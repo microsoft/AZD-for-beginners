@@ -39,13 +39,20 @@
 
 ## 🆕 What's New in azd Today
 
+> 📌 This course is validated against **`azd 1.25.6`** (June 2026). Run `azd version` to check your build, and `azd upgrade` to get the latest.
+
 Azure Developer CLI has grown beyond traditional web apps and APIs. Today, azd is the single tool for deploying **any** application to Azure—including AI-powered applications and intelligent agents.
 
 Here's what that means for you:
 
 - **AI agents are now first-class azd workloads.** You can initialize, deploy, and manage AI agent projects using the same `azd init` → `azd up` workflow you already know.
+- **A complete agent lifecycle from the CLI.** The `azure.ai.agents` extension now covers the whole journey—`azd ai agent init` to scaffold, `azd ai agent invoke` to test (with response-timing output), `azd ai agent eval generate` and `azd ai agent optimize` to measure and improve quality, and `azd ai agent delete` to clean up.
+- **More AI building blocks.** New preview extensions—`azure.ai.skills` and `azure.ai.connections`—let you manage reusable agent skills and Foundry connections directly with azd.
 - **Microsoft Foundry integration** brings model deployment, agent hosting, and AI service configuration directly into the azd template ecosystem.
+- **Smoother day-to-day basics.** Recent releases made `azd init` idempotent (safe to re-run), made `azd auth login` clear stale tokens automatically, and added a friendly `azd tool` first-run setup prompt.
 - **The core workflow hasn't changed.** Whether you're deploying a todo app, a microservice, or a multi-agent AI solution, the commands are the same.
+
+> **Note for Aspire users:** Microsoft now refers to the product simply as **Aspire** (formerly ".NET Aspire"). azd's Aspire support is unchanged—only the name was updated.
 
 If you've used azd before, AI support is a natural extension—not a separate tool or an advanced track. If you're starting fresh, you'll learn one workflow that works for everything.
 
@@ -660,7 +667,7 @@ Beyond the basics, AZD provides powerful features for production deployments:
 
 **Why AZD for AI Solutions?** AZD addresses the top challenges AI developers face:
 
-- **AI-Ready Templates** - Pre-configured templates for Microsoft Foundry Models, Cognitive Services, and ML workloads
+- **AI-Ready Templates** - Pre-configured templates for Microsoft Foundry Models, Azure AI Services, and ML workloads
 - **Secure AI Deployments** - Built-in security patterns for AI services, API keys, and model endpoints  
 - **Production AI Patterns** - Best practices for scalable, cost-effective AI application deployments
 - **End-to-End AI Workflows** - From model development to production deployment with proper monitoring

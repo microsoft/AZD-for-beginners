@@ -8,7 +8,7 @@
 
 This chapter covers essential planning and validation steps before deploying your application. Learn to avoid costly mistakes with proper capacity planning, SKU selection, and preflight checks.
 
-> Validated against `azd 1.23.12` in March 2026.
+> Validated against `azd 1.25.6` in June 2026.
 
 ## Learning Objectives
 

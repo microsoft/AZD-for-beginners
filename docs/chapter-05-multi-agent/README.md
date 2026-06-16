@@ -8,7 +8,7 @@
 
 This chapter covers advanced multi-agent architecture patterns, agent orchestration, and production-ready AI deployments for complex scenarios.
 
-> Validated against `azd 1.23.12` in March 2026.
+> Validated against `azd 1.25.6` in June 2026.
 
 ## Learning Objectives
 
@@ -24,9 +24,11 @@ By completing this chapter, you will:
 
 | # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [Retail Multi-Agent Solution](../../examples/retail-scenario.md) | Complete implementation walkthrough | 90 min |
-| 2 | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) | Agent orchestration strategies | 30 min |
-| 3 | [ARM Template Deployment](../../examples/retail-multiagent-arm-template/README.md) | One-click deployment | 30 min |
+| 1 | [Multi-Agent Basics](multi-agent-basics.md) | Hands-on: deploy a working multi-agent app with `azd up` | 45 min |
+| 2 | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) | Agent orchestration strategies (continues in Chapter 6) | 30 min |
+| 3 | [ARM Template Deployment](../../examples/retail-multiagent-arm-template/README.md) | One-click deployment example | 30 min |
+
+> **Start with Lesson 1.** It's the only fully hands-on, deployable lesson in this chapter. Lesson 2 lives in Chapter 6 (it's shared with pre-deployment planning), and the [Retail Multi-Agent Solution](../../examples/retail-scenario.md) is an architecture blueprint—a design reference, not a one-command template.
 
 ---
 

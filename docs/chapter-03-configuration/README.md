@@ -8,7 +8,7 @@
 
 This chapter covers environment configuration, authentication patterns, and security best practices for Azure Developer CLI deployments.
 
-> Validated against `azd 1.23.12` in March 2026.
+> Validated against `azd 1.25.6` in June 2026.
 
 ## Learning Objectives
 

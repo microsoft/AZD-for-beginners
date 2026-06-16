@@ -376,7 +376,7 @@ azd down --force --purge
    # Update app.py with database connection
    ```
 
-2. **Add Authentication** - Implement Azure AD or API keys
+2. **Add Authentication** - Implement Microsoft Entra ID or API keys
    ```python
    # Add authentication middleware to app.py
    from functools import wraps

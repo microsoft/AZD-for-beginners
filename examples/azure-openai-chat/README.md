@@ -519,7 +519,7 @@ azd down --force --purge
 
 2. **Implement RAG** - Add document search with Azure AI Search
    ```python
-   # Integrate Azure Cognitive Search
+   # Integrate Azure AI Search
    # Upload documents and create vector index
    ```
 

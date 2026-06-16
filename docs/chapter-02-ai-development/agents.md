@@ -135,6 +135,9 @@ azd ai agent init -m agent-manifest.yaml
 
 # Deploy to Azure
 azd up
+
+# Test the deployed agent (shows latency + time-to-first-byte)
+azd ai agent invoke
 ```
 
 **When to use `azd ai agent init` vs `azd init --template`:**
@@ -144,7 +147,9 @@ azd up
 | `azd init --template` | Starting from a working sample app | Clones a full template repo with code + infra |
 | `azd ai agent init -m` | Building from your own agent manifest | Scaffolds project structure from your agent definition |
 
-> **Tip:** Use `azd init --template` when learning (Options 1-3 above). Use `azd ai agent init` when building production agents with your own manifests. See [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for full reference.
+> **Tip:** Use `azd init --template` when learning (Options 1-3 above). Use `azd ai agent init` when building production agents with your own manifests.
+
+After `azd up`, the same extension carries you through the rest of the agent lifecycle: `azd ai agent invoke` to test, `azd ai agent eval generate` and `azd ai agent optimize` to measure and improve quality, and `azd ai agent delete` to clean up. See [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for the full reference.
 
 ---
 
@@ -579,8 +584,8 @@ Now that you understand AI agents, explore these advanced topics:
 ## 📖 Additional Resources
 
 ### Official Documentation
-- [Azure AI Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
-- [Azure AI Foundry Agent Service Quickstart](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
+- [Microsoft Foundry Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
+- [Microsoft Foundry Agent Service Quickstart](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
 - [Semantic Kernel Agent Framework](https://learn.microsoft.com/semantic-kernel/)
 
 ### AZD Templates for Agents

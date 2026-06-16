@@ -206,7 +206,7 @@ graph TB
 | **Agent Router** | Routes requests to appropriate agent | Container Apps | Primary Region |
 | **Customer Agent** | Handles customer service queries | Container Apps + gpt-4.1 | Primary Region |
 | **Inventory Agent** | Manages stock and fulfillment | Container Apps + gpt-4.1-mini | Primary Region |
-| **Microsoft Foundry Models** | LLM inference for agents | Cognitive Services | Multi-region |
+| **Microsoft Foundry Models** | LLM inference for agents | Azure AI Services | Multi-region |
 | **AI Search** | Vector search and RAG | AI Search Service | Primary Region |
 | **Storage Account** | File uploads and documents | Blob Storage | Primary Region |
 | **Application Insights** | Monitoring and telemetry | Monitor | Primary Region |

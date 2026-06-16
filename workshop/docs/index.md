@@ -1,6 +1,6 @@
 # AZD for AI Developers Workshop
 
-> Validated against `azd 1.23.12` in March 2026.
+> Validated against `azd 1.25.6` in June 2026.
 
 > [!IMPORTANT]  
 > **This workshop is instrumented with a workshop guide that you can preview in your local browser. To get started, open the repo in GitHub Codespaces, a dev container, or a local clone with MkDocs installed—then wait until you see an active VS Code terminal and type:**  

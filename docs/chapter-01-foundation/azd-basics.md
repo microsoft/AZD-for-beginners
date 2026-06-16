@@ -321,9 +321,23 @@ azd extension install azure.ai.agents
 # Initialize an AI agent project from a manifest
 azd ai agent init -m agent-manifest.yaml
 
+# Test a deployed agent (shows latency and time-to-first-byte)
+azd ai agent invoke
+
 # Start the MCP server for AI-assisted development (Alpha)
 azd mcp start
 ```
+
+**The agent lifecycle, end to end.** Once you've installed `azure.ai.agents`, a single workflow takes you from idea to a running, monitored agent. You don't need all of these on day one—just know they exist:
+
+| Stage | Command | What it does |
+|-------|---------|--------------|
+| **Scaffold** | `azd ai agent init -m <manifest>` | Generate an agent project from a manifest |
+| **Test** | `azd ai agent invoke` | Call the agent and view response timing |
+| **Measure** | `azd ai agent eval generate` | Create an evaluation dataset for the agent |
+| **Improve** | `azd ai agent optimize` | Optimize agent instructions against your data |
+| **Inspect** | `azd ai agent endpoint show` | View the live endpoint configuration |
+| **Clean up** | `azd ai agent delete` | Delete a hosted agent and all its versions |
 
 > Extensions are covered in detail in [Chapter 2: AI-First Development](../chapter-02-ai-development/agents.md) and the [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) reference.
 
@@ -765,7 +779,7 @@ az account get-access-token
 
 # Common diagnostic commands
 whoami                          # Current user context
-az ad signed-in-user show      # Azure AD user details
+az ad signed-in-user show      # Microsoft Entra ID user details
 az group list                  # Test resource access
 ```
 

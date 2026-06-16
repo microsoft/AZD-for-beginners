@@ -54,7 +54,7 @@ const client = new BlobServiceClient(
 **Benefits:**
 - ✅ **Zero secrets** in code or configuration
 - ✅ **Automatic rotation** - Azure handles it
-- ✅ **Full audit trail** in Azure AD logs
+- ✅ **Full audit trail** in Microsoft Entra ID logs
 - ✅ **Centralized security** - manage in Azure Portal
 - ✅ **Compliance ready** - meets security standards
 
@@ -69,7 +69,7 @@ const client = new BlobServiceClient(
 ```mermaid
 sequenceDiagram
     participant App as Your Application<br/>(Container App)
-    participant MI as Managed Identity<br/>(Azure AD)
+    participant MI as Managed Identity<br/>(Microsoft Entra ID)
     participant KV as Key Vault
     participant Storage as Azure Storage
     participant DB as Azure SQL
@@ -260,6 +260,59 @@ const blobServiceClient = new BlobServiceClient(
 - ✅ Compliance ready
 
 **When to use:** Always, for production applications.
+
+---
+
+### Pattern 4: Service Principals (CI/CD & Automation)
+
+Managed identity is the gold standard *for resources running inside Azure*. But what about things running **outside** Azure—like a CI/CD pipeline on a build agent, or a script on your laptop that can't use your interactive login? That's where a **service principal** comes in: a non-human identity with its own credentials that an automated process can sign in as.
+
+**How it works:**
+
+Create a service principal scoped to a resource group (least privilege):
+
+```bash
+az ad sp create-for-rbac \
+  --name "myapp-cicd" \
+  --role contributor \
+  --scopes /subscriptions/<sub-id>/resourceGroups/<rg-name>
+```
+
+This prints a client ID, client secret, and tenant ID. azd can sign in with them non-interactively:
+
+```bash
+azd auth login \
+  --client-id "<appId>" \
+  --client-secret "<password>" \
+  --tenant-id "<tenant>"
+```
+
+**Prefer federated credentials (OIDC) over secrets.** Instead of a long-lived client secret, configure a federated credential so the pipeline exchanges a short-lived token—no secret to leak or rotate:
+
+```bash
+azd auth login \
+  --client-id "<appId>" \
+  --federated-credential-provider "github" \
+  --tenant-id "<tenant>"
+```
+
+> `azd pipeline config` sets this up for you automatically. See the CI/CD walkthroughs in [Chapter 8](../chapter-08-production/production-ai-practices.md).
+
+**Benefits:**
+- ✅ Works outside Azure (build agents, on-prem, other clouds)
+- ✅ Can be scoped to a single resource group with one role
+- ✅ Federated (OIDC) variant uses no stored secret
+
+**Trade-offs:**
+- ⚠️ Secret-based variant requires careful storage and rotation
+- ⚠️ A leaked secret grants whatever the SP can do—keep scopes tight
+
+**When to use:** CI/CD pipelines and automation that can't use managed identity. Always prefer the **federated/OIDC** variant over a client secret, and prefer managed identity whenever the workload runs inside Azure.
+
+**Storing credentials safely:**
+- Never commit secrets—use your pipeline's secret store (GitHub Actions secrets, Azure DevOps variable groups / Key Vault).
+- Scope the SP to the smallest role and resource group it needs.
+- Set an expiry and rotate, or eliminate the secret entirely with OIDC.
 
 ---
 
@@ -1175,7 +1228,7 @@ Test your understanding:
   - **A**: Read-only access to secrets (cannot create, update, or delete)
 
 - [ ] **Q3**: How do you grant a Container App access to Azure SQL?
-  - **A**: Assign "SQL DB Contributor" role or configure Azure AD authentication for SQL
+  - **A**: Assign "SQL DB Contributor" role or configure Microsoft Entra ID authentication for SQL
 
 **Hands-On Verification:**
 ```bash
@@ -1477,7 +1530,7 @@ az containerapp revision restart \
 |----------|------|
 | **Managed Identity** | 🆓 **FREE** - No charge |
 | **RBAC Role Assignments** | 🆓 **FREE** - No charge |
-| **Azure AD Token Requests** | 🆓 **FREE** - Included |
+| **Microsoft Entra ID Token Requests** | 🆓 **FREE** - Included |
 | **Key Vault Operations** | $0.03 per 10,000 operations |
 | **Key Vault Storage** | $0.024 per secret per month |
 

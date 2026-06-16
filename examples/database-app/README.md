@@ -387,7 +387,7 @@ This example follows Azure security best practices:
 - [ ] Configure Private Endpoints for SQL Database
 - [ ] Enable Web Application Firewall (WAF)
 - [ ] Implement Azure Key Vault for secret rotation
-- [ ] Configure Azure AD authentication
+- [ ] Configure Microsoft Entra ID authentication
 - [ ] Enable diagnostic logging for all resources
 
 ## Cost Optimization
@@ -856,7 +856,7 @@ az group delete --name rg-<env-name> --yes
 - **[Deployment Best Practices](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Production deployment patterns
 
 ### Advanced Topics
-- **Managed Identity**: Remove passwords and use Azure AD authentication
+- **Managed Identity**: Remove passwords and use Microsoft Entra ID authentication
 - **Private Endpoints**: Secure database connections within a virtual network
 - **CI/CD Integration**: Automate deployments with GitHub Actions or Azure DevOps
 - **Multi-Environment**: Set up dev, staging, and production environments

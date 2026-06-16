@@ -54,7 +54,7 @@ Azure Account
 - **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
 - **Networking**: Virtual Network, Application Gateway, CDN
 - **Security**: Key Vault, Application Insights, Log Analytics
-- **AI/ML**: Cognitive Services, OpenAI, Machine Learning
+- **AI/ML**: Azure AI Services, Azure OpenAI, Azure Machine Learning
 
 ## Bicep Infrastructure Templates
 
@@ -199,6 +199,200 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
   }
 }
 ```
+
+## 🌐 Using Terraform with azd
+
+Bicep is azd's default, but azd also supports **Terraform**—useful if your team already standardizes on it or you manage multi-cloud infrastructure. The azd workflow (`azd up`, `azd provision`, `azd down`) is identical; only the infrastructure language and folder layout change.
+
+### Tell azd to use Terraform
+
+Add an `infra` section to `azure.yaml` pointing at the Terraform provider:
+
+```yaml
+# azure.yaml
+name: my-terraform-app
+infra:
+  provider: terraform   # default is "bicep"
+  path: infra           # folder containing your .tf files
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### Terraform folder layout
+
+With the Terraform provider, your `infra/` folder uses `.tf` files instead of Bicep:
+
+```
+infra/
+├── main.tf            # resource definitions
+├── variables.tf       # input variables
+├── outputs.tf         # outputs azd reads back (endpoints, names)
+├── provider.tf        # azurerm/azurecaf providers + backend
+└── main.tfvars.json   # values azd injects per environment
+```
+
+### A minimal `main.tf`
+
+```hcl
+# infra/main.tf
+resource "azurerm_resource_group" "rg" {
+  name     = "rg-${var.environment_name}"
+  location = var.location
+  tags     = { "azd-env-name" = var.environment_name }
+}
+
+resource "azurerm_service_plan" "plan" {
+  name                = "plan-${var.environment_name}"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  os_type             = "Linux"
+  sku_name            = "B1"
+}
+```
+
+### How azd connects to your Terraform outputs
+
+azd reads Terraform **outputs** to learn your endpoints and to wire environment values back into your app. The output names matter—azd looks for specific ones:
+
+```hcl
+# infra/outputs.tf
+output "AZURE_LOCATION" {
+  value = var.location
+}
+
+output "SERVICE_WEB_ENDPOINT_URL" {
+  value = azurerm_linux_web_app.web.default_hostname
+}
+```
+
+> **Important:** azd uses the `azd-env-name` tag and `AZURE_*` outputs to track resources per environment. Always tag your resource group with `"azd-env-name" = var.environment_name` so `azd down` can find and remove everything.
+
+### Deploy with Terraform
+
+The commands are exactly the same as Bicep:
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd runs 'terraform plan' under the hood
+azd up                    # provision + deploy
+azd down --force          # destroys the Terraform-managed resources
+```
+
+> **Prerequisite:** Terraform must be installed and on your `PATH`. azd manages the Terraform *workflow* but does not install Terraform for you. For state, azd defaults to local state; for teams, configure a remote backend (for example, an Azure Storage backend) in `provider.tf`.
+
+For complete, runnable Terraform-based starters, browse the [Awesome AZD gallery](https://azure.github.io/awesome-azd/) and filter for Terraform, or see the official [azd Terraform documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
+
+## 🧩 Using Pulumi with azd
+
+If your team writes infrastructure in a general-purpose language (TypeScript, Python, Go, or C#) rather than a DSL, azd also supports **Pulumi**. As with Terraform, the `azd up` / `azd provision` / `azd down` workflow is unchanged—only the infrastructure tooling and folder layout differ.
+
+### Tell azd to use Pulumi
+
+```yaml
+# azure.yaml
+name: my-pulumi-app
+infra:
+  provider: pulumi      # default is "bicep"
+  path: infra           # folder containing your Pulumi program
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### Pulumi folder layout
+
+```
+infra/
+├── Pulumi.yaml          # project definition
+├── Pulumi.dev.yaml      # stack config (one per environment)
+├── index.ts             # your resource program (or __main__.py, main.go, etc.)
+├── package.json         # dependencies (for TypeScript)
+└── tsconfig.json
+```
+
+### A minimal `index.ts`
+
+```typescript
+import * as azure from "@pulumi/azure-native";
+import * as pulumi from "@pulumi/pulumi";
+
+const environmentName = pulumi.getStack();
+
+// Tag every resource so azd can track and clean them up
+const tags = { "azd-env-name": environmentName };
+
+const rg = new azure.resources.ResourceGroup("rg", {
+  resourceGroupName: `rg-${environmentName}`,
+  tags,
+});
+
+// azd reads these outputs back into your environment
+export const AZURE_LOCATION = rg.location;
+export const SERVICE_WEB_ENDPOINT_URL = "https://...";
+```
+
+### Stacks map to azd environments
+
+Pulumi organizes deployments into **stacks**, and azd maps each azd environment to a Pulumi stack of the same name. When you run `azd env new staging`, azd selects (or creates) the `staging` Pulumi stack. The same `azd-env-name` tagging and `AZURE_*` output rules apply, so `azd down` can find and remove everything.
+
+### Deploy with Pulumi
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd runs 'pulumi preview' under the hood
+azd up                    # provision + deploy
+azd down --force          # runs 'pulumi destroy'
+```
+
+> **Prerequisite:** Pulumi must be installed and on your `PATH`, and you'll need a state backend (Pulumi Cloud or a self-managed backend such as Azure Blob Storage). azd manages the Pulumi *workflow*, not the install. See the official [azd Pulumi documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-pulumi-for-azd).
+
+## 🎯 Choosing a Host for Your Service
+
+The `host` field in `azure.yaml` decides where your code runs. azd supports several hosts—picking the right one matters more than the infrastructure language. Here's a beginner-friendly comparison:
+
+| `host` value | Best for | Why |
+|--------------|----------|-----|
+| `appservice` | Traditional web apps and APIs | Simplest PaaS; no containers required |
+| `staticwebapp` | Front-end SPAs (React, Vue, Angular) | Global CDN + free SSL, built-in API support |
+| `function` | Event-driven and serverless workloads | Scale-to-zero, pay-per-execution |
+| `containerapp` | Containerized microservices | Serverless containers, scale-to-zero, built-in ingress |
+| `aks` | Complex orchestration needs | Full Kubernetes control when you truly need it |
+| `springapp` | Java Spring Boot apps | Managed Azure Spring Apps runtime tuned for Spring |
+
+### When to reach for AKS
+
+**Azure Kubernetes Service (`host: aks`)** gives you the full power of Kubernetes—custom controllers, service meshes, complex networking, and fine-grained scheduling. That power comes with operational overhead: you manage node pools, upgrades, and cluster networking.
+
+```yaml
+services:
+  api:
+    project: ./src/api
+    language: js
+    host: aks          # deploys to an existing AKS cluster
+```
+
+> **Start simpler if you can.** For most microservices, **Container Apps** gives you containers, autoscaling, and scale-to-zero without managing a cluster. Choose AKS only when you need Kubernetes-specific features.
+
+### When to use Azure Spring Apps
+
+**Azure Spring Apps (`host: springapp`)** is a managed runtime purpose-built for Spring Boot. It handles service discovery, config server, and blue-green deployment so Java teams don't run their own infrastructure.
+
+```yaml
+services:
+  catalog:
+    project: ./src/catalog
+    language: java
+    host: springapp
+```
+
+> Use `springapp` when you have existing Spring Boot apps and want a runtime tuned for them. For new containerized Java apps without Spring-specific needs, `containerapp` is often the simpler choice.
 
 ## 🗃️ Database Provisioning
 

@@ -8,7 +8,7 @@
 
 This chapter introduces Azure Developer CLI (azd) fundamentals. You'll learn core concepts, install the tools, and deploy your first application to Azure.
 
-> Validated against `azd 1.23.12` in March 2026.
+> Validated against `azd 1.25.6` in June 2026.
 
 ## Learning Objectives
 
@@ -27,6 +27,8 @@ By completing this chapter, you will:
 | 1 | [AZD Basics](azd-basics.md) | Core concepts, terminology, and project structure | 15 min |
 | 2 | [Installation & Setup](installation.md) | Platform-specific installation guides | 10 min |
 | 3 | [Your First Project](first-project.md) | Hands-on: Deploy a web app to Azure | 20 min |
+| 4 | [Bring Your Own App](bring-your-own-app.md) | Add azd to an existing project you already have | 15 min |
+| 5 | [Dev Containers & Codespaces](dev-containers.md) | Reproducible azd environments with dev containers | 15 min |
 
 ---
 

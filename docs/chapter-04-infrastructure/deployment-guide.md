@@ -5,6 +5,7 @@
 - **📖 Current Chapter**: Chapter 4 - Infrastructure as Code & Deployment
 - **⬅️ Previous Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 - **➡️ Next**: [Provisioning Resources](provisioning.md)
+- **🧩 Also in this chapter**: [Authoring Your Own Template](custom-templates.md)
 - **🚀 Next Chapter**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
 
 ## Introduction
@@ -117,6 +118,35 @@ azd monitor --logs
 
 ## 🏗️ Understanding the Deployment Process
 
+### New to hooks? Start here
+
+A **hook** is a command azd runs automatically at a specific moment in the deploy process—before or after provisioning, and before or after deploying your code. They let you automate the small chores that always surround a deployment: seeding a database, running migrations, building assets, or smoke-testing the live app.
+
+| Hook | Runs… | Common use |
+|------|-------|------------|
+| `preprovision` | Before resources are created | Validate prerequisites, log in to a registry |
+| `postprovision` | After resources exist | Configure resources, set up the database |
+| `predeploy` | Before code is deployed | Build front-end assets, run unit tests |
+| `postdeploy` | After code is live | Run DB migrations, smoke-test the endpoint |
+
+Hooks live in your `azure.yaml`. Here's the smallest possible example—it just prints a message after deployment:
+
+```yaml
+# azure.yaml
+hooks:
+  postdeploy:
+    shell: sh
+    run: echo "Deployment finished! 🎉"
+```
+
+That's it—next time you run `azd up`, the message prints automatically. You can also run a hook by itself, without a full deploy, which is great for testing:
+
+```bash
+azd hooks run postdeploy
+```
+
+The phases below show real-world hooks (migrations, tests, validation) for each stage.
+
 ### Phase 1: Pre-Provision Hooks
 ```yaml
 # azure.yaml
@@ -185,6 +215,54 @@ hooks:
       echo "Warming up applications..."
       curl https://${WEB_URL}/health
 ```
+
+### Handling Hook Errors
+
+By default, **if a hook command exits with a non-zero code, azd stops the whole operation.** This is usually what you want—a failed migration should halt the deploy, not ship a broken app. But it means hooks need to be written carefully.
+
+**1. Make failures loud and intentional.** A hook fails when its last command returns a non-zero exit code. In shell scripts, add `set -e` so the hook stops at the first failing command instead of silently continuing:
+
+```yaml
+hooks:
+  predeploy:
+    shell: sh
+    run: |
+      set -e                      # stop on the first error
+      npm run test:unit           # if tests fail, the deploy halts here
+      npm run db:migrate
+```
+
+**2. Allow a hook to fail without stopping azd.** For non-critical steps (an optional cache warm-up, a best-effort notification), set `continueOnError: true`. azd logs the failure but keeps going:
+
+```yaml
+hooks:
+  postdeploy:
+    shell: sh
+    continueOnError: true         # a failure here won't fail 'azd up'
+    run: curl -f https://${WEB_URL}/warmup || echo "Warm-up skipped"
+```
+
+**3. Test hooks in isolation before a full run.** You don't have to run `azd up` to debug a hook—run it on its own and iterate quickly:
+
+```bash
+azd hooks run predeploy          # runs just the predeploy hook
+azd hooks run postdeploy --service api
+```
+
+**4. Watch for OS-specific shells.** A hook using `shell: pwsh` needs PowerShell installed on the machine running it (including CI agents). Use `shell: sh` for the broadest portability, or provide both `windows` and `posix` variants:
+
+```yaml
+hooks:
+  postprovision:
+    posix:
+      shell: sh
+      run: ./scripts/setup.sh
+    windows:
+      shell: pwsh
+      run: ./scripts/setup.ps1
+```
+
+> **Debugging tip:** run any azd command with `--debug` to see the exact hook command line and its full output—invaluable when a hook works locally but fails in CI.
 
 ## 🎛️ Deployment Configuration
 

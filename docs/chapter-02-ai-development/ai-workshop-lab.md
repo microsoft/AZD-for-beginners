@@ -85,7 +85,7 @@ azure-search-openai-demo/
 │   ├── main.parameters.json # Environment parameters
 │   └── modules/            # Reusable Bicep modules
 │       ├── openai.bicep    # Microsoft Foundry Models configuration
-│       ├── search.bicep    # Cognitive Search setup
+│       ├── search.bicep    # Azure AI Search setup
 │       └── webapp.bicep    # Web app configuration
 ├── app/                    # Application code
 ├── scripts/               # Deployment scripts
@@ -111,7 +111,7 @@ cat infra/main.bicep
 
 **Key AI patterns to identify:**
 - Microsoft Foundry Models service provisioning
-- Cognitive Search integration
+- Azure AI Search integration
 - Secure key management
 - Network security configurations
 
@@ -149,7 +149,7 @@ azd up
 
 **What happens during `azd up`:**
 - ✅ Provisions Microsoft Foundry Models service
-- ✅ Creates Cognitive Search service
+- ✅ Creates Azure AI Search service
 - ✅ Sets up App Service for the web application
 - ✅ Configures networking and security
 - ✅ Deploys application code
@@ -259,7 +259,7 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 3. Deploy and compare costs with the production configuration
 
 **Solution hints:**
-- Use F0 (free) tier for Cognitive Services when possible
+- Use F0 (free) tier for Azure AI Services when possible
 - Use Basic tier for Search Service in development
 - Consider using Consumption plan for Functions
 
@@ -602,7 +602,7 @@ You're tasked with creating a production-ready AI-powered customer service chatb
 **Functional Requirements:**
 - Web interface for customer interactions
 - Integration with Microsoft Foundry Models for responses
-- Document search capability using Cognitive Search
+- Document search capability using Azure AI Search
 - Integration with existing customer database
 - Multi-language support
 

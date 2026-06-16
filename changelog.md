@@ -22,6 +22,107 @@ After reviewing changelog entries, you will be able to:
 
 ## Version History
 
+### [v3.22.0] - 2026-06-16
+
+#### Beginner Gap-Fill #2: Template Authoring, Dev Containers, Pulumi, Azure DevOps, Service Principals, and More
+**This version closes the remaining intermediate gaps surfaced by the azd-coverage analysis: how to author and publish your own template, reproducible dev-container/Codespaces environments, the Pulumi infrastructure provider, an Azure DevOps CI/CD walkthrough, service-principal authentication, host-selection guidance (AKS/Spring Apps), `azd restore`/`azd package` explanations, hook error-handling, and team/shared-environment practices.**
+
+#### Added
+- **🧱 New Chapter 4 lesson** `docs/chapter-04-infrastructure/custom-templates.md` — authoring your own azd template: required structure (`azure.yaml`, `infra/`, `src/`), the `metadata.template` field, parameterizing infrastructure with the `uniqueString()` resource token and `azd-env-name` tag, testing locally with `azd init --template <local-path>`, publishing to GitHub, and submitting to the Awesome AZD gallery
+- **📦 New Chapter 1 lesson** `docs/chapter-01-foundation/dev-containers.md` — reproducible azd environments with Dev Containers and GitHub Codespaces: a minimal `.devcontainer/devcontainer.json` using the official `ghcr.io/azure/azure-dev/azd` feature, language-specific features, `docker-in-docker` for container hosts, and `azd auth login --use-device-code` for remote sign-in
+- **🧩 Pulumi with azd** section in `docs/chapter-04-infrastructure/provisioning.md` — `infra.provider: pulumi`, Pulumi folder layout, stacks mapped to azd environments, required outputs/tagging, and the identical `azd up` / `azd down` workflow
+- **🎯 Host-selection guidance** in `docs/chapter-04-infrastructure/provisioning.md` — a beginner-friendly comparison of `appservice`, `staticwebapp`, `function`, `containerapp`, `aks`, and `springapp`, with guidance on when to choose AKS or Azure Spring Apps
+- **🛠️ Azure DevOps CI/CD walkthrough** in `docs/chapter-08-production/production-ai-practices.md` — `azd pipeline config --provider azdo`, service connection with workload identity federation (OIDC), the generated `azure-dev.yml`, and variable-group setup
+- **🔑 Service Principals (Pattern 4)** added to `docs/chapter-03-configuration/authsecurity.md` — `az ad sp create-for-rbac`, non-interactive `azd auth login` with client secret vs. federated/OIDC credentials, when to use, and safe credential storage
+- **🪝 Hook error-handling** subsection in `docs/chapter-04-infrastructure/deployment-guide.md` — exit codes and `set -e`, `continueOnError`, testing hooks in isolation with `azd hooks run`, OS-specific shells, and `--debug`
+- **👥 Team / shared environments** section in `docs/chapter-03-configuration/configuration.md` — what lives in `.azure/`, what to gitignore, per-developer environments, `azd env list`/`select`, and providing environment values in CI/CD
+- **🧰 `azd restore` and expanded `azd package`** explanations in `resources/cheat-sheet.md` — restoring dependencies and building a deployable artifact without deploying
+
+#### Changed
+- **🧭 Chapter 4 lessons table** updated to include the new "Authoring Your Own Template" lesson (Lesson 3)
+- **🧭 Chapter 1 lessons table** updated to include the new "Dev Containers & Codespaces" lesson (Lesson 5); navigation footers wired between `bring-your-own-app.md` and `dev-containers.md`
+
+### [v3.21.0] - 2026-06-16
+
+#### Beginner Gap-Fill: Hands-On Multi-Agent Lesson, "Bring Your Own App," Terraform, and CI/CD Walkthrough
+**This version closes the biggest gaps for a complete beginners' guide by adding two new hands-on lessons (a deployable multi-agent walkthrough and adding azd to an existing app), a beginner-friendly hooks introduction, a Terraform-with-azd section, a step-by-step GitHub Actions pipeline walkthrough, an explainer for the new preview extensions, and an explicit deployment-verification checklist.**
+
+#### Added
+- **🤝 New Chapter 5 lesson** `docs/chapter-05-multi-agent/multi-agent-basics.md` — a fully hands-on, deployable two-agent walkthrough (orchestrator + specialists) using a real template (`contoso-creative-writer`), covering when to use multi-agent, the `azd up` workflow, understanding the deployed resources, cross-agent tracing, customization, and cleanup
+- **📦 New Chapter 1 lesson** `docs/chapter-01-foundation/bring-your-own-app.md` — how to add azd to an existing project with `azd init` ("use code in the current directory"), understanding `azure.yaml` and `infra/`, `azd infra generate`, host detection, and deploying with `azd up`
+- **🌐 Terraform with azd** section added to `docs/chapter-04-infrastructure/provisioning.md` — `infra.provider: terraform` config, `.tf` folder layout, required `AZURE_*` outputs and `azd-env-name` tagging, and the identical `azd up` / `azd down` workflow (closes the gap where Terraform support was claimed but only Bicep was shown)
+- **⚙️ Step-by-step GitHub Actions walkthrough** in `docs/chapter-08-production/production-ai-practices.md` — from GitHub repo to automated deploys: `azd pipeline config`, OIDC federated credentials (no stored secrets), the generated `azure-dev.yml`, and secrets-vs-variables guidance
+- **🪝 Beginner "New to hooks?" introduction** in `docs/chapter-04-infrastructure/deployment-guide.md` — what a hook is, a hook-stage table, a minimal first hook, and running hooks manually with `azd hooks run`
+- **✅ "Verify Your Deployment" checklist** added to Step 5 of `docs/chapter-01-foundation/first-project.md` — smoke test, health-endpoint check, and explicit success criteria
+- **🧩 Explainer for new preview extensions** `azure.ai.skills` and `azure.ai.connections` (what they are and when to reach for them) in `docs/chapter-08-production/production-ai-practices.md`
+
+#### Changed
+- **🧭 Chapter 5 lessons table** corrected: `multi-agent-basics.md` is now Lesson 1 (the only fully hands-on lesson), with honest labeling that Lesson 2 lives in Chapter 6 and the Retail scenario is an architecture blueprint, not a one-command template
+- **🧭 Chapter 1 lessons table** now includes the new "Bring Your Own App" lesson (Lesson 4)
+- **🔗 Navigation footers** updated: `first-project.md` now links forward to `bring-your-own-app.md`
+
+#### Fixed
+- **🧱 Closed the "claimed but missing" Terraform gap** — the course previously referenced Terraform support without showing it
+- **🔀 Corrected misleading Chapter 5 cross-links** that implied a full multi-agent implementation existed when only an architecture blueprint did
+
+#### Files Updated
+- `changelog.md`
+- `docs/chapter-01-foundation/README.md`
+- `docs/chapter-01-foundation/bring-your-own-app.md` *(new)*
+- `docs/chapter-01-foundation/first-project.md`
+- `docs/chapter-04-infrastructure/deployment-guide.md`
+- `docs/chapter-04-infrastructure/provisioning.md`
+- `docs/chapter-05-multi-agent/README.md`
+- `docs/chapter-05-multi-agent/multi-agent-basics.md` *(new)*
+- `docs/chapter-08-production/production-ai-practices.md`
+
+---
+
+### [v3.20.0] - 2026-06-16
+
+#### AZD 1.25.6 Refresh, Full Agent Lifecycle Commands & Aspire Rebrand
+**This version revalidates the course against `azd` `1.25.6` (June 2026) and the `azure.ai.agents` `0.1.40-preview` extension, expands AI guidance from "scaffold an agent" to the complete agent lifecycle (test → evaluate → optimize → inspect → delete), surfaces the new `azure.ai.skills` and `azure.ai.connections` preview extensions, and notes the ".NET Aspire" → "Aspire" product rebrand.**
+
+#### Added
+- **🔁 Full agent lifecycle coverage** for beginners and AI engineers across the docs:
+  - `docs/chapter-01-foundation/azd-basics.md` — Lifecycle table (scaffold → test → measure → improve → inspect → clean up) added to the Extensions and AI Commands section
+  - `docs/chapter-08-production/production-ai-practices.md` — New "Managing the Agent Lifecycle" section covering `azd ai agent invoke`, `endpoint show`, `eval generate`, `optimize`, `code download`, and `delete --force`
+  - `resources/cheat-sheet.md` — Expanded AI Agent Commands with `invoke`, `endpoint show`, `eval generate`, `optimize`, `code download`, and `delete --force`
+- **🧩 New preview extensions** documented: `azure.ai.skills` (reusable agent skills) and `azure.ai.connections` (Foundry connections) added to the extensions table and cheat sheet
+- **⏱️ Response-timing guidance** — `azd ai agent invoke` examples now note that it prints total latency and time-to-first-byte
+- **📌 Version banner** in the root README pointing learners at `azd version` and `azd upgrade`
+
+#### Changed
+- **✅ Validation baseline updated** from `azd 1.23.12` (March 2026) to `azd 1.25.6` (June 2026) across all chapter READMEs and the workshop docs
+- **🤖 Chapter 2 extension note** updated from `azure.ai.agents` `0.1.18-preview` to `0.1.40-preview`
+- **🧪 Workshop validation example** (`azd version` output) updated to `1.25.6`
+- **🧭 README "What's New in azd Today"** refreshed to highlight the end-to-end agent lifecycle, new AI extensions, and recent quality-of-life fixes (`azd init` idempotency, `azd auth login` stale-token clearing, `azd tool` first-run prompt)
+- **📖 Chapter 2 agents.md (Option 4)** now points learners to the post-deploy lifecycle commands rather than stopping at `azd up`
+
+#### Fixed
+- **🏷️ Product naming** — added an Aspire rebrand note (".NET Aspire" is now simply "Aspire"); azd's Aspire support is unchanged
+- **🔎 Live release validation** confirmed against the Azure Developer CLI release feed: stable CLI `1.25.6` (2026-06-12) and `azure.ai.agents` `0.1.40-preview` (2026-06-15)
+
+#### Files Updated
+- `README.md`
+- `changelog.md`
+- `docs/chapter-01-foundation/README.md`
+- `docs/chapter-01-foundation/azd-basics.md`
+- `docs/chapter-02-ai-development/README.md`
+- `docs/chapter-02-ai-development/agents.md`
+- `docs/chapter-03-configuration/README.md`
+- `docs/chapter-04-infrastructure/README.md`
+- `docs/chapter-05-multi-agent/README.md`
+- `docs/chapter-06-pre-deployment/README.md`
+- `docs/chapter-07-troubleshooting/README.md`
+- `docs/chapter-08-production/README.md`
+- `docs/chapter-08-production/production-ai-practices.md`
+- `resources/cheat-sheet.md`
+- `workshop/docs/index.md`
+- `workshop/docs/instructions/2-Validate-AI-Template.md`
+
+---
+
 ### [v3.19.1] - 2026-03-27
 
 #### Beginner Onboarding Clarification, Setup Validation & Final AZD Command Cleanup

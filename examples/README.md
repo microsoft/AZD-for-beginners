@@ -417,7 +417,7 @@ Each example includes:
 ### Microsoft Foundry Examples
 
 #### Microsoft Foundry Models Chat App
-**Technologies**: Microsoft Foundry Models, Cognitive Search, App Service  
+**Technologies**: Microsoft Foundry Models, Azure AI Search, App Service  
 **Complexity**: Intermediate  
 **Concepts**: RAG architecture, vector search, LLM integration
 
