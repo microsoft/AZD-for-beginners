@@ -1,47 +1,47 @@
-# Provisioning Azure Resources with AZD
+# توفير موارد Azure باستخدام AZD
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD للمبتدئين](../../README.md)
+**تنقّل الفصل:**
+- **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)
 - **📖 الفصل الحالي**: الفصل 4 - البنية التحتية كرمز والنشر
-- **⬅️ Previous**: [دليل النشر](deployment-guide.md)
-- **➡️ Next Chapter**: [الفصل 5: حلول الذكاء الاصطناعي متعددة الوكلاء](../../examples/retail-scenario.md)
-- **🔧 Related**: [الفصل 6: التحقق قبل النشر](../chapter-06-pre-deployment/capacity-planning.md)
+- **⬅️ السابق**: [دليل النشر](deployment-guide.md)
+- **➡️ الفصل التالي**: [الفصل 5: حلول الذكاء الاصطناعي متعددة الوكلاء](../../examples/retail-scenario.md)
+- **🔧 ذي صلة**: [الفصل 6: التحقق قبل النشر](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## المقدمة
 
-يغطي هذا الدليل الشامل كل ما تحتاج معرفته حول توفير وإدارة موارد Azure باستخدام Azure Developer CLI. تعلّم كيفية تنفيذ أنماط البنية التحتية كرمز (IaC) من إنشاء الموارد الأساسية إلى بنى تحتية متقدمة على مستوى المؤسسات باستخدام Bicep وARM templates وTerraform وPulumi.
+يغطي هذا الدليل الشامل كل ما تحتاج لمعرفته حول توفير وإدارة موارد Azure باستخدام Azure Developer CLI. تعلّم كيفية تنفيذ أنماط البنية التحتية كرمز (IaC) بدءًا من إنشاء الموارد الأساسية وحتى هياكل البنية التحتية المتقدمة على مستوى المؤسسات باستخدام Bicep وARM templates وTerraform وPulumi.
 
 ## أهداف التعلم
 
-بإكمال هذا الدليل، ستتمكن من:
+من خلال إكمال هذا الدليل، ستتمكن من:
 - إتقان مبادئ البنية التحتية كرمز وتوفير موارد Azure
-- فهم مزودي IaC المتعددين المدعومين من Azure Developer CLI
+- فهم مُزودي IaC المتعدّدين المدعومين من Azure Developer CLI
 - تصميم وتنفيذ قوالب Bicep لهياكل التطبيقات الشائعة
-- تكوين معلمات الموارد، والمتغيرات، وإعدادات خاصة بالبيئة
-- تنفيذ أنماط بنية متقدمة تشمل الشبكات والأمان
-- إدارة دورة حياة الموارد والتحديثات وحل الاعتماديات
+- تكوين معلمات الموارد والمتغيرات والإعدادات الخاصة بالبيئات
+- تنفيذ أنماط بنية تحتية متقدمة بما في ذلك الشبكات والأمان
+- إدارة دورة حياة الموارد والتحديثات وحل الاعتمادات
 
 ## مخرجات التعلم
 
-عند الانتهاء، ستكون قادرًا على:
-- تصميم وتوفير بنية Azure التحتية باستخدام Bicep وARM templates
-- تكوين هياكل متعددة الخدمات المعقدة مع اعتماديات موارد صحيحة
-- تنفيذ قوالب معلمة لبيئات وتكوينات متعددة
-- استكشاف مشكلات توفير البنية التحتية وإصلاح فشل النشر
-- تطبيق مبادئ إطار العمل Azure Well-Architected على تصميم البنية التحتية
-- إدارة تحديثات البنية التحتية وتنفيذ استراتيجيات إصدار للبنية التحتية
+عند الانتهاء، ستتمكن من:
+- تصميم وتوفير بنية Azure باستخدام Bicep وARM templates
+- تكوين هندسات متعددة الخدمات المعقدة مع الاعتمادات الصحيحة للموارد
+- تنفيذ قوالب قابلة للتمرير بالمعلمات لعدة بيئات وتكوينات
+- استكشاف مشكلات توفير البنية التحتية وحل فشل النشر
+- تطبيق مبادئ إطار عمل Azure للهندسة الجيدة على تصميم البنية التحتية
+- إدارة تحديثات البنية التحتية وتنفيذ استراتيجيات إصدار البنية التحتية
 
 ## نظرة عامة على توفير البنية التحتية
 
-يدعم Azure Developer CLI عدة مزودين للبنية التحتية كرمز (IaC):
-- **Bicep** (موصى به) - لغة مخصصة للنطاق الخاص بـ Azure
-- **ARM Templates** - قوالب Azure Resource Manager مبنية على JSON
+يدعم Azure Developer CLI عدة مُزودين للبنية التحتية كرمز (IaC):
+- **Bicep** (الموصى به) - لغة مخصصة لمجال Azure
+- **ARM Templates** - قوالب Azure Resource Manager المبنية على JSON
 - **Terraform** - أداة بنية تحتية متعددة السحابات
-- **Pulumi** - البنية التحتية كرمز الحديثة باستخدام لغات برمجة
+- **Pulumi** - البنية التحتية كرمز الحديثة باستخدام لغات البرمجة
 
 ## فهم موارد Azure
 
-### هيكلية الموارد
+### التسلسل الهرمي للموارد
 ```
 Azure Account
 └── Subscriptions
@@ -54,9 +54,9 @@ Azure Account
 - **التخزين**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
 - **الشبكات**: Virtual Network, Application Gateway, CDN
 - **الأمان**: Key Vault, Application Insights, Log Analytics
-- **الذكاء الاصطناعي/التعلّم الآلي**: Cognitive Services, OpenAI, Machine Learning
+- **الذكاء الاصطناعي/التعلم الآلي**: Azure AI Services, Azure OpenAI, Azure Machine Learning
 
-## قوالب Bicep للبنية التحتية
+## قوالب البنية التحتية باستخدام Bicep
 
 ### بنية قالب Bicep الأساسية
 ```bicep
@@ -130,7 +130,7 @@ output WEB_NAME string = webApp.name
 
 ### أنماط Bicep المتقدمة
 
-#### بنية معيارية
+#### بنية تحتية معيارية
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -179,7 +179,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### إنشاء موارد شرطي
+#### إنشاء موارد شرطية
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -199,6 +199,200 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
   }
 }
 ```
+
+## 🌐 استخدام Terraform مع azd
+
+Bicep هو الإعداد الافتراضي لـ azd، لكن azd يدعم أيضًا **Terraform** — مفيد إذا كان فريقك يعتمد عليه بالفعل أو إذا كنت تدير بنية تحتية متعددة السحابات. سير عمل azd (`azd up`, `azd provision`, `azd down`) متطابق؛ يتغير فقط لغة البنية التحتية وهيكل المجلدات.
+
+### أخبر azd باستخدام Terraform
+
+أضف قسم `infra` إلى `azure.yaml` يشير إلى موفر Terraform:
+
+```yaml
+# azure.yaml
+name: my-terraform-app
+infra:
+  provider: terraform   # default is "bicep"
+  path: infra           # folder containing your .tf files
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### بنية مجلد Terraform
+
+مع موفر Terraform، يستخدم مجلد `infra/` ملفات `.tf` بدلًا من Bicep:
+
+```
+infra/
+├── main.tf            # resource definitions
+├── variables.tf       # input variables
+├── outputs.tf         # outputs azd reads back (endpoints, names)
+├── provider.tf        # azurerm/azurecaf providers + backend
+└── main.tfvars.json   # values azd injects per environment
+```
+
+### ملف `main.tf` مصغر
+
+```hcl
+# infra/main.tf
+resource "azurerm_resource_group" "rg" {
+  name     = "rg-${var.environment_name}"
+  location = var.location
+  tags     = { "azd-env-name" = var.environment_name }
+}
+
+resource "azurerm_service_plan" "plan" {
+  name                = "plan-${var.environment_name}"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  os_type             = "Linux"
+  sku_name            = "B1"
+}
+```
+
+### كيف يتصل azd بمخرجات Terraform الخاصة بك
+
+azd يقرأ مخرجات Terraform **outputs** للتعرّف على نقاط النهاية وربط قيم البيئة بتطبيقك. أسماء المخرجات مهمة — يبحث azd عن أسماء محددة:
+
+```hcl
+# infra/outputs.tf
+output "AZURE_LOCATION" {
+  value = var.location
+}
+
+output "SERVICE_WEB_ENDPOINT_URL" {
+  value = azurerm_linux_web_app.web.default_hostname
+}
+```
+
+> **مهم:** azd يستخدم وسم `azd-env-name` ومخرجات `AZURE_*` لتعقّب الموارد لكل بيئة. دائمًا أَوْسِم مجموعة الموارد الخاصة بك بـ `"azd-env-name" = var.environment_name` حتى يتمكن `azd down` من العثور على كل شيء وإزالته.
+
+### النشر باستخدام Terraform
+
+الأوامر هي نفسها تمامًا كما في Bicep:
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd يقوم بتشغيل 'terraform plan' تحت الغطاء
+azd up                    # تهيئة + نشر
+azd down --force          # يدمر الموارد المُدارة بواسطة Terraform
+```
+
+> **المتطلبات المسبقة:** يجب تثبيت Terraform وأن يكون في `PATH` الخاص بك. يدير azd *سير عمل* Terraform ولكنه لا يثبت Terraform نيابةً عنك. بالنسبة للحالة، يعتمد azd افتراضيًا على الحالة المحلية؛ بالنسبة للفرق، قم بتكوين خلفية بعيدة (على سبيل المثال، خلفية Azure Storage) في `provider.tf`.
+
+للحصول على مشاريع بدء تشغيل كاملة وقابلة للتشغيل تعتمد على Terraform، تصفح معرض [Awesome AZD gallery](https://azure.github.io/awesome-azd/) وقم بتصفية النتائج لـ Terraform، أو راجع [وثائق azd الخاصة بـ Terraform](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
+
+## 🧩 استخدام Pulumi مع azd
+
+إذا كان فريقك يكتب البنية التحتية بلغة عامة الغرض (TypeScript, Python, Go, أو C#) بدلاً من DSL، فإن azd يدعم أيضًا **Pulumi**. كما هو الحال مع Terraform، تظل سير عمل `azd up` / `azd provision` / `azd down` دون تغيير — يتغير فقط أدوات البنية التحتية وهيكل المجلدات.
+
+### أخبر azd باستخدام Pulumi
+
+```yaml
+# azure.yaml
+name: my-pulumi-app
+infra:
+  provider: pulumi      # default is "bicep"
+  path: infra           # folder containing your Pulumi program
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### بنية مجلد Pulumi
+
+```
+infra/
+├── Pulumi.yaml          # project definition
+├── Pulumi.dev.yaml      # stack config (one per environment)
+├── index.ts             # your resource program (or __main__.py, main.go, etc.)
+├── package.json         # dependencies (for TypeScript)
+└── tsconfig.json
+```
+
+### ملف `index.ts` مصغر
+
+```typescript
+import * as azure from "@pulumi/azure-native";
+import * as pulumi from "@pulumi/pulumi";
+
+const environmentName = pulumi.getStack();
+
+// وسم كل مورد حتى تتمكن azd من تتبعه وتنظيفه
+const tags = { "azd-env-name": environmentName };
+
+const rg = new azure.resources.ResourceGroup("rg", {
+  resourceGroupName: `rg-${environmentName}`,
+  tags,
+});
+
+// azd يعيد قراءة هذه المخرجات إلى بيئتك
+export const AZURE_LOCATION = rg.location;
+export const SERVICE_WEB_ENDPOINT_URL = "https://...";
+```
+
+### تتطابق Stacks مع بيئات azd
+
+Pulumi ينظم النشر إلى **stacks**، ويقوم azd بمطابقة كل بيئة azd مع Pulumi stack بنفس الاسم. عند تشغيل `azd env new staging`، يختار azd (أو ينشئ) stack Pulumi باسم `staging`. تنطبق نفس قواعد الوسم `azd-env-name` ومخرجات `AZURE_*`، لذا يمكن لـ `azd down` العثور على كل شيء وإزالته.
+
+### النشر باستخدام Pulumi
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd يقوم بتشغيل 'pulumi preview' خلف الكواليس
+azd up                    # تهيئة + نشر
+azd down --force          # يقوم بتشغيل 'pulumi destroy'
+```
+
+> **المتطلبات المسبقة:** يجب تثبيت Pulumi وأن يكون في `PATH` الخاص بك، وستحتاج إلى بنية خلفية للحالة (Pulumi Cloud أو خلفية تُدار ذاتيًا مثل Azure Blob Storage). يدير azd *سير عمل* Pulumi وليس التثبيت. راجع [وثائق azd الخاصة بـ Pulumi](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-pulumi-for-azd).
+
+## 🎯 اختيار مضيف لخدمتك
+
+حقل `host` في `azure.yaml` يحدد مكان تشغيل التعليمات البرمجية الخاصة بك. يدعم azd عدة مستضيفين — اختيار الخيار الصحيح أهم من لغة البنية التحتية. فيما يلي مقارنة مناسبة للمبتدئين:
+
+| `host` value | الأفضل لـ | السبب |
+|--------------|----------|-----|
+| `appservice` | تطبيقات الويب التقليدية وواجهات برمجة التطبيقات | أبسط منصة كخدمة؛ لا تتطلب حاويات |
+| `staticwebapp` | واجهات المستخدم الأحادية (SPAs) للواجهة الأمامية (React, Vue, Angular) | شبكة CDN عالمية + SSL مجاني، ودعم API مدمج |
+| `function` | أحمال العمل المعتمدة على الأحداث ودون خوادم | قابلية التحجيم للصفر، ودفع مقابل كل تنفيذ |
+| `containerapp` | خدمات مصغرة محمولة في حاويات | حاويات بدون خوادم، قابلية التحجيم للصفر، ودعم دخول مدمج |
+| `aks` | حالات الحاجة لتنسيق معقد | تحكم كامل في Kubernetes عندما تحتاج لذلك فعلاً |
+| `springapp` | تطبيقات Java Spring Boot | بيئة تشغيل مُدارة لـ Azure Spring Apps مُحسّنة لـ Spring |
+
+### متى تختار AKS
+
+خدمة Azure Kubernetes (`host: aks`) تمنحك القوة الكاملة لـ Kubernetes — وحدات تحكم مخصصة، شبكات خدمة، شبكات معقدة، وجدولة دقيقة الحبيبات. تأتي هذه القوة مع عبء تشغيلي: أنت من يدير تجمعات العقد، والترقيات، وشبكات العنقود.
+
+```yaml
+services:
+  api:
+    project: ./src/api
+    language: js
+    host: aks          # deploys to an existing AKS cluster
+```
+
+> **ابدأ ببساطة إذا استطعت.** لمعظم الخدمات المصغرة، تمنحك **Container Apps** الحاويات، والتحجيم التلقائي، وقابلية التحجيم للصفر دون إدارة عنقود. اختر AKS فقط عندما تحتاج ميزات مخصصة لـ Kubernetes.
+
+### متى تستخدم Azure Spring Apps
+
+تعد **Azure Spring Apps (`host: springapp`)** بيئة تشغيل مُدارة مصممة خصيصًا لـ Spring Boot. تتعامل مع اكتشاف الخدمات، وخادم التكوين، والنشر الأزرق-الأخضر حتى لا يحتاج فرق Java إلى تشغيل بنيتهم التحتية الخاصة.
+
+```yaml
+services:
+  catalog:
+    project: ./src/catalog
+    language: java
+    host: springapp
+```
+
+> استخدم `springapp` عندما تكون لديك تطبيقات Spring Boot موجودة وتريد بيئة تشغيل مخصّصة لها. بالنسبة لتطبيقات Java الحاوية الجديدة دون احتياجات خاصة بـ Spring، غالبًا ما يكون `containerapp` الخيار الأبسط.
 
 ## 🗃️ توفير قواعد البيانات
 
@@ -342,7 +536,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### تكوين Managed Identity
+### تكوين الهوية المُدارة
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -561,7 +755,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 تكوينات خاصة بالبيئة
+## 🔧 التكوينات الخاصة بكل بيئة
 
 ### ملفات المعلمات لبيئات مختلفة
 ```json
@@ -617,7 +811,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### توفير موارد مشروطة
+### توفير الموارد الشرطي
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -651,7 +845,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 
 ## 🚀 أنماط توفير متقدمة
 
-### النشر متعدد المناطق
+### نشر متعدد المناطق
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -755,40 +949,40 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 معاينة والتحقق من البنية التحتية (جديد)
+## 🧪 معاينة البنية التحتية والتحقق (NEW)
 
 ### معاينة تغييرات البنية التحتية قبل النشر
 
-تتيح لك ميزة `azd provision --preview` **محاكاة توفير البنية التحتية** قبل نشر الموارد فعليًا. إنها مشابهة في المبدأ لـ `terraform plan` أو `bicep what-if`، مما يمنحك **عرضًا تجريبيًا لما ستكون عليه التغييرات** في بيئة Azure الخاصة بك.
+تتيح لك ميزة `azd provision --preview` **محاكاة توفير البنية التحتية** قبل نشر الموارد فعليًا. هي شبيهة بروح `terraform plan` أو `bicep what-if`، وتمنحك **عرضًا تجريبيًا** لما سيُغيّر في بيئة Azure الخاصة بك.
 
-#### 🛠️ ما يفعله
+#### 🛠️ ما الذي يفعله
 - **يحلل قوالب IaC الخاصة بك** (Bicep أو Terraform)
-- **يعرض معاينة لتغييرات الموارد**: إضافات، حذوفات، تحديثات
-- **لا يقوم بتطبيق التغييرات** — هو للقراءة فقط وآمن للتشغيل
+- **يعرض معاينة لتغييرات الموارد**: الإضافات، الحذف، التحديثات
+- **لا يُطبّق التغييرات** — إنه للقراءة فقط وآمن للتشغيل
 
 #### حالات الاستخدام
 ```bash
-# معاينة التغييرات في البنية التحتية قبل النشر
+# معاينة تغييرات البنية التحتية قبل النشر
 azd provision --preview
 
 # معاينة لبيئة محددة
 azd provision --preview -e production
 ```
 
-تساعدك هذه الميزة على:
+يساعدك هذا الأمر على:
 - **التحقق من تغييرات البنية التحتية** قبل الالتزام بالموارد
-- **التقاط الأخطاء في التكوين مبكرًا** خلال دورة التطوير
+- **التقاط الأخطاء في التكوين مبكرًا** في دورة التطوير
 - **التعاون بأمان** في بيئات الفريق
-- **ضمان عمليات نشر بأقل امتيازات** دون مفاجآت
+- **ضمان نشر بأدنى الامتيازات** دون مفاجآت
 
-تكون هذه الميزة مفيدة بشكل خاص عندما:
-- العمل مع بيئات متعددة الخدمات ومعقدة
-- إجراء تغييرات على بنية الإنتاج
+يكون ذلك مفيدًا بشكل خاص عندما:
+- العمل مع بيئات متعددة الخدمات المعقدة
+- إجراء تغييرات على البنية التحتية الإنتاجية
 - التحقق من تعديلات القوالب قبل الموافقة على طلب السحب (PR)
 - تدريب أعضاء الفريق الجدد على أنماط البنية التحتية
 
-### مثال لمخرجات المعاينة
-تختلف مخرجات المعاينة الدقيقة حسب المزود وهيكل المشروع، لكن يجب أن تُظهر النتيجة بوضوح التغييرات المقترحة قبل تطبيق أي شيء.
+### مثال على مخرجات المعاينة
+تختلف مخرجات المعاينة الدقيقة حسب الموفر وبنية المشروع، لكن يجب أن تحدّد النتيجة بوضوح التغييرات المقترحة قبل تطبيق أي شيء.
 
 ```bash
 $ azd provision --preview
@@ -815,20 +1009,20 @@ The following resources will be destroyed:
 
 ## �🔄 تحديثات الموارد والترحيلات
 
-### تحديثات الموارد الآمنة
+### تحديثات آمنة للموارد
 ```bash
-# عاين تغييرات البنية التحتية أولاً (موصى به)
+# عاين تغييرات البنية التحتية أولاً (مُوصى به)
 azd provision --preview
 
-# طبق التغييرات بعد تأكيد المعاينة
+# قم بتطبيق التغييرات بعد تأكيد المعاينة
 azd provision --confirm-with-no-prompt
 
-# للرجوع، استخدم Git للتراجع عن تغييرات البنية التحتية:
-git revert HEAD  # تراجع عن آخر التزام للبنية التحتية
-azd provision    # طبق حالة البنية التحتية السابقة
+# للتراجع، استخدم Git لإرجاع تغييرات البنية التحتية:
+git revert HEAD  # التراجع عن آخر التزام للبنية التحتية
+azd provision    # تطبيق حالة البنية التحتية السابقة
 ```
 
-### ترحيل قواعد البيانات
+### ترحيلات قاعدة البيانات
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -917,26 +1111,26 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ## الخطوات التالية
 
 - [التخطيط قبل النشر](../chapter-06-pre-deployment/capacity-planning.md) - التحقق من توفر الموارد
-- [المشاكل الشائعة](../chapter-07-troubleshooting/common-issues.md) - استكشاف مشكلات البنية التحتية وإصلاحها
-- [دليل تصحيح الأخطاء](../chapter-07-troubleshooting/debugging.md) - استكشاف مشكلات التزويد وإصلاحها
-- [اختيار SKU](../chapter-06-pre-deployment/sku-selection.md) - اختيار مستويات الخدمة المناسبة
+- [المشكلات الشائعة](../chapter-07-troubleshooting/common-issues.md) - استكشاف مشكلات البنية التحتية وحلها
+- [دليل التصحيح](../chapter-07-troubleshooting/debugging.md) - تصحيح مشكلات التوفير
+- [اختيار SKU](../chapter-06-pre-deployment/sku-selection.md) - اختر طبقات الخدمة المناسبة
 
-## موارد إضافية
+## مصادر إضافية
 
-- [توثيق Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [وثائق Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [قوالب Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
 - [مركز هندسة Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [إطار عمل Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [إطار عمل Azure للهندسة الجيدة](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-**التنقل**
+**التنقّل**
 - **الدرس السابق**: [دليل النشر](deployment-guide.md)
-- **الدرس التالي**: [تخطيط السعة](../chapter-06-pre-deployment/capacity-planning.md)
+- **الدرس التالي**: [التخطيط قبل النشر](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**إخلاء المسؤولية**:
-تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الموثوق. بالنسبة للمعلومات الحساسة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أي سوء فهم أو تفسير خاطئ ينشأ عن استخدام هذه الترجمة.
+**تنويه**:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى للدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي والمعتمد. للمعلومات الهامة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

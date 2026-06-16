@@ -1,50 +1,50 @@
-# Microsoft Foundry Integration with AZD
+# دمج Microsoft Foundry مع AZD
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: الفصل 2 - تطوير موجه بالذكاء الاصطناعي
-- **⬅️ Previous Chapter**: [Chapter 1: Your First Project](../chapter-01-foundation/first-project.md)
-- **➡️ Next**: [AI Model Deployment](ai-model-deployment.md)
-- **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+**تنقل الفصل:**
+- **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)
+- **📖 الفصل الحالي**: الفصل 2 - تطوير يركز على الذكاء الاصطناعي
+- **⬅️ الفصل السابق**: [الفصل 1: مشروعك الأول](../chapter-01-foundation/first-project.md)
+- **➡️ التالي**: [نشر نموذج الذكاء الاصطناعي](ai-model-deployment.md)
+- **🚀 الفصل التالي**: [الفصل 3: التكوين](../chapter-03-configuration/configuration.md)
 
 ## نظرة عامة
 
-يشرح هذا الدليل كيفية دمج خدمات Microsoft Foundry مع Azure Developer CLI (AZD) لنشر تطبيقات الذكاء الاصطناعي بسلاسة. يوفر Microsoft Foundry منصة شاملة لبناء ونشر وإدارة تطبيقات الذكاء الاصطناعي، بينما يبسط AZD عملية البنية التحتية والنشر.
+يوضح هذا الدليل كيفية دمج خدمات Microsoft Foundry مع Azure Developer CLI (AZD) لنشر تطبيقات الذكاء الاصطناعي بطريقة مبسطة. يوفر Microsoft Foundry منصة شاملة لبناء ونشر وإدارة تطبيقات الذكاء الاصطناعي، بينما يبسط AZD عملية البنية التحتية والنشر.
 
 ## ما هو Microsoft Foundry؟
 
-Microsoft Foundry هو منصة مايكروسوفت الموحدة لتطوير الذكاء الاصطناعي والتي تشمل:
+Microsoft Foundry هو منصة موحدة من Microsoft لتطوير الذكاء الاصطناعي تتضمن:
 
-- **Model Catalog**: الوصول إلى أحدث نماذج الذكاء الاصطناعي
+- **كتالوج النماذج**: الوصول إلى نماذج ذكاء اصطناعي متطورة
 - **Prompt Flow**: مصمم بصري لتدفقات عمل الذكاء الاصطناعي
-- **Microsoft Foundry Portal**: بيئة تطوير متكاملة لتطبيقات الذكاء الاصطناعي
-- **Deployment Options**: خيارات استضافة وتحجيم متعددة
-- **Safety and Security**: ميزات الذكاء الاصطناعي المسؤولة المدمجة
+- **بوابة Microsoft Foundry**: بيئة تطوير متكاملة لتطبيقات الذكاء الاصطناعي
+- **خيارات النشر**: خيارات استضافة ومقياس متعددة
+- **السلامة والأمان**: ميزات ذكاء اصطناعي مسؤولة مدمجة
 
 ## AZD + Microsoft Foundry: أفضل معًا
 
-| Feature | Microsoft Foundry | AZD Integration Benefit |
+| الميزة | Microsoft Foundry | ميزة التكامل مع AZD |
 |---------|-----------------|------------------------|
-| **Model Deployment** | Manual portal deployment | Automated, repeatable deployments |
-| **Infrastructure** | Click-through provisioning | Infrastructure as Code (Bicep) |
-| **Environment Management** | Single environment focus | Multi-environment (dev/staging/prod) |
-| **CI/CD Integration** | Limited | Native GitHub Actions support |
-| **Cost Management** | Basic monitoring | Environment-specific cost optimization |
+| **نشر النماذج** | نشر يدوي عبر البوابة | نشر آلي وقابل للتكرار |
+| **البنية التحتية** | توفير عبر النقر | البنية التحتية كرمز (Bicep) |
+| **إدارة البيئة** | تركيز على بيئة واحدة | بيئات متعددة (dev/staging/prod) |
+| **تكامل CI/CD** | محدود | دعم أصلي لـ GitHub Actions |
+| **إدارة التكاليف** | مراقبة أساسية | تحسين التكاليف حسب البيئة |
 
-## المتطلبات الأساسية
+## المتطلبات المسبقة
 
 - اشتراك Azure مع الأذونات المناسبة
-- Azure Developer CLI مثبت
+- تثبيت Azure Developer CLI
 - الوصول إلى خدمات Microsoft Foundry Models
 - معرفة أساسية بـ Microsoft Foundry
 
-> **Current AZD baseline:** تمت مراجعة هذه الأمثلة مقابل `azd` `1.23.12`. بالنسبة لتدفق عمل وكيل الذكاء الاصطناعي، استخدم إصدار الإضافة التجريبي الحالي وتحقق من الإصدار المثبت قبل أن تبدأ.
+> **الخط الأساسي الحالي لـ AZD:** تمت مراجعة هذه الأمثلة مقابل `azd` `1.23.12`. بالنسبة لتدفق عمل الوكيل الذكي، استخدم إصدار الامتداد المعاين الحالي وتحقق من الإصدار المثبت قبل أن تبدأ.
 
 ## أنماط التكامل الأساسية
 
-### النمط 1: تكامل نماذج Microsoft Foundry
+### النمط 1: تكامل Microsoft Foundry Models
 
-**حالة الاستخدام**: نشر تطبيقات دردشة باستخدام نماذج Microsoft Foundry
+**حالة الاستخدام**: نشر تطبيقات الدردشة باستخدام نماذج Microsoft Foundry Models
 
 ```yaml
 # azure.yaml
@@ -94,7 +94,7 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 
 ### النمط 2: تكامل البحث الذكي + RAG
 
-**حالة الاستخدام**: نشر تطبيقات الاستدلال المعزز بالاسترجاع (RAG)
+**حالة الاستخدام**: نشر تطبيقات التوليد المعزز بالاسترجاع (RAG)
 
 ```bicep
 // Azure AI Search
@@ -161,7 +161,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 **تكوين الإنتاج:**
 ```bash
-# خدمات الذكاء الاصطناعي الأساسية
+# الخدمات الأساسية للذكاء الاصطناعي
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_SEARCH_ENDPOINT "https://your-search.search.windows.net"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT "https://your-formrec.cognitiveservices.azure.com/"
@@ -220,9 +220,9 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ## تدفقات النشر
 
-### امتدادات AZD لـ Microsoft Foundry
+### امتدادات AZD لـ Foundry
 
-توفر AZD امتدادات تضيف قدرات خاصة بالذكاء الاصطناعي للعمل مع خدمات Microsoft Foundry:
+يوفر AZD امتدادات تضيف قدرات خاصة بالذكاء الاصطناعي للعمل مع خدمات Microsoft Foundry:
 
 ```bash
 # تثبيت امتداد وكلاء Foundry
@@ -237,15 +237,15 @@ azd extension install azure.ai.models
 # عرض الامتدادات المثبتة
 azd extension list --installed
 
-# عرض إصدار امتداد الوكيل المثبت حاليًا
+# فحص إصدار امتداد الوكلاء المثبت حاليًا
 azd extension show azure.ai.agents
 ```
 
-لا تزال امتدادات الذكاء الاصطناعي تتطور بسرعة في النسخة التجريبية. إذا تصرّف أمر ما بشكل مختلف عما هو موضح هنا، قم بترقية الإضافة ذات الصلة قبل استكشاف المشروع نفسه.
+لا تزال امتدادات الذكاء الاصطناعي تتطور بسرعة في المعاينة. إذا تصرف أمر ما بشكل مختلف عما هو موضح هنا، فقم بترقية الامتداد ذي الصلة قبل استكشاف المشروع نفسه.
 
-### النشر الموجه بالوكلاء باستخدام `azd ai`
+### النشر القائم على الوكيل أولًا باستخدام `azd ai`
 
-إذا كان لديك مُعرّف وكيل (agent manifest)، استخدم `azd ai agent init` لإنشاء مشروع منظم لخدمة وكلاء Foundry:
+إذا كان لديك بيان وكيل (agent manifest)، استخدم `azd ai agent init` لإنشاء هيكل مشروع مرتبط بخدمة Foundry Agent:
 
 ```bash
 # التهيئة من ملف تعريف الوكيل
@@ -255,9 +255,9 @@ azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 azd up
 ```
 
-أصدرت الإصدارات التجريبية الأخيرة من `azure.ai.agents` أيضًا دعم التهيئة المستندة إلى القوالب لـ `azd ai agent init`. إذا كنت تتبع أمثلة وكلاء أحدث، فتحقق من مساعدة الإضافة للأعلام المتاحة في الإصدار المثبت لديك.
+أصدرت الإصدارات المعاينة الحديثة من `azure.ai.agents` أيضًا دعمًا لتهيئة قائمة على القوالب لـ `azd ai agent init`. إذا كنت تتبع عينات وكيل أحدث، فراجع مساعدة الامتداد لمعرفة العلامات (flags) الدقيقة المتاحة في الإصدار المثبت لديك.
 
-انظر [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) للمرجع الكامل للأوامر والأعلام.
+انظر [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) للمرجع الكامل للأوامر والعلامات.
 
 ### النشر بأمر واحد
 
@@ -265,15 +265,15 @@ azd up
 # انشر كل شيء بأمر واحد
 azd up
 
-# أو انشر تدريجيًا
+# أو انشر تدريجياً
 azd provision  # البنية التحتية فقط
 azd deploy     # التطبيق فقط
 
-# لنشر تطبيقات الذكاء الاصطناعي طويلة الأمد باستخدام azd 1.23.11+
+# لنشر تطبيقات الذكاء الاصطناعي طويلة التشغيل في azd 1.23.11+
 azd deploy --timeout 1800
 ```
 
-### نشر مخصص لكل بيئة
+### عمليات النشر الخاصة بالبيئة
 
 ```bash
 # بيئة التطوير
@@ -292,7 +292,7 @@ azd up
 
 ## المراقبة وقابلية الملاحظة
 
-### التكامل مع Application Insights
+### تكامل Application Insights
 
 ```bicep
 // Application Insights for AI application monitoring
@@ -355,7 +355,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 ## 🔐 أفضل ممارسات الأمان
 
-### تكوين الهوية المدارة
+### تكوين الهوية المُدارة
 
 ```bicep
 // Managed identity for the web application
@@ -471,7 +471,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 ### المشكلة 1: تجاوز حصة OpenAI
 
 **الأعراض:**
-- يفشل النشر بأخطاء متعلقة بالحصة
+- يفشل النشر مع أخطاء الحصة
 - أخطاء 429 في سجلات التطبيق
 
 **الحلول:**
@@ -483,7 +483,7 @@ az cognitiveservices usage list --location eastus
 azd env set AZURE_LOCATION westus2
 azd up
 
-# تقليل السعة مؤقتًا
+# خفّض السعة مؤقتًا
 azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
@@ -492,7 +492,7 @@ azd deploy
 
 **الأعراض:**
 - أخطاء 401/403 عند استدعاء خدمات الذكاء الاصطناعي
-- رسائل "Access denied"
+- رسائل "تم رفض الوصول"
 
 **الحلول:**
 ```bash
@@ -502,34 +502,34 @@ az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 # تحقق من تكوين الهوية المدارة
 az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 
-# تحقق من صلاحية الوصول إلى مخزن المفاتيح
+# تحقق من الوصول إلى خزنة المفاتيح
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
-### المشكلة 3: مشاكل نشر النماذج
+### المشكلة 3: مشكلات نشر النماذج
 
 **الأعراض:**
 - النماذج غير متاحة في النشر
-- فشل إصدارات نموذج محددة
+- إصدارات نماذج محددة تفشل
 
 **الحلول:**
 ```bash
-# سرد النماذج المتاحة حسب المنطقة
+# عرض النماذج المتاحة حسب المنطقة
 az cognitiveservices model list --location eastus
 
 # تحديث إصدار النموذج في قالب bicep
 # التحقق من متطلبات سعة النموذج
 ```
 
-## أمثلة على القوالب
+## قوالب مثال
 
-### تطبيق دردشة RAG (Python)
+### RAG Chat Application (Python)
 
 **المستودع**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
 **الخدمات**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
 
-**الوصف**: العينة الأكثر شيوعًا في Azure AI — تطبيق دردشة RAG جاهز للإنتاج يتيح لك طرح أسئلة حول مستنداتك الخاصة. يستخدم GPT-4.1-mini للدردشة، وtext-embedding-3-large للتضمينات، وAzure AI Search للاسترجاع. يدعم المستندات متعددة الوسائط، وإدخال/إخراج صوتي، ومصادقة Microsoft Entra، وتتبع Application Insights.
+**الوصف**: العينة الأكثر شعبية في Azure AI — تطبيق دردشة RAG جاهز للإنتاج يتيح لك طرح أسئلة حول مستنداتك الخاصة. يستخدم GPT-4.1-mini للدردشة، وtext-embedding-3-large للتضمينات، وAzure AI Search للاسترجاع. يدعم المستندات متعددة الوسائط، وإدخال/إخراج صوتي، ومصادقة Microsoft Entra، وتتبع Application Insights.
 
 **بدء سريع**:
 ```bash
@@ -537,13 +537,13 @@ azd init --template azure-search-openai-demo
 azd up
 ```
 
-### تطبيق دردشة RAG (.NET)
+### RAG Chat Application (.NET)
 
 **المستودع**: [azure-search-openai-demo-csharp](https://github.com/Azure-Samples/azure-search-openai-demo-csharp)
 
 **الخدمات**: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
 
-**الوصف**: المعادل لـ Python لتطبيق دردشة RAG. مبني باستخدام ASP.NET Core Minimal API وواجهة أمامية Blazor WebAssembly. يتضمن دردشة صوتية، ودعم GPT-4o-mini للرؤية، وعميل سطح مكتب/جوال مصاحب باستخدام .NET MAUI Blazor Hybrid.
+**الوصف**: ما يعادل عينة RAG للدردشة بلغة .NET/C#. مبنية باستخدام ASP.NET Core Minimal API وواجهة Blazor WebAssembly. تتضمن دردشة صوتية، ودعم GPT-4o-mini vision، وعميل سطح مكتب/هاتف محمول مدمج باستخدام .NET MAUI Blazor Hybrid.
 
 **بدء سريع**:
 ```bash
@@ -551,13 +551,13 @@ azd init --template azure-search-openai-demo-csharp
 azd up
 ```
 
-### تطبيق دردشة RAG (Java)
+### RAG Chat Application (Java)
 
 **المستودع**: [azure-search-openai-demo-java](https://github.com/Azure-Samples/azure-search-openai-demo-java)
 
 **الخدمات**: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
 
-**الوصف**: نسخة جافا لعينة دردشة RAG تستخدم Langchain4J لتنفيذ أوركسترة الذكاء الاصطناعي. تدعم بنية خدمات مصغرة قائمة على الأحداث، واستراتيجيات بحث متعددة (نص، متجه، هجينة)، ورفع المستندات باستخدام Azure Document Intelligence، والنشر إما على Azure Container Apps أو Azure Kubernetes Service.
+**الوصف**: النسخة الجافا من عينة دردشة RAG باستخدام Langchain4J لتنظيم الذكاء الاصطناعي. يدعم بنية مايكروخدمات مدفوعة بالأحداث، واستراتيجيات بحث متعددة (نصيّة، شعاعية، هجينة)، ورفع المستندات باستخدام Azure Document Intelligence، والنشر على Azure Container Apps أو Azure Kubernetes Service.
 
 **بدء سريع**:
 ```bash
@@ -565,13 +565,13 @@ azd init --template azure-search-openai-demo-java
 azd up
 ```
 
-### مساعد مبيعات المؤسسات باستخدام Azure AI Foundry
+### Enterprise Retail Copilot with Microsoft Foundry
 
 **المستودع**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
-**الخدمات**: Azure OpenAI + Azure AI Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
+**الخدمات**: Azure OpenAI + Microsoft Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
 
-**الوصف**: مساعد مبيعات متكامل من نوع RAG باستخدام Azure AI Foundry وPrompty. روبوت دردشة لبائع تجزئة Contoso Outdoor يؤسس إجاباته على كتالوج المنتجات وبيانات طلبات العملاء. يوضح مسار GenAIOps الكامل — النموذج الأولي باستخدام Prompty، التقييم بمساعدات الذكاء الاصطناعي، والنشر عبر AZD إلى Container Apps.
+**الوصف**: مساعد RAG لتجزئة التجزئة نهاية إلى نهاية يستخدم Microsoft Foundry وPrompty. دردشة تاجر Contoso Outdoor تربط الاستجابات بكتالوج المنتجات وبيانات طلبات العملاء. يوضح سير عمل GenAIOps الكامل — النمذجة الأولية مع Prompty، التقييم بمساعدات AI، والنشر عبر AZD إلى Container Apps.
 
 **بدء سريع**:
 ```bash
@@ -579,13 +579,13 @@ azd init --template contoso-chat
 azd up
 ```
 
-### تطبيق كتابة إبداعية متعدد الوكلاء
+### Creative Writing Multi-Agent Application
 
 **المستودع**: [contoso-creative-writer](https://github.com/Azure-Samples/contoso-creative-writer)
 
 **الخدمات**: Azure OpenAI + Azure AI Agent Service + Bing Grounding + Azure AI Search + Azure Container Apps
 
-**الوصف**: عينة متعددة الوكلاء توضح أوركسترة وكلاء الذكاء الاصطناعي باستخدام Prompty. تستخدم وكيل بحث (Bing Grounding في Azure AI Agent Service)، وكيل منتج (Azure AI Search)، وكيل كاتب، ووكيل محرر للتعاون في إنتاج مقالات مدروسة جيدًا. تتضمن تكامل CI/CD مع التقييم في GitHub Actions.
+**الوصف**: عينة متعددة الوكلاء توضح تنظيم وكلاء الذكاء الاصطناعي باستخدام Prompty. تستخدم وكيل بحث (Bing Grounding في Azure AI Agent Service)، ووكيل منتج (Azure AI Search)، ووكيل كاتب، ووكيل محرر للتعاون على إنتاج مقالات مدعومة بالبحث. تتضمن CI/CD مع تقييم في GitHub Actions.
 
 **بدء سريع**:
 ```bash
@@ -593,13 +593,13 @@ azd init --template contoso-creative-writer
 azd up
 ```
 
-### RAG بدون خوادم دردشة (JavaScript/TypeScript)
+### Serverless RAG Chat (JavaScript/TypeScript)
 
 **المستودع**: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
 
 **الخدمات**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB for NoSQL + LangChain.js
 
-**الوصف**: روبوت دردشة RAG خالٍ تمامًا من الخوادم باستخدام LangChain.js مع Azure Functions للـ API وAzure Static Web Apps للاستضافة. يستخدم Azure Cosmos DB كمخزن متجه وسجل دردشة. يدعم التطوير المحلي باستخدام Ollama للاختبار بدون تكلفة.
+**الوصف**: روبوت دردشة RAG بدون خوادم بالكامل باستخدام LangChain.js مع Azure Functions للـ API وAzure Static Web Apps للاستضافة. يستخدم Azure Cosmos DB كمخزن شعاعي وقاعدة لتاريخ الدردشة. يدعم التطوير المحلي مع Ollama للاختبار بدون تكلفة.
 
 **بدء سريع**:
 ```bash
@@ -607,13 +607,13 @@ azd init --template serverless-chat-langchainjs
 azd up
 ```
 
-### الدردشة مع بياناتك - مسرّع الحلول
+### Chat with Your Data Solution Accelerator
 
 **المستودع**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
 
 **الخدمات**: Azure OpenAI + Azure AI Search + Azure App Service + Azure Document Intelligence + Azure Functions + Azure Cosmos DB / PostgreSQL
 
-**الوصف**: مسرّع حل RAG بمستوى الشركات مع بوابة إدارة لتحميل/إدارة المستندات، وخيارات منسق متعددة (Semantic Kernel، LangChain، Prompt Flow)، وتحويل الكلام إلى نص، وتكامل Microsoft Teams، وخيار PostgreSQL أو Cosmos DB كقاعدة خلفية. مصمم كنقطة بداية قابلة للتخصيص لسيناريوهات RAG الإنتاجية.
+**الوصف**: مسرِّع حل RAG بمستوى المؤسسات مع بوابة إدارة لتحميل/إدارة المستندات، وخيارات منسقة متعددة (Semantic Kernel, LangChain, Prompt Flow)، وتحويل الكلام إلى نص، وتكامل Microsoft Teams، وخيار استخدام PostgreSQL أو Cosmos DB كقاعدة خلفية. مصمم كنقطة بداية قابلة للتخصيص لسيناريوهات RAG الإنتاجية.
 
 **بدء سريع**:
 ```bash
@@ -621,13 +621,13 @@ azd init --template chat-with-your-data-solution-accelerator
 azd up
 ```
 
-### وكلاء السفر بالذكاء الاصطناعي — أوركسترة MCP متعددة الوكلاء
+### AI Travel Agents — Multi-Agent MCP Orchestration
 
 **المستودع**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
 
-**الخدمات**: Azure OpenAI + Azure AI Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
+**الخدمات**: Azure OpenAI + Microsoft Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
 
-**الوصف**: تطبيق مرجعي لأوركسترة الذكاء الاصطناعي متعددة الوكلاء باستخدام ثلاث أطر (LangChain.js، LlamaIndex.TS، وMicrosoft Agent Framework). يتميز بخوادم MCP (Model Context Protocol) بأربع لغات تُنشر كـ Azure Container Apps بدون خادم مع مراقبة OpenTelemetry.
+**الوصف**: تطبيق مرجعي لتنظيم وكلاء الذكاء الاصطناعي متعدد الوكلاء باستخدام ثلاث أطر (LangChain.js، LlamaIndex.TS، وMicrosoft Agent Framework). يضم خوادم MCP (Model Context Protocol) بأربع لغات مُنشورة كـ Azure Container Apps بدون خادم مع مراقبة OpenTelemetry.
 
 **بدء سريع**:
 ```bash
@@ -641,7 +641,7 @@ azd up
 
 **الخدمات**: Azure AI Services + Azure OpenAI
 
-**الوصف**: قالب Bicep بسيط ينشر خدمات Azure AI مع نماذج تعلم آلي مُكوّنة. نقطة بداية خفيفة عندما تحتاج فقط إلى توفير بنية Azure AI دون حزمة تطبيق كاملة.
+**الوصف**: قالب Bicep مصغر ينشر خدمات Azure AI مع نماذج تعلم آلي مُعدة. نقطة بداية خفيفة الوزن عندما تحتاج فقط إلى توفير بنية Azure AI دون حزمة تطبيق كاملة.
 
 **بدء سريع**:
 ```bash
@@ -649,20 +649,20 @@ azd init --template azd-ai-starter
 azd up
 ```
 
-> **تصفح مزيد من القوالب**: قم بزيارة [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) لمشاهدة أكثر من 80 قالب AZD مخصّص للذكاء الاصطناعي عبر لغات وسيناريوهات متعددة.
+> **تصفح المزيد من القوالب**: زر [معرض قوالب AZD AI الرائع](https://azure.github.io/awesome-azd/?tags=ai) للحصول على أكثر من 80 قالب AZD مخصص للذكاء الاصطناعي عبر لغات وسيناريوهات مختلفة.
 
 ## الخطوات التالية
 
-1. **جرّب الأمثلة**: ابدأ بقالب جاهز يتطابق مع حالة الاستخدام الخاصة بك
-2. **خصّص لاحتياجاتك**: عدّل البنية التحتية وكود التطبيق
-3. **أضف المراقبة**: نفّذ قابلية ملاحظة شاملة
-4. **حسّن التكاليف**: ضبّط التكوينات بما يتناسب مع ميزانيتك
-5. **أمّن النشر**: نفّذ أنماط أمان مؤسسية
-6. **وسع للإنتاج**: أضف ميزات التوزيع عبر مناطق وتوفّر عالي
+1. **جرّب الأمثلة**: ابدأ بقالب مُعد مسبقًا يطابق حالة الاستخدام لديك
+2. **خصص لاحتياجاتك**: عدّل البنية التحتية وكود التطبيق
+3. **أضف المراقبة**: نفّذ ملاحظية شاملة
+4. **حسّن التكاليف**: ضبط التكوينات وفق ميزانيتك
+5. **أمّن النشر الخاص بك**: نفّذ أنماط أمان مؤسسية
+6. **وسّع إلى الإنتاج**: أضف ميزات متعددة المناطق والقدرة على التوافر العالي
 
 ## 🎯 تمارين عملية
 
-### التمرين 1: نشر تطبيق دردشة بنماذج Microsoft Foundry (30 دقيقة)
+### التمرين 1: نشر تطبيق دردشة Microsoft Foundry Models (30 دقيقة)
 **الهدف**: نشر واختبار تطبيق دردشة ذكاء اصطناعي جاهز للإنتاج
 
 ```bash
@@ -674,7 +674,7 @@ azd init --template azure-search-openai-demo
 azd env set AZURE_LOCATION eastus2
 azd env set AZURE_OPENAI_CAPACITY 30
 
-# النشر
+# نشر
 azd up
 
 # اختبار التطبيق
@@ -684,18 +684,18 @@ echo "Chat app: $WEB_URL"
 # مراقبة عمليات الذكاء الاصطناعي
 azd monitor
 
-# التنظيف
+# تنظيف
 azd down --force --purge
 ```
 
 **معايير النجاح:**
-- [ ] يكتمل النشر دون أخطاء متعلقة بالحصة
+- [ ] يكتمل النشر دون أخطاء حصة
 - [ ] يمكن الوصول إلى واجهة الدردشة في المتصفح
-- [ ] يمكن طرح الأسئلة والحصول على إجابات مدعومة بالذكاء الاصطناعي
-- [ ] تُظهر Application Insights بيانات القياس
+- [ ] يمكن طرح أسئلة والحصول على استجابات مدعومة بالذكاء الاصطناعي
+- [ ] يظهر Application Insights بيانات القياس
 - [ ] تم تنظيف الموارد بنجاح
 
-**التكلفة التقديرية**: $5-10 لمدة 30 دقيقة من الاختبار
+**التكلفة المقدرة**: $5-10 مقابل 30 دقيقة من الاختبار
 
 ### التمرين 2: تكوين نشر متعدد النماذج (45 دقيقة)
 **الهدف**: نشر نماذج ذكاء اصطناعي متعددة بتكوينات مختلفة
@@ -754,14 +754,14 @@ azd show
 **معايير النجاح:**
 - [ ] تم نشر نماذج متعددة بنجاح
 - [ ] تم تطبيق إعدادات سعة مختلفة
-- [ ] النماذج قابلة للوصول عبر API
+- [ ] النماذج متاحة عبر API
 - [ ] يمكن استدعاء كلا النموذجين من التطبيق
 
 ### التمرين 3: تنفيذ مراقبة التكاليف (20 دقيقة)
-**الهدف**: إعداد تنبيهات الميزانية وتتبع التكلفة
+**الهدف**: إعداد تنبيهات الميزانية وتتبع التكاليف
 
 ```bash
-# أضف تنبيهًا للميزانية إلى Bicep
+# إضافة تنبيه للميزانية في Bicep
 cat >> infra/main.bicep << 'EOF'
 
 resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
@@ -792,7 +792,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 EOF
 
-# انشر تنبيه الميزانية
+# نشر تنبيه الميزانية
 azd provision
 
 # تحقق من التكاليف الحالية
@@ -808,57 +808,57 @@ az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-d
 ## 💡 الأسئلة الشائعة
 
 <details>
-<summary><strong>كيف أُقلل تكاليف نماذج Microsoft Foundry أثناء التطوير؟</strong></summary>
+<summary><strong>كيف أُقلل تكاليف Microsoft Foundry Models أثناء التطوير؟</strong></summary>
 
-1. **استخدم الطبقة المجانية**: توفر Microsoft Foundry Models 50,000 توكن شهريًا مجانًا
-2. **خفض السعة**: اضبط السعة إلى 10 TPM بدلاً من 30+ لبيئة التطوير
-3. **استخدم azd down**: قم بإلغاء تخصيص الموارد عندما لا تكون في مرحلة تطوير نشطة
-4. **تخزين الردود مؤقتًا**: نفّذ ذاكرة مؤقتة Redis للاستعلامات المتكررة
-5. **استخدم هندسة المطالبات (Prompt Engineering)**: قلل استخدام التوكنات بمطالبات فعّالة
+1. **استخدم الطبقة المجانية**: تقدم Microsoft Foundry Models 50,000 رمز شهريًا مجانًا
+2. **تقليل السعة**: اضبط السعة إلى 10 TPM بدلاً من 30+ لبيئة التطوير
+3. **استخدم azd down**: فك تخصيص الموارد عندما لا تكون في مرحلة التطوير النشط
+4. **تخزين الاستجابات مؤقتًا**: نفّذ ذاكرة تخزين مؤقتة Redis للاستعلامات المتكررة
+5. **استخدم هندسة المطالبات**: قلل استخدام الرموز باستخدام مطالبات فعّالة
 
 </details>
 ```bash
-# تكوين التطوير
+# إعدادات التطوير
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set ENABLE_RESPONSE_CACHE true
 ```
 </details>
 
 <details>
-<summary><strong>ما الفرق بين نماذج Microsoft Foundry وواجهة برمجة تطبيقات OpenAI؟</strong></summary>
+<summary><strong>ما الفرق بين Microsoft Foundry Models و OpenAI API؟</strong></summary>
 
 **Microsoft Foundry Models**:
-- أمان المؤسسات والامتثال
+- أمان وامتثال على مستوى المؤسسات
 - تكامل مع الشبكات الخاصة
 - ضمانات اتفاقية مستوى الخدمة (SLA)
-- المصادقة باستخدام الهوية المدارة
+- المصادقة عبر Managed Identity
 - حصص أعلى متاحة
 
 **OpenAI API**:
 - وصول أسرع إلى النماذج الجديدة
 - إعداد أبسط
 - حاجز دخول أقل
-- الإنترنت العام فقط
+- متاح عبر الإنترنت العام فقط
 
-بالنسبة للتطبيقات الإنتاجية، **Microsoft Foundry Models is recommended**.
+بالنسبة للتطبيقات الإنتاجية، **Microsoft Foundry Models هو الموصى به**.
 </details>
 
 <details>
-<summary><strong>كيف أتعامل مع أخطاء تجاوز الحصص في Microsoft Foundry Models؟</strong></summary>
+<summary><strong>كيف أتعامل مع أخطاء تجاوز الحصة في Microsoft Foundry Models؟</strong></summary>
 
 ```bash
 # تحقق من الحصة الحالية
 az cognitiveservices usage list --location eastus2
 
-# جرّب منطقة مختلفة
+# جرب منطقة مختلفة
 azd env set AZURE_LOCATION westus2
 azd up
 
-# تقليل السعة مؤقتًا
+# قلل السعة مؤقتًا
 azd env set AZURE_OPENAI_CAPACITY 10
 azd provision
 
-# طلب زيادة الحصة
+# اطلب زيادة الحصة
 # انتقل إلى بوابة Azure > الحصص > طلب زيادة
 ```
 </details>
@@ -878,7 +878,7 @@ services:
       - AZURE_OPENAI_ENDPOINT
 ```
 
-انظر القالب [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo).
+راجع قالب [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo).
 </details>
 
 <details>
@@ -886,10 +886,10 @@ services:
 
 **أفضل الممارسات**:
 1. استخدم Managed Identity (بدون مفاتيح API)
-2. قم بتمكين نقاط النهاية الخاصة
+2. فعّل Private Endpoints
 3. قم بتكوين مجموعات أمان الشبكة
 4. نفّذ تحديد المعدل
-5. استخدم Azure Key Vault لتخزين الأسرار
+5. استخدم Azure Key Vault لإدارة الأسرار
 
 ```bicep
 // Managed Identity authentication
@@ -911,25 +911,25 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 ## المجتمع والدعم
 
-- **Microsoft Foundry Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
-- **AZD GitHub**: [المشكلات والنقاشات](https://github.com/Azure/azure-dev)
-- **Microsoft Learn**: [التوثيق الرسمي](https://learn.microsoft.com/azure/ai-studio/)
-- **Agent Skills**: [مهارة Microsoft Foundry على skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - قم بتثبيت مهارات الوكيل لـ Azure + Foundry في محرر الأكواد الخاص بك باستخدام `npx skills add microsoft/github-copilot-for-azure`
+- **Microsoft Foundry Discord**: [#قناة Azure](https://discord.gg/microsoft-azure)
+- **AZD GitHub**: [القضايا والمناقشات](https://github.com/Azure/azure-dev)
+- **Microsoft Learn**: [الوثائق الرسمية](https://learn.microsoft.com/azure/ai-studio/)
+- **Agent Skills**: [مهارة Microsoft Foundry على skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - قم بتثبيت مهارات الوكيل Azure + Foundry في محررك باستخدام `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **التنقل بين الفصول:**
-- **📚 الصفحة الرئيسية للدورة**: [AZD For Beginners](../../README.md)
-- **📖 الفصل الحالي**: الفصل 2 - تطوير قائم على الذكاء الاصطناعي
+- **📚 صفحة الدورة الرئيسية**: [AZD للمبتدئين](../../README.md)
+- **📖 الفصل الحالي**: الفصل 2 - التطوير المعتمد على الذكاء الاصطناعي
 - **⬅️ الفصل السابق**: [الفصل 1: مشروعك الأول](../chapter-01-foundation/first-project.md)
-- **➡️ التالي**: [نشر نماذج الذكاء الاصطناعي](ai-model-deployment.md)
+- **➡️ التالي**: [نشر نموذج الذكاء الاصطناعي](ai-model-deployment.md)
 - **🚀 الفصل التالي**: [الفصل 3: التكوين](../chapter-03-configuration/configuration.md)
 
-**هل تحتاج مساعدة؟** انضم إلى مناقشات المجتمع أو افتح مشكلة في المستودع. مجتمع Azure AI + AZD هنا لمساعدتك على النجاح!
+**بحاجة للمساعدة؟** انضم إلى مناقشات المجتمع أو افتح قضية في المستودع. مجتمع Azure AI + AZD هنا لمساعدتك على النجاح!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**إخلاء المسؤولية**:
-تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار الوثيقة الأصلية بلغتها الأصلية المصدر الموثوق. بالنسبة للمعلومات الحرجة، يُنصح بالاستعانة بترجمة بشرية مهنية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة ناتجة عن استخدام هذه الترجمة.
+**تنويه**:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى للدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي والمعتمد. للمعلومات الهامة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

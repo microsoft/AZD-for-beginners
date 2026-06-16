@@ -1,42 +1,42 @@
-# 6. Teardown Infrastructure
+# 6. Infrastruktur abbauen
 
-!!! tip "AM ENDE DIESES MODULS SIND SIE IN DER LAGE"
+!!! tip "AM ENDE DIESES MODULS KÖNNEN SIE"
 
-    - [ ] Die Bedeutung der Bereinigung von Ressourcen und des Kostenmanagements verstehen
-    - [ ] Verwenden Sie `azd down`, um die Infrastruktur sicher zu deprovisionieren
-    - [ ] Soft-gelöschte Cognitive Services bei Bedarf wiederherstellen
-    - [ ] **Lab 6:** Azure-Ressourcen bereinigen und Entfernung verifizieren
+    - [ ] Die Bedeutung von Ressourcenbereinigung und Kostenmanagement verstehen
+    - [ ] Mit `azd down` die Infrastruktur sicher deprovisionieren
+    - [ ] Bei Bedarf soft-gelöschte Azure AI Services wiederherstellen
+    - [ ] **Lab 6:** Azure-Ressourcen bereinigen und Entfernung überprüfen
 
 ---
 
 ## Bonus-Übungen
 
-Before we tear down the project, take a few minutes to do some open-ended exploration.
+Bevor wir das Projekt abbauen, nehmen Sie sich ein paar Minuten für offene Erkundungen.
 
-!!! info "Probieren Sie diese Erkundungsanregungen"
+!!! info "Probieren Sie diese Erkundungsanregungen aus"
 
-    **Experimentieren Sie mit GitHub Copilot:**
+    **Experimentieren mit GitHub Copilot:**
     
-    1. Ask: `Welche anderen AZD-Vorlagen könnte ich für Multi-Agenten-Szenarien ausprobieren?`
-    2. Ask: `Wie kann ich die Agenten-Anweisungen für einen Anwendungsfall im Gesundheitswesen anpassen?`
-    3. Ask: `Welche Umgebungsvariablen steuern die Kostenoptimierung?`
+    1. Fragen Sie: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Fragen Sie: `How can I customize the agent instructions for a healthcare use case?`
+    3. Fragen Sie: `What environment variables control cost optimization?`
     
     **Erkunden Sie das Azure-Portal:**
     
-    1. Überprüfen Sie die Application Insights-Metriken Ihrer Bereitstellung
+    1. Überprüfen Sie die Application Insights-Metriken für Ihre Bereitstellung
     2. Überprüfen Sie die Kostenanalyse für bereitgestellte Ressourcen
-    3. Erkunden Sie den Agenten-Playground im Microsoft Foundry-Portal noch einmal
+    3. Erkunden Sie den Agent-Playground des Microsoft Foundry-Portals noch einmal
 
 ---
 
 ## Infrastruktur deprovisionieren
 
-1. Das Herunterfahren der Infrastruktur ist ganz einfach:
+1. Das Abbauen der Infrastruktur ist ganz einfach:
       
       ```bash title="" linenums="0"
       azd down --purge
       ```
-1. Das Flag `--purge` stellt sicher, dass auch soft-gelöschte Cognitive Service-Ressourcen bereinigt werden und dadurch von diesen Ressourcen belegte Kontingente freigegeben werden. Nach Abschluss sehen Sie etwas Ähnliches:
+1. The `--purge` flag ensures that it also purges soft-deleted Cognitive Service resources, thereby releasing quota held by these resources. Once complete you will see something like this:
       
       ```bash title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -47,18 +47,18 @@ Before we tear down the project, take a few minutes to do some open-ended explor
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Optional) Wenn Sie jetzt `azd up` erneut ausführen, werden Sie feststellen, dass das Modell gpt-4.1 bereitgestellt wird, da die Umgebungsvariable in dem lokalen `.azure`-Ordner geändert (und gespeichert) wurde. 
+1. (Optional) Wenn Sie jetzt erneut `azd up` ausführen, werden Sie feststellen, dass das gpt-4.1-Modell bereitgestellt wird, da die Umgebungsvariable im lokalen `.azure`-Ordner geändert (und gespeichert) wurde. 
 
-      Here is the model deployments **before**:
+      Hier sind die Modellbereitstellungen **vorher**:
 
       ![Vorher](../../../../../translated_images/de/14-deploy-initial.30e4cf1c29b587bc.webp)
 
-      And here it is **after**:
-      ![Neu](../../../../../translated_images/de/14-deploy-new.f7f3c355a3cf7299.webp)
+      Und hier ist es **nachher**:
+      ![Nachher](../../../../../translated_images/de/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Haftungsausschluss**:
-Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache ist als maßgebliche Quelle zu betrachten. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir haften nicht für Missverständnisse oder Fehlinterpretationen, die sich aus der Verwendung dieser Übersetzung ergeben.
+Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Ursprungssprache gilt als maßgebliche Quelle. Bei kritischen Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Verwendung dieser Übersetzung entstehen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

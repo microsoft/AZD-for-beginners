@@ -1,50 +1,50 @@
 # نشر قاعدة بيانات Microsoft SQL وتطبيق ويب باستخدام AZD
 
-⏱️ **الوقت المقدر**: 20-30 دقيقة | 💰 **التكلفة المقدرة**: ~$15-25/شهريًا | ⭐ **التعقيد**: متوسط
+⏱️ **الوقت المقدر**: 20-30 دقيقة | 💰 **التكلفة المقدرة**: ~$15-25/شهر | ⭐ **مستوى الصعوبة**: متوسط
 
-يوضح هذا المثال الكامل والعامل كيفية استخدام [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) لنشر تطبيق ويب Python Flask مع قاعدة بيانات Microsoft SQL إلى Azure. جميع الشفرات مضمّنة ومختبرة — لا توجد تبعيات خارجية مطلوبة.
+يوضح هذا المثال الكامل والعملي كيفية استخدام [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) لنشر تطبيق ويب Python Flask مع قاعدة بيانات Microsoft SQL إلى Azure. يتضمن كل الكود ومختبر—لا توجد تبعيات خارجية مطلوبة.
 
 ## ما الذي ستتعلمه
 
-بإكمال هذا المثال، ستقوم بـ:
-- نشر تطبيق متعدد الطبقات (تطبيق ويب + قاعدة بيانات) باستخدام البنية التحتية ككود
-- تكوين اتصالات قاعدة بيانات آمنة دون تضمين الأسرار بشكل ثابت في الشفرة
+من خلال إكمال هذا المثال، سوف:
+- نشر تطبيق متعدد الطبقات (تطبيق ويب + قاعدة بيانات) باستخدام البنية التحتية كرمز
+- تكوين اتصالات قاعدة بيانات آمنة دون تضمين أسرار في الشيفرة
 - مراقبة صحة التطبيق باستخدام Application Insights
-- إدارة موارد Azure بكفاءة باستخدام أداة AZD CLI
-- اتباع أفضل ممارسات Azure للأمان وتحسين التكلفة والقدرة على الرصد
+- إدارة موارد Azure بكفاءة باستخدام AZD CLI
+- اتباع ممارسات Azure الأفضل للأمان، وتحسين التكلفة، والقابلية للملاحظة
 
 ## نظرة عامة على السيناريو
-- **تطبيق الويب**: واجهة REST API باستخدام Python Flask مع اتصال بقاعدة بيانات
-- **قاعدة البيانات**: قاعدة بيانات Azure SQL مع بيانات نموذجية
-- **البنية التحتية**: مُوفَّرة باستخدام Bicep (قوالب معيارية وقابلة لإعادة الاستخدام)
+- **تطبيق الويب**: واجهة REST API باستخدام Python Flask مع اتصال بقاعدة البيانات
+- **قاعدة البيانات**: قاعدة بيانات Azure SQL مع بيانات عينة
+- **البنية التحتية**: مُنشأة باستخدام Bicep (قوالب معيارية قابلة لإعادة الاستخدام)
 - **النشر**: مؤتمت بالكامل باستخدام أوامر `azd`
 - **المراقبة**: Application Insights للسجلات والقياسات
 
-## المتطلبات الأساسية
+## المتطلبات المسبقة
 
 ### الأدوات المطلوبة
 
-قبل البدء، تأكد من تثبيت هذه الأدوات:
+قبل البدء، تحقق من تثبيت الأدوات التالية:
 
 1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (الإصدار 2.50.0 أو أعلى)
    ```sh
    az --version
-   # المخرجات المتوقعة: azure-cli 2.50.0 أو أعلى
+   # الإخراج المتوقع: azure-cli 2.50.0 أو أعلى
    ```
 
 2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (الإصدار 1.0.0 أو أعلى)
    ```sh
    azd version
-   # الإخراج المتوقع: إصدار azd 1.0.0 أو أعلى
+   # المخرجات المتوقعة: إصدار azd 1.0.0 أو أعلى
    ```
 
-3. **[Python 3.8+](https://www.python.org/downloads/)** (لتطوير محلي)
+3. **[Python 3.8+](https://www.python.org/downloads/)** (للتطوير المحلي)
    ```sh
    python --version
    # المخرجات المتوقعة: بايثون 3.8 أو أعلى
    ```
 
-4. **[Docker](https://www.docker.com/get-started)** (اختياري، لتطوير محلي في حاوية)
+4. **[Docker](https://www.docker.com/get-started)** (اختياري، لتطوير محلي مع الحاويات)
    ```sh
    docker --version
    # الإخراج المتوقع: إصدار Docker 20.10 أو أعلى
@@ -52,42 +52,43 @@
 
 ### متطلبات Azure
 
-- اشتراك **Azure** نشط ([إنشاء حساب مجاني](https://azure.microsoft.com/free/))
+- اشتراك **Azure** مُفعل ([أنشئ حسابًا مجانيًا](https://azure.microsoft.com/free/))
 - أذونات لإنشاء الموارد في اشتراكك
 - دور **Owner** أو **Contributor** على الاشتراك أو مجموعة الموارد
 
 ### المتطلبات المعرفية
 
-هذا المثال من مستوى **متوسط**. يجب أن تكون على دراية بـ:
-- أساسيات تشغيل سطر الأوامر
+هذا مثال بمستوى **متوسط**. يجب أن تكون على دراية بـ:
+- أساسيات استخدام سطر الأوامر
 - مفاهيم السحابة الأساسية (الموارد، مجموعات الموارد)
 - فهم أساسي لتطبيقات الويب وقواعد البيانات
 
-**جديد على AZD؟** ابدأ بدليل [البدء السريع](../../docs/chapter-01-foundation/azd-basics.md) أولًا.
+**جديد على AZD؟** ابدأ أولاً بـ [دليل البدء](../../docs/chapter-01-foundation/azd-basics.md).
 
 ## البنية
 
-يقوم هذا المثال بنشر بنية ذات مستويين مع تطبيق ويب وقاعدة بيانات SQL:
+ينشر هذا المثال بنية من مستويين مع تطبيق ويب وقاعدة بيانات SQL:
 
 ```mermaid
 graph TD
     Browser[متصفح المستخدم] <--> WebApp[تطبيق ويب Azure<br/>واجهة برمجة تطبيقات Flask<br/>/health<br/>/products]
-    WebApp -- اتصال آمن<br/>مشفر --> SQL[قاعدة بيانات Azure SQL<br/>جدول المنتجات<br/>بيانات نموذجية]
+    WebApp -- اتصال آمن<br/>مشفر --> SQL[قاعدة بيانات Azure SQL<br/>جدول المنتجات<br/>بيانات تجريبية]
 ```
+
 **نشر الموارد:**
 - **Resource Group**: حاوية لجميع الموارد
-- **App Service Plan**: استضافة مبنية على Linux (المستوى B1 لكفاءة التكلفة)
-- **Web App**: وقت تشغيل Python 3.11 مع تطبيق Flask
-- **SQL Server**: خادم قاعدة بيانات مدار مع TLS 1.2 كحد أدنى
-- **SQL Database**: مستوى Basic (2GB، مناسب للتطوير/الاختبار)
-- **Application Insights**: المراقبة والسجلات
+- **App Service Plan**: استضافة مبنية على Linux (الطبقة B1 لتوفير التكلفة)
+- **Web App**: بيئة تشغيل Python 3.11 مع تطبيق Flask
+- **SQL Server**: خادم قاعدة بيانات مُدار مع TLS 1.2 كحد أدنى
+- **SQL Database**: الطبقة Basic (2GB، مناسبة للتطوير/الاختبار)
+- **Application Insights**: للمراقبة وتسجيل السجلات
 - **Log Analytics Workspace**: تخزين مركزي للسجلات
 
-**التشبيه**: فكر في هذا كمطعم (تطبيق الويب) به غرفة تبريد (قاعدة البيانات). يطلب الزبائن من القائمة (نقاط نهاية API)، والمطبخ (تطبيق Flask) يستخرج المكونات (البيانات) من الثلاجة. مدير المطعم (Application Insights) يتتبع كل ما يحدث.
+**تمثيل توضيحي**: فكر في هذا كمطعم (تطبيق الويب) مع ثلاجة تخزين (قاعدة البيانات). يطلب الزبائن من القائمة (نقاط نهاية الـ API)، والمطبخ (تطبيق Flask) يستخرج المكونات (البيانات) من الثلاجة. مدير المطعم (Application Insights) يتتبع كل ما يحدث.
 
-## هيكل المجلدات
+## بنية المجلدات
 
-جميع الملفات مُضمّنة في هذا المثال — لا توجد تبعيات خارجية مطلوبة:
+كل الملفات مضمنة في هذا المثال—لا توجد تبعيات خارجية مطلوبة:
 
 ```
 examples/database-app/
@@ -114,15 +115,15 @@ examples/database-app/
         └── Dockerfile          # Container definition
 ```
 
-**ما وظيفة كل ملف:**
-- **azure.yaml**: يخبر AZD ما الذي يتم نشره وأين
-- **infra/main.bicep**: ينسق جميع موارد Azure
-- **infra/resources/*.bicep**: تعريفات الموارد الفردية (معيارية لإعادة الاستخدام)
+**ما الذي يفعله كل ملف:**
+- **azure.yaml**: يخبر AZD بما يجب نشره وأين
+- **infra/main.bicep**: ينظم كل موارد Azure
+- **infra/resources/*.bicep**: تعريفات الموارد الفردية (قابلة لإعادة الاستخدام)
 - **src/web/app.py**: تطبيق Flask مع منطق قاعدة البيانات
 - **requirements.txt**: تبعيات حزم Python
-- **Dockerfile**: تعليمات حاوية للنشر
+- **Dockerfile**: تعليمات الحاوية للنشر
 
-## بدء سريع (خطوة بخطوة)
+## بداية سريعة (خطوة بخطوة)
 
 ### الخطوة 1: الاستنساخ والتنقل
 
@@ -131,10 +132,10 @@ git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/database-app
 ```
 
-**✓ فحص النجاح**: تحقق من رؤية `azure.yaml` ومجلد `infra/`:
+**✓ التحقق من النجاح**: تأكد من رؤية `azure.yaml` ومجلد `infra/`:
 ```sh
 ls
-# المتوقّع: README.md، azure.yaml، infra/، src/
+# المتوقع: README.md، azure.yaml، infra/، src/
 ```
 
 ### الخطوة 2: المصادقة مع Azure
@@ -143,9 +144,9 @@ ls
 azd auth login
 ```
 
-سيفتح هذا المتصفح للمصادقة في Azure. سجّل الدخول باستخدام بيانات اعتماد Azure الخاصة بك.
+سيفتح هذا متصفحك للمصادقة على Azure. سجّل الدخول باستخدام بيانات اعتماد Azure الخاصة بك.
 
-**✓ فحص النجاح**: يجب أن ترى:
+**✓ التحقق من النجاح**: يجب أن ترى:
 ```
 Logged in to Azure.
 ```
@@ -156,14 +157,14 @@ Logged in to Azure.
 azd init
 ```
 
-**ما الذي يحدث**: يقوم AZD بإنشاء تكوين محلي لنشرك.
+**ما الذي يحدث**: ينشئ AZD تكوينًا محليًا لنشرك.
 
-**المطالبات التي ستراها**:
-- **Environment name**: أدخل اسمًا قصيرًا (مثل `dev`, `myapp`)
+**المطالبات التي سترى**:
+- **Environment name**: أدخل اسمًا مختصرًا (مثل `dev`, `myapp`)
 - **Azure subscription**: اختر اشتراكك من القائمة
 - **Azure location**: اختر منطقة (مثل `eastus`, `westeurope`)
 
-**✓ فحص النجاح**: يجب أن ترى:
+**✓ التحقق من النجاح**: يجب أن ترى:
 ```
 SUCCESS: New project initialized!
 ```
@@ -176,7 +177,7 @@ azd provision
 
 **ما الذي يحدث**: يقوم AZD بنشر كل البنية التحتية (يستغرق 5-8 دقائق):
 1. ينشئ مجموعة الموارد
-2. ينشئ خادم SQL وقاعدة البيانات
+2. ينشئ خادم وقاعدة بيانات SQL
 3. ينشئ App Service Plan
 4. ينشئ Web App
 5. ينشئ Application Insights
@@ -184,9 +185,9 @@ azd provision
 
 **سيُطلب منك**:
 - **SQL admin username**: أدخل اسم مستخدم (مثل `sqladmin`)
-- **SQL admin password**: أدخل كلمة مرور قوية (احفظها!)
+- **SQL admin password**: أدخل كلمة مرور قوية (احتفظ بها!)
 
-**✓ فحص النجاح**: يجب أن ترى:
+**✓ التحقق من النجاح**: يجب أن ترى:
 ```
 SUCCESS: Your application was provisioned in Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
@@ -201,14 +202,14 @@ https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-na
 azd deploy
 ```
 
-**ما الذي يحدث**: يقوم AZD ببناء ونشر تطبيق Flask الخاص بك:
+**ما الذي يحدث**: يبني AZD وينشر تطبيق Flask الخاص بك:
 1. يجمع تطبيق Python
 2. يبني حاوية Docker
 3. يدفعها إلى Azure Web App
-4. يهيئ قاعدة البيانات ببيانات نموذجية
-5. يبدأ التطبيق
+4. يهيئ قاعدة البيانات بالبيانات العينة
+5. يطلق التطبيق
 
-**✓ فحص النجاح**: يجب أن ترى:
+**✓ التحقق من النجاح**: يجب أن ترى:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
@@ -223,9 +224,9 @@ https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-na
 azd browse
 ```
 
-سيفتح هذا تطبيق الويب المنشور في المتصفح على `https://app-<unique-id>.azurewebsites.net`
+يفتح هذا تطبيق الويب الذي نشرته في المتصفح على `https://app-<unique-id>.azurewebsites.net`
 
-**✓ فحص النجاح**: يجب أن ترى مخرجات JSON:
+**✓ التحقق من النجاح**: يجب أن ترى إخراج JSON:
 ```json
 {
   "message": "Welcome to the Database App API",
@@ -238,7 +239,7 @@ azd browse
 }
 ```
 
-### الخطوة 7: اختبار نقاط نهاية API
+### الخطوة 7: اختبار نقاط نهاية الـ API
 
 **فحص الصحة** (تحقق من اتصال قاعدة البيانات):
 ```sh
@@ -253,7 +254,7 @@ curl https://app-<your-id>.azurewebsites.net/health
 }
 ```
 
-**قائمة المنتجات** (بيانات نموذجية):
+**قائمة المنتجات** (بيانات عينة):
 ```sh
 curl https://app-<your-id>.azurewebsites.net/products
 ```
@@ -277,36 +278,36 @@ curl https://app-<your-id>.azurewebsites.net/products
 curl https://app-<your-id>.azurewebsites.net/products/1
 ```
 
-**✓ فحص النجاح**: تُعيد جميع النقاط بيانات JSON بدون أخطاء.
+**✓ التحقق من النجاح**: تعيد كل نقاط النهاية بيانات JSON دون أخطاء.
 
 ---
 
 **🎉 تهانينا!** لقد نجحت في نشر تطبيق ويب مع قاعدة بيانات إلى Azure باستخدام AZD.
 
-## غوص عميق في التكوين
+## استكشاف التكوين بتفصيل
 
 ### متغيرات البيئة
 
-يتم إدارة الأسرار بأمان عبر تكوين Azure App Service—**لا تُضمّن الأسرار مطلقًا في شفرة المصدر**.
+يتم إدارة الأسرار بشكل آمن عبر تكوين Azure App Service—**لا تُضمّن الأسرار مطلقًا في الشيفرة المصدرية**.
 
-**مُكوّن تلقائيًا بواسطة AZD**:
-- `SQL_CONNECTION_STRING`: سلسلة اتصال القاعدة مع بيانات الاعتماد المشفّرة
-- `APPLICATIONINSIGHTS_CONNECTION_STRING`: نقطة نهاية قياس المراقبة
-- `SCM_DO_BUILD_DURING_DEPLOYMENT`: يتيح التثبيت التلقائي للاعتمادات أثناء النشر
+**المتغيرات المكوَّنة تلقائيًا بواسطة AZD**:
+- `SQL_CONNECTION_STRING`: سلسلة اتصال قاعدة البيانات مع بيانات الاعتماد المشفرة
+- `APPLICATIONINSIGHTS_CONNECTION_STRING`: نقطة نهاية قياسات المراقبة
+- `SCM_DO_BUILD_DURING_DEPLOYMENT`: يتيح التثبيت التلقائي للتبعيات أثناء النشر
 
 **أين تُخزن الأسرار**:
 1. أثناء `azd provision`، تزود بيانات اعتماد SQL عبر مطالبات آمنة
-2. يخزن AZD هذه في ملف `.azure/<env-name>/.env` المحلي (مستبعد من Git)
-3. يحقن AZD هذه في تكوين Azure App Service (مشفّر أثناء السكون)
-4. يقرأ التطبيق هذه عبر `os.getenv()` أثناء التشغيل
+2. يخزن AZD هذه في ملفك المحلي `.azure/<env-name>/.env` (مستبعد من Git)
+3. يحقن AZD هذه في تكوين Azure App Service (مشفر عند الراحة)
+4. يقرأ التطبيق هذه عبر `os.getenv()` وقت التشغيل
 
 ### التطوير المحلي
 
-لاختبار محلي، أنشئ ملف `.env` من العينة:
+لاختبار محلي، أنشئ ملف `.env` من النموذج:
 
 ```sh
 cp .env.sample .env
-# حرر ملف .env باستخدام معلومات اتصال قاعدة البيانات المحلية لديك
+# حرّر ملف .env ليحتوي على إعداد اتصال قاعدة البيانات المحلية
 ```
 
 **سير عمل التطوير المحلي**:
@@ -322,23 +323,23 @@ export SQL_CONNECTION_STRING="your-local-connection-string"
 python app.py
 ```
 
-**اختبار محليًا**:
+**الاختبار محليًا**:
 ```sh
 curl http://localhost:8000/health
-# متوقع: {"status": "healthy", "database": "connected"}
+# المتوقّع: {"الحالة": "سليمة", "قاعدة البيانات": "متصلة"}
 ```
 
-### البنية التحتية ككود
+### البنية التحتية كرمز
 
-جميع موارد Azure مُعرّفة في **قوالب Bicep** (`infra/` folder):
+كل موارد Azure معرفة في **قوالب Bicep** (`infra/`):
 
 - **تصميم معياري**: كل نوع مورد له ملفه الخاص لإعادة الاستخدام
-- **معاملية**: تخصيص SKUs والمناطق وقواعد التسمية
-- **أفضل الممارسات**: يتبع معايير التسمية والأمان في Azure
-- **مراقبة بالإصدار**: تغييرات البنية التحتية مُسجلة في Git
+- **معاملية**: خصص SKUs، والمناطق، واتفاقيات التسمية
+- **أفضل الممارسات**: يتبع معايير التسمية الافتراضية وإعدادات الأمان
+- **متحكم فيه بالإصدار**: تغييرات البنية التحتية متتبعة في Git
 
-**مثال التخصيص**:
-لتغيير مستوى قاعدة البيانات، حرّر `infra/resources/sql-database.bicep`:
+**مثال للتخصيص**:
+لتغيير طبقة قاعدة البيانات، حرّر `infra/resources/sql-database.bicep`:
 ```bicep
 sku: {
   name: 'Standard'  // Changed from 'Basic'
@@ -351,43 +352,43 @@ sku: {
 
 يتبع هذا المثال أفضل ممارسات أمان Azure:
 
-### 1. **لا أسرار في شفرة المصدر**
-- ✅ تُخزن بيانات الاعتماد في تكوين Azure App Service (مشفّرة)
-- ✅ ملفات `.env` مستبعدة من Git عبر `.gitignore`
-- ✅ تُمرّر الأسرار عبر معلمات آمنة أثناء التوفير
+### 1. **لا أسرار في الشيفرة المصدرية**
+- ✅ تُخزن بيانات الاعتماد في تكوين Azure App Service (مشفر)
+- ✅ تُستبعد ملفات `.env` من Git عبر `.gitignore`
+- ✅ تُمرر الأسرار عبر معلمات آمنة أثناء التهيئة
 
-### 2. **اتصالات مشفّرة**
+### 2. **اتصالات مشفرة**
 - ✅ TLS 1.2 كحد أدنى لخادم SQL
 - ✅ فرض HTTPS فقط لتطبيق الويب
-- ✅ اتصالات قاعدة البيانات تستخدم قنوات مشفّرة
+- ✅ تستخدم اتصالات قاعدة البيانات قنوات مشفرة
 
-### 3. **أمان الشبكة**
-- ✅ جدار حماية خادم SQL مُكوّن للسماح بخدمات Azure فقط
-- ✅ الوصول للشبكة العامة مقيد (يمكن تشديده أكثر بواسطة Private Endpoints)
+### 3. **أمن الشبكات**
+- ✅ جدار حماية خادم SQL مكوّن للسماح لخدمات Azure فقط
+- ✅ الوصول العام للشبكة مقيد (يمكن تضييقه أكثر باستخدام Private Endpoints)
 - ✅ تعطيل FTPS على Web App
 
 ### 4. **المصادقة والتفويض**
 - ⚠️ **الحالي**: مصادقة SQL (اسم مستخدم/كلمة مرور)
-- ✅ **توصية للإنتاج**: استخدم Managed Identity من Azure للمصادقة بدون كلمة مرور
+- ✅ **توصية للإنتاج**: استخدم Managed Identity الخاصة بـ Azure للمصادقة بدون كلمة مرور
 
-**للترقية إلى Managed Identity** (للبيئات الإنتاجية):
-1. فعّل Managed Identity على Web App
+**للترقية إلى Managed Identity** (للإنتاج):
+1. فعِّل Managed Identity على Web App
 2. امنح الهوية أذونات SQL
-3. حدّث سلسلة الاتصال لاستخدام Managed Identity
-4. أزل مصادقة كلمات المرور
+3. حدِّث سلسلة الاتصال لاستخدام Managed Identity
+4. أزل المصادقة المعتمدة على كلمة المرور
 
 ### 5. **التدقيق والامتثال**
-- ✅ Application Insights يسجّل كل الطلبات والأخطاء
+- ✅ تسجل Application Insights كل الطلبات والأخطاء
 - ✅ تمكين تدقيق SQL Database (يمكن تكوينه للامتثال)
-- ✅ وسم جميع الموارد للحوكمة
+- ✅ وسم كل الموارد للحوكمة
 
-**قائمة التحقق الأمنية قبل الإنتاج**:
-- [ ] تفعيل Azure Defender لـ SQL
+**قائمة مراجعة الأمان قبل الإنتاج**:
+- [ ] تفعيل Azure Defender for SQL
 - [ ] تكوين Private Endpoints لقاعدة بيانات SQL
 - [ ] تفعيل Web Application Firewall (WAF)
 - [ ] تنفيذ Azure Key Vault لتدوير الأسرار
-- [ ] تكوين مصادقة Azure AD
-- [ ] تفعيل تسجيل التشخيص لجميع الموارد
+- [ ] تكوين Microsoft Entra ID للمصادقة
+- [ ] تفعيل تسجيل التشخيص لكل الموارد
 
 ## تحسين التكلفة
 
@@ -402,14 +403,14 @@ sku: {
 
 **💡 نصائح لتوفير التكاليف**:
 
-1. **استخدم الطبقة المجانية للتعلّم**:
-   - App Service: مستوى F1 (مجاني، ساعات محدودة)
+1. **استخدم الطبقة المجانية للتعلم**:
+   - App Service: طبقة F1 (مجانية، ساعات محدودة)
    - SQL Database: استخدم Azure SQL Database serverless
    - Application Insights: 5GB/شهر استيعاب مجاني
 
 2. **أوقف الموارد عند عدم الاستخدام**:
    ```sh
-   # أوقف تطبيق الويب (لا تزال قاعدة البيانات تُحتسب رسومًا)
+   # أوقف تطبيق الويب (ستستمر تكاليف قاعدة البيانات)
    az webapp stop --name <app-name> --resource-group <rg-name>
    
    # أعد التشغيل عند الحاجة
@@ -420,16 +421,16 @@ sku: {
    ```sh
    azd down
    ```
-   هذا يزيل كل الموارد ويوقف التحصيل.
+   هذا يزيل كل الموارد ويوقف تحصيل الرسوم.
 
-4. **مستويات التطوير مقابل الإنتاج**:
-   - **تطوير**: مستوى Basic (المستخدم في هذا المثال)
-   - **إنتاج**: مستوى Standard/Premium مع التكرار
+4. **SKUs للتطوير مقابل الإنتاج**:
+   - **التطوير**: الطبقة Basic (المستخدمة في هذا المثال)
+   - **الإنتاج**: الطبقات Standard/Premium مع التكرار
 
-**مراقبة التكاليف**:
-- اعرض التكاليف في [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
-- أنشئ تنبيهات تكلفة لتجنب المفاجآت
-- وسم جميع الموارد بـ `azd-env-name` للتتبع
+**مراقبة التكلفة**:
+- عرض التكاليف في [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
+- إعداد تنبيهات تكلفة لتجنب المفاجآت
+- وسم كل الموارد بـ `azd-env-name` للتتبع
 
 **بديل الطبقة المجانية**:
 لأغراض التعلم، يمكنك تعديل `infra/resources/app-service-plan.bicep`:
@@ -439,15 +440,15 @@ sku: {
   tier: 'Free'
 }
 ```
-**ملاحظة**: الطبقة المجانية لها قيود (60 دقيقة/يوم CPU، لا تعمل دائمًا).
+**ملاحظة**: للطبقة المجانية قيود (60 دقيقة/يوم CPU، غير دائماً مُشغل).
 
-## المراقبة وإمكانية الرصد
+## المراقبة والقابلية للملاحظة
 
 ### تكامل Application Insights
 
 يتضمن هذا المثال **Application Insights** للمراقبة الشاملة:
 
-**ما الذي يُرصد**:
+**ما الذي يُراقب**:
 - ✅ طلبات HTTP (الزمن، رموز الحالة، نقاط النهاية)
 - ✅ أخطاء واستثناءات التطبيق
 - ✅ تسجيل مخصص من تطبيق Flask
@@ -469,7 +470,7 @@ requests
 | project timestamp, name, url, resultCode, duration
 ```
 
-**العثور على الأخطاء**:
+**البحث عن الأخطاء**:
 ```kusto
 exceptions
 | where timestamp > ago(24h)
@@ -477,7 +478,7 @@ exceptions
 | project timestamp, type, outerMessage, operation_Name
 ```
 
-**التحقق من نقطة صحة**:
+**فحص نقطة النهاية الصحية**:
 ```kusto
 requests
 | where name contains "health"
@@ -486,29 +487,29 @@ requests
 
 ### تدقيق قاعدة بيانات SQL
 
-**تمكين تدقيق SQL Database** لتتبع:
+**يتم تمكين تدقيق SQL Database** لتتبع:
 - أنماط الوصول إلى قاعدة البيانات
 - محاولات تسجيل الدخول الفاشلة
 - تغييرات المخطط
-- الوصول إلى البيانات (للامتثال)
+- وصول البيانات (للامتثال)
 
 **الوصول إلى سجلات التدقيق**:
-1. بوابة Azure → SQL Database → Auditing
+1. Azure Portal → SQL Database → Auditing
 2. عرض السجلات في Log Analytics workspace
 
-### المراقبة في الزمن الحقيقي
+### المراقبة في الوقت الحقيقي
 
 **عرض المقاييس الحية**:
 1. Application Insights → Live Metrics
-2. شاهد الطلبات والإخفاقات والأداء في الزمن الحقيقي
+2. مشاهدة الطلبات والفشل والأداء في الوقت الحقيقي
 
 **إعداد التنبيهات**:
-أنشئ تنبيهات للأحداث الحرجة:
+أنشئ تنبيهات للحوادث الحرجة:
 - أخطاء HTTP 500 > 5 خلال 5 دقائق
 - فشل اتصالات قاعدة البيانات
-- زمن استجابة مرتفع (>2 ثانية)
+- أوقات استجابة عالية (>2 ثانية)
 
-**مثال إنشاء تنبيه**:
+**مثال لإنشاء تنبيه**:
 ```sh
 az monitor metrics alert create \
   --name "High-Response-Time" \
@@ -519,24 +520,24 @@ az monitor metrics alert create \
 ```
 
 ## استكشاف الأخطاء وإصلاحها
-### القضايا الشائعة والحلول
+### المشكلات والحلول الشائعة
 
-#### 1. `azd provision` fails with "Location not available"
+#### 1. فشل `azd provision` مع "الموقع غير متاح"
 
-**العَرَض**:
+**الأعراض**:
 ```
 Error: The subscription is not registered for the resource type 'components' in the location 'centralus'.
 ```
 
 **الحل**:
-اختر منطقة Azure مختلفة أو سجّل موفر الموارد:
+اختر منطقة Azure مختلفة أو قم بتسجيل مزود المورد:
 ```sh
 az provider register --namespace Microsoft.Insights
 ```
 
-#### 2. SQL Connection Fails During Deployment
+#### 2. فشل اتصال SQL أثناء النشر
 
-**العَرَض**:
+**الأعراض**:
 ```
 pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL Server]TCP Provider...')
 ```
@@ -544,18 +545,18 @@ pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL S
 **الحل**:
 - تحقق من أن جدار حماية SQL Server يسمح بخدمات Azure (مُكوّن تلقائيًا)
 - تحقق من إدخال كلمة مرور مسؤول SQL بشكل صحيح أثناء `azd provision`
-- تأكد من أن SQL Server مُنشأ بالكامل (قد يستغرق 2-3 دقائق)
+- تأكد من أن SQL Server مُجهز بالكامل (قد يستغرق 2-3 دقائق)
 
 **تحقق من الاتصال**:
 ```sh
 # من بوابة Azure، انتقل إلى قاعدة بيانات SQL → محرر الاستعلام
-# حاول الاتصال باستخدام بيانات الاعتماد الخاصة بك
+# حاول الاتصال باستخدام بيانات اعتمادك
 ```
 
-#### 3. Web App Shows "Application Error"
+#### 3. تطبيق الويب يعرض "خطأ في التطبيق"
 
-**العَرَض**:
-يُظهر المتصفح صفحة خطأ عامة.
+**الأعراض**:
+يعرض المتصفح صفحة خطأ عامة.
 
 **الحل**:
 تحقق من سجلات التطبيق:
@@ -565,21 +566,21 @@ az webapp log tail --name <app-name> --resource-group <rg-name>
 ```
 
 **الأسباب الشائعة**:
-- متغيرات بيئة مفقودة (تحقق من App Service → Configuration)
+- متغيرات بيئة مفقودة (تحقق من App Service → التكوين)
 - فشل تثبيت حزم Python (تحقق من سجلات النشر)
 - خطأ في تهيئة قاعدة البيانات (تحقق من اتصال SQL)
 
-#### 4. `azd deploy` Fails with "Build Error"
+#### 4. فشل `azd deploy` مع "خطأ في البناء"
 
-**العَرَض**:
+**الأعراض**:
 ```
 Error: Failed to build project
 ```
 
 **الحل**:
-- تأكد من أن `requirements.txt` لا تحتوي على أخطاء في الصياغة
-- تحقق من أن Python 3.11 محددة في `infra/resources/web-app.bicep`
-- تحقق من أن Dockerfile يحتوي على صورة أساسية صحيحة
+- تأكد من أن `requirements.txt` لا يحتوي على أخطاء في الصياغة
+- تحقق من تحديد Python 3.11 في `infra/resources/web-app.bicep`
+- تأكد من أن Dockerfile يحتوي على صورة أساسية صحيحة
 
 **استكشاف الأخطاء محليًا**:
 ```sh
@@ -588,9 +589,9 @@ docker build -t test-app .
 docker run -p 8000:8000 test-app
 ```
 
-#### 5. "Unauthorized" When Running AZD Commands
+#### 5. "غير مصرح" عند تشغيل أوامر AZD
 
-**العَرَض**:
+**الأعراض**:
 ```
 ERROR: (Unauthorized) The client '<id>' with object id '<id>' does not have authorization
 ```
@@ -607,20 +608,20 @@ az login
 
 تحقق من أن لديك الأذونات الصحيحة (دور Contributor) على الاشتراك.
 
-#### 6. High Database Costs
+#### 6. تكاليف قاعدة بيانات عالية
 
-**العَرَض**:
+**الأعراض**:
 فاتورة Azure غير متوقعة.
 
 **الحل**:
 - تحقق مما إذا نسيت تشغيل `azd down` بعد الاختبار
-- تحقق من أن SQL Database يستخدم الفئة Basic (وليس Premium)
+- تأكد من أن SQL Database يستخدم الفئة Basic (ليس Premium)
 - راجع التكاليف في Azure Cost Management
 - قم بإعداد تنبيهات التكلفة
 
 ### الحصول على المساعدة
 
-**عرض جميع متغيرات بيئة AZD**:
+**عرض كل متغيرات بيئة AZD**:
 ```sh
 azd env get-values
 ```
@@ -635,23 +636,23 @@ az webapp show --name <app-name> --resource-group <rg-name> --query state
 az webapp log download --name <app-name> --resource-group <rg-name> --log-file app-logs.zip
 ```
 
-**هل تحتاج لمزيد من المساعدة؟**
+**هل تحتاج إلى مزيد من المساعدة؟**
 - [دليل استكشاف أخطاء AZD وإصلاحها](../../docs/chapter-07-troubleshooting/common-issues.md)
-- [استكشاف أخطاء Azure App Service وإصلاحها](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
-- [استكشاف أخطاء Azure SQL وإصلاحها](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
+- [استكشاف مشكلات Azure App Service](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
+- [استكشاف مشكلات Azure SQL](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
 
 ## تمارين عملية
 
-### التمرين 1: التحقق من نشر التطبيق (مبتدئ)
+### التمرين 1: تحقق من نشر التطبيق (مبتدئ)
 
-**الهدف**: التأكد من نشر جميع الموارد وأن التطبيق يعمل.
+**الهدف**: التأكد من نشر كل الموارد وأن التطبيق يعمل.
 
 **الخطوات**:
-1. سرد جميع الموارد في مجموعة الموارد الخاصة بك:
+1. قم بسرد كل الموارد في مجموعة الموارد الخاصة بك:
    ```sh
    az resource list --resource-group rg-<env-name> --output table
    ```
-   **المتوقع**: 6-7 موارد (Web App، SQL Server، SQL Database، App Service Plan، Application Insights، Log Analytics)
+   **المتوقع**: 6-7 موارد (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
 
 2. اختبر جميع نقاط نهاية API:
    ```sh
@@ -660,15 +661,15 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    curl https://app-<your-id>.azurewebsites.net/products
    curl https://app-<your-id>.azurewebsites.net/products/1
    ```
-   **المتوقع**: تعيد جميعها JSON صالح بدون أخطاء
+   **المتوقع**: جميعها تُعيد JSON صالح بدون أخطاء
 
 3. تحقق من Application Insights:
    - انتقل إلى Application Insights في بوابة Azure
    - اذهب إلى "Live Metrics"
-   - قم بتحديث متصفحك على تطبيق الويب
+   - قم بتحديث المتصفح على تطبيق الويب
    **المتوقع**: رؤية الطلبات تظهر في الوقت الحقيقي
 
-**معايير النجاح**: وجود جميع الموارد الـ 6-7، إرجاع جميع نقاط النهاية بيانات، تُظهر Live Metrics نشاطًا.
+**معايير النجاح**: وجود جميع الموارد الـ6-7، وإرجاع جميع نقاط النهاية للبيانات، وعرض Live Metrics لنشاط.
 
 ---
 
@@ -676,10 +677,10 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 
 **الهدف**: توسيع تطبيق Flask بإضافة نقطة نهاية جديدة.
 
-**كود البداية**: نقاط النهاية الحالية في `src/web/app.py`
+**كود البدء**: نقاط النهاية الحالية في `src/web/app.py`
 
 **الخطوات**:
-1. حرر `src/web/app.py` وأضف نقطة نهاية جديدة بعد الدالة `get_product()`:
+1. حرّر `src/web/app.py` وأضف نقطة نهاية جديدة بعد دالة `get_product()`:
    ```python
    @app.route('/products/search/<keyword>')
    def search_products(keyword):
@@ -722,9 +723,9 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    ```sh
    curl https://app-<your-id>.azurewebsites.net/products/search/laptop
    ```
-   **المتوقع**: تُرجع منتجات تطابق "laptop"
+   **المتوقع**: يُعيد المنتجات المطابقة لـ "laptop"
 
-**معايير النجاح**: تعمل نقطة النهاية الجديدة، تُرجع نتائج مُرشحة، تظهر في سجلات Application Insights.
+**معايير النجاح**: تعمل نقطة النهاية الجديدة، تُعيد نتائج مُفلترة، وتظهر في سجلات Application Insights.
 
 ---
 
@@ -733,9 +734,9 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 **الهدف**: إعداد مراقبة استباقية مع تنبيهات.
 
 **الخطوات**:
-1. إنشاء تنبيه لأخطاء HTTP 500:
+1. أنشئ تنبيهًا لأخطاء HTTP 500:
    ```sh
-   # الحصول على معرف مورد Application Insights
+   # الحصول على معرّف مورد Application Insights
    AI_ID=$(az monitor app-insights component show \
      --app appi-<your-id> \
      --resource-group rg-<env-name> \
@@ -752,17 +753,17 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
      --description "Alert when >5 failed requests in 5 minutes"
    ```
 
-2. أطلق التنبيه عن طريق التسبب في أخطاء:
+2. قم بإثارة التنبيه عن طريق إحداث أخطاء:
    ```sh
    # طلب منتج غير موجود
    for i in {1..10}; do curl https://app-<your-id>.azurewebsites.net/products/999; done
    ```
 
-3. تحقق مما إذا تم تشغيل التنبيه:
+3. تحقق مما إذا تم تفعيل التنبيه:
    - Azure Portal → Alerts → Alert Rules
    - تحقق من بريدك الإلكتروني (إذا تم تكوينه)
 
-**معايير النجاح**: تم إنشاء قاعدة التنبيه، يتم تشغيلها عند حدوث أخطاء، يتم استلام الإشعارات.
+**معايير النجاح**: تم إنشاء قاعدة التنبيه، تتفعل عند حدوث أخطاء، وتُستلم الإشعارات.
 
 ---
 
@@ -794,7 +795,7 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 
 4. انشر واختبر
 
-**معايير النجاح**: وجود الجدول الجديد، تعرض المنتجات معلومات الفئة، يظل التطبيق يعمل.
+**معايير النجاح**: وجود الجدول الجديد، عرض المنتجات لمعلومات الفئة، واستمرار عمل التطبيق.
 
 ---
 
@@ -804,25 +805,25 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 
 **الخطوات**:
 1. أضف Redis Cache إلى `infra/main.bicep`
-2. حدّث `src/web/app.py` لتخزين استعلامات المنتجات مؤقتًا
-3. قِس تحسين الأداء باستخدام Application Insights
-4. قارن أزمنة الاستجابة قبل/بعد التخزين المؤقت
+2. حدّث `src/web/app.py` لتخزين نتائج استعلامات المنتجات مؤقتًا
+3. قِس تحسُّن الأداء باستخدام Application Insights
+4. قارن أوقات الاستجابة قبل/بعد التخزين المؤقت
 
-**معايير النجاح**: تم نشر Redis، يعمل التخزين المؤقت، تتحسن أزمنة الاستجابة بأكثر من 50%.
+**معايير النجاح**: تم نشر Redis، يعمل التخزين المؤقت، وتحسنت أوقات الاستجابة بأكثر من 50%.
 
-**تلميح**: ابدأ بـ [وثائق Azure Cache for Redis](https://learn.microsoft.com/azure/azure-cache-for-redis/).
+**تلميح**: ابدأ بـ [توثيق Azure Cache for Redis](https://learn.microsoft.com/azure/azure-cache-for-redis/).
 
 ---
 
 ## التنظيف
 
-لتجنب الرسوم المستمرة، احذف جميع الموارد عند الانتهاء:
+لتجنب تكاليف مستمرة، احذف كل الموارد عند الانتهاء:
 
 ```sh
 azd down
 ```
 
-**مطالبة التأكيد**:
+**موجه التأكيد**:
 ```
 ? Total resources to delete: 7, are you sure you want to continue? (y/N)
 ```
@@ -830,18 +831,18 @@ azd down
 اكتب `y` للتأكيد.
 
 **✓ فحص النجاح**: 
-- تم حذف جميع الموارد من بوابة Azure
-- لا توجد رسوم مستمرة
-- يمكن حذف المجلد المحلي `.azure/<env-name>`
+- تم حذف كل الموارد من بوابة Azure
+- لا توجد تكاليف مستمرة
+- يمكنك حذف المجلد المحلي `.azure/<env-name>`
 
 **بديل** (الاحتفاظ بالبنية التحتية، حذف البيانات):
 ```sh
-# حذف مجموعة الموارد فقط (الاحتفاظ بتكوين AZD)
+# احذف مجموعة الموارد فقط (احتفظ بتكوين AZD)
 az group delete --name rg-<env-name> --yes
 ```
-## تعلّم المزيد
+## تعرف على المزيد
 
-### التوثيق ذي الصلة
+### الوثائق ذات الصلة
 - [توثيق Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [توثيق Azure SQL Database](https://learn.microsoft.com/azure/azure-sql/database/)
 - [توثيق Azure App Service](https://learn.microsoft.com/azure/app-service/)
@@ -849,48 +850,48 @@ az group delete --name rg-<env-name> --yes
 - [مرجع لغة Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
 ### الخطوات التالية في هذه الدورة
-- **[مثال Container Apps](../../../../examples/container-app)**: انشر الخدمات المصغرة باستخدام Azure Container Apps
-- **[دليل دمج الذكاء الاصطناعي](../../../../docs/ai-foundry)**: أضف قدرات الذكاء الاصطناعي إلى تطبيقك
+- **[مثال Container Apps](../../../../examples/container-app)**: نشر الخدمات المصغرة باستخدام Azure Container Apps
+- **[دليل تكامل الذكاء الاصطناعي](../../../../docs/ai-foundry)**: أضف قدرات الذكاء الاصطناعي إلى تطبيقك
 - **[أفضل ممارسات النشر](../../docs/chapter-04-infrastructure/deployment-guide.md)**: أنماط نشر للإنتاج
 
 ### مواضيع متقدمة
-- **Managed Identity**: إزالة كلمات المرور واستخدام مصادقة Azure AD
+- **Managed Identity**: إزالة كلمات المرور واستخدام مصادقة Microsoft Entra ID
 - **Private Endpoints**: تأمين اتصالات قاعدة البيانات داخل شبكة افتراضية
-- **CI/CD Integration**: أتمتة عمليات النشر باستخدام GitHub Actions أو Azure DevOps
-- **Multi-Environment**: إعداد بيئات التطوير والتجهيز والإنتاج
-- **Database Migrations**: استخدم Alembic أو Entity Framework لإصدار مخطط القاعدة
+- **تكامل CI/CD**: أتمتة النشر باستخدام GitHub Actions أو Azure DevOps
+- **بيئات متعددة**: إعداد بيئات التطوير، التجريب، والإنتاج
+- **ترحيل قواعد البيانات**: استخدم Alembic أو Entity Framework للتحكم في إصدار مخطط القاعدة
 
-### المقارنة مع طرق أخرى
+### المقارنة مع النهج الأخرى
 
 **AZD مقابل قوالب ARM**:
 - ✅ AZD: مستوى تجريد أعلى، أوامر أبسط
-- ⚠️ ARM: أكثر تفصيلاً، تحكم أدق
+- ⚠️ ARM: أكثر إسهابًا، تحكم تفصيلي
 
 **AZD مقابل Terraform**:
-- ✅ AZD: محلي لـ Azure، متكامل مع خدمات Azure
+- ✅ AZD: مخصص لـ Azure، متكامل مع خدمات Azure
 - ⚠️ Terraform: دعم متعدد السحب، نظام بيئي أوسع
 
 **AZD مقابل بوابة Azure**:
-- ✅ AZD: قابلة للتكرار، مسيطَر عليها بالإصدار، قابلة للأتمتة
-- ⚠️ بوابة Azure: نقرات يدوية، صعوبة في إعادة الإنتاج
+- ✅ AZD: قابل للتكرار، خاضع للتحكم بالإصدارات، قابل للأتمتة
+- ⚠️ Portal: نقرات يدوية، صعب التكرار
 
-**فكر في AZD كـ**: Docker Compose لـ Azure—تكوين مبسّط للنشر المعقد.
+**فكر في AZD كـ**: Docker Compose لـ Azure—تكوين مبسط لنشر معقد.
 
 ---
 
 ## الأسئلة المتكررة
 
 **س: هل يمكنني استخدام لغة برمجة مختلفة؟**  
-ج: نعم! استبدل `src/web/` بـ Node.js أو C# أو Go أو أي لغة. حدّث `azure.yaml` و Bicep وفقًا لذلك.
+ج: نعم! استبدل `src/web/` بـ Node.js أو C# أو Go أو أي لغة. حدّث `azure.yaml` وBicep وفقًا لذلك.
 
-**س: كيف أضيف قواعد بيانات إضافية؟**  
-ج: أضف وحدة SQL Database أخرى في `infra/main.bicep` أو استخدم PostgreSQL/MySQL من خدمات قواعد بيانات Azure.
+**س: كيف أضيف المزيد من قواعد البيانات؟**  
+ج: أضف وحدة SQL Database أخرى في `infra/main.bicep` أو استخدم PostgreSQL/MySQL من خدمات قاعدة بيانات Azure.
 
 **س: هل يمكنني استخدام هذا للإنتاج؟**  
-ج: هذا نقطة انطلاق. للإنتاج، أضف: managed identity، private endpoints، التكرار، استراتيجية النسخ الاحتياطي، WAF، ومراقبة محسّنة.
+ج: هذه نقطة بداية. للإنتاج، أضف: managed identity، private endpoints، التكرار، استراتيجية النسخ الاحتياطي، WAF، ومراقبة محسنة.
 
-**س: ماذا لو أردت استخدام الحاويات بدل نشر الشيفرة؟**  
-ج: اطلع على [مثال Container Apps](../../../../examples/container-app) الذي يستخدم حاويات Docker في جميع الأنحاء.
+**س: ماذا لو أردت استخدام الحاويات بدلًا من نشر الشيفرة؟**  
+ج: اطلع على [مثال Container Apps](../../../../examples/container-app) الذي يستخدم حاويات Docker في جميع النواحي.
 
 **س: كيف أتصل بقاعدة البيانات من جهازي المحلي؟**  
 ج: أضف عنوان IP الخاص بك إلى جدار حماية SQL Server:
@@ -903,21 +904,21 @@ az sql server firewall-rule create \
   --end-ip-address <your-ip>
 ```
 
-**س: هل يمكنني استخدام قاعدة بيانات موجودة بدل إنشاء واحدة جديدة؟**  
-ج: نعم، عدّل `infra/main.bicep` للإشارة إلى SQL Server موجود وحدث معلمات سلسلة الاتصال.
+**س: هل يمكنني استخدام قاعدة بيانات موجودة بدلًا من إنشاء واحدة جديدة؟**  
+ج: نعم، عدّل `infra/main.bicep` للإشارة إلى SQL Server موجود وحدّث معلمات سلسلة الاتصال.
 
 ---
 
-> **ملاحظة:** يوضح هذا المثال أفضل الممارسات لنشر تطبيق ويب مع قاعدة بيانات باستخدام AZD. يتضمن شيفرة عملية، توثيقًا شاملاً، وتمارين عملية لتعزيز التعلم. للنشر في الإنتاج، راجع متطلبات الأمان، والتدرج، والامتثال، ومتطلبات التكلفة الخاصة بمنظمتك.
+> **ملاحظة:** يوضح هذا المثال أفضل الممارسات لنشر تطبيق ويب مع قاعدة بيانات باستخدام AZD. يتضمن شيفرة عملية، وثائق شاملة، وتمارين عملية لتعزيز التعلم. بالنسبة لنشر الإنتاج، راجع متطلبات الأمان، والقياس، والامتثال، والتكاليف الخاصة بمنظمتك.
 
-**📚 تنقل الدورة:**
+**📚 تنقُّل الدورة:**
 - ← السابق: [مثال Container Apps](../../../../examples/container-app)
-- → التالي: [دليل دمج الذكاء الاصطناعي](../../../../docs/ai-foundry)
+- → التالي: [دليل تكامل الذكاء الاصطناعي](../../../../docs/ai-foundry)
 - 🏠 [الصفحة الرئيسية للدورة](../../README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر المعتمد. للمعلومات الحساسة، يُنصح بالاستعانة بترجمة بشرية مهنية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة تنشأ عن استخدام هذه الترجمة.
+**تنويه**:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى للدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي والمعتمد. للمعلومات الهامة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
