@@ -1,22 +1,22 @@
-# Chương 4: Hạ tầng như Mã & Triển khai
+# Chương 4: Hạ tầng dưới dạng mã & Triển khai
 
-**📚 Khóa học**: [AZD Cho Người Mới](../../README.md) | **⏱️ Thời lượng**: 1-1.5 giờ | **⭐ Độ khó**: Trung cấp
+**📚 Khóa học**: [AZD cho người mới](../../README.md) | **⏱️ Thời lượng**: 1-1.5 giờ | **⭐ Độ phức tạp**: Trung cấp
 
 ---
 
 ## Tổng quan
 
-Chương này bao gồm các mẫu Hạ tầng như Mã (IaC) với các template Bicep, việc cung cấp tài nguyên và các chiến lược triển khai sử dụng Azure Developer CLI.
+Chương này đề cập đến các mẫu Hạ tầng dưới dạng Mã (IaC) với các mẫu Bicep, cấp phát tài nguyên và các chiến lược triển khai bằng Azure Developer CLI.
 
-> Đã xác thực với `azd 1.23.12` vào tháng 3 năm 2026.
+> Đã kiểm chứng với `azd 1.25.6` vào tháng 6 năm 2026.
 
 ## Mục tiêu học tập
 
 Sau khi hoàn thành chương này, bạn sẽ:
-- Hiểu cấu trúc và cú pháp của template Bicep
-- Cung cấp tài nguyên Azure bằng `azd provision`
+- Hiểu cấu trúc và cú pháp của mẫu Bicep
+- Cấp phát tài nguyên Azure bằng `azd provision`
 - Triển khai ứng dụng bằng `azd deploy`
-- Thực hiện các chiến lược triển khai blue-green và rolling
+- Thực hiện chiến lược triển khai blue-green và rolling
 
 ---
 
@@ -24,8 +24,9 @@ Sau khi hoàn thành chương này, bạn sẽ:
 
 | # | Bài | Mô tả | Thời gian |
 |---|--------|-------------|------|
-| 1 | [Cung cấp tài nguyên](provisioning.md) | Quản lý tài nguyên Azure với AZD | 45 phút |
+| 1 | [Cấp phát tài nguyên](provisioning.md) | Quản lý tài nguyên Azure với AZD | 45 phút |
 | 2 | [Hướng dẫn triển khai](deployment-guide.md) | Chiến lược triển khai ứng dụng | 45 phút |
+| 3 | [Tạo mẫu của riêng bạn](custom-templates.md) | Xây dựng và xuất bản các mẫu azd tái sử dụng | 30 phút |
 
 ---
 
@@ -38,7 +39,7 @@ azd init --template azure-functions-python-v2-http
 # Xem trước những gì sẽ được tạo
 azd provision --preview
 
-# Chỉ thiết lập cơ sở hạ tầng
+# Chỉ triển khai hạ tầng
 azd provision
 
 # Chỉ triển khai mã
@@ -72,9 +73,9 @@ my-project/
 | Lệnh | Mô tả |
 |---------|-------------|
 | `azd init` | Khởi tạo dự án |
-| `azd provision` | Tạo các tài nguyên Azure |
+| `azd provision` | Tạo tài nguyên Azure |
 | `azd deploy` | Triển khai mã ứng dụng |
-| `azd up` | cung cấp + triển khai |
+| `azd up` | cấp phát + triển khai |
 | `azd down` | Xóa tất cả tài nguyên |
 
 ---
@@ -90,13 +91,13 @@ my-project/
 
 ## 📖 Tài nguyên liên quan
 
-- [Kiểm tra trước triển khai](../chapter-06-pre-deployment/README.md)
+- [Kiểm tra trước khi triển khai](../chapter-06-pre-deployment/README.md)
 - [Ví dụ ứng dụng Container](../../examples/container-app/README.md)
 - [Ví dụ ứng dụng cơ sở dữ liệu](../../examples/database-app/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Miễn trừ trách nhiệm**:
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Văn bản gốc bằng ngôn ngữ ban đầu của nó nên được coi là nguồn có thẩm quyền. Đối với thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp do con người thực hiện. Chúng tôi không chịu trách nhiệm cho bất kỳ hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+**Tuyên bố miễn trừ trách nhiệm**:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng bản dịch tự động có thể chứa lỗi hoặc sai sót. Tài liệu gốc bằng ngôn ngữ gốc nên được coi là nguồn tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,72 +1,73 @@
-# יישום צ'אט של Microsoft Foundry Models
+# יישום צ'אט עם Microsoft Foundry Models
 
-**מסלול למידה:** בינוני ⭐⭐ | **זמן:** 35-45 דקות | **עלות:** 50-200$ לחודש
+**מסלול למידה:** בינוני ⭐⭐ | **זמן:** 35-45 דקות | **עלות:** 50-200 דולר לחודש
 
-יישום צ'אט מלא של Microsoft Foundry Models 배포 באמצעות Azure Developer CLI (azd). דוגמה זו מציגה 배포 של gpt-4.1, גישה מאובטחת ל-API וממשק צ'אט פשוט.
+יישום צ'אט שלם של Microsoft Foundry Models המופעל בעזרת Azure Developer CLI (azd). דוגמה זו מדגימה פריסה של gpt-4.1, גישה מאובטחת ל-API, וממשק צ'אט פשוט.
 
 ## 🎯 מה תלמדו
 
-- 배포 שירות Microsoft Foundry Models עם מודל gpt-4.1  
-- אבטחת מפתחות API באמצעות Key Vault  
-- בניית ממשק צ'אט פשוט בפייתון  
-- ניטור שימוש בטוקנים ועלויות  
-- יישום הגבלת שיעורים וטיפול בשגיאות  
+- לפרוס שירות Microsoft Foundry Models עם דגם gpt-4.1
+- לאבטח מפתחות API בעזרת Key Vault
+- לבנות ממשק צ'אט פשוט עם Python
+- לנטר שימוש בטוקנים ועלויות
+- ליישם הגבלת קצב וטיפול בשגיאות
 
 ## 📦 מה כלול
 
-✅ **שירות Microsoft Foundry Models** - 배포 מודל gpt-4.1  
-✅ **אפליקציית צ'אט בפייתון** - ממשק צ'אט פשוט בשורת הפקודה  
-✅ **אינטגרציה עם Key Vault** - אחסון מאובטח למפתחי API  
-✅ **תבניות ARM** - תשתית מלאה כקוד  
-✅ **ניטור עלויות** - מעקב על שימוש בטוקנים  
-✅ **הגבלת שיעורים** - מניעת תשישות מכסת השימוש  
+✅ **שירות Microsoft Foundry Models** - פריסת דגם gpt-4.1  
+✅ **יישום צ'אט בפייתון** - ממשק שורת פקודה פשוט  
+✅ **אינטגרציה עם Key Vault** - אחסון מאובטח למפתחות API  
+✅ **תבניות ARM** - תשתית כקוד מלאה  
+✅ **מעקב עלויות** - מעקב אחרי שימוש בטוקנים  
+✅ **הגבלת קצב** - מניעת חריגת מכסה  
 
-## אדריכלות
+## ארכיטקטורה
 
 ```mermaid
 graph TD
-    App[יישום שיחה בפייתון<br/>מקומי/ענן<br/>ממשק שורת פקודה<br/>היסטוריית שיחות<br/>מעקב אחרי שימוש בטוקנים] -- "HTTPS (מפתח API)" --> Foundry[שירות דגמי Microsoft Foundry<br/>דגם gpt-4.1<br/>קיבולת 20K טוקנים/דקה<br/>כשל מרובה אזורים]
-    Foundry --> KV[Azure Key Vault<br/>מפתח API של OpenAI<br/>כתובת נקודת קצה]
+    App[יישום שיחת פייתון<br/>מקומי/ענן<br/>ממשק שורת פקודה<br/>היסטוריית שיחות<br/>מעקב אחרי שימוש בטוקנים] -- "HTTPS (מפתח API)" --> Foundry[שירות דגמי מיקרוסופט פאונדרי<br/>דגם gpt-4.1<br/>קיבולת 20K טוקנים/דקה<br/>כשל באזורים מרובים]
+    Foundry --> KV[מבחר מפתחות אז'ור<br/>מפתח API של OpenAI<br/>כתובת נקודת קצה]
     Foundry -. זהות מנוהלת .-> KV
 ```
+
 ## דרישות מוקדמות
 
-### נדרש
+### דרוש
 
-- **Azure Developer CLI (azd)** - [מדריך התקנה](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)  
-- **חשבון Azure** עם גישה ל-OpenAI - [בקשת גישה](https://aka.ms/oai/access)  
-- **Python 3.9+** - [התקנת Python](https://www.python.org/downloads/)  
+- **Azure Developer CLI (azd)** - [מדריך התקנה](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+- **מנוי Azure** עם גישה ל-OpenAI - [בקש גישה](https://aka.ms/oai/access)
+- **Python 3.9+** - [התקנת Python](https://www.python.org/downloads/)
 
-### בדיקת דרישות מוקדמות
+### אמת דרישות מוקדמות
 
 ```bash
-# בדוק את גרסת azd (נדרש 1.5.0 או גבוה יותר)
+# בדוק גרסת azd (נדרש 1.5.0 או גבוה יותר)
 azd version
 
-# אשר כניסה ל-Azure
+# אמת כניסה ל-Azure
 azd auth login
 
-# בדוק את גרסת Python
+# בדוק גרסת פייתון
 python --version  # או python3 --version
 
-# אשר גישה ל-OpenAI (בדוק בפורטל Azure)
+# אמת גישה ל-OpenAI (בדוק בפורטל Azure)
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus
 ```
 
-> **⚠️ חשוב:** Microsoft Foundry Models דורש אישור שימוש. אם לא הגשת בקשה, בקר ב-[aka.ms/oai/access](https://aka.ms/oai/access). האישור אורך בדרך כלל 1-2 ימי עסקים.
+> **⚠️ חשוב:** Microsoft Foundry Models דורש אישור יישום. אם לא הגשת בקשה, בקר ב-[aka.ms/oai/access](https://aka.ms/oai/access). האישור לוקח בדרך כלל 1-2 ימי עסקים.
 
 ## ⏱️ לוח זמנים לפריסה
 
-| שלב | משך זמן | מה קורה |
+| שלב | משך | מה קורה |
 |-------|----------|--------------|
 | בדיקת דרישות מוקדמות | 2-3 דקות | אימות זמינות מכסת OpenAI |
-| 배포 התשתית | 8-12 דקות | יצירת OpenAI, Key Vault, 배포 מודל |
-| קביעת תצורה לאפליקציה | 2-3 דקות | הגדרת סביבה ותלויות |
-| **סה"כ** | **12-18 דקות** | מוכנים לצ'אט עם gpt-4.1 |
+| פריסת תשתית | 8-12 דקות | יצירת OpenAI, Key Vault, פריסת דגם |
+| הגדרת היישום | 2-3 דקות | הגדרת סביבה ותלויות |
+| **סה"כ** | **12-18 דקות** | מוכן לצ'אט עם gpt-4.1 |
 
-**הערה:** 배포 OpenAI ראשון עלול לקחת זמן רב יותר עקב חלוקת משאבים למודל.
+**הערה:** פריסה ראשונית של OpenAI עשויה לקחת יותר זמן בשל הנפקת דגם.
 
 ## התחלה מהירה
 
@@ -77,14 +78,14 @@ cd examples/azure-openai-chat
 # אתחל סביבה
 azd env new myopenai
 
-# פרוס הכל (תשתית + קונפיגורציה)
+# פרוס הכל (תשתית + תצורה)
 azd up
-# תתבקש לעשות את הדברים הבאים:
+# יידרש ממך:
 # 1. בחר מנוי Azure
-# 2. בחר מיקום עם זמינות OpenAI (כגון eastus, eastus2, westus)
+# 2. בחר מיקום עם זמינות OpenAI (למשל, eastus, eastus2, westus)
 # 3. המתן 12-18 דקות לפריסה
 
-# התקן את התלויות של Python
+# התקן תלות בפייתון
 pip install -r requirements.txt
 
 # התחל לשוחח!
@@ -103,29 +104,29 @@ Assistant: Microsoft Foundry Models Service provides REST API access to OpenAI's
 [Tokens used: 145 | Estimated cost: $0.0044]
 ```
 
-## ✅ אימות 배포
+## ✅ אמת פריסה
 
-### שלב 1: בדיקת משאבים ב-Azure
+### שלב 1: בדוק משאבי Azure
 
 ```bash
-# הצג משאבים שפורסמו
+# הצג משאבים שהופעלו
 azd show
 
 # הפלט הצפוי מציג:
 # - שירות OpenAI: (שם המשאב)
-# - Key Vault: (שם המשאב)
+# - כספת מפתחות: (שם המשאב)
 # - פריסה: gpt-4.1
 # - מיקום: eastus (או האזור שבחרת)
 ```
 
-### שלב 2: בדיקת API OpenAI
+### שלב 2: בדיקת API של OpenAI
 
 ```bash
-# לקבל נקודת קצה ומפתח של OpenAI
+# קבל נקודת גישה ומפתח של OpenAI
 OPENAI_ENDPOINT=$(azd env get-value AZURE_OPENAI_ENDPOINT)
 OPENAI_KEY=$(azd env get-value AZURE_OPENAI_API_KEY)
 
-# לבדוק קריאה ל-API
+# בדיקת קריאת API
 curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
   -H "Content-Type: application/json" \
   -H "api-key: $OPENAI_KEY" \
@@ -154,7 +155,7 @@ curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2
 }
 ```
 
-### שלב 3: אימות גישה ל-Key Vault
+### שלב 3: אמת גישה ל-Key Vault
 
 ```bash
 # רשום סודות במאגר מפתחות
@@ -167,14 +168,14 @@ az keyvault secret list \
 ```
 
 **סודות צפויים:**
-- `openai-api-key`  
-- `openai-endpoint`  
+- `openai-api-key`
+- `openai-endpoint`
 
 **קריטריוני הצלחה:**
-- ✅ שירות OpenAI 배포 עם gpt-4.1  
-- ✅ קריאת API מחזירה השכלה תקינה  
-- ✅ סודות מאוחסנים ב-Key Vault  
-- ✅ ניטור שימוש בטוקנים תקין  
+- ✅ שירות OpenAI פרוס עם gpt-4.1
+- ✅ קריאת API מחזירה השלמה תקינה
+- ✅ סודות מאוחסנים ב-Key Vault
+- ✅ מעקב שימוש בטוקנים עובד
 
 ## מבנה הפרויקט
 
@@ -193,32 +194,32 @@ azure-openai-chat/
 └── .gitignore                  ✅ Git ignore rules
 ```
 
-## תכונות האפליקציה
+## תכונות היישום
 
 ### ממשק צ'אט (`chat.py`)
 
 אפליקציית הצ'אט כוללת:
 
-- **היסטוריית שיחה** - שומרת על הקשר בין ההודעות  
-- **ספירת טוקנים** - עוקבת אחרי השימוש ומעריכה עלויות  
-- **ניהול שגיאות** - טיפול חלק במגבלות והודעות שגיאה של ה-API  
-- **הערכות עלויות** - חישוב עלויות בזמן אמת לכל הודעה  
-- **תמיכה בזרימה** - זרימת תגובות אופציונלית  
+- **היסטוריית שיחה** - שומרת על ההקשר בין ההודעות
+- **מניית טוקנים** - עוקבת אחרי שימוש ומעריכה עלויות
+- **טיפול בשגיאות** - טיפול עדין במגבלות קצב ושגיאות API
+- **הערכת עלויות** - חישוב עלות בזמן אמת לכל הודעה
+- **תמיכה בזרימה** - תגובות בזרימה אופציונליות
 
 ### פקודות
 
-בעת הצ'אט אפשר להשתמש בפקודות:
-- `quit` או `exit` - סיום המפגש  
-- `clear` - ניקוי היסטוריית השיחה  
-- `tokens` - הצגת סך השימוש בטוקנים  
-- `cost` - הצגת הערכת עלות כוללת  
+בעת הצ'אט ניתן להשתמש ב:
+- `quit` או `exit` - סיום הסשן
+- `clear` - ניקוי היסטוריית שיחה
+- `tokens` - הצגת סך כל הטוקנים שהשתמשו
+- `cost` - הצגת עלות משוערת כוללת
 
 ### קונפיגורציה (`config.py`)
 
-טוען את התצורה ממשתני סביבה:
+טוען קונפיגורציה ממשתני סביבה:
 ```python
-AZURE_OPENAI_ENDPOINT  # מ-Key Vault
-AZURE_OPENAI_API_KEY   # מ-Key Vault
+AZURE_OPENAI_ENDPOINT  # מ- Key Vault
+AZURE_OPENAI_API_KEY   # מ- Key Vault
 AZURE_OPENAI_MODEL     # ברירת מחדל: gpt-4.1
 AZURE_OPENAI_MAX_TOKENS # ברירת מחדל: 800
 ```
@@ -231,7 +232,7 @@ AZURE_OPENAI_MAX_TOKENS # ברירת מחדל: 800
 python chat.py
 ```
 
-### צ'אט עם מודל מותאם
+### צ'אט עם דגם מותאם
 
 ```bash
 export AZURE_OPENAI_MODEL=gpt-35-turbo
@@ -244,7 +245,7 @@ python chat.py
 python chat.py --stream
 ```
 
-### דוגמת שיחה
+### שיחת דוגמה
 
 ```
 You: Explain Microsoft Foundry Models Service in 3 sentences.
@@ -270,33 +271,33 @@ Total session: 156 tokens | $0.0047
 
 ### תמחור טוקנים (gpt-4.1)
 
-| מודל | קלט (לכל 1K טוקנים) | פלט (לכל 1K טוקנים) |
+| דגם | קלט (לכל 1,000 טוקנים) | פלט (לכל 1,000 טוקנים) |
 |-------|----------------------|------------------------|
 | gpt-4.1 | $0.03 | $0.06 |
 | GPT-3.5-Turbo | $0.0015 | $0.002 |
 
-### עלויות חודשיות מוערכות
+### עלויות חודשיות משוערות
 
 בהתבסס על דפוסי שימוש:
 
-| רמת שימוש | הודעות/יום | טוקנים/יום | עלות חודשית |
+| רמת שימוש | הודעות ליום | טוקנים ליום | עלות חודשית |
 |-------------|--------------|------------|--------------|
 | **קל** | 20 הודעות | 3,000 טוקנים | $3-5 |
 | **בינוני** | 100 הודעות | 15,000 טוקנים | $15-25 |
 | **כבד** | 500 הודעות | 75,000 טוקנים | $75-125 |
 
-**עלות תשתית בסיסית:** $1-2 לחודש (Key Vault + חישוב מינימלי)
+**עלות תשתית בסיסית:** $1-2 לחודש (Key Vault + מחשוב מינימלי)
 
-### טיפים לאופטימיזציה של עלויות
+### טיפים לאופטימיזציית עלויות
 
 ```bash
-# 1. השתמש ב-GPT-3.5-Turbo למשימות פשוטות יותר (20 פעמים זול יותר)
+# 1. השתמש ב-GPT-3.5-Turbo למשימות פשוטות יותר (בחמישים מאה זול יותר)
 export AZURE_OPENAI_MODEL=gpt-35-turbo
 
-# 2. הקטן את כרטיסי הטוקנים למענה קצר יותר
+# 2. הפחת את מקסימום אסימונים לתגובות קצרות יותר
 export AZURE_OPENAI_MAX_TOKENS=400
 
-# 3. נטר שימוש בטוקנים
+# 3. נטר את השימוש באסימונים
 python chat.py --show-tokens
 
 # 4. הגדר התראות תקציב
@@ -308,11 +309,11 @@ az consumption budget create \
 
 ## ניטור
 
-### הצגת שימוש בטוקנים
+### צפייה בשימוש בטוקנים
 
 ```bash
 # בפורטל Azure:
-# משאבי OpenAI → מדדים → בחר "עסקאות טוקנים"
+# משאבי OpenAI → מדדים → בחר "עסקאות טוקן"
 
 # או דרך Azure CLI:
 az monitor metrics list \
@@ -322,7 +323,7 @@ az monitor metrics list \
   --interval PT1M
 ```
 
-### הצגת יומני API
+### צפייה ביומני API
 
 ```bash
 # זרם יומני אבחון
@@ -338,15 +339,15 @@ az monitor log-analytics query \
   --analytics-query "AzureDiagnostics | where Category == 'Audit' | top 10 by TimeGenerated"
 ```
 
-## פתרון תקלות
+## פתרון בעיות
 
-### תקלה: "Access Denied"
+### בעיה: שגיאת "Access Denied"
 
-**תסמינים:** שגיאת 403 Forbidden בעת קריאה ל-API
+**תסמינים:** 403 Forbidden עם קריאת API
 
 **פתרונות:**
 ```bash
-# 1. ודא כי הגישה ל-OpenAI אושרה
+# 1. יש לאשר גישה ל-OpenAI
 az cognitiveservices account show \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
@@ -354,14 +355,14 @@ az cognitiveservices account show \
 # 2. בדוק שמפתח ה-API נכון
 azd env get-value AZURE_OPENAI_API_KEY
 
-# 3. אמת את פורמט כתובת ה-URL של נקודת הסיום
+# 3. אשר את פורמט כתובת ה-URL של נקודת הקצה
 azd env get-value AZURE_OPENAI_ENDPOINT
 # צריך להיות: https://[name].openai.azure.com/
 ```
 
-### תקלה: "Rate Limit Exceeded"
+### בעיה: "חריגה ממגבלת קצב"
 
-**תסמינים:** שגיאת 429 מספר בקשות רב מדי
+**תסמינים:** 429 Too Many Requests
 
 **פתרונות:**
 ```bash
@@ -371,56 +372,56 @@ az cognitiveservices account deployment show \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
   --deployment-name gpt-4.1
 
-# 2. בקש הגדלת מכסה (אם יש צורך)
-# עבור אל פורטל Azure → משאבי OpenAI → מכסות → בקש הגדלה
+# 2. בקש הגדלת מכסה (אם נדרש)
+# עבור לפורטל Azure → משאב OpenAI → מכסות → בקש הגדלה
 
-# 3. יישם לוגיקת ניסיון חוזר (כבר בקובץ chat.py)
-# היישום מנסה אוטומטית שוב עם השהייה מעריכית
+# 3. יישם לוגיקת ניסיון מחדש (כבר ב-chat.py)
+# היישום מנסה אוטומטית שוב עם העצמה מעריכית של ההמתנה
 ```
 
-### תקלה: "Model Not Found"
+### בעיה: "דגם לא נמצא"
 
-**תסמינים:** שגיאת 404 עבור 배포
+**תסמינים:** שגיאה 404 בפריסה
 
 **פתרונות:**
 ```bash
-# 1. רשום את הפריסות הזמינות
+# 1. רשימת פריסות זמינות
 az cognitiveservices account deployment list \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
 
-# 2. אמת את שם המודל בסביבה
+# 2. אימות שם המודל בסביבה
 echo $AZURE_OPENAI_MODEL
 
-# 3. עדכן לשם הפריסה הנכון
+# 3. עדכון לשם הפריסה הנכון
 export AZURE_OPENAI_MODEL=gpt-4.1  # או gpt-35-turbo
 ```
 
-### תקלה: השהיה גבוהה
+### בעיה: השהייה גבוהה
 
 **תסמינים:** זמני תגובה איטיים (>5 שניות)
 
 **פתרונות:**
 ```bash
-# 1. בדוק את האיחור האזורי
+# 1. בדוק השהיית אזורית
 # פרוס לאזור הקרוב ביותר למשתמשים
 
-# 2. הפחת את max_tokens לתגובות מהירות יותר
+# 2. הפחת max_tokens לתגובות מהירות יותר
 export AZURE_OPENAI_MAX_TOKENS=400
 
-# 3. השתמש בזרימה לשיפור חוויית המשתמש
+# 3. השתמש בזרימה לשליחת תוצרים חיה לחוויית משתמש טובה יותר
 python chat.py --stream
 ```
 
-## שיטות אבטחה מיטביות
+## הנחיות אבטחה מומלצות
 
-### 1. הגנת מפתחות API
+### 1. הגן על מפתחות API
 
 ```bash
-# לעולם אל תתחייב למפתחות במערכת בקרת הגרסאות
-# השתמש במאגר מפתחות (כבר מוגדר)
+# לעולם אל תעלה מפתחות לבקרת גרסאות
+# השתמש ב-Key Vault (כבר מוגדר)
 
-# החלף מפתחות באופן קבוע
+# סובב מפתחות בקביעות
 az cognitiveservices account keys regenerate \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
@@ -431,14 +432,14 @@ az cognitiveservices account keys regenerate \
 
 ```python
 # דגמי Microsoft Foundry כוללים סינון תוכן מובנה
-# קבע תצורה בפורטל Azure:
-# משאב OpenAI → מסנני תוכן → צור מסנן מותאם אישית
+# הגדר בפורטל Azure:
+# משאב OpenAI → מסנני תוכן → יצירת מסנן מותאם אישית
 
 # קטגוריות: שנאה, מיני, אלימות, פגיעה עצמית
 # רמות: סינון נמוך, בינוני, גבוה
 ```
 
-### 3. שימוש בזהות מנוהלת (ייצור)
+### 3. השתמש בזיהוי מנוהל (Production)
 
 ```bash
 # לפריסות ייצור, השתמש בזהות מנוהלת
@@ -450,38 +451,38 @@ az cognitiveservices account keys regenerate \
 
 ## פיתוח
 
-### הפעלה מקומית
+### הפעל מקומית
 
 ```bash
-# התקנת תלותים
+# התקן תלותיות
 pip install -r src/requirements.txt
 
-# הגדרת משתני סביבה
+# הגדר משתני סביבה
 export AZURE_OPENAI_ENDPOINT="https://[name].openai.azure.com/"
 export AZURE_OPENAI_API_KEY="your-api-key"
 export AZURE_OPENAI_MODEL="gpt-4.1"
 
-# הרצת היישום
+# הרץ את היישום
 python src/chat.py
 ```
 
-### הרצת מבחנים
+### הרץ בדיקות
 
 ```bash
-# התקן תלותיות לבדיקות
+# התקן תלותיות של בדיקות
 pip install pytest pytest-cov
 
-# הפעל בדיקות
+# הרץ בדיקות
 pytest tests/ -v
 
 # עם כיסוי
 pytest tests/ --cov=src --cov-report=html
 ```
 
-### עדכון 배포 מודל
+### עדכן פריסת דגם
 
 ```bash
-# פרוס גרסה שונה של המודל
+# פרוס גרסה שונה של הדגם
 az cognitiveservices account deployment create \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
@@ -496,91 +497,91 @@ az cognitiveservices account deployment create \
 ## ניקוי
 
 ```bash
-# למחוק את כל משאבי Azure
+# מחק את כל המשאבים של Azure
 azd down --force --purge
 
 # זה מסיר:
 # - שירות OpenAI
-# - Key Vault (עם מחיקה רכה של 90 יום)
+# - Key Vault (עם מחיקה רכה ל-90 יום)
 # - קבוצת משאבים
-# - כל פריסות והגדרות
+# - כל הפריסות וההגדרות
 ```
 
 ## צעדים הבאים
 
-### הרחבת הדוגמה הזו
+### הרחב את הדוגמה הזו
 
-1. **הוספת ממשק ווב** - בניית frontend ב-React/Vue  
+1. **הוסף ממשק אינטרנט** - בנה ממשק React/Vue 
    ```bash
-   # הוסף שירות frontend ל-azure.yaml
+   # הוסף שירות פרונטאנד לקובץ azure.yaml
    # פרוס לאפליקציות ווב סטטיות של Azure
    ```
 
-2. **יישום RAG** - הוספת חיפוש במסמכים עם Azure AI Search  
+2. **יישם RAG** - הוסף חיפוש במסמכים עם Azure AI Search
    ```python
-   # אינטגרציה עם Azure Cognitive Search
-   # העלאת מסמכים ויצירת אינדקס וקטורי
+   # שלב את Azure AI Search
+   # העלה מסמכים וצור אינדקס וקטורי
    ```
 
-3. **הוספת קריאת פונקציות** - הפעלת שימוש בכלים  
+3. **הוסף קריאת פונקציות** - אפשר שימוש בכלים
    ```python
-   # הגדר פונקציות בקובץ chat.py
+   # הגדר פונקציות ב-chat.py
    # אפשר ל-gpt-4.1 לקרוא ל-APIs חיצוניים
    ```
 
-4. **תמיכה במודלים מרובים** - 배포 של מספר מודלים  
+4. **תמיכה בריבוי דגמים** - פרוס דגמים מרובים
    ```bash
-   # הוסף את הדגמים gpt-35-turbo ו-embeddings
-   # מימש את הלוגיקה להכוונת דגמים
+   # הוסף את gpt-35-turbo, מודלים של הטמעות
+   # יש לממש לוגיקת ניתוב מודל
    ```
 
 ### דוגמאות קשורות
 
-- **[Retail Multi-Agent](../retail-scenario.md)** - אדריכלות מרובת סוכנים מתקדמת  
-- **[Database App](../../../../examples/database-app)** - הוספת אחסון קבוע  
-- **[Container Apps](../../../../examples/container-app)** - 배포 כשירות מכולה  
+- **[Retail Multi-Agent](../retail-scenario.md)** - ארכיטקטורת ריבוי סוכנים מתקדמת  
+- **[Database App](../../../../examples/database-app)** - הוסף אחסון מתמיד  
+- **[Container Apps](../../../../examples/container-app)** - פרוס כשירות במכולות  
 
 ### משאבי למידה
 
-- 📚 [קורס AZD למתחילים](../../README.md) - העמוד הראשי של הקורס  
+- 📚 [קורס AZD למתחילים](../../README.md) - דף הבית של הקורס  
 - 📚 [תיעוד Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/) - מסמכים רשמיים  
-- 📚 [הפניה ל-API של OpenAI](https://platform.openai.com/docs/api-reference) - פרטי API  
-- 📚 [אינטליגנציה מלאכותית אחראית](https://www.microsoft.com/ai/responsible-ai) - שיטות מומלצות  
+- 📚 [מדריך API של OpenAI](https://platform.openai.com/docs/api-reference) - פרטי API  
+- 📚 [AI אחראי](https://www.microsoft.com/ai/responsible-ai) - שיטות עבודה מומלצות  
 
 ## משאבים נוספים
 
 ### תיעוד
-- **[שירות Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/)** - מדריך מלא  
-- **[מודלים gpt-4.1](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - יכולות מודל  
-- **[סינון תוכן](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - תכונות בטיחות  
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - הפניה ל-azd  
+- **[Microsoft Foundry Models Service](https://learn.microsoft.com/azure/ai-services/openai/)** - מדריך מלא  
+- **[דגמי gpt-4.1](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - יכולות דגם  
+- **[סינון תוכן](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - מאפייני אבטחה  
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - הפניות azd  
 
 ### מדריכים
-- **[OpenAI Quickstart](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - 배포 ראשוני  
-- **[צ'אט קומפלישנס](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - בניית אפליקציות צ'אט  
+- **[פתיחה מהירה OpenAI](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - פריסה ראשונית  
+- **[השלמות בצ'אט](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - בניית אפליקציות צ'אט  
 - **[קריאת פונקציות](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - תכונות מתקדמות  
 
 ### כלים
-- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - סביבת עבודה מבוססת ווב  
-- **[מדריך להנדסת פקודות](https://platform.openai.com/docs/guides/prompt-engineering)** - כתיבת פקודות טובות יותר  
+- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - סביבת ניסוי מבוססת רשת  
+- **[מדריך הנדסת הנחיות](https://platform.openai.com/docs/guides/prompt-engineering)** - כתיבת הנחיות טובות יותר  
 - **[מחשבון טוקנים](https://platform.openai.com/tokenizer)** - הערכת שימוש בטוקנים  
 
 ### קהילה
-- **[Azure AI Discord](https://discord.gg/azure)** - תמיכה מהקהילה  
+- **[Azure AI Discord](https://discord.gg/azure)** - קבל עזרה מהקהילה  
 - **[דיונים ב-GitHub](https://github.com/Azure-Samples/openai/discussions)** - פורום שאלות ותשובות  
 - **[בלוג Azure](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - עדכונים אחרונים  
 
 ---
 
-**🎉 הצלחה!** פרסת את Microsoft Foundry Models ובנית אפליקציית צ'אט עובדת. התחל לחקור את יכולות gpt-4.1 והתנסה בפקודות ומקרי שימוש שונים.
+**🎉 הצלחה!** פרסת Microsoft Foundry Models ובנית יישום צ'אט עובד. התחל לחקור את יכולות gpt-4.1 ונסו עם הנחיות ושימושים שונים.
 
 **שאלות?** [פתח נושא](https://github.com/microsoft/AZD-for-beginners/issues) או עיין ב-[שאלות נפוצות](../../resources/faq.md)
 
-**התראה עלויות:** זכור להפעיל `azd down` בסיום הבדיקה כדי למנוע חיובים מתמשכים (כ-50-100$ לחודש לשימוש פעיל).
+**אזהרת עלויות:** זכור להריץ `azd down` בסיום הבדיקות כדי למנוע חיובים שוטפים (~50-100 דולר לחודש לשימוש פעיל).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **כתב ויתור**:
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון כי תרגומים אוטומטיים עלולים להכיל שגיאות או אי-דיוקים. המסמך המקורי בשפת המקור שלו צריך להיחשב למקור הסמכותי. עבור מידע קריטי, מומלץ תרגום מקצועי על ידי בני אדם. איננו אחראים לכל אי הבנה או פרשנות שגויה הנובעים משימוש בתרגום זה.
+מסמך זה תורגם באמצעות שירות תרגום אוטומטי [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עלולים להכיל שגיאות או אי-דיוקים. יש להחשיב את המסמך המקורי בשפתו הטבעית כמקור הסמכות. למידע קריטי מומלץ להשתמש בתרגום מקצועי על ידי מתרגם אדם. אנו לא אחראים לכל אי-הבנה או פירוש שגוי הנובע מהשימוש בתרגום זה.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

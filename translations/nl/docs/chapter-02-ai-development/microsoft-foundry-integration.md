@@ -1,50 +1,50 @@
 # Microsoft Foundry-integratie met AZD
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 2 - AI-First Development
-- **⬅️ Previous Chapter**: [Chapter 1: Your First Project](../chapter-01-foundation/first-project.md)
-- **➡️ Next**: [AI Model Deployment](ai-model-deployment.md)
-- **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+**Hoofdstuknavigatie:**
+- **📚 Cursus Startpagina**: [AZD voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 2 - AI-First ontwikkeling
+- **⬅️ Vorig Hoofdstuk**: [Hoofdstuk 1: Je eerste project](../chapter-01-foundation/first-project.md)
+- **➡️ Volgende**: [AI-modelimplementatie](ai-model-deployment.md)
+- **🚀 Volgend hoofdstuk**: [Hoofdstuk 3: Configuratie](../chapter-03-configuration/configuration.md)
 
 ## Overzicht
 
-Deze handleiding laat zien hoe u Microsoft Foundry-services integreert met de Azure Developer CLI (AZD) voor gestroomlijnde AI-app-implementaties. Microsoft Foundry biedt een uitgebreid platform voor het bouwen, implementeren en beheren van AI-toepassingen, terwijl AZD het infrastructuur- en implementatieproces vereenvoudigt.
+Deze gids toont hoe je Microsoft Foundry-services integreert met Azure Developer CLI (AZD) voor gestroomlijnde AI-applicatie-implementaties. Microsoft Foundry biedt een uitgebreid platform voor het bouwen, implementeren en beheren van AI-toepassingen, terwijl AZD het infrastructuur- en implementatieproces vereenvoudigt.
 
 ## Wat is Microsoft Foundry?
 
-Microsoft Foundry is het geïntegreerde platform van Microsoft voor AI-ontwikkeling dat onder andere bevat:
+Microsoft Foundry is Microsofts uniforme platform voor AI-ontwikkeling dat het volgende omvat:
 
-- **Model Catalog**: Toegang tot geavanceerde AI-modellen
+- **Model Catalog**: Toegang tot state-of-the-art AI-modellen
 - **Prompt Flow**: Visuele ontwerper voor AI-workflows
 - **Microsoft Foundry Portal**: Geïntegreerde ontwikkelomgeving voor AI-toepassingen
 - **Deployment Options**: Meerdere hosting- en schaalopties
-- **Safety and Security**: Ingebouwde functies voor verantwoorde AI
+- **Safety and Security**: Ingebouwde features voor verantwoord AI-gebruik
 
 ## AZD + Microsoft Foundry: Beter samen
 
 | Feature | Microsoft Foundry | AZD Integration Benefit |
 |---------|-----------------|------------------------|
-| **Model Deployment** | Handmatige portal-implementatie | Geautomatiseerde, herhaalbare implementaties |
-| **Infrastructure** | Provisioning via klik-door | Infrastructure as Code (Bicep) |
-| **Environment Management** | Focus op één omgeving | Meerdere omgevingen (dev/staging/prod) |
-| **CI/CD Integration** | Beperkt | Ondersteuning voor GitHub Actions |
-| **Cost Management** | Basisbewaking | Kostenoptimalisatie per omgeving |
+| **Model Deployment** | Handmatige portal-implementatie | Geautomatiseerde, reproduceerbare implementaties |
+| **Infrastructure** | Klik-door provisioning | Infrastructure as Code (Bicep) |
+| **Environment Management** | Focus op één omgeving | Multi-omgeving (dev/staging/prod) |
+| **CI/CD Integration** | Beperkt | Native GitHub Actions-ondersteuning |
+| **Cost Management** | Basismonitoring | Omgevingsspecifieke kostenoptimalisatie |
 
 ## Vereisten
 
 - Azure-abonnement met passende machtigingen
 - Azure Developer CLI geïnstalleerd
 - Toegang tot Microsoft Foundry Models-services
-- Basiskennis van Microsoft Foundry
+- Basisbekendheid met Microsoft Foundry
 
-> **Current AZD baseline:** Deze voorbeelden zijn beoordeeld met `azd` `1.23.12`. Voor de AI-agentworkflow, gebruik de huidige preview-extensie en controleer uw geïnstalleerde versie voordat u begint.
+> **Huidige AZD-baseline:** Deze voorbeelden zijn beoordeeld met `azd` `1.23.12`. Voor de AI-agent-workflow, gebruik de huidige preview-extensie-release en controleer je geïnstalleerde versie voordat je begint.
 
 ## Kernintegratiepatronen
 
-### Pattern 1: Microsoft Foundry Models-integratie
+### Patroon 1: Microsoft Foundry Models-integratie
 
-**Gebruiksscenario**: Implementeer chattoepassingen met Microsoft Foundry Models
+**Use Case**: Chatapplicaties implementeren met Microsoft Foundry Models-modellen
 
 ```yaml
 # azure.yaml
@@ -92,9 +92,9 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 }
 ```
 
-### Pattern 2: AI Search + RAG-integratie
+### Patroon 2: AI Search + RAG-integratie
 
-**Gebruiksscenario**: Implementeer retrieval-augmented generation (RAG)-toepassingen
+**Use Case**: Implementeren van retrieval-augmented generation (RAG)-applicaties
 
 ```bicep
 // Azure AI Search
@@ -122,9 +122,9 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 }
 ```
 
-### Pattern 3: Document Intelligence-integratie
+### Patroon 3: Document Intelligence-integratie
 
-**Gebruiksscenario**: Documentverwerking en analysetaken
+**Use Case**: Documentverwerkings- en analyseworkflows
 
 ```bicep
 // Document Intelligence service
@@ -157,7 +157,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ## 🔧 Configuratiepatronen
 
-### Instellen van omgevingsvariabelen
+### Omgevingsvariabelen instellen
 
 **Productieconfiguratie:**
 ```bash
@@ -177,13 +177,13 @@ azd env set AZURE_SEARCH_SKU "standard"
 
 **Ontwikkelconfiguratie:**
 ```bash
-# Instellingen voor ontwikkeling, geoptimaliseerd voor kosten
+# Kostenefficiënte instellingen voor ontwikkeling
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set AZURE_SEARCH_SKU "basic"
-azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Gratis laag
+azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Gratis niveau
 ```
 
-### Beveiligde configuratie met Key Vault
+### Veilige configuratie met Key Vault
 
 ```bicep
 // Key Vault for secrets
@@ -225,7 +225,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 AZD biedt extensies die AI-specifieke mogelijkheden toevoegen voor het werken met Microsoft Foundry-services:
 
 ```bash
-# Installeer de Foundry-agentenextensie
+# Installeer de Foundry agents-extensie
 azd extension install azure.ai.agents
 
 # Installeer de fine-tuning-extensie
@@ -234,46 +234,46 @@ azd extension install azure.ai.finetune
 # Installeer de extensie voor aangepaste modellen
 azd extension install azure.ai.models
 
-# Geïnstalleerde extensies weergeven
+# Toon geïnstalleerde extensies
 azd extension list --installed
 
-# Controleer de momenteel geïnstalleerde versie van de agentextensie
+# Controleer de momenteel geïnstalleerde versie van de agent-extensie
 azd extension show azure.ai.agents
 ```
 
-De AI-extensies ontwikkelen zich nog snel in preview. Als een opdracht zich anders gedraagt dan hier weergegeven, werk dan de betreffende extensie bij voordat u het project zelf gaat oplossen.
+De AI-extensies ontwikkelen zich nog snel in preview. Als een commando zich anders gedraagt dan hier weergegeven, upgrade dan de relevante extensie voordat je het project zelf gaat troubleshooten.
 
-### Agent-first-implementatie met `azd ai`
+### Agent-first implementatie met `azd ai`
 
-Als u een agentmanifest hebt, gebruik `azd ai agent init` om een project te scaffolden dat is verbonden met Foundry Agent Service:
+Als je een agent-manifest hebt, gebruik `azd ai agent init` om een project te scaffolden dat is aangesloten op Foundry Agent Service:
 
 ```bash
 # Initialiseren vanuit een agentmanifest
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# Uitrollen naar Azure
+# Implementeren naar Azure
 azd up
 ```
 
-Recente preview-releases van `azure.ai.agents` hebben ook template-gebaseerde initialisatie voor `azd ai agent init` toegevoegd. Als u nieuwere agentvoorbeelden volgt, controleer dan de extensiehulp voor de exacte vlaggen die in uw geïnstalleerde versie beschikbaar zijn.
+Recente preview-releases van `azure.ai.agents` hebben ook template-gebaseerde initialisatiesupport toegevoegd voor `azd ai agent init`. Als je nieuwere agentvoorbeelden volgt, controleer dan de extensie-help voor de exacte flags die beschikbaar zijn in jouw geïnstalleerde versie.
 
-Zie [AZD AI CLI-opdrachten](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) voor de volledige opdrachtreferentie en vlaggen.
+Zie [AZD AI CLI-commando's](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) voor de volledige commandoverwijzing en flags.
 
-### Implementatie met één opdracht
+### Implementatie met één commando
 
 ```bash
 # Alles met één commando uitrollen
 azd up
 
-# Of stapsgewijs uitrollen
+# Of geleidelijk uitrollen
 azd provision  # Alleen infrastructuur
 azd deploy     # Alleen applicatie
 
-# Voor langdurige implementaties van AI-apps in azd 1.23.11+
+# Voor langdurige AI-app-implementaties in azd 1.23.11+
 azd deploy --timeout 1800
 ```
 
-### Omgeving-specifieke implementaties
+### Omgevingsspecifieke implementaties
 
 ```bash
 # Ontwikkelomgeving
@@ -325,7 +325,7 @@ resource customMetrics 'Microsoft.Insights/components/analyticsItems@2015-05-01'
 }
 ```
 
-### Kostenbewaking
+### Kostenmonitoring
 
 ```bicep
 // Budget alert for AI services
@@ -466,17 +466,17 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-## Probleemoplossing van veelvoorkomende problemen
+## Probleemoplossing - veelvoorkomende problemen
 
-### Probleem 1: OpenAI-quotum overschreden
+### Probleem 1: OpenAI-quota overschreden
 
 **Symptomen:**
 - Implementatie mislukt met quotafouten
-- 429-fouten in applicatielogboeken
+- 429-fouten in applicatielogs
 
 **Oplossingen:**
 ```bash
-# Controleer het huidige quotagebruik
+# Controleer het huidige gebruik van de quota
 az cognitiveservices usage list --location eastus
 
 # Probeer een andere regio
@@ -491,145 +491,145 @@ azd deploy
 ### Probleem 2: Authenticatiefouten
 
 **Symptomen:**
-- 401/403-fouten bij het oproepen van AI-services
-- "Access denied"-meldingen
+- 401/403-fouten bij het aanroepen van AI-services
+- "Toegang geweigerd"-meldingen
 
 **Oplossingen:**
 ```bash
 # Controleer roltoewijzingen
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Controleer configuratie van beheerde identiteit
+# Controleer configuratie van de beheerde identiteit
 az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 
 # Controleer toegang tot Key Vault
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
-### Probleem 3: Problemen met modelimplementatie
+### Probleem 3: Problemen bij modelimplementatie
 
 **Symptomen:**
-- Modellen niet beschikbaar in implementatie
+- Modellen niet beschikbaar in de implementatie
 - Specifieke modelversies falen
 
 **Oplossingen:**
 ```bash
-# Lijst beschikbare modellen per regio
+# Beschikbare modellen per regio weergeven
 az cognitiveservices model list --location eastus
 
-# Werk de modelversie bij in het bicep-sjabloon
-# Controleer de capaciteitsvereisten van het model
+# Modelversie bijwerken in Bicep-sjabloon
+# Controleer modelcapaciteitsvereisten
 ```
 
 ## Voorbeeldsjablonen
 
-### RAG Chat-applicatie (Python)
+### RAG-chatapplicatie (Python)
 
 **Repository**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
 **Services**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
 
-**Beschrijving**: Het populairste Azure AI-voorbeeld — een productieklare RAG-chatapp die u vragen over uw eigen documenten laat stellen. Gebruikt GPT-4.1-mini voor chat, text-embedding-3-large voor embeddings en Azure AI Search voor ophalen. Ondersteunt multimodale documenten, spraakinvoer/-uitvoer, Microsoft Entra-authenticatie en Application Insights-tracing.
+**Beschrijving**: Het meest populaire Azure AI-voorbeeld — een productieklare RAG-chatapp die je vragen over je eigen documenten laat stellen. Gebruikt GPT-4.1-mini voor chat, text-embedding-3-large voor embeddings, en Azure AI Search voor retrieval. Ondersteunt multimodale documenten, spraakinvoer/-uitvoer, Microsoft Entra-authenticatie en Application Insights-tracing.
 
-**Snelstart**:
+**Snel aan de slag**:
 ```bash
 azd init --template azure-search-openai-demo
 azd up
 ```
 
-### RAG Chat-applicatie (.NET)
+### RAG-chatapplicatie (.NET)
 
 **Repository**: [azure-search-openai-demo-csharp](https://github.com/Azure-Samples/azure-search-openai-demo-csharp)
 
 **Services**: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
 
-**Beschrijving**: De .NET/C#-equivalent van het Python RAG-chatvoorbeeld. Gebouwd met ASP.NET Core Minimal API en Blazor WebAssembly-frontend. Inclusief spraakchat, GPT-4o-mini vision-ondersteuning en een bijbehorende .NET MAUI Blazor Hybrid desktop/mobile client.
+**Beschrijving**: De .NET/C#-equivalent van het Python RAG-chatvoorbeeld. Gebouwd met ASP.NET Core Minimal API en Blazor WebAssembly-frontend. Inclusief spraakchat, GPT-4o-mini vision-ondersteuning en een bijbehorende .NET MAUI Blazor Hybrid desktop/mobiele client.
 
-**Snelstart**:
+**Snel aan de slag**:
 ```bash
 azd init --template azure-search-openai-demo-csharp
 azd up
 ```
 
-### RAG Chat-applicatie (Java)
+### RAG-chatapplicatie (Java)
 
 **Repository**: [azure-search-openai-demo-java](https://github.com/Azure-Samples/azure-search-openai-demo-java)
 
 **Services**: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
 
-**Beschrijving**: Java-versie van het RAG-chatvoorbeeld die Langchain4J gebruikt voor AI-orchestratie. Ondersteunt microservice event-driven architectuur, meerdere zoekstrategieën (tekst, vector, hybride), documentupload met Azure Document Intelligence en implementatie op Azure Container Apps of Azure Kubernetes Service.
+**Beschrijving**: Java-versie van het RAG-chatvoorbeeld met Langchain4J voor AI-orchestration. Ondersteunt microservices en event-driven architectuur, meerdere zoekstrategieën (tekst, vector, hybride), documentupload met Azure Document Intelligence en implementatie op Azure Container Apps of Azure Kubernetes Service.
 
-**Snelstart**:
+**Snel aan de slag**:
 ```bash
 azd init --template azure-search-openai-demo-java
 azd up
 ```
 
-### Enterprise Retail Copilot met Azure AI Foundry
+### Enterprise Retail Copilot met Microsoft Foundry
 
 **Repository**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
-**Services**: Azure OpenAI + Azure AI Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
+**Services**: Azure OpenAI + Microsoft Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
 
-**Beschrijving**: End-to-end retail RAG-copilot met Azure AI Foundry en Prompty. Een Contoso Outdoor-retailerchatbot die antwoorden baseert op productcatalogus- en klantordergegevens. Demonstreert de volledige GenAIOps-workflow — prototype met Prompty, evalueer met AI-ondersteunde evaluators en implementeer via AZD naar Container Apps.
+**Beschrijving**: End-to-end retail RAG-copilot met Microsoft Foundry en Prompty. Een Contoso Outdoor-winkelchatbot die reacties onderbouwt met productcatalogus- en klantordergegevens. Demonstreert de volledige GenAIOps-workflow — prototype met Prompty, evalueer met AI-assisted evaluators en implementeer via AZD naar Container Apps.
 
-**Snelstart**:
+**Snel aan de slag**:
 ```bash
 azd init --template contoso-chat
 azd up
 ```
 
-### Multi-agent applicatie voor creatief schrijven
+### Creative Writing Multi-Agent Application
 
 **Repository**: [contoso-creative-writer](https://github.com/Azure-Samples/contoso-creative-writer)
 
 **Services**: Azure OpenAI + Azure AI Agent Service + Bing Grounding + Azure AI Search + Azure Container Apps
 
-**Beschrijving**: Multi-agentvoorbeeld dat AI-agentorchestratie demonstreert met Prompty. Gebruikt een onderzoekagent (Bing Grounding in Azure AI Agent Service), een productagent (Azure AI Search), een schrijveragent en een redacteuragent om gezamenlijk goed onderzochte artikelen te produceren. Inclusief CI/CD met evaluatie in GitHub Actions.
+**Beschrijving**: Multi-agentvoorbeeld dat AI-agentorchestratie met Prompty demonstreert. Gebruikt een research-agent (Bing Grounding in Azure AI Agent Service), een product-agent (Azure AI Search), een schrijver-agent en een redacteur-agent om samen goed onderzochte artikelen te produceren. Inclusief CI/CD met evaluatie in GitHub Actions.
 
-**Snelstart**:
+**Snel aan de slag**:
 ```bash
 azd init --template contoso-creative-writer
 azd up
 ```
 
-### Serverloze RAG-chat (JavaScript/TypeScript)
+### Serverless RAG Chat (JavaScript/TypeScript)
 
 **Repository**: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
 
 **Services**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB for NoSQL + LangChain.js
 
-**Beschrijving**: Volledig serverloze RAG-chatbot die LangChain.js gebruikt met Azure Functions voor de API en Azure Static Web Apps voor hosting. Gebruikt Azure Cosmos DB als zowel vectorstore als chatgeschiedenisdatabase. Ondersteunt lokale ontwikkeling met Ollama voor gratis testen.
+**Beschrijving**: Volledig serverloze RAG-chatbot met LangChain.js, waarbij Azure Functions de API levert en Azure Static Web Apps hosting verzorgt. Gebruikt Azure Cosmos DB als vector store en chatgeschiedenisdatabase. Ondersteunt lokale ontwikkeling met Ollama voor kosteloos testen.
 
-**Snelstart**:
+**Snel aan de slag**:
 ```bash
 azd init --template serverless-chat-langchainjs
 azd up
 ```
 
-### Chat met uw gegevens Solution Accelerator
+### Chat met je gegevens Solution Accelerator
 
 **Repository**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
 
 **Services**: Azure OpenAI + Azure AI Search + Azure App Service + Azure Document Intelligence + Azure Functions + Azure Cosmos DB / PostgreSQL
 
-**Beschrijving**: Enterprise-grade RAG-solution accelerator met admin-portal voor documentupload/-beheer, meerdere orchestratoropties (Semantic Kernel, LangChain, Prompt Flow), spraak-naar-tekst, Microsoft Teams-integratie en keuze uit PostgreSQL of Cosmos DB-backend. Ontworpen als een aanpasbaar startpunt voor productiescenario's met RAG.
+**Beschrijving**: Enterprise-grade RAG-solution-accelerator met adminportal voor documentupload/beheer, meerdere orchestratoropties (Semantic Kernel, LangChain, Prompt Flow), spraak-naar-tekst, Microsoft Teams-integratie en keuze uit PostgreSQL of Cosmos DB-backend. Ontworpen als aanpasbaar startpunt voor productie-RAG-scenario's.
 
-**Snelstart**:
+**Snel aan de slag**:
 ```bash
 azd init --template chat-with-your-data-solution-accelerator
 azd up
 ```
 
-### AI Travel Agents — Multi-agent MCP-orchestratie
+### AI Travel Agents — Multi-Agent MCP Orchestration
 
 **Repository**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
 
-**Services**: Azure OpenAI + Azure AI Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
+**Services**: Azure OpenAI + Microsoft Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
 
-**Beschrijving**: Referentie-applicatie voor multi-agent AI-orchestratie met drie frameworks (LangChain.js, LlamaIndex.TS en Microsoft Agent Framework). Beschikt over MCP (Model Context Protocol)-servers in vier talen die worden ingezet als serverloze Azure Container Apps met OpenTelemetry-monitoring.
+**Beschrijving**: Referentieapplicatie voor multi-agent AI-orchestratie die drie frameworks gebruikt (LangChain.js, LlamaIndex.TS en Microsoft Agent Framework). Bevat MCP (Model Context Protocol)-servers in vier talen die worden uitgerold als serverless Azure Container Apps met OpenTelemetry-monitoring.
 
-**Snelstart**:
+**Snel aan de slag**:
 ```bash
 azd init --template azure-ai-travel-agents
 azd up
@@ -641,24 +641,24 @@ azd up
 
 **Services**: Azure AI Services + Azure OpenAI
 
-**Beschrijving**: Minimale Bicep-sjabloon die Azure AI-services implementeert met geconfigureerde machine learning-modellen. Een lichtgewicht startpunt wanneer u alleen de Azure AI-infrastructuur nodig heeft zonder een volledige applicatiestack.
+**Beschrijving**: Minimalistisch Bicep-sjabloon dat Azure AI-services implementeert met geconfigureerde machine learning-modellen. Een lichte startpunt wanneer je alleen de Azure AI-infrastructuur wilt provisionen zonder volledige applicatiestack.
 
-**Snelstart**:
+**Snel aan de slag**:
 ```bash
 azd init --template azd-ai-starter
 azd up
 ```
 
-> **Blader door meer sjablonen**: Bezoek de [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) voor meer dan 80 AI-specifieke AZD-sjablonen in verschillende talen en scenario's.
+> **Blader door meer sjablonen**: Bezoek de [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) voor 80+ AI-specifieke AZD-sjablonen in verschillende talen en scenario's.
 
 ## Volgende stappen
 
-1. **Probeer de voorbeelden**: Begin met een kant-en-klaar sjabloon dat bij uw gebruiksscenario past
-2. **Pas aan voor uw behoeften**: Wijzig de infrastructuur en applicatiecode
+1. **Probeer de voorbeelden**: Begin met een kant-en-klaar sjabloon dat bij je use case past
+2. **Pas aan voor je behoeften**: Wijzig de infrastructuur- en applicatiecode
 3. **Voeg monitoring toe**: Implementeer uitgebreide observeerbaarheid
-4. **Optimaliseer kosten**: Stel configuraties bij voor uw budget
-5. **Beveilig uw implementatie**: Implementeer enterprise-beveiligingspatronen
-6. **Schaal naar productie**: Voeg multi-region en hoge-beschikbaarheidfuncties toe
+4. **Optimaliseer kosten**: Fijnstel configuraties voor je budget
+5. **Beveilig je implementatie**: Implementeer enterprise-beveiligingspatronen
+6. **Schaal naar productie**: Voeg multi-regio- en hoge-beschikbaarheidfuncties toe
 
 ## 🎯 Praktijkoefeningen
 
@@ -666,7 +666,7 @@ azd up
 **Doel**: Implementeer en test een productieklare AI-chatapplicatie
 
 ```bash
-# Sjabloon initialiseren
+# Initialiseer sjabloon
 mkdir ai-chat-demo && cd ai-chat-demo
 azd init --template azure-search-openai-demo
 
@@ -681,7 +681,7 @@ azd up
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Chat app: $WEB_URL"
 
-# Toezicht houden op AI-activiteiten
+# Bewaak AI-operaties
 azd monitor
 
 # Opruimen
@@ -689,15 +689,15 @@ azd down --force --purge
 ```
 
 **Succescriteria:**
-- [ ] Implementatie voltooit zonder quotafouten
-- [ ] Toegang tot de chatinterface in de browser
-- [ ] Vragen kunnen stellen en AI-aangedreven antwoorden ontvangen
+- [ ] Implementatie voltooid zonder quotafouten
+- [ ] Toegang tot de chatinterface in de browser mogelijk
+- [ ] Vragen kunnen stellen en AI-gestuurde antwoorden ontvangen
 - [ ] Application Insights toont telemetriegegevens
-- [ ] Middelen succesvol opgeschoond
+- [ ] Resources succesvol opgeruimd
 
 **Geschatte kosten**: $5-10 voor 30 minuten testen
 
-### Oefening 2: Configureer implementatie met meerdere modellen (45 minuten)
+### Oefening 2: Configureer multi-modelimplementatie (45 minuten)
 **Doel**: Implementeer meerdere AI-modellen met verschillende configuraties
 
 ```bash
@@ -753,15 +753,15 @@ azd show
 
 **Succescriteria:**
 - [ ] Meerdere modellen succesvol geïmplementeerd
-- [ ] Verschillende capaciteitsinstellingen toegepast
+- [ ] Verschillende capaciteitinstellingen toegepast
 - [ ] Modellen toegankelijk via API
-- [ ] Beide modellen vanaf de applicatie kunnen worden aangeroepen
+- [ ] Beide modellen kunnen vanuit de applicatie worden aangeroepen
 
-### Oefening 3: Implementeer kostenbewaking (20 minuten)
-**Doel**: Stel budgetwaarschuwingen en kostenrapportage in
+### Oefening 3: Implementeer kostenmonitoring (20 minuten)
+**Doel**: Stel budgetwaarschuwingen en kostentracking in
 
 ```bash
-# Voeg budgetwaarschuwing toe aan Bicep
+# Voeg een budgetwaarschuwing toe aan Bicep
 cat >> infra/main.bicep << 'EOF'
 
 resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
@@ -802,19 +802,19 @@ az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-d
 **Succescriteria:**
 - [ ] Budgetwaarschuwing aangemaakt in Azure
 - [ ] E-mailmeldingen geconfigureerd
-- [ ] Kostengegevens kunnen worden bekeken in de Azure Portal
-- [ ] Budgetdrempels correct ingesteld
+- [ ] Kosteninformatie zichtbaar in de Azure Portal
+- [ ] Budgetdrempels passend ingesteld
 
 ## 💡 Veelgestelde vragen
 
 <details>
-<summary><strong>Hoe kan ik de kosten van Microsoft Foundry Models tijdens ontwikkeling verlagen?</strong></summary>
+<summary><strong>Hoe verlaag ik de kosten van Microsoft Foundry Models tijdens ontwikkeling?</strong></summary>
 
 1. **Gebruik de gratis laag**: Microsoft Foundry Models biedt 50.000 tokens/maand gratis
-2. **Verminder capaciteit**: Stel capaciteit in op 10 TPM in plaats van 30+ voor dev
-3. **Gebruik azd down**: Dealloceer resources wanneer u niet actief ontwikkelt
+2. **Verminder capaciteit**: Stel capaciteit in op 10 TPM in plaats van 30+ voor ontwikkeling
+3. **Gebruik azd down**: Dealloceer bronnen wanneer je niet actief ontwikkelt
 4. **Cache antwoorden**: Implementeer een Redis-cache voor herhaalde queries
-5. **Pas prompt-engineering toe**: Verminder tokengebruik met efficiënte prompts
+5. **Gebruik prompt-engineering**: Verminder tokengebruik met efficiënte prompts
 
 
 ```bash
@@ -828,23 +828,23 @@ azd env set ENABLE_RESPONSE_CACHE true
 <summary><strong>Wat is het verschil tussen Microsoft Foundry Models en de OpenAI API?</strong></summary>
 
 **Microsoft Foundry Models**:
-- Bedrijfsmatige beveiliging en naleving
+- Enterprise-beveiliging en naleving
 - Integratie met privé-netwerken
 - SLA-garanties
-- Authenticatie via Managed Identity
+- Authenticatie via beheerde identiteit
 - Hogere quota beschikbaar
 
 **OpenAI API**:
 - Snellere toegang tot nieuwe modellen
-- Eenvoudigere installatie
-- Lagere drempel om te beginnen
+- Eenvoudigere setup
+- Lagere instapdrempel
 - Alleen openbaar internet
 
 Voor productie-apps wordt **Microsoft Foundry Models aanbevolen**.
 </details>
 
 <details>
-<summary><strong>Hoe los ik quota-overschrijdingsfouten van Microsoft Foundry Models op?</strong></summary>
+<summary><strong>Hoe ga ik om met 'quota exceeded'-fouten bij Microsoft Foundry Models?</strong></summary>
 
 ```bash
 # Controleer de huidige quota
@@ -859,7 +859,7 @@ azd env set AZURE_OPENAI_CAPACITY 10
 azd provision
 
 # Vraag een verhoging van de quota aan
-# Ga naar de Azure Portal > Quota's > Verhoging aanvragen
+# Ga naar Azure Portal > Quota's > Verhoging aanvragen
 ```
 </details>
 
@@ -878,7 +878,7 @@ services:
       - AZURE_OPENAI_ENDPOINT
 ```
 
-Zie de [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) sjabloon.
+Bekijk de [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) sjabloon.
 </details>
 
 <details>
@@ -909,27 +909,27 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 ```
 </details>
 
-## Community en ondersteuning
+## Gemeenschap en ondersteuning
 
-- **Microsoft Foundry Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
+- **Microsoft Foundry Discord**: [#Azure-kanaal](https://discord.gg/microsoft-azure)
 - **AZD GitHub**: [Issues en discussies](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Officiële documentatie](https://learn.microsoft.com/azure/ai-studio/)
-- **Agent Skills**: [Microsoft Foundry skill on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Installeer Azure + Foundry agent skills in je editor met `npx skills add microsoft/github-copilot-for-azure`
+- **Agent Skills**: [Microsoft Foundry skill on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Installeer Azure + Foundry agentvaardigheden in je editor met `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **Hoofdstuknavigatie:**
-- **📚 Cursusstartpagina**: [AZD For Beginners](../../README.md)
-- **📖 Huidig hoofdstuk**: Hoofdstuk 2 - AI-first ontwikkeling
+- **📚 Course Home**: [AZD voor beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 2 - AI-First Ontwikkeling
 - **⬅️ Vorig hoofdstuk**: [Hoofdstuk 1: Je eerste project](../chapter-01-foundation/first-project.md)
 - **➡️ Volgende**: [AI-modelimplementatie](ai-model-deployment.md)
 - **🚀 Volgend hoofdstuk**: [Hoofdstuk 3: Configuratie](../chapter-03-configuration/configuration.md)
 
-**Hulp nodig?** Doe mee aan onze communitydiscussies of open een issue in de repository. De Azure AI + AZD-community is er om je te helpen slagen!
+**Hulp nodig?** Doe mee aan onze community-discussies of open een issue in de repository. De Azure AI + AZD-gemeenschap staat klaar om je te helpen slagen!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de oorspronkelijke taal moet als de gezaghebbende bron worden beschouwd. Voor cruciale informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI vertaaldienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

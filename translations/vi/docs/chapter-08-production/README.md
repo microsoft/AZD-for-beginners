@@ -1,22 +1,22 @@
-# Chương 8: Các Mẫu Triển Khai Sản Xuất & Doanh Nghiệp
+# Chương 8: Mẫu Sản xuất & Doanh nghiệp
 
-**📚 Khóa học**: [AZD For Beginners](../../README.md) | **⏱️ Thời lượng**: 2-3 giờ | **⭐ Độ khó**: Nâng cao
+**📚 Khóa học**: [AZD Dành cho Người Mới](../../README.md) | **⏱️ Thời lượng**: 2-3 giờ | **⭐ Độ phức tạp**: Nâng cao
 
 ---
 
 ## Tổng quan
 
-Chương này bao gồm các mẫu triển khai sẵn sàng cho doanh nghiệp, gia cố bảo mật, giám sát và tối ưu hóa chi phí cho khối lượng công việc AI trong môi trường sản xuất.
+Chương này bao gồm các mẫu triển khai sẵn sàng cho doanh nghiệp, gia cố bảo mật, giám sát và tối ưu chi phí cho khối lượng công việc AI trong môi trường sản xuất.
 
-> Đã xác minh với `azd 1.23.12` vào tháng 3 năm 2026.
+> Đã xác thực với `azd 1.25.6` vào tháng 6 năm 2026.
 
 ## Mục tiêu học tập
 
-Sau khi hoàn thành chương này, bạn sẽ:
+Khi hoàn thành chương này, bạn sẽ:
 - Triển khai ứng dụng chịu lỗi đa vùng
 - Triển khai các mẫu bảo mật cho doanh nghiệp
 - Cấu hình giám sát toàn diện
-- Tối ưu hóa chi phí ở quy mô lớn
+- Tối ưu chi phí ở quy mô lớn
 - Thiết lập pipeline CI/CD với AZD
 
 ---
@@ -25,41 +25,43 @@ Sau khi hoàn thành chương này, bạn sẽ:
 
 | # | Bài học | Mô tả | Thời gian |
 |---|--------|-------------|------|
-| 1 | [Thực hành AI cho Sản xuất](production-ai-practices.md) | Các mẫu triển khai cho doanh nghiệp | 90 phút |
+| 1 | [Production AI Practices](production-ai-practices.md) | Các mẫu triển khai cho doanh nghiệp | 90 phút |
 
 ---
 
 ## 🚀 Danh sách kiểm tra Sản xuất
 
-- [ ] Triển khai đa vùng để tăng khả năng chịu lỗi
-- [ ] Managed identity cho xác thực (không dùng khóa)
+- [ ] Triển khai đa vùng để tăng khả năng phục hồi
+- [ ] Định danh được quản lý cho xác thực (không dùng khóa)
 - [ ] Application Insights để giám sát
 - [ ] Cấu hình ngân sách chi phí và cảnh báo
 - [ ] Bật quét bảo mật
 - [ ] Tích hợp pipeline CI/CD
-- [ ] Kế hoạch phục hồi thảm họa
+- [ ] Kế hoạch phục hồi sau thảm họa
 
 ---
 
-## 🏗️ Mẫu Kiến trúc
+## 🏗️ Mẫu kiến trúc
 
 ### Mẫu 1: Microservices AI
 
 ```mermaid
 graph LR
-    Gateway[Cổng API] --> AI[Dịch vụ AI] --> Models[Các Mô hình Microsoft Foundry]
+    Gateway[Cổng API] --> AI[Dịch vụ AI] --> Models[Các mô hình Microsoft Foundry]
     Gateway --> Auth[Dịch vụ Xác thực]
-    AI --> Data[Kho Dữ liệu]
+    AI --> Data[Kho dữ liệu]
 ```
-### Mẫu 2: Event-Driven AI
+
+### Mẫu 2: AI hướng sự kiện
 
 ```mermaid
 graph LR
     EventGrid[Lưới Sự Kiện] --> Functions[Chức năng] --> Pipeline[Đường ống AI]
 ```
+
 ---
 
-## 🔐 Các Thực hành Bảo mật Tốt nhất
+## 🔐 Thực hành bảo mật tốt nhất
 
 ```bicep
 // Use managed identity
@@ -78,13 +80,13 @@ properties: {
 
 ---
 
-## 💰 Tối ưu hóa Chi phí
+## 💰 Tối ưu chi phí
 
 | Chiến lược | Tiết kiệm |
 |----------|---------|
-| Thu nhỏ về 0 (Container Apps) | 60-80% |
-| Sử dụng tầng tiêu thụ cho môi trường phát triển | 50-70% |
-| Tự động điều chỉnh theo lịch | 30-50% |
+| Tự động scale về 0 (Container Apps) | 60-80% |
+| Sử dụng tầng tiêu thụ cho môi trường dev | 50-70% |
+| Tự động mở rộng theo lịch | 30-50% |
 | Dung lượng đặt trước | 20-40% |
 
 ```bash
@@ -98,7 +100,7 @@ az consumption budget create \
 
 ---
 
-## 📊 Cấu hình Giám sát
+## 📊 Cấu hình giám sát
 
 ```bash
 # Phát trực tiếp nhật ký
@@ -118,20 +120,20 @@ az monitor metrics list --resource <resource-id>
 | Hướng | Chương |
 |-----------|---------|
 | **Trước** | [Chương 7: Khắc phục sự cố](../chapter-07-troubleshooting/README.md) |
-| **Hoàn thành Khóa học** | [Trang Khóa học](../../README.md) |
+| **Hoàn thành Khóa học** | [Trang khóa học](../../README.md) |
 
 ---
 
 ## 📖 Tài nguyên liên quan
 
-- [Hướng dẫn AI Agents](../chapter-02-ai-development/agents.md)
+- [AI Agents Guide](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Giải pháp Multi-Agent](../chapter-05-multi-agent/README.md)
-- [Ví dụ Microservices](../../examples/microservices/README.md)
+- [Multi-Agent Solutions](../chapter-05-multi-agent/README.md)
+- [Microservices Example](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Miễn trừ trách nhiệm**:
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ ban đầu nên được coi là nguồn chính thức. Đối với các thông tin quan trọng, khuyến nghị sử dụng bản dịch chuyên nghiệp do con người thực hiện. Chúng tôi không chịu trách nhiệm cho bất kỳ hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+**Tuyên bố miễn trừ trách nhiệm**:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng bản dịch tự động có thể chứa lỗi hoặc sai sót. Tài liệu gốc bằng ngôn ngữ gốc nên được coi là nguồn tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

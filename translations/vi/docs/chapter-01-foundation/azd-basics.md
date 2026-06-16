@@ -1,58 +1,58 @@
-# AZD Basics - Hiểu về Azure Developer CLI
+# AZD Basics - Hiểu Azure Developer CLI
 
-# AZD Basics - Các khái niệm cốt lõi và những vấn đề cơ bản
+# AZD Basics - Khái niệm cốt lõi và nền tảng
 
 **Chapter Navigation:**
-- **📚 Trang chính khóa học**: [AZD For Beginners](../../README.md)
-- **📖 Chương hiện tại**: Chương 1 - Nền tảng & Bắt đầu nhanh
-- **⬅️ Trước**: [Course Overview](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Tiếp theo**: [Installation & Setup](installation.md)
-- **🚀 Chương tiếp theo**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📚 Course Home**: [AZD cho Người Mới Bắt Đầu](../../README.md)
+- **📖 Current Chapter**: Chương 1 - Nền tảng & Bắt đầu nhanh
+- **⬅️ Previous**: [Tổng quan khóa học](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Next**: [Cài đặt & Thiết lập](installation.md)
+- **🚀 Next Chapter**: [Chương 2: Phát triển Ưu tiên AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Giới thiệu
 
-Bài học này giới thiệu cho bạn Azure Developer CLI (azd), một công cụ dòng lệnh mạnh mẽ giúp tăng tốc hành trình từ phát triển cục bộ đến triển khai lên Azure. Bạn sẽ học các khái niệm cơ bản, các tính năng cốt lõi, và hiểu cách azd đơn giản hóa việc triển khai ứng dụng cloud-native.
+Bài học này giới thiệu cho bạn về Azure Developer CLI (azd), một công cụ dòng lệnh mạnh mẽ giúp tăng tốc hành trình từ phát triển cục bộ đến triển khai trên Azure. Bạn sẽ học các khái niệm nền tảng, tính năng cốt lõi và hiểu cách azd đơn giản hóa việc triển khai ứng dụng cloud-native.
 
 ## Mục tiêu học tập
 
-Kết thúc bài học này, bạn sẽ:
+Sau khi kết thúc bài học này, bạn sẽ:
 - Hiểu Azure Developer CLI là gì và mục đích chính của nó
-- Học các khái niệm cốt lõi về templates, environments và services
-- Khám phá các tính năng chính bao gồm phát triển theo mẫu và Hạ tầng như Mã
+- Học các khái niệm cốt lõi về template, môi trường và dịch vụ
+- Khám phá các tính năng chính bao gồm phát triển theo template và Infrastructure as Code
 - Hiểu cấu trúc dự án và quy trình làm việc của azd
-- Chuẩn bị cài đặt và cấu hình azd cho môi trường phát triển của bạn
+- Chuẩn bị để cài đặt và cấu hình azd cho môi trường phát triển của bạn
 
-## Kết quả học tập
+## Kết quả mong đợi
 
-Sau khi hoàn thành bài học này, bạn sẽ có thể:
+Sau khi hoàn thành bài học này, bạn sẽ có khả năng:
 - Giải thích vai trò của azd trong quy trình phát triển đám mây hiện đại
-- Nhận biết các thành phần của cấu trúc dự án azd
-- Mô tả cách templates, environments và services hoạt động cùng nhau
-- Hiểu lợi ích của Hạ tầng như Mã với azd
+- Xác định các thành phần của cấu trúc dự án azd
+- Mô tả cách template, môi trường và dịch vụ phối hợp cùng nhau
+- Hiểu lợi ích của Infrastructure as Code với azd
 - Nhận diện các lệnh azd khác nhau và mục đích của chúng
 
 ## Azure Developer CLI (azd) là gì?
 
-Azure Developer CLI (azd) là một công cụ dòng lệnh được thiết kế để tăng tốc hành trình của bạn từ phát triển cục bộ đến triển khai lên Azure. Nó đơn giản hóa quá trình xây dựng, triển khai và quản lý các ứng dụng cloud-native trên Azure.
+Azure Developer CLI (azd) là một công cụ dòng lệnh được thiết kế để tăng tốc hành trình từ phát triển cục bộ đến triển khai trên Azure. Nó đơn giản hóa quá trình xây dựng, triển khai và quản lý các ứng dụng cloud-native trên Azure.
 
 ### Bạn có thể triển khai gì với azd?
 
-azd hỗ trợ nhiều loại workload—và danh sách này vẫn đang mở rộng. Hiện nay, bạn có thể dùng azd để triển khai:
+azd hỗ trợ nhiều loại workload—và danh sách này vẫn tiếp tục mở rộng. Ngày nay, bạn có thể sử dụng azd để triển khai:
 
 | Workload Type | Examples | Same Workflow? |
 |---------------|----------|----------------|
-| **Ứng dụng truyền thống** | Web apps, REST APIs, static sites | ✅ `azd up` |
-| **Dịch vụ và microservices** | Container Apps, Function Apps, multi-service backends | ✅ `azd up` |
-| **Ứng dụng hỗ trợ AI** | Chat apps with Microsoft Foundry Models, RAG solutions with AI Search | ✅ `azd up` |
-| **Tác nhân thông minh** | Foundry-hosted agents, multi-agent orchestrations | ✅ `azd up` |
+| **Traditional applications** | Ứng dụng web, REST API, trang tĩnh | ✅ `azd up` |
+| **Services and microservices** | Container Apps, Function Apps, backend đa dịch vụ | ✅ `azd up` |
+| **AI-powered applications** | Ứng dụng chat với Microsoft Foundry Models, giải pháp RAG với AI Search | ✅ `azd up` |
+| **Intelligent agents** | Tác nhân được lưu trữ trên Foundry, điều phối nhiều tác nhân | ✅ `azd up` |
 
-Điểm mấu chốt là **vòng đời azd vẫn giống nhau bất kể bạn đang triển khai gì**. Bạn khởi tạo dự án, cung cấp hạ tầng, triển khai mã, giám sát ứng dụng và dọn dẹp—dù đó là một trang web đơn giản hay một tác nhân AI phức tạp.
+Điểm mấu chốt là **vòng đời azd giữ nguyên bất kể bạn đang triển khai gì**. Bạn khởi tạo một dự án, cấp phát hạ tầng, triển khai mã, giám sát ứng dụng và dọn dẹp—dù đó là một trang web đơn giản hay một tác nhân AI phức tạp.
 
-Sự liên tục này là thiết kế có chủ ý. azd coi các khả năng AI như một loại dịch vụ khác mà ứng dụng của bạn có thể sử dụng, chứ không phải điều gì đó hoàn toàn khác biệt. Một endpoint chat được hỗ trợ bởi Microsoft Foundry Models, từ góc nhìn của azd, chỉ là một dịch vụ khác cần cấu hình và triển khai.
+Tính liên tục này là thiết kế có chủ đích. azd xem các khả năng AI như một loại dịch vụ khác mà ứng dụng của bạn có thể sử dụng, không phải là thứ khác biệt về bản chất. Một endpoint chat được hỗ trợ bởi Microsoft Foundry Models, từ góc nhìn của azd, chỉ là một dịch vụ khác để cấu hình và triển khai.
 
 ### 🎯 Tại sao dùng AZD? So sánh thực tế
 
-Hãy so sánh việc triển khai một ứng dụng web đơn giản kèm cơ sở dữ liệu:
+Hãy so sánh việc triển khai một ứng dụng web đơn giản với cơ sở dữ liệu:
 
 #### ❌ KHÔNG DÙNG AZD: Triển khai Azure thủ công (30+ phút)
 
@@ -60,12 +60,12 @@ Hãy so sánh việc triển khai một ứng dụng web đơn giản kèm cơ s
 # Bước 1: Tạo nhóm tài nguyên
 az group create --name myapp-rg --location eastus
 
-# Bước 2: Tạo Kế hoạch App Service
+# Bước 2: Tạo App Service Plan
 az appservice plan create --name myapp-plan \
   --resource-group myapp-rg \
   --sku B1 --is-linux
 
-# Bước 3: Tạo ứng dụng Web
+# Bước 3: Tạo Web App
 az webapp create --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --plan myapp-plan \
@@ -114,7 +114,7 @@ az monitor app-insights component create \
   --location eastus \
   --resource-group myapp-rg
 
-# Bước 11: Liên kết App Insights với ứng dụng Web
+# Bước 11: Liên kết Application Insights với Web App
 INSTRUMENTATION_KEY=$(az monitor app-insights component show \
   --app myapp-insights \
   --resource-group myapp-rg \
@@ -139,19 +139,19 @@ az webapp deployment source config-zip \
   --src app.zip
 
 # Bước 15: Chờ và cầu mong nó hoạt động 🙏
-# (Không có kiểm tra tự động, yêu cầu kiểm thử thủ công)
+# (Không có xác thực tự động, cần kiểm tra thủ công)
 ```
 
 **Vấn đề:**
-- ❌ Hơn 15 lệnh phải ghi nhớ và thực thi theo thứ tự
+- ❌ 15+ lệnh cần nhớ và thực thi theo thứ tự
 - ❌ 30-45 phút công việc thủ công
-- ❌ Dễ mắc lỗi (gõ sai, tham số sai)
-- ❌ Chuỗi kết nối để lộ trong lịch sử terminal
+- ❌ Dễ mắc lỗi (chính tả, tham số sai)
+- ❌ Chuỗi kết nối lộ ra trong lịch sử terminal
 - ❌ Không có rollback tự động nếu có lỗi
-- ❌ Khó lặp lại cho các thành viên trong nhóm
-- ❌ Mỗi lần khác nhau (không tái tạo được)
+- ❌ Khó tái tạo cho các thành viên trong nhóm
+- ❌ Khác nhau mỗi lần (không tái lập được)
 
-#### ✅ VỚI AZD: Triển khai tự động (5 lệnh, 10-15 phút)
+#### ✅ DÙNG AZD: Triển khai tự động (5 lệnh, 10-15 phút)
 
 ```bash
 # Bước 1: Khởi tạo từ mẫu
@@ -163,7 +163,7 @@ azd auth login
 # Bước 3: Tạo môi trường
 azd env new dev
 
-# Bước 4: Xem trước thay đổi (tùy chọn nhưng được khuyến nghị)
+# Bước 4: Xem trước các thay đổi (tùy chọn nhưng được khuyến nghị)
 azd provision --preview
 
 # Bước 5: Triển khai mọi thứ
@@ -173,57 +173,57 @@ azd up
 ```
 
 **Lợi ích:**
-- ✅ **5 lệnh** so với hơn 15 bước thủ công
+- ✅ **5 lệnh** so với 15+ bước thủ công
 - ✅ **10-15 phút** tổng thời gian (chủ yếu chờ Azure)
-- ✅ **Ít lỗi thủ công hơn** - quy trình nhất quán, dựa trên mẫu
-- ✅ **Xử lý bí mật an toàn** - nhiều mẫu sử dụng kho bí mật do Azure quản lý
-- ✅ **Triển khai có thể lặp lại** - cùng quy trình mọi lần
-- ✅ **Có thể tái tạo hoàn toàn** - kết quả giống nhau mọi lần
-- ✅ **Sẵn sàng cho nhóm** - bất kỳ ai cũng có thể triển khai với cùng lệnh
-- ✅ **Hạ tầng như Mã** - mẫu Bicep có quản lý phiên bản
+- ✅ **Ít lỗi thủ công hơn** - quy trình nhất quán theo template
+- ✅ **Xử lý bí mật an toàn** - nhiều template sử dụng lưu trữ bí mật do Azure quản lý
+- ✅ **Triển khai có thể lặp lại** - cùng quy trình mỗi lần
+- ✅ **Hoàn toàn tái lập được** - cùng kết quả mỗi lần
+- ✅ **Sẵn sàng cho nhóm** - bất kỳ ai cũng có thể triển khai bằng cùng các lệnh
+- ✅ **Infrastructure as Code** - template Bicep được quản lý phiên bản
 - ✅ **Giám sát tích hợp sẵn** - Application Insights được cấu hình tự động
 
 ### 📊 Giảm thời gian & lỗi
 
-| Chỉ số | Triển khai thủ công | Triển khai bằng AZD | Cải thiện |
+| Metric | Manual Deployment | AZD Deployment | Improvement |
 |:-------|:------------------|:---------------|:------------|
-| **Số lệnh** | 15+ | 5 | 67% fewer |
-| **Thời gian** | 30-45 min | 10-15 min | 60% faster |
-| **Tỷ lệ lỗi** | ~40% | <5% | 88% reduction |
-| **Tính nhất quán** | Low (manual) | 100% (automated) | Perfect |
-| **Onboarding nhóm** | 2-4 hours | 30 minutes | 75% faster |
-| **Rollback Time** | 30+ min (manual) | 2 min (automated) | 93% faster |
+| **Commands** | 15+ | 5 | 67% ít hơn |
+| **Time** | 30-45 min | 10-15 min | 60% nhanh hơn |
+| **Error Rate** | ~40% | <5% | Giảm 88% |
+| **Consistency** | Thấp (thủ công) | 100% (tự động) | Hoàn hảo |
+| **Team Onboarding** | 2-4 giờ | 30 phút | 75% nhanh hơn |
+| **Rollback Time** | 30+ phút (thủ công) | 2 phút (tự động) | 93% nhanh hơn |
 
-## Các khái niệm cốt lõi
+## Khái niệm cốt lõi
 
 ### Templates
 Templates là nền tảng của azd. Chúng chứa:
 - **Mã ứng dụng** - Mã nguồn và các phụ thuộc của bạn
-- **Định nghĩa hạ tầng** - Tài nguyên Azure được định nghĩa bằng Bicep hoặc Terraform
-- **Tệp cấu hình** - Cài đặt và biến môi trường
+- **Định nghĩa hạ tầng** - Các tài nguyên Azure được định nghĩa bằng Bicep hoặc Terraform
+- **Tệp cấu hình** - Cấu hình và biến môi trường
 - **Script triển khai** - Quy trình triển khai tự động
 
-### Môi trường
+### Environments
 Môi trường đại diện cho các mục tiêu triển khai khác nhau:
-- **Development** - Dành cho kiểm thử và phát triển
-- **Staging** - Môi trường tiền sản xuất
+- **Development** - Dùng để kiểm thử và phát triển
+- **Staging** - Môi trường trước sản xuất
 - **Production** - Môi trường sản xuất trực tiếp
 
 Mỗi môi trường duy trì riêng:
-- Azure resource group
+- Nhóm tài nguyên Azure (Azure resource group)
 - Cài đặt cấu hình
 - Trạng thái triển khai
 
-### Dịch vụ
-Dịch vụ là các khối cấu thành ứng dụng của bạn:
+### Services
+Dịch vụ là các khối xây dựng của ứng dụng của bạn:
 - **Frontend** - Ứng dụng web, SPA
-- **Backend** - API, microservice
-- **Cơ sở dữ liệu** - Giải pháp lưu trữ dữ liệu
+- **Backend** - API, microservices
+- **Database** - Giải pháp lưu trữ dữ liệu
 - **Storage** - Lưu trữ tệp và blob
 
-## Các tính năng chính
+## Tính năng chính
 
-### 1. Phát triển theo mẫu
+### 1. Phát triển theo Template
 ```bash
 # Duyệt các mẫu có sẵn
 azd template list
@@ -232,12 +232,12 @@ azd template list
 azd init --template <template-name>
 ```
 
-### 2. Hạ tầng như Mã
-- **Bicep** - Ngôn ngữ đặc thù cho Azure
+### 2. Infrastructure as Code
+- **Bicep** - Ngôn ngữ chuyên dụng của Azure
 - **Terraform** - Công cụ hạ tầng đa đám mây
 - **ARM Templates** - Mẫu Azure Resource Manager
 
-### 3. Quy trình tích hợp
+### 3. Quy trình làm việc tích hợp
 ```bash
 # Quy trình triển khai hoàn chỉnh
 azd up            # Cấp phát + Triển khai — không cần can thiệp cho lần thiết lập đầu tiên
@@ -245,22 +245,22 @@ azd up            # Cấp phát + Triển khai — không cần can thiệp cho 
 # 🧪 MỚI: Xem trước các thay đổi hạ tầng trước khi triển khai (AN TOÀN)
 azd provision --preview    # Mô phỏng triển khai hạ tầng mà không thực hiện thay đổi
 
-azd provision     # Tạo tài nguyên Azure; nếu bạn cập nhật hạ tầng, hãy dùng tùy chọn này
+azd provision     # Tạo tài nguyên Azure — nếu bạn cập nhật hạ tầng, hãy dùng tùy chọn này
 azd deploy        # Triển khai mã ứng dụng hoặc triển khai lại mã ứng dụng sau khi cập nhật
 azd down          # Dọn dẹp tài nguyên
 ```
 
-#### 🛡️ Lập kế hoạch hạ tầng an toàn với chế độ xem trước
-Lệnh `azd provision --preview` là một bước đột phá cho các triển khai an toàn:
-- **Phân tích chạy thử** - Hiển thị những gì sẽ được tạo, thay đổi hoặc xóa
+#### 🛡️ Lập kế hoạch hạ tầng an toàn với Preview
+Lệnh `azd provision --preview` là một bước đổi trò trong triển khai an toàn:
+- **Phân tích chạy khô** - Hiển thị những gì sẽ được tạo, chỉnh sửa hoặc xóa
 - **Không rủi ro** - Không có thay đổi thực tế nào được thực hiện trên môi trường Azure của bạn
-- **Hợp tác nhóm** - Chia sẻ kết quả xem trước trước khi triển khai
+- **Hợp tác nhóm** - Chia sẻ kết quả preview trước khi triển khai
 - **Ước tính chi phí** - Hiểu chi phí tài nguyên trước khi cam kết
 
 ```bash
 # Ví dụ quy trình xem trước
 azd provision --preview           # Xem những gì sẽ thay đổi
-# Xem xét kết quả, thảo luận với nhóm
+# Xem lại kết quả, thảo luận với nhóm
 azd provision                     # Áp dụng các thay đổi một cách tự tin
 ```
 
@@ -268,14 +268,14 @@ azd provision                     # Áp dụng các thay đổi một cách tự
 
 ```mermaid
 graph LR
-    A[azd init] -->|Khởi tạo dự án| B[azd auth login]
-    B -->|Xác thực| C[azd env new]
+    A[azd khởi tạo] -->|Khởi tạo dự án| B[azd auth đăng nhập]
+    B -->|Xác thực| C[azd env tạo mới]
     C -->|Tạo môi trường| D{Triển khai lần đầu?}
     D -->|Có| E[azd up]
-    D -->|Không| F[azd provision --preview]
-    F -->|Xem xét thay đổi| G[azd provision]
-    E -->|Cung cấp & triển khai| H[Tài nguyên đang chạy]
-    G -->|Cập nhật hạ tầng| H
+    D -->|Không| F[azd provision --xem trước]
+    F -->|Xem xét các thay đổi| G[azd provision]
+    E -->|Cấp phát & triển khai| H[Tài nguyên đang chạy]
+    G -->|Cập nhật cơ sở hạ tầng| H
     H -->|Giám sát| I[azd monitor]
     I -->|Thực hiện thay đổi mã| J[azd deploy]
     J -->|Chỉ triển khai lại mã| H
@@ -287,18 +287,19 @@ graph LR
     style H fill:#c5e1a5
     style K fill:#ffcdd2
 ```
+
 **Giải thích quy trình:**
-1. **Init** - Bắt đầu với mẫu hoặc dự án mới
+1. **Init** - Bắt đầu với template hoặc dự án mới
 2. **Auth** - Xác thực với Azure
-3. **Environment** - Tạo môi trường triển khai cô lập
-4. **Preview** - 🆕 Luôn xem trước thay đổi hạ tầng trước (thực hành an toàn)
+3. **Environment** - Tạo môi trường triển khai tách biệt
+4. **Preview** - 🆕 Luôn preview các thay đổi hạ tầng trước (thực hành an toàn)
 5. **Provision** - Tạo/cập nhật tài nguyên Azure
 6. **Deploy** - Đẩy mã ứng dụng của bạn
-7. **Monitor** - Quan sát hiệu suất ứng dụng
+7. **Monitor** - Quan sát hiệu năng ứng dụng
 8. **Iterate** - Thực hiện thay đổi và triển khai lại mã
 9. **Cleanup** - Xóa tài nguyên khi hoàn tất
 
-### 4. Quản lý môi trường
+### 4. Quản lý Môi trường
 ```bash
 # Tạo và quản lý các môi trường
 azd env new <environment-name>
@@ -306,29 +307,43 @@ azd env select <environment-name>
 azd env list
 ```
 
-### 5. Tiện ích mở rộng và lệnh AI
+### 5. Phần mở rộng và lệnh AI
 
-azd sử dụng hệ thống extension để thêm các khả năng vượt ra ngoài CLI cốt lõi. Điều này đặc biệt hữu ích cho khối lượng công việc AI:
+azd sử dụng hệ thống phần mở rộng để thêm các khả năng vượt ra ngoài CLI lõi. Điều này đặc biệt hữu ích cho các workload AI:
 
 ```bash
-# Liệt kê các phần mở rộng có sẵn
+# Liệt kê các tiện ích mở rộng có sẵn
 azd extension list
 
-# Cài đặt phần mở rộng Foundry agents
+# Cài đặt tiện ích mở rộng Foundry agents
 azd extension install azure.ai.agents
 
-# Khởi tạo một dự án tác nhân AI từ tệp manifest
+# Khởi tạo dự án agent AI từ tệp manifest
 azd ai agent init -m agent-manifest.yaml
 
-# Khởi động máy chủ MCP cho phát triển hỗ trợ AI (Alpha)
+# Kiểm tra một agent đã được triển khai (hiển thị độ trễ và thời gian đến byte đầu tiên)
+azd ai agent invoke
+
+# Khởi động máy chủ MCP cho phát triển hỗ trợ bởi AI (Alpha)
 azd mcp start
 ```
 
-> Các tiện ích mở rộng được trình bày chi tiết trong [Chương 2: Phát triển theo hướng AI](../chapter-02-ai-development/agents.md) và tài liệu tham khảo [Lệnh AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
+**Vòng đời tác nhân, từ đầu đến cuối.** Khi bạn đã cài đặt `azure.ai.agents`, một quy trình duy nhất đưa bạn từ ý tưởng đến một tác nhân đang chạy và được giám sát. Bạn không cần tất cả những điều này ngay ngày đầu—chỉ cần biết chúng tồn tại:
+
+| Stage | Command | What it does |
+|-------|---------|--------------|
+| **Scaffold** | `azd ai agent init -m <manifest>` | Tạo một dự án agent từ một manifest |
+| **Test** | `azd ai agent invoke` | Gọi agent và xem thời gian phản hồi |
+| **Measure** | `azd ai agent eval generate` | Tạo bộ dữ liệu đánh giá cho agent |
+| **Improve** | `azd ai agent optimize` | Tối ưu hướng dẫn agent dựa trên dữ liệu của bạn |
+| **Inspect** | `azd ai agent endpoint show` | Xem cấu hình endpoint đang hoạt động |
+| **Clean up** | `azd ai agent delete` | Xóa một agent được host và tất cả các phiên bản của nó |
+
+> Phần mở rộng được trình bày chi tiết trong [Chương 2: Phát triển Ưu tiên AI](../chapter-02-ai-development/agents.md) và tham chiếu [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
 
 ## 📁 Cấu trúc dự án
 
-Một cấu trúc dự án azd điển hình:
+Cấu trúc dự án azd điển hình:
 ```
 my-app/
 ├── .azd/                    # azd configuration
@@ -351,7 +366,7 @@ my-app/
 ## 🔧 Tệp cấu hình
 
 ### azure.yaml
-Tệp cấu hình chính của dự án:
+Tệp cấu hình dự án chính:
 ```yaml
 name: my-awesome-app
 metadata:
@@ -388,9 +403,9 @@ Cấu hình theo môi trường:
 }
 ```
 
-## 🎪 Quy trình phổ biến với bài tập thực hành
+## 🎪 Quy trình thường gặp với bài tập thực hành
 
-> **💡 Mẹo học tập:** Thực hiện các bài tập này theo thứ tự để xây dựng kỹ năng AZD của bạn dần dần.
+> **💡 Mẹo học tập:** Thực hiện các bài tập này theo thứ tự để xây dựng kỹ năng AZD của bạn một cách có tiến triển.
 
 ### 🎯 Bài tập 1: Khởi tạo Dự án Đầu tiên của bạn
 
@@ -398,11 +413,11 @@ Cấu hình theo môi trường:
 
 **Các bước:**
 ```bash
-# Sử dụng một mẫu đã được chứng minh
+# Sử dụng mẫu đã được chứng minh
 azd init --template todo-nodejs-mongo
 
 # Khám phá các tệp được tạo
-ls -la  # Xem tất cả tệp, bao gồm cả tệp ẩn
+ls -la  # Xem tất cả các tệp bao gồm cả tệp ẩn
 
 # Các tệp chính được tạo:
 # - azure.yaml (cấu hình chính)
@@ -410,13 +425,13 @@ ls -la  # Xem tất cả tệp, bao gồm cả tệp ẩn
 # - src/ (mã ứng dụng)
 ```
 
-**✅ Thành công:** Bạn có tệp azure.yaml và các thư mục infra/ và src/
+**✅ Thành công:** Bạn có azure.yaml, thư mục infra/ và src/
 
 ---
 
 ### 🎯 Bài tập 2: Triển khai lên Azure
 
-**Mục tiêu:** Hoàn thành triển khai đầu-cuối
+**Mục tiêu:** Hoàn thành triển khai đầu cuối
 
 **Các bước:**
 ```bash
@@ -427,28 +442,28 @@ az login && azd auth login
 azd env new dev
 azd env set AZURE_LOCATION eastus
 
-# 3. Xem trước các thay đổi (KHUYẾN NGHỊ)
+# 3. Xem trước các thay đổi (ĐƯỢC KHUYÊN NGHỊ)
 azd provision --preview
 
 # 4. Triển khai tất cả
 azd up
 
-# 5. Xác minh triển khai
-azd show    # Xem URL ứng dụng của bạn
+# 5. Xác minh việc triển khai
+azd show    # 6. Xem URL ứng dụng của bạn
 ```
 
-**Thời gian dự kiến:** 10-15 phút  
+**Thời gian dự tính:** 10-15 phút  
 **✅ Thành công:** URL ứng dụng mở trong trình duyệt
 
 ---
 
 ### 🎯 Bài tập 3: Nhiều môi trường
 
-**Mục tiêu:** Triển khai tới dev và staging
+**Mục tiêu:** Triển khai lên dev và staging
 
 **Các bước:**
 ```bash
-# Đã có dev, tạo staging
+# Đã có nhánh dev, tạo nhánh staging
 azd env new staging
 azd env set AZURE_LOCATION westus2
 azd up
@@ -462,7 +477,7 @@ azd env select dev
 
 ---
 
-### 🛡️ Đặt lại hoàn toàn: `azd down --force --purge`
+### 🛡️ Làm sạch hoàn toàn: `azd down --force --purge`
 
 Khi bạn cần đặt lại hoàn toàn:
 
@@ -470,18 +485,18 @@ Khi bạn cần đặt lại hoàn toàn:
 azd down --force --purge
 ```
 
-**Nó thực hiện:**
-- `--force`: Không có lời nhắc xác nhận
-- `--purge`: Xóa tất cả trạng thái cục bộ và tài nguyên Azure
+**Nó làm gì:**
+- `--force`: Không yêu cầu xác nhận
+- `--purge`: Xóa toàn bộ trạng thái cục bộ và tài nguyên Azure
 
-**Sử dụng khi:**
+**Dùng khi:**
 - Triển khai thất bại giữa chừng
 - Chuyển đổi dự án
-- Cần bắt đầu mới
+- Cần khởi đầu mới
 
 ---
 
-## 🎪 Tham chiếu Quy trình Gốc
+## 🎪 Tài liệu tham khảo quy trình gốc
 
 ### Bắt đầu một dự án mới
 ```bash
@@ -508,34 +523,34 @@ azd up
 # Thực hiện thay đổi và triển khai lại
 azd deploy
 
-# Dọn dẹp khi xong
-azd down --force --purge # lệnh trong Azure Developer CLI là một **đặt lại hoàn toàn** cho môi trường của bạn — đặc biệt hữu ích khi bạn đang khắc phục sự cố triển khai thất bại, dọn dẹp các tài nguyên mồ côi, hoặc chuẩn bị cho một lần triển khai mới.
+# Dọn dẹp khi hoàn thành
+azd down --force --purge # lệnh trong Azure Developer CLI là một **khôi phục hoàn toàn** cho môi trường của bạn—đặc biệt hữu ích khi bạn đang khắc phục các triển khai thất bại, dọn dẹp các tài nguyên bị bỏ lại, hoặc chuẩn bị để triển khai lại từ đầu.
 ```
 
 ## Hiểu `azd down --force --purge`
-Lệnh `azd down --force --purge` là cách mạnh mẽ để loại bỏ hoàn toàn môi trường azd của bạn và tất cả tài nguyên liên quan. Dưới đây là phân tích những gì mỗi cờ thực hiện:
+Lệnh `azd down --force --purge` là một cách mạnh mẽ để phá dỡ hoàn toàn môi trường azd của bạn và tất cả tài nguyên liên quan. Dưới đây là phân tích những gì mỗi flag thực hiện:
 ```
 --force
 ```
-- Bỏ qua lời nhắc xác nhận.
-- Hữu ích cho tự động hóa hoặc scripting khi không thể nhập tay.
-- Đảm bảo quá trình dỡ bỏ tiếp tục không bị gián đoạn, ngay cả khi CLI phát hiện sự không nhất quán.
+
+- Bỏ qua các lời nhắc xác nhận.
+- Hữu ích cho tự động hóa hoặc scripting nơi không thể nhập tay.
+- Đảm bảo việc phá dỡ tiến hành không bị gián đoạn, ngay cả khi CLI phát hiện sự không nhất quán.
 
 ```
 --purge
 ```
+
 Xóa **tất cả metadata liên quan**, bao gồm:
-Trạng thái môi trường
-Thư mục cục bộ `.azure`
-Thông tin triển khai được cache
-Ngăn azd "ghi nhớ" các triển khai trước đó, điều này có thể gây ra các vấn đề như nhóm tài nguyên không khớp hoặc tham chiếu registry lỗi thời.
+Environment state
+Local `.azure` folder
+Cached deployment info
+Ngăn azd "ghi nhớ" các triển khai trước đó, điều này có thể gây ra các vấn đề như nhóm tài nguyên không khớp hoặc tham chiếu registry cũ.
 
+### Tại sao dùng cả hai?
+Khi bạn gặp bế tắc với `azd up` do trạng thái còn sót hoặc triển khai một phần, tổ hợp này đảm bảo một **khởi đầu sạch sẽ**.
 
-### Tại sao sử dụng cả hai?
-Khi bạn gặp bế tắc với `azd up` do trạng thái tồn đọng hoặc triển khai một phần, việc kết hợp này đảm bảo một **bảng trắng sạch**.
-
-Nó đặc biệt hữu ích sau khi xóa tài nguyên thủ công trong Azure portal hoặc khi chuyển đổi templates, môi trường hoặc quy ước đặt tên resource group.
-
+Nó đặc biệt hữu ích sau khi xóa tài nguyên thủ công trong Azure portal hoặc khi thay đổi template, môi trường, hoặc quy ước đặt tên nhóm tài nguyên.
 
 ### Quản lý nhiều môi trường
 ```bash
@@ -544,20 +559,20 @@ azd env new staging
 azd env select staging
 azd up
 
-# Chuyển trở lại dev
+# Chuyển trở lại sang môi trường dev
 azd env select dev
 
 # So sánh các môi trường
 azd env list
 ```
 
-## 🔐 Xác thực và Chứng thực
+## 🔐 Xác thực và thông tin đăng nhập
 
-Hiểu về xác thực là then chốt để triển khai azd thành công. Azure sử dụng nhiều phương thức xác thực, và azd tận dụng cùng chuỗi chứng thực được các công cụ Azure khác sử dụng.
+Hiểu xác thực là điều quan trọng cho các triển khai azd thành công. Azure sử dụng nhiều phương thức xác thực, và azd tận dụng cùng chuỗi thông tin đăng nhập được sử dụng bởi các công cụ Azure khác.
 
 ### Xác thực Azure CLI (`az login`)
 
-Trước khi dùng azd, bạn cần xác thực với Azure. Phương pháp phổ biến nhất là sử dụng Azure CLI:
+Trước khi sử dụng azd, bạn cần xác thực với Azure. Phương thức phổ biến nhất là sử dụng Azure CLI:
 
 ```bash
 # Đăng nhập tương tác (mở trình duyệt)
@@ -582,28 +597,29 @@ az account set --subscription <subscription-id>
 ### Luồng xác thực
 1. **Đăng nhập tương tác**: Mở trình duyệt mặc định của bạn để xác thực
 2. **Device Code Flow**: Dành cho môi trường không có truy cập trình duyệt
-3. **Service Principal**: Dành cho tình huống tự động hóa và CI/CD
-4. **Managed Identity**: Dành cho ứng dụng chạy trên Azure
+3. **Service Principal**: Cho tự động hóa và kịch bản CI/CD
+4. **Managed Identity**: Cho các ứng dụng được host trên Azure
 
 ### Chuỗi DefaultAzureCredential
 
-`DefaultAzureCredential` là một loại chứng thực cung cấp trải nghiệm xác thực đơn giản hóa bằng cách tự động thử nhiều nguồn chứng thực theo một thứ tự cụ thể:
+`DefaultAzureCredential` là một loại credential cung cấp trải nghiệm xác thực đơn giản hóa bằng cách tự động thử nhiều nguồn credential theo một thứ tự cụ thể:
 
-#### Thứ tự chuỗi chứng thực
+#### Thứ tự chuỗi credential
 ```mermaid
 graph TD
-    A[Chứng thực Azure Mặc định] --> B[Biến Môi Trường]
+    A[Chứng thực Azure Mặc định] --> B[Biến môi trường]
     B --> C[Định danh Workload]
-    C --> D[Định danh được Quản lý]
+    C --> D[Định danh được quản lý]
     D --> E[Visual Studio]
     E --> F[Visual Studio Code]
     F --> G[Azure CLI]
     G --> H[Azure PowerShell]
-    H --> I[Trình duyệt Tương tác]
+    H --> I[Trình duyệt tương tác]
 ```
+
 #### 1. Biến môi trường
 ```bash
-# Thiết lập các biến môi trường cho service principal
+# Đặt biến môi trường cho service principal
 export AZURE_CLIENT_ID="<app-id>"
 export AZURE_CLIENT_SECRET="<password>"
 export AZURE_TENANT_ID="<tenant-id>"
@@ -612,11 +628,11 @@ export AZURE_TENANT_ID="<tenant-id>"
 #### 2. Workload Identity (Kubernetes/GitHub Actions)
 Được sử dụng tự động trong:
 - Azure Kubernetes Service (AKS) với Workload Identity
-- GitHub Actions với OIDC federation
+- GitHub Actions với liên kết OIDC
 - Các kịch bản danh tính liên kết khác
 
 #### 3. Managed Identity
-Cho các tài nguyên Azure như:
+Dành cho các tài nguyên Azure như:
 - Virtual Machines
 - App Service
 - Azure Functions
@@ -630,18 +646,18 @@ az account show --query "user.type" --output tsv
 
 #### 4. Tích hợp công cụ phát triển
 - **Visual Studio**: Tự động sử dụng tài khoản đã đăng nhập
-- **VS Code**: Sử dụng chứng thực của extension Azure Account
-- **Azure CLI**: Sử dụng chứng thực `az login` (phổ biến nhất cho phát triển cục bộ)
+- **VS Code**: Sử dụng credential từ extension Azure Account
+- **Azure CLI**: Sử dụng credential `az login` (phổ biến nhất cho phát triển cục bộ)
 
-### Cài đặt xác thực AZD
+### Thiết lập xác thực AZD
 
 ```bash
 # Phương pháp 1: Sử dụng Azure CLI (Khuyến nghị cho phát triển)
 az login
-azd auth login  # Sử dụng thông tin xác thực Azure CLI hiện có
+azd auth login  # Sử dụng các thông tin xác thực Azure CLI hiện có
 
-# Phương pháp 2: Xác thực trực tiếp azd
-azd auth login --use-device-code  # Dành cho môi trường không tương tác
+# Phương pháp 2: Xác thực azd trực tiếp
+azd auth login --use-device-code  # Dành cho các môi trường không có giao diện người dùng
 
 # Phương pháp 3: Kiểm tra trạng thái xác thực
 azd auth login --check-status
@@ -653,20 +669,20 @@ azd auth login
 
 ### Thực hành tốt nhất về xác thực
 
-#### Cho phát triển cục bộ
+#### Đối với phát triển cục bộ
 ```bash
 # 1. Đăng nhập bằng Azure CLI
 az login
 
-# 2. Xác minh đăng ký chính xác
+# 2. Xác minh đăng ký đúng
 az account show
 az account set --subscription "Your Subscription Name"
 
-# 3. Sử dụng azd với thông tin xác thực hiện có
+# 3. Sử dụng azd với thông tin đăng nhập hiện có
 azd auth login
 ```
 
-#### Cho pipeline CI/CD
+#### For CI/CD Pipelines
 ```yaml
 # GitHub Actions example
 - name: Azure Login
@@ -682,13 +698,13 @@ azd auth login
     azd up --no-prompt
 ```
 
-#### Cho môi trường sản xuất
-- Sử dụng **Managed Identity** khi chạy trên tài nguyên Azure
-- Sử dụng **Service Principal** cho các tình huống tự động hóa
-- Tránh lưu trữ chứng thực trong mã hoặc tệp cấu hình
-- Sử dụng **Azure Key Vault** cho cấu hình nhạy cảm
+#### Cho Môi trường Sản xuất
+- Use **Managed Identity** when running on Azure resources
+- Use **Service Principal** for automation scenarios
+- Avoid storing credentials in code or configuration files
+- Use **Azure Key Vault** for sensitive configuration
 
-### Các vấn đề xác thực phổ biến và giải pháp
+### Các Vấn đề Xác thực Thường Gặp và Giải pháp
 
 #### Vấn đề: "No subscription found"
 ```bash
@@ -704,8 +720,8 @@ azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 az role assignment list --assignee $(az account show --query user.name --output tsv)
 
 # Các vai trò cần thiết phổ biến:
-# - Contributor (cho quản lý tài nguyên)
-# - User Access Administrator (cho việc gán vai trò)
+# - Contributor (để quản lý tài nguyên)
+# - User Access Administrator (để gán vai trò)
 ```
 
 #### Vấn đề: "Token expired"
@@ -717,11 +733,11 @@ azd auth logout
 azd auth login
 ```
 
-### Xác thực trong các kịch bản khác nhau
+### Xác thực trong các Kịch bản Khác nhau
 
 #### Phát triển cục bộ
 ```bash
-# Tài khoản phát triển cá nhân
+# tài khoản phát triển cá nhân
 az login
 azd auth login
 ```
@@ -733,26 +749,27 @@ az login --tenant contoso.onmicrosoft.com
 azd auth login
 ```
 
-#### Kịch bản đa thuê
+#### Kịch bản đa tenant
 ```bash
 # Chuyển đổi giữa các tenant
 az login --tenant tenant1.onmicrosoft.com
-# Triển khai tới tenant 1
+# Triển khai đến tenant 1
 azd up
 
 az login --tenant tenant2.onmicrosoft.com  
-# Triển khai tới tenant 2
+# Triển khai đến tenant 2
 azd up
 ```
 
-### Cân nhắc bảo mật
-1. **Lưu trữ thông tin đăng nhập**: Không bao giờ lưu thông tin đăng nhập trong mã nguồn
-2. **Hạn chế phạm vi**: Sử dụng nguyên tắc ít quyền nhất cho service principal
-3. **Xoay vòng mã thông báo**: Thường xuyên xoay các secret của service principal
-4. **Theo dõi kiểm toán**: Giám sát các hoạt động xác thực và triển khai
-5. **Bảo mật mạng**: Sử dụng private endpoints khi có thể
+### Các lưu ý về Bảo mật
 
-### Khắc phục sự cố xác thực
+1. **Credential Storage**: Never store credentials in source code
+2. **Scope Limitation**: Use least-privilege principle for service principals
+3. **Token Rotation**: Regularly rotate service principal secrets
+4. **Audit Trail**: Monitor authentication and deployment activities
+5. **Network Security**: Use private endpoints when possible
+
+### Khắc phục sự cố Xác thực
 
 ```bash
 # Gỡ lỗi sự cố xác thực
@@ -762,8 +779,8 @@ az account get-access-token
 
 # Các lệnh chẩn đoán phổ biến
 whoami                          # Ngữ cảnh người dùng hiện tại
-az ad signed-in-user show      # Chi tiết người dùng Azure AD
-az group list                  # Kiểm tra truy cập tài nguyên
+az ad signed-in-user show      # Chi tiết người dùng Microsoft Entra ID
+az group list                  # Kiểm tra quyền truy cập tài nguyên
 ```
 
 ## Hiểu về `azd down --force --purge`
@@ -777,22 +794,22 @@ azd init --help               # Tùy chọn khởi tạo
 
 ### Quản lý Dự án
 ```bash
-azd show                     # Tổng quan về dự án
+azd show                     # Tổng quan dự án
 azd env list                # Các môi trường có sẵn và mặc định được chọn
 azd config show            # Cài đặt cấu hình
 ```
 
 ### Giám sát
 ```bash
-azd monitor                  # Mở phần Giám sát trên cổng Azure
+azd monitor                  # Mở phần giám sát trong Azure Portal
 azd monitor --logs           # Xem nhật ký ứng dụng
-azd monitor --live           # Xem số liệu thời gian thực
+azd monitor --live           # Xem số liệu trực tiếp
 azd pipeline config          # Thiết lập CI/CD
 ```
 
-## Các thực hành tốt nhất
+## Những Thực hành Tốt nhất
 
-### 1. Sử dụng tên có ý nghĩa
+### 1. Sử dụng Tên có Ý nghĩa
 ```bash
 # Tốt
 azd env new production-east
@@ -804,101 +821,101 @@ azd init --template template1
 ```
 
 ### 2. Tận dụng mẫu
-- Bắt đầu với các mẫu sẵn có
-- Tùy chỉnh theo nhu cầu của bạn
-- Tạo các mẫu có thể tái sử dụng cho tổ chức của bạn
+- Start with existing templates
+- Customize for your needs
+- Create reusable templates for your organization
 
-### 3. Cô lập môi trường
-- Sử dụng môi trường riêng cho dev/staging/prod
-- Không bao giờ triển khai trực tiếp lên production từ máy cục bộ
-- Sử dụng CI/CD pipelines cho các triển khai production
+### 3. Cách ly Môi trường
+- Use separate environments for dev/staging/prod
+- Never deploy directly to production from local machine
+- Use CI/CD pipelines for production deployments
 
-### 4. Quản lý cấu hình
-- Sử dụng biến môi trường cho dữ liệu nhạy cảm
-- Lưu cấu hình trong hệ thống quản lý phiên bản
-- Ghi tài liệu các cài đặt theo từng môi trường
+### 4. Quản lý Cấu hình
+- Use environment variables for sensitive data
+- Keep configuration in version control
+- Document environment-specific settings
 
-## Lộ trình học tập
+## Lộ trình Học tập
 
 ### Người mới (Tuần 1-2)
-1. Cài đặt azd và xác thực
-2. Triển khai một mẫu đơn giản
-3. Hiểu cấu trúc dự án
-4. Học các lệnh cơ bản (up, down, deploy)
+1. Install azd and authenticate
+2. Deploy a simple template
+3. Understand project structure
+4. Learn basic commands (up, down, deploy)
 
 ### Trung cấp (Tuần 3-4)
-1. Tùy chỉnh các mẫu
-2. Quản lý nhiều môi trường
-3. Hiểu mã hạ tầng
-4. Thiết lập pipeline CI/CD
+1. Customize templates
+2. Manage multiple environments
+3. Understand infrastructure code
+4. Set up CI/CD pipelines
 
 ### Nâng cao (Tuần 5+)
-1. Tạo các mẫu tùy chỉnh
-2. Các mẫu kiến trúc hạ tầng nâng cao
-3. Triển khai đa vùng
-4. Cấu hình chuẩn doanh nghiệp
+1. Create custom templates
+2. Advanced infrastructure patterns
+3. Multi-region deployments
+4. Enterprise-grade configurations
 
 ## Bước tiếp theo
 
 **📖 Tiếp tục Học Chương 1:**
-- [Cài đặt & Thiết lập](installation.md) - Cài đặt azd và cấu hình
-- [Dự án đầu tiên của bạn](first-project.md) - Hoàn thành hướng dẫn thực hành
-- [Hướng dẫn cấu hình](configuration.md) - Các tùy chọn cấu hình nâng cao
+- [Installation & Setup](installation.md) - Cài đặt và cấu hình azd
+- [Your First Project](first-project.md) - Hoàn thành bài hướng dẫn thực hành
+- [Configuration Guide](configuration.md) - Tùy chọn cấu hình nâng cao
 
-**🎯 Sẵn sàng cho chương tiếp theo?**
-- [Chương 2: Phát triển ưu tiên AI](../chapter-02-ai-development/microsoft-foundry-integration.md) - Bắt đầu xây dựng ứng dụng AI
+**🎯 Sẵn sàng cho Chương sau?**
+- [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md) - Bắt đầu xây dựng ứng dụng AI
 
-## Tài nguyên bổ sung
+## Tài Nguyên Bổ sung
 
-- [Tổng quan Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Thư viện mẫu](https://azure.github.io/awesome-azd/)
-- [Ví dụ cộng đồng](https://github.com/Azure-Samples)
+- [Azure Developer CLI Overview](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Template Gallery](https://azure.github.io/awesome-azd/)
+- [Community Samples](https://github.com/Azure-Samples)
 
 ---
 
-## 🙋 Câu hỏi thường gặp
+## 🙋 Câu hỏi Thường Gặp
 
-### Câu hỏi chung
+### Câu hỏi Chung
 
 **Q: Sự khác biệt giữa AZD và Azure CLI là gì?**
 
-A: Azure CLI (`az`) dùng để quản lý từng tài nguyên Azure. AZD (`azd`) dùng để quản lý toàn bộ ứng dụng:
+A: Azure CLI (`az`) dùng để quản lý các tài nguyên Azure riêng lẻ. AZD (`azd`) dùng để quản lý toàn bộ ứng dụng:
 
 ```bash
-# Azure CLI - quản lý tài nguyên cấp thấp
+# Azure CLI - Quản lý tài nguyên cấp thấp
 az webapp create --name myapp --resource-group rg
 az sql server create --name myserver --resource-group rg
-# ...cần thêm nhiều lệnh nữa
+# ...cần thêm nhiều lệnh
 
-# AZD - quản lý ở mức ứng dụng
+# AZD - Quản lý ở cấp ứng dụng
 azd up  # Triển khai toàn bộ ứng dụng với tất cả tài nguyên
 ```
 
-**Hãy nghĩ như sau:**
-- `az` = Thao tác trên từng viên Lego
+**Hãy nghĩ theo cách này:**
+- `az` = Thao tác trên từng viên gạch Lego riêng lẻ
 - `azd` = Làm việc với cả bộ Lego hoàn chỉnh
 
 ---
 
-**Q: Tôi có cần biết Bicep hoặc Terraform để dùng AZD không?**
+**Q: Tôi có cần biết Bicep hoặc Terraform để sử dụng AZD không?**
 
 A: Không! Bắt đầu với các mẫu:
 ```bash
-# Sử dụng mẫu có sẵn - không cần kiến thức về IaC
+# Sử dụng mẫu hiện có - không cần kiến thức về IaC
 azd init --template todo-nodejs-mongo
 azd up
 ```
 
-Bạn có thể học Bicep sau để tùy chỉnh hạ tầng. Các mẫu cung cấp ví dụ hoạt động để bạn học hỏi.
+Bạn có thể học Bicep sau để tùy chỉnh hạ tầng. Các mẫu cung cấp ví dụ hoạt động để học hỏi.
 
 ---
 
-**Q: Chi phí để chạy các mẫu AZD là bao nhiêu?**
+**Q: Chi phí chạy các mẫu AZD là bao nhiêu?**
 
-A: Chi phí thay đổi theo từng mẫu. Hầu hết các mẫu phát triển có chi phí $50-150/tháng:
+A: Chi phí thay đổi theo mẫu. Hầu hết các mẫu phát triển có chi phí $50-150/tháng:
 
 ```bash
-# Xem trước chi phí trước khi triển khai
+# Xem chi phí trước khi triển khai
 azd provision --preview
 
 # Luôn dọn dẹp khi không sử dụng
@@ -906,22 +923,22 @@ azd down --force --purge  # Xóa tất cả tài nguyên
 ```
 
 **Mẹo chuyên gia:** Sử dụng các tầng miễn phí khi có thể:
-- App Service: tầng F1 (Miễn phí)
-- Microsoft Foundry Models: Azure OpenAI 50,000 tokens/tháng miễn phí
-- Cosmos DB: tầng miễn phí 1000 RU/s
+- App Service: F1 (Free) tier
+- Microsoft Foundry Models: Azure OpenAI 50,000 tokens/month free
+- Cosmos DB: 1000 RU/s free tier
 
 ---
 
-**Q: Tôi có thể dùng AZD với các tài nguyên Azure hiện có không?**
+**Q: Tôi có thể sử dụng AZD với các tài nguyên Azure hiện có không?**
 
-A: Có, nhưng bắt đầu mới thường dễ hơn. AZD hoạt động tốt nhất khi nó quản lý toàn bộ vòng đời. Đối với các tài nguyên hiện có:
+A: Có, nhưng bắt đầu từ đầu thường dễ hơn. AZD hoạt động tốt nhất khi quản lý toàn bộ vòng đời. Với các tài nguyên hiện có:
 
 ```bash
 # Tùy chọn 1: Nhập các tài nguyên hiện có (nâng cao)
 azd init
-# Sau đó sửa đổi infra/ để tham chiếu tới các tài nguyên hiện có
+# Sau đó chỉnh sửa infra/ để tham chiếu tới các tài nguyên hiện có
 
-# Tùy chọn 2: Bắt đầu mới (khuyến nghị)
+# Tùy chọn 2: Bắt đầu mới (được khuyến nghị)
 azd init --template matching-your-stack
 azd up  # Tạo môi trường mới
 ```
@@ -934,34 +951,34 @@ A: Commit dự án AZD lên Git (nhưng KHÔNG commit thư mục .azure):
 
 ```bash
 # Đã có trong .gitignore theo mặc định
-.azure/        # Chứa các bí mật và dữ liệu môi trường
-*.env          # Biến môi trường
+.azure/        # Chứa bí mật và dữ liệu môi trường
+*.env          # Các biến môi trường
 
-# Các thành viên trong nhóm khi đó:
+# Các thành viên nhóm lúc đó:
 git clone <your-repo>
 azd auth login
 azd env new <their-name>-dev
 azd up
 ```
 
-Mọi người sẽ có hạ tầng giống nhau từ cùng một mẫu.
+Mọi người nhận được cơ sở hạ tầng giống hệt từ cùng một mẫu.
 
 ---
 
-### Câu hỏi khắc phục sự cố
+### Câu hỏi Khắc phục sự cố
 
-**Q: "azd up" bị lỗi một nửa chừng. Tôi nên làm gì?**
+**Q: "azd up" bị lỗi giữa chừng. Tôi nên làm gì?**
 
-A: Kiểm tra lỗi, sửa nó, rồi thử lại:
+A: Kiểm tra lỗi, sửa rồi thử lại:
 
 ```bash
 # Xem nhật ký chi tiết
 azd show
 
-# Sửa lỗi thường gặp:
+# Các cách khắc phục phổ biến:
 
 # 1. Nếu vượt quá hạn mức:
-azd env set AZURE_LOCATION "westus2"  # Thử vùng khác
+azd env set AZURE_LOCATION "westus2"  # Thử khu vực khác
 
 # 2. Nếu xung đột tên tài nguyên:
 azd down --force --purge  # Xóa sạch
@@ -973,7 +990,7 @@ azd auth login
 azd up
 ```
 
-**Vấn đề phổ biến nhất:** Đã chọn subscription Azure sai
+**Vấn đề phổ biến nhất:** Đã chọn sai đăng ký Azure
 ```bash
 az account list --output table
 az account set --subscription "<correct-subscription>"
@@ -981,7 +998,7 @@ az account set --subscription "<correct-subscription>"
 
 ---
 
-**Q: Làm sao để chỉ triển khai thay đổi mã mà không tạo lại hạ tầng?**
+**Q: Làm sao để chỉ triển khai các thay đổi mã mà không reprovisioning?**
 
 A: Dùng `azd deploy` thay vì `azd up`:
 
@@ -999,23 +1016,23 @@ So sánh tốc độ:
 
 ---
 
-**Q: Tôi có thể tùy chỉnh các mẫu hạ tầng không?**
+**Q: Tôi có thể tùy chỉnh mẫu hạ tầng không?**
 
-A: Có! Chỉnh sửa các file Bicep trong `infra/`:
+A: Có! Chỉnh sửa các tệp Bicep trong `infra/`:
 
 ```bash
-# Sau azd init
+# Sau khi chạy azd init
 cd infra/
 code main.bicep  # Chỉnh sửa trong VS Code
 
-# Xem trước thay đổi
+# Xem trước các thay đổi
 azd provision --preview
 
-# Áp dụng thay đổi
+# Áp dụng các thay đổi
 azd provision
 ```
 
-**Mẹo:** Bắt đầu nhỏ - thay đổi SKU trước:
+**Mẹo:** Bắt đầu nhỏ - thay đổi SKUs trước:
 ```bicep
 // infra/main.bicep
 sku: {
@@ -1025,32 +1042,32 @@ sku: {
 
 ---
 
-**Q: Làm sao xóa mọi thứ AZD đã tạo?**
+**Q: Làm sao để xóa mọi thứ AZD đã tạo?**
 
 A: Một lệnh sẽ xóa tất cả tài nguyên:
 
 ```bash
 azd down --force --purge
 
-# Điều này xóa:
+# Việc này sẽ xóa:
 # - Tất cả tài nguyên Azure
 # - Nhóm tài nguyên
 # - Trạng thái môi trường cục bộ
 # - Dữ liệu triển khai được lưu trong bộ nhớ đệm
 ```
 
-**Luôn chạy lệnh này khi:**
-- Hoàn thành việc thử nghiệm một mẫu
-- Chuyển sang dự án khác
-- Muốn bắt đầu lại từ đầu
+**Luôn chạy điều này khi:**
+- Finished testing a template
+- Switching to different project
+- Want to start fresh
 
-**Tiết kiệm chi phí:** Xóa tài nguyên không dùng = $0 chi phí
+**Tiết kiệm chi phí:** Xóa tài nguyên không dùng = $0 phí
 
 ---
 
 **Q: Nếu tôi vô tình xóa tài nguyên trong Azure Portal thì sao?**
 
-A: Trạng thái AZD có thể bị lệch. Cách làm là bắt đầu lại từ đầu:
+A: Trạng thái AZD có thể bị lệch. Cách làm là làm mới hoàn toàn:
 
 ```bash
 # 1. Xóa trạng thái cục bộ
@@ -1059,15 +1076,15 @@ azd down --force --purge
 # 2. Bắt đầu lại từ đầu
 azd up
 
-# Phương án thay thế: Cho AZD phát hiện và khắc phục
+# Lựa chọn khác: Để AZD phát hiện và khắc phục
 azd provision  # Sẽ tạo các tài nguyên bị thiếu
 ```
 
 ---
 
-### Câu hỏi nâng cao
+### Câu hỏi Nâng cao
 
-**Q: Tôi có thể dùng AZD trong pipeline CI/CD không?**
+**Q: Tôi có thể sử dụng AZD trong pipeline CI/CD không?**
 
 A: Có! Ví dụ GitHub Actions:
 
@@ -1103,32 +1120,32 @@ jobs:
 
 **Q: Làm sao xử lý secret và dữ liệu nhạy cảm?**
 
-A: AZD tích hợp tự động với Azure Key Vault:
+A: AZD tích hợp với Azure Key Vault tự động:
 
 ```bash
-# Bí mật được lưu trong Key Vault, không lưu trong mã
+# Bí mật được lưu trong Key Vault, không phải trong mã
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)"
 
 # AZD tự động:
 # 1. Tạo Key Vault
-# 2. Lưu bí mật
-# 3. Cấp quyền truy cập cho ứng dụng thông qua Managed Identity
-# 4. Chèn tại thời gian chạy
+# 2. Lưu trữ bí mật
+# 3. Cấp quyền truy cập cho ứng dụng thông qua Danh tính được quản lý
+# 4. Chèn vào thời gian chạy
 ```
 
 **Không bao giờ commit:**
 - Thư mục `.azure/` (chứa dữ liệu môi trường)
-- Các file `.env` (secret cục bộ)
-- Chuỗi kết nối
+- Các tệp `.env` (local secrets)
+- Connection strings
 
 ---
 
-**Q: Tôi có thể triển khai tới nhiều vùng không?**
+**Q: Tôi có thể triển khai tới nhiều khu vực không?**
 
-A: Có, tạo môi trường cho mỗi vùng:
+A: Có, tạo môi trường cho từng khu vực:
 
 ```bash
-# Môi trường Đông Hoa Kỳ
+# Môi trường miền Đông Hoa Kỳ
 azd env new prod-eastus
 azd env set AZURE_LOCATION eastus
 azd up
@@ -1142,19 +1159,20 @@ azd up
 azd env list
 ```
 
-Đối với ứng dụng đa vùng thực sự, tùy chỉnh các mẫu Bicep để triển khai tới nhiều vùng cùng lúc.
+Để thực sự triển khai đa vùng, tùy chỉnh các mẫu Bicep để triển khai tới nhiều khu vực cùng lúc.
 
 ---
 
-**Q: Tôi có thể nhận trợ giúp ở đâu nếu bị mắc kẹt?**
+**Q: Tôi có thể tìm trợ giúp ở đâu nếu bị mắc kẹt?**
 
 1. **Tài liệu AZD:** https://learn.microsoft.com/azure/developer/azure-developer-cli/
 2. **GitHub Issues:** https://github.com/Azure/azure-dev/issues
-3. **Discord:** [Azure Discord](https://discord.gg/microsoft-azure) - #azure-developer-cli channel
-4. **Stack Overflow:** Tag `azure-developer-cli`
-5. **Khóa học này:** [Hướng dẫn khắc phục sự cố](../chapter-07-troubleshooting/common-issues.md)
+3. **Discord:** [Azure Discord](https://discord.gg/microsoft-azure) - kênh #azure-developer-cli
+4. **Stack Overflow:** Dùng tag `azure-developer-cli`
+5. **Khóa học này:** [Hướng dẫn Khắc phục Sự cố](../chapter-07-troubleshooting/common-issues.md)
 
-**Mẹo chuyên gia:** Trước khi hỏi, chạy: ```bash
+**Mẹo chuyên gia:** Trước khi hỏi, chạy:
+```bash
 azd show       # Hiển thị trạng thái hiện tại
 azd version    # Hiển thị phiên bản của bạn
 ```
@@ -1164,35 +1182,35 @@ Bao gồm thông tin này trong câu hỏi của bạn để được trợ giú
 
 ## 🎓 Tiếp theo là gì?
 
-Bây giờ bạn đã hiểu các nguyên tắc cơ bản của AZD. Chọn con đường của bạn:
+Bây giờ bạn đã hiểu những nguyên tắc cơ bản của AZD. Chọn hướng đi của bạn:
 
-### 🎯 Dành cho người mới:
-1. **Tiếp theo:** [Cài đặt & Thiết lập](installation.md) - Cài đặt AZD trên máy của bạn
-2. **Sau đó:** [Dự án đầu tiên của bạn](first-project.md) - Triển khai ứng dụng đầu tiên của bạn
+### 🎯 Dành cho Người mới bắt đầu:
+1. **Tiếp theo:** [Installation & Setup](installation.md) - Install AZD on your machine
+2. **Sau đó:** [Your First Project](first-project.md) - Deploy your first app
 3. **Thực hành:** Hoàn thành cả 3 bài tập trong bài học này
 
-### 🚀 Dành cho nhà phát triển AI:
-1. **Bỏ tới:** [Chương 2: Phát triển ưu tiên AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+### 🚀 Dành cho Nhà phát triển AI:
+1. **Chuyển đến:** [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 2. **Triển khai:** Bắt đầu với `azd init --template get-started-with-ai-chat`
 3. **Học:** Xây dựng trong khi triển khai
 
-### 🏗️ Dành cho nhà phát triển có kinh nghiệm:
-1. **Xem lại:** [Hướng dẫn cấu hình](configuration.md) - Cài đặt nâng cao
-2. **Khám phá:** [Hạ tầng như mã](../chapter-04-infrastructure/provisioning.md) - Tìm hiểu sâu về Bicep
-3. **Xây dựng:** Tạo các mẫu tùy chỉnh cho stack của bạn
+### 🏗️ Dành cho Nhà phát triển Kinh nghiệm:
+1. **Xem lại:** [Configuration Guide](configuration.md) - Advanced settings
+2. **Khám phá:** [Infrastructure as Code](../chapter-04-infrastructure/provisioning.md) - Bicep deep dive
+3. **Xây dựng:** Create custom templates for your stack
 
 ---
 
-**Điều hướng chương:**
-- **📚 Trang chính khóa học**: [AZD Dành cho Người mới](../../README.md)
-- **📖 Chương hiện tại**: Chapter 1 - Foundation & Quick Start  
-- **⬅️ Trước**: [Tổng quan khóa học](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Tiếp theo**: [Cài đặt & Thiết lập](installation.md)
-- **🚀 Chương tiếp theo**: [Chương 2: Phát triển ưu tiên AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Điều hướng Chương:**
+- **📚 Trang chủ Khóa học**: [AZD For Beginners](../../README.md)
+- **📖 Chương hiện tại**: Chương 1 - Foundation & Quick Start  
+- **⬅️ Trước**: [Course Overview](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Tiếp theo**: [Installation & Setup](installation.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Miễn trừ trách nhiệm**:
-Văn bản này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi nỗ lực đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ gốc của nó nên được coi là nguồn thông tin có thẩm quyền. Đối với những thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch chuyên nghiệp do con người thực hiện. Chúng tôi không chịu trách nhiệm cho bất kỳ hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+**Tuyên bố miễn trừ trách nhiệm**:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng bản dịch tự động có thể chứa lỗi hoặc sai sót. Tài liệu gốc bằng ngôn ngữ gốc nên được coi là nguồn tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

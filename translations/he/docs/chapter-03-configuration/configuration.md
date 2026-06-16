@@ -1,72 +1,72 @@
 # מדריך תצורה
 
-**ניווט פרקים:**
-- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+**ניווט בפרקים:**
+- **📚 עמוד הקורס**: [AZD למתחילים](../../README.md)
 - **📖 הפרק הנוכחי**: פרק 3 - תצורה ואימות
-- **⬅️ הקודם**: [הפרויקט הראשון שלך](first-project.md)
+- **⬅️ קודם**: [הפרויקט הראשון שלך](first-project.md)
 - **➡️ הבא**: [מדריך פריסה](../chapter-04-infrastructure/deployment-guide.md)
-- **🚀 הפרק הבא**: [פרק 4: תשתית כקוד](../chapter-04-infrastructure/deployment-guide.md)
+- **🚀 פרק הבא**: [פרק 4: תשתית כקוד](../chapter-04-infrastructure/deployment-guide.md)
 
 ## מבוא
 
-מדריך מקיף זה מכסה את כל ההיבטים של תצורת Azure Developer CLI לזרימות עבודה מיטביות בפיתוח ופריסה. תלמדו על היררכיית התצורה, ניהול סביבות, שיטות אימות, ותבניות תצורה מתקדמות שמאפשרות פריסות Azure יעילות ובטוחות.
+המדריך המקיף הזה מכסה את כל ההיבטים של תצורת Azure Developer CLI עבור זרימות עבודה מיטביות לפיתוח ופריסה. תלמד על היררכיית התצורה, ניהול סביבות, שיטות אימות ודפוסי תצורה מתקדמים שמאפשרים פריסות Azure יעילות ומאובטחות.
 
-## מטרות הלמידה
+## מטרות הלימוד
 
-בסוף השיעור הזה, תוכלו:
-- לשלוט בהיררכיית התצורה של azd ולהבין כיצד העדיפויות מוגדרות
-- להגדיר הגדרות כלליות ופרויקט ספציפיות בצורה יעילה
+בסוף השיעור הזה, תוכל:
+- לשלוט בהיררכיית תצורת azd ולהבין כיצד מועדפות ההגדרות
+- להגדיר הגדרות גלובליות וספציפיות לפרויקט בצורה אפקטיבית
 - לנהל סביבות מרובות עם תצורות שונות
-- ליישם תבניות אימות והרשאה מאובטחות
-- להבין תבניות תצורה מתקדמות לתרחישים מורכבים
+- ליישם דפוסי אימות והרשאה מאובטחים
+- להבין דפוסי תצורה מתקדמים לתרחישים מורכבים
 
-## תוצאות הלמידה
+## תוצאות הלימוד
 
-לאחר שתסיימו שיעור זה, תוכלו:
-- להגדיר את azd לזרימות עבודה מיטביות בפיתוח
-- להקים ולנהל סביבות פריסה מרובות
-- ליישם פרקטיקות ניהול תצורה מאובטחות
-- לפתור בעיות הקשורות לתצורה
-- להתאים אישית את התנהגות azd לדרישות ארגוניות ספציפיות
+לאחר השלמת השיעור, תוכל:
+- להגדיר את azd לזרימות עבודה מיטביות לפיתוח
+- להגדיר ולנהל סביבות פריסה מרובות
+- ליישם שיטות ניהול תצורה מאובטחות
+- לטפל בבעיות הקשורות לתצורה
+- להתאים את התנהגות azd לדרישות ארגוניות ספציפיות
 
-מדריך מקיף זה מכסה את כל ההיבטים של תצורת Azure Developer CLI לזרימות עבודה מיטביות בפיתוח ופריסה.
+המדריך המקיף הזה מכסה את כל ההיבטים של תצורת Azure Developer CLI עבור זרימות עבודה מיטביות לפיתוח ופריסה.
 
 ## הבנת סוכני AI בפרויקט azd
 
-אם אתם חדשים לעולם סוכני ה-AI, הנה דרך פשוטה לחשוב עליהם בתוך עולם azd.
+אם אתה חדש בסוכני AI, הנה דרך פשוטה לחשוב עליהם בתוך העולם של azd.
 
 ### מהו סוכן?
 
-סוכן הוא תוכנה שיכולה לקבל בקשה, לנתח אותה, ולנקוט פעולות - לעיתים על ידי קריאה למודל AI, חיפוש נתונים, או הפעלת שירותים אחרים. בפרויקט azd, סוכן הוא פשוט עוד **שירות** לצד ממשק הווב או ה-API שלכם.
+סוכן הוא חתיכת תוכנה שיכולה לקבל בקשה, לנתח אותה ולקחת פעולות - לעיתים קרובות על ידי קריאה למודל AI, חיפוש נתונים או הפעלת שירותים אחרים. בפרויקט azd, סוכן הוא פשוט **שירות** נוסף לצד ממשק המשתמש הקדמי או backend ה-API שלך.
 
 ### איך סוכנים משתלבים במבנה פרויקט azd
 
-פרויקט azd מורכב משלוש שכבות: **תשתית**, **קוד**, ו-**תצורה**. סוכנים משתלבים באותן שכבות באותה צורה שכל שירות אחר משתלב:
+פרויקט azd מורכב משלוש שכבות: **תשתית**, **קוד** ו-**תצורה**. סוכנים מתחברים לשכבות הללו באותה דרך כפי שכל שירות אחר פועל:
 
-| שכבה | מה היא עושה לאפליקציה מסורתית | מה היא עושה לסוכן |
-|-------|-------------------------------------|---------------------------|
-| **תשתית** (`infra/`) | מספקת אפליקציית ווב ומסד נתונים | מספקת נקודת קצה של מודל AI, אינדקס חיפוש, או מארח לסוכן |
-| **קוד** (`src/`) | מכילה את הקוד של ממשק הווב ו-API | מכילה את הלוגיקה של הסוכן והגדרת הפקודות |
-| **תצורה** (`azure.yaml`) | מפרטת את השירותים והיעדים לאירוח שלהם | מפרטת את הסוכן כשירות, ומצביעה על הקוד והמארח שלו |
+| שכבה | מה היא עושה עבור אפליקציה מסורתית | מה היא עושה עבור סוכן |
+|-------|---------------------------------|------------------------|
+| **תשתית** (`infra/`) | מספקת אפליקציית ווב ומסד נתונים | מספקת נקודת קצה למודל AI, אינדקס חיפוש, או מארח סוכן |
+| **קוד** (`src/`) | מכילה קוד מקור של ממשק קדמי ו-API | מכילה לוגיקת הסוכן והגדרות הפקודות |
+| **תצורה** (`azure.yaml`) | מפרטת את השירותים ואת היעדים לאירוח | מפרטת את הסוכן כשירות, מופנית אל הקוד והמארח שלו |
 
 ### תפקידו של `azure.yaml`
 
-אין צורך לשנן את התחביר עכשיו. באופן קונספטואלי, `azure.yaml` הוא הקובץ שבו אתם אומרים ל-azd: *"אלה השירותים שמרכיבים את האפליקציה שלי, ופה נמצא הקוד שלהם."*
+אין צורך לשנן כרגע את התחביר. באופן רעיוני, `azure.yaml` הוא הקובץ שבו אתה אומר ל-azd: *"אלה השירותים שמרכיבים את האפליקציה שלי, וכאן נמצא הקוד שלהם."*
 
-כאשר הפרויקט שלכם כולל סוכן AI, `azure.yaml` פשוט מפרט את הסוכן כאחד השירותים. לאחר מכן azd יודע לספק את התשתית המתאימה (כמו נקודת קצה של Microsoft Foundry Models או אפליקציית Container לאירוח הסוכן) ולפרוס את קוד הסוכן - בדיוק כפי שהוא עושה עבור אפליקציית ווב או API.
+כאשר הפרויקט שלך כולל סוכן AI, `azure.yaml` פשוט מפרט את הסוכן כאחד מהשירותים. azd אז יודע לספק את התשתית המתאימה (כמו נקודת קצה של Microsoft Foundry Models או אפליקציית Container לאירוח הסוכן) ולפרוס את קוד הסוכן - בדיוק כמו היה עושה עבור אפליקציית ווב או API.
 
-משמעות הדבר שאין צורך ללמוד שום דבר חדש באופן יסודי. אם אתם מבינים כיצד azd מנהל שירות ווב, אתם כבר מבינים כיצד הוא מנהל סוכן.
+זה אומר שאין צורך בלמידה יסודית חדשה. אם אתה מבין כיצד azd מנהל שירות ווב, אתה כבר מבין כיצד הוא מנהל סוכן.
 
 ## היררכיית תצורה
 
 azd משתמש במערכת תצורה היררכית:
-1. **דגלי שורת הפקודה** (עדיפות עליונה)
+1. **דגלי שורת הפקודה** (העדיפות הגבוהה ביותר)
 2. **משתני סביבה**
-3. **תצורת פרוייקט מקומית** (`.azd/config.json`)
+3. **תצורת פרויקט מקומית** (`.azd/config.json`)
 4. **תצורת משתמש גלובלית** (`~/.azd/config.json`)
-5. **ערכי ברירת מחדל** (עדיפות נמוכה ביותר)
+5. **ערכי ברירת מחדל** (העדיפות הנמוכה ביותר)
 
-## תצורה כללית
+## תצורה גלובלית
 
 ### הגדרת ברירות מחדל גלובליות
 ```bash
@@ -76,7 +76,7 @@ azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 # הגדר מיקום ברירת מחדל
 azd config set defaults.location "eastus2"
 
-# הגדר קונבנציית שמות לקבוצת משאבים ברירת מחדל
+# הגדר את שיטת ההצמדה לשם קבוצה משאבים ברירת מחדל
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
 # הצג את כל ההגדרות הגלובליות
@@ -90,22 +90,22 @@ azd config unset defaults.location
 ```bash
 # העדפות פיתוח
 azd config set alpha.enable true                    # הפעלת תכונות אלפא
-azd config set telemetry.enabled false             # השבתת איסוף מידע
-azd config set output.format json                  # קבע פורמט פלט
+azd config set telemetry.enabled false             # השבתת טלמטריה
+azd config set output.format json                  # הגדר פורמט פלט
 
 # הגדרות אבטחה
 azd config set auth.useAzureCliCredential true     # השתמש ב-Azure CLI לאימות
-azd config set tls.insecure false                  # אכוף אימות TLS
+azd config set tls.insecure false                  # אכיפת אימות TLS
 
-# כיוון ביצועים
+# כיוונון ביצועים
 azd config set provision.parallelism 5             # יצירת משאבים במקביל
-azd config set deploy.timeout 30m                  # זמן חכות לפריסה
+azd config set deploy.timeout 30m                  # זמן מתנה לפריסה
 ```
 
 ## 🏗️ תצורת פרויקט
 
 ### מבנה azure.yaml
-קובץ `azure.yaml` הוא לב פרויקט azd שלכם:
+קובץ `azure.yaml` הוא הלב של פרויקט azd שלך:
 
 ```yaml
 # Minimum configuration
@@ -202,7 +202,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### הגדרות מותאמות לשפות
+#### הגדרות ספציפיות לשפה
 ```yaml
 services:
   node-app:
@@ -241,7 +241,7 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
 ### תצורת סביבה
-לכל סביבה תצורה משלה ב-`.azure/<env-name>/config.json`:
+לכל סביבה יש תצורה משלה ב-`.azure/<env-name>/config.json`:
 
 ```json
 {
@@ -265,7 +265,7 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 
 ### משתני סביבה
 ```bash
-# הגדר משתנים ספציפיים לסביבה
+# הגדר משתני סביבה ספציפיים
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
@@ -283,17 +283,17 @@ azd env unset DEBUG
 
 # אמת הסרה
 azd env get-values | grep DEBUG
-# (צריך להחזיר כלום)
+# (לא אמור להחזיר כלום)
 ```
 
 ### תבניות סביבה
-צרו `.azure/env.template` להגדרה עקבית של סביבות:
+צור `.azure/env.template` להצבת סביבה עקבית:
 ```bash
-# משתנים נדרשים
+# משתנים דרושים
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# הגדרות יישום
+# הגדרות אפליקציה
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
@@ -303,6 +303,51 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
+### שיתוף סביבות בצוות
+
+כאשר יותר מאדם אחד עובד על פרויקט, צריך להסכים על **מה נעביר עם המאגר ומה נשאיר מקומי**. azd שומר כל סביבה תחת תיקיית `.azure/`, ולא כל התוכן אמור להיות מחויב.
+
+**מה יש בתוך `.azure/`:**
+
+```
+.azure/
+├── config.json              # which env is currently selected (local)
+└── <env-name>/
+    ├── config.json          # subscription, location, resource IDs
+    └── .env                 # environment variables (may contain secrets!)
+```
+
+**מה ל- gitignore.** קובץ `.gitignore` כברירת מחדל של azd משמיט את `.azure/`. שמור על כך כפי שהוא - קבצי `.env` יכולים להכיל סודות, ומזהי משאבים ייחודיים למי שהקצה אותם. כל משתמש יוצר את הסביבה **שלו** באופן מקומי:
+
+```bash
+# כל מפתח מפעיל את זה פעם אחת כדי לקבל סביבה מבודדת משלו
+azd env new dev-alice
+azd up
+```
+
+**החלפה בין סביבות.** מפתח שמנהל מספר סביבות בוחר את הסביבה הפעילה לפני הפעלת פקודות:
+
+```bash
+azd env list                 # ראה את כל הסביבות המקומיות ואיזו מהן היא ברירת המחדל
+azd env select staging       # הפוך את 'staging' לסביבה הפעילה
+azd env get-values           # אשר שאתה מכוון לסביבה הנכונה
+```
+
+**מתן ברירות מחדל שאינן סודיות לצוות.** מחייבים תבנית (כמו `.azure/env.template` למעלה) כדי שכולם ידעו אילו משתנים להגדיר - אך לעולם לא מחייבים ערכים מלאים. חברי צוות חדשים מעתיקים את התבנית וממלאים אותה בעצמם.
+
+**סביבות ב-CI/CD.** צינורות לא קוראים את תיקיית `.azure/` המקומית שלך. במקום זאת, ספק את ערכי הסביבה כמשתני צנרת/סודות, ו-azd קורא אותם מסביבת התהליך:
+
+```bash
+# ב-CI, azd קורא את אלה מהסביבה, לא מהתיקייה .azure/
+export AZURE_ENV_NAME=production
+export AZURE_LOCATION=eastus2
+export AZURE_SUBSCRIPTION_ID=<sub-id>
+azd provision --no-prompt
+azd deploy --no-prompt
+```
+
+> **כלל אצבע:** קוד תשתית (`infra/`, `azure.yaml`) משותף ב-Git; *מצב וסודות הסביבה* (`.azure/`) הם לכל מפתח ולכל צינור בנפרד. הפקודה `azd pipeline config` מגדירה עבורך אוטומטית את משתני הצינור.
+
 ## 🔐 תצורת אימות
 
 ### אינטגרציה עם Azure CLI
@@ -310,14 +355,14 @@ LOG_LEVEL=info
 # השתמש באישורי Azure CLI (ברירת מחדל)
 azd config set auth.useAzureCliCredential true
 
-# התחבר עם שוכר מסוים
+# התחבר עם שוכר ספציפי
 az login --tenant <tenant-id>
 
-# הגדר מנוי ברירת מחדל
+# הגדר את המנוי כברירת מחדל
 az account set --subscription <subscription-id>
 ```
 
-### אימות עם Service Principal
+### אימות באמצעות Service Principal
 לצינורות CI/CD:
 ```bash
 # הגדר משתני סביבה
@@ -325,23 +370,23 @@ export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# או קבע ישירות
+# או הגדר ישירות
 azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
-### זהות מנוהלת (Managed Identity)
-לסביבות שמאוחסנות ב-Azure:
+### זהות מנוהלת
+לסביבות מתארחות ב-Azure:
 ```bash
-# אפשר אימות זהות מנוהל
+# אפשר אימות זהות מנוהלת
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
 ## 🏗️ תצורת תשתית
 
-### פרמטרים של Bicep
-הגדירו פרמטרים בתיקיית `infra/main.parameters.json`:
+### פרמטרי Bicep
+הגדר פרמטרים לתשתית ב-`infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -364,7 +409,7 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
 ### תצורת Terraform
-לפרויקטים המשתמשים ב-Terraform, הגדירו בתיקיית `infra/terraform.tfvars`:
+לפרויקטי Terraform, הגדר ב-`infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -415,9 +460,9 @@ services:
 
 ## 🔧 תצורה מתקדמת
 
-### שמות משאבים מותאמים אישית
+### שמות מותאמים אישית למשאבים
 ```bash
-# קבע את קונבנציות השמות
+# קבע הנחיות לאיתור שמות
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
@@ -446,18 +491,18 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 תצורות ייעודיות לסביבה
+## 🎯 תצורות ייחודיות לסביבה
 
 ### סביבת פיתוח
 ```bash
-# .azure/פיתוח/.env
+# .azure/development/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### סביבת השקה (Staging)
+### סביבת Staging
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -466,7 +511,7 @@ ENABLE_MONITORING=true
 USE_PRODUCTION_APIS=true
 ```
 
-### סביבת ייצור (Production)
+### סביבת הפקה
 ```bash
 # .azure/production/.env
 DEBUG=false
@@ -475,11 +520,11 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 אימות תצורה
+## 🔍 אישור תצורה
 
-### אימות תצורה
+### אמת תצורה
 ```bash
-# בדוק תחביר תצורה
+# בדוק את תחביר התצורה
 azd config validate
 
 # בדוק משתני סביבה
@@ -489,8 +534,8 @@ azd env get-values
 azd provision --dry-run
 ```
 
-### סקריפטים לאימות תצורה
-צרו סקריפטים בתיקיית `scripts/`:
+### סקריפטים לתצורה
+צור סקריפטי אימות ב-`scripts/`:
 
 ```bash
 #!/bin/bash
@@ -498,13 +543,13 @@ azd provision --dry-run
 
 echo "Validating configuration..."
 
-# בדוק את משתני הסביבה הנדרשים
+# בדוק משתני סביבה נדרשים
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# אמת את תחביר azure.yaml
+# אמת תחביר של azure.yaml
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -513,9 +558,9 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 הנחיות מומלצות
+## 🎓 שיטות מומלצות
 
-### 1. השתמשו במשתני סביבה
+### 1. השתמש במשתני סביבה
 ```yaml
 # Good: Use environment variables
 database:
@@ -526,7 +571,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. ארגון קבצי תצורה
+### 2. ארגן קבצי תצורה
 ```
 .azure/
 ├── config.json              # Global project config
@@ -550,8 +595,8 @@ database:
 .env                        # קובץ סביבה מקומי
 ```
 
-### 4. תיעוד התצורה
-תעדו את התצורה שלכם ב-`CONFIG.md`:
+### 4. תיעוד תצורה
+תעד את התצורה בקובץ `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -566,11 +611,11 @@ database:
 - Production: Uses production database, error logging only
 ```
 
-## 🎯 תרגולי מעשיים
+## 🎯 תרגילים מעשיים
 
-### תרגיל 1: תצורת סביבות מרובות (15 דקות)
+### תרגיל 1: תצורה מרובת סביבות (15 דקות)
 
-**מטרה**: ליצור ולהגדיר שלוש סביבות בהגדרות שונות
+**מטרה**: ליצור ולהגדיר שלוש סביבות עם הגדרות שונות
 
 ```bash
 # צור סביבת פיתוח
@@ -579,7 +624,7 @@ azd env set LOG_LEVEL debug
 azd env set ENABLE_TELEMETRY false
 azd env set APP_INSIGHTS_SAMPLING 100
 
-# צור סביבת בידוק
+# צור סביבת משלוח
 azd env new staging
 azd env set LOG_LEVEL info
 azd env set ENABLE_TELEMETRY true
@@ -598,9 +643,9 @@ azd env select production && azd env get-values
 ```
 
 **קריטריוני הצלחה:**
-- [ ] נוצרו בהצלחה שלוש סביבות
+- [ ] שלוש סביבות נוצרו בהצלחה
 - [ ] לכל סביבה תצורה ייחודית
-- [ ] ניתן לעבור בין הסביבות ללא שגיאות
+- [ ] ניתן להחליף בין סביבות ללא שגיאות
 - [ ] הפקודה `azd env list` מציגה את כל שלוש הסביבות
 
 ### תרגיל 2: ניהול סודות (10 דקות)
@@ -608,50 +653,50 @@ azd env select production && azd env get-values
 **מטרה**: לתרגל תצורה מאובטחת עם נתונים רגישים
 
 ```bash
-# הגדר סודות (לא מוצגים בתוצאה)
+# קבע סודות (לא מוצגים בפלט)
 azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 
-# הגדר קונפיגורציה לא סודית
+# קבע קונפיגורציה שאינה סודית
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
 # הצג סביבה (יש להסיר סודות)
 azd env get-values
 
-# אמת שסודות נשמרים
-azd env get DB_PASSWORD  # אמור להציג ערך אמיתי
+# אמת שהסודות נשמרו
+azd env get DB_PASSWORD  # צריך להראות את הערך האמיתי
 ```
 
 **קריטריוני הצלחה:**
-- [ ] סודות נשמרו מבלי להציג אותם בטרמינל
-- [ ] הפקודה `azd env get-values` מציגה סודות מוגנים
-- [ ] הפקודה `azd env get <SECRET_NAME>` מחזירה את הערך האמיתי
+- [ ] סודות נשמרים מבלי להופיע במסוף
+- [ ] הפקודה `azd env get-values` מציגה סודות מוסתרים
+- [ ] הפקודה האישית `azd env get <SECRET_NAME>` מחזירה את הערך האמיתי
 
 ## צעדים הבאים
 
-- [הפרויקט הראשון שלך](first-project.md) - יישום תצורה בפועל
-- [מדריך פריסה](../chapter-04-infrastructure/deployment-guide.md) - שימוש בתצורה לפריסה
+- [הפרויקט הראשון שלך](first-project.md) - החל תצורה בפועל
+- [מדריך פריסה](../chapter-04-infrastructure/deployment-guide.md) - השתמש בתצורה לפריסה
 - [הקצאת משאבים](../chapter-04-infrastructure/provisioning.md) - תצורות מוכנות לייצור
 
-## מקורות
+## הפניות
 
-- [אזכור תצורת azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [סכמת azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [התייחסות לתצורה של azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [סכמה של azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
 - [משתני סביבה](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**ניווט פרקים:**
-- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+**ניווט בפרקים:**
+- **📚 עמוד הקורס**: [AZD למתחילים](../../README.md)
 - **📖 הפרק הנוכחי**: פרק 3 - תצורה ואימות
-- **⬅️ הקודם**: [הפרויקט הראשון שלך](first-project.md)
-- **➡️ הפרק הבא**: [פרק 4: תשתית כקוד](../chapter-04-infrastructure/deployment-guide.md)
+- **⬅️ קודם**: [הפרויקט הראשון שלך](first-project.md)
+- **➡️ פרק הבא**: [פרק 4: תשתית כקוד](../chapter-04-infrastructure/deployment-guide.md)
 - **השיעור הבא**: [הפרויקט הראשון שלך](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות התרגום האוטומטי [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, קיימת אפשרות שהתרגום האוטומטי יכיל שגיאות או אי-דיוקים. המסמך המקורי בשפת המקור צריך להיחשב למקור הסמכותי. למידע קריטי מומלץ להשתמש בתרגום מקצועי של אדם. אנו לא אחראים לכל אי-הבנות או פרשנויות לא נכונות הנובעות מהשימוש בתרגום זה.
+**כתב ויתור**:
+מסמך זה תורגם באמצעות שירות תרגום אוטומטי [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עלולים להכיל שגיאות או אי-דיוקים. יש להחשיב את המסמך המקורי בשפתו הטבעית כמקור הסמכות. למידע קריטי מומלץ להשתמש בתרגום מקצועי על ידי מתרגם אדם. אנו לא אחראים לכל אי-הבנה או פירוש שגוי הנובע מהשימוש בתרגום זה.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,42 +1,43 @@
-# Thực hành tốt nhất cho khối lượng công việc AI sản xuất với AZD
+# Các Thực Hành Tốt Nhất cho Khối Lượng Công Việc AI Sản Xuất với AZD
 
-**Điều hướng Chương:**
-- **📚 Trang Khóa học**: [AZD Dành cho Người Mới](../../README.md)
-- **📖 Chương Hiện tại**: Chương 8 - Mẫu cho Sản xuất & Doanh nghiệp
-- **⬅️ Chương Trước**: [Chương 7: Khắc phục sự cố](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Cũng liên quan**: [Phòng thí nghiệm AI](ai-workshop-lab.md)
-- **🎯 Hoàn thành Khóa học**: [AZD Dành cho Người Mới](../../README.md)
+**Chapter Navigation:**
+- **📚 Trang khóa học**: [AZD cho Người Mới Bắt Đầu](../../README.md)
+- **📖 Chương hiện tại**: Chương 8 - Mẫu Sản Xuất & Doanh Nghiệp
+- **⬅️ Chương trước**: [Chương 7: Gỡ Lỗi](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Cũng liên quan**: [Lab Thực hành AI](ai-workshop-lab.md)
+- **🎯 Hoàn thành khóa học**: [AZD cho Người Mới Bắt Đầu](../../README.md)
 
 ## Tổng quan
 
-Hướng dẫn này cung cấp các thực hành tốt nhất toàn diện để triển khai khối lượng công việc AI sẵn sàng cho môi trường sản xuất bằng Azure Developer CLI (AZD). Dựa trên phản hồi từ cộng đồng Microsoft Foundry Discord và các triển khai thực tế của khách hàng, các thực hành này giải quyết những thách thức phổ biến nhất trong các hệ thống AI sản xuất.
+Hướng dẫn này cung cấp các thực hành tốt nhất toàn diện để triển khai các khối lượng công việc AI sẵn sàng cho sản xuất bằng Azure Developer CLI (AZD). Dựa trên phản hồi từ cộng đồng Microsoft Foundry Discord và các triển khai thực tế của khách hàng, các thực hành này giải quyết những thách thức phổ biến nhất trong hệ thống AI ở môi trường sản xuất.
 
-## Những thách thức chính được giải quyết
+## Các Thách Thức Chính Được Giải Quyết
 
-Dựa trên kết quả khảo sát cộng đồng của chúng tôi, đây là những thách thức hàng đầu mà các nhà phát triển gặp phải:
+Dựa trên kết quả cuộc thăm dò cộng đồng của chúng tôi, đây là những thách thức hàng đầu mà các nhà phát triển phải đối mặt:
 
-- **45%** gặp khó khăn với triển khai AI đa dịch vụ
+- **45%** gặp khó khăn với việc triển khai AI đa dịch vụ
 - **38%** gặp vấn đề với quản lý thông tin xác thực và bí mật  
-- **35%** thấy việc sẵn sàng cho sản xuất và mở rộng quy mô khó khăn
-- **32%** cần chiến lược tối ưu hóa chi phí tốt hơn
-- **29%** yêu cầu giám sát và khắc phục sự cố được cải thiện
+- **35%** thấy khó khăn trong việc sẵn sàng cho sản xuất và mở rộng
+- **32%** cần các chiến lược tối ưu hóa chi phí tốt hơn
+- **29%** yêu cầu cải thiện giám sát và khắc phục sự cố
 
-## Các mẫu kiến trúc cho AI sản xuất
+## Mẫu Kiến Trúc cho AI Ở Môi Trường Sản Xuất
 
 ### Mẫu 1: Kiến trúc AI Microservices
 
-**Khi nào sử dụng**: Ứng dụng AI phức tạp với nhiều khả năng
+**Khi sử dụng**: Các ứng dụng AI phức tạp với nhiều khả năng
 
 ```mermaid
 graph TD
     Frontend[Giao diện Web] --- Gateway[Cổng API] --- LB[Bộ cân bằng tải]
     Gateway --> Chat[Dịch vụ Trò chuyện]
-    Gateway --> Image[Dịch vụ Ảnh]
+    Gateway --> Image[Dịch vụ Hình ảnh]
     Gateway --> Text[Dịch vụ Văn bản]
-    Chat --> OpenAI[Các mô hình Microsoft Foundry]
+    Chat --> OpenAI[Mô hình Microsoft Foundry]
     Image --> Vision[Thị giác máy tính]
-    Text --> DocIntel[Trí tuệ Tài liệu]
+    Text --> DocIntel[Trí tuệ tài liệu]
 ```
+
 **Triển khai AZD**:
 
 ```yaml
@@ -60,9 +61,9 @@ services:
     host: containerapp
 ```
 
-### Mẫu 2: Xử lý AI theo sự kiện
+### Mẫu 2: Xử lý AI theo Sự kiện
 
-**Khi nào sử dụng**: Xử lý theo lô, phân tích tài liệu, luồng công việc bất đồng bộ
+**Khi sử dụng**: Xử lý theo lô, phân tích tài liệu, luồng công việc không đồng bộ
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -109,43 +110,43 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Cân nhắc về Sức khỏe của Agent AI
+## Nghĩ về Tình Trạng Hoạt Động của Agent AI
 
-Khi một ứng dụng web truyền thống gặp sự cố, các triệu chứng là quen thuộc: một trang không tải, một API trả về lỗi, hoặc một lần triển khai thất bại. Ứng dụng tích hợp AI có thể hỏng theo tất cả các cách đó—nhưng chúng cũng có thể hoạt động sai theo những cách tinh vi hơn mà không tạo ra thông báo lỗi rõ ràng.
+Khi một ứng dụng web truyền thống gặp sự cố, các triệu chứng thường quen thuộc: một trang không tải, một API trả về lỗi, hoặc một lần triển khai thất bại. Ứng dụng được hỗ trợ bởi AI có thể hỏng theo tất cả các cách đó — nhưng chúng cũng có thể hoạt động sai theo những cách tinh vi hơn mà không tạo ra thông báo lỗi rõ ràng.
 
-Phần này giúp bạn xây dựng mô hình tư duy để giám sát khối lượng công việc AI để bạn biết nên tìm gì khi mọi thứ có vẻ không ổn.
+Phần này giúp bạn xây dựng một mô hình tư duy để giám sát khối lượng công việc AI để bạn biết nên nhìn vào đâu khi mọi thứ có vẻ không ổn.
 
-### Sức khỏe Agent khác với Ứng dụng truyền thống như thế nào
+### Sự khác biệt giữa Tình trạng Agent và Tình trạng Ứng dụng Truyền thống
 
-Một ứng dụng truyền thống hoặc là hoạt động hoặc không. Một tác nhân AI có thể có vẻ hoạt động nhưng tạo ra kết quả kém. Hãy nghĩ về sức khỏe của tác nhân theo hai lớp:
+Một ứng dụng truyền thống hoặc hoạt động hoặc không hoạt động. Một agent AI có thể có vẻ hoạt động nhưng cho ra kết quả kém. Hãy nghĩ về tình trạng agent theo hai lớp:
 
-| Lớp | Cần theo dõi | Nên kiểm tra ở đâu |
+| Lớp | Những gì cần theo dõi | Nơi tìm kiếm |
 |-------|--------------|---------------|
-| **Sức khỏe hạ tầng** | Dịch vụ có đang chạy không? Tài nguyên đã được cấp phát chưa? Các điểm cuối có truy cập được không? | `azd monitor`, tình trạng tài nguyên trên Azure Portal, nhật ký container/ứng dụng |
-| **Sức khỏe hành vi** | Tác nhân phản hồi chính xác không? Phản hồi có kịp thời không? Mô hình có được gọi đúng cách không? | traces của Application Insights, số liệu độ trễ gọi mô hình, nhật ký chất lượng phản hồi |
+| **Tình trạng hạ tầng** | Dịch vụ có đang chạy không? Các tài nguyên đã được cấp phát chưa? Các endpoint có thể truy cập được không? | `azd monitor`, tình trạng tài nguyên trên Azure Portal, nhật ký container/ứng dụng |
+| **Tình trạng hành vi** | Agent có phản hồi chính xác không? Các phản hồi có kịp thời không? Mô hình có đang được gọi đúng cách không? | trace của Application Insights, các chỉ số độ trễ gọi mô hình, nhật ký chất lượng phản hồi |
 
-Sức khỏe hạ tầng thì quen thuộc—nó giống như đối với bất kỳ ứng dụng azd nào. Sức khỏe hành vi là lớp mới mà các khối lượng công việc AI đưa vào.
+Tình trạng hạ tầng thì quen thuộc—nó giống nhau cho bất kỳ ứng dụng azd nào. Tình trạng hành vi là lớp mới mà các khối lượng công việc AI giới thiệu.
 
-### Nên kiểm tra ở đâu khi ứng dụng AI không hoạt động như mong đợi
+### Nên kiểm tra ở đâu khi ứng dụng AI hoạt động không như mong đợi
 
-Nếu ứng dụng AI của bạn không tạo ra kết quả như mong đợi, đây là danh sách kiểm tra khái niệm:
+Nếu ứng dụng AI của bạn không tạo ra kết quả như mong đợi, đây là một danh sách kiểm tra khái niệm:
 
-1. **Bắt đầu với những điều cơ bản.** Ứng dụng có đang chạy không? Nó có thể truy cập các phụ thuộc không? Kiểm tra `azd monitor` và tình trạng tài nguyên như bạn vẫn làm với bất kỳ ứng dụng nào.
-2. **Kiểm tra kết nối mô hình.** Ứng dụng của bạn có đang gọi mô hình AI thành công không? Các cuộc gọi mô hình bị lỗi hoặc hết thời gian chờ là nguyên nhân phổ biến nhất của sự cố ứng dụng AI và sẽ xuất hiện trong nhật ký ứng dụng của bạn.
-3. **Xem những gì mô hình nhận được.** Phản hồi AI phụ thuộc vào đầu vào (prompt và bất kỳ ngữ cảnh được truy xuất nào). Nếu đầu ra sai, đầu vào thường là nguyên nhân. Kiểm tra xem ứng dụng của bạn có đang gửi dữ liệu đúng tới mô hình không.
-4. **Xem lại độ trễ phản hồi.** Các cuộc gọi tới mô hình AI chậm hơn so với các cuộc gọi API thông thường. Nếu ứng dụng của bạn cảm thấy chậm, kiểm tra xem thời gian phản hồi của mô hình có tăng hay không—điều này có thể báo hiệu bị giới hạn băng thông, giới hạn công suất, hoặc tắc nghẽn ở cấp vùng.
-5. **Theo dõi các tín hiệu chi phí.** Sự tăng đột biến bất ngờ trong việc sử dụng token hoặc cuộc gọi API có thể cho thấy vòng lặp, prompt cấu hình sai, hoặc thử lại quá nhiều lần.
+1. **Bắt đầu với những điều cơ bản.** Ứng dụng có đang chạy không? Nó có thể truy cập các phụ thuộc không? Kiểm tra `azd monitor` và tình trạng tài nguyên như bạn sẽ làm cho bất kỳ ứng dụng nào.
+2. **Kiểm tra kết nối tới mô hình.** Ứng dụng của bạn có đang gọi mô hình AI thành công không? Các cuộc gọi mô hình bị lỗi hoặc hết thời gian chờ là nguyên nhân phổ biến nhất gây ra vấn đề cho ứng dụng AI và sẽ xuất hiện trong nhật ký ứng dụng của bạn.
+3. **Xem những gì mô hình nhận được.** Phản hồi AI phụ thuộc vào đầu vào (prompt và bất kỳ ngữ cảnh được truy xuất). Nếu đầu ra sai, đầu vào thường sai. Kiểm tra xem ứng dụng của bạn có đang gửi đúng dữ liệu tới mô hình hay không.
+4. **Xem lại độ trễ phản hồi.** Các cuộc gọi tới mô hình AI chậm hơn so với các cuộc gọi API thông thường. Nếu ứng dụng của bạn cảm thấy chậm chạp, kiểm tra xem thời gian phản hồi của mô hình có tăng lên không—điều này có thể chỉ ra việc bị giới hạn băng thông, giới hạn năng lực, hoặc tắc nghẽn ở cấp vùng.
+5. **Theo dõi các tín hiệu chi phí.** Sự tăng đột ngột bất thường trong việc sử dụng token hoặc số cuộc gọi API có thể chỉ ra một vòng lặp, một prompt cấu hình sai, hoặc các lần thử lại quá mức.
 
-Bạn không cần phải thành thạo các công cụ quan sát ngay lập tức. Điều quan trọng là các ứng dụng AI có một lớp hành vi bổ sung cần giám sát, và cơ chế giám sát tích hợp của azd (`azd monitor`) cung cấp cho bạn điểm bắt đầu để điều tra cả hai lớp.
+Bạn không cần phải thành thạo công cụ quan sát ngay lập tức. Điều cần nhớ là các ứng dụng AI có một lớp hành vi bổ sung để giám sát, và tính năng giám sát tích hợp của azd (`azd monitor`) cung cấp cho bạn một điểm khởi đầu để điều tra cả hai lớp.
 
 ---
 
-## Những thực hành bảo mật tốt nhất
+## Thực hành bảo mật tốt nhất
 
 ### 1. Mô hình Bảo mật Zero-Trust
 
 **Chiến lược triển khai**:
-- Không có giao tiếp dịch vụ-nhờ dịch vụ nếu không có xác thực
+- Không có liên lạc dịch vụ-đến-dịch vụ mà không có xác thực
 - Tất cả các cuộc gọi API sử dụng managed identities
 - Cô lập mạng với private endpoints
 - Kiểm soát truy cập theo nguyên tắc ít đặc quyền nhất
@@ -264,9 +265,9 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## Hiệu năng và Mở rộng
+## Hiệu suất và Khả năng mở rộng
 
-### 1. Chiến lược tự động mở rộng
+### 1. Chiến lược Tự động mở rộng
 
 **Tự động mở rộng cho Container Apps**:
 
@@ -312,7 +313,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 2. Chiến lược bộ nhớ đệm
+### 2. Chiến lược Cache
 
 **Redis Cache cho phản hồi AI**:
 
@@ -342,7 +343,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. Cân bằng tải và quản lý lưu lượng
+### 3. Cân bằng tải và Quản lý lưu lượng
 
 **Application Gateway với WAF**:
 
@@ -382,7 +383,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ## 💰 Tối ưu hóa chi phí
 
-### 1. Chọn kích thước tài nguyên phù hợp
+### 1. Điều chỉnh kích thước tài nguyên phù hợp
 
 **Cấu hình theo môi trường**:
 
@@ -404,7 +405,7 @@ azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
 
-### 2. Giám sát chi phí và ngân sách
+### 2. Giám sát chi phí và Ngân sách
 
 ```bicep
 // Cost management and budgets
@@ -460,7 +461,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Cắt ngữ cảnh, không cắt đầu vào của người dùng
+      // Cắt bớt ngữ cảnh, không phải đầu vào người dùng
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -468,7 +469,7 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Ước lượng sơ bộ: 1 token ≈ 4 ký tự
+    // Ước tính sơ bộ: 1 token ≈ 4 ký tự
     return Math.ceil(text.length / 4);
   }
 }
@@ -476,7 +477,7 @@ class TokenOptimizer {
 
 ## Giám sát và Khả năng quan sát
 
-### 1. Toàn diện với Application Insights
+### 1. Application Insights toàn diện
 
 ```bicep
 // Application Insights with advanced features
@@ -521,7 +522,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. Giám sát đặc thù cho AI
+### 2. Giám sát dành riêng cho AI
 
 **Bảng điều khiển tùy chỉnh cho các chỉ số AI**:
 
@@ -552,7 +553,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Kiểm tra sức khỏe và giám sát thời gian hoạt động
+### 3. Kiểm tra sức khỏe và Giám sát thời gian hoạt động
 
 ```bicep
 // Application Insights availability tests
@@ -621,9 +622,9 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## Phục hồi thảm họa và Tính khả dụng cao
+## Khôi phục thảm họa và Khả năng sẵn sàng cao
 
-### 1. Triển khai đa khu vực
+### 1. Triển khai đa vùng
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -685,7 +686,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. Sao lưu và khôi phục dữ liệu
+### 2. Sao lưu và Khôi phục dữ liệu
 
 ```bicep
 // Backup configuration for critical data
@@ -827,7 +828,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Kiểm tra xem tất cả các dịch vụ cần thiết có đang chạy hay không
+# Kiểm tra xem tất cả các dịch vụ cần thiết có đang chạy không
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -837,7 +838,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Xác thực việc triển khai mô hình OpenAI
+# Xác thực các triển khai mô hình OpenAI
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-4.1-mini"* ]]; then
@@ -854,71 +855,71 @@ echo "Infrastructure validation completed successfully!"
 
 ## Danh sách kiểm tra sẵn sàng cho sản xuất
 
-### Bảo mật ✅
+### Security ✅
 - [ ] Tất cả dịch vụ sử dụng managed identities
-- [ ] Bí mật được lưu trữ trong Key Vault
-- [ ] Private endpoints đã được cấu hình
-- [ ] Network security groups đã được triển khai
-- [ ] RBAC với nguyên tắc ít đặc quyền nhất
-- [ ] WAF được bật trên các điểm cuối công khai
+- [ ] Bí mật được lưu trong Key Vault
+- [ ] Private endpoints được cấu hình
+- [ ] Network security groups được triển khai
+- [ ] RBAC với quyền tối thiểu
+- [ ] WAF được bật trên các endpoint công khai
 
-### Hiệu năng ✅
-- [ ] Tự động mở rộng đã cấu hình
-- [ ] Bộ nhớ đệm đã triển khai
-- [ ] Cân bằng tải đã thiết lập
+### Performance ✅
+- [ ] Tự động mở rộng được cấu hình
+- [ ] Cache được triển khai
+- [ ] Cân bằng tải được thiết lập
 - [ ] CDN cho nội dung tĩnh
-- [ ] Pool kết nối cơ sở dữ liệu
+- [ ] Pooling kết nối cơ sở dữ liệu
 - [ ] Tối ưu hóa sử dụng token
 
-### Giám sát ✅
-- [ ] Application Insights đã cấu hình
-- [ ] Các chỉ số tùy chỉnh đã định nghĩa
-- [ ] Các quy tắc cảnh báo đã thiết lập
-- [ ] Bảng điều khiển đã tạo
-- [ ] Kiểm tra sức khỏe đã triển khai
+### Monitoring ✅
+- [ ] Application Insights được cấu hình
+- [ ] Các chỉ số tùy chỉnh được định nghĩa
+- [ ] Các quy tắc cảnh báo được thiết lập
+- [ ] Bảng điều khiển được tạo
+- [ ] Kiểm tra sức khỏe được triển khai
 - [ ] Chính sách lưu trữ nhật ký
 
-### Độ tin cậy ✅
-- [ ] Triển khai đa khu vực
+### Reliability ✅
+- [ ] Triển khai đa vùng
 - [ ] Kế hoạch sao lưu và khôi phục
-- [ ] Circuit breakers đã triển khai
-- [ ] Chính sách thử lại đã cấu hình
-- [ ] Suy thoái có kiểm soát (graceful degradation)
-- [ ] Các điểm cuối kiểm tra sức khỏe
+- [ ] Cơ chế circuit breaker được triển khai
+- [ ] Chính sách thử lại được cấu hình
+- [ ] Giảm chức năng có kiểm soát
+- [ ] Các endpoint kiểm tra tình trạng
 
-### Quản lý chi phí ✅
-- [ ] Cảnh báo ngân sách đã cấu hình
-- [ ] Chọn kích thước tài nguyên phù hợp
-- [ ] Áp dụng chiết khấu dev/test
-- [ ] Mua reserved instances
+### Cost Management ✅
+- [ ] Cảnh báo ngân sách được cấu hình
+- [ ] Điều chỉnh kích thước tài nguyên phù hợp
+- [ ] Giảm giá cho môi trường Dev/test được áp dụng
+- [ ] Mua reserved instances khi phù hợp
 - [ ] Bảng điều khiển giám sát chi phí
 - [ ] Đánh giá chi phí định kỳ
 
-### Tuân thủ ✅
+### Compliance ✅
 - [ ] Yêu cầu lưu trú dữ liệu được đáp ứng
-- [ ] Ghi nhật ký kiểm toán đã bật
-- [ ] Chính sách tuân thủ đã áp dụng
-- [ ] Các chuẩn bảo mật được triển khai
+- [ ] Ghi nhật ký kiểm toán được bật
+- [ ] Chính sách tuân thủ được áp dụng
+- [ ] Các tiêu chuẩn bảo mật được triển khai
 - [ ] Đánh giá bảo mật định kỳ
 - [ ] Kế hoạch phản ứng sự cố
 
-## Tiêu chuẩn hiệu năng
+## Các chỉ số hiệu suất
 
 ### Các chỉ số điển hình cho môi trường sản xuất
 
 | Chỉ số | Mục tiêu | Giám sát |
 |--------|--------|------------|
-| **Thời gian phản hồi** | < 2 seconds | Application Insights |
-| **Khả dụng** | 99.9% | Uptime monitoring |
-| **Tỷ lệ lỗi** | < 0.1% | Application logs |
-| **Sử dụng token** | < $500/month | Cost management |
-| **Người dùng đồng thời** | 1000+ | Load testing |
-| **Thời gian khôi phục** | < 1 hour | Disaster recovery tests |
+| **Thời gian phản hồi** | < 2 giây | Application Insights |
+| **Độ sẵn sàng** | 99.9% | Giám sát thời gian hoạt động |
+| **Tỷ lệ lỗi** | < 0.1% | Nhật ký ứng dụng |
+| **Sử dụng token** | < $500/month | Quản lý chi phí |
+| **Người dùng đồng thời** | 1000+ | Kiểm thử tải |
+| **Thời gian phục hồi** | < 1 hour | Kiểm tra khôi phục thảm họa |
 
 ### Kiểm thử tải
 
 ```bash
-# Kịch bản kiểm tra tải cho các ứng dụng AI
+# Kịch bản kiểm thử tải cho ứng dụng AI
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -926,42 +927,42 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 Thực hành tốt nhất từ cộng đồng
+## 🤝 Các Thực hành Tốt nhất từ Cộng đồng
 
-Dựa trên phản hồi từ cộng đồng Microsoft Foundry Discord:
+Dựa trên phản hồi từ cộng đồng Microsoft Foundry trên Discord:
 
-### Các khuyến nghị hàng đầu từ cộng đồng:
+### Những khuyến nghị hàng đầu từ cộng đồng:
 
 1. **Bắt đầu nhỏ, mở rộng dần**: Bắt đầu với SKU cơ bản và mở rộng dựa trên mức sử dụng thực tế
 2. **Giám sát mọi thứ**: Thiết lập giám sát toàn diện ngay từ ngày đầu
-3. **Tự động hóa bảo mật**: Sử dụng hạ tầng như mã để đảm bảo bảo mật nhất quán
-4. **Kiểm thử kỹ lưỡng**: Bao gồm kiểm thử đặc thù cho AI trong pipeline của bạn
-5. **Lập kế hoạch chi phí**: Giám sát sử dụng token và thiết lập cảnh báo ngân sách sớm
+3. **Tự động hóa bảo mật**: Sử dụng hạ tầng như mã để đảm bảo bảo mật đồng nhất
+4. **Kiểm thử kỹ lưỡng**: Bao gồm kiểm thử dành riêng cho AI trong pipeline của bạn
+5. **Lên kế hoạch cho chi phí**: Giám sát việc sử dụng token và thiết lập cảnh báo ngân sách sớm
 
-### Những sai lầm phổ biến cần tránh:
+### Những cạm bẫy phổ biến cần tránh:
 
-- ❌ Lưu cứng API key trong mã
-- ❌ Không thiết lập giám sát đúng cách
-- ❌ Phớt lờ tối ưu hóa chi phí
-- ❌ Không kiểm thử các kịch bản lỗi
-- ❌ Triển khai mà không có kiểm tra sức khỏe
+- ❌ Hardcoding API keys in code
+- ❌ Not setting up proper monitoring
+- ❌ Ignoring cost optimization
+- ❌ Not testing failure scenarios
+- ❌ Deploying without health checks
 
-## Lệnh AZD AI CLI và Tiện ích mở rộng
+## Lệnh AZD AI CLI và các Extension
 
-AZD bao gồm một tập hợp ngày càng mở rộng các lệnh và tiện ích mở rộng đặc thù cho AI giúp đơn giản hóa các luồng công việc AI trong môi trường sản xuất. Các công cụ này kết nối khoảng cách giữa phát triển cục bộ và triển khai sản xuất cho khối lượng công việc AI.
+AZD bao gồm một bộ lệnh và extension dành riêng cho AI đang phát triển, giúp đơn giản hóa các luồng công việc AI ở môi trường sản xuất. Những công cụ này thu hẹp khoảng cách giữa phát triển cục bộ và triển khai sản xuất cho các khối lượng công việc AI.
 
-### Tiện ích mở rộng AZD cho AI
+### Các extension AZD cho AI
 
-AZD sử dụng hệ thống tiện ích mở rộng để thêm các khả năng đặc thù cho AI. Cài đặt và quản lý tiện ích mở rộng với:
+AZD sử dụng một hệ thống extension để thêm các khả năng dành riêng cho AI. Cài đặt và quản lý extension với:
 
 ```bash
 # Liệt kê tất cả các phần mở rộng có sẵn (bao gồm cả AI)
 azd extension list
 
-# Kiểm tra chi tiết phần mở rộng đã cài đặt
+# Xem chi tiết phần mở rộng đã cài đặt
 azd extension show azure.ai.agents
 
-# Cài đặt phần mở rộng Foundry Agents
+# Cài đặt phần mở rộng Foundry agents
 azd extension install azure.ai.agents
 
 # Cài đặt phần mở rộng tinh chỉnh
@@ -974,30 +975,43 @@ azd extension install azure.ai.models
 azd extension upgrade --all
 ```
 
-**Các tiện ích mở rộng AI hiện có:**
+**Các extension AI có sẵn:**
 
-| Tiện ích | Mục đích | Trạng thái |
+| Extension | Mục đích | Trạng thái |
 |-----------|---------|--------|
 | `azure.ai.agents` | Quản lý Foundry Agent Service | Xem trước |
+| `azure.ai.skills` | Các kỹ năng agent có thể tái sử dụng | Xem trước |
+| `azure.ai.connections` | Kết nối Foundry (nguồn dữ liệu, công cụ) | Xem trước |
 | `azure.ai.finetune` | Fine-tuning mô hình Foundry | Xem trước |
 | `azure.ai.models` | Mô hình tùy chỉnh Foundry | Xem trước |
-| `azure.coding-agent` | Cấu hình tác nhân hỗ trợ viết mã | Sẵn có |
+| `azure.coding-agent` | Cấu hình coding agent | Có sẵn |
 
-### Khởi tạo Dự án Agent với `azd ai agent init`
+> Extension `azure.ai.agents` phát triển nhanh chóng. Khóa học này được xác thực với `0.1.40-preview`. Chạy `azd extension upgrade --all` để lấy bộ lệnh mới nhất, và `azd extension show azure.ai.agents` để xác nhận phiên bản bạn đã cài.
 
-Lệnh `azd ai agent init` tạo bộ khung dự án agent sẵn sàng cho môi trường sản xuất tích hợp với Microsoft Foundry Agent Service:
+**Các extension `skills` và `connections` mới hơn là gì?**
+
+Hai extension bản xem trước xuất hiện cùng với công cụ agent và đáng để hiểu ngay cả khi bạn là người mới:
+
+- **`azure.ai.skills`** — Một **skill** là một khả năng có thể tái sử dụng (một công cụ hoặc hành vi đã đóng gói) mà bạn có thể đính kèm vào một hoặc nhiều agent thay vì triển khai lại mỗi lần. Hãy nghĩ về nó như một khối xây dựng chung: định nghĩa một kỹ năng "tìm kiếm tài liệu" hoặc "tra cứu đơn hàng" một lần, sau đó tái sử dụng nó cho các agent khác nhau. Điều này giữ cho các hệ thống đa agent (Chương 5) nhất quán và tránh việc sao chép-dán.
+- **`azure.ai.connections`** — Một **connection** là một liên kết được quản lý từ dự án Foundry của bạn tới một tài nguyên bên ngoài mà các agent cần — một nguồn dữ liệu (như Azure AI Search), một endpoint công cụ, hoặc một dịch vụ khác. Connections tập trung hóa nơi và cách các agent truy cập dữ liệu, nên thông tin xác thực và các endpoint sống ở một nơi được quản trị thay vì rải rác trong mã.
+
+Bạn không cần những thứ này để triển khai các agent đầu tiên — hãy dùng `azure.ai.agents` trong khi học. Sử dụng `skills` khi bạn thấy mình lặp lại cùng một công cụ giữa các agent, và `connections` khi nhiều agent chia sẻ cùng một nguồn dữ liệu.
+
+### Khởi tạo dự án Agent với `azd ai agent init`
+
+Lệnh `azd ai agent init` khởi tạo khung cho một dự án agent AI sẵn sàng cho sản xuất tích hợp với Microsoft Foundry Agent Service:
 
 ```bash
-# Khởi tạo một dự án agent mới từ manifest của agent
+# Khởi tạo một dự án agent mới từ một manifest agent
 azd ai agent init -m <manifest-path-or-uri>
 
-# Khởi tạo và nhắm tới một dự án Foundry cụ thể
+# Khởi tạo và chỉ định một dự án Foundry cụ thể
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# Khởi tạo với một thư mục nguồn tùy chỉnh
+# Khởi tạo với thư mục nguồn tùy chỉnh
 azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
 
-# Nhắm tới Container Apps làm máy chủ lưu trữ
+# Chọn Container Apps làm máy chủ
 azd ai agent init -m agent-manifest.yaml --host containerapp
 ```
 
@@ -1007,48 +1021,88 @@ azd ai agent init -m agent-manifest.yaml --host containerapp
 |------|-------------|
 | `-m, --manifest` | Đường dẫn hoặc URI tới manifest của agent để thêm vào dự án của bạn |
 | `-p, --project-id` | ID Dự án Microsoft Foundry hiện có cho môi trường azd của bạn |
-| `-s, --src` | Thư mục để tải định nghĩa agent (mặc định là `src/<agent-id>`) |
+| `-s, --src` | Thư mục để tải định nghĩa agent về (mặc định là `src/<agent-id>`) |
 | `--host` | Ghi đè host mặc định (ví dụ: `containerapp`) |
 | `-e, --environment` | Môi trường azd để sử dụng |
 
-**Mẹo cho môi trường sản xuất**: Sử dụng `--project-id` để kết nối trực tiếp với dự án Foundry hiện có, giữ mã agent và tài nguyên đám mây của bạn liên kết ngay từ đầu.
+**Mẹo triển khai**: Sử dụng `--project-id` để kết nối trực tiếp với một dự án Foundry hiện có, giữ mã agent và tài nguyên đám mây của bạn liên kết ngay từ đầu.
 
-### Giao thức Ngữ cảnh Mô hình (MCP) với `azd mcp`
+### Quản lý vòng đời Agent
 
-AZD bao gồm hỗ trợ MCP server tích hợp (Alpha), cho phép các tác nhân AI và công cụ tương tác với tài nguyên Azure của bạn thông qua một giao thức chuẩn:
+Ngoài `init`, extension `azure.ai.agents` cung cấp các lệnh cho toàn bộ vòng đời của một agent được host — kiểm thử, đánh giá, tối ưu và ngừng sử dụng nó:
+
+```bash
+# Gọi một tác nhân đã triển khai và xem thời gian phản hồi của máy chủ
+# (độ trễ tổng cộng và thời gian đến byte đầu tiên)
+azd ai agent invoke
+
+# Hiển thị cấu hình điểm cuối đang hoạt động trước khi thay đổi nó
+azd ai agent endpoint show
+
+# Tạo một tập dữ liệu đánh giá cho tác nhân
+azd ai agent eval generate --dataset ./eval/dataset.jsonl
+
+# Tối ưu hóa hướng dẫn tác nhân dựa trên dữ liệu đánh giá của bạn
+# (yêu cầu một optimization_model trong dự án tác nhân)
+azd ai agent optimize
+
+# Tải xuống mã nguồn đã triển khai của tác nhân lưu trữ dựa trên mã
+# (với xác minh SHA-256)
+azd ai agent code download
+
+# Xóa một tác nhân được lưu trữ và tất cả các phiên bản của nó
+# (--force chấm dứt các phiên đang hoạt động)
+azd ai agent delete --force
+```
+
+**Tổng quan vòng đời:**
+
+| Giai đoạn | Lệnh | Sử dụng trong môi trường sản xuất |
+|-------|---------|----------------|
+| Kiểm thử | `azd ai agent invoke` | Xác thực phản hồi và đo độ trễ trước khi phát hành |
+| Kiểm tra | `azd ai agent endpoint show` | Xem xét xác thực/cấu hình endpoint; phát hiện thay đổi phá vỡ sớm |
+| Đo lường | `azd ai agent eval generate` | Xây dựng một bộ đánh giá có thể lặp lại từ các trace thực tế |
+| Cải thiện | `azd ai agent optimize` | Tinh chỉnh hướng dẫn dựa trên chất lượng đo được |
+| Phục hồi | `azd ai agent code download` | Lấy mã nguồn chính xác đã triển khai để kiểm toán/rollback |
+| Ngừng hoạt động | `azd ai agent delete --force` | Hủy một agent và các phiên bản của nó một cách sạch sẽ |
+
+> Đây là các lệnh bản xem trước và có thể thay đổi giữa các phiên bản extension. Chạy `azd ai agent --help` để xem các lệnh con chính xác có trong phiên bản bạn đã cài.
+
+### Model Context Protocol (MCP) với `azd mcp`
+AZD includes built-in MCP server support (Alpha), enabling AI agents and tools to interact with your Azure resources through a standardized protocol:
 
 ```bash
 # Khởi động máy chủ MCP cho dự án của bạn
 azd mcp start
 
-# Xem lại các quy tắc đồng ý hiện tại của Copilot cho việc thực thi công cụ
+# Xem xét các quy tắc đồng ý hiện tại của Copilot cho việc thực thi công cụ
 azd copilot consent list
 ```
 
-Máy chủ MCP phơi bày ngữ cảnh dự án azd của bạn—các môi trường, dịch vụ và tài nguyên Azure—cho các công cụ phát triển được hỗ trợ bởi AI. Điều này cho phép:
+The MCP server exposes your azd project context—environments, services, and Azure resources—to AI-powered development tools. This enables:
 
-- **Triển khai được hỗ trợ bởi AI**: Cho phép các tác nhân viết mã truy vấn trạng thái dự án của bạn và kích hoạt triển khai
-- **Khám phá tài nguyên**: Công cụ AI có thể phát hiện những tài nguyên Azure mà dự án của bạn sử dụng
-- **Quản lý môi trường**: Các tác nhân có thể chuyển đổi giữa các môi trường dev/staging/production
+- **AI-assisted deployment**: Let coding agents query your project state and trigger deployments
+- **Resource discovery**: AI tools can discover what Azure resources your project uses
+- **Environment management**: Agents can switch between dev/staging/production environments
 
-### Tạo hạ tầng với `azd infra generate`
+### Infrastructure Generation with `azd infra generate`
 
-Đối với khối lượng công việc AI sản xuất, bạn có thể sinh và tùy chỉnh Infrastructure as Code thay vì dựa vào việc cấp phát tự động:
+For production AI workloads, you can generate and customize Infrastructure as Code rather than relying on automatic provisioning:
 
 ```bash
 # Tạo các tệp Bicep/Terraform từ định nghĩa dự án của bạn
 azd infra generate
 ```
 
-Điều này ghi IaC ra đĩa để bạn có thể:
-- Rà soát và kiểm toán hạ tầng trước khi triển khai
-- Thêm các chính sách bảo mật tùy chỉnh (quy tắc mạng, private endpoints)
-- Tích hợp với quy trình kiểm duyệt IaC hiện có
-- Kiểm soát phiên bản các thay đổi hạ tầng tách biệt khỏi mã ứng dụng
+This writes IaC to disk so you can:
+- Review and audit infrastructure before deploying
+- Add custom security policies (network rules, private endpoints)
+- Integrate with existing IaC review processes
+- Version control infrastructure changes separately from application code
 
-### Hooks vòng đời sản xuất
+### Production Lifecycle Hooks
 
-Các hook AZD cho phép bạn chèn logic tùy chỉnh ở mọi giai đoạn của vòng đời triển khai—điều quan trọng cho các luồng công việc AI trong môi trường sản xuất:
+AZD hooks let you inject custom logic at every stage of the deployment lifecycle—critical for production AI workflows:
 
 ```yaml
 # azure.yaml - Production hooks example
@@ -1081,34 +1135,109 @@ services:
 azd hooks run predeploy
 ```
 
-**Các hook đề xuất cho khối lượng công việc AI trong môi trường sản xuất:**
+**Recommended production hooks for AI workloads:**
 
-| Hook | Trường hợp sử dụng |
+| Hook | Use Case |
 |------|----------|
-| `preprovision` | Xác thực hạn mức subscription cho công suất mô hình AI |
-| `postprovision` | Cấu hình private endpoints, triển khai trọng số mô hình |
-| `predeploy` | Chạy kiểm tra an toàn AI, xác thực mẫu lời nhắc (prompt templates) |
-| `postdeploy` | Thử nghiệm khói phản hồi của agent, xác minh kết nối mô hình |
+| `preprovision` | Validate subscription quotas for AI model capacity |
+| `postprovision` | Configure private endpoints, deploy model weights |
+| `predeploy` | Run AI safety tests, validate prompt templates |
+| `postdeploy` | Smoke test agent responses, verify model connectivity |
 
-### Cấu hình đường ống CI/CD
+### CI/CD Pipeline Configuration
 
-Sử dụng `azd pipeline config` để kết nối dự án của bạn với GitHub Actions hoặc Azure Pipelines với xác thực Azure an toàn:
+Use `azd pipeline config` to connect your project to GitHub Actions or Azure Pipelines with secure Azure authentication:
 
 ```bash
 # Cấu hình pipeline CI/CD (tương tác)
 azd pipeline config
 
-# Cấu hình với nhà cung cấp cụ thể
+# Cấu hình với một nhà cung cấp cụ thể
 azd pipeline config --provider github
 ```
 
-Lệnh này:
-- Tạo một service principal với quyền ít nhất cần thiết
-- Cấu hình federated credentials (không lưu trữ bí mật)
-- Tạo hoặc cập nhật tệp định nghĩa pipeline của bạn
-- Đặt các biến môi trường cần thiết trong hệ thống CI/CD của bạn
+This command:
+- Creates a service principal with least-privilege access
+- Configures federated credentials (no stored secrets)
+- Generates or updates your pipeline definition file
+- Sets required environment variables in your CI/CD system
 
-**Luồng công việc sản xuất với cấu hình pipeline:**
+#### Step-by-step: your first GitHub Actions pipeline
+
+Here's the full walkthrough from a working azd project to automated deployments on every push.
+
+**1. Make sure your project is on GitHub**
+
+```bash
+git init
+git add .
+git commit -m "Initial azd project"
+gh repo create my-ai-app --private --source=. --push
+```
+
+**2. Run pipeline config**
+
+```bash
+azd pipeline config --provider github
+```
+
+azd will, interactively:
+- Ask which Azure subscription and environment to target
+- Create an Entra **app registration + service principal** for the pipeline
+- Set up **federated credentials (OIDC)**—so GitHub authenticates to Azure with short-lived tokens and **no secrets are stored**
+- Push the required **variables** to your GitHub repo (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `AZURE_ENV_NAME`, `AZURE_LOCATION`)
+
+**3. Understand the generated workflow**
+
+azd adds `.github/workflows/azure-dev.yml`. The key parts look like this:
+
+```yaml
+# .github/workflows/azure-dev.yml
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:        # lets you run it manually too
+
+permissions:
+  id-token: write           # required for OIDC federated login
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
+      AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install azd
+        uses: Azure/setup-azd@v2
+      - name: Log in with OIDC
+        run: azd auth login --client-id "$AZURE_CLIENT_ID" --federated-credential-provider "github" --tenant-id "$AZURE_TENANT_ID"
+      - name: Provision infrastructure
+        run: azd provision --no-prompt
+      - name: Deploy application
+        run: azd deploy --no-prompt
+```
+
+**4. Verify it works**
+
+```bash
+# Đẩy một thay đổi để kích hoạt pipeline
+git commit -am "Trigger pipeline" --allow-empty
+git push
+```
+
+Open the **Actions** tab in your GitHub repo and watch the workflow run `azd provision` and `azd deploy` automatically.
+
+> **Why federated credentials matter:** older pipelines stored a client secret in GitHub. OIDC federated credentials remove that secret entirely—GitHub requests a short-lived token at runtime, which is both more secure and nothing to rotate or leak. This is the default `azd pipeline config` sets up.
+
+> **Secrets vs. variables:** non-sensitive identifiers (`AZURE_CLIENT_ID`, etc.) go in repo **variables**. If your app genuinely needs a secret at build time, add it as a GitHub **secret** and reference it with `${{ secrets.NAME }}`—but prefer Key Vault + managed identity at runtime (see [Chapter 3](../chapter-03-configuration/authsecurity.md)).
+
+**Production workflow with pipeline config:**
 
 ```bash
 # 1. Thiết lập môi trường sản xuất
@@ -1118,44 +1247,111 @@ azd env set AZURE_OPENAI_CAPACITY 100
 # 2. Cấu hình pipeline
 azd pipeline config --provider github
 
-# 3. Pipeline chạy azd deploy mỗi khi có push lên nhánh main
+# 3. Pipeline chạy azd deploy trên mỗi lần push lên nhánh main
 ```
 
-### Thêm thành phần với `azd add`
+#### Step-by-step: Azure DevOps Pipelines
 
-Tăng dần thêm các dịch vụ Azure vào dự án hiện có:
+Prefer Azure DevOps over GitHub Actions? azd supports it natively with the `azdo` provider. The flow is nearly identical—azd generates the pipeline file, creates a service connection, and wires up authentication.
+
+**1. Make sure you have an Azure DevOps project**
+
+You need an organization and a project at `https://dev.azure.com/<your-org>`. Generate a Personal Access Token (PAT) with **Build (Read & execute)**, **Code (Read & write)**, and **Service Connections (Read, query & manage)** scopes—azd will prompt you for it.
+
+**2. Configure the pipeline**
+
+```bash
+azd pipeline config --provider azdo
+```
+
+azd will:
+- Ask for your Azure DevOps organization and project
+- Create (or reuse) a **service connection** to Azure using a service principal
+- Configure **workload identity federation (OIDC)** so no client secret is stored
+- Commit an `azure-dev.yml` pipeline definition to your repo
+
+**3. Review the generated `azure-dev.yml`**
+
+azd writes a pipeline that provisions and deploys on every push to `main`:
+
+```yaml
+# azure-dev.yml
+trigger:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: setup-azd@1
+    displayName: Install azd
+
+  - script: azd provision --no-prompt
+    displayName: Provision Infrastructure
+    env:
+      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
+      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
+      AZURE_LOCATION: $(AZURE_LOCATION)
+
+  - script: azd deploy --no-prompt
+    displayName: Deploy Application
+    env:
+      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
+      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
+      AZURE_LOCATION: $(AZURE_LOCATION)
+```
+
+**4. Where the variables come from**
+
+azd stores the environment values (`AZURE_ENV_NAME`, `AZURE_LOCATION`, `AZURE_SUBSCRIPTION_ID`) as a **variable group** in Azure DevOps so the pipeline can read them. You can view and edit them under **Pipelines → Library**.
+
+> **Same OIDC benefit as GitHub:** the `azdo` provider also configures workload identity federation by default, so there's no client secret stored in the service connection—Azure DevOps exchanges a short-lived token at runtime. Pass `--auth-type client-credentials` only if your organization can't use OIDC yet.
+
+**5. Run it**
+
+```bash
+git commit -am "Add Azure DevOps pipeline" --allow-empty
+git push
+```
+
+Open **Pipelines** in Azure DevOps to watch `azd provision` and `azd deploy` run.
+
+### Adding Components with `azd add`
+
+Incrementally add Azure services to an existing project:
 
 ```bash
 # Thêm một thành phần dịch vụ mới một cách tương tác
 azd add
 ```
 
-Điều này đặc biệt hữu ích để mở rộng các ứng dụng AI cho môi trường sản xuất—ví dụ, thêm dịch vụ tìm kiếm vector, một điểm cuối agent mới, hoặc một thành phần giám sát vào triển khai hiện có.
+This is particularly useful for expanding production AI applications—for example, adding a vector search service, a new agent endpoint, or a monitoring component to an existing deployment.
 
-## Tài nguyên bổ sung
-- **Azure Well-Architected Framework**: [Hướng dẫn khối lượng công việc AI](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Microsoft Foundry Documentation**: [Tài liệu chính thức](https://learn.microsoft.com/azure/ai-studio/)
-- **Mẫu cộng đồng**: [Azure Samples](https://github.com/Azure-Samples)
-- **Cộng đồng Discord**: [#kênh Azure](https://discord.gg/microsoft-azure)
-- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure trên skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 kỹ năng agent mở cho Azure AI, Foundry, triển khai, tối ưu hóa chi phí, và chẩn đoán. Cài đặt trong trình soạn thảo của bạn:
+## Additional Resources
+
+- **Azure Well-Architected Framework**: [AI workload guidance](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Microsoft Foundry Documentation**: [Official docs](https://learn.microsoft.com/azure/ai-studio/)
+- **Community Templates**: [Azure Samples](https://github.com/Azure-Samples)
+- **Discord Community**: [#Azure channel](https://discord.gg/microsoft-azure)
+- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 open agent skills for Azure AI, Foundry, deployment, cost optimization, and diagnostics. Install in your editor:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
 
 ---
 
-**Điều hướng chương:**
-- **📚 Trang khóa học**: [AZD For Beginners](../../README.md)
-- **📖 Chương hiện tại**: Chương 8 - Các mẫu cho Sản xuất & Doanh nghiệp
-- **⬅️ Chương trước**: [Chương 7: Gỡ lỗi](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Cũng liên quan**: [AI Workshop Lab](ai-workshop-lab.md)
-- **� Hoàn thành khóa học**: [AZD For Beginners](../../README.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 8 - Production & Enterprise Patterns
+- **⬅️ Previous Chapter**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Also Related**: [AI Workshop Lab](ai-workshop-lab.md)
+- **� Course Complete**: [AZD For Beginners](../../README.md)
 
-**Ghi nhớ**: Khối lượng công việc AI trong môi trường sản xuất đòi hỏi lập kế hoạch cẩn thận, giám sát và tối ưu hóa liên tục. Bắt đầu với các mẫu này và điều chỉnh chúng cho phù hợp với yêu cầu cụ thể của bạn.
+**Remember**: Production AI workloads require careful planning, monitoring, and continuous optimization. Start with these patterns and adapt them to your specific requirements.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi nỗ lực để đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ gốc nên được coi là nguồn có thẩm quyền. Đối với thông tin quan trọng, khuyến nghị sử dụng bản dịch chuyên nghiệp do con người thực hiện. Chúng tôi không chịu trách nhiệm cho bất kỳ hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+**Tuyên bố miễn trừ trách nhiệm**:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng bản dịch tự động có thể chứa lỗi hoặc sai sót. Tài liệu gốc bằng ngôn ngữ gốc nên được coi là nguồn tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

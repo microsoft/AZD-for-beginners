@@ -1,74 +1,74 @@
 # Hướng dẫn Cấu hình
 
-**Điều hướng chương:**
-- **📚 Trang Khóa học**: [AZD cho Người mới bắt đầu](../../README.md)
-- **📖 Chương hiện tại**: Chương 3 - Cấu hình & Xác thực
-- **⬅️ Trước**: [Dự án đầu tiên của bạn](first-project.md)
-- **➡️ Tiếp theo**: [Hướng dẫn Triển khai](../chapter-04-infrastructure/deployment-guide.md)
-- **🚀 Chương tiếp theo**: [Chương 4: Hạ tầng như mã](../chapter-04-infrastructure/deployment-guide.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 3 - Configuration & Authentication
+- **⬅️ Previous**: [Your First Project](first-project.md)
+- **➡️ Next**: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
+- **🚀 Next Chapter**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Giới thiệu
 
-Hướng dẫn toàn diện này bao quát mọi khía cạnh của việc cấu hình Azure Developer CLI để tối ưu hóa quy trình phát triển và triển khai. Bạn sẽ tìm hiểu về hệ thống phân cấp cấu hình, quản lý môi trường, phương thức xác thực và các mẫu cấu hình nâng cao cho phép triển khai Azure hiệu quả và an toàn.
+Hướng dẫn toàn diện này bao quát tất cả các khía cạnh của việc cấu hình Azure Developer CLI để có quy trình phát triển và triển khai tối ưu. Bạn sẽ tìm hiểu về hệ thống phân cấp cấu hình, quản lý môi trường, các phương thức xác thực, và các mẫu cấu hình nâng cao giúp triển khai Azure an toàn và hiệu quả.
 
 ## Mục tiêu học tập
 
 Sau bài học này, bạn sẽ:
-- Thông thạo hệ thống phân cấp cấu hình của azd và hiểu cách các thiết lập được ưu tiên
-- Cấu hình các thiết lập toàn cục và riêng cho dự án một cách hiệu quả
+- Nắm vững hệ thống phân cấp cấu hình azd và hiểu cách ưu tiên các thiết lập
+- Cấu hình các thiết lập toàn cục và theo dự án một cách hiệu quả
 - Quản lý nhiều môi trường với các cấu hình khác nhau
 - Triển khai các mẫu xác thực và ủy quyền an toàn
-- Hiểu các mẫu cấu hình nâng cao cho các tình huống phức tạp
+- Hiểu các mẫu cấu hình nâng cao cho các kịch bản phức tạp
 
 ## Kết quả học tập
 
 Sau khi hoàn thành bài học này, bạn sẽ có khả năng:
-- Cấu hình azd cho các luồng công việc phát triển tối ưu
+- Cấu hình azd cho các quy trình phát triển tối ưu
 - Thiết lập và quản lý nhiều môi trường triển khai
 - Triển khai các thực hành quản lý cấu hình an toàn
 - Khắc phục sự cố liên quan đến cấu hình
-- Tùy chỉnh hành vi của azd cho các yêu cầu tổ chức cụ thể
+- Tùy chỉnh hành vi azd cho các yêu cầu tổ chức cụ thể
 
-Hướng dẫn toàn diện này bao quát mọi khía cạnh của việc cấu hình Azure Developer CLI để tối ưu hóa quy trình phát triển và triển khai.
+Hướng dẫn toàn diện này bao quát tất cả các khía cạnh của việc cấu hình Azure Developer CLI để có quy trình phát triển và triển khai tối ưu.
 
 ## Hiểu về các tác nhân AI trong dự án azd
 
-Nếu bạn mới với các tác nhân AI, đây là một cách đơn giản để suy nghĩ về chúng trong thế giới azd.
+Nếu bạn mới với các tác nhân AI, đây là cách đơn giản để suy nghĩ về chúng trong thế giới azd.
 
 ### Tác nhân là gì?
 
-Tác nhân là một phần mềm có thể nhận yêu cầu, suy luận về nó và thực hiện các hành động—thường bằng cách gọi một mô hình AI, tra cứu dữ liệu, hoặc gọi các dịch vụ khác. Trong một dự án azd, một tác nhân chỉ là một **dịch vụ** khác bên cạnh giao diện web phía trước hoặc backend API của bạn.
+Tác nhân là một phần mềm có thể nhận yêu cầu, suy luận về nó và thực hiện hành động — thường bằng cách gọi một mô hình AI, tra cứu dữ liệu, hoặc gọi các dịch vụ khác. Trong một dự án azd, một tác nhân chỉ là một **dịch vụ** khác bên cạnh frontend web hoặc backend API của bạn.
 
-### Cách các tác nhân phù hợp với cấu trúc dự án azd
+### Cách tác nhân phù hợp với cấu trúc dự án azd
 
-Một dự án azd gồm ba lớp: **infrastructure**, **code**, và **configuration**. Các tác nhân cắm vào các lớp này theo cùng cách mà bất kỳ dịch vụ nào khác làm:
+Một dự án azd được tạo thành từ ba tầng: **infrastructure**, **code**, và **configuration**. Tác nhân được tích hợp vào các tầng này giống như bất kỳ dịch vụ nào khác:
 
-| Lớp | Vai trò đối với Ứng dụng truyền thống | Vai trò đối với Tác nhân |
+| Layer | What It Does for a Traditional App | What It Does for an Agent |
 |-------|-------------------------------------|---------------------------|
-| **Infrastructure** (`infra/`) | Cung cấp một ứng dụng web và cơ sở dữ liệu | Cung cấp một điểm cuối mô hình AI, chỉ mục tìm kiếm, hoặc máy chủ cho tác nhân |
-| **Code** (`src/`) | Chứa mã nguồn frontend và API của bạn | Chứa logic tác nhân và định nghĩa prompt |
-| **Configuration** (`azure.yaml`) | Liệt kê các dịch vụ và đích lưu trữ của chúng | Liệt kê tác nhân của bạn như một dịch vụ, trỏ đến mã nguồn và máy chủ của nó |
+| **Infrastructure** (`infra/`) | Cung cấp một ứng dụng web và cơ sở dữ liệu | Cung cấp điểm cuối mô hình AI, chỉ mục tìm kiếm, hoặc máy chủ để chạy tác nhân |
+| **Code** (`src/`) | Chứa mã nguồn frontend và API của bạn | Chứa logic tác nhân và định nghĩa lời nhắc |
+| **Configuration** (`azure.yaml`) | Liệt kê các dịch vụ của bạn và nơi lưu trữ của chúng | Liệt kê tác nhân của bạn như một dịch vụ, trỏ đến mã nguồn và nơi lưu trữ của nó |
 
 ### Vai trò của `azure.yaml`
 
-Bạn không cần phải thuộc lòng cú pháp ngay bây giờ. Về mặt khái niệm, `azure.yaml` là tệp nơi bạn nói với azd: "Đây là các dịch vụ tạo nên ứng dụng của tôi, và đây là nơi tìm mã nguồn của chúng."
+Bạn không cần phải ghi nhớ cú pháp ngay bây giờ. Về mặt khái niệm, `azure.yaml` là tệp mà bạn nói với azd: *"Đây là các dịch vụ tạo nên ứng dụng của tôi, và đây là nơi để tìm mã nguồn của chúng."*
 
-Khi dự án của bạn bao gồm một tác nhân AI, `azure.yaml` đơn giản liệt kê tác nhân đó như một trong các dịch vụ. azd sau đó biết cách cung cấp hạ tầng phù hợp (như một endpoint Microsoft Foundry Models hoặc một Container App để lưu trữ tác nhân) và triển khai mã tác nhân của bạn—giống như nó sẽ làm cho một ứng dụng web hoặc API.
+Khi dự án của bạn bao gồm một tác nhân AI, `azure.yaml` đơn giản liệt kê tác nhân đó như một trong các dịch vụ. azd sau đó biết cách cấp phát hạ tầng phù hợp (như một Microsoft Foundry Models endpoint hoặc một Container App để lưu trữ tác nhân) và triển khai mã tác nhân của bạn — giống như với một ứng dụng web hoặc API.
 
 Điều này có nghĩa là không có gì cơ bản mới để học. Nếu bạn hiểu cách azd quản lý một dịch vụ web, bạn đã hiểu cách nó quản lý một tác nhân.
 
 ## Hệ thống phân cấp cấu hình
 
-azd sử dụng một hệ thống cấu hình phân cấp:
-1. **Tham số dòng lệnh** (ưu tiên cao nhất)
-2. **Biến môi trường**
-3. **Cấu hình dự án cục bộ** (`.azd/config.json`)
-4. **Cấu hình người dùng toàn cục** (`~/.azd/config.json`)
-5. **Giá trị mặc định** (ưu tiên thấp nhất)
+azd sử dụng hệ thống cấu hình theo phân cấp:
+1. **Command-line flags** (ưu tiên cao nhất)
+2. **Environment variables**
+3. **Local project configuration** (`.azd/config.json`)
+4. **Global user configuration** (`~/.azd/config.json`)
+5. **Default values** (ưu tiên thấp nhất)
 
 ## Cấu hình toàn cục
 
-### Thiết lập mặc định toàn cục
+### Thiết lập giá trị mặc định toàn cục
 ```bash
 # Đặt đăng ký mặc định
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -86,11 +86,11 @@ azd config show
 azd config unset defaults.location
 ```
 
-### Các thiết lập toàn cục chung
+### Các cài đặt toàn cục thường gặp
 ```bash
 # Tùy chọn phát triển
-azd config set alpha.enable true                    # Bật các tính năng alpha
-azd config set telemetry.enabled false             # Tắt telemetry
+azd config set alpha.enable true                    # Bật tính năng alpha
+azd config set telemetry.enabled false             # Vô hiệu hóa thu thập dữ liệu
 azd config set output.format json                  # Đặt định dạng đầu ra
 
 # Cài đặt bảo mật
@@ -102,10 +102,10 @@ azd config set provision.parallelism 5             # Tạo tài nguyên song son
 azd config set deploy.timeout 30m                  # Thời gian chờ triển khai
 ```
 
-## 🏗️ Cấu hình Dự án
+## 🏗️ Cấu hình dự án
 
-### Cấu trúc của azure.yaml
-Tệp `azure.yaml` là trái tim của dự án azd của bạn:
+### Cấu trúc azure.yaml
+Tệp `azure.yaml` là trung tâm của dự án azd của bạn:
 
 ```yaml
 # Minimum configuration
@@ -181,7 +181,7 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Tùy chọn cấu hình Dịch vụ
+### Tùy chọn cấu hình dịch vụ
 
 #### Loại host
 ```yaml
@@ -202,7 +202,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Thiết lập theo ngôn ngữ
+#### Cài đặt theo ngôn ngữ
 ```yaml
 services:
   node-app:
@@ -226,11 +226,11 @@ services:
     startCommand: java -jar target/app.jar
 ```
 
-## 🌟 Quản lý Môi trường
+## 🌟 Quản lý môi trường
 
-### Tạo Môi trường
+### Tạo môi trường
 ```bash
-# Tạo một môi trường mới
+# Tạo môi trường mới
 azd env new development
 
 # Tạo với vị trí cụ thể
@@ -240,7 +240,7 @@ azd env new staging --location "westus2"
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### Cấu hình Môi trường
+### Cấu hình môi trường
 Mỗi môi trường có cấu hình riêng trong `.azure/<env-name>/config.json`:
 
 ```json
@@ -265,7 +265,7 @@ Mỗi môi trường có cấu hình riêng trong `.azure/<env-name>/config.json
 
 ### Biến môi trường
 ```bash
-# Thiết lập các biến môi trường theo môi trường cụ thể
+# Thiết lập các biến theo môi trường
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
@@ -283,13 +283,13 @@ azd env unset DEBUG
 
 # Xác minh việc xóa
 azd env get-values | grep DEBUG
-# (không trả về gì)
+# (không nên trả về gì)
 ```
 
-### Mẫu Môi trường
+### Mẫu môi trường
 Tạo `.azure/env.template` để thiết lập môi trường nhất quán:
 ```bash
-# Các biến bắt buộc
+# Biến bắt buộc
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
@@ -303,7 +303,52 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 Cấu hình Xác thực
+### Chia sẻ môi trường trong đội
+
+Khi nhiều người cùng làm việc trên một dự án, bạn cần thống nhất **những gì đi theo repo và những gì ở lại cục bộ**. azd giữ mỗi môi trường dưới thư mục `.azure/`, và không phải tất cả đều nên được commit.
+
+**Có gì trong `.azure/`:**
+
+```
+.azure/
+├── config.json              # which env is currently selected (local)
+└── <env-name>/
+    ├── config.json          # subscription, location, resource IDs
+    └── .env                 # environment variables (may contain secrets!)
+```
+
+**Những gì cần gitignore.** `.gitignore` mặc định của azd đã loại trừ `.azure/`. Giữ nguyên điều đó—các tệp `.env` có thể chứa bí mật, và ID tài nguyên là riêng cho người đã provision chúng. Mỗi thành viên tạo môi trường **riêng** cục bộ:
+
+```bash
+# Mỗi nhà phát triển chạy cái này một lần để có môi trường cô lập riêng
+azd env new dev-alice
+azd up
+```
+
+**Chuyển đổi giữa các môi trường.** Nhà phát triển quản lý nhiều môi trường sẽ chọn môi trường đang hoạt động trước khi chạy các lệnh:
+
+```bash
+azd env list                 # xem tất cả các môi trường cục bộ và môi trường nào là mặc định
+azd env select staging       # đặt 'staging' làm môi trường đang hoạt động
+azd env get-values           # xác nhận bạn đang trỏ tới môi trường đúng
+```
+
+**Cung cấp các giá trị mặc định không bí mật cho nhóm.** Commit một mẫu (như `.azure/env.template` ở trên) để mọi người biết các biến cần thiết—nhưng không bao giờ commit các giá trị đã điền. Thành viên mới sao chép mẫu và điền giá trị của riêng họ.
+
+**Môi trường trong CI/CD.** Các pipeline không đọc thư mục `.azure/` cục bộ của bạn. Thay vào đó, cung cấp các giá trị môi trường như biến/bí mật của pipeline, và azd đọc chúng từ môi trường tiến trình:
+
+```bash
+# Trong CI, azd đọc các giá trị này từ các biến môi trường, chứ không phải từ .azure/
+export AZURE_ENV_NAME=production
+export AZURE_LOCATION=eastus2
+export AZURE_SUBSCRIPTION_ID=<sub-id>
+azd provision --no-prompt
+azd deploy --no-prompt
+```
+
+> **Quy tắc chung:** mã hạ tầng (`infra/`, `azure.yaml`) được chia sẻ trên Git; *trạng thái môi trường và bí mật* (`.azure/`) là riêng cho từng nhà phát triển và từng pipeline. `azd pipeline config` sẽ thiết lập các biến pipeline cho bạn tự động.
+
+## 🔐 Cấu hình xác thực
 
 ### Tích hợp Azure CLI
 ```bash
@@ -318,9 +363,9 @@ az account set --subscription <subscription-id>
 ```
 
 ### Xác thực Service Principal
-Cho các pipeline CI/CD:
+Cho pipeline CI/CD:
 ```bash
-# Thiết lập biến môi trường
+# Đặt biến môi trường
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
@@ -331,7 +376,7 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### Managed Identity
-Cho các môi trường được lưu trữ trên Azure:
+Cho các môi trường chạy trên Azure:
 ```bash
 # Bật xác thực danh tính được quản lý
 azd config set auth.useMsi true
@@ -341,7 +386,7 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 ## 🏗️ Cấu hình Hạ tầng
 
 ### Tham số Bicep
-Cấu hình các tham số hạ tầng trong `infra/main.parameters.json`:
+Cấu hình tham số hạ tầng trong `infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -413,9 +458,9 @@ services:
 ```
 Ví dụ `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
-## 🔧 Cấu hình Nâng cao
+## 🔧 Cấu hình nâng cao
 
-### Đặt tên Tài nguyên Tùy chỉnh
+### Đặt tên tài nguyên tùy chỉnh
 ```bash
 # Thiết lập quy ước đặt tên
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -423,7 +468,7 @@ azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
 ```
 
-### Cấu hình Mạng
+### Cấu hình mạng
 ```yaml
 # In azure.yaml
 infra:
@@ -434,7 +479,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### Cấu hình Giám sát
+### Cấu hình giám sát
 ```yaml
 # In azure.yaml
 monitoring:
@@ -446,11 +491,11 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Cấu hình theo Môi trường
+## 🎯 Cấu hình theo môi trường
 
 ### Môi trường Phát triển
 ```bash
-# .azure/development/.env
+# .azure/phát triển/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
@@ -475,9 +520,9 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Kiểm tra cấu hình
+## 🔍 Xác thực cấu hình
 
-### Xác thực Cấu hình
+### Xác thực cấu hình
 ```bash
 # Kiểm tra cú pháp cấu hình
 azd config validate
@@ -485,11 +530,11 @@ azd config validate
 # Kiểm tra biến môi trường
 azd env get-values
 
-# Xác thực cơ sở hạ tầng
+# Xác minh cơ sở hạ tầng
 azd provision --dry-run
 ```
 
-### Script Cấu hình
+### Script cấu hình
 Tạo các script xác thực trong `scripts/`:
 
 ```bash
@@ -504,7 +549,7 @@ if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   exit 1
 fi
 
-# Kiểm tra cú pháp azure.yaml
+# Xác thực cú pháp của azure.yaml
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -513,9 +558,9 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Thực hành tốt nhất
+## 🎓 Những thực hành tốt nhất
 
-### 1. Sử dụng Biến Môi trường
+### 1. Sử dụng biến môi trường
 ```yaml
 # Good: Use environment variables
 database:
@@ -526,7 +571,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Sắp xếp các Tệp Cấu hình
+### 2. Tổ chức các tệp cấu hình
 ```
 .azure/
 ├── config.json              # Global project config
@@ -542,7 +587,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Cân nhắc về Kiểm soát Phiên bản
+### 3. Những cân nhắc về quản lý phiên bản
 ```bash
 # .gitignore
 .azure/*/config.json         # Cấu hình môi trường (chứa các ID tài nguyên)
@@ -550,8 +595,8 @@ database:
 .env                        # Tệp môi trường cục bộ
 ```
 
-### 4. Tài liệu Cấu hình
-Ghi tài liệu cấu hình của bạn trong `CONFIG.md`:
+### 4. Tài liệu cấu hình
+Ghi chép cấu hình của bạn trong `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -566,11 +611,11 @@ Ghi tài liệu cấu hình của bạn trong `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
-## 🎯 Bài tập Thực hành
+## 🎯 Bài tập thực hành
 
-### Bài tập 1: Cấu hình Đa-Môi trường (15 phút)
+### Bài tập 1: Cấu hình nhiều môi trường (15 phút)
 
-**Mục tiêu**: Tạo và cấu hình ba môi trường với các thiết lập khác nhau
+**Mục tiêu**: Tạo và cấu hình ba môi trường với các cài đặt khác nhau
 
 ```bash
 # Tạo môi trường phát triển
@@ -579,7 +624,7 @@ azd env set LOG_LEVEL debug
 azd env set ENABLE_TELEMETRY false
 azd env set APP_INSIGHTS_SAMPLING 100
 
-# Tạo môi trường dàn dựng (staging)
+# Tạo môi trường dàn dựng
 azd env new staging
 azd env set LOG_LEVEL info
 azd env set ENABLE_TELEMETRY true
@@ -598,21 +643,21 @@ azd env select production && azd env get-values
 ```
 
 **Tiêu chí thành công:**
-- [ ] Ba môi trường được tạo thành công
+- [ ] Tạo thành công ba môi trường
 - [ ] Mỗi môi trường có cấu hình riêng biệt
-- [ ] Có thể chuyển đổi giữa các môi trường mà không có lỗi
+- [ ] Có thể chuyển giữa các môi trường mà không lỗi
 - [ ] `azd env list` hiển thị cả ba môi trường
 
-### Bài tập 2: Quản lý Bí mật (10 phút)
+### Bài tập 2: Quản lý bí mật (10 phút)
 
 **Mục tiêu**: Thực hành cấu hình an toàn với dữ liệu nhạy cảm
 
 ```bash
-# Đặt bí mật (không hiển thị trong đầu ra)
+# Thiết lập bí mật (không hiển thị trong đầu ra)
 azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 
-# Đặt cấu hình không bí mật
+# Thiết lập cấu hình không bí mật
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
@@ -624,34 +669,34 @@ azd env get DB_PASSWORD  # Nên hiển thị giá trị thực tế
 ```
 
 **Tiêu chí thành công:**
-- [ ] Bí mật được lưu mà không hiển thị trên terminal
-- [ ] `azd env get-values` hiển thị các bí mật đã được che mờ
-- [ ] Mỗi `azd env get <SECRET_NAME>` truy xuất giá trị thực
+- [ ] Bí mật được lưu trữ mà không hiển thị trên terminal
+- [ ] `azd env get-values` hiển thị các bí mật được che đi
+- [ ] Lệnh `azd env get <SECRET_NAME>` riêng lẻ lấy được giá trị thực tế
 
 ## Bước tiếp theo
 
-- [Dự án đầu tiên của bạn](first-project.md) - Áp dụng cấu hình trong thực tế
-- [Hướng dẫn Triển khai](../chapter-04-infrastructure/deployment-guide.md) - Sử dụng cấu hình cho triển khai
-- [Cấp phát Tài nguyên](../chapter-04-infrastructure/provisioning.md) - Cấu hình sẵn sàng cho môi trường sản xuất
+- [Your First Project](first-project.md) - Áp dụng cấu hình vào thực tế
+- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Sử dụng cấu hình cho triển khai
+- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - Cấu hình sẵn sàng cho production
 
-## Tài liệu tham khảo
+## Tham khảo
 
-- [Tài liệu tham khảo cấu hình azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Lược đồ azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Biến môi trường](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [azd Configuration Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [Environment Variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**Điều hướng chương:**
-- **📚 Trang Khóa học**: [AZD cho Người mới bắt đầu](../../README.md)
-- **📖 Chương hiện tại**: Chương 3 - Cấu hình & Xác thực
-- **⬅️ Trước**: [Dự án đầu tiên của bạn](first-project.md)
-- **➡️ Chương tiếp theo**: [Chương 4: Hạ tầng như mã](../chapter-04-infrastructure/deployment-guide.md)
-- **Bài học tiếp theo**: [Dự án đầu tiên của bạn](first-project.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 3 - Configuration & Authentication
+- **⬅️ Previous**: [Your First Project](first-project.md)
+- **➡️ Next Chapter**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
+- **Next Lesson**: [Your First Project](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa của nó nên được coi là nguồn tham chiếu chính thức. Đối với thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp do con người thực hiện. Chúng tôi không chịu trách nhiệm cho bất kỳ hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+**Tuyên bố miễn trừ trách nhiệm**:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng bản dịch tự động có thể chứa lỗi hoặc sai sót. Tài liệu gốc bằng ngôn ngữ gốc nên được coi là nguồn tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
