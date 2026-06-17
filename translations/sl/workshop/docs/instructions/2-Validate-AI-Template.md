@@ -1,59 +1,59 @@
-# 2. Preverjanje predloge
+# 2. Potrditev predloge
 
-> Preverjeno z `azd 1.23.12` marca 2026.
+> Validated against `azd 1.25.6` in June 2026.
 
-!!! tip "NA KONCU TEGA MODULA BOSTE ZMOGLI"
+!!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
 
     - [ ] Analizirati arhitekturo AI rešitve
-    - [ ] Razumeti delovni tok nameščanja z AZD
+    - [ ] Razumeti potek uvajanja z AZD
     - [ ] Uporabiti GitHub Copilot za pomoč pri uporabi AZD
-    - [ ] **Lab 2:** Namestiti in preveriti predlogo AI Agentov
+    - [ ] **Lab 2:** Namestitev in potrditev predloge AI agentov
 
 ---
 
 
 ## 1. Uvod
 
-The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) or `azd` je odprtokodno orodje ukazne vrstice, ki poenostavi razvojni potek pri gradnji in nameščanju aplikacij v Azure. 
+The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) or `azd` is an open-source commandline tool that streamlines the developer workflow when building and deploying applications to Azure. 
 
-[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) so standardizirani repozitoriji, ki vključujejo vzorčno kodo aplikacije, sredstva _infrastrukture kot kode_ in konfiguracijske datoteke `azd` za skladno arhitekturo rešitve. Zagotavljanje infrastrukture postane tako preprosto kot ukaz `azd provision` - medtem ko `azd up` omogoča, da hkrati zagotovite infrastrukturo **in** namestite svojo aplikacijo!
+[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) are standardized repositories that include sample application code, _infrastructure-as-code_ assets, and `azd` configuration files for a cohesive solution architecture. Provisioning the infrastructure becomes as simple as an `azd provision` command - while using `azd up` allows you to provision infrastructure **and** deploy your application at one shot!
 
-Posledično je zagon razvoja aplikacije lahko tako preprost, kot najti pravo _AZD Starter predlogo_, ki se najbolj ujema z vašimi potrebami po aplikaciji in infrastrukturi - nato prilagoditi repozitorij tako, da ustreza zahtevam vašega scenarija.
+As a result, jumpstarting your application development process can be as simple as finding the right _AZD Starter template_ that comes closest to your application and infrastructure needs - then customizing the repository to suit your scenario requirements.
 
-Preden začnemo, poskrbimo, da imate nameščen Azure Developer CLI.
+Before we begin, let's make sure you have the Azure Developer CLI installed.
 
-1. Odprite terminal v VS Code in vnesite ta ukaz:
+1. Open a VS Code terminal and type this command:
 
       ```bash title="" linenums="0"
       azd version
       ```
 
-1. Videli boste nekaj podobnega!
+1. You should see something like this!
 
       ```bash title="" linenums="0"
-      azd version 1.23.12 (commit <current-build>)
+      azd version 1.25.6 (commit <current-build>)
       ```
 
-**Zdaj ste pripravljeni izbrati in namestiti predlogo z azd**
+**You are now ready to select and deploy a template with azd**
 
 ---
 
-## 2. Izbor predloge
+## 2. Izbira predloge
 
-Platforma Microsoft Foundry vključuje [serijo priporočenih AZD predlog](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started), ki pokrivajo priljubljene scenarije rešitev, kot so _samodejni delovni tok več agentov_ in _večmodalna obdelava vsebin_. Te predloge lahko odkrijete tudi neposredno v portalu Microsoft Foundry.
+The Microsoft Foundry platform comes with a [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that cover popular solution scenarios like _multi-agent workflow atomation_ and _multi-modal content processing_. You can also discover these templates by visiting the Microsoft Foundry portal.
 
-1. Obiščite [https://ai.azure.com/templates](https://ai.azure.com/templates)
-1. Prijavite se v portal Microsoft Foundry, ko boste pozvani - videli boste nekaj takega.
+1. Visit [https://ai.azure.com/templates](https://ai.azure.com/templates)
+1. Log into the Microsoft Foundry portal when prompted - you will see something like this.
 
-![Izberite](../../../../../translated_images/sl/01-pick-template.60d2d5fff5ebc374.webp)
+![Izberi](../../../../../translated_images/sl/01-pick-template.60d2d5fff5ebc374.webp)
 
 
-Možnosti **Basic** so vaše začetne predloge:
+The **Basic** options are your starter templates:
 
-1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) ki namešča osnovno klepetalno aplikacijo _z vašimi podatki_ v Azure Container Apps. Uporabite to za raziskovanje osnovnega scenarija AI klepetalnika.
-1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) ki prav tako namešča standardnega AI Agenta (s Foundry Agenti). Uporabite to za seznanitev z agentnimi AI rešitvami, ki vključujejo orodja in modele.
+1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) that deploys a basic chat application _with your data_ to Azure Container Apps. Use this to explore a basic AI chatbot scenario.
+1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) that also deploys a standard AI Agent (with the Foundry Agents). Use this to get familiar with agentic AI solutions involving tools and models.
 
-Obiščite drugo povezavo v novem zavihku brskalnika (ali kliknite `Open in GitHub` za ustrezni kartici). Videti bi morali repozitorij te AZD predloge. Vzemite si minuto in raziskujte README. Arhitektura aplikacije izgleda takole:
+Visit the second link in a new browser tab (or click `Open in GitHub` for the related card). You should see the repository for this AZD Template. Take a minute to explore the README. The application architecture looks like this:
 
 ![Arhitektura](../../../../../translated_images/sl/architecture.8cec470ec15c65c7.webp)
 
@@ -61,34 +61,34 @@ Obiščite drugo povezavo v novem zavihku brskalnika (ali kliknite `Open in GitH
 
 ## 3. Aktivacija predloge
 
-Poskusimo namestiti to predlogo in se prepričati, da je veljavna. Upoštevali bomo navodila v razdelku [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started).
+Let's try to deploy this template and make sure it is valid. We'll follow the guidelines in the [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) section.
 
-1. Izberite delovno okolje za repozitorij predloge:
+1. Choose a working environment for the template repository:
 
-      - **GitHub Codespaces**: Kliknite [to povezavo](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) in potrdite `Create codespace`
-      - **Local clone or dev container**: Klonirajte `Azure-Samples/get-started-with-ai-agents` in ga odprite v VS Code
+      - **GitHub Codespaces**: Click [this link](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) and confirm `Create codespace`
+      - **Local clone or dev container**: Clone `Azure-Samples/get-started-with-ai-agents` and open it in VS Code
 
-1. Počakajte, da je terminal v VS Code pripravljen, nato vnesite naslednji ukaz:
+1. Wait until the VS Code terminal is ready, then type the following command:
 
    ```bash title="" linenums="0"
    azd up
    ```
 
-Dokončajte korake delovnega toka, ki jih bo to sprožilo:
+Complete the workflow steps that this will trigger:
 
-1. Prijavili se boste v Azure - sledite navodilom za overjanje
-1. Vnesite edinstveno ime okolja za vas - npr., jaz sem uporabil `nitya-mshack-azd`
-1. To bo ustvarilo mapo `.azure/` - videli boste podmapo z imenom okolja
-1. Pozvani boste, da izberete ime naročnine - izberite privzeto
-1. Pozvani boste za lokacijo - uporabite `East US 2`
+1. You will be prompted to log into Azure - follow instructions to authenticate
+1. Enter a unique environment name for you - e.g., I used `nitya-mshack-azd`
+1. This  will create a `.azure/` folder - you will see a subfolder with the env name
+1. You will be prompted to select a subscription name - select the default
+1. You will be prompted for a location - use `East US 2`
 
-Zdaj počakajte, da se zagotavljanje zaključi. **To traja 10-15 minut**
+Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
 
-1. Ko je končano, bo v vaši konzoli prikazano sporočilo SUCCESS, podobno temu:
+1. When done, your console will show a SUCCESS message like this:
       ```bash title="" linenums="0"
       SUCCESS: Your up workflow to provision and deploy to Azure completed in 10 minutes 17 seconds.
       ```
-1. Vaš Azure Portal bo zdaj imel zagotovljeno skupino virov z imenom tega okolja:
+1. Vaš Azure Portal bo sedaj imel v skupini virov (resource group) z imenom tega okolja:
 
       ![Infrastruktura](../../../../../translated_images/sl/02-provisioned-infra.46c706b14f56e0bf.webp)
 
@@ -98,87 +98,87 @@ Zdaj počakajte, da se zagotavljanje zaključi. **To traja 10-15 minut**
 
 ## 4. Preverjanje predloge
 
-1. Obiščite stran Azure Portal [Resource Groups](https://portal.azure.com/#browse/resourcegroups) - prijavite se, ko boste pozvani
-1. Kliknite na RG za ime vašega okolja - videli boste stran, prikazano zgoraj
+1. Visit Azure Portal [Resource Groups](https://portal.azure.com/#browse/resourcegroups) page - log in when prompted
+1. Click on RG for your environment name - you see the page above
 
-      - kliknite na vir Azure Container Apps
-      - kliknite na Application Url v razdelku _Essentials_ (zgoraj desno)
+      - click on the Azure Container Apps resource
+      - click on the Application Url in the _Essentials_ section (top right)
 
-1. Videti bi morali gostujočo uporabniško vmesnik aplikacije, kot je ta:
+1. You should see a hosted application front-end UI like this:
 
    ![Aplikacija](../../../../../translated_images/sl/03-test-application.471910da12c3038e.webp)
 
-1. Poskusite zastaviti nekaj [vzorečnih vprašanj](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
+1. Try asking a couple of [sample questions](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
-      1. Vprašajte: ```Kaj je prestolnica Francije?``` 
-      1. Vprašajte: ```Kateri je najboljši šotor do $200 za dve osebi in katere lastnosti vključuje?```
+      1. Vprašajte: ```What is the capital of France?``` 
+      1. Vprašajte: ```What's the best tent under $200 for two people, and what features does it include?```
 
-1. Dobili bi morali odgovore, podobne prikazanemu spodaj. _Ampak kako to deluje?_ 
+1. You should get answers similar to what is shown below. _But how does this work?_ 
 
       ![Aplikacija](../../../../../translated_images/sl/03-test-question.521c1e863cbaddb6.webp)
 
 ---
 
-## 5. Validacija agenta
+## 5.  Preverjanje agenta
 
-Azure Container App namesti končno točko, ki se poveže z AI Agentom, zagotovljenim v projektu Microsoft Foundry za to predlogo. Oglejmo si, kaj to pomeni.
+The Azure Container App deploys an endpoint that connects to the AI Agent provisioned in the Microsoft Foundry project for this template. Let's take a look at what that means.
 
-1. Vrnite se na stran Overview v Azure Portal za vašo skupino virov
+1. Return to the Azure Portal _Overview_ page for your resource group
 
-1. Kliknite na vir `Microsoft Foundry` v tem seznamu
+1. Click on the `Microsoft Foundry` resource in that list
 
-1. Videti bi morali to. Kliknite gumb `Go to Microsoft Foundry Portal`. 
+1. You should see this. Click the `Go to Microsoft Foundry Portal` button. 
    ![Foundry](../../../../../translated_images/sl/04-view-foundry-project.fb94ca41803f28f3.webp)
 
-1. Videli boste stran Foundry Project za vašo AI aplikacijo
+1. You should see the Foundry Project page for your AI application
    ![Projekt](../../../../../translated_images/sl/05-visit-foundry-portal.d734e98135892d7e.webp)
 
-1. Kliknite na `Agents` - videli boste privzetega Agenta, zagotovljenega v vašem projektu
+1. Click on `Agents` - you see the default Agent provisioned in your project
    ![Agenti](../../../../../translated_images/sl/06-visit-agents.bccb263f77b00a09.webp)
 
-1. Izberite ga - in videli boste podrobnosti agenta. Upoštevajte naslednje:
+1. Select it - and you see the Agent details. Note the following:
 
-      - Agent privzeto vedno uporablja File Search
-      - Agentova `Knowledge` kaže, da ima naloženih 32 datotek (za iskanje po datotekah)
-      ![Agenti](../../../../../translated_images/sl/07-view-agent-details.0e049f37f61eae62.webp)
+      - Agent privzeto uporablja File Search (vedno)
+      - Agentov `Knowledge` kaže, da ima naloženih 32 datotek (za file search)
+      ![Podrobnosti agenta](../../../../../translated_images/sl/07-view-agent-details.0e049f37f61eae62.webp)
 
-1. Poiščite možnost `Data+indexes` v levem meniju in kliknite za podrobnosti. 
+1. Look for the `Data+indexes` option in the left menu and click for details. 
 
       - Videli bi morali 32 naloženih podatkovnih datotek za znanje.
-      - Te bodo ustrezale 12 datotekam strank in 20 datotekam izdelkov v mapi `src/files`
+      - Te bodo ustrezale 12 datotekam strank in 20 datotekam izdelkov v mapi `src/files` 
       ![Podatki](../../../../../translated_images/sl/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
-**Potrdili ste delovanje Agenta!** 
+**Potrdili ste delovanje agenta!** 
 
-1. Odgovori agenta so utemeljeni na znanju v teh datotekah. 
-1. Sedaj lahko postavljate vprašanja v povezavi s temi podatki in dobite utemeljene odgovore.
+1. Odgovori agenta temeljijo na znanju v teh datotekah. 
+1. Zdaj lahko postavljate vprašanja, povezana s temi podatki, in dobite utemeljene odgovore.
 1. Primer: `customer_info_10.json` opisuje 3 nakupe, ki jih je opravila "Amanda Perez"
 
-Vrnete se na zavihek brskalnika s končno točko Container App in vprašajte: `Katere izdelke ima Amanda Perez?`. Videti bi morali nekaj takega:
+Revisit the browser tab with the Container App endpoint and ask: `What products does Amanda Perez own?`. You should see something like this:
 
 ![Podatki](../../../../../translated_images/sl/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
-## 6. Igrišče agentov
+## 6. Igralnica agentov
 
-Izboljšajmo razumevanje zmogljivosti Microsoft Foundry tako, da Agenta preizkusimo v Agents Playground.
+Let's build a bit more intuition for the capabilities of Microsoft Foundry, by taking the Agent for a spin in the Agents Playground. 
 
-1. Vrnite se na stran `Agents` v Microsoft Foundry - izberite privzetega agenta
-1. Kliknite možnost `Try in Playground` - dobili boste uporabniški vmesnik Playground, podoben temu
-1. Postavite isto vprašanje: `Katere izdelke ima Amanda Perez?`
+1. Return to the `Agents` page in Microsoft Foundry - select the default agent
+1. Click the `Try in Playground` option - you should get a Playground UI like this
+1. Ask the same question: `What products does Amanda Perez own?`
 
     ![Podatki](../../../../../translated_images/sl/09-ask-in-playground.a1b93794f78fa676.webp)
 
-Dobite enak (ali podoben) odgovor - vendar dobite tudi dodatne informacije, ki jih lahko uporabite za razumevanje kakovosti, stroškov in zmogljivosti vaše agentne aplikacije. Na primer:
+You get the same (or similar) response - but you also get additional information that you can use to understand the quality, cost, and performance of your agentic app. For example:
 
-1. Opazite, da odgovor navaja podatkovne datoteke, uporabljene za "utrjevanje" odgovora
-1. POMEMBNO: Premaknite kazalec nad katerikoli od teh oznak datotek - ali se podatki ujemajo z vašim poizvedbo in prikazanim odgovorom?
+1. Opazite, da odgovor navaja podatkovne datoteke, uporabljene za podlago odgovora
+1. Premaknite kazalec nad katerokoli oznako datoteke - ali se podatki ujemajo z vašo poizvedbo in prikazanim odgovorom?
 
-V spodnjem delu odgovora vidite tudi vrstico s statistiko.
+You also see a _stats_ row below the response. 
 
-1. Premaknite kazalec nad katerikoli merilnik - npr. Safety. Videli boste nekaj takega
-1. Ali ocenjena ocena ustreza vašemu občutku glede ravni varnosti odgovora?
+1. Hover over any metric - e.g., Safety. You see something like this
+1. Does the assessed rating match your intuition for the response safety level?
 
       ![Podatki](../../../../../translated_images/sl/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
@@ -186,54 +186,55 @@ V spodnjem delu odgovora vidite tudi vrstico s statistiko.
 
 ## 7. Vgrajena opazljivost
 
-Opazljivost pomeni instrumentiranje vaše aplikacije za ustvarjanje podatkov, ki jih je mogoče uporabiti za razumevanje, odpravljanje napak in optimizacijo njenega delovanja. Da pridobite vtis o tem:
+Observability is about instrumenting your application to generate data that can be used to understand, debug, and optimize, its operations. To get a sense for this:
 
-1. Kliknite gumb `View Run Info` - videli boste ta pogled. To je primer [sledenja agentom](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) v akciji. _Ta pogled lahko dobite tudi z izbiro Thread Logs v zgornjem nivoju menija_.
+1. Click the `View Run Info` button - you should see this view. This is an example of [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) in action. _You can also get this view by clicking Thread Logs in the top-level menu_.
 
-   - Dobite občutek korakov izvajanja in orodij, ki jih agent uporablja
+   - Dobite pregled korakov izvajanja in orodij, ki jih je agent uporabil
    - Razumete skupno število tokenov (v primerjavi z uporabo izhodnih tokenov) za odgovor
-   - Razumete zakasnitev in kje se čas porablja med izvajanjem
+   - Razumete zakasnitev in kje se porablja čas med izvajanjem
 
       ![Agent](../../../../../translated_images/sl/10-view-run-info.b20ebd75fef6a1cc.webp)
 
-1. Kliknite zavihek `Metadata`, da vidite dodatne atribute za zagon, ki lahko kasneje nudijo uporaben kontekst za odpravljanje napak.   
+1. Click the `Metadata` tab to see additional attributes for the run, that may provide useful context for debugging issues later.   
 
       ![Agent](../../../../../translated_images/sl/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 
-1. Kliknite zavihek `Evaluations`, da vidite samodejne ocene, opravljene na odgovoru agenta. Te vključujejo ocene varnosti (npr. samopoškodovanje) in ocene specifične za agente (npr. razrešitev namere, sledenje nalogi).
+1. Click the `Evaluations` tab to see auto-assessments made on the agent response. These include safety evaluations (e.g., Self-harm) and agent-specifc evaluations (e.g., Intent resolution, Task adherence).
 
       ![Agent](../../../../../translated_images/sl/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
-1. In nenazadnje, kliknite zavihek `Monitoring` v stranskem meniju.
+1. Last but not least, click the `Monitoring` tab in the sidebar menu.
 
-      - Izberite zavihek `Resource usage` na prikazani strani - in si oglejte meritve.
-      - Spremljajte uporabo aplikacije v smislu stroškov (tokeni) in obremenitve (zahteve).
-      - Spremljajte zakasnitev aplikacije do prvega bajta (obdelava vnosa) in zadnjega bajta (izhod).
+      - Select `Resource usage` tab in the displayed page - and view the metrics.
+      - Track application usage in terms of costs (tokens) and load (requests).
+      - Track applicaton latency to first byte (input processing) and last byte (output).
 
       ![Agent](../../../../../translated_images/sl/13-monitoring-resources.5148015f7311807f.webp)
 
 ---
 
-## 8. Spremenljivke okolja
+## 8. Okoljske spremenljivke
 
-Doslej smo pregledali namestitev v brskalniku in potrdili, da je naša infrastruktura zagotovljena in da aplikacija deluje. Vendar pa, da delate s kodo aplikacije _na prvem mestu_, moramo konfigurirati lokalno razvojno okolje z ustreznimi spremenljivkami, potrebnimi za delo s temi viri. Uporaba `azd` to poenostavi.
+So far, we've walked through the deployment in the browser - and validated that our infrastructure is provisioned and the application is operational. But to work with the application _code-first_, we need to configure our local development environment with the relevant variables required to work with these resources. Using `azd` makes it easy.
 
-1. Azure Developer CLI [uses environment variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) za shranjevanje in upravljanje konfiguracijskih nastavitev za nameščanje aplikacij.
+1. The Azure Developer CLI [uses environment variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) to store and manage configuration settings for  the application deployments.
 
-1. Spremenljivke okolja so shranjene v `.azure/<env-name>/.env` - s tem so omejene na okolje z imenom `env-name`, uporabljeno med nameščanjem, kar pomaga izolirati okolja med različnimi cilji nameščanja v istem repozitoriju.
+1. Environment variables are stored in `.azure/<env-name>/.env` - this scopes them to the `env-name` environment used during deployment and helps you isolate environments between different deployment targets in the same repo.
 
-1. Spremenljivke okolja samodejno naloži ukaz `azd`, kadar izvaja določen ukaz (npr. `azd up`). Upoštevajte, da `azd` samodejno ne bere _spremenljivk okolja na nivoju OS_ (npr. nastavljenih v lupini) - namesto tega uporabite `azd set env` in `azd get env` za prenos informacij znotraj skript.
+1. Environment variables are automatically loaded by the `azd` command whenever it executes a specific command (e.g., `azd up`). Note that `azd` does not automatically read _OS-level_ environment variables (e.g., set in the shell) - instead use `azd set env` and `azd get env` to transfer information within scripts.
 
-Preizkusimo nekaj ukazov:
 
-1. Pridobite vse spremenljivke okolja, nastavljene za `azd` v tem okolju:
+Let's try out a few commands:
+
+1. Get all the environment variables set for `azd` in this environment:
 
       ```bash title="" linenums="0"
       azd env get-values
       ```
       
-      Videli boste nekaj takega:
+      You see something like:
 
       ```bash title="" linenums="0"
       AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4.1-mini"
@@ -243,19 +244,19 @@ Preizkusimo nekaj ukazov:
       ...
       ```
 
-1. Pridobite določeno vrednost - npr. želim vedeti, ali smo nastavili vrednost `AZURE_AI_AGENT_MODEL_NAME`
+1. Get a specific value - e.g., I want to know if we set the `AZURE_AI_AGENT_MODEL_NAME` value
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
       
-      Videli boste nekaj takega - privzeto ni bila nastavljena!
+      You see something like this - it was not set by default!
 
       ```bash title="" linenums="0"
       ERROR: key 'AZURE_AI_AGENT_MODEL_NAME' not found in the environment values
       ```
 
-1. Nastavite novo spremenljivko okolja za `azd`. Tukaj posodobimo ime modela agenta. _Opomba: vse spremembe bodo takoj odražene v datoteki `.azure/<env-name>/.env`._
+1. Set a new environment variable for `azd`. Here, we update the agent model name. _Note: any changes made will be immediately reflected in the `.azure/<env-name>/.env` file.
 
       ```bash title="" linenums="0"
       azd env set AZURE_AI_AGENT_MODEL_NAME gpt-4.1
@@ -263,27 +264,27 @@ Preizkusimo nekaj ukazov:
       azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
       ```
 
-      Zdaj bi morali videti, da je vrednost nastavljena:
+      Now, we should find the value is set:
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
 
-1. Upoštevajte, da so nekateri viri trajni (npr. namestitve modelov) in bodo zahtevali več kot samo `azd up`, da bi prisilili ponovno namestitev. Poskusimo razstaviti izvorno namestitev in ponovno namestiti s spremenjenimi spremenljivkami okolja.
+1. Note that some resources are persistent (e.g., model deployments) and will require more than just an `azd up` to force the redeployment. Let's try tearing down the original deployment and redeploying with changed env vars.
 
-1. **Refresh** Če ste prej nameščali infrastrukturo z uporabo azd predloge - lahko stanje vaših lokalnih spremenljivk okolja osvežite glede na trenutno stanje vaše Azure namestitve z uporabo tega ukaza:
+1. **Refresh** If you had previously deployed infrastructure using an azd template - you can _refresh_ the state of your local environment variables based on the current state of your Azure deployment using this command:
 
       ```bash title="" linenums="0"
       azd env refresh
       ```
 
-      To je zmogljiv način za _sinhronizacijo_ spremenljivk okolja med dvema ali več lokalnimi razvojnimi okolji (npr. ekipa z več razvijalci) - kar omogoča, da nameščena infrastruktura služi kot končni vir resnice za stanje spremenljivk okolja. Člani ekipe preprosto _osvežijo_ spremenljivke, da se ponovno sinhronizirajo.
+      To je zmogljiv način za _sinhroniziranje_ spremenljivk okolja med dvema ali več lokalnimi razvojnimi okolji (npr. ekipa z več razvijalci) - kar omogoča, da razporejena infrastruktura služi kot referenčna resnica glede stanja spremenljivk okolja. Člani ekipe preprosto _osvežijo_ spremenljivke, da se ponovno uskladijo.
 
 ---
 
 ## 9. Čestitke 🏆
 
-Pravkar ste zaključili celovit potek dela, v katerem ste:
+Pravkar ste zaključili celovit postopek, v katerem ste:
 
 - [X] Izbrali predlogo AZD, ki jo želite uporabiti
 - [X] Odprli predlogo v podprtem razvojnem okolju
@@ -292,6 +293,6 @@ Pravkar ste zaključili celovit potek dela, v katerem ste:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Izjava o omejitvi odgovornosti**:
-Ta dokument je bil preveden s storitvijo za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, upoštevajte, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v izvirnem jeziku velja za merodajen vir. Za kritične informacije priporočamo strokovni človeški prevod. Ne odgovarjamo za morebitne nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda.
+**Omejitev odgovornosti**:
+Ta dokument je bil preveden z uporabo AI prevajalske storitve [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za kritične informacije je priporočljiv strokovni človeški prevod. Ne odgovarjamo za morebitna nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

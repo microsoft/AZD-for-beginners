@@ -1,34 +1,34 @@
-# Hitri priročnik ukazov - Ključni AZD ukazi
+# Hitri pregled ukazov - Osnovni AZD ukazi
 
-**Hitri priročnik za vse poglavja**
+**Hiter pregled za vse poglavja**
 - **📚 Domača stran tečaja**: [AZD za začetnike](../README.md)
-- **📖 Hiter začetek**: [Poglavje 1: Osnove in hiter začetek](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI ukazi**: [Poglavje 2: Razvoj, osredotočen na AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **📖 Hitri začetek**: [Poglavje 1: Osnove in hitri začetek](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI ukazi**: [Poglavje 2: Razvoj, usmerjen na AI (priporočeno za AI razvijalce)](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 Napredno**: [Poglavje 4: Infrastruktura kot koda](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Uvod
 
-Ta obsežen hitri priročnik ponuja hiter pregled najpogosteje uporabljenih ukazov Azure Developer CLI, urejenih po kategorijah z praktičnimi primeri. Popoln za hitro iskanje med razvojem, odpravljanjem težav in vsakodnevnimi opravili pri projektih azd.
+Ta obsežen hiter pregled nudi hitro referenco za najpogosteje uporabljene ukaze Azure Developer CLI, organizirane po kategorijah z uporabnimi primeri. Popolno za hitro iskanje med razvojem, odpravljanjem težav in vsakodnevnimi opravili z azd projekti.
 
 ## Cilji učenja
 
-Z uporabo tega hitrega priročnika boste:
-- Imeli takojšen dostop do bistvenih ukazov Azure Developer CLI in njihove sintakse
+Z uporabo tega hitrega pregleda boste:
+- Imeli takojšen dostop do osnovnih Azure Developer CLI ukazov in sintakse
 - Razumeli organizacijo ukazov po funkcionalnih kategorijah in primerih uporabe
-- Se sklicevali na praktične primere za običajne scenarije razvoja in nameščanja
-- Dostopali do ukazov za odpravljanje težav za hitro rešitev težav
-- Našli napredne možnosti konfiguracije in prilagajanja učinkovito
-- Lokirali ukaze za upravljanje okolij in delovne tokove z več okolji
+- Imeli referenco praktičnih primerov za pogoste razvojne in razmestitvene scenarije
+- Dostopali do ukazov za odpravljanje težav za hitro razrešitev težav
+- Našli napredne možnosti konfiguracije in prilagoditve učinkovito
+- Locirali upravljanje okolij in delovne tokove za več okolij
 
 ## Pričakovani rezultati učenja
 
-Z rednim sklicevanjem na ta hitri priročnik boste lahko:
-- Izvajali azd ukaze samozavestno brez sklicevanja na celotno dokumentacijo
-- Hitro reševali pogoste težave z uporabo ustreznih diagnostičnih ukazov
-- Učinkovito upravljali več okolij in scenarijev nameščanja
-- Po potrebi uporabljali napredne funkcije azd in možnosti konfiguracije
-- Odpravljali težave pri nameščanju z uporabo sistematičnih zaporedij ukazov
-- Optimizirali delovne tokove z učinkovito uporabo bližnjic in možnosti azd
+Redno uporabljanje tega hitrega pregleda vam bo omogočilo:
+- Zaupno izvajanje azd ukazov brez nenehnega sklicevanja na polno dokumentacijo
+- Hitro reševanje pogostih težav z ustreznimi diagnostičnimi ukazi
+- Učinkovito upravljanje več okolij in razmestitvenih scenarijev
+- Uporabo naprednih azd funkcij in možnosti konfiguracije po potrebi
+- Odpravljanje težav z razmestitvijo z uporabo sistematičnih zaporedij ukazov
+- Optimizacijo potekov dela z učinkovito uporabo azd bližnjic in možnosti
 
 ## Ukazi za začetek
 
@@ -66,65 +66,76 @@ azd init --template <template-name>
 # Inicializiraj v trenutni mapi
 azd init .
 
-# Inicializiraj z lastnim imenom
+# Inicializiraj z imenom po meri
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## Osnovni ukazi za nameščanje
+## Osnovni ukazi za razmestitev
 
-### Celoten potek nameščanja
+### Celoten potek razmestitve
 ```bash
-# Razmestitev vsega (zagotovitev virov + namestitev)
+# Izvedi vse (pripravi in razporedi)
 azd up
 
-# Razmestitev z onemogočenimi potrditvenimi pozivi
+# Razporedi z onemogočenimi potrditvenimi pozivi
 azd up --confirm-with-no-prompt
 
-# Razmestitev v določeno okolje
+# Razporedi v določeno okolje
 azd up --environment production
 
-# Razmestitev s prilagojenimi parametri
+# Razporedi z uporabniško določenimi parametri
 azd up --parameter location=westus2
 ```
 
 ### Samo infrastruktura
 ```bash
-# Uvedba Azure virov
+# Vzpostavi Azure vire
 azd provision
 
 # 🧪 Predogled sprememb infrastrukture
 azd provision --preview
-# Prikaže pogled v suhem zagonu, kateri viri bi bili ustvarjeni, spremenjeni ali izbrisani
+# Prikaže poskusni pregled, kateri viri bi bili ustvarjeni, spremenjeni ali izbrisani
 # Podobno kot 'terraform plan' ali 'bicep what-if' - varno za zagon, spremembe se ne izvedejo
 ```
 
 ### Samo aplikacija
 ```bash
-# Razmestiti kodo aplikacije
+# Razporedi kodo aplikacije
 azd deploy
 
-# Razmestiti določeno storitev
+# Razporedi določeno storitev
 azd deploy --service web
 azd deploy --service api
 
-# Razmestiti vse storitve
+# Razporedi vse storitve
 azd deploy --all
 ```
 
-### Gradnja in pakiranje
+### Sestavljanje in pakiranje
 ```bash
-# Zgradi aplikacije
+# Obnovi (prenesi) odvisnosti aplikacije
+azd restore
+
+# Obnovi izbrano storitev
+azd restore --service api
+
+# Zgradi razmestljiv artefakt brez razmestitve
 azd package
 
-# Zgradi določeno storitev
+# Zgradi izbrano storitev
 azd package --service api
 ```
+
+> **`azd restore`** prenese odvisnosti vaše aplikacije (npm, pip, NuGet, Maven itd.). Samodejno se zažene med `azd package` in `azd deploy`, zato ga redko kličete neposredno — zaženite ga ročno, da prednaložite odvisnosti (na primer za ogrevanje predpomnilnika CI ali za delo brez povezave kasneje).
+
+> **`azd package`** zgradi razmestitveni artefakt (sliko kontejnerja ali zip) **brez** potiska v Azure. Uporabite ga samostojno, da preverite, ali se gradnja uspe, pregledate izhod ali ustvarite artefakt, ki ga bo kasneje razmestil ločen postopek. `azd deploy` samodejno pakira, zato potrebujete `azd package` le, ko želite artefakt brez razmestitve.
+
 
 ## 🌍 Upravljanje okolij
 
 ### Operacije okolij
 ```bash
-# Naštej vsa okolja
+# Prikaži vsa okolja
 azd env list
 
 # Ustvari novo okolje
@@ -143,17 +154,17 @@ azd env refresh
 
 ### Spremenljivke okolja
 ```bash
-# Nastavi okoljsko spremenljivko
+# Nastavi spremenljivko okolja
 azd env set API_KEY "your-secret-key"
 azd env set DEBUG true
 
-# Pridobi okoljsko spremenljivko
+# Pridobi spremenljivko okolja
 azd env get API_KEY
 
-# Prikaži vse okoljske spremenljivke
+# Naštej vse spremenljivke okolja
 azd env get-values
 
-# Odstrani okoljsko spremenljivko
+# Odstrani spremenljivko okolja
 azd env unset DEBUG
 ```
 
@@ -183,7 +194,7 @@ azd config validate
 # Prikaži informacije o projektu
 azd show
 
-# Pridobi končne točke storitve
+# Pridobi končne točke storitev
 azd show --output json
 ```
 
@@ -191,28 +202,28 @@ azd show --output json
 
 ### Nadzorna plošča
 ```bash
-# Odpri nadzorno ploščo za spremljanje v Azure portalu
+# Odpri nadzorno ploščo za spremljanje v portalu Azure
 azd monitor
 
-# Odpri metrike v realnem času za Application Insights
+# Odpri metrike v realnem času v Application Insights
 azd monitor --live
 
-# Odpri okno z dnevniki za Application Insights
+# Odpri okno dnevnikov v Application Insights
 azd monitor --logs
 
-# Odpri pregled za Application Insights
+# Odpri pregled v Application Insights
 azd monitor --overview
 ```
 
 ### Ogled dnevnikov kontejnerjev
 ```bash
-# Ogled dnevnikov prek Azure CLI (za Container Apps)
+# Oglejte si dnevnike prek Azure CLI (za Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
 
-# Spremljanje dnevnikov v realnem času
+# Spremljajte dnevnike v realnem času
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
-# Ogled dnevnikov v portalu Azure
+# Oglejte si dnevnike v Azure portalu
 azd monitor --logs
 ```
 
@@ -221,23 +232,23 @@ azd monitor --logs
 # Dostop do Log Analytics prek Azure portala
 azd monitor --logs
 
-# Poizvedujte po dnevnikih z Azure CLI
+# Poizvedovanje dnevnikov z uporabo Azure CLI
 az monitor log-analytics query \
   --workspace <workspace-id> \
   --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
 ```
 
-## 🛠️ Ukazi za vzdrževanje
+## 🛠️ Vzdrževalni ukazi
 
 ### Čiščenje
 ```bash
-# Odstranite vse vire v storitvi Azure
+# Odstrani vse Azure vire
 azd down
 
-# Prisilno izbrišite brez potrditve
+# Prisili brisanje brez potrditve
 azd down --force
 
-# Trajno odstranite vire, ki so začasno izbrisani
+# Trajno odstrani mehko izbrisane vire
 azd down --purge
 
 # Popolno čiščenje
@@ -260,13 +271,13 @@ azd config show
 
 ### Pipeline in CI/CD
 ```bash
-# Konfigurirajte GitHub Actions
+# Konfiguriraj GitHub Actions
 azd pipeline config
 
-# Konfigurirajte Azure DevOps
+# Konfiguriraj Azure DevOps
 azd pipeline config --provider azdo
 
-# Prikažite konfiguracijo cevovoda
+# Prikaži konfiguracijo cevovoda
 azd pipeline show
 ```
 
@@ -275,16 +286,16 @@ azd pipeline show
 # Ustvari predloge infrastrukture
 azd infra generate
 
-# 🧪 Predogled infrastrukture in načrtovanje
+# 🧪 Predogled in načrtovanje infrastrukture
 azd provision --preview
-# Simulira zagotavljanje infrastrukture brez dejanske razmestitve
-# Analizira predloge Bicep/Terraform in prikazuje:
+# Simulira pripravo infrastrukture brez uvajanja
+# Analizira predloge Bicep/Terraform in prikaže:
 # - Viri, ki bodo dodani (zeleno +)
 # - Viri, ki bodo spremenjeni (rumeno ~)
 # - Viri, ki bodo izbrisani (rdeče -)
-# Varen za izvajanje - v okolju Azure ne bodo narejene nobene dejanske spremembe
+# Varno za zagon - brez dejanskih sprememb v okolju Azure
 
-# Sintetizira infrastrukturo iz azure.yaml
+# Sinteziraj infrastrukturo iz azure.yaml
 azd infra synth
 ```
 
@@ -304,11 +315,17 @@ azd show --output json | jq '.services'
 
 ### AZD razširitve
 ```bash
-# Prikaži vse razpoložljive razširitve (vključno z AI)
+# Naštej vse razpoložljive razširitve (vključno z AI)
 azd extension list
 
 # Namesti razširitev Foundry agents
 azd extension install azure.ai.agents
+
+# Namesti razširitev agent skills (predogled)
+azd extension install azure.ai.skills
+
+# Namesti razširitev Foundry connections (predogled)
+azd extension install azure.ai.connections
 
 # Namesti razširitev za fino prilagajanje
 azd extension install azure.ai.finetune
@@ -322,17 +339,33 @@ azd extension upgrade --all
 
 ### Ukazi za AI agente
 ```bash
-# Inicializirajte agentni projekt iz manifesta
+# Inicializiraj projekt agenta iz manifesta
 azd ai agent init -m <manifest-path-or-uri>
 
-# Ciljajte na določen projekt Foundry
+# Nastavi določen projekt Foundry kot cilj
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# Določite izvorno mapo agenta
+# Določi izvorno mapo agenta
 azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
 
-# Izberite cilj gostovanja
+# Izberi cilj gostovanja
 azd ai agent init -m agent-manifest.yaml --host containerapp
+
+# Preizkusi nameščenega agenta (izpiše zakasnitev in čas do prvega bajta)
+azd ai agent invoke
+
+# Pokaži konfiguracijo žive končne točke
+azd ai agent endpoint show
+
+# Ustvari ocenjevalni nabor podatkov, nato optimiziraj agenta
+azd ai agent eval generate
+azd ai agent optimize
+
+# Prenesi nameščeno izvorno kodo gostovanega agenta, ki temelji na kodi
+azd ai agent code download
+
+# Izbriši gostovanega agenta in vse njegove različice (--force konča aktivne seje)
+azd ai agent delete --force
 ```
 
 ### MCP strežnik (alfa)
@@ -340,7 +373,7 @@ azd ai agent init -m agent-manifest.yaml --host containerapp
 # Zaženite MCP strežnik za vaš projekt
 azd mcp start
 
-# Upravljajte dovoljenja orodij za operacije MCP
+# Upravljajte privolitve orodja za operacije MCP
 azd copilot consent list
 ```
 
@@ -355,48 +388,48 @@ azd infra synth
 
 ---
 
-## 🎯 Hitri delovni tokovi
+## 🎯 Hitri delovni poteki
 
-### Delovni tok za razvoj
+### Razvojni potek dela
 ```bash
 # Začni nov projekt
 azd init --template todo-nodejs-mongo
 cd my-project
 
-# Razporedi v razvojno okolje
+# Namesti v razvojno okolje
 azd env new dev
 azd up
 
-# Naredi spremembe in ponovno razporedi
+# Naredi spremembe in ponovno namesti
 azd deploy
 
 # Odpri nadzorno ploščo za spremljanje
 azd monitor --live
 ```
 
-### Delovni tok z več okolji
+### Potek dela za več okolij
 ```bash
 # Nastavi okolja
 azd env new dev
 azd env new staging  
 azd env new production
 
-# Razporedi v razvojno okolje
+# Razporedi v dev
 azd env select dev
 azd up
 
-# Preizkusi in premakni v predprodukcijsko okolje
+# Preizkusi in premakni v staging
 azd env select staging
 azd up
 
-# Razporedi v produkcijsko okolje
+# Razporedi v produkcijo
 azd env select production
 azd up
 ```
 
-### Delovni tok za odpravljanje težav
+### Potek odpravljanja težav
 ```bash
-# Omogoči način razhroščevanja
+# Omogoči način odpravljanja napak
 export AZD_DEBUG=true
 
 # Preveri stanje uvajanja
@@ -412,9 +445,9 @@ azd monitor --logs
 azd show --output json
 ```
 
-## 🔍 Ukazi za odpravljanje napak
+## 🔍 Ukazi za razhroščevanje
 
-### Informacije za odpravljanje napak
+### Informacije za razhroščevanje
 ```bash
 # Omogoči izpis za odpravljanje napak
 export AZD_DEBUG=true
@@ -426,11 +459,11 @@ export AZD_DISABLE_TELEMETRY=true
 # Preveri trenutno konfiguracijo
 azd config show
 
-# Preveri stanje avtentikacije
+# Preveri stanje overjanja
 az account show
 ```
 
-### Razhroščevanje predlog
+### Razhroščevanje predloge
 ```bash
 # Prikaži razpoložljive predloge s podrobnostmi
 azd template list --output json
@@ -446,22 +479,22 @@ azd template validate <template-name>
 
 ### Struktura projekta
 ```bash
-# Prikaži trenutno strukturo imenikov
+# Pokaži trenutno strukturo imenikov
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
-# Pojdi v koren projekta azd
+# Pojdi v korenski imenik projekta azd
 cd $(azd root)
 
-# Prikaži konfiguracijsko mapo azd
+# Pokaži konfiguracijski imenik azd
 echo $AZD_CONFIG_DIR  # Običajno ~/.azd
 ```
 
 ## 🎨 Oblikovanje izhoda
 
-### Izhod JSON
+### Izhod v JSON
 ```bash
-# Pridobi JSON-izhod za uporabo v skriptah
+# Pridobi JSON izhod za skriptiranje
 azd show --output json
 azd env list --output json
 azd config show --output json
@@ -473,7 +506,7 @@ azd env get-values --output json | jq -r '.DATABASE_URL'
 
 ### Izhod v tabeli
 ```bash
-# Prikaži kot tabelo
+# Formatiraj kot tabelo
 azd env list --output table
 
 # Prikaži nameščene storitve
@@ -482,16 +515,16 @@ azd show --output json | jq '.services | keys'
 
 ## 🔧 Pogoste kombinacije ukazov
 
-### Skripta za preverjanje zdravja
+### Skript za preverjanje stanja
 ```bash
 #!/bin/bash
-# Hitro preverjanje stanja
+# Hiter pregled stanja
 azd show
 azd env get-values
 azd monitor --logs
 ```
 
-### Preverjanje nameščanja
+### Preverjanje razmestitve
 ```bash
 #!/bin/bash
 # Preverjanje pred uvajanjem
@@ -511,10 +544,10 @@ for env in dev staging production; do
 done
 ```
 
-### Skripta za čiščenje virov
+### Skript za čiščenje virov
 ```bash
 #!/bin/bash
-# Počisti stara okolja
+# Počistite stara okolja
 azd env list | grep -E "(dev-|test-)" | while read env; do
     echo "Cleaning up $env"
     azd env select $env
@@ -541,18 +574,18 @@ export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
-## 🚨 Ukazi za nujne primere
+## 🚨 Nujni ukazi
 
 ### Hitre rešitve
 ```bash
-# Ponastavi avtentikacijo
+# Ponastavi overjanje
 az account clear
 az login
 
 # Prisili osvežitev okolja
 azd env refresh
 
-# Ponovno uvedi vse storitve
+# Ponovno razporedi vse storitve
 azd deploy
 
 # Preveri stanje razmestitve
@@ -561,29 +594,29 @@ azd show --output json
 
 ### Ukazi za obnovitev
 ```bash
-# Obnovi po neuspelem uvajanju - očisti in ponovno namesti
+# Obnovi po neuspešni namestitvi - očisti in ponovno namesti
 azd down --force --purge
 azd up
 
-# Ponovno zagotovi samo infrastrukturo
+# Samo ponovna priprava infrastrukture
 azd provision
 
-# Ponovno namesti samo aplikacijo
+# Samo ponovna namestitev aplikacije
 azd deploy
 ```
 
 ## 💡 Nasveti strokovnjakov
 
-### Aliasi za hitrejši delovni tok
+### Vzdevki za hitrejši potek dela
 ```bash
-# Dodajte v svoj .bashrc ali .zshrc
+# Dodajte v datoteko .bashrc ali .zshrc
 alias azdup='azd up'
 alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Funkcijske bližnjice
+### Bližnjice funkcij
 ```bash
 # Hitro preklapljanje okolij
 azd-env() {
@@ -617,7 +650,7 @@ azd up --help
 azd env --help
 azd config --help
 
-# Prikaži informacije o različici in gradnji
+# Prikaži različico in informacije o gradnji
 azd version
 azd version --output json
 ```
@@ -633,21 +666,21 @@ azd template show <template-name> --docs
 
 ---
 
-**Namig**: Dodajte ta priročnik med zaznamke in uporabite `Ctrl+F` za hitro iskanje potrebnih ukazov!
+**Namig**: Dodajte ta hiter pregled v zaznamke in uporabite `Ctrl+F`, da hitro poiščete ukaze, ki jih potrebujete!
 
 ---
 
 **Navigacija**
-- **Prejšnja lekcija**: [Preflight preverjanja](../docs/pre-deployment/preflight-checks.md)
-- **Naslednja lekcija**: [Pojmovnik](glossary.md)
+- **Prejšnja lekcija**: [Preflight Checks](../docs/pre-deployment/preflight-checks.md)
+- **Naslednja lekcija**: [Glosar](glossary.md)
 
 ---
 
-> **💡 Želite pomoč pri Azure ukazih v vašem urejevalniku?** Namestite [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) z `npx skills add microsoft/github-copilot-for-azure` — 37 veščin za AI, Foundry, uvajanje, diagnostiko in še več.
+> **💡 Želite pomoč pri Azure ukazih v vašem urejevalniku?** Namestite [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) z `npx skills add microsoft/github-copilot-for-azure` — 37 spretnosti za AI, Foundry, razmestitev, diagnostiko in še več.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, upoštevajte, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v izvirnem jeziku se šteje za avtoritativni vir. Za kritične informacije priporočamo strokovni človeški prevod. Ne odgovarjamo za morebitne nesporazume ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
+**Omejitev odgovornosti**:
+Ta dokument je bil preveden z uporabo AI prevajalske storitve [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za kritične informacije je priporočljiv strokovni človeški prevod. Ne odgovarjamo za morebitna nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

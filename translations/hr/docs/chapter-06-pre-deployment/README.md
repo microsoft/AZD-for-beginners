@@ -1,22 +1,22 @@
 # Poglavlje 6: Planiranje i validacija prije implementacije
 
-**📚 Tečaj**: [AZD Za Početnike](../../README.md) | **⏱️ Trajanje**: 1 sat | **⭐ Kompleksnost**: Srednja
+**📚 Tečaj**: [AZD za početnike](../../README.md) | **⏱️ Trajanje**: 1 sat | **⭐ Kompleksnost**: Srednja
 
 ---
 
 ## Pregled
 
-Ovo poglavlje pokriva ključne korake planiranja i validacije prije implementacije vaše aplikacije. Naučite izbjeći skupe pogreške pravilnim planiranjem kapaciteta, odabirom SKU-a i provjerama prije implementacije.
+Ovo poglavlje pokriva osnovne korake planiranja i validacije prije implementacije vaše aplikacije. Naučite kako izbjeći skupe pogreške pravilnim planiranjem kapaciteta, odabirom SKU-a i preletnim provjerama.
 
-> Validirano s `azd 1.23.12` u ožujku 2026.
+> Validirano za `azd 1.25.6` u lipnju 2026.
 
 ## Ciljevi učenja
 
-Nakon završetka ovog poglavlja, moći ćete:
-- Pokrenuti provjere prije implementacije
-- Planirati kapacitete i procijeniti potrebne resurse
+Nakon završetka ovog poglavlja moći ćete:
+- Pokretati preletne provjere prije implementacije
+- Planirati kapacitet i procijeniti zahtjeve za resursima
 - Odabrati odgovarajuće SKU-ove za optimizaciju troškova
-- Konfigurirati Application Insights za nadzor
+- Konfigurirati Application Insights za praćenje
 - Razumjeti obrasce koordinacije timova
 
 ---
@@ -24,12 +24,12 @@ Nakon završetka ovog poglavlja, moći ćete:
 ## 📚 Lekcije
 
 | # | Lekcija | Opis | Vrijeme |
-|---|---------|------|---------|
-| 1 | [Provjere prije implementacije](preflight-checks.md) | Validacija konfiguracije prije implementacije | 15 min |
+|---|---------|-------|---------|
+| 1 | [Preletne provjere](preflight-checks.md) | Validacija konfiguracije prije implementacije | 15 min |
 | 2 | [Planiranje kapaciteta](capacity-planning.md) | Procjena zahtjeva za resursima | 20 min |
-| 3 | [Odabir SKU-a](sku-selection.md) | Izbor odgovarajućih cjenovnih razina | 15 min |
-| 4 | [Application Insights](application-insights.md) | Konfiguracija nadzora | 20 min |
-| 5 | [Obrasci koordinacije](coordination-patterns.md) | Radni tijekovi implementacije u timu | 15 min |
+| 3 | [Odabir SKU-a](sku-selection.md) | Izbor prikladnih razina cijena | 15 min |
+| 4 | [Application Insights](application-insights.md) | Konfiguracija praćenja | 20 min |
+| 5 | [Obrasci koordinacije](coordination-patterns.md) | Radni tokovi implementacije tima | 15 min |
 
 ---
 
@@ -39,33 +39,33 @@ Nakon završetka ovog poglavlja, moći ćete:
 # Provjeri kvote pretplate
 az vm list-usage --location eastus --output table
 
-# Pregled implementacije (bez stvaranja resursa)
+# Pregled implementacije (nisu stvoreni resursi)
 azd provision --preview
 
-# Potvrdi sintaksu Bicep-a
+# Validiraj Bicep sintaksu
 az bicep build --file infra/main.bicep
 
-# Provjeri konfiguraciju okruženja
+# Provjeri konfiguraciju okoline
 azd env get-values
 ```
 
 ---
 
-## ☑️ Popis za provjeru prije implementacije
+## ☑️ Provjerna lista prije implementacije
 
 ### Prije `azd provision`
 
-- [ ] Kvota potvrđena za regiju
-- [ ] SKU-ovi odgovarajuće odabrani
-- [ ] Pregled procjene troškova
-- [ ] Dosljedna konvencija imenovanja
-- [ ] Konfigurirana sigurnost/RBAC
+- [ ] Kvota provjerena za regiju
+- [ ] SKU-ovi pravilno odabrani
+- [ ] Procjena troškova pregledana
+- [ ] Pravilo imenovanja dosljedno
+- [ ] Sigurnost/RBAC konfigurirano
 
 ### Prije `azd deploy`
 
 - [ ] Postavljene varijable okoline
 - [ ] Tajne u Key Vault-u
-- [ ] Provjereni connection stringovi
+- [ ] Provjerene veze
 - [ ] Konfigurirane provjere zdravlja
 
 ---
@@ -73,10 +73,10 @@ azd env get-values
 ## 💰 Vodič za odabir SKU-a
 
 | Radno opterećenje | Razvoj | Produkcija |
-|-------------------|--------|------------|
+|-------------------|---------|------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standard | Standard + PTU |
+| Microsoft Foundry modeli | Standard | Standard + PTU |
 | AI Search | Basic | Standard S2+ |
 
 ---
@@ -85,8 +85,8 @@ azd env get-values
 
 | Smjer | Poglavlje |
 |-------|-----------|
-| **Prethodno** | [Poglavlje 5: Više-agentski](../chapter-05-multi-agent/README.md) |
-| **Sljedeće** | [Poglavlje 7: Rješavanje problema](../chapter-07-troubleshooting/README.md) |
+| **Prethodno** | [Poglavlje 5: Više agenata](../chapter-05-multi-agent/README.md) |
+| **Sljedeće** | [Poglavlje 7: Otklanjanje poteškoća](../chapter-07-troubleshooting/README.md) |
 
 ---
 
@@ -99,6 +99,6 @@ azd env get-values
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Odricanje od odgovornosti**:  
-Ovaj dokument je preveden pomoću AI prevoditeljskog servisa [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo postići točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za kritične informacije preporučuje se profesionalni ljudski prijevod. Ne snosimo odgovornost za bilo kakva nesporazumevanja ili pogrešne interpretacije koje proizlaze iz uporabe ovog prijevoda.
+**Napomena**:
+Ovaj dokument je preveden korištenjem AI prevoditeljskog servisa [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatski prijevodi mogu sadržavati greške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za važne informacije preporuča se profesionalni ljudski prijevod. Nismo odgovorni za bilo kakva nesporazumevanja ili pogrešne interpretacije koje proizlaze iz korištenja ovog prijevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

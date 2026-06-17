@@ -1,20 +1,20 @@
 # Poglavje 6: Načrtovanje in preverjanje pred uvajanjem
 
-**📚 Tečaj**: [AZD za začetnike](../../README.md) | **⏱️ Trajanje**: 1 ura | **⭐ Kompleksnost**: Srednje zahtevno
+**📚 Tečaj**: [AZD za začetnike](../../README.md) | **⏱️ Trajanje**: 1 ura | **⭐ Zahtevnost**: Srednja
 
 ---
 
 ## Pregled
 
-To poglavje zajema ključne korake načrtovanja in preverjanja pred uvajanjem vaše aplikacije. Naučite se, kako se izogniti dragim napakam z ustreznim načrtovanjem zmogljivosti, izborom SKU-jev in preflight preverjanji.
+To poglavje zajema bistvene korake načrtovanja in preverjanja pred uvajanjem vaše aplikacije. Naučite se, kako se izogniti dragim napakam z ustreznim načrtovanjem zmogljivosti, izbiro SKU-jev in predhodnimi pregledi.
 
-> Preverjeno z `azd 1.23.12` v marcu 2026.
+> Preverjeno z `azd 1.25.6` v juniju 2026.
 
 ## Cilji učenja
 
 Z zaključkom tega poglavja boste:
-- Zagnali preflight preverjanja pred uvajanjem
-- Načrtovali zmogljivost in ocenili potrebne vire
+- Izvedli predhodna preverjanja pred uvajanjem
+- Načrtovali zmogljivost in ocenili zahteve po virih
 - Izbrali ustrezne SKU-je za optimizacijo stroškov
 - Konfigurirali Application Insights za spremljanje
 - Razumeli vzorce koordinacije ekipe
@@ -25,24 +25,24 @@ Z zaključkom tega poglavja boste:
 
 | # | Lekcija | Opis | Čas |
 |---|--------|-------------|------|
-| 1 | [Preflight preverjanja](preflight-checks.md) | Preverite konfiguracijo pred uvajanjem | 15 min |
-| 2 | [Načrtovanje zmogljivosti](capacity-planning.md) | Ocenite potrebne vire | 20 min |
-| 3 | [Izbira SKU-jev](sku-selection.md) | Izberite ustrezne cenovne razrede | 15 min |
+| 1 | [Predhodna preverjanja](preflight-checks.md) | Preverite konfiguracijo pred uvajanjem | 15 min |
+| 2 | [Načrtovanje zmogljivosti](capacity-planning.md) | Ocenite zahteve po virih | 20 min |
+| 3 | [Izbira SKU-jev](sku-selection.md) | Izberite ustrezne cenovne stopnje | 15 min |
 | 4 | [Application Insights](application-insights.md) | Konfigurirajte spremljanje | 20 min |
-| 5 | [Koordinacijski vzorci](coordination-patterns.md) | Delovni poteki ekipe pri uvajanju | 15 min |
+| 5 | [Vzorce koordinacije](coordination-patterns.md) | Delovni poteki ekipe pri uvajanju | 15 min |
 
 ---
 
-## 🚀 Hiter začetek
+## 🚀 Hitri začetek
 
 ```bash
 # Preveri kvote naročnine
 az vm list-usage --location eastus --output table
 
-# Predogled uvajanja (brez ustvarjenih virov)
+# Predogled uvajanja (ne bodo ustvarjeni viri)
 azd provision --preview
 
-# Preveri sintakso Bicep
+# Preveri sintakso Bicepa
 az bicep build --file infra/main.bicep
 
 # Preveri konfiguracijo okolja
@@ -55,28 +55,28 @@ azd env get-values
 
 ### Pred `azd provision`
 
-- [ ] Kvota preverjena za regijo
+- [ ] Kvote preverjene za regijo
 - [ ] SKU-ji ustrezno izbrani
 - [ ] Ocena stroškov pregledana
-- [ ] Konvencija poimenovanja usklajena
+- [ ] Poimenovalna konvencija dosledna
 - [ ] Varnost/RBAC konfigurirana
 
 ### Pred `azd deploy`
 
-- [ ] Nastavljene spremenljivke okolja
-- [ ] Skrivnosti v Key Vaultu
-- [ ] Nizi povezave preverjeni
+- [ ] Spremenljivke okolja nastavljene
+- [ ] Skrivnosti v Key Vault
+- [ ] Nizi za povezavo preverjeni
 - [ ] Preverjanja stanja konfigurirana
 
 ---
 
-## 💰 Vodič za izbiro SKU-jev
+## 💰 Vodnik za izbiro SKU-jev
 
 | Delovna obremenitev | Razvoj | Produkcija |
 |----------|-------------|------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standard | Standard + PTU |
+| Modeli Microsoft Foundry | Standard | Standard + PTU |
 | AI Search | Basic | Standard S2+ |
 
 ---
@@ -85,12 +85,12 @@ azd env get-values
 
 | Smer | Poglavje |
 |-----------|---------|
-| **Prejšnje** | [Poglavje 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
+| **Prejšnje** | [Poglavje 5: Večagentni](../chapter-05-multi-agent/README.md) |
 | **Naslednje** | [Poglavje 7: Odpravljanje težav](../chapter-07-troubleshooting/README.md) |
 
 ---
 
-## 📖 Sorodni viri
+## 📖 Povezani viri
 
 - [Vodnik za konfiguracijo](../chapter-03-configuration/configuration.md)
 - [Vodnik za uvajanje](../chapter-04-infrastructure/deployment-guide.md)
@@ -99,6 +99,6 @@ azd env get-values
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Izjava o omejitvi odgovornosti**:
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, upoštevajte, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v izvirnem jeziku velja za avtoritativni vir. Za kritične informacije priporočamo strokovni človeški prevod. Za morebitne nesporazume ali napačne razlage, ki izhajajo iz uporabe tega prevoda, ne odgovarjamo.
+**Omejitev odgovornosti**:
+Ta dokument je bil preveden z uporabo AI prevajalske storitve [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za kritične informacije je priporočljiv strokovni človeški prevod. Ne odgovarjamo za morebitna nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

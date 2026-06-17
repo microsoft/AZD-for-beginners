@@ -1,42 +1,42 @@
-# Provisioniranje Azure resursa s AZD
+# Provisioning Azure resursa pomoću AZD
 
-**Navigacija kroz poglavlja:**
+**Navigacija poglavljima:**
 - **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
-- **📖 Trenutno poglavlje**: Poglavlje 4 - Infrastruktura kao kod i implementacija
+- **📖 Trenutno poglavlje**: Poglavlje 4 - Infrastruktura kao kod & implementacija
 - **⬅️ Prethodno**: [Vodič za implementaciju](deployment-guide.md)
-- **➡️ Sljedeće poglavlje**: [Poglavlje 5: Višeagentska AI rješenja](../../examples/retail-scenario.md)
+- **➡️ Sljedeće poglavlje**: [Poglavlje 5: AI rješenja s više agenata](../../examples/retail-scenario.md)
 - **🔧 Povezano**: [Poglavlje 6: Provjera prije implementacije](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## Uvod
 
-Ovaj detaljni vodič pokriva sve što trebate znati o provisioniranju i upravljanju Azure resursima koristeći Azure Developer CLI. Naučite implementirati obrasce Infrastructure as Code (IaC) od osnovnog stvaranja resursa do naprednih infrastrukturnih arhitektura razine poduzeća koristeći Bicep, ARM predloške, Terraform i Pulumi.
+Ovaj sveobuhvatni vodič obuhvaća sve što trebate znati o provisoniranju i upravljanju Azure resursima pomoću Azure Developer CLI. Naučite kako implementirati obrasce Infrastrukture kao koda (IaC) od osnovnog stvaranja resursa do naprednih infrastrukturnih arhitektura razine poduzeća koristeći Bicep, ARM predloške, Terraform i Pulumi.
 
 ## Ciljevi učenja
 
-Nakon završetka ovog vodiča, moći ćete:
-- Ovladati principima Infrastructure as Code i provisioningom Azure resursa
-- Razumjeti višestruke IaC pružatelje koje podržava Azure Developer CLI
+Nakon završetka ovog vodiča moći ćete:
+- Ovladati principima Infrastrukture kao koda i provisoniranjem Azure resursa
+- Razumjeti više IaC pružatelja podržanih od strane Azure Developer CLI
 - Dizajnirati i implementirati Bicep predloške za uobičajene arhitekture aplikacija
-- Konfigurirati parametre resursa, varijable i postavke specifične za okruženja
-- Implementirati napredne infrastrukturne obrasce uključujući mreže i sigurnost
+- Konfigurirati parametre resursa, varijable i postavke specifične za okoliš
+- Implementirati napredne infrastrukturne obrasce uključujući umrežavanje i sigurnost
 - Upravljati životnim ciklusom resursa, ažuriranjima i rješavanjem ovisnosti
 
 ## Ishodi učenja
 
-Po završetku, moći ćete:
-- Dizajnirati i provisionirati Azure infrastrukturu koristeći Bicep i ARM predloške
-- Konfigurirati složene višeservisne arhitekture s pravilnim ovisnostima resursa
-- Implementirati parametarske predloške za višestruka okruženja i konfiguracije
-- Otklanjati probleme s provisioningom infrastrukture i rješavati kvarove implementacije
-- Primjenjivati principe Azure Well-Architected Framework na dizajn infrastrukture
-- Upravljati ažuriranjima infrastrukture i provoditi strategije verzioniranja infrastrukture
+Po završetku ćete moći:
+- Dizajnirati i provisioningiti Azure infrastrukturu koristeći Bicep i ARM predloške
+- Konfigurirati složene arhitekture s više usluga s ispravnim ovisnostima resursa
+- Implementirati parametarske predloške za različite okoliše i konfiguracije
+- Otklanjati probleme u provisoniranju infrastrukture i rješavati neuspjehe implementacije
+- Primijeniti principe Azure Well-Architected Framework na dizajn infrastrukture
+- Upravljati izmjenama infrastrukture i primijeniti strategije verzioniranja infrastrukture
 
-## Pregled provisioniranja infrastrukture
+## Pregled provisioning infrastrukture
 
-Azure Developer CLI podržava višestruke Infrastructure as Code (IaC) pružatelje:
-- **Bicep** (preporučeno) - Azure-ov specifični jezik za domenu
-- **ARM predlošci** - JSON predlošci Azure Resource Managera
-- **Terraform** - alat za višemrežnu infrastrukturu
+Azure Developer CLI podržava više pružatelja Infrastructure as Code (IaC):
+- **Bicep** (preporučeno) - Azureov domenom specifični jezik
+- **ARM predlošci** - JSON predlošci za Azure Resource Manager
+- **Terraform** - alat za multi-cloud infrastrukturu
 - **Pulumi** - moderna infrastruktura kao kod s programskim jezicima
 
 ## Razumijevanje Azure resursa
@@ -50,15 +50,15 @@ Azure Account
 ```
 
 ### Uobičajene Azure usluge za aplikacije
-- **Compute**: App Service, Container Apps, Functions, Virtual Machines
-- **Pohrana**: Storage Account, Cosmos DB, SQL baza podataka, PostgreSQL
-- **Mreža**: Virtualna mreža, Application Gateway, CDN
+- **Računanje**: App Service, Container Apps, Functions, Virtual Machines
+- **Skladište**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
+- **Umrežavanje**: Virtual Network, Application Gateway, CDN
 - **Sigurnost**: Key Vault, Application Insights, Log Analytics
-- **AI/ML**: Cognitive Services, OpenAI, Machine Learning
+- **AI/ML**: Azure AI usluge, Azure OpenAI, Azure Machine Learning
 
 ## Bicep infrastrukturni predlošci
 
-### Osnovna struktura Bicep predložaka
+### Osnovna struktura Bicep predloška
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -200,6 +200,200 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
+## 🌐 Korištenje Terraforma s azd
+
+Bicep je zadani azd jezik, ali azd također podržava **Terraform**—korisno ako vaš tim već standardizira na njemu ili ako upravljate multi-cloud infrastrukturom. Azd radni tok (`azd up`, `azd provision`, `azd down`) je identičan; mijenja se samo jezik infrastrukture i struktura foldera.
+
+### Naredite azd-u da koristi Terraform
+
+Dodajte `infra` odjeljak u `azure.yaml` koji pokazuje na Terraform pružatelja:
+
+```yaml
+# azure.yaml
+name: my-terraform-app
+infra:
+  provider: terraform   # default is "bicep"
+  path: infra           # folder containing your .tf files
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### Terraform struktura foldera
+
+S Terraform pružateljem, vaš `infra/` folder koristi `.tf` datoteke umjesto Bicep:
+
+```
+infra/
+├── main.tf            # resource definitions
+├── variables.tf       # input variables
+├── outputs.tf         # outputs azd reads back (endpoints, names)
+├── provider.tf        # azurerm/azurecaf providers + backend
+└── main.tfvars.json   # values azd injects per environment
+```
+
+### Minimalni `main.tf`
+
+```hcl
+# infra/main.tf
+resource "azurerm_resource_group" "rg" {
+  name     = "rg-${var.environment_name}"
+  location = var.location
+  tags     = { "azd-env-name" = var.environment_name }
+}
+
+resource "azurerm_service_plan" "plan" {
+  name                = "plan-${var.environment_name}"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  os_type             = "Linux"
+  sku_name            = "B1"
+}
+```
+
+### Kako azd dohvaća Terraform izlaze
+
+azd čita Terraform **outputs** da bi saznao vaše krajnje točke i povezao vrijednosti okoliša natrag u vašu aplikaciju. Važni su nazivi izlaza—azd traži određene:
+
+```hcl
+# infra/outputs.tf
+output "AZURE_LOCATION" {
+  value = var.location
+}
+
+output "SERVICE_WEB_ENDPOINT_URL" {
+  value = azurerm_linux_web_app.web.default_hostname
+}
+```
+
+> **Važno:** azd koristi oznaku `azd-env-name` i izlaze `AZURE_*` za praćenje resursa po okolišu. Uvijek označite vašu grupu resursa s `"azd-env-name" = var.environment_name` da `azd down` može pronaći i ukloniti sve.
+
+### Implementacija s Terraform-om
+
+Naredbe su potpuno iste kao s Bicepom:
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd izvodi 'terraform plan' u pozadini
+azd up                    # osiguranje + implementacija
+azd down --force          # uništava resurse kojima upravlja Terraform
+```
+
+> **Preduvjet:** Terraform mora biti instaliran i dostupan u vašem `PATH`. azd upravlja Terraform *radnim tokom*, ali ne instalira Terraform za vas. Za stanje, azd po defaultu koristi lokalno stanje; za timove, konfigurirajte udaljeni backend (na primjer, Azure Storage backend) u `provider.tf`.
+
+Za potpune, funkcionalne Terraform početne primjere, pregledajte [Awesome AZD galeriju](https://azure.github.io/awesome-azd/) i filtrirajte za Terraform, ili pogledajte službenu [azd Terraform dokumentaciju](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
+
+## 🧩 Korištenje Pulumi-ja s azd
+
+Ako vaš tim piše infrastrukturu u općem programskom jeziku (TypeScript, Python, Go, ili C#) umjesto DSL-a, azd također podržava **Pulumi**. Kao i s Terraformom, radni tok `azd up` / `azd provision` / `azd down` ostaje isti—mijenjaju se samo alati za infrastrukturu i struktura foldera.
+
+### Naredite azd-u da koristi Pulumi
+
+```yaml
+# azure.yaml
+name: my-pulumi-app
+infra:
+  provider: pulumi      # default is "bicep"
+  path: infra           # folder containing your Pulumi program
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### Pulumi struktura foldera
+
+```
+infra/
+├── Pulumi.yaml          # project definition
+├── Pulumi.dev.yaml      # stack config (one per environment)
+├── index.ts             # your resource program (or __main__.py, main.go, etc.)
+├── package.json         # dependencies (for TypeScript)
+└── tsconfig.json
+```
+
+### Minimalni `index.ts`
+
+```typescript
+import * as azure from "@pulumi/azure-native";
+import * as pulumi from "@pulumi/pulumi";
+
+const environmentName = pulumi.getStack();
+
+// Oznacite svaki resurs kako bi azd mogao pratiti i očistiti ih
+const tags = { "azd-env-name": environmentName };
+
+const rg = new azure.resources.ResourceGroup("rg", {
+  resourceGroupName: `rg-${environmentName}`,
+  tags,
+});
+
+// azd učitava ove izlaze nazad u vaše okruženje
+export const AZURE_LOCATION = rg.location;
+export const SERVICE_WEB_ENDPOINT_URL = "https://...";
+```
+
+### Stogovi (Stacks) mapiraju se na azd okoliše
+
+Pulumi organizira implementacije u **stogove (stacks)**, a azd preslikava svaki azd okoliš na Pulumi stack istog imena. Kada pokrenete `azd env new staging`, azd odabire (ili stvara) `staging` Pulumi stack. Isti `azd-env-name` tagging i `AZURE_*` izlazna pravila vrijede, tako da `azd down` može pronaći i ukloniti sve.
+
+### Implementacija s Pulumi-jem
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd pokreće 'pulumi preview' u pozadini
+azd up                    # postavljanje + implementacija
+azd down --force          # pokreće 'pulumi destroy'
+```
+
+> **Preduvjet:** Pulumi mora biti instaliran i dostupan u vašem `PATH`, te trebate backend za pohranu stanja (Pulumi Cloud ili samostalno upravljani backend poput Azure Blob Storage). azd upravlja Pulumi *radnim tokom*, ne instalacijom. Pogledajte službenu [azd Pulumi dokumentaciju](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-pulumi-for-azd).
+
+## 🎯 Odabir hosta za vašu uslugu
+
+Polje `host` u `azure.yaml` odlučuje gdje vaš kod radi. azd podržava nekoliko hostova—odabir pravog ima veći značaj od jezika infrastrukture. Evo usporedbe za početnike:
+
+| `host` vrijednost | Najbolje za | Zašto |
+|-------------------|-------------|-------|
+| `appservice`      | Tradicionalne web aplikacije i API-jevi | Najjednostavniji PaaS; nisu potrebni kontejneri |
+| `staticwebapp`    | Front-end SPA (React, Vue, Angular) | Globalni CDN + besplatan SSL, ugrađena podrška za API |
+| `function`        | Događajno upravljani i serverless radni opterećenja | Skaliranje na nulu, plaćanje po izvršavanju |
+| `containerapp`    | Mikroservisi u kontejnerima | Serverless kontejneri, skaliranje na nulu, ugrađeni ulaz |
+| `aks`             | Komplicirane potrebe orkestracije | Potpuna Kubernetes kontrola kad vam stvarno treba |
+| `springapp`       | Java Spring Boot aplikacije | Upravljano Azure Spring Apps runtime podešeno za Spring |
+
+### Kada koristiti AKS
+
+**Azure Kubernetes Service (`host: aks`)** daje punu moć Kubernetes-a—prilagođene kontrolere, mrežne mreže usluga, složeno umrežavanje i precizno raspoređivanje. Ta moć dolazi s operativnim složenostima: vi upravljate pools čvorova, nadogradnjama i mrežom klastera.
+
+```yaml
+services:
+  api:
+    project: ./src/api
+    language: js
+    host: aks          # deploys to an existing AKS cluster
+```
+
+> **Počnite jednostavnije ako možete.** Za većinu mikroservisa, **Container Apps** daje kontejner, automatsko skaliranje i skaliranje na nulu bez upravljanja klasterom. Odaberite AKS samo kad trebate specifične Kubernetes značajke.
+
+### Kada koristiti Azure Spring Apps
+
+**Azure Spring Apps (`host: springapp`)** je upravljani runtime posebno izrađen za Spring Boot. On se brine za otkrivanje usluga, konfiguracijski server i blue-green implementaciju, tako da Java timovi ne moraju upravljati vlastitom infrastrukturom.
+
+```yaml
+services:
+  catalog:
+    project: ./src/catalog
+    language: java
+    host: springapp
+```
+
+> Koristite `springapp` kad imate postojeće Spring Boot aplikacije i želite runtime podešen za njih. Za nove Java aplikacije u kontejnerima bez specifičnih potreba za Spring, `containerapp` je često jednostavniji izbor.
+
 ## 🗃️ Provisioniranje baza podataka
 
 ### Cosmos DB
@@ -300,7 +494,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 
 ## 🔒 Sigurnost i upravljanje tajnama
 
-### Integracija Key Vaulta
+### Integracija Key Vault-a
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -368,9 +562,9 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 Mreža i povezivost
+## 🌍 Umrežavanje i povezivost
 
-### Konfiguracija virtualne mreže
+### Konfiguracija Virtualne mreže
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -496,7 +690,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Nadgledanje i vidljivost
+## 📊 Nadgledanje i uvidi
 
 ### Application Insights
 ```bicep
@@ -561,9 +755,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Konfiguracije specifične za okruženje
+## 🔧 Konfiguracije specifične za okoliš
 
-### Datoteke parametara za različita okruženja
+### Datoteke parametara za različite okoliše
 ```json
 // infra/main.parameters.dev.json
 {
@@ -617,7 +811,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Uvjetno provisioniranje resursa
+### Uvjetno provisioning resursa
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -649,7 +843,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Napredni obrasci provisioniranja
+## 🚀 Napredni obrasci provisioning-a
 
 ### Implementacija u više regija
 ```bicep
@@ -757,16 +951,16 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🧪 Pregled i validacija infrastrukture (NOVO)
 
-### Pregled promjena infrastrukture prije implementacije
+### Pregled izmjena infrastrukture prije implementacije
 
-Značajka `azd provision --preview` omogućuje vam da **simulirate provisioniranje infrastrukture** prije stvarnog implementiranja resursa. Slično je funkcijama `terraform plan` ili `bicep what-if`, pruža vam **suhi prikaz** promjena koje bi bile izvršene u vašem Azure okruženju.
+Značajka `azd provision --preview` omogućuje vam da **simulirate provisioning infrastrukture** prije nego što zapravo implementirate resurse. Slično je `terraform plan` ili `bicep what-if`, dajući vam **pregled bez izvršenja** promjena koje bi se napravile u vašem Azure okolišu.
 
 #### 🛠️ Što radi
 - **Analizira vaše IaC predloške** (Bicep ili Terraform)
 - **Prikazuje pregled promjena resursa**: dodavanja, brisanja, ažuriranja
-- **Ne izvršava promjene** — samo je za čitanje i sigurno za pokretanje
+- **Ne primjenjuje promjene** — samo čitanje, sigurno za pokretanje
 
-#### Slučajevi korištenja
+#### Primjeri upotrebe
 ```bash
 # Pregledajte promjene infrastrukture prije implementacije
 azd provision --preview
@@ -775,20 +969,20 @@ azd provision --preview
 azd provision --preview -e production
 ```
 
-Ova naredba pomaže vam da:
-- **Validirate promjene infrastrukture** prije dodjele resursa
-- **Rano otkrijete pogrešne konfiguracije** tijekom razvojnih ciklusa
-- **Sigurno surađujete** u timskim okruženjima
-- **Osigurate najmanje privilegirane implementacije** bez iznenađenja
+Ova naredba vam pomaže:
+- **Validirati promjene infrastrukture** prije obvezujuće implementacije
+- **Rano uhvatiti pogrešne konfiguracije** u razvojnom ciklusu
+- **Sigurno surađivati** u timskom okruženju
+- **Osigurati minimalna dopuštenja za implementacije** bez iznenađenja
 
-Posebno je korisna kada:
-- Radite s kompleksnim višeservisnim okruženjima
-- Izmjenjujete proizvodnu infrastrukturu
-- Provjeravate promjene predložaka prije odobrenja PR-a
-- Obučavate nove članove tima na infrastrukturalnim obrascima
+Posebno je korisno kada:
+- Radite sa složenim višeservisnim okruženjima
+- Mijenjate produkcijsku infrastrukturu
+- Validirate izmjene predložaka prije PR odobrenja
+- Obučavate nove članove tima o obrascima infrastrukture
 
 ### Primjer izlaza pregleda
-Točan izlaz pregleda varira ovisno o pružatelju i strukturi projekta, ali rezultat bi trebao jasno identificirati predložene promjene prije nego što se išta primijeni.
+Točan izlaz pregleda ovisi o pružatelju i strukturi projekta, ali rezultat bi trebao jasno označiti predložene izmjene prije bilo kakve primjene.
 
 ```bash
 $ azd provision --preview
@@ -813,19 +1007,19 @@ The following resources will be destroyed:
 ✅ Preview completed successfully!
 ```
 
-## 🔄 Ažuriranja i migracije resursa
+## �🔄 Ažuriranja i migracije resursa
 
 ### Sigurna ažuriranja resursa
 ```bash
-# Prvo pregledajte promjene u infrastrukturi (PREPORUČENO)
+# Pregledajte promjene infrastrukture prvo (PREPORUČENO)
 azd provision --preview
 
 # Primijenite promjene nakon potvrde pregleda
 azd provision --confirm-with-no-prompt
 
-# Za povratak koristite Git za vraćanje promjena u infrastrukturi:
-git revert HEAD  # Vratite zadnji commit infrastrukture
-azd provision    # Primijenite prethodno stanje infrastrukture
+# Za povratak koristite Git za poništavanje promjena infrastrukture:
+git revert HEAD  # Poništi zadnji commit infrastrukture
+azd provision    # Primijeni prethodno stanje infrastrukture
 ```
 
 ### Migracije baza podataka
@@ -870,7 +1064,7 @@ var naming = {
 }
 ```
 
-### 2. Strategija tagiranja
+### 2. Strategija označavanja (tagging)
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -916,14 +1110,14 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Sljedeći koraci
 
-- [Planiranje prije implementacije](../chapter-06-pre-deployment/capacity-planning.md) - Validacija dostupnosti resursa
+- [Planiranje prije implementacije](../chapter-06-pre-deployment/capacity-planning.md) - Validirajte dostupnost resursa
 - [Uobičajeni problemi](../chapter-07-troubleshooting/common-issues.md) - Otklanjanje problema s infrastrukturom
-- [Vodič za otklanjanje pogrešaka](../chapter-07-troubleshooting/debugging.md) - Otklanjanje problema s provisioningom
-- [Odabir SKU-a](../chapter-06-pre-deployment/sku-selection.md) - Odabir odgovarajućih razina usluge
+- [Vodič za otklanjanje pogrešaka](../chapter-07-troubleshooting/debugging.md) - Otklanjanje problema provisoniranja
+- [Odabir SKU](../chapter-06-pre-deployment/sku-selection.md) - Odaberite prikladne razine usluga
 
-## Dodatni izvori
+## Dodatni resursi
 
-- [Azure Bicep dokumentacija](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Dokumentacija Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Resource Manager predlošci](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -937,6 +1131,6 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Odricanje od odgovornosti**:
-Ovaj dokument je preveden korištenjem AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatizirani prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za kritične informacije preporučuje se profesionalni ljudski prijevod. Ne odgovaramo za bilo kakva nesporazuma ili pogrešna tumačenja nastala korištenjem ovog prijevoda.
+**Napomena**:
+Ovaj dokument je preveden korištenjem AI prevoditeljskog servisa [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatski prijevodi mogu sadržavati greške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za važne informacije preporuča se profesionalni ljudski prijevod. Nismo odgovorni za bilo kakva nesporazumevanja ili pogrešne interpretacije koje proizlaze iz korištenja ovog prijevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

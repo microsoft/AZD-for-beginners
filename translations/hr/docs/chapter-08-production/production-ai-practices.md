@@ -1,43 +1,44 @@
-# Najbolje prakse za produkcijske AI radne opterećenja s AZD-om
+# Najbolje prakse za proizvodne AI radne opterećenja s AZD
 
-**Navigacija poglavljima:**
-- **📚 Početna stranica tečaja**: [AZD Za početnike](../../README.md)
-- **📖 Trenutno poglavlje**: Poglavlje 8 - Produkcijski i enterprise obrasci
+**Navigacija kroz poglavlja:**
+- **📚 Početna stranica tečaja**: [AZD For Beginners](../../README.md)
+- **📖 Trenutno poglavlje**: Poglavlje 8 - Proizvodni i Enterprise obrasci
 - **⬅️ Prethodno poglavlje**: [Poglavlje 7: Otklanjanje poteškoća](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Također povezano**: [AI radionica lab](ai-workshop-lab.md)
-- **🎯 Završetak tečaja**: [AZD Za početnike](../../README.md)
+- **⬅️ Također povezano**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎯 Završetak tečaja**: [AZD For Beginners](../../README.md)
 
 ## Pregled
 
-Ovaj vodič pruža sveobuhvatne najbolje prakse za implementaciju produkcijski spremnih AI radnih opterećenja koristeći Azure Developer CLI (AZD). Bazirano na povratnim informacijama iz Microsoft Foundry Discord zajednice i stvarnim implementacijama kod kupaca, ove prakse obrađuju najčešće izazove u produkcijskim AI sustavima.
+Ovaj vodič pruža sveobuhvatne najbolje prakse za implementaciju proizvodnih AI radnih opterećenja koristeći Azure Developer CLI (AZD). Temelji se na povratnim informacijama iz zajednice Microsoft Foundry Discord i stvarnim implementacijama kupaca te obrađuje najčešće izazove u proizvodnim AI sustavima.
 
-## Ključni obrađeni izazovi
+## Ključni izazovi koji se rješavaju
 
-Na temelju rezultata ankete u zajednici, ovo su glavni izazovi s kojima se programeri susreću:
+Temeljem rezultata naše zajedničke ankete, ovo su glavni izazovi s kojima se developeri susreću:
 
-- **45%** ima poteškoće s višeslužbenim AI implementacijama
-- **38%** ima probleme s upravljanjem vjerodajnicama i tajnama  
-- **35%** smatra proizvodnu spremnost i skaliranje izazovnima
-- **32%** treba bolje strategije za optimizaciju troškova
-- **29%** zahtijeva unaprijeđeni nadzor i otklanjanje poteškoća
+- **45%** ima poteškoće s multi-servisnim AI implementacijama  
+- **38%** ima problema s upravljanjem vjerodajnicama i tajnama  
+- **35%** smatra da je spremnost za proizvodnju i skaliranje teško  
+- **32%** trebaju bolju strategiju optimizacije troškova  
+- **29%** zahtijevaju poboljšano praćenje i otklanjanje poteškoća  
 
-## Arhitektonski obrasci za produkcijski AI
+## Arhitektonski obrasci za proizvodni AI
 
-### Obrazac 1: AI mikroservisna arhitektura
+### Obrazac 1: Microservices AI arhitektura
 
-**Kada koristiti**: Složene AI aplikacije s višestrukim mogućnostima
+**Kada koristiti**: Složene AI aplikacije s više funkcionalnosti
 
 ```mermaid
 graph TD
     Frontend[Web sučelje] --- Gateway[API prolaz] --- LB[Upravljač opterećenjem]
-    Gateway --> Chat[Služba za chat]
-    Gateway --> Image[Služba za slike]
-    Gateway --> Text[Služba za tekst]
-    Chat --> OpenAI[Microsoft Foundry modeli]
-    Image --> Vision[Računalni vid]
-    Text --> DocIntel[Inteligencija dokumenata]
+    Gateway --> Chat[Usluga chata]
+    Gateway --> Image[Usluga slika]
+    Gateway --> Text[Usluga teksta]
+    Chat --> OpenAI[Microsoft modeli Foundry]
+    Image --> Vision[Rak računalnog vida]
+    Text --> DocIntel[Dokumentna inteligencija]
 ```
-**Implementacija u AZD-u**:
+
+**AZD implementacija**:
 
 ```yaml
 # azure.yaml
@@ -60,9 +61,9 @@ services:
     host: containerapp
 ```
 
-### Obrazac 2: Event-driven AI obrada
+### Obrazac 2: Obrada AI događaja na zahtjev
 
-**Kada koristiti**: Obrada u serijama, analiza dokumenata, asinkroni tokovi rada
+**Kada koristiti**: Obrada serija podataka, analiza dokumenata, asinhroni radni tokovi
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -109,46 +110,46 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Razmišljanja o zdravlju AI agenta
+## Razmišljanje o zdravlju AI agenta
 
-Kad se tradicionalna web aplikacija pokvari, simptomi su poznati: stranica se ne učitava, API vraća grešku ili implementacija ne uspije. AI aplikacije se mogu pokvariti na iste načine — ali mogu i pokazivati suptilnije nepravilnosti koje ne generiraju očite poruke o greškama.
+Kada se tradicionalna web aplikacija pokvari, simptomi su poznati: stranica se ne učitava, API vraća grešku ili implementacija ne uspije. AI-powered aplikacije mogu se pokvariti na sve te načine—ali mogu imati i suptilnije kvarove koji ne proizvode očite poruke o grešci.
 
-Ovaj odjeljak pomaže vam izgraditi mentalni model za nadzor AI radnih opterećenja tako da znate gdje gledati kada nešto nije u redu.
+Ovaj odjeljak pomaže vam izgraditi mentalni model za nadzor AI radnih opterećenja kako biste znali gdje pogledati kad nešto ne izgleda u redu.
 
 ### Kako se zdravlje agenta razlikuje od zdravlja tradicionalne aplikacije
 
-Tradicionalna aplikacija ili radi ili ne radi. AI agent može izgledati kao da radi, ali proizvoditi loše rezultate. Razmislite o zdravlju agenta u dva sloja:
+Tradicionalna aplikacija ili radi ili ne radi. AI agent može izgledati kao da radi, ali proizvoditi loše rezultate. Razmotrite zdravlje agenta u dva sloja:
 
 | Sloj | Što pratiti | Gdje gledati |
 |-------|--------------|---------------|
-| **Zdravlje infrastrukture** | Radi li usluga? Jesu li resursi provisionirani? Jesu li krajnje točke dostupne? | `azd monitor`, zdravstveno stanje resursa u Azure Portalu, zapisi kontejnera/aplikacije |
-| **Zdravlje ponašanja** | Odgovara li agent točno? Jesu li odgovori pravovremeni? Je li model ispravno pozvan? | Application Insights tragovi, metrike latencije poziva modela, zapisi kvalitete odgovora |
+| **Zdravlje infrastrukture** | Radi li servis? Jesu li resursi osigurani? Jesu li endpointi dostupni? | `azd monitor`, zdravlje resursa na Azure portalu, logovi kontejnera/aplikacije |
+| **Zdravlje ponašanja** | Odgovara li agent točno? Jesu li odgovori pravovremeni? Je li model pravilno pozvan? | Traces u Application Insights, metrike latencije poziva modela, logovi kvalitete odgovora |
 
-Zdravlje infrastrukture je poznato—isto je za bilo koju azd aplikaciju. Zdravlje ponašanja je novi sloj koji AI radna opterećenja uvode.
+Zdravlje infrastrukture je poznato—isto za bilo koju azd aplikaciju. Zdravlje ponašanja je novi sloj koji AI radna opterećenja uvode.
 
-### Gdje gledati kad AI aplikacije ne rade kako se očekuje
+### Gdje gledati kada se AI aplikacije ne ponašaju očekivano
 
-Ako vaša AI aplikacija ne daje očekivane rezultate, evo konceptualnog popisa:
+Ako vaša AI aplikacija ne proizvodi očekivane rezultate, evo konceptualnog popisa za provjeru:
 
-1. **Počnite s osnovama.** Radi li aplikacija? Može li doći do ovisnosti? Provjerite `azd monitor` i zdravlje resursa kao što biste to radili za bilo koju aplikaciju.
-2. **Provjerite vezu s modelom.** Poziva li vaša aplikacija AI model uspješno? Neuspjeli ili vremenski prekoračeni pozivi modelu najčešći su uzrok problema u AI aplikacijama i pojavit će se u zapisima aplikacije.
-3. **Pogledajte što je model primio.** AI odgovori ovise o ulazu (upit i svaki dohvaćeni kontekst). Ako je izlaz kriv, obično je i ulaz kriv. Provjerite šalje li vaša aplikacija ispravne podatke modelu.
-4. **Pregledajte latenciju odgovora.** Pozivi AI modelima sporiji su od tipičnih API poziva. Ako aplikacija djeluje sporo, provjerite jesu li vremena odgovora modela porasla — to može ukazivati na ograničenja kapaciteta, usporavanja ili zagušenja na razini regije.
-5. **Pratite signale troškova.** Neočekivani porasti u upotrebi tokena ili API poziva mogu ukazivati na petlju, nepravilno konfigurirani upit ili pretjerane pokušaje.
+1. **Počnite s osnovama.** Radi li aplikacija? Može li doseći svoje ovisnosti? Provjerite `azd monitor` i zdravlje resursa kao i za bilo koju aplikaciju.  
+2. **Provjerite vezu s modelom.** Vaša aplikacija mora uspješno pozvati AI model. Neuspjeli ili timeout pozivi modela najčešći su uzrok problema AI aplikacija i prikazuju se u logovima aplikacije.  
+3. **Pogledajte što je model primio.** AI odgovori ovise o unosu (prompt i bilo koji dohvaćeni kontekst). Ako je izlaz pogrešan, ulaz je obično pogrešan. Provjerite šalje li vaša aplikacija ispravne podatke modelu.  
+4. **Pregledajte latenciju odgovora.** Pozivi AI modelu sporiji su od uobičajenih API poziva. Ako vam se aplikacija čini spora, provjerite je li se vrijeme odgovora modela povećalo—to može ukazivati na throttling, limite kapaciteta ili regionalnu zagušenost.  
+5. **Pratite signale troškova.** Neočekivani skokovi u upotrebi tokena ili API pozivima mogu ukazivati na petlju, krivo konfiguriran prompt ili prekomjerne ponovne pokušaje.
 
-Ne morate odmah savladati alate za vidljivost. Ključna stvar je da AI aplikacije imaju dodatni sloj ponašanja koji treba nadzirati, a ugrađeni nadzor u azdu (`azd monitor`) daje vam početnu točku za ispitivanje oba sloja.
+Ne morate odmah savladati alate za opažanje. Ključna poruka je da AI aplikacije imaju dodatni sloj ponašanja koji treba pratiti, a ugrađeni monitor azda (`azd monitor`) daje početnu točku za istraživanje oba sloja.
 
 ---
 
-## Najbolje prakse za sigurnost
+## Najbolje sigurnosne prakse
 
 ### 1. Zero-Trust sigurnosni model
 
 **Strategija implementacije**:
-- Nema komunikacije usluga bez autentifikacije
-- Svi API pozivi koriste upravljane identitete
-- Izolacija mreže s privatnim krajnjim točkama
-- Kontrole pristupa s najmanjim potrebnim privilegijama
+- Nema komunikacije između servisa bez autentifikacije  
+- Svi API pozivi koriste managed identities  
+- Mrežna izolacija s privatnim endpointima  
+- Kontrole pristupa s najmanjim privilegijama  
 
 ```bicep
 // Managed Identity for each service
@@ -171,7 +172,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 ### 2. Sigurno upravljanje tajnama
 
-**Obrazac integracije s Key Vault-om**:
+**Obrazac integracije Key Vauta**:
 
 ```bicep
 // Key Vault with proper access policies
@@ -206,7 +207,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ### 3. Mrežna sigurnost
 
-**Konfiguracija privatnih krajnjih točaka**:
+**Konfiguracija privatnog endpointa**:
 
 ```bicep
 // Virtual Network for AI services
@@ -268,7 +269,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ### 1. Strategije automatskog skaliranja
 
-**Automatsko skaliranje aplikacija u kontejnerima**:
+**Automatsko skaliranje Container aplikacija**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -314,7 +315,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 2. Strategije keširanja
 
-**Redis keš za AI odgovore**:
+**Redis Cache za AI odgovore**:
 
 ```bicep
 // Redis Premium for production workloads
@@ -342,7 +343,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. Raspodjela opterećenja i upravljanje prometom
+### 3. Load balancing i upravljanje prometom
 
 **Application Gateway s WAF-om**:
 
@@ -382,9 +383,9 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ## 💰 Optimizacija troškova
 
-### 1. Prilagodba veličine resursa
+### 1. Pravilno dimenzioniranje resursa
 
-**Konfiguracije za pojedinačna okruženja**:
+**Okolišne specifične konfiguracije**:
 
 ```bash
 # Razvojno okruženje
@@ -445,9 +446,9 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-### 3. Optimizacija korištenja tokena
+### 3. Optimizacija upotrebe tokena
 
-**Upravljanje troškovima u OpenAI-u**:
+**Upravljanje troškovima OpenAI-ja**:
 
 ```typescript
 // Optimizacija tokena na razini aplikacije
@@ -460,7 +461,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Skratite kontekst, ne unos korisnika
+      // Skraćivanje konteksta, ne korisničkog unosa
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -474,7 +475,7 @@ class TokenOptimizer {
 }
 ```
 
-## Nadzor i vidljivost
+## Nadzor i opažanje
 
 ### 1. Sveobuhvatni Application Insights
 
@@ -621,9 +622,9 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## Oporavak od katastrofa i visoka dostupnost
+## Oporavak od katastrofe i visoka dostupnost
 
-### 1. Implementacija u višestrukim regijama
+### 1. Implementacija u više regija
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -685,7 +686,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. Backup podataka i oporavak
+### 2. Backup i oporavak podataka
 
 ```bicep
 // Backup configuration for critical data
@@ -852,73 +853,73 @@ python scripts/test_connectivity.py
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Kontrolni popis za produkcijsku spremnost
+## Kontrolni popis spremnosti za proizvodnju
 
 ### Sigurnost ✅
-- [ ] Sve usluge koriste upravljane identitete
-- [ ] Tajne su pohranjene u Key Vault-u
-- [ ] Konfigurirane privatne krajnje točke
-- [ ] Implementirani mrežni sigurnosni skupovi
-- [ ] RBAC s najmanjim privilegijama
-- [ ] WAF omogućen na javnim krajnjim točkama
+- [ ] Svi servisi koriste managed identities  
+- [ ] Tajne pohranjene u Key Vault  
+- [ ] Konfigurirani privatni endpointi  
+- [ ] Implementirane mrežne sigurnosne grupe  
+- [ ] RBAC s najmanjim privilegijama  
+- [ ] WAF omogućen na javnim endpointima  
 
 ### Performanse ✅
-- [ ] Konfigurirano automatsko skaliranje
-- [ ] Implementirano keširanje
-- [ ] Postavljeno raspodjeljivanje opterećenja
-- [ ] CDN za statički sadržaj
-- [ ] Pools za povezivanje s bazom podataka
-- [ ] Optimizacija korištenja tokena
+- [ ] Konfigurirano automatsko skaliranje  
+- [ ] Implementirano keširanje  
+- [ ] Postavljeno load balancing  
+- [ ] CDN za statični sadržaj  
+- [ ] Pooling veza baze podataka  
+- [ ] Optimizacija upotrebe tokena  
 
 ### Nadzor ✅
-- [ ] Konfiguriran Application Insights
-- [ ] Definirane prilagođene metrike
-- [ ] Postavljena pravila upozorenja
-- [ ] Izrađena nadzorna ploča
-- [ ] Implementirane provjere zdravlja
-- [ ] Pravila zadržavanja zapisa
+- [ ] Konfiguriran Application Insights  
+- [ ] Definirane prilagođene metrike  
+- [ ] Postavljeni alerti  
+- [ ] Kreirane nadzorne ploče  
+- [ ] Implementirane provjere zdravlja  
+- [ ] Politike zadržavanja logova  
 
 ### Pouzdanost ✅
-- [ ] Višeregionalna implementacija
-- [ ] Plan rezerva i oporavka
-- [ ] Implementirani prekidači strujnog kruga
-- [ ] Konfigurirane politike ponovnih pokušaja
-- [ ] Postupno smanjenje performansi
-- [ ] Krajnje točke za provjere zdravlja
+- [ ] Implementacija u više regija  
+- [ ] Plan backup-a i oporavka  
+- [ ] Implementirani circuit breakeri  
+- [ ] Konfigurirane politike ponovnih pokušaja  
+- [ ] Prijelaz u režim lijepog opadanja  
+- [ ] Endpointi za provjeru zdravlja  
 
 ### Upravljanje troškovima ✅
-- [ ] Konfigurirani budžetski alarmi
-- [ ] Prilagodba veličine resursa
-- [ ] Primijenjeni popusti za razvoj/testiranje
-- [ ] Kupljene rezervirane instance
-- [ ] Nadzorna ploča za praćenje troškova
-- [ ] Redoviti pregledi troškova
+- [ ] Konfigurirani alerti budžeta  
+- [ ] Pravilno dimenzioniranje resursa  
+- [ ] Primijenjeni rabati za razvoj/testiranje  
+- [ ] Kupljene rezervirane instance  
+- [ ] Nadzorne ploče za troškove  
+- [ ] Redoviti pregledi troškova  
 
 ### Usklađenost ✅
-- [ ] Zadovoljeni zahtjevi za domicilnoću podataka
-- [ ] Omogućen zapis za reviziju
-- [ ] Primijenjene usklađene politike
-- [ ] Implementirane sigurnosne osnove
-- [ ] Redovite sigurnosne procjene
-- [ ] Plan za odgovor na incidente
+- [ ] Zadovoljavanje zahtjeva za rezidencijom podataka  
+- [ ] Omogućeno auditiranje logova  
+- [ ] Primijenjene usklađenosti politike  
+- [ ] Implementirane sigurnosne početne vrijednosti  
+- [ ] Redovite sigurnosne procjene  
+- [ ] Plan za odgovor na incidente  
 
-## Performanse benchmarki
+## Benchmark performansi
 
-### Tipične produkcijske metrike
+### Tipične metrike za proizvodnju
 
 | Metrika | Cilj | Nadzor |
 |--------|--------|------------|
 | **Vrijeme odgovora** | < 2 sekunde | Application Insights |
-| **Dostupnost** | 99.9% | Nadzor dostupnosti |
-| **Stope grešaka** | < 0.1% | Zapisi aplikacije |
-| **Korištenje tokena** | < 500 $ mjesečno | Upravljanje troškovima |
-| **Istovremeni korisnici** | 1000+ | Testiranje opterećenja |
-| **Vrijeme oporavka** | < 1 sat | Testovi oporavka od katastrofa |
+| **Dostupnost** | 99.9% | Praćenje dostupnosti |
+| **Stopa grešaka** | < 0.1% | Logovi aplikacije |
+| **Upotreba tokena** | < $500/mjesečno | Upravljanje troškovima |
+| **Korisnici u isto vrijeme** | 1000+ | Testiranje opterećenja |
+| **Vrijeme oporavka** | < 1 sat | Testovi oporavka od katastrofe |
 
 ### Testiranje opterećenja
 
 ```bash
-# Skripta za opterećenje testiranja za AI aplikacije
+# Skripta za testiranje opterećenja za AI aplikacije
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -928,67 +929,80 @@ python scripts/load_test.py \
 
 ## 🤝 Najbolje prakse zajednice
 
-Na temelju povratnih informacija Microsoft Foundry Discord zajednice:
+Na temelju povratnih informacija iz Microsoft Foundry Discord zajednice:
 
-### Glavne preporuke zajednice:
+### Najvažniji savjeti iz zajednice:
 
-1. **Počnite maleno, skalirajte postupno**: Krećite s osnovnim SKU-ovima i skalirajte prema stvarnoj upotrebi
-2. **Nadzirite sve**: Postavite sveobuhvatan nadzor od prvog dana
-3. **Automatizirajte sigurnost**: Koristite infrastrukturu kao kod za dosljednu sigurnost
-4. **Temeljito testirajte**: Uključite AI-specifično testiranje u svoj pipeline
-5. **Planirajte troškove**: Pratite korištenje tokena i rano postavite budžetske alarme
+1. **Počnite skromno, skalirajte postupno**: Započnite s osnovnim SKU-ovima i povećavajte na temelju stvarne upotrebe  
+2. **Nadzirite sve**: Postavite sveobuhvatni nadzor od prvog dana  
+3. **Automatizirajte sigurnost**: Koristite infrastrukturu kao kod za dosljednu sigurnost  
+4. **Detaljno testirajte**: Uključite AI-specifična testiranja u svoj pipeline  
+5. **Planirajte troškove**: Pratite upotrebu tokena i postavite budžet alarme ranije  
 
-### Uobičajene zamke koje treba izbjeći:
+### Uobičajene zamke koje treba izbjegavati:
 
-- ❌ Hardkodiranje API ključeva u kod
-- ❌ Nepostavljanje pravilnog nadzora
-- ❌ Ignoriranje optimizacije troškova
-- ❌ Nepostavljanje testova za scenarije neuspjeha
-- ❌ Implementacija bez provjera zdravlja
+- ❌ Hardkodiranje API ključeva u kod  
+- ❌ Ne postavljanje pravilnog nadzora  
+- ❌ Ignoriranje optimizacije troškova  
+- ❌ Nepokretanje testiranja scenarija grešaka  
+- ❌ Implementacija bez provjere zdravlja  
 
 ## AZD AI CLI naredbe i ekstenzije
 
-AZD sadrži rastući skup AI-specifičnih naredbi i ekstenzija koje pojednostavljuju produkcijske AI radne tokove. Ovi alati premošćuju jaz između lokalnog razvoja i produkcijske implementacije AI radnih opterećenja.
+AZD uključuje rastući skup AI-specifičnih naredbi i ekstenzija koje pojednostavljuju proizvodne AI radne tokove. Ovi alati premošćuju jaz između lokalnog razvoja i produkcijske implementacije AI radnih opterećenja.
 
 ### AZD ekstenzije za AI
 
 AZD koristi sustav ekstenzija za dodavanje AI-specifičnih mogućnosti. Instalirajte i upravljajte ekstenzijama s:
 
 ```bash
-# Prikaži sve dostupne ekstenzije (uključujući AI)
+# Popis svih dostupnih ekstenzija (uključujući AI)
 azd extension list
 
-# Pregled detalja instaliranih ekstenzija
+# Pregledajte detalje instalirane ekstenzije
 azd extension show azure.ai.agents
 
-# Instaliraj Foundry agents ekstenziju
+# Instalirajte ekstenziju za agente Foundry
 azd extension install azure.ai.agents
 
-# Instaliraj ekstenziju za fino podešavanje
+# Instalirajte ekstenziju za fino podešavanje
 azd extension install azure.ai.finetune
 
-# Instaliraj ekstenziju za prilagođene modele
+# Instalirajte ekstenziju za prilagođene modele
 azd extension install azure.ai.models
 
-# Nadogradi sve instalirane ekstenzije
+# Nadogradite sve instalirane ekstenzije
 azd extension upgrade --all
 ```
 
 **Dostupne AI ekstenzije:**
 
-| Ekstenzija | Namjena | Status |
+| Ekstenzija | Svrha | Status |
 |-----------|---------|--------|
-| `azure.ai.agents` | Upravljanje Foundry Agent uslugom | Pregled |
-| `azure.ai.finetune` | Fino podešavanje Foundry modela | Pregled |
-| `azure.ai.models` | Prilagođeni Foundry modeli | Pregled |
-| `azure.coding-agent` | Konfiguracija kodnog agenta | Dostupno |
+| `azure.ai.agents` | Upravljanje Foundry agent servisom | Preview |
+| `azure.ai.skills` | Ponovno upotrebljive agentove vještine | Preview |
+| `azure.ai.connections` | Foundry konekcije (izvori podataka, alati) | Preview |
+| `azure.ai.finetune` | Fine-tuning Foundry modela | Preview |
+| `azure.ai.models` | Prilagođeni Foundry modeli | Preview |
+| `azure.coding-agent` | Konfiguracija coding agenta | Dostupno |
 
-### Inicijalizacija agent projekata s `azd ai agent init`
+> Ekstenzija `azure.ai.agents` brzo se razvija. Ovaj tečaj je potvrđen za verziju `0.1.40-preview`. Pokrenite `azd extension upgrade --all` za preuzimanje najnovijeg skupa naredbi, i `azd extension show azure.ai.agents` za potvrdu instalirane verzije.
 
-Naredba `azd ai agent init` postavlja produkcijski spreman AI agent projekt integriran s Microsoft Foundry Agent uslugom:
+**Što su novije ekstenzije `skills` i `connections`?**
+
+Dvije preview ekstenzije pojavile su se uz alat agent i vrijedi ih razumjeti čak i kao početnik:
+
+- **`azure.ai.skills`** — **vještina** je ponovno upotrebljiva sposobnost (pakirani alat ili ponašanje) koju možete dodijeliti jednom ili više agenata umjesto da je svaki put iznova implementirate. Promislite o tome kao o zajedničkom građevnom bloku: jednom definirajte "pretraživanje dokumenata" ili "provjeru narudžbe" vještinu, pa je ponovno koristite preko agenata. To održava sustave s više agenata (Poglavlje 5) konzistentnima i izbjegava kopiranje i lijepljenje.
+- **`azure.ai.connections`** — **konekcija** je upravljana veza vašeg Foundry projekta prema vanjskom resursu koji agenti trebaju — izvor podataka (kao Azure AI Search), endpoint alata ili drugi servis. Konekcije centraliziraju *gdje* i *kako* agenti pristupaju podacima, tako da vjerodajnice i endpointi žive na jednom upravljanom mjestu umjesto da su razbacani kroz kod.
+
+Za prvo postavljanje agenata ne trebate ove – držite se `azure.ai.agents` dok učite. Koristite `skills` kada duplicirate isti alat preko agenata, a `connections` kada više agenata dijeli isti izvor podataka.
+
+### Inicijalizacija agenata s `azd ai agent init`
+
+Naredba `azd ai agent init` generira proizvodno spreman AI agent projekt integriran s Microsoft Foundry Agent servisom:
 
 ```bash
-# Inicijalizirajte novi agent projekt iz agenta manifestacije
+# Inicijalizirajte novi agent projekt iz agent manifest
 azd ai agent init -m <manifest-path-or-uri>
 
 # Inicijalizirajte i ciljate određeni Foundry projekt
@@ -1005,17 +1019,57 @@ azd ai agent init -m agent-manifest.yaml --host containerapp
 
 | Zastavica | Opis |
 |------|-------------|
-| `-m, --manifest` | Put ili URI do agent manifest datoteke za dodavanje u projekt |
+| `-m, --manifest` | Put ili URI do manifesta agenta koji ćete dodati u projekt |
 | `-p, --project-id` | Postojeći Microsoft Foundry Project ID za vaše azd okruženje |
 | `-s, --src` | Direktorij za preuzimanje definicije agenta (zadano `src/<agent-id>`) |
-| `--host` | Zamjena zadane host vrijednosti (npr. `containerapp`) |
-| `-e, --environment` | azd okruženje koje treba koristiti |
+| `--host` | Prekoračenje zadanog hosta (npr. `containerapp`) |
+| `-e, --environment` | azd okruženje za korištenje |
 
-**Savjet za produkciju**: Koristite `--project-id` za direktno povezivanje s postojećim Foundry projektom, održavajući vezu koda agenta i cloud resursa od početka.
+**Savjet za proizvodnju**: Koristite `--project-id` za izravno povezivanje s postojećim Foundry projektom, čime držite vaš agent kod i oblačne resurse povezane od početka.
+
+### Upravljanje životnim ciklusom agenta
+
+Pored `init`, ekstenzija `azure.ai.agents` pruža naredbe za cijeli životni ciklus hostanog agenta—testiranje, evaluaciju, optimizaciju i umirovljenje:
+
+```bash
+# Pozovi implementiranog agenta i pogledaj vrijeme odziva poslužitelja
+# (ukupna latencija i vrijeme prvog bajta)
+azd ai agent invoke
+
+# Prikaži konfiguraciju aktivne točke prije promjene
+azd ai agent endpoint show
+
+# Generiraj skup podataka za evaluaciju agenta
+azd ai agent eval generate --dataset ./eval/dataset.jsonl
+
+# Optimiziraj upute agenta prema tvojim evaluacijskim podacima
+# (zahtijeva optimization_model u projektu agenta)
+azd ai agent optimize
+
+# Preuzmi implementirani izvorni kod agenta temeljenog na kodu
+# (s provjerom SHA-256)
+azd ai agent code download
+
+# Izbriši hostanog agenta i sve njegove verzije
+# (--force prekida aktivne sesije)
+azd ai agent delete --force
+```
+
+**Životni ciklus na prvi pogled:**
+
+| Faza | Naredba | Korištenje u proizvodnji |
+|-------|---------|----------------|
+| Testiranje | `azd ai agent invoke` | Validacija odgovora i mjerenje latencije prije puštanja |
+| Inspekcija | `azd ai agent endpoint show` | Pregled autentifikacije i konfiguracije endpointa; rana detekcija prekida |
+| Mjerenje | `azd ai agent eval generate` | Izgradnja ponovljivog skupa evaluacije iz stvarnih tragova |
+| Poboljšanje | `azd ai agent optimize` | Podešavanje uputa protiv izmjerene kvalitete |
+| Oporavak | `azd ai agent code download` | Dohvat točno implementiranog izvornog koda za reviziju/rollback |
+| Umirovljenje | `azd ai agent delete --force` | Čisto uklanjanje agenta i njegovih verzija |
+
+> Ovo su preview naredbe i mogu se mijenjati između izdanja ekstenzija. Pokrenite `azd ai agent --help` za pogled točnih dostupnih podnaredbi u vašoj verziji.
 
 ### Model Context Protocol (MCP) s `azd mcp`
-
-AZD uključuje ugrađenu podršku za MCP server (Alpha), omogućujući AI agentima i alatima da komuniciraju s vašim Azure resursima putem standardiziranog protokola:
+AZD uključuje ugrađenu podršku za MCP poslužitelj (Alfa), što omogućuje AI agentima i alatima interakciju s vašim Azure resursima putem standardiziranog protokola:
 
 ```bash
 # Pokrenite MCP poslužitelj za vaš projekt
@@ -1025,30 +1079,30 @@ azd mcp start
 azd copilot consent list
 ```
 
-MCP server izlaže kontekst vašeg azd projekta—okruženja, usluge i Azure resurse—za AI-pokretane razvojne alate. To omogućuje:
+MCP poslužitelj izlaže kontekst vašeg azd projekta—okruženja, usluge i Azure resurse—alatima za razvoj s podrškom za AI. To omogućuje:
 
-- **AI-pomoć pri implementaciji**: Dopustite kodnim agentima da upituju stanje projekta i pokreću implementacije
-- **Otkrivanje resursa**: AI alati mogu otkriti koje Azure resurse vaš projekt koristi
-- **Upravljanje okruženjima**: Agenti mogu mijenjati između razvojnih/testnih/produkcijskih okruženja
+- **Implantacija uz pomoć AI:** Dopustite agentima za kodiranje da upitaju stanje vašeg projekta i pokrenu implantacije
+- **Otkrivanje resursa:** AI alati mogu otkriti koje Azure resurse vaš projekt koristi
+- **Upravljanje okruženjem:** Agenti mogu prebacivati između razvojnih/testnih/produkcijskih okruženja
 
 ### Generiranje infrastrukture s `azd infra generate`
 
-Za produkcijska AI radna opterećenja možete generirati i prilagoditi Infrastructure as Code umjesto da se oslanjate na automatsko provisioniranje:
+Za produkcijske AI radne zadatke možete generirati i prilagoditi Infrastrukturu kao Kod umjesto oslanjanja na automatski provisioning:
 
 ```bash
 # Generirajte Bicep/Terraform datoteke iz definicije vašeg projekta
 azd infra generate
 ```
 
-Ovo zapisuje IaC na disk tako da možete:
+Ovo zapisuje IaC na disk kako biste mogli:
 - Pregledati i revidirati infrastrukturu prije implementacije
 - Dodati prilagođene sigurnosne politike (mrežna pravila, privatne krajnje točke)
-- Integrirati se s postojećim procesima za reviziju IaC
-- Verzijsko kontrolirati promjene infrastrukture odvojeno od koda aplikacije
+- Integrirati s postojećim procesima pregleda IaC
+- Verzijski kontrolirati promjene infrastrukture odvojeno od koda aplikacije
 
-### Produkcijski životni ciklus hook-ovi
+### Produkcijski lifecycle hookovi
 
-AZD hook-ovi dopuštaju vam da ubacite prilagođenu logiku u svakoj fazi životnog ciklusa implementacije—ključni za produkcijske AI radne tokove:
+AZD hookovi vam omogućuju da ubacite prilagođenu logiku u svaku fazu lifecycle-a implantacije—kritično za produkcijske AI tokove rada:
 
 ```yaml
 # azure.yaml - Production hooks example
@@ -1081,34 +1135,109 @@ services:
 azd hooks run predeploy
 ```
 
-**Preporučeni produkcijski hook-ovi za AI radna opterećenja:**
+**Preporučeni produkcijski hookovi za AI radne zadatke:**
 
-| Hook | Primjena |
+| Hook | Namjena |
 |------|----------|
-| `preprovision` | Validacija kvota pretplate za AI model kapacitete |
-| `postprovision` | Konfiguracija privatnih krajnjih točaka, implementacija težina modela |
-| `predeploy` | Pokretanje AI sigurnosnih testova, validacija predložaka upita |
-| `postdeploy` | Brzi testovi odgovora agenta, provjera povezanosti modela |
+| `preprovision` | Validacija kvota pretplate za kapacitet AI modela |
+| `postprovision` | Konfiguracija privatnih krajnjih točaka, implantacija težina modela |
+| `predeploy` | Pokretanje AI testova sigurnosti, validacija prompt predložaka |
+| `postdeploy` | Brzi test odgovora agenata, provjera povezivosti modela |
 
 ### Konfiguracija CI/CD pipeline-a
 
-Koristite `azd pipeline config` za povezivanje vašeg projekta s GitHub Actions ili Azure Pipelines sa sigurnom Azure autentifikacijom:
+Koristite `azd pipeline config` za povezivanje vašeg projekta s GitHub Actions ili Azure Pipelines uz sigurnu Azure autentikaciju:
 
 ```bash
 # Konfigurirajte CI/CD pipeline (interaktivno)
 azd pipeline config
 
-# Konfigurirajte s određenim pružateljem usluga
+# Konfigurirajte s određenim pružateljem usluge
 azd pipeline config --provider github
 ```
 
 Ova naredba:
-- Stvara servisni principal s minimalnim pristupom
+- Kreira servisni principal s pristupom s najmanjim privilegijama
 - Konfigurira federirane vjerodajnice (bez pohranjenih tajni)
-- Generira ili ažurira definiciju pipeline datoteke
-- Postavlja potrebne varijable okruženja u vaš CI/CD sustav
+- Generira ili ažurira datoteku definicije pipeline-a
+- Postavlja potrebne varijable okruženja u vašem CI/CD sustavu
 
-**Produkcijski radni tok s konfiguracijom pipeline-a:**
+#### Korak po korak: vaš prvi GitHub Actions pipeline
+
+Evo cjelovitog vodiča od radnog azd projekta do automatiziranih implantacija pri svakom pushu.
+
+**1. Provjerite da je vaš projekt na GitHubu**
+
+```bash
+git init
+git add .
+git commit -m "Initial azd project"
+gh repo create my-ai-app --private --source=. --push
+```
+
+**2. Pokrenite pipeline config**
+
+```bash
+azd pipeline config --provider github
+```
+
+azd će interaktivno:
+- Pitati koju Azure pretplatu i okruženje ciljate
+- Kreirati Entra **registraciju aplikacije + servisni principal** za pipeline
+- Postaviti **federirane vjerodajnice (OIDC)**—tako da se GitHub autentificira na Azure s kratkotrajnim tokenima i **bez pohranjenih tajni**
+- Gurnuti potrebne **varijable** u vaš GitHub repozitorij (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `AZURE_ENV_NAME`, `AZURE_LOCATION`)
+
+**3. Razumjeti generirani workflow**
+
+azd dodaje `.github/workflows/azure-dev.yml`. Ključni dijelovi izgledaju ovako:
+
+```yaml
+# .github/workflows/azure-dev.yml
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:        # lets you run it manually too
+
+permissions:
+  id-token: write           # required for OIDC federated login
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
+      AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install azd
+        uses: Azure/setup-azd@v2
+      - name: Log in with OIDC
+        run: azd auth login --client-id "$AZURE_CLIENT_ID" --federated-credential-provider "github" --tenant-id "$AZURE_TENANT_ID"
+      - name: Provision infrastructure
+        run: azd provision --no-prompt
+      - name: Deploy application
+        run: azd deploy --no-prompt
+```
+
+**4. Provjerite radi li**
+
+```bash
+# Gurnite promjenu da pokrenete pipeline
+git commit -am "Trigger pipeline" --allow-empty
+git push
+```
+
+Otvorite karticu **Actions** u vašem GitHub repozitoriju i pratite kako workflow automatski izvodi `azd provision` i `azd deploy`.
+
+> **Zašto su federirane vjerodajnice važne:** stariji pipelineovi su pohranjivali klijentovu tajnu u GitHubu. OIDC federirane vjerodajnice u potpunosti uklanjaju tu tajnu—GitHub traži kratkotrajan token u vrijeme izvođenja, što je sigurnije i nema potrebe za rotiranjem ili curenjem. Ovo je zadana konfiguracija `azd pipeline config`.
+
+> **Tajni podaci vs. varijable:** neosjetljivi identifikatori (`AZURE_CLIENT_ID`, itd.) idu u repozitorijske **varijable**. Ako vaša aplikacija stvarno treba tajnu za vrijeme builda, dodajte ju kao GitHub **tajnu** i referencirajte je s `${{ secrets.NAME }}`—ali preferirajte Key Vault + upravljanu identitetu u runtime-u (pogledajte [Poglavlje 3](../chapter-03-configuration/authsecurity.md)).
+
+**Produkcijski tok rada s pipeline config:**
 
 ```bash
 # 1. Postavite produkcijsko okruženje
@@ -1118,44 +1247,111 @@ azd env set AZURE_OPENAI_CAPACITY 100
 # 2. Konfigurirajte pipeline
 azd pipeline config --provider github
 
-# 3. Pipeline pokreće azd deploy pri svakom pushu na glavnu granu
+# 3. Pipeline pokreće azd deploy pri svakom guranju u main
 ```
+
+#### Korak po korak: Azure DevOps Pipelines
+
+Preferirate Azure DevOps umjesto GitHub Actions? azd ga nativno podržava s `azdo` providerom. Proces je gotovo identičan—azd generira pipeline datoteku, kreira servisnu konekciju i postavlja autentikaciju.
+
+**1. Provjerite imate li Azure DevOps projekt**
+
+Trebate organizaciju i projekt na `https://dev.azure.com/<your-org>`. Generirajte Personal Access Token (PAT) s dozvolama **Build (Read & execute)**, **Code (Read & write)** i **Service Connections (Read, query & manage)**—azd će vas tražiti te podatke.
+
+**2. Konfigurirajte pipeline**
+
+```bash
+azd pipeline config --provider azdo
+```
+
+azd će:
+- Pitati za vašu Azure DevOps organizaciju i projekt
+- Kreirati (ili ponovno iskoristiti) **servisnu konekciju** do Azure koristeći servisni principal
+- Konfigurirati **federaciju identiteta opterećenja (OIDC)** tako da se ne pohranjuje klijentova tajna
+- Komitirati `azure-dev.yml` definiciju pipeline-a u vaš repozitorij
+
+**3. Pregledajte generirani `azure-dev.yml`**
+
+azd zapisuje pipeline koji provisionira i deploya na svaki push na granu `main`:
+
+```yaml
+# azure-dev.yml
+trigger:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: setup-azd@1
+    displayName: Install azd
+
+  - script: azd provision --no-prompt
+    displayName: Provision Infrastructure
+    env:
+      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
+      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
+      AZURE_LOCATION: $(AZURE_LOCATION)
+
+  - script: azd deploy --no-prompt
+    displayName: Deploy Application
+    env:
+      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
+      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
+      AZURE_LOCATION: $(AZURE_LOCATION)
+```
+
+**4. Otkud varijable dolaze**
+
+azd pohranjuje vrijednosti okruženja (`AZURE_ENV_NAME`, `AZURE_LOCATION`, `AZURE_SUBSCRIPTION_ID`) kao **grupu varijabli** u Azure DevOpsu kako bi pipeline mogao čitati te vrijednosti. Možete ih pogledati i uređivati pod **Pipelines → Library**.
+
+> **Isti OIDC benefit kao GitHub:** `azdo` provider također prema zadanim postavkama konfigurira federaciju identiteta opterećenja, tako da nema pohranjene klijentove tajne u servisnoj konekciji—Azure DevOps razmjenjuje kratkotrajan token u runtime-u. Koristite `--auth-type client-credentials` samo ako vaša organizacija još ne može koristiti OIDC.
+
+**5. Pokrenite ga**
+
+```bash
+git commit -am "Add Azure DevOps pipeline" --allow-empty
+git push
+```
+
+Otvorite **Pipelines** u Azure DevOpsu da pratite izvođenje `azd provision` i `azd deploy`.
 
 ### Dodavanje komponenti s `azd add`
 
-Postupno dodajte Azure usluge postojećem projektu:
+Postepeno dodajte Azure usluge postojećem projektu:
 
 ```bash
-# Dodajte novu uslužnu komponentu interaktivno
+# Dodajte novu komponentu usluge interaktivno
 azd add
 ```
 
-Ova funkcionalnost je osobito korisna za proširenje produkcijskih AI aplikacija—npr. dodavanje usluge za vektorsku pretragu, novi agent endpoint ili nadzornu komponentu postojećoj implementaciji.
+Ovo je posebno korisno za proširenje produkcijskih AI aplikacija—na primjer, dodavanje vektorskog pretraživanja, nove krajnje točke agenta ili komponente za nadzor postojeće implantacije.
 
 ## Dodatni resursi
+
 - **Azure Well-Architected Framework**: [Smjernice za AI radna opterećenja](https://learn.microsoft.com/azure/well-architected/ai/)
 - **Microsoft Foundry Dokumentacija**: [Službena dokumentacija](https://learn.microsoft.com/azure/ai-studio/)
-- **Predlošci Zajednice**: [Azure Primjeri](https://github.com/Azure-Samples)
-- **Discord Zajednica**: [#Azure kanal](https://discord.gg/microsoft-azure)
-- **Agent Vještine za Azure**: [microsoft/github-copilot-for-azure na skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 otvorenih agent vještina za Azure AI, Foundry, implementaciju, optimizaciju troškova i dijagnostiku. Instalirajte u vaš uređivač:
+- **Community Templates**: [Azure primjeri](https://github.com/Azure-Samples)
+- **Discord zajednica**: [#Azure kanal](https://discord.gg/microsoft-azure)
+- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure na skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 otvorenih AI vještina za Azure, Foundry, implantaciju, optimizaciju troškova i dijagnostiku. Instalirajte u vašem editoru:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
 
 ---
 
-**Navigacija poglavljima:**
-- **📚 Početna tečaja**: [AZD Za Početnike](../../README.md)
-- **📖 Trenutno poglavlje**: Poglavlje 8 - Obrasci za proizvodnju i poslovanje
-- **⬅️ Prethodno poglavlje**: [Poglavlje 7: Rješavanje problema](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Također povezano**: [AI Radionica Lab](ai-workshop-lab.md)
-- **� Završetak tečaja**: [AZD Za Početnike](../../README.md)
+**Navigacija kroz poglavlja:**
+- **📚 Početak tečaja:** [AZD Za početnike](../../README.md)
+- **📖 Trenutno poglavlje:** Poglavlje 8 - Produkcijski & Enterprise obrasci
+- **⬅️ Prethodno poglavlje:** [Poglavlje 7: Otklanjanje poteškoća](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Također povezano:** [AI radionica](ai-workshop-lab.md)
+- **� Završetak tečaja:** [AZD Za početnike](../../README.md)
 
-**Zapamtite**: Proizvodna AI radna opterećenja zahtijevaju pažljivo planiranje, nadzor i kontinuiranu optimizaciju. Započnite s ovim obrascima i prilagodite ih svojim specifičnim zahtjevima.
+**Zapamtite:** Produkcijska AI radna opterećenja zahtijevaju pažljivo planiranje, nadzor i kontinuiranu optimizaciju. Počnite s ovim obrascima i prilagodite ih svojim specifičnim potrebama.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Izjava o odricanju odgovornosti**:
-Ovaj dokument je preveden korištenjem AI usluge za prijevod [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, molimo imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba se smatrati autoritativnim izvorom. Za kritične informacije preporučuje se profesionalni ljudski prijevod. Ne snosimo odgovornost za bilo kakva nerazumijevanja ili pogrešne tumačenja koja proizlaze iz korištenja ovog prijevoda.
+**Napomena**:
+Ovaj dokument je preveden korištenjem AI prevoditeljskog servisa [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatski prijevodi mogu sadržavati greške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za važne informacije preporuča se profesionalni ljudski prijevod. Nismo odgovorni za bilo kakva nesporazumevanja ili pogrešne interpretacije koje proizlaze iz korištenja ovog prijevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

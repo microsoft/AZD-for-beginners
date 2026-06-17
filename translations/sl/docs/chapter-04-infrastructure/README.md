@@ -1,22 +1,22 @@
-# Poglavje 4: Infrastruktura kot koda in nameščanje
+# Poglavje 4: Infrastruktura kot koda & Razmestitev
 
-**📚 Tečaj**: [AZD For Beginners](../../README.md) | **⏱️ Trajanje**: 1-1.5 ure | **⭐ Kompleksnost**: Srednje
+**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 1-1.5 hours | **⭐ Complexity**: Intermediate
 
 ---
 
 ## Pregled
 
-To poglavje obravnava vzorce Infrastrukture kot kode (IaC) z Bicep predlogami, zagotavljanje virov in strategije nameščanja z uporabo Azure Developer CLI.
+To poglavje obravnava vzorce Infrastrukture kot Kode (IaC) z Bicep predlogami, zagotavljanje virov in strategije razmestitve z uporabo Azure Developer CLI.
 
-> Preverjeno z `azd 1.23.12` marca 2026.
+> Preverjeno z `azd 1.25.6` junija 2026.
 
 ## Cilji učenja
 
-Po zaključku tega poglavja boste:
-- Razumeti strukturo in sintakso Bicep predlog
-- Ustvariti Azure vire z ukazom `azd provision`
-- Namestiti aplikacije z ukazom `azd deploy`
-- Izvesti blue-green in rolling strategije nameščanja
+Z dokončanjem tega poglavja boste:
+- Razumeli strukturo in sintakso Bicep predlog
+- Ustvarili Azure vire z `azd provision`
+- Razmestili aplikacije z `azd deploy`
+- Uvedli strategiji razmestitve blue-green in rolling
 
 ---
 
@@ -25,7 +25,8 @@ Po zaključku tega poglavja boste:
 | # | Lekcija | Opis | Čas |
 |---|--------|-------------|------|
 | 1 | [Provisioning Resources](provisioning.md) | Upravljanje Azure virov z AZD | 45 min |
-| 2 | [Deployment Guide](deployment-guide.md) | Strategije nameščanja aplikacij | 45 min |
+| 2 | [Deployment Guide](deployment-guide.md) | Strategije razmestitve aplikacij | 45 min |
+| 3 | [Authoring Your Own Template](custom-templates.md) | Gradnja in objava ponovno uporabnih azd predlog | 30 min |
 
 ---
 
@@ -38,10 +39,10 @@ azd init --template azure-functions-python-v2-http
 # Predogled tega, kar bo ustvarjeno
 azd provision --preview
 
-# Samo vzpostavi infrastrukturo
+# Vzpostavi le infrastrukturo
 azd provision
 
-# Samo razporedi kodo
+# Razporedi le kodo
 azd deploy
 
 # Ali oboje skupaj
@@ -71,11 +72,11 @@ my-project/
 
 | Ukaz | Opis |
 |---------|-------------|
-| `azd init` | Inicializiraj projekt |
-| `azd provision` | Ustvari Azure vire |
-| `azd deploy` | Namesti kodo aplikacije |
-| `azd up` | zagotovi + namesti |
-| `azd down` | Izbriši vse vire |
+| `azd init` | Inicializirajte projekt |
+| `azd provision` | Ustvarite Azure vire |
+| `azd deploy` | Razmestite kodo aplikacije |
+| `azd up` | ustvarjanje + razmestitev |
+| `azd down` | Izbrišite vse vire |
 
 ---
 
@@ -83,12 +84,12 @@ my-project/
 
 | Smer | Poglavje |
 |-----------|---------|
-| **Prejšnje** | [Chapter 3: Configuration](../chapter-03-configuration/README.md) |
-| **Naslednje** | [Chapter 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md) |
+| **Prejšnje** | [Poglavje 3: Konfiguracija](../chapter-03-configuration/README.md) |
+| **Naslednje** | [Poglavje 5: Večagentne rešitve](../chapter-05-multi-agent/README.md) |
 
 ---
 
-## 📖 Povezani viri
+## 📖 Sorodni viri
 
 - [Pre-Deployment Checks](../chapter-06-pre-deployment/README.md)
 - [Container App Examples](../../examples/container-app/README.md)
@@ -97,6 +98,6 @@ my-project/
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Izjava o omejitvi odgovornosti**:
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas opozarjamo, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba šteti za avtoritativni vir. Za kritične informacije priporočamo strokovni človeški prevod. Ne odgovarjamo za morebitne nesporazume ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
+**Omejitev odgovornosti**:
+Ta dokument je bil preveden z uporabo AI prevajalske storitve [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za kritične informacije je priporočljiv strokovni človeški prevod. Ne odgovarjamo za morebitna nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

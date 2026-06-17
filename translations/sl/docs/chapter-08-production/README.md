@@ -1,62 +1,64 @@
-# Chapter 8: Production & Enterprise Patterns
+# Poglavje 8: Produkcijski in podjetniški vzorci
 
-**📚 Tečaj**: [AZD For Beginners](../../README.md) | **⏱️ Trajanje**: 2-3 hours | **⭐ Zahtevnost**: Advanced
+**📚 Course**: [AZD za začetnike](../../README.md) | **⏱️ Duration**: 2-3 ure | **⭐ Complexity**: Napredno
 
 ---
 
-## Overview
+## Pregled
 
-To poglavje obravnava podjetju primerno uvajanje vzorcev, trdno varnost, spremljanje in optimizacijo stroškov za produkcijske AI obremenitve.
+To poglavje obravnava vzorce nameščanja, primerne za podjetja, krepitev varnosti, spremljanje in optimizacijo stroškov za produkcijske AI delovne obremenitve.
 
-> Validated against `azd 1.23.12` in March 2026.
+> Preverjeno z `azd 1.25.6` junija 2026.
 
-## Learning Objectives
+## Cilji učenja
 
 Z dokončanjem tega poglavja boste:
-- Uvajali aplikacije odpornosti v več regijah
-- Implementirali podjetniške varnostne vzorce
-- Konfigurirali obsežno spremljanje
-- Optimizirali stroške na obsegu
+- Postavili večregijske odporne aplikacije
+- Uvedli podjetniške varnostne vzorce
+- Konfigurirali celovito spremljanje
+- Optimizirali stroške v obsegu
 - Nastavili CI/CD cevovode z AZD
 
 ---
 
 ## 📚 Lessons
 
-| # | Lekcija | Opis | Čas |
+| # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [Prakse AI v produkciji](production-ai-practices.md) | Podjetniški vzorci uvajanja | 90 min |
+| 1 | [Prakse za produkcijski AI](production-ai-practices.md) | Podjetniški vzorci nameščanja | 90 min |
 
 ---
 
-## 🚀 Kontrolni seznam za produkcijo
+## 🚀 Production Checklist
 
-- [ ] Uvajanje v več regij za odpornost
+- [ ] Večregijska nameščanja za odpornost
 - [ ] Upravljana identiteta za overjanje (brez ključev)
 - [ ] Application Insights za spremljanje
-- [ ] Nastavljeni proračuni stroškov in opozorila
-- [ ] Omogočeno skeniranje varnosti
-- [ ] Integracija CI/CD cevovoda
-- [ ] Načrt za obnovo po nesrečah
+- [ ] Nastavljene proračunske omejitve in opozorila
+- [ ] Omogočeno varnostno skeniranje
+- [ ] Integracija CI/CD cevovodov
+- [ ] Načrt za obnovitev po katastrofi
 
 ---
 
 ## 🏗️ Arhitekturni vzorci
 
-### Vzorec 1: AI z mikrostoritvami
+### Vzorec 1: Mikroservisni AI
 
 ```mermaid
 graph LR
-    Gateway[API Prehod] --> AI[Storitev AI] --> Models[Modeli Microsoft Foundry]
-    Gateway --> Auth[Avtentikacijska Storitev]
-    AI --> Data[Podatkovna Shramba]
+    Gateway[API prehod] --> AI[Storitev AI] --> Models[Modeli Microsoft Foundry]
+    Gateway --> Auth[Storitev za overjanje]
+    AI --> Data[Skladišče podatkov]
 ```
-### Vzorec 2: AI, ki temelji na dogodkih
+
+### Vzorec 2: Dogodkovno voden AI
 
 ```mermaid
 graph LR
     EventGrid[Dogodkovno omrežje] --> Functions[Funkcije] --> Pipeline[AI cevovod]
 ```
+
 ---
 
 ## 🔐 Najboljše varnostne prakse
@@ -80,15 +82,15 @@ properties: {
 
 ## 💰 Optimizacija stroškov
 
-| Strategija | Prihranki |
+| Strategy | Savings |
 |----------|---------|
-| Samodejno skaliranje na nič (Container Apps) | 60-80% |
-| Uporabljajte porabniške nivoje za razvoj | 50-70% |
+| Skaliranje na nič (Container Apps) | 60-80% |
+| Uporabi porabniške ravni za razvoj | 50-70% |
 | Načrtovano skaliranje | 30-50% |
-| Rezervirana zmogljivost | 20-40% |
+| Rezervirana kapaciteta | 20-40% |
 
 ```bash
-# Nastavi opozorila za proračun
+# Nastavite opozorila za proračun
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -101,37 +103,37 @@ az consumption budget create \
 ## 📊 Nastavitev spremljanja
 
 ```bash
-# Pretakanje dnevnikov
+# Pretakaj dnevnike
 azd monitor --logs
 
 # Preveri Application Insights
 azd monitor --overview
 
-# Prikaži metrike
+# Poglej metrike
 az monitor metrics list --resource <resource-id>
 ```
 
 ---
 
-## 🔗 Navigation
+## 🔗 Navigacija
 
-| Smer | Poglavje |
+| Direction | Chapter |
 |-----------|---------|
-| **Previous** | [Poglavje 7: Odpravljanje težav](../chapter-07-troubleshooting/README.md) |
+| **Prejšnje** | [Poglavje 7: Odpravljanje težav](../chapter-07-troubleshooting/README.md) |
 | **Course Complete** | [Domov tečaja](../../README.md) |
 
 ---
 
-## 📖 Povezani viri
+## 📖 Sorodni viri
 
-- [Vodnik po AI agentih](../chapter-02-ai-development/agents.md)
+- [Vodnik za AI agente](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 - [Rešitve z več agenti](../chapter-05-multi-agent/README.md)
-- [Primer mikrostoritev](../../examples/microservices/README.md)
+- [Primer mikroservisov](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, prosimo upoštevajte, da avtomatski prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku velja za avtoritativni vir. Za ključne informacije priporočamo strokovni človeški prevod. Ne odgovarjamo za morebitne nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda.
+**Omejitev odgovornosti**:
+Ta dokument je bil preveden z uporabo AI prevajalske storitve [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za kritične informacije je priporočljiv strokovni človeški prevod. Ne odgovarjamo za morebitna nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
