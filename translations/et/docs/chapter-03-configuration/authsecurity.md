@@ -1,26 +1,26 @@
 # Autentimismustrid ja hallatud identiteet
 
-⏱️ **Hinnanguline aeg**: 45–60 minutit | 💰 **Kulukohustus**: Tasuta (ilma lisatasudeta) | ⭐ **Keerukus**: Kesktase
+⏱️ **Hinnanguline aeg**: 45-60 minutit | 💰 **Kulu mõju**: Tasuta (ilma täiendavate tasudeta) | ⭐ **Keerukus**: Kesktase
 
-**📚 Õppimise rada:**
-- ← Eelmine: [Konfiguratsiooni haldus](configuration.md) – keskkonnamuutujate ja saladuste haldamine
-- 🎯 **Sa oled siin**: Autentimine & turvalisus (hallatud identiteet, Key Vault, turvalised mustrid)
-- → Järgmine: [Esimene projekt](first-project.md) – ehita oma esimene AZD rakendus
-- 🏠 [Kursuse kodu](../../README.md)
+**📚 Õppeteek:**
+- ← Eelmine: [Konfiguratsiooni haldamine](configuration.md) - keskkonnamuutujate ja saladuste haldamine
+- 🎯 **Oled siin**: Autentimine & turvalisus (hallatud identiteet, Key Vault, turvalised mustrid)
+- → Järgmine: [Esimene projekt](first-project.md) - Ehita oma esimene AZD rakendus
+- 🏠 [Kursuse avaleht](../../README.md)
 
 ---
 
-## Mida õpid
+## Mida sa õpid
 
-Selle õppetunni lõpetamisel:
-- Sa mõistad Azure autentimismustreid (võtmed, ühendusstringid, hallatud identiteet)
+Selle õppetunni läbimisega:
+- Mõistad Azure autentimismustreid (võtmed, ühendusstringid, hallatud identiteet)
 - Rakendad **hallatud identiteeti** paroolivabaks autentimiseks
-- Kaitsed saladusi **Azure Key Vault** integratsiooniga
-- Konfigureerid **rollipõhist juurdepääsukontrolli (RBAC)** AZD juurutuste jaoks
+- Kaitsed saladusi **Azure Key Vault** integratsiooni abil
+- Konfigureerid **rollipõhist juurdepääsu kontrolli (RBAC)** AZD juurutuste jaoks
 - Rakendad turvalisuse parimaid tavasid Container Apps ja Azure teenustes
-- Teed migratsiooni võtmepõhisest autentimisest identiteedipõhisele autentimisele
+- Teed ülemineku võtmepõhiselt identiteedipõhisele autentimisele
 
-## Miks on hallatud identiteet oluline
+## Miks hallatud identiteet on oluline
 
 ### Probleem: Traditsiooniline autentimine
 
@@ -33,11 +33,11 @@ const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 ```
 
 **Probleemid:**
-- 🔴 **Avalikud saladused** koodis, konfiguratsioonifailides, keskkonnamuutujates
-- 🔴 **Tunnuste keeramine** nõuab koodi muutmist ja uuesti juurutamist
-- 🔴 **Audiitoräbad** – kes millele ligi pääses ja millal?
-- 🔴 **Levinuuma** – saladused hajutatud mitmes süsteemis
-- 🔴 **Vastavusriskid** – turvaauditite läbikukkumine
+- 🔴 **Avalikustatud saladused** koodis, konfiguratsioonifailides, keskkonnamuutujates
+- 🔴 **Mandaatide vahetus** nõuab koodi muutmist ja taaskäivitus
+- 🔴 **Auditi õudusunenäod** - kes, mida ja millal kasutas?
+- 🔴 **Levinuš** - saladused hajutatud mitmesse süsteemi
+- 🔴 **Vastavusriskid** - läbi kukutakse turvaaudititel
 
 ### Lahendus: Hallatud identiteet
 
@@ -53,12 +53,12 @@ const client = new BlobServiceClient(
 
 **Eelised:**
 - ✅ **Null saladusi** koodis või konfiguratsioonis
-- ✅ **Automaatne keeramine** – Azure haldab seda
-- ✅ **Täielik auditeerimislugu** Azure AD logides
-- ✅ **Keskne turvalahendus** – halda Azure portaalis
-- ✅ **Vastavus valmis** – vastab turvastandarditele
+- ✅ **Automaatne vahetus** - Azure haldab seda
+- ✅ **Täielik auditeerimisjälg** Microsoft Entra ID logides
+- ✅ **Keskne turvalisus** - halda Azure portaalis
+- ✅ **Vastavus valmis** - vastab turvastandarditele
 
-**Analoogia**: traditsiooniline autentimine on nagu kanda mitut füüsilist võtit erinevatele ustele. Hallatud identiteet on nagu turvakaart, mis automaatselt annab juurdepääsu sinu identiteedi alusel – võtmeid pole vaja kaotada, kopeerida ega keerata.
+**Analüüs:** Traditsiooniline autentimine on nagu kanda mitut füüsilist võtit eri ustele. Hallatud identiteet on nagu turvakaart, mis automaatselt lubab juurdepääsu sõltuvalt sinu identiteedist — võtit pole vaja kaotada, kopeerida ega vahetada.
 
 ---
 
@@ -69,36 +69,37 @@ const client = new BlobServiceClient(
 ```mermaid
 sequenceDiagram
     participant App as Teie rakendus<br/>(Konteinerirakendus)
-    participant MI as Hallatud identiteet<br/>(Azure AD)
+    participant MI as Hallatav identiteet<br/>(Microsoft Entra ID)
     participant KV as Võtmekogu
     participant Storage as Azure Storage
     participant DB as Azure SQL
     
-    App->>MI: Taotle juurdepääsu märk<br/>(automaatne)
+    App->>MI: Taotle juurdepääsutokenit<br/>(automaatne)
     MI->>MI: Kontrolli identiteeti<br/>(parooli pole vaja)
-    MI-->>App: Tagasta märk<br/>(kehtib 1 tund)
+    MI-->>App: Tagasta token<br/>(kehtib 1 tund)
     
-    App->>KV: Hangi saladus<br/>(märgi abil)
+    App->>KV: Hangi saladus<br/>(tokeni abil)
     KV->>KV: Kontrolli RBAC õigusi
     KV-->>App: Tagasta saladuse väärtus
     
-    App->>Storage: Laadi blob üles<br/>(märgi abil)
+    App->>Storage: Laadi üles objekt<br/>(tokeni abil)
     Storage->>Storage: Kontrolli RBAC õigusi
     Storage-->>App: Õnnestus
     
-    App->>DB: Päringu andmed<br/>(märgi abil)
+    App->>DB: Päring andmetele<br/>(tokeni abil)
     DB->>DB: Kontrolli SQL õigusi
     DB-->>App: Tagasta tulemused
     
-    Note over App,DB: Kõik autentimised ilma paroolita!
+    Note over App,DB: Kogu autentimine ilma paroolita!
 ```
+
 ### Hallatud identiteetide tüübid
 
 ```mermaid
 graph TB
-    MI[Haldatud identiteet]
+    MI[Haldusega identiteet]
     SystemAssigned[Süsteemi määratud identiteet]
-    UserAssigned[Kasutajamääratud identiteet]
+    UserAssigned[Kasutaja määratud identiteet]
     
     MI --> SystemAssigned
     MI --> UserAssigned
@@ -114,22 +115,23 @@ graph TB
     style SystemAssigned fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style UserAssigned fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
 ```
-| Funktsioon | Süsteemiga määratud | Kasutajaga määratud |
+
+| Omadus | Süsteemi määratud | Kasutaja määratud |
 |---------|----------------|---------------|
-| **Elutsükkel** | Sidemega ressursiga | Sõltumatu |
+| **Elutsükkel** | Ressursiga seotud | Sõltumatu |
 | **Loomine** | Automaatne ressursiga | Käsitsi loomine |
-| **Kustutamine** | Kustutatakse koos ressursiga | Püsib pärast ressursi kustutamist |
-| **Jagamine** | Üks ressurss | Mitme ressursi vahel |
-| **Kasutusjuhtum** | Lihtsad stsenaariumid | Komplekssemad mitme ressursi stsenaariumid |
-| **AZD vaikimisi** | ✅ Soovitatav | Valikuline |
+| **Kustutamine** | Kustutatakse koos ressursiga | Püsib ka pärast ressursi kustutamist |
+| **Jagamine** | Ainult üks ressurss | Mitmele ressursile |
+| **Kasutusjuhtum** | Lihtsad stsenaariumid | Komplekssemad mitmeressursilised stsenaariumid |
+| **AZD vaikimisi** | ✅ Soovitatud | Valikuline |
 
 ---
 
-## Eeldused
+## Eeltingimused
 
-### Vajalikud tööriistad
+### Nõutavad tööriistad
 
-Sul peaksid olema need juba installitud eelmistest õppetundidest:
+Neid peaks sul olema juba paigaldatud eelmistest õppetundidest:
 
 ```bash
 # Kontrolli Azure Developer CLI-d
@@ -145,25 +147,25 @@ az --version
 
 - Aktiivne Azure tellimus
 - Õigused:
-  - Luua hallatud identiteete
-  - Määrata RBAC rolle
-  - Luua Key Vault ressursse
-  - Juurutada Container Apps
+  - Hallatud identiteetide loomine
+  - RBAC rollide määramine
+  - Key Vault ressursside loomine
+  - Container Apps juurutamine
 
 ### Teadmiste eeldused
 
-Pead olema sooritanud:
-- [Paigaldusjuhend](installation.md) – AZD seadistus
-- [AZD põhialused](azd-basics.md) – põhimõisted
-- [Konfiguratsiooni haldus](configuration.md) – keskkonnamuutujad
+Pead olema lõpetanud:
+- [Paigaldusjuhend](installation.md) - AZD seadistus
+- [AZD põhialused](azd-basics.md) - Põhikontseptsioonid
+- [Konfiguratsiooni haldamine](configuration.md) - Keskkonnamuutujad
 
 ---
 
 ## Õppetund 1: Autentimismustrite mõistmine
 
-### Muster 1: Ühendusstringid (vananenud - väldi)
+### Muster 1: Ühendusstringid (pärand - väldi)
 
-**Kuidas töötab:**
+**Kuidas see toimib:**
 ```bash
 # Ühendusstring sisaldab mandaate
 STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=xK7mN9pQ2wR5..."
@@ -172,18 +174,18 @@ SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=
 ```
 
 **Probleemid:**
-- ❌ Saladused nähtavad keskkonnamuutujate seas
-- ❌ Logitud juurutussüsteemidesse
-- ❌ Raske keerata
-- ❌ Juurdepääsu audit puudub
+- ❌ Saladused nähtavad keskkonnamuutujates
+- ❌ Logitakse juurutussüsteemides
+- ❌ Raske vahetada
+- ❌ Puudub juurdepääsu auditeerimine
 
-**Millal kasutada:** ainult kohaliku arenduse jaoks, mitte kunagi tootmises.
+**Millal kasutada:** Ainult kohalikus arenduses, mitte kunagi tootmises.
 
 ---
 
-### Muster 2: Key Vault viited (parem)
+### Muster 2: Key Vaulti viited (parem)
 
-**Kuidas töötab:**
+**Kuidas see toimib:**
 ```bicep
 // Store secret in Key Vault
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
@@ -203,21 +205,21 @@ env: [
 ```
 
 **Eelised:**
-- ✅ Saladused turvaliselt Key Vaultis
+- ✅ Saladused salvestatud turvaliselt Key Vaultis
 - ✅ Keskne saladuste haldus
-- ✅ Keeramine koodimuudatusi tegemata
+- ✅ Vahetus ilma koodi muutmata
 
 **Piirangud:**
-- ⚠️ Kasutab endiselt võtmeid/paroolisid
-- ⚠️ Pead haldama Key Vault juurdepääsu
+- ⚠️ Endiselt kasutatakse võtmeid/paroolisid
+- ⚠️ Peab haldama Key Vaulti juurdepääsu
 
-**Millal kasutada:** üleminekutsükkel ühendusstringidelt hallatud identiteedile.
+**Millal kasutada:** Üleminekutapp ühendusstringidelt hallatud identiteedile.
 
 ---
 
 ### Muster 3: Hallatud identiteet (parim tava)
 
-**Kuidas töötab:**
+**Kuidas see toimib:**
 ```bicep
 // Enable managed identity
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -239,7 +241,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 **Rakenduse kood:**
 ```javascript
-// Saladusi pole vaja!
+// Salajasi pole vaja!
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -252,20 +254,73 @@ const blobServiceClient = new BlobServiceClient(
 
 **Eelised:**
 - ✅ Null saladusi koodis/konfiguratsioonis
-- ✅ Automaatne tunnuste keeramine
-- ✅ Täielik auditeerimislugu
+- ✅ Automaatne mandaatide vahetus
+- ✅ Täielik auditeerimisjälg
 - ✅ RBAC-põhised õigused
-- ✅ Vastavuse valmis
+- ✅ Vastavus valmis
 
-**Millal kasutada:** alati, tootmisrakendustes.
+**Millal kasutada:** Alati tootmiserakendustes.
+
+---
+
+### Muster 4: Teenusepõhised volitused (CI/CD ja automatiseerimine)
+
+Hallatud identiteet on kuldstandard *Azure sees töötavatele ressurssidele*. Aga mis saab neist, mis töötavad **Azure väljaspool** — näiteks CI/CD torujuhtmel build-agentil või süsteemi skriptil, mis ei saa interaktiivselt sisse logida? Selleks on olemas **teenuse põhiidentiteet**: mitte-inimlik identiteet oma mandaadiga, millega automatiseeritud protsess saab sisse logida.
+
+**Kuidas see toimib:**
+
+Loo teenusepõhine ID ressursigrupile (vähema õigusega):
+
+```bash
+az ad sp create-for-rbac \
+  --name "myapp-cicd" \
+  --role contributor \
+  --scopes /subscriptions/<sub-id>/resourceGroups/<rg-name>
+```
+
+See prindib välja kliendi ID, kliendi saladuse ja rentniku ID. azd saab neid kasutada mitteinteraktiivselt:
+
+```bash
+azd auth login \
+  --client-id "<appId>" \
+  --client-secret "<password>" \
+  --tenant-id "<tenant>"
+```
+
+**Eelista federatiivseid mandaate (OIDC) võtmete asemel.** Selle asemel, et hoida pikaajalist kliendi saladust, seadista federatiivne mandaat, nii et torujuhe vahetab lühikese eluajaga tokenit — pole saladust, mida lekkida või vahetada:
+
+```bash
+azd auth login \
+  --client-id "<appId>" \
+  --federated-credential-provider "github" \
+  --tenant-id "<tenant>"
+```
+
+> `azd pipeline config` seab selle sinu eest automaatselt üles. Vaata CI/CD läbivaateid [8. peatükis](../chapter-08-production/production-ai-practices.md).
+
+**Eelised:**
+- ✅ Töötavad väljaspool Azure (build-agentid, kohapeal, teised pilved)
+- ✅ Saab piirata ühe ressursigrupiga ja ühe rolliga
+- ✅ Federatiivne (OIDC) variatsioon ei kasuta salvestatud saladust
+
+**Kompromissid:**
+- ⚠️ Saladusel põhinev variatsioon vajab hoolikat hoiustamist ja vahetust
+- ⚠️ Lekkinud saladus annab kõik, mida SP suudab teha — hoia õigused kitsad
+
+**Millal kasutada:** CI/CD torujuhtmed ja automatiseerimine, mis ei saa kasutada hallatud identiteeti. Eelista alati **federatiivset/OIDC** varianti tavapärasele kliendi saladusele ja kasuta hallatud identiteeti, kui töökoormus jookseb Azure sees.
+
+**Mandaatide turvaline hoiustamine:**
+- Ära kunagi salvesta saladusi lähtekoodi — kasuta oma torujuhtme saladuste hoidlat (GitHub Actions secrets, Azure DevOps muutuja grupid / Key Vault).
+- Piira SP vähima vajalikku rolli ja ressursigrupiga.
+- Sea aegumistähtaeg ja vaheta või kaota saladus täielikult OIDC-ga.
 
 ---
 
 ## Õppetund 2: Hallatud identiteedi rakendamine AZD-ga
 
-### Samm-sammuline juhend
+### Samm-sammult juhis
 
-Loome turvalise Container App, mis kasutab hallatud identiteeti Azure Storage ja Key Vault ligipääsuks.
+Loome turvalise Container App-i, mis kasutab hallatud identiteeti Azure Storage ja Key Vaulti ligipääsuks.
 
 ### Projekti struktuur
 
@@ -286,7 +341,7 @@ secure-app/
     └── Dockerfile
 ```
 
-### 1. Seadista AZD (azure.yaml)
+### 1. Konfigureeri AZD (azure.yaml)
 
 ```yaml
 name: secure-app
@@ -302,7 +357,7 @@ services:
 # Enable managed identity (AZD handles this automatically)
 ```
 
-### 2. Infrastruktuur: Luba hallatud identiteet
+### 2. Taristu: Luba hallatud identiteet
 
 **Fail: `infra/main.bicep`**
 
@@ -384,7 +439,7 @@ output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output APP_URL string = containerApp.outputs.url
 ```
 
-### 3. Container App süsteemiga määratud identiteediga
+### 3. Container App süsteemi määratud identiteediga
 
 **Fail: `infra/app/container-app.bicep`**
 
@@ -476,17 +531,17 @@ const { SecretClient } = require('@azure/keyvault-secrets');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🔑 Algatage volikirjad (töötab automaatselt hallatud identiteediga)
+// 🔑 Initsialiseeri tõend (töötab automaatselt koos hallatud identiteediga)
 const credential = new DefaultAzureCredential();
 
-// Azure Storage seadistus
+// Azure Storage seadistamine
 const storageAccountName = process.env.AZURE_STORAGE_ACCOUNT_NAME;
 const blobServiceClient = new BlobServiceClient(
   `https://${storageAccountName}.blob.core.windows.net`,
   credential  // Võtmeid pole vaja!
 );
 
-// Key Vault seadistus
+// Key Vaulti seadistamine
 const keyVaultName = process.env.AZURE_KEY_VAULT_NAME;
 const secretClient = new SecretClient(
   `https://${keyVaultName}.vault.azure.net`,
@@ -498,7 +553,7 @@ app.get('/health', (req, res) => {
   res.json({ status: 'healthy', authentication: 'managed-identity' });
 });
 
-// Laadige fail blob-salvestusse
+// Lae fail üles blob-salvestusse
 app.post('/upload', async (req, res) => {
   try {
     const containerClient = blobServiceClient.getContainerClient('uploads');
@@ -520,7 +575,7 @@ app.post('/upload', async (req, res) => {
   }
 });
 
-// Hankige salajane võti Key Vault-ist
+// Hangi saladus Key Vaultist
 app.get('/secret/:name', async (req, res) => {
   try {
     const secretName = req.params.name;
@@ -537,7 +592,7 @@ app.get('/secret/:name', async (req, res) => {
   }
 });
 
-// Loetlege blob-konteinerid (näitab lugemisõigust)
+// Loetle blob-konteinerid (näitab lugemisõigust)
 app.get('/containers', async (req, res) => {
   try {
     const containers = [];
@@ -589,14 +644,14 @@ azd init
 # Paigalda infrastruktuur ja rakendus
 azd up
 
-# Hangi rakenduse URL
+# Saa rakenduse URL
 APP_URL=$(azd env get-values | grep APP_URL | cut -d '=' -f2 | tr -d '"')
 
 # Testi tervisekontrolli
 curl $APP_URL/health
 ```
 
-**✅ Oodatud tulemus:**
+**✅ Oodatav väljund:**
 ```json
 {
   "status": "healthy",
@@ -604,12 +659,12 @@ curl $APP_URL/health
 }
 ```
 
-**Testi blob üleslaadimine:**
+**Testi blobide üleslaadimist:**
 ```bash
 curl -X POST $APP_URL/upload
 ```
 
-**✅ Oodatud tulemus:**
+**✅ Oodatav väljund:**
 ```json
 {
   "success": true,
@@ -618,12 +673,12 @@ curl -X POST $APP_URL/upload
 }
 ```
 
-**Testi konteinerite nimekiri:**
+**Testi konteinerite nimekirja:**
 ```bash
 curl $APP_URL/containers
 ```
 
-**✅ Oodatud tulemus:**
+**✅ Oodatav väljund:**
 ```json
 {
   "containers": ["uploads"],
@@ -634,26 +689,26 @@ curl $APP_URL/containers
 
 ---
 
-## Levinumad Azure RBAC rollid
+## Tavalised Azure RBAC rollid
 
-### Hallatud identiteedi sisseehitatud rolli ID-d
+### Sisseehitatud rolli ID-d hallatud identiteedile
 
 | Teenus | Rolli nimi | Rolli ID | Õigused |
-|---------|-----------|---------|-------------|
-| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Loe blobe ja konteinerid |
+|---------|------------|----------|---------|
+| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Loe blobe ja konteinerit |
 | **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Loe, kirjuta, kustuta blobe |
-| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Loe, kirjuta, kustuta järjekorra sõnumeid |
-| **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Loeb saladusi |
+| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Loe, kirjuta, kustuta järjekorrateateid |
+| **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Loe saladusi |
 | **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Loe, kirjuta, kustuta saladusi |
 | **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Loe Cosmos DB andmeid |
 | **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Loe, kirjuta Cosmos DB andmeid |
 | **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Halda SQL andmebaase |
-| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Saada, vasta, halda sõnumeid |
+| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Saada, võta vastu, halda sõnumeid |
 
 ### Kuidas leida rolli ID-sid
 
 ```bash
-# Loenda kõik sisseehitatud rollid
+# Loetle kõik sisseehitatud rollid
 az role definition list --query "[].{Name:roleName, ID:name}" --output table
 
 # Otsi konkreetset rolli
@@ -671,7 +726,7 @@ az role definition list --name "Storage Blob Data Contributor"
 
 **Eesmärk**: Lisa hallatud identiteet olemasolevale Container App juurutusele
 
-**Stsenaarium**: Sul on Container App, mis kasutab ühendusstringe. Muuda see korraldatud identiteediks.
+**Stsenaarium**: Sul on Container App, mis kasutab ühendusstringe. Muuda see hallatud identiteediks.
 
 **Alguspunkt**: Container App selle konfiguratsiooniga:
 
@@ -687,7 +742,7 @@ env: [
 
 **Sammud**:
 
-1. **Luba hallatud identiteet Bicep-is:**
+1. **Luba hallatud identiteet Bicep'is:**
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -699,7 +754,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-2. **Anna Storage ligipääs:**
+2. **Luba Storage juurdepääs:**
 
 ```bicep
 // Get storage account reference
@@ -719,7 +774,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-3. **Uuenda rakenduse koodi:**
+3. **Uuenda rakenduse kood:**
 
 **Enne (ühendusstring):**
 ```javascript
@@ -757,49 +812,49 @@ env: [
 5. **Juuruta ja testi:**
 
 ```bash
-# Taaskäivitamine
+# Taaskäivita
 azd up
 
-# Kontrolli, et see ikka töötab
+# Testi, kas see ikka töötab
 curl https://myapp.azurecontainerapps.io/upload
 ```
 
-**✅ Õnnestumise kriteeriumid:**
-- ✅ Rakendus juurutub veata
-- ✅ Storage toimingud töötavad (üleslaadimine, nimekiri, allalaadimine)
+**✅ Edu nõuded:**
+- ✅ Rakendus juurutub ilma vigadeta
+- ✅ Storage toimingud toimivad (üleslaadimine, nimekirja koostamine, allalaadimine)
 - ✅ Keskkonnamuutujates pole ühendusstringe
-- ✅ Identiteeti näha Azure portaalis “Identity” vahekaardil
+- ✅ Identiteet on nähtav Azure portalil vahekaardil "Identity"
 
 **Kontroll:**
 
 ```bash
-# Kontrolli, kas haldatud identiteet on lubatud
+# Kontrolli, kas hallatud identiteet on lubatud
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
 # ✅ Oodatud: "SystemAssigned"
 
-# Kontrolli rolli määrangut
+# Kontrolli rolli määramist
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv) \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.Storage/storageAccounts/mystorageaccount
-# ✅ Oodatud: Kuvab rolli "Storage Blob Data Contributor"
+# ✅ Oodatud: Kuvatakse roll "Storage Blob Data Contributor"
 ```
 
-**Aeg**: 20–30 minutit
+**Aeg**: 20-30 minutit
 
 ---
 
-### Harjutus 2: Mitme teenusega ligipääs kasutajaga määratud identiteediga ⭐⭐⭐ (Edasijõudnu)
+### Harjutus 2: Mitme teenuse juurdepääs kasutaja määratud identiteediga ⭐⭐⭐ (Edasijõudnud)
 
-**Eesmärk**: Loo kasutajaga määratud identiteet, mida jagatakse mitme Container App vahel
+**Eesmärk**: Loo kasutaja määratud identiteet, mida jagatakse mitme Container App vahel
 
 **Stsenaarium**: Sul on 3 mikroteenust, mis kõik vajavad ligipääsu samale Storage kontole ja Key Vaultile.
 
 **Sammud**:
 
-1. **Loo kasutajaga määratud identiteet:**
+1. **Loo kasutaja määratud identiteet:**
 
 **Fail: `infra/core/identity.bicep`**
 
@@ -819,7 +874,7 @@ output principalId string = userAssignedIdentity.properties.principalId
 output clientId string = userAssignedIdentity.properties.clientId
 ```
 
-2. **Määra rollid kasutajaga määratud identiteedile:**
+2. **Määra rollid kasutaja määratud identiteedile:**
 
 ```bicep
 // In main.bicep
@@ -856,7 +911,7 @@ resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' =
 }
 ```
 
-3. **Määra identiteet mitmele Container App-ile:**
+3. **Määra identiteet mitmele Container Applikatsioonile:**
 
 ```bicep
 resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
@@ -917,37 +972,37 @@ const blobServiceClient = new BlobServiceClient(
 ```bash
 azd up
 
-# Testi, et kõik teenused pääsevad salvestusruumile ligi
+# Testi, kas kõik teenused pääsevad salvestusruumile ligi
 curl https://api-gateway.azurecontainerapps.io/upload
 curl https://product-service.azurecontainerapps.io/upload
 curl https://order-service.azurecontainerapps.io/upload
 ```
 
-**✅ Õnnestumise kriteeriumid:**
-- ✅ Üks identiteet jagatud 3 teenuse vahel
-- ✅ Kõik teenused pääsevad ligi Storage ja Key Vaultile
-- ✅ Identiteet püsib, kui kustutad teenuse
+**✅ Edu nõuded:**
+- ✅ Üks identiteet jagatud kolme teenuse vahel
+- ✅ Kõik teenused pääsevad juurde Storage ja Key Vaultile
+- ✅ Identiteet püsib, kui üks teenus kustutatakse
 - ✅ Keskne õiguste haldus
 
-**Kasutajaga määratud identiteedi eelised:**
+**Kasutaja määratud identiteedi eelised:**
 - Üks identiteet haldamiseks
-- Järjepidevad õigused teenuste vahel
+- Ühtsed õigused teenuste vahel
 - Püsib teenuse kustutamisel
-- Sobib keerukamate arhitektuuride jaoks
+- Sobib keeruliseks arhitektuuriks
 
-**Aeg**: 30–40 minutit
+**Aeg**: 30-40 minutit
 
 ---
 
-### Harjutus 3: Key Vault saladuse keeramise rakendamine ⭐⭐⭐ (Edasijõudnu)
+### Harjutus 3: Key Vaulti saladuste vahetuse rakendamine ⭐⭐⭐ (Edasijõudnud)
 
-**Eesmärk**: Hoida kolmandate osapoolte API võtmeid Key Vaultis ja pääseda neile ligi hallatud identiteedi kaudu
+**Eesmärk**: Salvesta kolmanda osapoole API võtmeid Key Vaulti ja kasuta neid hallatud identiteedi abil
 
-**Stsenaarium**: Sinu rakendus peab kutsuma väliseid API-sid (OpenAI, Stripe, SendGrid), mis nõuavad API võtmeid.
+**Stsenaarium**: Sinu rakendus vajab välise API (OpenAI, Stripe, SendGrid) kutsumiseks API võtmeid.
 
 **Sammud**:
 
-1. **Loo Key Vault koos RBAC-iga:**
+1. **Loo Key Vault koos RBAC-ga:**
 
 **Fail: `infra/core/keyvault.bicep`**
 
@@ -981,10 +1036,10 @@ output uri string = keyVault.properties.vaultUri
 2. **Salvesta saladused Key Vaulti:**
 
 ```bash
-# Saa Key Vaulti nimi
+# Hangi võtmehoidla nimi
 KV_NAME=$(azd env get-values | grep AZURE_KEY_VAULT_NAME | cut -d '=' -f2 | tr -d '"')
 
-# Salvesta kolmanda osapoole API võtmed
+# Salvesta kolmanda osapoole API-võtmed
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
@@ -1020,7 +1075,7 @@ class Config {
   }
 
   async getSecret(secretName) {
-    // Kontrollige esmalt vahemälu
+    // Esiteks kontrolli vahemälu
     if (this.cache[secretName]) {
       return this.cache[secretName];
     }
@@ -1063,7 +1118,7 @@ const { OpenAI } = require('openai');
 
 const app = express();
 
-// Algatage OpenAI võtmest Key Vault
+// Algata OpenAI võtmehoidlast saadud võtmega
 let openaiClient;
 
 async function initializeServices() {
@@ -1072,7 +1127,7 @@ async function initializeServices() {
   console.log('✅ Services initialized with secrets from Key Vault');
 }
 
-// Käivitage käivitamisel
+// Kutsu käivitamisel
 initializeServices().catch(console.error);
 
 app.post('/chat', async (req, res) => {
@@ -1101,19 +1156,19 @@ app.listen(3000, () => {
 ```bash
 azd up
 
-# Testi, et API võtmed toimivad
+# Testi, et API võtmed töötavad
 curl -X POST https://myapp.azurecontainerapps.io/chat \
   -H "Content-Type: application/json" \
   -d '{"message":"Hello AI"}'
 ```
 
-**✅ Õnnestumise kriteeriumid:**
-- ✅ Pole API võtmeid koodis ega keskkonnamuutujates
+**✅ Edu nõuded:**
+- ✅ Puuduvad API võtmed koodis või keskkonnamuutujates
 - ✅ Rakendus hangib võtmed Key Vaultist
-- ✅ Kolmandate osapoolte API-d töötavad korrektselt
-- ✅ Võtmeid saab keerata ilma koodi muutmata
+- ✅ Kolmanda osapoole API-d töötavad korrektselt
+- ✅ Võtmete pööramine ilma koodi muutmata
 
-**Keera saladust:**
+**Salajase andme pööramine:**
 
 ```bash
 # Uuenda saladust Key Vaultis
@@ -1122,13 +1177,13 @@ az keyvault secret set \
   --name "OpenAI-ApiKey" \
   --value "sk-proj-NEW_KEY_HERE"
 
-# Taaskäivita rakendus, et võtta kasutusele uus võti
+# Taaskäivita rakendus, et uus võti üles leiaks
 az containerapp revision restart \
   --name myapp \
   --resource-group rg-myapp
 ```
 
-**Aeg**: 25–35 minutit
+**Aeg**: 25-35 minutit
 
 ---
 
@@ -1139,23 +1194,23 @@ az containerapp revision restart \
 Testi oma arusaamist:
 
 - [ ] **K1**: Millised on kolm peamist autentimismustrit?  
-  - **V**: Ühendusstringid (vananenud), Key Vault viited (üleminek), Hallatud identiteet (parim)
+  - **V**: Ühendusstringid (pärandus), Key Vaulti viited (üleminek), Haldusega identiteet (parim)
 
-- [ ] **K2**: Miks on hallatud identiteet parem kui ühendusstringid?  
-  - **V**: Koodis pole saladusi, automaatne keeramine, täielik auditeerimislugu, RBAC õigused
+- [ ] **K2**: Miks on haldusega identiteet parem kui ühendusstringid?  
+  - **V**: Salajased andmed puuduvad koodis, automaatne pööramine, täielik auditeerimislogi, RBAC õigused
 
-- [ ] **K3**: Millal kasutada kasutajaga määratud identiteeti süsteemiga määratud asemel?  
-  - **V**: Kui jagatakse identiteeti mitme ressursi vahel või identiteedi elutsükkel on ressursist sõltumatu
+- [ ] **K3**: Millal kasutad kasutaja määratud identiteeti süsteemi määratud asemel?  
+  - **V**: Kui identiteeti jagatakse mitme ressursi vahel või kui identiteedi elutsükkel on ressursi elutsüklist sõltumatu
 
-**Käed-külge kontrollimine:**
+**Käsitsi kontroll:**
 ```bash
-# Kontrolli, millist tüüpi identiteeti sinu rakendus kasutab
+# Kontrolli, millist tüüpi identiteeti su rakendus kasutab
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
 
-# Loetle kõik rolli määramised identiteedi jaoks
+# Loe välja kõik rollimäärangud selle identiteedi kohta
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 ```
@@ -1166,40 +1221,41 @@ az role assignment list \
 
 Testi oma arusaamist:
 
-- [ ] **K1**: Mis on rolli ID "Storage Blob Data Contributor" jaoks?  
+- [ ] **K1**: Mis on "Storage Blob Data Contributor" rolli ID?  
   - **V**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
 
 - [ ] **K2**: Millised õigused annab "Key Vault Secrets User"?  
-  - **V**: Ainult lugemisõigus saladustele (ei saa luua, uuendada ega kustutada)
+  - **V**: Lugemisõigus saladustele (ei saa luua, uuendada ega kustutada)
 
-- [ ] **K3**: Kuidas anda Container App-le ligipääs Azure SQL-ile?  
-  - **V**: Määra "SQL DB Contributor" roll või konfigureeri SQL jaoks Azure AD autentimine
+- [ ] **K3**: Kuidas anda Container Appile ligipääs Azure SQL-ile?  
+  - **V**: Määra "SQL DB Contributor" roll või konfigureeri Microsoft Entra ID autentimine SQL jaoks
 
-**Käed-külge kontrollimine:**
+**Käsitsi kontroll:**
 ```bash
-# Leia konkreetne roll
+# Leia kindel roll
 az role definition list --name "Storage Blob Data Contributor"
 
-# Kontrolli, millised rollid on sinu identiteedile määratud
+# Kontrolli, millised rollid on sinu isikule määratud
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID --output table
 ```
 
 ---
 
-### 3. Key Vault integratsioon ✓
+### 3. Key Vaulti integratsioon ✓
 
 Testi oma arusaamist:
-- [ ] **K1**: Kuidas lubada RBAC Key Vaulti jaoks ligipääsupoliitikate asemel?
-  - **Vastus**: Määra Bicepis `enableRbacAuthorization: true`
 
-- [ ] **K2**: Milline Azure SDK teek haldab hallatud identiteedi autentimist?
-  - **Vastus**: `@azure/identity` koos klassiga `DefaultAzureCredential`
+- [ ] **K1**: Kuidas lubada RBAC Key Vaultis õiguste poliitikate asemel?  
+  - **V**: Määra Bicepis `enableRbacAuthorization: true`
 
-- [ ] **K3**: Kui kaua Key Vaulti saladused vahemälus püsivad?
-  - **Vastus**: Rakenduspõhine; rakenda oma vahemälustrateegia
+- [ ] **K2**: Milline Azure SDK teek haldab haldusega identiteedi autentimist?  
+  - **V**: `@azure/identity` koos `DefaultAzureCredential` klassiga
 
-**Praktiline kontroll:**
+- [ ] **K3**: Kui kaua püsivad Key Vaulti saladused vahemälus?  
+  - **V**: Sõltub rakendusest; rakenda oma vahemälustamisestrateegia
+
+**Käsitsi kontroll:**
 ```bash
 # Testi Key Vaulti juurdepääsu
 az keyvault secret show \
@@ -1216,47 +1272,47 @@ az keyvault show \
 
 ---
 
-## Turvalisuse parimad tavad
+## Turvalisuse parimad praktikad
 
-### ✅ TEE:
+### ✅ Tee nii:
 
-1. **Kasuta tootmises alati hallatud identiteeti**
+1. **Kasuta tootmises alati haldusega identiteeti**
    ```bicep
    identity: {
      type: 'SystemAssigned'
    }
    ```
 
-2. **Kasuta RBAC rolle minimaalsete õigustega**
-   - Kasuta võimalusel "Reader" rolle
-   - Väldi "Owner" või "Contributor" rolle, kui pole vaja
+2. **Kasuta põhimõtet miinimumõigustest RBAC rollides**  
+   - Kasuta "Reader" rolle, kus võimalik  
+   - Väldi "Owner" või "Contributor" rolle, kui pole vajalik
 
-3. **Hoia kolmanda osapoole võtmeid Key Vaultis**
+3. **Hoia kolmanda osapoole võtmed Key Vaultis**
    ```javascript
    const apiKey = await secretClient.getSecret('ThirdPartyApiKey');
    ```
 
-4. **Luba auditeerimise logimine**
+4. **Luba auditeerimist**
    ```bicep
    diagnosticSettings: {
      logs: [{ category: 'AuditEvent', enabled: true }]
    }
    ```
 
-5. **Kasuta dev/staging/production jaoks erinevaid identiteete**
+5. **Kasuta dev/staging/prod jaoks erinevaid identiteete**
    ```bash
    azd env new dev
    azd env new staging
    azd env new prod
    ```
 
-6. **Rota saladusi regulaarselt**
-   - Sea Key Vaulti saladustele aegumiskuupäevad
-   - Automaatne rotatsioon Azure Functions abil
+6. **Pööra saladusi regulaarselt**  
+   - Sea Key Vaulti saladustele aegumiskuupäevad  
+   - Automaatne pööramine Azure Functions abil
 
-### ❌ ÄRA TEE:
+### ❌ ÄRA tee:
 
-1. **Ära kunagi koodi kõvakodeeri saladusi**
+1. **Ära kunagi jäta saladusi koodi kõvakodeeritud**
    ```javascript
    // ❌ HALB
    const apiKey = "sk-proj-xxxxxxxxxxxxx";
@@ -1268,7 +1324,7 @@ az keyvault show \
    BlobServiceClient.fromConnectionString(process.env.STORAGE_CONNECTION_STRING)
    ```
 
-3. **Ära anna liigseid õigusi**
+3. **Ära anna üleliigseid õigusi**
    ```bicep
    // ❌ BAD - too much access
    roleDefinitionId: 'Owner'
@@ -1296,7 +1352,7 @@ az keyvault show \
 
 ## Tõrkeotsingu juhend
 
-### Probleem: "Unauthorized" Azure Storage’i kasutamisel
+### Probleem: "Unauthorized" Azure Storage'i kasutamisel
 
 **Sümptomid:**
 ```
@@ -1312,13 +1368,13 @@ az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
-# ✅ Oodatud: "SystemAssigned" või "UserAssigned"
+# ✅ Oodatav: "SystemAssigned" või "UserAssigned"
 
 # Kontrolli rolli määramisi
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID
 
-# Oodatud: Tuleb näha "Storage Blob Data Contributor" või sarnast rolli
+# Oodatav: Tuleb näha "Storage Blob Data Contributor" või sarnast rolli
 ```
 
 **Lahendused:**
@@ -1332,21 +1388,21 @@ az role assignment create \
   --scope $STORAGE_ID
 ```
 
-2. **Oota levikut (võib võtta 5-10 minutit):**
+2. **Oota levitamist (võib võtta 5-10 minutit):**
 ```bash
 # Kontrolli rolli määramise olekut
 az role assignment list --assignee $PRINCIPAL_ID --scope $STORAGE_ID
 ```
 
-3. **Kontrolli, et rakenduskood kasutab õiget volitust:**
+3. **Kontrolli, et rakenduskood kasutab õiget mandaatikut:**
 ```javascript
-// Veendu, et kasutad DefaultAzureCredential'i
+// Veenduge, et kasutate DefaultAzureCredentiali
 const credential = new DefaultAzureCredential();
 ```
 
 ---
 
-### Probleem: Key Vaulti ligipääs keelatud
+### Probleem: Ligipääs Key Vaultile keelatud
 
 **Sümptomid:**
 ```
@@ -1357,13 +1413,13 @@ The user, group or application does not have secrets get permission
 **Diagnoos:**
 
 ```bash
-# Kontrolli, kas võtmeklapi RBAC on lubatud
+# Kontrolli, kas Key Vault RBAC on lubatud
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
 # ✅ Oodatud: tõene
 
-# Kontrolli rollimääranguid
+# Kontrolli rolli määramisi
 az role assignment list \
   --assignee $PRINCIPAL_ID \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.KeyVault/vaults/$KV_NAME
@@ -1378,7 +1434,7 @@ az keyvault update \
   --enable-rbac-authorization true
 ```
 
-2. **Anna Key Vault Secrets Useri roll:**
+2. **Anna Key Vault Secrets User roll:**
 ```bash
 KV_ID=$(az keyvault show --name $KV_NAME --query "id" -o tsv)
 az role assignment create \
@@ -1426,11 +1482,11 @@ export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 ```
 
-4. **Või kasuta lokaalselt teist volitust:**
+4. **Või kasuta lokaalselt teist mandaatikut:**
 ```javascript
 const { DefaultAzureCredential, AzureCliCredential } = require('@azure/identity');
 
-// Kasuta kohaliku arenduse jaoks AzureCliCredential'i
+// Kasuta kohalikuks arendamiseks AzureCliCredential'i
 const credential = process.env.NODE_ENV === 'production' 
   ? new DefaultAzureCredential()
   : new AzureCliCredential();
@@ -1438,15 +1494,15 @@ const credential = process.env.NODE_ENV === 'production'
 
 ---
 
-### Probleem: Rolli määramine võtab liiga kaua aega
+### Probleem: Rolli määramine levib aeglaselt
 
 **Sümptomid:**
-- Roll määrati edukalt
-- Endiselt 403 vead
-- Juhtuvad hooti ligipääsu probleemid
+- Roll määratud edukalt  
+- Saab ikka kätte 403 vead  
+- Vahelduv ligipääs (mõnikord töötab, mõnikord mitte)
 
 **Selgitus:**
-Azure RBAC muudatuste levik võib võtta 5-10 minutit üle kogu maailma.
+Azure RBAC muudatuste levitamine võib võtta üle maailma 5-10 minutit.
 
 **Lahendus:**
 
@@ -1455,10 +1511,10 @@ Azure RBAC muudatuste levik võib võtta 5-10 minutit üle kogu maailma.
 echo "Waiting for RBAC propagation..."
 sleep 300  # Oota 5 minutit
 
-# Testi juurdepääsu
+# Testi ligipääsu
 curl https://myapp.azurecontainerapps.io/upload
 
-# Kui ikka ebaõnnestub, taaskäivita rakendus
+# Kui ikka ei tööta, taaskäivita rakendus
 az containerapp revision restart \
   --name myapp \
   --resource-group rg-myapp
@@ -1466,37 +1522,37 @@ az containerapp revision restart \
 
 ---
 
-## Kulude kaalutlused
+## Kuluaspektid
 
-### Hallatud identiteedi kulud
+### Haldusega identiteedi kulud
 
 | Ressurss | Kulu |
 |----------|------|
-| **Hallatud identiteet** | 🆓 **TASUTA** - ei maksustata |
-| **RBAC rolli määramised** | 🆓 **TASUTA** - ei maksustata |
-| **Azure AD tokenipäringud** | 🆓 **TASUTA** - sisalduvad |
-| **Key Vaulti toimingud** | $0.03 10 000 toimingu kohta |
-| **Key Vaulti salvestusruum** | $0.024 saladuse kohta kuus |
+| **Haldusega identiteet** | 🆓 **TASUTA** - Ei lisakulusid |
+| **RBAC rollide määramine** | 🆓 **TASUTA** - Ei lisakulusid |
+| **Microsoft Entra ID tokeni päringud** | 🆓 **TASUTA** - Kaasas |
+| **Key Vault operatsioonid** | $0.03 iga 10 000 operatsiooni kohta |
+| **Key Vault salvestus** | $0.024 saladuse kohta kuus |
 
-**Hallatud identiteet säästab raha:**
-- ✅ Vähendab Key Vaulti toiminguid teenuste vaheliseks autentimiseks
-- ✅ Vähendab turvaintsidente (pole lekkinud volitusi)
-- ✅ Alandab operatiivset koormust (pole manuaalset rotatsiooni)
+**Haldusega identiteet säästab raha, sest:**  
+- ✅ Väldib Key Vaulti operatsioone teenustevahelise autentimiseks  
+- ✅ Vähendab turvaintsidente (puhkenud mandaadid puuduvad)  
+- ✅ Vähendab halduskoormust (pole käsitsi pööramist)
 
-**Kulude võrdlus (kuus):**
+**Näidiskulude võrdlus (kuus):**
 
-| Stsenaarium | Ühendusstringid | Hallatud identiteet | Sääst |
-|-------------|-----------------|--------------------|-------|
-| Väike rakendus (1M päringut) | ~50$ (Key Vault + toimingud) | ~0$ | 50$/kuu |
-| Keskmine rakendus (10M päringut) | ~200$ | ~0$ | 200$/kuu |
-| Suur rakendus (100M päringut) | ~1500$ | ~0$ | 1500$/kuu |
+| Stsenaarium | Ühendusstringid | Haldusega identiteet | Sääst |
+|-------------|-----------------|---------------------|-------|
+| Väike rakendus (1M päringut) | ~$50 (Key Vault + ops) | ~$0 | $50/kuus |
+| Keskmine rakendus (10M päringut) | ~$200 | ~$0 | $200/kuus |
+| Suur rakendus (100M päringut) | ~$1,500 | ~$0 | $1,500/kuus |
 
 ---
 
-## Õpi veel
+## Rohkem õppimist
 
 ### Ametlik dokumentatsioon
-- [Azure Hallatud identiteet](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
+- [Azure haldusega identiteet](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
 - [Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)
 - [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)
 - [DefaultAzureCredential](https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential)
@@ -1506,42 +1562,42 @@ az containerapp revision restart \
 - [Azure.Identity (C#)](https://www.nuget.org/packages/Azure.Identity/)
 - [azure-identity (Python)](https://pypi.org/project/azure-identity/)
 
-### Järgmised sammud kursusel
+### Järgmised sammud selles kursuses
 - ← Eelmine: [Konfiguratsiooni haldus](configuration.md)
 - → Järgmine: [Esimene projekt](first-project.md)
 - 🏠 [Kursuse avaleht](../../README.md)
 
 ### Seotud näited
-- [Microsoft Foundry Models Chat näide](../../../../examples/azure-openai-chat) – Kasutab Microsoft Foundry Models hallatud identiteeti
-- [Microservices näide](../../../../examples/microservices) – Mitme teenuse autentimise mustrid
+- [Microsoft Foundry mudelite vestlusnäide](../../../../examples/azure-openai-chat) - Kasutab haldusega identiteeti Microsoft Foundry mudelite jaoks
+- [Mikroteenuste näide](../../../../examples/microservices) - Mitme teenuse autentimismustrid
 
 ---
 
 ## Kokkuvõte
 
-**Õppisid:**
-- ✅ Kolm autentimismustrit (ühendusstringid, Key Vault, hallatud identiteet)
-- ✅ Kuidas lubada ja seadistada hallatud identiteeti AZD-s
-- ✅ RBAC rollide määramine Azure teenustele
-- ✅ Key Vault integreerimine kolmanda osapoole saladuste jaoks
-- ✅ Kasutaja määratud vs süsteemi määratud identiteedid
-- ✅ Turvalisuse parimad tavad ja tõrkeotsing
+**Oled õppinud:**  
+- ✅ Kolm autentimismustrit (ühendusstringid, Key Vault, haldusega identiteet)  
+- ✅ Kuidas lubada ja konfigureerida haldusega identiteeti AZD-s  
+- ✅ RBAC rollide määramised Azure teenustele  
+- ✅ Key Vaulti integreerimine kolmanda osapoole saladustega  
+- ✅ Kasutaja määratud vs süsteemi määratud identiteedid  
+- ✅ Turvalisuse parimad praktikad ja tõrkeotsing
 
-**Peamised punktid:**
-1. **Kasuta tootmises alati hallatud identiteeti** – null saladusi, automaatne rotatsioon
-2. **Kasuta minimaalsete õigustega RBAC rolle** – anna ainult vajalikud õigused
-3. **Hoia kolmanda osapoole võtmeid Key Vaultis** – keskne saladuste haldus
-4. **Kasuta eraldi identiteete igas keskkonnas** – dev, staging, prod isolatsioon
-5. **Luba auditeerimise logimine** – jälgi, kes mida kasutas
+**Peamised võtmed:**  
+1. **Kasuta tootmises alati haldusega identiteeti** – null saladusi, automaatne pööramine  
+2. **Kasuta miinimumõigustega RBAC rolle** – anna vaid vajalikud õigused  
+3. **Hoia kolmanda osapoole võtmed Key Vaultis** – tsentraliseeritud saladuste haldus  
+4. **Kasuta keskkonna kohta eraldi identiteete** – arendus, test, tootmine eraldatud  
+5. **Luba auditeerimine** – jälgi, kes mida kasutas
 
-**Järgmised sammud:**
-1. Täida ülaltoodud praktilised ülesanded
-2. Migreeri olemasolev rakendus ühendusstringidelt hallatud identiteedile
-3. Ehita oma esimene AZD projekt turvalisusega alates esimesest päevast: [Esimene projekt](first-project.md)
+**Järgmised sammud:**  
+1. Täida eesolevad praktilised ülesanded  
+2. Migreeri olemasolev rakendus ühendusstringidelt haldusega identiteedile  
+3. Koosta oma esimene AZD projekt turvapõhimõtetest alates: [Esimene projekt](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vastutusest loobumine**:
-See dokument on tõlgitud kasutades tehisintellektil põhinevat tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi püüame täpsust, tuleb arvestada, et automatiseeritud tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise teabe korral soovitame kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste ega valesti tõlgendamise eest.
+**Lahtiütlus**:
+See dokument on tõlgitud kasutades AI tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi me püüdleme täpsuse poole, palun pange tähele, et automatiseeritud tõlgetes võib esineda vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlkega seotud eksimustest või valesti mõistmistest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

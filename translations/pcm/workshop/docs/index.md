@@ -1,19 +1,19 @@
 # AZD for AI Developers Workshop
 
-> Dem don validate wit `azd 1.23.12` for March 2026.
+> Dem don validate am with `azd 1.25.6` for June 2026.
 
 > [!IMPORTANT]  
-> **Dis workshop get workshop guide wey you fit preview for your local browser. To get started, open the repo in GitHub Codespaces, a dev container, or a local clone with MkDocs installed—then wait until you see an active VS Code terminal and type:**  
+> **Dis workshop get workshop guide wey you fit preview for your local browser. To start, open the repo for GitHub Codespaces, dev container, or local clone wey get MkDocs installed—then wait till you see active VS Code terminal and type:**  
 > `mkdocs serve > /dev/null 2>&1 &`  
-> **You go see one pop-up dialog wey go allow you open the preview page for your browser.**
+> **You go see pop-up dialog wey go ask you to open the preview page for your browser.**
 
-Welcome to dis hands-on workshop to learn Azure Developer CLI (AZD) wey focus on AI application deployment. Dis workshop go help you get practical understanding of AZD templates for 3 steps:
+Welcome to this hands-on workshop to learn Azure Developer CLI (AZD) with focus on how to deploy AI apps. Dis workshop go help you sabi AZD templates for practical way inside 3 steps:
 
-1. **Discovery** - find di template wey correct for you.
-1. **Deployment** - deploy and validate say e dey work
-1. **Customization** - change am and iterate make e become your own!
+1. **Discovery** - find the template wey good for you.  
+1. **Deployment** - deploy am and make sure say e dey work  
+1. **Customization** - change am small-small make e become your own!
 
-For di course of dis workshop, we go also introduce core developer tools and workflows to help you make your end-to-end development journey smoother.
+For this workshop, dem go also show you main developer tools and workflows to help make your end-to-end development journey easier.
 
 | | | 
 |:---|:---|
@@ -27,39 +27,39 @@ For di course of dis workshop, we go also introduce core developer tools and wor
 
 **Duration:** 3-4 hours  
 **Level:** Beginner to Intermediate  
-**Prerequisites:** You suppose sabi Azure, AI concepts, VS Code & command-line tools.
+**Prerequisites:** Make you sabi small about Azure, AI concepts, VS Code & command-line tools.
 
-Na hands-on workshop dis — you go learn by doing. After you don finish the exercises, we recommend say you review the AZD For Beginners curriculum to continue your learning journey into Security and Productivity best practices.
+Na hands-on workshop dis — you go learn by doing. After you finish di exercises, we recommend say you check the AZD For Beginners curriculum make you continue learn about Security and Productivity best practices.
 
 | Time| Module  | Objective |
 |:---|:---|:---|
-| 15 mins | Introduction | Set di stage, understand di goals |
+| 15 mins | Introduction | Set the stage, understand the goals |
 | 30 mins | Select AI Template | Explore options and pick starter | 
-| 30 mins | Validate AI Template | Deploy di default solution to Azure |
+| 30 mins | Validate AI Template | Deploy default solution to Azure |
 | 30 mins | Deconstruct AI Template | Explore structure and configuration |
-| 30 mins | Configure AI Template | Activate and try di available features |
-| 30 mins | Customize AI Template | Adapt di template to your needs |
+| 30 mins | Configure AI Template | Activate and try available features |
+| 30 mins | Customize AI Template | Adapt the template to your needs |
 | 30 mins | Teardown Infrastructure | Cleanup and release resources |
 | 15 mins | Wrap-Up & Next Steps | Learning resources, Workshop challenge |
 | | |
 
-## What You'll Learn
+## Wetin You Go Learn
 
-Tink of di AZD Template as one learning sandbox wey you fit use explore different capabilities and tools for end-to-end development on Microsoft Foundry. By di end of dis workshop, you go get one intuitive sense of how different tools and concepts dey work for dis context.
+Think of the AZD Template as learning sandbox wey you go use explore plenty capabilities and tools for end-to-end development on Microsoft Foundry. By the time you finish this workshop, you go get better idea of di tools and concepts wey dem show for here.
 
 | Concept  | Objective |
 |:---|:---|
-| **Azure Developer CLI** | Understand di tool commands and workflows|
-| **AZD Templates**| Understand project structure and config|
+| **Azure Developer CLI** | Make you sabi tool commands and workflows |
+| **AZD Templates**| Make you sabi project structure and config |
 | **Azure AI Agent**| Provision & deploy Microsoft Foundry project  |
 | **Azure AI Search**| Enable context engineering with agents |
 | **Observability**| Explore tracing, monitoring and evaluations |
-| **Red Teaming**| Explore adversarial testing and mitigations |
+| **Red Teaming**| Try adversarial testing and how to mitigate am |
 | | |
 
 ## Workshop Modules
 
-You ready to start? Move through di workshop modules:
+Ready to start? Navigate through di workshop modules:
 
 - [Module 1: Select AI Template](instructions/1-Select-AI-Template.md)
 - [Module 2: Validate AI Template](instructions/2-Validate-AI-Template.md) 
@@ -69,13 +69,13 @@ You ready to start? Move through di workshop modules:
 - [Module 6: Teardown Infrastructure](instructions/6-Teardown-Infrastructure.md)
 - [Module 7: Wrap-up & Next Steps](instructions/7-Wrap-up.md)
 
-## Have feedback?
+## Get feedback?
 
-Post an issue on this repo (tag it `Workshop`) or join us on [Discord](https://aka.ms/foundry/discord) and post to our `#get-help` channel
+Open issue for this repo (tag am `Workshop`) or join us for [Discord](https://aka.ms/foundry/discord) and post for our `#get-help` channel
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Dis document don translate with AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am accurate, abeg note say automated translations fit get errors or inaccuracies. The original document for im native language suppose be the authoritative source. For critical information, professional human translation dey recommended. We no dey liable for any misunderstandings or misinterpretations wey fit arise from the use of this translation.
+Dis document don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even tho we dey try make am correct, abeg make you know say automated translation fit get errors or mistakes. Di original document for dia own language na im be di correct source. For important info, make person wey sabi human translation do am. We no go responsible for any misunderstanding or wrong understanding wey fit happen because of dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,31 +1,31 @@
-# Chapter 3: Konfiguratsioon & Autentimine
+# Chapter 3: Konfiguratsioon ja autentimine
 
-**📚 Kursus**: [AZD Algajatele](../../README.md) | **⏱️ Kestus**: 45-60 minutit | **⭐ Tase**: Kesktase
+**📚 Kursus**: [AZD alustajatele](../../README.md) | **⏱️ Kestus**: 45-60 minutit | **⭐ Raskusaste**: Kesktasemel
 
 ---
 
 ## Ülevaade
 
-Selles peatükis käsitletakse keskkonna konfiguratsiooni, autentimismustreid ja Azure Developer CLI juurutuste turvalisi tavasid.
+See peatükk käsitleb keskkonna seadistamist, autentimise mustreid ja turvalisuse parimaid tavasid Azure Developer CLI kasutuselevõtuks.
 
-> Kinnitatud `azd 1.23.12` vastu märtsis 2026.
+> Kontrollitud versiooniga `azd 1.25.6` juunis 2026.
 
 ## Õpieesmärgid
 
-Selle peatüki läbimisega:
-- Valdad AZD konfiguratsiooni hierarhiat
-- Halda mitut keskkonda (arendus, testimine, tootmine)
-- Rakenda turvalist autentimist hallatud identiteetidega
-- Konfigureeri keskkonnapõhised seadistused
+Selle peatüki lõpetamisel:
+- Omandad AZD konfiguratsiooni hierarhia
+- Haldate mitut keskkonda (dev, staging, prod)
+- Rakendate turvalist autentimist hallatud identiteetidega
+- Konfigureerite keskkonnaspetsiifilisi seadeid
 
 ---
 
 ## 📚 Õppetunnid
 
-| # | Õppetund | Kirjeldus | Aeg |
-|---|----------|-----------|-----|
-| 1 | [Konfiguratsiooni juhend](configuration.md) | Keskkonna seadistus ja haldus | 30 min |
-| 2 | [Autentimine & turvalisus](authsecurity.md) | Hallatud identiteedi ja RBAC mustrid | 30 min |
+| # | Tund | Kirjeldus | Aeg |
+|---|--------|-------------|------|
+| 1 | [Konfiguratsioonijuhend](configuration.md) | Keskkonna seadistamine ja haldus | 30 min |
+| 2 | [Autentimine ja turvalisus](authsecurity.md) | Hallatud identiteedid ja RBAC mustrid | 30 min |
 
 ---
 
@@ -40,7 +40,7 @@ azd env new prod
 # Vaheta keskkondi
 azd env select prod
 
-# Sea keskkonnamuutujad
+# Määra keskkonnamuutujad
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
@@ -52,31 +52,31 @@ azd env get-values
 
 ## 🔧 Konfiguratsiooni hierarhia
 
-AZD rakendab seadistusi selles järjekorras (hilisem kirjutab varasema üle):
+AZD rakendab seadeid selles järjekorras (hilisemad kirjutavad eelnevaid üle):
 
-1. **Vaikimisi väärtused** (mallides sisse ehitatud)
+1. **Vaikeväärtused** (mallidesse sisse ehitatud)
 2. **azure.yaml** (projekti konfiguratsioon)
 3. **Keskkonnamuutujad** (`azd env set`)
 4. **Käsurea lipud** (`--location eastus`)
 
 ---
 
-## 🔐 Turvalised tavad
+## 🔐 Turvalisuse parimad tavad
 
 ```bash
-# Kasuta hallatud identiteeti (soovitatav)
+# Kasutage hallatud identiteeti (soovitatav)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Kontrolli AZD autentimise olekut
+# Kontrollige AZD autentimise olekut
 azd auth status
 
-# Valikuline: kontrolli Azure CLI konteksti, kui plaanid käivitada az käske
+# Valikuline: kontrollige Azure CLI konteksti, kui kavatsete käivitada az käske
 az account show
 
-# Autendi uuesti, kui vaja
+# Vajadusel autenduge uuesti
 azd auth login
 
-# Valikuline: uuenda Azure CLI autentimist az käskude jaoks
+# Valikuline: värskendage Azure CLI autentimist az käskude jaoks
 az login
 ```
 
@@ -85,20 +85,20 @@ az login
 ## 🔗 Navigeerimine
 
 | Suund | Peatükk |
-|-------|---------|
-| **Eelmine** | [Peatükk 2: Tehisintellekti arendus](../chapter-02-ai-development/README.md) |
-| **Järgmine** | [Peatükk 4: Taristu](../chapter-04-infrastructure/README.md) |
+|-----------|---------|
+| **Eelmine** | [Peatükk 2: AI arendus](../chapter-02-ai-development/README.md) |
+| **Järgmine** | [Peatükk 4: Infrastruktuur](../chapter-04-infrastructure/README.md) |
 
 ---
 
 ## 📖 Seotud ressursid
 
-- [Enne juurutamist tehtavad kontrollid](../chapter-06-pre-deployment/README.md)
+- [Juurutuseelne kontroll](../chapter-06-pre-deployment/README.md)
 - [Tõrkeotsing](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vastutusest loobumine**:
-See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame täpsust, palun pidage meeles, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument oma emakeeles tuleks pidada autoriteetseks allikaks. Tähtsa teabe puhul soovitatakse professionaalset inimtõlget. Me ei võta vastutust selle tõlke kasutamisest tingitud arusaamatuste või väärtõlgenduste eest.
+**Lahtiütlus**:
+See dokument on tõlgitud kasutades AI tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi me püüdleme täpsuse poole, palun pange tähele, et automatiseeritud tõlgetes võib esineda vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlkega seotud eksimustest või valesti mõistmistest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

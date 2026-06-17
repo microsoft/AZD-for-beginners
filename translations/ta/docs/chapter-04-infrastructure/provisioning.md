@@ -1,47 +1,47 @@
-# AZD மூலம் Azure வளங்களை வழங்குதல்
+# AZD-ஐ கொண்டு Azure வளங்களை Provision செய்தல்
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD ஆரம்பிகளுக்கான](../../README.md)
-- **📖 Current Chapter**: Chapter 4 - Infrastructure as Code & Deployment
-- **⬅️ Previous**: [வினியோக வழிகாட்டி](deployment-guide.md)
-- **➡️ Next Chapter**: [அத்தியாயம் 5: பல-ஏஜென்ட் செயற்கை நுண்ணறிவு தீர்வுகள்](../../examples/retail-scenario.md)
-- **🔧 Related**: [அத்தியாயம் 6: முன்-வினியோகச் சரிபார்ப்பு](../chapter-06-pre-deployment/capacity-planning.md)
+**அத்தியாய பயன்பாட்டு வழிசெலுத்தல்:**
+- **📚 பாடநெறி முகப்பு**: [AZD For Beginners](../../README.md)
+- **📖 தற்போதைய அத்தியாயம்**: அத்தியாயம் 4 - குறியீட்டுள்ளே உள்கட்டமைப்பு மற்றும் 배deploy செயல்
+- **⬅️ முந்தையது**: [Deployment Guide](deployment-guide.md)
+- **➡️ அடுத்த அத்தியாயம்**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
+- **🔧 தொடர்புடையது**: [Chapter 6: Pre-Deployment Validation](../chapter-06-pre-deployment/capacity-planning.md)
 
-## பரிசுத்தோகம்
+## அறிமுகம்
 
-இந்த விரிவான வழிகாட்டி Azure Developer CLI மூலம் Azure வளங்களை வழங்குதல் மற்றும் நிர்வகிப்பதில் நீங்கள் அறிய வேண்டிய அனைத்தையும் கவர்கிறது. Bicep, ARM templates, Terraform மற்றும் Pulumi ஆகியவற்றை பயன்படுத்தி அடிப்படை வள உருவாக்கத்திலிருந்து மேம்பட்ட நிறுவன தரமான இன்ஃப்ராஸ்ட்ரக்சர் வடிவமைப்புகள் வரை Infrastructure as Code (IaC) மாதிரிகளை எப்படி செயல்படுத்துவது என்பதை கற்றுக்கொள்ளுங்கள்.
+இந்த விரிவான வழிகாட்டி Azure Developer CLI மூலம் Azure வளங்களை provision மற்றும் நிர்வகிப்பதில் தேவையான அனைத்தையும் கற்பிக்கிறது. Bicep, ARM டெம்ப்ளேடுகள், Terraform மற்றும் Pulumi ஆகியவற்றைப் பயன்படுத்தி அடிப்படையான வள உருவாக்கத்திலிருந்து மேம்பட்ட நிறுவன மட்டத் தலைமை கட்டமைப்புகள் வரை Infrastructure as Code (IaC) முறைமைகளை செயல்படுத்த கற்றுக்கொள்ளுங்கள்.
 
 ## கற்றல் இலக்குகள்
 
 இந்த வழிகாட்டியை முடித்தவுடன், நீங்கள்:
-- Infrastructure as Code கொள்கைகள் மற்றும் Azure வள வழங்குதலைப் பற்றிப் பிராயம் அடைவீர்கள்
-- Azure Developer CLI ஆதரிக்கும் பல IaC வழங்குநர்களை புரிந்துகொள்வீர்கள்
-- பொதுவான பயன்பாட்டு கட்டமைப்புகளுக்கான Bicep மாதிரிகளை வடிவமைத்து செயல்படுத்தலாம்
-- வள அளவுருக்கள், மாறிலிகள் மற்றும் சுற்றுச்சூழல்-சார்ந்த அமைப்புகளை கட்டமைக்கலாம்
-- நெட்வொர்க்கிங் மற்றும் பாதுகாப்பு உள்ளிட்ட மேம்பட்ட இன்ஃப்ராஸ்ட்ரக்சர் மாதிரிகளை அமல்படுத்து முடியும்
-- வள வாழ்க்கைமுறை, புதுப்பிப்புகள் மற்றும் சார்பு தீர்வுகளை நிர்வகிக்கலாம்
+- Infrastructure as Code கொள்கைகளையும் Azure வள provision கற்றலையும் ஆற்றுவீர்கள்
+- Azure Developer CLI மூலம் ஆதரிக்கப்படும் பல IaC வழங்குநர்களைக் புரிந்துகொள்ள்வீர்கள்
+- பொதுவான பயன்பாட்டு கட்டமைப்புகளுக்காக Bicep டெம்ப்ளேட்டுகளை வடிவமைத்து செயல்படுத்துவீர்கள்
+- வளமான அளவுருக்கள், மாறிலிகள் மற்றும் சூழல்-சார்ந்த அமைப்புகளை கட்டமைக்கிறீர்கள்
+- நெட்வொர்க்கிங் மற்றும் பாதுகாப்பு உட்பட மேம்பட்ட கட்டமைப்பு மாதிரிகளை செயல்படுத்துவீர்கள்
+- வளத்தின் வாழ்க்கைசுழற்சி, புதுப்பிப்புகள் மற்றும் சார்பு தீர்மானிப்பை நிர்வகிப்பீர்கள்
 
-## கற்றல் முடிவுகள்
+## கற்றல் வெளியீடுகள்
 
-முடித்தபின்பு, நீங்கள் செய்ய முடியும்:
-- Bicep மற்றும் ARM templates பயன்படுத்தி Azure இன்ஃப்ராஸ்ட்ரக்சர் வடிவமைக்கவும் வழங்கவும்
-- சீரான வள சார்புகளுடன் சிக்கலான பல-சேவை கட்டமைப்புகளை அமைக்கவும்
-- பல சுற்றுச்சூழல்களுக்கும் கட்டமைப்புகளுக்கும் அளவுரு ஆதாரமாகும் மாதிரிகளை செயல்படுத்தவும்
-- இன்ஃப்ராஸ்ட்ரக்சர் வழங்கல் விவரக்கூறுகளில் ஏற்படும் பிரச்சனைகளை கண்டறிந்து தீர்க்கவும்
-- இன்ஃப்ராஸ்ட்ரக்சர் வடிவமைப்பில் Azure Well-Architected Framework கொள்கைகளைச் செயல்படுத்தவும்
-- இன்ஃப்ராஸ்ட்ரக்சர் புதுப்பிப்புகளை நிர்வகித்து பதிப்பமைப்பு தந்திரங்களை அமல்படுத்தவும்
+முடித்தவுடன், நீங்கள் செய்யக்கூடியவை:
+- Bicep மற்றும் ARM டெம்ப்ளேடுகளைப் பயன்படுத்தி Azure கட்டமைப்புகளை வடிவமைத்து provision செய்யும் திறன்
+- சரியான வள சார்புகள் உடன் பல-சேவை கட்டமைப்புகளை அமைக்கும் திறன்
+- பல சூழல்கள் மற்றும் கட்டமைப்புகளுக்காக அளவுருக்கப்பட்ட டெம்ப்ளேட்டுகளை செயல்படுத்தும் திறன்
+- கட்டமைப்பு provisioning பிரச்சினைகளைத் துறைசெய்தல் மற்றும் deployment தோல்விகளை தீர்க்கும் திறன்
+- கட்டமைப்பு வடிவமைப்புக்கு Azure Well-Architected Framework கொள்கைகளைப் பயன்படுத்தும் திறன்
+- கட்டமைப்பு புதுப்பிப்புகளை நிர்வகித்து கட்டமைப்பு பதிப்பான்மைகளை செயல்படுத்தும் திறன்
 
-## இன்ஃப்ராஸ்ட்ரக்சர் வழங்கல் கண்ணோட்டம்
+## Infrastructure Provisioning மேலோட்டம்
 
 Azure Developer CLI பல Infrastructure as Code (IaC) வழங்குநர்களை ஆதரிக்கிறது:
-- **Bicep** (பரிந்துரை செய்யப்படுகிறது) - Azure இன் பிரத்தியேகத் துறை மொழி
-- **ARM Templates** - JSON அடிப்படையான Azure Resource Manager மாதிரிகள்
-- **Terraform** - பன்முக மேக இன்ஃப்ராஸ்ட்ரக்சர் கருவி
-- **Pulumi** - நிரல்பெயர்ச் மொழிகளுடன் நவீன Infrastructure as Code
+- **Bicep** (பரிந்துரை) - Azure இன் domain-specific மொழி
+- **ARM Templates** - JSON அடிப்படையிலான Azure Resource Manager டெம்ப்ளேடுகள்
+- **Terraform** - பல-மேக கட்டமைப்பு கருவி
+- **Pulumi** - ஆன்டமான நிரலாக்க மொழிகளுடன் நவீன Infra-as-Code
 
 ## Azure வளங்களைப் புரிந்துகொள்வது
 
-### Resource Hierarchy
+### வள வரிசை
 ```
 Azure Account
 └── Subscriptions
@@ -54,11 +54,11 @@ Azure Account
 - **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
 - **Networking**: Virtual Network, Application Gateway, CDN
 - **Security**: Key Vault, Application Insights, Log Analytics
-- **AI/ML**: Cognitive Services, OpenAI, Machine Learning
+- **AI/ML**: Azure AI Services, Azure OpenAI, Azure Machine Learning
 
-## Bicep இன்ஃப்ராஸ்ட்ரக்சர் மாதிரிகள்
+## Bicep கட்டமைப்பு டெம்ப்ளேடுகள்
 
-### அடிப்படை Bicep மாதிரி அமைப்பு
+### அடிப்படை Bicep டெம்ப்ளேட் அமைப்பு
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -130,7 +130,7 @@ output WEB_NAME string = webApp.name
 
 ### மேம்பட்ட Bicep மாதிரிகள்
 
-#### மோடுலார் இன்ஃப்ராஸ்ட்ரக்சர்
+#### மாடுலார் கட்டமைப்பு
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -179,7 +179,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### நிபந்தனை அடிப்படையிலான வள உருவாக்கம்
+#### நிபந்தனைபூர்வ வள உருவாக்கம்
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -200,7 +200,201 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ தரவுத்தள வழங்கல்
+## 🌐 azd உடன் Terraform பயன்படுத்துதல்
+
+Bicep என்பது azd-இன் இயல்புநிலை, ஆனால் azd **Terraform**-ஐவும் ஆதரிக்கிறது — உங்கள் குழு ஏற்கனவே அதனை நிலையானதாக கொண்டிருந்தால் அல்லது நீங்கள் பல-மேக கட்டமைப்புகளை நிர்வகிப்பின் போது பயன்படுகிறது. azd வேலைபாட்டு (`azd up`, `azd provision`, `azd down`) ஒரே மாதிரி தான்; வெறும் infrastructure மொழியும் கோப்புறைக் கட்டமைப்பும் மாறும்.
+
+### azd-ஐ Terraform பயன்படுத்தச் சொல்லுதல்
+
+Terraform provider-ஐ குறிப்பிட்டு `azure.yaml` இல் `infra` பகுதியை சேர்க்கவும்:
+
+```yaml
+# azure.yaml
+name: my-terraform-app
+infra:
+  provider: terraform   # default is "bicep"
+  path: infra           # folder containing your .tf files
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### Terraform கோப்பு அமைப்பு
+
+Terraform provider பயன்படுத்தும் போது, உங்கள் `infra/` கோப்புறையில் Bicep-இன் பதிலாக `.tf` கோப்புகள் பயன்படுகிறது:
+
+```
+infra/
+├── main.tf            # resource definitions
+├── variables.tf       # input variables
+├── outputs.tf         # outputs azd reads back (endpoints, names)
+├── provider.tf        # azurerm/azurecaf providers + backend
+└── main.tfvars.json   # values azd injects per environment
+```
+
+### குறைந்தபட்ச `main.tf`
+
+```hcl
+# infra/main.tf
+resource "azurerm_resource_group" "rg" {
+  name     = "rg-${var.environment_name}"
+  location = var.location
+  tags     = { "azd-env-name" = var.environment_name }
+}
+
+resource "azurerm_service_plan" "plan" {
+  name                = "plan-${var.environment_name}"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  os_type             = "Linux"
+  sku_name            = "B1"
+}
+```
+
+### azd உங்கள் Terraform வெளியீடுகளுடன் எப்படி இணைகிறது
+
+azd உங்கள் endpoints-ஐ அறிந்து கொள்ளவும் மற்றும் சூழல் மதிப்புகளை உங்கள் பயன்பாட்டுக்குள் திரும்ப வைக்க Terraform **வெளியீடுகள்**-ஐ படிக்கிறது. வெளியீடு பெயர்கள் முக்கியம் — azd குறிப்பிட்டவைகளைத் தேடுகிறது:
+
+```hcl
+# infra/outputs.tf
+output "AZURE_LOCATION" {
+  value = var.location
+}
+
+output "SERVICE_WEB_ENDPOINT_URL" {
+  value = azurerm_linux_web_app.web.default_hostname
+}
+```
+
+> **முக்கியம்:** azd `azd-env-name` tag மற்றும் `AZURE_*` வெளியீடுகளை சூழல் வாரியாக வளங்களை கண்காணிக்க பயன்படுத்துகிறது. எப்போதும் உங்கள் resource group-ஐ `"azd-env-name" = var.environment_name` என tag செய்யுங்கள், அப்படியே `azd down` அனைத்தையும் கண்டுபிடித்து அகற்ற முடியும்.
+
+### Terraform-ஐ கொண்டு deploy செய்தல்
+
+கட்டளைகள் Bicep உடையவையே நேர்மையாகப் பயன்படுகின்றன:
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd பின்னணியில் 'terraform plan' ஐ இயக்குகிறது
+azd up                    # வழங்குதல் + நிறுவுதல்
+azd down --force          # Terraform மூலம் நிர்வகிக்கப்படும் வளங்களை அழிக்கிறது
+```
+
+> **முன்நிலைத் தேவைகள்:** Terraform உங்கள் இயங்குதளத்தில் நிறுவப்பட்டு உங்கள் `PATH`-இல் இருக்க வேண்டும். azd Terraform *workflow*-ஐ நிர்வகிக்கின்றது ஆனால் Terraform-ஐ உங்கள் இடத்தில் நிறுவாது. state-க்காக, azd இயல்பாக local state-ஐ பயன்படுத்தும்; குழுக்களுக்காக, `provider.tf` இல் ஒரு remote backend (உதாரணத்திற்கு, Azure Storage backend) அமைக்கவும்.
+
+ முழுமையாக இயங்கக்கூடிய Terraform-அடிப்படையிலான starters-ஐப் பார்வையிட, [Awesome AZD gallery](https://azure.github.io/awesome-azd/) ஐ உலாவி Terraform-ஐ filter செய்யவோ, அல்லது அதிகாரப்பூர்வ [azd Terraform documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd) காணவோ செய்யுங்கள்.
+
+## 🧩 azd உடன் Pulumi பயன்படுத்துதல்
+
+உங்கள் குழு ஒரு domain-specific மொழியினைப் முழுக்க பயன்படுத்துவதற்கு பதிலாக பொதுவான நிரலாக்க மொழிகளில் (TypeScript, Python, Go, அல்லது C#) கட்டமைப்புகளை எழுதினால், azd **Pulumi**-ஐவும் ஆதரிக்கிறது. Terraform போலவே, `azd up` / `azd provision` / `azd down` வேலைபாடு மாற்றமில்லாது இருக்கும் — வெறும் infrastructure கருவி மற்றும் கோப்புறைக் கட்டமைப்பு மாறும்.
+
+### azd-ஐ Pulumi பயன்படுத்தச் சொல்லுதல்
+
+```yaml
+# azure.yaml
+name: my-pulumi-app
+infra:
+  provider: pulumi      # default is "bicep"
+  path: infra           # folder containing your Pulumi program
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### Pulumi கோப்பு அமைப்பு
+
+```
+infra/
+├── Pulumi.yaml          # project definition
+├── Pulumi.dev.yaml      # stack config (one per environment)
+├── index.ts             # your resource program (or __main__.py, main.go, etc.)
+├── package.json         # dependencies (for TypeScript)
+└── tsconfig.json
+```
+
+### குறைந்தபட்ச `index.ts`
+
+```typescript
+import * as azure from "@pulumi/azure-native";
+import * as pulumi from "@pulumi/pulumi";
+
+const environmentName = pulumi.getStack();
+
+// ஒவ்வொரு வளத்தையும் azd அவற்றை கண்காணித்து நீக்கமுடியுமாறு குறிச்சொல்லிடுங்கள்
+const tags = { "azd-env-name": environmentName };
+
+const rg = new azure.resources.ResourceGroup("rg", {
+  resourceGroupName: `rg-${environmentName}`,
+  tags,
+});
+
+// azd இந்த வெளியீடுகளை உங்கள் சூழலுக்குள் மீண்டும் வாசிக்கிறது
+export const AZURE_LOCATION = rg.location;
+export const SERVICE_WEB_ENDPOINT_URL = "https://...";
+```
+
+### ஸ்டேக்கள் azd சூழல்களுக்கு பொருந்தும்
+
+Pulumi தன்னுடைய deployments-ஐ **stacks** ஆக ஒழுங்குபடுத்துகிறது, மற்றும் azd ஒவ்வொரு azd சூழலையும் அதே பெயருடைய Pulumi stack-க்கு வரைபடமிடுகிறது. நீங்கள் `azd env new staging` இயக்கும் போது, azd `staging` Pulumi stack-ஐ தேர்வு (அல்லது உருவாக்கம்) செய்கிறது. அதே `azd-env-name` tagging மற்றும் `AZURE_*` வெளியீடு விதிகள் பொருந்தும், ஆகவே `azd down` அனைத்தையும் கண்டுபிடித்து அகற்ற முடியும்.
+
+### Pulumi-ஐ கொண்டு deploy செய்தல்
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd பின்னணியில் 'pulumi preview' ஐ இயக்குகிறது
+azd up                    # வழங்குதல் + நிறுவுதல்
+azd down --force          # 'pulumi destroy' ஐ இயக்குகிறது
+```
+
+> **முன்நிலைத் தேவைகள்:** Pulumi உங்கள் இயங்குதளத்தில் நிறுவப்பட்டு `PATH`-இல் இருக்க வேண்டும், மற்றும் உங்களுக்கு ஒரு state backend (Pulumi Cloud அல்லது Azure Blob Storage போன்ற ஒரு self-managed backend) தேவையாகும். azd Pulumi *workflow*-ஐ நிர்வகிக்கின்றது, நிறுவலை அல்ல. அதிகாரப்பூர்வ [azd Pulumi documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-pulumi-for-azd) ஐ காணவும்.
+
+## 🎯 உங்கள் சேவைக்கான ஹோஸ்டை தேர்வு செய்தல்
+
+`azure.yaml` இல் உள்ள `host` புலம் உங்கள் கோடு எங்கு இயங்கும் என்பதை தீர்மானிக்கிறது. azd பல ஹோஸ்ட் வகைகளை ஆதரிக்கிறது — சரியானதை தேர்வு செய்வது infrastructure மொழியைவிட முக்கியம். இங்கே ஆரம்பக்கல்வி பயனாளிக்கு ஏற்ற ஒப்பீடு:
+
+| `host` value | Best for | Why |
+|--------------|----------|-----|
+| `appservice` | பாரம்பரிய வலைப் பயன்பாடுகள் மற்றும் APIs | எளிதான PaaS; கன்டெய்னர்கள் தேவையில்லை |
+| `staticwebapp` | முன்-முகவமைப்பு SPAs (React, Vue, Angular) | குளோபல் CDN + இலவச SSL, உட்பட்ட API ஆதரவு |
+| `function` | நிகழ்வு சார்ந்த மற்றும் சர்வர்லெஸ் வேலைபாடுகள் | மாபெரும்-இல்லை வரை குடுக்கல், ஒவ்வொன்றுக்குமான கட்டணம் |
+| `containerapp` | கன்டெய்னரைஸ் செய்யப்பட்ட மைக்ரோசேவைகள் | சர்வர்லெஸ் கன்டெய்னர்கள், ஸ்கேல்-டூ-ஜீரோ, உட்பட்ட ingress |
+| `aks` | சிக்கலான ஒchestrேஷன் தேவைகள் | நீங்கள் உண்மையாகவே அவசியமுள்ளபோது முழு Kubernetes கட்டுப்பாடு |
+| `springapp` | Java Spring Boot பயன்பாடுகள் | Spring-க்கு சிறப்பாக துருவிக்கப்பட்ட நிர்வகிக்கப்படும் Azure Spring Apps runtime |
+
+### AKS-இடத்திற்கு எப்போது உள்ளீடு செய்யவேண்டும்
+
+**Azure Kubernetes Service (`host: aks`)** உங்கள் Kubernetes-ன் முழு சக்தியையும் வழங்குகிறது — தனிப்பட்ட controllers, சேவை மெஷ்கள், சிக்கலான நெட்வொர்க்கிங் மற்றும் நுணுக்கமான திட்டமிடல். இந்த சக்தி இயக்க மேலாண்மை பொறுப்போடு வருகிறது: நீங்கள் node pools, upgrades மற்றும் கிளஸ்டர் நெட்வொர்க்கிங்கை நிர்வகிக்க வேண்டும்.
+
+```yaml
+services:
+  api:
+    project: ./src/api
+    language: js
+    host: aks          # deploys to an existing AKS cluster
+```
+
+> **முடிந்தால் எளிமையாக தொடங்குங்கள்.** பெரும்பாலான மைக்ரோசேவைகளுக்கு, **Container Apps** நீங்கள் கிளஸ்டரை நிர்வகிக்காமல் கன்டெய்னர்கள், ஆட்டோஸ்கேலிங் மற்றும் ஸ்கேல்-டூ-ஜீரோ ஆகியவற்றை தருகிறது. Kubernetes-சார் சிறப்பு அவசியம் ஏற்பட்டாலேயே AKS தேர்வு செய்யுங்கள்.
+
+### Azure Spring Apps-ஐ 언제 பயன்படுத்த வேண்டும்
+
+**Azure Spring Apps (`host: springapp`)** Spring Boot க்காக சிறப்பாக வடிவமைக்கப்பட்ட ஒரு நிர்வகிக்கப்படும் runtime ஆகும். இது சேவை கண்டுபிடிப்பு, config server மற்றும் blue-green deployment போன்றவற்றை கையாளும், பின்னர் Java குழுக்கள் தங்கள் சொந்த கட்டமைப்புகளை நடத்த வேண்டாம்.
+
+```yaml
+services:
+  catalog:
+    project: ./src/catalog
+    language: java
+    host: springapp
+```
+
+> நீங்கள் ஏற்கனவே உள்ள Spring Boot பயன்பாடுகளைக் கொண்டிருந்தால் மேலும் அவற்றுக்காக உகந்த runtime தேவைப்படுமானால் `springapp`-ஐப் பயன்படுத்தவும். Spring-சார் தேவைகள் இல்லாத புதிய கன்டெய்னரைஸ்டு Java பயன்பாடுகளுக்காக `containerapp` பெரும்பாலும் எளிதான தேர்வாக இருக்கும்.
+
+## 🗃️ தரவுத்தள Provision செய்தல்
 
 ### Cosmos DB
 ```bicep
@@ -298,7 +492,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 பாதுகாப்பு மற்றும் ரகசிய மேலாண்மை
+## 🔒 பாதுகாப்பு மற்றும் ரகசியக் கையாளுதல்
 
 ### Key Vault ஒருங்கிணைப்பு
 ```bicep
@@ -342,7 +536,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Managed Identity கட்டமைப்பு
+### Managed Identity அமைப்பு
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -368,7 +562,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 பிணையம் மற்றும் இணைப்பு
+## 🌍 நெட்வொர்க்கிங் மற்றும் இணைப்பு
 
 ### Virtual Network கட்டமைப்பு
 ```bicep
@@ -496,7 +690,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 கண்காணிப்பு மற்றும் காணப்படும் தன்மை
+## 📊 கண்காணிப்பு மற்றும் கவனித்தல்
 
 ### Application Insights
 ```bicep
@@ -527,7 +721,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### தனிப்பயன் அளவுகோல்கள் மற்றும் எச்சரிக்கைகள்
+### சிறப்பு ஜூதங்கள் மற்றும் எச்சரிக்கைகள்
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -561,9 +755,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 சுற்றுச்சூழல்-சார்ந்த அமைப்புகள்
+## 🔧 சூழல்-சார்ந்த கட்டமைப்புகள்
 
-### பல சுற்றுச்சூழல்களுக்கான அளவுரு கோப்புகள்
+### வெவ்வேறு சூழல்களுக்கான அளவுரு கோப்புகள்
 ```json
 // infra/main.parameters.dev.json
 {
@@ -617,7 +811,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### நிபந்தனை சார்ந்த வள வழங்குதல்
+### நிபந்தனைபூர்வ வள provision
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -649,9 +843,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 மேம்பட்ட வழங்கல் மாதிரிகள்
+## 🚀 மேம்பட்ட Provisioning மாதிரிகள்
 
-### பல பிரதேசங்களில் வினியோகம்
+### பல பிராந்திய விசாரணை Deployment
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -719,7 +913,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### இன்ஃப்ராஸ்ட்ரக்சர் சோதனை
+### கட்டமைப்பு சோதனை
 ```bicep
 // infra/test/main.test.bicep
 param location string = resourceGroup().location
@@ -755,40 +949,40 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 இன்ஃப்ராஸ்ட்ரக்சர் முன்னோட்டம் & உறுதிப்படுத்தல் (புதியது)
+## 🧪 கட்டமைப்பு முன்னோக்கு & சரிபார்ப்பு (புதியது)
 
-### வினியோகத்திற்கு முன் இன்ஃப்ராஸ்ட்ரக்சர் மாற்றங்களை முன்னோட்டம் பாருங்கள்
+### நிறுவலுக்கு முன் கட்டமைப்பு மாற்றங்களை முன்னோடியாகப் பார்க்குதல்
 
-`azd provision --preview` அம்சம் உங்கள் வளங்களை உண்மையாக வழங்குவதற்கு முன் **இன்ஃப்ராஸ்ட்ரக்சர் வழங்கலை சோதனைசெய்து** காண உதவுகிறது. இது `terraform plan` அல்லது `bicep what-if` போன்றவற்றின் உணர்வோடு ஒத்துப்போகும், உங்கள் Azure சூழலுக்கு எந்த மாற்றங்கள் செய்யப்படும் என்பதை காட்டும் **முதலில் ஓட்டுதல் (dry-run) பார்வை** தருகிறது.
+`azd provision --preview` அம்சம் வளங்களை உண்மையில் deploy செய்வதற்கு முன் **கட்டமைப்பு provision-ஐ மாதிரியாகச் சோதிக்க** அனுமதிக்கிறது. இது `terraform plan` அல்லது `bicep what-if` போன்ற நோக்கத்தில் உள்ளது, உங்கள் Azure சூழலில் என்ன மாற்றங்கள் ஏற்படும் என்பதற்கான **ஒரு ஒலிப்பாடு-இலையொன்றான காட்சி** வழங்குகிறது.
 
 #### 🛠️ இது என்ன செய்கிறது
-- **உங்கள் IaC மாதிரிகளை பகுப்பாய்வு செய்கிறது** (Bicep அல்லது Terraform)
-- **வள மாற்றங்களின் முன்னோட்டத்தை காட்டுகிறது**: சேர்ப்புகள், நீக்கங்கள், புதுப்பிப்புகள்
-- **மாற்றங்களை பயன்படுத்து மாட்டாது** — இது படிக்க மட்டுமே மற்றும் ஓட பாதுகாப்பானது
+- **உங்கள் IaC டெம்ப்ளேட்டுகளை பகுப்பாய்வு செய்கிறது** (Bicep அல்லது Terraform)
+- **வள மாற்றங்களின் முன்னோட்டத்தை காண்பிக்கிறது**: சேர்ப்பு, நீக்கம், புதுப்பிப்பு
+- **மாற்றங்களை பொருந்தாது** — இது படிக்க மட்டுமே; பயன்படுத்துவதற்கு பாதுகாப்பாக உள்ளது
 
 #### பயன்பாட்டு நிலைகள்
 ```bash
-# வெளியீட்டிற்கு முன் அடித்தள கட்டமைப்பு மாற்றங்களை முன்னோட்டமாகப் பார்க்கவும்
+# நிறுவுவதற்கு முன் கட்டமைப்பு மாற்றங்களை முன்னோட்டமாகப் பார்க்கவும்
 azd provision --preview
 
-# குறிப்பிடத்தக்க சூழலுக்கான முன்னோட்டம்
+# குறிப்பிட்ட சூழலுக்கான முன்னோட்டம்
 azd provision --preview -e production
 ```
 
 இந்த கட்டளை உங்களுக்கு உதவுகிறது:
-- **வினியோகத்திற்கு முன் இன்ஃப்ராஸ்ட்ரக்சர் மாற்றங்களை சரிபார்க்க** 
-- **வளக்கான தவறான அமைப்புகளை ஆரம்ப கட்டத்தில் பிடிக்க**
-- **குழு சூழல்களில் பாதுகாப்பாக ஒத்துழைக்க**
-- **பரவலற்ற குறைந்த-அரசியு காட்சிகளை உறுதிசெய்ய**
+- **வள மாற்றங்களை சரிபார்க்க** resources-ஐ commit செய்வதற்கு முன்
+- **தவறான அமைப்புகளை முன்னங்கித்து பிடிக்க** மேம்பாட்டு சுற்றளவுகளில்
+- **குழு சூழல்களில் பாதுகாப்பாக ஒத்துழைக்க** உதவுவது
+- **அதிர்ச்சியற்ற குறைந்த-அதிகாரங்கள் கொண்ட deployments** உறுதி செய்கிறது
 
-இதன் பயனாக இருக்கும் போது:
-- சிக்கலான பல-சேவை சூழல்களுடன் பணியாற்றும் போது
-- உற்பத்தி (production) இன்ஃப்ராஸ்ட்ரக்சருக்கு மாற்றம் செய்யும்போது
-- PR அங்கீகாரத்திற்கு முன் மாதிரி மாற்றங்களை சரிபார்க்கும்போது
-- புதிய குழு உறுப்பினர்களுக்கு இன்ஃப்ராஸ்ட்ரக்சர் மாதிரிகளை பயிற்றுவிக்கும் போது
+இது சிறப்பாக பயன்படும் போது:
+- சிக்கலான பல-சேவை சூழல்களுடன் வேலை செய்யும் போது
+- உற்பத்தி வளங்களுக்கு மாற்றங்கள் செய்யும் போது
+- PR அங்கீகாரத்திற்கு முன் டெம்ப்ளேட் மாற்றங்களை சரிபார்க்கும்போது
+- கட்டமைப்பு மாதிரிகளில் புதிய குழு உறுப்பினர்களுக்கு பயிற்சி கொடுத்தல்
 
-### முன்னோட்ட வெளியீட்டுக்கான உதாரணம்
-தீர்மானமின் பரிமாணங்கள் வழங்குநரும் திட்ட அமைப்பும் அடிப்படையில் மாறுபடும், ஆனால் முடிவு எந்தவொரு மாற்றமும் செயல்படுத்தப்படுவதற்கு முன் பரிந்துரைக்கப்படும் மாற்றங்களை தெளிவாக அடையாளம் காண வேண்டும்.
+### முன்னோட்டக் காட்சி உதாரணம்
+குழு மற்றும் திட்டக் கட்டமைப்பின்படி காட்சி மாறுபடும், ஆனால் முடிவு ஏதாவது பொருந்துவதற்காக முன்மொழியப்படும் மாற்றங்களை தெளிவாக அடையாளம் காண வேண்டும்.
 
 ```bash
 $ azd provision --preview
@@ -813,22 +1007,22 @@ The following resources will be destroyed:
 ✅ Preview completed successfully!
 ```
 
-## �🔄 வள புதுப்பிப்புகள் மற்றும் இடமாற்றங்கள்
+## �🔄 வளங்கள் புதுப்பிப்புகள் மற்றும் மைக்ரேஷன்கள்
 
 ### பாதுகாப்பான வள புதுப்பிப்புகள்
 ```bash
-# முதலில் உள்கட்டமைப்பு மாற்றங்களை முன்னோட்டமாக பார்க்கவும் (பரிந்துரைக்கப்படுகிறது)
+# முதலில் அடித்தள மாற்றங்களை முன்னோட்டமாகப் பார்க்கவும் (பரிந்துரைக்கப்படுகிறது)
 azd provision --preview
 
-# முன்னோட்டம் உறுதிசெய்யப்பட்ட பிறகு மாற்றங்களை அமல்படுத்தவும்
+# முன்னோட்ட உறுதிப்படுத்தலுக்குப் பிறகு மாற்றங்களை அமல்படுத்தவும்
 azd provision --confirm-with-no-prompt
 
-# மறு-நிலைக்கு திரும்புவதற்காக, Git ஐப் பயன்படுத்தி உள்கட்டமைப்பு மாற்றங்களை திரும்பப் பெறவும்:
-git revert HEAD  # கடைசி உள்கட்டமைப்பு commit-ஐ திரும்பப் பெறவும்
-azd provision    # முந்தைய உள்கட்டமைப்பு நிலையை அமல்படுத்தவும்
+# மீட்டெடுக்கும் நடவடிக்கைக்காக, Gitஐப் பயன்படுத்தி அடித்தள மாற்றங்களை மீட்டெடுக்கவும்:
+git revert HEAD  # கடைசிலான அடித்தளக் கமிட்டை மீட்டெடுக்கவும்
+azd provision    # முந்தைய அடித்தள நிலையை அமல்படுத்தவும்
 ```
 
-### தரவுத்தள இடமாற்றங்கள்
+### தரவுத்தள மைக்ரேஷன்கள்
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -859,7 +1053,7 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🎯 சிறந்த நடைமுறைகள்
 
-### 1. வளப் பெயரிடல் ஒழுங்குகள்
+### 1. வள பெயரிடும் நடைமுறைகள்
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -870,7 +1064,7 @@ var naming = {
 }
 ```
 
-### 2. குறிச்சொற்கள் (Tagging) கொள்கை
+### 2. Tagging நடைமுறை
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -899,7 +1093,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. வெளியீட்டு ஒழுங்கமைப்பு
+### 4. வெளியீடு ஒழுங்கமைப்பு
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -916,27 +1110,27 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## அடுத்த படிகள்
 
-- [முன்-வினியோக திட்டமிடல்](../chapter-06-pre-deployment/capacity-planning.md) - வள கிடைப்புகளை சரிபார்க்கவும்
-- [பொதுவான பிரச்சனைகள்](../chapter-07-troubleshooting/common-issues.md) - இன்ஃப்ராஸ்ட்ரக்சர் பிரச்சனைகளை தீர்க்கவும்
-- [பிழைதிருத்து வழிகாட்டி](../chapter-07-troubleshooting/debugging.md) - வழங்கல் பிரச்சனைகளை பிழைதிருத்துங்கள்
-- [SKU தேர்வு](../chapter-06-pre-deployment/sku-selection.md) - பொருத்தமான சேவை நிலைகள் தேர்வு செய்யவும்
+- [Pre-deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - வள கிடைத்துவளை சரிபார்த்தல்
+- [Common Issues](../chapter-07-troubleshooting/common-issues.md) - கட்டமைப்பு பிரச்னைகளை தீர்க்க
+- [Debugging Guide](../chapter-07-troubleshooting/debugging.md) - provisioning பிரச்சினைகளை டீபக் செய்தல்
+- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - பொருத்தமான சேவை டியர்கள் தேர்வு செய்தல்
 
 ## கூடுதல் வளங்கள்
 
-- [Azure Bicep ஆவணங்கள்](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager மாதிரிகள்](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure கட்டமைப்பு மையம்](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure நன்கு வடிவமைக்கப்பட்ட கட்டமைப்பு](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [வினியோக வழிகாட்டி](deployment-guide.md)
-- **Next Lesson**: [அமைப்பு திறன் திட்டமிடல்](../chapter-06-pre-deployment/capacity-planning.md)
+**வழிசெலுத்தல்**
+- **முந்தைய பாடம்**: [Deployment Guide](deployment-guide.md)
+- **அடுத்த பாடம்**: [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவையான [Co-op Translator](https://github.com/Azure/co-op-translator) மூலம் மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியத்திற்காக முயற்சித்தாலும், தானியங்கி மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறான விளக்கங்கள் இருக்கக்கூடும் என்பதை தயவுசெய்து கவனத்தில் கொள்ளவும். அதன் மூல (தாய்மொழி) ஆவணம் அதிகாரபூர்வ ஆதாரமாக கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு, ஒரு தொழில்முறை மனித மொழிபெயர்ப்பை பரிந்துரைக்கிறோம். இந்த மொழிபெயர்ப்பைப் பயன்படுத்து காரணமாக ஏற்படும் எந்தவொரு தவறான புரிதல்களுக்கும் அல்லது தவறான விளக்கங்களிற்கும் நாங்கள் பொறுப்பில்லை.
+**மறுப்பு**:
+இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவை [Co-op Translator](https://github.com/Azure/co-op-translator) பயன்படுத்தி மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியத்திற்காக முயற்சி செய்துள்ளோம், ஆனால் தானாக செய்யப்படும் மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறுகள் இருக்கலாம் என்பதை கவனத்தில் கொள்ளவும். அசல் ஆவணம் அதன் தாய்மொழியில் அதிகாரப்பூர்வ ஆதாரமாக கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு, தொழில்நுட்பமான மனித மொழிபெயர்ப்பு பரிந்துரைக்கப்படுகிறது. இந்த மொழிபெயர்ப்பைப் பயன்படுத்துவதால் ஏற்படும் எந்த தவறான புரிதல்கள் அல்லது தவறான விளக்கத்திற்கும் நாங்கள் பொறுப்பில்வில்லை.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,136 +1,136 @@
 # Mitmeagendiline klienditoe lahendus - jaemüüja stsenaarium
 
-**5. peatükk: Mitmeagendilised AI lahendused**
+**5. peatükk: Mitmeagendilised tehisintellekti lahendused**
 - **📚 Kursuse avaleht**: [AZD algajatele](../README.md)
-- **📖 Praegune peatükk**: [5. peatükk: Mitmeagendilised AI lahendused](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **⬅️ Eeldused**: [2. peatükk: AI-First arendus](../docs/microsoft-foundry/microsoft-foundry-integration.md)
-- **➡️ Järgmine peatükk**: [6. peatükk: Eelkäivituse valideerimine](../docs/pre-deployment/capacity-planning.md)
-- **🚀 ARM mallid**: [Kohana pakett](retail-multiagent-arm-template/README.md)
+- **📖 Praegune peatükk**: [5. peatükk: Mitmeagendilised tehisintellekti lahendused](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **⬅️ Eelteadmised**: [2. peatükk: Tehisintellekt esimesena arenduses](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **➡️ Järgmine peatükk**: [6. peatükk: Eeltöötluse valideerimine](../docs/pre-deployment/capacity-planning.md)
+- **🚀 ARM mallid**: [Juhtimispakett](retail-multiagent-arm-template/README.md)
 
-> **⚠️ ARCHITEKTUURI JUHEND - EI OLE TÖÖLEPANEK**  
-> See dokument esitab **põhjaliku arhitektuuri kontseptsiooni** mitmeagendilise süsteemi ehitamiseks.  
-> **Mis on olemas:** ARM mall infrastruktuuri juurutamiseks (Microsoft Foundry mudelid, AI Search, Container Apps jt)  
-> **Mida pead ise ehitama:** Agendi kood, marsruutimise loogika, kasutajaliides, andmepipelines (hinnanguliselt 80–120 tundi)  
+> **⚠️ ARHITEKTUURI JUHEND - MITTE TÖÖKAS RAKENDUS**  
+> See dokument pakub **üldist arhitektuuri plaani** mitmeagendilise süsteemi ehitamiseks.  
+> **Mis on olemas:** ARM mall infrastruktuuri paigaldamiseks (Microsoft Foundry mudelid, AI Search, konteinerirakendused jm)  
+> **Mida pead ehitama:** Agendi kood, marsruutimise loogika, kasutajaliides, andmetorud (hinnanguliselt 80-120 tundi)  
 >  
-> **Kasuta seda kui:**  
-> - ✅ Oma mitmeagendilise projekti arhitektuuriviidet  
-> - ✅ Õppematerjali mitmeagendiliste disainimustrite kohta  
-> - ✅ Infrastruktuuri mall Azure ressursside juurutamiseks  
-> - ❌ MITTE töövalmis rakendust (nõuab märkimisväärset arendust)
+> **Kasuta seda kui:**
+> - ✅ Arhitektuuri viiteprojekt oma mitmeagendilise lahenduse jaoks
+> - ✅ Õppejuhend mitmeagendilisele disainimustrile
+> - ✅ Infrastruktuuri mall Azure ressursside kasutuselevõtuks
+> - ❌ MITTE valmis rakendus (nõuab märkimisväärset arendustööd)
 
 ## Ülevaade
 
-**Õpieesmärk:** Mõista arhitektuuri, disainivalikuid ja rakenduse lähenemist tootmiskõlbuliku mitmeagendilise klienditoe vestlusroboti ehitamiseks jaemüüjale, millel on arenenud AI võimekused nagu laohaldus, dokumenditöötlus ja intelligentne kliendisuhtlus.
+**Õpieesmärk:** Mõista arhitektuuri, disainiotsuseid ja rakenduslähenemist tootmiskõlbliku mitmeagendilise klienditoe vestlusroboti ehitamiseks jaemüüjale, millel on täiustatud tehisintellekti võimed, sealhulgas laohaldus, dokumentide töötlemine ja nutikad kliendisuhtlused.
 
-**Tähtaeg:** Lugemine + mõistmine (2–3 tundi) | Täielik rakendus (80–120 tundi)
+**Aeg lõpetamiseks:** Lugemine + mõistmine (2–3 tundi) | Täielik rakendus (80–120 tundi)
 
 **Mida õpid:**
 - Mitmeagendilise arhitektuuri mustrid ja disainiprintsiibid
-- Mitmeregiooniline Microsoft Foundry mudelite juurutusstrateegia
-- AI Search integratsioon koos RAG (Retrieval-Augmented Generation) meetodiga
+- Mitme regiooni Microsoft Foundry mudelite juurutamisstrateegiad
+- AI Search integratsioon RAG-ga (tagasitoomisega täiustatud genereerimine)
 - Agendi hindamise ja turvatestimise raamistikud
-- Tootmisjuurutuse kaalutlused ja kulude optimeerimine
+- Tootmiskohased paigaldamisnõuded ja kulude optimeerimine
 
 ## Arhitektuuri eesmärgid
 
-**Õpetlik rõhk:** See arhitektuur demonstreerib ettevõtte tasandi mustreid mitmeagendiliste süsteemide jaoks.
+**Õppefookus:** See arhitektuur demonstreerib ettevõtte tasemel mustreid mitmeagendilise süsteemi jaoks.
 
-### Süsteeminõuded (Sinu rakenduse jaoks)
+### Süsteeminõuded (sinu rakenduseks)
 
-Tootmiskõlbulik klienditugi vajab:
-- **Mitmeid spetsialiseeritud agente** erinevate kliendivajaduste jaoks (Klienditeenindus + lao haldus)
-- **Mitme mudeli juurutust** koos nõuetekohase mahutavuse planeerimisega (gpt-4.1, gpt-4.1-mini, vektorembeddingud mitmes regioonis)
-- **Dünaamilist andmete integreerimist** AI Search ja failide üleslaadimisega (vektorotsing + dokumentide töötlemine)
-- **Põhjalikku jälgimist** ja hindamise võimalusi (Application Insights + kohandatud mõõdikud)
-- **Tootmisklassi turvalisust** punase meeskonna valideerimisega (haavatavuste skaneerimine + agendi hindamine)
+Tootmiskõlblik klienditugi nõuab:
+- **Mitut spetsialiseerunud agenti** erinevate kliendivajaduste jaoks (klienditeenindus + laohaldus)
+- **Mitme mudeli juurutust** sobiva võimsuse planeerimisega (gpt-4.1, gpt-4.1-mini, manused eri piirkondades)
+- **Dünaamilist andmete integreerimist** AI Search ja failide üleslaadimisega (vektorotsing + dokumenditöötlus)
+- **Kõikehõlmavat jälgimist** ja hindamisvõimalusi (Application Insights + kohandatud mõõdikud)
+- **Tootmisklassi turvalisust** punatiimi valideerimisega (haavatavuste skaneerimine + agendi hindamine)
 
 ### Mida see juhend pakub
 
-✅ **Arhitektuuri mustrid** - tõestatud disain skaleeritavate mitmeagendiliste süsteemide jaoks  
-✅ **Infrastruktuuri mallid** - ARM mallid kõikide Azure teenuste juurutuseks  
-✅ **Koodinäited** - võtmekomponentide viite-implementatsioonid  
-✅ **Konfiguratsiooni juhised** - samm-sammult paigaldusjuhised  
-✅ **Parimad tavad** - turvalisus, jälgimine, kulude optimeerimise strateegiad  
+✅ **Arhitektuuri mustrid** – tõestatud võimekas mitmeagendilise süsteemi disain  
+✅ **Infrastruktuurimallid** – ARM mallid kogu Azure teenuste paigaldamiseks  
+✅ **Koodinäited** – võtmekomponentide näidisrakendused  
+✅ **Seadistamise juhised** – samm-sammuline juhendamine  
+✅ **Parimad praktikad** – turvalisus, jälgimine, kulude optimeerimine  
 
-❌ **Ei sisalda** - täielikku töörakendust (nõuab arenduspingutust)
+❌ **Puudu** – täielik töökorras rakendus (nõuab arendust)
 
 ## 🗺️ Rakenduse teekaart
 
-### Faas 1: Arhitektuuri uurimine (2-3 tundi) - ALUSTA SIIT
+### 1. faas: arhitektuuri õppimine (2-3 tundi) – ALUSTA SIIT
 
-**Eesmärk:** Mõista süsteemi disaini ja komponentide omavahelist koostööd
+**Eesmärk:** Mõista süsteemi disaini ja komponentide vahelist koostööd
 
-- [ ] Loe see dokument läbi
-- [ ] Vaatle arhitektuuri skeemi ja komponentide suhteid
-- [ ] Mõista mitmeagendi mustreid ja disainivalikuid
-- [ ] Uuri agentide tööriistade ja marsruutimise koodinäiteid
-- [ ] Vaatle kulu- ja mahuplaani juhiseid
+- [ ] Loe see dokument täielikult läbi
+- [ ] Vaata arhitektuuri skeemi ja komponentide seoseid
+- [ ] Mõista mitmeagendilisi mustreid ja disainiotsuseid
+- [ ] Õpi koodinäiteid agendi tööriistade ja marsruutimise kohta
+- [ ] Vaata kulude hinnanguid ja võimsuse planeerimise juhiseid
 
-**Tulemus:** Selge arusaam, mida pead ehitama
+**Tulemus:** Selge arusaam, mida ehitada
 
-### Faas 2: Infrastruktuuri juurutamine (30–45 minutit)
+### 2. faas: infrastruktuuri paigaldus (30-45 minutit)
 
-**Eesmärk:** Hankida Azure ressursid ARM malli abil
+**Eesmärk:** Azure ressursside loomine ARM malli abil
 
 ```bash
 cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup -m standard
 ```
 
-**Mida juurutatakse:**
-- ✅ Microsoft Foundry mudelid (3 regioonis: gpt-4.1, gpt-4.1-mini, embeddings)
-- ✅ AI Search teenus (tühi, vajab indeksi määrangut)
-- ✅ Container Apps keskkond (kohatäitja pildid)
+**Mis paigaldatakse:**
+- ✅ Microsoft Foundry mudelid (3 piirkonda: gpt-4.1, gpt-4.1-mini, manused)
+- ✅ AI Search teenus (tühi, vajab indeksi seadistust)
+- ✅ Container Apps keskkond (kohatäited piltide jaoks)
 - ✅ Salvestuskontod, Cosmos DB, Key Vault
 - ✅ Application Insights jälgimine
 
-**Mis puudub:**
-- ❌ Agendi koodi implementatsioon
+**Puudub:**
+- ❌ Agendi rakenduskood
 - ❌ Marsruutimise loogika
 - ❌ Kasutajaliides
 - ❌ Otsingu indeksi skeem
-- ❌ Andmepipelines
+- ❌ Andmetorud
 
-### Faas 3: Rakenduse ehitus (80–120 tundi)
+### 3. faas: rakenduse ehitus (80-120 tundi)
 
-**Eesmärk:** Rakenda arhitektuur põhineb sellel juhendil
+**Eesmärk:** Teostada mitmeagendilist süsteemi vastavalt arhitektuurile
 
-1. **Agendi implementatsioon** (30–40 tundi)
-   - Baasklass ja liidesed
-   - Klienditeeninduse agent gpt-4.1-ga
-   - Laoagent gpt-4.1-mini-ga
-   - Tööriistade integratsioonid (AI Search, Bing, failitöötlus)
+1. **Agendi rakendus** (30-40 tundi)  
+   - Põhiagendi klass ja liidesed  
+   - Klienditeeninduse agent gpt-4.1 baasil  
+   - Laohalduse agent gpt-4.1-mini baasil  
+   - Tööriistade integreerimine (AI Search, Bing, failide töötlemine)
 
-2. **Marsruuti teenus** (12–16 tundi)
-   - Päringu klassifitseerimise loogika
-   - Agendi valik ja orkestreerimine
+2. **Marsruutimisteenus** (12-16 tundi)  
+   - Päringu klassifitseerimise loogika  
+   - Agendi valik ja orkestreerimine  
    - FastAPI/Express backend
 
-3. **Esipaneeli arendus** (20–30 tundi)
-   - Vestlusliidese UI
-   - Failide üleslaadimise funktsionaalsus
-   - Vastuste kuvamine
+3. **Kasutajaliidese arendus** (20-30 tundi)  
+   - Vestluse kasutajaliides  
+   - Failide üleslaadimise funktsionaalsus  
+   - Vastuse renderdamine
 
-4. **Andmepipeline** (8–12 tundi)
-   - AI Search indeksi loomine
-   - Dokumentide töötlemine Document Intelligence’iga
-   - Embeddingute genereerimine ja indekseerimine
+4. **Andmete torujuhe** (8-12 tundi)  
+   - AI Search indeksi loomine  
+   - Dokumentide töötlemine Document Intelligence abil  
+   - Manuste genereerimine ja indekseerimine
 
-5. **Jälgimine & hindamine** (10–15 tundi)
-   - Kohandatud telemetria
-   - Agendi hindamisraamistik
-   - Punase meeskonna turvakontroll
+5. **Jälgimine ja hindamine** (10-15 tundi)  
+   - Kohandatud telemeetriate rakendamine  
+   - Agendi hindamise raamistiku loomine  
+   - Punatiimi turvakontroller
 
-### Faas 4: Juurutamine ja testimine (8–12 tundi)
+### 4. faas: paigaldus ja testimine (8-12 tundi)
 
-- Koosta Docker pildid kõikidele teenustele
-- Lae need Azure Container Registry’sse
-- Uuenda Container Apps pärispiltidega
-- Sea keskkonnamuutujad ja saladused
-- Käivita hindamistestide iga
-- Teosta turvaskaneering
+- Kõigi teenuste Docker-piltide ehitus
+- Piltide tõstmine Azure Container Registry-sse
+- Container Apps uuendamine reaalsete piltidega
+- Keskkonnamuutujate ja saladuste seadistamine
+- Hindamistestide käivitamine
+- Turvaspetsiifilise skaneerimise teostamine
 
-**Kogu hinnanguline töömaht:** 80–120 tundi kogenud arendajatele
+**Kokku hinnanguline töömaht:** 80–120 tundi kogenud arendajale
 
 ## Lahenduse arhitektuur
 
@@ -139,39 +139,39 @@ cd retail-multiagent-arm-template
 ```mermaid
 graph TB
     User[👤 Klient] --> LB[Azure Front Door]
-    LB --> WebApp[Veebi esipaneel<br/>Konteinerirakendus]
+    LB --> WebApp[Veebi Esipind<br/>Konteineri Rakendus]
     
-    WebApp --> Router[Agendi marsruuter<br/>Konteinerirakendus]
-    Router --> CustomerAgent[Kliendiagent<br/>Klienditeenindus]
-    Router --> InvAgent[Laohaldusagent<br/>Laohaldus]
+    WebApp --> Router[Agentide Marsruutija<br/>Konteineri Rakendus]
+    Router --> CustomerAgent[Kliendiagent<br/>Klienditeenus]
+    Router --> InvAgent[Laohaldusagent<br/>Laohalduse]
     
     CustomerAgent --> OpenAI1[Microsoft Foundry mudelid<br/>gpt-4.1<br/>East US 2]
     InvAgent --> OpenAI2[Microsoft Foundry mudelid<br/>gpt-4.1-mini<br/>West US 2]
     
     CustomerAgent --> AISearch[Azure AI otsing<br/>Tootekataloog]
-    CustomerAgent --> BingSearch[Bing Search API<br/>Reaalajas info]
+    CustomerAgent --> BingSearch[Bing otsingu API<br/>Reaalajas info]
     InvAgent --> AISearch
     
-    AISearch --> Storage[Azure salvestus<br/>Dokumendid & failid]
-    Storage --> DocIntel[Dokumendi intellekt<br/>Sisu töötlemine]
+    AISearch --> Storage[Azure hoiustamine<br/>Dokumendid ja failid]
+    Storage --> DocIntel[Dokumendi intelligentsus<br/>Sisu töötlemine]
     
-    OpenAI1 --> Embeddings[Teksti manused<br/>ada-002<br/>Prantsusmaa Keskus]
+    OpenAI1 --> Embeddings[Tekstiembedingud<br/>ada-002<br/>Prantsusmaa Keskus]
     OpenAI2 --> Embeddings
     
-    Router --> AppInsights[Rakenduse Insights<br/>Jälgimine]
+    Router --> AppInsights[Rakenduse statistika<br/>Jälgimine]
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
-    GraderModel[gpt-4.1 hindaja<br/>Šveitsi põhjaosa] --> Evaluation[Hindamisraamistik]
-    RedTeam[Red Team skanner] --> SecurityReports[Turvaraportid]
+    GraderModel[gpt-4.1 hindaja<br/>Šveitsi Põhja] --> Evaluation[Hindamiskeskkond]
+    RedTeam[Punase meeskonna skanner] --> SecurityReports[Turvaraportid]
     
     subgraph "Andmekiht"
         Storage
         AISearch
-        CosmosDB[Cosmos DB<br/>Vestluste ajalugu]
+        CosmosDB[Cosmos DB<br/>Vestluse ajalugu]
     end
     
-    subgraph "AI teenused"
+    subgraph "Tehisintellekti teenused"
         OpenAI1
         OpenAI2
         Embeddings
@@ -180,10 +180,10 @@ graph TB
         BingSearch
     end
     
-    subgraph "Jälgimine & turvalisus"
+    subgraph "Jälgimine ja turvalisus"
         AppInsights
-        LogAnalytics[Log Analytics tööruum]
-        KeyVault[Azure võtmekogu<br/>Saladused & konfiguratsioon]
+        LogAnalytics[Logi analüütika tööruum]
+        KeyVault[Azure võtmekuur<br/>Saladused ja konfiguratsioon]
         RedTeam
         Evaluation
     end
@@ -197,26 +197,27 @@ graph TB
     style AISearch fill:#fce4ec
     style Storage fill:#f1f8e9
 ```
+
 ### Komponentide ülevaade
 
-| Komponent         | Eesmärk                              | Tehnoloogia           | Regioon          |
-|-------------------|------------------------------------|----------------------|------------------|
-| **Veebiesipaneel**| Kasutajaliides kliendisuhtluseks   | Container Apps        | Põhiregioon      |
-| **Agendi marsruutija**| Suunab päringud sobivale agendile | Container Apps        | Põhiregioon      |
-| **Klienditeeninduse agent** | Käsitleb klienditoe pöördumisi | Container Apps + gpt-4.1 | Põhiregioon  |
-| **Laoagent**      | Haldab laoseisu ja täitmist       | Container Apps + gpt-4.1-mini | Põhiregioon |
-| **Microsoft Foundry mudelid** | LLM järeldused agentidele    | Cognitive Services    | Mitmeregioon     |
-| **AI Search**     | Vektorotsing ja RAG                | AI Search teenus      | Põhiregioon      |
-| **Salvestuskonto**| Failide üleslaadimine ja dokumendid| Blob Storage          | Põhiregioon      |
-| **Application Insights** | Jälgimine ja telemeetria       | Monitor               | Põhiregioon      |
-| **Hindamismudel** | Agendi hindamise süsteem           | Microsoft Foundry mudelid | Sekundaarne regioon |
+| Komponent | Eesmärk | Tehnoloogia | Piirkond |
+|-----------|---------|-------------|----------|
+| **Veebiliides** | Kasutajaliides kliendisuhtluseks | Container Apps | Esmane piirkond |
+| **Agendi marsruutija** | Päringute suunamine sobivale agendile | Container Apps | Esmane piirkond |
+| **Kliendiagent** | Klienditeeninduse päringute töötlemine | Container Apps + gpt-4.1 | Esmane piirkond |
+| **Laohalduse agent** | Lao ja tarne haldamine | Container Apps + gpt-4.1-mini | Esmane piirkond |
+| **Microsoft Foundry mudelid** | LLM päringud agentidele | Azure AI Services | Mitme piirkonna tugi |
+| **AI Search** | Vektorotsing ja RAG | AI Search teenus | Esmane piirkond |
+| **Salvestuskonto** | Failide ja dokumentide hoius | Blob Storage | Esmane piirkond |
+| **Application Insights** | Jälgimine ja telemeetria | Monitor | Esmane piirkond |
+| **Hindamismudel** | Agendi hindamissüsteem | Microsoft Foundry mudelid | Sekundaarne piirkond |
 
 ## 📁 Projekti struktuur
 
 > **📍 Oleku legend:**  
 > ✅ = Olemas hoidlas  
-> 📝 = Viiteimplementatsioon (koodinäide selles dokumendis)  
-> 🔨 = Pead ise looma
+> 📝 = Viite rakendus (koodi näide selles dokumendis)  
+> 🔨 = Pead looma
 
 ```
 retail-multiagent-solution/              🔨 Your project directory
@@ -363,79 +364,79 @@ retail-multiagent-solution/              🔨 Your project directory
 
 ---
 
-## 🚀 Kiirkäivituse juhend: mida saad kohe teha
+## 🚀 Kiirkaas: mida saad praegu teha
 
-### Variant 1: Juuta ainult infrastruktuur (30 minutit)
+### Variant 1: Ainult infrastruktuuri paigaldus (30 minutit)
 
-**Mis saad:** Kõik Azure teenused on juurutatud ja valmis arenduseks
+**Mis saad:** Kõik Azure teenused loodud ja valmis arendamiseks
 
 ```bash
 # Klooni hoidla
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/retail-multiagent-arm-template
 
-# Deploy infrastruktuur
+# Käivita infrastruktuur
 ./deploy.sh -g myResourceGroup -m standard
 
-# Kontrolli paigaldust
+# Kontrolli juurutust
 az resource list --resource-group myResourceGroup --output table
 ```
 
 **Oodatav tulemus:**
-- ✅ Microsoft Foundry mudelid juurutatud (3 regioonis)
+- ✅ Microsoft Foundry mudelid juurutatud (3 piirkonda)
 - ✅ AI Search teenus loodud (tühi)
 - ✅ Container Apps keskkond valmis
 - ✅ Salvestus, Cosmos DB, Key Vault seadistatud
-- ❌ Töötavaid agente veel pole (ainult infrastruktuur)
+- ❌ Töökorras agente veel pole (ainult infrastruktuur)
 
-### Variant 2: Uuri arhitektuuri (2-3 tundi)
+### Variant 2: Arhitektuuri õppimine (2-3 tundi)
 
-**Mis saad:** Süviti arusaama mitmeagendiliste mustrite kohta
+**Mis saad:** Süva teadmised mitmeagendiliste mustrite kohta
 
-1. Loe kogu dokument läbi
-2. Vaata koodinäiteid iga komponendi kohta
-3. Mõista disainiotsuseid ja kompromisse
-4. Õpi kulude optimeerimise strateegiaid
-5. Planeeri rakenduslähenemine
+1. Loe see dokument täielikult läbi  
+2. Vaata koodinäiteid iga komponendi kohta  
+3. Mõista disainiotsuseid ja kompromisse  
+4. Uuri kulude optimeerimise strateegiaid  
+5. Planeeri oma rakendamise lähenemine
 
 **Oodatav tulemus:**
-- ✅ Selge mentaalne mudel süsteemi arhitektuurist
-- ✅ Kaardistatud vajalikud komponendid
-- ✅ Realistlikud töömahuhinnangud
+- ✅ Selge vaimne mudel süsteemi arhitektuurist  
+- ✅ Nõutavate komponentide mõistmine  
+- ✅ Realistlikud töömahu hinnangud  
 - ✅ Rakendusplaan
 
-### Variant 3: Ehita täielik süsteem (80–120 tundi)
+### Variant 3: Täieliku süsteemi ehitus (80-120 tundi)
 
-**Mis saad:** Tootmiskõlbulik mitmeagendiline lahendus
+**Mis saad:** Tootmiskõlblik mitmeagendiline lahendus
 
-1. **Faas 1:** Juurutamine (vt üleval)
-2. **Faas 2:** Agentide rakendamine (30–40 tundi)
-3. **Faas 3:** Marsruutimisteenus (12–16 tundi)
-4. **Faas 4:** Esipaneeli UI (20–30 tundi)
-5. **Faas 5:** Andmepipelines (8–12 tundi)
-6. **Faas 6:** Jälgimine & hindamine (10–15 tundi)
+1. **1. etapp:** infrastruktuuri paigaldus (nagu eespool)  
+2. **2. etapp:** agentide rakendamine, kasutades allolevaid koodinäiteid (30-40 tundi)  
+3. **3. etapp:** marsruutimisteenuse loomine (12-16 tundi)  
+4. **4. etapp:** kasutajaliidese ehitus (20-30 tundi)  
+5. **5. etapp:** andmetorude seadistamine (8-12 tundi)  
+6. **6. etapp:** jälgimise ja hindamise lisamine (10-15 tundi)
 
 **Oodatav tulemus:**
-- ✅ Täielikult toimiv mitmeagendiline süsteem
-- ✅ Tootmisklassi jälgimine
-- ✅ Turvalisuse valideerimine
-- ✅ Kuluefektiivne juurutus
+- ✅ Täielikult funktsionaalne mitmeagendiline süsteem  
+- ✅ Tootmisklassi jälgimine  
+- ✅ Turvalisuse valideerimine  
+- ✅ Kuluoptimeeritud paigaldus
 
 ---
 
-## 📚 Arhitektuuri viide ja implementeerimisjuhend
+## 📚 Arhitektuuri viited ja rakendusjuhend
 
-Järgmised sektsioonid sisaldavad üksikasjalikke arhitektuurimustreid, konfiguratsiooni näiteid ning viitekoodi sinu juhendamiseks.
+Järgmised sektsioonid pakuvad detailseid arhitektuuri mustreid, seadistuse näiteid ja viitekoodi suunamaks sinu rakendust.
 
-## Esialgsed konfiguratsiooninõuded
+## Algseadistuse nõuded
 
-### 1. Mitmed agentid ja konfiguratsioon
+### 1. Mitmed agentid ja seadistused
 
-**Eesmärk**: Juurutada 2 spetsialiseeritud agenti - "Customer Agent" (klienditeenindus) ja "Inventory" (laohaldus)
+**Eesmärk**: Paigaldada 2 spetsialiseerunud agenti - "Kliendiagent" (klienditugi) ja "Laoagent" (laohaldus)
 
-> **📝 Märkus:** Alljärgnevad azure.yaml ja Bicep konfiguratsioonid on **viitenäited**, mis näitavad, kuidas struktureerida mitmeagendilist juurutust. Pead need failid ja vastavad agendi implementatsioonid ise looma.
+> **📝 Märkus:** Järgnevad azure.yaml ja Bicep konfiguratsioonid on **viitenäited** mitmeagendilise paigalduse struktuuri demonstreerimiseks. Pead looma need failid ja vastavad agendi rakendused.
 
-#### Konfiguratsiooni sammud:
+#### Seadistamise sammud:
 
 ```yaml
 # azure.yaml - Agent Configuration
@@ -507,11 +508,11 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 }]
 ```
 
-### 2. Mitmed mudelid ja mahuplaanimine
+### 2. Mitmed mudelid koos võimsuse planeerimisega
 
-**Eesmärk**: Juurutada vestlusmudel (Customer), embedding mudel (otsing) ja põhjendamise mudel (grader) koos nõuetekohase mahukontrolliga
+**Eesmärk:** Paigaldada jutumudel (kliendiagent), manuste mudel (otsing) ning hindamismudel (grader) koos sobiva kvotihaldusega
 
-#### Mitmeregiooniline strateegia:
+#### Mitme regiooni strateegia:
 
 ```bicep
 // infra/models.bicep
@@ -555,7 +556,7 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
 }
 ```
 
-#### Regiooni tagasipöördumine:
+#### Piirkondlik varuplaan:
 
 ```yaml
 # .azure/env/.env.production
@@ -564,11 +565,11 @@ AZURE_OPENAI_FALLBACK_ENABLED=true
 MODEL_CAPACITY_REQUIREMENTS='{"gpt-4.1": 35, "text-embedding-ada-002": 30}'
 ```
 
-### 3. AI Search andmete indeksi seadistus
+### 3. AI Search andmestruktuuri seadistus
 
-**Eesmärk**: Konfigureerida AI Search andmevärskendusteks ja automaatseks indekseerimiseks
+**Eesmärk:** Seadistada AI Search andmete uuendamiseks ja automaatseks indekseerimiseks
 
-#### Eeltäidetav kinnitus:
+#### Eelpakkumise kontekst:
 
 ```bash
 #!/bin/bash
@@ -576,7 +577,7 @@ MODEL_CAPACITY_REQUIREMENTS='{"gpt-4.1": 35, "text-embedding-ada-002": 30}'
 
 echo "Setting up AI Search configuration..."
 
-# Loo otsinguteenuse konkreetse SKU-ga
+# Loo otsinguteenindus kindla SKU-ga
 az search service create \
   --name "$AZURE_SEARCH_SERVICE_NAME" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -585,7 +586,7 @@ az search service create \
   --replica-count 1
 ```
 
-#### Pärast juurutust andmete seadistus:
+#### Pärast ressursside loomist andmete seadistamine:
 
 ```bash
 #!/bin/bash
@@ -596,13 +597,13 @@ echo "Configuring AI Search indexes and uploading initial data..."
 # Hangi otsinguteenuse võti
 SEARCH_KEY=$(az search admin-key show --service-name "$AZURE_SEARCH_SERVICE_NAME" --resource-group "$AZURE_RESOURCE_GROUP" --query primaryKey -o tsv)
 
-# Loo indeksiskeem
+# Loo indeksi skeem
 curl -X POST "https://$AZURE_SEARCH_SERVICE_NAME.search.windows.net/indexes?api-version=2023-11-01" \
   -H "Content-Type: application/json" \
   -H "api-key: $SEARCH_KEY" \
   -d @"./infra/search-schema.json"
 
-# Laadi üles algdokumendid
+# Laadi üles esialgsed dokumendid
 python ./scripts/upload_search_data.py \
   --search-service "$AZURE_SEARCH_SERVICE_NAME" \
   --search-key "$SEARCH_KEY" \
@@ -634,11 +635,11 @@ python ./scripts/upload_search_data.py \
 }
 ```
 
-### 4. Agendi tööriist AI Search'iga
+### 4. Agendi tööriistade seadistus AI Search kasutamiseks
 
-**Eesmärk**: Seadistada agent kasutama AI Search'i maandamisvahendina
+**Eesmärk:** Seadistada agendid kasutama AI Searchi taustapõhjana
 
-#### Agendi otsingu tööriista implementatsioon:
+#### Agendi otsingu tööriista rakendus:
 
 ```python
 # src/agents/tools/search_tool.py
@@ -682,7 +683,7 @@ class SearchTool:
         return [doc async for doc in results]
 ```
 
-#### Agendi integratsioon:
+#### Agendi integreerimine:
 
 ```python
 # src/agents/customer_agent.py
@@ -701,7 +702,7 @@ class CustomerAgent:
         # Valmista ette kontekst LLM-ile
         context = "\n".join([doc['content'] for doc in search_results[:3]])
         
-        # Genereeri vastus põhjendusega
+        # Genereeri vastus koos tõenditega
         response = await self.openai_client.chat.completions.create(
             model="gpt-4.1",
             messages=[
@@ -713,9 +714,9 @@ class CustomerAgent:
         return response.choices[0].message.content
 ```
 
-### 5. Failide üleslaadimise salvestuse integratsioon
+### 5. Failide üleslaadimise salvestusintegreerimine
 
-**Eesmärk**: Lubada agendil töödelda üleslaaditud faile (juhendid, dokumendid) RAG kontekstis
+**Eesmärk:** Lubada agentidel töödelda üleslaaditud faile (juhendid, dokumendid) RAG konteksti jaoks
 
 #### Salvestuse konfiguratsioon:
 
@@ -756,7 +757,7 @@ resource eventGridTopic 'Microsoft.EventGrid/topics@2023-12-15-preview' = {
 }
 ```
 
-#### Dokumentide töötlemise pipeline:
+#### Dokumentide töötlemise andmetoru:
 
 ```python
 # src/document_processor.py
@@ -782,7 +783,7 @@ class DocumentProcessor:
             blob=blob_name
         )
         
-        # Teksti eraldamine Document Intelligence abil
+        # Teksti väljavõtmine Document Intelligence'i abil
         blob_url = blob_client.url
         poller = await self.doc_intel_client.begin_analyze_document(
             "prebuilt-read", 
@@ -790,19 +791,19 @@ class DocumentProcessor:
         )
         result = await poller.result()
         
-        # Tekstisisu eraldamine
+        # Tekstisisu väljavõtmine
         text_content = ""
         for page in result.pages:
             for line in page.lines:
                 text_content += line.content + "\n"
         
-        # Embeddingute genereerimine
+        # Sisendvektorite genereerimine
         embedding_response = await self.openai_client.embeddings.create(
             model="text-embedding-ada-002",
             input=text_content
         )
         
-        # Indekseerimine AI Searchis
+        # Indekseerimine AI otsingus
         document = {
             "id": blob_name.replace(".", "_"),
             "title": blob_name,
@@ -814,9 +815,9 @@ class DocumentProcessor:
         await self.search_client.upload_documents([document])
 ```
 
-### 6. Bing Otsingu integratsioon
+### 6. Bing Search integratsioon
 
-**Eesmärk**: Lisada Bing Search'i võimekus reaalajas info saamiseks
+**Eesmärk:** Lisada Bing Search reaalajas info saamiseks
 
 #### Bicep ressursi lisamine:
 
@@ -880,13 +881,13 @@ class BingSearchTool:
 
 ---
 
-## Jälgimine ja jälgitavus
+## Jälgimine ja nähtavus
 
-### 7. Trace ja Application Insights
+### 7. Trace-logid ja Application Insights
 
-**Eesmärk**: Põhjalik jälgimine trace logide ja rakenduse insightidega
+**Eesmärk:** Kõikehõlmav jälgimine trace-logide ja rakenduse analüütikaga
 
-#### Application Insights konfiguratsioon:
+#### Application Insights seadistus:
 
 ```bicep
 // infra/monitoring.bicep
@@ -939,7 +940,7 @@ resource agentPerformanceAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-#### Kohandatud telemeetia implementatsioon:
+#### Kohandatud telemeetriate rakendus:
 
 ```python
 # src/telemetry/agent_telemetry.py
@@ -984,7 +985,7 @@ class AgentTelemetry:
         """Track search operation performance"""
         properties = {
             'search_type': search_type,
-            'query': query[:100],  # Privaatsuse huvides kärpimine
+            'query': query[:100],  # Privaatsuse huvides lühendada
             'results_found': str(results_count > 0)
         }
         
@@ -1045,11 +1046,11 @@ class AgentTelemetry:
         return len(text) // 4
 ```
 
-### 8. Punase meeskonna turvakontroll
+### 8. Punatiimi turva kontrollid
 
-**Eesmärk**: Automatiseeritud turvatestimine agentidele ja mudelitele
+**Eesmärk:** Automatiseeritud turv тестimine agentidele ja mudelitele
 
-#### Punase meeskonna konfiguratsioon:
+#### Punatiimi seadistus:
 
 ```python
 # src/security/red_team_scanner.py
@@ -1097,7 +1098,7 @@ class RedTeamScanner:
                     'details': strategy_result['details']
                 })
         
-        # Arvuta üldine turvalisuse hinnang
+        # Arvuta üldine turvalisuse skoor
         scan_results['overall_score'] = self._calculate_security_score(scan_results)
         
         return scan_results
@@ -1165,8 +1166,8 @@ class RedTeamScanner:
     
     async def _send_test_prompt(self, prompt: str) -> str:
         """Send test prompt to target agent"""
-        # Rakendus saadaks HTTP-päringu agendi lõpp-punktile
-        # Demonstreerimise eesmärgil tagastatakse kohatäide
+        # Rakendus saadaks HTTP päringu agendi lõpp-punkti
+        # Demo eesmärkidel tagastatakse kohatäitja
         import aiohttp
         
         async with aiohttp.ClientSession() as session:
@@ -1223,14 +1224,14 @@ class RedTeamScanner:
         total_strategies = len(scan_results['strategies_tested'])
         vulnerabilities = len(scan_results['vulnerabilities_found'])
         
-        # Põhihindamine: 100 - (haavatavused / kokku * 100)
+        # Baasskoorimine: 100 - (haavatavused / kokku * 100)
         if total_strategies == 0:
             return 100.0
         
         vulnerability_ratio = vulnerabilities / total_strategies
         base_score = max(0, 100 - (vulnerability_ratio * 100))
         
-        # Hindamise vähendamine vastavalt kriitilisusele
+        # Skoori vähendamine vastavalt tõsidusele
         severity_penalty = 0
         for vuln in scan_results['vulnerabilities_found']:
             severity_weights = {'low': 5, 'medium': 15, 'high': 30, 'critical': 50}
@@ -1240,7 +1241,7 @@ class RedTeamScanner:
         return round(final_score, 2)
 ```
 
-#### Automaatne turvapiipeliin:
+#### Automatiseeritud turvapipeline:
 
 ```bash
 #!/bin/bash
@@ -1248,13 +1249,13 @@ class RedTeamScanner:
 
 echo "Starting Red Team Security Scan..."
 
-# Saa agenti ots punkt paigutusest
+# Saa agendi lõpp-punkt paigutusest
 AGENT_ENDPOINT=$(az containerapp show \
   --name "agent-customer" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# Käivita turvakontroll
+# Käivita turvalisuse skaneerimine
 python -m src.security.red_team_scanner \
   --endpoint "https://$AGENT_ENDPOINT" \
   --api-key "$AGENT_API_KEY" \
@@ -1266,9 +1267,9 @@ echo "Security scan completed. Check security_reports/ for results."
 
 ### 9. Agendi hindamine grader mudeliga
 
-**Eesmärk**: Juurutada hindamissüsteem pühendatud grader mudeliga
+**Eesmärk:** Paigaldada hindamissüsteem spetsiaalse grader mudeliga
 
-#### Grader mudeli konfiguratsioon:
+#### Grader mudeli seadistus:
 
 ```bicep
 // infra/evaluation.bicep
@@ -1311,7 +1312,7 @@ resource graderDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023
 }
 ```
 
-#### Hindamisraamistik:
+#### Hindamisraamistiku seadistused:
 
 ```python
 # src/evaluation/agent_evaluator.py
@@ -1425,7 +1426,7 @@ class AgentEvaluator:
                 max_tokens=500
             )
             
-            # Analüüsi JSON vastust
+            # Töötle JSON vastus
             grading_text = grader_response.choices[0].message.content
             grading_result = json.loads(grading_text)
             
@@ -1471,7 +1472,7 @@ class AgentEvaluator:
             if criterion_scores:
                 summary['criteria_averages'][criterion] = sum(criterion_scores) / len(criterion_scores)
         
-        # Tulemuste hindamine
+        # Tulemuslikkuse hinnang
         avg_score = summary['average_overall_score']
         if avg_score >= 4.5:
             summary['performance_rating'] = 'Excellent'
@@ -1487,7 +1488,7 @@ class AgentEvaluator:
         return summary
 ```
 
-#### Testjuhtumite konfiguratsioon:
+#### Testjuhtumite seadistus:
 
 ```json
 // tests/evaluation_test_cases.json
@@ -1526,13 +1527,13 @@ class AgentEvaluator:
 
 ---
 
-## Kohandamine ja värskendused
+## Kohandamine ja uuendused
 
 ### 10. Container App kohandamine
 
-**Eesmärk**: Uuendada konteinerirakenduse konfiguratsiooni ja asendada see kohandatud UI-ga
+**Eesmärk:** Uuendada konteinerirakenduse konfiguratsiooni ja asendada kohandatud UI-ga
 
-#### Dünaamiline konfiguratsioon:
+#### Dünaamiline seadistus:
 
 ```yaml
 # azure.yaml - Container App Configuration
@@ -1548,7 +1549,7 @@ services:
       CUSTOM_LOGO_URL: ${LOGO_URL}
 ```
 
-#### Kohandatud esipaneeli ehitus:
+#### Kohandatud esikülje ehitus:
 
 ```dockerfile
 # src/frontend/Dockerfile
@@ -1575,7 +1576,7 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 ```
 
-#### Ehituse ja juurutuse skript:
+#### Ehitus- ja paigaldusskript:
 
 ```bash
 #!/bin/bash
@@ -1583,7 +1584,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 echo "Building and deploying custom frontend..."
 
-# Ehita kohandatud pilt keskkonnamuutujatega
+# Koosta kohandatud pilt keskkonnamuutujatega
 docker build \
   --build-arg AGENT_NAME="$CUSTOMER_AGENT_NAME" \
   --build-arg COMPANY_NAME="retail Retail" \
@@ -1591,7 +1592,7 @@ docker build \
   -t retail-frontend:latest \
   ./src/frontend
 
-# Saada Azure Container Registry-sse
+# Lükka Azure Container Registry-sse
 az acr build \
   --registry "$AZURE_CONTAINER_REGISTRY" \
   --image "retail-frontend:latest" \
@@ -1608,23 +1609,23 @@ echo "Frontend deployed successfully!"
 
 ---
 
-## 🔧 Tõrkeotsingu juhend
+## 🔧 Veaotsingu juhend
 
 ### Levinumad probleemid ja lahendused
 
 #### 1. Container Apps kvotipiirangud
 
-**Probleem:** Juurutus ebaõnnestub piirkondliku kvota piirangu tõttu
+**Probleem:** Paigaldus ebaõnnestub piirkondlike kvotipiirangute tõttu
 
 **Lahendus:**
 ```bash
-# Kontrolli praegust kvotaaži kasutust
+# Kontrolli praegust kvota kasutust
 az containerapp env show \
   --name "$CONTAINER_APPS_ENVIRONMENT" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.workloadProfiles"
 
-# Taotle kvotaaži suurendamist
+# Taotle kvota suurendamist
 az support tickets create \
   --ticket-name "ContainerApps-Quota-Increase" \
   --severity "minimal" \
@@ -1647,7 +1648,7 @@ import json
 
 def check_model_versions():
     """Check for latest model versions"""
-    # See kutsub Microsoft Foundry mudelite API praeguste versioonide saamiseks
+    # See kutsub Microsoft Foundry Models API, et saada praegused versioonid
     latest_versions = {
         "gpt-4.1": "2024-11-20",
         "text-embedding-ada-002": "2", 
@@ -1664,7 +1665,7 @@ def update_bicep_templates(latest_versions):
     """Update Bicep templates with latest versions"""
     template_path = "./infra/models.bicep"
     
-    # Loe ja uuenda mall
+    # Loobu ja uuenda malli
     with open(template_path, 'r') as f:
         content = f.read()
     
@@ -1684,9 +1685,9 @@ if __name__ == "__main__":
     update_bicep_templates(versions)
 ```
 
-#### 3. Täpsustamise (fine-tuning) integratsioon
+#### 3. Täiustuste integreerimine
 
-**Probleem:** Kuidas integreerida täpsustatud mudelid AZD juurutusse
+**Probleem:** Kuidas integreerida peenhäälestatud mudeleid AZD paigaldusega
 
 **Lahendus:**
 ```python
@@ -1726,8 +1727,8 @@ class FineTuningPipeline:
             fine_tuned_model = job.fine_tuned_model
             print(f"Fine-tuned model ready: {fine_tuned_model}")
             
-            # Uuenda paigaldust, et kasutada peenhäälestatud mudelit
-            # See kutsub Azure CLI-d paigalduse uuendamiseks
+            # Uuenda juurutamist, et kasutada peenhäälestatud mudelit
+            # See kutsuks Azure CLI-d juurutamise uuendamiseks
             return fine_tuned_model
         else:
             print(f"Job status: {job.status}")
@@ -1736,13 +1737,13 @@ class FineTuningPipeline:
 
 ---
 
-## KKK ja avatud uurimine
+## KKK ja avatud uurimisvõimalused
 
-### Korduma kippuvad küsimused
+### Sageli esitatud küsimused
 
-#### K: Kas on lihtne viis juurutada mitut agenti (disainimuster)?
+#### K: Kas on lihtne viis paigaldada mitu agenti (disainimuster)?
 
-**V: Jah! Kasuta Multi-Agent mustrit:**
+**V: Jah! Kasuta mitmeagendilist mustrit:**
 
 ```yaml
 # azure.yaml - Multi-Agent Configuration
@@ -1759,12 +1760,12 @@ services:
         }
 ```
 
-#### K: Kas saan juurutada "model routeri" mudelina (kuluaspektid)?
+#### K: Kas saan paigaldada "mudelimarsruutija" mudelina (kulusid arvestades)?
 
 **V: Jah, hoolika kaalumisega:**
 
 ```python
-# Mudeli marsruuter rakendus
+# Mudelirouteri rakendus
 class ModelRouter:
     def __init__(self):
         self.routing_rules = {
@@ -1784,18 +1785,18 @@ class ModelRouter:
     
     def estimate_cost_savings(self, usage_patterns: dict):
         """Estimate cost savings from intelligent routing"""
-        # Rakendus arvutaks võimalikud säästud
+        # Rakendus arvutaks võimalikke sääste
         pass
 ```
 
-**Kulutused:**
-- **Säästud**: 60–80% kulude vähendamine lihtsate päringute korral
-- **Kompromissid**: Veidi kõrgem latentsus marsruutimisloogikas
-- **Jälgimine**: Jälgi täpsust vs kulusid
+**Kulukonsekventsid:**
+- **Sääst:** 60-80% kulude vähendamine lihtsate päringute korral  
+- **Kompromiss:** Marsruutimisloogika veidi suurem latentsus  
+- **Jälgimine:** Täpsuse ja kulu mõõdikute jälgimine
 
-#### K: Kas saan alustada fine-tuning töötlust azd mallist?
+#### K: Kas saan alustada peenhäälestamise tööd azd mallist?
 
-**V: Jah, kasutades post-provisioning hook’e:**
+**V: Jah, post-provision hookide kaudu:**
 
 ```bash
 #!/bin/bash
@@ -1808,7 +1809,7 @@ TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
   --data-path "./data/fine_tuning/training.jsonl" \
   --openai-key "$AZURE_OPENAI_API_KEY")
 
-# Alusta peenhäälestuse tööd
+# Alusta peenhäälestuse ülesannet
 FINE_TUNE_JOB_ID=$(python scripts/start_fine_tuning.py \
   --training-file-id "$TRAINING_FILE_ID" \
   --model "gpt-4.1-mini")
@@ -1822,7 +1823,7 @@ echo "Monitor progress with: azd hooks run monitor-fine-tuning"
 
 ### Täiustatud stsenaariumid
 
-#### Mitmeregiooniline juurutusstrateegia
+#### Mitmeregiooni juurutamisstrateegia
 
 ```bicep
 // infra/multi-region.bicep
@@ -1882,7 +1883,7 @@ class CostOptimizer:
                     'estimated_savings': usage['monthly_cost'] * 0.3
                 })
         
-        # Tippaja analüüs
+        # Tippkoormuse analüüs
         peak_patterns = self.analytics.get_peak_patterns()
         if peak_patterns['variance'] > 0.6:
             recommendations.append({
@@ -1903,65 +1904,66 @@ class CostOptimizer:
 ```
 
 ---
-## ✅ Valmis kasutamiseks ARM mall
 
-> **✨ SEE OLEMAS JA TÖÖTAB TÕESTI!**  
-> Erinevalt ülaltoodud kontseptuaalsetest koodinäidetest, on ARM mall **tõeline, töötav taristu juurutus**, mis on kaasatud sellesse hoidlasisse.
+## ✅ Valmis juurutamiseks ARM-mall
+
+> **✨ SEE TEGELIKULT OLEMAS JA TOIMIB!**  
+> Erinevalt ülaltoodud kontseptuaalsetest koodinäidetest on ARM-mall **reaalne, töötav infrastruktuuri juurutamine**, mis on kaasatud sellesse hoidlast.
 
 ### Mida see mall tegelikult teeb
 
-ARM mall kaustas [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) juurutab **kogu Azure'i taristu**, mis on vajalik multi-agent süsteemi jaoks. See on **ainus valmis kasutamiseks komponent** – kõik muu vajab arendust.
+ARM-mall aadressil [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) loob **kogu Azure infrastruktuuri**, mida mitmeagendiline süsteem vajab. See on **ainus valmis kasutamiseks komponent** - kõik muu vajab arendust.
 
-### Mis on ARM mallis kaasas
+### Mida ARM-mall sisaldab
 
-ARM mall kaustas [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) sisaldab:
+ARM-mall, mis asub aadressil [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template), sisaldab:
 
-#### **Täielik taristu**
+#### **Täielik infrastruktuur**
 - ✅ **Mitme regiooni Microsoft Foundry mudelite** juurutused (gpt-4.1, gpt-4.1-mini, embeddings, grader)
-- ✅ **Azure AI Search** vektorotsingu funktsionaalsusega
-- ✅ **Azure Storage** dokumentide ja üleslaadimise konteineritega
+- ✅ **Azure AI Search** koos vektorotsingu võimalustega
+- ✅ **Azure Storage** dokumentide ja üleslaadimiste konteineritega
 - ✅ **Container Apps keskkond** automaatse skaleerimisega
-- ✅ **Agent Router & Frontend** konteinerrakendused
-- ✅ **Cosmos DB** vestlusajaloo säilitamiseks
-- ✅ **Application Insights** põhjalikuks monitooringuks
-- ✅ **Key Vault** turvaliseks saladuste halduseks
-- ✅ **Document Intelligence** failitöötluseks
-- ✅ **Bing Search API** reaalajas info jaoks
+- ✅ **Agent Router & Frontend** konteinerirakendused
+- ✅ **Cosmos DB** vestluste ajaloo säilitamiseks
+- ✅ **Application Insights** täielikuks jälgimiseks
+- ✅ **Key Vault** turvaliseks saladuste haldamiseks
+- ✅ **Document Intelligence** failide töötlemiseks
+- ✅ **Bing Search API** reaalajas info leidmiseks
 
 #### **Juurutusrežiimid**
-| Režiim | Kasutusjuhtum | Ressursid | Hinnanguline Kulu/kuus |
-|--------|---------------|-----------|-----------------------|
-| **Minimaalne** | Arendus, testimine | Põhi SKU-d, ühe regiooni | $100-370 |
-| **Standard** | Tootmine, mõõdukas maht | Standard SKU-d, mitme regiooni | $420-1,450 |
-| **Premium** | Ettevõte, suur maht | Premium SKU-d, HA konfiguratsioon | $1,150-3,500 |
+| Režiim | Kasutusjuhtum | Ressursid | Hinnanguline kulu/kuus |
+|--------|---------------|-----------|------------------------|
+| **Minimaalne** | Arendus, testimine | Põhiskuud, üks region | 100–370 $ |
+| **Standard** | Tootmine, mõõdukas maht | Standardseid SKUd, mitme regioniga | 420–1450 $ |
+| **Premium** | Ettevõte, suur maht | Premium SKUd, kõrge kättesaadavusega | 1150–3500 $ |
 
-### 🎯 Kiirjuurutuse valikud
+### 🎯 Kiired juurutusvõimalused
 
-#### Valik 1: Ühe klõpsuga Azure juurutus
+#### Variant 1: Ühe klõpsuga Azure juurutus
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-#### Valik 2: Azure CLI juurutus
+#### Variant 2: Azure CLI juurutus
 
 ```bash
 # Klooni hoidla
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/examples/retail-multiagent-arm-template
 
-# Tee juurutusskript täidetavaks
+# Tee juurutusskript käivitatavaks
 chmod +x deploy.sh
 
-# Juuruta vaikeseadetega (Standardrežiim)
+# Juuruta vaikeseadete järgi (Standardrežiim)
 ./deploy.sh -g myResourceGroup
 
-# Juuruta tootmiseks koos Premium-funktsioonidega
+# Juuruta tootmiseks koos premium-funktsioonidega
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 
 # Juuruta minimaalne versioon arenduseks
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
-#### Valik 3: Otsene ARM malli juurutus
+#### Variant 3: Otse ARM-malli juurutus
 
 ```bash
 # Loo ressursigrupp
@@ -1977,7 +1979,7 @@ az deployment group create \
 
 ### Malli väljundid
 
-Pärast edukat juurutust saate:
+Pärast edukat juurutust saad:
 
 ```json
 {
@@ -1991,11 +1993,11 @@ Pärast edukat juurutust saate:
 }
 ```
 
-### 🔧 Järgnevad seadistused pärast juurutust
+### 🔧 Pärast juurutust seadistamine
 
-ARM mall haldab taristu juurutamist. Pärast juurutust:
+ARM-mall hoolitseb infrastruktuuri loomise eest. Pärast juurutust:
 
-1. **Konfigureeri otsinguindeks**:
+1. **Konfigureeri otsingukataloog**:
    ```bash
    # Kasutage antud otsinguskeemi
    curl -X POST "${SEARCH_ENDPOINT}/indexes?api-version=2023-11-01" \
@@ -2006,16 +2008,16 @@ ARM mall haldab taristu juurutamist. Pärast juurutust:
 
 2. **Laadi üles esialgsed dokumendid**:
    ```bash
-   # Laadige üles toote juhendid ja teadmistebaas
+   # Laadi üles toote käsiraamatud ja teadmistebaas
    az storage blob upload-batch \
      --destination documents \
      --source ../data/initial-docs \
      --account-name ${STORAGE_ACCOUNT}
    ```
 
-3. **Juuruta agendi kood**:
+3. **Juuruta agentide kood**:
    ```bash
-   # Ehitage ja juurutage tegelikke agendi rakendusi
+   # Koostage ja juurutage tegelikud agendi rakendused
    docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
    az containerapp update \
      --name retail-router \
@@ -2023,9 +2025,9 @@ ARM mall haldab taristu juurutamist. Pärast juurutust:
      --image myregistry.azurecr.io/agent-router:latest
    ```
 
-### 🎛️ Kohandamisvalikud
+### 🎛️ Kohandamisvõimalused
 
-Redigeeri `azuredeploy.parameters.json` fail oma juurutuse kohandamiseks:
+Muuda `azuredeploy.parameters.json` faili, et kohandada juurutust:
 
 ```json
 {
@@ -2041,145 +2043,145 @@ Redigeeri `azuredeploy.parameters.json` fail oma juurutuse kohandamiseks:
 
 ### 📊 Juurutuse funktsioonid
 
-- ✅ **Eeltingimuste valideerimine** (Azure CLI, kvoodid, õigused)
-- ✅ **Mitme regiooni kõrge kättesaadavus** automaatse varundusega
-- ✅ **Põhjalik monitooring** Application Insights ja Log Analytics abil
-- ✅ **Turvalisuse parimad praktikad** Key Vault ja RBAC-ga
-- ✅ **Kuluoptimeerimine** seadistatavate juurutusrežiimidega
+- ✅ **Eeltingimuste valideerimine** (Azure CLI, kvotaadid, õigused)
+- ✅ **Mitme regiooni kõrge kättesaadavus** automaatse üleminemisega
+- ✅ **Terviklik jälgimine** Application Insights ja Log Analytics abil
+- ✅ **Turvalisuse parimad tavad** Key Vaulti ja RBAC-iga
+- ✅ **Kulu optimeerimine** konfigureeritavate juurutusrežiimidega
 - ✅ **Automaatne skaleerimine** vastavalt nõudlusele
-- ✅ **Nullseisakuga uuendused** Container Apps revisjonidega
+- ✅ **Nullseiskamisega uuendused** Container Apps revisionide kaudu
 
-### 🔍 Monitooring ja haldus
+### 🔍 Jälgimine ja haldus
 
-Pärast juurutust jälgi lahendust järgmiste tööriistade kaudu:
+Pärast juurutust jälgi oma lahendust:
 
-- **Application Insights**: jõudlusmõõdikud, sõltuvuste jälgimine ja kohandatud telemeetria
-- **Log Analytics**: tsentraliseeritud logimine kõigist komponentidest
-- **Azure Monitor**: ressursside terviseseisundi ja saadavuse monitooring
-- **Kulude haldamine**: reaalajas kulujälgimine ja eelarvehäired
-
----
-
-## 📚 Täielik juurutusjuhend
-
-See stsenaariumidokument koos ARM malliga annab kõik, mida on vaja multi-agent klienditoe lahenduse tootmisvalmis juurutamiseks. Juurutus hõlmab:
-
-✅ **Arhitektuuri disain** - Põhjalik süsteemi disain koos komponentide suhetega  
-✅ **Taristu juurutamine** - Täielik ARM mall ühe klõpsuga juurutamiseks  
-✅ **Agendi seadistamine** - Detailne kliendi ja laoseisu agentide seadistamine  
-✅ **Mitme mudeli juurutus** - Mudelite strateegiline paigutus piirkondade vahel  
-✅ **Otsingu integreerimine** - AI Search koos vektoritega ja andmete indekseerimine  
-✅ **Turbe rakendus** - Red teaming, haavatavuse skaneerimine ja turvalisuse praktikad  
-✅ **Monitooring ja hindamine** - Põhjalik telemeetria ja agentide hindamise raamistik  
-✅ **Tootmisvalmidus** - Ettevõttetaseme juurutus HA ja katastroofitaastamisega  
-✅ **Kuluoptimeerimine** - Intelligentsed marsruudid ja kasutuspõhine skaleerimine  
-✅ **Veaotsingu juhend** - Levinud probleemid ja lahendused
+- **Application Insights**: jõudlusnäitajad, sõltuvuste jälgimine ja kohandatud telemeetria
+- **Log Analytics**: kõigi komponentide tsentraliseeritud logimine
+- **Azure Monitor**: ressursside tervis ja kättesaadavus
+- **Kulukorraldus**: reaalajas kulude jälgimine ja eelarvehoiatused
 
 ---
 
-## 📊 Kokkuvõte: Mida Sa Õppisid
+## 📚 Täielik rakendusjuhend
+
+See stsenaarium koos ARM-malliga annab kõik vajaliku mitmeagendilise klienditoe lahenduse tootmiskõlblikuks juurutamiseks. Juurutamine sisaldab:
+
+✅ **Arhitektuuri kujundus** - süsteemi põhjalik disain koos komponentide seostega  
+✅ **Infrastruktuuri loomine** - täielik ARM-mall ühe klõpsuga juurutamiseks  
+✅ **Agentide seadistus** - põhjalik häälestus kliendi ja laoseisu agentidele  
+✅ **Mitmemudeline juurutus** - strateegiline mudelite paigutus piirkondades  
+✅ **Otsing integratsioon** - AI Search koos vektorite ja andmeindeksiga  
+✅ **Turvalisuse rakendamine** - red teaming, haavatavuste skaneerimine ja turvapraktikad  
+✅ **Jälgimine ja hindamine** - põhjalik telemeetria ja agentide hindamise raamistik  
+✅ **Tootmiskõlblikkus** - ettevõtte-tasemel juurutus HA ja katastroofitaastusega  
+✅ **Kuluoptimeerimine** - nutikas marsruutimine ja kasutusel põhinev skaleerimine  
+✅ **Tõrkeotsingu juhend** - levinud probleemid ja lahendused
+
+---
+
+## 📊 Kokkuvõte: Mida oled õppinud
 
 ### Kaetud arhitektuurimustrid
 
-✅ **Multi-agendi süsteemidisain** - Erilised agendid (klient ja laoseis) pühendatud mudelitega  
-✅ **Mitme regiooni juurutus** - Mudelite strateegiline paigutus kuluoptimeerimiseks ja varundamiseks  
-✅ **RAG arhitektuur** - AI Search integratsioon vektorite ja embeddings'itega põhjalike vastuste jaoks  
-✅ **Agendi hindamine** - Pühendatud grader mudel kvaliteedi hindamiseks  
-✅ **Turberaamistik** - Red teaming ja haavatavuste skaneerimise mustrid  
-✅ **Kuluoptimeerimine** - Mudelite marsruutimise ja mahupõhise planeerimise strateegiad  
-✅ **Tootmise monitooring** - Application Insights koos kohandatud telemeetriaga  
+✅ **Mitmeagendiline süsteemi disain** - spetsialiseeritud agendid (Kliendi + Laoseisu) pühendatud mudelitega  
+✅ **Mitmeregiooniline juurutus** - strateegiline mudelite paigutus kulude optimeerimiseks ja usaldusväärsuse tõstmiseks  
+✅ **RAG arhitektuur** - AI Search vektorite jaotiseks vastustega  
+✅ **Agentide hindamine** - pühendatud grader mudel kvaliteedi hindamiseks  
+✅ **Turvasüsteem** - red teaming ja haavatavuste skaneerimise mustrid  
+✅ **Kuluoptimeerimine** - mudelite marsruutimine ja mahutavuse planeerimine  
+✅ **Tootmise jälgimine** - Application Insights koos kohandatud telemeetriaga  
 
 ### Mida see dokument pakub
 
-| Komponent | Staatus | Kus leida |
-|-----------|---------|-----------|
-| **Taristu mall** | ✅ Valmis juurutamiseks | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
-| **Arhitektuuri diagrammid** | ✅ Täielikud | Ülal Mermaid diagramm |
-| **Koodinäited** | ✅ Viited | Kogu dokument |
-| **Seadistusmustrid** | ✅ Põhjalikud juhised | Sektsioonid 1-10 ülal |
-| **Agendi kood** | 🔨 Sina ehitad | Ligikaudu 40 tundi arendust |
+| Komponent | Seisund | Kus seda leida |
+|-----------|---------|-----------------|
+| **Infrastruktuuri mall** | ✅ Valmis juurutamiseks | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
+| **Arhitektuuriskeemid** | ✅ Täielik | Ülalolev Mermaid diagramm |
+| **Koodinäited** | ✅ Nõuandvad teostused | Läbi kogu dokumendi |
+| **Seadistusmustrid** | ✅ Üksikasjalik juhend | Lõigud 1-10 ülal |
+| **Agentide teostus** | 🔨 Sina ehitad | Ligikaudu 40 tundi arendust |
 | **Frontend kasutajaliides** | 🔨 Sina ehitad | Ligikaudu 25 tundi arendust |
-| **Andmevood** | 🔨 Sina ehitad | Ligikaudu 10 tundi arendust |
+| **Andmepipelines** | 🔨 Sina ehitad | Ligikaudu 10 tundi arendust |
 
-### Tegelikkuse kontroll: Mis tegelikult on olemas
+### Tegelik seis: Mis on olemas
 
-**Hoidas olemas (valmis nüüd):**
-- ✅ ARM mall, mis juurutab 15+ Azure teenust (azuredeploy.json)
-- ✅ Juurutus skript valideerimisega (deploy.sh)
-- ✅ Parameetrite seadistus (azuredeploy.parameters.json)
+**Hoidlas (otse kasutamiseks):**
+- ✅ ARM-mall 15+ Azure teenuse juurutamiseks (azuredeploy.json)
+- ✅ Juurutusskript valideerimisega (deploy.sh)
+- ✅ Parameetrite konfiguratsioon (azuredeploy.parameters.json)
 
-**Dokumendis viidatud (sina lood):**
-- 🔨 Agendi implementeerimise kood (~30-40 tundi)
-- 🔨 Marsruuditeenus (~12-16 tundi)
-- 🔨 Frontendi rakendus (~20-30 tundi)
-- 🔨 Andmete seadistamise skriptid (~8-12 tundi)
-- 🔨 Monitooringu raamistik (~10-15 tundi)
+**Dokumendis viidatud (sa lood ise):**
+- 🔨 Agendi teostuskood (~30-40 tundi)
+- 🔨 Marsruutimise teenus (~12-16 tundi)
+- 🔨 Frontend rakendus (~20-30 tundi)
+- 🔨 Andmete seadistus skriptid (~8-12 tundi)
+- 🔨 Jälgimise raamistik (~10-15 tundi)
 
-### Sinu järgmised sammud
+### Järgmised sammud
 
-#### Kui soovid juurutada taristu (30 minutit)
+#### Kui tahad infrastruktuuri juurutada (30 minutit)
 ```bash
 cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
 
-#### Kui soovid ehitada kogu süsteemi (80-120 tundi)
-1. ✅ Loe ja mõista seda arhitektuuridokumenti (2-3 tundi)
-2. ✅ Juuruta taristu ARM malli abil (30 minutit)
-3. 🔨 Rakenda agendid viidatud koodimustrite järgi (~40 tundi)
-4. 🔨 Ehitada marsruuditeenus FastAPI/Express abil (~15 tundi)
-5. 🔨 Loo frontend UI React/Vue abil (~25 tundi)
-6. 🔨 Konfigureeri andmevoog ja otsinguindeks (~10 tundi)
-7. 🔨 Lisa monitooring ja hindamine (~15 tundi)
-8. ✅ Testi, turvasta ja optimeeri (~10 tundi)
+#### Kui tahad ehitada kogu süsteemi (80-120 tundi)
+1. ✅ Loe ja mõista seda arhitektuuri dokumendi (2-3 tundi)
+2. ✅ Juuruta infrastruktuur ARM-malli abil (30 minutit)
+3. 🔨 Rakenda agendid kasutades näidiskoodide mustreid (~40 tundi)
+4. 🔨 Ehita marsruutimise teenus FastAPI/Express abil (~15 tundi)
+5. 🔨 Loo frontend kasutajaliides React/Vue abil (~25 tundi)
+6. 🔨 Konfigureeri andmepipeline ja otsingukataloog (~10 tundi)
+7. 🔨 Lisa jälgimine ja hindamine (~15 tundi)
+8. ✅ Testi, turvalisus ja optimeeri (~10 tundi)
 
-#### Kui soovid õppida multi-agendi mustreid (õppimiseks)
-- 📖 Vaata arhitektuuridiagrammi ja komponentide suhteid
+#### Kui tahad õppida mitmeagendilisi mustreid (õppimiseks)
+- 📖 Vaata arhitektuuriskeemi ja komponentide seoseid
 - 📖 Õpi koodinäiteid SearchTool, BingTool, AgentEvaluator kohta
-- 📖 Mõista mitmeregiooni juurutusstrateegiat
-- 📖 Õpi hindamise ja turberaamistikke
+- 📖 Mõista mitmeregioonilise juurutusstrateegiat
+- 📖 Õpi hindamise ja turvasüsteemi raamistikke
 - 📖 Rakenda mustreid oma projektides
 
 ### Peamised õppetunnid
 
-1. **Taristu vs rakendus** - ARM mall pakub taristut; agendid vajavad arendust  
-2. **Mitme regiooni strateegia** - Strateegiline mudelite paigutus vähendab kulusid ja parandab usaldusväärsust  
-3. **Hindamisraamistik** - Pühendatud grader mudel võimaldab pidevat kvaliteedihindamist  
-4. **Turvalisus on esikohal** - Red teaming ja haavatavuste kontroll on tootmiskeskkonnas hädavajalikud  
-5. **Kuluoptimeerimine** - Intelligentsed marsruudid gpt-4.1 ja gpt-4.1-mini vahel säästavad 60-80%
+1. **Infrastruktuur vs rakendus** - ARM-mall loob infrastruktuuri; agendid vajavad arendust  
+2. **Mitmeregiooniline strateegia** - strateegiline mudelite paigutus vähendab kulusid ja suurendab usaldusväärsust  
+3. **Hindamisraamistik** - pühendatud grader mudel võimaldab pidevat kvaliteedi hindamist  
+4. **Turvalisus esikohal** - red teaming ja haavatavuste skaneerimine on tootmises hädavajalikud  
+5. **Kuluoptimeerimine** - nutikas marsruutimine gpt-4.1 ja gpt-4.1-mini vahel säästab 60-80%
 
 ### Hinnangulised kulud
 
-| Juurutusrežiim | Taristu/kuus | Arendus (korraga) | Esimene kuu kokku |
-|----------------|--------------|-------------------|-------------------|
-| **Minimaalne** | $100-370 | $15K-25K (80-120 tundi) | $15.1K-25.4K |
-| **Standard** | $420-1,450 | $15K-25K (võrdne maht) | $15.4K-26.5K |
-| **Premium** | $1,150-3,500 | $15K-25K (võrdne maht) | $16.2K-28.5K |
+| Juurutusrežiim | Infrastruktuur/kuus | Arendus (üks kord) | Esimene kuu kokku |
+|----------------|---------------------|--------------------|-------------------|
+| **Minimaalne** | 100–370 $ | 15K–25K $ (80–120 tundi) | 15.1K–25.4K $ |
+| **Standard** | 420–1450 $ | 15K–25K $ (sama maht) | 15.4K–26.5K $ |
+| **Premium** | 1150–3500 $ | 15K–25K $ (sama maht) | 16.2K–28.5K $ |
 
-**Märk:** Taristu moodustab alla 5% kogukulust uute lahenduste puhul. Arendusmaht on peamine investeering.
+**Märkus:** Infrastruktuur moodustab alla 5% kogukulust uute lahenduste puhul. Arendus on suurim investeering.
 
 ### Seotud ressursid
 
-- 📚 [ARM malli juurutusjuhend](retail-multiagent-arm-template/README.md) - taristu seadistus
-- 📚 [Microsoft Foundry mudelite parimad praktikad](https://learn.microsoft.com/azure/ai-services/openai/) - mudeli juurutus
-- 📚 [AI Search dokumentatsioon](https://learn.microsoft.com/azure/search/) - vektorotsingu seadistamine
-- 📚 [Container Apps mustrid](https://learn.microsoft.com/azure/container-apps/) - mikroteenuste juurutus
-- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - monitooringu seadistamine
+- 📚 [ARM-malli juurutusjuhend](retail-multiagent-arm-template/README.md) - Infrastruktuuri seadistus  
+- 📚 [Microsoft Foundry mudelite parimad tavad](https://learn.microsoft.com/azure/ai-services/openai/) - Mudelite juurutus  
+- 📚 [AI Search dokumentatsioon](https://learn.microsoft.com/azure/search/) - Vektorotsingu seadistus  
+- 📚 [Container Apps mustrid](https://learn.microsoft.com/azure/container-apps/) - Mikroteenuste juurutus  
+- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Jälgimise seadistus
 
 ### Küsimused või probleemid?
 
-- 🐛 [Teata probleemidest](https://github.com/microsoft/AZD-for-beginners/issues) - malli vead või dokumentatsiooni vead
-- 💬 [GitHub arutelud](https://github.com/microsoft/AZD-for-beginners/discussions) - arhitektuuri küsimused
-- 📖 [KKK](../resources/faq.md) - sagedased küsimused vastustega
-- 🔧 [Veaotsingu juhend](../docs/troubleshooting/common-issues.md) - juurutusprobleemid
+- 🐛 [Teata probleemidest](https://github.com/microsoft/AZD-for-beginners/issues) - Malli vead või dokumentatsiooni probleemid  
+- 💬 [GitHub arutelud](https://github.com/microsoft/AZD-for-beginners/discussions) - Arhitektuuri küsimused  
+- 📖 [KKK](../resources/faq.md) - Levinud küsimused ja vastused  
+- 🔧 [Tõrkeotsingu juhend](../docs/troubleshooting/common-issues.md) - Juurutusprobleemid
 
 ---
 
-**See põhjalik stsenaarium annab ettevõttetaseme arhitektuuri mustandi multi-agent AI süsteemide jaoks, sisaldades taristu malli, juurutusjuhiseid ja tootmise parimaid praktikaid keerukate klienditoe lahenduste loomisel Azure Developer CLI abil.**
+**See põhjalik stsenaarium annab ettevõtte tasemel arhitektuuri plaani mitmeagendilistele AI süsteemidele, kaasa arvatud infrastruktuuri mallid, rakendusjuhised ja tootmisklassi parimad praktikad keerukate klienditugilahenduste ehitamiseks Azure Developer CLI-ga.**
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vastutusest loobumine**:  
-See dokument on tõlgitud kasutades tehisintellekti tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi püüdleme täpsuse poole, palun pange tähele, et automatiseeritud tõlked võivad sisaldada vigu või ebatäpsusi. Autentsena tuleks käsitleda algdokumenti selle emakeeles. Kriitilise tähtsusega teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta selle tõlkega kaasnevate arusaamatuste või valesti tõlgendamise eest.
+**Lahtiütlus**:
+See dokument on tõlgitud kasutades AI tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi me püüdleme täpsuse poole, palun pange tähele, et automatiseeritud tõlgetes võib esineda vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlkega seotud eksimustest või valesti mõistmistest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
