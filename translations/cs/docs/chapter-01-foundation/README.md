@@ -1,4 +1,4 @@
-# Kapitola 1: Základy a rychlý start
+# Kapitola 1: Základy & Rychlý start
 
 **📚 Kurz**: [AZD pro začátečníky](../../README.md) | **⏱️ Délka**: 30-45 minut | **⭐ Složitost**: Začátečník
 
@@ -8,7 +8,7 @@
 
 Tato kapitola představuje základy Azure Developer CLI (azd). Naučíte se základní pojmy, nainstalujete nástroje a nasadíte svou první aplikaci do Azure.
 
-> Ověřeno na `azd 1.23.12` v březnu 2026.
+> Ověřeno proti `azd 1.25.6` v červnu 2026.
 
 ## Cíle učení
 
@@ -16,23 +16,25 @@ Po dokončení této kapitoly budete:
 - Rozumět tomu, co je Azure Developer CLI a jak se liší od Azure CLI
 - Nainstalovat a nakonfigurovat AZD na vaší platformě
 - Nasadit svou první aplikaci do Azure pomocí `azd up`
-- Vyčistit prostředky pomocí `azd down`
+- Odstranit zdroje pomocí `azd down`
 
 ---
 
 ## 📚 Lekce
 
-| # | Lekce | Popis | Doba |
+| # | Lekce | Popis | Čas |
 |---|--------|-------------|------|
-| 1 | [Základy AZD](azd-basics.md) | Základní pojmy, terminologie a struktura projektu | 15 min |
-| 2 | [Instalace a nastavení](installation.md) | Platformně specifické návody k instalaci | 10 min |
+| 1 | [Základy AZD](azd-basics.md) | Základní koncepty, terminologie a struktura projektu | 15 min |
+| 2 | [Instalace & Nastavení](installation.md) | Instalace specifická pro platformu | 10 min |
 | 3 | [Váš první projekt](first-project.md) | Prakticky: Nasazení webové aplikace do Azure | 20 min |
+| 4 | [Přidejte vlastní aplikaci](bring-your-own-app.md) | Přidání azd do existujícího projektu, který již máte | 15 min |
+| 5 | [Vývojové kontejnery & Codespaces](dev-containers.md) | Reprodukovatelné prostředí azd pomocí vývojových kontejnerů | 15 min |
 
 ---
 
 ## ✅ Začněte zde: Ověřte své nastavení
 
-Než začnete, ujistěte se, že váš lokální počítač je připraven pro šablonu kapitoly 1:
+Než začnete, potvrďte, že je váš lokální počítač připraven pro šablonu Kapitoly 1:
 
 **Windows:**
 ```powershell
@@ -44,7 +46,7 @@ Než začnete, ujistěte se, že váš lokální počítač je připraven pro š
 bash ./validate-setup.sh
 ```
 
-Pokud skript hlásí chybějící nástroje, nejprve je opravte a poté pokračujte v kapitole.
+Pokud skript hlásí chybějící nástroje, opravte je nejdříve a pak pokračujte v kapitole.
 
 ---
 
@@ -54,7 +56,7 @@ Pokud skript hlásí chybějící nástroje, nejprve je opravte a poté pokraču
 # Zkontrolujte instalaci
 azd version
 
-# Ověřte se pro AZD
+# Autentizujte se pro AZD
 # Volitelné: az login, pokud plánujete spouštět příkazy Azure CLI přímo
 azd auth login
 
@@ -70,21 +72,21 @@ azd down --force --purge
 
 ## ✅ Kritéria úspěchu
 
-Po dokončení této kapitoly byste měli umět:
+Po dokončení této kapitoly byste měli být schopni:
 
 ```bash
 azd version              # Zobrazuje nainstalovanou verzi
 azd init --template todo-nodejs-mongo  # Inicializuje projekt
-azd up                   # Nasazuje na Azure
-azd show                 # Zobrazuje URL běžící aplikace
-azd down --force --purge # Čistí prostředky
+azd up                   # Nasazuje do Azure
+azd show                 # Zobrazuje URL spuštěné aplikace
+azd down --force --purge # Uvolňuje prostředky
 ```
 
 ---
 
 ## 🔗 Navigace
 
-| Směr | Kapitola |
+| Direction | Chapter |
 |-----------|---------|
 | **Další** | [Kapitola 2: Vývoj orientovaný na AI](../chapter-02-ai-development/README.md) |
 | **Přeskočit na** | [Kapitola 3: Konfigurace](../chapter-03-configuration/README.md) |
@@ -93,13 +95,13 @@ azd down --force --purge # Čistí prostředky
 
 ## 📖 Související zdroje
 
-- [Rychlý přehled příkazů](../../resources/cheat-sheet.md)
-- [Často kladené dotazy](../../resources/faq.md)
+- [Přehled příkazů](../../resources/cheat-sheet.md)
+- [Často kladené otázky](../../resources/faq.md)
 - [Glosář](../../resources/glossary.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Prohlášení o vyloučení odpovědnosti**:
-Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli usilujeme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo nesprávné výklady vyplývající z použití tohoto překladu.
+**Prohlášení o omezení odpovědnosti**:
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o co největší přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo nesprávné interpretace vzniklé použitím tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

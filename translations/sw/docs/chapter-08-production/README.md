@@ -1,65 +1,67 @@
-# Sura 8: Mifumo ya Uzalishaji na Biashara
+# Sura 8: Mbinu za Uzalishaji na Kampuni
 
-**📚 Kozi**: [AZD Kwa Waanzilishi](../../README.md) | **⏱️ Muda**: 2-3 masaa | **⭐ Ugumu**: Ngumu
+**📚 Kozi**: [AZD For Beginners](../../README.md) | **⏱️ Muda**: 2-3 saa | **⭐ Ugumu**: Juu
 
 ---
 
 ## Muhtasari
 
-Sura hii inashughulikia mifumo ya kueneza huduma inayokidhi mahitaji ya biashara, kuimarisha usalama, ufuatiliaji, na uboreshaji wa gharama kwa mzigo wa kazi wa AI katika uzalishaji.
+Sura hii inashughulikia mifumo ya uenezaji inayofaa kampuni, ngome za usalama, ufuatiliaji, na uboreshaji wa gharama kwa mzigo wa kazi wa AI uliotumika.
 
-> Imethibitishwa dhidi ya `azd 1.23.12` mwezi Machi 2026.
+> Imethibitishwa dhidi ya `azd 1.25.6` katika Juni 2026.
 
 ## Malengo ya Kujifunza
 
-Kwa kumaliza sura hii, utakuwa umeweza:
-- Sambaza programu zenye ustahimilivu katika mikoa mbalimbali
-- Tekeleza miundo ya usalama ya biashara
-- Sanidi ufuatiliaji wa kina
-- Boresha gharama kwa wigo mkubwa
-- Sanidi mifereji ya CI/CD kwa AZD
+Kwa kumaliza sura hii, utakuwa unaweza:
+- Kutoa programu zenye ustahimilivu katika mikoa mingi
+- Kutekeleza mifumo ya usalama ya kampuni
+- Kusanidi ufuatiliaji kamilifu
+- Kuboresha gharama kwa wigo mkubwa
+- Kusanidi mistari ya CI/CD na AZD
 
 ---
 
-## 📚 Mafunzo
+## 📚 Masomo
 
 | # | Somo | Maelezo | Muda |
 |---|--------|-------------|------|
-| 1 | [Mila za AI za Uzalishaji](production-ai-practices.md) | Mifumo ya usambazaji ya biashara | 90 dakika |
+| 1 | [Mbinu za AI kwa Uzalishaji](production-ai-practices.md) | Mifumo ya uenezaji ya kampuni | 90 dak |
 
 ---
 
-## 🚀 Orodha ya Ukaguzi ya Uzalishaji
+## 🚀 Orodha ya Ukaguzi wa Uzalishaji
 
-- [ ] Uwekaji katika mikoa mingi kwa ustahimilivu
-- [ ] Utambulisho uliodhibitiwa kwa uthibitisho (bila funguo)
+- [ ] Ueneaji wa mikoa mingi kwa ustahimilivu
+- [ ] Utambulisho uliosimamiwa kwa uthibitishaji (hakuna funguo)
 - [ ] Application Insights kwa ufuatiliaji
-- [ ] Bajeti za gharama na arifu zimewekwa
+- [ ] Bajeti za gharama na arifa zimetayarishwa
 - [ ] Uchunguzi wa usalama umewezeshwa
-- [ ] Uunganishaji wa mifereji ya CI/CD
-- [ ] Mpango wa urejeshaji baada ya maafa
+- [ ] Uunganisho wa mistari ya CI/CD
+- [ ] Mpango wa urejeshaji baada ya janga
 
 ---
 
-## 🏗️ Mifano ya Usanifu
+## 🏗️ Mifumo ya Usanifu
 
-### Mfano 1: Microservices za AI
+### Mfano 1: AI ya Microservices
 
 ```mermaid
 graph LR
-    Gateway[Mlango wa API] --> AI[Huduma ya AI] --> Models[Mifano za Microsoft Foundry]
+    Gateway[Mlango wa API] --> AI[Huduma ya AI] --> Models[Mifano ya Microsoft Foundry]
     Gateway --> Auth[Huduma ya Uthibitishaji]
     AI --> Data[Hifadhi ya Data]
 ```
-### Mfano 2: AI Inayotegemea Matukio
+
+### Mfano 2: AI Inayoendeshwa na Tukio
 
 ```mermaid
 graph LR
-    EventGrid[Gridi ya Matukio] --> Functions[Kazi] --> Pipeline[Mlolongo wa Akili Bandia]
+    EventGrid[Gridi ya Matukio] --> Functions[Kazi] --> Pipeline[Mtiririko wa Akili Bandia]
 ```
+
 ---
 
-## 🔐 Mbinu Bora za Usalama
+## 🔐 Mazoea Bora za Usalama
 
 ```bicep
 // Use managed identity
@@ -82,13 +84,13 @@ properties: {
 
 | Mikakati | Akiba |
 |----------|---------|
-| Kupunguza hadi sifuri (Container Apps) | 60-80% |
+| Skeli hadi sifuri (Container Apps) | 60-80% |
 | Tumia ngazi za matumizi kwa maendeleo | 50-70% |
-| Kupandisha/kupunguza kwa ratiba | 30-50% |
-| Uwezo uliotengwa | 20-40% |
+| Skeli iliyopangwa | 30-50% |
+| Uwezo uliohifadhiwa | 20-40% |
 
 ```bash
-# Weka arifu za bajeti
+# Weka arifa za bajeti
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -113,12 +115,12 @@ az monitor metrics list --resource <resource-id>
 
 ---
 
-## 🔗 Uvinjari
+## 🔗 Urambazaji
 
-| Direction | Chapter |
+| Mwelekeo | Sura |
 |-----------|---------|
-| **Iliyopita** | [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/README.md) |
-| **Kozi Imekamilika** | [Course Home](../../README.md) |
+| **Iliyotangulia** | [Sura 7: Utatuzi wa Matatizo](../chapter-07-troubleshooting/README.md) |
+| **Kozi Imekamilika** | [Nyumbani kwa Kozi](../../README.md) |
 
 ---
 
@@ -132,6 +134,6 @@ az monitor metrics list --resource <resource-id>
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Angalizo**:
-Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuwa sahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au ukosefu wa usahihi. Nyaraka ya asili katika lugha yake ya asili inapaswa kuzingatiwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, inapendekezwa kutumia tafsiri ya kitaalamu iliyofanywa na mtafsiri wa binadamu. Hatuwajibiki kwa kutokuelewana au tafsiri potofu zinazotokana na matumizi ya tafsiri hii.
+**Kionyozo**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Hati ya asili katika lugha yake halisi inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatutojibu kwa kuelewa vibaya au tafsiri potofu zinazotokea kutokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

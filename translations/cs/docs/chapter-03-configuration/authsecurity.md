@@ -1,49 +1,49 @@
 # Autentizační vzory a spravovaná identita
 
-⏱️ **Odhadovaný čas**: 45-60 minut | 💰 **Náklady**: Zdarma (bez dalších poplatků) | ⭐ **Složitost**: Středně pokročilé
+⏱️ **Odhadovaný čas**: 45–60 minut | 💰 **Dopad na náklady**: Zdarma (žádné další poplatky) | ⭐ **Složitost**: Středně náročné
 
-**📚 Studijní cesta:**
-- ← Předchozí: [Správa konfigurace](configuration.md) - Správa proměnných prostředí a tajemství
+**📚 Vzdělávací cesta:**
+- ← Předchozí: [Configuration Management](configuration.md) - Správa proměnných prostředí a tajemství
 - 🎯 **Jste zde**: Autentizace a zabezpečení (spravovaná identita, Key Vault, bezpečné vzory)
-- → Další: [První projekt](first-project.md) - Vytvořte svou první AZD aplikaci
-- 🏠 [Domov kurzu](../../README.md)
+- → Další: [First Project](first-project.md) - Vytvořte svou první AZD aplikaci
+- 🏠 [Course Home](../../README.md)
 
 ---
 
 ## Co se naučíte
 
 Po dokončení této lekce budete:
-- Rozumět autentizačním vzorům v Azure (klíče, řetězce připojení, spravovaná identita)
+- Rozumět autentizačním vzorům v Azure (klíče, connection stringy, spravovaná identita)
 - Implementovat **spravovanou identitu** pro autentizaci bez hesel
-- Zabezpečit tajné údaje integrací s **Azure Key Vault**
-- Nakonfigurovat **řízení přístupu na základě rolí (RBAC)** pro nasazení AZD
+- Zabezpečit tajemství integrací s **Azure Key Vault**
+- Nakonfigurovat **role-based access control (RBAC)** pro nasazení AZD
 - Aplikovat bezpečnostní osvědčené postupy v Container Apps a službách Azure
 - Migrovat z autentizace založené na klíčích na autentizaci založenou na identitě
 
-## Proč je spravovaná identita důležitá
+## Proč má spravovaná identita význam
 
 ### Problém: Tradiční autentizace
 
 **Před spravovanou identitou:**
 ```javascript
-// ❌ BEZPEČNOSTNÍ RIZIKO: Tvrdě zakódovaná tajemství v kódu
+// ❌ BEZPEČNOSTNÍ RIZIKO: Napevno v kódu uložená tajemství
 const connectionString = "Server=mydb.database.windows.net;User=admin;Password=P@ssw0rd123";
 const storageKey = "xK7mN9pQ2wR5tY8uI0oP3aS6dF1gH4jK...";
 const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 ```
 
 **Problémy:**
-- 🔴 **Odkrytá tajemství** v kódu, konfiguračních souborech, proměnných prostředí
-- 🔴 **Rotace pověření** vyžaduje změny kódu a opětovné nasazení
-- 🔴 **Noční můra auditu** - kdo co kdy získal?
-- 🔴 **Rozptýlení** - tajné údaje roztroušené napříč více systémy
-- 🔴 **Rizika souladu** - neprojde bezpečnostními audity
+- 🔴 **Odhalená tajemství** v kódu, konfiguračních souborech, proměnných prostředí
+- 🔴 **Rotace přihlašovacích údajů** vyžaduje změny v kódu a redeploy
+- 🔴 **Hlavobol auditů** – kdo co kdy přistupoval?
+- 🔴 **Rozptýlení** – tajemství roztroušena napříč systémy
+- 🔴 **Rizika souladu** – nevyhovuje bezpečnostním auditům
 
 ### Řešení: Spravovaná identita
 
 **Po zavedení spravované identity:**
 ```javascript
-// ✅ BEZPEČNÉ: Žádná tajemství v kódu
+// ✅ BEZPEČNÉ: Žádné tajné údaje v kódu
 const credential = new DefaultAzureCredential();
 const client = new BlobServiceClient(
   "https://mystorageaccount.blob.core.windows.net",
@@ -53,12 +53,12 @@ const client = new BlobServiceClient(
 
 **Výhody:**
 - ✅ **Žádná tajemství** v kódu nebo konfiguraci
-- ✅ **Automatická rotace** - řeší Azure
-- ✅ **Úplný auditní záznam** v protokolech Azure AD
-- ✅ **Centralizované zabezpečení** - spravujte v Azure Portal
-- ✅ **Připravené na dodržování předpisů** - splňuje bezpečnostní standardy
+- ✅ **Automatická rotace** – za to se stará Azure
+- ✅ **Úplný auditní záznam** v Microsoft Entra ID logech
+- ✅ **Centralizované zabezpečení** – spravujte v Azure Portalu
+- ✅ **Připravené na compliance** – splňuje bezpečnostní standardy
 
-**Analogie**: Tradiční autentizace je jako nošení několika fyzických klíčů pro různé dveře. Spravovaná identita je jako bezpečnostní průkaz, který automaticky uděluje přístup na základě toho, kdo jste—žádné klíče k ztracení, kopírování nebo rotaci.
+**Analogie**: Tradiční autentizace je jako nošení více fyzických klíčů pro různé dveře. Spravovaná identita je jako průkazka, která automaticky poskytuje přístup podle toho, kdo jste — žádné klíče, které by bylo možné ztratit, kopírovat nebo rotovat.
 
 ---
 
@@ -68,30 +68,31 @@ const client = new BlobServiceClient(
 
 ```mermaid
 sequenceDiagram
-    participant App as Vaše aplikace<br/>(kontejnerová aplikace)
-    participant MI as Spravovaná identita<br/>(Azure AD)
+    participant App as Vaše aplikace<br/>(aplikace v kontejneru)
+    participant MI as Spravovaná identita<br/>(Microsoft Entra ID)
     participant KV as Key Vault
-    participant Storage as Úložiště Azure
+    participant Storage as Azure Storage
     participant DB as Azure SQL
     
-    App->>MI: Vyžádat přístupový token<br/>(automatické)
+    App->>MI: Požádat o přístupový token<br/>(automaticky)
     MI->>MI: Ověřit identitu<br/>(bez potřeby hesla)
     MI-->>App: Vrátit token<br/>(platný 1 hodinu)
     
     App->>KV: Získat tajemství<br/>(pomocí tokenu)
-    KV->>KV: Zkontrolovat RBAC oprávnění
+    KV->>KV: Kontrola oprávnění RBAC
     KV-->>App: Vrátit hodnotu tajemství
     
     App->>Storage: Nahrát blob<br/>(pomocí tokenu)
-    Storage->>Storage: Zkontrolovat RBAC oprávnění
+    Storage->>Storage: Kontrola oprávnění RBAC
     Storage-->>App: Úspěch
     
     App->>DB: Dotaz na data<br/>(pomocí tokenu)
-    DB->>DB: Zkontrolovat SQL oprávnění
+    DB->>DB: Kontrola oprávnění SQL
     DB-->>App: Vrátit výsledky
     
     Note over App,DB: Veškeré ověřování bez hesla!
 ```
+
 ### Typy spravovaných identit
 
 ```mermaid
@@ -104,32 +105,33 @@ graph TB
     MI --> UserAssigned
     
     SystemAssigned --> SA1[Životní cyklus vázaný na prostředek]
-    SystemAssigned --> SA2[Automatické vytvoření/odstranění]
-    SystemAssigned --> SA3[Nejvhodnější pro jednotlivý prostředek]
+    SystemAssigned --> SA2[Automatické vytvoření/smazání]
+    SystemAssigned --> SA3[Nejvhodnější pro jediný prostředek]
     
     UserAssigned --> UA1[Nezávislý životní cyklus]
-    UserAssigned --> UA2[Ruční vytvoření/odstranění]
-    UserAssigned --> UA3[Sdíleno mezi prostředky]
+    UserAssigned --> UA2[Ručné vytvoření/smazání]
+    UserAssigned --> UA3[Sdílená mezi prostředky]
     
     style SystemAssigned fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style UserAssigned fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
 ```
-| Funkce | Systémem přiřazená | Uživatelem přiřazená |
-|--------|--------------------|----------------------|
+
+| Vlastnost | Systémově přiřazená | Uživatelem přiřazená |
+|---------|----------------|---------------|
 | **Životní cyklus** | Vázaná na prostředek | Nezávislá |
 | **Vytvoření** | Automaticky s prostředkem | Ruční vytvoření |
-| **Odstranění** | Odstraněna s prostředkem | Přetrvává po odstranění prostředku |
+| **Smazání** | Smazána s prostředkem | Přetrvává po smazání prostředku |
 | **Sdílení** | Pouze jeden prostředek | Více prostředků |
-| **Použití** | Jednoduché scénáře | Složité scénáře s více prostředky |
-| **AZD výchozí** | ✅ Doporučeno | Nepovinné |
+| **Použití** | Jednoduché scénáře | Složitější multi-prostředkové scénáře |
+| **AZD výchozí** | ✅ Doporučeno | Volitelné |
 
 ---
 
-## Předpoklady
+## Požadavky
 
-### Požadované nástroje
+### Vyžadované nástroje
 
-Měli byste mít tyto nástroje již nainstalované z předchozích lekcí:
+Měli byste mít tyto nástroje nainstalované z předchozích lekcí:
 
 ```bash
 # Ověřte Azure Developer CLI
@@ -146,26 +148,26 @@ az --version
 - Aktivní předplatné Azure
 - Oprávnění k:
   - Vytváření spravovaných identit
-  - Přiřazování rolí RBAC
-  - Vytváření zdrojů Key Vault
-  - Nasazování Container Apps
+  - Přiřazování RBAC rolí
+  - Vytváření Key Vault zdrojů
+  - Nasazení Container Apps
 
-### Požadované znalosti
+### Požadavky na znalosti
 
 Měli byste mít dokončeno:
-- [Průvodce instalací](installation.md) - nastavení AZD
-- [Základy AZD](azd-basics.md) - Základní koncepty
-- [Správa konfigurace](configuration.md) - Proměnné prostředí
+- [Installation Guide](installation.md) - Nastavení AZD
+- [AZD Basics](azd-basics.md) - Základní koncepty
+- [Configuration Management](configuration.md) - Proměnné prostředí
 
 ---
 
 ## Lekce 1: Pochopení autentizačních vzorů
 
-### Vzor 1: Řetězce připojení (zastaralé - vyhněte se)
+### Vzor 1: Connection strings (Zastaralé - vyhnout se)
 
 **Jak to funguje:**
 ```bash
-# Připojovací řetězec obsahuje přihlašovací údaje
+# Řetězec připojení obsahuje přihlašovací údaje
 STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=xK7mN9pQ2wR5..."
 COSMOS_CONNECTION_STRING="AccountEndpoint=https://myaccount.documents.azure.com:443/;AccountKey=C2x7..."
 SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=P@ssw0rd..."
@@ -175,13 +177,13 @@ SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=
 - ❌ Tajemství viditelná v proměnných prostředí
 - ❌ Logována v nasazovacích systémech
 - ❌ Obtížná rotace
-- ❌ Žádný auditní záznam přístupu
+- ❌ Žádný auditní záznam přístupů
 
 **Kdy použít:** Pouze pro lokální vývoj, nikdy do produkce.
 
 ---
 
-### Vzor 2: Reference na Key Vault (lepší)
+### Vzor 2: Key Vault reference (Lepší)
 
 **Jak to funguje:**
 ```bicep
@@ -203,19 +205,19 @@ env: [
 ```
 
 **Výhody:**
-- ✅ Tajemství bezpečně uložena v Key Vault
-- ✅ Centralizované řízení tajemství
+- ✅ Tajemství bezpečně uložená v Key Vault
+- ✅ Centralizovaná správa tajemství
 - ✅ Rotace bez změn v kódu
 
 **Omezení:**
 - ⚠️ Stále se používají klíče/hesla
-- ⚠️ Nutnost spravovat přístup k Key Vault
+- ⚠️ Je třeba spravovat přístup k Key Vault
 
-**Kdy použít:** Přechodný krok od řetězců připojení k spravované identitě.
+**Kdy použít:** Přechodný krok z connection strings na spravovanou identitu.
 
 ---
 
-### Vzor 3: Spravovaná identita (osvědčený postup)
+### Vzor 3: Spravovaná identita (Nejlepší postup)
 
 **Jak to funguje:**
 ```bicep
@@ -252,20 +254,73 @@ const blobServiceClient = new BlobServiceClient(
 
 **Výhody:**
 - ✅ Žádná tajemství v kódu/konfiguraci
-- ✅ Automatická rotace pověření
+- ✅ Automatická rotace přihlašovacích údajů
 - ✅ Úplný auditní záznam
 - ✅ Oprávnění založená na RBAC
-- ✅ Připravené na splnění předpisů
+- ✅ Připravené na compliance
 
 **Kdy použít:** Vždy, pro produkční aplikace.
 
 ---
 
+### Vzor 4: Service Principals (CI/CD & automatizace)
+
+Spravovaná identita je zlatý standard *pro prostředky běžící v Azure*. Ale co věci běžící **mimo** Azure — jako CI/CD pipeline na build agentovi, nebo skript na vašem notebooku, které nemohou použít interaktivní přihlášení? Tam přichází na řadu **service principal**: ne-lidská identita s vlastními přihlašovacími údaji, pod kterou se může automatizovaný proces přihlásit.
+
+**Jak to funguje:**
+
+Vytvořte service principal s rozsahem na resource group (princip nejmenších oprávnění):
+
+```bash
+az ad sp create-for-rbac \
+  --name "myapp-cicd" \
+  --role contributor \
+  --scopes /subscriptions/<sub-id>/resourceGroups/<rg-name>
+```
+
+To vytiskne client ID, client secret a tenant ID. azd se může přihlásit pomocí nich bez interakce:
+
+```bash
+azd auth login \
+  --client-id "<appId>" \
+  --client-secret "<password>" \
+  --tenant-id "<tenant>"
+```
+
+**Preferujte federované přihlašovací údaje (OIDC) před tajnými klíči.** Místo dlouhodobého client secretu nakonfigurujte federované přihlašovací údaje, aby pipeline vyměnila krátkodobý token — žádné tajemství k úniku nebo rotaci:
+
+```bash
+azd auth login \
+  --client-id "<appId>" \
+  --federated-credential-provider "github" \
+  --tenant-id "<tenant>"
+```
+
+> `azd pipeline config` to pro vás automaticky nastaví. Viz průvodce CI/CD v [Chapter 8](../chapter-08-production/production-ai-practices.md).
+
+**Výhody:**
+- ✅ Funguje mimo Azure (build agenty, on-prem, jiné cloudy)
+- ✅ Lze omezit na jednu resource group s jednou rolí
+- ✅ Federovaná (OIDC) varianta nepoužívá uložené tajemství
+
+**Kompenzace:**
+- ⚠️ Varianta založená na tajných klíčích vyžaduje pečlivé uložení a rotaci
+- ⚠️ Uniklé tajemství poskytuje vše, co může SP dělat — držte rozsahy úzké
+
+**Kdy použít:** CI/CD pipelines a automatizace, které nemohou použít spravovanou identitu. Vždy preferujte **federovanou/OIDC** variantu před client secret, a preferujte spravovanou identitu, kdykoli běží pracovní zátěž v Azure.
+
+**Bezpečné ukládání přihlašovacích údajů:**
+- Nikdy neusazujte tajemství do repozitáře — použijte úložiště tajemství vaší pipeline (GitHub Actions secrets, Azure DevOps variable groups / Key Vault).
+- Omezte SP na nejmenší roli a resource group, kterou potřebuje.
+- Nastavte vypršení platnosti a rotujte, nebo eliminujte tajemství úplně pomocí OIDC.
+
+---
+
 ## Lekce 2: Implementace spravované identity s AZD
 
-### Postup implementace krok za krokem
+### Krok za krokem implementace
 
-Postavme zabezpečenou Container App, která používá spravovanou identitu pro přístup k Azure Storage a Key Vault.
+Postavme bezpečný Container App, který používá spravovanou identitu pro přístup k Azure Storage a Key Vault.
 
 ### Struktura projektu
 
@@ -286,7 +341,7 @@ secure-app/
     └── Dockerfile
 ```
 
-### 1. Nakonfigurujte AZD (azure.yaml)
+### 1. Konfigurace AZD (azure.yaml)
 
 ```yaml
 name: secure-app
@@ -302,7 +357,7 @@ services:
 # Enable managed identity (AZD handles this automatically)
 ```
 
-### 2. Infrastruktura: Povolte spravovanou identitu
+### 2. Infrastruktura: Povolit spravovanou identitu
 
 **Soubor: `infra/main.bicep`**
 
@@ -384,7 +439,7 @@ output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output APP_URL string = containerApp.outputs.url
 ```
 
-### 3. Container App se systémem přiřazenou identitou
+### 3. Container App se systémově přiřazenou identitou
 
 **Soubor: `infra/app/container-app.bicep`**
 
@@ -441,7 +496,7 @@ output id string = containerApp.id
 output url string = 'https://${containerApp.properties.configuration.ingress.fqdn}'
 ```
 
-### 4. Modul přiřazení rolí RBAC
+### 4. Modul pro přiřazení RBAC rolí
 
 **Soubor: `infra/core/role-assignment.bicep`**
 
@@ -476,21 +531,21 @@ const { SecretClient } = require('@azure/keyvault-secrets');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🔑 Inicializace pověření (funguje automaticky se spravovanou identitou)
+// 🔑 Inicializovat přihlašovací údaje (funguje automaticky s řízenou identitou)
 const credential = new DefaultAzureCredential();
 
 // Nastavení Azure Storage
 const storageAccountName = process.env.AZURE_STORAGE_ACCOUNT_NAME;
 const blobServiceClient = new BlobServiceClient(
   `https://${storageAccountName}.blob.core.windows.net`,
-  credential  // Klíče nejsou potřeba!
+  credential  // Žádné klíče nejsou potřeba!
 );
 
 // Nastavení Key Vaultu
 const keyVaultName = process.env.AZURE_KEY_VAULT_NAME;
 const secretClient = new SecretClient(
   `https://${keyVaultName}.vault.azure.net`,
-  credential  // Klíče nejsou potřeba!
+  credential  // Žádné klíče nejsou potřeba!
 );
 
 // Kontrola stavu
@@ -537,7 +592,7 @@ app.get('/secret/:name', async (req, res) => {
   }
 });
 
-// Vypsat kontejnery blobů (ukazuje přístup pro čtení)
+// Vypsat kontejnery blobů (demonstruje přístup pro čtení)
 app.get('/containers', async (req, res) => {
   try {
     const containers = [];
@@ -618,7 +673,7 @@ curl -X POST $APP_URL/upload
 }
 ```
 
-**Test výpisu kontejneru:**
+**Test výpisu kontejnerů:**
 ```bash
 curl $APP_URL/containers
 ```
@@ -636,19 +691,19 @@ curl $APP_URL/containers
 
 ## Běžné role Azure RBAC
 
-### Vestavěné ID rolí pro spravovanou identitu
+### Vestavěná Role ID pro spravovanou identitu
 
-| Service | Role Name | Role ID | Oprávnění |
-|---------|-----------|---------|-----------|
-| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Číst bloby a kontejnery |
+| Služba | Název role | Role ID | Oprávnění |
+|---------|-----------|---------|-------------|
+| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Čtení blobů a kontejnerů |
 | **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Čtení, zápis, mazání blobů |
 | **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Čtení, zápis, mazání zpráv fronty |
 | **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Čtení tajemství |
 | **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Čtení, zápis, mazání tajemství |
 | **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Čtení dat Cosmos DB |
 | **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Čtení, zápis dat Cosmos DB |
-| **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Spravovat SQL databáze |
-| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Odesílat, přijímat, spravovat zprávy |
+| **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Správa SQL databází |
+| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Odesílání, přijímání, správa zpráv |
 
 ### Jak najít ID rolí
 
@@ -669,9 +724,9 @@ az role definition list --name "Storage Blob Data Contributor"
 
 ### Cvičení 1: Povolit spravovanou identitu pro existující aplikaci ⭐⭐ (Střední)
 
-**Cíl**: Přidat spravovanou identitu do existujícího nasazení Container App
+**Cíl**: Přidat spravovanou identitu k existujícímu nasazení Container App
 
-**Scénář**: Máte Container App používající řetězce připojení. Převeďte ji na spravovanou identitu.
+**Scénář**: Máte Container App používající connection stringy. Převeďte ji na spravovanou identitu.
 
 **Výchozí stav**: Container App s touto konfigurací:
 
@@ -687,7 +742,7 @@ env: [
 
 **Kroky**:
 
-1. **Povolte spravovanou identitu v Bicep:**
+1. **Povolit spravovanou identitu v Bicep:**
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -699,7 +754,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-2. **Přidělte přístup ke Storage:**
+2. **Udělit přístup ke Storage:**
 
 ```bicep
 // Get storage account reference
@@ -719,9 +774,9 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-3. **Aktualizujte kód aplikace:**
+3. **Aktualizovat kód aplikace:**
 
-**Předtím (řetězec připojení):**
+**Před (připojovací řetězec):**
 ```javascript
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -730,7 +785,7 @@ const blobServiceClient = BlobServiceClient.fromConnectionString(
 );
 ```
 
-**Poté (spravovaná identita):**
+**Po (spravovaná identita):**
 ```javascript
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
@@ -742,7 +797,8 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-4. **Aktualizujte proměnné prostředí:**
+4. **Aktualizovat proměnné prostředí:**
+
 ```bicep
 env: [
   {
@@ -754,24 +810,25 @@ env: [
 ```
 
 5. **Nasadit a otestovat:**
+
 ```bash
 # Znovu nasadit
 azd up
 
-# Otestovat, zda to stále funguje
+# Ověřte, že to stále funguje
 curl https://myapp.azurecontainerapps.io/upload
 ```
 
 **✅ Kritéria úspěchu:**
 - ✅ Aplikace se nasadí bez chyb
-- ✅ Operace se Storage fungují (nahrávání, výpis, stahování)
-- ✅ Žádné řetězce připojení v proměnných prostředí
-- ✅ Identita viditelná v Azure Portal v panelu "Identity"
+- ✅ Operace se Storage fungují (upload, výpis, stažení)
+- ✅ Žádné connection stringy v proměnných prostředí
+- ✅ Identita viditelná v Azure Portalu pod částí "Identity"
 
-**Ověření:**
+**Verifikace:**
 
 ```bash
-# Zkontrolujte, že je spravovaná identita povolena
+# Zkontrolujte, zda je spravovaná identita povolena
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
@@ -785,19 +842,19 @@ az role assignment list \
 # ✅ Očekává se: Zobrazuje roli "Storage Blob Data Contributor"
 ```
 
-**Čas**: 20-30 minut
+**Čas**: 20–30 minut
 
 ---
 
-### Cvičení 2: Přístup více službám s uživatelem přiřazenou identitou ⭐⭐⭐ (Pokročilé)
+### Cvičení 2: Přístup více služeb pomocí uživatelem přiřazené identity ⭐⭐⭐ (Pokročilé)
 
 **Cíl**: Vytvořit uživatelem přiřazenou identitu sdílenou mezi více Container Apps
 
-**Scénář**: Máte 3 mikroslužby, které všechny potřebují přístup ke stejnému účtu Storage a Key Vault.
+**Scénář**: Máte 3 mikroservisy, které všechny potřebují přístup ke stejnému Storage účtu a Key Vault.
 
 **Kroky**:
 
-1. **Vytvořte uživatelem přiřazenou identitu:**
+1. **Vytvořit uživatelem přiřazenou identitu:**
 
 **Soubor: `infra/core/identity.bicep`**
 
@@ -817,7 +874,7 @@ output principalId string = userAssignedIdentity.properties.principalId
 output clientId string = userAssignedIdentity.properties.clientId
 ```
 
-2. **Přiřaďte role uživatelem přiřazené identitě:**
+2. **Přiřadit role uživatelem přiřazené identitě:**
 
 ```bicep
 // In main.bicep
@@ -854,7 +911,7 @@ resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' =
 }
 ```
 
-3. **Přiřaďte identitu více Container Apps:**
+3. **Přiřadit identitu více Container Apps:**
 
 ```bicep
 resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
@@ -896,7 +953,7 @@ resource orderService 'Microsoft.App/containerApps@2023-05-01' = {
 ```javascript
 const { DefaultAzureCredential, ManagedIdentityCredential } = require('@azure/identity');
 
-// Pro uživatelem přiřazenou identitu uveďte ID klienta
+// Pro uživatelem přiřazenou identitu zadejte ID klienta
 const credential = new ManagedIdentityCredential(
   process.env.AZURE_CLIENT_ID  // ID klienta uživatelem přiřazené identity
 );
@@ -915,7 +972,7 @@ const blobServiceClient = new BlobServiceClient(
 ```bash
 azd up
 
-# Ověřte, že všechny služby mají přístup k úložišti
+# Ověřte, že všechny služby mohou přistupovat k úložišti
 curl https://api-gateway.azurecontainerapps.io/upload
 curl https://product-service.azurecontainerapps.io/upload
 curl https://order-service.azurecontainerapps.io/upload
@@ -923,23 +980,23 @@ curl https://order-service.azurecontainerapps.io/upload
 
 **✅ Kritéria úspěchu:**
 - ✅ Jedna identita sdílená mezi 3 službami
-- ✅ Všechny služby mají přístup ke Storage a Key Vault
+- ✅ Všechny služby mohou přistupovat ke Storage a Key Vault
 - ✅ Identita přetrvává po smazání jedné služby
-- ✅ Centrální správa oprávnění
+- ✅ Centralizovaná správa oprávnění
 
 **Výhody uživatelem přiřazené identity:**
-- Jedna identita pro správu
+- Jedna identita ke správě
 - Konzistentní oprávnění napříč službami
-- Přežívá smazání služby
+- Přetrvává po smazání služby
 - Vhodnější pro složité architektury
 
-**Čas**: 30-40 minut
+**Čas**: 30–40 minut
 
 ---
 
 ### Cvičení 3: Implementace rotace tajemství v Key Vault ⭐⭐⭐ (Pokročilé)
 
-**Cíl**: Uložit API klíče třetích stran do Key Vault a přistupovat k nim pomocí spravované identity
+**Cíl**: Uložit API klíče třetích stran v Key Vault a přistupovat k nim pomocí spravované identity
 
 **Scénář**: Vaše aplikace potřebuje volat externí API (OpenAI, Stripe, SendGrid), které vyžaduje API klíče.
 
@@ -976,7 +1033,7 @@ output name string = keyVault.name
 output uri string = keyVault.properties.vaultUri
 ```
 
-2. **Uložit tajemství do Key Vault:**
+2. **Uložit tajemství v Key Vault:**
 
 ```bash
 # Získat název Key Vaultu
@@ -999,7 +1056,7 @@ az keyvault secret set \
   --value "SG.xxxxxxxxxxxxx"
 ```
 
-3. **Kód aplikace pro načtení tajemství:**
+3. **Kód aplikace pro načítání tajemství:**
 
 **Soubor: `src/config.js`**
 
@@ -1061,7 +1118,7 @@ const { OpenAI } = require('openai');
 
 const app = express();
 
-// Inicializovat OpenAI pomocí klíče z Key Vault
+// Inicializovat OpenAI pomocí klíče z Key Vaultu
 let openaiClient;
 
 async function initializeServices() {
@@ -1094,33 +1151,33 @@ app.listen(3000, () => {
 });
 ```
 
-5. **Nasadit a testovat:**
+5. **Nasadit a otestovat:**
 
 ```bash
 azd up
 
-# Ověřit, že API klíče fungují
+# Ověřte, že API klíče fungují
 curl -X POST https://myapp.azurecontainerapps.io/chat \
   -H "Content-Type: application/json" \
   -d '{"message":"Hello AI"}'
 ```
 
 **✅ Kritéria úspěchu:**
-- ✅ Žádné API klíče v kódu nebo proměnných prostředí
-- ✅ Aplikace načítá klíče z Key Vault
-- ✅ Externí API fungují správně
+- ✅ Žádné API klíče v kódu nebo v proměnných prostředí
+- ✅ Aplikace načítá klíče z Key Vaultu
+- ✅ API třetích stran fungují správně
 - ✅ Lze rotovat klíče bez změn v kódu
 
 **Rotace tajemství:**
 
 ```bash
-# Aktualizovat tajemství v Key Vault
+# Aktualizujte tajemství v Key Vault
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
   --value "sk-proj-NEW_KEY_HERE"
 
-# Restartovat aplikaci, aby načetla nový klíč
+# Restartujte aplikaci, aby se použil nový klíč
 az containerapp revision restart \
   --name myapp \
   --resource-group rg-myapp
@@ -1132,20 +1189,20 @@ az containerapp revision restart \
 
 ## Kontrolní bod znalostí
 
-### 1. Autentizační vzory ✓
+### 1. Vzory autentizace ✓
 
 Otestujte své porozumění:
 
-- [ ] **Q1**: Jaké jsou tři hlavní autentizační vzory? 
-  - **A**: Řetězce připojení (zastaralé), reference na Key Vault (přechod), spravovaná identita (nejlepší)
+- [ ] **Q1**: Jaké jsou tři hlavní vzory autentizace? 
+  - **A**: Připojovací řetězce (legacy), odkazy na Key Vault (přechod), spravovaná identita (nejlepší)
 
-- [ ] **Q2**: Proč je spravovaná identita lepší než řetězce připojení?
+- [ ] **Q2**: Proč je spravovaná identita lepší než připojovací řetězce?
   - **A**: Žádná tajemství v kódu, automatická rotace, úplný auditní záznam, oprávnění RBAC
 
-- [ ] **Q3**: Kdy byste použili uživatelem přiřazenou identitu místo systémem přiřazené?
-  - **A**: Když identitu sdílíte mezi více zdroji nebo když je životní cyklus identity nezávislý na životním cyklu zdroje
+- [ ] **Q3**: Kdy byste použili uživatelem přiřazenou identitu místo systémově přiřazené?
+  - **A**: Když identity sdílíte mezi více zdroji nebo když je životní cyklus identity nezávislý na životním cyklu zdroje
 
-**Praktické ověření:**
+**Praktická ověření:**
 ```bash
 # Zkontrolujte, jaký typ identity vaše aplikace používá
 az containerapp show \
@@ -1170,15 +1227,15 @@ Otestujte své porozumění:
 - [ ] **Q2**: Jaká oprávnění poskytuje "Key Vault Secrets User"?
   - **A**: Přístup pouze pro čtení k tajemstvím (nelze vytvářet, aktualizovat ani mazat)
 
-- [ ] **Q3**: Jak udělit Container App přístup k Azure SQL?
-  - **A**: Přiřaďte roli "SQL DB Contributor" nebo nakonfigurujte autentizaci Azure AD pro SQL
+- [ ] **Q3**: Jak udělíte Container App přístup k Azure SQL?
+  - **A**: Přiřaďte roli "SQL DB Contributor" nebo nakonfigurujte autentizaci Microsoft Entra ID pro SQL
 
-**Praktické ověření:**
+**Praktická ověření:**
 ```bash
 # Najít konkrétní roli
 az role definition list --name "Storage Blob Data Contributor"
 
-# Zkontrolovat, které role jsou přiřazeny vaší identitě
+# Zkontrolovat, jaké role jsou přiřazeny vaší identitě
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID --output table
 ```
@@ -1188,16 +1245,17 @@ az role assignment list --assignee $PRINCIPAL_ID --output table
 ### 3. Integrace Key Vault ✓
 
 Otestujte své porozumění:
-- [ ] **Q1**: Jak povolíte RBAC pro Key Vault místo přístupových zásad?
+
+- [ ] **Q1**: Jak povolíte RBAC pro Key Vault místo přístupových politik?
   - **A**: Nastavte `enableRbacAuthorization: true` v Bicep
 
-- [ ] **Q2**: Která knihovna Azure SDK řeší autentizaci spravované identity?
+- [ ] **Q2**: Knihovna Azure SDK, která zpracovává autentizaci spravované identity?
   - **A**: `@azure/identity` s třídou `DefaultAzureCredential`
 
-- [ ] **Q3**: Jak dlouho zůstávají tajemství Key Vault v mezipaměti?
-  - **A**: Závisí na aplikaci; implementujte vlastní strategii cachování
+- [ ] **Q3**: Jak dlouho zůstávají tajemství z Key Vaultu v cache?
+  - **A**: Záleží na aplikaci; implementujte vlastní strategii kešování
 
-**Praktické ověření:**
+**Praktická ověření:**
 ```bash
 # Ověřit přístup k Key Vaultu
 az keyvault secret show \
@@ -1209,7 +1267,7 @@ az keyvault secret show \
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ Očekáváno: true
+# ✅ Očekává se: true
 ```
 
 ---
@@ -1225,11 +1283,11 @@ az keyvault show \
    }
    ```
 
-2. **Používejte RBAC role s nejmenšími oprávněními**
-   - Používejte "Reader" role, pokud je to možné
-   - Vyvarujte se "Owner" nebo "Contributor", pokud to není nutné
+2. **Používejte RBAC role s nejmenšími potřebnými právy**
+   - Používejte role "Reader" kdykoli je to možné
+   - Vyhněte se rolím "Owner" nebo "Contributor", pokud to není nutné
 
-3. **Ukládejte klíče třetích stran v Key Vault**
+3. **Ukládejte klíče třetích stran v Key Vaultu**
    ```javascript
    const apiKey = await secretClient.getSecret('ThirdPartyApiKey');
    ```
@@ -1249,24 +1307,24 @@ az keyvault show \
    ```
 
 6. **Pravidelně rotujte tajemství**
-   - Nastavte data vypršení platnosti u tajemství v Key Vault
+   - Nastavte expiraci u tajemství v Key Vaultu
    - Automatizujte rotaci pomocí Azure Functions
 
 ### ❌ NEDĚLAT:
 
-1. **Nikdy nezabudovávejte tajemství do zdrojového kódu**
+1. **Nikdy nezakódovávejte tajemství napevno**
    ```javascript
    // ❌ ŠPATNÉ
    const apiKey = "sk-proj-xxxxxxxxxxxxx";
    ```
 
-2. **Nepoužívejte connection strings v produkci**
+2. **Nepoužívejte připojovací řetězce v produkci**
    ```javascript
    // ❌ ŠPATNÉ
    BlobServiceClient.fromConnectionString(process.env.STORAGE_CONNECTION_STRING)
    ```
 
-3. **Nepřidělujte nadměrná oprávnění**
+3. **Nedávejte nadměrná oprávnění**
    ```bicep
    // ❌ BAD - too much access
    roleDefinitionId: 'Owner'
@@ -1275,7 +1333,7 @@ az keyvault show \
    roleDefinitionId: 'Storage Blob Data Reader'
    ```
 
-4. **Nezaznamenávejte tajemství do logů**
+4. **Nezapisujte tajemství do logů**
    ```javascript
    // ❌ ŠPATNÉ
    console.log('API Key:', apiKey);
@@ -1292,7 +1350,7 @@ az keyvault show \
 
 ---
 
-## Průvodce řešením problémů
+## Návod pro řešení problémů
 
 ### Problém: "Unauthorized" při přístupu k Azure Storage
 
@@ -1305,7 +1363,7 @@ AuthorizationPermissionMismatch: This request is not authorized to perform this 
 **Diagnóza:**
 
 ```bash
-# Zkontrolujte, zda je povolena spravovaná identita
+# Zkontrolujte, zda je spravovaná identita povolena
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
@@ -1330,13 +1388,13 @@ az role assignment create \
   --scope $STORAGE_ID
 ```
 
-2. **Počkejte na propagaci (může trvat 5-10 minut):**
+2. **Počkejte na propagaci (může trvat 5–10 minut):**
 ```bash
-# Zkontrolujte stav přiřazení role
+# Zkontrolovat stav přiřazení role
 az role assignment list --assignee $PRINCIPAL_ID --scope $STORAGE_ID
 ```
 
-3. **Zkontrolujte, že aplikační kód používá správné přihlašovací údaje:**
+3. **Ověřte, že kód aplikace používá správné přihlašovací údaje:**
 ```javascript
 // Ujistěte se, že používáte DefaultAzureCredential
 const credential = new DefaultAzureCredential();
@@ -1344,7 +1402,7 @@ const credential = new DefaultAzureCredential();
 
 ---
 
-### Problém: Přístup do Key Vault odmítnut
+### Problém: Přístup k Key Vaultu odepřen
 
 **Příznaky:**
 ```
@@ -1355,7 +1413,7 @@ The user, group or application does not have secrets get permission
 **Diagnóza:**
 
 ```bash
-# Zkontrolovat, že je pro Key Vault povolen RBAC
+# Zkontrolovat, že je pro Key Vault povoleno RBAC
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
@@ -1369,7 +1427,7 @@ az role assignment list \
 
 **Řešení:**
 
-1. **Povolte RBAC na Key Vault:**
+1. **Povolte RBAC na Key Vaultu:**
 ```bash
 az keyvault update \
   --name $KV_NAME \
@@ -1401,7 +1459,7 @@ CredentialUnavailableError: No credential available
 # Zkontrolujte, zda jste přihlášeni
 az account show
 
-# Zkontrolujte autentizaci Azure CLI
+# Zkontrolujte ověření Azure CLI
 az ad signed-in-user show
 ```
 
@@ -1412,7 +1470,7 @@ az ad signed-in-user show
 az login
 ```
 
-2. **Nastavte předplatné Azure:**
+2. **Nastavte Azure subscription:**
 ```bash
 az account set --subscription "Your Subscription Name"
 ```
@@ -1440,11 +1498,11 @@ const credential = process.env.NODE_ENV === 'production'
 
 **Příznaky:**
 - Role byla úspěšně přiřazena
-- Přesto dostáváte chyby 403
-- Přerušovaný přístup (někdy funguje, jindy ne)
+- Stále dostáváte chyby 403
+- Příležitostný přístup (někdy funguje, někdy ne)
 
 **Vysvětlení:**
-Změny v Azure RBAC se mohou globálně rozšířit za 5-10 minut.
+Změny v Azure RBAC mohou trvat 5–10 minut, než se globálně projeví.
 
 **Řešení:**
 
@@ -1456,7 +1514,7 @@ sleep 300  # Počkejte 5 minut
 # Otestujte přístup
 curl https://myapp.azurecontainerapps.io/upload
 
-# Pokud stále selhává, restartujte aplikaci
+# Pokud to stále selhává, restartujte aplikaci
 az containerapp revision restart \
   --name myapp \
   --resource-group rg-myapp
@@ -1464,30 +1522,30 @@ az containerapp revision restart \
 
 ---
 
-## Úvahy o nákladech
+## Nákladové aspekty
 
 ### Náklady na spravovanou identitu
 
 | Resource | Cost |
 |----------|------|
-| **Managed Identity** | 🆓 **ZDARMA** - Žádný poplatek |
-| **RBAC Role Assignments** | 🆓 **ZDARMA** - Žádný poplatek |
-| **Azure AD Token Requests** | 🆓 **ZDARMA** - Zahrnuto |
-| **Key Vault Operations** | $0.03 per 10,000 operations |
-| **Key Vault Storage** | $0.024 per secret per month |
+| **Spravovaná identita** | 🆓 **ZDARMA** - Bez poplatku |
+| **RBAC přiřazení rolí** | 🆓 **ZDARMA** - Bez poplatku |
+| **Microsoft Entra ID Token Requests** | 🆓 **ZDARMA** - Součást služby |
+| **Operace Key Vault** | $0.03 per 10,000 operations |
+| **Úložiště Key Vault** | $0.024 per secret per month |
 
 **Spravovaná identita šetří peníze tím, že:**
-- ✅ Eliminací operací Key Vault pro autentizaci služba ke službě
-- ✅ Snížením bezpečnostních incidentů (žádné uniklé přihlašovací údaje)
-- ✅ Snížením provozní režie (žádná ruční rotace)
+- ✅ Eliminuje operace Key Vault pro autentizaci služba-ke-službě
+- ✅ Snižuje bezpečnostní incidenty (žádné uniklé pověření)
+- ✅ Snižuje provozní režii (žádná ruční rotace)
 
 **Příklad srovnání nákladů (měsíčně):**
 
 | Scenario | Connection Strings | Managed Identity | Savings |
 |----------|-------------------|-----------------|---------|
-| Small app (1M requests) | ~$50 (Key Vault + ops) | ~$0 | $50/month |
-| Medium app (10M requests) | ~$200 | ~$0 | $200/month |
-| Large app (100M requests) | ~$1,500 | ~$0 | $1,500/month |
+| Malá aplikace (1M požadavků) | ~$50 (Key Vault + ops) | ~$0 | $50/month |
+| Střední aplikace (10M požadavků) | ~$200 | ~$0 | $200/month |
+| Velká aplikace (100M požadavků) | ~$1,500 | ~$0 | $1,500/month |
 
 ---
 
@@ -1507,39 +1565,39 @@ az containerapp revision restart \
 ### Další kroky v tomto kurzu
 - ← Předchozí: [Správa konfigurace](configuration.md)
 - → Další: [První projekt](first-project.md)
-- 🏠 [Domov kurzu](../../README.md)
+- 🏠 [Domovská stránka kurzu](../../README.md)
 
 ### Související příklady
-- [Příklad chatu Microsoft Foundry Models](../../../../examples/azure-openai-chat) - Používá spravovanou identitu pro Microsoft Foundry Models
-- [Microservices Example](../../../../examples/microservices) - Vzorové postupy autentizace pro více služeb
+- [Microsoft Foundry Models Chat Example](../../../../examples/azure-openai-chat) - Používá spravovanou identitu pro Microsoft Foundry Models
+- [Microservices Example](../../../../examples/microservices) - Vzory autentizace v multi‑servisním prostředí
 
 ---
 
 ## Shrnutí
 
 **Naučili jste se:**
-- ✅ Tři vzory autentizace (řetězce připojení, Key Vault, spravovaná identita)
+- ✅ Tři vzory autentizace (připojovací řetězce, Key Vault, spravovaná identita)
 - ✅ Jak povolit a nakonfigurovat spravovanou identitu v AZD
-- ✅ Přiřazení RBAC rolí pro služby Azure
-- ✅ Integrace Key Vault pro tajemství třetích stran
-- ✅ Uživatelsky přiřazené vs systémově přiřazené identity
-- ✅ Nejlepší bezpečnostní postupy a řešení problémů
+- ✅ Přiřazení RBAC rolí pro Azure služby
+- ✅ Integraci Key Vault pro klíče třetích stran
+- ✅ Uživatelem přiřazené vs systémově přiřazené identity
+- ✅ Bezpečnostní osvědčené postupy a řešení problémů
 
-**Hlavní poznatky:**
+**Klíčové poznatky:**
 1. **V produkci vždy používejte spravovanou identitu** - Žádná tajemství, automatická rotace
-2. **Používejte RBAC role s nejmenšími oprávněními** - Přiřazujte pouze nezbytná oprávnění
-3. **Ukládejte klíče třetích stran v Key Vault** - Centralizovaná správa tajemství
+2. **Používejte RBAC role s nejmenšími právy** - Udělujte pouze nezbytná oprávnění
+3. **Ukládejte klíče třetích stran v Key Vaultu** - Centralizovaná správa tajemství
 4. **Oddělte identity podle prostředí** - Izolace dev, staging, prod
-5. **Povolte auditní protokolování** - Sledování, kdo co přistupoval
+5. **Povolte auditní protokolování** - Sledujte, kdo co přistupoval
 
 **Další kroky:**
-1. Dokončete výše uvedená praktická cvičení
-2. Migrujte existující aplikaci z connection strings na spravovanou identitu
-3. Postavte svůj první projekt AZD se zabezpečením od prvního dne: [První projekt](first-project.md)
+1. Dokončete praktické cvičení výše
+2. Migrujte existující aplikaci z připojovacích řetězců na spravovanou identitu
+3. Vytvořte svůj první projekt AZD se zabezpečením od první chvíle: [První projekt](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Prohlášení o vyloučení odpovědnosti**:
-Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho mateřském jazyce by měl být považován za závazný zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nezodpovídáme za žádné nedorozumění nebo chybné výklady vzniklé v důsledku používání tohoto překladu.
+**Prohlášení o omezení odpovědnosti**:
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o co největší přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo nesprávné interpretace vzniklé použitím tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

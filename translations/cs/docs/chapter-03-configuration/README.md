@@ -1,31 +1,31 @@
 # Kapitola 3: Konfigurace a autentizace
 
-**📚 Kurz**: [AZD Pro začátečníky](../../README.md) | **⏱️ Doba trvání**: 45-60 minut | **⭐ Náročnost**: Středně pokročilý
+**📚 Kurz**: [AZD pro začátečníky](../../README.md) | **⏱️ Doba trvání**: 45–60 minut | **⭐ Složitost**: Střední
 
 ---
 
 ## Přehled
 
-Tato kapitola pokrývá konfiguraci prostředí, vzory autentizace a nejlepší bezpečnostní postupy pro nasazení pomocí Azure Developer CLI.
+Tato kapitola pokrývá konfiguraci prostředí, vzory autentizace a nejlepší postupy zabezpečení pro nasazení pomocí Azure Developer CLI.
 
-> Ověřeno s `azd 1.23.12` v březnu 2026.
+> Ověřeno proti `azd 1.25.6` v červnu 2026.
 
-## Cíle učení
+## Cíle
 
-Po dokončení této kapitoly budete umět:
-- Ovládat hierarchii konfigurace AZD
-- Spravovat více prostředí (vývoj, testovací, produkční)
-- Implementovat zabezpečenou autentizaci s řízenými identitami
-- Konfigurovat nastavení specifická pro dané prostředí
+Po dokončení této kapitoly budete:
+- Ovládnout hierarchii konfigurace AZD
+- Spravovat více prostředí (dev, staging, prod)
+- Implementovat bezpečnou autentizaci pomocí spravovaných identit
+- Konfigurovat nastavení specifické pro prostředí
 
 ---
 
 ## 📚 Lekce
 
-| # | Lekce | Popis | Čas |
+| # | Lesson | Description | Time |
 |---|--------|-------------|------|
 | 1 | [Průvodce konfigurací](configuration.md) | Nastavení a správa prostředí | 30 min |
-| 2 | [Autentizace a bezpečnost](authsecurity.md) | Vzory řízených identit a RBAC | 30 min |
+| 2 | [Autentizace a zabezpečení](authsecurity.md) | Vzory spravovaných identit a RBAC | 30 min |
 
 ---
 
@@ -54,23 +54,23 @@ azd env get-values
 
 AZD aplikuje nastavení v tomto pořadí (pozdější přepíše dřívější):
 
-1. **Výchozí hodnoty** (vestavěné v šablonách)
+1. **Výchozí hodnoty** (vestavěné do šablon)
 2. **azure.yaml** (konfigurace projektu)
 3. **Proměnné prostředí** (`azd env set`)
-4. **Přepínače příkazového řádku** (`--location eastus`)
+4. **Příznaky příkazového řádku** (`--location eastus`)
 
 ---
 
-## 🔐 Nejlepší bezpečnostní postupy
+## 🔐 Nejlepší postupy zabezpečení
 
 ```bash
 # Použijte spravovanou identitu (doporučeno)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Zkontrolujte stav autentizace AZD
+# Zkontrolujte stav ověření AZD
 azd auth status
 
-# Volitelné: ověřte kontext Azure CLI, pokud plánujete spustit příkazy az
+# Volitelné: ověřte kontext Azure CLI, pokud plánujete spouštět příkazy az
 az account show
 
 # Znovu se autentizujte, pokud je to potřeba
@@ -87,7 +87,7 @@ az login
 | Směr | Kapitola |
 |-----------|---------|
 | **Předchozí** | [Kapitola 2: Vývoj AI](../chapter-02-ai-development/README.md) |
-| **Další** | [Kapitola 4: Infrastruktura](../chapter-04-infrastructure/README.md) |
+| **Následující** | [Kapitola 4: Infrastruktura](../chapter-04-infrastructure/README.md) |
 
 ---
 
@@ -99,6 +99,6 @@ az login
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Prohlášení o vyloučení odpovědnosti**:
-Tento dokument byl přeložen pomocí služby AI překladu [Co-op Translator](https://github.com/Azure/co-op-translator). I když usilujeme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo nesprávné výklady vyplývající z použití tohoto překladu.
+**Prohlášení o omezení odpovědnosti**:
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o co největší přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo nesprávné interpretace vzniklé použitím tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

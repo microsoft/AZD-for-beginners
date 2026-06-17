@@ -1,43 +1,43 @@
-# Cheti cha Amri - Amri Muhimu za AZD
+# Karatasi ya Marejeleo ya Amri - Amri Muhimu za AZD
 
-**Mrejeleo wa Haraka kwa Sura Zote**
-- **📚 Nyumbani kwa Kozi**: [AZD Kwa Waanzilishi](../README.md)
-- **📖 Anza Haraka**: [Sura 1: Msingi & Kuanzishwa kwa Haraka](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 Amri za AI**: [Sura 2: Maendeleo Yanayompa Kipaumbele AI (Inayopendekezwa kwa Waendelezaji wa AI)](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Za Juu/Za Kuendelea**: [Sura 4: Miundombinu kama Msimbo](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+**Marejeleo ya Haraka kwa Sura Zote**
+- **📚 Nyumbani ya Kozi**: [AZD Kwa Waanzilishi](../README.md)
+- **📖 Anza Haraka**: [Sura 1: Msingi & Mwongozo wa Kuanzia](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 Amri za AI**: [Sura 2: Maendeleo ya AI Kwanza](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Za Juu**: [Sura 4: Miundombinu kama Msimbo](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Utangulizi
 
-Cheti hiki cha amri kinatoa mrejeleo wa haraka kwa amri za Azure Developer CLI zinazotumika mara kwa mara, zilizopangwa kwa makundi kwa mifano ya vitendo. Ni kamili kwa kutafuta haraka wakati wa maendeleo, kutatua matatizo, na shughuli za kila siku na miradi ya azd.
+Hii karatasi ya marejeleo ya kina inatoa rejea ya haraka kwa amri za Azure Developer CLI zinazotumika sana, zilizopangwa kwa kategoria na mifano ya vitendo. Inafaa kwa kutafuta haraka wakati wa maendeleo, kutatua matatizo, na shughuli za kila siku na miradi ya azd.
 
 ## Malengo ya Kujifunza
 
-Kwa kutumia cheti hiki cha amri, utapata:
-- Upatikanaji wa papo hapo kwa amri muhimu za Azure Developer CLI na sintaksia
-- Uelewa wa upangaji wa amri kwa makundi ya kazi na matumizi
-- Marejeleo ya mifano ya vitendo kwa hali za maendeleo na uenezaji zinazotumika mara kwa mara
-- Kupata amri za utambuzi kwa utatuzi wa haraka wa matatizo
-- Kupata chaguzi za usanidi na urekebishaji wa juu kwa ufanisi
+Kwa kutumia karatasi hii ya marejeleo, utapata:
+- Ufikiaji wa papo hapo kwa amri muhimu za Azure Developer CLI na sintaksia
+- Uelewa wa upangaji wa amri kwa kategoria za kiutendaji na matumizi
+- Mifano ya vitendo kwa hali za kawaida za maendeleo na utoaji
+- Amri za utatuzi kwa utatuzi wa matatizo kwa haraka
+- Kupata chaguzi za usanidi wa juu na kubinafsisha kwa ufanisi
 - Kupata amri za usimamizi wa mazingira na mtiririko wa kazi wa mazingira mengi
 
 ## Matokeo ya Kujifunza
 
-Kwa marejeleo ya mara kwa mara ya cheti hiki, utaweza:
-- Kutekeleza amri za azd kwa ujasiri bila kurejea kwa nyaraka zote
-- Kutatua haraka matatizo ya kawaida kwa kutumia amri sahihi za utambuzi
-- Kusimamia kwa ufanisi mazingira mengi na matukio ya uenezaji
+Kwa kurejea mara kwa mara karatasi hii ya marejeleo, utaweza:
+- Kutekeleza amri za azd kwa kujiamini bila kurejea nyaraka kamili
+- Kutatua haraka matatizo ya kawaida kwa kutumia amri sahihi za uchunguzi
+- Kusimamia kwa ufanisi mazingira mengi na hali za utoaji
 - Kutumia vipengele vya juu vya azd na chaguzi za usanidi inapohitajika
-- Kutatua matatizo ya uenezaji kwa kutumia mfululizo wa amri ulioandaliwa
-- Kuboresha mitiririko ya kazi kupitia matumizi mazuri ya vifupisho na chaguzi za azd
+- Kutatua matatizo ya utekelezaji kwa kutumia mfululizo wa amri kwa mfumo
+- Kuongeza ufanisi wa mtiririko wa kazi kupitia matumizi madhubuti ya njia mfupi na chaguzi za azd
 
 ## Amri za Kuanzia
 
-### Uthibitishaji
+### Uthibitisho
 ```bash
 # Ingia kwenye Azure kupitia AZD
 azd auth login
 
-# Ingia kwenye Azure CLI (AZD inaitumia nyuma ya pazia)
+# Ingia kwenye Azure CLI (AZD inaitumia hii nyuma ya pazia)
 az login
 
 # Angalia akaunti ya sasa
@@ -54,12 +54,12 @@ azd auth logout
 az logout
 ```
 
-### Uanzishaji wa Mradi
+### Kuanza Mradi
 ```bash
-# Vinjari templeti zinazopatikana
+# Pitia tempeleti zinazopatikana
 azd template list
 
-# Anzisha kutoka kwa templeti
+# Anzisha kutoka kwenye tempeleti
 azd init --template todo-nodejs-mongo
 azd init --template <template-name>
 
@@ -72,53 +72,63 @@ azd init --template todo-nodejs-mongo my-awesome-app
 
 ## Amri za Msingi za Utekelezaji
 
-### Mtiririko Kamili wa Utekelezaji
+### Mchakato Kamili wa Utekelezaji
 ```bash
-# Sambaza kila kitu (kuandaa + kusambaza)
+# Weka yote (kuandaa rasilimali + kuweka)
 azd up
 
-# Sambaza bila maombi ya uthibitisho
+# Weka bila kuomba uthibitisho
 azd up --confirm-with-no-prompt
 
-# Sambaza kwa mazingira maalum
+# Weka kwenye mazingira maalum
 azd up --environment production
 
-# Sambaza na vigezo maalum
+# Weka kwa vigezo vilivyobinafsishwa
 azd up --parameter location=westus2
 ```
 
 ### Miundombinu Pekee
 ```bash
-# Toa rasilimali za Azure
+# Tayarishe rasilimali za Azure
 azd provision
 
-# 🧪 Tazama mabadiliko ya miundombinu
+# 🧪 Tazama mapema mabadiliko ya miundombinu
 azd provision --preview
-# Inaonyesha mtazamo wa 'dry-run' wa rasilimali zitakazoundwa/ zitakazobadilishwa/ zitakazofutwa
-# Inafanana na 'terraform plan' au 'bicep what-if' - salama kukimbia, hakuna mabadiliko yatakayotekelezwa
+# Inaonyesha mtazamo wa jaribio la kufanya bila kutekeleza wa rasilimali ambazo zingeundwa/zingebadilishwa/zingefutwa
+# Inafanana na 'terraform plan' au 'bicep what-if' - salama kuendesha, hakuna mabadiliko yatafanywa
 ```
 
 ### Programu Pekee
 ```bash
-# Sambaza msimbo wa programu
+# Weka msimbo wa programu
 azd deploy
 
-# Sambaza huduma maalum
+# Weka huduma maalum
 azd deploy --service web
 azd deploy --service api
 
-# Sambaza huduma zote
+# Weka huduma zote
 azd deploy --all
 ```
 
-### Jenga na Kifurushi
+### Jenga na Kutengeneza Kifurushi
 ```bash
-# Jenga programu
+# Rejesha (pakua) utegemezi wa programu
+azd restore
+
+# Rejesha huduma maalum
+azd restore --service api
+
+# Jenga artifakti inayoweza kupelekwa bila kupeleka
 azd package
 
 # Jenga huduma maalum
 azd package --service api
 ```
+
+> **`azd restore`** inapakua utegemezi wa programu yako (npm, pip, NuGet, Maven, n.k.). Inaendesha moja kwa moja wakati wa `azd package` na `azd deploy`, hivyo huwa hawezi kuitwa mara nyingi moja kwa moja—idaiendeshe kwa mkono ili kupakua utegemezi mapema (kwa mfano, kuwasilisha cache ya CI au kufanya kazi bila mtandao baadaye).
+
+> **`azd package`** hujenga kifurushi kinachoweza kutumwa (picha ya kontena au zipu) **bila** kukisukuma kwenda Azure. Tumia pekee yake ili kuthibitisha jengo limefanikiwa, kukagua matokeo, au kutengeneza kifurushi ambacho mchakato tofauti utaweka baadaye. `azd deploy` hufanya paketishaji kiatomati, kwa hivyo unahitaji `azd package` tu unapotaka kifurushi bila kuutekeleza.
 
 ## 🌍 Usimamizi wa Mazingira
 
@@ -127,7 +137,7 @@ azd package --service api
 # Orodhesha mazingira yote
 azd env list
 
-# Unda mazingira mapya
+# Tengeneza mazingira mapya
 azd env new development
 azd env new staging --location westus2
 
@@ -183,7 +193,7 @@ azd config validate
 # Onyesha taarifa za mradi
 azd show
 
-# Pata miisho ya huduma
+# Pata viunganishi vya huduma
 azd show --output json
 ```
 
@@ -191,37 +201,37 @@ azd show --output json
 
 ### Dashibodi ya Ufuatiliaji
 ```bash
-# Fungua dashibodi ya ufuatiliaji ya portal ya Azure
+# Fungua dashibodi ya ufuatiliaji kwenye portal ya Azure
 azd monitor
 
-# Fungua metiriki za moja kwa moja za Application Insights
+# Fungua vipimo vya wakati halisi vya Application Insights
 azd monitor --live
 
-# Fungua blade ya kumbukumbu za Application Insights
+# Fungua blade ya logi za Application Insights
 azd monitor --logs
 
 # Fungua muhtasari wa Application Insights
 azd monitor --overview
 ```
 
-### Kuangalia Logi za Kontena
+### Kuangalia Rekodi za Kontena
 ```bash
-# Tazama logi kupitia Azure CLI (kwa Container Apps)
+# Tazama kumbukumbu za matukio kupitia Azure CLI (kwa Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
 
-# Fuata logi kwa wakati halisi
+# Fuata kumbukumbu za matukio kwa wakati halisi
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
-# Tazama logi kutoka Azure Portal
+# Tazama kumbukumbu za matukio kupitia Azure Portal
 azd monitor --logs
 ```
 
-### Maswali ya Uchambuzi wa Logi
+### Maswali ya Uchambuzi wa Rekodi
 ```bash
-# Fikia Log Analytics kupitia Azure Portal
+# Fikia Log Analytics kupitia Portal ya Azure
 azd monitor --logs
 
-# Chunguza logi kwa kutumia Azure CLI
+# Chunguza rejista kwa kutumia CLI ya Azure
 az monitor log-analytics query \
   --workspace <workspace-id> \
   --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
@@ -237,7 +247,7 @@ azd down
 # Futa kwa nguvu bila uthibitisho
 azd down --force
 
-# Ondoa kabisa rasilimali zilizofutwa kwa muda
+# Futa kabisa rasilimali zilizofutwa kwa muda
 azd down --purge
 
 # Usafishaji kamili
@@ -256,9 +266,9 @@ azd version
 azd config show
 ```
 
-## 🔧 Amri Zinazoendelea
+## 🔧 Amri za Juu
 
-### Mifereji na CI/CD
+### Mstari wa Pipeline na CI/CD
 ```bash
 # Sanidi GitHub Actions
 azd pipeline config
@@ -272,51 +282,57 @@ azd pipeline show
 
 ### Usimamizi wa Miundombinu
 ```bash
-# Tengeneza violezo vya miundombinu
+# Tengeneza templeti za miundombinu
 azd infra generate
 
-# 🧪 Mapitio na Upangaji wa Miundombinu
+# 🧪 Mapitio na Mipango ya Miundombinu
 azd provision --preview
-# Inaiga utoaji wa miundombinu bila kuziweka
+# Inafananisha utoaji wa miundombinu bila kuitekeleza
 # Inachambua templeti za Bicep/Terraform na inaonyesha:
 # - Rasilimali zitakazoongezwa (kijani +)
 # - Rasilimali zitakazobadilishwa (manjano ~)
 # - Rasilimali zitakazofutwa (nyekundu -)
-# Salama kukimbia - hakuna mabadiliko halisi yaliyofanywa kwenye mazingira ya Azure
+# Salama kuendesha - hakuna mabadiliko halisi yaliyofanywa kwenye mazingira ya Azure
 
-# Tengeneza miundombinu kutoka kwa azure.yaml
+# Unda miundombinu kutoka azure.yaml
 azd infra synth
 ```
 
 ### Taarifa za Mradi
 ```bash
-# Onyesha hali ya mradi na anwani za mwisho
+# Onyesha hali ya mradi na vituo vya huduma
 azd show
 
-# Onyesha taarifa za kina za mradi kama JSON
+# Onyesha taarifa za kina za mradi kwa muundo wa JSON
 azd show --output json
 
-# Pata anwani za mwisho za huduma
+# Pata vituo vya huduma
 azd show --output json | jq '.services'
 ```
 
-## 🤖 Amri za AI na Nyongeza
+## 🤖 Amri za AI & Upanuzi
 
-### Nyongeza za AZD
+### Upanuzi za AZD
 ```bash
-# Orodhesha nyongeza zote zinazopatikana (ikijumuisha AI)
+# Orodhesha viendelezi vyote vinavyopatikana (ikiwa ni pamoja na AI)
 azd extension list
 
-# Sakinisha nyongeza ya mawakala wa Foundry
+# Sakinisha kiendelezi cha Foundry agents
 azd extension install azure.ai.agents
 
-# Sakinisha nyongeza ya kurekebisha kwa undani
+# Sakinisha kiendelezi cha agent skills (toleo la awali)
+azd extension install azure.ai.skills
+
+# Sakinisha kiendelezi cha Foundry connections (toleo la awali)
+azd extension install azure.ai.connections
+
+# Sakinisha kiendelezi cha kurekebisha kwa kina
 azd extension install azure.ai.finetune
 
-# Sakinisha nyongeza ya mifano maalum
+# Sakinisha kiendelezi cha modeli zilizobinafsishwa
 azd extension install azure.ai.models
 
-# Sasisha nyongeza zote zilizowekwa
+# Sasisha viendelezi vyote vilivyowekwa
 azd extension upgrade --all
 ```
 
@@ -328,11 +344,27 @@ azd ai agent init -m <manifest-path-or-uri>
 # Lenga mradi maalum wa Foundry
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# Taja saraka ya chanzo cha wakala
+# Ainisha saraka ya chanzo ya wakala
 azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
 
 # Chagua lengo la kuhosti
 azd ai agent init -m agent-manifest.yaml --host containerapp
+
+# Jaribu wakala uliowekwa (huonyesha ucheleweshaji na muda hadi baiti ya kwanza)
+azd ai agent invoke
+
+# Onyesha usanidi wa kiunganisho hai
+azd ai agent endpoint show
+
+# Zalisha seti ya data ya tathmini, kisha boresha wakala
+azd ai agent eval generate
+azd ai agent optimize
+
+# Pakua chanzo kilichowekwa cha wakala aliyehostiwa anayetegemea msimbo
+azd ai agent code download
+
+# Futa wakala aliyehostiwa na toleo zake zote (--force inamaliza vikao vinavyoendelea)
+azd ai agent delete --force
 ```
 
 ### Seva ya MCP (Alpha)
@@ -340,7 +372,7 @@ azd ai agent init -m agent-manifest.yaml --host containerapp
 # Anzisha seva ya MCP kwa mradi wako
 azd mcp start
 
-# Dhibiti idhini ya zana kwa shughuli za MCP
+# Simamia idhini ya zana kwa shughuli za MCP
 azd copilot consent list
 ```
 
@@ -349,13 +381,13 @@ azd copilot consent list
 # Tengeneza faili za IaC kutoka kwa ufafanuzi wa mradi wako
 azd infra generate
 
-# Tengeneza miundombinu kutoka kwa azure.yaml
+# Sinteza miundombinu kutoka kwa azure.yaml
 azd infra synth
 ```
 
 ---
 
-## 🎯 Mitiririko ya Kazi ya Haraka
+## 🎯 Mtiririko wa Kazi wa Haraka
 
 ### Mtiririko wa Maendeleo
 ```bash
@@ -363,18 +395,18 @@ azd infra synth
 azd init --template todo-nodejs-mongo
 cd my-project
 
-# Peleka kwenye mazingira ya maendeleo
+# Sambaza kwenye mazingira ya maendeleo
 azd env new dev
 azd up
 
-# Fanya mabadiliko na peleka tena
+# Fanya mabadiliko na usambaze tena
 azd deploy
 
 # Fungua dashibodi ya ufuatiliaji
 azd monitor --live
 ```
 
-### Mtiririko wa Mazingira Nyingi
+### Mtiririko wa Mazingira Mengi
 ```bash
 # Sanidi mazingira
 azd env new dev
@@ -385,60 +417,60 @@ azd env new production
 azd env select dev
 azd up
 
-# Jaribu na hamisha kwenye mazingira ya maandalizi
+# Jaribu na kuhamisha kwenda mazingira ya majaribio
 azd env select staging
 azd up
 
-# Sambaza kwenye mazingira ya uzalishaji
+# Sambaza kwenye uzalishaji
 azd env select production
 azd up
 ```
 
-### Mtiririko wa Utatuzi wa Tatizo
+### Mtiririko wa Utatuzi wa Matatizo
 ```bash
-# Washa hali ya kugundua mende
+# Washa modi ya kutatua hitilafu
 export AZD_DEBUG=true
 
-# Kagua hali ya uanzishaji
+# Angalia hali ya utekelezaji
 azd show
 
 # Thibitisha usanidi
 azd config show
 
-# Fungua dashibodi ya ufuatiliaji kwa ajili ya kumbukumbu za mfumo
+# Fungua dashibodi ya ufuatiliaji kwa maandishi ya kumbukumbu
 azd monitor --logs
 
-# Kagua hali ya rasilimali
+# Angalia hali ya rasilimali
 azd show --output json
 ```
 
-## 🔍 Amri za Kuondoa Mende
+## 🔍 Amri za Utafutaji Hitilafu
 
-### Taarifa za Kuondoa Mende
+### Taarifa za Utafutaji
 ```bash
-# Washa pato la ufuatiliaji
+# Wezesha utoaji wa debug
 export AZD_DEBUG=true
 azd <command> --debug
 
-# Zima telemetri kwa pato safi zaidi
+# Zima telemetry kwa matokeo safi
 export AZD_DISABLE_TELEMETRY=true
 
 # Angalia usanidi wa sasa
 azd config show
 
-# Kagua hali ya uthibitishaji
+# Angalia hali ya uthibitishaji
 az account show
 ```
 
-### Kuondoa Mende kwa Mfano
+### Kukanushwa kwa Kiolezo
 ```bash
-# Orodhesha violezo vinavyopatikana pamoja na maelezo
+# Orodhesha templeti zinazopatikana pamoja na maelezo
 azd template list --output json
 
-# Onyesha taarifa za kiolezo
+# Onyesha taarifa za templeti
 azd template show <template-name>
 
-# Thibitisha kiolezo kabla ya kuanzisha
+# Thibitisha templeti kabla ya kuanzishwa
 azd template validate <template-name>
 ```
 
@@ -450,7 +482,7 @@ azd template validate <template-name>
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
-# Nenda kwenye mzizi wa mradi wa azd
+# Nenda hadi mzizi wa mradi wa azd
 cd $(azd root)
 
 # Onyesha saraka ya usanidi ya azd
@@ -466,7 +498,7 @@ azd show --output json
 azd env list --output json
 azd config show --output json
 
-# Changanua kwa kutumia jq
+# Chambua kwa jq
 azd show --output json | jq '.services.web.endpoint'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
@@ -480,21 +512,21 @@ azd env list --output table
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 Mchanganyiko ya Amri ya Kawaida
+## 🔧 Mchanganyiko ya Amri za Kawaida
 
 ### Skripti ya Ukaguzi wa Afya
 ```bash
 #!/bin/bash
-# Ukaguzi wa afya wa haraka
+# Ukaguzi wa haraka wa afya
 azd show
 azd env get-values
 azd monitor --logs
 ```
 
-### Uthibitishaji wa Utekelezaji
+### Uthibitisho wa Utekelezaji
 ```bash
 #!/bin/bash
-# Uthibitishaji kabla ya kupeleka
+# Uthibitisho kabla ya kupeleka
 azd show
 azd provision --preview  # Tazama mabadiliko kabla ya kupeleka
 az account show
@@ -503,7 +535,7 @@ az account show
 ### Ulinganisho wa Mazingira
 ```bash
 #!/bin/bash
-# Linganisha mazingira
+# Linganishe mazingira
 for env in dev staging production; do
     echo "=== $env ==="
     azd env select $env
@@ -524,7 +556,7 @@ done
 
 ## 📝 Vigezo vya Mazingira
 
-### Vigezo vya Mazingira Vinavyotumika Mara kwa Mara
+### Vigezo vya Mazingira vya Kawaida
 ```bash
 # Usanidi wa Azure
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -543,7 +575,7 @@ export LOG_LEVEL="info"
 
 ## 🚨 Amri za Dharura
 
-### Ufumbuzi wa Haraka
+### Marekebisho ya Haraka
 ```bash
 # Weka upya uthibitisho
 az account clear
@@ -555,42 +587,42 @@ azd env refresh
 # Sambaza tena huduma zote
 azd deploy
 
-# Kagua hali ya usambazaji
+# Angalia hali ya usambazaji
 azd show --output json
 ```
 
 ### Amri za Urejeshaji
 ```bash
-# Kupona kutokana na uzinduzi ulioshindikana - safisha na uzindue tena
+# Rejesha kutokana na utekelezaji ulioshindikana - safisha na utekeleze tena
 azd down --force --purge
 azd up
 
-# Toa tena miundombinu pekee
+# Toa tena miundombinu tu
 azd provision
 
-# Uzindue tena programu pekee
+# Sakinisha tena programu tu
 azd deploy
 ```
 
-## 💡 Vidokezo vya Kitaalamu
+## 💡 Vidokezo vya Wataalamu
 
 ### Majina Mbadala kwa Mtiririko wa Kasi
 ```bash
-# Ongeza kwenye .bashrc au .zshrc yako
+# Ongeza kwenye .bashrc yako au .zshrc yako
 alias azdup='azd up'
 alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Njia Fupi za Kazi
+### Mifupisho ya Kazi
 ```bash
-# Kubadili mazingira kwa haraka
+# Kubadilisha mazingira kwa haraka
 azd-env() {
     azd env select $1 && azd show
 }
 
-# Uzindishaji wa haraka ukiambatana na ufuatiliaji
+# Uwekaji wa haraka pamoja na ufuatiliaji
 azd-deploy-watch() {
     azd deploy --service $1 && azd monitor --live
 }
@@ -612,12 +644,12 @@ azd-status() {
 azd --help
 azd help
 
-# Msaada maalum kwa amri
+# Msaada maalumu kwa amri
 azd up --help
 azd env --help
 azd config --help
 
-# Onyesha toleo na taarifa za ujenzi
+# Onyesha toleo na maelezo ya ujenzi
 azd version
 azd version --output json
 ```
@@ -633,21 +665,21 @@ azd template show <template-name> --docs
 
 ---
 
-**Kidokezo**: Kagua cheti hiki na tumia `Ctrl+F` kupata kwa haraka amri unazohitaji!
+**Dokezo**: Hifadhi karatasi hii ya marejeleo kwa alama (bookmark) na tumia `Ctrl+F` kupata haraka amri unazozihitaji!
 
 ---
 
 **Uvinjari**
-- **Somo lililopita**: [Ukaguzi wa Kabla ya Utekelezaji](../docs/pre-deployment/preflight-checks.md)
-- **Somo lililofuata**: [Kamusi](glossary.md)
+- **Somo Lililopita**: [Ukaguzi wa Kabla ya Utekelezaji](../docs/pre-deployment/preflight-checks.md)
+- **Somo Linalofuata**: [Kamusi](glossary.md)
 
 ---
 
-> **💡 Unataka msaada wa amri za Azure ndani ya mhariri wako?** Sakinisha [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) kwa `npx skills add microsoft/github-copilot-for-azure` — ustadi 37 kwa AI, Foundry, uenezaji, utambuzi, na zaidi.
+> **💡 Unataka msaada wa amri za Azure katika mhariri wako?** Sakinisha [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) kwa `npx skills add microsoft/github-copilot-for-azure` — ujuzi 37 kwa AI, Foundry, utekelezaji, utambuzi, na zaidi.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Taarifa ya kutotegemea**:
-Nyaraka hii imetafsiriwa kwa kutumia huduma ya utafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuwa sahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au ukosefu wa usahihi. Nyaraka asilia katika lugha yake ya asili inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, inashauriwa kutumia utafsiri wa kitaalamu unaofanywa na binadamu. Hatuwajibiki kwa uelewa potofu au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+**Kionyozo**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Hati ya asili katika lugha yake halisi inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatutojibu kwa kuelewa vibaya au tafsiri potofu zinazotokea kutokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

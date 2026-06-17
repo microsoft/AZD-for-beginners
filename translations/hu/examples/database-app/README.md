@@ -1,32 +1,32 @@
-# Microsoft SQL adatbázis és webalkalmazás telepítése az AZD-vel
+# Microsoft SQL adatbázis és webalkalmazás telepítése az AZD segítségével
 
-⏱️ **Becsült idő**: 20-30 perc | 💰 **Becsült költség**: kb. 15-25 $/hónap | ⭐ **Bonyolultság**: Középhaladó
+⏱️ **Becsült idő**: 20-30 perc | 💰 **Becsült költség**: ~15-25 USD/hónap | ⭐ **Komplexitás**: Középhaladó
 
-Ez a **teljes, működő példa** bemutatja, hogyan lehet az [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) eszközt használni egy Python Flask webalkalmazás Microsoft SQL adatbázissal Azure-ra történő telepítéséhez. Minden kódot tartalmaz és tesztelt – nincs szükség külső függőségekre.
+Ez a **teljes, működő példa** bemutatja, hogyan használható az [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) egy Python Flask webalkalmazás Microsoft SQL adatbázissal történő Azure-ba való telepítésére. Minden kód mellékelve van és tesztelve van—külső függőség nem szükséges.
 
-## Amit megtanulhatsz
+## Amit megtanulsz
 
 A példa végrehajtásával:
-- Telepítesz egy többrétegű alkalmazást (webalkalmazás + adatbázis) infrastruktúraként-kód segítségével
-- Biztonságos adatbáziskapcsolatot konfigurálsz titkok keménykódolása nélkül
-- Az Application Insights segítségével figyeled az alkalmazás állapotát
+- Többrétegű alkalmazást telepítesz (webalkalmazás + adatbázis) infrastruktúra-kód segítségével
+- Biztonságos adatbázis-kapcsolatokat konfigurálsz, titkok hardkódolása nélkül
+- Alkalmazás egészségügyi állapotát figyeled az Application Insights használatával
 - Hatékonyan kezeled az Azure erőforrásokat az AZD CLI-vel
-- Követed az Azure biztonsági, költséghatékonysági és megfigyelhetőségi legjobb gyakorlatait
+- Követed az Azure legjobb gyakorlatait biztonság, költségoptimalizálás és megfigyelhetőség terén
 
-## Forgatókönyv áttekintés
+## Forgatókönyv áttekintése
 - **Webalkalmazás**: Python Flask REST API adatbázis-kapcsolattal
 - **Adatbázis**: Azure SQL adatbázis mintaadatokkal
-- **Infrastruktúra**: Bicep segítségével kialakítva (moduláris, újrahasználható sablonok)
-- **Telepítés**: Teljesen automatizált `azd` parancsokkal
-- **Figyelés**: Application Insights naplózáshoz és telemetriához
+- **Infrastruktúra**: Bicep segítségével létrehozva (moduláris, újrahasznosítható sablonok)
+- **Telepítés**: Teljesen automatizált az `azd` parancsokkal
+- **Megfigyelés**: Application Insights naplózáshoz és telemetriához
 
 ## Előfeltételek
 
 ### Szükséges eszközök
 
-Kezdés előtt győződj meg róla, hogy ezek az eszközök telepítve vannak:
+Kezdés előtt ellenőrizd, hogy a következő eszközök telepítve vannak:
 
-1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (2.50.0 vagy újabb verzió)
+1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (2.50.0-s vagy újabb verzió)
    ```sh
    az --version
    # Várt kimenet: azure-cli 2.50.0 vagy újabb
@@ -44,50 +44,51 @@ Kezdés előtt győződj meg róla, hogy ezek az eszközök telepítve vannak:
    # Várt kimenet: Python 3.8 vagy újabb
    ```
 
-4. **[Docker](https://www.docker.com/get-started)** (opcionális, helyi konténeres fejlesztéshez)
+4. **[Docker](https://www.docker.com/get-started)** (opcionális, helyi konténer alapú fejlesztéshez)
    ```sh
    docker --version
-   # Várt kimenet: Docker verzió 20.10 vagy újabb
+   # Elvárt kimenet: Docker verzió 20.10 vagy újabb
    ```
 
 ### Azure követelmények
 
 - Aktív **Azure előfizetés** ([ingyenes fiók létrehozása](https://azure.microsoft.com/free/))
-- Jogosultság az erőforrások létrehozására az előfizetésben
-- **Tulajdonos** vagy **Hozzáférő** szerep az előfizetésen vagy erőforráscsoporton belül
+- Jogosultság erőforrások létrehozására az előfizetés alatt
+- **Tulajdonosi** vagy **Közreműködői** szerepkör az előfizetésben vagy erőforráscsoportban
 
-### Előzetes tudás
+### Tudás előfeltételek
 
-Ez egy **középhaladó** példa. Ismerned kell:
-- Alapvető parancssori műveleteket
-- Alapfelhő fogalmakat (erőforrások, erőforráscsoportok)
-- Az alap webalkalmazások és adatbázisok működését
+Ez egy **középhaladó szintű** példa. Jó, ha ismered:
+- Az alapvető parancssori műveleteket
+- Alapvető felhő fogalmakat (erőforrások, erőforráscsoportok)
+- Webalkalmazások és adatbázisok alapjait
 
-**Új vagy az AZD-ben?** Először nézd meg a [Bevezető útmutatót](../../docs/chapter-01-foundation/azd-basics.md).
+**Új vagy az AZD-ben?** Kezdd a [Kezdő útmutatóval](../../docs/chapter-01-foundation/azd-basics.md).
 
 ## Architektúra
 
-Ez a példa egy kétrétegű architektúrát telepít webalkalmazással és SQL adatbázissal:
+Ez a példa kétrétegű architektúrát telepít webalkalmazással és SQL adatbázissal:
 
 ```mermaid
 graph TD
-    Browser[Felhasználói böngésző] <--> WebApp[Azure Webalkalmazás<br/>Flask API<br/>/egészség<br/>/termékek]
-    WebApp -- Biztonságos kapcsolat<br/>Titkosítva --> SQL[Azure SQL Adatbázis<br/>Termékek tábla<br/>Minta adatok]
+    Browser[Felhasználó böngészője] <--> WebApp[Azure Web App<br/>Flask API<br/>/egeszseg<br/>/termekek]
+    WebApp -- Biztonságos kapcsolat<br/>Titkosítva --> SQL[Azure SQL Adatbázis<br/>Termék tábla<br/>Minta adatok]
 ```
-**Erőforrások telepítése:**
+
+**Erőforrás telepítés:**
 - **Erőforráscsoport**: Minden erőforrás konténere
 - **App Service terv**: Linux alapú hosztolás (B1 szint a költséghatékonyságért)
-- **Webalkalmazás**: Python 3.11 futtatókörnyezet Flask alkalmazással
-- **SQL szerver**: Kezelt adatbázis szerver TLS 1.2 minimummal
-- **SQL adatbázis**: Basic szint (2GB, fejlesztéshez/teszteléshez megfelelő)
-- **Application Insights**: Monitorozás és naplózás
-- **Log Analytics munkaterület**: Centralizált napló tárolás
+- **Webalkalmazás**: Python 3.11 runtime Flask alkalmazással
+- **SQL szerver**: Felügyelt adatbázis szerver legalább TLS 1.2-vel
+- **SQL adatbázis**: Alapszint (2GB, fejlesztéshez/testeléshez megfelelő)
+- **Application Insights**: Megfigyelés és naplózás
+- **Log Analytics munkaterület**: Központosított napló tárolás
 
-**Hasonlat**: Gondolj erre úgy, mint egy étteremre (webalkalmazás), aminek van egy walk-in fagyasztója (adatbázis). A vendégek a menüből rendelnek (API végpontok), a konyha (Flask app) pedig a fagyasztóból veszi az alapanyagokat (adatokat). Az étteremvezető (Application Insights) mindent nyomon követ.
+**Hasonlat**: Ez olyan, mint egy étterem (webalkalmazás) egy ipari mélyhűtővel (adatbázis). A vendégek rendelnek a menüből (API végpontok), a konyha (Flask alkalmazás) pedig az alapanyagokat (adatokat) veszi elő a mélyhűtőből. Az étterem vezetője (Application Insights) mindent nyomon követ.
 
-## Mappa struktúra
+## Mappaszerkezet
 
-Minden fájl benne van ebben a példában – nincs szükség külső függőségekre:
+Minden fájl benne van a példában—külső függőség nem szükséges:
 
 ```
 examples/database-app/
@@ -114,10 +115,10 @@ examples/database-app/
         └── Dockerfile          # Container definition
 ```
 
-**Mire jó az egyes fájl:**
-- **azure.yaml**: Megmondja az AZD-nek, mit és hova telepítsen
-- **infra/main.bicep**: Együtt irányít minden Azure erőforrást
-- **infra/resources/*.bicep**: Egyedi erőforrásdefiníciók (újrahasználható modulok)
+**Mit csinál az egyes fájl:**
+- **azure.yaml**: Meghatározza az AZD-nek, mit és hova telepítsen
+- **infra/main.bicep**: Összehangolja az összes Azure erőforrást
+- **infra/resources/*.bicep**: Egyedi erőforrás definíciók (moduláris, újrahasznosítható)
 - **src/web/app.py**: Flask alkalmazás adatbázis logikával
 - **requirements.txt**: Python csomag függőségek
 - **Dockerfile**: Konténerizációs utasítások telepítéshez
@@ -131,21 +132,21 @@ git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/database-app
 ```
 
-**✓ Ellenőrzés**: Győződj meg róla, hogy látod az `azure.yaml` fájlt és az `infra/` mappát:
+**✓ Sikertes ellenőrzés**: Ellenőrizd, hogy látod az `azure.yaml` fájlt és az `infra/` mappát:
 ```sh
 ls
 # Várt: README.md, azure.yaml, infra/, src/
 ```
 
-### 2. lépés: Azure-ba történő hitelesítés
+### 2. lépés: Azure hitelesítés
 
 ```sh
 azd auth login
 ```
 
-Megnyitja a böngészőt az Azure hitelesítéshez. Jelentkezz be az Azure fiókoddal.
+Megnyílik a böngésző az Azure hitelesítéshez. Jelentkezz be Azure hitelesítő adataiddal.
 
-**✓ Ellenőrzés**: Látnod kell:
+**✓ Sikertes ellenőrzés**: Ennek kell látszania:
 ```
 Logged in to Azure.
 ```
@@ -158,35 +159,35 @@ azd init
 
 **Mi történik**: AZD létrehoz egy helyi konfigurációt a telepítéshez.
 
-**Kérdések**:
+**A megjelenő kérdések**:
 - **Környezet neve**: Adj meg egy rövid nevet (pl. `dev`, `myapp`)
-- **Azure előfizetés**: Válassz az előfizetéseid közül
-- **Azure régió**: Válassz régiót (pl. `eastus`, `westeurope`)
+- **Azure előfizetés**: Válaszd ki az előfizetésed a listából
+- **Azure régió**: Válassz egy régiót (pl. `eastus`, `westeurope`)
 
-**✓ Ellenőrzés**: Látnod kell:
+**✓ Sikertes ellenőrzés**: Ennek kell látszania:
 ```
 SUCCESS: New project initialized!
 ```
 
-### 4. lépés: Azure erőforrások létrehozása
+### 4. lépés: Azure erőforrások előállítása
 
 ```sh
 azd provision
 ```
 
-**Mi történik**: AZD telepíti az egész infrastruktúrát (5-8 perc):
-1. Létrehozza az erőforráscsoportot
-2. Létrehozza az SQL szervert és adatbázist
-3. Létrehozza az App Service tervet
-4. Létrehozza a webalkalmazást
-5. Létrehozza az Application Insights-ot
-6. Konfigurálja a hálózatot és a biztonságot
+**Mi történik**: AZD telepíti az összes infrastruktúrát (5-8 perc):
+1. Erőforráscsoport létrehozása
+2. SQL szerver és adatbázis létrehozása
+3. App Service terv létrehozása
+4. Webalkalmazás létrehozása
+5. Application Insights létrehozása
+6. Hálózat és biztonság konfigurálása
 
-**Kérdések, amikre válaszolnod kell**:
-- **SQL admin felhasználónév**: Add meg a felhasználónevet (pl. `sqladmin`)
-- **SQL admin jelszó**: Adj meg egy erős jelszót (mentsd el!)
+**Kérni fogja tőled**:
+- **SQL admin felhasználónév**: Adj meg egy felhasználónevet (pl. `sqladmin`)
+- **SQL admin jelszó**: Adj meg egy erős jelszót (jegyezd meg!)
 
-**✓ Ellenőrzés**: Látnod kell:
+**✓ Sikertes ellenőrzés**: Ennek kell látszania:
 ```
 SUCCESS: Your application was provisioned in Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
@@ -195,20 +196,20 @@ https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-na
 
 **⏱️ Idő**: 5-8 perc
 
-### 5. lépés: Az alkalmazás telepítése
+### 5. lépés: Alkalmazás telepítése
 
 ```sh
 azd deploy
 ```
 
-**Mi történik**: AZD felépíti és telepíti a Flask alkalmazást:
+**Mi történik**: AZD építi és telepíti Flask alkalmazásod:
 1. Csomagolja a Python alkalmazást
 2. Felépíti a Docker konténert
-3. Feltölti az Azure Web App-be
-4. Inicializálja az adatbázist mintaadatokkal
+3. Feltölti az Azure Web App-ba
+4. Inicializálja az adatbázist minta adatokkal
 5. Elindítja az alkalmazást
 
-**✓ Ellenőrzés**: Látnod kell:
+**✓ Sikertes ellenőrzés**: Ennek kell látszania:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
@@ -217,15 +218,15 @@ https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-na
 
 **⏱️ Idő**: 3-5 perc
 
-### 6. lépés: Az alkalmazás böngészőben történő megnyitása
+### 6. lépés: Alkalmazás megnyitása böngészőben
 
 ```sh
 azd browse
 ```
 
-Megnyitja a telepített webalkalmazást a böngésződben `https://app-<unique-id>.azurewebsites.net` címen.
+Megnyitja a telepített webalkalmazást böngészőben az `https://app-<unique-id>.azurewebsites.net` címen.
 
-**✓ Ellenőrzés**: JSON adatot kell látnod:
+**✓ Sikertes ellenőrzés**: JSON kimenetet kell látnod:
 ```json
 {
   "message": "Welcome to the Database App API",
@@ -240,7 +241,7 @@ Megnyitja a telepített webalkalmazást a böngésződben `https://app-<unique-i
 
 ### 7. lépés: API végpontok tesztelése
 
-**Állapot ellenőrzés** (adatbáziskapcsolat tesztelése):
+**Egészségügyi ellenőrzés** (ellenőrizd az adatbázis kapcsolatot):
 ```sh
 curl https://app-<your-id>.azurewebsites.net/health
 ```
@@ -253,7 +254,7 @@ curl https://app-<your-id>.azurewebsites.net/health
 }
 ```
 
-**Terméklista lekérdezése** (mintaadat):
+**Termékek listázása** (minta adat):
 ```sh
 curl https://app-<your-id>.azurewebsites.net/products
 ```
@@ -272,73 +273,73 @@ curl https://app-<your-id>.azurewebsites.net/products
 ]
 ```
 
-**Egy termék lekérése**:
+**Egyetlen termék lekérése**:
 ```sh
 curl https://app-<your-id>.azurewebsites.net/products/1
 ```
 
-**✓ Ellenőrzés**: Minden végpont JSON adatot ad hiba nélkül.
+**✓ Sikertes ellenőrzés**: Minden végpont JSON adatot ad hiba nélkül.
 
 ---
 
-**🎉 Gratulálunk!** Sikeresen telepítettél egy webalkalmazást adatbázissal Azure-ra az AZD segítségével.
+**🎉 Gratulálunk!** Sikeresen telepítettél egy adatbázissal rendelkező webalkalmazást Azure-ba az AZD használatával.
 
 ## Konfiguráció mélyreható ismertetése
 
 ### Környezeti változók
 
-A titkokat biztonságosan az Azure App Service konfiguráción keresztül kezeljük – **soha nem keménykódoljuk a forráskódban**.
+A titkokat biztonságosan kezeli az Azure App Service konfiguráció—**soha nem hardkódoltak a forráskódban**.
 
-**AZD automatikusan beállítja**:
-- `SQL_CONNECTION_STRING`: Adatbáziskapcsolat titkosított hitelesítő adatokkal
-- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Monitorozási telemetria végpont
-- `SCM_DO_BUILD_DURING_DEPLOYMENT`: Automatikus függőség telepítést engedélyezi
+**Az AZD automatikusan konfigurálja**:
+- `SQL_CONNECTION_STRING`: Adatbázis kapcsolat titkosított hitelesítő adatokkal
+- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Megfigyelési telemetria végpont
+- `SCM_DO_BUILD_DURING_DEPLOYMENT`: Automatikus függőség telepítés engedélyezése
 
-**Hol tárolódnak a titkok**:
-1. Az `azd provision` során adod meg az SQL hitelesítő adatokat biztonságos kérésekben
-2. AZD eltárolja ezeket a helyi `.azure/<env-name>/.env` fájlban (git által figyelmen kívül hagyva)
-3. AZD beilleszti az adatokat az Azure App Service konfigurációba (titkosítva tárolva)
-4. Az alkalmazás az `os.getenv()` segítségével olvassa be futásidőben
+**A titkok tárolása helye**:
+1. az `azd provision` alatt megadod a SQL hitelesítő adatokat biztonságos kérdésekben
+2. AZD ezeket helyben tárolja `.azure/<env-name>/.env` fájlban (a git figyelmen kívül hagyja)
+3. AZD injektálja az Azure App Service konfigurációba (titkosítva tárolva)
+4. Az alkalmazás futás időben `os.getenv()`-tel olvassa ki
 
 ### Helyi fejlesztés
 
-Helyi teszteléshez készíts `.env` fájlt a mintából:
+Helyi teszthez hozz létre `.env` fájlt a mintából:
 
 ```sh
 cp .env.sample .env
-# Szerkessze a .env fájlt a helyi adatbázis-kapcsolatával
+# Szerkessze a .env fájlt a helyi adatbázis-kapcsolathoz
 ```
 
 **Helyi fejlesztési munkafolyamat**:
 ```sh
-# Futtassa a függőségek telepítését
+# Függőségek telepítése
 cd src/web
 pip install -r requirements.txt
 
-# Állítsa be a környezeti változókat
+# Környezeti változók beállítása
 export SQL_CONNECTION_STRING="your-local-connection-string"
 
-# Indítsa el az alkalmazást
+# Az alkalmazás futtatása
 python app.py
 ```
 
-**Helyi tesztelés**:
+**Tesztelj helyileg**:
 ```sh
 curl http://localhost:8000/health
-# Várt: {"status": "healthy", "database": "connected"}
+# Várható: {"status": "healthy", "database": "connected"}
 ```
 
-### Infrastruktúra mint kód
+### Infrastruktúra kód formájában
 
-Minden Azure erőforrás **Bicep sablonokban** van definiálva (`infra/` mappa):
+Az összes Azure erőforrás Bicep sablonokban van definiálva (`infra/` mappa):
 
-- **Moduláris felépítés**: minden erőforrástípus külön fájlban az újrafelhasználhatóságért
-- **Paraméterezhető**: testreszabható a SKU, régiók, névkonvenciók
-- **Legjobb gyakorlatoknak megfelelő**: Azure névadási szabványok és biztonsági alapbeállítások
-- **Verziókövetett**: infrastruktúra változásait Git kezeli
+- **Moduláris dizájn**: Minden erőforrástípusnak saját fájlja van az újrahasznosíthatóságért
+- **Paraméterezett**: Testreszabható SKU-k, régiók, névkonvenciók
+- **Legjobb gyakorlatok**: Követi az Azure névhasználati szabványokat és biztonsági alapbeállításokat
+- **Verziókövetett**: Az infrastruktúra változásokat Git-ben követjük
 
 **Testreszabási példa**:
-Az adatbázis szintjének megváltoztatásához szerkeszd az `infra/resources/sql-database.bicep` fájlt:
+Az adatbázis szintjének módosításához szerkeszd az `infra/resources/sql-database.bicep` fájlt:
 ```bicep
 sku: {
   name: 'Standard'  // Changed from 'Basic'
@@ -352,67 +353,67 @@ sku: {
 Ez a példa követi az Azure biztonsági legjobb gyakorlatait:
 
 ### 1. **Nincsenek titkok a forráskódban**
-- ✅ Hitelesítő adatok az Azure App Service konfigurációban vannak tárolva (titkosítva)
-- ✅ `.env` fájlok kizárva a Git-től `.gitignore`-ral
-- ✅ Titkok biztonságos paramétereken keresztül kerülnek beállításra telepítés során
+- ✅ Hitelesítő adatok az Azure App Service konfigurációjában tárolva (titkosított)
+- ✅ `.env` fájlok kizárva a Gitből `.gitignore`-ral
+- ✅ Titkok biztonságos paramétereken keresztül kerülnek átadásra telepítéskor
 
 ### 2. **Titkosított kapcsolatok**
-- ✅ TLS 1.2 minimum az SQL szerveren
-- ✅ HTTPS-only kötelező a Webalkalmazásnál
-- ✅ Adatbáziskapcsolatok titkosított csatornán mennek keresztül
+- ✅ TLS 1.2 minimum SQL szerverhez
+- ✅ Csak HTTPS kényszerítve a Web App-on
+- ✅ Adatbázis kapcsolatok titkosított csatornákon keresztül
 
 ### 3. **Hálózati biztonság**
-- ✅ SQL szerver tűzfal csak az Azure szolgáltatások számára engedélyezett
-- ✅ Nyilvános hálózati hozzáférés korlátozott (további zárolás Privát végpontokkal)
-- ✅ FTPS letiltva Web App-en
+- ✅ SQL szerver tűzfal beállítva, csak Azure szolgáltatások engedélyezve
+- ✅ Nyilvános hálózati hozzáférés korlátozva (tovább zárolható privát végpontokkal)
+- ✅ FTPS letiltva a Web App-on
 
-### 4. **Hitelesítés és jogosultságok**
-- ⚠️ **Jelenlegi**: SQL hitelesítés (felhasználónév/jelszó)
-- ✅ **Javaslat éles környezetre**: Azure Managed Identity jelszó nélküli hitelesítéshez
+### 4. **Hitelesítés és jogosultság**
+- ⚠️ **Jelenleg**: SQL hitelesítés (felhasználónév/jelszó)
+- ✅ **Éles használathoz ajánlott**: Azure Managed Identity jelszó nélküli hitelesítéshez
 
-**Managed Identity-re váltás lépései** (éles környezet esetén):
-1. Engedélyezd a kezelt identitást Web App-en
-2. Add meg az identitás SQL jogosultságait
-3. Frissítsd a kapcsolati stringet managed identity használatára
+**Managed Identity-re váltás (éles környezethez)**:
+1. Engedélyezd a menedzselt identitást a Web App-on
+2. Adj engedélyt az identitásnak SQL-ben
+3. Frissítsd a kapcsolódási stringet a managed identity használatára
 4. Távolítsd el a jelszavas hitelesítést
 
-### 5. **Auditálás és megfelelőség**
-- ✅ Az Application Insights naplózza az összes kérést és hibát
-- ✅ SQL adatbázis auditálás engedélyezve (állítható megfelelőséghez)
-- ✅ Minden erőforrás címkézve van a kormányzás érdekében
+### 5. **Auditing és megfelelőség**
+- ✅ Application Insights naplózza a kéréseket és hibákat
+- ✅ SQL adatbázis auditing engedélyezve (megfelelőséghez konfigurálható)
+- ✅ Minden erőforrás címkézve kormányzás céljából
 
-**Biztonsági ellenőrzőlista éles üzem előtt**:
-- [ ] Engedélyezd az Azure Defender az SQL-hez
-- [ ] Konfiguráld a Privát végpontokat SQL adatbázishoz
-- [ ] Engedélyezd a Webalkalmazás tűzfalat (WAF)
-- [ ] Implementáld az Azure Key Vault-ot titok forgatáshoz
-- [ ] Állítsd be az Azure AD hitelesítést
-- [ ] Kapcsold be az diagnosztikai naplózást minden erőforráshoz
+**Biztonsági ellenőrző lista éles előtt**:
+- [ ] Engedélyezd az Azure Defender for SQL-t
+- [ ] Konfiguráld a privát végpontokat az SQL adatbázishoz
+- [ ] Engedélyezd a Web Application Firewall-t (WAF)
+- [ ] Implementáld az Azure Key Vault titkok forgatását
+- [ ] Konfiguráld a Microsoft Entra ID hitelesítést
+- [ ] Engedélyezd a diagnosztikai naplózást minden erőforráshoz
 
-## Költséghatékonyság
+## Költségoptimalizálás
 
-**Becsült havi költségek** (2025 november):
+**Becsült havi költségek** (2025 novemberi állapot szerint):
 
 | Erőforrás | SKU/Szint | Becsült költség |
 |----------|----------|----------------|
-| App Service terv | B1 (alap) | kb. 13 $/hó |
-| SQL adatbázis | Basic (2GB) | kb. 5 $/hó |
-| Application Insights | Fogyasztás alapú | kb. 2 $/hó (alacsony forgalom) |
-| **Összesen** | | **kb. 20 $/hó** |
+| App Service terv | B1 (Alap) | kb. 13 USD/hó |
+| SQL adatbázis | Alap (2GB) | kb. 5 USD/hó |
+| Application Insights | Fogyasztás alapú | kb. 2 USD/hó (alacsony forgalom) |
+| **Összesen** | | **kb. 20 USD/hó** |
 
-**💡 Költségcsökkentési tippek**:
+**💡 Költségcsökkentő tippek**:
 
-1. **Használd az ingyenes szintet tanuláshoz**:
+1. **Ingyenes szint tanuláshoz**:
    - App Service: F1 szint (ingyenes, korlátozott óraszám)
-   - SQL adatbázis: Azure SQL Database szerver nélküli opció
-   - Application Insights: 5 GB/hónap ingyenes bevitel
+   - SQL adatbázis: Azure SQL Database serverless használata
+   - Application Insights: 5GB/hó ingyenes adatbevitel
 
-2. **Állítsd le az erőforrásokat, amikor nem használod**:
+2. **Állítsd le az erőforrásokat, ha nem használod**:
    ```sh
-   # Állítsa le a webalkalmazást (az adatbázis még mindig számol díjat)
+   # Állítsa le a webalkalmazást (az adatbázis továbbra is díjat számít fel)
    az webapp stop --name <app-name> --resource-group <rg-name>
    
-   # Szükség esetén indítsa újra
+   # Indítsa újra szükség esetén
    az webapp start --name <app-name> --resource-group <rg-name>
    ```
 
@@ -420,42 +421,42 @@ Ez a példa követi az Azure biztonsági legjobb gyakorlatait:
    ```sh
    azd down
    ```
-   Ez eltávolítja az összes erőforrást és megszünteti a költségeket.
+   Ez eltávolít mindent és megállítja a díjak felszámolását.
 
 4. **Fejlesztési vs. éles SKU-k**:
-   - **Fejlesztés**: Basic szint (ebben a példában)
-   - **Éles**: Standard/Premium szintek redundanciával
+   - **Fejlesztés**: Alapszint (ebben a példában használt)
+   - **Éles**: Standard/Premium szint redundanciával
 
 **Költségfigyelés**:
-- Nézd meg a költségeket az [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement) felületen
-- Állíts be költségriasztásokat váratlan költségek ellen
-- Jelöld címkével az összes erőforrást `azd-env-name`-mel a nyomon követéshez
+- Nézd meg a költségeket az [Azure Cost Management-ben](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
+- Állíts be költségriasztásokat meglepetések elkerülésére
+- Címkézd az összes erőforrást `azd-env-name` címkével az azonosításhoz
 
 **Ingyenes szint alternatíva**:
-Tanulási céllal módosíthatod az `infra/resources/app-service-plan.bicep` fájlt:
+Tanuláshoz módosíthatod az `infra/resources/app-service-plan.bicep` fájlt:
 ```bicep
 sku: {
   name: 'F1'  // Free tier
   tier: 'Free'
 }
 ```
-**Megjegyzés**: Az ingyenes szint korlátokkal jár (60 perc CPU/nap, nincs always-on).
+**Megjegyzés**: Az ingyenes szint korlátozásokkal jár (60 perc/nap CPU, nincs mindig futás).
 
-## Monitorozás és megfigyelhetőség
+## Megfigyelés és megfigyelhetőség
 
 ### Application Insights integráció
 
-Ez a példa tartalmazza az **Application Insights**-ot átfogó monitorozáshoz:
+Ez a példa tartalmaz **Application Insights**-t átfogó megfigyeléshez:
 
-**Mi van monitorozva**:
+**Mi kerül megfigyelésre**:
 - ✅ HTTP kérések (késleltetés, státuszkódok, végpontok)
 - ✅ Alkalmazás hibák és kivételek
-- ✅ Egyedi naplózás Flask alkalmazásból
-- ✅ Adatbáziskapcsolat állapota
-- ✅ Teljesítménymutatók (CPU, memória)
+- ✅ Egyéni naplózás Flask alkalmazásból
+- ✅ Adatbázis kapcsolat egészsége
+- ✅ Teljesítmény mutatók (CPU, memória)
 
-**Application Insights elérése**:
-1. Nyisd meg a [Azure portált](https://portal.azure.com)
+**Hozzáférés az Application Insights-hoz**:
+1. Nyisd meg az [Azure Portal](https://portal.azure.com)-t
 2. Navigálj az erőforráscsoportodhoz (`rg-<env-name>`)
 3. Kattints az Application Insights erőforrásra (`appi-<unique-id>`)
 
@@ -477,38 +478,38 @@ exceptions
 | project timestamp, type, outerMessage, operation_Name
 ```
 
-**Egészség állapot ellenőrzése végpont**:
+**Egészségügyi végpont ellenőrzése**:
 ```kusto
 requests
 | where name contains "health"
 | summarize count() by resultCode, bin(timestamp, 1h)
 ```
 
-### SQL adatbázis auditálás
+### SQL adatbázis audit naplózás
 
-**SQL adatbázis auditálás engedélyezve** a következők követésére:
-- Adatbázis-hozzáférési minták
-- Sikertelen bejelentkezési kísérletek
+**SQL adatbázis audit naplózás engedélyezve** a következők nyomon követésére:
+- Adatbázis hozzáférések mintái
+- Sikertelen bejelentkezések
 - Sémaváltozások
-- Adathozzáférés (megfelelőség miatt)
+- Adathozzáférés (megfelelőség érdekében)
 
-**Audit naplók elérése**:
+**Audit naplók megtekintése**:
 1. Azure Portal → SQL adatbázis → Auditálás
-2. A naplókat a Log Analytics munkaterületen tekintheted meg
+2. Naplók megtekintése a Log Analytics munkaterületen
 
-### Valós idejű monitorozás
+### Valós idejű megfigyelés
 
 **Élő metrikák megtekintése**:
 1. Application Insights → Élő metrikák
-2. Valós időben láthatod a kéréseket, hibákat és teljesítményt
+2. Kérések, sikertelenségek és teljesítmény valós időben látható
 
 **Riasztások beállítása**:
 Kritikus eseményekhez hozz létre riasztásokat:
-- HTTP 500 hibák > 5 db 5 perc alatt
-- Adatbáziskapcsolati hibák
+- HTTP 500 hiba > 5 db 5 perc alatt
+- Adatbázis kapcsolat hibák
 - Magas válaszidő (>2 másodperc)
 
-**Példa riasztás létrehozására**:
+**Riasztás létrehozásának példája**:
 ```sh
 az monitor metrics alert create \
   --name "High-Response-Time" \
@@ -521,7 +522,7 @@ az monitor metrics alert create \
 ## Hibakeresés
 ### Gyakori problémák és megoldások
 
-#### 1. `azd provision` nem sikerül "Location not available" hibával
+#### 1. `azd provision` hibája: "Location not available"
 
 **Tünet**:
 ```
@@ -529,12 +530,12 @@ Error: The subscription is not registered for the resource type 'components' in 
 ```
 
 **Megoldás**:
-Válasszon másik Azure régiót, vagy regisztrálja az erőforrás-szolgáltatót:
+Válassz másik Azure régiót vagy regisztráld az erőforrás-szolgáltatót:
 ```sh
 az provider register --namespace Microsoft.Insights
 ```
 
-#### 2. SQL kapcsolódás sikertelen telepítés közben
+#### 2. SQL Kapcsolat Hiba Telepítés Közben
 
 **Tünet**:
 ```
@@ -542,34 +543,34 @@ pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL S
 ```
 
 **Megoldás**:
-- Ellenőrizze, hogy az SQL Server tűzfala engedélyezi az Azure szolgáltatásokat (automatikusan konfigurálva)
-- Győződjön meg róla, hogy az SQL admin jelszó helyesen lett megadva az `azd provision` során
-- Ellenőrizze, hogy az SQL Server teljesen fel lett-e állítva (ez 2-3 percet is igénybe vehet)
+- Ellenőrizd, hogy az SQL Server tűzfala engedélyezi az Azure szolgáltatásokat (automatikusan beállítva)
+- Ellenőrizd, hogy az SQL admin jelszót helyesen adtad meg az `azd provision` során
+- Győződj meg arról, hogy az SQL Server teljesen elő van készítve (2-3 percet vehet igénybe)
 
-**Kapcsolódás ellenőrzése**:
+**Kapcsolat ellenőrzése**:
 ```sh
-# Az Azure Portálról lépjen a SQL adatbázishoz → Lekérdező szerkesztő
+# Az Azure Portálon navigáljon a SQL Adatbázishoz → Lekérdező szerkesztő
 # Próbáljon meg csatlakozni a hitelesítő adataival
 ```
 
-#### 3. Webalkalmazás "Application Error" hibaüzenetet mutat
+#### 3. Webalkalmazás "Application Error" Hibaüzenetet Mutat
 
 **Tünet**:
-A böngésző általános hibaképernyőt mutat.
+A böngésző általános hibaoldalt jelenít meg.
 
 **Megoldás**:
-Ellenőrizze az alkalmazás naplóit:
+Ellenőrizd az alkalmazás naplóit:
 ```sh
 # Legutóbbi naplók megtekintése
 az webapp log tail --name <app-name> --resource-group <rg-name>
 ```
 
 **Gyakori okok**:
-- Hiányzó környezeti változók (ellenőrizze az App Service → Configuration részt)
-- Nem sikerült a Python csomagok telepítése (ellenőrizze a telepítési naplókat)
-- Adatbázis inicializációs hiba (ellenőrizze az SQL kapcsolódást)
+- Hiányzó környezeti változók (ellenőrizd az App Service → Konfiguráció részt)
+- A Python csomag telepítése sikertelen (ellenőrizd a telepítési naplókat)
+- Adatbázis inicializációs hiba (ellenőrizd az SQL kapcsolatot)
 
-#### 4. `azd deploy` hibát ad "Build Error" üzenettel
+#### 4. `azd deploy` hibája: "Build Error"
 
 **Tünet**:
 ```
@@ -577,9 +578,9 @@ Error: Failed to build project
 ```
 
 **Megoldás**:
-- Győződjön meg róla, hogy a `requirements.txt` nem tartalmaz szintaxis hibákat
-- Ellenőrizze, hogy a Python 3.11 szerepel az `infra/resources/web-app.bicep` fájlban
-- Ellenőrizze, hogy a Dockerfile helyes alapképet használ
+- Győződj meg róla, hogy a `requirements.txt` nem tartalmaz szintaktikai hibát
+- Ellenőrizd, hogy a Python 3.11 szerepel az `infra/resources/web-app.bicep` fájlban
+- Ellenőrizd a Dockerfile helyes alapképet
 
 **Helyi hibakeresés**:
 ```sh
@@ -588,7 +589,7 @@ docker build -t test-app .
 docker run -p 8000:8000 test-app
 ```
 
-#### 5. "Unauthorized" hiba AZD parancsok futtatásakor
+#### 5. "Unauthorized" Hiba AZD Parancsok Futtatásakor
 
 **Tünet**:
 ```
@@ -596,29 +597,29 @@ ERROR: (Unauthorized) The client '<id>' with object id '<id>' does not have auth
 ```
 
 **Megoldás**:
-Jelentkezzen be újra az Azure-ba:
+Jelentkezz be újra az Azure-ba:
 ```sh
-# Szükséges az AZD munkafolyamataihoz
+# Szükséges az AZD munkafolyamatokhoz
 azd auth login
 
-# Nem kötelező, ha közvetlenül Azure CLI parancsokat is használsz
+# Opcionális, ha közvetlenül az Azure CLI parancsokat is használja
 az login
 ```
 
-Győződjön meg róla, hogy megfelelő jogosultságokkal (Contributor szerepkörrel) rendelkezik az előfizetésen.
+Ellenőrizd, hogy a megfelelő jogosultságokkal rendelkezel (Contributor szerepkör) az előfizetésen.
 
-#### 6. Magas adatbázis költségek
+#### 6. Magas Adatbázis Költségek
 
 **Tünet**:
 Váratlan Azure számla.
 
 **Megoldás**:
-- Ellenőrizze, hogy nem felejtette el futtatni az `azd down` parancsot tesztelés után
-- Győződjön meg róla, hogy az SQL adatbázis Basic szintet használ (nem Premium)
-- Tekintse át a költségeket az Azure Cost Management-ben
-- Állítson be költségértesítéseket
+- Ellenőrizd, hogy nem felejtetted-e el futtatni az `azd down` parancsot tesztelés után
+- Győződj meg arról, hogy az SQL adatbázis Basic szintet használ (nem Premium)
+- Nézd át a költségeket az Azure Cost Management-ben
+- Állíts be költségriasztásokat
 
-### Segítség kérése
+### Segítségkérés
 
 **Az összes AZD környezeti változó megtekintése**:
 ```sh
@@ -630,56 +631,56 @@ azd env get-values
 az webapp show --name <app-name> --resource-group <rg-name> --query state
 ```
 
-**Alkalmazásnaplók elérése**:
+**Alkalmazás naplók elérése**:
 ```sh
 az webapp log download --name <app-name> --resource-group <rg-name> --log-file app-logs.zip
 ```
 
-**További segítségre van szüksége?**
-- [AZD hibakeresési útmutató](../../docs/chapter-07-troubleshooting/common-issues.md)
-- [Azure App Service hibakeresés](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
-- [Azure SQL hibakeresés](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
+**További segítség kell?**
+- [AZD Hibakeresési Útmutató](../../docs/chapter-07-troubleshooting/common-issues.md)
+- [Azure App Service Hibakeresés](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
+- [Azure SQL Hibakeresés](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
 
-## Gyakorlati feladatok
+## Gyakorlati Feladatok
 
-### 1. feladat: Telepítés ellenőrzése (Kezdő)
+### 1. gyakorlat: Telepítés ellenőrzése (Kezdő)
 
-**Cél**: Ellenőrizze, hogy minden erőforrás telepítve van és az alkalmazás működik.
+**Cél**: Ellenőrizd, hogy minden erőforrás telepítve van és az alkalmazás működik.
 
 **Lépések**:
-1. Listázza az összes erőforrást az erőforráscsoportjában:
+1. Listázd az összes erőforrást az erőforráscsoportodban:
    ```sh
    az resource list --resource-group rg-<env-name> --output table
    ```
-   **Elvárt**: 6-7 erőforrás (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
+   **Várható**: 6-7 erőforrás (Web App, SQL Server, SQL Adatbázis, App Service Plan, Application Insights, Log Analytics)
 
-2. Tesztelje az összes API végpontot:
+2. Teszteld az összes API végpontot:
    ```sh
    curl https://app-<your-id>.azurewebsites.net/
    curl https://app-<your-id>.azurewebsites.net/health
    curl https://app-<your-id>.azurewebsites.net/products
    curl https://app-<your-id>.azurewebsites.net/products/1
    ```
-   **Elvárt**: Mindegyik valid JSON-t ad vissza hibák nélkül
+   **Várható**: Mindegyik érvényes JSON-t ad vissza, hiba nélkül
 
-3. Ellenőrizze az Application Insights-t:
-   - Lépjen be az Azure Portálban az Application Insights-ba
-   - Menjen a "Live Metrics" részhez
-   - Frissítse böngészőben a webalkalmazást
-   **Elvárt**: Valós időben megjelenő kérések
+3. Ellenőrizd az Application Insightset:
+   - Nyisd meg az Application Insights-t az Azure portálon
+   - Menj a "Live Metrics" részhez
+   - Frissítsd a böngészőt a webalkalmazásnál
+   **Várható**: Azonnal megjelenő kérések
 
-**Sikerfeltétel**: Az összes 6-7 erőforrás létezik, minden végpont adatot szolgáltat, a Live Metrics mutat aktivitást.
+**Siker kritériumai**: Mind a 6-7 erőforrás létezik, az összes végpont adatot ad vissza, a Live Metrics aktivitást mutat.
 
 ---
 
-### 2. feladat: Új API végpont hozzáadása (Középhaladó)
+### 2. gyakorlat: Új API végpont hozzáadása (Középhaladó)
 
-**Cél**: Bővítse a Flask alkalmazást új végponttal.
+**Cél**: Bővítsd a Flask alkalmazást egy új végponttal.
 
-**Indító kód**: Jelenlegi végpontok a `src/web/app.py` fájlban
+**Kezdő kód**: Jelenlegi végpontok a `src/web/app.py` fájlban
 
 **Lépések**:
-1. Szerkessze a `src/web/app.py` fájlt és adjon hozzá új végpontot a `get_product()` függvény után:
+1. Szerkeszd a `src/web/app.py` fájlt, és adj hozzá egy új végpontot a `get_product()` függvény után:
    ```python
    @app.route('/products/search/<keyword>')
    def search_products(keyword):
@@ -713,35 +714,35 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
            return jsonify({'error': str(e)}), 500
    ```
 
-2. Telepítse az alkalmazás frissített verzióját:
+2. Telepítsd az alkalmazás frissített verzióját:
    ```sh
    azd deploy
    ```
 
-3. Tesztelje az új végpontot:
+3. Teszteld az új végpontot:
    ```sh
    curl https://app-<your-id>.azurewebsites.net/products/search/laptop
    ```
-   **Elvárt**: Visszaadja a "laptop" keresésnek megfelelő termékeket
+   **Várható**: Visszaadja a "laptop" kulcsszóra illeszkedő termékeket
 
-**Sikerfeltétel**: Új végpont működik, szűrt eredményeket ad, megjelenik az Application Insights naplókban.
+**Siker kritériumai**: Az új végpont működik, szűrt eredményeket ad, megjelenik az Application Insights naplókban.
 
 ---
 
-### 3. feladat: Monitorozás és riasztások beállítása (Haladó)
+### 3. gyakorlat: Monitoring és Riasztások Beállítása (Haladó)
 
-**Cél**: Állítson be proaktív monitorozást és riasztásokat.
+**Cél**: Állíts be proaktív monitorozást és riasztásokat.
 
 **Lépések**:
-1. Hozzon létre riasztást HTTP 500-as hibákra:
+1. Hozz létre riasztást HTTP 500-as hibákra:
    ```sh
-   # Alkalmazás Elemzések erőforrásazonosítójának lekérése
+   # Alkalmazás Insights erőforrásazonosító lekérése
    AI_ID=$(az monitor app-insights component show \
      --app appi-<your-id> \
      --resource-group rg-<env-name> \
      --query id -o tsv)
    
-   # Értesítés létrehozása
+   # Riasztás létrehozása
    az monitor metrics alert create \
      --name "High-Error-Rate" \
      --resource-group rg-<env-name> \
@@ -752,28 +753,28 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
      --description "Alert when >5 failed requests in 5 minutes"
    ```
 
-2. Váltsa ki a riasztást hibák előidézésével:
+2. Indítsd el a riasztást hibák okozásával:
    ```sh
    # Nem létező termék lekérése
    for i in {1..10}; do curl https://app-<your-id>.azurewebsites.net/products/999; done
    ```
 
-3. Ellenőrizze, hogy aktiválódott-e a riasztás:
-   - Azure Portál → Alerts → Alert Rules
-   - Ellenőrizze az e-mailt (ha be van állítva)
+3. Ellenőrizd, hogy a riasztás elindult-e:
+   - Azure Portal → Riasztások → Riasztási szabályok
+   - Ellenőrizd az emailed (ha beállítottad)
 
-**Sikerfeltétel**: Létrejön a riasztási szabály, hibák esetén aktiválódik, értesítések érkeznek.
+**Siker kritériumai**: Létrejött a riasztási szabály, hibák esetén aktiválódik, értesítéseket kapni.
 
 ---
 
-### 4. feladat: Adatbázis sémaváltozások (Haladó)
+### 4. gyakorlat: Adatbázis sémaváltoztatások (Haladó)
 
-**Cél**: Hozzon létre új táblát és módosítsa az alkalmazást, hogy használja azt.
+**Cél**: Adj hozzá új táblát és módosítsd az alkalmazást, hogy használja azt.
 
 **Lépések**:
-1. Csatlakozzon az SQL adatbázishoz az Azure Portál Query Editor segítségével
+1. Csatlakozz az SQL adatbázishoz az Azure Portal Query Editor-ján keresztül
 
-2. Hozzon létre új `categories` táblát:
+2. Hozz létre egy új `categories` táblát:
    ```sql
    CREATE TABLE categories (
        id INT PRIMARY KEY IDENTITY(1,1),
@@ -790,33 +791,33 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    UPDATE products SET category_id = 1; -- Set all to Electronics
    ```
 
-3. Módosítsa a `src/web/app.py` fájlt, hogy a válaszok tartalmazzák a kategória információkat
+3. Frissítsd a `src/web/app.py` fájlt, hogy bevonja a kategória információkat a válaszokba
 
-4. Telepítse és tesztelje
+4. Telepítsd és teszteld az alkalmazást
 
-**Sikerfeltétel**: Az új tábla létezik, a termékeknél megjelenik a kategória információ, az alkalmazás továbbra is működik.
+**Siker kritériumai**: Az új tábla létezik, a termékek megjelenítik a kategória információkat, az alkalmazás továbbra is működik.
 
 ---
 
-### 5. feladat: Gyorsítótár (Caching) megvalósítása (Szakértő)
+### 5. gyakorlat: Gyorsítótárazás megvalósítása (Szakértő)
 
-**Cél**: Adjon hozzá Azure Redis Cache-et a teljesítmény javításához.
+**Cél**: Adj Azure Redis Cache-t a teljesítmény javításához.
 
 **Lépések**:
-1. Adja hozzá a Redis Cache-et az `infra/main.bicep` fájlhoz
-2. Módosítsa a `src/web/app.py`-t a terméklekérdezések gyorsítótárazására
-3. Mérje a teljesítményjavulást az Application Insights segítségével
-4. Hasonlítsa össze a válaszidőket gyorsítótárazás előtt és után
+1. Add hozzá a Redis Cache-t az `infra/main.bicep` fájlhoz
+2. Frissítsd a `src/web/app.py`-t a termék lekérdezések gyorsítótárazásához
+3. Mérd meg a teljesítmény javulást az Application Insights segítségével
+4. Hasonlítsd össze a válaszidőket gyorsítótárazás előtt és után
 
-**Sikerfeltétel**: Redis telepítve van, a gyorsítótár működik, a válaszidő több mint 50%-kal javul.
+**Siker kritériumai**: Redis telepítve van, a gyorsítótárazás működik, a válaszidők >50%-kal javulnak.
 
-**Tipp**: Kezdje a [Azure Cache for Redis dokumentációval](https://learn.microsoft.com/azure/azure-cache-for-redis/).
+**Tipp**: Kezdd az [Azure Cache for Redis dokumentációjával](https://learn.microsoft.com/azure/azure-cache-for-redis/).
 
 ---
 
 ## Takarítás
 
-Az ismétlődő költségek elkerülése érdekében törölje az összes erőforrást, ha végzett:
+A folyamatos díjak elkerülése érdekében törölj minden erőforrást, ha végeztél:
 
 ```sh
 azd down
@@ -827,19 +828,19 @@ azd down
 ? Total resources to delete: 7, are you sure you want to continue? (y/N)
 ```
 
-Írja be, hogy `y`, a megerősítéshez.
+Írd be a `y` betűt a megerősítéshez.
 
-**✓ Siker ellenőrzése**: 
-- Minden erőforrás törölve az Azure Portálból
-- Nem keletkeznek további költségek
+**✓ Siker Ellenőrzése**: 
+- Minden erőforrás törölve van az Azure Portálról
+- Nincsenek további díjak
 - A helyi `.azure/<env-name>` mappa törölhető
 
-**Alternatíva** (infrastruktúra megtartása, adatok törlése):
+**Alternatíva** (infrastruktúra megtartása, adat törlése):
 ```sh
 # Csak az erőforráscsoport törlése (AZD konfiguráció megtartása)
 az group delete --name rg-<env-name> --yes
 ```
-## További információk
+## További Információk
 
 ### Kapcsolódó dokumentáció
 - [Azure Developer CLI dokumentáció](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
@@ -848,52 +849,52 @@ az group delete --name rg-<env-name> --yes
 - [Application Insights dokumentáció](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
 - [Bicep nyelvi referencia](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
-### A kurzus következő lépései
-- **[Container Apps példa](../../../../examples/container-app)**: Mikro szolgáltatások telepítése Azure Container Apps segítségével
-- **[AI integrációs útmutató](../../../../docs/ai-foundry)**: AI képességek hozzáadása az alkalmazáshoz
-- **[Telepítési legjobb gyakorlatok](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Gyártási telepítési minták
+### A tanfolyam következő lépései
+- **[Container Apps példa](../../../../examples/container-app)**: Mikroservice-ek telepítése Azure Container Appsszel
+- **[AI integráció útmutató](../../../../docs/ai-foundry)**: AI képességek hozzáadása az alkalmazáshoz
+- **[Telepítési bevált gyakorlatok](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Gyártási telepítési minták
 
 ### Haladó témák
-- **Managed Identity**: Jelszavak eltávolítása és Azure AD hitelesítés használata
-- **Privát végpontok**: Biztonságos adatbázis-kapcsolatok virtuális hálózaton belül
-- **CI/CD integráció**: Automatizált telepítések GitHub Actions vagy Azure DevOps segítségével
-- **Több környezet**: Fejlesztői, staging és gyártási környezetek beállítása
-- **Adatbázis migrációk**: Alembic vagy Entity Framework használata séma verziókezeléshez
+- **Managed Identity**: Jelszavak eltávolítása és Microsoft Entra ID hitelesítés használata
+- **Private Endpoints**: Biztonságos adatbázis kapcsolat privát hálózaton belül
+- **CI/CD integráció**: Telepítések automatizálása GitHub Actions vagy Azure DevOps segítségével
+- **Több környezet**: Fejlesztői, tesztelői és gyártási környezetek létrehozása
+- **Adatbázis migrációk**: Alembic vagy Entity Framework használata séma verziókövetéshez
 
 ### Összehasonlítás más megközelítésekkel
 
-**AZD vs. ARM Template-ek**:
+**AZD vs ARM sablonok**:
 - ✅ AZD: Magasabb szintű absztrakció, egyszerűbb parancsok
-- ⚠️ ARM: Részletesebb, finomabb vezérlés
+- ⚠️ ARM: Részletesebb, aprólékosabb vezérlés
 
-**AZD vs. Terraform**:
-- ✅ AZD: Azure-natív, Azure szolgáltatásokkal integrált
+**AZD vs Terraform**:
+- ✅ AZD: Azure-natív, integrált Azure szolgáltatásokkal
 - ⚠️ Terraform: Többfelhős támogatás, nagyobb ökoszisztéma
 
-**AZD vs. Azure Portál**:
+**AZD vs Azure Portal**:
 - ✅ AZD: Ismételhető, verziókövetett, automatizálható
-- ⚠️ Portál: Manuális kattintások, nehéz reprodukálni
+- ⚠️ Portal: Kézi kattintás, nehéz reprodukálni
 
-**Gondoljon az AZD-re úgy, mint a Docker Compose Azure-hoz – egyszerűsített konfiguráció összetett telepítésekhez.**
+**Gondolj az AZD-re úgy, mint**: Docker Compose az Azure számára — egyszerűsített konfiguráció komplex telepítésekhez.
 
 ---
 
 ## Gyakran Ismételt Kérdések
 
 **K: Használhatok más programozási nyelvet?**  
-V: Igen! Cserélje le a `src/web/` mappát Node.js-re, C#-ra, Go-ra vagy bármely más nyelvre. Frissítse az `azure.yaml` és a Bicep fájlokat ennek megfelelően.
+V: Igen! Cseréld le a `src/web/` mappát Node.js-re, C#-ra, Go-ra vagy bármely más nyelvre. Frissítsd az `azure.yaml`-t és a Bicep fájlokat ennek megfelelően.
 
 **K: Hogyan adhatok hozzá több adatbázist?**  
-V: Adjon hozzá új SQL Database modult az `infra/main.bicep` fájlban, vagy használjon PostgreSQL/MySQL szolgáltatásokat az Azure adatbázisai közül.
+V: Adj hozzá egy másik SQL adatbázis modult az `infra/main.bicep`-ben, vagy használj PostgreSQL/MariaDB-t az Azure adatbázis szolgáltatásaiból.
 
 **K: Használhatom ezt éles környezetben?**  
-V: Ez egy kiindulópont. Éles környezethez adja hozzá: managed identity-t, privát végpontokat, redundanciát, biztonsági mentési stratégiát, WAF-ot és fejlett monitorozást.
+V: Ez egy kiindulópont. Éles környezethez adj hozzá: managed identity-t, privát végpontokat, redundanciát, mentési stratégiát, WAF-ot és fejlett monitorozást.
 
-**K: Mi van, ha konténereket szeretnék használni kód telepítése helyett?**  
-V: Nézze meg a [Container Apps példát](../../../../examples/container-app), amely végig Docker konténereket használ.
+**K: Mi van, ha tárolókban akarom futtatni a kód helyett?**  
+V: Nézd meg a [Container Apps példát](../../../../examples/container-app), amely egész alkalmazásokat Docker konténerekben futtat.
 
-**K: Hogyan csatlakozhatok az adatbázishoz helyi gépről?**  
-V: Adja hozzá az IP-címét az SQL Server tűzfalához:
+**K: Hogyan kapcsolódom az adatbázishoz a gépemről?**  
+V: Add hozzá az IP címed az SQL Server tűzfal szabályaihoz:
 ```sh
 az sql server firewall-rule create \
   --resource-group rg-<env-name> \
@@ -903,21 +904,21 @@ az sql server firewall-rule create \
   --end-ip-address <your-ip>
 ```
 
-**K: Használhatok meglévő adatbázist új létrehozása helyett?**  
-V: Igen, módosítsa az `infra/main.bicep` fájlt úgy, hogy egy meglévő SQL Servert hivatkozzon, és frissítse a kapcsolódási karakterlánc paramétereket.
+**K: Használhatom egy meglévő adatbázist az újak helyett?**  
+V: Igen, módosítsd az `infra/main.bicep`-t, hogy egy meglévő SQL Serverre mutasson, és frissítsd a kapcsolódási string paramétereket.
 
 ---
 
-> **Megjegyzés:** Ez a példa AZD használatával mutatja be legjobb gyakorlatokat egy webalkalmazás adatbázissal való telepítéséhez. Tartalmaz működő kódot, részletes dokumentációt és gyakorlati feladatokat a tanulás elmélyítéséhez. Éles telepítéshez vizsgálja meg a szervezete biztonsági, skálázási, megfelelőségi és költségszabályzatait.
+> **Megjegyzés:** Ez a példa bemutatja az AZD legjobb gyakorlatait egy webalkalmazás adatbázissal való telepítéséhez. Tartalmaz működő kódot, átfogó dokumentációt, és gyakorlati feladatokat a tanulás megerősítésére. Éles telepítéshez vizsgáld felül a biztonsági, skálázási, megfelelőségi és költségszempontokat, amelyeket a szervezeted igényei szabnak meg.
 
-**📚 Kurzus navigáció:**
+**📚 Tanfolyam navigáció:**
 - ← Előző: [Container Apps példa](../../../../examples/container-app)
-- → Következő: [AI integrációs útmutató](../../../../docs/ai-foundry)
-- 🏠 [Kurzus főoldal](../../README.md)
+- → Következő: [AI integráció útmutató](../../../../docs/ai-foundry)
+- 🏠 [Tanfolyam kezdőlap](../../README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Jogi nyilatkozat**:  
-Ezt a dokumentumot az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével fordítottuk le. Bár a pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti, anyanyelvű dokumentum tekintendő a hiteles forrásnak. Kritikus információk esetén professzionális, emberi fordítást javaslunk. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy félreértelmezésekért.
+**Jogi nyilatkozat**:
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Fontos információk esetén professzionális emberi fordítást javasolunk. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely ebből a fordításból ered.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

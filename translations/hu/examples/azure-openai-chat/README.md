@@ -1,23 +1,23 @@
-# Microsoft Foundry Models Chat Alkalmazás
+# Microsoft Foundry Models Chat alkalmazás
 
-**Tanulási út:** Középhaladó ⭐⭐ | **Idő:** 35-45 perc | **Költség:** $50-200/hó
+**Tanulási útvonal:** Középhaladó ⭐⭐ | **Időtartam:** 35-45 perc | **Költség:** 50-200 USD/hónap
 
-Egy teljes Microsoft Foundry Models chat alkalmazás, amely az Azure Developer CLI (azd) segítségével van telepítve. Ez a példa bemutatja a gpt-4.1 modell telepítését, a biztonságos API-hozzáférést és egy egyszerű chat felületet.
+Teljes Microsoft Foundry Models chat alkalmazás, amely az Azure Developer CLI-vel (azd) van telepítve. Ez a példa bemutatja a gpt-4.1 telepítését, a biztonságos API-hozzáférést és egy egyszerű chat felületet.
 
-## 🎯 Amit tanulni fogsz
+## 🎯 Amit megtanulsz
 
 - Microsoft Foundry Models szolgáltatás telepítése gpt-4.1 modellel  
-- OpenAI API kulcsok biztonságos tárolása Key Vault használatával  
-- Egyszerű chat felület készítése Pythonban  
-- Token használat és költségek nyomon követése  
+- OpenAI API kulcsok biztonságos tárolása Key Vault-tal  
+- Egyszerű chat felület építése Pythonban  
+- Token használat és költségek figyelése  
 - Korlátozás és hibakezelés megvalósítása  
 
-## 📦 Mi tartalmazza
+## 📦 Mi van benne
 
-✅ **Microsoft Foundry Models Szolgáltatás** - gpt-4.1 modell telepítése  
-✅ **Python Chat App** - Egyszerű parancssoros chat felület  
-✅ **Key Vault Integráció** - Biztonságos API kulcstárolás  
-✅ **ARM sablonok** - Teljes infrastruktúra kód formájában  
+✅ **Microsoft Foundry Models Szolgáltatás** - gpt-4.1 modell telepítés  
+✅ **Python Chat App** - Egyszerű parancssori chat felület  
+✅ **Key Vault Integráció** - Biztonságos API kulcs tárolás  
+✅ **ARM Sablonok** - Teljes infrastruktúra kódként  
 ✅ **Költségfigyelés** - Token használat nyomon követése  
 ✅ **Korlátozás** - Kvóta kimerülésének megelőzése  
 
@@ -25,22 +25,23 @@ Egy teljes Microsoft Foundry Models chat alkalmazás, amely az Azure Developer C
 
 ```mermaid
 graph TD
-    App[Python csevegőalkalmazás<br/>Helyi/Felhő<br/>Parancssori felület<br/>Beszélgetési előzmények<br/>Tokenhasználat nyomon követése] -- "HTTPS (API kulcs)" --> Foundry[Microsoft Foundry modellek szolgáltatás<br/>gpt-4.1 modell<br/>20K token/perc kapacitás<br/>Többrégiós failover]
-    Foundry --> KV[Azure Key Vault<br/>OpenAI API kulcs<br/>Végpont URL]
-    Foundry -. Kezelt identitás .-> KV
+    App[Python Chat Alkalmazás<br/>Helyi/Felhő<br/>Parancssori felület<br/>Beszélgetés előzmények<br/>Tokenhasználat követése] -- "HTTPS (API Kulcs)" --> Foundry[Microsoft Foundry Modellek Szolgáltatás<br/>gpt-4.1 Modell<br/>20K token/perc kapacitás<br/>Több régiós hibatűrés]
+    Foundry --> KV[Azure Kulcstároló<br/>OpenAI API Kulcs<br/>Végpont URL]
+    Foundry -. Kezelt Identitás .-> KV
 ```
+
 ## Előfeltételek
 
 ### Szükséges
 
-- **Azure Developer CLI (azd)** - [Telepítési útmutató](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure előfizetés** OpenAI hozzáféréssel - [Hozzáférés igénylése](https://aka.ms/oai/access)
-- **Python 3.9+** - [Python telepítése](https://www.python.org/downloads/)
+- **Azure Developer CLI (azd)** - [Telepítési útmutató](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)  
+- **Azure előfizetés** OpenAI hozzáféréssel - [Kérelmezés](https://aka.ms/oai/access)  
+- **Python 3.9+** - [Python telepítése](https://www.python.org/downloads/)  
 
 ### Előfeltételek ellenőrzése
 
 ```bash
-# Ellenőrizze az azd verziót (szükséges az 1.5.0 vagy újabb)
+# Azd verzió ellenőrzése (1.5.0 vagy újabb szükséges)
 azd version
 
 # Azure bejelentkezés ellenőrzése
@@ -49,29 +50,29 @@ azd auth login
 # Python verzió ellenőrzése
 python --version  # vagy python3 --version
 
-# OpenAI hozzáférés ellenőrzése (ellenőrizze az Azure Portalon)
+# OpenAI hozzáférés ellenőrzése (ellenőrizze az Azure Portálon)
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus
 ```
 
-> **⚠️ Fontos:** A Microsoft Foundry Models alkalmazás jóváhagyást igényel. Ha még nem igényelted, látogass el a [aka.ms/oai/access](https://aka.ms/oai/access) oldalra. A jóváhagyás általában 1-2 munkanapot vesz igénybe.
+> **⚠️ Fontos:** A Microsoft Foundry Models használatához alkalmazás jóváhagyás szükséges. Ha még nem igényelted, látogass el a [aka.ms/oai/access](https://aka.ms/oai/access) oldalra. A jóváhagyás általában 1-2 munkanapot vesz igénybe.
 
 ## ⏱️ Telepítési idővonal
 
 | Fázis | Időtartam | Mi történik |
-|-------|----------|--------------|
+|-------|-----------|-------------|
 | Előfeltételek ellenőrzése | 2-3 perc | OpenAI kvóta elérhetőségének ellenőrzése |
 | Infrastruktúra telepítése | 8-12 perc | OpenAI, Key Vault, modell telepítés létrehozása |
 | Alkalmazás konfigurálása | 2-3 perc | Környezet és függőségek beállítása |
-| **Összesen** | **12-18 perc** | Készen áll a chatre gpt-4.1-gyel |
+| **Összesen** | **12-18 perc** | Kész a beszélgetés a gpt-4.1-el |
 
-**Megjegyzés:** Első OpenAI telepítés hosszabb ideig tarthat a modell előkészítése miatt.
+**Megjegyzés:** Első OpenAI telepítéskor a modell előkészítése hosszabb időt vehet igénybe.
 
 ## Gyors indulás
 
 ```bash
-# Navigáljon a példához
+# Navigáljon az példához
 cd examples/azure-openai-chat
 
 # Inicializálja a környezetet
@@ -79,19 +80,19 @@ azd env new myopenai
 
 # Telepítsen mindent (infrastruktúra + konfiguráció)
 azd up
-# Kérni fogjuk, hogy:
+# A következőkre fogják kérni:
 # 1. Válassza ki az Azure előfizetést
-# 2. Válasszon elhelyezkedést OpenAI elérhetőséggel (pl. eastus, eastus2, westus)
+# 2. Válasszon helyet OpenAI elérhetőséggel (pl. eastus, eastus2, westus)
 # 3. Várjon 12-18 percet a telepítésre
 
 # Telepítse a Python függőségeket
 pip install -r requirements.txt
 
-# Kezdje el a beszélgetést!
+# Kezdjen el csevegni!
 python chat.py
 ```
 
-**Várt kimenet:**
+**Várt kimenet:**  
 ```
 🤖 Microsoft Foundry Models Chat Application
 Connected to: gpt-4.1 (eastus)
@@ -111,11 +112,11 @@ Assistant: Microsoft Foundry Models Service provides REST API access to OpenAI's
 # Telepített erőforrások megtekintése
 azd show
 
-# A várható kimenet a következőket mutatja:
+# A várt kimenet a következőket mutatja:
 # - OpenAI Szolgáltatás: (erőforrás neve)
-# - Kulcstároló: (erőforrás neve)
+# - Kulcstár: (erőforrás neve)
 # - Telepítés: gpt-4.1
-# - Helyszín: eastus (vagy az Ön által választott régió)
+# - Helyszín: eastus (vagy a kiválasztott régió)
 ```
 
 ### 2. lépés: OpenAI API tesztelése
@@ -135,7 +136,7 @@ curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2
   }'
 ```
 
-**Várt válasz:**
+**Várt válasz:**  
 ```json
 {
   "choices": [
@@ -157,7 +158,7 @@ curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2
 ### 3. lépés: Key Vault hozzáférés ellenőrzése
 
 ```bash
-# Titkok listázása a Key Vaultban
+# Titkok listázása a Key Vault-ban
 KV_NAME=$(azd env get-value AZURE_KEY_VAULT_NAME)
 
 az keyvault secret list \
@@ -166,17 +167,17 @@ az keyvault secret list \
   --output table
 ```
 
-**Várt titkok:**
-- `openai-api-key`
-- `openai-endpoint`
+**Várt titkok:**  
+- `openai-api-key`  
+- `openai-endpoint`  
 
-**Siker kritériumok:**
+**Siker kritériumok:**  
 - ✅ OpenAI szolgáltatás telepítve gpt-4.1 modellel  
 - ✅ API hívás érvényes választ ad  
-- ✅ Titkok tárolva a Key Vault-ban  
-- ✅ Token használat nyomon követése működik  
+- ✅ Titkok tárolva Key Vault-ban  
+- ✅ Token használat követése működik  
 
-## Projekt struktúra
+## Projekt struktúrája
 
 ```
 azure-openai-chat/
@@ -193,52 +194,52 @@ azure-openai-chat/
 └── .gitignore                  ✅ Git ignore rules
 ```
 
-## Alkalmazás funkciói
+## Alkalmazás funkciók
 
 ### Chat felület (`chat.py`)
 
 A chat alkalmazás tartalmazza:
 
-- **Beszélgetés előzményei** - Üzenetek közötti kontextus megtartása  
-- **Token számlálás** - Használat követése és költségbecslés  
-- **Hibakezelés** - Korlátozások és API hibák szakszerű kezelése  
-- **Költségbecslés** - Üzenetenkénti valós idejű költségszámítás  
+- **Beszélgetési előzmények** - Üzenetek közti kontextus megtartása  
+- **Token számolás** - Használat nyomon követése és költségbecslés  
+- **Hibakezelés** - Korlátozások és API hibák kezelése  
+- **Költségbecslés** - Üzenetenkénti valós idejű költségkalkuláció  
 - **Streaming támogatás** - Opcionális folyamatos válaszadás  
 
 ### Parancsok
 
-Chat közben használhatod:
-- `quit` vagy `exit` - Munkamenet vége  
+Beszélgetés közben használhatod:  
+- `quit` vagy `exit` - Munkamenet lezárása  
 - `clear` - Beszélgetési előzmények törlése  
-- `tokens` - Összes token használat megjelenítése  
-- `cost` - Becslés a teljes költségre  
+- `tokens` - Teljes token használat megjelenítése  
+- `cost` - Becslés az összkiadásra  
 
 ### Konfiguráció (`config.py`)
 
-Beállítások környezeti változókból töltődnek be:
+Környezet változókból tölti be a konfigurációt:  
 ```python
-AZURE_OPENAI_ENDPOINT  # Key Vault-ból
-AZURE_OPENAI_API_KEY   # Key Vault-ból
+AZURE_OPENAI_ENDPOINT  # Kulcstárolóból
+AZURE_OPENAI_API_KEY   # Kulcstárolóból
 AZURE_OPENAI_MODEL     # Alapértelmezett: gpt-4.1
 AZURE_OPENAI_MAX_TOKENS # Alapértelmezett: 800
 ```
 
 ## Használati példák
 
-### Egyszerű chat
+### Alap chat
 
 ```bash
 python chat.py
 ```
 
-### Chat egyéni modellel
+### Chat egyedi modellel
 
 ```bash
 export AZURE_OPENAI_MODEL=gpt-35-turbo
 python chat.py
 ```
 
-### Streaming chates használat
+### Streaminggel chat
 
 ```bash
 python chat.py --stream
@@ -270,36 +271,36 @@ Total session: 156 tokens | $0.0047
 
 ### Token árak (gpt-4.1)
 
-| Modell | Bemenet (1K tokenenként) | Kimenet (1K tokenenként) |
-|--------|--------------------------|--------------------------|
-| gpt-4.1 | $0.03 | $0.06 |
-| GPT-3.5-Turbo | $0.0015 | $0.002 |
+| Modell | Bemenet (1000 tokenenként) | Kimenet (1000 tokenenként) |
+|--------|----------------------------|----------------------------|
+| gpt-4.1 | 0,03 USD | 0,06 USD |
+| GPT-3.5-Turbo | 0,0015 USD | 0,002 USD |
 
-### Becslés havi költségre
+### Becsült havi költségek
 
-Használati minták alapján:
+A használati szokások alapján:
 
 | Használati szint | Üzenetek/nap | Tokenek/nap | Havi költség |
 |------------------|--------------|-------------|--------------|
-| **Könnyű** | 20 üzenet | 3,000 token | $3-5 |
-| **Közepes** | 100 üzenet | 15,000 token | $15-25 |
-| **Nehéz** | 500 üzenet | 75,000 token | $75-125 |
+| **Könnyű** | 20 üzenet | 3 000 token | 3-5 USD |
+| **Mérsékelt** | 100 üzenet | 15 000 token | 15-25 USD |
+| **Nehéz** | 500 üzenet | 75 000 token | 75-125 USD |
 
-**Alap infrastruktúra költség:** $1-2/hó (Key Vault + minimális számítástechnika)
+**Alapinfrastruktúra költsége:** 1-2 USD/hónap (Key Vault + minimális számítás)
 
-### Költség optimalizálási tippek
+### Költségoptimalizálási tippek
 
 ```bash
-# 1. Egyszerűbb feladatokhoz használja a GPT-3.5-Turbót (20-szor olcsóbb)
+# 1. Használd a GPT-3.5-Turbo-t egyszerűbb feladatokhoz (20-szor olcsóbb)
 export AZURE_OPENAI_MODEL=gpt-35-turbo
 
-# 2. Csökkentse a maximális tokenek számát a rövidebb válaszokért
+# 2. Csökkentsd a maximális tokenek számát rövidebb válaszokért
 export AZURE_OPENAI_MAX_TOKENS=400
 
-# 3. Figyelje a tokenhasználatot
+# 3. Figyeld a tokenhasználatot
 python chat.py --show-tokens
 
-# 4. Állítson be költségkeret-értesítéseket
+# 4. Állíts be költségvetési értesítéseket
 az consumption budget create \
   --budget-name "openai-budget" \
   --amount 50 \
@@ -311,10 +312,10 @@ az consumption budget create \
 ### Token használat megtekintése
 
 ```bash
-# Az Azure Portálon:
-# OpenAI Erőforrás → Metrikák → Válassza a "Token Tranzakciót"
+# Az Azure Portalon:
+# OpenAI Erőforrás → Metrikák → Válassza a „Token Tranzakció” lehetőséget
 
-# Vagy az Azure CLI-n keresztül:
+# Vagy az Azure CLI segítségével:
 az monitor metrics list \
   --resource $(azd env get-value AZURE_OPENAI_RESOURCE_ID) \
   --metric "TokenTransaction" \
@@ -325,7 +326,7 @@ az monitor metrics list \
 ### API naplók megtekintése
 
 ```bash
-# Diagnosztikai naplók folyamatos továbbítása
+# Diagnosztikai naplók továbbítása
 az monitor diagnostic-settings create \
   --resource $(azd env get-value AZURE_OPENAI_RESOURCE_ID) \
   --name openai-logs \
@@ -342,9 +343,9 @@ az monitor log-analytics query \
 
 ### Probléma: "Hozzáférés megtagadva" hiba
 
-**Tünetek:** 403 Forbidden az API híváskor
+**Tünetek:** 403 Forbidden az API hívásnál
 
-**Megoldások:**
+**Megoldások:**  
 ```bash
 # 1. Ellenőrizze, hogy az OpenAI hozzáférés engedélyezett-e
 az cognitiveservices account show \
@@ -354,37 +355,37 @@ az cognitiveservices account show \
 # 2. Ellenőrizze, hogy az API kulcs helyes-e
 azd env get-value AZURE_OPENAI_API_KEY
 
-# 3. Ellenőrizze az végpont URL formátumát
+# 3. Ellenőrizze a végpont URL formátumát
 azd env get-value AZURE_OPENAI_ENDPOINT
-# Ilyennek kell lennie: https://[név].openai.azure.com/
+# Ennek a következőnek kell lennie: https://[név].openai.azure.com/
 ```
 
-### Probléma: "Korlátozás túllépve"
+### Probléma: "Korlát túllépve"
 
-**Tünetek:** 429 Túl sok kérés
+**Tünetek:** 429 Too Many Requests
 
-**Megoldások:**
+**Megoldások:**  
 ```bash
-# 1. Ellenőrizze az aktuális kvótát
+# 1. Ellenőrizze a jelenlegi kvótát
 az cognitiveservices account deployment show \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
   --deployment-name gpt-4.1
 
-# 2. Kvóta növelésének kérelmezése (ha szükséges)
-# Menjen az Azure Portálra → OpenAI erőforrás → Kvóták → Növelés kérése
+# 2. Kérjen kvótaemelést (ha szükséges)
+# Menjen az Azure Portálra → OpenAI erőforrás → Kvóták → Kérés növelése
 
-# 3. Valósítsa meg az újrapróbálkozás logikáját (már a chat.py-ben van)
+# 3. Valósítsa meg az újrapróbálkozási logikát (már a chat.py-ben van)
 # Az alkalmazás automatikusan újrapróbálkozik exponenciális visszaeséssel
 ```
 
 ### Probléma: "Modell nem található"
 
-**Tünetek:** 404 hiba a telepítéshez
+**Tünetek:** 404 hiba a telepítésnél
 
-**Megoldások:**
+**Megoldások:**  
 ```bash
-# 1. Elérhető telepítések listázása
+# 1. Listázza a rendelkezésre álló telepítéseket
 az cognitiveservices account deployment list \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
@@ -392,23 +393,23 @@ az cognitiveservices account deployment list \
 # 2. Ellenőrizze a modell nevét a környezetben
 echo $AZURE_OPENAI_MODEL
 
-# 3. Frissítés a helyes telepítési névre
-export AZURE_OPENAI_MODEL=gpt-4.1  # vagy gpt-35-turbo
+# 3. Frissítse a helyes telepítési névre
+export AZURE_OPENAI_MODEL=gpt-4.1  # vagy gpt-35-turbó
 ```
 
 ### Probléma: Nagy késleltetés
 
 **Tünetek:** Lassú válaszidő (>5 másodperc)
 
-**Megoldások:**
+**Megoldások:**  
 ```bash
-# 1. Ellenőrizze a régiós késleltetést
+# 1. Ellenőrizze a regionális késleltetést
 # Telepítés a felhasználókhoz legközelebbi régióba
 
-# 2. Csökkentse a max_tokens értékét a gyorsabb válaszokért
+# 2. Csökkentse a max_tokens értéket a gyorsabb válaszokért
 export AZURE_OPENAI_MAX_TOKENS=400
 
-# 3. Használjon streaminget a jobb felhasználói élményért
+# 3. Streaming használata jobb felhasználói élményért
 python chat.py --stream
 ```
 
@@ -417,8 +418,8 @@ python chat.py --stream
 ### 1. API kulcsok védelme
 
 ```bash
-# Soha ne kövessünk el kulcsokat forráskód-kezelőbe
-# Használj Key Vault-ot (már konfigurálva)
+# Soha ne commitolj kulcsokat a forráskezelőbe
+# Használj Key Vault-ot (már be van állítva)
 
 # Rendszeresen cseréld a kulcsokat
 az cognitiveservices account keys regenerate \
@@ -427,24 +428,24 @@ az cognitiveservices account keys regenerate \
   --key-name key1
 ```
 
-### 2. Tartalom szűrés megvalósítása
+### 2. Tartalomszűrés alkalmazása
 
 ```python
 # A Microsoft Foundry Modellek beépített tartalomszűrést tartalmaznak
-# Azure portálon konfigurálható:
-# OpenAI erőforrás → Tartalomszűrők → Egyéni szűrő létrehozása
+# Beállítás az Azure Portálon:
+# OpenAI-erőforrás → Tartalomszűrők → Egyéni szűrő létrehozása
 
-# Kategóriák: Gyűlölet, Szexuális, Erőszak, Öngyilkosság
+# Kategóriák: Gyűlölet, Szexuális, Erőszak, Önkárosítás
 # Szintek: Alacsony, Közepes, Magas szűrés
 ```
 
 ### 3. Kezelt identitás használata (éles környezet)
 
 ```bash
-# Éles telepítésekhez használjon kezelt identitást
+# Éles telepítésekhez használd a kezelt identitást
 # API kulcsok helyett (az alkalmazás Azure-on történő hosztolását igényli)
 
-# Frissítse az infra/openai.bicep fájlt így:
+# Frissítsd az infra/openai.bicep fájlt az alábbiakkal:
 # identity: { type: 'SystemAssigned' }
 ```
 
@@ -453,28 +454,28 @@ az cognitiveservices account keys regenerate \
 ### Helyi futtatás
 
 ```bash
-# Telepítse a függőségeket
+# Függőségek telepítése
 pip install -r src/requirements.txt
 
-# Állítsa be a környezeti változókat
+# Környezeti változók beállítása
 export AZURE_OPENAI_ENDPOINT="https://[name].openai.azure.com/"
 export AZURE_OPENAI_API_KEY="your-api-key"
 export AZURE_OPENAI_MODEL="gpt-4.1"
 
-# Futtassa az alkalmazást
+# Alkalmazás futtatása
 python src/chat.py
 ```
 
 ### Tesztek futtatása
 
 ```bash
-# Telepítse a tesztfüggőségeket
+# Telepítse a teszt függőségeket
 pip install pytest pytest-cov
 
 # Futtassa a teszteket
 pytest tests/ -v
 
-# Lefedettséggel
+# Fedettséggel
 pytest tests/ --cov=src --cov-report=html
 ```
 
@@ -496,12 +497,12 @@ az cognitiveservices account deployment create \
 ## Takarítás
 
 ```bash
-# Törölje az összes Azure erőforrást
+# Minden Azure-erőforrás törlése
 azd down --force --purge
 
 # Ez eltávolítja:
 # - OpenAI szolgáltatás
-# - Kulcstartó (90 napos lágy törléssel)
+# - Key Vault (90 napos lágy törléssel)
 # - Erőforráscsoport
 # - Minden telepítést és konfigurációt
 ```
@@ -512,60 +513,60 @@ azd down --force --purge
 
 1. **Webes felület hozzáadása** - React/Vue frontend fejlesztése  
    ```bash
-   # Frontend szolgáltatás hozzáadása az azure.yaml-hoz
-   # Telepítés az Azure Static Web Apps szolgáltatásba
+   # Frontend szolgáltatás hozzáadása az azure.yaml fájlhoz
+   # Telepítés Azure Static Web Apps szolgáltatásba
    ```
 
-2. **RAG megvalósítása** - Dokumentum keresés hozzáadása Azure AI Search segítségével  
+2. **RAG megvalósítása** - Dokumentumkeresés Azure AI Search-szal  
    ```python
-   # Integrálja az Azure Cognitive Search szolgáltatást
-   # Töltsön fel dokumentumokat és hozzon létre vektorindexet
+   # Azure AI Search integrálása
+   # Dokumentumok feltöltése és vektor index létrehozása
    ```
 
-3. **Funkcióhívás hozzáadása** - Eszközhasználat engedélyezése  
+3. **Funkcióhívás hozzáadása** - Eszköz használat engedélyezése  
    ```python
-   # Funkciók definiálása a chat.py-ben
-   # Engedélyezze a gpt-4.1-nek a külső API-k hívását
+   # Függvények definiálása a chat.py fájlban
+   # Engedélyezze, hogy a gpt-4.1 külső API-kat hívjon meg
    ```
 
 4. **Többmodell támogatás** - Több modell telepítése  
    ```bash
-   # Adja hozzá a gpt-35-turbo, embeddings modelleket
-   # Valósítsa meg a modell útválasztási logikát
+   # Adja hozzá a gpt-35-turbo, beágyazási modelleket
+   # Valósítsa meg a modell útválasztási logikáját
    ```
 
 ### Kapcsolódó példák
 
-- **[Retail Multi-Agent](../retail-scenario.md)** - Fejlett több ügynökös architektúra  
-- **[Database App](../../../../examples/database-app)** - Tartós tárolás hozzáadása  
-- **[Container Apps](../../../../examples/container-app)** - Konténerizált szolgáltatás telepítése  
+- **[Retail Multi-Agent](../retail-scenario.md)** - Fejlett multi-agent architektúra  
+- **[Adatbázis alkalmazás](../../../../examples/database-app)** - Állandó tárolás hozzáadása  
+- **[Konténer alkalmazások](../../../../examples/container-app)** - Konténerizált szolgáltatás telepítése  
 
 ### Tanulási források
 
-- 📚 [AZD Kezdőknek Tanfolyam](../../README.md) - Fő kurzus kezdőoldal  
-- 📚 [Microsoft Foundry Models Dokumentáció](https://learn.microsoft.com/azure/ai-services/openai/) - Hivatalos dokumentáció  
-- 📚 [OpenAI API Referencia](https://platform.openai.com/docs/api-reference) - API részletek  
-- 📚 [Felelős AI](https://www.microsoft.com/ai/responsible-ai) - Legjobb gyakorlatok  
+- 📚 [AZD Kezdőknek tanfolyam](../../README.md) - Fő tanfolyam otthon  
+- 📚 [Microsoft Foundry Models dokumentáció](https://learn.microsoft.com/azure/ai-services/openai/) - Hivatalos dokumentáció  
+- 📚 [OpenAI API referencia](https://platform.openai.com/docs/api-reference) - API részletek  
+- 📚 [Felelős MI](https://www.microsoft.com/ai/responsible-ai) - Legjobb gyakorlatok  
 
 ## További források
 
-### Dokumentáció
+### Dokumentáció  
 - **[Microsoft Foundry Models Szolgáltatás](https://learn.microsoft.com/azure/ai-services/openai/)** - Teljes útmutató  
 - **[gpt-4.1 modellek](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - Modell képességek  
-- **[Tartalom szűrés](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - Biztonsági funkciók  
+- **[Tartalomszűrés](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - Biztonsági funkciók  
 - **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd referencia  
 
-### Oktatóanyagok
-- **[OpenAI Gyorsstart](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - Első telepítés  
-- **[Chat befejezések](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - Chat alkalmazások készítése  
+### Oktatóanyagok  
+- **[OpenAI Gyorsindítás](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - Első telepítés  
+- **[Chat kiegészítések](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - Chat alkalmazások építése  
 - **[Funkcióhívás](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - Haladó funkciók  
 
-### Eszközök
+### Eszközök  
 - **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - Webes játszótér  
 - **[Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)** - Jobb promptok írása  
-- **[Token Kalkulátor](https://platform.openai.com/tokenizer)** - Token használat becslése  
+- **[Token kalkulátor](https://platform.openai.com/tokenizer)** - Token használat becslése  
 
-### Közösség
+### Közösség  
 - **[Azure AI Discord](https://discord.gg/azure)** - Közösségi segítség  
 - **[GitHub Discussions](https://github.com/Azure-Samples/openai/discussions)** - Kérdések és válaszok fórum  
 - **[Azure Blog](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - Legfrissebb hírek  
@@ -574,13 +575,13 @@ azd down --force --purge
 
 **🎉 Siker!** Telepítetted a Microsoft Foundry Modelst és elkészítetted a működő chat alkalmazást. Kezdd el felfedezni a gpt-4.1 képességeit, és kísérletezz különböző promptokkal és felhasználási esetekkel.
 
-**Kérdések?** [Nyiss hibajegyet](https://github.com/microsoft/AZD-for-beginners/issues) vagy nézd meg a [GYIK](../../resources/faq.md) részt.
+**Kérdésed van?** [Nyiss egy issue-t](https://github.com/microsoft/AZD-for-beginners/issues) vagy nézd meg a [GYIK-et](../../resources/faq.md)
 
-**Költségfigyelmeztetés:** Ne felejtsd el futtatni az `azd down` parancsot a tesztelés után a folyamatos költségek (~$50-100/hó aktív használat esetén) elkerülése érdekében.
+**Költségfigyelmeztetés:** Ne felejtsd el a tesztelés után futtatni az `azd down` parancsot, hogy elkerüld a folyamatos díjakat (~50-100 USD/hónap aktív használat esetén).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Nyilatkozat**:  
-Ez a dokumentum az AI fordító szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) használatával készült. Bár igyekszünk pontosságra törekedni, kérjük, vegye figyelembe, hogy az automatikus fordítások tartalmazhatnak hibákat vagy pontatlanságokat. Az eredeti dokumentum az anyanyelvén tekintendő hivatalos forrásnak. Fontos információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget az ebből eredő félreértésekért vagy félreértelmezésekért.
+**Jogi nyilatkozat**:
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Fontos információk esetén professzionális emberi fordítást javasolunk. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely ebből a fordításból ered.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

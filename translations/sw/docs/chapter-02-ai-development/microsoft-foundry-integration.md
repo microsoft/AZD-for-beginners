@@ -1,50 +1,50 @@
 # Uunganishaji wa Microsoft Foundry na AZD
 
-**Urambazaji wa Sura:**
-- **📚 Nyumbani kwa Kozi**: [AZD Kwa Waanzilishi](../../README.md)
-- **📖 Sura ya Sasa**: Sura 2 - Maendeleo Yanayoweka AI Kwanza
-- **⬅️ Sura Iliyopita**: [Sura 1: Mradi Wako wa Kwanza](../chapter-01-foundation/first-project.md)
-- **➡️ Ifuatayo**: [Utekelezaji wa Mfano wa AI](ai-model-deployment.md)
-- **🚀 Sura Ifuatayo**: [Sura 3: Usanidi](../chapter-03-configuration/configuration.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Sura 2 - AI-First Development
+- **⬅️ Previous Chapter**: [Chapter 1: Your First Project](../chapter-01-foundation/first-project.md)
+- **➡️ Next**: [AI Model Deployment](ai-model-deployment.md)
+- **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
 ## Muhtasari
 
-Mwongozo huu unaonyesha jinsi ya kuunganisha huduma za Microsoft Foundry na Azure Developer CLI (AZD) kwa ajili ya kupeleka programu za AI kwa urahisi. Microsoft Foundry inatoa jukwaa kamili la kujenga, kupeleka, na kusimamia programu za AI, wakati AZD inarahisisha mchakato wa miundombinu na utekelezaji.
+Mwongozo huu unaonyesha jinsi ya kuunganisha huduma za Microsoft Foundry na Azure Developer CLI (AZD) kwa ajili ya utekelezaji wa programu za AI kwa njia rahisi. Microsoft Foundry inatoa jukwaa kamili la kujenga, kutekeleza, na kusimamia programu za AI, wakati AZD inarahisisha miundombinu na mchakato wa utekelezaji.
 
-## Microsoft Foundry ni Nini?
+## Microsoft Foundry ni nini?
 
-Microsoft Foundry ni jukwaa limeunganishwa la Microsoft kwa ajili ya maendeleo ya AI linalojumuisha:
+Microsoft Foundry ni jukwaa muunganifu la Microsoft kwa maendeleo ya AI ambalo linajumuisha:
 
-- **Model Catalog**: Ufikiaji wa modeli za AI za kisasa
+- **Model Catalog**: Upatikanaji wa modeli za hali ya juu za AI
 - **Prompt Flow**: Mbunifu wa kuona wa mtiririko wa kazi za AI
-- **Microsoft Foundry Portal**: Mazingira ya maendeleo yaliyounganishwa kwa programu za AI
-- **Deployment Options**: Chaguzi mbalimbali za kuendesha mwenyeji na kupanua
-- **Safety and Security**: Vipengele vilivyojengwa vya AI yenye uwajibikaji
+- **Microsoft Foundry Portal**: Mazingira ya kuendeleza iliyounganishwa kwa programu za AI
+- **Deployment Options**: Chaguzi mbalimbali za kuhosti na kubadilisha ukubwa
+- **Safety and Security**: Vipengele vya uwajibikaji wa AI vimejengwa ndani
 
-## AZD + Microsoft Foundry: Better Together
+## AZD + Microsoft Foundry: Bora Pamoja
 
-| Kipengele | Microsoft Foundry | Faida ya Uunganishaji wa AZD |
+| Feature | Microsoft Foundry | AZD Integration Benefit |
 |---------|-----------------|------------------------|
-| **Utekelezaji wa Modeli** | Utekelezaji kwa mkono kupitia portal | Utekelezaji otomatiki, unaorudiwa |
-| **Miundombinu** | Utayarishaji kwa kupitia bonyeza | Miundombinu kama Msimbo (Bicep) |
-| **Usimamizi wa Mazingira** | Kujikita katika mazingira moja | Mazingira mengi (dev/staging/prod) |
-| **Uunganishaji wa CI/CD** | Mdogo | Msaada asili kwa GitHub Actions |
-| **Usimamizi wa Gharama** | Ufuatiliaji wa msingi | Uboreshaji wa gharama kwa mazingira maalum |
+| **Model Deployment** | Manual portal deployment | Automated, repeatable deployments |
+| **Infrastructure** | Click-through provisioning | Infrastructure as Code (Bicep) |
+| **Environment Management** | Single environment focus | Multi-environment (dev/staging/prod) |
+| **CI/CD Integration** | Limited | Native GitHub Actions support |
+| **Cost Management** | Basic monitoring | Environment-specific cost optimization |
 
-## Mahitaji ya Awali
+## Mambo Yanayohitajika
 
-- Usajili wa Azure (subscription) wenye ruhusa zinazofaa
+- Usajili wa Azure wenye ruhusa zinazofaa
 - Azure Developer CLI imewekwa
-- Ufikiaji wa huduma za Microsoft Foundry Models
-- Ujuzi wa msingi wa Microsoft Foundry
+- Ufikiaji kwa huduma za Microsoft Foundry Models
+- Ufahamu wa msingi wa Microsoft Foundry
 
-> **Mstari wa Msingi wa AZD wa Sasa:** Mfano hizi zilichunguzwa dhidi ya `azd` `1.23.12`. Kwa mtiririko wa kazi wa wakala wa AI, tumia toleo la awali la upanuzi na angalia toleo uliyoweka kabla ya kuanza.
+> **Current AZD baseline:** Mfano hizi zilikaguliwa dhidi ya `azd` `1.23.12`. Kwa mtiririko wa kazi wa wakala wa AI, tumia toleo la nyongeza la preview linalofaa na angalia toleo uliloweka kabla ya kuanza.
 
-## Mifumo Msingi ya Uunganishaji
+## Mifano ya Msingi ya Uunganishaji
 
-### Mfano 1: Uunganishaji wa Microsoft Foundry Models
+### Mfano 1: Microsoft Foundry Models Integration
 
-**Tukio la Matumizi**: Telekeza programu za gumzo kwa kutumia modeli za Microsoft Foundry Models
+**Use Case**: Tengeneza programu za mazungumzo kwa kutumia modeli za Microsoft Foundry Models
 
 ```yaml
 # azure.yaml
@@ -58,7 +58,7 @@ services:
       - AZURE_OPENAI_API_KEY
 ```
 
-**Miundombinu (main.bicep):**
+**Infrastructure (main.bicep):**
 ```bicep
 // Microsoft Foundry Models Account
 resource openAIAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
@@ -92,9 +92,9 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 }
 ```
 
-### Mfano 2: Uunganishaji wa AI Search + RAG
+### Mfano 2: AI Search + RAG Integration
 
-**Tukio la Matumizi**: Telekeza programu za uzalishaji ulioboreshwa kwa urejeshaji (RAG)
+**Use Case**: Tengeneza programu za retrieval-augmented generation (RAG)
 
 ```bicep
 // Azure AI Search
@@ -122,9 +122,9 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 }
 ```
 
-### Mfano 3: Uunganishaji wa Document Intelligence
+### Mfano 3: Document Intelligence Integration
 
-**Tukio la Matumizi**: Mtiririko wa kazi wa usindikaji na uchambuzi wa nyaraka
+**Use Case**: Mtiririko wa kazi wa uchakataji na uchambuzi wa nyaraka
 
 ```bicep
 // Document Intelligence service
@@ -155,18 +155,18 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 }
 ```
 
-## 🔧 Mifumo ya Usanidi
+## 🔧 Mifano ya Usanidi
 
 ### Usanidi wa Vigezo vya Mazingira
 
-**Usanidi wa Uzalishaji:**
+**Production Configuration:**
 ```bash
 # Huduma kuu za AI
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_SEARCH_ENDPOINT "https://your-search.search.windows.net"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT "https://your-formrec.cognitiveservices.azure.com/"
 
-# Usanidi wa modeli
+# Mipangilio ya modeli
 azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
 azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-3-large"
 
@@ -175,7 +175,7 @@ azd env set AZURE_OPENAI_CAPACITY 30
 azd env set AZURE_SEARCH_SKU "standard"
 ```
 
-**Usanidi wa Maendeleo:**
+**Development Configuration:**
 ```bash
 # Mipangilio iliyoboreshwa kwa gharama kwa ajili ya maendeleo
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -218,46 +218,46 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-## Mtiririko ya Utekelezaji
+## Mitiririko ya Utekelezaji
 
-### Upanuzi wa AZD kwa Foundry
+### Viruzushi vya AZD kwa Foundry
 
-AZD huleta upanuzi unaoongeza uwezo maalum wa AI kwa kufanya kazi na huduma za Microsoft Foundry:
+AZD inatoa viruzushi vinavyoongeza uwezo maalum wa AI kwa kufanya kazi na huduma za Microsoft Foundry:
 
 ```bash
-# Sakinisha upanuzi wa mawakala wa Foundry
+# Sakinisha ugani wa maajenti wa Foundry
 azd extension install azure.ai.agents
 
-# Sakinisha upanuzi wa urekebishaji wa kina
+# Sakinisha ugani wa urekebishaji wa kina
 azd extension install azure.ai.finetune
 
-# Sakinisha upanuzi wa mifano maalum
+# Sakinisha ugani wa mifano maalum
 azd extension install azure.ai.models
 
-# Orodhesha upanuzi zilizowekwa
+# Orodhesha ugani zilizowekwa
 azd extension list --installed
 
-# Angalia toleo la sasa la upanuzi wa mawakala uliosakinishwa
+# Chunguza toleo la ugani wa maajenti uliosanikishwa kwa sasa
 azd extension show azure.ai.agents
 ```
 
-Upanuzi za AI bado zinabadilika kwa haraka katika awamu ya mapitio (preview). Ikiwa amri inafanya kazi tofauti na ilivyoonyeshwa hapa, sasisha upanuzi husika kabla ya kutatua matatizo ya mradi mwenyewe.
+Viruzushi za AI bado zinabadilika kwa haraka wakati wa preview. Ikiwa amri inavyofanya kazi tofauti na ilivyoonyeshwa hapa, sasisha kichanganuzi husika kabla ya kutatua mradi yenyewe.
 
-### Utekelezaji unaoweka Wakala Kwanza kwa `azd ai`
+### Utekelezaji wa Kwanza kwa Wakala kwa `azd ai`
 
-Ikiwa una manifest ya wakala, tumia `azd ai agent init` kuunda mradi uliounganishwa na Foundry Agent Service:
+Kama una manifeste ya wakala, tumia `azd ai agent init` kuunda muundo wa mradi uliounganishwa na Foundry Agent Service:
 
 ```bash
-# Anzisha kutoka kwenye manifesti ya wakala
+# Anzisha kutoka kwa manifesti ya wakala
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
 # Sambaza kwenye Azure
 azd up
 ```
 
-Matoleo ya hivi karibuni ya mapitio ya `azure.ai.agents` pia yameongeza msaada wa uanzishaji kwa kutumia templates kwa `azd ai agent init`. Ikiwa unafuata sampuli mpya za wakala, angalia msaada wa upanuzi kwa bendera kamili zinazopatikana katika toleo uliyoweka.
+Matoleo za hivi karibuni za preview za `azure.ai.agents` pia yaliongeza msaada wa uanzishaji unaotegemea templates kwa `azd ai agent init`. Ikiwa unafuata sampuli mpya za wakala, angalia msaada wa nyongeza kwa bendera kamili zinazopatikana kwenye toleo uliloweka.
 
-Angalia [Amri za AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) kwa rejea kamili ya amri na bendera.
+Tazama [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) kwa rejea kamili ya amri na bendera.
 
 ### Utekelezaji kwa Amri Moja
 
@@ -265,15 +265,15 @@ Angalia [Amri za AZD AI CLI](../chapter-08-production/production-ai-practices.md
 # Weka kila kitu kwa amri moja
 azd up
 
-# Au weka kwa hatua
-azd provision  # Miundombinu tu
-azd deploy     # Programu tu
+# Au weka hatua kwa hatua
+azd provision  # Miundombinu pekee
+azd deploy     # Programu pekee
 
-# Kwa kupeleka programu za AI zinazoendesha kwa muda mrefu katika azd 1.23.11+
+# Kwa uanzishaji wa programu za AI zinazoendesha kwa muda mrefu katika azd 1.23.11+
 azd deploy --timeout 1800
 ```
 
-### Utekelezaji Maalum kwa Mazingira
+### Utekelezaji wa Maeneo Mahususi
 
 ```bash
 # Mazingira ya maendeleo
@@ -290,7 +290,7 @@ azd env set AZURE_OPENAI_CAPACITY 100
 azd up
 ```
 
-## Ufuatiliaji na Observability
+## Ufuatiliaji na Uonekano
 
 ### Uunganishaji wa Application Insights
 
@@ -353,9 +353,9 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-## 🔐 Misingi Bora ya Usalama
+## 🔐 Mbinu Bora za Usalama
 
-### Usanidi wa Utambulisho Ulioendeshwa (Managed Identity)
+### Usanidi wa Managed Identity
 
 ```bicep
 // Managed identity for the web application
@@ -432,7 +432,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 }
 ```
 
-### Usanidi wa Upanuaji Kiotomatiki
+### Usanidi wa Upandishaji Kiotomatiki
 
 ```bicep
 // Container App with auto-scaling
@@ -468,15 +468,15 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ## Kutatua Matatizo ya Kawaida
 
-### Tatizo 1: Kiwango cha OpenAI Kimezidiwa
+### Tatizo 1: OpenAI Quota Exceeded
 
 **Dalili:**
 - Utekelezaji unashindwa kwa makosa ya quota
-- Makosa ya 429 kwenye magogo ya programu
+- Makosa 429 katika kumbukumbu za programu
 
 **Suluhisho:**
 ```bash
-# Angalia matumizi ya kikomo cha sasa
+# Angalia matumizi ya kiwango cha ruhusa kilichopo
 az cognitiveservices usage list --location eastus
 
 # Jaribu eneo tofauti
@@ -488,7 +488,7 @@ azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
 
-### Tatizo 2: Kushindwa kwa Uthibitishaji
+### Tatizo 2: Authentication Failures
 
 **Dalili:**
 - Makosa 401/403 wakati wa kuita huduma za AI
@@ -506,74 +506,74 @@ az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
-### Tatizo 3: Matatizo ya Utekelezaji wa Modeli
+### Tatizo 3: Model Deployment Issues
 
 **Dalili:**
 - Modeli hazipatikani katika utekelezaji
-- Matoleo maalum ya modeli yanashindwa
+- Toleo maalum la modeli linashindwa
 
 **Suluhisho:**
 ```bash
-# Orodhesha modeli zinazopatikana kwa mkoa
+# Orodha ya mifano inayopatikana kwa mkoa
 az cognitiveservices model list --location eastus
 
-# Sasisha toleo la modeli katika kiolezo cha bicep
-# Angalia mahitaji ya uwezo wa modeli
+# Sasisha toleo la mfano katika kiolezo cha Bicep
+# Angalia mahitaji ya uwezo wa mfano
 ```
 
-## Violezo vya Mfano
+## Mifano ya Kiolezo
 
-### Programu ya Gumzo ya RAG (Python)
+### RAG Chat Application (Python)
 
-**Hifadhi**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
+**Repository**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-**Huduma**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
+**Services**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
 
-**Maelezo**: Mfano maarufu kabisa wa Azure AI — programu ya gumzo ya RAG tayari kwa uzalishaji inayokuruhusu kuuliza maswali juu ya nyaraka zako mwenyewe. Inatumia GPT-4.1-mini kwa gumzo, text-embedding-3-large kwa embeddings, na Azure AI Search kwa urejeshaji. Inasaidia nyaraka za aina nyingi (multimodal), ingizo/utura wa sauti, uthibitishaji wa Microsoft Entra, na ufuatiliaji wa Application Insights.
+**Description**: Sampuli maarufu ya Azure AI — programu ya mazungumzo ya RAG inayofaa kwa uzalishaji ambayo inakuwezesha kuuliza maswali juu ya nyaraka zako mwenyewe. Inatumia GPT-4.1-mini kwa mazungumzo, text-embedding-3-large kwa embeddings, na Azure AI Search kwa urejeshaji. Inasaidia nyaraka za multimodal, pembejeo/latizo za sauti, uthibitishaji wa Microsoft Entra, na ufuatiliaji wa Application Insights.
 
-**Anza Haraka:**
+**Quick Start**:
 ```bash
 azd init --template azure-search-openai-demo
 azd up
 ```
 
-### Programu ya Gumzo ya RAG (.NET)
+### RAG Chat Application (.NET)
 
-**Hifadhi**: [azure-search-openai-demo-csharp](https://github.com/Azure-Samples/azure-search-openai-demo-csharp)
+**Repository**: [azure-search-openai-demo-csharp](https://github.com/Azure-Samples/azure-search-openai-demo-csharp)
 
-**Huduma**: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
+**Services**: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
 
-**Maelezo**: Tofauti ya .NET/C# ya sampuli ya gumzo ya RAG ya Python. Imejengwa kwa ASP.NET Core Minimal API na frontend ya Blazor WebAssembly. Inajumuisha gumzo la sauti, msaada wa GPT-4o-mini vision, na mteja wa mezani/mkononi wa .NET MAUI Blazor Hybrid.
+**Description**: Sawia ya .NET/C# ya sampuli ya RAG ya Python. Imejengwa kwa ASP.NET Core Minimal API na frontendi ya Blazor WebAssembly. Inajumuisha mazungumzo ya sauti, msaada wa GPT-4o-mini vision, na mteja mwenza wa .NET MAUI Blazor Hybrid kwa desktop/mkononi.
 
-**Anza Haraka:**
+**Quick Start**:
 ```bash
 azd init --template azure-search-openai-demo-csharp
 azd up
 ```
 
-### Programu ya Gumzo ya RAG (Java)
+### RAG Chat Application (Java)
 
-**Hifadhi**: [azure-search-openai-demo-java](https://github.com/Azure-Samples/azure-search-openai-demo-java)
+**Repository**: [azure-search-openai-demo-java](https://github.com/Azure-Samples/azure-search-openai-demo-java)
 
-**Huduma**: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
+**Services**: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
 
-**Maelezo**: Toleo la Java la sampuli ya gumzo ya RAG linalotumia Langchain4J kwa usimamizi wa AI. Inasaidia usanifu wa microservice unaoendeshwa kwa matukio, mikakati mingi ya utafutaji (maandishi, vector, mchanganyiko), upakiaji wa nyaraka kwa kutumia Azure Document Intelligence, na utekelezaji kwenye Azure Container Apps au Azure Kubernetes Service.
+**Description**: Toleo la Java la sampuli ya RAG likitumia Langchain4J kwa upangaji wa AI. Inasaidia usanifu wa microservice unaotegemea matukio, mikakati mingi ya utafutaji (maandishi, vector, hybrid), upakiaji wa nyaraka kwa kutumia Azure Document Intelligence, na utekelezaji kwenye Azure Container Apps au Azure Kubernetes Service.
 
-**Anza Haraka:**
+**Quick Start**:
 ```bash
 azd init --template azure-search-openai-demo-java
 azd up
 ```
 
-### Enterprise Retail Copilot with Azure AI Foundry
+### Enterprise Retail Copilot with Microsoft Foundry
 
-**Hifadhi**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
+**Repository**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
-**Huduma**: Azure OpenAI + Azure AI Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
+**Services**: Azure OpenAI + Microsoft Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
 
-**Maelezo**: Copilot wa rejareja wa RAG kutoka mwanzo hadi mwisho ukitumia Azure AI Foundry na Prompty. Chatbot ya Contoso Outdoor inayosimamiwa na data ya katalogi ya bidhaa na oda za wateja. Inaonyesha mtiririko kamili wa GenAIOps — prototipu kwa Prompty, tathmini kwa watathmini walioongozwa na AI, na utekelezaji kupitia AZD hadi Container Apps.
+**Description**: Copilot ya rejareja inayotumia RAG kikamilifu kwa Microsoft Foundry na Prompty. Chatbot ya muuzaji wa Contoso Outdoor inayojenga majibu juu ya katalogi ya bidhaa na data za oda za wateja. Inaonesha mtiririko kamili wa GenAIOps — tengeneza prototipu kwa Prompty, tathmini kwa wavuti wa tathmini wa AI, na tepeta via AZD hadi Container Apps.
 
-**Anza Haraka:**
+**Quick Start**:
 ```bash
 azd init --template contoso-chat
 azd up
@@ -581,13 +581,13 @@ azd up
 
 ### Creative Writing Multi-Agent Application
 
-**Hifadhi**: [contoso-creative-writer](https://github.com/Azure-Samples/contoso-creative-writer)
+**Repository**: [contoso-creative-writer](https://github.com/Azure-Samples/contoso-creative-writer)
 
-**Huduma**: Azure OpenAI + Azure AI Agent Service + Bing Grounding + Azure AI Search + Azure Container Apps
+**Services**: Azure OpenAI + Azure AI Agent Service + Bing Grounding + Azure AI Search + Azure Container Apps
 
-**Maelezo**: Sampuli ya wakala nyingi inayoonyesha uwanda wa wakala wa AI kwa kutumia Prompty. Inatumia wakala wa utafiti (Bing Grounding katika Azure AI Agent Service), wakala wa bidhaa (Azure AI Search), wakala mwandishi, na wakala mhariri kushirikiana kuandaa makala zilizo na utafiti mzuri. Inajumuisha CI/CD na tathmini katika GitHub Actions.
+**Description**: Sampuli ya multi-agent inayoonyesha upangaji wa wakala wa AI kwa kutumia Prompty. Inatumia wakala wa utafiti (Bing Grounding katika Azure AI Agent Service), wakala wa bidhaa (Azure AI Search), mwandishi wakala, na mhariri wakala kushirikiana kutengeneza makala zenye utafiti mzuri. Inajumuisha CI/CD na tathmini katika GitHub Actions.
 
-**Anza Haraka:**
+**Quick Start**:
 ```bash
 azd init --template contoso-creative-writer
 azd up
@@ -595,13 +595,13 @@ azd up
 
 ### Serverless RAG Chat (JavaScript/TypeScript)
 
-**Hifadhi**: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
+**Repository**: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
 
-**Huduma**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB for NoSQL + LangChain.js
+**Services**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB for NoSQL + LangChain.js
 
-**Maelezo**: Chatbot ya RAG isiyohitaji seva kabisa ikitumia LangChain.js na Azure Functions kwa API na Azure Static Web Apps kwa utoaji. Inatumia Azure Cosmos DB kama duka la vector na hifadhi ya historia ya gumzo. Inasaidia maendeleo ya kienyeji kwa Ollama kwa majaribio bila gharama.
+**Description**: Chatbot ya RAG isiyo na seva ikitumia LangChain.js kwa Azure Functions kwa API na Azure Static Web Apps kwa kuhudumia. Inatumia Azure Cosmos DB kama hifadhi ya vector na hifadhidata ya historia ya mazungumzo. Inasaidia maendeleo ya ndani kwa kutumia Ollama kwa upimaji bila gharama.
 
-**Anza Haraka:**
+**Quick Start**:
 ```bash
 azd init --template serverless-chat-langchainjs
 azd up
@@ -609,13 +609,13 @@ azd up
 
 ### Chat with Your Data Solution Accelerator
 
-**Hifadhi**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
+**Repository**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
 
-**Huduma**: Azure OpenAI + Azure AI Search + Azure App Service + Azure Document Intelligence + Azure Functions + Azure Cosmos DB / PostgreSQL
+**Services**: Azure OpenAI + Azure AI Search + Azure App Service + Azure Document Intelligence + Azure Functions + Azure Cosmos DB / PostgreSQL
 
-**Maelezo**: Suluhisho la RAG la kiwango cha biashara lenye jopo la msimamizi kwa upakiaji/usimamizi wa nyaraka, chaguzi nyingi za msimamizi wa mchakato (Semantic Kernel, LangChain, Prompt Flow), utambuzi wa sauti hadi maandishi, ujumuishaji wa Microsoft Teams, na chaguo la PostgreSQL au Cosmos DB kama backend. Limeundwa kama msingi unaoweza kubadilishwa kwa matukio ya RAG ya uzalishaji.
+**Description**: Suluhisho la daraja la biashara la RAG lenye jopo la msimamizi kwa upakiaji/usimamizi wa nyaraka, chaguo nyingi za orchestrator (Semantic Kernel, LangChain, Prompt Flow), kukamata sauti hadi maandishi, ujumuishwaji wa Microsoft Teams, na chaguo la PostgreSQL au Cosmos DB kama backend. Imetengenezwa kama msingi wa kubadilika kwa hali za uzalishaji za RAG.
 
-**Anza Haraka:**
+**Quick Start**:
 ```bash
 azd init --template chat-with-your-data-solution-accelerator
 azd up
@@ -623,13 +623,13 @@ azd up
 
 ### AI Travel Agents — Multi-Agent MCP Orchestration
 
-**Hifadhi**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
+**Repository**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
 
-**Huduma**: Azure OpenAI + Azure AI Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
+**Services**: Azure OpenAI + Microsoft Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
 
-**Maelezo**: Programu ya rejea kwa uwanda wa wakala wengi wa AI ikitumia mifumo mitatu (LangChain.js, LlamaIndex.TS, na Microsoft Agent Framework). Inajumuisha seva za MCP (Model Context Protocol) katika lugha nne zilitumika kama Azure Container Apps zisizo na seva pamoja na ufuatiliaji wa OpenTelemetry.
+**Description**: Programu ya rejea kwa upangaji wa wakala wengi wa AI ikitumia mifumo mitatu (LangChain.js, LlamaIndex.TS, na Microsoft Agent Framework). Inajumuisha seva za MCP (Model Context Protocol) kwa lugha nne zilizopelekwa kama Azure Container Apps zisizo na seva na ufuatiliaji wa OpenTelemetry.
 
-**Anza Haraka:**
+**Quick Start**:
 ```bash
 azd init --template azure-ai-travel-agents
 azd up
@@ -637,33 +637,33 @@ azd up
 
 ### Azure AI Starter
 
-**Hifadhi**: [azd-ai-starter](https://github.com/Azure/azd-ai-starter)
+**Repository**: [azd-ai-starter](https://github.com/Azure/azd-ai-starter)
 
-**Huduma**: Azure AI Services + Azure OpenAI
+**Services**: Azure AI Services + Azure OpenAI
 
-**Maelezo**: Templeti ndogo ya Bicep inayotoa huduma za Azure AI zikiwa na modeli za kujifunza kwa mashine zilizosanidiwa. Msingi mwepesi wa kuanza wakati unahitaji tu miundombinu ya Azure AI isipokuwa stack kamili ya programu.
+**Description**: Kiolezo cha Bicep ndogo kinachotekeleza huduma za Azure AI na modeli za kujifunza mashine zilizoimarishwa. Ni mwanzo mwepesi unapohitaji tu miundombinu ya Azure AI bila stack kamili ya programu.
 
-**Anza Haraka:**
+**Quick Start**:
 ```bash
 azd init --template azd-ai-starter
 azd up
 ```
 
-> **Tazama templeti zaidi**: Tembelea [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) kwa templeti 80+ za AZD zinazohusiana na AI kwa lugha na matukio mbalimbali.
+> **Browse more templates**: Tembelea [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) kwa templeti 80+ maalum za AZD AI kwa lugha na matukio mbalimbali.
 
 ## Hatua Zifuatazo
 
-1. **Jaribu Mifano**: Anza na templeti iliyojengwa tayari inayolingana na kesi yako ya matumizi
+1. **Jaribu Mifano**: Anza na kiolezo kilichotengenezwa tayari kinacholingana na matumizi yako
 2. **Binafsisha kwa Mahitaji Yako**: Badilisha miundombinu na msimbo wa programu
-3. **Ongeza Ufuatiliaji**: Tekeleza ufuatiliaji mpana
+3. **Ongeza Ufuatiliaji**: Tekeleza uonekano kamili
 4. **Boresha Gharama**: Rekebisha usanidi kwa bajeti yako
 5. **Lindeni Utekelezaji Wako**: Tekeleza mifumo ya usalama ya kampuni
-6. **Panuzi hadi Uzalishaji**: Ongeza vipengele vya maeneo mengi na upatikanaji wa juu
+6. **Pana hadi Uzalishaji**: Ongeza chaguzi za mikoa mingi na upatikanaji wa juu
 
 ## 🎯 Mazoezi ya Vitendo
 
-### Mazoezi 1: Telekeza App ya Gumzo ya Microsoft Foundry Models (30 minutes)
-**Lengo**: Telekeza na kujaribu programu ya gumzo ya AI ambayo iko tayari kwa uzalishaji
+### Mazoezi 1: Tengeneza Microsoft Foundry Models Chat App (dakika 30)
+**Lengo**: Tengeneza na jaribu programu ya mazungumzo ya AI inayofaa kwa uzalishaji
 
 ```bash
 # Anzisha kiolezo
@@ -681,7 +681,7 @@ azd up
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Chat app: $WEB_URL"
 
-# Fuatilia shughuli za AI
+# Fuatilia shughuli za akili bandia
 azd monitor
 
 # Safisha
@@ -690,18 +690,18 @@ azd down --force --purge
 
 **Vigezo vya Mafanikio:**
 - [ ] Utekelezaji unakamilika bila makosa ya quota
-- [ ] Inaweza kufikia kiolesura cha gumzo kwenye kivinjari
-- [ ] Inaweza kuuliza maswali na kupata majibu yanayozaa kwa AI
-- [ ] Application Insights inaonyesha data za telemetry
+- [ ] Inawezekana kufikia kiolesura cha mazungumzo kupitia kivinjari
+- [ ] Inawezekana kuuliza maswali na kupata majibu yanayotokana na AI
+- [ ] Application Insights inaonyesha data ya telemetry
 - [ ] Rasilimali zilisafishwa kwa mafanikio
 
-**Gharama Iliyokadiriwa**: $5-10 kwa dakika 30 za majaribio
+**Gharama Inayokadiriwa**: $5-10 kwa dakika 30 za upimaji
 
-### Mazoezi 2: Sanidi Utekelezaji wa Modeli Nyingi (45 minutes)
-**Lengo**: Telekeza modeli nyingi za AI zikiwa na usanidi tofauti
+### Mazoezi 2: Sanidi Utekelezaji wa Modeli Nyingi (dakika 45)
+**Lengo**: Tekeleza modeli nyingi za AI zenye usanidi tofauti
 
 ```bash
-# Unda usanidi maalum wa Bicep
+# Tegeneza usanidi maalum wa Bicep
 cat > infra/ai-models.bicep << 'EOF'
 param openAiAccountName string
 param location string
@@ -746,22 +746,22 @@ resource embedding 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01'
 }
 EOF
 
-# Sambaza na thibitisha
+# Weka na thibitisha
 azd provision
 azd show
 ```
 
 **Vigezo vya Mafanikio:**
-- [ ] Modeli nyingi zilitekelezwa kwa mafanikio
-- [ ] Mipangilio tofauti ya uwezo ilitumika
+- [ ] Modeli nyingi zimeftekelezwa kwa mafanikio
+- [ ] Mipangilio tofauti ya uwezo imewekwa
 - [ ] Modeli zinapatikana kupitia API
-- [ ] Inaweza kuita zote mbili kutoka kwenye programu
+- [ ] Inawezekana kuita modeli zote kutoka kwenye programu
 
-### Mazoezi 3: Tekeleza Ufuatiliaji wa Gharama (20 minutes)
-**Lengo**: Sanidi arifu za bajeti na ufuatiliaji wa gharama
+### Mazoezi 3: Tekeleza Ufuatiliaji wa Gharama (dakika 20)
+**Lengo**: Sanidi arifa za bajeti na ufuatiliaji wa gharama
 
 ```bash
-# Ongeza arifa ya bajeti kwa Bicep
+# Ongeza onyo la bajeti kwa Bicep
 cat >> infra/main.bicep << 'EOF'
 
 resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
@@ -792,7 +792,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 EOF
 
-# Weka arifa ya bajeti
+# Weka tahadhari ya bajeti
 azd provision
 
 # Angalia gharama za sasa
@@ -800,21 +800,23 @@ az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-d
 ```
 
 **Vigezo vya Mafanikio:**
-- [ ] Arifu la bajeti limetengenezwa katika Azure
-- [ ] Arifa za barua pepe zimesanidiwa
-- [ ] Inaweza kuona data za gharama katika Azure Portal
-- [ ] Vikomo vya bajeti vimewekwa ipasavyo
+- [ ] Arifa ya bajeti imetengenezwa katika Azure
+- [ ] Taarifa za barua pepe zimewekwa
+- [ ] Inawezekana kuona data ya gharama katika Azure Portal
+- [ ] Vizingiti vya bajeti vimewekwa ipasavyo
 
 ## 💡 Maswali Yanayoulizwa Mara kwa Mara
 
 <details>
-<summary><strong>Je, ninawezaje kupunguza gharama za Microsoft Foundry Models wakati wa maendeleo?</strong></summary>
+<summary><strong>Ninawezaje kupunguza gharama za Microsoft Foundry Models wakati wa maendeleo?</strong></summary>
 
-1. **Tumia Tier ya Bure**: Microsoft Foundry Models inatoa tokeni 50,000 kwa mwezi bila malipo
-2. **Punguza Uwezo**: Weka uwezo kwa 10 TPM badala ya 30+ kwa ajili ya maendeleo
-3. **Tumia azd down**: Ondoa rasilimali (deallocate) wakati hauendi kuendeleza
-4. **Hifadhi Majibu (Cache)**: Tekeleza cache ya Redis kwa maswali yanayojirudia
-5. **Tumia Prompt Engineering**: Punguza matumizi ya tokeni kwa kutumia prompts zenye ufanisi
+1. **Tumia Free Tier**: Microsoft Foundry Models hutoa 50,000 tokens/mwezi bila malipo
+2. **Punguza Uwezo**: Weka uwezo hadi 10 TPM badala ya 30+ kwa maendeleo
+3. **Tumia azd down**: Ondoa rasilimali wakati hauitajiwi kikamilifu
+4. **Cache Majibu**: Tekeleza cache ya Redis kwa maswali yanayojirudia
+5. **Tumia Uhandisi wa Prompt**: Punguza matumizi ya tokens kwa prompts zenye ufanisi
+
+
 ```bash
 # Usanidi wa maendeleo
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -823,32 +825,32 @@ azd env set ENABLE_RESPONSE_CACHE true
 </details>
 
 <details>
-<summary><strong>Je, tofauti kati ya Microsoft Foundry Models na OpenAI API ni ipi?</strong></summary>
+<summary><strong>Je, ni tofauti gani kati ya Microsoft Foundry Models na OpenAI API?</strong></summary>
 
 **Microsoft Foundry Models**:
-- Usalama wa shirika na ufuataji wa kanuni
-- Uunganishaji na mtandao wa kibinafsi
+- Usalama wa biashara na ufuataji wa kanuni
+- Uunganishaji wa mtandao binafsi
 - Dhamana za SLA
-- Uthibitishaji wa Managed Identity
-- Vikomo vya juu vinapatikana
+- Uthibitishaji wa utambulisho ulio simamiwa
+- Kiasi kikubwa cha rasilimali kinapatikana
 
 **OpenAI API**:
-- Upatikanaji wa haraka kwa modeli mpya
-- Utekelezaji rahisi
+- Ufikiaji wa haraka kwa modeli mpya
+- Usanidi rahisi
 - Kizuizi cha chini cha kuingia
-- Mtandao wa umma pekee
+- Mtandao wa umma tu
 
-Kwa programu za uzalishaji, **Microsoft Foundry Models inashauriwa**.
+Kwa programu za uzalishaji, **Microsoft Foundry Models inapendekezwa**.
 </details>
 
 <details>
-<summary><strong>Ninashughulikiaje makosa ya 'quota exceeded' ya Microsoft Foundry Models?</strong></summary>
+<summary><strong>How do I handle Microsoft Foundry Models quota exceeded errors?</strong></summary>
 
 ```bash
-# Angalia kizuizi cha sasa
+# Angalia ukomo wa sasa
 az cognitiveservices usage list --location eastus2
 
-# Jaribu eneo tofauti
+# Jaribu mkoa tofauti
 azd env set AZURE_LOCATION westus2
 azd up
 
@@ -856,8 +858,8 @@ azd up
 azd env set AZURE_OPENAI_CAPACITY 10
 azd provision
 
-# Omba ongezeko la kizuizi
-# Nenda kwenye Portal ya Azure > Kizuizi > Omba ongezeko
+# Omba ongezeko la ukomo
+# Nenda kwenye Portal ya Azure > Ukomo > Omba ongezeko
 ```
 </details>
 
@@ -880,13 +882,13 @@ Angalia kiolezo cha [azure-search-openai-demo](https://github.com/Azure-Samples/
 </details>
 
 <details>
-<summary><strong>Ninawezaje kulinda vituo vya mwisho vya modeli za AI?</strong></summary>
+<summary><strong>Jinsi ya kulinda endpoints za modeli za AI?</strong></summary>
 
-**Mbinu Bora**:
-1. Tumia Managed Identity (bila funguo za API)
+**Mazoea Bora**:
+1. Tumia Managed Identity (hakuna funguo za API)
 2. Wezesha Private Endpoints
-3. Sanidi vikundi vya usalama vya mtandao
-4. Tekeleza ukomo wa viwango (rate limiting)
+3. Sanidi vikundi vya usalama wa mtandao
+4. Tekeleza ukomo wa kiwango
 5. Tumia Azure Key Vault kwa siri
 
 ```bicep
@@ -912,22 +914,22 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 - **Microsoft Foundry Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
 - **AZD GitHub**: [Masuala na majadiliano](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Nyaraka rasmi](https://learn.microsoft.com/azure/ai-studio/)
-- **Agent Skills**: [Microsoft Foundry skill on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Sakinisha ujuzi wa wakala wa Azure + Foundry kwenye mhariri wako kwa kutumia `npx skills add microsoft/github-copilot-for-azure`
+- **Agent Skills**: [Microsoft Foundry skill on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Sakinisha ujuzi wa wakala wa Azure + Foundry katika mhariri wako kwa `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**Mwelekeo wa Sura:**
-- **📚 Nyumbani wa Kozi**: [AZD For Beginners](../../README.md)
-- **📖 Sura ya Sasa**: Sura 2 - Maendeleo ya AI Kwanza
-- **⬅️ Sura Iliyopita**: [Sura 1: Mradi Wako wa Kwanza](../chapter-01-foundation/first-project.md)
-- **➡️ Ifuatayo**: [Uwekaji wa Mfano wa AI](ai-model-deployment.md)
-- **🚀 Sura Ifuatayo**: [Sura 3: Mipangilio](../chapter-03-configuration/configuration.md)
+**Urambazaji wa Sura:**
+- **📚 Nyumbani kwa Kozi**: [AZD For Beginners](../../README.md)
+- **📖 Sura ya Sasa**: Sura 2 - Maendeleo ya AI-Kwanza
+- **⬅️ Sura Iliyotangulia**: [Sura 1: Mradi Wako wa Kwanza](../chapter-01-foundation/first-project.md)
+- **➡️ Inayofuata**: [Uwekaji wa Modeli za AI](ai-model-deployment.md)
+- **🚀 Sura Ifuatayo**: [Sura 3: Usanidi](../chapter-03-configuration/configuration.md)
 
-**Unahitaji Msaada?** Jiunge na majadiliano ya jamii au fungua tatizo (issue) kwenye hazina. Jamii ya Azure AI + AZD ipo hapa kukusaidia ufanikiwe!
+**Unahitaji Msaada?** Jiunge na mijadala ya jamii yetu au fungua tatizo kwenye hifadhi. Jamii ya Azure AI + AZD iko hapa kukusaidia kufanikiwa!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuwa sahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au ukosefu wa usahihi. Nyaraka ya asili katika lugha yake inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu iliyofanywa na mtaalamu wa binadamu inashauriwa. Hatujawajibiki kwa kutoelewana au tafsiri potofu yoyote inayotokana na matumizi ya tafsiri hii.
+**Kionyozo**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Hati ya asili katika lugha yake halisi inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatutojibu kwa kuelewa vibaya au tafsiri potofu zinazotokea kutokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

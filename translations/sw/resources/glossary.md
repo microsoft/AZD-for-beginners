@@ -1,113 +1,113 @@
-# Kamusi - Azure na Terminolojia za AZD
+# Kamusi - Azure na Istilahi za AZD
 
-**Marejeo kwa Sura Zote**
-- **📚 Course Home**: [AZD kwa Waanzilishi](../README.md)
-- **📖 Learn Basics**: [Sura 1: Misingi ya AZD](../docs/getting-started/azd-basics.md)
-- **🤖 AI Terms**: [Sura 2: Maendeleo Yanayozingatia AI](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+**Marejeleo ya Sura Zote**
+- **📚 Nyumbani ya Kozi**: [AZD For Beginners](../README.md)
+- **📖 Jifunze Misingi**: [Chapter 1: AZD Basics](../docs/getting-started/azd-basics.md)
+- **🤖 Maneno ya AI**: [Chapter 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
 
 ## Utangulizi
 
-Kamusi hii kamili inatoa ufafanuzi wa maneno, dhana, na vifupisho vinavyotumika katika Azure Developer CLI na maendeleo ya wingu la Azure. Marejeo muhimu kwa kuelewa nyaraka za kiufundi, kutatua matatizo, na kuwasiliana kwa ufanisi kuhusu miradi ya azd na huduma za Azure.
+Kamusi hii kamili inatoa ufafanuzi wa maneno, dhana, na vifupisho vinavyotumika katika Azure Developer CLI na maendeleo ya wingu ya Azure. Ni marejeleo muhimu kwa kuelewa nyaraka za kiufundi, kutatua matatizo, na kuwasiliana kwa ufanisi kuhusu miradi ya azd na huduma za Azure.
 
 ## Malengo ya Kujifunza
 
-Kwa kutumia kamusi hii, utakuwa na uwezo wa:
+Kwa kutumia kamusi hii, utauwezo:
 - Kuelewa istilahi na dhana muhimu za Azure Developer CLI
-- Kumudu msamiati wa maendeleo ya wingu la Azure na maneno ya kiufundi
-- Kurejea istilahi za Infrastructure as Code na kwenye utoaji kwa ufanisi
+- Kumiliki msamiati wa maendeleo ya wingu wa Azure na istilahi za kiufundi
+- Kumrejelea kwa ufanisi istilahi za Infrastructure as Code na usambazaji
 - Kuelewa majina ya huduma za Azure, vifupisho, na madhumuni yao
-- Kupata ufafanuzi wa istilahi za utatuzi wa matatizo na uchambuzi
-- Kujifunza dhana za hali ya juu za usanifu na maendeleo ya Azure
+- Kupata ufafanuzi wa istilahi za utatuzi wa matatizo na uharibifu
+- Kujifunza dhana za usanifu na maendeleo ya Azure kwa kiwango cha juu
 
 ## Matokeo ya Kujifunza
 
-Kwa kurejea mara kwa mara kamusi hii, utakuwa na uwezo wa:
+Kwa kurejelea mara kwa mara kamusi hii, utakuwa na uwezo wa:
 - Kuwasiliana kwa ufanisi ukitumia istilahi sahihi za Azure Developer CLI
 - Kuelewa nyaraka za kiufundi na ujumbe wa makosa kwa uwazi zaidi
-- Kupitia huduma na dhana za Azure kwa kujiamini
-- Kutatua matatizo ukitumia msamiati wa kiufundi unaofaa
+- Kuendesha huduma na dhana za Azure kwa kujiamini
+- Kutatua matatizo kwa kutumia msamiati wa kiufundi unaofaa
 - Kuchangia katika majadiliano ya timu kwa lugha ya kiufundi sahihi
-- Kupanua maarifa yako ya maendeleo ya wingu la Azure kwa mfululizo
+- Kupanua maarifa yako ya maendeleo ya wingu za Azure kwa mpangilio
 
 ## A
 
 **ARM Template**  
-Azure Resource Manager template. Muundo wa Infrastructure as Code unaotegemea JSON unaotumika kufafanua na kupeleka rasilimali za Azure kwa njia ya kauli.
+Kiolezo cha Azure Resource Manager. Muundo wa Infrastructure as Code ulio kwenye JSON unaotumika kufafanua na kusambaza rasilimali za Azure kwa njia ya kielezi.
 
 **App Service**  
-Toleo la Azure la platform-as-a-service (PaaS) kwa kuendesha programu za wavuti, REST API, na backends za simu bila kuendesha miundombinu.
+Toleo la Azure la platform-as-a-service (PaaS) kwa mwenyeji wa programu za wavuti, REST API, na sehemu za nyuma za simu bila kusimamia miundombinu.
 
 **Application Insights**  
-Huduma ya Azure ya ufuatiliaji wa utendaji wa programu (APM) inayotoa ufahamu wa kina kuhusu utendaji wa programu, upatikanaji, na matumizi.
+Huduma ya Azure ya ufuatiliaji wa utendaji wa programu (APM) inayotoa maarifa ya kina kuhusu utendaji, upatikana, na matumizi ya programu.
 
 **Azure CLI**  
-Kiolesura cha mstari wa amri kwa kusimamia rasilimali za Azure. Inatumiwa na azd kwa ajili ya utaftaji wa utambulisho na baadhi ya shughuli.
+Kiolesura cha mstari wa amri kwa kusimamia rasilimali za Azure. Kinatumiwa na azd kwa uthibitishaji na baadhi ya shughuli.
 
 **Azure Developer CLI (azd)**  
-Chombo cha mstari wa amri kinachomlenga msanidi programu ambacho kinakamilisha mchakato wa kujenga na kupeleka programu kwenda Azure kwa kutumia templates na Infrastructure as Code.
+Chombo cha mstari wa amri kinachomlenga mtaalamu wa maendeleo kinachoongeza kasi ya mchakato wa kujenga na kusambaza programu kwenye Azure kwa kutumia templates na Infrastructure as Code.
 
 **azure.yaml**  
-The main configuration file for an azd project that defines services, infrastructure, and deployment hooks.
+Faili kuu ya usanidi kwa mradi wa azd inayofafanua huduma, miundombinu, na hooks za usambazaji.
 
 **Azure Resource Manager (ARM)**  
-Huduma ya Azure ya utekelezaji na usimamizi inayotoa safu ya usimamizi kwa kuunda, kusasisha, na kufuta rasilimali.
+Huduma ya Azure ya usambazaji na usimamizi inayotoa tabaka la usimamizi kwa kuunda, kusasisha, na kufuta rasilimali.
 
 ## B
 
 **Bicep**  
-Lugha maalum kwa eneo (DSL) iliyoendelezwa na Microsoft kwa kupeleka rasilimali za Azure. Inatoa sintaksia rahisi kuliko ARM templates huku ikitafsiriwa kuwa ARM.
+Lugha maalum kwa kikoa (DSL) iliyotengenezwa na Microsoft kwa kusambaza rasilimali za Azure. Inatoa sintaksia rahisi kuliko templates za ARM huku ikikomaa hadi ARM.
 
 **Build**  
-Mchakato wa kujuwa msimbo wa chanzo, kusakinisha utegemezi, na kuandaa programu kwa ajili ya utoaji.
+Mchakato wa kukusanya msimbo wa chanzo, kusanidi utegemezi, na kuandaa programu kwa usambazaji.
 
 **Blue-Green Deployment**  
-Mikakati ya utoaji inayotumia mazingira mawili sawa ya uzalishaji (blue na green) ili kupunguza muda wa kushindwa huduma na hatari.
+Mkakati wa usambazaji unaotumia mazingira mawili ya uzalishaji yayafanayo (blue na green) ili kupunguza muda wa kukatika na hatari.
 
 ## C
 
 **Container Apps**  
-Huduma ya Azure isiyo na seva kwa kontena inayowezesha kuendesha programu zilizokatizwa katika kontena bila kuendesha miundombinu tata.
+Huduma ya Azure ya kontena isiyohitaji seva inayowezesha kuendesha programu zilizofungwa ndani ya kontena bila kusimamia miundombinu tata.
 
 **CI/CD**  
-Continuous Integration/Continuous Deployment. Mbinu zilizo otomatishwa za kuunganisha mabadiliko ya msimbo na kupeleka programu.
+Continuous Integration/Continuous Deployment. Mienendo iliyomoshipiwa kwa kujiendesha yenyewe kwa kuunganisha mabadiliko ya msimbo na kusambaza programu.
 
 **Cosmos DB**  
-Huduma ya Azure ya hifadhidata iliyoenezwa kimataifa na yenye modeli nyingi inayotoa SLA kamili kwa kupitia kwa mtiririko, ucheleweshaji, upatikanaji, na ulinganifu.
+Huduma ya Azure ya hifadhidata iliyosambazwa kimataifa, yenye modeli nyingi, inayotoa SLA kamili kwa njia za throughput, ucheleweshaji, upatikana, na ulinganifu.
 
 **Configuration**  
-Mipangilio na vigezo vinavyodhibiti tabia ya programu na chaguo za utoaji.
+Marekebisho na vigezo vinavyodhibiti tabia ya programu na chaguzi za usambazaji.
 
 ## D
 
 **Deployment**  
-Mchakato wa kusakinisha na kusanidi programu na utegemezi wake kwenye miundombinu lengwa.
+Mchakato wa kusanikisha na kusanidi programu na utegemezi wao kwenye miundombinu lengwa.
 
 **Docker**  
 Jukwaa la kuendeleza, kusafirisha, na kuendesha programu kwa kutumia teknolojia ya kontena.
 
 **Dockerfile**  
-Faili ya maandishi yenye maagizo ya kujenga picha ya kontena ya Docker.
+Faili ya maandishi inayojumuisha maagizo ya kujenga picha ya kontena ya Docker.
 
 ## E
 
 **Environment**  
-Lengo la utoaji linalowakilisha toleo maalum la programu yako (mfano, maendeleo, staging, uzalishaji).
+Lengo la usambazaji linalowakilisha mfano maalum wa programu yako (kwa mfano, development, staging, production).
 
 **Environment Variables**  
-Thamani za usanidi zilizohifadhiwa kama jozi ya funguo-na-thamani ambazo programu zinaweza kupata wakati wa utekelezaji.
+Thamani za usanidi zilizohifadhiwa kama jozi za ufunguo-na-thamani ambazo programu zinaweza kufikia wakati wa utekelezaji.
 
 **Endpoint**  
-URL au anuani ya mtandao ambapo programu au huduma inaweza kupatikana.
+URL au anwani ya mtandao ambapo programu au huduma inaweza kupatikana.
 
 ## F
 
 **Function App**  
-Huduma ya Azure ya kompyuta isiyo na seva inayowezesha kuendesha msimbo unaochochewa na matukio bila kuendesha miundombinu.
+Huduma ya Azure isiyo na seva kwa kompyuta inayowezesha kuendesha msimbo unaotegemea matukio bila kusimamia miundombinu.
 
 ## G
 
 **GitHub Actions**  
-Jukwaa la CI/CD lilioingizwa na hazina za GitHub kwa kuunda miradi ya kazi kwa njia ya otomatiki.
+Jukwaa la CI/CD lililounganishwa na hazina za GitHub kwa kujiendesha kwa njia ya workflows.
 
 **Git**  
 Mfumo wa udhibiti wa toleo uliosambazwa unaotumika kwa kufuatilia mabadiliko kwenye msimbo wa chanzo.
@@ -115,58 +115,58 @@ Mfumo wa udhibiti wa toleo uliosambazwa unaotumika kwa kufuatilia mabadiliko kwe
 ## H
 
 **Hooks**  
-Skripti maalum au amri zinazoendeshwa katika nyakati maalum za mzunguko wa utoaji (preprovision, postprovision, predeploy, postdeploy).
+Skripti au amri maalum zinazoendeshwa kwenye nyakati maalum katika mzunguko wa maisha wa usambazaji (preprovision, postprovision, predeploy, postdeploy).
 
 **Host**  
-Aina ya huduma ya Azure ambapo programu itapelekwa (mfano, appservice, containerapp, function).
+Aina ya huduma ya Azure ambapo programu itasambazwa (kwa mfano, appservice, containerapp, function).
 
 ## I
 
 **Infrastructure as Code (IaC)**  
-Dhana ya kufafanua na kusimamia miundombinu kupitia msimbo badala ya michakato ya mikono.
+Mazingira ya kufafanua na kusimamia miundombinu kwa kupitia msimbo badala ya michakato ya mikono.
 
 **Init**  
-Mchakato wa kuanzisha mradi mpya wa azd, kawaida kutoka kwa template.
+Mchakato wa kuanzisha mradi mpya wa azd, kawaida kutoka kwenye template.
 
 ## J
 
 **JSON**  
-JavaScript Object Notation. Muundo wa kubadilishana data unaotumika kwa kawaida kwa faili za usanidi na majibu ya API.
+JavaScript Object Notation. Muundo wa kubadilishana data unaotumika mara kwa mara kwa faili za usanidi na majibu ya API.
 
 **JWT**  
-JSON Web Token. Kiwango cha kusafirisha taarifa kwa usalama kati ya pande kama kitu cha JSON.
+JSON Web Token. Kiwango cha kusafirisha kwa usalama taarifa kati ya pande kama kitu cha JSON.
 
 ## K
 
 **Key Vault**  
-Huduma ya Azure ya kuhifadhi kwa usalama na kusimamia siri, funguo, na vyeti.
+Huduma ya Azure kwa kuhifadhi na kusimamia kwa usalama siri, funguo, na vyeti.
 
 **Kusto Query Language (KQL)**  
-Lugha ya utafutaji inayotumika kwa kuchambua data katika Azure Monitor, Application Insights, na huduma nyingine za Azure.
+Lugha ya uchunguzi inayotumika kwa kuchambua data katika Azure Monitor, Application Insights, na huduma nyingine za Azure.
 
 ## L
 
 **Load Balancer**  
-Huduma inayogawa trafiki inayokuja ya mtandao kwa seva au matoleo kadhaa.
+Huduma inayogawa trafiki ya mtandao inayokuja kwa seva au instance nyingi.
 
 **Log Analytics**  
-Huduma ya Azure ya kukusanya, kuchambua, na kuchukua hatua kulingana na data za telemetry kutoka kwa mazingira ya wingu na on-premises.
+Huduma ya Azure ya kukusanya, kuchambua, na kuchukua hatua kwa data za telemetry kutoka kwa mazingira ya wingu na kwenye premisa.
 
 ## M
 
 **Managed Identity**  
-Sifa ya Azure inayompatia huduma za Azure utambulisho unaosimamiwa moja kwa moja kwa kuthibitisha kwa huduma nyingine za Azure.
+Kipengele cha Azure kinachompa huduma za Azure kitambulisho kinachosimamiwa kiotomatiki kwa ajili ya kuthibitisha kwa huduma nyingine za Azure.
 
 **Microservices**  
 Mbinu ya usanifu ambapo programu zinajengwa kama mkusanyiko wa huduma ndogo, huru.
 
 **Monitor**  
-Suluhisho la umoja la ufuatiliaji la Azure linalotoa uonekano kamili wa programu na miundombinu.
+Suluhisho ya ufuatiliaji wa Azure inayotoa uonekano kamili wa stack kupitia programu na miundombinu.
 
 ## N
 
 **Node.js**  
-Mazingira ya utekelezaji ya JavaScript iliyojengwa juu ya injini ya V8 ya Chrome kwa kujenga programu za upande wa seva.
+Mazungumzo ya JavaScript yaliyojengwa juu ya injini ya JavaScript ya Chrome V8 kwa kujenga programu za upande wa seva.
 
 **npm**  
 Msimamizi wa vifurushi kwa Node.js unaosimamia utegemezi na vifurushi.
@@ -174,18 +174,18 @@ Msimamizi wa vifurushi kwa Node.js unaosimamia utegemezi na vifurushi.
 ## O
 
 **Output**  
-Thamani zinazorejeshwa kutoka kwa utoaji wa miundombinu ambazo zinaweza kutumika na programu au rasilimali nyingine.
+Thamani zinazorejeshwa kutoka kwa usambazaji wa miundombinu ambazo zinaweza kutumika na programu au rasilimali zingine.
 
 ## P
 
 **Package**  
-Mchakato wa kuandaa msimbo wa programu na utegemezi wake kwa ajili ya utoaji.
+Mchakato wa kuandaa msimbo wa programu na utegemezi kwa usambazaji.
 
 **Parameters**  
-Thamani za pembejeo zinazopitishwa kwenye templates za miundombinu ili kubinafsisha utoaji.
+Thamani za ingizo zinazopitishwa kwa templates za miundombinu ili kubinafsisha usambazaji.
 
 **PostgreSQL**  
-Mfumo wa hifadhidata wa uhusiano wa chanzo wazi unaoungwa mkono kama huduma iliyosimamiwa katika Azure.
+Mfumo wa hifadhidata wa uhusiano wa chanzo wazi unaoumiwa kama huduma iliyosimamiwa katika Azure.
 
 **Provisioning**  
 Mchakato wa kuunda na kusanidi rasilimali za Azure zilizofafanuliwa katika templates za miundombinu.
@@ -193,57 +193,57 @@ Mchakato wa kuunda na kusanidi rasilimali za Azure zilizofafanuliwa katika templ
 ## Q
 
 **Quota**  
-Mikomo juu ya kiasi cha rasilimali ambacho kinaweza kuundwa katika usajili wa Azure au mkoa.
+MiaBoundary za kiasi cha rasilimali zinazoweza kuundwa katika usajili wa Azure au eneo.
 
 ## R
 
 **Resource Group**  
-Mfuko wa kimantiki wa rasilimali za Azure zinazoshiriki mzunguko wa maisha, ruhusa, na sera.
+Kontena la kimantiki kwa rasilimali za Azure ambazo zinashiriki mzunguko wa maisha, ruhusa, na sera.
 
 **Resource Token**  
-Mstari wa kipekee uliotengenezwa na azd kuhakikisha majina ya rasilimali ni ya kipekee katika utoaji.
+Mstari wa kipekee uliotengenezwa na azd ili kuhakikisha majina ya rasilimali ni ya kipekee kote kwenye usambazaji.
 
 **REST API**  
-Mtindo wa usanifu wa kubuni programu za mtandao kwa kutumia mbinu za HTTP.
+Mtindo wa usanifu wa kutengeneza programu za mtandao kwa kutumia mbinu za HTTP.
 
 **Rollback**  
-Mchakato wa kurudisha matoleo ya awali ya programu au usanidi wa miundombinu.
+Mchakato wa kurudisha kwenye toleo la awali la programu au usanidi wa miundombinu.
 
 ## S
 
 **Service**  
-Sehemu ya programu yako iliyofafanuliwa katika azure.yaml (mfano, mbele ya wavuti, backend ya API, hifadhidata).
+Sehemu ya programu yako iliyofafanuliwa katika azure.yaml (kwa mfano, web frontend, API backend, database).
 
 **SKU**  
-Stock Keeping Unit. Inawakilisha ngazi tofauti za huduma au viwango vya utendaji kwa rasilimali za Azure.
+Stock Keeping Unit. Inaonyesha ngazi tofauti za huduma au viwango vya utendaji kwa rasilimali za Azure.
 
 **SQL Database**  
-Huduma ya Azure ya hifadhidata ya uhusiano iliyotegemea Microsoft SQL Server.
+Huduma ya hifadhidata ya uhusiano iliyosimamiwa ya Azure inayotegemea Microsoft SQL Server.
 
 **Static Web Apps**  
-Huduma ya Azure kwa kujenga na kupeleka programu za wavuti kamili kutoka kwa hazina za msimbo wa chanzo.
+Huduma ya Azure kwa kujenga na kusambaza programu za wavuti kamili kutoka kwa hazina za msimbo wa chanzo.
 
 **Storage Account**  
 Huduma ya Azure inayotoa uhifadhi wa wingu kwa vitu vya data ikijumuisha blobs, files, queues, na tables.
 
 **Subscription**  
-Kontena la akaunti ya Azure linaloshikilia resource groups na rasilimali, likiwa na bili na usimamizi wa ufikaji unaohusiana.
+Kontena la akaunti ya Azure linaloshikilia resource groups na rasilimali, pamoja na bili na usimamizi wa upatikanaji.
 
 ## T
 
 **Template**  
-Muundo wa mradi uliotengenezwa kabla unaojumuisha msimbo wa programu, ufafanuzi wa miundombinu, na usanidi kwa hali za kawaida.
+Muundo wa mradi uliotengenezwa tayari unaojumuisha msimbo wa programu, ufafanuzi wa miundombinu, na usanidi kwa matukio ya kawaida.
 
 **Terraform**  
-Chombo cha chanzo wazi cha Infrastructure as Code kinachounga mkono watoa huduma wa wingu kadhaa ikiwa ni pamoja na Azure.
+Zana ya Chanzo Wazi ya Infrastructure as Code inayounga mkono watoa huduma wengi wa wingu ikiwemo Azure.
 
 **Traffic Manager**  
-Balancer wa trafiki wa DNS wa Azure kwa kusambaza trafiki katika mikoa ya kimataifa ya Azure.
+Kibor ya Azure ya kusimamia mzigo wa trafiki kwa msingi wa DNS kwa kugawa trafiki ndani ya mikoa ya Azure duniani.
 
 ## U
 
 **URI**  
-Uniform Resource Identifier. Mstari unaotambua rasilimali fulani.
+Uniform Resource Identifier. Mstari unaotambulisha rasilimali maalum.
 
 **URL**  
 Uniform Resource Locator. Aina ya URI inayobainisha wapi rasilimali iko na jinsi ya kuipata.
@@ -251,64 +251,64 @@ Uniform Resource Locator. Aina ya URI inayobainisha wapi rasilimali iko na jinsi
 ## V
 
 **Virtual Network (VNet)**  
-Jengo la msingi kwa mitandao binafsi katika Azure, likitoa upotokezi na sehemu.
+Jengo la msingi kwa mitandao binafsi ndani ya Azure, likitoa upungufu na segmenti.
 
 **VS Code**  
-Visual Studio Code. Mhariri maarufu wa msimbo wenye uunganisho mzuri wa Azure na azd.
+Visual Studio Code. Mhariri maarufu wa msimbo uliyo na ujumuishaji mzuri wa Azure na azd.
 
 ## W
 
 **Webhook**  
-Callback ya HTTP inayochochewa na matukio maalum, kwa kawaida inayotumika katika pipelines za CI/CD.
+Callback ya HTTP inayochochewa na matukio maalum, kawaida kutumika katika pipelines za CI/CD.
 
 **What-if**  
-Sifa ya Azure inayoonyesha mabadiliko yatakayofanywa na utoaji bila kuutekeleza kwa kweli.
+Kipengele cha Azure kinachoonyesha mabadiliko ambayo yangetokea kwa usambazaji bila kutekeleza kwa kweli.
 
 ## Y
 
 **YAML**  
-YAML Ain't Markup Language. Kiwango cha serialization cha data kinachosasika kwa binadamu kinachotumiwa kwa faili za usanidi kama azure.yaml.
+YAML Ain't Markup Language. Kiwango cha serialization cha data kinachosomeka na binadamu kinachotumika kwa faili za usanidi kama azure.yaml.
 
 ## Z
 
 **Zone**  
-Maeneo yaliyotengwa kimwili ndani ya mkoa wa Azure yanayotoa wingi wa rasilimali na upatikanaji wa juu.
+Maeneo tofauti kimwili ndani ya eneo la Azure yanayotoa mdawaro na upatikana wa juu.
 
 ---
 
 ## Vifupisho Vinavyotumika Mara kwa Mara
 
-| Vifupisho | Fomu Kamili | Maelezo |
+| Kifupisho | Fomu Kamili | Maelezo |
 |---------|-----------|-------------|
-| AAD | Azure Active Directory | Huduma ya usimamizi wa utambulisho na ufikaji |
+| AAD | Azure Active Directory (now Microsoft Entra ID) | Huduma ya usimamizi wa utambulisho na ufikiaji |
 | ACR | Azure Container Registry | Huduma ya rejista ya picha za kontena |
-| AKS | Azure Kubernetes Service | Huduma ya Kubernetes iliyosimamiwa |
-| API | Application Programming Interface | Mkusanyiko wa itifaki za kujenga programu |
-| ARM | Azure Resource Manager | Huduma ya utekelezaji na usimamizi ya Azure |
-| CDN | Content Delivery Network | Mtandao uliosambazwa wa seva |
-| CI/CD | Continuous Integration/Continuous Deployment | Mbinu za maendeleo zilizo otomatishwa |
-| CLI | Command Line Interface | Kiolesura cha mtumiaji kinachotumia maandishi |
-| DNS | Domain Name System | Mfumo wa kutafsiri majina ya uwanja kwa anwani za IP |
+| AKS | Azure Kubernetes Service | Huduma iliyosimamiwa ya Kubernetes |
+| API | Application Programming Interface | Seti ya itifaki za kujenga programu |
+| ARM | Azure Resource Manager | Huduma ya usambazaji na usimamizi ya Azure |
+| CDN | Content Delivery Network | Mtandao uliogawanywa wa seva |
+| CI/CD | Continuous Integration/Continuous Deployment | Mienendo ya maendeleo iliyojirudia kwa kujitegemea |
+| CLI | Command Line Interface | Kiolesura cha mtumiaji cha maandishi |
+| DNS | Domain Name System | Mfumo wa kutafsiri majina ya kikoa kuwa anwani za IP |
 | HTTPS | Hypertext Transfer Protocol Secure | Toleo salama la HTTP |
 | IaC | Infrastructure as Code | Kusimamia miundombinu kupitia msimbo |
 | JSON | JavaScript Object Notation | Muundo wa kubadilishana data |
-| JWT | JSON Web Token | Muundo wa token kwa usafirishaji salama wa taarifa |
-| KQL | Kusto Query Language | Lugha ya utafutaji kwa huduma za data za Azure |
-| RBAC | Role-Based Access Control | Njia ya udhibiti wa ufikaji kulingana na majukumu |
+| JWT | JSON Web Token | Muundo wa tokeni kwa kusafirisha taarifa kwa usalama |
+| KQL | Kusto Query Language | Lugha ya uchunguzi kwa huduma za data za Azure |
+| RBAC | Role-Based Access Control | Njia ya udhibiti wa upatikanaji inayotegemea nafasi za watumiaji |
 | REST | Representational State Transfer | Mtindo wa usanifu kwa huduma za wavuti |
 | SDK | Software Development Kit | Mkusanyiko wa zana za maendeleo |
-| SLA | Service Level Agreement | Ahadi ya upatikanaji/utendaji wa huduma |
+| SLA | Service Level Agreement | Ahadi ya upatikana/utendaji wa huduma |
 | SQL | Structured Query Language | Lugha ya kusimamia hifadhidata za uhusiano |
-| SSL/TLS | Secure Sockets Layer/Transport Layer Security | Itifaki za kriptografia |
-| URI | Uniform Resource Identifier | Mstari unaotambua rasilimali |
+| SSL/TLS | Secure Sockets Layer/Transport Layer Security | Itifaki za usimbuaji |
+| URI | Uniform Resource Identifier | Mstari unaotambulisha rasilimali |
 | URL | Uniform Resource Locator | Aina ya URI inayobainisha eneo la rasilimali |
-| VM | Virtual Machine | Emulisho la mfumo wa kompyuta |
-| VNet | Virtual Network | Mtandao binafsi katika Azure |
-| YAML | YAML Ain't Markup Language | Kiwango cha serialization cha data |
+| VM | Virtual Machine | Uigaji wa mfumo wa kompyuta |
+| VNet | Virtual Network | Mtandao wa kibinafsi katika Azure |
+| YAML | YAML Ain't Markup Language | Kiwango cha serialization ya data |
 
 ---
 
-## Mepangilio ya Majina ya Huduma za Azure
+## Ramani ya Majina ya Huduma za Azure
 
 | Jina la Kawaida | Jina Rasmi la Huduma ya Azure | azd Host Type |
 |-------------|------------------------------|---------------|
@@ -321,50 +321,50 @@ Maeneo yaliyotengwa kimwili ndani ya mkoa wa Azure yanayotoa wingi wa rasilimali
 | NoSQL DB | Azure Cosmos DB | `cosmosdb` |
 | Storage | Azure Storage Account | `storage` |
 | Cache | Azure Cache for Redis | `redis` |
-| Search | Azure Cognitive Search | `search` |
+| Search | Azure AI Search | `search` |
 | Messaging | Azure Service Bus | `servicebus` |
 
 ---
 
-## Maneno maalum kwa Muktadha
+## Maneno Maalum kwa Muktadha
 
 ### Maneno ya Maendeleo
-- **Hot Reload**: Kusasisha programu kiotomatiki wakati wa maendeleo bila kuanzisha upya
-- **Build Pipeline**: Mchakato wa otomatiki wa kujenga na kujaribu msimbo
-- **Deployment Slot**: Mazingira ya kutathmini ndani ya App Service
-- **Environment Parity**: Kuweka mazingira ya maendeleo, staging, na uzalishaji kuwa sawa
+- **Hot Reload**: Kusasisha programu kiotomatiki wakati wa maendeleo bila kuanza upya
+- **Build Pipeline**: Mchakato unaojitekeleza wa kujenga na kujaribu msimbo
+- **Deployment Slot**: Mazingira ya staging ndani ya App Service
+- **Environment Parity**: Kuweka mazingira ya development, staging, na production kuwa sawa kadri iwezekanavyo
 
 ### Maneno ya Usalama
-- **Managed Identity**: Sifa ya Azure inayotoa usimamizi wa vitambulisho kiotomatiki
-- **Key Vault**: Uhifadhi salama kwa siri, funguo, na vyeti
-- **RBAC**: Udhibiti wa ufikaji kwa msingi wa majukumu kwa rasilimali za Azure
-- **Network Security Group**: Kizuizi cha mtandao cha mtandao wa mtandao kwa kudhibiti trafiki
+- **Managed Identity**: Kipengele cha Azure kinachotoa usimamizi wa vibali kiotomatiki
+- **Key Vault**: Uhifadhi salama wa siri, funguo, na vyeti
+- **RBAC**: Udhibiti wa upatikanaji uliotegemea nafasi kwa rasilimali za Azure
+- **Network Security Group**: Kizuizi cha mtandao cha virtual kwa kudhibiti trafiki ya mtandao
 
 ### Maneno ya Ufuatiliaji
-- **Telemetry**: Ukusanyaji wa moja kwa moja wa vipimo na data
+- **Telemetry**: Ukusanyaji wa kiotomatiki wa vipimo na data
 - **Application Performance Monitoring (APM)**: Ufuatiliaji wa utendaji wa programu
 - **Log Analytics**: Huduma ya kukusanya na kuchambua data za logi
-- **Alert Rules**: Arifa za otomatiki kulingana na vipimo au vigezo
+- **Alert Rules**: Arifu za kiotomatiki kulingana na vipimo au vigezo
 
-### Maneno ya Utoaji
-- **Blue-Green Deployment**: Mkakati wa utoaji usio na muda wa kukatika kwa huduma
-- **Canary Deployment**: Utoaji wa hatua kwa hatua kwa kundi la watumiaji
-- **Rolling Update**: Ubadilishaji wa mfululizo wa matoleo ya programu
+### Maneno ya Usambazaji
+- **Blue-Green Deployment**: Mkakati wa usambazaji usio na muda wa kukatika
+- **Canary Deployment**: Uenezaji wa hatua kwa subset ya watumiaji
+- **Rolling Update**: Ubadilishaji wa mfululizo wa instance za programu
 - **Rollback**: Kurudisha kwenye toleo la awali la programu
 
 ---
 
-**Usage Tip**: Use `Ctrl+F` to quickly search for specific terms in this glossary. Terms are cross-referenced where applicable.
+**Ushauri wa Matumizi**: Tumia `Ctrl+F` kutafuta haraka maneno maalum katika kamusi hii. Maneno yanarejelewa kupitishwa pale inapofaa.
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [Muhtasari](cheat-sheet.md)
-- **Next Lesson**: [FAQ](faq.md)
+**Utaratibu wa Kuwindilia**
+- **Somo Lililopita**: [Cheat Sheet](cheat-sheet.md)
+- **Somo Linalofuata**: [FAQ](faq.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Tamko la kutokuwa na uwajibikaji:
-Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator] (https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au kasoro. Nyaraka ya asili kwa lugha yake ya asili inapaswa kuchukuliwa kuwa chanzo chenye mamlaka. Kwa taarifa muhimu, inashauriwa kutumia tafsiri ya kitaalamu inayotolewa na mtafsiri wa binadamu. Hatuwajibiki kwa uelewa usio sahihi au tafsiri potofu zitokanazo na matumizi ya tafsiri hii.
+**Kionyozo**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Hati ya asili katika lugha yake halisi inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatutojibu kwa kuelewa vibaya au tafsiri potofu zinazotokea kutokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,50 +1,50 @@
 # Microsoft Foundry integráció az AZD-vel
 
 **Fejezet navigáció:**
-- **📚 Tanfolyam főoldal**: [AZD Kezdőknek](../../README.md)
-- **📖 Jelenlegi fejezet**: 2. fejezet – AI-első fejlesztés
+- **📚 Kurzus kezdőlap**: [AZD kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 2. fejezet – AI-első fejlesztés
 - **⬅️ Előző fejezet**: [1. fejezet: Az első projekted](../chapter-01-foundation/first-project.md)
-- **➡️ Következő**: [AI modell telepítése](ai-model-deployment.md)
+- **➡️ Következő**: [AI modell telepítés](ai-model-deployment.md)
 - **🚀 Következő fejezet**: [3. fejezet: Konfiguráció](../chapter-03-configuration/configuration.md)
 
 ## Áttekintés
 
-Ez az útmutató bemutatja, hogyan integrálható a Microsoft Foundry szolgáltatás az Azure Developer CLI-vel (AZD) az AI alkalmazások egyszerűbb telepítéséhez. A Microsoft Foundry egy átfogó platform AI alkalmazások építésére, telepítésére és kezelésére, míg az AZD leegyszerűsíti az infrastruktúrát és a telepítési folyamatot.
+Ez az útmutató bemutatja, hogyan lehet a Microsoft Foundry szolgáltatásokat integrálni az Azure Developer CLI-vel (AZD), hogy egyszerűbbé váljon az AI alkalmazások telepítése. A Microsoft Foundry átfogó platformot kínál AI alkalmazások építéséhez, telepítéséhez és kezeléséhez, míg az AZD leegyszerűsíti az infrastruktúra és telepítés folyamatát.
 
 ## Mi az a Microsoft Foundry?
 
-A Microsoft Foundry a Microsoft egységes AI fejlesztési platformja, amely tartalmazza:
+A Microsoft Foundry a Microsoft egységes AI fejlesztői platformja, amely magában foglalja:
 
-- **Modell katalógus**: Hozzáférés a legkorszerűbb AI modellekhez
-- **Prompt Flow**: Vizualizált tervező AI munkafolyamatokhoz
+- **Modell katalógus**: Hozzáférés a csúcstechnológiás AI modellekhez
+- **Prompt Flow**: AI munkafolyamatok vizuális tervezője
 - **Microsoft Foundry portál**: Integrált fejlesztői környezet AI alkalmazásokhoz
-- **Telepítési opciók**: Többféle hosztolási és skálázási lehetőség
+- **Telepítési lehetőségek**: Többféle hosztolási és skálázási opció
 - **Biztonság és védelem**: Beépített felelős AI funkciók
 
 ## AZD + Microsoft Foundry: Jobban együtt
 
-| Jellemző | Microsoft Foundry | AZD integráció előnye |
-|---------|-----------------|------------------------|
-| **Modell telepítés** | Kézi portálon keresztüli telepítés | Automatizált, ismételhető telepítések |
-| **Infrastruktúra** | Kattintásos előkészítés | Infrastruktúra kódként (Bicep) |
-| **Környezetkezelés** | Egyetlen környezet fókusz | Többkörnyezetes (fejlesztés/teszt/prod) |
-| **CI/CD integráció** | Korlátozott | Beépített GitHub Actions támogatás |
-| **Költségkezelés** | Alap monitorozás | Környezet specifikus költségoptimalizálás |
+| Funkció | Microsoft Foundry | AZD integráció előnye |
+|---------|-----------------|----------------------|
+| **Modell telepítés** | Kézi portál alapú telepítés | Automatikus, ismételhető telepítések |
+| **Infrastruktúra** | Kattintásos előkészítés | Infrastruktúra kód formájában (Bicep) |
+| **Környezetkezelés** | Egyetlen környezet fókusz | Többkörnyezetes (fejlesztő/teszt/éles) |
+| **CI/CD integráció** | Korlátozott | Natív GitHub Actions támogatás |
+| **Költségkezelés** | Alap monitoring | Környezet-specifikus költségoptimalizálás |
 
 ## Előfeltételek
 
 - Azure előfizetés megfelelő jogosultságokkal
 - Azure Developer CLI telepítve
-- Hozzáférés a Microsoft Foundry Models szolgáltatásokhoz
+- Hozzáférés a Microsoft Foundry Modellek szolgáltatásokhoz
 - Alapvető ismeretek a Microsoft Foundry-ról
 
-> **Jelenlegi AZD verzió:** Ezeket a példákat a `azd` `1.23.12` verzióján teszteltük. Az AI ügynök munkafolyamathoz használd az aktuális előzetes bővítmény verziót, és kezdés előtt ellenőrizd a telepített verziódat.
+> **Aktuális AZD alapverzió:** Ezeket a példákat a `azd` `1.23.12` verziójával teszteltük. Az AI ügynök munkafolyamathoz használja a legfrissebb előzetes kiegészítést, és ellenőrizze a telepített verziót a kezdés előtt.
 
 ## Alapvető integrációs minták
 
-### Minta 1: Microsoft Foundry Models integráció
+### Minta 1: Microsoft Foundry Modellek integrációja
 
-**Használati eset**: Csevegő alkalmazások telepítése Microsoft Foundry Models modellekkel
+**Használati eset**: Chat alkalmazások telepítése Microsoft Foundry Modellek használatával
 
 ```yaml
 # azure.yaml
@@ -92,9 +92,9 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 }
 ```
 
-### Minta 2: AI keresés + RAG integráció
+### Minta 2: AI Keresés + RAG integráció
 
-**Használati eset**: Keresés-alapú generálás (RAG) alkalmazások telepítése
+**Használati eset**: Hozzáférés-alapú generálás (RAG) alkalmazások telepítése
 
 ```bicep
 // Azure AI Search
@@ -122,9 +122,9 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 }
 ```
 
-### Minta 3: Dokumentum intelligencia integráció
+### Minta 3: Dokumentumintelligencia integráció
 
-**Használati eset**: Dokumentum feldolgozó és elemző munkafolyamatok
+**Használati eset**: Dokumentumfeldolgozási és elemzési munkafolyamatok
 
 ```bicep
 // Document Intelligence service
@@ -159,23 +159,23 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ### Környezeti változók beállítása
 
-**Termelési konfiguráció:**
+**Éles konfiguráció:**
 ```bash
-# Alapvető AI szolgáltatások
+# Alap AI szolgáltatások
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_SEARCH_ENDPOINT "https://your-search.search.windows.net"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT "https://your-formrec.cognitiveservices.azure.com/"
 
-# Modellkonfigurációk
+# Modell konfigurációk
 azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
 azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-3-large"
 
-# Teljesítménybeállítások
+# Teljesítmény beállítások
 azd env set AZURE_OPENAI_CAPACITY 30
 azd env set AZURE_SEARCH_SKU "standard"
 ```
 
-**Fejlesztési konfiguráció:**
+**Fejlesztői konfiguráció:**
 ```bash
 # Költségoptimalizált beállítások fejlesztéshez
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -220,63 +220,63 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ## Telepítési munkafolyamatok
 
-### AZD bővítmények a Foundry-hoz
+### AZD kiterjesztések a Foundryhoz
 
-Az AZD bővítmények AI-specifikus képességeket adnak a Microsoft Foundry szolgáltatásokhoz való munkához:
+Az AZD kiterjesztéseket kínál, amelyek AI-specifikus funkciókat adnak hozzá a Microsoft Foundry szolgáltatások használatához:
 
 ```bash
-# Telepítse a Foundry ügynökök kiterjesztését
+# A Foundry ügynökök kiterjesztés telepítése
 azd extension install azure.ai.agents
 
-# Telepítse a finomhangoló kiterjesztést
+# A finomhangolás kiterjesztés telepítése
 azd extension install azure.ai.finetune
 
-# Telepítse az egyedi modellek kiterjesztését
+# A testreszabott modellek kiterjesztés telepítése
 azd extension install azure.ai.models
 
-# Listázza a telepített kiterjesztéseket
+# A telepített kiterjesztések listázása
 azd extension list --installed
 
-# Ellenőrizze a jelenleg telepített ügynök kiterjesztés verzióját
+# Az aktuálisan telepített ügynök kiterjesztés verziójának ellenőrzése
 azd extension show azure.ai.agents
 ```
 
-Az AI bővítmények továbbra is gyorsan fejlődnek előzetes állapotban. Ha egy parancs máshogy viselkedik, mint itt leírva, frissítsd a vonatkozó bővítményt, mielőtt a projekt hibajavításába kezdenél.
+Az AI kiterjesztések még gyorsan fejlődnek előzetes verzióban. Ha egy parancs máshogy viselkedik, mint itt, frissítse a vonatkozó kiegészítést, mielőtt a projektet hibakeresné.
 
-### Ügynök-első telepítés `azd ai`-vel
+### Ügynök-első telepítés `azd ai` használatával
 
-Ha van ügynök manifest fájlod, használd az `azd ai agent init` parancsot, hogy a projektet a Foundry Agent Service-hez kötve scaffoldold:
+Ha rendelkezik ügynök-manifesztummal, használja az `azd ai agent init` parancsot az Foundry Ügynök Szolgáltatáshoz kapcsolódó projekt vázának elkészítéséhez:
 
 ```bash
-# Inicializálás egy ügynök manifestből
+# Inicializálás egy agent manifestből
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# Telepítés Azure-ra
+# Telepítés az Azure-ra
 azd up
 ```
 
-A `azure.ai.agents` nemrég megjelent előzetes verziója sablon-alapú inicializációs támogatást is adott az `azd ai agent init` számára. Ha újabb ügynök mintákat követsz, nézd meg a bővítmény súgóját a telepített verziódban elérhető pontos flag-ekhez.
+A közelmúltbeli `azure.ai.agents` előzetes kiadások sablon alapú inicializálási támogatást is hozzáadtak az `azd ai agent init` parancshoz. Ha újabb ügynökmintákat követ, nézze meg a kiterjesztés súgóját a telepített verzió pontos kapcsolóiért.
 
-Teljes parancs referencia és opciók a [AZD AI CLI parancsainál](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
+Lásd a [AZD AI CLI parancsokat](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) a teljes parancsreferencia és kapcsolók listájáért.
 
-### Egy parancsos telepítés
+### Egyparancsos telepítés
 
 ```bash
 # Minden telepítése egy parancssal
 azd up
 
-# Vagy fokozatos telepítés
+# Vagy telepítés lépésenként
 azd provision  # Csak infrastruktúra
 azd deploy     # Csak alkalmazás
 
-# Hosszú futású AI alkalmazástelepítésekhez az azd 1.23.11+ verzióban
+# Hosszú ideig futó AI alkalmazások telepítéséhez az azd 1.23.11+ verzióban
 azd deploy --timeout 1800
 ```
 
-### Környezet specifikus telepítések
+### Környezet-specifikus telepítések
 
 ```bash
-# Fejlesztői környezet
+# Fejlesztési környezet
 azd env new development
 azd env set AZURE_LOCATION eastus
 azd env set ENVIRONMENT_TYPE dev
@@ -290,7 +290,7 @@ azd env set AZURE_OPENAI_CAPACITY 100
 azd up
 ```
 
-## Monitorozás és megfigyelhetőség
+## Megfigyelés és láthatóság
 
 ### Application Insights integráció
 
@@ -325,7 +325,7 @@ resource customMetrics 'Microsoft.Insights/components/analyticsItems@2015-05-01'
 }
 ```
 
-### Költségfigyelés
+### Költségmonitorozás
 
 ```bicep
 // Budget alert for AI services
@@ -355,7 +355,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 ## 🔐 Biztonsági legjobb gyakorlatok
 
-### Managed Identity konfiguráció
+### Kezelt identitás beállítása
 
 ```bicep
 // Managed identity for the web application
@@ -400,7 +400,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## Teljesítmény optimalizáció
+## Teljesítmény optimalizálás
 
 ### Gyorsítótárazási stratégiák
 
@@ -432,7 +432,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 }
 ```
 
-### Autómatikusan skálázás konfigurációja
+### Automatikus skálázás konfigurációja
 
 ```bicep
 // Container App with auto-scaling
@@ -466,24 +466,24 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-## Gyakori problémák elhárítása
+## Gyakori problémák hibaelhárítása
 
-### Probléma 1: OpenAI kvóta túllépés
+### Probléma 1: OpenAI kvóta túllépve
 
 **Tünetek:**
-- A telepítés kvóta hibával megszakad
-- 429-es hibák az alkalmazás naplójában
+- A telepítés kvótahibával meghiúsul
+- 429-es hibák az alkalmazásnaplókban
 
 **Megoldások:**
 ```bash
-# Ellenőrizze a jelenlegi kvótahasználatot
+# Ellenőrizze a jelenlegi kvóta használatot
 az cognitiveservices usage list --location eastus
 
-# Próbáljon ki másik régiót
+# Próbáljon másik régiót
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Ideiglenesen csökkentse a kapacitást
+# Csökkentse ideiglenesen a kapacitást
 azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
@@ -491,117 +491,117 @@ azd deploy
 ### Probléma 2: Hitelesítési hibák
 
 **Tünetek:**
-- 401/403-as hibák AI szolgáltatások hívásakor
-- "Hozzáférés megtagadva" üzenetek
+- 401/403 hibák az AI szolgáltatások hívásakor
+- „Hozzáférés megtagadva” üzenetek
 
 **Megoldások:**
 ```bash
-# Ellenőrizze a szerepkör-hozzárendeléseket
+# Szerepkiosztások ellenőrzése
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Vizsgálja meg a kezelt identitás beállításait
+# Kezelt identitás konfigurációjának ellenőrzése
 az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 
-# Érvényesítse a Key Vault hozzáférést
+# Key Vault hozzáférés érvényesítése
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
 ### Probléma 3: Modell telepítési gondok
 
 **Tünetek:**
-- Modellek nem elérhetők telepítéskor
-- Bizonyos modell verziók hibásan működnek
+- Modellek nem elérhetők a telepítésben
+- Egyes modellverziók hibásak
 
 **Megoldások:**
 ```bash
-# Modellek elérhetőségének listázása régiónként
+# Listázza a rendelkezésre álló modelleket régiónként
 az cognitiveservices model list --location eastus
 
-# Model verzió frissítése bicep sablonban
-# Modell kapacitás követelmények ellenőrzése
+# Frissítse a modell verzióját a bicep sablonban
+# Ellenőrizze a modell kapacitás követelményeit
 ```
 
 ## Példa sablonok
 
-### RAG Csevegőalkalmazás (Python)
+### RAG chat alkalmazás (Python)
 
-**Tároló**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
+**Tárhely**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
 **Szolgáltatások**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
 
-**Leírás**: Az egyik legnépszerűbb Azure AI minta — egy éles RAG csevegőalkalmazás, amely lehetővé teszi, hogy saját dokumentumaidra kérdezz rá. GPT-4.1-mini-t használ chathez, text-embedding-3-large-ot az embeddingekhez, és Azure AI Search-t a kereséshez. Támogatja a multimodális dokumentumokat, beszéd bemenet/kimenetet, Microsoft Entra hitelesítést és Application Insights nyomkövetést.
+**Leírás**: Az egyik legnépszerűbb Azure AI példa — egy éles RAG chat alkalmazás, amely lehetővé teszi kérdések feltevését a saját dokumentumai alapján. GPT-4.1-mini chathez, text-embedding-3-large beágyazáshoz és Azure AI Search visszakereséshez használva. Támogat multimodális dokumentumokat, beszéd bemenet/kimenetet, Microsoft Entra hitelesítést és Application Insights nyomkövetést.
 
-**Gyors kezdés**:
+**Gyors indítás**:
 ```bash
 azd init --template azure-search-openai-demo
 azd up
 ```
 
-### RAG Csevegőalkalmazás (.NET)
+### RAG chat alkalmazás (.NET)
 
-**Tároló**: [azure-search-openai-demo-csharp](https://github.com/Azure-Samples/azure-search-openai-demo-csharp)
+**Tárhely**: [azure-search-openai-demo-csharp](https://github.com/Azure-Samples/azure-search-openai-demo-csharp)
 
 **Szolgáltatások**: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
 
-**Leírás**: A Python RAG chat mintának .NET/C# megfelelője. ASP.NET Core Minimal API és Blazor WebAssembly frontenddel. Tartalmaz hang alapú csevegést, GPT-4o-mini látási támogatást, valamint egy .NET MAUI Blazor Hybrid asztali/mobil klienst.
+**Leírás**: A Python RAG chat minta .NET/C# megfelelője. ASP.NET Core Minimal API és Blazor WebAssembly frontenddel készült. Tartalmazza a hang alapú chatet, GPT-4o-mini látástámogatást, valamint egy .NET MAUI Blazor Hybrid asztali/mobil klienst.
 
-**Gyors kezdés**:
+**Gyors indítás**:
 ```bash
 azd init --template azure-search-openai-demo-csharp
 azd up
 ```
 
-### RAG Csevegőalkalmazás (Java)
+### RAG chat alkalmazás (Java)
 
-**Tároló**: [azure-search-openai-demo-java](https://github.com/Azure-Samples/azure-search-openai-demo-java)
+**Tárhely**: [azure-search-openai-demo-java](https://github.com/Azure-Samples/azure-search-openai-demo-java)
 
 **Szolgáltatások**: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
 
-**Leírás**: A RAG chat minta Java verziója Langchain4J-vel az AI szervezéshez. Támogatja a mikroszolgáltatás esemény-vezérelt architektúrát, több keresési stratégiát (szöveg, vektor, hibrid), dokumentumfeltöltést Azure Document Intelligence segítségével, valamint telepíthető Azure Container Appsekre vagy Azure Kubernetes Service-re.
+**Leírás**: A RAG chat minta Java verziója, Langchain4J-al az AI összehangoláshoz. Támogat mikroservice eseményvezérelt architektúrát, több keresési stratégiát (szöveg, vektor, hibrid), dokumentumfeltöltést Azure Document Intelligence segítségével, valamint telepítést Azure Container Apps-re vagy Azure Kubernetes Service-re.
 
-**Gyors kezdés**:
+**Gyors indítás**:
 ```bash
 azd init --template azure-search-openai-demo-java
 azd up
 ```
 
-### Vállalati kiskereskedelmi copilot Azure AI Foundry-val
+### Enterprise Retail Copilot Microsoft Foundry-val
 
-**Tároló**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
+**Tárhely**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
-**Szolgáltatások**: Azure OpenAI + Azure AI Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
+**Szolgáltatások**: Azure OpenAI + Microsoft Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
 
-**Leírás**: Teljes körű kiskereskedelmi RAG copilot Azure AI Foundry-val és Prompty-val. Egy Contoso Outdoor kiskereskedő chatbotja, amely válaszait termékkatalógusokra és ügyfél rendelési adatokra alapozza. Bemutatja a teljes GenAIOps munkafolyamatot — prototípus készítés Prompty-val, értékelés AI-támogatott értékelőkkel, majd telepítés AZD-vel Container Apps-re.
+**Leírás**: Végponttól végpontig kiskereskedelmi RAG copilot Microsoft Foundry és Prompty használatával. A Contoso Outdoor kiskereskedő chatbotja, amely válaszait a termékkatalógus és ügyfélrendelés adataira alapozza. Bemutatja a teljes GenAIOps munkafolyamatot — prototípus Prompty-val, értékelés AI segítségével, majd telepítés AZD-vel Container Apps-re.
 
-**Gyors kezdés**:
+**Gyors indítás**:
 ```bash
 azd init --template contoso-chat
 azd up
 ```
 
-### Kreatív írás Többügynökös alkalmazás
+### Kreatív írás többügynökös alkalmazás
 
-**Tároló**: [contoso-creative-writer](https://github.com/Azure-Samples/contoso-creative-writer)
+**Tárhely**: [contoso-creative-writer](https://github.com/Azure-Samples/contoso-creative-writer)
 
 **Szolgáltatások**: Azure OpenAI + Azure AI Agent Service + Bing Grounding + Azure AI Search + Azure Container Apps
 
-**Leírás**: Többügynökös minta az AI ügynökök összefogására Prompty-val. Használ kutató ügynököt (Bing Grounding az Azure AI Agent Service-ben), termék ügynököt (Azure AI Search), író és szerkesztő ügynököket, amelyek együttműködve állítanak elő jól kutatott cikkeket. Tartalmaz CI/CD-t GitHub Actions-ben történő értékeléssel.
+**Leírás**: Többügynökös példa, amely AI ügynökök összehangolását mutatja be Prompty-val. Egy kutató ügynök (Bing Grounding az Azure AI Agent Service-ben), egy termékügynök (Azure AI Search), egy író és egy szerkesztő ügynök együttműködve készít alaposan kutatott cikkeket. Tartalmaz CI/CD-t és GitHub Actions-ban történő értékelést.
 
-**Gyors kezdés**:
+**Gyors indítás**:
 ```bash
 azd init --template contoso-creative-writer
 azd up
 ```
 
-### Serverless RAG Chat (JavaScript/TypeScript)
+### Szerver nélküli RAG chat (JavaScript/TypeScript)
 
-**Tároló**: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
+**Tárhely**: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
 
-**Szolgáltatások**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB for NoSQL + LangChain.js
+**Szolgáltatások**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB NoSQL + LangChain.js
 
-**Leírás**: Teljesen szervertelen RAG chatbot LangChain.js-sel, Azure Functions API-val és Azure Static Web Apps hosztolással. Azure Cosmos DB-t használ vektor tárolónak és csevegési előzmények adatbázisának. Támogatja a helyi fejlesztést Ollama-val nulla költségű teszteléshez.
+**Leírás**: Teljesen szerver nélküli RAG chatbott LangChain.js használatával, Azure Functions API-hoz és Azure Static Web Apps hosztoláshoz. Azure Cosmos DB-t használ vektor adattárként és chat előzmény adatbázisként. Támogat helyi fejlesztést Ollama-val ingyenes teszteléshez.
 
-**Gyors kezdés**:
+**Gyors indítás**:
 ```bash
 azd init --template serverless-chat-langchainjs
 azd up
@@ -609,27 +609,27 @@ azd up
 
 ### Chat az adataiddal megoldásgyorsító
 
-**Tároló**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
+**Tárhely**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
 
 **Szolgáltatások**: Azure OpenAI + Azure AI Search + Azure App Service + Azure Document Intelligence + Azure Functions + Azure Cosmos DB / PostgreSQL
 
-**Leírás**: Vállalati szintű RAG megoldásgyorsító admin portállal dokumentum feltöltés/kezeléshez, számos orkestrációs opcióval (Semantic Kernel, LangChain, Prompt Flow), beszéd-szöveg átalakítóval, Microsoft Teams integrációval, valamint PostgreSQL vagy Cosmos DB backend választási lehetőséggel. Testreszabható indulópont éles RAG forgatókönyvekhez.
+**Leírás**: Vállalati szintű RAG megoldásgyorsító admin portállal dokumentum feltöltéshez/kezeléshez, több orchestrator opcióval (Semantic Kernel, LangChain, Prompt Flow), beszédből szövegbe, Microsoft Teams integrációval, és PostgreSQL vagy Cosmos DB háttérrel. Testreszabható indulópont éles RAG forgatókönyvekhez.
 
-**Gyors kezdés**:
+**Gyors indítás**:
 ```bash
 azd init --template chat-with-your-data-solution-accelerator
 azd up
 ```
 
-### AI utazási ügynökök — Többügynökös MCP szerverek összefogása
+### AI Utazási ügynökök — többügynökös MCP összehangolás
 
-**Tároló**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
+**Tárhely**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
 
-**Szolgáltatások**: Azure OpenAI + Azure AI Foundry + Azure Container Apps + MCP szerverek (.NET, Python, Java, TypeScript)
+**Szolgáltatások**: Azure OpenAI + Microsoft Foundry + Azure Container Apps + MCP szerverek (.NET, Python, Java, TypeScript)
 
-**Leírás**: Referencia alkalmazás többügynökös AI összefogásra három keretrendszerrel (LangChain.js, LlamaIndex.TS, Microsoft Agent Framework). Tartalmaz MCP (Model Context Protocol) szervereket négy nyelven, szervertelen Azure Container Appsként telepítve OpenTelemetry monitorozással.
+**Leírás**: Referenciaalkalmazás többügynökös AI összehangoláshoz három keretrendszer használatával (LangChain.js, LlamaIndex.TS, Microsoft Agent Framework). MCP (Model Context Protocol) szerverek négy nyelven, szerver nélküli Azure Container Apps-ként telepítve, OpenTelemetry monitorozással.
 
-**Gyors kezdés**:
+**Gyors indítás**:
 ```bash
 azd init --template azure-ai-travel-agents
 azd up
@@ -637,51 +637,51 @@ azd up
 
 ### Azure AI Starter
 
-**Tároló**: [azd-ai-starter](https://github.com/Azure/azd-ai-starter)
+**Tárhely**: [azd-ai-starter](https://github.com/Azure/azd-ai-starter)
 
 **Szolgáltatások**: Azure AI szolgáltatások + Azure OpenAI
 
-**Leírás**: Egy minimális Bicep sablon, ami telepíti az Azure AI szolgáltatásokat konfigurált gépi tanulási modellekkel. Könnyű indulópont, amikor csak az Azure AI infrastruktúrát szeretnéd előkészíteni, teljes alkalmazásréteg nélkül.
+**Leírás**: Minimális Bicep sablon, amely Azure AI szolgáltatásokat telepít konfigurált gépi tanulási modellekkel. Könnyű kiindulópont, ha csak az Azure AI infrastruktúrát szeretné előkészíteni teljes alkalmazás stack nélkül.
 
-**Gyors kezdés**:
+**Gyors indítás**:
 ```bash
 azd init --template azd-ai-starter
 azd up
 ```
 
-> **Nézz meg több sablont**: Látogass el az [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) oldalra, ahol 80+ AI-specifikus AZD sablont találsz különböző nyelveken és forgatókönyvekhez.
+> **További sablonok böngészése**: Látogassa meg az [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) oldalt, ahol 80+ AI-specifikus AZD sablon érhető el több nyelven és forgatókönyvben.
 
 ## Következő lépések
 
-1. **Próbáld ki a példákat**: Kezdd egy előre elkészített sablonnal, amely illik a használati esetedhez
-2. **Testreszabás**: Módosítsd az infrastruktúrát és az alkalmazáskódot
-3. **Add hozzá a monitorozást**: Valósíts meg teljes körű megfigyelhetőséget
-4. **Optimalizáld a költségeket**: Hangold finomra a konfigurációkat a költségvetésedhez
-5. **Biztosítsd a telepítést**: Vezess be vállalati biztonsági mintákat
-6. **Skálázz éles környezetbe**: Adj hozzá több régiós és magas rendelkezésre állási funkciókat
+1. **Próbálja ki a példákat**: Válasszon egy előre elkészített sablont, amely megfelel az igényeinek
+2. **Testreszabás**: Módosítsa az infrastruktúrát és az alkalmazáskódot
+3. **Monitoring hozzáadása**: Valósítson meg átfogó megfigyelhetőséget
+4. **Költségoptimalizálás**: Finomhangolja a konfigurációkat a költségvetéséhez
+5. **Telepítés biztonságosítása**: Alkalmazza a vállalati biztonsági mintákat
+6. **Skálázás éles környezetre**: Adjon hozzá több régiót és magas rendelkezésre állást
 
 ## 🎯 Gyakorlati feladatok
 
-### 1. gyakorlat: Microsoft Foundry Models csevegőalkalmazás telepítése (30 perc)
-**Cél**: Éles AI csevegőalkalmazás telepítése és tesztelése
+### Feladat 1: Microsoft Foundry Modellek chat alkalmazás telepítése (30 perc)
+**Cél**: Telepítsen és teszteljen egy éles AI chat alkalmazást
 
 ```bash
-# Sablon inicializálása
+# Inicializálja a sablont
 mkdir ai-chat-demo && cd ai-chat-demo
 azd init --template azure-search-openai-demo
 
-# Környezeti változók beállítása
+# Állítsa be a környezeti változókat
 azd env set AZURE_LOCATION eastus2
 azd env set AZURE_OPENAI_CAPACITY 30
 
 # Telepítés
 azd up
 
-# Az alkalmazás tesztelése
+# Tesztelje az alkalmazást
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Chat app: $WEB_URL"
 
-# Az AI műveleteinek figyelése
+# Felügyelje az AI műveleteket
 azd monitor
 
 # Takarítás
@@ -689,16 +689,16 @@ azd down --force --purge
 ```
 
 **Siker kritériumok:**
-- [ ] Telepítés kvóta hibák nélkül befejeződik
-- [ ] Hozzáférés biztosított a csevegő felülethez böngészőben
-- [ ] Kérdéseket lehet feltenni, AI által támogatott válaszokat kapni
-- [ ] Az Application Insights adatokat rögzít
-- [ ] Erőforrások sikeres eltávolítása
+- [ ] Telepítés kvótahibák nélkül befejeződik
+- [ ] Elérhető a chat felület böngészőben
+- [ ] Képes kérdéseket feltenni és AI által támogatott válaszokat kapni
+- [ ] Application Insights telemetria adatai megjelennek
+- [ ] Sikeresen megtisztította az erőforrásokat
 
-**Becsült költség**: $5-10 30 perc tesztelésre
+**Becsült költség**: 5-10 USD 30 perc tesztelés
 
-### 2. gyakorlat: Többmodell telepítés konfigurálása (45 perc)
-**Cél**: Több AI modell telepítése eltérő beállításokkal
+### Feladat 2: Többmodellű telepítés konfigurálása (45 perc)
+**Cél**: Több AI modellen alapuló telepítés eltérő konfigurációkkal
 
 ```bash
 # Egyéni Bicep konfiguráció létrehozása
@@ -753,15 +753,15 @@ azd show
 
 **Siker kritériumok:**
 - [ ] Több modell sikeresen telepítve
-- [ ] Különböző kapacitás beállítások érvényesítve
-- [ ] Modellek API-n keresztül elérhetők
-- [ ] Mindkét modell hívható az alkalmazásból
+- [ ] Különböző kapacitás beállítások alkalmazva
+- [ ] API-n keresztül elérhetők a modellek
+- [ ] Mindkét modellt aktiválni tudja az alkalmazásból
 
-### 3. gyakorlat: Költségfigyelés beállítása (20 perc)
-**Cél**: Költségfigyelési riasztások és nyomon követés beállítása
+### Feladat 3: Költségmonitorozás megvalósítása (20 perc)
+**Cél**: Költségértesítők és költéskövetés beállítása
 
 ```bash
-# Költségvetési riasztás hozzáadása Bicep-hez
+# Költségkeret riasztás hozzáadása a Bicep-hez
 cat >> infra/main.bicep << 'EOF'
 
 resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
@@ -792,7 +792,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 EOF
 
-# Költségvetési riasztás telepítése
+# Költségkeret riasztás telepítése
 azd provision
 
 # Az aktuális költségek ellenőrzése
@@ -800,21 +800,21 @@ az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-d
 ```
 
 **Siker kritériumok:**
-- [ ] Költségkeret riasztás létrehozva az Azure-ban
+- [ ] Költségértesítés létrehozása Azure-ban
 - [ ] E-mail értesítések konfigurálva
-- [ ] Költségadatok megtekinthetők az Azure Portalban
-- [ ] Költségkeret küszöbértékek megfelelően beállítva
+- [ ] Költségadatok megtekinthetők az Azure Portalon
+- [ ] Költségkeret határértékek megfelelően beállítva
 
 ## 💡 Gyakran ismételt kérdések
 
 <details>
-<summary><strong>Hogyan csökkenthetem a Microsoft Foundry Models költségeit fejlesztés során?</strong></summary>
+<summary><strong>Hogyan csökkenthetem a Microsoft Foundry Modellek költségeit fejlesztés közben?</strong></summary>
 
-1. **Használd az ingyenes szintet**: A Microsoft Foundry Models 50,000 token/hó ingyenes keretet ad
-2. **Csökkentsd a kapacitást**: Állítsd a kapacitást fejlesztéshez 10 TPM-re a 30+ helyett
-3. **Használd az azd down parancsot**: Amikor nem fejlesztesz aktívan, szabadítsd fel az erőforrásokat
-4. **Gyorsítótárazd a válaszokat**: Valósíts meg Redis cache-t az ismétlődő lekérdezésekhez
-5. **Használj prompt-mérnökséget**: Hatékony promptokkal csökkentsd a token felhasználást
+1. **Használjon ingyenes szintet**: A Microsoft Foundry Modellek havi 50,000 token ingyenes kvótát kínálnak
+2. **Csökkentse a kapacitást**: Állítsa a kapacitást 10 TPM-re fejlesztéshez a 30+ helyett
+3. **Használja az azd down parancsot**: Szabadítsa fel az erőforrásokat, amikor nem fejleszt aktívan
+4. **Gyorsítótárazza a válaszokat**: Implementáljon Redis gyorsítótárat ismétlődő lekérdezésekhez
+5. **Használjon prompt tervezést**: Csökkentse a tokenhasználatot hatékony promptokkal
 ```bash
 # Fejlesztési konfiguráció
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -823,48 +823,48 @@ azd env set ENABLE_RESPONSE_CACHE true
 </details>
 
 <details>
-<summary><strong>Mi a különbség a Microsoft Foundry Modelleket és az OpenAI API között?</strong></summary>
+<summary><strong>Mi a különbség a Microsoft Foundry Modellek és az OpenAI API között?</strong></summary>
 
-**Microsoft Foundry Modelleket**:
-- Vállalati biztonság és megfelelőség
+**Microsoft Foundry Modellek**:
+- Vállalati szintű biztonság és megfelelőség
 - Privát hálózati integráció
 - SLA garanciák
-- Kezelt identitás hitelesítés
+- Kezelt identitás alapú hitelesítés
 - Magasabb kvóták elérhetők
 
 **OpenAI API**:
 - Gyorsabb hozzáférés az új modellekhez
 - Egyszerűbb beállítás
-- Alacsonyabb belépési korlát
+- Alacsonyabb belépési küszöb
 - Csak nyilvános internet
 
-Termelési alkalmazásokhoz a **Microsoft Foundry Modelleket javasolt** használni.
+Gyártási alkalmazásokhoz **a Microsoft Foundry Modellek ajánlottak**.
 </details>
 
 <details>
-<summary><strong>Hogyan kezeljem a Microsoft Foundry Modellekkel kapcsolatos kvóta túllépés hibákat?</strong></summary>
+<summary><strong>Hogyan kezeljem a Microsoft Foundry Modellek kvóta túllépési hibáit?</strong></summary>
 
 ```bash
-# Ellenőrizze az aktuális kvótát
+# Ellenőrizze a jelenlegi kvótát
 az cognitiveservices usage list --location eastus2
 
-# Próbáljon ki másik régiót
+# Próbáljon ki egy másik régiót
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Átmenetileg csökkentse a kapacitást
+# Ideiglenesen csökkentse a kapacitást
 azd env set AZURE_OPENAI_CAPACITY 10
 azd provision
 
-# Igényeljen kvóta növelést
-# Menjen az Azure Portálra > Kvóták > Növelés igénylése
+# Kvóta növelésének kérelmezése
+# Menjen az Azure Portálra > Kvóták > Növelés kérelmezése
 ```
 </details>
 
 <details>
-<summary><strong>Használhatok saját adatokat a Microsoft Foundry Modellekkel?</strong></summary>
+<summary><strong>Használhatom a saját adataimat a Microsoft Foundry Modellekkel?</strong></summary>
 
-Igen! Használd az **Azure AI Search**-t az RAG (Retrieval Augmented Generation) számára:
+Igen! Használd az **Azure AI Search**-t RAG (Retrieval Augmented Generation) célokra:
 
 ```yaml
 # azure.yaml
@@ -876,18 +876,18 @@ services:
       - AZURE_OPENAI_ENDPOINT
 ```
 
-Nézd meg az [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) sablont.
+Lásd az [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) sablont.
 </details>
 
 <details>
-<summary><strong>Hogyan védjem az AI modell végpontokat?</strong></summary>
+<summary><strong>Hogyan biztosítsam az AI modell végpontokat?</strong></summary>
 
 **Legjobb gyakorlatok**:
-1. Használj Kezelt Identitást (nincs API kulcs)
+1. Használj Kezelt Identitást (API-kulcsok nélkül)
 2. Engedélyezd a Privát Végpontokat
-3. Állíts be hálózati biztonsági csoportokat
-4. Valósíts meg korlátozást sebességre
-5. Használj Azure Key Vault-ot titkokhoz
+3. Állítsd be a hálózati biztonsági csoportokat
+4. Vezess be aránylimitálást
+5. Használd az Azure Key Vaultot titkokhoz
 
 ```bicep
 // Managed Identity authentication
@@ -912,22 +912,22 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 - **Microsoft Foundry Discord**: [#Azure csatorna](https://discord.gg/microsoft-azure)
 - **AZD GitHub**: [Problémák és viták](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Hivatalos dokumentáció](https://learn.microsoft.com/azure/ai-studio/)
-- **Agent Skills**: [Microsoft Foundry készség a skills.sh oldalon](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Telepítsd az Azure + Foundry agent készségeket a szerkesztődbe a `npx skills add microsoft/github-copilot-for-azure` paranccsal
+- **Agent Skills**: [Microsoft Foundry skill a skills.sh oldalon](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Telepíts Azure + Foundry agent skilleket a szerkesztődbe a `npx skills add microsoft/github-copilot-for-azure` paranccsal
 
 ---
 
-**Fejezeti navigáció:**
-- **📚 Tanfolyam kezdőlapja**: [AZD kezdőknek](../../README.md)
-- **📖 Jelenlegi fejezet**: 2. fejezet - AI-központú fejlesztés
+**Fejezet navigáció:**
+- **📚 Tanfolyam kezdőlap**: [AZD kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 2. fejezet - AI-első fejlesztés
 - **⬅️ Előző fejezet**: [1. fejezet: Az első projekted](../chapter-01-foundation/first-project.md)
 - **➡️ Következő**: [AI modell telepítése](ai-model-deployment.md)
 - **🚀 Következő fejezet**: [3. fejezet: Konfiguráció](../chapter-03-configuration/configuration.md)
 
-**Segítségre van szükséged?** Csatlakozz a közösségi vitáinkhoz vagy nyiss egy problémát a tárolóban. Az Azure AI + AZD közösség itt van, hogy segítsen a sikeredben!
+**Segítségre van szükséged?** Csatlakozz a közösségi beszélgetéseinkhez vagy nyiss egy hibajegyet a tárolóban. Az Azure AI + AZD közösség itt van, hogy segítsen neked!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Jogi nyilatkozat**:  
-Ezt a dokumentumot az AI fordító szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével fordítottuk. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum a saját nyelvén tekintendő hiteles forrásnak. Kiemelten fontos információk esetén javasolt szakmai, emberi fordítást igénybe venni. Nem vállalunk felelősséget az ebből eredő félreértésekért vagy félreértelmezésekért.
+**Jogi nyilatkozat**:
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Fontos információk esetén professzionális emberi fordítást javasolunk. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely ebből a fordításból ered.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,39 +1,41 @@
-# Kapitola 5: Multiagentní AI řešení
+# Kapitola 5: Řešení AI s více agenty
 
-**📚 Kurz**: [AZD pro začátečníky](../../README.md) | **⏱️ Doba trvání**: 2-3 hodiny | **⭐ Složitost**: Pokročilý
+**📚 Kurz**: [AZD For Beginners](../../README.md) | **⏱️ Doba trvání**: 2-3 hodiny | **⭐ Složitost**: Pokročilá
 
 ---
 
 ## Přehled
 
-Tato kapitola pokrývá pokročilé vzory multiagentní architektury, orchestraci agentů a produkčně připravená AI nasazení pro složité scénáře.
+Tato kapitola pokrývá pokročilé vzory architektury více agentů, orchestraci agentů a nasazení AI připravené pro produkci pro složité scénáře.
 
-> Ověřeno s `azd 1.23.12` v březnu 2026.
+> Ověřeno proti `azd 1.25.6` v červnu 2026.
 
 ## Výukové cíle
 
 Po dokončení této kapitoly budete:
-- Rozumět vzorům multiagentní architektury
-- Nasazovat koordinované systémy AI agentů
+- Pochopit vzory víceagentní architektury
+- Nasadit koordinované systémy AI agentů
 - Implementovat komunikaci mezi agenty
-- Vytvářet produkčně připravená multiagentní řešení
+- Postavit produkčně připravená víceagentní řešení
 
 ---
 
 ## 📚 Lekce
 
-| # | Lekce | Popis | Čas |
+| # | Lekce | Popis | Doba |
 |---|--------|-------------|------|
-| 1 | [Retail Multi-Agent Solution](../../examples/retail-scenario.md) | Kompletní průvodce implementací | 90 min |
-| 2 | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) | Strategie orchestrace agentů | 30 min |
-| 3 | [ARM Template Deployment](../../examples/retail-multiagent-arm-template/README.md) | Nasazení jedním kliknutím | 30 min |
+| 1 | [Multi-Agent Basics](multi-agent-basics.md) | Prakticky: nasadit funkční víceagentní aplikaci pomocí `azd up` | 45 min |
+| 2 | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) | Strategie orchestrace agentů (pokračuje v kapitole 6) | 30 min |
+| 3 | [ARM Template Deployment](../../examples/retail-multiagent-arm-template/README.md) | Příklad nasazení jedním kliknutím | 30 min |
+
+> **Začněte Lekcí 1.** Je to jediná zcela praktická lekce, kterou lze nasadit. Lekce 2 je v kapitole 6 (sdílí se s plánováním před nasazením) a [Řešení pro maloobchod s více agenty](../../examples/retail-scenario.md) je architektonický nákres — návrhová reference, nikoli šablona pro jediné příkazové nasazení.
 
 ---
 
 ## 🚀 Rychlý start
 
 ```bash
-# Možnost 1: Nasadit z šablony
+# Možnost 1: Nasadit ze šablony
 azd init --template agent-openai-python-prompty
 azd up
 
@@ -43,35 +45,36 @@ azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **Který přístup?** Použijte `azd init --template` pro start ze vzorového řešení. Použijte `azd ai agent init`, pokud máte vlastní manifest agenta. Kompletní informace najdete v [AZD AI CLI referenci](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
+> **Který přístup?** Použijte `azd init --template` pro zahájení z pracovního vzorku. Použijte `azd ai agent init`, když máte vlastní manifest agenta. Viz [Referenční příručka AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pro úplné informace.
 
 ---
 
-## 🤖 Multiagentní architektura
+## 🤖 Architektura víceagentních systémů
 
 ```mermaid
 graph TD
-    Orchestrator[Orchestrace Agent<br/>Řídí požadavky, spravuje pracovní postup] --> Customer[Agent zákazníka<br/>Dotazy uživatelů, preference]
-    Orchestrator --> Inventory[Agent skladu<br/>Stavy zásob, objednávky]
+    Orchestrator[Orchestrátor agent<br/>Směruje požadavky, řídí pracovní tok] --> Customer[Zákaznický agent<br/>Dotazy uživatele, preference]
+    Orchestrator --> Inventory[Skladový agent<br/>Stavy zásob, objednávky]
 ```
+
 ---
 
-## 🎯 Doporučené řešení: Retail Multi-Agent
+## 🎯 Vybrané řešení: Maloobchodní víceagentní řešení
 
-[Řešení Retail Multi-Agent](../../examples/retail-scenario.md) demonstruje:
+The [Retail Multi-Agent Solution](../../examples/retail-scenario.md) demonstrates:
 
-- **Agent zákazníka**: Zpracovává uživatelské interakce a preference
-- **Agent zásob**: Spravuje sklad a zpracování objednávek
-- **Orchestrátor**: Koordinuje mezi agenty
-- **Sdílená paměť**: Správa kontextu mezi agenty
+- **Customer Agent**: Zpracovává uživatelské interakce a preference
+- **Inventory Agent**: Spravuje zásoby a zpracování objednávek
+- **Orchestrator**: Koordinuje mezi agenty
+- **Shared Memory**: Správa kontextu napříč agenty
 
 ### Použité služby
 
 | Služba | Účel |
 |---------|---------|
 | Microsoft Foundry Models | Porozumění jazyku |
-| Azure AI Search | Produktový katalog |
-| Cosmos DB | Stav a paměť agenta |
+| Azure AI Search | Katalog produktů |
+| Cosmos DB | Stav a paměť agentů |
 | Container Apps | Hostování agentů |
 | Application Insights | Monitorování |
 
@@ -81,7 +84,7 @@ graph TD
 
 | Směr | Kapitola |
 |-----------|---------|
-| **Předchozí** | [Kapitola 4: Infrastruktura](../chapter-04-infrastructure/README.md) |
+| **Předchozí** | [Kapitola 4: Infrastructure](../chapter-04-infrastructure/README.md) |
 | **Další** | [Kapitola 6: Před nasazením](../chapter-06-pre-deployment/README.md) |
 
 ---
@@ -89,12 +92,12 @@ graph TD
 ## 📖 Související zdroje
 
 - [Průvodce AI agenty](../chapter-02-ai-development/agents.md)
-- [Produkční AI postupy](../chapter-08-production/production-ai-practices.md)
+- [Postupy pro produkční AI](../chapter-08-production/production-ai-practices.md)
 - [Řešení problémů s AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Prohlášení o vyloučení odpovědnosti**:
-Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). I když usilujeme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro zásadní informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo nesprávné výklady vzniklé použitím tohoto překladu.
+**Prohlášení o omezení odpovědnosti**:
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o co největší přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo nesprávné interpretace vzniklé použitím tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

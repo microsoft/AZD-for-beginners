@@ -1,31 +1,31 @@
 # 6. Kuondoa Miundombinu
 
-!!! tip "MWISHO WA MODULI HII UTAWEZA"
+!!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
 
     - [ ] Kuelewa umuhimu wa kusafisha rasilimali na usimamizi wa gharama
     - [ ] Tumia `azd down` kuondoa miundombinu kwa usalama
-    - [ ] Rejesha huduma za kognitifa zilizofutwa kwa muda inapohitajika
-    - [ ] **Maabara 6:** Safisha rasilimali za Azure na thibitisha uondoaji
+    - [ ] Rejesha Azure AI Services zilizofutwa kwa 'soft delete' ikiwa inahitajika
+    - [ ] **Lab 6:** Safisha rasilimali za Azure na thibitisha uondoaji
 
 ---
 
 ## Mazoezi ya Ziada
 
-Kabla ya kuondoa mradi, chukua dakika chache kufanya uchunguzi wa wazi.
+Before we tear down the project, take a few minutes to do some open-ended exploration.
 
-!!! info "Jaribu Haya Maelekezo ya Uchunguzi"
+!!! info "Try These Exploration Prompts"
 
     **Jaribu GitHub Copilot:**
     
-    1. Uliza: `Ni templates gani nyingine za AZD ninaweza kujaribu kwa matukio ya mawakala wengi?`
-    2. Uliza: `Ninawezaje kubinafsisha maagizo ya wakala kwa matumizi ya huduma za afya?`
-    3. Uliza: `Ni vigezo vya mazingira vinavyodhibiti uboreshaji wa gharama?`
+    1. Uliza: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Uliza: `How can I customize the agent instructions for a healthcare use case?`
+    3. Uliza: `What environment variables control cost optimization?`
     
-    **Chunguza Portal ya Azure:**
+    **Chunguza Azure Portal:**
     
-    1. Kagua vipimo vya Application Insights kwa uanzishaji wako
+    1. Kagua metriki za Application Insights za uanzisho wako
     2. Angalia uchambuzi wa gharama kwa rasilimali zilizotolewa
-    3. Chunguza tena eneo la mchezo la wakala kwenye portal ya Microsoft Foundry
+    3. Chunguza tena eneo la majaribio la wakala kwenye Microsoft Foundry portal one more time
 
 ---
 
@@ -36,7 +36,7 @@ Kabla ya kuondoa mradi, chukua dakika chache kufanya uchunguzi wa wazi.
       ```bash title="" linenums="0"
       azd down --purge
       ```
-1. Bendera `--purge` inahakikisha pia inafuta huduma za Cognitive zilizofutwa kwa muda, hivyo kuachilia quota inayoshikiliwa na huduma hizi. Mara baada ya kukamilika utaona kitu kama hiki:
+1. Bendera `--purge` inahakikisha kuwa pia inafuta rasilimali za Cognitive Service zilizofutwa kwa 'soft delete', na hivyo kuachilia quota inayoshikiliwa na rasilimali hizi. Mara itakapokamilika utaona kitu kama hiki:
       
       ```bash title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -47,9 +47,9 @@ Kabla ya kuondoa mradi, chukua dakika chache kufanya uchunguzi wa wazi.
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Hiari) Ikiwa sasa utaendesha `azd up` tena, utaona mfano gpt-4.1 utawekwa kwani kigezo cha mazingira kilibadilishwa (na kuhifadhiwa) katika saraka ya ndani `.azure`. 
+1. (Hiari) Ikiwa sasa utaendesha tena `azd up` tena, utaona modeli gpt-4.1 imewekwa kwa sababu variable ya mazingira ilibadilishwa (na kuhifadhiwa) kwenye saraka ya ndani `.azure`. 
 
-      Hapa kuna uwekaji wa modeli **kabla**:
+      Hapa ni usambazaji wa modeli **kabla**:
 
       ![Awali](../../../../../translated_images/sw/14-deploy-initial.30e4cf1c29b587bc.webp)
 
@@ -59,6 +59,6 @@ Kabla ya kuondoa mradi, chukua dakika chache kufanya uchunguzi wa wazi.
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Taarifa ya kutokuhusika:
-Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator] (https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kwamba tafsiri zilizofanywa kwa njia ya kiotomatiki zinaweza kuwa na makosa au kasoro. Nyaraka ya awali katika lugha yake ya asili inapaswa kuchukuliwa kama chanzo rasmi. Kwa taarifa muhimu, inashauriwa kutumia tafsiri ya mtaalamu wa kibinadamu. Sisi hatuwajibiki kwa kutokuelewana au tafsiri isiyo sahihi zinazotokana na matumizi ya tafsiri hii.
+**Kionyozo**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Hati ya asili katika lugha yake halisi inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatutojibu kwa kuelewa vibaya au tafsiri potofu zinazotokea kutokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

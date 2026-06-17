@@ -1,26 +1,26 @@
-# 2. Egy sablon érvényesítése
+# 2. Érvényesítsünk egy sablont
 
-> A `azd 1.23.12` verzióval lett érvényesítve 2026 márciusában.
+> Érvényesítve az `azd 1.25.6` verzióval 2026 júniusában.
 
-!!! tip "A TANFOLYAM VÉGÉRE KÉPES LESZ"
+!!! tip "A MODUL VÉGÉRE KÉPES LESZ"
 
-    - [ ] Elemezni az MI Megoldás architektúráját
-    - [ ] Megérteni az AZD Telepítési munkafolyamatát
-    - [ ] GitHub Copilot segítségével támogatást kapni az AZD használatához
-    - [ ] **Gyakorlat 2:** AI Agents sablon telepítése és érvényesítése
+    - [ ] Elemezni az AI Megoldás Architektúrát
+    - [ ] Megérteni az AZD Telepítési munkafolyamatot
+    - [ ] GitHub Copilot segítségét igénybe venni az AZD használatában
+    - [ ] **Labor 2:** Az AI Agent sablon telepítése és érvényesítése
 
 ---
 
 
 ## 1. Bevezetés
 
-Az [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) vagy `azd` egy nyílt forráskódú parancssori eszköz, amely egyszerűsíti a fejlesztői munkafolyamatot alkalmazások Azure-hoz történő fejlesztése és telepítése során.
+Az [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) vagy `azd` egy nyílt forráskódú parancssori eszköz, amely egyszerűsíti a fejlesztői munkafolyamatot az Azure-ra történő alkalmazásépítés és -telepítés során.
 
-Az [AZD sablonok](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) szabványosított tárolók, amelyek tartalmazzák a mintalkalmazás kódját, _infrastruktúra-kód_ elemeket és `azd` konfigurációs fájlokat egy egységes megoldásarchitektúrához. Az infrastruktúra kiépítése egyszerű `azd provision` paranccsal megoldható, míg az `azd up` lehetővé teszi, hogy egyszerre létesítse az infrastruktúrát **és** telepítse az alkalmazást!
+Az [AZD sablonok](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) szabványosított tárhelyek, amelyek tartalmaznak mintapélda alkalmazáskódot, _infrastruktúra-kód formájában_ eszközöket, valamint `azd` konfigurációs fájlokat egy összefüggő megoldás architektúrához. Az infrastruktúra kialakítása olyan egyszerű, mint az `azd provision` parancs - míg az `azd up` segítségével egyszerre tudja létrehozni az infrastruktúrát **és** telepíteni az alkalmazást!
 
-Ennek eredményeként az alkalmazásfejlesztés elindítása egyszerű lehet: csak meg kell találni a megfelelő _AZD Starter sablont_, amely legközelebb áll az alkalmazás és infrastruktúra igényeihez – majd testre szabni a tárolót az adott forgatókönyv követelményeihez.
+Ennek eredményeképpen az alkalmazásfejlesztési folyamat elindítása lehet olyan egyszerű, mint megtalálni a megfelelő _AZD kezdő sablont_, amely a legközelebb áll az alkalmazási és infrastruktúra igényeihez - majd testreszabni a tárhelyet az Ön forgatókönyvi követelményei szerint.
 
-Mielőtt elkezdenénk, győződjünk meg róla, hogy telepítve van az Azure Developer CLI.
+Mielőtt elkezdjük, győződjünk meg arról, hogy telepítve van az Azure Developer CLI.
 
 1. Nyisson meg egy VS Code terminált, és írja be ezt a parancsot:
 
@@ -28,32 +28,32 @@ Mielőtt elkezdenénk, győződjünk meg róla, hogy telepítve van az Azure Dev
       azd version
       ```
 
-1. Ilyet kell látnia!
+1. Valami hasonlót kell látnia!
 
       ```bash title="" linenums="0"
-      azd version 1.23.12 (commit <current-build>)
+      azd version 1.25.6 (commit <current-build>)
       ```
 
-**Most már készen áll arra, hogy sablont válasszon és telepítsen az azd segítségével**
+**Most készen áll arra, hogy sablont válasszon ki és telepítsen az azd segítségével**
 
 ---
 
-## 2. Sablon kiválasztása
+## 2. Sablon kiválasztás
 
-A Microsoft Foundry platform egy [ajánlott AZD sablonkészletet](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) kínál, amelyek népszerű megoldásszcenáriókat fednek le, mint például _több-agentes munkafolyamat automatizálás_ és _többmodális tartalomfeldolgozás_. Ezeket a sablonokat a Microsoft Foundry portálján is felfedezheti.
+A Microsoft Foundry platform egy [javasolt AZD sablonok sorozatával](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) érkezik, amelyek népszerű megoldási forgatókönyveket fednek le, például _több-ügynök munkafolyamat automatizálás_ és _többmodális tartalom feldolgozás_. Ezeket a sablonokat a Microsoft Foundry portálon is felfedezheti.
 
 1. Látogasson el a [https://ai.azure.com/templates](https://ai.azure.com/templates) oldalra
-1. Jelentkezzen be a Microsoft Foundry portálra, amikor kéri – az alábbihoz hasonló oldalt fog látni.
+1. Jelentkezzen be a Microsoft Foundry portálra, amikor erre kérik - valami ilyesmit fog látni.
 
 ![Pick](../../../../../translated_images/hu/01-pick-template.60d2d5fff5ebc374.webp)
 
 
-Az **Alap** opciók az indító sablonok:
+Az **Alap** lehetőségek a kezdő sablonjai:
 
-1. [ ] [Kezdje el az AI Chat használatát](https://github.com/Azure-Samples/get-started-with-ai-chat), amely egy alap chat alkalmazást telepít _az Ön adatával_ az Azure Container Apps-re. Ezt használja egy alap AI chatbot szcenárió felfedezéséhez.
-1. [X] [Kezdje el az AI Agents használatát](https://github.com/Azure-Samples/get-started-with-ai-agents), amely egy szabványos AI Agentet is telepít (a Foundry Agents-szel együtt). Ezt használja, hogy megismerje az ügynökalapú MI megoldásokat, amelyek eszközöket és modelleket tartalmaznak.
+1. [ ] [Kezdjünk el egy AI Chat-t](https://github.com/Azure-Samples/get-started-with-ai-chat), amely egy alap chat alkalmazást telepít _az Ön adataival_ az Azure Container Apps-re. Ezt arra használhatja, hogy felfedezzen egy egyszerű AI chatbot forgatókönyvet.
+1. [X] [Kezdjünk el AI Agentekkel](https://github.com/Azure-Samples/get-started-with-ai-agents), amely szintén egy szabványos AI Agentet telepít (a Foundry ügynökökkel). Ezt arra használhatja, hogy megismerkedjen az eszközökkel és modellekkel kapcsolatos agentikus AI megoldásokkal.
 
-Nyissa meg a második linket egy új böngészőfülön (vagy kattintson az adott kártyán az `Open in GitHub` gombra). Látni fogja ennek az AZD sablonnak a tárolóját. Szánjon egy percet a README áttekintésére. Az alkalmazás architektúrája így néz ki:
+Nyissa meg a második linket egy új böngészőfülön (vagy kattintson a `Open in GitHub` gombra a kapcsolódó kártyán). Meg kell látnia az AZD Template tárhelyét. Töltsön el egy percet az README felfedezésével. Az alkalmazás architektúrája így néz ki:
 
 ![Arch](../../../../../translated_images/hu/architecture.8cec470ec15c65c7.webp)
 
@@ -61,124 +61,124 @@ Nyissa meg a második linket egy új böngészőfülön (vagy kattintson az adot
 
 ## 3. Sablon aktiválása
 
-Próbáljuk meg telepíteni ezt a sablont, és győződjünk meg róla, hogy érvényes. Kövessük az [Első lépések](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) szakasz irányelveit.
+Próbáljuk meg telepíteni ezt a sablont, és ellenőrizzük, hogy érvényes-e. Kövessük a [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) szakasz útmutatásait.
 
-1. Válasszon munkakörnyezetet a sablon tárolójához:
+1. Válasszon munka környezetet a sablon tárhelyhez:
 
-      - **GitHub Codespaces**: Kattintson [ide](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) és erősítse meg a `Create codespace` parancsot
-      - **Helyi klónozás vagy fejlesztői konténer**: Klónozza a `Azure-Samples/get-started-with-ai-agents` tárolót, és nyissa meg VS Code-ban
+      - **GitHub Codespaces**: Kattintson [ide](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents), majd erősítse meg a `Create codespace`-et
+      - **Helyi klón vagy fejlesztői konténer**: Klónozza az `Azure-Samples/get-started-with-ai-agents` tárhelyet, és nyissa meg VS Code-ban
 
-1. Várja meg, míg a VS Code terminál készen áll, majd írja be a következő parancsot:
+1. Várja meg, amíg a VS Code terminál készen áll, majd írja be a következő parancsot:
 
    ```bash title="" linenums="0"
    azd up
    ```
 
-Teljesítse a triggered munkafolyamat lépéseit:
+Teljesítse az alábbi munkafolyamat lépéseket:
 
-1. Bejelentkezés fog kérni az Azure-ba – kövesse az utasításokat az authentikációhoz
-1. Adjon meg egy egyedi környezet nevet – például én a `nitya-mshack-azd` nevet használtam
-1. Ez létrehozza a `.azure/` mappát – látni fog egy al-mappát a környezet nevével
-1. Kéri a feliratkozási név kiválasztását – válassza az alapértelmezettet
-1. Kéri a hely kiválasztását – használja az `East US 2` helyet
+1. Az Azure-ba való bejelentkezésre kérik - kövesse az utasításokat az azonosításhoz
+1. Adjon meg egy egyedi környezeti nevet - például én `nitya-mshack-azd`-t használtam
+1. Ez létrehoz egy `.azure/` mappát - amelyben megjelenik egy alkönyvtár a környezet nevével
+1. Kérni fogja egy előfizetés kiválasztását - válassza az alapértelmezettet
+1. Kérni fogja egy helyszín megadását - használja az `East US 2`-t
 
-Most várjon a provisioning befejezéséig. **Ez 10-15 percet vesz igénybe**
+Most várjon, amíg a provisioning befejeződik. **Ez 10-15 percet vesz igénybe**
 
-1. Amikor kész, a terminál egy SUCCESS üzenetet fog megjeleníteni, valahogy így:
+1. Ha kész, a konzolja egy SIKERES üzenetet fog mutatni így:
       ```bash title="" linenums="0"
       SUCCESS: Your up workflow to provision and deploy to Azure completed in 10 minutes 17 seconds.
       ```
-1. Az Azure Portalban most már rendelkezni fog egy az adott környezet neve szerinti erőforráscsoporttal:
+1. Az Azure Portálján most lesz egy létrehozott erőforrás csoport az adott környezeti névvel:
 
       ![Infra](../../../../../translated_images/hu/02-provisioned-infra.46c706b14f56e0bf.webp)
 
-1. **Most már készen áll az infrastruktúra és az alkalmazás érvényesítésére**.
+1. **Most készen áll arra, hogy érvényesítse a telepített infrastruktúrát és alkalmazást**.
 
 ---
 
 ## 4. Sablon érvényesítése
 
-1. Látogasson el az Azure Portál [Erőforráscsoportok](https://portal.azure.com/#browse/resourcegroups) oldalára – jelentkezzen be, ha kéri
-1. Kattintson a környezeti nevéhez tartozó erőforráscsoportra – az imént látott oldal fog megjelenni
+1. Látogasson el az Azure Portál [Erőforrás Csoportok](https://portal.azure.com/#browse/resourcegroups) oldalára - jelentkezzen be
+1. Kattintson arra az erőforráscsoportra, amely a környezeti nevéhez tartozik - a fenti oldal fog megjelenni
 
       - kattintson az Azure Container Apps erőforrásra
-      - kattintson az Alkalmazás URL-re az _Essentials_ résznél (jobb felső sarok)
+      - kattintson az Alkalmazás URL-re az _Essentials_ szakaszban (jobb felső sarok)
 
-1. Egy ilyen, hosztolt alkalmazás front-end UI-t kell látnia:
+1. Egy ilyen hosztolt alkalmazás front-end felületet kell látnia:
 
    ![App](../../../../../translated_images/hu/03-test-application.471910da12c3038e.webp)
 
-1. Tegyen fel néhány [mintakérdést](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
+1. Próbáljon meg feltenni néhány [minta kérdést](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
-      1. Tegye fel: ```Mi Franciaország fővárosa?``` 
-      1. Tegye fel: ```Mi a legjobb sátor két személynek 200 dollár alatt, és milyen funkciókat tartalmaz?```
+      1. Kérdezze: ```Mi Franciaország fővárosa?```
+      1. Kérdezze: ```Mi a legjobb sátor 200 dollár alatt két ember számára, és milyen funkciói vannak?```
 
-1. Hasonló válaszokat fog kapni, mint az alábbi képen. _De hogyan működik ez?_
+1. Hasonló válaszokat kell kapnia, mint az alábbi. _De hogyan működik ez?_
 
       ![App](../../../../../translated_images/hu/03-test-question.521c1e863cbaddb6.webp)
 
 ---
 
-## 5. Ügynök érvényesítése
+## 5. Ügynök érvényesítés
 
-Az Azure Container App deployol egy végpontot, amely kapcsolódik az MI ügynökhöz, amely a Microsoft Foundry projektjében lett létrehozva ezen sablonhoz. Nézzük meg, mit jelent ez.
+Az Azure Container App egy végpontot telepít, amely csatlakozik az AI Agenthez, amely a Microsoft Foundry projektben van biztosítva ehhez a sablonhoz. Nézzük meg, pontosan mit is jelent ez.
 
-1. Térjen vissza az Azure Portál _Áttekintés_ oldalára az erőforráscsoportjánál
+1. Lépjen vissza az Azure Portál _Áttekintés_ oldalára az erőforráscsoportjához
 
-1. Kattintson a `Microsoft Foundry` erőforrásra ezen a listán
+1. Kattintson a `Microsoft Foundry` erőforrásra a listában
 
 1. Ezt kell látnia. Kattintson a `Go to Microsoft Foundry Portal` gombra.
    ![Foundry](../../../../../translated_images/hu/04-view-foundry-project.fb94ca41803f28f3.webp)
 
-1. Látni fogja a Foundry Projekt oldalt az MI alkalmazásához
+1. Meg kell látnia a Foundry projekt oldalát az AI alkalmazásához
    ![Project](../../../../../translated_images/hu/05-visit-foundry-portal.d734e98135892d7e.webp)
 
-1. Kattintson az `Agents` menüpontra – látni fogja az alapértelmezett Ügynököt a projektben
+1. Kattintson az `Agents` menüpontra - látni fogja az alapértelmezett ügynököt a projektben
    ![Agents](../../../../../translated_images/hu/06-visit-agents.bccb263f77b00a09.webp)
 
-1. Válassza ki – megjelennek az Ügynök részletei. Jegyezze meg a következőket:
+1. Válassza ki az ügynököt - megjelennek az Ügynök részletei. Jegyezze meg a következőket:
 
-      - Az ügynök alapértelmezettként File Search-t használ (mindig)
-      - Az ügynök `Knowledge` mutatja, hogy 32 fájlt töltöttek fel (a fájlkereséshez)
+      - Az ügynök alapértelmezés szerint Fájlkeresést használ (mindig)
+      - Az ügynök `Knowledge` mutatja, hogy 32 fájl lett feltöltve (a fájlkereséshez)
       ![Agents](../../../../../translated_images/hu/07-view-agent-details.0e049f37f61eae62.webp)
 
-1. Keresse meg a bal oldali menüben a `Data+indexes` lehetőséget, és kattintson a részletekért.
+1. Keresse meg a bal oldali menüben a `Data+indexes` opciót, és kattintson a részletekért.
 
-      - Látni fogja a 32 adatfájlt, amelyet a tudásbázishoz feltöltöttek.
-      - Ezek megfelelnek a 12 ügyfélfájlnak és 20 termékfájlnak a `src/files` alatt
+      - Látni fogja a 32 tudásra feltöltött adatfájlt.
+      - Ezek megfelelnek a `src/files` mappában található 12 ügyfél fájlnak és 20 termék fájlnak
       ![Data](../../../../../translated_images/hu/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
 **Érvényesítette az Ügynök működését!**
 
-1. Az ügynök válaszai azokban a fájlokban lévő tudáson alapulnak.
-1. Most már kérdéseket tehet fel ezzel az adattal kapcsolatban, és megalapozott válaszokat kap.
-1. Példa: a `customer_info_10.json` leírja "Amanda Perez" 3 vásárlását
+1. Az ügynök válaszai az említett fájlok adatai alapján alapszanak.
+1. Mostantól kérdéseket tehet fel ezekkel az adatokkal kapcsolatban, és megalapozott válaszokat kap.
+1. Példa: a `customer_info_10.json` leírja Amanda Perez 3 vásárlását.
 
-Lépjen vissza a böngészőablakhoz az Container App végponthoz, és kérdezze meg: „Milyen termékek vannak Amanda Perez tulajdonában?”. Valami ilyesmit fog látni:
+Lépjen vissza a böngészőfülre az Container App végponttal és tegye fel a kérdést: `Milyen termékei vannak Amanda Pereznek?`. Ehhez hasonló képet kell látnia:
 
 ![Data](../../../../../translated_images/hu/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
-## 6. Ügynök játékterem
+## 6. Ügynök játszótér
 
-Építsünk egy kicsit több intuíciót a Microsoft Foundry képességeiről azzal, hogy kipróbáljuk az Ügynököt az Agents Playground-ban.
+Építsünk egy kis intuíciót a Microsoft Foundry képességeiről, az Ügynököt próbáljuk ki az Agents Playground-ban.
 
-1. Térjen vissza az `Agents` oldalra a Microsoft Foundry-ban – válassza ki az alapértelmezett ügynököt
-1. Kattintson a `Try in Playground` opcióra – egy ilyen Playground UI jelenik meg
-1. Tegye fel ugyanazt a kérdést: „Milyen termékek vannak Amanda Perez tulajdonában?”
+1. Térjen vissza az `Agents` oldalra a Microsoft Foundry-ban - válassza ki az alapértelmezett ügynököt
+1. Kattintson a `Try in Playground` opcióra - megjelenik egy ilyen Playground felület
+1. Tegye fel ugyanazt a kérdést: `Milyen termékei vannak Amanda Pereznek?`
 
     ![Data](../../../../../translated_images/hu/09-ask-in-playground.a1b93794f78fa676.webp)
 
-Ugyanazt (vagy hasonló) választ kapja – de további információkat is lát, amelyek segítségével megértheti az ügynökalapú alkalmazás minőségét, költségét és teljesítményét. Például:
+Ugyanazt (vagy hasonló) választ kap, de további információkat is kap, amelyek segítségével megértheti az ügynökalapú alkalmazás minőségét, költségét és teljesítményét. Például:
 
-1. Vegye észre, hogy a válasz hivatkozik a válasz alapjául szolgáló adatfájlokra
-1. Vigye az egérmutatót ezekre a fájlcímkékre – egyezik-e az adat a lekérdezésével és a megjelenített válasszal?
+1. Vegye észre, hogy a válasz hivatkozik az adatfájlokra, amelyek "megalapozzák" a választ
+1. Vigye az egeret bármelyik fájlcímke fölé - az adatok megfelelnek a kérdésnek és a megjelenített válasznak?
 
-Láthat egy _statisztikai_ sort a válasz alatt.
+Láthat egy _statisztika_ sort a válasz alatt.
 
-1. Vigye az egeret bármelyik mutató fölé – pl. Safety. Ilyet fog látni
-1. Az értékelt besorolás egyezik-e az Ön intuíciójával a válasz biztonsági szintjére vonatkozóan?
+1. Vigye az egeret bármelyik metrika fölé, pl. Safety (Biztonság). Valami ilyesmit lát
+1. A besorolt értékelés megfelel az Ön intuíciójának a válasz biztonsági szintjéről?
 
       ![Data](../../../../../translated_images/hu/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
@@ -186,30 +186,30 @@ Láthat egy _statisztikai_ sort a válasz alatt.
 
 ## 7. Beépített megfigyelhetőség
 
-A megfigyelhetőség az alkalmazás műszerezésére vonatkozik, hogy adatokat generáljon, amelyek segítségével megérthetjük, hibakereshetjük és optimalizálhatjuk a működését. Ehhez:
+A megfigyelhetőség arról szól, hogy az alkalmazást úgy instrumentáljuk, hogy olyan adatokat generáljon, amelyek segítségével megérthetjük, hibakereshetjük és optimalizálhatjuk annak működését. Ehhez:
 
-1. Kattintson a `View Run Info` gombra – ezt a nézetet fogja látni. Ez egy példa az [Agent nyomkövetésre](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) működés közben. _Ezt a nézetet a Thread Logs menüpontjával is elérheti a főmenüben._
+1. Kattintson a `View Run Info` gombra - ezt a nézetet kell látnia. Ez egy példa az [Agent követésre](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground). _Ezt a nézetet a főmenüben a Thread Logs (Szál naplók) kiválasztásával is elérheti_.
 
-   - Tájékozódjon a végrehajtási lépésekről és az ügynök által igénybe vett eszközökről
-   - Értse meg a teljes token számot (a kimenő tokenek használatához viszonyítva) a válaszra
-   - Értse meg a késleltetést és hogy a végrehajtás mely részein telik el az idő
+   - Tekintse meg az ügynök által végrehajtott lépéseket és használ eszközöket
+   - Ismerje meg a teljes token számot (a kimeneti tokenek használatával szemben) a válasznál
+   - Ismerje meg a késleltetést és azt, hogy hol töltődik az idő a végrehajtás során
 
       ![Agent](../../../../../translated_images/hu/10-view-run-info.b20ebd75fef6a1cc.webp)
 
-1. Kattintson a `Metadata` fülre, hogy további attribútumokat lásson, amelyek hasznos kontextust nyújthatnak hibák későbbi elemzéséhez.
+1. Kattintson a „Metadata” fülre, hogy további attribútumokat lásson a futásról, amelyek hasznos kontextust adhatnak későbbi hibakereséshez.
 
       ![Agent](../../../../../translated_images/hu/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 
-1. Kattintson az `Evaluations` fülre, hogy megnézze az automatikus értékeléseket az ügynök válaszaira. Ide tartozik a biztonsági értékelés (pl. Önkárosítás) és az ügynökspecifikus értékelések (pl. szándékfeloldás, feladathűség).
+1. Kattintson az „Evaluations” fülre, hogy megtekintse az ügynök válaszára vonatkozó automatikus értékeléseket. Ebbe beletartoznak a biztonsági értékelések (pl. öngyilkossági kockázat) és az ügynök-specifikus értékelések (pl. szándék feloldása, feladat betartása).
 
       ![Agent](../../../../../translated_images/hu/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
-1. Végül, kattintson a `Monitoring` fülre az oldalsáv menüben.
+1. Végül kattintson az oldalsáv menüben a „Monitoring” fülre.
 
-      - Válassza ki a megjelenő oldalon az `Erőforrás-használat` fület – és tekintse meg a mutatókat.
-      - Figyelje az alkalmazás használatát költségek (tokenek) és terhelés (kérések) szempontjából.
-      - Figyelje az alkalmazás késleltetését az első bájttól (bemenet feldolgozása) az utolsó bájtig (kimenet).
+      - Válassza a „Resource usage” fület a megjelenő oldalon - és tekintse meg a metrikákat.
+      - Kövesse nyomon az alkalmazás használatot költségek (tokenek) és terhelés (kérések) szerint.
+      - Kövesse az alkalmazás késleltetését az első bájttól (bemeneti feldolgozás) az utolsó bájtig (kimenet).
 
       ![Agent](../../../../../translated_images/hu/13-monitoring-resources.5148015f7311807f.webp)
 
@@ -217,18 +217,18 @@ A megfigyelhetőség az alkalmazás műszerezésére vonatkozik, hogy adatokat g
 
 ## 8. Környezeti változók
 
-Eddig végigjártuk a telepítést a böngészőből – és érvényesítettük, hogy az infrastruktúránk létrejött és az alkalmazás működik. De az alkalmazáskóddal _elsőként_ dolgozva a helyi fejlesztői környezetünket kell beállítanunk a szükséges változókkal, amelyek az erőforrásokkal való munkához kellenek. Az `azd` használata ezt megkönnyíti.
+Eddig végigvezettük a telepítésen a böngészőben, és érvényesítettük, hogy az infrastruktúra ki lett építve, és az alkalmazás működik. Azonban ha _kóddal_ szeretnénk dolgozni, konfigurálnunk kell a helyi fejlesztői környezetünket a releváns változókkal, amelyek szükségesek a erőforrások használatához. Az `azd` használata ezt megkönnyíti.
 
-1. Az Azure Developer CLI [környezeti változókat használ](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) az alkalmazástelepítések konfigurációs beállításainak tárolására és kezelésére.
+1. Az Azure Developer CLI [környezeti változókat használ](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) a konfigurációs beállítások tárolására és kezelésére az alkalmazás telepítésekhez.
 
-1. A környezeti változókat a `.azure/<env-name>/.env` fájlban tárolja – ez a telepítés során használt `env-name` környezethez köti őket, és segít elkülöníteni a különböző telepítési célok környezeteit ugyanabban a tárolóban.
+1. A környezeti változók a `.azure/<env-name>/.env` fájlban vannak tárolva - így scope-olva az adott `env-name` környezethez, amelyet a telepítés során használunk, ezzel segítve a környezetek elkülönítését ugyanazon tárhely különböző telepítési céljai között.
 
-1. A környezeti változókat az `azd` parancs automatikusan tölti be, amikor végrehajt egy adott parancsot (pl. `azd up`). Fontos megjegyezni, hogy az `azd` nem olvassa be automatikusan az _operációs rendszer szintű_ környezeti változókat (pl. shell-ben beállítottakat) – e helyett használja az `azd set env` és `azd get env` parancsokat az információk szkriptek közötti továbbítására.
+1. A környezeti változókat az `azd` parancs automatikusan betölti, amikor egy adott parancsot futtat (pl. `azd up`). Fontos megjegyezni, hogy az `azd` nem olvassa be automatikusan az _operációs rendszer szintű_ környezeti változókat (pl. shellben beállítottakat), hanem használja az `azd set env` és `azd get env` parancsokat az információ átadására szkriptek között.
 
 
-Próbáljunk ki néhány parancsot:
+Próbáljunk meg néhány parancsot:
 
-1. Listázza az összes azd-hez beállított környezeti változót ebben a környezetben:
+1. Lekérni az összes környezeti változót, amely az `azd` számára be van állítva ebben a környezetben:
 
       ```bash title="" linenums="0"
       azd env get-values
@@ -244,19 +244,19 @@ Próbáljunk ki néhány parancsot:
       ...
       ```
 
-1. Lekérdez egy konkrét értéket – pl. meg akarom tudni, be lett-e állítva az `AZURE_AI_AGENT_MODEL_NAME`
+1. Lekérni egy konkrét értéket - pl. meg akarom tudni, hogy be lett-e állítva az `AZURE_AI_AGENT_MODEL_NAME` változó
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
       
-      Ilyet fog látni – alapértelmezés szerint nem lett beállítva!
+      Valami ilyesmit fog látni - alapértelmezés szerint nem volt beállítva!
 
       ```bash title="" linenums="0"
       ERROR: key 'AZURE_AI_AGENT_MODEL_NAME' not found in the environment values
       ```
 
-1. Állítson be egy új környezeti változót az azd-hez. Itt az ügynök modell nevét frissítjük. _Megjegyzés: az itt végzett változtatások azonnal megjelennek a `.azure/<env-name>/.env` fájlban._
+1. Állítson be egy új környezeti változót az `azd` számára. Itt az ügynök modell nevét frissítjük. _Megjegyzés: bármilyen módosítás azonnal megjelenik a `.azure/<env-name>/.env` fájlban._
 
       ```bash title="" linenums="0"
       azd env set AZURE_AI_AGENT_MODEL_NAME gpt-4.1
@@ -264,35 +264,35 @@ Próbáljunk ki néhány parancsot:
       azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
       ```
 
-      Most már az értéknek beállítottnak kell lennie:
+      Most már meg kell találnunk, hogy az érték beállított:
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
 
-1. Vegye figyelembe, hogy egyes erőforrások állandóak (pl. modell telepítések), és több, mint egy `azd up` parancsra van szükség a redeployhoz. Próbáljuk meg eltávolítani az eredeti telepítést, majd újratelepíteni a módosított környezeti változókkal.
+1. Vegye figyelembe, hogy néhány erőforrás tartós (pl. modell telepítések), ezért többre lesz szükség, mint egy egyszerű `azd up`, hogy újratelepítés történjen. Próbáljuk meg lebontani az eredeti telepítést és újratelepíteni a megváltoztatott környezeti változókkal.
 
-1. **Frissítés** Ha korábban telepített már infrastruktúrát egy azd sablon segítségével – akkor _frissítheti_ a helyi környezeti változók állapotát az aktuális Azure telepítés alapján ezzel a paranccsal:
+1. **Frissítés** Ha korábban már telepített infrastruktúrát egy azd sablon segítségével, akkor a helyi környezeti változók állapotát frissítheti az aktuális Azure telepítési állapot alapján ezzel a paranccsal:
 
       ```bash title="" linenums="0"
       azd env refresh
       ```
 
-      Ez egy erőteljes módszer arra, hogy két vagy több helyi fejlesztési környezet között _szinkronizáld_ a környezeti változókat (pl. több fejlesztőből álló csapat esetén) - lehetővé téve, hogy a telepített infrastruktúra szolgáljon az env változók állapotának valós alapjaként. A csapattagok egyszerűen _frissítik_ a változókat, hogy újra szinkronban legyenek.
+Ez egy hatékony módja annak, hogy környezeti változókat _szinkronizáljunk_ két vagy több helyi fejlesztői környezet között (pl. több fejlesztőből álló csapat) – lehetővé téve, hogy a telepített infrastruktúra szolgáljon igaz alapként a környezeti változók állapotához. A csapattagok egyszerűen _frissítik_ a változókat, hogy újra szinkronban legyenek.
 
 ---
 
 ## 9. Gratulálunk 🏆
 
-Most fejeztél be egy teljes folyamatot, amely során:
+Most fejeztél be egy végponttól végpontig tartó munkafolyamatot, amely során:
 
-- [X] Kiválasztottad a használandó AZD sablont
-- [X] Megnyitottad a sablont egy támogatott fejlesztési környezetben
-- [X] Telepítetted a sablont, és megerősítetted, hogy működik
+- [X] Kiválasztottad a használni kívánt AZD sablont
+- [X] Megnyitottad a sablont egy támogatott fejlesztői környezetben
+- [X] Telepítetted a sablont, és ellenőrizted, hogy működik
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Jogi nyilatkozat**:  
-Ez a dokumentum az AI fordító szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) használatával készült. Bár a pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum a saját nyelvén tekintendő irányadónak. Fontos információk esetén szakmai, emberi fordítást javasolt igénybe venni. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy félreértelmezésekért.
+**Jogi nyilatkozat**:
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Fontos információk esetén professzionális emberi fordítást javasolunk. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely ebből a fordításból ered.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

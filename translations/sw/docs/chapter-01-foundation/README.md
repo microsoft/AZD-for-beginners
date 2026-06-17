@@ -1,21 +1,21 @@
-# Sura 1: Msingi & Anza Haraka
+# Sura 1: Misingi & Anza Haraka
 
-**📚 Kozi**: [AZD For Beginners](../../README.md) | **⏱️ Muda**: 30-45 dakika | **⭐ Ugumu**: Beginner
+**📚 Kozi**: [AZD Kwa Waanzilishi](../../README.md) | **⏱️ Muda**: 30-45 dakika | **⭐ Ugumu**: Msingi
 
 ---
 
 ## Muhtasari
 
-Sura hii inaelezea misingi ya Azure Developer CLI (azd). Utajifunza dhana za msingi, kusakinisha zana, na kupeleka programu yako ya kwanza kwenye Azure.
+Sura hii inatambulisha misingi ya Azure Developer CLI (azd). Utajifunza dhana za msingi, kusakinisha zana, na kutuma programu yako ya kwanza kwenye Azure.
 
-> Imethibitishwa dhidi ya `azd 1.23.12` mwezi Machi 2026.
+> Imekaguliwa dhidi ya `azd 1.25.6` katika Juni 2026.
 
 ## Malengo ya Kujifunza
 
 Kwa kumaliza sura hii, utakuwa umeweza:
-- Elewa Azure Developer CLI ni nini na jinsi inavyotofautiana na Azure CLI
+- Elewa Azure Developer CLI ni nini na inavyotofautiana na Azure CLI
 - Sakinisha na usanidi AZD kwenye jukwaa lako
-- Peleka programu yako ya kwanza kwenye Azure kwa `azd up`
+- Tuma programu yako ya kwanza kwenye Azure kwa `azd up`
 - Safisha rasilimali kwa `azd down`
 
 ---
@@ -24,15 +24,17 @@ Kwa kumaliza sura hii, utakuwa umeweza:
 
 | # | Somo | Maelezo | Muda |
 |---|--------|-------------|------|
-| 1 | [Misingi ya AZD](azd-basics.md) | Dhana za msingi, istilahi, na muundo wa mradi | 15 dakika |
-| 2 | [Usakinishaji & Usanidi](installation.md) | Mwongozo wa usakinishaji kwa jukwaa maalum | 10 dakika |
-| 3 | [Mradi Wako wa Kwanza](first-project.md) | Vitendo: Weka programu ya wavuti kwenye Azure | 20 dakika |
+| 1 | [AZD Misingi](azd-basics.md) | Madhumuni ya msingi, istilahi, na muundo wa mradi | 15 dak |
+| 2 | [Usanidi & Ufungaji](installation.md) | Mwongozo wa ufungaji maalum kwa kila jukwaa | 10 dak |
+| 3 | [Mradi Wako wa Kwanza](first-project.md) | Vitendo: Tuma programu ya wavuti kwenye Azure | 20 dak |
+| 4 | [Leta Programu Yako](bring-your-own-app.md) | Ongeza azd kwenye mradi uliopo tayari | 15 dak |
+| 5 | [Kontena za Dev & Codespaces](dev-containers.md) | Mazingira ya azd yanayoweza kuzalishwa tena kwa kutumia kontena za dev | 15 dak |
 
 ---
 
-## ✅ Anza Hapa: Thibitisha Mipangilio Yako
+## ✅ Anza Hapa: Hakiki Usanidi Wako
 
-Kabla ya kuanza, thibitisha kwamba mashine yako ya ndani iko tayari kwa kiolezo cha Sura 1:
+Kabla hujaanza, thibitisha kwamba mashine yako ya karibu iko tayari kwa kiolezo cha Sura 1:
 
 **Windows:**
 ```powershell
@@ -44,18 +46,18 @@ Kabla ya kuanza, thibitisha kwamba mashine yako ya ndani iko tayari kwa kiolezo 
 bash ./validate-setup.sh
 ```
 
-If the script reports missing tools, fix those first and then continue with the chapter.
+Ikiwa skripti itaonyesha zana ambazo hazipo, rekebisha hizo kwanza kishaendelea na sura.
 
 ---
 
 ## 🚀 Anza Haraka
 
 ```bash
-# Angalia usakinishaji
+# Kagua usakinishaji
 azd version
 
-# Thibitisha kwa AZD
-# Hiari: az login ikiwa unapanga kuendesha amri za Azure CLI moja kwa moja
+# Thibitisha kwa ajili ya AZD
+# Hiari: az login ikiwa unakusudia kuendesha amri za Azure CLI moja kwa moja
 azd auth login
 
 # Sambaza programu yako ya kwanza
@@ -75,31 +77,31 @@ Baada ya kumaliza sura hii, unapaswa kuwa na uwezo wa:
 ```bash
 azd version              # Inaonyesha toleo lililosakinishwa
 azd init --template todo-nodejs-mongo  # Inaanzisha mradi
-azd up                   # Inaweka kwenye Azure
+azd up                   # Inapeleka kwenye Azure
 azd show                 # Inaonyesha URL ya programu inayokimbia
 azd down --force --purge # Inasafisha rasilimali
 ```
 
 ---
 
-## 🔗 Urambazaji
+## 🔗 Uelekezaji
 
 | Mwelekeo | Sura |
 |-----------|---------|
-| **Ijayo** | [Sura 2: Maendeleo ya AI-Kwanza](../chapter-02-ai-development/README.md) |
+| **Ifuatayo** | [Sura 2: Maendeleo Yanayolenga AI](../chapter-02-ai-development/README.md) |
 | **Ruka hadi** | [Sura 3: Usanidi](../chapter-03-configuration/README.md) |
 
 ---
 
 ## 📖 Rasilimali Zinazohusiana
 
-- [Mwongozo wa Amri](../../resources/cheat-sheet.md)
+- [Karatasi ya Mbinu za Amri](../../resources/cheat-sheet.md)
 - [Maswali Yanayoulizwa Mara kwa Mara (FAQ)](../../resources/faq.md)
 - [Kamusi](../../resources/glossary.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Tamko la kutolea uwajibikaji**:
-Hati hii imefasiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kufikia usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya asili inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, inapendekezwa kutumia tafsiri ya mtaalamu wa binadamu. Hatuwajibiki kwa kutokuelewana au tafsiri potofu zinazotokana na matumizi ya tafsiri hii.
+**Kionyozo**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Hati ya asili katika lugha yake halisi inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatutojibu kwa kuelewa vibaya au tafsiri potofu zinazotokea kutokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

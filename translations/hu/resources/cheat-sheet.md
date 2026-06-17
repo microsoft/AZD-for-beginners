@@ -1,72 +1,72 @@
-# Parancs Gyorsútmutató - Lényeges AZD Parancsok
+# Parancs Gyorssegéd - Lényeges AZD Parancsok
 
-**Gyors Hivatkozás Minden Fejezethez**
+**Gyors Referencia Minden Fejezethez**
 - **📚 Tanfolyam Kezdőlap**: [AZD Kezdőknek](../README.md)
 - **📖 Gyors Kezdés**: [1. fejezet: Alapok és Gyors Kezdés](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI Parancsok**: [2. fejezet: AI-első Fejlesztés](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Haladó**: [4. fejezet: Infrastruktúra mint Kód](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+- **🤖 AI Parancsok**: [2. fejezet: AI-Központú Fejlesztés](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Haladó**: [4. fejezet: Infrastruktúra Kódként](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Bevezetés
 
-Ez az átfogó gyorsútmutató gyors hivatkozást biztosít a leggyakrabban használt Azure Developer CLI parancsokhoz, kategóriák szerint rendezve, gyakorlati példákkal. Tökéletes gyors lekérdezésekhez fejlesztés, hibakeresés és napi műveletek során az azd projektekkel.
+Ez az átfogó gyorssegéd könnyű hozzáférést nyújt a leggyakrabban használt Azure Developer CLI parancsokhoz, kategóriák szerint rendszerezve gyakorlati példákkal. Tökéletes gyors kereséshez fejlesztés, hibakeresés és napi működés során az azd projektekkel.
 
 ## Tanulási Célok
 
-Ennek a gyorsútmutatónak a használatával:
-- Azonnal hozzáférsz a lényeges Azure Developer CLI parancsokhoz és szintaxisukhoz
-- Megérted a parancsok szervezését funkcionális kategóriák és használati esetek szerint
-- Hivatkozhatsz gyakorlati példákra gyakori fejlesztési és telepítési forgatókönyveknél
-- Hozzáférsz hibakereső parancsokhoz gyors hibamegoldáshoz
+Ezzel a gyorssegéd segítségével:
+- Azonnal hozzáférsz az alapvető Azure Developer CLI parancsokhoz és szintaxisukhoz
+- Megérted a parancsok funkcionális kategóriák szerinti felépítését és felhasználási eseteket
+- Hivatkozhatsz gyakorlati példákra gyakori fejlesztési és telepítési helyzetekben
+- Hozzáférsz a hibakeresési parancsokhoz gyors probléma megoldáshoz
 - Hatékonyan megtalálod a haladó konfigurációs és testreszabási lehetőségeket
 - Megtalálod a környezetkezelési és többkörnyezetes munkafolyamat parancsokat
 
 ## Tanulási Eredmények
 
-A gyorsútmutató rendszeres használatával képes leszel:
-- Magabiztosan végrehajtani az azd parancsokat teljes dokumentáció nélkül
-- Gyorsan megoldani gyakori problémákat megfelelő diagnosztikai parancsokkal
-- Hatékonyan kezelni több környezetet és telepítési forgatókönyvet
-- Szükség esetén alkalmazni az azd haladó funkcióit és konfigurációs lehetőségeit
-- Rendszeres parancssorozatokkal hibakeresni a telepítési problémákat
-- Optimalizálni a munkafolyamatokat hatékony azd parancsikonsok és opciók használatával
+A gyorssegéd rendszeres használatával képes leszel:
+- Magabiztosan futtatni az azd parancsokat anélkül, hogy a teljes dokumentációt át kellene nézni
+- Gyorsan megoldani gyakori problémákat a megfelelő diagnosztikai parancsok segítségével
+- Hatékonyan kezelni több környezetet és telepítési helyzetet
+- Szükség szerint alkalmazni haladó azd funkciókat és konfigurációs lehetőségeket
+- Rendszeresen hibakeresni telepítési problémákat szisztematikus parancssorozatokkal
+- Optimalizálni a munkafolyamatokat az azd gyorsparancsok és opciók hatékony használatával
 
-## Kezdő Lépések Parancsai
+## Kezdő Parancsok
 
 ### Hitelesítés
 ```bash
-# Jelentkezzen be az Azure-ba az AZD használatával
+# Bejelentkezés az Azure-ba az AZD használatával
 azd auth login
 
-# Jelentkezzen be az Azure CLI-be (az AZD ezt használja a háttérben)
+# Bejelentkezés az Azure CLI-be (az AZD ezt használja a háttérben)
 az login
 
-# Ellenőrizze a jelenlegi fiókot
+# Az aktuális fiók ellenőrzése
 az account show
 
-# Állítsa be az alapértelmezett előfizetést
+# Alapértelmezett előfizetés beállítása
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 
-# Jelentkezzen ki az AZD-ből
+# Kijelentkezés az AZD-ből
 azd auth logout
 
-# Jelentkezzen ki az Azure CLI-ből
+# Kijelentkezés az Azure CLI-ből
 az logout
 ```
 
 ### Projekt Inicializálás
 ```bash
-# Böngészés elérhető sablonok között
+# Böngésszen a rendelkezésre álló sablonok között
 azd template list
 
-# Inicializálás sablonból
+# Inicializálás sablon alapján
 azd init --template todo-nodejs-mongo
 azd init --template <template-name>
 
-# Inicializálás a jelenlegi könyvtárban
+# Inicializálás az aktuális könyvtárban
 azd init .
 
-# Inicializálás egyedi névvel
+# Inicializálás egyéni névvel
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
@@ -74,13 +74,13 @@ azd init --template todo-nodejs-mongo my-awesome-app
 
 ### Teljes Telepítési Munkafolyamat
 ```bash
-# Telepíts mindent (ellátás + telepítés)
+# Minden telepítése (előkészítés + telepítés)
 azd up
 
-# Telepítés megerősítő kérdések nélkül
+# Telepítés megerősítő promptok nélkül
 azd up --confirm-with-no-prompt
 
-# Telepítés egy adott környezetbe
+# Telepítés meghatározott környezetbe
 azd up --environment production
 
 # Telepítés egyedi paraméterekkel
@@ -92,10 +92,10 @@ azd up --parameter location=westus2
 # Azure erőforrások biztosítása
 azd provision
 
-# 🧪 Előzetes infrastruktúra változások
+# 🧪 Infrastruktúra változások előnézete
 azd provision --preview
-# Megjeleníti egy próbafuttatás nézetét arról, hogy milyen erőforrások jönnének létre/módosulnának/törlődnének
-# Hasonló a 'terraform plan' vagy 'bicep what-if' parancshoz - biztonságos futtatni, nem alkalmaz változtatásokat
+# Egy próba-futtatási nézetet mutat arról, hogy milyen erőforrások lennének létrehozva/módosítva/törölve
+# Hasonló a 'terraform plan' vagy 'bicep what-if' parancshoz – biztonságos futtatni, nem alkalmaz változásokat
 ```
 
 ### Csak Alkalmazás
@@ -113,12 +113,23 @@ azd deploy --all
 
 ### Build és Csomagolás
 ```bash
-# Alkalmazások építése
+# Az alkalmazásfüggőségek visszaállítása (letöltése)
+azd restore
+
+# Egy adott szolgáltatás visszaállítása
+azd restore --service api
+
+# Telepíthető fájl létrehozása telepítés nélkül
 azd package
 
-# Specifikus szolgáltatás építése
+# Egy adott szolgáltatás fordítása
 azd package --service api
 ```
+
+> **`azd restore`** letölti az alkalmazás függőségeit (npm, pip, NuGet, Maven, stb.). Ez automatikusan lefut az `azd package` és `azd deploy` parancsok során, ezért ritkán hívod meg közvetlenül – kézzel futtasd előre a függőségek letöltéséhez (például CI cache melegítésére vagy offline munkához).
+
+> **`azd package`** elkészíti a telepíthető csomagot (konténer képet vagy zip-et) **anélkül**, hogy azt az Azure-ba tolná. Használd önállóan a build sikerének ellenőrzésére, a kimenet vizsgálatára vagy egy másik folyamat számára gyártott csomag előállítására. Az `azd deploy` automatikusan csomagol, ezért csak akkor kell az `azd package`, ha a csomagot telepítés nélkül szeretnéd előállítani.
+
 
 ## 🌍 Környezetkezelés
 
@@ -150,7 +161,7 @@ azd env set DEBUG true
 # Környezeti változó lekérése
 azd env get API_KEY
 
-# Minden környezeti változó listázása
+# Minden környezeti változó felsorolása
 azd env get-values
 
 # Környezeti változó eltávolítása
@@ -164,61 +175,61 @@ azd env unset DEBUG
 # Az összes konfiguráció listázása
 azd config show
 
-# Globális alapértelmezések beállítása
+# Globális alapértelmezett értékek beállítása
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
 # Konfiguráció eltávolítása
 azd config unset defaults.location
 
-# Az összes konfiguráció alaphelyzetbe állítása
+# Az összes konfiguráció visszaállítása
 azd config reset
 ```
 
 ### Projekt Konfiguráció
 ```bash
-# Az azure.yaml érvényesítése
+# Ellenőrizze az azure.yaml fájlt
 azd config validate
 
-# Projekt információk megjelenítése
+# Projektinformációk megjelenítése
 azd show
 
-# Szolgáltatás végpontjainak lekérése
+# Szolgáltatási végpontok lekérése
 azd show --output json
 ```
 
-## 📊 Monitoring és Diagnosztika
+## 📊 Monitorozás és Diagnosztika
 
-### Monitoring Irányítópult
+### Monitorozó Műszerfal
 ```bash
-# Azure portál monitoring irányítópult megnyitása
+# Nyissa meg az Azure portál felügyeleti műszerfalát
 azd monitor
 
-# Application Insights valós idejű mérőszámok megnyitása
+# Nyissa meg az Application Insights élő metrikáit
 azd monitor --live
 
-# Application Insights naplózó lap megnyitása
+# Nyissa meg az Application Insights naplópaneljét
 azd monitor --logs
 
-# Application Insights áttekintés megnyitása
+# Nyissa meg az Application Insights áttekintést
 azd monitor --overview
 ```
 
-### Konténer Naplók Megtekintése
+### Konténer Naplók Nézése
 ```bash
-# Naplók megtekintése az Azure CLI segítségével (Container Apps esetén)
+# Naplók megtekintése az Azure CLI-n keresztül (Container Apps esetén)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
 
-# Naplók valós idejű követése
+# Naplók valós időben történő követése
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
 # Naplók megtekintése az Azure Portalon
 azd monitor --logs
 ```
 
-### Naplóelemzési Lekérdezések
+### Log Analytics Lekérdezések
 ```bash
-# Naplóelemzés elérése az Azure portálon keresztül
+# A hozzáférési naplóelemzés elérése az Azure portálon keresztül
 azd monitor --logs
 
 # Naplók lekérdezése az Azure CLI segítségével
@@ -231,13 +242,13 @@ az monitor log-analytics query \
 
 ### Takarítás
 ```bash
-# Távolítson el minden Azure erőforrást
+# Minden Azure erőforrás eltávolítása
 azd down
 
-# Erőltetett törlés megerősítés nélkül
+# Megerősítés nélküli végleges törlés
 azd down --force
 
-# Lágon törölt erőforrások végleges eltávolítása
+# Lágy törlésű erőforrások törlése
 azd down --purge
 
 # Teljes tisztítás
@@ -249,10 +260,10 @@ azd down --force --purge
 # Ellenőrizze az azd frissítéseket
 azd version
 
-# Szerezze be a jelenlegi verziót
+# Az aktuális verzió lekérése
 azd version
 
-# Tekintse meg a jelenlegi konfigurációt
+# A jelenlegi konfiguráció megtekintése
 azd config show
 ```
 
@@ -260,10 +271,10 @@ azd config show
 
 ### Pipeline és CI/CD
 ```bash
-# GitHub Actions beállítása
+# GitHub Actions konfigurálása
 azd pipeline config
 
-# Azure DevOps beállítása
+# Azure DevOps konfigurálása
 azd pipeline config --provider azdo
 
 # Pipeline konfiguráció megjelenítése
@@ -278,37 +289,43 @@ azd infra generate
 # 🧪 Infrastruktúra előnézet és tervezés
 azd provision --preview
 # Az infrastruktúra előkészítésének szimulálása telepítés nélkül
-# Bicep/Terraform sablonokat elemez és megmutatja:
+# Bicep/Terraform sablonok elemzése és megjelenítése:
 # - Hozzáadandó erőforrások (zöld +)
 # - Módosítandó erőforrások (sárga ~)
 # - Törlendő erőforrások (piros -)
-# Biztonságos futtatás - az Azure környezetben nem történik valós változtatás
+# Biztonságos futtatás - tényleges változtatások nélkül az Azure környezetben
 
-# Infrastruktur szintetizálása az azure.yaml alapján
+# Infrastrukturális szintézis az azure.yaml fájlból
 azd infra synth
 ```
 
-### Projekt Információk
+### Projekt Információ
 ```bash
-# Projekt állapot és végpontok megjelenítése
+# Projekt állapotának és végpontjainak megjelenítése
 azd show
 
-# Részletes projekt információk megjelenítése JSON formátumban
+# Részletes projektinformációk megjelenítése JSON formátumban
 azd show --output json
 
-# Szolgáltatás végpontjainak lekérése
+# Szolgáltatási végpontok lekérése
 azd show --output json | jq '.services'
 ```
 
-## 🤖 AI & Bővítmények Parancsai
+## 🤖 AI & Kiterjesztések Parancsok
 
-### AZD Bővítmények
+### AZD Kiterjesztések
 ```bash
-# Listázza az összes elérhető bővítményt (beleértve az MI-t is)
+# Az összes elérhető bővítmény listázása (beleértve az AI-t is)
 azd extension list
 
 # Telepítse a Foundry ügynökök bővítményt
 azd extension install azure.ai.agents
+
+# Telepítse az ügynök készségek bővítményt (előnézet)
+azd extension install azure.ai.skills
+
+# Telepítse a Foundry kapcsolatok bővítményt (előnézet)
+azd extension install azure.ai.connections
 
 # Telepítse a finomhangolás bővítményt
 azd extension install azure.ai.finetune
@@ -322,34 +339,50 @@ azd extension upgrade --all
 
 ### AI Ügynök Parancsok
 ```bash
-# Együgynök projekt inicializálása egy manifesztből
+# Ügynök projekt inicializálása egy manifesztből
 azd ai agent init -m <manifest-path-or-uri>
 
-# Egy adott Foundry projekt célozása
+# Egy adott Foundry projektre céloz
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# Az ügynök forráskönyvtárának megadása
+# Megadja az ügynök forráskönyvtárát
 azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
 
-# Hosztolási cél kiválasztása
+# Válasszon egy hosztolási célt
 azd ai agent init -m agent-manifest.yaml --host containerapp
+
+# Tesztelje a telepített ügynököt (késleltetés + első bájt ideje kiírásra kerül)
+azd ai agent invoke
+
+# Mutassa a élő végpont konfigurációját
+azd ai agent endpoint show
+
+# Értékelő adatállomány generálása, majd az ügynök optimalizálása
+azd ai agent eval generate
+azd ai agent optimize
+
+# Töltse le a kód-alapú hosztolt ügynök telepített forrását
+azd ai agent code download
+
+# Töröljön egy hosztolt ügynököt és az összes verzióját (--force befejezi az aktív munkameneteket)
+azd ai agent delete --force
 ```
 
 ### MCP Szerver (Alfa)
 ```bash
-# Indítsa el a MCP szervert a projektjéhez
+# Indítsa el az MCP szervert a projektjéhez
 azd mcp start
 
-# Kezelje az eszköz hozzájárulását az MCP műveletekhez
+# Kezelje az eszközhozzájárulást az MCP műveletekhez
 azd copilot consent list
 ```
 
 ### Infrastruktúra Generálás
 ```bash
-# IaC fájlok generálása a projektdefinícióból
+# Generálj IaC fájlokat a projektdefiníciódból
 azd infra generate
 
-# Infrastruktúra szintetizálása az azure.yaml alapján
+# Infrastrukturát szintetizálj az azure.yaml alapján
 azd infra synth
 ```
 
@@ -363,14 +396,14 @@ azd infra synth
 azd init --template todo-nodejs-mongo
 cd my-project
 
-# Telepítés fejlesztési környezetbe
+# Kiadás fejlesztési környezetbe
 azd env new dev
 azd up
 
-# Változtatások végrehajtása és újbóli telepítés
+# Változtatások végrehajtása és újratelepítés
 azd deploy
 
-# Monitoring irányítópult megnyitása
+# Megfigyelő irányítópult megnyitása
 azd monitor --live
 ```
 
@@ -381,7 +414,7 @@ azd env new dev
 azd env new staging  
 azd env new production
 
-# Telepítés fejlesztői környezetbe
+# Telepítés fejlesztési környezetbe
 azd env select dev
 azd up
 
@@ -396,23 +429,23 @@ azd up
 
 ### Hibakeresési Munkafolyamat
 ```bash
-# Hibakeresési mód engedélyezése
+# Engedélyezze a hibakeresési módot
 export AZD_DEBUG=true
 
-# Telepítési állapot ellenőrzése
+# Ellenőrizze a telepítés állapotát
 azd show
 
-# Konfiguráció érvényesítése
+# Érvényesítse a konfigurációt
 azd config show
 
-# Megnyitás a naplózó monitorozó műszerfal számára
+# Nyissa meg a naplózási felügyeleti műszerfalat
 azd monitor --logs
 
-# Erőforrás állapotának ellenőrzése
+# Ellenőrizze az erőforrás állapotát
 azd show --output json
 ```
 
-## 🔍 Hibakeresési Parancsok
+## 🔍 Hibakereső Parancsok
 
 ### Hibakeresési Információk
 ```bash
@@ -438,15 +471,15 @@ azd template list --output json
 # Sablon információk megjelenítése
 azd template show <template-name>
 
-# Sablon érvényesítése az inicializálás előtt
+# Sablon ellenőrzése inicializálás előtt
 azd template validate <template-name>
 ```
 
 ## 📁 Fájl és Könyvtár Parancsok
 
-### Projekt Szerkezet
+### Projekt Struktúra
 ```bash
-# Jelenlegi könyvtárszerkezet megjelenítése
+# Jelenlegi könyvtárstruktúra megjelenítése
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
@@ -461,7 +494,7 @@ echo $AZD_CONFIG_DIR  # Általában ~/.azd
 
 ### JSON Kimenet
 ```bash
-# JSON kimenet lekérése szkripteléshez
+# JSON kimenet lekérése szkriptekhez
 azd show --output json
 azd env list --output json
 azd config show --output json
@@ -491,12 +524,12 @@ azd env get-values
 azd monitor --logs
 ```
 
-### Telepítési Ellenőrzés
+### Telepítési Érvényesítés
 ```bash
 #!/bin/bash
-# Telepítés előtti ellenőrzés
+# Elő telepítési ellenőrzés
 azd show
-azd provision --preview  # Változások előnézete telepítés előtt
+azd provision --preview  # Változtatások előnézete a telepítés előtt
 az account show
 ```
 
@@ -511,10 +544,10 @@ for env in dev staging production; do
 done
 ```
 
-### Erőforrás Takarítási Szkript
+### Erőforrás Takarító Szkript
 ```bash
 #!/bin/bash
-# Régi környezetek takarítása
+# Régi környezetek tisztítása
 azd env list | grep -E "(dev-|test-)" | while read env; do
     echo "Cleaning up $env"
     azd env select $env
@@ -552,16 +585,16 @@ az login
 # Környezet frissítésének kényszerítése
 azd env refresh
 
-# Minden szolgáltatás újratelepítése
+# Az összes szolgáltatás újratelepítése
 azd deploy
 
-# Telepítés állapotának ellenőrzése
+# Telepítési állapot ellenőrzése
 azd show --output json
 ```
 
-### Helyreállítási Parancsok
+### Helyreállító Parancsok
 ```bash
-# Hibás telepítésből való visszaállítás - tisztítás és újratelepítés
+# Helyreállítás sikertelen telepítésből - tisztítás és újratelepítés
 azd down --force --purge
 azd up
 
@@ -574,7 +607,7 @@ azd deploy
 
 ## 💡 Profi Tippek
 
-### Aliasok Gyorsabb Munkafolyamathoz
+### Gyorsabb Munkafolyamat Aliások
 ```bash
 # Add hozzá a .bashrc vagy .zshrc fájlodhoz
 alias azdup='azd up'
@@ -583,14 +616,14 @@ alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Függvényparancsikonsok
+### Funkció Gyorsparancsok
 ```bash
 # Gyors környezetváltás
 azd-env() {
     azd env select $1 && azd show
 }
 
-# Gyors telepítés monitoringgal
+# Gyors telepítés megfigyeléssel
 azd-deploy-watch() {
     azd deploy --service $1 && azd monitor --live
 }
@@ -604,15 +637,15 @@ azd-status() {
 }
 ```
 
-## 📖 Segítség és Dokumentáció
+## 📖 Súgó és Dokumentáció
 
-### Segítség Kérése
+### Súgó Kérése
 ```bash
 # Általános segítség
 azd --help
 azd help
 
-# Parancsspecifikus segítség
+# Parancs-specifikus segítség
 azd up --help
 azd env --help
 azd config --help
@@ -627,13 +660,13 @@ azd version --output json
 # Dokumentáció megnyitása a böngészőben
 azd docs
 
-# Sablondokumentáció megjelenítése
+# Sablon dokumentáció megjelenítése
 azd template show <template-name> --docs
 ```
 
 ---
 
-**Tipp**: Könyvjelzőzd ezt a gyorsútmutatót, és használd a `Ctrl+F` funkciót, hogy gyorsan megtaláld a szükséges parancsokat!
+**Tipp**: Könyvjelzőzd ezt a gyorssegédet, és használd a `Ctrl+F`-et a szükséges parancsok gyors megtalálásához!
 
 ---
 
@@ -643,11 +676,11 @@ azd template show <template-name> --docs
 
 ---
 
-> **💡 Szeretnéd az Azure parancssegítséget az editorodban?** Telepítsd a [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) bővítményt az `npx skills add microsoft/github-copilot-for-azure` paranccsal — 37 képesség AI-hoz, Foundry-hoz, telepítéshez, diagnosztikához és még sok máshoz.
+> **💡 Szeretnél Azure parancssegítséget a szerkesztődben?** Telepítsd a [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) kiegészítőt `npx skills add microsoft/github-copilot-for-azure` paranccsal — 37 képesség AI-hoz, Foundry-hoz, telepítéshez, diagnosztikához és még sok más.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Nyilatkozat**:  
-Ez a dokumentum az AI fordító szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum a saját nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt a professzionális emberi fordítás igénybevétele. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy félreértelmezésekért.
+**Jogi nyilatkozat**:
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Fontos információk esetén professzionális emberi fordítást javasolunk. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely ebből a fordításból ered.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

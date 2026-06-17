@@ -1,22 +1,22 @@
-# Provisioning Azure Resources with AZD
+# Zřizování zdrojů Azure pomocí AZD
 
-**Navigace kapitolami:**
-- **📚 Domovská stránka kurzu**: [AZD For Beginners](../../README.md)
-- **📖 Aktuální kapitola**: Kapitola 4 - Infrastructure as Code & Deployment
-- **⬅️ Předchozí**: [Deployment Guide](deployment-guide.md)
-- **➡️ Další kapitola**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
-- **🔧 Související**: [Chapter 6: Pre-Deployment Validation](../chapter-06-pre-deployment/capacity-planning.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD pro začátečníky](../../README.md)
+- **📖 Current Chapter**: Kapitola 4 - Infrastruktura jako kód & Nasazení
+- **⬅️ Previous**: [Průvodce nasazením](deployment-guide.md)
+- **➡️ Next Chapter**: [Kapitola 5: Víceagentní AI řešení](../../examples/retail-scenario.md)
+- **🔧 Related**: [Kapitola 6: Validace před nasazením](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## Úvod
 
-Tento komplexní průvodce pokrývá vše, co potřebujete vědět o provisioning a správě zdrojů Azure pomocí Azure Developer CLI. Naučte se implementovat principy Infrastructure as Code (IaC) od základního vytváření zdrojů až po pokročilé podnikově orientované infrastruktury pomocí Bicep, ARM šablon, Terraformu a Pulumi.
+Tento komplexní průvodce pokrývá vše, co potřebujete vědět o zřizování a správě zdrojů Azure pomocí Azure Developer CLI. Naučíte se implementovat vzory Infrastructure as Code (IaC) od základního vytváření zdrojů po pokročilé podnikové architektury infrastruktury pomocí Bicep, ARM šablon, Terraformu a Pulumi.
 
-## Výukové cíle
+## Cíle učení
 
 Po dokončení tohoto průvodce budete:
-- Ovládat principy Infrastructure as Code a provisioning Azure zdrojů
-- Rozumět různým IaC nástrojům podporovaným Azure Developer CLI
-- Navrhovat a implementovat Bicep šablony pro běžné aplikační architektury
+- Ovládat principy Infrastructure as Code a zřizování zdrojů Azure
+- Rozumět různým poskytovatelům IaC podporovaným Azure Developer CLI
+- Navrhovat a implementovat Bicep šablony pro běžné architektury aplikací
 - Konfigurovat parametry zdrojů, proměnné a nastavení specifická pro prostředí
 - Implementovat pokročilé vzory infrastruktury včetně sítí a zabezpečení
 - Spravovat životní cyklus zdrojů, aktualizace a řešení závislostí
@@ -24,22 +24,22 @@ Po dokončení tohoto průvodce budete:
 ## Výsledky učení
 
 Po dokončení budete schopni:
-- Navrhovat a provisionovat infrastrukturu Azure pomocí Bicep a ARM šablon
-- Konfigurovat složité multi-službové architektury s korektními závislostmi zdrojů
-- Implementovat parametrizované šablony pro různá prostředí a konfigurace
-- Řešit problémy s provisionováním infrastruktury a řešit neúspěšné nasazení
-- Aplikovat zásady Azure Well-Architected Framework při návrhu infrastruktury
-- Spravovat aktualizace infrastruktury a zavádět strategie verzování infrastruktury
+- Navrhovat a zřizovat infrastrukturu Azure pomocí Bicep a ARM šablon
+- Konfigurovat složité více-službové architektury se správnými závislostmi zdrojů
+- Implementovat parametrizované šablony pro více prostředí a konfigurací
+- Řešit problémy se zřizováním infrastruktury a opravovat chyby nasazení
+- Aplikovat principy Azure Well-Architected Framework při návrhu infrastruktury
+- Spravovat aktualizace infrastruktury a zavést strategie verzování infrastruktury
 
-## Přehled provisioning infrastruktury
+## Přehled zřizování infrastruktury
 
 Azure Developer CLI podporuje více poskytovatelů Infrastructure as Code (IaC):
-- **Bicep** (doporučeno) – jazyk specifický pro Azure
-- **ARM Templates** – JSON šablony pro Azure Resource Manager
-- **Terraform** – nástroj pro multi-cloud infrastrukturu
-- **Pulumi** – moderní infrastruktura jako kód s programovacími jazyky
+- **Bicep** (doporučeno) - Azure doménově specifický jazyk
+- **ARM Templates** - JSON založené šablony Azure Resource Manager
+- **Terraform** - Nástroj pro infrastrukturu napříč cloudy
+- **Pulumi** - Moderní infrastruktura jako kód v obyčejných programovacích jazycích
 
-## Pochopení Azure zdrojů
+## Porozumění zdrojům Azure
 
 ### Hierarchie zdrojů
 ```
@@ -49,16 +49,16 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### Běžné Azure služby pro aplikace
-- **Výpočetní služba**: App Service, Container Apps, Functions, Virtuální stroje
+### Běžné služby Azure pro aplikace
+- **Výpočet**: App Service, Container Apps, Functions, Virtual Machines
 - **Úložiště**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Síťování**: Virtuální síť, Application Gateway, CDN
+- **Síť**: Virtual Network, Application Gateway, CDN
 - **Zabezpečení**: Key Vault, Application Insights, Log Analytics
-- **AI/ML**: Cognitive Services, OpenAI, Machine Learning
+- **AI/ML**: Azure AI Services, Azure OpenAI, Azure Machine Learning
 
-## Šablony infrastruktury Bicep
+## Bicep šablony infrastruktury
 
-### Základní struktura Bicep šablony
+### Základní struktura šablony Bicep
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -199,6 +199,200 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
   }
 }
 ```
+
+## 🌐 Použití Terraformu s azd
+
+Bicep je výchozí volba azd, ale azd také podporuje **Terraform** — užitečné, pokud váš tým již standardizuje na Terraformu nebo spravujete infrastrukturu napříč cloudy. Pracovní postup azd (`azd up`, `azd provision`, `azd down`) je identický; mění se pouze jazyk infrastruktury a rozložení složek.
+
+### Řekněte azd, aby používal Terraform
+
+Přidejte sekci `infra` do `azure.yaml`, která ukazuje na poskytovatele Terraform:
+
+```yaml
+# azure.yaml
+name: my-terraform-app
+infra:
+  provider: terraform   # default is "bicep"
+  path: infra           # folder containing your .tf files
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### Struktura složky Terraform
+
+S poskytovatelem Terraform váš adresář `infra/` používá soubory `.tf` místo Bicep:
+
+```
+infra/
+├── main.tf            # resource definitions
+├── variables.tf       # input variables
+├── outputs.tf         # outputs azd reads back (endpoints, names)
+├── provider.tf        # azurerm/azurecaf providers + backend
+└── main.tfvars.json   # values azd injects per environment
+```
+
+### Minimální `main.tf`
+
+```hcl
+# infra/main.tf
+resource "azurerm_resource_group" "rg" {
+  name     = "rg-${var.environment_name}"
+  location = var.location
+  tags     = { "azd-env-name" = var.environment_name }
+}
+
+resource "azurerm_service_plan" "plan" {
+  name                = "plan-${var.environment_name}"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  os_type             = "Linux"
+  sku_name            = "B1"
+}
+```
+
+### Jak se azd připojuje k vašim Terraform výstupům
+
+azd čte Terraform **outputs**, aby zjistil vaše koncové body a zapojil hodnoty prostředí zpět do vaší aplikace. Jména výstupů jsou důležitá — azd hledá konkrétní:
+
+```hcl
+# infra/outputs.tf
+output "AZURE_LOCATION" {
+  value = var.location
+}
+
+output "SERVICE_WEB_ENDPOINT_URL" {
+  value = azurerm_linux_web_app.web.default_hostname
+}
+```
+
+> **Important:** azd uses the `azd-env-name` tag and `AZURE_*` outputs to track resources per environment. Always tag your resource group with `"azd-env-name" = var.environment_name` so `azd down` can find and remove everything.
+
+### Nasazení s Terraformem
+
+Příkazy jsou přesně stejné jako pro Bicep:
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd pod kapotou spouští 'terraform plan'
+azd up                    # zřizování + nasazení
+azd down --force          # zničí zdroje spravované Terraformem
+```
+
+> **Prerequisite:** Terraform must be installed and on your `PATH`. azd manages the Terraform *workflow* but does not install Terraform for you. For state, azd defaults to local state; for teams, configure a remote backend (for example, an Azure Storage backend) in `provider.tf`.
+
+Pro kompletní spustitelné startovací projekty založené na Terraformu prozkoumejte [Awesome AZD gallery](https://azure.github.io/awesome-azd/) a filtrovat podle Terraform, nebo si přečtěte oficiální [azd Terraform documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
+
+## 🧩 Použití Pulumi s azd
+
+Pokud váš tým píše infrastrukturu v obecném jazyce (TypeScript, Python, Go nebo C#) místo DSL, azd také podporuje **Pulumi**. Stejně jako u Terraformu zůstává pracovní postup `azd up` / `azd provision` / `azd down` nezměněn — liší se pouze nástroje pro infrastrukturu a struktura složek.
+
+### Řekněte azd, aby používal Pulumi
+
+```yaml
+# azure.yaml
+name: my-pulumi-app
+infra:
+  provider: pulumi      # default is "bicep"
+  path: infra           # folder containing your Pulumi program
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### Struktura složky Pulumi
+
+```
+infra/
+├── Pulumi.yaml          # project definition
+├── Pulumi.dev.yaml      # stack config (one per environment)
+├── index.ts             # your resource program (or __main__.py, main.go, etc.)
+├── package.json         # dependencies (for TypeScript)
+└── tsconfig.json
+```
+
+### Minimální `index.ts`
+
+```typescript
+import * as azure from "@pulumi/azure-native";
+import * as pulumi from "@pulumi/pulumi";
+
+const environmentName = pulumi.getStack();
+
+// Označte všechny zdroje, aby azd mohl sledovat jejich stav a odstranit je
+const tags = { "azd-env-name": environmentName };
+
+const rg = new azure.resources.ResourceGroup("rg", {
+  resourceGroupName: `rg-${environmentName}`,
+  tags,
+});
+
+// azd načítá tyto výstupy zpět do vašeho prostředí
+export const AZURE_LOCATION = rg.location;
+export const SERVICE_WEB_ENDPOINT_URL = "https://...";
+```
+
+### Stacks odpovídají prostředím azd
+
+Pulumi organizuje nasazení do zásobníků (stacks) a azd mapuje každé azd prostředí na Pulumi stack se stejným názvem. Když spustíte `azd env new staging`, azd vybere (nebo vytvoří) Pulumi stack `staging`. Platí stejná pravidla pro tagování `azd-env-name` a výstupy `AZURE_*`, takže `azd down` může najít a odstranit vše.
+
+### Nasazení s Pulumi
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd spouští 'pulumi preview' pod kapotou
+azd up                    # provisionování + nasazení
+azd down --force          # spouští 'pulumi destroy'
+```
+
+> **Prerequisite:** Pulumi must be installed and on your `PATH`, and you'll need a state backend (Pulumi Cloud or a self-managed backend such as Azure Blob Storage). azd manages the Pulumi *workflow*, not the install. See the official [azd Pulumi documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-pulumi-for-azd).
+
+## 🎯 Výběr hostitele pro vaši službu
+
+Pole `host` v `azure.yaml` rozhoduje, kde váš kód poběží. azd podporuje několik hostitelů — výběr správného má větší význam než volba jazyka infrastruktury. Zde je přehled vhodný pro začátečníky:
+
+| `host` value | Nejlepší pro | Proč |
+|--------------|--------------|------|
+| `appservice` | Tradiční webové aplikace a API | Nejjednodušší PaaS; kontejnery nejsou nutné |
+| `staticwebapp` | Front-end SPA (React, Vue, Angular) | Globální CDN + bezplatné SSL, vestavěná podpora API |
+| `function` | Událostmi řízené a serverless pracovní zátěže | Škálování na nulu, platba za vykonání |
+| `containerapp` | Kontajnerizované mikroslužby | Serverless kontejnery, škálování na nulu, vestavěný ingress |
+| `aks` | Potřeby složité orchestrace | Plná kontrola nad Kubernetes, když ji opravdu potřebujete |
+| `springapp` | Aplikace Java Spring Boot | Spravované prostředí Azure Spring Apps optimalizované pro Spring |
+
+### Kdy zvolit AKS
+
+**Azure Kubernetes Service (`host: aks`)** vám dává plnou sílu Kubernetes — vlastní controllery, service meshe, složité sítě a jemné plánování. Tato síla s sebou nese provozní režii: spravujete node pooly, upgrady a síťování clusteru.
+
+```yaml
+services:
+  api:
+    project: ./src/api
+    language: js
+    host: aks          # deploys to an existing AKS cluster
+```
+
+> **Start simpler if you can.** For most microservices, **Container Apps** gives you containers, autoscaling, and scale-to-zero without managing a cluster. Choose AKS only when you need Kubernetes-specific features.
+
+### Kdy použít Azure Spring Apps
+
+**Azure Spring Apps (`host: springapp`)** je spravované runtime prostředí vytvořené pro Spring Boot. Zajišťuje service discovery, config server a blue-green nasazení, takže týmy pracující se Springem nemusí provozovat vlastní infrastrukturu.
+
+```yaml
+services:
+  catalog:
+    project: ./src/catalog
+    language: java
+    host: springapp
+```
+
+> Use `springapp` when you have existing Spring Boot apps and want a runtime tuned for them. For new containerized Java apps without Spring-specific needs, `containerapp` is often the simpler choice.
 
 ## 🗃️ Provisioning databází
 
@@ -370,7 +564,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 
 ## 🌍 Síťování a konektivita
 
-### Konfigurace virtuální sítě
+### Konfigurace Virtual Network
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -563,7 +757,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 
 ## 🔧 Konfigurace specifické pro prostředí
 
-### Parametrické soubory pro různá prostředí
+### Soubory parametrů pro různá prostředí
 ```json
 // infra/main.parameters.dev.json
 {
@@ -617,7 +811,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Podmíněné provisionování zdrojů
+### Podmíněné zřizování zdrojů
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -649,9 +843,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Pokročilé vzory provisioningu
+## 🚀 Pokročilé vzory zřizování
 
-### Nasazení v několika regionech
+### Nasazení do více regionů
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -755,40 +949,40 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 Náhled a validace infrastruktury (NOVINKA)
+## 🧪 Náhled a validace infrastruktury (NOVÉ)
 
 ### Náhled změn infrastruktury před nasazením
 
-Funkce `azd provision --preview` umožňuje **simulovat provisioning infrastruktury** před skutečným nasazením zdrojů. Je to podobné jako `terraform plan` nebo `bicep what-if`, poskytuje **suchý běh (dry-run)**, jaké změny by byly provedeny ve vašem Azure prostředí.
+Funkce `azd provision --preview` vám umožní **simulovat zřizování infrastruktury** před skutečným nasazením zdrojů. Je to podobné duchu příkazům terraform plan nebo bicep what-if — poskytuje vám **suchý běh** toho, jaké změny by byly provedeny ve vašem Azure prostředí.
 
 #### 🛠️ Co dělá
 - **Analyzuje vaše IaC šablony** (Bicep nebo Terraform)
-- **Zobrazuje náhled změn zdrojů**: přidání, odstranění, aktualizace
-- **Neaplikuje změny** — je to jen pro čtení a bezpečné spustit
+- **Ukazuje náhled změn zdrojů**: přidání, odstranění, aktualizace
+- **Neaplikuje změny** — je pouze pro čtení a bezpečné spuštění
 
 #### Použití
 ```bash
 # Náhled změn infrastruktury před nasazením
 azd provision --preview
 
-# Náhled pro specifické prostředí
+# Náhled pro konkrétní prostředí
 azd provision --preview -e production
 ```
 
 Tento příkaz vám pomůže:
-- **Ověřit změny infrastruktury** před zavedením zdrojů
-- **Včas odhalit špatné konfigurace** v průběhu vývoje
-- **Bezpečně spolupracovat** v týmech
-- **Zajistit nejnižší možná oprávnění** bez překvapení
+- **Ověřit změny infrastruktury** před tím, než nasadíte zdroje
+- **Včas odhalit nesprávné konfigurace** v průběhu vývoje
+- **Bezpečně spolupracovat** v týmových prostředích
+- **Zajistit nasazení s nejmenšími právy** bez nepříjemných překvapení
 
-Je obzvlášť užitečný při:
-- Práci se složitými multi-službovými prostředími
-- Provádění změn v produkční infrastruktuře
-- Ověřování úprav šablon před schválením PR
-- Školení nových členů týmů na vzory infrastruktury
+Je zvláště užitečný když:
+- Pracujete se složitými více-službovými prostředími
+- Provádíte změny v produkční infrastruktuře
+- Ověřujete úpravy šablon před schválením PR
+- Školíte nové členy týmu v infrastrukturních vzorech
 
 ### Příklad výstupu náhledu
-Přesný výstup náhledu se liší podle poskytovatele a struktury projektu, ale výsledek by měl jasně identifikovat navrhované změny před jejich aplikací.
+Přesný náhled se liší podle poskytovatele a struktury projektu, ale výsledek by měl jasně identifikovat navrhované změny dříve, než se cokoli aplikuje.
 
 ```bash
 $ azd provision --preview
@@ -813,19 +1007,19 @@ The following resources will be destroyed:
 ✅ Preview completed successfully!
 ```
 
-## 🔄 Aktualizace a migrace zdrojů
+## �🔄 Aktualizace a migrace zdrojů
 
 ### Bezpečné aktualizace zdrojů
 ```bash
 # Nejprve si prohlédněte změny infrastruktury (DOPORUČENO)
 azd provision --preview
 
-# Proveďte změny po potvrzení náhledu
+# Aplikujte změny po potvrzení náhledu
 azd provision --confirm-with-no-prompt
 
-# Pro návrat zpět použijte Git k vrácení změn infrastruktury:
+# Pro obnovení stavu použijte Git k vrácení změn infrastruktury:
 git revert HEAD  # Vrátit poslední commit infrastruktury
-azd provision    # Aplikovat předchozí stav infrastruktury
+azd provision    # Aplikujte předchozí stav infrastruktury
 ```
 
 ### Migrace databází
@@ -916,27 +1110,27 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Další kroky
 
-- [Plánování před nasazením](../chapter-06-pre-deployment/capacity-planning.md) - Ověření dostupnosti zdrojů
+- [Plánování před nasazením](../chapter-06-pre-deployment/capacity-planning.md) - Ověřte dostupnost zdrojů
 - [Běžné problémy](../chapter-07-troubleshooting/common-issues.md) - Řešení problémů s infrastrukturou
-- [Průvodce laděním](../chapter-07-troubleshooting/debugging.md) - Ladění problémů s provisioningem
-- [Výběr SKU](../chapter-06-pre-deployment/sku-selection.md) - Výběr správných úrovní služeb
+- [Průvodce laděním](../chapter-07-troubleshooting/debugging.md) - Ladění problémů se zřizováním
+- [Výběr SKU](../chapter-06-pre-deployment/sku-selection.md) - Vyberte vhodné úrovně služeb
 
 ## Další zdroje
 
 - [Dokumentace Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Šablony Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Centrum architektury Azure](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-**Navigace**
-- **Předchozí lekce**: [Deployment Guide](deployment-guide.md)
-- **Další lekce**: [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md)
+**Navigation**
+- **Previous Lesson**: [Průvodce nasazením](deployment-guide.md)
+- **Next Lesson**: [Plánování před nasazením](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Prohlášení o vyloučení odpovědnosti**:  
-Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). I když usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho rodném jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo mylné výklady vyplývající z použití tohoto překladu.
+**Prohlášení o omezení odpovědnosti**:
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o co největší přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo nesprávné interpretace vzniklé použitím tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
