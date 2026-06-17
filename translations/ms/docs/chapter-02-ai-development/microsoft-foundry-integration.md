@@ -1,44 +1,44 @@
-# Microsoft Foundry Integrasi dengan AZD
+# Integrasi Microsoft Foundry dengan AZD
 
 **Navigasi Bab:**
-- **📚 Laman Utama Kursus**: [AZD Untuk Pemula](../../README.md)
-- **📖 Bab Semasa**: Bab 2 - Pembangunan Berfokus AI
+- **📚 Halaman Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 2 - Pembangunan AI-Pertama
 - **⬅️ Bab Sebelumnya**: [Bab 1: Projek Pertama Anda](../chapter-01-foundation/first-project.md)
 - **➡️ Seterusnya**: [Penghantaran Model AI](ai-model-deployment.md)
 - **🚀 Bab Seterusnya**: [Bab 3: Konfigurasi](../chapter-03-configuration/configuration.md)
 
 ## Gambaran Keseluruhan
 
-Panduan ini menunjukkan cara mengintegrasikan perkhidmatan Microsoft Foundry dengan Azure Developer CLI (AZD) untuk penghantaran aplikasi AI yang lebih lancar. Microsoft Foundry menyediakan platform komprehensif untuk membina, menghantar, dan mengurus aplikasi AI, manakala AZD memudahkan proses infrastruktur dan penghantaran.
+Panduan ini menunjukkan cara untuk mengintegrasikan perkhidmatan Microsoft Foundry dengan Azure Developer CLI (AZD) untuk penghantaran aplikasi AI yang lebih lancar. Microsoft Foundry menyediakan platform menyeluruh untuk membina, menghantar, dan mengurus aplikasi AI, manakala AZD memudahkan proses infrastruktur dan penghantaran.
 
-## Apakah Microsoft Foundry?
+## Apa itu Microsoft Foundry?
 
-Microsoft Foundry adalah platform bersatu Microsoft untuk pembangunan AI yang merangkumi:
+Microsoft Foundry ialah platform bersatu Microsoft untuk pembangunan AI yang merangkumi:
 
 - **Katalog Model**: Akses kepada model AI terkini
-- **Prompt Flow**: Pereka visual untuk aliran kerja AI
-- **Portal Microsoft Foundry**: Persekitaran pembangunan terintegrasi untuk aplikasi AI
-- **Pilihan Penghantaran**: Pelbagai pilihan hosting dan penyesuaian skala
-- **Keselamatan dan Keselamatan**: Ciri AI bertanggungjawab terbina dalam
+- **Prompt Flow**: Pereka aliran kerja AI secara visual
+- **Portal Microsoft Foundry**: Persekitaran pembangunan bersepadu untuk aplikasi AI
+- **Pilihan Penghantaran**: Pelbagai pilihan penghosan dan penskalaan
+- **Keselamatan dan Perlindungan**: Ciri-ciri AI bertanggungjawab terbina dalam
 
-## AZD + Microsoft Foundry: Lebih Baik Bersama-sama
+## AZD + Microsoft Foundry: Lebih Baik Bersama
 
 | Ciri | Microsoft Foundry | Manfaat Integrasi AZD |
 |---------|-----------------|------------------------|
-| **Penghantaran Model** | Penghantaran portal manual | Penghantaran automatik, boleh diulang |
-| **Infrastruktur** | Penyediaan klik-lewat | Infrastruktur sebagai Kod (Bicep) |
-| **Pengurusan Persekitaran** | Fokus persekitaran tunggal | Pelbagai persekitaran (dev/staging/prod) |
-| **Integrasi CI/CD** | Terhad | Sokongan GitHub Actions asli |
-| **Pengurusan Kos** | Pemantauan asas | Pengoptimuman kos khusus persekitaran |
+| **Penghantaran Model** | Penghantaran manual melalui portal | Penghantaran automatik dan berulang |
+| **Infrastruktur** | Penyediaan klik sahaja | Infrastruktur sebagai Kod (Bicep) |
+| **Pengurusan Persekitaran** | Fokus pada satu persekitaran | Pelbagai persekitaran (dev/staging/prod) |
+| **Integrasi CI/CD** | Terhad | Sokongan asli GitHub Actions |
+| **Pengurusan Kos** | Pemantauan asas | Pengoptimuman kos mengikut persekitaran |
 
 ## Prasyarat
 
 - Langganan Azure dengan kebenaran yang sesuai
 - Azure Developer CLI dipasang
-- Akses ke perkhidmatan Microsoft Foundry Models
-- Kefahaman asas tentang Microsoft Foundry
+- Akses kepada perkhidmatan Model Microsoft Foundry
+- Kefahaman asas mengenai Microsoft Foundry
 
-> **Garis asas AZD semasa:** Contoh ini disemak menggunakan `azd` `1.23.12`. Untuk aliran kerja ejen AI, gunakan pelepasan pratonton lanjutan dan semak versi yang dipasang sebelum memulakan.
+> **Garis Dasar AZD Semasa:** Contoh-contoh ini telah disemak menggunakan `azd` `1.23.12`. Untuk aliran kerja ejen AI, gunakan keluaran pratonton sambungan semasa dan periksa versi yang dipasang sebelum bermula.
 
 ## Corak Integrasi Teras
 
@@ -94,7 +94,7 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 
 ### Corak 2: Integrasi AI Search + RAG
 
-**Kes Penggunaan**: Hantar aplikasi generasi diperkuat pengambilan (RAG)
+**Kes Penggunaan**: Hantar aplikasi generasi yang diperkuatkan pengambilan (RAG)
 
 ```bicep
 // Azure AI Search
@@ -157,7 +157,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ## 🔧 Corak Konfigurasi
 
-### Penyediaan Pembolehubah Persekitaran
+### Tetapan Pembolehubah Persekitaran
 
 **Konfigurasi Pengeluaran:**
 ```bash
@@ -180,7 +180,7 @@ azd env set AZURE_SEARCH_SKU "standard"
 # Tetapan yang dioptimumkan kos untuk pembangunan
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set AZURE_SEARCH_SKU "basic"
-azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Peringkat percuma
+azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Tingkat percuma
 ```
 
 ### Konfigurasi Selamat dengan Key Vault
@@ -225,10 +225,10 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 AZD menyediakan sambungan yang menambah keupayaan khusus AI untuk bekerja dengan perkhidmatan Microsoft Foundry:
 
 ```bash
-# Pasang sambungan agen Foundry
+# Pasang sambungan ejen Foundry
 azd extension install azure.ai.agents
 
-# Pasang sambungan penyetelan halus
+# Pasang sambungan penalaan halus
 azd extension install azure.ai.finetune
 
 # Pasang sambungan model tersuai
@@ -237,43 +237,43 @@ azd extension install azure.ai.models
 # Senaraikan sambungan yang dipasang
 azd extension list --installed
 
-# Periksa versi sambungan agen yang dipasang sekarang
+# Periksa versi sambungan ejen yang sedang dipasang
 azd extension show azure.ai.agents
 ```
 
-Sambungan AI masih berkembang dengan cepat dalam pratonton. Jika arahan berkelakuan berbeza daripada yang ditunjukkan di sini, kemas kini sambungan yang berkaitan sebelum menyelesaikan masalah projek itu sendiri.
+Sambungan AI ini masih bergerak pantas dalam pratonton. Jika arahan berkelakuan berbeza daripada yang ditunjukkan di sini, naik taraf sambungan yang berkaitan sebelum menyelesaikan masalah projek itu sendiri.
 
-### Penghantaran Akhbar Ejen dengan `azd ai`
+### Penghantaran Ejen-Pertama dengan `azd ai`
 
-Jika anda mempunyai manifesto ejen, gunakan `azd ai agent init` untuk membina rangka kerja projek yang bersambung dengan Perkhidmatan Ejen Foundry:
+Jika anda mempunyai manifest ejen, gunakan `azd ai agent init` untuk membina projek yang bersambung dengan Perkhidmatan Ejen Foundry:
 
 ```bash
-# Inisialisasi dari manifest ejen
+# Inisialisasi dari manifes ejen
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# Sebarkan ke Azure
+# Menyebarkan ke Azure
 azd up
 ```
 
-Pelepasan pratonton terkini `azure.ai.agents` juga menambah sokongan inisialisasi berasaskan templat untuk `azd ai agent init`. Jika anda mengikuti sampel ejen terkini, semak bantuan sambungan untuk bendera tepat yang tersedia dalam versi anda.
+Keluaran pratonton terkini `azure.ai.agents` juga menambah sokongan inisialisasi berasaskan templat untuk `azd ai agent init`. Jika anda mengikuti contoh ejen yang lebih baru, semak bantuan sambungan untuk bendera tepat yang tersedia dalam versi yang dipasang anda.
 
-Lihat [Perintah CLI AZD AI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) untuk rujukan penuh perintah dan bendera.
+Lihat [Perintah CLI AZD AI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) untuk rujukan perintah penuh dan bendera.
 
 ### Penghantaran Perintah Tunggal
 
 ```bash
-# Deploy semuanya dengan satu arahan
+# Sebarkan segala-galanya dengan satu arahan
 azd up
 
-# Atau deploy secara berperingkat
+# Atau sebarkan secara berperingkat
 azd provision  # Infrastruktur sahaja
 azd deploy     # Aplikasi sahaja
 
-# Untuk deployment aplikasi AI yang berjalan lama dalam azd 1.23.11+
+# Untuk penempatan aplikasi AI jangka panjang dalam azd 1.23.11+
 azd deploy --timeout 1800
 ```
 
-### Penghantaran Khusus Persekitaran
+### Penghantaran Mengikut Persekitaran
 
 ```bash
 # Persekitaran pembangunan
@@ -290,7 +290,7 @@ azd env set AZURE_OPENAI_CAPACITY 100
 azd up
 ```
 
-## Pemantauan dan Kebolehlihatan
+## Pemantauan dan Kebolehamatan
 
 ### Integrasi Application Insights
 
@@ -355,7 +355,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 ## 🔐 Amalan Terbaik Keselamatan
 
-### Konfigurasi Identiti Terurus
+### Konfigurasi Identiti Terkelola
 
 ```bicep
 // Managed identity for the web application
@@ -402,7 +402,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ## Pengoptimuman Prestasi
 
-### Strategi Caching
+### Strategi Penyimpanan Kesan
 
 ```yaml
 # azure.yaml - Redis cache integration
@@ -432,7 +432,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 }
 ```
 
-### Konfigurasi Penyesuaian Auto
+### Konfigurasi Penskalaan Auto
 
 ```bicep
 // Container App with auto-scaling
@@ -466,9 +466,9 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-## Menyelesaikan Masalah Biasa
+## Penyelesaian Masalah Umum
 
-### Masalah 1: Kuota OpenAI Melebihi
+### Isu 1: Kuota OpenAI Melebihi Had
 
 **Gejala:**
 - Penghantaran gagal dengan ralat kuota
@@ -479,19 +479,19 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 # Semak penggunaan kuota semasa
 az cognitiveservices usage list --location eastus
 
-# Cuba wilayah yang berbeza
+# Cuba wilayah berbeza
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Kurangkan kapasiti sementara
+# Kurangkan kapasiti buat sementara waktu
 azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
 
-### Masalah 2: Kegagalan Pengesahan
+### Isu 2: Kegagalan Pengesahan
 
 **Gejala:**
-- Ralat 401/403 semasa memanggil perkhidmatan AI
+- Ralat 401/403 ketika memanggil perkhidmatan AI
 - Mesej "Akses ditolak"
 
 **Penyelesaian:**
@@ -499,14 +499,14 @@ azd deploy
 # Sahkan penugasan peranan
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Semak konfigurasi identiti yang diuruskan
+# Semak konfigurasi identiti yang diurus
 az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 
 # Sahkan akses Key Vault
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
-### Masalah 3: Isu Penghantaran Model
+### Isu 3: Masalah Penghantaran Model
 
 **Gejala:**
 - Model tidak tersedia dalam penghantaran
@@ -514,14 +514,14 @@ az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 
 **Penyelesaian:**
 ```bash
-# Senaraikan model yang tersedia mengikut rantau
+# Senaraikan model yang tersedia mengikut wilayah
 az cognitiveservices model list --location eastus
 
 # Kemas kini versi model dalam templat bicep
-# Periksa keperluan kapasiti model
+# Semak keperluan kapasiti model
 ```
 
-## Templat Contoh
+## Contoh Templat
 
 ### Aplikasi Sembang RAG (Python)
 
@@ -529,9 +529,9 @@ az cognitiveservices model list --location eastus
 
 **Perkhidmatan**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
 
-**Penerangan**: Sampel Azure AI paling popular — aplikasi sembang RAG siap produksi yang membolehkan anda bertanya soalan berdasarkan dokumen anda sendiri. Menggunakan GPT-4.1-mini untuk sembang, text-embedding-3-large untuk embeddings, dan Azure AI Search untuk pengambilan. Menyokong dokumen multimodal, input/output pertuturan, pengesahan Microsoft Entra, dan penjejakan Application Insights.
+**Penerangan**: Contoh Azure AI paling popular — aplikasi sembang RAG sedia produksi yang membolehkan anda bertanya soalan berdasarkan dokumen anda sendiri. Menggunakan GPT-4.1-mini untuk sembang, text-embedding-3-large untuk pengimbangan, dan Azure AI Search untuk pengambilan. Menyokong dokumen multimodal, input/output pertuturan, pengesahan Microsoft Entra, dan penjejakan Application Insights.
 
-**Mula Cepat**:
+**Mula Pantas**:
 ```bash
 azd init --template azure-search-openai-demo
 azd up
@@ -543,9 +543,9 @@ azd up
 
 **Perkhidmatan**: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
 
-**Penerangan**: Versi .NET/C# sampel sembang RAG Python. Dibina dengan ASP.NET Core Minimal API dan frontend Blazor WebAssembly. Termasuk sembang suara, sokongan penglihatan GPT-4o-mini, dan klien desktop/mobile Blazor Hybrid .NET MAUI teman.
+**Penerangan**: Setara .NET/C# bagi contoh sembang RAG Python. Dibina dengan ASP.NET Core Minimal API dan frontend Blazor WebAssembly. Termasuk sembang suara, sokongan visi GPT-4o-mini, dan klien desktop/mobile .NET MAUI Blazor Hybrid pengiring.
 
-**Mula Cepat**:
+**Mula Pantas**:
 ```bash
 azd init --template azure-search-openai-demo-csharp
 azd up
@@ -557,23 +557,23 @@ azd up
 
 **Perkhidmatan**: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
 
-**Penerangan**: Versi Java sampel sembang RAG menggunakan Langchain4J untuk orkestrasi AI. Menyokong seni bina acara berasaskan mikroservis, pelbagai strategi carian (teks, vektor, hibrid), muat naik dokumen dengan Azure Document Intelligence, dan penghantaran pada Azure Container Apps atau Azure Kubernetes Service.
+**Penerangan**: Versi Java bagi contoh sembang RAG menggunakan Langchain4J untuk orkestrasi AI. Menyokong seni bina mikroservis berasaskan acara, pelbagai strategi carian (teks, vektor, hibrid), muat naik dokumen dengan Azure Document Intelligence, dan penghantaran pada Azure Container Apps atau Azure Kubernetes Service.
 
-**Mula Cepat**:
+**Mula Pantas**:
 ```bash
 azd init --template azure-search-openai-demo-java
 azd up
 ```
 
-### Rakan Niaga Runcit Perusahaan dengan Azure AI Foundry
+### Copilot Runcit Enterprise dengan Microsoft Foundry
 
 **Repositori**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
-**Perkhidmatan**: Azure OpenAI + Azure AI Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
+**Perkhidmatan**: Azure OpenAI + Microsoft Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
 
-**Penerangan**: Rakan niaga runcit RAG hujung-ke-hujung menggunakan Azure AI Foundry dan Prompty. Chatbot peruncit Contoso Outdoor yang memberi jawapan berdasarkan katalog produk dan data pesanan pelanggan. Memperagakan aliran kerja GenAIOps penuh — prototaip dengan Prompty, nilai dengan penilai berasaskan AI, dan hantar melalui AZD ke Container Apps.
+**Penerangan**: Copilot RAG runcit hujung-ke-hujung menggunakan Microsoft Foundry dan Prompty. Chatbot peruncit Contoso Outdoor yang berpandukan katalog produk dan data pesanan pelanggan. Menunjukkan aliran kerja GenAIOps penuh — prototaip dengan Prompty, nilai dengan penilai dibantu AI, dan hantar melalui AZD ke Container Apps.
 
-**Mula Cepat**:
+**Mula Pantas**:
 ```bash
 azd init --template contoso-chat
 azd up
@@ -585,9 +585,9 @@ azd up
 
 **Perkhidmatan**: Azure OpenAI + Azure AI Agent Service + Bing Grounding + Azure AI Search + Azure Container Apps
 
-**Penerangan**: Sampel multi-ejen yang memperagakan orkestrasi ejen AI dengan Prompty. Menggunakan ejen penyelidikan (Bing Grounding dalam Azure AI Agent Service), ejen produk (Azure AI Search), ejen penulis, dan ejen editor untuk menghasilkan artikel yang diselidik dengan baik secara kolaboratif. Termasuk CI/CD dengan penilaian dalam GitHub Actions.
+**Penerangan**: Contoh multi-ejen yang menunjukkan orkestrasi ejen AI dengan Prompty. Menggunakan ejen penyelidikan (Bing Grounding dalam Azure AI Agent Service), ejen produk (Azure AI Search), ejen penulis, dan ejen editor untuk menghasilkan artikel berpenyelidikan baik secara kolaboratif. Termasuk CI/CD dengan penilaian dalam GitHub Actions.
 
-**Mula Cepat**:
+**Mula Pantas**:
 ```bash
 azd init --template contoso-creative-writer
 azd up
@@ -597,25 +597,25 @@ azd up
 
 **Repositori**: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
 
-**Perkhidmatan**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB untuk NoSQL + LangChain.js
+**Perkhidmatan**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB for NoSQL + LangChain.js
 
-**Penerangan**: Chatbot RAG sepenuhnya tanpa pelayan menggunakan LangChain.js dengan Azure Functions untuk API dan Azure Static Web Apps untuk hosting. Menggunakan Azure Cosmos DB sebagai storan vektor dan pangkalan data sejarah sembang. Menyokong pembangunan tempatan dengan Ollama untuk ujian tanpa kos.
+**Penerangan**: Chatbot RAG sepenuhnya tanpa pelayan menggunakan LangChain.js dengan Azure Functions untuk API dan Azure Static Web Apps untuk penghosan. Menggunakan Azure Cosmos DB sebagai stor vektor dan pangkalan data sejarah sembang. Menyokong pembangunan tempatan dengan Ollama untuk ujian tanpa kos.
 
-**Mula Cepat**:
+**Mula Pantas**:
 ```bash
 azd init --template serverless-chat-langchainjs
 azd up
 ```
 
-### Penyelesai Chat dengan Data Anda
+### Pecut Penyelesaian Sembang dengan Data Anda
 
 **Repositori**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
 
 **Perkhidmatan**: Azure OpenAI + Azure AI Search + Azure App Service + Azure Document Intelligence + Azure Functions + Azure Cosmos DB / PostgreSQL
 
-**Penerangan**: Penyelesai RAG gred perusahaan dengan portal admin untuk muat naik/pengurusan dokumen, pelbagai pilihan orkestrator (Semantic Kernel, LangChain, Prompt Flow), pertuturan-ke-teks, integrasi Microsoft Teams, dan pilihan backend PostgreSQL atau Cosmos DB. Direka sebagai titik permulaan yang boleh disesuaikan untuk senario RAG produksi.
+**Penerangan**: Pecut penyelesaian RAG tahap perusahaan dengan portal admin untuk muat naik/pengurusan dokumen, pelbagai pilihan pengaturcara (Semantic Kernel, LangChain, Prompt Flow), pertuturan-ke-teks, integrasi Microsoft Teams, dan pilihan backend PostgreSQL atau Cosmos DB. Direka sebagai titik permulaan boleh sesuaikan untuk senario RAG produksi.
 
-**Mula Cepat**:
+**Mula Pantas**:
 ```bash
 azd init --template chat-with-your-data-solution-accelerator
 azd up
@@ -625,40 +625,40 @@ azd up
 
 **Repositori**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
 
-**Perkhidmatan**: Azure OpenAI + Azure AI Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
+**Perkhidmatan**: Azure OpenAI + Microsoft Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
 
-**Penerangan**: Aplikasi rujukan untuk orkestrasi AI multi-ejen menggunakan tiga rangka kerja (LangChain.js, LlamaIndex.TS, dan Microsoft Agent Framework). Menampilkan pelayan MCP (Protokol Konteks Model) dalam empat bahasa yang dihantar sebagai Azure Container Apps tanpa pelayan dengan pemantauan OpenTelemetry.
+**Penerangan**: Aplikasi rujukan untuk orkestrasi AI multi-ejen menggunakan tiga rangka kerja (LangChain.js, LlamaIndex.TS, dan Microsoft Agent Framework). Ciri server MCP (Model Context Protocol) dalam empat bahasa dihantar sebagai Container Apps Azure tanpa pelayan dengan pemantauan OpenTelemetry.
 
-**Mula Cepat**:
+**Mula Pantas**:
 ```bash
 azd init --template azure-ai-travel-agents
 azd up
 ```
 
-### Azure AI Starter
+### Pemula Azure AI
 
 **Repositori**: [azd-ai-starter](https://github.com/Azure/azd-ai-starter)
 
 **Perkhidmatan**: Perkhidmatan Azure AI + Azure OpenAI
 
-**Penerangan**: Templat Bicep minimal yang menghantar perkhidmatan Azure AI dengan model pembelajaran mesin yang dikonfigurasi. Titik permulaan ringan apabila anda hanya memerlukan infrastruktur Azure AI disediakan tanpa tumpukan aplikasi penuh.
+**Penerangan**: Templat Bicep minimal yang menghantar perkhidmatan Azure AI dengan model pembelajaran mesin yang dikonfigurasikan. Titik permulaan ringan apabila anda hanya perlu infrastruktur Azure AI disediakan tanpa tumpukan aplikasi penuh.
 
-**Mula Cepat**:
+**Mula Pantas**:
 ```bash
 azd init --template azd-ai-starter
 azd up
 ```
 
-> **Lihat lebih banyak templat**: Lawati [Galeri Templat AZD AI Hebat](https://azure.github.io/awesome-azd/?tags=ai) untuk lebih 80+ templat AZD khusus AI merentas bahasa dan senario.
+> **Lihat lebih banyak templat**: Lawati [Galeri Templat AI AZD Hebat](https://azure.github.io/awesome-azd/?tags=ai) untuk 80+ templat AZD khusus AI merentas bahasa dan senario.
 
 ## Langkah Seterusnya
 
-1. **Cuba Contoh**: Mulakan dengan templat pra-bina yang sesuai dengan kes penggunaan anda
-2. **Sesuaikan Mengikut Keperluan**: Ubah infrastruktur dan kod aplikasi
-3. **Tambah Pemantauan**: Laksanakan kebolehlihatan menyeluruh
+1. **Cuba Contoh-contoh**: Mulakan dengan templat pra-bina yang sepadan dengan kes penggunaan anda
+2. **Sesuaikan untuk Keperluan Anda**: Ubah suai infrastruktur dan kod aplikasi
+3. **Tambah Pemantauan**: Laksanakan kebolehamatan menyeluruh
 4. **Optimumkan Kos**: Laraskan konfigurasi mengikut bajet anda
 5. **Amankan Penghantaran Anda**: Laksanakan corak keselamatan perusahaan
-6. **Skala ke Pengeluaran**: Tambah ciri pelbagai wilayah dan ketersediaan tinggi
+6. **Skala ke Produksi**: Tambah ciri multi-wilayah dan kebolehpercayaan tinggi
 
 ## 🎯 Latihan Praktikal
 
@@ -690,14 +690,14 @@ azd down --force --purge
 
 **Kriteria Kejayaan:**
 - [ ] Penghantaran selesai tanpa ralat kuota
-- [ ] Boleh akses antara muka sembang dalam pelayar
-- [ ] Boleh bertanya soalan dan menerima jawapan berkuasa AI
-- [ ] Application Insights memaparkan data telemetri
+- [ ] Boleh mengakses antara muka sembang dalam pelayar
+- [ ] Boleh bertanya soalan dan dapatkan respons bertenaga AI
+- [ ] Application Insights menunjukkan data telemetri
 - [ ] Berjaya membersihkan sumber
 
 **Anggaran Kos**: $5-10 untuk 30 minit ujian
 
-### Latihan 2: Konfigurasi Penghantaran Berbilang Model (45 minit)
+### Latihan 2: Konfigurasikan Penghantaran Model Pelbagai (45 minit)
 **Matlamat**: Hantar pelbagai model AI dengan konfigurasi berbeza
 
 ```bash
@@ -746,22 +746,22 @@ resource embedding 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01'
 }
 EOF
 
-# Lancarkan dan sahkan
+# Pasang dan sahkan
 azd provision
 azd show
 ```
 
 **Kriteria Kejayaan:**
-- [ ] Beberapa model dihantar dengan berjaya
-- [ ] Tetapan kapasiti berbeza diaplikasi
+- [ ] Pelbagai model dihantar dengan berjaya
+- [ ] Tetapan kapasiti berbeza diterapkan
 - [ ] Model boleh diakses melalui API
-- [ ] Boleh panggil kedua-dua model dari aplikasi
+- [ ] Boleh memanggil kedua-dua model dari aplikasi
 
 ### Latihan 3: Laksanakan Pemantauan Kos (20 minit)
 **Matlamat**: Sediakan amaran bajet dan penjejakan kos
 
 ```bash
-# Tambah amaran bajet ke Bicep
+# Tambah amaran belanjawan ke Bicep
 cat >> infra/main.bicep << 'EOF'
 
 resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
@@ -792,7 +792,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 EOF
 
-# Lancarkan amaran bajet
+# Sebarkan amaran belanjawan
 azd provision
 
 # Semak kos semasa
@@ -800,20 +800,20 @@ az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-d
 ```
 
 **Kriteria Kejayaan:**
-- [ ] Amaran bajet dicipta di Azure
-- [ ] Pemberitahuan e-mel dikonfigurasi
-- [ ] Boleh melihat data kos dalam Portal Azure
-- [ ] Ambang bajet ditetapkan dengan betul
+- [ ] Amaran bajet dibuat dalam Azure
+- [ ] Notifikasi emel dikonfigurasikan
+- [ ] Boleh melihat data kos dalam Azure Portal
+- [ ] Ambang bajet ditetapkan dengan sesuai
 
 ## 💡 Soalan Lazim
 
 <details>
-<summary><strong>Bagaimana saya mengurangkan kos Model Microsoft Foundry semasa pembangunan?</strong></summary>
+<summary><strong>Bagaimana saya mengurangkan kos Microsoft Foundry Models semasa pembangunan?</strong></summary>
 
-1. **Gunakan Tier Percuma**: Microsoft Foundry Models menawarkan 50,000 token/bulan percuma
-2. **Kurangkan Kapasiti**: Tetapkan kapasiti kepada 10 TPM bukan 30+ untuk dev
-3. **Gunakan azd down**: Nyahperuntukkan sumber apabila tidak sedang membangun aktif
-4. **Cache Respons**: Laksanakan cache Redis untuk pertanyaan berulang
+1. **Gunakan Tahap Percuma**: Microsoft Foundry Models menawarkan 50,000 token/bulan percuma
+2. **Kurangkan Kapasiti**: Tetapkan kapasiti kepada 10 TPM daripada 30+ untuk pembangunan
+3. **Gunakan azd down**: Nyahperuntukkan sumber apabila tidak sedang membangun secara aktif
+4. **Simpan Respons dalam Cache**: Laksanakan cache Redis untuk pertanyaan berulang
 5. **Gunakan Kejuruteraan Prompt**: Kurangkan penggunaan token dengan prompt yang cekap
 ```bash
 # Konfigurasi pembangunan
@@ -823,32 +823,32 @@ azd env set ENABLE_RESPONSE_CACHE true
 </details>
 
 <details>
-<summary><strong>Apakah perbezaan antara Microsoft Foundry Models dan OpenAI API?</strong></summary>
+<summary><strong>Apa perbezaan antara Microsoft Foundry Models dan OpenAI API?</strong></summary>
 
 **Microsoft Foundry Models**:
 - Keselamatan dan pematuhan perusahaan
 - Integrasi rangkaian peribadi
 - Jaminan SLA
 - Pengesahan identiti terurus
-- Kuota lebih tinggi tersedia
+- Kuota yang lebih tinggi tersedia
 
 **OpenAI API**:
-- Akses lebih pantas ke model baru
-- Persediaan lebih mudah
-- Halangan kemasukan lebih rendah
+- Akses lebih cepat ke model baru
+- Penetapan yang lebih mudah
+- Halangan kemasukan yang lebih rendah
 - Hanya internet awam
 
-Untuk aplikasi pengeluaran, **Microsoft Foundry Models adalah disyorkan**.
+Untuk aplikasi produksi, **Microsoft Foundry Models adalah disyorkan**.
 </details>
 
 <details>
-<summary><strong>Bagaimana saya mengendalikan ralat kuota Microsoft Foundry Models yang melebihi had?</strong></summary>
+<summary><strong>Bagaimana saya mengendalikan ralat kuota Microsoft Foundry Models yang telah melebihi?</strong></summary>
 
 ```bash
 # Semak kuota semasa
 az cognitiveservices usage list --location eastus2
 
-# Cuba kawasan berbeza
+# Cuba wilayah yang berbeza
 azd env set AZURE_LOCATION westus2
 azd up
 
@@ -856,15 +856,15 @@ azd up
 azd env set AZURE_OPENAI_CAPACITY 10
 azd provision
 
-# Minta kenaikan kuota
-# Pergi ke Azure Portal > Kuota > Minta kenaikan
+# Mohon peningkatan kuota
+# Pergi ke Portal Azure > Kuota > Mohon peningkatan
 ```
 </details>
 
 <details>
 <summary><strong>Bolehkah saya menggunakan data saya sendiri dengan Microsoft Foundry Models?</strong></summary>
 
-Ya! Gunakan **Azure AI Search** untuk RAG (Generasi Bertambah Dapatkan):
+Ya! Gunakan **Azure AI Search** untuk RAG (Retrieval Augmented Generation):
 
 ```yaml
 # azure.yaml
@@ -883,7 +883,7 @@ Lihat templat [azure-search-openai-demo](https://github.com/Azure-Samples/azure-
 <summary><strong>Bagaimana saya mengamankan titik akhir model AI?</strong></summary>
 
 **Amalan Terbaik**:
-1. Gunakan Managed Identity (tanpa kekunci API)
+1. Gunakan Identiti Terurus (tanpa kekunci API)
 2. Aktifkan Titik Akhir Peribadi
 3. Konfigurasikan kumpulan keselamatan rangkaian
 4. Laksanakan had kadar
@@ -912,7 +912,7 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 - **Microsoft Foundry Discord**: [saluran #Azure](https://discord.gg/microsoft-azure)
 - **AZD GitHub**: [Isu dan perbincangan](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Dokumentasi rasmi](https://learn.microsoft.com/azure/ai-studio/)
-- **Agent Skills**: [Kemahiran Microsoft Foundry di skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Pasang kemahiran ejen Azure + Foundry dalam penyunting anda dengan `npx skills add microsoft/github-copilot-for-azure`
+- **Kemahiran Ejen**: [Kemahiran Microsoft Foundry di skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Pasang kemahiran ejen Azure + Foundry dalam editor anda dengan `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
@@ -920,14 +920,14 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 - **📚 Halaman Kursus**: [AZD Untuk Pemula](../../README.md)
 - **📖 Bab Semasa**: Bab 2 - Pembangunan AI-Pertama
 - **⬅️ Bab Sebelumnya**: [Bab 1: Projek Pertama Anda](../chapter-01-foundation/first-project.md)
-- **➡️ Seterusnya**: [Penempatan Model AI](ai-model-deployment.md)
+- **➡️ Seterusnya**: [Penghantaran Model AI](ai-model-deployment.md)
 - **🚀 Bab Seterusnya**: [Bab 3: Konfigurasi](../chapter-03-configuration/configuration.md)
 
-**Perlu Bantuan?** Sertai perbincangan komuniti kami atau buka isu dalam repositori. Komuniti Azure AI + AZD sedia membantu anda berjaya!
+**Perlukan Bantuan?** Sertai perbincangan komuniti kami atau buka isu dalam repositori. Komuniti Azure AI + AZD sedia membantu anda berjaya!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk mencapai ketepatan, sila maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan profesional oleh manusia adalah disyorkan. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+**Penafian**:
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan oleh manusia profesional adalah disyorkan. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

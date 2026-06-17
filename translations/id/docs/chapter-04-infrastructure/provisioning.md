@@ -1,7 +1,7 @@
 # Penyediaan Sumber Daya Azure dengan AZD
 
 **Navigasi Bab:**
-- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📚 Beranda Kursus**: [AZD untuk Pemula](../../README.md)
 - **📖 Bab Saat Ini**: Bab 4 - Infrastruktur sebagai Kode & Penyebaran
 - **⬅️ Sebelumnya**: [Panduan Penyebaran](deployment-guide.md)
 - **➡️ Bab Berikutnya**: [Bab 5: Solusi AI Multi-Agen](../../examples/retail-scenario.md)
@@ -9,39 +9,39 @@
 
 ## Pendahuluan
 
-Panduan komprehensif ini mencakup segala hal yang perlu Anda ketahui tentang penyediaan dan pengelolaan sumber daya Azure menggunakan Azure Developer CLI. Pelajari cara menerapkan pola Infrastruktur sebagai Kode (IaC) mulai dari pembuatan sumber daya dasar hingga arsitektur infrastruktur skala perusahaan yang canggih menggunakan Bicep, ARM templates, Terraform, dan Pulumi.
+Panduan komprehensif ini mencakup segala yang perlu Anda ketahui tentang penyediaan dan pengelolaan sumber daya Azure menggunakan Azure Developer CLI. Pelajari cara mengimplementasikan pola Infrastructure as Code (IaC) mulai dari pembuatan sumber daya dasar hingga arsitektur infrastruktur tingkat perusahaan yang canggih menggunakan Bicep, template ARM, Terraform, dan Pulumi.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan panduan ini, Anda akan:
-- Menguasai prinsip Infrastruktur sebagai Kode dan penyediaan sumber daya Azure
+- Menguasai prinsip Infrastructure as Code (IaC) dan penyediaan sumber daya Azure
 - Memahami berbagai penyedia IaC yang didukung oleh Azure Developer CLI
-- Merancang dan menerapkan template Bicep untuk arsitektur aplikasi umum
+- Merancang dan mengimplementasikan template Bicep untuk arsitektur aplikasi umum
 - Mengonfigurasi parameter sumber daya, variabel, dan pengaturan khusus lingkungan
 - Menerapkan pola infrastruktur lanjutan termasuk jaringan dan keamanan
-- Mengelola siklus hidup sumber daya, pembaruan, dan resolusi dependensi
+- Mengelola siklus hidup sumber daya, pembaruan, dan penyelesaian dependensi
 
 ## Hasil Pembelajaran
 
-Setelah penyelesaian, Anda akan mampu:
-- Merancang dan menyediakan infrastruktur Azure menggunakan Bicep dan ARM templates
-- Mengonfigurasi arsitektur multi-layanan kompleks dengan dependensi sumber daya yang tepat
-- Menerapkan template yang diparameterisasi untuk berbagai lingkungan dan konfigurasi
+Setelah menyelesaikan, Anda akan mampu:
+- Merancang dan menyediakan infrastruktur Azure menggunakan Bicep dan template ARM
+- Mengonfigurasi arsitektur multi-layanan yang kompleks dengan dependensi sumber daya yang tepat
+- Menerapkan template yang diparameterkan untuk beberapa lingkungan dan konfigurasi
 - Memecahkan masalah penyediaan infrastruktur dan menyelesaikan kegagalan penyebaran
 - Menerapkan prinsip Azure Well-Architected Framework pada desain infrastruktur
-- Mengelola pembaruan infrastruktur dan menerapkan strategi versioning infrastruktur
+- Mengelola pembaruan infrastruktur dan menerapkan strategi versi infrastruktur
 
 ## Ikhtisar Penyediaan Infrastruktur
 
 Azure Developer CLI mendukung beberapa penyedia Infrastructure as Code (IaC):
-- **Bicep** (direkomendasikan) - bahasa spesifik domain Azure
+- **Bicep** (disarankan) - bahasa khusus domain Azure
 - **ARM Templates** - template Azure Resource Manager berbasis JSON
 - **Terraform** - alat infrastruktur multi-cloud
 - **Pulumi** - Infrastruktur sebagai kode modern dengan bahasa pemrograman
 
 ## Memahami Sumber Daya Azure
 
-### Hirarki Sumber Daya
+### Hierarki Sumber Daya
 ```
 Azure Account
 └── Subscriptions
@@ -54,7 +54,7 @@ Azure Account
 - **Penyimpanan**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
 - **Jaringan**: Virtual Network, Application Gateway, CDN
 - **Keamanan**: Key Vault, Application Insights, Log Analytics
-- **AI/ML**: Cognitive Services, OpenAI, Machine Learning
+- **AI/ML**: Azure AI Services, Azure OpenAI, Azure Machine Learning
 
 ## Template Infrastruktur Bicep
 
@@ -179,7 +179,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### Pembuatan Sumber Daya Bersyarat
+#### Pembuatan Sumber Daya Kondisional
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -199,6 +199,200 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
   }
 }
 ```
+
+## 🌐 Menggunakan Terraform dengan azd
+
+Bicep adalah bawaan azd, tetapi azd juga mendukung **Terraform**—berguna jika tim Anda sudah menstandarisasikannya atau Anda mengelola infrastruktur multi-cloud. Alur kerja azd (`azd up`, `azd provision`, `azd down`) identik; hanya bahasa infrastruktur dan tata letak folder yang berubah.
+
+### Beritahu azd untuk menggunakan Terraform
+
+Tambahkan bagian `infra` ke `azure.yaml` yang menunjuk ke penyedia Terraform:
+
+```yaml
+# azure.yaml
+name: my-terraform-app
+infra:
+  provider: terraform   # default is "bicep"
+  path: infra           # folder containing your .tf files
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### Tata letak folder Terraform
+
+Dengan penyedia Terraform, folder `infra/` Anda menggunakan berkas `.tf` alih-alih Bicep:
+
+```
+infra/
+├── main.tf            # resource definitions
+├── variables.tf       # input variables
+├── outputs.tf         # outputs azd reads back (endpoints, names)
+├── provider.tf        # azurerm/azurecaf providers + backend
+└── main.tfvars.json   # values azd injects per environment
+```
+
+### `main.tf` minimal
+
+```hcl
+# infra/main.tf
+resource "azurerm_resource_group" "rg" {
+  name     = "rg-${var.environment_name}"
+  location = var.location
+  tags     = { "azd-env-name" = var.environment_name }
+}
+
+resource "azurerm_service_plan" "plan" {
+  name                = "plan-${var.environment_name}"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  os_type             = "Linux"
+  sku_name            = "B1"
+}
+```
+
+### Bagaimana azd terhubung ke output Terraform Anda
+
+azd membaca **outputs** Terraform untuk mengetahui endpoint Anda dan untuk menghubungkan nilai lingkungan kembali ke aplikasi Anda. Nama output penting—azd mencari nama-nama tertentu:
+
+```hcl
+# infra/outputs.tf
+output "AZURE_LOCATION" {
+  value = var.location
+}
+
+output "SERVICE_WEB_ENDPOINT_URL" {
+  value = azurerm_linux_web_app.web.default_hostname
+}
+```
+
+> **Penting:** azd menggunakan tag `azd-env-name` dan output `AZURE_*` untuk melacak sumber daya per lingkungan. Selalu beri tag pada resource group Anda dengan `"azd-env-name" = var.environment_name` sehingga `azd down` dapat menemukan dan menghapus semuanya.
+
+### Menyebarkan dengan Terraform
+
+Perintahnya persis sama seperti Bicep:
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd menjalankan 'terraform plan' di balik layar
+azd up                    # penyediaan + penyebaran
+azd down --force          # menghancurkan sumber daya yang dikelola oleh Terraform
+```
+
+> **Prasyarat:** Terraform harus terinstal dan ada di `PATH` Anda. azd mengelola *workflow* Terraform tetapi tidak menginstal Terraform untuk Anda. Untuk state, azd default ke state lokal; untuk tim, konfigurasikan backend jarak jauh (misalnya, backend Azure Storage) di `provider.tf`.
+
+Untuk starter berbasis Terraform yang lengkap dan dapat dijalankan, telusuri [Awesome AZD gallery](https://azure.github.io/awesome-azd/) dan saring untuk Terraform, atau lihat dokumentasi resmi [azd Terraform](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
+
+## 🧩 Menggunakan Pulumi dengan azd
+
+Jika tim Anda menulis infrastruktur dalam bahasa tujuan umum (TypeScript, Python, Go, atau C#) daripada DSL, azd juga mendukung **Pulumi**. Seperti dengan Terraform, alur kerja `azd up` / `azd provision` / `azd down` tidak berubah—hanya alat infrastruktur dan tata letak folder yang berbeda.
+
+### Beritahu azd untuk menggunakan Pulumi
+
+```yaml
+# azure.yaml
+name: my-pulumi-app
+infra:
+  provider: pulumi      # default is "bicep"
+  path: infra           # folder containing your Pulumi program
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### Tata letak folder Pulumi
+
+```
+infra/
+├── Pulumi.yaml          # project definition
+├── Pulumi.dev.yaml      # stack config (one per environment)
+├── index.ts             # your resource program (or __main__.py, main.go, etc.)
+├── package.json         # dependencies (for TypeScript)
+└── tsconfig.json
+```
+
+### `index.ts` minimal
+
+```typescript
+import * as azure from "@pulumi/azure-native";
+import * as pulumi from "@pulumi/pulumi";
+
+const environmentName = pulumi.getStack();
+
+// Tandai setiap sumber daya agar azd dapat melacak dan membersihkannya
+const tags = { "azd-env-name": environmentName };
+
+const rg = new azure.resources.ResourceGroup("rg", {
+  resourceGroupName: `rg-${environmentName}`,
+  tags,
+});
+
+// azd membaca keluaran ini kembali ke lingkungan Anda
+export const AZURE_LOCATION = rg.location;
+export const SERVICE_WEB_ENDPOINT_URL = "https://...";
+```
+
+### Stacks dipetakan ke lingkungan azd
+
+Pulumi mengorganisir penyebaran menjadi **stacks**, dan azd memetakan setiap lingkungan azd ke stack Pulumi dengan nama yang sama. Ketika Anda menjalankan `azd env new staging`, azd memilih (atau membuat) stack Pulumi `staging`. Aturan penandaan `azd-env-name` dan output `AZURE_*` yang sama berlaku, sehingga `azd down` dapat menemukan dan menghapus semuanya.
+
+### Menyebarkan dengan Pulumi
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd menjalankan 'pulumi preview' di balik layar
+azd up                    # penyediaan + penyebaran
+azd down --force          # menjalankan 'pulumi destroy'
+```
+
+> **Prasyarat:** Pulumi harus terinstal dan ada di `PATH` Anda, dan Anda memerlukan backend state (Pulumi Cloud atau backend self-managed seperti Azure Blob Storage). azd mengelola *workflow* Pulumi, bukan pemasangannya. Lihat dokumentasi resmi [azd Pulumi](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-pulumi-for-azd).
+
+## 🎯 Memilih Host untuk Layanan Anda
+
+Field `host` di `azure.yaml` menentukan di mana kode Anda dijalankan. azd mendukung beberapa host—memilih yang tepat lebih penting daripada bahasa infrastruktur. Berikut perbandingan ramah pemula:
+
+| `host` value | Terbaik untuk | Mengapa |
+|--------------|----------|-----|
+| `appservice` | Aplikasi web tradisional dan API | PaaS paling sederhana; tidak membutuhkan kontainer |
+| `staticwebapp` | SPA front-end (React, Vue, Angular) | CDN global + SSL gratis, dukungan API bawaan |
+| `function` | Beban kerja event-driven dan serverless | Skala-ke-nol, bayar per eksekusi |
+| `containerapp` | Mikrolayanan berbasis kontainer | Kontainer serverless, skala-ke-nol, ingress bawaan |
+| `aks` | Kebutuhan orkestrasi kompleks | Kontrol Kubernetes penuh ketika benar-benar dibutuhkan |
+| `springapp` | Aplikasi Java Spring Boot | Runtime Azure Spring Apps terkelola yang disesuaikan untuk Spring |
+
+### Kapan harus memilih AKS
+
+**Azure Kubernetes Service (`host: aks`)** memberi Anda kekuatan penuh Kubernetes—custom controllers, service mesh, jaringan kompleks, dan penjadwalan granular. Kekuatan itu datang dengan overhead operasional: Anda mengelola node pool, upgrade, dan jaringan klaster.
+
+```yaml
+services:
+  api:
+    project: ./src/api
+    language: js
+    host: aks          # deploys to an existing AKS cluster
+```
+
+> **Mulailah lebih sederhana jika memungkinkan.** Untuk sebagian besar mikrolayanan, **Container Apps** memberi Anda kontainer, autoscaling, dan skala-ke-nol tanpa mengelola klaster. Pilih AKS hanya ketika Anda membutuhkan fitur spesifik Kubernetes.
+
+### Kapan menggunakan Azure Spring Apps
+
+**Azure Spring Apps (`host: springapp`)** adalah runtime terkelola yang dibuat khusus untuk Spring Boot. Ini menangani service discovery, config server, dan blue-green deployment sehingga tim Java tidak perlu menjalankan infrastruktur mereka sendiri.
+
+```yaml
+services:
+  catalog:
+    project: ./src/catalog
+    language: java
+    host: springapp
+```
+
+> Gunakan `springapp` ketika Anda memiliki aplikasi Spring Boot yang sudah ada dan menginginkan runtime yang disesuaikan untuk itu. Untuk aplikasi Java berbasis kontainer baru tanpa kebutuhan spesifik Spring, `containerapp` sering kali merupakan pilihan yang lebih sederhana.
 
 ## 🗃️ Penyediaan Basis Data
 
@@ -342,7 +536,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Konfigurasi Identitas Terkelola
+### Konfigurasi Managed Identity
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -370,7 +564,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 
 ## 🌍 Jaringan dan Konektivitas
 
-### Konfigurasi Jaringan Virtual
+### Konfigurasi Virtual Network
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -561,9 +755,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Konfigurasi Khusus Lingkungan
+## 🔧 Konfigurasi Spesifik Lingkungan
 
-### Berkas Parameter untuk Berbagai Lingkungan
+### Berkas Parameter untuk Lingkungan yang Berbeda
 ```json
 // infra/main.parameters.dev.json
 {
@@ -617,7 +811,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Penyediaan Sumber Daya Bersyarat
+### Penyediaan Sumber Daya Kondisional
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -651,7 +845,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 
 ## 🚀 Pola Penyediaan Lanjutan
 
-### Penyebaran Multi-Region
+### Penyebaran Multi-Wilayah
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -759,12 +953,12 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ### Pratinjau Perubahan Infrastruktur Sebelum Penyebaran
 
-Fitur `azd provision --preview` memungkinkan Anda **mensimulasikan penyediaan infrastruktur** sebelum benar-benar menerapkan sumber daya. Ini mirip dengan `terraform plan` atau `bicep what-if`, memberi Anda tampilan **dry-run** tentang perubahan yang akan dibuat di lingkungan Azure Anda.
+Fitur `azd provision --preview` memungkinkan Anda **mensimulasikan penyediaan infrastruktur** sebelum benar-benar menyebarkan sumber daya. Ini mirip dengan `terraform plan` atau `bicep what-if`, memberi Anda tampilan **dry-run** tentang perubahan apa yang akan dibuat di lingkungan Azure Anda.
 
 #### 🛠️ Apa yang Dilakukannya
 - **Menganalisis template IaC Anda** (Bicep atau Terraform)
 - **Menampilkan pratinjau perubahan sumber daya**: penambahan, penghapusan, pembaruan
-- **Tidak menerapkan perubahan** — bersifat baca-saja dan aman dijalankan
+- **Tidak menerapkan perubahan** — ini bersifat hanya-baca dan aman dijalankan
 
 #### Kasus Penggunaan
 ```bash
@@ -779,16 +973,16 @@ Perintah ini membantu Anda:
 - **Memvalidasi perubahan infrastruktur** sebelum mengkomit sumber daya
 - **Mendeteksi konfigurasi yang salah lebih awal** dalam siklus pengembangan
 - **Berkolaborasi dengan aman** dalam lingkungan tim
-- **Memastikan penyebaran dengan hak istimewa minimum** tanpa kejutan
+- **Memastikan penyebaran dengan prinsip least-privilege** tanpa kejutan
 
 Ini sangat berguna ketika:
 - Bekerja dengan lingkungan multi-layanan yang kompleks
 - Melakukan perubahan pada infrastruktur produksi
 - Memvalidasi modifikasi template sebelum persetujuan PR
-- Melatih anggota tim baru mengenai pola infrastruktur
+- Melatih anggota tim baru pada pola infrastruktur
 
 ### Contoh Output Pratinjau
-Output pratinjau yang tepat bervariasi menurut penyedia dan struktur proyek, tetapi hasilnya harus mengidentifikasi perubahan yang diusulkan dengan jelas sebelum apa pun diterapkan.
+Output pratinjau yang tepat bervariasi menurut penyedia dan struktur proyek, tetapi hasilnya seharusnya mengidentifikasi perubahan yang diusulkan sebelum apa pun diterapkan.
 
 ```bash
 $ azd provision --preview
@@ -820,11 +1014,11 @@ The following resources will be destroyed:
 # Pratinjau perubahan infrastruktur terlebih dahulu (DISARANKAN)
 azd provision --preview
 
-# Terapkan perubahan setelah pratinjau dikonfirmasi
+# Terapkan perubahan setelah konfirmasi pratinjau
 azd provision --confirm-with-no-prompt
 
-# Untuk rollback, gunakan Git untuk membatalkan perubahan infrastruktur:
-git revert HEAD  # Batalkan commit infrastruktur terakhir
+# Untuk rollback, gunakan Git untuk mengembalikan perubahan infrastruktur:
+git revert HEAD  # Kembalikan commit infrastruktur terakhir
 azd provision    # Terapkan status infrastruktur sebelumnya
 ```
 
@@ -918,7 +1112,7 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 - [Perencanaan Pra-penyebaran](../chapter-06-pre-deployment/capacity-planning.md) - Memvalidasi ketersediaan sumber daya
 - [Masalah Umum](../chapter-07-troubleshooting/common-issues.md) - Memecahkan masalah infrastruktur
-- [Panduan Debugging](../chapter-07-troubleshooting/debugging.md) - Men-debug masalah penyediaan
+- [Panduan Debugging](../chapter-07-troubleshooting/debugging.md) - Debug masalah penyediaan
 - [Pemilihan SKU](../chapter-06-pre-deployment/sku-selection.md) - Memilih tingkatan layanan yang sesuai
 
 ## Sumber Daya Tambahan
@@ -926,7 +1120,7 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 - [Dokumentasi Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Template Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
 - [Pusat Arsitektur Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Kerangka Kerja Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
@@ -937,6 +1131,6 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya mencapai ketepatan, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan terjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+**Penafian**:
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk mencapai akurasi, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang sah. Untuk informasi penting, disarankan menggunakan terjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

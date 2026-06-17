@@ -1,63 +1,63 @@
-# Configuration Guide
+# Panduan Konfigurasi
 
 **Chapter Navigation:**
-- **📚 Course Home**: [AZD Untuk Pemula](../../README.md)
-- **📖 Current Chapter**: Chapter 3 - Configuration & Authentication
-- **⬅️ Previous**: [Your First Project](first-project.md)
-- **➡️ Next**: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
-- **🚀 Next Chapter**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
+- **📚 Course Home**: [AZD untuk Pemula](../../README.md)
+- **📖 Current Chapter**: Bab 3 - Konfigurasi & Otentikasi
+- **⬅️ Previous**: [Proyek Pertama Anda](first-project.md)
+- **➡️ Next**: [Panduan Penyebaran](../chapter-04-infrastructure/deployment-guide.md)
+- **🚀 Next Chapter**: [Bab 4: Infrastruktur sebagai Kode](../chapter-04-infrastructure/deployment-guide.md)
 
-## Introduction
+## Pendahuluan
 
-Panduan komprehensif ini mencakup semua aspek mengonfigurasi Azure Developer CLI untuk alur kerja pengembangan dan penyebaran yang optimal. Anda akan mempelajari tentang hirarki konfigurasi, manajemen lingkungan, metode otentikasi, dan pola konfigurasi lanjutan yang memungkinkan penyebaran Azure yang efisien dan aman.
+Panduan komprehensif ini mencakup semua aspek mengonfigurasi Azure Developer CLI untuk alur kerja pengembangan dan penyebaran yang optimal. Anda akan mempelajari hierarki konfigurasi, manajemen lingkungan, metode otentikasi, dan pola konfigurasi lanjutan yang memungkinkan penyebaran Azure yang efisien dan aman.
 
-## Learning Goals
+## Tujuan Pembelajaran
 
 Pada akhir pelajaran ini, Anda akan:
-- Menguasai hirarki konfigurasi azd dan memahami bagaimana pengaturan diprioritaskan
-- Mengonfigurasi pengaturan global dan spesifik-proyek secara efektif
+- Menguasai hierarki konfigurasi azd dan memahami bagaimana pengaturan diprioritaskan
+- Mengonfigurasi pengaturan global dan spesifik proyek secara efektif
 - Mengelola beberapa lingkungan dengan konfigurasi berbeda
-- Menerapkan pola otentikasi dan otorisasi yang aman
+- Mengimplementasikan pola otentikasi dan otorisasi yang aman
 - Memahami pola konfigurasi lanjutan untuk skenario kompleks
 
-## Learning Outcomes
+## Hasil Pembelajaran
 
 Setelah menyelesaikan pelajaran ini, Anda akan mampu:
 - Mengonfigurasi azd untuk alur kerja pengembangan yang optimal
 - Menyiapkan dan mengelola beberapa lingkungan penyebaran
-- Menerapkan praktik manajemen konfigurasi yang aman
-- Memecahkan masalah terkait konfigurasi
+- Mengimplementasikan praktik manajemen konfigurasi yang aman
+- Menyelesaikan masalah terkait konfigurasi
 - Menyesuaikan perilaku azd untuk kebutuhan organisasi tertentu
 
 Panduan komprehensif ini mencakup semua aspek mengonfigurasi Azure Developer CLI untuk alur kerja pengembangan dan penyebaran yang optimal.
 
-## Understanding AI Agents in an azd Project
+## Memahami Agen AI dalam Proyek azd
 
-Jika Anda baru mengenal agen AI, berikut cara sederhana memahaminya dalam dunia azd.
+Jika Anda baru dengan agen AI, berikut cara sederhana memikirkannya dalam dunia azd.
 
-### What Is an Agent?
+### Apa itu Agen?
 
-Sebuah agen adalah perangkat lunak yang dapat menerima permintaan, berpikir tentangnya, dan mengambil tindakan—seringkali dengan memanggil model AI, mencari data, atau memanggil layanan lain. Dalam proyek azd, agen hanyalah sebuah **layanan** di samping frontend web atau backend API Anda.
+Agen adalah potongan perangkat lunak yang dapat menerima permintaan, berpikir tentangnya, dan mengambil tindakan—sering kali dengan memanggil model AI, mencari data, atau memanggil layanan lain. Dalam proyek azd, agen hanyalah satu **layanan** di samping frontend web atau backend API Anda.
 
-### How Agents Fit Into the azd Project Structure
+### Bagaimana Agen Terintegrasi ke Dalam Struktur Proyek azd
 
-Sebuah proyek azd terdiri dari tiga lapisan: **infrastructure**, **code**, dan **configuration**. Agen terhubung ke lapisan-lapisan ini dengan cara yang sama seperti layanan lainnya:
+Proyek azd terdiri dari tiga lapisan: **infrastruktur**, **kode**, dan **konfigurasi**. Agen terhubung ke lapisan-lapisan ini dengan cara yang sama seperti layanan lain:
 
-| Lapisan | Apa yang Dilakukan untuk Aplikasi Tradisional | Apa yang Dilakukan untuk Agen |
+| Lapisan | Fungsi untuk Aplikasi Tradisional | Fungsi untuk Agen |
 |-------|-------------------------------------|---------------------------|
-| **Infrastructure** (`infra/`) | Menyediakan sebuah aplikasi web dan database | Menyediakan endpoint model AI, indeks pencarian, atau host agen |
-| **Code** (`src/`) | Berisi kode sumber frontend dan API Anda | Berisi logika agen dan definisi prompt |
-| **Configuration** (`azure.yaml`) | Mendaftar layanan Anda dan target hostingnya | Mendaftarkan agen Anda sebagai layanan, menunjuk ke kode dan hostnya |
+| **Infrastruktur** (`infra/`) | Menyediakan aplikasi web dan basis data | Menyediakan endpoint model AI, indeks pencarian, atau host agen |
+| **Kode** (`src/`) | Berisi kode sumber frontend dan API Anda | Berisi logika agen Anda dan definisi prompt |
+| **Konfigurasi** (`azure.yaml`) | Mencantumkan layanan Anda dan target hostingnya | Mencantumkan agen Anda sebagai layanan, menunjuk ke kode dan hostnya |
 
-### The Role of `azure.yaml`
+### Peran `azure.yaml`
 
-Anda tidak perlu menghafal sintaks sekarang. Secara konseptual, `azure.yaml` adalah file tempat Anda memberi tahu azd: *"Berikut layanan yang membentuk aplikasi saya, dan ini tempat menemukan kode mereka."*
+Anda tidak perlu menghafal sintaksnya sekarang. Secara konsep, `azure.yaml` adalah file tempat Anda memberi tahu azd: "Ini adalah layanan yang membentuk aplikasi saya, dan ini adalah lokasi kode mereka."
 
-Ketika proyek Anda menyertakan agen AI, `azure.yaml` hanya mencantumkan agen tersebut sebagai salah satu layanan. azd kemudian tahu untuk menyediakan infrastruktur yang tepat (seperti endpoint Microsoft Foundry Models atau Container App untuk menghosting agen) dan menerapkan kode agen Anda—seperti halnya untuk aplikasi web atau API.
+Ketika proyek Anda mencakup agen AI, `azure.yaml` cukup mencantumkan agen tersebut sebagai salah satu layanan. azd kemudian tahu untuk menyediakan infrastruktur yang tepat (seperti endpoint Microsoft Foundry Models atau Container App untuk menampung agen) dan menyebarkan kode agen Anda—sama seperti untuk aplikasi web atau API.
 
-Ini berarti tidak ada yang secara fundamental baru untuk dipelajari. Jika Anda memahami bagaimana azd mengelola layanan web, Anda sudah memahami bagaimana ia mengelola agen.
+Ini berarti tidak ada yang benar-benar baru untuk dipelajari. Jika Anda memahami bagaimana azd mengelola layanan web, Anda sudah memahami bagaimana ia mengelola agen.
 
-## Configuration Hierarchy
+## Hirarki Konfigurasi
 
 azd menggunakan sistem konfigurasi hirarkis:
 1. **Command-line flags** (prioritas tertinggi)
@@ -66,7 +66,7 @@ azd menggunakan sistem konfigurasi hirarkis:
 4. **Global user configuration** (`~/.azd/config.json`)
 5. **Default values** (prioritas terendah)
 
-## Global Configuration
+## Konfigurasi Global
 
 ### Setting Global Defaults
 ```bash
@@ -89,23 +89,23 @@ azd config unset defaults.location
 ### Common Global Settings
 ```bash
 # Preferensi pengembangan
-azd config set alpha.enable true                    # Aktifkan fitur alfa
+azd config set alpha.enable true                    # Aktifkan fitur alpha
 azd config set telemetry.enabled false             # Nonaktifkan telemetri
 azd config set output.format json                  # Atur format keluaran
 
 # Pengaturan keamanan
 azd config set auth.useAzureCliCredential true     # Gunakan Azure CLI untuk otentikasi
-azd config set tls.insecure false                  # Tegakkan verifikasi TLS
+azd config set tls.insecure false                  # Terapkan verifikasi TLS
 
-# Penalaan kinerja
-azd config set provision.parallelism 5             # Pembuatan sumber daya paralel
-azd config set deploy.timeout 30m                  # Waktu tunggu penyebaran
+# Penyetelan kinerja
+azd config set provision.parallelism 5             # Pembuatan sumber daya secara paralel
+azd config set deploy.timeout 30m                  # Batas waktu penyebaran
 ```
 
-## 🏗️ Project Configuration
+## 🏗️ Konfigurasi Proyek
 
-### azure.yaml Structure
-The `azure.yaml` file is the heart of your azd project:
+### Struktur azure.yaml
+File `azure.yaml` adalah inti dari proyek azd Anda:
 
 ```yaml
 # Minimum configuration
@@ -181,9 +181,9 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Service Configuration Options
+### Opsi Konfigurasi Layanan
 
-#### Host Types
+#### Jenis Host
 ```yaml
 services:
   web-static:
@@ -202,7 +202,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Language-Specific Settings
+#### Pengaturan Spesifik Bahasa
 ```yaml
 services:
   node-app:
@@ -226,9 +226,9 @@ services:
     startCommand: java -jar target/app.jar
 ```
 
-## 🌟 Environment Management
+## 🌟 Manajemen Lingkungan
 
-### Creating Environments
+### Membuat Lingkungan
 ```bash
 # Buat lingkungan baru
 azd env new development
@@ -240,8 +240,8 @@ azd env new staging --location "westus2"
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### Environment Configuration
-Each environment has its own configuration in `.azure/<env-name>/config.json`:
+### Konfigurasi Lingkungan
+Setiap lingkungan memiliki konfigurasi sendiri di `.azure/<env-name>/config.json`:
 
 ```json
 {
@@ -263,9 +263,9 @@ Each environment has its own configuration in `.azure/<env-name>/config.json`:
 }
 ```
 
-### Environment Variables
+### Variabel Lingkungan
 ```bash
-# Tetapkan variabel lingkungan spesifik
+# Tetapkan variabel spesifik lingkungan
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
@@ -286,8 +286,8 @@ azd env get-values | grep DEBUG
 # (seharusnya tidak mengembalikan apa pun)
 ```
 
-### Environment Templates
-Create `.azure/env.template` for consistent environment setup:
+### Template Lingkungan
+Buat `.azure/env.template` untuk penyiapan lingkungan yang konsisten:
 ```bash
 # Variabel yang diperlukan
 AZURE_SUBSCRIPTION_ID=
@@ -303,22 +303,67 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 Authentication Configuration
+### Berbagi Lingkungan Antar Tim
 
-### Azure CLI Integration
+Saat lebih dari satu orang bekerja pada sebuah proyek, Anda perlu sepakat tentang **apa yang dibawa oleh repo dan apa yang tetap lokal**. azd menyimpan setiap lingkungan di bawah folder `.azure/`, dan tidak semuanya harus dikomit.
+
+**Apa yang ada di `.azure/`:**
+
+```
+.azure/
+├── config.json              # which env is currently selected (local)
+└── <env-name>/
+    ├── config.json          # subscription, location, resource IDs
+    └── .env                 # environment variables (may contain secrets!)
+```
+
+**Apa yang harus di-gitignore.** `.gitignore` default azd sudah mengecualikan `.azure/`. Biarkan seperti itu—file `.env` dapat berisi rahasia, dan ID sumber daya spesifik untuk siapa pun yang mem-provision mereka. Setiap anggota tim membuat **mereka sendiri** lingkungan secara lokal:
+
+```bash
+# Setiap pengembang menjalankan ini sekali untuk mendapatkan lingkungan terisolasi mereka sendiri
+azd env new dev-alice
+azd up
+```
+
+**Beralih antar lingkungan.** Pengembang yang mengelola beberapa lingkungan memilih lingkungan aktif sebelum menjalankan perintah:
+
+```bash
+azd env list                 # lihat semua lingkungan lokal dan mana yang default
+azd env select staging       # jadikan 'staging' sebagai lingkungan aktif
+azd env get-values           # konfirmasi bahwa Anda mengarah ke yang benar
+```
+
+**Memberikan default non-rahasia kepada tim.** Komit template (seperti `.azure/env.template` di atas) supaya semua orang tahu variabel mana yang harus diisi—tetapi jangan pernah mengompit nilai yang sudah terisi. Rekan baru menyalin template dan mengisi milik mereka sendiri.
+
+**Lingkungan di CI/CD.** Pipeline tidak membaca folder `.azure/` lokal Anda. Sebagai gantinya, sediakan nilai lingkungan sebagai variabel/secret pipeline, dan azd membacanya dari environment proses:
+
+```bash
+# Di CI, azd membaca ini dari variabel lingkungan, bukan dari .azure/
+export AZURE_ENV_NAME=production
+export AZURE_LOCATION=eastus2
+export AZURE_SUBSCRIPTION_ID=<sub-id>
+azd provision --no-prompt
+azd deploy --no-prompt
+```
+
+> **Aturan praktis:** kode infrastruktur (`infra/`, `azure.yaml`) dibagikan di Git; *status lingkungan dan rahasia* (`.azure/`) bersifat per-pengembang dan per-pipeline. `azd pipeline config` mengatur variabel pipeline untuk Anda secara otomatis.
+
+## 🔐 Konfigurasi Otentikasi
+
+### Integrasi Azure CLI
 ```bash
 # Gunakan kredensial Azure CLI (bawaan)
 azd config set auth.useAzureCliCredential true
 
-# Masuk dengan tenant tertentu
+# Masuk dengan penyewa tertentu
 az login --tenant <tenant-id>
 
 # Tetapkan langganan bawaan
 az account set --subscription <subscription-id>
 ```
 
-### Service Principal Authentication
-For CI/CD pipelines:
+### Otentikasi Service Principal
+Untuk pipeline CI/CD:
 ```bash
 # Tetapkan variabel lingkungan
 export AZURE_CLIENT_ID="your-client-id"
@@ -330,18 +375,18 @@ azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
-### Managed Identity
-Untuk lingkungan yang dihosting di Azure:
+### Identitas Terkelola
+Untuk lingkungan yang di-hosting Azure:
 ```bash
 # Aktifkan autentikasi identitas terkelola
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ Infrastructure Configuration
+## 🏗️ Konfigurasi Infrastruktur
 
-### Bicep Parameters
-Configure infrastructure parameters in `infra/main.parameters.json`:
+### Parameter Bicep
+Konfigurasikan parameter infrastruktur di `infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -363,8 +408,8 @@ Configure infrastructure parameters in `infra/main.parameters.json`:
 }
 ```
 
-### Terraform Configuration
-For Terraform projects, configure in `infra/terraform.tfvars`:
+### Konfigurasi Terraform
+Untuk proyek Terraform, konfigurasikan di `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -372,9 +417,9 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 Deployment Configuration
+## 🚀 Konfigurasi Penyebaran
 
-### Build Configuration
+### Konfigurasi Build
 ```yaml
 # In azure.yaml
 services:
@@ -397,7 +442,7 @@ services:
       PYTHONPATH: src
 ```
 
-### Docker Configuration
+### Konfigurasi Docker
 ```yaml
 services:
   api:
@@ -413,9 +458,9 @@ services:
 ```
 Contoh `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
-## 🔧 Advanced Configuration
+## 🔧 Konfigurasi Lanjutan
 
-### Custom Resource Naming
+### Penamaan Sumber Daya Kustom
 ```bash
 # Tetapkan konvensi penamaan
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -423,7 +468,7 @@ azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
 ```
 
-### Network Configuration
+### Konfigurasi Jaringan
 ```yaml
 # In azure.yaml
 infra:
@@ -434,7 +479,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### Monitoring Configuration
+### Konfigurasi Pemantauan
 ```yaml
 # In azure.yaml
 monitoring:
@@ -446,9 +491,9 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Environment-Specific Configurations
+## 🎯 Konfigurasi Spesifik Lingkungan
 
-### Development Environment
+### Lingkungan Pengembangan
 ```bash
 # .azure/pengembangan/.env
 DEBUG=true
@@ -457,7 +502,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Staging Environment
+### Lingkungan Staging
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -466,7 +511,7 @@ ENABLE_MONITORING=true
 USE_PRODUCTION_APIS=true
 ```
 
-### Production Environment
+### Lingkungan Produksi
 ```bash
 # .azure/production/.env
 DEBUG=false
@@ -475,9 +520,9 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Configuration Validation
+## 🔍 Validasi Konfigurasi
 
-### Validate Configuration
+### Validasi Konfigurasi
 ```bash
 # Periksa sintaks konfigurasi
 azd config validate
@@ -489,8 +534,8 @@ azd env get-values
 azd provision --dry-run
 ```
 
-### Configuration Scripts
-Create validation scripts in `scripts/`:
+### Skrip Konfigurasi
+Buat skrip validasi di `scripts/`:
 
 ```bash
 #!/bin/bash
@@ -513,9 +558,9 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Best Practices
+## 🎓 Praktik Terbaik
 
-### 1. Use Environment Variables
+### 1. Gunakan Variabel Lingkungan
 ```yaml
 # Good: Use environment variables
 database:
@@ -526,7 +571,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organize Configuration Files
+### 2. Atur Berkas Konfigurasi
 ```
 .azure/
 ├── config.json              # Global project config
@@ -542,16 +587,16 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Version Control Considerations
+### 3. Pertimbangan Kontrol Versi
 ```bash
 # .gitignore
 .azure/*/config.json         # Konfigurasi lingkungan (berisi ID sumber daya)
 .azure/*/.env               # Variabel lingkungan (mungkin berisi rahasia)
-.env                        # Berkas lingkungan lokal
+.env                        # File lingkungan lokal
 ```
 
-### 4. Configuration Documentation
-Document your configuration in `CONFIG.md`:
+### 4. Dokumentasi Konfigurasi
+Dokumentasikan konfigurasi Anda di `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -566,11 +611,11 @@ Document your configuration in `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
-## 🎯 Hands-On Practice Exercises
+## 🎯 Latihan Praktik
 
-### Exercise 1: Multi-Environment Configuration (15 minutes)
+### Latihan 1: Konfigurasi Multi-Lingkungan (15 menit)
 
-**Goal**: Create and configure three environments with different settings
+**Tujuan**: Buat dan konfigurasikan tiga lingkungan dengan pengaturan yang berbeda
 
 ```bash
 # Buat lingkungan pengembangan
@@ -597,22 +642,22 @@ azd env select staging && azd env get-values
 azd env select production && azd env get-values
 ```
 
-**Success Criteria:**
+**Kriteria Keberhasilan:**
 - [ ] Tiga lingkungan berhasil dibuat
 - [ ] Setiap lingkungan memiliki konfigurasi unik
-- [ ] Dapat berpindah antar lingkungan tanpa kesalahan
+- [ ] Dapat beralih antar lingkungan tanpa kesalahan
 - [ ] `azd env list` menampilkan ketiga lingkungan
 
-### Exercise 2: Secret Management (10 minutes)
+### Latihan 2: Manajemen Rahasia (10 menit)
 
-**Goal**: Practice secure configuration with sensitive data
+**Tujuan**: Latihan konfigurasi aman dengan data sensitif
 
 ```bash
-# Tetapkan rahasia (tidak ditampilkan dalam keluaran)
+# Atur rahasia (tidak ditampilkan dalam keluaran)
 azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 
-# Tetapkan konfigurasi non-rahasia
+# Atur konfigurasi non-rahasia
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
@@ -623,18 +668,18 @@ azd env get-values
 azd env get DB_PASSWORD  # Seharusnya menampilkan nilai sebenarnya
 ```
 
-**Success Criteria:**
+**Kriteria Keberhasilan:**
 - [ ] Rahasia disimpan tanpa ditampilkan di terminal
-- [ ] `azd env get-values` menunjukkan rahasia yang disamarkan
-- [ ] Perintah individual `azd env get <SECRET_NAME>` mengambil nilai sebenarnya
+- [ ] `azd env get-values` menampilkan rahasia yang disensor
+- [ ] Perintah `azd env get <SECRET_NAME>` mengambil nilai sebenarnya
 
-## Next Steps
+## Langkah Selanjutnya
 
-- [Your First Project](first-project.md) - Terapkan konfigurasi dalam praktik
-- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Gunakan konfigurasi untuk penyebaran
-- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - Konfigurasi siap produksi
+- [Proyek Pertama Anda](first-project.md) - Terapkan konfigurasi dalam praktik
+- [Panduan Penyebaran](../chapter-04-infrastructure/deployment-guide.md) - Gunakan konfigurasi untuk penyebaran
+- [Penyediaan Sumber Daya](../chapter-04-infrastructure/provisioning.md) - Konfigurasi siap produksi
 
-## References
+## Referensi
 
 - [Referensi Konfigurasi azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [Skema azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
@@ -643,15 +688,15 @@ azd env get DB_PASSWORD  # Seharusnya menampilkan nilai sebenarnya
 ---
 
 **Chapter Navigation:**
-- **📚 Course Home**: [AZD Untuk Pemula](../../README.md)
-- **📖 Current Chapter**: Chapter 3 - Configuration & Authentication
-- **⬅️ Previous**: [Your First Project](first-project.md)
-- **➡️ Next Chapter**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
-- **Next Lesson**: [Your First Project](first-project.md)
+- **📚 Course Home**: [AZD untuk Pemula](../../README.md)
+- **📖 Current Chapter**: Bab 3 - Konfigurasi & Otentikasi
+- **⬅️ Previous**: [Proyek Pertama Anda](first-project.md)
+- **➡️ Next Chapter**: [Bab 4: Infrastruktur sebagai Kode](../chapter-04-infrastructure/deployment-guide.md)
+- **Next Lesson**: [Proyek Pertama Anda](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk mencapai ketepatan, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber otoritatif. Untuk informasi penting, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau salah tafsir yang timbul dari penggunaan terjemahan ini.
+**Penafian**:
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk mencapai akurasi, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang sah. Untuk informasi penting, disarankan menggunakan terjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

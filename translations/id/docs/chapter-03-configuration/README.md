@@ -6,17 +6,17 @@
 
 ## Ikhtisar
 
-Bab ini membahas konfigurasi lingkungan, pola otentikasi, dan praktik terbaik keamanan untuk penyebaran Azure Developer CLI.
+This chapter covers environment configuration, authentication patterns, and security best practices for Azure Developer CLI deployments.
 
-> Tervalidasi terhadap `azd 1.23.12` pada Maret 2026.
+> Divalidasi terhadap `azd 1.25.6` pada Juni 2026.
 
 ## Tujuan Pembelajaran
 
-Dengan menyelesaikan bab ini, Anda akan:
+By completing this chapter, you will:
 - Menguasai hierarki konfigurasi AZD
 - Mengelola beberapa lingkungan (dev, staging, prod)
 - Menerapkan otentikasi aman dengan identitas terkelola
-- Mengonfigurasi pengaturan spesifik lingkungan
+- Mengonfigurasi pengaturan khusus lingkungan
 
 ---
 
@@ -37,7 +37,7 @@ azd env new dev
 azd env new staging
 azd env new prod
 
-# Beralih lingkungan
+# Beralih antar lingkungan
 azd env select prod
 
 # Atur variabel lingkungan
@@ -52,19 +52,19 @@ azd env get-values
 
 ## 🔧 Hierarki Konfigurasi
 
-AZD menerapkan pengaturan dalam urutan ini (yang kemudian menggantikan yang sebelumnya):
+AZD menerapkan pengaturan dalam urutan ini (yang lebih akhir menimpa yang sebelumnya):
 
 1. **Nilai default** (tertanam dalam template)
 2. **azure.yaml** (konfigurasi proyek)
 3. **Variabel lingkungan** (`azd env set`)
-4. **Flag baris perintah** (`--location eastus`)
+4. **Opsi baris perintah** (`--location eastus`)
 
 ---
 
-## 🔐 Praktik Terbaik Keamanan
+## 🔐 Praktik Keamanan Terbaik
 
 ```bash
-# Gunakan identitas terkelola (disarankan)
+# Gunakan identitas terkelola (direkomendasikan)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
 # Periksa status autentikasi AZD
@@ -100,5 +100,5 @@ az login
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau salah tafsir yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk mencapai akurasi, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang sah. Untuk informasi penting, disarankan menggunakan terjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

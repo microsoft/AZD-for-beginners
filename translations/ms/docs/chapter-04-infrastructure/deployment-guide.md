@@ -1,104 +1,105 @@
-# Panduan Penyebaran - Menguasai Penyebaran AZD
+# Panduan Penggunaan - Menguasai Penempatan AZD
 
 **Navigasi Bab:**
 - **📚 Laman Utama Kursus**: [AZD Untuk Pemula](../../README.md)
-- **📖 Bab Semasa**: Bab 4 - Infrastruktur sebagai Kod & Penyebaran
+- **📖 Bab Semasa**: Bab 4 - Infrastruktur sebagai Kod & Penempatan
 - **⬅️ Bab Sebelumnya**: [Bab 3: Konfigurasi](../chapter-03-configuration/configuration.md)
 - **➡️ Seterusnya**: [Penyediaan Sumber](provisioning.md)
+- **🧩 Juga dalam bab ini**: [Mencipta Templat Sendiri](custom-templates.md)
 - **🚀 Bab Seterusnya**: [Bab 5: Penyelesaian AI Pelbagai Ejen](../../examples/retail-scenario.md)
 
 ## Pengenalan
 
-Panduan menyeluruh ini meliputi segala yang anda perlu tahu mengenai penyebaran aplikasi menggunakan Azure Developer CLI, dari penyebaran asas menggunakan satu arahan hingga senario produksi lanjutan dengan kaitan khusus, pelbagai persekitaran, dan integrasi CI/CD. Kuasai kitaran hayat penyebaran sepenuhnya dengan contoh praktikal dan amalan terbaik.
+Panduan komprehensif ini merangkumi segala yang anda perlu tahu tentang melaksanakan aplikasi menggunakan Azure Developer CLI, dari penempatan asas dengan satu arahan hingga senario lanjutan pengeluaran dengan kaitan tersuai, pelbagai persekitaran, dan integrasi CI/CD. Kuasai keseluruhan kitar hayat penempatan dengan contoh praktikal dan amalan terbaik.
 
 ## Matlamat Pembelajaran
 
-Dengan menyelesaikan panduan ini, anda akan:
-- Menguasai semua arahan dan aliran kerja penyebaran Azure Developer CLI
-- Memahami kitaran hayat penyebaran sepenuhnya dari penyediaan hingga pemantauan
-- Melaksanakan kaitan penyebaran khusus untuk automasi sebelum dan selepas penyebaran
+Dengan menamatkan panduan ini, anda akan:
+- Menguasai semua arahan dan aliran kerja penempatan Azure Developer CLI
+- Memahami keseluruhan kitar hayat penempatan dari penyediaan hingga pemantauan
+- Melaksanakan kaitan penempatan tersuai untuk automasi pra dan pasca penempatan
 - Mengkonfigurasi pelbagai persekitaran dengan parameter khusus persekitaran
-- Menyediakan strategi penyebaran lanjutan termasuk penyebaran biru-hijau dan canary
-- Mengintegrasi penyebaran azd dengan saluran CI/CD dan aliran kerja DevOps
+- Menyediakan strategi penempatan lanjutan termasuk penempatan biru-hijau dan canary
+- Mengintegrasi penempatan azd dengan saluran CI/CD dan aliran kerja DevOps
 
 ## Hasil Pembelajaran
 
-Setelah selesai, anda akan dapat:
-- Melaksanakan dan menyelesaikan masalah semua aliran kerja penyebaran azd secara berdikari
-- Mereka bentuk dan melaksanakan automasi penyebaran khusus menggunakan kaitan
-- Mengkonfigurasi penyebaran sedia produksi dengan keselamatan dan pemantauan yang betul
-- Menguruskan senario penyebaran pelbagai persekitaran yang kompleks
-- Mengoptimumkan prestasi penyebaran dan melaksanakan strategi rollback
-- Mengintegrasi penyebaran azd ke dalam amalan DevOps perusahaan
+Selepas menamatkan, anda akan mampu untuk:
+- Melaksanakan dan menyelesaikan masalah semua aliran kerja penempatan azd secara berdikari
+- Mereka bentuk dan melaksanakan automasi penempatan tersuai menggunakan kaitan
+- Mengkonfigurasi penempatan sedia pengeluaran dengan keselamatan dan pemantauan yang betul
+- Mengurus senario penempatan pelbagai persekitaran yang kompleks
+- Mengoptimumkan prestasi penempatan dan melaksanakan strategi rollback
+- Mengintegrasi penempatan azd ke dalam amalan DevOps perusahaan
 
-## Gambaran Keseluruhan Penyebaran
+## Gambaran Keseluruhan Penempatan
 
-Azure Developer CLI menyediakan beberapa arahan penyebaran:
-- `azd up` - Aliran kerja lengkap (penyediaan + penyebaran)
-- `azd provision` - Membuat/mengemas kini sumber Azure sahaja
-- `azd deploy` - Menyebarkan kod aplikasi sahaja
-- `azd package` - Membina dan mengepak aplikasi
+Azure Developer CLI menyediakan beberapa arahan penempatan:
+- `azd up` - Aliran kerja lengkap (penyediaan + penempatan)
+- `azd provision` - Cipta/kemas kini sumber Azure sahaja
+- `azd deploy` - Letakkan kod aplikasi sahaja
+- `azd package` - Bina dan pek aplikasi
 
-## Aliran Kerja Penyebaran Asas
+## Aliran Kerja Penempatan Asas
 
-### Penyebaran Lengkap (azd up)
+### Penempatan Lengkap (azd up)
 Aliran kerja paling biasa untuk projek baru:
 ```bash
-# Sebarkan semuanya dari awal
+# Menggoda semuanya dari awal
 azd up
 
-# Sebarkan dengan persekitaran tertentu
+# Menggoda dengan persekitaran tertentu
 azd up --environment production
 
-# Sebarkan dengan parameter tersuai
+# Menggoda dengan parameter tersuai
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Penyebaran Infrastruktur Sahaja
+### Penempatan Infrastruktur Sahaja
 Apabila anda hanya perlu mengemas kini sumber Azure:
 ```bash
-# Menyediakan/mengemas kini infrastruktur
+# Membekal/kemas kini infrastruktur
 azd provision
 
-# Menyediakan dengan dry-run untuk pratonton perubahan
+# Membekal dengan dry-run untuk pratonton perubahan
 azd provision --preview
 
-# Menyediakan perkhidmatan tertentu
+# Membekal perkhidmatan tertentu
 azd provision --service database
 ```
 
-### Penyebaran Kod Sahaja
-Untuk kemas kini aplikasi dengan cepat:
+### Penempatan Kod Sahaja
+Untuk kemas kini aplikasi yang cepat:
 ```bash
-# Menggerakkan semua perkhidmatan
+# Hantar semua perkhidmatan
 azd deploy
 
 # Jangkaan output:
-# Menggerakkan perkhidmatan (azd deploy)
-# - web: Menggerakkan... Selesai
-# - api: Menggerakkan... Selesai
-# BERJAYA: Penggerakkan anda selesai dalam 2 minit 15 saat
+# Menghantar perkhidmatan (azd hantar)
+# - web: Menghantar... Selesai
+# - api: Menghantar... Selesai
+# BERJAYA: Penghantaran anda selesai dalam 2 minit 15 saat
 
-# Menggerakkan perkhidmatan tertentu
+# Hantar perkhidmatan tertentu
 azd deploy --service web
 azd deploy --service api
 
-# Menggerakkan dengan argumen binaan tersuai
+# Hantar dengan argumen binaan tersuai
 azd deploy --service api --build-arg NODE_ENV=production
 
-# Sahkan penggerakan
+# Sahkan penghantaran
 azd show --output json | jq '.services'
 ```
 
-### ✅ Pengesahan Penyebaran
+### ✅ Pengesahan Penempatan
 
-Selepas sebarang penyebaran, sahkan kejayaan:
+Selepas sebarang penempatan, sahkan kejayaan:
 
 ```bash
-# Semak semua perkhidmatan berjalan
+# Semak semua perkhidmatan sedang berjalan
 azd show
 
-# Uji titik akhir kesihatan
+# Uji hujung kesihatan
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -110,12 +111,41 @@ azd monitor --logs
 ```
 
 **Kriteria Kejayaan:**
-- ✅ Semua perkhidmatan menunjukkan status "Berjalan"
-- ✅ Titik pemeriksaan kesihatan mengembalikan HTTP 200
+- ✅ Semua perkhidmatan menunjukkan status "Berlaku"
+- ✅ Titik akhir kesihatan mengembalikan HTTP 200
 - ✅ Tiada log ralat dalam 5 minit terakhir
-- ✅ Aplikasi bertindak balas terhadap permintaan ujian
+- ✅ Aplikasi bertindak balas kepada permintaan ujian
 
-## 🏗️ Memahami Proses Penyebaran
+## 🏗️ Memahami Proses Penempatan
+
+### Baru dengan kaitan? Mulakan di sini
+
+**Kaitan** adalah arahan yang dijalankan azd secara automatik pada saat tertentu dalam proses penempatan—sebelum atau selepas penyediaan, dan sebelum atau selepas meletakkan kod anda. Ia membolehkan anda mengautomasikan kerja kecil yang sentiasa mengiringi penempatan: menanam pangkalan data, menjalankan migrasi, membina aset, atau melakukan ujian asap aplikasi secara langsung.
+
+| Kaitan | Dijalan… | Kegunaan biasa |
+|--------|---------|----------------|
+| `preprovision` | Sebelum sumber dicipta | Sahkan keperluan awal, log masuk ke registri |
+| `postprovision` | Selepas sumber tersedia | Konfigurasikan sumber, sediakan pangkalan data |
+| `predeploy` | Sebelum kod diletakkan | Bina aset hadapan, jalankan ujian unit |
+| `postdeploy` | Selepas kod digunakan | Jalankan migrasi DB, ujian asap titik akhir |
+
+Kaitan ditempatkan dalam `azure.yaml` anda. Berikut contoh paling kecil—hanya mencetak mesej selepas penempatan:
+
+```yaml
+# azure.yaml
+hooks:
+  postdeploy:
+    shell: sh
+    run: echo "Deployment finished! 🎉"
+```
+
+Itu sahaja—lain kali anda jalankan `azd up`, mesej itu akan dicetak secara automatik. Anda juga boleh menjalankan kaitan secara sendiri, tanpa penempatan penuh, yang bagus untuk ujian:
+
+```bash
+azd hooks run postdeploy
+```
+
+Fasa-fasa di bawah menunjukkan kaitan dunia sebenar (migrasi, ujian, pengesahan) untuk setiap tahap.
 
 ### Fasa 1: Kaitan Pra-Penyediaan
 ```yaml
@@ -133,11 +163,11 @@ hooks:
 
 ### Fasa 2: Penyediaan Infrastruktur
 - Membaca templat infrastruktur (Bicep/Terraform)
-- Membuat atau mengemas kini sumber Azure
+- Mencipta atau mengemas kini sumber Azure
 - Mengkonfigurasi rangkaian dan keselamatan
-- Menyediakan pemantauan dan perekodan
+- Menyediakan pemantauan dan logging
 
-### Fasa 3: Kaitan Pasca-Penyediaan
+### Fasa 3: Kaitan Pasca Penyediaan
 ```yaml
 hooks:
   postprovision:
@@ -150,12 +180,12 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### Fasa 4: Pengemasan Aplikasi
+### Fasa 4: Pembungkusan Aplikasi
 - Membina kod aplikasi
-- Membuat artifak penyebaran
-- Mengepak untuk platform sasaran (kontena, fail ZIP, dsb.)
+- Mencipta artifak penempatan
+- Membungkus untuk platform sasaran (bekas, fail ZIP, dsb.)
 
-### Fasa 5: Kaitan Pra-Penyebaran
+### Fasa 5: Kaitan Pra-Penempatan
 ```yaml
 hooks:
   predeploy:
@@ -168,12 +198,12 @@ hooks:
       npm run db:migrate
 ```
 
-### Fasa 6: Penyebaran Aplikasi
-- Menyebarkan aplikasi yang telah dikepak ke perkhidmatan Azure
+### Fasa 6: Penempatan Aplikasi
+- Meletakkan aplikasi yang dibungkus ke perkhidmatan Azure
 - Mengemas kini tetapan konfigurasi
-- Memulakan/memulakan semula perkhidmatan
+- Memulakan/menyemak semula perkhidmatan
 
-### Fasa 7: Kaitan Pasca-Penyebaran
+### Fasa 7: Kaitan Pasca Penempatan
 ```yaml
 hooks:
   postdeploy:
@@ -186,9 +216,57 @@ hooks:
       curl https://${WEB_URL}/health
 ```
 
-## 🎛️ Konfigurasi Penyebaran
+### Mengendalikan Ralat Kaitan
 
-### Tetapan Penyebaran Khusus Perkhidmatan
+Secara lalai, **jika arahan kaitan keluar dengan kod bukan sifar, azd menghentikan keseluruhan operasi.** Ini biasanya yang anda mahu—migrasi yang gagal harus menghentikan penempatan, bukan menghantar aplikasi rosak. Tetapi ini bermakna kaitan perlu ditulis dengan berhati-hati.
+
+**1. Jadikan kegagalan jelas dan disengajakan.** Kaitan gagal apabila arahan terakhirnya mengembalikan kod keluar bukan sifar. Dalam skrip shell, tambah `set -e` supaya kaitan berhenti pada arahan yang gagal pertama dan tidak terus secara senyap:
+
+```yaml
+hooks:
+  predeploy:
+    shell: sh
+    run: |
+      set -e                      # stop on the first error
+      npm run test:unit           # if tests fail, the deploy halts here
+      npm run db:migrate
+```
+
+**2. Benarkan kaitan gagal tanpa menghentikan azd.** Untuk langkah tak kritikal (pemanasan cache pilihan, notifikasi usaha terbaik), tetapkan `continueOnError: true`. azd merekod kegagalan tetapi teruskan operasi:
+
+```yaml
+hooks:
+  postdeploy:
+    shell: sh
+    continueOnError: true         # a failure here won't fail 'azd up'
+    run: curl -f https://${WEB_URL}/warmup || echo "Warm-up skipped"
+```
+
+**3. Uji kaitan secara berasingan sebelum menjalankan penuh.** Anda tidak perlu menjalankan `azd up` untuk membaiki kaitan—jalankan secara sendiri dan ulang cepat:
+
+```bash
+azd hooks run predeploy          # menjalankan hanya kait pra-penerapan
+azd hooks run postdeploy --service api
+```
+
+**4. Berhati dengan cangkuk shell spesifik OS.** Kaitan menggunakan `shell: pwsh` perlukan PowerShell dipasang pada mesin yang menjalankan (termasuk ejen CI). Gunakan `shell: sh` untuk portabiliti paling luas, atau sediakan kedua varian `windows` dan `posix`:
+
+```yaml
+hooks:
+  postprovision:
+    posix:
+      shell: sh
+      run: ./scripts/setup.sh
+    windows:
+      shell: pwsh
+      run: ./scripts/setup.ps1
+```
+
+> **Petua penyahpepijatan:** jalankan mana-mana arahan azd dengan `--debug` untuk melihat baris arahan kaitan tepat dan output penuh—amat berguna apabila kaitan berfungsi secara lokal tetapi gagal dalam CI.
+
+## 🎛️ Konfigurasi Penempatan
+
+### Tetapan Penempatan Khusus Perkhidmatan
 ```yaml
 # azure.yaml
 services:
@@ -225,7 +303,7 @@ azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# Persekitaran persediaan
+# Persekitaran pentas
 azd env new staging
 azd env set NODE_ENV staging
 azd env set DEBUG false
@@ -238,7 +316,7 @@ azd env set DEBUG false
 azd env set LOG_LEVEL error
 ```
 
-## 🔧 Senario Penyebaran Lanjutan
+## 🔧 Senario Penempatan Lanjutan
 
 ### Aplikasi Pelbagai Perkhidmatan
 ```yaml
@@ -276,7 +354,7 @@ services:
     host: function
 ```
 
-### Penyebaran Biru-Hijau
+### Penempatan Biru-Hijau
 ```bash
 # Cipta persekitaran biru
 azd env new production-blue
@@ -285,7 +363,7 @@ azd up --environment production-blue
 # Uji persekitaran biru
 ./scripts/test-environment.sh production-blue
 
-# Tukar trafik ke biru (kemas kini DNS/pembahagi beban secara manual)
+# Tukar trafik ke biru (kemaskini DNS/pengimbangan beban secara manual)
 ./scripts/switch-traffic.sh production-blue
 
 # Bersihkan persekitaran hijau
@@ -293,7 +371,7 @@ azd env select production-green
 azd down --force
 ```
 
-### Penyebaran Canary
+### Penempatan Canary
 ```yaml
 # azure.yaml - Configure traffic splitting
 services:
@@ -307,7 +385,7 @@ services:
         percentage: 10
 ```
 
-### Penyebaran Berperingkat
+### Penempatan Berperingkat
 ```bash
 #!/bin/bash
 # deploy-staged.sh
@@ -338,9 +416,9 @@ if [[ $confirm == [yY] ]]; then
 fi
 ```
 
-## 🐳 Penyebaran Kontena
+## 🐳 Penempatan Bekas
 
-### Penyebaran Aplikasi Kontena
+### Penempatan Aplikasi Bekas
 ```yaml
 services:
   api:
@@ -392,7 +470,7 @@ CMD ["npm", "start"]
 
 ## ⚡ Pengoptimuman Prestasi
 
-### Penyebaran Khusus Perkhidmatan
+### Penempatan Khusus Perkhidmatan
 ```bash
 # Lancarkan perkhidmatan tertentu untuk iterasi lebih pantas
 azd deploy --service web
@@ -402,7 +480,7 @@ azd deploy --service api
 azd deploy
 ```
 
-### Penyimpanan Cache Pembinaan
+### Caching Pembangunan
 ```yaml
 # azure.yaml - Configure build commands
 services:
@@ -412,19 +490,19 @@ services:
     outputPath: dist
 ```
 
-### Penyebaran Kod Berkesan
+### Penempatan Kod Efisien
 ```bash
-# Gunakan azd deploy (bukan azd up) untuk perubahan kod sahaja
-# Ini melangkau penyediaan infrastruktur dan jauh lebih cepat
+# Gunakan azd deploy (bukan azd up) untuk perubahan hanya kod
+# Ini melangkau penyediaan infrastruktur dan adalah lebih pantas
 azd deploy
 
 # Lancarkan perkhidmatan tertentu untuk iterasi terpantas
 azd deploy --service api
 ```
 
-## 🔍 Pemantauan Penyebaran
+## 🔍 Pemantauan Penempatan
 
-### Pemantauan Penyebaran Masa Nyata
+### Pemantauan Penempatan Masa Nyata
 ```bash
 # Pantau aplikasi secara masa nyata
 azd monitor --live
@@ -432,7 +510,7 @@ azd monitor --live
 # Lihat log aplikasi
 azd monitor --logs
 
-# Semak status penyebaran
+# Semak status penempatan
 azd show
 ```
 
@@ -450,10 +528,10 @@ services:
       retries: 3
 ```
 
-### Pengesahan Pasca-Penyebaran
+### Pengesahan Pasca Penempatan
 ```bash
 #!/bin/bash
-# scripts/validate-deployment.sh
+# skrip/validate-deployment.sh
 
 echo "Validating deployment..."
 
@@ -537,12 +615,12 @@ services:
 ```bash
 # AZD tidak mempunyai rollback terbina dalam. Pendekatan yang disyorkan:
 
-# Pilihan 1: Penghantaran semula dari Git (disyorkan)
-git revert HEAD  # Pulihkan commit yang bermasalah
+# Pilihan 1: Melakukan deploy semula dari Git (disyorkan)
+git revert HEAD  # Kembalikan commit yang bermasalah
 git push
 azd deploy
 
-# Pilihan 2: Penghantaran semula commit tertentu
+# Pilihan 2: Melakukan deploy semula commit khusus
 git checkout <previous-commit-hash>
 azd deploy
 git checkout main
@@ -554,7 +632,7 @@ git checkout main
 azd provision --preview
 
 # Untuk rollback infrastruktur, gunakan kawalan versi:
-git revert HEAD  # Kembalikan perubahan infrastruktur
+git revert HEAD  # Batalkan perubahan infrastruktur
 azd provision    # Terapkan keadaan infrastruktur sebelumnya
 ```
 
@@ -572,21 +650,21 @@ npm run db:validate
 echo "Database rollback completed"
 ```
 
-## 📊 Metrik Penyebaran
+## 📊 Metik Penempatan
 
-### Jejaki Prestasi Penyebaran
+### Jejak Prestasi Penempatan
 ```bash
-# Lihat status penyebaran semasa
+# Lihat status penghantaran semasa
 azd show
 
 # Pantau aplikasi dengan Application Insights
 azd monitor --overview
 
-# Lihat metrik masa nyata
+# Lihat metrik langsung
 azd monitor --live
 ```
 
-### Pengumpulan Metrik Tersuai
+### Pengumpulan Metik Tersuai
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -612,13 +690,13 @@ azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Kekalkan kesamaan persekitaran
+# Kekalkan keseragaman persekitaran
 ./scripts/sync-environments.sh
 ```
 
 ### 2. Pengesahan Infrastruktur
 ```bash
-# Pratonton perubahan infrastruktur sebelum pelaksanaan
+# Pratonton perubahan infrastruktur sebelum penyebaran
 azd provision --preview
 
 # Gunakan linting ARM/Bicep
@@ -657,9 +735,9 @@ hooks:
       npm run test:smoke
 ```
 
-### 4. Dokumentasi dan Perekodan
+### 4. Dokumentasi dan Logging
 ```bash
-# Dokumenkan prosedur pengedaran
+# Dokumenkan prosedur penyebaran
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env get-value AZURE_ENV_NAME)" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
@@ -667,52 +745,52 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Langkah Seterusnya
 
-- [Penyediaan Sumber](provisioning.md) - Pendalaman pengurusan infrastruktur
-- [Perancangan Pra-Penyebaran](../chapter-06-pre-deployment/capacity-planning.md) - Rancang strategi penyebaran anda
-- [Isu Biasa](../chapter-07-troubleshooting/common-issues.md) - Selesaikan isu penyebaran
-- [Amalan Terbaik](../chapter-07-troubleshooting/debugging.md) - Strategi penyebaran sedia produksi
+- [Penyediaan Sumber](provisioning.md) - Pembelajaran mendalam pengurusan infrastruktur
+- [Perancangan Pra-Penempatan](../chapter-06-pre-deployment/capacity-planning.md) - Rancang strategi penempatan anda
+- [Isu Biasa](../chapter-07-troubleshooting/common-issues.md) - Selesaikan isu penempatan
+- [Amalan Terbaik](../chapter-07-troubleshooting/debugging.md) - Strategi penempatan sesuai pengeluaran
 
-## 🎯 Latihan Penyebaran Praktikal
+## 🎯 Latihan Penempatan Praktikal
 
-### Latihan 1: Aliran Kerja Penyebaran Inkremental (20 minit)
-**Matlamat**: Kuasai perbezaan antara penyebaran penuh dan inkremental
+### Latihan 1: Aliran Kerja Penempatan Inkremental (20 minit)
+**Matlamat**: Menguasai beza antara penempatan penuh dan penempatan inkremental
 
 ```bash
-# Pengeluaran awal
+# Penempatan awal
 mkdir deployment-practice && cd deployment-practice
 azd init --template todo-nodejs-mongo
 azd up
 
-# Rekod masa pengeluaran awal
+# Rakam masa penempatan awal
 echo "Full deployment: $(date)" > deployment-log.txt
 
 # Buat perubahan kod
 echo "// Updated $(date)" >> src/api/src/server.js
 
-# Hantar kod sahaja (cepat)
+# Hantar hanya kod (cepat)
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
 # Bandingkan masa
 cat deployment-log.txt
 
-# Bersihkan kembali
+# Bersihkan diri
 azd down --force --purge
 ```
 
 **Kriteria Kejayaan:**
-- [ ] Penyebaran penuh mengambil masa 5-15 minit
-- [ ] Penyebaran kod sahaja mengambil masa 2-5 minit
-- [ ] Perubahan kod dipaparkan dalam aplikasi yang disebarkan
+- [ ] Penempatan penuh mengambil masa 5-15 minit
+- [ ] Penempatan kod sahaja mengambil 2-5 minit
+- [ ] Perubahan kod tercermin dalam aplikasi yang diletakkan
 - [ ] Infrastruktur tidak berubah selepas `azd deploy`
 
-**Hasil Pembelajaran**: `azd deploy` adalah 50-70% lebih pantas daripada `azd up` untuk perubahan kod
+**Hasil Pembelajaran**: `azd deploy` 50-70% lebih pantas daripada `azd up` untuk perubahan kod
 
-### Latihan 2: Kaitan Penyebaran Khusus (30 minit)
-**Matlamat**: Melaksanakan automasi pra dan pasca penyebaran
+### Latihan 2: Kait Penempatan Tersuai (30 minit)
+**Matlamat**: Melaksanakan automasi pra dan pasca penempatan
 
 ```bash
-# Buat skrip pengesahan sebelum pelaksanaan
+# Buat skrip pengesahan sebelum penyebaran
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
@@ -724,7 +802,7 @@ if ! npm run test:unit; then
     exit 1
 fi
 
-# Semak perubahan yang belum dikomit
+# Semak perubahan yang belum disahkan
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -734,7 +812,7 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# Buat ujian asap selepas pelaksanaan
+# Buat ujian asap selepas penyebaran
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
 echo "💨 Running smoke tests..."
@@ -753,7 +831,7 @@ EOF
 
 chmod +x scripts/post-deploy-test.sh
 
-# Tambah hooks ke azure.yaml
+# Tambah hook ke azure.yaml
 cat >> azure.yaml << 'EOF'
 
 hooks:
@@ -766,21 +844,21 @@ hooks:
     run: ./scripts/post-deploy-test.sh
 EOF
 
-# Uji pelaksanaan dengan hooks
+# Uji penyebaran dengan hook
 azd deploy
 ```
 
 **Kriteria Kejayaan:**
-- [ ] Skrip pra-penyebaran berjalan sebelum penyebaran
-- [ ] Penyebaran dibatalkan jika ujian gagal
-- [ ] Ujian ringkas pasca penyebaran mengesahkan kesihatan
-- [ ] Kaitan dijalankan dalam urutan yang betul
+- [ ] Skrip pra-penempatan dijalankan sebelum penempatan
+- [ ] Penempatan dibatalkan jika ujian gagal
+- [ ] Ujian asap pasca penempatan mengesahkan kesihatan
+- [ ] Kaitan dijalankan dalam urutan betul
 
-### Latihan 3: Strategi Penyebaran Pelbagai Persekitaran (45 minit)
-**Matlamat**: Melaksanakan aliran kerja penyebaran berperingkat (dev → staging → produksi)
+### Latihan 3: Strategi Penempatan Berbilang Persekitaran (45 minit)
+**Matlamat**: Melaksanakan aliran kerja penempatan berperingkat (dev → staging → pengeluaran)
 
 ```bash
-# Buat skrip penyebaran
+# Buat skrip penghantaran
 cat > deploy-staged.sh << 'EOF'
 #!/bin/bash
 set -e
@@ -788,7 +866,7 @@ set -e
 echo "🚀 Staged Deployment Workflow"
 echo "=============================="
 
-# Langkah 1: Sebarkan ke dev
+# Langkah 1: Hantar ke dev
 echo "
 🛠️ Step 1: Deploying to development..."
 azd env select dev
@@ -797,7 +875,7 @@ azd up --no-prompt
 echo "Running dev tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# Langkah 2: Sebarkan ke staging
+# Langkah 2: Hantar ke staging
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
@@ -806,7 +884,7 @@ azd up --no-prompt
 echo "Running staging tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# Langkah 3: Kelulusan manual untuk produksi
+# Langkah 3: Kelulusan manual untuk pengeluaran
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -834,46 +912,46 @@ azd env new dev
 azd env new staging
 azd env new production
 
-# Jalankan penyebaran berperingkat
+# Jalankan penghantaran berperingkat
 ./deploy-staged.sh
 ```
 
 **Kriteria Kejayaan:**
-- [ ] Persekitaran dev berjaya disebarkan
-- [ ] Persekitaran staging berjaya disebarkan
-- [ ] Kelulusan manual diperlukan untuk produksi
-- [ ] Semua persekitaran mempunyai pemeriksaan kesihatan yang berfungsi
+- [ ] Persekitaran dev berjaya diletakkan
+- [ ] Persekitaran staging berjaya diletakkan
+- [ ] Kelulusan manual diperlukan untuk pengeluaran
+- [ ] Semua persekitaran mempunyai pemeriksaan kesihatan berfungsi
 - [ ] Boleh melakukan rollback jika perlu
 
 ### Latihan 4: Strategi Rollback (25 minit)
-**Matlamat**: Melaksanakan dan menguji rollback penyebaran menggunakan Git
+**Matlamat**: Melaksanakan dan menguji rollback penempatan menggunakan Git
 
 ```bash
-# Menggunakan v1
+# Lancarkan v1
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# Simpan hash commit v1
+# Simpan hash komit v1
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# Menggunakan v2 dengan perubahan besar
+# Lancarkan v2 dengan perubahan kritikal
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
 azd deploy
 
-# Mengesan kegagalan dan pulihkan
+# Sahkan kegagalan dan buat rollback
 if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # Pulihkan menggunakan git
+    # Rollback menggunakan git
     git revert HEAD --no-edit
     
-    # Pulihkan persekitaran
+    # Rollback persekitaran
     azd env set APP_VERSION "1.0.0"
     
-    # Menggunakan semula v1
+    # Lancarkan semula v1
     azd deploy
     
     echo "✅ Rolled back to v1.0.0"
@@ -881,17 +959,17 @@ fi
 ```
 
 **Kriteria Kejayaan:**
-- [ ] Boleh mengesan kegagalan penyebaran
+- [ ] Boleh mengesan kegagalan penempatan
 - [ ] Skrip rollback dijalankan secara automatik
 - [ ] Aplikasi kembali ke keadaan berfungsi
 - [ ] Pemeriksaan kesihatan lulus selepas rollback
 
-## 📊 Jejak Metrik Penyebaran
+## 📊 Jejak Metik Penempatan
 
-### Jejaki Prestasi Penyebaran Anda
+### Jejak Prestasi Penempatan Anda
 
 ```bash
-# Buat skrip metrik penempatan
+# Cipta skrip metrik penyebaran
 cat > track-deployment.sh << 'EOF'
 #!/bin/bash
 START_TIME=$(date +%s)
@@ -918,21 +996,21 @@ chmod +x track-deployment.sh
 ./track-deployment.sh
 ```
 
-**Analisis metrik anda:**
+**Analisa metrik anda:**
 ```bash
-# Lihat sejarah penyebaran
+# Lihat sejarah penghantaran
 cat deployment-metrics.csv
 
-# Kira purata masa penyebaran
+# Kira masa penghantaran purata
 awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
 ```
 
 ## Sumber Tambahan
 
-- [Rujukan Penyebaran Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Penyebaran Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Penyebaran Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Penyebaran Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Rujukan Penempatan Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Penempatan Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Penempatan Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Penempatan Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
@@ -943,6 +1021,6 @@ awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat kritikal, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+**Penafian**:
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan oleh manusia profesional adalah disyorkan. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,37 +1,37 @@
-# 6. Membongkar Infrastruktur
+# 6. Menghapus Infrastruktur
 
-!!! tip "PADA AKHIR MODUL INI ANDA AKAN MAMPU"
+!!! tip "PADA AKHIR MODUL INI ANDA AKAN DAPAT"
 
-    - [ ] Memahami pentingnya pembersihan sumber daya dan manajemen biaya
-    - [ ] Gunakan `azd down` untuk menghentikan penyediaan infrastruktur dengan aman
-    - [ ] Memulihkan layanan kognitif yang dihapus sementara jika diperlukan
+    - [ ] Memahami pentingnya pembersihan sumber daya dan pengelolaan biaya
+    - [ ] Gunakan `azd down` untuk menghapus penyediaan infrastruktur dengan aman
+    - [ ] Memulihkan layanan Azure AI yang dihapus sementara jika diperlukan
     - [ ] **Lab 6:** Membersihkan sumber daya Azure dan memverifikasi penghapusan
 
 ---
 
-## Latihan Bonus
+## Latihan Tambahan
 
 Before we tear down the project, take a few minutes to do some open-ended exploration.
 
-!!! info "Coba Petunjuk Eksplorasi Ini"
+!!! info "Coba Prompt Eksplorasi Ini"
 
     **Bereksperimen dengan GitHub Copilot:**
     
-    1. Tanyakan: `What other AZD templates could I try for multi-agent scenarios?`
-    2. Tanyakan: `How can I customize the agent instructions for a healthcare use case?`
-    3. Tanyakan: `What environment variables control cost optimization?`
+    1. Ask: `Template AZD lain apa yang bisa saya coba untuk skenario multi-agen?`
+    2. Ask: `Bagaimana saya dapat menyesuaikan instruksi agen untuk kasus penggunaan layanan kesehatan?`
+    3. Ask: `Variabel lingkungan apa yang mengontrol optimasi biaya?`
     
     **Jelajahi Azure Portal:**
     
-    1. Tinjau metrik Application Insights untuk penerapan Anda
+    1. Tinjau metrik Application Insights untuk penyebaran Anda
     2. Periksa analisis biaya untuk sumber daya yang disediakan
-    3. Jelajahi playground agen di portal Microsoft Foundry sekali lagi
+    3. Jelajahi ulang playground agen di portal Microsoft Foundry
 
 ---
 
-## Menghentikan Penyediaan Infrastruktur
+## Menghapus Penyediaan Infrastruktur
 
-1. Tearing down infrastructure is as easy as:
+1. Membongkar infrastruktur semudah:
       
       ```bash title="" linenums="0"
       azd down --purge
@@ -47,18 +47,18 @@ Before we tear down the project, take a few minutes to do some open-ended explor
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Optional) If you now run `azd up` again, you will notice the gpt-4.1 model gets deployed since the environment variable was changed (and saved) in the local `.azure` folder. 
+1. (Opsional) Jika Anda sekarang menjalankan `azd up` lagi, Anda akan melihat model gpt-4.1 dideploy karena variabel lingkungan diubah (dan disimpan) di folder lokal `.azure`. 
 
-      Here is the model deployments **before**:
+      Berikut adalah penempatan model **sebelum**:
 
-      ![Awal](../../../../../translated_images/id/14-deploy-initial.30e4cf1c29b587bc.webp)
+      ![Sebelum](../../../../../translated_images/id/14-deploy-initial.30e4cf1c29b587bc.webp)
 
-      And here it is **after**:
-      ![Baru](../../../../../translated_images/id/14-deploy-new.f7f3c355a3cf7299.webp)
+      Dan ini **setelah**:
+      ![Setelah](../../../../../translated_images/id/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:
-Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya mencapai akurasi, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau salah tafsir yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk mencapai akurasi, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang sah. Untuk informasi penting, disarankan menggunakan terjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

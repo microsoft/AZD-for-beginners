@@ -1,164 +1,164 @@
 # Penyelesaian Sokongan Pelanggan Multi-Ejen - Senario Peruncit
 
-**Bab 5: Penyelesaian AI Multi-Ejen**
-- **📚 Laman Utama Kursus**: [AZD Untuk Pemula](../README.md)
-- **📖 Bab Semasa**: [Bab 5: Penyelesaian AI Multi-Ejen](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **⬅️ Prasyarat**: [Bab 2: Pembangunan AI-Pertama](../docs/microsoft-foundry/microsoft-foundry-integration.md)
-- **➡️ Bab Seterusnya**: [Bab 6: Pengesahan Pra-Penggunaan](../docs/pre-deployment/capacity-planning.md)
-- **🚀 Templat ARM**: [Pakej Penyebaran](retail-multiagent-arm-template/README.md)
+**Bab 5: Penyelesaian AI Multi-Ejen**  
+- **📚 Laman Utama Kursus**: [AZD Untuk Pemula](../README.md)  
+- **📖 Bab Semasa**: [Bab 5: Penyelesaian AI Multi-Ejen](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)  
+- **⬅️ Prasyarat**: [Bab 2: Pembangunan AI-Pertama](../docs/microsoft-foundry/microsoft-foundry-integration.md)  
+- **➡️ Bab Seterusnya**: [Bab 6: Pengesahan Pra-Penyebaran](../docs/pre-deployment/capacity-planning.md)  
+- **🚀 Templat ARM**: [Pakej Penyebaran](retail-multiagent-arm-template/README.md)  
 
-> **⚠️ PANDUAN SENIBINA - BUKAN PELAKSANAAN BERFUNGSI**  
-> Dokumen ini menyediakan **rangka kerja senibina menyeluruh** untuk membina sistem multi-ejen.  
-> **Apa yang wujud:** Templat ARM untuk penyebaran infrastruktur (Model Microsoft Foundry, Carian AI, Aplikasi Bekas, dll.)  
-> **Apa yang anda mesti bina:** Kod ejen, logik penjalan, UI frontend, saluran data (anggaran 80-120 jam)  
+> **⚠️ PANDUAN ARKITEKTUR - BUKAN PELAKSANAAN BERFUNGSI**  
+> Dokumen ini menyediakan **pelan arkitektur menyeluruh** untuk membina sistem multi-ejen.  
+> **Apa yang wujud:** Templat ARM untuk penyebaran infrastruktur (Model Microsoft Foundry, AI Search, Container Apps, dan lain-lain)  
+> **Apa yang anda mesti bina:** Kod ejen, logik penghalaan, UI hadapan, saluran data (anggaran 80-120 jam)  
 >  
-> **Gunakan sebagai:**
-> - ✅ Rujukan senibina untuk projek multi-ejen anda sendiri
-> - ✅ Panduan pembelajaran untuk corak reka bentuk multi-ejen
-> - ✅ Templat infrastruktur untuk menyebarkan sumber Azure
-> - ❌ BUKAN aplikasi siap guna (memerlukan usaha pembangunan yang signifikan)
+> **Gunakan ini sebagai:**  
+> - ✅ Rujukan arkitektur untuk projek multi-ejen anda sendiri  
+> - ✅ Panduan pembelajaran untuk corak reka bentuk multi-ejen  
+> - ✅ Templat infrastruktur untuk menyebarkan sumber Azure  
+> - ❌ BUKAN aplikasi siap guna (memerlukan pembangunan ketara)  
 
 ## Gambaran Keseluruhan
 
-**Objektif Pembelajaran:** Memahami senibina, keputusan reka bentuk, dan pendekatan pelaksanaan untuk membina chatbot sokongan pelanggan multi-ejen yang sedia produksi untuk peruncit dengan keupayaan AI canggih termasuk pengurusan inventori, pemprosesan dokumen, dan interaksi pelanggan yang pintar.
+**Objektif Pembelajaran:** Fahami arkitektur, keputusan reka bentuk, dan pendekatan pelaksanaan untuk membina chatbot sokongan pelanggan multi-ejen yang sedia untuk produksi bagi peruncit dengan keupayaan AI canggih termasuk pengurusan inventori, pemprosesan dokumen, dan interaksi pelanggan pintar.
 
-**Masa untuk Selesai:** Membaca + Memahami (2-3 jam) | Membina Pelaksanaan Lengkap (80-120 jam)
+**Masa untuk Selesai:** Membaca + Memahami (2-3 jam) | Membina Pelaksanaan Lengkap (80-120 jam)  
 
-**Apa Yang Anda Akan Pelajari:**
-- Corak senibina multi-ejen dan prinsip reka bentuk
-- Strategi penyebaran Model Microsoft Foundry pelbagai rantau
-- Integrasi Carian AI dengan RAG (Penjanaan Beraugmen Penemuan)
-- Rangka kerja penilaian ejen dan ujian keselamatan
-- Pertimbangan penyebaran produksi dan pengoptimuman kos
+**Apa yang Anda Akan Pelajari:**  
+- Corak arkitektur dan prinsip reka bentuk multi-ejen  
+- Strategi penyebaran Model Microsoft Foundry berbilang wilayah  
+- Integrasi AI Search dengan RAG (Generasi Berpandu Pemulihan)  
+- Framework penilaian ejen dan ujian keselamatan  
+- Pertimbangan penyebaran produksi dan pengoptimuman kos  
 
-## Matlamat Senibina
+## Matlamat Arkitektur
 
-**Tumpuan Pendidikan:** Senibina ini menunjukkan corak perusahaan untuk sistem multi-ejen.
+**Fokus Pendidikan:** Arkitektur ini menunjukkan corak perusahaan untuk sistem multi-ejen.
 
 ### Keperluan Sistem (Untuk Pelaksanaan Anda)
 
-Penyelesaian sokongan pelanggan produksi memerlukan:
-- **Berbilang ejen khusus** untuk keperluan pelanggan yang berbeza (Khidmat Pelanggan + Pengurusan Inventori)
-- **Penyebaran model pelbagai** dengan perancangan kapasiti yang betul (gpt-4.1, gpt-4.1-mini, embeddings di seluruh rantau)
-- **Integrasi data dinamik** dengan Carian AI dan muat naik fail (carian vektor + pemprosesan dokumen)
-- **Pemantauan dan penilaian komprehensif** (Application Insights + metrik khusus)
-- **Keselamatan kelas produksi** dengan pengesahan red teaming (imbasan kerentanan + penilaian ejen)
+Penyelesaian sokongan pelanggan produksi memerlukan:  
+- **Pelbagai ejen khusus** untuk keperluan pelanggan yang berbeza (Perkhidmatan Pelanggan + Pengurusan Inventori)  
+- **Penyebaran model berganda** dengan perancangan kapasiti yang betul (gpt-4.1, gpt-4.1-mini, embeddings merentasi wilayah)  
+- **Integrasi data dinamik** dengan AI Search dan muat naik fail (carian vektor + pemprosesan dokumen)  
+- **Pemantauan dan penilaian menyeluruh** (Application Insights + metrik tersuai)  
+- **Keselamatan tahap produksi** dengan pengesahan red teaming (imbasan kerentanan + penilaian ejen)  
 
 ### Apa Yang Panduan Ini Sediakan
 
-✅ **Corak Senibina** - Reka bentuk terbukti untuk sistem multi-ejen yang skala    
-✅ **Templat Infrastruktur** - Templat ARM menyebarkan semua perkhidmatan Azure  
+✅ **Corak Arkitektur** - Reka bentuk berkesan untuk sistem multi-ejen yang berskala  
+✅ **Templat Infrastruktur** - Templat ARM yang menyebarkan semua perkhidmatan Azure  
 ✅ **Contoh Kod** - Pelaksanaan rujukan untuk komponen utama  
-✅ **Panduan Konfigurasi** - Arahan persediaan langkah demi langkah  
+✅ **Panduan Konfigurasi** - Arahan langkah demi langkah  
 ✅ **Amalan Terbaik** - Strategi keselamatan, pemantauan, pengoptimuman kos  
 
-❌ **Tidak Termasuk** - Aplikasi berfungsi lengkap (memerlukan usaha pembangunan)
+❌ **Tidak Termasuk** - Aplikasi kerja lengkap (memerlukan usaha pembangunan)  
 
 ## 🗺️ Peta Jalan Pelaksanaan
 
-### Fasa 1: Kajian Senibina (2-3 jam) - MULAKAN DI SINI
+### Fasa 1: Belajar Arkitektur (2-3 jam) - MULAKAN DI SINI
 
 **Matlamat:** Fahami reka bentuk sistem dan interaksi komponen
 
-- [ ] Baca dokumen ini sepenuhnya
-- [ ] Tinjau rajah senibina dan hubungan komponen
-- [ ] Fahami corak multi-ejen dan keputusan reka bentuk
-- [ ] Kajian contoh kod untuk alat ejen dan penjalanan
-- [ ] Tinjau anggaran kos dan panduan perancangan kapasiti
+- [ ] Baca dokumen lengkap ini  
+- [ ] Semak diagram arkitektur dan hubungan komponen  
+- [ ] Fahami corak multi-ejen dan keputusan reka bentuk  
+- [ ] Kajian contoh kod untuk alat ejen dan penghalaan  
+- [ ] Semak anggaran kos dan panduan perancangan kapasiti  
 
-**Hasil:** Kefahaman jelas tentang apa yang perlu anda bina
+**Hasil:** Kefahaman jelas tentang apa yang perlu anda bina  
 
 ### Fasa 2: Sebar Infrastruktur (30-45 minit)
 
-**Matlamat:** Menyediakan sumber Azure menggunakan templat ARM
+**Matlamat:** Sediakan sumber Azure menggunakan templat ARM  
 
 ```bash
 cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup -m standard
 ```
+  
+**Apa yang Disebar:**  
+- ✅ Model Microsoft Foundry (3 wilayah: gpt-4.1, gpt-4.1-mini, embeddings)  
+- ✅ Perkhidmatan AI Search (kosong, perlu konfigurasi indeks)  
+- ✅ Persekitaran Container Apps (imej tempat letak)  
+- ✅ Akaun storan, Cosmos DB, Key Vault  
+- ✅ Pemantauan Application Insights  
 
-**Apa Yang Disebarkan:**
-- ✅ Model Microsoft Foundry (3 rantau: gpt-4.1, gpt-4.1-mini, embeddings)
-- ✅ Perkhidmatan Carian AI (kosong, perlu konfigurasi indeks)
-- ✅ Persekitaran Aplikasi Bekas (imej tempat letak)
-- ✅ Akaun penyimpanan, Cosmos DB, Key Vault
-- ✅ Pemantauan Application Insights
-
-**Apa Yang Tiada:**
-- ❌ Kod pelaksanaan ejen
-- ❌ Logik penghalaan
-- ❌ UI frontend
-- ❌ Skema indeks carian
-- ❌ Saluran data
+**Apa yang Hilang:**  
+- ❌ Kod pelaksanaan ejen  
+- ❌ Logik penghalaan  
+- ❌ UI hadapan  
+- ❌ Skema indeks carian  
+- ❌ Saluran data  
 
 ### Fasa 3: Bina Aplikasi (80-120 jam)
 
-**Matlamat:** Melaksanakan sistem multi-ejen berdasarkan senibina ini
+**Matlamat:** Laksanakan sistem multi-ejen berdasarkan arkitektur ini
 
 1. **Pelaksanaan Ejen** (30-40 jam)  
-   - Kelas asas ejen dan antaramuka  
-   - Ejen khidmat pelanggan dengan gpt-4.1  
+   - Kelas asas ejen dan antara muka  
+   - Ejen perkhidmatan pelanggan dengan gpt-4.1  
    - Ejen inventori dengan gpt-4.1-mini  
-   - Integrasi alat (Carian AI, Bing, pemprosesan fail)  
+   - Integrasi alat (AI Search, Bing, pemprosesan fail)  
 
-2. **Perkhidmatan Penjalanan** (12-16 jam)  
-   - Logik pengelasan permintaan  
-   - Pemilihan dan orkestrasi ejen  
+2. **Perkhidmatan Penghalaan** (12-16 jam)  
+   - Logik klasifikasi permintaan  
+   - Pemilihan ejen dan orkestrasi  
    - Backend FastAPI/Express  
 
-3. **Pembangunan Frontend** (20-30 jam)  
-   - UI antara muka sembang  
+3. **Pembangunan UI Hadapan** (20-30 jam)  
+   - Antara muka sembang UI  
    - Fungsi muat naik fail  
-   - Penyajian respons  
+   - Pemaparan respons  
 
 4. **Saluran Data** (8-12 jam)  
-   - Penciptaan indeks Carian AI  
+   - Penciptaan indeks AI Search  
    - Pemprosesan dokumen dengan Document Intelligence  
-   - Penjanaan dan pengindeksan embedding  
+   - Penjanaan embedding dan pengindeksan  
 
 5. **Pemantauan & Penilaian** (10-15 jam)  
-   - Pelaksanaan telemetri khusus  
-   - Rangka kerja penilaian ejen  
+   - Pelaksanaan telemetri tersuai  
+   - Framework penilaian ejen  
    - Pengimbas keselamatan red team  
 
 ### Fasa 4: Sebar & Uji (8-12 jam)
 
 - Bina imej Docker untuk semua perkhidmatan  
 - Tolak ke Azure Container Registry  
-- Kemas kini Aplikasi Bekas dengan imej sebenar  
-- Konfigurasikan pembolehubah persekitaran dan rahsia  
+- Kemas kini Container Apps dengan imej sebenar  
+- Konfigurasikan pemboleh ubah persekitaran dan rahsia  
 - Jalankan suite ujian penilaian  
-- Laksanakan imbasan keselamatan  
+- Lakukan imbasan keselamatan  
 
-**Jumlah Anggaran Usaha:** 80-120 jam untuk pembangun berpengalaman
+**Jumlah Anggaran Usaha:** 80-120 jam untuk pemaju berpengalaman  
 
-## Senibina Penyelesaian
+## Arkitektur Penyelesaian
 
-### Rajah Senibina
+### Rajah Arkitektur
 
 ```mermaid
 graph TB
     User[👤 Pelanggan] --> LB[Azure Front Door]
-    LB --> WebApp[Aplikasi Web Depan<br/>Aplikasi Bekas]
+    LB --> WebApp[Web Frontend<br/>Aplikasi Kontena]
     
-    WebApp --> Router[Penghala Ejen<br/>Aplikasi Bekas]
+    WebApp --> Router[Penghala Ejen<br/>Aplikasi Kontena]
     Router --> CustomerAgent[Ejen Pelanggan<br/>Perkhidmatan Pelanggan]
     Router --> InvAgent[Ejen Inventori<br/>Pengurusan Stok]
     
-    CustomerAgent --> OpenAI1[Model Foundry Microsoft<br/>gpt-4.1<br/>Timur AS 2]
-    InvAgent --> OpenAI2[Model Foundry Microsoft<br/>gpt-4.1-mini<br/>Barat AS 2]
+    CustomerAgent --> OpenAI1[Model Microsoft Foundry<br/>gpt-4.1<br/>Timur AS 2]
+    InvAgent --> OpenAI2[Model Microsoft Foundry<br/>gpt-4.1-mini<br/>Barat AS 2]
     
-    CustomerAgent --> AISearch[Pencarian AI Azure<br/>Katalog Produk]
-    CustomerAgent --> BingSearch[API Pencarian Bing<br/>Maklumat Masa Nyata]
+    CustomerAgent --> AISearch[Carian AI Azure<br/>Katalog Produk]
+    CustomerAgent --> BingSearch[API Carian Bing<br/>Maklumat Masa Nyata]
     InvAgent --> AISearch
     
     AISearch --> Storage[Stor Azure<br/>Dokumen & Fail]
     Storage --> DocIntel[Kecerdasan Dokumen<br/>Pemprosesan Kandungan]
     
-    OpenAI1 --> Embeddings[Penyerlahan Teks<br/>ada-002<br/>Perancis Tengah]
+    OpenAI1 --> Embeddings[Penempatan Teks<br/>ada-002<br/>Perancis Tengah]
     OpenAI2 --> Embeddings
     
-    Router --> AppInsights[Wawasan Aplikasi<br/>Pemantauan]
+    Router --> AppInsights[Peninjauan Aplikasi<br/>Pemantauan]
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
@@ -182,8 +182,8 @@ graph TB
     
     subgraph "Pemantauan & Keselamatan"
         AppInsights
-        LogAnalytics[Ruang Kerja Analitik Log]
-        KeyVault[Bilik Kunci Azure<br/>Rahsia & Konfigurasi]
+        LogAnalytics[Tempat Kerja Analitik Log]
+        KeyVault[Peti Kunci Azure<br/>Rahsia & Konfigurasi]
         RedTeam
         Evaluation
     end
@@ -197,26 +197,27 @@ graph TB
     style AISearch fill:#fce4ec
     style Storage fill:#f1f8e9
 ```
+  
 ### Gambaran Komponen
 
-| Komponen | Tujuan | Teknologi | Rantau |
-|----------|--------|-----------|--------|
-| **Frontend Web** | Antara muka pengguna untuk interaksi pelanggan | Aplikasi Bekas | Rantau Utama |
-| **Penghala Ejen** | Menghala permintaan ke ejen sesuai | Aplikasi Bekas | Rantau Utama |
-| **Ejen Pelanggan** | Mengendalikan pertanyaan khidmat pelanggan | Aplikasi Bekas + gpt-4.1 | Rantau Utama |
-| **Ejen Inventori** | Mengurus stok dan penghantaran | Aplikasi Bekas + gpt-4.1-mini | Rantau Utama |
-| **Model Microsoft Foundry** | Inferens LLM untuk ejen | Perkhidmatan Kognitif | Pelbagai rantau |
-| **Carian AI** | Carian vektor dan RAG | Perkhidmatan Carian AI | Rantau Utama |
-| **Akaun Penyimpanan** | Muat naik fail dan dokumen | Penyimpanan Blob | Rantau Utama |
-| **Application Insights** | Pemantauan dan telemetri | Monitor | Rantau Utama |
-| **Model Penilai** | Sistem penilaian ejen | Model Microsoft Foundry | Rantau Sekunder |
+| Komponen           | Tujuan                             | Teknologi       | Wilayah       |
+|--------------------|----------------------------------|-----------------|---------------|
+| **Web Frontend**   | Antara muka pengguna untuk interaksi pelanggan | Container Apps  | Wilayah Utama |
+| **Agent Router**   | Menghala permintaan ke ejen sesuai | Container Apps  | Wilayah Utama |
+| **Customer Agent** | Mengendalikan pertanyaan perkhidmatan pelanggan | Container Apps + gpt-4.1 | Wilayah Utama |
+| **Inventory Agent**| Menguruskan stok dan pemenuhan    | Container Apps + gpt-4.1-mini | Wilayah Utama |
+| **Microsoft Foundry Models** | Inferens LLM untuk ejen        | Azure AI Services | Multi-wilayah |
+| **AI Search**       | Carian vektor dan RAG           | AI Search Service | Wilayah Utama |
+| **Storage Account** | Muat naik fail dan dokumen      | Blob Storage    | Wilayah Utama |
+| **Application Insights** | Pemantauan dan telemetri         | Monitor         | Wilayah Utama |
+| **Grader Model**    | Sistem penilaian ejen           | Microsoft Foundry Models | Wilayah Sekunder |
 
 ## 📁 Struktur Projek
 
 > **📍 Legenda Status:**  
 > ✅ = Wujud dalam repositori  
 > 📝 = Pelaksanaan rujukan (contoh kod dalam dokumen ini)  
-> 🔨 = Anda perlu cipta ini
+> 🔨 = Anda perlu buat ini  
 
 ```
 retail-multiagent-solution/              🔨 Your project directory
@@ -360,80 +361,80 @@ retail-multiagent-solution/              🔨 Your project directory
         ├── security-scan.yml           # Security scanning
         └── performance-test.yml        # Performance testing
 ```
-
+  
 ---
 
-## 🚀 Mula Cepat: Apa Yang Anda Boleh Buat Sekarang
+## 🚀 Mula Pantas: Apa Yang Boleh Anda Lakukan Sekarang
 
 ### Pilihan 1: Sebar Infrastruktur Sahaja (30 minit)
 
-**Apa yang anda dapat:** Semua perkhidmatan Azure disediakan dan siap untuk pembangunan
+**Apa yang anda dapat:** Semua perkhidmatan Azure disediakan dan sedia untuk pembangunan  
 
 ```bash
 # Klon repositori
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/retail-multiagent-arm-template
 
-# Sediakan infrastruktur
+# Sebarkan infrastruktur
 ./deploy.sh -g myResourceGroup -m standard
 
 # Sahkan penyebaran
 az resource list --resource-group myResourceGroup --output table
 ```
+  
+**Hasil yang Dijangka:**  
+- ✅ Perkhidmatan Model Microsoft Foundry disebar (3 wilayah)  
+- ✅ Perkhidmatan AI Search dibuat (kosong)  
+- ✅ Persekitaran Container Apps sedia  
+- ✅ Storan, Cosmos DB, Key Vault dikonfigurasikan  
+- ❌ Tiada ejen berfungsi lagi (hanya infrastruktur)  
 
-**Hasil Dijangka:**
-- ✅ Perkhidmatan Model Microsoft Foundry disebarkan (3 rantau)
-- ✅ Perkhidmatan Carian AI dicipta (kosong)
-- ✅ Persekitaran Aplikasi Bekas sedia
-- ✅ Penyimpanan, Cosmos DB, Key Vault dikonfigurasikan
-- ❌ Tiada ejen berfungsi lagi (hanya infrastruktur)
+### Pilihan 2: Belajar Arkitektur (2-3 jam)
 
-### Pilihan 2: Kajian Senibina (2-3 jam)
+**Apa yang anda dapat:** Pemahaman mendalam tentang corak multi-ejen  
 
-**Apa yang anda dapat:** Kefahaman mendalam tentang corak multi-ejen
-
-1. Baca dokumen ini sepenuhnya  
-2. Tinjau contoh kod untuk setiap komponen  
+1. Baca dokumen lengkap ini  
+2. Semak contoh kod untuk setiap komponen  
 3. Fahami keputusan reka bentuk dan pertukaran  
-4. Kajian strategi pengoptimuman kos  
+4. Pelajari strategi pengoptimuman kos  
 5. Rancang pendekatan pelaksanaan anda  
 
-**Hasil Dijangka:**
-- ✅ Model mental jelas tentang senibina sistem  
-- ✅ Memahami komponen yang diperlukan  
-- ✅ Anggaran usaha realistik  
+**Hasil yang Dijangka:**  
+- ✅ Model mental jelas tentang arkitektur sistem  
+- ✅ Kefahaman tentang komponen diperlukan  
+- ✅ Anggaran usaha yang realistik  
 - ✅ Pelan pelaksanaan  
 
 ### Pilihan 3: Bina Sistem Lengkap (80-120 jam)
 
-**Apa yang anda dapat:** Penyelesaian multi-ejen sedia produksi
+**Apa yang anda dapat:** Penyelesaian multi-ejen sedia produksi  
 
-1. **Fasa 1:** Sebar infrastruktur (sudah dilakukan di atas)  
-2. **Fasa 2:** Laksanakan ejen gunakan contoh kod di bawah (30-40 jam)  
+1. **Fasa 1:** Sebar infrastruktur (sudah selesai di atas)  
+2. **Fasa 2:** Laksanakan ejen menggunakan contoh kod di bawah (30-40 jam)  
 3. **Fasa 3:** Bina perkhidmatan penghalaan (12-16 jam)  
-4. **Fasa 4:** Cipta UI frontend (20-30 jam)  
-5. **Fasa 5:** Konfigurasikan saluran data (8-12 jam)  
+4. **Fasa 4:** Buat UI hadapan (20-30 jam)  
+5. **Fasa 5:** Konfigurasi saluran data (8-12 jam)  
 6. **Fasa 6:** Tambah pemantauan & penilaian (10-15 jam)  
 
-**Hasil Dijangka:**
+**Hasil yang Dijangka:**  
 - ✅ Sistem multi-ejen berfungsi penuh  
-- ✅ Pemantauan kelas produksi  
+- ✅ Pemantauan tahap produksi  
 - ✅ Pengesahan keselamatan  
-- ✅ Penyebaran kos-dioptimumkan  
+- ✅ Penyebaran dengan pengoptimuman kos  
 
 ---
 
-## 📚 Rujukan Senibina & Panduan Pelaksanaan
+## 📚 Rujukan Arkitektur & Panduan Pelaksanaan
 
-Bahagian berikut menyediakan corak senibina terperinci, contoh konfigurasi, dan kod rujukan untuk membimbing pelaksanaan anda.
+Bahagian berikut menyediakan corak arkitektur terperinci, contoh konfigurasi, dan kod rujukan untuk membimbing pelaksanaan anda.
 
 ## Keperluan Konfigurasi Awal
 
 ### 1. Pelbagai Ejen & Konfigurasi
 
-**Matlamat**: Sebarkan 2 ejen khusus - "Ejen Pelanggan" (khidmat pelanggan) dan "Inventori" (pengurusan stok)
+**Matlamat**: Sebar 2 ejen khusus - "Customer Agent" (perkhidmatan pelanggan) dan "Inventory" (pengurusan stok)
 
-> **📝 Nota:** azure.yaml dan konfigurasi Bicep berikut adalah **contoh rujukan** yang menunjukkan cara menyusun penyebaran multi-ejen. Anda perlu mencipta fail ini dan pelaksanaan ejen yang sepadan.
+> **📝 Nota:** azure.yaml dan konfigurasi Bicep berikut adalah **contoh rujukan** yang menunjukkan cara mengstrukturkan penyebaran multi-ejen. Anda perlu menghasilkan fail ini dan pelaksanaan ejen yang bersesuaian.
 
 #### Langkah Konfigurasi:
 
@@ -466,7 +467,7 @@ services:
           }
         }
 ```
-
+  
 #### Kemas Kini Templat Bicep:
 
 ```bicep
@@ -506,12 +507,12 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
   }
 }]
 ```
-
+  
 ### 2. Pelbagai Model dengan Perancangan Kapasiti
 
-**Matlamat**: Sebarkan model sembang (Pelanggan), model embeddings (carian), dan model penilai dengan pengurusan kuota yang betul
+**Matlamat**: Sebar model sembang (Pelanggan), model embeddings (carian), dan model penilai (grader) dengan pengurusan kuota yang betul
 
-#### Strategi Pelbagai Rantau:
+#### Strategi Multi-Wilayah:
 
 ```bicep
 // infra/models.bicep
@@ -554,8 +555,8 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
   }
 }
 ```
-
-#### Konfigurasi Fallback Rantau:
+  
+#### Konfigurasi Fallback Wilayah:
 
 ```yaml
 # .azure/env/.env.production
@@ -563,12 +564,12 @@ AZURE_OPENAI_REGIONS='["eastus2", "westus2", "francecentral"]'
 AZURE_OPENAI_FALLBACK_ENABLED=true
 MODEL_CAPACITY_REQUIREMENTS='{"gpt-4.1": 35, "text-embedding-ada-002": 30}'
 ```
+  
+### 3. AI Search dengan Konfigurasi Indeks Data
 
-### 3. Carian AI dengan Konfigurasi Indeks Data
+**Matlamat**: Konfigurasikan AI Search untuk kemas kini data dan pengindeksan automatik
 
-**Matlamat**: Konfigurasikan Carian AI untuk kemas kini data dan pengindeksan automatik
-
-#### Hook Pra-Peruntukan:
+#### Hook Pra-Penyediaan:
 
 ```bash
 #!/bin/bash
@@ -576,7 +577,7 @@ MODEL_CAPACITY_REQUIREMENTS='{"gpt-4.1": 35, "text-embedding-ada-002": 30}'
 
 echo "Setting up AI Search configuration..."
 
-# Cipta perkhidmatan carian dengan SKU tertentu
+# Cipta perkhidmatan carian dengan SKU khusus
 az search service create \
   --name "$AZURE_SEARCH_SERVICE_NAME" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -584,8 +585,8 @@ az search service create \
   --partition-count 1 \
   --replica-count 1
 ```
-
-#### Penetapan Data Pasca-Peruntukan:
+  
+#### Setup Data Pasca-Penyediaan:
 
 ```bash
 #!/bin/bash
@@ -596,7 +597,7 @@ echo "Configuring AI Search indexes and uploading initial data..."
 # Dapatkan kunci perkhidmatan carian
 SEARCH_KEY=$(az search admin-key show --service-name "$AZURE_SEARCH_SERVICE_NAME" --resource-group "$AZURE_RESOURCE_GROUP" --query primaryKey -o tsv)
 
-# Cipta skema indeks
+# Buat skema indeks
 curl -X POST "https://$AZURE_SEARCH_SERVICE_NAME.search.windows.net/indexes?api-version=2023-11-01" \
   -H "Content-Type: application/json" \
   -H "api-key: $SEARCH_KEY" \
@@ -608,7 +609,7 @@ python ./scripts/upload_search_data.py \
   --search-key "$SEARCH_KEY" \
   --data-path "./data/initial-docs"
 ```
-
+  
 #### Skema Indeks Carian:
 
 ```json
@@ -633,15 +634,15 @@ python ./scripts/upload_search_data.py \
   }
 }
 ```
+  
+### 4. Konfigurasi Alat Ejen untuk AI Search
 
-### 4. Konfigurasi Alat Ejen untuk Carian AI
+**Matlamat**: Konfigurasikan ejen untuk menggunakan AI Search sebagai alat dasar
 
-**Matlamat**: Konfigurasikan ejen untuk menggunakan Carian AI sebagai alat asas
-
-#### Pelaksanaan Alat Carian Ejen:
+#### Pelaksanaan Alat Cari Ejen:
 
 ```python
-# src/agents/tools/search_tool.py
+# src/agen/alatan/alat_carian.py
 import asyncio
 from azure.search.documents.aio import SearchClient
 from azure.core.credentials import AzureKeyCredential
@@ -681,7 +682,7 @@ class SearchTool:
         )
         return [doc async for doc in results]
 ```
-
+  
 #### Integrasi Ejen:
 
 ```python
@@ -701,7 +702,7 @@ class CustomerAgent:
         # Sediakan konteks untuk LLM
         context = "\n".join([doc['content'] for doc in search_results[:3]])
         
-        # Hasilkan jawapan dengan asas
+        # Hasilkan respons dengan asas
         response = await self.openai_client.chat.completions.create(
             model="gpt-4.1",
             messages=[
@@ -712,10 +713,10 @@ class CustomerAgent:
         
         return response.choices[0].message.content
 ```
-
+  
 ### 5. Integrasi Penyimpanan Muat Naik Fail
 
-**Matlamat**: Membolehkan ejen memproses fail yang dimuat naik (manual, dokumen) untuk konteks RAG
+**Matlamat**: Benarkan ejen memproses fail yang dimuat naik (manual, dokumen) untuk konteks RAG
 
 #### Konfigurasi Penyimpanan:
 
@@ -755,7 +756,7 @@ resource eventGridTopic 'Microsoft.EventGrid/topics@2023-12-15-preview' = {
   }
 }
 ```
-
+  
 #### Saluran Pemprosesan Dokumen:
 
 ```python
@@ -776,7 +777,7 @@ class DocumentProcessor:
     async def process_uploaded_file(self, container_name: str, blob_name: str):
         """Process uploaded file and add to search index"""
         
-        # Muat turun fail dari simpanan blob
+        # Muat turun fail dari penyimpanan blob
         blob_client = self.storage_client.get_blob_client(
             container=container_name, 
             blob=blob_name
@@ -796,7 +797,7 @@ class DocumentProcessor:
             for line in page.lines:
                 text_content += line.content + "\n"
         
-        # Jana pengekodan
+        # Jana penjelmaan
         embedding_response = await self.openai_client.embeddings.create(
             model="text-embedding-ada-002",
             input=text_content
@@ -813,10 +814,10 @@ class DocumentProcessor:
         
         await self.search_client.upload_documents([document])
 ```
+  
+### 6. Integrasi Bing Search
 
-### 6. Integrasi Carian Bing
-
-**Matlamat**: Tambah keupayaan Carian Bing untuk maklumat masa nyata
+**Matlamat**: Tambah keupayaan Bing Search untuk maklumat masa nyata
 
 #### Penambahan Sumber Bicep:
 
@@ -835,8 +836,8 @@ resource bingSearchService 'Microsoft.Bing/accounts@2020-06-10' = {
 output bingSearchKey string = bingSearchService.listKeys().key1
 output bingSearchEndpoint string = 'https://api.bing.microsoft.com/v7.0/search'
 ```
-
-#### Alat Carian Bing:
+  
+#### Alat Bing Search:
 
 ```python
 # src/ejen/alatan/bing_search_tool.py
@@ -877,14 +878,14 @@ class BingSearchTool:
                 
                 return results
 ```
-
+  
 ---
 
-## Pemantauan & Kebolehperhati
+## Pemantauan & Kebolehpantauan
 
 ### 7. Penjejakan dan Application Insights
 
-**Matlamat**: Pemantauan komprehensif dengan log jejak dan application insights
+**Matlamat**: Pemantauan menyeluruh dengan log jejak dan applications insights
 
 #### Konfigurasi Application Insights:
 
@@ -938,8 +939,8 @@ resource agentPerformanceAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   }
 }
 ```
-
-#### Pelaksanaan Telemetri Khusus:
+  
+#### Pelaksanaan Telemetri Tersuai:
 
 ```python
 # src/telemetry/agent_telemetry.py
@@ -953,7 +954,7 @@ class AgentTelemetry:
     def __init__(self, instrumentation_key: str):
         self.telemetry_client = TelemetryClient(instrumentation_key)
         
-        # Tetapkan logging
+        # Konfigurasikan log
         handler = LoggingHandler(instrumentation_key)
         logging.basicConfig(handlers=[handler], level=logging.INFO)
         self.logger = logging.getLogger(__name__)
@@ -1044,7 +1045,7 @@ class AgentTelemetry:
         """Rough token estimation (4 characters per token)"""
         return len(text) // 4
 ```
-
+  
 ### 8. Pengesahan Keselamatan Red Teaming
 
 **Matlamat**: Ujian keselamatan automatik untuk ejen dan model
@@ -1165,8 +1166,8 @@ class RedTeamScanner:
     
     async def _send_test_prompt(self, prompt: str) -> str:
         """Send test prompt to target agent"""
-        # Pelaksanaan akan menghantar permintaan HTTP ke titik hujung ejen
-        # Untuk tujuan demo, memulangkan penanda tempat
+        # Pelaksanaan akan menghantar permintaan HTTP ke titik akhir ejen
+        # Untuk tujuan demo, memulangkan tempat letak
         import aiohttp
         
         async with aiohttp.ClientSession() as session:
@@ -1223,14 +1224,14 @@ class RedTeamScanner:
         total_strategies = len(scan_results['strategies_tested'])
         vulnerabilities = len(scan_results['vulnerabilities_found'])
         
-        # Pengiraan asas: 100 - (kerentanan / jumlah * 100)
+        # Pemarkahan asas: 100 - (kerentanan / jumlah * 100)
         if total_strategies == 0:
             return 100.0
         
         vulnerability_ratio = vulnerabilities / total_strategies
         base_score = max(0, 100 - (vulnerability_ratio * 100))
         
-        # Kurangkan skor berdasarkan keterukan
+        # Kurangkan skor berdasarkan tahap keterukan
         severity_penalty = 0
         for vuln in scan_results['vulnerabilities_found']:
             severity_weights = {'low': 5, 'medium': 15, 'high': 30, 'critical': 50}
@@ -1239,12 +1240,12 @@ class RedTeamScanner:
         final_score = max(0, base_score - severity_penalty)
         return round(final_score, 2)
 ```
-
+  
 #### Saluran Keselamatan Automatik:
 
 ```bash
 #!/bin/bash
-# scripts/security_scan.sh
+# skrip/pengesanan_keamanan.sh
 
 echo "Starting Red Team Security Scan..."
 
@@ -1263,12 +1264,12 @@ python -m src.security.red_team_scanner \
 
 echo "Security scan completed. Check security_reports/ for results."
 ```
+  
+### 9. Penilaian Ejen dengan Model Grader
 
-### 9. Penilaian Ejen dengan Model Penilai
+**Matlamat**: Sebar sistem penilaian dengan model grader khusus
 
-**Matlamat**: Sebarkan sistem penilaian dengan model penilai khusus
-
-#### Konfigurasi Model Penilai:
+#### Konfigurasi Model Grader:
 
 ```bicep
 // infra/evaluation.bicep
@@ -1310,8 +1311,8 @@ resource graderDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023
   }
 }
 ```
-
-#### Rangka Kerja Penilaian:
+  
+#### Framework Penilaian:
 
 ```python
 # src/evaluation/agent_evaluator.py
@@ -1425,7 +1426,7 @@ class AgentEvaluator:
                 max_tokens=500
             )
             
-            # Tafsirkan respons JSON
+            # Kuraikan respons JSON
             grading_text = grader_response.choices[0].message.content
             grading_result = json.loads(grading_text)
             
@@ -1486,7 +1487,7 @@ class AgentEvaluator:
         
         return summary
 ```
-
+  
 #### Konfigurasi Kes Ujian:
 
 ```json
@@ -1523,14 +1524,14 @@ class AgentEvaluator:
   ]
 }
 ```
-
+  
 ---
 
 ## Penyesuaian & Kemas Kini
 
-### 10. Penyesuaian Aplikasi Bekas
+### 10. Penyesuaian Container App
 
-**Matlamat**: Kemas kini konfigurasi aplikasi bekas dan gantikan dengan UI tersuai
+**Matlamat**: Kemas kini konfigurasi container app dan ganti dengan UI tersuai
 
 #### Konfigurasi Dinamik:
 
@@ -1547,7 +1548,7 @@ services:
       BRAND_COLOR: "#2E86AB"
       CUSTOM_LOGO_URL: ${LOGO_URL}
 ```
-
+  
 #### Pembangunan Frontend Tersuai:
 
 ```dockerfile
@@ -1574,7 +1575,7 @@ FROM nginx:alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 ```
-
+  
 #### Skrip Bina dan Sebar:
 
 ```bash
@@ -1605,18 +1606,18 @@ az containerapp update \
 
 echo "Frontend deployed successfully!"
 ```
-
+  
 ---
 
 ## 🔧 Panduan Penyelesaian Masalah
 
-### Isu dan Penyelesaian Umum
+### Isu Umum dan Penyelesaian
 
-#### 1. Had Kuota Aplikasi Bekas
+#### 1. Had Kuota Container Apps
 
-**Masalah**: Penyebaran gagal kerana had kuota rantau
+**Masalah:** Penyebaran gagal disebabkan had kuota wilayah
 
-**Penyelesaian**:
+**Penyelesaian:**  
 ```bash
 # Semak penggunaan kuota semasa
 az containerapp env show \
@@ -1624,7 +1625,7 @@ az containerapp env show \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.workloadProfiles"
 
-# Memohon peningkatan kuota
+# Mohon peningkatan kuota
 az support tickets create \
   --ticket-name "ContainerApps-Quota-Increase" \
   --severity "minimal" \
@@ -1634,12 +1635,12 @@ az support tickets create \
   --contact-phone-number "+1234567890" \
   --description "Request quota increase for Container Apps in region X"
 ```
-
+  
 #### 2. Luput Penyebaran Model
 
-**Masalah**: Penyebaran model gagal kerana versi API tamat tempoh
+**Masalah:** Penyebaran model gagal disebabkan versi API luput
 
-**Penyelesaian**:
+**Penyelesaian:**  
 ```python
 # scripts/update_model_versions.py
 import requests
@@ -1647,7 +1648,7 @@ import json
 
 def check_model_versions():
     """Check for latest model versions"""
-    # Ini akan memanggil Microsoft Foundry Models API untuk mendapatkan versi semasa
+    # Ini akan memanggil Microsoft Foundry Models API untuk mendapatkan versi terkini
     latest_versions = {
         "gpt-4.1": "2024-11-20",
         "text-embedding-ada-002": "2", 
@@ -1664,7 +1665,7 @@ def update_bicep_templates(latest_versions):
     """Update Bicep templates with latest versions"""
     template_path = "./infra/models.bicep"
     
-    # Baca dan kemas kini templat
+    # Baca dan kemaskini templat
     with open(template_path, 'r') as f:
         content = f.read()
     
@@ -1683,14 +1684,14 @@ if __name__ == "__main__":
     versions = check_model_versions()
     update_bicep_templates(versions)
 ```
-
+  
 #### 3. Integrasi Penalaan Halus
 
-**Masalah**: Bagaimana untuk mengintegrasi model yang ditala halus dalam penyebaran AZD
+**Masalah:** Cara mengintegrasikan model yang ditala halus ke dalam penyebaran AZD
 
-**Penyelesaian**:
+**Penyelesaian:**  
 ```python
-# skrip/fine_tuning_pipeline.py
+# scripts/fine_tuning_pipeline.py
 import asyncio
 from openai import AsyncOpenAI
 
@@ -1726,23 +1727,23 @@ class FineTuningPipeline:
             fine_tuned_model = job.fine_tuned_model
             print(f"Fine-tuned model ready: {fine_tuned_model}")
             
-            # Kemas kini penempatan untuk menggunakan model yang ditala halus
-            # Ini akan memanggil Azure CLI untuk mengemas kini penempatan
+            # Kemas kini penyebaran untuk menggunakan model yang telah ditala dengan baik
+            # Ini akan memanggil Azure CLI untuk mengemas kini penyebaran
             return fine_tuned_model
         else:
             print(f"Job status: {job.status}")
             return None
 ```
-
+  
 ---
 
 ## Soalan Lazim & Eksplorasi Terbuka
 
 ### Soalan Lazim
 
-#### S: Adakah terdapat cara mudah untuk menyebarkan berbilang ejen (corak reka bentuk)?
+#### S: Adakah terdapat cara mudah untuk menyebarkan pelbagai ejen (corak reka bentuk)?
 
-**J: Ya! Gunakan Corak Multi-Ejen:**
+**J: Ya! Gunakan Corak Multi-Ejen:**  
 
 ```yaml
 # azure.yaml - Multi-Agent Configuration
@@ -1758,10 +1759,10 @@ services:
           "returns": {"type": "returns_processing", "model": "gpt-4.1-mini", "capacity": 5}
         }
 ```
+  
+#### S: Bolehkah saya menyebarkan "model router" sebagai model (implikasi kos)?
 
-#### S: Bolehkah saya menyebarkan "penghala model" sebagai model (implikasi kos)?
-
-**J: Ya, dengan pertimbangan teliti:**
+**J: Ya, dengan pertimbangan teliti:**  
 
 ```python
 # Pelaksanaan Penghala Model
@@ -1787,19 +1788,19 @@ class ModelRouter:
         # Pelaksanaan akan mengira potensi penjimatan
         pass
 ```
-
-**Implikasi Kos:**
+  
+**Implikasi Kos:**  
 - **Penjimatan**: Pengurangan kos 60-80% untuk pertanyaan mudah  
 - **Pertukaran**: Peningkatan kelewatan sedikit untuk logik penghalaan  
-- **Pemantauan**: Jejaki ketepatan berbanding metrik kos  
+- **Pemantauan**: Jejaki ketepatan vs metrik kos  
 
-#### S: Bolehkah saya memulakan kerja penalaan halus dari templat azd?
+#### S: Bolehkah saya mulakan kerja penalaan halus dari templat azd?
 
-**J: Ya, menggunakan hook pasca-peruntukan:**
+**J: Ya, menggunakan hook pasca-penyediaan:**  
 
 ```bash
 #!/bin/bash
-# hooks/postprovision.sh - Penyelarasan Halus Integrasi
+# hooks/postprovision.sh - Penalaan Halus Integrasi
 
 echo "Starting fine-tuning pipeline..."
 
@@ -1808,7 +1809,7 @@ TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
   --data-path "./data/fine_tuning/training.jsonl" \
   --openai-key "$AZURE_OPENAI_API_KEY")
 
-# Mula kerja penyelarasan halus
+# Mulakan kerja penalaan halus
 FINE_TUNE_JOB_ID=$(python scripts/start_fine_tuning.py \
   --training-file-id "$TRAINING_FILE_ID" \
   --model "gpt-4.1-mini")
@@ -1819,10 +1820,10 @@ echo "$FINE_TUNE_JOB_ID" > .azure/fine_tune_job_id
 echo "Fine-tuning job started: $FINE_TUNE_JOB_ID"
 echo "Monitor progress with: azd hooks run monitor-fine-tuning"
 ```
-
+  
 ### Senario Lanjutan
 
-#### Strategi Penyebaran Multi-Rantau
+#### Strategi Penyebaran Multi-Wilayah
 
 ```bicep
 // infra/multi-region.bicep
@@ -1857,7 +1858,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
   }
 }
 ```
-
+  
 #### Rangka Kerja Pengoptimuman Kos
 
 ```python
@@ -1882,7 +1883,7 @@ class CostOptimizer:
                     'estimated_savings': usage['monthly_cost'] * 0.3
                 })
         
-        # Analisis waktu puncak
+        # Analisis masa puncak
         peak_patterns = self.analytics.get_peak_patterns()
         if peak_patterns['variance'] > 0.6:
             recommendations.append({
@@ -1901,83 +1902,85 @@ class CostOptimizer:
             elif rec['type'] == 'auto_scaling':
                 self._enable_auto_scaling(rec)
 ```
+  
 
 ---
-## ✅ Templat ARM Sedia-Digunakan
 
-> **✨ INI MEMANG WUJUD DAN BERFUNGSI!**  
-> Tidak seperti contoh kod konseptual di atas, templat ARM adalah **penyebaran infrastruktur sebenar yang berfungsi** yang disertakan dalam repositori ini.
+## ✅ Templat ARM Sedia Untuk Dideploy
+
+> **✨ INI SEMEMANGNYA WUJUD DAN BERFUNGSI!**  
+> Berbeza dengan contoh kod konseptual di atas, templat ARM adalah **penyebaran infrastruktur sebenar yang berfungsi** yang disertakan dalam repositori ini.
 
 ### Apa Yang Sebenarnya Dilakukan Oleh Templat Ini
 
-Templat ARM di [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) memperuntukkan **semua infrastruktur Azure** yang diperlukan untuk sistem multi-ejen. Ini adalah **satu-satunya komponen sedia-jalankan** - yang lain memerlukan pembangunan.
+Templat ARM di [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) menyediakan **semua infrastruktur Azure** yang diperlukan untuk sistem multi-ejen. Ini adalah **satu-satunya komponen sedia untuk dijalankan** - yang lain memerlukan pembangunan.
 
 ### Apa Yang Termasuk Dalam Templat ARM
 
 Templat ARM yang terletak di [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) termasuk:
 
 #### **Infrastruktur Lengkap**
-- ✅ Penyebaran **Model Microsoft Foundry Multi-wilayah** (gpt-4.1, gpt-4.1-mini, embeddings, grader)  
-- ✅ **Azure AI Search** dengan kebolehan carian vektor  
-- ✅ **Azure Storage** dengan bekas dokumen dan muat naik  
-- ✅ **Persekitaran Aplikasi Kontena** dengan penskalaan automatik  
-- ✅ Aplikasi kontena **Penghala Ejen & Frontend**  
-- ✅ **Cosmos DB** untuk penyimpanan sejarah sembang  
-- ✅ **Application Insights** untuk pemantauan menyeluruh  
-- ✅ **Key Vault** untuk pengurusan rahsia yang selamat  
-- ✅ **Document Intelligence** untuk pemprosesan fail  
-- ✅ **Bing Search API** untuk maklumat masa nyata  
+- ✅ Penyebaran **Model Microsoft Foundry Pelbagai Wilayah** (gpt-4.1, gpt-4.1-mini, embeddings, grader)
+- ✅ **Azure AI Search** dengan kebolehan carian vektor
+- ✅ **Azure Storage** dengan bekas dokumen dan muat naik
+- ✅ **Persekitaran Container Apps** dengan skala automatik
+- ✅ **Agent Router & Frontend** container apps
+- ✅ **Cosmos DB** untuk penyimpanan sejarah chat
+- ✅ **Application Insights** untuk pemantauan menyeluruh
+- ✅ **Key Vault** untuk pengurusan rahsia yang selamat
+- ✅ **Document Intelligence** untuk pemprosesan fail
+- ✅ **Bing Search API** untuk maklumat masa nyata
 
 #### **Mod Penyebaran**
-| Mod | Kegunaan | Sumber | Anggaran Kos/Bulan |
+| Mod | Kes Penggunaan | Sumber | Anggaran Kos/Bulan |
 |------|----------|-----------|---------------------|
-| **Minimal** | Pembangunan, Ujian | SKU Asas, Wilayah Tunggal | $100-370 |
-| **Standard** | Pengeluaran, Skala sederhana | SKU Standard, Multi-wilayah | $420-1,450 |
-| **Premium** | Perusahaan, Skala tinggi | SKU Premium, Persediaan HA | $1,150-3,500 |
+| **Minimum** | Pembangunan, Ujian | SKU Asas, Wilayah tunggal | $100-370 |
+| **Standard** | Pengeluaran, Skala sederhana | SKU Standard, Pelbagai wilayah | $420-1,450 |
+| **Premium** | Perusahaan, Skala tinggi | SKU Premium, konfigurasi HA | $1,150-3,500 |
 
 ### 🎯 Pilihan Penyebaran Pantas
 
-#### Pilihan 1: Penyebaran Azure Satu Klik
+#### Pilihan 1: Penyebaran Azure Satu-Klik
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-#### Pilihan 2: Penyebaran CLI Azure
+#### Pilihan 2: Penyebaran Azure CLI
 
 ```bash
 # Klon repositori
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/examples/retail-multiagent-arm-template
 
-# Jadikan skrip penempatan boleh dijalankan
+# Jadikan skrip penyebaran boleh dilaksanakan
 chmod +x deploy.sh
 
-# Lancarkan dengan tetapan lalai (mod Standard)
+# Sebarkan dengan tetapan lalai (Mod Standard)
 ./deploy.sh -g myResourceGroup
 
-# Lancarkan untuk pengeluaran dengan ciri premium
+# Sebarkan untuk pengeluaran dengan ciri premium
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 
-# Lancarkan versi minimal untuk pembangunan
+# Sebarkan versi minimal untuk pembangunan
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
-  
-#### Pilihan 3: Penyebaran Templat ARM Secara Langsung
+
+#### Pilihan 3: Penyebaran Templat ARM Langsung
 
 ```bash
 # Cipta kumpulan sumber
 az group create --name myResourceGroup --location eastus2
 
-# Terapkan templat secara langsung
+# Lancarkan templat secara langsung
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
   --parameters azuredeploy.parameters.json \
   --parameters projectName=retail environmentName=prod
 ```
-  
+
 ### Output Templat
 
-Selepas penyebaran berjaya, anda akan terima:
+Selepas penyebaran berjaya, anda akan menerima:
 
 ```json
 {
@@ -1990,12 +1993,12 @@ Selepas penyebaran berjaya, anda akan terima:
   "applicationInsightsName": "retail-ai-abc123"
 }
 ```
-  
+
 ### 🔧 Konfigurasi Selepas Penyebaran
 
 Templat ARM mengendalikan penyediaan infrastruktur. Selepas penyebaran:
 
-1. **Konfigurasikan Indeks Carian**:  
+1. **Konfigurasikan Indeks Carian**:
    ```bash
    # Gunakan skema carian yang disediakan
    curl -X POST "${SEARCH_ENDPOINT}/indexes?api-version=2023-11-01" \
@@ -2003,8 +2006,8 @@ Templat ARM mengendalikan penyediaan infrastruktur. Selepas penyebaran:
      -H "api-key: ${SEARCH_KEY}" \
      -d @../data/search-schema.json
    ```
-  
-2. **Muat Naik Dokumen Awal**:  
+
+2. **Muat Naik Dokumen Awal**:
    ```bash
    # Muat naik manual produk dan pangkalan pengetahuan
    az storage blob upload-batch \
@@ -2012,17 +2015,17 @@ Templat ARM mengendalikan penyediaan infrastruktur. Selepas penyebaran:
      --source ../data/initial-docs \
      --account-name ${STORAGE_ACCOUNT}
    ```
-  
-3. **Sebarkan Kod Ejen**:  
+
+3. **Deploy Kod Ejen**:
    ```bash
-   # Bina dan laksanakan aplikasi ejen sebenar
+   # Membina dan melancarkan aplikasi ejen sebenar
    docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
    az containerapp update \
      --name retail-router \
      --resource-group myResourceGroup \
      --image myregistry.azurecr.io/agent-router:latest
    ```
-  
+
 ### 🎛️ Pilihan Penyesuaian
 
 Edit `azuredeploy.parameters.json` untuk menyesuaikan penyebaran anda:
@@ -2038,121 +2041,121 @@ Edit `azuredeploy.parameters.json` untuk menyesuaikan penyebaran anda:
   "enableSecurity": {"value": true}
 }
 ```
-  
-### 📊 Ciri-ciri Penyebaran
 
-- ✅ **Pengesahan prasyarat** (Azure CLI, kuota, kebenaran)  
-- ✅ **Ketersediaan tinggi multi-wilayah** dengan pemulihan automatik  
-- ✅ **Pemantauan menyeluruh** dengan Application Insights dan Log Analytics  
-- ✅ **Amalan keselamatan terbaik** dengan Key Vault dan RBAC  
-- ✅ **Pengoptimuman kos** dengan mod penyebaran yang boleh dikonfigurasi  
-- ✅ **Penskalaan automatik** berdasarkan corak permintaan  
-- ✅ **Kemas kini tanpa henti** dengan semakan Container Apps  
+### 📊 Ciri Penyebaran
+
+- ✅ **Pengesahan Prasyarat** (Azure CLI, kuota, kebenaran)
+- ✅ **Ketersediaan Tinggi Pelbagai Wilayah** dengan failover automatik
+- ✅ **Pemantauan Menyeluruh** dengan Application Insights dan Log Analytics
+- ✅ **Amalan Keselamatan Terbaik** dengan Key Vault dan RBAC
+- ✅ **Optimasi Kos** dengan mod penyebaran yang boleh dilaras
+- ✅ **Penskalaan Automatik** berdasarkan corak permintaan
+- ✅ **Kemas Kini Tanpa Henti** dengan revisi Container Apps
 
 ### 🔍 Pemantauan dan Pengurusan
 
-Setelah disebarkan, pantau penyelesaian anda melalui:
+Setelah dideploy, pantau penyelesaian anda melalui:
 
-- **Application Insights**: Metrik prestasi, pengesanan kebergantungan, dan telemetri tersuai  
+- **Application Insights**: Metrik prestasi, penjejakan pergantungan, dan telemetri khusus  
 - **Log Analytics**: Log berpusat dari semua komponen  
-- **Azure Monitor**: Kesihatan sumber dan pemantauan ketersediaan  
+- **Azure Monitor**: Pemantauan kesihatan dan ketersediaan sumber  
 - **Pengurusan Kos**: Penjejakan kos masa nyata dan amaran bajet  
 
 ---
 
 ## 📚 Panduan Pelaksanaan Lengkap
 
-Dokumen senario ini bersama templat ARM menyediakan segala yang diperlukan untuk menyebarkan penyelesaian sokongan pelanggan multi-ejen siap pengeluaran. Pelaksanaan meliputi:
+Dokumen senario ini digabungkan dengan templat ARM menyediakan segala yang diperlukan untuk menyebarkan solusi sokongan pelanggan multi-ejen yang sedia untuk produksi. Pelaksanaan merangkumi:
 
-✅ **Reka Bentuk Seni Bina** - Reka bentuk sistem lengkap dengan hubungan komponen  
+✅ **Reka Bentuk Seni Bina** - Reka bentuk sistem menyeluruh dengan hubungan komponen  
 ✅ **Penyediaan Infrastruktur** - Templat ARM lengkap untuk penyebaran satu klik  
 ✅ **Konfigurasi Ejen** - Persediaan terperinci untuk ejen Pelanggan dan Inventori  
-✅ **Penyebaran Multi-Model** - Penempatan strategik model merentasi wilayah  
+✅ **Penyebaran Pelbagai Model** - Penempatan model strategik merentasi wilayah  
 ✅ **Integrasi Carian** - AI Search dengan kebolehan vektor dan pengindeksan data  
-✅ **Pelaksanaan Keselamatan** - Red teaming, pengimbasan kerentanan, dan amalan selamat  
+✅ **Pelaksanaan Keselamatan** - Red teaming, imbasan kerentanan, dan amalan selamat  
 ✅ **Pemantauan & Penilaian** - Telemetri menyeluruh dan rangka kerja penilaian ejen  
-✅ **Kesiapan Pengeluaran** - Penyebaran tahap perusahaan dengan HA dan pemulihan bencana  
-✅ **Pengoptimuman Kos** - Penghalaan pintar dan penskalaan berasaskan penggunaan  
+✅ **Kesediaan Pengeluaran** - Penyebaran kelas perusahaan dengan HA dan pemulihan bencana  
+✅ **Optimasi Kos** - Penghalaan pintar dan penskalaan berdasarkan penggunaan  
 ✅ **Panduan Penyelesaian Masalah** - Isu biasa dan strategi penyelesaian  
 
 ---
 
 ## 📊 Ringkasan: Apa Yang Anda Telah Pelajari
 
-### Corak Seni Bina Diliputi
+### Corak Seni Bina Yang Diliputi
 
-✅ **Reka Bentuk Sistem Multi-Ejen** - Ejen khusus (Pelanggan + Inventori) dengan model dedicated  
-✅ **Penyebaran Multi-Wilayah** - Penempatan model strategik untuk pengoptimuman kos dan kebolehpercayaan  
-✅ **Seni Bina RAG** - Integrasi AI Search dengan embeddings vektor untuk jawapan berpandukan fakta  
-✅ **Penilaian Ejen** - Model grader khusus untuk penilaian kualiti  
-✅ **Rangka Kerja Keselamatan** - Corak red teaming dan pengimbasan kerentanan  
-✅ **Pengoptimuman Kos** - Strategi penghalaan model dan perancangan kapasiti  
-✅ **Pemantauan Pengeluaran** - Application Insights dengan telemetri tersuai  
+✅ **Reka Bentuk Sistem Multi-Ejen** - Ejen khusus (Pelanggan + Inventori) dengan model berdedikasi  
+✅ **Penyebaran Pelbagai Wilayah** - Penempatan model strategik untuk optimasi kos dan redundansi  
+✅ **Seni Bina RAG** - Integrasi AI Search dengan vektor embeddings untuk jawapan berasaskan sumber  
+✅ **Penilaian Ejen** - Model penilai berdedikasi untuk penilaian kualiti  
+✅ **Rangka Kerja Keselamatan** - Corak red teaming dan imbasan kerentanan  
+✅ **Optimasi Kos** - Strategi penghalaan model dan perancangan kapasiti  
+✅ **Pemantauan Pengeluaran** - Application Insights dengan telemetri khusus  
 
 ### Apa Yang Dokumen Ini Sediakan
 
-| Komponen | Status | Lokasi |
-|-----------|--------|------------------|
-| **Templat Infrastruktur** | ✅ Sedia Digunakan | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
-| **Rajah Seni Bina** | ✅ Lengkap | Rajah Mermaid di atas |
-| **Contoh Kod** | ✅ Pelaksanaan Rujukan | Sepanjang dokumen ini |
-| **Corak Konfigurasi** | ✅ Panduan Terperinci | Bahagian 1-10 di atas |
-| **Pelaksanaan Ejen** | 🔨 Anda Bangunkan | ~40 jam pembangunan |
-| **UI Frontend** | 🔨 Anda Bangunkan | ~25 jam pembangunan |
-| **Pipelines Data** | 🔨 Anda Bangunkan | ~10 jam pembangunan |
+| Komponen | Status | Di Mana Untuk Ditemui |
+|-----------|--------|-----------------------|
+| **Templat Infrastruktur** | ✅ Sedia untuk Deploy | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
+| **Diagram Seni Bina** | ✅ Lengkap | Diagram Mermaid di atas |
+| **Contoh Kod** | ✅ Implementasi Rujukan | Sepanjang dokumen ini |
+| **Corak Konfigurasi** | ✅ Panduan Terperinci | Seksyen 1-10 di atas |
+| **Implementasi Ejen** | 🔨 Anda Bangunkan | ~40 jam pembangunan |
+| **Frontend UI** | 🔨 Anda Bangunkan | ~25 jam pembangunan |
+| **Saluran Data** | 🔨 Anda Bangunkan | ~10 jam pembangunan |
 
-### Pemeriksaan Realiti: Apa Yang Sebenarnya Wujud
+### Semakan Realiti: Apa Yang Sebenarnya Wujud
 
-**Dalam Repositori (Sedia Sekarang):**  
-- ✅ Templat ARM menyebarkan 15+ perkhidmatan Azure (azuredeploy.json)  
+**Dalam Repositori (Sedia Sekarang):**
+- ✅ Templat ARM menyebarkan 15+ servis Azure (azuredeploy.json)  
 - ✅ Skrip penyebaran dengan pengesahan (deploy.sh)  
 - ✅ Konfigurasi parameter (azuredeploy.parameters.json)  
 
-**Dirujuk Dalam Dokumen (Anda Hasilkan):**  
-- 🔨 Pelaksanaan kod ejen (~30-40 jam)  
+**Dirujuk Dalam Dokumen (Anda Wujudkan):**
+- 🔨 Kod pelaksanaan ejen (~30-40 jam)  
 - 🔨 Perkhidmatan penghalaan (~12-16 jam)  
 - 🔨 Aplikasi frontend (~20-30 jam)  
-- 🔨 Skrip penyediaan data (~8-12 jam)  
+- 🔨 Skrip persediaan data (~8-12 jam)  
 - 🔨 Rangka kerja pemantauan (~10-15 jam)  
 
-### Langkah Anda Seterusnya
+### Langkah Seterusnya Anda
 
-#### Jika Anda Mahu Menyebarkan Infrastruktur (30 minit)  
+#### Jika Mahu Deploy Infrastruktur (30 minit)
 ```bash
 cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
-  
-#### Jika Anda Mahu Membangun Sistem Lengkap (80-120 jam)  
-1. ✅ Baca dan fahami dokumen seni bina ini (2-3 jam)  
-2. ✅ Sebarkan infrastruktur menggunakan templat ARM (30 minit)  
-3. 🔨 Laksanakan ejen menggunakan corak kod rujukan (~40 jam)  
-4. 🔨 Bina perkhidmatan penghala menggunakan FastAPI/Express (~15 jam)  
-5. 🔨 Cipta UI frontend dengan React/Vue (~25 jam)  
-6. 🔨 Konfigurasi pipeline data dan indeks carian (~10 jam)  
-7. 🔨 Tambah pemantauan dan penilaian (~15 jam)  
-8. ✅ Uji, amankan, dan optimakan (~10 jam)  
 
-#### Jika Anda Mahu Belajar Corak Multi-Ejen (Belajar)  
-- 📖 Kajian rajah seni bina dan hubungan komponen  
+#### Jika Mahu Bangunkan Sistem Lengkap (80-120 jam)
+1. ✅ Baca dan fahami dokumen seni bina ini (2-3 jam)  
+2. ✅ Deploy infrastruktur menggunakan templat ARM (30 minit)  
+3. 🔨 Laksanakan ejen menggunakan corak kod rujukan (~40 jam)  
+4. 🔨 Bangunkan perkhidmatan penghalaan dengan FastAPI/Express (~15 jam)  
+5. 🔨 Cipta UI frontend dengan React/Vue (~25 jam)  
+6. 🔨 Konfigurasikan saluran data dan indeks carian (~10 jam)  
+7. 🔨 Tambah pemantauan dan penilaian (~15 jam)  
+8. ✅ Uji, selamatkan, dan optimasi (~10 jam)  
+
+#### Jika Mahu Pelajari Corak Multi-Ejen (Belajar)
+- 📖 Tinjau diagram seni bina dan hubungan komponen  
 - 📖 Pelajari contoh kod untuk SearchTool, BingTool, AgentEvaluator  
-- 📖 Fahami strategi penyebaran multi-wilayah  
+- 📖 Fahami strategi penyebaran pelbagai wilayah  
 - 📖 Pelajari rangka kerja penilaian dan keselamatan  
 - 📖 Gunakan corak untuk projek anda sendiri  
 
-### Intipati Utama
+### Perkara Penting
 
-1. **Infrastruktur vs Aplikasi** - Templat ARM menyediakan infrastruktur; ejen memerlukan pembangunan  
-2. **Strategi Multi-Wilayah** - Penempatan model strategik mengurangkan kos dan memperbaiki kebolehpercayaan  
-3. **Rangka Kerja Penilaian** - Model grader dedicated membolehkan penilaian kualiti berterusan  
-4. **Keselamatan Diutamakan** - Red teaming dan pengimbasan kerentanan penting untuk pengeluaran  
-5. **Pengoptimuman Kos** - Penghalaan pintar antara gpt-4.1 dan gpt-4.1-mini menjimatkan 60-80%  
+1. **Infrastruktur vs. Aplikasi** - Templat ARM menyediakan infrastruktur; ejen memerlukan pembangunan  
+2. **Strategi Pelbagai Wilayah** - Penempatan model strategik mengurangkan kos dan meningkatkan kebolehpercayaan  
+3. **Rangka Penilaian** - Model penilai berdedikasi membolehkan penilaian kualiti berterusan  
+4. **Keselamatan Diutamakan** - Red teaming dan imbasan kerentanan penting untuk pengeluaran  
+5. **Optimasi Kos** - Penghalaan pintar antara gpt-4.1 dan gpt-4.1-mini menjimatkan 60-80%  
 
 ### Anggaran Kos
 
-| Mod Penyebaran | Infrastruktur/Bulan | Pembangunan (Satu Kali) | Jumlah Bulan Pertama |
-|-----------------|---------------------|------------------------|-------------------|
-| **Minimal** | $100-370 | $15K-25K (80-120 jam) | $15.1K-25.4K |
+| Mod Penyebaran | Infrastruktur/Bulan | Pembangunan (Sekali) | Jumlah Bulan Pertama |
+|-----------------|---------------------|----------------------|----------------------|
+| **Minimum** | $100-370 | $15K-25K (80-120 jam) | $15.1K-25.4K |
 | **Standard** | $420-1,450 | $15K-25K (usaha sama) | $15.4K-26.5K |
 | **Premium** | $1,150-3,500 | $15K-25K (usaha sama) | $16.2K-28.5K |
 
@@ -2163,23 +2166,23 @@ cd retail-multiagent-arm-template
 - 📚 [Panduan Penyebaran Templat ARM](retail-multiagent-arm-template/README.md) - Persediaan infrastruktur  
 - 📚 [Amalan Terbaik Model Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/) - Penyebaran model  
 - 📚 [Dokumentasi AI Search](https://learn.microsoft.com/azure/search/) - Konfigurasi carian vektor  
-- 📚 [Corak Aplikasi Kontena](https://learn.microsoft.com/azure/container-apps/) - Penyebaran mikroservis  
+- 📚 [Corak Container Apps](https://learn.microsoft.com/azure/container-apps/) - Penyebaran mikroservis  
 - 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Persediaan pemantauan  
 
-### Soalan atau Isu?
+### Soalan atau Masalah?
 
-- 🐛 [Lapor Isu](https://github.com/microsoft/AZD-for-beginners/issues) - Pepijat templat atau kesilapan dokumentasi  
+- 🐛 [Laporkan Masalah](https://github.com/microsoft/AZD-for-beginners/issues) - Pepijat templat atau ralat dokumentasi  
 - 💬 [Perbincangan GitHub](https://github.com/microsoft/AZD-for-beginners/discussions) - Soalan seni bina  
 - 📖 [FAQ](../resources/faq.md) - Soalan lazim dijawab  
 - 🔧 [Panduan Penyelesaian Masalah](../docs/troubleshooting/common-issues.md) - Isu penyebaran  
 
 ---
 
-**Senario komprehensif ini menyediakan pelan seni bina bertaraf perusahaan untuk sistem AI multi-ejen, lengkap dengan templat infrastruktur, panduan pelaksanaan, dan amalan terbaik pengeluaran untuk membina penyelesaian sokongan pelanggan sofistikated menggunakan Azure Developer CLI.**
+**Senario komprehensif ini menyediakan pelan seni bina kelas perusahaan untuk sistem AI multi-ejen, lengkap dengan templat infrastruktur, panduan pelaksanaan, dan amalan terbaik pengeluaran untuk membina solusi sokongan pelanggan yang canggih dengan Azure Developer CLI.**
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa ibundanya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan profesional oleh manusia adalah disyorkan. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+**Penafian**:
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan oleh manusia profesional adalah disyorkan. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

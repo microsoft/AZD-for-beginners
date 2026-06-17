@@ -1,23 +1,23 @@
 # Bab 8: Pola Produksi & Perusahaan
 
-**📚 Kursus**: [AZD untuk Pemula](../../README.md) | **⏱️ Durasi**: 2-3 hours | **⭐ Kompleksitas**: Lanjutan
+**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Durasi**: 2-3 jam | **⭐ Kompleksitas**: Lanjutan
 
 ---
 
 ## Ikhtisar
 
-Bab ini membahas pola penerapan yang siap untuk perusahaan, penguatan keamanan, pemantauan, dan optimisasi biaya untuk beban kerja AI produksi.
+Bab ini membahas pola penyebaran yang siap untuk lingkungan perusahaan, penguatan keamanan, pemantauan, dan optimasi biaya untuk beban kerja AI produksi.
 
-> Validated against `azd 1.23.12` in March 2026.
+> Divalidasi terhadap `azd 1.25.6` pada Juni 2026.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan bab ini, Anda akan:
-- Menerapkan aplikasi yang tahan gangguan multi-wilayah
-- Mengimplementasikan pola keamanan untuk perusahaan
-- Mengonfigurasi pemantauan komprehensif
+- Menerapkan aplikasi yang tangguh di multi-wilayah
+- Menerapkan pola keamanan tingkat perusahaan
+- Mengonfigurasi pemantauan yang komprehensif
 - Mengoptimalkan biaya dalam skala besar
-- Menyiapkan pipeline CI/CD dengan AZD
+- Mengatur pipeline CI/CD dengan AZD
 
 ---
 
@@ -25,14 +25,14 @@ Dengan menyelesaikan bab ini, Anda akan:
 
 | # | Pelajaran | Deskripsi | Waktu |
 |---|--------|-------------|------|
-| 1 | [Praktik AI Produksi](production-ai-practices.md) | Pola penerapan perusahaan | 90 menit |
+| 1 | [Praktik AI Produksi](production-ai-practices.md) | Pola penyebaran tingkat perusahaan | 90 menit |
 
 ---
 
 ## 🚀 Daftar Periksa Produksi
 
-- [ ] Penerapan multi-wilayah untuk ketahanan
-- [ ] Identitas terkelola untuk autentikasi (tanpa kunci)
+- [ ] Penyebaran multi-wilayah untuk ketahanan
+- [ ] Identitas terkelola untuk otentikasi (tanpa kunci)
 - [ ] Application Insights untuk pemantauan
 - [ ] Anggaran biaya dan peringatan dikonfigurasi
 - [ ] Pemindaian keamanan diaktifkan
@@ -43,7 +43,7 @@ Dengan menyelesaikan bab ini, Anda akan:
 
 ## 🏗️ Pola Arsitektur
 
-### Pola 1: Microservices untuk AI
+### Pola 1: Microservices AI
 
 ```mermaid
 graph LR
@@ -51,12 +51,14 @@ graph LR
     Gateway --> Auth[Layanan Otentikasi]
     AI --> Data[Penyimpanan Data]
 ```
-### Pola 2: AI Berbasis Peristiwa
+
+### Pola 2: Event-Driven AI
 
 ```mermaid
 graph LR
-    EventGrid[Grid Acara] --> Functions[Fungsi] --> Pipeline[Alur AI]
+    EventGrid[Grid Peristiwa] --> Functions[Fungsi] --> Pipeline[Alur AI]
 ```
+
 ---
 
 ## 🔐 Praktik Keamanan Terbaik
@@ -78,14 +80,14 @@ properties: {
 
 ---
 
-## 💰 Optimisasi Biaya
+## 💰 Optimasi Biaya
 
 | Strategi | Penghematan |
 |----------|---------|
 | Skalakan ke nol (Container Apps) | 60-80% |
 | Gunakan tier konsumsi untuk pengembangan | 50-70% |
 | Skalasi terjadwal | 30-50% |
-| Kapasitas cadangan | 20-40% |
+| Kapasitas terpesan | 20-40% |
 
 ```bash
 # Atur peringatan anggaran
@@ -132,6 +134,6 @@ az monitor metrics list --resource <resource-id>
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya mencapai akurasi, harap disadari bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi penting, disarankan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas setiap kesalahpahaman atau salah tafsir yang timbul dari penggunaan terjemahan ini.
+**Penafian**:
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk mencapai akurasi, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang sah. Untuk informasi penting, disarankan menggunakan terjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
