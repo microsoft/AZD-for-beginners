@@ -1,49 +1,50 @@
-# సులభమైన Flask API - Container App ఉదాహరణ
+# Simple Flask API - Container App Example
 
-**Learning Path:** ప్రారంభిక ⭐ | **Time:** 25-35 నిమిషాలు | **Cost:** $0-15/నెల
+**Learning Path:** Beginner ⭐ | **Time:** 25-35 minutes | **Cost:** $0-15/month
 
-పూర్తిగా పనిచేసే Python Flask REST APIని Azure Container Appsలో Azure Developer CLI (azd) ఉపయోగించి అమర్చిన ఉదాహరణ. ఈ ఉదాహరణ కంటెయినర్ డిప్లాయ్‌మెంట్, ఆటో-స్కేలింగ్, మరియు మానిటరింగ్ మౌలిక విషయాలు చూపిస్తుంది.
+సంపూర్ణంగా పనిచేసే Python Flask REST API ను Azure Developer CLI (azd) ఉపయోగించి Azure Container Apps లో డిప్లాయ్ చేయించిన ఉదాహరణ. ఈ ఉదాహరణలో కంటైనర్ డిప్లాయ్‌మెంట్, ఆటో-స్కేలింగ్ మరియు మానిటరింగ్ యొక్క ప్రాథమిక అంశాలు చూపిస్తారు.
 
 ## 🎯 మీరు ఏమి నేర్చుకుంటారు
 
-- Python అప్లికేషన్‌ను కంటెయినర్ రూపంలో Azureకు డిప్లాయ్ చేయడం
-- scale-to-zeroతో ఆటో-స్కేలింగ్‌ను కాన్ఫిగర్ చేయడం
-- హెల్త్ ప్రోబ్‌లు మరియు రెడినెస్ చెక్లు అమలు చేయడం
-- అప్లికేషన్ లాగ్‌లు మరియు మెట్రిక్స్‌ను మానిటర్ చేయడం
-- వేగవంతమైన డిప్లాయ్‌మెంట్ కోసం Azure Developer CLI ఉపయోగించడం
+- కంటైనర్ చేయబడిన Python అప్లికేషన్‌ను Azureలో డిప్లాయ్ చేయడం
+- స్కేల్-టు-జీరోతో ఆటో-స్కేలింగ్‌ను కాన్ఫిగర్ చేయడం
+- హెల్త్ ప్రోబ్లు మరియు రెడీనెస్ చెక్స్లను అమలు చేయడం
+- అప్లికేషన్ లాగ్స్ మరియు మెట్రిక్స్‌ను మానిటర్ చేయడం
+- త్వరిత డిప్లాయ్‌మెంట్ కోసం Azure Developer CLI ఉపయోగించడం
 
-## 📦 ఏమి ఉంటుంది
+## 📦 ఏమి ఉన్నాయి
 
-✅ **Flask Application** - CRUD ఆపరేషన్లు కలిగిన పూర్తి REST API (`src/app.py`)  
-✅ **Dockerfile** - ప్రొడక్షన్-రెడి కంటెయినర్ కాన్ఫిగరేషన్  
-✅ **Bicep Infrastructure** - Container Apps పర్యావరణం మరియు API డిప్లాయ్‌మెంట్  
-✅ **AZD Configuration** - ఒక కమాండ్ డిప్లాయ్‌మెంట్ సెటప్  
-✅ **Health Probes** - లైవ్‌నెస్ మరియు రెడినెస్ చెక్స్ కాన్ఫిగర్ చేయబడ్డాయి  
-✅ **Auto-scaling** - HTTP లోడ్ ఆధారంగా 0-10 రిప్లికాస్  
+✅ **Flask Application** - CRUD ఆపరేషన్లతో పూర్తి REST API (`src/app.py`)  
+✅ **Dockerfile** - ప్రొడక్షన్-సిద్ధ কంటైనర్ కాన్ఫిగరేషన్  
+✅ **Bicep Infrastructure** - Container Apps ఎన్విరాన్‌మెంట్ మరియు API డిప్లాయ్‌మెంట్  
+✅ **AZD Configuration** - ఒకే కమాండ్ డిప్లాయ్‌మెంట్ సెటప్  
+✅ **Health Probes** - లైవ్‌నెస్ మరియు రెడీనెస్ చెక్స్లు కాన్ఫిగర్ చేయబడ్డాయి  
+✅ **Auto-scaling** - HTTP లోడ్ ఆధారంగా 0-10 రిప్లికాల వరకు
 
-## రూపకల్పన
+## Architecture
 
 ```mermaid
 graph TD
-    subgraph ACA[అజ్యూర్ కంటైనర్ యాప్స్ వాతావరణం]
-        Flask[Flask API కంటైనర్<br/>హెల్త్ ఎండ్‌పాయింట్లు<br/>REST API<br/>ఆటో-స్కేలింగ్ 0-10 రిప్లికాలు]
+    subgraph ACA[ఆజ్యూర్ కంటెయినర్ యాప్స్ పరిసరము]
+        Flask[Flask API కంటెయినర్<br/>ఆరోగ్య ఎండ్‌పాయింట్లు<br/>REST API<br/>ఆటో-స్కేలింగ్ 0-10 నకలులు]
         AppInsights[అప్లికేషన్ ఇన్సైట్స్]
     end
 ```
+
 ## ముందస్తు అవసరాలు
 
-### కావలసినవి
-- **Azure Developer CLI (azd)** - [ఇన్స్టాల్ గైడ్](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure subscription** - [ఉచిత ఖాతా](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Docker ఇన్స్టాల్ చేయండి](https://www.docker.com/products/docker-desktop/) (లోకల్ టెస్టింగ్ కోసం)
+### అవసరమైనవి
+- **Azure Developer CLI (azd)** - [Install guide](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+- **Azure subscription** - [Free account](https://azure.microsoft.com/free/)
+- **Docker Desktop** - [Install Docker](https://www.docker.com/products/docker-desktop/) (స్థానిక పరీక్షల కోసం)
 
-### ముందస్తు అవసరాలను తనిఖీ చేయండి
+### అవసరాలను నిర్ధారించండి
 
 ```bash
-# azd వెర్షన్ తనిఖీ చేయండి (కనీసం 1.5.0 అవసరం)
+# azd వెర్షన్ తనిఖీ చేయండి (కనీసం 1.5.0 లేదా ఎక్కువ అవసరం)
 azd version
 
-# Azure లాగిన్‌ని నిర్ధారించండి
+# Azure లాగిన్ నిర్ధారించండి
 azd auth login
 
 # Docker తనిఖీ చేయండి (ఐచ్ఛికం, స్థానిక పరీక్ష కోసం)
@@ -52,29 +53,29 @@ docker --version
 
 ## ⏱️ డిప్లాయ్‌మెంట్ సమయం
 
-| దశ | కాలవ్యవధి | ఏం జరుగుతుంది |
+| Phase | Duration | What Happens |
 |-------|----------|--------------||
-| పర్యావరణం సెటప్ | 30 సెకన్లు | azd పర్యావరణం సృష్టించడం |
-| కంటెయినర్ బిల్డ్ | 2-3 నిమిషాలు | Docker ద్వారా Flask అప్లికేషన్ బిల్డ్ చేయడం |
-| ఇన్ఫ్రాస్ట్రక్చర్ ప్రొవిజనింగ్ | 3-5 నిమిషాలు | Container Apps, రిజిస్ట్రి, మానిటరింగ్ సృష్టించడం |
-| అప్లికేషన్ డిప్లాయ్ | 2-3 నిమిషాలు | ఇమేజ్‌ను పుష్ చేసి Container Appsకు డిప్లాయ్ చేయడం |
-| **మొత్తం** | **8-12 నిమిషాలు** | పూర్తి డిప్లాయ్‌మెంట్ సిద్ధం |
+| Environment setup | 30 seconds | Create azd environment |
+| Build container | 2-3 minutes | Docker build Flask app |
+| Provision infrastructure | 3-5 minutes | Create Container Apps, registry, monitoring |
+| Deploy application | 2-3 minutes | Push image and deploy to Container Apps |
+| **Total** | **8-12 minutes** | Complete deployment ready |
 
-## శీఘ్ర ప్రారంభం
+## క్విక్ స్టార్ట్
 
 ```bash
-# ఉదాహరణకు వెళ్ళండి
+# ఉదాహరణకు వెళ్లండి
 cd examples/container-app/simple-flask-api
 
-# పరిసరాన్ని ప్రారంభించండి (అద్వితీయమైన పేరు ఎంచుకోండి)
+# పర్యావరణాన్ని ఆరంభించండి (అనన్యమైన పేరు ఎంచుకోండి)
 azd env new myflaskapi
 
-# అన్నింటినీ అమలు చేయండి (మౌలిక నిర్మాణం + అప్లికేషన్)
+# అన్నింటినీ డిప్లాయ్ చేయండి (ఇన్ఫ్రాస్ట్రక్చర్ + అప్లికేషన్)
 azd up
-# మీకు ఈ విషయాలు అడగబడతాయి:
-# 1. Azure సభ్యత్వాన్ని ఎంచుకోండి
-# 2. ప్రాంతం ఎంచుకోండి (ఉదాహరణకు: eastus2)
-# 3. డిప్లాయ్‌మెంట్ కోసం 8-12 నిమిషాలు వేచి ఉండండి
+# మీకు అడిగబడుతుంది:
+# 1. Azure సబ్‌స్క్రిప్షన్ ఎంచుకోండి
+# 2. ప్రదేశం ఎంచుకోండి (ఉదాహరణకు, eastus2)
+# 3. డిప్లాయ్ అయ్యే వరకు 8-12 నిమిషాలు వేచి ఉండండి
 
 # మీ API ఎండ్‌పాయింట్‌ను పొందండి
 azd env get-values
@@ -83,7 +84,7 @@ azd env get-values
 curl $(azd env get-value API_ENDPOINT)/health
 ```
 
-**అంచనా ఫలితం:**
+**ఎ(Expected Output):**
 ```json
 {
   "status": "healthy",
@@ -93,7 +94,7 @@ curl $(azd env get-value API_ENDPOINT)/health
 }
 ```
 
-## ✅ డిప్లాయ్‌మెంట్‌ను తనిఖీ చేయండి
+## ✅ డిప్లాయ్‌మెంట్‌ను ధృవీకరించండి
 
 ### దశ 1: డిప్లాయ్‌మెంట్ స్థితిని తనిఖీ చేయండి
 
@@ -101,19 +102,19 @@ curl $(azd env get-value API_ENDPOINT)/health
 # డిప్లాయ్ చేసిన సేవలను చూడండి
 azd show
 
-# ఆశించిన అవుట్‌పుట్ చూపిస్తుంది:
+# అంచనా అవుట్పుట్ ఇలా ఉంటుంది:
 # - సేవ: api
 # - ఎండ్‌పాయింట్: https://ca-api-[env].xxx.azurecontainerapps.io
-# - స్థితి: నడుస్తోంది
+# - స్థితి: నడుస్తుంది
 ```
 
-### దశ 2: API ఎండ్‌పాయింట్లను పరీక్షించండి
+### దశ 2: API ఎండ్పాయింట్లను పరీక్షించండి
 
 ```bash
 # API ఎండ్‌పాయింట్ పొందండి
 API_URL=$(azd env get-value API_ENDPOINT)
 
-# సర్వీస్ ఆరోగ్యాన్ని పరీక్షించండి
+# ఆరోగ్యాన్ని పరీక్షించండి
 curl $API_URL/health
 
 # రూట్ ఎండ్‌పాయింట్‌ను పరీక్షించండి
@@ -128,16 +129,16 @@ curl -X POST $API_URL/api/items \
 curl $API_URL/api/items
 ```
 
-**విజయ ప్రమాణాలు:**
-- ✅ హెల్త్ ఎండ్‌పాయింట్ HTTP 200 ని రిటర్న్ చేస్తుంది
-- ✅ రూట్ ఎండ్‌పాయింట్ API సమాచారం చూపిస్తుంది
-- ✅ POST ఐటెంను సృష్టిస్తుంది మరియు HTTP 201 ని రిటర్న్ చేస్తుంది
-- ✅ GET సృష్టించిన ఐటెంలను రిటర్న్ చేస్తుంది
+**సక్సెస్ ప్రమాణాలు:**
+- ✅ హెల్త్ ఎండ్పాయింట్ HTTP 200 రిటర్న్ చేయాలి
+- ✅ రూట్ ఎండ్పాయింట్ API సమాచారాన్ని చూపించాలి
+- ✅ POST ఐటెం సృష్టించి HTTP 201 రిటర్న్ చేయాలి
+- ✅ GET సృష్టించిన ఐటెమ్స్‌ను రిటర్న్ చేయాలి
 
-### దశ 3: లాగ్‌లు చూడండి
+### దశ 3: లాగ్‌లను చూడండి
 
 ```bash
-# azd monitor ఉపయోగించి ప్రత్యక్ష లాగ్‌లను ప్రసారం చేయండి
+# azd monitor ఉపయోగించి ప్రత్యక్ష లాగ్‌లను స్ట్రీమ్ చేయండి
 azd monitor --logs
 
 # లేదా Azure CLI ఉపయోగించండి:
@@ -145,8 +146,8 @@ az containerapp logs show --name api --resource-group $RG_NAME --follow
 
 # మీకు ఇవి కనిపించాలి:
 # - Gunicorn ప్రారంభ సందేశాలు
-# - HTTP అభ్యర్థనల లాగ్‌లు
-# - అనువర్తన సమాచారం లాగ్‌లు
+# - HTTP అభ్యర్థన లాగ్‌లు
+# - అప్లికేషన్ సమాచారం లాగ్‌లు
 ```
 
 ## ప్రాజెక్ట్ నిర్మాణం
@@ -166,23 +167,23 @@ simple-flask-api/
     └── Dockerfile
 ```
 
-## API ఎండ్‌పాయింట్లు
+## API ఎండ్పాయింట్లు
 
-| ఎండ్‌పాయింట్ | మెథడ్ | వివరణ |
+| Endpoint | Method | Description |
 |----------|--------|-------------|
 | `/health` | GET | హెల్త్ చెక్ |
-| `/api/items` | GET | అన్ని ఐటెంలను జాబితా చేస్తుంది |
-| `/api/items` | POST | కొత్త ఐటెమ్ సృష్టించండి |
-| `/api/items/{id}` | GET | నిర్దిష్ట ఐటెమ్ పొందండి |
-| `/api/items/{id}` | PUT | ఐటెమ్‌ను నవీకరించండి |
-| `/api/items/{id}` | DELETE | ఐటెమ్‌ను తొలగించండి |
+| `/api/items` | GET | అన్ని ఐటెమ్స్‌ను జాబితా చేయండి |
+| `/api/items` | POST | కొత్త ఐటెం సృష్టించండి |
+| `/api/items/{id}` | GET | నిర్దిష్ట ఐటెంను పొందండి |
+| `/api/items/{id}` | PUT | ఐటెం నవీకరించండి |
+| `/api/items/{id}` | DELETE | ఐటెంను తొలగించండి |
 
 ## కాన్ఫిగరేషన్
 
-### పర్యావరణ వేరియబుల్స్
+### ఎన్విరాన్‌మెంట్ వేరియబుల్స్
 
 ```bash
-# కస్టమ్ కాన్ఫిగరేషన్ సెట్ చేయండి
+# అనుకూల కాన్ఫిగరేషన్ సెట్ చేయండి
 azd env set PORT 8000
 azd env set LOG_LEVEL info
 azd env set MAX_REPLICAS 20
@@ -190,17 +191,17 @@ azd env set MAX_REPLICAS 20
 
 ### స్కేలింగ్ కాన్ఫిగరేషన్
 
-API HTTP ట్రాఫిక్ ఆధారంగా ఆటోమేటిగ్గా స్కేల్ అవుతుంది:
-- **Min Replicas**: 0 (ఆయిదైనప్పుడు జీరోకి స్కేల్ అవుతుంది)
+API ఆటోమేటిక్గా HTTP ట్రాఫిక్ ఆధారంగా స్కేల్ అవుతుంది:
+- **Min Replicas**: 0 (అనవసరం ఉన్నప్పుడు జీరో వరకు స్కేల్ అవుతుంది)
 - **Max Replicas**: 10
 - **Concurrent Requests per Replica**: 50
 
-## డెవలప్మెంట్
+## అభివృద్ధి
 
-### స్థానికంగా రన్ చేయండి
+### స్థానికంగా నడపండి
 
 ```bash
-# డిపెండెన్సీలు ఇన్‌స్టాల్ చేయండి
+# ఆశ్రిత ప్యాకేజీలను ఇన్‌స్టాల్ చేయండి
 cd src
 pip install -r requirements.txt
 
@@ -211,13 +212,13 @@ python app.py
 curl http://localhost:8000/health
 ```
 
-### కంటెయినర్ బిల్డ్ చేసి టెస్ట్ చేయండి
+### కంటైనర్‌ను నిర్మించి పరీక్షించండి
 
 ```bash
-# డాకర్ ఇమేజ్‌ను నిర్మించండి
+# Docker ఇమేజ్‌ను నిర్మించండి
 docker build -t flask-api:local ./src
 
-# స్థానికంగా కంటైనర్‌ను నడపండి
+# కంటైనర్‌ను స్థానికంగా నడపండి
 docker run -p 8000:8000 flask-api:local
 
 # కంటైనర్‌ను పరీక్షించండి
@@ -229,33 +230,33 @@ curl http://localhost:8000/health
 ### పూర్తి డిప్లాయ్‌మెంట్
 
 ```bash
-# మౌలిక సదుపాయాలు మరియు అనువర్తనాన్ని అమలు చేయండి
+# మౌలిక సదుపాయాలు మరియు అప్లికేషన్‌ను అమలు చేయండి
 azd up
 ```
 
-### కోడ్-మాత్రమే డిప్లాయ్‌మెంట్
+### కోడ్-కేవలం డిప్లాయ్‌మెంట్
 
 ```bash
-# కేవలం అప్లికేషన్ కోడ్‌ను డిప్లాయ్ చేయండి (ఇన్ఫ్రాస్ట్రక్చర్ మారలేదు)
+# కేవలం అప్లికేషన్ కోడ్‌ను మాత్రమే డిప్లాయ్ చేయండి (ఇన్ఫ్రాస్ట్రక్చర్ మారకుండా ఉంచండి)
 azd deploy api
 ```
 
-### కాన్ఫిగరేషన్‌ను అప్‌డేట్ చేయడం
+### కాన్ఫిగరేషన్‌ను అప్డేట్ చేయండి
 
 ```bash
-# ఎన్విరాన్‌మెంట్ వేరియబుల్స్‌ను నవీకరించండి
+# పర్యావరణ చరాలను నవీకరించండి
 azd env set API_KEY "new-api-key"
 
-# కొత్త కాన్ఫిగరేషన్‌తో మళ్లీ డిప్లాయ్ చేయండి
+# కొత్త కాన్ఫిగరేషన్‌తో మళ్లీ అమర్చండి
 azd deploy api
 ```
 
 ## మానిటరింగ్
 
-### లాగ్‌లు చూడండి
+### లాగ్‌లను చూడండి
 
 ```bash
-# azd monitor ఉపయోగించి ప్రత్యక్ష లాగ్‌లను స్ట్రీమ్ చేయండి
+# azd monitor ఉపయోగించి సజీవ లాగ్‌లను స్ట్రీమ్ చేయండి
 azd monitor --logs
 
 # లేదా Container Apps కోసం Azure CLI ఉపయోగించండి:
@@ -265,10 +266,10 @@ az containerapp logs show --name api --resource-group $RG_NAME --follow
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 ```
 
-### మెట్రిక్స్‌ని పర్యవేక్షించండి
+### మెట్రిక్స్‌ను మానిటర్ చేయండి
 
 ```bash
-# Azure Monitor డ్యాష్‌బోర్డు తెరవండి
+# Azure Monitor డ్యాష్‌బోర్డ్ తెరవండి
 azd monitor --overview
 
 # నిర్దిష్ట మెట్రిక్‌లను చూడండి
@@ -277,7 +278,7 @@ az monitor metrics list \
   --metric "Requests,ResponseTime"
 ```
 
-## టెస్టింగ్
+## పరీక్షలు
 
 ### హెల్త్ చెక్
 
@@ -285,7 +286,7 @@ az monitor metrics list \
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-అంచనా ప్రతిస్పందన:
+ Expected response:
 ```json
 {
   "status": "healthy",
@@ -293,7 +294,7 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 }
 ```
 
-### ఐటెమ్ సృష్టించండి
+### ఐటెం సృష్టించండి
 
 ```bash
 curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/items \
@@ -301,7 +302,7 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/item
   -d '{"name": "Test Item", "description": "A test item"}'
 ```
 
-### అన్ని ఐటెంలు పొందండి
+### అన్ని ఐటెమ్స్ పొందండి
 
 ```bash
 curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
@@ -309,43 +310,43 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
 
 ## ఖర్చు ఆప్టిమైజేషన్
 
-ఈ డిప్లాయ్‌మెంట్ scale-to-zero ఉపయోగిస్తుంది, కాబట్టి API అభ్యర్థనలు ప్రాసెస్ చేస్తున్నప్పుడు మాత్రమే మీరు చెల్లిస్తారు:
+ఈ డిప్లాయ్‌మెంట్ స్కేల్-టు-జీరో ఉపయోగిస్తుంది, అందుకే API అభ్యర్థనలు 처리 చేస్తున్నప్పుడు మాత్రమే చెల్లించాల్సి ఉంటుంది:
 
-- **Idle cost**: ~$0/నెల (జీరోకి స్కేల్ అవుతుంది)
-- **Active cost**: ~$0.000024/సెకను ప్రతి రిప్లికా
-- **అంచనా నెలవారీ ఖర్చు** (తేలికైన ఉపయోగం): $5-15
+- **Idle cost**: ~$0/month (జీరోకి స్కేల్ అయ్యేటప్పుడు)
+- **Active cost**: ~$0.000024/second per replica
+- **Expected monthly cost** (తక్కువ ఉపయోగం): $5-15
 
 ### ఖర్చులను మరింత తగ్గించండి
 
 ```bash
-# డెవ్ కోసం గరిష్ట రిప్లికలను తగ్గించండి
+# డెవ్ కోసం గరిష్ట రిప్లికాలను తగ్గించండి
 azd env set MAX_REPLICAS 3
 
-# చిన్న నిష్క్రియ సమయావధి ఉపయోగించండి
+# తక్కువ idle టైమౌట్ ఉపయోగించండి
 azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 నిమిషాలు
 ```
 
 ## సమస్య పరిష్కారం
 
-### కంటెయినర్ ప్రారంభం కావడం లేదు
+### కంటైనర్ ప్రారంభం కావడం లేదు
 
 ```bash
 # Azure CLI ఉపయోగించి కంటైనర్ లాగ్‌లను తనిఖీ చేయండి
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 
-# Docker ఇమేజ్‌లు స్థానికంగా నిర్మించబడుతున్నాయా అని నిర్ధారించండి
+# Docker ఇమేజ్‌లు స్థానికంగా బిల్డ్ అవుతున్నాయో లేదో తనిఖీ చేయండి
 docker build -t test ./src
 ```
 
-### API యాక్సెస్ చేయలేకపోతోంది
+### API అందుబాటులో లేదు
 
 ```bash
-# ఇన్‌గ్రెస్ బాహ్యమైనదే అని నిర్ధారించండి
+# ఇన్గ్రెస్ బాహ్యంగా ఉందని నిర్ధారించండి
 az containerapp show --name api --resource-group rg-simple-flask-api \
   --query properties.configuration.ingress.external
 ```
 
-### అధిక స్పందన సమయాలు
+### ఉన్నత ప్రతిస్పందనా సమయం
 
 ```bash
 # CPU/మెమరీ వినియోగాన్ని తనిఖీ చేయండి
@@ -353,7 +354,7 @@ az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# అవసరం ఉంటే వనరులను పెంచండి
+# అవసరమైతే వనరులను పెంచండి
 az containerapp update --name api --resource-group rg-simple-flask-api \
   --cpu 1.0 --memory 2Gi
 ```
@@ -369,15 +370,15 @@ azd down --force --purge
 
 ### ఈ ఉదాహరణను విస్తరించండి
 
-1. **డేటాబేస్ జత చేయండి** - Azure Cosmos DB లేదా SQL Databaseని ఇంటిగ్రేట్ చేయండి
+1. **డేటాబేస్ జోడించు** - Azure Cosmos DB లేదా SQL Database ను అనుసంధానించండి
    ```bash
-   # infra/main.bicepకు Cosmos DB మాడ్యూల్‌ను జోడించండి
-   # app.pyని డేటాబేస్ కనెక్షన్‌తో నవీకరించండి
+   # Cosmos DB మాడ్యూల్‌ను infra/main.bicep లో జోడించండి
+   # app.py ను డేటాబేస్ కనెక్షన్‌తో నవీకరించండి
    ```
 
-2. **ఆథెంటికేషన్ జత చేయండి** - Azure AD లేదా API కీలు అమలు చేయండి
+2. **ప్రామాణీకరణ జోడించు** - Microsoft Entra ID లేదా API కీలు అమలు చేయండి
    ```python
-   # app.pyకి ఆథెంటికేషన్ మిడిల్‌వేర్ జోడించండి
+   # app.pyకి ప్రామాణీకరణ మిడిల్‌వేర్‌ను జోడించండి
    from functools import wraps
    ```
 
@@ -388,7 +389,7 @@ azd down --force --purge
    on: [push]
    ```
 
-4. **Managed Identity జత చేయండి** - Azure సేవలకు సురక్షిత యాక్సెస్
+4. **మేనేజ్‌డ్ ఐడెంటిటీ జోడించండి** - Azure సేవలకు సురక్షిత ప్రాప్తిని నిర్ధారించండి
    ```bicep
    # Update infra/app/api.bicep
    identity: { type: 'SystemAssigned' }
@@ -396,41 +397,41 @@ azd down --force --purge
 
 ### సంబంధిత ఉదాహరణలు
 
-- **[డేటాబేస్ యాప్](../../../../../examples/database-app)** - SQL Database తో పూర్తి ఉదాహరణ
-- **[మైక్రోసర్వీసెస్](../../../../../examples/container-app/microservices)** - బహు-సేవల ఆర్కిటెక్చర్
-- **[Container Apps Master Guide](../README.md)** - అన్ని కంటెయినర్ నమూనాలు
+- **[Database App](../../../../../examples/database-app)** - SQL Database తో పూర్తి ఉదాహరణ
+- **[Microservices](../../../../../examples/container-app/microservices)** - మల్టీ-సర్వీస్ ఆర్కిటెక్చర్
+- **[Container Apps Master Guide](../README.md)** - అన్ని కంటైనర్ నమూనాలు
 
-### అభ్యాస వనరులు
+### అడుక్కోవాల్సిన వనరులు
 
 - 📚 [AZD For Beginners Course](../../../README.md) - ప్రధాన కోర్సు హోమ్
 - 📚 [Container Apps Patterns](../README.md) - మరిన్ని డిప్లాయ్‌మెంట్ నమూనాలు
-- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - కమ్యూనిటీ టెంప్లేట్స్
+- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - కమ్యూనిటీ టెంప్లేట్లు
 
 ## అదనపు వనరులు
 
 ### డాక్యుమెంటేషన్
 - **[Flask Documentation](https://flask.palletsprojects.com/)** - Flask ఫ్రేమ్‌వర్క్ గైడ్
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - అధికారిక Azure డాక్యుమెంటేషన్
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd కమాండ్ సూచిక
+- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - అధికారిక Azure డాక్స్
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd కమాండ్ రిఫరెన్స్
 
-### ట్యుటోరియల్స్
-- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - మీ మొదటి యాప్ డిప్లాయ్ చేయండి
-- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Python డెవలప్మెంట్ గైడ్
-- **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - కోడ్ రూపంలో ఇన్ఫ్రాస్ట్రక్చర్
+### పాఠాలు
+- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - మీ మొదటి అప్లికేషన్‌ను డిప్లాయ్ చేయండి
+- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Python అభివృద్ధి గైడ్
+- **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - ఇన్ఫ్రాస్ట్రక్చర్ యాజ్ఞగా కోడ్
 
-### టూల్స్
-- **[Azure Portal](https://portal.azure.com)** - విజువల్‌గా వనరులను నిర్వహించండి
-- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - IDE ఇంటిగ్రేషన్
+### పరికరాలు
+- **[Azure Portal](https://portal.azure.com)** - వనరులను విజువల్‌గా నిర్వహించండి
+- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - IDE ఇన్‌టిగ్రేషన్
 
 ---
 
-**🎉 శుభాకాంక్షలు!** మీరు ఆటో-స్కేలింగ్ మరియు మానిటరింగ్ తో Azure Container Appsలో ప్రొడక్షన్-తయారైన Flask APIని డిప్లాయ్ చేసారు.
+**🎉 అభినందనలు!** మీరు ఆటో-స్కేలింగ్ మరియు మానిటరింగ్‌తో Azure Container Apps కు ప్రొడక్షన్-సిద్ధ Flask API ను డిప్లాయ్ చేశారు.
 
-**ప్రశ్నలున్నాయా?** [ఒక ఇష్యూ తెరవండి](https://github.com/microsoft/AZD-for-beginners/issues) లేదా [FAQ](../../../resources/faq.md) చూడండి
+**ప్రశ్నలున్నాయా?** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) లేదా [FAQ](../../../resources/faq.md) ని చూడండి
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**అస్పష్టీకరణ**:
-ఈ పత్రాన్ని AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ద్వారా అనువదించబడింది. మేము ఖచ్చితత్వానికి ప్రయత్నించినప్పటికీ, ఆటోమేటెడ్ అనువాదాల్లో తప్పులు లేదా ఖచ్చితత్వ లోపాలు ఉండవచ్చని దయచేసి గమనించండి. మూల భాషలో ఉన్న ఒరిజినల్ డాక్యుమెంట్‌ను అధికారిక మూలంగా పరిగణించాలి. ముఖ్యమైన సమాచారానికి, ప్రొఫెషనల్ మానవ అనువాదం సిఫార్సు చేయబడుతుంది. ఈ అనువాదాన్ని ఉపయోగించడంతో ఏర్పడే ఏవైనా అవగాహనా లోపాలు లేదా తప్పుగా అర్థం చేసుకోవడం వల్ల కలిగే పరిణామాలకు మేము బాధ్యులు కాదు.
+**అస్వీకరణ**:
+ఈ పత్రం AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించబడింది. మేము ఖచ్చితత్వానికి ప్రయత్నిస్తున్నప్పటికీ, ఆటోమేటెడ్ అనువాదాలు తప్పులు లేదా అసమగ్రతలను కలిగి ఉండవచ్చు. దాని స్వదేశ భాషలో ఉన్న అసలు పత్రాన్ని అధికారం కలిగిన మూలంగా పరిగణించాలి. కీలకమైన సమాచారం కోసం, ప్రొఫెషనల్ మానవ అనువాదాన్ని సిఫారసు చేస్తాము. ఈ అనువాదం ఉపయోగం వల్ల కలిగే ఏవైనా అపార్థాలు లేదా తప్పుదారులు కోసం మేము బాధ్యత వహించము.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
