@@ -1,48 +1,148 @@
-# परिवर्तन विवरण - AZD शुरुआतीहरूको लागि
+# परिवर्तन सूची - AZD शुरुवातकर्ताका लागि
 
 ## परिचय
 
-यस परिवर्तन विवरणले AZD शुरुआतीहरूको लागि रेपोमा भएका सबै उल्लेखनीय परिवर्तनहरू, अपडेटहरू, र सुधारहरू दस्तावेज गर्दछ। हामी सेमेन्टिक संस्करण निर्धारण सिद्धान्तहरू अनुसरण गर्छौं र यो लग राख्छौं जसले प्रयोगकर्ताहरूलाई संस्करणहरू बीच के परिवर्तन भएको छ बुझ्न मद्दत गर्दछ।
+यो परिवर्तन सूचिमा AZD For Beginners रिपोजिटरीमा भएका सबै महत्वपूर्ण परिवर्तनहरू, अपडेटहरू, र सुधारहरू दर्ता गरिएको छ। हामी semantic versioning सिद्धान्तहरू पालन गर्छौं र प्रयोगकर्ताहरूलाई संस्करणहरू बीच के बदलियो बुझ्न मद्दत गर्न यो लग राख्छौं।
 
-## सिकाइ लक्ष्यहरू
+## अधिगम लक्ष्यहरू
 
-यस परिवर्तन विवरणको समीक्षा गरेर, तपाईं:
-- नयाँ सुविधाहरू र सामग्री थपहरूको बारेमा जानकारीमा रहनुहुनेछ
-- अस्तित्वमा रहेका दस्तावेजहरूमा गरिएको सुधारहरू बुझ्नुहुनेछ
-- बग फिक्सहरू र सुधारहरू ट्र्याक गर्नुहुनेछ जसले सुनिश्चित गर्दछ कि सूचना सही छ
-- सिकाइ सामग्रीहरूको विकासलाई समयसँगै पछ्याउन सक्नुहुनेछ
+यस परिवर्तन सूचीलाई समीक्षा गरेर, तपाईं:
+- नयाँ सुविधाहरू र सामग्री थप्ने बारे सूचित रहनुहुनेछ
+- अवस्थित दस्तावेजहरूमा गरिएका सुधारहरू बुझ्न सक्नुहुनेछ
+- शुद्धता सुनिश्चित गर्न बग फिक्स र सुधारहरू ट्र्याक गर्न सक्नुहुनेछ
+- समयक्रममा सिकाइ सामग्रीहरूको विकासलाई अनुसरण गर्न सक्नुहुनेछ
 
-## सिकाइ परिणामहरू
+## अधिगम परिणामहरू
 
-परिवर्तन विवरणका प्रविष्टिहरूको समीक्षा पछि, तपाईं सक्षम हुनुहुनेछ:
+परिवर्तन सूचिका प्रविष्टिहरू समीक्षा गरेपछि, तपाईं सक्षम हुनुहुनेछ:
 - सिकाइका लागि उपलब्ध नयाँ सामग्री र स्रोतहरू पहिचान गर्न
-- कुन खण्डहरू अपडेट वा सुधार गरिएको छ बुझ्न
-- सबैभन्दा नयाँ सामग्रीहरू आधारमा आफ्नो सिकाइ मार्ग योजना बनाउन
-- भविष्यका सुधारहरूको लागि प्रतिक्रिया र सुझावहरू योगदान गर्न
+- कुन भागहरू अपडेट वा सुधार गरिएको छ बुझ्न
+- सबैभन्दा आधुनिक सामग्रीका आधारमा आफ्नो सिकाइ मार्ग योजना गर्न
+- भविष्यका सुधारहरूको लागि प्रतिक्रिया र सुझाव प्रदान गर्न
 
-## संस्करण इतिहास
+## भर्सन इतिहास
+
+### [v3.22.0] - 2026-06-16
+
+#### Beginner Gap-Fill #2: Template Authoring, Dev Containers, Pulumi, Azure DevOps, Service Principals, and More
+**यस भर्सनले azd-coverage विश्लेषणले देखाएका बाँकी अन्तरिम खाल्तिहरू बन्द गर्छ: आफ्नो टेम्पलेट कसरी लेख्ने र प्रकाशित गर्ने, पुनरुत्पादनीय dev-container/Codespaces वातावरणहरू, Pulumi infrastructure provider, Azure DevOps CI/CD वाकथ्रु, service-principal प्रमाणिकरण, होस्ट-छनौट मार्गदर्शन (AKS/Spring Apps), `azd restore`/`azd package` व्याख्याहरू, हुक त्रुटि-ह्यान्डलिंग, र टोली/साझा-पर्यावरण अभ्यासहरू।**
+
+#### थपिएको
+- **🧱 नयाँ अध्याय 4 पाठ** `docs/chapter-04-infrastructure/custom-templates.md` — आफ्नो azd टेम्पलेट लेख्ने तरिका: आवश्यक संरचना (`azure.yaml`, `infra/`, `src/`), `metadata.template` फिल्ड, `uniqueString()` resource token र `azd-env-name` ट्याग प्रयोग गरी इन्फ्रास्ट्रक्चरलाई प्यारामिटराइज गर्ने, स्थानीय रूपमा परीक्षण गर्न `azd init --template <local-path>`, GitHub मा प्रकाशन, र Awesome AZD ग्यालरीमा पेश गर्ने
+- **📦 नयाँ अध्याय 1 पाठ** `docs/chapter-01-foundation/dev-containers.md` — Dev Containers र GitHub Codespaces का साथ पुनरुत्पादनीय azd वातावरणहरू: आधिकारिक `ghcr.io/azure/azure-dev/azd` feature प्रयोग गरी न्यूनतम `.devcontainer/devcontainer.json`, भाषा-विशिष्ट फीचरहरू, container hosts को लागि `docker-in-docker`, र रिमोट साइन-इनका लागि `azd auth login --use-device-code`
+- **🧩 Pulumi with azd** खण्ड `docs/chapter-04-infrastructure/provisioning.md` मा — `infra.provider: pulumi`, Pulumi फोल्डर लेआउट, स्ट्याकहरू azd वातावरणहरूसँग म्याप गरिएको, आवश्यक outputs/tagging, र समान `azd up` / `azd down` वर्कफ्लो
+- **🎯 Host-selection मार्गदर्शन** `docs/chapter-04-infrastructure/provisioning.md` मा — `appservice`, `staticwebapp`, `function`, `containerapp`, `aks`, र `springapp` को शुरुवाती-मैत्री तुलना, र कहिले AKS वा Azure Spring Apps छान्ने बारे मार्गदर्शन
+- **🛠️ Azure DevOps CI/CD वाकथ्रु** `docs/chapter-08-production/production-ai-practices.md` मा — `azd pipeline config --provider azdo`, workload identity federation (OIDC) सहितको service connection, जनरेट गरिएको `azure-dev.yml`, र variable-group सेटअप
+- **🔑 Service Principals (Pattern 4)** `docs/chapter-03-configuration/authsecurity.md` मा थपियो — `az ad sp create-for-rbac`, non-interactive `azd auth login` client secret बनाम federated/OIDC credentials, प्रयोग गर्ने बेला र सुरक्षित क्रेडेन्सियल भण्डारण
+- **🪝 हुक त्रुटि-ह्यान्डलिंग** उप-खण्ड `docs/chapter-04-infrastructure/deployment-guide.md` मा — exit codes र `set -e`, `continueOnError`, `azd hooks run` सँग हुकलाई अलग रूपमा परीक्षण गर्ने, OS-विशिष्ट shells, र `--debug`
+- **👥 टोली / साझा वातावरणहरू** खण्ड `docs/chapter-03-configuration/configuration.md` मा — `.azure/` मा के हुन्छ, के gitignore गर्ने, प्रति-डेभलपर वातावरणहरू, `azd env list`/`select`, र CI/CD मा वातावरण मानहरू प्रदान गर्ने तरिका
+- **🧰 `azd restore` र विस्तारित `azd package`** व्याख्याहरू `resources/cheat-sheet.md` मा — निर्भरता पुनर्स्थापना र deploy नगरी deployable artifact बनाउने प्रक्रिया
+
+#### परिर्वतन गरिएको
+- **🧭 अध्याय 4 पाठ तालिका** नयाँ "Authoring Your Own Template" पाठ (पाठ 3) समावेश गर्न अपडेट गरियो
+- **🧭 अध्याय 1 पाठ तालिका** नयाँ "Dev Containers & Codespaces" पाठ (पाठ 5) समावेश गर्न अपडेट गरियो; navigation footers `bring-your-own-app.md` र `dev-containers.md` बीच तारिएका
+
+### [v3.21.0] - 2026-06-16
+
+#### Beginner Gap-Fill: Hands-On Multi-Agent Lesson, "Bring Your Own App," Terraform, and CI/CD Walkthrough
+**यस भर्सनले एक पूर्ण शुरुवातकर्ताका लागि मार्गनिर्देशनका ठूला खाल्तिहरू बन्द गर्छ जसले दुई नयाँ हात-मा-पर्ने पाठहरू (एक deployable multi-agent वाकथ्रु र अवस्थित एपमा azd थप्ने), शुरुवाती-मैत्री hooks परिचय, Terraform-with-azd खण्ड, 단계-द्वारा-स्टेप GitHub Actions पाइपलाइन वाकथ्रु, नयाँ preview extensions का लागि explainer, र स्पष्ट deployment-प्रमाणीकरण चेकलिस्ट थप गर्दछ।**
+
+#### थपिएको
+- **🤝 नयाँ अध्याय 5 पाठ** `docs/chapter-05-multi-agent/multi-agent-basics.md` — पूर्ण हात-मा-पर्ने, deployable दुई-एजेन्ट वाकथ्रु (orchestrator + specialists) वास्तविक टेम्पलेट (`contoso-creative-writer`) प्रयोग गर्दै, कहिले multi-agent प्रयोग गर्ने, `azd up` वर्कफ्लो, deploy गरिएका संसाधनहरू बुझ्ने, cross-agent tracing, अनुकूलन, र cleanup समावेश
+- **📦 नयाँ अध्याय 1 पाठ** `docs/chapter-01-foundation/bring-your-own-app.md` — अवस्थित प्रोजेक्टमा `azd init` ("use code in the current directory") प्रयोग गरी azd कसरी थप्ने, `azure.yaml` र `infra/` बुझ्ने, `azd infra generate`, host detection, र `azd up` सँग deploy गर्ने तरिका
+- **🌐 Terraform with azd** खण्ड `docs/chapter-04-infrastructure/provisioning.md` मा थपियो — `infra.provider: terraform` कन्फिग, `.tf` फोल्डर लेआउट, आवश्यक `AZURE_*` outputs र `azd-env-name` tagging, र समान `azd up` / `azd down` वर्कफ्लो (पहिले Terraform समर्थन दाबी गरिए तर केवल Bicep देखाइएको ठाउँ बन्द गर्छ)
+- **⚙️ चरण-द्वारा-चरण GitHub Actions वाकथ्रु** `docs/chapter-08-production/production-ai-practices.md` मा — GitHub repo बाट स्वचालित deploy सम्म: `azd pipeline config`, OIDC federated credentials (स्टोर गरिएको secrets बिना), जनरेट गरिएको `azure-dev.yml`, र secrets-vs-variables मार्गदर्शन
+- **🪝 शुरुवाती "हुकहरू नयाँ?" परिचय** `docs/chapter-04-infrastructure/deployment-guide.md` मा — हुक के हो, हुक-स्टेज तालिका, न्यूनतम पहिलो हुक, र `azd hooks run` सँग हुकहरू म्यानुअली चलाउने
+- **✅ "Verify Your Deployment" चेकलिस्ट** `docs/chapter-01-foundation/first-project.md` को Step 5 मा थपियो — smoke test, health-endpoint जाँच, र स्पष्ट सफलता मापदण्डहरू
+- **🧩 नयाँ preview extensions को explainer** `azure.ai.skills` र `azure.ai.connections` (यी के हुन् र कहिले प्रयोग गर्ने) `docs/chapter-08-production/production-ai-practices.md` मा
+
+#### परिर्वतन गरिएको
+- **🧭 अध्याय 5 पाठ तालिका** सुधार गरियो: `multi-agent-basics.md` अब पाठ 1 हो (एक मात्रै पूर्ण रूपमा हात-मा-पर्ने पाठ), ईमानदार लेबलिङ जसले बताउँछ कि पाठ 2 अध्याय 6 मा छ र Retail परिदृश्य एक आर्किटेक्चर ब्लूप्रिन्ट हो, एक-कमाण्ड टेम्पलेट होइन
+- **🧭 अध्याय 1 पाठ तालिका** अब नयाँ "Bring Your Own App" पाठ (पाठ 4) समावेश गर्छ
+- **🔗 Navigation footers** अपडेट गरियो: `first-project.md` अब अघि `bring-your-own-app.md` लाई लिंक गर्छ
+
+#### समाधान गरियो
+- **🧱 "दावी तर हराएको" Terraform खाल्टि बन्द गरियो** — पाठ्यक्रमले पहिले Terraform समर्थन उल्लेख गर्यो तर देखाएको थिएन
+- **🔀 अध्याय 5 क्रस-लिङ्कहरू सुधारियो** जसले पूर्ण multi-agent कार्यान्वयन भएको भन्ने भ्रम दिन्थ्यो जब केवल आर्किटेक्चर ब्लूप्रिन्ट मात्र थियो
+
+#### अपडेट गरिएका फाइलहरू
+- `changelog.md`
+- `docs/chapter-01-foundation/README.md`
+- `docs/chapter-01-foundation/bring-your-own-app.md` *(new)*
+- `docs/chapter-01-foundation/first-project.md`
+- `docs/chapter-04-infrastructure/deployment-guide.md`
+- `docs/chapter-04-infrastructure/provisioning.md`
+- `docs/chapter-05-multi-agent/README.md`
+- `docs/chapter-05-multi-agent/multi-agent-basics.md` *(new)*
+- `docs/chapter-08-production/production-ai-practices.md`
+
+---
+
+### [v3.20.0] - 2026-06-16
+
+#### AZD 1.25.6 Refresh, Full Agent Lifecycle Commands & Aspire Rebrand
+**यस भर्सनले कोर्सलाई `azd` `1.25.6` (June 2026) र `azure.ai.agents` `0.1.40-preview` extension विरुद्ध पुनःमान्य गर्दछ, AI मार्गदर्शनलाई "scaffold an agent" बाट पूर्ण एजेन्ट लाइफसाइकल (test → evaluate → optimize → inspect → delete) सम्म विस्तार गर्छ, नयाँ `azure.ai.skills` र `azure.ai.connections` preview extensions लाई सतहमा ल्याउँछ, र ".NET Aspire" → "Aspire" उत्पादन रिब्रान्ड नोट गर्दछ।**
+
+#### थपिएको
+- **🔁 पूर्ण एजेन्ट लाइफसाइकल कभरेज** शुरुवातकर्ताहरू र AI इन्जिनियरहरूका लागि सबै डक्युमेन्टमा:
+  - `docs/chapter-01-foundation/azd-basics.md` — Extensions र AI Commands सेक्सनमा Lifecycle तालिका (scaffold → test → measure → improve → inspect → clean up) थपियो
+  - `docs/chapter-08-production/production-ai-practices.md` — नयाँ "Managing the Agent Lifecycle" खण्ड जसले `azd ai agent invoke`, `endpoint show`, `eval generate`, `optimize`, `code download`, र `delete --force` समेट्छ
+  - `resources/cheat-sheet.md` — AI Agent Commands विस्तार: `invoke`, `endpoint show`, `eval generate`, `optimize`, `code download`, र `delete --force`
+- **🧩 नयाँ preview extensions** दस्तावेज गरिएको: `azure.ai.skills` (reusable agent skills) र `azure.ai.connections` (Foundry connections) extensions तालिका र cheat sheet मा थपियो
+- **⏱️ प्रतिक्रिया-समय मार्गदर्शन** — `azd ai agent invoke` का उदाहरणहरूले अब कुल लेटेन्सी र time-to-first-byte प्रिन्ट गर्ने कुरा उल्लेख गर्छ
+- **📌 भर्सन ब्यानर** मूल README मा सिक्नेहरूलाई `azd version` र `azd upgrade` तर्फ निर्देशित गर्दै थपियो
+
+#### परिर्वतन गरिएको
+- **✅ मान्यकरण आधार रेखा अपडेट गरियो** `azd 1.23.12` (March 2026) बाट `azd 1.25.6` (June 2026) मा सबै अध्याय README र कार्यशाला डकमा
+- **🤖 अध्याय 2 extension नोट** `azure.ai.agents` `0.1.18-preview` बाट `0.1.40-preview` मा अपडेट गरियो
+- **🧪 कार्यशाला मान्यकरण उदाहरण** (`azd version` आउटपुट) `1.25.6` मा अपडेट गरियो
+- **🧭 README "What's New in azd Today"** अपडेट गरियो ताकि end-to-end एजेन्ट लाइफसाइकल, नयाँ AI extensions, र हालैका गुणवत्ता-जीवन सुधारहरू (`azd init` idempotency, `azd auth login` stale-token clearing, `azd tool` first-run prompt) हाइलाइट होस
+- **📖 अध्याय 2 agents.md (Option 4)** अब सिक्नेहरूलाई post-deploy लाइफसाइकल कमाण्डहरू तर्फ निर्देश गर्दछ, `azd up` मा रोकिँदैन
+
+#### समाधान गरियो
+- **🏷️ उत्पादन नामकरण** — Aspire रब्रान्ड नोट थपियो (".NET Aspire" अब मात्र "Aspire"); azd को Aspire समर्थन अपरिवर्तित छ
+- **🔎 लाइभ रिलिज मान्यकरण** Azure Developer CLI रिलिज फीड विरुद्ध पुष्टि गरियो: स्थिर CLI `1.25.6` (2026-06-12) र `azure.ai.agents` `0.1.40-preview` (2026-06-15)
+
+#### अपडेट गरिएका फाइलहरू
+- `README.md`
+- `changelog.md`
+- `docs/chapter-01-foundation/README.md`
+- `docs/chapter-01-foundation/azd-basics.md`
+- `docs/chapter-02-ai-development/README.md`
+- `docs/chapter-02-ai-development/agents.md`
+- `docs/chapter-03-configuration/README.md`
+- `docs/chapter-04-infrastructure/README.md`
+- `docs/chapter-05-multi-agent/README.md`
+- `docs/chapter-06-pre-deployment/README.md`
+- `docs/chapter-07-troubleshooting/README.md`
+- `docs/chapter-08-production/README.md`
+- `docs/chapter-08-production/production-ai-practices.md`
+- `resources/cheat-sheet.md`
+- `workshop/docs/index.md`
+- `workshop/docs/instructions/2-Validate-AI-Template.md`
+
+---
 
 ### [v3.19.1] - 2026-03-27
-
-#### शुरुआती अनबोर्डिङ स्पष्टिकरण, सेटअप प्रमाणीकरण र अन्तिम AZD कमाण्ड सफा गर्ने कार्य
-**यस संस्करणले AZD 1.23 प्रमाणीकरण स्विप पछि शुरुआती-केंद्रित दस्तावेज पासको पालना गर्छ: यसले AZD-प्रथम प्रमाणीकरण मार्गदर्शन स्पष्ट पार्छ, स्थानीय सेटअप प्रमाणीकरण स्क्रिप्टहरू थप्छ, महत्वपूर्ण कमाण्डहरूलाई प्रत्यक्ष AZD CLI विरुद्ध प्रमाणित गर्छ, र परिवर्तन विवरण बाहिरको अन्तिम अप्रचलित अंग्रेजी स्रोतका कमाण्ड सन्दर्भहरू हटाउँछ।**
+#### सुरुवाती मार्गदर्शन स्पष्टिकरण, सेटअप मान्यकरण र अन्तिम AZD कमाण्ड सरसफाइ
+**यो संस्करण AZD 1.23 मान्यकरण स्वीपको पछिल्लो कार्य हो र सुरुकर्तामुखी दस्तावेजीकरण पास समावेश गर्दछ: यसले AZD-प्राथमिक प्रमाणीकरण मार्गदर्शन स्पष्ट गर्छ, स्थानीय सेटअप मान्यकरण स्क्रिप्टहरू थप्छ, मुख्य कमाण्डहरू प्रत्यक्ष AZD CLI सँग प्रमाणित गर्छ, र changelog बाहेकको अन्तिम पुरानो अंग्रेजी-मूल कमाण्ड सन्दर्भहरू हटाउँछ।**
 
 #### थपियो
-- **🧪 शुरुआती सेटअप प्रमाणीकरण स्क्रिप्टहरू** `validate-setup.ps1` र `validate-setup.sh` सहित, जसले सिक्नेहरूलाई अध्याय 1 सुरु गर्नु अघि आवश्यक उपकरणहरू पुष्टि गर्न अनुमति दिन्छ
-- **✅ प्रारम्भिक सेटअप प्रमाणीकरण कदमहरू** मूल README र अध्याय 1 README मा ताकि `azd up` अघि आवश्यक पूर्वापेक्षहरू छुटेका छैनन् भन्ने सुनिश्चित होस्
+- **🧪 सुरुकर्ताका लागि सेटअप मान्यकरण स्क्रिप्टहरू** with `validate-setup.ps1` and `validate-setup.sh` ताकि सिक्नेहरूले अध्याय 1 सुरु गर्नु अघि आवश्यक उपकरणहरू पुष्टि गर्न सकून्
+- **✅ सुरुमा सेटअप मान्यकरण कदमहरू** रुट README र अध्याय 1 README मा ताकि आवश्यक पूर्वशर्तहरू `azd up` भन्दा पहिले समातिन सकोस्
 
 #### परिवर्तन गरियो
-- **🔐 शुरुआती प्रमाणीकरण मार्गदर्शन** अब लगातार `azd auth login` लाई AZD कार्य फ्लोहरूको प्राथमिक मार्गको रूपमा व्यवहार गर्छ, जहाँ `az login` वैकल्पिक रूपमा उल्लेख गरिएको छ यदि Azure CLI कमाण्डहरू प्रत्यक्ष प्रयोग गरिएको छैन भने मात्र
-- **📚 अध्याय 1 अनबोर्डिङ फ्लो** अब सिक्नेलाई स्थापना, प्रमाणीकरण, र पहिलो डिप्लयमेन्ट चरणहरू अघि आफ्नो स्थानीय सेटअप प्रमाणित गर्न निर्देशन दिन्छ
-- **🛠️ प्रमाणीकरण सन्देशहरू** अब स्पष्ट रूपमा बाधक आवश्यकताहरूलाई वैकल्पिक Azure CLI चेतावनीहरूबाट अलग गर्छ, AZD-मैत्री शुरुआती मार्गका लागि
-- **📖 कन्फिगरेसन, समस्या समाधान र उदाहरण दस्तावेजहरू** अब आवश्यकीय AZD प्रमाणीकरण र वैकल्पिक Azure CLI साइन-इन बीच फरक देखाउँछन् जहाँ पहिले दुबै सन्दर्भ बिना प्रसंग प्रस्तुत भएका थिए
+- **🔐 सुरुकर्ताका लागि प्रमाणिकरण मार्गदर्शन** अब सुस्पष्ट रूपमा `azd auth login` लाई AZD कार्यप्रवाहहरूको प्राथमिक मार्गको रूपमा मान्छ, र `az login` लाई वैकल्पिकको रूपमा उल्लेख गरिन्छ जबसम्म Azure CLI कमाण्डहरू प्रत्यक्ष रूपमा प्रयोग हुँदैनन्
+- **📚 अध्याय 1 ऑनबोर्डिङ प्रवाह** अब सिक्नेहरूलाई स्थापना, प्रमाणिकरण, र पहिलो परिनियोजन कदमहरू अघि आफ्नो स्थानीय सेटअप मान्यकरण गर्न निर्देशन गर्दछ
+- **🛠️ मान्यकर्ता सन्देशहरू** अब AZD-मै सीमित सुरुकर्ताका मार्गका लागि अवरोधक आवश्यकताहरूलाई वैकल्पिक Azure CLI चेतावनीहरूबाट स्पष्ट रूपमा अलग गर्दछ
+- **📖 कन्फिगरेसन, समस्या निराकरण, र उदाहरण दस्तावेजहरू** अब अनिवार्य AZD प्रमाणिकरण र वैकल्पिक Azure CLI साइन-इन बीच फरक गर्छ जहाँ पहिले दुवै प्रसंगबिन प्रस्तुत भएका थिए
 
 #### सुधार गरियो
-- **📋 बाँकी अंग्रेजी स्रोत कमाण्ड सन्दर्भहरू** वर्तमान AZD फारमहरूमा अपडेट गरियो, जस्तै `azd config show` चिट सिटमा र `azd monitor --overview` जहाँ Azure पोर्टल अवलोकन मार्गदर्शन चाहिएको थियो
-- **🧭 अध्याय 1 मा शुरुआती दाबीहरू** सबै टेम्प्लेटहरू र Azure स्रोतहरूमा निश्चित त्रुटि-मुक्त वा रोलब्याक व्यवहार सुनिश्चित नगर्ने गरी नरम बनाइयो
-- **🔎 प्रत्यक्ष CLI प्रमाणीकरण** हाल समर्थन गरिएका कमाण्डहरू पुष्टि गरियो: `azd env get-values`, `azd template list`, `azd extension list --installed`, `azd copilot consent list`, `azd mcp start`, `azd provision --preview`, `azd monitor --logs`, र `azd down --force --purge`
+- **📋 बाँकी अंग्रेजी-मूल कमाण्ड सन्दर्भहरू** वर्तमान AZD स्वरूपमा अद्यावधिक गरियो, जस्तै cheat sheet मा `azd config show` र जहाँ Azure Portal अवलोकन मार्गदर्शन चाहिएको थियो त्यहाँ `azd monitor --overview`
+- **🧭 अध्याय 1 का सुरुकर्ता दाबीहरू** सबै टेम्पलेट र Azure स्रोतहरूमा सुनिश्चित शून्य-त्रुटि वा रोलब्याक व्यवहारको बारेमा बढी वाच्य नगर्नको लागि नरम गरिएको छ
+- **🔎 प्रत्यक्ष CLI मान्यकरण** ले हालको समर्थन सुनिश्चित गर्यो: `azd env get-values`, `azd template list`, `azd extension list --installed`, `azd copilot consent list`, `azd mcp start`, `azd provision --preview`, `azd monitor --logs`, र `azd down --force --purge`
 
-#### फाइलहरू अपडेट गरियो
+#### अद्यावधिक गरिएका फाइलहरू
 - `README.md`
 - `changelog.md`
 - `docs/chapter-01-foundation/README.md`
@@ -61,40 +161,40 @@
 
 ### [v3.19.0] - 2026-03-26
 
-#### AZD 1.23.12 प्रमाणीकरण, कार्यशाला वातावरण विस्तार र AI मोडेल पुनःताजगी
-**यस संस्करणले `azd` `1.23.12` विरुद्ध दस्तावेज प्रमाणीकरण स्विप गर्छ, पुराना AZD कमाण्ड उदाहरणहरू अपडेट गर्छ, AI मोडेल मार्गदर्शनलाई हालको पूर्वनिर्धारित रूपमा ताज़ा गर्छ, र कार्यशाला निर्देशनहरू GitHub Codespaces बाहेक dev कन्टेनरहरू र स्थानीय क्लोनहरूलाई पनि समर्थन गर्ने गरी व्यापक बनाउँछ।**
+#### AZD 1.23.12 Validation, Workshop Environment Expansion & AI Model Refresh
+**यो संस्करण दस्तावेजीकरणलाई `azd` `1.23.12` विरुद्ध मान्यकरण स्वीप गर्छ, पुराना AZD कमाण्ड उदाहरणहरू अद्यावधिक गर्छ, AI मोडल मार्गदर्शनलाई हालका डिफल्टहरूमा रिफ्रेश गर्छ, र कार्यशाला निर्देशहरूलाई GitHub Codespaces थपेर dev containers र स्थानीय क्लोनहरूलाई पनि समर्थन गर्ने गरी विस्तार गर्छ।**
 
 #### थपियो
-- **✅ मुख्य अध्यायहरू र कार्यशाला दस्तावेजहरूमा प्रमाणीकरण टिप्पणिहरू** ताकि नयाँ वा पुरानो CLI बिल्डहरू प्रयोग गर्ने सिक्नेलाई परीक्षण गरिएको AZD आधार स्पष्ट हुने
-- **⏱️ लामो समयसम्म चल्ने AI अनुप्रयोगको लागि डिप्लयमेन्ट समय सीमा मार्गदर्शन** `azd deploy --timeout 1800` प्रयोग गरी
-- **🔎 एक्स्टेन्सन निरीक्षण कदमहरू** AI कार्यप्रवाह दस्तावेजहरूमा `azd extension show azure.ai.agents`
-- **🌐 कार्यशाला वातावरण मार्गदर्शन विस्तार** GitHub Codespaces, dev कन्टेनरहरू, र MkDocs सहित स्थानीय क्लोनहरू समेटेर
+- **✅ कोर अध्यायहरू र कार्यशाला दस्तावेजहरूमा मान्यकरण नोट्स** ताकि परीक्षण गरिएको AZD आधाररेखा नयाँ वा पुराना CLI बिल्डहरू प्रयोग गर्दै सिक्नेहरूका लागि स्पष्ट होस्
+- **⏱️ लामो समयसम्म चल्ने AI एप परिनियोजनहरूका लागि टाइमआउट मार्गदर्शन** `azd deploy --timeout 1800` प्रयोग गर्दा
+- **🔎 एक्सटेन्सन निरीक्षण कदमहरू** AI कार्यप्रवाह दस्तावेजहरूमा `azd extension show azure.ai.agents` सँग
+- **🌐 अधिक व्यापक कार्यशाला वातावरण मार्गदर्शन** GitHub Codespaces, dev containers, र स्थानीय क्लोनहरूलाई MkDocs सँग समेट्दै
 
 #### परिवर्तन गरियो
-- **📚 अध्याय परिचय READMEs** अब आधार, कन्फिगरेसन, पूर्वाधार, बहु-एजेन्ट, पूर्व-डिप्लयमेन्ट, समस्या समाधान, र उत्पादन खण्डहरूमा `azd 1.23.12` विरुद्ध प्रमाणीकरण सधैं उल्लेखित छ
-- **🛠️ AZD कमाण्ड सन्दर्भहरू** डकुमेन्टहरूमा हालका फारमहरूमा अपडेट गरियो:
+- **📚 अध्याय परिचय READMEs** अब आधारभूत, कन्फिगरेसन, इन्फ्रास्ट्रक्चर, मल्टि-एजेन्ट, प्रि-डिप्लोयमेन्ट, ट्रबलशुटिङ, र प्रोडक्सन सेक्सनहरूमा `azd 1.23.12` विरुद्ध मान्यकरणलाई सुसंगत रूपमा नोट गर्छ
+- **🛠️ AZD कमाण्ड सन्दर्भहरू** दस्तावेजभरि वर्तमान स्वरूपमा अद्यावधिक गरियो:
   - `azd config list` → `azd config show`
-  - `azd env show` → सन्दर्भ अनुसार `azd env list` वा `azd env get-value(s)`
+  - `azd env show` → `azd env list` वा `azd env get-value(s)` प्रसंग अनुसार
   - `azd auth whoami` → `azd auth status`
-  - `azd monitor` → Application Insights अवलोकन चाहिने ठाउँमा `azd monitor --overview`
-- **🧪 प्रोभिजन पूर्वावलोकन उदाहरणहरू** हाल मान्य प्रयोगमा सरलीकृत जस्तै `azd provision --preview` र `azd provision --preview -e production`
-- **🧭 कार्यशाला फ्लो** अद्यावधिक गरियो जसले सिक्नेलाई Codespaces, dev कन्टेनर, वा स्थानीय क्लोनमा ल्याबहरू सम्पन्न गर्न सजिलो बनाउँछ Codespaces-मै मात्र नभई
-- **🔐 प्रमाणीकरण मार्गदर्शन** AZD कार्यप्रवाहका लागि `azd auth login` प्राथमिक छनोट बनाइयो, जहाँ Azure CLI कमाण्डहरू सिधै प्रयोग गर्दा मात्र `az login` वैकल्पिक रूपमा राखियो
+  - `azd monitor` → `azd monitor --overview` जहाँ Application Insights अवलोकन चाहिएको हो
+- **🧪 Provision preview उदाहरणहरू** हाल समर्थित प्रयोगमा सरल बनाइयो, जस्तै `azd provision --preview` र `azd provision --preview -e production`
+- **🧭 कार्यशाला प्रवाह** अद्यावधिक गरियो ताकि सिक्नेहरूले Codespaces, dev container, वा स्थानीय क्लोनमा ल्याब पूरा गर्न सकून्, Codespaces मात्र मान्ने सन्दर्भ हटाइयो
+- **🔐 प्रमाणीकरण मार्गदर्शन** अब AZD कार्यप्रवाहहरूको लागि `azd auth login` लाई प्राथमिक तरिका मान्छ, र Azure CLI कमाण्डहरू प्रत्यक्ष प्रयोग गर्दा मात्र `az login` वैकल्पिकको रूपमा राखिन्छ
 
 #### सुधार गरियो
-- **🪟 विन्डोज इन्स्टल कमाण्डहरू** इन्स्टलेसन गाइडमा हालको `winget` प्याकेज केसिङसँग सामन्जस्य गरियो
-- **🐧 लिनक्स इन्स्टल मार्गदर्शन** असमर्थित वितरण-विशिष्ट `azd` प्याकेज म्यानेजर निर्देशनहरू हटाइयो र आवश्यकता अनुसार रिलिज एसेटहरूमा निर्देशित गरियो
-- **📦 AI मोडेल उदाहरणहरू** पुराना पूर्वनिर्धारितहरू जस्तै `gpt-35-turbo` र `text-embedding-ada-002` बाट हालका जस्तै `gpt-4.1-mini`, `gpt-4.1`, र `text-embedding-3-large` मा ताज़ा गरियो
-- **📋 डिप्लयमेन्ट र डायग्नोस्टिक्स स्निपेटहरू** हालका पर्यावरण र स्थितिको आदेशहरू प्रयोग गरी सुधार गरियो, जस्तै लगहरू, स्क्रिप्टहरू, र समस्या समाधान चरणहरूमा
+- **🪟 विंडोज इन्स्टल कमाण्डहरू** स्थापना गाइडमा हालको `winget` प्याकेज केसिङमा सामान्यीकरण गरियो
+- **🐧 लिनक्स इन्स्टल मार्गदर्शन** वितरण-विशेष अनसमर्थित `azd` प्याकेज म्यानेजर निर्देशनहरू हटाएर आवश्यक अनुसार रिलिज एसेटहरूतर्फ संकेत गर्न सुधार गरियो
+- **📦 AI मोडल उदाहरणहरू** पुराना डिफल्टहरू जस्तै `gpt-35-turbo` र `text-embedding-ada-002` बाट हालका उदाहरणहरू जस्तै `gpt-4.1-mini`, `gpt-4.1`, र `text-embedding-3-large` मा रिफ्रेश गरियो
+- **📋 परिनियोजन र डायग्नोस्टिक्स स्निपेटहरू** लग, स्क्रिप्ट, र ट्रबलशुटिङ कदमहरूमा हालको वातावरण र स्थिति कमाण्ड प्रयोग गर्न ठीक गरियो
 - **⚙️ GitHub Actions मार्गदर्शन** `Azure/setup-azd@v1.0.0` बाट `Azure/setup-azd@v2` मा अद्यावधिक गरियो
 - **🤖 MCP/Copilot सहमति मार्गदर्शन** `azd mcp consent` बाट `azd copilot consent list` मा अद्यावधिक गरियो
 
-#### सुधार गरियो
-- **🧠 AI अध्याय मार्गदर्शन** अब पूर्वावलोकन-संवेदनशील `azd ai` व्यवहार, टेनन्ट-विशिष्ट लगइन, हालको एक्स्टेन्सन प्रयोग, र अपडेट गरिएको मोडेल डिप्लयमेन्ट सिफारिसहरूको स्पष्ट व्याख्या गर्छ
-- **🧪 कार्यशाला निर्देशनहरू** अब अधिक यथार्थपरक संस्करण उदाहरणहरू र स्पष्ट वातावरण सेटअप भाषा प्रयोग गर्छन् हात-अन ल्याबहरूका लागि
-- **📈 उत्पादन र समस्या समाधान दस्तावेजहरू** अब हालको नजरदारी, फ्यालब्याक मोडेल, र लागत-स्तर उदाहरणहरूसँग राम्रोसँग मेल खान्छन्
+#### सुधार गरिएको
+- **🧠 AI अध्याय मार्गदर्शन** अब preview-संवेदनशील `azd ai` व्यवहार, टेन्यान्ट-विशेष लगइन, हालको एक्सटेन्सन प्रयोग, र अद्यावधिक मोडल परिनियोजन सिफारिसहरू राम्रोसँग व्याख्या गर्छ
+- **🧪 कार्यशाला निर्देशहरू** अब बढी वास्तविक संस्करण उदाहरणहरू र हात-ऑन ल्याबहरूको लागि स्पष्ट वातावरण सेटअप भाषा प्रयोग गर्छन्
+- **📈 प्रोडक्सन र ट्रबलशुटिङ दस्तावेजहरू** हालको अनुगमन, फ्यालब्याक मोडल, र लागत-टियर उदाहरणसँग राम्रोसँग मेल खान्छन्
 
-#### फाइलहरू अपडेट गरियो
+#### अद्यावधिक गरिएका फाइलहरू
 - `docs/chapter-01-foundation/README.md`
 - `docs/chapter-01-foundation/azd-basics.md`
 - `docs/chapter-01-foundation/installation.md`
@@ -127,47 +227,46 @@
 
 ### [v3.18.0] - 2026-03-16
 
-#### AZD AI CLI कमाण्डहरू, सामग्री प्रमाणीकरण र टेम्प्लेट विस्तार
-**यस संस्करणले सबै AI सम्बन्धित अध्यायहरूमा `azd ai`, `azd extension`, र `azd mcp` कमाण्ड समेटेको छ, agents.md मा टुटेका लिङ्कहरू र अविशिष्ट कोडहरू सच्याएको छ, चिट सिट अपडेट गरेको छ, र उदाहरण टेम्प्लेट खण्डलाई मान्य गरिएका विवरणहरू र नयाँ Azure AI AZD टेम्प्लेटहरूसँग पूर्णरूपमा नवीकरण गरेको छ।**
+#### AZD AI CLI Commands, Content Validation & Template Expansion
+**यो संस्करणले `azd ai`, `azd extension`, र `azd mcp` कमाण्ड कभरेज सबै AI-सम्बन्धी अध्यायहरूमा थप्छ, agents.md मा टुटेका लिङ्क र Deprecated कोड सच्याउँछ, cheat sheet अद्यावधिक गर्छ, र Example Templates सेक्सनलाई मान्य गरिएको विवरण र नयाँ Azure AI AZD टेम्पलेटहरू सहित पुनःनिर्माण गर्छ।**
 
 #### थपियो
-- **🤖 AZD AI CLI कभरेज** 7 फाइलहरूमा (पहिले केवल अध्याय 8 मा):
+- **🤖 AZD AI CLI कभरेज** 7 फाइलहरूमा (पहिलेदेखि मात्र अध्याय 8 मा थियो):
   - `docs/chapter-01-foundation/azd-basics.md` — नयाँ "Extensions and AI Commands" खण्ड जसले `azd extension`, `azd ai agent init`, र `azd mcp` परिचय गराउँछ
-  - `docs/chapter-02-ai-development/agents.md` — विकल्प 4: `azd ai agent init` तुलनात्मक तालिकासहित (टेम्प्लेट बनाम म्यानिफेस्ट दृष्टिकोण)
+  - `docs/chapter-02-ai-development/agents.md` — विकल्प 4: `azd ai agent init` टेम्पलेट बनाम म्यानिफेस्ट दृष्टिकोणको तुलना तालिकासहित
   - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — "AZD Extensions for Foundry" र "Agent-First Deployment" उपखण्डहरू
-  - `docs/chapter-05-multi-agent/README.md` — क्विक स्टार्टले टेम्प्लेट र म्यानिफेस्ट आधारित दुवै डिप्लयमेन्ट मार्गहरू देखाउँछ
-  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — डिप्लयमेन्ट खण्डमा `azd ai agent init` विकल्प समावेश
+  - `docs/chapter-05-multi-agent/README.md` — क्विक स्टार्टले अब टेम्पलेट र म्यानिफेस्ट-आधारित दुबै परिनियोजन पथहरू देखाउँछ
+  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — Deploy सेक्सनले अब `azd ai agent init` विकल्प समावेश गर्दछ
   - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — "AZD AI Extension Commands for Diagnostics" उपखण्ड
-  - `resources/cheat-sheet.md` — नयाँ "AI & Extensions Commands" खण्ड जसमा `azd extension`, `azd ai agent init`, `azd mcp`, र `azd infra generate` समावेश
-
-- **📦 नयाँ AZD AI उदाहरण टेम्प्लेटहरू** `microsoft-foundry-integration.md` मा:
-  - **azure-search-openai-demo-csharp** — Blazor WebAssembly, Semantic Kernel, र भ्वाइस च्याट समर्थन सहित .NET RAG च्याट
-  - **azure-search-openai-demo-java** — Langchain4J प्रयोग गरी Java RAG च्याट जसमा ACA/AKS डिप्लयमेन्ट विकल्पहरू छन्
-  - **contoso-creative-writer** — Azure AI Agent Service, Bing Grounding, र Prompty प्रयोग गरेर बहु-एजेन्ट क्रिएटिभ लेखन अनुप्रयोग
-  - **serverless-chat-langchainjs** — Azure Functions + LangChain.js + Cosmos DB र Ollama स्थानीय विकास समर्थन सहित सर्भरलेस RAG
-  - **chat-with-your-data-solution-accelerator** — प्रशासक पोर्टल, Teams एकीकरण, र PostgreSQL/Cosmos DB विकल्पहरूसहित एंटरप्राइज RAG एक्सेलेटर
-  - **azure-ai-travel-agents** — .NET, Python, Java, र TypeScript मा सर्भरहरू सहित बहु-एजेन्ट MCP अर्चेस्ट्रेशन सन्दर्भ अनुप्रयोग
-  - **azd-ai-starter** — न्यूनतम Azure AI पूर्वाधार Bicep स्टार्ट टेम्प्लेट
-  - **🔗 Awesome AZD AI Gallery लिंक** — [awesome-azd AI gallery](https://azure.github.io/awesome-azd/?tags=ai) यसको सन्दर्भ (80+ टेम्प्लेटहरू)
+  - `resources/cheat-sheet.md` — नयाँ "AI & Extensions Commands" सेक्सन `azd extension`, `azd ai agent init`, `azd mcp`, र `azd infra generate` सँग
+- **📦 नयाँ AZD AI उदाहरण टेम्पलेटहरू** `microsoft-foundry-integration.md` मा:
+  - **azure-search-openai-demo-csharp** — .NET RAG chat Blazor WebAssembly, Semantic Kernel, र भ्वाइस च्याट समर्थनसहित
+  - **azure-search-openai-demo-java** — Langchain4J प्रयोग गर्ने Java RAG chat जसले ACA/AKS परिनियोजन विकल्पहरू समर्थन गर्छ
+  - **contoso-creative-writer** — Azure AI Agent Service, Bing Grounding, र Prompty प्रयोग गर्ने मल्टि-एजेन्ट क्रिएटिभ लेखन एप
+  - **serverless-chat-langchainjs** — Azure Functions + LangChain.js + Cosmos DB प्रयोग गरेर सर्वरलेस RAG र Ollama स्थानीय विकास समर्थनसहित
+  - **chat-with-your-data-solution-accelerator** — प्रशासन पोर्टल, Teams एकीकरण, र PostgreSQL/Cosmos DB विकल्पहरूसहित एन्त्रप्राइ즈 RAG एक्सेलेरेटर
+  - **azure-ai-travel-agents** — मल्टि-एजेन्ट MCP अर्गेस्ट्रेसन सन्दर्भ एप जसमा .NET, Python, Java, र TypeScript मा सर्भरहरू छन्
+  - **azd-ai-starter** — न्यूनतम Azure AI इन्फ्रास्ट्रक्चर Bicep स्टार्टर टेम्पलेट
+  - **🔗 Awesome AZD AI Gallery link** — Reference to the [awesome-azd AI gallery](https://azure.github.io/awesome-azd/?tags=ai) (80+ templates)
 
 #### सुधार गरियो
-- **🔗 agents.md नेभिगेसन**: पूर्व/अर्को लिङ्कहरू अब अध्याय 2 README पाठ्यक्रम क्रममा मेल खान्छन् (Microsoft Foundry Integration → Agents → AI Model Deployment)
-- **🔗 agents.md टुटेका लिङ्कहरू**: `production-ai-practices.md` लाई ठीक गरी `../chapter-08-production/production-ai-practices.md` बनाइयो (3 स्थानहरूमा)
-- **📦 agents.md अविशिष्ट कोड**: `opencensus` लाई `azure-monitor-opentelemetry` + OpenTelemetry SDK मा प्रतिस्थापन गरियो
-- **🐛 agents.md अमान्य API**: `create_agent()` बाट `max_tokens` लाई `create_run()` मा `max_completion_tokens` रूपमा सारियो
-- **🔢 agents.md टोकन गणना**: मोटामोटी `len//4` अनुमानलाई `tiktoken.encoding_for_model()` ले प्रतिस्थापन गरियो
-- **azure-search-openai-demo**: सेवा विवरण "Cognitive Search + App Service" बाट परिवर्तन गरी "Azure AI Search + Azure Container Apps" बनाइयो (डिफल्ट होस्ट अक्टुबर 2024 मा परिवर्तन)
-- **contoso-chat**: वर्णन Azure AI Foundry + Prompty समावेश गरेर अपडेट गरियो, जसले रेपोको वास्तविक शीर्षक र प्रविधि स्ट्याकसँग मेल खान्छ
+- **🔗 agents.md नेभिगेसन**: Previous/Next लिङ्कहरू अब Chapter 2 README को पाठ्यक्रम क्रममा मेल खान्छन् (Microsoft Foundry Integration → Agents → AI Model Deployment)
+- **🔗 agents.md टुटेका लिङ्कहरू**: `production-ai-practices.md` लाई `../chapter-08-production/production-ai-practices.md` मा ठीक गरियो (3 occurrences)
+- **📦 agents.md deprecated कोड**: `opencensus` लाई `azure-monitor-opentelemetry` + OpenTelemetry SDK बाट प्रतिस्थापित गरियो
+- **🐛 agents.md अमान्य API**: `max_tokens` लाई `create_agent()` बाट `create_run()` मा `max_completion_tokens` को रूपमा सारियो
+- **🔢 agents.md टोकन गणना**: मोटामोटा `len//4` अनुमानलाई `tiktoken.encoding_for_model()` प्रयोग गरेर बदलियो
+- **azure-search-openai-demo**: सेवाहरूलाई "Cognitive Search + App Service" बाट "Azure AI Search + Azure Container Apps" मा सुधार गरियो (अक्टुबर 2024 बाट डिफल्ट होस्ट परिवर्तन)
+- **contoso-chat**: विवरणलाई Azure AI Foundry + Prompty सन्दर्भमा अद्यावधिक गरियो, जसले रिपोको वास्तविक शीर्षक र टेक स्ट्याकसँग मेल खान्छ
 
-#### हटाइयो
-- **ai-document-processing**: कार्यरत नभएको टेम्प्लेट सन्दर्भ हटाइयो (रेपो AZD टेम्प्लेटको रूपमा सार्वजनिक रूपमा पहुँचयोग्य छैन)
+#### हटाइएको
+- **ai-document-processing**: गैर-कार्यशील टेम्पलेट सन्दर्भ हटाइएको (रिपो सार्वजनिक रूपमा AZD टेम्पलेटको रूपमा पहुँचयोग्य छैन)
 
-#### सुधार भयो
-- **📝 agents.md अभ्यासहरू**: अभ्यास 1 मा अब अपेक्षित नतिजा र `azd monitor` चरण देखाइएको छ; अभ्यास 2 मा पूर्ण `FunctionTool` दर्ता कोड समावेश गरिएको छ; अभ्यास 3 मा अस्पष्ट निर्देशनहरूलाई ठोस `prepdocs.py` आदेशहरूले प्रतिस्थापन गरिएको छ
-- **📚 agents.md स्रोतहरू**: वर्तमान Azure AI Agent Service कागजातहरू र क्विकस्टार्टमा अद्यावधिक गरिएको छ
-- **📋 agents.md अर्को कदम तालिका**: पूर्ण अध्याय कवरेजको लागि AI कार्यशाला ल्याब लिंक थपिएको छ
+#### सुधार गरिएको
+- **📝 agents.md अभ्यासहरू**: Exercise 1 अब अपेक्षित आउटपुट र `azd monitor` चरण देखाउँछ; Exercise 2 मा पूर्ण `FunctionTool` दर्ता कोड समावेश गरिएको छ; Exercise 3 अस्पष्ट मार्गदर्शनलाई ठोस `prepdocs.py` कमाण्डहरूले बदलिएको छ
+- **📚 agents.md स्रोतहरू**: दस्तावेज लिङ्कहरू हालका Azure AI Agent Service डकुमेन्टेसन र क्विकस्टार्टमा अद्यावधिक गरियो
+- **📋 agents.md Next Steps तालिका**: पूरा अध्याय कभरको लागि AI Workshop Lab लिंक थपियो
 
-#### अपडेट गरिएका फाइलहरू
+#### अद्यावधिक गरिएका फाइलहरू
 - `docs/chapter-01-foundation/azd-basics.md`
 - `docs/chapter-02-ai-development/agents.md`
 - `docs/chapter-02-ai-development/microsoft-foundry-integration.md`
@@ -179,31 +278,30 @@
 ---
 
 ### [v3.17.0] - 2026-02-05
+#### पाठ्यक्रम नेभिगेशन सुधार
+**यो संस्करणले README.md अध्याय नेभिगेशनलाई एक उन्नत तालिका ढाँचाको साथ सुधार गर्दछ।**
 
-#### कोर्स नेभिगेसन सुधार
-**यस संस्करणले README.md अध्याय नेभिगेसनलाई सुधारिएको तालिका स्वरूपसहित सुविधा दिन्छ।**
-
-#### परिवर्तनहरू
-- **कोर्स म्याप तालिका**: प्रत्यक्ष पाठ सिकाइ लिंकहरू, अवधि अनुमानहरू, र जटिलता रेटिङहरूका साथ सुधार गरिएको
-- **फोल्डर सफाइ**: अनावश्यक पुराना फोल्डरहरू हटाइयो (deployment/, getting-started/, pre-deployment/, troubleshooting/)
-- **लिंक प्रमाणीकरण**: कोर्स म्याप तालिकामा सबै २१+ भित्री लिंकहरू प्रमाणित गरियो
+#### परिवर्तन
+- **पाठ्यक्रम नक्सा तालिका**: प्रत्यक्ष पाठ लिङ्कहरू, अवधि अनुमान, र जटिलता रेटिङहरू सहित सुधार गरिएको
+- **फोल्डर क्लिनअप**: अनावश्यक पुराना फोल्डरहरू हटाइयो (deployment/, getting-started/, pre-deployment/, troubleshooting/)
+- **लिङ्क प्रमाणीकरण**: Course Map तालिकामा रहेका सबै 21+ आन्तरिक लिङ्कहरू प्रमाणित गरियो
 
 ### [v3.16.0] - 2026-02-05
 
-#### उत्पादन नाम अपडेटहरू
-**यस संस्करणले उत्पादन सन्दर्भहरूलाई वर्तमान Microsoft ब्रान्डिंग अनुसार अद्यावधिक गर्छ।**
+#### उत्पादन नाम अद्यावधिक
+**यो संस्करणले उत्पादन सन्दर्भहरू हालको Microsoft ब्राण्डिङ अनुसार अद्यावधिक गर्दछ।**
 
-#### परिवर्तनहरू
-- **Microsoft Foundry → Microsoft Foundry**: सबै सन्दर्भहरू गैर-अनुवाद फाइलहरूमा अद्यावधिक गरियो
-- **Azure AI Agent Service → Foundry Agents**: सेवा नाम वर्तमान ब्रान्डिंग अनुरूप परिवर्तन गरियो
+#### परिवर्तन
+- **Microsoft Foundry → Microsoft Foundry**: सबै सन्दर्भहरू अनुवाद नभएका फाईलहरूमा अद्यावधिक गरियो
+- **Azure AI Agent Service → Foundry Agents**: सेवा नाम हालको ब्राण्डिङ प्रतिबिम्बित गर्न अद्यावधिक गरियो
 
-#### अपडेट गरिएका फाइलहरू
-- `README.md` - मुख्य कोर्स ल्याण्डिङ पृष्ठ
+#### अद्यावधिक फाइलहरू
+- `README.md` - मुख्य पाठ्यक्रम ल्यान्डिङ पृष्ठ
 - `changelog.md` - संस्करण इतिहास
-- `course-outline.md` - कोर्स संरचना
-- `docs/chapter-02-ai-development/agents.md` - AI एजेन्ट मार्गदर्शन
-- `examples/README.md` - उदाहरण कागजातहरू
-- `workshop/README.md` - कार्यशाला ल्याण्डिङ पृष्ठ
+- `course-outline.md` - पाठ्यक्रम संरचना
+- `docs/chapter-02-ai-development/agents.md` - AI एजेन्ट गाइड
+- `examples/README.md` - उदाहरण दस्तावेज
+- `workshop/README.md` - कार्यशाला ल्यान्डिङ पृष्ठ
 - `workshop/docs/index.md` - कार्यशाला सूची
 - `workshop/docs/instructions/*.md` - सबै कार्यशाला निर्देशन फाइलहरू
 
@@ -211,20 +309,20 @@
 
 ### [v3.15.0] - 2026-02-05
 
-#### प्रमुख रिपोजिटोरी पुनर्गठन: अध्याय-आधारित फोल्डर नामहरू
-**यस संस्करणले कागजातहरूलाई स्पष्ट नेभिगेसनको लागि समर्पित अध्याय फोल्डरहरूमा पुनर्गठन गर्छ।**
+#### प्रमुख रिपोजिटरी पुनःसंरचनाः अध्याय-आधारित फोल्डर नामहरू
+**यस संस्करणले प्रष्ट नेभिगेसनका लागि दस्तावेजहरू समर्पित अध्याय फोल्डरहरूमा पुनर्संरचित गरेको छ।**
 
 #### फोल्डर नाम परिवर्तनहरू
-पुराना फोल्डरहरू अध्याय-सङ्ख्यात्मक फोल्डरहरूले प्रतिस्थापित गरिएका छन्:
+पुराना फोल्डरहरू अध्याय-संख्यामा नाम भएका फोल्डरहरूसँग बदलिएका छन्:
 - `docs/getting-started/` → `docs/chapter-01-foundation/` + `docs/chapter-03-configuration/`
 - `docs/microsoft-foundry/` → `docs/chapter-02-ai-development/` + `docs/chapter-08-production/`
 - `docs/deployment/` → `docs/chapter-04-infrastructure/`
 - `docs/pre-deployment/` → `docs/chapter-06-pre-deployment/`
 - `docs/troubleshooting/` → `docs/chapter-07-troubleshooting/`
-- थपियो नयाँ: `docs/chapter-05-multi-agent/`
+- Added new: `docs/chapter-05-multi-agent/`
 
-#### फाइल स्थानान्तरणहरू
-| फाइल | बाट | तर्फ |
+#### फाइल माइग्रेशन
+| फाइल | बाट | तिर |
 |------|------|---|
 | azd-basics.md | getting-started/ | chapter-01-foundation/ |
 | installation.md | getting-started/ | chapter-01-foundation/ |
@@ -238,942 +336,942 @@
 | production-ai-practices.md | microsoft-foundry/ | chapter-08-production/ |
 | deployment-guide.md | deployment/ | chapter-04-infrastructure/ |
 | provisioning.md | deployment/ | chapter-04-infrastructure/ |
-| सबै प्रि-डिप्लोयमेन्ट फाइलहरू | pre-deployment/ | chapter-06-pre-deployment/ |
-| सबै ट्रबलशुटिङ फाइलहरू | troubleshooting/ | chapter-07-troubleshooting/ |
+| All pre-deployment files | pre-deployment/ | chapter-06-pre-deployment/ |
+| All troubleshooting files | troubleshooting/ | chapter-07-troubleshooting/ |
 
 #### थपियो
 - **📚 अध्याय README फाइलहरू**: प्रत्येक अध्याय फोल्डरमा README.md सिर्जना गरियो जसमा:
   - सिकाइ उद्देश्यहरू र अवधि
-  - पाठ तालिका विवरण सहित
-  - छिटो सुरु गर्ने आदेशहरू
+  - विवरण सहितको पाठ तालिका
+  - द्रुत सुरु आदेशहरू
   - अन्य अध्यायहरूमा नेभिगेसन
 
-#### परिवर्तनहरू
-- **🔗 सबै भित्री लिंकहरू अपडेट**: ७८+ बाट सबै कागजात फाइलहरूमा नयाँ मार्गहरूमा
-- **🗺️ मुख्य README.md**: कोर्स म्याप नयाँ अध्याय संरचनासहित अपडेट गरिएको
-- **📝 examples/README.md**: अध्याय फोल्डरहरूमा क्रस-रेफरेन्सहरू अपडेट गरियो
+#### परिवर्तन
+- **🔗 सबै आन्तरिक लिङ्कहरू अद्यावधिक गरियो**: दस्तावेजका सबै फाइलहरूमा 78+ पथहरू अद्यावधिक गरियो
+- **🗺️ मुख्य README.md**: नयाँ अध्याय संरचनासहित Course Map अद्यावधिक गरियो
+- **📝 examples/README.md**: अध्याय फोल्डरहरूसँग क्रस-रेफरेन्सहरू अद्यावधिक गरियो
 
 #### हटाइयो
-- पुरानो फोल्डर संरचना (getting-started/, microsoft-foundry/, deployment/, pre-deployment/, troubleshooting/, ai-foundry/)
+- पुरानो फोल्डर संरचना हटाइयो (getting-started/, microsoft-foundry/, deployment/, pre-deployment/, troubleshooting/, ai-foundry/)
 
 ---
 
 ### [v3.14.0] - 2026-02-05
 
-#### रिपोजिटोरी पुनर्गठन: अध्याय नेभिगेसन
+#### रिपोजिटरी पुनर्संरचना: अध्याय नेभिगेसन
 **यस संस्करणले अध्याय नेभिगेसन README फाइलहरू थप्यो (v3.15.0 द्वारा प्रतिस्थापित)।**
 
 ---
 
 ### [v3.13.0] - 2026-02-05
 
-#### नयाँ AI एजेन्ट मार्गदर्शन
-**यस संस्करणले Azure Developer CLI द्वारा AI एजेन्टहरू जिम्मेवार बनाउने समग्र मार्गदर्शन थप्दछ।**
+#### नयाँ AI एजेन्ट मार्गदर्शिका
+**यस संस्करणले Azure Developer CLI प्रयोग गरी AI एजेन्टहरू डिप्लोय गर्न व्यापक मार्गदर्शिका थप्छ।**
 
 #### थपियो
-- **🤖 docs/microsoft-foundry/agents.md**: पूरै मार्गदर्शन जसले समावेश गर्दछ:
-  - AI एजेन्टहरू के हुन् र चैटबोटहरूबाट कसरी भिन्न छन्
-  - तीन छिटो सुरु एजेन्ट टेम्प्लेटहरू (Foundry Agents, Prompty, RAG)
-  - एजेन्ट वास्तुकला ढाँचाहरू (एकल एजेन्ट, RAG, बहु-एजेन्ट)
+- **🤖 docs/microsoft-foundry/agents.md**: समग्र मार्गदर्शन समावेश गर्दछ:
+  - AI एजेन्टहरू के हुन् र तिनीहरू च्याटबटहरूबाट कसरी फरक छन्
+  - तीन द्रुत-स्टार्ट एजेन्ट टेम्पलेटहरू (Foundry Agents, Prompty, RAG)
+  - एजेन्ट आर्किटेक्चर ढाँचाहरू (एकल एजेन्ट, RAG, बहु-एजेन्ट)
   - उपकरण कन्फिगरेसन र अनुकूलन
-  - अनुगमन र मेट्रिक्स ट्र्याकिङ
-  - लागत विचार र अनुकूलन
-  - सामान्य समस्या समाधान परिदृश्यहरू
-  - तीन व्यवहारिक अभ्यासहरू सफलताका मापदण्डहरूसहित
+  - निगरानी र मेट्रिक्स ट्र्याकिङ
+  - लागतका विचार र अनुकूलन
+  - सामान्य समस्या निवारण परिदृश्यहरू
+  - सफलताको मापदण्डसहित तीन व्यवहारिक अभ्यासहरू
 
 #### सामग्री संरचना
-- **परिचय**: आरम्भकर्ताहरूका लागि एजेन्ट अवधारणाहरू
-- **छिटो सुरु**: `azd init --template get-started-with-ai-agents` का साथ एजेन्टहरू जिम्मेवार बनाउने
-- **वास्तुकला ढाँचाहरू**: एजेन्ट ढाँचाहरूका दृश्य चित्रहरू
-- **कन्फिगरेसन**: उपकरण सेटअप र वातावरण चरहरू
-- **अनुगमन**: एप्लिकेशन इनसाइट्स एकीकरण
-- **अभ्यासहरू**: प्रगतिशील व्यवहारिक सिकाइ (२०-४५ मिनेट प्रत्येक)
+- **परिचय**: शुरुवातीहरूको लागि एजेन्ट अवधारणाहरू
+- **द्रुत सुरु**: `azd init --template get-started-with-ai-agents` संग एजेन्टहरू डिप्लोय गर्नुहोस्
+- **आर्किटेक्चर ढाँचाहरू**: एजेन्ट ढाँचाहरूको दृश्यात्मक डायाग्रामहरू
+- **कन्फिगरेसन**: उपकरण सेटअप र वातावरण भेरिएबलहरू
+- **निगरानी**: Application Insights एकीकरण
+- **अभ्यासहरू**: प्रगतिशील व्यवहारिक सिकाइ (हरेक 20-45 मिनेट)
 
 ---
 
 ### [v3.12.0] - 2026-02-05
 
-#### देवकन्टेनर वातावरण अपडेट
-**यस संस्करणले आधुनिक उपकरण र AZD सिकाइ अनुभवका लागि राम्रो पूर्वनिर्धारित मानहरूसहित विकास कन्टेनर कन्फिगरेसन अपडेट गर्छ।**
+#### DevContainer वातावरण अद्यावधिक
+**यस संस्करणले AZD सिकाइ अनुभवको लागि आधुनिक उपकरणहरू र राम्रो पूर्वनिर्धारणहरूसहित विकास कन्टेनर कन्फिगरेसन अद्यावधिक गर्दछ।**
 
-#### परिवर्तनहरू
-- **🐳 आधार छवि**: `python:3.12-bullseye` बाट `python:3.12-bookworm` (नवीनतम Debian स्थिर) मा अपडेट गरियो
-- **📛 कन्टेनर नाम**: स्पष्टता का लागि "Python 3" बाट "AZD for Beginners" मा नाम परिवर्तन गरियो
+#### परिवर्तन
+- **🐳 बेस इमेज**: `python:3.12-bullseye` बाट `python:3.12-bookworm` मा अद्यावधिक गरियो (नवीनतम Debian स्थिर)
+- **📛 कन्टेनर नाम**: स्पष्टताका लागि "Python 3" बाट "AZD for Beginners" मा नाम परिवर्तन गरियो
 
 #### थपियो
-- **🔧 नयाँ देव कन्टेनर सुविधाहरू**:
-  - `azure-cli` बाइसिप समर्थन सक्षमसँग
-  - `node:20` (AZD टेम्प्लेटहरूको लागि LTS संस्करण)
-  - `github-cli` टेम्प्लेट प्रबंधनका लागि
-  - `docker-in-docker` कन्टेनर एप्स डिप्लोयमेन्टका लागि
+- **🔧 नयाँ Dev Container सुविधाहरू**:
+  - `azure-cli` Bicep समर्थन सक्षम गरिएको
+  - `node:20` (AZD टेम्पलेटहरूको लागि LTS संस्करण)
+  - `github-cli` टेम्पलेट व्यवस्थापनका लागि
+  - `docker-in-docker` कन्टेनर एप डिप्लोयमेन्टहरूको लागि
 
-- **🔌 पोर्ट अग्रेषण**: प्रचलित विकासका लागि पूर्व-सेट गरिएका पोर्टहरू:
-  - ८००० (MkDocs पूर्वावलोकन)
-  - ३००० (वेब एपहरू)
-  - ५००० (Python Flask)
-  - ८०८० (API हरू)
+- **🔌 पोर्ट फर्वार्डिङ**: सामान्य विकासका लागि पूर्व-कन्फिगर गरिएको पोर्टहरू:
+  - 8000 (MkDocs पूर्वावलोकन)
+  - 3000 (वेब एप्स)
+  - 5000 (Python Flask)
+  - 8080 (APIs)
 
-- **🧩 नयाँ VS कोड एक्सटेन्सनहरू**:
-  - `ms-python.vscode-pylance` - सुधारिएको Python IntelliSense
+- **🧩 नयाँ VS Code विस्तारहरू**:
+  - `ms-python.vscode-pylance` - उन्नत Python IntelliSense
   - `ms-azuretools.vscode-azurefunctions` - Azure Functions समर्थन
   - `ms-azuretools.vscode-docker` - Docker समर्थन
   - `ms-azuretools.vscode-bicep` - Bicep भाषा समर्थन
   - `ms-azure-devtools.azure-resource-groups` - Azure स्रोत व्यवस्थापन
   - `yzhang.markdown-all-in-one` - Markdown सम्पादन
   - `DavidAnson.vscode-markdownlint` - Markdown लिन्टिङ
-  - `bierner.markdown-mermaid` - Mermaid आरेख समर्थन
-  - `redhat.vscode-yaml` - YAML समर्थन (azure.yaml लागि)
-  - `eamodio.gitlens` - Git दृश्यांकन
+  - `bierner.markdown-mermaid` - Mermaid डायाग्राम समर्थन
+  - `redhat.vscode-yaml` - YAML समर्थन (azure.yaml का लागि)
+  - `eamodio.gitlens` - Git भिजुअलाइजेसन
   - `mhutchie.git-graph` - Git इतिहास
 
-- **⚙️ VS कोड सेटिङहरू**: Python अन्तर्वर्तक, बचत गर्दा ढाँचा गर्ने, र व्हाइटस्पेस ट्रिमिङका लागि पूर्वनिर्धारित सेटिङहरू थपियो
+- **⚙️ VS Code सेटिङहरू**: Python इन्टरप्रेटर, फर्म्याट अन सेभ, र whitespace ट्रिमिङका लागि पूर्वनिर्धारित सेटिङहरू थपियो
 
-- **📦 requirements-dev.txt अद्यावधिक**:
-  - MkDocs मिनिफाइ प्लगइन थपियो
+- **📦 Updated requirements-dev.txt**:
+  - MkDocs minify प्लगइन थपियो
   - कोड गुणस्तरका लागि pre-commit थपियो
-  - Azure SDK प्याकेजहरू (azure-identity, azure-mgmt-resource) थपियो
+  - Azure SDK प्याकेजहरू थपियो (azure-identity, azure-mgmt-resource)
 
 #### समाधान गरियो
-- **पोस्ट-क्रिएट आदेश**: अब कन्टेनर सुरु हुँदा AZD र Azure CLI इन्स्टलेशन जाँच गर्दछ
+- **पोस्ट-क्रिएट कमाण्ड**: अब कन्टेनर सुरु हुँदा AZD र Azure CLI स्थापना प्रमाणित गर्छ
 
 ---
 
 ### [v3.11.0] - 2026-02-05
 
-#### प्रारम्भकर्ताहरूका लागि README पुनर्लेखन
-**यस संस्करणले README.md लाई प्रारम्भकर्ताहरूका लागि बढी पहुँचयोग्य बनाउँदछ र AI विकासकर्ताहरूका लागि आवश्यक स्रोतहरू थप्दछ।**
+#### शुरुवाती-अनुकूल README पुनरावलोकन
+**यस संस्करणले README.md लाई शुरुवातीहरूको लागि धेरै पहुँचयोग्य बनाउँछ र AI विकासकर्ताहरूका लागि आवश्यक स्रोतहरू थप्दछ।**
 
 #### थपियो
-- **🆚 Azure CLI विरुद्ध AZD तुलना**: कुन उपकरण कहिले प्रयोग गर्ने स्पष्ट व्याख्या व्यावहारिक उदाहरणहरूसहित
-- **🌟 उत्कृष्ट AZD लिंकहरू**: समुदाय टेम्प्लेट ग्यालरी र योगदान स्रोतहरूसँग सीधा लिंकहरू:
-  - [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) - २००+ तयार डिप्लोय टेम्प्लेटहरू
+- **🆚 Azure CLI vs AZD तुलना**: कुन उपकरण कहिले प्रयोग गर्ने भन्ने स्पष्ट व्याख्या व्यावहारिक उदाहरणहरूसँग
+- **🌟 Awesome AZD लिङ्कहरू**: समुदाय टेम्पलेट ग्यालरी र योगदान स्रोतहरूमा प्रत्यक्ष लिङ्कहरू:
+  - [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) - 200+ तैनाथ गर्न तयार टेम्पलेटहरू
   - [Submit a Template](https://github.com/Azure/awesome-azd/issues) - समुदाय योगदान
-- **🎯 छिटो सुरु मार्गदर्शन**: सरल ३-चरण आरम्भ खण्ड (इन्स्टल → लगइन → डिप्लोय)
-- **📊 अनुभव-आधारित नेभिगेसन तालिका**: विकासकर्ता अनुभव अनुसार कहाँबाट सुरु गर्ने स्पष्ट निर्देशन
+- **🎯 छिटो सुरु मार्गदर्शिका**: सरल 3-चरणीय सुरु गर्ने खण्ड (Install → Login → Deploy)
+- **📊 अनुभव-आधारित नेभिगेसन तालिका**: विकासकर्ता अनुभवको आधारमा कहाँबाट सुरु गर्ने स्पष्ट मार्गदर्शन
 
-#### परिवर्तनहरू
-- **README संरचना**: क्रमबद्ध प्रकटीकरणका लागि पुनःसंगठन - प्रमुख जानकारी पहिला
-- **परिचय खण्ड**: पूर्ण आरम्भकर्ताहरूका लागि "The Magic of `azd up`" व्याख्या पुनर्लेखन
-- **नक्कली सामग्री हटाइयो**: नक्कली समस्यापत्ता लगाउने खण्ड हटाइयो
-- **समस्या समाधान आदेशहरू**: `azd logs` सन्दर्भलाई मान्य `azd monitor --logs` मा सुधार गरियो
+#### परिवर्तन
+- **README संरचना**: क्रमिक प्रकटीकरणको लागि पुन:व्यवस्थित - मुख्य जानकारी पहिले
+- **परिचय खण्ड**: पूर्ण शुरुवातीहरूका लागि "The Magic of `azd up`" व्याख्या गर्न पुनर्लेखन गरिएको
+- **दोहोरो सामग्री हटाइयो**: दोहोरिएको समस्या निवारण खण्ड हटाइयो
+- **समस्या निवारण कमाण्डहरू**: `azd logs` सन्दर्भलाई मान्य `azd monitor --logs` प्रयोग गर्न ठीक गरियो
 
 #### समाधान गरियो
-- **🔐 प्रमाणीकरण आदेशहरू**: `azd auth login` र `azd auth logout` cheat-sheet.md मा थपियो
-- **अमान्य आदेश सन्दर्भहरू**: README समस्या समाधान खण्डबाट बाँकी `azd logs` हटाइयो
+- **🔐 प्रमाणीकरण कमाण्डहरू**: `azd auth login` र `azd auth logout` cheat-sheet.md मा थपियो
+- **अवैध कमाण्ड सन्दर्भहरू**: README समस्या निवारण खण्डबाट बाँकी रहेका `azd logs` हटाइयो
 
 #### नोटहरू
-- **दायरा**: प्रमुख README.md र resources/cheat-sheet.md मा परिवर्तनहरू लागु
-- **लक्षित दर्शक**: AZD सङ्ग नयाँ विकासकर्ताहरूका लागि सुधारहरू
+- **क्षेत्र**: परिवर्तनहरू मुख्य README.md र resources/cheat-sheet.md मा लागू गरियो
+- **लक्षित दर्शक**: सुधारहरू विशेष रूपमा AZD मा नयाँ विकासकर्ताहरूलाई लक्षित
 
 ---
 
 ### [v3.10.0] - 2026-02-05
 
-#### Azure Developer CLI आदेश शुद्धता अपडेट
-**यस संस्करणले सबै अस्टित्व नभएका AZD आदेशहरू कागजातहरूमा सच्याउँछ, सबै कोड उदाहरणहरू वैध Azure Developer CLI वाक्यविन्यास प्रयोग गर्न सुनिश्चित गर्दै।**
+#### Azure Developer CLI कमाण्ड शुद्धता अद्यावधिक
+**यस संस्करणले दस्तावेजहरूभर गैर-अवस्थित AZD कमाण्डहरू सच्याउँछ, जसले सबै कोड उदाहरणहरू वैध Azure Developer CLI सिन्ट्याक्स प्रयोग गर्न सुनिश्चित गर्छ।**
 
 #### समाधान गरियो
-- **🔧 अमान्य AZD आदेशहरू हटाइयो**: व्यापक जाँच र सुधार:
-  - `azd logs` (अस्तित्व छैन) → `azd monitor --logs` वा Azure CLI विकल्पहरूद्वारा प्रतिस्थापन
-  - `azd service` सबकमाण्डहरू (अस्तित्व छैन) → `azd show` र Azure CLI सँग प्रतिस्थापन
-  - `azd infra import/export/validate` (अस्तित्व छैन) → हटाइयो वा वैध विकल्पले बदलियो
-  - `azd deploy --rollback/--incremental/--parallel/--detect-changes` फ्ल्यागहरू (अस्तित्व छैन) → हटाइयो
-  - `azd provision --what-if/--rollback` फ्ल्यागहरू (अस्तित्व छैन) → `--preview` प्रयोग गरी अपडेट
-  - `azd config validate` (अस्तित्व छैन) → `azd config list` मा प्रतिस्थापन
-  - `azd info`, `azd history`, `azd metrics` (अस्तित्व छैन) → हटाइयो
+- **🔧 अस्तित्वहीन AZD कमाण्डहरू हटाइयो**: अवैध कमाण्डहरूको व्यापक अडिट र सुधार:
+  - `azd logs` (अस्तित्वमा छैन) → `azd monitor --logs` वा Azure CLI विकल्पहरूसँग प्रतिस्थापित
+  - `azd service` सबकमाण्डहरू (अस्तित्वमा छैनन्) → `azd show` र Azure CLI सँग प्रतिस्थापित
+  - `azd infra import/export/validate` (अस्तित्वमा छैनन्) → हटाइयो वा वैध विकल्पहरूसँग प्रतिस्थापित
+  - `azd deploy --rollback/--incremental/--parallel/--detect-changes` झण्डाहरू (अस्तित्वमा छैनन्) → हटाइयो
+  - `azd provision --what-if/--rollback` झण्डाहरू (अस्तित्वमा छैनन्) → `--preview` प्रयोगमा अद्यावधिक गरियो
+  - `azd config validate` (अस्तित्वमा छैन) → `azd config list` सँग प्रतिस्थापित
+  - `azd info`, `azd history`, `azd metrics` (अस्तित्वमा छैनन्) → हटाइयो
 
-- **📚 आदेश सुधारसहित अपडेट गरिएका फाइलहरू**:
-  - `resources/cheat-sheet.md`: आदेश सन्दर्भको ठूलो सुधार
-  - `docs/deployment/deployment-guide.md`: रोलब्याक र डिप्लोयमेन्ट रणनीतिहरू सुधार
-  - `docs/troubleshooting/debugging.md`: लग विश्लेषण अनुभाग सुधार
-  - `docs/troubleshooting/common-issues.md`: समस्या समाधान आदेशहरू अपडेट
-  - `docs/troubleshooting/ai-troubleshooting.md`: AZD डिबगिङ खण्ड सुधार
-  - `docs/getting-started/azd-basics.md`: अनुगमन आदेशहरू सुधार
-  - `docs/getting-started/first-project.md`: अनुगमन र डिबगिङ उदाहरणहरू अपडेट
-  - `docs/getting-started/installation.md`: सहायता र भर्सन उदाहरणहरू सुधार
-  - `docs/pre-deployment/application-insights.md`: लग हेर्ने आदेशहरू सुधार
-  - `docs/pre-deployment/coordination-patterns.md`: एजेन्ट डिबगिङ आदेशहरू सुधार
+- **📚 कमाण्ड सुधारसहित अद्यावधिक गरिएका फाइलहरू**:
+  - `resources/cheat-sheet.md`: कमाण्ड सन्दर्भको ठूलो सुधार
+  - `docs/deployment/deployment-guide.md`: रोलब्याक र डिप्लोयमेन्ट रणनीतिहरू ठीक गरियो
+  - `docs/troubleshooting/debugging.md`: लग विश्लेषण खण्डहरू सुधारियो
+  - `docs/troubleshooting/common-issues.md`: समस्या निवारण कमाण्डहरू अद्यावधिक गरियो
+  - `docs/troubleshooting/ai-troubleshooting.md`: AZD डिबगिङ खण्ड सुधारियो
+  - `docs/getting-started/azd-basics.md`: निगरानी कमाण्डहरू सुधारियो
+  - `docs/getting-started/first-project.md`: निगरानी र डिबगिङ उदाहरणहरू अद्यावधिक गरियो
+  - `docs/getting-started/installation.md`: हेल्प र भर्सन उदाहरणहरू ठीक गरियो
+  - `docs/pre-deployment/application-insights.md`: लग हेर्ने कमाण्डहरू सुधारियो
+  - `docs/pre-deployment/coordination-patterns.md`: एजेन्ट डिबगिङ कमाण्डहरू सुधारियो
 
-- **📝 संस्करण सन्दर्भ अपडेट**:
-  - `docs/getting-started/installation.md`: हार्डकोड गरिएको `1.5.0` संस्करणलाई साधारण `1.x.x` र रिलिज लिंकमा परिवर्तन
+- **📝 भर्सन सन्दर्भ अद्यावधिक गरिएको**: 
+  - `docs/getting-started/installation.md`: हार्डकोड गरिएको `1.5.0` भर्सनलाई सामान्य `1.x.x` मा परिवर्तन गरियो र रिलिजहरूमा लिंक थपियो
 
-#### परिवर्तनहरू
-- **रोलब्याक रणनीतिहरू**: कागजातलाई गिट-आधारित रोलब्याकमा अपडेट (AZD मा स्वदेशी रोलब्याक छैन)
-- **लग हेर्ने तरिका**: `azd logs` सन्दर्भलाई `azd monitor --logs`, `azd monitor --live`, र Azure CLI आदेशहरूसँग प्रतिस्थापन
-- **प्रदर्शन खण्ड**: अस्तित्व नभएका समानान्तर/क्रमिक डिप्लोय फ्ल्यागहरू हटाइए, वैध विकल्पहरू प्रदान गरियो
+#### परिवर्तन
+- **रोलब्याक रणनीतिहरू**: AZD सँग नेटिभ रोलब्याक नहुँदा Git-आधारित रोलब्याक प्रयोग गर्न दस्तावेज अद्यावधिक गरियो
+- **लग हेर्ने**: `azd logs` सन्दर्भहरूलाई `azd monitor --logs`, `azd monitor --live`, र Azure CLI कमाण्डहरूसँग प्रतिस्थापित गरियो
+- **प्रदर्शन खण्ड**: अस्तित्वमा नभएका parallel/incremental deployment झण्डाहरू हटाइयो, वैध विकल्पहरू प्रदान गरियो
 
-#### प्राविधिक विवरण
+#### प्राविधिक विवरणहरू
 - **वैध AZD कमाण्डहरू**: `init`, `up`, `auth`, `deploy`, `down`, `provision`, `publish`, `completion`, `config`, `env`, `show`, `version`, `monitor`
 - **वैध azd monitor झण्डाहरू**: `--live`, `--logs`, `--overview`
 - **हटाइएका सुविधाहरू**: `azd logs`, `azd service`, `azd infra import/export/validate`, `azd history`, `azd metrics`, `azd info`, `azd config validate`
 
 #### नोटहरू
-- **पुष्टिकरण**: कमाण्डहरू Azure Developer CLI v1.23.x सँग मिलाइएका छन्
+- **पुष्टि**: कमाण्डहरू Azure Developer CLI v1.23.x सँग मिलाएर प्रमाणित गरियो
 
 ---
 
 ### [v3.9.0] - 2026-02-05
 
-#### कार्यशाला समाप्ती र दस्तावेज गुणस्तर अद्यावधिक
-**यस संस्करणले अन्तरक्रियात्मक कार्यशाला मोड्युलहरू पूरा गर्दछ, सबै फुटेका दस्तावेज लिंकहरू ठीक गर्दछ, र Microsoft AZD प्रयोग गर्ने AI विकासकर्ताहरूका लागि समग्र सामग्री गुणस्तर सुधार गर्छ।**
+#### कार्यशाला समाप्ति र दस्तावेज गुणस्तर अद्यावधिक
+**यस संस्करणले अन्तरक्रियात्मक कार्यशाला मोड्युलहरू पूरा गर्छ, सबै भंग भएका दस्तावेज लिङ्कहरू ठीक गर्छ, र Microsoft AZD प्रयोग गर्ने AI विकासकर्ताहरूका लागि समग्र सामग्री गुणस्तर सुधारछ।**
 
 #### थपियो
-- **📝 CONTRIBUTING.md**: नयाँ योगदान दिशानिर्देश दस्तावेज:
-  - समस्या रिपोर्ट गर्ने र परिवर्तन प्रस्ताव गर्ने स्पष्ट निर्देशिका
-  - नयाँ सामग्रीका लागि दस्तावेज मापदण्डहरू
-  - कोड उदाहरण दिशानिर्देशहरू र कमिट सन्देश सम्मेलनहरू
+- **📝 CONTRIBUTING.md**: नयाँ योगदान निर्देशिका दस्तावेज जसमा:
+  - समस्याहरू रिपोर्ट गर्ने र परिवर्तन प्रस्ताव गर्ने स्पष्ट निर्देशहरू
+  - नयाँ सामग्रीका लागि दस्तावेज मानकहरू
+  - कोड उदाहरण मार्गनिर्देशन र कमिट मेसेज परम्पराहरू
   - समुदाय संलग्नता सम्बन्धी जानकारी
 
-#### पूरा भयो
-- **🎯 कार्यशाला मोड्युल ७ (Wrap-up)**: पूर्ण wrap-up मोड्युल:
-  - कार्यशालाका उपलब्धिहरूको व्यापक सारांश
-  - AZD, टेम्प्लेटहरू र Microsoft Foundry को प्रमुख अवधारणाहरू समेटिएको भाग
+#### सम्पन्न
+- **🎯 Workshop Module 7 (Wrap-up)**: Wrap-up मोड्युल पूर्ण रूपमा सम्पन्न गरिएको:
+  - कार्यशाला उपलब्धिहरूको व्यापक सारांश
+  - AZD, टेम्प्लेटहरू, र Microsoft Foundry समेट्ने मुख्य अवधारणाहरू
   - सिकाइ यात्रा जारी राख्ने सिफारिसहरू
-  - कार्यशाला चुनौती अभ्यासहरू कठिनाइ मापन सहित
-  - समुदायको प्रतिक्रिया र समर्थन लिंकहरू
+  - कठिनाइ रेटिङ सहित कार्यशाला चुनौती अभ्यासहरू
+  - समुदाय प्रतिक्रिया र समर्थन लिंकहरू
 
-- **📚 कार्यशाला मोड्युल ३ (Deconstruct)**: सिकाइ उद्देश्यहरू अद्यावधिक:
-  - MCP सर्भरहरूसँग GitHub Copilot सक्रिय गर्ने मार्गदर्शन
-  - AZD टेम्प्लेट फोल्डर संरचना बुझाइ
-  - इन्फ्रास्ट्रक्चर-एज-कोड (Bicep) संगठन ढाँचाहरू
-  - प्रयोगात्मक प्रयोगशाला निर्देशहरू
+- **📚 Workshop Module 3 (Deconstruct)**: सिकाइ उद्देश्यहरू अद्यावधिक गरियो:
+  - GitHub Copilot सँग MCP सर्भरहरू सक्रिय गर्ने मार्गदर्शन
+  - AZD टेम्प्लेट फोल्डर संरचनाको बुझाइ
+  - Infrastructure-as-code (Bicep) संगठन शैलीहरू
+  - ह्यान्ड्स-ऑन ल्याब निर्देशनहरू
 
-- **🔧 कार्यशाला मोड्युल ६ (Teardown)**: पूरा भयो:
-  - स्रोत सफाइ र लागत व्यवस्थापन उद्देश्यहरू
-  - सुरक्षित रूपमा इन्फ्रास्ट्रक्चर हटाउन `azd down` प्रयोग
-  - मेटिएका cognitive सेवा पुनःप्राप्ति मार्गदर्शन
-  - GitHub Copilot र Azure पोर्टल अन्वेषणका लागि अतिरिक्त प्रश्नहरू
+- **🔧 Workshop Module 6 (Teardown)**: पूरा गरिएको:
+  - स्रोत सरसफाइ र लागत व्यवस्थापन उद्देश्यहरू
+  - सुरक्षित इन्फ्रास्ट्रक्चर डि-प्रोभिजनिङका लागि `azd down` प्रयोग
+  - सॉफ्ट-डिलिट गरिएको cognitive services को पुन:प्राप्ति मार्गदर्शन
+  - GitHub Copilot तथा Azure Portal का लागि बोनस अन्वेषण प्रवाहहरू
 
-#### मर्मत गरियो
-- **🔗 फुटेका लिंक मर्मत**: १५ भन्दा बढी आन्तरिक दस्तावेज लिंकहरू समाधान गरियो:
-  - `docs/ai-foundry/ai-model-deployment.md`: microsoft-foundry-integration.md का लागि बाटोहरू सच्याइयो
-  - `docs/troubleshooting/ai-troubleshooting.md`: ai-model-deployment.md र production-ai-practices.md बाटोहरू सच्याइयो
+#### Fixed
+- **🔗 Broken Link Fixes**: 15+ भित्री दस्तावेजीकरण लिंकहरू मर्मत गरियो:
+  - `docs/ai-foundry/ai-model-deployment.md`: microsoft-foundry-integration.md तर्फका पाथहरू फिक्स गरियो
+  - `docs/troubleshooting/ai-troubleshooting.md`: ai-model-deployment.md र production-ai-practices.md का पाथहरू सच्याइयो
   - `docs/getting-started/first-project.md`: अवस्थित नभएको cicd-integration.md लाई deployment-guide.md ले प्रतिस्थापन गरियो
-  - `examples/retail-scenario.md`: FAQ र troubleshooting मार्गदर्शकका बाटोहरू सच्याइयो
-  - `examples/container-app/microservices/README.md`: कोर्स गृह पृष्ठ र deployment guide बाटोहरू सच्याइयो
-  - `resources/faq.md` र `resources/glossary.md`: AI अध्याय सन्दर्भहरू अद्यावधिक गरियो
-  - `course-outline.md`: प्रशिक्षक मार्गदर्शक र AI कार्यशाला प्रयोगशाला सन्दर्भहरू सच्याइयो
+  - `examples/retail-scenario.md`: FAQ र troubleshooting गाइडका पाथहरू फिक्स गरियो
+  - `examples/container-app/microservices/README.md`: कोर्स होम र deployment guide का पाथहरू सच्याइयो
+  - `resources/faq.md` र `resources/glossary.md`: AI अध्याय सन्दर्भहरू अपडेट गरियो
+  - `course-outline.md`: instructor guide र AI workshop lab सन्दर्भहरू फिक्स गरियो
 
-- **📅 कार्यशाला स्थिति ब्यानर**: "अधीनमा निर्माण" बाट सक्रिय कार्यशाला स्थितिमा परिवर्तन, २०२६ फेब्रुअरी मिति सहित
+- **📅 Workshop Status Banner**: "Under Construction" बाट सक्रिय कार्यशाला स्थितिमा परिवर्तन गरी February 2026 मिति अद्यावधिक गरियो
 
-- **🔗 कार्यशाला नेविगेशन**: कार्यशाला README.md मा फुटेका नेविगेशन लिंकहरू जसले अवस्थित नभएको lab-1-azd-basics फोल्डरलाई जनाउँथ्यो, ठीक गरियो
+- **🔗 Workshop Navigation**: workshop README.md भित्रका भाँचिएका नेभिगेशन लिंकहरू जुन lab-1-azd-basics फोल्डरमा नहाँदै थिए तिनीहरू फिक्स गरियो
 
-#### परिवर्तनहरू
-- **कार्यशाला प्रस्तुति**: "अधीनमा निर्माण" चेतावनी हटाइयो, कार्यशाला अब पूरा र प्रयोगका लागि तयार
-- **नेविगेशन सुसंगतता**: सबै कार्यशाला मोड्युलहरूबीच उपयुक्त अन्तर्मोड्युल नेविगेशन सुनिश्चित गरियो
-- **सिकाइ मार्ग सन्दर्भहरू**: अध्यायहरुमा microsoft-foundry बाटोहरू सही गरी अद्यावधिक गरियो
+#### Changed
+- **Workshop Presentation**: "under construction" चेतावनी हटाइयो, कार्यशाला अब पुरा र प्रयोगका लागि तयार छ
+- **Navigation Consistency**: सुनिश्चित गरियो कि सबै कार्यशाला मोड्युलहरूमा सहि अन्त-मोड्युल नेभिगेशन छ
+- **Learning Path References**: अध्याय क्रस-रेफरेन्सहरू microsoft-foundry सही पाथहरू प्रयोग गर्ने गरी अपडेट गरियो
 
-#### पुष्टिकरण गरियो
-- ✅ सबै अंग्रेजी मार्कडाउन फाइलहरूमा वैध आन्तरिक लिंकहरू छन्
-- ✅ कार्यशाला मोड्युल ०-७ पुरा भएका छन् र सिकाइ उद्देश्यहरू छन्
-- ✅ अध्यायहरू र मोड्युलहरूबीच नेविगेशन सही कार्य गर्दछ
+#### Validated
+- ✅ सबै अंग्रेजी मार्कडाउन फाइलहरूमा मान्य भित्री लिंकहरू छन्
+- ✅ Workshop modules 0-7 सिकाइ उद्देश्यहरू सहित पूर्ण छन्
+- ✅ अध्याय र मोड्युलहरू बीच नेभिगेशन सहि रूपमा काम गर्छ
 - ✅ सामग्री Microsoft AZD प्रयोग गर्ने AI विकासकर्ताहरूका लागि उपयुक्त छ
-- ✅ शुरुवाती-मैत्री भाषा र संरचना कायम राखियो
-- ✅ CONTRIBUTING.md ले समुदाय योगदानकर्ताहरूलाई स्पष्ट मार्गदर्शन प्रदान गर्दछ
+- ✅ आरम्भिक-स्तरमैत्री भाषा र संरचना सम्पूर्ण दस्तावेजमा कायम गरिएको छ
+- ✅ CONTRIBUTING.md ले समुदाय योगदानकर्ताहरूका लागि स्पष्ट मार्गनिर्देशन प्रदान गर्छ
 
-#### प्राविधिक कार्यान्वयन
-- **लिंक मान्यकरण**: अटोमेटेड PowerShell स्क्रिप्टले सबै .md आन्तरिक लिंकहरू प्रमाणित गर्यो
-- **सामग्री समीक्षा**: कार्यशाला पूर्णताका लागि म्यानुअल जाँच र शुरुवातमैत्रीता परीक्षण गरियो
-- **नेविगेशन प्रणाली**: अध्याय र मोड्युल नेविगेशन ढाँचाहरू सुसंगत बनाइयो
+#### Technical Implementation
+- **Link Validation**: Automated PowerShell स्क्रिप्टले सबै .md भित्री लिंकहरू प्रमाणित गर्‍यो
+- **Content Audit**: कार्यशालाको पूर्णता र आरम्भिक उपयुक्तता म्यानुअल रूपमा समीक्षा गरियो
+- **Navigation System**: अध्याय र मोड्युल नेभिगेशन ढाँचाहरू सुसंगत रूपमा लागू गरियो
 
-#### नोटहरू
-- **दायरा**: परिवर्तनहरू अंग्रेजी दस्तावेजमा मात्र लागू गरियो
-- **अनुवादहरू**: अनुवाद फोल्डरहरू यस संस्करणमा अद्यावधिक भएनन् (अटोमेटेड अनुवाद पछि समकालीन हुनेछ)
-- **कार्यशाला अवधि**: अब कार्यशाला ३-४ घण्टाको प्रयोगात्मक सिकाइ प्रदान गर्दछ
+#### Notes
+- **Scope**: परिवर्तनहरू केवल अंग्रेजी दस्तावेजीकरणमा मात्र लागू भएका छन्
+- **Translations**: यस संस्करणमा अनुवाद फोल्डरहरू अद्यावधिक गरिएको छैन (स्वचालित अनुवाद पछि समिकरण हुनेछ)
+- **Workshop Duration**: पूर्ण कार्यशालाले 3-4 घण्टाको ह्यान्ड्स-ऑन सिकाइ प्रदान गर्दछ
 
 ---
 
 ### [v3.8.0] - 2025-11-19
 
-#### उन्नत दस्तावेज: अनुगमन, सुरक्षा, र बहु-एजेन्ट ढाँचाहरू
-**यस संस्करणले एप्लिकेसन इन्साइट्स एकीकरण, प्रमाणीकरण ढाँचाहरू, र उत्पादन प्रक्षेपणका लागि बहु-एजेन्ट समन्वयमा समग्र A-ग्रेड पाठहरू थप्दछ।**
+#### Advanced Documentation: Monitoring, Security, and Multi-Agent Patterns
+**यस संस्करणले Application Insights एकीकरण, प्रमाणीकरण ढाँचाहरू, र उत्पादन तैनाथीकरणहरूको लागि बहु-एजेन्ट समन्वयमा व्यापक A-ग्रेड पाठहरू थपेको छ।**
 
-#### थपियो
-- **📊 एप्लिकेसन इन्साइट्स एकीकरण पाठ**: `docs/pre-deployment/application-insights.md` मा:
-  - AZD केन्द्रीत प्रक्षेपण र स्वचालित प्रविधि प्रवाह
-  - Application Insights + Log Analytics को पूर्ण Bicep टेम्प्लेटहरू
-  - कस्टम टेलिमेट्री सहित काम गर्ने Python अनुप्रयोगहरू (१२००+ लाइनहरू)
-  - AI/LLM अनुगमन ढाँचाहरू (Microsoft Foundry मोडेल टोकन/खर्च ट्र्याकिङ)
-  - ६ वटा Mermaid आरेखहरू (वास्तुकला, वितरण गरिएको ट्रेसिङ, टेलिमेट्री प्रवाह)
-  - ३ व्यावहारिक अभ्यासहरू (अलर्ट, ड्यासबोर्ड, AI अनुगमन)
-  - कुस्टो क्वेरी उदाहरण र लागत अप्टिमाइजेसन रणनीतिहरू
-  - प्रत्यक्ष मेट्रिक्स स्ट्रिमिङ र रियल-टाइम डिबगिङ
-  - उत्पादन-तयार ढाँचाहरूका साथ ४०-५० मिनेट सिकाइ समय
+#### Added
+- **📊 Application Insights Integration Lesson**: in `docs/pre-deployment/application-insights.md`:
+  - AZD-केन्द्रित तैनाथीकरण स्वत: प्राविजनिङसँग
+  - Application Insights + Log Analytics का लागि पूर्ण Bicep टेम्प्लेटहरू
+  - अनुकूल टेलीमेट्री सहित काम गर्ने Python अनुप्रयोगहरू (1,200+ लाइन)
+  - AI/LLM निगरानी ढाँचाहरू (Microsoft Foundry Models टोकन/लागत ट्र्याकिङ)
+  - 6 Mermaid आरेखहरू (वास्तुकला, वितरित ट्रेसिङ, टेलीमेट्री प्रवाह)
+  - 3 ह्यान्ड्स-ऑन अभ्यास (अलर्टहरू, ड्यासबोर्डहरू, AI निगरानी)
+  - Kusto प्रश्न उदाहरणहरू र लागत अनुकूलन रणनीतिहरू
+  - लाइव मेट्रिक्स स्ट्रिमिङ र वास्तविक-समय डिबगिङ
+  - उत्पादन-तयारी ढाँचाहरूसँग 40-50 मिनेट सिकाइ समय
 
-- **🔐 प्रमाणीकरण र सुरक्षा ढाँचाहरू पाठ**: `docs/getting-started/authsecurity.md` मा:
-  - ३ प्रमाणीकरण ढाँचाहरू (कनेक्सन स्ट्रिङहरू, Key Vault, प्रबन्धित पहिचान)
-  - सुरक्षित प्रक्षेपणका लागि पूर्ण Bicep इन्फ्रास्ट्रक्चर टेम्प्लेटहरू
-  - Azure SDK सहित Node.js अनुप्रयोग कोड
-  - ३ पूर्ण अभ्यासहरू (प्रबन्धित पहिचान सक्षम पार्ने, प्रयोगकर्ता-प्रदान गरिएको पहिचान, Key Vault रोटेशन)
-  - सुरक्षा उत्कृष्ट अभ्यासहरू र RBAC कन्फिगरेसनहरू
-  - समस्या समाधान मार्गदर्शक र लागत विश्लेषण
-  - उत्पादन-तयार पासवर्ड रहित प्रमाणीकरण ढाँचाहरू
+- **🔐 Authentication & Security Patterns Lesson**: in `docs/getting-started/authsecurity.md`:
+  - 3 प्रमाणीकरण ढाँचाहरू (connection strings, Key Vault, managed identity)
+  - सुरक्षित तैनाथीकरणका लागि पूर्ण Bicep इन्फ्रास्ट्रक्चर टेम्प्लेटहरू
+  - Azure SDK एकीकरण सहित Node.js एप्लिकेसन कोड
+  - 3 पूर्ण अभ्यासहरू (managed identity सक्षम गर्ने, user-assigned identity, Key Vault rotation)
+  - सुरक्षा सर्वोत्तम अभ्यासहरू र RBAC कन्फिगरेसनहरू
+  - ट्रबलशुटिङ गाइड र लागत विश्लेषण
+  - उत्पादन-तयारी पासवर्डलेस प्रमाणीकरण ढाँचाहरू
 
-- **🤖 बहु-एजेन्ट समन्वय ढाँचाहरू पाठ**: `docs/pre-deployment/coordination-patterns.md` मा:
-  - ५ समन्वय ढाँचाहरू (क्रमागत, समानान्तर, श्रेणीबद्ध, घटनाभित्रका, सहमति)
-  - पूर्ण ऑर्केस्ट्रेटर सेवा कार्यान्वयन (Python/Flask, १५००+ लाइनहरू)
-  - ३ विशिष्ट एजेन्ट कार्यान्वयनहरू (शोध, लेखक, सम्पादक)
-  - सेवा बस एकीकरण सन्देश क्यूइङका लागि
-  - Cosmos DB राज्य व्यवस्थापन वितरण प्रणालीहरूका लागि
-  - ६ Mermaid आरेखहरू एजेन्ट अन्तरक्रियाहरू देखाउँदै
-  - ३ उन्नत अभ्यासहरू (समय समाप्ति प्रबन्धन, पुनः प्रयास तर्क, सर्किट ब्रेकर)
-  - लागत विश्लेषण ($२४०-५६५/महिना) र अप्टिमाइजेसन रणनीतिहरू
-  - अनुगमनका लागि एप्लिकेसन इन्साइट्स एकीकरण
+- **🤖 Multi-Agent Coordination Patterns Lesson**: in `docs/pre-deployment/coordination-patterns.md`:
+  - 5 समन्वय ढाँचाहरू (sequential, parallel, hierarchical, event-driven, consensus)
+  - पूर्ण orchestrator सेवा कार्यान्वयन (Python/Flask, 1,500+ लाइन)
+  - 3 विशिष्ट एजेन्ट कार्यान्वयनहरू (Research, Writer, Editor)
+  - message queuing का लागि Service Bus एकीकरण
+  - वितरित प्रणालीहरूको लागि Cosmos DB स्टेट म्यानेजमेन्ट
+  - एजेन्ट अन्तरक्रियाहरू देखाउने 6 Mermaid आरेखहरू
+  - 3 उन्नत अभ्यास (timeout ह्यान्डलिङ, retry logic, circuit breaker)
+  - लागत ब्रेकडाउन ($240-565/month) र अनुकूलन रणनीतिहरू
+  - निगरानीका लागि Application Insights एकीकरण
 
-#### सुधार गरियो
-- **पूर्व-प्रक्षेपण अध्याय**: अब समग्र अनुगमन र समन्वय ढाँचाहरू समावेश गर्दछ
-- **सुरु गर्ने अध्याय**: व्यावसायिक प्रमाणीकरण ढाँचाहरू थपियो
-- **उत्पादन तयारी**: सुरक्षा देखि निगरानी सम्म पूर्ण कभर गरिएको
-- **कोर्स रूपरेखा**: अध्याय ३ र ६ मा नयाँ पाठहरू सन्दर्भ गरिएको
+#### Enhanced
+- **Pre-deployment Chapter**: अब व्यापक निगरानी र समन्वय ढाँचाहरू समावेश गरिएको छ
+- **Getting Started Chapter**: व्यवसायिक प्रमाणीकरण ढाँचाहरूले समृद्ध पारिएको छ
+- **Production Readiness**: सुरक्षा देखि अव्जरभबिलिटीसम्म पूर्ण कवरेज
+- **Course Outline**: अध्याय 3 र 6 मा नयाँ पाठहरू सन्दर्भ गर्ने गरी अपडेट गरिएको
 
-#### परिवर्तन गरियो
-- **सिकाइ प्रगति**: सुरक्षा र अनुगमन बीच राम्रो एकीकरण
-- **दस्तावेज गुणस्तर**: नयाँ पाठहरूमा एकरूप A-ग्रेड मापदण्ड (९५-९७%)
-- **उत्पादन ढाँचाहरू**: व्यावसायिक प्रक्षेपणको लागि सम्पूर्ण अन्त-देखि-अन्त कभर
+#### Changed
+- **Learning Progression**: कोर्समा सुरक्षा र निगरानीको राम्रो एकीकरण
+- **Documentation Quality**: नयाँ पाठहरूमा सुसंगत A-ग्रेड मानकहरू (95-97%)
+- **Production Patterns**: एन्त्रप्राइज तैनाथीकरणका लागि अन्त-देखि-अन्त कवरेज
 
-#### सुधार गरियो
-- **डेभलपर अनुभव**: विकासदेखि उत्पादन अनुगमन सम्म स्पष्ट मार्ग
-- **सुरक्षा मापदण्डहरू**: प्रमाणीकरण र गोप्य व्यवस्थापनका लागि व्यावसायिक ढाँचाहरू
-- **अनुगमनयोग्यता**: AZD सहित पूर्ण एप्लिकेसन इन्साइट्स एकीकरण
-- **AI वर्कलोडहरू**: Microsoft Foundry मोडेल र बहु-एजेन्ट सिस्टमका लागि विशिष्ट अनुगमन
+#### Improved
+- **Developer Experience**: विकासदेखि उत्पादन निगरानीसम्म स्पष्ट मार्ग
+- **Security Standards**: प्रमाणीकरण र सिक्रेट्स म्यानेजमेन्टका व्यवसायिक ढाँचाहरू
+- **Observability**: AZD सँग पूर्ण Application Insights एकीकरण
+- **AI Workloads**: Microsoft Foundry Models र बहु-एजेन्ट प्रणालीहरूको लागि विशेष निगरानी
 
-#### पुष्टिकरण गरियो
-- ✅ सबै पाठहरूमाः पूर्ण कार्यरत कोड समावेश
-- ✅ दृश्य शिक्षाका लागि Mermaid आरेखहरू (३ पाठमा १९ वटा)
-- ✅ प्रयोगात्मक अभ्यासहरू (९ कुल)
-- ✅ `azd up` द्वारा प्रक्षेपण योग्य पूर्ण Bicep टेम्प्लेटहरू
-- ✅ लागत विश्लेषण र अप्टिमाइजेसन रणनीतिहरू
-- ✅ समस्या समाधान र सर्वोत्तम अभ्यासहरू
-- ✅ ज्ञान परीक्षण बिन्दुहरू र पुष्टिकरण कमाण्डहरू
+#### Validated
+- ✅ सबै पाठहरूले पूर्ण काम गर्ने कोड समावेश गर्छन् (स्निपेट मात्र होइन)
+- ✅ भिजुअल सिकाइका लागि Mermaid आरेखहरू (3 पाठमा जम्मा 19)
+- ✅ मान्यताको चरणहरू सहित ह्यान्ड्स-ऑन अभ्यासहरू (जम्मा 9)
+- ✅ उत्पादन-तयार Bicep टेम्प्लेटहरू `azd up` मार्फत तैनाथ गर्न योग्य
+- ✅ लागत विश्लेषण र अनुकूलन रणनीतिहरू
+- ✅ ट्रबलशुटिङ गाइडहरू र सर्वोत्तम अभ्यासहरू
+- ✅ प्रमाणिकरण कमाण्डहरूसँग ज्ञान जाँच बिन्दुहरू
 
-#### दस्तावेज ग्रेडिङ परिणाम
-- **docs/pre-deployment/application-insights.md**: - समग्र अनुगमन मार्गदर्शक
-- **docs/getting-started/authsecurity.md**: - व्यावसायिक सुरक्षा ढाँचाहरू
-- **docs/pre-deployment/coordination-patterns.md**: - उन्नत बहु-एजेन्ट वास्तुकला
-- **सम्पूर्ण नयाँ सामग्री**: - उच्च गुणस्तरका निरन्तर मापदण्डहरू
+#### Documentation Grading Results
+- **docs/pre-deployment/application-insights.md**: - व्यापक निगरानी गाइड
+- **docs/getting-started/authsecurity.md**: - व्यवसायिक सुरक्षा ढाँचाहरू
+- **docs/pre-deployment/coordination-patterns.md**: - उन्नत बहु-एजेन्ट आर्किटेक्चरहरू
+- **Overall New Content**: - सुसंगत उच्च-गुणस्तर मानकहरू
 
-#### प्राविधिक कार्यान्वयन
-- **एप्लिकेसन इन्साइट्स**: Log Analytics + कस्टम टेलिमेट्री + वितरण ट्रेसिङ
-- **प्रमाणीकरण**: प्रबन्धित पहिचान + Key Vault + RBAC ढाँचाहरू
-- **बहु-एजेन्ट**: सेवा बस + Cosmos DB + कन्टेनर एप्स + ऑर्केस्ट्रेसन
-- **अनुगमन**: प्रत्यक्ष मेट्रिक्स + कुस्टो क्वेरी + अलर्ट + ड्यासबोर्ड
-- **लागत व्यवस्थापन**: स्याम्पलिङ रणनीतिहरू, प्रतिधारण नीति, बजेट नियन्त्रण
+#### Technical Implementation
+- **Application Insights**: Log Analytics + अनुकूल टेलीमेट्री + वितरित ट्रेसिङ
+- **Authentication**: Managed Identity + Key Vault + RBAC ढाँचाहरू
+- **Multi-Agent**: Service Bus + Cosmos DB + Container Apps + orchestration
+- **Monitoring**: लाइव मेट्रिक्स + Kusto प्रश्नहरू + अलर्टहरू + ड्यासबोर्डहरू
+- **Cost Management**: स्याम्पलिङ रणनीतिहरू, रिटेन्शन नीतिहरू, बजेट नियन्त्रण
 
 ### [v3.7.0] - 2025-11-19
 
-#### दस्तावेज गुणस्तर सुधार र नयाँ Microsoft Foundry Models उदाहरण
-**यस संस्करणले भण्डारको दस्तावेज गुणस्तर सुधार गर्दछ र gpt-4.1 च्याट अन्तरफलक सहित पूर्ण Microsoft Foundry Models प्रक्षेपण उदाहरण थप्दछ।**
+#### Documentation Quality Improvements and New Microsoft Foundry Models Example
+**यस संस्करणले रिपोजिटरी भरि दस्तावेजीकरण गुणस्तर सुधार गरेको छ र gpt-4.1 च्याट इन्टरफेस सहित पूर्ण Microsoft Foundry Models डिप्लोयमेन्ट उदाहरण थपेको छ।**
 
-#### थपियो
-- **🤖 Microsoft Foundry Models च्याट उदाहरण**: `examples/azure-openai-chat/` मा पूर्ण gpt-4.1 प्रक्षेपण कार्यान्वयन:
-  - पूर्ण Microsoft Foundry Models इन्फ्रास्ट्रक्चर (gpt-4.1 मोडेल प्रक्षेपण)
-  - संवाद इतिहास सहित Python कमाण्ड-लाइन च्याट अन्तरफलक
-  - सुरक्षित API कुञ्जी संग्रहका लागि Key Vault एकीकरण
+#### Added
+- **🤖 Microsoft Foundry Models Chat Example**: Complete gpt-4.1 deployment with working implementation in `examples/azure-openai-chat/`:
+  - Microsoft Foundry Models इन्फ्रास्ट्रक्चरको पूर्ण सेटअप (gpt-4.1 model deployment)
+  - संवाद इतिहाससहित Python command-line च्याट इन्टरफेस
+  - सुरक्षित API किज् भण्डारणका लागि Key Vault एकीकरण
   - टोकन प्रयोग ट्र्याकिङ र लागत अनुमान
-  - दर सीमांकन र त्रुटि ह्यान्डलिङ
-  - ३५-४५ मिनेट प्रक्षेपण मार्गदर्शक सहित व्यापक README
-  - ११ उत्पादन-तयार फाइलहरू (Bicep टेम्प्लेटहरू, Python एप, कन्फिगरेसन)
-- **📚 दस्तावेज अभ्यासहरू**: कन्फिगरेसन गाइडमा व्यावहारिक अभ्यास थपियो:
-  - अभ्यास १: बहु-वातावरण कन्फिगरेसन (१५ मिनट)
-  - अभ्यास २: गोप्य व्यवस्थापन अभ्यास (१० मिनट)
-  - स्पष्ट सफलताका मापदण्ड र पुष्टिकरण चरणहरू
-- **✅ प्रक्षेपण पुष्टिकरण**: प्रक्षेपण गाइडमा पुष्टिकरण खण्ड थपियो:
-  - स्वास्थ्य जाँच प्रक्रिया
-  - सफलताको मापन सुची
-  - सबै प्रक्षेपण कमाण्डहरूको अपेक्षित आउटपुट
-  - छिटो समस्या समाधान सन्दर्भ
+  - रेट लिमिटिङ र एरर ह्यान्डलिङ
+  - 35-45 मिनेट तैनाथीकरण मार्गदर्शन सहित व्यापक README
+  - 11 उत्पादन-तयार फाइलहरू (Bicep टेम्प्लेटहरू, Python app, कन्फिगरेसन)
+- **📚 Documentation Exercises**: कन्फिगरेसन गाइडमा ह्यान्ड्स-ऑन अभ्यासहरू थपियो:
+  - Exercise 1: बहु-पर्यावरण कन्फिगरेसन (15 मिनेट)
+  - Exercise 2: सिक्रेट म्यानेजमेन्ट अभ्यास (10 मिनेट)
+  - स्पष्ट सफलता मापदण्ड र प्रमाणिकरण चरणहरू
+- **✅ Deployment Verification**: deployment guide मा प्रमाणिकरण सेक्सन थपियो:
+  - हेल्थ चेक प्रक्रियाहरू
+  - सफलता मापदण्ड चेकलिस्ट
+  - सबै तैनाथीकरण कमाण्डहरूको अपेक्षित आउटपुटहरू
+  - छिटो ट्रबलशुटिङ संदर्भ
 
-#### सुधार गरियो
-- **examples/README.md**: A-ग्रेड गुणस्तर (९३%) मा अद्यावधिक:
-  - azure-openai-chat सबै सम्बन्धित भागहरूमा थपियो
-  - स्थानीय उदाहरणको संख्या ३ बाट ४ मा सुधार गरियो
-  - AI एप्लिकेसन उदाहरण तालिकामा समावेश गरियो
-  - मध्यवर्ती प्रयोगकर्ताका लागि क्विक स्टार्टमा समाहित
-  - Microsoft Foundry टेम्प्लेट्स सेक्सनमा थपियो
-  - तुलना म्याट्रिक्स र प्रविधि खोजी भागहरू अद्यावधिक गरियो
-- **दस्तावेज गुणस्तर**: B+ (८७%) बाट A- (९२%) मा सुधार:
-  - महत्वपूर्ण कमाण्ड उदाहरणहरूमा अपेक्षित आउटपुट थपियो
-  - कन्फिगरेसन परिवर्तनका लागि पुष्टिकरण चरणहरू समावेश गरियो
-  - व्यावहारिक अभ्यासहरूसँग सिकाइ वृद्धि
+#### Enhanced
+- **examples/README.md**: A-ग्रेड गुणस्तरमा अद्यावधिक (93%):
+  - azure-openai-chat लाई सबै सम्बन्धित सेक्सनमा थपियो
+  - स्थानीय उदाहरण गणना 3 बाट 4 मा अपडेट गरियो
+  - AI Application Examples तालिकामा थपियो
+  - Intermediate Users का लागि Quick Start मा समावेश गरियो
+  - Microsoft Foundry Templates सेक्सनमा समावेश
+  - Comparison Matrix र प्रविधि पत्ता लगाउने सेक्सनहरू अपडेट गरियो
+- **Documentation Quality**: B+ (87%) → A- (92%) सम्म सुधार:
+  - आवश्यक कमाण्ड उदाहरणहरूमा अपेक्षित आउटपुटहरू थपियो
+  - कन्फिगरेसन परिवर्तनहरूको लागि प्रमाणिकरण चरणहरू समावेश गरियो
+  - व्यवहारिक अभ्यासहरूसँग ह्यान्ड्स-ऑन सिकाइ बलियो बनाइयो
 
-#### परिवर्तनहरू
-- **सिकाइ प्रगति**: मध्यवर्ती सिक्नेहरूका लागि AI उदाहरणहरूको राम्रो एकीकरण
-- **दस्तावेज संरचना**: स्पष्ट परिणामसँग बढी व्यावहारिक अभ्यासहरू
-- **पुष्टिकरण प्रक्रिया**: मुख्य कार्यप्रवाहहरूमा स्पष्ट सफलताको मापदण्ड थपियो
+#### Changed
+- **Learning Progression**: मध्यम स्तरका सिक्नेहरूका लागि AI उदाहरणहरूको राम्रो एकीकरण
+- **Documentation Structure**: स्पष्ट परिणाम सहित अधिक कार्यान्वयनयोग्य अभ्यासहरू
+- **Verification Process**: प्रमुख कार्यप्रवाहहरूमा स्पष्ट सफलता मापदण्ड थपियो
 
-#### सुधार गरियो
-- **डेभलपर अनुभव**: Microsoft Foundry Models प्रक्षेपण अब ३५-४५ मिनेटमा (जटिल विकल्पको तुलनामा ६०-९०)
-- **लागत पारदर्शिता**: Microsoft Foundry Models उदाहरणको लागि स्पष्ट लागत अनुमान ($५०-२००/महिना)
-- **सिकाइ मार्ग**: AI विकासकर्ताहरूले azure-openai-chat बाट स्पष्ट प्रवेश बिन्दु पाउँछन्
-- **दस्तावेज मापदण्ड**: अपेक्षित आउटपुट र पुष्टिकरण चरणहरू एकरूप
+#### Improved
+- **Developer Experience**: Microsoft Foundry Models डिप्लोयमेन्ट अब 35-45 मिनेटमा सम्पन्न हुन्छ (कठिन विकल्पहरूको तुलनामा 60-90 भन्दा कम)
+- **Cost Transparency**: Microsoft Foundry Models उदाहरणका लागि स्पष्ट लागत अनुमान ($50-200/month)
+- **Learning Path**: AI विकासकर्ताहरूका लागि azure-openai-chat सँग स्पष्ट प्रवेश बिन्दु
+- **Documentation Standards**: अपेक्षित आउटपुट र प्रमाणिकरण चरणहरू सुसंगत
 
-#### पुष्टिकरण गरियो
-- ✅ Microsoft Foundry Models उदाहरण पूर्ण रूपमा `azd up` द्वारा कार्यरत
-- ✅ सबै ११ कार्यान्वयन फाइलहरू व्याकरणात्मक रूपमा सही
-- ✅ README निर्देशनहरू वास्तविक प्रक्षेपण अनुभवसँग मेल खान्छ
-- ✅ ८+ स्थानमा दस्तावेज लिंकहरू अद्यावधिक
-- ✅ उदाहरण सूचकांकले ४ स्थानीय उदाहरणहरू सही देखाउँछ
-- ✅ कुनै दोहोरो बाह्य लिंकहरू छैनन्
-- ✅ सबै नेविगेशन सन्दर्भहरू सही
+#### Validated
+- ✅ Microsoft Foundry Models उदाहरण `azd up` सँग पूर्ण रूपमा कार्यरत
+- ✅ सबै 11 कार्यान्वयन फाइलहरू सिन्ट्याक्टिक रूपमा सहि
+- ✅ README निर्देशनहरू वास्तविक तैनाथीकरण अनुभवसँग मेल खान्छन्
+- ✅ दस्तावेजीकरण लिंकहरू 8+ स्थानमा अपडेट गरियो
+- ✅ Examples सूचीले 4 स्थानीय उदाहरणहरू सहि रूपमा प्रतिबिम्बित गर्छ
+- ✅ तालिकाहरूमा कुनै दोहोरो बाह्य लिंक छैन
+- ✅ सबै नेभिगेशन सन्दर्भहरू सहि
 
-#### प्राविधिक कार्यान्वयन
-- **Microsoft Foundry Models वास्तुकला**: gpt-4.1 + Key Vault + कन्टेनर एप्स ढाँचा
-- **सुरक्षा**: प्रबन्धित पहिचान तयार, Key Vault मा गोप्यहरू
-- **अनुगमन**: एप्लिकेसन इन्साइट्स एकीकरण
-- **लागत व्यवस्थापन**: टोकन ट्र्याकिङ र प्रयोग अप्टिमाइजेसन
-- **प्रक्षेपण**: पूर्ण सेटअपका लागि एकल `azd up` कमाण्ड
+#### Technical Implementation
+- **Microsoft Foundry Models Architecture**: gpt-4.1 + Key Vault + Container Apps ढाँचा
+- **Security**: Managed Identity तयार, Key Vault मा सिक्रेट्स
+- **Monitoring**: Application Insights एकीकरण
+- **Cost Management**: टोकन ट्र्याकिङ र प्रयोग अनुकूलन
+- **Deployment**: सम्पूर्ण सेटअपका लागि एकल `azd up` कमाण्ड
 
 ### [v3.6.0] - 2025-11-19
 
-#### मुख्य अद्यावधिक: कन्टेनर एप प्रक्षेपण उदाहरणहरू
-**यस संस्करणले Azure Developer CLI (AZD) प्रयोग गरी उत्पादन-तयार कन्टेनर एप्लिकेसन प्रक्षेपण उदाहरणहरू पूर्ण दस्तावेज तथा सिकाइ मार्गसँग परिचय गराउँछ।**
+#### Major Update: Container App Deployment Examples
+**यस संस्करणले Azure Developer CLI (AZD) प्रयोग गरेर उत्पादन-तयार कन्टेनर एप्लिकेसन तैनाथीकरण उदाहरणहरू व्यापक रूपमा थपेको छ, पूरै दस्तावेजीकरण र सिकाइ मार्गमा एकीकरण सहित।**
 
-#### थपियो
-- **🚀 कन्टेनर एप उदाहरणहरू**: `examples/container-app/` मा नयाँ स्थानीय उदाहरणहरू:
-  - [मास्टर गाइड](examples/container-app/README.md): कन्टेनराइज्ड प्रक्षेपणहरूको पूर्ण अवलोकन, छिटो सुरु, उत्पादन, र उन्नत ढाँचाहरू
-  - [साधारण Flask API](../../examples/container-app/simple-flask-api): शुरुवाती मैत्री REST API जसमा scale-to-zero, स्वास्थ्य जाँच, अनुगमन, र समस्या समाधान छ
-  - [माइक्रोसर्भिस आर्किटेक्चर](../../examples/container-app/microservices): उत्पादन-तयार बहु-सेवा प्रक्षेपण (API गेटवे, उत्पादन, अर्डर, प्रयोगकर्ता, सूचना), असिन्क्रोनस मेसेजिङ, सेवा बस, Cosmos DB, Azure SQL, वितरण ट्रेसिङ, ब्लू-ग्रीन/क्यानरी प्रक्षेपण
-- **सर्वोत्तम अभ्यासहरू**: सुरक्षितता, अनुगमन, लागत अनुकूलन, र CI/CD निर्देशनहरू कन्टेनराइज्ड वर्कलोडका लागि
-- **कोड नमूना**: पूर्ण `azure.yaml`, Bicep टेम्प्लेटहरू, र बहुभाषिक सेवा कार्यान्वयनहरू (Python, Node.js, C#, Go)
-- **परीक्षण र समस्या समाधान**: अन्त-देखि-अन्त परीक्षण परिदृश्यहरू, अनुगमन कमाण्डहरू, समस्या समाधान निर्देशन
+#### Added
+- **🚀 Container App Examples**: नयाँ स्थानीय उदाहरणहरू `examples/container-app/` मा:
+  - [Master Guide](examples/container-app/README.md): कन्टेनराइज्ड तैनाथीकरणहरूको पूर्ण अवलोकन, क्विक स्टार्ट, उत्पादन, र उन्नत ढाँचाहरू
+  - [Simple Flask API](../../examples/container-app/simple-flask-api): आरम्भिक-मैत्री REST API जसमा scale-to-zero, health probes, निगरानी, र ट्रबलशुटिङ समावेश
+  - [Microservices Architecture](../../examples/container-app/microservices): उत्पादन-तयार बहु-सेवा तैनाथीकरण (API Gateway, Product, Order, User, Notification), असिंक्रोनस मेसेजिङ, Service Bus, Cosmos DB, Azure SQL, वितरित ट्रेसिङ, ब्लू-ग्रीन/क्यानेरी तैनाथीकरण
+- **Best Practices**: सुरक्षा, निगरानी, लागत अनुकूलन, र CI/CD मार्गदर्शन कन्टेनरवर्कलोडहरूको लागि
+- **Code Samples**: पूरा `azure.yaml`, Bicep टेम्प्लेटहरू, र बहु-भाषी सेवा कार्यान्वयनहरू (Python, Node.js, C#, Go)
+- **Testing & Troubleshooting**: एन्ड-टु-एन्ड टेस्ट परिदृश्यहरू, निगरानी कमाण्डहरू, ट्रबलशुटिङ मार्गदर्शन
 
-#### परिवर्तनहरू
-- **README.md**: "Local Examples - Container Applications" अन्तर्गत नयाँ कन्टेनर एप्लिकेसन उदाहरणहरूलाई समावेश गर्दै लिंकहरू अद्यावधिक गरियो
-- **examples/README.md**: कन्टेनर एप्लिकेसन उदाहरणहरू माथि जोडिएको, तुलना म्याट्रिक्स प्रविष्टिहरू थपिएको, र प्रविधि/आर्किटेक्चर सन्दर्भहरू अद्यावधिक गरियो
-- **Course Outline & Study Guide**: सम्बन्धित अध्यायहरूमा नयाँ कन्टेनर एप्लिकेसन उदाहरणहरू र परिनियोजन ढाँचाहरू सन्दर्भ गरी अद्यावधिक गरियो
+#### Changed
+- **README.md**: “Local Examples - Container Applications” अन्तर्गत नयाँ container app उदाहरणहरू प्रदर्शन र लिंक गर्न अपडेट गरियो
+- **examples/README.md**: container app उदाहरणहरू उच्चारण गर्न, तुलना तालिका प्रविष्टिहरू थप्न, र प्रविधि/वास्तुकला सन्दर्भहरू अपडेट गर्न बदलिए
+- **Course Outline & Study Guide**: सम्बन्धित अध्यायहरूमा नयाँ container app उदाहरणहरू र तैनाथीकरण ढाँचाहरू सन्दर्भ गर्न अपडेट गरियो
 
-#### प्रमाणित
-- ✅ सबै नयाँ उदाहरणहरू `azd up` संग परिनियोजित गर्न मिल्ने र उत्कृष्ट अभ्यासहरू पालना गर्दछन्
-- ✅ कागजात क्रस-लिङ्कहरू र नेभिगेसन अद्यावधिक गरियो
-- ✅ उदाहरणहरूले शुरुवाती देखि उन्नत परिदृश्यहरू समेट्छ, जसमा उत्पादन माइक्रोसर्भिसहरू समेत छन्
+#### Validated
+- ✅ सबै नयाँ उदाहरणहरू `azd up` संग तैनाथ गर्न मिल्ने र सर्वोत्तम अभ्यासहरू अनुसरण गर्ने गरी सत्यापित
+- ✅ दस्तावेजीकरण क्रस-लिंकहरू र नेभिगेशन अपडेट गरियो
+- ✅ उदाहरणहरूले आरम्भिक देखि उन्नत परिदृश्यहरू कभर गर्छन्, उत्पादन माइक्रोसर्भिसहरूसहित
 
-#### नोटहरू
-- **सेवा क्षेत्र**: अंग्रेजी कागजात र उदाहरणहरू मात्र
-- **अर्को चरणहरू**: आगामी रिलीजहरूमा थप उन्नत कन्टेनर ढाँचाहरू र CI/CD स्वचालन विस्तार गर्ने
+#### Notes
+- **Scope**: अंग्रेजी दस्तावेजीकरण र उदाहरणहरू मात्र
+- **Next Steps**: भविष्यका रिलिजमा थप उन्नत कन्टेनर ढाँचाहरू र CI/CD स्वचालन विस्तार गर्ने
 
 ### [v3.5.0] - 2025-11-19
 
-#### उत्पादन पुनःब्रान्डिङ: Microsoft Foundry
-**यो संस्करणले सम्पूर्ण अंग्रेजी कागजातमा "Microsoft Foundry" बाट "Microsoft Foundry" मा व्यापक उत्पादन नाम परिवर्तन लागू गर्दछ, Microsoft को आधिकारिक पुनःब्रान्डिङलाई प्रतिबिम्बित गर्दै।**
+#### Product Rebranding: Microsoft Foundry
+**यस संस्करणले सम्पूर्ण अंग्रेजी दस्तावेजीकरणभरि "Microsoft Foundry" नामको व्यापक ब्रान्ड परिवर्तन कार्यान्वयन गरेको छ।**
 
-#### परिवर्तनहरू
-- **🔄 उत्पादन नाम अद्यावधिक**: "Microsoft Foundry" बाट "Microsoft Foundry" सम्म पूर्ण पुनःब्रान्डिङ
-  - `docs/` फोल्डरभित्र अंग्रेजी कागजातहरूमा सबै सन्दर्भहरू अद्यावधिक गरियो
-  - फोल्डर नाम परिवर्तन: `docs/ai-foundry/` → `docs/microsoft-foundry/`
-  - फाइल नाम परिवर्तन: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - जम्मा 7 कागजात फाइलहरूमा 23 सामग्री सन्दर्भहरू अद्यावधिक
+#### Changed
+- **🔄 Product Name Update**: "Microsoft Foundry" मा पूर्ण रीब्राण्डिङ
+  - `docs/` फोल्डरमा अंग्रेजी दस्तावेजीकरणभरि सबै सन्दर्भहरू अद्यावधिक गरियो
+  - फोल्डर पुन:नामकरण: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+  - फाइलको नाम परिवर्तन गरियो: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+  - कुल: 7 डकुमेन्टेसन फाइलहरूमा जम्मा 23 सामग्री संदर्भहरू अपडेट गरियो
 
-- **📁 फोल्डर संरचना परिवर्तनहरू**:
-  - `docs/ai-foundry/` नाम परिवर्तन भएर `docs/microsoft-foundry/` बन्यो
-  - नयाँ फोल्डर संरचनासँग मेल खाने सबै क्रस-रेफरेन्सहरू अद्यावधिक गरियो
-  - सबै कागजातहरूमा नेभिगेसन लिङ्कहरू प्रमाणित गरियो
+- **📁 Folder Structure Changes**:
+  - `docs/ai-foundry/` लाई `docs/microsoft-foundry/` मा नाम परिवर्तन गरियो
+  - नयाँ फोल्डर संरचनालाई प्रतिबिम्बित गर्न सबै क्रस-रेफरेन्सहरू अपडेट गरियो
+  - सबै डकुमेन्टेसनमा नेभिगेसन लिङ्कहरू प्रमाणित गरियो
 
-- **📄 फाइल नाम परिवर्तनहरू**:
+- **📄 File Renames**:
   - `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - सबै आन्तरिक लिङ्कहरू नयाँ फाइल नाममा अद्यावधिक गरियो
+  - सबै आन्तरिक लिङ्कहरू नयाँ फाइलनामलाई सन्दर्भ गर्न अपडेट गरियो
 
-#### अद्यावधिक फाइलहरू
-- **अध्याय कागजातहरू** (7 फाइलहरू):
-  - `docs/microsoft-foundry/ai-model-deployment.md` - 3 नेभिगेसन लिंक अद्यावधिक
-  - `docs/microsoft-foundry/ai-workshop-lab.md` - 4 उत्पादन नाम सन्दर्भहरू अद्यावधिक
-  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - पहिले नै Microsoft Foundry प्रयोगमा
-  - `docs/microsoft-foundry/production-ai-practices.md` - 3 सन्दर्भहरू अद्यावधिक (अवलोकन, समुदाय प्रतिक्रिया, कागजात)
-  - `docs/getting-started/azd-basics.md` - 4 क्रस-रेफरेन्स लिंक अद्यावधिक
-  - `docs/getting-started/first-project.md` - 2 अध्याय नेभिगेसन लिंक अद्यावधिक
-  - `docs/getting-started/installation.md` - 2 अर्को अध्याय लिंकहरू अद्यावधिक
-  - `docs/troubleshooting/ai-troubleshooting.md` - 3 सन्दर्भहरू अद्यावधिक (नेभिगेसन, Discord समुदाय)
-  - `docs/troubleshooting/common-issues.md` - 1 नेभिगेसन लिंक अद्यावधिक
-  - `docs/troubleshooting/debugging.md` - 1 नेभिगेसन लिंक अद्यावधिक
+#### अपडेट गरिएका फाइलहरू
+- **अध्याय डकुमेन्टेसन** (7 फाइलहरू):
+  - `docs/microsoft-foundry/ai-model-deployment.md` - 3 नेभिगेसन लिङ्क अपडेटहरू
+  - `docs/microsoft-foundry/ai-workshop-lab.md` - 4 उत्पादन नाम सन्दर्भहरू अपडेट गरियो
+  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - पहिलेबाटै Microsoft Foundry प्रयोगमा रहेको (पछिल्ला अपडेटहरूबाट)
+  - `docs/microsoft-foundry/production-ai-practices.md` - 3 सन्दर्भहरू अपडेट गरियो (अवलोकन, समुदायको प्रतिक्रिया, डकुमेन्टेसन)
+  - `docs/getting-started/azd-basics.md` - 4 क्रस-रेफरेन्स लिङ्क अपडेटहरू
+  - `docs/getting-started/first-project.md` - 2 अध्याय नेभिगेसन लिङ्क अपडेटहरू
+  - `docs/getting-started/installation.md` - 2 अर्को अध्यायका लिङ्कहरू अपडेट गरियो
+  - `docs/troubleshooting/ai-troubleshooting.md` - 3 सन्दर्भहरू अपडेट गरियो (नेभिगेसन, Discord समुदाय)
+  - `docs/troubleshooting/common-issues.md` - 1 नेभिगेसन लिङ्क अपडेट गरियो
+  - `docs/troubleshooting/debugging.md` - 1 नेभिगेसन लिङ्क अपडेट गरियो
 
 - **कोर्स संरचना फाइलहरू** (2 फाइलहरू):
-  - `README.md` - 17 सन्दर्भहरू अद्यावधिक (कोर्स अवलोकन, अध्याय शीर्षकहरू, टेम्प्लेट खण्ड, समुदाय दृष्टिकोणहरू)
-  - `course-outline.md` - 14 सन्दर्भहरू अद्यावधिक (अवलोकन, सिकाइ लक्ष्यहरू, अध्याय स्रोतहरू)
+  - `README.md` - 17 सन्दर्भहरू अपडेट गरियो (कोर्स अवलोकन, अध्याय शीर्षकहरू, टेम्पलेट सेक्सन, समुदाय अन्तर्दृष्टि)
+  - `course-outline.md` - 14 सन्दर्भहरू अपडेट गरियो (अवलोकन, सिकाइ उद्देश्यहरू, अध्याय स्रोतहरू)
 
 #### प्रमाणित
-- ✅ अंग्रेजी कागजातहरूमा कुनै पनि पुरानो "ai-foundry" फोल्डर पथ सन्दर्भ बाँकी छैन
-- ✅ अंग्रेजी कागजातहरूमा कुनै "Microsoft Foundry" उत्पादन नाम सन्दर्भ बाँकी छैन
-- ✅ सबै नेभिगेसन लिङ्कहरू नयाँ फोल्डर संरचनासँग काम गर्दैछ
-- ✅ फाइल र फोल्डर नाम परिवर्तन सफलतापूर्वक सम्पन्न
-- ✅ अध्यायहरू बीचको क्रस-रेफरेन्सहरू प्रमाणित गरियो
+- ✅ अंग्रेजी डकुमेन्टेसनमा `ai-foundry` फोल्डर पथका कुनै अवशेष छैनन्
+- ✅ अंग्रेजी डकुमेन्टेसनमा "Microsoft Foundry" उत्पादन नामका कुनै अवशेष छैनन्
+- ✅ नयाँ फोल्डर संरचनासँग सबै नेभिगेसन लिङ्कहरू कार्यशील छन्
+- ✅ फाइल र फोल्डर नाम परिवर्तन सफलतापूर्वक पूरा गरियो
+- ✅ अध्यायहरूबीचको क्रस-रेफरेन्सहरू प्रमाणित गरियो
 
 #### नोटहरू
-- **सेवा क्षेत्र**: परिवर्तनहरू अंग्रेजी कागजातहरूको `docs/` फोल्डरमा मात्र लागू
-- **अनुवादहरू**: यस संस्करणमा अनुवाद फोल्डरहरू (`translations/`) अद्यावधिक भएनन्
-- **कार्यशाला**: कार्यशाला सामग्रीहरू (`workshop/`) यस संस्करणमा अद्यावधिक भएनन्
-- **उदाहरणहरू**: उदाहरण फाइलहरू अझै पुरानो नामावली सन्दर्भ गर्न सक्छन् (भविष्यमा सच्याइने)
-- **बाह्य लिङ्कहरू**: बाह्य URL र GitHub रिपोजिटरी सन्दर्भहरू अपरिवर्तित छन्
+- **परिधि**: परिवर्तनहरू केवल `docs/` फोल्डरमा रहेको अंग्रेजी डकुमेन्टेसनमा लागू गरियो
+- **अनुवादहरू**: यस संस्करणमा अनुवाद फोल्डरहरू (`translations/`) अपडेट गरिएका छैनन्
+- **कार्यशाला**: कार्यशाला सामग्रीहरू (`workshop/`) यस संस्करणमा अपडेट गरिएका छैनन्
+- **उदाहरणहरू**: उदाहरण फाइलहरूले अझै पुरानो नामकरणलाई सन्दर्भ गर्न सक्छन् (भविष्यको अपडेटमा सम्बोधन गरिनेछ)
+- **बाह्य लिङ्कहरू**: बाह्य URL हरू र GitHub रेपो सन्दर्भहरू अपरिवर्तित छन्
 
-#### योगदानकर्ताहरूका लागि माइग्रेशन मार्गदर्शन
-यदि तपाइँसँग पुरानो संरचना सन्दर्भ गर्ने स्थानीय शाखाहरू वा कागजातहरू छन्:
-1. फोल्डर सन्दर्भ अद्यावधिक गर्नुहोस्: `docs/ai-foundry/` → `docs/microsoft-foundry/`
-2. फाइल सन्दर्भ अद्यावधिक गर्नुहोस्: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-3. उत्पादन नाम प्रत्यक्ष प्रतिस्थापन गर्नुहोस्: "Microsoft Foundry" → "Microsoft Foundry"
-4. सबै आन्तरिक कागजात लिंकहरू काम गर्दैछन् भनेर प्रमाणित गर्नुहोस्
+#### योगदानकर्ताहरूका लागि माइग्रेशन मार्गदर्शिका
+यदि तपाईंसँग स्थानीय ब्रान्चहरू वा पुरानो संरचनालाई सन्दर्भ गर्ने डकुमेन्टेसन छ भने:
+1. फोल्डर सन्दर्भहरू अपडेट गर्नुहोस्: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+2. फाइल सन्दर्भहरू अपडेट गर्नुहोस्: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+3. उत्पादन नाम परिवर्तन गर्नुहोस्: "Microsoft Foundry" → "Microsoft Foundry"
+4. सबै आन्तरिक डकुमेन्टेसन लिङ्कहरू अझै काम गर्छन् कि भनेर प्रमाणित गर्नुहोस्
 
 ---
 
 ### [v3.4.0] - 2025-10-24
 
-#### पूर्वाधार पूर्वावलोकन र प्रमाणिकरण सुधारहरू
-**यो संस्करणले नयाँ Azure Developer CLI पूर्वावलोकन सुविधा लागि व्यापक समर्थन र कार्यशाला प्रयोगकर्ता अनुभव सुधार गर्दछ।**
+#### पूर्वाधार पूर्वावलोकन र प्रमाणीकरण सुधारहरू
+**यस संस्करणले नयाँ Azure Developer CLI पूर्वावलोकन सुविधाको लागि व्यापक समर्थन परिचय गराउँछ र कार्यशाला प्रयोगकर्ताको अनुभव सुधार्छ।**
 
-#### थपियो
-- **🧪 azd provision --preview सुविधा कागजात**: नयाँ पूर्वाधार पूर्वावलोकन क्षमताको व्यापक कभर
-  - आदेश सन्दर्भ र उपयोग उदाहरणहरू चिट शीटमा
-  - प्राविधिक मार्गदर्शिका संग विस्तृत एकीकरण र उपयोग मामिलाहरू
-  - पूर्व-उडान जांच एकीकरण सुरक्षित परिनियोजन प्रमाणिकरणको लागि
-  - सुरक्षामुखी परिनियोजन अभ्याससहित प्रारम्भिक मार्गदर्शिका अद्यावधिक
-- **🚧 कार्यशाला स्थिति ब्यानर**: कार्यशाला विकास स्थिति जनाउने व्यावसायिक HTML ब्यानर
-  - ग्रेडियन्ट डिजाइन र निर्माण सूचकहरू स्पष्ट प्रयोगकर्ता संवादको लागि
-  - पारदर्शिताको लागि अन्तिम अद्यावधिक समय स्ट्याम्प
-  - सबै उपकरण प्रकारहरूको लागि मोबाइल-प्रतिसादात्मक डिजाइन
+#### थप
+- **🧪 azd provision --preview Feature Documentation**: नयाँ पूर्वाधार पूर्वावलोकन क्षमताको व्यापक कभर
+  - चिट शीटमा कमाण्ड सन्दर्भ र प्रयोग उदाहरणहरू
+  - प्राविजनिङ गाइडमा प्रयोगका केसहरू र लाभहरूसहित विस्तृत एकीकरण
+  - सुरक्षित डिप्लोयमेन्ट प्रमाणीकरणका लागि प्रि-फ्लाइट जाँच एकीकरण
+  - सुरक्षालाई प्राथमिकतामा राखेर डिप्लोयमेन्ट अभ्यासहरूसहितको सुरु गर्न मार्गदर्शक अपडेटहरू
+- **🚧 Workshop Status Banner**: कार्यशाला विकास स्थिति जनाउने व्यावसायिक HTML ब्यानर
+  - स्पष्ट प्रयोगकर्ता संवादका लागि ग्रेडियन्ट डिजाइन र निर्माण संकेतकहरू
+  - पारदर्शिताका लागि अन्तिम अद्यावधिक समयस्ट्याम्प
+  - सबै उपकरण प्रकारका लागि मोबाइल-रेस्पोन्सिभ डिजाइन
 
-#### सुधार गरियो
-- **पूर्वाधार सुरक्षा**: परिनियोजन कागजातहरूमा पूर्वावलोकन क्षमताको सामग्रिपूर्ण समायोजन
-- **पूर्व परिनियोजन प्रमाणिकरण**: स्वचालित स्क्रिप्टहरूले पूर्वाधार पूर्वावलोकन परीक्षण समावेश गरियो
-- **विकासकर्ताको कार्यप्रवाह**: पूर्वावलोकन समावेश गर्दै आदेश अनुक्रमहरू अद्यावधिक गरियो
-- **कार्यशाला अनुभव**: सामग्री विकास स्थितिको स्पष्ट अपेक्षा सेट गरियो
+#### सुधारिएको
+- **पूर्वाधार सुरक्षा**: डिप्लोयमेन्ट डकुमेन्टेसनभरि पूर्वावलोकन कार्यक्षमता एकीकृत गरियो
+- **प्रि-डिप्लोयमेन्ट प्रमाणीकरण**: स्वचालित स्क्रिप्टहरूले अब पूर्वावलोकन परीक्षण समावेश गर्दछन्
+- **डेभलपर वर्कफ्लो**: उत्कृष्ट अभ्यासको रूपमा पूर्वावलोकन समावेश गरेर कमाण्ड अनुक्रमहरू अपडेट गरियो
+- **कार्यशाला अनुभव**: सामग्री विकास स्थितिहरू सम्बन्धी स्पष्ट अपेक्षाहरू सेट गरियो
 
-#### परिवर्तन गरियो
-- **परिनियोजन उत्कृष्ट अभ्यासहरू**: पूर्वावलोकन-प्रथम कार्यप्रवाह हाल सिफारिस गरिएको विधि हो
-- **कागजात प्रवाह**: सिकाइ प्रक्रियामा पूर्वाधार प्रमाणिकरण पहिले सारियो
-- **कार्यशाला प्रस्तुति**: स्पष्ट विकास समयरेखासहित व्यावसायिक स्थिति संवाद
+#### परिवर्तनहरू
+- **डिप्लोयमेन्ट उत्तम अभ्यासहरू**: पूर्वावलोकन-प्रथम वर्कफ्लो अब सिफारिस गरिएको दृष्टिकोण भयो
+- **डकुमेन्टेसन प्रवाह**: सिकाइ प्रक्रियामा पूर्वाधार प्रमाणीकरणलाई अघि सारियो
+- **कार्यशाला प्रस्तुतीकरण**: विकास समयरेखा सहित व्यावसायिक स्थिति संवाद
 
-#### सुधार गरिएको
-- **सुरक्षामुखी दृष्टिकोण**: परिनियोजनअघि पूर्वाधार परिवर्तनहरू प्रमाणित गर्न सकिन्छ
-- **टोली सहकार्य**: पूर्वावलोकन नतिजाहरू समीक्षा र स्वीकृतिका लागि साझेदारी गर्न सकिन्छ
-- **लागत सचेतना**: व्यवस्थापन अघि स्रोत लागत बेहतर बुझाइ
-- **जोखिम न्यूनीकरण**: अग्रिम प्रमाणिकरणमार्फत परिनियोजन असफलताहरू कम गरियो
+#### सुधार
+- **सुरक्षा-प्रथम दृष्टिकोण**: डिप्लोयमेन्ट अघि पूर्वावलोकन मार्फत पूर्वाधार परिवर्तनहरू प्रमाणित गर्न सकिने भयो
+- **दलीय सहकार्य**: पूर्वावलोकन नतिजाहरू समीक्षा र अनुमोदनका लागि साझा गर्न सकिन्छ
+- **लागत अवेयरनेस**: प्राविजनिङ अघि स्रोतहरूको लागतको राम्रो बुझाइ
+- **जोखिम न्यूनीकरण**: पूर्व प्रमाणीकरणमार्फत डिप्लोयमेन्ट असफलताहरू घटाइयो
 
 #### प्राविधिक कार्यान्वयन
-- **बहु-दस्तावेज एकीकरण**: ४ महत्वपूर्ण फाइलहरूमा पूर्वावलोकन सुविधा कागजात
-- **आदेश ढाँचाहरू**: कागजातभरि स्थिर वाक्यविन्यास र उदाहरणहरू
-- **अभ्यास समावेशन**: प्रमाणिकरण कार्यप्रवाह र स्क्रिप्टहरूमा पूर्वावलोकन समावेश
-- **दृश्य सूचकहरू**: नविनतम सुविधा खोज्न स्पष्ट मार्किंग
+- **बहु-डकुमेन्ट एकीकरण**: पूर्वावलोकन सुविधा 4 प्रमुख फाइलहरूमा दस्तावेजित गरिएको
+- **कमाण्ड ढाँचा**: डकुमेन्टेसनभरि सुसंगत सिन्ट्याक्स र उदाहरणहरू
+- **श्रेष्ठ अभ्यास एकीकरण**: प्रमाणीकरण वर्कफ्लो र स्क्रिप्टहरूमा पूर्वावलोकन समावेश
+- **दृश्य संकेतकहरू**: नयाँ सुविधाको खोजीयोग्यतालाई बढाउन स्पष्ट NEW फीचर मार्किङ
 
 #### कार्यशाला पूर्वाधार
-- **स्थिति संवाद**: ग्रेडियन्ट शैलीको व्यावसायिक HTML ब्यानर
-- **प्रयोगकर्ता अनुभव**: विकास स्थिति स्पष्ट राखेर भ्रम टाढा राख्ने
-- **व्यावसायिक प्रस्तुति**: भण्डारण विश्वसनीयता कायम राख्दै अपेक्षा सेट
-- **समयरेखा पारदर्शिता**: अक्टोबर २०२५ अन्तिम अद्यावधिक समय स्ट्याम्प
+- **स्थिति संवाद**: ग्रेडियन्ट स्टाइलिंग सहित व्यावसायिक HTML ब्यानर
+- **प्रयोगकर्ता अनुभव**: विकास स्थिति स्पष्ट भएपछि भ्रम घट्छ
+- **व्यावसायिक प्रस्तुतीकरण**: अपेक्षाहरू सेट गर्दै रिपोजिटरीको विश्वासनीयता कायम राख्छ
+- **समयरेखा पारदर्शिता**: जिम्मेवारी सुनिश्चित गर्न अक्टोबर 2025 अन्तिम अद्यावधिक टाइमस्ट्याम्प
 
 ### [v3.3.0] - 2025-09-24
 
 #### सुधारिएको कार्यशाला सामग्री र अन्तरक्रियात्मक सिकाइ अनुभव
-**यो संस्करणले ब्राउजरमा आधारित अन्तरक्रियात्मक मार्गनिर्देशन र संरचित सिकाइ पथ सहित व्यापक कार्यशाला सामग्री प्रस्तुत गर्दछ।**
+**यस संस्करणले ब्राउजर-आधारित अन्तरक्रियात्मक मार्गदर्शकहरू र संरचित सिकाइ पथहरू सहित व्यापक कार्यशाला सामग्रीहरू प्रस्तुत गर्दछ।**
 
-#### थपियो
-- **🎥 अन्तरक्रियात्मक कार्यशाला मार्गदर्शक**: MkDocs पूर्वावलोकन क्षमतासहित ब्राउजरमा आधारित कार्यशाला अनुभव
-- **📝 संरचित कार्यशाला निर्देशनहरू**: पत्ता लगाउनेदेखि अनुकूलनसम्म ७-चरण सिकाइ पथ
-  - 0-परिचय: कार्यशाला अवलोकन र सेटअप
-  - 1-AI-टेम्प्लेट चयन: टेम्प्लेट पत्ता लगाउने र चयन प्रक्रिया
-  - 2-AI-टेम्प्लेट प्रमाणिकरण: परिनियोजन र प्रमाणिकरण प्रक्रियाहरू
-  - 3-AI-टेम्प्लेट पुनर्निर्माण: टेम्प्लेट आर्किटेक्चर बुझाइ
-  - 4-AI-टेम्प्लेट कन्फिगरेसन: कन्फिगरेसन र अनुकूलन
-  - 5-AI-टेम्प्लेट अनुकूलन: उन्नत संशोधन र पुनरावृत्ति
-  - 6-पूर्वाधार सरसफाइ: सरसफाइ र स्रोत व्यवस्थापन
-  - 7-समापन: सारांश र आगामी चरणहरू
-- **🛠️ कार्यशाला उपकरणहरू**: उत्कृष्ट सिकाइ अनुभवका लागि Material थीम सहित MkDocs कन्फिगरेसन
-- **🎯 व्यावहारिक सिकाइ पथ**: 3-चरण विधि (पत्ता लगाउने → परिनियोजन → अनुकूलन)
-- **📱 GitHub Codespaces एकीकरण**: सहज विकास वातावरण सेटअप
+#### थप
+- **🎥 Interactive Workshop Guide**: MkDocs पूर्वावलोकन क्षमतासहित ब्राउजर-आधारित कार्यशाला अनुभव
+- **📝 Structured Workshop Instructions**: पत्ता लगाउने देखि अनुकूलनसम्मको 7-स्टेप मार्गदर्शित सिकाइ पथ
+  - 0-Introduction: कार्यशाला अवलोकन र सेटअप
+  - 1-Select-AI-Template: टेम्पलेट पत्ता लगाउने र छनोट गर्ने प्रक्रिया
+  - 2-Validate-AI-Template: डिप्लोयमेन्ट र प्रमाणीकरण प्रक्रियाहरू
+  - 3-Deconstruct-AI-Template: टेम्पलेट आर्किटेक्चर बुझ्ने
+  - 4-Configure-AI-Template: कन्फिगरेसन र अनुकूलन
+  - 5-Customize-AI-Template: उन्नत संशोधन र पुनरावृत्ति
+  - 6-Teardown-Infrastructure: क्लीनअप र स्रोत व्यवस्थापन
+  - 7-Wrap-up: संक्षेप र अर्को कदमहरू
+- **🛠️ Workshop Tooling**: बेहतर सिकाइ अनुभवको लागि Material थिमसहित MkDocs कन्फिगरेसन
+- **🎯 Hands-On Learning Path**: 3-स्टेप विधि (Discovery → Deployment → Customization)
+- **📱 GitHub Codespaces Integration**: सहज विकास वातावरण सेटअप
 
-#### सुधार गरियो
-- **AI कार्यशाला ल्याब**: 2-3 घण्टे संरचित सिकाइ अनुभवसहित विस्तार गरिएको
-- **कार्यशाला कागजात**: नेभिगेसन र दृश्य सहायता सहित व्यावसायिक प्रस्तुति
-- **सिकाइ प्रगति**: टेम्प्लेट चयनदेखि उत्पादन परिनियोजनसम्म स्पष्ट मार्गदर्शन
-- **विकासकर्ता अनुभव**: सहज विकास कार्यप्रवाहका लागि एकीकृत उपकरणहरू
+#### सुधारिएको
+- **AI Workshop Lab**: 2-3 घण्टे संरचित सिकाइ अनुभवसहित विस्तार
+- **कार्यशाला डकुमेन्टेसन**: नेभिगेसन र दृश्य सहायता सहित व्यावसायिक प्रस्तुतीकरण
+- **सिकाइ क्रम**: टेम्पलेट छनोटदेखि उत्पादन डिप्लोयमेन्टसम्म स्पष्ट चरण-दर-चरण मार्गदर्शन
+- **डेभलपर अनुभव**: समेकित उपकरणहरूद्वारा स्ट्रिमलाइन्ड विकास वर्कफ्लो
 
-#### सुधार गरिएको
-- **पहुँच योग्यता**: खोज, प्रतिलिपि कार्यक्षमता र थिम टगलसहित ब्राउजर-आधारित अन्तरफलक
-- **स्व-गति सिकाइ**: विभिन्न सिकाइ गतिको अनुरूप लचकदार कार्यशाला संरचना
-- **व्यावहारिक प्रयोग**: वास्तविक विश्व AI टेम्प्लेट परिनियोजन परिदृश्यहरू
-- **समुदाय एकीकरण**: कार्यशालाको समर्थन र सहकार्यका लागि Discord समावेशन
+#### सुधार
+- **पहुँचयोग्यता**: सर्च, कपी कार्यक्षमता, र थिम ट्गग्लसहित ब्राउजर-आधारित इन्टरफेस
+- **आफ्नै गतिमा सिकाइ**: फरक सिक्ने गतिहरूलाई समायोज्य लचिलो कार्यशाला संरचना
+- **व्यावहारिक अनुप्रयोग**: वास्तविक संसारका AI टेम्पलेट डिप्लोयमेन्ट परिदृश्यहरू
+- **समुदाय एकीकरण**: कार्यशाला समर्थन र सहकार्यका लागि Discord एकीकरण
 
 #### कार्यशाला सुविधाहरू
-- **निर्मित-भित्र खोज**: छिटो कुञ्जीशब्द र पाठ पत्ता लगाउने
-- **कोड ब्लक प्रतिलिपि**: सबै कोड उदाहरणहरूको लागि होभर गरेर प्रतिलिपि गर्ने सुविधा
-- **थिम टगल**: फरक रुचिका लागि डार्क/लाइट मोड समर्थन
-- **दृश्यात्मक सामग्री**: स्क्रीनशट र आरेखहरू सुधारिएको बुझाइका लागि
-- **मद्दत एकीकरण**: समुदाय सहयोगका लागि प्रत्यक्ष Discord पहुँच
+- **निहित सर्च**: छिटो कुञ्जीशब्द र पाठ खोज
+- **कोड ब्लकहरू कपी गर्नुहोस्**: सबै कोड उदाहरणहरूको लागि hover-to-copy कार्यक्षमता
+- **थिम ट्गग्ल**: फरक प्राथमिकताका लागि डार्क/लाइट मोड समर्थन
+- **दृश्य सम्पत्ति**: बुझाइ बढाउनका लागि स्क्रीनशट र डायाग्रामहरू
+- **सहायता एकीकरण**: समुदाय समर्थनका लागि प्रत्यक्ष Discord पहुँच
 
 ### [v3.2.0] - 2025-09-17
 
 #### प्रमुख नेभिगेसन पुनर्संरचना र अध्याय-आधारित सिकाइ प्रणाली
-**यो संस्करणले सम्पूर्ण रिपोजिटरीमा सुधारिएको नेभिगेसन सहित व्यापक अध्याय-आधारित सिकाइ संरचना प्रस्तुत गर्दछ।**
+**यस संस्करणले सम्पूर्ण रिपोजिटरीमा सुधारिएको नेभिगेसन सहित व्यापक अध्याय-आधारित सिकाइ संरचना प्रस्तुत गर्दछ।**
 
-#### थपियो
-- **📚 अध्याय-आधारित सिकाइ प्रणाली**: पुरै कोर्सलाई ८ प्रगतिशील सिकाइ अध्यायहरूमा पुनर्संरचित
-  - अध्याय १: आधार र छिटो शुरुआत (⭐ - ३०-४५ मिनेट)
-  - अध्याय २: AI-प्रथम विकास (⭐⭐ - १-२ घण्टा)
-  - अध्याय ३: कन्फिगरेसन र प्रमाणिकरण (⭐⭐ - ४५-६० मिनेट)
-  - अध्याय ४: पूर्वाधार कोड र परिनियोजन (⭐⭐⭐ - १-१.५ घण्टा)
-  - अध्याय ५: बहु-एजेन्ट AI समाधानहरू (⭐⭐⭐⭐ - २-३ घण्टा)
-  - अध्याय ६: पूर्व-परिनियोजन प्रमाणिकरण र योजना (⭐⭐ - १ घण्टा)
-  - अध्याय ७: समस्या निवारण र डिबगिङ (⭐⭐ - १-१.५ घण्टा)
-  - अध्याय ८: उत्पादन र उद्यम ढाँचाहरू (⭐⭐⭐⭐ - २-३ घण्टा)
-- **📚 समग्र नेभिगेसन प्रणाली**: सबै कागजातमा एकरुप नेभिगेसन हेडर र फुटर
-- **🎯 प्रगति ट्र्याकिङ**: कोर्स पूरा गर्न चेकलिस्ट र सिकाइ प्रमाणीकरण प्रणाली
-- **🗺️ सिकाइ पथ निर्देशन**: विभिन्न अनुभव स्तर र लक्ष्यका लागि स्पष्ट प्रवेश बिन्दुहरू
-- **🔗 क्रस रेफरेन्स नेभिगेसन**: सम्बन्धित अध्यायहरू र पूर्व शर्तहरू स्पष्ट रूपमा लिंक गरिएको
+#### थप
+- **📚 अध्याय-आधारित सिकाइ प्रणाली**: सम्पूर्ण कोर्सलाई 8 प्रगतिशील सिकाइ अध्यायहरूमा पुनर्संरचित गरियो
+  - अध्याय 1: आधार र छिटो सुरु (⭐ - 30-45 मिनेट)
+  - अध्याय 2: AI-First Development (⭐⭐ - 1-2 घण्टा)
+  - अध्याय 3: कन्फिगरेसन र प्रमाणीकरण (⭐⭐ - 45-60 मिनेट)
+  - अध्याय 4: इन्फ्रास्ट्रक्चर एज कोड र डिप्लोयमेन्ट (⭐⭐⭐ - 1-1.5 घण्टा)
+  - अध्याय 5: बहु-एजेन्ट AI समाधानहरू (⭐⭐⭐⭐ - 2-3 घण्टा)
+  - अध्याय 6: प्रि-डिप्लोयमेन्ट प्रमाणीकरण र योजना (⭐⭐ - 1 घण्टा)
+  - अध्याय 7: ट्रबलशुटिङ र डिबगिङ (⭐⭐ - 1-1.5 घण्टा)
+  - अध्याय 8: उत्पादन र एन्त्रप्राइज ढाँचाहरू (⭐⭐⭐⭐ - 2-3 घण्टा)
+- **📚 समग्र नेभिगेसन प्रणाली**: सबै डकुमेन्टेसनमा सुसंगत नेभिगेसन हेडर र फुटर
+- **🎯 प्रोग्रेस ट्र्याकिङ**: कोर्स पूरा गर्ने चेकलिस्ट र सिकाइ प्रमाणीकरण प्रणाली
+- **🗺️ सिकाइ पथ मार्गदर्शन**: फरक अनुभव स्तर र लक्ष्यका लागि स्पष्ट प्रवेश बिन्दुहरू
+- **🔗 क्रस-रेफरेन्स नेभिगेसन**: सम्बन्धित अध्यायहरू र प्रेरेक्विजाइटहरू स्पष्ट रूपमा लिङ्क गरिएको
 
-#### सुधार गरियो
-- **README संरचना**: अध्याय आधारित संगठनमा आधारित संरचित सिकाइ प्लेटफर्ममा परिणत
-- **कागजात नेभिगेसन**: प्रत्येक पृष्ठमा अध्याय सन्दर्भ र प्रगति निर्देशन समावेश
-- **टेम्प्लेट संगठन**: उदाहरणहरू र टेम्प्लेटहरू उपयुक्त सिकाइ अध्यायसँग जोडीएको
-- **स्रोत एकीकरण**: चिट शीट, FAQs, र अध्ययन मार्गदर्शकहरू सम्बन्धित अध्यायहरूसँग जोडिएको
-- **कार्यशाला एकीकरण**: ह्यान्ड्स-ऑन ल्याबहरू धेरै अध्याय सिकाइ लक्ष्यहरूसँग जोडीएको
+#### सुधारिएको
+- **README संरचना**: अध्याय-आधारित संगठन सहित संरचित सिकाइ प्लेटफर्ममा रूपान्तरण
+- **डकुमेन्टेसन नेभिगेसन**: प्रत्येक पृष्ठमा अब अध्याय सन्दर्भ र प्रगति मार्गदर्शन समावेश
+- **टेम्पलेट संगठन**: उदाहरणहरू र टेम्पलेटहरू उपयुक्त सिकाइ अध्यायसँग म्याप गरिएको
+- **स्रोत एकीकरण**: चिट शीट, FAQs, र अध्ययन गाइडहरू सम्बन्धित अध्यायहरूसँग जोडिएका
+- **कार्यशाला एकीकरण**: हात-देखि-हात प्रयोगशालाहरू बहु अध्याय सिकाइ उद्देश्यहरूसँग म्याप भएका
 
-#### परिवर्तन गरियो
-- **सिकाइ प्रगति**: सीधै कागजातबाट लचकदार अध्याय-आधारित सिकाइमा सारियो
-- **कन्फिगरेसन स्थिति**: राम्रो सिकाइ प्रवाहका लागि कन्फिगरेसन मार्गदर्शक अध्याय ३ मा सारियो
-- **AI सामग्री एकीकरण**: सम्पूर्ण सिकाइ यात्रामा AI विशेष सामग्रीको राम्रो समावेश
-- **उत्पादन सामग्री**: उन्नत ढाँचाहरू अध्याय ८ मा उद्यम सिकाइकर्ताका लागि समेटियो
+#### परिवर्तनहरू
+- **सिकाइ प्रगति**: रेखीय डकुमेन्टेसनबाट लचिलो अध्याय-आधारित सिकाइमा सारियो
+- **कन्फिगरेसन स्थान**: राम्रो सिकाइ प्रवाहका लागि कन्फिगरेसन गाइडलाई अध्याय 3 मा सारियो
+- **AI सामग्री एकीकरण**: सिकाइ यात्राभरि AI-विशेष सामग्रीको राम्रो समेकन
+- **उत्पादन सामग्री**: एन्त्रप्राइज सिक्नेहरूको लागि उन्नत ढाँचाहरू अध्याय 8 मा समाहित
 
-#### सुधार गरिएको
-- **प्रयोगकर्ता अनुभव**: स्पष्ट नेभिगेसन ब्रेडक्रम्ब र अध्याय प्रगति संकेतकहरू
-- **पहुँच योग्यता**: सजिलो कोर्स यात्रा लागि एकरूप नेभिगेसन ढाँचाहरू
-- **व्यावसायिक प्रस्तुति**: शैक्षिक र कर्पोरेट तालिमका लागि उपयुक्त विश्वविद्यालय शैली कोर्स संरचना
-- **सिकाइ दक्षता**: सुधारिएको संगठनबाट सम्बन्धित सामग्री छिटो पत्ता लगाउने
+#### सुधार
+- **प्रयोगकर्ता अनुभव**: स्पष्ट नेभिगेसन ब्रेडक्रम्ब्स र अध्याय प्रगति संकेतकहरू
+- **पहुँचयोग्यता**: सजिलो कोर्स यात्रा को लागी सुसंगत नेभिगेसन ढाँचा
+- **व्यावसायिक प्रस्तुतीकरण**: शैक्षिक तथा कर्पोरेट तालिमका लागि उपयुक्त विश्वविद्यालय शैली कोर्स संरचना
+- **सिकाइ दक्षता**: सुधारिएको संगठनद्वारा सम्बन्धित सामग्री फेला पार्ने समय घटाइएको
 
 #### प्राविधिक कार्यान्वयन
-- **नेभिगेसन हेडरहरू**: 40+ कागजात फाइलहरूमा एकरुप अध्याय नेभिगेसन
-- **फुटर नेभिगेसन**: एकरुप प्रगति निर्देशन र अध्याय पूरा सूचकहरू
-- **क्रस-लिंकिङ**: सम्बन्धित अवधारणाहरू जोड्ने समग्र आन्तरिक लिंक प्रणाली
-- **अध्याय म्यापिङ**: सिकाइ लक्ष्यसँग टेम्प्लेटहरू र उदाहरणहरू स्पष्ट रूपमा जोडीएको
+- **नेभिगेसन हेडरहरू**: 40+ डकुमेन्टेसन फाइलहरूमा मानकीकृत अध्याय नेभिगेसन
+- **फुटर नेभिगेसन**: सुसंगत प्रगति मार्गदर्शन र अध्याय पूरा गर्ने संकेतकहरू
+- **क्रस-लिंकिङ**: सम्बन्धित अवधारणाहरू जडान गर्ने व्यापक आन्तरिक लिङ्किङ प्रणाली
+- **अध्याय म्यापिङ**: टेम्पलेट र उदाहरणहरू स्पष्ट रूपमा सिकाइ उद्देश्यहरूसँग सम्बन्धित
 
-#### अध्ययन मार्गदर्शक सुधार
-- **📚 समग्र सिकाइ उद्देश्यहरू**: ८ अध्याय प्रणालीसँग मिल्दोजुल्दो अध्ययन मार्गदर्शक पुनर्संरचित
-- **🎯 अध्याय-आधारित मूल्यांकन**: प्रत्येक अध्यायमा विशेष सिकाइ उद्देश्य र व्यावहारिक अभ्यासहरू समावेश
-- **📋 प्रगति ट्र्याकिङ**: साप्ताहिक सिकाइ तालिका जसमा मापनयोग्य नतिजा र पूरा चेकलिस्टहरू
-- **❓ मूल्यांकन प्रश्नहरू**: प्रत्येक अध्यायका लागि ज्ञान प्रमाणीकरण प्रश्नहरू व्यावसायिक नतिजासहित
-- **🛠️ व्यावहारिक अभ्यासहरू**: वास्तविक परिनियोजन परिदृश्यहरू र समस्या निवारण कार्यहरू
-- **📊 कौशल प्रगति**: आधारभूत अवधारणाहरूबाट उद्यम ढाँचाहरू सम्म स्पष्ट उन्नति, करियर विकास केन्द्रित
-- **🎓 प्रमाणपत्र संरचना**: व्यावसायिक विकास नतिजा र सामुदायिक मान्यता प्रणाली
-- **⏱️ समय व्यवस्थापन**: संरचित १० हप्ते सिकाइ योजना र माइलस्टोन प्रमाणीकरण
+#### अध्ययन गाइड सुधार
+- **📚 समग्र सिकाइ उद्देश्यहरू**: 8-अध्याय प्रणालीसँग मिलेर अध्ययन गाइड पुनर्संरचित
+- **🎯 अध्याय-आधारित मूल्याङ्कन**: प्रत्येक अध्यायमा विशिष्ट सिकाइ उद्देश्य र व्यावहारिक अभ्यासहरू
+- **📋 प्रगति ट्र्याकिङ**: नापिने नतिजा र पूरा गर्ने चेकलिस्ट सहित साप्ताहिक सिकाइ तालिका
+- **❓ मूल्याङ्कन प्रश्नहरू**: प्रत्येक अध्यायका लागि ज्ञान प्रमाणीकरण प्रश्नहरू र व्यावसायिक नतिजाहरू
+- **🛠️ व्यावहारिक अभ्यासहरू**: वास्तविक डिप्लोयमेन्ट परिदृश्यहरूसँग हात-देखि-हात गतिविधिहरू
+- **📊 सीप प्रगति**: आधारभूत अवधारणाहरूबाट एन्त्रप्राइज ढाँचाहरू सम्म स्पष्ट प्रगति
+- **🎓 प्रमाणन फ्रेमवर्क**: व्यावसायिक विकास परिणाम र समुदाय मान्यता प्रणाली
+- **⏱️ तालिका व्यवस्थापन**: माइलस्टोन प्रमाणीकरण सहित संरचित 10-साता सिकाइ योजना
 
 ### [v3.1.0] - 2025-09-17
 
 #### सुधारिएको बहु-एजेन्ट AI समाधानहरू
-**यस संस्करणले बहु-एजेन्ट खुद्रा समाधानमा राम्रो एजेन्ट नामकरण र कागजात सुधार गर्दछ।**
+**यस संस्करणले रिटेल बहु-एजेन्ट समाधानमा एजेन्ट नामकरण र डकुमेन्टेसन सुधार गर्दछ।**
 
 #### परिवर्तनहरू
-- **बहु-एजेन्ट शब्दावली**: खुद्रा बहु-एजेन्ट समाधानमा सम्पूर्ण "Cora agent" लाई "Customer agent" सँग प्रतिस्थापन गरियो स्पष्ट बुझाइका लागि
-- **एजेन्ट आर्किटेक्चर**: सबै कागजात, ARM टेम्प्लेट, र कोड उदाहरणहरूमा "Customer agent" नाम समान बनाएर अद्यावधिक गरियो
-- **कन्फिगरेसन उदाहरणहरू**: नामकरण शैलीहरू अपडेट गर्दै एजेन्ट कन्फिगरेसन ढाँचाहरू आधुनिक बनाइयो
-- **कागजात सुसंगतता**: सबै सन्दर्भहरू व्यावसायिक, वर्णनात्मक एजेन्ट नामहरू प्रयोग गर्ने सुनिश्चित गरियो
-
-#### सुधार गरियो
-- **ARM टेम्प्लेट प्याकेज**: Customer एजेन्ट सन्दर्भहरूसहित retail-multiagent-arm-template अपडेट गरियो
-- **आर्किटेक्चर डायग्रामहरू**: अपडेट गरिएको एजेन्ट नामकरणसहित Mermaid डायग्रामहरू ताजा गरियो
-- **कोड उदाहरणहरू**: Python कक्षाहरू र कार्यान्वयन उदाहरणहरू अब CustomerAgent नामकरण प्रयोग गर्छन्
-- **पर्यावरण चरहरू**: सबै परिनियोजन स्क्रिप्टहरू CUSTOMER_AGENT_NAME प्रचलनहरूमा अपडेट गरियो
+- **बहु-एजेन्ट शब्दावली**: स्पष्ट बुझाइका लागि "Cora agent" लाई "Customer agent" ले प्रतिस्थापित गरियो
+- **एजेन्ट आर्किटेक्चर**: निरन्तर "Customer agent" नामकरण प्रयोग गर्न सबै डकुमेन्टेसन, ARM टेम्पलेटहरू, र कोड उदाहरणहरू अपडेट गरियो
+- **कन्फिगरेसन उदाहरणहरू**: अपडेट गरिएको नामकरण संयोजनसहित आधुनिकीकृत एजेन्ट कन्फिगरेसन ढाँचाहरू
+- **डकुमेन्टेसन निरन्तरता**: सबै सन्दर्भहरू व्यावसायिक, वर्णनात्मक एजेन्ट नामहरू प्रयोग गर्छन्
 
 #### सुधारिएको
-- **डेभलपर अनुभव**: दस्तावेजमा स्पष्ट एजेन्ट भूमिकाहरू र जिम्मेवारीहरू
-- **उत्पादन तयारी**: एंटरप्राइज नामकरण प्रचलनसँग राम्रो मिलन
-- **शिक्षण सामग्रीहरू**: शिक्षण प्रयोजनका लागि बढी सहज एजेन्ट नामकरण
-- **टेम्प्लेट प्रयोगयोग्यता**: एजेन्ट कार्यहरू र परिनियोजन ढाँचाहरूको सरल बुझाइ
+- **ARM Template Package**: Customer agent सन्दर्भहरूसहित retail-multiagent-arm-template अपडेट गरियो
+- **आर्किटेक्चर डायाग्रामहरू**: अपडेट गरिएको एजेन्ट नामकरणसहित Mermaid डायाग्रामहरू रिफ्रेस गरियो
+- **कोड उदाहरणहरू**: Python क्लासहरू र कार्यान्वयन उदाहरणहरू अब CustomerAgent नाम प्रयोग गर्दछन्
+- **Environment Variables**: सबै डिप्लोयमेन्ट स्क्रिप्टहरू CUSTOMER_AGENT_NAME कनभेन्सन प्रयोग गर्ने गरी अपडेट गरियो
 
-#### प्राविधिक विवरणहरू
-- CustomerAgent सन्दर्भहरू सहित Mermaid आर्किटेक्चर डायग्रामहरू अपडेट गरियो
-- Python उदाहरणहरूमा CoraAgent कक्षा नामहरू CustomerAgent सँग प्रतिस्थापित गरियो
-- ARM टेम्प्लेट JSON कन्फिगरेसनहरू "customer" एजेन्ट प्रकार प्रयोग गर्न संशोधित गरियो
+#### सुधार
+- **डेभलपर अनुभव**: डकुमेन्टेसनमा स्पष्ट एजेन्ट भूमिका र जिम्मेवारीहरू
+- **उत्पादन तत्परता**: एन्त्रप्राइज नामकरण कनभेन्सनसँग राम्रो समायोजन
+- **सिकाइ सामग्री**: शैक्षिक उद्देश्यका लागि थप सहज एजेन्ट नामकरण
+- **टेम्पलेट उपयोगिता**: एजेन्ट कार्य र डिप्लोयमेन्ट ढाँचाहरू बुझ्न सजिलो
+
+#### प्राविधिक विवरण
+- Mermaid आर्किटेक्चर डायाग्रामहरू CustomerAgent सन्दर्भहरूसहित अपडेट गरियो
+- Python उदाहरणहरूमा CoraAgent क्लास नामहरू CustomerAgent सँग प्रतिस्थापित गरियो
+- ARM टेम्पलेट JSON कन्फिगरेसनहरू "customer" एजेन्ट प्रकार प्रयोग गर्न संशोधित गरियो
 - वातावरण चरहरू CORA_AGENT_* बाट CUSTOMER_AGENT_* ढाँचामा अपडेट गरियो
-- सबै परिनियोजन आदेशहरू र कन्टेनर कन्फिगरेसनहरू ताजा गरियो
+- सबै डिप्लोयमेन्ट कमाण्ड र कन्टेनर कन्फिगरेसनहरू रिफ्रेस गरियो
 
 ### [v3.0.0] - 2025-09-12
 
-#### मुख्य परिवर्तनहरू - AI डेभलपर फोकस र Microsoft Foundry एकीकरण
-**यस संस्करणले रेपोमा Microsoft Foundry एकीकरण सहित व्यापक AI-केंद्रित सिकाइ स्रोतमा रूपान्तरण गर्दछ।**
+#### ठूला परिवर्तनहरू - AI डेभलपर केन्द्रित र Microsoft Foundry एकीकरण
+**यस संस्करणले रिपोजिटरीलाई AI-केन्द्रित पूर्ण सिकाइ स्रोतमा रूपान्तरण गर्दछ र Microsoft Foundry एकीकरण समावेश गर्दछ।**
 
-#### थपियो
-- **🤖 AI-प्रथम सिकाइ मार्ग**: AI डेभलपर्स र इन्जिनियरहरूको प्राथमिकतामा पूर्ण पुनःसंरचना
-- **Microsoft Foundry एकीकरण गाइड**: AZD लाई Microsoft Foundry सेवासँग जडान गर्ने समग्र दस्तावेज
-- **AI मोडेल परिनियोजन ढाँचाहरू**: मोडेल चयन, कन्फिगरेसन, र उत्पादन परिनियोजन रणनीति समेटिएको विस्तृत गाइड
-- **AI कार्यशाला प्रयोगशाला**: AI अनुप्रयोगहरूलाई AZD-परिनियोज्य समाधानहरूमा रूपान्तरण गर्ने २-३ घण्टे व्यावहारिक कार्यशाला
-- **उत्पादन AI उत्कृष्ट अभ्यासहरू**: AI कार्यभारहरूको स्केलिङ, अनुगमन, र सुरक्षा लागि एंटरप्राइज-तयार ढाँचाहरू
-- **AI-विशिष्ट समस्या समाधान गाइड**: Microsoft Foundry मोडेलहरू, Cognitive Services, र AI परिनियोजन समस्याहरूका लागि व्यापक समस्या समाधान
-- **AI टेम्प्लेट ग्यालरी**: जटिलता दरसहित Microsoft Foundry टेम्प्लेटहरूको चयन
-- **कार्यशाला सामग्रीहरू**: व्यावहारिक प्रयोगशाला र सन्दर्भ सामग्री सहित पूर्ण कार्यशाला संरचना
+#### थप
+- **🤖 AI-First Learning Path**: AI डेभलपर र इन्जिनियरहरूलाई प्राथमिकता दिने पूर्ण पुनर्संरचना
+- **Microsoft Foundry Integration Guide**: AZD लाई Microsoft Foundry सेवासँग जडान गर्ने समग्र डकुमेन्टेसन
+- **AI Model Deployment Patterns**: मोडेल चयन, कन्फिगरेसन, र उत्पादन डिप्लोयमेन्ट रणनीतिहरू समेट्ने विस्तृत गाइड
+- **AI Workshop Lab**: 2-3 घण्टा व्यावहारिक कार्यशाला जुन AI अनुप्रयोगहरूलाई AZD-डिप्लोययोग्य समाधानमा रूपान्तरण गर्नका लागि
+- **Production AI Best Practices**: स्केलिङ, मोनिटरिङ, र AI वर्कलोडहरूलाई सुरक्षा गर्ने एंटरप्राइज-तयार ढाँचाहरू
+- **AI-Specific Troubleshooting Guide**: Microsoft Foundry Models, Cognitive Services, र AI डिप्लोयमेन्ट समस्याहरूका लागि व्यापक ट्रबलशुटिङ
+- **AI Template Gallery**: जटिलता रेटिङसहित Microsoft Foundry टेम्पलेटहरूको विशेष संग्रह
+- **Workshop Materials**: व्यावहारिक ल्याबहरू र सन्दर्भ सामग्रीहरूसहित पूर्ण कार्यशाला संरचना
 
 #### सुधारिएको
-- **README संरचना**: Microsoft Foundry Discord बाट ४५% समुदाय रुचि डाटासहित AI डेभलपर केन्द्रित
-- **सिकाइ मार्गहरू**: विद्यार्थी र DevOps इन्जिनियरहरूको पारम्परिक मार्गसँग समानान्तर समर्पित AI डेभलपर यात्रा
-- **टेम्प्लेट सिफारिसहरू**: azure-search-openai-demo, contoso-chat, र openai-chat-app-quickstart सहित AI टेम्प्लेटहरू प्रदर्शन गरियो
-- **समुदाय एकीकरण**: AI-विशिष्ट च्यानलहरू र छलफलहरू सहित Discord समुदाय समर्थन सुधारियो
+- **README Structure**: AI-डेभलपर-केन्द्रित जसमा Microsoft Foundry Discord बाट 45% समुदाय रुचिको डेटा समावेश
+- **Learning Paths**: विद्यार्थी र DevOps इन्जिनियरहरूका परम्परागत मार्गहरूसँगसाथै समर्पित AI डेभलपर यात्रा
+- **Template Recommendations**: azure-search-openai-demo, contoso-chat, र openai-chat-app-quickstart समावेश गरी प्रमुख AI टेम्पलेटहरू
+- **Community Integration**: AI-विशेष च्यानल र छलफलहरूसहित सुदृढ Discord समुदाय समर्थन
 
 #### सुरक्षा र उत्पादन फोकस
-- **प्रबन्धित पहिचान ढाँचाहरू**: AI-विशिष्ट प्रमाणीकरण र सुरक्षा कन्फिगरेसनहरू
-- **लागत अनुकूलन**: AI कार्यभारहरूको लागि टोकन प्रयोग ट्र्याकिङ र बजेट नियन्त्रण
-- **बहु-क्षेत्र परिनियोजन**: विश्वव्यापी AI अनुप्रयोग परिनियोजनका रणनीतिहरू
-- **प्रदर्शन अनुगमन**: AI-विशिष्ट मेट्रिक्स र Application Insights एकीकरण
+- **Managed Identity Patterns**: AI-विशेष प्रमाणीकरण र सुरक्षा कन्फिगरेसनहरू
+- **Cost Optimization**: AI वर्कलोडहरूको लागि टोकन उपयोग ट्र्याकिङ र बजेट नियन्त्रणहरू
+- **Multi-Region Deployment**: विश्वव्यापी AI अनुप्रयोग डिप्लोयमेन्टका रणनीतिहरू
+- **Performance Monitoring**: AI-विशेष मेट्रिक्स र Application Insights एकीकरण
 
 #### दस्तावेज गुणस्तर
-- **रैखिक पाठ्यक्रम संरचना**: शुरुआती देखि उन्नत AI परिनियोजन ढाँचाहरूमा तर्कसंगत प्रगति
-- **प्रमाणित URLहरू**: सबै बाह्य रेपो लिंकहरू जाँच र पहुँचयोग्य
-- **पूर्ण सन्दर्भ**: सबै आन्तरिक दस्तावेज लिंकहरू वैध र कार्यशील
-- **उत्पादन तयार**: वास्तविक उदाहरणहरू सहित एंटरप्राइज परिनियोजन ढाँचाहरू
+- **Linear Course Structure**: शुरुवातीदेखि उन्नत AI डिप्लोयमेन्ट ढाँचासम्मको तर्कसंगत प्रगति
+- **Validated URLs**: सबै बाह्य रिपोजिटरी लिंकहरू प्रमाणित र पहुँचयोग्य
+- **Complete Reference**: सबै आन्तरिक दस्तावेज लिंकहरू प्रमाणित र कार्यशील
+- **Production Ready**: वास्तविक-विश्व उदाहरणहरूसहित एंटरप्राइज डिप्लोयमेन्ट ढाँचाहरू
 
 ### [v2.0.0] - 2025-09-09
 
-#### मुख्य परिवर्तनहरू - रेपो पुनर्संरचना र व्यावसायिक सुधार
-**यस संस्करणले रेपो संरचना र सामग्री प्रस्तुतीकरणमा महत्वपूर्ण परिवर्तन ल्याउँछ।**
+#### प्रमुख परिवर्तनहरू - रिपोजिटरी संरचना पुनर्संरचना र व्यावसायिक सुधार
+**यो संस्करणले रिपोजिटरी संरचना र सामग्री प्रस्तुतीकरणमा महत्वपूर्ण समग्र परिमार्जन प्रतिनिधित्व गर्दछ।**
 
 #### थपियो
-- **संरचित सिकाइ संरचना**: सबै दस्तावेज पृष्ठहरूमा अब परिचय, सिकाइ लक्ष्यहरू, र सिकाइ नतिजाहरू अनुभागहरू
-- **नेभिगेसन प्रणाली**: सबै दस्तावेजमा अघिल्लो/अर्को पाठ लिङ्क थपियो जसले मार्गनिर्देशन सिकाइ प्रगति सुनिश्चित गर्दछ
-- **अध्ययन गाइड**: सिकाइ उद्देश्य, अभ्यास अभ्यास, र मूल्याङ्कन सामग्री सहित व्यापक study-guide.md
-- **व्यावसायिक प्रस्तुतीकरण**: पहुँचयोग्यता र व्यावसायिक देखिने गरी सबै इमोजी आइकनहरू हटाइयो
-- **सुधारिएको सामग्री संरचना**: सिकाइ सामग्रीको राम्रो संगठन र प्रवाह
+- **Structured Learning Framework**: सबै दस्तावेज पृष्ठहरूले अब Introduction, Learning Goals, र Learning Outcomes खण्डहरू समावेश गर्छन्
+- **Navigation System**: मार्गदर्शनकर्ता सिकाइ प्रगति को लागि सबै दस्तावेजहरूमा Previous/Next पाठ लिंकहरू थपियो
+- **Study Guide**: सिकाइ लक्ष्यहरू, अभ्यास अभ्यासहरू, र मूल्याङ्कन सामग्रीहरूको साथ व्यापक study-guide.md
+- **Professional Presentation**: पहुँचयोग्यता सुधार र व्यावसायिक देखिनको लागि सबै इमोजी आइकनहरू हटाइयो
+- **Enhanced Content Structure**: सिकाइ सामग्रीहरूको संगठन र प्रवाहमा सुधार
 
-#### परिवर्तनहरू
-- **दस्तावेज ढाँचा**: सबै दस्तावेजलाई स्थिर सिकाइ-केंद्रित संरचनामा मानकीकरण गरियो
-- **नेभिगेसन प्रवाह**: सबै सिकाइ सामग्रीहरूमा तर्कसंगत प्रगति कार्यान्वयन गरियो
-- **सामग्री प्रस्तुतीकरण**: स्पष्ट, व्यावसायिक स्वरूपमा सजावट सामग्री हटाइयो
-- **लिङ्क संरचना**: नयाँ नेभिगेसन प्रणालीलाई समर्थन गर्न सबै आन्तरिक लिङ्कहरू अपडेट गरियो
+#### परिवर्तन गरिएको
+- **Documentation Format**: सबै दस्तावेजलाई सुसंगत सिकाइ-केन्द्रित संरचनासँग मानकीकृत गरियो
+- **Navigation Flow**: सबै सिकाइ सामग्रीहरूमा तर्कसंगत प्रगति लागू गरियो
+- **Content Presentation**: स्पष्ट, व्यावसायिक ढाँचाका लागि सजावटी तत्वहरू हटाइयो
+- **Link Structure**: नयाँ नेभिगेसन प्रणाली समर्थन गर्न सबै आन्तरिक लिंकहरू अपडेट गरियो
 
-#### सुधारिएको
-- **पहुंच योग्यता**: राम्रो स्क्रीन रिडर अनुकूलताको लागि इमोजी निर्भरताहरू हटाइयो
-- **व्यावसायिक उपस्थिति**: एंटरप्राइज सिकाइका लागि सफा, शैक्षिक शैली प्रस्तुति
-- **सिकाइ अनुभव**: प्रत्येक पाठको लागि स्पष्ट उद्देश्य र नतिजा सहित संरचित दृष्टिकोण
-- **सामग्री संगठन**: सम्बन्धित विषयहरू बीच राम्रो तर्कसंगत प्रवाह र सम्बन्ध
+#### सुधार गरियो
+- **Accessibility**: स्क्रिन रिडर अनुकूलताको लागि इमोजी निर्भरतालाई हटाइयो
+- **Professional Appearance**: एंटरप्राइज सिकाइको लागि उपयुक्त सफा, शैक्षिक-शैली प्रस्तुति
+- **Learning Experience**: प्रत्येक पाठका लागि स्पष्ट उद्देश्य र नतिजासहित संरचित अभिगमन
+- **Content Organization**: सम्बन्धित विषयबीच राम्रो तर्कसंगत प्रवाह र सम्बन्ध
 
 ### [v1.0.0] - 2025-09-09
 
-#### प्रारम्भिक विमोचन - व्यावस्थित AZD सिकाइ रेपो
+#### प्रारम्भिक रिलिज - व्यापक AZD सिकाइ रिपोजिटरी
 
 #### थपियो
-- **मूल दस्तावेज संरचना**
-  - पूरा स्टार्ट गाइड श्रृंखला
-  - व्यापक परिनियोजन र प्रावधान दस्तावेज
-  - विस्तृत समस्या समाधान स्रोत र डिबग दिशानिर्देशहरू
-  - पूर्व-परिनियोजन प्रमाणीकरण उपकरणहरू र प्रक्रिया
+- **Core Documentation Structure**
+  - पूर्ण getting-started गाइड श्रृंखला
+  - व्यापक डिप्लोयमेन्ट र प्रोभिजनिङ दस्तावेजहरू
+  - विस्तृत ट्रबलशुटिङ स्रोतहरू र डिबगिङ गाइडहरू
+  - पूर्व-डिप्लोयमेन्ट प्रमाणिकरण उपकरणहरू र प्रक्रियाहरू
 
-- **स्टार्ट मोड्युल**
-  - AZD आधारहरू: मूल अवधारणाहरू र पदावली
-  - स्थापना गाइड: प्लेटफर्म विशिष्ट सेटअप निर्देशनहरू
-  - कन्फिगरेसन गाइड: वातावरण सेटअप र प्रमाणीकरण
-  - पहिलो परियोजना ट्युटोरियल: चरण-द्वारा-चरण व्यावहारिक सिकाइ
+- **Getting Started Module**
+  - AZD आधारभूत: मूल अवधारणाहरू र शब्दावली
+  - Installation Guide: प्लेटफर्म-विशिष्ट सेटअप निर्देशनहरू
+  - Configuration Guide: वातावरण सेटअप र प्रमाणीकरण
+  - First Project Tutorial: चरण-दर-चरण व्यावहारिक सिकाइ
 
-- **परिनियोजन र प्रावधान मोड्युल**
-  - परिनियोजन गाइड: पूर्ण कार्यप्रवाह दस्तावेज
-  - प्रावधान गाइड: Bicep सँग इन्फ्रास्ट्रक्चर एज कोड
-  - उत्पादन परिनियोजनहरूको लागि उत्कृष्ट अभ्यासहरू
+- **Deployment and Provisioning Module**
+  - Deployment Guide: पूर्ण वर्कफ्लो दस्तावेजीकरण
+  - Provisioning Guide: Bicep संग Infrastructure as Code
+  - उत्पादन डिप्लोयमेन्टहरूको लागि उत्तम अभ्यासहरू
   - बहु-सेवा आर्किटेक्चर ढाँचाहरू
 
-- **पूर्व-परिनियोजन प्रमाणीकरण मोड्युल**
-  - क्षमता योजना: Azure स्रोत उपलभ्दता प्रमाणीकरण
-  - SKU चयन: सेवा तह मार्गदर्शनहरू
-  - पूर्व-उडान चेकहरू: स्वचालित प्रमाणीकरण स्क्रिप्टहरू (PowerShell र Bash)
+- **Pre-deployment Validation Module**
+  - Capacity Planning: Azure स्रोत उपलब्धता प्रमाणिकरण
+  - SKU Selection: व्यापक सेवा टियर मार्गदर्शन
+  - Pre-flight Checks: स्वचालित प्रमाणिकरण स्क्रिप्टहरू (PowerShell र Bash)
   - लागत अनुमान र बजेट योजना उपकरणहरू
 
-- **समस्या समाधान मोड्युल**
-  - सामान्य समस्या: प्रायः देखिने समस्याहरू र समाधानहरू
-  - डिबग गाइड: प्रणालीगत समस्या समाधान विधिहरू
-  - उन्नत डायगnostic प्रविधिहरू र उपकरणहरू
-  - प्रदर्शन अनुगमन र अनुकूलन
+- **Troubleshooting Module**
+  - Common Issues: साधारण रूपमा देखा पर्ने समस्या र समाधानहरू
+  - Debugging Guide: प्रणालीगत ट्रबलशुटिङ मेथडोलोजीहरू
+  - उन्नत डायग्नोस्टिक प्रविधिहरू र उपकरणहरू
+  - प्रदर्शन निगरानी र अनुकूलन
 
-- **स्रोत र सन्दर्भहरू**
-  - आदेश छिटो सन्दर्भ: आवश्यक आदेशहरूको छिटो सन्दर्भ
-  - शब्दावली: व्यापक पदावली र संक्षिप्ताक्षर परिभाषाहरू
-  - FAQ: सामान्य प्रश्नहरूको विस्तृत उत्तरहरू
-  - बाह्य स्रोत लिङ्कहरू र समुदाय सम्बन्धहरू
+- **Resources and References**
+  - Command Cheat Sheet: आवश्यक कमाण्डहरूको छिटो सन्दर्भ
+  - Glossary: व्यापक शब्दावली र संक्षेपाक्षर परिभाषाहरू
+  - FAQ: साधारण प्रश्नहरूका विस्तृत उत्तरहरू
+  - बाह्य स्रोत लिंकहरू र समुदाय सम्बन्धहरू
 
-- **उदाहरण र टेम्प्लेटहरू**
-  - सरल वेब अनुप्रयोग उदाहरण
-  - स्थिर वेबसाइट परिनियोजन टेम्प्लेट
+- **Examples and Templates**
+  - सादा वेब अनुप्रयोग उदाहरण
+  - स्टाटिक वेबसाइट डिप्लोयमेन्ट टेम्पलेट
   - कन्टेनर अनुप्रयोग कन्फिगरेसन
   - डेटाबेस एकीकरण ढाँचाहरू
   - माइक्रोसर्भिस आर्किटेक्चर उदाहरणहरू
-  - सर्भरलेस फंक्सन कार्यान्वयनहरू
+  - सर्भरलेस फङ्क्शन कार्यान्वयनहरू
 
 #### विशेषताहरू
-- **बहु-प्लेटफर्म समर्थन**: Windows, macOS, र Linux को लागि स्थापना र कन्फिगरेसन गाइडहरू
-- **धेरै दक्षता स्तरहरू**: विद्यार्थीदेखि व्यावसायिक विकासकर्तालाई लक्षित सामग्री
-- **व्यावहारिक फोकस**: व्यावहारिक उदाहरणहरू र वास्तविक संसार परिदृश्यहरू
-- **सम्पूर्ण आवरण**: आधारभूत अवधारणादेखि उन्नत एंटरप्राइज ढाँचासम्म
-- **सुरक्षा-प्रथम दृष्टिकोण**: सम्पूर्ण सामग्रीभित्र सुरक्षा उत्कृष्ट अभ्यासहरू
-- **लागत अनुकूलन**: लागत-कुशल परिनियोजन र स्रोत व्यवस्थापन मार्गदर्शन
+- **Multi-Platform Support**: Windows, macOS, र Linux का लागि स्थापना र कन्फिगरेसन गाइडहरू
+- **Multiple Skill Levels**: विद्यार्थीदेखि व्यावसायिक डेभलपरहरूसम्मका लागि डिजाइन गरिएको सामग्री
+- **Practical Focus**: व्यावहारिक उदाहरणहरू र वास्तविक-विश्व परिदृश्यहरू
+- **Comprehensive Coverage**: आधारभूत अवधारणाहरूदेखि उन्नत एंटरप्राइज ढाँचासम्म
+- **Security-First Approach**: सुरक्षा सर्वोत्कृष्ट अभ्यासहरू समग्रमा समावेश गरिएका
+- **Cost Optimization**: लागत-प्रभावकारी डिप्लोयमेन्ट र स्रोत व्यवस्थापनका लागि मार्गदर्शन
 
 #### दस्तावेज गुणस्तर
-- **विस्तृत कोड उदाहरणहरू**: व्यावहारिक, परीक्षण गरिएका कोड नमूनाहरू
-- **चरण-द्वारा-चरण निर्देशनहरू**: स्पष्ट, कार्यनीतिपूर्ण मार्गदर्शन
-- **सम्पूर्ण त्रुटि ह्यान्डलिङ**: सामान्य समस्याहरूका लागि समस्या समाधान
-- **श्रेष्ठ अभ्यास समेकन**: उद्योग मापदण्डहरू र सिफारिसहरू
-- **संस्करण अनुकूलता**: पछिल्लो Azure सेवाहरू र azd सुविधासँग अद्यावधिक
+- **Detailed Code Examples**: व्यावहारिक, परीक्षण गरिएको कोड नमूनाहरू
+- **Step-by-Step Instructions**: स्पष्ट, कार्यान्वयनयोग्य मार्गदर्शन
+- **Comprehensive Error Handling**: साधारण समस्याहरूको लागि ट्रबलशुटिङ
+- **Best Practices Integration**: उद्योग मापदण्डहरू र सिफारिसहरू
+- **Version Compatibility**: नविनतम Azure सेवाहरू र azd सुविधाहरू संग अद्यावधिक
 
-## योजनाबद्ध भविष्य सुधारहरू
+## भविष्य योजना गरिएका सुधारहरू
 
-### संस्करण 3.1.0 (योजना भित्र)
+### Version 3.1.0 (Planned)
 #### AI प्लेटफर्म विस्तार
-- **बहु-मोडेल समर्थन**: Hugging Face, Azure Machine Learning, र अनुकूलित मोडेलहरूको लागि एकीकरण ढाँचाहरू
-- **AI एजेन्ट फ्रेमवर्क**: LangChain, Semantic Kernel, र AutoGen परिनियोजन टेम्प्लेटहरू
-- **उन्नत RAG ढाँचाहरू**: Azure AI Search बाहिरका भेक्टर डाटाबेस विकल्पहरू (Pinecone, Weaviate, आदि)
-- **AI अवलोकनयोग्यता**: मोडेल प्रदर्शन, टोकन प्रयोग, र प्रतिक्रिया गुणस्तरको विस्तारित अनुगमन
+- **Multi-Model Support**: Hugging Face, Azure Machine Learning, र कस्टम मोडेलहरूको लागि एकीकरण ढाँचाहरू
+- **AI Agent Frameworks**: LangChain, Semantic Kernel, र AutoGen डिप्लोयमेन्टहरूका लागि टेम्पलेटहरू
+- **Advanced RAG Patterns**: Azure AI Search बाहेकका भेक्टर डाटाबेस विकल्पहरू (Pinecone, Weaviate, आदि)
+- **AI Observability**: मोडेल प्रदर्शन, टोकन प्रयोग, र प्रतिक्रिया गुणस्तरको लागि सुदृढ निगरानी
 
 #### डेभलपर अनुभव
-- **VS Code विस्तार**: AZD + Microsoft Foundry विकास अनुभव समेकित
-- **GitHub Copilot एकीकरण**: AI-सहायता प्राप्त AZD टेम्प्लेट सिर्जना
-- **इन्टरएक्टिभ ट्युटोरियलहरू**: AI परिदृश्यहरूको लागि स्वचालित प्रमाणीकरण सहित व्यावहारिक कोडिंग अभ्यासहरू
-- **भिडियो सामग्रीहरू**: भिजुअल सिक्नेहरूका लागि AI परिनियोजनमा केन्द्रित अतिरिक्त भिडियो ट्युटोरियलहरू
+- **VS Code Extension**: एकीकृत AZD + Microsoft Foundry विकास अनुभव
+- **GitHub Copilot Integration**: AI-ले सहयोग गरिने AZD टेम्पलेट निर्माण
+- **Interactive Tutorials**: AI परिदृश्यहरूको लागि स्वचालित प्रमाणिकरणसहित व्यावहारिक कोडिङ अभ्यासहरू
+- **Video Content**: AI डिप्लोयमेन्टहरूमा केन्द्रित दृश्य शिक्षार्थीहरूका लागि पूरक भिडियो ट्युटोरियलहरू
 
-### संस्करण 4.0.0 (योजना भित्र)
+### Version 4.0.0 (Planned)
 #### एंटरप्राइज AI ढाँचाहरू
-- **शासन फ्रेमवर्क**: AI मोडेल शासन, अनुपालन, र परीक्षण ट्रेलहरू
-- **बहु-टेनेन्ट AI**: पृथक AI सेवाहरू सहित बहु ग्राहकहरूलाई सेवा गर्ने ढाँचाहरू
-- **एज AI परिनियोजन**: Azure IoT Edge र कन्टेनर इन्स्टेन्सहरूसँग एकीकरण
-- **हाइब्रिड क्लाउड AI**: बहु-क्लाउड र हाइब्रिड परिनियोजन ढाँचाहरू AI कार्यभारहरूका लागि
+- **Governance Framework**: AI मोडेल गभर्नन्स, अनुपालन, र अडिट ट्रेलहरू
+- **Multi-Tenant AI**: अलग-थलग AI सेवाहरूमार्फत धेरै ग्राहकहरूलाई सेवा प्रदान गर्ने ढाँचाहरू
+- **Edge AI Deployment**: Azure IoT Edge र कन्टेनर इन्स्टेन्सहरूसँग एकीकरण
+- **Hybrid Cloud AI**: AI वर्कलोडहरूको लागि मल्टि-क्लाउड र हाइब्रिड डिप्लोयमेन्ट ढाँचाहरू
 
-#### उन्नत विशेषताहरू
-- **AI पाइपलाइन अटोमेशन**: Azure Machine Learning पाइपलाइनहरूसँग MLOps एकीकरण
-- **उन्नत सुरक्षा**: ज़ीरो-ट्रस्ट ढाँचाहरू, निजी अन्तबिन्दुहरू, र उन्नत खतरा सुरक्षा
-- **प्रदर्शन अनुकूलन**: उच्च-थ्रूपुट AI अनुप्रयोगहरूको लागि उन्नत ट्युनिंग र स्केलिङ रणनीतिहरू
-- **वैश्विक वितरण**: AI अनुप्रयोगहरूको लागि सामग्री वितरण र एज क्याचिङ ढाँचाहरू
+#### उन्नत सुविधाहरू
+- **AI Pipeline Automation**: Azure Machine Learning पाइपलाइनहरूसँग MLOps एकीकरण
+- **Advanced Security**: Zero-trust ढाँचाहरू, निजी endpoints, र उन्नत थ्रेट सुरक्षा
+- **Performance Optimization**: उच्च-थ्रूपुट AI अनुप्रयोगहरूको लागि उन्नत ट्युनिङ र स्केलिङ रणनीतिहरू
+- **Global Distribution**: AI अनुप्रयोगहरूको लागि कन्टेन्ट डेलिभरी र एdge क्यासिङ ढाँचाहरू
 
-### संस्करण 3.0.0 (योजना भित्र) - वर्तमान विमोचनद्वारा प्रतिस्थापित
-#### प्रस्तावित थपहरू - अब v3.0.0 मा कार्यान्वयन गरियो
-- ✅ **AI-केंद्रित सामग्री**: व्यापक Microsoft Foundry एकीकरण (पूरा)
-- ✅ **इन्टरएक्टिभ ट्युटोरियलहरू**: व्यावहारिक AI कार्यशाला प्रयोगशाला (पूरा)
-- ✅ **उन्नत सुरक्षा मोड्युल**: AI-विशिष्ट सुरक्षा ढाँचाहरू (पूरा)
-- ✅ **प्रदर्शन अनुकूलन**: AI कार्यभार ट्युनिङ रणनीति (पूरा)
+### Version 3.0.0 (Planned) - Superseded by Current Release
+#### प्रस्तावित थपहरू - अब v3.0.0 मा लागू गरियो
+- ✅ **AI-Focused Content**: व्यापक Microsoft Foundry एकीकरण (सम्पूर्ण)
+- ✅ **Interactive Tutorials**: व्यावहारिक AI कार्यशाला ल्याब (सम्पूर्ण)
+- ✅ **Advanced Security Module**: AI-विशेष सुरक्षा ढाँचाहरू (सम्पूर्ण)
+- ✅ **Performance Optimization**: AI वर्कलोड ट्युनिङ रणनीतिहरू (सम्पूर्ण)
 
-### संस्करण 2.1.0 (योजना भित्र) - आंशिक रूपमा v3.0.0 मा कार्यान्वयन
-#### साना सुधारहरू - केहि हालको विमोचनमा पूरा भएका
-- ✅ **थप उदाहरणहरू**: AI-केंद्रित परिनियोजन परिदृश्यहरू (पूरा)
-- ✅ **विस्तारित FAQ**: AI-विशिष्ट प्रश्नहरू र समस्या समाधान (पूरा)
-- **उपकरण एकीकरण**: सुधारिएको IDE र सम्पादक एकीकरण गाइडहरू
-- ✅ **अनुगमन विस्तार**: AI-विशिष्ट अनुगमन र चेतावनी ढाँचाहरू (पूरा)
+### Version 2.1.0 (Planned) - आंशिक रूपमा v3.0.0 मा लागू भयो
+#### साना सुधारहरू - केही हालको रिलिजमा पूरा
+- ✅ **Additional Examples**: AI-केन्द्रित डिप्लोयमेन्ट परिदृश्यहरू (सम्पूर्ण)
+- ✅ **Extended FAQ**: AI-विशेष प्रश्नहरू र ट्रबलशुटिङ (सम्पूर्ण)
+- **Tool Integration**: IDE र सम्पादक एकीकरण गाइडहरूमा सुधार
+- ✅ **Monitoring Expansion**: AI-विशेष निगरानी र अलर्टिङ ढाँचाहरू (सम्पूर्ण)
 
-#### अझै भविष्यका रिलिजको लागि योजना
-- **मोबाइलदेखि अनुकूल दस्तावेज**: मोबाइल सिकाइका लागि प्रतिक्रिया डिजाइन
-- **अफलाइन पहुँच**: डाउनलोड गर्न मिल्ने दस्तावेज प्याकेजहरू
-- **उन्नत IDE एकीकरण**: AZD + AI कार्यप्रवाहहरूका लागि VS Code विस्तार
-- **समुदाय ड्यासबोर्ड**: वास्तविक-समय समुदाय मेट्रिक्स र योगदान ट्र्याकिंग
+#### अझै आगामी रिलिजका लागि योजना गरिएको
+- **Mobile-Friendly Documentation**: मोबाइल सिकाइका लागि उत्तरदायी डिजाइन
+- **Offline Access**: डाउनलोड गर्न मिल्ने दस्तावेज प्याकेजहरू
+- **Enhanced IDE Integration**: AZD + AI वर्कफ्लोहरूको लागि VS Code विस्तार
+- **Community Dashboard**: वास्तविक-समय समुदाय मेट्रिक्स र योगदान ट्र्याकिङ
 
-## चेंजलॉगमा योगदान
+## Changelog मा योगदान
 
-### परिवर्तन रिपोर्टिङ
-यस रेपोजिटरीमा योगदान गर्दा कृपया सुनिश्चित गर्नुहोस् कि चेंजलॉग प्रविष्टिहरूले समावेश गरेको छ:
+### परिवर्तन रिपोर्ट गर्ने तरिका
+जब यस रिपोजिटरीमा योगदान गर्दा, कृपया सुनिश्चित गर्नुहोस् कि चेंजलॉग प्रविष्टिहरूमा समावेश छन्:
 
-1. **संस्करण नम्बर**: सेम्यान्टिक संस्करण अनुसार (major.minor.patch)
-2. **मिति**: रिलिज वा अपडेट मिति YYYY-MM-DD ढाँचामा
-3. **श्रेणी**: थपियो, परिवर्तन, निष्कासित, हटाइयो, सुधारियो, सुरक्षा
-4. **स्पष्ट विवरण**: के परिवर्तन भयो संक्षिप्त वर्णन
-5. **प्रभाव मूल्याङ्कन**: परिवर्तनहरूले वर्तमान प्रयोगकर्तामा कस्तो प्रभाव पार्छ
+1. **Version Number**: semantic versioning (major.minor.patch) अनुसरण गर्दै
+2. **Date**: रिलिज वा अपडेट मिति YYYY-MM-DD ढाँचामा
+3. **Category**: Added, Changed, Deprecated, Removed, Fixed, Security
+4. **Clear Description**: के परिवर्तन भयो भन्ने संक्षेप विवरण
+5. **Impact Assessment**: परिवर्तनहरूले विद्यमान प्रयोगकर्तामा कसरी प्रभाव पार्छ
 
-### परिवर्तन श्रेणिहरू
+### परिवर्तन वर्गहरू
 
-#### थपियो
-- नयाँ सुविधाहरू, दस्तावेज अनुभागहरू, वा क्षमता
-- नयाँ उदाहरणहरू, टेम्प्लेटहरू, वा सिकाइ स्रोतहरू
-- थप उपकरणहरू, स्क्रिप्टहरू, वा युटिलिटीहरू
+#### थपिएको
+- नयाँ सुविधाहरू, दस्तावेज खण्डहरू, वा क्षमता
+- नयाँ उदाहरणहरू, टेम्पलेटहरू, वा सिकाइ स्रोतहरू
+- थप उपकरणहरू, स्क्रिप्टहरू, वा युटिलिटीज
 
-#### परिवर्तन भयो
-- विद्यमान कार्यक्षमतामा वा दस्तावेजमा संशोधनहरू
-- स्पष्टता वा शुद्धता सुधारका लागि अपडेटहरू
-- सामग्री वा संगठनको पुनःसंरचना
+#### परिवर्तन गरिएको
+- अवस्थित कार्यक्षमता वा दस्तावेजमा संशोधन
+- स्पष्टता वा सटीकता सुधार गर्नका लागि अद्यावधिक
+- सामग्री वा संगठनको पुनर्संरचना
 
-#### निष्कासित
-- फिचर या तरिकाहरू जुन चरणबद्ध रूपमा हटाइंदैछ
-- हटाउनका लागि तालिका गरिएको दस्तावेज भागहरू
-- राम्रो विकल्प भएका विधिहरू
+#### अप्रचलित
+- फेसिङ आउट गरिँदै गरेका सुविधा वा तरिकाहरू
+- हटाउने तालिकामा रहेका दस्तावेज खण्डहरू
+- जसका लागि राम्रो विकल्पहरू भएका विधिहरू
 
-#### हटाइयो
-- फिचर, दस्तावेज, वा उदाहरणहरू जुन अब सान्दर्भिक छैनन्
-- पुराना जानकारी वा निष्कासित तरिकाहरू
-- दोहोरिएको वा एकीकृत सामग्री
+#### हटाइएको
+- अब प्रासंगिक नभएका सुविधा, दस्तावेज, वा उदाहरणहरू
+- पुरानो जानकारी वा अप्रचलित तरिकाहरू
+- अनावश्यक वा एकत्रित सामग्री
 
-#### सुधारियो
-- दस्तावेज वा कोडमा त्रुटि सुधारहरू
-- रिपोर्ट गरिएको समस्याहरू वा मुद्दाहरू समाधान
-- शुद्धता वा कार्यक्षमता सुधार
+#### ठीक गरियो
+- दस्तावेज वा कोडमा त्रुटिहरूको सुधार
+- रिपोर्ट गरिएका समस्याहरू वा त्रुटिहरूको समाधान
+- सटीकता वा कार्यक्षमतामा सुधार
 
 #### सुरक्षा
-- सुरक्षा सम्बन्धी सुधार वा समाधानहरू
-- सुरक्षा उत्कृष्ट अभ्यासहरूको अपडेट
-- सुरक्षा जोखिमहरूको समाधान
+- सुरक्षा सम्बन्धी सुधार वा फिक्सहरू
+- सुरक्षा सर्वोत्कृष्ट अभ्यासहरूको अद्यावधिक
+- सुरक्षा भल्नरेबिलिटीहरूको समाधान
 
-### सेम्यान्टिक संस्करणनिर्देशन
+### सेम्यान्टिक भर्सनिङ मार्गदर्शन
 
 #### मुख्य संस्करण (X.0.0)
-- प्रयोगकर्ताबाट कार्य चाहिने महत्वपूर्ण परिवर्तनहरू
-- सामग्री वा संगठनको महत्वपूर्ण पुनःसंरचना
-- आधारभूत दृष्टिकोण वा पद्दति परिवर्तन गर्ने परिवर्तनहरू
+- प्रयोगकर्ताले कदम चाल्नुपर्ने ब्रेकिङ परिवर्तनहरू
+- सामग्री वा संगठनको महत्वपूर्ण पुनर्संरचना
+- जसले मूल दृष्टिकोण वा कार्यविधिलाई परिवर्तन गर्छ
 
-#### साना संस्करण (X.Y.0)
-- नयाँ सुविधाहरू वा सामग्री थपहरू
-- पछिल्लो अनुकूलन कायम राख्ने सुधारहरू
+#### सानो संस्करण (X.Y.0)
+- नयाँ सुविधाहरू वा सामग्री थप
+- पूर्व-अनुकूलता कायम राख्ने सुधारहरू
 - थप उदाहरणहरू, उपकरणहरू, वा स्रोतहरू
 
-#### प्‍याच संस्करण (X.Y.Z)
+#### पैच संस्करण (X.Y.Z)
 - बग फिक्स र सुधारहरू
-- विद्यमान सामग्रीमा साना सुधारहरू
+- अवस्थित सामग्रीमा साना सुधारहरू
 - स्पष्टिकरण र साना सुधारहरू
 
 ## समुदाय प्रतिक्रिया र सुझावहरू
 
-हामी यस सिकाइ स्रोत सुधार गर्न सक्रिय रूपमा समुदाय प्रतिक्रिया प्रोत्साहित गर्छौं:
+हामी यस सिकाइ स्रोत सुधार गर्न सक्रिय रूपमा समुदायको प्रतिक्रिया प्रोत्साहित गर्दछौं:
 
-### कसरी प्रतिक्रिया दिनुहोस
-- **GitHub Issues**: समस्या रिपोर्ट गर्नुहोस् वा सुधार सुझावहरू दिनुहोस् (AI-विशिष्ट मुद्दाहरू स्वागतयोग्य)
-- **Discord छलफलहरू**: आइडिया साझा गर्नुहोस् र Microsoft Foundry समुदायमा सहभागी हुनुहोस्
-- **Pull Requests**: विशेष गरी AI टेम्प्लेटहरू र गाइडहरूमा प्रत्यक्ष सुधारहरू योगदान गर्नुहोस्
-- **Microsoft Foundry Discord**: AZD + AI छलफलका लागि #Azure च्यानलमा सहभागिता जनाउनुहोस्
-- **समुदाय फोरमहरू**: व्यापक Azure डेभलपर छलफलमा सहभागी हुनुहोस्
+### प्रतिक्रिया कसरी दिनुहोस्
+- **GitHub Issues**: समस्याहरू रिपोर्ट गर्नुहोस् वा सुधारहरू सुझाव दिनुहोस् (AI-विशेष मुद्दाहरू स्वागत छ)
+- **Discord Discussions**: विचारहरू साझा गर्नुहोस् र Microsoft Foundry समुदायसँग संलग्न हुनुहोस्
+- **Pull Requests**: सामग्रीमा सिधा सुधारहरू योगदान गर्नुहोस्, विशेष गरी AI टेम्पलेट र गाइडहरू
+- **Microsoft Foundry Discord**: AZD + AI छलफलहरूको लागि #Azure च्यानलमा सहभागी हुनुहोस्
+- **Community Forums**: व्यापक Azure डेभलपर छलफलहरूमा भाग लिनुहोस्
 
-### प्रतिक्रिया श्रेणिहरू
-- **AI सामग्री शुद्धता**: AI सेवा एकीकरण र परिनियोजन जानकारी सुधार
-- **सिकाइ अनुभव**: बेहतर AI डेभलपर सिकाइ प्रवाहका लागि सुझावहरू
-- **निम्न AI सामग्री**: थप AI टेम्प्लेटहरू, ढाँचाहरू, वा उदाहरणहरूको अनुरोध
-- **पहुंच प्रप्तता**: विविध सिकाइ आवश्यकताहरूको लागि सुधारहरू
-- **AI उपकरण एकीकरण**: AI विकास कार्यप्रवाह एकीकरणका लागि सुझावहरू
-- **उत्पादन AI ढाँचाहरू**: एंटरप्राइज AI परिनियोजन ढाँचाहरूको अनुरोधहरू
+### प्रतिक्रिया वर्गहरू
+- **AI Content Accuracy**: AI सेवा एकीकरण र डिप्लोयमेन्ट जानकारीमा सुधारहरू
+- **Learning Experience**: AI डेभलपर सिकाइ प्रवाह सुधारका लागि सुझावहरू
+- **Missing AI Content**: अतिरिक्त AI टेम्पलेट, ढाँचा, वा उदाहरणहरूको अनुरोधहरू
+- **Accessibility**: विविध सिकाइ आवश्यकताका लागि सुधार
+- **AI Tool Integration**: राम्रो AI विकास वर्कफ्लो एकीकरणका लागि सुझावहरू
+- **Production AI Patterns**: एंटरप्राइज AI डिप्लोयमेन्ट ढाँचाका अनुरोधहरू
 
 ### प्रतिक्रिया प्रतिबद्धता
-- **मुद्दा प्रतिक्रिया**: रिपोर्ट गरिएको समस्याहरूमा ४८ घण्टा भित्र
-- **विशेषता अनुरोधहरू**: एक हप्ताभित्र मूल्याङ्कन
-- **समुदाय योगदानहरू**: एक हप्ताभित्र समीक्षा
-- **सुरक्षा मुद्दाहरू**: तत्काल प्राथमिकता र छिटो प्रतिक्रिया
+- **Issue Response**: रिपोर्ट गरिएका समस्याहरूका लागि ४८ घन्टाभित्र
+- **Feature Requests**: एक हप्ताभित्र मूल्याङ्कन
+- **Community Contributions**: एक हप्ताभित्र समीक्षा
+- **Security Issues**: तात्कालिक प्राथमिकता र तीव्र गरिएको प्रतिक्रिया
 
-## मर्मत समयतालिका
+## मर्मत तालिका
 
 ### नियमित अपडेटहरू
-- **मासिक समीक्षा**: सामग्री शुद्धता र लिङ्क जाँच
-- **त्रैमासिक अपडेटहरू**: महत्वपूर्ण सामग्री थप र सुधारहरू
-- **छमाही समीक्षा**: व्यापक पुनःसंरचना र सुधार
-- **वार्षिक विमोचनहरू**: महत्वपूर्ण संस्करण अपडेटहरू र सुधारहरू
+- **Monthly Reviews**: सामग्री सटीकता र लिंक प्रमाणिकरण
+- **Quarterly Updates**: प्रमुख सामग्री थप र सुधारहरू
+- **Semi-Annual Reviews**: व्यापक पुनर्संरचना र सुधार
+- **Annual Releases**: महत्वपूर्ण सुधारहरू सहित प्रमुख संस्करण अद्यावधिकहरू
 
-### अनुगमन र गुणस्तर आश्वासन
-- **स्वचालित परीक्षण**: कोड उदाहरण र लिङ्कहरूको नियमित प्रमाणीकरण
-- **समुदाय प्रतिक्रिया समेकन**: प्रयोगकर्ताको सुझावहरूको नियमित समावेशीकरण
-- **प्रविधि अपडेटहरू**: नवीनतम Azure सेवाहरू र azd संस्करणहरूसँग समन्वयन
-- **पहुंच योग्यता अडिटहरू**: समावेशी डिजाइन सिद्धान्तहरूको नियमित समीक्षा
+### निगरानी र गुणस्तर सुनिश्चितता
+- **Automated Testing**: कोड उदाहरण र लिंकहरूको नियमित प्रमाणिकरण
+- **Community Feedback Integration**: प्रयोगकर्ता सुझावहरूको नियमित समावेश
+- **Technology Updates**: नविनतम Azure सेवाहरू र azd रिलिजहरूसँग सिङ्गत
+- **Accessibility Audits**: समावेशी डिजाइन सिद्धान्तहरूको लागि नियमित समीक्षा
 
 ## संस्करण समर्थन नीति
 
 ### हालको संस्करण समर्थन
-- **भर्खरको मुख्य संस्करण**: नियमित अपडेट सहित पूर्ण समर्थन
-- **अघिल्लो मुख्य संस्करण**: सुरक्षा अपडेट र महत्वपूर्ण सुधारहरू १२ महिनाका लागि
-- **पुराना संस्करणहरू**: केबल समुदायको समर्थन, कुनै आधिकारिक अपडेट छैन
+- **Latest Major Version**: नियमित अपडेटहरू सहित पूर्ण समर्थन
+- **Previous Major Version**: १२ महिनाका लागि सुरक्षा अपडेट र महत्त्वपूर्ण फिक्सहरू
+- **Legacy Versions**: केवल समुदाय समर्थन, कुनै आधिकारिक अद्यावधिक छैन
 
-### स्थानान्तरण मार्गदर्शन
-जब मुख्य संस्करणहरू रिलिज हुन्छन्, हामी प्रदान गर्छौं:
-- **स्थानान्तरण मार्गदर्शनहरू**: चरण-द्वारा-चरण ट्रान्जिसन निर्देशनहरू
-- **अनुपयुक्तता नोटहरू**: तोड्ने परिवर्तनहरूको विवरण
-- **उपकरण समर्थन**: स्थानान्तरणमा सहयोग गर्न स्क्रिप्ट वा युटिलिटीहरू
-- **समुदाय समर्थन**: स्थानान्तरण प्रश्नहरूको लागि समर्पित फोरमहरू
+### माइग्रेशन मार्गदर्शन
+जब प्रमुख संस्करणहरू जारी गरिन्छ, हामी प्रदान गर्छौं:
+- **Migration Guides**: चरण-दर-चरण संक्रमण निर्देशनहरू
+- **Compatibility Notes**: ब्रेकिङ परिवर्तनहरूका बारेमा विवरण
+- **Tool Support**: माइग्रेशनमा सहयोग गर्नका लागि स्क्रिप्टहरू वा युटिलिटीज
+- **Community Support**: माइग्रेशन प्रश्नहरूका लागि समर्पित फोरमहरू
 
 ---
 
 **नेभिगेसन**
-- **अघिल्लो पाठ**: [अध्ययन गाइड](resources/study-guide.md)
-- **अर्को पाठ**: फर्कनुहोस् [मुख्य README](README.md)
+- **अघिल्लो पाठ**: [Study Guide](resources/study-guide.md)
+- **अर्को पाठ**: फर्किनुहोस् [Main README](README.md)
 
-**अद्यावधिक रहनुहोस्**: नयाँ रिलीजहरू र सिकाइ सामग्रीहरूमा महत्वपूर्ण अपडेटहरूको लागि यस रिपोजिटोरीलाई अनुगमन गर्नुहोस्।
+**Stay Updated**: नयाँ रिलीजहरू र सिकाइ सामग्रीहरूमा महत्वपूर्ण अद्यावधिकहरूको सूचनाका लागि यस रिपोजिटरीलाई निगरानी गर्नुहोस्।
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **अस्वीकरण**:
-यो दस्तावेज AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) प्रयोग गरी अनुवाद गरिएको हो। हामी शुद्धताका लागि प्रयास गर्छौं, तर कृपया सम्झनुहोस् कि स्वचालित अनुवादमा त्रुटिहरु वा अशुद्धिहरु हुन सक्छन्। मूल दस्तावेज यसको मूल भाषामा नै अधिकारिक स्रोत मानिनु पर्छ। आवश्यक जानकारीको लागि, पेशेवर मानव अनुवाद सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट हुने कुनै पनि गलतफहमी वा गलत व्याख्याको लागि हामी जिम्मेवार छैनौं।
+यो दस्तावेज़ AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) प्रयोग गरेर अनुवाद गरिएको हो। हामी सही हुन प्रयास गर्छौं, तर कृपया जानकार हुनुस् कि स्वचालित अनुवादमा त्रुटिहरू वा अशुद्धताहरू हुन सक्छन्। मूल दस्तावेज़ यसको मूल भाषामा आधिकारिक स्रोत मानिनुपर्छ। महत्वपूर्ण जानकारीका लागि व्यावसायिक मानव अनुवाद सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न कुनै पनि गलत बुझाइ वा त्रुटिको लागि हामी जिम्मेवार छैनौं।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

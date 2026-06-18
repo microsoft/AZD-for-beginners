@@ -1,47 +1,47 @@
-# AZD सँग Azure स्रोतहरू प्रदान गर्ने
+# AZD प्रयोग गरेर Azure स्रोतहरू प्रावधान गर्ने
 
-**अध्याय नेभिगेसन:**
-- **📚 कोर्स गृहपृष्ठ**: [AZD For Beginners](../../README.md)
-- **📖 वर्तमान अध्याय**: अध्याय ४ - कोड रूपमा पूर्वाधार र परिनियोजन
-- **⬅️ अघिल्लो**: [Deployment Guide](deployment-guide.md)
-- **➡️ अर्को अध्याय**: [अध्याय ५: मल्टि-एजेन्ट AI समाधानहरू](../../examples/retail-scenario.md)
-- **🔧 सम्बन्धित**: [अध्याय ६: पूर्व-परिनियोजन प्रमाणीकरण](../chapter-06-pre-deployment/capacity-planning.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD आरम्भकर्ताहरूको लागि](../../README.md)
+- **📖 Current Chapter**: अध्याय 4 - कोडको रूपमा पूर्वधार र परिनियोजन
+- **⬅️ Previous**: [Deployment Guide](deployment-guide.md)
+- **➡️ Next Chapter**: [अध्याय 5: बहु-एजेन्ट AI समाधानहरू](../../examples/retail-scenario.md)
+- **🔧 Related**: [अध्याय 6: पूर्व-परिनियोजन मान्यकरण](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## परिचय
 
-यो विस्तृत मार्गदर्शनले Azure Developer CLI प्रयोग गरेर Azure स्रोतहरू प्रदान र व्यवस्थापन गर्ने बारे सबै कुरा समेट्छ। आधारभूत स्रोत सिर्जना देखि उन्नत एंटरप्राइज-ग्रेड पूर्वाधार वास्तुकलासम्म Bicep, ARM टेम्प्लेट, Terraform, र Pulumi प्रयोग गरी पूर्वाधार कोडका ढाँचाहरू लागू गर्न सिक्नुहोस्।
+यो विस्तृत मार्गदर्शिकाले Azure Developer CLI प्रयोग गरेर Azure स्रोतहरू कसरी प्रावधान र व्यवस्थापन गर्ने भन्ने सबै कुरा समेट्छ। बुनियादी स्रोत सिर्जना देखि लिएर उद्यम-स्तरका पूर्वाधार आर्किटेक्चरहरू सम्म Bicep, ARM टेम्पलेटहरू, Terraform, र Pulumi प्रयोग गरेर Infrastructure as Code (IaC) ढाँचाहरू लागू गर्न सिक्नुहोस्।
 
 ## सिकाइ लक्ष्यहरू
 
-यो मार्गदर्शन पूरा गरेपछि, तपाईंले:
-- पूर्वाधार कोड सिद्धान्तहरू र Azure स्रोत प्रावधानमा विशेषज्ञता हासिल गर्नुहुनेछ
-- Azure Developer CLI द्वारा समर्थन गरिएको विभिन्न IaC प्रदायकहरू बुझ्नुहुनेछ
-- प्रचलित आवेदन वास्तुकलाहरूका लागि Bicep टेम्प्लेटहरू डिजाइन र लागू गर्नुहोस्
-- स्रोत प्यारामिटरहरू, चरहरू, र वातावरणविशिष्ट सेटिङहरू कन्फिगर गर्नुहोस्
-- जटिल पूर्वाधार ढाँचाहरू लागू गर्नुहोस् जसमा नेटवर्किङ र सुरक्षा समावेश छन्
-- स्रोतको जीवनचक्र, अपडेटहरू, र निर्भरता समाधान व्यवस्थापन गर्नुहोस्
+यो मार्गदर्शिका पूरा गर्दा तपाईंले:
+- Infrastructure as Code सिद्धान्त र Azure स्रोत प्रावधानमा मास्टरी हासिल गर्नुहुनेछ
+- Azure Developer CLI द्वारा समर्थन गरिएका विभिन्न IaC प्रदायकहरू बुझ्नुहुनेछ
+- साधारण एप्लिकेशन आर्किटेक्चरसँग मेल खाने Bicep टेम्पलेटहरू डिजाइन र कार्यान्वयन गर्न सक्नुहुनेछ
+- स्रोत प्यारामिटरहरू, भेरिएबलहरू, र वातावरण-विशिष्ट सेटिङहरू कन्फिगर गर्न सिक्नुहुनेछ
+- नेटवर्किङ र सुरक्षा सहित उन्नत पूर्वाधार ढाँचाहरू लागू गर्न सक्नुहुनेछ
+- स्रोत जीवनचक्र, अपडेटहरू, र निर्भरताको समाधान व्यवस्थापन गर्न सक्षम हुनुहुनेछ
 
-## सिकाइ परिणामहरू
+## सिकाइ नतिजाहरू
 
-पूरा गरेपछि, तपाईं सक्षम हुनुहुनेछ:
-- Bicep र ARM टेम्प्लेट प्रयोग गरी Azure पूर्वाधार डिज़ाइन र प्रावधान गर्नुहोस्
-- उपयुक्त स्रोत निर्भरतासहित जटिल बहु-सेवा वास्तुकलाहरू कन्फिगर गर्नुहोस्
-- धेरै वातावरण र कन्फिगरेशन्सका लागि प्यारामिटराइज्ड टेम्प्लेटहरू लागू गर्नुहोस्
-- पूर्वाधार प्रावधान समस्याहरूलाई ट्रबलशूट गर्नुहोस् र परिनियोजन असफलताहरू समाधान गर्नुहोस्
-- Azure Well-Architected Framework सिद्धान्तहरू पूर्वाधार डिज़ाइनमा लागू गर्नुहोस्
-- पूर्वाधार अपडेटहरू व्यवस्थापन गर्नुहोस् र पूर्वाधार संस्करण रणनीतिहरू लागू गर्नुहोस्
+समाप्ति पछि, तपाईं सक्षम हुनुहुनेछ:
+- Bicep र ARM टेम्पलेटहरू प्रयोग गरेर Azure पूर्वाधार डिजाइन र प्रावधान गर्न
+- उपयुक्त स्रोत निर्भरताहरूसहित जटिल बहु-सेवा आर्किटेक्चरहरू कन्फिगर गर्न
+- बहु वातावरण र कन्फिगरेसनहरूका लागि प्यारामेटराइज्ड टेम्पलेटहरू लागू गर्न
+- पूर्वाधार प्रावधान समस्याहरू ट्रबलशुट गरेर परिनियोजन असफलताहरू समाधान गर्न
+- Azure Well-Architected Framework सिद्धान्तहरू पूर्वाधार डिजाइनमा लागू गर्न
+- पूर्वाधार अपडेटहरू व्यवस्थापन र पूर्वाधार भर्सनिङ रणनीतिहरू कार्यान्वयन गर्न
 
-## पूर्वाधार प्रावधान अवलोकन
+## पूर्वाधार प्रावधान ओभरभ्यू
 
-Azure Developer CLI ले विभिन्न पूर्वाधार कोड (IaC) प्रदायकहरूलाई समर्थन गर्दछ:
-- **Bicep** (सिफारिस गरिएको) – Azure को डोमेन-विशेष भाषा
-- **ARM टेम्प्लेटहरू** – JSON आधारित Azure Resource Manager टेम्प्लेटहरू
-- **Terraform** – मल्टि-क्लाउड पूर्वाधार उपकरण
-- **Pulumi** – प्रोग्रामिङ भाषाहरुका साथ आधुनिक पूर्वाधार कोड
+Azure Developer CLI ले धेरै Infrastructure as Code (IaC) प्रदायकहरू समर्थन गर्दछ:
+- **Bicep** (सिफारिश गरिन्छ) - Azure को डोमेन-विशेष भाषा
+- **ARM Templates** - JSON-आधारित Azure Resource Manager टेम्पलेटहरू
+- **Terraform** - बहु-क्लाउड पूर्वाधार उपकरण
+- **Pulumi** - प्रोग्रामिङ भाषाहरूको साथ आधुनिक Infrastructure as Code
 
-## Azure स्रोतहरू बुझ्नुहोस्
+## Azure स्रोतहरू बुझ्दै
 
-### स्रोत पदानुक्रम
+### Resource Hierarchy
 ```
 Azure Account
 └── Subscriptions
@@ -49,16 +49,16 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### आवेदनहरूको लागि सामान्य Azure सेवाहरू
+### अनुप्रयोगहरूको लागि सामान्य Azure सेवाहरू
 - **कम्प्युट**: App Service, Container Apps, Functions, Virtual Machines
-- **स्टोरेज**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
+- **भण्डारण**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
 - **नेटवर्किङ**: Virtual Network, Application Gateway, CDN
 - **सुरक्षा**: Key Vault, Application Insights, Log Analytics
-- **AI/ML**: Cognitive Services, OpenAI, Machine Learning
+- **AI/ML**: Azure AI Services, Azure OpenAI, Azure Machine Learning
 
-## Bicep पूर्वाधार टेम्प्लेटहरू
+## Bicep पूर्वाधार टेम्पलेटहरू
 
-### आधारभूत Bicep टेम्प्लेट संरचना
+### आधारभूत Bicep टेम्पलेट संरचना
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -130,7 +130,7 @@ output WEB_NAME string = webApp.name
 
 ### उन्नत Bicep ढाँचाहरू
 
-#### मोड्युलर पूर्वाधार
+#### मोडुलर पूर्वाधार
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -200,7 +200,201 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ डाटाबेस प्रावधान
+## 🌐 azd सँग Terraform प्रयोग गर्नु
+
+Bicep azd को डिफल्ट हो, तर azd ले **Terraform** पनि समर्थन गर्दछ—यदि तपाईंको टोली पहिले नै यसमा मानकीकरण गर्छ वा तपाईं बहु-क्लाउड पूर्वाधार व्यवस्थापन गर्नुहुन्छ भने उपयोगी हुन्छ। azd वर्कफ्लो (`azd up`, `azd provision`, `azd down`) ठ्याक्कै एउटै हुन्छ; केवल पूर्वाधार भाषा र फोल्डर लेआउट परिवर्तन हुन्छ।
+
+### azd लाई Terraform प्रयोग गर्न भन्नुहोस्
+
+Terraform प्रदायक तर्फ संकेत गर्दै `azure.yaml` मा `infra` सेक्शन थप्नुहोस्:
+
+```yaml
+# azure.yaml
+name: my-terraform-app
+infra:
+  provider: terraform   # default is "bicep"
+  path: infra           # folder containing your .tf files
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### Terraform फोल्डर लेआउट
+
+Terraform प्रदायकको साथ, तपाईंको `infra/` फोल्डरले Bicep को सट्टा `.tf` फाइलहरू प्रयोग गर्दछ:
+
+```
+infra/
+├── main.tf            # resource definitions
+├── variables.tf       # input variables
+├── outputs.tf         # outputs azd reads back (endpoints, names)
+├── provider.tf        # azurerm/azurecaf providers + backend
+└── main.tfvars.json   # values azd injects per environment
+```
+
+### एक न्यूनतम `main.tf`
+
+```hcl
+# infra/main.tf
+resource "azurerm_resource_group" "rg" {
+  name     = "rg-${var.environment_name}"
+  location = var.location
+  tags     = { "azd-env-name" = var.environment_name }
+}
+
+resource "azurerm_service_plan" "plan" {
+  name                = "plan-${var.environment_name}"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  os_type             = "Linux"
+  sku_name            = "B1"
+}
+```
+
+### azd कसरी तपाईंको Terraform आउटपुटहरूमा जडान गर्दछ
+
+azd ले Terraform **outputs** पढ्छ ताकि तपाईंका endpoints थाहा पाओस् र वातावरण मानहरू तपाईंको एपमा फर्काउन सकियोस्। आउटपुट नामहरू महत्वपूर्ण हुन्छन्—azd ले विशिष्ट नामहरू खोज्छ:
+
+```hcl
+# infra/outputs.tf
+output "AZURE_LOCATION" {
+  value = var.location
+}
+
+output "SERVICE_WEB_ENDPOINT_URL" {
+  value = azurerm_linux_web_app.web.default_hostname
+}
+```
+
+> **Important:** azd ले `azd-env-name` ट्याग र `AZURE_*` आउटपुटहरू प्रयोग गरेर वातावरणअनुसार स्रोतहरू ट्र्याक गर्छ। सधैं आफ्नो रिसोर्स ग्रुपमा `"azd-env-name" = var.environment_name` ट्याग गर्नुहोस् ताकि `azd down` ले सबै कुरा फेला पारेर हटाउन सकोस्।
+
+### Terraform सँग परिनियोजन
+
+कमाण्डहरू Bicep जस्तै नै हुन्:
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd पृष्ठभूमिमा 'terraform plan' चलाउँछ
+azd up                    # प्राविजन + परिनियोजन
+azd down --force          # Terraform द्वारा व्यवस्थापन गरिएका संसाधनहरू नष्ट गर्दछ
+```
+
+> **Prerequisite:** Terraform इन्स्टल गरिएको र तपाईंको `PATH` मा हुनुपर्छ। azd ले Terraform को *workflow* व्यवस्थापन गर्छ तर Terraform तपाईंका लागि इन्स्टल गर्दैन। स्टेटका लागि, azd ले डिफल्ट रूपमा स्थानीय स्टेट प्रयोग गर्छ; टोलीहरूका लागि, `provider.tf` मा रिमोट ब्याकएन्ड (उदाहरणका लागि Azure Storage ब्याकएन्ड) कन्फिगर गर्नुहोस्।
+
+पूर्ण, runnable Terraform-आधारित स्टार्टरहरूको लागि, [Awesome AZD gallery](https://azure.github.io/awesome-azd/) ब्राउज गर्नुहोस् र Terraform फिल्टर गर्नुहोस्, वा आधिकारिक [azd Terraform documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd) हेर्नुहोस्।
+
+## 🧩 azd सँग Pulumi प्रयोग गर्नु
+
+यदि तपाईंको टोलीले एक सामान्य-उद्देश्य भाषा (TypeScript, Python, Go, वा C#) मा पूर्वाधार लेख्छ भने DSL भन्दा, azd ले **Pulumi** पनि समर्थन गर्छ। Terraform जस्तो, `azd up` / `azd provision` / `azd down` वर्कफ्लो अपरिवर्तित छ—केवल पूर्वाधार उपकरण र फोल्डर लेआउट फरक हुन्छ।
+
+### azd लाई Pulumi प्रयोग गर्न भन्नुहोस्
+
+```yaml
+# azure.yaml
+name: my-pulumi-app
+infra:
+  provider: pulumi      # default is "bicep"
+  path: infra           # folder containing your Pulumi program
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### Pulumi फोल्डर लेआउट
+
+```
+infra/
+├── Pulumi.yaml          # project definition
+├── Pulumi.dev.yaml      # stack config (one per environment)
+├── index.ts             # your resource program (or __main__.py, main.go, etc.)
+├── package.json         # dependencies (for TypeScript)
+└── tsconfig.json
+```
+
+### एक न्यूनतम `index.ts`
+
+```typescript
+import * as azure from "@pulumi/azure-native";
+import * as pulumi from "@pulumi/pulumi";
+
+const environmentName = pulumi.getStack();
+
+// azd ले ट्र्याक गरी सफा गर्न सकोस् भन्नका लागि प्रत्येक स्रोतलाई ट्याग गर्नुहोस्
+const tags = { "azd-env-name": environmentName };
+
+const rg = new azure.resources.ResourceGroup("rg", {
+  resourceGroupName: `rg-${environmentName}`,
+  tags,
+});
+
+// azd यी आउटपुटहरूलाई तपाईंको वातावरणमा फिर्ता पढ्छ
+export const AZURE_LOCATION = rg.location;
+export const SERVICE_WEB_ENDPOINT_URL = "https://...";
+```
+
+### स्ट्याकहरू azd वातावरणसँग नक्सा हुन्छन्
+
+Pulumi ले परिनियोजनहरूलाई **stacks** मा व्यवस्थित गर्छ, र azd ले प्रत्येक azd वातावरणलाई सोही नामको Pulumi स्ट्याकसँग म्याप गर्छ। जब तपाईं `azd env new staging` चलाउनुहुन्छ, azd ले `staging` Pulumi स्ट्याक छान्छ (वा सिर्जना गर्छ)। त्यही `azd-env-name` ट्यागिङ र `AZURE_*` आउटपुट नियमहरू लागू हुन्छन्, ताकि `azd down` ले सबै कुरा फेला पारेर हटाउन सकोस्।
+
+### Pulumi सँग परिनियोजन
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd ले भित्रै 'pulumi preview' चलाउँछ
+azd up                    # प्राविजन + परिनियोजन
+azd down --force          # 'pulumi destroy' चलाउँछ
+```
+
+> **Prerequisite:** Pulumi इन्स्टल गरिएको र तपाईंको `PATH` मा हुनुपर्छ, र तपाईंलाई स्टेट ब्याकएन्ड चाहिन्छ (Pulumi Cloud वा Azure Blob Storage जस्ता स्व-प्रबन्धित ब्याकएन्ड)। azd ले Pulumi को *workflow* व्यवस्थापन गर्छ, इन्स्टल गर्दैन। आधिकारिक [azd Pulumi documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-pulumi-for-azd) हेर्नुहोस्।
+
+## 🎯 तपाईंको सेवाको लागि होस्ट कसरी रोज्ने
+
+`host` फिल्डले `azure.yaml` मा निर्णय गर्छ कि तपाईंको कोड कहाँ चल्नेछ। azd ले केही होस्टहरू समर्थन गर्छ—उपयुक्त एउटा रोज्नु पूर्वाधार भाषाभन्दा बढी महत्त्वपूर्ण हुन्छ। यहाँ एउटा शुरुवातकर्ताका लागि तुलना छ:
+
+| `host` value | Best for | Why |
+|--------------|----------|-----|
+| `appservice` | परम्परागत वेब एपहरू र API हरू | सबैभन्दा सरल PaaS; कन्टेनर चाहिँदैन |
+| `staticwebapp` | फ्रन्ट-एन्ड SPA हरू (React, Vue, Angular) | ग्लोबल CDN + निःशुल्क SSL, बिल्ट-इन API समर्थन |
+| `function` | घटना-आधारित र सर्भरलेस कार्यभारहरू | स्केल-टु-ज़िरो, प्रति-एक्जिक्युसन तिर्ने मोडेल |
+| `containerapp` | कन्टेनराइज्ड माइक्रोसर्भिसहरू | सर्भरलेस कन्टेनरहरू, स्केल-टु-ज़िरो, बिल्ट-इन इन्ग्रेस |
+| `aks` | जटिल अর্কेस्ट्रेसन आवश्यकताहरू | जब साँच्चिकै चाहिन्छ तब पुरा Kubernetes नियन्त्रण |
+| `springapp` | Java Spring Boot एपहरू | Spring का लागि ट्युन गरिएको Managed Azure Spring Apps runtime |
+
+### AKS तर्फ कहिले पुग्ने
+
+**Azure Kubernetes Service (`host: aks`)** ले तपाईंलाई Kubernetes को पूरा शक्ती दिन्छ—कस्टम कन्ट्रोलरहरू, सर्भिस मेशहरू, जटिल नेटवर्किङ, र सूक्ष्म-ग्रान्युलर शेड्युलिङ। यो शक्ती अपरेसनल ओभरहेडसँग आउँछ: तपाईंले नोड पूलहरू, अपग्रेडहरू, र क्लस्टर नेटवर्किङ व्यवस्थापन गर्नुपर्छ।
+
+```yaml
+services:
+  api:
+    project: ./src/api
+    language: js
+    host: aks          # deploys to an existing AKS cluster
+```
+
+> **Start simpler if you can.** धेरै माइक्रोसर्भिसहरूको लागि, **Container Apps** ले कन्टेनरहरू, अटोस्केलिङ, र स्केल-टु-ज़िरो दिन्छ क्लस्टर व्यवस्थापन बिना। Kubernetes-विशेष सुविधाहरू चाहिएको बेला मात्र AKS रोज्नुहोस्।
+
+### Azure Spring Apps कहिले प्रयोग गर्ने
+
+**Azure Spring Apps (`host: springapp`)** Spring Boot का लागि उद्धेश्यबद्ध Managed runtime हो। यो सेवा डिस्कभरी, कन्फिग सर्भर, र ब्लू-ग्रीन परिनियोजन ह्यान्डल गर्छ ताकि Java टोलीहरूले आफैंको पूर्वाधार दौडाउन नपरोस्।
+
+```yaml
+services:
+  catalog:
+    project: ./src/catalog
+    language: java
+    host: springapp
+```
+
+> `springapp` प्रयोग गर्नुहोस् जब तपाईंसँग अवस्थित Spring Boot एपहरू छन् र Spring-विशेष आवश्यकताहरूको लागि ट्युन गरिएको runtime चाहनुहुन्छ। नयाँ कन्टेनराइज्ड Java एपहरूका लागि जुन Spring-विशेष आवश्यकताहरू छैनन्, `containerapp` प्रायः सरल विकल्प हुन्छ।
+
+## 🗃️ डेटाबेस प्रावधान
 
 ### Cosmos DB
 ```bicep
@@ -298,7 +492,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 सुरक्षा र रहस्य व्यवस्थापन
+## 🔒 सुरक्षा र गोपनीयता व्यवस्थापन
 
 ### Key Vault एकीकरण
 ```bicep
@@ -342,7 +536,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### व्यवस्थापन गरिएको पहिचान कन्फिगरेसन
+### Managed Identity कन्फिगरेसन
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -496,7 +690,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 निगरानी र अवलोकनयोग्यता
+## 📊 मोनिटरिङ र अव्जर्भेबिलिटी
 
 ### Application Insights
 ```bicep
@@ -561,9 +755,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 वातावरण-स्पेसिफिक कन्फिगरेसनहरू
+## 🔧 वातावरण-विशिष्ट कन्फिगरेसनहरू
 
-### विभिन्न वातावरणहरूका लागि प्यारामिटर फाइलहरू
+### फरक वातावरणका लागि प्यारामिटर फाइलहरू
 ```json
 // infra/main.parameters.dev.json
 {
@@ -719,7 +913,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### पूर्वाधार परीक्षण
+### Infrastructure परीक्षण
 ```bicep
 // infra/test/main.test.bicep
 param location string = resourceGroup().location
@@ -755,40 +949,40 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 पूर्वाधार पूर्वावलोकन र प्रमाणीकरण (नयाँ)
+## 🧪 Infrastructure Preview & Validation (NEW)
 
-### परिनियोजन अघि पूर्वाधार परिवर्तनहरूको पूर्वावलोकन गर्नुहोस्
+### परिनियोजन अघि पूर्वाधार परिवर्तनहरूको पूर्वावलोकन
 
-`azd provision --preview` फीचरले तपाईंलाई स्रोतहरू व्यावहारिक रूपमा परिनियोजन गर्नु अघि पूर्वाधार प्रावधान प्रक्रिया **सिमुलेट** गर्न दिन्छ। यो `terraform plan` वा `bicep what-if` जस्तै छ, जसले तपाईंको Azure वातावरणमा गरिने परिवर्तनहरूको **सुक्खा-रन दृश्य** दिन्छ।
+`azd provision --preview` फीचरले तपाईंलाई स्रोतहरू वास्तवमा परिनियोजन गर्नु अघि **पूर्वाधार प्रावधानको अनुकरण** गर्न दिन्छ। यो `terraform plan` वा `bicep what-if` जस्तो भावना दिने ड्राइ-रन दृश्य हो जसले तपाईंसँग के परिवर्तनहरू गरिनेछ भनेर देखाउँछ।
 
-#### 🛠️ के गर्छ
-- **तपाईंको IaC टेम्प्लेटहरू (Bicep वा Terraform)** विश्लेषण गर्छ
-- **स्रोत परिवर्तनहरूको पूर्वावलोकन देखाउँछ**: थप, हटाउने, अपडेटहरू
-- **परिवर्तनहरू लागू गर्दैन** — यो केवल पढ्न योग्य र सुरक्षित छ
+#### 🛠️ यसले के गर्छ
+- तपाईंका IaC टेम्पलेटहरू (Bicep वा Terraform) **विश्लेषण** गर्छ
+- **स्रोत परिवर्तनहरूको पूर्वावलोकन देखाउँछ**: थप, मेट्ने, अपडेटहरू
+- **परिवर्तनहरू लागू गर्दैन** — यो पढ्न मात्र हो र चलाउन सुरक्षित छ
 
-#### प्रयोगका केसहरू
+#### प्रयोग केसहरू
 ```bash
-# परिनियोजन अघि पूर्वावलोकन पूर्वधारणा परिवर्तनहरू
+# परिनियोजन अघि पूर्वाधार परिवर्तनहरूको पूर्वावलोकन
 azd provision --preview
 
 # विशिष्ट वातावरणको लागि पूर्वावलोकन
 azd provision --preview -e production
 ```
 
-यस आदेशले तपाईंलाई मद्दत गर्दछ:
-- स्रोतहरू प्रतिबद्ध गर्नु अघि पूर्वाधार परिवर्तन **प्रमाणीकरण** गर्न
-- विकास चक्रमा **छिट्टै मिसकन्फिगरेसन पत्ता लगाउन**
-- टोली वातावरणमा **सुरक्षित सहयोग** गर्न
-- आश्चर्य बिना **सर्वन्यून अधिकार परिनियोजनहरू सुनिश्चित** गर्न
+यो कमाण्डले तपाईंलाई मद्दत गर्छ:
+- संसाधनहरू कमिट गर्नु अघि **पूर्वाधार परिवर्तनहरू मान्य** गर्न
+- विकास चक्रको शुरुमा **कन्फिगरेसन गल्तीहरू पत्ता लगाउन**
+- टोली वातावरणहरूमा **सुरक्षित रूपमा सहकार्य** गर्न
+- आश्चर्य बिना **न्यूनतम-प्रिविलेज परिनियोजनहरू सुनिश्चित** गर्न
 
 यो विशेष गरी उपयोगी हुन्छ जब:
-- जटिल बहु-सेवा वातावरणहरूसँग काम गर्दा
-- उत्पादन पूर्वाधारमा परिवर्तन गर्दा
-- टेम्प्लेट संशोधनहरू PR अनुमोदन अघि प्रमाणित गर्दा
-- नयाँ टोली सदस्यहरूलाई पूर्वाधार ढाँचाहरू सम्बन्धी तालिम दिन
+- जटिल बहु-सेवा वातावरणहरूसँग काम गर्दै हुनुहुन्छ
+- उत्पादन पूर्वाधारमा परिवर्तन गर्दै हुनुहुन्छ
+- PR अनुमोदन अघि टेम्पलेट संशोधनहरू मान्य गर्दै हुनुहुन्छ
+- पूर्वाधार ढाँचाहरूमा नयाँ टोली सदस्यहरूलाई तालिम दिँदै हुनुहुन्छ
 
 ### उदाहरण पूर्वावलोकन आउटपुट
-ठ्याक्कै पूर्वावलोकन आउटपुट प्रदायक र परियोजना संरचनामा भिन्न हुन सक्छ, तर नतिजाले के प्रस्तावित परिवर्तनहरू छन् स्पष्ट रूपमा चिन्हित गर्नुपर्छ।
+ठ्याक्कै पूर्वावलोकन आउटपुट प्रदायक र प्रोजेक्ट संरचनामा निर्भर गर्दछ, तर परिणामले प्रस्ताव गरिएका परिवर्तनहरू स्पष्ट रूपमा चिन्हित गर्नुपर्छ जुन केही पनि लागू गर्नु अघि।
 
 ```bash
 $ azd provision --preview
@@ -813,22 +1007,22 @@ The following resources will be destroyed:
 ✅ Preview completed successfully!
 ```
 
-## �🔄 स्रोत अपडेट र माइग्रेशनहरू
+## �🔄 स्रोत अपडेटहरू र माइग्रेशनहरू
 
 ### सुरक्षित स्रोत अपडेटहरू
 ```bash
-# पूर्वावलोकन पूर्व इन्फ्रास्ट्रक्चर परिवर्तनहरू (सिफारिस गरिन्छ)
+# पहिले पूर्वाधार परिवर्तनहरूको पूर्वावलोकन गर्नुहोस् (अनुशंसित)
 azd provision --preview
 
-# पूर्वावलोकन पुष्टि पछि परिवर्तनहरू लागू गर्नुहोस्
+# पूर्वावलोकन पुष्टि भएपछि परिवर्तनहरू लागू गर्नुहोस्
 azd provision --confirm-with-no-prompt
 
-# रोलब्याकको लागि, इन्फ्रास्ट्रक्चर परिवर्तनहरू फर्काउन Git प्रयोग गर्नुहोस्:
-git revert HEAD  # अन्तिम इन्फ्रास्ट्रक्चर कमिट फर्काउनुहोस्
-azd provision    # अघिल्लो इन्फ्रास्ट्रक्चर अवस्था लागू गर्नुहोस्
+# रोलब्याकका लागि Git प्रयोग गरी पूर्वाधार परिवर्तनहरू फर्काउन:
+git revert HEAD  # अन्तिम पूर्वाधार कमिट फर्काउनुहोस्
+azd provision    # अघिल्लो पूर्वाधार अवस्था लागू गर्नुहोस्
 ```
 
-### डाटाबेस माइग्रेशनहरू
+### डेटाबेस माइग्रेशनहरू
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -857,9 +1051,9 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🎯 उत्कृष्ट अभ्यासहरू
+## 🎯 उत्तम अभ्यासहरू
 
-### १. स्रोत नामकरण सङ्केतहरू
+### 1. स्रोत नामकरण सम्मेलनहरू
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -870,7 +1064,7 @@ var naming = {
 }
 ```
 
-### २. ट्यागिङ रणनीति
+### 2. ट्यागिङ रणनीति
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -883,7 +1077,7 @@ var commonTags = {
 }
 ```
 
-### ३. प्यारामिटर प्रमाणीकरण
+### 3. प्यारामिटर मान्यकरण
 ```bicep
 @description('Environment name')
 @minLength(3)
@@ -899,7 +1093,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### ४. आउटपुट संगठन
+### 4. आउटपुट संगठन
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -914,29 +1108,29 @@ output DATABASE_NAME string = database.name
 output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
 ```
 
-## आगामी चरणहरू
+## Next Steps
 
-- [पूर्व-परिनियोजन योजना](../chapter-06-pre-deployment/capacity-planning.md) – स्रोत उपलब्धता प्रमाणीकरण
-- [सामान्य समस्याहरू](../chapter-07-troubleshooting/common-issues.md) – पूर्वाधार समस्या समाधान
-- [डिबगिङ गाइड](../chapter-07-troubleshooting/debugging.md) – प्रावधान समस्याहरू डिबग गर्नुहोस्
-- [SKU चयन](../chapter-06-pre-deployment/sku-selection.md) – उपयुक्त सेवा स्तरहरू छान्नुहोस्
+- [पूर्व-परिनियोजन योजना](../chapter-06-pre-deployment/capacity-planning.md) - स्रोत उपलब्धता मान्य गर्नुहोस्
+- [सामान्य समस्याहरू](../chapter-07-troubleshooting/common-issues.md) - पूर्वाधार समस्याहरू ट्रबलशुट गर्नुहोस्
+- [डिबगिङ मार्गदर्शिका](../chapter-07-troubleshooting/debugging.md) - प्रावधान समस्याहरू डिबग गर्नुहोस्
+- [SKU चयन](../chapter-06-pre-deployment/sku-selection.md) - उपयुक्त सेवा स्तरहरू छनौट गर्नुहोस्
 
-## थप स्रोतहरू
+## अतिरिक्त स्रोतहरू
 
-- [Azure Bicep कागजात](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager टेम्प्लेटहरू](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure वास्तुकला केन्द्र](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-**नेभिगेसन**
-- **अघिल्लो पाठ**: [Deployment Guide](deployment-guide.md)
-- **अर्को पाठ**: [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md)
+**Navigation**
+- **Previous Lesson**: [Deployment Guide](deployment-guide.md)
+- **Next Lesson**: [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **अस्वीकरण**:
-यो दस्तावेज AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) प्रयोग गरी अनुवाद गरिएको हो। हामी शुद्धताका लागि प्रयासरत छौं, तर कृपया जानकार हुनुहोस् कि स्वचालित अनुवादमा त्रुटिहरू वा असंगतिहरू हुन सक्छन्। मूल दस्तावेज यसको मातृभाषामा प्राधिकृत स्रोतको रूपमा मानिनुपर्छ। महत्वपूर्ण सूचना लागि, पेशेवर मानवीय अनुवाद सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न कुनै पनि गलतफहमी वा गलत व्याख्यामा हामी जिम्मेवार छैौँैनौं।
+यो दस्तावेज़ AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) प्रयोग गरेर अनुवाद गरिएको हो। हामी सही हुन प्रयास गर्छौं, तर कृपया जानकार हुनुस् कि स्वचालित अनुवादमा त्रुटिहरू वा अशुद्धताहरू हुन सक्छन्। मूल दस्तावेज़ यसको मूल भाषामा आधिकारिक स्रोत मानिनुपर्छ। महत्वपूर्ण जानकारीका लागि व्यावसायिक मानव अनुवाद सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न कुनै पनि गलत बुझाइ वा त्रुटिको लागि हामी जिम्मेवार छैनौं।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

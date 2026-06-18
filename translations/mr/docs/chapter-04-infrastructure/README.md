@@ -1,56 +1,57 @@
-# प्रकरण 4: इन्फ्रास्ट्रक्चर अ‍ॅज कोड आणि तैनाती
+# Chapter 4: Infrastructure as Code & Deployment
 
-**📚 कोर्स**: [AZD For Beginners](../../README.md) | **⏱️ कालावधी**: 1-1.5 तास | **⭐ कठीणपणा**: मध्यम
-
----
-
-## आढावा
-
-हे प्रकरण Bicep टेम्पलेट्ससह Infrastructure as Code (IaC) नमुने, संसाधन तैनाती, आणि Azure Developer CLI वापरून तैनाती धोरणे कव्हर करते.
-
-> `azd 1.23.12` च्या विरुद्ध मार्च 2026 मध्ये पडताळले.
-
-## शिकण्याची उद्दिष्टे
-
-हे प्रकरण पूर्ण केल्यावर, आपण:
-- Bicep टेम्पलेट संरचना आणि सिन्टॅक्स समजून घेणार
-- `azd provision` ने Azure संसाधने प्राव्हिजन करणार
-- `azd deploy` ने अनुप्रयोग तैनात करणार
-- ब्लू-ग्रीन आणि रोलिंग तैनाती धोरणे लागू करणार
+**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 1-1.5 hours | **⭐ Complexity**: Intermediate
 
 ---
 
-## 📚 पाठ
+## Overview
 
-| # | पाठ | वर्णन | वेळ |
+हा अध्याय Bicep टेम्पलेट्स, रिसोर्स प्रोव्हिजनिंग, आणि Azure Developer CLI वापरून डिप्लॉयमेंट धोरणांसह Infrastructure as Code (IaC) पॅटर्न्स कव्हर करतो.
+
+> `azd 1.25.6` विरुद्ध जून 2026 मध्ये प्रमाणित.
+
+## Learning Objectives
+
+हा अध्याय पूर्ण केल्यावर, तुम्ही:
+- Bicep टेम्पलेट संरचना आणि सिन्‍टॅक्स समजून घेणार
+- `azd provision` वापरून Azure रिसोर्सेस प्रोव्हिजन करण्यास सक्षम असाल
+- `azd deploy` वापरून ऍप्लिकेशन्स डिप्लॉय करता येतील
+- ब्लू-ग्रीन आणि रोलिंग डिप्लॉयमेंट धोरणे अंमलात आणू शकाल
+
+---
+
+## 📚 Lessons
+
+| # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [Provisioning Resources](provisioning.md) | AZD सह Azure संसाधन व्यवस्थापन | 45 min |
-| 2 | [Deployment Guide](deployment-guide.md) | अ‍ॅप्लिकेशन तैनाती धोरणे | 45 min |
+| 1 | [Provisioning Resources](provisioning.md) | AZD सह Azure रिसोर्स व्यवस्थापन | 45 मिनिटे |
+| 2 | [Deployment Guide](deployment-guide.md) | अनुप्रयोग डिप्लॉयमेंट धोरणे | 45 मिनिटे |
+| 3 | [Authoring Your Own Template](custom-templates.md) | पुनर्वापर करण्याजोगे azd टेम्पलेट तयार व प्रकाशित करा | 30 मिनिटे |
 
 ---
 
-## 🚀 त्वरित प्रारंभ
+## 🚀 Quick Start
 
 ```bash
-# टेम्पलेटमधून प्रारंभ करा
+# साच्यावरून सुरुवात करा
 azd init --template azure-functions-python-v2-http
 
-# जे तयार होणार आहे ते पूर्वावलोकन करा
+# काय तयार होणार आहे हे पूर्वावलोकन करा
 azd provision --preview
 
-# केवळ पायाभूत सुविधा पुरवा
+# फक्त पूर्वसंरचना तयार करा
 azd provision
 
-# केवळ कोड तैनात करा
+# फक्त कोड तैनात करा
 azd deploy
 
-# किंवा दोन्ही एकत्र करा
+# किंवा दोन्ही एकत्र
 azd up
 ```
 
 ---
 
-## 📁 AZD प्रकल्प रचना
+## 📁 AZD Project Structure
 
 ```
 my-project/
@@ -67,36 +68,36 @@ my-project/
 
 ---
 
-## 🔧 महत्त्वाचे आदेश
+## 🔧 Essential Commands
 
-| कमांड | वर्णन |
+| Command | Description |
 |---------|-------------|
-| `azd init` | प्रकल्प सुरू करा |
-| `azd provision` | Azure संसाधने तयार करा |
-| `azd deploy` | अॅप्लिकेशन कोड तैनात करा |
-| `azd up` | प्राव्हिजन + तैनात |
-| `azd down` | सर्व संसाधने हटवा |
+| `azd init` | प्रोजेक्ट सुरू करा |
+| `azd provision` | Azure रिसोर्सेस तयार करा |
+| `azd deploy` | ऍप्लिकेशन कोड डिप्लॉय करा |
+| `azd up` | प्रोव्हिजन + डिप्लॉय |
+| `azd down` | सर्व रिसोर्सेस हटवा |
 
 ---
 
-## 🔗 नेव्हिगेशन
+## 🔗 Navigation
 
 | Direction | Chapter |
 |-----------|---------|
-| **मागील** | [प्रकरण 3: कॉन्फिगरेशन](../chapter-03-configuration/README.md) |
-| **पुढचे** | [प्रकरण 5: मल्टी-एजंट सोल्यूशन्स](../chapter-05-multi-agent/README.md) |
+| **Previous** | [Chapter 3: Configuration](../chapter-03-configuration/README.md) |
+| **Next** | [Chapter 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md) |
 
 ---
 
-## 📖 संबंधित संसाधने
+## 📖 Related Resources
 
-- [पूर्व-तैनाती तपासण्या](../chapter-06-pre-deployment/README.md)
-- [कंटेनर अॅप उदाहरणे](../../examples/container-app/README.md)
-- [डेटाबेस अॅप उदाहरण](../../examples/database-app/README.md)
+- [Pre-Deployment Checks](../chapter-06-pre-deployment/README.md)
+- [Container App Examples](../../examples/container-app/README.md)
+- [Database App Example](../../examples/database-app/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **अस्वीकरण**:
-हा दस्तऐवज AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) वापरून अनुवादित करण्यात आला आहे. आम्ही अचूकतेसाठी प्रयत्न करतो, परंतु कृपया लक्षात घ्या की स्वयंचलित अनुवादांमध्ये त्रुटी किंवा अचूकतेची कमतरता असू शकते. मूळ दस्तऐवज त्याच्या मूळ भाषेत अधिकृत स्रोत मानला जावा. गंभीर माहितीसाठी व्यावसायिक मानवी अनुवादाची शिफारस केली जाते. या अनुवादाच्या वापरामुळे झालेल्या कोणत्याही गैरसमजुती किंवा चुकीच्या अर्थलावनांसाठी आम्ही जबाबदार नाही.
+हा दस्तऐवज AI भाषांतर सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) चा वापर करून अनुवादित केला आहे. जरी आम्ही अचूकतेसाठी प्रयत्न करतो, तरी कृपया लक्षात घ्या की स्वयंचलित भाषांतरांमध्ये त्रुटी किंवा अचूकतेची कमतरता असू शकते. मूळ दस्तऐवज त्याच्या मूळ भाषेत अधिकृत स्रोत मानला पाहिजे. महत्त्वाची माहिती असल्यास, व्यावसायिक मानवी भाषांतराची शिफारस केली जाते. या भाषांतराच्या वापरामुळे उद्भवणाऱ्या कोणत्याही गैरसमज किंवा चुकीच्या अर्थलावणीसाठी आम्ही जबाबदार नाही.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

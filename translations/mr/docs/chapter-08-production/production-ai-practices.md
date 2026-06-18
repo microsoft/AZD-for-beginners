@@ -1,43 +1,44 @@
-# Production AI Workload Best Practices with AZD
+# AZD सह उत्पादन AI कार्यभार सर्वोत्तम पद्धती
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 8 - Production & Enterprise Patterns
-- **⬅️ Previous Chapter**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Also Related**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🎯 Course Complete**: [AZD For Beginners](../../README.md)
+**अध्याय नेव्हिगेशन:**
+- **📚 कोर्स गृहपृष्ठ**: [AZD For Beginners](../../README.md)
+- **📖 चालू अध्याय**: अध्याय 8 - उत्पादन व एंटरप्राइज पॅटर्न्स
+- **⬅️ मागील अध्याय**: [अध्याय 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ संबंधित**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎯 कोर्स पूर्ण**: [AZD For Beginners](../../README.md)
 
-## Overview
+## आढावा
 
-हा मार्गदर्शक Azure Developer CLI (AZD) वापरताना production-योग्य AI वर्कलोड तैनात करण्याच्या सर्वसमावेशक सर्वोत्तम पद्धती देतो. Microsoft Foundry Discord समुदायाच्या अभिप्राय आणि वास्तविक ग्राहकांच्या तैनातीवर आधारित, हे मार्गदर्शक production AI प्रणालींमध्ये सर्वात सामान्य आव्हानांना संबोधित करतात.
+हा मार्गदर्शक उत्पादन-तयार AI कार्यभार तैनात करण्यासाठी Azure Developer CLI (AZD) वापरण्याच्या सर्वसमावेशक सर्वोत्तम पद्धती प्रदान करतो. Microsoft Foundry Discord समुदायाच्या अभिप्रायावर आणि प्रत्यक्ष ग्राहक तैनातींवर आधारित, या पद्धती उत्पादन AI सिस्टममधील सर्वसाधारण समस्या सोडवतात.
 
-## Key Challenges Addressed
+## मुख्य समस्या addressed केल्या
 
-आमच्या समुदायाच्या मतदानाच्या निकालांनुसार, विकसकांना खालील प्रमुख आव्हानांचा सामना करावा लागतो:
+आमच्या समुदायाच्या मतदानांच्या निकालांनुसार, विकासकांना या शीर्ष समस्यांचा सामना करावा लागतो:
 
-- **45%** बहु-सेवा AI तैनातींसोबत अडचणीत असतात
-- **38%** क्रेडेन्शियल आणि सीक्रेट व्यवस्थापनात समस्या आहेत  
-- **35%** production-तयारी आणि स्केलिंग कठीण वाटते
-- **32%** खर्च-अनुकूलन धोरणांची गरज आहे
-- **29%** मॉनिटरिंग आणि ट्रबलशुटिंग सुधारण्याची आवश्यकता आहे
+- **४५%** मल्टी-सर्व्हिस AI तैनातींमध्ये अडचणी
+- **३८%** क्रिडेन्शियल आणि सीक्रेट व्यवस्थापनात समस्या  
+- **३५%** उत्पादन तयारी आणि स्केलिंग कठीण वाटणे
+- **३२%** चांगल्या खर्च अनुकूलन धोरणांची गरज
+- **२९%** सुधारित मॉनिटरिंग व ट्रबलशूटिंग आवश्यक
 
-## Architecture Patterns for Production AI
+## उत्पादन AI साठी आर्किटेक्चर पॅटर्न्स
 
-### Pattern 1: Microservices AI Architecture
+### पॅटर्न १: मायक्रोसर्व्हिसेस AI आर्किटेक्चर
 
-**When to use**: अनेक क्षमतांसह जटिल AI अनुप्रयोगांसाठी
+**कधी वापरायचे**: अनेक क्षमता असलेल्या क्लिष्ट AI अनुप्रयोगांसाठी
 
 ```mermaid
 graph TD
-    Frontend[वेब फ्रंटएंड] --- Gateway[API गेटवे] --- LB[लोड बॅलन्सर]
+    Frontend[वेब फ्रंटएंड] --- Gateway[API गेटवे] --- LB[लोड बलांसर]
     Gateway --> Chat[चॅट सेवा]
     Gateway --> Image[प्रतिमा सेवा]
-    Gateway --> Text[मजकूर सेवा]
-    Chat --> OpenAI[Microsoft Foundry मॉडेल्स]
-    Image --> Vision[संगणकीय दृष्टी]
+    Gateway --> Text[टेक्स्ट सेवा]
+    Chat --> OpenAI[मायक्रोसॉफ्ट फाउंड्री मॉडेल्स]
+    Image --> Vision[कंप्युटर व्हिजन]
     Text --> DocIntel[दस्तऐवज बुद्धिमत्ता]
 ```
-**AZD Implementation**:
+
+**AZD अंमलबजावणी**:
 
 ```yaml
 # azure.yaml
@@ -60,9 +61,9 @@ services:
     host: containerapp
 ```
 
-### Pattern 2: Event-Driven AI Processing
+### पॅटर्न २: इव्हेंट-ड्रिव्हन AI प्रक्रिया
 
-**When to use**: बॅच प्रोसेसिंग, दस्तऐवज विश्लेषण, असिंक्रोनस वर्कफ्लोस
+**कधी वापरायचे**: बॅच प्रक्रिया, दस्तऐवज विश्लेषण, असिंक्रोनस वर्कफ्लोज
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -109,46 +110,46 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Thinking About AI Agent Health
+## AI एजंट आरोग्याबद्दल विचार
 
-जेव्हा पारंपरिक वेब अॅप्लिकेशन बिघडते, तेव्हा लक्षणे ओळखीची असतात: एखादी पृष्ठ लोड होत नाही, एपीआय त्रुटी देते, किंवा तैनात करणे अयशस्वी होते. AI-शक्तीमान अनुप्रयोग हे सर्व मार्गांनी खराब होऊ शकतात—परंतु ते सूक्ष्म पद्धतींनी चुकीचे काम करू शकतात ज्यामुळे स्पष्ट त्रुटी संदेश दिसत नाहीत.
+पारंपारिक वेब अ‍ॅप खराब झाल्यावर लक्षणे परिचित असतात: एखादी पृष्ठ लोड होत नाही, API त्रुटी देते किंवा तैनाती अपयशी होते. AI-शक्तीवान अनुप्रयोग देखील अशाच प्रकारे भंग होऊ शकतात—पण ते सूक्ष्म मार्गांनी चुकीचे वागू शकतात जे स्पष्ट त्रुटी संदेश निर्माण करत नाहीत.
 
-हा विभाग तुम्हाला AI वर्कलोडसाठी मॉनिटरिंग करण्याचा मानसिक मॉडेल तयार करण्यात मदत करतो जेणेकरून काही चुकीचे दिसल्यास तुम्हाला कुठे पाहायचे हे कळेल.
+हा विभाग आपल्याला AI कार्यभार मॉनिटर करण्यासाठी मानसिक मॉडेल तयार करण्यात मदत करतो जेणेकरून काहीतरी चुकीचे वाटल्यास कुठे पाहायचे ते माहिती येईल.
 
-### How Agent Health Differs from Traditional App Health
+### एजंट आरोग्य पारंपारिक अ‍ॅप आरोग्यापेक्षा कसे वेगळे आहे
 
-एक पारंपरिक अॅप कार्य करते किंवा नाही. एखादा AI एजंट कार्यरत दिसू शकतो परंतु चांगले निकाल देत नाही. एजंटची आरोग्यस्थिती दोन स्तरांमध्ये विचार करा:
+पारंपारिक अ‍ॅप कार्यान्वित होते किंवा नाहीच. AI एजंट कार्यरत दिसू शकतो पण निकृष्ट निकाल देऊ शकतो. एजंट आरोग्य दोन स्तरांमध्ये पाहा:
 
-| Layer | What to Watch | Where to Look |
+| स्तर | काय पहावे | कुठे पहावे |
 |-------|--------------|---------------|
-| **Infrastructure health** | सेवा चालू आहे का? संसाधने provision झाली आहेत का? एन्डपॉइंट पोहोचनीय आहेत का? | `azd monitor`, Azure Portal resource health, container/app logs |
-| **Behavior health** | एजंट अचूकपणे प्रतिसाद देतो का? प्रतिसाद वेळेवर येतात का? मॉडेल योग्यरित्या कॉल केले जात आहे का? | Application Insights traces, model call latency metrics, response quality logs |
+| **पूर्वाधार आरोग्य** | सेवा चालू आहे का? संसाधने दिली आहेत का? एंडपॉइंट्स पोहोचता येतात का? | `azd monitor`, Azure Portal संसाधन आरोग्य, कंटेनर/अ‍ॅप लॉग्ज |
+| **वर्तन आरोग्य** | एजंट अचूक प्रतिसाद देतो का? प्रतिसाद वेळेत येतात का? मॉडेल योग्यरित्या कॉल केले जात आहे का? | Application Insights ट्रेसेस, मॉडेल कॉल लेटन्सी मेट्रिक्स, प्रतिसाद गुणवत्ता लॉग्ज |
 
-Infrastructure health ओळखीची आहे—हे कोणत्याही azd अॅपसाठी एकसारखे आहे. Behavior health हा AI वर्कलोड्सद्वारे परिचित झालेला नवीन स्तर आहे.
+पूर्वाधार आरोग्य परिचित आहे - ही कोणत्याही azd अ‍ॅपसाठी सारखीच आहे. वर्तन आरोग्य हा AI कार्यभारांतील नवीन स्तर आहे.
 
-### Where to Look When AI Apps Don't Behave as Expected
+### AI अ‍ॅप अपेक्षेप्रमाणे वागत नसल्यास कुठे पाहावे
 
-जर तुमचे AI अनुप्रयोग अपेक्षित निकाल देत नसतील, तर इथे एक संकल्पनात्मक तपासणी यादी आहे:
+आपला AI अनुप्रयोग अपेक्षित निकाल देत नसेल, तर खालील संकल्पनात्मक तपासणी करा:
 
-1. **तत्त्वांपासून सुरुवात करा.** अॅप चालू आहे का? ते आपल्या अवलंबित्वांपर्यंत पोहोचू शकते का? `azd monitor` आणि resource health तपासा जसे तुम्ही कोणत्याही अॅपसाठी कराल.
-2. **मॉडेल कनेक्शन तपासा.** तुमचे अॅप मॉडेलला यशस्वीरित्या कॉल करत आहे का? अयशस्वी किंवा टाइमआउट झालेले मॉडेल कॉल्स हे AI अॅपच्या समस्यांचे सर्वात सामान्य कारण असतात आणि तुमच्या application logs मध्ये दिसून येतील.
-3. **मॉडेलने काय प्राप्त केले ते पहा.** AI प्रतिसाद इनपुटवर (प्रॉम्प्ट आणि कोणत्याही प्राप्त संदर्भावर) अवलंबून असतात. जर आउटपुट चुकीचा असेल, तर इनपुट सहसा चुकीचा असतो. तपासा की तुमचे अॅप मॉडेलला योग्य डेटा पाठवत आहे का.
-4. **प्रतिक्रिया विलंब तपासा.** AI मॉडेल कॉल्स हे सामान्य API कॉल्सपेक्षा जास्त मंद असतात. जर तुमचे अॅप सुस्त वाटत असेल, तर तपासा की मॉडेल प्रतिसाद वेळ वाढले आहेत का—हे थ्रॉटलिंग, क्षमतेच्या मर्यादा, किंवा प्रदेश-स्तरीय कंजेशन सूचित करू शकते.
-5. **खर्च संकेतांसाठी पहा.** टोकन वापर किंवा API कॉल्समध्ये अनपेक्षित वाढ लूप, चुकिचे कॉन्फिगर केलेले प्रॉम्प्ट, किंवा अत्यधिक रीट्राय सूचित करू शकते.
+1. **मुळाशी सुरू करा.** अ‍ॅप चालू आहे का? त्याच्या अवलंबित्वाकडे पोहोचू शकतो का? `azd monitor` आणि संसाधन आरोग्य तपासा जसे तुम्ही कोणत्याही अ‍ॅपसाठी करता.
+2. **मॉडेल कनेक्शन तपासा.** तुमचा अ‍ॅप यशस्वीपणे AI मॉडेल कॉल करतोय का? अयशस्वी किंवा टाइम-आउट मॉडेल कॉल हे AI अ‍ॅप समस्यांमागील सर्वात सामान्य कारण असून ते तुमच्या अ‍ॅप लॉग्जमध्ये दिसतील.
+3. **मॉडेलला काय मिळाले पाहा.** AI प्रतिसाद इनपुटवर (प्रॉम्प्ट आणि कोणतीही शोधलेली संदर्भ सामग्री) अवलंबून असतो. जर आउटपुट चुकीचा असेल, तर इनपुट सहसा चुकलेला असतो. तुमचा अ‍ॅप मॉडेलला योग्य डेटा पाठवत आहे का ते तपासा.
+4. **प्रतिक्रिया लेटन्सी तपासा.** AI मॉडेल कॉल सामान्य API कॉलच्या तुलनेत जास्त वेळ घेतात. तुमचा अ‍ॅप सुस्त वाटत असेल तर मॉडेल प्रतिसाद वेळ वाढला आहे का ते पहा—यामुळे थ्रॉटलिंग, क्षमतेचे मर्यादा किंवा प्रदेश-स्तरीय गर्दी सूचित होऊ शकते.
+5. **खर्च संकेतांसाठी पहा.** टोकन वापर किंवा API कॉलमध्ये अनपेक्षित वाढ म्हणजे लूप, चुकीचा प्रॉम्प्ट किंवा अति पुनरावृत्ती सूचित करू शकतो.
 
-तुम्हाला लगेचच ऑब्झर्वेबिलिटी साधने mastery करण्याची गरज नाही. मुख्य धडा असा आहे की AI अनुप्रयोगांना निरीक्षण करण्यासाठी एक अतिरिक्त व्यवहारिक स्तर असतो, आणि azd चे बिल्ट-इन मॉनिटरिंग (`azd monitor`) तुम्हाला दोन्ही स्तरांची तपासणी करण्यासाठी एक प्रारंभबिंदू देते.
+आपल्याला तत्काळ ऑब्झर्व्हेबिलिटी टूल्समध्ये पारंगत होण्याची गरज नाही. मुख्य मुद्दा म्हणजे AI अ‍ॅप्समध्ये वर्तनाचे अतिरिक्त स्तर असते ज्यावर लक्ष ठेवायला हवे आणि azd च्या अंगभूत मॉनिटरिंग (`azd monitor`) ने दोन्ही स्तरांसाठी तपासणी सुरू करता येते.
 
 ---
 
-## Security Best Practices
+## सुरक्षा सर्वोत्तम पद्धती
 
-### 1. Zero-Trust Security Model
+### १. झिरो-ट्रस्ट सुरक्षा मॉडेल
 
-**Implementation Strategy**:
-- प्रमाणीकरणाशिवाय कोणतीही सेवा-ते-सेवा संवाद नको
-- सर्व API कॉल्स managed identities वापरतात
-- प्रायव्हेट एन्डपॉइंटसह नेटवर्क आयसोलेशन
-- Least privilege प्रवेश नियंत्रणे
+**अंमलबजावणी रणनीती**:
+- प्रमाणीकरणाशिवाय कोणत्याही सेवा-ते-सेवा संवादास परवानगी नाही
+- सर्व API कॉल्स मॅनेज्ड ओळखपत्रांसह होतात
+- खासगी एंडपॉइंटसह नेटवर्क अलगाव
+- किमान विशेषाधिकार प्रवेश नियंत्रणे
 
 ```bicep
 // Managed Identity for each service
@@ -169,9 +170,9 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-### 2. Secure Secret Management
+### २. सुरक्षित सीक्रेट व्यवस्थापन
 
-**Key Vault Integration Pattern**:
+**की व्हॉल्ट समाकलन नमुना**:
 
 ```bicep
 // Key Vault with proper access policies
@@ -204,9 +205,9 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-### 3. Network Security
+### ३. नेटवर्क सुरक्षा
 
-**Private Endpoint Configuration**:
+**खासगी एंडपॉइंट कॉन्फिगरेशन**:
 
 ```bicep
 // Virtual Network for AI services
@@ -264,11 +265,11 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## Performance and Scaling
+## कामगिरी व स्केलिंग
 
-### 1. Auto-Scaling Strategies
+### १. ऑटो-स्केलिंग धोरणे
 
-**Container Apps Auto-scaling**:
+**कंटेनर अ‍ॅप्स ऑटो-स्केलिंग**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -312,9 +313,9 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 2. Caching Strategies
+### २. कॅशिंग धोरणे
 
-**Redis Cache for AI Responses**:
+**Redis कॅश AI प्रतिसादांसाठी**:
 
 ```bicep
 // Redis Premium for production workloads
@@ -342,9 +343,9 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. Load Balancing and Traffic Management
+### ३. लोड बॅलन्सिंग व ट्रॅफिक व्यवस्थापन
 
-**Application Gateway with WAF**:
+**WAF सह अ‍ॅप्लिकेशन गेटवे**:
 
 ```bicep
 // Application Gateway with Web Application Firewall
@@ -380,11 +381,11 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 💰 Cost Optimization
+## 💰 खर्च अनुकूलन
 
-### 1. Resource Right-Sizing
+### १. संसाधन योग्य आकाराचे निर्धारण
 
-**Environment-Specific Configurations**:
+**परिसर-विशिष्ट कॉन्फिगरेशन**:
 
 ```bash
 # विकास वातावरण
@@ -404,7 +405,7 @@ azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
 
-### 2. Cost Monitoring and Budgets
+### २. खर्च मॉनिटरिंग व बजेट
 
 ```bicep
 // Cost management and budgets
@@ -445,12 +446,12 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-### 3. Token Usage Optimization
+### ३. टोकन वापर अनुकूलन
 
-**OpenAI Cost Management**:
+**OpenAI खर्च व्यवस्थापन**:
 
 ```typescript
-// अॅप्लिकेशन-स्तरीय टोकन अनुकूलन
+// अनुप्रयोग-स्तर टोकन ऑप्टिमायझेशन
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -460,7 +461,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // संदर्भ छाटा, वापरकर्त्याचे इनपुट नाही
+      // वापरकर्त्याच्या इनपुटऐवजी संदर्भ कापा
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -468,15 +469,15 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // अंदाजे: 1 टोकन ≈ 4 अक्षरे
+    // अंदाजे मूल्यांकन: 1 टोकन ≈ 4 अक्षरे
     return Math.ceil(text.length / 4);
   }
 }
 ```
 
-## Monitoring and Observability
+## मॉनिटरिंग व ऑब्झर्व्हेबिलिटी
 
-### 1. Comprehensive Application Insights
+### १. सर्वसमावेशक Application Insights
 
 ```bicep
 // Application Insights with advanced features
@@ -521,9 +522,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. AI-Specific Monitoring
+### २. AI-स्पेसिफिक मॉनिटरिंग
 
-**Custom Dashboards for AI Metrics**:
+**AI मेट्रिक्ससाठी कस्टम डॅशबोर्ड**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -552,7 +553,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Health Checks and Uptime Monitoring
+### ३. हेल्थ चेक आणि अपटाइम मॉनिटरिंग
 
 ```bicep
 // Application Insights availability tests
@@ -621,9 +622,9 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## Disaster Recovery and High Availability
+## आपत्ती पुनर्प्राप्ती व उच्च उपलब्धता
 
-### 1. Multi-Region Deployment
+### १. मल्टी-रिजन तैनाती
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -685,7 +686,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. Data Backup and Recovery
+### २. डेटा बॅकअप व पुनर्प्राप्ती
 
 ```bicep
 // Backup configuration for critical data
@@ -736,9 +737,9 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
 }
 ```
 
-## DevOps and CI/CD Integration
+## DevOps व CI/CD समाकलन
 
-### 1. GitHub Actions Workflow
+### १. GitHub Actions वर्कफ्लो
 
 ```yaml
 # .github/workflows/deploy-ai-app.yml
@@ -819,7 +820,7 @@ jobs:
           python scripts/health_check.py --env production
 ```
 
-### 2. Infrastructure Validation
+### २. पूर्वाधार वैधता
 
 ```bash
 # scripts/validate_infrastructure.sh
@@ -827,7 +828,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# सर्व आवश्यक सेवा चालू आहेत का ते तपासा
+# तपासा की सर्व आवश्यक सेवा चालू आहेत का
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -837,7 +838,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# OpenAI मॉडेल डिप्लॉयमेंटची पडताळणी करा
+# OpenAI मॉडेल डिप्लॉयमेंट्स वैध ठरवा
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-4.1-mini"* ]]; then
@@ -845,80 +846,80 @@ if [[ ! $models == *"gpt-4.1-mini"* ]]; then
     exit 1
 fi
 
-# AI सेवांची कनेक्टिव्हिटीची चाचणी करा
+# AI सेवा कनेक्टिव्हिटीची चाचणी करा
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Production Readiness Checklist
+## उत्पादन तयारी चेकलिस्ट
 
-### Security ✅
-- [ ] सर्व सेवा managed identities वापरतात
-- [ ] सिक्रेट्स Key Vault मध्ये संग्रहित केलेले आहेत
-- [ ] प्रायव्हेट एन्डपॉइंट कॉन्फिगर केलेले आहेत
-- [ ] Network security groups लागू केलेले आहेत
-- [ ] RBAC least privilege सह
-- [ ] सार्वजनिक एन्डपॉइंटवर WAF सक्षम
+### सुरक्षा ✅
+- [ ] सर्व सेवा मॅनेज्ड ओळखपत्रे वापरतात
+- [ ] सीक्रेट्स की व्हॉल्टमध्ये साठवले जातात
+- [ ] खासगी एंडपॉइंट कॉन्फिगर केलेले आहेत
+- [ ] नेटवर्क सुरक्षा गट अंमलात आले आहेत
+- [ ] किमान विशेषाधिकारांसह RBAC
+- [ ] सार्वजनिक एंडपॉइंटसाठी WAF सक्षम आहे
 
-### Performance ✅
-- [ ] Auto-scaling कॉन्फिगर केलेले आहे
-- [ ] Caching अंमलात आणलेले आहे
-- [ ] Load balancing सेटअप केलेले आहे
-- [ ] स्टॅटिक कंटेंटसाठी CDN
+### कामगिरी ✅
+- [ ] ऑटो-स्केलिंग कॉन्फिगर केलेले आहे
+- [ ] कॅशिंग राबवले गेले आहे
+- [ ] लोड बॅलन्सिंग सेटअप केलेले आहे
+- [ ] स्थिर सामग्रीसाठी CDN
 - [ ] डेटाबेस कनेक्शन पूलिंग
-- [ ] टोकन वापर अनुकूलित
+- [ ] टोकन वापर अनुकूलन
 
-### Monitoring ✅
+### मॉनिटरिंग ✅
 - [ ] Application Insights कॉन्फिगर केलेले आहे
-- [ ] कस्टम मेट्रिक्स परिभाषित
-- [ ] अलर्टिंग नियम सेटअप
+- [ ] कस्टम मेट्रिक्स परिभाषित केलेले आहेत
+- [ ] अलर्ट नियम सेटअप केलेले आहेत
 - [ ] डॅशबोर्ड तयार केलेले आहे
-- [ ] हेल्थ चेक्स अमलात आणलेले आहेत
-- [ ] लॉग रिटेन्शन पॉलिसी
+- [ ] हेल्थ चेक्ज लागू केलेले आहेत
+- [ ] लॉग रिटेंशन धोरणे
 
-### Reliability ✅
-- [ ] मल्टी-रीजन तैनाती
-- [ ] बॅकअप आणि रिकव्हरी योजना
-- [ ] सर्किट ब्रेकर्स लागू केलेले आहेत
-- [ ] रीट्राय पॉलिसीज कॉन्फिगर केलेले आहेत
-- [ ] अनुकूली डाउनग्रेड (Graceful degradation)
-- [ ] हेल्थ चेक एन्डपॉइंट्स
+### विश्वासार्हता ✅
+- [ ] मल्टी-रिजन तैनाती
+- [ ] बॅकअप व पुनर्प्राप्ती योजना
+- [ ] सर्किट ब्रेकर अंमलात आणलेले आहेत
+- [ ] पुनरावृत्ती धोरणे कॉन्फिगर केलेली आहेत
+- [ ] मार्जीनली डिग्रेडेशन
+- [ ] हेल्थ चेक एंडपॉइंट्स
 
-### Cost Management ✅
+### खर्च व्यवस्थापन ✅
 - [ ] बजेट अलर्ट कॉन्फिगर केलेले आहेत
-- [ ] रिसोर्स राइट-सायझिंग
-- [ ] Dev/test सवलती लागू
-- [ ] Reserved instances खरेदी केलेले
+- [ ] संसाधन योग्य आकारांसाठी
+- [ ] विकास/चाचणी सवलती लागू केल्या
+- [ ] आरक्षित उदाहरणे खरेदी केली
 - [ ] खर्च मॉनिटरिंग डॅशबोर्ड
-- [ ] नियमित खर्च आढावे
+- [ ] नियमित खर्च पुनरावलोकने
 
-### Compliance ✅
-- [ ] डेटा निवासीपणाच्या आवश्यकता पूर्ण
-- [ ] ऑडिट लॉगिंग सक्षम
-- [ ] अनुपालन धोरणे लागू
-- [ ] सुरक्षा बेसलाइन अंमलात आणलेले
-- [ ] नियमित सुरक्षा मूल्यमापन
-- [ ] इन्सिडेंट रिस्पॉन्स योजना
+### अनुपालन ✅
+- [ ] डेटा निवास गरजा पूर्ण झाल्या
+- [ ] ऑडिट लॉगिंग सक्षम केलेले
+- [ ] अनुपालन धोरणे लागू केल्या
+- [ ] सुरक्षा बेसलाईन्स अंमलात आलेले
+- [ ] नियमित सुरक्षा मूल्यांकन
+- [ ] आपत्ती प्रतिसाद योजना
 
-## Performance Benchmarks
+## कामगिरी बेंचमार्क्स
 
-### Typical Production Metrics
+### सामान्य उत्पादन मेट्रिक्स
 
-| Metric | Target | Monitoring |
+| मेट्रिक | लक्ष्य | मॉनिटरिंग |
 |--------|--------|------------|
-| **Response Time** | < 2 seconds | Application Insights |
-| **Availability** | 99.9% | Uptime monitoring |
-| **Error Rate** | < 0.1% | Application logs |
-| **Token Usage** | < $500/month | Cost management |
-| **Concurrent Users** | 1000+ | Load testing |
-| **Recovery Time** | < 1 hour | Disaster recovery tests |
+| **प्रतिक्रिया वेळ** | < २ सेकंद | Application Insights |
+| **उपलब्धता** | ९९.९% | अपटाइम मॉनिटरिंग |
+| **त्रुटी दर** | < ०.१% | अ‍ॅप्लिकेशन लॉग्ज |
+| **टोकन वापर** | < $५००/महिना | खर्च व्यवस्थापन |
+| **समांतर वापरकर्ते** | १०००+ | लोड चाचणी |
+| **पुनर्प्राप्ती वेळ** | < १ तास | आपत्ती पुनर्प्राप्ती चाचण्या |
 
-### Load Testing
+### लोड चाचणी
 
 ```bash
-# एआय अनुप्रयोगांसाठी लोड चाचणी स्क्रिप्ट
+# AI अनुप्रयोगांसाठी लोड चाचणी स्क्रिप्ट
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -926,129 +927,182 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 Community Best Practices
+## 🤝 समुदायाच्या सर्वोत्तम पद्धती
 
 Microsoft Foundry Discord समुदायाच्या अभिप्रायावर आधारित:
 
-### Top Recommendations from the Community:
+### समुदायाकडून शीर्ष शिफारसी:
 
-1. **लहानपासून सुरू करा, हळूहळू स्केल करा**: मूलभूत SKUs ने सुरू करा आणि प्रत्यक्ष वापरावर आधारित स्केल करा
-2. **सर्वकाही मॉनिटर करा**: पहिल्या दिवसापासून सर्वसमावेशक मॉनिटरिंग सेट करा
-3. **सुरक्षा ऑटोमेट करा**: सातत्यपूर्ण सुरक्षेसाठी infrastructure as code वापरा
-4. **पूर्णपणे टेस्ट करा**: तुमच्या पाइपलाइनमध्ये AI-विशिष्ट चाचण्या समाविष्ट करा
-5. **खर्चांसाठी योजना करा**: टोकन वापर मॉनिटर करा आणि लवकरच बजेट अलर्ट सेट करा
+1. **लहानपासून सुरुवात करा, हळूहळू स्केल करा**: मूलभूत SKU सह सुरू करा आणि प्रत्यक्ष वापरानुसार वाढवा
+2. **सर्वकाही मॉनिटर करा**: पहिल्याच दिवशी सर्वसमावेशक मॉनिटरिंग सेट करा
+3. **सुरक्षा स्वयंचलित करा**: सुसंगततेसाठी इन्फ्रास्ट्रक्चर एज कोड वापरा
+4. **संपूर्ण चाचणी करा**: तुमच्या पाइपलाइनमध्ये AI-विशिष्ट चाचणी समाविष्ट करा
+5. **खर्चांसाठी योजना करा**: टोकन वापर पहा आणि लवकरच बजेट अलर्ट सेट करा
 
-### Common Pitfalls to Avoid:
+### सामान्य चुका टाळा:
 
-- ❌ कोडमध्ये API की हार्डकोड करणे
-- ❌ योग्य मॉनिटरिंग सेट न करणे
-- ❌ खर्च-अनुकूलन दुर्लक्षित करणे
-- ❌ फेल्युअर परिस्थितींची चाचणी न करणे
-- ❌ हेल्थ चेकशिवाय तैनात करणे
+- ❌ API की कोडमध्ये हार्डकोड करणे
+- ❌ योग्य मॉनिटरिंग न करणे
+- ❌ खर्च अनुकूलनकडे दुर्लक्ष करणे
+- ❌ अपयश परिस्थिती चाचणी न करणे
+- ❌ हेल्थ चेक न वापरता तैनात करणे
 
-## AZD AI CLI Commands and Extensions
+## AZD AI CLI कमांड्स आणि एक्सटेंशन्स
 
-AZD मध्ये AI-विशिष्ट कमांड्स आणि एक्सटेन्शन्सची वाढती संच आहे जी production AI कार्यप्रवाह सुलभ करतात. हे साधने स्थानिक विकास आणि production तैनाती यांच्यातील अंतर कमी करतात.
+AZD मध्ये AI-विशिष्ट कमांड्स आणि एक्सटेंशन्स वाढत आहेत जे उत्पादन AI वर्कफ्लो सुलभ करतात. हे साधने स्थानिक विकास व उत्पादन तैनाती यांच्यातील अंतर कमी करतात.
 
-### AZD Extensions for AI
+### AI साठी AZD एक्सटेंशन्स
 
-AZD AI-विशिष्ट क्षमता जोडण्यासाठी एक एक्सटेन्शन सिस्टम वापरते. एक्सटेन्शन्स इंस्टॉल आणि व्यवस्थापित करण्यासाठी:
+AZD एक एक्सटेंशन प्रणाली वापरते ज्याद्वारे AI-विशिष्ट क्षमता जोडल्या जातात. खालीलप्रमाणे एक्सटेंशन्स इन्स्टॉल व व्यवस्थापित करा:
 
 ```bash
-# सर्व उपलब्ध विस्तार सूचीबद्ध करा (AI समाविष्ट)
+# सर्व उपलब्ध विस्तारांची यादी करा (AI सह)
 azd extension list
 
-# स्थापित विस्तारांचे तपशील तपासा
+# इन्स्टॉल केलेल्या विस्तारांचे तपशील तपासा
 azd extension show azure.ai.agents
 
-# Foundry Agents विस्तार स्थापित करा
+# Foundry एजंट्स विस्तार स्थापित करा
 azd extension install azure.ai.agents
 
-# फाईन-ट्युनिंग विस्तार स्थापित करा
+# फाइन-ट्यूनिंग विस्तार स्थापित करा
 azd extension install azure.ai.finetune
 
-# सानुकूल मॉडेल्स विस्तार स्थापित करा
+# कस्टम मॉडेल्स विस्तार स्थापित करा
 azd extension install azure.ai.models
 
-# सर्व स्थापित विस्तार अद्यतनित करा
+# सर्व इन्स्टॉल केलेले विस्तार अपग्रेड करा
 azd extension upgrade --all
 ```
 
-**Available AI extensions:**
+**उपलब्ध AI एक्सटेंशन्स:**
 
-| Extension | Purpose | Status |
+| एक्सटेंशन | उद्देश | स्थिती |
 |-----------|---------|--------|
-| `azure.ai.agents` | Foundry Agent Service management | Preview |
-| `azure.ai.finetune` | Foundry model fine-tuning | Preview |
-| `azure.ai.models` | Foundry custom models | Preview |
-| `azure.coding-agent` | Coding agent configuration | Available |
+| `azure.ai.agents` | Foundry एजंट सेवा व्यवस्थापन | प्रिव्ह्यू |
+| `azure.ai.skills` | पुनर्वापरयोग्य एजंट कौशल्ये | प्रिव्ह्यू |
+| `azure.ai.connections` | Foundry कनेक्शन्स (डेटा स्रोत, उपकरणे) | प्रिव्ह्यू |
+| `azure.ai.finetune` | Foundry मॉडेल फाइन-ट्यूनिंग | प्रिव्ह्यू |
+| `azure.ai.models` | Foundry कस्टम मॉडेल्स | प्रिव्ह्यू |
+| `azure.coding-agent` | कोडिंग एजंट कॉन्फिगरेशन | उपलब्ध |
 
-### Initializing Agent Projects with `azd ai agent init`
+> `azure.ai.agents` एक्सटेंशन जलद विकसित होत आहे. हा कोर्स `0.1.40-preview` वर सत्यापित आहे. `azd extension upgrade --all` चालवा ताजे कमांड सेट मिळविण्यासाठी, आणि `azd extension show azure.ai.agents` करून तुमचा इन्स्टॉल केलेला संस्करण तपासा.
 
-`azd ai agent init` कमांड Microsoft Foundry Agent Service सह समाकलित production-तयार AI एजंट प्रोजेक्ट स्कॅफोल्ड करते:
+**नवीन `skills` आणि `connections` एक्सटेंशन्स काय आहेत?**
+
+एजंट टूलिंगसोबत दोन प्रिव्ह्यू एक्सटेंशन्स आले आहेत आणि सुरुवातीला हे समजून घेणे उपयुक्त आहे:
+
+- **`azure.ai.skills`** — एक **कौशल्य** म्हणजे पुनर्वापरासाठी असलेली क्षमता (पॅकेज केलेले साधन किंवा वर्तन) जी तुम्ही अनेक एजंट्सना जोडू शकता, पुन्हा तयार करण्याऐवजी. हे एका सामायिक बिल्डिंग ब्लॉकसारखे आहे: "दस्तऐवज शोधा" किंवा "ऑर्डर शोधा" असे कौशल्य एकदाच तयार करा आणि नंतर एजंट्समध्ये पुनर्वापर करा. यामुळे मल्टी-एजंट सिस्टम्स (अध्याय 5) सुसंगत राहतात आणि कॉपी-पेस्ट टाळता येतो.
+- **`azure.ai.connections`** — एक **कनेक्शन** म्हणजे तुमच्या Foundry प्रोजेक्टचे बाह्य स्त्रोताकडे एजंट्सना प्रवेश देणारे व्यवस्थापित दुवा—डेटा स्रोत (जसे Azure AI Search), उपकरण एंडपॉइंट, किंवा दुसरी सेवा. कनेक्शन्स एजंट्सकडे डेटा कोठे आणि कसे पोहोचतो याचे केंद्रीकरण करतात, त्यामुळे क्रेडेन्शियल्स आणि एंडपॉइंट्स कोडमध्ये विखुरले जाण्याऐवजी एका नियंत्रित ठिकाणी राहतात.
+
+तुम्हाला तुमचे पहिले एजंट तैनात करण्यासाठी हे आवश्यक नाही—`azure.ai.agents` वर लक्ष ठेवा शिकण्याच्या काळात. जेव्हा तुम्हाला त्या सारखे उपकरण अनेक एजंट्समध्ये डुप्लिकेट करावे लागेल तेव्हा `skills` वापरा, आणि जेव्हा अनेक एजंट्स एकाच डेटा स्रोताचा वापर करतात तेव्हा `connections`.
+
+### `azd ai agent init` सह एजंट प्रोजेक्ट्सची सुरुवात
+
+`azd ai agent init` कमांड Microsoft Foundry Agent Service सह जोडलेला उत्पादन-तयार AI एजंट प्रोजेक्ट तयार करते:
 
 ```bash
-# एजंट मॅनिफेस्टमधून नवीन एजंट प्रकल्प प्रारंभ करा
+# एजंट मॅनिफेस्टमधून नवीन एजंट प्रकल्प सुरू करा
 azd ai agent init -m <manifest-path-or-uri>
 
-# प्रारंभ करा व विशिष्ट Foundry प्रकल्प लक्ष्य म्हणून निवडा
+# विशिष्ट Foundry प्रकल्प सुरू करा आणि लक्ष्य करा
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# सानुकूल स्रोत निर्देशिकेसह प्रारंभ करा
+# कस्टम स्रोत निर्देशिकेसह प्रारंभ करा
 azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
 
-# Container Apps ला होस्ट म्हणून लक्ष्य करा
+# होस्ट म्हणून कंटेनर अॅप्सचे लक्ष्य करा
 azd ai agent init -m agent-manifest.yaml --host containerapp
 ```
 
-**Key flags:**
+**महत्त्वाचे ध्वज (flags):**
 
-| Flag | Description |
+| ध्वज | वर्णन |
 |------|-------------|
-| `-m, --manifest` | प्रोजेक्टमध्ये जोडण्यासाठी एजंट मॅनिफेस्टचा पथ किंवा URI |
-| `-p, --project-id` | तुमच्या azd एन्व्हायर्नमेंटसाठी विद्यमान Microsoft Foundry Project ID |
-| `-s, --src` | एजंट परिभाषा डाउनलोड करायची निर्देशिका (मूलभूतपणे `src/<agent-id>` ला डिफॉल्ट) |
-| `--host` | डिफॉल्ट होस्ट ओव्हरराईड करा (उदा., `containerapp`) |
-| `-e, --environment` | वापरायचे azd एन्व्हायर्नमेंट |
+| `-m, --manifest` | तुमच्या प्रोजेक्टमध्ये जोडण्यासाठी एजंट मॅनिफेस्टची मार्ग किंवा URI |
+| `-p, --project-id` | तुमच्या azd पर्यावरणासाठी विद्यमान Microsoft Foundry प्रोजेक्ट आयडी |
+| `-s, --src` | एजंट व्याख्या डाउनलोड करण्यासाठी निर्देशिका (मूलतः `src/<agent-id>`) |
+| `--host` | डीफॉल्ट होस्ट ओवरराईड करा (उदा., `containerapp`) |
+| `-e, --environment` | वापरण्याचे azd वातावरण |
 
-**Production tip**: सुरूवातीपासूनच तुमचा एजंट कोड आणि क्लाउड रिसोर्सेस लिंक ठेवण्यासाठी विद्यमान Foundry प्रोजेक्टशी थेट कनेक्ट करण्यासाठी `--project-id` वापरा.
+**उत्पादन टिप**: `--project-id` वापरून थेट विद्यमान Foundry प्रोजेक्टशी कनेक्ट करा, तुमचा एजंट कोड आणि क्लाउड संसाधने सुरुवातीपासून लिंक्ड राहतील.
 
-### Model Context Protocol (MCP) with `azd mcp`
+### एजंट जीवनचक्र व्यवस्थापन
 
-AZD मध्ये बिल्ट-इन MCP सर्व्हर समर्थन (Alpha) समाविष्ट आहे, जे AI एजंट आणि साधनांना तुमच्या Azure रिसोर्सेसशी प्रमाणीकृत प्रोटोकॉलद्वारे संवाद साधण्यास सक्षम करते:
+`init` व्यतिरिक्त, `azure.ai.agents` एक्सटेंशन होस्टेड एजंटचे पूर्ण जीवनचक्र व्यवस्थापित करणाऱ्या कमांड्स पुरवते—चाचणी, मूल्यांकन, ऑप्टिमायझेशन, आणि निवृत्ती:
+
+```bash
+# तैनात एजंटला कॉल करा आणि सर्व्हर प्रतिसाद वेळ पहा
+# (एकूण विलंब आणि प्रथम बाइटपर्यंतचा वेळ)
+azd ai agent invoke
+
+# बदल करण्यापूर्वी थेट एंडपॉइंट कॉन्फिगरेशन दाखवा
+azd ai agent endpoint show
+
+# एजंटसाठी मूल्यमापन डेटा सेट तयार करा
+azd ai agent eval generate --dataset ./eval/dataset.jsonl
+
+# आपल्या मूल्यमापन डेटाअनुसार एजंट सूचनांचे अनुकूलन करा
+# (एजंट प्रोजेक्टमध्ये optimization_model आवश्यक आहे)
+azd ai agent optimize
+
+# कोड-आधारित होस्टेड एजंटचा तैनात स्रोत डाउनलोड करा
+# (SHA-256 पडताळणीसह)
+azd ai agent code download
+
+# होस्टेड एजंट आणि त्याच्या सर्व आवृत्त्या हटवा
+# (--force सक्रिय सत्रे समाप्त करते)
+azd ai agent delete --force
+```
+
+**जीवनचक्राचा आढावा:**
+
+| टप्पा | कमांड | उत्पादन वापर |
+|-------|---------|----------------|
+| चाचणी | `azd ai agent invoke` | प्रकाशनापूर्वी प्रतिसाद वैधता आणि लेटन्सी मोजा |
+| तपासणी | `azd ai agent endpoint show` | एंडपॉइंट ऑथ/कॉन्फिग तपासा; ताबडतोब बदलांसाठी लक्ष ठेवा |
+| मोजणी | `azd ai agent eval generate` | वास्तविक ट्रेसेसपासून पुनरावृत्ती होऊ शकणारे मूल्यांकन संच तयार करा |
+| सुधारणा | `azd ai agent optimize` | मोजलेल्या गुणवत्तेवर आधारित सूचना ट्यून करा |
+| पुनर्प्राप्ती | `azd ai agent code download` | अचूक तैनात स्रोत प्राप्त करा ऑडिट/रोलबॅकसाठी |
+| निवृत्ती | `azd ai agent delete --force` | एजंट आणि त्याच्या आवृत्त्या स्वच्छपणे हटवा |
+
+> ही प्रिव्ह्यू कमांड्स आहेत आणि एक्सटेंशनच्या आवृत्त्यांमध्ये बदलू शकतात. `azd ai agent --help` चालवा तुमच्या इन्स्टॉल आवृत्तीतील उपलब्ध सबकमानड्स पाहण्यासाठी.
+
+### `azd mcp` सह मॉडेल संदर्भ प्रोटोकॉल (MCP)
+AZDमध्ये इनबिल्ट MCP सर्व्हर सपोर्ट (अल्फा) समाविष्ट आहे, ज्यामुळे AI एजंट्स आणि साधने आपल्या Azure संसाधनांशी एकसंध प्रोटोकॉलद्वारे संवाद साधू शकतात:
 
 ```bash
 # आपल्या प्रकल्पासाठी MCP सर्व्हर सुरू करा
 azd mcp start
 
-# साधनांच्या अंमलबजावणीसाठी सध्याच्या Copilot संमती नियमांचे पुनरावलोकन करा
+# टूल अंमलबजावणीसाठी सध्याच्या Copilot संमती नियमांचे पुनरावलोकन करा
 azd copilot consent list
 ```
 
-MCP सर्व्हर तुमच्या azd प्रोजेक्ट संदर्भ—एन्व्हायर्नमेंट्स, सेवा, आणि Azure रिसोर्सेस—AI-शक्तीमान विकास साधनांना एक्स्पोज करतो. यामुळे सक्षम होते:
+MCP सर्व्हर आपला azd प्रोजेक्ट संदर्भ—पर्यावरण, सेवा, आणि Azure संसाधने—AI-शक्तीप्राप्त विकास साधनांसमोर मोकळा करतो. हे सक्षम करते:
 
-- **AI-लादलेले तैनाती सहाय्य**: कोडिंग एजंटना तुमच्या प्रोजेक्ट स्टेटची चौकशी करण्यास आणि तैनाती सुरू करण्यास परवानगी द्या
-- **रिसोर्स शोध**: AI साधने शोधू शकतात की तुमचा प्रोजेक्ट कोणती Azure रिसोर्सेस वापरतो
-- **एन्व्हायर्नमेंट व्यवस्थापन**: एजंट डेव्ह/स्टेजिंग/प्रॉडक्शन एन्व्हायर्नमेंट्स बदला शकतात
+- **AI सहायक तैनाती**: कोडिंग एजंट्सना आपला प्रोजेक्ट स्थिती विचारण्याचा आणि तैनाती सुरू करण्याचा परवानगी द्या
+- **संसाधन शोध**: AI साधने शोधू शकतात की आपल्या प्रोजेक्टमध्ये कोणती Azure संसाधने वापरली जातात
+- **पर्यावरण व्यवस्थापन**: एजंट्स डेव/स्टेजिंग/उत्पादन पर्यावरणांमध्ये स्विच करू शकतात
 
-### Infrastructure Generation with `azd infra generate`
+### `azd infra generate` सह पायाभूत सुविधा निर्मिती
 
-production AI वर्कलोडसाठी, तुम्ही स्वतः Infrastructure as Code जनरेट आणि सानुकूलित करू शकता, स्वयंचलित provisioning वर अवलंबून न राहता:
+उत्पादन AI वर्कलोडसाठी, आपण आपोआप प्राविजनिंगवर अवलंबून न राहता Infrastructure as Code तयार आणि सानुकूलित करू शकता:
 
 ```bash
-# आपल्या प्रकल्पाच्या परिभाषेमधून Bicep/Terraform फायली तयार करा
+# तुमच्या प्रकल्प व्याख्येतून बायसेप/टेराफॉर्म फाइल्स तयार करा
 azd infra generate
 ```
 
-हे IaC डिस्कवर लिहिते जेणेकरून तुम्ही करू शकता:
-- तैनातीपूर्वी इन्फ्रास्ट्रक्चर पुनरावलोकन आणि ऑडिट करा
-- सानुकूल सुरक्षा धोरणे जोडा (नेटवर्क नियम, प्रायव्हेट एन्डपॉइंट्स)
-- विद्यमान IaC पुनरावलोकन प्रक्रियांशी एकत्र करा
-- अॅप्लिकेशन कोडपासून स्वतंत्रपणे इन्फ्रास्ट्रक्चर बदलांची व्हर्शन कंट्रोल करा
+हे IaC डिस्कवर लिहिते त्यामुळे आपण करू शकता:
+- तैनात करण्यापूर्वी पायाभूत सुविधा पुनरावलोकन आणि ऑडिट करा
+- सानुकूल सुरक्षा धोरणे जोडा (नेटवर्क नियम, खासगी एंडपॉइंट्स)
+- विद्यमान IaC पुनरावलोकन प्रक्रियांमध्ये समाकलित करा
+- अ‍ॅप्लिकेशन कोडपासून स्वतंत्रपणे पायाभूत सुविधा बदलांचे आवृत्ती नियंत्रण करा
 
-### Production Lifecycle Hooks
+### उत्पादन जीवनचक्र हुक
 
-AZD hooks तुम्हाला तैनाती जीवनचक्राच्या प्रत्येक टप्प्यात कस्टम लॉजिक इंजेक्ट करण्यास अनुमती देतात—production AI कार्यप्रवाहांसाठी महत्त्वाचे:
+AZD हुक आपल्याला तैनाती जीवनचक्राच्या प्रत्येक टप्प्यावर सानुकूल लॉजिक इन्सर्ट करण्याची मुभा देतात—जो उत्पादन AI वर्कफ्लोजसाठी महत्त्वाचा आहे:
 
 ```yaml
 # azure.yaml - Production hooks example
@@ -1077,85 +1131,227 @@ services:
 ```
 
 ```bash
-# विकासादरम्यान एखादा विशिष्ट हुक हाताने चालवा
+# विकास दरम्यान विशिष्ट हुक हाताने चालवा
 azd hooks run predeploy
 ```
 
-**Recommended production hooks for AI workloads:**
+**AI वर्कलोडसाठी शिफारस केलेले उत्पादन हुक:**
 
-| Hook | Use Case |
+| हुक | वापर प्रकरण |
 |------|----------|
-| `preprovision` | AI मॉडेल क्षमतेसाठी सदस्यत्व कोटा पडताळा |
-| `postprovision` | प्रायव्हेट एन्डपॉइंट कॉन्फिगर करा, मॉडेल वेट्स तैनात करा |
+| `preprovision` | AI मॉडेल क्षमतेसाठी सबस्क्रिप्शन कोटा वैध करा |
+| `postprovision` | खासगी एंडपॉइंट कॉन्फिगर करा, मॉडेल वेट्स तैनात करा |
 | `predeploy` | AI सुरक्षा चाचण्या चालवा, प्रॉम्प्ट टेम्पलेट्स वैध करा |
 | `postdeploy` | एजंट प्रतिसादांसाठी स्मोक टेस्ट करा, मॉडेल कनेक्टिव्हिटी सत्यापित करा |
 
-### CI/CD Pipeline Configuration
+### CI/CD पाईपलाइन कॉन्फिगरेशन
 
-सुरक्षित Azure प्रमाणीकरणासह तुमच्या प्रोजेक्टला GitHub Actions किंवा Azure Pipelines शी कनेक्ट करण्यासाठी `azd pipeline config` वापरा:
+आपला प्रोजेक्ट GitHub Actions किंवा Azure Pipelines शी सुरक्षित Azure प्रमाणीकरणासह कनेक्ट करण्यासाठी `azd pipeline config` वापरा:
 
 ```bash
-# CI/CD पाइपलाइन कॉन्फिगर करा (परस्परसंवादी)
+# CI/CD पाईपलाइन कॉन्फिगर करा (इंटरऐक्टिव्ह)
 azd pipeline config
 
-# विशिष्ट पुरवठादारासह कॉन्फिगर करा
+# एखाद्या विशिष्ट प्रदात्यासह कॉन्फिगर करा
 azd pipeline config --provider github
 ```
 
-ही कमांड:
-- Least-privilege प्रवेश असलेले एक service principal तयार करते
-- फेडरेटेड क्रेडेन्शियल्स कॉन्फिगर करते (कोणतेही संग्रहित सिक्रेट्स नाहीत)
-- तुमचे पाइपलाइन डेफिनिशन फाइल तयार किंवा अद्ययावत करते
-- तुमच्या CI/CD सिस्टममध्ये आवश्यक एन्व्हायर्नमेंट व्हेरिएबल्स सेट करते
+हा कमांड:
+- किमान-प्राधान्य प्रवेशासह सेवा प्रिंसिपल तयार करतो
+- फेडरेटेड क्रेडेन्शियल्स कॉन्फिगर करतो (कोणतेही सांत्विक सिक्रेट संग्रहित नाही)
+- आपली पाईपलाइन परिभाषा फाइल तयार किंवा अद्ययावत करतो
+- आपली CI/CD प्रणालीमध्ये आवश्यक पर्यावरण चल सेट करतो
 
-**Production workflow with pipeline config:**
+#### टप्प्याटप्प्याने: आपली पहिली GitHub Actions पाईपलाइन
+
+इथे एका काम करणाऱ्या azd प्रोजेक्टपासून दर पुषवर आपोआप तैनातीपर्यंत संपूर्ण मार्गदर्शन आहे.
+
+**1. खात्री करा की आपला प्रोजेक्ट GitHub वर आहे**
 
 ```bash
-# 1. उत्पादन पर्यावरण तैयार करा
+git init
+git add .
+git commit -m "Initial azd project"
+gh repo create my-ai-app --private --source=. --push
+```
+
+**2. पाइपलाइन कॉन्फिग चालवा**
+
+```bash
+azd pipeline config --provider github
+```
+
+azd संवादात्मकरित्या:
+- कोणता Azure सबस्क्रिप्शन आणि पर्यावरण लक्ष्यित करायचा हे विचारेल
+- पाइपलाइनसाठी Entra **अ‍ॅप नोंदणी + सेवा प्रिंसिपल** तयार करेल
+- **फेडरेटेड क्रेडेन्शियल्स (OIDC)** सेटअप करेल—म्हणजे GitHub Azure शी लघु-कालावधी टोकन्ससह प्रमाणीकरण करते आणि **कोणतेही सिक्रेट संग्रहित केले जात नाहीत**
+- आवश्यक **चल** आपल्या GitHub रेपोत ढकलेल (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `AZURE_ENV_NAME`, `AZURE_LOCATION`)
+
+**3. तयार केलेले वर्कफ्लो समजून घ्या**
+
+azd `.github/workflows/azure-dev.yml` जोडतो. प्रमुख भाग असे दिसतात:
+
+```yaml
+# .github/workflows/azure-dev.yml
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:        # lets you run it manually too
+
+permissions:
+  id-token: write           # required for OIDC federated login
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
+      AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install azd
+        uses: Azure/setup-azd@v2
+      - name: Log in with OIDC
+        run: azd auth login --client-id "$AZURE_CLIENT_ID" --federated-credential-provider "github" --tenant-id "$AZURE_TENANT_ID"
+      - name: Provision infrastructure
+        run: azd provision --no-prompt
+      - name: Deploy application
+        run: azd deploy --no-prompt
+```
+
+**4. ते कार्यरत आहे का तपासा**
+
+```bash
+# पाइपलाइन ट्रिगर करण्यासाठी एक बदल पुश करा
+git commit -am "Trigger pipeline" --allow-empty
+git push
+```
+
+आपल्या GitHub रेपोत **Actions** टॅब उघडा आणि वर्कफ्लो `azd provision` आणि `azd deploy` आपोआप चालताना पहा.
+
+> **फेडरेटेड क्रेडेन्शियल्स का महत्त्वाचे आहेत:** जुन्या पाईपलाइनमध्ये GitHub मध्ये क्लाएंट सिक्रेट संग्रहित केले जात असे. OIDC फेडरेटेड क्रेडेन्शियल्स त्या सिक्रेटला पूर्णपणे काढून टाकतात—GitHub रनटाइममध्ये लघु-कालावधी टोकनची विनंती करतो, जे अधिक सुरक्षित आहे आणि पुन:प्रक्रिया किंवा लीक होण्याची काळजी नाही. हे डीफॉल्ट `azd pipeline config` सेटअप आहे.
+
+> **सिक्रेट विरुद्ध चल:** गैर-संवेदनशील ओळखपत्रे (`AZURE_CLIENT_ID` इ.) रेपो **चल** मध्ये जातात. आपल्या अ‍ॅपला खरोखर बिल्ड वेळेत सिक्रेटची आवश्यकता असल्यास, GitHub **सिक्रेट** म्हणून जोडा आणि ` ${{ secrets.NAME }}` असा संदर्भ द्या—पण रनटाइममध्ये Key Vault + मॅनेज्ड ओळख प्राधान्य द्या (बघा [Chapter 3](../chapter-03-configuration/authsecurity.md)).
+
+**पाईपलाइन कॉन्फिगसह उत्पादन वर्कफ्लो:**
+
+```bash
+# 1. उत्पादन वातावरण सेट करा
 azd env new production
 azd env set AZURE_OPENAI_CAPACITY 100
 
-# 2. पाइपलाइन कॉन्फिगर करा
+# 2. पाईपलाईन कॉन्फिगर करा
 azd pipeline config --provider github
 
-# 3. प्रत्येक main शाखेवर पुश झाल्यावर पाइपलाइन azd deploy चालवते
+# 3. मुख्य शाखेत प्रत्येक पुशवर पाईपलाईन azd deploy चालवते
 ```
 
-### Adding Components with `azd add`
+#### टप्प्याटप्प्याने: Azure DevOps Pipelines
 
-विद्यमान प्रोजेक्टमध्ये हळूहळू Azure सेवा जोडा:
+GitHub Actions पेक्षा Azure DevOps प्राधान्य द्याल का? azd त्याला नैसर्गिकरित्या `azdo` प्रदात्यासह समर्थन देते. फ्लो जवळजवळ सारखाच आहे—azd पाईपलाइन फाइल तयार करते, सेवा कनेक्शन तयार करते, आणि प्रमाणीकरण सुसज्ज करते.
+
+**1. खात्री करा की आपल्याकडे एक Azure DevOps प्रोजेक्ट आहे**
+
+आपल्याला `https://dev.azure.com/<your-org>` येथे एक संघटना आणि प्रोजेक्ट आवश्यक आहे. **Build (Read & execute)**, **Code (Read & write)**, आणि **Service Connections (Read, query & manage)** स्कोपसह व्यावसायिक प्रवेश टोकन (PAT) तयार करा—azd आपल्याला यासाठी विचारेल.
+
+**2. पाइपलाइन कॉन्फिग करा**
+
+```bash
+azd pipeline config --provider azdo
+```
+
+azd:
+- आपल्या Azure DevOps संघटना आणि प्रोजेक्टसाठी विचारेल
+- सेवा प्रिंसिपल वापरून Azure साठी **सेवा कनेक्शन** तयार करेल (किंवा पुन्हा वापरेल)
+- **वर्कलोड ओळख फेडरेशन (OIDC)** कॉन्फिगर करेल त्यामुळे कोणतेही क्लाएंट सिक्रेट संग्रहित नाही
+- आपल्या रेपोत `azure-dev.yml` पाईपलाइन परिभाषा कमिट करेल
+
+**3. तयार झालेले `azure-dev.yml` पुनरावलोकन करा**
+
+azd एक अशी पाईपलाइन लिहिते जी प्रत्येक `main` पुशवर प्राव्हिजन आणि तैनात करते:
+
+```yaml
+# azure-dev.yml
+trigger:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: setup-azd@1
+    displayName: Install azd
+
+  - script: azd provision --no-prompt
+    displayName: Provision Infrastructure
+    env:
+      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
+      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
+      AZURE_LOCATION: $(AZURE_LOCATION)
+
+  - script: azd deploy --no-prompt
+    displayName: Deploy Application
+    env:
+      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
+      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
+      AZURE_LOCATION: $(AZURE_LOCATION)
+```
+
+**4. चल कुठून येतात**
+
+azd पर्यावरण मूल्ये (`AZURE_ENV_NAME`, `AZURE_LOCATION`, `AZURE_SUBSCRIPTION_ID`) Azure DevOps मध्ये एक **variable group** म्हणून संग्रहित करतो जेणेकरून पाईपलाइन त्यांना वाचू शकेल. आपण ते **Pipelines → Library** अंतर्गत पाहू आणि संपादित करू शकता.
+
+> **GitHub प्रमाणेच OIDC फायदा:** `azdo` प्रदाता डीफॉल्टनुसार वर्कलोड ओळख फेडरेशन देखील कॉन्फिगर करतो, त्यामुळे सेवा कनेक्शनमध्ये कोणताही क्लाएंट सिक्रेट संग्रहित होत नाही—Azure DevOps रनटाइममध्ये लघु-कालावधी टोकन देवाणघेवाण करते. आपली संघटना OIDC वापरू शकत नाही तरच `--auth-type client-credentials` पास करा.
+
+**5. त्याला चालवा**
+
+```bash
+git commit -am "Add Azure DevOps pipeline" --allow-empty
+git push
+```
+
+Azure DevOps मध्ये **Pipelines** उघडा आणि `azd provision` आणि `azd deploy` चालताना पाहा.
+
+### `azd add` सह घटक जोडणे
+
+वर्तमान प्रोजेक्टमध्ये हळूहळू Azure सेवा जोडा:
 
 ```bash
 # नवीन सेवा घटक संवादात्मकपणे जोडा
 azd add
 ```
 
-हे विशेषतः production AI अनुप्रयोग वाढवण्यासाठी उपयुक्त आहे—उदाहरणार्थ, व्हेक्टर सर्च सेवा, नवीन एजंट एन्डपॉइंट, किंवा मॉनिटरिंग घटक विद्यमान तैनातीमध्ये जोडणे.
+हे उत्पादन AI अनुप्रयोग वाढवण्यासाठी विशेषतः उपयुक्त आहे—उदाहरणार्थ, व्हेक्टर शोध सेवा, नवीन एजंट एंडपॉइंट किंवा विद्यमान तैनातीसाठी देखरेख घटक जोडणे.
 
-## Additional Resources
-- **Azure Well-Architected Framework**: [AI workload guidance](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Microsoft Foundry Documentation**: [Official docs](https://learn.microsoft.com/azure/ai-studio/)
-- **Community Templates**: [Azure Samples](https://github.com/Azure-Samples)
-- **Discord Community**: [#Azure channel](https://discord.gg/microsoft-azure)
-- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure वर skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 उपलब्ध एजंट कौशल्ये Azure AI, Foundry, तैनाती, खर्च अनुकूलन, आणि डायग्नोस्टिक्ससाठी. आपल्या संपादकात स्थापित करा:
+## अतिरिक्त संसाधने
+
+- **Azure वेळ-आर्किटेक्टेड फ्रेमवर्क**: [AI वर्कलोड मार्गदर्शन](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Microsoft Foundry डॉक्यूमेंटेशन**: [अधिकृत दस्तऐवज](https://learn.microsoft.com/azure/ai-studio/)
+- **समुदाय टेम्पलेट्स**: [Azure सॅम्पल्स](https://github.com/Azure-Samples)
+- **डिसकॉर्ड समुदाय**: [#Azure चॅनेल](https://discord.gg/microsoft-azure)
+- **Azure साठी एजंट कौशल्ये**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - Azure AI, Foundry, तैनाती, खर्च ऑप्टिमायझेशन, आणि निदानासाठी 37 खुल्या एजंट कौशल्ये. आपले एडिटरमध्ये इंस्टॉल करा:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
 
 ---
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: अध्याय 8 - उत्पादन आणि उद्योजकीय नमुने
-- **⬅️ Previous Chapter**: [अध्याय 7: समस्या निवारण](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Also Related**: [AI कार्यशाळा लॅब](ai-workshop-lab.md)
+**अध्याय नेव्हिगेशन:**
+- **📚 कोर्स होम**: [AZD For Beginners](../../README.md)
+- **📖 चालू अध्याय**: अध्याय 8 - उत्पादन आणि एंटरप्राइझ नमुने
+- **⬅️ मागील अध्याय**: [अध्याय 7: समस्या सोडवणे](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ संबंधित देखील:** [AI वर्कशॉप लॅब](ai-workshop-lab.md)
 - **� कोर्स पूर्ण**: [AZD For Beginners](../../README.md)
 
-**लक्षात ठेवा**: उत्पादन AI वर्कलोडसाठी काळजीपूर्वक नियोजन, मॉनिटरिंग आणि सातत्यपूर्ण सुधारणा आवश्यक आहे. या नमुन्यांपासून सुरू करा आणि आपल्या विशिष्ट आवश्यकता लक्षात घेऊन त्यांना अनुकूल करा.
+**लक्षात ठेवा**: उत्पादन AI वर्कलोडसाठी काळजीपूर्वक नियोजन, निरीक्षण, आणि सातत्यपूर्ण ऑप्टिमायझेशन आवश्यक आहे. ह्या पॅटर्न्सपासून सुरू करा आणि आपल्या विशिष्ट गरजांनुसार त्यास अनुकूल करा.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **अस्वीकरण**:
-हा दस्तऐवज AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) वापरून अनुवादित केला आहे. जरी आम्ही अचूकतेसाठी प्रयत्न करत असलो, तरी कृपया लक्षात घ्या की स्वयंचलित अनुवादांमध्ये चूका किंवा गैरअचूकता असू शकते. मूळ दस्तऐवज त्याच्या मूळ भाषेत अधिकृत स्रोत मानला जावा. महत्त्वाच्या माहितीसाठी व्यावसायिक मानवी अनुवादाची शिफारस केली जाते. या अनुवादाच्या वापरामुळे उद्भवलेल्या कोणत्याही गैरसमजुती किंवा चुकीच्या अर्थलागीसाठी आम्ही जबाबदार नाही.
+हा दस्तऐवज AI भाषांतर सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) चा वापर करून अनुवादित केला आहे. जरी आम्ही अचूकतेसाठी प्रयत्न करतो, तरी कृपया लक्षात घ्या की स्वयंचलित भाषांतरांमध्ये त्रुटी किंवा अचूकतेची कमतरता असू शकते. मूळ दस्तऐवज त्याच्या मूळ भाषेत अधिकृत स्रोत मानला पाहिजे. महत्त्वाची माहिती असल्यास, व्यावसायिक मानवी भाषांतराची शिफारस केली जाते. या भाषांतराच्या वापरामुळे उद्भवणाऱ्या कोणत्याही गैरसमज किंवा चुकीच्या अर्थलावणीसाठी आम्ही जबाबदार नाही.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
