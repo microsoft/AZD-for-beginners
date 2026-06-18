@@ -1,66 +1,66 @@
-# Noções Básicas do AZD - Compreendendo o Azure Developer CLI
+# AZD Basics - Compreender o Azure Developer CLI
 
-# Noções Básicas do AZD - Conceitos e Fundamentos Essenciais
+# AZD Basics - Conceitos e Fundamentos Essenciais
 
 **Navegação do Capítulo:**
-- **📚 Início do Curso**: [AZD Para Iniciantes](../../README.md)
-- **📖 Capítulo Atual**: Capítulo 1 - Fundação & Arranque Rápido
+- **📚 Página Inicial do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 1 - Fundamentos & Início Rápido
 - **⬅️ Anterior**: [Visão Geral do Curso](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Seguinte**: [Instalação & Configuração](installation.md)
+- **➡️ Próximo**: [Instalação & Configuração](installation.md)
 - **🚀 Próximo Capítulo**: [Capítulo 2: Desenvolvimento AI-First](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Introdução
 
-Esta lição apresenta-lhe o Azure Developer CLI (azd), uma poderosa ferramenta de linha de comando que acelera a sua jornada desde o desenvolvimento local até à implantação no Azure. Você vai aprender os conceitos fundamentais, as funcionalidades principais e compreender como o azd simplifica a implantação de aplicações nativas na cloud.
+Esta lição apresenta-lhe o Azure Developer CLI (azd), uma poderosa ferramenta de linha de comandos que acelera a sua jornada desde o desenvolvimento local até à implementação no Azure. Vai aprender os conceitos fundamentais, as funcionalidades principais e compreender como o azd simplifica a implementação de aplicações nativas na cloud.
 
 ## Objetivos de Aprendizagem
 
-No final desta lição, você irá:
+No final desta lição, irá:
 - Compreender o que é o Azure Developer CLI e o seu propósito principal
-- Aprender os conceitos básicos de templates, ambientes e serviços
-- Explorar as funcionalidades chave incluindo desenvolvimento orientado a templates e Infraestrutura como Código
-- Compreender a estrutura do projeto azd e o fluxo de trabalho
+- Aprender os conceitos centrais de modelos, ambientes e serviços
+- Explorar funcionalidades chave incluindo desenvolvimento orientado a modelos e Infraestrutura como Código
+- Compreender a estrutura e o fluxo de trabalho do projeto azd
 - Estar preparado para instalar e configurar o azd no seu ambiente de desenvolvimento
 
 ## Resultados de Aprendizagem
 
-Depois de concluir esta lição, será capaz de:
-- Explicar o papel do azd em fluxos de trabalho modernos de desenvolvimento em cloud
+Após concluir esta lição, será capaz de:
+- Explicar o papel do azd nos fluxos de trabalho modernos de desenvolvimento na cloud
 - Identificar os componentes da estrutura de um projeto azd
-- Descrever como templates, ambientes e serviços funcionam em conjunto
-- Entender os benefícios da Infraestrutura como Código com azd
+- Descrever como os modelos, ambientes e serviços funcionam em conjunto
+- Compreender os benefícios da Infraestrutura como Código com azd
 - Reconhecer diferentes comandos azd e os seus propósitos
 
 ## O que é o Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) é uma ferramenta de linha de comando concebida para acelerar a sua jornada desde o desenvolvimento local até à implantação no Azure. Simplifica o processo de construir, implantar e gerir aplicações nativas da cloud no Azure.
+Azure Developer CLI (azd) é uma ferramenta de linha de comandos desenhada para acelerar a sua jornada desde o desenvolvimento local até à implementação no Azure. Simplifica o processo de construção, implementação e gestão de aplicações nativas na cloud no Azure.
 
-### O Que Pode Implantar com o azd?
+### O que pode implementar com o azd?
 
-O azd suporta uma vasta gama de cargas de trabalho — e a lista continua a crescer. Atualmente, pode usar o azd para implantar:
+O azd suporta uma ampla gama de cargas de trabalho — e a lista continua a crescer. Hoje, pode usar azd para implementar:
 
 | Tipo de Carga de Trabalho | Exemplos | Mesmo Fluxo de Trabalho? |
 |---------------------------|----------|--------------------------|
-| **Aplicações tradicionais** | Aplicações web, APIs REST, sites estáticos | ✅ `azd up` |
+| **Aplicações tradicionais** | Apps web, APIs REST, sites estáticos | ✅ `azd up` |
 | **Serviços e microsserviços** | Container Apps, Function Apps, backends multi-serviço | ✅ `azd up` |
-| **Aplicações com IA** | Aplicações de chat com Microsoft Foundry Models, soluções RAG com AI Search | ✅ `azd up` |
-| **Agentes inteligentes** | Agentes alojados no Foundry, orquestrações multi-agente | ✅ `azd up` |
+| **Aplicações com IA** | Apps de chat com Modelos Microsoft Foundry, soluções RAG com AI Search | ✅ `azd up` |
+| **Agentes inteligentes** | Agentes hospedados na Foundry, orquestrações multi-agente | ✅ `azd up` |
 
-O ponto-chave é que **o ciclo de vida do azd mantém-se igual independentemente do que estiver a implantar**. Você inicializa um projeto, provisona a infraestrutura, implanta o seu código, monitora a aplicação e limpa — seja um simples website ou um agente de IA sofisticado.
+A principal ideia é que **o ciclo de vida do azd mantém-se o mesmo independentemente do que estiver a implementar**. Inicializa um projeto, providencia infraestrutura, implementa o seu código, monitora a sua aplicação e limpa — seja um site simples ou um agente de IA sofisticado.
 
-Esta continuidade é propositada. O azd trata as capacidades de IA como mais um tipo de serviço que a sua aplicação pode usar, e não como algo fundamentalmente diferente. Um endpoint de chat suportado por Microsoft Foundry Models é, para o azd, apenas mais um serviço para configurar e implantar.
+Esta continuidade é intencional. O azd trata as capacidades de IA como outro tipo de serviço que a sua aplicação pode usar, e não como algo fundamentalmente diferente. Um endpoint de chat suportado por Modelos Microsoft Foundry é, do ponto de vista do azd, apenas mais um serviço a configurar e implementar.
 
-### 🎯 Por Que Usar o AZD? Uma Comparação do Mundo Real
+### 🎯 Porquê usar o AZD? Uma comparação no mundo real
 
-Vamos comparar a implantação de uma aplicação web simples com base de dados:
+Vamos comparar a implementação de uma aplicação web simples com base de dados:
 
-#### ❌ SEM AZD: Implantação Manual no Azure (mais de 30 minutos)
+#### ❌ SEM AZD: Implementação manual no Azure (mais de 30 minutos)
 
 ```bash
 # Passo 1: Criar grupo de recursos
 az group create --name myapp-rg --location eastus
 
-# Passo 2: Criar Plano de Serviço de Aplicação
+# Passo 2: Criar Plano de Serviço de Aplicações
 az appservice plan create --name myapp-plan \
   --resource-group myapp-rg \
   --sku B1 --is-linux
@@ -71,7 +71,7 @@ az webapp create --name myapp-web-unique123 \
   --plan myapp-plan \
   --runtime "NODE:18-lts"
 
-# Passo 4: Criar conta Cosmos DB (10-15 minutos)
+# Passo 4: Criar conta do Cosmos DB (10-15 minutos)
 az cosmosdb create --name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --kind MongoDB
@@ -102,7 +102,7 @@ az webapp config appsettings set \
   --resource-group myapp-rg \
   --settings MONGODB_URI="$CONN_STR"
 
-# Passo 9: Ativar logging
+# Passo 9: Ativar registo de eventos
 az webapp log config --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --application-logging filesystem \
@@ -132,26 +132,26 @@ npm run build
 # Passo 13: Criar pacote de implantação
 zip -r app.zip . -x "*.git*" "node_modules/*"
 
-# Passo 14: Implantar aplicação
+# Passo 14: Desdobrar aplicação
 az webapp deployment source config-zip \
   --resource-group myapp-rg \
   --name myapp-web-unique123 \
   --src app.zip
 
 # Passo 15: Esperar e rezar para que funcione 🙏
-# (Sem validação automática, requer testes manuais)
+# (Sem validação automática, teste manual necessário)
 ```
 
 **Problemas:**
-- ❌ Mais de 15 comandos para memorizar e executar por ordem
+- ❌ Mais de 15 comandos para lembrar e executar pela ordem
 - ❌ 30-45 minutos de trabalho manual
-- ❌ Facilmente propenso a erros (erros de digitação, parâmetros errados)
+- ❌ Fácil de cometer erros (erros tipográficos, parâmetros errados)
 - ❌ Strings de conexão expostas no histórico do terminal
-- ❌ Sem rollback automatizado se algo falhar
+- ❌ Sem rollback automático se ocorrer falha
 - ❌ Difícil de replicar para outros membros da equipa
-- ❌ Diferente de cada vez (não reproduzível)
+- ❌ Diferente a cada vez (não é reproduzível)
 
-#### ✅ COM AZD: Implantação Automatizada (5 comandos, 10-15 minutos)
+#### ✅ COM AZD: Implementação automática (5 comandos, 10-15 minutos)
 
 ```bash
 # Passo 1: Inicializar a partir do modelo
@@ -174,20 +174,20 @@ azd up
 
 **Benefícios:**
 - ✅ **5 comandos** vs. mais de 15 passos manuais
-- ✅ **10-15 minutos** no total (maioritariamente a esperar pelo Azure)
-- ✅ **Menos erros manuais** – fluxo consistente e orientado a templates
-- ✅ **Gestão segura de segredos** – muitos templates usam armazenamento de segredos gerido pelo Azure
-- ✅ **Implantações repetíveis** – mesmo fluxo todas as vezes
-- ✅ **Totalmente reproduzível** – mesmo resultado todas as vezes
-- ✅ **Pronto para equipas** – qualquer pessoa pode implantar com os mesmos comandos
-- ✅ **Infraestrutura como Código** – templates Bicep versionados
-- ✅ **Monitorização incorporada** – Application Insights configurado automaticamente
+- ✅ **10-15 minutos** no total (maioritariamente à espera do Azure)
+- ✅ **Menos erros manuais** - fluxo de trabalho consistente e orientado a modelos
+- ✅ **Gestão segura de segredos** - muitos modelos usam armazenamento de segredos gerido pelo Azure
+- ✅ **Implementações repetíveis** - mesmo fluxo de trabalho todas as vezes
+- ✅ **Totalmente reproduzível** - mesmo resultado sempre
+- ✅ **Pronto para equipa** - qualquer pessoa pode implementar com os mesmos comandos
+- ✅ **Infraestrutura como Código** - modelos Bicep com controlo de versões
+- ✅ **Monitoração integrada** - Application Insights configurado automaticamente
 
 ### 📊 Redução de Tempo & Erros
 
-| Métrica | Implantação Manual | Implantação AZD | Melhoria |
-|:--------|:------------------|:----------------|:---------|
-| **Comandos** | 15+ | 5 | 67% menos |
+| Métrica | Implementação Manual | Implementação AZD | Melhoria |
+|:--------|:--------------------|:-----------------|:---------|
+| **Comandos** | +15 | 5 | 67% menos |
 | **Tempo** | 30-45 min | 10-15 min | 60% mais rápido |
 | **Taxa de Erro** | ~40% | <5% | Redução de 88% |
 | **Consistência** | Baixa (manual) | 100% (automatizado) | Perfeita |
@@ -196,34 +196,34 @@ azd up
 
 ## Conceitos Essenciais
 
-### Templates
-Os templates são a base do azd. Contêm:
-- **Código da aplicação** – O seu código-fonte e dependências
-- **Definições de infraestrutura** – Recursos Azure definidos em Bicep ou Terraform
-- **Ficheiros de configuração** – Definições e variáveis de ambiente
-- **Scripts de implantação** – Fluxos de trabalho de implantação automatizados
+### Modelos
+Os modelos são a base do azd. Eles contêm:
+- **Código da aplicação** - O seu código fonte e dependências
+- **Definições de infraestrutura** - Recursos Azure definidos em Bicep ou Terraform
+- **Ficheiros de configuração** - Definições e variáveis de ambiente
+- **Scripts de implementação** - Fluxos de trabalho automáticos de implementação
 
 ### Ambientes
-Ambientes representam diferentes alvos de implantação:
-- **Desenvolvimento** – Para testes e desenvolvimento
-- **Staging** – Ambiente pré-produção
-- **Produção** – Ambiente de produção live
+Ambientes representam diferentes destinos de implementação:
+- **Desenvolvimento** - Para testes e desenvolvimento
+- **Staging** - Ambiente pré-produção
+- **Produção** - Ambiente de produção ao vivo
 
 Cada ambiente mantém o seu próprio:
 - Grupo de recursos Azure
 - Configurações
-- Estado de implantação
+- Estado da implementação
 
 ### Serviços
-Serviços são os blocos de construção da sua aplicação:
-- **Frontend** – Aplicações web, SPAs
-- **Backend** – APIs, microsserviços
-- **Base de dados** – Soluções de armazenamento de dados
-- **Armazenamento** – Armazenamento de ficheiros e blobs
+Os serviços são os blocos construtivos da sua aplicação:
+- **Frontend** - Aplicações web, SPAs
+- **Backend** - APIs, microsserviços
+- **Base de dados** - Soluções de armazenamento de dados
+- **Armazenamento** - Armazenamento de ficheiros e blobs
 
-## Funcionalidades Chave
+## Funcionalidades Principais
 
-### 1. Desenvolvimento Orientado por Templates
+### 1. Desenvolvimento Orientado a Modelos
 ```bash
 # Navegar pelos modelos disponíveis
 azd template list
@@ -233,33 +233,33 @@ azd init --template <template-name>
 ```
 
 ### 2. Infraestrutura como Código
-- **Bicep** – linguagem específica do domínio da Azure
-- **Terraform** – ferramenta de infraestrutura multi-cloud
-- **Templates ARM** – templates do Azure Resource Manager
+- **Bicep** - Linguagem especializada do Azure
+- **Terraform** - Ferramenta multi-cloud para infraestrutura
+- **Modelos ARM** - Modelos do Azure Resource Manager
 
 ### 3. Fluxos de Trabalho Integrados
 ```bash
-# Fluxo completo de implantação
-azd up            # Provisionar + Implantar isto é automático para a configuração inicial
+# Fluxo de trabalho de implantação completo
+azd up            # Provisionar + Implantar, isto é automático para a configuração inicial
 
 # 🧪 NOVO: Visualizar alterações na infraestrutura antes da implantação (SEGURO)
 azd provision --preview    # Simular a implantação da infraestrutura sem fazer alterações
 
-azd provision     # Criar recursos Azure se atualizar a infraestrutura usar isto
+azd provision     # Criar recursos Azure, se atualizar a infraestrutura use isto
 azd deploy        # Implantar código da aplicação ou reimplantar código da aplicação após atualização
 azd down          # Limpar recursos
 ```
 
-#### 🛡️ Planeamento Seguro de Infraestrutura com Pré-visualização
-O comando `azd provision --preview` é uma revolução para implantações seguras:
-- **Análise de simulação** – Mostra o que será criado, modificado ou eliminado
-- **Risco zero** – Nenhuma alteração real é feita ao ambiente Azure
-- **Colaboração em equipa** – Partilhe os resultados da pré-visualização antes da implantação
-- **Estimativa de custos** – Entenda os custos dos recursos antes do compromisso
+#### 🛡️ Planeamento Seguro de Infraestrutura com Preview
+O comando `azd provision --preview` é revolucionário para implementações seguras:
+- **Análise de simulação** - Mostra o que será criado, modificado ou removido
+- **Risco zero** - Nenhuma alteração real é feita no seu ambiente Azure
+- **Colaboração em equipa** - Partilhe os resultados da pré-visualização antes da implementação
+- **Estimativa de custos** - Perceba os custos dos recursos antes de comprometer
 
 ```bash
 # Exemplo de fluxo de trabalho de pré-visualização
-azd provision --preview           # Veja o que vai mudar
+azd provision --preview           # Veja o que irá mudar
 # Reveja o resultado, discuta com a equipa
 azd provision                     # Aplique as alterações com confiança
 ```
@@ -270,15 +270,15 @@ azd provision                     # Aplique as alterações com confiança
 graph LR
     A[azd init] -->|Inicializar projeto| B[azd auth login]
     B -->|Autenticar| C[azd env new]
-    C -->|Criar ambiente| D{Primeira implantação?}
+    C -->|Criar ambiente| D{Primeira implementação?}
     D -->|Sim| E[azd up]
     D -->|Não| F[azd provision --preview]
     F -->|Rever alterações| G[azd provision]
-    E -->|Provisões e implantações| H[Recursos em execução]
+    E -->|Providencia & implementa| H[Recursos a correr]
     G -->|Atualiza infraestrutura| H
     H -->|Monitorizar| I[azd monitor]
     I -->|Fazer alterações ao código| J[azd deploy]
-    J -->|Reimplantar só o código| H
+    J -->|Reimplementar só código| H
     H -->|Limpar| K[azd down]
     
     style A fill:#e1f5fe
@@ -287,16 +287,17 @@ graph LR
     style H fill:#c5e1a5
     style K fill:#ffcdd2
 ```
+
 **Explicação do Fluxo de Trabalho:**
-1. **Init** – Começar com um template ou projeto novo
-2. **Auth** – Autenticar com Azure
-3. **Ambiente** – Criar ambiente isolado para implantação
-4. **Preview** – 🆕 Sempre pré-visualizar alterações na infraestrutura primeiro (boa prática)
-5. **Provision** – Criar/atualizar recursos Azure
-6. **Deploy** – Enviar o código da sua aplicação
-7. **Monitor** – Observar o desempenho da aplicação
-8. **Iterar** – Fazer alterações e reimplantar código
-9. **Cleanup** – Remover recursos quando terminar
+1. **Init** - Começar com modelo ou projeto novo
+2. **Auth** - Autenticar com Azure
+3. **Environment** - Criar ambiente isolado para implementação
+4. **Preview** - 🆕 Sempre pré-visualizar alterações na infraestrutura primeiro (boa prática segura)
+5. **Provision** - Criar/atualizar recursos Azure
+6. **Deploy** - Enviar o código da aplicação
+7. **Monitor** - Observar desempenho da aplicação
+8. **Iterate** - Fazer alterações e reimplementar código
+9. **Cleanup** - Remover recursos quando terminar
 
 ### 4. Gestão de Ambientes
 ```bash
@@ -308,7 +309,7 @@ azd env list
 
 ### 5. Extensões e Comandos AI
 
-O azd usa um sistema de extensões para adicionar capacidades para além do CLI base. Isto é especialmente útil para workloads de IA:
+O azd usa um sistema de extensões para adicionar funcionalidades além do CLI principal. Isto é especialmente útil para cargas de trabalho AI:
 
 ```bash
 # Listar extensões disponíveis
@@ -317,18 +318,32 @@ azd extension list
 # Instalar a extensão de agentes Foundry
 azd extension install azure.ai.agents
 
-# Inicializar um projeto de agente de IA a partir de um manifesto
+# Inicializar um projeto de agente IA a partir de um manifesto
 azd ai agent init -m agent-manifest.yaml
 
-# Iniciar o servidor MCP para desenvolvimento assistido por IA (Alfa)
+# Testar um agente implementado (mostra latência e tempo até ao primeiro byte)
+azd ai agent invoke
+
+# Iniciar o servidor MCP para desenvolvimento assistido por IA (Alpha)
 azd mcp start
 ```
 
-> As extensões são abordadas em detalhe em [Capítulo 2: Desenvolvimento AI-First](../chapter-02-ai-development/agents.md) e a referência de [Comandos AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
+**O ciclo de vida do agente, de ponta a ponta.** Uma vez instalado o `azure.ai.agents`, um único fluxo de trabalho leva-o da ideia até um agente em execução e monitorizado. Não precisa de todos eles no primeiro dia — apenas saiba que existem:
+
+| Fase | Comando | O que faz |
+|------|---------|-----------|
+| **Scaffold** | `azd ai agent init -m <manifest>` | Gera um projeto de agente a partir de um manifesto |
+| **Test** | `azd ai agent invoke` | Chama o agente e vê o tempo de resposta |
+| **Measure** | `azd ai agent eval generate` | Cria um conjunto de avaliação para o agente |
+| **Improve** | `azd ai agent optimize` | Optimiza instruções do agente com base nos seus dados |
+| **Inspect** | `azd ai agent endpoint show` | Mostra a configuração do endpoint em tempo real |
+| **Clean up** | `azd ai agent delete` | Elimina um agente hospedado e todas as suas versões |
+
+> As extensões são detalhadas em [Capítulo 2: Desenvolvimento AI-First](../chapter-02-ai-development/agents.md) e na referência [Comandos AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
 
 ## 📁 Estrutura do Projeto
 
-Uma estrutura típica de projeto azd:
+Uma estrutura típica de um projeto azd:
 ```
 my-app/
 ├── .azd/                    # azd configuration
@@ -390,7 +405,7 @@ Configuração específica do ambiente:
 
 ## 🎪 Fluxos de Trabalho Comuns com Exercícios Práticos
 
-> **💡 Dica de Aprendizagem:** Siga estes exercícios por ordem para desenvolver progressivamente as suas competências em AZD.
+> **💡 Dica de Aprendizagem:** Siga estes exercícios por ordem para desenvolver progressivamente as suas competências AZD.
 
 ### 🎯 Exercício 1: Inicializar o Seu Primeiro Projeto
 
@@ -398,13 +413,13 @@ Configuração específica do ambiente:
 
 **Passos:**
 ```bash
-# Utilize um modelo comprovado
+# Use um modelo comprovado
 azd init --template todo-nodejs-mongo
 
 # Explore os ficheiros gerados
-ls -la  # Veja todos os ficheiros, incluindo os ocultos
+ls -la  # Veja todos os ficheiros incluindo os ocultos
 
-# Ficheiros principais criados:
+# Ficheiros chave criados:
 # - azure.yaml (configuração principal)
 # - infra/ (código de infraestrutura)
 # - src/ (código da aplicação)
@@ -414,9 +429,9 @@ ls -la  # Veja todos os ficheiros, incluindo os ocultos
 
 ---
 
-### 🎯 Exercício 2: Implantar no Azure
+### 🎯 Exercício 2: Implementar no Azure
 
-**Objetivo:** Completar a implantação end-to-end
+**Objetivo:** Completar implementação fim a fim
 
 **Passos:**
 ```bash
@@ -427,28 +442,28 @@ az login && azd auth login
 azd env new dev
 azd env set AZURE_LOCATION eastus
 
-# 3. Visualizar alterações (RECOMENDADO)
+# 3. Pré-visualizar alterações (RECOMENDADO)
 azd provision --preview
 
-# 4. Fazer o deploy de tudo
+# 4. Implementar tudo
 azd up
 
-# 5. Verificar o deploy
-azd show    # Ver o URL da sua app
+# 5. Verificar a implementação
+azd show    # Ver a URL da sua aplicação
 ```
 
-**Tempo Estimado:** 10-15 minutos  
+**Tempo Previsto:** 10-15 minutos  
 **✅ Sucesso:** URL da aplicação abre no navegador
 
 ---
 
-### 🎯 Exercício 3: Múltiplos Ambientes
+### 🎯 Exercício 3: Ambientes Múltiplos
 
-**Objetivo:** Implantar em dev e staging
+**Objetivo:** Implementar em dev e staging
 
 **Passos:**
 ```bash
-# Já tem dev, criar staging
+# Já existe dev, criar staging
 azd env new staging
 azd env set AZURE_LOCATION westus2
 azd up
@@ -462,36 +477,36 @@ azd env select dev
 
 ---
 
-### 🛡️ Reset Completo: `azd down --force --purge`
+### 🛡️ Limpeza Completa: `azd down --force --purge`
 
-Quando precisa de reiniciar completamente:
+Quando precisar de reiniciar completamente:
 
 ```bash
 azd down --force --purge
 ```
 
 **O que faz:**
-- `--force`: Sem perguntas de confirmação
-- `--purge`: Elimina todo o estado local e recursos Azure
+- `--force`: Sem prompts de confirmação
+- `--purge`: Apaga todo o estado local e recursos Azure
 
 **Usar quando:**
-- Implantação falhou a meio
-- Mudança de projetos
-- Necessidade de recomeçar do zero
+- Implementação falhou a meio
+- Alterar projetos
+- Precisar de um novo começo
 
 ---
 
 ## 🎪 Referência do Fluxo de Trabalho Original
 
-### Começar um Projeto Novo
+### Iniciar um Projeto Novo
 ```bash
-# Método 1: Usar um modelo existente
+# Método 1: Usar template existente
 azd init --template todo-nodejs-mongo
 
 # Método 2: Começar do zero
 azd init
 
-# Método 3: Usar o diretório atual
+# Método 3: Usar diretório atual
 azd init .
 ```
 
@@ -502,47 +517,47 @@ azd auth login
 azd env new dev
 azd env select dev
 
-# Implantar tudo
+# Fazer o deploy de tudo
 azd up
 
-# Fazer alterações e reimplantar
+# Fazer alterações e voltar a fazer o deploy
 azd deploy
 
 # Limpar quando terminar
-azd down --force --purge # o comando no Azure Developer CLI é um **reset completo** para o seu ambiente—especialmente útil quando está a resolver problemas de implantações falhadas, a limpar recursos órfãos ou a preparar uma nova implantação.
+azd down --force --purge # o comando no Azure Developer CLI é um **reset completo** para o seu ambiente—especialmente útil quando está a resolver erros em deploys falhados, a limpar recursos órfãos ou a preparar uma nova implantação.
 ```
 
 ## Compreender `azd down --force --purge`
-O comando `azd down --force --purge` é uma forma poderosa de desmantelar completamente o seu ambiente azd e todos os recursos associados. Aqui está uma explicação do que cada opção faz:
+O comando `azd down --force --purge` é uma forma poderosa de desmantelar completamente o seu ambiente azd e todos os recursos associados. Eis um resumo do que cada flag faz:
 ```
 --force
 ```
-- Ignora pedidos de confirmação.
-- Útil para automação ou scripts onde input manual não é viável.
-- Garante que o encerramento prossegue sem interrupções, mesmo se o CLI detetar inconsistências.
+- Ignora prompts de confirmação.
+- Útil para automação ou scripts onde a interação manual não é viável.
+- Garante que a desmontagem segue sem interrupções, mesmo que o CLI detecte inconsistências.
 
 ```
 --purge
 ```
-Elimina **todos os metadados associados**, incluindo:
+Apaga **toda a metadata associada**, incluindo:
 Estado do ambiente  
 Pasta local `.azure`  
-Informações em cache da implantação  
-Impede que o azd "lembre" implantações anteriores, o que pode causar problemas como grupos de recursos desalinhados ou referências a registos desatualizadas.
+Informação em cache da implementação  
+Evita que o azd "lembre" implementações anteriores, o que pode causar problemas como grupos de recursos incompatíveis ou referências antigas no registo.
 
-### Por que usar ambos?
-Quando se depara com bloqueios no `azd up` devido a estados persistentes ou implantações parciais, esta combinação assegura uma **limpeza total**.
+### Porquê usar os dois juntos?
+Quando encontra um bloqueio com `azd up` devido a estado residual ou implementações parciais, esta combinação assegura um **recomeço limpo**.
 
-É especialmente útil após eliminações manuais de recursos no portal Azure ou quando se muda de templates, ambientes ou convenções de nomes de grupos de recursos.
+É especialmente útil após eliminações manuais de recursos no portal Azure ou quando muda de modelos, ambientes ou convenções de nomenclatura de grupos de recursos.
 
 ### Gestão de Múltiplos Ambientes
 ```bash
-# Criar ambiente de staging
+# Criar ambiente de preparação
 azd env new staging
 azd env select staging
 azd up
 
-# Voltar para dev
+# Voltar para desenvolvimento
 azd env select dev
 
 # Comparar ambientes
@@ -551,41 +566,41 @@ azd env list
 
 ## 🔐 Autenticação e Credenciais
 
-Compreender a autenticação é crucial para implantações bem-sucedidas com azd. A Azure usa múltiplos métodos de autenticação, e azd aproveita a mesma cadeia de credenciais utilizada por outras ferramentas Azure.
+Compreender a autenticação é crucial para implementações azd bem-sucedidas. O Azure usa múltiplos métodos de autenticação, e o azd aproveita a mesma cadeia de credenciais usada por outras ferramentas Azure.
 
 ### Autenticação Azure CLI (`az login`)
 
-Antes de usar o azd, precisa autenticar-se com o Azure. O método mais comum é usar o Azure CLI:
+Antes de usar azd, precisa de autenticar-se no Azure. O método mais comum é usando Azure CLI:
 
 ```bash
-# Login interativo (abre o navegador)
+# Início de sessão interativo (abre o navegador)
 az login
 
-# Login com inquilino específico
+# Início de sessão com inquilino específico
 az login --tenant <tenant-id>
 
-# Login com principal de serviço
+# Início de sessão com principal de serviço
 az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
 
-# Verificar estado de login atual
+# Verificar estado atual do início de sessão
 az account show
 
 # Listar subscrições disponíveis
 az account list --output table
 
-# Definir subscrição padrão
+# Definir subscrição predefinida
 az account set --subscription <subscription-id>
 ```
 
 ### Fluxo de Autenticação
-1. **Login Interativo**: Abre o browser padrão para autenticação
+1. **Login Interativo**: Abre o seu navegador padrão para autenticação
 2. **Fluxo de Código de Dispositivo**: Para ambientes sem acesso a browser
-3. **Service Principal**: Para automação e cenários CI/CD
-4. **Identidade Gerida**: Para aplicações alojadas no Azure
+3. **Principal de Serviço**: Para cenários de automação e CI/CD
+4. **Identidade Gerida**: Para aplicações hospedadas no Azure
 
 ### Cadeia DefaultAzureCredential
 
-`DefaultAzureCredential` é um tipo de credencial que oferece uma experiência simplificada de autenticação, tentando automaticamente múltiplas fontes de credenciais numa ordem específica:
+`DefaultAzureCredential` é um tipo de credencial que proporciona uma experiência de autenticação simplificada ao tentar automaticamente múltiplas fontes de credenciais numa ordem específica:
 
 #### Ordem da Cadeia de Credenciais
 ```mermaid
@@ -599,17 +614,18 @@ graph TD
     G --> H[Azure PowerShell]
     H --> I[Navegador Interativo]
 ```
+
 #### 1. Variáveis de Ambiente
 ```bash
-# Definir variáveis de ambiente para o principal do serviço
+# Definir variáveis de ambiente para o principal de serviço
 export AZURE_CLIENT_ID="<app-id>"
 export AZURE_CLIENT_SECRET="<password>"
 export AZURE_TENANT_ID="<tenant-id>"
 ```
 
-#### 2. Identidade de Workload (Kubernetes/GitHub Actions)
+#### 2. Identidade de Carga de Trabalho (Kubernetes/GitHub Actions)
 Usado automaticamente em:
-- Azure Kubernetes Service (AKS) com Identidade de Workload
+- Azure Kubernetes Service (AKS) com Identidade de Carga de Trabalho
 - GitHub Actions com federação OIDC
 - Outros cenários de identidade federada
 
@@ -618,30 +634,30 @@ Para recursos Azure como:
 - Máquinas Virtuais
 - App Service
 - Azure Functions
-- Container Instances
+- Instâncias de Contentores
 
 ```bash
-# Verificar se está a correr num recurso Azure com identidade gerida
+# Verificar se está a executar numa recurso Azure com identidade gerida
 az account show --query "user.type" --output tsv
 # Retorna: "servicePrincipal" se estiver a usar identidade gerida
 ```
 
 #### 4. Integração com Ferramentas de Desenvolvimento
-- **Visual Studio**: Usa automaticamente a conta iniciada
+- **Visual Studio**: Usa automaticamente a conta autenticada
 - **VS Code**: Usa credenciais da extensão Azure Account
-- **Azure CLI**: Usa credenciais de `az login` (mais comum no desenvolvimento local)
+- **Azure CLI**: Usa credenciais do `az login` (mais comum para desenvolvimento local)
 
-### Configuração de Autenticação no AZD
+### Configuração de Autenticação AZD
 
 ```bash
 # Método 1: Usar Azure CLI (Recomendado para desenvolvimento)
 az login
-azd auth login  # Usa credenciais existentes do Azure CLI
+azd auth login  # Utiliza as credenciais existentes do Azure CLI
 
 # Método 2: Autenticação direta azd
 azd auth login --use-device-code  # Para ambientes sem interface gráfica
 
-# Método 3: Verificar estado da autenticação
+# Método 3: Verificar o estado da autenticação
 azd auth login --check-status
 
 # Método 4: Terminar sessão e autenticar novamente
@@ -653,14 +669,14 @@ azd auth login
 
 #### Para Desenvolvimento Local
 ```bash
-# 1. Inicie sessão com Azure CLI
+# 1. Inicie sessão com o Azure CLI
 az login
 
 # 2. Verifique a subscrição correta
 az account show
 az account set --subscription "Your Subscription Name"
 
-# 3. Utilize azd com as credenciais existentes
+# 3. Use o azd com credenciais existentes
 azd auth login
 ```
 
@@ -681,16 +697,16 @@ azd auth login
 ```
 
 #### Para Ambientes de Produção
-- Use **Identidade Gerida** quando executar em recursos Azure
-- Use **Service Principal** para cenários de automação
-- Evite armazenar credenciais em código ou ficheiros de configuração
+- Use **Identidade Gerida** quando estiver a executar em recursos Azure
+- Use **Principal de Serviço** para cenários de automação
+- Evite armazenar credenciais no código ou ficheiros de configuração
 - Use **Azure Key Vault** para configuração sensível
 
 ### Problemas Comuns de Autenticação e Soluções
 
 #### Problema: "Nenhuma subscrição encontrada"
 ```bash
-# Solução: Definir assinatura predefinida
+# Solução: Definir subscrição padrão
 az account list --output table
 az account set --subscription "<subscription-id>"
 azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
@@ -698,12 +714,12 @@ azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 
 #### Problema: "Permissões insuficientes"
 ```bash
-# Solução: Verificar e atribuir funções necessárias
+# Solução: Verificar e atribuir os papéis necessários
 az role assignment list --assignee $(az account show --query user.name --output tsv)
 
-# Funções comuns necessárias:
+# Papéis comuns necessários:
 # - Colaborador (para gestão de recursos)
-# - Administrador de Acesso de Utilizadores (para atribuições de funções)
+# - Administrador de Acesso de Utilizadores (para atribuições de papéis)
 ```
 
 #### Problema: "Token expirado"
@@ -726,7 +742,7 @@ azd auth login
 
 #### Desenvolvimento em Equipa
 ```bash
-# Use um inquilino específico para a organização
+# Utilize inquilino específico para a organização
 az login --tenant contoso.onmicrosoft.com
 azd auth login
 ```
@@ -735,20 +751,21 @@ azd auth login
 ```bash
 # Alternar entre inquilinos
 az login --tenant tenant1.onmicrosoft.com
-# Implementar para o inquilino 1
+# Desplegar para o inquilino 1
 azd up
 
 az login --tenant tenant2.onmicrosoft.com  
-# Implementar para o inquilino 2
+# Desplegar para o inquilino 2
 azd up
 ```
 
 ### Considerações de Segurança
-1. **Armazenamento de Credenciais**: Nunca armazene credenciais no código-fonte  
-2. **Limitação de Âmbito**: Use o princípio do mínimo privilégio para service principals  
-3. **Rotação de Token**: Rode regularmente os segredos do service principal  
-4. **Rastreamento de Auditoria**: Monitorize atividades de autenticação e implantação  
-5. **Segurança de Rede**: Utilize endpoints privados sempre que possível  
+
+1. **Armazenamento de Credenciais**: Nunca armazene credenciais no código fonte
+2. **Limitação de Escopo**: Utilize o princípio do menor privilégio para principais de serviço
+3. **Rotação de Tokens**: Rode regularmente os segredos dos principais de serviço
+4. **Registo de Auditoria**: Monitorize atividades de autenticação e deployment
+5. **Segurança de Rede**: Utilize endpoints privados sempre que possível
 
 ### Resolução de Problemas de Autenticação
 
@@ -758,39 +775,39 @@ azd auth login --check-status
 az account show
 az account get-access-token
 
-# Comandos comuns de diagnóstico
+# Comandos de diagnóstico comuns
 whoami                          # Contexto do utilizador atual
-az ad signed-in-user show      # Detalhes do utilizador do Azure AD
-az group list                  # Testar acesso a recursos
+az ad signed-in-user show      # Detalhes do utilizador Microsoft Entra ID
+az group list                  # Testar acesso ao recurso
 ```
-  
-## Compreender `azd down --force --purge`  
 
-### Descoberta  
+## Entender `azd down --force --purge`
+
+### Descoberta
 ```bash
 azd template list              # Navegar por modelos
 azd template show <template>   # Detalhes do modelo
 azd init --help               # Opções de inicialização
 ```
-  
-### Gestão de Projetos  
+
+### Gestão de Projeto
 ```bash
 azd show                     # Visão geral do projeto
 azd env list                # Ambientes disponíveis e predefinição selecionada
 azd config show            # Definições de configuração
 ```
-  
-### Monitorização  
+
+### Monitorização
 ```bash
 azd monitor                  # Abrir monitorização do portal Azure
 azd monitor --logs           # Ver registos da aplicação
-azd monitor --live           # Ver métricas em tempo real
+azd monitor --live           # Ver métricas em direto
 azd pipeline config          # Configurar CI/CD
 ```
-  
-## Melhores Práticas  
 
-### 1. Use Nomes Significativos  
+## Melhores Práticas
+
+### 1. Use Nomes Significativos
 ```bash
 # Bom
 azd env new production-east
@@ -800,67 +817,67 @@ azd init --template web-app-secure
 azd env new env1
 azd init --template template1
 ```
-  
-### 2. Aproveitar Templates  
-- Comece com templates existentes  
-- Personalize conforme as suas necessidades  
-- Crie templates reutilizáveis para a sua organização  
 
-### 3. Isolamento de Ambiente  
-- Use ambientes separados para dev/staging/prod  
-- Nunca faça deploy diretamente para produção a partir da máquina local  
-- Utilize pipelines CI/CD para deploys de produção  
+### 2. Aproveite os Modelos
+- Comece com modelos existentes
+- Personalize conforme as suas necessidades
+- Crie modelos reutilizáveis para a sua organização
 
-### 4. Gestão de Configuração  
-- Use variáveis de ambiente para dados sensíveis  
-- Guarde a configuração no controlo de versões  
-- Documente definições específicas do ambiente  
+### 3. Isolamento de Ambiente
+- Use ambientes separados para dev/staging/prod
+- Nunca faça deployment diretamente para produção a partir da máquina local
+- Use pipelines CI/CD para deployments de produção
 
-## Progressão de Aprendizagem  
+### 4. Gestão de Configuração
+- Utilize variáveis de ambiente para dados sensíveis
+- Mantenha configuração sob controlo de versões
+- Documente configurações específicas de ambiente
 
-### Iniciante (Semanas 1-2)  
-1. Instalar azd e autenticar  
-2. Fazer deploy de um template simples  
-3. Compreender a estrutura do projeto  
-4. Aprender comandos básicos (up, down, deploy)  
+## Progressão de Aprendizagem
 
-### Intermédio (Semanas 3-4)  
-1. Personalizar templates  
-2. Gerir múltiplos ambientes  
-3. Compreender código de infraestrutura  
-4. Configurar pipelines CI/CD  
+### Iniciante (Semana 1-2)
+1. Instalar azd e autenticar
+2. Fazer deploy de um modelo simples
+3. Compreender a estrutura do projeto
+4. Aprender comandos básicos (up, down, deploy)
 
-### Avançado (Semana 5+)  
-1. Criar templates personalizados  
-2. Padrões avançados de infraestrutura  
-3. Deploys multi-região  
-4. Configurações ao nível empresarial  
+### Intermédio (Semana 3-4)
+1. Personalizar modelos
+2. Gerir múltiplos ambientes
+3. Compreender o código de infraestrutura
+4. Configurar pipelines CI/CD
 
-## Próximos Passos  
+### Avançado (Semana 5+)
+1. Criar modelos personalizados
+2. Padrões avançados de infraestrutura
+3. Deployments multi-região
+4. Configurações de nível empresarial
 
-**📖 Continuar a Aprender o Capítulo 1:**  
-- [Instalação e Configuração](installation.md) - Faça a instalação e configure o azd  
-- [O Seu Primeiro Projeto](first-project.md) - Complete o tutorial prático  
-- [Guia de Configuração](configuration.md) - Opções avançadas de configuração  
+## Próximos Passos
 
-**🎯 Pronto para o Próximo Capítulo?**  
-- [Capítulo 2: Desenvolvimento AI-First](../chapter-02-ai-development/microsoft-foundry-integration.md) - Comece a construir aplicações AI  
+**📖 Continue o Capítulo 1:**
+- [Instalação & Configuração](installation.md) - Instale e configure o azd
+- [O Seu Primeiro Projeto](first-project.md) - Complete o tutorial prático
+- [Guia de Configuração](configuration.md) - Opções avançadas de configuração
 
-## Recursos Adicionais  
+**🎯 Pronto para o Próximo Capítulo?**
+- [Capítulo 2: Desenvolvimento AI-First](../chapter-02-ai-development/microsoft-foundry-integration.md) - Comece a criar aplicações AI
 
-- [Visão Geral do Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- [Galeria de Templates](https://azure.github.io/awesome-azd/)  
-- [Exemplos da Comunidade](https://github.com/Azure-Samples)  
+## Recursos Adicionais
+
+- [Visão Geral Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Galeria de Modelos](https://azure.github.io/awesome-azd/)
+- [Exemplos da Comunidade](https://github.com/Azure-Samples)
 
 ---
 
-## 🙋 Perguntas Frequentes  
+## 🙋 Perguntas Frequentes
 
-### Perguntas Gerais  
+### Perguntas Gerais
 
-**Q: Qual a diferença entre AZD e Azure CLI?**  
+**Q: Qual a diferença entre AZD e Azure CLI?**
 
-A: Azure CLI (`az`) é para gerir recursos individuais do Azure. AZD (`azd`) é para gerir aplicações completas:  
+A: Azure CLI (`az`) serve para gerir recursos individuais no Azure. AZD (`azd`) serve para gerir aplicações completas:
 
 ```bash
 # Azure CLI - Gestão de recursos a baixo nível
@@ -868,32 +885,32 @@ az webapp create --name myapp --resource-group rg
 az sql server create --name myserver --resource-group rg
 # ...muitos mais comandos necessários
 
-# AZD - Gestão a nível de aplicação
-azd up  # Desdobra aplicação inteira com todos os recursos
+# AZD - Gestão ao nível da aplicação
+azd up  # Desdobra toda a aplicação com todos os recursos
 ```
-  
-**Pense desta forma:**  
-- `az` = Operar tijolos Lego individuais  
-- `azd` = Trabalhar com conjuntos completos de Lego  
+
+**Pense assim:**
+- `az` = Operar com peças individuais de Lego
+- `azd` = Trabalhar com conjuntos completos de Lego
 
 ---
 
-**Q: Preciso saber Bicep ou Terraform para usar AZD?**  
+**Q: Preciso de saber Bicep ou Terraform para usar AZD?**
 
-A: Não! Comece com templates:  
+A: Não! Comece com modelos:
 ```bash
-# Use o modelo existente - não é necessário conhecimento de IaC
+# Utilize o modelo existente - não é necessário conhecimento de IaC
 azd init --template todo-nodejs-mongo
 azd up
 ```
-  
-Pode aprender Bicep mais tarde para personalizar a infraestrutura. Templates fornecem exemplos práticos para aprender.  
+
+Pode aprender Bicep mais tarde para personalizar a infraestrutura. Os modelos fornecem exemplos práticos para aprender.
 
 ---
 
-**Q: Quanto custa usar templates AZD?**  
+**Q: Quanto custa executar modelos AZD?**
 
-A: Os custos variam consoante o template. A maioria dos templates de desenvolvimento custa entre 50 a 150 dólares/mês:  
+A: O custo varia consoante o modelo. A maioria dos modelos de desenvolvimento custa entre 50-150$/mês:
 
 ```bash
 # Pré-visualizar custos antes de implantar
@@ -902,17 +919,17 @@ azd provision --preview
 # Limpar sempre quando não estiver a usar
 azd down --force --purge  # Remove todos os recursos
 ```
-  
-**Dica profissional:** Use níveis gratuitos onde disponíveis:  
-- App Service: nível F1 (Gratuito)  
-- Modelos Microsoft Foundry: Azure OpenAI 50.000 tokens/mês gratuitos  
-- Cosmos DB: nível gratuito de 1000 RU/s  
+
+**Dica profissional:** Utilize tiers gratuitos sempre que disponíveis:
+- App Service: tier F1 (Gratuito)
+- Microsoft Foundry Models: Azure OpenAI 50,000 tokens/mês grátis
+- Cosmos DB: tier gratuito 1000 RU/s
 
 ---
 
-**Q: Posso usar AZD com recursos Azure já existentes?**  
+**Q: Posso usar AZD com recursos Azure existentes?**
 
-A: Sim, mas é mais fácil começar do zero. AZD funciona melhor quando gere o ciclo completo. Para recursos existentes:  
+A: Sim, mas é mais fácil começar do zero. AZD funciona melhor quando gere o ciclo de vida completo. Para recursos existentes:
 
 ```bash
 # Opção 1: Importar recursos existentes (avançado)
@@ -923,34 +940,34 @@ azd init
 azd init --template matching-your-stack
 azd up  # Cria um novo ambiente
 ```
-  
+
 ---
 
-**Q: Como partilho o meu projeto com colegas?**  
+**Q: Como partilho o meu projeto com colegas?**
 
-A: Faça commit do projeto AZD para o Git (mas NÃO da pasta .azure):  
+A: Faça commit do projeto AZD para Git (mas NÃO da pasta .azure):
 
 ```bash
 # Já está no .gitignore por padrão
 .azure/        # Contém segredos e dados do ambiente
 *.env          # Variáveis de ambiente
 
-# Membros da equipa então:
+# Membros da equipa depois:
 git clone <your-repo>
 azd auth login
 azd env new <their-name>-dev
 azd up
 ```
-  
-Todos obtêm a mesma infraestrutura a partir dos mesmos templates.  
+
+Todos têm infraestrutura idêntica a partir dos mesmos modelos.
 
 ---
 
-### Perguntas de Resolução de Problemas  
+### Perguntas de Resolução de Problemas
 
-**Q: "azd up" falhou a meio. O que faço?**  
+**Q: O comando "azd up" falhou a meio. O que faço?**
 
-A: Verifique o erro, corrija e tente novamente:  
+A: Verifique o erro, corrija e tente novamente:
 
 ```bash
 # Ver registos detalhados
@@ -958,48 +975,48 @@ azd show
 
 # Correções comuns:
 
-# 1. Se a quota foi excedida:
+# 1. Se a quota for excedida:
 azd env set AZURE_LOCATION "westus2"  # Tente uma região diferente
 
-# 2. Se houver conflito no nome do recurso:
-azd down --force --purge  # Limpar tudo
-azd up  # Tente novamente
+# 2. Se houver conflito de nome de recurso:
+azd down --force --purge  # Começar do zero
+azd up  # Tentar novamente
 
 # 3. Se a autenticação expirou:
 az login
 azd auth login
 azd up
 ```
-  
-**Problema mais comum:** Subscrição Azure errada selecionada  
+
+**Problema mais comum:** Subscrição Azure errada selecionada
 ```bash
 az account list --output table
 az account set --subscription "<correct-subscription>"
 ```
-  
+
 ---
 
-**Q: Como faço deploy só das alterações de código sem reprovisionar?**  
+**Q: Como faço deploy só das alterações de código sem reprovisionar?**
 
-A: Use `azd deploy` em vez de `azd up`:  
+A: Use `azd deploy` em vez de `azd up`:
 
 ```bash
-azd up          # Primeira vez: provisionar + implantar (lento)
+azd up          # Primeira vez: provisão + implantação (lento)
 
-# Fazer alterações no código...
+# Faça alterações no código...
 
-azd deploy      # Próximas vezes: apenas implantar (rápido)
+azd deploy      # Vezes subsequentes: apenas implantação (rápido)
 ```
-  
-Comparação de velocidade:  
-- `azd up`: 10-15 minutos (provisiona infraestrutura)  
-- `azd deploy`: 2-5 minutos (só código)  
+
+Comparação de velocidade:
+- `azd up`: 10-15 minutos (provisiona infraestrutura)
+- `azd deploy`: 2-5 minutos (só código)
 
 ---
 
-**Q: Posso personalizar os templates de infraestrutura?**  
+**Q: Posso personalizar os modelos de infraestrutura?**
 
-A: Sim! Edite os ficheiros Bicep em `infra/`:  
+A: Sim! Edite os ficheiros Bicep em `infra/`:
 
 ```bash
 # Após azd init
@@ -1012,20 +1029,20 @@ azd provision --preview
 # Aplicar alterações
 azd provision
 ```
-  
-**Dica:** Comece pequeno - altere SKUs primeiro:  
+
+**Dica:** Comece pequeno - altere SKUs primeiro:
 ```bicep
 // infra/main.bicep
 sku: {
   name: 'B1'  // Change to 'P1V2' for production
 }
 ```
-  
+
 ---
 
-**Q: Como elimino tudo o que o AZD criou?**  
+**Q: Como apago tudo o que o AZD criou?**
 
-A: Um comando remove todos os recursos:  
+A: Um comando remove todos os recursos:
 
 ```bash
 azd down --force --purge
@@ -1034,40 +1051,40 @@ azd down --force --purge
 # - Todos os recursos Azure
 # - Grupo de recursos
 # - Estado do ambiente local
-# - Dados em cache da implementação
+# - Dados de implementação em cache
 ```
-  
-**Use sempre quando:**  
-- Terminar de testar um template  
-- Mudar para outro projeto  
-- Querer começar do zero  
 
-**Economia:** Apagar recursos não usados = cobranças $0  
+**Execute sempre quando:**
+- Terminar de testar um modelo
+- Mudar para outro projeto
+- Querer começar do zero
+
+**Economia de custos:** Apagar recursos não usados = $0 de cobrança
 
 ---
 
-**Q: E se apagar recursos acidentalmente no Portal Azure?**  
+**Q: E se apagar recursos acidentalmente no Portal Azure?**
 
-A: O estado do AZD pode desincronizar. Abordagem limpa:  
+A: O estado do AZD pode desincronizar. Abordagem de limpeza:
 
 ```bash
-# 1. Remover o estado local
+# 1. Remover estado local
 azd down --force --purge
 
-# 2. Começar de novo
+# 2. Começar do zero
 azd up
 
-# Alternativa: Deixar o AZD detetar e corrigir
-azd provision  # Irá criar os recursos em falta
+# Alternativa: Deixar o AZD detectar e corrigir
+azd provision  # Irá criar recursos em falta
 ```
-  
+
 ---
 
-### Perguntas Avançadas  
+### Perguntas Avançadas
 
-**Q: Posso usar AZD em pipelines CI/CD?**  
+**Q: Posso usar AZD em pipelines CI/CD?**
 
-A: Sim! Exemplo GitHub Actions:  
+A: Sim! Exemplo GitHub Actions:
 
 ```yaml
 # .github/workflows/deploy.yml
@@ -1096,12 +1113,12 @@ jobs:
       - name: Deploy
         run: azd up --no-prompt
 ```
-  
+
 ---
 
-**Q: Como gerenciar segredos e dados sensíveis?**  
+**Q: Como gerencio segredos e dados sensíveis?**
 
-A: AZD integra-se automaticamente com o Azure Key Vault:  
+A: O AZD integra-se automaticamente com Azure Key Vault:
 
 ```bash
 # Os segredos são armazenados no Key Vault, não no código
@@ -1113,25 +1130,25 @@ azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)"
 # 3. Concede acesso à aplicação através da Identidade Gerida
 # 4. Injeta em tempo de execução
 ```
-  
-**Nunca faça commit de:**  
-- Pasta `.azure/` (contém dados do ambiente)  
-- Ficheiros `.env` (segredos locais)  
-- Strings de ligação  
+
+**Nunca faça commit de:**
+- Pasta `.azure/` (contém dados do ambiente)
+- Ficheiros `.env` (segredos locais)
+- Strings de ligação
 
 ---
 
-**Q: Posso fazer deploy para múltiplas regiões?**  
+**Q: Posso fazer deploy para múltiplas regiões?**
 
-A: Sim, crie um ambiente por região:  
+A: Sim, crie um ambiente por região:
 
 ```bash
-# Ambiente Leste dos EUA
+# Ambiente EUA Este
 azd env new prod-eastus
 azd env set AZURE_LOCATION eastus
 azd up
 
-# Ambiente Oeste da Europa
+# Ambiente Europa Ocidental
 azd env new prod-westeurope
 azd env set AZURE_LOCATION westeurope
 azd up
@@ -1139,59 +1156,59 @@ azd up
 # Cada ambiente é independente
 azd env list
 ```
-  
-Para apps verdadeiramente multi-região, personalize os templates Bicep para implantar em várias regiões simultaneamente.  
+
+Para apps multi-região reais, personalize os modelos Bicep para deploy simultâneo em várias regiões.
 
 ---
 
-**Q: Onde posso obter ajuda se ficar bloqueado?**  
+**Q: Onde posso obter ajuda se estiver bloqueado?**
 
-1. **Documentação AZD:** https://learn.microsoft.com/azure/developer/azure-developer-cli/  
-2. **Issues no GitHub:** https://github.com/Azure/azure-dev/issues  
-3. **Discord:** [Azure Discord](https://discord.gg/microsoft-azure) - canal #azure-developer-cli  
-4. **Stack Overflow:** Tag `azure-developer-cli`  
-5. **Este Curso:** [Guia de Resolução de Problemas](../chapter-07-troubleshooting/common-issues.md)  
+1. **Documentação AZD:** https://learn.microsoft.com/azure/developer/azure-developer-cli/
+2. **GitHub Issues:** https://github.com/Azure/azure-dev/issues
+3. **Discord:** [Azure Discord](https://discord.gg/microsoft-azure) - canal #azure-developer-cli
+4. **Stack Overflow:** Tag `azure-developer-cli`
+5. **Este Curso:** [Guia de Resolução de Problemas](../chapter-07-troubleshooting/common-issues.md)
 
-**Dica profissional:** Antes de perguntar, corra:  
+**Dica profissional:** Antes de perguntar, execute:
 ```bash
 azd show       # Mostra o estado atual
 azd version    # Mostra a sua versão
 ```
-Inclua esta informação na sua pergunta para uma ajuda mais rápida.  
+Inclua esta informação na sua pergunta para ajuda mais rápida.
 
 ---
 
-## 🎓 O Que Vem a Seguir?  
+## 🎓 E Agora?
 
-Agora compreende os fundamentos AZD. Escolha o seu caminho:  
+Já compreende os fundamentos do AZD. Escolha o seu caminho:
 
-### 🎯 Para Iniciantes:  
-1. **A seguir:** [Instalação e Configuração](installation.md) - Instale o AZD na sua máquina  
-2. **Depois:** [O Seu Primeiro Projeto](first-project.md) - Faça deploy da sua primeira app  
-3. **Prática:** Complete os 3 exercícios desta lição  
+### 🎯 Para Iniciantes:
+1. **Seguinte:** [Instalação & Configuração](installation.md) - Instale o AZD na sua máquina
+2. **Depois:** [O Seu Primeiro Projeto](first-project.md) - Faça deploy da sua primeira aplicação
+3. **Pratique:** Complete os 3 exercícios desta lição
 
-### 🚀 Para Desenvolvedores AI:  
-1. **Pule para:** [Capítulo 2: Desenvolvimento AI-First](../chapter-02-ai-development/microsoft-foundry-integration.md)  
-2. **Faça deploy:** Comece com `azd init --template get-started-with-ai-chat`  
-3. **Aprenda:** Construa enquanto implanta  
+### 🚀 Para Desenvolvedores AI:
+1. **Passe para:** [Capítulo 2: Desenvolvimento AI-First](../chapter-02-ai-development/microsoft-foundry-integration.md)
+2. **Implemente:** Comece com `azd init --template get-started-with-ai-chat`
+3. **Aprenda:** Construa enquanto implementa
 
-### 🏗️ Para Desenvolvedores Experientes:  
-1. **Revise:** [Guia de Configuração](configuration.md) - Definições avançadas  
-2. **Explore:** [Infraestrutura como Código](../chapter-04-infrastructure/provisioning.md) - Mergulho profundo em Bicep  
-3. **Construa:** Crie templates personalizados para a sua stack  
+### 🏗️ Para Desenvolvedores Experientes:
+1. **Revise:** [Guia de Configuração](configuration.md) - Definições avançadas
+2. **Explore:** [Infraestrutura como Código](../chapter-04-infrastructure/provisioning.md) - Imersão em Bicep
+3. **Construa:** Crie modelos personalizados para o seu stack
 
 ---
 
-**Navegação do Capítulo:**  
-- **📚 Início do Curso**: [AZD Para Iniciantes](../../README.md)  
-- **📖 Capítulo Atual**: Capítulo 1 - Fundamentos e Início Rápido  
-- **⬅️ Anterior**: [Visão Geral do Curso](../../README.md#-chapter-1-foundation--quick-start)  
-- **➡️ Seguinte**: [Instalação e Configuração](installation.md)  
-- **🚀 Capítulo Seguinte**: [Capítulo 2: Desenvolvimento AI-First](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Navegação do Capítulo:**
+- **📚 Início do Curso:** [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual:** Capítulo 1 - Fundação & Início Rápido  
+- **⬅️ Anterior:** [Visão Geral do Curso](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Seguinte:** [Instalação & Configuração](installation.md)
+- **🚀 Próximo Capítulo:** [Capítulo 2: Desenvolvimento AI-First](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos por garantir a precisão, por favor tenha em conta que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.
+**Aviso Legal**:
+Este documento foi traduzido utilizando o serviço de tradução automática [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas resultantes da utilização desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

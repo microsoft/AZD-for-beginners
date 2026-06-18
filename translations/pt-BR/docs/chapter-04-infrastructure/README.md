@@ -1,35 +1,36 @@
-# Chapter 4: Infraestrutura como Código & Implantação
+# Capítulo 4: Infraestrutura como Código & Implantação
 
-**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duration**: 1-1.5 hours | **⭐ Complexity**: Intermediário
+**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 1-1,5 horas | **⭐ Complexidade**: Intermediário
 
 ---
 
 ## Visão Geral
 
-Este capítulo aborda padrões de Infraestrutura como Código (IaC) com templates Bicep, provisionamento de recursos e estratégias de implantação usando o Azure Developer CLI.
+Este capítulo aborda padrões de Infrastructure as Code (IaC) com templates Bicep, provisionamento de recursos e estratégias de implantação usando o Azure Developer CLI.
 
-> Validado contra `azd 1.23.12` em março de 2026.
+> Validado com `azd 1.25.6` em junho de 2026.
 
 ## Objetivos de Aprendizagem
 
 Ao concluir este capítulo, você irá:
-- Entender a estrutura e a sintaxe dos templates Bicep
+- Compreender a estrutura e a sintaxe de templates Bicep
 - Provisionar recursos do Azure com `azd provision`
 - Implantar aplicações com `azd deploy`
 - Implementar estratégias de implantação blue-green e rolling
 
 ---
 
-## 📚 Lições
+## 📚 Aulas
 
 | # | Lição | Descrição | Tempo |
 |---|--------|-------------|------|
-| 1 | [Provisionamento de Recursos](provisioning.md) | Gerenciamento de recursos do Azure com AZD | 45 min |
-| 2 | [Guia de Implantação](deployment-guide.md) | Estratégias de implantação de aplicações | 45 min |
+| 1 | [Provisioning Resources](provisioning.md) | Gerenciamento de recursos do Azure com AZD | 45 min |
+| 2 | [Deployment Guide](deployment-guide.md) | Estratégias de implantação de aplicações | 45 min |
+| 3 | [Authoring Your Own Template](custom-templates.md) | Criar e publicar modelos azd reutilizáveis | 30 min |
 
 ---
 
-## 🚀 Início Rápido
+## 🚀 Quick Start
 
 ```bash
 # Inicializar a partir do modelo
@@ -50,7 +51,7 @@ azd up
 
 ---
 
-## 📁 Estrutura do Projeto AZD
+## 📁 AZD Project Structure
 
 ```
 my-project/
@@ -67,13 +68,13 @@ my-project/
 
 ---
 
-## 🔧 Comandos Essenciais
+## 🔧 Essential Commands
 
-| Comando | Descrição |
+| Command | Description |
 |---------|-------------|
-| `azd init` | Inicializar projeto |
+| `azd init` | Inicializar o projeto |
 | `azd provision` | Criar recursos do Azure |
-| `azd deploy` | Implantar código da aplicação |
+| `azd deploy` | Implantar o código da aplicação |
 | `azd up` | provisionar + implantar |
 | `azd down` | Excluir todos os recursos |
 
@@ -90,13 +91,13 @@ my-project/
 
 ## 📖 Recursos Relacionados
 
-- [Verificações Pré-Implantação](../chapter-06-pre-deployment/README.md)
-- [Exemplos de Aplicativos em Container](../../examples/container-app/README.md)
-- [Exemplo de Aplicativo de Banco de Dados](../../examples/database-app/README.md)
+- [Verificações pré-implantação](../chapter-06-pre-deployment/README.md)
+- [Exemplos de Container App](../../examples/container-app/README.md)
+- [Exemplo de Aplicação de Banco de Dados](../../examples/database-app/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Isenção de responsabilidade**:
-Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução humana profissional. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+**Aviso Legal**:
+Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, por favor, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

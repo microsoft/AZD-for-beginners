@@ -1,41 +1,41 @@
-# Capítulo 8: Padrões de Produção e Empresariais
+# Capítulo 8: Padrões de Produção & Empresariais
 
-**📚 Curso**: [AZD Para Principiantes](../../README.md) | **⏱️ Duração**: 2-3 horas | **⭐ Complexidade**: Avançado
+**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 2-3 horas | **⭐ Complexidade**: Avançado
 
 ---
 
 ## Visão Geral
 
-Este capítulo aborda padrões de implantação prontos para empresas, reforço de segurança, monitorização e otimização de custos para cargas de trabalho de IA em produção.
+Este capítulo aborda padrões de implementação prontos para empresas, reforço de segurança, monitorização e otimização de custos para cargas de trabalho de IA em produção.
 
-> Validado com `azd 1.23.12` em março de 2026.
+> Validado com `azd 1.25.6` em junho de 2026.
 
 ## Objetivos de Aprendizagem
 
-Ao completar este capítulo, você irá:
-- Implantar aplicações resilientes multi-região
-- Implementar padrões de segurança empresarial
+Ao concluir este capítulo, irá:
+- Implementar aplicações resistentes multinregionais
+- Aplicar padrões de segurança empresariais
 - Configurar monitorização abrangente
-- Otimizar custos em larga escala
+- Otimizar custos em grande escala
 - Configurar pipelines CI/CD com AZD
 
 ---
 
-## 📚 Lições
+## 📚 Aulas
 
-| # | Lição | Descrição | Tempo |
+| # | Aula | Descrição | Tempo |
 |---|--------|-------------|------|
-| 1 | [Práticas de IA em Produção](production-ai-practices.md) | Padrões de implantação empresarial | 90 min |
+| 1 | [Práticas de IA em Produção](production-ai-practices.md) | Padrões de implementação empresarial | 90 min |
 
 ---
 
 ## 🚀 Lista de Verificação para Produção
 
-- [ ] Implantação multi-região para resiliência
+- [ ] Implementação multinregional para resiliência
 - [ ] Identidade gerida para autenticação (sem chaves)
 - [ ] Application Insights para monitorização
 - [ ] Orçamentos e alertas de custos configurados
-- [ ] Análise de segurança ativada
+- [ ] Verificação de segurança ativada
 - [ ] Integração de pipeline CI/CD
 - [ ] Plano de recuperação de desastres
 
@@ -43,20 +43,22 @@ Ao completar este capítulo, você irá:
 
 ## 🏗️ Padrões de Arquitetura
 
-### Padrão 1: IA de Microserviços
+### Padrão 1: Microserviços AI
 
 ```mermaid
 graph LR
-    Gateway[Gateway de API] --> AI[Serviço de IA] --> Models[Modelos Microsoft Foundry]
+    Gateway[API Gateway] --> AI[Serviço de IA] --> Models[Modelos Microsoft Foundry]
     Gateway --> Auth[Serviço de Autenticação]
     AI --> Data[Armazenamento de Dados]
 ```
+
 ### Padrão 2: IA Orientada a Eventos
 
 ```mermaid
 graph LR
     EventGrid[Event Grid] --> Functions[Funções] --> Pipeline[Pipeline de IA]
 ```
+
 ---
 
 ## 🔐 Melhores Práticas de Segurança
@@ -82,8 +84,8 @@ properties: {
 
 | Estratégia | Poupança |
 |----------|---------|
-| Dimensionar para zero (Aplicações em Contentor) | 60-80% |
-| Usar níveis de consumo para dev | 50-70% |
+| Escalar até zero (Container Apps) | 60-80% |
+| Usar níveis de consumo para desenvolvimento | 50-70% |
 | Escalonamento programado | 30-50% |
 | Capacidade reservada | 20-40% |
 
@@ -101,7 +103,7 @@ az consumption budget create \
 ## 📊 Configuração de Monitorização
 
 ```bash
-# Transmitir registos
+# Transmitir logs
 azd monitor --logs
 
 # Verificar o Application Insights
@@ -132,6 +134,6 @@ az monitor metrics list --resource <resource-id>
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução automática [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos por garantir a precisão, por favor tenha em conta que as traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações erradas decorrentes do uso desta tradução.
+**Aviso Legal**:
+Este documento foi traduzido utilizando o serviço de tradução automática [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas resultantes da utilização desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

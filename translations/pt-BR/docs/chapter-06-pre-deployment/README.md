@@ -1,35 +1,35 @@
 # Capítulo 6: Planejamento e Validação Pré-Implantação
 
-**📚 Curso**: [AZD For Beginners](../../README.md) | **⏱️ Duração**: 1 hora | **⭐ Complexidade**: Intermediário
+**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 1 hora | **⭐ Complexidade**: Intermediário
 
 ---
 
 ## Visão Geral
 
-Este capítulo aborda etapas essenciais de planejamento e validação antes de implantar sua aplicação. Aprenda a evitar erros custosos com planejamento de capacidade adequado, seleção de SKUs e verificações pré-implantação.
+Este capítulo aborda etapas essenciais de planejamento e validação antes de implantar sua aplicação. Aprenda a evitar erros custosos com um planejamento adequado de capacidade, seleção de SKUs e verificações pré-implantação.
 
-> Validado contra `azd 1.23.12` em março de 2026.
+> Validado com `azd 1.25.6` em junho de 2026.
 
 ## Objetivos de Aprendizagem
 
 Ao concluir este capítulo, você irá:
-- Executar verificações pré-implantação
+- Executar verificações pré-implantação antes da implantação
 - Planejar capacidade e estimar requisitos de recursos
 - Selecionar SKUs apropriados para otimização de custos
-- Configurar o Application Insights para monitoramento
+- Configurar Application Insights para monitoramento
 - Entender padrões de coordenação da equipe
 
 ---
 
-## 📚 Lições
+## 📚 Aulas
 
 | # | Lição | Descrição | Tempo |
 |---|--------|-------------|------|
-| 1 | [Verificações pré-implantação](preflight-checks.md) | Validar configuração antes da implantação | 15 min |
+| 1 | [Verificações Pré-Implantação](preflight-checks.md) | Validar configuração antes da implantação | 15 min |
 | 2 | [Planejamento de Capacidade](capacity-planning.md) | Estimar requisitos de recursos | 20 min |
-| 3 | [Seleção de SKU](sku-selection.md) | Escolher níveis de preço apropriados | 15 min |
+| 3 | [Seleção de SKUs](sku-selection.md) | Escolher níveis de preços apropriados | 15 min |
 | 4 | [Application Insights](application-insights.md) | Configurar monitoramento | 20 min |
-| 5 | [Padrões de Coordenação](coordination-patterns.md) | Fluxos de trabalho de implantação da equipe | 15 min |
+| 5 | [Padrões de Coordenação](coordination-patterns.md) | Fluxos de trabalho de implantação em equipe | 15 min |
 
 ---
 
@@ -51,14 +51,14 @@ azd env get-values
 
 ---
 
-## ☑️ Checklist de Pré-Implantação
+## ☑️ Lista de Verificação de Pré-Implantação
 
 ### Antes de `azd provision`
 
 - [ ] Cota verificada para a região
 - [ ] SKUs selecionados adequadamente
 - [ ] Estimativa de custo revisada
-- [ ] Convenção de nomes consistente
+- [ ] Convenção de nomenclatura consistente
 - [ ] Segurança/RBAC configurados
 
 ### Antes de `azd deploy`
@@ -85,8 +85,8 @@ azd env get-values
 
 | Direction | Chapter |
 |-----------|---------|
-| **Previous** | [Chapter 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
-| **Next** | [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/README.md) |
+| **Previous** | [Capítulo 5: Multi-Agente](../chapter-05-multi-agent/README.md) |
+| **Next** | [Capítulo 7: Solução de Problemas](../chapter-07-troubleshooting/README.md) |
 
 ---
 
@@ -99,6 +99,6 @@ azd env get-values
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Isenção de responsabilidade**:
-Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se tradução profissional realizada por um tradutor humano. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+**Aviso Legal**:
+Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, por favor, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
