@@ -1,52 +1,52 @@
-# គម្រោងដំបូងរបស់អ្នក - មេរៀនដៃបង្ហាញ
+# Your First Project - Hands-On Tutorial
 
-**ការរុករកជំពូក៖**
-- **📚 ទំព័រដើមវគ្គសិក្សា**: [AZD សម្រាប់អ្នកចាប់ផ្ដើម](../../README.md)
-- **📖 ជំពូកបច្ចុប្បន្ន**: ជំពូកទី 1 - គ្រឹះបច្ចេកទេស និងចាប់ផ្ដើមយ៉ាងរហ័ស
-- **⬅️ មុន**: [ការតំឡើង និង ការតំរូវការ](installation.md)
-- **➡️ បន្ទាប់**: [ការកំណត់រចនាសម្ព័ន្ធ](configuration.md)
-- **🚀 ជំពូកបន្ទាប់**: [ជំពូកទី 2: ការអភិវឌ្ឍ AI ជាដំបូង](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
+- **⬅️ Previous**: [Installation & Setup](installation.md)
+- **➡️ Next**: [Configuration](configuration.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-## ការណែនាំ
+## Introduction
 
-សូមស្វាគមន៍មកកាន់គម្រោង Azure Developer CLI ដំបូងរបស់អ្នក! មេរៀននេះដែលមានការប្រតិបត្តិពេញលេញផ្តល់នូវការដើរតាមដានជំហានច្បាស់លាស់សម្រាប់ការបង្កើត ការដាក់ពាក្យ និងការគ្រប់គ្រងកម្មវិធីផ្ទាល់ខ្លួនគ្មានខ្សែ លើ Azure ដោយប្រើ azd។ អ្នកនឹងធ្វើការជាមួយកម្មវិធី todo ពិតដែលរួមបញ្ចូល React មុខខាងមុខ, Node.js API ខាងក្រោយ និងមូលដ្ឋានទិន្នន័យ MongoDB។
+សូមស្វាគមਨ៍មកកាន់គម្រោង Azure Developer CLI ដំបូងរបស់អ្នក! មេរៀនអនុវត្តប្រៀបនេះផ្តល់ការបណ្តុះបណ្តាលពេញលេញពីការបង្កើត ការចែកចាយ និងការគ្រប់គ្រងកម្មវិធី full-stack នៅលើ Azure ដោយប្រើ azd។ អ្នកនឹងធ្វើការជាមួយកម្មវិធី todo ពិត ដែលមាន React frontend, Node.js API backend និង MongoDB database។
 
-## គោលដៅការសិក្សា
+## Learning Goals
 
-ដោយបញ្ចប់មេរៀននេះ អ្នកនឹង៖
-- អាចចេះរបៀបចាប់ផ្ដើមគម្រោង azd ដោយប្រើគំរូ
-- យល់ដឹងពីរចនាសម្ព័ន្ធគម្រោង Azure Developer CLI និងឯកសារកំណត់រចនាសម្ព័ន្ធ
-- អនុវត្តការដាក់ពាក្យពេញលេញទៅ Azure ជាមួយការផ្តល់សេវាឧបទដ្ឋាន
-- អនុវត្តយុទ្ធសាស្រ្តធ្វើបច្ចុប្បន្នភាពកម្មវិធី និងការដាក់ឡើងវិញ
-- គ្រប់គ្រងបរិបទច្រើនសម្រាប់ការអភិវឌ្ឍន៍ និងការកំណត់ជាស្ថានភាពសាកល្បង
-- អនុវត្តការសម្អាតធនធាន និងការគ្រប់គ្រងចំណាយ
+ដោយបញ្ចប់មេរៀននេះ អ្នកនឹង:
+- អភិវឌ្ឍជំនាញលើធ្វើដំណើរ initialization គម្រោង azd ដោយប្រើសំពាធសាលា (templates)
+- យល់ដឹងអំពីរចនាសម្ព័ន្ធគម្រោង Azure Developer CLI និងគ្រប់កំណត់រចនាសម្ព័ន្ធ
+- អនុវត្តការចែកចាយកម្មវិធីពេញលេញទៅ Azure រួមទាំងការផ្គត់ផ្គង់ហេដ្ឋារចនាសម្ព័ន្ធ
+- អនុវត្តយុទ្ធសាស្រ្តធ្វើបច្ចុប្បន្នភាពកម្មវិធី និងចែកចាយឡើងវិញ
+- គ្រប់គ្រងបរិយាកាសច្រើនសម្រាប់ការអភិវឌ្ឍន៍ និង staging
+- អនុវត្តការសម្អាតធនធាន និងការគ្រប់គ្រងថ្លៃដើម
 
-## លទ្ធផលសិក្សា
+## Learning Outcomes
 
-បរិច្ចេកទេសបន្ទាប់ពីបញ្ចប់ អ្នកនឹងអាច៖
-- ចាប់ផ្ដើម និងកំណត់រចនាសម្ព័ន្ធគម្រោង azd ពីគំរូដោយឯករាជ្យ
-- រុករក និងកែប្រែរចនាសម្ព័ន្ធគម្រោង azd បានយ៉ាងមានប្រសិទ្ធិភាព
-- ដាក់ពាក្យកម្មវិធីផ្ទាល់ខ្លួនគ្មានខ្សែទៅ Azure ដោយប្រើពាក្យបញ្ជាเดียว
-- ដោះស្រាយបញ្ហាការដាក់ពាក្យជាញឹកញាប់ និងបញ្ហាអត្តសញ្ញាណ
-- គ្រប់គ្រងបរិបទ Azure ជាច្រើនសម្រាប់ជំហានដាក់ពាក្យផ្សេងៗ
-- អនុវត្តដំណើរការការដាក់ពាក្យជាប់លាប់សម្រាប់ការអាប់ដេតកម្មវិធី
+បន្ទាប់ពីបញ្ចប់ អ្នកនឹងអាច:
+- Initialize និងកំណត់រចនាសម្ព័ន្ធគម្រោង azd ពាពី templates ដោយធ្វើឡើងដោយឯង
+- នាវីហ្គេត និងកែប្រែរចនាសម្ព័ន្ធគម្រោង azd បានយ៉ាងមានប្រសិទ្ធភាព
+- ចែកចាយកម្មវិធី full-stack ទៅ Azure ដោយប្រើពាក្យបញ្ជាមួយគត់
+- ប្តូរការពិនិត្យបញ្ហាចែកចាយទូទៅ និងបញ្ហាផ្នែក authentication
+- គ្រប់គ្រងបរិយាកាស Azure ច្រើនសម្រាប់ដំណាក់កាលចែកចាយខុសគ្នា
+- អនុវត្តចរន្តចែកចាយបន្តសម្រាប់ការអាប់ដេតកម្មវិធី
 
-## ការចាប់ផ្ដើម
+## Getting Started
 
-### បញ្ជីត្រួតពិនិត្យបម្រើការជាមុន
-- ✅ បានតំឡើង Azure Developer CLI ([មគ្គុទេសក៍តំឡើង](installation.md))
-- ✅ បានបញ្ចប់ការផ្ទៀងផ្ទាត់ AZD ជាមួយ `azd auth login`
-- ✅ បានតំឡើង Git នៅលើប្រព័ន្ធរបស់អ្នក
-- ✅ Node.js 16+ (សម្រាប់មេរៀននេះ)
-- ✅ Visual Studio Code (ផ្តល់អនុសាសន៍)
+### Prerequisites Checklist
+- ✅ Azure Developer CLI installed ([Installation Guide](installation.md))
+- ✅ AZD authentication completed with `azd auth login`
+- ✅ Git installed on your system
+- ✅ Node.js 16+ (for this tutorial)
+- ✅ Visual Studio Code (recommended)
 
-មុនត្រូវបន្ត សូមបើកកម្មវិធីបញ្ច្រួលការតំរូវការពីគ្រឹះដើមឃ្លាំងទិន្នន័យ៖
+មុននឹងបន្ត សូមរត់កម្មវិធី validator សម្រាប់ការតម្រុយពី root នៃ repository៖
 
 **Windows:** `./validate-setup.ps1`
 
 **macOS / Linux:** `bash ./validate-setup.sh`
 
-### ផ្ទៀងផ្ទាត់ការតំរូវការរបស់អ្នក
+### Verify Your Setup
 ```bash
 # ពិនិត្យការដំឡើង azd
 azd version
@@ -55,54 +55,54 @@ azd version
 azd auth login --check-status
 ```
 
-### ផ្ទៀងផ្ទាត់ការផ្ទៀងផ្ទាត់ Azure CLI ជាជម្រើស
+### Verify optional Azure CLI authentication
 
 ```bash
 az account show
 ```
 
-### ពិនិត្យរឿងកំណែ Node.js
+### Check Node.js version
 ```bash
 node --version
 ```
 
-## ជំហាន 1៖ ជ្រើសរើស និង ចាប់ផ្ដើមគំរូមួយ
+## Step 1: Choose and Initialize a Template
 
-ចាប់ផ្ដើមជាមួយគំរូកម្មវិធី todo ទៅរីករាយ ដែលរួមបញ្ចូល React មុខខាងមុខ និង Node.js API ខាងក្រោយ។
+ចាប់ផ្តើមជាមួយ template todo ដែលពេញនិយម ដែលរួមមាន React frontend និង Node.js API backend។
 
 ```bash
 # រុករកគំរូដែលមាន
 azd template list
 
-# ចាប់ផ្តើមគំរូកម្មវិធី todo
+# ចាប់ផ្តើមគំរូកម្មវិធី To-Do
 mkdir my-first-azd-app
 cd my-first-azd-app
 azd init --template todo-nodejs-mongo
 
-# អនុវត្តតាមការណែនាំ៖
-# - បញ្ចូលឈ្មោះបរិយាកាស៖ "dev"
+# ធ្វើតាមការណែនាំ:
+# - បញ្ចូលឈ្មោះបរិស្ថាន: "dev"
 # - ជ្រើសរើសការជាវ (បើអ្នកមានច្រើន)
-# - ជ្រើសរើសតំបន់៖ "East US 2" (ឬតំបន់ដែលអ្នកចូលចិត្ត)
+# - ជ្រើសរើសតំបន់: "East US 2" (ឬតំបន់ដែលអ្នកចូលចិត្ត)
 ```
 
-### តើមានអ្វីកើតឡើង?
-- បានទាញយកកូដគំរូទៅកាន់ថតទិន្នន័យតំបន់ស្រុករបស់អ្នក
-- បង្កើតឯកសារ `azure.yaml` ដែលមានការបញ្ជាក់សេវាកម្ម
-- តំឡើងកូដឧបករណ៍នៅក្នុងថត `infra/`
-- បង្កើតកំណត់បរិបទបរិយាកាស
+### What Just Happened?
+- បានទាញយកកូដ template មកក្នុងថតបណ្តាញក្នុងเครื่องរបស់អ្នក
+- បានបង្កើតឯកសារ `azure.yaml` ដែលមានការពិពណ៌នាសេវាកម្ម
+- បានកំណត់កូដហេដ្ឋារចនាសម្ព័ន្ធក្នុងថត `infra/`
+- បានបង្កើតការកំណត់បរិយាកាស
 
-## ជំហាន 2៖ រុករករចនាសម្ព័ន្ធគម្រោង
+## Step 2: Explore the Project Structure
 
-មកមើលថាតើ azd បានបង្កើតអ្វីសម្រាប់យើង៖
+ចាំមើលអ្វីដែល azd បានបង្កើតសម្រាប់យើង៖
 
 ```bash
 # មើលរចនាសម្ព័ន្ធគម្រោង
-tree /f   # វីនដូឌ
+tree /f   # វីនដូ
 # ឬ
-find . -type f | head -20   # macOS/Linux
+find . -type f | head -20   # ម៉ាក់អូអេស/លីនុច
 ```
 
-អ្នកគួរតែឃើញ៖
+You should see:
 ```
 my-first-azd-app/
 ├── .azd/
@@ -129,68 +129,68 @@ my-first-azd-app/
 └── README.md                   # Project documentation
 ```
 
-### ឯកសារសំខាន់ៗដែលត្រូវយល់
+### Key Files to Understand
 
-**azure.yaml** - បេះដូងគម្រោង azd របស់អ្នក៖
+**azure.yaml** - ដើមទ្រូងនៃគម្រោង azd របស់អ្នក:
 ```bash
-# មើលការកំណត់រចនាសម្ព័ន្ធគម្រោង
+# មើលការកំណត់រចនាសម្ព័ន្ធនៃគម្រោង
 cat azure.yaml
 ```
 
-**infra/main.bicep** - ការបញ្ជាក់អហ្គួរឋានភាគ៖
+**infra/main.bicep** - ការកំណត់ហេដ្ឋារចនាសម្ព័ន្ធ:
 ```bash
 # មើលកូដរចនាសម្ព័ន្ធ
 head -30 infra/main.bicep
 ```
 
-## ជំហាន 3៖ ផ្លាស់ប្តូរកម្មវិធីរបស់អ្នក (ជាជម្រើស)
+## Step 3: Customize Your Project (Optional)
 
-មុនដាក់ពាក្យ អ្នកអាចផ្លាស់ប្តូរកម្មវិធីបាន៖
+មុនចែកចាយ អ្នកអាចប្ដូរតាមតម្រូវការកម្មវិធីបាន៖
 
-### កែប្រែមុខខាងមុខ
+### Modify the Frontend
 ```bash
-# បើកធាតុកម្មវិធី React
+# បើកធាតុ (component) នៃកម្មវិធី React
 code src/web/src/App.tsx
 ```
 
-ធ្វើការផ្លាស់ប្តូរងាយៗ៖
+ធ្វើការផ្លាស់ប្តូរពិសេសតូចមួយ:
 ```typescript
-// ស្វែងរកចំណងជើងហើយផ្លាស់ប្តូរវា
+// ស្វែងរកចំណងជើង និងផ្លាស់ប្តូរវា
 <h1>My Awesome Todo App</h1>
 ```
 
-### កំណត់បរិបរិច្ឆេទបរិយាកាស
+### Configure Environment Variables
 ```bash
-# កំណត់អថេរស្រោចស្រពបត់បែន
+# កំណត់អថេរបរិស្ថានផ្ទាល់ខ្លួន
 azd env set WEBSITE_TITLE "My First AZD App"
 azd env set API_VERSION "v1.18"
-# មើលអថេរស្រោចស្រពទាំងអស់
+# មើលអថេរបរិស្ថានទាំងអស់
 azd env get-values
 ```
 
-## ជំហាន 4៖ ដាក់ពាក្យទៅ Azure
+## Step 4: Deploy to Azure
 
-ឥឡូវសម្រាប់ផ្នែករំភើប - ដាក់ចូលគ្រប់អ្វីទៅ Azure!
+ឥឡូវនេះទៅកាន់ផ្នែករំភើប - ចែកចាយអ្វីៗទាំងអស់ទៅ Azure!
 
 ```bash
-# ដាក់ចេញហ្វើដ្ឋាន និងកម្មវិធី
+# ដាក់ឲ្យដំណើរការ ហេដ្ឋារចនាសម្ព័ន្ធ និងកម្មវិធី
 azd up
 
 # ពាក្យបញ្ជានេះនឹង:
-# 1. រៀបចំធនធាន Azure (App Service, Cosmos DB, ល)
-# 2. សង់កម្មវិធីរបស់អ្នក
-# 3. ដាក់ចេញទៅធនធានដែលបានរៀបចំ
+# 1. ផ្គត់ផ្គង់ធនធាន Azure (App Service, Cosmos DB, ល។)
+# 2. សាងសង់កម្មវិធីរបស់អ្នក
+# 3. ដាក់ឲ្យដំណើរការ​ទៅលើ​ធនធាន​ដែលបានផ្គត់ផ្គង់
 # 4. បង្ហាញ URL នៃកម្មវិធី
 ```
 
-### តើអ្វីកំពុងកើតឡើងពេលដាក់ពាក្យ?
+### What's Happening During Deployment?
 
-ពាក្យបញ្ជា `azd up` អនុវត្តជំហានខាងក្រោម៖
+ពាក្យបញ្ជា `azd up` ប្រតិបត្តិជំហានទាំងនេះ:
 1. **Provision** (`azd provision`) - បង្កើតធនធាន Azure
-2. **Package** - សំណុំកូដកម្មវិធីរបស់អ្នក
-3. **Deploy** (`azd deploy`) - ដាក់កូដទៅធនធាន Azure
+2. **Package** - សង់កូដកម្មវិធីរបស់អ្នក
+3. **Deploy** (`azd deploy`) - ចែកចាយកូដទៅធនធាន Azure
 
-### លទ្ធផលដែលរំពឹងទុក
+### Expected Output
 ```
 Packaging services (azd package)
 
@@ -203,97 +203,120 @@ Navigate to the Todo app at:
 https://app-web-abc123def.azurewebsites.net
 ```
 
-## ជំហាន 5៖ សាកល្បងកម្មវិធីរបស់អ្នក
+## Step 5: Test Your Application
 
-### ចូលដំណើរការកម្មវិធីរបស់អ្នក
-ចុចលើ URL ដែលផ្តល់ជូននៅលើលទ្ធផលដាក់ពាក្យ ឬទទួលបានវាពេលណាក៏បាន៖
+### Access Your Application
+ចុចលើ URL ដែលបានផ្តល់ក្នុងលទ្ធផលចែកចាយ ឬទទួលបានវានៅពេលណាមួយ:
 ```bash
-# ទទួលបានចំណុចចូលកម្មវិធី
+# យកចំណុចបញ្ចប់នៃកម្មវិធី
 azd show
 
-# បើកកម្មវិធីនៅក្នុងកម្មវិធីរុករករបស់អ្នក
+# បើកកម្មវិធីក្នុងកម្មវិធីរុករករបស់អ្នក
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### សាកល្បងកម្មវិធី Todo
-1. **បន្ថែមអំណោយចុះបញ្ជី** - ចុច "បន្ថែម Todo" ហើយបញ្ចូលភារកិច្ច
-2. **សម្គាល់ថាជា​ការសម្រេច** - ពិនិត្យបញ្ចូលអំណោយចុះបញ្ជីដែលបានធ្វើរួច
-3. **លុបអំណោយ** - ដកអំណោយ​ចុះបញ្ជីដែលអ្នកមិនចាំបាច់
+### Test the Todo App
+1. **Add a todo item** - ចុច "Add Todo" ហើយបញ្ចូលភារៈការ
+2. **Mark as complete** - ទទូចឲ្យសញ្ញាសម្គាល់ធាតុដែលបានបញ្ចប់
+3. **Delete items** - លុប todo ដែលអ្នកមិនត្រូវការម្តងទៀត
 
-### ត្រួតពិនិត្យកម្មវិធីរបស់អ្នក
+### Monitor Your Application
 ```bash
-# បើកទ្វារ Azure សម្រាប់ធនធានរបស់អ្នក
+# បើកផ្ទាំង Azure សម្រាប់ធនធានរបស់អ្នក
 azd monitor
 
 # មើលកំណត់ហេតុកម្មវិធី
 azd monitor --logs
 
-# មើលពិន្ទុរស់រវើក
+# មើលមាត្រដ្ឋានផ្ទាល់
 azd monitor --live
 ```
 
-## ជំហាន 6៖ ធ្វើបម្រែបម្រួល និងដាក់ឡើងវិញ
+### ✅ Verify Your Deployment
 
-មកធ្វើការផ្លាស់ប្តូរមួយ ហើយមើលថាយ៉ាងងាយស្រួលក្នុងការអាប់ដេត៖
+មុននឹងបន្ត សូមអនុវត្តតាមបញ្ជីពិនិត្យរហ័សនេះដើម្បីបញ្ជាក់ថារបស់ទាំងអស់ធ្វើបាន—កុំសន្មតថា "deploy succeeded" មានន័យថា "កម្មវិធីដំណើរការ":
 
-### កែប្រែ API
+```bash
+# 1. បញ្ជាក់ថាចំណុចបញ្ចប់មានស្រាប់ និងអាចទាក់ទងបាន
+azd show
+
+# 2. ធ្វើសាកល្បងសាមញ្ញលើចំណុចបញ្ចប់ (រំពឹង HTTP 200)
+curl -I "$(azd show --output json | jq -r '.services.web.endpoint')"
+
+# 3. ពិនិត្យចំណុចសុខភាព ប្រសិនបើកម្មវិធីរបស់អ្នកផ្តល់មួយ
+curl "$(azd show --output json | jq -r '.services.web.endpoint')/health"
+```
+
+**Deployment is verified when:**
+- ✅ `azd show` lists a reachable endpoint URL
+- ✅ The URL opens in your browser without errors
+- ✅ Core features work (add/complete/delete a todo)
+- ✅ `azd monitor --logs` shows requests arriving with no unexpected errors
+
+If any check fails, jump to [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/README.md).
+
+## Step 6: Make Changes and Redeploy
+
+ចាំអនុវត្តចំណ.Modify ហើយមើលថាវាងាយស្រួលប៉ុណ្ណា ក្នុងការអាប់ដេតៈ
+
+### Modify the API
 ```bash
 # កែសម្រួលកូដ API
 code src/api/src/routes/lists.js
 ```
 
-បន្ថែមក្បាលការឆ្លើយតបផ្ទាល់ខ្លួន៖
+Add a custom response header:
 ```javascript
-// រកអ្នកកាន់តំណរប្រតិបត្តិ និងបន្ថែមៈ
+// ស្វែងរកកម្មវិធីចាត់ការផ្លូវ ហើយបន្ថែម:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### ដាក់ពាក្យតែបម្រែបម្រួលកូដប៉ុណ្ណោះ
+### Deploy Just the Code Changes
 ```bash
-# បញ្ចូនកូដកម្មវិធីតែប៉ុណ្ណោះ(រំលងហេដ្ឋារចនាសម្ព័ន្ធ)
+# ដាក់ចេញតែកូដកម្មវិធី (រំលងហេដ្ឋារចនាសម្ព័ន្ធ)
 azd deploy
 
-# នេះលឿនជាង'azd up' ពោលគឺហេដ្ធារចនាសម្ព័ន្ធមានរួចហើយ
+# នេះរហ័សជាង 'azd up' ច្រើន ពីព្រោះហេដ្ឋារចនាសម្ព័ន្ធមានរួចហើយ
 ```
 
-## ជំហាន 7៖ គ្រប់គ្រងបរិបទច្រើន
+## Step 7: Manage Multiple Environments
 
-បង្កើតបរិបទសាកល្បងសម្រាប់សាកល្បងបម្រែបម្រួលមុនវេចខ្ចប់ផលិតកម្ម៖
+បង្កើតបរិយាកាស staging ដើម្បីសាកល្បងការផ្លាស់ប្ដូរមុនពេលទៅផលិតកម្ម:
 
 ```bash
-# បង្កើតបរិវេណ staging ថ្មី
+# បង្កើតបរិស្ថានស្តេជថ្មី
 azd env new staging
 
-# ដាក់ប្រើនៅ staging
+# ដាក់ប្រើទៅបរិស្ថានស្តេជ
 azd up
 
-# ប្តូរត្រលប់ទៅបរិវេណ dev
+# ប្ដូរវិញទៅបរិស្ថានអភិវឌ្ឍន៍
 azd env select dev
 
-# បញ្ជីបរិវេណទាំងអស់
+# បញ្ជីបរិស្ថានទាំងអស់
 azd env list
 ```
 
-### ផ្ទៀងផ្ទាត់បរិបទ
+### Environment Comparison
 ```bash
 # មើលបរិយាកាសអភិវឌ្ឍន៍
 azd env select dev
 azd show
 
-# មើលបរិយាកាសចេញផ្សាយបណ្ដោះអាសន្ន
+# មើលបរិយាកាសសាកល្បង
 azd env select staging
 azd show
 ```
 
-## ជំហាន 8៖ សម្អាតធនធាន
+## Step 8: Clean Up Resources
 
-ពេលអ្នកបានបញ្ចប់ការសាកល្បង សូមសម្អាតដើម្បីចៀសវាងការចំណាយបន្ត៖
+នៅពេលអ្នកបានបញ្ចប់ការសាកល្បង សូមសម្អាតដើម្បីជៀសវាងកម្រៃប្រចាំខែ:
 
 ```bash
 # លុបធនធាន Azure ទាំងអស់សម្រាប់បរិយាកាសបច្ចុប្បន្ន
 azd down
 
-# យកចេញដោយបង្ខំដោយគ្មានការអះអាង និងលុបធនធានដែលបានលុបបណ្តោះអាសន្ន
+# បង្ខំលុបដោយគ្មានការបញ្ជាក់ និងលុបចោលធនធានដែលបានលុបប្រភេទស្រាល
 azd down --force --purge
 
 # លុបបរិយាកាសជាក់លាក់
@@ -301,63 +324,63 @@ azd env select staging
 azd down --force --purge
 ```
 
-## កម្មវិធីបែបសាំនិងកម្មវិធី AI៖ ដំណើរការដូចគ្នា
+## Classic App vs. AI-Powered App: Same Workflow
 
-អ្នកទើបតែបានដាក់ពាក្យកម្មវិធីវេបសំរាប់ប្រពៃណីមួយ។ តែនៅពេលដែលអ្នកចង់ដាក់ពាក្យកម្មវិធីដែលគាំទ្រដោយ AI ដូចជា កម្មវិធីផ្ទាល់ខ្លួនជជែកដែលគាំទ្រដោយ Microsoft Foundry Models តើធ្វើដូចម្តេច?
+អ្នកទើបបានចែកចាយកម្មវិធីវែបដ៏ប្រពៃណីមួយ។ តែបើអ្នកចង់ចែកចាយកម្មវិធីដែលមានថាមពល AI ជាជម្រើស — ឧទាហរណ៍ app ជជែក ដែលមាន Microsoft Foundry Models ជាថាមពលក្រោយ?
 
-សំណាងល្អ៖ **ដំណើរការនោះដូចគ្នា។**
+ដំណឹងល្អគឺ៖ **ដំណើរការគឺដូចគ្នា។**
 
-| ជំហាន | កម្មវិធី Todo ជាប្រពៃណី | កម្មវិធី AI Chat |
+| Step | Classic Todo App | AI Chat App |
 |------|-----------------|-------------|
-| ចាប់ផ្ដើម | `azd init --template todo-nodejs-mongo` | `azd init --template azure-search-openai-demo` |
-| ផ្ទៀងផ្ទាត់ | `azd auth login` | `azd auth login` |
-| ដាក់ពាក្យ | `azd up` | `azd up` |
-| ត្រួតពិនិត្យ | `azd monitor` | `azd monitor` |
-| សម្អាត | `azd down --force --purge` | `azd down --force --purge` |
+| Initialize | `azd init --template todo-nodejs-mongo` | `azd init --template azure-search-openai-demo` |
+| Authenticate | `azd auth login` | `azd auth login` |
+| Deploy | `azd up` | `azd up` |
+| Monitor | `azd monitor` | `azd monitor` |
+| Clean up | `azd down --force --purge` | `azd down --force --purge` |
 
-ភាពខុសគ្នាតែមួយគត់គឺ **គំរូ** ដែលអ្នកចាប់ផ្ដើម។ គំរូ AI រួមបញ្ចូលឧបករណ៍បន្ថែម (ដូចជា Microsoft Foundry Models ឬ AI Search index) ប៉ុន្តែ azd គ្រប់គ្រងសរុបសម្រាប់អ្នក។ អ្នកមិនចាំបាច់រៀនពាក្យបញ្ជាថ្មី ទទួលយកឧបករណ៍ផ្សេងទៀត ឬផ្លាស់ប្តូរវិធីសាស្រ្តគិតពីការដាក់ពាក្យទេ។
+ភាពខុសគ្នាឯងតែមួយគឺ **template** ដែលអ្នកចាប់ផ្តើម។ Template AI អាចរួមបញ្ចូលហេដ្ឋារចនាសម្ព័ន្ធបន្ថែម (ដូចជា Microsoft Foundry Models resource ឬ AI Search index), ប៉ុន្តែ azd ទទួលខុសត្រូវគ្រប់យ៉ាងនោះសម្រាប់អ្នក។ អ្នកមិនចាំបាច់រៀនពាក្យបញ្ជាថ្មី មិនចាំបាច់យកឧបករណ៍ផ្សេង ឬប្ដូរគំនិតរបស់អ្នកអំពីការចែកចាយទេ។
 
-នេះគឺជាគោលការណ៍ចម្បងរបស់ azd៖ **ដំណើរការតែមួយ សម្រាប់កិច្ចការ​ជាច្រើន។** ជំនាញដែលអ្នកអនុវត្តក្នុងមេរៀននេះ - ចាប់ផ្ដើម, ដាក់ពាក្យ, ត្រួតពិនិត្យ, ដាក់ឡើងវិញ, និងសម្អាត - អាចអនុវត្តទៅលើកម្មវិធី AI និងភ្នាក់ងារដូចគ្នា។
+នេះជាគោលការណ៍ស្នូលរបស់ azd៖ **one workflow, any workload.** ជំនាញដែលអ្នកបានអនុវត្តក្នុងមេរៀននេះ—initializing, deploying, monitoring, redeploying, និង cleaning up—អាចប្រើបានដូចគ្នាក្នុងកម្មវិធី AI និង agents។
 
 ---
 
-## អ្វីដែលអ្នកបានរៀន
+## What You've Learned
 
-អបអរសាទរ! អ្នកបានជោគជ័យក្នុងការបញ្ចប់៖
-- ✅ ចាប់ផ្ដើមគម្រោង azd ពីគំរូមួយ
-- ✅ រុករករចនាសម្ព័ន្ធគម្រោង និងឯកសារសំខាន់ៗ
-- ✅ ដាក់ពាក្យកម្មវិធីផ្ទាល់ខ្លួនគ្មានខ្សែទៅ Azure
-- ✅ ប្រែបម្រួលកូដ និងដាក់ឡើងវិញ
-- ✅ គ្រប់គ្រងបរិបទច្រើន
-- ✅ សម្អាតធនធាន
+សូមអបអរសាទរ! អ្នកបានជោគជ័យក្នុង​ការ:
+- ✅ Initialized an azd project from a template
+- ✅ Explored the project structure and key files
+- ✅ Deployed a full-stack application to Azure
+- ✅ Made code changes and redeployed
+- ✅ Managed multiple environments
+- ✅ Cleaned up resources
 
-## 🎯 លំហែរបញ្ជាក់ជំនាញ
+## 🎯 Skill Validation Exercises
 
-### លំហែរទី 1៖ ដាក់ពាក្យគំរូផ្សេង (១៥ នាទី)
-**គោលដៅ**: បង្ហាញជំនាញចាប់ផ្ដើម azd init និងដំណើរការដាក់ពាក្យ
+### Exercise 1: Deploy a Different Template (15 minutes)
+**Goal**: Demonstrate mastery of azd init and deployment workflow
 
 ```bash
-# សាកល្បងស្ទាក់ Python + MongoDB
+# សាកល្បងស្តាក់ Python + MongoDB
 mkdir todo-python && cd todo-python
 azd init --template todo-python-mongo
 azd up
 
-# បញ្ជាក់ការចាក់ផ្សាយ
+# ផ្ទៀងផ្ទាត់ការតំឡើង
 azd show
 curl $(azd show --output json | jq -r '.services.web.endpoint')
 
-# សំអាត
+# សម្អាត
 azd down --force --purge
 ```
 
-**លទ្ធផលជោគជ័យ៖**
-- [ ] កម្មវិធីដាក់ពាក្យដោយគ្មានកំហុស
-- [ ] អាចចូលកម្មវិធីតាម URL នៅក្នុងកម្មវិធីរុករក
-- [ ] កម្មវិធីដំណើរការបានត្រឹមត្រូវ (បន្ថែម/លុប todo)
-- [ ] បានសម្អាតធនធានទាំងអស់ដោយជោគជ័យ
+**Success Criteria:**
+- [ ] Application deploys without errors
+- [ ] Can access application URL in browser
+- [ ] Application functions correctly (add/remove todos)
+- [ ] Successfully cleaned up all resources
 
-### លំហែរ ទី 2៖ ប្ដូរកំណត់រចនាសម្ព័ន្ធ (២០ នាទី)
-**គោលដៅ**: អនុវត្តការកំណត់បរិព័ន្ធបរិយាកាស
+### Exercise 2: Customize Configuration (20 minutes)
+**Goal**: Practice environment variable configuration
 
 ```bash
 cd my-first-azd-app
@@ -370,174 +393,173 @@ azd env set APP_TITLE "My Custom Todo App"
 azd env set API_VERSION "2.0.0"
 azd env set ENABLE_DEBUG "true"
 
-# ពិនិត្យអថេរ
+# ផ្ទៀងផ្ទាត់អថេរ
 azd env get-values | grep APP_TITLE
 
-# អភិវឌ្ឍជាមួយការកំណត់ផ្ទាល់ខ្លួន
+# ដាក់ប្រើជាមួយការកំណត់រចនាសម្ព័ន្ធផ្ទាល់ខ្លួន
 azd up
 ```
 
-**លទ្ធផលជោគជ័យ៖**
-- [ ] បរិមាណបរិបទផ្ទាល់ខ្លួនបានបង្កើតដោយជោគជ័យ
-- [ ] ការកំណត់បរិព័ន្ធអាចបានយកឡើងវិញ
-- [ ] កម្មវិធីដាក់ពាក្យដោយកំណត់រចនាសម្ព័ន្ធផ្ទាល់ខ្លួន
-- [ ] អាចផ្ទៀងផ្ទាត់ការកំណត់ផ្ទាល់ខ្លួនក្នុងកម្មវិធីដាក់ពាក្យ
+**Success Criteria:**
+- [ ] Custom environment created successfully
+- [ ] Environment variables set and retrievable
+- [ ] Application deploys with custom configuration
+- [ ] Can verify custom settings in deployed app
 
-### លំហែរ ទី 3៖ ដំណើរការបរិព័ន្ធច្រើន (២៥ នាទី)
-**គោលដៅ**: ជំនាញគ្រប់គ្រងបរិព័ន្ធ និងយុទ្ធសាស្រ្តដាក់ពាក្យ
+### Exercise 3: Multi-Environment Workflow (25 minutes)
+**Goal**: Master environment management and deployment strategies
 
 ```bash
-# បង្កើត​បរិយាកាស​អភិវឌ្ឍន៍
+# បង្កើតបរិយាកាសអភិវឌ្ឍន៍
 azd env new dev-$(whoami)
 azd env set ENVIRONMENT_TYPE dev
 azd env set LOG_LEVEL debug
 azd up
 
-# ចំណាំ URL អភិវឌ្ឍន៍
+# កត់សម្គាល់ URL អភិវឌ្ឍន៍
 DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Dev: $DEV_URL"
 
-# បង្កើត​បរិយាកាស​ស្ទេជ៊ីង
+# បង្កើតបរិយាកាសស្ទេជីង
 azd env new staging-$(whoami)
 azd env set ENVIRONMENT_TYPE staging
 azd env set LOG_LEVEL info
 azd up
 
-# ចំណាំ URL ស្ទេជ៊ីង
+# កត់សម្គាល់ URL ស្ទេជីង
 STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Staging: $STAGING_URL"
 
-# ប្រៀបធៀប​បរិយាកាស​ទាំងពីរ
+# ប្រៀបធៀបបរិយាកាសទាំងពីរ
 azd env list
 
-# សាកល្បង​បរិយាកាស​ទាំងពីរ
+# សាកល្បងបរិយាកាសទាំងពីរ
 curl "$DEV_URL/health"
 curl "$STAGING_URL/health"
 
-# សម្អាត​ពីរ​ទាំងអស់
+# សម្អាតបរិយាកាសទាំងពីរ
 azd env select dev-$(whoami) && azd down --force --purge
 azd env select staging-$(whoami) && azd down --force --purge
 ```
 
-**លទ្ធផលជោគជ័យ៖**
-- [ ] បរិមាណពីរបរិបទបង្កើតជាមួយកំណត់រចនាសម្ព័ន្ធផ្សេងគ្នា
-- [ ] បរិទាំងពីរក្នុងការដាក់ពាក្យដោយជោគជ័យ
-- [ ] អាចប្ដូររវាងបរិទាំងពីរដោយប្រើ `azd env select`
-- [ ] បរិយាកាសបរិវេណខុសគ្នារវាងបរិទាំងពីរ
-- [ ] បានសម្អាតបរិទាំងពីរដោយជោគជ័យ
+**Success Criteria:**
+- [ ] Two environments created with different configurations
+- [ ] Both environments deployed successfully
+- [ ] Can switch between environments using `azd env select`
+- [ ] Environment variables differ between environments
+- [ ] Successfully cleaned up both environments
 
-## 📊 ចំណុចកំណត់លំដាប់របស់អ្នក
+## 📊 Your Progress
 
-**ពេលវេលាដែលបានដាក់បញ្ចូល**: ~60-90 នាទី  
-**ជំនាញដែលបានទទួល**៖
-- ✅ ចាប់ផ្ដើមគម្រោងពីគំរូ
-- ✅ ផ្តល់ធនធាន Azure
-- ✅ ដំណើរការដាក់ពាក្យកម្មវិធី
-- ✅ គ្រប់គ្រងបរិបទ
-- ✅ កំណត់រចនាសម្ព័ន្ធ
-- ✅ សម្អាតធនធាន និងគ្រប់គ្រងចំណាយ
+**Time Invested**: ~60-90 minutes  
+**Skills Acquired**:
+- ✅ Template-based project initialization
+- ✅ Azure resource provisioning
+- ✅ Application deployment workflows
+- ✅ Environment management
+- ✅ Configuration management
+- ✅ Resource cleanup and cost management
 
-**កម្រិតបន្ទាប់**: អ្នកមានស្រេចសម្រាប់ [មគ្គុទេសក៍កំណត់រចនាសម្ព័ន្ធ](configuration.md) ដើម្បីរៀនរៀបការគ្រប់គ្រងកំណត់រចនាសម្ព័ន្ធកម្រិតខ្ពស់!
+**Next Level**: You're ready for [Configuration Guide](configuration.md) to learn advanced configuration patterns!
 
-## ដោះស្រាយបញ្ហាធម្មតា
+## Troubleshooting Common Issues
 
-### បញ្ហាអត្តសញ្ញាណ
+### Authentication Errors
 ```bash
-# បញ្ជាក់ម្ដងទៀតជាមួយ Azure
+# ផ្ទៀងផ្ទាត់សម្គាល់ជាមួយ Azure ម្តងទៀត
 az login
 
-# ផ្ទៀងផ្ទាត់ការចូលប្រើការជាវ
+# ផ្ទៀងផ្ទាត់សិទ្ធិចូលប្រើសេវាជាវ
 az account show
 ```
 
-### បញ្ហាការដាក់ពាក្យបរាជ័យ
+### Deployment Failures
 ```bash
-# អនុញ្ញាតការចុះបញ្ជីកម្រិតងាយស្រួល
+# បើកកំណត់ហេតុសម្រាប់ការដោះស្រាយកំហុស
 export AZD_DEBUG=true
 azd up --debug
 
 # មើលកំណត់ហេតុកម្មវិធីនៅក្នុង Azure
 azd monitor --logs
 
-# សម្រាប់កម្មវិធី Container Apps, ប្រើ Azure CLI:
+# សម្រាប់ Container Apps, សូមប្រើ Azure CLI:
 # az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 ```
 
-### ជម្លោះឈ្មោះធនធាន
+### Resource Name Conflicts
 ```bash
-# ប្រើឈ្មោះបរិយាកាសមួយដែលមានតែមួយគត់
+# ប្រើឈ្មោះបរិយាកាសដែលមិនទាន់មាន
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
-### បញ្ហាសួរភាគ/បណ្តាញ
+### Port/Network Issues
 ```bash
-# ពិនិត្យមើលថាតើព័រតមានអាចប្រើបាន។
+# ពិនិត្យថាច្រកមានសេរីឬទេ
 netstat -an | grep :3000
 netstat -an | grep :3100
 ```
 
-## ជំហានបន្ទាប់
+## Next Steps
 
-ឥឡូវនេះដែលអ្នកបានបញ្ចប់គម្រោងដំបូងរបស់អ្នក សូមរុករកប្រធានបទកម្រិតខ្ពស់ទាំងនេះ៖
+ឥឡូវនេះដែលអ្នកបានបញ្ចប់គម្រោងដំបូងរបស់អ្នក សូមស្វែងរកប្រធានបទជំរុញទាំងនេះ៖
 
-### ១. ផ្លាស់ប្តូរអាហ្គួរឋានភាគ
-- [អាហ្គួរឋានជាកូដ](../chapter-04-infrastructure/provisioning.md)
-- [បន្ថែមមូលដ្ឋានទិន្នន័យ, ឃ្លាំងទិន្នន័យ និងសេវាកម្មផ្សេងៗ](../chapter-04-infrastructure/provisioning.md#adding-services)
+### 1. Customize Infrastructure
+- [Infrastructure as Code](../chapter-04-infrastructure/provisioning.md)
+- [Add databases, storage, and other services](../chapter-04-infrastructure/provisioning.md#adding-services)
 
-### ២. តំឡើង CI/CD
-- [មគ្គុទេសក៍ដាក់ពាក្យ](../chapter-04-infrastructure/deployment-guide.md) - ដំណើរការ CI/CD ពេញលេញ
-- [ឯកសាររបស់ Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - កំណត់រចនាសម្ព័ន្ធ Pipeline
+### 2. Set Up CI/CD
+- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Complete CI/CD workflows
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - Pipeline configuration
 
-### ៣. លក្ខណៈបំរើល្អបំផុតសម្រាប់ផលិតកម្ម
-- [មគ្គុទេសក៍ដាក់ពាក្យ](../chapter-04-infrastructure/deployment-guide.md) - សុវត្ថិភាព, ការសម្របសម្រួល និងត្រួតពិនិត្យ
+### 3. Production Best Practices
+- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Security, performance, and monitoring
 
-### ៤. រុករកគំរូបន្ថែម
+### 4. Explore More Templates
 ```bash
-# រុករកផមេនអ្នកតាមប្រភេទ
+# រុករកគំរូតាមប្រភេទ
 azd template list --filter web
 azd template list --filter api
 azd template list --filter database
 
-# សាកល្បងបច្ចេកវិទ្យាផ្សេងៗ
+# សាកល្បងសំណុំបច្ចេកវិទ្យាផ្សេងៗ
 azd init --template todo-python-mongo
 azd init --template todo-csharp-sql
 azd init --template todo-java-mongo
 ```
 
-## ប្រភពបន្ថែម
+## Additional Resources
 
-### សម្ភារៈរៀន
-- [ឯកសាររបស់ Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [មជ្ឈមណ្ឌលរចនាសម្ព័ន្ធ Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [ស៊ុមនៃរចនាសម្ព័ន្ធល្អភាព Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
+### Learning Materials
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
-### សហគមន៍ និងការគាំទ្រ
+### Community & Support
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [សហគម Azure Developer](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
+- [Azure Developer Community](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
-### គំរូ និង ឧទាហរណ៍
-- [ហាងគំរូផ្លូវការណ៍](https://azure.github.io/awesome-azd/)
-- [គំរូសហគមន៍](https://github.com/Azure-Samples/azd-templates)
-- [គំរូស្ទីលធំ](https://github.com/Azure/azure-dev/tree/main/templates)
+### Templates & Examples
+- [Official Template Gallery](https://azure.github.io/awesome-azd/)
+- [Community Templates](https://github.com/Azure-Samples/azd-templates)
+- [Enterprise Patterns](https://github.com/Azure/azure-dev/tree/main/templates)
 
 ---
 
-**អបអរសាទរដែលបានបញ្ចប់គម្រោង azd ដំបូងរបស់អ្នក!** ឥឡូវអ្នកមានភាពជឿជាក់ក្នុងការរចនា និងដាក់ពាក្យកម្មវិធីល្អៗលើ Azure។
+**Congratulations on completing your first azd project!** You're now ready to build and deploy amazing applications on Azure with confidence.
 
 ---
 
-**ការរុករកជំពូក៖**
-- **📚 ទំព័រដើមវគ្គសិក្សា**: [AZD សម្រាប់អ្នកចាប់ផ្ដើម](../../README.md)
-- **📖 ជំពូកបច្ចុប្បន្ន**: ជំពូកទី 1 - គ្រឹះបច្ចេកទេស និងចាប់ផ្ដើមយ៉ាងរហ័ស
-- **⬅️ មុន**: [ការតំឡើង និង ការតំរូវការ](installation.md)
-- **➡️ បន្ទាប់**: [ការកំណត់រចនាសម្ព័ន្ធ](configuration.md)
-- **🚀 ជំពូកបន្ទាប់**: [ជំពូកទី 2: ការអភិវឌ្ឍ AI ជាដំបូង](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- **មេរៀនបន្ទាប់**: [មគ្គុទេសក៍ដាក់ពាក្យ](../chapter-04-infrastructure/deployment-guide.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
+- **⬅️ Previous**: [Installation & Setup](installation.md)
+- **➡️ Next**: [Bring Your Own App](bring-your-own-app.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ការបដិសេធ**៖
-ឯកសារនេះត្រូវបានបកប្រែដោយប្រើសេវាកម្មបកប្រែ AI [Co-op Translator](https://github.com/Azure/co-op-translator)។ ខណៈពេលដែលយើងខំប្រឹងប្រែងឲ្យបានភាពត្រឹមត្រូវ សូមចងចាំថាការបកប្រែដោយស្វ័យប្រវត្តិអាចមានកំហុស ឬភាពមិនត្រឹមត្រូវ។ ឯកសារដើមក្នុងភាសារបស់វាគួរត្រូវបានគេចាត់ទុកថាជា​ប្រភព​ដំណឹង​ដ៏អាថ៌កំបាំង។ សម្រាប់ព័ត៌មានសំខាន់ៗ ផ្តល់អនុសាសន៍ឲ្យប្រើការបកប្រែដោយមនុស្សវិជ្ជាជីវៈ។ យើងមិនទទួលខុសត្រូវចំពោះការយល់ច្រឡំ ឬការបកប្រែខុសពីការប្រើប្រាស់ការបកប្រែនេះឡើយ។
+**ការបដិសេធ**:
+ឯកសារនេះត្រូវបានបម្លែងភាសា ដោយប្រើសេវាបម្លែងភាសា AI [Co-op Translator](https://github.com/Azure/co-op-translator)។ ទោះយើងខ្ញុំមានក្តីប្រាថ្នាឱ្យបានច្បាស់លាស់ តែសូមយល់ដឹងថាការបម្លែងដោយស្វ័យប្រវត្តិក៏អាចមានកំហុសឬភាពមិនត្រឹមត្រូវ។ ឯកសារដើមជាភាសាទីតាំងគួរត្រូវបានគេប្រើជាប្រភពច្បាស់លាស់។ សម្រាប់ព័ត៌មានសំខាន់ៗ សូមណែនាំឱ្យប្រើប្រាស់ការប្រែដោយមនុស្សជំនាញ។ យើងខ្ញុំមិនទទួលខុសត្រូវចំពោះការយល់ច្រឡំ ឬការបកស្រាយខុសបន្ទាប់ពីការប្រើប្រាស់ការបម្លែងនេះនោះទេ។
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
