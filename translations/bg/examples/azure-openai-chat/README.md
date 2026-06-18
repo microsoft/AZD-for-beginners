@@ -1,43 +1,44 @@
-# Чат приложение Microsoft Foundry Models
+# Чат приложение на Microsoft Foundry Models
 
-**Учебна пътека:** Intermediate ⭐⭐ | **Време:** 35-45 минути | **Цена:** $50-200/month
+**Път за обучение:** Междинно ⭐⭐ | **Време:** 35-45 минути | **Цена:** $50-200/месец
 
-Пълно чат приложение Microsoft Foundry Models, разгърнато с помощта на Azure Developer CLI (azd). Този пример демонстрира разгръщане на gpt-4.1, сигурен достъп до API и прост чат интерфейс.
+Пълно чат приложение с Microsoft Foundry Models, разположено с помощта на Azure Developer CLI (azd). Този пример демонстрира разполагане на gpt-4.1, защитен достъп до API и прост чат интерфейс.
 
 ## 🎯 Какво ще научите
 
-- Разгръщане на Microsoft Foundry Models Service с модел gpt-4.1
-- Защита на OpenAI API ключове с Key Vault
-- Създаване на прост чат интерфейс с Python
-- Следене на използване на токени и разходи
-- Имплементиране на ограничение на заявки и обработка на грешки
+- Разположете Microsoft Foundry Models Service с модел gpt-4.1
+- Защитете OpenAI API ключовете с Key Vault
+- Създайте прост чат интерфейс с Python
+- Наблюдавайте използването на токени и разходите
+- Реализирайте ограничаване на скоростта и обработка на грешки
 
 ## 📦 Какво е включено
 
-✅ **Microsoft Foundry Models Service** - разгръщане на модел gpt-4.1  
-✅ **Python Chat App** - Прост команден чат интерфейс  
+✅ **Microsoft Foundry Models Service** - разполагане на модел gpt-4.1  
+✅ **Python Chat App** - Прост чат интерфейс в командния ред  
 ✅ **Key Vault Integration** - Сигурно съхранение на API ключове  
 ✅ **ARM Templates** - Пълна инфраструктура като код  
-✅ **Cost Monitoring** - Проследяване на използване на токени  
-✅ **Rate Limiting** - Предотвратяване на изчерпване на квотите  
+✅ **Cost Monitoring** - Проследяване на използването на токени  
+✅ **Rate Limiting** - Предотвратяване на изчерпване на квотата  
 
 ## Архитектура
 
 ```mermaid
 graph TD
-    App[Python чат приложение<br/>Локално/Облак<br/>Интерфейс на командния ред<br/>История на разговорите<br/>Проследяване на използването на токени] -- "HTTPS (API ключ)" --> Foundry[Microsoft Foundry услуга за модели<br/>Модел gpt-4.1<br/>Капацитет 20K токена/мин<br/>Failover в няколко региона]
-    Foundry --> KV[Хранилище за ключове Azure<br/>Ключ на OpenAI API<br/>URL на крайна точка]
+    App[Python чат приложение<br/>Локално/Облачно<br/>Интерфейс на командния ред<br/>История на разговорите<br/>Проследяване на използването на токените] -- "HTTPS (API ключ)" --> Foundry[Услуга за модели Microsoft Foundry<br/>Модел gpt-4.1<br/>Капацитет: 20K токени/мин<br/>Резервиране при отказ в няколко региона]
+    Foundry --> KV[Хранилище за ключове Azure<br/>API ключ на OpenAI<br/>URL на крайна точка]
     Foundry -. Управлявана идентичност .-> KV
 ```
+
 ## Изисквания
 
-### Задължителни
+### Необходими
 
-- **Azure Developer CLI (azd)** - [Install guide](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Абонамент за Azure** с достъп до OpenAI - [Request access](https://aka.ms/oai/access)
-- **Python 3.9+** - [Install Python](https://www.python.org/downloads/)
+- **Azure Developer CLI (azd)** - [Инструкции за инсталиране](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+- **Azure subscription** с достъп до OpenAI - [Заявете достъп](https://aka.ms/oai/access)
+- **Python 3.9+** - [Инсталирайте Python](https://www.python.org/downloads/)
 
-### Проверка на изискванията
+### Проверете изискванията
 
 ```bash
 # Проверете версията на azd (трябва да е 1.5.0 или по-нова)
@@ -49,15 +50,15 @@ azd auth login
 # Проверете версията на Python
 python --version  # или python3 --version
 
-# Проверете достъпа до OpenAI (проверете в портала на Azure)
+# Проверете достъпа до OpenAI (проверете в Azure портала)
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus
 ```
 
-> **⚠️ Important:** Microsoft Foundry Models изисква одобрение на приложението. Ако не сте кандидатствали, посетете [aka.ms/oai/access](https://aka.ms/oai/access). Одобрението обикновено отнема 1-2 работни дни.
+> **⚠️ Важно:** Microsoft Foundry Models изисква одобрение на заявлението. Ако не сте подали заявка, посетете [aka.ms/oai/access](https://aka.ms/oai/access). Одобрението обикновено отнема 1-2 работни дни.
 
-## ⏱️ Времева рамка за разгръщане
+## ⏱️ Времева линия на разгръщане
 
 | Phase | Duration | What Happens |
 |-------|----------|--------------|
@@ -66,7 +67,7 @@ az cognitiveservices account list-skus \
 | Configure application | 2-3 minutes | Set up environment and dependencies |
 | **Total** | **12-18 minutes** | Ready to chat with gpt-4.1 |
 
-**Забележка:** Първото разгръщане на OpenAI може да отнеме повече време поради предоставяне на модела.
+**Бележка:** Първото разполагане на OpenAI може да отнеме повече време поради подготовка на модела.
 
 ## Бърз старт
 
@@ -80,9 +81,9 @@ azd env new myopenai
 # Разположете всичко (инфраструктура + конфигурация)
 azd up
 # Ще бъдете подканени да:
-# 1. Изберете абонамент за Azure
-# 2. Изберете локация с наличност на OpenAI (например eastus, eastus2, westus)
-# 3. Изчакайте 12-18 минути за разгръщането
+# 1. Изберете абонамент в Azure
+# 2. Изберете местоположение с наличност на OpenAI (например eastus, eastus2, westus)
+# 3. Изчакайте 12-18 минути за разполагането
 
 # Инсталирайте зависимостите на Python
 pip install -r requirements.txt
@@ -105,17 +106,17 @@ Assistant: Microsoft Foundry Models Service provides REST API access to OpenAI's
 
 ## ✅ Проверка на разгръщането
 
-### Стъпка 1: Проверете Azure ресурсите
+### Стъпка 1: Проверете ресурсите в Azure
 
 ```bash
 # Преглед на внедрените ресурси
 azd show
 
 # Очакваният изход показва:
-# - Услуга OpenAI: (име на ресурса)
-# - Трезор за ключове: (име на ресурса)
+# - OpenAI услуга: (име на ресурса)
+# - Хранилище за ключове: (име на ресурса)
 # - Разгръщане: gpt-4.1
-# - Местоположение: eastus (или избрания от вас регион)
+# - Местоположение: eastus (или избраният от вас регион)
 ```
 
 ### Стъпка 2: Тествайте OpenAI API
@@ -125,7 +126,7 @@ azd show
 OPENAI_ENDPOINT=$(azd env get-value AZURE_OPENAI_ENDPOINT)
 OPENAI_KEY=$(azd env get-value AZURE_OPENAI_API_KEY)
 
-# Тествайте повикване към API
+# Тествайте извикване на API
 curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
   -H "Content-Type: application/json" \
   -H "api-key: $OPENAI_KEY" \
@@ -170,11 +171,11 @@ az keyvault secret list \
 - `openai-api-key`
 - `openai-endpoint`
 
-Критерии за успех:
-- ✅ OpenAI услугата е разположена с gpt-4.1
-- ✅ API извикването връща валидно completion
+**Критерии за успех:**
+- ✅ Услугата OpenAI е разположена с gpt-4.1
+- ✅ Извикване на API връща валиден отговор
 - ✅ Тайните са съхранени в Key Vault
-- ✅ Проследяването на използване на токени работи
+- ✅ Проследяването на използването на токени работи
 
 ## Структура на проекта
 
@@ -200,18 +201,18 @@ azure-openai-chat/
 Чат приложението включва:
 
 - **История на разговора** - Поддържа контекст между съобщенията
-- **Броене на токени** - Проследява използването и оценява разходите
-- **Обработка на грешки** - Гладко справяне с rate limits и API грешки
-- **Оценка на разходите** - Изчисление на разходите в реално време за всяко съобщение
-- **Поддръжка на стрийминг** - Опционални стрийминг отговори
+- **Броене на токени** - Следи използването и оценява разходите
+- **Обработка на грешки** - Гладко справяне с ограниченията и грешките от API
+- **Оценка на разходите** - Изчисление на разходите в реално време за съобщение
+- **Поддръжка на стрийминг** - По желание стрийминг отговори
 
 ### Команди
 
-Докато чатите, можете да използвате:
-- `quit` или `exit` - Прекратяване на сесията
-- `clear` - Изчистване на историята на разговора
-- `tokens` - Показване на общото използване на токени
-- `cost` - Показване на приблизителните общи разходи
+По време на чат можете да използвате:
+- `quit` or `exit` - Прекратете сесията
+- `clear` - Изчистете историята на разговора
+- `tokens` - Покажи общото използване на токени
+- `cost` - Покажи приблизителната обща цена
 
 ### Конфигурация (`config.py`)
 
@@ -268,24 +269,24 @@ Total session: 156 tokens | $0.0047
 
 ## Управление на разходите
 
-### Ценообразуване на токени (gpt-4.1)
+### Ценообразуване на токените (gpt-4.1)
 
 | Model | Input (per 1K tokens) | Output (per 1K tokens) |
 |-------|----------------------|------------------------|
 | gpt-4.1 | $0.03 | $0.06 |
 | GPT-3.5-Turbo | $0.0015 | $0.002 |
 
-### Оценени месечни разходи
+### Прогнозирани месечни разходи
 
 Въз основа на модели на използване:
 
 | Usage Level | Messages/Day | Tokens/Day | Monthly Cost |
 |-------------|--------------|------------|--------------|
-| **Light** | 20 messages | 3,000 tokens | $3-5 |
-| **Moderate** | 100 messages | 15,000 tokens | $15-25 |
-| **Heavy** | 500 messages | 75,000 tokens | $75-125 |
+| **Леко** | 20 messages | 3,000 tokens | $3-5 |
+| **Умерено** | 100 messages | 15,000 tokens | $15-25 |
+| **Интензивно** | 500 messages | 75,000 tokens | $75-125 |
 
-**Базова инфраструктурна цена:** $1-2/month (Key Vault + минимален compute)
+**Базова инфраструктурна цена:** $1-2/месец (Key Vault + минимален изчислителен ресурс)
 
 ### Съвети за оптимизация на разходите
 
@@ -296,23 +297,23 @@ export AZURE_OPENAI_MODEL=gpt-35-turbo
 # 2. Намалете максималния брой токени за по-кратки отговори
 export AZURE_OPENAI_MAX_TOKENS=400
 
-# 3. Наблюдавайте използването на токени
+# 3. Следете използването на токени
 python chat.py --show-tokens
 
-# 4. Настройте известия за бюджета
+# 4. Настройте бюджетни предупреждения
 az consumption budget create \
   --budget-name "openai-budget" \
   --amount 50 \
   --time-grain Monthly
 ```
 
-## Мониторинг
+## Наблюдение
 
-### Преглед на използване на токени
+### Преглед на използването на токени
 
 ```bash
 # В портала на Azure:
-# Ресурс OpenAI → Метрики → Изберете "Транзакция на токени"
+# OpenAI ресурс → Метрики → Изберете "Token Transaction"
 
 # Или чрез Azure CLI:
 az monitor metrics list \
@@ -322,25 +323,25 @@ az monitor metrics list \
   --interval PT1M
 ```
 
-### Преглед на API логове
+### Преглед на логовете на API
 
 ```bash
-# Потокови диагностични дневници
+# Поток от диагностични журнали
 az monitor diagnostic-settings create \
   --resource $(azd env get-value AZURE_OPENAI_RESOURCE_ID) \
   --name openai-logs \
   --logs '[{"category": "Audit", "enabled": true}]' \
   --workspace $(azd env get-value LOG_ANALYTICS_WORKSPACE_ID)
 
-# Дневници на заявки
+# Журнали на заявки
 az monitor log-analytics query \
   --workspace $(azd env get-value LOG_ANALYTICS_WORKSPACE_ID) \
   --analytics-query "AzureDiagnostics | where Category == 'Audit' | top 10 by TimeGenerated"
 ```
 
-## Отстраняване на неизправности
+## Отстраняване на проблеми
 
-### Проблем: "Access Denied" грешка
+### Проблем: "Access Denied" Error
 
 **Симптоми:** 403 Forbidden при извикване на API
 
@@ -372,19 +373,19 @@ az cognitiveservices account deployment show \
   --deployment-name gpt-4.1
 
 # 2. Заявете увеличение на квотата (ако е необходимо)
-# Отидете в Azure портал → Ресурс на OpenAI → Квоти → Заявете увеличение
+# Отидете в Azure портала → Ресурс OpenAI → Квоти → Заявка за увеличение
 
-# 3. Реализирайте логика за повторен опит (вече в chat.py)
-# Приложението автоматично прави повторни опити с експоненциално увеличаващо се забавяне
+# 3. Реализирайте логика за повторни опити (вече в chat.py)
+# Приложението автоматично повтаря опитите с експоненциално изчакване
 ```
 
 ### Проблем: "Model Not Found"
 
-**Симптоми:** 404 грешка за deployment
+**Симптоми:** 404 грешка при разполагане
 
 **Решения:**
 ```bash
-# 1. Избройте наличните разгръщания
+# 1. Изброяване на наличните разгръщания
 az cognitiveservices account deployment list \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
@@ -398,7 +399,7 @@ export AZURE_OPENAI_MODEL=gpt-4.1  # или gpt-35-turbo
 
 ### Проблем: Висока латентност
 
-**Симптоми:** Бавни времена за отговор (>5 секунди)
+**Симптоми:** Бавно време за отговор (>5 секунди)
 
 **Решения:**
 ```bash
@@ -417,7 +418,7 @@ python chat.py --stream
 ### 1. Защитете API ключовете
 
 ```bash
-# Никога не комитвайте ключове в системата за контрол на версиите
+# Никога не добавяйте ключове в системата за контрол на версиите
 # Използвайте Key Vault (вече е конфигуриран)
 
 # Редовно сменяйте ключовете
@@ -427,24 +428,24 @@ az cognitiveservices account keys regenerate \
   --key-name key1
 ```
 
-### 2. Внедрете филтриране на съдържание
+### 2. Внедрете филтриране на съдържанието
 
 ```python
-# Microsoft Foundry Models включва вградено филтриране на съдържанието
-# Конфигурирайте в Azure портала:
-# OpenAI ресурс → Филтри за съдържание → Създаване на персонализиран филтър
+# Microsoft Foundry Models включва вградено филтриране на съдържание
+# Конфигурирайте в портала на Azure:
+# Ресурс на OpenAI → Филтри за съдържание → Създаване на персонализиран филтър
 
 # Категории: Омраза, Сексуално съдържание, Насилие, Самонараняване
-# Нива: Ниско, Средно, Високо филтриране
+# Нива на филтриране: Ниско, Средно, Високо
 ```
 
-### 3. Използвайте Managed Identity (Production)
+### 3. Използвайте управлявана идентичност (в продукция)
 
 ```bash
 # За продукционни разгръщания използвайте управлявана идентичност
 # вместо API ключове (изисква хостване на приложението в Azure)
 
-# Актуализирайте infra/openai.bicep, за да включите:
+# Актуализирайте infra/openai.bicep, за да включва:
 # identity: { type: 'SystemAssigned' }
 ```
 
@@ -453,10 +454,10 @@ az cognitiveservices account keys regenerate \
 ### Стартирайте локално
 
 ```bash
-# Инсталирайте зависимости
+# Инсталирайте зависимостите
 pip install -r src/requirements.txt
 
-# Задайте променливи на средата
+# Задайте променливите на средата
 export AZURE_OPENAI_ENDPOINT="https://[name].openai.azure.com/"
 export AZURE_OPENAI_API_KEY="your-api-key"
 export AZURE_OPENAI_MODEL="gpt-4.1"
@@ -468,20 +469,20 @@ python src/chat.py
 ### Стартирайте тестове
 
 ```bash
-# Инсталиране на зависимости за тестове
+# Инсталиране на тестови зависимости
 pip install pytest pytest-cov
 
-# Стартирай тестовете
+# Изпълнение на тестове
 pytest tests/ -v
 
 # С покритие на кода
 pytest tests/ --cov=src --cov-report=html
 ```
 
-### Актуализиране на разгръщането на модела
+### Актуализирайте разполагането на модела
 
 ```bash
-# Разгърнете различна версия на модела
+# Разгръщане на различна версия на модела
 az cognitiveservices account deployment create \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
@@ -493,14 +494,14 @@ az cognitiveservices account deployment create \
   --sku-name "Standard"
 ```
 
-## Почистване
+## Изчистване
 
 ```bash
 # Изтрийте всички ресурси в Azure
 azd down --force --purge
 
 # Това премахва:
-# - Услуга OpenAI
+# - OpenAI услуга
 # - Key Vault (с 90-дневно меко изтриване)
 # - Група ресурси
 # - Всички разгръщания и конфигурации
@@ -508,79 +509,79 @@ azd down --force --purge
 
 ## Следващи стъпки
 
-### Разширяване на този пример
+### Разширете този пример
 
-1. **Добавете уеб интерфейс** - Изградете React/Vue frontend
+1. **Добавете уеб интерфейс** - Създайте frontend с React/Vue
    ```bash
-   # Добавете фронтенд услуга в azure.yaml
+   # Добавете фронтенд услуга към azure.yaml
    # Разположете в Azure Static Web Apps
    ```
 
-2. **Имплементирайте RAG** - Добавете търсене в документи с Azure AI Search
+2. **Реализирайте RAG** - Добавете търсене в документи с Azure AI Search
    ```python
-   # Интегриране на Azure Cognitive Search
+   # Интегриране на Azure AI Search
    # Качване на документи и създаване на векторен индекс
    ```
 
-3. **Добавете Function Calling** - Активирайте използване на инструменти
+3. **Добавете извикване на функции** - Активирайте използване на инструменти
    ```python
    # Дефинирайте функции в chat.py
-   # Позволете на gpt-4.1 да извиква външни API-та
+   # Позволете на gpt-4.1 да извиква външни API
    ```
 
-4. **Поддръжка на множество модели** - Разположете няколко модела
+4. **Поддръжка на няколко модела** - Разположете няколко модела
    ```bash
    # Добавете gpt-35-turbo и модели за вграждания
-   # Реализирайте логиката за маршрутиране на моделите
+   # Реализирайте логиката за маршрутизиране на моделите
    ```
 
 ### Свързани примери
 
-- **[Retail Multi-Agent](../retail-scenario.md)** - Advanced multi-agent architecture
-- **[Database App](../../../../examples/database-app)** - Add persistent storage
-- **[Container Apps](../../../../examples/container-app)** - Deploy as containerized service
+- **[Retail Multi-Agent](../retail-scenario.md)** - Разширена архитектура с множество агенти
+- **[Database App](../../../../examples/database-app)** - Добавете трайно съхранение
+- **[Container Apps](../../../../examples/container-app)** - Разположете като контейнеризирана услуга
 
-### Ресурси за обучение
+### Ресурси за учене
 
-- 📚 [AZD For Beginners Course](../../README.md) - Основен курс
+- 📚 [AZD For Beginners Course](../../README.md) - Основна начална страница на курса
 - 📚 [Microsoft Foundry Models Documentation](https://learn.microsoft.com/azure/ai-services/openai/) - Официална документация
-- 📚 [OpenAI API Reference](https://platform.openai.com/docs/api-reference) - API детайли
+- 📚 [OpenAI API Reference](https://platform.openai.com/docs/api-reference) - Подробности за API
 - 📚 [Responsible AI](https://www.microsoft.com/ai/responsible-ai) - Най-добри практики
 
 ## Допълнителни ресурси
 
 ### Документация
-- **[Microsoft Foundry Models Service](https://learn.microsoft.com/azure/ai-services/openai/)** - Пълен гид
-- **[gpt-4.1 Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - Възможности на моделите
+- **[Microsoft Foundry Models Service](https://learn.microsoft.com/azure/ai-services/openai/)** - Пълен наръчник
+- **[gpt-4.1 Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - Възможности на модела
 - **[Content Filtering](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - Функции за безопасност
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd референция
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - Справочник за azd
 
 ### Уроци
-- **[OpenAI Quickstart](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - Първо разгръщане
+- **[OpenAI Quickstart](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - Първо разполагане
 - **[Chat Completions](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - Създаване на чат приложения
 - **[Function Calling](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - Разширени функции
 
 ### Инструменти
-- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - Уеб базирана работна среда
-- **[Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)** - Писане на по-добри промптове
-- **[Token Calculator](https://platform.openai.com/tokenizer)** - Оценка на използване на токени
+- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - Уеб-базиран плейграунд
+- **[Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)** - Как да създавате по-добри подканвания
+- **[Token Calculator](https://platform.openai.com/tokenizer)** - Оценка на използването на токени
 
 ### Общност
-- **[Azure AI Discord](https://discord.gg/azure)** - Потърсете помощ от общността
+- **[Azure AI Discord](https://discord.gg/azure)** - Получете помощ от общността
 - **[GitHub Discussions](https://github.com/Azure-Samples/openai/discussions)** - Форум за въпроси и отговори
 - **[Azure Blog](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - Последни новини
 
 ---
 
-**🎉 Успех!** Разгърнахте Microsoft Foundry Models и създадохте работещо чат приложение. Започнете да изследвате възможностите на gpt-4.1 и експериментирайте с различни промптове и сценарии.
+**🎉 Успех!** Вече разположихте Microsoft Foundry Models и създадохте работещо чат приложение. Започнете да изследвате възможностите на gpt-4.1 и експериментирайте с различни подканвания и сценарии на използване.
 
-**Въпроси?** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) или разгледайте [FAQ](../../resources/faq.md)
+**Въпроси?** [Отворете issue](https://github.com/microsoft/AZD-for-beginners/issues) или проверете [FAQ](../../resources/faq.md)
 
-**Аларма за разходи:** Не забравяйте да стартирате `azd down` след приключване на тестовете, за да избегнете продължаващи такси (~$50-100/month при активно използване).
+**Предупреждение за разходи:** Не забравяйте да изпълните `azd down`, когато приключите с тестовете, за да избегнете текущи такси (~$50-100/месец при активно използване).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Отказ от отговорност**:
-Този документ е преведен с помощта на AI преводаческа услуга [Co-op Translator](https://github.com/Azure/co-op-translator). Въпреки че се стремим към точност, моля, имайте предвид, че автоматизираните преводи могат да съдържат грешки или неточности. Оригиналният документ на езика, на който е написан, трябва да се счита за авторитетен източник. За критична информация се препоръчва професионален човешки превод. Не носим отговорност за евентуални недоразумения или погрешни тълкувания, произтичащи от използването на този превод.
+Този документ е преведен с помощта на AI преводачески услуга [Co-op Translator](https://github.com/Azure/co-op-translator). Въпреки че се стремим към точност, моля имайте предвид, че автоматизираните преводи могат да съдържат грешки или неточности. Оригиналният документ на неговия роден език трябва да се счита за авторитетен източник. За критична информация се препоръчва професионален човешки превод. Ние не носим отговорност за каквито и да е недоразумения или неправилни тълкувания, произтичащи от използването на този превод.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

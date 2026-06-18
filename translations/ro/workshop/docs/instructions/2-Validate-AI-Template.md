@@ -1,240 +1,238 @@
-# 2. Validate a Template
+# 2. Validarea unui Șablon
 
-> Validated against `azd 1.23.12` in March 2026.
+> Validat cu `azd 1.25.6` în iunie 2026.
 
-!!! tip "LA SFÂRȘITUL ACESTUI MODUL VEI PUTEA"
+!!! tip "LA SFÂRȘITUL ACESTUI MODUL VEI FI CAPABIL SĂ"
 
-    - [ ] Analizați arhitectura soluției AI
-    - [ ] Înțelegeți fluxul de implementare AZD
-    - [ ] Folosiți GitHub Copilot pentru asistență privind utilizarea AZD
-    - [ ] **Lab 2:** Implementare și validare a șablonului AI Agents
+    - [ ] Analizezi Arhitectura Soluției AI
+    - [ ] Înțelegi Fluxul de Lucru de Implementare AZD
+    - [ ] Folosești GitHub Copilot pentru ajutor în utilizarea AZD
+    - [ ] **Laborator 2:** Implementarea și Validarea șablonului AI Agents
 
 ---
 
+## 1. Introducere
 
-## 1. Introduction
+[Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) sau `azd` este un instrument open-source de linie de comandă care simplifică fluxul de lucru al dezvoltatorului atunci când construiești și implementezi aplicații în Azure. 
 
-The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) or `azd` is an open-source commandline tool that streamlines the developer workflow when building and deploying applications to Azure. 
+[Șabloanele AZD](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) sunt depozite standardizate care includ cod exemplar pentru aplicații, resurse _infrastructură-ca-sursă_, și fișiere de configurare `azd` pentru o arhitectură coezivă a soluției. Provizionarea infrastructurii devine la fel de simplă precum o comandă `azd provision` – iar folosirea `azd up` îți permite să provizionezi infrastructura **și** să implementezi aplicația într-un singur pas!
 
-[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) are standardized repositories that include sample application code, _infrastructure-as-code_ assets, and `azd` configuration files for a cohesive solution architecture. Provisioning the infrastructure becomes as simple as an `azd provision` command - while using `azd up` allows you to provision infrastructure **and** deploy your application at one shot!
+Ca rezultat, demararea procesului tău de dezvoltare a aplicației poate fi la fel de simplă ca găsirea șablonului _AZD Starter_ potrivit, care se potrivește cel mai bine nevoilor tale de aplicație și infrastructură – apoi personalizarea depozitului pentru a satisface cerințele scenariului tău.
 
-As a result, jumpstarting your application development process can be as simple as finding the right _AZD Starter template_ that comes closest to your application and infrastructure needs - then customizing the repository to suit your scenario requirements.
+Înainte de a începe, hai să ne asigurăm că ai instalat Azure Developer CLI.
 
-Before we begin, let's make sure you have the Azure Developer CLI installed.
-
-1. Open a VS Code terminal and type this command:
+1. Deschide un terminal VS Code și tastează această comandă:
 
       ```bash title="" linenums="0"
       azd version
       ```
 
-1. You should see something like this!
+1. Ar trebui să vezi ceva asemănător cu acesta!
 
       ```bash title="" linenums="0"
-      azd version 1.23.12 (commit <current-build>)
+      azd version 1.25.6 (commit <current-build>)
       ```
 
-**You are now ready to select and deploy a template with azd**
+**Acum ești gata să selectezi și să implementezi un șablon cu azd**
 
 ---
 
-## 2. Template Selection
+## 2. Selectarea Șablonului
 
-The Microsoft Foundry platform comes with a [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that cover popular solution scenarios like _multi-agent workflow atomation_ and _multi-modal content processing_. You can also discover these templates by visiting the Microsoft Foundry portal.
+Platforma Microsoft Foundry vine cu un [set recomandat de șabloane AZD](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) care acoperă scenarii populare de soluții precum _automatizarea fluxului multi-agent_ și _procesarea conținutului multimodal_. Poți descoperi aceste șabloane și vizitând portalul Microsoft Foundry.
 
-1. Visit [https://ai.azure.com/templates](https://ai.azure.com/templates)
-1. Log into the Microsoft Foundry portal when prompted - you will see something like this.
+1. Vizitează [https://ai.azure.com/templates](https://ai.azure.com/templates)
+1. Autentifică-te în portalul Microsoft Foundry când ți se solicită – vei vedea ceva asemănător.
 
-![Alege șablon](../../../../../translated_images/ro/01-pick-template.60d2d5fff5ebc374.webp)
+![Pick](../../../../../translated_images/ro/01-pick-template.60d2d5fff5ebc374.webp)
 
+Opțiunile **Basic** sunt șabloanele tale de start:
 
-The **Basic** options are your starter templates:
+1. [ ] [Începe cu AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) care implementează o aplicație de chat de bază _cu datele tale_ în Azure Container Apps. Folosește-l pentru a explora un scenariu de chatbot AI de bază.
+1. [X] [Începe cu AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) care implementează și un Agent AI standard (cu Foundry Agents). Folosește-l pentru a te familiariza cu soluțiile AI agentice care includ unelte și modele.
 
-1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) that deploys a basic chat application _with your data_ to Azure Container Apps. Use this to explore a basic AI chatbot scenario.
-1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) that also deploys a standard AI Agent (with the Foundry Agents). Use this to get familiar with agentic AI solutions involving tools and models.
+Vizitează al doilea link într-o filă nouă de browser (sau click pe `Open in GitHub` pentru cardul respectiv). Ar trebui să vezi depozitul pentru acest șablon AZD. Ia-ți un moment să explorezi fișierul README. Arhitectura aplicației arată așa:
 
-Visit the second link in a new browser tab (or click `Open in GitHub` for the related card). You should see the repository for this AZD Template. Take a minute to explore the README. The application architecture looks like this:
-
-![Arhitectură](../../../../../translated_images/ro/architecture.8cec470ec15c65c7.webp)
+![Arch](../../../../../translated_images/ro/architecture.8cec470ec15c65c7.webp)
 
 ---
 
-## 3. Template Activation
+## 3. Activarea Șablonului
 
-Let's try to deploy this template and make sure it is valid. We'll follow the guidelines in the [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) section.
+Hai să încercăm să implementăm acest șablon și să ne asigurăm că este valid. Vom urma indicațiile din secțiunea [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started).
 
-1. Choose a working environment for the template repository:
+1. Alege un mediu de lucru pentru depozitul șablonului:
 
-      - **GitHub Codespaces**: Click [this link](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) and confirm `Create codespace`
-      - **Local clone or dev container**: Clone `Azure-Samples/get-started-with-ai-agents` and open it in VS Code
+      - **GitHub Codespaces**: Click pe [acest link](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) și confirmă `Create codespace`
+      - **Clone local sau container dev**: Clonază `Azure-Samples/get-started-with-ai-agents` și deschide-l în VS Code
 
-1. Wait until the VS Code terminal is ready, then type the following command:
+1. Așteaptă până când terminalul VS Code este gata, apoi tastează următoarea comandă:
 
    ```bash title="" linenums="0"
    azd up
    ```
 
-Complete the workflow steps that this will trigger:
+Completează pașii din fluxul care vor fi declanșați:
 
-1. You will be prompted to log into Azure - follow instructions to authenticate
-1. Enter a unique environment name for you - e.g., I used `nitya-mshack-azd`
-1. This  will create a `.azure/` folder - you will see a subfolder with the env name
-1. You will be prompted to select a subscription name - select the default
-1. You will be prompted for a location - use `East US 2`
+1. Ți se va cere să te autentifici în Azure – urmează instrucțiunile pentru autentificare
+1. Introdu un nume unic pentru mediu – de exemplu, eu am folosit `nitya-mshack-azd`
+1. Se va crea un folder `.azure/` – vei vedea un subfolder cu numele mediului
+1. Ți se va cere să selectezi un nume de abonament – selectează cel implicit
+1. Ți se va cere o locație – folosește `East US 2`
 
-Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
+Acum, așteaptă finalizarea provizionării. **Aceasta durează 10-15 minute**
 
-1. When done, your console will show a SUCCESS message like this:
+1. Când se termină, consola ta va afișa un mesaj de SUCCES ca acesta:
       ```bash title="" linenums="0"
       SUCCESS: Your up workflow to provision and deploy to Azure completed in 10 minutes 17 seconds.
       ```
-1. Your Azure Portal will now have a provisioned resource group with that env name:
+1. Portalul tău Azure va avea acum un grup de resurse provizionat cu numele acelui mediu:
 
-      ![Infrastructură provisionată](../../../../../translated_images/ro/02-provisioned-infra.46c706b14f56e0bf.webp)
+      ![Infra](../../../../../translated_images/ro/02-provisioned-infra.46c706b14f56e0bf.webp)
 
-1. **You are now ready to validate the deployed infrastructure and application**.
-
----
-
-## 4. Template Validation
-
-1. Visit Azure Portal [Resource Groups](https://portal.azure.com/#browse/resourcegroups) page - log in when prompted
-1. Click on RG for your environment name - you see the page above
-
-      - click on the Azure Container Apps resource
-      - click on the Application Url in the _Essentials_ section (top right)
-
-1. You should see a hosted application front-end UI like this:
-
-   ![Aplicație](../../../../../translated_images/ro/03-test-application.471910da12c3038e.webp)
-
-1. Try asking a couple of [sample questions](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
-
-      1. Ask: ```Care este capitala Franței?``` 
-      1. Ask: ```Care este cel mai bun cort sub 200 de dolari pentru două persoane și ce caracteristici include?```
-
-1. You should get answers similar to what is shown below. _But how does this work?_ 
-
-      ![Aplicație](../../../../../translated_images/ro/03-test-question.521c1e863cbaddb6.webp)
+1. **Acum ești gata să validezi infrastructura și aplicația implementate**.
 
 ---
 
-## 5.  Agent Validation
+## 4. Validarea Șablonului
 
-The Azure Container App deploys an endpoint that connects to the AI Agent provisioned in the Microsoft Foundry project for this template. Let's take a look at what that means.
+1. Vizitează pagina Azure Portal [Resource Groups](https://portal.azure.com/#browse/resourcegroups) – autentifică-te dacă ți se solicită
+1. Click pe RG pentru numele mediului tău – vei vedea pagina de mai sus
 
-1. Return to the Azure Portal _Overview_ page for your resource group
+      - dă click pe resursa Azure Container Apps
+      - dă click pe Application Url în secțiunea _Essentials_ (sus dreapta)
 
-1. Click on the `Microsoft Foundry` resource in that list
+1. Ar trebui să vezi o interfață front-end a aplicației găzduite asemănătoare cu aceasta:
 
-1. You should see this. Click the `Go to Microsoft Foundry Portal` button. 
+   ![App](../../../../../translated_images/ro/03-test-application.471910da12c3038e.webp)
+
+1. Încearcă să pui câteva [întrebări exemplu](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
+
+      1. Întreabă: ```Care este capitala Franței?``` 
+      1. Întreabă: ```Care este cel mai bun cort sub 200$ pentru două persoane și ce caracteristici include?```
+
+1. Ar trebui să primești răspunsuri asemănătoare cu cele afișate mai jos. _Dar cum funcționează asta?_ 
+
+      ![App](../../../../../translated_images/ro/03-test-question.521c1e863cbaddb6.webp)
+
+---
+
+## 5. Validarea Agentului
+
+Azure Container App implementează un endpoint care se conectează la Agentul AI provisionat în proiectul Microsoft Foundry pentru acest șablon. Să aruncăm o privire asupra a ceea ce înseamnă asta.
+
+1. Revino la pagina _Overview_ din Azure Portal pentru grupul tău de resurse
+
+1. Click pe resursa `Microsoft Foundry` din listă
+
+1. Ar trebui să vezi aceasta. Click pe butonul `Go to Microsoft Foundry Portal`. 
    ![Foundry](../../../../../translated_images/ro/04-view-foundry-project.fb94ca41803f28f3.webp)
 
-1. You should see the Foundry Project page for your AI application
-   ![Proiect](../../../../../translated_images/ro/05-visit-foundry-portal.d734e98135892d7e.webp)
+1. Ar trebui să vezi pagina proiectului Foundry pentru aplicația ta AI
+   ![Project](../../../../../translated_images/ro/05-visit-foundry-portal.d734e98135892d7e.webp)
 
-1. Click on `Agents` - you see the default Agent provisioned in your project
-   ![Agenți](../../../../../translated_images/ro/06-visit-agents.bccb263f77b00a09.webp)
+1. Click pe `Agents` – vei vedea Agentul implicit provisionat în proiectul tău
+   ![Agents](../../../../../translated_images/ro/06-visit-agents.bccb263f77b00a09.webp)
 
-1. Select it - and you see the Agent details. Note the following:
+1. Selectează-l – și vei vedea detaliile Agentului. Observă următoarele:
 
-      - The agent uses File Search by default (always)
-      - The agent `Knowledge` indicates it has 32 files uploaded (for file search)
-      ![Detalii agent](../../../../../translated_images/ro/07-view-agent-details.0e049f37f61eae62.webp)
+      - Agentul folosește File Search implicit (mereu)
+      - `Knowledge` al agentului arată că are 32 fișiere încărcate (pentru căutarea în fișiere)
+      ![Agents](../../../../../translated_images/ro/07-view-agent-details.0e049f37f61eae62.webp)
 
-1. Look for the `Data+indexes` option in the left menu and click for details. 
+1. Caută opțiunea `Data+indexes` în meniul din stânga și dă click pentru detalii. 
 
-      - You should see the 32 data files uploaded for knowledge.
-      - These will correspond to the 12 customer files and 20 product files under `src/files` 
-      ![Date](../../../../../translated_images/ro/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
+      - Vei vedea cele 32 de fișiere de date încărcate pentru cunoaștere.
+      - Acestea corespund celor 12 fișiere pentru clienți și 20 fișiere pentru produse din `src/files` 
+      ![Data](../../../../../translated_images/ro/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
-**You validated Agent operation!** 
+**Ai validat funcționarea Agentului!** 
 
-1. The agent responses are grounded in the knowledge in those files. 
-1. You can now ask questions related to that data, and get grounded responses.
-1. Example: `customer_info_10.json` describes the 3 purchases made by "Amanda Perez"
+1. Răspunsurile agentului se bazează pe cunoștințele din acele fișiere. 
+1. Acum poți pune întrebări referitoare la acele date și vei primi răspunsuri fondate.
+1. Exemplu: `customer_info_10.json` descrie cele 3 achiziții făcute de "Amanda Perez"
 
-Revisit the browser tab with the Container App endpoint and ask: `What products does Amanda Perez own?`. You should see something like this:
+Revino la fila browser cu endpoint-ul Container App și întreabă: `Ce produse deține Amanda Perez?`. Ar trebui să vezi ceva asemănător:
 
-![Date](../../../../../translated_images/ro/09-ask-in-aca.4102297fc465a4d5.webp)
+![Data](../../../../../translated_images/ro/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
 ## 6. Agent Playground
 
-Let's build a bit more intuition for the capabilities of Microsoft Foundry, by taking the Agent for a spin in the Agents Playground. 
+Hai să construim puțină intuiție pentru capabilitățile Microsoft Foundry, testând Agentul în Agents Playground. 
 
-1. Return to the `Agents` page in Microsoft Foundry - select the default agent
-1. Click the `Try in Playground` option - you should get a Playground UI like this
-1. Ask the same question: `What products does Amanda Perez own?`
+1. Revino la pagina `Agents` din Microsoft Foundry – selectează agentul implicit
+1. Click pe opțiunea `Try in Playground` – ar trebui să apară o interfață Playground de genul acesta
+1. Pune aceeași întrebare: `Ce produse deține Amanda Perez?`
 
-    ![Date](../../../../../translated_images/ro/09-ask-in-playground.a1b93794f78fa676.webp)
+    ![Data](../../../../../translated_images/ro/09-ask-in-playground.a1b93794f78fa676.webp)
 
-You get the same (or similar) response - but you also get additional information that you can use to understand the quality, cost, and performance of your agentic app. For example:
+Primești același răspuns (sau similar) – dar primești și informații suplimentare pe care le poți folosi pentru a înțelege calitatea, costul și performanța aplicației tale agentice. De exemplu:
 
-1. Note that the response cites data files used to "ground" the response
-1. Hover over any of these file labels - does the data match your query and displayed response?
+1. Observă că răspunsul citează fișiere de date folosite pentru a „ancla” răspunsul
+1. Plasează cursorul peste etichetele fișierelor – datele corespund cu întrebarea și răspunsul afișat?
 
-You also see a _stats_ row below the response. 
+De asemenea, vezi un rând de _statistici_ sub răspuns.
 
-1. Hover over any metric - e.g., Safety. You see something like this
-1. Does the assessed rating match your intuition for the response safety level?
+1. Plasează cursorul peste orice metrică – de exemplu, Safety (Siguranță). Vezi ceva similar
+1. Evaluarea afișată corespunde intuiției tale privind nivelul de siguranță al răspunsului?
 
-      ![Date](../../../../../translated_images/ro/10-view-run-info-meter.6cdb89a0eea5531f.webp)
+      ![Data](../../../../../translated_images/ro/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
 ---
 
-## 7. Built-in Observability
+## 7. Observabilitate Integrată
 
-Observability is about instrumenting your application to generate data that can be used to understand, debug, and optimize, its operations. To get a sense for this:
+Observabilitatea înseamnă instrumentarea aplicației tale pentru a genera date care pot fi folosite pentru a înțelege, depana și optimiza operațiunile acesteia. Pentru a înțelege acest aspect:
 
-1. Click the `View Run Info` button - you should see this view. This is an example of [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) in action. _You can also get this view by clicking Thread Logs in the top-level menu_.
+1. Apasă butonul `View Run Info` – ar trebui să vezi această vizualizare. Acesta este un exemplu de [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) în acțiune. _Poți obține această vizualizare și făcând click pe Thread Logs din meniul principal_.
 
-   - Get a sense for the run steps and tools engaged by the agent
-   - Understand total Token count (vs. output tokens usage) for response
-   - Understand the latency and where time is being spent in execution
+   - Obține o înțelegere a pașilor de execuție și uneltelor folosite de agent
+   - Înțelege numărul total de Tokeni (comparativ cu tokenii folosiți pentru ieșire) în răspuns
+   - Înțelege latența și unde se petrece timpul în execuție
 
       ![Agent](../../../../../translated_images/ro/10-view-run-info.b20ebd75fef6a1cc.webp)
 
-1. Click the `Metadata` tab to see additional attributes for the run, that may provide useful context for debugging issues later.   
+1. Click pe fila `Metadata` pentru a vedea atribute suplimentare ale execuției, care pot oferi context util pentru depanare ulterioară.
 
       ![Agent](../../../../../translated_images/ro/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 
-1. Click the `Evaluations` tab to see auto-assessments made on the agent response. These include safety evaluations (e.g., Self-harm) and agent-specifc evaluations (e.g., Intent resolution, Task adherence).
+1. Click pe fila `Evaluations` pentru a vedea autoevaluările făcute pe răspunsul agentului. Acestea includ evaluări de siguranță (de ex., Auto-vătămare) și evaluări specifice agentului (de ex., Rezolvarea intenției, Respectarea sarcinii).
 
       ![Agent](../../../../../translated_images/ro/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
-1. Last but not least, click the `Monitoring` tab in the sidebar menu.
+1. Ultimul, dar nu cel din urmă, fă click pe fila `Monitoring` în meniul sidebar.
 
-      - Select `Resource usage` tab in the displayed page - and view the metrics.
-      - Track application usage in terms of costs (tokens) and load (requests).
-      - Track applicaton latency to first byte (input processing) and last byte (output).
+      - Selectează fila `Resource usage` în pagina afișată – și vizualizează metricile.
+      - Urmărește utilizarea aplicației în termeni de costuri (tokeni) și încărcare (cereri).
+      - Monitorizează latența aplicației până la primul byte (procesare input) și ultimul byte (output).
 
       ![Agent](../../../../../translated_images/ro/13-monitoring-resources.5148015f7311807f.webp)
 
 ---
 
-## 8. Environment Variables
+## 8. Variabile de Mediu
 
-So far, we've walked through the deployment in the browser - and validated that our infrastructure is provisioned and the application is operational. But to work with the application _code-first_, we need to configure our local development environment with the relevant variables required to work with these resources. Using `azd` makes it easy.
+Până acum, am parcurs implementarea în browser – și am validat că infrastructura noastră este provisionată și aplicația este operațională. Dar pentru a lucra cu aplicația _din cod în primul rând_, trebuie să configurăm mediul nostru de dezvoltare local cu variabilele relevante necesare pentru a lucra cu aceste resurse. Folosirea `azd` face acest lucru simplu.
 
-1. The Azure Developer CLI [uses environment variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) to store and manage configuration settings for  the application deployments.
+1. Azure Developer CLI [folosește variabile de mediu](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) pentru a stoca și gestiona setările de configurare pentru implementările aplicațiilor.
 
-1. Environment variables are stored in `.azure/<env-name>/.env` - this scopes them to the `env-name` environment used during deployment and helps you isolate environments between different deployment targets in the same repo.
+1. Variabilele de mediu sunt stocate în `.azure/<env-name>/.env` – ceea ce le limitează la mediul `env-name` folosit la implementare și te ajută să izolezi mediile între diferitele ținte de implementare în același depozit.
 
-1. Environment variables are automatically loaded by the `azd` command whenever it executes a specific command (e.g., `azd up`). Note that `azd` does not automatically read _OS-level_ environment variables (e.g., set in the shell) - instead use `azd set env` and `azd get env` to transfer information within scripts.
+1. Variabilele de mediu sunt încărcate automat de comanda `azd` ori de câte ori execută o comandă specifică (ex: `azd up`). Ține cont că `azd` nu citește automat variabilele de mediu la nivel de OS (ex: setate în shell) – în schimb folosește `azd set env` și `azd get env` pentru a transfera informații în scripturi.
 
 
-Let's try out a few commands:
+Hai să încercăm câteva comenzi:
 
-1. Get all the environment variables set for `azd` in this environment:
+1. Afișează toate variabilele de mediu setate pentru `azd` în acest mediu:
 
       ```bash title="" linenums="0"
       azd env get-values
       ```
       
-      You see something like:
+      Vei vedea ceva de genul:
 
       ```bash title="" linenums="0"
       AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4.1-mini"
@@ -244,19 +242,19 @@ Let's try out a few commands:
       ...
       ```
 
-1. Get a specific value - e.g., I want to know if we set the `AZURE_AI_AGENT_MODEL_NAME` value
+1. Afișează o valoare specifică – de exemplu, vreau să știu dacă a fost setată valoarea `AZURE_AI_AGENT_MODEL_NAME`
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
       
-      You see something like this - it was not set by default!
+      Vei vedea ceva asemănător – nu a fost setată implicit!
 
       ```bash title="" linenums="0"
       ERROR: key 'AZURE_AI_AGENT_MODEL_NAME' not found in the environment values
       ```
 
-1. Set a new environment variable for `azd`. Here, we update the agent model name. _Note: any changes made will be immediately reflected in the `.azure/<env-name>/.env` file.
+1. Setează o variabilă de mediu nouă pentru `azd`. Aici, actualizăm numele modelului agentului. _Notă: orice modificări vor fi reflectate imediat în fișierul `.azure/<env-name>/.env`.
 
       ```bash title="" linenums="0"
       azd env set AZURE_AI_AGENT_MODEL_NAME gpt-4.1
@@ -264,35 +262,35 @@ Let's try out a few commands:
       azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
       ```
 
-      Now, we should find the value is set:
+      Acum ar trebui să vedem valoarea setată:
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
 
-1. Note that some resources are persistent (e.g., model deployments) and will require more than just an `azd up` to force the redeployment. Let's try tearing down the original deployment and redeploying with changed env vars.
+1. Unele resurse sunt persistente (ex: implementările modelului) și vor necesita mai mult decât un simplu `azd up` pentru reimplementare forțată. Hai să încercăm să demontăm implementarea originală și să redeployăm cu variabilele de mediu schimbate.
 
-1. **Refresh** If you had previously deployed infrastructure using an azd template - you can _refresh_ the state of your local environment variables based on the current state of your Azure deployment using this command:
+1. **Actualizează** Dacă ai implementat anterior infrastructură folosind un șablon azd – poți _actualiza_ starea variabilelor locale de mediu bazate pe starea curentă din implementarea Azure folosind această comandă:
 
       ```bash title="" linenums="0"
       azd env refresh
       ```
 
-      Aceasta este o modalitate puternică de a _sincroniza_ variabilele de mediu între două sau mai multe medii locale de dezvoltare (de exemplu, o echipă cu mai mulți dezvoltatori) - permițând infrastructurii implementate să servească drept adevăr fundamental pentru starea variabilelor de mediu. Membrii echipei pur și simplu _reîmprospătează_ variabilele pentru a reveni în sincronizare.
+Aceasta este o modalitate puternică de a _sincroniza_ variabilele de mediu între două sau mai multe medii locale de dezvoltare (de ex., o echipă cu mai mulți dezvoltatori) - permițând infrastructurii implementate să servească drept adevărul fundamental pentru starea variabilelor de mediu. Membrii echipei trebuie pur și simplu să _reîmprospăteze_ variabilele pentru a reveni la sincronizare.
 
 ---
 
 ## 9. Felicitări 🏆
 
-Tocmai ați finalizat un flux de lucru complet în care you:
+Tocmai ai finalizat un flux de lucru complet în care ai:
 
-- [X] Ați selectat AZD Template pe care doriți să-l utilizați
-- [X] Ați deschis șablonul într-un mediu de dezvoltare compatibil
-- [X] Ați implementat șablonul și ați validat că funcționează
+- [X] Selectat șablonul AZD pe care dorești să îl folosești
+- [X] Deschis șablonul într-un mediu de dezvoltare suportat
+- [X] Implementat șablonul și validat că funcționează
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă o traducere profesională realizată de un traducător uman. Nu răspundem pentru eventuale neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+**Declinare a responsabilității**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). În timp ce ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un om. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care decurg din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

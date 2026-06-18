@@ -1,42 +1,42 @@
-# 6. Ukončenie infraštruktúry
+# 6. Odstránenie infraštruktúry
 
-!!! tip "PO DOKONČENÍ TOHTO MODULU BUDETE SCHOPNÍ"
+!!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
 
-    - [ ] Pochopiť dôležitosť vyčistenia zdrojov a riadenia nákladov
-    - [ ] Použiť `azd down` na bezpečné zrušenie infraštruktúry
-    - [ ] Obnoviť dočasne zmazané kognitívne služby, ak je to potrebné
-    - [ ] **Lab 6:** Vyčistiť Azure zdroje a overiť ich odstránenie
+    - [ ] Pochopiť dôležitosť vyčistenia prostriedkov a riadenia nákladov
+    - [ ] Použiť `azd down` na bezpečné odstránenie infraštruktúry
+    - [ ] Obnoviť soft-deleteované Azure AI Services v prípade potreby
+    - [ ] **Laboratórium 6:** Vyčistiť Azure zdroje a overiť odstránenie
 
 ---
 
 ## Bonusové cvičenia
 
-Predtým, než ukončíme projekt, venujte pár minút otvorenému prieskumu.
+Predtým, než projekt odstránime, venujte niekoľko minút otvorenému preskúmaniu.
 
-!!! info "Vyskúšajte tieto prieskumné podnety"
+!!! info "Try These Exploration Prompts"
 
-    **Experimentujte s GitHub Copilotom:**
+    **Experimentujte s GitHub Copilot:**
     
-    1. Ask: `Aké ďalšie AZD šablóny by som mohol vyskúšať pre scenáre s viacerými agentmi?`
-    2. Ask: `Ako môžem prispôsobiť inštrukcie agenta pre použitie v zdravotnej starostlivosti?`
-    3. Ask: `Ktoré premenné prostredia riadia optimalizáciu nákladov?`
+    1. Opýtajte sa: `Aké ďalšie AZD šablóny by som mohol vyskúšať pre scenáre s viacerými agentmi?`
+    2. Opýtajte sa: `Ako môžem prispôsobiť inštrukcie agenta pre prípad použitia v zdravotnej starostlivosti?`
+    3. Opýtajte sa: `Ktoré premenné prostredia riadia optimalizáciu nákladov?`
     
-    **Preskúmajte Azure portál:**
+    **Preskúmajte Azure Portal:**
     
-    1. Skontrolujte metriky Application Insights pre vaše nasadenie
-    2. Skontrolujte analýzu nákladov na nasadené zdroje
-    3. Preskúmajte portál Microsoft Foundry (agent playground) ešte raz
+    1. Preskúmajte metriky Application Insights pre vaše nasadenie
+    2. Skontrolujte analýzu nákladov pre nasadené zdroje
+    3. Preskúmajte portál Microsoft Foundry a jeho agent playground ešte raz
 
 ---
 
-## Zrušenie infraštruktúry
+## Odstránenie infraštruktúry
 
-1. Zrušenie infraštruktúry je také jednoduché ako:
+1. Odstránenie infraštruktúry je také jednoduché ako:
       
       ```bash title="" linenums="0"
       azd down --purge
       ```
-1. The `--purge` flag ensures that it also purges soft-deleted Cognitive Service resources, thereby releasing quota held by these resources. Once complete you will see something like this:
+1. Prepínač `--purge` zabezpečí, že vymaže aj soft-deleteované zdroje Cognitive Service, čím uvoľní kvótu, ktorú tieto zdroje zaberajú. Po dokončení uvidíte niečo takéto:
       
       ```bash title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -47,18 +47,18 @@ Predtým, než ukončíme projekt, venujte pár minút otvorenému prieskumu.
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Voliteľné) Ak teraz znovu spustíte `azd up`, všimnete si, že model gpt-4.1 bude nasadený, pretože bola zmenená (a uložená) premenná prostredia v lokálnom priečinku `.azure`. 
+1. (Voliteľné) Ak teraz znovu spustíte `azd up`, všimnete si, že sa nasadí model gpt-4.1, pretože sa zmenila (a uložila) premenná prostredia v lokálnom `.azure` priečinku. 
 
-      Tu sú nasadenia modelov **pred**:
+      Tu sú nasadenia modelu **pred**:
 
       ![Pôvodné](../../../../../translated_images/sk/14-deploy-initial.30e4cf1c29b587bc.webp)
 
-      A tu sú **po**:
+      A tu je **po**:
       ![Nové](../../../../../translated_images/sk/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Zrieknutie sa zodpovednosti:
-Tento dokument bol preložený pomocou AI prekladateľskej služby [Co‑op Translator](https://github.com/Azure/co-op-translator). Hoci sa usilujeme o presnosť, berte prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by sa mal považovať za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne výklady vzniknuté použitím tohto prekladu.
+**Vyhlásenie o zodpovednosti**:
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, vezmite prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho natívnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

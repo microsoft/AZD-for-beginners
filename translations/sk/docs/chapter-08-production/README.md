@@ -1,38 +1,38 @@
-# Chapter 8: Produkčné a podnikové vzory
+# Kapitola 8: Produkčné a podnikové vzory
 
-**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Trvanie**: 2-3 hodiny | **⭐ Náročnosť**: Pokročilý
+**📚 Kurz**: [AZD For Beginners](../../README.md) | **⏱️ Trvanie**: 2-3 hodiny | **⭐ Zložitosť**: Pokročilá
 
 ---
 
 ## Prehľad
 
-Táto kapitola pokrýva podnikové vzory nasadenia, zabezpečenie, monitorovanie a optimalizáciu nákladov pre produkčné AI pracovné záťaže.
+Táto kapitola pokrýva podnikové vzory nasadenia pripravené na produkciu, spevňovanie bezpečnosti, monitorovanie a optimalizáciu nákladov pre produkčné AI pracovné záťaže.
 
-> Overené verzia `azd 1.23.12` v marci 2026.
+> Overené s `azd 1.25.6` v júni 2026.
 
 ## Ciele učenia
 
-Po dokončení tejto kapitoly budete vedieť:
-- Nasadiť aplikácie odolné v multi-regiónoch
+Po dokončení tejto kapitoly budete:
+- Nasadzovať odolné aplikácie v viacerých regiónoch
 - Implementovať podnikové bezpečnostné vzory
 - Konfigurovať komplexné monitorovanie
-- Optimalizovať náklady vo veľkom meradle
-- Nastaviť CI/CD pipeliny s AZD
+- Optimalizovať náklady v rozsahu
+- Nastaviť CI/CD pipeline s AZD
 
 ---
 
 ## 📚 Lekcie
 
 | # | Lekcia | Popis | Čas |
-|---|--------|-------|-----|
-| 1 | [Produkčné AI praktiky](production-ai-practices.md) | Podnikové vzory nasadenia | 90 min |
+|---|--------|-------------|------|
+| 1 | [Produkčné praktiky AI](production-ai-practices.md) | Podnikové vzory nasadenia | 90 min |
 
 ---
 
-## 🚀 Produkčný kontrolný zoznam
+## 🚀 Kontrolný zoznam pre produkciu
 
-- [ ] Nasadenie v multi-regiónoch pre odolnosť
-- [ ] Riadená identita pre autentifikáciu (bez kľúčov)
+- [ ] Nasadenie v viacerých regiónoch pre odolnosť
+- [ ] Spravovaná identita pre autentifikáciu (bez kľúčov)
 - [ ] Application Insights pre monitorovanie
 - [ ] Nastavené rozpočty a upozornenia na náklady
 - [ ] Povolené bezpečnostné skenovanie
@@ -43,20 +43,22 @@ Po dokončení tejto kapitoly budete vedieť:
 
 ## 🏗️ Architektonické vzory
 
-### Vzor 1: Microservices AI
+### Vzor 1: Mikroslužby AI
 
 ```mermaid
 graph LR
-    Gateway[API Brána] --> AI[AI Služba] --> Models[Modely Microsoft Foundry]
-    Gateway --> Auth[Autentifikačná Služba]
-    AI --> Data[Ukladisko Dát]
+    Gateway[API brána] --> AI[Služba AI] --> Models[Modely Microsoft Foundry]
+    Gateway --> Auth[Autentifikačná služba]
+    AI --> Data[Úložisko dát]
 ```
-### Vzor 2: Event-Driven AI
+
+### Vzor 2: Udalosťami riadené AI
 
 ```mermaid
 graph LR
-    EventGrid[Event Grid] --> Functions[Funkcie] --> Pipeline[AI Potrubie]
+    EventGrid[Mriežka udalostí] --> Functions[Funkcie] --> Pipeline[AI pracovný tok]
 ```
+
 ---
 
 ## 🔐 Najlepšie bezpečnostné postupy
@@ -81,14 +83,14 @@ properties: {
 ## 💰 Optimalizácia nákladov
 
 | Stratégia | Úspory |
-|----------|--------|
+|----------|---------|
 | Škálovanie na nulu (Container Apps) | 60-80% |
-| Použitie spotrebných vrstiev pre vývoj | 50-70% |
+| Použiť spotrebné úrovne pre vývoj | 50-70% |
 | Plánované škálovanie | 30-50% |
 | Rezervovaná kapacita | 20-40% |
 
 ```bash
-# Nastaviť upozornenia na rozpočet
+# Nastaviť upozornenia pre rozpočet
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -101,13 +103,13 @@ az consumption budget create \
 ## 📊 Nastavenie monitorovania
 
 ```bash
-# Prehliadať logy
+# Sledujte denníky
 azd monitor --logs
 
-# Skontrolovať Application Insights
+# Skontrolujte Application Insights
 azd monitor --overview
 
-# Zobraziť metriky
+# Zobrazte metriky
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -116,9 +118,9 @@ az monitor metrics list --resource <resource-id>
 ## 🔗 Navigácia
 
 | Smer | Kapitola |
-|------|----------|
+|-----------|---------|
 | **Predchádzajúca** | [Kapitola 7: Riešenie problémov](../chapter-07-troubleshooting/README.md) |
-| **Kurz dokončený** | [Domovská stránka kurzu](../../README.md) |
+| **Kurz dokončený** | [Domov kurzu](../../README.md) |
 
 ---
 
@@ -126,12 +128,12 @@ az monitor metrics list --resource <resource-id>
 
 - [Sprievodca AI agentmi](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Viacagentové riešenia](../chapter-05-multi-agent/README.md)
-- [Príklad microservices](../../examples/microservices/README.md)
+- [Riešenia s viacerými agentmi](../chapter-05-multi-agent/README.md)
+- [Príklad mikroslužieb](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Zrieknutie sa zodpovednosti**:  
-Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, majte prosím na pamäti, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Originálny dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+**Vyhlásenie o zodpovednosti**:
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, vezmite prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho natívnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
