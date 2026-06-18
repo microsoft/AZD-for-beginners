@@ -1,40 +1,40 @@
-# 第8章：本番およびエンタープライズのパターン
+# Chapter 8: 本番およびエンタープライズパターン
 
-**📚 コース**: [AZD For Beginners](../../README.md) | **⏱️ 所要時間**: 2-3 hours | **⭐ 難易度**: 上級
+**📚 Course**: [AZD 入門](../../README.md) | **⏱️ Duration**: 2-3 hours | **⭐ Complexity**: 上級
 
 ---
 
-## 概要
+## Overview
 
-この章では、エンタープライズ対応のデプロイパターン、セキュリティ強化、監視、および本番AIワークロードのコスト最適化について説明します。
+この章では、本番向けAIワークロードのエンタープライズ対応デプロイパターン、セキュリティ強化、監視、およびコスト最適化を扱います。
 
-> 2026年3月に `azd 1.23.12` で検証済み。
+> Validated against `azd 1.25.6` in June 2026.
 
-## 学習目標
+## Learning Objectives
 
-この章を修了すると、以下ができるようになります:
-- マルチリージョンで耐障害性のあるアプリケーションをデプロイする
-- エンタープライズ向けのセキュリティパターンを実装する
+この章を修了すると、次のことができるようになります:
+- マルチリージョンでの耐障害性のあるアプリケーションをデプロイする
+- エンタープライズ向けセキュリティパターンを実装する
 - 包括的な監視を構成する
-- 大規模なコスト最適化を行う
-- AZDでCI/CDパイプラインを設定する
+- 大規模でコストを最適化する
+- AZD を使用した CI/CD パイプラインを設定する
 
 ---
 
 ## 📚 レッスン
 
-| # | レッスン | 説明 | 時間 |
+| # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [本番AIの実践](production-ai-practices.md) | エンタープライズ向けの展開パターン | 90分 |
+| 1 | [本番AIのプラクティス](production-ai-practices.md) | エンタープライズ向けデプロイパターン | 90分 |
 
 ---
 
 ## 🚀 本番チェックリスト
 
-- [ ] 耐障害性のためのマルチリージョン展開
-- [ ] 認証のためのマネージドアイデンティティ（キー不要）
-- [ ] 監視のためのApplication Insights
-- [ ] コスト予算とアラートを構成
+- [ ] 耐障害性のためのマルチリージョンデプロイ
+- [ ] 認証のためのマネージドID（キー不要）
+- [ ] 監視のための Application Insights
+- [ ] コスト予算とアラートを設定
 - [ ] セキュリティスキャンを有効化
 - [ ] CI/CD パイプラインの統合
 - [ ] 災害復旧計画
@@ -43,20 +43,22 @@
 
 ## 🏗️ アーキテクチャパターン
 
-### パターン1：マイクロサービスAI
+### Pattern 1: マイクロサービスAI
 
 ```mermaid
 graph LR
-    Gateway[APIゲートウェイ] --> AI[AIサービス] --> Models[Microsoft Foundry モデル]
+    Gateway[APIゲートウェイ] --> AI[AIサービス] --> Models[マイクロソフト ファウンドリ モデル]
     Gateway --> Auth[認証サービス]
     AI --> Data[データストア]
 ```
-### パターン2：イベント駆動AI
+
+### Pattern 2: Event-Driven AI
 
 ```mermaid
 graph LR
-    EventGrid[イベント グリッド] --> Functions[ファンクション] --> Pipeline[AI パイプライン]
+    EventGrid[イベント グリッド] --> Functions[関数] --> Pipeline[AI パイプライン]
 ```
+
 ---
 
 ## 🔐 セキュリティのベストプラクティス
@@ -80,12 +82,12 @@ properties: {
 
 ## 💰 コスト最適化
 
-| 戦略 | 削減率 |
+| Strategy | Savings |
 |----------|---------|
-| ゼロスケール（Container Apps） | 60-80% |
-| 開発で消費ベースのプランを利用 | 50-70% |
-| スケジュールによるスケーリング | 30-50% |
-| 予約容量 | 20-40% |
+| Scale to zero (Container Apps) | 60-80% |
+| Use consumption tiers for dev | 50-70% |
+| Scheduled scaling | 30-50% |
+| Reserved capacity | 20-40% |
 
 ```bash
 # 予算アラートを設定する
@@ -98,16 +100,16 @@ az consumption budget create \
 
 ---
 
-## 📊 監視の設定
+## 📊 モニタリング設定
 
 ```bash
-# ログをストリーミングする
+# ログのストリーミング
 azd monitor --logs
 
-# Application Insights を確認する
+# Application Insights を確認
 azd monitor --overview
 
-# メトリクスを表示する
+# メトリクスを表示
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -115,10 +117,10 @@ az monitor metrics list --resource <resource-id>
 
 ## 🔗 ナビゲーション
 
-| 方向 | 章 |
+| Direction | Chapter |
 |-----------|---------|
-| <strong>前の章</strong> | [第7章：トラブルシューティング](../chapter-07-troubleshooting/README.md) |
-| <strong>コース完了</strong> | [コースホーム](../../README.md) |
+| **Previous** | [第7章: トラブルシューティング](../chapter-07-troubleshooting/README.md) |
+| **Course Complete** | [コースホーム](../../README.md) |
 
 ---
 
@@ -132,6 +134,6 @@ az monitor metrics list --resource <resource-id>
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責事項**:
-本書類は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されました。正確性の確保に努めておりますが、自動翻訳には誤りや不正確な箇所が含まれている可能性があることにご注意ください。原文（原語）が正本として扱われるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用に起因する誤解や誤訳について、当方は一切責任を負いません。
+**免責事項**：
+本書類は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を期していますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知おきください。原文の原語版が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じたいかなる誤解や解釈違いについても、当方は責任を負いかねます。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

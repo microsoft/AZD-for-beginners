@@ -1,6 +1,6 @@
-# 第1章: 基礎 & クイックスタート
+# 第1章: 基礎とクイックスタート
 
-**📚 コース**: [AZD For Beginners](../../README.md) | **⏱️ 期間**: 30～45分 | **⭐ 難易度**: 初級
+**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 30-45 minutes | **⭐ Complexity**: Beginner
 
 ---
 
@@ -8,31 +8,33 @@
 
 この章では Azure Developer CLI (azd) の基本を紹介します。コアコンセプトを学び、ツールをインストールし、最初のアプリケーションを Azure にデプロイします。
 
-> 2026年3月の `azd 1.23.12` で検証済み。
+> `azd 1.25.6` に対して 2026年6月に検証済み。
 
 ## 学習目標
 
-この章を完了することで以下のことができるようになります：
-- Azure Developer CLI の概要と Azure CLI との違いを理解する
-- お使いのプラットフォームに AZD をインストールして設定する
-- `azd up` を使って最初のアプリケーションを Azure にデプロイする
+この章を完了すると、以下ができるようになります:
+- Azure Developer CLI が何であるか、Azure CLI とどのように異なるかを理解する
+- 使用しているプラットフォームに AZD をインストールして設定する
+- `azd up` で最初のアプリケーションを Azure にデプロイする
 - `azd down` でリソースをクリーンアップする
 
 ---
 
-## 📚 レッスン一覧
+## 📚 レッスン
 
 | # | レッスン | 説明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [AZDの基本](azd-basics.md) | コアコンセプト、用語、プロジェクト構成 | 15分 |
-| 2 | [インストール＆セットアップ](installation.md) | プラットフォーム別インストールガイド | 10分 |
-| 3 | [最初のプロジェクト](first-project.md) | ハンズオン：Webアプリを Azure にデプロイ | 20分 |
+| 1 | [AZD Basics](azd-basics.md) | コア概念、用語、プロジェクト構成 | 15分 |
+| 2 | [Installation & Setup](installation.md) | プラットフォーム別のインストールガイド | 10分 |
+| 3 | [Your First Project](first-project.md) | ハンズオン: Web アプリを Azure にデプロイ | 20分 |
+| 4 | [Bring Your Own App](bring-your-own-app.md) | 既存のプロジェクトに azd を追加する | 15分 |
+| 5 | [Dev Containers & Codespaces](dev-containers.md) | 開発コンテナを使った再現可能な azd 環境 | 15分 |
 
 ---
 
-## ✅ ここから開始: セットアップ確認
+## ✅ ここから開始: セットアップの検証
 
-開始前に、ローカルマシンが第1章のテンプレートに対応しているか確認してください：
+始める前に、ローカルマシンが第1章のテンプレートに対応していることを確認してください:
 
 **Windows:**
 ```powershell
@@ -44,25 +46,25 @@
 bash ./validate-setup.sh
 ```
 
-スクリプトでツールの不足が報告される場合は、先にそれを解決してから章を進めてください。
+スクリプトがツールの欠如を報告した場合は、まずそれらを修正してから章を続けてください。
 
 ---
 
 ## 🚀 クイックスタート
 
 ```bash
-# インストールを確認する
+# インストールを確認
 azd version
 
-# AZDの認証を行う
-# オプション: Azure CLIコマンドを直接実行する場合はaz login
+# AZD の認証
+# 任意: Azure CLI コマンドを直接実行する場合は az login
 azd auth login
 
 # 最初のアプリをデプロイする
 azd init --template todo-nodejs-mongo
 azd up
 
-# 完了したらクリーンアップする
+# 完了したらクリーンアップ
 azd down --force --purge
 ```
 
@@ -70,13 +72,13 @@ azd down --force --purge
 
 ## ✅ 成功基準
 
-この章を終えた後には、以下のことができるはずです：
+この章を完了した後、次のことができるはずです:
 
 ```bash
-azd version              # インストールされているバージョンを表示します
+azd version              # インストール済みのバージョンを表示します
 azd init --template todo-nodejs-mongo  # プロジェクトを初期化します
-azd up                   # Azureにデプロイします
-azd show                 # 実行中のアプリのURLを表示します
+azd up                   # Azure にデプロイします
+azd show                 # 実行中のアプリの URL を表示します
 azd down --force --purge # リソースをクリーンアップします
 ```
 
@@ -84,22 +86,22 @@ azd down --force --purge # リソースをクリーンアップします
 
 ## 🔗 ナビゲーション
 
-| 方向 | 章 |
+| Direction | Chapter |
 |-----------|---------|
-| <strong>次へ</strong> | [第2章: AIファースト開発](../chapter-02-ai-development/README.md) |
-| <strong>スキップして</strong> | [第3章: 設定](../chapter-03-configuration/README.md) |
+| **Next** | [Chapter 2: AI-First Development](../chapter-02-ai-development/README.md) |
+| **Skip to** | [Chapter 3: Configuration](../chapter-03-configuration/README.md) |
 
 ---
 
-## 📖 関連リソース
+## 📖 関連資料
 
-- [コマンド チートシート](../../resources/cheat-sheet.md)
+- [Command Cheat Sheet](../../resources/cheat-sheet.md)
 - [FAQ](../../resources/faq.md)
-- [用語集](../../resources/glossary.md)
+- [Glossary](../../resources/glossary.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責事項**:  
-本書類は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性には努めていますが、自動翻訳には誤りや不正確な箇所が含まれる可能性があることをご承知おきください。原文の言語で記述された文書が正式な情報源とみなされます。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じたいかなる誤解や誤訳についても、当方は責任を負いかねます。
+**免責事項**：
+本書類は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を期していますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知おきください。原文の原語版が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じたいかなる誤解や解釈違いについても、当方は責任を負いかねます。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

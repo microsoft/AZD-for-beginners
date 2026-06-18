@@ -1,59 +1,59 @@
-# 2. Validate a Template
+# 2. テンプレートの検証
 
-> Validated against `azd 1.23.12` in March 2026.
+> 2026年6月に `azd 1.25.6` で検証済み。
 
-!!! tip "このモジュールの終了時点で次のことができるようになります"
+!!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
 
-    - [ ] AI ソリューションのアーキテクチャを分析する
-    - [ ] AZD のデプロイワークフローを理解する
-    - [ ] GitHub Copilot を使用して AZD の使用方法について支援を得る
-    - [ ] **ラボ 2:** AI Agents テンプレートをデプロイして検証する
+    - [ ] Analyze the AI Solution Architecture
+    - [ ] Understand the AZD Deployment Workflow
+    - [ ] Use GitHub Copilot to get help on AZD usage
+    - [ ] **Lab 2:** AI Agents テンプレートをデプロイして検証する
 
 ---
 
 
 ## 1. Introduction
 
-The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) or `azd` is an open-source commandline tool that streamlines the developer workflow when building and deploying applications to Azure. 
+The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) or `azd` は、アプリケーションを Azure に構築およびデプロイする際の開発者ワークフローを合理化するオープンソースのコマンドラインツールです。 
 
-[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) are standardized repositories that include sample application code, _infrastructure-as-code_ assets, and `azd` configuration files for a cohesive solution architecture. Provisioning the infrastructure becomes as simple as an `azd provision` command - while using `azd up` allows you to provision infrastructure **and** deploy your application at one shot!
+[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) は、サンプルアプリケーションコード、_infrastructure-as-code_ のアセット、および統合されたソリューションアーキテクチャのための `azd` 設定ファイルを含む標準化されたリポジトリです。インフラのプロビジョニングは `azd provision` コマンドを実行するだけで簡単に行え、`azd up` を使えばインフラのプロビジョニングとアプリケーションのデプロイを一度に行うことができます！
 
-As a result, jumpstarting your application development process can be as simple as finding the right _AZD Starter template_ that comes closest to your application and infrastructure needs - then customizing the repository to suit your scenario requirements.
+その結果、アプリケーション開発プロセスの立ち上げは、アプリケーションとインフラ要件に最も近い _AZD Starter template_ を見つけ、それをシナリオ要件に合わせてリポジトリをカスタマイズするだけで済む場合があります。
 
-Before we begin, let's make sure you have the Azure Developer CLI installed.
+始める前に、Azure Developer CLI がインストールされていることを確認しましょう。
 
-1. Open a VS Code terminal and type this command:
+1. VS Code のターミナルを開き、次のコマンドを入力します：
 
       ```bash title="" linenums="0"
       azd version
       ```
 
-1. You should see something like this!
+1. 以下のような表示が出ます！
 
       ```bash title="" linenums="0"
-      azd version 1.23.12 (commit <current-build>)
+      azd version 1.25.6 (commit <current-build>)
       ```
 
-**You are now ready to select and deploy a template with azd**
+**これで azd を使ってテンプレートを選択およびデプロイする準備が整いました**
 
 ---
 
 ## 2. Template Selection
 
-The Microsoft Foundry platform comes with a [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that cover popular solution scenarios like _multi-agent workflow atomation_ and _multi-modal content processing_. You can also discover these templates by visiting the Microsoft Foundry portal.
+Microsoft Foundry プラットフォームには、[set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) が用意されており、_multi-agent workflow atomation_ や _multi-modal content processing_ といった人気のあるソリューションシナリオをカバーしています。これらのテンプレートは Microsoft Foundry ポータルでも確認できます。
 
 1. Visit [https://ai.azure.com/templates](https://ai.azure.com/templates)
-1. Log into the Microsoft Foundry portal when prompted - you will see something like this.
+1. プロンプトが表示されたら Microsoft Foundry ポータルにログインします - 次のような画面が表示されます。
 
-![テンプレート選択](../../../../../translated_images/ja/01-pick-template.60d2d5fff5ebc374.webp)
+![選択](../../../../../translated_images/ja/01-pick-template.60d2d5fff5ebc374.webp)
 
 
 The **Basic** options are your starter templates:
 
-1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) that deploys a basic chat application _with your data_ to Azure Container Apps. Use this to explore a basic AI chatbot scenario.
-1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) that also deploys a standard AI Agent (with the Foundry Agents). Use this to get familiar with agentic AI solutions involving tools and models.
+1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) は、基本的なチャットアプリケーションを _with your data_ で Azure Container Apps にデプロイします。基本的な AI チャットボットのシナリオを探索するために使用してください。
+1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) は、Foundry Agents を使った標準的な AI エージェントもデプロイします。ツールやモデルを用いたエージェント型 AI ソリューションに慣れるために使ってください。
 
-Visit the second link in a new browser tab (or click `Open in GitHub` for the related card). You should see the repository for this AZD Template. Take a minute to explore the README. The application architecture looks like this:
+関連するカードの `Open in GitHub` をクリックするか、2つ目のリンクを新しいブラウザタブで開いてください。該当する AZD テンプレートのリポジトリが表示されます。README を少し確認してみましょう。アプリケーションのアーキテクチャは次のようになっています:
 
 ![アーキテクチャ](../../../../../translated_images/ja/architecture.8cec470ec15c65c7.webp)
 
@@ -61,14 +61,14 @@ Visit the second link in a new browser tab (or click `Open in GitHub` for the re
 
 ## 3. Template Activation
 
-Let's try to deploy this template and make sure it is valid. We'll follow the guidelines in the [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) section.
+このテンプレートをデプロイして有効であることを確認してみましょう。[Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) セクションのガイドラインに従います。
 
-1. Choose a working environment for the template repository:
+1. テンプレートリポジトリの作業環境を選択します:
 
       - **GitHub Codespaces**: Click [this link](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) and confirm `Create codespace`
       - **Local clone or dev container**: Clone `Azure-Samples/get-started-with-ai-agents` and open it in VS Code
 
-1. Wait until the VS Code terminal is ready, then type the following command:
+1. VS Code のターミナルが準備できるまで待ち、次のコマンドを入力します：
 
    ```bash title="" linenums="0"
    azd up
@@ -76,44 +76,44 @@ Let's try to deploy this template and make sure it is valid. We'll follow the gu
 
 Complete the workflow steps that this will trigger:
 
-1. You will be prompted to log into Azure - follow instructions to authenticate
-1. Enter a unique environment name for you - e.g., I used `nitya-mshack-azd`
-1. This  will create a `.azure/` folder - you will see a subfolder with the env name
-1. You will be prompted to select a subscription name - select the default
-1. You will be prompted for a location - use `East US 2`
+1. プロンプトが表示されたら Azure にサインインします - 指示に従って認証してください
+1. 一意の環境名を入力します - 例: 私は `nitya-mshack-azd` を使用しました
+1. これにより `.azure/` フォルダーが作成されます - 環境名のサブフォルダーが表示されます
+1. サブスクリプション名の選択を促されます - デフォルトを選択してください
+1. ロケーションを尋ねられます - `East US 2` を使用してください
 
-Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
+ここからはプロビジョニングが完了するまで待ちます。**これには 10～15 分かかります**
 
-1. When done, your console will show a SUCCESS message like this:
+1. 完了すると、コンソールに次のような SUCCESS メッセージが表示されます:
       ```bash title="" linenums="0"
       SUCCESS: Your up workflow to provision and deploy to Azure completed in 10 minutes 17 seconds.
       ```
-1. Your Azure Portal will now have a provisioned resource group with that env name:
+1. あなたの Azure ポータルには、その環境名のプロビジョニング済みリソースグループが表示されます：
 
-      ![プロビジョン済みインフラ](../../../../../translated_images/ja/02-provisioned-infra.46c706b14f56e0bf.webp)
+      ![インフラ](../../../../../translated_images/ja/02-provisioned-infra.46c706b14f56e0bf.webp)
 
-1. **You are now ready to validate the deployed infrastructure and application**.
+1. <strong>これでプロビジョニングされたインフラとアプリケーションを検証する準備が整いました</strong>。
 
 ---
 
 ## 4. Template Validation
 
-1. Visit Azure Portal [Resource Groups](https://portal.azure.com/#browse/resourcegroups) page - log in when prompted
-1. Click on RG for your environment name - you see the page above
+1. Azure ポータルの [Resource Groups](https://portal.azure.com/#browse/resourcegroups) ページにアクセスします - プロンプトが表示されたらサインインします
+1. 環境名の RG をクリックします - 上記のページが表示されます
 
-      - click on the Azure Container Apps resource
-      - click on the Application Url in the _Essentials_ section (top right)
+      - Azure Container Apps リソースをクリックします
+      - _Essentials_ セクション（右上）の Application Url をクリックします
 
-1. You should see a hosted application front-end UI like this:
+1. 次のようなホストされたアプリケーションのフロントエンド UI が表示されるはずです：
 
    ![アプリ](../../../../../translated_images/ja/03-test-application.471910da12c3038e.webp)
 
-1. Try asking a couple of [sample questions](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
+1. [sample questions](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md) をいくつか試してみてください
 
       1. Ask: ```What is the capital of France?``` 
       1. Ask: ```What's the best tent under $200 for two people, and what features does it include?```
 
-1. You should get answers similar to what is shown below. _But how does this work?_ 
+1. 以下のような回答が得られるはずです。_でも、これはどうやって動作しているのでしょうか？_ 
 
       ![アプリ](../../../../../translated_images/ja/03-test-question.521c1e863cbaddb6.webp)
 
@@ -121,95 +121,95 @@ Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
 
 ## 5.  Agent Validation
 
-The Azure Container App deploys an endpoint that connects to the AI Agent provisioned in the Microsoft Foundry project for this template. Let's take a look at what that means.
+Azure Container App は、このテンプレートの Microsoft Foundry プロジェクトでプロビジョニングされた AI エージェントに接続するエンドポイントをデプロイします。これが何を意味するのかを見てみましょう。
 
-1. Return to the Azure Portal _Overview_ page for your resource group
+1. Azure ポータルのリソースグループの _Overview_ ページに戻ります
 
-1. Click on the `Microsoft Foundry` resource in that list
+1. リスト内の `Microsoft Foundry` リソースをクリックします
 
-1. You should see this. Click the `Go to Microsoft Foundry Portal` button. 
+1. 次の画面が表示されます。`Go to Microsoft Foundry Portal` ボタンをクリックしてください。 
    ![Foundry](../../../../../translated_images/ja/04-view-foundry-project.fb94ca41803f28f3.webp)
 
-1. You should see the Foundry Project page for your AI application
-   ![プロジェクト](../../../../../translated_images/ja/05-visit-foundry-portal.d734e98135892d7e.webp)
+1. AI アプリケーションの Foundry プロジェクトページが表示されます
+   ![Project](../../../../../translated_images/ja/05-visit-foundry-portal.d734e98135892d7e.webp)
 
-1. Click on `Agents` - you see the default Agent provisioned in your project
+1. `Agents` をクリックします - プロジェクトにプロビジョニングされたデフォルトのエージェントが表示されます
    ![Agents](../../../../../translated_images/ja/06-visit-agents.bccb263f77b00a09.webp)
 
-1. Select it - and you see the Agent details. Note the following:
+1. 選択すると、エージェントの詳細が表示されます。以下に注意してください：
 
-      - The agent uses File Search by default (always)
-      - The agent `Knowledge` indicates it has 32 files uploaded (for file search)
+      - エージェントはデフォルトで File Search を使用します（常に）
+      - エージェントの `Knowledge` は、32 ファイルがアップロードされていることを示しています（ファイル検索用）
       ![Agents](../../../../../translated_images/ja/07-view-agent-details.0e049f37f61eae62.webp)
 
-1. Look for the `Data+indexes` option in the left menu and click for details. 
+1. 左メニューの `Data+indexes` オプションを探してクリックし、詳細を表示します。 
 
-      - You should see the 32 data files uploaded for knowledge.
-      - These will correspond to the 12 customer files and 20 product files under `src/files` 
-      ![データ](../../../../../translated_images/ja/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
+      - 知識用にアップロードされた 32 個のデータファイルが表示されるはずです。
+      - これらは `src/files` の下にある 12 個の customer ファイルと 20 個の product ファイルに対応します
+      ![Data](../../../../../translated_images/ja/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
-**You validated Agent operation!** 
+**エージェントの動作を検証しました！** 
 
-1. The agent responses are grounded in the knowledge in those files. 
-1. You can now ask questions related to that data, and get grounded responses.
-1. Example: `customer_info_10.json` describes the 3 purchases made by "Amanda Perez"
+1. エージェントの応答は、これらのファイル内の知識に基づいています。 
+1. これで、そのデータに関連する質問をして、根拠のある応答を得ることができます。
+1. 例: `customer_info_10.json` は "Amanda Perez" が行った 3 回の購入を記述しています
 
-Revisit the browser tab with the Container App endpoint and ask: `What products does Amanda Perez own?`. You should see something like this:
+Container App のエンドポイントが開かれているブラウザタブに戻り、`What products does Amanda Perez own?` と尋ねてみてください。次のような表示が得られるはずです：
 
-![データ](../../../../../translated_images/ja/09-ask-in-aca.4102297fc465a4d5.webp)
+![Data](../../../../../translated_images/ja/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
 ## 6. Agent Playground
 
-Let's build a bit more intuition for the capabilities of Microsoft Foundry, by taking the Agent for a spin in the Agents Playground. 
+Microsoft Foundry の機能についてより直感的に理解するため、Agents Playground でエージェントを動かしてみましょう。 
 
-1. Return to the `Agents` page in Microsoft Foundry - select the default agent
-1. Click the `Try in Playground` option - you should get a Playground UI like this
-1. Ask the same question: `What products does Amanda Perez own?`
+1. Microsoft Foundry の `Agents` ページに戻り、デフォルトエージェントを選択します
+1. `Try in Playground` オプションをクリックすると、次のような Playground UI が表示されます
+1. 同じ質問をします: `What products does Amanda Perez own?`
 
-    ![データ](../../../../../translated_images/ja/09-ask-in-playground.a1b93794f78fa676.webp)
+    ![Data](../../../../../translated_images/ja/09-ask-in-playground.a1b93794f78fa676.webp)
 
-You get the same (or similar) response - but you also get additional information that you can use to understand the quality, cost, and performance of your agentic app. For example:
+同じ（または類似の）応答が得られますが、エージェント型アプリの品質、コスト、パフォーマンスを理解するために役立つ追加情報も得られます。例えば：
 
-1. Note that the response cites data files used to "ground" the response
-1. Hover over any of these file labels - does the data match your query and displayed response?
+1. 応答が「根拠」として使用したデータファイルを引用していることに注意してください
+1. これらのファイルラベルにカーソルを合わせると、データがあなたのクエリと表示された応答に一致しているか確認できますか？
 
-You also see a _stats_ row below the response. 
+応答の下に _stats_ 行も表示されます。 
 
-1. Hover over any metric - e.g., Safety. You see something like this
-1. Does the assessed rating match your intuition for the response safety level?
+1. 任意のメトリック（例: Safety）にカーソルを合わせてみてください。次のような表示が出ます
+1. 評価された格付けは、応答の安全性レベルに対するあなたの直感と一致していますか？
 
-      ![データ](../../../../../translated_images/ja/10-view-run-info-meter.6cdb89a0eea5531f.webp)
+      ![Data](../../../../../translated_images/ja/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
 ---
 
 ## 7. Built-in Observability
 
-Observability is about instrumenting your application to generate data that can be used to understand, debug, and optimize, its operations. To get a sense for this:
+Observability（可観測性）とは、アプリケーションの動作を理解、デバッグ、最適化するために使用できるデータを生成するようにアプリケーションに計装することです。これを把握するために次の操作を行ってください：
 
-1. Click the `View Run Info` button - you should see this view. This is an example of [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) in action. _You can also get this view by clicking Thread Logs in the top-level menu_.
+1. `View Run Info` ボタンをクリックします - このビューが表示されます。これは [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) の実例です。_このビューはトップレベルメニューの Thread Logs をクリックしても表示できます_。
 
-   - Get a sense for the run steps and tools engaged by the agent
-   - Understand total Token count (vs. output tokens usage) for response
-   - Understand the latency and where time is being spent in execution
+   - 実行ステップとエージェントが使用したツールの概要を把握する
+   - 応答に対するトークンの総数（と出力トークンの使用量）を理解する
+   - レイテンシーと実行にどこで時間が費やされているかを理解する
 
       ![Agent](../../../../../translated_images/ja/10-view-run-info.b20ebd75fef6a1cc.webp)
 
-1. Click the `Metadata` tab to see additional attributes for the run, that may provide useful context for debugging issues later.   
+1. `Metadata` タブをクリックして、後で問題をデバッグするための有用なコンテキストを提供する可能性のある追加属性を確認します。   
 
       ![Agent](../../../../../translated_images/ja/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 
-1. Click the `Evaluations` tab to see auto-assessments made on the agent response. These include safety evaluations (e.g., Self-harm) and agent-specifc evaluations (e.g., Intent resolution, Task adherence).
+1. `Evaluations` タブをクリックして、エージェント応答に対して行われた自動評価を確認します。これには安全性評価（例: 自傷行為関連）やエージェント固有の評価（例: 意図の解決、タスクの順守）などが含まれます。
 
       ![Agent](../../../../../translated_images/ja/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
-1. Last but not least, click the `Monitoring` tab in the sidebar menu.
+1. 最後に、サイドバーの `Monitoring` タブをクリックします。
 
-      - Select `Resource usage` tab in the displayed page - and view the metrics.
-      - Track application usage in terms of costs (tokens) and load (requests).
-      - Track applicaton latency to first byte (input processing) and last byte (output).
+      - 表示されたページで `Resource usage` タブを選択し、メトリクスを確認します。
+      - コスト（トークン）と負荷（リクエスト）に関するアプリケーションの使用状況を追跡します。
+      - 初バイト（入力処理）から最終バイト（出力）までのアプリケーションのレイテンシを追跡します。
 
       ![Agent](../../../../../translated_images/ja/13-monitoring-resources.5148015f7311807f.webp)
 
@@ -217,24 +217,24 @@ Observability is about instrumenting your application to generate data that can 
 
 ## 8. Environment Variables
 
-So far, we've walked through the deployment in the browser - and validated that our infrastructure is provisioned and the application is operational. But to work with the application _code-first_, we need to configure our local development environment with the relevant variables required to work with these resources. Using `azd` makes it easy.
+ここまでブラウザでのデプロイ手順を通して、インフラがプロビジョニングされ、アプリケーションが動作していることを検証しました。しかし、コードファーストでアプリケーションを扱うには、これらのリソースと連携するためにローカル開発環境に関連する変数を設定する必要があります。`azd` を使うと簡単です。
 
-1. The Azure Developer CLI [uses environment variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) to store and manage configuration settings for  the application deployments.
+1. Azure Developer CLI は、アプリケーションのデプロイ設定を格納および管理するために [environment variables を使用します](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash)。
 
-1. Environment variables are stored in `.azure/<env-name>/.env` - this scopes them to the `env-name` environment used during deployment and helps you isolate environments between different deployment targets in the same repo.
+1. 環境変数は `.azure/<env-name>/.env` に保存されます - これはデプロイ時に使用された `env-name` 環境にスコープされ、同じリポジトリ内で異なるデプロイターゲット間の環境を分離するのに役立ちます。
 
-1. Environment variables are automatically loaded by the `azd` command whenever it executes a specific command (e.g., `azd up`). Note that `azd` does not automatically read _OS-level_ environment variables (e.g., set in the shell) - instead use `azd set env` and `azd get env` to transfer information within scripts.
+1. 環境変数は、`azd` が特定のコマンド（例: `azd up`）を実行する際に自動的に読み込まれます。`azd` は OS レベルの環境変数（例: シェルで設定されたもの）を自動的に読み取るわけではない点に注意してください - スクリプト内で情報を渡すには `azd set env` と `azd get env` を使用します。
 
 
-Let's try out a few commands:
+いくつかのコマンドを試してみましょう:
 
-1. Get all the environment variables set for `azd` in this environment:
+1. この環境で `azd` に設定されているすべての環境変数を取得します:
 
       ```bash title="" linenums="0"
       azd env get-values
       ```
       
-      You see something like:
+      次のような表示が出ます:
 
       ```bash title="" linenums="0"
       AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4.1-mini"
@@ -244,19 +244,19 @@ Let's try out a few commands:
       ...
       ```
 
-1. Get a specific value - e.g., I want to know if we set the `AZURE_AI_AGENT_MODEL_NAME` value
+1. 特定の値を取得します - 例: `AZURE_AI_AGENT_MODEL_NAME` の値が設定されているか確認したい
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
       
-      You see something like this - it was not set by default!
+      次のような表示が出ます - デフォルトでは設定されていませんでした！
 
       ```bash title="" linenums="0"
       ERROR: key 'AZURE_AI_AGENT_MODEL_NAME' not found in the environment values
       ```
 
-1. Set a new environment variable for `azd`. Here, we update the agent model name. _Note: any changes made will be immediately reflected in the `.azure/<env-name>/.env` file.
+1. `azd` の新しい環境変数を設定します。ここではエージェントのモデル名を更新します。_注意: 変更は `.azure/<env-name>/.env` ファイルに即座に反映されます。_
 
       ```bash title="" linenums="0"
       azd env set AZURE_AI_AGENT_MODEL_NAME gpt-4.1
@@ -264,13 +264,13 @@ Let's try out a few commands:
       azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
       ```
 
-      Now, we should find the value is set:
+      これで値が設定されているはずです:
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
 
-1. Note that some resources are persistent (e.g., model deployments) and will require more than just an `azd up` to force the redeployment. Let's try tearing down the original deployment and redeploying with changed env vars.
+1. 一部のリソースは永続的です（例: モデルのデプロイ）ので、再デプロイを強制するには単なる `azd up` 以上の操作が必要になることに注意してください。元のデプロイを停止して、変更した環境変数で再デプロイしてみましょう。
 
 1. **Refresh** If you had previously deployed infrastructure using an azd template - you can _refresh_ the state of your local environment variables based on the current state of your Azure deployment using this command:
 
@@ -278,21 +278,21 @@ Let's try out a few commands:
       azd env refresh
       ```
 
-      これは、2つ以上のローカル開発環境（例, 複数の開発者を抱えるチーム）間で環境変数を_同期_する強力な方法です - デプロイされたインフラストラクチャを環境変数の状態の基準として利用できます。チームメンバーは単に変数を_更新_するだけで再同期できます。
+      これは、2つ以上のローカル開発環境（例：複数の開発者がいるチーム）間で環境変数を _同期_ する強力な方法であり、デプロイされたインフラストラクチャを環境変数の状態の基準として扱うことができます。チームメンバーは単に変数を _更新_ するだけで再同期できます。
 
 ---
 
 ## 9. おめでとうございます 🏆
 
-あなたはエンドツーエンドのワークフローを完了しました:
+You just completed an end-to-end workflow where you:
 
-- [X] 使用する AZD テンプレートを選択しました
+- [X] 使用したい AZD テンプレートを選択しました
 - [X] サポートされている開発環境でテンプレートを開きました
-- [X] テンプレートをデプロイし、動作を検証しました
+- [X] テンプレートをデプロイし、動作することを確認しました
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責事項**:  
-本書類は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性には努めていますが、自動翻訳には誤りや不正確な箇所が含まれる可能性があることにご注意ください。原文（原言語）の文書が権威ある情報源と見なされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の使用により生じた誤解や解釈の相違について、当方は責任を負いません。
+**免責事項**：
+本書類は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を期していますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知おきください。原文の原語版が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じたいかなる誤解や解釈違いについても、当方は責任を負いかねます。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

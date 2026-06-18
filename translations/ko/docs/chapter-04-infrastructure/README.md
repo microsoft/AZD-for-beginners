@@ -1,31 +1,32 @@
-# 챕터 4: 인프라로서의 코드(IaC) 및 배포
+# 4장: 코드형 인프라 & 배포
 
-**📚 강좌**: [초보자를 위한 AZD](../../README.md) | **⏱️ 소요 시간**: 1-1.5시간 | **⭐ 난이도**: 중급
+**📚 과정**: [초보자를 위한 AZD](../../README.md) | **⏱️ 소요 시간**: 1-1.5시간 | **⭐ 난이도**: 중급
 
 ---
 
 ## 개요
 
-이 장에서는 Bicep 템플릿을 사용한 Infrastructure as Code (IaC) 패턴, 리소스 프로비저닝, Azure Developer CLI를 사용한 배포 전략을 다룹니다.
+이 장에서는 Bicep 템플릿을 활용한 코드형 인프라(IaC) 패턴, 리소스 프로비저닝 및 Azure Developer CLI를 이용한 배포 전략을 다룹니다.
 
-> 다음 환경에서 검증됨: `azd 1.23.12` (2026년 3월).
+> 2026년 6월 `azd 1.25.6` 버전으로 검증됨.
 
 ## 학습 목표
 
-이 장을 완료하면, 다음을 할 수 있습니다:
-- Bicep 템플릿 구조와 구문을 이해합니다
-- `azd provision`으로 Azure 리소스를 프로비저닝합니다
-- `azd deploy`로 애플리케이션을 배포합니다
-- 블루-그린 및 롤링 배포 전략을 구현합니다
+이 장을 완료하면 다음을 할 수 있습니다:
+- Bicep 템플릿 구조 및 구문 이해
+- `azd provision`을 사용한 Azure 리소스 프로비저닝
+- `azd deploy`를 이용한 애플리케이션 배포
+- 블루-그린 및 롤링 배포 전략 구현
 
 ---
 
 ## 📚 강의
 
-| # | 강의 | 설명 | 시간 |
+| # | 강의 | 설명 | 소요 시간 |
 |---|--------|-------------|------|
-| 1 | [리소스 프로비저닝](provisioning.md) | AZD를 사용한 Azure 리소스 관리 | 45분 |
+| 1 | [리소스 프로비저닝](provisioning.md) | AZD를 통한 Azure 리소스 관리 | 45분 |
 | 2 | [배포 가이드](deployment-guide.md) | 애플리케이션 배포 전략 | 45분 |
+| 3 | [자체 템플릿 작성하기](custom-templates.md) | 재사용 가능한 azd 템플릿 빌드 및 게시 | 30분 |
 
 ---
 
@@ -35,7 +36,7 @@
 # 템플릿에서 초기화
 azd init --template azure-functions-python-v2-http
 
-# 생성될 항목 미리보기
+# 생성될 내용을 미리보기
 azd provision --preview
 
 # 인프라만 프로비저닝
@@ -44,7 +45,7 @@ azd provision
 # 코드만 배포
 azd deploy
 
-# 또는 둘 다
+# 또는 둘 다 함께
 azd up
 ```
 
@@ -67,24 +68,24 @@ my-project/
 
 ---
 
-## 🔧 필수 명령
+## 🔧 필수 명령어
 
 | 명령어 | 설명 |
 |---------|-------------|
 | `azd init` | 프로젝트 초기화 |
 | `azd provision` | Azure 리소스 생성 |
 | `azd deploy` | 애플리케이션 코드 배포 |
-| `azd up` | provision + deploy |
+| `azd up` | 프로비저닝 + 배포 |
 | `azd down` | 모든 리소스 삭제 |
 
 ---
 
-## 🔗 탐색
+## 🔗 이동 경로
 
 | 방향 | 챕터 |
 |-----------|---------|
-| <strong>이전</strong> | [챕터 3: 구성](../chapter-03-configuration/README.md) |
-| <strong>다음</strong> | [챕터 5: 멀티 에이전트 솔루션](../chapter-05-multi-agent/README.md) |
+| <strong>이전</strong> | [3장: 구성하기](../chapter-03-configuration/README.md) |
+| <strong>다음</strong> | [5장: 멀티 에이전트 솔루션](../chapter-05-multi-agent/README.md) |
 
 ---
 
@@ -97,6 +98,6 @@ my-project/
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 노력하고 있으나 자동 번역은 오류나 부정확성을 포함할 수 있음을 유의해 주시기 바랍니다. 원문(원어) 문서는 권위 있는 출처로 간주되어야 합니다. 중요한 정보의 경우 전문 번역가의 번역을 권장합니다. 이 번역의 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 당사는 책임을 지지 않습니다.
+**면책 조항**:
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 기하기 위해 노력하고 있으나, 자동 번역은 오류나 부정확한 부분이 있을 수 있음을 유의하시기 바랍니다. 원본 문서의 원어본이 권위 있는 자료로 간주되어야 합니다. 중요한 정보의 경우, 전문가의 인간 번역을 권장합니다. 이 번역 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 당사는 책임을 지지 않습니다.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

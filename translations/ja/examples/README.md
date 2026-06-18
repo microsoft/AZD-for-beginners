@@ -1,51 +1,51 @@
 # 例 - 実用的な AZD テンプレートと構成
 
-**例による学習 - 章ごとに整理**
-- **📚 コース ホーム**: [AZD 入門](../README.md)
-- **📖 章マッピング**: 学習の複雑さごとに整理された例
-- **🚀 ローカル例**: [小売マルチエージェント ソリューション](retail-scenario.md)
-- **🤖 外部 AI サンプル**: Azure Samples リポジトリへのリンク
+**例による学習 - 章別に整理**
+- **📚 コースホーム**: [AZD 入門](../README.md)
+- **📖 章マッピング**: 学習の難易度別に整理された例
+- **🚀 ローカル例**: [小売マルチエージェントソリューション](retail-scenario.md)
+- **🤖 外部AIの例**: Azure Samples リポジトリへのリンク
 
-> **📍 重要: ローカルと外部の例の違い**  
-> このリポジトリには、完全な実装を含む **4つのローカル例** が含まれています:  
-> - **Microsoft Foundry Models Chat** (チャットインターフェイス付きの gpt-4.1 デプロイ)  
+> **📍 重要: ローカルと外部の例**  
+> このリポジトリにはフル実装の **4 つの完全なローカル例** が含まれています:  
+> - **Microsoft Foundry Models Chat** (チャットインターフェイスを含む gpt-4.1 デプロイ)  
 > - **Container Apps** (シンプルな Flask API + マイクロサービス)  
 > - **Database App** (Web + SQL データベース)  
-> - **Retail Multi-Agent** (エンタープライズ向け AI ソリューション)  
+> - **Retail Multi-Agent** (エンタープライズ AI ソリューション)  
 >  
-> 追加の例はクローンできる Azure-Samples リポジトリへの <strong>外部参照</strong> です。
+> 追加の例は、クローンして使用できる Azure-Samples リポジトリへの <strong>外部参照</strong> です。
 
 ## はじめに
 
-このディレクトリでは、ハンズオンの練習を通じて Azure Developer CLI を学ぶための実践的な例と参照を提供します。Retail Multi-Agent シナリオは、このリポジトリに含まれる完全な本番対応の実装です。追加の例は、さまざまな AZD パターンを示す公式の Azure Samples を参照しています。
+このディレクトリは、Azure Developer CLI を実践で学ぶための実用的な例と参照を提供します。Retail Multi-Agent シナリオは、このリポジトリに含まれる完全な本番対応実装です。追加の例は、さまざまな AZD パターンを示す公式 Azure Samples を参照しています。
 
-### 複雑さ評価の凡例
+### 難易度評価の凡例
 
-- ⭐ <strong>初心者</strong> - 基本概念、単一サービス、15-30 分
-- ⭐⭐ <strong>中級</strong> - 複数サービス、データベース統合、30-60 分
-- ⭐⭐⭐ <strong>上級</strong> - 複雑なアーキテクチャ、AI 統合、1-2 時間
-- ⭐⭐⭐⭐ <strong>エキスパート</strong> - 本番対応、エンタープライズパターン、2+ 時間
+- ⭐ <strong>初心者</strong> - 基本概念、単一サービス、15-30 分  
+- ⭐⭐ <strong>中級</strong> - 複数サービス、データベース統合、30-60 分  
+- ⭐⭐⭐ <strong>上級</strong> - 複雑なアーキテクチャ、AI 統合、1-2 時間  
+- ⭐⭐⭐⭐ <strong>エキスパート</strong> - 本番対応、エンタープライズパターン、2 時間以上
 
 ## 🎯 このリポジトリに実際に含まれているもの
 
-### ✅ ローカル実装（すぐに使用可能）
+### ✅ ローカル実装（すぐに使える）
 
-#### [Microsoft Foundry Models チャット アプリケーション](azure-openai-chat/README.md) 🆕
-**このリポジトリにチャットインターフェイス付きの完全な gpt-4.1 デプロイが含まれています**
+#### [Microsoft Foundry Models Chat Application](azure-openai-chat/README.md) 🆕
+**このリポジトリに含まれるチャットインターフェイス付きの完全な gpt-4.1 デプロイ**
 
 - **場所:** `examples/azure-openai-chat/`
-- **複雑さ:** ⭐⭐ (中級)
+- **難易度:** ⭐⭐ (中級)
 - **含まれているもの:**
-  - Microsoft Foundry Models の完全なデプロイ (gpt-4.1)
+  - 完全な Microsoft Foundry Models のデプロイ (gpt-4.1)
   - Python コマンドラインチャットインターフェイス
   - API キーを安全に管理するための Key Vault 統合
-  - Bicep のインフラテンプレート
+  - Bicep インフラストラクチャテンプレート
   - トークン使用量とコストの追跡
-  - レート制限とエラーハンドリング
+  - レート制限とエラー処理
 
-**Quick Start:**
+**クイックスタート:**
 ```bash
-# example に移動する
+# サンプルに移動
 cd examples/azure-openai-chat
 
 # すべてをデプロイする
@@ -56,21 +56,21 @@ pip install -r src/requirements.txt
 python src/chat.py
 ```
 
-**技術:** Microsoft Foundry Models、gpt-4.1、Key Vault、Python、Bicep
+**技術:** Microsoft Foundry Models, gpt-4.1, Key Vault, Python, Bicep
 
-#### [Container App の例](container-app/README.md) 🆕
-<strong>このリポジトリに包括的なコンテナデプロイの例が含まれています</strong>
+#### [Container App Examples](container-app/README.md) 🆕
+<strong>このリポジトリに含まれる包括的なコンテナデプロイの例</strong>
 
 - **場所:** `examples/container-app/`
-- **複雑さ:** ⭐-⭐⭐⭐⭐ (初心者〜上級)
+- **難易度:** ⭐-⭐⭐⭐⭐ (初心者〜上級)
 - **含まれているもの:**
-  - [マスターガイド](container-app/README.md) - コンテナデプロイの包括的な概要
+  - [マスターガイド](container-app/README.md) - コンテナデプロイの完全概要
   - [シンプルな Flask API](../../../examples/container-app/simple-flask-api) - 基本的な REST API の例
   - [マイクロサービスアーキテクチャ](../../../examples/container-app/microservices) - 本番対応のマルチサービスデプロイ
-  - クイックスタート、プロダクション、および高度なパターン
+  - クイックスタート、本番、上級パターン
   - 監視、セキュリティ、コスト最適化
 
-**Quick Start:**
+**クイックスタート:**
 ```bash
 # マスターガイドを見る
 cd examples/container-app
@@ -84,44 +84,44 @@ cd ../microservices
 azd up
 ```
 
-**技術:** Azure Container Apps、Docker、Python Flask、Node.js、C#、Go、Application Insights
+**技術:** Azure Container Apps, Docker, Python Flask, Node.js, C#, Go, Application Insights
 
-#### [小売マルチエージェント ソリューション](retail-scenario.md) 🆕
-<strong>このリポジトリに含まれる完全な本番対応実装</strong>
+#### [Retail Multi-Agent Solution](retail-scenario.md) 🆕
+<strong>このリポジトリに含まれる本番対応の完全実装</strong>
 
 - **場所:** `examples/retail-multiagent-arm-template/`
-- **複雑さ:** ⭐⭐⭐⭐ (上級)
+- **難易度:** ⭐⭐⭐⭐ (上級)
 - **含まれているもの:**
   - 完全な ARM デプロイテンプレート
   - マルチエージェントアーキテクチャ（顧客 + 在庫）
   - Microsoft Foundry Models 統合
-  - RAG を使用した AI 検索
+  - RAG を用いた AI 検索
   - 包括的な監視
   - ワンクリックデプロイスクリプト
 
-**Quick Start:**
+**クイックスタート:**
 ```bash
 cd examples/retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
 
-**技術:** Microsoft Foundry Models、AI Search、Container Apps、Cosmos DB、Application Insights
+**技術:** Microsoft Foundry Models, AI Search, Container Apps, Cosmos DB, Application Insights
 
 ---
 
-## 🔗 外部 Azure Samples（クローンして使用）
+## 🔗 外部 Azure サンプル（クローンして使用）
 
-以下の例は公式の Azure-Samples リポジトリで管理されています。クローンして、さまざまな AZD パターンを確認してください:
+以下の例は公式 Azure-Samples リポジトリで管理されています。クローンしてさまざまな AZD パターンを確認してください。
 
-### シンプルなアプリケーション（章 1-2）
+### シンプルアプリケーション（章 1-2）
 
-| テンプレート | リポジトリ | 複雑さ | サービス |
+| テンプレート | リポジトリ | 難易度 | サービス |
 |:---------|:-----------|:-----------|:---------|
-| **Python Flask API** | [ローカル: simple-flask-api](../../../examples/container-app/simple-flask-api) | ⭐ | Python、Container Apps、Application Insights |
-| <strong>マイクロサービス</strong> | [ローカル: microservices](../../../examples/container-app/microservices) | ⭐⭐⭐⭐ | マルチサービス、Service Bus、Cosmos DB、SQL |
-| **Node.js + MongoDB** | [todo-nodejs-mongo](https://github.com/Azure-Samples/todo-nodejs-mongo) | ⭐ | Express、Cosmos DB、Container Apps |
-| **React + Functions** | [todo-csharp-sql-swa-func](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) | ⭐ | Static Web Apps、Functions、SQL |
-| **Python Flask Container** | [container-apps-store-api](https://github.com/Azure-Samples/container-apps-store-api-microservice) | ⭐ | Python、Container Apps、API |
+| **Python Flask API** | [ローカル: simple-flask-api](../../../examples/container-app/simple-flask-api) | ⭐ | Python, Container Apps, Application Insights |
+| <strong>マイクロサービス</strong> | [ローカル: microservices](../../../examples/container-app/microservices) | ⭐⭐⭐⭐ | Multi-service, Service Bus, Cosmos DB, SQL |
+| **Node.js + MongoDB** | [todo-nodejs-mongo](https://github.com/Azure-Samples/todo-nodejs-mongo) | ⭐ | Express, Cosmos DB, Container Apps |
+| **React + Functions** | [todo-csharp-sql-swa-func](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) | ⭐ | Static Web Apps, Functions, SQL |
+| **Python Flask Container** | [container-apps-store-api](https://github.com/Azure-Samples/container-apps-store-api-microservice) | ⭐ | Python, Container Apps, API |
 
 **使い方:**
 ```bash
@@ -135,17 +135,17 @@ azd up
 
 ### AI アプリケーションの例（章 2、5、8）
 
-| テンプレート | リポジトリ | 複雑さ | フォーカス |
+| テンプレート | リポジトリ | 難易度 | フォーカス |
 |:---------|:-----------|:-----------|:------|
-| **Microsoft Foundry Models チャット** | [ローカル: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | gpt-4.1 デプロイ |
-| **AI Chat Quickstart** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | 基本的な AI チャット |
-| **AI Agents** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | エージェントフレームワーク |
-| **Search + OpenAI Demo** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | RAG パターン |
+| **Microsoft Foundry Models Chat** | [ローカル: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | gpt-4.1 デプロイ |
+| **AI チャット クイックスタート** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | 基本的な AI チャット |
+| **AI エージェント** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | エージェントフレームワーク |
+| **Search + OpenAI デモ** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | RAG パターン |
 | **Contoso Chat** | [contoso-chat](https://github.com/Azure-Samples/contoso-chat) | ⭐⭐⭐⭐ | エンタープライズ AI |
 
-### データベース & 高度なパターン（章 3-8）
+### データベース＆高度なパターン（章 3-8）
 
-| テンプレート | リポジトリ | 複雑さ | フォーカス |
+| テンプレート | リポジトリ | 難易度 | フォーカス |
 |:---------|:-----------|:-----------|:------|
 | **C# + SQL** | [todo-csharp-sql](https://github.com/Azure-Samples/todo-csharp-sql) | ⭐⭐ | データベース統合 |
 | **Python + Cosmos** | [todo-python-mongo-swa-func](https://github.com/Azure-Samples/todo-python-mongo-swa-func) | ⭐⭐ | NoSQL サーバーレス |
@@ -154,25 +154,25 @@ azd up
 
 ## 学習目標
 
-これらの例を通じて学習することで、次のことができます:
-- 実用的なアプリケーションシナリオで Azure Developer CLI のワークフローを練習する
-- さまざまなアプリケーションアーキテクチャとそれらの azd 実装を理解する
-- さまざまな Azure サービスに対する Infrastructure as Code パターンを習得する
-- 構成管理と環境固有のデプロイ戦略を適用する
-- 実用的な文脈で監視、セキュリティ、スケーリングのパターンを実装する
-- 本番デプロイのトラブルシューティングとデバッグの経験を積む
+これらの例を通して学習することで、以下が期待できます:
+- 現実的なアプリケーションシナリオを用いた Azure Developer CLI ワークフローの練習
+- 異なるアプリケーションアーキテクチャとその azd 実装の理解
+- さまざまな Azure サービスに対する Infrastructure as Code パターンの習得
+- 構成管理と環境固有のデプロイ戦略の適用
+- 実践的な文脈での監視、セキュリティ、スケーリングパターンの実装
+- 実際のデプロイシナリオにおけるトラブルシューティングとデバッグの経験構築
 
 ## 学習成果
 
-これらの例を完了すると、次のことができるようになります:
-- Azure Developer CLI を使用してさまざまなアプリケーションタイプを自信を持ってデプロイする
+これらの例を完了すると、以下ができるようになります:
+- Azure Developer CLI を使用してさまざまなタイプのアプリケーションを自信を持ってデプロイする
 - 提供されたテンプレートを自分のアプリケーション要件に適応させる
-- Bicep を使用してカスタムインフラパターンを設計および実装する
+- Bicep を使用してカスタムのインフラパターンを設計・実装する
 - 適切な依存関係を持つ複雑なマルチサービスアプリケーションを構成する
-- 実際のシナリオでセキュリティ、監視、およびパフォーマンスのベストプラクティスを適用する
-- 実務経験に基づいてデプロイをトラブルシュートおよび最適化する
+- 実際のシナリオでのセキュリティ、監視、パフォーマンスのベストプラクティスを適用する
+- 実践経験に基づいてデプロイをトラブルシュートおよび最適化する
 
-## ディレクトリ構造
+## ディレクトリ構成
 
 ```
 Azure Samples AZD Templates (linked externally):
@@ -190,121 +190,122 @@ Azure Samples AZD Templates (linked externally):
 
 ## クイックスタート例
 
-> **💡 AZD に不慣れですか？** まず例 #1（Flask API）から始めてください - 約20分でコア概念を学べます。
+> **💡 AZD を始めたばかりですか？** 例 #1（Flask API）から始めてください — 約 20 分でコア概念を学べます。
 
 ### 初心者向け
-1. **[コンテナアプリ - Python Flask API](../../../examples/container-app/simple-flask-api)** (ローカル) ⭐  
-   scale-to-zero を使用したシンプルな REST API をデプロイします  
-   **所要時間:** 20-25 分 | **コスト:** $0-5/月  
+1. **[Container App - Python Flask API](../../../examples/container-app/simple-flask-api)** (ローカル) ⭐  
+   スケール・トゥ・ゼロ対応のシンプルな REST API をデプロイ  
+   **時間:** 20-25 分 | **コスト:** $0-5/月  
    **学べること:** 基本的な azd ワークフロー、コンテナ化、ヘルスプローブ  
-   **期待される成果:** モニタリング付きで "Hello, World!" を返す動作する API エンドポイント
+   **期待される成果:** 監視付きで "Hello, World!" を返す稼働中の API エンドポイント
 
-2. **[シンプル Web アプリ - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** ⭐  
-   MongoDB を使用した Node.js Express ウェブアプリをデプロイします  
-   **所要時間:** 25-35 分 | **コスト:** $10-30/月  
+2. **[Simple Web App - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** ⭐  
+   MongoDB を使用した Node.js Express Web アプリをデプロイ  
+   **時間:** 25-35 分 | **コスト:** $10-30/月  
    **学べること:** データベース統合、環境変数、接続文字列  
    **期待される成果:** 作成/読み取り/更新/削除機能を持つ Todo リストアプリ
 
-3. **[静的サイト - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** ⭐  
-   Azure Static Web Apps で React の静的サイトをホストします  
-   **所要時間:** 20-30 分 | **コスト:** $0-10/月  
+3. **[Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** ⭐  
+   Azure Static Web Apps で React 静的サイトをホスト  
+   **時間:** 20-30 分 | **コスト:** $0-10/月  
    **学べること:** 静的ホスティング、サーバーレス関数、CDN デプロイ  
-   **期待される成果:** API バックエンドを持つ React UI、 自動 SSL、グローバル CDN
+   **期待される成果:** API バックエンドを持つ React UI、自動 SSL、グローバル CDN
 
 ### 中級者向け
-4. **[Microsoft Foundry Models チャット アプリケーション](../../../examples/azure-openai-chat)** (ローカル) ⭐⭐  
-   gpt-4.1 をチャットインターフェイスと安全な API キー管理でデプロイします  
-   **所要時間:** 35-45 分 | **コスト:** $50-200/月  
+4. **[Microsoft Foundry Models Chat Application](../../../examples/azure-openai-chat)** (ローカル) ⭐⭐  
+   チャットインターフェイスと安全な API キー管理で gpt-4.1 をデプロイ  
+   **時間:** 35-45 分 | **コスト:** $50-200/月  
    **学べること:** Microsoft Foundry Models のデプロイ、Key Vault 統合、トークン追跡  
-   **期待される成果:** gpt-4.1 とコスト監視を備えた動作するチャットアプリケーション
+   **期待される成果:** gpt-4.1 とコスト監視を備えた稼働中のチャットアプリ
 
-5. **[コンテナアプリ - マイクロサービス](../../../examples/container-app/microservices)** (ローカル) ⭐⭐⭐⭐  
+5. **[Container App - Microservices](../../../examples/container-app/microservices)** (ローカル) ⭐⭐⭐⭐  
    本番対応のマルチサービスアーキテクチャ  
-   **所要時間:** 45-60 分 | **コスト:** $50-150/月  
+   **時間:** 45-60 分 | **コスト:** $50-150/月  
    **学べること:** サービス間通信、メッセージキューイング、分散トレーシング  
-   **期待される成果:** 監視を備えた 2 サービスシステム（API ゲートウェイ + 製品サービス）
+   **期待される成果:** モニタリングを備えた 2 サービスシステム（API ゲートウェイ + プロダクトサービス）
 
-6. **[データベースアプリ - C# と Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** ⭐⭐  
-   C# API と Azure SQL Database を持つウェブアプリケーション  
-   **所要時間:** 30-45 分 | **コスト:** $20-80/月  
-   **学べること:** Entity Framework、データベースマイグレーション、接続のセキュリティ  
+6. **[Database App - C# with Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** ⭐⭐  
+   C# API と Azure SQL Database を備えた Web アプリ  
+   **時間:** 30-45 分 | **コスト:** $20-80/月  
+   **学べること:** Entity Framework、データベースマイグレーション、接続セキュリティ  
    **期待される成果:** Azure SQL バックエンドを持つ C# API、スキーマの自動デプロイ
 
-7. **[サーバーレス関数 - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** ⭐⭐  
-   HTTP トリガーと Cosmos DB を使用する Python Azure Functions  
-   **所要時間:** 30-40 分 | **コスト:** $10-40/月  
-   **学べること:** イベント駆動アーキテクチャ、サーバーレススケーリング、NoSQL 統合  
-   **期待される成果:** HTTP リクエストに応答し Cosmos DB に格納する Function App
+7. **[Serverless Function - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** ⭐⭐  
+   HTTP トリガーと Cosmos DB を持つ Python Azure Functions  
+   **時間:** 30-40 分 | **コスト:** $10-40/月  
+   **学べること:** イベント駆動アーキテクチャ、サーバーレスのスケーリング、NoSQL 統合  
+   **期待される成果:** HTTP リクエストに応答し Cosmos DB に保存する Function アプリ
 
-8. **[マイクロサービス - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** ⭐⭐⭐  
-   Container Apps と API ゲートウェイを使用したマルチサービス Java アプリケーション  
-   **所要時間:** 60-90 分 | **コスト:** $80-200/月  
+8. **[Microservices - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** ⭐⭐⭐  
+   Container Apps と API ゲートウェイを使用したマルチサービス Java アプリ  
+   **時間:** 60-90 分 | **コスト:** $80-200/月  
    **学べること:** Spring Boot のデプロイ、サービスメッシュ、ロードバランシング  
    **期待される成果:** サービスディスカバリとルーティングを備えたマルチサービス Java システム
 
 ### Microsoft Foundry テンプレート
 
-1. **[Microsoft Foundry Models チャット アプリ - ローカル例](../../../examples/azure-openai-chat)** ⭐⭐  
-   チャットインターフェイス付きの完全な gpt-4.1 デプロイ  
-   **所要時間:** 35-45 分 | **コスト:** $50-200/月  
-   **期待される成果:** トークン追跡とコスト監視を備えた動作するチャットアプリケーション
+1. **[Microsoft Foundry Models Chat App - Local Example](../../../examples/azure-openai-chat)** ⭐⭐  
+   チャットインターフェイスを備えた完全な gpt-4.1 デプロイ  
+   **時間:** 35-45 分 | **コスト:** $50-200/月  
+   **期待される成果:** トークン追跡とコスト監視を備えた稼働中のチャットアプリ
 
-2. **[Azure Search + OpenAI デモ](https://github.com/Azure-Samples/azure-search-openai-demo)** ⭐⭐⭐  
-   RAG アーキテクチャを備えたインテリジェントなチャットアプリケーション  
-   **所要時間:** 60-90 分 | **コスト:** $100-300/月  
-   **期待される成果:** ドキュメント検索と引用を含む RAG 駆動のチャットインターフェイス
+2. **[Azure Search + OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** ⭐⭐⭐  
+   RAG アーキテクチャによるインテリジェントチャットアプリケーション  
+   **時間:** 60-90 分 | **コスト:** $100-300/月  
+   **期待される成果:** ドキュメント検索と引用を備えた RAG 駆動のチャットインターフェイス
 
-3. **[AI ドキュメント処理](https://github.com/Azure-Samples/azure-ai-document-processing)** ⭐⭐  
-   Azure AI サービスを使用したドキュメント解析  
-   **所要時間:** 40-60 分 | **コスト:** $20-80/月  
+3. **[AI Document Processing](https://github.com/Azure-Samples/azure-ai-document-processing)** ⭐⭐  
+   Azure AI サービスを用いたドキュメント解析  
+   **時間:** 40-60 分 | **コスト:** $20-80/月  
    **期待される成果:** アップロードされたドキュメントからテキスト、表、エンティティを抽出する API
 
-4. **[機械学習パイプライン](https://github.com/Azure-Samples/mlops-v2)** ⭐⭐⭐⭐  
-   Azure Machine Learning を使用した MLOps ワークフロー  
-   **所要時間:** 2-3 時間 | **コスト:** $150-500/月  
-   **期待される成果:** トレーニング、デプロイ、および監視を備えた自動化された ML パイプライン
+4. **[Machine Learning Pipeline](https://github.com/Azure-Samples/mlops-v2)** ⭐⭐⭐⭐  
+   Azure Machine Learning を用いた MLOps ワークフロー  
+   **時間:** 2-3 時間 | **コスト:** $150-500/月  
+   **期待される成果:** トレーニング、デプロイ、監視を備えた自動化 ML パイプライン
 
 ### 実世界のシナリオ
 
 #### **Retail Multi-Agent Solution** 🆕
-**[Complete Implementation Guide](./retail-scenario.md)**
+**[完全な実装ガイド](./retail-scenario.md)**
 
-包括的で本番対応のマルチエージェント顧客サポートソリューションで、AZD を使用したエンタープライズクラスの AI アプリケーションデプロイを示します。このシナリオは以下を提供します：
-- **Complete Architecture**: マルチエージェントシステム（専門のカスタマーサービスおよび在庫管理エージェントを備える）
-- **Production Infrastructure**: マルチリージョンの Microsoft Foundry Models デプロイ、AI Search、Container Apps、および包括的な監視
-- **Ready-to-Deploy ARM Template**: ワンクリックでデプロイ可能な ARM テンプレート（複数の構成モード: Minimal/Standard/Premium）
+AZD を使用したエンタープライズグレードの AI アプリケーションデプロイを示す、包括的で本番対応のマルチエージェント顧客サポートソリューションです。このシナリオは次を提供します:
+
+- <strong>完全なアーキテクチャ</strong>: 専門化されたカスタマーサービスおよび在庫管理エージェントを備えたマルチエージェントシステム
+- **Production Infrastructure**: マルチリージョンの Microsoft Foundry Models デプロイ、AI Search、Container Apps、および包括的なモニタリング
+- **Ready-to-Deploy ARM Template**: 複数の構成モード（Minimal/Standard/Premium）でワンクリックデプロイ
 - **Advanced Features**: レッドチーミングによるセキュリティ検証、エージェント評価フレームワーク、コスト最適化、トラブルシューティングガイド
 - **Real Business Context**: ファイルアップロード、検索統合、動的スケーリングを含む小売業者のカスタマーサポートユースケース
 
 **Technologies**: Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
 
-**Complexity**: ⭐⭐⭐⭐ (Advanced - Enterprise Production Ready)
+**Complexity**: ⭐⭐⭐⭐ (上級 - エンタープライズ本番対応)
 
-**Perfect for**: AI 開発者、ソリューションアーキテクト、及び本番環境のマルチエージェントシステムを構築するチームに最適
+**Perfect for**: AI 開発者、ソリューションアーキテクト、および本番環境のマルチエージェントシステムを構築するチーム
 
-**Quick Start**: 同梱の ARM テンプレートを使用して `./deploy.sh -g myResourceGroup` により 30 分未満で完全ソリューションをデプロイ
+**Quick Start**: 添付の ARM テンプレートを使用して `./deploy.sh -g myResourceGroup` を実行することで、30 分以内に完全なソリューションをデプロイできます
 
-## 📋 使用方法
+## 📋 使用手順
 
 ### 前提条件
 
-例を実行する前に:
-- ✅ Azure サブスクリプション（Owner または Contributor 権限）
-- ✅ Azure Developer CLI がインストールされている ([Installation Guide](../docs/chapter-01-foundation/installation.md))
-- ✅ Docker Desktop が稼働している（コンテナの例用）
-- ✅ 適切な Azure クォータ（例ごとの要件を確認）
+各例を実行する前に:
+- ✅ Owner または Contributor 権限を持つ Azure サブスクリプション
+- ✅ Azure Developer CLI がインストールされていること（[インストールガイド](../docs/chapter-01-foundation/installation.md)）
+- ✅ Docker Desktop が稼働していること（コンテナ例向け）
+- ✅ 適切な Azure クォータ（例ごとの要件を確認してください）
 
-> **💰 コストに関する注意:** すべての例は課金対象となる実際の Azure リソースを作成します。コスト見積もりは各 README ファイルを参照してください。作業終了後は継続的なコストを避けるために `azd down` を実行してください。
+> **💰 コスト警告:** すべての例は実際の Azure リソースを作成し、料金が発生します。コスト見積もりは各 README ファイルを参照してください。継続的なコストを避けるため、終了後は `azd down` を実行することを忘れないでください。
 
 ### ローカルでの例の実行
 
 1. <strong>例をクローンまたはコピー</strong>
    ```bash
-   # 目的の例に移動
+   # 目的の例に移動する
    cd examples/simple-web-app
    ```
 
-2. **AZD 環境の初期化**
+2. **AZD 環境を初期化**
    ```bash
    # 既存のテンプレートで初期化する
    azd init
@@ -313,7 +314,7 @@ Azure Samples AZD Templates (linked externally):
    azd env new my-environment
    ```
 
-3. <strong>環境の設定</strong>
+3. <strong>環境を構成</strong>
    ```bash
    # 必要な変数を設定する
    azd env set AZURE_LOCATION eastus
@@ -336,41 +337,41 @@ Azure Samples AZD Templates (linked externally):
    ```
    
    **期待される成功指標:**
-   - ✅ `azd up` がエラーなく完了する
-   - ✅ サービスエンドポイントが HTTP 200 を返す
-   - ✅ Azure Portal に "Running" ステータスが表示される
-   - ✅ Application Insights がテレメトリを受信している
+   - ✅ `azd up` がエラーなく完了すること
+   - ✅ サービスエンドポイントが HTTP 200 を返すこと
+   - ✅ Azure ポータルで「Running」ステータスが表示されること
+   - ✅ Application Insights がテレメトリを受信していること
 
-> **⚠️ 問題が発生しましたか？** デプロイのトラブルシューティングについては [Common Issues](../docs/chapter-07-troubleshooting/common-issues.md) を参照してください
+> **⚠️ 問題が発生した場合:** デプロイのトラブルシューティングについては [一般的な問題](../docs/chapter-07-troubleshooting/common-issues.md) を参照してください
 
 ### 例の適応
 
 各例には以下が含まれます:
-- **README.md** - 詳細なセットアップとカスタマイズ手順
-- **azure.yaml** - コメント付きの AZD 設定
-- **infra/** - パラメーター説明付きの Bicep テンプレート
+- **README.md** - 詳細なセットアップおよびカスタマイズ手順
+- **azure.yaml** - コメント付きの AZD 構成
+- **infra/** - パラメータ説明付きの Bicep テンプレート
 - **src/** - サンプルアプリケーションコード
-- **scripts/** - 一般的な作業のためのヘルパースクリプト
+- **scripts/** - 共通タスクのヘルパースクリプト
 
 ## 🎯 学習目標
 
 ### 例のカテゴリ
 
-#### <strong>基本的なデプロイ</strong>
+#### <strong>基本デプロイ</strong>
 - 単一サービスアプリケーション
 - シンプルなインフラパターン
 - 基本的な構成管理
-- コスト効率の高い開発セットアップ
+- コスト効率の良い開発セットアップ
 
 #### <strong>高度なシナリオ</strong>
 - マルチサービスアーキテクチャ
 - 複雑なネットワーク構成
 - データベース統合パターン
-- セキュリティおよびコンプライアンス実装
+- セキュリティおよびコンプライアンスの実装
 
 #### <strong>本番対応パターン</strong>
 - 高可用性構成
-- 監視と可観測性
+- モニタリングと可観測性
 - CI/CD 統合
 - 災害復旧構成
 
@@ -389,14 +390,14 @@ Azure Samples AZD Templates (linked externally):
 ### Container App - Python Flask
 **Technologies**: Python Flask, Docker, Container Apps, Container Registry, Application Insights  
 **Complexity**: 初級  
-**Concepts**: コンテナ化、REST API、scale-to-zero、ヘルスプローブ、監視  
-**Location**: [Local Example](../../../examples/container-app/simple-flask-api)
+**Concepts**: コンテナ化、REST API、scale-to-zero、ヘルスプローブ、モニタリング  
+**Location**: [ローカル例](../../../examples/container-app/simple-flask-api)
 
 ### Container App - Microservices Architecture
 **Technologies**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, Container Apps  
 **Complexity**: 上級  
-**Concepts**: マルチサービスアーキテクチャ、サービス間通信、メッセージキュー、分散トレーシング  
-**Location**: [Local Example](../../../examples/container-app/microservices)
+**Concepts**: マルチサービスアーキテクチャ、サービス間通信、メッセージキューイング、分散トレース  
+**Location**: [ローカル例](../../../examples/container-app/microservices)
 
 ### Database App - C# with Azure SQL
 **Technologies**: C# ASP.NET Core, Azure SQL Database, App Service  
@@ -416,28 +417,28 @@ Azure Samples AZD Templates (linked externally):
 ### Microsoft Foundry Examples
 
 #### Microsoft Foundry Models Chat App
-**Technologies**: Microsoft Foundry Models, Cognitive Search, App Service  
+**Technologies**: Microsoft Foundry Models, Azure AI Search, App Service  
 **Complexity**: 中級  
 **Concepts**: RAG アーキテクチャ、ベクトル検索、LLM 統合
 
 #### AI Document Processing
 **Technologies**: Azure AI Document Intelligence, Storage, Functions  
 **Complexity**: 中級  
-**Concepts**: ドキュメント分析、OCR、データ抽出
+**Concepts**: ドキュメント解析、OCR、データ抽出
 
 #### Machine Learning Pipeline
 **Technologies**: Azure ML, MLOps, Container Registry  
 **Complexity**: 上級  
-**Concepts**: モデル訓練、デプロイパイプライン、モニタリング
+**Concepts**: モデル学習、デプロイパイプライン、モニタリング
 
 ## 🛠 設定例
 
 `configurations/` ディレクトリには再利用可能なコンポーネントが含まれます:
 
-### 環境設定
+### 環境構成
 - 開発環境設定
-- ステージング環境設定
-- 本番対応設定
+- ステージング環境構成
+- 本番対応構成
 - マルチリージョンデプロイ設定
 
 ### Bicep モジュール
@@ -448,55 +449,55 @@ Azure Samples AZD Templates (linked externally):
 
 ### ヘルパースクリプト
 - 環境セットアップの自動化
-- データベースマイグレーションスクリプト
+- データベース移行スクリプト
 - デプロイ検証ツール
 - コスト監視ユーティリティ
 
 ## 🔧 カスタマイズガイド
 
-### 使用ケースに合わせた例の適応
+### ユースケースに合わせた例の適応
 
 1. <strong>前提条件の確認</strong>
    - Azure サービス要件を確認
    - サブスクリプションの制限を検証
    - コストの影響を理解
 
-2. <strong>構成の修正</strong>
+2. <strong>構成の変更</strong>
    - `azure.yaml` のサービス定義を更新
    - Bicep テンプレートをカスタマイズ
    - 環境変数を調整
 
 3. <strong>十分なテスト</strong>
    - まず開発環境にデプロイ
-   - 機能性を検証
+   - 機能を検証
    - スケーリングとパフォーマンスをテスト
 
 4. <strong>セキュリティレビュー</strong>
-   - アクセス制御を見直す
+   - アクセス制御を確認
    - シークレット管理を実装
-   - 監視とアラートを有効化
+   - モニタリングとアラートを有効化
 
 ## 📊 比較マトリクス
 
 | Example | Services | Database | Auth | Monitoring | Complexity |
 |---------|----------|----------|------|------------|------------|
-| **Microsoft Foundry Models Chat** (ローカル) | 2 | ❌ | Key Vault | フル | ⭐⭐ |
-| **Python Flask API** (ローカル) | 1 | ❌ | 基本 | フル | ⭐ |
-| **Microservices** (ローカル) | 5+ | ✅ | エンタープライズ | 高度 | ⭐⭐⭐⭐ |
-| Node.js Express Todo | 2 | ✅ | 基本 | 基本 | ⭐ |
-| React SPA + Functions | 3 | ✅ | 基本 | フル | ⭐ |
-| Python Flask Container | 2 | ❌ | 基本 | フル | ⭐ |
-| C# Web API + SQL | 2 | ✅ | フル | フル | ⭐⭐ |
-| Python Functions + SPA | 3 | ✅ | フル | フル | ⭐⭐ |
-| Java Microservices | 5+ | ✅ | フル | フル | ⭐⭐ |
-| Microsoft Foundry Models Chat | 3 | ✅ | フル | フル | ⭐⭐⭐ |
-| AI Document Processing | 2 | ❌ | 基本 | フル | ⭐⭐ |
-| ML Pipeline | 4+ | ✅ | フル | フル | ⭐⭐⭐⭐ |
-| **Retail Multi-Agent** (ローカル) | **8+** | **✅** | <strong>エンタープライズ</strong> | <strong>高度</strong> | **⭐⭐⭐⭐** |
+| **Microsoft Foundry Models Chat** (Local) | 2 | ❌ | Key Vault | Full | ⭐⭐ |
+| **Python Flask API** (Local) | 1 | ❌ | Basic | Full | ⭐ |
+| **Microservices** (Local) | 5+ | ✅ | Enterprise | Advanced | ⭐⭐⭐⭐ |
+| Node.js Express Todo | 2 | ✅ | Basic | Basic | ⭐ |
+| React SPA + Functions | 3 | ✅ | Basic | Full | ⭐ |
+| Python Flask Container | 2 | ❌ | Basic | Full | ⭐ |
+| C# Web API + SQL | 2 | ✅ | Full | Full | ⭐⭐ |
+| Python Functions + SPA | 3 | ✅ | Full | Full | ⭐⭐ |
+| Java Microservices | 5+ | ✅ | Full | Full | ⭐⭐ |
+| Microsoft Foundry Models Chat | 3 | ✅ | Full | Full | ⭐⭐⭐ |
+| AI Document Processing | 2 | ❌ | Basic | Full | ⭐⭐ |
+| ML Pipeline | 4+ | ✅ | Full | Full | ⭐⭐⭐⭐ |
+| **Retail Multi-Agent** (Local) | **8+** | **✅** | **Enterprise** | **Advanced** | **⭐⭐⭐⭐** |
 
-## 🎓 学習パス
+## 🎓 学習ロードマップ
 
-### 推奨進行
+### 推奨進行順
 
 1. **Simple Web App から始める**
    - 基本的な AZD の概念を学ぶ
@@ -504,21 +505,21 @@ Azure Samples AZD Templates (linked externally):
    - 環境管理を実践する
 
 2. **Static Website を試す**
-   - 異なるホスティングオプションを探る
+   - 異なるホスティングオプションを探索
    - CDN 統合について学ぶ
-   - DNS 設定を理解する
+   - DNS 構成を理解する
 
-3. **Container App へ進む**
+3. **Container App に進む**
    - コンテナ化の基本を学ぶ
-   - スケーリングの概念を理解する
-   - Docker を用いて練習する
+   - スケーリング概念を理解する
+   - Docker を使って練習する
 
 4. <strong>データベース統合を追加</strong>
    - データベースプロビジョニングを学ぶ
    - 接続文字列を理解する
    - シークレット管理を実践する
 
-5. <strong>サーバーレスを探る</strong>
+5. **Serverless を探索**
    - イベント駆動アーキテクチャを理解する
    - トリガーとバインディングについて学ぶ
    - API を使って練習する
@@ -531,14 +532,14 @@ Azure Samples AZD Templates (linked externally):
 ## 🔍 適切な例の見つけ方
 
 ### 技術スタック別
-- **Container Apps**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices), Java マイクロサービス
+- **Container Apps**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices), Java Microservices
 - **Node.js**: Node.js Express Todo App, [Microservices API Gateway (Local)](../../../examples/container-app/microservices)
 - **Python**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), [Microservices Product Service (Local)](../../../examples/container-app/microservices), Python Functions + SPA
 - **C#**: [Microservices Order Service (Local)](../../../examples/container-app/microservices), C# Web API + SQL Database, Microsoft Foundry Models Chat App, ML Pipeline
 - **Go**: [Microservices User Service (Local)](../../../examples/container-app/microservices)
-- **Java**: Java Spring Boot マイクロサービス
+- **Java**: Java Spring Boot Microservices
 - **React**: React SPA + Functions
-- **Containers**: [Python Flask (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices), Java マイクロサービス
+- **Containers**: [Python Flask (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices), Java Microservices
 - **Databases**: [Microservices (Local)](../../../examples/container-app/microservices), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
 - **AI/ML**: **[Microsoft Foundry Models Chat (Local)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
 - **Multi-Agent Systems**: **Retail Multi-Agent Solution**
@@ -549,17 +550,17 @@ Azure Samples AZD Templates (linked externally):
 - **Simple REST API**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api)
 - **Monolithic**: Node.js Express Todo, C# Web API + SQL
 - **Static + Serverless**: React SPA + Functions, Python Functions + SPA
-- **Microservices**: [Production Microservices (Local)](../../../examples/container-app/microservices), Java Spring Boot マイクロサービス
+- **Microservices**: [Production Microservices (Local)](../../../examples/container-app/microservices), Java Spring Boot Microservices
 - **Containerized**: [Python Flask (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices)
 - **AI-Powered**: **[Microsoft Foundry Models Chat (Local)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
 - **Multi-Agent Architecture**: **Retail Multi-Agent Solution**
 - **Enterprise Multi-Service**: [Microservices (Local)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
 
-### 難易度別
+### 複雑さレベル別
 - **Beginner**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions
-- **Intermediate**: **[Microsoft Foundry Models Chat (Local)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java マイクロサービス, Microsoft Foundry Models Chat App, AI Document Processing
+- **Intermediate**: **[Microsoft Foundry Models Chat (Local)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Microservices, Microsoft Foundry Models Chat App, AI Document Processing
 - **Advanced**: ML Pipeline
-- **Enterprise Production-Ready**: [Microservices (Local)](../../../examples/container-app/microservices)（メッセージキューを伴うマルチサービス）, **Retail Multi-Agent Solution**（ARM テンプレートデプロイを含む完全なマルチエージェントシステム）
+- **Enterprise Production-Ready**: [Microservices (Local)](../../../examples/container-app/microservices)（メッセージキューイングを伴うマルチサービス）、**Retail Multi-Agent Solution**（ARM テンプレートによる完全なマルチエージェントシステムのデプロイ）
 
 ## 📚 追加リソース
 
@@ -569,27 +570,27 @@ Azure Samples AZD Templates (linked externally):
 - [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
-### コミュニティの例
-- [Azure Samples の AZD テンプレート](https://github.com/Azure-Samples/azd-templates)
-- [Microsoft Foundry のテンプレート](https://github.com/Azure/ai-foundry-templates)
-- [Azure Developer CLI ギャラリー](https://azure.github.io/awesome-azd/)
-- [C# と Azure SQL の Todo アプリ](https://github.com/Azure-Samples/todo-csharp-sql)
-- [Python と MongoDB の Todo アプリ](https://github.com/Azure-Samples/todo-python-mongo)
-- [Node.js と PostgreSQL の Todo アプリ](https://github.com/Azure-Samples/todo-nodejs-mongo)
-- [C# API を持つ React Web アプリ](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+### コミュニティ例
+- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
+- [Microsoft Foundry Templates](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
+- [Todo App with C# and Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
+- [Todo App with Python and MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
+- [Todo App with Node.js and PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [C# API を使った React Web アプリ](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
 - [Azure Container Apps ジョブ](https://github.com/Azure-Samples/container-apps-jobs)
 - [Java を使った Azure Functions](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### ベストプラクティス
-- [Azure Well-Architected フレームワーク](https://learn.microsoft.com/en-us/azure/well-architected/)
-- [クラウド導入フレームワーク](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Cloud Adoption Framework](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
-## 🤝 サンプルの寄稿
+## 🤝 寄稿例
 
-役に立つサンプルを共有したいですか？寄稿を歓迎します！
+共有したい有用な例がありますか？寄稿を歓迎します！
 
 ### 提出ガイドライン
-1. 確立されたディレクトリ構造に従う
+1. 定められたディレクトリ構成に従う
 2. 包括的な README.md を含める
 3. 設定ファイルにコメントを追加する
 4. 提出前に十分にテストする
@@ -611,46 +612,46 @@ example-name/
 
 ---
 
-<strong>プロのヒント</strong>: 技術スタックに合った最も簡単な例から始め、徐々により複雑なシナリオに進んでください。各サンプルは前のものの概念に基づいて構築されています！
+<strong>プロのヒント</strong>: あなたの技術スタックに一致する最も単純な例から始め、徐々により複雑なシナリオに進んでください。各例は前の例の概念に基づいて構築されています！
 
 ## 🚀 始める準備はできましたか？
 
 ### 学習パス
 
-1. **完全な初心者ですか？** → まずは [Flask API](../../../examples/container-app/simple-flask-api) (⭐, 20 分)
-2. **基本的な AZD の知識がありますか？** → [マイクロサービス](../../../examples/container-app/microservices) (⭐⭐⭐⭐, 60 分) を試してください
-3. **AI アプリを構築していますか？** → まずは [Microsoft Foundry Models Chat](../../../examples/azure-openai-chat) (⭐⭐, 35 分) または [Retail Multi-Agent](retail-scenario.md) (⭐⭐⭐⭐, 2+ 時間) を試してください
+1. **完全な初心者ですか？** → [Flask API](../../../examples/container-app/simple-flask-api) から始めてください (⭐, 20 分)
+2. **基本的な AZD の知識がありますか？** → [マイクロサービス](../../../examples/container-app/microservices) を試してみてください (⭐⭐⭐⭐, 60 分)
+3. **AIアプリを構築していますか？** → [Microsoft Foundry Models Chat](../../../examples/azure-openai-chat) から始める (⭐⭐, 35 分) か、[Retail Multi-Agent](retail-scenario.md) を探ってみてください (⭐⭐⭐⭐, 2+ 時間)
 4. **特定の技術スタックが必要ですか？** → 上記の [適切な例の見つけ方](#-finding-the-right-example) セクションを参照してください
 
 ### 次のステップ
 
 - ✅ 上記の [前提条件](#前提条件) を確認する
-- ✅ 自分のスキルレベルに合った例を選ぶ（[複雑さの凡例](#複雑さ評価の凡例) を参照）
-- ✅ サンプルの README をデプロイ前によく読む
-- ✅ テスト後に `azd down` を実行するようリマインダーを設定する
-- ✅ GitHub Issues または Discussions を通じて経験を共有する
+- ✅ 自分のスキルレベルに合った例を選ぶ（[複雑度の凡例](#難易度評価の凡例) を参照）
+- ✅ デプロイする前に例の README をよく読む
+- ✅ テスト後に `azd down` を実行するリマインダーを設定する
+- ✅ GitHub Issues または Discussions で経験を共有する
 
 ### ヘルプが必要ですか？
 
-- 📖 [FAQ](../resources/faq.md) - よくある質問に回答
-- 🐛 [トラブルシューティングガイド](../docs/chapter-07-troubleshooting/common-issues.md) - デプロイの問題を解決する
+- 📖 [FAQ](../resources/faq.md) - よくある質問への回答
+- 🐛 [トラブルシューティング ガイド](../docs/chapter-07-troubleshooting/common-issues.md) - デプロイの問題を修正する
 - 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - コミュニティに質問する
 - 📚 [学習ガイド](../resources/study-guide.md) - 学習を強化する
 
 ---
 
 <strong>ナビゲーション</strong>
-- **📚 コースホーム**: [AZD 入門](../README.md)
+- **📚 コースホーム**: [AZD For Beginners](../README.md)
 - **📖 学習資料**: [学習ガイド](../resources/study-guide.md) | [チートシート](../resources/cheat-sheet.md) | [用語集](../resources/glossary.md)
 - **🔧 リソース**: [FAQ](../resources/faq.md) | [トラブルシューティング](../docs/chapter-07-troubleshooting/common-issues.md)
 
 ---
 
-*最終更新: 2025年11月 | [問題を報告する](https://github.com/microsoft/AZD-for-beginners/issues) | [サンプルを寄稿する](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
+*最終更新: 2025年11月 | [問題を報告する](https://github.com/microsoft/AZD-for-beginners/issues) | [例を寄稿する](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責事項**:
-本書類はAI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) により翻訳されました。正確性の確保に努めていますが、自動翻訳には誤りや不正確さが含まれる可能性があることにご注意ください。重要な情報については、原文（原言語の文書）を権威ある情報源とみなしてください。重要な事項については、専門の翻訳者による人間の翻訳を推奨します。この翻訳の利用により生じたいかなる誤解や誤訳についても、当社は責任を負いません。
+**免責事項**：
+本書類は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を期していますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知おきください。原文の原語版が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じたいかなる誤解や解釈違いについても、当方は責任を負いかねます。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
