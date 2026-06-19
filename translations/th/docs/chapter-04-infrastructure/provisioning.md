@@ -1,47 +1,47 @@
 # การจัดเตรียมทรัพยากร Azure ด้วย AZD
 
 **การนำทางบทเรียน:**
-- **📚 หน้าแรกของหลักสูตร**: [AZD For Beginners](../../README.md)
-- **📖 บทปัจจุบัน**: บทที่ 4 - Infrastructure as Code & การปรับใช้งาน
+- **📚 หน้าแรกคอร์ส**: [AZD สำหรับผู้เริ่มต้น](../../README.md)
+- **📖 บทปัจจุบัน**: บทที่ 4 - โครงสร้างพื้นฐานเป็นโค้ด & การปรับใช้
 - **⬅️ ก่อนหน้า**: [คู่มือการปรับใช้](deployment-guide.md)
 - **➡️ บทถัดไป**: [บทที่ 5: โซลูชัน AI หลายตัวแทน](../../examples/retail-scenario.md)
-- **🔧 ที่เกี่ยวข้อง**: [บทที่ 6: การตรวจสอบก่อนปรับใช้งาน](../chapter-06-pre-deployment/capacity-planning.md)
+- **🔧 ที่เกี่ยวข้อง**: [บทที่ 6: การตรวจสอบก่อนปรับใช้](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## บทนำ
 
-คู่มือฉบับสมบูรณ์นี้ครอบคลุมทุกสิ่งที่คุณต้องรู้เกี่ยวกับการจัดเตรียมและจัดการทรัพยากร Azure โดยใช้ Azure Developer CLI เรียนรู้วิธีการใช้รูปแบบ Infrastructure as Code (IaC) ตั้งแต่การสร้างทรัพยากรพื้นฐานจนถึงสถาปัตยกรรมโครงสร้างพื้นฐานระดับองค์กรขั้นสูงโดยใช้ Bicep, แม่แบบ ARM, Terraform และ Pulumi
+คู่มือที่ครอบคลุมนี้กล่าวถึงทุกสิ่งที่คุณจำเป็นต้องรู้เกี่ยวกับการจัดเตรียมและจัดการทรัพยากร Azure โดยใช้ Azure Developer CLI เรียนรู้การใช้แพตเทิร์นโครงสร้างพื้นฐานเป็นโค้ด (IaC) ตั้งแต่การสร้างทรัพยากรพื้นฐานจนถึงสถาปัตยกรรมโครงสร้างพื้นฐานระดับองค์กรขั้นสูงโดยใช้ Bicep, ARM templates, Terraform และ Pulumi
 
 ## เป้าหมายการเรียนรู้
 
-เมื่อทำคู่มือนี้สำเร็จ คุณจะ:
-- เชี่ยวชาญหลักการ Infrastructure as Code และการจัดเตรียมทรัพยากร Azure
+เมื่อผ่านคู่มือนี้แล้ว คุณจะสามารถ:
+- เชี่ยวชาญหลักการโครงสร้างพื้นฐานเป็นโค้ดและการจัดเตรียมทรัพยากร Azure
 - เข้าใจผู้ให้บริการ IaC หลายรายที่ Azure Developer CLI รองรับ
-- ออกแบบและใช้งานแม่แบบ Bicep สำหรับสถาปัตยกรรมแอปพลิเคชันทั่วไป
-- กำหนดค่าพารามิเตอร์ทรัพยากร ตัวแปร และการตั้งค่าสภาพแวดล้อมเฉพาะ
-- ใช้รูปแบบโครงสร้างพื้นฐานขั้นสูงรวมถึงเครือข่ายและความปลอดภัย
-- จัดการวงจรชีวิตทรัพยากร อัปเดต และการแก้ไขข้อขัดแย้งของการพึ่งพา
+- ออกแบบและใช้ Bicep templates สำหรับสถาปัตยกรรมแอปพลิเคชันทั่วไป
+- กำหนดค่าพารามิเตอร์ตัวแปร และการตั้งค่าสภาพแวดล้อมเฉพาะ
+- ใช้แพตเทิร์นโครงสร้างพื้นฐานขั้นสูงรวมถึงเครือข่ายและความปลอดภัย
+- จัดการวงจรชีวิตของทรัพยากร การอัปเดต และการแก้ไขความสัมพันธ์การขึ้นต่อกัน
 
 ## ผลลัพธ์การเรียนรู้
 
 หลังจากเสร็จสิ้น คุณจะสามารถ:
-- ออกแบบและจัดเตรียมโครงสร้างพื้นฐาน Azure โดยใช้ Bicep และแม่แบบ ARM
-- กำหนดค่าสถาปัตยกรรมการบริการหลายอย่างที่ซับซ้อนพร้อมการพึ่งพาทรัพยากรอย่างเหมาะสม
-- ใช้แม่แบบที่มีพารามิเตอร์สำหรับหลายสภาพแวดล้อมและการตั้งค่าต่าง ๆ
-- แก้ไขปัญหาการจัดเตรียมโครงสร้างพื้นฐานและแก้ไขข้อผิดพลาดการปรับใช้
-- ใช้หลักการของ Azure Well-Architected Framework ในการออกแบบโครงสร้างพื้นฐาน
-- จัดการการอัปเดตโครงสร้างพื้นฐานและใช้กลยุทธ์การเวอร์ชันโครงสร้างพื้นฐาน
+- ออกแบบและจัดเตรียมโครงสร้างพื้นฐาน Azure โดยใช้ Bicep และ ARM templates
+- กำหนดค่าสถาปัตยกรรมหลายบริการที่ซับซ้อนพร้อมการขึ้นต่อกันของทรัพยากรอย่างเหมาะสม
+- ใช้เทมเพลตที่มีพารามิเตอร์สำหรับหลายสภาพแวดล้อมและการตั้งค่าที่แตกต่างกัน
+- แก้ไขปัญหาการจัดเตรียมโครงสร้างพื้นฐานและแก้ปัญหาการปรับใช้ล้มเหลว
+- นำหลักการ Azure Well-Architected Framework มาใช้ในการออกแบบโครงสร้างพื้นฐาน
+- จัดการอัปเดตโครงสร้างพื้นฐานและใช้กลยุทธ์เวอร์ชันโครงสร้างพื้นฐาน
 
 ## ภาพรวมการจัดเตรียมโครงสร้างพื้นฐาน
 
-Azure Developer CLI รองรับผู้ให้บริการ Infrastructure as Code (IaC) หลายราย:
-- **Bicep** (แนะนำ) - ภาษาเฉพาะทางของ Azure
-- **แม่แบบ ARM** - แม่แบบ Azure Resource Manager ที่ใช้ JSON
-- **Terraform** - เครื่องมือโครงสร้างพื้นฐานแบบ Multi-cloud
-- **Pulumi** - โครงสร้างพื้นฐานยุคใหม่ที่ใช้ภาษาการเขียนโปรแกรม
+Azure Developer CLI รองรับผู้ให้บริการโครงสร้างพื้นฐานเป็นโค้ด (IaC) หลายราย:
+- **Bicep** (แนะนำ) - ภาษาที่เฉพาะเจาะจงกับโดเมนของ Azure
+- **ARM Templates** - เทมเพลต Azure Resource Manager แบบ JSON
+- **Terraform** - เครื่องมือโครงสร้างพื้นฐานแบบมัลติคลาวด์
+- **Pulumi** - โครงสร้างพื้นฐานเป็นโค้ดสมัยใหม่ด้วยภาษาโปรแกรม
 
-## การทำความเข้าใจทรัพยากรของ Azure
+## การเข้าใจทรัพยากร Azure
 
-### ลำดับชั้นของทรัพยากร
+### โครงสร้างลำดับชั้นของทรัพยากร
 ```
 Azure Account
 └── Subscriptions
@@ -49,16 +49,16 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### บริการ Azure ทั่วไปสำหรับแอปพลิเคชัน
+### บริการ Azure ที่ใช้บ่อยสำหรับแอปพลิเคชัน
 - **Compute**: App Service, Container Apps, Functions, Virtual Machines
 - **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
 - **Networking**: Virtual Network, Application Gateway, CDN
 - **Security**: Key Vault, Application Insights, Log Analytics
-- **AI/ML**: Cognitive Services, OpenAI, Machine Learning
+- **AI/ML**: Azure AI Services, Azure OpenAI, Azure Machine Learning
 
-## แม่แบบโครงสร้างพื้นฐาน Bicep
+## เทมเพลตโครงสร้างพื้นฐาน Bicep
 
-### โครงสร้างแม่แบบ Bicep พื้นฐาน
+### โครงสร้างเทมเพลต Bicep พื้นฐาน
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -128,7 +128,7 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### รูปแบบ Bicep ขั้นสูง
+### แพตเทิร์น Bicep ขั้นสูง
 
 #### โครงสร้างพื้นฐานแบบโมดูลาร์
 ```bicep
@@ -199,6 +199,200 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
   }
 }
 ```
+
+## 🌐 การใช้ Terraform กับ azd
+
+Bicep เป็นค่าเริ่มต้นของ azd แต่ azd ยังรองรับ **Terraform** — เหมาะหากทีมของคุณได้ใช้มาตรฐานนี้หรือคุณจัดการโครงสร้างพื้นฐานแบบมัลติคลาวด์ ขั้นตอนการทำงาน azd (`azd up`, `azd provision`, `azd down`) เหมือนกันทั้งหมด; เปลี่ยนแค่ภาษาโครงสร้างพื้นฐานและโครงสร้างโฟลเดอร์เท่านั้น
+
+### แจ้ง azd ให้ใช้ Terraform
+
+เพิ่มส่วน `infra` ในไฟล์ `azure.yaml` ชี้ไปที่ผู้ให้บริการ Terraform:
+
+```yaml
+# azure.yaml
+name: my-terraform-app
+infra:
+  provider: terraform   # default is "bicep"
+  path: infra           # folder containing your .tf files
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### โครงสร้างโฟลเดอร์ Terraform
+
+เมื่อใช้ผู้ให้บริการ Terraform โฟลเดอร์ `infra/` ของคุณจะใช้ไฟล์ `.tf` แทน Bicep:
+
+```
+infra/
+├── main.tf            # resource definitions
+├── variables.tf       # input variables
+├── outputs.tf         # outputs azd reads back (endpoints, names)
+├── provider.tf        # azurerm/azurecaf providers + backend
+└── main.tfvars.json   # values azd injects per environment
+```
+
+### ไฟล์ `main.tf` ที่เรียบง่ายที่สุด
+
+```hcl
+# infra/main.tf
+resource "azurerm_resource_group" "rg" {
+  name     = "rg-${var.environment_name}"
+  location = var.location
+  tags     = { "azd-env-name" = var.environment_name }
+}
+
+resource "azurerm_service_plan" "plan" {
+  name                = "plan-${var.environment_name}"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  os_type             = "Linux"
+  sku_name            = "B1"
+}
+```
+
+### วิธีที่ azd เชื่อมต่อกับค่าผลลัพธ์ Terraform ของคุณ
+
+azd อ่านค่าผลลัพธ์ (outputs) ของ Terraform เพื่อเรียนรู้จุดเชื่อมต่อและนำค่าจากสภาพแวดล้อมกลับมาใช้ในแอปชื่อ output สำคัญ—azd มองหาชื่อเฉพาะ:
+
+```hcl
+# infra/outputs.tf
+output "AZURE_LOCATION" {
+  value = var.location
+}
+
+output "SERVICE_WEB_ENDPOINT_URL" {
+  value = azurerm_linux_web_app.web.default_hostname
+}
+```
+
+> **สำคัญ:** azd ใช้แท็ก `azd-env-name` และค่าผลลัพธ์ `AZURE_*` เพื่อติดตามทรัพยากรในแต่ละสภาพแวดล้อม กรุณาเพิ่มแท็กให้กลุ่มทรัพยากรของคุณด้วย `"azd-env-name" = var.environment_name` เสมอ เพื่อที่คำสั่ง `azd down` จะสามารถค้นหาและลบทั้งหมดได้
+
+### การปรับใช้ด้วย Terraform
+
+คำสั่งเหมือนกับ Bicep เป๊ะ:
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd รัน 'terraform plan' เบื้องหลัง
+azd up                    # จัดเตรียม + ปล่อยใช้งาน
+azd down --force          # ทำลายทรัพยากรที่จัดการโดย Terraform
+```
+
+> **ข้อกำหนดล่วงหน้า:** ต้องติดตั้ง Terraform และตั้งไว้ใน `PATH` ของคุณ azd จัดการ *ขั้นตอนการทำงาน* ของ Terraform แต่ไม่ติดตั้ง Terraform ให้ สำหรับสถานะโดยค่าเริ่มต้น azd ใช้สถานะในเครื่อง; สำหรับทีม ควรกำหนด backend ระยะไกล (เช่น Azure Storage backend) ในไฟล์ `provider.tf`
+
+สำหรับตัวอย่างเริ่มต้นแบบ Terraform พร้อมใช้งาน ดูที่ [Awesome AZD gallery](https://azure.github.io/awesome-azd/) และกรองสำหรับ Terraform หรือดูเอกสารทางการ [azd Terraform documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd)
+
+## 🧩 การใช้ Pulumi กับ azd
+
+หากทีมของคุณเขียนโครงสร้างพื้นฐานด้วยภาษาโปรแกรมทั่วไป (TypeScript, Python, Go หรือ C#) แทนการใช้ DSL azd ก็รองรับ **Pulumi** ด้วย เช่นเดียวกับ Terraform ขั้นตอนการทำงาน `azd up` / `azd provision` / `azd down` ไม่เปลี่ยนแปลง—เปลี่ยนแค่เครื่องมือและโครงสร้างโฟลเดอร์ของโครงสร้างพื้นฐาน
+
+### แจ้ง azd ให้ใช้ Pulumi
+
+```yaml
+# azure.yaml
+name: my-pulumi-app
+infra:
+  provider: pulumi      # default is "bicep"
+  path: infra           # folder containing your Pulumi program
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### โครงสร้างโฟลเดอร์ Pulumi
+
+```
+infra/
+├── Pulumi.yaml          # project definition
+├── Pulumi.dev.yaml      # stack config (one per environment)
+├── index.ts             # your resource program (or __main__.py, main.go, etc.)
+├── package.json         # dependencies (for TypeScript)
+└── tsconfig.json
+```
+
+### ไฟล์ `index.ts` ที่เรียบง่ายที่สุด
+
+```typescript
+import * as azure from "@pulumi/azure-native";
+import * as pulumi from "@pulumi/pulumi";
+
+const environmentName = pulumi.getStack();
+
+// ติดแท็กแต่ละทรัพยากรเพื่อให้ azd สามารถติดตามและล้างข้อมูลเหล่านั้นได้
+const tags = { "azd-env-name": environmentName };
+
+const rg = new azure.resources.ResourceGroup("rg", {
+  resourceGroupName: `rg-${environmentName}`,
+  tags,
+});
+
+// azd อ่านผลลัพธ์เหล่านี้กลับเข้าไปในสภาพแวดล้อมของคุณ
+export const AZURE_LOCATION = rg.location;
+export const SERVICE_WEB_ENDPOINT_URL = "https://...";
+```
+
+### Stacks จะแมปกับ azd environment
+
+Pulumi จัดการ deployment เป็น **stacks** และ azd แมปแต่ละ environment ของ azd ไปยัง Pulumi stack ที่ชื่อเดียวกัน เมื่อคุณรัน `azd env new staging` azd จะเลือก (หรือสร้าง) Pulumi stack ชื่อ `staging` กฎการแท็ก `azd-env-name` และค่าผลลัพธ์ `AZURE_*` เหมือนเดิม ดังนั้น `azd down` จึงสามารถค้นหาและลบทั้งหมดได้
+
+### การปรับใช้ด้วย Pulumi
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd รัน 'pulumi preview' เบื้องหลัง
+azd up                    # จัดเตรียม + ดีพลอย
+azd down --force          # รัน 'pulumi destroy'
+```
+
+> **ข้อกำหนดล่วงหน้า:** ต้องติดตั้ง Pulumi และตั้งไว้ใน `PATH` ของคุณ และจำเป็นต้องมี backend สำหรับจัดการสถานะ (Pulumi Cloud หรือ backend ที่จัดการเอง เช่น Azure Blob Storage) azd จัดการ *ขั้นตอนการทำงาน* ของ Pulumi ไม่ใช่การติดตั้ง ดูเอกสารทางการ [azd Pulumi documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-pulumi-for-azd)
+
+## 🎯 การเลือกโฮสต์สำหรับบริการของคุณ
+
+ฟิลด์ `host` ใน `azure.yaml` กำหนดว่ารันโค้ดของคุณที่ไหน azd รองรับโฮสต์หลายตัว—การเลือกโฮสต์ที่เหมาะสมสำคัญกว่าภาษาโครงสร้างพื้นฐาน ต่อไปนี้เป็นการเปรียบเทียบสำหรับผู้เริ่มต้น:
+
+| ค่า `host` | เหมาะสำหรับ | เหตุผล |
+|--------------|----------|-----|
+| `appservice` | เว็บแอปและ API แบบดั้งเดิม | PaaS ที่ง่ายที่สุด; ไม่ต้องใช้คอนเทนเนอร์ |
+| `staticwebapp` | SPA หน้าแรก (React, Vue, Angular) | CDN ทั่วโลก + SSL ฟรี, รองรับ API ในตัว |
+| `function` | งานที่ขับเคลื่อนด้วยเหตุการณ์และแบบ serverless | ปรับขนาดเป็นศูนย์ได้, คิดเงินตามการประมวลผล |
+| `containerapp` | ไมโครเซอร์วิสที่รันในคอนเทนเนอร์ | คอนเทนเนอร์แบบ serverless, ปรับขนาดเป็นศูนย์, ingress ในตัว |
+| `aks` | งาน orchestration ที่ซับซ้อน | ควบคุม Kubernetes เต็มรูปแบบเมื่อจำเป็นจริงๆ |
+| `springapp` | แอป Java Spring Boot | รันไทม์ Azure Spring Apps ที่จัดการและปรับแต่งสำหรับ Spring |
+
+### เมื่อไรควรเลือก AKS
+
+**Azure Kubernetes Service (`host: aks`)** ให้พลัง Kubernetes เต็มรูปแบบ—ตัวควบคุมแบบกำหนดเอง, service meshes, เครือข่ายซับซ้อน และการจัดการตารางเวลาระดับละเอียด พลังนี้มาพร้อมกับภาระงานตัวจัดการ: คุณต้องดูแล node pools, การอัปเกรด และเครือข่ายคลัสเตอร์
+
+```yaml
+services:
+  api:
+    project: ./src/api
+    language: js
+    host: aks          # deploys to an existing AKS cluster
+```
+
+> **เริ่มง่ายกว่าถ้าได้** สำหรับไมโครเซอร์วิสส่วนใหญ่, **Container Apps** ให้คุณใช้คอนเทนเนอร์, autoscaling และปรับขนาดเป็นศูนย์ได้โดยไม่ต้องจัดการคลัสเตอร์ เลือกใช้ AKS เมื่อคุณต้องการฟีเจอร์เฉพาะของ Kubernetes จริงๆ
+
+### เมื่อไรใช้ Azure Spring Apps
+
+**Azure Spring Apps (`host: springapp`)** เป็นรันไทม์ที่จัดการเพื่อ Spring Boot โดยเฉพาะ รับผิดชอบค้นหาบริการ, เซิร์ฟเวอร์ config และการ deploy แบบ blue-green เพื่อที่ทีม Java จะไม่ต้องดูแลโครงสร้างพื้นฐานเอง
+
+```yaml
+services:
+  catalog:
+    project: ./src/catalog
+    language: java
+    host: springapp
+```
+
+> ใช้ `springapp` เมื่อคุณมีแอป Spring Boot ที่มีอยู่แล้วและต้องการรันไทม์ที่ปรับแต่งสำหรับพวกเขา สำหรับแอป Java ใหม่ที่ใส่คอนเทนเนอร์และไม่มีความต้องการเฉพาะ Spring, `containerapp` มักเป็นตัวเลือกที่ง่ายกว่า
 
 ## 🗃️ การจัดเตรียมฐานข้อมูล
 
@@ -298,9 +492,9 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 ความปลอดภัยและการจัดการความลับ
+## 🔒 การจัดการความปลอดภัยและความลับ
 
-### การผสาน Key Vault
+### การเชื่อมต่อ Key Vault
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -368,9 +562,9 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 การเชื่อมต่อเครือข่าย
+## 🌍 เครือข่ายและการเชื่อมต่อ
 
-### กำหนดค่า Virtual Network
+### การกำหนดค่า Virtual Network
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -496,7 +690,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 การตรวจสอบและการสังเกตการณ์
+## 📊 การตรวจสอบและการสังเกต
 
 ### Application Insights
 ```bicep
@@ -527,7 +721,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### เมตริกและการแจ้งเตือนแบบกำหนดเอง
+### เมตริกและการแจ้งเตือนที่กำหนดเอง
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -563,7 +757,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 
 ## 🔧 การตั้งค่าสภาพแวดล้อมเฉพาะ
 
-### ไฟล์พารามิเตอร์สำหรับสภาพแวดล้อมต่าง ๆ
+### ไฟล์พารามิเตอร์สำหรับสภาพแวดล้อมต่างๆ
 ```json
 // infra/main.parameters.dev.json
 {
@@ -649,7 +843,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 รูปแบบการจัดเตรียมขั้นสูง
+## 🚀 แพตเทิร์นการจัดเตรียมขั้นสูง
 
 ### การปรับใช้หลายภูมิภาค
 ```bicep
@@ -755,16 +949,16 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 การดูตัวอย่าง & การตรวจสอบโครงสร้างพื้นฐาน (ใหม่)
+## 🧪 การดูตัวอย่างและตรวจสอบโครงสร้างพื้นฐาน (ใหม่)
 
 ### ดูตัวอย่างการเปลี่ยนแปลงโครงสร้างพื้นฐานก่อนปรับใช้
 
-ฟีเจอร์ `azd provision --preview` ช่วยให้คุณ **จำลองการจัดเตรียมโครงสร้างพื้นฐาน** ก่อนที่จะปรับใช้ทรัพยากรจริง ๆ ซึ่งคล้ายกับ `terraform plan` หรือ `bicep what-if` ช่วยให้คุณเห็น **ภาพรวมการดำเนินการโดยไม่ทำการเปลี่ยนแปลงจริง**
+ฟีเจอร์ `azd provision --preview` ช่วยให้คุณ **จำลองการจัดเตรียมโครงสร้างพื้นฐาน** ก่อนจะปรับใช้ทรัพยากรจริง เหมือนกับ `terraform plan` หรือ `bicep what-if` ให้มุมมอง **dry-run** ว่าจะมีการเปลี่ยนแปลงอะไรในสภาพแวดล้อม Azure ของคุณ
 
-#### 🛠️ สิ่งที่มันทำ
-- **วิเคราะห์แม่แบบ IaC ของคุณ** (Bicep หรือ Terraform)
-- **แสดงตัวอย่างการเปลี่ยนแปลงทรัพยากร** ได้แก่ การเพิ่ม ลบ หรืออัปเดต
-- **ไม่ปรับเปลี่ยนทรัพยากรจริง** — อ่านได้อย่างเดียวและปลอดภัยในการใช้งาน
+#### 🛠️ มันทำอะไร
+- **วิเคราะห์เทมเพลต IaC ของคุณ** (Bicep หรือ Terraform)
+- **แสดงตัวอย่างการเปลี่ยนแปลงของทรัพยากร**: การเพิ่ม การลบ การอัปเดต
+- **ไม่ปรับใช้การเปลี่ยนแปลง** — อ่านได้อย่างเดียวและปลอดภัยที่จะรัน
 
 #### กรณีการใช้งาน
 ```bash
@@ -777,18 +971,18 @@ azd provision --preview -e production
 
 คำสั่งนี้ช่วยให้คุณ:
 - **ตรวจสอบการเปลี่ยนแปลงโครงสร้างพื้นฐาน** ก่อนยืนยันการจัดเตรียมทรัพยากร
-- **จับข้อผิดพลาดของการตั้งค่าที่ผิดพลาดได้ตั้งแต่เนิ่น ๆ** ในวงจรการพัฒนา
-- **ทำงานร่วมกันอย่างปลอดภัย** ในสภาพแวดล้อมของทีม
-- **มั่นใจในการปรับใช้แบบสิทธิ์น้อยสุด** โดยไม่มีสิ่งไม่คาดคิด
+- **จับข้อผิดพลาดการตั้งค่าตั้งแต่เนิ่นๆ** ในวงจรการพัฒนา
+- **ร่วมมือกันอย่างปลอดภัย** ในสภาพแวดล้อมแบบทีม
+- **รับรองการปรับใช้แบบสิทธิ์น้อยที่สุด** โดยไม่มีความประหลาดใจ
 
-เหมาะอย่างยิ่งเมื่อ:
+มีประโยชน์มากเมื่อ:
 - ทำงานกับสภาพแวดล้อมหลายบริการที่ซับซ้อน
-- ทำการเปลี่ยนแปลงโครงสร้างพื้นฐานในสภาพแวดล้อมการผลิต
-- ตรวจสอบการแก้ไขแม่แบบก่อนอนุมัติ PR
-- ฝึกอบรมสมาชิกใหม่ในทีมเกี่ยวกับรูปแบบโครงสร้างพื้นฐาน
+- การเปลี่ยนแปลงโครงสร้างพื้นฐานในสภาพแวดล้อมการผลิต
+- ตรวจสอบการแก้ไขเทมเพลตก่อนอนุมัติ PR
+- ฝึกอบรมสมาชิกทีมใหม่ในแพตเทิร์นโครงสร้างพื้นฐาน
 
-### ตัวอย่างผลลัพธ์ตัวอย่าง
-ผลลัพธ์ตัวอย่างจะแตกต่างตามผู้ให้บริการและโครงสร้างโปรเจกต์ แต่ควรแสดงการเปลี่ยนแปลงที่เสนออย่างชัดเจนก่อนดำเนินการใด ๆ
+### ตัวอย่างผลลัพธ์การดูตัวอย่าง
+ผลลัพธ์การดูตัวอย่างจะแตกต่างกันตามผู้ให้บริการและโครงสร้างโปรเจกต์ แต่ควรระบุชัดเจนถึงการเปลี่ยนแปลงที่เสนอไว้ก่อนที่จะมีการใช้จริง
 
 ```bash
 $ azd provision --preview
@@ -813,18 +1007,18 @@ The following resources will be destroyed:
 ✅ Preview completed successfully!
 ```
 
-## �🔄 การอัปเดตและการย้ายทรัพยากร
+## �🔄 การอัปเดตและย้ายทรัพยากร
 
 ### การอัปเดตทรัพยากรอย่างปลอดภัย
 ```bash
 # ดูตัวอย่างการเปลี่ยนแปลงโครงสร้างพื้นฐานก่อน (แนะนำ)
 azd provision --preview
 
-# ใช้การเปลี่ยนแปลงหลังจากยืนยันดูตัวอย่าง
+# ใช้การเปลี่ยนแปลงหลังจากยืนยันการดูตัวอย่าง
 azd provision --confirm-with-no-prompt
 
 # สำหรับการย้อนกลับ ให้ใช้ Git เพื่อย้อนกลับการเปลี่ยนแปลงโครงสร้างพื้นฐาน:
-git revert HEAD  # ย้อนกลับคอมมิทโครงสร้างพื้นฐานล่าสุด
+git revert HEAD  # ย้อนกลับ commit โครงสร้างพื้นฐานล่าสุด
 azd provision    # ใช้สถานะโครงสร้างพื้นฐานก่อนหน้า
 ```
 
@@ -859,7 +1053,7 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🎯 แนวทางปฏิบัติที่ดีที่สุด
 
-### 1. แนวทางการตั้งชื่อทรัพยากร
+### 1. ข้อกำหนดการตั้งชื่อทรัพยากร
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -870,7 +1064,7 @@ var naming = {
 }
 ```
 
-### 2. กลยุทธ์การติดแท็ก
+### 2. กลยุทธ์การแท็ก
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -899,7 +1093,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. การจัดระเบียบข้อมูลผลลัพธ์
+### 4. การจัดระเบียบผลลัพธ์
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -914,19 +1108,19 @@ output DATABASE_NAME string = database.name
 output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
 ```
 
-## ขั้นตอนถัดไป
+## ขั้นตอนต่อไป
 
 - [การวางแผนก่อนปรับใช้](../chapter-06-pre-deployment/capacity-planning.md) - ตรวจสอบความพร้อมของทรัพยากร
 - [ปัญหาทั่วไป](../chapter-07-troubleshooting/common-issues.md) - แก้ไขปัญหาโครงสร้างพื้นฐาน
-- [คู่มือการดีบัก](../chapter-07-troubleshooting/debugging.md) - ดีบักปัญหาการจัดเตรียม
+- [คู่มือดีบัก](../chapter-07-troubleshooting/debugging.md) - ดีบักปัญหาการจัดเตรียม
 - [การเลือก SKU](../chapter-06-pre-deployment/sku-selection.md) - เลือกระดับบริการที่เหมาะสม
 
 ## แหล่งข้อมูลเพิ่มเติม
 
 - [เอกสาร Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [แม่แบบ Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [เทมเพลต Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
 - [ศูนย์สถาปัตยกรรม Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [กรอบงาน Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
@@ -937,6 +1131,6 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ข้อจำกัดความรับผิดชอบ**:  
-เอกสารนี้ได้รับการแปลโดยใช้บริการแปลภาษาด้วย AI [Co-op Translator](https://github.com/Azure/co-op-translator) แม้เราจะพยายามให้ความถูกต้อง โปรดทราบว่าการแปลโดยอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้องได้ เอกสารต้นฉบับในภาษาต้นทางควรถูกพิจารณาเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลที่สำคัญ แนะนำให้ใช้บริการแปลโดยผู้เชี่ยวชาญทางภาษา เราจะไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความผิดใด ๆ ที่เกิดจากการใช้การแปลนี้
+**ปฏิเสธความรับผิดชอบ**:
+เอกสารนี้ได้รับการแปลโดยใช้บริการแปลภาษา AI [Co-op Translator](https://github.com/Azure/co-op-translator) ขณะที่เราพยายามให้ความถูกต้อง โปรดทราบว่าการแปลโดยอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้อง เอกสารต้นฉบับในภาษาต้นทางควรถูกพิจารณาเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลที่สำคัญ แนะนำให้ใช้การแปลโดยมนุษย์มืออาชีพ เราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความที่ผิดพลาดที่เกิดขึ้นจากการใช้การแปลนี้
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

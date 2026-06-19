@@ -1,46 +1,47 @@
-# Simple Flask API - Container App Example
+# Enkelt Flask-API - Container App-exempel
 
-**Learning Path:** Beginner ⭐ | **Time:** 25-35 minutes | **Cost:** $0-15/month
+**Lärväg:** Nybörjare ⭐ | **Tid:** 25-35 minuter | **Kostnad:** $0-15/month
 
-En komplett, fungerande Python Flask REST API distribuerad till Azure Container Apps med Azure Developer CLI (azd). Detta exempel visar distribution av container, autoskalning och grundläggande övervakning.
+En komplett, fungerande Python Flask REST-API distribuerat till Azure Container Apps med Azure Developer CLI (azd). Detta exempel visar containerdistribution, automatisk skalning och grundläggande övervakning.
 
-## 🎯 What You'll Learn
+## 🎯 Vad du kommer att lära dig
 
 - Distribuera en containeriserad Python-applikation till Azure
-- Konfigurera autoskalning med scale-to-zero
-- Implementera health probes och readiness checks
-- Övervaka applikationsloggar och metrik
+- Konfigurera automatisk skalning med scale-to-zero
+- Implementera hälsoavläsningar och readiness-kontroller
+- Övervaka applikationsloggar och mätvärden
 - Använd Azure Developer CLI för snabb distribution
 
-## 📦 What's Included
+## 📦 Vad som ingår
 
-✅ **Flask Application** - Komplett REST API med CRUD-operationer (`src/app.py`)  
+✅ **Flask Application** - Fullständigt REST API med CRUD-operationer (`src/app.py`)  
 ✅ **Dockerfile** - Produktionsklar containerkonfiguration  
 ✅ **Bicep Infrastructure** - Container Apps-miljö och API-distribution  
-✅ **AZD Configuration** - Enkommands distributionssetup  
-✅ **Health Probes** - Liveness och readiness checks konfigurerade  
+✅ **AZD Configuration** - One-command-distributionsinställning  
+✅ **Health Probes** - Liveness- och readiness-kontroller konfigurerade  
 ✅ **Auto-scaling** - 0-10 repliker baserat på HTTP-belastning  
 
-## Architecture
+## Arkitektur
 
 ```mermaid
 graph TD
     subgraph ACA[Azure Container Apps-miljö]
-        Flask[Flask API-container<br/>Hälsokontroller<br/>REST API<br/>Autoskalning 0-10 repliker]
+        Flask[Flask API-container<br/>Hälsokontroller<br/>REST-API<br/>Autoskalning 0-10 repliker]
         AppInsights[Application Insights]
     end
 ```
-## Prerequisites
 
-### Required
+## Förutsättningar
+
+### Krävs
 - **Azure Developer CLI (azd)** - [Install guide](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
 - **Azure subscription** - [Free account](https://azure.microsoft.com/free/)
 - **Docker Desktop** - [Install Docker](https://www.docker.com/products/docker-desktop/) (för lokal testning)
 
-### Verify Prerequisites
+### Verifiera förutsättningar
 
 ```bash
-# Kontrollera azd-version (kräver 1.5.0 eller högre)
+# Kontrollera azd-versionen (kräver 1.5.0 eller högre)
 azd version
 
 # Verifiera Azure-inloggning
@@ -50,17 +51,17 @@ azd auth login
 docker --version
 ```
 
-## ⏱️ Deployment Timeline
+## ⏱️ Distribueringsschema
 
 | Phase | Duration | What Happens |
 |-------|----------|--------------||
-| Environment setup | 30 seconds | Create azd environment |
+| Environment setup | 30 seconds | Skapa azd-miljö |
 | Build container | 2-3 minutes | Docker build Flask app |
-| Provision infrastructure | 3-5 minutes | Create Container Apps, registry, monitoring |
+| Provision infrastructure | 3-5 minutes | Skapa Container Apps, registry, övervakning |
 | Deploy application | 2-3 minutes | Push image and deploy to Container Apps |
-| **Total** | **8-12 minutes** | Complete deployment ready |
+| **Total** | **8-12 minutes** | Komplett distribution redo |
 
-## Quick Start
+## Snabbstart
 
 ```bash
 # Navigera till exemplet
@@ -74,16 +75,16 @@ azd up
 # Du kommer att uppmanas att:
 # 1. Välj Azure-prenumeration
 # 2. Välj plats (t.ex. eastus2)
-# 3. Vänta 8-12 minuter för distributionen
+# 3. Vänta 8-12 minuter på distributionen
 
 # Hämta din API-slutpunkt
 azd env get-values
 
-# Testa API:t
+# Testa API:et
 curl $(azd env get-value API_ENDPOINT)/health
 ```
 
-**Expected Output:**
+**Förväntat utdata:**
 ```json
 {
   "status": "healthy",
@@ -93,30 +94,30 @@ curl $(azd env get-value API_ENDPOINT)/health
 }
 ```
 
-## ✅ Verify Deployment
+## ✅ Verifiera distribution
 
-### Step 1: Check Deployment Status
+### Steg 1: Kontrollera distributionsstatus
 
 ```bash
-# Visa utplacerade tjänster
+# Visa distribuerade tjänster
 azd show
 
-# Förväntat utdata visar:
+# Förväntad utdata visar:
 # - Tjänst: api
 # - Slutpunkt: https://ca-api-[env].xxx.azurecontainerapps.io
 # - Status: Körs
 ```
 
-### Step 2: Test API Endpoints
+### Steg 2: Testa API-endpoints
 
 ```bash
 # Hämta API-slutpunkt
 API_URL=$(azd env get-value API_ENDPOINT)
 
-# Testa hälsan
+# Testa hälsa
 curl $API_URL/health
 
-# Testa rotändpunkt
+# Testa rot-slutpunkt
 curl $API_URL/
 
 # Skapa ett objekt
@@ -128,13 +129,13 @@ curl -X POST $API_URL/api/items \
 curl $API_URL/api/items
 ```
 
-**Success Criteria:**
-- ✅ Health endpoint returns HTTP 200
-- ✅ Root endpoint shows API information
-- ✅ POST creates item and returns HTTP 201
-- ✅ GET returns created items
+**Framgångskriterier:**
+- ✅ Hälsorutin returnerar HTTP 200
+- ✅ Root-endpoint visar API-information
+- ✅ POST skapar objekt och returnerar HTTP 201
+- ✅ GET returnerar skapade objekt
 
-### Step 3: View Logs
+### Steg 3: Visa loggar
 
 ```bash
 # Strömma live-loggar med azd monitor
@@ -144,12 +145,12 @@ azd monitor --logs
 az containerapp logs show --name api --resource-group $RG_NAME --follow
 
 # Du bör se:
-# - Gunicorn-uppstartsmeddelanden
+# - Startmeddelanden från Gunicorn
 # - HTTP-förfrågningsloggar
 # - Loggar med applikationsinformation
 ```
 
-## Project Structure
+## Projektstruktur
 
 ```
 simple-flask-api/
@@ -166,38 +167,38 @@ simple-flask-api/
     └── Dockerfile
 ```
 
-## API Endpoints
+## API-endpoints
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
-| `/health` | GET | Health check |
+| `/health` | GET | Hälsokontroll |
 | `/api/items` | GET | Lista alla objekt |
 | `/api/items` | POST | Skapa nytt objekt |
 | `/api/items/{id}` | GET | Hämta specifikt objekt |
 | `/api/items/{id}` | PUT | Uppdatera objekt |
-| `/api/items/{id}` | DELETE | Ta bort objekt |
+| `/api/items/{id}` | DELETE | Radera objekt |
 
-## Configuration
+## Konfiguration
 
-### Environment Variables
+### Miljövariabler
 
 ```bash
-# Ställ in anpassad konfiguration
+# Ange anpassad konfiguration
 azd env set PORT 8000
 azd env set LOG_LEVEL info
 azd env set MAX_REPLICAS 20
 ```
 
-### Scaling Configuration
+### Skalningskonfiguration
 
 API:et skalar automatiskt baserat på HTTP-trafik:
-- **Min Replicas**: 0 (skalar till noll när inaktiv)
-- **Max Replicas**: 10
-- **Concurrent Requests per Replica**: 50
+- **Min repliker**: 0 (skalar till noll när den är inaktiv)
+- **Max repliker**: 10
+- **Samtidiga förfrågningar per replika**: 50
 
-## Development
+## Utveckling
 
-### Run Locally
+### Kör lokalt
 
 ```bash
 # Installera beroenden
@@ -211,10 +212,10 @@ python app.py
 curl http://localhost:8000/health
 ```
 
-### Build and Test Container
+### Bygg och testa container
 
 ```bash
-# Bygg Docker-avbildning
+# Bygg Docker-avbild
 docker build -t flask-api:local ./src
 
 # Kör container lokalt
@@ -224,38 +225,38 @@ docker run -p 8000:8000 flask-api:local
 curl http://localhost:8000/health
 ```
 
-## Deployment
+## Distribution
 
-### Full Deployment
+### Fullständig distribution
 
 ```bash
-# Distribuera infrastruktur och applikation
+# Driftsätt infrastruktur och applikation
 azd up
 ```
 
-### Code-Only Deployment
+### Endast koddistribution
 
 ```bash
-# Distribuera endast applikationskod (infrastrukturen oförändrad)
+# Distribuera endast applikationskoden (infrastrukturen oförändrad)
 azd deploy api
 ```
 
-### Update Configuration
+### Uppdatera konfiguration
 
 ```bash
-# Uppdatera miljövariabler
+# Uppdatera miljövariablerna
 azd env set API_KEY "new-api-key"
 
 # Distribuera om med ny konfiguration
 azd deploy api
 ```
 
-## Monitoring
+## Övervakning
 
-### View Logs
+### Visa loggar
 
 ```bash
-# Strömma loggar i realtid med azd monitor
+# Strömma live-loggar med azd monitor
 azd monitor --logs
 
 # Eller använd Azure CLI för Container Apps:
@@ -265,7 +266,7 @@ az containerapp logs show --name api --resource-group $RG_NAME --follow
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 ```
 
-### Monitor Metrics
+### Övervaka mätvärden
 
 ```bash
 # Öppna Azure Monitor-instrumentpanelen
@@ -277,15 +278,15 @@ az monitor metrics list \
   --metric "Requests,ResponseTime"
 ```
 
-## Testing
+## Testning
 
-### Health Check
+### Hälsokontroll
 
 ```bash
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-Expected response:
+Förväntat svar:
 ```json
 {
   "status": "healthy",
@@ -293,7 +294,7 @@ Expected response:
 }
 ```
 
-### Create Item
+### Skapa objekt
 
 ```bash
 curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/items \
@@ -301,43 +302,43 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/item
   -d '{"name": "Test Item", "description": "A test item"}'
 ```
 
-### Get All Items
+### Hämta alla objekt
 
 ```bash
 curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
 ```
 
-## Cost Optimization
+## Kostnadsoptimering
 
 Denna distribution använder scale-to-zero, så du betalar endast när API:et hanterar förfrågningar:
 
-- **Idle cost**: ~$0/month (skalat till noll)
-- **Active cost**: ~$0.000024/second per replica
-- **Expected monthly cost** (lätt användning): $5-15
+- **Inaktiv kostnad**: ~$0/month (skalad till noll)
+- **Aktiv kostnad**: ~$0.000024/second per replika
+- **Förväntad månadskostnad** (låg användning): $5-15
 
-### Reduce Costs Further
+### Minska kostnader ytterligare
 
 ```bash
-# Skala ner max antal repliker för dev
+# Skala ner max antal repliker för utveckling
 azd env set MAX_REPLICAS 3
 
 # Använd kortare timeout för inaktivitet
 azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 minuter
 ```
 
-## Troubleshooting
+## Felsökning
 
-### Container Won't Start
+### Containern startar inte
 
 ```bash
 # Kontrollera containerloggar med Azure CLI
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 
-# Verifiera att Dockerbilden byggs lokalt
+# Verifiera att Docker-avbildningen byggs lokalt
 docker build -t test ./src
 ```
 
-### API Not Accessible
+### API:t är inte åtkomligt
 
 ```bash
 # Verifiera att ingress är extern
@@ -345,7 +346,7 @@ az containerapp show --name api --resource-group rg-simple-flask-api \
   --query properties.configuration.ingress.external
 ```
 
-### High Response Times
+### Höga svarstider
 
 ```bash
 # Kontrollera CPU- och minnesanvändning
@@ -358,79 +359,79 @@ az containerapp update --name api --resource-group rg-simple-flask-api \
   --cpu 1.0 --memory 2Gi
 ```
 
-## Clean Up
+## Rensa upp
 
 ```bash
 # Ta bort alla resurser
 azd down --force --purge
 ```
 
-## Next Steps
+## Nästa steg
 
-### Expand This Example
+### Bygg ut det här exemplet
 
-1. **Add Database** - Integrera Azure Cosmos DB eller SQL Database
+1. **Lägg till databas** - Integrera Azure Cosmos DB eller SQL Database
    ```bash
    # Lägg till Cosmos DB-modul i infra/main.bicep
    # Uppdatera app.py med databasanslutning
    ```
 
-2. **Add Authentication** - Implementera Azure AD eller API-nycklar
+2. **Lägg till autentisering** - Implementera Microsoft Entra ID eller API-nycklar
    ```python
    # Lägg till autentiseringsmiddleware i app.py
    from functools import wraps
    ```
 
-3. **Set Up CI/CD** - GitHub Actions workflow
+3. **Ställ in CI/CD** - Arbetsflöde för GitHub Actions
    ```yaml
    # Create .github/workflows/deploy.yml
    name: Deploy to Azure
    on: [push]
    ```
 
-4. **Add Managed Identity** - Säkra åtkomst till Azure-tjänster
+4. **Lägg till hanterad identitet** - Säkerställ åtkomst till Azure-tjänster
    ```bicep
    # Update infra/app/api.bicep
    identity: { type: 'SystemAssigned' }
    ```
 
-### Related Examples
+### Relaterade exempel
 
 - **[Database App](../../../../../examples/database-app)** - Komplett exempel med SQL Database
-- **[Microservices](../../../../../examples/container-app/microservices)** - Flerjänstarkitektur
+- **[Microservices](../../../../../examples/container-app/microservices)** - Arkitektur med flera tjänster
 - **[Container Apps Master Guide](../README.md)** - Alla containermönster
 
-### Learning Resources
+### Lärresurser
 
-- 📚 [AZD For Beginners Course](../../../README.md) - Huvudkursens startsida
+- 📚 [AZD For Beginners Course](../../../README.md) - Huvudsida för kursen
 - 📚 [Container Apps Patterns](../README.md) - Fler distributionsmönster
-- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - Community-mallar
+- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - Gemenskapsmallar
 
-## Additional Resources
+## Ytterligare resurser
 
-### Documentation
+### Dokumentation
 - **[Flask Documentation](https://flask.palletsprojects.com/)** - Guide för Flask-ramverket
 - **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Officiell Azure-dokumentation
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd kommandoreferens
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd-kommandoreferens
 
-### Tutorials
+### Handledningar
 - **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Distribuera din första app
-- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Guide för Python-utveckling
+- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Guide för Pythonutveckling
 - **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastruktur som kod
 
-### Tools
+### Verktyg
 - **[Azure Portal](https://portal.azure.com)** - Hantera resurser visuellt
-- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - IDE-integration
+- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - IDE-integrering
 
 ---
 
-**🎉 Congratulations!** Du har distribuerat ett produktionsklart Flask API till Azure Container Apps med autoskalning och övervakning.
+**🎉 Grattis!** Du har distribuerat ett produktionsklart Flask-API till Azure Container Apps med automatisk skalning och övervakning.
 
-**Questions?** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) or check the [FAQ](../../../resources/faq.md)
+**Frågor?** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) eller kolla [FAQ](../../../resources/faq.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Ansvarsfriskrivning:
-Detta dokument har översatts med AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet bör du vara medveten om att automatiska översättningar kan innehålla fel eller felaktigheter. Originaldokumentet på dess ursprungliga språk ska betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+**Ansvarsfriskrivning**:
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var vänlig notera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

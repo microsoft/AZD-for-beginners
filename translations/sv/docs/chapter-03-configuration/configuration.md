@@ -1,8 +1,8 @@
-# Kapitelnavigering
+# Konfigurationsguide
 
-**Chapter Navigation:**
-- **📚 Kursstartsida**: [AZD For Beginners](../../README.md)
-- **📖 Aktuellt kapitel**: Kapitel 3 - Konfiguration & autentisering
+**Kapitelnavigering:**
+- **📚 Kurshemsida**: [AZD För Nybörjare](../../README.md)
+- **📖 Aktuellt kapitel**: Kapitel 3 - Konfiguration & Autentisering
 - **⬅️ Föregående**: [Ditt första projekt](first-project.md)
 - **➡️ Nästa**: [Distributionsguide](../chapter-04-infrastructure/deployment-guide.md)
 - **🚀 Nästa kapitel**: [Kapitel 4: Infrastruktur som kod](../chapter-04-infrastructure/deployment-guide.md)
@@ -22,40 +22,40 @@ I slutet av denna lektion kommer du att:
 
 ## Läranderesultat
 
-Efter att ha slutfört denna lektion kommer du att kunna:
+Efter att ha genomfört denna lektion kommer du att kunna:
 - Konfigurera azd för optimala utvecklingsarbetsflöden
 - Ställa in och hantera flera distributionsmiljöer
 - Implementera säkra konfigurationshanteringsrutiner
 - Felsöka konfigurationsrelaterade problem
-- Anpassa azd:s beteende för specifika organisatoriska krav
+- Anpassa azd:s beteende efter specifika organisatoriska krav
 
 Denna omfattande guide täcker alla aspekter av att konfigurera Azure Developer CLI för optimala utvecklings- och distributionsarbetsflöden.
 
 ## Förstå AI‑agenter i ett azd‑projekt
 
-Om du är ny med AI‑agenter är här ett enkelt sätt att tänka på dem i azd‑världen.
+Om du är ny inför AI‑agenter, här är ett enkelt sätt att tänka på dem inom azd‑världen.
 
 ### Vad är en agent?
 
-En agent är ett mjukvaruelement som kan ta emot en förfrågan, resonera kring den och vidta åtgärder — ofta genom att anropa en AI‑modell, slå upp data eller anropa andra tjänster. I ett azd‑projekt är en agent bara en annan **tjänst** bredvid ditt webbfrontend eller API‑backend.
+En agent är en mjukvarukomponent som kan ta emot en förfrågan, resonera kring den och utföra åtgärder — ofta genom att anropa en AI‑modell, hämta data eller anropa andra tjänster. I ett azd‑projekt är en agent bara en annan **tjänst** intill din webbfrontend eller API‑backend.
 
-### Hur agenter passar in i azd‑projektstrukturen
+### Hur agenter passar in i azd‑projektets struktur
 
 Ett azd‑projekt består av tre lager: **infrastruktur**, **kod** och **konfiguration**. Agenter ansluts till dessa lager på samma sätt som vilken annan tjänst som helst:
 
 | Layer | What It Does for a Traditional App | What It Does for an Agent |
 |-------|-------------------------------------|---------------------------|
-| **Infrastruktur** (`infra/`) | Provisionerar en webbapp och en databas | Provisionerar en AI‑modellendpoint, sökindex eller agentvärd |
-| **Kod** (`src/`) | Innehåller din frontend- och API‑källkod | Innehåller din agentlogik och promptdefinitioner |
-| **Konfiguration** (`azure.yaml`) | Anger dina tjänster och deras värdmål | Anger din agent som en tjänst, pekar på dess kod och värd |
+| **Infrastructure** (`infra/`) | Provisionerar en webbapp och databas | Provisionerar en AI‑modellendpoint, sökindex eller agentvärd |
+| **Code** (`src/`) | Innehåller din frontend- och API‑källkod | Innehåller din agentlogik och promptdefinitioner |
+| **Configuration** (`azure.yaml`) | Listar dina tjänster och var de hostas | Listar din agent som en tjänst och pekar på dess kod och värd |
 
-### `azure.yaml`‑filens roll
+### Rollen för `azure.yaml`
 
-Du behöver inte memorera syntaxen just nu. Begreppsmässigt är `azure.yaml` filen där du talar om för azd: *"Här är de tjänster som utgör min applikation, och här hittar du deras kod."*
+Du behöver inte memorera syntaxen just nu. Konceptuellt är `azure.yaml` filen där du berättar för azd: *"Här är tjänsterna som utgör min applikation, och här finns deras kod."*
 
-När ditt projekt inkluderar en AI‑agent listar `azure.yaml` helt enkelt den agenten som en av tjänsterna. azd vet då att den ska provisionera rätt infrastruktur (som en Microsoft Foundry Models‑endpoint eller en Container App för att hosta agenten) och distribuera din agentkod — precis som det skulle göra för en webbapp eller API.
+När ditt projekt inkluderar en AI‑agent, listar `azure.yaml` helt enkelt den agenten som en av tjänsterna. azd vet då att provisionera rätt infrastruktur (som en Microsoft Foundry Models‑endpoint eller en Container App för att hosta agenten) och distribuera din agentkod — precis som det skulle göra för en webbapp eller API.
 
-Detta innebär att det inte finns något fundamentalt nytt att lära sig. Om du förstår hur azd hanterar en webbtjänst förstår du redan hur det hanterar en agent.
+Det betyder att det inte finns något fundamentalt nytt att lära sig. Om du förstår hur azd hanterar en webbservice, förstår du redan hur det hanterar en agent.
 
 ## Konfigurationshierarki
 
@@ -68,7 +68,7 @@ azd använder ett hierarkiskt konfigurationssystem:
 
 ## Global konfiguration
 
-### Ange globala standarder
+### Ställa in globala standardvärden
 ```bash
 # Ange standardprenumeration
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -183,7 +183,7 @@ pipeline:
 
 ### Tjänstkonfigurationsalternativ
 
-#### Värdtyper
+#### Hosttyper
 ```yaml
 services:
   web-static:
@@ -226,7 +226,7 @@ services:
     startCommand: java -jar target/app.jar
 ```
 
-## 🌟 Miljöhantering
+## 🌟 Hantering av miljöer
 
 ### Skapa miljöer
 ```bash
@@ -273,27 +273,27 @@ azd env set DEBUG "true"
 # Visa miljövariabler
 azd env get-values
 
-# Förväntad utdata:
+# Förväntat utdata:
 # DATABASE_URL=postgresql://user:pass@host:5432/db
 # API_KEY=secret-api-key
 # DEBUG=true
 
-# Ta bort en miljövariabel
+# Ta bort miljövariabel
 azd env unset DEBUG
 
 # Verifiera borttagning
 azd env get-values | grep DEBUG
-# (ska inte returnera något)
+# (bör inte returnera något)
 ```
 
 ### Miljömallar
-Skapa `.azure/env.template` för en konsekvent miljöuppsättning:
+Skapa `.azure/env.template` för enhetlig miljöuppsättning:
 ```bash
 # Obligatoriska variabler
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Applikationsinställningar
+# Programinställningar
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
@@ -303,24 +303,69 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
+### Dela miljöer i teamet
+
+När mer än en person arbetar i ett projekt behöver ni komma överens om **vad som följer med repot och vad som stannar lokalt**. azd håller varje miljö under en `.azure/`‑mapp, och inte allt bör committas.
+
+**Vad finns i `.azure/`:**
+
+```
+.azure/
+├── config.json              # which env is currently selected (local)
+└── <env-name>/
+    ├── config.json          # subscription, location, resource IDs
+    └── .env                 # environment variables (may contain secrets!)
+```
+
+**Vad som bör gitignoreras.** azd:s standard `.gitignore` exkluderar redan `.azure/`. Behåll det så — `.env`‑filerna kan innehålla hemligheter, och resurs‑ID:n är specifika för den som provisionerade dem. Varje teammedlem skapar sin **egen** miljö lokalt:
+
+```bash
+# Varje utvecklare kör detta en gång för att få sin egen isolerade miljö.
+azd env new dev-alice
+azd up
+```
+
+**Växla mellan miljöer.** En utvecklare som hanterar flera miljöer väljer den aktiva innan kommandon körs:
+
+```bash
+azd env list                 # se alla lokala miljöer och vilken som är standard
+azd env select staging       # gör 'staging' till den aktiva miljön
+azd env get-values           # bekräfta att du pekar på rätt miljö
+```
+
+**Tillhandahålla icke‑hemliga standardvärden till teamet.** Commit:a en mall (som `.azure/env.template` ovan) så att alla vet vilka variabler som ska sättas — men commit:a aldrig ifyllda värden. Nya teammedlemmar kopierar mallen och fyller i sina egna värden.
+
+**Miljöer i CI/CD.** Pipelines läser inte din lokala `.azure/`‑mapp. Ange istället miljövärdena som pipelinevariabler/hemligheter, och azd läser dem från processens miljö:
+
+```bash
+# I CI läser azd dessa från miljön, inte från .azure/
+export AZURE_ENV_NAME=production
+export AZURE_LOCATION=eastus2
+export AZURE_SUBSCRIPTION_ID=<sub-id>
+azd provision --no-prompt
+azd deploy --no-prompt
+```
+
+> **Tumregel:** infrastrukturkod (`infra/`, `azure.yaml`) delas i Git; miljö *tillstånd och hemligheter* (`.azure/`) är per‑utvecklare och per‑pipeline. `azd pipeline config` ställer in pipelinevariablerna åt dig automatiskt.
+
 ## 🔐 Autentiseringskonfiguration
 
 ### Integration med Azure CLI
 ```bash
-# Använd Azure CLI-uppgifter (standard)
+# Använd Azure CLI-inloggningsuppgifter (standard)
 azd config set auth.useAzureCliCredential true
 
-# Logga in med en specifik tenant
+# Logga in med specifik hyresgäst
 az login --tenant <tenant-id>
 
 # Ange standardprenumeration
 az account set --subscription <subscription-id>
 ```
 
-### Autentisering med serviceprincipal
+### Service Principal‑autentisering
 För CI/CD‑pipelines:
 ```bash
-# Ange miljövariabler
+# Ställ in miljövariabler
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
@@ -331,7 +376,7 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### Hanterad identitet
-För Azure‑värdade miljöer:
+För Azure‑hostade miljöer:
 ```bash
 # Aktivera autentisering med hanterad identitet
 azd config set auth.useMsi true
@@ -341,7 +386,7 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 ## 🏗️ Infrastrukturkonfiguration
 
 ### Bicep‑parametrar
-Konfigurera infrastruktursparametrar i `infra/main.parameters.json`:
+Konfigurera infrastrukturparametrar i `infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -415,7 +460,7 @@ Exempel `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azu
 
 ## 🔧 Avancerad konfiguration
 
-### Anpassad resursnamngivning
+### Anpassad namngivning av resurser
 ```bash
 # Ange namngivningskonventioner
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -457,7 +502,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Stagingmiljö
+### Staging‑miljö
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -475,17 +520,17 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Konfigurationsvalidering
+## 🔍 Validering av konfiguration
 
 ### Validera konfiguration
 ```bash
-# Kontrollera konfigurationssyntax
+# Kontrollera konfigurationssyntaxen
 azd config validate
 
 # Testa miljövariabler
 azd env get-values
 
-# Validera infrastruktur
+# Validera infrastrukturen
 azd provision --dry-run
 ```
 
@@ -566,9 +611,9 @@ Dokumentera din konfiguration i `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
-## 🎯 Praktiska övningsuppgifter
+## 🎯 Praktiska övningar
 
-### Övning 1: Konfiguration för flera miljöer (15 minuter)
+### Övning 1: Multi‑miljökonfiguration (15 minuter)
 
 **Mål**: Skapa och konfigurera tre miljöer med olika inställningar
 
@@ -605,7 +650,7 @@ azd env select production && azd env get-values
 
 ### Övning 2: Hantering av hemligheter (10 minuter)
 
-**Mål**: Öva säker konfiguration med känslig data
+**Mål**: Öva säker konfiguration med känsliga data
 
 ```bash
 # Ange hemligheter (visas inte i utdata)
@@ -624,34 +669,34 @@ azd env get DB_PASSWORD  # Bör visa det faktiska värdet
 ```
 
 **Framgångskriterier:**
-- [ ] Hemligheter lagrade utan att visas i terminalen
+- [ ] Hemligheter lagras utan att visas i terminalen
 - [ ] `azd env get-values` visar maskerade hemligheter
 - [ ] Individuellt `azd env get <SECRET_NAME>` hämtar verkligt värde
 
 ## Nästa steg
 
-- [Ditt första projekt](first-project.md) - Använd konfigurationen i praktiken
-- [Distributionsguide](../chapter-04-infrastructure/deployment-guide.md) - Använd konfigurationen för distribution
-- [Provisionering av resurser](../chapter-04-infrastructure/provisioning.md) - Produktionsklara konfigurationer
+- [Ditt första projekt](first-project.md) - Tillämpa konfiguration i praktiken
+- [Distributionsguide](../chapter-04-infrastructure/deployment-guide.md) - Använd konfiguration för distribution
+- [Resursprovisionering](../chapter-04-infrastructure/provisioning.md) - Produktionsfärdiga konfigurationer
 
 ## Referenser
 
-- [azd konfigurationsreferens](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Schema för azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [Referens för azd‑konfiguration](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azure.yaml‑schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
 - [Miljövariabler](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**Chapter Navigation:**
-- **📚 Kursstartsida**: [AZD For Beginners](../../README.md)
-- **📖 Aktuellt kapitel**: Kapitel 3 - Konfiguration & autentisering
+**Kapitelnavigering:**
+- **📚 Kurshemsida**: [AZD För Nybörjare](../../README.md)
+- **📖 Aktuellt kapitel**: Kapitel 3 - Konfiguration & Autentisering
 - **⬅️ Föregående**: [Ditt första projekt](first-project.md)
 - **➡️ Nästa kapitel**: [Kapitel 4: Infrastruktur som kod](../chapter-04-infrastructure/deployment-guide.md)
-- **Nästa lektion**: [Ditt första projekt](first-project.md)
+- **Next Lesson**: [Ditt första projekt](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Friskrivning**:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet bör du vara medveten om att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på sitt ursprungliga språk bör anses vara den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+**Ansvarsfriskrivning**:
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var vänlig notera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

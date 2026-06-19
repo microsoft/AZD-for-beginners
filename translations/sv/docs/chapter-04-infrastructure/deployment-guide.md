@@ -1,61 +1,62 @@
-# Driftsättningsguide - Bemästra AZD-distributioner
+# Deployment Guide - Mastering AZD Deployments
 
-**Kapitelnavigering:**
-- **📚 Kursens startsida**: [AZD för nybörjare](../../README.md)
-- **📖 Nuvarande kapitel**: Kapitel 4 - Infrastruktur som kod & distribution
-- **⬅️ Föregående kapitel**: [Kapitel 3: Konfiguration](../chapter-03-configuration/configuration.md)
-- **➡️ Nästa**: [Provisionering av resurser](provisioning.md)
-- **🚀 Nästa kapitel**: [Kapitel 5: Multi-Agent AI-lösningar](../../examples/retail-scenario.md)
+**Chapter Navigation:**
+- **📚 Kursöversikt**: [AZD For Beginners](../../README.md)
+- **📖 Aktuellt kapitel**: Kapitel 4 - Infrastruktur som kod & distribution
+- **⬅️ Föregående kapitel**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+- **➡️ Nästa**: [Provisioning Resources](provisioning.md)
+- **🧩 Även i detta kapitel**: [Authoring Your Own Template](custom-templates.md)
+- **🚀 Nästa kapitel**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
 
 ## Introduktion
 
-Denna omfattande guide täcker allt du behöver veta om att driftsätta applikationer med Azure Developer CLI, från grundläggande enstaka-kommandon driftsättningar till avancerade produktionsscenarier med anpassade hooks, flera miljöer och CI/CD-integrering. Bemästra hela driftsättningslivscykeln med praktiska exempel och bästa praxis.
+Denna omfattande guide täcker allt du behöver veta om att distribuera applikationer med Azure Developer CLI, från enkla kommandon till avancerade produktionsscenarier med anpassade hooks, flera miljöer och CI/CD-integration. Bemästra hela distributionslivscykeln med praktiska exempel och rekommenderade metoder.
 
 ## Lärandemål
 
 Genom att slutföra denna guide kommer du att:
-- Bemästra alla Azure Developer CLI driftsättningskommandon och arbetsflöden
-- Förstå hela driftsättningslivscykeln från provisioning till övervakning
-- Implementera anpassade driftsättningshooks för automatisering före och efter driftsättning
+- Bemästra alla Azure Developer CLI-distributionskommandon och arbetsflöden
+- Förstå hela distributionslivscykeln från provisioning till övervakning
+- Implementera anpassade distributionshooks för automation före och efter distribution
 - Konfigurera flera miljöer med miljöspecifika parametrar
-- Ställa in avancerade driftsättningsstrategier inklusive blue-green och canary-driftsättningar
-- Integrera azd-driftsättningar med CI/CD-pipelines och DevOps-arbetsflöden
+- Sätta upp avancerade distributionsstrategier inklusive blue-green och canary-distributioner
+- Integrera azd-distributioner med CI/CD-pipelines och DevOps-arbetsflöden
 
 ## Läranderesultat
 
 Efter slutförande kommer du att kunna:
-- Köra och felsöka alla azd-driftsättningsarbetsflöden självständigt
-- Designa och implementera anpassad driftsättningsautomatisering med hooks
-- Konfigurera produktionsklara driftsättningar med korrekt säkerhet och övervakning
-- Hantera komplexa multi-miljö driftsättningsscenarier
-- Optimera driftsättningsprestanda och implementera återställningsstrategier
-- Integrera azd-driftsättningar i företags-DevOps-praktiker
+- Köra och felsöka alla azd-distributionsarbetsflöden självständigt
+- Designa och implementera anpassad distributionsautomation med hooks
+- Konfigurera produktionsredo distributioner med korrekt säkerhet och övervakning
+- Hantera komplexa scenarier med flera miljöer
+- Optimera distributionsprestanda och implementera återställningsstrategier
+- Integrera azd-distributioner i företags DevOps-praktiker
 
 ## Översikt över distribution
 
-Azure Developer CLI tillhandahåller flera driftsättningskommandon:
+Azure Developer CLI erbjuder flera distributionskommandon:
 - `azd up` - Komplett arbetsflöde (provision + deploy)
 - `azd provision` - Skapa/uppdatera endast Azure-resurser
-- `azd deploy` - Driftsätt endast applikationskod
+- `azd deploy` - Distribuera endast applikationskod
 - `azd package` - Bygg och paketera applikationer
 
-## Grundläggande driftsättningsarbetsflöden
+## Grundläggande distributionsarbetsflöden
 
-### Komplett driftsättning (azd up)
+### Komplett distribution (azd up)
 Det vanligaste arbetsflödet för nya projekt:
 ```bash
 # Distribuera allt från grunden
 azd up
 
-# Distribuera med specifik miljö
+# Distribuera med en specifik miljö
 azd up --environment production
 
 # Distribuera med anpassade parametrar
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Endast infrastruktur-driftsättning
-När du endast behöver uppdatera Azure-resurser:
+### Endast infrastruktur-distribution
+När du bara behöver uppdatera Azure-resurser:
 ```bash
 # Provisionera/uppdatera infrastruktur
 azd provision
@@ -67,7 +68,7 @@ azd provision --preview
 azd provision --service database
 ```
 
-### Endast kod-driftsättning
+### Endast kod-distribution
 För snabba applikationsuppdateringar:
 ```bash
 # Distribuera alla tjänster
@@ -77,22 +78,22 @@ azd deploy
 # Distribuerar tjänster (azd deploy)
 # - web: Distribuerar... Klart
 # - api: Distribuerar... Klart
-# SUCCESS: Din distribution slutfördes på 2 minuter och 15 sekunder
+# LYCKAT: Din distribution slutfördes på 2 minuter och 15 sekunder
 
 # Distribuera en specifik tjänst
 azd deploy --service web
 azd deploy --service api
 
-# Distribuera med egna byggargument
+# Distribuera med anpassade byggargument
 azd deploy --service api --build-arg NODE_ENV=production
 
 # Verifiera distributionen
 azd show --output json | jq '.services'
 ```
 
-### ✅ Verifiering av driftsättning
+### ✅ Verifiering av distribution
 
-Efter varje driftsättning, verifiera framgång:
+Efter varje distribution, verifiera att den lyckades:
 
 ```bash
 # Kontrollera att alla tjänster körs
@@ -110,12 +111,41 @@ azd monitor --logs
 ```
 
 **Kriterier för framgång:**
-- ✅ Alla tjänster visar statusen "Running"
-- ✅ Hälsoslutpunkter returnerar HTTP 200
-- ✅ Inga fel i loggarna de senaste 5 minuterna
+- ✅ Alla tjänster visar status "Running"
+- ✅ Hälsosändpunkter returnerar HTTP 200
+- ✅ Inga fel-loggar de senaste 5 minuterna
 - ✅ Applikationen svarar på testförfrågningar
 
-## 🏗️ Förstå driftsättningsprocessen
+## 🏗️ Förstå distributionsprocessen
+
+### Ny med hooks? Börja här
+
+En **hook** är ett kommando som azd kör automatiskt vid ett specifikt ögonblick i deploy-processen—före eller efter provisioning, och före eller efter att din kod distribueras. De låter dig automatisera de små sysslor som alltid omger en distribution: fylla en databas, köra migrationer, bygga tillgångar eller smoke-testa den live appen.
+
+| Hook | Körs… | Vanligt användningsområde |
+|------|-------|---------------------------|
+| `preprovision` | Innan resurser skapas | Validera förutsättningar, logga in i ett register |
+| `postprovision` | Efter att resurser finns | Konfigurera resurser, sätta upp databasen |
+| `predeploy` | Innan kod distribueras | Bygga front-end-tillgångar, köra enhetstester |
+| `postdeploy` | Efter att koden är live | Köra DB-migrationer, smoke-testa sändpunkten |
+
+Hooks finns i din `azure.yaml`. Här är det minsta möjliga exemplet—det skriver bara ut ett meddelande efter distribution:
+
+```yaml
+# azure.yaml
+hooks:
+  postdeploy:
+    shell: sh
+    run: echo "Deployment finished! 🎉"
+```
+
+Det var allt—nästa gång du kör `azd up` skrivs meddelandet ut automatiskt. Du kan också köra en hook för sig själv, utan en full distribution, vilket är utmärkt för testning:
+
+```bash
+azd hooks run postdeploy
+```
+
+Faserna nedan visar verkliga hooks (migrationer, tester, validering) för varje steg.
 
 ### Fas 1: Pre-Provision Hooks
 ```yaml
@@ -132,10 +162,10 @@ hooks:
 ```
 
 ### Fas 2: Infrastrukturprovisionering
-- Läser infrastruktursmallar (Bicep/Terraform)
+- Läser infrastrukturmallar (Bicep/Terraform)
 - Skapar eller uppdaterar Azure-resurser
 - Konfigurerar nätverk och säkerhet
-- Ställer in övervakning och loggning
+- Sätter upp övervakning och loggning
 
 ### Fas 3: Post-Provision Hooks
 ```yaml
@@ -150,10 +180,10 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### Fas 4: Applikationspaketering
+### Fas 4: Paketisering av applikation
 - Bygger applikationskod
-- Skapar driftsättningsartefakter
-- Paketerar för målplattform (containers, ZIP-filer, med mera)
+- Skapar distributionsartefakter
+- Paketerar för målplattform (containers, ZIP-filer, etc.)
 
 ### Fas 5: Pre-Deploy Hooks
 ```yaml
@@ -168,8 +198,8 @@ hooks:
       npm run db:migrate
 ```
 
-### Fas 6: Applikationsdriftsättning
-- Driftsätter paketerade applikationer till Azure-tjänster
+### Fas 6: Applikationsdistribution
+- Distribuerar paketerade applikationer till Azure-tjänster
 - Uppdaterar konfigurationsinställningar
 - Startar/omstartar tjänster
 
@@ -186,9 +216,57 @@ hooks:
       curl https://${WEB_URL}/health
 ```
 
-## 🎛️ Driftsättningskonfiguration
+### Hantera hook-fel
 
-### Tjänstspecificerade driftsättningsinställningar
+Som standard, **om ett hook-kommando avslutas med en icke-noll exit-kod, stoppar azd hela operationen.** Detta är vanligtvis vad du vill—en misslyckad migration bör stoppa distributionen, inte leverera en trasig app. Men det innebär att hooks måste skrivas omsorgsfullt.
+
+**1. Gör fel tydliga och avsiktliga.** Ett hook misslyckas när dess sista kommando returnerar en icke-noll exit-kod. I shell-skript, lägg till `set -e` så att hooken stoppar vid det första felande kommandot istället för att tyst fortsätta:
+
+```yaml
+hooks:
+  predeploy:
+    shell: sh
+    run: |
+      set -e                      # stop on the first error
+      npm run test:unit           # if tests fail, the deploy halts here
+      npm run db:migrate
+```
+
+**2. Tillåt att en hook kan misslyckas utan att stoppa azd.** För icke-kritiska steg (en valfri cache-uppvärmning, en försök-till-notifikation), sätt `continueOnError: true`. azd loggar felet men fortsätter:
+
+```yaml
+hooks:
+  postdeploy:
+    shell: sh
+    continueOnError: true         # a failure here won't fail 'azd up'
+    run: curl -f https://${WEB_URL}/warmup || echo "Warm-up skipped"
+```
+
+**3. Testa hooks i isolering innan ett fullständigt körning.** Du behöver inte köra `azd up` för att felsöka en hook—kör den separat och iterera snabbt:
+
+```bash
+azd hooks run predeploy          # kör endast predeploy-hooken
+azd hooks run postdeploy --service api
+```
+
+**4. Var uppmärksam på OS-specifika skal.** En hook som använder `shell: pwsh` kräver att PowerShell är installerat på maskinen som kör den (inklusive CI-agenter). Använd `shell: sh` för bredast portabilitet, eller tillhandahåll både `windows` och `posix` varianter:
+
+```yaml
+hooks:
+  postprovision:
+    posix:
+      shell: sh
+      run: ./scripts/setup.sh
+    windows:
+      shell: pwsh
+      run: ./scripts/setup.ps1
+```
+
+> **Felsökningstips:** Kör vilket azd-kommando som helst med `--debug` för att se den exakta hook-kommandoraden och dess fullständiga utdata—ovärderligt när en hook fungerar lokalt men misslyckas i CI.
+
+## 🎛️ Distributionskonfiguration
+
+### Tjänstspecificerade distributionsinställningar
 ```yaml
 # azure.yaml
 services:
@@ -238,9 +316,9 @@ azd env set DEBUG false
 azd env set LOG_LEVEL error
 ```
 
-## 🔧 Avancerade driftsättningsscenarier
+## 🔧 Avancerade distributionsscenarier
 
-### Multi-tjänst applikationer
+### Fler-tjänst applikationer
 ```yaml
 # Complex application with multiple services
 services:
@@ -276,7 +354,7 @@ services:
     host: function
 ```
 
-### Blue-Green-driftsättningar
+### Blue-Green-distributioner
 ```bash
 # Skapa blå miljö
 azd env new production-blue
@@ -285,7 +363,7 @@ azd up --environment production-blue
 # Testa blå miljö
 ./scripts/test-environment.sh production-blue
 
-# Byt trafik till blå (manuell uppdatering av DNS/lastbalanserare)
+# Växla trafiken till blå (manuell uppdatering av DNS/lastbalanserare)
 ./scripts/switch-traffic.sh production-blue
 
 # Rensa upp grön miljö
@@ -293,7 +371,7 @@ azd env select production-green
 azd down --force
 ```
 
-### Canary-driftsättningar
+### Canary-distributioner
 ```yaml
 # azure.yaml - Configure traffic splitting
 services:
@@ -307,7 +385,7 @@ services:
         percentage: 10
 ```
 
-### Stegvisa driftsättningar
+### Stegvis distribution
 ```bash
 #!/bin/bash
 # deploy-staged.sh
@@ -338,9 +416,9 @@ if [[ $confirm == [yY] ]]; then
 fi
 ```
 
-## 🐳 Containerdriftsättningar
+## 🐳 Containerdistributioner
 
-### Container-app driftsättningar
+### Distributioner till Container Apps
 ```yaml
 services:
   api:
@@ -364,7 +442,7 @@ services:
       maxReplicas: 10
 ```
 
-### Multisteg Dockerfile-optimering
+### Optimering av multi-stage Dockerfile
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -392,7 +470,7 @@ CMD ["npm", "start"]
 
 ## ⚡ Prestandaoptimering
 
-### Tjänstspecificerade driftsättningar
+### Tjänstspecificerade distributioner
 ```bash
 # Distribuera en specifik tjänst för snabbare iteration
 azd deploy --service web
@@ -402,7 +480,7 @@ azd deploy --service api
 azd deploy
 ```
 
-### Bygg-caching
+### Byggcache
 ```yaml
 # azure.yaml - Configure build commands
 services:
@@ -412,19 +490,19 @@ services:
     outputPath: dist
 ```
 
-### Effektiva koddriftsättningar
+### Effektiva koddistributioner
 ```bash
-# Använd azd deploy (inte azd up) för ändringar som endast gäller koden
-# Detta hoppar över provisionering av infrastrukturen och är betydligt snabbare
+# Använd azd deploy (inte azd up) för enbart kodändringar
+# Detta hoppar över att provisionera infrastrukturen och är mycket snabbare
 azd deploy
 
 # Distribuera en specifik tjänst för snabbast möjliga iteration
 azd deploy --service api
 ```
 
-## 🔍 Övervakning av driftsättningar
+## 🔍 Distributionsövervakning
 
-### Realtidsövervakning av driftsättningar
+### Realtidsövervakning av distributioner
 ```bash
 # Övervaka applikationen i realtid
 azd monitor --live
@@ -432,7 +510,7 @@ azd monitor --live
 # Visa applikationsloggar
 azd monitor --logs
 
-# Kontrollera driftsättningsstatus
+# Kontrollera distributionsstatus
 azd show
 ```
 
@@ -450,7 +528,7 @@ services:
       retries: 3
 ```
 
-### Post-driftsättningsvalidering
+### Validering efter distribution
 ```bash
 #!/bin/bash
 # scripts/validate-deployment.sh
@@ -516,7 +594,7 @@ infra:
       - "198.51.100.0/24" # VPN IP range
 ```
 
-### Identitets- och åtkomsthantering
+### Identitet och åtkomsthantering
 ```yaml
 services:
   api:
@@ -550,15 +628,15 @@ git checkout main
 
 ### Infrastrukturåterställning
 ```bash
-# Förhandsgranska infrastrukturförändringar innan du tillämpar dem
+# Förhandsgranska infrastruktursändringar innan de tillämpas
 azd provision --preview
 
-# För återställning av infrastrukturen, använd versionskontroll:
-git revert HEAD  # Återställ infrastrukturförändringar
+# För återställning av infrastrukturen, använd versionshantering:
+git revert HEAD  # Återställ infrastruktursändringar
 azd provision    # Tillämpa tidigare infrastrukturtillstånd
 ```
 
-### Återställning av databas-migrering
+### Återställning av databasmigrationer
 ```bash
 #!/bin/bash
 # scripts/rollback-database.sh
@@ -572,9 +650,9 @@ npm run db:validate
 echo "Database rollback completed"
 ```
 
-## 📊 Driftsättningsmetrik
+## 📊 Distributionsmätvärden
 
-### Spåra driftsättningsprestanda
+### Spåra distributionsprestanda
 ```bash
 # Visa aktuell distributionsstatus
 azd show
@@ -582,11 +660,11 @@ azd show
 # Övervaka applikationen med Application Insights
 azd monitor --overview
 
-# Visa live-mätvärden
+# Visa realtidsmätvärden
 azd monitor --live
 ```
 
-### Anpassad metriksamling
+### Insamling av anpassade mätvärden
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -612,11 +690,11 @@ azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Upprätthåll paritet mellan miljöer
+# Bibehåll miljöparitet
 ./scripts/sync-environments.sh
 ```
 
-### 2. Infrastrukturvalidering
+### 2. Validering av infrastruktur
 ```bash
 # Förhandsgranska infrastruktursändringar innan distribution
 azd provision --preview
@@ -628,7 +706,7 @@ az bicep lint --file infra/main.bicep
 az bicep build --file infra/main.bicep
 ```
 
-### 3. Testintegrering
+### 3. Integrering av tester
 ```yaml
 hooks:
   predeploy:
@@ -667,49 +745,49 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Nästa steg
 
-- [Provisionering av resurser](provisioning.md) - Fördjupning i hantering av infrastruktur
-- [Planering före driftsättning](../chapter-06-pre-deployment/capacity-planning.md) - Planera din driftsättningsstrategi
-- [Vanliga problem](../chapter-07-troubleshooting/common-issues.md) - Lös driftsättningsproblem
-- [Bästa praxis](../chapter-07-troubleshooting/debugging.md) - Produktionsklara driftsättningsstrategier
+- [Provisioning Resources](provisioning.md) - Fördjupning i infrastrukturhantering
+- [Pre-Deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - Planera din distributionsstrategi
+- [Common Issues](../chapter-07-troubleshooting/common-issues.md) - Felsök distributionsproblem
+- [Best Practices](../chapter-07-troubleshooting/debugging.md) - Produktionsredo distributionsstrategier
 
-## 🎯 Praktiska övningar i driftsättning
+## 🎯 Praktiska övningar för distribution
 
-### Övning 1: Inkrementellt driftsättningsarbetsflöde (20 minuter)
-**Mål**: Bemästra skillnaden mellan full och inkrementell driftsättning
+### Övning 1: Inkrementellt distributionsarbetsflöde (20 minuter)
+**Mål**: Bemästra skillnaden mellan fullständig och inkrementell distribution
 
 ```bash
-# Initial driftsättning
+# Initial utrullning
 mkdir deployment-practice && cd deployment-practice
 azd init --template todo-nodejs-mongo
 azd up
 
-# Registrera tidpunkt för initial driftsättning
+# Registrera tidpunkt för initial utrullning
 echo "Full deployment: $(date)" > deployment-log.txt
 
 # Gör en kodändring
 echo "// Updated $(date)" >> src/api/src/server.js
 
-# Driftsätt endast kod (snabbt)
+# Distribuera endast kod (snabbt)
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
 # Jämför tider
 cat deployment-log.txt
 
-# Städa upp
+# Rensa upp
 azd down --force --purge
 ```
 
 **Kriterier för framgång:**
-- [ ] Fullständig driftsättning tar 5–15 minuter
-- [ ] Endast kod-driftsättning tar 2–5 minuter
-- [ ] Kodändringar reflekteras i den driftsatta appen
-- [ ] Infrastrukturen oförändrad efter `azd deploy`
+- [ ] Full distribution tar 5–15 minuter
+- [ ] Endast kod-distribution tar 2–5 minuter
+- [ ] Kodändringar återspeglas i distribuerad app
+- [ ] Infrastruktur oförändrad efter `azd deploy`
 
-**Läranderesultat**: `azd deploy` är 50–70 % snabbare än `azd up` för kodändringar
+**Läranderesultat**: `azd deploy` är 50–70% snabbare än `azd up` för kodändringar
 
-### Övning 2: Anpassade driftsättningshooks (30 minuter)
-**Mål**: Implementera automatisering före och efter driftsättning
+### Övning 2: Anpassade distributionshooks (30 minuter)
+**Mål**: Implementera automation före och efter distribution
 
 ```bash
 # Skapa valideringsskript före distribution
@@ -718,13 +796,13 @@ cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
 echo "⚠️ Running pre-deployment checks..."
 
-# Kontrollera om testerna passerar
+# Kontrollera att testerna passerar
 if ! npm run test:unit; then
     echo "❌ Tests failed! Aborting deployment."
     exit 1
 fi
 
-# Kontrollera om det finns ändringar som inte har committats
+# Kontrollera om det finns ocommitterade ändringar
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -771,13 +849,13 @@ azd deploy
 ```
 
 **Kriterier för framgång:**
-- [ ] Pre-deploy-script körs före driftsättning
-- [ ] Driftsättning avbryts om tester misslyckas
+- [ ] Pre-deploy script körs före distribution
+- [ ] Distribution avbryts om tester misslyckas
 - [ ] Post-deploy smoke-test validerar hälsa
-- [ ] Hooks körs i korrekt ordning
+- [ ] Hooks körs i rätt ordning
 
-### Övning 3: Multi-miljö driftsättningsstrategi (45 minuter)
-**Mål**: Implementera ett stegvis driftsättningsarbetsflöde (dev → staging → production)
+### Övning 3: Strategi för distribution i flera miljöer (45 minuter)
+**Mål**: Implementera ett stegvis distributionsarbetsflöde (dev → staging → production)
 
 ```bash
 # Skapa distributionsskript
@@ -834,30 +912,30 @@ azd env new dev
 azd env new staging
 azd env new production
 
-# Kör etappvis distribution
+# Kör stegvis distribution
 ./deploy-staged.sh
 ```
 
 **Kriterier för framgång:**
-- [ ] Dev-miljön driftsätts framgångsrikt
-- [ ] Staging-miljön driftsätts framgångsrikt
-- [ ] Manuell godkännande krävs för produktion
+- [ ] Dev-miljön distribueras framgångsrikt
+- [ ] Staging-miljön distribueras framgångsrikt
+- [ ] Manuellt godkännande krävs för produktion
 - [ ] Alla miljöer har fungerande hälsokontroller
-- [ ] Kan rullas tillbaka vid behov
+- [ ] Kan återställa vid behov
 
 ### Övning 4: Återställningsstrategi (25 minuter)
-**Mål**: Implementera och testa återställning av driftsättning med Git
+**Mål**: Implementera och testa återställning av distribution med Git
 
 ```bash
-# Driftsätt v1
+# Distribuera v1
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# Spara v1:s commit-hash
+# Spara commit-hashen för v1
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# Driftsätt v2 med en bakåtinkompatibel ändring
+# Distribuera v2 med brytande ändring
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
@@ -873,7 +951,7 @@ if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; 
     # Rulla tillbaka miljön
     azd env set APP_VERSION "1.0.0"
     
-    # Driftsätt v1 igen
+    # Distribuera v1 igen
     azd deploy
     
     echo "✅ Rolled back to v1.0.0"
@@ -881,17 +959,17 @@ fi
 ```
 
 **Kriterier för framgång:**
-- [ ] Kan upptäcka driftsättningsfel
-- [ ] Återställningsscript körs automatiskt
+- [ ] Kan upptäcka distributionsfel
+- [ ] Återställningsskript körs automatiskt
 - [ ] Applikationen återgår till fungerande tillstånd
-- [ ] Hälsokontroller godkänns efter återställning
+- [ ] Hälsokontroller passerar efter återställning
 
-## 📊 Spårning av driftsättningsmetrik
+## 📊 Spårning av distributionsmätvärden
 
-### Spåra din driftsättningsprestanda
+### Spåra din distributionsprestanda
 
 ```bash
-# Skapa skript för driftsättningsstatistik
+# Skapa skript för driftsättningsmätningar
 cat > track-deployment.sh << 'EOF'
 #!/bin/bash
 START_TIME=$(date +%s)
@@ -929,20 +1007,20 @@ awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-
 
 ## Ytterligare resurser
 
-- [Azure Developer CLI driftsättningsreferens](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Azure Developer CLI Deployment Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [Azure App Service Deployment](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
 - [Azure Container Apps Deployment](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
 - [Azure Functions Deployment](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
-**Navigering**
-- **Föregående lektion**: [Ditt första projekt](../chapter-01-foundation/first-project.md)
-- **Nästa lektion**: [Provisionering av resurser](provisioning.md)
+**Navigation**
+- **Föregående lektion**: [Your First Project](../chapter-01-foundation/first-project.md)
+- **Nästa lektion**: [Provisioning Resources](provisioning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfriskrivning**:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var god observera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess modersmål bör anses vara den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var vänlig notera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

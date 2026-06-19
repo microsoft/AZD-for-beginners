@@ -2,42 +2,43 @@
 
 **Μονοπάτι Μάθησης:** Αρχάριος ⭐ | **Χρόνος:** 25-35 λεπτά | **Κόστος:** $0-15/μήνα
 
-Μια πλήρης, λειτουργική REST API σε Python Flask, αναπτυγμένη σε Azure Container Apps χρησιμοποιώντας το Azure Developer CLI (azd). Αυτό το παράδειγμα παρουσιάζει τις βασικές έννοιες ανάπτυξης κοντέινερ, αυτόματης κλιμάκωσης και παρακολούθησης.
+Μια πλήρης, λειτουργική Python Flask REST API αναπτυγμένη σε Azure Container Apps χρησιμοποιώντας το Azure Developer CLI (azd). Αυτό το παράδειγμα δείχνει την ανάπτυξη container, την αυτόματη κλιμάκωση και τα βασικά παρακολούθησης.
 
 ## 🎯 Τι θα μάθετε
 
-- Αναπτύσσετε μια εφαρμογή Python container σε Azure
-- Διαμορφώνετε αυτόματη κλιμάκωση με scale-to-zero
-- Υλοποιείτε health probes και readiness checks
-- Παρακολουθείτε καταγραφές και μετρήσεις εφαρμογής
-- Χρησιμοποιείτε το Azure Developer CLI για γρήγορη ανάπτυξη
+- Αναπτύξτε μια εφαρμογή Python σε container στο Azure
+- Διαμορφώστε αυτόματη κλιμάκωση με scale-to-zero
+- Υλοποιήστε probes υγείας και ελέγχους ετοιμότητας
+- Παρακολουθήστε τα αρχεία καταγραφής και τις μετρήσεις της εφαρμογής
+- Χρησιμοποιήστε το Azure Developer CLI για γρήγορη ανάπτυξη
 
 ## 📦 Τι περιλαμβάνεται
 
-✅ **Εφαρμογή Flask** - Πλήρης REST API με λειτουργίες CRUD (`src/app.py`)  
-✅ **Dockerfile** - Διαμόρφωση κοντέινερ έτοιμη για παραγωγή  
-✅ **Bicep Infrastructure** - Container Apps environment και ανάπτυξη API  
-✅ **AZD Configuration** - Ρύθμιση ανάπτυξης με μία εντολή  
-✅ **Health Probes** - Διαμορφώθηκαν έλεγχοι liveness και readiness  
-✅ **Αυτόματη κλιμάκωση** - 0-10 αντίγραφα ανάλογα με το φορτίο HTTP  
+✅ **Εφαρμογή Flask** - Πλήρες REST API με λειτουργίες CRUD (`src/app.py`)  
+✅ **Dockerfile** - Ρυθμίσεις container έτοιμες για παραγωγή  
+✅ **Bicep Infrastructure** - Περιβάλλον Container Apps και ανάπτυξη του API  
+✅ **Διαμόρφωση AZD** - Ρύθμιση ανάπτυξης με μία εντολή  
+✅ **Probes Υγείας** - Διαμορφωμένοι έλεγχοι liveness και readiness  
+✅ **Αυτόματη κλιμάκωση** - 0-10 αντίγραφα ανάλογα με το HTTP φορτίο  
 
-## Αρχιτεκτονική
+## Architecture
 
 ```mermaid
 graph TD
     subgraph ACA[Περιβάλλον Azure Container Apps]
-        Flask[Κοντέινερ Flask API<br/>Endpoints υγείας<br/>REST API<br/>Αυτόματη κλιμάκωση 0-10 αντίγραφα]
-        AppInsights[Application Insights]
+        Flask[Δοχείο Flask API<br/>Τερματικά υγείας<br/>Διεπαφή REST API<br/>Αυτόματη κλιμάκωση 0-10 αντιγράφων]
+        AppInsights[Insights εφαρμογής]
     end
 ```
+
 ## Προαπαιτούμενα
 
 ### Απαιτείται
 - **Azure Developer CLI (azd)** - [Οδηγός εγκατάστασης](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure subscription** - [Δωρεάν λογαριασμός](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Εγκαταστήστε το Docker](https://www.docker.com/products/docker-desktop/) (για τοπική δοκιμή)
+- **Συνδρομή Azure** - [Δωρεάν λογαριασμός](https://azure.microsoft.com/free/)
+- **Docker Desktop** - [Εγκατάσταση Docker](https://www.docker.com/products/docker-desktop/) (για τοπικές δοκιμές)
 
-### Επιβεβαίωση προαπαιτουμένων
+### Επαλήθευση προαπαιτούμενων
 
 ```bash
 # Έλεγχος έκδοσης azd (απαιτείται 1.5.0 ή νεότερη)
@@ -50,17 +51,17 @@ azd auth login
 docker --version
 ```
 
-## ⏱️ Χρονοδιάγραμμα ανάπτυξης
+## ⏱️ Χρονοδιάγραμμα Ανάπτυξης
 
 | Phase | Duration | What Happens |
 |-------|----------|--------------||
-| Environment setup | 30 seconds | Create azd environment |
-| Build container | 2-3 minutes | Docker build Flask app |
-| Provision infrastructure | 3-5 minutes | Create Container Apps, registry, monitoring |
-| Deploy application | 2-3 minutes | Push image and deploy to Container Apps |
-| **Total** | **8-12 minutes** | Complete deployment ready |
+| Ρύθμιση περιβάλλοντος | 30 δευτερόλεπτα | Δημιουργία περιβάλλοντος azd |
+| Κατασκευή container | 2-3 λεπτά | Εκτέλεση Docker build για την εφαρμογή Flask |
+| Προετοιμασία υποδομής | 3-5 λεπτά | Δημιουργία Container Apps, registry και υπηρεσιών παρακολούθησης |
+| Ανάπτυξη εφαρμογής | 2-3 λεπτά | Αποστολή εικόνας και ανάπτυξη σε Container Apps |
+| **Σύνολο** | **8-12 λεπτά** | Ολοκληρωμένη ανάπτυξη έτοιμη |
 
-## Γρήγορη εκκίνηση
+## Γρήγορη Εκκίνηση
 
 ```bash
 # Μεταβείτε στο παράδειγμα
@@ -83,7 +84,7 @@ azd env get-values
 curl $(azd env get-value API_ENDPOINT)/health
 ```
 
-**Αναμενόμενη έξοδος:**
+**Αναμενόμενο αποτέλεσμα:**
 ```json
 {
   "status": "healthy",
@@ -93,7 +94,7 @@ curl $(azd env get-value API_ENDPOINT)/health
 }
 ```
 
-## ✅ Επιβεβαίωση ανάπτυξης
+## ✅ Επαλήθευση Ανάπτυξης
 
 ### Βήμα 1: Έλεγχος κατάστασης ανάπτυξης
 
@@ -103,23 +104,23 @@ azd show
 
 # Το αναμενόμενο αποτέλεσμα δείχνει:
 # - Υπηρεσία: api
-# - Τερματικό σημείο: https://ca-api-[env].xxx.azurecontainerapps.io
-# - Κατάσταση: Εκτελείται
+# - Σημείο τερματισμού: https://ca-api-[env].xxx.azurecontainerapps.io
+# - Κατάσταση: Σε λειτουργία
 ```
 
 ### Βήμα 2: Δοκιμή τελικών σημείων API
 
 ```bash
-# Λήψη τελικού σημείου API
+# Λήψη του endpoint του API
 API_URL=$(azd env get-value API_ENDPOINT)
 
 # Έλεγχος υγείας
 curl $API_URL/health
 
-# Δοκιμή ριζικού σημείου τερματισμού
+# Δοκιμή του ριζικού endpoint
 curl $API_URL/
 
-# Δημιουργία αντικειμένου
+# Δημιουργία ενός αντικειμένου
 curl -X POST $API_URL/api/items \
   -H "Content-Type: application/json" \
   -d '{"name": "Test Item", "description": "My first item"}'
@@ -129,24 +130,24 @@ curl $API_URL/api/items
 ```
 
 **Κριτήρια επιτυχίας:**
-- ✅ Το endpoint υγείας επιστρέφει HTTP 200
-- ✅ Το root endpoint εμφανίζει πληροφορίες για το API
-- ✅ Το POST δημιουργεί αντικείμενο και επιστρέφει HTTP 201
-- ✅ Το GET επιστρέφει τα δημιουργημένα αντικείμενα
+- ✅ Το endpoint υγείας (/health) επιστρέφει HTTP 200
+- ✅ Το κύριο endpoint εμφανίζει πληροφορίες του API
+- ✅ Το POST δημιουργεί στοιχείο και επιστρέφει HTTP 201
+- ✅ Το GET επιστρέφει τα δημιουργημένα στοιχεία
 
 ### Βήμα 3: Προβολή καταγραφών
 
 ```bash
-# Μετάδωσε ζωντανά αρχεία καταγραφής χρησιμοποιώντας το azd monitor
+# Μεταδώστε ζωντανά αρχεία καταγραφής χρησιμοποιώντας azd monitor
 azd monitor --logs
 
-# Ή χρησιμοποίησε το Azure CLI:
+# Ή χρησιμοποιήστε το Azure CLI:
 az containerapp logs show --name api --resource-group $RG_NAME --follow
 
 # Θα πρέπει να δείτε:
-# - μηνύματα εκκίνησης του Gunicorn
-# - αρχεία καταγραφής αιτήσεων HTTP
-# - αρχεία καταγραφής πληροφοριών εφαρμογής
+# - Μηνύματα εκκίνησης του Gunicorn
+# - Καταγραφές αιτημάτων HTTP
+# - Καταγραφές πληροφοριών εφαρμογής
 ```
 
 ## Δομή έργου
@@ -166,9 +167,9 @@ simple-flask-api/
     └── Dockerfile
 ```
 
-## Τελικά σημεία API
+## Τερματικά API
 
-| Τελικό σημείο | Μέθοδος | Περιγραφή |
+| Endpoint | Method | Description |
 |----------|--------|-------------|
 | `/health` | GET | Έλεγχος υγείας |
 | `/api/items` | GET | Λίστα όλων των αντικειμένων |
@@ -188,14 +189,14 @@ azd env set LOG_LEVEL info
 azd env set MAX_REPLICAS 20
 ```
 
-### Ρύθμιση κλιμάκωσης
+### Ρυθμίσεις κλιμάκωσης
 
-Το API κλιμακώνεται αυτόματα βάσει της κίνησης HTTP:
-- **Min Replicas**: 0 (κλιμακώνεται στο μηδέν όταν είναι αδρανές)
-- **Max Replicas**: 10
-- **Concurrent Requests per Replica**: 50
+Το API κλιμακώνεται αυτόματα με βάση την κίνηση HTTP:
+- **Ελάχιστα αντίγραφα**: 0 (κλιμακώνεται στο μηδέν όταν είναι αδρανές)
+- **Μέγιστα αντίγραφα**: 10
+- **Ταυτόχρονες αιτήσεις ανά αντίγραφο**: 50
 
-## Development
+## Ανάπτυξη
 
 ### Εκτέλεση τοπικά
 
@@ -204,14 +205,14 @@ azd env set MAX_REPLICAS 20
 cd src
 pip install -r requirements.txt
 
-# Τρέξτε την εφαρμογή
+# Εκτελέστε την εφαρμογή
 python app.py
 
 # Δοκιμάστε το τοπικά
 curl http://localhost:8000/health
 ```
 
-### Κατασκευή και δοκιμή κοντέινερ
+### Κατασκευή και δοκιμή container
 
 ```bash
 # Δημιουργία εικόνας Docker
@@ -224,7 +225,7 @@ docker run -p 8000:8000 flask-api:local
 curl http://localhost:8000/health
 ```
 
-## Deployment
+## Ανάπτυξη
 
 ### Πλήρης ανάπτυξη
 
@@ -233,14 +234,14 @@ curl http://localhost:8000/health
 azd up
 ```
 
-### Ανάπτυξη μόνο κώδικα
+### Ανάπτυξη μόνο με κώδικα
 
 ```bash
-# Ανάπτυξη μόνο του κώδικα της εφαρμογής (η υποδομή αμετάβλητη)
+# Αναπτύξτε μόνο τον κώδικα της εφαρμογής (χωρίς αλλαγή στην υποδομή)
 azd deploy api
 ```
 
-### Ενημέρωση ρυθμίσεων
+### Ενημέρωση διαμόρφωσης
 
 ```bash
 # Ενημερώστε τις μεταβλητές περιβάλλοντος
@@ -255,20 +256,20 @@ azd deploy api
 ### Προβολή καταγραφών
 
 ```bash
-# Μετάδοση ζωντανών αρχείων καταγραφής χρησιμοποιώντας το azd monitor
+# Μετάδωσε ζωντανά αρχεία καταγραφής χρησιμοποιώντας το azd monitor
 azd monitor --logs
 
-# Ή χρησιμοποιήστε το Azure CLI για τις Container Apps:
+# Ή χρησιμοποιήστε το Azure CLI για τα Container Apps:
 az containerapp logs show --name api --resource-group $RG_NAME --follow
 
 # Προβολή των τελευταίων 100 γραμμών
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 ```
 
-### Παρακολούθηση μετρήσεων
+### Παρακολούθηση μετρικών
 
 ```bash
-# Άνοιγμα πίνακα ελέγχου του Azure Monitor
+# Άνοιγμα του πίνακα εργαλείων του Azure Monitor
 azd monitor --overview
 
 # Προβολή συγκεκριμένων μετρικών
@@ -309,25 +310,25 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
 
 ## Βελτιστοποίηση κόστους
 
-Αυτή η ανάπτυξη χρησιμοποιεί scale-to-zero, οπότε πληρώνετε μόνο όταν το API επεξεργάζεται αιτήματα:
+Αυτή η ανάπτυξη χρησιμοποιεί scale-to-zero, οπότε πληρώνετε μόνο όταν το API επεξεργάζεται αιτήσεις:
 
-- **Κόστος όταν αδρανεί**: ~$0/μήνα (κλιμακώνεται στο μηδέν)
+- **Κόστος αδράνειας**: ~$0/μήνα (κλιμακώνεται στο μηδέν)
 - **Κόστος κατά την ενεργή λειτουργία**: ~$0.000024/δευτερόλεπτο ανά αντίγραφο
-- **Εκτιμώμενο μηνιαίο κόστος** (ελαφριά χρήση): $5-15
+- **Αναμενόμενο μηνιαίο κόστος** (ελαφριά χρήση): $5-15
 
-### Μειώστε περαιτέρω τα κόστη
+### Περαιτέρω μείωση κόστους
 
 ```bash
-# Μείωση του μέγιστου αριθμού αντιγράφων για το περιβάλλον ανάπτυξης
+# Μείωσε τον μέγιστο αριθμό αντιγράφων για το περιβάλλον ανάπτυξης
 azd env set MAX_REPLICAS 3
 
-# Χρησιμοποιήστε μικρότερο χρονικό όριο αδράνειας
+# Χρησιμοποίησε μικρότερο χρονικό όριο αδράνειας
 azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 λεπτά
 ```
 
-## Αντιμετώπιση προβλημάτων
+## Επίλυση προβλημάτων
 
-### Το κοντέινερ δεν ξεκινά
+### Το container δεν ξεκινάει
 
 ```bash
 # Ελέγξτε τα αρχεία καταγραφής του κοντέινερ χρησιμοποιώντας το Azure CLI
@@ -340,7 +341,7 @@ docker build -t test ./src
 ### Το API δεν είναι προσβάσιμο
 
 ```bash
-# Επαληθεύστε ότι το ingress είναι εξωτερικό
+# Επιβεβαιώστε ότι το ingress είναι εξωτερικό
 az containerapp show --name api --resource-group rg-simple-flask-api \
   --query properties.configuration.ingress.external
 ```
@@ -348,12 +349,12 @@ az containerapp show --name api --resource-group rg-simple-flask-api \
 ### Υψηλοί χρόνοι απόκρισης
 
 ```bash
-# Ελέγξτε τη χρήση της CPU/μνήμης
+# Ελέγξτε τη χρήση CPU/μνήμης
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# Αυξήστε τους πόρους εάν χρειάζεται
+# Αυξήστε τους πόρους αν χρειάζεται
 az containerapp update --name api --resource-group rg-simple-flask-api \
   --cpu 1.0 --memory 2Gi
 ```
@@ -375,13 +376,13 @@ azd down --force --purge
    # Ενημερώστε το app.py με τη σύνδεση στη βάση δεδομένων
    ```
 
-2. **Προσθήκη αυθεντικοποίησης** - Εφαρμογή Azure AD ή API keys
+2. **Προσθήκη αυθεντικοποίησης** - Υλοποίηση Microsoft Entra ID ή κλειδιών API
    ```python
    # Προσθέστε middleware αυθεντικοποίησης στο app.py
    from functools import wraps
    ```
 
-3. **Ρύθμιση CI/CD** - Ροή εργασίας GitHub Actions
+3. **Ρύθμιση CI/CD** - Workflow GitHub Actions
    ```yaml
    # Create .github/workflows/deploy.yml
    name: Deploy to Azure
@@ -397,40 +398,40 @@ azd down --force --purge
 ### Σχετικά παραδείγματα
 
 - **[Εφαρμογή βάσης δεδομένων](../../../../../examples/database-app)** - Πλήρες παράδειγμα με SQL Database
-- **[Microservices](../../../../../examples/container-app/microservices)** - Αρχιτεκτονική πολλαπλών υπηρεσιών
-- **[Container Apps Master Guide](../README.md)** - Όλα τα μοτίβα για κοντέινερ
+- **[Μικροϋπηρεσίες](../../../../../examples/container-app/microservices)** - Αρχιτεκτονική πολλαπλών υπηρεσιών
+- **[Οδηγός Container Apps](../README.md)** - Όλα τα μοτίβα container
 
-### Πόροι μάθησης
+### Πόροι εκμάθησης
 
-- 📚 [Μάθημα AZD για Αρχάριους](../../../README.md) - Κύρια σελίδα του μαθήματος
-- 📚 [Πρότυπα Container Apps](../README.md) - Περισσότερα πρότυπα ανάπτυξης
-- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - Πρότυπα της κοινότητας
+- 📚 [Μάθημα AZD για αρχάριους](../../../README.md) - Κύρια σελίδα μαθήματος
+- 📚 [Πρότυπα Container Apps](../README.md) - Περισσότερα μοτίβα ανάπτυξης
+- 📚 [Συλλογή προτύπων AZD](https://azure.github.io/awesome-azd/) - Πρότυπα της κοινότητας
 
-## Επιπλέον πόροι
+## Πρόσθετοι πόροι
 
 ### Τεκμηρίωση
-- **[Τεκμηρίωση Flask](https://flask.palletsprojects.com/)** - Οδηγός του Flask framework
+- **[Τεκμηρίωση Flask](https://flask.palletsprojects.com/)** - Οδηγός του πλαισίου Flask
 - **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Επίσημη τεκμηρίωση Azure
 - **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - Αναφορά εντολών azd
 
-### Οδηγοί
+### Σεμινάρια
 - **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Αναπτύξτε την πρώτη σας εφαρμογή
 - **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Οδηγός ανάπτυξης Python
 - **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Υποδομή ως κώδικας
 
 ### Εργαλεία
-- **[Azure Portal](https://portal.azure.com)** - Διαχείριση πόρων με γραφικό περιβάλλον
-- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - Ενσωμάτωση στο IDE
+- **[Azure Portal](https://portal.azure.com)** - Διαχειριστείτε πόρους οπτικά
+- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - Ενσωμάτωση IDE
 
 ---
 
-**🎉 Συγχαρητήρια!** Έχετε αναπτύξει ένα Flask API έτοιμο για παραγωγή σε Azure Container Apps με αυτόματη κλιμάκωση και παρακολούθηση.
+**🎉 Συγχαρητήρια!** Έχετε αναπτύξει ένα έτοιμο για παραγωγή Flask API σε Azure Container Apps με αυτόματη κλιμάκωση και παρακολούθηση.
 
 **Ερωτήσεις;** [Ανοίξτε ένα issue](https://github.com/microsoft/AZD-for-beginners/issues) ή ελέγξτε το [FAQ](../../../resources/faq.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Αποποίηση ευθυνών:
-Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης με τεχνητή νοημοσύνη [Co-op Translator](https://github.com/Azure/co-op-translator). Παρόλο που επιδιώκουμε την ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Η πρωτότυπη έκδοση του εγγράφου στην αρχική γλώσσα πρέπει να θεωρείται η έγκυρη πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική μετάφραση από άνθρωπο. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+**Αποποίηση ευθυνών**:
+Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης με τεχνητή νοημοσύνη [Co-op Translator](https://github.com/Azure/co-op-translator). Ενώ επιδιώκουμε την ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

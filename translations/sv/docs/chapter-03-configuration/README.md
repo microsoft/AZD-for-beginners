@@ -1,14 +1,14 @@
 # Kapitel 3: Konfiguration & Autentisering
 
-**📚 Kurs**: [AZD För nybörjare](../../README.md) | **⏱️ Duration**: 45-60 minutes | **⭐ Complexity**: Intermediate
+**📚 Kurs**: [AZD för nybörjare](../../README.md) | **⏱️ Varaktighet**: 45-60 minuter | **⭐ Svårighetsgrad**: Medel
 
 ---
 
 ## Översikt
 
-Detta kapitel täcker miljökonfiguration, autentiseringsmönster och säkerhetsrekommendationer för Azure Developer CLI-distributioner.
+Detta kapitel behandlar miljökonfiguration, autentiseringsmönster och säkerhetsbästa praxis för distributioner med Azure Developer CLI.
 
-> Validerad mot `azd 1.23.12` i mars 2026.
+> Validerad mot `azd 1.25.6` i juni 2026.
 
 ## Lärandemål
 
@@ -25,7 +25,7 @@ Genom att slutföra detta kapitel kommer du att:
 | # | Lektion | Beskrivning | Tid |
 |---|--------|-------------|------|
 | 1 | [Konfigurationsguide](configuration.md) | Miljöinställning och hantering | 30 min |
-| 2 | [Autentisering & Säkerhet](authsecurity.md) | Mönster för hanterade identiteter och RBAC | 30 min |
+| 2 | [Autentisering och säkerhet](authsecurity.md) | Mönster för hanterad identitet och RBAC | 30 min |
 
 ---
 
@@ -37,7 +37,7 @@ azd env new dev
 azd env new staging
 azd env new prod
 
-# Byt mellan miljöer
+# Växla mellan miljöer
 azd env select prod
 
 # Ställ in miljövariabler
@@ -61,7 +61,7 @@ AZD tillämpar inställningar i denna ordning (senare åsidosätter tidigare):
 
 ---
 
-## 🔐 Bästa säkerhetspraxis
+## 🔐 Säkerhetsbästa praxis
 
 ```bash
 # Använd hanterad identitet (rekommenderas)
@@ -73,10 +73,10 @@ azd auth status
 # Valfritt: verifiera Azure CLI-kontexten om du planerar att köra az-kommandon
 az account show
 
-# Autentisera om det behövs
+# Autentisera igen vid behov
 azd auth login
 
-# Valfritt: uppdatera Azure CLI-autentisering för az-kommandon
+# Valfritt: uppdatera Azure CLI-autentiseringen för az-kommandon
 az login
 ```
 
@@ -100,5 +100,5 @@ az login
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfriskrivning**:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var vänlig observera att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på sitt ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår genom användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var vänlig notera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,12 +1,12 @@
 # 2. Validera en mall
 
-> Validerad mot `azd 1.23.12` i mars 2026.
+> Validerad mot `azd 1.25.6` i juni 2026.
 
 !!! tip "I SLUTET AV DENNA MODUL KOMMER DU ATT KUNNA"
 
     - [ ] Analysera AI-lösningens arkitektur
     - [ ] Förstå AZD-distributionsarbetsflödet
-    - [ ] Använd GitHub Copilot för att få hjälp med att använda AZD
+    - [ ] Använd GitHub Copilot för att få hjälp med AZD
     - [ ] **Lab 2:** Distribuera och validera AI Agents-mallen
 
 ---
@@ -31,14 +31,14 @@ Before we begin, let's make sure you have the Azure Developer CLI installed.
 1. You should see something like this!
 
       ```bash title="" linenums="0"
-      azd version 1.23.12 (commit <current-build>)
+      azd version 1.25.6 (commit <current-build>)
       ```
 
-**You are now ready to select and deploy a template with azd**
+**Du är nu redo att välja och distribuera en mall med azd**
 
 ---
 
-## 2. Val av mall
+## 2. Mallval
 
 The Microsoft Foundry platform comes with a [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that cover popular solution scenarios like _multi-agent workflow atomation_ and _multi-modal content processing_. You can also discover these templates by visiting the Microsoft Foundry portal.
 
@@ -88,7 +88,7 @@ Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
       ```bash title="" linenums="0"
       SUCCESS: Your up workflow to provision and deploy to Azure completed in 10 minutes 17 seconds.
       ```
-1. Din Azure Portal kommer nu att ha en provisionerad resursgrupp med det där miljönamnet:
+1. Your Azure Portal will now have a provisioned resource group with that env name:
 
       ![Infrastruktur](../../../../../translated_images/sv/02-provisioned-infra.46c706b14f56e0bf.webp)
 
@@ -98,32 +98,32 @@ Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
 
 ## 4. Validering av mallen
 
-1. Besök Azure Portal [Resursgrupper](https://portal.azure.com/#browse/resourcegroups) sidan - logga in när du uppmanas
-1. Klicka på RG för ditt miljönamn - du ser sidan ovan
+1. Visit Azure Portal [Resursgrupper](https://portal.azure.com/#browse/resourcegroups) page - log in when prompted
+1. Click on RG for your environment name - you see the page above
 
       - klicka på Azure Container Apps-resursen
-      - klicka på Application Url i _Essentials_-sektionen (övre högra)
+      - klicka på Application Url i avsnittet _Essentials_ (top right)
 
-1. Du bör se en hostad applikationsfrontend som detta:
+1. You should see a hosted application front-end UI like this:
 
-   ![App](../../../../../translated_images/sv/03-test-application.471910da12c3038e.webp)
+   ![Applikation](../../../../../translated_images/sv/03-test-application.471910da12c3038e.webp)
 
-1. Försök att ställa ett par [exempelfrågor](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
+1. Try asking a couple of [exempelfrågor](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
       1. Fråga: ```What is the capital of France?``` 
       1. Fråga: ```What's the best tent under $200 for two people, and what features does it include?```
 
-1. Du bör få svar liknande det som visas nedan. _Men hur fungerar detta?_ 
+1. You should get answers similar to what is shown below. _But how does this work?_ 
 
-      ![App-svar](../../../../../translated_images/sv/03-test-question.521c1e863cbaddb6.webp)
+      ![Applikation](../../../../../translated_images/sv/03-test-question.521c1e863cbaddb6.webp)
 
 ---
 
-## 5.  Validering av agenten
+## 5. Agentvalidering
 
 The Azure Container App deploys an endpoint that connects to the AI Agent provisioned in the Microsoft Foundry project for this template. Let's take a look at what that means.
 
-1. Return to the Azure Portal _Overview_ page for your resource group
+1. Return to the Azure Portal _Översikt_ page for your resource group
 
 1. Click on the `Microsoft Foundry` resource in that list
 
@@ -131,28 +131,28 @@ The Azure Container App deploys an endpoint that connects to the AI Agent provis
    ![Foundry](../../../../../translated_images/sv/04-view-foundry-project.fb94ca41803f28f3.webp)
 
 1. You should see the Foundry Project page for your AI application
-   ![Project](../../../../../translated_images/sv/05-visit-foundry-portal.d734e98135892d7e.webp)
+   ![Projekt](../../../../../translated_images/sv/05-visit-foundry-portal.d734e98135892d7e.webp)
 
 1. Click on `Agents` - you see the default Agent provisioned in your project
    ![Agenter](../../../../../translated_images/sv/06-visit-agents.bccb263f77b00a09.webp)
 
 1. Select it - and you see the Agent details. Note the following:
 
-      - The agent uses File Search by default (always)
-      - The agent `Knowledge` indicates it has 32 files uploaded (for file search)
-      ![Agent](../../../../../translated_images/sv/07-view-agent-details.0e049f37f61eae62.webp)
+      - Agenten använder File Search som standard (alltid)
+      - Agentens `Knowledge` visar att den har 32 filer uppladdade (för file search)
+      ![Agenter](../../../../../translated_images/sv/07-view-agent-details.0e049f37f61eae62.webp)
 
 1. Look for the `Data+indexes` option in the left menu and click for details. 
 
-      - You should see the 32 data files uploaded for knowledge.
-      - These will correspond to the 12 customer files and 20 product files under `src/files` 
+      - Du bör se de 32 datafilerna uppladdade för kunskap.
+      - Dessa motsvarar de 12 kundfilerna och 20 produktfilerna under `src/files` 
       ![Data](../../../../../translated_images/sv/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
 **Du har validerat agentens funktion!** 
 
-1. The agent responses are grounded in the knowledge in those files. 
-1. You can now ask questions related to that data, and get grounded responses.
-1. Example: `customer_info_10.json` describes the 3 purchases made by "Amanda Perez"
+1. Agentens svar är grundade i kunskapen i dessa filer. 
+1. Du kan nu ställa frågor relaterade till dessa data och få grundade svar.
+1. Exempel: `customer_info_10.json` beskriver de 3 köp som gjorts av "Amanda Perez"
 
 Revisit the browser tab with the Container App endpoint and ask: `What products does Amanda Perez own?`. You should see something like this:
 
@@ -160,7 +160,7 @@ Revisit the browser tab with the Container App endpoint and ask: `What products 
 
 ---
 
-## 6. Agentens lekplats
+## 6. Agent Playground
 
 Let's build a bit more intuition for the capabilities of Microsoft Foundry, by taking the Agent for a spin in the Agents Playground. 
 
@@ -184,15 +184,15 @@ You also see a _stats_ row below the response.
 
 ---
 
-## 7. Inbyggd observerbarhet
+## 7. Inbyggd observabilitet
 
 Observability is about instrumenting your application to generate data that can be used to understand, debug, and optimize, its operations. To get a sense for this:
 
 1. Click the `View Run Info` button - you should see this view. This is an example of [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) in action. _You can also get this view by clicking Thread Logs in the top-level menu_.
 
-   - Get a sense for the run steps and tools engaged by the agent
-   - Understand total Token count (vs. output tokens usage) for response
-   - Understand the latency and where time is being spent in execution
+   - Få en uppfattning om körstegen och vilka verktyg agenten använde
+   - Förstå total token-räkning (vs. utgående tokens användning) för svaret
+   - Förstå latensen och var tiden spenderas under exekveringen
 
       ![Agent](../../../../../translated_images/sv/10-view-run-info.b20ebd75fef6a1cc.webp)
 
@@ -234,7 +234,7 @@ Let's try out a few commands:
       azd env get-values
       ```
       
-      Du ser något i stil med:
+      Du ser något liknande:
 
       ```bash title="" linenums="0"
       AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4.1-mini"
@@ -250,7 +250,7 @@ Let's try out a few commands:
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
       
-      Du ser något i stil med detta - det sattes inte som standard!
+      Du ser något liknande - det var inte inställt som standard!
 
       ```bash title="" linenums="0"
       ERROR: key 'AZURE_AI_AGENT_MODEL_NAME' not found in the environment values
@@ -264,7 +264,7 @@ Let's try out a few commands:
       azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
       ```
 
-      Nu bör vi se att värdet är satt:
+      Nu bör vi se att värdet är inställt:
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
@@ -272,27 +272,27 @@ Let's try out a few commands:
 
 1. Note that some resources are persistent (e.g., model deployments) and will require more than just an `azd up` to force the redeployment. Let's try tearing down the original deployment and redeploying with changed env vars.
 
-1. **Refresh** If you had previously deployed infrastructure using an azd template - you can _refresh_ the state of your local environment variables based on the current state of your Azure deployment using this command:
+1. **Uppdatera** Om du tidigare har distribuerat infrastruktur med en azd-mall - du kan _refresha_ tillståndet för dina lokala miljövariabler baserat på det aktuella tillståndet för din Azure-distribution med detta kommando:
 
       ```bash title="" linenums="0"
       azd env refresh
       ```
 
-      Detta är ett kraftfullt sätt att _synkronisera_ miljövariabler mellan två eller fler lokala utvecklingsmiljöer (t.ex. team med flera utvecklare) - vilket gör att den distribuerade infrastrukturen kan fungera som den slutgiltiga sanningen för miljövariablernas tillstånd. Teammedlemmar behöver helt enkelt _uppdatera_ variablerna för att åter komma i synk.
+      Detta är ett kraftfullt sätt att _synkronisera_ miljövariabler mellan två eller fler lokala utvecklingsmiljöer (t.ex. ett team med flera utvecklare) - vilket gör att den distribuerade infrastrukturen kan fungera som sanningskälla för tillståndet hos miljövariablerna. Teammedlemmar behöver bara _uppdatera_ variablerna för att komma tillbaka i synk.
 
 ---
 
 ## 9. Grattis 🏆
 
-Du har precis slutfört ett komplett arbetsflöde där du:
+Du har precis slutfört ett ända-till-ända-arbetsflöde där du:
 
-- [X] Valde AZD-mallen du vill använda
+- [X] Valde den AZD-mall du vill använda
 - [X] Öppnade mallen i en stödd utvecklingsmiljö
-- [X] Distribuerade mallen och verifierade att den fungerar
+- [X] Driftsatte mallen och verifierade att den fungerar
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Friskrivning**:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var vänlig observera att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+**Ansvarsfriskrivning**:
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var vänlig notera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

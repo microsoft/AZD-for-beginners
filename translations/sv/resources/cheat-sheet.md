@@ -1,43 +1,43 @@
 # Kommandofusklista - Viktiga AZD-kommandon
 
 **Snabbreferens för alla kapitel**
-- **📚 Kursstartsida**: [AZD för nybörjare](../README.md)
-- **📖 Kom igång**: [Kapitel 1: Grund & Kom igång](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI-kommandon**: [Kapitel 2: AI-först utveckling](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **📚 Kursöversikt**: [AZD för nybörjare](../README.md)
+- **📖 Snabbstart**: [Kapitel 1: Grunderna & Snabbstart](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI-kommandon**: [Kapitel 2: AI-fokuserad utveckling](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 Avancerat**: [Kapitel 4: Infrastruktur som kod](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Introduktion
 
-Detta omfattande fuskblad ger snabbreferens för de mest använda Azure Developer CLI-kommandona, organiserade efter kategori med praktiska exempel. Perfekt för snabba uppslag under utveckling, felsökning och dagliga operationer med azd-projekt.
+Denna omfattande fusklista ger en snabbreferens för de vanligast använda Azure Developer CLI-kommandona, organiserade efter kategori med praktiska exempel. Perfekt för snabba uppslag under utveckling, felsökning och dagliga operationer med azd-projekt.
 
 ## Lärandemål
 
-Genom att använda detta fuskblad kommer du att:
+Genom att använda denna fusklista kommer du att:
 - Ha omedelbar åtkomst till viktiga Azure Developer CLI-kommandon och syntax
-- Förstå hur kommandon är organiserade efter funktionella kategorier och användningsfall
-- Hänvisa till praktiska exempel för vanliga utvecklings- och distributionsscenarier
+- Förstå kommandoorganisation efter funktionella kategorier och användningsfall
+- Referera praktiska exempel för vanliga utvecklings- och driftsättningsscenarier
 - Få åtkomst till felsökningskommandon för snabb problemlösning
 - Hitta avancerade konfigurations- och anpassningsalternativ effektivt
-- Hitta kommandon för hantering av miljöer och arbetsflöden med flera miljöer
+- Lokalisera kommandon för miljöhantering och arbetsflöden med flera miljöer
 
 ## Läranderesultat
 
-Med regelbunden användning av detta fuskblad kommer du att kunna:
-- Köra azd-kommandon med självförtroende utan att behöva hänvisa till fullständig dokumentation
+Genom regelbunden användning av denna fusklista kommer du att kunna:
+- Köra azd-kommandon självsäkert utan att referera till fullständig dokumentation
 - Snabbt lösa vanliga problem med lämpliga diagnostiska kommandon
 - Effektivt hantera flera miljöer och distributionsscenarier
 - Använda avancerade azd-funktioner och konfigurationsalternativ vid behov
-- Felsöka distributionsproblem med hjälp av systematiska kommandosekvenser
+- Felsöka distributionsproblem med systematiska kommando-sekvenser
 - Optimera arbetsflöden genom effektiv användning av azd-genvägar och alternativ
 
-## Kom igång-kommandon
+## Kommandon för att komma igång
 
 ### Autentisering
 ```bash
 # Logga in på Azure via AZD
 azd auth login
 
-# Logga in i Azure CLI (AZD använder detta i bakgrunden)
+# Logga in i Azure CLI (AZD använder detta bakom kulisserna)
 az login
 
 # Kontrollera det aktuella kontot
@@ -54,7 +54,7 @@ azd auth logout
 az logout
 ```
 
-### Projektinitiering
+### Initiering av projekt
 ```bash
 # Bläddra bland tillgängliga mallar
 azd template list
@@ -66,7 +66,7 @@ azd init --template <template-name>
 # Initiera i aktuell katalog
 azd init .
 
-# Initiera med anpassat namn
+# Initiera med eget namn
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
@@ -74,7 +74,7 @@ azd init --template todo-nodejs-mongo my-awesome-app
 
 ### Komplett distributionsarbetsflöde
 ```bash
-# Distribuera allt (provisionera + driftsätta)
+# Distribuera allt (provisionering + distribution)
 azd up
 
 # Distribuera med bekräftelsefrågor inaktiverade
@@ -92,10 +92,10 @@ azd up --parameter location=westus2
 # Provisionera Azure-resurser
 azd provision
 
-# 🧪 Förhandsgranska ändringar i infrastrukturen
+# 🧪 Förhandsgranska infrastruktursändringar
 azd provision --preview
-# Visar en simulerad vy av vilka resurser som skulle skapas/ändras/tas bort
-# Liknande 'terraform plan' eller 'bicep what-if' - säkert att köra, inga ändringar tillämpas
+# Visar en simulerad vy av vilka resurser som skulle skapas/ändras/raderas
+# Liknar 'terraform plan' eller 'bicep what-if' - säkert att köra, inga ändringar genomförs
 ```
 
 ### Endast applikation
@@ -113,12 +113,23 @@ azd deploy --all
 
 ### Bygg och paketera
 ```bash
-# Bygg applikationer
+# Återställ (ladda ner) applikationens beroenden
+azd restore
+
+# Återställ en specifik tjänst
+azd restore --service api
+
+# Bygg ett distribuerbart paket utan att distribuera
 azd package
 
 # Bygg en specifik tjänst
 azd package --service api
 ```
+
+> **`azd restore`** laddar ner din apps beroenden (npm, pip, NuGet, Maven, etc.). Det körs automatiskt under `azd package` och `azd deploy`, så du anropar det sällan direkt—kör det manuellt för att förhämta beroenden (till exempel för att värma en CI-cache eller arbeta offline efteråt).
+
+> **`azd package`** bygger det deploybara artefaktet (en containerbild eller zip) **utan** att pusha det till Azure. Använd det separat för att verifiera att en build lyckas, inspektera utdata eller producera ett artefakt som en separat process kommer att distribuera senare. `azd deploy` paketerar automatiskt, så du behöver bara `azd package` när du vill ha artefaktet utan att distribuera.
+
 
 ## 🌍 Miljöhantering
 
@@ -127,7 +138,7 @@ azd package --service api
 # Lista alla miljöer
 azd env list
 
-# Skapa en ny miljö
+# Skapa ny miljö
 azd env new development
 azd env new staging --location westus2
 
@@ -137,13 +148,13 @@ azd env select production
 # Visa tillgängliga miljöer
 azd env list
 
-# Uppdatera miljöns status
+# Uppdatera miljöns tillstånd
 azd env refresh
 ```
 
 ### Miljövariabler
 ```bash
-# Ställ in miljövariabel
+# Sätt miljövariabel
 azd env set API_KEY "your-secret-key"
 azd env set DEBUG true
 
@@ -164,7 +175,7 @@ azd env unset DEBUG
 # Lista alla konfigurationer
 azd config show
 
-# Ställ in globala standardinställningar
+# Ange globala standardinställningar
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
@@ -183,7 +194,7 @@ azd config validate
 # Visa projektinformation
 azd show
 
-# Hämta slutpunkter för tjänster
+# Hämta tjänendepunkter
 azd show --output json
 ```
 
@@ -194,13 +205,13 @@ azd show --output json
 # Öppna övervakningspanelen i Azure-portalen
 azd monitor
 
-# Öppna Application Insights live-metriker
+# Öppna live-metriker i Application Insights
 azd monitor --live
 
 # Öppna loggbladet i Application Insights
 azd monitor --logs
 
-# Öppna översikten i Application Insights
+# Öppna översikten för Application Insights
 azd monitor --overview
 ```
 
@@ -212,7 +223,7 @@ az containerapp logs show --name <app-name> --resource-group <rg-name>
 # Följ loggar i realtid
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
-# Visa loggar i Azure-portalen
+# Visa loggar från Azure-portalen
 azd monitor --logs
 ```
 
@@ -221,7 +232,7 @@ azd monitor --logs
 # Få åtkomst till Log Analytics via Azure-portalen
 azd monitor --logs
 
-# Kör frågor mot loggar med Azure CLI
+# Fråga loggar med hjälp av Azure CLI
 az monitor log-analytics query \
   --workspace <workspace-id> \
   --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
@@ -234,10 +245,10 @@ az monitor log-analytics query \
 # Ta bort alla Azure-resurser
 azd down
 
-# Tvinga borttagning utan bekräftelse
+# Tvinga radering utan bekräftelse
 azd down --force
 
-# Rensa mjukborttagna resurser
+# Rensa mjukt raderade resurser
 azd down --purge
 
 # Fullständig rensning
@@ -246,7 +257,7 @@ azd down --force --purge
 
 ### Uppdateringar
 ```bash
-# Kontrollera uppdateringar för azd
+# Kontrollera efter azd-uppdateringar
 azd version
 
 # Hämta aktuell version
@@ -258,7 +269,7 @@ azd config show
 
 ## 🔧 Avancerade kommandon
 
-### Pipelines och CI/CD
+### Pipeline och CI/CD
 ```bash
 # Konfigurera GitHub Actions
 azd pipeline config
@@ -275,13 +286,13 @@ azd pipeline show
 # Generera infrastruktursmallar
 azd infra generate
 
-# 🧪 Förhandsgranskning och planering av infrastruktur
+# 🧪 Infrastrukturförhandsgranskning och planering
 azd provision --preview
-# Simulerar uppsättning av infrastruktur utan att distribuera
-# Analyserar Bicep-/Terraform-mallar och visar:
-# - Resurser som ska läggas till (gröna +)
-# - Resurser som ska ändras (gula ~)
-# - Resurser som ska tas bort (röda -)
+# Simulerar skapande av infrastruktur utan att distribuera
+# Analyserar Bicep/Terraform-mallar och visar:
+# - Resurser som kommer att läggas till (grön +)
+# - Resurser som kommer att ändras (gul ~)
+# - Resurser som kommer att tas bort (röd -)
 # Säkert att köra - inga faktiska ändringar görs i Azure-miljön
 
 # Syntetisera infrastruktur från azure.yaml
@@ -307,13 +318,19 @@ azd show --output json | jq '.services'
 # Lista alla tillgängliga tillägg (inklusive AI)
 azd extension list
 
-# Installera tillägget Foundry agents
+# Installera Foundry agents-tillägget
 azd extension install azure.ai.agents
 
-# Installera tillägget för finjustering
+# Installera agent skills-tillägget (förhandsgranskning)
+azd extension install azure.ai.skills
+
+# Installera Foundry connections-tillägget (förhandsgranskning)
+azd extension install azure.ai.connections
+
+# Installera fine-tuning-tillägget
 azd extension install azure.ai.finetune
 
-# Installera tillägget för anpassade modeller
+# Installera custom models-tillägget
 azd extension install azure.ai.models
 
 # Uppgradera alla installerade tillägg
@@ -322,7 +339,7 @@ azd extension upgrade --all
 
 ### AI-agentkommandon
 ```bash
-# Initiera ett agentprojekt från en manifestfil
+# Initiera ett agentprojekt från ett manifest
 azd ai agent init -m <manifest-path-or-uri>
 
 # Rikta in mot ett specifikt Foundry-projekt
@@ -331,8 +348,24 @@ azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 # Ange agentens källkatalog
 azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
 
-# Välj en värdplattform
+# Välj ett mål för hosting
 azd ai agent init -m agent-manifest.yaml --host containerapp
+
+# Testa en driftsatt agent (skriver ut latens + tid till första byte)
+azd ai agent invoke
+
+# Visa konfigurationen för den aktiva slutpunkten
+azd ai agent endpoint show
+
+# Generera en utvärderingsdatamängd och optimera sedan agenten
+azd ai agent eval generate
+azd ai agent optimize
+
+# Ladda ner den driftsatta källkoden för en kodbaserad hostad agent
+azd ai agent code download
+
+# Ta bort en hostad agent och alla dess versioner (--force avslutar aktiva sessioner)
+azd ai agent delete --force
 ```
 
 ### MCP-server (Alpha)
@@ -340,7 +373,7 @@ azd ai agent init -m agent-manifest.yaml --host containerapp
 # Starta MCP-servern för ditt projekt
 azd mcp start
 
-# Hantera samtycke för verktyg vid MCP-operationer
+# Hantera verktygssamtycke för MCP-operationer
 azd copilot consent list
 ```
 
@@ -359,7 +392,7 @@ azd infra synth
 
 ### Utvecklingsarbetsflöde
 ```bash
-# Starta ett nytt projekt
+# Starta nytt projekt
 azd init --template todo-nodejs-mongo
 cd my-project
 
@@ -367,7 +400,7 @@ cd my-project
 azd env new dev
 azd up
 
-# Gör ändringar och distribuera igen
+# Gör ändringar och distribuera om
 azd deploy
 
 # Öppna övervakningspanelen
@@ -381,15 +414,15 @@ azd env new dev
 azd env new staging  
 azd env new production
 
-# Distribuera till utvecklingsmiljö
+# Driftsätt till dev
 azd env select dev
 azd up
 
-# Testa och distribuera till stagingmiljö
+# Testa och flytta till staging
 azd env select staging
 azd up
 
-# Distribuera till produktionsmiljö
+# Driftsätt till produktion
 azd env select production
 azd up
 ```
@@ -402,10 +435,10 @@ export AZD_DEBUG=true
 # Kontrollera distributionsstatus
 azd show
 
-# Verifiera konfigurationen
+# Validera konfiguration
 azd config show
 
-# Öppna övervakningspanelen för loggar
+# Öppna övervakningspanel för loggar
 azd monitor --logs
 
 # Kontrollera resursstatus
@@ -416,7 +449,7 @@ azd show --output json
 
 ### Felsökningsinformation
 ```bash
-# Aktivera felsökningsutdata
+# Aktivera felsökningsutmatning
 export AZD_DEBUG=true
 azd <command> --debug
 
@@ -450,7 +483,7 @@ azd template validate <template-name>
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
-# Navigera till azd-projektets rotmapp
+# Navigera till azd-projektets rotkatalog
 cd $(azd root)
 
 # Visa azd-konfigurationskatalog
@@ -461,7 +494,7 @@ echo $AZD_CONFIG_DIR  # Vanligtvis ~/.azd
 
 ### JSON-utdata
 ```bash
-# Få JSON-utdata för skriptning
+# Hämta JSON-utdata för skript
 azd show --output json
 azd env list --output json
 azd config show --output json
@@ -480,7 +513,7 @@ azd env list --output table
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 Vanliga kommando-kombinationer
+## 🔧 Vanliga kommando­kombinationer
 
 ### Hälsokontrollskript
 ```bash
@@ -491,16 +524,16 @@ azd env get-values
 azd monitor --logs
 ```
 
-### Distributionsvalidering
+### Distributionvalidering
 ```bash
 #!/bin/bash
-# Validering före driftsättning
+# Validering före distribution
 azd show
-azd provision --preview  # Förhandsgranska ändringar innan driftsättning
+azd provision --preview  # Förhandsgranska ändringar innan distribution
 az account show
 ```
 
-### Jämförelse av miljöer
+### Miljöjämförelse
 ```bash
 #!/bin/bash
 # Jämför miljöer
@@ -511,7 +544,7 @@ for env in dev staging production; do
 done
 ```
 
-### Skript för rensning av resurser
+### Skript för resursrensning
 ```bash
 #!/bin/bash
 # Rensa upp gamla miljöer
@@ -541,7 +574,7 @@ export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
-## 🚨 Akuta kommandon
+## 🚨 Nödlägeskommandon
 
 ### Snabba åtgärder
 ```bash
@@ -552,29 +585,29 @@ az login
 # Tvinga uppdatering av miljön
 azd env refresh
 
-# Driftsätt om alla tjänster
+# Distribuera om alla tjänster
 azd deploy
 
-# Kontrollera driftsättningsstatus
+# Kontrollera distributionsstatus
 azd show --output json
 ```
 
 ### Återställningskommandon
 ```bash
-# Återställ från misslyckad driftsättning - rensa och driftsätt om
+# Återställ efter misslyckad distribution - rensa och distribuera på nytt
 azd down --force --purge
 azd up
 
-# Provisionera om endast infrastrukturen
+# Återprovisionera endast infrastrukturen
 azd provision
 
-# Driftsätt om endast applikationen
+# Distribuera om endast applikationen
 azd deploy
 ```
 
-## 💡 Pro-tips
+## 💡 Proffstips
 
-### Aliaser för snabbare arbetsflöde
+### Alias för snabbare arbetsflöde
 ```bash
 # Lägg till i din .bashrc eller .zshrc
 alias azdup='azd up'
@@ -624,30 +657,30 @@ azd version --output json
 
 ### Dokumentationslänkar
 ```bash
-# Öppna dokumentation i webbläsaren
+# Öppna dokumentationen i webbläsaren
 azd docs
 
-# Visa dokumentation för mallen
+# Visa mallens dokumentation
 azd template show <template-name> --docs
 ```
 
 ---
 
-**Tips**: Bokmärk detta fuskblad och använd `Ctrl+F` för att snabbt hitta de kommandon du behöver!
+**Tips**: Bokmärk denna fusklista och använd `Ctrl+F` för att snabbt hitta de kommandon du behöver!
 
 ---
 
 **Navigering**
-- **Föregående lektion**: [Förkontroller](../docs/pre-deployment/preflight-checks.md)
+- **Föregående lektion**: [Förhandskontroller](../docs/pre-deployment/preflight-checks.md)
 - **Nästa lektion**: [Ordlista](glossary.md)
 
 ---
 
-> **💡 Vill du ha hjälp med Azure-kommandon i din redigerare?** Installera [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) med `npx skills add microsoft/github-copilot-for-azure` — 37 färdigheter för AI, Foundry, distribution, diagnostik och mer.
+> **💡 Vill du ha hjälp med Azure-kommandon i din redigerare?** Installera [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) med `npx skills add microsoft/github-copilot-for-azure` — 37 skills för AI, Foundry, driftsättning, diagnostik och mer.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var vänlig uppmärksam på att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess originals​​pråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår genom användningen av denna översättning.
+**Ansvarsfriskrivning**:
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var vänlig notera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

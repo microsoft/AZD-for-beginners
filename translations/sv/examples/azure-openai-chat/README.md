@@ -1,12 +1,12 @@
-# Microsoft Foundry Models Chattapplikation
+# Microsoft Foundry Models chattapplikation
 
-**Learning Path:** Intermediate ⭐⭐ | **Time:** 35-45 minutes | **Cost:** $50-200/månad
+**Lärväg:** Mellanliggande ⭐⭐ | **Tid:** 35-45 minuter | **Kostnad:** $50-200/månad
 
 En komplett Microsoft Foundry Models chattapplikation distribuerad med Azure Developer CLI (azd). Detta exempel demonstrerar distribution av gpt-4.1, säker API-åtkomst och ett enkelt chattgränssnitt.
 
 ## 🎯 Vad du kommer att lära dig
 
-- Distribuera Microsoft Foundry Models-tjänsten med modellen gpt-4.1
+- Distribuera Microsoft Foundry Models Service med modellen gpt-4.1
 - Skydda OpenAI API-nycklar med Key Vault
 - Bygga ett enkelt chattgränssnitt med Python
 - Övervaka tokenanvändning och kostnader
@@ -14,10 +14,10 @@ En komplett Microsoft Foundry Models chattapplikation distribuerad med Azure Dev
 
 ## 📦 Vad som ingår
 
-✅ **Microsoft Foundry Models Service** - distribution av modellen gpt-4.1  
-✅ **Python Chat App** - Enkel kommandoradschatt  
-✅ **Key Vault Integration** - Säker lagring av API-nyckel  
-✅ **ARM Templates** - Komplett infrastruktur som kod  
+✅ **Microsoft Foundry Models Service** - distribution av gpt-4.1  
+✅ **Python Chat App** - Enkelt kommandoradsgränssnitt för chatt  
+✅ **Key Vault Integration** - Säker lagring av API-nycklar  
+✅ **ARM Templates** - Full infrastruktur som kod  
 ✅ **Cost Monitoring** - Spårning av tokenanvändning  
 ✅ **Rate Limiting** - Förhindra uttömning av kvoter  
 
@@ -25,17 +25,18 @@ En komplett Microsoft Foundry Models chattapplikation distribuerad med Azure Dev
 
 ```mermaid
 graph TD
-    App[Python chattapplikation<br/>Lokalt/moln<br/>Kommandoradsgränssnitt<br/>Konversationshistorik<br/>Spårning av tokenanvändning] -- "HTTPS (API-nyckel)" --> Foundry[Microsoft Foundry modelltjänst<br/>gpt-4.1-modell<br/>20K tokens/min kapacitet<br/>Failover över flera regioner]
+    App[Python-chattapplikation<br/>Lokal/Moln<br/>Kommandoradsgränssnitt<br/>Konversationshistorik<br/>Spårning av tokenanvändning] -- "HTTPS (API-nyckel)" --> Foundry[Microsoft Foundry-modelltjänst<br/>gpt-4.1-modell<br/>20K token/min kapacitet<br/>Failover över flera regioner]
     Foundry --> KV[Azure Key Vault<br/>OpenAI API-nyckel<br/>Slutpunkts-URL]
-    Foundry -. Hanterad identitet .-> KV
+    Foundry -. Managed Identity .-> KV
 ```
+
 ## Förutsättningar
 
-### Obligatoriskt
+### Krävs
 
-- **Azure Developer CLI (azd)** - [Install guide](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure subscription** with OpenAI access - [Request access](https://aka.ms/oai/access)
-- **Python 3.9+** - [Install Python](https://www.python.org/downloads/)
+- **Azure Developer CLI (azd)** - [Installationsguide](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+- **Azure subscription** med OpenAI-åtkomst - [Begär åtkomst](https://aka.ms/oai/access)
+- **Python 3.9+** - [Installera Python](https://www.python.org/downloads/)
 
 ### Verifiera förutsättningar
 
@@ -55,9 +56,9 @@ az cognitiveservices account list-skus \
   --location eastus
 ```
 
-> **⚠️ Viktigt:** Microsoft Foundry Models kräver godkännande av ansökan. Om du inte har ansökt, besök [aka.ms/oai/access](https://aka.ms/oai/access). Godkännande tar vanligtvis 1-2 arbetsdagar.
+> **⚠️ Viktigt:** Microsoft Foundry Models kräver godkännande för applikationer. Om du inte har ansökt, besök [aka.ms/oai/access](https://aka.ms/oai/access). Godkännande tar vanligtvis 1–2 arbetsdagar.
 
-## ⏱️ Distribueringsschema
+## ⏱️ Distributionstid
 
 | Phase | Duration | What Happens |
 |-------|----------|--------------|
@@ -71,7 +72,7 @@ az cognitiveservices account list-skus \
 ## Snabbstart
 
 ```bash
-# Gå till exemplet
+# Navigera till exemplet
 cd examples/azure-openai-chat
 
 # Initiera miljön
@@ -79,10 +80,10 @@ azd env new myopenai
 
 # Distribuera allt (infrastruktur + konfiguration)
 azd up
-# Du blir ombedd att:
-# 1. Välj en Azure-prenumeration
-# 2. Välj en plats där OpenAI är tillgängligt (t.ex. eastus, eastus2, westus)
-# 3. Vänta 12–18 minuter på distributionen
+# Du kommer att uppmanas att:
+# 1. Välj Azure-prenumeration
+# 2. Välj plats med OpenAI-tillgänglighet (t.ex. eastus, eastus2, westus)
+# 3. Vänta 12–18 minuter för distributionen
 
 # Installera Python-beroenden
 pip install -r requirements.txt
@@ -103,7 +104,7 @@ Assistant: Microsoft Foundry Models Service provides REST API access to OpenAI's
 [Tokens used: 145 | Estimated cost: $0.0044]
 ```
 
-## ✅ Verifiera distribution
+## ✅ Verifiera distributionen
 
 ### Steg 1: Kontrollera Azure-resurser
 
@@ -111,14 +112,14 @@ Assistant: Microsoft Foundry Models Service provides REST API access to OpenAI's
 # Visa distribuerade resurser
 azd show
 
-# Förväntad utdata visar:
+# Förväntat utdata:
 # - OpenAI-tjänst: (resursnamn)
 # - Nyckelvalv: (resursnamn)
 # - Distribution: gpt-4.1
 # - Plats: eastus (eller din valda region)
 ```
 
-### Steg 2: Testa OpenAI-API
+### Steg 2: Testa OpenAI API
 
 ```bash
 # Hämta OpenAI-slutpunkt och nyckel
@@ -170,11 +171,11 @@ az keyvault secret list \
 - `openai-api-key`
 - `openai-endpoint`
 
-**Framgångskriterier:**
-- ✅ OpenAI service deployed with gpt-4.1
-- ✅ API-anrop returnerar giltigt svar
+**Kriterier för framgång:**
+- ✅ OpenAI-tjänst distribuerad med gpt-4.1
+- ✅ API-anrop returnerar giltig completion
 - ✅ Hemligheter lagrade i Key Vault
-- ✅ Spårning av token-användning fungerar
+- ✅ Spårning av tokenanvändning fungerar
 
 ## Projektstruktur
 
@@ -193,29 +194,29 @@ azure-openai-chat/
 └── .gitignore                  ✅ Git ignore rules
 ```
 
-## Applikationens funktioner
+## Applikationsfunktioner
 
 ### Chattgränssnitt (`chat.py`)
 
-Chattapplikationen innehåller:
+Chattapplikationen inkluderar:
 
-- **Conversation History** - Behåller kontext över meddelanden
-- **Token Counting** - Spårar användning och uppskattar kostnader
-- **Error Handling** - Hantering av hastighetsbegränsningar och API-fel på ett smidigt sätt
-- **Cost Estimation** - Realtidsberäkning per meddelande
-- **Streaming Support** - Valfria strömmade svar
+- **Konversationshistorik** - Behåller kontext över meddelanden
+- **Tokenräkning** - Spårar användning och uppskattar kostnader
+- **Felhantering** - Mjuk hantering av hastighetsbegränsningar och API-fel
+- **Kostnadsuppskattning** - Realtidsberäkning av kostnad per meddelande
+- **Streamingstöd** - Valfria streamade svar
 
 ### Kommandon
 
 När du chattar kan du använda:
-- `quit` or `exit` - Avsluta sessionen
-- `clear` - Rensa konversationshistoriken
-- `tokens` - Visa total tokenanvändning
+- `quit` eller `exit` - Avsluta sessionen
+- `clear` - Rensa konversationshistorik
+- `tokens` - Visa totalt tokenanvändning
 - `cost` - Visa uppskattad total kostnad
 
 ### Konfiguration (`config.py`)
 
-Laddar konfiguration från miljövariabler:
+Läser konfiguration från miljövariabler:
 ```python
 AZURE_OPENAI_ENDPOINT  # Från Key Vault
 AZURE_OPENAI_API_KEY   # Från Key Vault
@@ -270,22 +271,22 @@ Total session: 156 tokens | $0.0047
 
 ### Tokenpriser (gpt-4.1)
 
-| Model | Input (per 1K tokens) | Output (per 1K tokens) |
+| Modell | Indata (per 1K tokens) | Utdata (per 1K tokens) |
 |-------|----------------------|------------------------|
 | gpt-4.1 | $0.03 | $0.06 |
 | GPT-3.5-Turbo | $0.0015 | $0.002 |
 
-### Uppskattade månadskostnader
+### Beräknade månadskostnader
 
 Baserat på användningsmönster:
 
-| Usage Level | Messages/Day | Tokens/Day | Monthly Cost |
+| Användningsnivå | Meddelanden/dag | Tokens/dag | Månadskostnad |
 |-------------|--------------|------------|--------------|
-| **Light** | 20 messages | 3,000 tokens | $3-5 |
-| **Moderate** | 100 messages | 15,000 tokens | $15-25 |
-| **Heavy** | 500 messages | 75,000 tokens | $75-125 |
+| **Lätt** | 20 messages | 3,000 tokens | $3-5 |
+| **Måttlig** | 100 messages | 15,000 tokens | $15-25 |
+| **Hög** | 500 messages | 75,000 tokens | $75-125 |
 
-**Basinfrastrukturkostnad:** $1-2/månad (Key Vault + minimal beräkningsresurs)
+**Basinfrastrukturkostnad:** $1-2/månad (Key Vault + minimala beräkningsresurser)
 
 ### Tips för kostnadsoptimering
 
@@ -312,7 +313,7 @@ az consumption budget create \
 
 ```bash
 # I Azure-portalen:
-# OpenAI-resurs → Mätvärden → Välj "Token Transaction"
+# OpenAI-resurs → Mätvärden → Välj "Tokentransaktion"
 
 # Eller via Azure CLI:
 az monitor metrics list \
@@ -332,7 +333,7 @@ az monitor diagnostic-settings create \
   --logs '[{"category": "Audit", "enabled": true}]' \
   --workspace $(azd env get-value LOG_ANALYTICS_WORKSPACE_ID)
 
-# Förfrågningsloggar
+# Frågeloggar
 az monitor log-analytics query \
   --workspace $(azd env get-value LOG_ANALYTICS_WORKSPACE_ID) \
   --analytics-query "AzureDiagnostics | where Category == 'Audit' | top 10 by TimeGenerated"
@@ -340,9 +341,9 @@ az monitor log-analytics query \
 
 ## Felsökning
 
-### Issue: "Access Denied" Error
+### Problem: "Access Denied"-fel
 
-**Symptom:** 403 Forbidden när du anropar API
+**Symptom:** 403 Forbidden vid anrop till API
 
 **Lösningar:**
 ```bash
@@ -354,31 +355,31 @@ az cognitiveservices account show \
 # 2. Kontrollera att API-nyckeln är korrekt
 azd env get-value AZURE_OPENAI_API_KEY
 
-# 3. Verifiera formatet för endpoint-URL
+# 3. Verifiera formatet för slutpunkts-URL:en
 azd env get-value AZURE_OPENAI_ENDPOINT
 # Bör vara: https://[name].openai.azure.com/
 ```
 
-### Issue: "Rate Limit Exceeded"
+### Problem: "Rate Limit Exceeded"
 
 **Symptom:** 429 Too Many Requests
 
 **Lösningar:**
 ```bash
-# 1. Kontrollera den aktuella kvoten
+# 1. Kontrollera nuvarande kvot
 az cognitiveservices account deployment show \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
   --deployment-name gpt-4.1
 
-# 2. Begär kvotökning (vid behov)
-# Gå till Azure-portalen → OpenAI-resursen → Kvoter → Begär ökning
+# 2. Begär ökning av kvot (om det behövs)
+# 3. Gå till Azure-portalen → OpenAI-resurs → Kvoter → Begär ökning
 
-# 3. Implementera omförsökslogik (redan i chat.py)
-# Applikationen gör automatiska omförsök med exponentiell backoff
+# 3. Implementera logik för omförsök (redan i chat.py)
+# Applikationen försöker automatiskt igen med exponentiell backoff
 ```
 
-### Issue: "Model Not Found"
+### Problem: "Model Not Found"
 
 **Symptom:** 404 error för distribution
 
@@ -392,13 +393,13 @@ az cognitiveservices account deployment list \
 # 2. Verifiera modellnamnet i miljön
 echo $AZURE_OPENAI_MODEL
 
-# 3. Uppdatera till korrekt distributionsnamn
+# 3. Uppdatera till korrekt namn på distributionen
 export AZURE_OPENAI_MODEL=gpt-4.1  # eller gpt-35-turbo
 ```
 
-### Issue: High Latency
+### Problem: Hög latens
 
-**Symptom:** Långa svarstider (>5 sekunder)
+**Symptom:** Långsamma svarstider (>5 sekunder)
 
 **Lösningar:**
 ```bash
@@ -408,16 +409,16 @@ export AZURE_OPENAI_MODEL=gpt-4.1  # eller gpt-35-turbo
 # 2. Minska max_tokens för snabbare svar
 export AZURE_OPENAI_MAX_TOKENS=400
 
-# 3. Använd streaming för bättre användarupplevelse
+# 3. Använd strömning för bättre användarupplevelse
 python chat.py --stream
 ```
 
-## Bästa säkerhetspraxis
+## Säkerhetsrekommendationer
 
-### 1. Protect API Keys
+### 1. Skydda API-nycklar
 
 ```bash
-# Lägg aldrig in nycklar i versionskontrollen
+# Lägg aldrig nycklar i versionskontroll
 # Använd Key Vault (redan konfigurerat)
 
 # Rotera nycklar regelbundet
@@ -427,10 +428,10 @@ az cognitiveservices account keys regenerate \
   --key-name key1
 ```
 
-### 2. Implement Content Filtering
+### 2. Implementera innehållsfiltrering
 
 ```python
-# Microsoft Foundry Models innehåller inbyggd innehållsfiltrering
+# Microsoft Foundry Models inkluderar inbyggd innehållsfiltrering
 # Konfigurera i Azure-portalen:
 # OpenAI-resurs → Innehållsfilter → Skapa anpassat filter
 
@@ -438,11 +439,11 @@ az cognitiveservices account keys regenerate \
 # Nivåer: Låg, Medel, Hög filtrering
 ```
 
-### 3. Use Managed Identity (Production)
+### 3. Använd Managed Identity (produktion)
 
 ```bash
-# För produktionsdriftsättningar, använd en hanterad identitet
-# istället för API-nycklar (kräver att appen körs på Azure)
+# Vid produktionsdrift, använd hanterad identitet
+# Istället för API-nycklar (kräver att appen hostas i Azure)
 
 # Uppdatera infra/openai.bicep för att inkludera:
 # identity: { type: 'SystemAssigned' }
@@ -481,7 +482,7 @@ pytest tests/ --cov=src --cov-report=html
 ### Uppdatera modelldistribution
 
 ```bash
-# Distribuera en annan modellversion
+# Distribuera en annan version av modellen
 az cognitiveservices account deployment create \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
@@ -510,39 +511,39 @@ azd down --force --purge
 
 ### Utöka detta exempel
 
-1. **Add Web Interface** - Build React/Vue frontend
+1. **Lägg till webbgränssnitt** - Bygg React/Vue frontend
    ```bash
-   # Lägg till frontendtjänst i azure.yaml
+   # Lägg till frontend-tjänst i azure.yaml
    # Distribuera till Azure Static Web Apps
    ```
 
-2. **Implement RAG** - Add document search with Azure AI Search
+2. **Implementera RAG** - Lägg till dokumentsökning med Azure AI Search
    ```python
-   # Integrera Azure Cognitive Search
+   # Integrera Azure AI Search
    # Ladda upp dokument och skapa ett vektorindex
    ```
 
-3. **Add Function Calling** - Enable tool use
+3. **Lägg till funktionsanrop** - Aktivera verktygsanvändning
    ```python
    # Definiera funktioner i chat.py
    # Låt gpt-4.1 anropa externa API:er
    ```
 
-4. **Multi-Model Support** - Deploy multiple models
+4. **Stöd för flera modeller** - Distribuera flera modeller
    ```bash
    # Lägg till gpt-35-turbo och inbäddningsmodeller
-   # Implementera modellroutningslogik
+   # Implementera logik för modellroutning
    ```
 
 ### Relaterade exempel
 
-- **[Retail Multi-Agent](../retail-scenario.md)** - Advanced multi-agent architecture
-- **[Database App](../../../../examples/database-app)** - Add persistent storage
-- **[Container Apps](../../../../examples/container-app)** - Deploy as containerized service
+- **[Retail Multi-Agent](../retail-scenario.md)** - Avancerad multi-agent-arkitektur
+- **[Database App](../../../../examples/database-app)** - Lägg till beständig lagring
+- **[Container Apps](../../../../examples/container-app)** - Distribuera som containeriserad tjänst
 
 ### Lärresurser
 
-- 📚 [AZD For Beginners Course](../../README.md) - Huvudsida för kursen
+- 📚 [AZD For Beginners Course](../../README.md) - Kursens huvudsida
 - 📚 [Microsoft Foundry Models Documentation](https://learn.microsoft.com/azure/ai-services/openai/) - Officiell dokumentation
 - 📚 [OpenAI API Reference](https://platform.openai.com/docs/api-reference) - API-detaljer
 - 📚 [Responsible AI](https://www.microsoft.com/ai/responsible-ai) - Bästa praxis
@@ -551,7 +552,7 @@ azd down --force --purge
 
 ### Dokumentation
 - **[Microsoft Foundry Models Service](https://learn.microsoft.com/azure/ai-services/openai/)** - Komplett guide
-- **[gpt-4.1 Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - Modellkapabiliteter
+- **[gpt-4.1 Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - Modellkapaciteter
 - **[Content Filtering](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - Säkerhetsfunktioner
 - **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd-referens
 
@@ -561,26 +562,26 @@ azd down --force --purge
 - **[Function Calling](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - Avancerade funktioner
 
 ### Verktyg
-- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - Webbaserad playground
+- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - Webbaserad lekplats
 - **[Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)** - Skriva bättre prompts
 - **[Token Calculator](https://platform.openai.com/tokenizer)** - Uppskatta tokenanvändning
 
 ### Community
 - **[Azure AI Discord](https://discord.gg/azure)** - Få hjälp från communityn
 - **[GitHub Discussions](https://github.com/Azure-Samples/openai/discussions)** - Frågor och svar
-- **[Azure Blog](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - Senaste uppdateringarna
+- **[Azure Blog](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - Senaste uppdateringar
 
 ---
 
-**🎉 Success!** Du har distribuerat Microsoft Foundry Models och byggt en fungerande chattapplikation. Börja utforska gpt-4.1:s kapabiliteter och experimentera med olika prompts och användningsfall.
+**🎉 Framgång!** Du har distribuerat Microsoft Foundry Models och byggt en fungerande chattapplikation. Börja utforska gpt-4.1:s möjligheter och experimentera med olika prompts och användningsfall.
 
-**Frågor?** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) eller kolla [FAQ](../../resources/faq.md)
+**Frågor?** [Öppna ett issue](https://github.com/microsoft/AZD-for-beginners/issues) eller kolla [FAQ](../../resources/faq.md)
 
-**Kostnadsvarning:** Kom ihåg att köra `azd down` när du är klar med testningen för att undvika löpande avgifter (~$50-100/månad för aktiv användning).
+**Kostnadsvarning:** Kom ihåg att köra `azd down` när du är klar med testandet för att undvika löpande avgifter (~$50-100/månad för aktiv användning).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Ansvarsfriskrivning:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Vi strävar efter korrekthet, men var medveten om att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+**Ansvarsfriskrivning**:
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var vänlig notera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

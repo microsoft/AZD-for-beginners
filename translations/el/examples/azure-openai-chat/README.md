@@ -1,74 +1,75 @@
-# Microsoft Foundry Models Chat Application
+# Εφαρμογή Συνομιλίας Microsoft Foundry Models
 
-**Learning Path:** Intermediate ⭐⭐ | **Time:** 35-45 minutes | **Cost:** $50-200/month
+**Learning Path:** Ενδιάμεσο ⭐⭐ | **Time:** 35-45 λεπτά | **Cost:** $50-200/μήνα
 
-Μια πλήρης εφαρμογή συνομιλίας Microsoft Foundry Models αναπτυγμένη χρησιμοποιώντας το Azure Developer CLI (azd). Αυτό το παράδειγμα δείχνει την ανάπτυξη gpt-4.1, την ασφαλή πρόσβαση στο API και μια απλή διεπαφή συνομιλίας.
+Μια πλήρης εφαρμογή συνομιλίας Microsoft Foundry Models αναπτυγμένη χρησιμοποιώντας το Azure Developer CLI (azd). Αυτό το παράδειγμα δείχνει την ανάπτυξη gpt-4.1, την ασφαλή πρόσβαση στο API και ένα απλό περιβάλλον συνομιλίας.
 
 ## 🎯 Τι θα μάθετε
 
-- Ανάπτυξη της υπηρεσίας Microsoft Foundry Models με το μοντέλο gpt-4.1
-- Ασφάλεια κλειδιών OpenAI με Key Vault
-- Δημιουργία απλής διεπαφής συνομιλίας με Python
-- Παρακολούθηση χρήσης tokens και κόστους
-- Εφαρμογή περιορισμού ρυθμού και διαχείρισης σφαλμάτων
+- Αναπτύξτε την υπηρεσία Microsoft Foundry Models με το μοντέλο gpt-4.1
+- Ασφαλίστε τα κλειδιά OpenAI API με το Key Vault
+- Δημιουργήστε ένα απλό περιβάλλον συνομιλίας με Python
+- Παρακολουθήστε τη χρήση token και τα κόστη
+- Υλοποιήστε περιορισμό ρυθμού (rate limiting) και χειρισμό σφαλμάτων
 
 ## 📦 Τι περιλαμβάνεται
 
 ✅ **Microsoft Foundry Models Service** - ανάπτυξη μοντέλου gpt-4.1  
-✅ **Python Chat App** - Απλή διεπαφή συνομιλίας στη γραμμή εντολών  
+✅ **Python Chat App** - Απλό περιβάλλον συνομιλίας γραμμής εντολών  
 ✅ **Key Vault Integration** - Ασφαλής αποθήκευση κλειδιών API  
-✅ **ARM Templates** - Ολοκληρωμένη υποδομή ως κώδικας  
-✅ **Cost Monitoring** - Παρακολούθηση χρήσης tokens  
-✅ **Rate Limiting** - Πρόληψη εξάντλησης των ποσοστώσεων  
+✅ **ARM Templates** - Πλήρης υποδομή ως κώδικας  
+✅ **Cost Monitoring** - Παρακολούθηση χρήσης token  
+✅ **Rate Limiting** - Αποφυγή εξάντλησης ποσοστώσεων  
 
 ## Architecture
 
 ```mermaid
 graph TD
-    App[Εφαρμογή συνομιλίας Python<br/>Τοπικά/Σύννεφο<br/>Διεπαφή γραμμής εντολών<br/>Ιστορικό συνομιλιών<br/>Παρακολούθηση χρήσης token] -- "HTTPS (Κλειδί API)" --> Foundry[Υπηρεσία Μοντέλων Microsoft Foundry<br/>gpt-4.1 Μοντέλο<br/>Χωρητικότητα 20K token/λεπτό<br/>Αντιμετώπιση αποτυχίας πολλαπλών περιοχών]
-    Foundry --> KV[Αποθήκη Κλειδιών Azure<br/>Κλειδί API OpenAI<br/>URL τελικού σημείου]
-    Foundry -. Διαχειριζόμενη ταυτότητα .-> KV
+    App[Εφαρμογή Συνομιλίας Python<br/>Τοπικό/Σύννεφο<br/>Διεπαφή γραμμής εντολών<br/>Ιστορικό συνομιλίας<br/>Παρακολούθηση χρήσης tokens] -- "HTTPS (Κλειδί API)" --> Foundry[Υπηρεσία Μοντέλων Microsoft Foundry<br/>Μοντέλο gpt-4.1<br/>Χωρητικότητα 20K tokens/λεπτό<br/>Αντιμετώπιση αποτυχίας σε πολλές περιοχές]
+    Foundry --> KV[Αποθήκη Κλειδιών Azure<br/>Κλειδί API OpenAI<br/>URL τερματικού σημείου]
+    Foundry -. Διαχειριζόμενη Ταυτότητα .-> KV
 ```
+
 ## Προαπαιτούμενα
 
 ### Απαιτείται
 
-- **Azure Developer CLI (azd)** - [Install guide](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure subscription** with OpenAI access - [Request access](https://aka.ms/oai/access)
-- **Python 3.9+** - [Install Python](https://www.python.org/downloads/)
+- **Azure Developer CLI (azd)** - [Οδηγός εγκατάστασης](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+- **Συνδρομή Azure** with OpenAI access - [Request access](https://aka.ms/oai/access)
+- **Python 3.9+** - [Εγκαταστήστε Python](https://www.python.org/downloads/)
 
-### Επαλήθευση προαπαιτούμενων
+### Επαληθεύστε τα προαπαιτούμενα
 
 ```bash
-# Ελέγξτε την έκδοση του azd (απαιτείται 1.5.0 ή νεότερη)
+# Έλεγχος έκδοσης azd (απαιτείται 1.5.0 ή νεότερη)
 azd version
 
-# Επαληθεύστε τη σύνδεση στο Azure
+# Επαλήθευση σύνδεσης στο Azure
 azd auth login
 
-# Ελέγξτε την έκδοση της Python
+# Έλεγχος έκδοσης Python
 python --version  # ή python3 --version
 
-# Επαληθεύστε την πρόσβαση στο OpenAI (ελέγξτε στο Azure Portal)
+# Επαλήθευση πρόσβασης στο OpenAI (ελέγξτε στο Azure Portal)
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus
 ```
 
-> **⚠️ Σπουδαίο:** Το Microsoft Foundry Models απαιτεί έγκριση αίτησης. Εάν δεν έχετε υποβάλει αίτηση, επισκεφτείτε [aka.ms/oai/access](https://aka.ms/oai/access). Η έγκριση συνήθως διαρκεί 1-2 εργάσιμες ημέρες.
+> **⚠️ Σημαντικό:** Microsoft Foundry Models requires application approval. If you haven't applied, visit [aka.ms/oai/access](https://aka.ms/oai/access). Approval typically takes 1-2 business days.
 
 ## ⏱️ Χρονοδιάγραμμα ανάπτυξης
 
-| Phase | Duration | What Happens |
+| Φάση | Διάρκεια | Τι συμβαίνει |
 |-------|----------|--------------|
-| Prerequisites check | 2-3 minutes | Verify OpenAI quota availability |
-| Deploy infrastructure | 8-12 minutes | Create OpenAI, Key Vault, model deployment |
-| Configure application | 2-3 minutes | Set up environment and dependencies |
-| **Total** | **12-18 minutes** | Ready to chat with gpt-4.1 |
+| Έλεγχος προαπαιτούμενων | 2-3 λεπτά | Επαλήθευση διαθέσιμης ποσόστωσης OpenAI |
+| Ανάπτυξη υποδομής | 8-12 λεπτά | Δημιουργία OpenAI, Key Vault, ανάπτυξη μοντέλου |
+| Διαμόρφωση εφαρμογής | 2-3 λεπτά | Διαμόρφωση περιβάλλοντος και εξαρτήσεων |
+| **Σύνολο** | **12-18 λεπτά** | Έτοιμο για συνομιλία με gpt-4.1 |
 
-**Σημείωση:** Η πρώτη ανάπτυξη OpenAI μπορεί να διαρκέσει περισσότερο λόγω παροχής του μοντέλου.
+**Σημείωση:** Η πρώτη ανάπτυξη OpenAI ενδέχεται να διαρκέσει περισσότερο λόγω προμήθειας μοντέλου.
 
-## Quick Start
+## Γρήγορη Εκκίνηση
 
 ```bash
 # Μεταβείτε στο παράδειγμα
@@ -80,8 +81,8 @@ azd env new myopenai
 # Αναπτύξτε τα πάντα (υποδομή + διαμόρφωση)
 azd up
 # Θα σας ζητηθεί να:
-# 1. Επιλέξτε τη συνδρομή Azure
-# 2. Επιλέξτε τοποθεσία με διαθεσιμότητα OpenAI (π.χ., eastus, eastus2, westus)
+# 1. Επιλέξτε συνδρομή Azure
+# 2. Επιλέξτε τοποθεσία όπου είναι διαθέσιμο το OpenAI (π.χ., eastus, eastus2, westus)
 # 3. Περιμένετε 12-18 λεπτά για την ανάπτυξη
 
 # Εγκαταστήστε τις εξαρτήσεις Python
@@ -91,7 +92,7 @@ pip install -r requirements.txt
 python chat.py
 ```
 
-**Expected Output:**
+**Αναμενόμενο αποτέλεσμα:**
 ```
 🤖 Microsoft Foundry Models Chat Application
 Connected to: gpt-4.1 (eastus)
@@ -103,29 +104,29 @@ Assistant: Microsoft Foundry Models Service provides REST API access to OpenAI's
 [Tokens used: 145 | Estimated cost: $0.0044]
 ```
 
-## ✅ Επαλήθευση Ανάπτυξης
+## ✅ Επαληθεύστε την ανάπτυξη
 
-### Βήμα 1: Έλεγχος πόρων Azure
+### Βήμα 1: Ελέγξτε τους πόρους Azure
 
 ```bash
 # Προβολή αναπτυγμένων πόρων
 azd show
 
-# Η αναμενόμενη έξοδος εμφανίζει:
+# Το αναμενόμενο αποτέλεσμα εμφανίζει:
 # - Υπηρεσία OpenAI: (όνομα πόρου)
-# - Αποθήκη κλειδιών: (όνομα πόρου)
+# - Αποθήκη Κλειδιών: (όνομα πόρου)
 # - Ανάπτυξη: gpt-4.1
-# - Τοποθεσία: eastus (ή την επιλεγμένη περιοχή σας)
+# - Τοποθεσία: eastus (ή η επιλεγμένη περιοχή σας)
 ```
 
-### Βήμα 2: Δοκιμή του OpenAI API
+### Βήμα 2: Δοκιμάστε το OpenAI API
 
 ```bash
-# Λήψη του endpoint και του κλειδιού του OpenAI
+# Λάβετε το endpoint και το κλειδί του OpenAI
 OPENAI_ENDPOINT=$(azd env get-value AZURE_OPENAI_ENDPOINT)
 OPENAI_KEY=$(azd env get-value AZURE_OPENAI_API_KEY)
 
-# Δοκιμή κλήσης του API
+# Δοκιμή κλήσης API
 curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
   -H "Content-Type: application/json" \
   -H "api-key: $OPENAI_KEY" \
@@ -135,7 +136,7 @@ curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2
   }'
 ```
 
-**Αναμενόμενη Απάντηση:**
+**Αναμενόμενη απάντηση:**
 ```json
 {
   "choices": [
@@ -154,7 +155,7 @@ curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2
 }
 ```
 
-### Βήμα 3: Επαλήθευση πρόσβασης στο Key Vault
+### Βήμα 3: Επαληθεύστε την πρόσβαση στο Key Vault
 
 ```bash
 # Απαρίθμηση μυστικών στο Key Vault
@@ -170,13 +171,13 @@ az keyvault secret list \
 - `openai-api-key`
 - `openai-endpoint`
 
-**Κριτήρια Επιτυχίας:**
+**Κριτήρια επιτυχίας:**
 - ✅ Η υπηρεσία OpenAI αναπτύχθηκε με gpt-4.1
-- ✅ Η κλήση API επιστρέφει έγκυρο completion
-- ✅ Τα μυστικά αποθηκεύονται στο Key Vault
-- ✅ Η παρακολούθηση χρήσης tokens λειτουργεί
+- ✅ Η κλήση API επιστρέφει έγκυρη συμπλήρωση
+- ✅ Τα μυστικά αποθηκεύτηκαν στο Key Vault
+- ✅ Η παρακολούθηση χρήσης token λειτουργεί
 
-## Δομή Έργου
+## Δομή έργου
 
 ```
 azure-openai-chat/
@@ -193,29 +194,29 @@ azure-openai-chat/
 └── .gitignore                  ✅ Git ignore rules
 ```
 
-## Χαρακτηριστικά Εφαρμογής
+## Χαρακτηριστικά εφαρμογής
 
-### Διεπαφή συνομιλίας (`chat.py`)
+### Περιβάλλον συνομιλίας (`chat.py`)
 
 Η εφαρμογή συνομιλίας περιλαμβάνει:
 
-- **Ιστορικό συνομιλίας** - Διατηρεί το πλαίσιο ανάμεσα σε μηνύματα
-- **Μέτρηση tokens** - Παρακολουθεί τη χρήση και εκτιμά το κόστος
-- **Διαχείριση σφαλμάτων** - Ομαλή διαχείριση ορίων ρυθμού και σφαλμάτων API
-- **Εκτίμηση κόστους** - Υπολογισμός κόστους ανά μήνυμα σε πραγματικό χρόνο
-- **Υποστήριξη ροής** - Προαιρετικές απαντήσεις σε ροή
+- **Ιστορικό συνομιλίας** - Διατηρεί το πλαίσιο μεταξύ μηνυμάτων
+- **Αρίθμηση token** - Παρακολουθεί τη χρήση και εκτιμά τα κόστη
+- **Χειρισμός σφαλμάτων** - Ομαλός χειρισμός περιορισμών ρυθμού και σφαλμάτων API
+- **Εκτίμηση κόστους** - Υπολογισμός κόστους σε πραγματικό χρόνο ανά μήνυμα
+- **Υποστήριξη streaming** - Προαιρετικές ροές απαντήσεων
 
 ### Εντολές
 
 Κατά τη συνομιλία, μπορείτε να χρησιμοποιήσετε:
-- `quit` or `exit` - End the session
-- `clear` - Clear conversation history
-- `tokens` - Show total token usage
-- `cost` - Show estimated total cost
+- `quit` ή `exit` - Τερματίστε τη συνεδρία
+- `clear` - Διαγράψτε το ιστορικό συνομιλίας
+- `tokens` - Δείξτε τη συνολική χρήση token
+- `cost` - Δείξτε το εκτιμώμενο συνολικό κόστος
 
-### Ρυθμίσεις (`config.py`)
+### Διαμόρφωση (`config.py`)
 
-Φορτώνει ρυθμίσεις από μεταβλητές περιβάλλοντος:
+Φορτώνει τη διαμόρφωση από μεταβλητές περιβάλλοντος:
 ```python
 AZURE_OPENAI_ENDPOINT  # Από το Key Vault
 AZURE_OPENAI_API_KEY   # Από το Key Vault
@@ -238,7 +239,7 @@ export AZURE_OPENAI_MODEL=gpt-35-turbo
 python chat.py
 ```
 
-### Συνομιλία με ροή
+### Συνομιλία με streaming
 
 ```bash
 python chat.py --stream
@@ -266,34 +267,34 @@ for vector search. Each model has different capabilities, pricing, and token lim
 Total session: 156 tokens | $0.0047
 ```
 
-## Διαχείριση Κόστους
+## Διαχείριση κόστους
 
-### Τιμολόγηση tokens (gpt-4.1)
+### Τιμολόγηση token (gpt-4.1)
 
-| Model | Input (per 1K tokens) | Output (per 1K tokens) |
+| Μοντέλο | Είσοδος (ανά 1K tokens) | Έξοδος (ανά 1K tokens) |
 |-------|----------------------|------------------------|
 | gpt-4.1 | $0.03 | $0.06 |
 | GPT-3.5-Turbo | $0.0015 | $0.002 |
 
-### Εκτιμώμενο Μηνιαίο Κόστος
+### Εκτιμώμενο μηνιαίο κόστος
 
-Βασισμένο σε μοτίβα χρήσης:
+Βασισμένο σε πρότυπα χρήσης:
 
-| Usage Level | Messages/Day | Tokens/Day | Monthly Cost |
+| Επίπεδο χρήσης | Μηνύματα/ημέρα | Tokens/ημέρα | Μηνιαίο κόστος |
 |-------------|--------------|------------|--------------|
-| **Light** | 20 messages | 3,000 tokens | $3-5 |
-| **Moderate** | 100 messages | 15,000 tokens | $15-25 |
-| **Heavy** | 500 messages | 75,000 tokens | $75-125 |
+| **Ελαφρύ** | 20 μηνύματα | 3,000 tokens | $3-5 |
+| **Μέτριο** | 100 μηνύματα | 15,000 tokens | $15-25 |
+| **Εντατικό** | 500 μηνύματα | 75,000 tokens | $75-125 |
 
-**Βασικό κόστος υποδομής:** $1-2/month (Key Vault + minimal compute)
+**Βασικό κόστος υποδομής:** $1-2/μήνα (Key Vault + ελάχιστη υπολογιστική ισχύ)
 
 ### Συμβουλές βελτιστοποίησης κόστους
 
 ```bash
-# 1. Χρησιμοποιήστε το GPT-3.5-Turbo για απλούστερες εργασίες (20 φορές πιο φθηνό)
+# 1. Χρησιμοποιήστε το GPT-3.5-Turbo για απλούστερες εργασίες (20 φορές φθηνότερο)
 export AZURE_OPENAI_MODEL=gpt-35-turbo
 
-# 2. Μειώστε τον μέγιστο αριθμό tokens για πιο σύντομες απαντήσεις
+# 2. Μειώστε τα μέγιστα tokens για συντομότερες απαντήσεις
 export AZURE_OPENAI_MAX_TOKENS=400
 
 # 3. Παρακολουθήστε τη χρήση των tokens
@@ -308,13 +309,13 @@ az consumption budget create \
 
 ## Παρακολούθηση
 
-### Προβολή χρήσης tokens
+### Προβολή χρήσης token
 
 ```bash
 # Στο Azure Portal:
-# OpenAI Resource → Metrics → Επιλέξτε "Token Transaction"
+# Πόρος OpenAI → Μετρικές → Επιλέξτε "Συναλλαγή Διακριτικού"
 
-# Ή μέσω του Azure CLI:
+# Ή μέσω Azure CLI:
 az monitor metrics list \
   --resource $(azd env get-value AZURE_OPENAI_RESOURCE_ID) \
   --metric "TokenTransaction" \
@@ -346,7 +347,7 @@ az monitor log-analytics query \
 
 **Λύσεις:**
 ```bash
-# 1. Επαληθεύστε ότι η πρόσβαση στο OpenAI έχει εγκριθεί
+# 1. Επιβεβαιώστε ότι η πρόσβαση στο OpenAI έχει εγκριθεί
 az cognitiveservices account show \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
@@ -374,8 +375,8 @@ az cognitiveservices account deployment show \
 # 2. Ζητήστε αύξηση ορίου (εάν χρειάζεται)
 # Μεταβείτε στο Azure Portal → Πόρος OpenAI → Όρια → Ζητήστε Αύξηση
 
-# 3. Εφαρμόστε λογική επαναπροσπάθειας (ήδη στο chat.py)
-# Η εφαρμογή επαναπροσπαθεί αυτόματα με εκθετική αύξηση του διαστήματος αναμονής
+# 3. Υλοποιήστε λογική επαναπροσπάθειας (ήδη στο chat.py)
+# Η εφαρμογή επαναπροσπαθεί αυτόματα με εκθετική αύξηση του χρόνου αναμονής
 ```
 
 ### Πρόβλημα: "Model Not Found"
@@ -384,7 +385,7 @@ az cognitiveservices account deployment show \
 
 **Λύσεις:**
 ```bash
-# 1. Εμφανίστε τις διαθέσιμες αναπτύξεις
+# 1. Λίστα διαθέσιμων αναπτύξεων
 az cognitiveservices account deployment list \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
@@ -392,33 +393,33 @@ az cognitiveservices account deployment list \
 # 2. Επαληθεύστε το όνομα του μοντέλου στο περιβάλλον
 echo $AZURE_OPENAI_MODEL
 
-# 3. Αλλάξτε στο σωστό όνομα ανάπτυξης
+# 3. Ενημερώστε με το σωστό όνομα ανάπτυξης
 export AZURE_OPENAI_MODEL=gpt-4.1  # ή gpt-35-turbo
 ```
 
 ### Πρόβλημα: Υψηλή καθυστέρηση
 
-**Συμπτώματα:** Αργές απαντήσεις (>5 δευτερόλεπτα)
+**Συμπτώματα:** Αργοί χρόνοι απόκρισης (>5 δευτερόλεπτα)
 
 **Λύσεις:**
 ```bash
 # 1. Ελέγξτε την καθυστέρηση ανά περιοχή
 # Αναπτύξτε στην περιοχή που είναι πιο κοντά στους χρήστες
 
-# 2. Μειώστε το max_tokens για ταχύτερες απαντήσεις
+# 2. Μειώστε το max_tokens για γρηγορότερες απαντήσεις
 export AZURE_OPENAI_MAX_TOKENS=400
 
 # 3. Χρησιμοποιήστε streaming για καλύτερη εμπειρία χρήστη
 python chat.py --stream
 ```
 
-## Καλές Πρακτικές Ασφαλείας
+## Καλές πρακτικές ασφάλειας
 
 ### 1. Προστατέψτε τα κλειδιά API
 
 ```bash
-# Μην αποθηκεύετε ποτέ κλειδιά στο σύστημα ελέγχου εκδόσεων
-# Χρησιμοποιήστε το Key Vault (έχει ήδη ρυθμιστεί)
+# Μην αποθηκεύετε ποτέ τα κλειδιά στο σύστημα ελέγχου έκδοσης
+# Χρησιμοποιήστε το Key Vault (ήδη διαμορφωμένο)
 
 # Ανανεώστε τακτικά τα κλειδιά
 az cognitiveservices account keys regenerate \
@@ -430,19 +431,19 @@ az cognitiveservices account keys regenerate \
 ### 2. Εφαρμόστε φιλτράρισμα περιεχομένου
 
 ```python
-# Το Microsoft Foundry Models περιλαμβάνει ενσωματωμένο φιλτράρισμα περιεχομένου
-# Διαμορφώστε στο Azure Portal:
-# Πόρος OpenAI → Φίλτρα Περιεχομένου → Δημιουργία Προσαρμοσμένου Φίλτρου
+# Τα Microsoft Foundry Models περιλαμβάνουν ενσωματωμένο φιλτράρισμα περιεχομένου
+# Ρυθμίστε στο Azure Portal:
+# OpenAI πόρος → Φίλτρα περιεχομένου → Δημιουργία προσαρμοσμένου φίλτρου
 
-# Κατηγορίες: Μίσος, Σεξουαλικό, Βία, Αυτοβλάβη
+# Κατηγορίες: Μίσος, Σεξουαλικό περιεχόμενο, Βία, Αυτο-βλάβη
 # Επίπεδα: Χαμηλό, Μεσαίο, Υψηλό φιλτράρισμα
 ```
 
-### 3. Χρησιμοποιήστε Managed Identity (Production)
+### 3. Χρησιμοποιήστε Managed Identity (Παραγωγή)
 
 ```bash
 # Για παραγωγικές αναπτύξεις, χρησιμοποιήστε διαχειριζόμενη ταυτότητα
-# αντί για κλειδιά API (απαιτεί φιλοξενία εφαρμογής στο Azure)
+# αντί για κλειδιά API (απαιτείται φιλοξενία της εφαρμογής στο Azure)
 
 # Ενημερώστε το infra/openai.bicep ώστε να περιλαμβάνει:
 # identity: { type: 'SystemAssigned' }
@@ -468,13 +469,13 @@ python src/chat.py
 ### Εκτέλεση δοκιμών
 
 ```bash
-# Εγκατάσταση εξαρτήσεων για τις δοκιμές
+# Εγκαταστήστε τις εξαρτήσεις των δοκιμών
 pip install pytest pytest-cov
 
-# Εκτέλεση δοκιμών
+# Εκτελέστε τις δοκιμές
 pytest tests/ -v
 
-# Με κάλυψη κώδικα
+# Με κάλυψη
 pytest tests/ --cov=src --cov-report=html
 ```
 
@@ -501,86 +502,86 @@ azd down --force --purge
 
 # Αυτό αφαιρεί:
 # - Υπηρεσία OpenAI
-# - Key Vault (με 90ήμερη ήπια διαγραφή)
+# - Key Vault (με 90ήμερη μαλακή διαγραφή)
 # - Ομάδα πόρων
-# - Όλες οι αναπτύξεις και οι διαμορφώσεις
+# - Όλες οι αναπτύξεις και διαμορφώσεις
 ```
 
-## Επόμενα Βήματα
+## Επόμενα βήματα
 
-### Επέκταση αυτού του παραδείγματος
+### Επεκτείνετε αυτό το παράδειγμα
 
-1. **Add Web Interface** - Build React/Vue frontend
+1. **Προσθέστε διεπαφή Web** - Δημιουργήστε frontend με React/Vue
    ```bash
    # Προσθέστε την υπηρεσία frontend στο azure.yaml
    # Αναπτύξτε σε Azure Static Web Apps
    ```
 
-2. **Implement RAG** - Add document search with Azure AI Search
+2. **Εφαρμόστε RAG** - Προσθέστε αναζήτηση εγγράφων με Azure AI Search
    ```python
-   # Ενσωματώστε το Azure Cognitive Search
-   # Ανεβάστε έγγραφα και δημιουργήστε ευρετήριο διανυσμάτων
+   # Ενσωματώστε το Azure AI Search
+   # Μεταφορτώστε έγγραφα και δημιουργήστε ευρετήριο διανυσμάτων
    ```
 
-3. **Add Function Calling** - Enable tool use
+3. **Προσθέστε Function Calling** - Ενεργοποιήστε τη χρήση εργαλείων
    ```python
    # Ορίστε συναρτήσεις στο chat.py
    # Επιτρέψτε στο gpt-4.1 να καλεί εξωτερικά APIs
    ```
 
-4. **Multi-Model Support** - Deploy multiple models
+4. **Υποστήριξη πολλαπλών μοντέλων** - Αναπτύξτε πολλαπλά μοντέλα
    ```bash
-   # Προσθήκη gpt-35-turbo και μοντέλων ενσωματώσεων
-   # Υλοποίηση λογικής δρομολόγησης μοντέλων
+   # Προσθέστε τα μοντέλα gpt-35-turbo και embeddings
+   # Υλοποιήστε τη λογική δρομολόγησης μοντέλων
    ```
 
-### Σχετικά Παραδείγματα
+### Σχετικά παραδείγματα
 
-- **[Retail Multi-Agent](../retail-scenario.md)** - Advanced multi-agent architecture
-- **[Database App](../../../../examples/database-app)** - Add persistent storage
-- **[Container Apps](../../../../examples/container-app)** - Deploy as containerized service
+- **[Retail Multi-Agent](../retail-scenario.md)** - Προηγμένη αρχιτεκτονική πολλαπλών πρακτόρων
+- **[Database App](../../../../examples/database-app)** - Προσθέστε μόνιμη αποθήκευση
+- **[Container Apps](../../../../examples/container-app)** - Αναπτύξτε ως υπηρεσία σε κοντέινερ
 
-### Πόροι Μάθησης
+### Πόροι μάθησης
 
-- 📚 [AZD For Beginners Course](../../README.md) - Main course home
-- 📚 [Microsoft Foundry Models Documentation](https://learn.microsoft.com/azure/ai-services/openai/) - Official docs
-- 📚 [OpenAI API Reference](https://platform.openai.com/docs/api-reference) - API details
-- 📚 [Responsible AI](https://www.microsoft.com/ai/responsible-ai) - Best practices
+- 📚 [Μάθημα AZD για αρχάριους](../../README.md) - Κύρια σελίδα μαθήματος
+- 📚 [Τεκμηρίωση Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/) - Επίσημη τεκμηρίωση
+- 📚 [Αναφορά OpenAI API](https://platform.openai.com/docs/api-reference) - Λεπτομέρειες API
+- 📚 [Υπεύθυνη AI](https://www.microsoft.com/ai/responsible-ai) - Καλές πρακτικές
 
-## Επιπλέον Πόροι
+## Πρόσθετοι πόροι
 
 ### Τεκμηρίωση
-- **[Microsoft Foundry Models Service](https://learn.microsoft.com/azure/ai-services/openai/)** - Complete guide
-- **[gpt-4.1 Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - Model capabilities
-- **[Content Filtering](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - Safety features
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd reference
+- **[Microsoft Foundry Models Service](https://learn.microsoft.com/azure/ai-services/openai/)** - Πλήρης οδηγός
+- **[gpt-4.1 Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - Δυνατότητες μοντέλου
+- **[Content Filtering](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - Λειτουργίες ασφάλειας
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - αναφορά azd
 
 ### Σεμινάρια
-- **[OpenAI Quickstart](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - First deployment
-- **[Chat Completions](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - Building chat apps
-- **[Function Calling](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - Advanced features
+- **[OpenAI Quickstart](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - Πρώτη ανάπτυξη
+- **[Chat Completions](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - Δημιουργία εφαρμογών συνομιλίας
+- **[Function Calling](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - Προηγμένα χαρακτηριστικά
 
 ### Εργαλεία
-- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - Web-based playground
-- **[Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)** - Writing better prompts
-- **[Token Calculator](https://platform.openai.com/tokenizer)** - Estimate token usage
+- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - Διαδικτυακό περιβάλλον εργασίας
+- **[Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)** - Συγγραφή καλύτερων προτροπών
+- **[Token Calculator](https://platform.openai.com/tokenizer)** - Εκτίμηση χρήσης token
 
 ### Κοινότητα
-- **[Azure AI Discord](https://discord.gg/azure)** - Get help from community
-- **[GitHub Discussions](https://github.com/Azure-Samples/openai/discussions)** - Q&A forum
-- **[Azure Blog](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - Latest updates
+- **[Azure AI Discord](https://discord.gg/azure)** - Λάβετε βοήθεια από την κοινότητα
+- **[GitHub Discussions](https://github.com/Azure-Samples/openai/discussions)** - Φόρουμ ερωτήσεων & απαντήσεων
+- **[Azure Blog](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - Τελευταίες ενημερώσεις
 
 ---
 
-**🎉 Επιτυχία!** Έχετε αναπτύξει το Microsoft Foundry Models και δημιουργήσει μια λειτουργική εφαρμογή συνομιλίας. Ξεκινήστε να εξερευνάτε τις δυνατότητες του gpt-4.1 και πειραματιστείτε με διάφορα prompts και περιπτώσεις χρήσης.
+**🎉 Επιτυχία!** Έχετε αναπτύξει τα Microsoft Foundry Models και δημιουργήσει μια λειτουργική εφαρμογή συνομιλίας. Ξεκινήστε να εξερευνάτε τις δυνατότητες του gpt-4.1 και πειραματιστείτε με διαφορετικές προτροπές και σενάρια χρήσης.
 
-**Ερωτήσεις;** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) ή δείτε το [FAQ](../../resources/faq.md)
+**Ερωτήσεις;** [Ανοίξτε ένα θέμα](https://github.com/microsoft/AZD-for-beginners/issues) ή ελέγξτε τις [Συχνές Ερωτήσεις](../../resources/faq.md)
 
-**Ειδοποίηση κόστους:** Θυμηθείτε να εκτελέσετε `azd down` όταν τελειώσετε τις δοκιμές για να αποφύγετε συνεχιζόμενες χρεώσεις (~$50-100/month for active usage).
+**Προειδοποίηση κόστους:** Θυμηθείτε να εκτελέσετε `azd down` όταν τελειώσετε τη δοκιμή για να αποφύγετε συνεχιζόμενες χρεώσεις (~$50-100/μήνα για ενεργή χρήση).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Αποποίηση ευθυνών:
-Αυτό το έγγραφο έχει μεταφραστεί με χρήση της υπηρεσίας αυτόματης μετάφρασης τεχνητής νοημοσύνης Co-op Translator (https://github.com/Azure/co-op-translator). Παρόλο που καταβάλλουμε προσπάθεια για ακρίβεια, σημειώστε ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στη γλώσσα του πρέπει να θεωρείται η επίσημη πηγή. Για κρίσιμες πληροφορίες συνιστάται επαγγελματική μετάφραση από ανθρώπινο μεταφραστή. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+**Αποποίηση ευθυνών**:
+Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης με τεχνητή νοημοσύνη [Co-op Translator](https://github.com/Azure/co-op-translator). Ενώ επιδιώκουμε την ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
