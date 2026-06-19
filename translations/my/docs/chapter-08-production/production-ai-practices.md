@@ -1,43 +1,44 @@
-# Production AI Workload Best Practices with AZD
+# AZD ဖြင့် ထုတ်လုပ်ရေး AI အလုပ်များ အတွက် အကောင်းဆုံး လက်တွေ့လမ်းညွှန်များ
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 8 - Production & Enterprise Patterns
-- **⬅️ Previous Chapter**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Also Related**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🎯 Course Complete**: [AZD For Beginners](../../README.md)
+**အခန်း လမ်းညွှန်:**
+- **📚 သင်တန်း မူလစာမျက်နှာ**: [AZD အစပြုသူများအတွက်](../../README.md)
+- **📖 လက်ရှိ အခန်း**: အခန်း 8 - ထုတ်လုပ်ရေးနှင့် စီးပွားရေး ပုံစံများ
+- **⬅️ ယခင် အခန်း**: [အခန်း 7: ပြဿနာရှာဖွေခြင်း](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ ဆက်စပ် အရာများ**: [AI လက်တွေ့ လေ့လာခန်း](ai-workshop-lab.md)
+- **🎯 သင်တန်း ပြီးစီး**: [AZD အစပြုသူများအတွက်](../../README.md)
 
-## Overview
+## အကျဉ်းချုံး
 
-ဒီလမ်းညွှန်စာတမ်းက Azure Developer CLI (AZD) ကို အသုံးပြုပြီး production အဆင့် သတ်မှတ်ထားသော AI workload များကို deploy လုပ်ရာတွင် လိုက်နာသင့်တဲ့ အကောင်းဆုံး အလေ့အကျင့်များကို စုံလင်စွာ ဖော်ပြထားသည်။ Microsoft Foundry Discord community မှ တုံ့ပြန်ချက်များနှင့် real-world client deployment များအပေါ် အခြေခံ၍၊ ဒီနည်းလမ်းများက production AI စနစ်များတွင် အထိတွေ့လေ့အများဆုံး အခက်အခဲများကို ဖြေရှင်းပေးသည်။
+ဤလမ်းညွှန်သည် Azure Developer CLI (AZD) ကို အသုံးပြု၍ ထုတ်လုပ်ရေးအဆင်သင့် AI အလုပ်များ တင်သွင်းရာတွင် လိုက်နာရမည့် စုံလင်သော အကောင်းဆုံး လမ်းညွှန်ချက်များကို ပေးသည်။ Microsoft Foundry Discord အသိုင်းအဝိုင်းနှင့် အဖြစ်မှန် ဖောက်သည် တင်သွင်းမှုများမှ ရရှိသော အကြံပြုချက်များအပေါ် အခြေခံပြီး၊ ဤလမ်းညွှန်များသည် ထုတ်လုပ်ရေး AI စနစ်များတွင် အများဆုံး ကြုံတွေ့ရသော အခက်အခဲများကို ကိုင်တွယ်ပေးသည်။
 
-## Key Challenges Addressed
+## ဖြေရှင်းပေးသည့် အဓိက အခက်အခဲများ
 
-community poll ရလဒ်များအရ developer များရှေ့မက်ကြုံတွေ့ရတဲ့ ထိပ်တန်း အခက်အခဲများမှာ:
+အသိုင်းအဝိုင်း ဆန္ဒ မဲပေးမှု ရလဒ်များအရ developer များ ကြုံတွေ့ရသော ထိပ်တန်း ချဉ်းကပ်မှုများမှာ အောက်ပါအတိုင်း ဖြစ်ပါသည်။
 
-- **45%** တွင် multi-service AI deployments အားကြုံရသည်
-- **38%** တွင် credential နှင့် secret စီမံခန့်ခွဲမှု ပြဿနာရှိသည်  
-- **35%** တွင် production အဆင့်အသင့်ဖြစ်စေရန်နှင့် scaling ပြဿနာများရှိသည်
-- **32%** တွင် ကုန်ကျစရိတ် အOptimization နည်းလမ်းများလိုအပ်သည်
-- **29%** တွင် monitoring နှင့် troubleshooting တိုးတက်စေရန် လိုအပ်သည်
+- **45%** က မျိုးစုံ ဝန်ဆောင်မှုများပါသော AI တင်သွင်းမှုများ ဖြေလှည်ရာတွင် အခက်အခဲရှိသည်
+- **38%** က လက်မှတ်များနှင့် စျေးကွက်မှတ်ပုံတင် (credential and secret) စီမံခန့်ခွဲမှု နှင့်ပတ်သက်၍ ပြဿနာရှိသည်  
+- **35%** က ထုတ်လုပ်ရေးအဆင်သင့်ဖြစ်အောင်နှင့် များပြားစွာ တိုးချဲ့နိုင်ရေးကို ခက်ခဲလို့ တွေ့သည်
+- **32%** က ကုန်ကျစရိတ် tối ưu ညွှန်ကြားချက်များလိုအပ်သည်
+- **29%** က မီတာခြင်းနှင့် ပြဿနာရှာဖွေရေးကို တိုးတက်စေရန် လိုအပ်သည်
 
-## Architecture Patterns for Production AI
+## ထုတ်လုပ်ရေး AI အတွက် ဆောက်လုပ်ရေး ပုံစံများ
 
-### Pattern 1: Microservices AI Architecture
+### ပုံစံ 1: မိုက်ခရိုဆာဗစ် (Microservices) AI အဆောက်အအုံ
 
-**When to use**: တစ်ခုထက်ပိုသော စွမ်းဆောင်ရည်များပါဝင်သည့် ရှုပ်ထွေးသော AI application များအတွက်
+**အသုံးပြုရန်အချိန်**: လုပ်ဆောင်နိုင်စွမ်းများ များစွာ ပါဝင်သည့် ရှုပ်ထွေးသော AI အက်ပ်များ
 
 ```mermaid
 graph TD
-    Frontend[ဝက်ဘ် ရှေ့ဆုံး အင်တာဖေ့စ်] --- Gateway[API ဂိတ်ဝေး] --- LB[လော့ဒ် ဘလန်ဆာ]
-    Gateway --> Chat[စကားဝိုင်း ဝန်ဆောင်မှု]
-    Gateway --> Image[ရုပ်ပုံ ဝန်ဆောင်မှု]
+    Frontend[ဝဘ် မျက်နှာပြင်] --- Gateway[API ဝင်ပေါက်] --- LB[တင်ပို့ပမာဏ ချိန်ညှိကိရိယာ]
+    Gateway --> Chat[စကားပြော ဝန်ဆောင်မှု]
+    Gateway --> Image[ပုံ ဝန်ဆောင်မှု]
     Gateway --> Text[စာသား ဝန်ဆောင်မှု]
     Chat --> OpenAI[Microsoft Foundry မော်ဒယ်များ]
-    Image --> Vision[ကွန်ပျူတာမြင်ခြင်း]
-    Text --> DocIntel[စာရွက်စာတမ်း ဗဟုဉာဏ်]
+    Image --> Vision[ကွန်ပျူတာ မြင်ကွင်း]
+    Text --> DocIntel[စာရွက်စာတမ်း ဉာဏ်ရည်]
 ```
-**AZD Implementation**:
+
+**AZD အကောင်အထည်ဖော်ခြင်း**:
 
 ```yaml
 # azure.yaml
@@ -60,9 +61,9 @@ services:
     host: containerapp
 ```
 
-### Pattern 2: Event-Driven AI Processing
+### ပုံစံ 2: ဖြစ်ရပ်-မောင်းနှင်သည့် AI ပြုလုပ်စဉ်
 
-**When to use**: Batch processing, document analysis, async workflows အတွက်
+**အသုံးပြုရန်အချိန်**: အစုလိုက် လုပ်ဆောင်ချက်များ (batch processing), စာရွက်စာတမ်း စိစစ်ခြင်း, အဆက်မပြတ် အလုပ်စဉ်များ (async workflows)
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -109,46 +110,46 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Thinking About AI Agent Health
+## AI ကိုယ်စားလှယ် ကျန်းမာရေးအကြောင်း စဉ်းစားခြင်း
 
-ရိုးရာ web app တစ်ခု ပျက်ကွက်သွားတဲ့အခါ ရောဂါလက္ခဏာများက ရိုးရှင်းတတ်သည်။ စာမျက်နှာမဖွင့်တော့, API မှ အမှားပြန်လာ, သို့မဟုတ် deployment မအောင်မြင်—AI ဖြင့် တိုးမြှင့်ထားသော application များမှာလည်း အဲ့ဒီလိုပဲပျက်ကွက်နိုင်ပေမယ့် အမွိုးမရှိတဲ့ အမှားစကားများမထွက်ပေါ်ပဲ ပြဿနာဖြစ်ပေါ်နိုင်သည်။
+ရိုးရာ ဝက်ဘ်အက်ပ်တစ်ခု ချိုးဖောက်ချိန်တွင် ပြသနာအကြောင်းရင်းများကို မြင်ရသည်—စာမျက်နှာတခု မဖွင့်ခြင်း၊ API တစ်ခု အမှား ပြန်လာခြင်း သို့မဟုတ် deployment တစ်ခု မအောင်မြင်ခြင်း။ AI အားဖြင့် လှုံ့ဆော်ထားသော အက်ပ်များသည် ထိုပုံစံများအားလုံးဖြင့်ချိုးကွဲနိုင်သလို၊ ထင်ရှားသော အမှားစာမက်ဆေ့ခ်ျ မပေါ်ပဲ ပြဿနာဖြစ်ပေါ်နိုင်သော ပုံစံပိုမိုပါရှိသည်။
 
-ဒီအပိုင်းက AI workload များကို အကောင်းဆုံး တွေ့ရှိခြင်း၊ စောင့်ကြည့်ခြင်းအတွက် စိတ်ကူးယဉ်ပုံစံ တစ်ခု ဖန်တီးရာတွင် အကူအညီပေးမယ်၊ ပြဿနာဖြစ်လာရင် ဘယ်နေရာကို ရှာရမယ်ဆိုတာ သိနိုင်စေမယ်။
+ဤအပိုင်းသည် AI အလုပ်များကို ကြည့်ရှုစစ်ဆေးရာတွင် မည်နေရာကို ရှာဖွေကြည့်ရမည်ကို သိရှိစေရန် စိတ်ဓာတ် ပုံစံတစ်ခု တည်ဆောက်ရန် ကူညီပေးသည်။
 
-### How Agent Health Differs from Traditional App Health
+### ကိုယ်စားလှယ် ကျန်းမာရေးသည် ရိုးရာ အက်ပ် ကျန်းမာရေးနှင့် မတူဘယ်လောက်ထိ ကွာဟမှုရှိသနည်း
 
-ရိုးရာ app က အလုပ်လုပ်တယ် မလုပ်ဘူး ဆိုတာ ရှင်းလင်းတတ်သည်။ AI agent က ရှင်းလင်းပုံရနိုင်သော်လည်း ဖျက်မဖြစ်တဲ့ မကောင်းတဲ့ အဖြေများ ရှိနိုင်သည်။ agent health ကို အလွှာ ၂ ခုအနေနဲ့ သတိပြုစဉ်းစားပါ။
+ရိုးရာ အက်ပ်မှာ ဖြစ်တည်နေသည် သို့မဟုတ် မဖြစ်တော့ပါ—ဟုတ်/မဟုတ် လို့ ရှင်းလင်းသည်။ AI ကိုယ်စားလှယ်တစ်ခုကတော့ လုပ်ဆောင်နေသည့်အတိုင်း မြင်နိုင်ဖြစ်ပေမယ့် ရလဒ်များ သာမန်မဖြစ်နိုင်ပါ။ ကိုယ်စားလှယ် ကျန်းမာရေးကို အလွှာ နှစ်ခုအဖြစ် တွေးပါ။
 
-| Layer | What to Watch | Where to Look |
+| အလွှာ | ကြည့်ရန် အရာ | ကြည့်ရမည့် နေရာ |
 |-------|--------------|---------------|
-| **Infrastructure health** | ဆာဗာသည် လည်ပတ်နေရပါသလား? အရင်းအမြစ်များ provision လုပ်ထားလား? endpoint များ သက်ရောက်နိုင်သလား? | `azd monitor`, Azure Portal resource health, container/app logs |
-| **Behavior health** | agent သည် တိကျမှန်ကန်စွာ အဖြေပြန်ပေးနေရပါသလား? အချိန်မီ တုံ့ပြန်မှုများ ရှိနေရပါသလား? model ကို မှန်ကန်စွာ ခေါ်ဆောင်ရပါသလား? | Application Insights traces, model call latency metrics, response quality logs |
+| **အဆောက်အအုံ ကျန်းမာရေး** | ဝန်ဆောင်မှုက အလုပ်လုပ်နေပါသလား? အရင်းအမြစ်များ ထောက်ပံ့ထားပါသလား? endpoint များကို ရောက်ရှိနိုင်ပါသလား? | `azd monitor`, Azure Portal ရဲ့ အရင်းအမြစ် ကျန်းမာရေး၊ container/app မှတ်တမ်းများ |
+| **အပြုအမူ ကျန်းမာရေး** | ကိုယ်စားလှယ်သည် မှန်ကန်စွာ တုံ့ပြန်နေပါသလား? တုံ့ပြန်ချိန်များ သေချာရှိပါသလား? မော်ဒယ်ကို မှန်ကန်စွာ ခေါ်ယူနေပါသလား? | Application Insights trace များ၊ model call latency မီထရစ်များ၊ response quality မှတ်တမ်းများ |
 
-Infrastructure health က သိရှင်းပြီးသား—azd app များအတွက် တူညီတဲ့ အနေအထားပါ။ Behavior health က AI workload များမှာ အသစ်ထည့်သွင်းလာတဲ့ အလွှာ ဖြစ်သည်။
+အဆောက်အအုံ ကျန်းမာရေးမှာ သတ်မှတ်ထားသကဲ့သို့ ရိုးရာ ဖြစ်သည်—azd အက်ပ် အားလုံးအတွက် တူညီပါသည်။ အပြုအမူ ကျန်းမာရေးသည် AI အလုပ်များ ကာတွန်းထည့်သွင်းသည့် အသစ်သော အလွှာဖြစ်သည်။
 
-### Where to Look When AI Apps Don't Behave as Expected
+### AI အက်ပ်များ မျှော်မှန်းသလို မလုပ်ဆောင်သောအခါ သေချာစို့ ရှာဖွေရမည့် နေရာများ
 
-AI application သင့်မျှော်လင့်ရာအဖြေ မထွက်လာပါက အောက်ပါ ကိုင်တွယ်စရာ စစ်ဆေးလမ်းစဉ်ကို အသုံးပြုပါ။
+သင့် AI အက်ပ်က မျှော်မှန်းသလို ရလဒ် မထုတ်ပေးပါက၊ အောက်ပါ အတွေးအဆင့်စာရင်းကို ဆောင်ရွက်ပါ။
 
-1. **အခြေခံများနဲ့ စတင်ပါ။** app လည်ပတ်နေရှိသလား? သူ့ရဲ့ dependency တွေကို မရောက်နဲ့လား? အခြား app တစ်ခုလို `azd monitor` နဲ့ resource health ကို စစ်ဆေးပါ။
-2. **model ဆက်သွယ်မှုကို စစ်ပါ။** သင့် app က AI model ကို အောင်မြင်စွာ ခေါ်ဆောင်နေပေးလား? မအောင်မြင်သော်လည်း သို့မဟုတ် timeout ဖြစ်တဲ့ model ခေါ်ဆိုမှုများက AI app ပြဿနာများအတွက် ပိုများပြီး ဖြစ်ပေါ်တတ်သည်၊ အဲဒီအရာတွေကို application logs မှာ တွေ့နိုင်ပါမယ်။
-3. **model က ရရှိသွားတဲ့ input ကို ကြည့်ပါ။** AI အဖြေများက input (prompt နှင့် ရရှိသည့် context) ပေါ် မူတည်သည်။ output မှားနေခဲ့ရင် input ပိုမိုမှားနေတတ်한다။ သင့် app က model ကို မှန်ကန်တဲ့ data ပို့နေသလား စစ်ဆေးပါ။
-4. **response latency ကို ပြန်လည်စစ်ဆေးပါ။** AI model ခေါ်ဆိုမှုများက ဗဟို API ခေါ်ဆိုမှုများထက် နှေးထထားတတ်သည်။ app က နှေးကွေးနေသလိုခံစားရင် model response time တွေတက်လာခြင်းကို စစ်ပါ—ဤသည်က throttling, capacity ကန့်သတ်ချက်များ သို့မဟုတ် region-level congestion ကိုပြသနိုင်သည်။
-5. **ကုန်ကျစရိတ် သက်ဆိုင်ရာ သင်္ကေတများကို သတိထားပါ။** token အသုံးအများပြင်းထွက်ခြင်း သို့မဟုတ် API ခေါ်ဆိုမှု တက်လာခြင်းများက loop တစ်ခု, prompt မဖြစ်မှန် config, သို့မဟုတ် မလိုလားအပ်စွာ retry လုပ်နေခြင်းကို ဖေါ်ပြနိုင်သည်။
+1. **အခြေခံအချက်များဖြင့် စတင်ပါ။** အက်ပ် အလုပ်လုပ်နေပါသလား? မှီခိုရန် ပရိုင်းတူးများကို ရောက်ရှိနိုင်ပါသလား? မည်သည့်အက်ပ်မဆို အတွက် `azd monitor` နှင့် resource health ကို စစ်ဆေးပါ။
+2. **မော်ဒယ် ချိတ်ဆက်မှုကို စစ်ဆေးပါ။** သင့်အက်ပ်က မော်ဒယ်ကို အောင်မြင်စွာ ခေါ်ယူနိုင်ပါသလား? မော်ဒယ်ခေါ်ယူမှု မအောင်မြင်ခြင်း သို့မဟုတ် သတ်မှတ်ချိန် ကျော်လွန်ခေါ်ယူခြင်းများက AI အက်ပ်ပြဿနာများ၏ အများဆုံး အကြောင်းရင်းဖြစ်ပြီး သင်၏ application logs တွင် တွေ့ရပါလိမ့်မည်။
+3. **မော်ဒယ်အတွက် ပေးပို့ထားသော အချက်အလက်ကို ကြည့်ပါ။** AI ရလဒ်များသည် input (prompt နှင့် ရယူထားသော context) ပေါ် မူတည်သည်။ output မှားနေပါက input က ပိုမိုဖြစ်နေသည်။ သင့်အက်ပ်က မော်ဒယ်ထံ သင့်တော်သော ဒေတာကို ပေးပို့ထားသလား စစ်ဆေးပါ။
+4. **တုံ့ပြန်ချိန်ကို ပြန်စစ်ပါ။** မော်ဒယ်ခေါ်ယူမှုများသည် ယေဘုယျ API ခေါ်ယူမှုထက် သေးနည်းပင်နက်ဖြစ်နိုင်သည်။ အက်ပ်က စွန့်ဆိုင်းသလိုခံစားရပါက မော်ဒယ်တုံ့ပြန်ချိန်များ တိုးမြင့်နေပါသလား စစ်ဆေးပါ—ဒါက throttling, စွမ်းရည် ကန့်သတ်ချက်များ သို့မဟုတ် ဒေသအဆင့် ညီဆက်မှု ဒဏ်တွေ ဖြစ်နိုင်သည်။
+5. **ကုန်ကျစရိတ် အချက်အလက်များကို ကြည့်ရှုပါ။** token အသုံးပြုမှု သို့မဟုတ် API ခေါ်ယူမှု များ အောက်မေ့ မထင်မှတ်ထားသော တက်လာမှုများရှိပါက loop တစ်ခု၊ prompt မှားဖွဲ့ထားခြင်း သို့မဟုတ် အလွန်များတဲ့ retry များ ဖြစ်နိုင်သည်။
 
-observability tooling ကို အဆုံးသတ်ကျွမ်းကျင်ဖို့ ခဏချိန်ထားနိုင်ပါတယ်။ အဓိက takeaway က AI application များမှာ behavior စောင့်ကြည့်ရမယ့် နောက်ထပ်အလွှာတစ်ခု ရှိပြီး azd ရဲ့ built-in monitoring (`azd monitor`) က အဲ့ဒီ နှစ်ခုလုံးကို စူးစမ်းစစ်ဆေးဖို့ စတင်ရန် လမ်းပြပေးတယ်ဆိုတာပါ။
+သင် observability tooling များကို ချက်ချင်းကျွမ်းကျင်ရန် မလိုအပ်ပါ။ အဓိကယူဆချက်မှာ AI အက်ပ်များသည် ကြည့်နှင့်စောင့်ရှောက်ရန် အပြုအမူ အလွှာ တစ်ခု ထပ်မံ ထည့်သွင်းထားပြီး azd ၏ အတွင်းတွင် ပါဝင်သော မော်နီတာ (`azd monitor`) သည် အဆိုပါ အလွှာ နှစ်ခုလုံးကို စတင် စုံစမ်းရန် အစနေကျကို ပေးသည်။
 
 ---
 
-## Security Best Practices
+## လုံခြုံရေး အကောင်းဆုံး လမ်းစဉ်များ
 
-### 1. Zero-Trust Security Model
+### 1. Zero-Trust လုံခြုံရေး မော်ဒယ်
 
-**Implementation Strategy**:
-- authentication မရှိပဲ service-to-service စကားဝိုင်း မရှိစေရန်
-- 모든 API ခေါ်ဆိုမှုများမှာ managed identities ကို အသုံးပြုရန်
-- private endpoints ဖြင့် network isolation
-- least privilege access control များ ဖော်ထုတ်ရန်
+**လက်တွေ့ကျအောင်ဆောင်ရွက်ခြင်းနည်းလမ်းများ**:
+- မရှိမဖြစ် authentication မပါဘဲ service-to-service ဆက်သွယ်မှု မရှိစေရန်
+- အားလုံးသော API ခေါ်ယူမှုများတွင် managed identities အသုံးပြုရန်
+- private endpoints ဖြင့် ကွန်ယက် ခွဲခြားထားရန်
+- လုံချုပ်ခွင့် (least privilege) အမျိုးအစား အာမခံချက်များ
 
 ```bicep
 // Managed Identity for each service
@@ -169,9 +170,9 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-### 2. Secure Secret Management
+### 2. လုံခြုံစိတ်ချစေရန် Secret စီမံခန့်ခွဲမှု
 
-**Key Vault Integration Pattern**:
+**Key Vault ပေါင်းစည်းခြင်း ပုံစံ**:
 
 ```bicep
 // Key Vault with proper access policies
@@ -204,9 +205,9 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-### 3. Network Security
+### 3. ကွန်ယက် လုံခြုံရေး
 
-**Private Endpoint Configuration**:
+**Private Endpoint ဖန်တီးပုံ**:
 
 ```bicep
 // Virtual Network for AI services
@@ -264,11 +265,11 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## Performance and Scaling
+## စွမ်းဆောင်ရည်နှင့် တိုးချဲ့နိုင်မှု
 
-### 1. Auto-Scaling Strategies
+### 1. အလိုအလျောက် တိုးချဲ့မှု မဟာဗျူဟာများ
 
-**Container Apps Auto-scaling**:
+**Container Apps အလိုအလျောက် တိုးချဲ့မှု**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -312,9 +313,9 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 2. Caching Strategies
+### 2. Cache မဟာဗျူဟာများ
 
-**Redis Cache for AI Responses**:
+**AI တုံ့ပြန်မှုများအတွက် Redis Cache**:
 
 ```bicep
 // Redis Premium for production workloads
@@ -342,9 +343,9 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. Load Balancing and Traffic Management
+### 3. လုပ်တင်ချိန်ချိန်နှင့် Traffic စီမံခြင်း
 
-**Application Gateway with WAF**:
+**WAF ပါရှိသည့် Application Gateway**:
 
 ```bicep
 // Application Gateway with Web Application Firewall
@@ -380,11 +381,11 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 💰 Cost Optimization
+## 💰 ကုန်ကျစရိတ် tối ưu ဆိုင်ရာ
 
-### 1. Resource Right-Sizing
+### 1. အရင်းအမြစ် ကို သင့်တော်စွာ ထားရှိခြင်း (Right-Sizing)
 
-**Environment-Specific Configurations**:
+**ပတ်ဝန်းကျင်-သတ်မှတ် ချိန်ညှိချက်များ**:
 
 ```bash
 # ဖွံ့ဖြိုးရေး ပတ်ဝန်းကျင်
@@ -404,7 +405,7 @@ azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
 
-### 2. Cost Monitoring and Budgets
+### 2. ကုန်ကျစရိတ် မျက်နှာစာနှင့် ငွေကြေး အထိမ်းအမှတ်များ
 
 ```bicep
 // Cost management and budgets
@@ -445,12 +446,12 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-### 3. Token Usage Optimization
+### 3. Token အသုံးပြုမှု tối ưu ဖြေရှင်းချက်
 
-**OpenAI Cost Management**:
+**OpenAI ကုန်ကျစရိတ် စီမံခန့်ခွဲမှု**:
 
 ```typescript
-// အပလီကေးရှင်းအဆင့်တွင် တိုကင် ထိရောက်စွာ အသုံးပြုခြင်း
+// အပလီကေးရှင်းအဆင့်တွင် တိုကင်များကို ထိရောက်စွာ တိုးတက်အောင် ပြုလုပ်ခြင်း
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -460,7 +461,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // အကြောင်းအရာကို ဖြတ်ချုပ်ပါ၊ အသုံးပြုသူ၏ ထည့်သွင်းချက်ကို မဖြတ်ပါ
+      // ဆက်စပ်အကြောင်းအရာကို ဖြတ်တောက်ပါ၊ အသုံးပြုသူ၏ အဝင်ကို မဖြတ်ပါ
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -468,15 +469,15 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // ကြမ်းတမ်း ခန့်မှန်းချက်: 1 တိုကင် ≈ 4 အက္ခရာ
+    // အကြမ်းဖျင်း ခန့်မှန်းချက်: တိုကင် ၁ ခု ≈ အက္ခရာ ၄ ခု
     return Math.ceil(text.length / 4);
   }
 }
 ```
 
-## Monitoring and Observability
+## မော်နီတာနှင့် မြင်သာမှု (Observability)
 
-### 1. Comprehensive Application Insights
+### 1. စုံလင်သော Application Insights
 
 ```bicep
 // Application Insights with advanced features
@@ -521,9 +522,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. AI-Specific Monitoring
+### 2. AI-အထူး မော်နီတာ
 
-**Custom Dashboards for AI Metrics**:
+**AI မီထရစ်များအတွက် အထူး ထိန်းချုပ် အချက်ပြ ပတ်လမ်းများ**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -552,7 +553,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Health Checks and Uptime Monitoring
+### 3. ကျန်းမာရေး စစ်ဆေးမှုများနှင့် Uptime မျက်နှာစာ
 
 ```bicep
 // Application Insights availability tests
@@ -621,9 +622,9 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## Disaster Recovery and High Availability
+## မည်သည့်ဘေးအန္တရာယ်ပျောက်ကင်းရေးနှင့် မြင့်မားသောရနိုင်မှု
 
-### 1. Multi-Region Deployment
+### 1. မျိုးစုံ ဒေသများတွင် တင်သွင်းခြင်း
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -685,7 +686,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. Data Backup and Recovery
+### 2. ဒေတာ ဂိုဒေါင်နှင့် ပြန်လည်ရရှိရေး
 
 ```bicep
 // Backup configuration for critical data
@@ -736,9 +737,9 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
 }
 ```
 
-## DevOps and CI/CD Integration
+## DevOps နှင့် CI/CD ပေါင်းစည်းမှု
 
-### 1. GitHub Actions Workflow
+### 1. GitHub Actions အလုပ်စဉ်
 
 ```yaml
 # .github/workflows/deploy-ai-app.yml
@@ -819,7 +820,7 @@ jobs:
           python scripts/health_check.py --env production
 ```
 
-### 2. Infrastructure Validation
+### 2. အခြေခံအဆောက်အအုံ စစ်ဆေးခြင်း
 
 ```bash
 # scripts/validate_infrastructure.sh
@@ -827,7 +828,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# လိုအပ်သည့် ဝန်ဆောင်မှုများအားလုံး လည်ပတ်လား စစ်ဆေးပါ
+# လိုအပ်သော ဝန်ဆောင်မှုအားလုံး လည်ပတ်နေကြောင်း စစ်ဆေးပါ
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -837,7 +838,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# OpenAI မော်ဒယ် တပ်ဆင်မှုများကို စစ်ဆေးပါ
+# OpenAI မော်ဒယ် တပ်ဆင်မှုများကို အတည်ပြုပါ
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-4.1-mini"* ]]; then
@@ -852,9 +853,9 @@ python scripts/test_connectivity.py
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Production Readiness Checklist
+## ထုတ်လုပ်ရေး အဆင်သင့် စစ်ဆေးစာရင်း
 
-### Security ✅
+### လုံခြုံရေး ✅
 - [ ] All services use managed identities
 - [ ] Secrets stored in Key Vault
 - [ ] Private endpoints configured
@@ -862,7 +863,7 @@ echo "Infrastructure validation completed successfully!"
 - [ ] RBAC with least privilege
 - [ ] WAF enabled on public endpoints
 
-### Performance ✅
+### စွမ်းဆောင်ရည် ✅
 - [ ] Auto-scaling configured
 - [ ] Caching implemented
 - [ ] Load balancing setup
@@ -870,7 +871,7 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Database connection pooling
 - [ ] Token usage optimization
 
-### Monitoring ✅
+### မော်နီတာ ✅
 - [ ] Application Insights configured
 - [ ] Custom metrics defined
 - [ ] Alerting rules setup
@@ -878,7 +879,7 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Health checks implemented
 - [ ] Log retention policies
 
-### Reliability ✅
+### ယုံကြည်ရမှု (Reliability) ✅
 - [ ] Multi-region deployment
 - [ ] Backup and recovery plan
 - [ ] Circuit breakers implemented
@@ -886,7 +887,7 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Graceful degradation
 - [ ] Health check endpoints
 
-### Cost Management ✅
+### ကုန်ကျစရိတ် စီမံခန့်ခွဲမှု ✅
 - [ ] Budget alerts configured
 - [ ] Resource right-sizing
 - [ ] Dev/test discounts applied
@@ -894,7 +895,7 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Cost monitoring dashboard
 - [ ] Regular cost reviews
 
-### Compliance ✅
+### ကိုက်ညီမှု (Compliance) ✅
 - [ ] Data residency requirements met
 - [ ] Audit logging enabled
 - [ ] Compliance policies applied
@@ -902,23 +903,23 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Regular security assessments
 - [ ] Incident response plan
 
-## Performance Benchmarks
+## စွမ်းဆောင်ရည် စမ်းသပ်ချက်များ
 
-### Typical Production Metrics
+### ယေဘုယျ ထုတ်လုပ်ရေး မီထရစ်များ
 
-| Metric | Target | Monitoring |
+| မီထရစ် | အလားတူ သတ်မှတ်ချက် | မော်နီတာနေရာ |
 |--------|--------|------------|
-| **Response Time** | < 2 seconds | Application Insights |
-| **Availability** | 99.9% | Uptime monitoring |
-| **Error Rate** | < 0.1% | Application logs |
-| **Token Usage** | < $500/month | Cost management |
-| **Concurrent Users** | 1000+ | Load testing |
-| **Recovery Time** | < 1 hour | Disaster recovery tests |
+| **တုံ့ပြန်ချိန်** | < 2 seconds | Application Insights |
+| **ရရှိနိုင်မှု** | 99.9% | Uptime monitoring |
+| **အမှားနှုန်း** | < 0.1% | Application logs |
+| **Token အသုံးပြုမှု** | < $500/month | Cost management |
+| **တပြိုင်နက် အသုံးပြုသူများ** | 1000+ | Load testing |
+| **ပြန်လည်ရရှိချိန်** | < 1 hour | Disaster recovery tests |
 
 ### Load Testing
 
 ```bash
-# AI အပလီကေးရှင်းများအတွက် တင်ပမာဏ စမ်းသပ်ရေး စကရစ်
+# AI အပလီကေးရှင်းများအတွက် ဖိအား (load) စမ်းသပ်ရေး စကရစ်ပ့်
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -926,129 +927,182 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 Community Best Practices
+## 🤝 အသိုင်းအဝိုင်း မှ အကောင်းဆုံး လမ်းများ
 
-Microsoft Foundry Discord community မှ ရရှိထားသည့် တုံ့ပြန်ချက်များအပေါ် အခြေခံထားပြီး။
+Microsoft Foundry Discord အသိုင်းအဝိုင်း၏ အကြံပေးချက်များအပေါ် အခြေခံ၍ -
 
-### Top Recommendations from the Community:
+### အသိုင်းအဝိုင်းမှ ထိပ်တန်း အကြံပြုချက်များ
 
-1. **Start Small, Scale Gradually**: အခြေခံ SKU များနှင့် စတင်ပြီး အမှန်တကယ်အသုံးပြုမှုအပေါ် မူတည်၍ တိုးမြှင့်ပါ
-2. **Monitor Everything**: ပထမနေ့ထားကတည်းက စောင့်ကြည့်မှု စုံလင်စွာ တည်ဆောက်ပါ
-3. **Automate Security**: consistent security အတွက် infrastructure as code ကို အသုံးပြုပါ
-4. **Test Thoroughly**: pipeline အတွင်း AI-specific စမ်းသပ်မှုများထည့်သွင်းပါ
-5. **Plan for Costs**: token အသုံးအနှုန်းကို စောင့်ကြည့်ပြီး အရန် budget alerts များ သတ်မှတ်ပါ
+1. **သေးစွာ စတင်ပြီး တဖြည်းဖြည်း တိုးချဲ့ပါ။** အခြေခံ SKU များနှင့် စတင်ပြီး အသုံးပြုမှုအပေါ်မူတည်၍ တိုးချဲ့ပါ
+2. **အားလုံးကို မော်နီတာ လုပ်ပါ။** ပထမနေ့စမှ စုံလင်သည့် မော်နီတာအားဖွဲ့စည်းပါ
+3. **လုံခြုံရေးကို အော်တိုမိတ်လုပ်ပါ။** တူညီသော လုံခြုံရေးအချိုးအစားအတွက် infrastructure as code ကို အသုံးပြုပါ
+4. **စမ်းသပ်မှုကို စုံစမ်းပါ။** သင့် pipeline အတွင်း AI-အထူး စမ်းသပ်မှုများ ထည့်ပါ
+5. **ကုန်ကျစရိတ် အတွက် ကြိုတင်အစီအစဉ် ပြုစုပါ။** token အသုံးပြုမှုကို မျက်နှာပြင်တင်စောင့်ကြည့်ပြီး budget alerts များ စတင် ဆောင်ရွက်ပါ
 
-### Common Pitfalls to Avoid:
+### ရှောင်ကြဉ်သင့်သော အသားတင် လက်မှတ်များ
 
-- ❌ Hardcoding API keys in code
-- ❌ Not setting up proper monitoring
-- ❌ Ignoring cost optimization
-- ❌ Not testing failure scenarios
-- ❌ Deploying without health checks
+- ❌ ကုဒ်အတွင်း API keys များကို တိုက်ရိုက် ထည့်သွင်းထားခြင်း
+- ❌ သင့်လျော်သော မော်နီတာ မတပ်ဆင်ခြင်း
+- ❌ ကုန်ကျစရိတ် tối ưu အလေးမထားခြင်း
+- ❌ ကာလရှည် မအောင်မြင်မှု စက်လည်မှု ကို စမ်းသပ်မထားခြင်း
+- ❌ health checks မပါဘဲ တင်သွင်းခြင်း
 
-## AZD AI CLI Commands and Extensions
+## AZD AI CLI ဆုံးဖြတ်ချက်များနှင့် Extension များ
 
-AZD သည် production AI workflow များကို လွယ်ကူစေရန် AI-specific commands နှင့် extensions များတိုးချဲ့ပေးထားသည်။ ဒီ tools များက local development နှင့် production deployment အကြား အားကစားတံဆိပ်တစ်ခု ဖန်တီးပေးသည်။
+AZD သည် ထုတ်လုပ်ရေး AI အလုပ်စဉ်များကို ပိုမိုလွယ်ကူစေရန် AI-အထူး command များနှင့် extension များ တိုးချဲ့နေသည်။ ဤကိရိယာများက ဒေသီယဖွံ့ဖြိုးမှုနှင့် ထုတ်လုပ်ရေး deployment များအကြား အပြွန်ကို ဖြည်းဖြည်းချေဖျက်ပေးသည်။
 
-### AZD Extensions for AI
+### AI အတွက် AZD Extension များ
 
-AZD သည် extension စနစ်ကို အသုံးပြု၍ AI-specific အင်္ဂါရပ်များ ထည့်သွင်းသည်။ အောက်ပါနည်းဖြင့် extensions များကို install နှင့် စီမံနိုင်သည်။
+AZD သည် AI-အထူး စွမ်းရည်များ ထည့်သွင်းရန် extension စနစ်ကို အသုံးပြုသည်။ extension များကို 설치နှင့် စီမံရန်:
 
 ```bash
-# ရနိုင်သော တိုးချဲ့ချက်အားလုံးကို (AI အပါအဝင်) စာရင်းပြပါ
+# ရနိုင်သည့် တိုးချဲ့မှုများအားလုံးကို စာရင်းပြပါ (AI အပါအဝင်)
 azd extension list
 
-# တပ်ဆင်ထားသော တိုးချဲ့ချက်၏ အသေးစိတ်ကို စစ်ဆေးပါ
+# ထည့်သွင်းထားသော တိုးချဲ့မှုများ၏ အသေးစိတ်ကို စစ်ဆေးပါ
 azd extension show azure.ai.agents
 
-# Foundry agents တိုးချဲ့ချက်ကို တပ်ဆင်ပါ
+# Foundry agents တိုးချဲ့မှုကို ထည့်သွင်းပါ
 azd extension install azure.ai.agents
 
-# fine-tuning တိုးချဲ့ချက်ကို တပ်ဆင်ပါ
+# fine-tuning တိုးချဲ့မှုကို ထည့်သွင်းပါ
 azd extension install azure.ai.finetune
 
-# custom models တိုးချဲ့ချက်ကို တပ်ဆင်ပါ
+# စိတ်ကြိုက် မော်ဒယ်များ တိုးချဲ့မှုကို ထည့်သွင်းပါ
 azd extension install azure.ai.models
 
-# တပ်ဆင်ထားသော တိုးချဲ့ချက်အားလုံးကို အဆင့်မြှင့်တင်ပါ
+# ထည့်သွင်းထားသော တိုးချဲ့မှုများအားလုံးကို မြှင့်တင်ပါ
 azd extension upgrade --all
 ```
 
-**Available AI extensions:**
+**ရနိုင်သော AI extension များ:**
 
-| Extension | Purpose | Status |
+| Extension | ရည်ရွယ်ချက် | အခြေအနေ |
 |-----------|---------|--------|
-| `azure.ai.agents` | Foundry Agent Service management | Preview |
-| `azure.ai.finetune` | Foundry model fine-tuning | Preview |
-| `azure.ai.models` | Foundry custom models | Preview |
-| `azure.coding-agent` | Coding agent configuration | Available |
+| `azure.ai.agents` | Foundry Agent Service ကို စီမံခန့်ခွဲခြင်း | Preview |
+| `azure.ai.skills` | ပြန်လည်အသုံးပြုနိုင်သော agent skills များ | Preview |
+| `azure.ai.connections` | Foundry connections (ဒေတာရင်းမြစ်များ၊ ကိရိယာများ) | Preview |
+| `azure.ai.finetune` | Foundry မော်ဒယ် fine-tuning | Preview |
+| `azure.ai.models` | Foundry စိတ်ကြိုက် မော်ဒယ်များ | Preview |
+| `azure.coding-agent` | Coding agent ဖန်တီးမှု ထိန်းချုပ်မှု | Available |
 
-### Initializing Agent Projects with `azd ai agent init`
+> `azure.ai.agents` extension သည် လျင်မြန်စွာ တိုးတက်နေပါသည်။ ဤသင်တန်းကို `0.1.40-preview` နောက်ဆုံးပေါ်နှင့် သက်မှတ်ထားပါသည်။ နောက်ဆုံး command အစုကို ယူရန် `azd extension upgrade --all` ကို ဆောင်ရွက်ပြီး သင့်မှာထည့်ထားသော ဗားရှင်းကို အတည်ပြုရန် `azd extension show azure.ai.agents` ကို ဆောင်ရွက်ပါ။
 
-`azd ai agent init` command က Microsoft Foundry Agent Service နှင့် ပေါင်းစည်းထားသည့် production-ready AI agent project ကို scaffolding ပေးသည်။
+**`skills` နဲ့ `connections` အကြောင်း အသေးစိတ် ဘာလဲ?**
+
+agent ကိရိယာများနှင့်အတူပေါ်ပေါက်လာသည့် နှစ်ခုသော preview extension များရှိပြီး၊ ကိုယ့်ကိုယ်ကို စတင်လေ့လာနေသူတစ်ဦးအနေဖြင့် တောင်သိသင့်သည်။
+
+- **`azure.ai.skills`** — “skill” ဆိုသည်မှာ ပြန်လည်အသုံးပြုနိုင်သော စွမ်းရည်တစ်ခုဖြစ်သည် (ထုပ်ပိုးထားသော ကိရိယာ သို့မဟုတ် အပြုအမူ) ကို agent များတွင် ထပ်မံရေးသားခြင်း မဖြစ်စေရန် တစ်ခါတည်း တပ်ဆင်နိုင်သည်။ ဥပမာ "စာရွက်စာတမ်းကို ရှာဖွေပါ" သို့မဟုတ် "မှာယူမှုကို ကြည့်ပါ" ဆိုသည့် skill များကို တစ်ကြိမ် သတ်မှတ်ထားပြီး agent အများသို့ ပြန်လည်အသုံးပြုနိုင်သည်။ ယင်းသည် multi-agent စနစ်များကို (အခန်း 5) တူညီစေပြီး copy-paste ဖြင့် ဖြစ်ပေါ်သော ပြဿနာများကို ရှောင်ရှားစေသည်။
+- **`azure.ai.connections`** — “connection” ဆိုသည်မှာ သင့် Foundry project မှ agent များ လိုအပ်သော ပြင်ပ အရင်းအမြစ်တစ်ခုသို့ စီမံထားသော ချိတ်ဆက်မှုတစ်ခုဖြစ်သည်—ဒေတာရင်းမြစ် (ဥပမာ Azure AI Search), ကိရိယာ endpoint သို့မဟုတ် အခြားဝန်ဆောင်မှုတစ်ခု။ Connections များက agent များ ဘယ်နေရာကနေ ဘယ်လို ဒေတာ ရယူမလဲ ဆိုတာကို စုစည်းပေးသဖြင့် credential များနှင့် endpoint များကို code အတွင်း ပျက်ပြားနေခြင်း မဖြစ်အောင် တစ်နေရာတည်းမှာ အုပ်ချုပ်နိုင်သည်။
+
+ပထမ agents များကို တင်သွင်းရန် အတွက် ဤ extension များ မပါဘဲရပါတယ်—သင်လေ့လာစဉ် `azure.ai.agents` အားသာ အသုံးပြုပါ။ agent များအကြား တူညီသော ကိရိယာကို ထပ်ထပ်အသုံးပြုနေပါက `skills` ကို အသုံးပြုရန် စဉ်းစားပါ၊ agent အနည်းငယ်က တူညီသော ဒေတာရင်းမြစ်ကို မျှဝေနေပါက `connections` ကို အသုံးပြုပါ။
+
+### `azd ai agent init` ဖြင့် Agent ပရောဂျက် စတင်ဖန်တီးခြင်း
+
+`azd ai agent init` command သည် Microsoft Foundry Agent Service နှင့် ပေါင်းစည်းထားသည့် ထုတ်လုပ်ရေးအဆင်သင့် AI agent ပရောဂျက် တစ်ခုကို scaffolding ဖန်တီးပေးသည်။
 
 ```bash
-# agent manifest မှ အခြေခံ၍ အသစ်သော agent ပရောဂျက်ကို စတင်ဖန်တီးပါ
+# အေးဂျင့် မက်နီဖက်မှ အေးဂျင့် ပရောဂျက်အသစ်ကို စတင်ဖန်တီးပါ
 azd ai agent init -m <manifest-path-or-uri>
 
-# တိကျသော Foundry ပရောဂျက်ကို စတင်ပြီး ပစ်မှတ်ထားပါ
+# တိကျသော Foundry ပရောဂျက်ကို စတင်ဖန်တီးပြီး ပစ်မှတ်ထားပါ
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# စိတ်ကြိုက် source ဖိုလ်ဒါဖြင့် စတင်ပါ
+# စိတ်ကြိုက် source ဖိုလ်ဒါကို သတ်မှတ်၍ စတင်ဖန်တီးပါ
 azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
 
-# Container Apps ကို host အဖြစ် ပစ်မှတ်ထားပါ
+# Container Apps ကို ဟိုစ် အဖြစ် ပစ်မှတ်ထားပါ
 azd ai agent init -m agent-manifest.yaml --host containerapp
 ```
 
-**Key flags:**
+**အဓိက flag များ:**
 
-| Flag | Description |
+| Flag | ဖေါ်ပြချက် |
 |------|-------------|
-| `-m, --manifest` | Path or URI to an agent manifest to add to your project |
-| `-p, --project-id` | Existing Microsoft Foundry Project ID for your azd environment |
-| `-s, --src` | Directory to download the agent definition (defaults to `src/<agent-id>`) |
-| `--host` | Override the default host (e.g., `containerapp`) |
-| `-e, --environment` | The azd environment to use |
+| `-m, --manifest` | ပရောဂျက်တွင် ထည့်ရန် agent manifest ၏ လမ်းကြောင်း သို့မဟုတ် URI |
+| `-p, --project-id` | သင့် azd ပတ်ဝန်းကျင်အတွက် Microsoft Foundry ရှိပြီးသား Project ID |
+| `-s, --src` | agent ဖော်ပြချက်ကို ဒေါင်းလုဒ်လုပ်ရန် ဒါရိုက်တာရီ (ပုံမှန်အားဖြင့် `src/<agent-id>`) |
+| `--host` | ပုံမှန် host ကို အစားထိုးရန် (ဥပမာ `containerapp`) |
+| `-e, --environment` | အသုံးပြုမည့် azd ပတ်ဝန်းကျင် |
 
-**Production tip**: `--project-id` ကို အသုံးပြု၍ ရှိပြီးသား Foundry project နဲ့ တိုက်ရိုက် ချိတ်ဆက်ပါ၊ agent code နှင့် cloud resources များကို စတင်ချိန်ကတည်းက ဖက်စပ်ထားနိုင်စေပါသည်။
+**ထုတ်လုပ်ရေး အကြံပေးချက်**: `--project-id` ကိုအသုံးပြု၍ ရှိပြီးသား Foundry project တစ်ခုနှင့် တိုက်ရိုက် ချိတ်ဆက်ပါ၊ သင့် agent ကုဒ်နှင့် ကောင်းကင်အရင်းအမြစ်များကို အစပိုင်းမှတည်းချိတ်ထားပါ။
 
-### Model Context Protocol (MCP) with `azd mcp`
+### Agent လည်ပတ်မှု အသက်တာ စီမံခြင်း
 
-AZD သည် built-in MCP server support (Alpha) ကို ထည့်သွင်းထားပြီး AI agents နှင့် tools များကို standardized protocol ဖြင့် သင့် Azure resources နှင့် အလုပ်လုပ်နိုင်စေသည်။
+`init` အပြင် `azure.ai.agents` extension သည် hosted agent တစ်ရပ်၏ အသက်တာ စပစ္စည်းအတွက် စမ်းသပ်ခြင်း၊ အကဲဖြတ်ခြင်း၊ ညှိနှိုင်းခြင်း နှင့် ပင်ပန်းမီသည့်အချိန်တွင် ပယ်ချခြင်း အပါအဝင် command များ နှင့် ပံ့ပိုးမှု ပေးသည်။
 
 ```bash
-# သင်၏ပရောဂျက်အတွက် MCP ဆာဗာကို စတင်ပါ။
+# တပ်ဆင်ပြီးသား အေဂျင့်ကို ခေါ်ယူပြီး ဆာဗာ၏ တုံ့ပြန်ချိန်ကို ကြည့်ရှုပါ
+# (စုစုပေါင်း နောက်ကျချိန်နှင့် ပထမ ဘိုက်ရသည့် အချိန်)
+azd ai agent invoke
+
+# ပြောင်းလဲမီ လက်ရှိ endpoint သတ်မှတ်ချက်ကို ပြပါ
+azd ai agent endpoint show
+
+# အေဂျင့်အတွက် အကဲဖြတ် ဒေတာစုကို ဖန်တီးပါ
+azd ai agent eval generate --dataset ./eval/dataset.jsonl
+
+# သင်၏ အကဲဖြတ်ဒေတာအပေါ် အခြေခံ၍ အေဂျင့် ညွှန်ကြားချက်များကို အကောင်းဆုံးချိန်ညှိပါ
+# (agent project မှာ optimization_model တစ်ခု လိုအပ်သည်)
+azd ai agent optimize
+
+# ကုဒ်အခြေပြု ဟိုစ့်ထားသော အေဂျင့်၏ တပ်ဆင်ပြီးသား မူရင်းကို ဒေါင်းလုတ်ဆွဲပါ
+# (SHA-256 အတည်ပြုမှုနှင့်)
+azd ai agent code download
+
+# ဟိုစ့်ထားသော အေဂျင့်နှင့် ၎င်း၏ ဗားရှင်းများအားလုံးကို ဖျက်ပါ
+# (--force သည် လက်ရှိ ဖွင့်ထားသော session များကို ပိတ်ပစ်သည်)
+azd ai agent delete --force
+```
+
+**အသက်တာလမ်းကြောင်း အကျဉ်းချုပ်:**
+
+| အဆင့် | Command | ထုတ်လုပ်ရေး အသုံးအရှိဆုံး |
+|-------|---------|----------------|
+| စမ်းသပ် | `azd ai agent invoke` | ထုတ်ဝေမှုမပြုမီ တုံ့ပြန်ချက်များကို စစ်ဆေး၍ latency ကို တိုင်းတာပါ |
+| စစ်ဆေး | `azd ai agent endpoint show` | endpoint auth/config ကို ပြန်ကြည့်ပါ; ချိုးကွဲမှုများကို အစောပိုင်း တွေ့ရှိနိုင်စေပါ |
+| တိုင်းတာ | `azd ai agent eval generate` | အမှန်တကယ် trace များမှ ပြန်လည်အသုံးချနိုင်သော အကဲဖြတ် စာရင်း တည်ဆောက်ပါ |
+| တိုးတက် | `azd ai agent optimize` | တိုင်းတာထားသော အရည်အသွေးအပေါ် instruction များကို ညှိနှိုင်းပါ |
+| ပြန်လည်ရယူ | `azd ai agent code download` | အတိအကျ deployment ထဲမှ source ကို audit/rollback အတွက် ရယူပါ |
+| ဖျက်သိမ်း | `azd ai agent delete --force` | agent နှင့် ၎င်း၏ ဗားရှင်းများကို သန့်ရှင်းစွာ ဖျက်ပေးပါ |
+
+> ဤသည်တို့သည် preview commands ဖြစ်ပြီး extension ဗားရှင်းများ အလိုက် ပြောင်းလဲနိုင်သည်။ သင့်ထည့်ထားသော ဗားရှင်းအတွက် ရရှိနိုင်သော subcommands များကို ကြည့်ရန် `azd ai agent --help` ကို လည်ပတ်ပါ။
+
+### Model Context Protocol (MCP) နှင့် `azd mcp`
+AZD includes built-in MCP server support (Alpha), enabling AI agents and tools to interact with your Azure resources through a standardized protocol:
+
+```bash
+# သင့်ပရိုဂျက်အတွက် MCP ဆာဗာကို စတင်ပါ
 azd mcp start
 
-# ကိရိယာများ ဆောင်ရွက်ခြင်းဆိုင်ရာ Copilot သဘောတူခွင့်စည်းမျဉ်းများကို လက်ရှိအတိုင်း ပြန်လည်သုံးသပ်ပါ။
+# ကိရိယာများကို ဖော်ဆောင်ရန် Copilot သဘောတူမှုဆိုင်ရာ လက်ရှိ စည်းမျဉ်းများကို ပြန်လည်သုံးသပ်ပါ
 azd copilot consent list
 ```
 
-MCP server က သင့် azd project context—environments, services, နှင့် Azure resources—ကို AI-powered development tools များဆီ ပေးပို့စေသည်။ ဒီလိုလုပ်ခြင်းက အောက်ပါ အရာ들을 လုပ်နိုင်စေသည်။
+The MCP server exposes your azd project context—environments, services, and Azure resources—to AI-powered development tools. This enables:
 
-- **AI-assisted deployment**: coding agents တွေကို project state ကို query လုပ်ကာ deployments များ trigger လုပ်ခွင့်ပြုပါ
-- **Resource discovery**: AI tools များက သင့် project မှ အသုံးပြုနေတဲ့ Azure resources များကို ရှာဖွေပေးနိုင်သည်
-- **Environment management**: Agents များက dev/staging/production environments တွေကို ပြောင်းလဲနိုင်စေသည်
+- **AI-assisted deployment**: ကုဒ်ရေးတဲ့ agent တွေကို သင်၏ project အခြေအနေကို မေးမြန်းခိုင်းပြီး deployment များကို စတင်ခိုင်းနိုင်စေခြင်း
+- **Resource discovery**: AI tools များသည် သင်၏ project သုံးနေသော Azure resource များကို တွေ့ရှိနိုင်စေခြင်း
+- **Environment management**: agent များက dev/staging/production environment များကို ပြောင်းရွှေ့နိုင်စေခြင်း
 
 ### Infrastructure Generation with `azd infra generate`
 
-production AI workloads များအတွက် automatic provisioning မှ မူမရွေး Infrastructure as Code ကို generate ပြီး customize လုပ်နိုင်သည်။
+For production AI workloads, you can generate and customize Infrastructure as Code rather than relying on automatic provisioning:
 
 ```bash
-# သင့်ပရောဂျက် သတ်မှတ်ချက်မှ Bicep/Terraform ဖိုင်များ ဖန်တီးပါ
+# သင့်ပရောဂျက် သတ်မှတ်ချက်မှ Bicep/Terraform ဖိုင်များကို ဖန်တီးပါ
 azd infra generate
 ```
 
-ဤသည်က IaC ကို disk ပေါ်သို့ ရေးပြီး သင့်အား:
-- deployment မပြုမီ infrastructure ကို ပြန်လည်သုံးသပ်နှင့် audit ပြုလုပ်နိုင်ရန်
-- custom security policies (network rules, private endpoints) ထည့်နိုင်ရန်
-- ရှိပြီးသား IaC review လုပ်ငန်းစဉ်များနှင့် ပေါင်းစည်းနိုင်ရန်
-- application code ကွဲပြားပြီး infrastructure changes များကို version control ထိန်းသိမ်းနိုင်ရန် အခွင့်အလမ်း ပေးသည်
+This writes IaC to disk so you can:
+- Review and audit infrastructure before deploying
+- Add custom security policies (network rules, private endpoints)
+- Integrate with existing IaC review processes
+- Version control infrastructure changes separately from application code
 
 ### Production Lifecycle Hooks
 
-AZD hooks များက deployment lifecycle တစ်ခုချင်းစီမှာ custom logic ထည့်သွင်းခွင့်ပေးသည်—production AI workflows အတွက် အလွန်အရေးကြီးပါ။
+AZD hooks let you inject custom logic at every stage of the deployment lifecycle—critical for production AI workflows:
 
 ```yaml
 # azure.yaml - Production hooks example
@@ -1077,67 +1131,209 @@ services:
 ```
 
 ```bash
-# ဖွံ့ဖြိုးရေးအချိန်တွင် သတ်မှတ်ထားသော hook တစ်ခုကို လက်ဖြင့် လည်ပတ်ပါ
+# ဖွံ့ဖြိုးရေးအချိန်တွင် သတ်မှတ်ထားသော hook တစ်ခုကို လက်ဖြင့် လည်ပတ်ပါ။
 azd hooks run predeploy
 ```
 
 **Recommended production hooks for AI workloads:**
 
-| Hook | Use Case |
+| Hook | အသုံးပြုမှု |
 |------|----------|
-| `preprovision` | Validate subscription quotas for AI model capacity |
-| `postprovision` | Configure private endpoints, deploy model weights |
-| `predeploy` | Run AI safety tests, validate prompt templates |
-| `postdeploy` | Smoke test agent responses, verify model connectivity |
+| `preprovision` | AI မော်ဒယ်စွမ်းရည်အတွက် subscription quota များကို စစ်ဆေးသတ်မှတ်ခြင်း |
+| `postprovision` | private endpoint များကို ဖွဲ့စည်းခြင်း၊ မော်ဒယ် weight များကို တင်သွင်းခြင်း |
+| `predeploy` | AI safety စမ်းသပ်မှုများကို ဆောင်ရွက်ခြင်း၊ prompt template များကို သက်မှတ်ခြင်း |
+| `postdeploy` | agent တုံ့ပြန်ချက်များကို smoke test လုပ်ခြင်း၊ မော်ဒယ် ချိတ်ဆက်မှုကို အတည်ပြုခြင်း |
 
 ### CI/CD Pipeline Configuration
 
-`azd pipeline config` ကို အသုံးပြု၍ သင့် project ကို GitHub Actions သို့မဟုတ် Azure Pipelines နဲ့ secure Azure authentication ဖြင့် ချိတ်ဆက်ပါ။
+Use `azd pipeline config` to connect your project to GitHub Actions or Azure Pipelines with secure Azure authentication:
 
 ```bash
-# CI/CD pipeline ကို အပြန်အလှန်ဖြင့် ပြင်ဆင်ပါ
+# CI/CD ပိုင်းလိုင်းကို အပြန်အလှန် မေးမြန်း၍ ဖွဲ့စည်းပါ
 azd pipeline config
 
-# တိကျသည့် ပံ့ပိုးသူဖြင့် ပြင်ဆင်ပါ
+# သတ်မှတ်ထားသည့် ပံ့ပိုးသူနှင့် ဖွဲ့စည်းပါ
 azd pipeline config --provider github
 ```
 
-ဒီ command က:
-- least-privilege access ကို ရရှိတဲ့ service principal တစ်ခု ဖန်တီးပေးသည်
-- federated credentials (stored secrets မရှိသည့်) ကို configure လုပ်သည်
-- pipeline definition file ကို ဖန်တီး သို့မဟုတ် update လုပ်ပေးသည်
-- CI/CD system ထဲမှာ လိုအပ်သော environment variables များ ဆက်သွယ်သတ်မှတ်ပေးသည်
+This command:
+- Creates a service principal with least-privilege access
+- Configures federated credentials (no stored secrets)
+- Generates or updates your pipeline definition file
+- Sets required environment variables in your CI/CD system
+
+#### Step-by-step: your first GitHub Actions pipeline
+
+Here's the full walkthrough from a working azd project to automated deployments on every push.
+
+**1. Make sure your project is on GitHub**
+
+```bash
+git init
+git add .
+git commit -m "Initial azd project"
+gh repo create my-ai-app --private --source=. --push
+```
+
+**2. Run pipeline config**
+
+```bash
+azd pipeline config --provider github
+```
+
+azd will, interactively:
+- Ask which Azure subscription and environment to target
+- Create an Entra **app registration + service principal** for the pipeline
+- Set up **federated credentials (OIDC)**—so GitHub authenticates to Azure with short-lived tokens and **no secrets are stored**
+- Push the required **variables** to your GitHub repo (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `AZURE_ENV_NAME`, `AZURE_LOCATION`)
+
+**3. Understand the generated workflow**
+
+azd adds `.github/workflows/azure-dev.yml`. The key parts look like this:
+
+```yaml
+# .github/workflows/azure-dev.yml
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:        # lets you run it manually too
+
+permissions:
+  id-token: write           # required for OIDC federated login
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
+      AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install azd
+        uses: Azure/setup-azd@v2
+      - name: Log in with OIDC
+        run: azd auth login --client-id "$AZURE_CLIENT_ID" --federated-credential-provider "github" --tenant-id "$AZURE_TENANT_ID"
+      - name: Provision infrastructure
+        run: azd provision --no-prompt
+      - name: Deploy application
+        run: azd deploy --no-prompt
+```
+
+**4. Verify it works**
+
+```bash
+# လုပ်ငန်းစဉ်ကို လှုံ့ဆော်ရန် ပြောင်းလဲမှုတစ်ခုကို တင်ပို့ပါ
+git commit -am "Trigger pipeline" --allow-empty
+git push
+```
+
+Open the **Actions** tab in your GitHub repo and watch the workflow run `azd provision` and `azd deploy` automatically.
+
+> **Why federated credentials matter:** older pipelines stored a client secret in GitHub. OIDC federated credentials remove that secret entirely—GitHub requests a short-lived token at runtime, which is both more secure and nothing to rotate or leak. This is the default `azd pipeline config` sets up.
+
+> **Secrets vs. variables:** non-sensitive identifiers (`AZURE_CLIENT_ID`, etc.) go in repo **variables**. If your app genuinely needs a secret at build time, add it as a GitHub **secret** and reference it with `${{ secrets.NAME }}`—but prefer Key Vault + managed identity at runtime (see [အပိုင်း 3](../chapter-03-configuration/authsecurity.md)).
 
 **Production workflow with pipeline config:**
 
 ```bash
-# 1. ထုတ်လုပ်ရေး ပတ်ဝန်းကျင်ကို စီစဉ်ပါ
+# ၁။ ထုတ်လုပ်ရေးပတ်ဝန်းကျင်ကို ပြင်ဆင်ပါ
 azd env new production
 azd env set AZURE_OPENAI_CAPACITY 100
 
-# 2. pipeline ကို ပြင်ဆင်ပါ
+# ၂။ pipeline ကို ပြင်ဆင်ပါ
 azd pipeline config --provider github
 
-# 3. Pipeline သည် main သို့ push တစ်ခုတိုင်းတွင် azd deploy ကို အလိုအလျော့ လုပ်ဆောင်သည်
+# ၃။ main သို့ ကုဒ် push တစ်ကြိမ်ချင်းစီတိုင်း pipeline သည် azd deploy ကို အလိုအလျောက် ဆောင်ရွက်သည်
 ```
+
+#### Step-by-step: Azure DevOps Pipelines
+
+Prefer Azure DevOps over GitHub Actions? azd supports it natively with the `azdo` provider. The flow is nearly identical—azd generates the pipeline file, creates a service connection, and wires up authentication.
+
+**1. Make sure you have an Azure DevOps project**
+
+You need an organization and a project at `https://dev.azure.com/<your-org>`. Generate a Personal Access Token (PAT) with **Build (Read & execute)**, **Code (Read & write)**, and **Service Connections (Read, query & manage)** scopes—azd will prompt you for it.
+
+**2. Configure the pipeline**
+
+```bash
+azd pipeline config --provider azdo
+```
+
+azd will:
+- Ask for your Azure DevOps organization and project
+- Create (or reuse) a **service connection** to Azure using a service principal
+- Configure **workload identity federation (OIDC)** so no client secret is stored
+- Commit an `azure-dev.yml` pipeline definition to your repo
+
+**3. Review the generated `azure-dev.yml`**
+
+azd writes a pipeline that provisions and deploys on every push to `main`:
+
+```yaml
+# azure-dev.yml
+trigger:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: setup-azd@1
+    displayName: Install azd
+
+  - script: azd provision --no-prompt
+    displayName: Provision Infrastructure
+    env:
+      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
+      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
+      AZURE_LOCATION: $(AZURE_LOCATION)
+
+  - script: azd deploy --no-prompt
+    displayName: Deploy Application
+    env:
+      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
+      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
+      AZURE_LOCATION: $(AZURE_LOCATION)
+```
+
+**4. Where the variables come from**
+
+azd stores the environment values (`AZURE_ENV_NAME`, `AZURE_LOCATION`, `AZURE_SUBSCRIPTION_ID`) as a **variable group** in Azure DevOps so the pipeline can read them. You can view and edit them under **Pipelines → Library**.
+
+> **Same OIDC benefit as GitHub:** the `azdo` provider also configures workload identity federation by default, so there's no client secret stored in the service connection—Azure DevOps exchanges a short-lived token at runtime. Pass `--auth-type client-credentials` only if your organization can't use OIDC yet.
+
+**5. Run it**
+
+```bash
+git commit -am "Add Azure DevOps pipeline" --allow-empty
+git push
+```
+
+Open **Pipelines** in Azure DevOps to watch `azd provision` and `azd deploy` run.
 
 ### Adding Components with `azd add`
 
-အလိုရှိသလို Azure services များကို ရှိပြီးသား project ထဲသို့ အဆင့်ဆင့် ထည့်သွင်းနိုင်သည်။
+Incrementally add Azure services to an existing project:
 
 ```bash
-# အသစ်သော ဝန်ဆောင်မှု အစိတ်အပိုင်းကို အပြန်အလှန်ဖြင့် ထည့်ပါ
+# အပြန်အလှန်နည်းဖြင့် ဝန်ဆောင်မှု အစိတ်အပိုင်း အသစ်ကို ထည့်ပါ
 azd add
 ```
 
-ဒီနည်းလမ်းက production AI applications များကို တိုးချဲ့ရာတွင် အလွန်သင့်တော်သည်—ဥပမာ vector search service, အချက်ပြ agent endpoint အသစ်, သို့မဟုတ် monitoring component တစ်ခုကို ရှိပြီးသား deployment ထဲ သို့ ထည့်သွင်းခြင်း။
+This is particularly useful for expanding production AI applications—for example, adding a vector search service, a new agent endpoint, or a monitoring component to an existing deployment.
 
 ## Additional Resources
-- **Azure Well-Architected Framework**: [AI အလုပ်ပမာဏဆိုင်ရာ လမ်းညွှန်ချက်များ](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Microsoft Foundry Documentation**: [တရားဝင် စာရွက်များ](https://learn.microsoft.com/azure/ai-studio/)
+
+- **Azure Well-Architected Framework**: [AI workload guidance](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Microsoft Foundry Documentation**: [Official docs](https://learn.microsoft.com/azure/ai-studio/)
 - **Community Templates**: [Azure Samples](https://github.com/Azure-Samples)
-- **Discord Community**: [#Azure ချန်နယ်](https://discord.gg/microsoft-azure)
-- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - Azure AI, Foundry, deployment, cost optimization, နှင့် diagnostics အတွက် ဖွင့်လှစ်ထားသော agent skills 37 ခုရှိသည်။ သင်၏ အယ်ဒီတာတွင် တင်သွင်းပါ:
+- **Discord Community**: [#Azure channel](https://discord.gg/microsoft-azure)
+- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - Azure AI, Foundry, deployment, cost optimization, နှင့် diagnostics အတွက် 37 ခုသော ဖွင့်လှစ် agent skill များ။ သင်၏ editor တွင် တပ်ဆင်ပါ:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
@@ -1146,16 +1342,16 @@ azd add
 
 **Chapter Navigation:**
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: အခန်း ၈ - ထုတ်လုပ်မှုနှင့် စီးပွားရေး ပုံစံများ
-- **⬅️ Previous Chapter**: [အခန်း ၇: ပြဿနာဖြေရှင်းခြင်း](../chapter-07-troubleshooting/debugging.md)
+- **📖 Current Chapter**: Chapter 8 - Production & Enterprise Patterns
+- **⬅️ Previous Chapter**: [အပိုင်း 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
 - **⬅️ Also Related**: [AI Workshop Lab](ai-workshop-lab.md)
 - **� Course Complete**: [AZD For Beginners](../../README.md)
 
-**မှတ်ထားရန်**: ထုတ်လုပ်မှုဆိုင်ရာ AI အလုပ်ပမာဏများအတွက် သေချာစွာ စီမံကိန်းချခြင်း၊ စောင့်ကြည့်ခြင်းနှင့် ဆက်တိုက်တိုးတက်ကောင်းမွန်အောင် ပြုစုခြင်းများ လိုအပ်ပါသည်။ ဤနမူနာပုံစံများဖြင့် စတင်ကာ သင်၏ သီးသန့်လိုအပ်ချက်များအရ ချိန်ညှိလိုက်ပါ။
+**Remember**: Production AI workloads require careful planning, monitoring, and continuous optimization. Start with these patterns and adapt them to your specific requirements.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးပမ်းထားသော်လည်း အလိုအလျောက် ဘာသာပြန်ခြင်းများတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ပါရှိနိုင်ကြောင်း သတိပေးပါသည်။ မူလစာတမ်းကို မူရင်းဘာသာဖြင့် အာဏာပိုင် အရင်းအမြစ်အဖြစ် ယူဆသင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် ပရော်ဖက်ရှင်နယ် လူသား ဘာသာပြန်ချက်ကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုမှုကြောင့် ဖြစ်ပေါ်လာနိုင်သည့် နားမလည်မှုများ သို့မဟုတ် မှားသိမှတ်ခြင်းများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+**ပြောကြားချက်**
+ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးပမ်းနေသော်လည်း၊ စက်ကိရိယာဘာသာပြန်ခြင်းများတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ပါဝင်နိုင်ကြောင်း သတိပြုပါရန် လိုအပ်ပါသည်။ မူလစာတမ်းကို မူရင်းဘာသာဖြင့်သာ ယုံကြည်စိတ်ချရသော အချက်အလက်အဖြစ် သတ်မှတ်သင့်သည်။ အရေးကြီးသည့် သတင်းအချက်အလက်များအတွက် ပရော်ဖက်ရှင်နယ် လူသားဘာသာပြန်သူဝန်ဆောင်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော နားလည်မှုကွာခြားမှုများ သို့မဟုတ် မမှန်ကန်သော အသုံးပြုမှုများအတွက် ကျွန်ုပ်တို့ တာဝန်မခံပါ။
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

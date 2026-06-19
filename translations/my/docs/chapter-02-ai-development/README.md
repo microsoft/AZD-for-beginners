@@ -1,83 +1,82 @@
-# အခန်း 2: AI-ပထမ ဦးစားပေး ဖွံ့ဖြိုးရေး
+# အခန်း ၂: AI-First ဖွံ့ဖြိုးရေး
 
-**📚 သင်တန်း**: [AZD For Beginners](../../README.md) | **⏱️ ကြာမြင့်ချိန်**: 1-2 နာရီ | **⭐ ရှုပ်ထွေးမှု**: အလယ်အလတ်
+**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 1-2 hours | **⭐ Complexity**: အလယ်အလတ်
 
 ---
 
 ## အကျဉ်းချုပ်
 
-ဤအခန်းသည် Azure Developer CLI နှင့် Microsoft Foundry ဝန်ဆောင်မှုများကို အသုံးပြု၍ AI အင်အားပြင်းသော အက်ပလီကေးရှင်းများကို တပ်ဆင်နည်းများအပေါ် ဦးတည်ထားသည်။ ရိုးရှင်းသော AI စကားပြော အက်ပလီကေးရှင်းများမှ tools များပါရှိသည့် တရားရှင်း အေးဂျင့်များထိ ပါဝင်သည်။
+ဤအခန်းသည် Azure Developer CLI နှင့် Microsoft Foundry ဝန်ဆောင်မှုများကို အသုံးပြု၍ AI အင်အားပြင်းသော အပလီကေးရှင်းများကို တပ်ဆင်ခြင်းအပေါ် ဦးတည်ထားသည်။ ရိုးရှင်းသော AI စကားပြောအက်ပ်များမှ ကိရိယာများပါရှိသည့် ဉာဏ်ရည်ရှိ အေးဂျင့်များထိ အရာအားလုံးကို ဖော်ပြထားသည်။
 
-> **အတည်ပြု မှတ်ချက် (2026-03-25):** ဤအခန်းရှိ command အလုပ်စဉ်နှင့် extension လမ်းညွှန်ချက်များကို `azd` `1.23.12` နှင့် လက်ရှိ preview AI agent extension release `azure.ai.agents` `0.1.18-preview` တို့နှင့် နှိုင်းယှဉ်စစ်ဆေးခဲ့ပါသည်။ သင်၏ AZD build သည် အဟောင်းဖြစ်ပါက အရင်ဆုံး update လုပ်ပြီးနောက် လေ့ကျင့်ခန်းများကို ဆက်လက်ဆောင်ရွက်ပါ။
+> **စစ်ဆေးမှတ်ချက် (2026-06-15):** ဤအခန်းတွင်ပါတဲ့ command စီးကြောင်းနှင့် extension လမ်းညွှန်ချက်များကို `azd` `1.25.6` နှင့် လက်ရှိ preview AI agent extension release `azure.ai.agents` `0.1.40-preview` တို့နှင့် နှိုင်းယှဉ်၍ စစ်ဆေးထားပါသည်။ သင့်တွင် အဟောင်း AZD build ရှိပါက အရင်ဆုံး update ပြုလုပ်ပြီးနောက် လေ့ကျင့်ခန်းများကို ဆက်လုပ်ဆောင်ပါ။
 
 ## သင်ယူရမည့် ရည်မှန်းချက်များ
 
-By completing this chapter, you will:
-- တီထွင်ပြီးသား AZD နမူနာများကို အသုံးပြု၍ AI အက်ပလီကေးရှင်းများကို တပ်ဆင်နိုင်ရန်
-- AZD နှင့် Microsoft Foundry ပေါင်းစည်းမှုကို နားလည်ရန်
-- ကိရိယာများဖြင့် AI agent များကို အပြောင်းအလဲ ပြု၍ ဖွဲ့စည်းရန်
-- RAG (Retrieval-Augmented Generation) အက်ပလီကေးရှင်းများကို တပ်ဆင်ရန်
+- Pre-built AZD templates များကို အသုံးပြု၍ AI အပလီကေးရှင်းများကို တပ်ဆင်ပါ။
+- AZD နှင့် Microsoft Foundry ပေါင်းစည်းမှုကို နားလည်ပါ။
+- ကိရိယာများဖြင့် AI agents များကို ဖော်ဆောင်၊ တပ်ဆင်နှင့် စိတ်ကြိုက်ပြုပြင်နိုင်ရန် စီစဉ်ပါ။
+- RAG (Retrieval-Augmented Generation) အပလီကေးရှင်းများကို တပ်ဆင်ပါ။
 
 ---
 
 ## 📚 သင်ခန်းစာများ
 
-| # | Lesson | Description | Time |
+| # | သင်ခန်းစာ | ဖော်ပြချက် | အချိန် |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | AZD ကို Foundry ဝန်ဆောင်မှုများနှင့် ချိတ်ဆက်ပါ | 30 မိနစ် |
-| 2 | [AI Agents Guide](agents.md) | ကိရိယာများပါသော အနူးအမြှုပ် agent များကို တပ်ဆင်ပါ | 45 မိနစ် |
-| 3 | [AI Model Deployment](ai-model-deployment.md) | AI မော်ဒယ်များကို တပ်ဆင်ပြီး ဖွဲ့စည်းပါ | 30 မိနစ် |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | လက်တွေ့ လေ့ကျင့်ခန်း: သင့် AI ဖြေရှင်းချက်ကို AZD အဆင်သင့် ပြုလုပ်ပါ | 60 မိနစ် |
+| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | AZD ကို Foundry ဝန်ဆောင်မှုများနှင့် ချိတ်ဆက်ပါ | 30 min |
+| 2 | [AI Agents Guide](agents.md) | ကိရိယာများဖြင့် ဉာဏ်ရည်မြင့် agent များ တပ်ဆင်ပါ | 45 min |
+| 3 | [AI Model Deployment](ai-model-deployment.md) | AI မော်ဒယ်များကို တပ်ဆင်ပြီး ဆက်တင်ပြုလုပ်ပါ | 30 min |
+| 4 | [AI Workshop Lab](ai-workshop-lab.md) | လက်တွေ့အလုပ်: သင့် AI ဖြေရှင်းချက်ကို AZD အတွက် ပြင်ဆင်ပါ | 60 min |
 
 ---
 
-## 🚀 အမြန် စတင်ခြင်း
+## 🚀 လျင်မြန်စတင်ခြင်း
 
 ```bash
-# ရွေးချယ်မှု ၁: RAG စကားပြော အက်ပ်
+# ရွေးချယ်စရာ ၁: RAG စကားပြော အက်ပလီကေးရှင်း
 azd init --template azure-search-openai-demo
 azd up
 
-# ရွေးချယ်မှု ၂: AI ကိုယ်စားလှယ်များ
+# ရွေးချယ်စရာ ၂: AI ကိုယ်စားလှယ်များ
 azd init --template get-started-with-ai-agents
 azd up
 
-# ရွေးချယ်မှု ၃: အမြန် စကားပြော အက်ပ်
+# ရွေးချယ်စရာ ၃: အမြန် စကားပြော အက်ပ်
 azd init --template openai-chat-app-quickstart
 azd up
 ```
 
 ---
 
-## 🤖 ဖော်ပြထားသော AI Templates
+## 🤖 ထင်ရှားသော AI နမူနာများ
 
-| Template | Description | Services |
+| နမူနာ | ဖော်ပြချက် | ဝန်ဆောင်မှုများ |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ရင်းမြစ်ကို ဖော်ပြသည့် citation များပါသော RAG စကားဝိုင်း | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ကိရိယာများကို အသုံးပြုသည့် AI agent | AI Agent Service |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | အခြေခံ AI စကားဝိုင်း | OpenAI + Container Apps |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ကိုးကားချက်များပါသည့် RAG စကားဝိုင်း | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ကိရိယာများပါရှိသော AI agent | AI Agent Service |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | အခြေခံ AI စကားပြော | OpenAI + Container Apps |
 
 ---
 
-## 💰 ကုန်ကျစရိတ် သတိပေးချက်
+## 💰 ကုန်ကျစရိတ် သတိပြုချက်
 
-| Environment | Estimated Monthly Cost |
+| ပတ်ဝန်းကျင် | ခန့်မှန်း လစဉ်ကုန်ကျစရိတ် |
 |-------------|----------------------|
-| Development | $80-150 |
-| Staging | $150-300 |
-| Production | $300-3,500+ |
+| ဖွံ့ဖြိုးရေး | $80-150 |
+| စမ်းသပ်ပတ်ဝန်းကျင် | $150-300 |
+| ထုတ်လုပ်မှု | $300-3,500+ |
 
-**အကြံပြုချက်:** စမ်းသပ်ပြီးပါက ကုန်ကျစရိတ်များ ရှောင်ရန် `azd down` ကို လုပ်ဆောင်ပါ။
+**အကြံပြုချက်:** စမ်းသပ်ပြီးပါက ကျသင့်ငွေများကို ရှောင်ရှားရန် `azd down` ကို လုပ်ဆောင်ပါ။
 
 ---
 
-## 🔗 သွားရာလမ်းကြောင်း
+## 🔗 လမ်းညွှန်
 
-| Direction | Chapter |
+| သွားရာလမ်း | အခန်း |
 |-----------|---------|
-| **ယခင်** | [Chapter 1: Foundation](../chapter-01-foundation/README.md) |
-| **နောက်တစ်ခု** | [Chapter 3: Configuration](../chapter-03-configuration/README.md) |
-| **ကျော်၍ သို့သွားရန်** | [Chapter 8: Production Patterns](../chapter-08-production/README.md) |
+| **Previous** | [အခန်း ၁: အခြေခံ](../chapter-01-foundation/README.md) |
+| **Next** | [အခန်း ၃: ဖွဲ့စည်းတပ်ဆင်ခြင်း](../chapter-03-configuration/README.md) |
+| **Skip to** | [အခန်း ၈: ထုတ်လုပ်မှု ပုံစံများ](../chapter-08-production/README.md) |
 
 ---
 
@@ -90,6 +89,6 @@ azd up
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-ဒီစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးပမ်းလျက်ရှိသော်လည်း အလိုအလျောက် ဘာသာပြန်ချက်များတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါရှိနိုင်ကြောင်း သတိပြုပါ။ မူလဘာသာဖြင့် ရေးသားထားသော မူရင်းစာတမ်းကို ယုံကြည်ရသော အရင်းအမြစ်အဖြစ် ယူဆရမည်။ အရေးကြီးသော အချက်အလက်များအတွက် ပရော်ဖက်ရှင်နယ် လူ့ဘာသာပြန်ကို အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုခြင်းကြောင့် ဖြစ်ပေါ်တတ်သည့် နားမလည်မှုများ သို့မဟုတ် မှားယွင်းဖော်ပြချက်များအတွက် ကျွန်ုပ်တို့ တာဝန်မယူပါ။
+**ပြောကြားချက်**
+ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးပမ်းနေသော်လည်း၊ စက်ကိရိယာဘာသာပြန်ခြင်းများတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ပါဝင်နိုင်ကြောင်း သတိပြုပါရန် လိုအပ်ပါသည်။ မူလစာတမ်းကို မူရင်းဘာသာဖြင့်သာ ယုံကြည်စိတ်ချရသော အချက်အလက်အဖြစ် သတ်မှတ်သင့်သည်။ အရေးကြီးသည့် သတင်းအချက်အလက်များအတွက် ပရော်ဖက်ရှင်နယ် လူသားဘာသာပြန်သူဝန်ဆောင်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော နားလည်မှုကွာခြားမှုများ သို့မဟုတ် မမှန်ကန်သော အသုံးပြုမှုများအတွက် ကျွန်ုပ်တို့ တာဝန်မခံပါ။
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

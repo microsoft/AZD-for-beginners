@@ -1,24 +1,24 @@
-# Diegiame Microsoft SQL duomenų bazę ir žiniatinklio programą su AZD
+# Diegiant Microsoft SQL duomenų bazę ir Web App su AZD
 
-⏱️ **Numatomas laikas**: 20–30 minučių | 💰 **Numatoma kaina**: ~$15-25/mėn. | ⭐ **Sudėtingumas**: Vidutinis
+⏱️ **Apskaičiuotas laikas**: 20-30 minučių | 💰 **Apskaičiuotos išlaidos**: ~$15-25/month | ⭐ **Sudėtingumas**: Vidutinio sudėtingumo
 
-Šis **pilnas, veikiantis pavyzdys** parodo, kaip naudoti [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) diegiant Python Flask žiniatinklio programą su Microsoft SQL duomenų baze į Azure. Visi kodai įtraukti ir išbandyti — jokių išorinių priklausomybių nereikia.
+Šis **pilnas, veikiantis pavyzdys** demonstruoja, kaip naudoti [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) norint iškelti Python Flask žiniatinklio programą su Microsoft SQL duomenų baze į Azure. Visi kodai įtraukti ir išbandyti — nereikia jokių išorinių priklausomybių.
 
-## Ko išmoksite
+## Ką sužinosite
 
 Baigę šį pavyzdį jūs:
-- Įdiegsite daugiapakopę programą (žiniatinklio programa + duomenų bazė) naudodami infrastruktūrą kaip kodą
-- Suversite saugius duomenų bazės ryšius be slaptažodžių kietojo kodo
+- Išdėstysite daugiasluoksnę programą (web app + duomenų bazė) naudodami infrastruktūrą kaip kodą
+- Konfigūruosite saugius duomenų bazės ryšius be slaptažodžių įkapsuliavimo į kodą
 - Stebėsite programos būklę su Application Insights
-- Efektyviai valdysite Azure išteklius su AZD CLI
-- Vadovausitės Azure geriausia praktika saugumo, kaštų optimizavimo ir stebėsenos srityse
+- Efektyviai valdysite Azure išteklius naudodami AZD CLI
+- Laikysitės Azure geriausių praktikų saugumo, išlaidų optimizavimo ir stebėsenos srityse
 
 ## Scenarijaus apžvalga
-- **Žiniatinklio programa**: Python Flask REST API su duomenų bazės ryšiu
-- **Duomenų bazė**: Azure SQL Database su pavyzdiniais duomenimis
-- **Infrastruktūra**: Paruošta naudojant Bicep (modulinės, pakartotinai naudojamos šablonai)
-- **Diegimas**: Pilnai automatizuotas su `azd` komandomis
-- **Stebėsena**: Application Insights žurnalams ir telemetrijai
+- **Web App**: Python Flask REST API su duomenų bazės prisijungimu
+- **Database**: Azure SQL Database su pavyzdiniais duomenimis
+- **Infrastructure**: Paruošta naudojant Bicep (moduliniai, pakartotinai naudojami šablonai)
+- **Deployment**: Visiškai automatizuota naudojant `azd` komandas
+- **Monitoring**: Application Insights žurnalams ir telemetriniams duomenims
 
 ## Reikalavimai
 
@@ -29,65 +29,66 @@ Prieš pradėdami, įsitikinkite, kad turite įdiegtus šiuos įrankius:
 1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (versija 2.50.0 arba naujesnė)
    ```sh
    az --version
-   # Tikėtina išvestis: azure-cli 2.50.0 arba naujesnė
+   # Tikėtinas rezultatas: azure-cli 2.50.0 arba naujesnė
    ```
 
 2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (versija 1.0.0 arba naujesnė)
    ```sh
    azd version
-   # Tikėtina išvestis: azd versija 1.0.0 arba naujesnė
+   # Tikėtinas išvestis: azd versija 1.0.0 arba naujesnė
    ```
 
 3. **[Python 3.8+](https://www.python.org/downloads/)** (lokaliam vystymui)
    ```sh
    python --version
-   # Tikėtina išvestis: Python 3.8 arba naujesnė
+   # Tikėtinas rezultatas: Python 3.8 arba naujesnė
    ```
 
-4. **[Docker](https://www.docker.com/get-started)** (pasirinktinai, lokaliam konteineriniam vystymui)
+4. **[Docker](https://www.docker.com/get-started)** (neprivaloma, vietiniam konteinerizuotam vystymui)
    ```sh
    docker --version
-   # Tikėtinas rezultatas: Docker versija 20.10 arba naujesnė
+   # Tikėtinas išvestis: Docker versija 20.10 arba naujesnė
    ```
 
 ### Azure reikalavimai
 
-- Aktyvi **Azure prenumerata** ([sukurkite nemokamą paskyrą](https://azure.microsoft.com/free/))
-- Teisės kurti išteklius jūsų prenumeratoje
+- Aktyvi **Azure prenumerata** ([sukurti nemokamą paskyrą](https://azure.microsoft.com/free/))
+- Leidimai kurti išteklius jūsų prenumeratoje
 - **Owner** arba **Contributor** rolė prenumeratoje arba išteklių grupėje
 
-### Žinių reikalavimai
+### Reikalingos žinios
 
 Tai yra **vidutinio lygio** pavyzdys. Turėtumėte būti susipažinę su:
 - Pagrindinėmis komandų eilutės operacijomis
-- Pagrindinėmis debesijos sąvokomis (ištekliai, išteklių grupės)
+- Pagrindinėmis debesų koncepcijomis (ištekliai, išteklių grupės)
 - Pagrindiniu supratimu apie žiniatinklio programas ir duomenų bazes
 
-**Naujas AZD?** Pradėkite nuo [Pradžios vadovas](../../docs/chapter-01-foundation/azd-basics.md).
+**Naujokas AZD?** Pirmiausia pradėkite su [Getting Started guide](../../docs/chapter-01-foundation/azd-basics.md).
 
 ## Architektūra
 
-Šis pavyzdys diegia dviejų sluoksnių architektūrą su žiniatinklio programa ir SQL duomenų baze:
+Šis pavyzdys išdėsto dviejų sluoksnių architektūrą su žiniatinklio programa ir SQL duomenų baze:
 
 ```mermaid
 graph TD
     Browser[Vartotojo naršyklė] <--> WebApp[Azure žiniatinklio programa<br/>Flask API<br/>/health<br/>/products]
-    WebApp -- Saugus ryšys<br/>Šifruotas --> SQL[Azure SQL duomenų bazė<br/>Produktų lentelė<br/>Pavyzdiniai duomenys]
+    WebApp -- Saugus ryšys<br/>Užšifruotas --> SQL[Azure SQL duomenų bazė<br/>Produktų lentelė<br/>Pavyzdžių duomenys]
 ```
+
 **Išteklių diegimas:**
-- **Resource Group**: Visų išteklių konteineris
-- **App Service Plan**: Linux pagrindu talpinimas (B1 lygis efektyvumui)
+- **Išteklių grupė**: Visų išteklių konteineris
+- **App Service planas**: Linux pagrindu talpinimas (B1 lygis dėl sąnaudų efektyvumo)
 - **Web App**: Python 3.11 vykdymo aplinka su Flask programa
-- **SQL Server**: Valdomas duomenų bazės serveris su TLS 1.2 minimumu
+- **SQL Server**: Valdomas duomenų bazių serveris su TLS 1.2 minimumu
 - **SQL Database**: Basic lygis (2GB, tinkamas vystymui/testavimui)
-- **Application Insights**: Stebėsena ir žurnalai
+- **Application Insights**: Stebėjimo ir žurnalų kaupimo įrankis
 - **Log Analytics Workspace**: Centralizuota žurnalų saugykla
 
-**Analogija**: Galvokite apie tai kaip restoraną (žiniatinklio programa) su įeinančiu šaldikliu (duomenų bazė). Klientai užsisako iš meniu (API pabaigos taškai), o virtuvė (Flask programa) paima ingredientus (duomenis) iš šaldiklio. Restorano vadovas (Application Insights) seka viską, kas vyksta.
+**Panašumas**: Galvokite apie tai kaip restoraną (web app) su šaldikliu (duomenų bazė). Klientai užsisako iš meniu (API galiniai taškai), o virtuvė (Flask programa) pasiima ingredientus (duomenis) iš šaldiklio. Restorano vadybininkas (Application Insights) seka viską, kas vyksta.
 
 ## Aplanko struktūra
 
-Visi failai yra įtraukti šiame pavyzdyje — jokių išorinių priklausomybių nereikia:
+Visi failai įtraukti į šį pavyzdį—nereikia jokių išorinių priklausomybių:
 
 ```
 examples/database-app/
@@ -114,43 +115,43 @@ examples/database-app/
         └── Dockerfile          # Container definition
 ```
 
-**Ką kiekvienas failas atlieka:**
+**Ką atlieka kiekvienas failas:**
 - **azure.yaml**: Nurodo AZD, ką diegti ir kur
-- **infra/main.bicep**: Orkestravimas visų Azure išteklių
-- **infra/resources/*.bicep**: Atskirų išteklių apibrėžimai (modulinis pakartotiniam naudojimui)
+- **infra/main.bicep**: Orkestruoja visus Azure išteklius
+- **infra/resources/*.bicep**: Atskiri išteklių aprašymai (moduliniai, pakartojamai naudojami)
 - **src/web/app.py**: Flask programa su duomenų bazės logika
 - **requirements.txt**: Python paketų priklausomybės
 - **Dockerfile**: Konteinerizacijos nurodymai diegimui
 
-## Greitas pradmenis (žingsnis po žingsnio)
+## Greitas pradžios vadovas (žingsnis po žingsnio)
 
-### 1 veiksmas: Nukopijuokite repo ir pereikite
+### 1 žingsnis: Klonuoti ir pereiti
 
 ```sh
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/database-app
 ```
 
-**✓ Sėkmės patikra**: Įsitikinkite, kad matote `azure.yaml` ir `infra/` katalogą:
+**✓ Sėkmės patikra**: Patikrinkite, ar matote `azure.yaml` ir aplanką `infra/`:
 ```sh
 ls
-# Laukiama: README.md, azure.yaml, infra/, src/
+# Tikimasi: README.md, azure.yaml, infra/, src/
 ```
 
-### 2 veiksmas: Autentifikuokitės į Azure
+### 2 žingsnis: Prisijunkite prie Azure
 
 ```sh
 azd auth login
 ```
 
-Tai atidarys naršyklę Azure autentifikacijai. Prisijunkite su savo Azure paskyra.
+Tai atidarys jūsų naršyklę Azure autentifikacijai. Prisijunkite naudodami savo Azure kredencialus.
 
-**✓ Sėkmės patikra**: Turėtumėte pamatyti:
+**✓ Sėkmės patikra**: Jūs turėtumėte matyti:
 ```
 Logged in to Azure.
 ```
 
-### 3 veiksmas: Inicializuokite aplinką
+### 3 žingsnis: Inicializuoti aplinką
 
 ```sh
 azd init
@@ -158,17 +159,17 @@ azd init
 
 **Kas vyksta**: AZD sukuria vietinę konfigūraciją jūsų diegimui.
 
-**Kokius raginimus pamatysite**:
+**Prašymai, kuriuos pamatysite**:
 - **Environment name**: Įveskite trumpą pavadinimą (pvz., `dev`, `myapp`)
-- **Azure subscription**: Iš sąrašo pasirinkite savo prenumeratą
+- **Azure subscription**: Pasirinkite savo prenumeratą iš sąrašo
 - **Azure location**: Pasirinkite regioną (pvz., `eastus`, `westeurope`)
 
-**✓ Sėkmės patikra**: Turėtumėte pamatyti:
+**✓ Sėkmės patikra**: Jūs turėtumėte matyti:
 ```
 SUCCESS: New project initialized!
 ```
 
-### 4 veiksmas: Paruoškite Azure išteklius
+### 4 žingsnis: Paruošti Azure išteklius
 
 ```sh
 azd provision
@@ -177,38 +178,38 @@ azd provision
 **Kas vyksta**: AZD diegia visą infrastruktūrą (užtrunka 5–8 minutes):
 1. Sukuria išteklių grupę
 2. Sukuria SQL Serverį ir duomenų bazę
-3. Sukuria App Service Plan
+3. Sukuria App Service planą
 4. Sukuria Web App
 5. Sukuria Application Insights
 6. Konfigūruoja tinklą ir saugumą
 
-**Jums bus prašoma**:
+**Jūsų bus paprašyta**:
 - **SQL admin username**: Įveskite vartotojo vardą (pvz., `sqladmin`)
 - **SQL admin password**: Įveskite stiprų slaptažodį (išsaugokite jį!)
 
-**✓ Sėkmės patikra**: Turėtumėte pamatyti:
+**✓ Sėkmės patikra**: Jūs turėtumėte matyti:
 ```
 SUCCESS: Your application was provisioned in Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
 https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-name>
 ```
 
-**⏱️ Laikas**: 5–8 minutės
+**⏱️ Laikas**: 5–8 minučių
 
-### 5 veiksmas: Diegti programą
+### 5 žingsnis: Iškelti programą
 
 ```sh
 azd deploy
 ```
 
-**Kas vyksta**: AZD sukompiliuoja ir įdiegia jūsų Flask programą:
+**Kas vyksta**: AZD surenka ir iškelia jūsų Flask programą:
 1. Supakuoja Python programą
-2. Suka Docker konteinerį
-3. Nusiunčia jį į Azure Web App
+2. Sukuria Docker konteinerį
+3. Paskelbia į Azure Web App
 4. Inicializuoja duomenų bazę su pavyzdiniais duomenimis
 5. Paleidžia programą
 
-**✓ Sėkmės patikra**: Turėtumėte pamatyti:
+**✓ Sėkmės patikra**: Jūs turėtumėte matyti:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
@@ -217,15 +218,15 @@ https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-na
 
 **⏱️ Laikas**: 3–5 minutės
 
-### 6 veiksmas: Naršyti programą
+### 6 žingsnis: Peržiūrėti programą naršyklėje
 
 ```sh
 azd browse
 ```
 
-Tai atidarys jūsų įdiegtą žiniatinklio programą naršyklėje adresu `https://app-<unique-id>.azurewebsites.net`
+Tai atidarys jūsų iškeltą web programą naršyklėje adresu `https://app-<unique-id>.azurewebsites.net`
 
-**✓ Sėkmės patikra**: Turėtumėte pamatyti JSON išvestį:
+**✓ Sėkmės patikra**: Jūs turėtumėte matyti JSON išvestį:
 ```json
 {
   "message": "Welcome to the Database App API",
@@ -238,9 +239,9 @@ Tai atidarys jūsų įdiegtą žiniatinklio programą naršyklėje adresu `https
 }
 ```
 
-### 7 veiksmas: Išbandykite API pabaigos taškus
+### 7 žingsnis: Išbandykite API galinius taškus
 
-**Būklės patikra** (patikrinkite duomenų bazės ryšį):
+**Sveikatos patikra** (patikrinkite ryšį su duomenų baze):
 ```sh
 curl https://app-<your-id>.azurewebsites.net/health
 ```
@@ -277,27 +278,27 @@ curl https://app-<your-id>.azurewebsites.net/products
 curl https://app-<your-id>.azurewebsites.net/products/1
 ```
 
-**✓ Sėkmės patikra**: Visi pabaigos taškai grąžina JSON duomenis be klaidų.
+**✓ Sėkmės patikra**: Visi galiniai taškai grąžina JSON duomenis be klaidų.
 
 ---
 
-**🎉 Sveikiname!** Jūs sėkmingai įdiegėte žiniatinklio programą su duomenų baze Azure naudodami AZD.
+**🎉 Sveikiname!** Jūs sėkmingai iškėlėte žiniatinklio programą su duomenų baze į Azure naudojant AZD.
 
-## Konfigūracijos giluminis aprašymas
+## Išsami konfigūracija
 
 ### Aplinkos kintamieji
 
-Slaptažodžiai valdomi saugiai per Azure App Service konfigūraciją — **niekada nekodinkite jų tiesiogiai šaltinyje**.
+Slapti duomenys yra saugiai valdomi per Azure App Service konfigūraciją—**niekada neįrašykite jų tiesiogiai į šaltinio kodą**.
 
 **Automatiškai konfigūruoja AZD**:
-- `SQL_CONNECTION_STRING`: Duomenų bazės ryšys su užšifruotais kredencialais
-- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Stebėjimo telemetrijos galutinis taškas
-- `SCM_DO_BUILD_DURING_DEPLOYMENT`: Leidžia automatinį priklausomybių įdiegimą
+- `SQL_CONNECTION_STRING`: Duomenų bazės prisijungimas su užšifruotais kredencialais
+- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Telemetrijos stebėjimo pabaigos taškas
+- `SCM_DO_BUILD_DURING_DEPLOYMENT`: Leidžia automatinį priklausomybių įdiegimą diegimo metu
 
-**Kur saugomi slaptažodžiai**:
-1. Per `azd provision` pateikiate SQL kredencialus per saugius raginimus
-2. AZD saugo juos jūsų vietiniame `.azure/<env-name>/.env` faile (ignore'inamas Gite)
-3. AZD įterpia juos į Azure App Service konfigūraciją (užšifruota diske)
+**Kur saugomi slapti duomenys**:
+1. Per `azd provision` jūs pateikiate SQL kredencialus per saugius raginimus
+2. AZD saugo juos jūsų vietiniame `.azure/<env-name>/.env` faile (įtrauktame į .gitignore)
+3. AZD injektuoja juos į Azure App Service konfigūraciją (užšifruota saugant)
 4. Programa skaito juos per `os.getenv()` vykdymo metu
 
 ### Vietinis vystymas
@@ -306,10 +307,10 @@ Vietiniam testavimui sukurkite `.env` failą iš pavyzdžio:
 
 ```sh
 cp .env.sample .env
-# Redaguokite .env ir nurodykite savo vietinės duomenų bazės prisijungimo duomenis
+# Redaguokite .env, nurodydami savo vietinio duomenų bazės prisijungimo duomenis
 ```
 
-**Vietinio vystymo darbo eiga**:
+**Vietinio vystymo eiga**:
 ```sh
 # Įdiegti priklausomybes
 cd src/web
@@ -322,20 +323,20 @@ export SQL_CONNECTION_STRING="your-local-connection-string"
 python app.py
 ```
 
-**Testuoti lokaliai**:
+**Paleisti testuojant vietoje**:
 ```sh
 curl http://localhost:8000/health
-# Tikėtasi: {"status": "healthy", "database": "connected"}
+# Tikėtasi: {"status": "sveikas", "database": "prijungta"}
 ```
 
 ### Infrastruktūra kaip kodas
 
-Visi Azure ištekliai apibrėžti **Bicep šablonuose** (`infra/` katalogas):
+Visi Azure ištekliai aprašyti **Bicep šablonuose** (`infra/` aplankas):
 
-- **Modulinis dizainas**: Kiekvienam išteklių tipui yra atskiras failas pakartotiniam naudojimui
-- **Parametrizuota**: Galite pritaikyti SKU, regionus, vardų konvencijas
-- **Geriausios praktikos**: Laikosi Azure vardų standartų ir saugumo numatytųjų reikšmių
-- **Versijų valdymas**: Infrastruktūros pakeitimai sekami Gite
+- **Modulinis dizainas**: Kiekvienam išteklių tipui atskiras failas pakartotinumui
+- **Parametrizuota**: Galima pritaikyti SKU, regionus, pavadinimų konvencijas
+- **Geriausios praktikos**: Atitinka Azure pavadinimų standartus ir saugumo numatytuosius nustatymus
+- **Versijų valdymas**: Infrastruktūros pakeitimai stebimi Gite
 
 **Pritaikymo pavyzdys**:
 Norėdami pakeisti duomenų bazės lygį, redaguokite `infra/resources/sql-database.bicep`:
@@ -347,72 +348,72 @@ sku: {
 }
 ```
 
-## Saugumo geriausios praktikos
+## Geriausios saugumo praktikos
 
-Šis pavyzdys seka Azure saugumo gerąsias praktikas:
+Šis pavyzdys laikosi Azure saugumo geriausių praktikų:
 
-### 1. **Jokių slaptažodžių šaltinyje**
-- ✅ Kredencialai saugomi Azure App Service konfigūracijoje (užšifruota)
+### 1. **Nėra slaptų duomenų šaltinio kode**
+- ✅ Prisijungimo duomenys saugomi Azure App Service konfigūracijoje (užšifruoti)
 - ✅ `.env` failai neįtraukti į Git per `.gitignore`
-- ✅ Slaptažodžiai perduodami per saugius parametrus diegimo metu
+- ✅ Slaptieji parametrai perduodami per saugius provisioning raginimus
 
 ### 2. **Užšifruoti ryšiai**
-- ✅ TLS 1.2 minimumas SQL Serveriui
-- ✅ HTTPS tik (HTTPS-only) privalomas Web App
+- ✅ SQL Serveris naudoja TLS 1.2 minimumą
+- ✅ Web App priverstinai naudoja HTTPS
 - ✅ Duomenų bazės ryšiai naudoja užšifruotus kanalus
 
 ### 3. **Tinklo saugumas**
-- ✅ SQL Server ugniasienė sukonfigūruota leisti tik Azure paslaugoms
-- ✅ Viešas tinklo prieigos ribojimas (gali būti dar labiau apribota naudojant Private Endpoints)
-- ✅ FTPS išjungtas Web App
+- ✅ SQL Serverio ugniasienė sukonfigūruota leisti tik Azure paslaugas
+- ✅ Viešasis prieigos tinklas apribotas (gali būti papildomai užblokuotas naudojant Private Endpoints)
+- ✅ FTPS išjungtas Web App aplinkoje
 
 ### 4. **Autentifikacija ir autorizacija**
-- ⚠️ **Šiuo metu**: SQL autentifikacija (vartotojo vardas/slaptažodis)
-- ✅ **Rekomendacija gamybai**: Naudokite Azure Managed Identity be slaptažodžių
+- ⚠️ **Dabartinė**: SQL autentifikacija (vartotojo vardas/slaptažodis)
+- ✅ **Rekomendacija gamybai**: Naudoti Azure Managed Identity autentiškumui be slaptažodžio
 
-**Norint perjungti į Managed Identity** (gamybai):
-1. Įjunkite managed identity Web App
-2. Suteikite identitetui SQL teises
-3. Atnaujinkite jungties eilutę naudoti managed identity
-4. Pašalinkite slaptažodinę autentifikaciją
+**Norėdami pereiti prie Managed Identity** (gamybai):
+1. Įgalinkite valdomą tapatybę ant Web App
+2. Suteikite tapatybei teises SQL serveryje
+3. Atnaujinkite prisijungimo eilutę, kad naudotų Managed Identity
+4. Pašalinkite slaptažodžiu pagrįstą autentifikaciją
 
 ### 5. **Auditas ir atitiktis**
-- ✅ Application Insights registra visus užklausimus ir klaidas
-- ✅ SQL Database auditas įjungtas (galima konfigūruoti atitikties reikalavimams)
+- ✅ Application Insights registruoja visus užklausimus ir klaidas
+- ✅ SQL Database auditas įjungtas (gali būti konfigūruojamas atitikties poreikiams)
 - ✅ Visi ištekliai pažymėti žymomis valdymui
 
 **Saugumo kontrolinis sąrašas prieš gamybą**:
 - [ ] Įjungti Azure Defender for SQL
-- [ ] Konfigūruoti Private Endpoints SQL Database
+- [ ] Konfigūruoti Private Endpoints SQL duomenų bazei
 - [ ] Įjungti Web Application Firewall (WAF)
-- [ ] Diegti Azure Key Vault slaptažodžių rotacijai
-- [ ] Konfigūruoti Azure AD autentifikaciją
-- [ ] Įjungti diagnostinį žurnavimą visiems ištekliams
+- [ ] Įdiegti Azure Key Vault slaptųjų duomenų rotacijai
+- [ ] Konfigūruoti Microsoft Entra ID autentifikaciją
+- [ ] Įjungti diagnostikos žurnalavimą visiems ištekliams
 
-## Kaštų optimizavimas
+## Išlaidų optimizavimas
 
-**Apskaičiuotos mėnesinės išlaidos** (pagal 2025 m. lapkritį):
+**Apskaičiuotos mėnesinės išlaidos** (pagal 2025 m. lapkričio duomenis):
 
-| Resource | SKU/Tier | Estimated Cost |
+| Ištekliai | SKU/Lygis | Apskaičiuotos išlaidos |
 |----------|----------|----------------|
 | App Service Plan | B1 (Basic) | ~$13/month |
 | SQL Database | Basic (2GB) | ~$5/month |
-| Application Insights | Pay-as-you-go | ~$2/month (low traffic) |
-| **Total** | | **~$20/month** |
+| Application Insights | Pay-as-you-go | ~$2/month (mažas srautas) |
+| **Viso** | | **~$20/month** |
 
 **💡 Patarimai, kaip sutaupyti**:
 
 1. **Naudokite nemokamą lygį mokymuisi**:
-   - App Service: F1 lygis (nemokamas, ribotas valandų skaičius)
-   - SQL Database: Naudokite Azure SQL Database serverless
-   - Application Insights: 5GB/mėn nemokamas įvedimas
+   - App Service: F1 lygis (nemokamas, ribotas valandas)
+   - SQL Database: naudokite Azure SQL Database serverless
+   - Application Insights: 5GB/mėn nemokamo įkėlimo limitas
 
-2. **Sustabdykite išteklius, kai jų nenaudojate**:
+2. **Sustabdykite išteklius, kai nenaudojami**:
    ```sh
-   # Sustabdyti žiniatinklio programą (duomenų bazė vis tiek apmokestinama)
+   # Sustabdyti žiniatinklio programą (duomenų bazė vis tiek kainuos)
    az webapp stop --name <app-name> --resource-group <rg-name>
    
-   # Paleisti iš naujo prireikus
+   # Paleisti iš naujo, kai reikia
    az webapp start --name <app-name> --resource-group <rg-name>
    ```
 
@@ -420,46 +421,46 @@ sku: {
    ```sh
    azd down
    ```
-   Tai pašalins VISUS išteklius ir sustabdys mokesčius.
+   Tai pašalina VISUS išteklius ir sustabdo mokesčius.
 
-4. **Vystymo vs. gamybos SKU**:
+4. **Vystymui vs. gamybai SKU**:
    - **Vystymui**: Basic lygis (naudojamas šiame pavyzdyje)
-   - **Gamybai**: Standard/Premium lygiai su redundancija
+   - **Gamybai**: Standard/Premium lygiai su atsargumu
 
-**Išlaidų stebėsena**:
-- Peržiūrėkite išlaidas [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
-- Sukurkite įspėjimus dėl išlaidų, kad nepatirčiau netikėtumų
-- Pažymėkite visus išteklius su `azd-env-name` sekimui
+**Išlaidų stebėjimas**:
+- Peržiūrėkite išlaidas per [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
+- Nustatykite išlaidų įspėjimus, kad išvengtumėte staigmenų
+- Žymėkite visus išteklius su `azd-env-name` sekimui
 
 **Nemokamo lygio alternatyva**:
-Mokymuisi galite pakeisti `infra/resources/app-service-plan.bicep`:
+Mokymosi tikslais galite pakeisti `infra/resources/app-service-plan.bicep`:
 ```bicep
 sku: {
   name: 'F1'  // Free tier
   tier: 'Free'
 }
 ```
-**Pastaba**: Nemokamas lygis turi apribojimus (60 min/dieną CPU, nėra always-on).
+**Pastaba**: Nemokamas lygis turi apribojimų (60 min/dieną CPU, nėra nuolatinio įjungimo).
 
-## Stebėsena ir pastebimumas
+## Stebėjimas ir matomumas
 
 ### Application Insights integracija
 
-Šis pavyzdys įtraukia **Application Insights** išsamiam stebėjimui:
+Šis pavyzdys apima **Application Insights** išsamiai stebėsenai:
 
 **Kas stebima**:
-- ✅ HTTP užklausos (latencija, statuso kodai, pabaigos taškai)
+- ✅ HTTP užklausos (vėlinimas, statuso kodai, galiniai taškai)
 - ✅ Programos klaidos ir išimtys
-- ✅ Vartotojo žurnalai iš Flask programos
+- ✅ Vartotojo žurnavimas iš Flask programos
 - ✅ Duomenų bazės ryšio būklė
-- ✅ Veikimo metrikos (CPU, atmintis)
+- ✅ Veikimo metrika (CPU, atmintis)
 
 **Kaip pasiekti Application Insights**:
 1. Atidarykite [Azure Portal](https://portal.azure.com)
 2. Eikite į savo išteklių grupę (`rg-<env-name>`)
 3. Spustelėkite Application Insights išteklių (`appi-<unique-id>`)
 
-Naudingi užklausimai (Application Insights → Logs):
+**Naudingi užklausimai** (Application Insights → Logs):
 
 **Peržiūrėti visas užklausas**:
 ```kusto
@@ -477,36 +478,36 @@ exceptions
 | project timestamp, type, outerMessage, operation_Name
 ```
 
-**Patikrinti būklės pabaigos tašką**:
+**Patikrinti sveikatos galinį tašką**:
 ```kusto
 requests
 | where name contains "health"
 | summarize count() by resultCode, bin(timestamp, 1h)
 ```
 
-### SQL Database auditas
+### SQL duomenų bazės auditas
 
-**SQL Database auditas įjungtas** norint sekti:
-- Duomenų bazės prieigos modelius
-- Nepavykusias prisijungimų bandymus
-- Schemos pakeitimus
-- Duomenų prieigą (atitikties tikslais)
+**SQL duomenų bazės auditas įjungtas**, kad būtų stebima:
+- Duomenų bazės prieigos modeliai
+- Nesėkmingi prisijungimai
+- Schemos pakeitimai
+- Duomenų prieiga (atitikties tikslais)
 
 **Kaip pasiekti audito žurnalus**:
 1. Azure Portal → SQL Database → Auditing
-2. Peržiūrėkite žurnalus Log Analytics workspace
+2. Peržiūrėkite žurnalus Log Analytics darbo srityje
 
-### Realaus laiko stebėsena
+### Realaus laiko stebėjimas
 
-**Peržiūrėti gyvąsias metrikas**:
+**Peržiūrėti tiesioginius rodiklius**:
 1. Application Insights → Live Metrics
-2. Matykite užklausas, gedimus ir veikimą realiu laiku
+2. Matykite užklausas, klaidas ir našumą realiu laiku
 
 **Nustatyti įspėjimus**:
-Sukurkite įspėjimus dėl kritinių įvykių:
+Sukurkite įspėjimus kritiniams įvykiams:
 - HTTP 500 klaidos > 5 per 5 minutes
-- Duomenų bazės ryšio klaidos
-- Aukštas atsako laikas (>2 sekundės)
+- Duomenų bazės prisijungimo klaidos
+- Aukšti atsakymo laikai (>2 sekundžių)
 
 **Pavyzdys, kaip sukurti įspėjimą**:
 ```sh
@@ -518,170 +519,168 @@ az monitor metrics alert create \
   --description "Alert when response time exceeds 2 seconds"
 ```
 
-## Avarijų diagnostika
-### Dažnos problemos ir jų sprendimai
+## Trikčių šalinimas
+### Dažnos problemos ir sprendimai
 
-#### 1. `azd provision` nepavyksta su pranešimu „Location not available“
+#### 1. `azd provision` fails with "Location not available"
 
-**Simptomas**:  
+**Simptomas**:
 ```
 Error: The subscription is not registered for the resource type 'components' in the location 'centralus'.
 ```
-  
-**Sprendimas**:  
-Pasirinkite kitą Azure regioną arba užregistruokite išteklių teikėją:  
+
+**Sprendimas**:
+Pasirinkite kitą Azure regioną arba užregistruokite resursų teikėją:
 ```sh
 az provider register --namespace Microsoft.Insights
 ```
-  
-#### 2. SQL ryšys nepavyksta diegimo metu
 
-**Simptomas**:  
+#### 2. SQL Connection Fails During Deployment
+
+**Simptomas**:
 ```
 pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL Server]TCP Provider...')
 ```
-  
-**Sprendimas**:  
-- Patikrinkite, ar SQL serverio ugniasienė leidžia Azure paslaugas (konfigūruojama automatiškai)  
-- Įsitikinkite, kad `azd provision` metu teisingai įvestas SQL administratoriaus slaptažodis  
-- Įsitikinkite, kad SQL serveris pilnai provisionintas (gali užtrukti 2-3 minutes)
 
-**Prisijungimo patikrinimas**:  
+**Sprendimas**:
+- Patikrinkite, ar SQL Server tinklo užkarda leidžia Azure paslaugas (sukonfigūruojama automatiškai)
+- Patikrinkite, ar SQL administratoriaus slaptažodis buvo teisingai įvestas vykdant `azd provision`
+- Įsitikinkite, kad SQL Server pilnai suteiktas (gali užtrukti 2–3 min.)
+
+**Patikrinkite ryšį**:
 ```sh
-# Azure portale pasirinkite SQL duomenų bazę → Užklausų redaktorių
+# Azure portale eikite į SQL Database → Query editor
 # Pabandykite prisijungti naudodami savo prisijungimo duomenis
 ```
-  
-#### 3. Web programoje rodoma „Application Error“
 
-**Simptomas**:  
+#### 3. Web App Shows "Application Error"
+
+**Simptomas**:
 Naršyklė rodo bendrą klaidos puslapį.
 
-**Sprendimas**:  
-Patikrinkite programos žurnalus:  
+**Sprendimas**:
+Patikrinkite programos žurnalus:
 ```sh
 # Peržiūrėti naujausius žurnalus
 az webapp log tail --name <app-name> --resource-group <rg-name>
 ```
-  
-**Dažnos priežastys**:  
-- Trūksta aplinkos kintamųjų (patikrinkite App Service → Configuration)  
-- Nepavyko įdiegti Python paketų (patikrinkite diegimo žurnalus)  
-- Duomenų bazės inicializacijos klaida (patikrinkite SQL ryšį)
 
-#### 4. `azd deploy` nepavyksta su pranešimu „Build Error“
+**Dažnos priežastys**:
+- Trūksta aplinkos kintamųjų (patikrinkite App Service → Configuration)
+- Nepavyko įdiegti Python paketų (patikrinkite diegimo žurnalus)
+- Duomenų bazės inicializavimo klaida (patikrinkite SQL ryšį)
 
-**Simptomas**:  
+#### 4. `azd deploy` Fails with "Build Error"
+
+**Simptomas**:
 ```
 Error: Failed to build project
 ```
-  
-**Sprendimas**:  
-- Įsitikinkite, kad `requirements.txt` neturi sintaksės klaidų  
-- Patikrinkite, ar `infra/resources/web-app.bicep` nurodytas Python 3.11  
-- Patikrinkite, ar Dockerfile naudoja teisingą pagrindinį atvaizdą
 
-**Debug vietoje**:  
+**Sprendimas**:
+- Įsitikinkite, kad `requirements.txt` neturi sintaksės klaidų
+- Patikrinkite, kad Python 3.11 nurodytas faile `infra/resources/web-app.bicep`
+- Patikrinkite, ar Dockerfile turi teisingą bazinį vaizdą
+
+**Derinkite lokaliai**:
 ```sh
 cd src/web
 docker build -t test-app .
 docker run -p 8000:8000 test-app
 ```
-  
-#### 5. „Unauthorized“ klaida vykdant AZD komandas
 
-**Simptomas**:  
+#### 5. "Unauthorized" When Running AZD Commands
+
+**Simptomas**:
 ```
 ERROR: (Unauthorized) The client '<id>' with object id '<id>' does not have authorization
 ```
-  
-**Sprendimas**:  
-Perautentifikuokitės Azure:  
+
+**Sprendimas**:
+Prisijunkite iš naujo prie Azure:
 ```sh
-# Reikalinga AZD darbo eigoms
+# Reikalinga AZD darbo srautams
 azd auth login
 
 # Pasirenkama, jei taip pat tiesiogiai naudojate Azure CLI komandas
 az login
 ```
-  
-Įsitikinkite, kad turite tinkamas teises (Contributor rolę) prenumeratoje.
 
-#### 6. Didelės duomenų bazės sąnaudos
+Patikrinkite, ar turite tinkamus leidimus (Contributor rolė) prenumeratoje.
 
-**Simptomas**:  
-Netikėtas Azure sąskaitos išrašas.
+#### 6. High Database Costs
 
-**Sprendimas**:  
-- Patikrinkite, ar nepraleidote paleisti `azd down` po testavimo  
-- Patikrinkite, ar SQL duomenų bazė naudoja Basic lygį (ne Premium)  
-- Peržiūrėkite išlaidas Azure Cost Management  
+**Simptomas**:
+Netikėta Azure sąskaita.
+
+**Sprendimas**:
+- Patikrinkite, ar nepamiršote paleisti `azd down` po testavimo
+- Įsitikinkite, kad SQL Database naudoja Basic lygį (ne Premium)
+- Peržiūrėkite išlaidas Azure Cost Management
 - Nustatykite išlaidų įspėjimus
 
 ### Pagalba
 
-**Peržiūrėti visus AZD aplinkos kintamuosius**:  
+**Peržiūrėti visus AZD aplinkos kintamuosius**:
 ```sh
 azd env get-values
 ```
-  
-**Patikrinti diegimo būseną**:  
+
+**Patikrinti diegimo būseną**:
 ```sh
 az webapp show --name <app-name> --resource-group <rg-name> --query state
 ```
-  
-**Prieiga prie programos žurnalų**:  
+
+**Peržiūrėti programos žurnalus**:
 ```sh
 az webapp log download --name <app-name> --resource-group <rg-name> --log-file app-logs.zip
 ```
-  
-**Reikia daugiau pagalbos?**  
-- [AZD trikčių šalinimo vadovas](../../docs/chapter-07-troubleshooting/common-issues.md)  
-- [Azure App Service trikčių šalinimas](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)  
-- [Azure SQL trikčių šalinimas](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
 
-## Praktiniai pratimai
+**Reikia daugiau pagalbos?**
+- [AZD Troubleshooting Guide](../../docs/chapter-07-troubleshooting/common-issues.md)
+- [Azure App Service Troubleshooting](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
+- [Azure SQL Troubleshooting](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
 
-### 1 pratimas: Patikrinkite savo diegimą (Pradedantiesiems)
+## Praktinės užduotys
 
-**Tikslas**: Patvirtinti, kad visi resursai įdiegti ir programa veikia.
+### Užduotis 1: Patikrinkite diegimą (Pradedantiesiems)
 
-**Veiksmai**:  
-1. Išvardinkite visus resursus savo resursų grupėje:  
+**Tikslas**: Patvirtinti, kad visi ištekliai yra įdiegti ir programa veikia.
+
+**Veiksmai**:
+1. Išvardinkite visus išteklius savo resursų grupėje:
    ```sh
    az resource list --resource-group rg-<env-name> --output table
    ```
-  
-**Laukiama**: 6-7 resursai (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
+   **Numatoma**: 6-7 ištekliai (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
 
-2. Išbandykite visus API galinius taškus:  
+2. Išbandykite visus API galinius taškus:
    ```sh
    curl https://app-<your-id>.azurewebsites.net/
    curl https://app-<your-id>.azurewebsites.net/health
    curl https://app-<your-id>.azurewebsites.net/products
    curl https://app-<your-id>.azurewebsites.net/products/1
    ```
-  
-**Laukiama**: Visi grąžina galiojančius JSON be klaidų
+   **Numatoma**: Visi grąžina galiojantį JSON be klaidų
 
-3. Patikrinkite Application Insights:  
-   - Eikite į Application Insights Azure portale  
-   - Pasirinkite „Live Metrics“  
-   - Atnaujinkite savo naršyklės puslapį web programoje  
-   **Laukiama**: Matomas užklausų realaus laiko srautas
+3. Patikrinkite Application Insights:
+   - Eikite į Application Insights Azure portale
+   - Atidarykite "Live Metrics"
+   - Atnaujinkite naršyklės puslapį prie web programos
+   **Numatoma**: Matyti užklausas realiu laiku
 
-**Sėkmės kriterijai**: Visi 6-7 resursai egzistuoja, visi galiniai taškai grąžina duomenis, Live Metrics rodo veiklą.
+**Sėkmės kriterijai**: Visi 6-7 ištekliai egzistuoja, visi galiniai taškai grąžina duomenis, Live Metrics rodo aktyvumą.
 
 ---
 
-### 2 pratimas: Pridėkite naują API galinį tašką (Vidutinis lygis)
+### Užduotis 2: Pridėti naują API galinį tašką (Vidutinis)
 
 **Tikslas**: Išplėsti Flask programą nauju galiniu tašku.
 
-**Pradinio kodo vieta**: Dabartiniai galiniai taškai `src/web/app.py`
+**Pradinis kodas**: Dabartiniai galiniai taškai faile `src/web/app.py`
 
-**Veiksmai**:  
-1. Redaguokite `src/web/app.py` ir pridėkite naują galinį tašką po `get_product()` funkcijos:  
+**Veiksmai**:
+1. Redaguokite `src/web/app.py` ir pridėkite naują galinį tašką po funkcijos `get_product()`:
    ```python
    @app.route('/products/search/<keyword>')
    def search_products(keyword):
@@ -714,31 +713,30 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
            logger.error(f"Error searching products: {str(e)}")
            return jsonify({'error': str(e)}), 500
    ```
-  
-2. Diegkite atnaujintą programą:  
+
+2. Diegti atnaujintą programą:
    ```sh
    azd deploy
    ```
-  
-3. Išbandykite naują galinį tašką:  
+
+3. Išbandyti naują galinį tašką:
    ```sh
    curl https://app-<your-id>.azurewebsites.net/products/search/laptop
    ```
-  
-**Laukiama**: Grąžina produktus, atitinkančius „laptop“
+   **Numatoma**: Grąžina produktus, atitinkančius "laptop"
 
-**Sėkmės kriterijai**: Naujas galinis taškas veikia, grąžina filtruotus rezultatus, rodomas Application Insights žurnaluose.
+**Sėkmės kriterijai**: Naujas galinis taškas veikia, grąžina filtruotus rezultatus, matomas Application Insights žurnaluose.
 
 ---
 
-### 3 pratimas: Pridėkite stebėjimą ir įspėjimus (Pažengęs lygis)
+### Užduotis 3: Pridėti stebėjimą ir įspėjimus (Pažengusiems)
 
 **Tikslas**: Nustatyti proaktyvų stebėjimą su įspėjimais.
 
-**Veiksmai**:  
-1. Sukurkite įspėjimą HTTP 500 klaidoms:  
+**Veiksmai**:
+1. Sukurkite įspėjimą HTTP 500 klaidoms:
    ```sh
-   # Gauti Application Insights resurso ID
+   # Gauti Application Insights resurso identifikatorių
    AI_ID=$(az monitor app-insights component show \
      --app appi-<your-id> \
      --resource-group rg-<env-name> \
@@ -754,29 +752,29 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
      --evaluation-frequency 1m \
      --description "Alert when >5 failed requests in 5 minutes"
    ```
-  
-2. Sukelkite įspėjimą sukeldami klaidas:  
+
+2. Sukelkite įspėjimą sukeldami klaidas:
    ```sh
    # Užklausti neegzistuojančio produkto
    for i in {1..10}; do curl https://app-<your-id>.azurewebsites.net/products/999; done
    ```
-  
-3. Patikrinkite, ar įspėjimas paleistas:  
-   - Azure Portal → Alerts → Alert Rules  
-   - Patikrinkite savo el. paštą (jei nustatyta)
 
-**Sėkmės kriterijai**: Įspėjimo taisyklė sukurta, suveikia klaidoms, gaunami pranešimai.
+3. Patikrinkite, ar įspėjimas įsijungė:
+   - Azure Portal → Alerts → Alert Rules
+   - Patikrinkite el. paštą (jei sukonfigūruota)
+
+**Sėkmės kriterijai**: Įspėjimo taisyklė sukurta, suveikia klaidų atveju, pranešimai gaunami.
 
 ---
 
-### 4 pratimas: Duomenų bazės schemos pakeitimai (Pažengęs lygis)
+### Užduotis 4: Duomenų bazės schemos keitimai (Pažengusiems)
 
-**Tikslas**: Pridėti naują lentelę ir modifikuoti programą naudoti ją.
+**Tikslas**: Pridėti naują lentelę ir pakeisti programą, kad ją naudotų.
 
-**Veiksmai**:  
-1. Prisijunkite prie SQL duomenų bazės per Azure Portal Query Editor
+**Veiksmai**:
+1. Prisijunkite prie SQL Database naudodami Azure Portal Query Editor
 
-2. Sukurkite naują `categories` lentelę:  
+2. Sukurkite naują `categories` lentelę:
    ```sql
    CREATE TABLE categories (
        id INT PRIMARY KEY IDENTITY(1,1),
@@ -792,52 +790,52 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    ALTER TABLE products ADD category_id INT;
    UPDATE products SET category_id = 1; -- Set all to Electronics
    ```
-  
-3. Atnaujinkite `src/web/app.py`, kad įtrauktumėte kategorijų informaciją į atsakymus
 
-4. Diegkite ir testuokite
+3. Atnaujinkite `src/web/app.py`, kad atsakymai įtrauktų kategorijų informaciją
 
-**Sėkmės kriterijai**: Nauja lentelė egzistuoja, produktai rodo kategorijų informaciją, programa veikia.
+4. Diegti ir išbandyti
+
+**Sėkmės kriterijai**: Nauja lentelė egzistuoja, produktai rodo kategorijų informaciją, programa vis dar veikia.
 
 ---
 
-### 5 pratimas: Įgyvendinkite talpinimą (Ekspertas)
+### Užduotis 5: Įgyvendinti kešavimą (Ekspertams)
 
 **Tikslas**: Pridėti Azure Redis Cache našumui pagerinti.
 
-**Veiksmai**:  
-1. Pridėkite Redis Cache prie `infra/main.bicep`  
-2. Atnaujinkite `src/web/app.py` talpinti produktų užklausas  
-3. Išmatuokite našumo pagerėjimą Application Insights pagalba  
-4. Palyginkite atsako laikus prieš ir po talpinimo
+**Veiksmai**:
+1. Pridėkite Redis Cache į `infra/main.bicep`
+2. Atnaujinkite `src/web/app.py`, kad kešuotų produktų užklausas
+3. Išmatuokite našumo pagerėjimą su Application Insights
+4. Palyginkite atsakymo laikus prieš ir po kešavimo
 
-**Sėkmės kriterijai**: Redis įdiegtas, talpinimas veikia, atsako laikai pagerėja >50%.
+**Sėkmės kriterijai**: Redis diegiamas, kešavimas veikia, atsakymo laikas pagerėja >50%.
 
-**Patvirtinimas**: Pradėkite nuo [Azure Cache for Redis dokumentacijos](https://learn.microsoft.com/azure/azure-cache-for-redis/).
+**Patarimas**: Pradėkite nuo [Azure Cache for Redis documentation](https://learn.microsoft.com/azure/azure-cache-for-redis/).
 
 ---
 
 ## Išvalymas
 
-Kad išvengtumėte nuolatinių mokesčių, ištrinkite visus resursus pabaigus darbą:
+Kad išvengtumėte nuolatinių mokesčių, ištrinkite visus išteklius kai baigsite:
 
 ```sh
 azd down
 ```
-  
-**Patvirtinimo promptas**:  
+
+**Patvirtinimo užklausa**:
 ```
 ? Total resources to delete: 7, are you sure you want to continue? (y/N)
 ```
-  
+
 Įveskite `y`, kad patvirtintumėte.
 
-**✓ Sėkmės patikrinimas**:  
-- Visi resursai ištrinti iš Azure portalo  
-- Nėra jokių nuolatinių mokesčių  
-- Vietinė `.azure/<env-name>` aplanka gali būti ištrinta
+**✓ Sėkmės patikra**: 
+- Visos ištekliai ištrinti iš Azure portalo
+- Nėra nuolatinių mokesčių
+- Vietinį `.azure/<env-name>` aplanką galima ištrinti
 
-**Alternatyva** (išlaikyti infrastruktūrą, ištrinti duomenis):  
+**Alternatyva** (išsaugoti infrastruktūrą, ištrinti duomenis):
 ```sh
 # Ištrinti tik išteklių grupę (palikti AZD konfigūraciją)
 az group delete --name rg-<env-name> --yes
@@ -845,37 +843,37 @@ az group delete --name rg-<env-name> --yes
 ## Sužinokite daugiau
 
 ### Susijusi dokumentacija
-- [Azure Developer CLI dokumentacija](https://learn.microsoft.com/azure/developer/azure-developer-cli/)  
-- [Azure SQL Database dokumentacija](https://learn.microsoft.com/azure/azure-sql/database/)  
-- [Azure App Service dokumentacija](https://learn.microsoft.com/azure/app-service/)  
-- [Application Insights dokumentacija](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)  
-- [Bicep kalbos atmintinė](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Azure SQL Database Documentation](https://learn.microsoft.com/azure/azure-sql/database/)
+- [Azure App Service Documentation](https://learn.microsoft.com/azure/app-service/)
+- [Application Insights Documentation](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
+- [Bicep Language Reference](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
 ### Tolimesni žingsniai šiame kurse
-- **[Container Apps pavyzdys](../../../../examples/container-app)**: diegti mikroservisus su Azure Container Apps  
-- **[AI integracijos vadovas](../../../../docs/ai-foundry)**: pridėti AI funkcionalumą į savo programą  
-- **[Diegimo gerosios praktikos](../../docs/chapter-04-infrastructure/deployment-guide.md)**: produkcijos diegimo modeliai
+- **[Container Apps Example](../../../../examples/container-app)**: Diegti mikroservisus su Azure Container Apps
+- **[AI Integration Guide](../../../../docs/ai-foundry)**: Pridėti AI galimybių į savo programą
+- **[Deployment Best Practices](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Gamintojo diegimo modelių gairės
 
 ### Pažangios temos
-- **Managed Identity**: pašalinti slaptažodžius, naudoti Azure AD autentifikaciją  
-- **Private Endpoints**: saugūs duomenų bazės ryšiai virtualiame tinkle  
-- **CI/CD integracija**: diegimą automatizuokite su GitHub Actions arba Azure DevOps  
-- **Daugiaplanė aplinka**: nustatykite kūrimo, testavimo ir produkcijos aplinkas  
-- **Duomenų bazės migracijos**: naudokite Alembic arba Entity Framework schemos versijavimui
+- **Valdomoji tapatybė**: Pašalinkite slaptažodžius ir naudokite Microsoft Entra ID autentifikaciją
+- **Privatūs galiniai taškai**: Užtikrinkite duomenų bazės ryšius virtualiame tinkle
+- **CI/CD integracija**: Automatizuokite diegimus su GitHub Actions arba Azure DevOps
+- **Keli aplinkos**: Nustatykite dev, staging ir production aplinkas
+- **Duomenų bazių migracijos**: Naudokite Alembic arba Entity Framework schemų versijavimui
 
 ### Palyginimas su kitais metodais
 
-**AZD vs. ARM šablonai**:  
-- ✅ AZD: aukštesnio lygio abstrakcija, paprastesnės komandos  
-- ⚠️ ARM: daugiau žodžių, smulkesnė kontrolė  
+**AZD vs. ARM Templates**:
+- ✅ AZD: Aukštesnio lygio abstrakcija, paprastesnės komandos
+- ⚠️ ARM: Daugiau žodžių, detalesnė kontrolė
 
-**AZD vs. Terraform**:  
-- ✅ AZD: Azure natyvi integracija su Azure paslaugomis  
-- ⚠️ Terraform: daugia debesų palaikymas, didesnė ekosistema  
+**AZD vs. Terraform**:
+- ✅ AZD: Azure-natyvus, integruotas su Azure paslaugomis
+- ⚠️ Terraform: Multi-cloud palaikymas, didesnė ekosistema
 
-**AZD vs. Azure Portal**:  
-- ✅ AZD: pakartojamas, versijomis valdomas, automatizuojamas  
-- ⚠️ Portalas: rankiniai paspaudimai, sudėtinga pakartoti  
+**AZD vs. Azure Portal**:
+- ✅ AZD: Kartojama, versijoms valdoma, automatizuojama
+- ⚠️ Portal: Rankiniai paspaudimai, sunku atkurti
 
 **Galvokite apie AZD kaip**: Docker Compose Azure – supaprastinta konfigūracija sudėtingiems diegimams.
 
@@ -884,19 +882,19 @@ az group delete --name rg-<env-name> --yes
 ## Dažniausiai užduodami klausimai
 
 **K: Ar galiu naudoti kitą programavimo kalbą?**  
-A: Taip! Pakeiskite `src/web/` su Node.js, C#, Go ar bet kokia kita kalba. Atnaujinkite `azure.yaml` ir Bicep.
+A: Taip! Pakeiskite `src/web/` į Node.js, C#, Go arba bet kurią kitą kalbą. Atnaujinkite `azure.yaml` ir Bicep atitinkamai.
 
 **K: Kaip pridėti daugiau duomenų bazių?**  
-A: Pridėkite kitą SQL duomenų bazės modulį `infra/main.bicep` arba naudokite PostgreSQL/MySQL iš Azure duomenų bazių paslaugų.
+A: Pridėkite kitą SQL Database modulį faile `infra/main.bicep` arba naudokite PostgreSQL/MySQL iš Azure Database paslaugų.
 
-**K: Ar galiu tai naudoti produkcijoje?**  
-A: Tai pradinis taškas. Produkcijai pridėkite: managed identity, private endpoints, redundanciją, atsargines kopijas, WAF ir patobulintą stebėjimą.
+**K: Ar tai tinka produkcijai?**  
+A: Tai yra pradinė vieta. Produkcijai pridėkite: valdomąją tapatybę, privatųs galinius taškus, atsparumą, atsargines kopijas, WAF ir pagerintą stebėjimą.
 
 **K: O jei noriu naudoti konteinerius vietoje kodo diegimo?**  
-A: Peržiūrėkite [Container Apps pavyzdį](../../../../examples/container-app), kuriame visur naudojami Docker konteineriai.
+A: Peržiūrėkite [Container Apps Example](../../../../examples/container-app), kuris naudoja Docker konteinerius visur.
 
-**K: Kaip prisijungti prie duomenų bazės iš vietinio kompiuterio?**  
-A: Pridėkite savo IP prie SQL serverio ugniasienės:  
+**K: Kaip prisijungti prie duomenų bazės iš savo kompiuterio?**  
+A: Pridėkite savo IP prie SQL Server tinklo užkardos:
 ```sh
 az sql server firewall-rule create \
   --resource-group rg-<env-name> \
@@ -905,22 +903,22 @@ az sql server firewall-rule create \
   --start-ip-address <your-ip> \
   --end-ip-address <your-ip>
 ```
-  
+
 **K: Ar galiu naudoti esamą duomenų bazę vietoje naujos?**  
-A: Taip, pakeiskite `infra/main.bicep`, kad nurodytumėte esamą SQL serverį ir atnaujinkite ryšio eilutės parametrus.
+A: Taip, pakeiskite `infra/main.bicep`, kad nurodytumėte esamą SQL Server, ir atnaujinkite prisijungimo eilutės parametrus.
 
 ---
 
-> **Pastaba:** Šis pavyzdys demonstruoja geriausias praktikas diegiant web programą su duomenų baze naudojant AZD. Jame yra veikiantis kodas, išsami dokumentacija ir praktiniai pratimai mokymuisi sustiprinti. Produkcijos diegimams peržiūrėkite saugumą, mastelį, atitiktį ir mokesčių reikalavimus konkrečiai jūsų organizacijai.
+> **Pastaba:** Šis pavyzdys demonstruoja gerąsias praktikas diegiant web programą su duomenų baze naudojant AZD. Jame yra veikiančio kodo, išsami dokumentacija ir praktinės užduotys mokymuisi sustiprinti. Produkcijai peržiūrėkite saugumo, mastelio, atitikties ir išlaidų reikalavimus, specifinius jūsų organizacijai.
 
-**📚 Kurso navigacija:**  
-- ← Ankstesnis: [Container Apps pavyzdys](../../../../examples/container-app)  
-- → Kitas: [AI integracijos vadovas](../../../../docs/ai-foundry)  
-- 🏠 [Kurso pradžia](../../README.md)
+**📚 Kurso navigacija:**
+- ← Ankstesnis: [Container Apps Example](../../../../examples/container-app)
+- → Kitas: [AI Integration Guide](../../../../docs/ai-foundry)
+- 🏠 [Course Home](../../README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Perspėjimas**:  
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatizuoti vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojama profesionali žmonių atlikta vertimo paslauga. Mes neatsakome už jokius nesusipratimus ar klaidingas interpretacijas, kylančias dėl šio vertimo naudojimo.
+**Atsakomybės apribojimas**:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojama naudoti profesionalų žmogiškąjį vertimą. Mes neatsakome už jokius nesusipratimus ar neteisingą interpretaciją, kilusią naudojantis šiuo vertimu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

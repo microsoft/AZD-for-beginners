@@ -1,50 +1,50 @@
-# „Microsoft Foundry“ integracija su AZD
+# Microsoft Foundry integracija su AZD
 
-**Skyrių navigacija:**
-- **📚 Kursų pradžia**: [AZD pradedantiesiems](../../README.md)
-- **📖 Dabartinis skyrius**: 2 skyrius – AI pirmoji plėtra
-- **⬅️ Ankstesnis skyrius**: [1 skyrius: Jūsų pirmasis projektas](../chapter-01-foundation/first-project.md)
+**Skyrių naršymas:**
+- **📚 Kurso pradžia**: [AZD For Beginners](../../README.md)
+- **📖 Dabartinis skyrius**: Skyrius 2 - AI pirmumo kūrimas
+- **⬅️ Ankstesnis skyrius**: [Skyrius 1: Jūsų pirmasis projektas](../chapter-01-foundation/first-project.md)
 - **➡️ Kitas**: [AI modelio diegimas](ai-model-deployment.md)
-- **🚀 Kitas skyrius**: [3 skyrius: Konfigūravimas](../chapter-03-configuration/configuration.md)
+- **🚀 Sekantis skyrius**: [Skyrius 3: Konfigūracija](../chapter-03-configuration/configuration.md)
 
 ## Apžvalga
 
-Šiame vadove parodyta, kaip integruoti „Microsoft Foundry“ paslaugas su „Azure Developer CLI“ (AZD), kad būtų supaprastintas AI taikomųjų programų diegimas. „Microsoft Foundry“ suteikia išsamų platformos sprendimą AI taikomųjų programų kūrimui, diegimui ir valdymui, o AZD supaprastina infrastruktūros ir diegimo procesą.
+Šis vadovas demonstruoja, kaip integruoti Microsoft Foundry paslaugas su Azure Developer CLI (AZD) siekiant supaprastinti AI programų diegimą. Microsoft Foundry suteikia išsamią platformą AI programų kūrimui, diegimui ir valdymui, o AZD supaprastina infrastruktūros ir diegimo procesą.
 
-## Kas yra „Microsoft Foundry“?
+## Kas yra Microsoft Foundry?
 
-„Microsoft Foundry“ – tai „Microsoft“ vieninga AI kūrimo platforma, apimanti:
+Microsoft Foundry yra „Microsoft“ suvienyta AI kūrimo platforma, kuri apima:
 
-- **Modelių katalogas**: prieiga prie pažangių AI modelių
-- **Prompt Flow**: vizualus AI darbo srautų kūrėjas
-- **Microsoft Foundry portalas**: integruota kūrimo aplinka AI taikomosioms programoms
-- **Diegimo galimybės**: įvairios talpinimo ir skalavimo parinktys
-- **Saugumas ir atsakomybė**: įmontuotos atsakingo AI funkcijos
+- **Model Catalog**: Prieiga prie pažangių AI modelių
+- **Prompt Flow**: Vizualus AI darbo eigų dizaineris
+- **Microsoft Foundry Portal**: Integruota AI programų kūrimo aplinka
+- **Deployment Options**: Keli talpinimo ir skalavimo variantai
+- **Safety and Security**: Integruotos atsakingo AI priemonės
 
-## AZD + „Microsoft Foundry“: kartu geriau
+## AZD + Microsoft Foundry: Geriau kartu
 
 | Funkcija | Microsoft Foundry | AZD integracijos nauda |
 |---------|-----------------|------------------------|
-| **Modelių diegimas** | Rankinis portalas | Automatizuotas, pakartojamas diegimas |
-| **Infrastruktūra** | Paspaudimų peržiūra | Infrastruktūra kaip kodas (Bicep) |
-| **Aplinkos valdymas** | Viena aplinka | Daugybė aplinkų (dev/staging/prod) |
-| **CI/CD integracija** | Ribota | Natūrali „GitHub Actions“ palaikymas |
-| **Išlaidų valdymas** | Pagrindinė stebėsena | Tiksli aplinkos išlaidų optimizacija |
+| **Model Deployment** | Rankinis diegimas per portalą | Automatizuoti, kartojami diegimai |
+| **Infrastructure** | Diegimas per spustelėjimus | Infrastruktūra kaip kodas (Bicep) |
+| **Environment Management** | Dėmesys vienai aplinkai | Keli aplinkų (dev/staging/prod) |
+| **CI/CD Integration** | Ribotas | Gimtasis GitHub Actions palaikymas |
+| **Cost Management** | Pagrindinis stebėjimas | Aplinkai pritaikyta sąnaudų optimizacija |
 
 ## Išankstiniai reikalavimai
 
-- „Azure“ prenumerata su tinkamomis teisėmis
-- Įdiegtas „Azure Developer CLI“
-- Prieiga prie „Microsoft Foundry Models“ paslaugų
-- Pagrindinis pažinimas apie „Microsoft Foundry“
+- Azure abonementas su tinkamomis teisėmis
+- Azure Developer CLI įdiegta
+- Prieiga prie Microsoft Foundry Models paslaugų
+- Pagrindinis pažinimas su Microsoft Foundry
 
-> **Dabartinė AZD bazė:** Šie pavyzdžiai peržiūrėti su `azd` `1.23.12`. Naudokite dabartinę peržiūros plėtinio versiją dirbdami su AI agentų darbo srautu ir patikrinkite įdiegtą versiją prieš pradėdami.
+> **Dabartinė AZD bazė:** Šie pavyzdžiai buvo peržiūrėti su `azd` `1.23.12`. AI agento darbo eigai naudokite dabartinį peržiūros plėtinio leidimą ir prieš pradėdami patikrinkite savo įdiegtą versiją.
 
 ## Pagrindiniai integracijos modeliai
 
-### Modelis 1: „Microsoft Foundry Models“ integracija
+### Šablonas 1: Microsoft Foundry Models integracija
 
-**Naudojimo atvejis**: Diegti pokalbių taikomąsias programas su „Microsoft Foundry Models“ modeliais
+**Naudojimo atvejis**: Diegti pokalbių programas su Microsoft Foundry Models modeliais
 
 ```yaml
 # azure.yaml
@@ -92,9 +92,9 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 }
 ```
 
-### Modelis 2: AI paieška + RAG integracija
+### Šablonas 2: AI Search + RAG integracija
 
-**Naudojimo atvejis**: Diegti atgavimo papildytos generacijos (RAG) taikomąsias programas
+**Naudojimo atvejis**: Diegti retrieval-augmented generation (RAG) programas
 
 ```bicep
 // Azure AI Search
@@ -122,9 +122,9 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 }
 ```
 
-### Modelis 3: Dokumentų intelekto integracija
+### Šablonas 3: Dokumentų intelekto integracija
 
-**Naudojimo atvejis**: Dokumentų apdorojimo ir analizės darbo srautai
+**Naudojimo atvejis**: Dokumentų apdorojimo ir analizės darbo eigos
 
 ```bicep
 // Document Intelligence service
@@ -155,7 +155,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 }
 ```
 
-## 🔧 Konfigūracijos modeliai
+## 🔧 Konfigūracijos šablonai
 
 ### Aplinkos kintamųjų nustatymas
 
@@ -166,24 +166,24 @@ azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_SEARCH_ENDPOINT "https://your-search.search.windows.net"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT "https://your-formrec.cognitiveservices.azure.com/"
 
-# Modelio konfigūracijos
+# Modelių konfigūracijos
 azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
 azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-3-large"
 
-# Veikimo nustatymai
+# Našumo nustatymai
 azd env set AZURE_OPENAI_CAPACITY 30
 azd env set AZURE_SEARCH_SKU "standard"
 ```
 
 **Vystymo konfigūracija:**
 ```bash
-# Kaina optimizuoti nustatymai plėtrai
+# Sąnaudų optimizuoti nustatymai vystymui
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set AZURE_SEARCH_SKU "basic"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Nemokamas lygis
 ```
 
-### Saugi konfigūracija su Key Vault
+### Saugus konfigūravimas su Key Vault
 
 ```bicep
 // Key Vault for secrets
@@ -218,62 +218,62 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-## Diegimo darbo srautai
+## Diegimo darbo eiga
 
-### AZD plėtiniai „Foundry“
+### AZD plėtiniai Microsoft Foundry
 
-AZD teikia plėtinius, kurie prideda AI specifines galimybes darbui su „Microsoft Foundry“ paslaugomis:
+AZD teikia plėtinius, kurie prideda AI specifines galimybes darbui su Microsoft Foundry paslaugomis:
 
 ```bash
-# Įdiekite Foundry agentų plėtinį
+# Įdiegti Foundry agentų plėtinį
 azd extension install azure.ai.agents
 
-# Įdiekite smulkiojo derinimo plėtinį
+# Įdiegti smulkaus derinimo plėtinį
 azd extension install azure.ai.finetune
 
-# Įdiekite pasirinktinių modelių plėtinį
+# Įdiegti pasirinktinių modelių plėtinį
 azd extension install azure.ai.models
 
-# Išvardinkite įdiegtus plėtinius
+# Išvardinti įdiegtus plėtinius
 azd extension list --installed
 
-# Patikrinkite šiuo metu įdiegtos agentų plėtinio versiją
+# Peržiūrėti šiuo metu įdiegtą agentų plėtinio versiją
 azd extension show azure.ai.agents
 ```
 
-AI plėtiniai vis dar greitai tobulėja peržiūros režime. Jei komanda veikia kitaip nei čia pateikta, atnaujinkite atitinkamą plėtinį prieš spręsdami projekto problemas.
+AI plėtiniai vis dar greitai vystosi peržiūros stadijoje. Jei komanda veikia kitaip nei čia parodyta, atnaujinkite atitinkamą plėtinį prieš pradėdami spręsti projektui kitas problemas.
 
-### Agentų pirmojo diegimas su `azd ai`
+### Agentų pirmasis diegimas su `azd ai`
 
-Jei turite agentų manifestą, naudokite `azd ai agent init`, kad sukurtumėte projektą, prijungtą prie Foundry Agent Service:
+Jei turite agento manifestą, naudokite `azd ai agent init`, kad sukurti projektą, prijungtą prie Foundry Agent Service:
 
 ```bash
-# Inicializuojama iš agentų manifestų
+# Inicializuoti iš agento manifesto
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
 # Diegti į Azure
 azd up
 ```
 
-Naujausiuose peržiūros leidimuose `azure.ai.agents` taip pat pridėta palaikymas šablonų pagrindu `azd ai agent init` komandai. Jei naudojate naujesnius agentų pavyzdžius, patikrinkite plėtinio pagalbos informaciją apie galimus indikatorius jūsų įdiegtos versijos atžvilgiu.
+Naujesni peržiūros leidimai `azure.ai.agents` taip pat pridėjo šablonais pagrįstą inicializavimo palaikymą `azd ai agent init`. Jei sekate naujesnius agentų pavyzdžius, patikrinkite plėtinio pagalbą dėl tikslių vėliavų, prieinamų jūsų įdiegtame leidime.
 
-Skaitykite [AZD AI CLI komandas](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions), kad gautumėte pilną komandų sąrašą su indikatoriais.
+Žr. [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) visai komandų nuorodai ir vėliavoms.
 
 ### Diegimas viena komanda
 
 ```bash
-# Diegti viską viena komanda
+# Įdiekite viską per vieną komandą
 azd up
 
-# Arba diegti palaipsniui
+# Arba įdiekite palaipsniui
 azd provision  # Tik infrastruktūra
 azd deploy     # Tik programa
 
-# Skirta ilgai veikiančioms AI programų diegimams azd 1.23.11+
+# Skirta ilgai veikiančių AI programų diegimams azd 1.23.11+
 azd deploy --timeout 1800
 ```
 
-### Diegimai pagal aplinką
+### Aplinkai pritaikyti diegimai
 
 ```bash
 # Kūrimo aplinka
@@ -282,7 +282,7 @@ azd env set AZURE_LOCATION eastus
 azd env set ENVIRONMENT_TYPE dev
 azd up
 
-# Gamybos aplinka
+# Gamybinė aplinka
 azd env new production
 azd env set AZURE_LOCATION westus2
 azd env set ENVIRONMENT_TYPE prod
@@ -290,9 +290,9 @@ azd env set AZURE_OPENAI_CAPACITY 100
 azd up
 ```
 
-## Stebėsena ir matomumas
+## Stebėjimas ir matomumas
 
-### „Application Insights“ integracija
+### Application Insights integracija
 
 ```bicep
 // Application Insights for AI application monitoring
@@ -325,7 +325,7 @@ resource customMetrics 'Microsoft.Insights/components/analyticsItems@2015-05-01'
 }
 ```
 
-### Išlaidų stebėsena
+### Sąnaudų stebėjimas
 
 ```bicep
 // Budget alert for AI services
@@ -353,7 +353,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-## 🔐 Geriausios praktikos saugumui
+## 🔐 Saugumo geriausios praktikos
 
 ### Valdomos tapatybės konfigūracija
 
@@ -376,7 +376,7 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-### Tinklo saugumas
+### Tinklo sauga
 
 ```bicep
 // Private endpoints for AI services
@@ -466,12 +466,12 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-## Dažniausiai pasitaikančių problemų šalinimas
+## Dažnų problemų sprendimas
 
-### Problema 1: Viršytas OpenAI kvotas
+### Problema 1: Viršyta OpenAI kvota
 
 **Simptomai:**
-- Diegimas nepavyksta dėl kvotų klaidų
+- Diegimas neįvyksta dėl kvotos klaidų
 - 429 klaidos programos žurnaluose
 
 **Sprendimai:**
@@ -483,26 +483,26 @@ az cognitiveservices usage list --location eastus
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Laikinai sumažinkite talpą
+# Laikinai sumažinkite pajėgumą
 azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
 
-### Problema 2: Autentifikacijos klaidos
+### Problema 2: Autentifikavimo klaidos
 
 **Simptomai:**
 - 401/403 klaidos kviečiant AI paslaugas
-- Žinutės „Prieiga atmesta“
+- „Access denied“ pranešimai
 
 **Sprendimai:**
 ```bash
 # Patikrinti vaidmenų priskyrimus
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Patikrinti valdytos tapatybės konfigūraciją
+# Patikrinti valdomos tapatybės konfigūraciją
 az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 
-# Patvirtinti Key Vault prieigą
+# Patikrinti prieigą prie Key Vault
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
@@ -510,15 +510,15 @@ az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 
 **Simptomai:**
 - Modeliai neprieinami diegime
-- Konkretūs modelių versijų veikimo sutrikimai
+- Konkrečių modelio versijų gedimai
 
 **Sprendimai:**
 ```bash
-# Išvardinti turimus modelius pagal regioną
+# Išvardinti prieinamus modelius pagal regionus
 az cognitiveservices model list --location eastus
 
-# Atnaujinti modelio versiją bicep šablone
-# Patikrinti modelio talpos reikalavimus
+# Atnaujinti modelio versiją Bicep šablone
+# Patikrinti modelio pajėgumo reikalavimus
 ```
 
 ## Pavyzdžių šablonai
@@ -529,7 +529,7 @@ az cognitiveservices model list --location eastus
 
 **Paslaugos**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
 
-**Aprašymas**: Populiariausias Azure AI pavyzdys – gamybai paruošta RAG pokalbių programa, leidžianti užduoti klausimus apie jūsų pačių dokumentus. Naudoja GPT-4.1-mini pokalbiams, text-embedding-3-large įrašams ir Azure AI Search paieškai. Palaiko multimodalius dokumentus, balso įėjimą/išėjimą, „Microsoft Entra“ autentifikaciją ir „Application Insights“ sekimą.
+**Aprašymas**: Populiariausias Azure AI pavyzdys — gamybai paruošta RAG pokalbių programa, leidžianti užduoti klausimus apie jūsų dokumentus. Naudoja GPT-4.1-mini pokalbiams, text-embedding-3-large įterpimams ir Azure AI Search paieškai. Palaiko multimodalinius dokumentus, kalbos įvestį/išvestį, Microsoft Entra autentifikaciją ir Application Insights sekimą.
 
 **Greitas pradėjimas**:
 ```bash
@@ -543,7 +543,7 @@ azd up
 
 **Paslaugos**: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
 
-**Aprašymas**: .NET/C# atitikmuo Python RAG pokalbių pavyzdžiui. Sukurta naudojant ASP.NET Core Minimal API ir Blazor WebAssembly priekinę dalį. Įtraukta balso pokalbių palaikymas, GPT-4o-mini regėjimas ir papildomas .NET MAUI Blazor Hybrid darbalaukio/mobiliojo kliento modulis.
+**Aprašymas**: .NET/C# atitikmuo Python RAG pokalbių pavyzdžiui. Sukurta su ASP.NET Core Minimal API ir Blazor WebAssembly frontend'u. Apima balso pokalbį, GPT-4o-mini vizijos palaikymą ir palydovinį .NET MAUI Blazor Hybrid darbalaukio/mobiliųjų klientą.
 
 **Greitas pradėjimas**:
 ```bash
@@ -557,7 +557,7 @@ azd up
 
 **Paslaugos**: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
 
-**Aprašymas**: RAG pokalbių pavyzdžio Java versija, naudojanti Langchain4J AI orkestracijai. Palaiko mikroservisų įvykių architektūrą, kelių paieškos strategijų (tekstas, vektorius, hibridas), dokumentų įkėlimą su Azure Document Intelligence ir diegimą Azure Container Apps arba Azure Kubernetes Service.
+**Aprašymas**: Java versija RAG pokalbių pavyzdžio, naudojanti Langchain4J AI orkestracijai. Palaiko mikroservisų įvykių valdomą architektūrą, kelias paieškos strategijas (tekstas, vektorius, hibridinė), dokumentų kėlimą su Azure Document Intelligence ir diegimą tiek Azure Container Apps, tiek Azure Kubernetes Service.
 
 **Greitas pradėjimas**:
 ```bash
@@ -565,13 +565,13 @@ azd init --template azure-search-openai-demo-java
 azd up
 ```
 
-### Verslo mažmeninės prekybos padėjėjas su Azure AI Foundry
+### Įmonės mažmeninės prekybos Copilot su Microsoft Foundry
 
 **Saugykla**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
-**Paslaugos**: Azure OpenAI + Azure AI Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
+**Paslaugos**: Azure OpenAI + Microsoft Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
 
-**Aprašymas**: Pilnas mažmeninės prekybos RAG padėjėjas, naudojant Azure AI Foundry ir Prompty. Contoso Outdoor mažmeninės prekybos chatbot'as, kuris grindžia atsakymus produktų katalogo ir užsakymų duomenimis. Demonstruojamas visas GenAIOps darbo srautas – prototipavimas su Prompty, vertinimas su AI palaikomais vertintojais ir diegimas per AZD į Container Apps.
+**Aprašymas**: Pilnas mažmeninės prekybos RAG copilot, naudojantis Microsoft Foundry ir Prompty. Contoso Outdoor parduotuvės pokalbių robotas, kuris pagrindžia atsakymus produkto katalogo ir klientų užsakymų duomenimis. Demonstruoja visą GenAIOps darbo eigą — prototipavimas su Prompty, vertinimas su AI padedančiais vertintojais ir diegimas per AZD į Container Apps.
 
 **Greitas pradėjimas**:
 ```bash
@@ -579,13 +579,13 @@ azd init --template contoso-chat
 azd up
 ```
 
-### Kūrėjų rašymo daugiaagentinė programa
+### Kūrybinio rašymo daugiaagentinė programa
 
 **Saugykla**: [contoso-creative-writer](https://github.com/Azure-Samples/contoso-creative-writer)
 
 **Paslaugos**: Azure OpenAI + Azure AI Agent Service + Bing Grounding + Azure AI Search + Azure Container Apps
 
-**Aprašymas**: Daugiaagentis pavyzdys, demonstruojantis AI agentų orkestraciją su Prompty. Naudoja tyrimų agentą (Bing Grounding Azure AI Agent Service), produkto agentą (Azure AI Search), rašytojo agentą ir redaktoriaus agentą, kad bendradarbiautų ruošiant gerai ištirtus straipsnius. Įtraukia CI/CD vertinimą „GitHub Actions“.
+**Aprašymas**: Daugiaagentinis pavyzdys, demonstruojantis AI agentų orkestraciją su Prompty. Naudoja tyrimų agentą (Bing Grounding in Azure AI Agent Service), produktų agentą (Azure AI Search), rašytojo agentą ir redaktoriaus agentą, kad bendradarbiautų kuriant gerai ištirtus straipsnius. Įtraukia CI/CD su vertinimu GitHub Actions.
 
 **Greitas pradėjimas**:
 ```bash
@@ -593,13 +593,13 @@ azd init --template contoso-creative-writer
 azd up
 ```
 
-### Serverless RAG pokalbių programa (JavaScript/TypeScript)
+### Serverless RAG pokalbis (JavaScript/TypeScript)
 
 **Saugykla**: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
 
-**Paslaugos**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB NoSQL + LangChain.js
+**Paslaugos**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB for NoSQL + LangChain.js
 
-**Aprašymas**: Visiškai serverless RAG chatbot'as, naudojant LangChain.js su Azure Functions API ir Azure Static Web Apps talpinimui. Naudoja Azure Cosmos DB tiek kaip vektorių saugyklą, tiek kaip pokalbių istorijos duomenų bazę. Palaiko vietinį vystymą su Ollama nemokamam testavimui.
+**Aprašymas**: Visiškai be serverio veikiantis RAG pokalbių robotas, naudojantis LangChain.js su Azure Functions API ir Azure Static Web Apps talpinimui. Naudoja Azure Cosmos DB kaip tiek vektorių saugyklą, tiek pokalbių istorijos duomenų bazę. Palaiko vietinį vystymą su Ollama nemokamam testavimui.
 
 **Greitas pradėjimas**:
 ```bash
@@ -607,13 +607,13 @@ azd init --template serverless-chat-langchainjs
 azd up
 ```
 
-### Pokalbis su jūsų duomenų sprendimų greitintuvas
+### Pokalbis su jūsų duomenimis — sprendimo pagreitinimo pavyzdys
 
 **Saugykla**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
 
 **Paslaugos**: Azure OpenAI + Azure AI Search + Azure App Service + Azure Document Intelligence + Azure Functions + Azure Cosmos DB / PostgreSQL
 
-**Aprašymas**: Įmonių lygio RAG sprendimų greitintuvas su administravimo portalu dokumentų įkėlimui/valdymui, įvairių orkestratorių pasirinkimais (Semantic Kernel, LangChain, Prompt Flow), kalbos į tekstą, Microsoft Teams integracija ir galimybe rinktis PostgreSQL arba Cosmos DB duomenų bazę. Sukurta kaip pritaikoma pradžios vieta gamybos RAG scenarijams.
+**Aprašymas**: Įmoniniam naudojimui skirtas RAG sprendimo pagreitintuvas su administravimo portalu dokumentų kėlimui/valdymui, keliais orkestratoriaus pasirinkimais (Semantic Kernel, LangChain, Prompt Flow), kalbos į tekstą, Microsoft Teams integracija ir PostgreSQL arba Cosmos DB pasirinkimu kaip backend'u. Sukurtas kaip pritaikoma pradžia gamybiniams RAG scenarijams.
 
 **Greitas pradėjimas**:
 ```bash
@@ -621,13 +621,13 @@ azd init --template chat-with-your-data-solution-accelerator
 azd up
 ```
 
-### AI kelionių agentai – daugiaagentė MCP orkestracija
+### AI kelionių agentai — daugiaagentinė MCP orkestracija
 
 **Saugykla**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
 
-**Paslaugos**: Azure OpenAI + Azure AI Foundry + Azure Container Apps + MCP serveriai (.NET, Python, Java, TypeScript)
+**Paslaugos**: Azure OpenAI + Microsoft Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
 
-**Aprašymas**: Daugiagentės AI orkestracijos atmintinė, naudojant tris karkasus (LangChain.js, LlamaIndex.TS ir Microsoft Agent Framework). Apima MCP (Model Context Protocol) serverius keturiomis kalbomis, paleistus kaip serverless Azure Container Apps su OpenTelemetry stebėsena.
+**Aprašymas**: Referencinė programa daugiaagentinei AI orkestracijai, naudojant tris karkasus (LangChain.js, LlamaIndex.TS ir Microsoft Agent Framework). Yra MCP (Model Context Protocol) serveriai keturiomis kalbomis, išdėstyti kaip be serverio Azure Container Apps su OpenTelemetry stebėsena.
 
 **Greitas pradėjimas**:
 ```bash
@@ -635,13 +635,13 @@ azd init --template azure-ai-travel-agents
 azd up
 ```
 
-### Azure AI pradžia
+### Azure AI Starter
 
 **Saugykla**: [azd-ai-starter](https://github.com/Azure/azd-ai-starter)
 
-**Paslaugos**: Azure AI paslaugos + Azure OpenAI
+**Paslaugos**: Azure AI Services + Azure OpenAI
 
-**Aprašymas**: Minimalus Bicep šablonas, kuris diegia Azure AI paslaugas su sukonfigūruotais mašininio mokymosi modeliais. Lengvas pradinis taškas, kai jums reikia tik Azure AI infrastruktūros be pilno taikomųjų programų paketo.
+**Aprašymas**: Minimalus Bicep šablonas, kuris diegia Azure AI paslaugas su sukonfigūruotais mašininio mokymosi modeliais. Lengvas pradžios taškas, kai reikia tik Azure AI infrastruktūros be pilno programos paketo.
 
 **Greitas pradėjimas**:
 ```bash
@@ -649,21 +649,21 @@ azd init --template azd-ai-starter
 azd up
 ```
 
-> **Peržiūrėkite daugiau šablonų**: apsilankykite [Awesome AZD AI šablonų galerijoje](https://azure.github.io/awesome-azd/?tags=ai) ir raskite daugiau nei 80 AI specifinių AZD šablonų įvairioms kalboms ir scenarijams.
+> **Peržiūrėkite daugiau šablonų**: Apsilankykite [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) dėl daugiau nei 80 AI specifinių AZD šablonų įvairioms kalboms ir scenarijams.
 
 ## Tolimesni žingsniai
 
-1. **Išbandykite pavyzdžius**: pradėkite nuo paruošto šablono, atitinkančio jūsų naudojimo atvejį
-2. **Priderinkite pagal savo poreikius**: modifikuokite infrastruktūrą ir taikomosios programos kodą
-3. **Įtraukite stebėseną**: įgyvendinkite išsamų matomumą
-4. **Optimizuokite išlaidas**: koreguokite konfigūracijas pagal biudžetą
-5. **Užtikrinkite savo diegimą**: įgyvendinkite įmonių saugumo modelius
-6. **Skalėkite gamybai**: pridėkite kelių regionų ir aukšto prieinamumo funkcijas
+1. **Išbandykite pavyzdžius**: Pradėkite nuo paruošto šablono, atitinkančio jūsų naudojimo atvejį
+2. **Pritaikykite pagal poreikius**: Modifikuokite infrastruktūrą ir programos kodą
+3. **Pridėkite stebėjimą**: Įgyvendinkite išsamią matomumą
+4. **Optimizuokite sąnaudas**: Smulkiai sureguliuokite konfigūracijas pagal biudžetą
+5. **Užtikrinkite diegimą**: Įgyvendinkite įmonės saugumo modelius
+6. **Skalavimas į gamybą**: Pridėkite kelių regionų ir aukšto prieinamumo funkcijas
 
-## 🎯 Praktinės užduotys
+## 🎯 Praktiniai pratimai
 
-### Užduotis 1: Diegti „Microsoft Foundry Models“ pokalbių programą (30 min.)
-**Tikslas**: Diegti ir išbandyti gamybai paruoštą AI pokalbių programą
+### Pratimas 1: Diegti Microsoft Foundry Models pokalbių programą (30 minučių)
+**Tikslas**: Įdiegti ir išbandyti gamybai paruoštą AI pokalbių programą
 
 ```bash
 # Inicializuoti šabloną
@@ -681,27 +681,27 @@ azd up
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Chat app: $WEB_URL"
 
-# Stebėti DI operacijas
+# Stebėti dirbtinio intelekto operacijas
 azd monitor
 
-# Sutvarkyti po darbų
+# Išvalyti
 azd down --force --purge
 ```
 
 **Sėkmės kriterijai:**
-- [ ] Diegimas baigiasi be kvotų klaidų
+- [ ] Diegimas baigiamas be kvotos klaidų
 - [ ] Galima pasiekti pokalbių sąsają naršyklėje
 - [ ] Galima užduoti klausimus ir gauti AI palaikomus atsakymus
-- [ ] „Application Insights“ rodo telemetrijos duomenis
-- [ ] Sėkmingai išvalytos ištekliai
+- [ ] Application Insights rodo telemetrijos duomenis
+- [ ] Sėkmingai išvalyti ištekliai
 
-**Apskaičiuotos išlaidos**: 5–10 USD už 30 minučių testavimo
+**Apskaičiuotos išlaidos**: $5–10 už 30 minučių testavimo
 
-### Užduotis 2: Konfigūruoti daugiamodelių diegimą (45 min.)
-**Tikslas**: Diegti kelis AI modelius su skirtingomis konfigūracijomis
+### Pratimas 2: Konfigūruoti daugiamodelių diegimą (45 minutės)
+**Tikslas**: Įdiegti kelis AI modelius su skirtingomis konfigūracijomis
 
 ```bash
-# Sukurkite pasirinktinius Bicep nustatymus
+# Sukurti pasirinktą Bicep konfigūraciją
 cat > infra/ai-models.bicep << 'EOF'
 param openAiAccountName string
 param location string
@@ -752,13 +752,13 @@ azd show
 ```
 
 **Sėkmės kriterijai:**
-- [ ] Sėkmingai įdiegta kelių modelių
-- [ ] Taikyti skirtingi talpinimo nustatymai
-- [ ] Modeliai prieinami per API
-- [ ] Galima skambinti abiem modeliams iš programos
+- [ ] Kelis modeliai sėkmingai įdiegti
+- [ ] Taikyti skirtingi talpumo nustatymai
+- [ ] Modeliai pasiekiami per API
+- [ ] Galima kviesti abu modelius iš programos
 
-### Užduotis 3: Įgyvendinti išlaidų stebėseną (20 min.)
-**Tikslas**: Nustatyti biudžeto įspėjimus ir išlaidų sekimą
+### Pratimas 3: Įgyvendinti sąnaudų stebėjimą (20 minučių)
+**Tikslas**: Nustatyti biudžeto įspėjimus ir sąnaudų stebėjimą
 
 ```bash
 # Pridėti biudžeto įspėjimą prie Bicep
@@ -792,7 +792,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 EOF
 
-# Įdiegti biudžeto įspėjimą
+# Diegti biudžeto įspėjimą
 azd provision
 
 # Patikrinti dabartines išlaidas
@@ -801,20 +801,22 @@ az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-d
 
 **Sėkmės kriterijai:**
 - [ ] Sukurtas biudžeto įspėjimas Azure
-- [ ] Konfigūruoti el. laiškų pranešimai
-- [ ] Gali peržiūrėti išlaidų duomenis Azure portale
-- [ ] Biudžeto slenksčiai tinkamai nustatyti
+- [ ] Konfigūruoti el. pašto pranešimai
+- [ ] Galima peržiūrėti sąnaudų duomenis Azure portale
+- [ ] Biudžeto ribos nustatytos tinkamai
 
-## 💡 Dažnai užduodami klausimai
+## 💡 Dažniausiai užduodami klausimai
 
 <details>
-<summary><strong>Kaip sumažinti „Microsoft Foundry Models“ išlaidas vystymo metu?</strong></summary>
+<summary><strong>Kaip sumažinti Microsoft Foundry Models išlaidas vystymo metu?</strong></summary>
 
-1. **Naudokite nemokamą lygį**: „Microsoft Foundry Models“ suteikia 50 000 nemokamų žetonų per mėnesį
-2. **Sumažinkite talpinimą**: nustatykite talpinimą 10 TPM vietoje 30+ vystymui
-3. **Naudokite azd down**: atjungti išteklius, kai nekuriate aktyviai
-4. **Naudokite talpyklą**: įgyvendinkite Redis talpyklą pasikartojančioms užklausoms
-5. **Naudokite promptų inžineriją**: sumažinkite žetonų sunaudojimą efektyviais užklausimų šablonais
+1. **Naudokite nemokamą lygį**: Microsoft Foundry Models siūlo 50 000 žetonų/mėnesį nemokamai
+2. **Sumažinkite talpumą**: Nustatykite talpumą 10 TPM vietoje 30+ vystymui
+3. **Naudokite azd down**: Atlaisvinkite išteklius, kai aktyviai nevystote
+4. **Talpinkite atsakymus**: Įdiekite Redis talpyklą pasikartojančioms užklausoms
+5. **Naudokite promptų inžineriją**: Mažinkite žetonų naudojimą efektyviais promptais
+
+</details>
 ```bash
 # Vystymo konfigūracija
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -823,48 +825,48 @@ azd env set ENABLE_RESPONSE_CACHE true
 </details>
 
 <details>
-<summary><strong>Kuo skiriasi Microsoft Foundry modeliai nuo OpenAI API?</strong></summary>
+<summary><strong>Kuo skiriasi Microsoft Foundry Models ir OpenAI API?</strong></summary>
 
-**Microsoft Foundry modeliai**:
-- Verslo lygio saugumas ir atitiktis
-- Privatus tinklo integravimas
+**Microsoft Foundry Models**:
+- Įmonės lygio saugumas ir atitiktis
+- Privataus tinklo integracija
 - SLA garantijos
-- Valdomos tapatybės autentifikavimas
-- Galimi didesni kvotų limitai
+- Valdomos tapatybės autentifikacija
+- Galimos didesnės kvotos
 
 **OpenAI API**:
-- Greitesnis prieinamumas naujiems modeliams
+- Greitesnis prieigos prie naujų modelių laikas
 - Paprastesnis nustatymas
-- Mažesnė įėjimo riba
-- Tik viešasis internetas
+- Žemesnis įėjimo barjeras
+- Veikia tik per viešąjį internetą
 
-Produktinėms programoms **rekomenduojama naudoti Microsoft Foundry modelius**.
+Produktinėms programoms rekomenduojama naudoti **Microsoft Foundry Models**.
 </details>
 
 <details>
-<summary><strong>Kaip spręsti „Microsoft Foundry Models“ viršytų kvotų klaidas?</strong></summary>
+<summary><strong>Kaip tvarkyti Microsoft Foundry Models kvotos viršijimo klaidas?</strong></summary>
 
 ```bash
-# Patikrinti esamą kvotą
+# Patikrinkite esamą kvotą
 az cognitiveservices usage list --location eastus2
 
-# Išbandyti kitą regioną
+# Pabandykite kitą regioną
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Laikinai sumažinti talpą
+# Laikinai sumažinkite pajėgumą
 azd env set AZURE_OPENAI_CAPACITY 10
 azd provision
 
-# Paprašyti kvotos padidinimo
-# Eiti į Azure Portalą > Kvotos > Prašyti padidinimo
+# Prašykite kvotos padidinimo
+# Eikite į Azure portalą > Kvotos > Prašyti padidinimo
 ```
 </details>
 
 <details>
-<summary><strong>Ar galiu naudoti savo duomenis su Microsoft Foundry modeliais?</strong></summary>
+<summary><strong>Ar galiu naudoti savo duomenis su Microsoft Foundry Models?</strong></summary>
 
-Taip! Naudokite **Azure AI Search** RAG (Retrieval Augmented Generation):
+Taip! Naudokite **Azure AI Search** RAG (paieškos pagrįstas papildytas generavimas):
 
 ```yaml
 # azure.yaml
@@ -876,18 +878,18 @@ services:
       - AZURE_OPENAI_ENDPOINT
 ```
 
-Žr. [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) šabloną.
+Peržiūrėkite [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) šabloną.
 </details>
 
 <details>
 <summary><strong>Kaip apsaugoti AI modelių galinius taškus?</strong></summary>
 
-**Geros praktikos**:
-1. Naudokite valdytą tapatybę (nereikia API raktų)
-2. Įjunkite privačius galinius taškus
+**Geriausios praktikos**:
+1. Naudokite Managed Identity (nereikia API raktų)
+2. Įgalinkite Private Endpoints
 3. Konfigūruokite tinklo saugumo grupes
 4. Įgyvendinkite užklausų ribojimą
-5. Naudokite Azure Key Vault slapties duomenims
+5. Naudokite Azure Key Vault slaptoms reikšmėms
 
 ```bicep
 // Managed Identity authentication
@@ -909,25 +911,25 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 ## Bendruomenė ir palaikymas
 
-- **Microsoft Foundry Discord**: [#Azure kanalas](https://discord.gg/microsoft-azure)
-- **AZD GitHub**: [Klaidos ir diskusijos](https://github.com/Azure/azure-dev)
+- **Microsoft Foundry Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
+- **AZD GitHub**: [Problemos ir diskusijos](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Oficiali dokumentacija](https://learn.microsoft.com/azure/ai-studio/)
-- **Agentų įgūdžiai**: [Microsoft Foundry įgūdis skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) – Įdiekite Azure + Foundry agentų įgūdžius savo redaktoriuje su `npx skills add microsoft/github-copilot-for-azure`
+- **Agent Skills**: [Microsoft Foundry skill on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Įdiekite Azure + Foundry agentų įgūdžius savo redaktoriuje su `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**Skyrių navigacija:**
-- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
-- **📖 Dabartinis skyrius**: 2 skyrius - AI pirmaujanti plėtra
-- **⬅️ Ankstesnis skyrius**: [1 skyrius: Jūsų pirmasis projektas](../chapter-01-foundation/first-project.md)
-- **➡️ Kitas**: [AI modelių diegimas](ai-model-deployment.md)
-- **🚀 Kitas skyrius**: [3 skyrius: Konfigūracija](../chapter-03-configuration/configuration.md)
+**Skyriaus naršymas:**
+- **📚 Kurso pradžia**: [AZD For Beginners](../../README.md)
+- **📖 Dabartinis skyrius**: Chapter 2 - AI-First Development
+- **⬅️ Ankstesnis skyrius**: [Chapter 1: Your First Project](../chapter-01-foundation/first-project.md)
+- **➡️ Kitas**: [AI Model Deployment](ai-model-deployment.md)
+- **🚀 Kitas skyrius**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
-**Reikia pagalbos?** Prisijunkite prie mūsų bendruomenės diskusijų arba atidarykite problemą šiame saugykloje. Azure AI + AZD bendruomenė pasiruošusi jums padėti sėkmingai!
+**Reikia pagalbos?** Prisijunkite prie mūsų bendruomenės diskusijų arba atidarykite problemą saugykloje. Azure AI + AZD bendruomenė pasiruošusi padėti!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turi būti laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojama naudoti profesionalų žmogaus vertimą. Mes neatsakome už jokią painiavą ar klaidingą interpretaciją, kylančią dėl šio vertimo naudojimo.
+**Atsakomybės apribojimas**:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojama naudoti profesionalų žmogiškąjį vertimą. Mes neatsakome už jokius nesusipratimus ar neteisingą interpretaciją, kilusią naudojantis šiuo vertimu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

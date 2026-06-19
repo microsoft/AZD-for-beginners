@@ -1,47 +1,47 @@
-# Azure išteklių įsigijimas su AZD
+# Azure išteklių teikimas su AZD
 
 **Skyrių naršymas:**
 - **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
-- **📖 Dabartinis skyrius**: 4 skyrius – infrastruktūra kaip kodas ir diegimas
+- **📖 Dabartinis skyrius**: 4 skyrius - infrastruktūra kaip kodas ir diegimas
 - **⬅️ Ankstesnis**: [Diegimo vadovas](deployment-guide.md)
-- **➡️ Kitas skyrius**: [5 skyrius: daugiaagentės AI sprendimai](../../examples/retail-scenario.md)
-- **🔧 Susiję**: [6 skyrius: prieš diegimą vykdoma validacija](../chapter-06-pre-deployment/capacity-planning.md)
+- **➡️ Kitas skyrius**: [5 skyrius: Daugiaagentės DI sprendimai](../../examples/retail-scenario.md)
+- **🔧 Susiję**: [6 skyrius: Išankstinė diegimo patikra](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## Įvadas
 
-Ši išsami instrukcija apima viską, ką turite žinoti apie Azure išteklių įsigijimą ir valdymą naudojant Azure Developer CLI. Išmokite taikyti infrastruktūros kaip kodo (IaC) modelius nuo pagrindinio išteklių kūrimo iki sudėtingų įmonės lygio infrastruktūros architektūrų naudojant Bicep, ARM šablonus, Terraform ir Pulumi.
+Šis išsamus vadovas apima viską, ką reikia žinoti apie Azure išteklių teikimą ir valdymą naudojant Azure Developer CLI. Išmoksite įgyvendinti Infrastructure as Code (IaC) modelius nuo paprasto išteklių kūrimo iki pažangių įmonės lygio infrastruktūros architektūrų naudojant Bicep, ARM šablonus, Terraform ir Pulumi.
 
 ## Mokymosi tikslai
 
-Įveikę šį vadovą, jūs:
-- Įvaldysite infrastruktūros kaip kodo principus ir Azure išteklių įsigijimą
+Baigę šį vadovą, jūs:
+- Išmoksite Infrastructure as Code principų ir Azure išteklių teikimo
 - Suprasite kelis IaC tiekėjus, kuriuos palaiko Azure Developer CLI
-- Sukursite ir įgyvendinsite Bicep šablonus įprastoms programų architektūroms
-- Sugebėsite konfigūruoti išteklių parametrus, kintamuosius ir aplinkai specifinius nustatymus
-- Įgyvendinsite sudėtingus infrastruktūros modelius, įskaitant tinklų ir saugumo sprendimus
-- Valdysite išteklių gyvavimo ciklą, atnaujinimus ir priklausomybių tvarkymą
+- Suprasite ir įgyvendinsite Bicep šablonus bendroms programų architektūroms
+- Konfigūruosite išteklių parametrus, kintamuosius ir aplinkai specifinius nustatymus
+- Įgyvendinsite pažangius infrastruktūros modelius, įskaitant tinklų ir saugumo sprendimus
+- Valdysite išteklių gyvavimo ciklą, atnaujinimus ir priklausomybių sprendimą
 
 ## Mokymosi rezultatai
 
-Baigę šį kursą, galėsite:
-- Kurti ir diegti Azure infrastruktūrą naudodami Bicep ir ARM šablonus
-- Konfigūruoti sudėtingas daugiaservises architektūras su tinkamai reglamentuotomis priklausomybėmis
-- Įgyvendinti parametruotus šablonus keliai aplinkoms ir konfigūracijoms
-- Spręsti infrastruktūros diegimo problemas ir klaidų šalinimą
-- Taikyti Azure geros architektūros gairių principus infrastruktūros projektavime
-- Valdyti infrastruktūros atnaujinimus ir įdiegti versijavimo strategijas
+Baigę kursą galėsite:
+- Projektuoti ir tiekti Azure infrastruktūrą naudojant Bicep ir ARM šablonus
+- Konfigūruoti sudėtingas daugiapaslapių paslaugų architektūras su tinkamomis išteklių priklausomybėmis
+- Įgyvendinti parametrizuotus šablonus kelioms aplinkoms ir konfigūracijoms
+- Troubleshootinti (spręsti) infrastruktūros teikimo problemas ir išspręsti diegimo klaidas
+- Taikyti Azure Well-Architected Framework principus infrastruktūros projektavime
+- Valdyti infrastruktūros atnaujinimus ir įgyvendinti infrastruktūros versijavimo strategijas
 
-## Infrastruktūros įsigijimo apžvalga
+## Infrastruktūros teikimo apžvalga
 
-Azure Developer CLI palaiko keletą infrastruktūros kaip kodo (IaC) tiekėjų:
-- **Bicep** (rekomenduojama) – Azure specifinė domeno kalba
-- **ARM šablonai** – JSON pagrindu sukurti Azure išteklių valdymo šablonai
-- **Terraform** – daugia debesų infrastruktūros įrankis
-- **Pulumi** – modernus infrastruktūros kaip kodo sprendimas su programavimo kalbomis
+Azure Developer CLI palaiko kelis Infrastructure as Code (IaC) tiekėjus:
+- **Bicep** (rekomenduojama) - Azure domenui skirta specializuota kalba
+- **ARM Templates** - JSON pagrindu veikiantys Azure Resource Manager šablonai
+- **Terraform** - įrankis kelių debesų (multi-cloud) infrastruktūrai
+- **Pulumi** - modernesnis infrastruktūros kaip kodo požiūris su programavimo kalbomis
 
-## Azure išteklių supratimas
+## Supratimas apie Azure išteklius
 
-### Išteklių hierarchija
+### Išteklų hierarchija
 ```
 Azure Account
 └── Subscriptions
@@ -49,12 +49,12 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### Dažniausiai naudojamos Azure paslaugos programoms
-- **Skaičiavimas**: App Service, Container Apps, Functions, Virtual Machines
-- **Saugykla**: Saugyklos paskyra, Cosmos DB, SQL duomenų bazė, PostgreSQL
-- **Tinklai**: Virtualus tinklas, Application Gateway, CDN
+### Bendros Azure paslaugos programoms
+- **Skaičiavimo paslaugos**: App Service, Container Apps, Functions, Virtual Machines
+- **Saugykla**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
+- **Tinklų paslaugos**: Virtual Network, Application Gateway, CDN
 - **Saugumas**: Key Vault, Application Insights, Log Analytics
-- **AI/ML**: Cognitive Services, OpenAI, Machine Learning
+- **AI/ML**: Azure AI Services, Azure OpenAI, Azure Machine Learning
 
 ## Bicep infrastruktūros šablonai
 
@@ -128,7 +128,7 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### Pažangios Bicep modelių struktūros
+### Išplėstiniai Bicep modeliai
 
 #### Modulinė infrastruktūra
 ```bicep
@@ -200,7 +200,201 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ Duomenų bazių įsigijimas
+## 🌐 Terraform naudojimas su azd
+
+Bicep yra azd numatytasis pasirinkimas, tačiau azd taip pat palaiko **Terraform** — tai naudinga, jei jūsų komanda jau naudoja Terraform arba valdote kelių debesų infrastruktūrą. azd darbo eiga (`azd up`, `azd provision`, `azd down`) yra identiška; keičiasi tik infrastruktūros kalba ir aplanko struktūra.
+
+### Nurodykite azd naudoti Terraform
+
+Pridėkite `infra` skyrių į `azure.yaml`, nukreipiantį į Terraform tiekėją:
+
+```yaml
+# azure.yaml
+name: my-terraform-app
+infra:
+  provider: terraform   # default is "bicep"
+  path: infra           # folder containing your .tf files
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### Terraform katalogo struktūra
+
+Naudojant Terraform tiekėją, jūsų `infra/` aplankas naudoja `.tf` failus vietoje Bicep:
+
+```
+infra/
+├── main.tf            # resource definitions
+├── variables.tf       # input variables
+├── outputs.tf         # outputs azd reads back (endpoints, names)
+├── provider.tf        # azurerm/azurecaf providers + backend
+└── main.tfvars.json   # values azd injects per environment
+```
+
+### Minimalus `main.tf`
+
+```hcl
+# infra/main.tf
+resource "azurerm_resource_group" "rg" {
+  name     = "rg-${var.environment_name}"
+  location = var.location
+  tags     = { "azd-env-name" = var.environment_name }
+}
+
+resource "azurerm_service_plan" "plan" {
+  name                = "plan-${var.environment_name}"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  os_type             = "Linux"
+  sku_name            = "B1"
+}
+```
+
+### Kaip azd jungiasi prie jūsų Terraform išvesties
+
+azd skaito Terraform **outputs**, kad sužinotų jūsų galinius taškus ir prijungtų aplinkos reikšmes atgal į jūsų programą. Išvesties pavadinimai yra svarbūs — azd ieško konkrečių:
+
+```hcl
+# infra/outputs.tf
+output "AZURE_LOCATION" {
+  value = var.location
+}
+
+output "SERVICE_WEB_ENDPOINT_URL" {
+  value = azurerm_linux_web_app.web.default_hostname
+}
+```
+
+> **Svarbu:** azd naudoja žymą `azd-env-name` ir `AZURE_*` išvestis, kad stebėtų išteklius pagal aplinką. Visada pažymėkite savo išteklių grupę su `"azd-env-name" = var.environment_name`, kad `azd down` galėtų rasti ir pašalinti viską.
+
+### Diegimas su Terraform
+
+Komandos yra tokios pačios kaip su Bicep:
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd po gaubtu vykdo 'terraform plan'
+azd up                    # paruošimas + diegimas
+azd down --force          # naikina Terraform valdomus išteklius
+```
+
+> **Išankstinė sąlyga:** Terraform turi būti įdiegtas ir pasiekiamas jūsų `PATH`. azd valdo Terraform *workflow*, bet neįdiegia Terraform už jus. Būsenai azd pagal nutylėjimą naudoja vietinę būseną; komandai sukonfigūruokite nuotolinį backend'ą (pavyzdžiui, Azure Storage backend) faile `provider.tf`.
+
+Pilnam, vykdomam Terraform pagrindu sukurtų pradmenų rinkiniui peržiūrėti peržiūrėkite [Awesome AZD galeriją](https://azure.github.io/awesome-azd/) ir filtruokite pagal Terraform, arba žr. oficialią [azd Terraform dokumentaciją](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
+
+## 🧩 Pulumi naudojimas su azd
+
+Jei jūsų komanda rašo infrastruktūrą bendros paskirties kalba (TypeScript, Python, Go arba C#) vietoje DSL, azd taip pat palaiko **Pulumi**. Kaip ir su Terraform, `azd up` / `azd provision` / `azd down` darbo eiga nekeičiasi — keičiasi tik infrastruktūros įrankiai ir aplanko struktūra.
+
+### Nurodykite azd naudoti Pulumi
+
+```yaml
+# azure.yaml
+name: my-pulumi-app
+infra:
+  provider: pulumi      # default is "bicep"
+  path: infra           # folder containing your Pulumi program
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### Pulumi katalogo struktūra
+
+```
+infra/
+├── Pulumi.yaml          # project definition
+├── Pulumi.dev.yaml      # stack config (one per environment)
+├── index.ts             # your resource program (or __main__.py, main.go, etc.)
+├── package.json         # dependencies (for TypeScript)
+└── tsconfig.json
+```
+
+### Minimalus `index.ts`
+
+```typescript
+import * as azure from "@pulumi/azure-native";
+import * as pulumi from "@pulumi/pulumi";
+
+const environmentName = pulumi.getStack();
+
+// Priskirkite žymes visiems ištekliams, kad azd galėtų juos sekti ir pašalinti
+const tags = { "azd-env-name": environmentName };
+
+const rg = new azure.resources.ResourceGroup("rg", {
+  resourceGroupName: `rg-${environmentName}`,
+  tags,
+});
+
+// azd perskaito šias išvestis ir įkelia jas į jūsų aplinką
+export const AZURE_LOCATION = rg.location;
+export const SERVICE_WEB_ENDPOINT_URL = "https://...";
+```
+
+### Stacks atitinka azd aplinkas
+
+Pulumi organizuoja diegimus į **stacks**, o azd susieja kiekvieną azd aplinką su tokio pat pavadinimo Pulumi staku. Kai paleidžiate `azd env new staging`, azd parenka (arba sukuria) `staging` Pulumi stack'ą. Ta pati `azd-env-name` žymėjimo ir `AZURE_*` išvesties taisyklė galioja, todėl `azd down` gali rasti ir pašalinti viską.
+
+### Diegimas su Pulumi
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd po gaubtu vykdo 'pulumi preview'
+azd up                    # paruošimas + diegimas
+azd down --force          # vykdo 'pulumi destroy'
+```
+
+> **Išankstinė sąlyga:** Pulumi turi būti įdiegtas ir pasiekiamas jūsų `PATH`, ir jums reikės būsenos backend'o (Pulumi Cloud arba savarankiškai valdomas backend'as, pavyzdžiui, Azure Blob Storage). azd valdo Pulumi *workflow*, bet ne diegimą. Žr. oficialią [azd Pulumi dokumentaciją](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-pulumi-for-azd).
+
+## 🎯 Kur talpinti jūsų paslaugą
+
+Laukas `host` faile `azure.yaml` nulemia, kur paleidžiama jūsų programa. azd palaiko kelis host'us — teisingo pasirinkimo svarba dažnai didesnė už infrastruktūros kalbos pasirinkimą. Štai palyginimas pradedantiesiems:
+
+| `host` value | Tinka | Kodėl |
+|--------------|----------|-----|
+| `appservice` | Tradicinėms žiniatinklio programoms ir API | Paprasčiausias PaaS; nereikia konteinerių |
+| `staticwebapp` | Priekinės dalies SPA (React, Vue, Angular) | Globalus CDN + nemokamas SSL, įmontuota API palaikymas |
+| `function` | Įvykių valdomoms ir serverless apkrovoms | Masto iki nulio, mokama už vykdymą |
+| `containerapp` | Konteinerizuoti mikroservisai | Serverless konteineriai, masto iki nulio, įmontuotas įėjimas |
+| `aks` | Sudėtingiems orkestracijos poreikiams | Pilna Kubernetes kontrolė, kai jos tikrai reikia |
+| `springapp` | Java Spring Boot programoms | Valdomas Azure Spring Apps vykdymo laikas, pritaikytas Spring |
+
+### Kada rinktis AKS
+
+**Azure Kubernetes Service (`host: aks`)** suteikia pilną Kubernetes galingumą — pasirinktinius valdiklius, paslaugų tinklus (service meshes), sudėtingą tinklo valdymą ir smulkų planavimą. Ši galia ateina su operaciniu papildomu darbu: jūs valdote mazgų baseinus, atnaujinimus ir klasterio tinklą.
+
+```yaml
+services:
+  api:
+    project: ./src/api
+    language: js
+    host: aks          # deploys to an existing AKS cluster
+```
+
+> **Pradėkite paprasčiau, jei galite.** Daugumai mikroservisų **Container Apps** suteikia konteinerius, automatinį mastelį ir mastelį iki nulio be klasterio valdymo. Rinkitės AKS tik tada, kai jums reikia Kubernetes specifinių funkcijų.
+
+### Kada naudoti Azure Spring Apps
+
+**Azure Spring Apps (`host: springapp`)** yra valdomas vykdymo laikas, sukurtas specialiai Spring Boot. Jis tvarko service discovery, config server ir blue-green diegimus, todėl Java komandoms nereikia valdyti savo infrastruktūros.
+
+```yaml
+services:
+  catalog:
+    project: ./src/catalog
+    language: java
+    host: springapp
+```
+
+> Naudokite `springapp`, kai turite esamas Spring Boot programas ir norite vykdymo laiko, pritaikyto joms. Naujiems konteinerizuotiems Java programoms be Spring specifinių poreikių dažnai paprasčiau rinktis `containerapp`.
+
+## 🗃️ Duomenų bazių teikimas
 
 ### Cosmos DB
 ```bicep
@@ -298,7 +492,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 Saugumas ir slaptųjų raktų valdymas
+## 🔒 Saugumas ir slaptųjų duomenų valdymas
 
 ### Key Vault integracija
 ```bicep
@@ -370,7 +564,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 
 ## 🌍 Tinklų ir ryšio nustatymai
 
-### Virtualaus tinklo konfigūracija
+### Virtual Network konfigūracija
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -496,7 +690,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Stebėjimas ir stebimumas
+## 📊 Stebėjimas ir matomumas
 
 ### Application Insights
 ```bicep
@@ -527,7 +721,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Pasirinktinių metrikų ir perspėjimų kūrimas
+### Individualūs metrikai ir įspėjimai
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -561,7 +755,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Aplinkai pritaikytos konfigūracijos
+## 🔧 Aplinkai specifinės konfigūracijos
 
 ### Parametrų failai skirtingoms aplinkoms
 ```json
@@ -617,7 +811,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Sąlyginis išteklių įsigijimas
+### Sąlyginis išteklių teikimas
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -649,9 +843,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Pažangios įsigijimo struktūros
+## 🚀 Išplėstiniai teikimo modeliai
 
-### Daugiaregioninis diegimas
+### Daugiavietis diegimas
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -757,38 +951,38 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🧪 Infrastruktūros peržiūra ir validacija (NAUJA)
 
-### Peržiūrėkite infrastruktūros pokyčius prieš diegiant
+### Peržiūrėkite infrastruktūros pakeitimus prieš diegimą
 
-Funkcija `azd provision --preview` leidžia **simuliuoti infrastruktūros įsigijimą** prieš iš tikrųjų diegiant išteklius. Tai panašu į `terraform plan` arba `bicep what-if`, suteikiant jums **sausosios kaitos peržiūrą**, kokie pokyčiai būtų atlikti jūsų Azure aplinkoje.
+Savybė `azd provision --preview` leidžia jums **simuliuoti infrastruktūros teikimą** prieš iš tikrųjų diegiant išteklius. Tai panašu į `terraform plan` arba `bicep what-if`, suteikiant **dry-run** vaizdą apie tai, kokie pakeitimai būtų atlikti jūsų Azure aplinkoje.
 
 #### 🛠️ Ką tai daro
 - **Analizuoja jūsų IaC šablonus** (Bicep arba Terraform)
 - **Rodo išteklių pakeitimų peržiūrą**: pridėjimai, šalinimai, atnaujinimai
-- **Nepakeičia nieko** – tai tik skaitymo režimas, saugus naudoti
+- **Nevykdo pakeitimų** — tai tik skaitymo režimas ir saugu vykdyti
 
-#### Naudojimo atvejai
+#### Panaudojimo atvejai
 ```bash
-# Peržiūrėkite infrastruktūros pakeitimus prieš diegiant
+# Peržiūrėti infrastruktūros pakeitimus prieš diegimą
 azd provision --preview
 
 # Peržiūra konkrečiai aplinkai
 azd provision --preview -e production
 ```
 
-Ši komanda padeda:
-- **Patvirtinti infrastruktūros pakeitimus** prieš įsipareigojant išteklius
-- **Anksti aptikti klaidas** kūrimo cikle
-- **Saugiai bendradarbiauti** komandos aplinkoje
-- **Užtikrinti minimalias leidimų diegimo teises** be netikėtumų
+Ši komanda padeda jums:
+- **Patikrinti infrastruktūros pakeitimus** prieš diegiant resursus
+- **Aptikti klaidingas konfigūracijas anksti** plėtros cikle
+- **Saugiai bendradarbiauti** komandų aplinkose
+- **Užtikrinti mažiausių privilegijų diegimus** be staigmenų
 
 Ypač naudinga, kai:
-- Dirbate su sudėtingomis daugiaservisėmis aplinkomis
+- Dirbate su sudėtingomis daugiapaslapių paslaugų aplinkomis
 - Atliekate pakeitimus gamybos infrastruktūroje
-- Tikrinate šablonų pakeitimus prieš patvirtinimą (PR)
-- Mokote naujus komandos narius apie infrastruktūros modelius
+- Patvirtinate šablono pakeitimus prieš PR patvirtinimą
+- Mokote naujus komandos narius infrastruktūros modelių
 
 ### Pavyzdinė peržiūros išvestis
-Tiksli peržiūros išvestis priklauso nuo tiekėjo ir projekto struktūros, bet rezultatas aiškiai nurodo siūlomus pakeitimus prieš bet kokį taikymą.
+Tikroji peržiūros išvestis skirsis priklausomai nuo tiekėjo ir projekto struktūros, bet rezultatas turėtų aiškiai parodyti siūlomus pakeitimus prieš pradedant bet ką taikyti.
 
 ```bash
 $ azd provision --preview
@@ -813,19 +1007,19 @@ The following resources will be destroyed:
 ✅ Preview completed successfully!
 ```
 
-## �🔄 Išteklių atnaujinimai ir migracijos
+## �🔄 Resursų atnaujinimai ir migracijos
 
-### Saugūs išteklių atnaujinimai
+### Saugių išteklių atnaujinimai
 ```bash
 # Pirmiausia peržiūrėkite infrastruktūros pakeitimus (REKOMENDUOJAMA)
 azd provision --preview
 
-# Pritaikykite pakeitimus po peržiūros patvirtinimo
+# Taikykite pakeitimus po peržiūros patvirtinimo
 azd provision --confirm-with-no-prompt
 
-# Norėdami atšaukti, naudokite Git, kad grąžintumėte infrastruktūros pakeitimus:
-git revert HEAD  # Grąžinkite paskutinį infrastruktūros įsipareigojimą
-azd provision    # Pritaikykite ankstesnę infrastruktūros būseną
+# Rollback atveju naudokite Git, kad atšauktumėte infrastruktūros pakeitimus:
+git revert HEAD  # Atšaukti paskutinį infrastruktūros commit'ą
+azd provision    # Taikyti ankstesnę infrastruktūros būseną
 ```
 
 ### Duomenų bazių migracijos
@@ -857,9 +1051,9 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🎯 Gerosios praktikos
+## 🎯 Geriausios praktikos
 
-### 1. Išteklių vardų konvencijos
+### 1. Išteklių pavadinimų konvencijos
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -916,27 +1110,27 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Tolimesni žingsniai
 
-- [Prieš diegimą vykdoma planavimas](../chapter-06-pre-deployment/capacity-planning.md) – patikrinkite išteklių prieinamumą
-- [Dažnos problemos](../chapter-07-troubleshooting/common-issues.md) – infrastruktūros problemų sprendimas
-- [Derinimo vadovas](../chapter-07-troubleshooting/debugging.md) – diegimo problemų derinimas
-- [SKU pasirinkimas](../chapter-06-pre-deployment/sku-selection.md) – tinkamų paslaugų lygių pasirinkimas
+- [Išankstinis diegimo planavimas](../chapter-06-pre-deployment/capacity-planning.md) - Patikrinkite išteklių prieinamumą
+- [Dažnos problemos](../chapter-07-troubleshooting/common-issues.md) - Išspręskite infrastruktūros problemas
+- [Debug vadovas](../chapter-07-troubleshooting/debugging.md) - Debug'inimo gairės diegimo problemoms
+- [SKU pasirinkimas](../chapter-06-pre-deployment/sku-selection.md) - Pasirinkite tinkamus paslaugų lygius
 
 ## Papildomi ištekliai
 
 - [Azure Bicep dokumentacija](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Resource Manager šablonai](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
 - [Azure architektūros centras](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure gerosios architektūros gaires](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
 **Naršymas**
-- **Ankstesnis pamoka**: [Diegimo vadovas](deployment-guide.md)
-- **Kitas pamoka**: [Talpos planavimas](../chapter-06-pre-deployment/capacity-planning.md)
+- **Ankstesnė pamoka**: [Diegimo vadovas](deployment-guide.md)
+- **Kita pamoka**: [Išankstinis diegimo planavimas](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipkite dėmesį, kad automatizuoti vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojamas profesionalus žmogaus vertimas. Mes neatsakome už jokius nesusipratimus ar neteisingą šio vertimo supratimą.
+**Atsakomybės apribojimas**:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojama naudoti profesionalų žmogiškąjį vertimą. Mes neatsakome už jokius nesusipratimus ar neteisingą interpretaciją, kilusią naudojantis šiuo vertimu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

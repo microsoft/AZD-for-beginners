@@ -1,35 +1,36 @@
-# 4 skyrius: Infrastruktūra kaip kodas & Diegimas
+# Skyrius 4: Infrastruktūra kaip kodas ir diegimas
 
-**📚 Kursas**: [AZD Pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 1-1.5 valandos | **⭐ Sudėtingumas**: Vidutinis
+**📚 Kursas**: [AZD For Beginners](../../README.md) | **⏱️ Trukmė**: 1–1,5 val. | **⭐ Sudėtingumas**: Vidutinio sudėtingumo
 
 ---
 
 ## Apžvalga
 
-Šiame skyriuje aptariami infrastruktūros kaip kodo (IaC) šablonai su Bicep, resursų parengimas ir diegimo strategijos naudojant Azure Developer CLI.
+Šis skyrius apima Infrastruktūrą kaip kodą (IaC) modelius su Bicep šablonais, išteklių teikimą ir diegimo strategijas, naudojant Azure Developer CLI.
 
-> Patikrinta su `azd 1.23.12` 2026 metų kovą.
+> Patikrinta su `azd 1.25.6` 2026 m. birželį.
 
 ## Mokymosi tikslai
 
 Baigę šį skyrių, jūs:
 - Suprasite Bicep šablonų struktūrą ir sintaksę
-- Parengsite Azure resursus su komanda `azd provision`
-- Diegsite programas su komanda `azd deploy`
-- Įgyvendinsite mėlynai-žalią ir slankiojančio diegimo strategijas
+- Sukursite Azure išteklius naudodami `azd provision`
+- Diegsite programas naudodami `azd deploy`
+- Įgyvendinsite blue-green ir rolling diegimo strategijas
 
 ---
 
 ## 📚 Pamokos
 
 | # | Pamoka | Aprašymas | Laikas |
-|---|--------|-----------|--------|
-| 1 | [Resursų parengimas](provisioning.md) | Azure resursų valdymas naudojant AZD | 45 min |
+|---|--------|-------------|------|
+| 1 | [Resursų teikimas](provisioning.md) | Azure išteklių valdymas su AZD | 45 min |
 | 2 | [Diegimo vadovas](deployment-guide.md) | Programų diegimo strategijos | 45 min |
+| 3 | [Kurti savo šabloną](custom-templates.md) | Kurti ir publikuoti pakartotinai naudojamus azd šablonus | 30 min |
 
 ---
 
-## 🚀 Greitas pradžia
+## 🚀 Greita pradžia
 
 ```bash
 # Inicializuoti iš šablono
@@ -38,10 +39,10 @@ azd init --template azure-functions-python-v2-http
 # Peržiūrėti, kas bus sukurta
 azd provision --preview
 
-# Teikti tik infrastruktūrą
+# Tik paruošti infrastruktūrą
 azd provision
 
-# Diegti tik kodą
+# Tik diegti kodą
 azd deploy
 
 # Arba abu kartu
@@ -70,33 +71,33 @@ my-project/
 ## 🔧 Pagrindinės komandos
 
 | Komanda | Aprašymas |
-|---------|-----------|
-| `azd init` | Inicijuoti projektą |
-| `azd provision` | Sukurti Azure resursus |
+|---------|-------------|
+| `azd init` | Inicializuoti projektą |
+| `azd provision` | Sukurti Azure išteklius |
 | `azd deploy` | Diegti programos kodą |
-| `azd up` | parengti + diegti |
-| `azd down` | Ištrinti visus resursus |
+| `azd up` | sukurti + diegti |
+| `azd down` | Ištrinti visus išteklius |
 
 ---
 
-## 🔗 Navigacija
+## 🔗 Naršymas
 
 | Kryptis | Skyrius |
-|---------|---------|
+|-----------|---------|
 | **Ankstesnis** | [3 skyrius: Konfigūracija](../chapter-03-configuration/README.md) |
-| **Kitas** | [5 skyrius: Multi-agentų sprendimai](../chapter-05-multi-agent/README.md) |
+| **Kitas** | [5 skyrius: Daugiagentiniai sprendimai](../chapter-05-multi-agent/README.md) |
 
 ---
 
 ## 📖 Susiję ištekliai
 
-- [Patikrinimai prieš diegimą](../chapter-06-pre-deployment/README.md)
-- [Container App pavyzdžiai](../../examples/container-app/README.md)
-- [Database App pavyzdys](../../examples/database-app/README.md)
+- [Priešdiegimo patikrinimai](../chapter-06-pre-deployment/README.md)
+- [Konteinerių programų pavyzdžiai](../../examples/container-app/README.md)
+- [Duomenų bazės programos pavyzdys](../../examples/database-app/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Atsakomybės apribojimas**:
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų arba netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritiniais atvejais rekomenduojamas profesionalus vertimas žmogaus. Mes neprisiimame atsakomybės už bet kokius nesusipratimus ar klaidingas interpretacijas, kilusias dėl šio vertimo naudojimo.
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojama naudoti profesionalų žmogiškąjį vertimą. Mes neatsakome už jokius nesusipratimus ar neteisingą interpretaciją, kilusią naudojantis šiuo vertimu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,48 +1,49 @@
-# Diegimo vadovas – įvaldant AZD diegimus
+# Diegimo vadovas - AZD diegimų įvaldymas
 
-**Skyriaus naršymas:**
+**Skyriaus navigacija:**
 - **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
-- **📖 Dabartinis skyrius**: 4 skyrius – infrastruktūra kaip kodas ir diegimas
-- **⬅️ Ankstesnis skyrius**: [3 skyrius: konfigūracija](../chapter-03-configuration/configuration.md)
-- **➡️ Kitas**: [Ištekliai](provisioning.md)
-- **🚀 Kitas skyrius**: [5 skyrius: daugiaprogramiai AI sprendimai](../../examples/retail-scenario.md)
+- **📖 Dabartinis skyrius**: 4 skyrius - Infrastruktūra kaip kodas ir diegimas
+- **⬅️ Ankstesnis skyrius**: [3 skyrius: Konfigūracija](../chapter-03-configuration/configuration.md)
+- **➡️ Kitas**: [Išteklių teikimas](provisioning.md)
+- **🧩 Taip pat šiame skyriuje**: [Sukurti savo šabloną](custom-templates.md)
+- **🚀 Kitas skyrius**: [5 skyrius: Daugiagentės AI sprendimai](../../examples/retail-scenario.md)
 
 ## Įvadas
 
-Ši išsami instrukcija apima viską, ką reikia žinoti apie programų diegimą naudojant Azure Developer CLI – nuo paprastų vieno komandos diegimų iki sudėtingų gamybinių scenarijų su pasirinktiniais kabliais, keliais aplinkomis ir CI/CD integracija. Įvaldykite visą diegimo ciklą su praktiniais pavyzdžiais ir geriausiomis praktikomis.
+Šis išsamus vadovas apima viską, ką turite žinoti apie programų diegimą naudojant Azure Developer CLI — nuo paprastų vienos komandos diegimų iki pažangių gamybinių scenarijų su pritaikytais hook'ais, keliomis aplinkomis ir CI/CD integracija. Įvaldykite visą diegimo gyvavimo ciklą su praktiniais pavyzdžiais ir geriausia praktika.
 
 ## Mokymosi tikslai
 
-Baigę šią instrukciją jūs:
-- Įvaldysite visas Azure Developer CLI diegimo komandas ir darbo eigas
-- Suprasite visą diegimo gyvavimo ciklą nuo resursų paruošimo iki stebėjimo
-- Įgyvendinsite pasirinktinį diegimo automatizavimą naudojant prieš ir po diegimo kablius
-- Konfigūruosite kelias aplinkas su aplinkai būdingomis parametrų reikšmėmis
-- Nustatysite pažangias diegimo strategijas, įskaitant mėlyna-žalia ir kanarėlių diegimus
-- Integruosite azd diegimus su CI/CD vamzdynais ir DevOps darbo principais
+Įveikę šį vadovą, jūs:
+- Įvaldysite visus Azure Developer CLI diegimo komandų ir darbo eigų niuansus
+- Suprasite visą diegimo gyvavimo ciklą nuo išteklių teikimo iki stebėjimo
+- Įdiegsime pritaikytus diegimo hook'us prieš ir po diegimo automatizacijai
+- Konfigūruosite kelias aplinkas su aplinkai specifiniais parametrais
+- Nustatysite pažangias diegimo strategijas, įskaitant blue-green ir canary diegimus
+- Integruosite azd diegimus su CI/CD vamzdynais ir DevOps darbo srautais
 
 ## Mokymosi rezultatai
 
-Baigę vadovą, sugebėsite:
-- Savarankiškai vykdyti ir spręsti visas azd diegimo darbo eigas
-- Kurti ir įgyvendinti pasirinktinę automatizaciją naudojant kablius
-- Konfigūruoti gamybai tinkamus diegimus su tinkamu saugumu ir stebėjimu
-- Valdyti sudėtingus daugiaprinio aplinkos diegimo scenarijus
-- Optimizuoti diegimo veikimą ir įgyvendinti grąžinimo strategijas
-- Integruoti azd diegimus į įmonių DevOps praktiką
+Baigę šį skyrių, galėsite:
+- Vykdyti ir trikčių šalinimą visų azd diegimo darbo eigų savarankiškai
+- Kurti ir įgyvendinti pritaikytą diegimo automatizaciją naudojant hook'us
+- Konfigūruoti gamybai paruoštus diegimus su tinkama sauga ir stebėjimu
+- Valdyti sudėtingus kelių aplinkų diegimo scenarijus
+- Optimizuoti diegimo našumą ir įgyvendinti atsitraukimo (rollback) strategijas
+- Integruoti azd diegimus į įmonės DevOps praktiką
 
 ## Diegimo apžvalga
 
-Azure Developer CLI suteikia keletą diegimo komandų:
-- `azd up` – pilna darbo eiga (paruošimas + diegimas)
-- `azd provision` – sukuria/atnaujina tik Azure išteklius
-- `azd deploy` – diegia tik programos kodą
-- `azd package` – kuria ir pakuoja programas
+Azure Developer CLI suteikia kelias diegimo komandas:
+- `azd up` - Visa darbo eiga (provision + deploy)
+- `azd provision` - Kuria/atnaujina tik Azure išteklius
+- `azd deploy` - Diegia tik programos kodą
+- `azd package` - Kurią ir supakuoja programas
 
 ## Pagrindinės diegimo darbo eigos
 
 ### Pilnas diegimas (azd up)
-Dažniausiai naudojama darbo eiga naujiems projektams:
+Dažniausia darbo eiga naujiems projektams:
 ```bash
 # Diegti viską nuo nulio
 azd up
@@ -50,24 +51,24 @@ azd up
 # Diegti su konkrečia aplinka
 azd up --environment production
 
-# Diegti su individualiais parametrais
+# Diegti su pasirinktinais parametrais
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Tik infrastruktūros diegimas
-Kai reikia tik atnaujinti Azure išteklius:
+### Tik infrastruktūra
+Kai reikia atnaujinti tik Azure išteklius:
 ```bash
 # Paruošti/atnaujinti infrastruktūrą
 azd provision
 
-# Paruošti su sausos eigos režimu, kad peržiūrėti pakeitimus
+# Paruošti naudojant bandomąjį vykdymą, kad peržiūrėtumėte pakeitimus
 azd provision --preview
 
 # Paruošti konkrečias paslaugas
 azd provision --service database
 ```
 
-### Tik kodo diegimas
+### Tik kodas
 Greitiems programos atnaujinimams:
 ```bash
 # Diegti visas paslaugas
@@ -77,28 +78,28 @@ azd deploy
 # Diegiamos paslaugos (azd deploy)
 # - web: Diegiama... Atlikta
 # - api: Diegiama... Atlikta
-# SĖKMĖ: Jūsų diegimas užbaigtas per 2 minutes 15 sekundžių
+# SĖKMĖ: Jūsų diegimas užtruko 2 min. 15 sek.
 
 # Diegti konkrečią paslaugą
 azd deploy --service web
 azd deploy --service api
 
-# Diegti su pasirinktinais kūrimo argumentais
+# Diegti su pasirinktais kūrimo argumentais
 azd deploy --service api --build-arg NODE_ENV=production
 
-# Patvirtinkite diegimą
+# Patikrinti diegimą
 azd show --output json | jq '.services'
 ```
 
-### ✅ Diegimo patikrinimas
+### ✅ Diegimo patikra
 
-Po kiekvieno diegimo patikrinkite sėkmę:
+Po bet kurio diegimo, patikrinkite sėkmę:
 
 ```bash
-# Patikrinkite, ar visi servisai veikia
+# Patikrinkite, ar visos paslaugos veikia
 azd show
 
-# Išbandykite sveikatos patikros galus
+# Išbandykite sveikatos galinius taškus
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -110,14 +111,43 @@ azd monitor --logs
 ```
 
 **Sėkmės kriterijai:**
-- ✅ Visos paslaugos rodo „Veikia“ būseną
-- ✅ Sveikatos taškai grąžina HTTP 200
+- ✅ Visos paslaugos rodo „Running“ būseną
+- ✅ Health endpoint'ai grąžina HTTP 200
 - ✅ Nėra klaidų žurnalų per paskutines 5 minutes
-- ✅ Programa atsako į testinius užklausimus
+- ✅ Programa atsako į bandymų užklausas
 
 ## 🏗️ Diegimo proceso supratimas
 
-### 1 etapas: priešparuošimo kabliai
+### Nežinote, kas yra hook'ai? Pradėkite čia
+
+Hook'as yra komanda, kurį azd vykdo automatiškai tam tikru diegimo proceso momentu — prieš arba po išteklių suteikimo, ir prieš arba po kodo diegimo. Jie leidžia automatizuoti mažus darbus, kurie visuomet lydi diegimą: duomenų bazės užpildymas, migracijų vykdymas, išteklių kūrimas ar pagrindinis gyvos programos tikrinimas.
+
+| Hook'as | Vyksta… | Įprastas naudojimas |
+|------|-------|------------|
+| `preprovision` | Prieš išteklių sukūrimą | Patikrinti išankstines sąlygas, prisijungti prie registracijos |
+| `postprovision` | Po to, kai ištekliai egzistuoja | Konfigūruoti išteklius, paruošti duomenų bazę |
+| `predeploy` | Prieš kodo diegimą | Sugeneruoti front-end resursus, paleisti vienetinius testus |
+| `postdeploy` | Po to, kai kodas gyvas | Vykdyti DB migracijas, atlikti smoke-test'ą endpoint'ui |
+
+Hook'ai yra saugomi jūsų `azure.yaml`. Štai mažiausias įmanomas pavyzdys — jis tik išspausdina žinutę po diegimo:
+
+```yaml
+# azure.yaml
+hooks:
+  postdeploy:
+    shell: sh
+    run: echo "Deployment finished! 🎉"
+```
+
+Viskas — kitą kartą paleidus `azd up`, žinutė bus atspausdinta automatiškai. Taip pat galite paleisti hook'ą atskirai, be pilno diegimo, kas puikiai tinka testavimui:
+
+```bash
+azd hooks run postdeploy
+```
+
+Žemiau pateiktos fazės rodo realaus pasaulio hook'us (migracijos, testai, validacija) kiekvienam etapui.
+
+### 1 fazė: Prieš-provision hook'ai
 ```yaml
 # azure.yaml
 hooks:
@@ -131,13 +161,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### 2 etapas: infrastruktūros paruošimas
+### 2 fazė: Infrastruktūros sukūrimas
 - Skaito infrastruktūros šablonus (Bicep/Terraform)
-- Sukuria arba atnaujina Azure išteklius
+- Kuria arba atnaujina Azure išteklius
 - Konfigūruoja tinklus ir saugumą
-- Nustato stebėjimą ir žurnalų kaupimą
+- Nustato stebėjimą ir žurnalavimą
 
-### 3 etapas: po paruošimo kabliai
+### 3 fazė: Po-provision hook'ai
 ```yaml
 hooks:
   postprovision:
@@ -150,12 +180,12 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### 4 etapas: programos pakavimas
-- Kiekia programos kodą
+### 4 fazė: Programos pakavimas
+- Kloja programos kodą
 - Kuria diegimo artefaktus
-- Pakuoja tiksliai platformai (konteineriai, ZIP failai ir t.t.)
+- Pakuoja tikslinei platformai (konteineriai, ZIP failai ir pan.)
 
-### 5 etapas: prieš diegimo kabliai
+### 5 fazė: Prieš-deploy hook'ai
 ```yaml
 hooks:
   predeploy:
@@ -168,12 +198,12 @@ hooks:
       npm run db:migrate
 ```
 
-### 6 etapas: programos diegimas
-- Diegia sukurtas programas Azure paslaugose
-- Atnaujina konfigūracijas
-- Paleidžia/Perkrauna paslaugas
+### 6 fazė: Programos diegimas
+- Diegia supakuotas programas į Azure paslaugas
+- Atnaujina konfigūracijos nustatymus
+- Paleidžia/persikrauna paslaugas
 
-### 7 etapas: po diegimo kabliai
+### 7 fazė: Po-deploy hook'ai
 ```yaml
 hooks:
   postdeploy:
@@ -186,9 +216,57 @@ hooks:
       curl https://${WEB_URL}/health
 ```
 
-## 🎛️ Diegimo konfigūracija
+### Hook'ų klaidų tvarkymas
 
-### Paslaugų specifinės diegimo nuostatos
+Pagal numatytuosius nustatymus, **jei hook'o komanda išeina su nenuliniu kodu, azd sustabdo visą operaciją.** Tai dažnai yra pageidautina — nepavykusi migracija turėtų nutraukti diegimą, o ne pristatyti sugadintą programą. Tačiau tai reiškia, kad hook'ai turi būti rašomi atsargiai.
+
+**1. Padarykite klaidas garsias ir sąmoningas.** Hook'as laikomas nepavykusiu, kai jo paskutinė komanda grąžina nenulinį išeities kodą. Shell skriptuose pridėkite `set -e`, kad hook'as sustotų prie pirmos nepavykusios komandos, o ne tyliai tęstų:
+
+```yaml
+hooks:
+  predeploy:
+    shell: sh
+    run: |
+      set -e                      # stop on the first error
+      npm run test:unit           # if tests fail, the deploy halts here
+      npm run db:migrate
+```
+
+**2. Leiskite hook'ui nepavykti neblokuojant azd.** Neesminiams veiksmams (neprivalomas cache sušildymas, bandymas pranešti) nustatykite `continueOnError: true`. azd užfiksuos klaidą žurnale, bet tęsis toliau:
+
+```yaml
+hooks:
+  postdeploy:
+    shell: sh
+    continueOnError: true         # a failure here won't fail 'azd up'
+    run: curl -f https://${WEB_URL}/warmup || echo "Warm-up skipped"
+```
+
+**3. Testuokite hook'us izoliuotai prieš pilną paleidimą.** Jums nebūtina paleisti `azd up`, kad derintumėte hook'ą — paleiskite jį atskirai ir iteruokite greitai:
+
+```bash
+azd hooks run predeploy          # vykdo tik prieš diegimą skirtą hook'ą
+azd hooks run postdeploy --service api
+```
+
+**4. Atkreipkite dėmesį į OS specifines shells.** Hook'as, naudojantis `shell: pwsh`, reikalauja PowerShell įdiegtos mašinoje, kuri jį vykdo (įskaitant CI agentus). Naudokite `shell: sh` plačiausiam suderinamumui, arba pateikite tiek `windows`, tiek `posix` variantus:
+
+```yaml
+hooks:
+  postprovision:
+    posix:
+      shell: sh
+      run: ./scripts/setup.sh
+    windows:
+      shell: pwsh
+      run: ./scripts/setup.ps1
+```
+
+> **Derinimo patarimas:** paleiskite bet kurią azd komandą su `--debug`, kad pamatytumėte tikslų hook'o komandų eilutę ir visą jo išvestį — tai neįkainojama, kai hook'as veikia lokaliai, bet nepavyksta CI.
+
+## 🎛️ Diegimo konfigūracijos
+
+### Paslaugai specifiniai diegimo nustatymai
 ```yaml
 # azure.yaml
 services:
@@ -220,7 +298,7 @@ services:
 
 ### Aplinkai specifinės konfigūracijos
 ```bash
-# Vystymo aplinka
+# Kūrimo aplinka
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
@@ -231,7 +309,7 @@ azd env set NODE_ENV staging
 azd env set DEBUG false
 azd env set LOG_LEVEL info
 
-# Veiklos aplinka
+# Gamybinė aplinka
 azd env new production
 azd env set NODE_ENV production
 azd env set DEBUG false
@@ -240,7 +318,7 @@ azd env set LOG_LEVEL error
 
 ## 🔧 Pažangūs diegimo scenarijai
 
-### Daugiapaslauginės programos
+### Daugiapaslaugės programos
 ```yaml
 # Complex application with multiple services
 services:
@@ -276,24 +354,24 @@ services:
     host: function
 ```
 
-### Mėlyna-žalia diegimai
+### Blue-Green diegimai
 ```bash
-# Sukurkite mėlyną aplinką
+# Sukurti mėlyną aplinką
 azd env new production-blue
 azd up --environment production-blue
 
-# Išbandykite mėlyną aplinką
+# Išbandyti mėlyną aplinką
 ./scripts/test-environment.sh production-blue
 
-# Perjunkite srautą į mėlyną (rankinis DNS/arba apkrovos balansavimo atnaujinimas)
+# Perjungti srautą į mėlyną (rankinis DNS / apkrovos balansatoriaus atnaujinimas)
 ./scripts/switch-traffic.sh production-blue
 
-# Išvalykite žalią aplinką
+# Išvalyti žalią aplinką
 azd env select production-green
 azd down --force
 ```
 
-### Kanarėlių diegimai
+### Canary diegimai
 ```yaml
 # azure.yaml - Configure traffic splitting
 services:
@@ -307,7 +385,7 @@ services:
         percentage: 10
 ```
 
-### Pakopinis diegimas
+### Etapizuoti diegimai
 ```bash
 #!/bin/bash
 # deploy-staged.sh
@@ -364,7 +442,7 @@ services:
       maxReplicas: 10
 ```
 
-### Daugiapakopis Dockerfile optimizavimas
+### Multi-stage Dockerfile optimizacija
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -390,19 +468,19 @@ EXPOSE 3000
 CMD ["npm", "start"]
 ```
 
-## ⚡ Veikimo optimizavimas
+## ⚡ Našumo optimizavimas
 
-### Paslaugų specifiniai diegimai
+### Paslaugai specifiniai diegimai
 ```bash
-# Diegti konkretų servisą greitesniam iteravimui
+# Diegti konkrečią paslaugą greitesniam iteravimui
 azd deploy --service web
 azd deploy --service api
 
-# Diegti visus servisus
+# Diegti visas paslaugas
 azd deploy
 ```
 
-### Konstravimo kešavimas
+### Build cache naudojimas
 ```yaml
 # azure.yaml - Configure build commands
 services:
@@ -414,29 +492,29 @@ services:
 
 ### Efektyvūs kodo diegimai
 ```bash
-# Naudokite azd deploy (ne azd up) tik kodui keisti
-# Tai praleidžia infrastruktūros diegimą ir yra daug greitesnis
+# Naudokite azd deploy (ne azd up) tik kodo pakeitimams
+# Tai apeina infrastruktūros parengimą ir yra žymiai greitesnis
 azd deploy
 
-# Diegkite konkretų servisą greičiausiam iteravimui
+# Norėdami greitesnių iteracijų, diegkite konkrečią paslaugą
 azd deploy --service api
 ```
 
-## 🔍 Diegimo stebėsena
+## 🔍 Diegimo stebėjimas
 
 ### Realaus laiko diegimo stebėjimas
 ```bash
-# Stebėkite programą realiu laiku
+# Stebėti programą realiu laiku
 azd monitor --live
 
-# Peržiūrėkite programos žurnalus
+# Peržiūrėti programos žurnalus
 azd monitor --logs
 
-# Patikrinkite diegimo būseną
+# Patikrinti diegimo būseną
 azd show
 ```
 
-### Sveikatos patikros
+### Health check'ai
 ```yaml
 # azure.yaml - Configure health checks
 services:
@@ -450,14 +528,14 @@ services:
       retries: 3
 ```
 
-### Diegimo patvirtinimas po diegimo
+### Po diegimo validacija
 ```bash
 #!/bin/bash
 # scripts/validate-deployment.sh
 
 echo "Validating deployment..."
 
-# Patikrinti programos būklę
+# Patikrinti programos sveikatą
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -485,14 +563,14 @@ echo "✅ Deployment validation completed successfully"
 
 ## 🔐 Saugumo aspektai
 
-### Slaptųjų duomenų valdymas
+### Slapčių valdymas
 ```bash
-# Saugojimo slaptažodžiai saugiai
+# Laikykite slaptus duomenis saugiai
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
 azd env set API_KEY "your-api-key" --secret
 
-# Nuoroda į slaptažodžius faile azure.yaml
+# Nurodykite slaptus duomenis faile azure.yaml
 ```
 
 ```yaml
@@ -531,34 +609,34 @@ services:
           - external-api-key
 ```
 
-## 🚨 Grąžinimo strategijos
+## 🚨 Atsitraukimo (rollback) strategijos
 
-### Greitas grąžinimas
+### Greitas atsitraukimas
 ```bash
-# AZD neturi įmontuotos atšaukimo funkcijos. Rekomenduojami metodai:
+# AZD neturi įmontuotos atšaukimo funkcijos. Rekomenduojami būdai:
 
-# 1 variantas: Perdiegti iš Git (rekomenduojama)
-git revert HEAD  # Atšaukti probleminį commit
+# Parinktis 1: Iš naujo įdiegti iš Git (rekomenduojama)
+git revert HEAD  # Atšaukti probleminį commit'ą
 git push
 azd deploy
 
-# 2 variantas: Perdiegti konkretų commit
+# Parinktis 2: Iš naujo įdiegti konkretų commit'ą
 git checkout <previous-commit-hash>
 azd deploy
 git checkout main
 ```
 
-### Infrastruktūros grąžinimas
+### Infrastruktūros atsitraukimas
 ```bash
-# Peržiūrėkite infrastruktūros pakeitimus prieš taikydami
+# Peržiūrėkite infrastruktūros pakeitimus prieš juos taikydami
 azd provision --preview
 
-# Norėdami atšaukti infrastruktūrą, naudokite versijų kontrolę:
+# Infrastruktūros grąžinimui naudokite versijų valdymą:
 git revert HEAD  # Atšaukti infrastruktūros pakeitimus
 azd provision    # Taikyti ankstesnę infrastruktūros būseną
 ```
 
-### Duomenų bazės migracijos grąžinimas
+### Duomenų bazės migracijos atsitraukimas
 ```bash
 #!/bin/bash
 # scripts/rollback-database.sh
@@ -574,7 +652,7 @@ echo "Database rollback completed"
 
 ## 📊 Diegimo metrikos
 
-### Diegimo veikimo sekimas
+### Stebėkite diegimo našumą
 ```bash
 # Peržiūrėti dabartinę diegimo būseną
 azd show
@@ -582,11 +660,11 @@ azd show
 # Stebėti programą naudojant Application Insights
 azd monitor --overview
 
-# Peržiūrėti tiesioginius metrikos duomenis
+# Peržiūrėti tiesioginius rodiklius
 azd monitor --live
 ```
 
-### Pasirinktinių metrikų rinkimas
+### Vartotojiškų metrikų rinkimas
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -605,23 +683,23 @@ hooks:
 
 ## 🎯 Geriausios praktikos
 
-### 1. Aplinkos nuoseklumas
+### 1. Aplinkų nuoseklumas
 ```bash
-# Naudokite nuoseklų pavadinimų vartojimą
+# Naudokite nuoseklius pavadinimus
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Išlaikykite aplinkos atitikimą
+# Užtikrinkite aplinkų suderinamumą
 ./scripts/sync-environments.sh
 ```
 
 ### 2. Infrastruktūros patikra
 ```bash
-# Peržiūrėkite infrastruktūros pakeitimus prieš diegiant
+# Peržiūrėkite infrastruktūros pakeitimus prieš diegimą
 azd provision --preview
 
-# Naudokite ARM/Bicep sintaksės tikrinimą
+# Naudokite ARM/Bicep lintinimą
 az bicep lint --file infra/main.bicep
 
 # Patikrinkite Bicep sintaksę
@@ -659,7 +737,7 @@ hooks:
 
 ### 4. Dokumentavimas ir žurnalavimas
 ```bash
-# Dokumentuoti diegimo procedūras
+# Dokumentuokite diegimo procedūras
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env get-value AZURE_ENV_NAME)" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
@@ -667,15 +745,15 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Kiti žingsniai
 
-- [Ištekliai](provisioning.md) – gilinamės į infrastruktūros valdymą
-- [Priešdiegimo planavimas](../chapter-06-pre-deployment/capacity-planning.md) – planuokite diegimo strategiją
-- [Dažnos problemos](../chapter-07-troubleshooting/common-issues.md) – sprendžiame diegimo problemas
-- [Geriausios praktikos](../chapter-07-troubleshooting/debugging.md) – gamybai paruoštos diegimo strategijos
+- [Išteklių teikimas](provisioning.md) - Gyliau apie infrastruktūros valdymą
+- [Prieš-diegimo planavimas](../chapter-06-pre-deployment/capacity-planning.md) - Suplanuokite savo diegimo strategiją
+- [Dažnos problemos](../chapter-07-troubleshooting/common-issues.md) - Išspręskite diegimo problemas
+- [Geriausios praktikos](../chapter-07-troubleshooting/debugging.md) - Gamybai paruoštos diegimo strategijos
 
 ## 🎯 Praktinės diegimo užduotys
 
-### Užduotis 1: pakopinė diegimo darbo eiga (20 minučių)
-**Tikslas**: suprasti pilno ir pakopinio diegimo skirtumus
+### Užduotis 1: Inkrementinis diegimo darbo srautas (20 minučių)
+**Tikslas**: Įvaldyti skirtumą tarp pilno ir inkrementinio diegimo
 
 ```bash
 # Pradinis diegimas
@@ -683,13 +761,13 @@ mkdir deployment-practice && cd deployment-practice
 azd init --template todo-nodejs-mongo
 azd up
 
-# Įrašyti pradinio diegimo laiką
+# Užfiksuoti pradinio diegimo laiką
 echo "Full deployment: $(date)" > deployment-log.txt
 
 # Atlikti kodo pakeitimą
 echo "// Updated $(date)" >> src/api/src/server.js
 
-# Įdiegti tik kodą (greitai)
+# Diegti tik kodą (greitai)
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
@@ -701,18 +779,18 @@ azd down --force --purge
 ```
 
 **Sėkmės kriterijai:**
-- [ ] Pilnas diegimas trunka 5–15 minučių
-- [ ] Tik kodo diegimas trunka 2–5 minutes
-- [ ] Kodo pakeitimai atsispindi veikiančioje programoje
-- [ ] Infrastrukturai `azd deploy` metu nėra pakeitimų
+- [ ] Pilnas diegimas užtrunka 5–15 minučių
+- [ ] Tik kodo diegimas užtrunka 2–5 minutes
+- [ ] Kodo pakeitimai atsispindi diegtoje programoje
+- [ ] Infrastruktūra nesikeičia po `azd deploy`
 
-**Mokymosi rezultatas**: `azd deploy` yra 50-70 % greitesnis už `azd up` kodui pakeisti
+**Mokymosi rezultatas**: `azd deploy` yra 50–70% greitesnis už `azd up` kodo pakeitimams
 
-### Užduotis 2: pasirinktiniai diegimo kabliai (30 minučių)
-**Tikslas**: įgyvendinti prieš ir po diegimo automatizaciją
+### Užduotis 2: Tinkinti diegimo hook'ai (30 minučių)
+**Tikslas**: Įgyvendinti prieš ir po diegimo automatizaciją
 
 ```bash
-# Sukurti priešdiegiamos validacijos skriptą
+# Sukurti prieš diegimą skirtą patikros skriptą
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
@@ -724,7 +802,7 @@ if ! npm run test:unit; then
     exit 1
 fi
 
-# Patikrinti nepateiktus pakeitimus
+# Patikrinti, ar nėra neįrašytų pakeitimų
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -734,7 +812,7 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# Sukurti po diegimo vykdomą testą
+# Sukurti po diegimo trumpą patikros (smoke) testą
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
 echo "💨 Running smoke tests..."
@@ -753,7 +831,7 @@ EOF
 
 chmod +x scripts/post-deploy-test.sh
 
-# Pridėti kablius prie azure.yaml
+# Pridėti hooks į azure.yaml
 cat >> azure.yaml << 'EOF'
 
 hooks:
@@ -766,21 +844,21 @@ hooks:
     run: ./scripts/post-deploy-test.sh
 EOF
 
-# Išbandyti diegimą su kablys
+# Išbandyti diegimą su hooks
 azd deploy
 ```
 
 **Sėkmės kriterijai:**
-- [ ] Prieš diegimą skriptas paleidžiamas prieš diegimą
-- [ ] Diegimas nutraukiamas, jei testai nepavyksta
-- [ ] Po diegimo vyksta sveikatos patikra (smoke test)
-- [ ] Kabliai vykdomi teisinga tvarka
+- [ ] Prieš diegimą paleidžiamas skriptas
+- [ ] Diegimas nutraukiamas, jei testai nepraeina
+- [ ] Po diegimo atliekamas smoke-test'as patikrina būklę
+- [ ] Hook'ai vykdomi teisinga tvarka
 
-### Užduotis 3: daugiaplinis diegimo strategija (45 minutės)
-**Tikslas**: įgyvendinti pakopinę diegimo darbo eigą (dev → staging → production)
+### Užduotis 3: Kelių aplinkų diegimo strategija (45 minutės)
+**Tikslas**: Įgyvendinti etapizuotą diegimo darbo eigą (dev → staging → production)
 
 ```bash
-# Sukurti diegimo scenarijų
+# Sukurti diegimo skriptą
 cat > deploy-staged.sh << 'EOF'
 #!/bin/bash
 set -e
@@ -797,7 +875,7 @@ azd up --no-prompt
 echo "Running dev tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# 2 žingsnis: Diegti į staging aplinką
+# 2 žingsnis: Diegti į paruošiamąją aplinką
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
@@ -834,46 +912,46 @@ azd env new dev
 azd env new staging
 azd env new production
 
-# Vykdyti etapinį diegimą
+# Paleisti etapinį diegimą
 ./deploy-staged.sh
 ```
 
 **Sėkmės kriterijai:**
-- [ ] Dev aplinka sėkmingai įdiegta
-- [ ] Staging aplinka sėkmingai įdiegta
-- [ ] Gamybai reikalingas rankinis patvirtinimas
-- [ ] Visose aplinkose veikia sveikatos patikros
-- [ ] Galima atšaukti diegimą jei reikia
+- [ ] Dev aplinka sėkmingai diegiama
+- [ ] Staging aplinka sėkmingai diegiama
+- [ ] Reikalaujamas rankinis patvirtinimas gamybai
+- [ ] Visos aplinkos turi veikiančius health check'us
+- [ ] Gali būti atliekamas atsitraukimas, jei reikia
 
-### Užduotis 4: atšaukimo strategija (25 minutės)
-**Tikslas**: įgyvendinti ir išbandyti diegimo grąžinimo strategiją naudojant Git
+### Užduotis 4: Atsitraukimo strategija (25 minutes)
+**Tikslas**: Įgyvendinti ir ištestuoti diegimo atsitraukimą naudojant Git
 
 ```bash
 # Diegti v1
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# Išsaugoti v1 commit hash
+# Išsaugoti v1 commito hashą
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# Diegti v2 su trikdančiu pakeitimu
+# Diegti v2 su nesuderinamu pakeitimu
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
 azd deploy
 
-# Aptikti klaidą ir grąžinti atgal
+# Nustatyti gedimą ir atkurti ankstesnę versiją
 if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # Grąžinti atgal naudojant git
+    # Atkurti naudojant git
     git revert HEAD --no-edit
     
-    # Aplinkos grąžinimas atgal
+    # Atstatyti aplinką
     azd env set APP_VERSION "1.0.0"
     
-    # Perdiegi v1
+    # Pakartotinai diegti v1
     azd deploy
     
     echo "✅ Rolled back to v1.0.0"
@@ -881,17 +959,17 @@ fi
 ```
 
 **Sėkmės kriterijai:**
-- [ ] Suvokti diegimo nesėkmes
-- [ ] Gružinimo skriptas paleidžiamas automatiškai
+- [ ] Gali aptikti diegimo klaidas
+- [ ] Atsitraukimo skriptas vykdomas automatiškai
 - [ ] Programa grįžta į veikiančią būseną
-- [ ] Sveikatos patikros praeina po grąžinimo
+- [ ] Health check'ai praeina po atsitraukimo
 
-## 📊 Diegimo metrikų sekimas
+## 📊 Diegimo metrikos stebėjimas
 
-### Stebėkite savo diegimo veikimą
+### Stebėkite diegimo našumą
 
 ```bash
-# Sukurti diegimo metrikos scenarijų
+# Sukurkite diegimo metrikų skriptą
 cat > track-deployment.sh << 'EOF'
 #!/bin/bash
 START_TIME=$(date +%s)
@@ -908,7 +986,7 @@ echo "Timestamp: $(date)"
 echo "Environment: $(azd env get-value AZURE_ENV_NAME)"
 echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
 
-# Įrašyti į failą
+# Rašykite į failą
 echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
 EOF
 
@@ -920,29 +998,29 @@ chmod +x track-deployment.sh
 
 **Analizuokite savo metrikas:**
 ```bash
-# Peržiūrėti diegimo istoriją
+# Peržiūrėti diegimų istoriją
 cat deployment-metrics.csv
 
-# Apskaičiuoti vidutinį diegimo laiką
+# Apskaičiuoti vidutinį diegimo trukmę
 awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
 ```
 
 ## Papildomi ištekliai
 
-- [Azure Developer CLI diegimo nuoroda](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Azure App Service diegimas](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Azure Container Apps diegimas](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Azure Functions diegimas](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Azure Developer CLI Deployment Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Azure App Service Deployment](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Azure Container Apps Deployment](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Azure Functions Deployment](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
-**Naršymas**
+**Navigacija**
 - **Ankstesnė pamoka**: [Jūsų pirmasis projektas](../chapter-01-foundation/first-project.md)
-- **Kita pamoka**: [Ištekliai](provisioning.md)
+- **Kita pamoka**: [Išteklių teikimas](provisioning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, prašome atkreipti dėmesį, kad automatizuotuose vertimuose gali būti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojamas profesionalus žmogaus vertimas. Mes neatsakome už bet kokius nesusipratimus ar klaidingus interpretavimus, kylančius dėl šio vertimo naudojimo.
+**Atsakomybės apribojimas**:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojama naudoti profesionalų žmogiškąjį vertimą. Mes neatsakome už jokius nesusipratimus ar neteisingą interpretaciją, kilusią naudojantis šiuo vertimu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
