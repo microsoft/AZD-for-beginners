@@ -1,53 +1,54 @@
 # 部署指南 - 精通 AZD 部署
 
 **章节导航：**
-- **📚 Course Home**: [AZD 初学者](../../README.md)
-- **📖 Current Chapter**: 第4章 - 基础设施即代码与部署
-- **⬅️ Previous Chapter**: [第3章：配置](../chapter-03-configuration/configuration.md)
-- **➡️ Next**: [资源预配](provisioning.md)
-- **🚀 Next Chapter**: [第5章：多代理 AI 解决方案](../../examples/retail-scenario.md)
+- **📚 课程主页**: [AZD 入门](../../README.md)
+- **📖 当前章节**: 第4章 - 基础设施即代码 与 部署
+- **⬅️ 上一章**: [第3章：配置](../chapter-03-configuration/configuration.md)
+- **➡️ 下一章**: [资源预配](provisioning.md)
+- **🧩 本章其他内容**: [编写你自己的模板](custom-templates.md)
+- **🚀 下一章节**: [第5章：多代理 AI 解决方案](../../examples/retail-scenario.md)
 
 ## 介绍
 
-本综合指南涵盖使用 Azure Developer CLI 部署应用所需了解的一切内容，从基本的单命令部署到具有自定义钩子、多个环境和 CI/CD 集成的高级生产场景。通过实用示例和最佳实践，掌握完整的部署生命周期。
+本综合指南涵盖使用 Azure Developer CLI 部署应用所需的所有内容，从基本的一步命令部署到具有自定义钩子、多环境和 CI/CD 集成的高级生产场景。通过实用示例和最佳实践掌握完整的部署生命周期。
 
 ## 学习目标
 
-完成本指南后，您将能够：
-- 掌握所有 Azure Developer CLI 的部署命令和工作流
+完成本指南后，你将能够：
+- 掌握所有 Azure Developer CLI 部署命令和工作流
 - 理解从预配到监控的完整部署生命周期
-- 实现用于部署前后自动化的自定义部署钩子
-- 使用环境特定参数配置多个环境
-- 设置高级部署策略，包括蓝绿部署和金丝雀部署
+- 为部署前后实现自定义部署钩子以进行自动化
+- 配置具有环境特定参数的多环境
+- 设置包括蓝绿和金丝雀部署在内的高级部署策略
 - 将 azd 部署与 CI/CD 管道和 DevOps 工作流集成
 
 ## 学习成果
 
-完成后，您将能够：
-- 独立执行并排查所有 azd 部署工作流的问题
-- 设计并使用钩子实现自定义部署自动化
-- 配置具有适当安全性和监控的生产就绪部署
+完成后，你将能够：
+- 独立执行并排查所有 azd 部署工作流
+- 使用钩子设计并实现自定义部署自动化
+- 配置适用于生产的部署，具备适当的安全性和监控
 - 管理复杂的多环境部署场景
 - 优化部署性能并实现回滚策略
-- 将 azd 部署集成到企业级 DevOps 实践中
+- 将 azd 部署整合到企业级 DevOps 实践中
 
-## 部署概述
+## 部署概览
 
-Azure Developer CLI 提供以下几个部署命令：
+Azure Developer CLI 提供了若干部署命令：
 - `azd up` - 完整工作流（预配 + 部署）
 - `azd provision` - 仅创建/更新 Azure 资源
 - `azd deploy` - 仅部署应用代码
-- `azd package` - 构建并打包应用程序
+- `azd package` - 构建并打包应用
 
 ## 基本部署工作流
 
 ### 完整部署 (azd up)
 新项目最常见的工作流：
 ```bash
-# 从头开始部署所有内容
+# 从头部署所有内容
 azd up
 
-# 使用指定环境部署
+# 使用特定环境部署
 azd up --environment production
 
 # 使用自定义参数部署
@@ -55,12 +56,12 @@ azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
 ### 仅基础设施部署
-当您只需更新 Azure 资源时：
+当你只需更新 Azure 资源时：
 ```bash
 # 配置/更新基础设施
 azd provision
 
-# 使用模拟运行（dry-run）进行预配以预览更改
+# 使用 dry-run 进行配置以预览更改
 azd provision --preview
 
 # 配置特定服务
@@ -68,16 +69,16 @@ azd provision --service database
 ```
 
 ### 仅代码部署
-用于快速的应用更新：
+用于快速应用更新：
 ```bash
 # 部署所有服务
 azd deploy
 
-# 预期输出：
-# 正在部署服务（azd deploy）
+# 预期输出:
+# 正在部署服务 (azd deploy)
 # - web: 正在部署... 完成
 # - api: 正在部署... 完成
-# SUCCESS：您的部署在 2 分钟 15 秒内完成
+# 成功: 您的部署在 2 分钟 15 秒内完成
 
 # 部署特定服务
 azd deploy --service web
@@ -92,7 +93,7 @@ azd show --output json | jq '.services'
 
 ### ✅ 部署验证
 
-在任何部署之后，验证成功情况：
+在任何部署之后，验证是否成功：
 
 ```bash
 # 检查所有服务是否正在运行
@@ -105,19 +106,48 @@ API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
 curl -f "$API_URL/health" || echo "❌ API health check failed"
 
-# 监视错误（默认在浏览器中打开）
+# 监控错误（默认在浏览器中打开）
 azd monitor --logs
 ```
 
 **成功标准：**
-- ✅ 所有服务显示“运行中”状态
+- ✅ 所有服务显示为“运行中”状态
 - ✅ 健康端点返回 HTTP 200
-- ✅ 最近 5 分钟内没有错误日志
+- ✅ 最近5分钟内无错误日志
 - ✅ 应用对测试请求有响应
 
-## 🏗️ 了解部署过程
+## 🏗️ 理解部署流程
 
-### 阶段 1：预配前钩子
+### 初次接触钩子？从这里开始
+
+<strong>钩子</strong> 是 azd 在部署流程的特定时刻自动运行的命令——在预配之前或之后，以及在部署代码之前或之后。它们让你自动化那些总是伴随部署的小事务：为数据库注入初始数据、运行迁移、构建资源或对线上应用进行冒烟测试。
+
+| 钩子 | 运行时… | 常见用途 |
+|------|-------|------------|
+| `preprovision` | 在资源创建之前 | 验证前置条件，登录到注册表 |
+| `postprovision` | 在资源存在之后 | 配置资源，设置数据库 |
+| `predeploy` | 在代码部署之前 | 构建前端资源，运行单元测试 |
+| `postdeploy` | 在代码上线之后 | 运行数据库迁移，对端点进行冒烟测试 |
+
+钩子保存在你的 `azure.yaml` 中。下面是最小的示例——它在部署后打印一条消息：
+
+```yaml
+# azure.yaml
+hooks:
+  postdeploy:
+    shell: sh
+    run: echo "Deployment finished! 🎉"
+```
+
+就是这样——下次运行 `azd up` 时，这条消息会自动打印。你也可以单独运行某个钩子，而不进行完整部署，这对于测试非常有用：
+
+```bash
+azd hooks run postdeploy
+```
+
+下面各阶段展示了实际世界中的钩子（迁移、测试、验证）。
+
+### 阶段1：预配前钩子
 ```yaml
 # azure.yaml
 hooks:
@@ -131,13 +161,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### 阶段 2：基础设施预配
+### 阶段2：基础设施预配
 - 读取基础设施模板（Bicep/Terraform）
 - 创建或更新 Azure 资源
 - 配置网络和安全
 - 设置监控和日志记录
 
-### 阶段 3：预配后钩子
+### 阶段3：预配后钩子
 ```yaml
 hooks:
   postprovision:
@@ -150,12 +180,12 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### 阶段 4：应用打包
+### 阶段4：应用打包
 - 构建应用代码
-- 创建部署产物
+- 创建部署制品
 - 为目标平台打包（容器、ZIP 文件等）
 
-### 阶段 5：部署前钩子
+### 阶段5：部署前钩子
 ```yaml
 hooks:
   predeploy:
@@ -168,12 +198,12 @@ hooks:
       npm run db:migrate
 ```
 
-### 阶段 6：应用部署
+### 阶段6：应用部署
 - 将打包的应用部署到 Azure 服务
 - 更新配置设置
 - 启动/重启服务
 
-### 阶段 7：部署后钩子
+### 阶段7：部署后钩子
 ```yaml
 hooks:
   postdeploy:
@@ -185,6 +215,54 @@ hooks:
       echo "Warming up applications..."
       curl https://${WEB_URL}/health
 ```
+
+### 处理钩子错误
+
+默认情况下，**如果钩子命令以非零代码退出，azd 会停止整个操作。** 这通常是你想要的——失败的迁移应该中止部署，而不是发布一个损坏的应用。但这也意味着钩子需要谨慎编写。
+
+**1. 让失败显而易见并有意为之。** 当钩子最后一个命令返回非零退出代码时，钩子会失败。在 shell 脚本中，添加 `set -e`，以便钩子在遇到第一个失败命令时停止，而不是静默继续：
+
+```yaml
+hooks:
+  predeploy:
+    shell: sh
+    run: |
+      set -e                      # stop on the first error
+      npm run test:unit           # if tests fail, the deploy halts here
+      npm run db:migrate
+```
+
+**2. 允许钩子失败而不停止 azd。** 对于非关键步骤（可选的缓存预热、尽力而为的通知），设置 `continueOnError: true`。azd 会记录失败但继续执行：
+
+```yaml
+hooks:
+  postdeploy:
+    shell: sh
+    continueOnError: true         # a failure here won't fail 'azd up'
+    run: curl -f https://${WEB_URL}/warmup || echo "Warm-up skipped"
+```
+
+**3. 在完整运行前单独测试钩子。** 你不必运行 `azd up` 来调试钩子——单独运行它并快速迭代：
+
+```bash
+azd hooks run predeploy          # 只运行 predeploy 钩子
+azd hooks run postdeploy --service api
+```
+
+**4. 注意操作系统特定的 shell。** 使用 `shell: pwsh` 的钩子需要在运行它的机器（包括 CI 代理）上安装 PowerShell。使用 `shell: sh` 来获得最广泛的可移植性，或同时提供 `windows` 和 `posix` 变体：
+
+```yaml
+hooks:
+  postprovision:
+    posix:
+      shell: sh
+      run: ./scripts/setup.sh
+    windows:
+      shell: pwsh
+      run: ./scripts/setup.ps1
+```
+
+> **调试提示：** 使用 `--debug` 运行任何 azd 命令以查看确切的钩子命令行及其完整输出——当钩子在本地可行但在 CI 中失败时，这非常有价值。
 
 ## 🎛️ 部署配置
 
@@ -285,7 +363,7 @@ azd up --environment production-blue
 # 测试蓝色环境
 ./scripts/test-environment.sh production-blue
 
-# 将流量切换到蓝色（手动更新 DNS/负载均衡器）
+# 切换流量到蓝色（手动更新 DNS/负载均衡器）
 ./scripts/switch-traffic.sh production-blue
 
 # 清理绿色环境
@@ -340,7 +418,7 @@ fi
 
 ## 🐳 容器部署
 
-### 容器应用部署
+### Container App 部署
 ```yaml
 services:
   api:
@@ -414,11 +492,11 @@ services:
 
 ### 高效的代码部署
 ```bash
-# 对于仅代码更改，请使用 azd deploy（不要使用 azd up）
-# 这会跳过基础设施预配，快得多
+# 对于仅代码更改，请使用 azd deploy（而不是 azd up）
+# 这会跳过基础设施的预配，速度快得多
 azd deploy
 
-# 部署特定服务以获得最快的迭代速度
+# 部署特定服务以实现最快的迭代
 azd deploy --service api
 ```
 
@@ -429,7 +507,7 @@ azd deploy --service api
 # 实时监控应用程序
 azd monitor --live
 
-# 查看应用程序日志
+# 查看应用日志
 azd monitor --logs
 
 # 检查部署状态
@@ -457,7 +535,7 @@ services:
 
 echo "Validating deployment..."
 
-# 检查应用程序的健康状态
+# 检查应用程序的健康状况
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -535,14 +613,14 @@ services:
 
 ### 快速回滚
 ```bash
-# AZD没有内置回滚。推荐的方法：
+# AZD 没有内置的回滚功能。建议的方法：
 
-# Option 1: 从 Git 重新部署（推荐）
-git revert HEAD  # 回退有问题的提交
+# 选项 1：从 Git 重新部署（推荐）
+git revert HEAD  # 回滚有问题的提交
 git push
 azd deploy
 
-# Option 2: 重新部署特定提交
+# 选项 2：重新部署指定的提交
 git checkout <previous-commit-hash>
 azd deploy
 git checkout main
@@ -554,7 +632,7 @@ git checkout main
 azd provision --preview
 
 # 要回滚基础设施，请使用版本控制：
-git revert HEAD  # 撤销基础设施更改
+git revert HEAD  # 还原基础设施更改
 azd provision    # 应用先前的基础设施状态
 ```
 
@@ -579,7 +657,7 @@ echo "Database rollback completed"
 # 查看当前部署状态
 azd show
 
-# 使用 Application Insights 监视应用程序
+# 使用 Application Insights 监控应用程序
 azd monitor --overview
 
 # 查看实时指标
@@ -665,17 +743,17 @@ echo "Environment: $(azd env get-value AZURE_ENV_NAME)" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
 ```
 
-## 后续步骤
+## 接下来
 
-- [资源预配](provisioning.md) - 深入研究基础设施管理
-- [部署前规划](../chapter-06-pre-deployment/capacity-planning.md) - 规划您的部署策略
+- [资源预配](provisioning.md) - 深入基础设施管理
+- [部署前规划](../chapter-06-pre-deployment/capacity-planning.md) - 规划你的部署策略
 - [常见问题](../chapter-07-troubleshooting/common-issues.md) - 解决部署问题
-- [最佳实践](../chapter-07-troubleshooting/debugging.md) - 生产就绪的部署策略
+- [最佳实践](../chapter-07-troubleshooting/debugging.md) - 面向生产的部署策略
 
 ## 🎯 实战部署练习
 
-### 练习 1：增量部署工作流（20 分钟）
-<strong>目标</strong>：掌握完整部署与增量部署之间的差异
+### 练习1：增量部署工作流（20 分钟）
+<strong>目标</strong>：掌握完整部署与增量部署的区别
 
 ```bash
 # 初始部署
@@ -703,12 +781,12 @@ azd down --force --purge
 **成功标准：**
 - [ ] 完整部署耗时 5-15 分钟
 - [ ] 仅代码部署耗时 2-5 分钟
-- [ ] 代码更改在已部署的应用中体现
-- [ ] 在 `azd deploy` 之后基础设施保持不变
+- [ ] 代码更改在已部署的应用中得以体现
+- [ ] `azd deploy` 之后基础设施保持不变
 
-<strong>学习成果</strong>：对于代码变更，`azd deploy` 比 `azd up` 快 50-70%
+<strong>学习成果</strong>：对于代码更改，`azd deploy` 比 `azd up` 快 50-70%
 
-### 练习 2：自定义部署钩子（30 分钟）
+### 练习2：自定义部署钩子（30 分钟）
 <strong>目标</strong>：实现部署前后自动化
 
 ```bash
@@ -753,7 +831,7 @@ EOF
 
 chmod +x scripts/post-deploy-test.sh
 
-# 向 azure.yaml 添加钩子
+# 将钩子添加到 azure.yaml
 cat >> azure.yaml << 'EOF'
 
 hooks:
@@ -776,7 +854,7 @@ azd deploy
 - [ ] 部署后冒烟测试验证健康状况
 - [ ] 钩子按正确顺序执行
 
-### 练习 3：多环境部署策略（45 分钟）
+### 练习3：多环境部署策略（45 分钟）
 <strong>目标</strong>：实现分阶段部署工作流（dev → staging → production）
 
 ```bash
@@ -788,7 +866,7 @@ set -e
 echo "🚀 Staged Deployment Workflow"
 echo "=============================="
 
-# 步骤 1：部署到开发环境
+# 第1步：部署到开发环境
 echo "
 🛠️ Step 1: Deploying to development..."
 azd env select dev
@@ -797,7 +875,7 @@ azd up --no-prompt
 echo "Running dev tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# 步骤 2：部署到预发布环境
+# 第2步：部署到预发布环境
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
@@ -806,7 +884,7 @@ azd up --no-prompt
 echo "Running staging tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# 步骤 3：生产环境需人工批准
+# 第3步：生产环境的手动审批
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -839,13 +917,13 @@ azd env new production
 ```
 
 **成功标准：**
-- [ ] Dev 环境部署成功
-- [ ] Staging 环境部署成功
+- [ ] 开发环境部署成功
+- [ ] 预发布环境部署成功
 - [ ] 生产环境需要人工审批
-- [ ] 所有环境具有正常工作的健康检查
-- [ ] 可以在需要时回滚
+- [ ] 所有环境具有可用的健康检查
+- [ ] 需要时可回滚
 
-### 练习 4：回滚策略（25 分钟）
+### 练习4：回滚策略（25 分钟）
 <strong>目标</strong>：使用 Git 实现并测试部署回滚
 
 ```bash
@@ -853,11 +931,11 @@ azd env new production
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# 保存 v1 的提交哈希值
+# 保存 v1 的提交哈希
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# 部署包含破坏性更改的 v2
+# 部署 v2（包含破坏性更改）
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
@@ -888,7 +966,7 @@ fi
 
 ## 📊 部署指标跟踪
 
-### 跟踪您的部署性能
+### 跟踪你的部署性能
 
 ```bash
 # 创建部署指标脚本
@@ -918,7 +996,7 @@ chmod +x track-deployment.sh
 ./track-deployment.sh
 ```
 
-**分析您的指标：**
+**分析你的指标：**
 ```bash
 # 查看部署历史
 cat deployment-metrics.csv
@@ -927,22 +1005,22 @@ cat deployment-metrics.csv
 awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
 ```
 
-## 其他资源
+## 附加资源
 
-- [Azure Developer CLI 部署参考](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Azure 应用服务 部署](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Azure 容器应用 部署](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Azure Functions 部署](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Azure Developer CLI Deployment Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Azure App Service Deployment](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Azure Container Apps Deployment](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Azure Functions Deployment](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
 <strong>导航</strong>
-- <strong>上一课</strong>： [您的第一个项目](../chapter-01-foundation/first-project.md)
-- <strong>下一课</strong>： [资源预配](provisioning.md)
+- <strong>上一课</strong>: [你的第一个项目](../chapter-01-foundation/first-project.md)
+- <strong>下一课</strong>: [资源预配](provisioning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免责声明**:  
-本文件使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们力求准确，但请注意自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议采用专业人工翻译。我们不对因使用本翻译而导致的任何误解或错误解释承担责任。
+**免责声明**：
+本文件由 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 翻译完成。尽管我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。原始语言版文件应视为权威来源。对于重要信息，建议使用专业人工翻译。我们对因使用本翻译而产生的任何误解或误释不承担责任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

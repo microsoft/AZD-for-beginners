@@ -1,43 +1,43 @@
-# AZD کے ساتھ Azure وسائل کی فراہمی
+# AZD کے ساتھ Azure وسائل کی پروویژننگ
 
-**باب کی نیویگیشن:**
-- **📚 کورس کا ہوم**: [ابتدائیوں کے لیے AZD](../../README.md)
-- **📖 موجودہ باب**: باب 4 - انفراسٹرکچر از کوڈ اور تعیناتی
-- **⬅️ پچھلا**: [تعیناتی کی رہنمائی](deployment-guide.md)
-- **➡️ اگلا باب**: [باب 5: ملٹی ایجنٹ AI حل](../../examples/retail-scenario.md)
-- **🔧 متعلقہ**: [باب 6: پری-ڈپلائمنٹ ویلیڈیشن](../chapter-06-pre-deployment/capacity-planning.md)
+**باب کے نیویگیشن:**
+- **📚 کورس ہوم**: [نوآموزوں کے لیے AZD](../../README.md)
+- **📖 موجودہ باب**: باب 4 - انفرا اسٹرکچر بطور کوڈ اور تعیناتی
+- **⬅️ پچھلا:** [تعیناتی رہنمائی](deployment-guide.md)
+- **➡️ اگلا باب:** [باب 5: ملٹی ایجنٹ AI حل](../../examples/retail-scenario.md)
+- **🔧 متعلقہ:** [باب 6: پری-ڈپلائمنٹ ویلیڈیشن](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## تعارف
 
-یہ مکمل رہنمائی Azure Developer CLI استعمال کرتے ہوئے Azure وسائل کی فراہمی اور انتظام کے بارے میں سب کچھ سکھاتی ہے۔ بنیادی وسائل کی تخلیق سے لے کر Bicep، ARM ٹیمپلیٹس، Terraform، اور Pulumi کے ذریعے ایڈوانس انٹرپرائز گریڈ انفراسٹرکچر آرکیٹیکچرز تک Infrastructure as Code (IaC) کے نمونوں کو نافذ کریں۔
+یہ جامع رہنما Azure ڈویلپر CLI کا استعمال کرتے ہوئے Azure وسائل کی پروویژننگ اور انتظام کے بارے میں ہر وہ چیز شامل کرتا ہے جو آپ کو جاننی چاہیے۔ بنیادی وسائل کی تخلیق سے لے کر بیسیپ، ARM ٹیمپلیٹس، ٹیریفارم، اور پولمی کے ذریعے جدید انٹرپرائز گریڈ انفراسٹرکچر آرکیٹیکچرز تک انفرا اسٹرکچر بطور کوڈ (IaC) کے پیٹرنز کو نافذ کرنا سیکھیں۔
 
-## سیکھنے کے مقاصد
+## تعلیمی مقاصد
 
-اس رہنمائی کو مکمل کرنے پر آپ:
-- Infrastructure as Code کے اصول اور Azure وسائل کی فراہمی پر مہارت حاصل کریں گے
-- Azure Developer CLI کی جانب سے سپورٹ کیے گئے متعدد IaC فراہم کنندگان کو سمجھیں گے
-- عام ایپلیکیشن آرکیٹیکچرز کے لیے Bicep ٹیمپلیٹس ڈیزائن اور نافذ کریں گے
-- وسائل کے پیرامیٹرز، متغیرات، اور ماحول کے مخصوص ترتیبات کو ترتیب دیں گے
-- نیٹ ورکنگ اور سیکیورٹی سمیت جدید انفراسٹرکچر کے نمونوں کو نافذ کریں گے
-- وسائل کے لائف سائیکل، اپ ڈیٹس، اور انحصار کے حل کا انتظام کریں گے
+اس رہنما کو مکمل کر کے، آپ:
+- انفرا اسٹرکچر بطور کوڈ اصولوں اور Azure وسائل کی پروویژننگ میں مہارت حاصل کریں گے
+- Azure ڈویلپر CLI کی جانب سے سپورٹ کیے گئے متعدد IaC پرووائیڈرز کو سمجھیں گے
+- عام اطلاقی آرکیٹیکچرز کے لیے بیسیپ ٹیمپلیٹس ڈیزائن اور نافذ کریں گے
+- وسائل کے پیرامیٹرز، متغیرات، اور ماحول مخصوص سیٹنگز کو کنفیگر کریں گے
+- نیٹ ورکنگ اور سیکیورٹی سمیت جدید انفرا اسٹرکچر پیٹرنز نافذ کریں گے
+- وسائل کے لائف سائیکل، اپڈیٹس، اور انحصاری مسائل کو منظم کریں گے
 
-## سیکھنے کے نتائج
+## تعلیمی نتائج
 
-مکمل کرنے پر، آپ قابل ہوں گے:
-- Bicep اور ARM ٹیمپلیٹس کے ذریعے Azure انفراسٹرکچر ڈیزائن اور فراہم کریں
-- مناسب وسائل کے انحصارات کے ساتھ پیچیدہ ملٹی سروس آرکیٹیکچرز کو ترتیب دیں
-- متعدد ماحول اور ترتیبات کے لیے پیرامیٹرائزڈ ٹیمپلیٹس نافذ کریں
-- انفراسٹرکچر کی فراہمی کے مسائل کو حل کریں اور تعیناتی ناکامیوں کو درست کریں
-- Azure Well-Architected Framework کے اصول انفراسٹرکچر ڈیزائن میں اپنائیں
-- انفراسٹرکچر اپ ڈیٹس کا انتظام کریں اور انفراسٹرکچر ورژننگ حکمت عملی نافذ کریں
+مکمل کرنے کے بعد، آپ قابل ہوں گے:
+- بیسیپ اور ARM ٹیمپلیٹس کا استعمال کرتے ہوئے Azure انفراسٹرکچر ڈیزائن اور پروویژن کریں
+- مناسب وسائل کی انحصاریوں کے ساتھ پیچیدہ کثیر سروس آرکیٹیکچرز کو کنفیگر کریں
+- مختلف ماحول اور کنفیگریشنز کے لیے پیرامیٹرائزڈ ٹیمپلیٹس نافذ کریں
+- انفراسٹرکچر پروویژننگ کے مسائل کو تلاش اور تعیناتی کی ناکامیوں کو حل کریں
+- انفراسٹرکچر ڈیزائن میں Azure ویل-آرکیٹیکٹڈ فریم ورک اصولوں کو لاگو کریں
+- انفراسٹرکچر اپڈیٹس کو منظم کریں اور انفراسٹرکچر ورژننگ حکمت عملیاں نافذ کریں
 
-## انفراسٹرکچر کی فراہمی کا جائزہ
+## انفراسٹرکچر پروویژننگ کا جائزہ
 
-Azure Developer CLI متعدد Infrastructure as Code (IaC) فراہم کنندگان کی حمایت کرتا ہے:
-- **Bicep** (تجویز کردہ) - Azure کی مخصوص زبان
-- **ARM ٹیمپلیٹس** - JSON پر مبنی Azure Resource Manager ٹیمپلیٹس
-- **Terraform** - کثیر کلاؤڈ انفراسٹرکچر کا آلہ
-- **Pulumi** - پروگرامنگ زبانوں کے ساتھ جدید انفراسٹرکچر بطور کوڈ
+Azure ڈویلپر CLI متعدد انفراسٹرکچر بطور کوڈ (IaC) پرووائیڈرز کی معاونت کرتا ہے:
+- **بیسیپ** (تجویز شدہ) - Azure کی ڈومین-اسپیسفک لینگویج
+- **ARM ٹیمپلیٹس** - JSON پر مبنی Azure ریسورس مینجر ٹیمپلیٹس
+- **ٹیریفارم** - کثیر کلاؤڈ انفراسٹرکچر ٹول
+- **پولمی** - پروگرامنگ لینگویجز کے ساتھ جدید انفراسٹرکچر بطور کوڈ
 
 ## Azure وسائل کو سمجھنا
 
@@ -49,16 +49,16 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### ایپلیکیشنز کے لیے عام Azure سروسز
-- **کمپیوٹ**: App Service، Container Apps، Functions، Virtual Machines
-- **ذخیرہ**: Storage Account، Cosmos DB، SQL Database، PostgreSQL
-- **نیٹ ورکنگ**: Virtual Network، Application Gateway، CDN
-- **سیکیورٹی**: Key Vault، Application Insights، Log Analytics
-- **AI/ML**: Cognitive Services، OpenAI، Machine Learning
+### اطلاقی خدمات کے لیے عام Azure سروسز
+- **کمپیوٹ:** ایپ سروس، کنٹینر ایپس، فنکشنز، ورچوئل مشینز
+- **اسٹوریج:** اسٹوریج اکاؤنٹ، Cosmos DB، SQL ڈیٹابیس، PostgreSQL
+- **نیٹ ورکنگ:** ورچوئل نیٹ ورک، اپلیکیشن گیٹ وے، CDN
+- **سیکیورٹی:** کی والٹ، اپلیکیشن انسائٹس، لاگ انالٹکس
+- **AI/ML:** Azure AI سروسز، Azure OpenAI، Azure مشین لرننگ
 
-## Bicep انفراسٹرکچر ٹیمپلیٹس
+## بیسیپ انفراسٹرکچر ٹیمپلیٹس
 
-### بنیادی Bicep ٹیمپلیٹ کی ساخت
+### بنیادی بیسیپ ٹیمپلیٹ کی ساخت
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -128,7 +128,7 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### جدید Bicep نمونے
+### جدید بیسیپ پیٹرنز
 
 #### ماڈیولر انفراسٹرکچر
 ```bicep
@@ -200,7 +200,201 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ ڈیٹا بیس فراہمی
+## 🌐 azd کے ساتھ ٹیریفارم کا استعمال
+
+بیسیپ azd کا ڈیفالٹ ہے، لیکن azd **ٹیریفارم** کو بھی سپورٹ کرتا ہے—یہ مفید ہے اگر آپ کی ٹیم پہلے ہی اسے معیاری بناتی ہے یا آپ ملٹی کلاؤڈ انفراسٹرکچر کو منظم کرتے ہیں۔ azd کے ورک فلو (`azd up`, `azd provision`, `azd down`) ایک جیسے ہیں؛ صرف انفراسٹرکچر زبان اور فولڈر لے آؤٹ بدلتا ہے۔
+
+### azd کو ٹیریفارم استعمال کرنے کو کہیں
+
+`azure.yaml` میں ایک `infra` سیکشن شامل کریں جو ٹیریفارم پرووائیڈر کی طرف اشارہ کرے:
+
+```yaml
+# azure.yaml
+name: my-terraform-app
+infra:
+  provider: terraform   # default is "bicep"
+  path: infra           # folder containing your .tf files
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### ٹیریفارم فولڈر لے آؤٹ
+
+ٹیریفارم پرووائیڈر کے ساتھ، آپ کا `infra/` فولڈر بیسیپ کی بجائے `.tf` فائلیں استعمال کرتا ہے:
+
+```
+infra/
+├── main.tf            # resource definitions
+├── variables.tf       # input variables
+├── outputs.tf         # outputs azd reads back (endpoints, names)
+├── provider.tf        # azurerm/azurecaf providers + backend
+└── main.tfvars.json   # values azd injects per environment
+```
+
+### ایک مختصر `main.tf`
+
+```hcl
+# infra/main.tf
+resource "azurerm_resource_group" "rg" {
+  name     = "rg-${var.environment_name}"
+  location = var.location
+  tags     = { "azd-env-name" = var.environment_name }
+}
+
+resource "azurerm_service_plan" "plan" {
+  name                = "plan-${var.environment_name}"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  os_type             = "Linux"
+  sku_name            = "B1"
+}
+```
+
+### azd کیسے آپ کے ٹیریفارم آؤٹ پٹ سے جڑتا ہے
+
+azd ٹیریفارم **آؤٹ پٹس** کو پڑھتا ہے تاکہ آپ کے اینڈ پوائنٹس کا پتہ چلے اور ماحول کی قدریں آپ کے ایپ میں واپس منسلک کر سکے۔ آؤٹ پٹ کے نام اہم ہیں—azd مخصوص آؤٹ پٹس تلاش کرتا ہے:
+
+```hcl
+# infra/outputs.tf
+output "AZURE_LOCATION" {
+  value = var.location
+}
+
+output "SERVICE_WEB_ENDPOINT_URL" {
+  value = azurerm_linux_web_app.web.default_hostname
+}
+```
+
+> **اہم:** azd "azd-env-name" ٹیگ اور "AZURE_*" آؤٹ پٹس استعمال کرتا ہے تاکہ ہر ماحول کے لیے وسائل کو ٹریک کیا جا سکے۔ ہمیشہ اپنے ریسورس گروپ کو `"azd-env-name" = var.environment_name` کے ساتھ ٹیگ کریں تاکہ `azd down` سب کچھ تلاش کر کے ہٹا سکے۔
+
+### ٹیریفارم کے ساتھ تعیناتی کریں
+
+کمانڈز بیسیپ کے بالکل برابر ہیں:
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # ایزد پس منظر میں 'terraform plan' چلاتا ہے
+azd up                    # فراہمی + تعیناتی
+azd down --force          # ٹیرraform-منتظم وسائل کو تباہ کرتا ہے
+```
+
+> **ضروری شرط:** ٹیریفارم انسٹال ہونا چاہیے اور آپ کے `PATH` میں ہونا چاہیے۔ azd ٹیریفارم *ورک فلو* کو منظم کرتا ہے لیکن ٹیریفارم انسٹال نہیں کرتا۔ اسٹیٹ کے لیے، azd مقامی اسٹیٹ کو بطور ڈیفالٹ استعمال کرتا ہے؛ ٹیموں کے لیے، ایک ریموٹ بیک اینڈ (مثلاً Azure اسٹوریج بیک اینڈ) `provider.tf` میں کنفیگر کریں۔
+
+مکمل اور قابل عمل ٹیریفارم پر مبنی سٹارٹرز کے لیے، [Awesome AZD گیلری](https://azure.github.io/awesome-azd/) کو براؤز کریں اور ٹیریفارم کے لیے فلٹر کریں، یا سرکاری [azd ٹیریفارم ڈاکیومینٹیشن](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd) دیکھیں۔
+
+## 🧩 azd کے ساتھ پولمی کا استعمال
+
+اگر آپ کی ٹیم انفراسٹرکچر کو DSL کی بجائے عمومی مقصد کی زبان (TypeScript، Python، Go، یا C#) میں لکھتی ہے، تو azd **پولمی** کو بھی سپورٹ کرتا ہے۔ جیسا کہ ٹیریفارم کے ساتھ، `azd up` / `azd provision` / `azd down` ورک فلو تبدیل نہیں ہوتا—صرف انفراسٹرکچر ٹولنگ اور فولڈر لے آؤٹ مختلف ہوتے ہیں۔
+
+### azd کو پولمی استعمال کرنے کو کہیں
+
+```yaml
+# azure.yaml
+name: my-pulumi-app
+infra:
+  provider: pulumi      # default is "bicep"
+  path: infra           # folder containing your Pulumi program
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### پولمی فولڈر لے آؤٹ
+
+```
+infra/
+├── Pulumi.yaml          # project definition
+├── Pulumi.dev.yaml      # stack config (one per environment)
+├── index.ts             # your resource program (or __main__.py, main.go, etc.)
+├── package.json         # dependencies (for TypeScript)
+└── tsconfig.json
+```
+
+### ایک مختصر `index.ts`
+
+```typescript
+import * as azure from "@pulumi/azure-native";
+import * as pulumi from "@pulumi/pulumi";
+
+const environmentName = pulumi.getStack();
+
+// ہر وسائل کو ٹیگ کریں تاکہ azd انہیں ٹریک کر سکے اور صاف کر سکے
+const tags = { "azd-env-name": environmentName };
+
+const rg = new azure.resources.ResourceGroup("rg", {
+  resourceGroupName: `rg-${environmentName}`,
+  tags,
+});
+
+// azd یہ آؤٹ پٹ واپس آپ کے ماحول میں پڑھتا ہے
+export const AZURE_LOCATION = rg.location;
+export const SERVICE_WEB_ENDPOINT_URL = "https://...";
+```
+
+### اسٹیکس کو azd ماحول کے ساتھ میپ کریں
+
+پولمی ڈپلائمنٹس کو **اسٹیکس** میں منظم کرتا ہے، اور azd ہر azd ماحول کو اسی نام کے پولمی اسٹیک سے میپ کرتا ہے۔ جب آپ `azd env new staging` چلاتے ہیں، azd `staging` پولمی اسٹیک منتخب یا تخلیق کرتا ہے۔ ایک ہی `azd-env-name` ٹیگنگ اور `AZURE_*` آؤٹ پٹ قواعد لاگو ہوتے ہیں تاکہ `azd down` سب کچھ تلاش کر کے ہٹا سکے۔
+
+### پولمی کے ساتھ تعیناتی کریں
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd اندر 'pulumi preview' چلاتا ہے
+azd up                    # فراہمی + تعیناتی
+azd down --force          # 'pulumi destroy' چلاتا ہے
+```
+
+> **ضروری شرط:** پولمی انسٹال ہونا چاہیے اور آپ کے `PATH` میں ہونا چاہیے، اور آپ کو اسٹیٹ بیک اینڈ چاہیے (پولمی کلاؤڈ یا خود سے منظم کردہ بیک اینڈ جیسے Azure Blob Storage)۔ azd پولمی *ورک فلو* کو منظم کرتا ہے، انسٹال نہیں۔ سرکاری [azd پولمی ڈاکیومینٹیشن](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-pulumi-for-azd) دیکھیں۔
+
+## 🎯 اپنی سروس کے لیے میزبان کا انتخاب
+
+`azure.yaml` میں `host` فیلڈ فیصلہ کرتا ہے کہ آپ کا کوڈ کہاں چلے گا۔ azd کئی میزبانوں کی حمایت کرتا ہے—صحیح انتخاب زبان سے زیادہ اہم ہے۔ یہاں ابتدائی افراد کے لیے موازنہ:
+
+| `host` کی قیمت | بہترین استعمال | وجہ |
+|--------------|----------|-----|
+| `appservice` | روایتی ویب ایپس اور APIs | سب سے آسان PaaS؛ کوئی کنٹینرز ضروری نہیں |
+| `staticwebapp` | فرنٹ اینڈ SPAs (React, Vue, Angular) | عالمی CDN + مفت SSL، بلٹ ان API سپورٹ |
+| `function` | ایونٹ ڈرائیون اور سرور لیس کام | صفر پر پیمائش، فی عمل ادائیگی |
+| `containerapp` | کنٹینرائزڈ مائیکرو سروسز | سرورلیس کنٹینرز، صفر پیمائش، بلٹ ان انگریس |
+| `aks` | پیچیدہ آرکیسٹریشن کی ضرورتیں | جب واقعی ضرورت ہو تو مکمل کوبرنیٹیز کنٹرول |
+| `springapp` | جاوا اسپرنگ بوٹ ایپس | مینیجڈ Azure Spring Apps رن ٹائم جو اسپرنگ کے لیے ٹون کیا گیا ہے |
+
+### AKS کا استعمال کب کریں
+
+**Azure Kubernetes Service (`host: aks`)** آپ کو کوبرنیٹیز کی مکمل طاقت دیتا ہے—کسٹم کنٹرولرز، سروس میشز، پیچیدہ نیٹ ورکنگ، اور باریک بینی سے شیڈولنگ۔ یہ طاقت آپریشنل بوجھ کے ساتھ آتی ہے: آپ کو نوڈ پولز، اپگریڈز، اور کلسٹر نیٹ ورکنگ کا انتظام کرنا ہوتا ہے۔
+
+```yaml
+services:
+  api:
+    project: ./src/api
+    language: js
+    host: aks          # deploys to an existing AKS cluster
+```
+
+> **اگر ممکن ہو تو آسان سے شروع کریں۔** زیادہ تر مائیکرو سروسز کے لیے، **کنٹینر ایپس** کنٹینرز، آٹوسکیلنگ، اور صفر پیمائش فراہم کرتی ہیں بغیر کسی کلسٹر کے انتظام کے۔ کوبرنیٹیز کے خصوصی فیچرز کی ضرورت ہو تو ہی AKS منتخب کریں۔
+
+### Azure Spring Apps کا استعمال کب کریں
+
+**Azure Spring Apps (`host: springapp`)** ایک مینیجڈ رن ٹائم ہے جو خاص طور پر اسپرنگ بوٹ کے لیے بنایا گیا ہے۔ یہ سروس ڈسکوری، کنفیگ سرور، اور بلیو-گرین تعیناتی کا انتظام کرتا ہے تاکہ جاوا ٹیمیں اپنی انفراسٹرکچر خود نہ چلائیں۔
+
+```yaml
+services:
+  catalog:
+    project: ./src/catalog
+    language: java
+    host: springapp
+```
+
+> `springapp` استعمال کریں جب آپ کے پاس موجودہ اسپرنگ بوٹ ایپس ہوں اور آپ ان کے لیے ٹون کیا گیا رن ٹائم چاہتے ہوں۔ نئے کنٹینرائزڈ جاوا ایپس کے لیے جنہیں اسپرنگ کی مخصوص ضرورت نہیں، `containerapp` عام طور پر آسان انتخاب ہے۔
+
+## 🗃️ ڈیٹابیس پروویژننگ
 
 ### Cosmos DB
 ```bicep
@@ -298,9 +492,9 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 سیکیورٹی اور خفیہ معلومات کا انتظام
+## 🔒 سیکورٹی اور سیکریٹس مینجمنٹ
 
-### Key Vault انضمام
+### کی والٹ انٹیگریشن
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -342,7 +536,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Managed Identity ترتیب
+### منیجڈ شناخت کی ترتیب
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -370,7 +564,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 
 ## 🌍 نیٹ ورکنگ اور کنیکٹوٹی
 
-### Virtual Network ترتیب
+### ورچوئل نیٹ ورک کنفیگریشن
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -433,7 +627,7 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### SSL کے ساتھ Application Gateway
+### SSL کے ساتھ اپلیکیشن گیٹ وے
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -496,9 +690,9 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 نگرانی اور مشاہدہ
+## 📊 مانیٹرنگ اور آبزرویبیلٹی
 
-### Application Insights
+### اپلیکیشن انسائٹس
 ```bicep
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
   name: '${applicationName}-logs-${resourceToken}'
@@ -527,7 +721,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### حسب خواہش میٹرکس اور الارٹس
+### حسب ضرورت میٹرکس اور الرٹس
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -561,9 +755,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 ماحول مخصوص ترتیبات
+## 🔧 ماحول مخصوص کنفیگریشنز
 
-### مختلف ماحول کے لیے پیرامیٹر فائلز
+### مختلف ماحول کے لیے پیرامیٹر فائلیں
 ```json
 // infra/main.parameters.dev.json
 {
@@ -617,7 +811,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### مشروط وسائل کی فراہمی
+### مشروط وسائل کی پروویژننگ
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -649,9 +843,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 جدید فراہمی کے نمونے
+## 🚀 جدید پروویژننگ پیٹرنز
 
-### ملٹی-ریجن تعیناتی
+### کثیر خطہ تعیناتی
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -755,20 +949,20 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 انفراسٹرکچر کا پیشگی جائزہ اور تصدیق (نیا)
+## 🧪 انفراسٹرکچر پیش نظارہ اور ویلیڈیشن (نیا)
 
-### تعیناتی سے پہلے انفراسٹرکچر میں تبدیلیوں کا پیشگی جائزہ لیں
+### تعیناتی سے پہلے انفراسٹرکچر تبدیلیوں کا پیش نظارہ کریں
 
-`azd provision --preview` فیچر آپ کو **حقیقی وسائل تعینات کرنے سے پہلے انفراسٹرکچر فراہمی کی تقلید کرنے** کی سہولت دیتا ہے۔ یہ `terraform plan` یا `bicep what-if` کے جیسے ہے، جو آپ کو آپ کے Azure ماحول میں کی جانے والی تبدیلیوں کی **خشک دوڑ کا منظر** فراہم کرتا ہے۔
+`azd provision --preview` فیچر آپ کو وسائل کی اصل تعیناتی سے پہلے **انفراسٹرکچر پروویژننگ کی مشابہت** کرنے دیتا ہے۔ یہ `terraform plan` یا `bicep what-if` کی طرح ہے، جو آپ کو آپ کے Azure ماحول میں کیے جانے والے تبدیلیوں کا **ڈرائی رن ویو** فراہم کرتا ہے۔
 
 #### 🛠️ یہ کیا کرتا ہے
-- **آپ کے IaC ٹیمپلیٹس (Bicep یا Terraform) کا تجزیہ کرتا ہے**
-- **وسائل میں تبدیلیوں کا پیشگی منظر دکھاتا ہے:** اضافے، حذف، اپ ڈیٹس
-- **کوئی تبدیلی لاگو نہیں کرتا** — یہ صرف پڑھنے کے لیے ہے اور چلانے میں محفوظ ہے
+- **آپ کے IaC ٹیمپلیٹس کا تجزیہ کرتا ہے** (بیسیپ یا ٹیریفارم)
+- **وسائل کی تبدیلیوں کا پیش نظارہ دکھاتا ہے**: اضافے، حذف، اپڈیٹس
+- **تبدیلیاں لاگو نہیں کرتا** — یہ صرف پڑھنے والا اور محفوظ ہے
 
-#### استعمال کے کیسز
+#### استعمال کی صورتیں
 ```bash
-# تعیناتی سے پہلے بنیادی ڈھانچے میں تبدیلیوں کا پیش نظارہ کریں
+# تعیناتی سے پہلے انفراسٹرکچر میں تبدیلیوں کا پیش نظارہ کریں
 azd provision --preview
 
 # مخصوص ماحول کے لیے پیش نظارہ کریں
@@ -776,19 +970,19 @@ azd provision --preview -e production
 ```
 
 یہ کمانڈ آپ کی مدد کرتا ہے:
-- **وسائل پر عمل درآمد سے پہلے انفراسٹرکچر کی تبدیلیوں کی تصدیق کریں**
-- **ترقیاتی مرحلے میں غلط ترتیبات کو ابتدائی مرحلے میں پکڑیں**
-- **ٹیم کے ماحول میں بحفاظت تعاون کریں**
-- **کم سے کم مراعات کے تحت تعینات کو یقینی بنائیں بغیر کسی حیرت کے**
+- **وسائل کی تبدیلیوں کی تصدیق** کرنے میں قبل از مہیا کرنا
+- **غلط کنفیگریشنز کو جلد پکڑنا** ترقیاتی سائیکل میں
+- **ٹیم ماحول میں محفوظ تعاون**
+- **کم سے کم مراعات کے تعیناتیاں بغیر حیرانی کے یقینی بنانا**
 
 یہ خاص طور پر مفید ہے جب:
-- پیچیدہ ملٹی سروس ماحول کے ساتھ کام کر رہے ہوں
-- پیداوار کے انفراسٹرکچر میں تبدیلیاں کر رہے ہوں
-- PR منظوری سے پہلے ٹیمپلیٹ میں تبدیلیوں کی توثیق کر رہے ہوں
-- انفراسٹرکچر کے نمونوں پر نئے ٹیم ممبران کو تربیت دے رہے ہوں
+- پیچیدہ کثیر سروس ماحول کے ساتھ کام کر رہے ہوں
+- پیداوار انفراسٹرکچر میں تبدیلیاں کر رہے ہوں
+- PR کی منظوری سے پہلے ٹیمپلیٹ میں تبدیلیوں کی تصدیق کر رہے ہوں
+- نئی ٹیم ممبرز کو انفراسٹرکچر پیٹرنز کی تربیت دے رہے ہوں
 
-### مثال کے طور پر پیشگی آؤٹ پٹ
-مختلف فراہم کنندگان اور پراجیکٹ کی ساخت کے مطابق درست پیشگی آؤٹ پٹ مختلف ہو سکتا ہے، لیکن نتیجہ واضح طور پر ظاہر کرے گا کہ تعیناتی سے پہلے کونسے تبدیلیاں کی جائیں گی۔
+### مثال پیش نظارہ آؤٹ پٹ
+صحیح پیش نظارہ کا آؤٹ پٹ پرووائیڈر اور پروجیکٹ کی ساخت کے لحاظ سے مختلف ہوتا ہے، لیکن نتیجہ واضح طور پر تجویز کردہ تبدیلیوں کی نشاندہی کرے گا اس سے پہلے کہ کوئی چیز لاگو ہو۔
 
 ```bash
 $ azd provision --preview
@@ -813,22 +1007,22 @@ The following resources will be destroyed:
 ✅ Preview completed successfully!
 ```
 
-## 🔄 وسائل کی اپ ڈیٹس اور مائگریشنز
+## �🔄 وسائل کی اپ ڈیٹس اور مائگریشنز
 
 ### محفوظ وسائل کی اپ ڈیٹس
 ```bash
-# پہلے انفراسٹرکچر کی تبدیلیوں کا جائزہ لیں (تجویز کردہ)
+# پہلے انفراسٹرکچر میں تبدیلیوں کا پیش نظارہ کریں (سفارش کی جاتی ہے)
 azd provision --preview
 
-# جائزہ کی تصدیق کے بعد تبدیلیاں نافذ کریں
+# پیش نظارہ کی تصدیق کے بعد تبدیلیاں نافذ کریں
 azd provision --confirm-with-no-prompt
 
-# واپس پلٹنے کے لیے، انفراسٹرکچر کی تبدیلیوں کو واپس کرنے کے لیے Git کا استعمال کریں:
+# واپس لوٹنے کے لیے، انفراسٹرکچر کی تبدیلیوں کو پلٹانے کے لیے Git استعمال کریں:
 git revert HEAD  # آخری انفراسٹرکچر کمیٹ کو واپس کریں
-azd provision    # پچھلے انفراسٹرکچر کی حالت کو نافذ کریں
+azd provision    # پچھلی انفراسٹرکچر کی حالت نافذ کریں
 ```
 
-### ڈیٹا بیس مائگریشنز
+### ڈیٹابیس مائگریشنز
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -859,7 +1053,7 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🎯 بہترین طریقے
 
-### 1. وسائل کے نام دینے کے قواعد
+### 1. وسائل کے لیے نام دینے کے ضوابط
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -883,7 +1077,7 @@ var commonTags = {
 }
 ```
 
-### 3. پیرامیٹر کی تصدیق
+### 3. پیرامیٹر ویلیڈیشن
 ```bicep
 @description('Environment name')
 @minLength(3)
@@ -914,29 +1108,29 @@ output DATABASE_NAME string = database.name
 output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
 ```
 
-## اگلے مراحل
+## اگلے اقدامات
 
 - [پری-ڈپلائمنٹ پلاننگ](../chapter-06-pre-deployment/capacity-planning.md) - وسائل کی دستیابی کی تصدیق کریں
-- [عام مسائل](../chapter-07-troubleshooting/common-issues.md) - انفراسٹرکچر کے مسائل کی تشخیص کریں
-- [ڈی بگنگ گائیڈ](../chapter-07-troubleshooting/debugging.md) - فراہمی کے مسائل کی تلاش کریں
+- [عام مسائل](../chapter-07-troubleshooting/common-issues.md) - انفراسٹرکچر کے مسائل کو حل کریں
+- [ڈی بگنگ گائیڈ](../chapter-07-troubleshooting/debugging.md) - پروویژننگ کے مسائل کو ڈی بگ کریں
 - [SKU انتخاب](../chapter-06-pre-deployment/sku-selection.md) - مناسب سروس ٹائر منتخب کریں
 
 ## اضافی وسائل
 
 - [Azure Bicep دستاویزات](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager ٹیمپلیٹس](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Azure ریسورس مینجر ٹیمپلیٹس](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
 - [Azure آرکیٹیکچر سینٹر](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure ویل-آرکیٹیکٹڈ فریم ورک](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
 **نیویگیشن**
-- **پچھلا سبق**: [تعیناتی کی رہنمائی](deployment-guide.md)
-- **اگلا سبق**: [صلاحیت کی منصوبہ بندی](../chapter-06-pre-deployment/capacity-planning.md)
+- **پچھلا درس:** [تعیناتی رہنمائی](deployment-guide.md)
+- **اگلا درس:** [صلاحیت کی منصوبہ بندی](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**دستبرداری**:  
-یہ دستاویز AI ترجمہ سروس [Co-op Translator](https://github.com/Azure/co-op-translator) استعمال کرتے ہوئے ترجمہ کی گئی ہے۔ اگرچہ ہم درستگی کے لیے کوشاں ہیں، براہ کرم آگاہ رہیں کہ خودکار تراجم میں غلطیاں یا بے دقتیاں ہو سکتی ہیں۔ اصل دستاویز اپنی مادری زبان میں ہی مستند ماخذ سمجھا جانا چاہیے۔ اہم معلومات کے لیے پیشہ ور انسانی ترجمہ کی سفارش کی جاتی ہے۔ اس ترجمہ کے استعمال سے ہونے والے کسی بھی غلط فہمی یا غلط تشریح کی ذمہ داری ہم پر نہیں ہوگی۔
+**ڈس کلیمر**:
+یہ دستاویز AI ترجمہ سروس [Co-op Translator](https://github.com/Azure/co-op-translator) کے ذریعے ترجمہ کی گئی ہے۔ جبکہ ہم درستگی کے لیے کوشاں ہیں، براہ کرم اس بات سے آگاہ رہیں کہ خودکار ترجمے میں غلطیاں یا عدم درستیاں ہو سکتی ہیں۔ اصل دستاویز اپنے مادری زبان میں مستند ماخذ سمجھی جائے گی۔ حساس معلومات کے لیے پیشہ ور انسانی ترجمہ کی سفارش کی جاتی ہے۔ اس ترجمے کے استعمال سے پیدا ہونے والی کسی بھی غلط فہمی یا غلط تشریح کی ذمہ داری ہم قبول نہیں کرتے۔
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

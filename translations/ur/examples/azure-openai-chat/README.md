@@ -1,69 +1,70 @@
-# مائیکروسافٹ فاؤنڈری ماڈلز چیٹ ایپلیکیشن
+# Microsoft Foundry Models چیٹ ایپلیکیشن
 
 **سیکھنے کا راستہ:** درمیانی ⭐⭐ | **وقت:** 35-45 منٹ | **لاگت:** $50-200/ماہ
 
-ایک مکمل مائیکروسافٹ فاؤنڈری ماڈلز چیٹ ایپلیکیشن جو Azure Developer CLI (azd) کے ذریعے تعینات کی گئی ہے۔ یہ مثال gpt-4.1 کی تعیناتی، محفوظ API رسائی، اور ایک سادہ چیٹ انٹرفیس دکھاتی ہے۔
+ایک مکمل Microsoft Foundry Models چیٹ ایپلیکیشن جو Azure Developer CLI (azd) کے ذریعے تعینات کی گئی ہے۔ یہ مثال gpt-4.1 کی تعیناتی، محفوظ API رسائی، اور ایک سادہ چیٹ انٹرفیس کو ظاہر کرتی ہے۔
 
 ## 🎯 آپ کیا سیکھیں گے
 
-- gpt-4.1 ماڈل کے ساتھ Microsoft Foundry Models سروس تعینات کرنا  
-- Key Vault کے ذریعے OpenAI API کلیدوں کو محفوظ بنانا  
-- Python کے ساتھ ایک سادہ چیٹ انٹرفیس تیار کرنا  
+- Microsoft Foundry Models سروس کو gpt-4.1 ماڈل کے ساتھ تعینات کرنا  
+- OpenAI API کیز کو Key Vault کے ساتھ محفوظ کرنا  
+- Python کے ساتھ سادہ چیٹ انٹرفیس بنانا  
 - ٹوکن کے استعمال اور لاگت کی نگرانی  
-- ریٹ لمیٹنگ اور ایرر ہینڈلنگ نافذ کرنا  
+- ریٹ حد بندی اور خرابیوں کی ہینڈلنگ کا نفاذ  
 
 ## 📦 شامل کیا گیا ہے
 
 ✅ **Microsoft Foundry Models سروس** - gpt-4.1 ماڈل کی تعیناتی  
 ✅ **Python چیٹ ایپ** - سادہ کمانڈ لائن چیٹ انٹرفیس  
-✅ **Key Vault انٹیگریشن** - API کلیدوں کی محفوظ ذخیرہ اندوزی  
+✅ **Key Vault انٹیگریشن** - API کیز کا محفوظ ذخیرہ  
 ✅ **ARM ٹیمپلیٹس** - مکمل انفراسٹرکچر بطور کوڈ  
-✅ **لاگت کی نگرانی** - ٹوکن استعمال کی ٹریکنگ  
-✅ **ریٹ لمیٹنگ** - کوٹا ختم ہونے سے بچاؤ  
+✅ **لاگت کی نگرانی** - ٹوکن کے استعمال کی ٹریکنگ  
+✅ **ریٹ حد بندی** - کوٹا ختم ہونے سے بچاؤ  
 
 ## فن تعمیر
 
 ```mermaid
 graph TD
-    App[پائتھن چیٹ ایپلیکیشن<br/>مقامی/کلاؤڈ<br/>کمانڈ لائن انٹرفیس<br/>گفتگو کی تاریخ<br/>ٹوکن کے استعمال کا تعاقب] -- "HTTPS (API Key)" --> Foundry[مائیکروسافٹ فاؤنڈری ماڈلز سروس<br/>gpt-4.1 ماڈل<br/>20K ٹوکنز/منٹ کی صلاحیت<br/>کثیرالعلاقائی فال اوور]
-    Foundry --> KV[ایژر کی والٹ<br/>اوپن اے آئی API کی<br/>اختتامی URL]
+    App[پائتھن چیٹ ایپلیکیشن<br/>مقامی/کلاؤڈ<br/>کمانڈ لائن انٹرفیس<br/>گفتگو کی تاریخ<br/>ٹوکن استعمال کی ٹریکنگ] -- "HTTPS (API کلید)" --> Foundry[مائیکروسافٹ فاؤنڈری ماڈلز سروس<br/>gpt-4.1 ماڈل<br/>20K ٹوکنز/منٹ کی صلاحیت<br/>کثیرالعلاقائی فیل اوور]
+    Foundry --> KV[ایزور کی والٹ<br/>اوپنAI API کیی<br/>اینڈ پوائنٹ URL]
     Foundry -. Managed Identity .-> KV
 ```
-## پری ریکوائزٹس
+
+## ضروریات
 
 ### درکار
 
 - **Azure Developer CLI (azd)** - [انسٹال گائیڈ](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)  
-- **Azure سبسکرپشن** جس میں OpenAI رسائی ہو - [درخواست دیں](https://aka.ms/oai/access)  
+- **OpenAI رسائی کے ساتھ Azure سبسکرپشن** - [رسائی کی درخواست کریں](https://aka.ms/oai/access)  
 - **Python 3.9+** - [Python انسٹال کریں](https://www.python.org/downloads/)  
 
-### پری ریکوائزٹس کی تصدیق
+### ضروریات کی تصدیق
 
 ```bash
-# ایزی ڈی کا ورژن چیک کریں (1.5.0 یا اس سے زیادہ چاہیے)
+# azd ورژن چیک کریں (1.5.0 یا اس سے زیادہ درکار ہے)
 azd version
 
-# آزور لاگ ان کی تصدیق کریں
+# Azure لاگ ان کی تصدیق کریں
 azd auth login
 
-# پائتھن ورژن چیک کریں
+# Python ورژن چیک کریں
 python --version  # یا python3 --version
 
-# اوپن اے آئی تک رسائی کی تصدیق کریں (آزور پورٹل میں چیک کریں)
+# OpenAI رسائی کی تصدیق کریں (Azure پورٹل میں چیک کریں)
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus
 ```
 
-> **⚠️ اہم:** Microsoft Foundry Models کے لیے درخواست کی منظوری ضروری ہے۔ اگر آپ نے درخواست نہیں دی تو [aka.ms/oai/access](https://aka.ms/oai/access) ملاحظہ کریں۔ منظوری عام طور پر 1-2 کاروباری دن لیتی ہے۔
+> **⚠️ اہم:** Microsoft Foundry Models کو درخواست کی منظوری کی ضرورت ہے۔ اگر آپ نے درخواست نہیں دی، تو یہاں جائیں [aka.ms/oai/access](https://aka.ms/oai/access)۔ منظوری عام طور پر 1-2 کاروباری دنوں میں ملتی ہے۔
 
 ## ⏱️ تعیناتی کا وقت
 
 | مرحلہ | دورانیہ | کیا ہوتا ہے |
 |-------|----------|--------------|
-| پری ریکوائزٹس کی جانچ | 2-3 منٹ | OpenAI کوٹا کی دستیابی کی تصدیق |
-| انفراسٹرکچر تعینات کریں | 8-12 منٹ | OpenAI، Key Vault، ماڈل تعینات کریں |
-| ایپلیکیشن کی تشکیلات | 2-3 منٹ | ماحول اور انحصاری سیٹ اپ کریں |
+| ضروریات کی جانچ | 2-3 منٹ | OpenAI کوٹا کی دستیابی کی تصدیق |
+| انفراسٹرکچر کی تعیناتی | 8-12 منٹ | OpenAI، Key Vault، ماڈل کی تعیناتی بنائیں |
+| ایپلیکیشن کی تشکیل | 2-3 منٹ | ماحول اور انحصارات سیٹ کریں |
 | **کل** | **12-18 منٹ** | gpt-4.1 کے ساتھ چیٹ کے لیے تیار |
 
 **نوٹ:** پہلی بار OpenAI کی تعیناتی ماڈل کی فراہمی کی وجہ سے زیادہ وقت لے سکتی ہے۔
@@ -74,24 +75,24 @@ az cognitiveservices account list-skus \
 # مثال پر جائیں
 cd examples/azure-openai-chat
 
-# ماحول کو شروع کریں
+# ماحول شروع کریں
 azd env new myopenai
 
-# سب کچھ تعینات کریں ( بنیادی ڈھانچہ + ترتیب)
+# سب کچھ تعینات کریں (انفراسٹرکچر + ترتیب)
 azd up
 # آپ سے پوچھا جائے گا:
 # 1. Azure سبسکرپشن منتخب کریں
-# 2. ایسی جگہ منتخب کریں جہاں OpenAI دستیاب ہو (مثلاً، eastus، eastus2، westus)
-# 3. تعیناتی کے لیے 12-18 منٹ انتظار کریں
+# 2. ایسی جگہ منتخب کریں جہاں OpenAI دستیاب ہو (مثلاً، eastus, eastus2, westus)
+# 3. تعیناتی کے لئے 12-18 منٹ انتظار کریں
 
-# Python کی dependencies انسٹال کریں
+# Python انحصارات انسٹال کریں
 pip install -r requirements.txt
 
-# بات چیت شروع کریں!
+# چیٹ شروع کریں!
 python chat.py
 ```
 
-**متوقع آؤٹ پٹ:**
+**متوقع نتیجہ:**  
 ```
 🤖 Microsoft Foundry Models Chat Application
 Connected to: gpt-4.1 (eastus)
@@ -105,27 +106,27 @@ Assistant: Microsoft Foundry Models Service provides REST API access to OpenAI's
 
 ## ✅ تعیناتی کی تصدیق
 
-### مرحلہ 1: Azure وسائل چیک کریں
+### مرحلہ 1: Azure وسائل کی جانچ
 
 ```bash
 # تعینات شدہ وسائل دیکھیں
 azd show
 
 # متوقع نتیجہ دکھاتا ہے:
-# - OpenAI سروس: (وسیلے کا نام)
-# - کی والٹ: (وسیلے کا نام)
+# - اوپن اے آئی سروس: (وسیلے کا نام)
+# - کی ولٹ: (وسیلے کا نام)
 # - تعیناتی: gpt-4.1
 # - مقام: eastus (یا آپ کا منتخب کردہ علاقہ)
 ```
 
-### مرحلہ 2: OpenAI API کا ٹیسٹ کریں
+### مرحلہ 2: OpenAI API کا امتحان
 
 ```bash
-# اوپن اے آئی اینڈپوائنٹ اور کلید حاصل کریں
+# اوپن اے آئی اینڈ پوائنٹ اور کلید حاصل کریں
 OPENAI_ENDPOINT=$(azd env get-value AZURE_OPENAI_ENDPOINT)
 OPENAI_KEY=$(azd env get-value AZURE_OPENAI_API_KEY)
 
-# اے پی آئی کال کا تجربہ کریں
+# ای پی آئی کال کا ٹیسٹ کریں
 curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
   -H "Content-Type: application/json" \
   -H "api-key: $OPENAI_KEY" \
@@ -135,7 +136,7 @@ curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2
   }'
 ```
 
-**متوقع جواب:**
+**متوقع جواب:**  
 ```json
 {
   "choices": [
@@ -157,7 +158,7 @@ curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2
 ### مرحلہ 3: Key Vault رسائی کی تصدیق
 
 ```bash
-# کی وولٹ میں سیکرٹس کی فہرست بنائیں
+# کی واؤلٹ میں خفیہ کو فہرست بنائیں
 KV_NAME=$(azd env get-value AZURE_KEY_VAULT_NAME)
 
 az keyvault secret list \
@@ -166,17 +167,17 @@ az keyvault secret list \
   --output table
 ```
 
-**متوقع سیکریٹس:**
+**متوقع سیکریٹس:**  
 - `openai-api-key`  
 - `openai-endpoint`  
 
-**کامیابی کے معیار:**
-- ✅ OpenAI سروس gpt-4.1 کے ساتھ تعینات ہو چکی ہے  
-- ✅ API کال سے درست مکمل جواب آ رہا ہے  
-- ✅ سیکریٹس Key Vault میں محفوظ ہیں  
+**کامیابی کے معیار:**  
+- ✅ OpenAI سروس gpt-4.1 کے ساتھ تعینات  
+- ✅ API کال درست مکمل جواب دیتی ہے  
+- ✅ Key Vault میں سیکریٹس محفوظ  
 - ✅ ٹوکن کے استعمال کی ٹریکنگ کام کر رہی ہے  
 
-## پروجیکٹ کا ڈھانچہ
+## پروجیکٹ کی ساخت
 
 ```
 azure-openai-chat/
@@ -200,22 +201,22 @@ azure-openai-chat/
 چیٹ ایپلیکیشن میں شامل ہیں:
 
 - **بات چیت کی تاریخ** - پیغامات کے درمیان سیاق و سباق برقرار رکھتا ہے  
-- **ٹوکن گنتی** - استعمال کی ٹریکنگ اور لاگت کا اندازہ لگانا  
-- **ایرر ہینڈلنگ** - ریٹ لمیٹس اور API غلطیوں کی شائستہ ہینڈلنگ  
-- **لاگت کا اندازہ** - فی پیغام حقیقی وقت پر لاگت کا حساب  
+- **ٹوکن گننا** - استعمال کا سراغ لگانا اور اخراجات کا اندازہ  
+- **خرابی کی ہینڈلنگ** - ریٹ لمٹس اور API کی خرابیوں کا آرام دہ انتظام  
+- **اخراجات کا تخمینہ** - فی پیغام حقیقی وقت لاگت کا حساب  
 - **اسٹریمنگ سپورٹ** - اختیاری اسٹریمنگ جوابات  
 
 ### کمانڈز
 
-چیٹ کرتے وقت آپ استعمال کر سکتے ہیں:
+چیٹ کرتے ہوئے آپ استعمال کر سکتے ہیں:  
 - `quit` یا `exit` - سیشن ختم کریں  
 - `clear` - بات چیت کی تاریخ صاف کریں  
-- `tokens` - کل استعمال شدہ ٹوکنز دکھائیں  
-- `cost` - تخمینہ شدہ کل لاگت دکھائیں  
+- `tokens` - کل ٹوکن استعمال دکھائیں  
+- `cost` - کل لاگت کا اندازہ دکھائیں  
 
 ### کنفیگریشن (`config.py`)
 
-ماحول کی متغیرات سے کنفیگریشن لوڈ کرتا ہے:  
+ماحول کی متغیرات سے ترتیب لوڈ کرتا ہے:  
 ```python
 AZURE_OPENAI_ENDPOINT  # کی ویلت سے
 AZURE_OPENAI_API_KEY   # کی ویلت سے
@@ -244,7 +245,7 @@ python chat.py
 python chat.py --stream
 ```
 
-### مثال کی بات چیت
+### مثال بات چیت
 
 ```
 You: Explain Microsoft Foundry Models Service in 3 sentences.
@@ -268,38 +269,38 @@ Total session: 156 tokens | $0.0047
 
 ## لاگت کا انتظام
 
-### ٹوکن کی قیمت (gpt-4.1)
+### ٹوکن قیمتیں (gpt-4.1)
 
 | ماڈل | ان پٹ (فی 1K ٹوکن) | آؤٹ پٹ (فی 1K ٹوکن) |
 |-------|----------------------|------------------------|
 | gpt-4.1 | $0.03 | $0.06 |
 | GPT-3.5-Turbo | $0.0015 | $0.002 |
 
-### تخمینہ ماہانہ لاگت
+### ماہانہ اندازہ لاگت
 
-استعمال کے اندازوں کی بنیاد پر:
+استعمال کے نمونوں کی بنیاد پر:
 
-| استعمال کی سطح | پیغامات/دن | ٹوکنز/دن | ماہانہ لاگت |
+| استعمال کی سطح | پیغامات/دن | ٹوکن/دن | ماہانہ لاگت |
 |-------------|--------------|------------|--------------|
-| **ہلکا** | 20 پیغامات | 3,000 ٹوکنز | $3-5 |
-| **درمیانہ** | 100 پیغامات | 15,000 ٹوکنز | $15-25 |
-| **زیادہ** | 500 پیغامات | 75,000 ٹوکنز | $75-125 |
+| **ہلکا** | 20 پیغامات | 3,000 ٹوکن | $3-5 |
+| **درمیانہ** | 100 پیغامات | 15,000 ٹوکن | $15-25 |
+| **زیادہ** | 500 پیغامات | 75,000 ٹوکن | $75-125 |
 
 **بنیادی انفراسٹرکچر لاگت:** $1-2/ماہ (Key Vault + کم از کم کمپیوٹ)
 
-### لاگت کی اصلاح کے نکات
+### لاگت کی بچت کے نکات
 
 ```bash
-# 1۔ آسان کاموں کے لیے GPT-3.5-Turbo استعمال کریں (20 گنا سستا)
+# 1. آسان کاموں کے لیے GPT-3.5-Turbo استعمال کریں (20 گنا سستا)
 export AZURE_OPENAI_MODEL=gpt-35-turbo
 
-# 2۔ جواب مختصر کرنے کے لیے زیادہ سے زیادہ ٹوکنز کم کریں
+# 2. مختصر جوابات کے لیے زیادہ سے زیادہ ٹوکن کم کریں
 export AZURE_OPENAI_MAX_TOKENS=400
 
-# 3۔ ٹوکن کے استعمال کی نگرانی کریں
+# 3. ٹوکن کے استعمال کی نگرانی کریں
 python chat.py --show-tokens
 
-# 4۔ بجٹ_ALERT قائم کریں
+# 4. بجٹ کی اطلاع ترتیب دیں
 az consumption budget create \
   --budget-name "openai-budget" \
   --amount 50 \
@@ -308,13 +309,13 @@ az consumption budget create \
 
 ## نگرانی
 
-### ٹوکن کے استعمال کا مشاہدہ کریں
+### ٹوکن کے استعمال کا جائزہ
 
 ```bash
-# ایژور پورٹل میں:
-# OpenAI ریسورس → میٹرکس → "ٹوکن ٹرانزیکشن" منتخب کریں
+# ان اےژور پورٹل میں:
+# اوپن اےآئی ریسورس → میٹرکس → "ٹوکن ٹرانزیکشن" منتخب کریں
 
-# یا ایژور CLI کے ذریعے:
+# یا اےژور کمانڈ لائن انٹرفیس کے ذریعے:
 az monitor metrics list \
   --resource $(azd env get-value AZURE_OPENAI_RESOURCE_ID) \
   --metric "TokenTransaction" \
@@ -325,102 +326,102 @@ az monitor metrics list \
 ### API لاگز دیکھیں
 
 ```bash
-# تشخیصی لاگز کو سلسلہ بہ سلسلہ دکھائیں
+# تشخیصی لاگز کو اسٹریم کریں
 az monitor diagnostic-settings create \
   --resource $(azd env get-value AZURE_OPENAI_RESOURCE_ID) \
   --name openai-logs \
   --logs '[{"category": "Audit", "enabled": true}]' \
   --workspace $(azd env get-value LOG_ANALYTICS_WORKSPACE_ID)
 
-# لاگز کو تلاش کریں
+# کوئری لاگز
 az monitor log-analytics query \
   --workspace $(azd env get-value LOG_ANALYTICS_WORKSPACE_ID) \
   --analytics-query "AzureDiagnostics | where Category == 'Audit' | top 10 by TimeGenerated"
 ```
 
-## مسئلے کا حل
+## مسئلہ حل کرنا
 
-### مسئلہ: "رسائی اجازت نہیں" کی غلطی
+### مسئلہ: "رسائی مسترد" کی خرابی
 
-**علامات:** API کال کرتے وقت 403 Forbidden
+**علامات:** API کال کرتے ہوئے 403 Forbidden
 
-**حل:**
+**حل:**  
 ```bash
-# ١۔ تصدیق کریں کہ OpenAI تک رسائی کی منظوری دی گئی ہے
+# 1. تصدیق کریں کہ OpenAI کی رسائی منظور ہو چکی ہے
 az cognitiveservices account show \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
 
-# ٢۔ چیک کریں کہ API کلید درست ہے
+# 2. چیک کریں کہ API کلید درست ہے
 azd env get-value AZURE_OPENAI_API_KEY
 
-# ٣۔ اینڈ پوائنٹ URL کے فارمیٹ کی تصدیق کریں
+# 3. endpoint URL فارمیٹ کی تصدیق کریں
 azd env get-value AZURE_OPENAI_ENDPOINT
-# ہونا چاہیے: https://[name].openai.azure.com/
+# یہ ہونا چاہیے: https://[name].openai.azure.com/
 ```
 
-### مسئلہ: "ریٹ لمٹ تجاوز کر گیا"
+### مسئلہ: "ریٹ حد سے تجاوز"
 
-**علامات:** 429 Too Many Requests
+**علامات:** 429 بہت زیادہ درخواستیں
 
-**حل:**
+**حل:**  
 ```bash
-# 1۔ موجودہ کوٹہ چیک کریں
+# 1۔ موجودہ کوٹا چیک کریں
 az cognitiveservices account deployment show \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
   --deployment-name gpt-4.1
 
-# 2۔ کوٹہ میں اضافہ کی درخواست کریں (اگر ضرورت ہو)
-# Azure پورٹل پر جائیں → OpenAI وسائل → کوٹے → اضافہ کی درخواست کریں
+# 2۔ کوٹا میں اضافہ کی درخواست کریں (اگر ضرورت ہو)
+# Azure پورٹل پر جائیں → OpenAI ریسورس کھولیں → کوٹاز → اضافہ کی درخواست کریں
 
-# 3۔ ریٹری لاجک کو نافذ کریں (پہلے ہی chat.py میں موجود ہے)
-# ایپلیکیشن خود بخود تکرار کرتی ہے جس میں اسکیل بڑھاتا ہوا وقفہ ہوتا ہے
+# 3۔ ریٹری لاجک نافذ کریں (پہلے سے chat.py میں موجود ہے)
+# درخواست خود بخود متواتر وقتوں کے ساتھ دوبارہ کوشش کرتی ہے
 ```
 
 ### مسئلہ: "ماڈل نہیں ملا"
 
-**علامات:** تعیناتی کے لیے 404 کی خرابی
+**علامات:** تعیناتی کے لیے 404 خرابی
 
-**حل:**
+**حل:**  
 ```bash
-# 1. دستیاب تعینات کی فہرست بنائیں
+# 1. دستیاب تعیناتیوں کی فہرست بنائیں
 az cognitiveservices account deployment list \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
 
-# 2. ماحول میں ماڈل کے نام کی تصدیق کریں
+# 2. ماحول میں ماڈل کا نام تصدیق کریں
 echo $AZURE_OPENAI_MODEL
 
-# 3. درست تعینات نام کو اپ ڈیٹ کریں
+# 3. درست تعیناتی کے نام کو اپ ڈیٹ کریں
 export AZURE_OPENAI_MODEL=gpt-4.1  # یا gpt-35-turbo
 ```
 
 ### مسئلہ: زیادہ تاخیر
 
-**علامات:** سست ردعمل وقت (>5 سیکنڈ)
+**علامات:** جواب میں سستی (>5 سیکنڈ)
 
-**حل:**
+**حل:**  
 ```bash
-# 1. علاقائی تاخیر چیک کریں
+# 1۔ علاقائی لیٹنسی چیک کریں
 # صارفین کے قریب ترین خطے میں تعینات کریں
 
-# 2. تیز تر جوابات کے لیے max_tokens کم کریں
+# 2۔ تیز جوابات کے لیے زیادہ سے زیادہ ٹوکنز کم کریں
 export AZURE_OPENAI_MAX_TOKENS=400
 
-# 3. بہتر صارف تجربے کے لیے اسٹریمنگ استعمال کریں
+# 3۔ بہتر صارف تجربے کے لیے اسٹریمنگ استعمال کریں
 python chat.py --stream
 ```
 
-## سیکیورٹی بہترین طریقے
+## حفاظتی بہترین طریقے
 
-### 1. API کلیدوں کی حفاظت
+### 1. API کیز کی حفاظت کریں
 
 ```bash
 # کبھی بھی چابیاں سورس کنٹرول میں جمع نہ کریں
-# کی والٹ استعمال کریں (پہلے سے ترتیب شدہ)
+# کی وولٹ استعمال کریں (پہلے ہی ترتیب دیا گیا ہے)
 
-# چابیاں باقاعدگی سے تبدیل کریں
+# چابیاں باقاعدگی سے گھمائیں
 az cognitiveservices account keys regenerate \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
@@ -430,30 +431,30 @@ az cognitiveservices account keys regenerate \
 ### 2. مواد کی فلٹرنگ نافذ کریں
 
 ```python
-# Microsoft Foundry Models میں بلٹ ان مواد کی فلٹرنگ شامل ہے
-# Azure پورٹل میں ترتیب دیں:
-# OpenAI Resource → Content Filters → Create Custom Filter
+# Microsoft Foundry ماڈلز میں بلٹ ان مواد کی فلٹرنگ شامل ہے
+# Azure Portal میں ترتیب دیں:
+# OpenAI Resource → مواد کے فلٹرز → کسٹم فلٹر بنائیں
 
-# زمرے: نفرت، جنسی، تشدد، خود کو نقصان پہنچانا
-# درجات: کم، درمیانہ، اعلیٰ فلٹرنگ
+# زمرے: نفرت انگیز، جنسی، تشدد، خود کو نقصان
+# سطحیں: کم، درمیانی، اعلیٰ فلٹرنگ
 ```
 
-### 3. مینیجڈ شناخت استعمال کریں (پیداواری)
+### 3. منظم شناخت (مینجڈ آئیڈینٹی) استعمال کریں (پیداوار)
 
 ```bash
-# پیداواری تعینات کے لیے، منظم شناخت استعمال کریں
-# API کلیدوں کے بجائے (ایپ کو Azure پر ہوسٹنگ کی ضرورت ہے)
+# پیداواری تعیناتی کے لیے، منیجڈ شناخت استعمال کریں
+# API چابیاں کے بجائے (ایپ کو آزور پر ہوسٹ کرنا ضروری ہے)
 
-# infra/openai.bicep کو شامل کرنے کے لیے اپ ڈیٹ کریں:
+# infrra/openai.bicep کو اپ ڈیٹ کریں تاکہ شامل ہو:
 # identity: { قسم: 'SystemAssigned' }
 ```
 
 ## ترقی
 
-### لوکل چلائیں
+### مقامی طور پر چلائیں
 
 ```bash
-# انحصاریات انسٹال کریں
+# انحصارات انسٹال کریں
 pip install -r src/requirements.txt
 
 # ماحولیاتی متغیرات سیٹ کریں
@@ -461,27 +462,27 @@ export AZURE_OPENAI_ENDPOINT="https://[name].openai.azure.com/"
 export AZURE_OPENAI_API_KEY="your-api-key"
 export AZURE_OPENAI_MODEL="gpt-4.1"
 
-# درخواست چلائیں
+# ایپلی کیشن چلائیں
 python src/chat.py
 ```
 
 ### ٹیسٹ چلائیں
 
 ```bash
-# ٹیسٹ کی انحصاریوں کو انسٹال کریں
+# ٹیسٹ کی ضروریات انسٹال کریں
 pip install pytest pytest-cov
 
-# ٹیسٹ چلاؤ
+# ٹیسٹ چلائیں
 pytest tests/ -v
 
-# کورویج کے ساتھ
+# کوریج کے ساتھ
 pytest tests/ --cov=src --cov-report=html
 ```
 
 ### ماڈل کی تعیناتی کو اپ ڈیٹ کریں
 
 ```bash
-# مختلف ماڈل ورژن کو تعینات کریں
+# مختلف ماڈل ورژن تعینات کریں
 az cognitiveservices account deployment create \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
@@ -496,14 +497,14 @@ az cognitiveservices account deployment create \
 ## صفائی
 
 ```bash
-# تمام Azure وسائل کو حذف کریں
+# تمام ایزور وسائل حذف کریں
 azd down --force --purge
 
-# یہ مندرجہ ذیل کو حذف کرے گا:
-# - OpenAI سروس
+# یہ ہٹاتا ہے:
+# - اوپن اے آئی سروس
 # - کی والٹ (90 دن کی نرم حذف کے ساتھ)
 # - ریسورس گروپ
-# - تمام تعیناتیاں اور ترتیبات
+# - تمام تعیناتیاں اور ترتیبیں
 ```
 
 ## اگلے اقدامات
@@ -512,58 +513,58 @@ azd down --force --purge
 
 1. **ویب انٹرفیس شامل کریں** - React/Vue فرنٹ اینڈ بنائیں  
    ```bash
-   # فرنٹ اینڈ سروس کو azure.yaml میں شامل کریں
-   # Azure Static Web Apps پر تعینات کریں
+   # azure.yaml میں فرنٹ اینڈ سروس شامل کریں
+   # Azure Static Web Apps پر تعین کریں
    ```
 
-2. **RAG نافذ کریں** - Azure AI سرچ کے ساتھ دستاویزات کی تلاش شامل کریں  
+2. **RAG نافذ کریں** - Azure AI سرچ کے ساتھ دستاویز تلاش شامل کریں  
    ```python
-   # ایزور کگنیٹیو سرچ کو مربوط کریں
+   # ایزور اے آئی سرچ کو ضم کریں
    # دستاویزات اپ لوڈ کریں اور ویکٹر انڈیکس بنائیں
    ```
 
-3. **فنکشن کالنگ شامل کریں** - ٹول کے استعمال کی اجازت دیں  
+3. **فنکشن کالنگ شامل کریں** - ٹول استعمال کو فعال کریں  
    ```python
-   # چیٹ.py میں فنکشنز کو متعین کریں
-   # gpt-4.1 کو خارجی APIs کو کال کرنے دیں
+   # chat.py میں فنکشنز کی تعریف کریں
+   # gpt-4.1 کو بیرونی API کال کرنے دیں
    ```
 
-4. **کثیر ماڈل سپورٹ** - متعدد ماڈلز تعینات کریں  
+4. **کئی ماڈلز کی حمایت** - متعدد ماڈلز کی تعیناتی  
    ```bash
-   # جی پی ٹی-35-ٹربو، ایمبیڈنگز ماڈلز شامل کریں
-   # ماڈل روٹنگ منطق نافذ کریں
+   # جی پی ٹی -۳۵-ٹربو، ایمبیڈنگ ماڈلز شامل کریں
+   # ماڈل راؤٹنگ منطق لاگو کریں
    ```
 
 ### متعلقہ مثالیں
 
-- **[ریٹیل ملٹی ایجنٹ](../retail-scenario.md)** - اعلی درجے کی ملٹی ایجنٹ فن تعمیر  
-- **[ڈیٹا بیس ایپ](../../../../examples/database-app)** - مستقل اسٹوریج شامل کریں  
+- **[ریٹیل ملٹی ایجنٹ](../retail-scenario.md)** - جدید ملٹی ایجنٹ فن تعمیر  
+- **[ڈیٹابیس ایپ](../../../../examples/database-app)** - مسلسل ذخیرہ شامل کریں  
 - **[کنٹینر ایپس](../../../../examples/container-app)** - کنٹینرائزڈ سروس کے طور پر تعینات کریں  
 
-### سیکھنے کے وسائل
+### تعلیمی وسائل
 
-- 📚 [AZD فار بگنرز کورس](../../README.md) - اہم کورس کا مرکز  
+- 📚 [AZD ابتدائیوں کے لیے کورس](../../README.md) - مرکزی کورس ہوم  
 - 📚 [Microsoft Foundry Models دستاویزات](https://learn.microsoft.com/azure/ai-services/openai/) - سرکاری دستاویزات  
 - 📚 [OpenAI API ریفرنس](https://platform.openai.com/docs/api-reference) - API تفصیلات  
-- 📚 [ریسپانسبل AI](https://www.microsoft.com/ai/responsible-ai) - بہترین عملی طریقے  
+- 📚 [Responsible AI](https://www.microsoft.com/ai/responsible-ai) - بہترین طریقے  
 
 ## اضافی وسائل
 
 ### دستاویزات
-- **[Microsoft Foundry Models سروس](https://learn.microsoft.com/azure/ai-services/openai/)** - مکمل رہنما  
+- **[Microsoft Foundry Models سروس](https://learn.microsoft.com/azure/ai-services/openai/)** - مکمل رہنمائی  
 - **[gpt-4.1 ماڈلز](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - ماڈل کی صلاحیتیں  
 - **[مواد کی فلٹرنگ](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - حفاظتی خصوصیات  
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd کا حوالہ  
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd حوالہ  
 
 ### ٹیوٹوریلز
 - **[OpenAI فوری آغاز](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - پہلی تعیناتی  
-- **[چیٹ مکمل ہونے کے طریقے](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - چیٹ ایپس بنانا  
-- **[فنکشن کالنگ](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - اعلی درجے کی خصوصیات  
+- **[چیٹ کمپلیشن](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - چیٹ ایپس کی تیاری  
+- **[فنکشن کالنگ](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - جدید خصوصیات  
 
 ### اوزار
-- **[Microsoft Foundry Models اسٹوڈیو](https://oai.azure.com/)** - ویب پر مبنی پلے گراونڈ  
-- **[پرومپٹ انجینئرنگ گائیڈ](https://platform.openai.com/docs/guides/prompt-engineering)** - بہتر پرومپٹس لکھنا  
-- **[ٹوکن کیلکولیٹر](https://platform.openai.com/tokenizer)** - ٹوکن استعمال کا تخمینہ  
+- **[Microsoft Foundry Models اسٹوڈیو](https://oai.azure.com/)** - ویب بیسڈ پلے گراؤنڈ  
+- **[پرومپٹ انجینئرنگ گائیڈ](https://platform.openai.com/docs/guides/prompt-engineering)** - بہتر پرومپٹ لکھنا  
+- **[ٹوکن کیلکولیٹر](https://platform.openai.com/tokenizer)** - ٹوکن کے استعمال کا اندازہ لگائیں  
 
 ### کمیونٹی
 - **[Azure AI Discord](https://discord.gg/azure)** - کمیونٹی سے مدد حاصل کریں  
@@ -572,15 +573,15 @@ azd down --force --purge
 
 ---
 
-**🎉 کامیابی!** آپ نے Microsoft Foundry Models تعینات کر دیے ہیں اور ایک فعال چیٹ ایپلیکیشن بنا لی ہے۔ gpt-4.1 کی صلاحیتوں کو دریافت کریں اور مختلف پرومپٹس و استعمالات کے ساتھ تجربہ کریں۔
+**🎉 کامیابی!** آپ نے Microsoft Foundry Models کو تعینات کیا اور کام کرنے والی چیٹ ایپلیکیشن بنالی ہے۔ gpt-4.1 کی صلاحیتوں کو تلاش کریں اور مختلف پرومپٹس اور استعمال کیسز کے ساتھ تجربہ کریں۔
 
 **سوالات؟** [ایک مسئلہ کھولیں](https://github.com/microsoft/AZD-for-beginners/issues) یا [FAQ](../../resources/faq.md) دیکھیں۔
 
-**لاگت کا انتباہ:** ٹیسٹنگ ختم کرنے پر `azd down` کمانڈ چلائیں تاکہ جاری چارجز سے بچا جا سکے (~فعال استعمال کے لیے $50-100/ماہ)۔
+**لاگت کی اطلاع:** ٹیسٹنگ مکمل ہونے پر `azd down` چلانا یاد رکھیں تاکہ جاری چارجز سے بچا جا سکے (~$50-100/ماہ فعال استعمال کے لیے)۔
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ڈسکلیمر**:  
-اس دستاویز کا ترجمہ AI ترجمہ سروس [Co-op Translator](https://github.com/Azure/co-op-translator) کے ذریعے کیا گیا ہے۔ اگرچہ ہم درستگی کے لیے کوشاں ہیں، براہ کرم اس بات کا خیال رکھیں کہ خودکار ترجمے میں غلطیاں یا عدم صحت ہو سکتی ہے۔ اصل دستاویز اپنی مادری زبان میں معتبر ماخذ سمجھی جانی چاہیے۔ اہم معلومات کے لیے پیشہ ورانہ انسانی ترجمہ کی سفارش کی جاتی ہے۔ اس ترجمے کے استعمال سے پیدا ہونے والی کسی بھی غلط فہمی یا غلط تشریح کے لیے ہم ذمہ دار نہیں ہیں۔
+**ڈس کلیمر**:
+یہ دستاویز AI ترجمہ سروس [Co-op Translator](https://github.com/Azure/co-op-translator) کے ذریعے ترجمہ کی گئی ہے۔ جبکہ ہم درستگی کے لیے کوشاں ہیں، براہ کرم اس بات سے آگاہ رہیں کہ خودکار ترجمے میں غلطیاں یا عدم درستیاں ہو سکتی ہیں۔ اصل دستاویز اپنے مادری زبان میں مستند ماخذ سمجھی جائے گی۔ حساس معلومات کے لیے پیشہ ور انسانی ترجمہ کی سفارش کی جاتی ہے۔ اس ترجمے کے استعمال سے پیدا ہونے والی کسی بھی غلط فہمی یا غلط تشریح کی ذمہ داری ہم قبول نہیں کرتے۔
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
