@@ -1,38 +1,39 @@
-# Simpel Flask-API - Container App-eksempel
+# Simple Flask API - Container App Eksempel
 
 **Læringssti:** Begynder ⭐ | **Tid:** 25-35 minutter | **Pris:** $0-15/måned
 
-En komplet, fungerende Python Flask REST API udrullet til Azure Container Apps ved hjælp af Azure Developer CLI (azd). Dette eksempel demonstrerer containerudrulning, autoskalering og grundlæggende overvågning.
+En komplet, fungerende Python Flask REST-API udrullet til Azure Container Apps ved hjælp af Azure Developer CLI (azd). Dette eksempel demonstrerer containerudrulning, autoskalering og grundlæggende overvågning.
 
-## 🎯 Hvad du vil lære
+## 🎯 Hvad du lærer
 
 - Udrul en containeriseret Python-applikation til Azure
 - Konfigurer autoskalering med scale-to-zero
-- Implementér health probes og readiness checks
-- Overvåg applikationslogs og metrics
+- Implementer sundhedsprober og readiness-tjek
+- Overvåg applikationens logfiler og målinger
 - Brug Azure Developer CLI til hurtig udrulning
 
-## 📦 Hvad der er inkluderet
+## 📦 Hvad er inkluderet
 
-✅ **Flask-applikation** - Færdig REST-API med CRUD-operationer (`src/app.py`)  
+✅ **Flask-applikation** - Fuldstændig REST-API med CRUD-operationer (`src/app.py`)  
 ✅ **Dockerfile** - Produktionsklar containerkonfiguration  
 ✅ **Bicep-infrastruktur** - Container Apps-miljø og API-udrulning  
-✅ **AZD-konfiguration** - Udrulning med én kommando  
-✅ **Health Probes** - Liveness- og readiness-checks konfigureret  
-✅ **Auto-skalering** - 0-10 replikaer baseret på HTTP-belastning  
+✅ **AZD-konfiguration** - Opsætning til udrulning med én kommando  
+✅ **Sundhedsprober** - Liveness- og readiness-tjek konfigureret  
+✅ **Autoskalering** - 0-10 replikaer baseret på HTTP-trafik  
 
 ## Arkitektur
 
 ```mermaid
 graph TD
     subgraph ACA[Azure Container Apps-miljø]
-        Flask[Flask API-container<br/>Sundhedsendpoints<br/>REST-API<br/>Autoskalering 0-10 replikaer]
+        Flask[Flask API-container<br/>Sundhedsendepunkter<br/>REST API<br/>Autoskalering 0-10 replikaer]
         AppInsights[Application Insights]
     end
 ```
+
 ## Forudsætninger
 
-### Krævet
+### Påkrævet
 - **Azure Developer CLI (azd)** - [Installationsvejledning](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
 - **Azure-abonnement** - [Gratis konto](https://azure.microsoft.com/free/)
 - **Docker Desktop** - [Installer Docker](https://www.docker.com/products/docker-desktop/) (til lokal test)
@@ -40,7 +41,7 @@ graph TD
 ### Bekræft forudsætninger
 
 ```bash
-# Kontroller azd-version (kræver 1.5.0 eller højere)
+# Kontroller azd-version (kræver 1.5.0 eller nyere)
 azd version
 
 # Bekræft Azure-login
@@ -50,17 +51,17 @@ azd auth login
 docker --version
 ```
 
-## ⏱️ Udrulningstidslinje
+## ⏱️ Tidslinje for udrulning
 
-| Fase | Varighed | Hvad sker der |
+| Phase | Duration | What Happens |
 |-------|----------|--------------||
-| Opsætning af miljø | 30 sekunder | Opret azd-miljø |
-| Byg container | 2-3 minutter | Docker bygger Flask-app |
-| Provisionér infrastruktur | 3-5 minutter | Opret Container Apps, containerregister, overvågning |
-| Udrul applikation | 2-3 minutter | Push billedet og udrul til Container Apps |
-| **I alt** | **8-12 minutter** | Udrulning fuldført |
+| Environment setup | 30 seconds | Create azd environment |
+| Build container | 2-3 minutes | Docker build Flask app |
+| Provision infrastructure | 3-5 minutes | Create Container Apps, registry, monitoring |
+| Deploy application | 2-3 minutes | Push image and deploy to Container Apps |
+| **Total** | **8-12 minutes** | Complete deployment ready |
 
-## Kom godt i gang
+## Hurtigstart
 
 ```bash
 # Naviger til eksemplet
@@ -71,19 +72,19 @@ azd env new myflaskapi
 
 # Udrul alt (infrastruktur + applikation)
 azd up
-# Du vil blive bedt om at:
+# Du bliver bedt om at:
 # 1. Vælg Azure-abonnement
 # 2. Vælg placering (f.eks. eastus2)
 # 3. Vent 8-12 minutter på udrulningen
 
-# Hent dit API-endepunkt
+# Hent dit API-endpoint
 azd env get-values
 
 # Test API'en
 curl $(azd env get-value API_ENDPOINT)/health
 ```
 
-**Forventet resultat:**
+**Forventet output:**
 ```json
 {
   "status": "healthy",
@@ -107,44 +108,44 @@ azd show
 # - Status: Kører
 ```
 
-### Trin 2: Test API-endepunkter
+### Trin 2: Test API-endpoints
 
 ```bash
-# Hent API-endepunkt
+# Hent API-endpoint
 API_URL=$(azd env get-value API_ENDPOINT)
 
-# Sundhedstjek
+# Test sundhed
 curl $API_URL/health
 
-# Test rodendepunkt
+# Test rod-endpoint
 curl $API_URL/
 
-# Opret et element
+# Opret en vare
 curl -X POST $API_URL/api/items \
   -H "Content-Type: application/json" \
   -d '{"name": "Test Item", "description": "My first item"}'
 
-# Hent alle elementer
+# Hent alle varer
 curl $API_URL/api/items
 ```
 
-**Succes-kriterier:**
-- ✅ Health-endpoint returnerer HTTP 200
-- ✅ Root-endpoint viser API-information
+**Succeskriterier:**
+- ✅ Sundheds-endpoint returnerer HTTP 200
+- ✅ Root-endpoint viser API-oplysninger
 - ✅ POST opretter element og returnerer HTTP 201
 - ✅ GET returnerer oprettede elementer
 
 ### Trin 3: Se logfiler
 
 ```bash
-# Stream live-logfiler via azd monitor
+# Se live-logfiler med azd monitor
 azd monitor --logs
 
 # Eller brug Azure CLI:
 az containerapp logs show --name api --resource-group $RG_NAME --follow
 
 # Du bør se:
-# - Opstartsmeddelelser fra Gunicorn
+# - Gunicorn-opstartsmeddelelser
 # - HTTP-anmodningslogfiler
 # - Applikationsinformationslogfiler
 ```
@@ -166,9 +167,9 @@ simple-flask-api/
     └── Dockerfile
 ```
 
-## API-endepunkter
+## API-endpoints
 
-| Endpoint | Metode | Beskrivelse |
+| Endpoint | Method | Description |
 |----------|--------|-------------|
 | `/health` | GET | Sundhedstjek |
 | `/api/items` | GET | List alle elementer |
@@ -182,7 +183,7 @@ simple-flask-api/
 ### Miljøvariabler
 
 ```bash
-# Indstil brugerdefineret konfiguration
+# Angiv brugerdefineret konfiguration
 azd env set PORT 8000
 azd env set LOG_LEVEL info
 azd env set MAX_REPLICAS 20
@@ -191,9 +192,9 @@ azd env set MAX_REPLICAS 20
 ### Skaleringskonfiguration
 
 API'en skalerer automatisk baseret på HTTP-trafik:
-- **Min. replikaer**: 0 (skalerer til nul når inaktiv)
-- **Maks. replikaer**: 10
-- **Samtidige anmodninger pr. replika**: 50
+- **Min Replicas**: 0 (skalerer til nul når inaktiv)
+- **Max Replicas**: 10
+- **Concurrent Requests per Replica**: 50
 
 ## Udvikling
 
@@ -217,7 +218,7 @@ curl http://localhost:8000/health
 # Byg Docker-billede
 docker build -t flask-api:local ./src
 
-# Kør container lokalt
+# Kør containeren lokalt
 docker run -p 8000:8000 flask-api:local
 
 # Test containeren
@@ -233,7 +234,7 @@ curl http://localhost:8000/health
 azd up
 ```
 
-### Udrulning (kun kode)
+### Kun kode-udrulning
 
 ```bash
 # Udrul kun applikationskode (infrastrukturen uændret)
@@ -255,7 +256,7 @@ azd deploy api
 ### Se logfiler
 
 ```bash
-# Strøm live-logfiler ved hjælp af azd monitor
+# Stream live-logfiler med azd monitor
 azd monitor --logs
 
 # Eller brug Azure CLI til Container Apps:
@@ -265,7 +266,7 @@ az containerapp logs show --name api --resource-group $RG_NAME --follow
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 ```
 
-### Overvåg metrics
+### Overvåg målinger
 
 ```bash
 # Åbn Azure Monitor-dashboard
@@ -279,7 +280,7 @@ az monitor metrics list \
 
 ## Test
 
-### Sundhedstjek
+### Sundhedscheck
 
 ```bash
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
@@ -309,19 +310,19 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
 
 ## Omkostningsoptimering
 
-Denne udrulning bruger scale-to-zero, så du betaler kun, når API'en behandler anmodninger:
+Denne udrulning bruger scale-to-zero, så du betaler kun, når API'en behandler forespørgsler:
 
-- **Inaktiv omkostning**: ~$0/måned (skaleret til nul)
-- **Aktiv omkostning**: ~$0.000024/sekund pr. replika
+- **Inaktiv pris**: ~$0/måned (skaleret til nul)
+- **Aktiv omkostning**: ~$0.000024/sekund per replika
 - **Forventet månedlig omkostning** (let brug): $5-15
 
 ### Reducer omkostninger yderligere
 
 ```bash
-# Skaler ned det maksimale antal replikaer til udvikling
+# Reducer maks. antal replikaer for dev
 azd env set MAX_REPLICAS 3
 
-# Brug kortere timeout ved inaktivitet
+# Brug kortere tomgangstimeout
 azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 minutter
 ```
 
@@ -330,7 +331,7 @@ azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 minutter
 ### Container starter ikke
 
 ```bash
-# Kontrollér containerlogs med Azure CLI
+# Kontroller containerlogfiler ved hjælp af Azure CLI
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 
 # Bekræft, at Docker-billedet bygges lokalt
@@ -348,12 +349,12 @@ az containerapp show --name api --resource-group rg-simple-flask-api \
 ### Høje svartider
 
 ```bash
-# Kontroller CPU-/hukommelsesforbrug
+# Kontroller CPU- og hukommelsesforbrug
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# Skaler ressourcerne op efter behov
+# Skaler ressourcerne op om nødvendigt
 az containerapp update --name api --resource-group rg-simple-flask-api \
   --cpu 1.0 --memory 2Gi
 ```
@@ -375,7 +376,7 @@ azd down --force --purge
    # Opdater app.py med databaseforbindelse
    ```
 
-2. **Tilføj autentificering** - Implementér Azure AD eller API-nøgler
+2. **Tilføj autentificering** - Implementer Microsoft Entra ID eller API-nøgler
    ```python
    # Tilføj autentificeringsmiddleware til app.py
    from functools import wraps
@@ -388,7 +389,7 @@ azd down --force --purge
    on: [push]
    ```
 
-4. **Tilføj Managed Identity** - Sikr adgang til Azure-tjenester
+4. **Tilføj Managed Identity** - Sikre adgang til Azure-tjenester
    ```bicep
    # Update infra/app/api.bicep
    identity: { type: 'SystemAssigned' }
@@ -396,20 +397,20 @@ azd down --force --purge
 
 ### Relaterede eksempler
 
-- **[Database-app](../../../../../examples/database-app)** - Færdigt eksempel med SQL Database
+- **[Database-app](../../../../../examples/database-app)** - Fuldstændigt eksempel med SQL-database
 - **[Mikrotjenester](../../../../../examples/container-app/microservices)** - Arkitektur med flere services
-- **[Container Apps Masterguide](../README.md)** - Alle containermønstre
+- **[Container Apps Master Guide](../README.md)** - Alle container-mønstre
 
 ### Læringsressourcer
 
-- 📚 [AZD for Beginners Course](../../../README.md) - Hovedsiden for kurset
-- 📚 [Container Apps-mønstre](../README.md) - Flere udrulningsmønstre
-- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - Fællesskabsskabeloner
+- 📚 [AZD For Beginners Course](../../../README.md) - Kursusets hovedside
+- 📚 [Container Apps Patterns](../README.md) - Flere udrulningsmønstre
+- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - Skabeloner fra fællesskabet
 
 ## Yderligere ressourcer
 
 ### Dokumentation
-- **[Flask-dokumentation](https://flask.palletsprojects.com/)** - Guide til Flask-rammeværket
+- **[Flask Documentation](https://flask.palletsprojects.com/)** - Vejledning til Flask-rammeværket
 - **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Officiel Azure-dokumentation
 - **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd kommando-reference
 
@@ -424,13 +425,13 @@ azd down --force --purge
 
 ---
 
-**🎉 Tillykke!** Du har udrullet en produktionsklar Flask-API til Azure Container Apps med auto-skalering og overvågning.
+**🎉 Tillykke!** Du har udrullet en produktionsklar Flask-API til Azure Container Apps med autoskalering og overvågning.
 
-**Spørgsmål?** [Opret en issue](https://github.com/microsoft/AZD-for-beginners/issues) eller se [FAQ](../../../resources/faq.md)
+**Spørgsmål?** [Opret en issue](https://github.com/microsoft/AZD-for-beginners/issues) eller tjek [FAQ](../../../resources/faq.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, bedes du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på originalsproget bør betragtes som den autoritative kilde. For kritisk information anbefales en professionel, menneskelig oversættelse. Vi er ikke ansvarlige for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

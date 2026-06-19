@@ -6,31 +6,33 @@
 
 ## Oversikt
 
-Dette kapitlet dekker avanserte mønstre for multi-agent-arkitektur, agentorkestrering og produksjonsklare AI-distribusjoner for komplekse scenarier.
+Dette kapittelet dekker avanserte multi-agent arkitektur-mønstre, agentorkestrering og produksjonsklare AI-distribusjoner for komplekse scenarier.
 
-> Validert mot `azd 1.23.12` i mars 2026.
+> Validert mot `azd 1.25.6` i juni 2026.
 
 ## Læringsmål
 
-Ved å fullføre dette kapitlet vil du:
-- Forstå multi-agent-arkitektur-mønstre
+Ved å fullføre dette kapittelet vil du:
+- Forstå multi-agent arkitektur-mønstre
 - Distribuere koordinerte AI-agent-systemer
-- Implementere agent-til-agent-kommunikasjon
-- Bygge produksjonsklare multi-agentløsninger
+- Implementere agent-til-agent kommunikasjon
+- Bygge produksjonsklare multi-agent løsninger
 
 ---
 
 ## 📚 Leksjoner
 
 | # | Leksjon | Beskrivelse | Tid |
-|---|--------|-------------|------|
-| 1 | [Retail Multi-Agent Solution](../../examples/retail-scenario.md) | Komplett implementasjonsgjennomgang | 90 min |
-| 2 | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) | Agentorkestreringsstrategier | 30 min |
-| 3 | [ARM Template Deployment](../../examples/retail-multiagent-arm-template/README.md) | Ett-klikk-distribusjon | 30 min |
+|---|---------|-------------|-----|
+| 1 | [Multi-Agent Basics](multi-agent-basics.md) | Praktisk: distribuer en fungerende multi-agent app med `azd up` | 45 min |
+| 2 | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) | Agentorkestreringsstrategier (fortsetter i kapittel 6) | 30 min |
+| 3 | [ARM Template Deployment](../../examples/retail-multiagent-arm-template/README.md) | Ett-klikks distribusjonseksempel | 30 min |
+
+> **Start med leksjon 1.** Det er den eneste fullt praktiske, distribuerbare leksjonen i dette kapittelet. Leksjon 2 er i kapittel 6 (den deles med forhåndsdistribusjonsplanlegging), og [Retail Multi-Agent Solution](../../examples/retail-scenario.md) er en arkitekturmal—en designreferanse, ikke en ett-kommando-mal.
 
 ---
 
-## 🚀 Rask start
+## 🚀 Kom i gang raskt
 
 ```bash
 # Alternativ 1: Distribuer fra en mal
@@ -43,7 +45,7 @@ azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **Hvilken tilnærming?** Bruk `azd init --template` for å starte fra en fungerende mal. Bruk `azd ai agent init` når du har din egen agent-manifest. Se [AZD AI CLI referanse](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for fullstendige detaljer.
+> **Hvilken tilnærming?** Bruk `azd init --template` for å starte fra en fungerende prøve. Bruk `azd ai agent init` når du har ditt eget agentmanifest. Se [AZD AI CLI referanse](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for fullstendige detaljer.
 
 ---
 
@@ -51,38 +53,39 @@ azd up
 
 ```mermaid
 graph TD
-    Orchestrator[Orkestrator Agent<br/>Ruter forespørsler, administrerer arbeidsflyt] --> Customer[Kundeagent<br/>Brukerforespørsler, preferanser]
-    Orchestrator --> Inventory[Lageragent<br/>Lagerbeholdning, bestillinger]
+    Orchestrator[Orkestratoragent<br/>Ruter forespørsler, administrerer arbeidsflyt] --> Customer[Kundeagent<br/>Brukerspørsmål, preferanser]
+    Orchestrator --> Inventory[Lageragent<br/>Lagerstatus, bestillinger]
 ```
+
 ---
 
-## 🎯 Utvalgt løsning: Retail Multi-Agent
+## 🎯 Fokuserte løsning: Retail Multi-Agent
 
 [Retail Multi-Agent Solution](../../examples/retail-scenario.md) demonstrerer:
 
 - **Kundeagent**: Håndterer brukerinteraksjoner og preferanser
 - **Lageragent**: Administrerer lager og ordrebehandling
 - **Orkestrator**: Koordinerer mellom agenter
-- **Delt minne**: Tverragent kontekst-håndtering
+- **Delt Minne**: Tverragents kontekststyring
 
 ### Brukte tjenester
 
 | Tjeneste | Formål |
-|---------|---------|
+|----------|---------|
 | Microsoft Foundry Models | Språkforståelse |
 | Azure AI Search | Produktkatalog |
-| Cosmos DB | Agentstatus og minne |
+| Cosmos DB | Agenttilstand og minne |
 | Container Apps | Agenthosting |
-| Application Insights | Overvåking |
+| Application Insights | Overvåkning |
 
 ---
 
 ## 🔗 Navigasjon
 
 | Retning | Kapittel |
-|-----------|---------|
+|---------|----------|
 | **Forrige** | [Kapittel 4: Infrastruktur](../chapter-04-infrastructure/README.md) |
-| **Neste** | [Kapittel 6: Pre-Deployment](../chapter-06-pre-deployment/README.md) |
+| **Neste** | [Kapittel 6: Forhåndsdistribusjon](../chapter-06-pre-deployment/README.md) |
 
 ---
 
@@ -95,6 +98,6 @@ graph TD
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi søker nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+**Ansvarsfraskrivelse**:
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på originalspråket skal betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

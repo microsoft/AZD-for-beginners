@@ -1,49 +1,50 @@
-# Simple Flask API - Container App-eksempel
+# Enkel Flask API - Container App Eksempel
 
 **Læringssti:** Nybegynner ⭐ | **Tid:** 25-35 minutter | **Kostnad:** 0-15 USD/måned
 
-En komplett, fungerende Python Flask REST API distribuert til Azure Container Apps ved bruk av Azure Developer CLI (azd). Dette eksemplet demonstrerer containerdistribusjon, autoskalering og grunnleggende overvåking.
+En komplett, fungerende Python Flask REST API distribuert til Azure Container Apps ved bruk av Azure Developer CLI (azd). Dette eksempelet demonstrerer containervisning, automatisk skalering og grunnleggende overvåking.
 
-## 🎯 Hva du vil lære
+## 🎯 Hva Du Vil Lære
 
-- Distribuere en containerisert Python-applikasjon til Azure  
-- Konfigurere autoskalering med skalering til null  
-- Implementere helseprober og readiness-sjekker  
-- Overvåke applikasjonslogger og -metrikk  
-- Bruke Azure Developer CLI for rask distribusjon  
+- Distribuere en containerisert Python-applikasjon til Azure
+- Konfigurere automatisk skalering med skalering til null
+- Implementere helseprober og klarhetskontroller
+- Overvåke applikasjonslogger og måledata
+- Bruke Azure Developer CLI for rask distribusjon
 
-## 📦 Hva som er inkludert
+## 📦 Hva Som Er Inkludert
 
-✅ **Flask-applikasjon** - Komplett REST API med CRUD-operasjoner (`src/app.py`)  
+✅ **Flask Applikasjon** - Komplett REST API med CRUD-operasjoner (`src/app.py`)  
 ✅ **Dockerfile** - Produksjonsklar containerkonfigurasjon  
-✅ **Bicep-infrastruktur** - Container Apps-miljø og API-distribusjon  
-✅ **AZD-konfigurasjon** - Én-kommando distribusjonsoppsett  
-✅ **Helseprober** - Liveness og readiness sjekker konfigurert  
-✅ **Autoskalering** - 0-10 replikaer basert på HTTP-belastning  
+✅ **Bicep Infrastruktur** - Container Apps-miljø og API-distribusjon  
+✅ **AZD Konfigurasjon** - Distribusjonsoppsett med én kommando  
+✅ **Helseprober** - Konfigurerte liveness- og readiness-kontroller  
+✅ **Automatisk skalering** - 0-10 replikaer basert på HTTP-behov  
 
 ## Arkitektur
 
 ```mermaid
 graph TD
     subgraph ACA[Azure Container Apps-miljø]
-        Flask[Flask API-beholder<br/>Hendelsesendepunkter<br/>REST API<br/>Autoskalering 0-10 replikaer]
+        Flask[Flask API-beholder<br/>Helsesjekkendepunkter<br/>REST-API<br/>Autoskalering 0-10 replikater]
         AppInsights[Application Insights]
     end
 ```
+
 ## Forutsetninger
 
 ### Påkrevd
-- **Azure Developer CLI (azd)** - [Installationsveiledning](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)  
-- **Azure-abonnement** - [Gratis konto](https://azure.microsoft.com/free/)  
-- **Docker Desktop** - [Installer Docker](https://www.docker.com/products/docker-desktop/) (for lokal testing)  
+- **Azure Developer CLI (azd)** - [Installering guide](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+- **Azure-abonnement** - [Gratis konto](https://azure.microsoft.com/free/)
+- **Docker Desktop** - [Installer Docker](https://www.docker.com/products/docker-desktop/) (for lokal testing)
 
-### Bekreft forutsetninger
+### Verifiser Forutsetninger
 
 ```bash
-# Sjekk azd-versjon (trenger 1.5.0 eller høyere)
+# Sjekk azd-versjon (krever 1.5.0 eller høyere)
 azd version
 
-# Verifiser Azure-innlogging
+# Verifiser Azure-pålogging
 azd auth login
 
 # Sjekk Docker (valgfritt, for lokal testing)
@@ -52,15 +53,15 @@ docker --version
 
 ## ⏱️ Distribusjonstidslinje
 
-| Fase | Varighet | Hva skjer |
+| Fase | Varighet | Hva Skjer |
 |-------|----------|--------------||
 | Miljøoppsett | 30 sekunder | Opprett azd-miljø |
-| Bygg container | 2-3 minutter | Docker bygger Flask-applikasjon |
-| Provisionere infrastruktur | 3-5 minutter | Opprett Container Apps, registry, overvåking |
-| Distribuer applikasjon | 2-3 minutter | Push av bilde og distribusjon til Container Apps |
-| **Totalt** | **8-12 minutter** | Distribusjon ferdig og klar |
+| Bygg container | 2-3 minutter | Docker bygger Flask-app |
+| Tilrettelegg infrastruktur | 3-5 minutter | Opprett Container Apps, register, overvåking |
+| Distribuer applikasjon | 2-3 minutter | Push bilde og distribuer til Container Apps |
+| **Totalt** | **8-12 minutter** | Fullført distribusjon klar |
 
-## Rask start
+## Komme I Gang Raskt
 
 ```bash
 # Naviger til eksemplet
@@ -72,18 +73,18 @@ azd env new myflaskapi
 # Distribuer alt (infrastruktur + applikasjon)
 azd up
 # Du vil bli bedt om å:
-# 1. Velg Azure-abonnement
-# 2. Velg plassering (f.eks., eastus2)
-# 3. Vent 8-12 minutter for distribusjon
+# 1. Velge Azure-abonnement
+# 2. Velge lokasjon (f.eks., eastus2)
+# 3. Vent 8-12 minutter på distribusjon
 
-# Hent API-endepunktet ditt
+# Få API-endepunktet ditt
 azd env get-values
 
 # Test API-en
 curl $(azd env get-value API_ENDPOINT)/health
 ```
 
-**Forventet utdata:**  
+**Forventet Utdata:**
 ```json
 {
   "status": "healthy",
@@ -93,9 +94,9 @@ curl $(azd env get-value API_ENDPOINT)/health
 }
 ```
 
-## ✅ Bekreft distribusjon
+## ✅ Verifiser Distribusjon
 
-### Steg 1: Sjekk distribusjonsstatus
+### Trinn 1: Sjekk Distribusjonsstatus
 
 ```bash
 # Vis distribuerte tjenester
@@ -107,7 +108,7 @@ azd show
 # - Status: Kjører
 ```
 
-### Steg 2: Test API-endepunkter
+### Trinn 2: Test API-Endepunkter
 
 ```bash
 # Hent API-endepunkt
@@ -116,7 +117,7 @@ API_URL=$(azd env get-value API_ENDPOINT)
 # Test helsetilstand
 curl $API_URL/health
 
-# Test rotnivå endepunkt
+# Test rotendepunkt
 curl $API_URL/
 
 # Opprett et element
@@ -128,23 +129,23 @@ curl -X POST $API_URL/api/items \
 curl $API_URL/api/items
 ```
 
-**Suksesskriterier:**  
-- ✅ Health-endepunkt returnerer HTTP 200  
-- ✅ Rotendepunkt viser API-informasjon  
-- ✅ POST oppretter element og returnerer HTTP 201  
-- ✅ GET returnerer opprettede elementer  
+**Suksesskriterier:**
+- ✅ Helseendepunkt returnerer HTTP 200
+- ✅ Rotendepunkt viser API-informasjon
+- ✅ POST oppretter element og returnerer HTTP 201
+- ✅ GET returnerer opprettede elementer
 
-### Steg 3: Se på logger
+### Trinn 3: Se Logger
 
 ```bash
-# Strøm live logger ved bruk av azd monitor
+# Strøm live logger ved å bruke azd monitor
 azd monitor --logs
 
 # Eller bruk Azure CLI:
 az containerapp logs show --name api --resource-group $RG_NAME --follow
 
 # Du bør se:
-# - Gunicorn oppstartsmeldinger
+# - Gunicorn oppstarts meldinger
 # - HTTP forespørselslogger
 # - Applikasjonsinformasjonslogger
 ```
@@ -166,7 +167,7 @@ simple-flask-api/
     └── Dockerfile
 ```
 
-## API-endepunkter
+## API-Endepunkter
 
 | Endepunkt | Metode | Beskrivelse |
 |----------|--------|-------------|
@@ -190,14 +191,14 @@ azd env set MAX_REPLICAS 20
 
 ### Skaleringskonfigurasjon
 
-API-en skaleres automatisk basert på HTTP-trafikk:  
-- **Min replikaer**: 0 (skalerer til null når inaktiv)  
-- **Maks replikaer**: 10  
-- **Samtidige forespørsler per replika**: 50  
+API-en skalerer automatisk basert på HTTP-trafikk:
+- **Min replikaer**: 0 (skalerer til null når inaktiv)
+- **Maks replikaer**: 10
+- **Samtidige forespørsler per replika**: 50
 
 ## Utvikling
 
-### Kjør lokalt
+### Kjør Lokalt
 
 ```bash
 # Installer avhengigheter
@@ -211,7 +212,7 @@ python app.py
 curl http://localhost:8000/health
 ```
 
-### Bygg og test container
+### Bygg og Test Container
 
 ```bash
 # Bygg Docker-bilde
@@ -226,21 +227,21 @@ curl http://localhost:8000/health
 
 ## Distribusjon
 
-### Full distribusjon
+### Full Distribusjon
 
 ```bash
 # Distribuer infrastruktur og applikasjon
 azd up
 ```
 
-### Kode-only distribusjon
+### Bare Kode-Distribusjon
 
 ```bash
-# Deploy kun applikasjonskode (infrastruktur uendret)
+# Distribuer bare applikasjonskode (infrastrukturen uendret)
 azd deploy api
 ```
 
-### Oppdater konfigurasjon
+### Oppdater Konfigurasjon
 
 ```bash
 # Oppdater miljøvariabler
@@ -252,10 +253,10 @@ azd deploy api
 
 ## Overvåking
 
-### Se logger
+### Se Logger
 
 ```bash
-# Strøm live logger ved å bruke azd monitor
+# Strøm live logger ved hjelp av azd monitor
 azd monitor --logs
 
 # Eller bruk Azure CLI for Container Apps:
@@ -265,10 +266,10 @@ az containerapp logs show --name api --resource-group $RG_NAME --follow
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 ```
 
-### Overvåk metrikker
+### Overvåk Måledata
 
 ```bash
-# Åpne Azure Monitor-dashboard
+# Åpne Azure Monitor-dashbord
 azd monitor --overview
 
 # Se spesifikke måledata
@@ -285,7 +286,7 @@ az monitor metrics list \
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-Forventet respons:  
+Forventet respons:
 ```json
 {
   "status": "healthy",
@@ -293,7 +294,7 @@ Forventet respons:
 }
 ```
 
-### Opprett element
+### Opprett Element
 
 ```bash
 curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/items \
@@ -301,7 +302,7 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/item
   -d '{"name": "Test Item", "description": "A test item"}'
 ```
 
-### Hent alle elementer
+### Hent Alle Elementer
 
 ```bash
 curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
@@ -309,46 +310,46 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
 
 ## Kostnadsoptimalisering
 
-Denne distribusjonen bruker skalering-til-null, så du betaler kun når API-en behandler forespørsler:  
+Denne distribusjonen bruker skalering til null, så du betaler kun når API-en behandler forespørsler:
 
-- **Inaktiv kostnad**: ~0 USD/måned (skalert til null)  
-- **Aktiv kostnad**: ~0,000024 USD/sekund per replika  
-- **Forventet månedlig kostnad** (lett bruk): 5-15 USD  
+- **Inaktiv kostnad**: ~0 USD/måned (skalert til null)
+- **Aktiv kostnad**: ~0,000024 USD/sekund per replika
+- **Forventet månedskostnad** (lett bruk): 5-15 USD
 
-### Reduser kostnader ytterligere
+### Reduser Kostnadene Videre
 
 ```bash
-# Skaler ned maks replikater for dev
+# Skaler ned maks replikater for utvikling
 azd env set MAX_REPLICAS 3
 
-# Bruk kortere inaktivitetstidsavbrudd
+# Bruk kortere tomgangstid
 azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 minutter
 ```
 
 ## Feilsøking
 
-### Container starter ikke
+### Container Starter Ikke
 
 ```bash
 # Sjekk containerlogger ved hjelp av Azure CLI
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 
-# Verifiser Docker-bilde bygges lokalt
+# Verifiser Docker-bilder bygges lokalt
 docker build -t test ./src
 ```
 
-### API ikke tilgjengelig
+### API Ikke Tilgjengelig
 
 ```bash
-# Bekreft at ingress er ekstern
+# Bekreft at inngangen er ekstern
 az containerapp show --name api --resource-group rg-simple-flask-api \
   --query properties.configuration.ingress.external
 ```
 
-### Høye responstider
+### Høye Responstider
 
 ```bash
-# Sjekk CPU/minnebruk
+# Sjekk CPU-/minnebruk
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
@@ -358,73 +359,73 @@ az containerapp update --name api --resource-group rg-simple-flask-api \
   --cpu 1.0 --memory 2Gi
 ```
 
-## Rydd opp
+## Rydd Opp
 
 ```bash
 # Slett alle ressurser
 azd down --force --purge
 ```
 
-## Neste steg
+## Neste Steg
 
-### Utvid dette eksemplet
+### Utvid Dette Eksempelet
 
-1. **Legg til database** - Integrer Azure Cosmos DB eller SQL Database  
+1. **Legg til database** - Integrer Azure Cosmos DB eller SQL Database
    ```bash
    # Legg til Cosmos DB-modul i infra/main.bicep
    # Oppdater app.py med databaseforbindelse
    ```
 
-2. **Legg til autentisering** - Implementer Azure AD eller API-nøkler  
+2. **Legg til autentisering** - Implementer Microsoft Entra ID eller API-nøkler
    ```python
    # Legg til autentiserings-mellomvare i app.py
    from functools import wraps
    ```
 
-3. **Sett opp CI/CD** - GitHub Actions workflow  
+3. **Sett opp CI/CD** - GitHub Actions workflow
    ```yaml
    # Create .github/workflows/deploy.yml
    name: Deploy to Azure
    on: [push]
    ```
 
-4. **Legg til administrert identitet** - Sikre tilgang til Azure-tjenester  
+4. **Legg til administrert identitet** - Sikre tilgang til Azure-tjenester
    ```bicep
    # Update infra/app/api.bicep
    identity: { type: 'SystemAssigned' }
    ```
 
-### Relaterte eksempler
+### Relaterte Eksempler
 
-- **[Database App](../../../../../examples/database-app)** - Komplett eksempel med SQL Database  
-- **[Mikrotjenester](../../../../../examples/container-app/microservices)** - Multi-tjeneste arkitektur  
-- **[Container Apps Master Guide](../README.md)** - Alle container-mønstre  
+- **[Database App](../../../../../examples/database-app)** - Komplett eksempel med SQL Database
+- **[Mikrotjenester](../../../../../examples/container-app/microservices)** - Multi-tjeneste arkitektur
+- **[Container Apps Hovedguide](../README.md)** - Alle container-mønstre
 
 ### Læringsressurser
 
-- 📚 [AZD For Beginners Course](../../../README.md) - Hovedkurs hjemme  
-- 📚 [Container Apps Patterns](../README.md) - Flere distribusjonsmønstre  
-- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - Fellesskapets maler  
+- 📚 [AZD For Nybegynnere Kurs](../../../README.md) - Hovedkurs startside
+- 📚 [Container Apps Mønstre](../README.md) - Flere distribusjonsmønstre
+- 📚 [AZD Maler Galleri](https://azure.github.io/awesome-azd/) - Fellesskapsmaler
 
-## Ekstra ressurser
+## Ekstra Ressurser
 
-### Dokumentasjon  
-- **[Flask Documentation](https://flask.palletsprojects.com/)** - Flask-rammeverksguide  
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Offisiell Azure-dokumentasjon  
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd kommandoreferanse  
+### Dokumentasjon
+- **[Flask Dokumentasjon](https://flask.palletsprojects.com/)** - Flask rammeverksguide
+- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Offisielle Azure-dokumenter
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd kommandoreferanse
 
-### Veiledninger  
-- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Distribuer din første app  
-- **[Python på Azure](https://learn.microsoft.com/azure/developer/python/)** - Python utviklingsguide  
-- **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastruktur som kode  
+### Veiledninger
+- **[Container Apps Komme I Gang](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Distribuer din første app
+- **[Python på Azure](https://learn.microsoft.com/azure/developer/python/)** - Python utviklingsguide
+- **[Bicep Språk](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastruktur som kode
 
-### Verktøy  
-- **[Azure Portal](https://portal.azure.com)** - Administrer ressurser visuelt  
-- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - IDE-integrasjon  
+### Verktøy
+- **[Azure Portalen](https://portal.azure.com)** - Administrer ressurser visuelt
+- **[VS Code Azure Utvidelse](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - IDE-integrasjon
 
 ---
 
-**🎉 Gratulerer!** Du har distribuert en produksjonsklar Flask API til Azure Container Apps med autoskalering og overvåking.
+**🎉 Gratulerer!** Du har distribuert en produksjonsklar Flask API til Azure Container Apps med automatisk skalering og overvåking.
 
 **Spørsmål?** [Åpne en sak](https://github.com/microsoft/AZD-for-beginners/issues) eller sjekk [FAQ](../../../resources/faq.md)
 
@@ -432,5 +433,5 @@ azd down --force --purge
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:
-Dette dokumentet har blitt oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på det opprinnelige språket bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår fra bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på originalspråket skal betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

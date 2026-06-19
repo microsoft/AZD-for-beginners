@@ -1,56 +1,57 @@
 # Yksinkertainen Flask-API - Container App -esimerkki
 
-**Oppimispolku:** Aloittelija ⭐ | **Aika:** 25-35 minuuttia | **Kustannus:** ~$0-15/kuukausi
+**Oppimispolku:** Aloittelija ⭐ | **Aika:** 25-35 minuuttia | **Kustannus:** $0-15/month
 
-Täydellinen, toimiva Python Flask REST API, joka on otettu käyttöön Azure Container Appsissa käyttäen Azure Developer CLI:tä (azd). Tämä esimerkki havainnollistaa konttien käyttöönottoa, automaattista skaalausta ja valvonnan perusteita.
+Täydellinen, toimiva Python Flask REST API, joka on otettu käyttöön Azure Container Appsissa Azure Developer CLI:llä (azd). Tämä esimerkki demonstroi konttien julkaisemista, automaattista skaalausta ja valvonnan perusteita.
 
 ## 🎯 Mitä opit
 
-- Ota konttisoitu Python-sovellus käyttöön Azuren ympäristöön
-- Määritä automaattinen skaalaus scale-to-zero -toiminnolla
-- Toteuta terveystarkistukset ja readiness-tarkistukset
-- Seuraa sovelluksen lokitietoja ja mittareita
-- Käytä Azure Developer CLI:tä nopeaan käyttöönottoon
+- Julkaista konttisoitu Python-sovellus Azureen
+- Konfiguroida automaattinen skaalaus, mukaan lukien skaalaus nollaan
+- Toteuttaa health probeja ja readiness-tarkistuksia
+- Valvoa sovelluksen lokitietoja ja mittareita
+- Käyttää Azure Developer CLI:tä nopeaan käyttöönottoon
 
 ## 📦 Mitä sisältyy
 
-✅ **Flask-sovellus** - Täydellinen REST API CRUD-operaatioilla (`src/app.py`)  
-✅ **Dockerfile** - Tuotantovalmiit konttiasetukset  
-✅ **Bicep Infrastructure** - Container Apps -ympäristö ja API:n käyttöönotto  
-✅ **AZD Configuration** - Yhden komennon käyttöönotto  
-✅ **Health Probes** - Liveness- ja readiness-tarkistukset konfiguroitu  
-✅ **Auto-scaling** - 0-10 replikaa HTTP-kuorman perusteella  
+✅ **Flask Application** - Täydellinen REST API CRUD-operaatioilla (`src/app.py`)  
+✅ **Dockerfile** - Tuotantovalmiin kontin konfiguraatio  
+✅ **Bicep Infrastructure** - Container Apps -ympäristö ja API-julkaisu  
+✅ **AZD Configuration** - Yhdellä komennolla toimiva käyttöönotto  
+✅ **Health Probes** - Konfiguroidut liveness- ja readiness-tarkistukset  
+✅ **Auto-scaling** - 0-10 instanssia HTTP-kuorman mukaan  
 
-## Arkkitehtuuri
+## Architecture
 
 ```mermaid
 graph TD
     subgraph ACA[Azure Container Apps -ympäristö]
-        Flask[Flask API -säiliö<br/>Terveys-päätepisteet<br/>REST-rajapinta<br/>Automaattinen skaalaus 0-10 instanssia]
+        Flask[Flask API -kontti<br/>Terveys-päätepisteet<br/>REST-rajapinta<br/>Automaattinen skaalaus 0-10 instanssia]
         AppInsights[Application Insights]
     end
 ```
+
 ## Esivaatimukset
 
 ### Tarvittavat
-- **Azure Developer CLI (azd)** - [Asennusopas](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure subscription** - [Ilmainen tili](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Asenna Docker](https://www.docker.com/products/docker-desktop/) (paikallista testausta varten)
+- **Azure Developer CLI (azd)** - [Asennusohje](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+- **Azure subscription** - [Free account](https://azure.microsoft.com/free/)
+- **Docker Desktop** - [Install Docker](https://www.docker.com/products/docker-desktop/) (paikalliseen testaamiseen)
 
-### Vahvista esivaatimukset
+### Varmista esivaatimukset
 
 ```bash
-# Tarkista azd-versio (tarvitaan versiota 1.5.0 tai uudempaa)
+# Tarkista azd-versio (vaaditaan 1.5.0 tai uudempi)
 azd version
 
 # Varmista Azure-kirjautuminen
 azd auth login
 
-# Tarkista Docker (valinnainen, paikalliseen testaukseen)
+# Tarkista Docker (valinnainen, paikallista testausta varten)
 docker --version
 ```
 
-## ⏱️ Käyttöönoton aikajana
+## ⏱️ Julkaisun aikataulu
 
 | Phase | Duration | What Happens |
 |-------|----------|--------------||
@@ -60,7 +61,7 @@ docker --version
 | Deploy application | 2-3 minutes | Push image and deploy to Container Apps |
 | **Total** | **8-12 minutes** | Complete deployment ready |
 
-## Pikakäynnistys
+## Nopea aloitus
 
 ```bash
 # Siirry esimerkkiin
@@ -74,12 +75,12 @@ azd up
 # Sinulta kysytään:
 # 1. Valitse Azure-tilaus
 # 2. Valitse sijainti (esim. eastus2)
-# 3. Odota 8–12 minuuttia käyttöönottoa varten
+# 3. Odota 8–12 minuuttia käyttöönoton ajan
 
 # Hanki API-päätepisteesi
 azd env get-values
 
-# Testaa API
+# Testaa API:ta
 curl $(azd env get-value API_ENDPOINT)/health
 ```
 
@@ -93,7 +94,7 @@ curl $(azd env get-value API_ENDPOINT)/health
 }
 ```
 
-## ✅ Varmista käyttöönotto
+## ✅ Vahvista käyttöönotto
 
 ### Vaihe 1: Tarkista käyttöönoton tila
 
@@ -107,13 +108,13 @@ azd show
 # - Tila: Käynnissä
 ```
 
-### Vaihe 2: Testaa API-päätepisteet
+### Vaihe 2: Testaa API-päätepisteitä
 
 ```bash
 # Hae API-päätepiste
 API_URL=$(azd env get-value API_ENDPOINT)
 
-# Testaa palvelun kunto
+# Testaa terveydentila
 curl $API_URL/health
 
 # Testaa juuripäätepiste
@@ -137,13 +138,13 @@ curl $API_URL/api/items
 ### Vaihe 3: Katso lokit
 
 ```bash
-# Striimaa reaaliaikaisia lokeja käyttäen azd monitoria
+# Suoratoista reaaliaikaisia lokeja komennolla azd monitor
 azd monitor --logs
 
 # Tai käytä Azure CLI:tä:
 az containerapp logs show --name api --resource-group $RG_NAME --follow
 
-# Näet:
+# Sinun pitäisi nähdä:
 # - Gunicornin käynnistysviestit
 # - HTTP-pyyntöjen lokit
 # - Sovelluksen informaatio-lokit
@@ -168,7 +169,7 @@ simple-flask-api/
 
 ## API-päätepisteet
 
-| Päätepiste | Metodi | Kuvaus |
+| Endpoint | Method | Description |
 |----------|--------|-------------|
 | `/health` | GET | Terveystarkistus |
 | `/api/items` | GET | Listaa kaikki kohteet |
@@ -177,21 +178,21 @@ simple-flask-api/
 | `/api/items/{id}` | PUT | Päivitä kohde |
 | `/api/items/{id}` | DELETE | Poista kohde |
 
-## Konfiguraatio
+## Asetukset
 
 ### Ympäristömuuttujat
 
 ```bash
-# Aseta mukautettu kokoonpano
+# Aseta mukautettu määritys
 azd env set PORT 8000
 azd env set LOG_LEVEL info
 azd env set MAX_REPLICAS 20
 ```
 
-### Skaalauskonfiguraatio
+### Skaalausasetukset
 
-API skaalautuu automaattisesti HTTP-liikenteen mukaan:
-- **Min Replicas**: 0 (skaalaa nollaan, kun se on lepotilassa)
+API skaalaa automaattisesti HTTP-liikenteen mukaan:
+- **Min Replicas**: 0 (skaalautuu nollaan ollessa lepotilassa)
 - **Max Replicas**: 10
 - **Concurrent Requests per Replica**: 50
 
@@ -204,7 +205,7 @@ API skaalautuu automaattisesti HTTP-liikenteen mukaan:
 cd src
 pip install -r requirements.txt
 
-# Käynnistä sovellus
+# Aja sovellus
 python app.py
 
 # Testaa paikallisesti
@@ -217,36 +218,36 @@ curl http://localhost:8000/health
 # Rakenna Docker-kuva
 docker build -t flask-api:local ./src
 
-# Suorita kontti paikallisesti
+# Aja kontti paikallisesti
 docker run -p 8000:8000 flask-api:local
 
 # Testaa kontti
 curl http://localhost:8000/health
 ```
 
-## Käyttöönotto
+## Julkaisu
 
 ### Täysi käyttöönotto
 
 ```bash
-# Ota käyttöön infrastruktuuri ja sovellus
+# Ota infrastruktuuri ja sovellus käyttöön
 azd up
 ```
 
-### Pelkkä koodin käyttöönotto
+### Pelkkä koodin julkaisu
 
 ```bash
 # Ota käyttöön vain sovelluskoodi (infrastruktuuri ennallaan)
 azd deploy api
 ```
 
-### Päivitä konfiguraatio
+### Päivitä asetuksia
 
 ```bash
 # Päivitä ympäristömuuttujat
 azd env set API_KEY "new-api-key"
 
-# Ota uudelleen käyttöön uusi kokoonpano
+# Ota uudelleen käyttöön uudella kokoonpanolla
 azd deploy api
 ```
 
@@ -255,7 +256,7 @@ azd deploy api
 ### Näytä lokit
 
 ```bash
-# Striimaa reaaliaikaisia lokeja azd monitorilla
+# Suoratoista reaaliaikaiset lokit azd monitor -komennolla
 azd monitor --logs
 
 # Tai käytä Azure CLI:tä Container Appsille:
@@ -268,7 +269,7 @@ az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 ### Seuraa mittareita
 
 ```bash
-# Avaa Azure Monitor -kojelaudan
+# Avaa Azure Monitor -kojelauta
 azd monitor --overview
 
 # Näytä tietyt mittarit
@@ -309,35 +310,35 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
 
 ## Kustannusten optimointi
 
-Tässä käyttöönotossa käytetään scale-to-zero -mallia, joten maksat vain, kun API käsittelee pyyntöjä:
+Tämä käyttöönotto käyttää skaalausta nollaan, joten maksat vain silloin kun API käsittelee pyyntöjä:
 
-- **Lepokustannus**: ~$0/kuukausi (skaalattu nollaan)
-- **Aktiivinen kustannus**: ~$0.000024/sekunti per replikka
+- **Lepo**: ~$0/kuukausi (skaalautuu nollaan)
+- **Aktiivinen kustannus**: ~$0.000024/sekunti per instanssi
 - **Odotettu kuukausikustannus** (kevyt käyttö): $5-15
 
-### Vähennä kustannuksia lisää
+### Vähennä kustannuksia edelleen
 
 ```bash
-# Vähennä kehitysympäristön maksimireplikoiden määrää
+# Vähennä suurinta sallittua replikoiden määrää kehitystä varten
 azd env set MAX_REPLICAS 3
 
-# Käytä lyhyempää tyhjäkäyntiaikaa
+# Käytä lyhyempää inaktiivisuusaikaa
 azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 minuuttia
 ```
 
-## Vianetsintä
+## Ongelmanratkaisu
 
 ### Kontti ei käynnisty
 
 ```bash
-# Tarkista säilön lokit Azure CLI:n avulla
+# Tarkista säiliön lokit Azure CLI:llä
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 
 # Varmista, että Docker-kuva rakentuu paikallisesti
 docker build -t test ./src
 ```
 
-### API ei ole saavutettavissa
+### API ei ole käytettävissä
 
 ```bash
 # Varmista, että ingress on ulkoinen
@@ -345,10 +346,10 @@ az containerapp show --name api --resource-group rg-simple-flask-api \
   --query properties.configuration.ingress.external
 ```
 
-### Korkeat vasteajat
+### Pitkät vasteajat
 
 ```bash
-# Tarkista suorittimen ja muistin käyttö
+# Tarkista CPU:n ja muistin käyttö
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
@@ -369,54 +370,54 @@ azd down --force --purge
 
 ### Laajenna tätä esimerkkiä
 
-1. **Lisää tietokanta** - Integroi Azure Cosmos DB tai SQL Database
+1. **Add Database** - Integroi Azure Cosmos DB tai SQL Database
    ```bash
-   # Lisää Cosmos DB -moduuli tiedostoon infra/main.bicep
+   # Lisää Cosmos DB -moduuli infra/main.bicep-tiedostoon
    # Päivitä app.py lisäämällä tietokantayhteys
    ```
 
-2. **Lisää todennus** - Ota käyttöön Azure AD tai API-avaimet
+2. **Add Authentication** - Ota käyttöön Microsoft Entra ID tai API-avaimet
    ```python
-   # Lisää autentikointiväliohjelma app.py-tiedostoon
+   # Lisää todennusvälikerros tiedostoon app.py
    from functools import wraps
    ```
 
-3. **Määritä CI/CD** - GitHub Actions -työnkulku
+3. **Set Up CI/CD** - GitHub Actions -työnkulku
    ```yaml
    # Create .github/workflows/deploy.yml
    name: Deploy to Azure
    on: [push]
    ```
 
-4. **Lisää hallittu identiteetti** - Suojaa pääsy Azure-palveluihin
+4. **Add Managed Identity** - Turvaa pääsy Azure-palveluihin
    ```bicep
    # Update infra/app/api.bicep
    identity: { type: 'SystemAssigned' }
    ```
 
-### Liittyvät esimerkit
+### Aiheeseen liittyviä esimerkkejä
 
-- **[Tietokantasovellus](../../../../../examples/database-app)** - Täydellinen esimerkki SQL-tietokannan kanssa
+- **[Tietokantasovellus](../../../../../examples/database-app)** - Täydellinen esimerkki SQL-tietokannalla
 - **[Mikropalvelut](../../../../../examples/container-app/microservices)** - Monipalveluarkkitehtuuri
-- **[Container Apps -opas](../README.md)** - Kaikki konttimallit
+- **[Container Apps - Pääopas](../README.md)** - Kaikki container-kuviot
 
 ### Oppimateriaalit
 
-- 📚 [AZD aloittelijoille -kurssi](../../../README.md) - Kurssin pääsivu
-- 📚 [Container Apps -mallit](../README.md) - Lisää käyttöönotto-malleja
-- 📚 [AZD-mallien galleria](https://azure.github.io/awesome-azd/) - Yhteisön mallit
+- 📚 [AZD For Beginners Course](../../../README.md) - Kurssin pääsivu
+- 📚 [Container Apps Patterns](../README.md) - Lisää julkaisu- ja arkkitehtuurimalleja
+- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - Yhteisön mallipohjat
 
 ## Lisäresurssit
 
 ### Dokumentaatio
-- **[Flask-dokumentaatio](https://flask.palletsprojects.com/)** - Flask-kehyksen opas
+- **[Flask Documentation](https://flask.palletsprojects.com/)** - Flask-kehyksen opas
 - **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Viralliset Azure-dokumentit
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd-komentojen viite
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd-komentoviite
 
-### Opetusohjeet
+### Opetusohjelmat
 - **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Ota ensimmäinen sovellus käyttöön
-- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Python-kehitysopas
-- **[Bicep-kieli](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastruktuuri koodina
+- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Python-kehitysohjeet
+- **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastructure as code
 
 ### Työkalut
 - **[Azure Portal](https://portal.azure.com)** - Hallitse resursseja visuaalisesti
@@ -424,13 +425,13 @@ azd down --force --purge
 
 ---
 
-**🎉 Onnittelut!** Olet ottanut tuotantovalmiin Flask-API:n käyttöön Azure Container Appsissa automaattisella skaalauksella ja valvonnalla.
+**🎉 Onnittelut!** Olet julkaissut tuotantovalmiin Flask-APIn Azure Container Appsiin automaattisella skaalauksella ja valvonnalla.
 
-**Kysymyksiä?** [Lähetä ongelma](https://github.com/microsoft/AZD-for-beginners/issues) tai katso [UKK](../../../resources/faq.md)
+**Kysymyksiä?** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) tai tarkista [UKK](../../../resources/faq.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Tämä asiakirja on käännetty tekoälykäännöspalvelulla [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, ota huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä on pidettävä määräävänä lähteenä. Kriittisten tietojen osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tästä käännöksestä aiheutuvista väärinymmärryksistä tai virhetulkinnoista.
+**Vastuuvapauslauseke**:
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, otathan huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäiskielellä on virallinen lähde. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,10 +1,10 @@
-# Authentication Patterns and Managed Identity
+# Autentikointimallit ja hallittu identiteetti
 
-⏱️ **Arvioitu aika**: 45–60 minuuttia | 💰 **Kustannusvaikutus**: Ilmainen (ei lisämaksuja) | ⭐ **Vaativuus**: Keskitaso
+⏱️ **Arvioitu aika**: 45–60 minuuttia | 💰 **Kustannusvaikutus**: Ilmainen (ei lisämaksuja) | ⭐ **Monimutkaisuus**: Keskitaso
 
 **📚 Oppimispolku:**
-- ← Edellinen: [Konfiguraation hallinta](configuration.md) - Ympäristömuuttujien ja salaisuuksien hallinta
-- 🎯 **Olet tässä**: Autentikointi ja turvallisuus (Managed Identity, Key Vault, turvalliset mallit)
+- ← Edellinen: [Konfiguraation hallinta](configuration.md) - Ympäristömuuttujien ja salaisten hallinta
+- 🎯 **Olet tässä**: Autentikointi & Turvallisuus (hallittu identiteetti, Key Vault, turvalliset mallit)
 - → Seuraava: [Ensimmäinen projekti](first-project.md) - Rakenna ensimmäinen AZD-sovelluksesi
 - 🏠 [Kurssin etusivu](../../README.md)
 
@@ -12,36 +12,36 @@
 
 ## Mitä opit
 
-Tämän oppitunnin suorittamalla:
-- Ymmärrät Azuren autentikointimallit (avaimet, yhteysmerkkijonot, managed identity)
-- Toteutat **Managed Identityn** salasanettomaan autentikointiin
-- Suojaat salaisuuksia **Azure Key Vault** -integraatiolla
-- Konfiguroit **roolipohjaisen käyttöoikeushallinnan (RBAC)** AZD-deploymenteille
-- Sovellat tietoturvan parhaat käytännöt Container Apps -ympäristössä ja Azure-palveluissa
-- Migroit avainpohjaisesta identiteettipohjaiseen autentikointiin
+Suorittamalla tämän oppitunnin:
+- Ymmärrät Azuren autentikointimallit (avaimet, connection stringit, hallittu identiteetti)
+- Toteutat **hallidun identiteetin** salasanasuuttomaan autentikointiin
+- Turvaat salaisuudet **Azure Key Vault** -integraatiolla
+- Määrität **roolipohjaisen käyttöoikeuksien hallinnan (RBAC)** AZD-julkaisuissa
+- Sovellat turvallisuusparhaiden käytäntöjen Container Appseissa ja Azure-palveluissa
+- Migratoit avainpohjaisesta identiteettipohjaiseen autentikointiin
 
-## Miksi Managed Identity on tärkeä
+## Miksi hallittu identiteetti on tärkeä
 
 ### Ongelma: Perinteinen autentikointi
 
-**Ennen Managed Identityä:**
+**Ennen hallittua identiteettiä:**
 ```javascript
-// ❌ TURVARISKI: Kovakoodatut salaisuudet koodissa
+// ❌ TIETOTURVARISKI: Koodiin kovakoodatut salaisuudet
 const connectionString = "Server=mydb.database.windows.net;User=admin;Password=P@ssw0rd123";
 const storageKey = "xK7mN9pQ2wR5tY8uI0oP3aS6dF1gH4jK...";
 const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 ```
 
 **Ongelmia:**
-- 🔴 **Paljastuneet salaisuudet** koodissa, konfiguraatiotiedostoissa, ympäristömuuttujissa
+- 🔴 **Paljastetut salaisuudet** koodissa, konfiguraatiotiedostoissa, ympäristömuuttujissa
 - 🔴 **Tunnistetietojen kierto** vaatii koodimuutoksia ja uudelleenjulkaisun
-- 🔴 **Auditointi on painajaista** - kuka pääsi mihinkin, milloin?
-- 🔴 **Leviäminen** - salaisuudet hajallaan monissa järjestelmissä
-- 🔴 **Säädösten noudattamisen riskit** - epäonnistuu tietoturvatarkastuksissa
+- 🔴 **Auditoinnin painajainen** - kuka käytti mitä ja milloin?
+- 🔴 **Leviäminen** - salaisuudet hajallaan useissa järjestelmissä
+- 🔴 **Säädösten noudattamisen riskit** - epäonnistuu turvallisuusauditoinneissa
 
-### Ratkaisu: Managed Identity
+### Ratkaisu: Hallittu identiteetti
 
-**Managed Identityn jälkeen:**
+**Hallidun identiteetin jälkeen:**
 ```javascript
 // ✅ TURVALLINEN: Ei salaisuuksia koodissa
 const credential = new DefaultAzureCredential();
@@ -52,51 +52,52 @@ const client = new BlobServiceClient(
 ```
 
 **Hyödyt:**
-- ✅ **Ei salaisuuksia** koodissa tai konfiguraatiossa
+- ✅ **Ei lainkaan salaisuuksia** koodissa tai konfiguraatiossa
 - ✅ **Automaattinen kierto** - Azure hoitaa sen
-- ✅ **Täydellinen audit trail** Azure AD -lokitiedoissa
-- ✅ **Keskitetty turvallisuus** - hallinnointi Azuren portaalissa
-- ✅ **Valmis säädöksiin** - täyttää tietoturvastandardit
+- ✅ **Täydellinen audit trail** Microsoft Entra ID -lokeissa
+- ✅ **Keskitetty turvallisuus** - hallinta Azure-portaalista
+- ✅ **Valmis vaatimustenmukaisuuteen** - täyttää turvallisuusstandardit
 
-**Analogia**: Perinteinen autentikointi on kuin kantaisit useita fyysisiä avaimia eri oviin. Managed Identity on kuin kulkukortti, joka myöntää pääsyn automaattisesti sen mukaan, kuka olet—ei avaimia, joita voi kadottaa, kopioida tai kiertää.
+**Analogia**: Perinteinen autentikointi on kuin kantaisit useita fyysisiä avaimia eri oviin. Hallittu identiteetti on kuin henkilökortti, joka antaa automaattisesti pääsyn perusteella kuka olet — ei avaimia, joita voisi kadottaa, kopioida tai kiertää.
 
 ---
 
 ## Arkkitehtuurin yleiskuva
 
-### Autentikointivirtaus Managed Identityn kanssa
+### Autentikointivirtaus hallitulla identiteetillä
 
 ```mermaid
 sequenceDiagram
-    participant App as Sovelluksesi<br/>(Container-sovellus)
-    participant MI as Hallittu identiteetti<br/>(Azure AD)
-    participant KV as Avainvarasto
+    participant App as Sovelluksesi<br/>(Säiliösovellus)
+    participant MI as Hallinnoitu identiteetti<br/>(Microsoft Entra ID)
+    participant KV as Avainten holvi
     participant Storage as Azure-tallennus
     participant DB as Azure SQL
     
     App->>MI: Pyydä käyttöoikeustunnusta<br/>(automaattinen)
-    MI->>MI: Vahvista identiteetti<br/>(ei salasanaa tarvittu)
+    MI->>MI: Vahvista identiteetti<br/>(salasanaa ei tarvita)
     MI-->>App: Palauta tunnus<br/>(voimassa 1 tunti)
     
-    App->>KV: Hae salaisuus<br/>(tokenia käyttäen)
+    App->>KV: Hae salaisuus<br/>(käyttäen tunnusta)
     KV->>KV: Tarkista RBAC-oikeudet
-    KV-->>App: Palauta salaisuuden arvo
+    KV-->>App: Palauta salainen arvo
     
-    App->>Storage: Lähetä blob<br/>(tokenia käyttäen)
+    App->>Storage: Lähetä blob<br/>(käyttäen tunnusta)
     Storage->>Storage: Tarkista RBAC-oikeudet
     Storage-->>App: Onnistui
     
-    App->>DB: Hae tietoja<br/>(tokenia käyttäen)
+    App->>DB: Hae tietoja<br/>(käyttäen tunnusta)
     DB->>DB: Tarkista SQL-oikeudet
     DB-->>App: Palauta tulokset
     
-    Note over App,DB: Kaikki todennukset ovat salasanattomia!
+    Note over App,DB: Kaikki todennukset ilman salasanaa!
 ```
-### Managed Identityn tyypit
+
+### Hallittujen identiteettien tyypit
 
 ```mermaid
 graph TB
-    MI[Hallittu identiteetti]
+    MI[Hallinnoitu identiteetti]
     SystemAssigned[Järjestelmän määrittämä identiteetti]
     UserAssigned[Käyttäjän määrittämä identiteetti]
     
@@ -104,30 +105,31 @@ graph TB
     MI --> UserAssigned
     
     SystemAssigned --> SA1[Elinkaari sidottu resurssiin]
-    SystemAssigned --> SA2[Automaattinen luominen/poisto]
-    SystemAssigned --> SA3[Parhaiten yksittäiselle resurssille]
+    SystemAssigned --> SA2[Automaattinen luonti/poisto]
+    SystemAssigned --> SA3[Parhaiten yhdelle resurssille]
     
-    UserAssigned --> UA1[I tsenäinen elinkaari]
-    UserAssigned --> UA2[Manuaalinen luominen/poisto]
-    UserAssigned --> UA3[Jaettavissa resurssien välillä]
+    UserAssigned --> UA1[Itsenäinen elinkaari]
+    UserAssigned --> UA2[Manuaalinen luonti/poisto]
+    UserAssigned --> UA3[Jaettu resurssien kesken]
     
     style SystemAssigned fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style UserAssigned fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
 ```
-| Feature | System-Assigned | User-Assigned |
+
+| Ominaisuus | Järjestelmän määrittämä | Käyttäjän määrittämä |
 |---------|----------------|---------------|
-| **Lifecycle** | Tiedot resurssiin sidottu | Riippumaton |
-| **Creation** | Automaattinen resurssin kanssa | Luodaan manuaalisesti |
-| **Deletion** | Poistuu resurssin mukana | Säilyy resurssin poistamisen jälkeen |
-| **Sharing** | Yksi resurssi vain | Useita resursseja |
-| **Use Case** | Yksinkertaiset tapaukset | Moniresurssiset monimutkaiset tapaukset |
-| **AZD Default** | ✅ Suositeltu | Valinnainen |
+| **Elinkaari** | Sidottu resurssiin | Riippumaton |
+| **Luonti** | Automaattinen resurssin mukana | Luodaan manuaalisesti |
+| **Poisto** | Poistuu resurssin mukana | Säilyy resurssin poiston jälkeen |
+| **Jakaminen** | Vain yhdelle resurssille | Useille resursseille |
+| **Käyttötapaus** | Yksinkertaiset skenaariot | Moniresurssiset monimutkaiset skenaariot |
+| **AZD oletusarvo** | ✅ Suositeltu | Valinnainen |
 
 ---
 
-## Vaatimukset
+## Esivaatimukset
 
-### Tarvittavat työkalut
+### Vaaditut työkalut
 
 Sinun tulisi jo olla asentanut nämä aiemmista oppitunneista:
 
@@ -145,23 +147,23 @@ az --version
 
 - Aktiivinen Azure-tilaus
 - Oikeudet:
-  - Luoda managed identityjä
+  - Luoda hallittuja identiteettejä
   - Määrittää RBAC-rooleja
   - Luoda Key Vault -resursseja
-  - Deployata Container Apps -sovelluksia
+  - Julkaista Container Apps -resursseja
 
-### Tietopohja
+### Tietovaatimukset
 
 Sinun tulisi olla suorittanut:
 - [Asennusopas](installation.md) - AZD:n asennus
-- [AZD Basics](azd-basics.md) - Peruskäsitteet
+- [AZD-perusteet](azd-basics.md) - Peruskäsitteet
 - [Konfiguraation hallinta](configuration.md) - Ympäristömuuttujat
 
 ---
 
 ## Oppitunti 1: Autentikointimallien ymmärtäminen
 
-### Malli 1: Yhteysmerkkijonot (Perintö - Vältä)
+### Malli 1: Yhteysmerkkijonot (vanhentunut - vältä)
 
 **Miten se toimii:**
 ```bash
@@ -173,15 +175,15 @@ SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=
 
 **Ongelmia:**
 - ❌ Salaisuudet näkyvissä ympäristömuuttujissa
-- ❌ Lokitetaan deploy-järjestelmiin
-- ❌ Vaikea kierrättää
-- ❌ Ei audittrailia pääsystä
+- ❌ Kirjattuina julkaisujärjestelmiin
+- ❌ Vaikea kiertää
+- ❌ Ei auditointilokia pääsystä
 
 **Milloin käyttää:** Vain paikalliseen kehitykseen, ei koskaan tuotantoon.
 
 ---
 
-### Malli 2: Key Vault -viittaukset (Parempi)
+### Malli 2: Key Vault -viitteet (parempi)
 
 **Miten se toimii:**
 ```bicep
@@ -205,17 +207,17 @@ env: [
 **Hyödyt:**
 - ✅ Salaisuudet tallennettu turvallisesti Key Vaultiin
 - ✅ Keskitetty salaisuuksien hallinta
-- ✅ Kierto ilman koodimuutoksia
+- ✅ Kierron mahdollisuus ilman koodimuutoksia
 
 **Rajoitukset:**
-- ⚠️ Käytetään edelleen avaimia/salasanoja
-- ⚠️ Key Vaultin käyttöoikeuksia pitää hallita
+- ⚠️ Käytössä edelleen avaimia/salasanoja
+- ⚠️ Tarve hallita Key Vaultin käyttöoikeuksia
 
-**Milloin käyttää:** Väliaskel yhteysmerkkijonoista managed identityyn siirtyessä.
+**Milloin käyttää:** Väliaskel yhteysmerkkijonoista hallittuun identiteettiin.
 
 ---
 
-### Malli 3: Managed Identity (Paras käytäntö)
+### Malli 3: Hallittu identiteetti (paras käytäntö)
 
 **Miten se toimii:**
 ```bicep
@@ -239,7 +241,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 **Sovelluskoodi:**
 ```javascript
-// Salaisuuksia ei tarvita!
+// Ei tarvita salaisuuksia!
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -251,21 +253,74 @@ const blobServiceClient = new BlobServiceClient(
 ```
 
 **Hyödyt:**
-- ✅ Ei salaisuuksia koodissa/konfigissa
-- ✅ Automaattinen tunnistetietojen kierto
+- ✅ Ei lainkaan salaisuuksia koodissa/konfiguraatiossa
+- ✅ Automaattinen tunnisteiden kierto
 - ✅ Täydellinen audit trail
-- ✅ RBAC-pohjaiset käyttöoikeudet
-- ✅ Valmis säädöksiin
+- ✅ RBAC-pohjainen käyttöoikeuksien hallinta
+- ✅ Valmis vaatimustenmukaisuuteen
 
-**Milloin käyttää:** Aina, tuotantosovelluksissa.
+**Milloin käyttää:** Aina tuotantosovelluksissa.
 
 ---
 
-## Oppitunti 2: Managed Identityn käyttöönotto AZD:llä
+### Malli 4: Service Principals (CI/CD & automaatio)
+
+Hallittu identiteetti on kultastandardi *resursseille, jotka ajetaan Azuren sisällä*. Entä asiat, jotka ajetaan **Azuren ulkopuolella** — kuten CI/CD-putki build-agentilla, tai skripti kannettavallasi, joka ei voi käyttää vuorovaikutteista kirjautumista? Silloin tarvitaan **service principal**: ei-inhimillinen identiteetti omilla tunnistetiedoillaan, johon automatisoitu prosessi voi kirjautua.
+
+**Miten se toimii:**
+
+Luo service principal rajattuna resurssiryhmään (vähimmän oikeuden periaate):
+
+```bash
+az ad sp create-for-rbac \
+  --name "myapp-cicd" \
+  --role contributor \
+  --scopes /subscriptions/<sub-id>/resourceGroups/<rg-name>
+```
+
+Tämä tulostaa client ID:n, client secretin ja tenant ID:n. azd voi kirjautua niillä ei-interaktiivisesti:
+
+```bash
+azd auth login \
+  --client-id "<appId>" \
+  --client-secret "<password>" \
+  --tenant-id "<tenant>"
+```
+
+Suosi federoitua todentamista (OIDC) salaisuusperusteisen ratkaisun sijaan. Pitkäikäisen client secretin sijaan ota käyttöön federoitu tunniste, jotta putki vaihtaa lyhytaikaisen tokenin — ei vuotavaa tai kierrättävää salaista:
+
+```bash
+azd auth login \
+  --client-id "<appId>" \
+  --federated-credential-provider "github" \
+  --tenant-id "<tenant>"
+```
+
+> `azd pipeline config` asettaa tämän puolestasi automaattisesti. Katso CI/CD-kävelyt läpi [Luku 8](../chapter-08-production/production-ai-practices.md).
+
+**Hyödyt:**
+- ✅ Toimii Azuren ulkopuolella (build-agentit, paikalliset ympäristöt, muut pilvet)
+- ✅ Voidaan rajata yhdelle resurssiryhmälle yhdellä roolilla
+- ✅ Federeoitu (OIDC) vaihtoehto ei käytä tallennettua salaista
+
+**Haittapuolet:**
+- ⚠️ Salaisuusperusteinen vaihtoehto vaatii huolellista säilytystä ja kiertoa
+- ⚠️ Vuotanut salaisuus antaa kaiken SP:n oikeudet — pidä skoopit tiukkoina
+
+**Milloin käyttää:** CI/CD-putkissa ja automaatiossa, jotka eivät voi käyttää hallittua identiteettiä. Suosi aina **federoitua/OIDC**-vaihtoehtoa client secretin sijaan, ja suosii hallittua identiteettiä aina kun työkuorma ajetaan Azuren sisällä.
+
+**Tunnistetietojen turvallinen säilytys:**
+- Älä koskaan commitoi salaisuuksia — käytä putkesi salaisuusvarastoa (GitHub Actions secrets, Azure DevOps variable groups / Key Vault).
+- Rajaa SP pienimpään tarpeelliseen rooliin ja resurssiryhmään.
+- Aseta vanhenemisaika ja kierrä, tai poista salaisuus kokonaan OIDC:llä.
+
+---
+
+## Oppitunti 2: Hallitun identiteetin toteuttaminen AZD:llä
 
 ### Vaiheittainen toteutus
 
-Rakennetaan turvallinen Container App, joka käyttää managed identityä Azure Storageen ja Key Vaultiin pääsyyn.
+Rakennetaan turvallinen Container App, joka käyttää hallittua identiteettiä Azure Storageen ja Key Vaultiin pääsyyn.
 
 ### Projektin rakenne
 
@@ -286,7 +341,7 @@ secure-app/
     └── Dockerfile
 ```
 
-### 1. Konfiguroi AZD (azure.yaml)
+### 1. Määritä AZD (azure.yaml)
 
 ```yaml
 name: secure-app
@@ -302,7 +357,7 @@ services:
 # Enable managed identity (AZD handles this automatically)
 ```
 
-### 2. Infrastruktuuri: Ota Managed Identity käyttöön
+### 2. Infrastruktuuri: Ota käyttöön hallittu identiteetti
 
 **Tiedosto: `infra/main.bicep`**
 
@@ -384,7 +439,7 @@ output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output APP_URL string = containerApp.outputs.url
 ```
 
-### 3. Container App järjestelmäkohtaisella identiteetillä
+### 3. Container App järjestelmän määrittämällä identiteetillä
 
 **Tiedosto: `infra/app/container-app.bicep`**
 
@@ -441,7 +496,7 @@ output id string = containerApp.id
 output url string = 'https://${containerApp.properties.configuration.ingress.fqdn}'
 ```
 
-### 4. RBAC-roolimäärittelymoduuli
+### 4. RBAC-roolien määritysmoduuli
 
 **Tiedosto: `infra/core/role-assignment.bicep`**
 
@@ -463,7 +518,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 output id string = roleAssignment.id
 ```
 
-### 5. Sovelluskoodi Managed Identityllä
+### 5. Sovelluskoodi hallitulla identiteetillä
 
 **Tiedosto: `src/app.js`**
 
@@ -476,17 +531,17 @@ const { SecretClient } = require('@azure/keyvault-secrets');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🔑 Alusta tunnistetiedot (toimii automaattisesti hallinnoidun identiteetin kanssa)
+// 🔑 Alusta tunnistetiedot (toimii automaattisesti hallitun identiteetin kanssa)
 const credential = new DefaultAzureCredential();
 
-// Azure Storage -määritys
+// Azure Storage -asetukset
 const storageAccountName = process.env.AZURE_STORAGE_ACCOUNT_NAME;
 const blobServiceClient = new BlobServiceClient(
   `https://${storageAccountName}.blob.core.windows.net`,
   credential  // Avaimia ei tarvita!
 );
 
-// Key Vault -määritys
+// Key Vault -asetukset
 const keyVaultName = process.env.AZURE_KEY_VAULT_NAME;
 const secretClient = new SecretClient(
   `https://${keyVaultName}.vault.azure.net`,
@@ -498,7 +553,7 @@ app.get('/health', (req, res) => {
   res.json({ status: 'healthy', authentication: 'managed-identity' });
 });
 
-// Lataa tiedosto blob-tallennustilaan
+// Lataa tiedosto blob-säilöön
 app.post('/upload', async (req, res) => {
   try {
     const containerClient = blobServiceClient.getContainerClient('uploads');
@@ -537,7 +592,7 @@ app.get('/secret/:name', async (req, res) => {
   }
 });
 
-// Listaa blob-säiliöt (näyttää lukuoikeuden)
+// Listaa blob-säiliöt (osoittaa lukuoikeuden)
 app.get('/containers', async (req, res) => {
   try {
     const containers = [];
@@ -580,7 +635,7 @@ app.listen(PORT, () => {
 }
 ```
 
-### 6. Deploy ja testaus
+### 6. Julkaise ja testaa
 
 ```bash
 # Alusta AZD-ympäristö
@@ -618,7 +673,7 @@ curl -X POST $APP_URL/upload
 }
 ```
 
-**Testi: säiliöiden listaus:**
+**Testi: konttien listaus:**
 ```bash
 curl $APP_URL/containers
 ```
@@ -636,11 +691,11 @@ curl $APP_URL/containers
 
 ## Yleiset Azure RBAC -roolit
 
-### Built-in rooli-ID:t Managed Identitylle
+### Sisäänrakennetut rooli-ID:t hallitulle identiteetille
 
-| Palvelu | Roolin nimi | Rooli-ID | Oikeudet |
-|---------|-------------|----------|----------|
-| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Lue blobit ja säiliöt |
+| Palvelu | Role Name | Role ID | Oikeudet |
+|---------|-----------|---------|-------------|
+| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Lue blobit ja kontit |
 | **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Lue, kirjoita, poista blobeja |
 | **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Lue, kirjoita, poista jonoviestejä |
 | **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Lue salaisuuksia |
@@ -648,9 +703,9 @@ curl $APP_URL/containers
 | **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Lue Cosmos DB -dataa |
 | **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Lue ja kirjoita Cosmos DB -dataa |
 | **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Hallinnoi SQL-tietokantoja |
-| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Lähetä, vastaanota, hallinnoi viestejä |
+| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Lähetä, vastaanota, hallitse viestejä |
 
-### Miten löydät rooli-ID:t
+### Miten löytää rooli-ID:t
 
 ```bash
 # Listaa kaikki sisäänrakennetut roolit
@@ -667,13 +722,13 @@ az role definition list --name "Storage Blob Data Contributor"
 
 ## Käytännön harjoitukset
 
-### Harjoitus 1: Ota Managed Identity käyttöön olemassa olevalle sovellukselle ⭐⭐ (Keskitaso)
+### Harjoitus 1: Ota hallittu identiteetti käyttöön olemassa olevalle sovellukselle ⭐⭐ (Keskitaso)
 
-**Tavoite**: Lisää managed identity olemassa olevaan Container App -deploymnettiin
+**Tavoite**: Lisää hallittu identiteetti olemassa olevaan Container App -julkaisuun
 
-**Skenaario**: Sinulla on Container App, joka käyttää yhteysmerkkijonoja. Muunna se käyttämään managed identityä.
+**Skenaario**: Sinulla on Container App, joka käyttää connection stringejä. Muunna se käyttämään hallittua identiteettiä.
 
-**Lähtökohta**: Container App tällä konfiguraatiolla:
+**Lähtötilanne**: Container App tällä konfiguraatiolla:
 
 ```bicep
 // ❌ Current: Using connection string
@@ -687,7 +742,7 @@ env: [
 
 **Vaiheet**:
 
-1. **Ota managed identity käyttöön Bicepissä:**
+1. **Ota hallittu identiteetti käyttöön Bicepissä:**
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -699,7 +754,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-2. **Myönnä Storage-oikeudet:**
+2. **Anna Storage-oikeudet:**
 
 ```bicep
 // Get storage account reference
@@ -730,7 +785,7 @@ const blobServiceClient = BlobServiceClient.fromConnectionString(
 );
 ```
 
-**Jälkeen (managed identity):**
+**Jälkeen (hallittu identiteetti):**
 ```javascript
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
@@ -754,7 +809,7 @@ env: [
 ]
 ```
 
-5. **Deployaa ja testaa:**
+5. **Ota käyttöön ja testaa:**
 
 ```bash
 # Ota uudelleen käyttöön
@@ -765,15 +820,15 @@ curl https://myapp.azurecontainerapps.io/upload
 ```
 
 **✅ Onnistumiskriteerit:**
-- ✅ Sovellus deployaa ilman virheitä
+- ✅ Sovellus julkaistaan ilman virheitä
 - ✅ Storage-operaatiot toimivat (lataus, listaus, lataus)
-- ✅ Yhteysmerkkijonoja ei ole ympäristömuuttujissa
+- ✅ Ympäristömuuttujissa ei ole connection stringejä
 - ✅ Identiteetti näkyy Azure-portaalissa "Identity" -välilehdellä
 
-**Varmistus:**
+**Varmennus:**
 
 ```bash
-# Tarkista, että hallittu identiteetti on käytössä
+# Tarkista, että hallinnoitu identiteetti on käytössä
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
@@ -784,22 +839,22 @@ az containerapp show \
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv) \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.Storage/storageAccounts/mystorageaccount
-# ✅ Odotettu: Näyttää roolin "Storage Blob Data Contributor"
+# ✅ Odotettu: Näyttää "Storage Blob Data Contributor" -roolin
 ```
 
 **Aika**: 20–30 minuuttia
 
 ---
 
-### Harjoitus 2: Monipalvelujen pääsy käyttäjäkohtaisella identiteetillä ⭐⭐⭐ (Edistynyt)
+### Harjoitus 2: Monipalveluinen pääsy käyttäjän määrittämällä identiteetillä ⭐⭐⭐ (Edistynyt)
 
-**Tavoite**: Luo user-assigned identity, jota jaetaan useiden Container Appien kesken
+**Tavoite**: Luo käyttäjän määrittämä identiteetti, jota jaetaan useiden Container Appsejen kesken
 
 **Skenaario**: Sinulla on 3 mikropalvelua, jotka kaikki tarvitsevat pääsyn samaan Storage-tiliin ja Key Vaultiin.
 
 **Vaiheet**:
 
-1. **Luo user-assigned identity:**
+1. **Luo käyttäjän määrittämä identiteetti:**
 
 **Tiedosto: `infra/core/identity.bicep`**
 
@@ -819,7 +874,7 @@ output principalId string = userAssignedIdentity.properties.principalId
 output clientId string = userAssignedIdentity.properties.clientId
 ```
 
-2. **Määritä roolit user-assigned identitylle:**
+2. **Määritä roolit käyttäjän määritetylle identiteetille:**
 
 ```bicep
 // In main.bicep
@@ -856,7 +911,7 @@ resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' =
 }
 ```
 
-3. **Liitä identiteetti useisiin Container Appeihin:**
+3. **Liitä identiteetti useisiin Container Apps -resursseihin:**
 
 ```bicep
 resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
@@ -898,9 +953,9 @@ resource orderService 'Microsoft.App/containerApps@2023-05-01' = {
 ```javascript
 const { DefaultAzureCredential, ManagedIdentityCredential } = require('@azure/identity');
 
-// Käyttäjän määrittelemälle identiteetille määritä asiakastunnus
+// Käyttäjän määrittelemälle identiteetille määritä asiakas-ID
 const credential = new ManagedIdentityCredential(
-  process.env.AZURE_CLIENT_ID  // Käyttäjän määrittämän identiteetin asiakastunnus
+  process.env.AZURE_CLIENT_ID  // Käyttäjän määrittelemän identiteetin asiakas-ID
 );
 
 // Tai käytä DefaultAzureCredentialia (tunnistaa automaattisesti)
@@ -912,7 +967,7 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-5. **Deployaa ja varmista:**
+5. **Julkaise ja varmista:**
 
 ```bash
 azd up
@@ -929,10 +984,10 @@ curl https://order-service.azurecontainerapps.io/upload
 - ✅ Identiteetti säilyy, vaikka poistat yhden palvelun
 - ✅ Keskitetty käyttöoikeuksien hallinta
 
-**User-Assigned Identityn hyödyt:**
+**Käyttäjän määritetyn identiteetin hyödyt:**
 - Yksi identiteetti hallittavaksi
-- Johdonmukaiset oikeudet palvelujen välillä
-- Säilyy palvelun poiston yli
+- Johdonmukaiset oikeudet palveluiden välillä
+- Säilyy palvelun poiston jälkeen
 - Parempi monimutkaisissa arkkitehtuureissa
 
 **Aika**: 30–40 minuuttia
@@ -941,9 +996,9 @@ curl https://order-service.azurecontainerapps.io/upload
 
 ### Harjoitus 3: Toteuta Key Vault -salaisuuksien kierto ⭐⭐⭐ (Edistynyt)
 
-**Tavoite**: Tallenna kolmannen osapuolen API-avaimet Key Vaultiin ja käytä niitä managed identityllä
+**Tavoite**: Tallenna kolmannen osapuolen API-avaimet Key Vaultiin ja käytä niitä hallitun identiteetin avulla
 
-**Skenaario**: Sovelluksesi kutsuu ulkoista APIa (OpenAI, Stripe, SendGrid), joka vaatii API-avaimia.
+**Skenaario**: Sovelluksesi tarvitsee kutsua ulkoista APIa (OpenAI, Stripe, SendGrid), joka vaatii API-avaimia.
 
 **Vaiheet**:
 
@@ -1001,7 +1056,7 @@ az keyvault secret set \
   --value "SG.xxxxxxxxxxxxx"
 ```
 
-3. **Sovelluskoodi salaisuuksien noutamiseen:**
+3. **Sovelluskoodi salaisuuksien hakemiseen:**
 
 **Tiedosto: `src/config.js`**
 
@@ -1020,7 +1075,7 @@ class Config {
   }
 
   async getSecret(secretName) {
-    // Tarkista ensin välimuisti
+    // Tarkista välimuisti ensin
     if (this.cache[secretName]) {
       return this.cache[secretName];
     }
@@ -1063,7 +1118,7 @@ const { OpenAI } = require('openai');
 
 const app = express();
 
-// Alusta OpenAI käyttämällä avainta Key Vaultista
+// Alusta OpenAI Key Vaultista haetulla avaimella
 let openaiClient;
 
 async function initializeServices() {
@@ -1072,7 +1127,7 @@ async function initializeServices() {
   console.log('✅ Services initialized with secrets from Key Vault');
 }
 
-// Kutsu käynnistyksen yhteydessä
+// Kutsutaan käynnistyksen yhteydessä
 initializeServices().catch(console.error);
 
 app.post('/chat', async (req, res) => {
@@ -1096,7 +1151,7 @@ app.listen(3000, () => {
 });
 ```
 
-5. **Deployaa ja testaa:**
+5. **Julkaise ja testaa:**
 
 ```bash
 azd up
@@ -1109,9 +1164,9 @@ curl -X POST https://myapp.azurecontainerapps.io/chat \
 
 **✅ Onnistumiskriteerit:**
 - ✅ Ei API-avaimia koodissa tai ympäristömuuttujissa
-- ✅ Sovellus noutaa avaimet Key Vaultista
-- ✅ Kolmannen osapuolen APIt toimivat oikein
-- ✅ Avaimia voi kierrättää ilman koodimuutoksia
+- ✅ Sovellus hakee avaimet Key Vaultista
+- ✅ Kolmannen osapuolen API:t toimivat oikein
+- ✅ Avainkierto onnistuu ilman koodimuutoksia
 
 **Kierrä salaisuus:**
 
@@ -1122,32 +1177,32 @@ az keyvault secret set \
   --name "OpenAI-ApiKey" \
   --value "sk-proj-NEW_KEY_HERE"
 
-# Käynnistä sovellus uudelleen ottaaksesi uuden avaimen käyttöön
+# Käynnistä sovellus uudelleen, jotta uusi avain otetaan käyttöön
 az containerapp revision restart \
   --name myapp \
   --resource-group rg-myapp
 ```
 
-**Aika**: 25–35 minuuttia
+**Aika**: 25-35 minuuttia
 
 ---
 
-## Tietotarkastus
+## Osaamisen tarkistus
 
-### 1. Autentikointimallit ✓
+### 1. Todentamismallit ✓
 
-Testaa ymmärryksesi:
+Testaa ymmärrystäsi:
 
-- [ ] **K1**: Mitkä ovat kolme pääasiallista autentikointimallia? 
-  - **V**: Yhteysmerkkijonot (perintö), Key Vault -viittaukset (siirtymä), Managed Identity (paras)
+- [ ] **Q1**: Mitkä ovat kolme pääasiallista todentamismallia? 
+  - **A**: Yhteysmerkkijonot (perintö), Key Vault -viittaukset (siirtymä), Hallittu identiteetti (paras)
 
-- [ ] **K2**: Miksi managed identity on parempi kuin yhteysmerkkijonot?
-  - **V**: Ei salaisuuksia koodissa, automaattinen kierto, täydellinen audit trail, RBAC-oikeudet
+- [ ] **Q2**: Miksi hallittu identiteetti on parempi kuin yhteysmerkkijonot?
+  - **A**: Ei salaisuuksia koodissa, automaattinen kierto, täydellinen audit-loki, RBAC-oikeudet
 
-- [ ] **K3**: Milloin käytät user-assigned identityä system-assignedin sijaan?
-  - **V**: Kun identiteettiä jaetaan useiden resurssien kesken tai kun identiteetin elinkaari on riippumaton resurssin elinkaaresta
+- [ ] **Q3**: Milloin kannattaa käyttää käyttäjäkohtaisen identiteetin sijaan järjestelmäkohtaista?
+  - **A**: Kun identiteettiä jaetaan useiden resurssien kesken tai identiteetin elinkaari on riippumaton resurssin elinkaaresta
 
-**Käytännön varmistus:**
+**Käytännön varmennus:**
 ```bash
 # Tarkista, minkä tyyppistä identiteettiä sovelluksesi käyttää
 az containerapp show \
@@ -1155,7 +1210,7 @@ az containerapp show \
   --resource-group rg-myapp \
   --query "identity.type"
 
-# Listaa kaikki roolimääritykset identiteetille
+# Listaa kaikki roolimääräykset identiteetille
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 ```
@@ -1164,18 +1219,18 @@ az role assignment list \
 
 ### 2. RBAC ja käyttöoikeudet ✓
 
-Testaa ymmärryksesi:
+Testaa ymmärrystäsi:
 
-- [ ] **K1**: Mikä on "Storage Blob Data Contributor" -roolin rooli-ID?
-  - **V**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
+- [ ] **Q1**: Mikä on roolin ID "Storage Blob Data Contributor"?
+  - **A**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
 
-- [ ] **K2**: Mitä oikeuksia "Key Vault Secrets User" antaa?
-  - **V**: Vain lukuoikeus salaisuuksiin (ei voi luoda, päivittää tai poistaa)
+- [ ] **Q2**: Mitä oikeuksia "Key Vault Secrets User" tarjoaa?
+  - **A**: Vain lukuoikeus salaisuuksiin (ei voi luoda, päivittää tai poistaa)
 
-- [ ] **K3**: Kuinka annat Container Appille pääsyn Azure SQL:iin?
-  - **V**: Määritä "SQL DB Contributor" -rooli tai konfiguroi Azure AD -autentikointi SQL:lle
+- [ ] **Q3**: Miten annat Container Appille pääsyn Azure SQL:ään?
+  - **A**: Määritä "SQL DB Contributor" -rooli tai konfiguroi Microsoft Entra ID -todennus SQL:lle
 
-**Käytännön varmistus:**
+**Käytännön varmennus:**
 ```bash
 # Etsi tietty rooli
 az role definition list --name "Storage Blob Data Contributor"
@@ -1189,17 +1244,18 @@ az role assignment list --assignee $PRINCIPAL_ID --output table
 
 ### 3. Key Vault -integraatio ✓
 
+Testaa ymmärrystäsi:
 
-- [ ] **Q1**: Kuinka otat RBAC:n käyttöön Key Vaultille pääsypolitiikkojen sijaan?
+- [ ] **Q1**: Miten otat Key Vaultille käyttöön RBAC:n access policiesin sijaan?
   - **A**: Aseta `enableRbacAuthorization: true` Bicepissä
 
-- [ ] **Q2**: Mikä Azure SDK -kirjasto käsittelee hallinnoidun identiteetin todennusta?
-  - **A**: `@azure/identity` käyttäen `DefaultAzureCredential`-luokkaa
+- [ ] **Q2**: Mikä Azure SDK -kirjasto hoitaa hallitun identiteetin todennuksen?
+  - **A**: `@azure/identity` ja `DefaultAzureCredential`-luokka
 
-- [ ] **Q3**: Kuinka kauan Key Vault -salaisuudet pysyvät välimuistissa?
-  - **A**: Riippuu sovelluksesta; toteuta oma välimuististrategiasi
+- [ ] **Q3**: Kuinka kauan Key Vaultin salaisuudet pysyvät välimuistissa?
+  - **A**: Sovelluksesta riippuu; toteuta oma välimuististrategiasi
 
-**Käytännön tarkistus:**
+**Käytännön varmennus:**
 ```bash
 # Testaa pääsyä Key Vaultiin
 az keyvault secret show \
@@ -1220,39 +1276,39 @@ az keyvault show \
 
 ### ✅ TEE:
 
-1. **Käytä aina hallinnoitua identiteettiä tuotannossa**
+1. **Käytä aina hallittua identiteettiä tuotannossa**
    ```bicep
    identity: {
      type: 'SystemAssigned'
    }
    ```
 
-2. **Käytä vähimmäisoikeuksien RBAC-rooleja**
-   - Käytä mahdollisuuksien mukaan "Reader"-rooleja
-   - Vältä "Owner" tai "Contributor" ellei välttämätöntä
+2. **Käytä vähimmän oikeuden periaatetta RBAC-rooleissa**
+   - Käytä "Reader" -rooleja kun mahdollista
+   - Vältä "Owner" tai "Contributor" ellei ole tarpeen
 
 3. **Tallenna kolmannen osapuolen avaimet Key Vaultiin**
    ```javascript
    const apiKey = await secretClient.getSecret('ThirdPartyApiKey');
    ```
 
-4. **Ota auditointilokit käyttöön**
+4. **Ota audit-lokin kirjaus käyttöön**
    ```bicep
    diagnosticSettings: {
      logs: [{ category: 'AuditEvent', enabled: true }]
    }
    ```
 
-5. **Käytä eri identiteettejä dev/staging/prod-ympäristöille**
+5. **Käytä eri identiteettejä dev/staging/prod-ympäristöissä**
    ```bash
    azd env new dev
    azd env new staging
    azd env new prod
    ```
 
-6. **Kierrätä salaisuuksia säännöllisesti**
-   - Aseta vanhenemispäivämäärät Key Vault -salaisuuksille
-   - Automaattista kierron Azure Functionsin avulla
+6. **Kierrä salaisuuksia säännöllisesti**
+   - Aseta vanhenemispäivät Key Vault -salaisuuksille
+   - Automatisoi kierto Azure Functionsilla
 
 ### ❌ ÄLÄ:
 
@@ -1277,7 +1333,7 @@ az keyvault show \
    roleDefinitionId: 'Storage Blob Data Reader'
    ```
 
-4. **Älä tallenna salaisuuksia lokiin**
+4. **Älä kirjaa salaisuuksia lokiin**
    ```javascript
    // ❌ HUONO
    console.log('API Key:', apiKey);
@@ -1286,7 +1342,7 @@ az keyvault show \
    console.log('API Key retrieved successfully');
    ```
 
-5. **Älä jaa tuotantoympäristön identiteettejä eri ympäristöjen välillä**
+5. **Älä jaa tuotantoidentiteettejä ympäristöjen välillä**
    ```bicep
    // ❌ BAD - same identity for dev and prod
    // ✅ GOOD - separate identities per environment
@@ -1296,7 +1352,7 @@ az keyvault show \
 
 ## Vianmääritysohje
 
-### Ongelma: "Unauthorized" Azure Storageen käytettäessä
+### Ongelma: "Unauthorized" Azure Storageia käytettäessä
 
 **Oireet:**
 ```
@@ -1307,18 +1363,18 @@ AuthorizationPermissionMismatch: This request is not authorized to perform this 
 **Diagnoosi:**
 
 ```bash
-# Tarkista, onko hallittu identiteetti otettu käyttöön
+# Tarkista, onko hallittu identiteetti käytössä
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
 # ✅ Odotettu: "SystemAssigned" tai "UserAssigned"
 
-# Tarkista roolimääritykset
+# Tarkista roolien määritykset
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID
 
-# Odotettu: pitäisi näkyä "Storage Blob Data Contributor" tai vastaava rooli
+# Odotettu: Pitäisi näkyä "Storage Blob Data Contributor" tai vastaava rooli
 ```
 
 **Ratkaisut:**
@@ -1332,7 +1388,7 @@ az role assignment create \
   --scope $STORAGE_ID
 ```
 
-2. **Odota levittämistä (voi kestää 5–10 minuuttia):**
+2. **Odota muutosten levittäytymistä (voi kestää 5–10 minuuttia):**
 ```bash
 # Tarkista roolimäärityksen tila
 az role assignment list --assignee $PRINCIPAL_ID --scope $STORAGE_ID
@@ -1346,7 +1402,7 @@ const credential = new DefaultAzureCredential();
 
 ---
 
-### Ongelma: Key Vault -käyttö estetty
+### Ongelma: Pääsy Key Vaultiin evätty
 
 **Oireet:**
 ```
@@ -1400,7 +1456,7 @@ CredentialUnavailableError: No credential available
 **Diagnoosi:**
 
 ```bash
-# Tarkista, että olet kirjautunut sisään
+# Tarkista, oletko kirjautunut sisään
 az account show
 
 # Tarkista Azure CLI:n todennus
@@ -1426,11 +1482,11 @@ export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 ```
 
-4. **Tai käytä eri tunnistetta paikallisesti:**
+4. **Tai käytä paikallisesti eri tunnistetta:**
 ```javascript
 const { DefaultAzureCredential, AzureCliCredential } = require('@azure/identity');
 
-// Käytä AzureCliCredentialia paikallisessa kehityksessä
+// Käytä AzureCliCredentialia paikalliseen kehitykseen
 const credential = process.env.NODE_ENV === 'production' 
   ? new DefaultAzureCredential()
   : new AzureCliCredential();
@@ -1438,15 +1494,15 @@ const credential = process.env.NODE_ENV === 'production'
 
 ---
 
-### Ongelma: Roolin myöntämisen levittäminen kestää liian kauan
+### Ongelma: Roolin myöntämisen levittäytyminen kestää liian kauan
 
 **Oireet:**
 - Rooli myönnetty onnistuneesti
 - Silti tulee 403-virheitä
-- Epävakaa pääsy (joskus toimii, joskus ei)
+- Vaihteleva pääsy (toisinaan toimii, toisinaan ei)
 
 **Selitys:**
-Azure RBAC -muutosten levittyminen voi kestää 5–10 minuuttia maailmanlaajuisesti.
+Azure RBAC -muutosten levittäytyminen voi kestää 5–10 minuuttia maailmanlaajuisesti.
 
 **Ratkaisu:**
 
@@ -1458,7 +1514,7 @@ sleep 300  # Odota 5 minuuttia
 # Testaa pääsyä
 curl https://myapp.azurecontainerapps.io/upload
 
-# Jos epäonnistuu edelleen, käynnistä sovellus uudelleen
+# Jos se epäonnistuu edelleen, käynnistä sovellus uudelleen
 az containerapp revision restart \
   --name myapp \
   --resource-group rg-myapp
@@ -1468,35 +1524,35 @@ az containerapp revision restart \
 
 ## Kustannusnäkökohdat
 
-### Hallinnoidun identiteetin kustannukset
+### Hallitun identiteetin kustannukset
 
 | Resurssi | Kustannus |
-|----------|-----------|
-| **Hallinnoitu identiteetti** | 🆓 **ILMAINEN** - Ei maksua |
-| **RBAC-roolien myöntäminen** | 🆓 **ILMAINEN** - Ei maksua |
-| **Azure AD -tokenpyynnöt** | 🆓 **ILMAINEN** - Sisältyy |
+|----------|------|
+| **Managed Identity** | 🆓 **ILMAINEN** - Ei maksua |
+| **RBAC-roolien myönnöt** | 🆓 **ILMAINEN** - Ei maksua |
+| **Microsoft Entra ID -tokenpyynnöt** | 🆓 **ILMAINEN** - Sisältyy |
 | **Key Vault -operaatiot** | $0.03 per 10,000 operaatiota |
-| **Key Vault -tallennus** | $0.024 per secret per month |
+| **Key Vault -tallennus** | $0.024 per salaisuus per kuukausi |
 
-**Hallinnoitu identiteetti säästää rahaa seuraavasti:**
-- ✅ Poistaa Key Vault -operaatiot palveluiden välisessä todennuksessa
-- ✅ Vähentää turvallisuusincidenttejä (ei vuotaneita tunnuksia)
-- ✅ Vähentää operatiivista taakkaa (ei manuaalista kiertoa)
+**Hallitun identiteetin avulla säästetään rahaa seuraavasti:**
+- ✅ Poistamalla Key Vault -operaatiot palveluiden välisestä todennuksesta
+- ✅ Vähentämällä tietoturvaloukkauksia (ei vuotaneita tunnuksia)
+- ✅ Vähentämällä operatiivista taakkaa (ei manuaalista kiertoa)
 
 **Esimerkkikustannusvertailu (kuukausittain):**
 
-| Skenaario | Yhteysmerkkijonot | Hallinnoitu identiteetti | Säästö |
-|----------|-------------------|-------------------------|--------|
-| Pieni sovellus (1M requests) | ~$50 (Key Vault + operaatiot) | ~$0 | $50/month |
-| Keskisuuri sovellus (10M requests) | ~$200 | ~$0 | $200/month |
-| Suuri sovellus (100M requests) | ~$1,500 | ~$0 | $1,500/month |
+| Skenaario | Yhteysmerkkijonot | Hallittu identiteetti | Säästö |
+|----------|-------------------|-----------------|---------|
+| Pieni sovellus (1M pyyntöä) | ~$50 (Key Vault + operaatiot) | ~$0 | $50/kk |
+| Keskisuuri sovellus (10M pyyntöä) | ~$200 | ~$0 | $200/kk |
+| Suuri sovellus (100M pyyntöä) | ~$1,500 | ~$0 | $1,500/kk |
 
 ---
 
 ## Lisätietoja
 
 ### Virallinen dokumentaatio
-- [Azure Hallinnoidut identiteetit](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
+- [Azure Managed Identity](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
 - [Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)
 - [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)
 - [DefaultAzureCredential](https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential)
@@ -1506,42 +1562,42 @@ az containerapp revision restart \
 - [Azure.Identity (C#)](https://www.nuget.org/packages/Azure.Identity/)
 - [azure-identity (Python)](https://pypi.org/project/azure-identity/)
 
-### Seuraavat vaiheet tässä kurssissa
+### Seuraavat askeleet tässä kurssissa
 - ← Edellinen: [Konfiguraation hallinta](configuration.md)
 - → Seuraava: [Ensimmäinen projekti](first-project.md)
 - 🏠 [Kurssin etusivu](../../README.md)
 
 ### Liittyviä esimerkkejä
-- [Microsoft Foundry Models Chat -esimerkki](../../../../examples/azure-openai-chat) - Käyttää hallinnoitua identiteettiä Microsoft Foundry Modelsille
-- [Mikropalveluesimerkki](../../../../examples/microservices) - Monipalveluiden todennusmallit
+- [Microsoft Foundry Models Chat Example](../../../../examples/azure-openai-chat) - Käyttää hallittua identiteettiä Microsoft Foundry Modelsille
+- [Microservices Example](../../../../examples/microservices) - Monipalveluiden todennustavat
 
 ---
 
 ## Yhteenveto
 
 **Olet oppinut:**
-- ✅ Kolme todennusmallia (yhteysmerkkijonot, Key Vault, hallinnoitu identiteetti)
-- ✅ Kuinka ottaa käyttöön ja konfiguroida hallinnoitu identiteetti AZD:ssä
-- ✅ RBAC-roolien myöntäminen Azure-palveluille
+- ✅ Kolme todentamismallia (yhteysmerkkijonot, Key Vault, hallittu identiteetti)
+- ✅ Kuinka ottaa käyttöön ja konfiguroida hallittu identiteetti AZD:ssä
+- ✅ RBAC-roolien myönnöt Azure-palveluille
 - ✅ Key Vault -integraatio kolmannen osapuolen salaisuuksille
-- ✅ Käyttäjän määrittämät vs järjestelmän määrittämät identiteetit
+- ✅ Käyttäjäkohtaiset vs järjestelmäkohtaiset identiteetit
 - ✅ Turvallisuuden parhaat käytännöt ja vianmääritys
 
-**Keskeiset opit:**
-1. **Käytä aina hallinnoitua identiteettiä tuotannossa** - Ei salaisuuksia, automaattinen kierto
-2. **Käytä vähimmäisoikeuksien RBAC-rooleja** - Myönnä vain tarvittavat oikeudet
-3. **Tallenna kolmannen osapuolen avaimet Key Vaultiin** - Keskitetty salaisuudenhallinta
-4. **Erota identiteetit ympäristöittäin** - Dev, staging, prod eristys
-5. **Ota auditointilokit käyttöön** - Seuraa kuka pääsi käsiksi mihin
+**Tärkeimmät asiat:**
+1. **Käytä aina hallittua identiteettiä tuotannossa** - Ei salaisuuksia, automaattinen kierto
+2. **Käytä vähimmän oikeuden periaatetta RBAC-rooleissa** - Myönnä vain tarvittavat oikeudet
+3. **Tallenna kolmannen osapuolen avaimet Key Vaultiin** - Keskitetty salaisuuksien hallinta
+4. **Erota identiteetit ympäristöittäin** - Dev-, staging- ja prod-ympäristöjen eristys
+5. **Ota audit-lokin kirjaus käyttöön** - Seuraa kuka pääsi mihin
 
 **Seuraavat askeleet:**
 1. Suorita yllä olevat käytännön harjoitukset
-2. Siirrä olemassa oleva sovellus yhteysmerkkijonoista hallinnoituun identiteettiin
-3. Rakenna ensimmäinen AZD-projektisi turvallisuus mukana alusta alkaen: [Ensimmäinen projekti](first-project.md)
+2. Siirrä olemassa oleva sovellus yhteysmerkkijonoista hallittuun identiteettiin
+3. Rakenna ensimmäinen AZD-projektisi turvallisuus huomioiden alusta alkaen: [Ensimmäinen projekti](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastuuvapauslauseke**:
-Tämä asiakirja on käännetty tekoälypohjaisella käännöspalvelulla [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme täsmällisyyteen, on hyvä huomata, että automaattisissa käännöksissä saattaa esiintyä virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä tulee pitää määräävänä lähteenä. Kriittisten tietojen osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tästä käännöksestä aiheutuvista väärinkäsityksistä tai virheellisistä tulkinnoista.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, otathan huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäiskielellä on virallinen lähde. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

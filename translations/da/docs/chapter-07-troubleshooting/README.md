@@ -1,22 +1,22 @@
-# Kapitel 7: Fejlfinding & Debugging
+# Kapitel 7: Fejlfinding og fejlretning
 
-**📚 Kursus**: [AZD for begyndere](../../README.md) | **⏱️ Varighed**: 1-1,5 timer | **⭐ Kompleksitet**: Mellem
+**📚 Kursus**: [AZD for begyndere](../../README.md) | **⏱️ Varighed**: 1-1,5 timer | **⭐ Kompleksitet**: Middelniveau
 
 ---
 
 ## Oversigt
 
-Dette kapitel hjælper dig med at diagnosticere og løse almindelige problemer, når du arbejder med Azure Developer CLI. Fra implementeringsfejl til AI-specifikke problemer.
+Dette kapitel hjælper dig med at diagnosticere og løse almindelige problemer, når du arbejder med Azure Developer CLI. Fra udrulningsfejl til AI-specifikke problemer.
 
-> Valideret med `azd 1.23.12` i marts 2026.
+> Valideret mod `azd 1.25.6` i juni 2026.
 
 ## Læringsmål
 
 Ved at gennemføre dette kapitel vil du:
-- Diagnosticere almindelige AZD-implementeringsfejl
-- Fejlsøge autentificerings- og tilladelsesproblemer
-- Løse AI-tjenestens forbindelsesproblemer
-- Brug Azure Portal og CLI til fejlfinding
+- Diagnosticere almindelige AZD-udrulningsfejl
+- Fejlfinde autentificerings- og tilladelsesproblemer
+- Løse AI-tjenesteforbindelsesproblemer
+- Bruge Azure Portal og CLI til fejlfinding
 
 ---
 
@@ -24,26 +24,26 @@ Ved at gennemføre dette kapitel vil du:
 
 | # | Lektion | Beskrivelse | Tid |
 |---|--------|-------------|------|
-| 1 | [Almindelige problemer](common-issues.md) | Hyppigt forekommende problemer | 30 min |
-| 2 | [Fejlsøgningsvejledning](debugging.md) | Trin-for-trin fejlsøgningsstrategier | 45 min |
+| 1 | [Almindelige problemer](common-issues.md) | Ofte forekommende problemer | 30 min |
+| 2 | [Fejlfindingsguide](debugging.md) | Trin-for-trin fejlfindingstrategier | 45 min |
 | 3 | [AI-fejlfinding](ai-troubleshooting.md) | AI-specifikke problemer | 30 min |
 
 ---
 
-## 🚨 Hurtige rettelser
+## 🚨 Hurtige løsninger
 
 ### Autentificeringsproblemer
 ```bash
 # Påkrævet for AZD-arbejdsgange
 azd auth login
 
-# Valgfrit, hvis du også bruger Azure CLI-kommandoer direkte
+# Valgfri, hvis du også bruger Azure CLI-kommandoer direkte
 az login
 
 azd auth status
 ```
 
-### Provisioneringsfejl
+### Fejl ved provisionering
 ```bash
 azd show
 azd monitor --logs
@@ -66,23 +66,23 @@ azd up
 
 ---
 
-## 📋 Fejlkodehenvisning
+## 📋 Fejlkodereference
 
 | Fejl | Årsag | Løsning |
 |-------|-------|----------|
 | `AuthenticationError` | Ikke logget ind | `azd auth login` |
-| `ResourceNotFound` | Manglende ressource | Kontroller ressourcenavne |
-| `QuotaExceeded` | Abonnementsgrænser | Anmod om øget kvote |
+| `ResourceNotFound` | Manglende ressource | Tjek ressourcenavne |
+| `QuotaExceeded` | Begrænsninger i abonnementet | Anmod om øget kvote |
 | `InvalidTemplate` | Bicep-syntaksfejl | `az bicep build` |
 | `Conflict` | Ressourcen findes | Brug nyt navn eller slet |
-| `Forbidden` | Utilstrækkelige tilladelser | Kontroller RBAC-roller |
+| `Forbidden` | Utilstrækkelige tilladelser | Tjek RBAC-roller |
 
 ---
 
-## 🔄 Nulstilling og genopretning
+## 🔄 Nulstilling og gendannelse
 
 ```bash
-# Blød nulstilling (behold ressourcer, genudrul koden)
+# Blød nulstilling (behold ressourcerne, udrul koden igen)
 azd deploy --force
 
 # Hård nulstilling (slet alt, start forfra)
@@ -103,13 +103,13 @@ azd up
 
 ## 📖 Relaterede ressourcer
 
-- [Kontroller før udrulning](../chapter-06-pre-deployment/preflight-checks.md)
-- [Konfigurationsvejledning](../chapter-03-configuration/configuration.md)
-- [AZD GitHub-problemer](https://github.com/Azure/azure-dev/issues)
+- [Forud-udrulningskontroller](../chapter-06-pre-deployment/preflight-checks.md)
+- [Konfigurationsguide](../chapter-03-configuration/configuration.md)
+- [AZD GitHub-issues](https://github.com/Azure/azure-dev/issues)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, bedes du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på originalsproget bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

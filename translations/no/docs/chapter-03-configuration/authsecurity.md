@@ -3,9 +3,9 @@
 ⏱️ **Estimert tid**: 45-60 minutter | 💰 **Kostnadseffekt**: Gratis (ingen ekstra kostnader) | ⭐ **Kompleksitet**: Middels
 
 **📚 Læringssti:**
-- ← Forrige: [Konfigurasjonsstyring](configuration.md) - Håndtere miljøvariabler og hemmeligheter
+- ← Forrige: [Configuration Management](configuration.md) - Håndtering av miljøvariabler og hemmeligheter
 - 🎯 **Du er her**: Autentisering og sikkerhet (Administrert identitet, Key Vault, sikre mønstre)
-- → Neste: [Første prosjekt](first-project.md) - Bygg din første AZD-applikasjon
+- → Neste: [First Project](first-project.md) - Bygg din første AZD-applikasjon
 - 🏠 [Kurs Hjem](../../README.md)
 
 ---
@@ -14,13 +14,13 @@
 
 Ved å fullføre denne leksjonen vil du:
 - Forstå Azure-autentiseringsmønstre (nøkler, tilkoblingsstrenger, administrert identitet)
-- Implementere **Administrert identitet** for passordfri autentisering
-- Sikre hemmeligheter med **Azure Key Vault**-integrasjon
+- Implementere **Administrert identitet** for passordløs autentisering
+- Sikre hemmeligheter med **Azure Key Vault** integrasjon
 - Konfigurere **rollebasert tilgangskontroll (RBAC)** for AZD-distribusjoner
-- Anvende sikkerhetsbeste praksis i Container Apps og Azure-tjenester
+- Anvende sikkerhets beste praksis i Container Apps og Azure-tjenester
 - Migrere fra nøkkelbasert til identitetsbasert autentisering
 
-## Hvorfor administrert identitet er viktig
+## Hvorfor Administrert Identitet er Viktig
 
 ### Problemet: Tradisjonell autentisering
 
@@ -34,10 +34,10 @@ const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 
 **Problemer:**
 - 🔴 **Eksponerte hemmeligheter** i kode, konfigurasjonsfiler, miljøvariabler
-- 🔴 **Legitimasjoner må roteres** med kodeendringer og ny distribusjon
-- 🔴 **Revisjonsmareritt** - hvem hadde tilgang til hva, når?
-- 🔴 **Spredning** - hemmeligheter spredt på flere systemer
-- 🔴 **Samsvarsrisikoer** - feiler sikkerhetsrevisjoner
+- 🔴 **Legitimrotasjon** krever kodeendringer og ny distribusjon
+- 🔴 **Revisjonsmareritt** - hvem fikk tilgang til hva, når?
+- 🔴 **Spredning** - hemmeligheter spredt over flere systemer
+- 🔴 **Overholdelsesrisiko** - feiler sikkerhetsrevisjoner
 
 ### Løsningen: Administrert identitet
 
@@ -52,13 +52,13 @@ const client = new BlobServiceClient(
 ```
 
 **Fordeler:**
-- ✅ **Ingen hemmeligheter** i kode eller konfigurasjon
+- ✅ **Null hemmeligheter** i kode eller konfigurasjon
 - ✅ **Automatisk rotasjon** - Azure håndterer det
-- ✅ **Full revisjonsspor** i Azure AD logger
-- ✅ **Sentralisert sikkerhet** - håndter via Azure Portal
-- ✅ **Samsvarsklart** - møter sikkerhetsstandarder
+- ✅ **Full revisjonssporing** i Microsoft Entra ID-logger
+- ✅ **Sentralisert sikkerhet** - håndteres i Azure Portal
+- ✅ **Klar for overholdelse** - møter sikkerhetsstandarder
 
-**Analogien**: Tradisjonell autentisering er som å bære flere fysiske nøkler til ulike dører. Administrert identitet er som å ha et adgangskort som automatisk gir tilgang basert på hvem du er — ingen nøkler å miste, kopiere eller rotere.
+**Analogien**: Tradisjonell autentisering er som å bære flere fysiske nøkler til ulike dører. Administrert identitet er som å ha et sikkerhetskort som automatisk gir tilgang basert på hvem du er—ingen nøkler å miste, kopiere eller rotere.
 
 ---
 
@@ -69,12 +69,12 @@ const client = new BlobServiceClient(
 ```mermaid
 sequenceDiagram
     participant App as Din applikasjon<br/>(Container-app)
-    participant MI as Administrert identitet<br/>(Azure AD)
-    participant KV as Key Vault
+    participant MI as Administrert identitet<br/>(Microsoft Entra ID)
+    participant KV as Nøkkeltjeneste
     participant Storage as Azure Storage
     participant DB as Azure SQL
     
-    App->>MI: Be om tilgangstoken<br/>(automatisk)
+    App->>MI: Forespør tilgangstoken<br/>(automatisk)
     MI->>MI: Verifiser identitet<br/>(ingen passord nødvendig)
     MI-->>App: Returner token<br/>(gyldig 1 time)
     
@@ -92,20 +92,21 @@ sequenceDiagram
     
     Note over App,DB: All autentisering uten passord!
 ```
-### Typer administrerte identiteter
+
+### Typer av administrerte identiteter
 
 ```mermaid
 graph TB
-    MI[Administrert identitet]
-    SystemAssigned[System-Tildelt identitet]
-    UserAssigned[Bruker-Tildelt identitet]
+    MI[Managed Identity]
+    SystemAssigned[System-tilordnet identitet]
+    UserAssigned[Brukertilordnet identitet]
     
     MI --> SystemAssigned
     MI --> UserAssigned
     
-    SystemAssigned --> SA1[Livetid knyttet til ressurs]
+    SystemAssigned --> SA1[Livssyklus bundet til ressurs]
     SystemAssigned --> SA2[Automatisk opprettelse/sletting]
-    SystemAssigned --> SA3[Best for enkel ressurs]
+    SystemAssigned --> SA3[Best for enkeltressurs]
     
     UserAssigned --> UA1[Uavhengig livssyklus]
     UserAssigned --> UA2[Manuell opprettelse/sletting]
@@ -114,14 +115,15 @@ graph TB
     style SystemAssigned fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style UserAssigned fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
 ```
+
 | Funksjon | System-tilordnet | Bruker-tilordnet |
-|---------|-----------------|-----------------|
+|---------|------------------|------------------|
 | **Livssyklus** | Knyttet til ressurs | Uavhengig |
 | **Opprettelse** | Automatisk med ressurs | Manuell opprettelse |
-| **Sletting** | Slettet med ressurs | Består etter ressurs sletting |
-| **Deling** | En ressurs kun | Flere ressurser |
-| **Brukstilfelle** | Enkle scenarier | Komplekse flerservicescenarier |
-| **AZD standard** | ✅ Anbefalt | Valgfritt |
+| **Sletting** | Slettet med ressurs | Beholder etter sletting |
+| **Deling** | Én ressurs bare | Flere ressurser |
+| **Brukstilfelle** | Enkle scenarioer | Kompleks fler-ressurs scenario |
+| **AZD Standard** | ✅ Anbefalt | Valgfri |
 
 ---
 
@@ -141,7 +143,7 @@ az --version
 # ✅ Forventet: azure-cli 2.50.0 eller høyere
 ```
 
-### Azure-krav
+### Azure krav
 
 - Aktiv Azure-abonnement
 - Tillatelser til å:
@@ -150,20 +152,20 @@ az --version
   - Opprette Key Vault-ressurser
   - Distribuere Container Apps
 
-### Forkunnskaper
+### Kunnskapsforutsetninger
 
 Du bør ha fullført:
-- [Installasjonsveiledning](installation.md) - AZD-oppsett
-- [AZD Grunnleggende](azd-basics.md) - Kjernebegreper
-- [Konfigurasjonsstyring](configuration.md) - Miljøvariabler
+- [Installasjonsguide](installation.md) - Oppsett av AZD
+- [AZD Grunnleggende](azd-basics.md) - Kjernen i konsepter
+- [Configuration Management](configuration.md) - Miljøvariabler
 
 ---
 
 ## Leksjon 1: Forstå autentiseringsmønstre
 
-### Mønster 1: Tilkoblingsstrenger (Gammel metode - unngå)
+### Mønster 1: Tilkoblingsstrenger (Legacy - Unngå)
 
-**Slik fungerer det:**
+**Hvordan det fungerer:**
 ```bash
 # Tilkoblingsstreng inneholder legitimasjon
 STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=xK7mN9pQ2wR5..."
@@ -173,17 +175,17 @@ SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=
 
 **Problemer:**
 - ❌ Hemmeligheter synlige i miljøvariabler
-- ❌ Logges i distribusjonssystemer
+- ❌ Logget i distribusjonssystemer
 - ❌ Vanskelig å rotere
-- ❌ Ingen revisjonsspor for tilgang
+- ❌ Ingen revisjonsspor av tilgang
 
-**Når å bruke:** Bare for lokal utvikling, aldri i produksjon.
+**Når bruke:** Kun for lokal utvikling, aldri i produksjon.
 
 ---
 
-### Mønster 2: Key Vault Referanser (Bedre)
+### Mønster 2: Key Vault-referanser (Bedre)
 
-**Slik fungerer det:**
+**Hvordan det fungerer:**
 ```bicep
 // Store secret in Key Vault
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
@@ -203,21 +205,21 @@ env: [
 ```
 
 **Fordeler:**
-- ✅ Hemmeligheter lagres sikkert i Key Vault
+- ✅ Hemmeligheter lagret sikkert i Key Vault
 - ✅ Sentralisert hemmelighetshåndtering
 - ✅ Rotasjon uten kodeendringer
 
 **Begrensninger:**
 - ⚠️ Bruker fortsatt nøkler/passord
-- ⚠️ Må håndtere Key Vault-tilgang
+- ⚠️ Må håndtere tilgang til Key Vault
 
-**Når å bruke:** Overgangssteg fra tilkoblingsstrenger til administrert identitet.
+**Når bruke:** Overgangsperiode fra tilkoblingsstrenger til administrert identitet.
 
 ---
 
 ### Mønster 3: Administrert identitet (Beste praksis)
 
-**Slik fungerer det:**
+**Hvordan det fungerer:**
 ```bicep
 // Enable managed identity
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -251,13 +253,66 @@ const blobServiceClient = new BlobServiceClient(
 ```
 
 **Fordeler:**
-- ✅ Ingen hemmeligheter i kode/konfigurasjon
+- ✅ Null hemmeligheter i kode/konfig
 - ✅ Automatisk legitimasjonsrotasjon
-- ✅ Full revisjonsspor
+- ✅ Full revisjonssporing
 - ✅ RBAC-baserte tillatelser
-- ✅ Samsvarsklart
+- ✅ Klar for overholdelse
 
-**Når å bruke:** Alltid, for produksjonsapplikasjoner.
+**Når bruke:** Alltid, for produksjonsapplikasjoner.
+
+---
+
+### Mønster 4: Service Principals (CI/CD og automatisering)
+
+Administrert identitet er gullstandarden *for ressurser kjørende inne i Azure*. Men hva med ting som kjører **utenfor** Azure — som en CI/CD-pipeline på en build-agent, eller et skript på din laptop som ikke kan bruke interaktiv innlogging? Der kommer en **service principal** inn: en ikke-menneskelig identitet med egne legitimasjoner som en automatisert prosess kan logge inn med.
+
+**Hvordan det fungerer:**
+
+Opprett en service principal med skop til en ressursgruppe (minste nødvendige privilegier):
+
+```bash
+az ad sp create-for-rbac \
+  --name "myapp-cicd" \
+  --role contributor \
+  --scopes /subscriptions/<sub-id>/resourceGroups/<rg-name>
+```
+
+Dette skriver ut en klient-ID, klienthemmelighet og leietaker-ID. azd kan logge inn med disse uten interaksjon:
+
+```bash
+azd auth login \
+  --client-id "<appId>" \
+  --client-secret "<password>" \
+  --tenant-id "<tenant>"
+```
+
+**Foretrekk fødererte legitimasjoner (OIDC) over hemmeligheter.** I stedet for en langtids levetids klienthemmelighet, konfigurer en føderert legitimasjon så pipelinen bytter en kortvarig token–ingen hemmelighet å lekke eller rotere:
+
+```bash
+azd auth login \
+  --client-id "<appId>" \
+  --federated-credential-provider "github" \
+  --tenant-id "<tenant>"
+```
+
+> `azd pipeline config` setter dette opp for deg automatisk. Se CI/CD gjennomgangene i [Kapittel 8](../chapter-08-production/production-ai-practices.md).
+
+**Fordeler:**
+- ✅ Fungerer utenfor Azure (build-agenter, lokalt, andre skyer)
+- ✅ Kan skopføres til én ressursgruppe med én rolle
+- ✅ Føderert (OIDC) variant bruker ingen lagret hemmelighet
+
+**Avveininger:**
+- ⚠️ Hemmelagsbasert variant krever nøye lagring og rotasjon
+- ⚠️ En lekket hemmelighet gir full tilgang som SP-en har – hold skopene stramme
+
+**Når bruke:** CI/CD-pipelines og automatisering som ikke kan bruke administrert identitet. Foretrekk alltid **føderert/OIDC** variant over klienthemmelighet, og foretrekk administrert identitet når arbeidsbelastningen kjører inne i Azure.
+
+**Lagring av legitimasjon sikkert:**
+- Aldri legg hemmeligheter i kildekoderepositorier — bruk pipelinens hemmelighets-lager (GitHub Actions secrets, Azure DevOps variable groups / Key Vault).
+- Skop SP til minste nødvendige rolle og ressursgruppe.
+- Sett utløpstid og roter, eller eliminer hemmeligheten helt med OIDC.
 
 ---
 
@@ -265,7 +320,7 @@ const blobServiceClient = new BlobServiceClient(
 
 ### Trinnvis implementering
 
-La oss bygge en sikker Container App som bruker administrert identitet for å få tilgang til Azure Storage og Key Vault.
+La oss bygge en sikker Container App som bruker administrert identitet til å få tilgang til Azure Storage og Key Vault.
 
 ### Prosjektstruktur
 
@@ -302,7 +357,7 @@ services:
 # Enable managed identity (AZD handles this automatically)
 ```
 
-### 2. Infrastruktur: Aktivere administrert identitet
+### 2. Infrastruktur: Aktiver administrert identitet
 
 **Fil: `infra/main.bicep`**
 
@@ -537,7 +592,7 @@ app.get('/secret/:name', async (req, res) => {
   }
 });
 
-// List blob-beholdere (demonstrerer leseadgang)
+// List opp blob-containere (demonstrerer lesetilgang)
 app.get('/containers', async (req, res) => {
   try {
     const containers = [];
@@ -596,7 +651,7 @@ APP_URL=$(azd env get-values | grep APP_URL | cut -d '=' -f2 | tr -d '"')
 curl $APP_URL/health
 ```
 
-**✅ Forventet resultat:**
+**✅ Forventet utdata:**
 ```json
 {
   "status": "healthy",
@@ -609,7 +664,7 @@ curl $APP_URL/health
 curl -X POST $APP_URL/upload
 ```
 
-**✅ Forventet resultat:**
+**✅ Forventet utdata:**
 ```json
 {
   "success": true,
@@ -618,12 +673,12 @@ curl -X POST $APP_URL/upload
 }
 ```
 
-**Test container-listing:**
+**Test liste over containere:**
 ```bash
 curl $APP_URL/containers
 ```
 
-**✅ Forventet resultat:**
+**✅ Forventet utdata:**
 ```json
 {
   "containers": ["uploads"],
@@ -636,30 +691,30 @@ curl $APP_URL/containers
 
 ## Vanlige Azure RBAC-roller
 
-### Bygde inn rolle-IDer for administrert identitet
+### Innebygde rolle-IDer for administrert identitet
 
 | Tjeneste | Rollenavn | Rolle-ID | Tillatelser |
 |---------|-----------|---------|-------------|
-| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Lese blobs og containere |
-| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Lese, skrive, slette blobs |
-| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Lese, skrive, slette kømeldinger |
-| **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Lese hemmeligheter |
-| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Lese, skrive, slette hemmeligheter |
-| **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Lese Cosmos DB-data |
-| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Lese, skrive Cosmos DB-data |
-| **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Administrere SQL-databaser |
-| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Sende, motta, håndtere meldinger |
+| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Leser blobs og containere |
+| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Leser, skriver, sletter blobs |
+| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Leser, skriver, sletter kømeldinger |
+| **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Leser hemmeligheter |
+| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Leser, skriver, sletter hemmeligheter |
+| **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Leser Cosmos DB-data |
+| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Leser, skriver Cosmos DB-data |
+| **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Håndterer SQL-databaser |
+| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Sender, mottar, håndterer meldinger |
 
 ### Hvordan finne rolle-IDer
 
 ```bash
-# Liste alle innebygde roller
+# List opp alle innebygde roller
 az role definition list --query "[].{Name:roleName, ID:name}" --output table
 
 # Søk etter spesifikk rolle
 az role definition list --query "[?contains(roleName, 'Storage Blob')].{Name:roleName, ID:name}" --output table
 
-# Hent detaljene til rollen
+# Hent rolleinformasjon
 az role definition list --name "Storage Blob Data Contributor"
 ```
 
@@ -673,7 +728,7 @@ az role definition list --name "Storage Blob Data Contributor"
 
 **Scenario**: Du har en Container App som bruker tilkoblingsstrenger. Konverter den til administrert identitet.
 
-**Startpunkt**: Container App med denne konfigurasjonen:
+**Utgangspunkt**: Container App med denne konfigurasjonen:
 
 ```bicep
 // ❌ Current: Using connection string
@@ -687,7 +742,7 @@ env: [
 
 **Trinn**:
 
-1. **Aktivere administrert identitet i Bicep:**
+1. **Aktiver administrert identitet i Bicep:**
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -699,7 +754,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-2. **Gi tilgang til Storage:**
+2. **Gi lagrings tilgang:**
 
 ```bicep
 // Get storage account reference
@@ -719,7 +774,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-3. **Oppdater applikasjonskoden:**
+3. **Oppdater applikasjonskode:**
 
 **Før (tilkoblingsstreng):**
 ```javascript
@@ -742,7 +797,7 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-4. **Oppdater miljøvariablene:**
+4. **Oppdater miljøvariabler:**
 
 ```bicep
 env: [
@@ -766,9 +821,9 @@ curl https://myapp.azurecontainerapps.io/upload
 
 **✅ Suksesskriterier:**
 - ✅ Applikasjonen distribueres uten feil
-- ✅ Storage-operasjoner fungerer (opplasting, liste, nedlasting)
+- ✅ Lagringsoperasjoner fungerer (opplasting, liste, nedlasting)
 - ✅ Ingen tilkoblingsstrenger i miljøvariabler
-- ✅ Identitet synlig i Azure Portal under "Identitet"-blad
+- ✅ Identitet synlig i Azure Portal under "Identity"-delen
 
 **Verifikasjon:**
 
@@ -791,11 +846,11 @@ az role assignment list \
 
 ---
 
-### Øvelse 2: Tjenestetilgang med bruker-tilordnet identitet ⭐⭐⭐ (Avansert)
+### Øvelse 2: Fler-tjenestetilgang med bruker-tilordnet identitet ⭐⭐⭐ (Avansert)
 
-**Mål**: Opprett en bruker-tilordnet identitet delt mellom flere Container Apps
+**Mål**: Lag en bruker-tilordnet identitet delt mellom flere Container Apps
 
-**Scenario**: Du har 3 mikro-tjenester som alle trenger tilgang til samme Storage-konto og Key Vault.
+**Scenario**: Du har 3 mikrotjenester som alle trenger tilgang til samme Storage-konto og Key Vault.
 
 **Trinn**:
 
@@ -856,7 +911,7 @@ resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' =
 }
 ```
 
-3. **Tilordne identitet til flere Container Apps:**
+3. **Tilordnet identitet til flere Container Apps:**
 
 ```bicep
 resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
@@ -900,10 +955,10 @@ const { DefaultAzureCredential, ManagedIdentityCredential } = require('@azure/id
 
 // For bruker-tilordnet identitet, spesifiser klient-ID
 const credential = new ManagedIdentityCredential(
-  process.env.AZURE_CLIENT_ID  // Bruker-tilordnet identitets klient-ID
+  process.env.AZURE_CLIENT_ID  // Klient-ID for bruker-tilordnet identitet
 );
 
-// Eller bruk DefaultAzureCredential (oppdager automatisk)
+// Eller bruk DefaultAzureCredential (auto-opptrekning)
 const credential = new DefaultAzureCredential();
 
 const blobServiceClient = new BlobServiceClient(
@@ -917,22 +972,22 @@ const blobServiceClient = new BlobServiceClient(
 ```bash
 azd up
 
-# Test at alle tjenester kan få tilgang til lagring
+# Test at alle tjenester kan få tilgang til lagringen
 curl https://api-gateway.azurecontainerapps.io/upload
 curl https://product-service.azurecontainerapps.io/upload
 curl https://order-service.azurecontainerapps.io/upload
 ```
 
 **✅ Suksesskriterier:**
-- ✅ Én identitet delt mellom 3 tjenester
+- ✅ Én identitet delt blant 3 tjenester
 - ✅ Alle tjenester kan få tilgang til Storage og Key Vault
-- ✅ Identiteten består selv om en tjeneste slettes
+- ✅ Identiteten vedvarer hvis du sletter én tjeneste
 - ✅ Sentralisert tillatelsesadministrasjon
 
 **Fordeler med bruker-tilordnet identitet:**
-- Enkelt identitetshåndtering
+- Én identitet å administrere
 - Konsistente tillatelser på tvers av tjenester
-- Overlever tjenestesletting
+- Overlever sletting av tjenester
 - Bedre for komplekse arkitekturer
 
 **Tid**: 30-40 minutter
@@ -941,9 +996,9 @@ curl https://order-service.azurecontainerapps.io/upload
 
 ### Øvelse 3: Implementer rotasjon av Key Vault-hemmeligheter ⭐⭐⭐ (Avansert)
 
-**Mål**: Lagre tredjeparts API-nøkler i Key Vault og få tilgang til dem via administrert identitet
+**Mål**: Lagre tredjeparts API-nøkler i Key Vault og få tilgang til dem med administrert identitet
 
-**Scenario**: Appen din trenger å kalle et eksternt API (OpenAI, Stripe, SendGrid) som krever API-nøkler.
+**Scenario**: Appen din må ringe en ekstern API (OpenAI, Stripe, SendGrid) som krever API-nøkler.
 
 **Trinn**:
 
@@ -984,7 +1039,7 @@ output uri string = keyVault.properties.vaultUri
 # Hent Key Vault-navn
 KV_NAME=$(azd env get-values | grep AZURE_KEY_VAULT_NAME | cut -d '=' -f2 | tr -d '"')
 
-# Lagre tredjeparts API-nøkler
+# Lagre API-nøkler fra tredjepart
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
@@ -1052,7 +1107,7 @@ class Config {
 module.exports = new Config();
 ```
 
-4. **Bruk hemmeligheter i applikasjon:**
+4. **Bruk hemmeligheter i applikasjonen:**
 
 **Fil: `src/app.js`**
 
@@ -1108,12 +1163,12 @@ curl -X POST https://myapp.azurecontainerapps.io/chat \
 ```
 
 **✅ Suksesskriterier:**
-- ✅ Ingen API-nøkler i kode eller miljøvariabler
-- ✅ Applikasjonen henter nøkler fra Key Vault
-- ✅ Tredjeparts API-er fungerer korrekt
-- ✅ Kan rotere nøkler uten kodeendringer
+- ✅ Ingen API-nøkler i kode eller miljøvariabler  
+- ✅ Applikasjonen henter nøkler fra Key Vault  
+- ✅ Tredjeparts-APIer fungerer korrekt  
+- ✅ Kan rotere nøkler uten kodeendringer  
 
-**Roter en hemmelighet:**
+**Rotér en hemmelighet:**  
 
 ```bash
 # Oppdater hemmelighet i Key Vault
@@ -1122,32 +1177,32 @@ az keyvault secret set \
   --name "OpenAI-ApiKey" \
   --value "sk-proj-NEW_KEY_HERE"
 
-# Start appen på nytt for å hente ny nøkkel
+# Start appen på nytt for å hente opp ny nøkkel
 az containerapp revision restart \
   --name myapp \
   --resource-group rg-myapp
 ```
+  
+**Tid**: 25-35 minutter  
 
-**Tid**: 25-35 minutter
+---  
 
----
+## Kunnskapssjekk  
 
-## Kunnskapssjekk
+### 1. Autentiseringsmønstre ✓  
 
-### 1. Autentiseringsmønstre ✓
+Test din forståelse:  
 
-Test din forståelse:
+- [ ] **Q1**: Hva er de tre hovedmønstrene for autentisering?  
+  - **A**: Tilkoblingsstrenger (gammeldags), Key Vault-referanser (overgang), Administrert identitet (beste)  
 
-- [ ] **Q1**: Hva er de tre hovedautentiseringsmønstrene? 
-  - **A**: Tilkoblingsstrenger (gammel metode), Key Vault-referanser (overgang), Administrert identitet (beste praksis)
+- [ ] **Q2**: Hvorfor er administrert identitet bedre enn tilkoblingsstrenger?  
+  - **A**: Ingen hemmeligheter i kode, automatisk rotasjon, full revisjonssporing, RBAC-tillatelser  
 
-- [ ] **Q2**: Hvorfor er administrert identitet bedre enn tilkoblingsstrenger?
-  - **A**: Ingen hemmeligheter i kode, automatisk rotasjon, full revisjonsspor, RBAC-tillatelser
+- [ ] **Q3**: Når vil du bruke bruker-tilordnet identitet i stedet for system-tilordnet?  
+  - **A**: Når du deler identitet på tvers av flere ressurser eller når identitetens livssyklus er uavhengig av ressursens livssyklus  
 
-- [ ] **Q3**: Når vil du bruke bruker-tilordnet identitet i stedet for system-tilordnet?
-  - **A**: Når du deler identitet på tvers av flere ressurser eller når identitetens livssyklus er uavhengig av ressursens livssyklus
-
-**Praktisk verifikasjon:**
+**Praktisk verifikasjon:**  
 ```bash
 # Sjekk hvilken type identitet appen din bruker
 az containerapp show \
@@ -1155,51 +1210,52 @@ az containerapp show \
   --resource-group rg-myapp \
   --query "identity.type"
 
-# List opp alle rolleoppgaver for identiteten
+# List alle rolleoppgaver for identiteten
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 ```
+  
+---  
 
----
+### 2. RBAC og Tillatelser ✓  
 
-### 2. RBAC og tillatelser ✓
+Test din forståelse:  
 
-Test din forståelse:
+- [ ] **Q1**: Hva er rolle-ID for "Storage Blob Data Contributor"?  
+  - **A**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`  
 
-- [ ] **Q1**: Hva er rolle-ID for "Storage Blob Data Contributor"?
-  - **A**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
+- [ ] **Q2**: Hvilke tillatelser gir "Key Vault Secrets User"?  
+  - **A**: Lesetilgang til hemmeligheter (kan ikke opprette, oppdatere eller slette)  
 
-- [ ] **Q2**: Hvilke rettigheter gir "Key Vault Secrets User"?
-  - **A**: Lesetilgang til hemmeligheter (kan ikke opprette, oppdatere eller slette)
+- [ ] **Q3**: Hvordan gir du en Container App tilgang til Azure SQL?  
+  - **A**: Tilordne "SQL DB Contributor"-rolle eller konfigurere Microsoft Entra ID-autentisering for SQL  
 
-- [ ] **Q3**: Hvordan gir du en Container App tilgang til Azure SQL?
-  - **A**: Tilordne rollen "SQL DB Contributor" eller konfigurer Azure AD-autentisering for SQL
-
-**Praktisk verifikasjon:**
+**Praktisk verifikasjon:**  
 ```bash
 # Finn spesifikk rolle
 az role definition list --name "Storage Blob Data Contributor"
 
-# Sjekk hvilke roller som er tildelt din identitet
+# Sjekk hvilke roller som er tildelt identiteten din
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID --output table
 ```
+  
+---  
 
----
+### 3. Key Vault-integrasjon ✓  
 
-### 3. Key Vault-integrasjon ✓
+Test din forståelse:  
 
-Test din forståelse:
-- [ ] **Q1**: Hvordan aktiverer du RBAC for Key Vault i stedet for tilgangspolicyer?
-  - **A**: Sett `enableRbacAuthorization: true` i Bicep
+- [ ] **Q1**: Hvordan aktiverer du RBAC for Key Vault i stedet for tilgangspolicyer?  
+  - **A**: Sett `enableRbacAuthorization: true` i Bicep  
 
-- [ ] **Q2**: Hvilket Azure SDK-bibliotek håndterer autentisering med administrert identitet?
-  - **A**: `@azure/identity` med `DefaultAzureCredential`-klassen
+- [ ] **Q2**: Hvilket Azure SDK-bibliotek håndterer autentisering med administrert identitet?  
+  - **A**: `@azure/identity` med `DefaultAzureCredential`-klassen  
 
-- [ ] **Q3**: Hvor lenge ligger Key Vault-hemmeligheter i hurtigbufferen?
-  - **A**: Avhengig av applikasjonen; implementer din egen caching-strategi
+- [ ] **Q3**: Hvor lenge lagres Key Vault-hemmeligheter i cache?  
+  - **A**: Avhenger av applikasjonen; implementer egen caching-strategi  
 
-**Hands-On Verification:**
+**Praktisk verifikasjon:**  
 ```bash
 # Test tilgang til Key Vault
 az keyvault secret show \
@@ -1211,64 +1267,64 @@ az keyvault secret show \
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ Forventet: sant
+# ✅ Forventet: sann
 ```
+  
+---  
 
----
+## Sikkerhetsbeste praksis  
 
-## Sikkerhetsbeste praksis
+### ✅ GJØR:  
 
-### ✅ GJØR:
-
-1. **Bruk alltid administrert identitet i produksjon**
+1. **Bruk alltid administrert identitet i produksjon**  
    ```bicep
    identity: {
      type: 'SystemAssigned'
    }
    ```
+  
+2. **Bruk RBAC-roller med minste privilegium**  
+   - Bruk "Reader"-roller når det er mulig  
+   - Unngå "Owner" eller "Contributor" med mindre det er nødvendig  
 
-2. **Bruk minste privilegium RBAC-roller**
-   - Bruk "Reader"-roller når mulig
-   - Unngå "Owner" eller "Contributor" med mindre det er nødvendig
-
-3. **Lagre tredjepartsnøkler i Key Vault**
+3. **Lagre tredjepartsnøkler i Key Vault**  
    ```javascript
    const apiKey = await secretClient.getSecret('ThirdPartyApiKey');
    ```
-
-4. **Aktiver revisjonslogging**
+  
+4. **Aktiver revisjonslogging**  
    ```bicep
    diagnosticSettings: {
      logs: [{ category: 'AuditEvent', enabled: true }]
    }
    ```
-
-5. **Bruk forskjellige identiteter for dev/staging/prod**
+  
+5. **Bruk forskjellige identiteter for dev/staging/prod**  
    ```bash
    azd env new dev
    azd env new staging
    azd env new prod
    ```
+  
+6. **Rotér hemmeligheter regelmessig**  
+   - Sett utløpsdato på Key Vault-hemmeligheter  
+   - Automatiser rotasjon med Azure Functions  
 
-6. **Roter hemmeligheter jevnlig**
-   - Sett utløpsdatoer på Key Vault-hemmeligheter
-   - Automatiser rotasjon med Azure Functions
+### ❌ IKKE GJØR:  
 
-### ❌ IKKE GJØR:
-
-1. **Ikke hardkod hemmeligheter**
+1. **Aldri hardkod hemmeligheter**  
    ```javascript
    // ❌ DÅRLIG
    const apiKey = "sk-proj-xxxxxxxxxxxxx";
    ```
-
-2. **Ikke bruk connection strings i produksjon**
+  
+2. **Ikke bruk tilkoblingsstrenger i produksjon**  
    ```javascript
    // ❌ DÅRLIG
    BlobServiceClient.fromConnectionString(process.env.STORAGE_CONNECTION_STRING)
    ```
-
-3. **Ikke gi for mange tillatelser**
+  
+3. **Ikke gi overdrevne tillatelser**  
    ```bicep
    // ❌ BAD - too much access
    roleDefinitionId: 'Owner'
@@ -1276,35 +1332,35 @@ az keyvault show \
    // ✅ GOOD - least privilege
    roleDefinitionId: 'Storage Blob Data Reader'
    ```
-
-4. **Ikke logg hemmeligheter**
+  
+4. **Ikke logg hemmeligheter**  
    ```javascript
    // ❌ DÅRLIG
    console.log('API Key:', apiKey);
    
-   // ✅ GODT
+   // ✅ BRA
    console.log('API Key retrieved successfully');
    ```
-
-5. **Ikke del produksjonsidentiteter på tvers av miljøer**
+  
+5. **Ikke del produksjonsidentiteter på tvers av miljøer**  
    ```bicep
    // ❌ BAD - same identity for dev and prod
    // ✅ GOOD - separate identities per environment
    ```
+  
+---  
 
----
+## Feilsøkingsguide  
 
-## Feilsøkingsguide
+### Problem: "Unauthorized" ved tilgang til Azure Storage  
 
-### Problem: "Unauthorized" ved tilgang til Azure Storage
-
-**Symptomer:**
+**Symptomer:**  
 ```
 Error: Unauthorized (403)
 AuthorizationPermissionMismatch: This request is not authorized to perform this operation
 ```
-
-**Diagnose:**
+  
+**Diagnose:**  
 
 ```bash
 # Sjekk om administrert identitet er aktivert
@@ -1314,16 +1370,16 @@ az containerapp show \
   --query "identity.type"
 # ✅ Forventet: "SystemAssigned" eller "UserAssigned"
 
-# Sjekk rolle-tildelinger
+# Sjekk rolleoppgaver
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID
 
 # Forventet: Skal se "Storage Blob Data Contributor" eller lignende rolle
 ```
+  
+**Løsninger:**  
 
-**Løsninger:**
-
-1. **Gi riktig RBAC-rolle:**
+1. **Gi riktig RBAC-rolle:**  
 ```bash
 STORAGE_ID=$(az storage account show --name mystorageaccount --resource-group rg-myapp --query "id" -o tsv)
 az role assignment create \
@@ -1331,54 +1387,54 @@ az role assignment create \
   --role "Storage Blob Data Contributor" \
   --scope $STORAGE_ID
 ```
-
-2. **Vent på propagasjon (kan ta 5-10 minutter):**
+  
+2. **Vent på propagasjon (kan ta 5-10 minutter):**  
 ```bash
 # Sjekk status for rolleoppgave
 az role assignment list --assignee $PRINCIPAL_ID --scope $STORAGE_ID
 ```
-
-3. **Bekreft at applikasjonskode bruker riktig legitimajon:**
+  
+3. **Verifiser at applikasjonskode bruker korrekt legitimasjon:**  
 ```javascript
 // Sørg for at du bruker DefaultAzureCredential
 const credential = new DefaultAzureCredential();
 ```
+  
+---  
 
----
+### Problem: Key Vault tilgang nektet  
 
-### Problem: Fått avslag på tilgang til Key Vault
-
-**Symptomer:**
+**Symptomer:**  
 ```
 Error: Forbidden (403)
 The user, group or application does not have secrets get permission
 ```
-
-**Diagnose:**
+  
+**Diagnose:**  
 
 ```bash
 # Sjekk at Key Vault RBAC er aktivert
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ Forventet: sant
+# ✅ Forventet: sann
 
 # Sjekk rolleoppgaver
 az role assignment list \
   --assignee $PRINCIPAL_ID \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.KeyVault/vaults/$KV_NAME
 ```
+  
+**Løsninger:**  
 
-**Løsninger:**
-
-1. **Aktiver RBAC på Key Vault:**
+1. **Aktiver RBAC på Key Vault:**  
 ```bash
 az keyvault update \
   --name $KV_NAME \
   --enable-rbac-authorization true
 ```
-
-2. **Gi Key Vault Secrets User-rolle:**
+  
+2. **Tildel Key Vault Secrets User-rolle:**  
 ```bash
 KV_ID=$(az keyvault show --name $KV_NAME --query "id" -o tsv)
 az role assignment create \
@@ -1386,18 +1442,18 @@ az role assignment create \
   --role "Key Vault Secrets User" \
   --scope $KV_ID
 ```
+  
+---  
 
----
+### Problem: DefaultAzureCredential mislykkes lokalt  
 
-### Problem: DefaultAzureCredential feiler lokalt
-
-**Symptomer:**
+**Symptomer:**  
 ```
 Error: DefaultAzureCredential failed to retrieve a token
 CredentialUnavailableError: No credential available
 ```
-
-**Diagnose:**
+  
+**Diagnose:**  
 
 ```bash
 # Sjekk om du er logget inn
@@ -1406,27 +1462,27 @@ az account show
 # Sjekk Azure CLI-autentisering
 az ad signed-in-user show
 ```
+  
+**Løsninger:**  
 
-**Løsninger:**
-
-1. **Logg inn på Azure CLI:**
+1. **Logg inn i Azure CLI:**  
 ```bash
 az login
 ```
-
-2. **Sett Azure-abonnement:**
+  
+2. **Sett Azure-abonnement:**  
 ```bash
 az account set --subscription "Your Subscription Name"
 ```
-
-3. **For lokal utvikling, bruk miljøvariabler:**
+  
+3. **For lokal utvikling, bruk miljøvariabler:**  
 ```bash
 export AZURE_TENANT_ID="your-tenant-id"
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 ```
-
-4. **Eller bruk annen kredential lokalt:**
+  
+4. **Eller bruk en annen legitimasjon lokalt:**  
 ```javascript
 const { DefaultAzureCredential, AzureCliCredential } = require('@azure/identity');
 
@@ -1435,25 +1491,25 @@ const credential = process.env.NODE_ENV === 'production'
   ? new DefaultAzureCredential()
   : new AzureCliCredential();
 ```
+  
+---  
 
----
+### Problem: Rolle-tilordning tar for lang tid å propagere  
 
-### Problem: Rolle-tilordning tar for lang tid å propagere
+**Symptomer:**  
+- Rolle tildelt vellykket  
+- Får fortsatt 403-feil  
+- Intermitterende tilgang (noen ganger fungerer, andre ganger ikke)  
 
-**Symptomer:**
-- Rolle tilordnet vellykket
-- Får fortsatt 403-feil
-- Tilfeldig tilgang (noen ganger fungerer, noen ganger ikke)
+**Forklaring:**  
+Azure RBAC-endringer kan ta 5-10 minutter å spre globalt.  
 
-**Forklaring:**
-Azure RBAC-endringer kan ta 5-10 minutter å propagere globalt.
-
-**Løsning:**
+**Løsning:**  
 
 ```bash
-# Vent og prøv igjen
+# Vent og prøv på nytt
 echo "Waiting for RBAC propagation..."
-sleep 300  # Vent i 5 minutter
+sleep 300  # Vent 5 minutter
 
 # Test tilgang
 curl https://myapp.azurecontainerapps.io/upload
@@ -1463,85 +1519,85 @@ az containerapp revision restart \
   --name myapp \
   --resource-group rg-myapp
 ```
+  
+---  
 
----
+## Kostnadshensyn  
 
-## Kostnadsbetraktninger
+### Kostnader for administrert identitet  
 
-### Kostnader for administrert identitet
+| Ressurs | Kostnad |  
+|----------|---------|  
+| **Administrert identitet** | 🆓 **GRATIS** - Ingen kostnad |  
+| **RBAC-rolle-tilordninger** | 🆓 **GRATIS** - Ingen kostnad |  
+| **Microsoft Entra ID Token-forespørsler** | 🆓 **GRATIS** - Inkludert |  
+| **Key Vault-operasjoner** | $0,03 per 10 000 operasjoner |  
+| **Key Vault-lagring** | $0,024 per hemmelighet per måned |  
 
-| Ressurs | Kostnad |
-|----------|---------|
-| **Administrert identitet** | 🆓 **GRATIS** - Ingen kostnad |
-| **RBAC rolle-tilordninger** | 🆓 **GRATIS** - Ingen kostnad |
-| **Azure AD token-forespørsler** | 🆓 **GRATIS** - Inkludert |
-| **Key Vault-operasjoner** | $0,03 per 10 000 operasjoner |
-| **Key Vault-lagring** | $0,024 per hemmelighet per måned |
+**Administrert identitet sparer penger ved:**  
+- ✅ Å eliminere Key Vault-operasjoner for tjeneste-til-tjeneste autentisering  
+- ✅ Redusere sikkerhetshendelser (ingen lekkede legitimasjoner)  
+- ✅ Minske operasjonell overhead (ingen manuelt rotasjon)  
 
-**Administrert identitet sparer penger ved å:**
-- ✅ Eliminere Key Vault-operasjoner for tjeneste-til-tjeneste-autentisering
-- ✅ Redusere sikkerhetshendelser (ingen lekkede legitimasjoner)
-- ✅ Redusere operasjonell overhead (ingen manuell rotasjon)
+**Eksempel på kostnadssammenligning (månedlig):**  
 
-**Eksempel kostnadssammenligning (månedlig):**
+| Scenario | Tilkoblingsstrenger | Administrert identitet | Besparelse |  
+|----------|---------------------|-----------------------|------------|  
+| Liten app (1M forespørsler) | ~50 USD (Key Vault + operasjoner) | ~0 USD | 50 USD/mnd |  
+| Medium app (10M forespørsler) | ~200 USD | ~0 USD | 200 USD/mnd |  
+| Stor app (100M forespørsler) | ~1 500 USD | ~0 USD | 1 500 USD/mnd |  
 
-| Scenario | Connection Strings | Administrert Identitet | Besparelse |
-|----------|-------------------|-----------------------|------------|
-| Liten app (1M forespørsler) | ~$50 (Key Vault + operasjoner) | ~$0 | $50/måned |
-| Middels app (10M forespørsler) | ~$200 | ~$0 | $200/måned |
-| Stor app (100M forespørsler) | ~$1,500 | ~$0 | $1 500/måned |
+---  
 
----
+## Lær mer  
 
-## Lær mer
+### Offisiell dokumentasjon  
+- [Azure Managed Identity](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)  
+- [Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)  
+- [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)  
+- [DefaultAzureCredential](https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential)  
 
-### Offisiell dokumentasjon
-- [Azure Managed Identity](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
-- [Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)
-- [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)
-- [DefaultAzureCredential](https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential)
+### SDK-dokumentasjon  
+- [@azure/identity (Node.js)](https://www.npmjs.com/package/@azure/identity)  
+- [Azure.Identity (C#)](https://www.nuget.org/packages/Azure.Identity/)  
+- [azure-identity (Python)](https://pypi.org/project/azure-identity/)  
 
-### SDK-dokumentasjon
-- [@azure/identity (Node.js)](https://www.npmjs.com/package/@azure/identity)
-- [Azure.Identity (C#)](https://www.nuget.org/packages/Azure.Identity/)
-- [azure-identity (Python)](https://pypi.org/project/azure-identity/)
+### Neste steg i denne kursen  
+- ← Forrige: [Konfigurasjonsadministrasjon](configuration.md)  
+- → Neste: [Første prosjekt](first-project.md)  
+- 🏠 [Kurs Hjem](../../README.md)  
 
-### Neste steg i dette kurset
-- ← Forrige: [Configuration Management](configuration.md)
-- → Neste: [First Project](first-project.md)
-- 🏠 [Kurs Hjem](../../README.md)
+### Relaterte eksempler  
+- [Microsoft Foundry Models Chat Eksempel](../../../../examples/azure-openai-chat) - Bruker administrert identitet for Microsoft Foundry Models  
+- [Mikrotjenester Eksempel](../../../../examples/microservices) - Flere tjeneste-autentiseringsmønstre  
 
-### Relaterte eksempler
-- [Microsoft Foundry Models Chat Example](../../../../examples/azure-openai-chat) - Bruker administrert identitet for Microsoft Foundry Models
-- [Microservices Example](../../../../examples/microservices) - Autentiseringsmønstre for multi-tjeneste
+---  
 
----
+## Sammendrag  
 
-## Oppsummering
+**Du har lært:**  
+- ✅ Tre autentiseringsmønstre (tilkoblingsstrenger, Key Vault, administrert identitet)  
+- ✅ Hvordan aktivere og konfigurere administrert identitet i AZD  
+- ✅ RBAC-rolle-tilordninger for Azure-tjenester  
+- ✅ Key Vault-integrasjon for tredjepartshemmeligheter  
+- ✅ Bruker-tilordnet vs system-tilordnet identiteter  
+- ✅ Sikkerhetsbeste praksis og feilsøking  
 
-**Du har lært:**
-- ✅ Tre autentiseringsmønstre (connection strings, Key Vault, administrert identitet)
-- ✅ Hvordan aktivere og konfigurere administrert identitet i AZD
-- ✅ RBAC rolle-tilordninger for Azure-tjenester
-- ✅ Key Vault-integrasjon for tredjepartshemmeligheter
-- ✅ Bruker-tilordnede vs system-tilordnede identiteter
-- ✅ Sikkerhetsbeste praksis og feilsøking
+**Viktige punkter:**  
+1. **Bruk alltid administrert identitet i produksjon** - Ingen hemmeligheter, automatisk rotasjon  
+2. **Bruk RBAC-roller med minste privilegium** - Tildel kun nødvendige tillatelser  
+3. **Lagre tredjepartsnøkler i Key Vault** - Sentralisert hemmelighetshåndtering  
+4. **Separate identiteter per miljø** - Isolasjon mellom dev, staging, prod  
+5. **Aktiver revisjonslogging** - Spor hvem som har hatt tilgang til hva  
 
-**Viktige poeng:**
-1. **Bruk alltid administrert identitet i produksjon** - Ingen hemmeligheter, automatisk rotasjon
-2. **Bruk minste privilegium RBAC-roller** - Gi kun nødvendige tillatelser
-3. **Lagre tredjepartsnøkler i Key Vault** - Sentralisert hemmelighetshåndtering
-4. **Skill identiteter per miljø** - Isolasjon av dev, staging, prod
-5. **Aktiver revisjonslogging** - Spor hvem som har fått tilgang til hva
-
-**Neste steg:**
-1. Fullfør de praktiske øvelsene ovenfor
-2. Migrer en eksisterende app fra connection strings til administrert identitet
-3. Bygg ditt første AZD-prosjekt med sikkerhet fra dag én: [First Project](first-project.md)
+**Neste steg:**  
+1. Fullfør de praktiske øvelsene ovenfor  
+2. Migrer en eksisterende app fra tilkoblingsstrenger til administrert identitet  
+3. Bygg ditt første AZD-prosjekt med sikkerhet fra dag én: [Første prosjekt](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på originalspråket skal betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

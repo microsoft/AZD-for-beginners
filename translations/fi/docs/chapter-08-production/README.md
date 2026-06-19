@@ -1,23 +1,23 @@
 # Luku 8: Tuotanto- ja yritysmallit
 
-**📚 Kurssi**: [AZD For Beginners](../../README.md) | **⏱️ Kesto**: 2–3 tuntia | **⭐ Vaikeustaso**: Edistynyt
+**📚 Kurssi**: [AZD Aloittelijoille](../../README.md) | **⏱️ Kesto**: 2-3 tuntia | **⭐ Vaativuus**: Edistynyt
 
 ---
 
 ## Yleiskatsaus
 
-Tässä luvussa käsitellään yritystason käyttöön valmiita käyttöönotto‑malleja, turvallisuuden koventamista, valvontaa ja kustannusten optimointia tuotantotekoälykuormituksille.
+Tässä luvussa käsitellään yrityskäyttöön sopivia käyttöönotto- (deployment) malleja, tietoturvan koventamista, valvontaa ja kustannusten optimointia tuotantotason AI-kuormituksille.
 
-> Varmennettu `azd 1.23.12`:lla maaliskuussa 2026.
+> Vahvistettu `azd 1.25.6` kesäkuussa 2026.
 
 ## Oppimistavoitteet
 
-Suorittamalla tämän luvun osaat:
-- Ota käyttöön monialueisia (multi-region) resilientejä sovelluksia
-- Toteuttaa yritystason turvallisuusmalleja
-- Konfiguroida kattavan valvonnan
-- Optimoida kustannuksia laajassa mittakaavassa
-- Määrittää CI/CD‑putket AZD:llä
+Tämän luvun läpikäytyäsi osaat:
+- Käyttöönottaa monialueisia, vikasietoisia sovelluksia
+- Toteuttaa yritystason tietoturvamalleja
+- Määrittää kattavan valvonnan
+- Optimoida kustannuksia suuressa mittakaavassa
+- Asettaa CI/CD-putket AZD:llä
 
 ---
 
@@ -25,41 +25,43 @@ Suorittamalla tämän luvun osaat:
 
 | # | Oppitunti | Kuvaus | Aika |
 |---|--------|-------------|------|
-| 1 | [Tuotantotekoälyn käytännöt](production-ai-practices.md) | Yritystason käyttöönotto‑mallit | 90 min |
+| 1 | [Tuotantotason AI-käytännöt](production-ai-practices.md) | Yrityksen käyttöönotto-mallit | 90 min |
 
 ---
 
 ## 🚀 Tuotannon tarkistuslista
 
-- [ ] Monialueinen käyttöönotto resiliencyä varten
+- [ ] Monialueinen käyttöönotto vikasietoisuuden varmistamiseksi
 - [ ] Hallittu identiteetti todennukseen (ei avaimia)
 - [ ] Application Insights valvontaan
 - [ ] Kustannusbudjetit ja hälytykset määritelty
-- [ ] Turvallisuusskannaus käytössä
-- [ ] CI/CD-putken integrointi
-- [ ] Toipumissuunnitelma häiriötilanteissa
+- [ ] Tietoturvaskannaus käytössä
+- [ ] CI/CD-putkien integrointi
+- [ ] Toipumissuunnitelma
 
 ---
 
 ## 🏗️ Arkkitehtuurimallit
 
-### Malli 1: Mikropalvelupohjainen tekoäly
+### Malli 1: Mikropalvelu-AI
 
 ```mermaid
 graph LR
-    Gateway[API-väylä] --> AI[tekoälypalvelu] --> Models[Microsoft Foundry -mallit]
-    Gateway --> Auth[Autentikointipalvelu]
+    Gateway[API-väylä] --> AI[Tekoälypalvelu] --> Models[Microsoft Foundry -mallit]
+    Gateway --> Auth[Todennuspalvelu]
     AI --> Data[Tietovarasto]
 ```
-### Malli 2: Tapahtumapohjainen tekoäly
+
+### Malli 2: Tapahtumapohjainen AI
 
 ```mermaid
 graph LR
-    EventGrid[Tapahtumaruudukko] --> Functions[Funktiot] --> Pipeline[Tekoälyputki]
+    EventGrid[Tapahtuma-ruudukko] --> Functions[Funktiot] --> Pipeline[AI-putkisto]
 ```
+
 ---
 
-## 🔐 Turvallisuuden parhaat käytännöt
+## 🔐 Tietoturvan parhaat käytännöt
 
 ```bicep
 // Use managed identity
@@ -80,11 +82,11 @@ properties: {
 
 ## 💰 Kustannusten optimointi
 
-| Strategy | Savings |
+| Strategia | Säästöt |
 |----------|---------|
 | Skaalaa nollaan (Container Apps) | 60-80% |
-| Käytä kulutuskerroksia kehityksessä | 50-70% |
-| Ajoitettu skaalaus | 30-50% |
+| Käytä kulutusperusteisia tasoja kehityksessä | 50-70% |
+| Aikataulutettu skaalaus | 30-50% |
 | Varattu kapasiteetti | 20-40% |
 
 ```bash
@@ -101,7 +103,7 @@ az consumption budget create \
 ## 📊 Valvonnan asetukset
 
 ```bash
-# Suoratoista lokit
+# Seuraa lokivirtaa
 azd monitor --logs
 
 # Tarkista Application Insights
@@ -113,7 +115,7 @@ az monitor metrics list --resource <resource-id>
 
 ---
 
-## 🔗 Navigaatio
+## 🔗 Navigointi
 
 | Suunta | Luku |
 |-----------|---------|
@@ -124,14 +126,14 @@ az monitor metrics list --resource <resource-id>
 
 ## 📖 Aiheeseen liittyvät resurssit
 
-- [Tekoälyagenttien opas](../chapter-02-ai-development/agents.md)
+- [AI-agenttien opas](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Moniagenttiratkaisut](../chapter-05-multi-agent/README.md)
+- [Moni-agenttiset ratkaisut](../chapter-05-multi-agent/README.md)
 - [Mikropalveluesimerkki](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastuuvapauslauseke**:
-Tämä asiakirja on käännetty tekoälykäännöspalvelulla [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automatisoiduissa käännöksissä saattaa esiintyä virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää auktoritatiivisena lähteenä. Kriittisten tietojen osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa mahdollisista väärinymmärryksistä tai virheellisistä tulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, otathan huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäiskielellä on virallinen lähde. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

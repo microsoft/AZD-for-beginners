@@ -1,46 +1,46 @@
 # Ensimmäinen projektisi - Käytännön opas
 
 **Lukujen navigointi:**
-- **📚 Kurssin aloitus**: [AZD aloittelijoille](../../README.md)
-- **📖 Nykyinen luku**: Luku 1 - Perusta ja pika-aloitus
-- **⬅️ Edellinen**: [Asennus ja määritys](installation.md)
-- **➡️ Seuraava**: [Konfigurointi](configuration.md)
-- **🚀 Seuraava luku**: [Luku 2: AI-ensisuuntainen kehitys](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📚 Kurssin etusivu**: [AZD For Beginners](../../README.md)
+- **📖 Nykyinen luku**: Luku 1 - Perusta & Nopeasti alkuun
+- **⬅️ Edellinen**: [Installation & Setup](installation.md)
+- **➡️ Seuraava**: [Configuration](configuration.md)
+- **🚀 Seuraava luku**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Johdanto
 
-Tervetuloa ensimmäiseen Azure Developer CLI -projektiisi! Tämä kattava käytännön opas tarjoaa täydellisen läpikäynnin koko pinon sovelluksen luomisesta, käyttöönotosta ja hallinnasta Azureen azd:llä. Työskentelet oikean todo-sovelluksen kanssa, joka sisältää React-frontendin, Node.js API -backendin ja MongoDB-tietokannan.
+Tervetuloa ensimmäiseen Azure Developer CLI -projektiisi! Tämä kattava käytännön opas tarjoaa täydellisen läpikäynnin koko pinon sovelluksen luomisesta, käyttöönotosta ja hallinnasta Azuren avulla azd:llä. Työskentelet oikean todo-sovelluksen kanssa, joka sisältää React-frontendin, Node.js API -backendin ja MongoDB-tietokannan.
 
 ## Oppimistavoitteet
 
-Suorittamalla tämän oppaan sinä:
-- Hallitset azd-projektin alustamisen työnkulun mallipohjien avulla
-- Ymmärrät Azure Developer CLI -projektin rakenteen ja konfiguraatiotiedostot
-- Suoritat sovelluksen täydellisen käyttöönoton Azureen infrastruktuurin provisioinnin kera
-- Toteutat sovelluspäivityksiä ja uudelleenkäyttöönotto-strategioita
-- Hallinnoit useita ympäristöjä kehitystä ja testausvaiheita varten
+Suorittamalla tämän oppaan:
+- Hallitset azd-projektin alustamisprosessin mallipohjien avulla
+- Ymmärrät Azure Developer CLI -projektin rakenteen ja kokoonpanotiedostot
+- Suoritat sovelluksen täydellisen käyttöönoton Azureen infrastruktuurin provisioinnin yhteydessä
+- Toteutat sovelluspäivitys- ja uudelleenkäyttöönotto-strategioita
+- Hallitset useita ympäristöjä kehitystä ja testausvaihetta varten
 - Sovellat resurssien siivousta ja kustannusten hallintakäytäntöjä
 
 ## Oppimistulokset
 
-Oppaan suorittamisen jälkeen osaat:
+Kun olet suorittanut oppaan, osaat:
 - Alustaa ja konfiguroida azd-projekteja mallipohjista itsenäisesti
 - Navigoida ja muokata azd-projektin rakennetta tehokkaasti
-- Ottaa full-stack-sovelluksia käyttöön Azureen yhdellä komennolla
-- Selvittää yleisiä käyttöönotto- ja todennusongelmia
+- Ottaa full-stack -sovelluksia käyttöön Azureen yhdellä komennolla
+- Ratkoa yleisiä käyttöönotto- ja todennusongelmia
 - Hallita useita Azure-ympäristöjä eri käyttöönottoasteille
-- Toteuttaa jatkuvan julkaisuputken sovelluspäivityksiä varten
+- Toteuttaa jatkuvan toimituksen työnkulkuja sovelluspäivityksiä varten
 
 ## Aloittaminen
 
-### Esivaatimusten tarkistuslista
-- ✅ Azure Developer CLI asennettuna ([Asennusopas](installation.md))
-- ✅ AZD-todennus suoritettu komennolla `azd auth login`
+### Esivaatimukset – tarkistuslista
+- ✅ Azure Developer CLI asennettuna ([Installation Guide](installation.md))
+- ✅ azd-todennus suoritettu komennolla `azd auth login`
 - ✅ Git asennettuna järjestelmääsi
 - ✅ Node.js 16+ (tätä opasta varten)
 - ✅ Visual Studio Code (suositeltu)
 
-Ennen kuin jatkat, suorita asentajatarkistus repositorion juuressa:
+Ennen kuin jatkat, suorita asennustarkistin repositorion juuresta:
 
 **Windows:** `./validate-setup.ps1`
 
@@ -55,7 +55,7 @@ azd version
 azd auth login --check-status
 ```
 
-### Varmista valinnainen Azure CLI -todennus
+### Tarkista valinnainen Azure CLI -todennus
 
 ```bash
 az account show
@@ -68,30 +68,30 @@ node --version
 
 ## Vaihe 1: Valitse ja alusta mallipohja
 
-Aloitetaan suositulla todo-sovelluksen mallipohjalla, joka sisältää React-frontendin ja Node.js API -backendin.
+Aloitetaan suositulla todo-sovellusmallilla, joka sisältää React-frontendin ja Node.js API -backendin.
 
 ```bash
 # Selaa saatavilla olevia malleja
 azd template list
 
-# Alusta todo-sovellusmalli
+# Alusta todo-sovelluksen malli
 mkdir my-first-azd-app
 cd my-first-azd-app
 azd init --template todo-nodejs-mongo
 
-# Seuraa kehotteita:
+# Noudata kehotteita:
 # - Anna ympäristön nimi: "dev"
 # - Valitse tilaus (jos sinulla on useita)
 # - Valitse alue: "East US 2" (tai haluamasi alue)
 ```
 
 ### Mitä juuri tapahtui?
-- Ladattiin mallipohjan koodi paikalliseen hakemistoon
+- Mallikoodi ladattiin paikalliseen hakemistoon
 - Luotiin `azure.yaml`-tiedosto palvelumäärittelyillä
-- Asetettiin infrastruktuurikoodi hakemistoon `infra/`
-- Luotiin ympäristön määritys
+- Määriteltiin infrastruktuurikoodi `infra/`-hakemistoon
+- Luotiin ympäristön kokoonpano
 
-## Vaihe 2: Tutustu projektin rakenteeseen
+## Vaihe 2: Tutki projektin rakennetta
 
 Tarkastellaan mitä azd loi meille:
 
@@ -102,7 +102,7 @@ tree /f   # Windows
 find . -type f | head -20   # macOS/Linux
 ```
 
-Näet:
+Sinun pitäisi nähdä:
 ```
 my-first-azd-app/
 ├── .azd/
@@ -129,17 +129,17 @@ my-first-azd-app/
 └── README.md                   # Project documentation
 ```
 
-### Keskeiset tiedostot, jotka on hyvä ymmärtää
+### Tärkeät tiedostot, jotka kannattaa ymmärtää
 
 **azure.yaml** - azd-projektisi ydin:
 ```bash
-# Näytä projektin määritys
+# Näytä projektin asetukset
 cat azure.yaml
 ```
 
 **infra/main.bicep** - Infrastruktuurin määrittely:
 ```bash
-# Näytä infrastruktuurikoodi
+# Tarkastele infrastruktuurikoodia
 head -30 infra/main.bicep
 ```
 
@@ -155,7 +155,7 @@ code src/web/src/App.tsx
 
 Tee yksinkertainen muutos:
 ```typescript
-// Etsi otsikko ja vaihda se
+// Etsi otsikko ja muuta se
 <h1>My Awesome Todo App</h1>
 ```
 
@@ -170,24 +170,24 @@ azd env get-values
 
 ## Vaihe 4: Ota käyttöön Azureen
 
-Nyt jännittävä osuus – ota kaikki käyttöön Azureen!
+Nyt jännittävä osa — ota kaikki käyttöön Azureen!
 
 ```bash
 # Ota käyttöön infrastruktuuri ja sovellus
 azd up
 
 # Tämä komento suorittaa:
-# 1. Ota käyttöön Azure-resursseja (App Service, Cosmos DB jne.)
+# 1. Provisionoi Azure-resursseja (App Service, Cosmos DB jne.)
 # 2. Rakenna sovelluksesi
-# 3. Ota sovellus käyttöön luoduille resursseille
+# 3. Ota käyttöön provisionoituihin resursseihin
 # 4. Näytä sovelluksen URL-osoite
 ```
 
 ### Mitä tapahtuu käyttöönoton aikana?
 
-Komento `azd up` suorittaa nämä vaiheet:
+`azd up` -komento suorittaa nämä vaiheet:
 1. **Provision** (`azd provision`) - Luo Azure-resursseja
-2. **Package** - Kääntää sovelluskoodisi
+2. **Package** - Rakentaa sovelluskoodisi
 3. **Deploy** (`azd deploy`) - Ottaa koodin käyttöön Azure-resursseihin
 
 ### Odotettu tuloste
@@ -206,7 +206,7 @@ https://app-web-abc123def.azurewebsites.net
 ## Vaihe 5: Testaa sovellustasi
 
 ### Pääsy sovellukseesi
-Napsauta käyttöönoton tulosteessa annettua URL-osoitetta, tai hae se milloin tahansa:
+Napsauta käyttöönoton tulosteessa annettua URL-osoitetta tai hae se milloin tahansa:
 ```bash
 # Hae sovelluksen päätepisteet
 azd show
@@ -216,9 +216,9 @@ azd show --output json | jq -r '.services.web.endpoint'
 ```
 
 ### Testaa todo-sovellusta
-1. **Lisää todo-kohta** - Napsauta "Add Todo" ja kirjoita tehtävä
-2. **Merkitse suoritetuksi** - Rastita suoritetut kohteet
-3. **Poista kohteita** - Poista tehtävät, joita et enää tarvitse
+1. **Add a todo item** - Napsauta "Add Todo" ja kirjoita tehtävä
+2. **Mark as complete** - Rastita suoritetut kohteet
+3. **Delete items** - Poista tarpeettomat todo-tehtävät
 
 ### Seuraa sovellustasi
 ```bash
@@ -232,9 +232,32 @@ azd monitor --logs
 azd monitor --live
 ```
 
+### ✅ Vahvista käyttöönotto
+
+Ennen kuin jatkat, käy tämä nopea tarkistuslista läpi varmistaaksesi, että kaikki todella toimii—älä oleta, että "deploy succeeded" tarkoittaa, että sovellus toimii:
+
+```bash
+# 1. Varmista, että päätepiste on olemassa ja saavutettavissa
+azd show
+
+# 2. Suorita savutesti päätepisteelle (odottaa HTTP 200)
+curl -I "$(azd show --output json | jq -r '.services.web.endpoint')"
+
+# 3. Tarkista sovelluksesi terveystila-päätepiste, jos sellainen on
+curl "$(azd show --output json | jq -r '.services.web.endpoint')/health"
+```
+
+**Käyttöönotto on vahvistettu, kun:**
+- ✅ `azd show` näyttää saavutettavan endpointin URL-osoitteen
+- ✅ URL avautuu selaimessasi ilman virheitä
+- ✅ Perustoiminnot toimivat (lisää/merkitse valmiiksi/poista todo)
+- ✅ `azd monitor --logs` näyttää saapuvat pyynnöt ilman odottamattomia virheitä
+
+Jos jokin kohta epäonnistuu, siirry kohtaan [Luku 7: Vianmääritys](../chapter-07-troubleshooting/README.md).
+
 ## Vaihe 6: Tee muutoksia ja ota uudelleen käyttöön
 
-Tehdään muutos ja katsotaan, kuinka helppoa on päivittää:
+Tehdään muutos ja katsotaan, kuinka helppoa päivitys on:
 
 ### Muokkaa APIa
 ```bash
@@ -242,32 +265,32 @@ Tehdään muutos ja katsotaan, kuinka helppoa on päivittää:
 code src/api/src/routes/lists.js
 ```
 
-Lisää mukautettu vastausotsake:
+Lisää mukautettu vastausotsikko:
 ```javascript
-// Etsi reittikäsittelijä ja lisää:
+// Etsi reitin käsittelijä ja lisää:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### Ota vain koodimuutokset käyttöön
+### Ota käyttöön vain koodimuutokset
 ```bash
-# Ota käyttöön vain sovelluskoodi (ohita infrastruktuuri)
+# Ota käyttöön vain sovelluksen koodi (ohita infrastruktuuri)
 azd deploy
 
 # Tämä on paljon nopeampaa kuin 'azd up', koska infrastruktuuri on jo olemassa
 ```
 
-## Vaihe 7: Hallinnoi useita ympäristöjä
+## Vaihe 7: Hallitse useita ympäristöjä
 
-Luo staging-ympäristö testataksesi muutoksia ennen tuotantoa:
+Luo staging-ympäristö testataksesi muutokset ennen tuotantoon siirtämistä:
 
 ```bash
-# Luo uusi staging-ympäristö
+# Luo uusi esivalmisteluympäristö
 azd env new staging
 
-# Julkaise staging-ympäristöön
+# Julkaise esivalmisteluympäristöön
 azd up
 
-# Palaa takaisin kehitysympäristöön
+# Vaihda takaisin kehitysympäristöön
 azd env select dev
 
 # Listaa kaikki ympäristöt
@@ -280,14 +303,14 @@ azd env list
 azd env select dev
 azd show
 
-# Näytä staging-ympäristö
+# Näytä esikatseluympäristö
 azd env select staging
 azd show
 ```
 
 ## Vaihe 8: Siivoa resurssit
 
-Kun olet valmis kokeilujen kanssa, siivoa resurssit välttääksesi jatkuvia kuluja:
+Kun olet valmis kokeiluissa, siivoa resurssit välttääksesi jatkuvat kustannukset:
 
 ```bash
 # Poista kaikki Azure-resurssit nykyisestä ympäristöstä
@@ -301,43 +324,43 @@ azd env select staging
 azd down --force --purge
 ```
 
-## Klassinen sovellus vs. AI-voimalla toimiva sovellus: Sama työnkulku
+## Perinteinen sovellus vs. tekoälypohjainen sovellus: sama työnkulku
 
-Osoitit juuri perinteisen web-sovelluksen käyttöönoton. Entä jos haluaisit ottaa käyttöön AI-voimalla toimivan sovelluksen — esimerkiksi chat-sovelluksen, joka hyödyntää Microsoft Foundry -malleja?
+Juuri otit käyttöön perinteisen web-sovelluksen. Entä jos haluaisit sen sijaan ottaa käyttöön tekoälypohjaisen sovelluksen — esimerkiksi chat-sovelluksen, jonka taustalla on Microsoft Foundry Models?
 
 Hyvä uutinen: **työnkulku on identtinen.**
 
-| Vaihe | Klassinen todo-sovellus | AI-chat-sovellus |
-|------|-------------------------|------------------|
-| Initialize | `azd init --template todo-nodejs-mongo` | `azd init --template azure-search-openai-demo` |
-| Authenticate | `azd auth login` | `azd auth login` |
-| Deploy | `azd up` | `azd up` |
-| Monitor | `azd monitor` | `azd monitor` |
-| Clean up | `azd down --force --purge` | `azd down --force --purge` |
+| Vaihe | Perinteinen Todo-sovellus | Tekoäly-chat-sovellus |
+|------|-------------------------|------------------------|
+| Alusta | `azd init --template todo-nodejs-mongo` | `azd init --template azure-search-openai-demo` |
+| Todennus | `azd auth login` | `azd auth login` |
+| Ota käyttöön | `azd up` | `azd up` |
+| Valvo | `azd monitor` | `azd monitor` |
+| Siivoa | `azd down --force --purge` | `azd down --force --purge` |
 
-Ainoa ero on se, mistä **mallipohjasta** aloitat. AI-mallipohja sisältää lisäinfrastruktuuria (kuten Microsoft Foundry Models -resurssin tai AI Search -indeksin), mutta azd hoitaa kaiken puolestasi. Sinun ei tarvitse oppia uusia komentoja, ottaa käyttöön eri työkaluja tai muuttaa suhtautumistasi käyttöönottoon.
+Ainoa ero on se **mallipohja**, josta aloitat. AI-mallipohja sisältää lisäinfrastruktuuria (esim. Microsoft Foundry Models -resurssi tai AI Search -indeksi), mutta azd hoitaa kaiken puolestasi. Sinun ei tarvitse oppia uusia komentoja, ottaa käyttöön eri työkalua tai muuttaa tapaa, jolla ajattelet käyttöönottoa.
 
-Tämä on azd:n ydinsanoma: **yhdenmukainen työnkulku, kaikki kuormitukset.** Taidot, joita harjoittelit tässä oppaassa — alustaminen, käyttöönotto, monitorointi, uudelleenkäyttöönotto ja siivous — pätevät yhtä lailla AI-sovelluksiin ja agenteihin.
+Tämä on azd:n keskeinen periaate: **yksi työnkulku, mikä tahansa työnkuorma.** Taidot, joita harjoittelit tässä oppaassa — alustaminen, käyttöönotto, valvonta, uudelleenkäyttöönotto ja siivous — pätevät yhtä lailla AI-sovelluksiin ja agenteihin.
 
 ---
 
-## Mitä olet oppinut
+## Mitä opit
 
 Onnittelut! Olet onnistuneesti:
 - ✅ Alustanut azd-projektin mallipohjasta
-- ✅ Tutustunut projektin rakenteeseen ja keskeisiin tiedostoihin
-- ✅ Ottanut full-stack-sovelluksen käyttöön Azureen
-- ✅ Tehnyt koodimuutoksia ja ottanut ne uudelleen käyttöön
+- ✅ Tutkinut projektin rakennetta ja keskeisiä tiedostoja
+- ✅ Ottanut full-stack -sovelluksen käyttöön Azureen
+- ✅ Tehnyt koodimuutoksia ja ottanut uudelleen käyttöön
 - ✅ Hallinnoinut useita ympäristöjä
 - ✅ Siivonnut resurssit
 
-## 🎯 Taitojen varmistusharjoitukset
+## 🎯 Taitojen varmistamistehtävät
 
 ### Harjoitus 1: Ota käyttöön eri mallipohja (15 minuuttia)
 **Tavoite**: Näytä hallitsevasi azd init ja käyttöönoton työnkulku
 
 ```bash
-# Kokeile Python + MongoDB -pinoa
+# Kokeile Python- ja MongoDB-pinoa
 mkdir todo-python && cd todo-python
 azd init --template todo-python-mongo
 azd up
@@ -350,14 +373,14 @@ curl $(azd show --output json | jq -r '.services.web.endpoint')
 azd down --force --purge
 ```
 
-**Onnistumiskriteerit:**
+**Onnistumisen kriteerit:**
 - [ ] Sovellus otetaan käyttöön ilman virheitä
-- [ ] Voit avata sovelluksen URL-osoitteen selaimessa
-- [ ] Sovellus toimii oikein (lisää/poista todoja)
-- [ ] Resurssit siivottiin onnistuneesti
+- [ ] Pääset käsiksi sovelluksen URL-osoitteeseen selaimessa
+- [ ] Sovellus toimii oikein (lisää/poista to-dolista)
+- [ ] Resurssit puhdistettiin onnistuneesti
 
-### Harjoitus 2: Mukauta konfiguraatiota (20 minuuttia)
-**Tavoite**: Harjoitella ympäristömuuttujien määritystä
+### Harjoitus 2: Mukauta kokoonpanoa (20 minuuttia)
+**Tavoite**: Harjoittele ympäristömuuttujien konfigurointia
 
 ```bash
 cd my-first-azd-app
@@ -373,15 +396,15 @@ azd env set ENABLE_DEBUG "true"
 # Tarkista muuttujat
 azd env get-values | grep APP_TITLE
 
-# Ota käyttöön mukautetulla konfiguraatiolla
+# Ota käyttöön mukautetulla kokoonpanolla
 azd up
 ```
 
-**Onnistumiskriteerit:**
+**Onnistumisen kriteerit:**
 - [ ] Mukautettu ympäristö luotu onnistuneesti
 - [ ] Ympäristömuuttujat asetettu ja haettavissa
 - [ ] Sovellus otetaan käyttöön mukautetuilla asetuksilla
-- [ ] Voit varmistaa mukautetut asetukset käyttöönotetussa sovelluksessa
+- [ ] Voit vahvistaa mukautetut asetukset otetussa sovelluksessa
 
 ### Harjoitus 3: Moniympäristöinen työnkulku (25 minuuttia)
 **Tavoite**: Hallitse ympäristöjen hallintaa ja käyttöönotto-strategioita
@@ -397,13 +420,13 @@ azd up
 DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Dev: $DEV_URL"
 
-# Luo staging-ympäristö
+# Luo esituotantoympäristö
 azd env new staging-$(whoami)
 azd env set ENVIRONMENT_TYPE staging
 azd env set LOG_LEVEL info
 azd up
 
-# Kirjaa staging-ympäristön URL-osoite
+# Kirjaa esituotantoympäristön URL-osoite
 STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Staging: $STAGING_URL"
 
@@ -419,12 +442,12 @@ azd env select dev-$(whoami) && azd down --force --purge
 azd env select staging-$(whoami) && azd down --force --purge
 ```
 
-**Onnistumiskriteerit:**
-- [ ] Kaksi ympäristöä luotu eri konfiguraatioilla
+**Onnistumisen kriteerit:**
+- [ ] Kaksi ympäristöä luotu eri kokoonpanoilla
 - [ ] Molemmat ympäristöt otettu käyttöön onnistuneesti
 - [ ] Voit vaihtaa ympäristöjen välillä komennolla `azd env select`
-- [ ] Ympäristömuuttujat eroavat ympäristöjen välillä
-- [ ] Molemmat ympäristöt siivottiin onnistuneesti
+- [ ] Ympäristömuuttujat poikkeavat ympäristöittäin
+- [ ] Molemmat ympäristöt siivottu onnistuneesti
 
 ## 📊 Edistymisesi
 
@@ -434,19 +457,19 @@ azd env select staging-$(whoami) && azd down --force --purge
 - ✅ Azure-resurssien provisiointi
 - ✅ Sovelluksen käyttöönoton työnkulut
 - ✅ Ympäristöjen hallinta
-- ✅ Konfiguraation hallinta
+- ✅ Kokoonpanon hallinta
 - ✅ Resurssien siivous ja kustannusten hallinta
 
-**Seuraava taso**: Olet valmis [Konfigurointioppaaseen](configuration.md) oppimaan edistyneitä konfigurointimalleja!
+**Seuraava askel**: Olet valmis [Konfigurointiopas](configuration.md) -osion pariin oppiaksesi edistyneitä konfiguraatiomalleja!
 
-## Yleisten ongelmien vianmääritys
+## Yleiset vianmääritysongelmat
 
 ### Todennusvirheet
 ```bash
-# Kirjaudu uudelleen Azureen
+# Tunnistaudu uudelleen Azureen
 az login
 
-# Tarkista tilaukseen pääsy
+# Varmista tilauksen käyttöoikeudet
 az account show
 ```
 
@@ -456,20 +479,20 @@ az account show
 export AZD_DEBUG=true
 azd up --debug
 
-# Näytä sovelluksen lokit Azuressa
+# Näytä sovelluksen lokit Azure-palvelussa
 azd monitor --logs
 
 # Container Apps -sovelluksille käytä Azure CLI:tä:
 # az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 ```
 
-### Resurssinimen ristiriidat
+### Resurssin nimen ristiriidat
 ```bash
-# Käytä yksilöllistä ympäristön nimeä
+# Käytä ainutlaatuista ympäristön nimeä
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
-### Portti-/verkko-ongelmat
+### Portti-/verkkongelmat
 ```bash
 # Tarkista, ovatko portit käytettävissä
 netstat -an | grep :3000
@@ -484,14 +507,14 @@ Nyt kun olet suorittanut ensimmäisen projektisi, tutustu näihin edistyneempiin
 - [Infrastructure as Code](../chapter-04-infrastructure/provisioning.md)
 - [Add databases, storage, and other services](../chapter-04-infrastructure/provisioning.md#adding-services)
 
-### 2. Ota CI/CD käyttöön
+### 2. Ota käyttöön CI/CD
 - [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Täydelliset CI/CD-työnkulut
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - Putken konfigurointi
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - Putkiston konfigurointi
 
 ### 3. Tuotannon parhaat käytännöt
-- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Turvallisuus, suorituskyky ja monitorointi
+- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Turvallisuus, suorituskyky ja valvonta
 
-### 4. Tutustu laajemmin mallipohjiin
+### 4. Tutustu lisää mallipohjiin
 ```bash
 # Selaa malleja kategorian mukaan
 azd template list --filter web
@@ -506,8 +529,8 @@ azd init --template todo-java-mongo
 
 ## Lisäresurssit
 
-### Oppimateriaalia
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+### Oppimateriaalit
+- [Azure Developer CLI -dokumentaatio](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
@@ -528,16 +551,15 @@ azd init --template todo-java-mongo
 ---
 
 **Lukujen navigointi:**
-- **📚 Kurssin aloitus**: [AZD aloittelijoille](../../README.md)
-- **📖 Nykyinen luku**: Luku 1 - Perusta ja pika-aloitus
-- **⬅️ Edellinen**: [Asennus ja määritys](installation.md)
-- **➡️ Seuraava**: [Konfigurointi](configuration.md)
-- **🚀 Seuraava luku**: [Luku 2: AI-ensisuuntainen kehitys](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- **Seuraava oppitunti**: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
+- **📚 Kurssin etusivu**: [AZD For Beginners](../../README.md)
+- **📖 Nykyinen luku**: Luku 1 - Perusta & Nopeasti alkuun
+- **⬅️ Edellinen**: [Installation & Setup](installation.md)
+- **➡️ Seuraava**: [Bring Your Own App](bring-your-own-app.md)
+- **🚀 Seuraava luku**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastuuvapauslauseke**:
-Tämä asiakirja on käännetty tekoälypohjaisella käännöspalvelulla [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, ota huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä tulee pitää ensisijaisena lähteenä. Tärkeää tietoa varten suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai virheellisistä tulkinnoista.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, otathan huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäiskielellä on virallinen lähde. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -6,15 +6,15 @@
 
 ## Oversikt
 
-Dette kapittelet dekker enterprise-klare distribusjonsmønstre, sikring, overvåking og kostnadsoptimalisering for produksjonsarbeidsbelastninger med AI.
+Dette kapitlet dekker enterprise-klare distribusjonsmønstre, sikkerhetsforbedring, overvåking og kostnadsoptimalisering for produksjons-AI arbeidsbelastninger.
 
-> Validert mot `azd 1.23.12` i mars 2026.
+> Validert mot `azd 1.25.6` i juni 2026.
 
 ## Læringsmål
 
-Når du fullfører dette kapittelet, vil du:
-- Distribuere flerregions applikasjoner med høy tilgjengelighet
-- Implementere enterprise sikkerhetsmønstre
+Ved å fullføre dette kapitlet vil du:
+- Distribuere flerregionale robuste applikasjoner
+- Implementere enterprise-sikkerhetsmønstre
 - Konfigurere omfattende overvåking
 - Optimalisere kostnader i stor skala
 - Sette opp CI/CD-pipelines med AZD
@@ -24,20 +24,20 @@ Når du fullfører dette kapittelet, vil du:
 ## 📚 Leksjoner
 
 | # | Leksjon | Beskrivelse | Tid |
-|---|--------|-------------|------|
-| 1 | [Produksjonspraksiser for AI](production-ai-practices.md) | Enterprise distribusjonsmønstre | 90 min |
+|---|---------|-------------|-----|
+| 1 | [Produksjonspraksis for AI](production-ai-practices.md) | Enterprise distribusjonsmønstre | 90 min |
 
 ---
 
 ## 🚀 Produksjonsjekkliste
 
-- [ ] Flerregions distribusjon for robusthet
+- [ ] Flerregional distribusjon for robusthet
 - [ ] Administrert identitet for autentisering (ingen nøkler)
 - [ ] Application Insights for overvåking
 - [ ] Kostnadsbudsjetter og varsler konfigurert
 - [ ] Sikkerhetsskanning aktivert
-- [ ] Integrasjon med CI/CD-pipeline
-- [ ] Katastrofeberedskapsplan
+- [ ] CI/CD-pipeline-integrasjon
+- [ ] Katastrofegjenopprettingsplan
 
 ---
 
@@ -47,19 +47,21 @@ Når du fullfører dette kapittelet, vil du:
 
 ```mermaid
 graph LR
-    Gateway[API-gateway] --> AI[AI-tjeneste] --> Models[Microsoft Foundry-modeller]
+    Gateway[API Gateway] --> AI[AI-tjeneste] --> Models[Microsoft Foundry-modeller]
     Gateway --> Auth[Autentiseringstjeneste]
-    AI --> Data[Databaselager]
+    AI --> Data[Databutikk]
 ```
+
 ### Mønster 2: Hendelsesdrevet AI
 
 ```mermaid
 graph LR
-    EventGrid[Event Grid] --> Functions[Funksjoner] --> Pipeline[AI-pipeline]
+    EventGrid[Hendelsesnett] --> Functions[Funksjoner] --> Pipeline[AI-pipeline]
 ```
+
 ---
 
-## 🔐 Sikkerhets beste praksis
+## 🔐 Sikkerhetsanbefalinger
 
 ```bicep
 // Use managed identity
@@ -80,8 +82,8 @@ properties: {
 
 ## 💰 Kostnadsoptimalisering
 
-| Strategi | Besparelser |
-|----------|-------------|
+| Strategi | Besparelse |
+|----------|------------|
 | Skaler til null (Container Apps) | 60-80 % |
 | Bruk forbruksnivåer for utvikling | 50-70 % |
 | Planlagt skalering | 30-50 % |
@@ -101,13 +103,13 @@ az consumption budget create \
 ## 📊 Overvåkingsoppsett
 
 ```bash
-# Strøm logger
+# Stream logger
 azd monitor --logs
 
 # Sjekk Application Insights
 azd monitor --overview
 
-# Se målinger
+# Vis måledata
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -116,22 +118,22 @@ az monitor metrics list --resource <resource-id>
 ## 🔗 Navigasjon
 
 | Retning | Kapittel |
-|---------|----------|
+|----------|----------|
 | **Forrige** | [Kapittel 7: Feilsøking](../chapter-07-troubleshooting/README.md) |
-| **Kurs Fullført** | [Kurs Hjem](../../README.md) |
+| **Fullfør kurs** | [Kurs Hjem](../../README.md) |
 
 ---
 
 ## 📖 Relaterte ressurser
 
-- [AI-agenter Veiledning](../chapter-02-ai-development/agents.md)
+- [AI-agentguide](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Multi-agent Løsninger](../chapter-05-multi-agent/README.md)
-- [Mikrotjenester Eksempel](../../examples/microservices/README.md)
+- [Multi-agentløsninger](../chapter-05-multi-agent/README.md)
+- [Mikrotjenestereksempel](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår fra bruk av denne oversettelsen.
+**Ansvarsfraskrivelse**:
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på originalspråket skal betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

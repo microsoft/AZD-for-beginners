@@ -1,53 +1,53 @@
 # Sanasto - Azure ja AZD -terminologia
 
-**Viite kaikkiin lukuihin**
-- **📚 Kurssin etusivu**: [AZD Aloittelijoille](../README.md)
-- **📖 Opiskele perusteet**: [Luku 1: AZD-perusteet](../docs/getting-started/azd-basics.md)
-- **🤖 AI-termit**: [Luku 2: AI-ensuuntautunut kehitys](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+**Viite kaikille luvuille**
+- **📚 Kurssin kotisivu**: [AZD Aloittelijoille](../README.md)
+- **📖 Lue perusteet**: [Luku 1: AZD-perusteet](../docs/getting-started/azd-basics.md)
+- **🤖 AI-terminologia**: [Luku 2: AI-ensisuuntainen kehitys](../docs/microsoft-foundry/microsoft-foundry-integration.md)
 
 ## Johdanto
 
-Tämä kattava sanasto tarjoaa määritelmiä Azure Developer CLI:ssä ja Azure-pilvikehityksessä käytetyille termeille, käsitteille ja lyhenteille. Olennaista viitetietoa teknisen dokumentaation ymmärtämiseen, ongelmanratkaisuun ja tehokkaaseen kommunikointiin azd-projektien ja Azure-palveluiden yhteydessä.
+Tämä kattava sanasto tarjoaa määritelmiä Azure Developer CLI:ssä ja Azure-pilvikehityksessä käytetyille termeille, käsitteille ja lyhenteille. Olennaista viitetietoa teknisen dokumentaation ymmärtämiseen, ongelmien ratkaisuun ja tehokkaaseen viestintään azd-projekteista ja Azure-palveluista.
 
 ## Oppimistavoitteet
 
-Tämän sanaston avulla voit:
-- Ymmärtää keskeiset Azure Developer CLI -terminologian käsitteet
-- Hallita Azure-pilvikehityksen sanaston ja tekniset termit
-- Viitata Infrastructure as Code- ja käyttöönotto-termistöön tehokkaasti
-- Ymmärtää Azure-palveluiden nimet, lyhenteet ja niiden tarkoitukset
-- Saada määritelmiä vianmääritys- ja debuggaustermeille
-- Oppia edistyneitä Azure-arkkitehtuuriin ja kehitykseen liittyviä käsitteitä
+Tämän sanaston avulla:
+- Ymmärrät Azure Developer CLI:n keskeisen terminologian ja käsitteet
+- Hallitset Azure-pilvikehityksen sanaston ja tekniset termit
+- Viittaat Infrastructure as Code- ja käyttöönottoon liittyvään terminologiaan tehokkaasti
+- Ymmärrät Azure-palveluiden nimet, lyhenteet ja niiden tarkoitukset
+- Saat määritelmiä vianetsintään ja debuggausterminologiaan
+- Opit edistyneempiä Azure-arkkitehtuuriin ja kehitykseen liittyviä käsitteitä
 
 ## Oppimistulokset
 
-Säännöllisen viittauksen avulla tähän sanastoon pystyt:
+Kun viittaat tähän sanastoon säännöllisesti, pystyt:
 - Kommunikoimaan tehokkaasti käyttäen asianmukaista Azure Developer CLI -terminologiaa
 - Ymmärtämään teknistä dokumentaatiota ja virheilmoituksia selkeämmin
-- Navigoimaan Azure-palveluissa ja käsitteissä itsevarmasti
-- Vianmääritykseen sopivan teknisen sanaston avulla
-- Osallistumaan tiimikeskusteluihin täsmällisellä teknisellä kielellä
-- Laajentamaan Azure-pilvikehityksen tietämystäsi systemaattisesti
+- Navigoimaan Azure-palveluissa ja -käsitteissä itsevarmasti
+- Vianetsimään ongelmia käyttäen oikeaa teknistä sanastoa
+- Osallistumaan tiimikeskusteluihin tarkalla teknisellä kielellä
+- Laajentamaan Azure-pilvikehityksen osaamistasi järjestelmällisesti
 
 ## A
 
-**ARM-malli**  
-Azure Resource Manager -malli. JSON-pohjainen Infrastructure as Code -muoto, jota käytetään Azure-resurssien deklaratiiviseen määrittelyyn ja käyttöönottoon.
+**ARM Template**  
+Azure Resource Manager -malli. JSON-pohjainen Infrastructure as Code -muoto, jota käytetään Azure-resurssien määrittelyyn ja käyttöönottoon deklaratiivisesti.
 
 **App Service**  
-Azuren platform-as-a-service (PaaS) -tarjous web-sovellusten, REST-rajapintojen ja mobiilitaustojen isännöintiin ilman infrastruktuurin hallintaa.
+Azuren platform-as-a-service (PaaS) -tarjonta verkkosovellusten, REST-rajapintojen ja mobiilitaustapalveluiden isännöintiin ilman infrastruktuurin hallintaa.
 
 **Application Insights**  
-Azuren sovelluksen suorituskyvyn valvontapalvelu (APM), joka tarjoaa syvällistä tietoa sovelluksen suorituskyvystä, käytettävyydestä ja käytöstä.
+Azuren sovellusten suorituskyvyn valvontapalvelu (APM), joka tarjoaa syvällistä tietoa sovellusten suorituskyvystä, saatavuudesta ja käytöstä.
 
 **Azure CLI**  
-Komentorivityökalu Azure-resurssien hallintaan. Sitä käyttää azd todennukseen ja joihinkin toimintoihin.
+Komentoriviliittymä Azure-resurssien hallintaan. azd käyttää sitä todennukseen ja joihinkin toimintoihin.
 
 **Azure Developer CLI (azd)**  
-Kehittäjäkeskeinen komentorivityökalu, joka nopeuttaa sovellusten rakentamista ja käyttöönottoa Azureen käyttämällä malleja ja Infrastructure as Code -periaatetta.
+Kehittäjäkeskeinen komentorivityökalu, joka nopeuttaa sovellusten rakentamisen ja käyttöönoton prosessia Azureen käyttämällä malleja ja Infrastructure as Code -menetelmiä.
 
 **azure.yaml**  
-Pääkonfiguraatiotiedosto azd-projektille, joka määrittelee palvelut, infrastruktuurin ja käyttöönoton hookit.
+Pääkonfiguraatiotiedosto azd-projektille, joka määrittelee palvelut, infrastruktuurin ja käyttöönoton koukkuja.
 
 **Azure Resource Manager (ARM)**  
 Azuren käyttöönotto- ja hallintapalvelu, joka tarjoaa hallintakerroksen resurssien luomiseen, päivittämiseen ja poistamiseen.
@@ -55,24 +55,24 @@ Azuren käyttöönotto- ja hallintapalvelu, joka tarjoaa hallintakerroksen resur
 ## B
 
 **Bicep**  
-Microsoftin kehittämä domain-spesifinen kieli (DSL) Azure-resurssien käyttöönottoon. Tarjoaa yksinkertaisemman syntaksin kuin ARM-mallit ja kääntyy ARM:iin.
+Microsoftin kehittämä domaineihin erikoistunut kieli (DSL) Azure-resurssien käyttöönottoon. Tarjoaa yksinkertaisemman syntaksin kuin ARM-mallit ja kääntyy ARM-malleiksi.
 
 **Build**  
 Prosessi, jossa lähdekoodi käännetään, riippuvuudet asennetaan ja sovellukset valmistellaan käyttöönottoa varten.
 
 **Blue-Green Deployment**  
-Käyttöönotto-strategia, joka käyttää kahta identtistä tuotantoympäristöä (blue ja green) käyttökatkosten ja riskin minimoimiseksi.
+Käyttöönotto-strategia, jossa käytetään kahta identtistä tuotantoympäristöä (blue ja green) käyttökatkojen ja riskin minimoimiseksi.
 
 ## C
 
 **Container Apps**  
-Azuren serveritön konttipalvelu, joka mahdollistaa konttien ajamisen ilman monimutkaisen infrastruktuurin hallintaa.
+Azuren serverless-konttipalvelu, joka mahdollistaa konttisoitujen sovellusten ajamisen ilman monimutkaisen infrastruktuurin hallintaa.
 
 **CI/CD**  
-Continuous Integration/Continuous Deployment. Automaattiset käytännöt koodimuutosten integroimiseksi ja sovellusten käyttöönotoksi.
+Continuous Integration/Continuous Deployment. Automaattiset käytännöt koodimuutosten integroimiseksi ja sovellusten käyttöönottoon.
 
 **Cosmos DB**  
-Azuren maailmanlaajuisesti hajautettu, monimalli-tietokantapalvelu, joka tarjoaa kattavat SLA:t läpäisevyydelle, latenssille, saatavuudelle ja konsistenssille.
+Azuren globaalisti hajautettu, monimalli tietokantapalvelu, joka tarjoaa kattavat SLA:t läpäisevyydelle, latenssille, saatavuudelle ja johdonmukaisuudelle.
 
 **Configuration**  
 Asetukset ja parametrit, jotka ohjaavat sovelluksen käyttäytymistä ja käyttöönottoasetuksia.
@@ -83,31 +83,31 @@ Asetukset ja parametrit, jotka ohjaavat sovelluksen käyttäytymistä ja käytt�
 Prosessi, jossa sovellukset ja niiden riippuvuudet asennetaan ja konfiguroidaan kohdeinfrastruktuuriin.
 
 **Docker**  
-Alusta sovellusten kehittämiseen, toimittamiseen ja ajamiseen konttiteknologiaa hyödyntäen.
+Alusta sovellusten kehittämiseen, jakeluun ja ajamiseen konttiteknologian avulla.
 
 **Dockerfile**  
-Tekstitiedosto, joka sisältää ohjeet Docker-konttikuvun rakentamiseen.
+Tekstitiedosto, joka sisältää ohjeet Docker-konttikuvaan rakentamiseen.
 
 ## E
 
 **Environment**  
-Käyttöönottokohde, joka edustaa tiettyä sovelluksen esiintymää (esim. development, staging, production).
+Käyttöönoton kohde, joka edustaa tiettyä sovelluksen ilmentymää (esim. kehitys, staging, tuotanto).
 
 **Environment Variables**  
-Asetusarvot, jotka tallennetaan avain-arvopareina ja joihin sovellukset voivat päästä käsiksi ajonaikana.
+Konfiguraatioviarit, jotka tallennetaan avain-arvo-pareina ja joita sovellukset voivat käyttää suoritusajassa.
 
 **Endpoint**  
-URL tai verkkotunnus, josta sovellukseen tai palveluun pääsee käsiksi.
+URL-osoite tai verkko-osoite, josta sovellukseen tai palveluun pääsee käsiksi.
 
 ## F
 
 **Function App**  
-Azuren serverless-laskentapalvelu, joka mahdollistaa tapahtumaohjatun koodin suorittamisen ilman infrastruktuurin hallintaa.
+Azuren serverless-laskentapalvelu, joka mahdollistaa tapahtumapohjaisen koodin ajamisen ilman infrastruktuurin hallintaa.
 
 ## G
 
 **GitHub Actions**  
-GitHub-repositorioihin integroitava CI/CD-alusta työnkulkujen automatisointiin.
+GitHub-repositorioon integroidu CI/CD-alusta työnkulkujen automatisointiin.
 
 **Git**  
 Hajautettu versionhallintajärjestelmä, jota käytetään lähdekoodin muutosten seuraamiseen.
@@ -115,10 +115,10 @@ Hajautettu versionhallintajärjestelmä, jota käytetään lähdekoodin muutoste
 ## H
 
 **Hooks**  
-Mukautetut skriptit tai komennot, jotka suoritetaan tietyissä kohdissa käyttöönoton elinkaaren aikana (preprovision, postprovision, predeploy, postdeploy).
+Mukautetut skriptit tai komennot, jotka suoritetaan tiettyinä ajankohtina käyttöönoton elinkaaren aikana (preprovision, postprovision, predeploy, postdeploy).
 
 **Host**  
-Azure-palvelutyyppi, johon sovellus tullaan käyttöönottaa (esim. appservice, containerapp, function).
+Azure-palvelutyyppi, johon sovellus otetaan käyttöön (esim. appservice, containerapp, function).
 
 ## I
 
@@ -126,55 +126,55 @@ Azure-palvelutyyppi, johon sovellus tullaan käyttöönottaa (esim. appservice, 
 Käytäntö infrastruktuurin määrittelystä ja hallinnasta koodin avulla manuaalisten prosessien sijaan.
 
 **Init**  
-Uuden azd-projektin alustamisprosessi, yleensä mallipohjaisesti.
+Prosessi uuden azd-projektin alustus, tyypillisesti mallista.
 
 ## J
 
 **JSON**  
-JavaScript Object Notation. Lähinnä konfigurointi- ja API-vastausten tietojenvaihtoformaatti.
+JavaScript Object Notation. Tiedonvaihtoformaatti, jota käytetään yleisesti konfiguraatiotiedostoissa ja API-vastauksissa.
 
 **JWT**  
-JSON Web Token. Standardi tietojen turvalliseen välittämiseen osapuolten välillä JSON-objektina.
+JSON Web Token. Standardi tietoturvalliselle tiedon välitykselle osapuolten välillä JSON-objektina.
 
 ## K
 
 **Key Vault**  
-Azuren palvelu salaisuuksien, avainten ja sertifikaattien turvalliseen tallentamiseen ja hallintaan.
+Azuren palvelu salaisuuksien, avainten ja varmenteiden turvalliseen säilytykseen ja hallintaan.
 
 **Kusto Query Language (KQL)**  
-Kyselykieli, jota käytetään datan analysointiin Azure Monitorissa, Application Insightsissa ja muissa Azure-palveluissa.
+Kyselykieli, jota käytetään tietojen analysointiin Azure Monitorissa, Application Insightsissa ja muissa Azure-palveluissa.
 
 ## L
 
 **Load Balancer**  
-Palvelu, joka jakaa saapuvan verkkoliikenteen useiden palvelimien tai instanssien kesken.
+Palvelu, joka jakaa saapuvan verkkoliikenteen useiden palvelimien tai ilmentymien kesken.
 
 **Log Analytics**  
-Azuren palvelu telemetriadatan keräämiseen, analysointiin ja hyödyntämiseen pilvi- ja paikallisympäristöistä.
+Azure-palvelu telemetriatietojen keräämiseen, analysointiin ja hyödyntämiseen pilvi- ja paikallisympäristöistä.
 
 ## M
 
 **Managed Identity**  
-Azure-ominaisuus, joka tarjoaa Azure-palveluille automaattisesti hallinnoidun identiteetin muiden Azure-palveluiden todennukseen.
+Azure-ominaisuus, joka tarjoaa Azure-palveluille automaattisesti hallinnoidun identiteetin muiden Azure-palveluiden todentamista varten.
 
 **Microservices**  
-Arkkitehtoninen lähestymistapa, jossa sovellus koostuu pienistä, itsenäisistä palveluista.
+Arkkitehtoninen lähestymistapa, jossa sovellukset rakennetaan kokoelmasta pieniä, itsenäisiä palveluja.
 
 **Monitor**  
-Azuren yhtenäinen valvontaratkaisu, joka tarjoaa täyspinnoisen näkyvyyden sovelluksiin ja infrastruktuuriin.
+Azuren yhtenäinen valvontaratkaisu, joka tarjoaa koko pinon havainnoitavuutta sovelluksille ja infrastruktuurille.
 
 ## N
 
 **Node.js**  
-Chromen V8-moottorin päälle rakennettu JavaScript-ajonaikaympäristö palvelinpuolen sovellusten rakentamiseen.
+JavaScript-suoritin, joka on rakennettu Chrome V8 -moottorin päälle ja jota käytetään palvelinpuolen sovellusten rakentamiseen.
 
 **npm**  
-Node.js:n pakettienhallinta, joka hallitsee riippuvuuksia ja paketteja.
+Node.js:n paketinhallinta, joka hallinnoi riippuvuuksia ja paketteja.
 
 ## O
 
 **Output**  
-Arvot, jotka palautuvat infrastruktuurin käyttöönotosta ja joita sovellukset tai muut resurssit voivat hyödyntää.
+Arvot, jotka palautuvat infrastruktuurin käyttöönotosta ja joita sovellukset tai muut resurssit voivat käyttää.
 
 ## P
 
@@ -182,63 +182,63 @@ Arvot, jotka palautuvat infrastruktuurin käyttöönotosta ja joita sovellukset 
 Prosessi, jossa sovelluskoodi ja riippuvuudet valmistellaan käyttöönottoa varten.
 
 **Parameters**  
-Syöttöarvot, jotka välitetään infrastruktuurimalleille käyttöönottojen räätälöimiseksi.
+Syötearvot, jotka välitetään infrastruktuurimalleille käyttöönottojen mukauttamiseksi.
 
 **PostgreSQL**  
-Avoimen lähdekoodin relaatiotietokantajärjestelmä, jota Azure tukee hallinnoituna palveluna.
+Avoimen lähdekoodin relaatiotietokantajärjestelmä, jota tuetaan hallittuna palveluna Azuressa.
 
 **Provisioning**  
-Prosessi Azure-resurssien luomiseksi ja konfiguroimiseksi infrastruktuurimalleissa määriteltyjen asetusten mukaisesti.
+Prosessi Azure-resurssien luomiseksi ja konfiguroimiseksi infrastruktuurimalleissa määritellyn mukaisesti.
 
 ## Q
 
 **Quota**  
-Rajoitukset sille, kuinka paljon resursseja voidaan luoda Azure-tilauksessa tai -alueella.
+Rajoitukset resurssien määrälle, joita voidaan luoda Azure-tilauksessa tai alueella.
 
 ## R
 
 **Resource Group**  
-Looginen kontti Azure-resursseille, jotka jakavat saman elinkaaren, käyttöoikeudet ja politiikat.
+Looginen säiliö Azure-resursseille, jotka jakavat saman elinkaaren, käyttöoikeudet ja politiikat.
 
 **Resource Token**  
-Ainutlaatuinen merkkijono, jonka azd luo varmistaakseen, että resurssien nimet ovat yksilöllisiä käyttöönottojen välillä.
+Ainutkertainen merkkijono, jonka azd generoi varmistaakseen resurssien nimet ainutkertaisiksi käyttöönottojen välillä.
 
 **REST API**  
-Arkkitehtoninen tyyli verkottuneiden sovellusten suunnitteluun HTTP-menetelmiä käyttäen.
+Arkkitehtoninen tyyli verkkosovellusten suunnitteluun HTTP-menetelmiä käyttäen.
 
 **Rollback**  
-Prosessi, jossa palautetaan aiempi versio sovelluksesta tai infrastruktuurin konfiguraatiosta.
+Prosessi, jossa palautetaan aiempi versio sovelluksesta tai infrastruktuurikokoonpanosta.
 
 ## S
 
 **Service**  
-Sovelluksesi komponentti, joka on määritelty azure.yaml-tiedostossa (esim. web frontend, API backend, tietokanta).
+Sovelluksen komponentti, joka on määritelty azure.yaml-tiedostossa (esim. web-frontend, API-backend, tietokanta).
 
 **SKU**  
-Stock Keeping Unit. Kuvaa erilaisia palvelutasoja tai suorituskykyvaihtoehtoja Azure-resursseille.
+Stock Keeping Unit. Kuvastaa eri palvelutasoja tai suorituskykyvaihtoehtoja Azure-resursseille.
 
 **SQL Database**  
-Azuren hallinnoitu relaatiotietokantapalvelu, joka perustuu Microsoft SQL Serveriin.
+Azuren hallittu relaatiotietokantapalvelu, joka perustuu Microsoft SQL Serveriin.
 
 **Static Web Apps**  
-Azure-palvelu koko pinon web-sovellusten rakentamiseen ja käyttöönottoon lähdekoodivarastoista.
+Azure-palvelu täyspinon verkkosovellusten rakentamiseen ja käyttöönottoon lähdekoodivarastoista.
 
 **Storage Account**  
-Azure-palvelu, joka tarjoaa pilvitallennustilan objekteille, kuten blobeille, tiedostoille, jonoille ja taulukoille.
+Azure-palvelu, joka tarjoaa pilvitallennuksen datalle, mukaan lukien blobit, tiedostot, jonot ja taulut.
 
 **Subscription**  
-Azure-tilin kontti, joka sisältää resurssiryhmät ja resurssit sekä siihen liittyvän laskutuksen ja käyttöoikeuksien hallinnan.
+Azure-tilauksen säiliö, joka sisältää Resource Groupit ja resurssit sekä niihin liittyvän laskutuksen ja käyttöoikeuksien hallinnan.
 
 ## T
 
 **Template**  
-Ennalta rakennettu projektirakenne, joka sisältää sovelluskoodin, infrastruktuurin määrittelyt ja konfiguraation yleisiin skenaarioihin.
+Esirakennettu projektirakenne, joka sisältää sovelluskoodin, infrastruktuurin määritelmät ja konfiguraation yleisiin skenaarioihin.
 
 **Terraform**  
-Avoimen lähdekoodin Infrastructure as Code -työkalu, joka tukee useita pilvitarjoajia, mukaan lukien Azure.
+Avoimen lähdekoodin Infrastructure as Code -työkalu, joka tukee useita pilvipalveluntarjoajia, mukaan lukien Azure.
 
 **Traffic Manager**  
-Azuren DNS-pohjainen liikenteen kuormantasain, joka jakaa liikennettä globaalisti Azure-alueiden välillä.
+Azuren DNS-pohjainen liikenteen kuormantasaaja, joka jakaa liikennettä maailmanlaajuisesti eri Azure-alueiden välillä.
 
 ## U
 
@@ -246,12 +246,12 @@ Azuren DNS-pohjainen liikenteen kuormantasain, joka jakaa liikennettä globaalis
 Uniform Resource Identifier. Merkkijono, joka tunnistaa tietyn resurssin.
 
 **URL**  
-Uniform Resource Locator. URI:n tyyppi, joka kertoo, missä resurssi sijaitsee ja miten sen saa haettua.
+Uniform Resource Locator. URI-tyyppi, joka määrittää, missä resurssi sijaitsee ja miten se haetaan.
 
 ## V
 
 **Virtual Network (VNet)**  
-Perusrakenne yksityisverkoille Azuressa, tarjoten eristystä ja segmentointia.
+Perusrakennuspalikka yksityisverkoille Azuressa, joka tarjoaa eristystä ja segmentointia.
 
 **VS Code**  
 Visual Studio Code. Suosittu koodieditori, jolla on erinomainen Azure- ja azd-integraatio.
@@ -259,58 +259,58 @@ Visual Studio Code. Suosittu koodieditori, jolla on erinomainen Azure- ja azd-in
 ## W
 
 **Webhook**  
-HTTP-kutsupohjainen palautus, joka laukaistaan tiettyjen tapahtumien yhteydessä, yleisesti käytetty CI/CD-putkissa.
+HTTP-kutsu, joka laukaistaan tiettyjen tapahtumien perusteella, yleisesti käytetty CI/CD-putkissa.
 
 **What-if**  
-Azure-ominaisuus, joka näyttää, mitä muutoksia käyttöönotto tekisi ilman, että se suoritetaan todella.
+Azure-ominaisuus, joka näyttää, mitä muutoksia käyttöönotto tekisi ilman, että muutoksia todella suoritetaan.
 
 ## Y
 
 **YAML**  
-YAML Ain't Markup Language. Ihmislukuiseksi suunniteltu tietojen sarjoitusstandardi, jota käytetään konfiguraatiotiedostoissa kuten azure.yaml.
+YAML ei ole merkintäkieli. Ihmislukuisuuteen suunniteltu tiedonserialisointistandardi, jota käytetään konfiguraatiotiedostoissa kuten azure.yaml.
 
 ## Z
 
 **Zone**  
-Fysikaalisesti erillisiä sijainteja Azure-alueen sisällä, jotka tarjoavat redundanssia ja korkean saatavuuden.
+Fyysisesti erilliset sijainnit Azure-alueen sisällä, jotka tarjoavat redundanssia ja korkeaa saatavuutta.
 
 ---
 
 ## Yleiset lyhenteet
 
-| Lyhenne | Koko nimi | Kuvaus |
+| Acronym | Full Form | Description |
 |---------|-----------|-------------|
-| AAD | Azure Active Directory | Identiteetin ja pääsynhallinnan palvelu |
+| AAD | Azure Active Directory (now Microsoft Entra ID) | Identiteetin ja pääsynhallinnan palvelu |
 | ACR | Azure Container Registry | Konttikuvien rekisteröintipalvelu |
-| AKS | Azure Kubernetes Service | Hallinnoitu Kubernetes-palvelu |
-| API | Application Programming Interface | Sovellusohjelmointirajapinta |
-| ARM | Azure Resource Manager | Azuren käyttöönoton ja hallinnan palvelu |
-| CDN | Content Delivery Network | Sisällönjakeluverkko |
+| AKS | Azure Kubernetes Service | Hallittu Kubernetes-palvelu |
+| API | Application Programming Interface | Rajapintaohjelmointirajapinta ohjelmiston rakentamiseen |
+| ARM | Azure Resource Manager | Azuren käyttöönotto- ja hallintapalvelu |
+| CDN | Content Delivery Network | Palvelimista koostuva jakeluverkko |
 | CI/CD | Continuous Integration/Continuous Deployment | Automaattiset kehitys- ja käyttöönotto-käytännöt |
-| CLI | Command Line Interface | Komentorivikäyttöliittymä |
-| DNS | Domain Name System | Järjestelmä verkkotunnusten kääntämiseen IP-osoitteiksi |
-| HTTPS | Hypertext Transfer Protocol Secure | HTTP:n suojattu versio |
+| CLI | Command Line Interface | Tekstipohjainen käyttäjäliittymä |
+| DNS | Domain Name System | Järjestelmä, joka muuntaa domain-nimet IP-osoitteiksi |
+| HTTPS | Hypertext Transfer Protocol Secure | Suojattu HTTP-versio |
 | IaC | Infrastructure as Code | Infrastruktuurin hallinta koodin avulla |
-| JSON | JavaScript Object Notation | Tietojenvaihtoformaatti |
-| JWT | JSON Web Token | Token-muoto turvalliseen tietojen välitykseen |
-| KQL | Kusto Query Language | Kyselykieli Azure-datapalveluille |
-| RBAC | Role-Based Access Control | Roolipohjainen käyttöoikeuksien hallinta |
-| REST | Representational State Transfer | Verkkopalvelujen arkkitehtoninen tyyli |
-| SDK | Software Development Kit | Ohjelmistokehityspaketti |
-| SLA | Service Level Agreement | Palvelutasositoumus |
-| SQL | Structured Query Language | Relaatiotietokantojen hallintaan tarkoitettu kieli |
+| JSON | JavaScript Object Notation | Tiedonvaihtoformaatti |
+| JWT | JSON Web Token | Tietoturvallinen tunniste tietojen välitykseen |
+| KQL | Kusto Query Language | Kyselykieli Azure-tietopalveluille |
+| RBAC | Role-Based Access Control | Käyttöoikeuksien hallinta roolien perusteella |
+| REST | Representational State Transfer | Arkkitehtoninen tyyli web-palveluille |
+| SDK | Software Development Kit | Kokoelma kehitystyökaluja |
+| SLA | Service Level Agreement | Sitoumus palvelun saatavuudesta/suorituskyvystä |
+| SQL | Structured Query Language | Kieli relaatiotietokantojen hallintaan |
 | SSL/TLS | Secure Sockets Layer/Transport Layer Security | Kryptografiset protokollat |
-| URI | Uniform Resource Identifier | Resurssin tunnistava merkkijono |
-| URL | Uniform Resource Locator | URI-tyyppi, joka määrittää resurssin sijainnin |
-| VM | Virtual Machine | Tietokonejärjestelmän emulaatio |
-| VNet | Virtual Network | Yksityisverkko Azuressa |
-| YAML | YAML Ain't Markup Language | Tietojen sarjoitusstandardi |
+| URI | Uniform Resource Identifier | Resurssia tunnistava merkkijono |
+| URL | Uniform Resource Locator | URI:n tyyppi, joka määrittää resurssin sijainnin |
+| VM | Virtual Machine | Tietokonejärjestelmän emulointi |
+| VNet | Virtual Network | Yksityinen verkko Azuressa |
+| YAML | YAML Ain't Markup Language | Tiedonserialisointistandardi |
 
 ---
 
-## Azure-palvelujen nimien vastaavuudet
+## Azure-palveluiden nimikartoitukset
 
-| Yleinen nimi | Virallinen Azure-palvelun nimi | azd Host -tyyppi |
+| Common Name | Official Azure Service Name | azd Host Type |
 |-------------|------------------------------|---------------|
 | Web App | Azure App Service | `appservice` |
 | API App | Azure App Service | `appservice` |
@@ -321,7 +321,7 @@ Fysikaalisesti erillisiä sijainteja Azure-alueen sisällä, jotka tarjoavat red
 | NoSQL DB | Azure Cosmos DB | `cosmosdb` |
 | Storage | Azure Storage Account | `storage` |
 | Cache | Azure Cache for Redis | `redis` |
-| Search | Azure Cognitive Search | `search` |
+| Search | Azure AI Search | `search` |
 | Messaging | Azure Service Bus | `servicebus` |
 
 ---
@@ -329,42 +329,42 @@ Fysikaalisesti erillisiä sijainteja Azure-alueen sisällä, jotka tarjoavat red
 ## Kontekstiin liittyvät termit
 
 ### Kehitykseen liittyvät termit
-- **Hot Reload**: Sovellusten automaattinen päivitys kehityksen aikana ilman uudelleenkäynnistystä
+- **Hot Reload**: Sovellusten automaattinen päivittäminen kehityksen aikana ilman uudelleenkäynnistystä
 - **Build Pipeline**: Automaattinen prosessi koodin rakentamiseen ja testaamiseen
 - **Deployment Slot**: Staging-ympäristö App Servicessä
-- **Environment Parity**: Kehitys-, staging- ja tuotantoympäristöjen pitäminen samanlaisina
+- **Environment Parity**: Kehitys-, staging- ja tuotantoympäristöjen pitäminen samankaltaisina
 
-### Turvallisuuteen liittyvät termit
+### Turvallisuusterminologia
 - **Managed Identity**: Azure-ominaisuus, joka tarjoaa automaattisen tunnistetietojen hallinnan
-- **Key Vault**: Turvallinen säiliö salaisuuksille, avaimille ja sertifikaateille
+- **Key Vault**: Turvallinen säilytystila salaisuuksille, avaimille ja varmenteille
 - **RBAC**: Roolipohjainen käyttöoikeuksien hallinta Azure-resursseille
 - **Network Security Group**: Virtuaalinen palomuuri verkkoliikenteen hallintaan
 
 ### Valvontaan liittyvät termit
-- **Telemetry**: Mittausten ja datan automaattinen kerääminen
-- **Application Performance Monitoring (APM)**: Sovellusten suorituskyvyn valvonta
-- **Log Analytics**: Palvelu lokidatan keräämiseen ja analysointiin
-- **Alert Rules**: Automaattiset ilmoitukset mittarien tai ehtojen perusteella
+- **Telemetry**: Mittausten ja tietojen automaattinen keruu
+- **Application Performance Monitoring (APM)**: Ohjelmiston suorituskyvyn valvonta
+- **Log Analytics**: Palvelu lokitietojen keräämiseen ja analysointiin
+- **Alert Rules**: Automaattiset ilmoitukset metriikoihin tai ehtoihin perustuen
 
 ### Käyttöönottoon liittyvät termit
-- **Blue-Green Deployment**: Käyttöönotto-strategia ilman käyttökatkoksia
-- **Canary Deployment**: Asteittainen käyttöönotto osalle käyttäjistä
-- **Rolling Update**: Sovellusinstanssien peräkkäinen korvaaminen
+- **Blue-Green Deployment**: Käyttöönotto-strategia, joka mahdollistaa käyttökatkojen välttämisen
+- **Canary Deployment**: Asteittainen julkaisu osalle käyttäjistä
+- **Rolling Update**: Sovellusinstanssien korvaaminen peräkkäin
 - **Rollback**: Palautus aiempaan sovellusversioon
 
 ---
 
-**Käyttövinkki**: Käytä `Ctrl+F` etsiäksesi nopeasti tiettyjä termejä tässä sanastossa. Termit on ristiinviitattu tarvittaessa.
+**Käyttövinkki**: Käytä `Ctrl+F` etsiäksesi nopeasti tiettyjä termejä tässä sanastossa. Termit ovat ristiviitteitä tarvittaessa.
 
 ---
 
 **Navigointi**
 - **Edellinen oppitunti**: [Muistilista](cheat-sheet.md)
-- **Seuraava oppitunti**: [UKK](faq.md)
+- **Seuraava oppitunti**: [Usein kysytyt kysymykset](faq.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Vastuuvapauslauseke:
-Tämä asiakirja on käännetty tekoälypohjaisella käännöspalvelulla [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automatisoiduissa käännöksissä saattaa olla virheitä tai epätarkkuuksia. Alkuperäinen asiakirja alkuperäiskielellään on määräävä lähde. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä johtuvista väärinkäsityksistä tai virhetulkinnoista.
+**Vastuuvapauslauseke**:
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, otathan huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäiskielellä on virallinen lähde. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

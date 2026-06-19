@@ -1,86 +1,86 @@
-# Multi-agent kundesupportløsning - forhandler-scenarie
+# Multi-Agent kundesupportløsning - detailhandels-scenarie
 
-**Kapitel 5: Multi-agent AI-løsninger**
-- **📚 Kursusside**: [AZD For Beginners](../README.md)
-- **📖 Aktuelt kapitel**: [Chapter 5: Multi-Agent AI Solutions](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+**Kapitel 5: Multi-Agent AI-løsninger**
+- **📚 Kursusforside**: [AZD For Beginners](../README.md)
+- **📖 Nuværende kapitel**: [Chapter 5: Multi-Agent AI Solutions](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
 - **⬅️ Forudsætninger**: [Chapter 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
 - **➡️ Næste kapitel**: [Chapter 6: Pre-Deployment Validation](../docs/pre-deployment/capacity-planning.md)
 - **🚀 ARM-skabeloner**: [Deployment Package](retail-multiagent-arm-template/README.md)
 
-> **⚠️ ARKITEKTURVEJLEDNING - IKKE FUNKTIONEL IMPLEMENTERING**  
-> Dette dokument giver en **omfattende arkitekturplan** for at bygge et multi-agent system.  
-> **Hvad der findes:** ARM-skabelon til infrastrukturimplementering (Microsoft Foundry Models, AI Search, Container Apps osv.)  
-> **Hvad du skal bygge:** Agentkode, routinglogik, frontend-UI, datapipelines (estimeret 80-120 timer)  
+> **⚠️ ARKITEKTURGUIDE - IKKE EN FUNGERENDE IMPLEMENTERING**  
+> Dette dokument giver en **omfattende arkitekturblueprint** til at bygge et multi-agent system.  
+> **Hvad der findes:** ARM-skabelon til infrastrukturudrulning (Microsoft Foundry Models, AI Search, Container Apps osv.)  
+> **Hvad du skal bygge:** Agentkode, routinglogik, frontend UI, datapipelines (estimeret 80-120 timer)  
 >  
 > **Brug dette som:**
-> - ✅ Arkitekturreference til dit eget multi-agent projekt
-> - ✅ Læringsvejledning til multi-agent designmønstre
-> - ✅ Infrastruktur-skabelon til at implementere Azure-ressourcer
+> - ✅ Arkitekturreference for dit eget multi-agent projekt
+> - ✅ Læringsguide til designmønstre for multi-agent
+> - ✅ Infrastruktur-skabelon til at udrulle Azure-ressourcer
 > - ❌ IKKE en klar-til-kørsel-applikation (kræver betydelig udvikling)
 
 ## Oversigt
 
-**Læringsmål:** Forstå arkitekturen, designbeslutningerne og implementeringstilgangen til at bygge en produktionsklar multi-agent kundesupport-chatbot for en forhandler med avancerede AI-funktioner inklusive lagerstyring, dokumentbehandling og intelligente kundedialoger.
+**Læringsmål:** Forstå arkitekturen, designbeslutningerne og implementeringstilgangen for at bygge en produktionsklar multi-agent kundesupport-chatbot til en detailhandler med avancerede AI-muligheder inklusive lagerstyring, dokumentbehandling og intelligente kundedialoger.
 
-**Tid til færdiggørelse:** Læsning + forståelse (2-3 timer) | Opbygning af komplet implementation (80-120 timer)
+**Tid til færdiggørelse:** Læsning + forståelse (2-3 timer) | Færdig implementering (80-120 timer)
 
-**Hvad du vil lære:**
+**Hvad du lærer:**
 - Multi-agent arkitekturmønstre og designprincipper
-- Multi-region Microsoft Foundry Models implementeringsstrategier
-- AI Search-integration med RAG (Retrieval-Augmented Generation)
-- Agent-evaluerings- og sikkerhedstest-rammer
-- Overvejelser ved produktionsimplementering og omkostningsoptimering
+- Strategier for udrulning af Microsoft Foundry Models i flere regioner
+- Integration af AI Search med RAG (Retrieval-Augmented Generation)
+- Agent-evaluerings- og sikkerhedstestningsrammer
+- Overvejelser for produktionsudrulning og omkostningsoptimering
 
-## Arkitektursmål
+## Arkitektur mål
 
-**Uddannelsesmæssigt fokus:** Denne arkitektur demonstrerer virksomhedsmønstre for multi-agent systemer.
+**Pædagogisk fokus:** Denne arkitektur demonstrerer virksomhedsmønstre for multi-agent systemer.
 
 ### Systemkrav (til din implementering)
 
-En produktionsklar kundesupportløsning kræver:
-- **Flere specialiserede agenter** til forskellige kundebehov (kundeservice + lagerstyring)
-- **Multi-model deployment** med korrekt kapacitetsplanlægning (gpt-4.1, gpt-4.1-mini, embeddings på tværs af regioner)
+En produktionskundesupportløsning kræver:
+- **Flere specialiserede agenter** til forskellige kundebehov (Kundeservice + Lagerstyring)
+- **Multi-model udrulning** med korrekt kapacitetsplanlægning (gpt-4.1, gpt-4.1-mini, embeddings på tværs af regioner)
 - **Dynamisk dataintegration** med AI Search og filuploads (vektorsøgning + dokumentbehandling)
 - **Omfattende overvågning** og evalueringsmuligheder (Application Insights + brugerdefinerede metrics)
-- **Produktionssikkerhed** med red teaming-validering (sårbarhedsscanning + agentevaluering)
+- **Produktionsklar sikkerhed** med red teaming-validering (sårbarhedsscanning + agent-evaluering)
 
-### Hvad denne vejledning giver
+### Hvad denne guide leverer
 
-✅ **Arkitekturmønstre** - Dokumenteret design til skalerbare multi-agent systemer  
-✅ **Infrastrukturskabeloner** - ARM-skabeloner der implementerer alle Azure-tjenester  
+✅ **Arkitekturmønstre** - Bevist design til skalerbare multi-agent systemer  
+✅ **Infrastruktur-skabeloner** - ARM-skabeloner der udruller alle Azure-tjenester  
 ✅ **Kodeeksempler** - Referenceimplementeringer for nøglekomponenter  
 ✅ **Konfigurationsvejledning** - Trin-for-trin opsætningsinstruktioner  
 ✅ **Best Practices** - Sikkerhed, overvågning, omkostningsoptimeringsstrategier  
 
-❌ **Ikke inkluderet** - Komplet fungerende applikation (kræver udviklingsindsats)
+❌ **Ikke inkluderet** - Fuldt fungerende applikation (kræver udviklingsindsats)
 
 ## 🗺️ Implementeringskøreplan
 
-### Fase 1: Studér arkitekturen (2-3 timer) - START HER
+### Fase 1: Studer arkitekturen (2-3 timer) - START HER
 
-**Mål:** Forstå systemdesignet og komponentinteraktioner
+**Mål:** Forstå systemdesignet og komponentinteraktionerne
 
 - [ ] Læs dette komplette dokument
-- [ ] Gennemgå arkitekturdiagram og komponentrelationer
+- [ ] Gennemgå arkitekturdiagram og komponentforhold
 - [ ] Forstå multi-agent mønstre og designbeslutninger
-- [ ] Studér kodeeksempler for agentværktøjer og routing
+- [ ] Studer kodeeksempler for agentværktøjer og routing
 - [ ] Gennemgå omkostningsestimater og kapacitetsplanlægningsvejledning
 
 **Resultat:** Klar forståelse af hvad du skal bygge
 
-### Fase 2: Implementer infrastruktur (30-45 minutter)
+### Fase 2: Udrul infrastruktur (30-45 minutter)
 
-**Mål:** Provisionér Azure-ressourcer ved hjælp af ARM-skabelonen
+**Mål:** Provisioner Azure-ressourcer ved hjælp af ARM-skabelon
 
 ```bash
 cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup -m standard
 ```
 
-**Hvad der implementeres:**
+**Hvad der bliver udrullet:**
 - ✅ Microsoft Foundry Models (3 regioner: gpt-4.1, gpt-4.1-mini, embeddings)
-- ✅ AI Search-tjeneste (tom, kræver indekskonfiguration)
-- ✅ Container Apps-miljø (pladsholder-images)
+- ✅ AI Search service (tom, kræver indekskonfiguration)
+- ✅ Container Apps-miljø (pladsholderbilleder)
 - ✅ Storage accounts, Cosmos DB, Key Vault
 - ✅ Application Insights-overvågning
 
@@ -88,12 +88,12 @@ cd retail-multiagent-arm-template
 - ❌ Agentimplementeringskode
 - ❌ Routinglogik
 - ❌ Frontend UI
-- ❌ Search-indeksskema
+- ❌ Search-indeksschema
 - ❌ Datapipelines
 
 ### Fase 3: Byg applikationen (80-120 timer)
 
-**Mål:** Implementér multi-agent systemet baseret på denne arkitektur
+**Mål:** Implementer multi-agent systemet baseret på denne arkitektur
 
 1. **Agentimplementering** (30-40 timer)
    - Basisklasse for agent og interfaces
@@ -101,13 +101,13 @@ cd retail-multiagent-arm-template
    - Lageragent med gpt-4.1-mini
    - Værktøjsintegrationer (AI Search, Bing, filbehandling)
 
-2. **Routingtjeneste** (12-16 timer)
-   - Forespørgselsklassifikationslogik
-   - Agentvalg og orkestrering
+2. **Routing-service** (12-16 timer)
+   - Anmodningsklassificeringslogik
+   - Agentudvælgelse og orkestrering
    - FastAPI/Express backend
 
 3. **Frontend-udvikling** (20-30 timer)
-   - Chat-interface UI
+   - Chatgrænseflade UI
    - Filupload-funktionalitet
    - Rendering af svar
 
@@ -121,14 +121,14 @@ cd retail-multiagent-arm-template
    - Agent-evalueringsramme
    - Red team sikkerhedsscanner
 
-### Fase 4: Implementér & test (8-12 timer)
+### Fase 4: Udrul & test (8-12 timer)
 
-- Byg Docker-images for alle tjenester
+- Byg Docker-billeder for alle services
 - Push til Azure Container Registry
-- Opdater Container Apps med rigtige images
+- Opdater Container Apps med rigtige billeder
 - Konfigurer miljøvariabler og secrets
-- Kør evaluerings-testsuite
-- Udfør sikkerhedsscanning
+- Kør evaluerings test suite
+- Udfør sikkerhedsskanning
 
 **Samlet estimeret indsats:** 80-120 timer for erfarne udviklere
 
@@ -139,7 +139,7 @@ cd retail-multiagent-arm-template
 ```mermaid
 graph TB
     User[👤 Kunde] --> LB[Azure Front Door]
-    LB --> WebApp[Webfrontend<br/>Container-app]
+    LB --> WebApp[Web-frontend<br/>Container-app]
     
     WebApp --> Router[Agent-router<br/>Container-app]
     Router --> CustomerAgent[Kundeagent<br/>Kundeservice]
@@ -162,10 +162,10 @@ graph TB
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
-    GraderModel[gpt-4.1 Vurderingsmodel<br/>Switzerland North] --> Evaluation[Vurderingsramme]
+    GraderModel[gpt-4.1 Vurderingsmodel<br/>Switzerland North] --> Evaluation[Evalueringsramme]
     RedTeam[Red Team-scanner] --> SecurityReports[Sikkerhedsrapporter]
     
-    subgraph "Datalag"
+    subgraph "Data-lag"
         Storage
         AISearch
         CosmosDB[Cosmos DB<br/>Chat-historik]
@@ -197,19 +197,20 @@ graph TB
     style AISearch fill:#fce4ec
     style Storage fill:#f1f8e9
 ```
+
 ### Komponentoversigt
 
-| Komponent | Formål | Teknologi | Region |
-|-----------|--------|-----------|--------|
-| **Web Frontend** | Brugergrænseflade til kundedialoger | Container Apps | Primær region |
-| **Agent Router** | Router forespørgsler til passende agent | Container Apps | Primær region |
-| **Customer Agent** | Håndterer kundeservicehenvendelser | Container Apps + gpt-4.1 | Primær region |
-| **Inventory Agent** | Håndterer lager og opfyldelse | Container Apps + gpt-4.1-mini | Primær region |
-| **Microsoft Foundry Models** | LLM-inferens til agenter | Cognitive Services | Multi-region |
-| **AI Search** | Vektorsøgning og RAG | AI Search Service | Primær region |
-| **Storage Account** | Filuploads og dokumenter | Blob Storage | Primær region |
-| **Application Insights** | Overvågning og telemetry | Monitor | Primær region |
-| **Grader Model** | Agentvurderingssystem | Microsoft Foundry Models | Sekundær region |
+| Component | Purpose | Technology | Region |
+|-----------|---------|------------|---------|
+| **Web Frontend** | Brugeroverflade til kundeadministration | Container Apps | Primary Region |
+| **Agent Router** | Router anmodninger til passende agent | Container Apps | Primary Region |
+| **Customer Agent** | Håndterer kundeserviceforespørgsler | Container Apps + gpt-4.1 | Primary Region |
+| **Inventory Agent** | Håndterer lager og opfyldelse | Container Apps + gpt-4.1-mini | Primary Region |
+| **Microsoft Foundry Models** | LLM-inferens for agenter | Azure AI Services | Multi-region |
+| **AI Search** | Vektorsøgning og RAG | AI Search Service | Primary Region |
+| **Storage Account** | Filuploads og dokumenter | Blob Storage | Primary Region |
+| **Application Insights** | Overvågning og telemetry | Monitor | Primary Region |
+| **Grader Model** | Agent-evalueringssystem | Microsoft Foundry Models | Secondary Region |
 
 ## 📁 Projektstruktur
 
@@ -365,7 +366,7 @@ retail-multiagent-solution/              🔨 Your project directory
 
 ## 🚀 Hurtigstart: Hvad du kan gøre lige nu
 
-### Mulighed 1: Implementer kun infrastruktur (30 minutter)
+### Mulighed 1: Udrul kun infrastrukturen (30 minutter)
 
 **Hvad du får:** Alle Azure-tjenester provisioneret og klar til udvikling
 
@@ -374,28 +375,28 @@ retail-multiagent-solution/              🔨 Your project directory
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/retail-multiagent-arm-template
 
-# Udrul infrastruktur
+# Udrul infrastrukturen
 ./deploy.sh -g myResourceGroup -m standard
 
-# Bekræft udrulning
+# Bekræft udrulningen
 az resource list --resource-group myResourceGroup --output table
 ```
 
 **Forventet resultat:**
-- ✅ Microsoft Foundry Models-tjenester implementeret (3 regioner)
-- ✅ AI Search-tjeneste oprettet (tom)
+- ✅ Microsoft Foundry Models services udrullet (3 regioner)
+- ✅ AI Search service oprettet (tom)
 - ✅ Container Apps-miljø klar
 - ✅ Storage, Cosmos DB, Key Vault konfigureret
 - ❌ Ingen fungerende agenter endnu (kun infrastruktur)
 
-### Mulighed 2: Studér arkitekturen (2-3 timer)
+### Mulighed 2: Studer arkitekturen (2-3 timer)
 
-**Hvad du får:** Dyb forståelse af multi-agent mønstre
+**Hvad du får:** Dybtgående forståelse af multi-agent mønstre
 
 1. Læs dette komplette dokument
 2. Gennemgå kodeeksempler for hver komponent
-3. Forstå designbeslutninger og afvejninger
-4. Studér omkostningsoptimeringsstrategier
+3. Forstå designbeslutninger og kompromiser
+4. Studer omkostningsoptimeringsstrategier
 5. Planlæg din implementeringstilgang
 
 **Forventet resultat:**
@@ -408,32 +409,32 @@ az resource list --resource-group myResourceGroup --output table
 
 **Hvad du får:** Produktionsklar multi-agent løsning
 
-1. **Fase 1:** Implementer infrastruktur (gjort ovenfor)
-2. **Fase 2:** Implementér agenter ved hjælp af kodeeksemplerne nedenfor (30-40 timer)
-3. **Fase 3:** Byg routingtjeneste (12-16 timer)
+1. **Fase 1:** Udrul infrastruktur (som ovenfor)
+2. **Fase 2:** Implementer agenter ved hjælp af kodeeksempler nedenfor (30-40 timer)
+3. **Fase 3:** Byg routing-service (12-16 timer)
 4. **Fase 4:** Opret frontend UI (20-30 timer)
 5. **Fase 5:** Konfigurer datapipelines (8-12 timer)
 6. **Fase 6:** Tilføj overvågning & evaluering (10-15 timer)
 
 **Forventet resultat:**
-- ✅ Fuldstændigt funktionelt multi-agent system
+- ✅ Fuldt fungerende multi-agent system
 - ✅ Produktionsklar overvågning
 - ✅ Sikkerhedsvalidering
-- ✅ Omkostningsoptimeret implementering
+- ✅ Omkostningsoptimeret udrulning
 
 ---
 
 ## 📚 Arkitekturreference & implementeringsguide
 
-Følgende sektioner giver detaljerede arkitekturmønstre, konfigurationseksempler og referencekode til at vejlede din implementering.
+Følgende sektioner giver detaljerede arkitekturmønstre, konfigurationseksempler og referencekode til at guide din implementering.
 
 ## Indledende konfigurationskrav
 
 ### 1. Flere agenter & konfiguration
 
-**Mål**: Implementer 2 specialiserede agenter - "Customer Agent" (kundeservice) og "Inventory" (lagerstyring)
+**Mål**: Udrul 2 specialiserede agenter - "Customer Agent" (kundeservice) og "Inventory" (lagerstyring)
 
-> **📝 Bemærk:** Følgende azure.yaml og Bicep-konfigurationer er **referenceeksempler** der viser, hvordan man strukturerer multi-agent implementeringer. Du skal oprette disse filer og de tilsvarende agentimplementeringer.
+> **📝 Bemærk:** Følgende azure.yaml- og Bicep-konfigurationer er **referenceeksempler** der viser, hvordan man strukturerer multi-agent udrulninger. Du skal oprette disse filer og de tilsvarende agentimplementeringer.
 
 #### Konfigurationstrin:
 
@@ -509,7 +510,7 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 
 ### 2. Flere modeller med kapacitetsplanlægning
 
-**Mål**: Implementer chatmodel (Customer), embeddings-model (search) og ræsonneringsmodel (grader) med korrekt kvotestyring
+**Mål**: Udrul chatmodel (Customer), embeddingsmodel (search) og ræsonnementsmodel (grader) med korrekt kvotestyring
 
 #### Multi-region strategi:
 
@@ -564,9 +565,9 @@ AZURE_OPENAI_FALLBACK_ENABLED=true
 MODEL_CAPACITY_REQUIREMENTS='{"gpt-4.1": 35, "text-embedding-ada-002": 30}'
 ```
 
-### 3. AI Search med dataindeks-konfiguration
+### 3. AI Search med dataindekskonfiguration
 
-**Mål**: Konfigurer AI Search til dataopdateringer og automatiseret indeksering
+**Mål**: Konfigurer AI Search til dataopdateringer og automatisk indeksering
 
 #### For-provisioning hook:
 
@@ -602,14 +603,14 @@ curl -X POST "https://$AZURE_SEARCH_SERVICE_NAME.search.windows.net/indexes?api-
   -H "api-key: $SEARCH_KEY" \
   -d @"./infra/search-schema.json"
 
-# Upload initiale dokumenter
+# Upload indledende dokumenter
 python ./scripts/upload_search_data.py \
   --search-service "$AZURE_SEARCH_SERVICE_NAME" \
   --search-key "$SEARCH_KEY" \
   --data-path "./data/initial-docs"
 ```
 
-#### Search-indeksskema:
+#### Search-indeksschema:
 
 ```json
 {
@@ -634,11 +635,11 @@ python ./scripts/upload_search_data.py \
 }
 ```
 
-### 4. Agentværktøjskonfiguration til AI Search
+### 4. Agentværktøjskonfiguration for AI Search
 
-**Mål**: Konfigurer agenter til at bruge AI Search som et forankringsværktøj
+**Mål**: Konfigurer agenter til at bruge AI Search som et grounding-værktøj
 
-#### Agent Search Tool-implementering:
+#### Agent Search-værktøjsimplementering:
 
 ```python
 # src/agents/tools/search_tool.py
@@ -695,7 +696,7 @@ class CustomerAgent:
         self.search_tool = search_tool
         
     async def process_query(self, user_query: str) -> str:
-        # Først, søg efter relevant kontekst
+        # Først søg efter relevant kontekst
         search_results = await self.search_tool.search_products(user_query)
         
         # Forbered kontekst til LLM'en
@@ -713,7 +714,7 @@ class CustomerAgent:
         return response.choices[0].message.content
 ```
 
-### 5. Filupload-lagringsintegration
+### 5. Filupload storage-integration
 
 **Mål**: Gør det muligt for agenter at behandle uploadede filer (manualer, dokumenter) til RAG-kontekst
 
@@ -776,7 +777,7 @@ class DocumentProcessor:
     async def process_uploaded_file(self, container_name: str, blob_name: str):
         """Process uploaded file and add to search index"""
         
-        # Hent fil fra bloblagring
+        # Hent fil fra blob-lagring
         blob_client = self.storage_client.get_blob_client(
             container=container_name, 
             blob=blob_name
@@ -816,9 +817,9 @@ class DocumentProcessor:
 
 ### 6. Bing Search-integration
 
-**Mål**: Tilføj Bing Search-funktionalitet til realtidsinformation
+**Mål**: Tilføj Bing Search-muligheder for realtidsinformation
 
-#### Bicep-ressourcetilføjelse:
+#### Bicep resource-tilføjelse:
 
 ```bicep
 // infra/bing-search.bicep
@@ -880,11 +881,11 @@ class BingSearchTool:
 
 ---
 
-## Overvågning & observabilitet
+## Overvågning & observability
 
-### 7. Sporing og Application Insights
+### 7. Tracing og Application Insights
 
-**Mål**: Omfattende overvågning med sporing og Application Insights
+**Mål**: Omfattende overvågning med sporingslogs og application insights
 
 #### Application Insights-konfiguration:
 
@@ -939,10 +940,10 @@ resource agentPerformanceAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-#### Implementering af brugerdefineret telemetry:
+#### Brugerdefineret telemetry-implementering:
 
 ```python
-# src/telemetry/agent_telemetry.py
+# src/telemetri/agent_telemetri.py
 from applicationinsights import TelemetryClient
 from applicationinsights.logging import LoggingHandler
 import logging
@@ -984,7 +985,7 @@ class AgentTelemetry:
         """Track search operation performance"""
         properties = {
             'search_type': search_type,
-            'query': query[:100],  # Forkort af hensyn til privatliv
+            'query': query[:100],  # Afkort for privatlivets skyld
             'results_found': str(results_count > 0)
         }
         
@@ -1047,7 +1048,7 @@ class AgentTelemetry:
 
 ### 8. Red Teaming sikkerhedsvalidering
 
-**Mål**: Automatisk sikkerhedstest for agenter og modeller
+**Mål**: Automatisk sikkerhedstestning for agenter og modeller
 
 #### Red Teaming-konfiguration:
 
@@ -1223,7 +1224,7 @@ class RedTeamScanner:
         total_strategies = len(scan_results['strategies_tested'])
         vulnerabilities = len(scan_results['vulnerabilities_found'])
         
-        # Grundlæggende scoring: 100 - (vulnerabilities / total * 100)
+        # Grundlæggende scoring: 100 - (sårbarheder / samlet * 100)
         if total_strategies == 0:
             return 100.0
         
@@ -1248,7 +1249,7 @@ class RedTeamScanner:
 
 echo "Starting Red Team Security Scan..."
 
-# Hent agentens endepunkt fra udrulning
+# Hent agentendepunkt fra udrulning
 AGENT_ENDPOINT=$(az containerapp show \
   --name "agent-customer" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1264,11 +1265,11 @@ python -m src.security.red_team_scanner \
 echo "Security scan completed. Check security_reports/ for results."
 ```
 
-### 9. Agent-evaluering med grader-model
+### 9. Agent-evaluering med Grader Model
 
-**Mål**: Implementer evalueringssystem med dedikeret grader-model
+**Mål**: Udrul evalueringssystem med dedikeret grader-model
 
-#### Grader-modelkonfiguration:
+#### Grader Model-konfiguration:
 
 ```bicep
 // infra/evaluation.bicep
@@ -1341,7 +1342,7 @@ class AgentEvaluator:
             case_result = await self._evaluate_single_case(test_case)
             evaluation_results['results'].append(case_result)
         
-        # Beregn oversigtsmålinger
+        # Beregn sammendragsmetrikker
         evaluation_results['summary'] = self._calculate_summary(evaluation_results['results'])
         
         return evaluation_results
@@ -1425,7 +1426,7 @@ class AgentEvaluator:
                 max_tokens=500
             )
             
-            # Parsér JSON-svaret
+            # Pars JSON-responsen
             grading_text = grader_response.choices[0].message.content
             grading_result = json.loads(grading_text)
             
@@ -1471,7 +1472,7 @@ class AgentEvaluator:
             if criterion_scores:
                 summary['criteria_averages'][criterion] = sum(criterion_scores) / len(criterion_scores)
         
-        # Ydelsesvurdering
+        # Præstationsvurdering
         avg_score = summary['average_overall_score']
         if avg_score >= 4.5:
             summary['performance_rating'] = 'Excellent'
@@ -1528,7 +1529,7 @@ class AgentEvaluator:
 
 ## Tilpasning & opdateringer
 
-### 10. Tilpasning af Container App
+### 10. Container App-tilpasning
 
 **Mål**: Opdater container app-konfiguration og udskift med brugerdefineret UI
 
@@ -1548,7 +1549,7 @@ services:
       CUSTOM_LOGO_URL: ${LOGO_URL}
 ```
 
-#### Brugerdefineret frontend-build:
+#### Brugertilpasset frontend-build:
 
 ```dockerfile
 # src/frontend/Dockerfile
@@ -1583,7 +1584,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 echo "Building and deploying custom frontend..."
 
-# Byg brugerdefineret image med miljøvariabler
+# Byg et brugerdefineret image med miljøvariabler
 docker build \
   --build-arg AGENT_NAME="$CUSTOMER_AGENT_NAME" \
   --build-arg COMPANY_NAME="retail Retail" \
@@ -1608,23 +1609,23 @@ echo "Frontend deployed successfully!"
 
 ---
 
-## 🔧 Fejlfinding
+## 🔧 Fejlsøgningsguide
 
 ### Almindelige problemer og løsninger
 
 #### 1. Container Apps kvotebegrænsninger
 
-**Problem**: Implementering fejler på grund af regionale kvotebegrænsninger
+**Problem**: Udrulning mislykkes på grund af regionale kvotebegrænsninger
 
 **Løsning**:
 ```bash
-# Kontroller nuværende kvoteforbrug
+# Kontroller aktuelt kvoteforbrug
 az containerapp env show \
   --name "$CONTAINER_APPS_ENVIRONMENT" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.workloadProfiles"
 
-# Anmod om kvoteforhøjelse
+# Anmod om kvoteforøgelse
 az support tickets create \
   --ticket-name "ContainerApps-Quota-Increase" \
   --severity "minimal" \
@@ -1635,9 +1636,9 @@ az support tickets create \
   --description "Request quota increase for Container Apps in region X"
 ```
 
-#### 2. Modelimplementering udløbet
+#### 2. Modeludrulning udløbet
 
-**Problem**: Modelimplementering fejler på grund af udløbet API-version
+**Problem**: Modeludrulning mislykkes på grund af udløbet API-version
 
 **Løsning**:
 ```python
@@ -1647,7 +1648,7 @@ import json
 
 def check_model_versions():
     """Check for latest model versions"""
-    # Dette vil kalde Microsoft Foundry Models API for at hente de aktuelle versioner
+    # Dette vil kalde Microsoft Foundry Models API'en for at hente de aktuelle versioner
     latest_versions = {
         "gpt-4.1": "2024-11-20",
         "text-embedding-ada-002": "2", 
@@ -1664,7 +1665,7 @@ def update_bicep_templates(latest_versions):
     """Update Bicep templates with latest versions"""
     template_path = "./infra/models.bicep"
     
-    # Læs og opdater skabelon
+    # Læs og opdater skabelonen
     with open(template_path, 'r') as f:
         content = f.read()
     
@@ -1686,7 +1687,7 @@ if __name__ == "__main__":
 
 #### 3. Fine-tuning integration
 
-**Problem**: Hvordan integreres finetunede modeller i AZD-implementering
+**Problem**: Hvordan integreres finetunede modeller i AZD-udrulning
 
 **Løsning**:
 ```python
@@ -1726,7 +1727,7 @@ class FineTuningPipeline:
             fine_tuned_model = job.fine_tuned_model
             print(f"Fine-tuned model ready: {fine_tuned_model}")
             
-            # Opdater udrulningen til at bruge den finjusterede model
+            # Opdater udrulning til at bruge den finjusterede model
             # Dette ville kalde Azure CLI for at opdatere udrulningen
             return fine_tuned_model
         else:
@@ -1736,13 +1737,13 @@ class FineTuningPipeline:
 
 ---
 
-## FAQ & åbne udforskninger
+## FAQ & åbne udforskningsemner
 
 ### Ofte stillede spørgsmål
 
-#### Q: Er der en nem måde at implementere flere agenter på (designmønster)?
+#### Q: Er der en nem måde at udrulle flere agenter på (designmønster)?
 
-**A: Ja! Brug Multi-Agent-mønstret:**
+**A: Ja! Brug Multi-Agent-mønsteret:**
 
 ```yaml
 # azure.yaml - Multi-Agent Configuration
@@ -1759,7 +1760,7 @@ services:
         }
 ```
 
-#### Q: Kan jeg implementere "model router" som en model (omkostningsmæssige konsekvenser)?
+#### Q: Kan jeg udrulle "model router" som en model (omkostningsimplikationer)?
 
 **A: Ja, med omhyggelig overvejelse:**
 
@@ -1788,14 +1789,14 @@ class ModelRouter:
         pass
 ```
 
-**Omkostningskonsekvenser:**
+**Omkostningsimplikationer:**
 - **Besparelser**: 60-80% omkostningsreduktion for simple forespørgsler
-- **Afvejninger**: Lidt øget latenstid for routinglogik
+- **Trade-offs**: Lidt øget latenstid for routinglogik
 - **Overvågning**: Spor nøjagtighed vs. omkostnings-metrics
 
 #### Q: Kan jeg starte et fine-tuning job fra en azd-skabelon?
 
-**A: Ja, ved hjælp af post-provisioning hooks:**
+**A: Ja, ved at bruge post-provisioning hooks:**
 
 ```bash
 #!/bin/bash
@@ -1803,7 +1804,7 @@ class ModelRouter:
 
 echo "Starting fine-tuning pipeline..."
 
-# Overfør træningsdata
+# Upload af træningsdata
 TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
   --data-path "./data/fine_tuning/training.jsonl" \
   --openai-key "$AZURE_OPENAI_API_KEY")
@@ -1822,7 +1823,7 @@ echo "Monitor progress with: azd hooks run monitor-fine-tuning"
 
 ### Avancerede scenarier
 
-#### Multi-region implementeringsstrategi
+#### Multi-region udrulningsstrategi
 
 ```bicep
 // infra/multi-region.bicep
@@ -1882,7 +1883,7 @@ class CostOptimizer:
                     'estimated_savings': usage['monthly_cost'] * 0.3
                 })
         
-        # Analyse af spidstid
+        # Analyse af spidsbelastning
         peak_patterns = self.analytics.get_peak_patterns()
         if peak_patterns['variance'] > 0.6:
             recommendations.append({
@@ -1903,6 +1904,7 @@ class CostOptimizer:
 ```
 
 ---
+
 ## ✅ Klar-til-udrulning ARM-skabelon
 
 > **✨ DETTE FINDES FAKTISK OG VIRKER!**  
@@ -1910,45 +1912,45 @@ class CostOptimizer:
 
 ### Hvad denne skabelon rent faktisk gør
 
-ARM-skabelonen i [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) provisionerer **al Azure-infrastruktur**, der er nødvendig for multi-agent-systemet. Dette er den **eneste klar-til-kørsel-komponent** - alt andet kræver udvikling.
+ARM-skabelonen i [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) opretter **al den Azure-infrastruktur**, der er nødvendig for multi-agent-systemet. Dette er den **eneste klar-til-kørsel-komponent** - alt andet kræver udvikling.
 
 ### Hvad der er inkluderet i ARM-skabelonen
 
 ARM-skabelonen i [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) indeholder:
 
-#### **Fuldstændig infrastruktur**
+#### **Fuld infrastruktur**
 - ✅ **Multi-region Microsoft Foundry Models** udrulninger (gpt-4.1, gpt-4.1-mini, embeddings, grader)
-- ✅ **Azure AI Search** med vektorsøgning
+- ✅ **Azure AI Search** med vektorsøgekapaciteter
 - ✅ **Azure Storage** med dokument- og upload-containere
 - ✅ **Container Apps Environment** med autoskalering
 - ✅ **Agent Router & Frontend** container apps
-- ✅ **Cosmos DB** til vedvarende lagring af chathistorik
+- ✅ **Cosmos DB** til vedvarende chat-historik
 - ✅ **Application Insights** til omfattende overvågning
 - ✅ **Key Vault** til sikker håndtering af hemmeligheder
 - ✅ **Document Intelligence** til filbehandling
 - ✅ **Bing Search API** til realtidsinformation
 
-#### **Udrulningstilstande**
-| Tilstand | Anvendelsestilfælde | Ressourcer | Anslået pris/måned |
+#### **Udrulningsmåder**
+| Tilstand | Anvendelse | Ressourcer | Anslået pris/måned |
 |------|----------|-----------|---------------------|
-| **Minimal** | Udvikling, test | Basis-SKUs, enkel region | $100-370 |
-| **Standard** | Produktion, moderat skala | Standard-SKUs, multi-region | $420-1,450 |
-| **Premium** | Virksomhed, høj skala | Premium SKUs, HA-opsætning | $1,150-3,500 |
+| **Minimal** | Udvikling, Test | Grundlæggende SKU'er, Enkelt region | $100-370 |
+| **Standard** | Produktion, Moderat skala | Standard SKU'er, Multi-region | $420-1,450 |
+| **Premium** | Enterprise, Høj skala | Premium SKU'er, HA-opsætning | $1,150-3,500 |
 
 ### 🎯 Hurtige udrulningsmuligheder
 
-#### Mulighed 1: Én-klik Azure-udrulning
+#### Option 1: Ét-klik Azure-udrulning
 
 [![Udrul til Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-#### Mulighed 2: Azure CLI-udrulning
+#### Option 2: Azure CLI-udrulning
 
 ```bash
 # Klon repositoryet
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/examples/retail-multiagent-arm-template
 
-# Gør deploymentscriptet kørbart
+# Gør deploymentskriptet eksekverbart
 chmod +x deploy.sh
 
 # Udrul med standardindstillinger (Standardtilstand)
@@ -1961,7 +1963,7 @@ chmod +x deploy.sh
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
-#### Mulighed 3: Direkte ARM-skabelonudrulning
+#### Option 3: Direkte ARM-skabelonsudrulning
 
 ```bash
 # Opret ressourcegruppe
@@ -1975,7 +1977,7 @@ az deployment group create \
   --parameters projectName=retail environmentName=prod
 ```
 
-### Skabelonuddata
+### Skabelonoutput
 
 Efter en vellykket udrulning modtager du:
 
@@ -1991,7 +1993,7 @@ Efter en vellykket udrulning modtager du:
 }
 ```
 
-### 🔧 Konfiguration efter udrulning
+### 🔧 Post-udrulningskonfiguration
 
 ARM-skabelonen håndterer infrastrukturprovisionering. Efter udrulning:
 
@@ -2004,7 +2006,7 @@ ARM-skabelonen håndterer infrastrukturprovisionering. Efter udrulning:
      -d @../data/search-schema.json
    ```
 
-2. **Upload indledende dokumenter**:
+2. **Upload initiale dokumenter**:
    ```bash
    # Upload produktmanualer og vidensbase
    az storage blob upload-batch \
@@ -2041,145 +2043,145 @@ Rediger `azuredeploy.parameters.json` for at tilpasse din udrulning:
 
 ### 📊 Udrulningsfunktioner
 
-- ✅ **Validering af forudsætninger** (Azure CLI, kvoter, tilladelser)
+- ✅ **Forudsætningsvalidering** (Azure CLI, kvoter, rettigheder)
 - ✅ **Multi-region høj tilgængelighed** med automatisk failover
 - ✅ **Omfattende overvågning** med Application Insights og Log Analytics
-- ✅ **Bedste sikkerhedspraksis** med Key Vault og RBAC
-- ✅ **Omkostningsoptimering** med konfigurerbare udrulningstilstande
-- ✅ **Automatisk skalering** baseret på efterspørgselsmønstre
-- ✅ **Opdateringer uden nedetid** med Container Apps revisions
+- ✅ **Sikkerhedspraksis** med Key Vault og RBAC
+- ✅ **Omkostningsoptimering** med konfigurerbare udrulningsmåder
+- ✅ **Automatiseret skalering** baseret på efterspørgselsmønstre
+- ✅ **Zero-downtime opdateringer** med Container Apps-revisioner
 
 ### 🔍 Overvågning og administration
 
 Når det er udrullet, overvåg din løsning via:
 
-- **Application Insights**: Ydelsesmetrikker, afhængighedssporing og brugerdefineret telemetri
+- **Application Insights**: Ydelsesmålinger, afhængighedssporing og brugerdefineret telemetri
 - **Log Analytics**: Centraliseret logning fra alle komponenter
-- **Azure Monitor**: Overvågning af ressourcehelbred og tilgængelighed
-- **Cost Management**: Realtids omkostningssporing og budgetalarmer
+- **Azure Monitor**: Ressourcehelbred og tilgængelighedsovervågning
+- **Cost Management**: Realtidsomkostningssporing og budgetalarmer
 
 ---
 
-## 📚 Fuldstændig implementeringsvejledning
+## 📚 Komplet implementeringsvejledning
 
-Dette scenariedokument kombineret med ARM-skabelonen giver alt, der er nødvendigt for at udrulle en produktionsklar multi-agent kundesupportløsning. Implementeringen dækker:
+Dette scenariedokument kombineret med ARM-skabelonen giver alt, hvad der er nødvendigt for at udrulle en produktionsklar multi-agent kundesupportløsning. Implementeringen dækker:
 
 ✅ **Arkitekturdesign** - Omfattende systemdesign med komponentforhold  
 ✅ **Infrastrukturprovisionering** - Fuld ARM-skabelon til ét-klik-udrulning  
 ✅ **Agentkonfiguration** - Detaljeret opsætning for Customer- og Inventory-agenter  
-✅ **Multi-model-udrulning** - Strategisk modelplacering på tværs af regioner  
+✅ **Multi-model udrulning** - Strategisk modelplacering på tværs af regioner  
 ✅ **Søgeintegration** - AI Search med vektorfunktioner og dataindeksering  
 ✅ **Sikkerhedsimplementering** - Red teaming, sårbarhedsscanning og sikre praksisser  
-✅ **Overvågning & evaluering** - Omfattende telemetri og ramme for agentvurdering  
-✅ **Klar til produktion** - Enterprise-grade udrulning med høj tilgængelighed og katastrofegendannelse  
+✅ **Overvågning & evaluering** - Omfattende telemetri og agent-evalueringsramme  
+✅ **Produktionsparathed** - Enterprise-grade udrulning med HA og katastrofegendannelse  
 ✅ **Omkostningsoptimering** - Intelligent routing og forbrugsbaseret skalering  
-✅ **Fejlfinding** - Almindelige problemer og løsningsstrategier
+✅ **Fejlfindingsguide** - Almindelige problemer og løsningstrategier
 
 ---
 
 ## 📊 Resumé: Hvad du har lært
 
-### Arkitekturmønstre dækket
+### Arkitekturmønstre der dækkes
 
-✅ **Multi-agent systemdesign** - Specialiserede agenter (Customer + Inventory) med dedikerede modeller  
-✅ **Multi-region-udrulning** - Strategisk modelplacering for omkostningsoptimering og redundans  
-✅ **RAG-arkitektur** - AI Search-integration med vektor-embeddings for grundfæstede svar  
-✅ **Agentvurdering** - Dedikeret grader-model til kvalitetsvurdering  
+✅ **Multi-Agent System Design** - Specialiserede agenter (Customer + Inventory) med dedikerede modeller  
+✅ **Multi-Region Udrulning** - Strategisk modelplacering for omkostningsoptimering og redundans  
+✅ **RAG-arkitektur** - AI Search-integration med vektor-embeddings for funderede svar  
+✅ **Agent-evaluering** - Dedikeret grader-model til kvalitetsvurdering  
 ✅ **Sikkerhedsramme** - Red teaming og sårbarhedsscanningsmønstre  
-✅ **Omkostningsoptimering** - Modelrouting og kapacitetsplanlægningsstrategier  
+✅ **Omkostningsoptimering** - Model-routing og kapacitetsplanlægningsstrategier  
 ✅ **Produktionsovervågning** - Application Insights med brugerdefineret telemetri  
 
 ### Hvad dette dokument leverer
 
-| Komponent | Status | Hvor du kan finde det |
+| Komponent | Status | Hvor du finder det |
 |-----------|--------|------------------|
 | **Infrastructure Template** | ✅ Klar til udrulning | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
-| **Architecture Diagrams** | ✅ Fuldført | Mermaid-diagram ovenfor |
-| **Code Examples** | ✅ Referenceimplementeringer | Gennem dette dokument |
-| **Configuration Patterns** | ✅ Detaljeret vejledning | Sektioner 1-10 ovenfor |
+| **Architecture Diagrams** | ✅ Færdig | Mermaid-diagrammet ovenfor |
+| **Code Examples** | ✅ Referenceimplementeringer | Gennem dokumentet |
+| **Configuration Patterns** | ✅ Detaljeret vejledning | Afsnit 1-10 ovenfor |
 | **Agent Implementations** | 🔨 Du bygger dette | ~40 timers udvikling |
 | **Frontend UI** | 🔨 Du bygger dette | ~25 timers udvikling |
 | **Data Pipelines** | 🔨 Du bygger dette | ~10 timers udvikling |
 
 ### Virkelighedstjek: Hvad der faktisk findes
 
-**I repositoryet (klar nu):**
-- ✅ ARM-skabelon, der udruller 15+ Azure-tjenester (azuredeploy.json)
+**I repositoryet (Klar nu):**
+- ✅ ARM-skabelon der udruller 15+ Azure-tjenester (azuredeploy.json)
 - ✅ Udrulningsscript med validering (deploy.sh)
 - ✅ Parameterkonfiguration (azuredeploy.parameters.json)
 
-**Henvist i dokumentet (du opretter):**
+**Nævnt i dokumentet (du opretter):**
 - 🔨 Agentimplementeringskode (~30-40 timer)
-- 🔨 Routingservice (~12-16 timer)
+- 🔨 Routing-service (~12-16 timer)
 - 🔨 Frontend-applikation (~20-30 timer)
-- 🔨 Dataopsætningsscripts (~8-12 timer)
+- 🔨 Datasætoprettelsesscripts (~8-12 timer)
 - 🔨 Overvågningsramme (~10-15 timer)
 
-### Dine næste trin
+### Dine næste skridt
 
-#### Hvis du vil udrulle infrastruktur (30 minutter)
+#### Hvis du vil udrulle infrastrukturen (30 minutter)
 ```bash
 cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
 
-#### Hvis du vil bygge hele systemet (80-120 timer)
+#### Hvis du vil bygge det komplette system (80-120 timer)
 1. ✅ Læs og forstå dette arkitekturdokument (2-3 timer)
-2. ✅ Udrul infrastruktur ved hjælp af ARM-skabelon (30 minutter)
+2. ✅ Udrul infrastruktur ved hjælp af ARM-skabelonen (30 minutter)
 3. 🔨 Implementer agenter ved hjælp af referencekode-mønstre (~40 timer)
-4. 🔨 Byg routingservice med FastAPI/Express (~15 timer)
-5. 🔨 Opret frontend-UI med React/Vue (~25 timer)
+4. 🔨 Byg routing-service med FastAPI/Express (~15 timer)
+5. 🔨 Opret frontend UI med React/Vue (~25 timer)
 6. 🔨 Konfigurer datapipeline og søgeindeks (~10 timer)
 7. 🔨 Tilføj overvågning og evaluering (~15 timer)
-8. ✅ Test, sikr og optimer (~10 timer)
+8. ✅ Test, sikre og optimere (~10 timer)
 
-#### Hvis du vil lære multi-agent-mønstre (Studie)
-- 📖 Gennemgå arkitekturdiagram og komponentforhold
+#### Hvis du vil lære multi-agent-mønstre (Studér)
+- 📖 Gennemgå arkitekturdiagrammet og komponentforholdene
 - 📖 Studér kodeeksempler for SearchTool, BingTool, AgentEvaluator
-- 📖 Forstå multi-region-udrulningsstrategi
-- 📖 Lær evaluerings- og sikkerhedsrammer
-- 📖 Anvend mønstrene på dine egne projekter
+- 📖 Forstå multi-region udrulningsstrategi
+- 📖 Lær evaluerings- og sikkerhedsrammerne
+- 📖 Anvend mønstrene i dine egne projekter
 
 ### Vigtige pointer
 
-1. **Infrastruktur vs. applikation** - ARM-skabelonen leverer infrastruktur; agenter kræver udvikling  
-2. **Multi-region-strategi** - Strategisk modelplacering reducerer omkostninger og forbedrer pålidelighed  
+1. **Infrastruktur vs. Applikation** - ARM-skabelonen leverer infrastrukturen; agenter kræver udvikling  
+2. **Multi-Region Strategi** - Strategisk modelplacering reducerer omkostninger og forbedrer pålidelighed  
 3. **Evalueringsramme** - Dedikeret grader-model muliggør kontinuerlig kvalitetsvurdering  
-4. **Sikkerhed først** - Red teaming og sårbarhedsscanning er essentielle i produktion  
+4. **Sikkerhed først** - Red teaming og sårbarhedsscanning er afgørende for produktion  
 5. **Omkostningsoptimering** - Intelligent routing mellem gpt-4.1 og gpt-4.1-mini sparer 60-80%
 
 ### Anslåede omkostninger
 
 | Udrulningstilstand | Infrastruktur/måned | Udvikling (engangs) | Total første måned |
 |-----------------|---------------------|------------------------|-------------------|
-| **Minimal** | $100-370 | $15K-25K (80-120 timer) | $15.1K-25.4K |
-| **Standard** | $420-1,450 | $15K-25K (samme indsats) | $15.4K-26.5K |
-| **Premium** | $1,150-3,500 | $15K-25K (samme indsats) | $16.2K-28.5K |
+| **Minimal** | $100-370 | $15K-25K (80-120 hrs) | $15.1K-25.4K |
+| **Standard** | $420-1,450 | $15K-25K (same effort) | $15.4K-26.5K |
+| **Premium** | $1,150-3,500 | $15K-25K (same effort) | $16.2K-28.5K |
 
-**Bemærk:** Infrastruktur er <5% af de samlede omkostninger for nye implementeringer. Udviklingsindsatsen er den største investering.
+**Bemærk:** Infrastruktur udgør <5% af de samlede omkostninger for nye implementeringer. Udviklingsindsatsen er den største investering.
 
 ### Relaterede ressourcer
 
-- 📚 [ARM-skabelon-udrulningsvejledning](retail-multiagent-arm-template/README.md) - Infrastrukturopsætning
-- 📚 [Microsoft Foundry Models Bedste praksis](https://learn.microsoft.com/azure/ai-services/openai/) - Modeludrulning
-- 📚 [AI Search Documentation](https://learn.microsoft.com/azure/search/) - Konfiguration af vektorsøgning
-- 📚 [Container Apps Patterns](https://learn.microsoft.com/azure/container-apps/) - Udrulning af mikrotjenester
+- 📚 [ARM Template Deployment Guide](retail-multiagent-arm-template/README.md) - Infrastrukturopsætning
+- 📚 [Microsoft Foundry Models Best Practices](https://learn.microsoft.com/azure/ai-services/openai/) - Bedste praksis for Microsoft Foundry-modeller
+- 📚 [AI Search Documentation](https://learn.microsoft.com/azure/search/) - Vektor-søgekonfiguration
+- 📚 [Container Apps Patterns](https://learn.microsoft.com/azure/container-apps/) - Mikrotjenester-udrulning
 - 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Opsætning af overvågning
 
 ### Spørgsmål eller problemer?
 
-- 🐛 [Rapporter problemer](https://github.com/microsoft/AZD-for-beginners/issues) - Skabelonfejl eller dokumentationsfejl
-- 💬 [GitHub-diskussioner](https://github.com/microsoft/AZD-for-beginners/discussions) - Arkitekturspørgsmål
-- 📖 [FAQ](../resources/faq.md) - Almindelige spørgsmål besvaret
-- 🔧 [Fejlfinding](../docs/troubleshooting/common-issues.md) - Udrulningsproblemer
+- 🐛 [Rapportér problemer](https://github.com/microsoft/AZD-for-beginners/issues) - Skabelonfejl eller dokumentationsfejl
+- 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - Arkitekturspørgsmål
+- 📖 [FAQ](../resources/faq.md) - Ofte stillede spørgsmål
+- 🔧 [Fejlfindingvejledning](../docs/troubleshooting/common-issues.md) - Udrulningsproblemer
 
 ---
 
-**Dette omfattende scenarie giver et enterprise-niveau arkitekturblåtryk for multi-agent AI-systemer, komplet med infrastruktur-skabeloner, implementeringsvejledning og bedste praksis til produktion for opbygning af avancerede kundesupportløsninger med Azure Developer CLI.**
+**Dette omfattende scenarie leverer en enterprise-grade arkitekturblåtryk for multi-agent AI-systemer, komplet med infrastrukturskabeloner, implementeringsvejledning og produktionsbedste praksis til at bygge avancerede kundesupportløsninger med Azure Developer CLI.**
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, bedes du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument i sit originalsprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, som måtte opstå som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
