@@ -1,69 +1,69 @@
-# AI 工作坊實作室：讓您的 AI 解決方案可用 AZD 部署
+# AI Workshop Lab: 使您的 AI 解決方案可由 AZD 部署
 
-**章節導航：**
-- **📚 課程首頁**：[AZD For Beginners](../../README.md)
-- **📖 當前章節**：第 2 章 - AI 優先開發
-- **⬅️ 前一章**：[AI 模型部署](ai-model-deployment.md)
-- **➡️ 下一章**：[生產 AI 最佳實踐](production-ai-practices.md)
-- **🚀 下一章節**：[第 3 章：設定](../chapter-03-configuration/configuration.md)
+**Chapter Navigation:**
+- **📚 課程首頁**: [AZD 入門](../../README.md)
+- **📖 目前章節**: 第 2 章 - 以 AI 為先的開發
+- **⬅️ Previous**: [AI 模型部署](ai-model-deployment.md)
+- **➡️ Next**: [生產環境 AI 最佳實務](production-ai-practices.md)
+- **🚀 下一章**: [第 3 章：設定](../chapter-03-configuration/configuration.md)
 
-## 工作坊概述
+## 工作坊概覽
 
-此動手實作實驗室引導開發者瞭解如何使用 Azure Developer CLI (AZD) 來部署現有的 AI 範本。您將學習使用 Microsoft Foundry 服務進行生產 AI 部署的關鍵模式。
+本實作實驗室引導開發人員透過 Azure Developer CLI (AZD) 將現有的 AI 範本部署。您將學習使用 Microsoft Foundry 服務進行生產等級 AI 部署的基本模式。
 
-> **驗證備註 (2026-03-25)：** 本工作坊已根據 `azd` 版本 `1.23.12` 進行審核。如果您的本地版本較舊，請在開始前更新 AZD，確保驗證、範本及部署流程與下述步驟一致。
+> **驗證註記 (2026-03-25)：** 本工作坊已依 `azd` `1.23.12` 進行審查。如果您本機安裝的版本較舊，請在開始前更新 AZD，以確保認證、範本與部署工作流程與下方步驟匹配。
 
-**所需時間：** 2-3 小時  
-**程度：** 中階  
-**先備知識：** 基本 Azure 知識，熟悉 AI/ML 概念
+**Duration:** 2-3 hours  
+**Level:** Intermediate  
+**Prerequisites:** Basic Azure knowledge, familiarity with AI/ML concepts
 
 ## 🎓 學習目標
 
-完成本工作坊後，您將能夠：
-- ✅ 將現有 AI 應用程式轉換為使用 AZD 範本
-- ✅ 使用 AZD 設定 Microsoft Foundry 服務
-- ✅ 實作 AI 服務的安全認證管理
-- ✅ 部署具備監控功能的生產級 AI 應用程式
-- ✅ 排除常見 AI 部署問題
+By the end of this workshop, you will be able to:
+- ✅ Convert an existing AI application to use AZD templates
+- ✅ Configure Microsoft Foundry services with AZD
+- ✅ Implement secure credential management for AI services
+- ✅ Deploy production-ready AI applications with monitoring
+- ✅ Troubleshoot common AI deployment issues
 
-## 先備條件
+## 前置需求
 
-### 必要工具
+### 所需工具
 - 已安裝 [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
 - 已安裝 [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli)
 - 已安裝 [Git](https://git-scm.com/)
-- 程式碼編輯器 (推薦使用 VS Code)
+- 程式碼編輯器（建議使用 VS Code）
 
 ### Azure 資源
-- 具備貢獻者權限的 Azure 訂閱
-- 可存取 Microsoft Foundry Models 服務（或能申請存取）
-- 有建立資源群組的權限
+- 具備 contributor 權限的 Azure 訂閱
+- 可存取 Microsoft Foundry Models 服務（或能申請存取權）
+- 可建立資源群組的權限
 
-### 知識先備
-- 基本 Azure 服務理解
+### 知識前提
+- 基本的 Azure 服務理解
 - 熟悉命令列介面
-- 基本 AI/ML 概念（API、模型、提示詞）
+- 基本 AI/ML 概念（API、模型、提示）
 
-## 實驗室環境設定
+## 實驗準備
 
-### 第一步：環境準備
+### 步驟 1：環境準備
 
 1. **確認工具安裝：**
 ```bash
-# 檢查 AZD 安裝
+# 檢查 AZD 是否已安裝
 azd version
 
-# 檢查 Azure CLI
+# 檢查 Azure CLI 是否已安裝
 az --version
 
-# 為 AZD 工作流程登入 Azure
+# 登入 Azure 以執行 AZD 工作流程
 azd auth login
 
-# 只有在您計劃在診斷期間執行 az 指令時，才登入 Azure CLI
+# 只有在您計畫在診斷期間執行 az 命令時，才登入 Azure CLI
 az login
 ```
 
-如果您跨多個租戶工作或訂閱無法自動偵測，請使用 `azd auth login --tenant-id <tenant-id>` 重新登入。
+If you work across multiple tenants or your subscription is not detected automatically, retry with `azd auth login --tenant-id <tenant-id>`.
 
 2. **複製工作坊程式庫：**
 ```bash
@@ -71,11 +71,11 @@ git clone https://github.com/Azure-Samples/azure-search-openai-demo
 cd azure-search-openai-demo
 ```
 
-## 模組 1：了解 AI 應用程式的 AZD 結構
+## 模組 1：了解 AI 應用的 AZD 結構
 
-### AI AZD 範本架構解析
+### AI AZD 範本的結構
 
-探索 AI 專用 AZD 範本中的關鍵檔案：
+探索 AI 就緒的 AZD 範本中的關鍵檔案：
 
 ```
 azure-search-openai-demo/
@@ -85,46 +85,46 @@ azure-search-openai-demo/
 │   ├── main.parameters.json # Environment parameters
 │   └── modules/            # Reusable Bicep modules
 │       ├── openai.bicep    # Microsoft Foundry Models configuration
-│       ├── search.bicep    # Cognitive Search setup
+│       ├── search.bicep    # Azure AI Search setup
 │       └── webapp.bicep    # Web app configuration
 ├── app/                    # Application code
 ├── scripts/               # Deployment scripts
 └── .azure/               # AZD environment files
 ```
 
-### **實作練習 1.1：探索設定**
+### **實驗練習 1.1：探索設定**
 
-1. **查看 azure.yaml 檔案：**
+1. **檢視 azure.yaml 檔案：**
 ```bash
 cat azure.yaml
 ```
 
-**重點檢查：**
-- AI 組件的服務定義
-- 環境變數對應設定
+**注意事項：**
+- AI 元件的服務定義
+- 環境變數對應
 - 主機設定
 
-2. **檢視 main.bicep 基礎架構：**
+2. **檢閱 main.bicep 基礎架構：**
 ```bash
 cat infra/main.bicep
 ```
 
 **要辨識的關鍵 AI 模式：**
-- Microsoft Foundry Models 服務佈署
-- 認知搜尋整合
-- 安全密鑰管理
-- 網路安全配置
+- Microsoft Foundry Models 服務的佈建
+- Azure AI Search 的整合
+- 安全金鑰管理
+- 網路安全設定
 
-### **討論重點：這些模式為何對 AI 重要**
+### **討論要點：** 為何這些模式對 AI 很重要
 
-- <strong>服務依賴性</strong>：AI 應用程式通常需求多個協調服務
+- <strong>服務相依性</strong>：AI 應用通常需要多個協調運作的服務
 - <strong>安全性</strong>：API 金鑰與端點需妥善保護
-- <strong>擴展性</strong>：AI 工作負載有獨特的擴展需求
-- <strong>成本管理</strong>：若配置不當，AI 服務成本可能過高
+- <strong>可擴充性</strong>：AI 工作負載有其特殊的擴充需求
+- <strong>成本管理</strong>：若設定不當，AI 服務可能會很昂貴
 
-## 模組 2：部署您的第一個 AI 應用程式
+## 模組 2：部署您的第一個 AI 應用
 
-### 第 2.1 步：初始化環境
+### 步驟 2.1：初始化環境
 
 1. **建立新的 AZD 環境：**
 ```bash
@@ -136,28 +136,28 @@ azd env new myai-workshop
 # 設定您偏好的 Azure 區域
 azd env set AZURE_LOCATION eastus
 
-# 選填：設定特定的 OpenAI 模型
+# 可選：設定特定的 OpenAI 模型
 azd env set AZURE_OPENAI_MODEL gpt-4.1-mini
 ```
 
-### 第 2.2 步：部署基礎架構與應用程式
+### 步驟 2.2：部署基礎架構與應用程式
 
 1. **使用 AZD 部署：**
 ```bash
 azd up
 ```
 
-**`azd up` 過程中發生什麼：**
-- ✅ 佈署 Microsoft Foundry Models 服務
-- ✅ 建立認知搜尋服務
-- ✅ 設定應用服務以承載 Web 應用程式
-- ✅ 配置網路與安全設定
+**執行 `azd up` 時會發生的事：**
+- ✅ 佈建 Microsoft Foundry Models 服務
+- ✅ 建立 Azure AI Search 服務
+- ✅ 為 Web 應用設定 App Service
+- ✅ 設定網路與安全性
 - ✅ 部署應用程式程式碼
-- ✅ 設置監控與日誌功能
+- ✅ 設定監控與記錄
 
-2. <strong>監控部署進度</strong> 並留意正在建立的資源。
+2. <strong>監控部署進度</strong> 並記錄正在建立的資源。
 
-### 第 2.3 步：驗證您的部署
+### 步驟 2.3：驗證您的部署
 
 1. **檢查已部署的資源：**
 ```bash
@@ -169,22 +169,22 @@ azd show
 azd show
 ```
 
-請開啟 `azd show` 輸出中顯示的 Web 端點。
+開啟 `azd show` 輸出中顯示的 Web 端點。
 
 3. **測試 AI 功能：**
-   - 瀏覽至 Web 應用程式
-   - 嘗試範例查詢
-   - 確認 AI 回應正常
+   - 前往 Web 應用程式
+   - 嘗試樣本查詢
+   - 驗證 AI 回應是否正常
 
-### **實作練習 2.1：除錯練習**
+### **實驗練習 2.1：故障排除實作**
 
-<strong>情境</strong>：部署成功，但 AI 無法回應。
+<strong>情境</strong>：部署成功但 AI 沒有回應。
 
-**常見檢查項目：**
-1. **OpenAI API 金鑰**：確認設定正確
-2. <strong>模型可用性</strong>：確認區域是否支援該模型
-3. <strong>網路連線</strong>：確保服務間通信正常
-4. **RBAC 權限**：確認應用程式能存取 OpenAI
+**常見要檢查的問題：**
+1. **OpenAI API 金鑰**：確認是否正確設定
+2. <strong>模型可用性</strong>：檢查您的地區是否支援該模型
+3. <strong>網路連線</strong>：確保服務之間可以通訊
+4. **RBAC 權限**：確認應用程式可以存取 OpenAI
 
 **除錯指令：**
 ```bash
@@ -198,22 +198,22 @@ az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
 
-## 模組 3：依需求自訂 AI 應用程式
+## 模組 3：為您的需求客製化 AI 應用
 
-### 第 3.1 步：修改 AI 設定
+### 步驟 3.1：修改 AI 設定
 
 1. **更新 OpenAI 模型：**
 ```bash
-# 更改為不同的模型（如果您的地區有提供）
+# 更換為不同的模型（若在您所在區域可用）
 azd env set AZURE_OPENAI_MODEL gpt-4.1
 
-# 以新配置重新部署
+# 使用新設定重新部署
 azd deploy
 ```
 
-2. **新增額外 AI 服務：**
+2. **新增其他 AI 服務：**
 
-編輯 `infra/main.bicep` 以新增文件智慧：
+編輯 `infra/main.bicep` 以新增 Document Intelligence：
 
 ```bicep
 // Add to main.bicep
@@ -230,18 +230,18 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-### 第 3.2 步：區域特定設定
+### 步驟 3.2：環境特定設定
 
-<strong>最佳實踐</strong>：為開發與生產環境設不同配置。
+<strong>最佳實務</strong>：為開發與生產使用不同設定。
 
 1. **建立生產環境：**
 ```bash
 azd env new myai-production
 ```
 
-2. **設定生產環境專用參數：**
+2. **設定生產專屬參數：**
 ```bash
-# 生產通常使用較高的SKU
+# 生產環境通常使用較高階的 SKU
 azd env set AZURE_OPENAI_SKU S0
 azd env set AZURE_SEARCH_SKU standard
 
@@ -249,45 +249,45 @@ azd env set AZURE_SEARCH_SKU standard
 azd env set ENABLE_PRIVATE_ENDPOINTS true
 ```
 
-### **實作練習 3.1：成本優化**
+### **實驗練習 3.1：成本優化**
 
-<strong>挑戰</strong>：配置範本以達到開發成本效益。
+<strong>挑戰</strong>：配置範本以達到具成本效益的開發環境。
 
 **任務：**
-1. 識別哪些 SKU 可設為免費/基本層
-2. 配置環境變數以降低成本
-3. 部署並與生產設定作成本比較
+1. 識別哪些 SKU 可以設定為免費/基本等級
+2. 設定環境變數以降低成本
+3. 部署並與生產設定比較成本
 
-**提示方案：**
-- 盡量使用 Cognitive Services 的 F0（免費）層
-- 開發階段使用搜尋服務的 Basic 階層
-- 考慮 Functions 的用量計費方案
+**解題提示：**
+- 在可能的情況下，對 Azure AI Services 使用 F0（免費）層
+- 在開發環境對 Search Service 使用 Basic 層
+- 考慮對 Functions 使用 Consumption 計劃
 
-## 模組 4：安全性及生產最佳實踐
+## 模組 4：安全性與生產最佳實務
 
-### 第 4.1 步：安全認證管理
+### 步驟 4.1：安全憑證管理
 
-<strong>現行挑戰</strong>：許多 AI 應用程式硬編碼 API 金鑰或使用不安全儲存。
+目前的挑戰：許多 AI 應用把 API 金鑰硬編碼或使用不安全的儲存方式。
 
-**AZD 解決方案**：使用受管理身分與 Key Vault 整合。
+AZD 解決方案：Managed Identity + Key Vault 整合。
 
-1. **查看範本中的安全設定：**
+1. **檢視範本中的安全性設定：**
 ```bash
-# 尋找金鑰保管庫與受管理身份配置
+# 尋找 Key Vault 與託管識別的設定
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
-2. **確認受管理身分功能運作正常：**
+2. **驗證 Managed Identity 是否正常運作：**
 ```bash
-# 檢查網頁應用程式是否具有正確的身分設定
+# 檢查 Web 應用程式是否具有正確的身分識別設定
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
-### 第 4.2 步：網路安全
+### 步驟 4.2：網路安全
 
-1. <strong>啟用私用端點</strong>（如果尚未配置）：
+1. <strong>啟用私人端點</strong>（如果尚未設定）：
 
-加入您的 bicep 範本：
+將以下內容加入您的 bicep 範本：
 ```bicep
 // Private endpoint for OpenAI
 resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
@@ -310,18 +310,18 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-### 第 4.3 步：監控與可觀察性
+### 步驟 4.3：監控與可觀察性
 
-1. **配置 Application Insights：**
+1. **設定 Application Insights：**
 ```bash
-# Application Insights 應該自動配置
-# 檢查配置：
+# Application Insights 應該會自動設定
+# 檢查設定：
 az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
 2. **設定 AI 專屬監控：**
 
-新增 AI 操作的自訂指標：
+新增 AI 操作的自訂度量：
 ```bicep
 // In your web app configuration
 resource webApp 'Microsoft.Web/sites@2023-01-01' = {
@@ -342,42 +342,42 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-### **實作練習 4.1：安全稽核**
+### **實驗練習 4.1：安全稽核**
 
-<strong>任務</strong>：檢視您的部署是否符合安全最佳實踐。
+<strong>任務</strong>：檢視您的部署是否符合安全最佳實務。
 
-**檢查清單：**
-- [ ] 程式碼或設定中無硬編碼的密鑰
-- [ ] 使用受管理身分進行服務間驗證
-- [ ] Key Vault 存放敏感設定
-- [ ] 網路存取適當限制
-- [ ] 已啟用監控與日誌
+**核對清單：**
+- [ ] 程式碼或設定中無硬編碼祕密
+- [ ] 使用 Managed Identity 做為服務間驗證
+- [ ] Key Vault 儲存敏感設定
+- [ ] 網路存取已受到適當限制
+- [ ] 已啟用監控與記錄
 
-## 模組 5：轉換您自己的 AI 應用程式
+## 模組 5：轉換您自己的 AI 應用
 
-### 第 5.1 步：評估工作表
+### 步驟 5.1：評估工作表
 
-**轉換 App 前，回答以下問題：**
+<strong>在轉換應用程式之前</strong>，回答以下問題：
 
-1. **應用架構：**
-   - 您的 App 使用哪些 AI 服務？
+1. **應用程式架構：**
+   - 您的應用程式使用哪些 AI 服務？
    - 需要哪些運算資源？
-   - 需要資料庫嗎？
-   - 服務彼此間有哪些依賴？
+   - 是否需要資料庫？
+   - 服務之間的相依性為何？
 
-2. **安全需求：**
-   - 您的 App 處理哪些敏感資料？
-   - 有哪些合規要求？
-   - 需要私有網路嗎？
+2. **安全性需求：**
+   - 您的應用處理哪些敏感資料？
+   - 有哪些合規性要求？
+   - 是否需要私人網路？
 
-3. **擴展需求：**
-   - 預期負載為何？
-   - 需要自動擴展嗎？
-   - 有區域性需求嗎？
+3. **擴充需求：**
+   - 預期的負載是多少？
+   - 是否需要自動擴充？
+   - 是否有區域性要求？
 
-### 第 5.2 步：建立您的 AZD 範本
+### 步驟 5.2：建立您的 AZD 範本
 
-**請依此模式轉換您的 App：**
+**依照以下模式轉換您的應用程式：**
 
 1. **建立基本結構：**
 ```bash
@@ -411,7 +411,7 @@ hooks:
     run: echo "Preparing AI models..."
 ```
 
-3. **建立基礎設施範本：**
+3. **建立基礎架構範本：**
 
 **infra/main.bicep** - 主要範本：
 ```bicep
@@ -455,43 +455,43 @@ output endpoint string = openAIAccount.properties.endpoint
 output name string = openAIAccount.name
 ```
 
-### **實作練習 5.1：範本建立挑戰**
+### **實驗練習 5.1：範本建立挑戰**
 
-<strong>挑戰</strong>：為文件處理 AI App 建立 AZD 範本。
+<strong>挑戰</strong>：為文件處理 AI 應用建立 AZD 範本。
 
 **需求：**
 - 使用 Microsoft Foundry Models 進行內容分析
-- 使用文件智慧進行 OCR
-- 儲存帳戶用於文件上傳
-- Function App 負責處理邏輯
-- Web App 提供使用者介面
+- 使用 Document Intelligence 做 OCR
+- 用於文件上傳的 Storage Account
+- 用於處理邏輯的 Function App
+- 提供使用者介面的 Web 應用
 
-**加分項：**
-- 加入完善錯誤處理
-- 包含成本估算
-- 建置監控儀表板
+**加分項目：**
+- 加入適當的錯誤處理
+- 包含成本預估
+- 設定監控儀表板
 
 ## 模組 6：排除常見問題
 
 ### 常見部署問題
 
 #### 問題 1：OpenAI 服務配額超過
-**症狀：** 部署失敗並出現配額錯誤  
-**解決方案：**
+**症狀：** 部署因配額錯誤而失敗
+**解決方式：**
 ```bash
-# 檢查當前配額
+# 檢查目前配額
 az cognitiveservices usage list --location eastus
 
-# 請求增加配額或嘗試不同的區域
+# 申請提高配額或嘗試不同區域
 azd env set AZURE_LOCATION westus2
 azd up
 ```
 
-#### 問題 2：模型在區域不可用
-**症狀：** AI 回應失敗或模型部署錯誤  
-**解決方案：**
+#### 問題 2：模型在該地區不可用
+**症狀：** AI 回應失敗或模型部署錯誤
+**解決方式：**
 ```bash
-# 檢查地區的模型可用性
+# 檢查模型在各地區的可用性
 az cognitiveservices model list --location eastus
 
 # 更新為可用的模型
@@ -500,62 +500,62 @@ azd deploy
 ```
 
 #### 問題 3：權限問題
-**症狀：** 呼叫 AI 服務時出現 403 禁止存取錯誤  
-**解決方案：**
+**症狀：** 呼叫 AI 服務時出現 403 Forbidden 錯誤
+**解決方式：**
 ```bash
-# 檢查角色指派
+# 檢查角色分配
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# 新增缺少的角色
+# 新增遺漏的角色
 az role assignment create \
   --assignee YOUR_PRINCIPAL_ID \
   --role "Cognitive Services OpenAI User" \
   --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 ```
 
-### 效能問題
+### 性能問題
 
 #### 問題 4：AI 回應緩慢
 **調查步驟：**
-1. 檢查 Application Insights 性能指標
-2. 查看 Azure 入口網站中的 OpenAI 服務指標
-3. 確認網路連通性與延遲
+1. 在 Application Insights 檢查效能度量
+2. 在 Azure 入口網站檢閱 OpenAI 服務的度量
+3. 驗證網路連線與延遲
 
-**解決方案：**
-- 對常見查詢實作快取
-- 使用適合您用例的 OpenAI 模型
-- 考慮高負載時使用讀取副本
+**解決方法：**
+- 為常見查詢實作快取
+- 為您的使用案例選用適當的 OpenAI 模型
+- 在高負載情境考慮使用只讀複本
 
-### **實作練習 6.1：除錯挑戰**
+### **實驗練習 6.1：除錯挑戰**
 
-<strong>情境</strong>：部署成功，但應用回傳 500 錯誤。
+<strong>情境</strong>：部署成功，但應用程式返回 500 錯誤。
 
 **除錯任務：**
 1. 檢查應用程式日誌
-2. 驗證服務連線
-3. 測試認證機制
-4. 檢閱設定內容
+2. 驗證服務連線狀態
+3. 測試驗證機制
+4. 檢閱設定
 
-**可利用工具：**
-- 使用 `azd show` 查看部署概況
-- 透過 Azure 入口網站查詢服務日誌
-- 使用 Application Insights 追蹤應用遙測
+**可使用的工具：**
+- `azd show` 用於部署總覽
+- Azure 入口網站查看詳細服務日誌
+- Application Insights 查看應用程式遙測
 
 ## 模組 7：監控與優化
 
-### 第 7.1 步：建立全面監控
+### 步驟 7.1：建立完整的監控
 
 1. **建立自訂儀表板：**
 
 前往 Azure 入口網站並建立包含以下項目的儀表板：
-- OpenAI 請求數量與延遲
+- OpenAI 請求數與延遲
 - 應用錯誤率
 - 資源使用率
 - 成本追蹤
 
 2. **設定警示：**
 ```bash
-# 高錯誤率警報
+# 錯誤率過高的警示
 az monitor metrics alert create \
   --name "AI-App-High-Error-Rate" \
   --resource-group YOUR_RG \
@@ -564,82 +564,82 @@ az monitor metrics alert create \
   --description "Alert when error rate is high"
 ```
 
-### 第 7.2 步：成本優化
+### 步驟 7.2：成本優化
 
-1. **分析當前成本：**
+1. **分析目前成本：**
 ```bash
 # 使用 Azure CLI 取得成本資料
 az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 ```
 
-2. **實施成本控制：**
+2. **實作成本控制：**
 - 設定預算警示
-- 使用自動擴展政策
+- 使用自動調整規則
 - 實作請求快取
-- 監控 OpenAI 代幣使用量
+- 監控 OpenAI 代幣使用情況
 
-### **實作練習 7.1：效能優化**
+### **實驗練習 7.1：效能優化**
 
-<strong>任務</strong>：優化您的 AI 應用，改善效能與成本。
+<strong>任務</strong>：為效能與成本優化您的 AI 應用。
 
-**指標目標：**
-- 平均回應時間降低 20%
-- 月度成本降低 15%
-- 維持 99.9% 正常運作時間
+**要改善的指標：**
+- 將平均回應時間減少 20%
+- 將每月成本降低 15%
+- 維持 99.9% 的正常運作時間
 
-**嘗試策略：**
-- 實施回應快取
-- 優化提示詞以提升代幣效率
-- 選用適當的運算 SKU
-- 設定正確的自動擴展氣規則
+**可嘗試的策略：**
+- 實作回應快取
+- 優化 prompt 以提高代幣效率
+- 使用適合的運算 SKU
+- 設定適當的自動擴充
 
-## 最終挑戰：端到端實作
+## 最後挑戰：端到端實作
 
 ### 挑戰情境
 
-您被指派創建一個生產級、AI 驅動的客戶服務聊天機器人，需求如下：
+您被指派建立一個生產等級的 AI 客服聊天機器人，需求如下：
 
-**功能需求：**
-- 網頁介面供客戶互動
-- 整合 Microsoft Foundry Models 以產生回應
-- 使用認知搜尋進行文件搜尋
+**功能性需求：**
+- 提供客戶互動的 Web 介面
+- 與 Microsoft Foundry Models 整合以提供回應
+- 使用 Azure AI Search 的文件搜尋功能
 - 與現有客戶資料庫整合
 - 支援多語言
 
-**非功能需求：**
-- 支援 1000 名並發使用者
+**非功能性需求：**
+- 能處理 1000 名同時使用者
 - 99.9% 正常運作時間 SLA
-- SOC 2 合規
-- 每月成本低於 500 美元
-- 部署於多個環境（開發、測試、生產）
+- 符合 SOC 2 規範
+- 每月成本低於 $500
+- 部署至多個環境（dev、staging、prod）
 
 ### 實作步驟
 
-1. <strong>設計架構</strong>
-2. **建立 AZD 範本**
-3. <strong>實作安全措施</strong>
-4. <strong>設定監控與警示</strong>
-5. <strong>建立部署管線</strong>
-6. <strong>撰寫解決方案文件</strong>
+1. 設計架構
+2. 建立 AZD 範本
+3. 實作安全措施
+4. 設定監控與警示
+5. 建立部署管線
+6. 撰寫解決方案文件
 
 ### 評估標準
 
 - ✅ <strong>功能性</strong>：是否符合所有需求？
-- ✅ <strong>安全性</strong>：是否實施最佳實務？
-- ✅ <strong>擴展性</strong>：能否承受負載？
-- ✅ <strong>可維護性</strong>：程式碼及基礎架構是否良好組織？
-- ✅ <strong>成本</strong>：是否符合預算？
+- ✅ <strong>安全性</strong>：是否實作最佳實務？
+- ✅ <strong>可擴充性</strong>：能否承受負載？
+- ✅ <strong>可維護性</strong>：程式碼與基礎架構是否井然有序？
+- ✅ <strong>成本</strong>：是否在預算內？
 
-## 附加資源
+## 其他資源
 
 ### Microsoft 文件
 - [Azure Developer CLI 文件](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Microsoft Foundry Models 服務文件](https://learn.microsoft.com/azure/cognitive-services/openai/)
-- [Microsoft Foundry 文件](https://learn.microsoft.com/azure/ai-studio/)
+- [Microsoft Foundry Models Service Documentation](https://learn.microsoft.com/azure/cognitive-services/openai/)
+- [Microsoft Foundry Documentation](https://learn.microsoft.com/azure/ai-studio/)
 
 ### 範例範本
-- [Microsoft Foundry Models Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
-- [OpenAI Chat App Quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart)
+- [Microsoft Foundry Models 聊天應用程式](https://github.com/Azure-Samples/azure-search-openai-demo)
+- [OpenAI 聊天應用快速上手](https://github.com/Azure-Samples/openai-chat-app-quickstart)
 - [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
 
 ### 社群資源
@@ -649,38 +649,38 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 
 ## 🎓 完成證書
 
-恭喜！您已完成 AI 工作坊實驗。您現在應該能夠：
+恭喜！你已完成 AI 工作坊實作。你現在應該能夠：
 
-- ✅ 將現有 AI 應用程式轉換為 AZD 範本
-- ✅ 部署生產就緒的 AI 應用程式
+- ✅ 將現有的 AI 應用程式轉換為 AZD 範本
+- ✅ 部署可投入生產的 AI 應用程式
 - ✅ 為 AI 工作負載實作安全最佳做法
 - ✅ 監控並優化 AI 應用程式效能
-- ✅ 疑難排解一般部署問題
+- ✅ 排解常見部署問題
 
-### 下一步驟
-1. 將這些模式應用於您自己的 AI 專案
+### 下一步
+1. 將這些模式套用到你自己的 AI 專案
 2. 將範本回饋給社群
-3. 加入 Microsoft Foundry Discord 獲得持續支援
+3. 加入 Microsoft Foundry 的 Discord 以獲得持續支援
 4. 探索進階主題，例如多區域部署
 
 ---
 
-<strong>工作坊回饋</strong>：透過在 [Microsoft Foundry Discord #Azure 頻道](https://discord.gg/microsoft-azure) 分享您的體驗，幫助我們改進此工作坊。
+**Workshop Feedback**: Help us improve this workshop by sharing your experience in the [Microsoft Foundry Discord #Azure channel](https://discord.gg/microsoft-azure).
 
 ---
 
-**章節導覽：**
-- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
-- **📖 本章節**: 第二章 - AI 優先開發
-- **⬅️ 上一章**: [AI 模型部署](ai-model-deployment.md)
-- **➡️ 下一章**: [生產 AI 最佳實務](production-ai-practices.md)
-- **🚀 下一章節**: [第三章：設定](../chapter-03-configuration/configuration.md)
+**章節導覽:**
+- **📚 課程首頁**: [AZD For Beginners](../../README.md)
+- **📖 目前章節**: 第 2 章 - 以 AI 為先的開發
+- **⬅️ 上一節**: [AI Model Deployment](ai-model-deployment.md)
+- **➡️ 下一節**: [Production AI Best Practices](production-ai-practices.md)
+- **🚀 下一章**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
-**需要幫助？** 加入我們的社群，取得關於 AZD 與 AI 部署的支援和討論。
+**需要幫助嗎？** 加入我們的社群，獲得關於 AZD 與 AI 部署的支援與討論。
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責聲明**：  
-本文件係使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們盡力確保準確性，但請注意自動翻譯可能包含錯誤或不準確之處。原始文件之母語版本應被視為權威來源。對於關鍵資訊，建議使用專業人工翻譯。我們不對因使用此翻譯所引起的任何誤解或錯誤解釋承擔責任。
+**免責聲明**：
+此文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們努力追求準確性，但請注意自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應視為權威來源。對於關鍵資訊，建議採用專業人工翻譯。我們不對因使用此翻譯所產生的任何誤解或誤譯承擔責任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

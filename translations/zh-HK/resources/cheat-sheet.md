@@ -1,43 +1,43 @@
-# 指令速查表 - 基本 AZD 指令
+# Command Cheat Sheet - 必備 AZD 指令
 
-<strong>各章節快速參考</strong>
-- **📚 課程主頁**: [AZD 入門](../README.md)
-- **📖 快速開始**: [第 1 章：基礎與快速開始](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI 指令**: [第 2 章：以 AI 為先的開發](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 進階**: [第 4 章：基礎設施即程式碼](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+<strong>快速參考所有章節</strong>
+- **📚 課程首頁**: [初學者的 AZD](../README.md)
+- **📖 快速入門**: [第 1 章：基礎與快速入門](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI 指令**: [第 2 章：AI 優先開發](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 高階**: [第 4 章：基礎結構即代碼](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## 介紹
 
-這份全面的速查表提供常用的 Azure Developer CLI 指令快速參考，按類別組織並附上實用範例。非常適合在開發、疑難排解及 azd 專案的日常操作中快速查找。
+此完整速查表提供最常用的 Azure Developer CLI 指令的快速參考，按類別組織並配有實用範例。非常適合在使用 azd 項目開發、故障排除和日常操作時快速查找。
 
 ## 學習目標
 
-使用此速查表，您將：
+使用本速查表，您將能：
 - 即時取得必要的 Azure Developer CLI 指令與語法
-- 理解指令如何按功能類別與使用情境組織
-- 參考常見開發與部署情境的實用範例
-- 使用疑難排解指令以快速解決問題
-- 有效找到進階設定與自訂選項
-- 尋找環境管理與多環境工作流程相關指令
+- 了解指令按功能類別與用例組織方式
+- 參考常見開發與部署場景的實用範例
+- 使用疑難排解指令快速解決問題
+- 有效率找到進階配置與客製化選項
+- 定位環境管理與多環境工作流程指令
 
 ## 學習成果
 
-經常參考此速查表，您將能：
-- 自信地執行 azd 指令，而無需翻查完整文件
-- 使用適當的診斷指令快速解決常見問題
-- 有效管理多個環境與部署情境
-- 按需套用進階的 azd 功能與設定選項
-- 使用系統化的指令序列來排解部署問題
-- 透過有效使用 azd 捷徑與選項來優化工作流程
+經常參考此速查表後，您將能夠：
+- 自信執行 azd 指令，不需參考完整文件
+- 快速使用適當的診斷指令解決常見問題
+- 高效管理多個環境和部署場景
+- 按需應用進階 azd 功能與配置選項
+- 使用系統化指令序列排查部署問題
+- 透過有效利用 azd 快捷鍵和選項優化工作流程
 
 ## 入門指令
 
-### 驗證
+### 認證
 ```bash
-# 使用 AZD 登入 Azure
+# 透過 AZD 登入 Azure
 azd auth login
 
-# 使用 Azure CLI 登入（AZD 在底層會使用它）
+# 登入 Azure CLI（AZD 底層使用此工具）
 az login
 
 # 檢查目前帳戶
@@ -56,54 +56,54 @@ az logout
 
 ### 專案初始化
 ```bash
-# 瀏覽可用範本
+# 瀏覽可用的範本
 azd template list
 
-# 從範本初始化
+# 由範本初始化
 azd init --template todo-nodejs-mongo
 azd init --template <template-name>
 
 # 在當前目錄初始化
 azd init .
 
-# 以自訂名稱初始化
+# 使用自定名稱初始化
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
 ## 核心部署指令
 
-### 完整部署工作流程
+### 完整部署流程
 ```bash
-# 部署全部（設定資源與部署）
+# 部署所有內容（配置 + 部署）
 azd up
 
-# 部署時關閉確認提示
+# 禁用確認提示進行部署
 azd up --confirm-with-no-prompt
 
-# 部署到指定環境
+# 部署到特定環境
 azd up --environment production
 
-# 使用自訂參數部署
+# 使用自訂參數進行部署
 azd up --parameter location=westus2
 ```
 
-### 僅基礎設施
+### 僅基礎結構
 ```bash
 # 配置 Azure 資源
 azd provision
 
-# 🧪 預覽基礎架構變更
+# 🧪 預覽基礎設施更改
 azd provision --preview
-# 顯示模擬執行的檢視，指出哪些資源會被建立/修改/刪除
-# 類似 'terraform plan' 或 'bicep what-if' - 安全執行，沒有套用任何變更
+# 顯示將會建立/修改/刪除的資源的模擬執行視圖
+# 類似於 'terraform plan' 或 'bicep what-if' - 安全執行，無更改套用
 ```
 
 ### 僅應用程式
 ```bash
-# 部署應用程式的程式碼
+# 部署應用程式代碼
 azd deploy
 
-# 部署指定的服務
+# 部署指定服務
 azd deploy --service web
 azd deploy --service api
 
@@ -113,12 +113,22 @@ azd deploy --all
 
 ### 建置與打包
 ```bash
-# 建構應用程式
+# 還原（下載）應用程式依賴項
+azd restore
+
+# 還原特定服務
+azd restore --service api
+
+# 建立可部署的檔案但不部署
 azd package
 
-# 建構特定服務
+# 建立特定服務
 azd package --service api
 ```
+
+> **`azd restore`** 會下載您的應用程式相依性（npm、pip、NuGet、Maven 等）。此指令會在 `azd package` 和 `azd deploy` 過程中自動執行，因此您通常不需直接呼叫——手動執行可預先抓取相依性（例如，熱身 CI 快取或後續離線作業）。
+
+> **`azd package`<strong> 建置可部署的工件（容器映像或 zip），</strong>但不會**推送到 Azure。單獨使用時，用於確認建置成功、檢視輸出或產生稍後由其他流程部署的工件。`azd deploy` 會自動打包，因此只在需要產生不部署的工件時執行 `azd package`。
 
 ## 🌍 環境管理
 
@@ -127,7 +137,7 @@ azd package --service api
 # 列出所有環境
 azd env list
 
-# 建立新環境
+# 創建新環境
 azd env new development
 azd env new staging --location westus2
 
@@ -137,41 +147,41 @@ azd env select production
 # 顯示可用環境
 azd env list
 
-# 重新整理環境狀態
+# 更新環境狀態
 azd env refresh
 ```
 
 ### 環境變數
 ```bash
-# 設定環境變數
+# 設置環境變量
 azd env set API_KEY "your-secret-key"
 azd env set DEBUG true
 
-# 取得環境變數
+# 獲取環境變量
 azd env get API_KEY
 
-# 列出所有環境變數
+# 列出所有環境變量
 azd env get-values
 
-# 移除環境變數
+# 刪除環境變量
 azd env unset DEBUG
 ```
 
-## ⚙️ 設定指令
+## ⚙️ 配置指令
 
 ### 全域設定
 ```bash
-# 列出所有設定
+# 列出所有配置
 azd config show
 
-# 設定全域預設值
+# 設定全局預設值
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# 移除設定
+# 移除配置
 azd config unset defaults.location
 
-# 重設所有設定
+# 重設所有配置
 azd config reset
 ```
 
@@ -180,10 +190,10 @@ azd config reset
 # 驗證 azure.yaml
 azd config validate
 
-# 顯示專案資訊
+# 顯示項目信息
 azd show
 
-# 取得服務端點
+# 獲取服務端點
 azd show --output json
 ```
 
@@ -191,25 +201,25 @@ azd show --output json
 
 ### 監控儀表板
 ```bash
-# 打開 Azure 入口網站的監控儀表板
+# 開啟 Azure 入口網站監控儀表板
 azd monitor
 
-# 打開 Application Insights 的即時指標
+# 開啟 Application Insights 即時指標
 azd monitor --live
 
-# 打開 Application Insights 的日誌窗格
+# 開啟 Application Insights 日誌視窗
 azd monitor --logs
 
-# 打開 Application Insights 的概覽
+# 開啟 Application Insights 總覽
 azd monitor --overview
 ```
 
-### 檢視容器日誌
+### 查看容器日誌
 ```bash
-# 透過 Azure CLI 檢視 Container Apps 的日誌
+# 透過 Azure CLI 檢視日誌（用於容器應用程式）
 az containerapp logs show --name <app-name> --resource-group <rg-name>
 
-# 即時追蹤日誌
+# 即時跟蹤日誌
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
 # 從 Azure 入口網站檢視日誌
@@ -218,7 +228,7 @@ azd monitor --logs
 
 ### 日誌分析查詢
 ```bash
-# 透過 Azure 入口網站存取 Log Analytics
+# 通過 Azure 入口網站存取日誌分析
 azd monitor --logs
 
 # 使用 Azure CLI 查詢日誌
@@ -231,10 +241,10 @@ az monitor log-analytics query \
 
 ### 清理
 ```bash
-# 移除所有 Azure 資源
+# 刪除所有 Azure 資源
 azd down
 
-# 強制刪除，毋須確認
+# 強制刪除，無需確認
 azd down --force
 
 # 清除已軟刪除的資源
@@ -246,13 +256,13 @@ azd down --force --purge
 
 ### 更新
 ```bash
-# 檢查 azd 更新
+# 檢查 azd 的更新
 azd version
 
-# 取得目前版本
+# 獲取當前版本
 azd version
 
-# 檢視目前設定
+# 查看當前配置
 azd config show
 ```
 
@@ -260,31 +270,31 @@ azd config show
 
 ### 管線與 CI/CD
 ```bash
-# 設定 GitHub Actions
+# 配置 GitHub Actions
 azd pipeline config
 
-# 設定 Azure DevOps
+# 配置 Azure DevOps
 azd pipeline config --provider azdo
 
-# 顯示管道設定
+# 顯示流水線配置
 azd pipeline show
 ```
 
-### 基礎設施管理
+### 基礎結構管理
 ```bash
-# 生成基礎架構範本
+# 產生基礎建設範本
 azd infra generate
 
-# 🧪 基礎架構預覽與規劃
+# 🧪 基礎建設預覽與規劃
 azd provision --preview
-# 模擬基礎架構佈署但不會實際部署
+# 模擬基礎建設部署，無需實際部署
 # 分析 Bicep/Terraform 範本並顯示：
-# - 將會新增的資源 (綠色 +)
-# - 將會修改的資源 (黃色 ~)
-# - 將會刪除的資源 (紅色 -)
-# 安全執行 - 不會對 Azure 環境作出任何實際更改
+# - 將新增的資源（綠色 +）
+# - 將修改的資源（黃色 ~）
+# - 將刪除的資源（紅色 -）
+# 安全執行 - 不會對 Azure 環境做出實際更改
 
-# 由 azure.yaml 合成基礎架構
+# 從 azure.yaml 合成基礎建設
 azd infra synth
 ```
 
@@ -293,22 +303,28 @@ azd infra synth
 # 顯示項目狀態及端點
 azd show
 
-# 以 JSON 顯示項目的詳細資訊
+# 顯示詳細項目信息以 JSON 格式
 azd show --output json
 
-# 取得服務端點
+# 獲取服務端點
 azd show --output json | jq '.services'
 ```
 
 ## 🤖 AI 與擴充指令
 
-### AZD 擴充套件
+### AZD 擴充
 ```bash
-# 列出所有可用的擴充功能（包括 AI）
+# 列出所有可用擴充功能（包括 AI）
 azd extension list
 
-# 安裝 Foundry agents 擴充功能
+# 安裝 Foundry 代理擴充功能
 azd extension install azure.ai.agents
+
+# 安裝代理技能擴充功能（預覽）
+azd extension install azure.ai.skills
+
+# 安裝 Foundry 連接擴充功能（預覽）
+azd extension install azure.ai.connections
 
 # 安裝微調擴充功能
 azd extension install azure.ai.finetune
@@ -316,46 +332,62 @@ azd extension install azure.ai.finetune
 # 安裝自訂模型擴充功能
 azd extension install azure.ai.models
 
-# 升級所有已安裝的擴充功能
+# 升級所有已安裝擴充功能
 azd extension upgrade --all
 ```
 
-### AI 代理指令
+### AI 代理人指令
 ```bash
-# 由 manifest 檔初始化一個代理專案
+# 從清單初始化代理項目
 azd ai agent init -m <manifest-path-or-uri>
 
-# 針對特定的 Foundry 專案
+# 指定特定的 Foundry 項目
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# 指定代理程式來源目錄
+# 指定代理源目錄
 azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
 
-# 選擇託管目標
+# 選擇主機目標
 azd ai agent init -m agent-manifest.yaml --host containerapp
+
+# 測試已部署的代理（列印延遲和首字節時間）
+azd ai agent invoke
+
+# 顯示實時端點配置
+azd ai agent endpoint show
+
+# 生成評估數據集，然後優化代理
+azd ai agent eval generate
+azd ai agent optimize
+
+# 下載基於代碼的托管代理的已部署源碼
+azd ai agent code download
+
+# 刪除托管代理及其所有版本（--force 可結束所有活動會話）
+azd ai agent delete --force
 ```
 
-### MCP Server（Alpha）
+### MCP 伺服器（Alpha）
 ```bash
-# 為你的專案啟動 MCP 伺服器
+# 為你的項目啟動 MCP 服務器
 azd mcp start
 
-# 管理工具對 MCP 操作的同意
+# 管理 MCP 操作的工具同意權限
 azd copilot consent list
 ```
 
-### 基礎設施生成
+### 基礎結構產生
 ```bash
-# 從你的專案定義產生 IaC 檔案
+# 從您的項目定義生成 IaC 檔案
 azd infra generate
 
-# 根據 azure.yaml 合成基礎架構
+# 從 azure.yaml 合成基礎設施
 azd infra synth
 ```
 
 ---
 
-## 🎯 常用工作流程
+## 🎯 快速工作流程
 
 ### 開發工作流程
 ```bash
@@ -367,16 +399,16 @@ cd my-project
 azd env new dev
 azd up
 
-# 進行更改並重新部署
+# 作出更改並重新部署
 azd deploy
 
-# 打開監控儀表板
+# 開啟監控儀表板
 azd monitor --live
 ```
 
 ### 多環境工作流程
 ```bash
-# 設定環境
+# 設置環境
 azd env new dev
 azd env new staging  
 azd env new production
@@ -385,7 +417,7 @@ azd env new production
 azd env select dev
 azd up
 
-# 測試並推上預備環境
+# 測試並推廣到預備環境
 azd env select staging
 azd up
 
@@ -394,18 +426,18 @@ azd env select production
 azd up
 ```
 
-### 疑難排解工作流程
+### 故障排除工作流程
 ```bash
-# 啟用偵錯模式
+# 啟用除錯模式
 export AZD_DEBUG=true
 
 # 檢查部署狀態
 azd show
 
-# 驗證設定
+# 驗證配置
 azd config show
 
-# 開啟監控儀表板以檢視日誌
+# 打開用於日誌的監控儀表板
 azd monitor --logs
 
 # 檢查資源狀態
@@ -416,29 +448,29 @@ azd show --output json
 
 ### 除錯資訊
 ```bash
-# 啟用偵錯輸出
+# 啟用除錯輸出
 export AZD_DEBUG=true
 azd <command> --debug
 
-# 停用遙測以獲得較乾淨的輸出
+# 停用遙測以獲得更清晰的輸出
 export AZD_DISABLE_TELEMETRY=true
 
-# 檢查目前設定
+# 檢查當前設定
 azd config show
 
-# 檢查驗證狀態
+# 檢查認證狀態
 az account show
 ```
 
 ### 範本除錯
 ```bash
-# 列出可用的範本及其詳細資料
+# 列出可用的模板詳情
 azd template list --output json
 
-# 顯示範本資訊
+# 顯示模板資訊
 azd template show <template-name>
 
-# 在初始化之前驗證範本
+# 初始化前驗證模板
 azd template validate <template-name>
 ```
 
@@ -446,41 +478,41 @@ azd template validate <template-name>
 
 ### 專案結構
 ```bash
-# 顯示目前目錄結構
+# 顯示當前目錄結構
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
-# 前往 azd 專案根目錄
+# 導航至 azd 專案根目錄
 cd $(azd root)
 
-# 顯示 azd 設定目錄
-echo $AZD_CONFIG_DIR  # 通常位於 ~/.azd
+# 顯示 azd 配置目錄
+echo $AZD_CONFIG_DIR  # 通常是 ~/.azd
 ```
 
-## 🎨 輸出格式
+## 🎨 輸出格式化
 
 ### JSON 輸出
 ```bash
-# 取得供腳本使用的 JSON 輸出
+# 獲取用於腳本的 JSON 輸出
 azd show --output json
 azd env list --output json
 azd config show --output json
 
-# 用 jq 解析
+# 使用 jq 解析
 azd show --output json | jq '.services.web.endpoint'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
 ### 表格輸出
 ```bash
-# 以表格格式顯示
+# 格式化為表格
 azd env list --output table
 
-# 檢視已部署的服務
+# 查看已部署服務
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 常見指令組合
+## 🔧 常用指令組合
 
 ### 健康檢查腳本
 ```bash
@@ -496,7 +528,7 @@ azd monitor --logs
 #!/bin/bash
 # 部署前驗證
 azd show
-azd provision --preview  # 在部署前預覽變更
+azd provision --preview  # 部署前預覽更改
 az account show
 ```
 
@@ -524,19 +556,19 @@ done
 
 ## 📝 環境變數
 
-### 常用環境變數
+### 常見環境變數
 ```bash
-# Azure 設定
+# Azure 配置
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# AZD 設定
+# AZD 配置
 export AZD_DEBUG=true
 export AZD_DISABLE_TELEMETRY=true
 export AZD_CONFIG_DIR="~/.azd"
 
-# 應用程式設定
+# 應用程式配置
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
@@ -549,7 +581,7 @@ export LOG_LEVEL="info"
 az account clear
 az login
 
-# 強制重新整理環境
+# 強制刷新環境
 azd env refresh
 
 # 重新部署所有服務
@@ -561,22 +593,22 @@ azd show --output json
 
 ### 復原指令
 ```bash
-# 從失敗的部署復原 - 清理並重新部署
+# 從部署失敗恢復 - 清理並重新部署
 azd down --force --purge
 azd up
 
-# 只重新配置基礎架構
+# 只重新配置基礎設施
 azd provision
 
 # 只重新部署應用程式
 azd deploy
 ```
 
-## 💡 專業提示
+## 💡 專家提示
 
-### 加速工作流程的別名
+### 提升工作流程的別名
 ```bash
-# 加入到你的 .bashrc 或 .zshrc
+# 新增到你的 .bashrc 或 .zshrc 文件
 alias azdup='azd up'
 alias azdm='azd monitor --live'
 alias azds='azd show --output json'
@@ -585,7 +617,7 @@ alias azde='azd env'
 
 ### 功能捷徑
 ```bash
-# 快速切換環境
+# 快速環境切換
 azd-env() {
     azd env select $1 && azd show
 }
@@ -604,49 +636,50 @@ azd-status() {
 }
 ```
 
-## 📖 說明與文件
+## 📖 幫助與文件
 
-### 取得說明
+### 獲取幫助
 ```bash
-# 一般說明
+# 一般幫助
 azd --help
 azd help
 
-# 特定指令的說明
+# 指令專用幫助
 azd up --help
 azd env --help
 azd config --help
 
-# 顯示版本及建置資訊
+# 顯示版本及編譯資訊
 azd version
 azd version --output json
 ```
 
 ### 文件連結
 ```bash
-# 在瀏覽器中開啟說明文件
+# 在瀏覽器中開啟文件
 azd docs
 
-# 顯示範本說明文件
+# 顯示模板文件
 azd template show <template-name> --docs
 ```
 
 ---
 
-<strong>提示</strong>：將此速查表加入書籤，並使用 `Ctrl+F` 快速找到所需指令！
+<strong>提示</strong>：將本速查表加入書籤並使用 `Ctrl+F` 快速找到所需指令！
 
 ---
 
 <strong>導覽</strong>
-- <strong>上一課程</strong>: [預部署檢查](../docs/pre-deployment/preflight-checks.md)
-- <strong>下一課程</strong>: [術語表](glossary.md)
+- <strong>上一課</strong>： [前置檢查](../docs/pre-deployment/preflight-checks.md)
+- <strong>下一課</strong>： [術語表](glossary.md)
 
 ---
 
-> **💡 想在編輯器中獲得 Azure 指令協助嗎？** 安裝 [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) 並使用 `npx skills add microsoft/github-copilot-for-azure` — 37 個技能，涵蓋 AI、Foundry、部署、診斷等。
+> **💡 想在編輯器中獲得 Azure 指令幫助？** 安裝 [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) ，執行 `npx skills add microsoft/github-copilot-for-azure` — 37 個 AI、Foundry、部署、診斷等技能。
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責聲明**: 本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們力求準確，但請注意自動翻譯可能包含錯誤或不準確之處。原始語言的原文應被視為具權威性的來源。對於關鍵資訊，建議聘請專業人工翻譯。我們不就因使用此翻譯而產生的任何誤解或誤譯承擔責任。
+**免責聲明**：
+本文件由 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 翻譯而成。雖然我們致力於確保準確性，但請注意，機器自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要資訊，建議進行專業人工翻譯。我們不對因使用本翻譯而產生的任何誤解或誤釋承擔責任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,25 +1,25 @@
-# 6. 清除基礎設施
+# 6. Teardown Infrastructure
 
-!!! tip "在本模組結束時您將能夠"
+!!! tip "在本模組結束時，您將能夠"
 
-    - [ ] 了解資源清理和成本管理的重要性
-    - [ ] 使用 `azd down` 安全地撤除基礎設施
-    - [ ] 在需要時還原已軟刪除的認知服務
-    - [ ] **Lab 6:** 清理 Azure 資源並確認已移除
+    - [ ] 理解資源清理與成本管理的重要性
+    - [ ] 使用 `azd down` 安全地解除配置基礎設施
+    - [ ] 在需要時復原已軟刪除的 Azure AI Services
+    - [ ] **實驗 6：** 清理 Azure 資源並驗證已移除
 
 ---
 
-## 額外練習
+## Bonus Exercises
 
 在我們拆除專案之前，花幾分鐘進行一些開放式探索。
 
-!!! info "嘗試這些探索提示"
+!!! info "試試這些探索提示"
 
-    **使用 GitHub Copilot 進行實驗：**
+    **嘗試使用 GitHub Copilot：**
     
-    1. 詢問：`還有哪些 AZD 範本我可以嘗試用於多代理情境？`
-    2. 詢問：`如何客製化代理人的指示以用於醫療保健情境？`
-    3. 詢問：`哪些環境變數會控制成本優化？`
+    1. 詢問：`我還可以嘗試哪些 AZD 範本來處理多代理情境？`
+    2. 詢問：`我如何為醫療保健使用案例自訂代理指令？`
+    3. 詢問：`哪些環境變數會控制成本最佳化？`
     
     **探索 Azure 入口網站：**
     
@@ -29,9 +29,9 @@
 
 ---
 
-## 解除佈建基礎設施
+## Deprovision Infra
 
-1. 拆除基礎設施就是這麼簡單：
+1. 拆除基礎架構非常簡單：
       
       ```bash title="" linenums="0"
       azd down --purge
@@ -47,18 +47,18 @@
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (可選) 如果您現在再次執行 `azd up`，您會注意到 gpt-4.1 模型會被部署，因為環境變數已在本機的 `.azure` 資料夾中變更（並已儲存）。 
+1. (可選) 如果您現在再次執行 `azd up`，您會注意到 gpt-4.1 模型會被部署，因為環境變數已在本機 `.azure` 資料夾中被變更（並儲存）。 
 
-      以下是模型部署的 **之前**：
+      以下是模型部署 <strong>之前</strong>：
 
       ![初始](../../../../../translated_images/zh-TW/14-deploy-initial.30e4cf1c29b587bc.webp)
 
-      而這是 **之後**：
+      而這是 <strong>之後</strong>：
       ![更新後](../../../../../translated_images/zh-TW/14-deploy-new.f7f3c355a3cf7299.webp)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免責聲明：
-本文件係使用 AI 翻譯服務 [Co-op Translator]（https://github.com/Azure/co-op-translator）進行翻譯。雖然我們力求準確，但請注意自動翻譯可能包含錯誤或不精確之處。以原始語言撰寫的原文件應視為權威來源。對於關鍵資訊，建議由專業人工翻譯處理。我們不對因使用本翻譯而導致的任何誤解或誤譯負責。
+**免責聲明**：
+此文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們努力追求準確性，但請注意自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應視為權威來源。對於關鍵資訊，建議採用專業人工翻譯。我們不對因使用此翻譯所產生的任何誤解或誤譯承擔責任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
