@@ -1,35 +1,36 @@
-# Dağıtım Kılavuzu - AZD Dağıtımlarında Uzmanlaşma
+# Dağıtım Kılavuzu - AZD Dağıtımlarında Ustalaşma
 
-**Bölüm Gezinme:**
-- **📚 Kurs Anasayfa**: [AZD Yeni Başlayanlar](../../README.md)
-- **📖 Geçerli Bölüm**: Bölüm 4 - Altyapı Kod Olarak (IaC) ve Dağıtım
-- **⬅️ Önceki Bölüm**: [Bölüm 3: Yapılandırma](../chapter-03-configuration/configuration.md)
-- **➡️ Sonraki**: [Kaynakların Sağlanması](provisioning.md)
-- **🚀 Sonraki Bölüm**: [Bölüm 5: Çok Ajanlı Yapay Zeka Çözümleri](../../examples/retail-scenario.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD Yeni Başlayanlar için](../../README.md)
+- **📖 Geçerli Bölüm**: Bölüm 4 - Altyapı olarak Kod & Dağıtım
+- **⬅️ Previous Chapter**: [Bölüm 3: Yapılandırma](../chapter-03-configuration/configuration.md)
+- **➡️ Next**: [Kaynakların Sağlanması](provisioning.md)
+- **🧩 Also in this chapter**: [Kendi Şablonunuzu Oluşturma](custom-templates.md)
+- **🚀 Next Chapter**: [Bölüm 5: Çok Ajanlı Yapay Zeka Çözümleri](../../examples/retail-scenario.md)
 
 ## Giriş
 
-Bu kapsamlı kılavuz, Azure Developer CLI kullanarak uygulamaların dağıtımıyla ilgili bilmeniz gereken her şeyi kapsar; temel tek komutla dağıtımdan özelleştirilmiş kancalar, birden fazla ortam ve CI/CD entegrasyonu ile gelişmiş üretim senaryolarına kadar. Pratik örnekler ve en iyi uygulamalar ile eksiksiz dağıtım yaşam döngüsünü öğrenin.
+Bu kapsamlı kılavuz, Azure Developer CLI kullanarak uygulama dağıtımı hakkında bilmeniz gereken her şeyi kapsar; basit tek komutluk dağıtımlardan özel hook'lar, birden çok ortam ve CI/CD entegrasyonuyla gelişmiş üretim senaryolarına kadar. Pratik örnekler ve en iyi uygulamalarla tam dağıtım yaşam döngüsünde ustalaşın.
 
 ## Öğrenme Hedefleri
 
-Bu kılavuzu tamamlayarak şunları yapabileceksiniz:
-- Azure Developer CLI dağıtım komutları ve iş akışlarında ustalaşmak
-- Provisioning'den izlemeye kadar eksiksiz dağıtım yaşam döngüsünü anlamak
-- Ön ve sonrası dağıtım otomasyonu için özel dağıtım kancaları uygulamak
-- Ortama özgü parametrelerle birden fazla ortam yapılandırmak
-- Blue-green ve canary dağıtımları dahil gelişmiş dağıtım stratejileri ayarlamak
-- azd dağıtımlarını CI/CD boru hatlarına ve DevOps iş akışlarına entegre etmek
+Bu kılavuzu tamamlayarak:
+- Tüm Azure Developer CLI dağıtım komutları ve iş akışlarında ustalaşacaksınız
+- Sağlamadan izlemeye kadar tam dağıtım yaşam döngüsünü anlayacaksınız
+- Ön ve sonrası dağıtım otomasyonu için özel deployment hook'ları uygulayacaksınız
+- Ortama özel parametrelerle birden çok ortam yapılandıracaksınız
+- Blue-green ve canary dağıtımları dahil gelişmiş dağıtım stratejileri kuracaksınız
+- azd dağıtımlarını CI/CD boru hatları ve DevOps iş akışlarıyla entegre edeceksiniz
 
 ## Öğrenme Çıktıları
 
-Tamamlandığında şunları yapabileceksiniz:
-- Tüm azd dağıtım iş akışlarını bağımsız olarak çalıştırmak ve hata ayıklamak
-- Kancalar kullanarak özel dağıtım otomasyonu tasarlamak ve uygulamak
-- Uygun güvenlik ve izleme ile üretime hazır dağıtımlar yapılandırmak
-- Karmaşık çok ortamlı dağıtım senaryolarını yönetmek
-- Dağıtım performansını optimize etmek ve geri alma stratejileri uygulamak
-- azd dağıtımlarını kurumsal DevOps uygulamalarına entegre etmek
+Tamamlandığında, şunları yapabileceksiniz:
+- Tüm azd dağıtım iş akışlarını bağımsız olarak çalıştırıp çözeceksiniz
+- Hook'lar kullanarak özel dağıtım otomasyonu tasarlayıp uygulayacaksınız
+- Uygun güvenlik ve izleme ile üretime hazır dağıtımlar yapılandıracaksınız
+- Karmaşık çok ortamlı dağıtım senaryolarını yöneteceksiniz
+- Dağıtım performansını optimize edip geri alma stratejileri uygulayacaksınız
+- Azd dağıtımlarını kurumsal DevOps uygulamalarına entegre edeceksiniz
 
 ## Dağıtım Genel Bakış
 
@@ -54,20 +55,20 @@ azd up --environment production
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Sadece Altyapı Dağıtımı
+### Yalnızca Altyapı Dağıtımı
 Sadece Azure kaynaklarını güncellemeniz gerektiğinde:
 ```bash
 # Altyapıyı sağla/güncelle
 azd provision
 
-# Değişiklikleri önizlemek için kuru çalıştırma ile sağlama
+# Değişiklikleri önizlemek için kuru çalıştırma ile sağla
 azd provision --preview
 
 # Belirli hizmetleri sağla
 azd provision --service database
 ```
 
-### Sadece Kod Dağıtımı
+### Yalnızca Kod Dağıtımı
 Hızlı uygulama güncellemeleri için:
 ```bash
 # Tüm hizmetleri dağıt
@@ -92,13 +93,13 @@ azd show --output json | jq '.services'
 
 ### ✅ Dağıtım Doğrulama
 
-Herhangi bir dağıtımdan sonra, başarıyı doğrulayın:
+Her dağıtımdan sonra başarıyı doğrulayın:
 
 ```bash
-# Tüm servislerin çalıştığını kontrol et
+# Tüm servislerin çalıştığını kontrol edin
 azd show
 
-# Sağlık uç noktalarını test et
+# Sağlık uç noktalarını test edin
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -110,14 +111,43 @@ azd monitor --logs
 ```
 
 **Başarı Kriterleri:**
-- ✅ Tüm servisler "Çalışıyor" durumunu gösteriyor
+- ✅ Tüm hizmetler "Çalışıyor" durumunu gösteriyor
 - ✅ Sağlık uç noktaları HTTP 200 döndürüyor
 - ✅ Son 5 dakikada hata günlükleri yok
 - ✅ Uygulama test isteklerine yanıt veriyor
 
-## 🏗️ Dağıtım Sürecini Anlama
+## 🏗️ Dağıtım Sürecini Anlamak
 
-### Aşama 1: Ön-Provision Kancaları
+### Hook'lara yeni misiniz? Buradan başlayın
+
+Bir **hook**, azd'nin dağıtım sürecinde belirli bir anda—kaynak sağlamadan önce veya sonra, ve kodu dağıtmadan önce veya sonra—otomatik olarak çalıştırdığı bir komuttur. Bunlar; veritabanı doldurma, migration çalıştırma, varlıkları derleme veya canlı uygulamayı smoke-test etme gibi dağıtımı çevreleyen küçük işleri otomatikleştirmenizi sağlar.
+
+| Hook | Çalışır… | Yaygın kullanım |
+|------|-------|------------|
+| `preprovision` | Kaynaklar oluşturulmadan önce | Önkoşulları doğrulayın, bir kayıt defterine giriş yapın |
+| `postprovision` | Kaynaklar oluşturulduktan sonra | Kaynakları yapılandırın, veritabanını kurun |
+| `predeploy` | Kod dağıtılmadan önce | Ön yüz varlıklarını derleyin, birim testleri çalıştırın |
+| `postdeploy` | Kod yayına alındıktan sonra | Veritabanı migration'larını çalıştırın, uç noktayı smoke-test ile kontrol edin |
+
+Hook'lar `azure.yaml` dosyanızda yer alır. İşte dağıtımdan sonra sadece bir mesaj yazdıran en küçük örnek:
+
+```yaml
+# azure.yaml
+hooks:
+  postdeploy:
+    shell: sh
+    run: echo "Deployment finished! 🎉"
+```
+
+Hepsi bu—bir dahaki `azd up` çalıştırmanızda mesaj otomatik olarak yazdırılır. Bir hook'u tam bir dağıtım olmadan da tek başına çalıştırabilirsiniz; bu, test için harikadır:
+
+```bash
+azd hooks run postdeploy
+```
+
+Aşağıdaki aşamalar her evre için gerçek dünya hook'larını (migration'lar, testler, doğrulama) gösterir.
+
+### Aşama 1: Ön-Provision Hook'ları
 ```yaml
 # azure.yaml
 hooks:
@@ -137,7 +167,7 @@ hooks:
 - Ağ ve güvenliği yapılandırır
 - İzleme ve günlüklemeyi kurar
 
-### Aşama 3: Post-Provision Kancaları
+### Aşama 3: Post-Provision Hook'ları
 ```yaml
 hooks:
   postprovision:
@@ -152,10 +182,10 @@ hooks:
 
 ### Aşama 4: Uygulama Paketleme
 - Uygulama kodunu derler
-- Dağıtım artefaktlarını oluşturur
+- Dağıtım artifact'lerini oluşturur
 - Hedef platform için paketler (konteynerler, ZIP dosyaları vb.)
 
-### Aşama 5: Ön-Deploy Kancaları
+### Aşama 5: Ön-Deploy Hook'ları
 ```yaml
 hooks:
   predeploy:
@@ -169,11 +199,11 @@ hooks:
 ```
 
 ### Aşama 6: Uygulama Dağıtımı
-- Paketlenmiş uygulamaları Azure servislerine dağıtır
+- Paketlenmiş uygulamaları Azure hizmetlerine dağıtır
 - Yapılandırma ayarlarını günceller
-- Servisleri başlatır/yeniden başlatır
+- Hizmetleri başlatır/yeniden başlatır
 
-### Aşama 7: Post-Deploy Kancaları
+### Aşama 7: Post-Deploy Hook'ları
 ```yaml
 hooks:
   postdeploy:
@@ -186,9 +216,57 @@ hooks:
       curl https://${WEB_URL}/health
 ```
 
+### Hook Hatalarını Ele Alma
+
+Varsayılan olarak, **bir hook komutu sıfır dışı bir kod ile sonlanırsa, azd tüm işlemi durdurur.** Bu genellikle istediğiniz davranıştır—başarısız bir migration dağıtımı durdurmalıdır, bozuk bir uygulamayı göndermemelidir. Ancak bu, hook'ların dikkatle yazılması gerektiği anlamına gelir.
+
+**1. Hataları yüksek ve kasıtlı yapın.** Bir hook, son komutu sıfır dışı bir çıkış kodu döndürdüğünde başarısız olur. Kabuk betiklerinde, hook'un ilk başarısız komandoda durması için `set -e` ekleyin; aksi halde sessizce devam edebilir:
+
+```yaml
+hooks:
+  predeploy:
+    shell: sh
+    run: |
+      set -e                      # stop on the first error
+      npm run test:unit           # if tests fail, the deploy halts here
+      npm run db:migrate
+```
+
+**2. Bir hook'un azd'yi durdurmadan başarısız olmasına izin verin.** Kritik olmayan adımlar (isteğe bağlı cache ısıtma, elden çıkarma bilgilendirmesi vb.) için `continueOnError: true` ayarlayın. azd hatayı kaydeder ama işlem devam eder:
+
+```yaml
+hooks:
+  postdeploy:
+    shell: sh
+    continueOnError: true         # a failure here won't fail 'azd up'
+    run: curl -f https://${WEB_URL}/warmup || echo "Warm-up skipped"
+```
+
+**3. Tam çalıştırma öncesi hook'ları izole şekilde test edin.** Bir hook'u debug etmek için `azd up` çalıştırmanız gerekmez—onu tek başına çalıştırın ve hızlıca yineleyin:
+
+```bash
+azd hooks run predeploy          # yalnızca predeploy hook'unu çalıştırır
+azd hooks run postdeploy --service api
+```
+
+**4. İşletim sistemine özgü shell'lere dikkat edin.** `shell: pwsh` kullanan bir hook, onu çalıştıran makinede PowerShell yüklü olmasını gerektirir (CI ajanları dahil). En geniş taşınabilirlik için `shell: sh` kullanın veya hem `windows` hem `posix` varyantları sağlayın:
+
+```yaml
+hooks:
+  postprovision:
+    posix:
+      shell: sh
+      run: ./scripts/setup.sh
+    windows:
+      shell: pwsh
+      run: ./scripts/setup.ps1
+```
+
+> **Hata ayıklama ipucu:** herhangi bir azd komutunu `--debug` ile çalıştırarak tam hook komut satırını ve tam çıktısını görün—bir hook yerelde çalışırken CI'de başarısız olduğunda paha biçilmezdir.
+
 ## 🎛️ Dağıtım Yapılandırması
 
-### Hizmete Özgü Dağıtım Ayarları
+### Hizmete Özel Dağıtım Ayarları
 ```yaml
 # azure.yaml
 services:
@@ -218,7 +296,7 @@ services:
     buildCommand: npm install --production
 ```
 
-### Ortam Bazlı Yapılandırmalar
+### Ortama Özel Yapılandırmalar
 ```bash
 # Geliştirme ortamı
 azd env set NODE_ENV development
@@ -238,9 +316,9 @@ azd env set DEBUG false
 azd env set LOG_LEVEL error
 ```
 
-## 🔧 Gelişmiş Dağıtım Senaryoları
+## 🔧 İleri Seviye Dağıtım Senaryoları
 
-### Çoklu Servis Uygulamaları
+### Çok Hizmetli Uygulamalar
 ```yaml
 # Complex application with multiple services
 services:
@@ -307,7 +385,7 @@ services:
         percentage: 10
 ```
 
-### Aşamalı Dağıtımlar
+### Aşamalı (Staged) Dağıtımlar
 ```bash
 #!/bin/bash
 # deploy-staged.sh
@@ -392,13 +470,13 @@ CMD ["npm", "start"]
 
 ## ⚡ Performans Optimizasyonu
 
-### Hizmete Özgü Dağıtımlar
+### Hizmete Özel Dağıtımlar
 ```bash
-# Daha hızlı yineleme için belirli bir hizmeti dağıtın
+# Daha hızlı yineleme için belirli bir hizmeti dağıt
 azd deploy --service web
 azd deploy --service api
 
-# Tüm hizmetleri dağıtın
+# Tüm hizmetleri dağıt
 azd deploy
 ```
 
@@ -415,7 +493,7 @@ services:
 ### Verimli Kod Dağıtımları
 ```bash
 # Sadece kod değişiklikleri için azd deploy (azd up değil) kullanın
-# Bu altyapı sağlama işlemini atlar ve çok daha hızlıdır
+# Bu altyapı sağlama adımını atlar ve çok daha hızlıdır
 azd deploy
 
 # En hızlı yineleme için belirli bir servisi dağıtın
@@ -450,7 +528,7 @@ services:
       retries: 3
 ```
 
-### Dağıtımdan Sonra Doğrulama
+### Dağıtım Sonrası Doğrulama
 ```bash
 #!/bin/bash
 # scripts/validate-deployment.sh
@@ -485,14 +563,14 @@ echo "✅ Deployment validation completed successfully"
 
 ## 🔐 Güvenlik Hususları
 
-### Sırlar Yönetimi
+### Gizli Bilgilerin Yönetimi
 ```bash
 # Gizli bilgileri güvenli bir şekilde saklayın
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
 azd env set API_KEY "your-api-key" --secret
 
-# azure.yaml dosyasında gizli bilgilere referans verin
+# azure.yaml dosyasında gizli bilgilere başvurun
 ```
 
 ```yaml
@@ -531,13 +609,13 @@ services:
           - external-api-key
 ```
 
-## 🚨 Geri Alma (Rollback) Stratejileri
+## 🚨 Geri Alma Stratejileri
 
 ### Hızlı Geri Alma
 ```bash
 # AZD'nin yerleşik geri alma özelliği yok. Önerilen yaklaşımlar:
 
-# Seçenek 1: Git'ten yeniden dağıtım (önerilen)
+# Seçenek 1: Git'ten yeniden dağıtım (önerilir)
 git revert HEAD  # Sorunlu commit'i geri al
 git push
 azd deploy
@@ -548,7 +626,7 @@ azd deploy
 git checkout main
 ```
 
-### Altyapı Geri Alımı
+### Altyapı Geri Alma
 ```bash
 # Uygulamadan önce altyapı değişikliklerini önizleyin
 azd provision --preview
@@ -558,7 +636,7 @@ git revert HEAD  # Altyapı değişikliklerini geri alın
 azd provision    # Önceki altyapı durumunu uygulayın
 ```
 
-### Veritabanı Göç Geri Alımı
+### Veritabanı Migration Geri Alma
 ```bash
 #!/bin/bash
 # scripts/rollback-database.sh
@@ -579,7 +657,7 @@ echo "Database rollback completed"
 # Mevcut dağıtım durumunu görüntüle
 azd show
 
-# Application Insights ile uygulamayı izle
+# Application Insights ile uygulamayı izleyin
 azd monitor --overview
 
 # Canlı metrikleri görüntüle
@@ -607,16 +685,16 @@ hooks:
 
 ### 1. Ortam Tutarlılığı
 ```bash
-# Tutarlı isimlendirme kullanın
+# Tutarlı adlandırma kullanın
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Ortamlar arasındaki uyumu koruyun
+# Ortam tutarlılığını koruyun
 ./scripts/sync-environments.sh
 ```
 
-### 2. Altyapı Doğrulaması
+### 2. Altyapı Doğrulama
 ```bash
 # Dağıtımdan önce altyapı değişikliklerini önizleyin
 azd provision --preview
@@ -657,9 +735,9 @@ hooks:
       npm run test:smoke
 ```
 
-### 4. Belgelendirme ve Kayıt Tutma
+### 4. Dokümantasyon ve Günlükleme
 ```bash
-# Dağıtım prosedürlerini belgelendirin
+# Dağıtım prosedürlerini belgeleyin
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env get-value AZURE_ENV_NAME)" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
@@ -675,7 +753,7 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 ## 🎯 Uygulamalı Dağıtım Alıştırmaları
 
 ### Alıştırma 1: Artımlı Dağıtım İş Akışı (20 dakika)
-**Hedef**: Tam ve artımlı dağıtımlar arasındaki farkı öğrenmek
+**Hedef**: Tam ve artımlı dağıtımlar arasındaki farkta ustalaşma
 
 ```bash
 # İlk dağıtım
@@ -686,7 +764,7 @@ azd up
 # İlk dağıtım zamanını kaydet
 echo "Full deployment: $(date)" > deployment-log.txt
 
-# Kodda değişiklik yap
+# Kod değişikliği yap
 echo "// Updated $(date)" >> src/api/src/server.js
 
 # Sadece kodu dağıt (hızlı)
@@ -701,15 +779,15 @@ azd down --force --purge
 ```
 
 **Başarı Kriterleri:**
-- [ ] Tam dağıtım 5-15 dakika sürüyor
-- [ ] Sadece kod dağıtımı 2-5 dakika sürüyor
-- [ ] Kod değişiklikleri dağıtılmış uygulamada yansıyor
-- [ ] `azd deploy` sonrası altyapı değişmedi
+- [ ] Tam dağıtım 5-15 dakika sürer
+- [ ] Sadece kod dağıtımı 2-5 dakika sürer
+- [ ] Kod değişiklikleri dağıtılmış uygulamada yansır
+- [ ] `azd deploy` sonrası altyapı değişmez
 
-**Öğrenme Çıktısı**: `azd deploy`, kod değişiklikleri için `azd up`'a göre %50-70 daha hızlıdır
+**Öğrenme Çıktısı**: `azd deploy`, kod değişiklikleri için `azd up`'e göre %50-70 daha hızlıdır
 
-### Alıştırma 2: Özel Dağıtım Kancaları (30 dakika)
-**Hedef**: Ön ve sonrası dağıtım otomasyonunu uygulamak
+### Alıştırma 2: Özel Dağıtım Hook'ları (30 dakika)
+**Hedef**: Ön ve sonrası dağıtım otomasyonunu uygulama
 
 ```bash
 # Dağıtımdan önce doğrulama betiği oluştur
@@ -724,7 +802,7 @@ if ! npm run test:unit; then
     exit 1
 fi
 
-# Commitlenmemiş değişiklikleri kontrol et
+# Commit edilmemiş değişiklikleri kontrol et
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -753,7 +831,7 @@ EOF
 
 chmod +x scripts/post-deploy-test.sh
 
-# azure.yaml dosyasına hook'ları ekle
+# azure.yaml dosyasına hook'lar ekle
 cat >> azure.yaml << 'EOF'
 
 hooks:
@@ -771,13 +849,13 @@ azd deploy
 ```
 
 **Başarı Kriterleri:**
-- [ ] Ön-deploy betiği dağıtımdan önce çalışıyor
-- [ ] Testler başarısız olursa dağıtım iptal ediliyor
-- [ ] Post-deploy smoke testi sağlık durumunu doğruluyor
-- [ ] Kancalar doğru sırada çalışıyor
+- [ ] Ön-deploy betiği dağıtımdan önce çalışır
+- [ ] Testler başarısız olursa dağıtım iptal edilir
+- [ ] Post-deploy smoke testi sağlığı doğrular
+- [ ] Hook'lar doğru sırada çalışır
 
 ### Alıştırma 3: Çok Ortamlı Dağıtım Stratejisi (45 dakika)
-**Hedef**: Aşamalı dağıtım iş akışını uygulamak (dev → staging → production)
+**Hedef**: Aşamalı dağıtım iş akışını uygulama (dev → staging → production)
 
 ```bash
 # Dağıtım betiği oluştur
@@ -788,7 +866,7 @@ set -e
 echo "🚀 Staged Deployment Workflow"
 echo "=============================="
 
-# Adım 1: geliştirme ortamına dağıt
+# Adım 1: Geliştirme ortamına dağıt
 echo "
 🛠️ Step 1: Deploying to development..."
 azd env select dev
@@ -797,7 +875,7 @@ azd up --no-prompt
 echo "Running dev tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# Adım 2: hazırlık ortamına dağıt
+# Adım 2: Hazırlık ortamına dağıt
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
@@ -806,7 +884,7 @@ azd up --no-prompt
 echo "Running staging tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# Adım 3: üretim için manuel onay
+# Adım 3: Üretim için manuel onay
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -839,14 +917,14 @@ azd env new production
 ```
 
 **Başarı Kriterleri:**
-- [ ] Dev ortamı başarıyla dağıtıldı
-- [ ] Staging ortamı başarıyla dağıtıldı
-- [ ] Production için manuel onay gerekiyor
+- [ ] Dev ortamı başarılı şekilde dağıtılır
+- [ ] Staging ortamı başarılı şekilde dağıtılır
+- [ ] Production için manuel onay gerekli
 - [ ] Tüm ortamlarda çalışan sağlık kontrolleri var
-- [ ] Gerekirse geri alabilme
+- [ ] Gerekirse geri alma yapılabiliyor
 
 ### Alıştırma 4: Geri Alma Stratejisi (25 dakika)
-**Hedef**: Git kullanarak dağıtım geri almasını uygulamak ve test etmek
+**Hedef**: Git kullanarak dağıtım geri almayı uygulama ve test etme
 
 ```bash
 # v1'i dağıt
@@ -857,20 +935,20 @@ azd up
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# Geri uyumsuz değişiklik içeren v2'yi dağıt
+# geri uyumluluğu bozan değişiklikle v2'yi dağıt
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
 azd deploy
 
-# Hata tespit et ve geri al
+# Başarısızlığı tespit et ve geri al
 if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
     echo "❌ v2 deployment failed! Rolling back..."
     
     # git kullanarak geri al
     git revert HEAD --no-edit
     
-    # Ortamı geri al
+    # Ortamı geri döndür
     azd env set APP_VERSION "1.0.0"
     
     # v1'i yeniden dağıt
@@ -883,10 +961,10 @@ fi
 **Başarı Kriterleri:**
 - [ ] Dağıtım hatalarını tespit edebiliyor
 - [ ] Geri alma betiği otomatik olarak çalışıyor
-- [ ] Uygulama çalışır duruma geri dönüyor
-- [ ] Geri alma sonrası sağlık kontrolleri geçiyor
+- [ ] Uygulama çalışır durumuna geri dönüyor
+- [ ] Geri alma sonrası sağlık kontrolleri başarılı
 
-## 📊 Dağıtım Metriklerini İzleme
+## 📊 Dağıtım Metrikleri Takibi
 
 ### Dağıtım Performansınızı İzleyin
 
@@ -944,5 +1022,5 @@ awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Feragatname**:
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Orijinal belge, ana dilindeki sürümü yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi tavsiye edilir. Bu çevirinin kullanımından kaynaklanan herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

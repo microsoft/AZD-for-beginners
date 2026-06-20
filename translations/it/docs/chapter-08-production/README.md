@@ -1,62 +1,64 @@
-# Capitolo 8: Produzione e pattern aziendali
+# Capitolo 8: Modelli di Produzione e Aziendali
 
-**📚 Corso**: [AZD Per Principianti](../../README.md) | **⏱️ Durata**: 2-3 ore | **⭐ Complessità**: Avanzato
+**📚 Corso**: [AZD per Principianti](../../README.md) | **⏱️ Durata**: 2-3 ore | **⭐ Complessità**: Avanzato
 
 ---
 
 ## Panoramica
 
-Questo capitolo tratta pattern di deployment pronti per l'azienda, hardening della sicurezza, monitoraggio e ottimizzazione dei costi per carichi di lavoro AI in produzione.
+Questo capitolo copre modelli di deployment pronti per l'uso aziendale, hardening della sicurezza, monitoraggio e ottimizzazione dei costi per carichi di lavoro AI in produzione.
 
-> Validato con `azd 1.23.12` a marzo 2026.
+> Validato con `azd 1.25.6` a giugno 2026.
 
 ## Obiettivi di apprendimento
 
 Completando questo capitolo, sarai in grado di:
-- Distribuire applicazioni resilienti multi-regione
-- Implementare pattern di sicurezza aziendale
+- Distribuire applicazioni resilienti su più regioni
+- Implementare modelli di sicurezza aziendale
 - Configurare un monitoraggio completo
 - Ottimizzare i costi su larga scala
-- Configurare pipeline CI/CD con AZD
+- Impostare pipeline CI/CD con AZD
 
 ---
 
 ## 📚 Lezioni
 
-| # | Lezione | Descrizione | Tempo |
+| # | Lezione | Descrizione | Durata |
 |---|--------|-------------|------|
-| 1 | [Pratiche AI di produzione](production-ai-practices.md) | Pattern di deployment aziendale | 90 min |
+| 1 | [Pratiche AI per la Produzione](production-ai-practices.md) | Modelli di deployment aziendali | 90 min |
 
 ---
 
 ## 🚀 Checklist di produzione
 
-- [ ] Distribuzione multi-regione per resilienza
+- [ ] Distribuzione multi-regione per la resilienza
 - [ ] Identità gestita per l'autenticazione (senza chiavi)
 - [ ] Application Insights per il monitoraggio
-- [ ] Budget dei costi e avvisi configurati
-- [ ] Scansione della sicurezza abilitata
-- [ ] Integrazione della pipeline CI/CD
+- [ ] Budget e avvisi sui costi configurati
+- [ ] Scansione di sicurezza abilitata
+- [ ] Integrazione pipeline CI/CD
 - [ ] Piano di disaster recovery
 
 ---
 
-## 🏗️ Pattern architetturali
+## 🏗️ Modelli di Architettura
 
-### Pattern 1: Microservizi AI
+### Modello 1: Microservizi AI
 
 ```mermaid
 graph LR
     Gateway[Gateway API] --> AI[Servizio AI] --> Models[Modelli Microsoft Foundry]
-    Gateway --> Auth[Servizio di autenticazione]
-    AI --> Data[Archivio dati]
+    Gateway --> Auth[Servizio di Autenticazione]
+    AI --> Data[Archivio Dati]
 ```
-### Pattern 2: AI basata su eventi
+
+### Modello 2: AI guidata da eventi
 
 ```mermaid
 graph LR
-    EventGrid[Griglia di eventi] --> Functions[Funzioni] --> Pipeline[Pipeline di IA]
+    EventGrid[Griglia eventi] --> Functions[Funzioni] --> Pipeline[Pipeline IA]
 ```
+
 ---
 
 ## 🔐 Migliori pratiche di sicurezza
@@ -80,11 +82,11 @@ properties: {
 
 ## 💰 Ottimizzazione dei costi
 
-| Strategia | Risparmi |
+| Strategia | Risparmio |
 |----------|---------|
 | Scalare a zero (Container Apps) | 60-80% |
-| Usare livelli di consumo per sviluppo | 50-70% |
-| Ridimensionamento pianificato | 30-50% |
+| Usare tier a consumo per lo sviluppo | 50-70% |
+| Scaling programmato | 30-50% |
 | Capacità riservata | 20-40% |
 
 ```bash
@@ -101,7 +103,7 @@ az consumption budget create \
 ## 📊 Configurazione del monitoraggio
 
 ```bash
-# Streaming dei log
+# Visualizza i log in streaming
 azd monitor --logs
 
 # Controlla Application Insights
@@ -118,7 +120,7 @@ az monitor metrics list --resource <resource-id>
 | Direzione | Capitolo |
 |-----------|---------|
 | **Precedente** | [Capitolo 7: Risoluzione dei problemi](../chapter-07-troubleshooting/README.md) |
-| **Corso completo** | [Home del corso](../../README.md) |
+| **Corso completato** | [Home del corso](../../README.md) |
 
 ---
 
@@ -132,6 +134,6 @@ az monitor metrics list --resource <resource-id>
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Dichiarazione di non responsabilità**:
-Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Pur impegnandoci per l'accuratezza, si segnala che le traduzioni automatizzate possono contenere errori o inesattezze. Il documento originale nella sua lingua madre dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale eseguita da un traduttore umano. Non siamo responsabili per eventuali malintesi o interpretazioni errate derivanti dall'uso di questa traduzione.
+**Disclaimer**:
+Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire la precisione, si prega di notare che le traduzioni automatizzate possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa deve essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un essere umano. Non siamo responsabili per eventuali malintesi o interpretazioni errate derivanti dall’uso di questa traduzione.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

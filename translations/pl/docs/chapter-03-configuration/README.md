@@ -1,18 +1,18 @@
 # Rozdział 3: Konfiguracja i uwierzytelnianie
 
-**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 45-60 minut | **⭐ Poziom trudności**: Średniozaawansowany
+**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 45-60 minut | **⭐ Poziom**: Średniozaawansowany
 
 ---
 
 ## Przegląd
 
-Ten rozdział obejmuje konfigurację środowiska, wzorce uwierzytelniania oraz najlepsze praktyki bezpieczeństwa dla wdrożeń Azure Developer CLI.
+Ten rozdział omawia konfigurację środowiska, wzorce uwierzytelniania oraz najlepsze praktyki bezpieczeństwa dla wdrożeń Azure Developer CLI.
 
-> Zweryfikowano na `azd 1.23.12` w marcu 2026.
+> Weryfikowano z `azd 1.25.6` w czerwcu 2026.
 
 ## Cele nauki
 
-Po ukończeniu tego rozdziału będziesz potrafić:
+Po ukończeniu tego rozdziału będziesz potrafił:
 - Opanować hierarchię konfiguracji AZD
 - Zarządzać wieloma środowiskami (dev, staging, prod)
 - Wdrażać bezpieczne uwierzytelnianie za pomocą zarządzanych tożsamości
@@ -24,8 +24,8 @@ Po ukończeniu tego rozdziału będziesz potrafić:
 
 | # | Lekcja | Opis | Czas |
 |---|--------|-------------|------|
-| 1 | [Przewodnik po konfiguracji](configuration.md) | Ustawianie i zarządzanie środowiskiem | 30 min |
-| 2 | [Uwierzytelnianie i bezpieczeństwo](authsecurity.md) | Zarządzane tożsamości i wzorce RBAC | 30 min |
+| 1 | [Przewodnik po konfiguracji](configuration.md) | Ustawienia i zarządzanie środowiskiem | 30 min |
+| 2 | [Uwierzytelnianie i bezpieczeństwo](authsecurity.md) | Wzorce zarządzanej tożsamości i RBAC | 30 min |
 
 ---
 
@@ -44,7 +44,7 @@ azd env select prod
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Wyświetl konfigurację
+# Zobacz konfigurację
 azd env get-values
 ```
 
@@ -52,19 +52,19 @@ azd env get-values
 
 ## 🔧 Hierarchia konfiguracji
 
-AZD stosuje ustawienia w następującej kolejności (późniejsze nadpisuje wcześniejsze):
+AZD stosuje ustawienia w kolejności (późniejsze nadpisują wcześniejsze):
 
 1. **Wartości domyślne** (wbudowane w szablony)
 2. **azure.yaml** (konfiguracja projektu)
 3. **Zmienne środowiskowe** (`azd env set`)
-4. **Przełączniki wiersza poleceń** (`--location eastus`)
+4. **Flagi wiersza poleceń** (`--location eastus`)
 
 ---
 
 ## 🔐 Najlepsze praktyki bezpieczeństwa
 
 ```bash
-# Użyj zarządzanej tożsamości (zalecane)
+# Użyj tożsamości zarządzanej (zalecane)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
 # Sprawdź status uwierzytelniania AZD
@@ -73,7 +73,7 @@ azd auth status
 # Opcjonalnie: zweryfikuj kontekst Azure CLI, jeśli planujesz uruchamiać polecenia az
 az account show
 
-# Ponownie się uwierzytelnij w razie potrzeby
+# Ponownie się uwierzytelnij, jeśli to konieczne
 azd auth login
 
 # Opcjonalnie: odśwież uwierzytelnianie Azure CLI dla poleceń az
@@ -99,6 +99,6 @@ az login
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Zastrzeżenie**:  
-Niniejszy dokument został przetłumaczony za pomocą automatycznej usługi tłumaczeniowej AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mimo że dążymy do dokładności, prosimy mieć na uwadze, że tłumaczenia automatyczne mogą zawierać błędy lub nieścisłości. Oryginalny dokument w języku źródłowym powinien być traktowany jako wiarygodne źródło. W przypadku informacji krytycznych zaleca się profesjonalne tłumaczenie wykonane przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+**Zastrzeżenie**:
+Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Choć dążymy do dokładności, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub niedokładności. Oryginalny dokument w jego języku źródłowym należy uznawać za autorytatywne źródło. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

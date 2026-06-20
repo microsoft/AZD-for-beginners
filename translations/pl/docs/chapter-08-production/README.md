@@ -1,49 +1,49 @@
-# Rozdział 8: Wzorce produkcyjne i korporacyjne
+# Chapter 8: Production & Enterprise Patterns
 
-**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 2-3 godziny | **⭐ Poziom trudności**: Zaawansowany
+**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 2-3 godziny | **⭐ Complexity**: Zaawansowany
 
 ---
 
-## Przegląd
+## Overview
 
-Ten rozdział omawia wzorce wdrożeń gotowych do zastosowań korporacyjnych, zabezpieczanie, monitorowanie oraz optymalizację kosztów dla produkcyjnych obciążeń AI.
+Ten rozdział obejmuje wzorce wdrożeń gotowych do zastosowań korporacyjnych, zabezpieczenia, monitorowanie oraz optymalizację kosztów dla produkcyjnych obciążeń AI.
 
-> Zweryfikowano za pomocą `azd 1.23.12` w marcu 2026.
+> Zatwierdzono dla `azd 1.25.6` w czerwcu 2026.
 
-## Cele nauki
+## Learning Objectives
 
-Po ukończeniu tego rozdziału będziesz potrafił:
-- Wdrażać odporne aplikacje wieloregionowe
-- Implementować wzorce zabezpieczeń korporacyjnych
-- Konfigurować wszechstronne monitorowanie
+Po ukończeniu tego rozdziału będziesz potrafić:
+- Wdrażać aplikacje odporne na awarie w wielu regionach
+- Wdrażać wzorce bezpieczeństwa korporacyjnego
+- Konfigurować kompleksowe monitorowanie
 - Optymalizować koszty na dużą skalę
-- Ustawiać potoki CI/CD za pomocą AZD
+- Konfigurować pipeline’y CI/CD z AZD
 
 ---
 
-## 📚 Lekcje
+## 📚 Lessons
 
 | # | Lekcja | Opis | Czas |
 |---|--------|-------------|------|
-| 1 | [Praktyki produkcyjne AI](production-ai-practices.md) | Wzorce wdrożeń korporacyjnych | 90 min |
+| 1 | [Production AI Practices](production-ai-practices.md) | Wzorce wdrożeń korporacyjnych | 90 min |
 
 ---
 
-## 🚀 Lista kontrolna produkcji
+## 🚀 Production Checklist
 
-- [ ] Wdrożenie wieloregionowe dla odporności
-- [ ] Zarządzana tożsamość do uwierzytelniania (bez kluczy)
+- [ ] Wdrażanie wieloregionalne dla odporności
+- [ ] Managed identity do uwierzytelniania (bez kluczy)
 - [ ] Application Insights do monitorowania
-- [ ] Skonfigurowane budżety i alerty kosztów
+- [ ] Budżety kosztów i alerty skonfigurowane
 - [ ] Włączone skanowanie bezpieczeństwa
-- [ ] Integracja potoku CI/CD
+- [ ] Integracja pipeline’u CI/CD
 - [ ] Plan odzyskiwania po awarii
 
 ---
 
-## 🏗️ Wzorce architektoniczne
+## 🏗️ Architecture Patterns
 
-### Wzorzec 1: Microservices AI
+### Wzorzec 1: Mikroserwisy AI
 
 ```mermaid
 graph LR
@@ -51,15 +51,17 @@ graph LR
     Gateway --> Auth[Usługa Uwierzytelniania]
     AI --> Data[Magazyn Danych]
 ```
-### Wzorzec 2: AI zdarzeniowy
+
+### Wzorzec 2: AI sterowane zdarzeniami
 
 ```mermaid
 graph LR
-    EventGrid[Event Grid] --> Functions[Funkcje] --> Pipeline[Potok AI]
+    EventGrid[Siatka Zdarzeń] --> Functions[Funkcje] --> Pipeline[Potok AI]
 ```
+
 ---
 
-## 🔐 Najlepsze praktyki bezpieczeństwa
+## 🔐 Security Best Practices
 
 ```bicep
 // Use managed identity
@@ -78,13 +80,13 @@ properties: {
 
 ---
 
-## 💰 Optymalizacja kosztów
+## 💰 Cost Optimization
 
 | Strategia | Oszczędności |
 |----------|--------------|
 | Skalowanie do zera (Container Apps) | 60-80% |
-| Użycie warstw konsumpcyjnych w dev | 50-70% |
-| Skalowanie zaplanowane | 30-50% |
+| Użycie poziomów konsumpcyjnych dla środowisk deweloperskich | 50-70% |
+| Skalowanie według harmonogramu | 30-50% |
 | Zarezerwowana pojemność | 20-40% |
 
 ```bash
@@ -98,10 +100,10 @@ az consumption budget create \
 
 ---
 
-## 📊 Konfiguracja monitorowania
+## 📊 Monitoring Setup
 
 ```bash
-# Strumieniuj logi
+# Transmituj logi
 azd monitor --logs
 
 # Sprawdź Application Insights
@@ -113,25 +115,25 @@ az monitor metrics list --resource <resource-id>
 
 ---
 
-## 🔗 Nawigacja
+## 🔗 Navigation
 
 | Kierunek | Rozdział |
 |-----------|---------|
-| **Poprzedni** | [Rozdział 7: Rozwiązywanie problemów](../chapter-07-troubleshooting/README.md) |
-| **Koniec kursu** | [Strona główna kursu](../../README.md) |
+| **Poprzedni** | [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/README.md) |
+| **Koniec kursu** | [Course Home](../../README.md) |
 
 ---
 
-## 📖 Powiązane zasoby
+## 📖 Related Resources
 
-- [Przewodnik agentów AI](../chapter-02-ai-development/agents.md)
+- [AI Agents Guide](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Rozwiązania wieloagentowe](../chapter-05-multi-agent/README.md)
-- [Przykład mikroserwisów](../../examples/microservices/README.md)
+- [Multi-Agent Solutions](../chapter-05-multi-agent/README.md)
+- [Microservices Example](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Zastrzeżenie**:  
-Dokument ten został przetłumaczony przy użyciu usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dążymy do jak największej dokładności, prosimy mieć na uwadze, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w języku źródłowym powinien być uważany za źródło autorytatywne. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonane przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+**Zastrzeżenie**:
+Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Choć dążymy do dokładności, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub niedokładności. Oryginalny dokument w jego języku źródłowym należy uznawać za autorytatywne źródło. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

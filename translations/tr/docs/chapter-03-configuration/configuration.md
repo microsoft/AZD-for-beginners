@@ -1,61 +1,60 @@
-# Yapılandırma Kılavuzu
+# Bölüm Gezintisi
 
-**Bölüm Gezinme:**
-- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar İçin](../../README.md)
+**📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
 - **📖 Mevcut Bölüm**: Bölüm 3 - Yapılandırma ve Kimlik Doğrulama
 - **⬅️ Önceki**: [İlk Projeniz](first-project.md)
-- **➡️ Sonraki**: [Dağıtım Kılavuzu](../chapter-04-infrastructure/deployment-guide.md)
+- **➡️ Sonraki**: [Dağıtım Rehberi](../chapter-04-infrastructure/deployment-guide.md)
 - **🚀 Sonraki Bölüm**: [Bölüm 4: Kod Olarak Altyapı](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Giriş
 
-Bu kapsamlı kılavuz, Azure Developer CLI'nin en iyi geliştirme ve dağıtım iş akışları için yapılandırılmasına dair tüm yönleri kapsar. Yapılandırma hiyerarşisini, ortam yönetimini, kimlik doğrulama yöntemlerini ve verimli ve güvenli Azure dağıtımlarını mümkün kılan gelişmiş yapılandırma desenlerini öğreneceksiniz.
+Bu kapsamlı rehber, Azure Developer CLI'yi en uygun geliştirme ve dağıtım iş akışları için yapılandırmanın tüm yönlerini kapsar. Yapılandırma hiyerarşisini, ortam yönetimini, kimlik doğrulama yöntemlerini ve güvenli Azure dağıtımlarını sağlayan gelişmiş yapılandırma desenlerini öğreneceksiniz.
 
 ## Öğrenme Hedefleri
 
-Bu dersin sonunda şunları yapabileceksiniz:
-- azd yapılandırma hiyerarşisinde uzmanlaşmak ve ayarların nasıl önceliklendirildiğini anlamak
-- Global ve proje-özgü ayarları etkili şekilde yapılandırmak
-- Farklı yapılandırmalara sahip birden çok ortamı yönetmek
-- Güvenli kimlik doğrulama ve yetkilendirme desenlerini uygulamak
-- Karmaşık senaryolar için gelişmiş yapılandırma desenlerini anlamak
+Bu dersin sonunda:
+- azd yapılandırma hiyerarşisinde ustalaşacak ve ayarların nasıl önceliklendirildiğini anlayacaksınız
+- genel ve proje-özel ayarları etkili şekilde yapılandıracaksınız
+- farklı yapılandırmalara sahip birden çok ortamı yöneteceksiniz
+- güvenli kimlik doğrulama ve yetkilendirme desenlerini uygulayacaksınız
+- karmaşık senaryolar için gelişmiş yapılandırma desenlerini anlayacaksınız
 
 ## Öğrenme Çıktıları
 
-Bu dersi tamamladıktan sonra şunları yapabileceksiniz:
-- azd'yi optimal geliştirme iş akışları için yapılandırmak
-- Birden çok dağıtım ortamını kurmak ve yönetmek
-- Güvenli yapılandırma yönetimi uygulamalarını hayata geçirmek
-- Yapılandırmayla ilgili sorunları gidermek
-- azd davranışını belirli kurumsal gereksinimler için özelleştirmek
+Bu dersi tamamladıktan sonra, şunları yapabileceksiniz:
+- azd'yi en iyi geliştirme iş akışları için yapılandırmak
+- birden çok dağıtım ortamı kurup yönetmek
+- güvenli yapılandırma yönetimi uygulamaları uygulamak
+- yapılandırma ile ilgili sorunları gidermek
+- belirli kuruluş gereksinimleri için azd davranışını özelleştirmek
 
-Bu kapsamlı kılavuz, Azure Developer CLI'nin en iyi geliştirme ve dağıtım iş akışları için yapılandırılmasına dair tüm yönleri kapsar.
+Bu kapsamlı rehber, Azure Developer CLI'yi en uygun geliştirme ve dağıtım iş akışları için yapılandırmanın tüm yönlerini kapsar.
 
-## azd Projesinde Yapay Zeka Ajanlarını Anlamak
+## Bir azd Projesinde Yapay Zeka Ajanlarını Anlamak
 
-Eğer yapay zeka ajanlarına yeniyseniz, bunları azd dünyası içinde düşünmenin basit bir yolu şöyle.
+Eğer AI ajanlarına yeniseniz, azd dünyasında onları düşünmenin basit bir yolu şu şekildedir.
 
 ### Ajan Nedir?
 
-Bir ajan, bir isteği alabilen, üzerinde akıl yürütebilen ve genellikle bir yapay zeka modelini çağırarak, veri arayarak veya diğer servisleri tetikleyerek eylem gerçekleştiren bir yazılım parçasıdır. Bir azd projesinde, bir ajan web ön yüzünüz veya API arka ucunuz ile birlikte başka bir **hizmet** olarak yer alır.
+Bir ajan, bir isteği alabilen, üzerinde akıl yürütebilen ve genellikle bir AI modeli çağırarak, veri arayarak veya diğer hizmetleri çağırarak eylem gerçekleştiren bir yazılım parçasıdır. Bir azd projesinde, bir ajan web ön yüzünüzün veya API arka ucunuzun yanında başka bir **servis**'tir.
 
-### Ajanlar azd Proje Yapısına Nasıl Uyum Sağlar
+### Ajanlar azd Proje Yapısına Nasıl Uyuyor
 
-Bir azd projesi üç katmandan oluşur: **infrastructure**, **code**, ve **configuration**. Ajanlar, diğer hizmetlerin yaptığı şekilde bu katmanlara takılır:
+Bir azd projesi üç katmandan oluşur: **altyapı**, **kod** ve **yapılandırma**. Ajanlar bu katmanlara diğer servislerin yaptığı şekilde entegre olur:
 
 | Katman | Geleneksel Bir Uygulama İçin Ne Yapar | Bir Ajan İçin Ne Yapar |
 |-------|-------------------------------------|---------------------------|
-| **Infrastructure** (`infra/`) | Bir web uygulaması ve veritabanı sağlar | Bir yapay zeka model uç noktası, arama dizini veya ajan barındırıcısı sağlar |
-| **Code** (`src/`) | Ön yüz ve API kaynak kodunuzu içerir | Ajan mantığını ve prompt tanımlarını içerir |
-| **Configuration** (`azure.yaml`) | Hizmetlerinizi ve barındırma hedeflerini listeler | Ajanınızı bir hizmet olarak listeler; koduna ve barındırma ortamına işaret eder |
+| **Altyapı** (`infra/`) | Bir web uygulaması ve veritabanı sağlar | Bir AI model uç noktası, arama dizini veya ajan barındırıcısı sağlar |
+| **Kod** (`src/`) | Ön yüzünüzün ve API kaynak kodunuzu içerir | Ajan mantığınızı ve istem/komut tanımlarınızı içerir |
+| **Yapılandırma** (`azure.yaml`) | Servislerinizi ve barındırma hedeflerini listeler | Ajanınızı bir servis olarak listeler, koduna ve barındırma hedefine işaret eder |
 
 ### `azure.yaml`'in Rolü
 
-Şu an için sözdizimini ezberlemenize gerek yok. Kavramsal olarak, `azure.yaml` azd'ye şunu söyleyen dosyadır: *"İşte uygulamamı oluşturan hizmetler ve bunların kodlarını bulacağınız yer."*
+Sözdizimini şu an ezberlemeniz gerekmez. Kavramsal olarak, `azure.yaml` azd'ye şunu söylediğiniz dosyadır: *"İşte uygulamamı oluşturan servisler ve işte kodlarını bulabileceğiniz yerler."*
 
-Projeniz bir yapay zeka ajanı içerdiğinde, `azure.yaml` sadece o ajanı hizmetlerden biri olarak listeler. azd ardından doğru altyapıyı (örneğin Microsoft Foundry Models uç noktası veya ajanı barındırmak için bir Container App gibi) sağlamayı ve ajan kodunuzu dağıtmayı bilir—tıpkı bir web uygulaması veya API için yaptığı gibi.
+Projeniz bir AI ajanı içerdiğinde, `azure.yaml` basitçe bu ajanı servislerden biri olarak listeler. azd, doğru altyapıyı (ör. bir Microsoft Foundry Models uç noktası veya ajanı barındırmak için bir Container App gibi) sağlamayı ve ajan kodunuzu dağıtmayı bilir—tıpkı bir web uygulaması veya API için yapacağı gibi.
 
-Bu, temelde öğrenilecek yeni bir şey olmadığı anlamına gelir. azd'nin bir web servisini nasıl yönettiğini anlıyorsanız, ajanın nasıl yönetildiğini de zaten anlamışsınızdır.
+Bu, öğrenilecek temelde yeni bir şey olmadığı anlamına gelir. azd'nin bir web servisini nasıl yönettiğini anlıyorsanız, bir ajanın nasıl yönetildiğini de zaten anlamışsınızdır.
 
 ## Yapılandırma Hiyerarşisi
 
@@ -66,7 +65,7 @@ azd hiyerarşik bir yapılandırma sistemi kullanır:
 4. **Küresel kullanıcı yapılandırması** (`~/.azd/config.json`)
 5. **Varsayılan değerler** (en düşük öncelik)
 
-## Küresel Yapılandırma
+## Genel Yapılandırma
 
 ### Küresel Varsayılanları Ayarlama
 ```bash
@@ -76,7 +75,7 @@ azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 # Varsayılan konumu ayarla
 azd config set defaults.location "eastus2"
 
-# Varsayılan kaynak grubu adlandırma kuralını ayarla
+# Varsayılan kaynak grubu isimlendirme kuralını ayarla
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
 # Tüm genel yapılandırmayı görüntüle
@@ -94,10 +93,10 @@ azd config set telemetry.enabled false             # Telemetriyi devre dışı b
 azd config set output.format json                  # Çıktı formatını ayarla
 
 # Güvenlik ayarları
-azd config set auth.useAzureCliCredential true     # Kimlik doğrulama için Azure CLI'yi kullan
+azd config set auth.useAzureCliCredential true     # Kimlik doğrulama için Azure CLI kullan
 azd config set tls.insecure false                  # TLS doğrulamasını zorunlu kıl
 
-# Performans ayarlamaları
+# Performans ayarları
 azd config set provision.parallelism 5             # Kaynakların paralel oluşturulması
 azd config set deploy.timeout 30m                  # Dağıtım zaman aşımı
 ```
@@ -181,7 +180,7 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Hizmet Yapılandırma Seçenekleri
+### Servis Yapılandırma Seçenekleri
 
 #### Barındırma Türleri
 ```yaml
@@ -202,7 +201,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Dile Özgü Ayarlar
+#### Dil-Özel Ayarlar
 ```yaml
 services:
   node-app:
@@ -241,7 +240,7 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
 ### Ortam Yapılandırması
-Her ortamın `.azure/<env-name>/config.json` içinde kendi yapılandırması vardır:
+Her ortamın kendi yapılandırması `.azure/<env-name>/config.json` içindedir:
 
 ```json
 {
@@ -265,7 +264,7 @@ Her ortamın `.azure/<env-name>/config.json` içinde kendi yapılandırması var
 
 ### Ortam Değişkenleri
 ```bash
-# Ortama özgü değişkenleri ayarla
+# Ortam için özel değişkenleri ayarla
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
@@ -287,7 +286,7 @@ azd env get-values | grep DEBUG
 ```
 
 ### Ortam Şablonları
-Tutarlı bir ortam kurulumu için `.azure/env.template` oluşturun:
+Tutarlı ortam kurulumu için `.azure/env.template` oluşturun:
 ```bash
 # Gerekli değişkenler
 AZURE_SUBSCRIPTION_ID=
@@ -303,6 +302,51 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
+### Ortamları Bir Ekip Arasında Paylaşma
+
+Bir projede birden fazla kişi çalıştığında, **hangi öğelerin repo ile taşındığı ve hangi öğelerin yerel kaldığı** konusunda anlaşmanız gerekir. azd her ortamı `.azure/` klasörü altında tutar ve tamamının commit edilmesi gerekmez.
+
+**`.azure/` içinde neler var:**
+
+```
+.azure/
+├── config.json              # which env is currently selected (local)
+└── <env-name>/
+    ├── config.json          # subscription, location, resource IDs
+    └── .env                 # environment variables (may contain secrets!)
+```
+
+**Neyi gitignore etmelisiniz.** azd'nin varsayılan `.gitignore` dosyası zaten `.azure/`'yı hariç tutar. Böyle kalmasına dikkat edin—`.env` dosyaları gizli bilgileri içerebilir ve kaynak kimlikleri bunları oluşturan kişiye özeldir. Her ekip üyesi **kendi** ortamını yerel olarak oluşturur:
+
+```bash
+# Her geliştirici kendi izole ortamını elde etmek için bunu bir kez çalıştırır.
+azd env new dev-alice
+azd up
+```
+
+**Ortamlar arasında geçiş yapma.** Birden çok ortamı yöneten geliştirici, komutları çalıştırmadan önce aktif olanı seçer:
+
+```bash
+azd env list                 # tüm yerel ortamları ve hangisinin varsayılan olduğunu gör
+azd env select staging       # 'staging' ortamını aktif yap
+azd env get-values           # doğru olanı işaret ettiğinden emin ol
+```
+
+**Takım için gizli olmayan varsayılanlar sağlama.** Bir şablon (yukarıdaki `.azure/env.template` gibi) commit edin ki herkes hangi değişkenleri ayarlaması gerektiğini bilsin—ama doldurulmuş değerleri asla commit etmeyin. Yeni ekip üyeleri şablonu kopyalar ve kendi değerlerini doldurur.
+
+**CI/CD'deki Ortamlar.** Pipeline'lar yerel `.azure/` klasörünüzü okumaz. Bunun yerine ortam değerlerini pipeline değişkenleri/gizli değerleri olarak sağlayın ve azd bunları süreç ortamından okur:
+
+```bash
+# CI'de azd bunları .azure/ yerine ortam değişkenlerinden okur.
+export AZURE_ENV_NAME=production
+export AZURE_LOCATION=eastus2
+export AZURE_SUBSCRIPTION_ID=<sub-id>
+azd provision --no-prompt
+azd deploy --no-prompt
+```
+
+> **Kural:** altyapı kodu (`infra/`, `azure.yaml`) Git'te paylaşılır; ortam *durumu ve gizli bilgileri* (`.azure/`) geliştirici başına ve pipeline başına özeldir. `azd pipeline config` pipeline değişkenlerini sizin için otomatik olarak ayarlar.
+
 ## 🔐 Kimlik Doğrulama Yapılandırması
 
 ### Azure CLI Entegrasyonu
@@ -317,8 +361,8 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### Servis Prensibi Kimlik Doğrulama
-CI/CD boru hatları için:
+### Hizmet Prensibi Kimlik Doğrulaması
+CI/CD pipeline'ları için:
 ```bash
 # Ortam değişkenlerini ayarla
 export AZURE_CLIENT_ID="your-client-id"
@@ -333,7 +377,7 @@ azd config set auth.tenantId "your-tenant-id"
 ### Yönetilen Kimlik
 Azure'da barındırılan ortamlar için:
 ```bash
-# Yönetilen kimlikle kimlik doğrulamayı etkinleştir
+# Yönetilen kimlik doğrulamasını etkinleştir
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
@@ -364,7 +408,7 @@ Altyapı parametrelerini `infra/main.parameters.json` içinde yapılandırın:
 ```
 
 ### Terraform Yapılandırması
-Terraform projeleri için `infra/terraform.tfvars` içinde yapılandırın:
+Terraform projeleri için, `infra/terraform.tfvars` içinde yapılandırın:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -417,7 +461,7 @@ services:
 
 ### Özel Kaynak Adlandırma
 ```bash
-# İsimlendirme kurallarını belirleyin
+# Adlandırma kurallarını belirleyin
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
@@ -446,7 +490,7 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Ortama Özgü Yapılandırmalar
+## 🎯 Ortama Özel Yapılandırmalar
 
 ### Geliştirme Ortamı
 ```bash
@@ -457,9 +501,9 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Hazırlık (Staging) Ortamı
+### Hazırlık Ortamı
 ```bash
-# .azure/hazırlık/.env
+# .azure/staging/.env
 DEBUG=false
 LOG_LEVEL=info
 ENABLE_MONITORING=true
@@ -468,7 +512,7 @@ USE_PRODUCTION_APIS=true
 
 ### Üretim Ortamı
 ```bash
-# .azure/production/.env
+# .azure/üretim/.env
 DEBUG=false
 LOG_LEVEL=error
 ENABLE_MONITORING=true
@@ -477,7 +521,7 @@ ENABLE_SECURITY_HEADERS=true
 
 ## 🔍 Yapılandırma Doğrulama
 
-### Yapılandırmayı Doğrula
+### Yapılandırmayı Doğrulama
 ```bash
 # Yapılandırma sözdizimini kontrol et
 azd config validate
@@ -498,13 +542,13 @@ Doğrulama betiklerini `scripts/` içinde oluşturun:
 
 echo "Validating configuration..."
 
-# Gerekli ortam değişkenlerini kontrol et
+# Gerekli ortam değişkenlerini kontrol edin
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# azure.yaml sözdizimini doğrula
+# azure.yaml sözdizimini doğrulayın
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -546,7 +590,7 @@ database:
 ```bash
 # .gitignore
 .azure/*/config.json         # Ortam yapılandırmaları (kaynak kimliklerini içerir)
-.azure/*/.env               # Ortam değişkenleri (gizli bilgileri içerebilir)
+.azure/*/.env               # Ortam değişkenleri (gizli bilgiler içerebilir)
 .env                        # Yerel ortam dosyası
 ```
 
@@ -599,16 +643,16 @@ azd env select production && azd env get-values
 
 **Başarı Kriterleri:**
 - [ ] Üç ortam başarıyla oluşturuldu
-- [ ] Her ortamın benzersiz yapılandırması var
-- [ ] Hatalar olmadan ortamlar arasında geçiş yapabiliyor
-- [ ] `azd env list` tüm üç ortamı gösteriyor
+- [ ] Her ortam benzersiz yapılandırmaya sahip
+- [ ] Ortamlar arasında hatasız geçiş yapılabiliyor
+- [ ] `azd env list` tüm üç ortamı gösterir
 
 ### Alıştırma 2: Gizli Yönetimi (10 dakika)
 
-**Hedef**: Hassas verilerle güvenli yapılandırma uygulaması yapmak
+**Hedef**: Hassas verilerle güvenli yapılandırma uygulamaları yapmak
 
 ```bash
-# Gizli değerleri ayarla (çıktıda gösterilmez)
+# Gizli bilgileri ayarla (çıktıda gösterilmeyecek)
 azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 
@@ -616,7 +660,7 @@ azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# Ortamı görüntüle (gizli bilgiler gizlenmiş olmalıdır)
+# Ortamı görüntüle (gizli bilgiler gizlenmiş olmalı)
 azd env get-values
 
 # Gizli bilgilerin saklandığını doğrula
@@ -624,26 +668,25 @@ azd env get DB_PASSWORD  # Gerçek değeri göstermeli
 ```
 
 **Başarı Kriterleri:**
-- [ ] Gizli değerler terminalde gösterilmeden saklandı
-- [ ] `azd env get-values` gizli değerleri sansürlenmiş gösteriyor
-- [ ] Bireysel `azd env get <SECRET_NAME>` gerçek değeri alıyor
+- [ ] Gizli bilgiler terminalde gösterilmeden saklanır
+- [ ] `azd env get-values` gizlenmiş gizli bilgileri gösterir
+- [ ] Bireysel `azd env get <SECRET_NAME>` gerçek değeri alır
 
 ## Sonraki Adımlar
 
-- [İlk Projeniz](first-project.md) - Yapılandırmayı uygulamada kullanın
-- [Dağıtım Kılavuzu](../chapter-04-infrastructure/deployment-guide.md) - Dağıtım için yapılandırmayı kullanın
-- [Kaynak Sağlama](../chapter-04-infrastructure/provisioning.md) - Üretim hazır yapılandırmalar
+- [İlk Projeniz](first-project.md) - yapılandırmayı pratiğe uygulayın
+- [Dağıtım Rehberi](../chapter-04-infrastructure/deployment-guide.md) - dağıtım için yapılandırmayı kullanın
+- [Kaynakları Sağlama](../chapter-04-infrastructure/provisioning.md) - üretim hazır yapılandırmalar
 
-## Referanslar
+## Kaynaklar
 
-- [azd Yapılandırma Referansı](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [azure.yaml Şeması](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Ortam Değişkenleri](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [azd Configuration Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [Environment Variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**Bölüm Gezinme:**
-- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar İçin](../../README.md)
+**📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
 - **📖 Mevcut Bölüm**: Bölüm 3 - Yapılandırma ve Kimlik Doğrulama
 - **⬅️ Önceki**: [İlk Projeniz](first-project.md)
 - **➡️ Sonraki Bölüm**: [Bölüm 4: Kod Olarak Altyapı](../chapter-04-infrastructure/deployment-guide.md)
@@ -652,6 +695,6 @@ azd env get DB_PASSWORD  # Gerçek değeri göstermeli
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Bu belge AI çeviri servisi [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi ana dilindeki hali yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucunda ortaya çıkan herhangi bir yanlış anlaşılma veya yanlış yorumlamadan sorumlu değiliz.
+**Feragatname**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

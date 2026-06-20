@@ -1,35 +1,35 @@
-# Najlepsze praktyki obsługi AI w produkcji z AZD
+# Najlepsze praktyki dla produkcyjnych obciążeń AI z AZD
 
-**Nawigacja po rozdziałach:**
-- **📚 Strona kursu**: [AZD dla początkujących](../../README.md)
-- **📖 Aktualny rozdział**: Rozdział 8 - Wzorce produkcyjne i korporacyjne
+**Nawigacja po rozdziale:**
+- **📚 Strona główna kursu**: [AZD For Beginners](../../README.md)
+- **📖 Bieżący rozdział**: Rozdział 8 - Wzorce produkcyjne i korporacyjne
 - **⬅️ Poprzedni rozdział**: [Rozdział 7: Rozwiązywanie problemów](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Powiązane również**: [Laboratorium warsztatów AI](ai-workshop-lab.md)
-- **🎯 Kurs ukończony**: [AZD dla początkujących](../../README.md)
+- **⬅️ Również powiązane**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎯 Kurs zakończony**: [AZD For Beginners](../../README.md)
 
 ## Przegląd
 
-Ten przewodnik zawiera kompleksowe najlepsze praktyki dotyczące wdrażania gotowych do produkcji obciążeń AI za pomocą Azure Developer CLI (AZD). Oparte na opiniach społeczności Microsoft Foundry Discord oraz rzeczywistych wdrożeniach klientów, praktyki te rozwiązują najczęstsze wyzwania w systemach AI produkcyjnych.
+Ten przewodnik zawiera kompleksowe najlepsze praktyki dotyczące wdrażania produkcyjnych obciążeń AI przy użyciu Azure Developer CLI (AZD). Oparte na opiniach społeczności Microsoft Foundry Discord i rzeczywistych wdrożeniach klientów, praktyki te adresują najczęstsze wyzwania w produkcyjnych systemach AI.
 
-## Najważniejsze wyzwania
+## Kluczowe wyzwania, które rozwiązujemy
 
-Na podstawie wyników ankiety społeczności deweloperów, oto główne problemy, z jakimi się mierzą:
+Na podstawie wyników ankiety w naszej społeczności, oto najważniejsze wyzwania, z którymi mierzą się deweloperzy:
 
-- **45%** ma trudności z wdrażaniem AI w wielu usługach
-- **38%** ma problemy z zarządzaniem poświadczeniami i sekretami  
-- **35%** uważa za trudne zapewnienie gotowości produkcyjnej i skalowalności
+- **45%** ma trudności z wdrożeniami AI z wieloma usługami
+- **38%** zmaga się z zarządzaniem poświadczeniami i sekretami  
+- **35%** uważa, że gotowość produkcyjna i skalowanie są trudne
 - **32%** potrzebuje lepszych strategii optymalizacji kosztów
-- **29%** wymaga poprawy monitorowania i rozwiązywania problemów
+- **29%** wymaga usprawnionego monitoringu i rozwiązywania problemów
 
 ## Wzorce architektury dla produkcyjnego AI
 
-### Wzorzec 1: Architektura AI oparta na mikroserwisach
+### Wzorzec 1: Architektura AI oparta na mikrousługach
 
-**Kiedy stosować**: Złożone aplikacje AI z wieloma funkcjami
+**Kiedy stosować**: Złożone aplikacje AI z wieloma funkcjonalnościami
 
 ```mermaid
 graph TD
-    Frontend[Frontend internetowy] --- Gateway[Brama API] --- LB[Równoważnik obciążenia]
+    Frontend[Frontend WWW] --- Gateway[Brama API] --- LB[Równoważnik obciążenia]
     Gateway --> Chat[Usługa czatu]
     Gateway --> Image[Usługa obrazów]
     Gateway --> Text[Usługa tekstu]
@@ -37,6 +37,7 @@ graph TD
     Image --> Vision[Wizja komputerowa]
     Text --> DocIntel[Inteligencja dokumentów]
 ```
+
 **Implementacja AZD**:
 
 ```yaml
@@ -60,9 +61,9 @@ services:
     host: containerapp
 ```
 
-### Wzorzec 2: Przetwarzanie AI sterowane zdarzeniami
+### Wzorzec 2: Przetwarzanie AI zdarzeniowe
 
-**Kiedy stosować**: Przetwarzanie wsadowe, analiza dokumentów, asynchroniczne procesy
+**Kiedy stosować**: Przetwarzanie wsadowe, analiza dokumentów, asynchroniczne workflowy
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -111,44 +112,44 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 
 ## Myślenie o zdrowiu agenta AI
 
-Gdy tradycyjna aplikacja sieciowa przestaje działać, objawy są znane: strona się nie ładuje, API zwraca błąd lub wdrożenie kończy się niepowodzeniem. Aplikacje zasilane AI mogą zawodzić w tych samych sposób — ale mogą też zachowywać się nieprawidłowo w subtelniejszy sposób, który nie generuje oczywistych komunikatów o błędach.
+Gdy tradycyjna aplikacja webowa przestaje działać, objawy są znane: strona się nie ładuje, API zwraca błąd lub wdrożenie się nie powiodło. Aplikacje oparte na AI mogą się psuć w tych samych sposób — ale też mogą działać nieprawidłowo w subtelny sposób, który nie generuje oczywistych komunikatów o błędach.
 
-Ta sekcja pomaga stworzyć model mentalny do monitorowania obciążeń AI, by wiedzieć, gdzie szukać problemów, gdy coś jest nie tak.
+Ta sekcja pomaga zbudować mentalny model monitoringu obciążeń AI, dzięki czemu wiesz, gdzie szukać problemów, gdy coś wydaje się nie tak.
 
-### Jak zdrowie agenta różni się od zdrowia tradycyjnej aplikacji
+### Jak zdrowie agenta różni się od tradycyjnego zdrowia aplikacji
 
-Tradycyjna aplikacja albo działa, albo nie. Agent AI może działać na pozór poprawnie, ale generować słabe wyniki. Zdrowie agenta można rozważać na dwóch warstwach:
+Tradycyjna aplikacja albo działa, albo nie. Agent AI może wyglądać na działającego, ale generować słabe wyniki. Myśl o zdrowiu agenta w dwóch warstwach:
 
-| Warstwa | Co obserwować | Gdzie szukać |
-|---------|---------------|--------------|
-| **Zdrowie infrastruktury** | Czy usługa działa? Czy zasoby są przydzielone? Czy endpointy są dostępne? | `azd monitor`, zdrowie zasobów w Azure Portal, logi kontenerów/aplikacji |
-| **Zdrowie zachowania** | Czy agent odpowiada dokładnie? Czy odpowiedzi są na czas? Czy model jest wywoływany prawidłowo? | śledzenia Application Insights, metryki opóźnień wywołań modelu, logi jakości odpowiedzi |
+| Warstwa | Na co zwracać uwagę | Gdzie patrzeć |
+|---------|---------------------|---------------|
+| **Zdrowie infrastruktury** | Czy usługa działa? Czy zasoby są dostępne? Czy punkty końcowe są osiągalne? | `azd monitor`, zdrowie zasobów w Azure Portal, logi kontenera/aplikacji |
+| **Zdrowie zachowania** | Czy agent odpowiada poprawnie? Czy odpowiedzi są na czas? Czy model jest wywoływany prawidłowo? | Ślady Application Insights, metryki opóźnienia wywołań modelu, logi jakości odpowiedzi |
 
-Zdrowie infrastruktury jest znane — to to samo dla każdej aplikacji azd. Zdrowie zachowania to nowa warstwa wprowadzona przez obciążenia AI.
+Zdrowie infrastruktury jest znane — to to samo w każdej aplikacji azd. Zdrowie zachowania to nowa warstwa wnoszona przez obciążenia AI.
 
-### Gdzie szukać, gdy aplikacje AI nie zachowują się zgodnie z oczekiwaniami
+### Gdzie patrzeć, gdy aplikacje AI zachowują się nieoczekiwanie
 
-Jeśli Twoja aplikacja AI nie generuje oczekiwanych rezultatów, oto konceptualna lista kontrolna:
+Jeśli Twoja aplikacja AI nie generuje oczekiwanych wyników, oto koncepcyjna lista kontrolna:
 
-1. **Zacznij od podstaw.** Czy aplikacja działa? Czy może połączyć się z zależnościami? Sprawdź `azd monitor` i zdrowie zasobów, tak jak w przypadku każdej aplikacji.
-2. **Sprawdź połączenie z modelem.** Czy Twoja aplikacja skutecznie wywołuje model AI? Nieudane lub zbyt długie wywołania są najczęstszą przyczyną problemów i pojawią się w logach aplikacji.
-3. **Spójrz, co model otrzymał.** Odpowiedzi AI zależą od danych wejściowych (prompt i ewentualnego pobranego kontekstu). Jeśli wynik jest błędny, zwykle problem jest z wejściem. Sprawdź, czy aplikacja wysyła odpowiednie dane do modelu.
-4. **Przejrzyj opóźnienia odpowiedzi.** Wywołania modeli AI są wolniejsze niż typowe wywołania API. Jeśli aplikacja działa wolno, sprawdź, czy czasy odpowiedzi modelu się wydłużyły — może to oznaczać ograniczenia przepustowości, limity pojemności lub przeciążenie regionu.
-5. **Obserwuj sygnały kosztowe.** Niespodziewane skoki w zużyciu tokenów lub wywołaniach API mogą wskazywać pętlę, błędną konfigurację prompta lub nadmierne ponawianie prób.
+1. **Zacznij od podstaw.** Czy aplikacja działa? Czy może osiągnąć swoje zależności? Sprawdź `azd monitor` i zdrowie zasobów tak samo jak w przypadku każdej aplikacji.
+2. **Sprawdź połączenie z modelem.** Czy aplikacja poprawnie wywołuje model AI? Nieudane lub przeterminowane wywołania modelu są najczęstszą przyczyną problemów z aplikacjami AI i pojawią się w logach aplikacji.
+3. **Przyjrzyj się, co dostał model.** Odpowiedzi AI zależą od danych wejściowych (promptu i ewentualnego kontekstu). Jeśli wynik jest błędny, wejście zwykle też jest błędne. Sprawdź, czy aplikacja wysyła poprawne dane do modelu.
+4. **Przeanalizuj opóźnienia odpowiedzi.** Wywołania modeli AI są wolniejsze niż typowe wywołania API. Jeśli aplikacja działa opornie, sprawdź, czy czas odpowiedzi modelu wzrósł — może to wskazywać na ograniczenia, limity mocy lub zatory regionalne.
+5. **Obserwuj sygnały kosztowe.** Niespodziewane skoki w zużyciu tokenów lub wywołaniach API mogą oznaczać pętlę, błędnie skonfigurowany prompt lub nadmierne ponawianie prób.
 
-Nie musisz od razu opanowywać narzędzi do obserwacji. Kluczowe jest zrozumienie, że aplikacje AI mają dodatkową warstwę zachowania do monitorowania, a wbudowane monitorowanie azd (`azd monitor`) daje punkt startowy do badania obu warstw.
+Nie musisz od razu opanować narzędzi obserwowalności. Kluczowym wnioskiem jest to, że aplikacje AI mają dodatkową warstwę zachowania do monitorowania, a wbudowany monitoring azd (`azd monitor`) daje punkt wyjścia do badania obu warstw.
 
 ---
 
 ## Najlepsze praktyki bezpieczeństwa
 
-### 1. Model bezpieczeństwa Zero-Trust
+### 1. Model bezpieczeństwa zero-trust
 
 **Strategia wdrożenia**:
 - Brak komunikacji między usługami bez uwierzytelnienia
-- Wszystkie wywołania API używają tożsamości zarządzanych
-- Izolacja sieciowa poprzez prywatne endpointy
-- Kontrola dostępu na zasadzie najmniejszych uprawnień
+- Wszystkie wywołania API korzystają z zarządzanych tożsamości
+- Izolacja sieci z prywatnymi punktami końcowymi
+- Kontrola dostępu z zasadą najmniejszych uprawnień
 
 ```bicep
 // Managed Identity for each service
@@ -206,7 +207,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ### 3. Bezpieczeństwo sieci
 
-**Konfiguracja prywatnych endpointów**:
+**Konfiguracja prywatnego punktu końcowego**:
 
 ```bicep
 // Virtual Network for AI services
@@ -266,9 +267,9 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ## Wydajność i skalowanie
 
-### 1. Strategie automatycznego skalowania
+### 1. Strategie autoskalowania
 
-**Automatyczne skalowanie Kontenerowych Aplikacji**:
+**Autoskalowanie kontenerów**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -312,7 +313,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 2. Strategie pamięci podręcznej
+### 2. Strategie buforowania
 
 **Redis Cache dla odpowiedzi AI**:
 
@@ -382,12 +383,12 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ## 💰 Optymalizacja kosztów
 
-### 1. Dopasowanie zasobów
+### 1. Właściwe dopasowanie zasobów
 
 **Konfiguracje specyficzne dla środowiska**:
 
 ```bash
-# Środowisko deweloperskie
+# Środowisko programistyczne
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -445,7 +446,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-### 3. Optymalizacja wykorzystania tokenów
+### 3. Optymalizacja zużycia tokenów
 
 **Zarządzanie kosztami OpenAI**:
 
@@ -460,7 +461,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Obcinaj kontekst, nie dane wejściowe użytkownika
+      // Skróć kontekst, nie dane wejściowe użytkownika
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -468,7 +469,7 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Przybliżone oszacowanie: 1 token ≈ 4 znaki
+    // Wstępne oszacowanie: 1 token ≈ 4 znaki
     return Math.ceil(text.length / 4);
   }
 }
@@ -521,9 +522,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. Monitoring specyficzny dla AI
+### 2. Monitorowanie specyficzne dla AI
 
-**Własne pulpity kontrolne dla metryk AI**:
+**Niestandardowe pulpity nawigacyjne dla metryk AI**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -685,7 +686,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. Kopia zapasowa i odzyskiwanie danych
+### 2. Backup danych i odzyskiwanie
 
 ```bicep
 // Backup configuration for critical data
@@ -837,7 +838,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Zweryfikuj wdrożenia modeli OpenAI
+# Waliduj wdrożenia modelu OpenAI
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-4.1-mini"* ]]; then
@@ -845,7 +846,7 @@ if [[ ! $models == *"gpt-4.1-mini"* ]]; then
     exit 1
 fi
 
-# Przetestuj łączność z usługą AI
+# Przetestuj łączność usługi AI
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
@@ -855,54 +856,54 @@ echo "Infrastructure validation completed successfully!"
 ## Lista kontrolna gotowości produkcyjnej
 
 ### Bezpieczeństwo ✅
-- [ ] Wszystkie usługi używają tożsamości zarządzanych
+- [ ] Wszystkie usługi korzystają z zarządzanych tożsamości
 - [ ] Sekrety przechowywane w Key Vault
-- [ ] Skonfigurowane prywatne endpointy
-- [ ] Zaimplementowane grupy zabezpieczeń sieciowych
-- [ ] RBAC z zasadą najmniejszych uprawnień
-- [ ] WAF włączony na publicznych endpointach
+- [ ] Skonfigurowane prywatne punkty końcowe
+- [ ] Wdrożone grupy bezpieczeństwa sieci
+- [ ] RBAC zgodnie z zasadą najmniejszych uprawnień
+- [ ] Włączony WAF na publicznych punktach końcowych
 
 ### Wydajność ✅
-- [ ] Skonfigurowane automatyczne skalowanie
-- [ ] Wdrożona pamięć podręczna
-- [ ] Skonfigurowane równoważenie obciążenia
-- [ ] CDN dla zawartości statycznej
-- [ ] Połączenia do baz danych z poolingiem
-- [ ] Optymalizacja wykorzystania tokenów
+- [ ] Skonfigurowane autoskalowanie
+- [ ] Wdrożone buforowanie
+- [ ] Ustawione równoważenie obciążenia
+- [ ] CDN dla statycznych zasobów
+- [ ] Puli połączeń do bazy danych
+- [ ] Optymalizacja użycia tokenów
 
 ### Monitoring ✅
 - [ ] Skonfigurowane Application Insights
-- [ ] Zdefiniowane metryki niestandardowe
-- [ ] Skonfigurowane reguły alertów
-- [ ] Utworzony pulpit kontrolny
-- [ ] Zaimplementowane kontrole stanu
-- [ ] Polityki przechowywania logów
+- [ ] Zdefiniowane niestandardowe metryki
+- [ ] Ustawione reguły alertów
+- [ ] Stworzony pulpit nawigacyjny
+- [ ] Wdrożone kontrole zdrowia
+- [ ] Polityki retencji logów
 
 ### Niezawodność ✅
 - [ ] Wdrożenie wieloregionalne
-- [ ] Plan kopii zapasowej i odzyskiwania
-- [ ] Wdrożone zabezpieczenia (circuit breakers)
-- [ ] Skonfigurowane polityki ponawiania prób
+- [ ] Plan backupu i odzyskiwania
+- [ ] Wdrożone bezpieczniki (circuit breakers)
+- [ ] Skonfigurowane polityki ponownych prób
 - [ ] Łagodne degradacje
-- [ ] Endpointy kontroli stanu
+- [ ] Punkty końcowe kontroli zdrowia
 
 ### Zarządzanie kosztami ✅
-- [ ] Skonfigurowane alerty budżetowe
-- [ ] Dopasowanie zasobów
-- [ ] Zastosowane zniżki dla dev/test
-- [ ] Zakupione rezerwacje instancji
-- [ ] Pulpit do monitorowania kosztów
+- [ ] Ustawione alerty budżetowe
+- [ ] Dopasowanie zasobów do potrzeb
+- [ ] Rabaty dla środowisk deweloperskich/testowych
+- [ ] Zakupione zarezerwowane instancje
+- [ ] Pulpit monitoringu kosztów
 - [ ] Regularne przeglądy kosztów
 
 ### Zgodność ✅
-- [ ] Spełnione wymagania dotyczące lokalizacji danych
-- [ ] Włączone logowanie audytowe
+- [ ] Spełnienie wymogów lokalizacji danych
+- [ ] Włączone logowanie audytu
 - [ ] Zastosowane polityki zgodności
-- [ ] Wdrożone standardy bezpieczeństwa
+- [ ] Wdrożone podstawy bezpieczeństwa
 - [ ] Regularne oceny bezpieczeństwa
 - [ ] Plan reagowania na incydenty
 
-## Wskaźniki wydajności
+## Benchmarki wydajności
 
 ### Typowe metryki produkcyjne
 
@@ -912,13 +913,13 @@ echo "Infrastructure validation completed successfully!"
 | **Dostępność** | 99,9% | Monitorowanie dostępności |
 | **Wskaźnik błędów** | < 0,1% | Logi aplikacji |
 | **Zużycie tokenów** | < 500 USD/miesiąc | Zarządzanie kosztami |
-| **Liczba jednoczesnych użytkowników** | 1000+ | Testy obciążeniowe |
+| **Równoczesni użytkownicy** | 1000+ | Testy obciążeniowe |
 | **Czas odzyskiwania** | < 1 godzina | Testy odzyskiwania po awarii |
 
 ### Testy obciążeniowe
 
 ```bash
-# Skrypt testów obciążeniowych dla aplikacji AI
+# Skrypt do testowania obciążenia dla aplikacji AI
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -930,29 +931,29 @@ python scripts/load_test.py \
 
 Na podstawie opinii społeczności Microsoft Foundry Discord:
 
-### Najważniejsze zalecenia społeczności:
+### Najważniejsze rekomendacje społeczności:
 
-1. **Zacznij od małych zasobów, skaluj stopniowo**: Zacznij od podstawowych SKU i zwiększaj w oparciu o rzeczywiste zapotrzebowanie
-2. **Monitoruj wszystko**: Ustaw kompleksowy monitoring od pierwszego dnia
-3. **Automatyzuj bezpieczeństwo**: Wykorzystuj infrastrukturę jako kod dla spójnego bezpieczeństwa
-4. **Dokładnie testuj**: Uwzględnij w pipeline testy specyficzne dla AI
-5. **Planuj koszty**: Monitoruj zużycie tokenów i wczesne alerty budżetowe
+1. **Zacznij od małego, skaluj stopniowo**: Zacznij od podstawowych SKU i skaluj w oparciu o rzeczywiste użycie
+2. **Monitoruj wszystko**: Skonfiguruj kompleksowy monitoring od pierwszego dnia
+3. **Automatyzuj bezpieczeństwo**: Używaj infrastruktury jako kodu dla spójnego bezpieczeństwa
+4. **Testuj dokładnie**: Włącz testowanie specyficzne dla AI w swoim pipeline
+5. **Planuj koszty**: Monitoruj zużycie tokenów i ustawiaj alerty budżetowe wcześnie
 
-### Typowe pułapki do unikania:
+### Typowe pułapki do uniknięcia:
 
 - ❌ Twarde kodowanie kluczy API w kodzie
-- ❌ Brak właściwego monitorowania
+- ❌ Brak poprawnego monitoringu
 - ❌ Ignorowanie optymalizacji kosztów
 - ❌ Brak testów scenariuszy awaryjnych
-- ❌ Wdrożenia bez kontroli stanu
+- ❌ Wdrażanie bez kontroli stanu
 
-## Polecenia i rozszerzenia AI w AZD
+## Komendy i rozszerzenia AZD AI CLI
 
-AZD zawiera rosnący zestaw poleceń i rozszerzeń specyficznych dla AI, które usprawniają produkcyjne workflow AI. Narzędzia te łączą lokalny rozwój z wdrożeniem produkcyjnym obciążeń AI.
+AZD zawiera rosnący zestaw komend i rozszerzeń specyficznych dla AI, które usprawniają produkcyjne workflowy AI. Narzędzia te łączą rozwój lokalny z produkcyjnym wdrożeniem obciążeń AI.
 
 ### Rozszerzenia AZD dla AI
 
-AZD korzysta z systemu rozszerzeń dodających funkcje specyficzne dla AI. Instaluj i zarządzaj rozszerzeniami za pomocą:
+AZD wykorzystuje system rozszerzeń do dodawania funkcji specyficznych dla AI. Instaluj i zarządzaj rozszerzeniami za pomocą:
 
 ```bash
 # Wyświetl wszystkie dostępne rozszerzenia (w tym AI)
@@ -967,88 +968,141 @@ azd extension install azure.ai.agents
 # Zainstaluj rozszerzenie do dostrajania
 azd extension install azure.ai.finetune
 
-# Zainstaluj rozszerzenie modeli niestandardowych
+# Zainstaluj rozszerzenie do modeli niestandardowych
 azd extension install azure.ai.models
 
-# Uaktualnij wszystkie zainstalowane rozszerzenia
+# Zaktualizuj wszystkie zainstalowane rozszerzenia
 azd extension upgrade --all
 ```
 
 **Dostępne rozszerzenia AI:**
 
-| Rozszerzenie | Przeznaczenie | Status |
-|--------------|---------------|--------|
+| Rozszerzenie | Cel | Status |
+|--------------|-----|--------|
 | `azure.ai.agents` | Zarządzanie usługą Foundry Agent | Preview |
-| `azure.ai.finetune` | Dostosowywanie modeli Foundry | Preview |
-| `azure.ai.models` | Niestandardowe modele Foundry | Preview |
+| `azure.ai.skills` | Wielokrotne umiejętności agenta | Preview |
+| `azure.ai.connections` | Połączenia Foundry (źródła danych, narzędzia) | Preview |
+| `azure.ai.finetune` | Fine-tuning modeli Foundry | Preview |
+| `azure.ai.models` | Własne modele Foundry | Preview |
 | `azure.coding-agent` | Konfiguracja agenta kodującego | Dostępne |
+
+> Rozszerzenie `azure.ai.agents` szybko ewoluuje. Ten kurs zweryfikowano pod kątem wersji `0.1.40-preview`. Uruchom `azd extension upgrade --all`, aby pobrać najnowszy zestaw komend, oraz `azd extension show azure.ai.agents`, aby potwierdzić zainstalowaną wersję.
+
+**Czym są nowsze rozszerzenia `skills` i `connections`?**
+
+Dwa rozszerzenia preview pojawiły się równolegle z narzędziami agenta i warto je znać już na początku:
+
+- **`azure.ai.skills`** — **umiejętność** to wielokrotna zdolność (spakowane narzędzie lub zachowanie), które możesz dołączyć do jednego lub więcej agentów zamiast implementować od nowa za każdym razem. Pomyśl o tym jako o wspólnym elemencie budującym: zdefiniuj raz umiejętność „przeszukuj dokumentację” lub „sprawdzaj zamówienie”, a potem używaj jej w wielu agentach. To zapewnia spójność systemom wieloagentowym (rozdział 5) i eliminuje kopiuj-wklej.
+- **`azure.ai.connections`** — **połączenie** to zarządzany link twojego projektu Foundry do zewnętrznego zasobu, którego agenci potrzebują — źródło danych (np. Azure AI Search), punkt końcowy narzędzia lub inna usługa. Połączenia centralizują *gdzie* i *jak* agenci mają dostęp do danych, więc poświadczenia i punkty końcowe są w jednym zarządzanym miejscu, a nie powycinane w kodzie.
+
+Nie potrzebujesz ich do wdrożenia pierwszych agentów — pozostań przy `azure.ai.agents` podczas nauki. Sięgnij po `skills`, gdy zaczniesz powielać te same narzędzia w wielu agentach, a po `connections`, gdy kilku agentów dzieli to samo źródło danych.
 
 ### Inicjalizacja projektów agentów za pomocą `azd ai agent init`
 
-Polecenie `azd ai agent init` szkicuje projekt agenta AI gotowego do produkcji zintegrowany z usługą Microsoft Foundry Agent Service:
+Polecenie `azd ai agent init` tworzy szkielet produkcyjnego projektu agenta AI zintegrowanego z Microsoft Foundry Agent Service:
 
 ```bash
-# Zainicjuj nowy projekt agenta z manifestu agenta
+# Zainicjuj nowy projekt agenta na podstawie manifestu agenta
 azd ai agent init -m <manifest-path-or-uri>
 
-# Zainicjuj i wybierz konkretny projekt Foundry
+# Zainicjuj i skieruj na konkretny projekt Foundry
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
 # Zainicjuj z niestandardowym katalogiem źródłowym
 azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
 
-# Wybierz Container Apps jako hosta
+# Skieruj na Container Apps jako hosta
 azd ai agent init -m agent-manifest.yaml --host containerapp
 ```
 
 **Kluczowe flagi:**
 
 | Flaga | Opis |
-|-------|------|
-| `-m, --manifest` | Ścieżka lub URI manifestu agenta do dodania do projektu |
+|-------|-------|
+| `-m, --manifest` | Ścieżka lub URI do manifestu agenta, który dodasz do projektu |
 | `-p, --project-id` | Istniejące ID projektu Microsoft Foundry dla środowiska azd |
 | `-s, --src` | Katalog do pobrania definicji agenta (domyślnie `src/<agent-id>`) |
 | `--host` | Nadpisanie domyślnego hosta (np. `containerapp`) |
-| `-e, --environment` | Środowisko azd do użycia |
+| `-e, --environment` | Środowisko azd, którego używasz |
 
-**Wskazówka produkcyjna**: Użyj `--project-id`, aby połączyć się bezpośrednio z istniejącym projektem Foundry, utrzymując kod agenta i zasoby chmurowe powiązane od samego początku.
+**Wskazówka produkcyjna**: Użyj `--project-id`, aby połączyć się bezpośrednio z istniejącym projektem Foundry, utrzymując kod agenta i zasoby chmurowe powiązane od początku.
 
-### Protokół kontekstowy modelu (MCP) z `azd mcp`
+### Zarządzanie cyklem życia agenta
 
-AZD zawiera wbudowaną obsługę serwera MCP (Alpha), umożliwiającą agentom AI i narzędziom interakcję z Twoimi zasobami Azure za pomocą standardowego protokołu:
+Poza `init`, rozszerzenie `azure.ai.agents` udostępnia komendy do pełnego cyklu życia hostowanego agenta — testowania, oceny, optymalizacji oraz wycofywania:
+
+```bash
+# Wywołaj wdrożonego agenta i wyświetl czas odpowiedzi serwera
+# (całkowite opóźnienie i czas do pierwszego bajtu)
+azd ai agent invoke
+
+# Pokaż konfigurację punktu końcowego na żywo przed jej zmianą
+azd ai agent endpoint show
+
+# Wygeneruj zestaw danych do oceny dla agenta
+azd ai agent eval generate --dataset ./eval/dataset.jsonl
+
+# Optymalizuj instrukcje agenta na podstawie twoich danych oceny
+# (wymaga modelu optymalizacyjnego w projekcie agenta)
+azd ai agent optimize
+
+# Pobierz wdrożone źródło agenta opartego na kodzie
+# (z weryfikacją SHA-256)
+azd ai agent code download
+
+# Usuń hostowanego agenta oraz wszystkie jego wersje
+# (--force zakończy aktywne sesje)
+azd ai agent delete --force
+```
+
+**Przegląd cyklu życia:**
+
+| Etap | Komenda | Użycie produkcyjne |
+|-------|---------|--------------------|
+| Test | `azd ai agent invoke` | Walidacja odpowiedzi i pomiar opóźnień przed wydaniem |
+| Inspekcja | `azd ai agent endpoint show` | Przegląd autoryzacji i konfiguracji endpointu; wykrywanie zmian mogących powodować błędy |
+| Pomiar | `azd ai agent eval generate` | Budowanie powtarzalnego zestawu ewaluacyjnego na bazie rzeczywistych śladów |
+| Poprawa | `azd ai agent optimize` | Strojenie instrukcji na podstawie zmierzonej jakości |
+| Odzyskanie | `azd ai agent code download` | Pobranie dokładnego wdrożonego źródła do audytu/rollbacku |
+| Wycofanie | `azd ai agent delete --force` | Czyste usunięcie agenta i jego wersji |
+
+> To komendy w wersji preview, mogą się zmieniać wraz z kolejnymi wydaniami rozszerzeń. Uruchom `azd ai agent --help`, aby zobaczyć dokładne podkomendy dostępne w Twojej wersji.
+
+### Protokół kontekstu modelu (MCP) z `azd mcp`
+AZD zawiera wbudowane wsparcie serwera MCP (Alpha), umożliwiające agentom AI i narzędziom interakcję z zasobami Azure za pomocą ustandaryzowanego protokołu:
 
 ```bash
 # Uruchom serwer MCP dla swojego projektu
 azd mcp start
 
-# Przejrzyj aktualne zasady zgody Copilot na wykonanie narzędzia
+# Przejrzyj aktualne zasady zgody Copilota dotyczące wykonywania narzędzi
 azd copilot consent list
 ```
 
-Serwer MCP udostępnia kontekst projektu azd — środowiska, usługi i zasoby Azure — narzędziom deweloperskim wspomaganym AI. To umożliwia:
+Serwer MCP udostępnia kontekst projektu azd — środowiska, usługi i zasoby Azure — narzędziom do tworzenia wspieranym przez AI. Umożliwia to:
 
-- **Wdrożenia wspomagane AI**: Pozwól agentom kodowania pytać o stan projektu i wywoływać wdrożenia
-- **Odkrywanie zasobów**: Narzędzia AI mogą poznać, jakich zasobów Azure używa projekt
-- **Zarządzanie środowiskami**: Agenci mogą przełączać się między środowiskami dev/staging/production
+- **Wdrażanie z asystą AI**: pozwól agentom kodującym zapytywać o stan projektu i inicjować wdrożenia
+- **Odkrywanie zasobów**: narzędzia AI mogą wykrywać, jakie zasoby Azure wykorzystuje Twój projekt
+- **Zarządzanie środowiskami**: agenci mogą przełączać się między środowiskami dev/staging/production
 
-### Generowanie infrastruktury z `azd infra generate`
+### Generowanie infrastruktury za pomocą `azd infra generate`
 
-Dla produkcyjnych obciążeń AI możesz generować i dostosowywać Infrastrukturę jako Kod zamiast polegać na automatycznym provisioningu:
+Dla produkcyjnych obciążeń AI możesz generować i dostosowywać infrastrukturę jako kod, zamiast polegać na automatycznym udostępnianiu:
 
 ```bash
 # Generuj pliki Bicep/Terraform z definicji projektu
 azd infra generate
 ```
 
-Zapisuje to IaC na dysku, abyś mógł:
+To zapisuje IaC na dysku, dzięki czemu możesz:
 - Przejrzeć i audytować infrastrukturę przed wdrożeniem
-- Dodawać niestandardowe polityki bezpieczeństwa (reguły sieciowe, prywatne endpointy)
-- Integracja z istniejącymi procesami przeglądu IaC
-- Kontrolować wersje zmian infrastruktury oddzielnie od kodu aplikacji
+- Dodać niestandardowe polityki bezpieczeństwa (reguły sieciowe, prywatne punkty końcowe)
+- Zintegrować się z istniejącymi procesami przeglądu IaC
+- Zarządzać wersjami zmian infrastruktury niezależnie od kodu aplikacji
 
-### Haki cyklu życia produkcyjnego
+### Haki cyklu życia produkcji
 
-Haki AZD pozwalają wstrzykiwać niestandardową logikę na każdym etapie cyklu wdrożenia — co jest kluczowe dla produkcyjnych workflow AI:
+Haki AZD pozwalają na wstrzyknięcie własnej logiki na każdym etapie cyklu życia wdrożenia — co jest krytyczne dla produkcyjnych obciążeń AI:
 
 ```yaml
 # azure.yaml - Production hooks example
@@ -1077,22 +1131,22 @@ services:
 ```
 
 ```bash
-# Ręczne uruchomienie określonego hooka podczas tworzenia
+# Ręczne uruchomienie określonego hooka podczas tworzenia aplikacji
 azd hooks run predeploy
 ```
 
 **Zalecane haki produkcyjne dla obciążeń AI:**
 
 | Hak | Przypadek użycia |
-|-----|------------------|
-| `preprovision` | Walidacja limitów subskrypcji na pojemność modeli AI |
-| `postprovision` | Konfiguracja prywatnych endpointów, wdrożenie wag modeli |
+|------|-----------------|
+| `preprovision` | Walidacja limitów subskrypcji dla pojemności modeli AI |
+| `postprovision` | Konfiguracja prywatnych punktów końcowych, wdrażanie wag modeli |
 | `predeploy` | Uruchamianie testów bezpieczeństwa AI, walidacja szablonów promptów |
-| `postdeploy` | Testy dymne odpowiedzi agenta, weryfikacja łączności z modelem |
+| `postdeploy` | Testy dymne odpowiedzi agenta, weryfikacja łączności modelu |
 
 ### Konfiguracja pipeline CI/CD
 
-Użyj `azd pipeline config` do połączenia projektu z GitHub Actions lub Azure Pipelines z bezpiecznym uwierzytelnieniem Azure:
+Użyj `azd pipeline config` do połączenia projektu z GitHub Actions lub Azure Pipelines za pomocą bezpiecznego uwierzytelniania Azure:
 
 ```bash
 # Skonfiguruj pipeline CI/CD (interaktywnie)
@@ -1103,41 +1157,183 @@ azd pipeline config --provider github
 ```
 
 To polecenie:
-- Tworzy service principal z dostępem minimalnych uprawnień
-- Konfiguruje federowane poświadczenia (bez przechowywanych sekretów)
-- Generuje lub aktualizuje plik definicji pipeline
+- Tworzy service principal z dostępem o minimalnych uprawnieniach
+- Konfiguruje uwierzytelnianie federacyjne (bez przechowywanych sekretów)
+- Generuje lub aktualizuje plik definicji pipeline'u
 - Ustawia wymagane zmienne środowiskowe w systemie CI/CD
 
-**Produkcyjny workflow z konfiguracją pipeline:**
+#### Krok po kroku: Twój pierwszy pipeline GitHub Actions
+
+Oto pełny przewodnik od działającego projektu azd do automatycznych wdrożeń przy każdym pushu.
+
+**1. Upewnij się, że Twój projekt jest na GitHub**
+
+```bash
+git init
+git add .
+git commit -m "Initial azd project"
+gh repo create my-ai-app --private --source=. --push
+```
+
+**2. Uruchom pipeline config**
+
+```bash
+azd pipeline config --provider github
+```
+
+azd interaktywnie:
+- Pyta, którą subskrypcję Azure i środowisko chcesz wybrać
+- Tworzy rejestrację aplikacji Entra oraz service principal dla pipeline'u
+- Konfiguruje federowane poświadczenia (OIDC) — dzięki czemu GitHub uwierzytelnia się w Azure przy pomocy krótkotrwałych tokenów i **nie są przechowywane żadne sekrety**
+- Wysyła wymagane **zmienne** do Twojego repozytorium GitHub (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `AZURE_ENV_NAME`, `AZURE_LOCATION`)
+
+**3. Zapoznaj się z wygenerowanym workflow**
+
+azd dodaje `.github/workflows/azure-dev.yml`. Kluczowe elementy wyglądają tak:
+
+```yaml
+# .github/workflows/azure-dev.yml
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:        # lets you run it manually too
+
+permissions:
+  id-token: write           # required for OIDC federated login
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
+      AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install azd
+        uses: Azure/setup-azd@v2
+      - name: Log in with OIDC
+        run: azd auth login --client-id "$AZURE_CLIENT_ID" --federated-credential-provider "github" --tenant-id "$AZURE_TENANT_ID"
+      - name: Provision infrastructure
+        run: azd provision --no-prompt
+      - name: Deploy application
+        run: azd deploy --no-prompt
+```
+
+**4. Sprawdź, czy działa**
+
+```bash
+# Wypchnij zmianę, aby uruchomić pipeline
+git commit -am "Trigger pipeline" --allow-empty
+git push
+```
+
+Otwórz zakładkę **Actions** w repozytorium GitHub i obserwuj, jak workflow automatycznie uruchamia `azd provision` oraz `azd deploy`.
+
+> **Dlaczego federowane poświadczenia są ważne:** starsze pipeline’y przechowywały sekret klienta w GitHub. Federowane poświadczenia OIDC całkowicie eliminują ten sekret — GitHub żąda krótkotrwałego tokenu podczas działania, co jest bezpieczniejsze i nie wymaga rotacji lub ryzyka wycieku. To ustawienie domyślne konfiguracji `azd pipeline config`.
+
+> **Sekrety vs zmienne:** niepoufne identyfikatory (`AZURE_CLIENT_ID` itd.) trafiają do zmiennych repozytorium. Jeśli aplikacja naprawdę potrzebuje sekretu podczas budowania, dodaj go jako sekret GitHub i odwołuj się przez `${{ secrets.NAME }}` — jednak preferuj Key Vault + zarządzaną tożsamość podczas uruchamiania (zobacz [Rozdział 3](../chapter-03-configuration/authsecurity.md)).
+
+**Produkcjny workflow z pipeline config:**
 
 ```bash
 # 1. Skonfiguruj środowisko produkcyjne
 azd env new production
 azd env set AZURE_OPENAI_CAPACITY 100
 
-# 2. Skonfiguruj potok
+# 2. Skonfiguruj pipeline
 azd pipeline config --provider github
 
-# 3. Potok uruchamia azd deploy przy każdym pushu do main
+# 3. Pipeline uruchamia azd deploy przy każdym pushu do main
 ```
+
+#### Krok po kroku: Azure DevOps Pipelines
+
+Wolisz Azure DevOps zamiast GitHub Actions? azd wspiera go natywnie przez provider `azdo`. Przebieg jest niemal identyczny — azd generuje plik pipeline, tworzy połączenie serwisowe i konfiguruje uwierzytelnianie.
+
+**1. Upewnij się, że masz projekt w Azure DevOps**
+
+Potrzebujesz organizacji i projektu pod `https://dev.azure.com/<your-org>`. Wygeneruj token dostępu osobistego (PAT) z uprawnieniami **Build (Read & execute)**, **Code (Read & write)** oraz **Service Connections (Read, query & manage)** — azd poprosi Cię o niego.
+
+**2. Skonfiguruj pipeline**
+
+```bash
+azd pipeline config --provider azdo
+```
+
+azd:
+- Poprosi o podanie organizacji Azure DevOps i projektu
+- Utworzy (lub użyje istniejącego) **połączenia serwisowego** do Azure za pomocą service principal
+- Skonfiguruje **workload identity federation (OIDC)**, aby nie przechowywać sekretu klienta
+- Zatwierdzi plik definicji pipeline `azure-dev.yml` do Twojego repozytorium
+
+**3. Przejrzyj wygenerowany `azure-dev.yml`**
+
+azd tworzy pipeline, który przy każdym pushu do `main` wykonuje provisioning i deployment:
+
+```yaml
+# azure-dev.yml
+trigger:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: setup-azd@1
+    displayName: Install azd
+
+  - script: azd provision --no-prompt
+    displayName: Provision Infrastructure
+    env:
+      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
+      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
+      AZURE_LOCATION: $(AZURE_LOCATION)
+
+  - script: azd deploy --no-prompt
+    displayName: Deploy Application
+    env:
+      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
+      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
+      AZURE_LOCATION: $(AZURE_LOCATION)
+```
+
+**4. Skąd pochodzą zmienne**
+
+azd przechowuje wartości środowiskowe (`AZURE_ENV_NAME`, `AZURE_LOCATION`, `AZURE_SUBSCRIPTION_ID`) jako **grupę zmiennych** w Azure DevOps, dzięki czemu pipeline może je odczytać. Możesz je przeglądać i edytować w **Pipelines → Library**.
+
+> **Takie same korzyści OIDC jak w GitHub:** provider `azdo` również domyślnie konfiguruje workload identity federation, więc w połączeniu serwisowym nie ma przechowywanego sekretu — Azure DevOps wymienia krótkotrwały token podczas działania. Używaj `--auth-type client-credentials` tylko, gdy Twoja organizacja nie może jeszcze korzystać z OIDC.
+
+**5. Uruchom pipeline**
+
+```bash
+git commit -am "Add Azure DevOps pipeline" --allow-empty
+git push
+```
+
+Otwórz **Pipelines** w Azure DevOps i obserwuj działanie `azd provision` oraz `azd deploy`.
 
 ### Dodawanie komponentów za pomocą `azd add`
 
-Stopniowo dodawaj usługi Azure do istniejącego projektu:
+Dodawaj stopniowo usługi Azure do istniejącego projektu:
 
 ```bash
 # Dodaj nowy komponent usługi interaktywnie
 azd add
 ```
 
-Jest to szczególnie przydatne do rozszerzania produkcyjnych aplikacji AI — na przykład dodanie usługi wyszukiwania wektorowego, nowego endpointu agenta czy komponentu monitorującego do istniejącego wdrożenia.
+Jest to szczególnie przydatne przy rozbudowie produkcyjnych aplikacji AI — na przykład dodanie usługi wyszukiwania wektorowego, nowego punktu końcowego agenta lub komponentu monitorowania do istniejącego wdrożenia.
 
 ## Dodatkowe zasoby
-- **Azure Well-Architected Framework**: [Wytyczne dotyczące obciążeń AI](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Microsoft Foundry Documentation**: [Oficjalna dokumentacja](https://learn.microsoft.com/azure/ai-studio/)
-- **Community Templates**: [Przykłady Azure](https://github.com/Azure-Samples)
-- **Discord Community**: [Kanał #Azure](https://discord.gg/microsoft-azure)
-- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 dostępnych umiejętności agenta dla Azure AI, Foundry, wdrożeń, optymalizacji kosztów i diagnostyki. Zainstaluj w swoim edytorze:
+
+- **Azure Well-Architected Framework**: [Wskazówki dotyczące obciążeń AI](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Dokumentacja Microsoft Foundry**: [Oficjalna dokumentacja](https://learn.microsoft.com/azure/ai-studio/)
+- **Szablony społecznościowe**: [Azure Samples](https://github.com/Azure-Samples)
+- **Społeczność Discord**: [Kanał #Azure](https://discord.gg/microsoft-azure)
+- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure na skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) — 37 otwartych umiejętności agenta dla AI Azure, Foundry, wdrożeń, optymalizacji kosztów i diagnostyki. Zainstaluj w swoim edytorze:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
@@ -1145,17 +1341,17 @@ Jest to szczególnie przydatne do rozszerzania produkcyjnych aplikacji AI — na
 ---
 
 **Nawigacja po rozdziale:**
-- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📚 Strona główna kursu**: [AZD Dla Początkujących](../../README.md)
 - **📖 Aktualny rozdział**: Rozdział 8 - Wzorce produkcyjne i korporacyjne
 - **⬅️ Poprzedni rozdział**: [Rozdział 7: Rozwiązywanie problemów](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Również powiązane**: [Laboratorium warsztatów AI](ai-workshop-lab.md)
-- **� Kurs ukończony**: [AZD dla początkujących](../../README.md)
+- **⬅️ Powiązane tematy**: [AI Workshop Lab](ai-workshop-lab.md)
+- **� Koniec kursu**: [AZD Dla Początkujących](../../README.md)
 
-**Pamiętaj**: Produkcyjne obciążenia AI wymagają starannego planowania, monitorowania i ciągłej optymalizacji. Zacznij od tych wzorców i dostosuj je do swoich specyficznych wymagań.
+**Pamiętaj**: Produkcyjne obciążenia AI wymagają starannego planowania, monitorowania i ciągłej optymalizacji. Zacznij od tych wzorców i dostosuj je do swoich wymagań.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Zastrzeżenie**:  
-Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczeń AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dążymy do dokładności, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w języku źródłowym powinien być uważany za źródło wiążące. Dla informacji krytycznych zalecane jest profesjonalne tłumaczenie wykonywane przez człowieka. Nie ponosimy odpowiedzialności za wszelkie nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+**Zastrzeżenie**:
+Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Choć dążymy do dokładności, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub niedokładności. Oryginalny dokument w jego języku źródłowym należy uznawać za autorytatywne źródło. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

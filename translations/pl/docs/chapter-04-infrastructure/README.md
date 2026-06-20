@@ -1,22 +1,22 @@
-# Rozdział 4: Infrastruktura jako kod i wdrażanie
+# Rozdział 4: Infrastruktura jako Kod i Wdrożenie
 
-**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 1-1,5 godziny | **⭐ Poziom trudności**: Średniozaawansowany
+**📚 Kurs**: [AZD dla Początkujących](../../README.md) | **⏱️ Czas trwania**: 1-1.5 godziny | **⭐ Poziom trudności**: Średniozaawansowany
 
 ---
 
 ## Przegląd
 
-Ten rozdział obejmuje wzorce Infrastruktur jako Kod (IaC) z szablonami Bicep, udostępnianie zasobów oraz strategie wdrażania przy użyciu Azure Developer CLI.
+Ten rozdział obejmuje wzorce Infrastruktury jako Kod (IaC) z wykorzystaniem szablonów Bicep, provisionowanie zasobów oraz strategie wdrożeń przy użyciu Azure Developer CLI.
 
-> Sprawdzone z `azd 1.23.12` w marcu 2026.
+> Weryfikowano na `azd 1.25.6` w czerwcu 2026.
 
 ## Cele nauki
 
 Po ukończeniu tego rozdziału będziesz potrafił:
 - Zrozumieć strukturę i składnię szablonów Bicep
-- Udostępniać zasoby Azure za pomocą `azd provision`
+- Provisionować zasoby Azure za pomocą `azd provision`
 - Wdrażać aplikacje za pomocą `azd deploy`
-- Wdrażać strategie wdrażania blue-green i rolling
+- Implementować strategie wdrożeń blue-green i rolling
 
 ---
 
@@ -24,27 +24,28 @@ Po ukończeniu tego rozdziału będziesz potrafił:
 
 | # | Lekcja | Opis | Czas |
 |---|--------|-------------|------|
-| 1 | [Udostępnianie zasobów](provisioning.md) | Zarządzanie zasobami Azure za pomocą AZD | 45 min |
-| 2 | [Przewodnik po wdrażaniu](deployment-guide.md) | Strategie wdrażania aplikacji | 45 min |
+| 1 | [Provisionowanie zasobów](provisioning.md) | Zarządzanie zasobami Azure z AZD | 45 min |
+| 2 | [Przewodnik wdrożeń](deployment-guide.md) | Strategie wdrożeń aplikacji | 45 min |
+| 3 | [Tworzenie własnego szablonu](custom-templates.md) | Budowanie i publikowanie wielokrotnego użytku szablonów azd | 30 min |
 
 ---
 
 ## 🚀 Szybki start
 
 ```bash
-# Inicjalizuj z szablonu
+# Zainicjuj z szablonu
 azd init --template azure-functions-python-v2-http
 
-# Podgląd tego, co zostanie utworzone
+# Podejrzyj, co zostanie utworzone
 azd provision --preview
 
-# Wdróż tylko infrastrukturę
+# Wdroż tylko infrastrukturę
 azd provision
 
-# Wdróż tylko kod
+# Wdroż tylko kod
 azd deploy
 
-# Lub obie opcje razem
+# Lub oba razem
 azd up
 ```
 
@@ -97,6 +98,6 @@ my-project/
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Zastrzeżenie**:  
-Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczeniowej AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub niedokładności. Oryginalny dokument w języku źródłowym należy uznać za autorytatywne źródło. W przypadku informacji krytycznych zaleca się skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+**Zastrzeżenie**:
+Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Choć dążymy do dokładności, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub niedokładności. Oryginalny dokument w jego języku źródłowym należy uznawać za autorytatywne źródło. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,31 +1,32 @@
-# Capitolo 4: Infrastruttura come codice e distribuzione
+# Capitolo 4: Infrastruttura come Codice & Distribuzione
 
-**📚 Corso**: [AZD per principianti](../../README.md) | **⏱️ Durata**: 1-1.5 ore | **⭐ Complessità**: Intermedio
+**📚 Corso**: [AZD per Principianti](../../README.md) | **⏱️ Durata**: 1-1.5 ore | **⭐ Complessità**: Intermedio
 
 ---
 
 ## Panoramica
 
-Questo capitolo tratta i pattern di Infrastructure as Code (IaC) con template Bicep, il provisioning delle risorse e le strategie di distribuzione usando Azure Developer CLI.
+Questo capitolo tratta i pattern di Infrastruttura come Codice (IaC) con template Bicep, il provisioning delle risorse e le strategie di distribuzione usando Azure Developer CLI.
 
-> Convalidato con `azd 1.23.12` a marzo 2026.
+> Validato con `azd 1.25.6` a giugno 2026.
 
 ## Obiettivi di apprendimento
 
-Completando questo capitolo, sarai in grado di:
+Al completamento di questo capitolo, sarai in grado di:
 - Comprendere la struttura e la sintassi dei template Bicep
-- Eseguire il provisioning delle risorse Azure con `azd provision`
-- Distribuire le applicazioni con `azd deploy`
+- Provisionare risorse Azure con `azd provision`
+- Distribuire applicazioni con `azd deploy`
 - Implementare strategie di distribuzione blue-green e rolling
 
 ---
 
 ## 📚 Lezioni
 
-| # | Lezione | Descrizione | Tempo |
+| # | Lezione | Descrizione | Durata |
 |---|--------|-------------|------|
 | 1 | [Provisioning delle risorse](provisioning.md) | Gestione delle risorse Azure con AZD | 45 min |
 | 2 | [Guida alla distribuzione](deployment-guide.md) | Strategie di distribuzione delle applicazioni | 45 min |
+| 3 | [Creazione del proprio template](custom-templates.md) | Costruire e pubblicare template azd riutilizzabili | 30 min |
 
 ---
 
@@ -38,7 +39,7 @@ azd init --template azure-functions-python-v2-http
 # Anteprima di ciò che verrà creato
 azd provision --preview
 
-# Provisiona solo l'infrastruttura
+# Configura solo l'infrastruttura
 azd provision
 
 # Distribuisci solo il codice
@@ -91,12 +92,12 @@ my-project/
 ## 📖 Risorse correlate
 
 - [Controlli pre-distribuzione](../chapter-06-pre-deployment/README.md)
-- [Esempi di Container App](../../examples/container-app/README.md)
-- [Esempio di Database App](../../examples/database-app/README.md)
+- [Esempi di app container](../../examples/container-app/README.md)
+- [Esempio di app database](../../examples/database-app/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Pur impegnandoci per l'accuratezza, si prega di notare che le traduzioni automatizzate possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa deve essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un traduttore umano. Non siamo responsabili per eventuali malintesi o interpretazioni errate derivanti dall'uso di questa traduzione.
+Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire la precisione, si prega di notare che le traduzioni automatizzate possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa deve essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un essere umano. Non siamo responsabili per eventuali malintesi o interpretazioni errate derivanti dall’uso di questa traduzione.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
