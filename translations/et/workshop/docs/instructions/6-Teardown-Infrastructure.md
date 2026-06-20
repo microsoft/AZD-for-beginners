@@ -1,42 +1,42 @@
-# 6. Tehniline infrastruktuur
+# 6. Infra struktuuri eemaldamine
 
-!!! tip "SESI MÄÄRATUD MÄÄRATLUSES OLETE SUUTNUD"
+!!! tip "SELLE MÄLUMOODULI LÕPUS SAAD OMAOSAKS"
 
-    - [ ] Mõista ressursi puhastamise ja kulude haldamise tähtsust
+    - [ ] Mõista ressursi puhastamise ja kulude juhtimise olulisust
     - [ ] Kasutada `azd down` infrastruktuuri turvaliseks eemaldamiseks
-    - [ ] Taastada vajadusel pehme kustutusega kognitiivseid teenuseid
-    - [ ] **Lab 6:** Puhastada Azure'i ressursid ja kontrollida eemaldamist
+    - [ ] Vajadusel taastada pehmelt kustutatud Azure AI teenused
+    - [ ] **Lab 6:** Azure ressursside puhastamine ja eemaldamise kinnitamine
 
 ---
 
 ## Boonusülesanded
 
-Enne projekti eemaldamist võta mõni minut avatud uurimiseks.
+Enne projekti eemaldamist võta mõned minutid avastuslikuks uurimiseks.
 
-!!! info "Proovi neid uurimiskäsklusi"
+!!! info "Proovi neid uurimisküsimusi"
 
     **Katseta GitHub Copilotiga:**
     
-    1. Küsi: `Milliseid teisi AZD malle võiksin proovida mitmeagendi stsenaariumide jaoks?`
+    1. Küsi: `Milliseid teisi AZD malle võiksin proovida mitme agendi stsenaariumite jaoks?`
     2. Küsi: `Kuidas kohandada agendi juhiseid tervishoiu kasutusjuhtumi jaoks?`
     3. Küsi: `Millised keskkonnamuutujad kontrollivad kulude optimeerimist?`
     
-    **Uuri Azure'i portaali:**
+    **Uuri Azure portaali:**
     
-    1. Vaata üle Application Insightsi mõõdikud oma juurutuse jaoks
-    2. Kontrolli pakutud ressursside kulude analüüsi
-    3. Uuri veel kord Microsoft Foundry portaali agendi mänguväljakut
+    1. Vaata üle oma juurutuse Application Insights mõõdikud
+    2. Kontrolli provisjoneeritud ressursside kulude analüüsi
+    3. Uuri Microsoft Foundry portaali agendi mänguväljakut veel kord
 
 ---
 
-## Infrastruktuuri eemaldamine
+## Infra eemaldamine
 
 1. Infrastruktuuri eemaldamine on sama lihtne kui:
       
       ```bash title="" linenums="0"
       azd down --purge
       ```
-1. Lipp `--purge` tagab, et pehme kustutusega kognitiivsed teenused ka eemaldatakse, vabastades nende ressursside poolt hõivatud kvota. Kui protsess on lõpetatud, näed midagi sellist:
+1. Lipp `--purge` tagab, et see ka puhastab pehmelt kustutatud Kognitiivsete teenuste ressursid, vabastades nende ressursside poolt hoitud mahupiirangud. Kui see on lõpetatud, näed midagi sellist:
       
       ```bash title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -47,7 +47,7 @@ Enne projekti eemaldamist võta mõni minut avatud uurimiseks.
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Valikuline) Kui nüüd uuesti käivitad `azd up`, märkad, et gpt-4.1 mudel juurutatakse, kuna keskkonnamuutuja muudeti (ja salvestati) kohalikus `.azure` kaustas. 
+1. (Valikuline) Kui nüüd jooksutad uuesti `azd up` käsku, märkad, et gpt-4.1 mudel paigaldatakse, sest keskkonnamuutuja muudeti (ja salvestati) kohalikus `.azure` kaustas. 
 
       Siin on mudeli juurutused **enne**:
 
@@ -59,6 +59,6 @@ Enne projekti eemaldamist võta mõni minut avatud uurimiseks.
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vastutusest loobumine**:  
-See dokument on tõlgitud AI-tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame täpsust tagada, palun arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks käsitleda autoriteetse allikana. Olulise teabe puhul soovitatakse professionaalset inimtõlget. Me ei vastuta selle tõlge kasutamisega seotud arusaamatuste ega väärarusaamade eest.
+**Lahtiütlus**:
+See dokument on tõlgitud kasutades AI tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi me püüdleme täpsuse poole, palun pange tähele, et automatiseeritud tõlgetes võib esineda vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlkega seotud eksimustest või valesti mõistmistest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

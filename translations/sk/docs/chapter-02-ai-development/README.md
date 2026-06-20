@@ -1,22 +1,22 @@
-# Chapter 2: Vývoj s prioritou na AI
+# Kapitola 2: Vývoj orientovaný na AI
 
-**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Trvanie**: 1-2 hodiny | **⭐ Náročnosť**: Stredná
+**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Doba trvania**: 1-2 hours | **⭐ Náročnosť**: Stredne pokročilý
 
 ---
 
 ## Prehľad
 
-Táto kapitola sa zameriava na nasadenie aplikácií poháňaných AI pomocou Azure Developer CLI a služieb Microsoft Foundry. Od jednoduchých AI chatovacích aplikácií až po inteligentných agentov s nástrojmi.
+Táto kapitola sa zameriava na nasadzovanie aplikácií poháňaných AI pomocou Azure Developer CLI a služieb Microsoft Foundry. Od jednoduchých AI chatovacích aplikácií po inteligentných agentov s nástrojmi.
 
-> **Poznámka k validácii (2026-03-25):** Priebeh príkazov a pokyny k rozšíreniam v tejto kapitole boli skontrolované voči `azd` `1.23.12` a aktuálnej ukážkovej verzii AI agent rozšírenia `azure.ai.agents` `0.1.18-preview`. Ak používate staršiu verziu AZD, najskôr aktualizujte a potom pokračujte v cvičeniach.
+> **Validation note (2026-06-15):** The command flow and extension guidance in this chapter were reviewed against `azd` `1.25.6` and the current preview AI agent extension release `azure.ai.agents` `0.1.40-preview`. If you are on an older AZD build, update first and then continue with the exercises.
 
 ## Ciele učenia
 
-Dokončením tejto kapitoly budete vedieť:
-- Nasadiť AI aplikácie pomocou predpripravených AZD šablón
-- Pochopiť integráciu Microsoft Foundry s AZD
-- Konfigurovať a prispôsobiť AI agentov s nástrojmi
-- Nasadiť RAG (Retrieval-Augmented Generation) aplikácie
+Po dokončení tejto kapitoly budete:
+- Nasadzovať AI aplikácie pomocou predpripravených AZD šablón
+- Rozumieť integrácii Microsoft Foundry s AZD
+- Konfigurovať a prispôsobovať AI agentov s nástrojmi
+- Nasadzovať RAG (Retrieval-Augmented Generation) aplikácie
 
 ---
 
@@ -24,17 +24,17 @@ Dokončením tejto kapitoly budete vedieť:
 
 | # | Lekcia | Popis | Čas |
 |---|--------|-------------|------|
-| 1 | [Integrácia Microsoft Foundry](microsoft-foundry-integration.md) | Prepojiť AZD so službami Foundry | 30 min |
+| 1 | [Integrácia Microsoft Foundry](microsoft-foundry-integration.md) | Prepojte AZD so službami Foundry | 30 min |
 | 2 | [Sprievodca AI agentmi](agents.md) | Nasadiť inteligentných agentov s nástrojmi | 45 min |
 | 3 | [Nasadenie AI modelu](ai-model-deployment.md) | Nasadiť a nakonfigurovať AI modely | 30 min |
-| 4 | [AI Workshop Laboratórium](ai-workshop-lab.md) | Prakticky: Pripravte svoje AI riešenie na AZD | 60 min |
+| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Prakticky: Pripravte svoje AI riešenie pre AZD | 60 min |
 
 ---
 
 ## 🚀 Rýchly štart
 
 ```bash
-# Možnosť 1: RAG Chat aplikácia
+# Možnosť 1: RAG chatová aplikácia
 azd init --template azure-search-openai-demo
 azd up
 
@@ -63,11 +63,11 @@ azd up
 
 | Prostredie | Odhadované mesačné náklady |
 |-------------|----------------------|
-| Vývojové | 80-150 $ |
-| Testovacie | 150-300 $ |
-| Produkčné | 300-3 500+ $ |
+| Vývoj | $80-150 |
+| Testovacie prostredie | $150-300 |
+| Produkčné | $300-3,500+ |
 
-**Tip:** Po testovaní spustite `azd down`, aby ste predišli poplatkom.
+**Tip:** Spustite `azd down` po testovaní, aby ste sa vyhli poplatkom.
 
 ---
 
@@ -76,20 +76,20 @@ azd up
 | Smer | Kapitola |
 |-----------|---------|
 | **Predchádzajúca** | [Kapitola 1: Základy](../chapter-01-foundation/README.md) |
-| **Nasledujúca** | [Kapitola 3: Konfigurácia](../chapter-03-configuration/README.md) |
-| **Preskočiť na** | [Kapitola 8: Produkčné vzory](../chapter-08-production/README.md) |
+| **Ďalšia** | [Kapitola 3: Konfigurácia](../chapter-03-configuration/README.md) |
+| **Prejsť na** | [Kapitola 8: Produkčné vzory](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Súvisiace zdroje
 
 - [Riešenie problémov s AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Produkčné AI praktiky](../chapter-08-production/production-ai-practices.md)
+- [Praktiky pre produkčné AI](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Zrieknutie sa zodpovednosti**:  
-Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, upozorňujeme, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+**Vyhlásenie o zodpovednosti**:
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, vezmite prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho natívnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

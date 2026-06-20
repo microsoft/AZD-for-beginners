@@ -1,35 +1,35 @@
-# Kapitel 6: Planlægning og validering før udrulning
+# Kapitel 6: Forudgående planlægning og validering
 
-**📚 Kursus**: [AZD for begyndere](../../README.md) | **⏱️ Varighed**: 1 time | **⭐ Kompleksitet**: Mellem
+**📚 Kursus**: [AZD for begyndere](../../README.md) | **⏱️ Varighed**: 1 time | **⭐ Kompleksitet**: Mellemniveau
 
 ---
 
 ## Oversigt
 
-Dette kapitel dækker væsentlige planlægnings- og valideringstrin før udrulning af din applikation. Lær at undgå dyre fejl med korrekt kapacitetsplanlægning, SKU-udvælgelse og preflight-tjek.
+Dette kapitel dækker væsentlige planlægnings- og valideringstrin, før du implementerer din applikation. Lær at undgå dyre fejl med korrekt kapacitetsplanlægning, valg af SKU'er og preflight-tjek.
 
-> Valideret mod `azd 1.23.12` i marts 2026.
+> Valideret imod `azd 1.25.6` i juni 2026.
 
 ## Læringsmål
 
-Når du har gennemført dette kapitel, vil du:
-- Køre preflight-tjek før udrulning
+Ved at gennemføre dette kapitel vil du:
+- Køre preflight-kontroller før implementering
 - Planlægge kapacitet og estimere ressourcebehov
-- Vælge passende SKU'er for omkostningsoptimering
+- Vælge passende SKUs for omkostningsoptimering
 - Konfigurere Application Insights til overvågning
-- Forstå teamkoordinationsmønstre
+- Forstå mønstre for teamkoordinering
 
 ---
 
 ## 📚 Lektioner
 
-| # | Lektion | Beskrivelse | Tid |
+| # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [Preflight-tjek](preflight-checks.md) | Validér konfiguration før udrulning | 15 min |
+| 1 | [Preflight-kontroller](preflight-checks.md) | Valider konfiguration før implementering | 15 min |
 | 2 | [Kapacitetsplanlægning](capacity-planning.md) | Estimer ressourcebehov | 20 min |
-| 3 | [Valg af SKU'er](sku-selection.md) | Vælg passende prissætningsniveauer | 15 min |
-| 4 | [Application Insights](application-insights.md) | Konfigurér overvågning | 20 min |
-| 5 | [Koordinationsmønstre](coordination-patterns.md) | Teamets udrulningsarbejdsgange | 15 min |
+| 3 | [SKU-valg](sku-selection.md) | Vælg passende prisklasser | 15 min |
+| 4 | [Application Insights](application-insights.md) | Konfigurer overvågning | 20 min |
+| 5 | [Koordineringsmønstre](coordination-patterns.md) | Teamets udrulningsarbejdsgange | 15 min |
 
 ---
 
@@ -39,7 +39,7 @@ Når du har gennemført dette kapitel, vil du:
 # Kontroller abonnementskvoter
 az vm list-usage --location eastus --output table
 
-# Forhåndsvis udrulning (ingen ressourcer oprettes)
+# Forhåndsvisning af udrulning (ingen ressourcer oprettes)
 azd provision --preview
 
 # Valider Bicep-syntaks
@@ -51,12 +51,12 @@ azd env get-values
 
 ---
 
-## ☑️ Tjekliste før udrulning
+## ☑️ Tjekliste før implementering
 
 ### Før `azd provision`
 
-- [ ] Kvote bekræftet for regionen
-- [ ] SKU'er valgt passende
+- [ ] Kvoter bekræftet for regionen
+- [ ] SKUs valgt passende
 - [ ] Omkostningsestimat gennemgået
 - [ ] Navnekonvention ensartet
 - [ ] Sikkerhed/RBAC konfigureret
@@ -64,17 +64,17 @@ azd env get-values
 ### Før `azd deploy`
 
 - [ ] Miljøvariabler indstillet
-- [ ] Adgangsoplysninger i Key Vault
-- [ ] Forbindelsestrenge verificeret
-- [ ] Sundhedskontroller konfigureret
+- [ ] Secrets i Key Vault
+- [ ] Forbindelsesstrenge verificeret
+- [ ] Sundhedstjek konfigureret
 
 ---
 
-## 💰 Guide til valg af SKU'er
+## 💰 Vejledning til SKU-valg
 
-| Workload | Udvikling | Produktion |
-|----------|-----------|------------|
-| Container Apps | Consumption | Dedicated D4 |
+| Workload | Development | Production |
+|----------|-------------|------------|
+| Container Apps | Forbrugsbaseret | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
 | Microsoft Foundry Models | Standard | Standard + PTU |
 | AI Search | Basic | Standard S2+ |
@@ -83,7 +83,7 @@ azd env get-values
 
 ## 🔗 Navigation
 
-| Retning | Kapitel |
+| Direction | Chapter |
 |-----------|---------|
 | **Forrige** | [Kapitel 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
 | **Næste** | [Kapitel 7: Fejlfinding](../chapter-07-troubleshooting/README.md) |
@@ -93,12 +93,12 @@ azd env get-values
 ## 📖 Relaterede ressourcer
 
 - [Konfigurationsguide](../chapter-03-configuration/configuration.md)
-- [Udrulningsguide](../chapter-04-infrastructure/deployment-guide.md)
+- [Udrulningsvejledning](../chapter-04-infrastructure/deployment-guide.md)
 - [Almindelige problemer](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, bedes du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

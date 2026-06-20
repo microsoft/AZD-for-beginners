@@ -1,178 +1,178 @@
-# Näited - praktilised AZD mallid ja konfiguratsioonid
+# Näited - Praktilised AZD mallid ja konfiguratsioonid
 
-**Õppimine näidete kaudu - organiseeritud peatükkide kaupa**
-- **📚 Kooliavaleht**: [AZD Algajatele](../README.md)
-- **📖 Peatükkide kaardistus**: näited organiseeritud õppimise keerukuse järgi
-- **🚀 Kohalik näide**: [Jaemüügi mitmeagendi lahendus](retail-scenario.md)
-- **🤖 Välised AI näited**: lingid Azure Samples hoidlatele
+**Õppimine näidete kaudu - organiseeritud peatükkide kaupa**  
+- **📚 Kursuse avaleht**: [AZD algajatele](../README.md)  
+- **📖 Peatükkide kaart**: näited organiseeritud õppimise keerukuse alusel  
+- **🚀 Kohalik näide**: [Jaemüügi mitmeagendi lahendus](retail-scenario.md)  
+- **🤖 Välised AI näited**: lingid Azure Samples repodele  
 
-> **📍 OLULINE: kohalikud vs välised näited**  
-> See hoidla sisaldab **4 täielikku kohalikku näidet** koos täielike rakendustega:  
-> - **Microsoft Foundry mudelid vestluseks** (gpt-4.1 juurutus vestlusliidesega)  
-> - **Konteinerirakendused** (Lihtne Flask API + mikroteenused)  
+> **📍 TÄHTIS: Kohalikud vs välised näited**  
+> See hoidla sisaldab **4 täiesti kohalikku näidet** täielike rakendustega:  
+> - **Microsoft Foundry Models Chat** (gpt-4.1 juurutus koos jututulemiga)  
+> - **Container Apps** (Lihtne Flask API + mikroteenused)  
 > - **Andmebaasi rakendus** (Veeb + SQL andmebaas)  
-> - **Jaemüügi mitmeagent** (ettevõtte AI lahendus)  
+> - **Jaemüügi mitmeagendi lahendus** (ettevõtte AI lahendus)  
 >  
-> Täiendavad näited on **välised viited** Azure-Samples hoidlatele, mida saab kloonida.
+> Täiendavad näited on **välised viited** Azure-Samples repodele, mida saab kloonida.
 
 ## Sissejuhatus
 
-See kataloog pakub praktilisi näiteid ja viiteid, mis aitavad sul Azure Developer CLI õppida käed-külge harjutuste kaudu. Jaemüügi mitmeagendi stsenaarium on täielik ja tootmiskõlbulik rakendus, mis on kaasatud sellesse hoidlasse. Täiendavad näited viitavad ametlikele Azure näidetele, mis demonstreerivad erinevaid AZD mustreid.
+See kaust pakub praktilisi näiteid ja viiteid, et aidata sul õppida Azure Developer CLI-d käed-külge harjutuste kaudu. Jaemüügi mitmeagendi stsenaarium on täielik, tootmiskõlblik rakendus, mis on lisatud sellesse hoidlas. Täiendavad näited viitavad ametlikele Azure Samples repodele, mis demonstreerivad erinevaid AZD mustreid.
 
-### Keerukuse hinnang
+### Keerukuse skaalatähised
 
-- ⭐ **Algaja** - Põhimõisted, üksikteenus, 15-30 minutit
-- ⭐⭐ **Kesktase** - Mitmed teenused, andmebaasi integreerimine, 30-60 minutit
-- ⭐⭐⭐ **Edasijõudnu** - Kompleksne arhitektuur, AI integreerimine, 1-2 tundi
-- ⭐⭐⭐⭐ **Ekspert** - Tootmiskõlbulik, ettevõtte mustrid, üle 2 tunni
+- ⭐ **Algaja** – Põhimõisted, üks teenus, 15-30 minutit  
+- ⭐⭐ **Kesktase** – Mitmed teenused, andmebaasi integratsioon, 30-60 minutit  
+- ⭐⭐⭐ **Edasijõudnu** – Keerukas arhitektuur, AI integratsioon, 1-2 tundi  
+- ⭐⭐⭐⭐ **Ekspert** – Tootmiskõlblik, ettevõtte mustrid, 2+ tundi  
 
-## 🎯 Mis selles hoidlas tegelikult on
+## 🎯 Mis tegelikult selles hoidlas on
 
 ### ✅ Kohalik rakendus (valmis kasutamiseks)
 
-#### [Microsoft Foundry mudelid vestlusrakendus](azure-openai-chat/README.md) 🆕
-**Täielik gpt-4.1 juurutus vestlusliidesega selle hoidla sees**
+#### [Microsoft Foundry Models juturakendus](azure-openai-chat/README.md) 🆕  
+**Täielik gpt-4.1 juurutus koos jutuliidesega on selles hoidlas**
 
-- **Asukoht:** `examples/azure-openai-chat/`
-- **Keerukus:** ⭐⭐ (kesktase)
-- **Sisaldab:**
-  - Täielik Microsoft Foundry mudelite juurutus (gpt-4.1)
-  - Pythoni käsurea vestlusliides
-  - Key Vault integreerimine API-võtmete turvaliseks halduseks
-  - Bicep infrastruktuuri mallid
-  - Tokeni kasutuse ja kulude jälgimine
-  - Piirangud ja vigade käitlemine
+- **Asukoht:** `examples/azure-openai-chat/`  
+- **Keerukus:** ⭐⭐ (kesktase)  
+- **Sisaldab:**  
+  - Täielik Microsoft Foundry Models juurutus (gpt-4.1)  
+  - Python käsurea jutuliides  
+  - Key Vault integratsioon turvaliste API võtmete jaoks  
+  - Bicepi infrastruktuurimallid  
+  - Tokenite kasutuse ja kulude jälgimine  
+  - Piirangute seadmine ja veahaldus  
 
-**Kiire algus:**
+**Kiire alustamine:**  
 ```bash
-# Liigu näidisele
+# Navigeeri näidisele
 cd examples/azure-openai-chat
 
-# Paiguta kõik
+# Paigalda kõik
 azd up
 
 # Paigalda sõltuvused ja alusta vestlust
 pip install -r src/requirements.txt
 python src/chat.py
 ```
+  
+**Tehnoloogiad:** Microsoft Foundry Models, gpt-4.1, Key Vault, Python, Bicep  
 
-**Tehnoloogiad:** Microsoft Foundry mudelid, gpt-4.1, Key Vault, Python, Bicep
+#### [Container App näited](container-app/README.md) 🆕  
+**Üldised konteineri juurutuse näited selles hoidlas**
 
-#### [Konteinerirakenduse näited](container-app/README.md) 🆕
-**Konteinerite juurutamise põhjalikud näited selle hoidla sees**
+- **Asukoht:** `examples/container-app/`  
+- **Keerukus:** ⭐-⭐⭐⭐⭐ (algajast edasijõudnuni)  
+- **Sisaldab:**  
+  - [Peamine juhend](container-app/README.md) - Täielik konteinerite juurutuste ülevaade  
+  - [Lihtne Flask API](../../../examples/container-app/simple-flask-api) - Põhiline REST API näide  
+  - [Mikroteenuste arhitektuur](../../../examples/container-app/microservices) - Tootmiskõlblik mitme teenuse juurutus  
+  - Kiire algus, tootmismustrid ja edasijõudnute mustrid  
+  - Jälgimine, turvalisus ja kulude optimeerimine  
 
-- **Asukoht:** `examples/container-app/`
-- **Keerukus:** ⭐-⭐⭐⭐⭐ (algajast edasijõudnuni)
-- **Sisaldab:**
-  - [Peamine juhend](container-app/README.md) - täielik ülevaade konteinerite juurutamisest
-  - [Lihtne Flask API](../../../examples/container-app/simple-flask-api) - lihtne REST API näide
-  - [Mikroteenuste arhitektuur](../../../examples/container-app/microservices) - tootmiskõlbulik mitmete teenustega juurutus
-  - Kiire algus, tootmismustrid ja edasijõudnud mustrid
-  - Jälgimine, turvalisus ja kulude optimeerimine
-
-**Kiire algus:**
+**Kiire alustamine:**  
 ```bash
 # Vaata peamist juhendit
 cd examples/container-app
 
-# Loo lihtne Flask API
+# Kasuta lihtsat Flask API-t
 cd simple-flask-api
 azd up
 
-# Loo mikroteenuste näide
+# Kasuta mikroteenuste näidet
 cd ../microservices
 azd up
 ```
+  
+**Tehnoloogiad:** Azure Container Apps, Docker, Python Flask, Node.js, C#, Go, Application Insights  
 
-**Tehnoloogiad:** Azure Container Apps, Docker, Python Flask, Node.js, C#, Go, Application Insights
+#### [Jaemüügi mitmeagendi lahendus](retail-scenario.md) 🆕  
+**Täielik tootmiskõlblik rakendus sisaldub selles hoidlas**
 
-#### [Jaemüügi mitmeagendi lahendus](retail-scenario.md) 🆕
-**Täielik tootmiskõlbulik rakendus selle hoidla sees**
+- **Asukoht:** `examples/retail-multiagent-arm-template/`  
+- **Keerukus:** ⭐⭐⭐⭐ (edasijõudnu)  
+- **Sisaldab:**  
+  - Täielik ARM juurutuse mall  
+  - Mitmeagendi arhitektuur (kliendi- ja laoseisuagent)  
+  - Microsoft Foundry Models integratsioon  
+  - AI otsing koos RAG-ga  
+  - Põhjalik jälgimine  
+  - Ühe klõpsuga juurutusskript  
 
-- **Asukoht:** `examples/retail-multiagent-arm-template/`
-- **Keerukus:** ⭐⭐⭐⭐ (edasijõudnu)
-- **Sisaldab:**
-  - Täielik ARM juurutusmall
-  - Mitmeagendi arhitektuur (klient + laoseis)
-  - Microsoft Foundry mudelid integreeritud
-  - AI otsing RAG-ga
-  - Täielik jälgimine
-  - Ühe nupuvajutusega juurutusskript
-
-**Kiire algus:**
+**Kiire alustamine:**  
 ```bash
 cd examples/retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
-
-**Tehnoloogiad:** Microsoft Foundry mudelid, AI otsing, konteinerirakendused, Cosmos DB, Application Insights
+  
+**Tehnoloogiad:** Microsoft Foundry Models, AI Search, Container Apps, Cosmos DB, Application Insights  
 
 ---
 
-## 🔗 Välised Azure näited (klooni kasutamiseks)
+## 🔗 Välised Azure Samples (klooni kasutamiseks)
 
-Järgmised näited on hallatavad ametlikes Azure-Samples hoidlates. Klooni need, et uurida erinevaid AZD mustreid:
+Järgnevad näited on ametlikult hoitud Azure-Samples repodes. Klooni need, et uurida erinevaid AZD mustreid:
 
-### Lihtsad rakendused (peatükid 1-2)
+### Lihtsad rakendused (Peatükid 1–2)
 
 | Mall | Hoidla | Keerukus | Teenused |
 |:---------|:-----------|:-----------|:---------|
-| **Python Flask API** | [Kohalik: simple-flask-api](../../../examples/container-app/simple-flask-api) | ⭐ | Python, konteinerirakendused, Application Insights |
-| **Mikroteenused** | [Kohalik: microservices](../../../examples/container-app/microservices) | ⭐⭐⭐⭐ | Mitme teenusega, Service Bus, Cosmos DB, SQL |
-| **Node.js + MongoDB** | [todo-nodejs-mongo](https://github.com/Azure-Samples/todo-nodejs-mongo) | ⭐ | Express, Cosmos DB, konteinerirakendused |
-| **React + Functions** | [todo-csharp-sql-swa-func](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) | ⭐ | Static Web Apps, Functions, SQL |
-| **Python Flask konteiner** | [container-apps-store-api](https://github.com/Azure-Samples/container-apps-store-api-microservice) | ⭐ | Python, konteinerirakendused, API |
+| **Python Flask API** | [Kohalik: simple-flask-api](../../../examples/container-app/simple-flask-api) | ⭐ | Python, Container Apps, Application Insights |
+| **Mikroteenused** | [Kohalik: mikroteenused](../../../examples/container-app/microservices) | ⭐⭐⭐⭐ | Mitme teenuse, Service Bus, Cosmos DB, SQL |
+| **Node.js + MongoDB** | [todo-nodejs-mongo](https://github.com/Azure-Samples/todo-nodejs-mongo) | ⭐ | Express, Cosmos DB, Container Apps |
+| **React + funktsioonid** | [todo-csharp-sql-swa-func](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) | ⭐ | Static Web Apps, funktsioonid, SQL |
+| **Python Flask konteiner** | [container-apps-store-api](https://github.com/Azure-Samples/container-apps-store-api-microservice) | ⭐ | Python, Container Apps, API |
 
-**Kasutamisjuhend:**
+**Kasutusjuhend:**  
 ```bash
-# Klooni ükskõik milline näide
+# Kloneeri ükskõik milline näide
 git clone https://github.com/Azure-Samples/todo-nodejs-mongo
 cd todo-nodejs-mongo
 
-# Käivita rakendus
+# Rakenda
 azd up
 ```
-
-### AI rakenduste näited (peatükid 2, 5, 8)
-
-| Mall | Hoidla | Keerukus | Fookus |
-|:---------|:-----------|:-----------|:------|
-| **Microsoft Foundry mudelid vestlus** | [Kohalik: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | gpt-4.1 juurutus |
-| **AI vestlus kiire algus** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | põhiline AI vestlus |
-| **AI agendid** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | agendiraamistik |
-| **Otsing + OpenAI demo** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | RAG mustri demonstraator |
-| **Contoso vestlus** | [contoso-chat](https://github.com/Azure-Samples/contoso-chat) | ⭐⭐⭐⭐ | ettevõtte AI |
-
-### Andmebaas ja edasijõudnud mustrid (peatükid 3-8)
+  
+### AI rakenduste näited (Peatükid 2, 5, 8)
 
 | Mall | Hoidla | Keerukus | Fookus |
 |:---------|:-----------|:-----------|:------|
-| **C# + SQL** | [todo-csharp-sql](https://github.com/Azure-Samples/todo-csharp-sql) | ⭐⭐ | andmebaasi integratsioon |
-| **Python + Cosmos** | [todo-python-mongo-swa-func](https://github.com/Azure-Samples/todo-python-mongo-swa-func) | ⭐⭐ | serverivaba NoSQL |
-| **Java mikroteenused** | [java-microservices-aca-lab](https://github.com/Azure-Samples/java-microservices-aca-lab) | ⭐⭐⭐ | mitme teenusega |
+| **Microsoft Foundry Models Chat** | [Kohalik: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | gpt-4.1 juurutus |
+| **AI jutuvestluse kiire algus** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | Põhiline AI jutuvestlus |
+| **AI agendid** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | Agendi raamistik |
+| **Otsing + OpenAI demo** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | RAG muster |
+| **Contoso jututuba** | [contoso-chat](https://github.com/Azure-Samples/contoso-chat) | ⭐⭐⭐⭐ | Ettevõtte AI |
+
+### Andmebaas & edasijõudnud mustrid (Peatükid 3–8)
+
+| Mall | Hoidla | Keerukus | Fookus |
+|:---------|:-----------|:-----------|:------|
+| **C# + SQL** | [todo-csharp-sql](https://github.com/Azure-Samples/todo-csharp-sql) | ⭐⭐ | Andmebaasi integratsioon |
+| **Python + Cosmos** | [todo-python-mongo-swa-func](https://github.com/Azure-Samples/todo-python-mongo-swa-func) | ⭐⭐ | NoSQL serverless |
+| **Java mikroteenused** | [java-microservices-aca-lab](https://github.com/Azure-Samples/java-microservices-aca-lab) | ⭐⭐⭐ | Mitme teenuse |
 | **ML torujuhe** | [mlops-v2](https://github.com/Azure-Samples/mlops-v2) | ⭐⭐⭐⭐ | MLOps |
 
 ## Õpieesmärgid
 
-Nende näidete töötlemise kaudu:
-- Harjutad Azure Developer CLI töövoogusid realistlike rakenduste stsenaariumitega
-- Mõistad erinevaid rakenduste arhitektuure ja nende azd rakendusi
-- Valdad infrastruktuuri koodi mustrid eri Azure teenuste jaoks
-- Rakendad konfiguratsiooni haldust ja keskkonnapõhiseid juurutusstrateegiaid
-- Kasutad jälgimise, turvalisuse ja skaleerimise mustreid praktilises kontekstis
-- Kogud kogemust tõrkeotsingus ja silumises päris juurutusstsenaariumitel
+Nende näidete läbimängimisel:  
+- Harjutad Azure Developer CLI töövooge realistlike rakenduste stsenaariumitega  
+- Mõistad erinevaid rakendusarhitektuure ja nende azd rakendusi  
+- Valdad infrastruktuuri koodi mustreid erinevate Azure teenuste jaoks  
+- Rakendad konfiguratsiooni haldust ja keskkonnapõhist juurutusstrateegiat  
+- Rakendad jälgimise, turvalisuse ja skaleerimise mustreid praktilistes tingimustes  
+- Hangid kogemusi tõrkeotsingus ja silumises päris juurutussituatsioonides  
 
-## Õppimise tulemused
+## Õpitulemused
 
-Pärast nende näidete läbimist suudad:
-- Juurutada erinevat tüüpi rakendusi Azure Developer CLI abil enesekindlalt
-- Kohandada olemasolevaid malle vastavalt oma rakenduse vajadustele
-- Kujundada ja rakendada kohandatud infrastruktuuri mustreid Bicepiga
-- Konfigureerida keerukaid mitme teenusega rakendusi õigetesse sõltuvustesse
-- Rakendada turvalisuse, jälgimise ja jõudluse parimaid tavasid päris olukordades
-- Tõrkeotsingus ning juurutuste optimeerimises praktikal põhinevalt kontekteeruda
+Pärast nende näidete lõpetamist suudad:  
+- Usaldusväärselt juurutada erinevaid rakendustüüpe Azure Developer CLI-ga  
+- Kohandada antud malle vastavalt oma rakenduse nõuetele  
+- Kujundada ja rakendada kohandatud infrastruktuuri mustreid Bicepiga  
+- Konfigureerida keerukaid mitme teenusega rakendusi korralike sõltuvustega  
+- Rakendada turbe-, jälgimis- ja jõudluse parimaid praktikaid päris stsenaariumites  
+- Tõrkeotsida ja optimeerida juurutusi praktilise kogemuse põhjal  
 
-## Kataloogistruktuur
+## Kausta struktuur
 
 ```
 Azure Samples AZD Templates (linked externally):
@@ -187,116 +187,117 @@ Azure Samples AZD Templates (linked externally):
     ├── bicep-modules/
     └── scripts/
 ```
+  
+## Kiired stardinäited
 
-## Kiire alguse näited
+> **💡 Uus AZD-s?** Alusta näitega #1 (Flask API) - võtab ~20 minutit ja õpetab põhitõdesid.
 
-> **💡 Uus AZD kasutaja?** Alusta näitest #1 (Flask API) - see võtab ~20 minutit ja õpetab põhikontseptsioonid.
-
-### Algajatele
-1. **[Konteinerirakendus - Python Flask API](../../../examples/container-app/simple-flask-api)** (Kohalik) ⭐  
-   Juuruta lihtne REST API koos nullini skaaleerimisega  
-   **Aeg:** 20-25 minutit | **Kulu:** $0-5/kuu  
-   **Õpid:** põhiline azd töövoog, konteineriseerimine, tervisekontroll  
-   **Eeldatav tulemus:** toimiv API ots, mis tagastab "Hello, World!" koos jälgimisega
+### Algajatele  
+1. **[Container App - Python Flask API](../../../examples/container-app/simple-flask-api)** (kohalik) ⭐  
+   Juhi lihtsat REST API-d koos scale-to-zero-ga  
+   **Aeg:** 20-25 minutit | **Kulu:** $0-5/kuus  
+   **Õpid:** põhilise azd töövoo, konteineriseerimise, tervisekontrolli  
+   **Oodatav tulemus:** töökas API lõpp-punkt, mis tagastab "Hello, World!" koos jälgimisega  
 
 2. **[Lihtne veebirakendus - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** ⭐  
-   Juuruta Node.js Express veebirakendus koos MongoDB-ga  
-   **Aeg:** 25-35 minutit | **Kulu:** $10-30/kuu  
+   Juhi Node.js Express veebirakendus MongoDB-ga  
+   **Aeg:** 25-35 minutit | **Kulu:** $10-30/kuus  
    **Õpid:** andmebaasi integratsioon, keskkonnamuutujad, ühendusstringid  
-   **Eeldatav tulemus:** todo list rakendus, mis võimaldab luua/vaadata/muutma/kustutada
+   **Oodatav tulemus:** Todo nimekirja rakendus, mis toetab loomist/lugemist/uuendamist/kustutamist  
 
 3. **[Staatiline veebisait - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** ⭐  
    Host React staatilist veebisaiti Azure Static Web Apps abil  
-   **Aeg:** 20-30 minutit | **Kulu:** $0-10/kuu  
-   **Õpid:** staatiline hostimine, serverivabad funktsioonid, CDN juurutamine  
-   **Eeldatav tulemus:** React kasutajaliides API tagapoolsega, automaatne SSL, globaalne CDN
+   **Aeg:** 20-30 minutit | **Kulu:** $0-10/kuus  
+   **Õpid:** staatiline hostimine, serverless funktsioonid, CDN juurutus  
+   **Oodatav tulemus:** React kasutajaliides API backendiga, automaatne SSL, globaalne CDN  
 
-### Kesktaseme kasutajatele
-4. **[Microsoft Foundry mudelid vestlusrakendus](../../../examples/azure-openai-chat)** (Kohalik) ⭐⭐  
-   Juuruta gpt-4.1 vestlusliides ja turvaline API võtme haldus  
-   **Aeg:** 35-45 minutit | **Kulu:** $50-200/kuu  
-   **Õpid:** Microsoft Foundry mudelite juurutus, Key Vault integreerimine, tokenite jälgimine  
-   **Eeldatav tulemus:** toimiv vestlusrakendus gpt-4.1-ga koos kulude jälgimisega
+### Kesktaseme kasutajatele  
+4. **[Microsoft Foundry Models juturakendus](../../../examples/azure-openai-chat)** (kohalik) ⭐⭐  
+   Juhi gpt-4.1 jutuliidesega ja turvalise API võtme haldusega  
+   **Aeg:** 35-45 minutit | **Kulu:** $50-200/kuus  
+   **Õpid:** Microsoft Foundry Models juurutust, Key Vault integratsiooni, tokenite jälgimist  
+   **Oodatav tulemus:** töökas juturakendus gpt-4.1 ja kulu jälgimisega  
 
-5. **[Konteinerirakendus - mikroteenused](../../../examples/container-app/microservices)** (Kohalik) ⭐⭐⭐⭐  
-   Tootmiskõlbulik mitmeteenusega arhitektuur  
-   **Aeg:** 45-60 minutit | **Kulu:** $50-150/kuu  
-   **Õpid:** teenustevaheline suhtlus, sõnumijadad, hajutatud jälgimine  
-   **Eeldatav tulemus:** 2-teenusega süsteem (API Gateway + Toote teenus) koos jälgimisega
+5. **[Container App - Mikroteenused](../../../examples/container-app/microservices)** (kohalik) ⭐⭐⭐⭐  
+   Tootmiskõlblik mitme teenuse arhitektuur  
+   **Aeg:** 45-60 minutit | **Kulu:** $50-150/kuus  
+   **Õpid:** teenustevahelist kommunikatsiooni, sõnumijärjekordi, hajutatud jälgimist  
+   **Oodatav tulemus:** 2-teenusega süsteem (API Gateway + toote teenus) koos jälgimisega  
 
-6. **[Andmebaasi rakendus - C# koos Azure SQL-iga](https://github.com/Azure-Samples/todo-csharp-sql)** ⭐⭐  
+6. **[Andmebaasi rakendus - C# Azure SQL-iga](https://github.com/Azure-Samples/todo-csharp-sql)** ⭐⭐  
    Veebirakendus C# API ja Azure SQL andmebaasiga  
-   **Aeg:** 30-45 minutit | **Kulu:** $20-80/kuu  
+   **Aeg:** 30-45 minutit | **Kulu:** $20-80/kuus  
    **Õpid:** Entity Framework, andmebaasi migratsioonid, ühenduste turve  
-   **Eeldatav tulemus:** C# API Azure SQL tagapoolsega, skeemi automaatne juurutus
+   **Oodatav tulemus:** C# API Azure SQL tagapõhja ja automaatse skeemi juurutusega  
 
-7. **[Serverivaba funktsioon - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** ⭐⭐  
-   Python Azure Functions HTTP päästikute ja Cosmos DB-ga  
-   **Aeg:** 30-40 minutit | **Kulu:** $10-40/kuu  
-   **Õpid:** sündmuspõhine arhitektuur, serverivaba skaleerimine, NoSQL integreerimine  
-   **Eeldatav tulemus:** funktsioonirakendus, mis reageerib HTTP päringutele Cosmos DB salvestusega
+7. **[Serverless funktsioon - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** ⭐⭐  
+   Python Azure funktsioonid HTTP päästikutega ja Cosmos DB-ga  
+   **Aeg:** 30-40 minutit | **Kulu:** $10-40/kuus  
+   **Õpid:** sündmuspõhine arhitektuur, serverless skaleerimine, NoSQL integratsioon  
+   **Oodatav tulemus:** funktsioonirakendus, mis reageerib HTTP päringutele Cosmos DB salvestusega  
 
 8. **[Mikroteenused - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** ⭐⭐⭐  
-   Mitme teenusega Java rakendus konteinerirakenduste ja API Gateway ga  
-   **Aeg:** 60-90 minutit | **Kulu:** $80-200/kuu  
-   **Õpid:** Spring Boot juurutus, teenusvõrk, koormuse tasakaalustamine  
-   **Eeldatav tulemus:** mitme teenusega Java süsteem teenuse avastamise ja marsruutimisega
+   Mitme teenusega Java rakendus Container Apps ja API Gatewayga  
+   **Aeg:** 60-90 minutit | **Kulu:** $80-200/kuus  
+   **Õpid:** Spring Boot juurutus, teenusevõrk, koormuse tasakaalustamine  
+   **Oodatav tulemus:** Java mitme teenuse süsteem teenuste avastuse ja marsruutimisega  
 
 ### Microsoft Foundry mallid
 
-1. **[Microsoft Foundry mudelid vestlusrakendus - kohalik näide](../../../examples/azure-openai-chat)** ⭐⭐  
-   Täielik gpt-4.1 juurutus vestlusliidesega  
-   **Aeg:** 35-45 minutit | **Kulu:** $50-200/kuu  
-   **Eeldatav tulemus:** toimiv vestlusrakendus tokeni jälgimise ja kulude monitooringuga
+1. **[Microsoft Foundry Models juturakendus - kohalik näide](../../../examples/azure-openai-chat)** ⭐⭐  
+   Täielik gpt-4.1 juurutus jutuliidesega  
+   **Aeg:** 35-45 minutit | **Kulu:** $50-200/kuus  
+   **Oodatav tulemus:** töökas juturakendus tokeni jälgimise ja kulu jälgimisega  
 
 2. **[Azure Search + OpenAI demo](https://github.com/Azure-Samples/azure-search-openai-demo)** ⭐⭐⭐  
-   Intelligentsed vestlusrakendused RAG arhitektuuriga  
-   **Aeg:** 60-90 minutit | **Kulu:** $100-300/kuu  
-   **Eeldatav tulemus:** RAG-käivitatud vestlusliides dokumentide otsingu ja tsitaatidega
+   Intelligentselt juhitud jutuliides RAG arhitektuuriga  
+   **Aeg:** 60-90 minutit | **Kulu:** $100-300/kuus  
+   **Oodatav tulemus:** RAG-põhine jutuliides dokumentide otsingu ja viidetega  
 
-3. **[AI Dokumenditöötlus](https://github.com/Azure-Samples/azure-ai-document-processing)** ⭐⭐  
+3. **[AI dokumenditöötlus](https://github.com/Azure-Samples/azure-ai-document-processing)** ⭐⭐  
    Dokumentide analüüs Azure AI teenustega  
-   **Aeg:** 40-60 minutit | **Kulu:** $20-80/kuu  
-   **Eeldatav tulemus:** API ekstraktib teksti, tabeleid ja üksusi üleslaaditud dokumentidest
+   **Aeg:** 40-60 minutit | **Kulu:** $20-80/kuus  
+   **Oodatav tulemus:** API, mis ekstraheerib teksti, tabeleid ja entiteete üleslaaditud dokumentidest  
 
 4. **[Masinõppe torujuhe](https://github.com/Azure-Samples/mlops-v2)** ⭐⭐⭐⭐  
-   MLOpsi töövoog Azure Machine Learninguga  
-   **Aeg:** 2-3 tundi | **Kulu:** $150-500/kuu  
-   **Eeldatav tulemus:** automatiseeritud ML torujuhe koos treeningu, juurutuse ja jälgimisega
+   MLOps töövoog Azure Machine Learninguga  
+   **Aeg:** 2-3 tundi | **Kulu:** $150-500/kuus  
+   **Oodatav tulemus:** automatiseeritud ML torujuhe koolituse, juurutuse ja jälgimisega  
 
 ### Reaalsed stsenaariumid
 
-#### **Jaemüügi mitmeagendi lahendus** 🆕
-**[Täielik juurutusjuhend](./retail-scenario.md)**
+#### **Jaemüügi mitmeagendi lahendus** 🆕  
+**[Täielik rakenduse juhend](./retail-scenario.md)**
 
-Kõikehõlmav, tootmiskõlbulik mitmeagendi klienditoe lahendus, mis demonstreerib ettevõtte taseme AI rakenduse juurutust AZD-ga. See stsenaarium pakub:
-- **Täielik arhitektuur**: Mitmeagendiline süsteem spetsialiseerunud klienditeeninduse ja laohalduse agentidega  
-- **Tootmise infrastruktuur**: Mitme piirkonna Microsoft Foundry mudelite juurutused, AI otsing, konteineri rakendused ja ulatuslik jälgimine  
-- **Valmis juurutamiseks ARM mall**: Ühe klõpsuga juurutamine mitme konfiguratsioonirežiimiga (Minimaalne/Standardne/Premium)  
-- **Täpsemad funktsioonid**: Red teaming turvalisuse valideerimine, agentide hindamisraamistik, kulude optimeerimine ja tõrkeotsingu juhendid  
-- **Tegelik äriline kontekst**: Jaemüüja klienditoe kasutusjuht koos failide üleslaadimise, otsingute integratsiooni ja dünaamilise skaleerimisega  
+Põhjalik, tootmiskõlblik mitmeagendi klienditoe lahendus, mis demonstreerib ettevõtte taseme AI rakenduse juurutust AZD-ga. See stsenaarium pakub:
 
-**Tehnoloogiad**: Microsoft Foundry mudelid (gpt-4.1, gpt-4.1-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API  
+- **Täielik arhitektuur**: mitmeagendiga süsteem eraldiseisvate klienditeeninduse ja laohalduse agentidega
+- **Tootmiskeskkond**: Mitme regiooni Microsoft Foundry mudelite paigaldused, AI otsing, konteinerirakendused ja põhjalik monitooring  
+- **Koheseks kasutamiseks valmis ARM mall**: Ühe klõpsuga paigaldus mitme konfiguratsioonirežiimiga (Minimal/Standard/Premium)  
+- **Täpsemad funktsioonid**: Punase meeskonna turvakontroll, agendi hindamise raamistik, kulude optimeerimine ja tõrkeotsingu juhendid  
+- **Reaalne ärikontekst**: Jaemüüja klienditoe kasutusjuhtum failide üleslaadimise, otsingute integreerimise ja dünaamilise skaleerimisega  
 
-**Kompleksus**: ⭐⭐⭐⭐ (Täiustatud - Ettevõtte tootmiskõlblik)  
+**Tehnoloogiad**: Microsoft Foundry mudelid (gpt-4.1, gpt-4.1-mini), Azure AI Search, konteinerirakendused, Cosmos DB, Application Insights, Document Intelligence, Bing Search API  
 
-**Sobib ideaalselt**: tehisintellekti arendajatele, lahendusarhitektidele ja meeskondadele, kes ehitavad tootmiskõlblikke mitmeagentseid süsteeme  
+**Kompleksus**: ⭐⭐⭐⭐ (Täpsem - ettevõttekeskkonnaks valmis)
 
-**Kiire algus**: Juurutage täielik lahendus alla 30 minutiga, kasutades kaasasolevat ARM malli `./deploy.sh -g myResourceGroup` käsuga  
+**Täiuslik valik**: AI arendajatele, lahenduste arhitektidele ja meeskondadele, kes ehitavad tootmiskasutuseks mitmeagendilisi süsteeme  
 
-## 📋 Kasutusjuhised  
+**Kiire alustamine**: Paigaldage kogu lahendus vähem kui 30 minutiga kaasasoleva ARM malliga käsuga `./deploy.sh -g myResourceGroup`  
 
-### Eeltingimused  
+## 📋 Kasutusjuhised
 
-Enne näidete käivitamist:  
-- ✅ Azure tellimus, millel on Omaniku või Kaasautorite juurdepääs  
-- ✅ Paigaldatud Azure Developer CLI ([Paigaldusjuhend](../docs/chapter-01-foundation/installation.md))  
-- ✅ Töötav Docker Desktop (konteineriteste jaoks)  
-- ✅ Sobivad Azure kvotaadid (kontrollige näidete spetsiifilisi nõudeid)  
+### Eeldused
 
-> **💰 Kulu hoiatus:** Kõik näited loovad reaalseid Azure ressursse, mis kaasnevad kuludega. Vaadake iga näite README faile kuluhinnangute kohta. Ärge unustage pärast töödlust käivitada `azd down`, et vältida jooksvaid kulusid.  
+Enne mõne näite käivitamist:  
+- ✅ Azure tellimus, millel on omaniku või panustaja ligipääs  
+- ✅ Azure Developer CLI on paigaldatud ([paigaldusjuhend](../docs/chapter-01-foundation/installation.md))  
+- ✅ Docker Desktop töötab (konteinerinäidete jaoks)  
+- ✅ Sobivad Azure kvoodid (kontrollige näidete erisoove)  
 
-### Näidete lokaalne käivitamine  
+> **💰 Kuluhoiatus:** Kõik näited loovad päris Azure ressursse, mis toovad kaasa tasusid. Vaadake iga README faili kulueeskirjade kohta. Pärast kasutamist käivitage `azd down`, et vältida jätkuvaid kulusid.  
+
+### Näidete kohalik käivitamine
 
 1. **Kloonige või kopeerige näide**  
    ```bash
@@ -306,7 +307,7 @@ Enne näidete käivitamist:
   
 2. **Initsialiseerige AZD keskkond**  
    ```bash
-   # Algata olemasoleva malliga
+   # Initsialiseeri olemasoleva malliga
    azd init
    
    # Või loo uus keskkond
@@ -320,282 +321,282 @@ Enne näidete käivitamist:
    azd env set AZURE_SUBSCRIPTION_ID your-subscription-id
    ```
   
-4. **Juurutage**  
+4. **Paigaldage**  
    ```bash
-   # Juhi infrastruktuuri ja rakenduse juurutamine
+   # Paigalda infrastruktuur ja rakendus
    azd up
    ```
   
-5. **Kontrollige juurutust**  
+5. **Kontrollige paigaldust**  
    ```bash
-   # Hangi teenuse lõpp-punktid
+   # Saa teenuse lõpp-punktid
    azd env get-values
    
    # Testi lõpp-punkti (näide)
    curl https://your-app-url.azurecontainer.io/health
    ```
   
-   **Oodatavad õnnestumise näitajad:**  
-   - ✅ `azd up` lõpetab veatult  
+   **Oodatavad õnnestumise tunnused:**  
+   - ✅ `azd up` lõpetab ilma vigadeta  
    - ✅ Teenuse lõpp-punkt tagastab HTTP 200  
-   - ✅ Azure portaal kuvab olekut "Jooksmas"  
-   - ✅ Application Insights vastu võtab telemeetriaid  
+   - ✅ Azure portaal näitab olekut "Running"  
+   - ✅ Application Insights vastuvõtmas telemeetriaid  
 
-> **⚠️ Probleeme?** Vaadake [Levinud probleemid](../docs/chapter-07-troubleshooting/common-issues.md) juurutamise tõrkeotsingu jaoks  
+> **⚠️ Probleemid?** Vaadake [tuntud probleemid](../docs/chapter-07-troubleshooting/common-issues.md) tõrkeotsingu abiks  
 
-### Näidete kohandamine  
+### Näidete kohandamine
 
-Iga näide sisaldab:  
-- **README.md** - üksikasjalikud seadistus- ja kohandamisjuhised  
+Igal näitel on kaasas:  
+- **README.md** - Üksikasjalikud seadistus- ja kohandamisjuhised  
 - **azure.yaml** - AZD konfiguratsioon kommentaaridega  
-- **infra/** - Bicep mallid parameetrite seletustega  
-- **src/** - näidiskoodi rakendus  
-- **scripts/** - abiskriptid sagedaste ülesannete jaoks  
+- **infra/** - Bicep mallid koos parameetrite seletustega  
+- **src/** - Näidiskoodi rakendus  
+- **scripts/** - Abi skriptid sagedasteks ülesanneteks  
 
-## 🎯 Õpieesmärgid  
+## 🎯 Õpieesmärgid
 
-### Näiteliigid  
+### Näidete kategooriad
 
-#### **Põhilised juurutused**  
-- Üksikteenuste rakendused  
-- Lihtsad infrastruktuurimustrid  
-- Põhiseadistushaldus  
-- Kuluefektiivsed arenduseadistused  
+#### **Põhilised paigaldused**  
+- Ühetegevuslikud rakendused  
+- Lihtsad infrastruktuuri mustrid  
+- Põhiline konfiguratsioonihaldus  
+- Kulutõhusad arenduskeskkonnad  
 
 #### **Täpsemad stsenaariumid**  
-- Mitme teenusega arhitektuurid  
+- Mitmekihilised arhitektuurid  
 - Keerukad võrgukonfiguratsioonid  
-- Andmebaasi integreerimise mustrid  
-- Turvalisuse ja vastavuse rakendused  
+- Andmebaasi integratsiooni mustrid  
+- Turva- ja vastavuslahendused  
 
-#### **Tootmiskõlblikud mustrid**  
-- Kõrge kättesaadavusega konfiguratsioonid  
-- Jälgimine ja jälgitavus  
+#### **Toodanguks valmis mustrid**  
+- Kõrge kättesaadavuse konfiguratsioonid  
+- Monitooring ja jälgitavus  
 - CI/CD integreerimine  
-- Katastroofi taastumise seadistused  
+- Katastroofitaaste lahendused  
 
-## 📖 Näidete kirjeldused  
+## 📖 Näidete kirjelduse
 
 ### Lihtne veebirakendus - Node.js Express  
-**Tehnoloogiad**: Node.js, Express, MongoDB, Container Apps  
+**Tehnoloogiad**: Node.js, Express, MongoDB, konteinerirakendused  
 **Kompleksus**: Algaja  
-**Kontseptsioonid**: lihtne juurutus, REST API, NoSQL andmebaasi integreerimine  
+**Kontseptsioonid**: Põhiline paigaldus, REST API, NoSQL andmebaasi integratsioon  
 
-### Staatiline veebisait - React SPA  
+### Staatiline veebileht - React SPA  
 **Tehnoloogiad**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
 **Kompleksus**: Algaja  
-**Kontseptsioonid**: staatiline majutamine, serveritu backend, kaasaegne veebiarendus  
+**Kontseptsioonid**: Staatiline majutus, serverivaba backend, kaasaegne veebiarendus  
 
-### Konteineri rakendus - Python Flask  
-**Tehnoloogiad**: Python Flask, Docker, Container Apps, Container Registry, Application Insights  
+### Konteinerirakendus - Python Flask  
+**Tehnoloogiad**: Python Flask, Docker, konteinerirakendused, konteineriregister, Application Insights  
 **Kompleksus**: Algaja  
-**Kontseptsioonid**: konteinerdamine, REST API, skaleerimine nullini, tervisekontrollid, jälgimine  
-**Asukoht**: [Lokaalne näide](../../../examples/container-app/simple-flask-api)  
+**Kontseptsioonid**: Konteiner kasutamine, REST API, skaleerimine nulli, terviseprobe, monitooring  
+**Asukoht**: [Kohalik näide](../../../examples/container-app/simple-flask-api)  
 
-### Konteineri rakendus - mikroteenuste arhitektuur  
-**Tehnoloogiad**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, Container Apps  
-**Kompleksus**: Täiustatud  
-**Kontseptsioonid**: mitme teenuse arhitektuur, teenuste omavaheline suhtlus, sõnumite järjekord, hajutatud jälgimine  
-**Asukoht**: [Lokaalne näide](../../../examples/container-app/microservices)  
+### Konteinerirakendus - mikroteenuste arhitektuur  
+**Tehnoloogiad**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, konteinerirakendused  
+**Kompleksus**: Täpsem  
+**Kontseptsioonid**: Mitmete teenuste arhitektuur, teenustevaheline suhtlus, sõnumite järjekord, hajutatud jälgimine  
+**Asukoht**: [Kohalik näide](../../../examples/container-app/microservices)  
 
-### Andmebaasi rakendus - C# Azure SQL-iga  
-**Tehnoloogiad**: C# ASP.NET Core, Azure SQL Database, App Service  
+### Andmebaasirakendus - C# Azure SQL-iga  
+**Tehnoloogiad**: C# ASP.NET Core, Azure SQL andmebaas, App Service  
 **Kompleksus**: Kesktase  
 **Kontseptsioonid**: Entity Framework, andmebaasiühendused, veebirakenduse API arendus  
 
-### Serveritu funktsioon - Python Azure Functions  
+### Serverivaba funktsioon - Python Azure Functions  
 **Tehnoloogiad**: Python, Azure Functions, Cosmos DB, Static Web Apps  
 **Kompleksus**: Kesktase  
-**Kontseptsioonid**: sündmuspõhine arhitektuur, serveritu arvutus, täispinu arendus  
+**Kontseptsioonid**: Sündmustepõhine arhitektuur, serverivaba arvutus, täispinu arendus  
 
 ### Mikroteenused - Java Spring Boot  
-**Tehnoloogiad**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
+**Tehnoloogiad**: Java Spring Boot, konteinerirakendused, Service Bus, API Gateway  
 **Kompleksus**: Kesktase  
-**Kontseptsioonid**: mikroteenuste suhtlus, hajutatud süsteemid, ettevõtte mustrid  
+**Kontseptsioonid**: Mikroteenuste side, hajutatud süsteemid, ettevõtte mustrid  
 
-### Microsoft Foundry näited  
+### Microsoft Foundry näited
 
-#### Microsoft Foundry mudelite juturobot  
-**Tehnoloogiad**: Microsoft Foundry mudelid, Cognitive Search, App Service  
+#### Microsoft Foundry mudelite vestlusrakendus  
+**Tehnoloogiad**: Microsoft Foundry mudelid, Azure AI Search, App Service  
 **Kompleksus**: Kesktase  
-**Kontseptsioonid**: RAG arhitektuur, vektoriotsing, suurte keelemudelite integreerimine  
+**Kontseptsioonid**: RAG arhitektuur, vektorotsing, LLM integratsioon  
 
-#### AI dokumentide töötlemine  
+#### AI dokumenditöötlus  
 **Tehnoloogiad**: Azure AI Document Intelligence, Storage, Functions  
 **Kompleksus**: Kesktase  
-**Kontseptsioonid**: dokumentide analüüs, OCR, andmeekstraktsioon  
+**Kontseptsioonid**: Dokumendianalüüs, OCR, andmete väljavõte  
 
-#### Masinõppe töövoog  
-**Tehnoloogiad**: Azure ML, MLOps, Container Registry  
-**Kompleksus**: Täiustatud  
-**Kontseptsioonid**: mudelite koolitus, juurutamise torud, jälgimine  
+#### Masinõppe torujuhe  
+**Tehnoloogiad**: Azure ML, MLOps, konteineriregister  
+**Kompleksus**: Täpsem  
+**Kontseptsioonid**: Mudelite treening, paigaldustoru, monitooring  
 
-## 🛠 Konfiguratsiooni näited  
+## 🛠 Konfiguratsiooni näited
 
-Kaust `configurations/` sisaldab taaskasutatavaid komponente:  
+Kataloog `configurations/` sisaldab taaskasutatavaid komponente:  
 
 ### Keskkonna konfiguratsioonid  
 - Arenduskeskkonna seaded  
-- Testkeskkonna konfiguratsioonid  
-- Tootmiskõlblikud seadistused  
-- Mitme piirkonna juurutussed  
+- Staging keskkonna konfiguratsioonid  
+- Toodanguks valmis konfiguratsioonid  
+- Mitme regiooni paigaldised  
 
 ### Bicep moodulid  
-- Taaskasutatavad infrastruktuuri komponendid  
-- Üldised ressursimustrid  
-- Turvalisuse tugevdatud mallid  
+- Taaskasutavad infrastruktuuri komponendid  
+- Levinud ressursimustrid  
+- Turvaliselt tugevdunud mallid  
 - Kuluefektiivsed konfiguratsioonid  
 
 ### Abiskriptid  
 - Keskkonna seadistamise automatiseerimine  
 - Andmebaasi migratsiooniskriptid  
-- Juurutuse valideerimise tööriistad  
+- Paigalduse valideerimise tööriistad  
 - Kulude jälgimise utiliidid  
 
-## 🔧 Kohandamisjuhend  
+## 🔧 Kohandamise juhend
 
-### Näidete kohandamine vastavalt kasutusjuhtumile  
+### Näidete kohandamine oma kasutusvajadustele
 
-1. **Eeltingimuste ülevaatus**  
-   - Kontrolli Azure teenuste nõudeid  
-   - Kinnita tellimuse piirangud  
-   - Mõista kulude mõjusid  
+1. **Eelduste kontroll**  
+   - Kontrollige Azure teenuste nõudeid  
+   - Vaadake üle tellimuse limiidid  
+   - Mõistke kulude mõju  
 
 2. **Konfiguratsiooni muutmine**  
-   - Uuenda `azure.yaml` teenusedefinitsioone  
-   - Kohanda Bicep malle  
-   - Muuda keskkonnamuutujaid  
+   - Uuendage `azure.yaml` teenuste definitsioone  
+   - Kohandage Bicep malle  
+   - Muutke keskkonnamuutujaid  
 
-3. **Testi põhjalikult**  
-   - Juuruta esmalt arenduskeskkonda  
-   - Kinnita funktsionaalsus  
-   - Testi skaleerimist ja jõudlust  
+3. **Testige põhjalikult**  
+   - Paigaldage esmalt arenduskeskkonda  
+   - Kontrollige funktsionaalsust  
+   - Testige skaleerimist ja jõudlust  
 
-4. **Turvalisuse ülevaatus**  
-   - Vaata juurdepääsukontrolli üle  
-   - Rakenda saladuste haldus  
-   - Lülita sisse jälgimine ja hoiatused  
+4. **Turvakontroll**  
+   - Vaadake ligipääsukontrollid üle  
+   - Rakendage saladuste haldus  
+   - Lubage monitooringu ja häirete teavitamine  
 
-## 📊 Võrdlustabel  
+## 📊 Võrdlustabel
 
-| Näide                     | Teenused | Andmebaas | Autentimine | Jälgimine | Kompleksus  |  
-|---------------------------|----------|-----------|-------------|-----------|-------------|  
-| **Microsoft Foundry Chat** (lokal) | 2        | ❌         | Key Vault   | Täielik   | ⭐⭐          |  
-| **Python Flask API** (lokal)         | 1        | ❌         | Põhiline    | Täielik   | ⭐           |  
-| **Mikroteenused** (lokal)            | 5+       | ✅         | Ettevõtte   | Täiustatud| ⭐⭐⭐⭐        |  
-| Node.js Express Todo                 | 2        | ✅         | Põhiline    | Põhiline  | ⭐           |  
-| React SPA + Functions                | 3        | ✅         | Põhiline    | Täielik   | ⭐           |  
-| Python Flask Container               | 2        | ❌         | Põhiline    | Täielik   | ⭐           |  
-| C# Web API + SQL                    | 2        | ✅         | Täielik    | Täielik   | ⭐⭐          |  
-| Python Functions + SPA              | 3        | ✅         | Täielik    | Täielik   | ⭐⭐          |  
-| Java Mikroteenused                  | 5+       | ✅         | Täielik    | Täielik   | ⭐⭐          |  
-| Microsoft Foundry Chat              | 3        | ✅         | Täielik    | Täielik   | ⭐⭐⭐         |  
-| AI dokumentide töötlemine           | 2        | ❌         | Põhiline   | Täielik   | ⭐⭐          |  
-| ML töövoog                        | 4+       | ✅         | Täielik    | Täielik   | ⭐⭐⭐⭐        |  
-| **Jaemüügi mitmeagendiline** (lokal) | **8+**  | **✅**     | **Ettevõtte** | **Täiustatud** | **⭐⭐⭐⭐** |  
+| Näide                          | Teenused | Andmebaas | Autentimine | Monitooring | Kompleksus |
+|--------------------------------|----------|-----------|-------------|-------------|------------|
+| **Microsoft Foundry mudelite vestlus** (kohalik) | 2        | ❌        | Key Vault   | Täielik     | ⭐⭐         |
+| **Python Flask API** (kohalik) | 1        | ❌        | Põhiline    | Täielik     | ⭐          |
+| **Mikroteenused** (kohalik)    | 5+       | ✅        | Ettevõtte   | Täpsem      | ⭐⭐⭐⭐       |
+| Node.js Express Todo           | 2        | ✅        | Põhiline    | Põhiline    | ⭐          |
+| React SPA + Functions          | 3        | ✅        | Põhiline    | Täielik     | ⭐          |
+| Python Flask konteiner         | 2        | ❌        | Põhiline    | Täielik     | ⭐          |
+| C# Web API + SQL              | 2        | ✅        | Täielik     | Täielik     | ⭐⭐         |
+| Python Functions + SPA         | 3        | ✅        | Täielik     | Täielik     | ⭐⭐         |
+| Java mikroteenused             | 5+       | ✅        | Täielik     | Täielik     | ⭐⭐         |
+| Microsoft Foundry mudelite vestlus | 3     | ✅        | Täielik     | Täielik     | ⭐⭐⭐        |
+| AI dokumenditöötlus            | 2        | ❌        | Põhiline    | Täielik     | ⭐⭐         |
+| ML torujuhe                   | 4+       | ✅        | Täielik     | Täielik     | ⭐⭐⭐⭐       |
+| **Jaemüügi mitmeagendiline** (kohalik) | **8+**  | **✅**    | **Ettevõtte** | **Täpsem**  | **⭐⭐⭐⭐**   |
 
-## 🎓 Õppeteekond  
+## 🎓 Õpitee
 
-### Soovitatav järjepidevus  
+### Soovitatud järjekord
 
-1. **Alusta lihtsast veebirakendusest**  
-   - Õpi AZD põhimõisteid  
-   - Saa aru juurutusprotsessist  
-   - Harjuta keskkonna haldust  
+1. **Alustage lihtsast veebirakendusest**  
+   - Õppige AZD põhimõtteid  
+   - Mõistke paigaldustöövoogu  
+   - Harjutage keskkondade haldamist  
 
-2. **Proovi staatilist veebisaiti**  
-   - Uuri erinevaid majutamise võimalusi  
-   - Õpi CDN integratsiooni  
-   - Saa aru DNS-seadistusest  
+2. **Proovige staatilist veebilehte**  
+   - Uurige erinevaid majutusvõimalusi  
+   - Õppige CDN integreerimisest  
+   - Mõistke DNS konfiguratsiooni  
 
-3. **Liigu konteineri rakenduse suunas**  
-   - Õpi konteinerdamise aluseid  
-   - Saa aru skaleerimise kontseptsioonidest  
-   - Harjuta Dockeriga  
+3. **Liikuge konteinerirakenduste poole**  
+   - Õppige konteineriseerimise aluseid  
+   - Mõistke skaleerimise kontseptsioone  
+   - Harjutage Dockeriga  
 
-4. **Lisa andmebaasi integratsioon**  
-   - Õpi andmebaasi loomist  
-   - Saa aru ühendusstringidest  
-   - Harjuta saladuste haldust  
+4. **Lisage andmebaasi integratsioon**  
+   - Õppige andmebaasi provisjoneerimist  
+   - Mõistke ühendusstringide tähendust  
+   - Harjutage saladuste haldust  
 
-5. **Avasta serveritu arhitektuur**  
-   - Saa aru sündmuspõhisest arhitektuurist  
-   - Õpi päästikute ja sidemete kohta  
-   - Harjuta API-dega  
+5. **Uurige serverivaba tehnoloogiat**  
+   - Mõistke sündmustepõhist arhitektuuri  
+   - Õppige käivitajatest ja sidumistest  
+   - Harjutage APIdega  
 
-6. **Ehita mikroteenuseid**  
-   - Õpi teenustevahelist suhtlust  
-   - Saa aru hajutatud süsteemidest  
-   - Harjuta keerukaid juurutusi  
+6. **Ehitage mikroteenuseid**  
+   - Õppige teenustevahelist suhtlust  
+   - Mõistke hajutatud süsteeme  
+   - Harjutage keerukate paigaldustega  
 
-## 🔍 Õige näite leidmine  
+## 🔍 Sobiva näite leidmine
 
 ### Tehnoloogiapinu järgi  
-- **Container Apps**: [Python Flask API (lokal)](../../../examples/container-app/simple-flask-api), [Mikroteenused (lokal)](../../../examples/container-app/microservices), Java Mikroteenused  
-- **Node.js**: Node.js Express Todo App, [Mikroteenuste API Gateway (lokal)](../../../examples/container-app/microservices)  
-- **Python**: [Python Flask API (lokal)](../../../examples/container-app/simple-flask-api), [Mikroteenuste toote teenus (lokal)](../../../examples/container-app/microservices), Python Functions + SPA  
-- **C#**: [Mikroteenuste tellimuste teenus (lokal)](../../../examples/container-app/microservices), C# Web API + SQL Database, Microsoft Foundry mudelite juturobot, ML töövoog  
-- **Go**: [Mikroteenuste kasutajate teenus (lokal)](../../../examples/container-app/microservices)  
+- **Konteinerirakendused**: [Python Flask API (kohalik)](../../../examples/container-app/simple-flask-api), [Mikroteenused (kohalik)](../../../examples/container-app/microservices), Java mikroteenused  
+- **Node.js**: Node.js Express Todo App, [Mikroteenuste API Gateway (kohalik)](../../../examples/container-app/microservices)  
+- **Python**: [Python Flask API (kohalik)](../../../examples/container-app/simple-flask-api), [Mikroteenuste tooteteenus (kohalik)](../../../examples/container-app/microservices), Python Functions + SPA  
+- **C#**: [Mikroteenuste tellimisteenus (kohalik)](../../../examples/container-app/microservices), C# Web API + SQL andmebaas, Microsoft Foundry mudelite vestlusrakendus, ML torujuhe  
+- **Go**: [Mikroteenuste kasutajateenus (kohalik)](../../../examples/container-app/microservices)  
 - **Java**: Java Spring Boot mikroteenused  
 - **React**: React SPA + Functions  
-- **Konteinerid**: [Python Flask (lokal)](../../../examples/container-app/simple-flask-api), [Mikroteenused (lokal)](../../../examples/container-app/microservices), Java Mikroteenused  
-- **Andmebaasid**: [Mikroteenused (lokal)](../../../examples/container-app/microservices), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB  
-- **AI/ML**: **[Microsoft Foundry mudelite juturobot (lokal)](../../../examples/azure-openai-chat)**, Microsoft Foundry mudelite juturobot, AI dokumentide töötlemine, ML töövoog, **Jaemüügi mitmeagendiline lahendus**  
-- **Mitmeagentse süsteemid**: **Jaemüügi mitmeagendiline lahendus**  
-- **OpenAI integratsioon**: **[Microsoft Foundry mudelite juturobot (lokal)](../../../examples/azure-openai-chat)**, Jaemüügi mitmeagendiline lahendus  
-- **Ettevõtte tootmiskõlblik**: [Mikroteenused (lokal)](../../../examples/container-app/microservices), **Jaemüügi mitmeagendiline lahendus**  
+- **Konteinerid**: [Python Flask (kohalik)](../../../examples/container-app/simple-flask-api), [Mikroteenused (kohalik)](../../../examples/container-app/microservices), Java mikroteenused  
+- **Andmebaasid**: [Mikroteenused (kohalik)](../../../examples/container-app/microservices), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB  
+- **AI/ML**: **[Microsoft Foundry mudelite vestlus (kohalik)](../../../examples/azure-openai-chat)**, Microsoft Foundry mudelite vestlusrakendus, AI dokumenditöötlus, ML torujuhe, **Jaemüügi mitmeagendiline lahendus**  
+- **Mitmeagendilised süsteemid**: **Jaemüügi mitmeagendiline lahendus**  
+- **OpenAI integratsioon**: **[Microsoft Foundry mudelite vestlus (kohalik)](../../../examples/azure-openai-chat)**, Jaemüügi mitmeagendiline lahendus  
+- **Ettevõtte tootmine**: [Mikroteenused (kohalik)](../../../examples/container-app/microservices), **Jaemüügi mitmeagendiline lahendus**  
 
 ### Arhitektuurimustri järgi  
-- **Lihtne REST API**: [Python Flask API (lokal)](../../../examples/container-app/simple-flask-api)  
+- **Lihtne REST API**: [Python Flask API (kohalik)](../../../examples/container-app/simple-flask-api)  
 - **Monoliitne**: Node.js Express Todo, C# Web API + SQL  
-- **Staatiline + serveritu**: React SPA + Functions, Python Functions + SPA  
-- **Mikroteenused**: [Tootmise mikroteenused (lokal)](../../../examples/container-app/microservices), Java Spring Boot mikroteenused  
-- **Konteineriseeritud**: [Python Flask (lokal)](../../../examples/container-app/simple-flask-api), [Mikroteenused (lokal)](../../../examples/container-app/microservices)  
-- **AI-põhine**: **[Microsoft Foundry mudelite juturobot (lokal)](../../../examples/azure-openai-chat)**, Microsoft Foundry mudelite juturobot, AI dokumentide töötlemine, ML töövoog, **Jaemüügi mitmeagendiline lahendus**  
-- **Mitmeagentne arhitektuur**: **Jaemüügi mitmeagendiline lahendus**  
-- **Ettevõtte mitmete teenustega**: [Mikroteenused (lokal)](../../../examples/container-app/microservices), **Jaemüügi mitmeagendiline lahendus**  
+- **Staatiline + serverivaba**: React SPA + Functions, Python Functions + SPA  
+- **Mikroteenused**: [Tootmismikroteenused (kohalik)](../../../examples/container-app/microservices), Java Spring Boot mikroteenused  
+- **Konteineriseeritud**: [Python Flask (kohalik)](../../../examples/container-app/simple-flask-api), [Mikroteenused (kohalik)](../../../examples/container-app/microservices)  
+- **AI-toega**: **[Microsoft Foundry mudelite vestlus (kohalik)](../../../examples/azure-openai-chat)**, Microsoft Foundry mudelite vestlusrakendus, AI dokumenditöötlus, ML torujuhe, **Jaemüügi mitmeagendiline lahendus**  
+- **Mitmeagendi arhitektuur**: **Jaemüügi mitmeagendiline lahendus**  
+- **Ettevõtte mitmete teenustega**: [Mikroteenused (kohalik)](../../../examples/container-app/microservices), **Jaemüügi mitmeagendiline lahendus**  
 
-### Kompleksusastme järgi  
-- **Algaja**: [Python Flask API (lokal)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions  
-- **Kesktase**: **[Microsoft Foundry mudelite juturobot (lokal)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Mikroteenused, Microsoft Foundry mudelite juturobot, AI dokumentide töötlemine  
-- **Täiustatud**: ML töövoog  
-- **Ettevõtte tootmiskõlblik**: [Mikroteenused (lokal)](../../../examples/container-app/microservices) (mitmete teenustega ja sõnumite järjepidevusega), **Jaemüügi mitmeagendiline lahendus** (täielik mitmeagentne süsteem ARM malli juurutusega)  
+### Raskeustaseme järgi  
+- **Algaja**: [Python Flask API (kohalik)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions  
+- **Kesktase**: **[Microsoft Foundry mudelite vestlus (kohalik)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java mikroteenused, Microsoft Foundry mudelite vestlusrakendus, AI dokumenditöötlus  
+- **Täpsem**: ML torujuhe  
+- **Ettevõtte tootmiskeskkond**: [Mikroteenused (kohalik)](../../../examples/container-app/microservices) (Mitme teenusega koos sõnumite järjekorraga), **Jaemüügi mitmeagendiline lahendus** (Täielik mitmeagendiline süsteem ARM malli paigaldusega)  
 
-## 📚 Täiendavad allikad  
+## 📚 Lisamaterjalid
 
 ### Dokumentatsiooni lingid  
 - [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)  
 - [Microsoft Foundry AZD mallid](https://github.com/Azure/ai-foundry-templates)  
-- [Bicep dokumentatsioon](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)  
+- [Bicepi dokumentatsioon](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)  
 - [Azure arhitektuurikeskus](https://learn.microsoft.com/en-us/azure/architecture/)  
 
-### Kogukonna näited  
-- [Azure näidised AZD mallid](https://github.com/Azure-Samples/azd-templates)
-- [Microsoft Foundry mallid](https://github.com/Azure/ai-foundry-templates)
-- [Azure Developer CLI galerii](https://azure.github.io/awesome-azd/)
-- [Todo rakendus C# ja Azure SQL-iga](https://github.com/Azure-Samples/todo-csharp-sql)
-- [Todo rakendus Python ja MongoDB-ga](https://github.com/Azure-Samples/todo-python-mongo)
+### Kogukonnanäited  
+- [Azure näidiste AZD mallid](https://github.com/Azure-Samples/azd-templates)  
+- [Microsoft Foundry mallid](https://github.com/Azure/ai-foundry-templates)  
+- [Azure Developer CLI galerii](https://azure.github.io/awesome-azd/)  
+- [Todo rakendus C# ja Azure SQL-iga](https://github.com/Azure-Samples/todo-csharp-sql)  
+- [Todo rakendus Pythoniga ja MongoDB-ga](https://github.com/Azure-Samples/todo-python-mongo)  
 - [Todo rakendus Node.js ja PostgreSQL-iga](https://github.com/Azure-Samples/todo-nodejs-mongo)
-- [React veebiapp C# API-ga](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
-- [Azure konteinerirakenduste töö](https://github.com/Azure-Samples/container-apps-jobs)
-- [Azure Functions Java-ga](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
+- [Reacti veebirakendus C# API-ga](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- [Azure Container Apps Job](https://github.com/Azure-Samples/container-apps-jobs)
+- [Azure Functions Java keeles](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### Parimad tavad
-- [Azure hästi arhitektuuri raamistik](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure hästi arhitektuuritud raamistik](https://learn.microsoft.com/en-us/azure/well-architected/)
 - [Pilve kasutuselevõtu raamistik](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
-## 🤝 Näidiste panus
+## 🤝 Näidete panustamine
 
-Kas sul on kasulik näide jagamiseks? Tunnustame panuseid!
+Kas sul on kasulik näide jagada? Ootame panuseid!
 
-### Esitamise juhised
-1. Järgi kehtestatud kaustastruktuuri
-2. Sisalda põhjalik README.md
-3. Lisa kommentaarid konfiguratsioonifailidesse
+### Esitamistingimused
+1. Järgi kehtestatud kataloogistruktuuri
+2. Lisa põhjalik README.md
+3. Lisa kommentaarid konfiguratsioonifailidele
 4. Testi hoolikalt enne esitamist
-5. Lisa kuluennustused ja eeltingimused
+5. Lisa kuluhinnangud ja eeltingimused
 
-### Näidismalli struktuur
+### Näidise mallistruktuur
 ```
 example-name/
 ├── README.md           # Detailed setup instructions
@@ -611,46 +612,46 @@ example-name/
 
 ---
 
-**Pro-nipp**: Alusta lihtsaimast näitest, mis sobib sinu tehnoloogiapuhvri jaoks, seejärel tööta järk-järgult keerukamate stsenaariumite suunas. Iga näide ehitab eelmiste kontseptsioonidele!
+**Pro näpunäide**: Alusta lihtsaimast näitest, mis vastab sinu tehnoloogiapinu, ja liikudes järk-järgult keerukamate stsenaariumite juurde. Iga näide põhineb eelnevate kontseptsioonidel!
 
 ## 🚀 Valmis alustama?
 
-### Sinu õppeteekond
+### Sinu õppimise tee
 
-1. **Täiesti algaja?** → Alusta [Flask API-ga](../../../examples/container-app/simple-flask-api) (⭐, 20 minutit)
-2. **On põhiteadmised AZD-st?** → Proovi [Mikroteenuseid](../../../examples/container-app/microservices) (⭐⭐⭐⭐, 60 minutit)
-3. **AI-rakenduste loomine?** → Alusta [Microsoft Foundry mudelite vestlusest](../../../examples/azure-openai-chat) (⭐⭐, 35 minutit) või uurige [Jaemüügimultiagenti](retail-scenario.md) (⭐⭐⭐⭐, 2+ tundi)
-4. **Vajate kindlat tehnoloogiauuringut?** → Kasuta ülalpool olevat jaotist [Õige näite leidmine](../../../examples)
+1. **Täielik algaja?** → Alusta [Flaski API-ga](../../../examples/container-app/simple-flask-api) (⭐, 20 minutit)
+2. **On AZD põhiteadmised?** → Proovi [Mikroteenuseid](../../../examples/container-app/microservices) (⭐⭐⭐⭐, 60 minutit)
+3. **Loote AI-rakendusi?** → Alusta [Microsoft Foundry mudelite vestlusest](../../../examples/azure-openai-chat) (⭐⭐, 35 minutit) või avasta [Jahutusmüügi mitmeagendi](retail-scenario.md) (⭐⭐⭐⭐, 2+ tundi)
+4. **Vajate spetsiifilist tehnoloogiapinu?** → Kasutage ülalolevat jaotist [Õige näite leidmine](#-finding-the-right-example)
 
 ### Järgmised sammud
 
-- ✅ Vaata üle ülalpool [Eeltingimused](../../../examples)
-- ✅ Vali oma oskustele vastav näide (vaata [Keerukuse legendi](../../../examples))
-- ✅ Loe näite README põhjalikult enne juurutamist
-- ✅ Pane meeldetuletus käivitada `azd down` pärast testimist
-- ✅ Jaga oma kogemust GitHubi probleemide või arutelude kaudu
+- ✅ Vaata üle ülaltoodud [Eeltingimused](#eeldused)
+- ✅ Vali oma oskustasemele vastav näide (vaata [Keerukuse legendi](#keerukuse-skaalatähised))
+- ✅ Loe näite README põhjalikult enne kasutuselevõttu
+- ✅ Sea meeldetuletus käivitada `azd down` pärast testimist
+- ✅ Jaga oma kogemust GitHubi Issues'i või Discussions abil
 
-### Abi vaja?
+### Vajate abi?
 
-- 📖 [KKK](../resources/faq.md) - Vastused korduma kippuvatele küsimustele
-- 🐛 [Veaotsingu juhend](../docs/chapter-07-troubleshooting/common-issues.md) - Lahenda juurutusprobleeme
+- 📖 [KKK](../resources/faq.md) - Levinud küsimustele vastused
+- 🐛 [Tõrkeotsingu juhend](../docs/chapter-07-troubleshooting/common-issues.md) - Lahenda kasutuselevõtu probleeme
 - 💬 [GitHubi arutelud](https://github.com/microsoft/AZD-for-beginners/discussions) - Küsi kogukonnalt
-- 📚 [Õppejuhend](../resources/study-guide.md) - Oma õppimise kinnistamine
+- 📚 [Õppejuhend](../resources/study-guide.md) - Tugevda oma teadmisi
 
 ---
 
 **Navigeerimine**
-- **📚 Kursuse avaleht**: [AZD algajatele](../README.md)
-- **📖 Õppematerjalid**: [Õppejuhend](../resources/study-guide.md) | [Vihik](../resources/cheat-sheet.md) | [Sõnastik](../resources/glossary.md)
-- **🔧 Ressursid**: [KKK](../resources/faq.md) | [Veaotsing](../docs/chapter-07-troubleshooting/common-issues.md)
+- **📚 Kooli koduleht**: [AZD algajatele](../README.md)
+- **📖 Õppematerjalid**: [Õppejuhend](../resources/study-guide.md) | [Petuleht](../resources/cheat-sheet.md) | [Sõnastik](../resources/glossary.md)
+- **🔧 Ressursid**: [KKK](../resources/faq.md) | [Tõrkeotsing](../docs/chapter-07-troubleshooting/common-issues.md)
 
 ---
 
-*Viimati uuendatud: november 2025 | [Teata probleemidest](https://github.com/microsoft/AZD-for-beginners/issues) | [Panusta näidetega](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
+*Viimati uuendatud: november 2025 | [Teata probleemidest](https://github.com/microsoft/AZD-for-beginners/issues) | [Panusta näiteid](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Lahtiütlus**:  
-See dokument on tõlgitud kasutades tehisintellekti tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi me püüame täpsust tagada, palun arvestage, et automatiseeritud tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise info puhul soovitatakse professionaalset inimtõlget. Me ei vastuta käesoleva tõlke kasutamisest tingitud arusaamatuste ega valesti mõistmiste eest.
+**Lahtiütlus**:
+See dokument on tõlgitud kasutades AI tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi me püüdleme täpsuse poole, palun pange tähele, et automatiseeritud tõlgetes võib esineda vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlkega seotud eksimustest või valesti mõistmistest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

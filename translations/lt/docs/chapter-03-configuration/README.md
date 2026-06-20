@@ -1,35 +1,35 @@
-# 3 skyrius: Konfigūracija ir autentifikacija
+# 3 skyrius: Konfigūracija ir autentifikavimas
 
-**📚 Kursas**: [AZD pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 45–60 minučių | **⭐ Sudėtingumas**: Vidutinis
+**📚 Kursas**: [AZD Pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 45-60 minučių | **⭐ Sudėtingumas**: Vidutinis
 
 ---
 
 ## Apžvalga
 
-Šiame skyriuje aptariama aplinkos konfigūracija, autentifikacijos modeliai ir saugumo geriausios praktikos Azure Developer CLI diegimams.
+Šiame skyriuje aptariama aplinkos konfigūracija, autentifikavimo modeliai ir saugumo gerosios praktikos Azure Developer CLI diegimams.
 
-> Patikrinta naudojant `azd 1.23.12` 2026 m. kovo mėn.
+> Patikrinta su `azd 1.25.6` 2026 m. birželį.
 
 ## Mokymosi tikslai
 
-Įveikę šį skyrių, jūs:
-- Išmanysite AZD konfigūracijos hierarchiją
-- Tvarkysite kelias aplinkas (dev, staging, prod)
-- Įgyvendinsite saugią autentifikaciją naudojant valdomąsias tapatybes
-- Konfigūruosite aplinkai būdingus nustatymus
+Baigę šį skyrių, jūs:
+- Įvaldysite AZD konfigūracijos hierarchiją
+- Valdysite kelias aplinkas (dev, staging, prod)
+- Įgyvendinsite saugų autentifikavimą naudojant valdomas tapatybes
+- Konfigūruosite aplinkai būdingus parametrus
 
 ---
 
 ## 📚 Pamokos
 
 | # | Pamoka | Aprašymas | Laikas |
-|---|--------|-----------|--------|
+|---|--------|-------------|------|
 | 1 | [Konfigūracijos vadovas](configuration.md) | Aplinkos nustatymas ir valdymas | 30 min |
-| 2 | [Autentifikacija ir saugumas](authsecurity.md) | Valdomosios tapatybės ir RBAC modeliai | 30 min |
+| 2 | [Autentifikavimas ir saugumas](authsecurity.md) | Valdomos tapatybės ir RBAC modeliai | 30 min |
 
 ---
 
-## 🚀 Greitas pradėjimas
+## 🚀 Greitas startas
 
 ```bash
 # Sukurti kelias aplinkas
@@ -52,53 +52,53 @@ azd env get-values
 
 ## 🔧 Konfigūracijos hierarchija
 
-AZD taiko nustatymus šia tvarka (vėlesni užrašo ankstesnius):
+AZD taiko nustatymus šia tvarka (vėlesni perrašo ankstesnius):
 
-1. **Numatytosios reikšmės** (įmontuotos šablonuose)
+1. **Numatytosios reikšmės** (įtrauktos į šablonus)
 2. **azure.yaml** (projekto konfigūracija)
 3. **Aplinkos kintamieji** (`azd env set`)
 4. **Komandinės eilutės parametrai** (`--location eastus`)
 
 ---
 
-## 🔐 Saugumo geriausios praktikos
+## 🔐 Saugumo gerosios praktikos
 
 ```bash
-# Naudokite valdytą identitetą (rekomenduojama)
+# Naudokite valdomąją tapatybę (rekomenduojama)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Patikrinkite AZD autentifikavimo būseną
+# Patikrinkite AZD autentifikacijos būseną
 azd auth status
 
 # Pasirinktinai: patikrinkite Azure CLI kontekstą, jei planuojate vykdyti az komandas
 az account show
 
-# Jei reikia, vykdykite pakartotinį autentifikavimą
+# Iš naujo autentifikuokitės prireikus
 azd auth login
 
-# Pasirinktinai: atnaujinkite Azure CLI autentifikavimą az komandoms
+# Pasirinktinai: atnaujinkite Azure CLI autentifikaciją az komandoms
 az login
 ```
 
 ---
 
-## 🔗 Navigacija
+## 🔗 Naršymas
 
 | Kryptis | Skyrius |
-|---------|---------|
-| **Ankstesnis** | [2 skyrius: DI vystymas](../chapter-02-ai-development/README.md) |
+|-----------|---------|
+| **Ankstesnis** | [Chapter 2: AI Development](../chapter-02-ai-development/README.md) |
 | **Kitas** | [4 skyrius: Infrastruktūra](../chapter-04-infrastructure/README.md) |
 
 ---
 
 ## 📖 Susiję ištekliai
 
-- [Prieš diegimą patikrinimai](../chapter-06-pre-deployment/README.md)
+- [Patikrinimai prieš diegimą](../chapter-06-pre-deployment/README.md)
 - [Trikčių šalinimas](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Atsakomybės apribojimas**:  
-Šis dokumentas išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipkite dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritiniais atvejais rekomenduojamas profesionalus žmogaus vertimas. Mes neatsakome už galimus nesusipratimus ar klaidingą interpretaciją, kylančią naudojantis šiuo vertimu.
+**Atsakomybės apribojimas**:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojama naudoti profesionalų žmogiškąjį vertimą. Mes neatsakome už jokius nesusipratimus ar neteisingą interpretaciją, kilusią naudojantis šiuo vertimu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

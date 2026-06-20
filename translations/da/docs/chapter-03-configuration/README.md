@@ -1,21 +1,21 @@
-# Kapitel 3: Konfiguration & Godkendelse
+# Kapitel 3: Konfiguration & Autentificering
 
-**📚 Kursus**: [AZD For Beginners](../../README.md) | **⏱️ Varighed**: 45-60 minutter | **⭐ Kompleksitet**: Mellemniveau
+**📚 Kursus**: [AZD for begyndere](../../README.md) | **⏱️ Varighed**: 45-60 minutter | **⭐ Kompleksitet**: Mellemniveau
 
 ---
 
 ## Oversigt
 
-Dette kapitel dækker miljøkonfiguration, godkendelsesmønstre og bedste praksis for sikkerhed ved Azure Developer CLI-udrulninger.
+Dette kapitel dækker miljøkonfiguration, autentificeringsmønstre og bedste sikkerhedspraksis for Azure Developer CLI-udrulninger.
 
-> Valideret mod `azd 1.23.12` i marts 2026.
+> Bekræftet mod `azd 1.25.6` i juni 2026.
 
 ## Læringsmål
 
 Ved at gennemføre dette kapitel vil du:
 - Beherske AZD's konfigurationshierarki
 - Administrere flere miljøer (dev, staging, prod)
-- Implementere sikker godkendelse med styrede identiteter
+- Implementere sikker autentificering med administrerede identiteter
 - Konfigurere miljøspecifikke indstillinger
 
 ---
@@ -24,12 +24,12 @@ Ved at gennemføre dette kapitel vil du:
 
 | # | Lektion | Beskrivelse | Tid |
 |---|--------|-------------|------|
-| 1 | [Konfigurationsguide](configuration.md) | Miljøopsætning og styring | 30 min |
-| 2 | [Godkendelse & Sikkerhed](authsecurity.md) | Mønstre for styrede identiteter og RBAC | 30 min |
+| 1 | [Configuration Guide](configuration.md) | Opsætning og administration af miljø | 30 min |
+| 2 | [Authentication & Security](authsecurity.md) | Administrerede identiteter og RBAC-mønstre | 30 min |
 
 ---
 
-## 🚀 Hurtig start
+## 🚀 Hurtigstart
 
 ```bash
 # Opret flere miljøer
@@ -57,11 +57,11 @@ AZD anvender indstillinger i denne rækkefølge (senere overskriver tidligere):
 1. **Standardværdier** (indbygget i skabeloner)
 2. **azure.yaml** (projektkonfiguration)
 3. **Miljøvariabler** (`azd env set`)
-4. **Kommandolinjeflag** (`--location eastus`)
+4. **Kommandolinje-flag** (`--location eastus`)
 
 ---
 
-## 🔐 Bedste praksis for sikkerhed
+## 🔐 Bedste sikkerhedspraksis
 
 ```bash
 # Brug administreret identitet (anbefales)
@@ -76,7 +76,7 @@ az account show
 # Autentificer igen om nødvendigt
 azd auth login
 
-# Valgfrit: opdater Azure CLI-autentificering for az-kommandoer
+# Valgfrit: opfrisk Azure CLI-autentificering for az-kommandoer
 az login
 ```
 
@@ -84,7 +84,7 @@ az login
 
 ## 🔗 Navigation
 
-| Retning | Kapitel |
+| Direction | Chapter |
 |-----------|---------|
 | **Forrige** | [Kapitel 2: AI-udvikling](../chapter-02-ai-development/README.md) |
 | **Næste** | [Kapitel 4: Infrastruktur](../chapter-04-infrastructure/README.md) |
@@ -93,12 +93,12 @@ az login
 
 ## 📖 Relaterede ressourcer
 
-- [Tjek før udrulning](../chapter-06-pre-deployment/README.md)
-- [Fejlfinding](../chapter-07-troubleshooting/common-issues.md)
+- [Pre-Deployment Checks](../chapter-06-pre-deployment/README.md)
+- [Troubleshooting](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi stræber efter nøjagtighed, bedes du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på dets modersmål bør betragtes som den autoritative kilde. For kritisk information anbefales en professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

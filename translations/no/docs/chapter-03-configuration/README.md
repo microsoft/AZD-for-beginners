@@ -1,19 +1,19 @@
-# Kapittel 3: Konfigurasjon og autentisering
+# Kapittel 3: Konfigurasjon & Autentisering
 
-**📚 Kurs**: [AZD for nybegynnere](../../README.md) | **⏱️ Varighet**: 45-60 minutter | **⭐ Vanskelighetsgrad**: Middels
+**📚 Kurs**: [AZD For Nybegynnere](../../README.md) | **⏱️ Varighet**: 45-60 minutter | **⭐ Vanskelighetsgrad**: Middels
 
 ---
 
 ## Oversikt
 
-Dette kapittelet dekker miljøkonfigurasjon, autentiseringsmønstre og sikkerhetsanbefalinger for Azure Developer CLI-distribusjoner.
+Dette kapittelet dekker miljøkonfigurasjon, autentiseringsmønstre, og sikkerhetsbeste praksis for Azure Developer CLI-distribusjoner.
 
-> Validert mot `azd 1.23.12` i mars 2026.
+> Validert mot `azd 1.25.6` i juni 2026.
 
 ## Læringsmål
 
 Ved å fullføre dette kapittelet vil du:
-- Mestre AZD-konfigurasjonens hierarki
+- Mestre AZD-konfigurasjonshierarkiet
 - Administrere flere miljøer (dev, staging, prod)
 - Implementere sikker autentisering med administrerte identiteter
 - Konfigurere miljøspesifikke innstillinger
@@ -25,11 +25,11 @@ Ved å fullføre dette kapittelet vil du:
 | # | Leksjon | Beskrivelse | Tid |
 |---|---------|-------------|-----|
 | 1 | [Konfigurasjonsguide](configuration.md) | Miljøoppsett og administrasjon | 30 min |
-| 2 | [Autentisering og sikkerhet](authsecurity.md) | Administrerte identiteter og RBAC-mønstre | 30 min |
+| 2 | [Autentisering & Sikkerhet](authsecurity.md) | Administrert identitet og RBAC-mønstre | 30 min |
 
 ---
 
-## 🚀 Kom raskt i gang
+## 🚀 Rask Start
 
 ```bash
 # Opprett flere miljøer
@@ -52,22 +52,22 @@ azd env get-values
 
 ## 🔧 Konfigurasjonshierarki
 
-AZD bruker innstillinger i denne rekkefølgen (senere overstyrer tidligere):
+AZD anvender innstillinger i denne rekkefølgen (senere overstyrer tidligere):
 
-1. **Standardverdier** (bygget inn i maler)
+1. **Standardverdier** (innebygd i maler)
 2. **azure.yaml** (prosjektkonfigurasjon)
 3. **Miljøvariabler** (`azd env set`)
-4. **Kommandolinjeflagg** (`--location eastus`)
+4. **Kommando-linje-flagg** (`--location eastus`)
 
 ---
 
-## 🔐 Sikkerhetsanbefalinger
+## 🔐 Sikkerhetsbeste Praksis
 
 ```bash
 # Bruk administrert identitet (anbefalt)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Sjekk AZD-autentiseringsstatus
+# Sjekk AZD autentiseringsstatus
 azd auth status
 
 # Valgfritt: verifiser Azure CLI-kontekst hvis du planlegger å kjøre az-kommandoer
@@ -91,7 +91,7 @@ az login
 
 ---
 
-## 📖 Relaterte ressurser
+## 📖 Relaterte Ressurser
 
 - [Sjekkliste før distribusjon](../chapter-06-pre-deployment/README.md)
 - [Feilsøking](../chapter-07-troubleshooting/common-issues.md)
@@ -100,5 +100,5 @@ az login
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på dets opprinnelige språk bør betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som følge av bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på originalspråket skal betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

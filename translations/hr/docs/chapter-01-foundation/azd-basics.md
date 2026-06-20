@@ -1,63 +1,63 @@
-# Osnove AZD-a - Razumijevanje Azure Developer CLI-a
+# AZD Osnove - Razumijevanje Azure Developer CLI
 
-# Osnove AZD-a - Temeljni Koncepti i Osnove
+# AZD Osnove - Temeljni pojmovi i osnove
 
-**Navigacija poglavljima:**
+**Navigacija poglavlja:**
 - **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
-- **📖 Trenutno poglavlje**: Poglavlje 1 - Osnove i Brzi početak
+- **📖 Trenutno poglavlje**: Poglavlje 1 - Temelj i brzi početak
 - **⬅️ Prethodno**: [Pregled tečaja](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ Sljedeće**: [Instalacija i postavljanje](installation.md)
-- **🚀 Sljedeće poglavlje**: [Poglavlje 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🚀 Sljedeće poglavlje**: [Poglavlje 2: AI-prvi razvoj](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Uvod
 
-Ova lekcija uvodi vas u Azure Developer CLI (azd), moćan alat naredbenog retka koji ubrzava vaš put od lokalnog razvoja do raspoređivanja na Azure. Naučit ćete temeljne koncepte, glavne značajke i razumjeti kako azd pojednostavljuje implementaciju aplikacija cloud-native tipa.
+Ova lekcija upoznaje vas s Azure Developer CLI-jem (azd), moćnim alatom naredbenog retka koji ubrzava vaš put od lokalnog razvoja do implementacije u Azure. Naučit ćete osnovne pojmove, ključne značajke i razumjeti kako azd pojednostavljuje implementaciju cloud-native aplikacija.
 
 ## Ciljevi učenja
 
 Na kraju ove lekcije ćete:
-- Razumjeti što je Azure Developer CLI i njegovu primarnu svrhu
-- Naučiti osnovne koncepte šablona, okruženja i servisa
-- Istražiti ključne značajke uključujući razvoj vođen šablonima i infrastrukturu kao kod
-- Razumjeti strukturu i tijek rada azd projekta
-- Biti spremni za instalaciju i konfiguraciju azd-a za vaše razvojno okruženje
+- Razumjeti što je Azure Developer CLI i njegov primarni cilj
+- Naučiti osnovne pojmove o predlošcima, okruženjima i uslugama
+- Istražiti ključne značajke uključujući razvoj vođen predlošcima i Infrastructure as Code
+- Razumjeti strukturu projekta i tijek rada u azd-u
+- Biti spremni instalirati i konfigurirati azd za vaše razvojno okruženje
 
 ## Ishodi učenja
 
-Nakon završetka ove lekcije moći ćete:
-- Objasniti ulogu azd-a u modernim oblak razvojnim tijekovima rada
-- Identificirati komponente strukture azd projekta
-- Opisati kako šabloni, okruženja i servisi rade zajedno
+Nakon završetka ove lekcije, moći ćete:
+- Objasniti ulogu azd-a u modernim tijekovima razvoja u oblaku
+- Prepoznati komponente strukture azd projekta
+- Opisati kako predlošci, okruženja i usluge rade zajedno
 - Razumjeti prednosti Infrastructure as Code s azd-om
 - Prepoznati različite azd naredbe i njihove svrhe
 
 ## Što je Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) je alat naredbenog retka dizajniran da ubrza vaš put od lokalnog razvoja do raspoređivanja na Azure. Pojednostavljuje proces izgradnje, implementacije i upravljanja cloud-native aplikacijama na Azure-u.
+Azure Developer CLI (azd) je alat naredbenog retka dizajniran za ubrzavanje vašeg puta od lokalnog razvoja do implementacije u Azure. Pojednostavljuje proces izgradnje, implementacije i upravljanja cloud-native aplikacijama na Azureu.
 
-### Što možete rasporediti pomoću azd-a?
+### Što možete implementirati s azd-om?
 
-azd podržava širok raspon radnih opterećenja – i popis se stalno povećava. Danas možete koristiti azd za raspoređivanje:
+azd podržava širok raspon radnih opterećenja—i popis se stalno povećava. Danas možete koristiti azd za implementaciju:
 
 | Vrsta radnog opterećenja | Primjeri | Isti tijek rada? |
-|-------------------------|----------|------------------|
-| **Tradicionalne aplikacije** | Web aplikacije, REST API-ji, statične stranice | ✅ `azd up` |
-| **Servisi i mikroservisi** | Container Apps, Function Apps, višeservisni backendi | ✅ `azd up` |
-| **AI-pokretane aplikacije** | Chat aplikacije s Microsoft Foundry Models, RAG rješenja s AI Search | ✅ `azd up` |
-| **Inteligentni agenti** | Agentima hostirani u Foundry-ju, višestruke orkestracije agenata | ✅ `azd up` |
+|--------------------------|----------|------------------|
+| **Tradicionalne aplikacije** | Web aplikacije, REST API-jevi, statične stranice | ✅ `azd up` |
+| **Usluge i mikrousloge** | Container Apps, Function Apps, višeservisni backendi | ✅ `azd up` |
+| **Aplikacije s AI potporom** | Chat aplikacije s Microsoft Foundry modelima, RAG rješenja s AI pretraživanjem | ✅ `azd up` |
+| **Inteligentni agenti** | Agentu hostani u Foundry-u, višestruka koordinacija agenata | ✅ `azd up` |
 
-Ključni uvid je da **životni ciklus azd ostaje isti bez obzira na to što raspoređujete**. Inicijalizirate projekt, pripremite infrastrukturu, rasporedite kod, pratite aplikaciju i čistite resurse – bilo da je riječ o jednostavnoj web stranici ili sofisticiranom AI agentu.
+Ključna spoznaja je da **životni ciklus azd-a ostaje isti bez obzira na to što implementirate**. Inicijalizirate projekt, osiguravate infrastrukturu, implementirate kod, pratite aplikaciju i čistite resurse—bilo da se radi o jednostavnoj web stranici ili sofisticiranom AI agentu.
 
-Ova kontinuitet je po dizajnu. azd tretira AI mogućnosti kao još jedan tip servisa koji vaša aplikacija može koristiti, a ne kao nešto temeljno drugačije. Chat endpoint podržan Microsoft Foundry Models je, iz perspektive azd-a, samo još jedan servis za konfiguraciju i implementaciju.
+Ova kontinuitet je dizajniran. azd tretira AI sposobnosti kao još jednu vrstu usluge koju vaša aplikacija može koristiti, a ne kao nešto potpuno drugačije. Chat endpoint podržan Microsoft Foundry modelima je, iz azd perspektive, samo još jedna usluga za konfigurirati i implementirati.
 
 ### 🎯 Zašto koristiti AZD? Usporedba iz stvarnog svijeta
 
-Usporedimo raspoređivanje jednostavne web aplikacije s bazom podataka:
+Usporedimo implementaciju jednostavne web aplikacije s bazom podataka:
 
-#### ❌ BEZ AZD-a: Ručna Azure implementacija (30+ minuta)
+#### ❌ BEZ AZD: Ručna implementacija na Azure (30+ minuta)
 
 ```bash
-# Korak 1: Kreirajte skup resursa
+# Korak 1: Kreirajte grupu resursa
 az group create --name myapp-rg --location eastus
 
 # Korak 2: Kreirajte App Service plan
@@ -65,7 +65,7 @@ az appservice plan create --name myapp-plan \
   --resource-group myapp-rg \
   --sku B1 --is-linux
 
-# Korak 3: Kreirajte web aplikaciju
+# Korak 3: Kreirajte Web aplikaciju
 az webapp create --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --plan myapp-plan \
@@ -89,7 +89,7 @@ az cosmosdb mongodb collection create \
   --database-name tododb \
   --name todos
 
-# Korak 7: Nabavite poveznicu za spajanje
+# Korak 7: Nabavite poveznu string
 CONN_STR=$(az cosmosdb keys list \
   --name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
@@ -102,7 +102,7 @@ az webapp config appsettings set \
   --resource-group myapp-rg \
   --settings MONGODB_URI="$CONN_STR"
 
-# Korak 9: Omogućite zapisivanje logova
+# Korak 9: Omogućite zapisivanje dnevnika
 az webapp log config --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --application-logging filesystem \
@@ -114,7 +114,7 @@ az monitor app-insights component create \
   --location eastus \
   --resource-group myapp-rg
 
-# Korak 11: Povežite App Insights s web aplikacijom
+# Korak 11: Povežite App Insights s Web aplikacijom
 INSTRUMENTATION_KEY=$(az monitor app-insights component show \
   --app myapp-insights \
   --resource-group myapp-rg \
@@ -138,20 +138,20 @@ az webapp deployment source config-zip \
   --name myapp-web-unique123 \
   --src app.zip
 
-# Korak 15: Pričekajte i molite se da radi 🙏
-# (Nema automatske provjere, potrebno je ručno testiranje)
+# Korak 15: Pričekajte i molite da radi 🙏
+# (Nema automatizirane provjere, potrebna je ručna provjera)
 ```
   
 **Problemi:**  
-- ❌ Više od 15 naredbi koje treba zapamtiti i izvršiti po redu  
+- ❌ 15+ naredbi za zapamtiti i izvršiti redom  
 - ❌ 30-45 minuta ručnog rada  
-- ❌ Lako je napraviti pogreške (tipfeleri, pogrešni parametri)  
-- ❌ Veze za pristup izložene u povijesti terminala  
-- ❌ Nema automatskog vraćanja ako nešto ne uspije  
-- ❌ Teško za replicirati kolegama iz tima  
-- ❌ Svaki put drugačije (nerazmnoživo)
+- ❌ Lako je pogriješiti (tipkarske greške, krivi parametri)  
+- ❌ Konekcijski stringovi izloženi u povijesti terminala  
+- ❌ Nema automatskog vraćanja u slučaju pogreške  
+- ❌ Teško replikirati za članove tima  
+- ❌ Svaki put drugačije (nereproducibilno)  
 
-#### ✅ S AZD-om: Automatizirana implementacija (5 naredbi, 10-15 minuta)
+#### ✅ S AZD: Automatska implementacija (5 naredbi, 10-15 minuta)
 
 ```bash
 # Korak 1: Inicijaliziraj iz predloška
@@ -166,64 +166,64 @@ azd env new dev
 # Korak 4: Pregledaj promjene (opcionalno, ali preporučeno)
 azd provision --preview
 
-# Korak 5: Implementiraj sve
+# Korak 5: Postavi sve
 azd up
 
-# ✨ Gotovo! Sve je implementirano, konfigurirano i nadzirano
+# ✨ Gotovo! Sve je postavljeno, konfigurirano i nadzirano
 ```
   
 **Prednosti:**  
 - ✅ **5 naredbi** naspram 15+ ručnih koraka  
-- ✅ **10-15 minuta** ukupno (uglavnom čekanje Azura)  
-- ✅ **Manje ručnih pogrešaka** - dosljedan, vođen šablonima tijek rada  
-- ✅ **Sigurno rukovanje tajnama** - mnogi šabloni koriste Azure-om upravljano spremište tajni  
+- ✅ **10-15 minuta** ukupnog vremena (uglavnom čekanje na Azure)  
+- ✅ **Manje ručnih pogrešaka** - dosljedan, vođen predlošcima tijek rada  
+- ✅ **Sigurno upravljanje tajnama** - mnogi predlošci koriste Azure-managed pohranu tajni  
 - ✅ **Ponavljajuće implementacije** - isti tijek rada svaki put  
 - ✅ **Potpuno reproducibilno** - isti rezultat svaki put  
-- ✅ **Pripremljeno za tim** - bilo tko može izvršiti implementaciju s istim naredbama  
-- ✅ **Infrastruktura kao kod** - verzionirani Bicep šabloni  
-- ✅ **Ugrađeni monitoring** - Application Insights automatski konfiguriran
+- ✅ **Prikladno za tim** - bilo tko može implementirati istim naredbama  
+- ✅ **Infrastructure as Code** - Bicep predlošci pod kontrolom verzija  
+- ✅ **Ugrađeni nadzor** - Application Insights automatski konfiguriran  
 
-### 📊 Smanjenje vremena i pogrešaka
+### 📊 Ušteda vremena i smanjenje pogrešaka
 
-| Mjera       | Ručna implementacija | AZD implementacija | Poboljšanje  |
-|-------------|---------------------|--------------------|--------------|
-| **Naredbe** | 15+                 | 5                  | 67% manje   |
-| **Vrijeme** | 30-45 min           | 10-15 min          | 60% brže   |
-| **Stopa pogrešaka** | ~40%          | <5%                | 88% smanjenje |
-| **Dosljednost** | Niska (ručno)     | 100% (automatizirano) | Savršena   |
-| **Uvođenje u tim** | 2-4 sata        | 30 minuta          | 75% brže   |
-| **Vrijeme za poništenje** | preko 30 min (ručno) | 2 min (automatizirano) | 93% brže |
+| Mjerilo | Ručna implementacija | Implementacija s AZD | Poboljšanje |
+|:--------|:--------------------|:--------------------|:------------|
+| **Naredbe** | 15+ | 5 | 67% manje |
+| **Vrijeme** | 30-45 min | 10-15 min | 60% brže |
+| **Stope pogreške** | ~40% | <5% | 88% smanjenje |
+| **Dosljednost** | Niska (ručno) | 100% (automatizirano) | Savršeno |
+| **Uvođenje u tim** | 2-4 sata | 30 minuta | 75% brže |
+| **Vrijeme vraćanja** | 30+ min (ručno) | 2 min (automatizirano) | 93% brže |
 
-## Temeljni koncepti
+## Temeljni pojmovi
 
-### Šabloni
-Šabloni su temelj azd-a. Oni sadrže:  
-- **Kod aplikacije** - Vaš izvorni kod i ovisnosti  
-- **Definicije infrastrukture** - Azure resursi definirani u Bicep ili Terraformu  
-- **Konfiguracijske datoteke** - Postavke i varijable okoliša  
-- **Skripte za implementaciju** - Automatizirani tijekovi rada implementacije
+### Predlošci
+Predlošci su temelj azd-a. Oni sadrže:
+- **Kod aplikacije** - Vaš izvorni kod i ovisnosti
+- **Definicije infrastrukture** - Azure resursi definirani u Bicep ili Terraform
+- **Konfiguracijske datoteke** - Postavke i varijable okruženja
+- **Skripte za implementaciju** - Automatizirani tijekovi implementacije
 
 ### Okruženja
-Okruženja predstavljaju različite ciljeve implementacije:  
-- **Razvojno** - Za testiranje i razvoj  
-- **Staging** - Pred-produkcijsko okruženje  
-- **Produkcijsko** - Živo produkcijsko okruženje  
+Okruženja predstavljaju različite ciljeve implementacije:
+- **Razvoj** - Za testiranje i razvoj
+- **Staging** - Predprodukcijsko okruženje
+- **Produkcija** - Živo produkcijsko okruženje
 
-Svako okruženje održava svoj:  
-- Azure resource group  
-- Konfiguracijske postavke  
+Svako okruženje održava svoje vlastito:
+- Azure resource group
+- Konfiguracijske postavke
 - Stanje implementacije
 
-### Servisi
-Servisi su građevni blokovi vaše aplikacije:  
-- **Frontend** - Web aplikacije, SPA  
-- **Backend** - API-ji, mikroservisi  
-- **Baza podataka** - Rješenja za pohranu podataka  
-- **Spremište** - Pohrana datoteka i blobova
+### Usluge
+Usluge su građevni blokovi vaše aplikacije:
+- **Frontend** - Web aplikacije, SPA
+- **Backend** - API-jevi, mikrousluge
+- **Baza podataka** - Rješenja za pohranu podataka
+- **Pohrana** - Pohrana datoteka i blobova
 
 ## Ključne značajke
 
-### 1. Razvoj vođen šablonima  
+### 1. Razvoj vođen predlošcima
 ```bash
 # Pregledajte dostupne predloške
 azd template list
@@ -232,33 +232,33 @@ azd template list
 azd init --template <template-name>
 ```
   
-### 2. Infrastruktura kao kod  
-- **Bicep** - Azure jezično specifičan jezik  
-- **Terraform** - Višeoblačni infrastrukturni alat  
-- **ARM šabloni** - Azure Resource Manager šabloni
+### 2. Infrastructure as Code
+- **Bicep** - Specifični jezik za Azure
+- **Terraform** - Alat za višemrežnu infrastrukturu
+- **ARM predlošci** - Azure Resource Manager predlošci
 
-### 3. Integrirani tijekovi rada  
+### 3. Integrirani tijekovi rada
 ```bash
-# Kompletan tijek rada implementacije
-azd up            # Provision + Deploy ovo je automatizirano za prvo postavljanje
+# Potpuni tijek rada implementacije
+azd up            # Nabava + Implementacija, ovo je bez intervencije za prvo postavljanje
 
 # 🧪 NOVO: Pregledajte promjene infrastrukture prije implementacije (SIGURNO)
-azd provision --preview    # Simulirajte implementaciju infrastrukture bez stvarnih promjena
+azd provision --preview    # Simulirajte implementaciju infrastrukture bez unosa promjena
 
-azd provision     # Napravite Azure resurse ako ažurirate infrastrukturu koristite ovo
-azd deploy        # Implementirajte kod aplikacije ili ponovno implementirajte kod aplikacije nakon ažuriranja
+azd provision     # Kreirajte Azure resurse ako ažurirate infrastrukturu koristite ovo
+azd deploy        # Implementirajte kod aplikacije ili ponovo implementirajte kod aplikacije nakon ažuriranja
 azd down          # Očistite resurse
 ```
   
-#### 🛡️ Sigurno planiranje infrastrukture s pregledom  
-`azd provision --preview` naredba je velika novost za sigurne implementacije:  
-- **Suho pokretanje analize** - Prikazuje što će biti kreirano, izmijenjeno ili izbrisano  
-- **Nulta opasnost** - Nema stvarnih promjena u vašem Azure okruženju  
-- **Timsku suradnju** - Dijelite rezultate pregleda prije implementacije  
-- **Procjenu troškova** - Razumite cijene resursa prije nego se obavežete
+#### 🛡️ Sigurno planiranje infrastrukture s pregledom
+Naredba `azd provision --preview` je revolucionarna za sigurne implementacije:
+- **Suha analiza** - Prikazuje što će biti stvoreno, izmijenjeno ili obrisano
+- **Nula rizika** - Nema stvarnih promjena u vašem Azure okruženju
+- **Timsku suradnju** - Dijelite rezultate pregleda prije implementacije
+- **Procjena troškova** - Razumijevanje troškova resursa prije obveze
 
 ```bash
-# Primjer pregleda radnog toka
+# Primjer pregleda tijeka rada
 azd provision --preview           # Pogledajte što će se promijeniti
 # Pregledajte rezultat, razgovarajte s timom
 azd provision                     # Primijenite promjene s povjerenjem
@@ -269,16 +269,16 @@ azd provision                     # Primijenite promjene s povjerenjem
 ```mermaid
 graph LR
     A[azd init] -->|Inicijaliziraj projekt| B[azd auth login]
-    B -->|Autentifikacija| C[azd env new]
+    B -->|Autentificiraj| C[azd env new]
     C -->|Kreiraj okruženje| D{Prvo postavljanje?}
     D -->|Da| E[azd up]
     D -->|Ne| F[azd provision --preview]
     F -->|Pregledaj promjene| G[azd provision]
-    E -->|Postavlja i implementira| H[Resursi u radu]
+    E -->|Provisionira i postavlja| H[Resursi rade]
     G -->|Ažurira infrastrukturu| H
     H -->|Nadzor| I[azd monitor]
     I -->|Izmijeni kod| J[azd deploy]
-    J -->|Ponovno implementiraj samo kod| H
+    J -->|Ponovno postavi samo kod| H
     H -->|Čišćenje| K[azd down]
     
     style A fill:#e1f5fe
@@ -286,45 +286,60 @@ graph LR
     style F fill:#fff9c4
     style H fill:#c5e1a5
     style K fill:#ffcdd2
-```  
+```
+  
 **Objašnjenje tijeka rada:**  
-1. **Init** - Počnite sa šablonom ili novim projektom  
-2. **Auth** - Autentikacija na Azure  
-3. **Okruženje** - Kreirajte izolirano okruženje za implementaciju  
+1. **Init** - Započnite s predloškom ili novim projektom  
+2. **Auth** - Autentifikacija na Azure  
+3. **Environment** - Kreirajte izolirano okruženje za implementaciju  
 4. **Preview** - 🆕 Uvijek prvo pregledajte promjene infrastrukture (sigurna praksa)  
 5. **Provision** - Kreirajte/azurirajte Azure resurse  
-6. **Deploy** - Gurnite kod vaše aplikacije  
+6. **Deploy** - Implementirajte vaš aplikacijski kod  
 7. **Monitor** - Promatrajte performanse aplikacije  
-8. **Iterate** - Napravite izmjene i ponovno rasporedite kod  
-9. **Cleanup** - Uklonite resurse kad završite
+8. **Iterate** - Napravite izmjene i ponovo implementirajte kod  
+9. **Cleanup** - Uklonite resurse kada završite  
 
-### 4. Upravljanje okruženjima  
+### 4. Upravljanje okruženjima
 ```bash
-# Kreirajte i upravljajte okruženjima
+# Stvaranje i upravljanje okruženjima
 azd env new <environment-name>
 azd env select <environment-name>
 azd env list
 ```
   
-### 5. Ekstenzije i AI naredbe
+### 5. Proširenja i AI naredbe
 
-azd koristi sustav ekstenzija za dodavanje mogućnosti izvan osnovnog CLI-ja. Ovo je posebno korisno za AI radna opterećenja:
+azd koristi sustav proširenja za dodavanje mogućnosti izvan osnovnog CLI-ja. Ovo je posebno korisno za AI radna opterećenja:
 
 ```bash
-# Nabroj dostupne ekstenzije
+# Prikaži dostupne ekstenzije
 azd extension list
 
-# Instaliraj Foundry agents ekstenziju
+# Instaliraj ekstenziju Foundry agenata
 azd extension install azure.ai.agents
 
 # Inicijaliziraj AI agent projekt iz manifesta
 azd ai agent init -m agent-manifest.yaml
 
-# Pokreni MCP server za razvoj uz AI pomoć (Alfa)
+# Testiraj implementiranog agenta (prikazuje kašnjenje i vrijeme do prvog bajta)
+azd ai agent invoke
+
+# Pokreni MCP server za AI-pomoć pri razvoju (Alfa)
 azd mcp start
 ```
   
-> Ekstenzije su detaljno obrađene u [Poglavlju 2: AI-First Development](../chapter-02-ai-development/agents.md) i referenci [AZD AI CLI naredbi](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
+**Životni ciklus agenta, od kraja do kraja.** Nakon instalacije `azure.ai.agents`, jedan tijek rada vodi vas od ideje do pokrenutog agenta s nadzorom. Nije potrebno imati sve ovo prvi dan—samo znajte da postoje:
+
+| Faza | Naredba | Što radi |
+|-------|---------|----------|
+| **Scaffold** | `azd ai agent init -m <manifest>` | Generira agent projekt iz manifesta |
+| **Test** | `azd ai agent invoke` | Poziva agenta i prikazuje vrijeme odziva |
+| **Measure** | `azd ai agent eval generate` | Stvara evaluacijski skup podataka za agenta |
+| **Improve** | `azd ai agent optimize` | Optimizira upute za agenta na osnovu vaših podataka |
+| **Inspect** | `azd ai agent endpoint show` | Prikazuje konfiguraciju live endpointa |
+| **Clean up** | `azd ai agent delete` | Briše hostanog agenta i sve njegove verzije |
+
+> Proširenja su detaljno obrađena u [Poglavlju 2: AI-prvi razvoj](../chapter-02-ai-development/agents.md) i u referenci [AZD AI CLI naredbe](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
 
 ## 📁 Struktura projekta
 
@@ -351,7 +366,7 @@ my-app/
 ## 🔧 Konfiguracijske datoteke
 
 ### azure.yaml  
-Glavna konfiguracijska datoteka projekta:  
+Glavna datoteka konfiguracije projekta:  
 ```yaml
 name: my-awesome-app
 metadata:
@@ -374,7 +389,7 @@ hooks:
 ```
   
 ### .azure/config.json  
-Okružno-specifična konfiguracija:  
+Konfiguracija specifična za okruženje:  
 ```json
 {
   "version": 1,
@@ -388,13 +403,13 @@ Okružno-specifična konfiguracija:
 }
 ```
   
-## 🎪 Uobičajeni tijekovi rada s praktičnim vježbama
+## 🎪 Uobičajeni tijekovi rada s praktičnim zadacima
 
 > **💡 Savjet za učenje:** Slijedite ove vježbe redom kako biste postupno razvijali svoje AZD vještine.
 
 ### 🎯 Vježba 1: Inicijalizirajte svoj prvi projekt
 
-**Cilj:** Kreirajte AZD projekt i istražite njegovu strukturu
+**Cilj:** Kreirati AZD projekt i istražiti njegovu strukturu
 
 **Koraci:**  
 ```bash
@@ -402,21 +417,21 @@ Okružno-specifična konfiguracija:
 azd init --template todo-nodejs-mongo
 
 # Istražite generirane datoteke
-ls -la  # Prikažite sve datoteke uključujući skrivene
+ls -la  # Prikaži sve datoteke uključujući skrivene
 
-# Ključne stvorene datoteke:
+# Ključne kreirane datoteke:
 # - azure.yaml (glavna konfiguracija)
 # - infra/ (kod infrastrukture)
 # - src/ (kod aplikacije)
 ```
   
-**✅ Uspjeh:** Imate direktorije azure.yaml, infra/ i src/
+**✅ Uspjeh:** Imate azure.yaml, infra/ i src/ direktorije
 
 ---
 
-### 🎯 Vježba 2: Implementirajte na Azure
+### 🎯 Vježba 2: Implementacija u Azure
 
-**Cilj:** Izvedite cjelokupnu implementaciju
+**Cilj:** Završiti end-to-end implementaciju
 
 **Koraci:**  
 ```bash
@@ -430,11 +445,11 @@ azd env set AZURE_LOCATION eastus
 # 3. Pregledajte promjene (PREPORUČENO)
 azd provision --preview
 
-# 4. Postavite sve
+# 4. Implementirajte sve
 azd up
 
-# 5. Provjerite postavljanje
-azd show    # Pogledajte URL vaše aplikacije
+# 5. Potvrdite implementaciju
+azd show    # Pogledajte URL svoje aplikacije
 ```
   
 **Očekivano vrijeme:** 10-15 minuta  
@@ -444,125 +459,127 @@ azd show    # Pogledajte URL vaše aplikacije
 
 ### 🎯 Vježba 3: Višestruka okruženja
 
-**Cilj:** Implementirajte u razvojno i staging okruženje
+**Cilj:** Implementirati u razvojno i staging okruženje
 
 **Koraci:**  
 ```bash
-# Već imate dev, stvorite staging
+# Već postoji dev, stvori staging
 azd env new staging
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Prebacujte se između njih
+# Prebaci se između njih
 azd env list
 azd env select dev
 ```
   
-**✅ Uspjeh:** Dvije odvojene resource grupe u Azure Portalu
+**✅ Uspjeh:** Dvije zasebne resource grupe u Azure portalu
 
 ---
 
-### 🛡️ Čisto okruženje: `azd down --force --purge`
+### 🛡️ Čista ploča: `azd down --force --purge`
 
-Kad trebate potpuno resetirati:
+Kada trebate potpuno resetirati:
 
 ```bash
 azd down --force --purge
 ```
   
 **Što radi:**  
-- `--force`: Bez potvrda korištenja  
-- `--purge`: Briše sve lokalno stanje i Azure resurse
+- `--force`: Bez potvrda  
+- `--purge`: Briše sve lokalno stanje i Azure resurse  
 
 **Koristite kada:**  
-- Implementacija nije uspjela na pola puta  
+- Implementacija je prekinuta usred procesa  
 - Mijenjate projekte  
-- Trebate potpuno svježi početak
+- Trebate svježi početak  
 
 ---
 
-## 🎪 Originalni referentni tijek rada
+## 🎪 Originalni tijek rada referenca
 
 ### Pokretanje novog projekta  
 ```bash
-# Metoda 1: Koristi postojeći predložak
+# Metoda 1: Koristite postojeći predložak
 azd init --template todo-nodejs-mongo
 
-# Metoda 2: Počni od nule
+# Metoda 2: Počnite od nule
 azd init
 
-# Metoda 3: Koristi trenutni direktorij
+# Metoda 3: Koristite trenutni direktorij
 azd init .
 ```
   
 ### Razvojni ciklus  
 ```bash
-# Postavi razvojno okruženje
+# Postavite razvojno okruženje
 azd auth login
 azd env new dev
 azd env select dev
 
-# Implementiraj sve
+# Implementirajte sve
 azd up
 
-# Napravi izmjene i ponovo implementiraj
+# Napravite promjene i ponovno implementirajte
 azd deploy
 
-# Očisti kada završiš
-azd down --force --purge # naredba u Azure Developer CLI znači **tvrd reset** za tvoje okruženje—posebno korisno kada rješavaš probleme s neuspjelim implementacijama, čistiš siroče resurse ili pripremaš novu implementaciju.
+# Očistite kada završite
+azd down --force --purge # naredba u Azure Developer CLI-u je **tvrdi reset** za vaše okruženje—posebno korisno kada otklanjate kvarove neuspjelih implementacija, čistite napuštene resurse ili se pripremate za novu implementaciju.
 ```
   
 ## Razumijevanje `azd down --force --purge`
 
-`azd down --force --purge` naredba je snažan način da u potpunosti rastavite svoje azd okruženje i sve povezane resurse. Evo pregleda što svaki parametar radi:  
+Naredba `azd down --force --purge` moćan je način da potpuno uklonite svoje azd okruženje i sve povezane resurse. Evo što svaki flag radi:  
 ```
 --force
 ```
-- Preskače zahtjeve za potvrdu.  
-- Korisno za automatizaciju ili skripte gdje ručni unos nije moguć.  
-- Osigurava da razgradnja ide bez prekida, čak i ako CLI detektira nedosljednosti.
+  
+- Preskače potvrde.  
+- Korisno za automatizaciju ili skriptiranje bez potrebe za unosom korisnika.  
+- Osigurava da rušenje ide bez prekida, čak i ako CLI detektira nesukladnosti.  
 
 ```
 --purge
 ```
- Briše **sav povezani metapodatak**, uključujući:  
+  
+Briše **sve povezane metapodatke**, uključujući:  
 Stanje okruženja  
-Lokalni `.azure` folder  
-Predmemorirane informacije o implementaciji  
-Sprječava da azd "pamti" prethodne implementacije, što može uzrokovati probleme kao što su neusklađene resource grupe ili zastarjeli registry reference.
+Lokalni `.azure` direktorij  
+Keširane informacije o implementaciji  
+Sprječava da azd „pamti“ prethodne implementacije, koje mogu uzrokovati probleme poput nepodudaranja resource grupa ili zastarjelih referenci registara.
 
-### Zašto koristiti oboje?  
-Kada zapnete s `azd up` zbog zaostalih stanja ili djelomičnih implementacija, ova kombinacija osigurava **čistu podlogu**.
+### Zašto koristiti oba?  
+Kada naiđete na probleme s `azd up` zbog zaostalog stanja ili djelomičnih implementacija, ova kombinacija osigurava **čistu ploču**.
 
-Posebno je korisno nakon ručnih brisanja resursa u Azure portalu ili kada mijenjate šablone, okruženja ili konvencije imenovanja resource grupa.
+Posebno je korisno nakon ručnih brisanja resursa u Azure portalu ili kod promjene predložaka, okruženja ili konvencija imenovanja resource grupa.
 
 ### Upravljanje višestrukim okruženjima  
 ```bash
-# Kreiraj pripremno okruženje
+# Kreiraj staging okruženje
 azd env new staging
 azd env select staging
 azd up
 
-# Prebaci se natrag na razvoj
+# Vratite se na razvoj
 azd env select dev
 
 # Usporedi okruženja
 azd env list
 ```
   
-## 🔐 Autentikacija i vjerodajnice
+## 🔐 Autentifikacija i vjerodajnice
 
-Razumijevanje autentikacije ključno je za uspješne azd implementacije. Azure koristi više metoda autentikacije, a azd koristi isti lanac vjerodajnica koji koriste i drugi Azure alati.
+Razumijevanje autentifikacije je ključno za uspješne azd implementacije. Azure koristi više metoda autentifikacije, a azd koristi isti lanac vjerodajnica kao i drugi Azure alati.
 
-### Azure CLI autentikacija (`az login`)
+### Azure CLI autentifikacija (`az login`)
 
-Prije korištenja azd-a, potrebno se autentificirati na Azure. Najčešći način je korištenje Azure CLI:
+Prije korištenja azd-a, morate se autentificirati na Azure. Najčešći način je korištenje Azure CLI-ja:
 
 ```bash
 # Interaktivna prijava (otvara preglednik)
 az login
 
-# Prijava s određenim najmodavcem
+# Prijava s određenim zakupcem
 az login --tenant <tenant-id>
 
 # Prijava s glavnim servisnim računom
@@ -571,38 +588,39 @@ az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
 # Provjeri trenutni status prijave
 az account show
 
-# Popis dostupnih pretplata
+# Prikaži dostupne pretplate
 az account list --output table
 
 # Postavi zadanu pretplatu
 az account set --subscription <subscription-id>
 ```
   
-### Tijek autentikacije
-1. **Interaktivni login**: Otvara vaš zadani preglednik za autentikaciju  
+### Tijek autentifikacije  
+1. **Interaktivni login**: Otvara vaš zadani preglednik za autentifikaciju  
 2. **Device Code Flow**: Za okruženja bez pristupa pregledniku  
 3. **Service Principal**: Za automatizaciju i CI/CD scenarije  
-4. **Managed Identity**: Za aplikacije hostane na Azure-u
+4. **Managed Identity**: Za aplikacije hostane na Azureu  
 
 ### Lanac vjerodajnica DefaultAzureCredential
 
-`DefaultAzureCredential` je tip vjerodajnica koji pruža pojednostavljen proces autentikacije automatskim isprobavanjem više izvora vjerodajnica u određenom redoslijedu:
+`DefaultAzureCredential` je tip vjerodajnica koji pruža pojednostavljeno iskustvo autentifikacije automatskim pokušajem iz više izvora vjerodajnica u određenom redoslijedu:
 
-#### Redoslijed lanca vjerodajnica  
+#### Redoslijed u lancu vjerodajnica  
 ```mermaid
 graph TD
-    A[DefaultAzureCredential] --> B[Varijable okoline]
+    A[DefaultAzureCredential] --> B[Promjenjive okoline]
     B --> C[Identitet radnog opterećenja]
-    C --> D[Upravljani identitet]
+    C --> D[Upravljački identitet]
     D --> E[Visual Studio]
     E --> F[Visual Studio Code]
     F --> G[Azure CLI]
     G --> H[Azure PowerShell]
     H --> I[Interaktivni preglednik]
-```  
+```
+  
 #### 1. Varijable okruženja  
 ```bash
-# Postavite varijable okoline za servisnog principala
+# Postavi varijable okoline za servisni princip
 export AZURE_CLIENT_ID="<app-id>"
 export AZURE_CLIENT_SECRET="<password>"
 export AZURE_TENANT_ID="<tenant-id>"
@@ -610,51 +628,51 @@ export AZURE_TENANT_ID="<tenant-id>"
   
 #### 2. Workload Identity (Kubernetes/GitHub Actions)  
 Automatski se koristi u:  
-- Azure Kubernetes Service (AKS) s Workload Identity  
+- Azure Kubernetes Service (AKS) sa Workload Identity  
 - GitHub Actions s OIDC federacijom  
-- Drugi scenariji federirane identifikacije
+- Ostalim scenarijima federirane identifikacije  
 
 #### 3. Managed Identity  
 Za Azure resurse poput:  
-- Virtualnih strojeva  
+- Virtualnih računala  
 - App Service  
 - Azure Functions  
 - Container Instances
 
 ```bash
-# Provjerite radi li se na Azure resursu s upravljanim identitetom
+# Provjeri radi li se na Azure resursu s upravljanim identitetom
 az account show --query "user.type" --output tsv
 # Vraća: "servicePrincipal" ako se koristi upravljani identitet
 ```
   
-#### 4. Integracija s alatima za razvoj  
-- **Visual Studio**: Automatski koristi prijavljen račun  
-- **VS Code**: Koristi vjerodajnice Azure Account ekstenzije  
-- **Azure CLI**: Koristi vjerodajnice `az login` (najčešće za lokalni razvoj)
+#### 4. Integracija s razvojnim alatima  
+- **Visual Studio**: Automatski koristi prijavljeni račun  
+- **VS Code**: Koristi vjerodajnice iz Azure Account ekstenzije  
+- **Azure CLI**: Koristi vjerodajnice iz `az login` (najčešće za lokalni razvoj)  
 
-### Postavljanje autentikacije za AZD
+### Postavljanje autentifikacije za AZD
 
 ```bash
-# Metoda 1: Koristite Azure CLI (preporučeno za razvoj)
+# Metoda 1: Koristite Azure CLI (Preporučeno za razvoj)
 az login
 azd auth login  # Koristi postojeće vjerodajnice Azure CLI-ja
 
-# Metoda 2: Izravna azd autentifikacija
-azd auth login --use-device-code  # Za okruženja bez sučelja
+# Metoda 2: Izravna azd autentikacija
+azd auth login --use-device-code  # Za okruženja bez glave
 
-# Metoda 3: Provjeri status autentifikacije
+# Metoda 3: Provjeri status autentikacije
 azd auth login --check-status
 
-# Metoda 4: Odjava i ponovna autentifikacija
+# Metoda 4: Odjavite se i ponovno se autentificirajte
 azd auth logout
 azd auth login
 ```
   
-### Najbolje prakse za autentikaciju
+### Najbolje prakse autentifikacije
 
-#### Za lokalni razvoj  
+#### Za lokalni razvoj
 ```bash
-# 1. Prijavite se pomoću Azure CLI
+# 1. Prijava putem Azure CLI
 az login
 
 # 2. Provjerite ispravnu pretplatu
@@ -664,8 +682,8 @@ az account set --subscription "Your Subscription Name"
 # 3. Koristite azd s postojećim vjerodajnicama
 azd auth login
 ```
-  
-#### Za CI/CD pipelineove  
+
+#### Za CI/CD pipelineove
 ```yaml
 # GitHub Actions example
 - name: Azure Login
@@ -680,24 +698,24 @@ azd auth login
                     --tenant-id ${{ secrets.AZURE_TENANT_ID }}
     azd up --no-prompt
 ```
-  
-#### Za produkcijska okruženja  
-- Koristite **Managed Identity** prilikom rada na Azure resursima  
-- Koristite **Service Principal** za automatizacijske scenarije  
-- Izbjegavajte pohranu vjerodajnica u kod ili konfiguracijske datoteke  
-- Koristite **Azure Key Vault** za osjetljivu konfiguraciju
 
-### Uobičajeni problemi s autentikacijom i rješenja
+#### Za produkcijska okruženja
+- Koristite **Managed Identity** prilikom rada na Azure resursima
+- Koristite **Service Principal** za scenarije automatizacije
+- Izbjegavajte pohranjivanje vjerodajnica u kod ili konfiguracijske datoteke
+- Koristite **Azure Key Vault** za osjetljive konfiguracije
 
-#### Problem: "Nema pretplate"  
+### Uobičajeni problemi s autentifikacijom i rješenja
+
+#### Problem: "No subscription found" (Pretplata nije pronađena)
 ```bash
 # Rješenje: Postavite zadanu pretplatu
 az account list --output table
 az account set --subscription "<subscription-id>"
 azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 ```
-  
-#### Problem: "Nedovoljna dopuštenja"  
+
+#### Problem: "Insufficient permissions" (Nedostatak dozvola)
 ```bash
 # Rješenje: Provjerite i dodijelite potrebne uloge
 az role assignment list --assignee $(az account show --query user.name --output tsv)
@@ -706,8 +724,8 @@ az role assignment list --assignee $(az account show --query user.name --output 
 # - Suradnik (za upravljanje resursima)
 # - Administrator pristupa korisnicima (za dodjelu uloga)
 ```
-  
-#### Problem: "Token je istekao"  
+
+#### Problem: "Token expired" (Token je istekao)
 ```bash
 # Rješenje: Ponovno se autentificirajte
 az logout
@@ -715,186 +733,187 @@ az login
 azd auth logout
 azd auth login
 ```
-  
-### Autentikacija u različitim scenarijima
 
-#### Lokalni razvoj  
+### Autentifikacija u različitim scenarijima
+
+#### Lokalni razvoj
 ```bash
 # Račun za osobni razvoj
 az login
 azd auth login
 ```
-  
-#### Razvoj u timu  
+
+#### Timski razvoj
 ```bash
-# Koristite specifični zakupac za organizaciju
+# Koristite specifičan zakupac za organizaciju
 az login --tenant contoso.onmicrosoft.com
 azd auth login
 ```
-  
-#### Scenariji s višestrukim zakupcima  
+
+#### Multi-tenant scenariji
 ```bash
-# Prebaci između najmodavaca
+# Prebaci između korisnika
 az login --tenant tenant1.onmicrosoft.com
-# Postavi na najmodavca 1
+# Implementiraj za korisnika 1
 azd up
 
 az login --tenant tenant2.onmicrosoft.com  
-# Postavi na najmodavca 2
+# Implementiraj za korisnika 2
 azd up
 ```
-  
-### Sigurnosni aspekti
-1. **Spremanje vjerodajnica**: Nikada ne pohranjujte vjerodajnice u izvorni kod  
-2. **Ograničenje opsega**: Koristite načelo najmanjih privilegija za servisne principe  
-3. **Rotacija tokena**: Redovito rotirajte tajne servisnih principa  
-4. **Revizijski trag**: Nadzirite aktivnosti autentifikacije i implementacije  
-5. **Sigurnost mreže**: Koristite privatne krajnje točke kad god je moguće  
+
+### Sigurnosne napomene
+
+1. **Pohrana vjerodajnica**: Nikada ne pohranjujte vjerodajnice u izvorni kod
+2. **Ograničenje opsega**: Koristite princip najmanjih privilegija za service principale
+3. **Rotacija tokena**: Redovito mijenjajte tajne service pricnipala
+4. **Revizijski trag**: Pratite aktivnosti autentifikacije i implementacije
+5. **Sigurnost mreže**: Koristite privatne endpointove kad god je moguće
 
 ### Rješavanje problema s autentifikacijom
 
 ```bash
-# Otklanjanje problema s autentifikacijom
+# Otkloni pogreške u autentifikaciji
 azd auth login --check-status
 az account show
 az account get-access-token
 
 # Uobičajene dijagnostičke naredbe
 whoami                          # Trenutni korisnički kontekst
-az ad signed-in-user show      # Podaci o korisniku Azure AD
-az group list                  # Test pristupa resursu
+az ad signed-in-user show      # Detalji korisnika Microsoft Entra ID-a
+az group list                  # Testiraj pristup resursu
 ```
-  
-## Razumijevanje `azd down --force --purge`  
 
-### Otkrivanje  
+## Razumijevanje `azd down --force --purge`
+
+### Otkrivanje
 ```bash
-azd template list              # Pregledajte predloške
+azd template list              # Pregledaj predloške
 azd template show <template>   # Detalji predloška
 azd init --help               # Opcije inicijalizacije
 ```
-  
-### Upravljanje projektom  
+
+### Upravljanje projektom
 ```bash
 azd show                     # Pregled projekta
 azd env list                # Dostupna okruženja i odabrano zadano
 azd config show            # Postavke konfiguracije
 ```
-  
-### Nadgledanje  
-```bash
-azd monitor                  # Otvorite Azure portal za nadzor
-azd monitor --logs           # Pregledajte zapisnike aplikacije
-azd monitor --live           # Pregledajte žive metrike
-azd pipeline config          # Postavite CI/CD
-```
-  
-## Najbolje prakse  
 
-### 1. Koristite smisrena imena  
+### Praćenje
+```bash
+azd monitor                  # Otvori Azure portal za nadzor
+azd monitor --logs           # Pregledaj dnevnike aplikacije
+azd monitor --live           # Pregledaj žive metrike
+azd pipeline config          # Postavi CI/CD
+```
+
+## Najbolje prakse
+
+### 1. Koristite smislenim imena
 ```bash
 # Dobro
 azd env new production-east
 azd init --template web-app-secure
 
-# Izbjegavati
+# Izbjegavaj
 azd env new env1
 azd init --template template1
 ```
-  
-### 2. Iskoristite predloške  
-- Počnite s postojećim predlošcima  
-- Prilagodite ih svojim potrebama  
-- Kreirajte predloške za višekratnu upotrebu u svojoj organizaciji  
 
-### 3. Izolacija okruženja  
-- Koristite zasebna okruženja za razvoj/testiranje/produkciju  
-- Nikada nemojte implementirati izravno u produkciju sa lokalnog računala  
-- Koristite CI/CD cjevovode za produkcijske implementacije  
+### 2. Iskoristite predloške
+- Počnite s postojećim predlošcima
+- Prilagodite ih svojim potrebama
+- Kreirajte predloške za višekratnu upotrebu za svoju organizaciju
 
-### 4. Upravljanje konfiguracijom  
-- Koristite varijable okruženja za osjetljive podatke  
-- Držite konfiguraciju pod verzijskom kontrolom  
-- Dokumentirajte postavke specifične za okruženje  
+### 3. Izolacija okruženja
+- Koristite odvojena okruženja za razvoj/testirnje/produkciju
+- Nikada ne implementirajte direktno u produkciju s lokalnog računala
+- Koristite CI/CD pipelineove za produkcijske implementacije
 
-## Napredak u učenju  
+### 4. Upravljanje konfiguracijom
+- Koristite varijable okruženja za osjetljive podatke
+- Čuvajte konfiguraciju pod verzioniranjem
+- Dokumentirajte postavke specifične za okruženje
 
-### Početnik (Tjedan 1-2)  
-1. Instalirajte azd i autentificirajte se  
-2. Implementirajte jednostavan predložak  
-3. Razumite strukturu projekta  
-4. Naučite osnovne naredbe (up, down, deploy)  
+## Napredovanje u učenju
 
-### Srednji nivo (Tjedan 3-4)  
-1. Prilagodite predloške  
-2. Upravljajte višestrukim okruženjima  
-3. Razumite kod infrastrukture  
-4. Postavite CI/CD cjevovode  
+### Početnik (tjedan 1–2)
+1. Instalirajte azd i autentificirajte se
+2. Implementirajte jednostavan predložak
+3. Razumite strukturu projekta
+4. Naučite osnovne naredbe (up, down, deploy)
 
-### Napredni (Tjedan 5+)  
-1. Kreirajte prilagođene predloške  
-2. Napredni obrasci infrastrukture  
-3. Implementacije u više regija  
-4. Enterprise-grade konfiguracije  
+### Srednji nivo (tjedan 3–4)
+1. Prilagođavajte predloške
+2. Upravljajte više okruženja
+3. Razumite infrastrukturu kao kod
+4. Postavite CI/CD pipelineove
 
-## Sljedeći koraci  
+### Napredni nivo (tjedan 5+)
+1. Kreirajte vlastite predloške
+2. Napredni obrasci infrastrukture
+3. Implementacije u više regija
+4. Konfiguracije za poslovnu razinu
 
-**📖 Nastavite učenje u Poglavlju 1:**  
-- [Instalacija i postavljanje](installation.md) - Instalirajte i konfigurirajte azd  
-- [Vaš prvi projekt](first-project.md) - Završite praktični vodič  
-- [Vodič za konfiguraciju](configuration.md) - Napredne opcije konfiguracije  
+## Sljedeći koraci
 
-**🎯 Spremni za sljedeće poglavlje?**  
-- [Poglavlje 2: AI-prvi razvoj](../chapter-02-ai-development/microsoft-foundry-integration.md) - Počnite graditi AI aplikacije  
+**📖 Nastavite s poglavljem 1:**
+- [Instalacija i postavljanje](installation.md) - Instalirajte i konfigurirajte azd
+- [Vaš prvi projekt](first-project.md) - Završite praktičnu radionicu
+- [Vodič za konfiguraciju](configuration.md) - Napredne opcije konfiguracije
 
-## Dodatni resursi  
+**🎯 Spremni za sljedeće poglavlje?**
+- [Poglavlje 2: AI-prvo razvoj](../chapter-02-ai-development/microsoft-foundry-integration.md) - Počnite graditi AI aplikacije
 
-- [Pregled Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- [Galerija predložaka](https://azure.github.io/awesome-azd/)  
-- [Community primjeri](https://github.com/Azure-Samples)  
+## Dodatni izvori
+
+- [Pregled Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Galerija predložaka](https://azure.github.io/awesome-azd/)
+- [Primjeri zajednice](https://github.com/Azure-Samples)
 
 ---
 
-## 🙋 Često postavljana pitanja  
+## 🙋 Često postavljana pitanja
 
-### Opća pitanja  
+### Općenita pitanja
 
-**P: Koja je razlika između AZD i Azure CLI?**  
+**P: Koja je razlika između AZD i Azure CLI?**
 
-O: Azure CLI (`az`) služi za upravljanje pojedinačnim Azure resursima. AZD (`azd`) upravlja cijelim aplikacijama:  
+O: Azure CLI (`az`) služi za upravljanje pojedinačnim Azure resursima. AZD (`azd`) služi za upravljanje cijelim aplikacijama:
 
 ```bash
-# Azure CLI - Upravljanje resursima na niskoj razini
+# Azure CLI - Upravljanje resursima niske razine
 az webapp create --name myapp --resource-group rg
 az sql server create --name myserver --resource-group rg
 # ...potrebno je još mnogo naredbi
 
 # AZD - Upravljanje na razini aplikacije
-azd up  # Implementira cijelu aplikaciju sa svim resursima
+azd up  # Postavlja cijelu aplikaciju sa svim resursima
 ```
-  
-**Razmislite ovako:**  
-- `az` = Rukovanje pojedinačnim Lego kockicama  
-- `azd` = Rad s kompletnim Lego setovima  
+
+**Razmislite o ovome:**
+- `az` = Rukovanje pojedinačnim Lego kockicama
+- `azd` = Rad s kompletnim Lego setovima
 
 ---
 
-**P: Trebam li znati Bicep ili Terraform da bih koristio AZD?**  
+**P: Trebam li znati Bicep ili Terraform da koristim AZD?**
 
-O: Ne! Počnite s predlošcima:  
+O: Ne! Počnite s predlošcima:
 ```bash
-# Koristite postojeći predložak - nije potrebno znanje o IaC
+# Koristite postojeći predložak - nije potrebno znanje o IaC-u
 azd init --template todo-nodejs-mongo
 azd up
 ```
-  
-Kasnije možete naučiti Bicep za prilagodbu infrastrukture. Predlošci pružaju radne primjere za učenje.  
+
+Kasnije možete naučiti Bicep za prilagodbu infrastrukture. Predlošci pružaju radne primjere za učenje.
 
 ---
 
-**P: Koliko košta pokretanje AZD predložaka?**  
+**P: Koliko košta korištenje AZD predložaka?**
 
-O: Troškovi variraju ovisno o predlošku. Većina razvojnih predložaka košta 50-150 USD mjesečno:  
+O: Troškovi ovise o predlošku. Većina razvojnih predložaka košta 50-150$ mjesečno:
 
 ```bash
 # Pregledajte troškove prije implementacije
@@ -903,36 +922,36 @@ azd provision --preview
 # Uvijek očistite kada ne koristite
 azd down --force --purge  # Uklanja sve resurse
 ```
-  
-**Stručni savjet:** Koristite besplatne slojeve gdje je moguće:  
-- App Service: F1 (besplatni) sloj  
-- Microsoft Foundry modeli: Azure OpenAI 50.000 tokena/mjesečno besplatno  
-- Cosmos DB: 1000 RU/s besplatni sloj  
+
+**Savjet:** Koristite besplatne slojeve gdje je dostupno:
+- App Service: F1 (besplatni) sloj
+- Microsoft Foundry modeli: Azure OpenAI 50,000 tokena/mjesec gratis
+- Cosmos DB: 1000 RU/s besplatni sloj
 
 ---
 
-**P: Mogu li koristiti AZD s postojećim Azure resursima?**  
+**P: Mogu li koristiti AZD s postojećim Azure resursima?**
 
-O: Da, ali je lakše početi iznova. AZD najbolje radi kad upravlja cijelim životnim ciklusom. Za postojeće resurse:  
+O: Da, ali je lakše započeti iznova. AZD najbolje radi kad upravlja cjelokupnim životnim ciklusom. Za postojeće resurse:
 
 ```bash
 # Opcija 1: Uvezi postojeće resurse (napredno)
 azd init
 # Zatim izmijeni infra/ da referencira postojeće resurse
 
-# Opcija 2: Započni ispočetka (preporučeno)
+# Opcija 2: Počni ispočetka (preporučeno)
 azd init --template matching-your-stack
 azd up  # Stvara novo okruženje
 ```
-  
+
 ---
 
-**P: Kako dijeliti projekt s kolegama?**  
+**P: Kako dijeliti svoj projekt s timom?**
 
-O: Poslužite AZD projekt u Git repozitorij (ali NE .azure mapu):  
+O: Potvrdite AZD projekt u Git (ali NE .azure mapu):
 
 ```bash
-# Već zadano u .gitignore
+# Već prema zadanim postavkama u .gitignore
 .azure/        # Sadrži tajne i podatke o okruženju
 *.env          # Varijable okruženja
 
@@ -942,28 +961,28 @@ azd auth login
 azd env new <their-name>-dev
 azd up
 ```
-  
-Svi dobiju identičnu infrastrukturu iz istih predložaka.  
+
+Svi dobivaju identičnu infrastrukturu iz istih predložaka.
 
 ---
 
-### Pitanja o rješavanju problema  
+### Pitanja o rješavanju problema
 
-**P: "azd up" nije uspio do kraja. Što da radim?**  
+**P: "azd up" je propao na pola puta. Što da radim?**
 
-O: Provjerite pogrešku, ispravite je, zatim pokušajte ponovno:  
+O: Provjerite grešku, ispravite, zatim pokušajte ponovo:
 
 ```bash
-# Pregledajte detaljne zapise
+# Pogledajte detaljne zapise
 azd show
 
-# Uobičajena rješenja:
+# Uobičajeni popravci:
 
 # 1. Ako je kvota premašena:
-azd env set AZURE_LOCATION "westus2"  # Isprobajte drugu regiju
+azd env set AZURE_LOCATION "westus2"  # Pokušajte s drugom regijom
 
-# 2. Ako postoji sukob u nazivu resursa:
-azd down --force --purge  # Početak ispočetka
+# 2. Ako je došlo do sukoba imena resursa:
+azd down --force --purge  # Početak iznova
 azd up  # Pokušajte ponovno
 
 # 3. Ako je autorizacija istekla:
@@ -971,36 +990,36 @@ az login
 azd auth login
 azd up
 ```
-  
-**Najčešći problem:** Odabran je pogrešan Azure pretplatnički račun  
+
+**Najčešći problem:** Odabrana je pogrešna Azure pretplata
 ```bash
 az account list --output table
 az account set --subscription "<correct-subscription>"
 ```
-  
+
 ---
 
-**P: Kako implementirati samo promjene u kodu bez ponovnog postavljanja?**  
+**P: Kako implementirati samo promjene u kodu bez ponovnog provisioniranja?**
 
-O: Koristite `azd deploy` umjesto `azd up`:  
+O: Koristite `azd deploy` umjesto `azd up`:
 
 ```bash
-azd up          # Prvi put: priprema + implementacija (sporo)
+azd up          # Prvi put: postavljanje + implementacija (sporo)
 
 # Napravite promjene u kodu...
 
 azd deploy      # Sljedeći put: samo implementacija (brzo)
 ```
-  
-Usporedba brzine:  
-- `azd up`: 10-15 minuta (postavlja infrastrukturu)  
-- `azd deploy`: 2-5 minuta (samo kod)  
+
+Usporedba brzina:
+- `azd up`: 10-15 minuta (provisioniranje infrastrukture)
+- `azd deploy`: 2-5 minuta (samo kod)
 
 ---
 
-**P: Mogu li prilagoditi predloške infrastrukture?**  
+**P: Mogu li prilagoditi infrastrukturne predloške?**
 
-O: Da! Uredite Bicep datoteke u `infra/`:  
+O: Da! Uređujte Bicep datoteke u `infra/`:
 
 ```bash
 # Nakon azd init
@@ -1013,62 +1032,62 @@ azd provision --preview
 # Primijeni promjene
 azd provision
 ```
-  
-**Savjet:** Počnite s malim promjenama - prvo izmijenite SKU-e:  
+
+**Savjet:** Počnite s malim izmjenama - prvo promijenite SKU:
 ```bicep
 // infra/main.bicep
 sku: {
   name: 'B1'  // Change to 'P1V2' for production
 }
 ```
-  
+
 ---
 
-**P: Kako obrisati sve što je AZD kreirao?**  
+**P: Kako obrisati sve što je AZD kreirao?**
 
-O: Jedna naredba uklanja sve resurse:  
+O: Jedna naredba briše sve resurse:
 
 ```bash
 azd down --force --purge
 
 # Ovo briše:
 # - Sve Azure resurse
-# - Skup resursa
+# - Skupinu resursa
 # - Stanje lokalnog okruženja
 # - Predmemorirane podatke o implementaciji
 ```
-  
-**Uvijek pokrenite kada:**  
-- Završite testiranje predloška  
-- Prebacujete se na drugi projekt  
-- Želite početi iznova  
 
-**Ušteda troškova:** Brisanje neiskorištenih resursa = 0 troškova  
+**Uvijek koristite kad:**
+- Dovršite testiranje predloška
+- Prelazite na drugi projekt
+- Želite početi iznova
+
+**Ušteda troškova:** Brisanje neiskorištenih resursa = $0 troškova
 
 ---
 
-**P: Što ako slučajno obrišem resurse u Azure portalu?**  
+**P: Što ako sam slučajno obrisao resurse u Azure portalu?**
 
-O: Stanje AZD može biti nesinkronizirano. Pristup „čistom listu“:  
+O: AZD stanje može biti nesinkronizirano. Pristup čistom početku:
 
 ```bash
 # 1. Ukloni lokalno stanje
 azd down --force --purge
 
-# 2. Počni iznova
+# 2. Počni ispočetka
 azd up
 
-# Alternativa: Pusti AZD da otkrije i popravi
+# Alternativa: Neka AZD detektira i popravi
 azd provision  # Kreirat će nedostajuće resurse
 ```
-  
+
 ---
 
-### Napredna pitanja  
+### Napredna pitanja
 
-**P: Mogu li koristiti AZD u CI/CD cjevovodima?**  
+**P: Mogu li koristiti AZD u CI/CD pipelineovima?**
 
-O: Da! Primjer GitHub Actions:  
+O: Da! Primjer s GitHub Actions:
 
 ```yaml
 # .github/workflows/deploy.yml
@@ -1097,102 +1116,102 @@ jobs:
       - name: Deploy
         run: azd up --no-prompt
 ```
-  
+
 ---
 
-**P: Kako upravljati tajnama i osjetljivim podacima?**  
+**P: Kako upravljati tajnama i osjetljivim podacima?**
 
-O: AZD se automatski integrira s Azure Key Vault:  
+O: AZD se automatski integrira s Azure Key Vault:
 
 ```bash
-# Tajne se pohranjuju u Key Vault, ne u kod
+# Tajne se pohranjuju u Key Vault, ne u kodu
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)"
 
 # AZD automatski:
-# 1. Stvara Key Vault
+# 1. Kreira Key Vault
 # 2. Pohranjuje tajnu
-# 3. Dodjeljuje aplikaciji pristup putem Managed Identity
-# 4. Ubrizgava u vrijeme izvođenja
+# 3. Dodjeljuje pristup aplikaciji putem Managed Identity
+# 4. Ubacuje u vrijeme izvođenja
 ```
-  
-**Nikada ne dodajte u repozitorij:**  
-- `.azure/` mapu (sadrži podatke o okruženjima)  
-- `.env` datoteke (lokalne tajne)  
-- Poveznice za pristup  
+
+**Nikada ne potvrđujte:**
+- `.azure/` mapu (sadrži podatke o okruženju)
+- `.env` datoteke (lokalne tajne)
+- Connection stringove
 
 ---
 
-**P: Mogu li implementirati u više regija?**  
+**P: Mogu li implementirati u više regija?**
 
-O: Da, kreirajte okruženje za svaku regiju:  
+O: Da, kreirajte okruženje za svaku regiju:
 
 ```bash
-# Okruženje Istočni SAD
+# Okoliš Istočni SAD
 azd env new prod-eastus
 azd env set AZURE_LOCATION eastus
 azd up
 
-# Okruženje Zapadna Europa
+# Okoliš Zapadna Europa
 azd env new prod-westeurope
 azd env set AZURE_LOCATION westeurope
 azd up
 
-# Svako okruženje je neovisno
+# Svaki okoliš je neovisan
 azd env list
 ```
-  
-Za prave višeregionalne aplikacije prilagodite Bicep predloške za simultanu implementaciju u više regija.  
+
+Za prave multi-regionalne aplikacije, prilagodite Bicep predloške za simultanu implementaciju u više regija.
 
 ---
 
-**P: Gdje mogu dobiti pomoć ako zapnem?**  
+**P: Gdje mogu dobiti pomoć ako zapnem?**
 
-1. **AZD dokumentacija:** https://learn.microsoft.com/azure/developer/azure-developer-cli/  
-2. **GitHub Issues:** https://github.com/Azure/azure-dev/issues  
-3. **Discord:** [Azure Discord](https://discord.gg/microsoft-azure) - kanal #azure-developer-cli  
-4. **Stack Overflow:** Oznaka `azure-developer-cli`  
-5. **Ovaj tečaj:** [Vodič za rješavanje problema](../chapter-07-troubleshooting/common-issues.md)  
+1. **AZD Dokumentacija:** https://learn.microsoft.com/azure/developer/azure-developer-cli/
+2. **GitHub Issues:** https://github.com/Azure/azure-dev/issues
+3. **Discord:** [Azure Discord](https://discord.gg/microsoft-azure) - kanal #azure-developer-cli
+4. **Stack Overflow:** Oznaka `azure-developer-cli`
+5. **Ovaj tečaj:** [Vodič za rješavanje problema](../chapter-07-troubleshooting/common-issues.md)
 
-**Stručni savjet:** Prije nego što pitate, pokrenite:  
+**Savjet:** Prije nego pitate, pokrenite:
 ```bash
 azd show       # Prikazuje trenutačno stanje
 azd version    # Prikazuje vašu verziju
 ```
-Uključite ove informacije u svoje pitanje za bržu pomoć.  
+Uključite ove informacije u svoj upit za bržu pomoć.
 
 ---
 
-## 🎓 Što je sljedeće?  
+## 🎓 Što dalje?
 
-Sada razumijete osnove AZD-a. Odaberite svoj put:  
+Sada razumijete osnove AZD-a. Odaberite svoj put:
 
-### 🎯 Za početnike:  
-1. **Sljedeće:** [Instalacija i postavljanje](installation.md) - Instalirajte AZD na svoje računalo  
-2. **Zatim:** [Vaš prvi projekt](first-project.md) - Implementirajte prvu aplikaciju  
-3. **Vježbajte:** Završite svih 3 zadatka u ovoj lekciji  
+### 🎯 Za početnike:
+1. **Sljedeće:** [Instalacija i postavljanje](installation.md) - Instalirajte AZD na svoje računalo
+2. **Zatim:** [Vaš prvi projekt](first-project.md) - Implementirajte svoju prvu aplikaciju
+3. **Vježbajte:** Završite sva 3 zadatka u ovoj lekciji
 
-### 🚀 Za AI programere:  
-1. **Preskočite na:** [Poglavlje 2: AI-prvi razvoj](../chapter-02-ai-development/microsoft-foundry-integration.md)  
-2. **Implementirajte:** Počnite s `azd init --template get-started-with-ai-chat`  
-3. **Učite:** Gradite dok implementirate  
+### 🚀 Za AI developere:
+1. **Preskočite na:** [Poglavlje 2: AI-prvo razvoj](../chapter-02-ai-development/microsoft-foundry-integration.md)
+2. **Implementirajte:** Počnite s `azd init --template get-started-with-ai-chat`
+3. **Naučite:** Gradite dok implementirate
 
-### 🏗️ Za iskusne programere:  
-1. **Pregledajte:** [Vodič za konfiguraciju](configuration.md) - Napredne postavke  
-2. **Istražite:** [Infrastruktura kao kod](../chapter-04-infrastructure/provisioning.md) - Detaljna analiza Bicep-a  
-3. **Gradite:** Kreirajte prilagođene predloške za svoj sklad  
+### 🏗️ Za iskusne developere:
+1. **Pregledajte:** [Vodič za konfiguraciju](configuration.md) - Napredne postavke
+2. **Istražite:** [Infrastruktura kao kod](../chapter-04-infrastructure/provisioning.md) - Dubinski Bicep
+3. **Gradite:** Kreirajte prilagođene predloške za svoj stack
 
 ---
 
-**Navigacija po poglavljima:**  
-- **📚 Početna stranica tečaja:** [AZD za početnike](../../README.md)  
-- **📖 Trenutno poglavlje:** Poglavlje 1 - Osnove i brzi početak  
-- **⬅️ Prethodno:** [Pregled tečaja](../../README.md#-chapter-1-foundation--quick-start)  
-- **➡️ Sljedeće:** [Instalacija i postavljanje](installation.md)  
-- **🚀 Sljedeće poglavlje:** [Poglavlje 2: AI-prvi razvoj](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Navigacija po poglavljima:**
+- **📚 Početak tečaja**: [AZD za početnike](../../README.md)
+- **📖 Trenutno poglavlje**: Poglavlje 1 - Osnove i brz početak  
+- **⬅️ Prethodno**: [Pregled tečaja](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Sljedeće**: [Instalacija i postavljanje](installation.md)
+- **🚀 Sljedeće poglavlje**: [Poglavlje 2: AI-prvo razvoj](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Izjava o odricanju odgovornosti**:  
-Ovaj dokument je preveden pomoću AI prevoditeljskog servisa [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatizirani prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za kritične informacije preporučuje se profesionalni ljudski prijevod. Nismo odgovorni za bilo kakve nesporazume ili kriva tumačenja proistekla iz korištenja ovog prijevoda.
+**Napomena**:
+Ovaj dokument je preveden korištenjem AI prevoditeljskog servisa [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatski prijevodi mogu sadržavati greške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za važne informacije preporuča se profesionalni ljudski prijevod. Nismo odgovorni za bilo kakva nesporazumevanja ili pogrešne interpretacije koje proizlaze iz korištenja ovog prijevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

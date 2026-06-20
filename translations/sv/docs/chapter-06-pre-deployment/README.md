@@ -1,23 +1,23 @@
-# Kapitel 6: Planering och validering inför distribution
+# Kapitel 6: Planering och validering före driftsättning
 
-**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Varaktighet**: 1 timme | **⭐ Komplexitet**: Medel
+**📚 Kurs**: [AZD för nybörjare](../../README.md) | **⏱️ Längd**: 1 timme | **⭐ Komplexitet**: Medel
 
 ---
 
 ## Översikt
 
-Detta kapitel täcker viktiga planerings- och valideringssteg innan du distribuerar din applikation. Lär dig att undvika kostsamma misstag genom korrekt kapacitetsplanering, val av SKU och preflight‑kontroller.
+Detta kapitel täcker viktiga planerings- och valideringssteg innan du driftsätter din applikation. Lär dig undvika kostsamma misstag med korrekt kapacitetsplanering, SKU-val och förkontroller.
 
-> Validerad mot `azd 1.23.12` i mars 2026.
+> Validerad mot `azd 1.25.6` i juni 2026.
 
 ## Lärandemål
 
-När du har slutfört detta kapitel kommer du att:
-- Köra preflight‑kontroller före distribution
+Genom att slutföra detta kapitel kommer du att:
+- Köra förkontroller före driftsättning
 - Planera kapacitet och uppskatta resursbehov
 - Välja lämpliga SKU:er för kostnadsoptimering
 - Konfigurera Application Insights för övervakning
-- Förstå mönster för teamkoordinering
+- Förstå mönster för teamkoordination
 
 ---
 
@@ -25,15 +25,15 @@ När du har slutfört detta kapitel kommer du att:
 
 | # | Lektion | Beskrivning | Tid |
 |---|--------|-------------|------|
-| 1 | [Preflight Checks](preflight-checks.md) | Validera konfiguration innan distribution | 15 min |
+| 1 | [Preflight Checks](preflight-checks.md) | Validera konfiguration före driftsättning | 15 min |
 | 2 | [Capacity Planning](capacity-planning.md) | Uppskatta resursbehov | 20 min |
-| 3 | [SKU Selection](sku-selection.md) | Välja lämpliga prissättningsnivåer | 15 min |
+| 3 | [SKU Selection](sku-selection.md) | Välj lämpliga prissättningsnivåer | 15 min |
 | 4 | [Application Insights](application-insights.md) | Konfigurera övervakning | 20 min |
-| 5 | [Coordination Patterns](coordination-patterns.md) | Teamets distributionsarbetsflöden | 15 min |
+| 5 | [Coordination Patterns](coordination-patterns.md) | Teamets driftsättningsarbetsflöden | 15 min |
 
 ---
 
-## 🚀 Kom igång snabbt
+## 🚀 Snabbstart
 
 ```bash
 # Kontrollera prenumerationskvoter
@@ -51,17 +51,17 @@ azd env get-values
 
 ---
 
-## ☑️ Checklista inför distribution
+## ☑️ Checklista före driftsättning
 
-### Före `azd provision`
+### Innan `azd provision`
 
 - [ ] Kvot verifierad för regionen
 - [ ] SKUs valda på lämpligt sätt
 - [ ] Kostnadsuppskattning granskad
-- [ ] Konsekvent namngivningskonvention
+- [ ] Namngivningskonvention konsekvent
 - [ ] Säkerhet/RBAC konfigurerat
 
-### Före `azd deploy`
+### Innan `azd deploy`
 
 - [ ] Miljövariabler inställda
 - [ ] Hemligheter i Key Vault
@@ -72,7 +72,7 @@ azd env get-values
 
 ## 💰 Guide för val av SKU
 
-| Arbetsbelastning | Utveckling | Produktion |
+| Workload | Development | Production |
 |----------|-------------|------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
@@ -85,7 +85,7 @@ azd env get-values
 
 | Riktning | Kapitel |
 |-----------|---------|
-| **Föregående** | [Kapitel 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
+| **Föregående** | [Kapitel 5: Fleragent](../chapter-05-multi-agent/README.md) |
 | **Nästa** | [Kapitel 7: Felsökning](../chapter-07-troubleshooting/README.md) |
 
 ---
@@ -93,12 +93,12 @@ azd env get-values
 ## 📖 Relaterade resurser
 
 - [Konfigurationsguide](../chapter-03-configuration/configuration.md)
-- [Distribueringsguide](../chapter-04-infrastructure/deployment-guide.md)
+- [Driftsättningsguide](../chapter-04-infrastructure/deployment-guide.md)
 - [Vanliga problem](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfriskrivning**:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, observera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess ursprungsspråk bör anses vara den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var vänlig notera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

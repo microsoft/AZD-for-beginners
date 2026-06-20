@@ -1,158 +1,163 @@
 # Azure Developer CLI ဖြင့် AI အေဂျင့်များ
 
-**အကြောင်းအရာ(nav) သွားရန်:**
-- **📚 သင်တန်း မူလစာမျက်နှာ**: [AZD For Beginners](../../README.md)
-- **📖 လက်ရှိ အခန်း**: အခန်း 2 - AI-ပထမဦးစီး ဖွံ့ဖြိုးတိုးတက်ရေး
-- **⬅️ မျက်နှာပြင်**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ နောက်တစ်ခု**: [AI Model Deployment](ai-model-deployment.md)
-- **🚀 တိုးတက်မြှင့်တင်ရန်**: [Multi-Agent Solutions](../../examples/retail-scenario.md)
+**အခန်း လမ်းညွှန်:**
+- **📚 သင်တန်း မူလစာမျက်နှာ**: [AZD အစပြုသူများအတွက်](../../README.md)
+- **📖 လက်ရှိ အခန်း**: အခန်း 2 - AI-ဦးစားပေး ဖွံ့ဖြိုးရေး
+- **⬅️ ယခင်**: [Microsoft Foundry ပေါင်းစည်းမှု](microsoft-foundry-integration.md)
+- **➡️ နောက်တစ်ခု**: [AI မော်ဒယ် တင်သွင်းခြင်း](ai-model-deployment.md)
+- **🚀 အဆင့်မြင့်**: [အမြောက်အများ အေဂျင့် ဖြေရှင်းချက်များ](../../examples/retail-scenario.md)
 
 ---
 
 ## နိဒါန်း
 
-AI အေဂျင့်များသည် မိမိenviornment ကို ခံစားနိုင်ပြီး ဆုံးဖြတ်ချက်ချနိုင်ကာ သတ်မှတ်ထားသော ရည်မှန်းချက်များကို အောင်မြင်စေရန် လှုပ်ရှားချက်များ ပြုလုပ်နိုင်သော ကိုယ်ပိုင်အလိုအလျောက် အစီအစဉ်များ ဖြစ်သည်။ ပုံမှန် prompt တွေကိုသာ ပြန်ဖြေတဲ့ စာရင်းပြန် စက်များနှင့် မတူဘဲ, အေဂျင့်များမှာ -
+AI အေဂျင့်များသည် သူတို့၏ ပတ်ဝန်းကျင်ကို သတိပြု၍ ဆုံးဖြတ်ချက်များ ချနိုင်ကာ သတ်မှတ်ထားသော ရည်ရွယ်ချက်များကို ရောက်ရှိအောင် လုပ်ဆောင်နိုင်သည့် ကိုယ်ပိုင် လုပ်ဆောင်နိုင်သော ပရိုဂရမ်းများဖြစ်သည်။ အမိန့်များကို တုံ့ပြန်သော ရိုးရှင်းသော chatbot များနှင့် မတူဘဲ၊ အေဂျင့်များသည် အောက်ပါများကို လုပ်ဆောင်နိုင်သည်။
 
-- **ကိရိယာများကို သုံးနိုင်ခြင်း** - API များ ခေါ်ရန်၊ ဒေတာဘေ့စ် ရှာဖွေရန်၊ ကုဒ်실행 ပြုလုပ်ရန်
-- **အစီအစဉ်ဆွဲခြင်းနှင့် အတွေးအခေါ်ဆောင်ရွက်ခြင်း** - ခက်ခဲသော တာဝန်များကို အဆင့်လိုက် ခွဲခြားဆောင်ရွက်နိုင်ခြင်း
-- **အနေအထားအရ သင်ယူနိုင်ခြင်း** - မှတ်ဉာဏ်ကို ထိန်းသိမ်းပြီး အပြုအမူကို ကိုက်ညီစေနိုင်ခြင်း
-- **ပူးပေါင်းဆောင်ရွက်နိုင်ခြင်း** - အခြား အေဂျင့်များနှင့် ပေါင်းစည်း ဆောင်ရွက်နိုင်ခြင်း (multi-agent systems)
+- **ကိရိယာများ အသုံးပြုနိုင်ခြင်း** - API များကို ခေါ်ဆိုခြင်း၊ ဒေတာဘေ့(စ်)များကို ရှာဖွေခြင်း၊ ကုဒ်ကို ဆောင်ရွက်ခြင်း
+- **အစီအစဉ်ရေးဆွဲခြင်း နှင့် အတွေးပေါင်းစည်းခြင်း** - ရှုပ်ထွေးသော လုပ်ငန်းများကို အဆင့်များအဖြစ် ခွဲခြမ်းစဉ်းစားခြင်း
+- **Context မှ သင်ယူခြင်း** - မှတ်ဉာဏ် ထိန်းသိမ်းကာ အပြုအမူကို ကိုက်ညီအောင် ပြုပြင်နိုင်ခြင်း
+- **ပူးပေါင်းဆောင်ရွက်ခြင်း** - အခြား အေဂျင့်များနှင့် ပူးပေါင်း အလုပ်လုပ်နိုင်ခြင်း (multi-agent systems)
 
-ဤလမ်းညွှန်သည် Azure တွင် Azure Developer CLI (azd) ကို အသုံးပြု၍ AI အေဂျင့်များ ကို မည်သို့ deploy ပေးရမည်ကို ပြသပေးသည်။
+ဒီလမ်းညွှန်စာသည် Azure Developer CLI (azd) ကို အသုံးပြု၍ Azure သို့ AI အေဂျင့်များကို မည်သို့ တင်သွင်းရမည်ကို ပြသသည်။
 
-> **အတည်ပြုမှတ်ချက် (2026-03-25):** ဤလမ်းညွှန်ကို `azd` `1.23.12` နှင့် `azure.ai.agents` `0.1.18-preview` ကို အခြေခံ၍ စစ်ဆေးထားပါသည်။ `azd ai` အတွေ့အကြုံသည် preview အခြေအနေတွင် ဆောင်ရွက်နေဆဲဖြစ်၍ သင့် ထည့်သွင်းထားသော flags များကွဲပြားလျှင် extension help ကို ကြည့်ပါ။
+> **စစ်ဆေး မှတ်ချက် (2026-03-25):** ဒီလမ်းညွှန်ကို `azd` `1.23.12` နှင့် `azure.ai.agents` `0.1.18-preview` အပေါ် သုံးသပ်ပြီး စစ်ဆေးခဲ့ပါသည်။ `azd ai` အတွေ့အကြုံသည် အခုလက်ရှိတွင် preview အခြေခံဖြစ်နေဆဲဖြစ်သောကြောင့် သင်ထည့်သွင်းထားသော flags မတူပါက extension အကူအညီကို စစ်ဆေးပါ။
 
-## လေ့လာရန် ရည်မှန်းချက်များ
+## သင်ယူရမည့် ရည်မှန်းချက်များ
 
-ဤလမ်းညွှန်ကို ပြီးစီးမှခြင်းဖြင့် သင်သည်:
-- AI အေဂျင့်များ ဆိုသည်မှာ ဘာလဲ၊ စာရင်းပြန်(sñabot) များနှင့် မည်သို့ကွဲပြားသည်ကို နားလည်ရမည်
-- AZD ကိုအသုံးပြု၍ ကြိုတင်ပြင်ဆင်ထားသည့် AI အေဂျင့် template များကို deploy ပေးနိုင်မည်
-- စိတ်ကြိုက် အေဂျင့်များအတွက် Foundry Agents ကို ဖွန်ခွဲပေးနိုင်မည်
-- အခြေခံ အေဂျင့် အချိုးအစားများ (ကိရိယာအသုံးပြုခြင်း၊ RAG, multi-agent) ကို အကောင်အထည်ဖော်နိုင်မည်
-- Deploy လုပ်ထားသည့် အေဂျင့်များကို စောင့်ကြည့်နှင့် debug ရနိုင်မည်
+ဒီလမ်းညွှန်ကို အပြီးသတ်လျှင် သင်သည်:
+- AI အေဂျင့်များ၏ အဓိပ္ပါယ်နှင့် chatbot များနှင့် မည်သို့ ကွာခြားကြောင်း နားလည်နိုင်မည်
+- AZD ကို အသုံးပြု၍ ကြိုတင်ဆောက်ထားသော AI အေဂျင့် နမူနာများကို တင်သွင်းနိုင်မည်
+- စိတ်ကြိုက် အေဂျင့်များအတွက် Foundry Agents ကို ပြင်ဆင်နိုင်မည်
+- အခြေခံ အေဂျင့် ပုံစံများ (ကိရိယာ အသုံးချခြင်း၊ RAG၊ multi-agent) ကို အကောင်အထည်ဖော်နိုင်မည်
+- တင်သွင်းထားသော အေဂျင့်များကို မော်နီတာပြု၍ ဒက်ဘတ်လုပ်နိုင်မည်
 
 ## သင်ယူပြီးရလဒ်များ
 
-ပြီးစီးချိန်တွင် သင်သည်:
-- single command သာဖြင့် Azure သို့ AI agent application များကို deploy ပေးနိုင်မည်
-- အေဂျင့် ကိရိယာများနှင့် အင်အားများကို ဖွန်ခွဲနိုင်မည်
-- agents ဖြင့် retrieval-augmented generation (RAG) ကို အကောင်အထည်ဖော်နိုင်မည်
-- ခက်ခဲသော workflow များအတွက် multi-agent အင်ဂျင်နီယာပုံစံများ ဒီဇိုင်းဆွဲနိုင်မည်
-- အေဂျင့် deployment ပျက်ကွက်များကို ပြုပြင်ဖြ.Factory
+ပြီးစီးသည်နှင့်အမျှ သင်သည် အောက်ပါအရာများကို လုပ်နိုင်မည်။
+- တစ်ချက်အမိန့်ဖြင့် Azure သို့ AI အေဂျင့် အက်ပလီကေးရှင်းများ တင်သွင်းနိုင်မည်
+- အေဂျင့် ကိရိယာများနှင့် စွမ်းရည်များကို ပြင်ဆင်နိုင်မည်
+- အေဂျင့်များဖြင့် retrieval-augmented generation (RAG) ကို အကောင်အထည်ဖော်နိုင်မည်
+- ရှုပ်ထွေးသော လုပ်ငန်းစဉ်များအတွက် multi-agent ဆောက်တည်မှုပုံစံများဒီဇိုင်းရေးဆွဲနိုင်မည်
+- အေဂျင့် တင်သွင်းစဉ် တွေ့ကြုံရနိုင်သော ပြဿနာများကို ဖြေရှင်းနိုင်မည်
 
 ---
 
-## 🤖 အေဂျင့်နှင့် စာရင်းပြန်(sñabot) ကွာခြားချက်များ
+## 🤖 AI အေဂျင့် သည် Chatbot နှင့် မည်ကြောင့် ကွာခြားသနည်း?
 
-| Feature | Chatbot | AI Agent |
+| အင်္ဂါရပ် | Chatbot | AI အေဂျင့် |
 |---------|---------|----------|
-| **ပြုမူအကျိုးအំပေါ်** | prompts သို့တုံ့ပြန်သည် | ကိုယ်ပိုင် လှုပ်ရှားချက်များ ယူသည် |
-| **ကိရိယာများ** | မရှိ | API ခေါ်ဆိုနိုင်၊ ရှာဖွေရန်၊ ကုဒ်실행 ပြုလုပ်နိုင်သည် |
-| **မှတ်ဉာဏ်** | session အပေါ်သာ မူတည် | session များဖြတ်ကျော် အတည်အကျန် မှတ်ဉာဏ်ရှိသည် |
-| **အစီအစဉ်ဆွဲခြင်း** | တစ်ကြိမ်တည်း ပြန်ဖြေသည် | အဆင့်များစွာ reasoning ပြုလုပ်သည် |
-| **ပူးပေါင်းဆောင်ရွက်မှု** | တစ်ခုတည်း အဖွဲ့အစည်း | အခြား အေဂျင့်များနှင့် ပူးပေါင်း လုပ်ဆောင်နိုင်သည် |
+| **အပြုအမူ** | အမိန့်များကို တုံ့ပြန်သည် | ကိုယ်ပိုင် လုပ်ဆောင်ချက်များ ဆောင်ရွက်သည် |
+| **ကိရိယာများ** | မရှိ | API များကို ခေါ်ဆိုနိုင်၊ ရှာဖွေနိုင်၊ ကုဒ်ကို ဆောင်ရွက်နိုင်သည် |
+| **မှတ်ဉာဏ်** | session အခြေခံသာ | session များ ကျော်လွန်၍ တည်တံ့သော မှတ်ဉာဏ် ရှိသည် |
+| **အစီအစဉ်ရေးဆွဲခြင်း** | တစ်ကြိမ်တုံ့ပြန်ချက် | အဆင့်များစွာ အသုံးပြု၍ အတွေးပညာဆောင်ရွက်ခြင်း |
+| **ပူးပေါင်းဆောင်ရွက်ခြင်း** | တစ်ဦးတည်း | အခြား အေဂျင့်များနှင့် တို့ ပူးပေါင်း လုပ်ကိုင်နိုင်သည် |
 
-### ရိုးရှင်းသဘောတရား တစ်ခု
+### ရိုးရှင်းသော နှိုင်းယှဉ်ချက်
 
-- **Chatbot** = အချက်အလက် တိုင်ပင်ပေးသည့် စာရေးဆောင် ရှိသူကဲ့သို့ ကူညီပေးနေသူ
-- **AI Agent** = ဖုန်းခေါ်၊ အပေါ်ချိန်းပွဲ စီစဉ်၊ တာဝန်များကို ပြီးစီးပေးနိုင်သည့် ကိုယ်ပိုင် အကူအညီပေးသူ
+- **Chatbot** = သတင်းအချက်အလက် စင်တာတွင် မေးခွန်းများကို ကူညီ ဖြေဆိုပေးသည့် လူတစ်ဦး
+- **AI အေဂျင့်** = ဖုန်းခေါ်ဆိုနိုင်ပြီး၊ အစည်းအဝေး ချိတ်ဆက်ပေးနိုင်ပြီး၊ သင့်အတွက် အလုပ်များ ပြီးစီးပေးနိုင်သည့် ကိုယ်ပိုင် အကူ
 
 ---
 
-## 🚀 စတင်လျင်မြန်နည်း: သင့်ပထမဆုံး အေဂျင့်ကို Deploy လုပ်ပါ
+## 🚀 အမြန် စတင်ခြင်း: သင်၏ ပထမ အေဂျင့် တင်သွင်းခြင်း
 
-### ရွေးချယ်မှု 1: Foundry Agents Template (အကြံပြု)
+### ရွေးချယ်စရာ 1: Foundry Agents နမူနာ (အကြံပြု)
 
 ```bash
-# AI အေးဂျင့်များအတွက် နမူနာကို စတင်ပြုလုပ်ပါ
+# AI အေးဂျင့်များအတွက် ပုံစံကို စတင်သတ်မှတ်ပါ
 azd init --template get-started-with-ai-agents
 
-# Azure သို့ ဖြန့်ချိပါ
+# Azure သို့ တပ်ဆင်ပါ
 azd up
 ```
 
-**ဘာတွေ deploy လုပ်ပေးမလဲ:**
+**ဘာတွေ တင်သွင်းမလဲ:**
 - ✅ Foundry Agents
 - ✅ Microsoft Foundry Models (gpt-4.1)
-- ✅ Azure AI Search (RAG အတွက်)
+- ✅ Azure AI Search (for RAG)
 - ✅ Azure Container Apps (web interface)
-- ✅ Application Insights (စောင့်ကြည့်ရေး)
+- ✅ Application Insights (monitoring)
 
 **အချိန်:** ~15-20 မိနစ်
 **ကုန်ကျစရိတ်:** ~$100-150/လ (ဖွံ့ဖြိုးရေး)
 
-### ရွေးချယ်မှု 2: OpenAI Agent with Prompty
+### ရွေးချယ်စရာ 2: Prompty ဖြင့် OpenAI Agent
 
 ```bash
-# Prompty အခြေပြု agent ပုံစံကို စတင်တည်ဆောက်ပါ
+# Prompty အပေါ် အခြေခံထားသည့် agent ပုံစံကို စတင်ဖန်တီးပါ
 azd init --template agent-openai-python-prompty
 
 # Azure သို့ တပ်ဆင်ပါ
 azd up
 ```
 
-**ဘာတွေ deploy လုပ်ပေးမလဲ:**
-- ✅ Azure Functions (serverless agent 실행)
+**ဘာတွေ တင်သွင်းမလဲ:**
+- ✅ Azure Functions (serverless agent execution)
 - ✅ Microsoft Foundry Models
-- ✅ Prompty configuration ဖိုင်များ
-- ✅ နမူနာ agent အကောင်အထည်ဖော်ခြင်း
+- ✅ Prompty configuration files
+- ✅ Sample agent implementation
 
 **အချိန်:** ~10-15 မိနစ်
 **ကုန်ကျစရိတ်:** ~$50-100/လ (ဖွံ့ဖြိုးရေး)
 
-### ရွေးချယ်မှု 3: RAG Chat Agent
+### ရွေးချယ်စရာ 3: RAG Chat Agent
 
 ```bash
-# RAG chat template ကို စတင်သတ်မှတ်ပါ
+# RAG chat ပုံစံကို စတင်ဖန်တီးခြင်း
 azd init --template azure-search-openai-demo
 
-# Azure သို့ ဖြန့်ချိပါ
+# Azure သို့ တပ်ဆင်ခြင်း
 azd up
 ```
 
-**ဘာတွေ deploy လုပ်ပေးမလဲ:**
+**ဘာတွေ တင်သွင်းမလဲ:**
 - ✅ Microsoft Foundry Models
-- ✅ Azure AI Search နှင့် နမူနာဒေတာ
-- ✅ စာတမ်းလက်ခံနှင့် အလုပ်လုပ်စနစ်(pipeline)
-- ✅ မွမ်းမံချက်များပါရှိသော chat interface
+- ✅ Azure AI Search နှင့် နမူနာဒေတာများ
+- ✅ စာရွက်စာတမ်းများ ကို လုပ်ဆောင်ပေးသော pipeline
+- ✅ ရည်ညွှန်းချက်များပါသော chat interface
 
 **အချိန်:** ~15-25 မိနစ်
 **ကုန်ကျစရိတ်:** ~$80-150/လ (ဖွံ့ဖြိုးရေး)
 
-### ရွေးချယ်မှု 4: AZD AI Agent Init (Manifest- သို့မဟုတ် Template- အပေါ် မူတည်သည့် Preview)
+### ရွေးချယ်စရာ 4: AZD AI Agent Init (Manifest- သို့မဟုတ် Template- အခြေပြုပြီ Preview)
 
-အကယ်၍ သင့်မှာ agent manifest ဖိုင်ရှိပါက `azd ai` command ကို အသုံးပြု၍ Foundry Agent Service project ကို တိုက်ရိုက် scaffold လုပ်နိုင်သည်။ နောက်ဆက်တွဲ preview releases များသည် template-based initialization ကိုလည်း ထပ်ထည့်ပေးထားသဖြင့် သင့်ထည့်သွင်းထားသော extension version အပေါ်မူတည်၍ prompt flow သည် သေးငယ်စွာကွာခြားနိုင်သည်။
+Agent manifest ဖိုင်ရှိပါက `azd ai` command ကို အသုံးပြုပြီး Foundry Agent Service ပရောဂျက်ကို တိုက်ရိုက် scaffolding ပြုလုပ်နိုင်သည်။ နောက်ဆုံး preview ဖြန့်ချိမှုများတွင် template-based initialization ကိုလည်း ထည့်သွင်းထားသဖြင့် သင်ထည့်သွင်းထားသော extension ဗားရှင်းပေါ် မူတည်၍ prompt flow က ဆန့်ကျင်မှုငယ်ငယ် ရှိနိုင်သည်။
 
 ```bash
-# AI agents extension ကို တပ်ဆင်ပါ
+# AI agent များအတွက် extension ကို တပ်ဆင်ပါ
 azd extension install azure.ai.agents
 
-# ရွေးချယ်စရာ: ထည့်သွင်းထားသော ကြိုတင်စမ်းသပ် ဗားရှင်းကို အတည်ပြုပါ
+# ရွေးချယ်စရာ: တပ်ဆင်ထားသော preview ဗားရှင်းကို စစ်ဆေးပါ
 azd extension show azure.ai.agents
 
-# အေးဂျင့် ဖော်ပြချက်မှ စတင်ပါ
+# agent manifest မှ အစပြုပါ
 azd ai agent init -m agent-manifest.yaml
 
 # Azure သို့ ဖြန့်ချိပါ
 azd up
+
+# ဖြန့်ချိထားသော agent ကို စမ်းသပ်ပါ (latency နှင့် time-to-first-byte ကို ပြသမည်)
+azd ai agent invoke
 ```
 
-**`azd ai agent init` ကို ဘယ်အချိန်သုံးမလဲ၊ `azd init --template` ကို ဘယ်လိုသုံးမလဲ:**
+**When to use `azd ai agent init` vs `azd init --template`:**
 
-| Approach | Best For | How It Works |
+| နည်းလမ်း | သင့်တော်သော အတွက် | အလုပ်လုပ်ပုံ |
 |----------|----------|------|
-| `azd init --template` | အလုပ်လုပ်နိုင်သော နမူနာ app ထဲကနေ စတင်လိုသူများ | code + infra ပါရှိသော full template repo ကို clone လုပ်ပေးသည် |
-| `azd ai agent init -m` | မိမိ၏ agent manifest မှ စတင်ဆောက်လိုသူများ | agent definition မှ project structure ကို scaffold လုပ်ပေးသည် |
+| `azd init --template` | အလုပ်လုပ်နေသော နမူနာ အက်ပလီကေးရှင်းမှ စတင်ချင်သူများ | ကုဒ် + အင်ဖရာပါ အပြည့်အစုံ template repo ကို ကလုန်းလုပ်ကူးယူသည် |
+| `azd ai agent init -m` | သင်၏ ကိုယ်ပိုင် agent manifest မှ ဆောက်လုပ်ချင်သူများ | သင်၏ agent သတ်မှတ်ချက်မှ project ဖွဲ့စည်းပုံကို scaffolding ပြုလုပ်ပေးသည် |
 
-> **အကြံပြုချက်:** သင်ယူနေစဉ် (အထက်ပါ ရွေးချယ်မှု 1-3) တွင် `azd init --template` ကို အသုံးပြုပါ။ သင့်ကိုယ်ပိုင် manifests များနှင့် production အေဂျင့်များ တည်ဆောက်လိုပါက `azd ai agent init` ကို အသုံးပြုပါ။ အပြည့်အစုံ ရည်ညွှန်းချက်အတွက် [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) ကို ကြည့်ပါ။
+> **တစ်ချက်အကြံ:** လေ့လာနေစဉ်တွင် (အထက်ပါ ရွေးချယ်စရာ 1-3) `azd init --template` ကို အသုံးပြုပါ။ ကိုယ်ပိုင် manifests များဖြင့် production agent များ တည်ဆောက်သည့်အခါ `azd ai agent init` ကို အသုံးပြုပါ။
+
+`azd up` ပြီးချိန်တွင် သက်ဆိုင်ရာ extension သည် agent lifecycle အခြားပိုင်းများကို လမ်းညွှန်ပေးပါသည်။ စမ်းသပ်ရန် `azd ai agent invoke` ၊ အရည်အသွေး တိုင်းတာရန် `azd ai agent eval generate` နှင့် `azd ai agent optimize` ၊ ဖယ်ရှားရန် `azd ai agent delete` စတဲ့ command များကို အသုံးပြုနိုင်သည်။ စုံလင်သော ကိုးကားချက်များအတွက် [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) ကို ကြည့်ပါ။
 
 ---
 
-## 🏗️ အေဂျင့် အထောက်အထား ပုံစံများ
+## 🏗️ အေဂျင့် ဆောက်တည်မှုပုံစံများ
 
-### ပုံစံ 1: ကိရိယာများပါရှိသည့် တစ်ဦးတည်း အေဂျင့်
+### ပုံစံ 1: ကိရိယာများနှင့် တစ်ဦးတည်း အေဂျင့်
 
-အရိုးရှင်းဆုံး အေဂျင့် ပုံစံ - ကိရိယာအသည်းအသန် များစွာသုံးနိုင်သော မည်သည့် အေဂျင့်တစ်ခုကိုဆိုသည်။
+ရှင်းလင်းဆုံးပုံစံ - ကိရိယာစုံအသုံးပြုနိုင်သည့် တစ်ဦးတည်း အေဂျင့်တစ်ခု။
 
 ```mermaid
 graph TD
@@ -161,63 +166,66 @@ graph TD
     Agent --> Database[ဒေတာဘေ့စ် ကိရိယာ]
     Agent --> API[API ကိရိယာ]
 ```
-**အကောင်းဆုံး သုံးနိုင်မည့် အရာများ:**
-- ဖောက်သည်အထောက်အပံ့ ဘော့များ
-- သုတေသနအကူအညီပေးသူများ
-- ဒေတာ phânသန်း အကူအညီပေးသူများ
+
+**အကောင်းဆုံး သင့်လျော်သော အရာများ:**
+- ဖောက်သည် ထောက်ပံ့ရေး ဘော့များ
+- သုတေသန အကူများ
+- ဒေတာ သုတေသန/ခွဲခြမ်းစိတ်ဖြာ အကူအညီ ပေးသူ အေဂျင့်များ
 
 **AZD Template:** `azure-search-openai-demo`
 
 ### ပုံစံ 2: RAG Agent (Retrieval-Augmented Generation)
 
-တုံ့ပြန်မှု ထုတ်ပေးမှုမပြုမီ သက်ဆိုင်ရာစာရွက်များကို ရှာဖွေယူပြီး ဖြေကြားပေးသည့် အေဂျင့်။
+တုံ့ပြန်ခင် သင့်မေးခွန်းနဲ့ သက်ဆိုင်သော စာရွက်စာတမ်းများကို ရှာယူပြီး ပြန်တုံ့ပြန်မှု ထုတ်ပေးသည့် အေဂျင့်တစ်ခု။
 
 ```mermaid
 graph TD
-    Query[အသုံးပြုသူ မေးခွန်း] --> RAG[RAG အေဂျင့်]
-    RAG --> Vector[ဗက်တာ ရှာဖွေမှု]
-    RAG --> LLM[ကြီးကျယ်သော ဘာသာစကား မော်ဒယ်<br/>gpt-4.1]
-    Vector -- စာရွက်စာတမ်းများ --> LLM
+    Query[အသုံးပြုသူ မေးခွန်း] --> RAG[RAG ကိုယ်စားလှယ်]
+    RAG --> Vector[ဗက်တာ ရှာဖွေခြင်း]
+    RAG --> LLM[LLM<br/>gpt-4.1]
+    Vector -- စာရွက်များ --> LLM
     LLM --> Response[ကိုးကားချက်များပါသော တုံ့ပြန်ချက်]
 ```
-**အကောင်းဆုံး သုံးနိုင်မည့် အရာများ:**
-- စီးပွားရေး အချက်အလက်အသစ်များ
-- စာရွက် Q&A စနစ်များ
-- ကိုက်ညီမှုနှင့် ဥပဒေရေးရာ သုတေသန
+
+**အကောင်းဆုံး သင့်လျော်သော အရာများ:**
+- မောင်းနှင်ရေး အဖွဲ့အစည်းများ၏ ဗဟုသုတ အချက်အလက်စုစည်းမှုများ
+- စာရွက်စာတမ်း Q&A စနစ်များ
+- ဥပဒေ နှင့် ကိုက်တြယ်စစ်ဆေးမှု အလုပ်များ
 
 **AZD Template:** `azure-search-openai-demo`
 
 ### ပုံစံ 3: Multi-Agent System
 
-နယ်ပယ်စိတ်ပိုင်းအလိုက် အထူးပြုထားသည့် အေဂျင့် အများအပြားက ခက်ခဲသော တာဝန်များကို ပူးပေါင်းဆောင်ရွက်သည်။
+အမျိုးအမိန့် အထူးပြု အေဂျင့်များစွာက တွဲဖက်စွာ လုပ်ဆောင်ရန်။
 
 ```mermaid
 graph TD
-    Orchestrator[စီမံခန့်ခွဲသူ ကိုယ်စားလှယ်] --> Research[သုတေသန ကိုယ်စားလှယ်<br/>gpt-4.1]
-    Orchestrator --> Writer[စာရေးသူ ကိုယ်စားလှယ်<br/>gpt-4.1-mini]
-    Orchestrator --> Reviewer[သုံးသပ်သူ ကိုယ်စားလှယ်<br/>gpt-4.1]
+    Orchestrator[ညှိနှိုင်းသူ အေးဂျင့်] --> Research[သုတေသနသူ အေးဂျင့်<br/>gpt-4.1]
+    Orchestrator --> Writer[ရေးသားသူ အေးဂျင့်<br/>gpt-4.1-mini]
+    Orchestrator --> Reviewer[သုံးသပ်သူ အေးဂျင့်<br/>gpt-4.1]
 ```
-**အကောင်းဆုံး သုံးနိုင်မည့် အရာများ:**
-- ခက်ခဲသော အကြောင်းအရာ ကို စုစည်းဖန်တီးခြင်း
-- အဆင့်စဉ်လုပ်ငန်းစဉ်များ
-- အတတ်ပညာနှင့် ကျွမ်းကျင်မှု မတူညီသည့် လုပ်ငန်းများ
 
-**ပိုမိုလေ့လာရန်:** [Multi-Agent Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md)
+**အကောင်းဆုံး သင့်လျော်သော အရာများ:**
+- ရှုပ်ထွေးသော အကြောင်းအရာ ဖန်တီးခြင်း
+- အဆင့်များစွာ ပါဝင်သော လုပ်ငန်းစဉ်များ
+- အမျိုးမျိုးသော ကျွမ်းကျင်မှုလိုအပ်သော တာဝန်များ
+
+**ထပ်မံ သင်ယူရန်:** [Multi-Agent ပူးပေါင်းဆောင်ရွက်ပုံစံများ](../chapter-06-pre-deployment/coordination-patterns.md)
 
 ---
 
-## ⚙️ အေဂျင့် ကိရိယာများ ဖွန်ခွဲခြင်း
+## ⚙️ အေဂျင့် ကိရိယာများ ပြင်ဆင်ခြင်း
 
-ကိရိယာများကို အသုံးပြုနိုင်သည်ဆိုပါက အေဂျင့်များသည် အင်အားပြင်းになります။ အောက်တွင် ပုံမှန် ကိရိယာများကို မည်သို့ ဖွန်ခွဲရမည်ကို ဖော်ပြထားသည်။
+ကိရိယာများကို အသုံးပြုနိုင်သောအခါ တကယ်အားကောင်းလာသည်။ အောက်တွင် ပုံမှန် အသုံးဝင်သော ကိရိယာများကို မည်သို့ ပြင်ဆင်ရမည်ကို ဖော်ပြပါသည်။
 
-### Foundry Agents တွင် Tool ဖွန်ခွဲခြင်း
+### Foundry Agents တွင် ကိရိယာ ပြင်ဆင်ခြင်း
 
 ```python
 # agent_config.py
 from azure.ai.projects import AIProjectClient
 from azure.ai.projects.models import FunctionTool, CodeInterpreterTool
 
-# စိတ်ကြိုက် ကိရိယာများကို သတ်မှတ်ပါ
+# စိတ်ကြိုက်ကိရိယာများကို သတ်မှတ်ပါ
 search_tool = FunctionTool(
     name="search_knowledge_base",
     description="Search the company knowledge base for relevant documents",
@@ -233,7 +241,7 @@ search_tool = FunctionTool(
     }
 )
 
-# ကိရိယာများနှင့် အေဂျင့်တစ်ခု ဖန်တီးပါ
+# ကိရိယာများနှင့်အတူ agent တစ်ခု ဖန်တီးပါ
 agent = project_client.agents.create_agent(
     model="gpt-4.1",
     name="Support Agent",
@@ -242,56 +250,56 @@ agent = project_client.agents.create_agent(
 )
 ```
 
-### ပတ်ဝန်းကျင် ဖွန်ခွဲခြင်း (Environment Configuration)
+### ပတ်ဝန်းကျင် ပြင်ဆင်ခြင်း
 
 ```bash
-# Agent အတွက် သီးသန့် ပတ်ဝန်းကျင် တန်ဖိုးများကို ပြင်ဆင် သတ်မှတ်ပါ
+# အေဂျင့်အလိုက် သီးသန့် ပတ်ဝန်းကျင် မူလတန်ဖိုးများကို စတင်သတ်မှတ်ပါ
 azd env set AZURE_OPENAI_MODEL "gpt-4.1"
 azd env set AGENT_INSTRUCTIONS "You are a helpful assistant..."
 azd env set ENABLE_CODE_INTERPRETER "true"
 azd env set ENABLE_FILE_SEARCH "true"
 
-# ပြင်ဆင်ထားသည့် ဖွဲ့စည်းမှုဖြင့် တပ်ဆင်ပါ
+# ပြင်ဆင်ထားသည့် စနစ်သတ်မှတ်ချက်များဖြင့် တပ်ဆင်ပါ
 azd deploy
 ```
 
 ---
 
-## 📊 အေဂျင့်များ စောင့်ကြည့်ခြင်း
+## 📊 အေဂျင့် မော်နီတာလုပ်ခြင်း
 
-### Application Insights များ ဆက်သွယ်ခြင်း
+### Application Insights ပေါင်းစည်းခြင်း
 
-AZD agent template များအားလုံးတွင် monitoring အတွက် Application Insights ပါဝင်သည်။
+AZD အေဂျင့် နမူနာများအားလုံးတွင် မော်နီတာလုပ်ရန် Application Insights ပါဝင်သည်။
 
 ```bash
-# စောင့်ကြည့်မှု ဒက်ရှ်ဘုတ်ကို ဖွင့်ရန်
+# စောင့်ကြည့်ရေး ဒက်ရှ်ဘုတ်ကို ဖွင့်ပါ
 azd monitor --overview
 
-# တိုက်ရိုက် မှတ်တမ်းများကို ကြည့်ရန်
+# တိုက်ရိုက် မှတ်တမ်းများကို ကြည့်ပါ
 azd monitor --logs
 
-# တိုက်ရိုက် မက်ထရစ်များကို ကြည့်ရန်
+# တိုက်ရိုက် တိုင်းတာချက်များကို ကြည့်ပါ
 azd monitor --live
 ```
 
-### ကြည့်ရှုရန် အဓိက မီထရစ်များ
+### သင့်ကြည့်ရှုရန် အဓိက မီထရစ်များ
 
-| Metric | Description | Target |
+| မီထရစ် | ဖော်ပြချက် | ရည်မှန်းချက် |
 |--------|-------------|--------|
-| Response Latency | တုံ့ပြန်မှု ထုတ်ပေးရန် ကြာချိန် | < 5 seconds |
-| Token Usage | တောင်းဆိုမှု တစ်ခုလျှင် token များ | ကုန်ကျစရိတ်အတွက် မှီကြည့်ရန် |
-| Tool Call Success Rate | ကိရိယာ ခေါ်ဆိုမှုများအောင်မြင် သော ရာခိုင်နှုန်း | > 95% |
-| Error Rate | အေဂျင့် တောင်းဆိုမှု မအောင်မြင်မှု | < 1% |
-| User Satisfaction | အသုံးပြုသူ ရီယူမွန် ရမှတ်များ | > 4.0/5.0 |
+| တုံ့ပြန်ချိန် (Response Latency) | တုံ့ပြန်ချက် ထုတ်ပေးရန် ကာလ | < 5 seconds |
+| token အသုံးပြုမှု (Token Usage) | တစ်တောင်းလျှင် အသုံးပြု token အရေအတွက် | ကုန်ကျစရိတ် အတွက် စောင့်ကြည့်ပါ |
+| ကိရိယာ ခေါ်ဆိုခြင်း အောင်မြင်မှုနှုန်း | ကိရိယာ လုပ်ဆောင်ချက် အောင်မြင်မှု ရာခိုင်နှုန်း | > 95% |
+| အမှားနှုန်း | အကျဉ်းချုံး agent တောင်းဆိုချက် မအောင်မြင်ခြင်း | < 1% |
+| အသုံးပြုသူ စိတ်ကျေနပ်မှု | တုံ့ပြန်ချက်မှ အဆင့်သတ်မှတ်ချက်များ | > 4.0/5.0 |
 
-### အေဂျင့်များ အတွက် စိတ်ကြိုက် လော့ဂ်ရေးခြင်း
+### အေဂျင့်များအတွက် စိတ်ကြိုက် လော့ဂ်ရေးခြင်း
 
 ```python
 import os
 from azure.monitor.opentelemetry import configure_azure_monitor
 from opentelemetry import trace
 
-# OpenTelemetry ဖြင့် Azure Monitor ကို ဖွဲ့စည်းပါ
+# OpenTelemetry ဖြင့် Azure Monitor ကို ဆက်တင်ပါ
 configure_azure_monitor(
     connection_string=os.environ["APPLICATIONINSIGHTS_CONNECTION_STRING"]
 )
@@ -308,29 +316,29 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
         })
 ```
 
-> **မှတ်ချက်:** လိုအပ်သော package များကို install လုပ်ပါ: `pip install azure-monitor-opentelemetry opentelemetry`
+> **မှတ်ချက်:** လိုအပ်သော package များကို ထည့်သွင်းပါ: `pip install azure-monitor-opentelemetry opentelemetry`
 
 ---
 
-## 💰 ကုန်ကျစရိတ်ဆိုင်ရာ အကြံပြုချက်များ
+## 💰 ကုန်ကျစရိတ် အချက်များ
 
-### ပုံစံအလိုက် လစဉ် ခန့်မှန်း ကုန်ကျစရိတ်များ
+### ပုံစံအလိုက် ခန့်မှန်း လစဉ်ကုန်ကျစရိတ်
 
-| Pattern | Dev Environment | Production |
+| ပုံစံ | ဖွံ့ဖြိုးရေး ပတ်ဝန်းကျင် | ထုတ်လုပ်မှု |
 |---------|-----------------|------------|
 | Single Agent | $50-100 | $200-500 |
 | RAG Agent | $80-150 | $300-800 |
 | Multi-Agent (2-3 agents) | $150-300 | $500-1,500 |
 | Enterprise Multi-Agent | $300-500 | $1,500-5,000+ |
 
-### ကုန်ကျစရိတ် Optimize ပြုလုပ်ရန် အကြံပြုချက်များ
+### ကုန်ကျစရိတ် ထိရောက်စွာ လျော့ချနည်းများ
 
-1. **ရိုးရှင်းသော တာဝန်များအတွက် gpt-4.1-mini ကို အသုံးပြုပါ**
+1. **ရိုးရှင်းသော အလုပ်များအတွက် gpt-4.1-mini ကို အသုံးပြုပါ**
    ```bash
    azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
    ```
 
-2. **ပြန်မေးမြန်းမှုများအတွက် caching ကို အကောင်အထည်ဖော်ပါ**
+2. **ပြန်လည်မေးမြန်းမှုများအတွက် caching ကို အကောင်အထည်ဖော်ပါ**
    ```python
    from functools import lru_cache
    
@@ -339,9 +347,9 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
        return agent.run(query_hash)
    ```
 
-3. **run တစ်ခုလျှင် token ကန့်သတ်ချက်ထားပါ**
+3. **တစ်ကြိမ် အပြေးချိန်ကို token အကန့်အသတ် သတ်မှတ်ပါ**
    ```python
-   # ဖန်တီးစဉ်တွင်မဟုတ်ဘဲ အေးဂျင့်ကို လည်ပတ်စဉ် max_completion_tokens ကို သတ်မှတ်ပါ
+   # ဖန်တီးချိန်မှာ မဟုတ်ဘဲ အေဂျင့်ကို လည်ပတ်စေတဲ့အချိန်မှာ max_completion_tokens ကို သတ်မှတ်ပါ
    run = project_client.agents.create_run(
        thread_id=thread.id,
        agent_id=agent.id,
@@ -349,63 +357,63 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
    )
    ```
 
-4. **မအသုံးပြုနေချိန်တွင် scale to zero ပြုလုပ်ပါ**
+4. **အသုံးမပြုသည့်အချိန်တွင် scale to zero ပြုလုပ်ပါ**
    ```bash
-   # Container Apps များသည် အလိုအလျောက် အင်စတန်စ်အရေအတွက်ကို သုညအထိ လျော့ချနိုင်သည်
+   # Container Apps များကို အလိုအလျောက် instance အရေအတွက် 0 အထိ လျော့ချနိုင်သည်
    azd env set MIN_REPLICAS "0"
    ```
 
 ---
 
-## 🔧 အေဂျင့်များ ပြဿနာရှာဖွေရန်
+## 🔧 အေဂျင့် ပြဿနာ ဖြေရှင်းခြင်း
 
-### ပုံမှန် ပြဿနာများနှင့် ဖြေရှင်းချက်များ
+### ပုံမှန် ကြုံတွေ့ရသော ပြဿနာများနှင့် ဖြေရှင်းနည်းများ
 
 <details>
-<summary><strong>❌ အေဂျင့်က ကိရိယာ ခေါ်ဆိုချက်များကို မတုံ့ပြန်ခြင်း</strong></summary>
+<summary><strong>❌ အေဂျင့်သည် ကိရိယာ ခေါ်ဆိုမှုများကို တုံ့ပြန်မနေခြင်း</strong></summary>
 
 ```bash
-# ကိရိယာများကို မှန်ကန်စွာ မှတ်ပုံတင်ထားသည်ကို စစ်ဆေးပါ
+# ကိရိယာများကို မှန်ကန်စွာ မှတ်ပုံတင်ထားကြောင်း စစ်ဆေးပါ
 azd show
 
-# OpenAI ဖြန့်ချိမှုကို စစ်ဆေးပါ
+# OpenAI တပ်ဆင်မှုကို စစ်ဆေးပါ
 az cognitiveservices account deployment list \
   --name $AZURE_OPENAI_NAME \
   --resource-group $RG_NAME
 
-# အေးဂျင့်မှတ်တမ်းများကို စစ်ဆေးပါ
+# အေဂျင့် မှတ်တမ်းများကို စစ်ဆေးပါ
 azd monitor --logs
 ```
 
 **ပုံမှန် အကြောင်းရင်းများ:**
 - ကိရိယာ function signature မကိုက်ညီခြင်း
-- လိုအပ်သော ခွင့်ပြုချက်များ မရှိခြင်း
-- API endpoint မရောက်နိုင်ခြင်း
+- လိုအပ်သော ခွင့်ပြုချက်များ လက်လွတ်ထားခြင်း
+- API endpoint သို့ ချိတ်ဆက် မရနိုင်ခြင်း
 </details>
 
 <details>
-<summary><strong>❌ အေဂျင့် တုံ့ပြန်မှုတွင် latency မြင့်မားခြင်း</strong></summary>
+<summary><strong>❌ အေဂျင့် တုံ့ပြန်မှု အချိန် ကြာရှည်ခြင်း</strong></summary>
 
 ```bash
-# Application Insights တွင် ကြုံတွေ့ရသည့် တင်းကျပ်နေမှုများကို စစ်ဆေးပါ
+# Application Insights တွင် ပိတ်ဆို့နေသော အချက်များကို စစ်ဆေးပါ
 azd monitor --live
 
-# ပိုမိုမြန်ဆန်သော မော်ဒယ်ကို အသုံးပြုရန် စဉ်းစားပါ
+# ပိုလျင်မြန်သော မော်ဒယ်တစ်ခုကို အသုံးပြုရန် စဉ်းစားပါ
 azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
 azd deploy
 ```
 
-**အကောင်းဆုံး တိုးတက်ရေး အကြံပြုချက်များ:**
-- streaming responses ကို သုံးပါ
-- တုံ့ပြန်မှု caching ကို အကောင်အထည်ဖော်ပါ
-- context window အရွယ်အစားကို လျော့ပါးစေပါ
+**တိုးတက်စေသော အကြံပြုချက်များ:**
+- Streaming responses ကို အသုံးပြုပါ
+- တုံ့ပြန်ချက်များကို cache ပြုလုပ်ပါ
+- context window အရွယ်အစားကို လျှော့ချပါ
 </details>
 
 <details>
-<summary><strong>❌ အေဂျင့်မှ မှားဆန်သော သို့မဟုတ် hallucination ဖြစ်သော အချက်အလက် ပြန်လည်ပေးခြင်း</strong></summary>
+<summary><strong>❌ အေဂျင့်မှ မှားယွင်း သို့မဟုတ် hallucinated အချက်အလက် ပြန်ထုတ်ခြင်း</strong></summary>
 
 ```python
-# ပိုမိုကောင်းမွန်သော စနစ် ပြောကြားချက်များဖြင့် တိုးတက်စေပါ
+# စနစ် အမိန့်များကို ပိုမိုကောင်းမွန်အောင် တိုးတက်စေပါ
 instructions = """
 You are a helpful assistant. IMPORTANT:
 - Only answer based on provided context
@@ -414,20 +422,20 @@ You are a helpful assistant. IMPORTANT:
 - Never make up information
 """
 
-# အချက်အလက် အခြေခံမှုအတွက် ရှာဖွေရေးကို ထည့်ပါ
+# အခြေခံရန် ရှာဖွေမှုကို ထည့်ပါ
 agent = project_client.agents.create_agent(
     model="gpt-4.1",
     instructions=instructions,
-    tools=[FileSearchTool()]  # တုံ့ပြန်ချက်များကို စာရွက်စာတမ်းများအပေါ် အခြေခံပါ
+    tools=[FileSearchTool()]  # ဖြေကြားချက်များကို စာရွက်စာတမ်းများပေါ်တွင် အခြေခံပါ
 )
 ```
 </details>
 
 <details>
-<summary><strong>❌ Token limit မကျေနပ်မှု အမှားများ (exceeded errors)</strong></summary>
+<summary><strong>❌ Token အကန့်အသတ် ကျော်လွန်မှု အမှားများ</strong></summary>
 
 ```python
-# အကြောင်းအရာ ဝင်းဒိုးကို စီမံခန့်ခွဲရန် အကောင်အထည်ဖော်ပါ
+# အကြောင်းအရာ ပြတင်းပေါက် စီမံခန့်ခွဲမှုကို အကောင်အထည်ဖော်ပါ
 def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
     """Keep only recent messages within token limit."""
     import tiktoken
@@ -450,56 +458,56 @@ def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
 
 ## 🎓 လက်တွေ့ လေ့ကျင့်ခန်းများ
 
-### လေ့ကျင့်ခန်း 1: အခြေခံ အေဂျင့် တစ်ခု Deploy လုပ်ခြင်း (20 မိနစ်)
+### လေ့ကျင့်ခန်း 1: အခြေခံ အေဂျင့် တင်သွင်းခြင်း (20 မိနစ်)
 
-**ရည်ရွယ်ချက်:** AZD ကို အသုံးပြု၍ သင့် ပထမဆုံး AI အေဂျင့်ကို Deploy လုပ်ပါ
+**ရည်မှန်းချက်:** AZD ကို အသုံးပြု၍ သင်၏ ပထမ AI အေဂျင့်ကို တင်သွင်းပါ
 
 ```bash
-# အဆင့် 1: ပုံစံကို စတင်တည်ဆောက်ပါ
+# အဆင့် ၁: တမ်းပလိတ်ကို စတင်ပြင်ဆင်ပါ
 azd init --template get-started-with-ai-agents
 
-# အဆင့် 2: Azure သို့ လော့ဂ်အင် ဝင်ပါ
+# အဆင့် ၂: Azure သို့ လော့ဂ်အင် ဝင်ပါ
 azd auth login
-# အကယ်၍ သင်သည် tenant များအကြား အလုပ်လုပ်နေပါက --tenant-id <tenant-id> ကို ထည့်ပါ
+# tenant များအကြား အလုပ်လုပ်ပါက --tenant-id <tenant-id> ကို ထည့်ပါ
 
-# အဆင့် 3: ဖြန့်ချိပါ
+# အဆင့် ၃: ဖြန့်ချိပါ
 azd up
 
-# အဆင့် 4: အေးဂျင့်ကို စမ်းသပ်ပါ
-# ဖြန့်ချိပြီးနောက် မျှော်မှန်းထားသော ထွက်:
-#   ဖြန့်ချိမှု ပြီးစီးပါပြီ!
-#   အင်ဒ်ပိုင်း (Endpoint): https://<app-name>.<region>.azurecontainerapps.io
-# ထွက်ပြချက်တွင် ပြထားသော URL ကို ဖွင့်ပြီး မေးခွန်း မေးကြည့်ပါ
+# အဆင့် ၄: အေဂျင့်ကို စမ်းသပ်ပါ
+# ဖြန့်ချိပြီးနောက် မျှော်မှန်းထားသော ထွက်ရလဒ်:
+#   ဖြန့်ချိမှု ပြီးဆုံးပါပြီ!
+#   အဆုံးချိတ် URL: https://<app-name>.<region>.azurecontainerapps.io
+# ထွက်ရှိမှုတွင် ပြသထားသော URL ကို ဖွင့်ပြီး မေးခွန်း တစ်ခုမေးကြည့်ပါ
 
-# အဆင့် 5: မော်နီတာကို ကြည့်ရှုပါ
+# အဆင့် ၅: စောင့်ကြည့်မှုကို ကြည့်ရှုပါ
 azd monitor --overview
 
-# အဆင့် 6: ရှင်းလင်းပါ
+# အဆင့် ၆: အရင်းအမြစ်များကို ရှင်းလင်းပါ
 azd down --force --purge
 ```
 
-**အောင်မြင်မှု အခြေအနေများ:**
+**အောင်မြင်မှု ရည်မှန်းချက်များ:**
 - [ ] အေဂျင့်သည် မေးခွန်းများကို တုံ့ပြန်သည်
-- [ ] `azd monitor` ဖြင့် monitoring dashboard ကို ဝင်ရောက်ကြည့်ရှုနိုင်သည်
-- [ ] ရင်းနှီးမြှုပ်နှံထားသော အရင်းအမြစ်များကို ရှင်းလင်း ထုတ်ပစ်နိုင်သည့်အခြေအနေ ဖြစ်သည်
+- [ ] `azd monitor` ဖြင့် မော်နီတာဘုတ်ဒက်ရှ်ဘုတ်ကို ဝင်ရောက်ကြည့်ရှုနိုင်သည်
+- [ ] အရင်းအမြစ်များကို အောင်မြင်စွာ ရှင်းလင်းနိုင်သည်
 
-### လေ့ကျင့်ခန်း 2: စိတ်ကြိုက် ကိရိယာ တစ်ခု ထည့်သွင်းခြင်း (30 မိနစ်)
+### လေ့ကျင့်ခန်း 2: စိတ်ကြိုက် ကိရိယာ တိုးထည့်ခြင်း (30 မိနစ်)
 
-**ရည်ရွယ်ချက်:** အေဂျင့်ကို စိတ်ကြိုက် ကိရိယာဖြင့် အချိုးချိတ်ပေးပါ
+**ရည်မှန်းချက်:** Agent ကို စိတ်ကြိုက် ကိရိယာတစ်ခု ဖြင့် တိုးချဲ့ပါ
 
-1. agent template ကို deploy လုပ်ပါ:
+1. Deploy the agent template:
    ```bash
    azd init --template get-started-with-ai-agents
    azd up
    ```
-2. သင့် agent code တွင် ကိရိယာ function အသစ် တစ်ခု ဘယ်လို ဖန်တီးမလဲ:
+2. ကိုယ့် အေဂျင့် ကုဒ် ထဲတွင် ကိရိယာ အသစ် ဖန်တီးပါ:
    ```python
    def get_weather(location: str) -> str:
        """Get current weather for a location."""
-       # မိုးလေဝသ ဝန်ဆောင်မှုသို့ API ခေါ်ယူခြင်း
+       # ရာသီဥတု ဝန်ဆောင်မှုသို့ API ခေါ်ဆိုခြင်း
        return f"Weather in {location}: Sunny, 72°F"
    ```
-3. ကိရိယာကို agent နှင့် မှတ်ပုံတင်ပါ:
+3. ကိရိယာကို အေဂျင့်နှင့် မှတ်ပုံတင်ပါ:
    ```python
    from azure.ai.projects.models import FunctionTool
 
@@ -521,90 +529,90 @@ azd down --force --purge
        tools=[weather_tool]
    )
    ```
-4. ပြန်လည် deploy ပြီး စမ်းသပ်ပါ:
+4. ပြန်လည်တင်သွင်း၍ စမ်းသပ်ပါ:
    ```bash
    azd deploy
-   # မေးရန်: "Seattle ရဲ့ မိုးလေဝသ ဘယ်လိုရှိသလဲ?"
-   # မျှော်မှန်းချက်: အေဂျင့်သည် get_weather("Seattle") ကို ခေါ်၍ မိုးလေဝသ အချက်အလက်ကို ပြန်ပေးမည်
+   # မေးပါ: "စီယက်တယ်မှာ မိုးလေဝသ ဘယ်လိုရှိသလဲ?"
+   # မျှော်မှန်းချက်: Agent သည် get_weather("Seattle") ကို ခေါ်ပြီး မိုးလေဝသ အချက်အလက်ကို ပြန်ပေးမည်။
    ```
 
-**အောင်မြင်မှု အခြေအနေများ:**
-- [ ] အေဂျင့်သည် ရာသီဥတု ဆိုင်ရာ မေးခွန်းများကို အသိအမှတ်ပြုသည်
+**အောင်မြင်မှု ရည်မှန်းချက်များ:**
+- [ ] အေဂျင့်သည် မိုးလေဝသနှင့် သက်ဆိုင်သော မေးခွန်းများကို ရှာဖွေသိရှိသည်
 - [ ] ကိရိယာကို မှန်ကန်စွာ ခေါ်ဆိုသည်
-- [ ] တုံ့ပြန်မှုတွင် ရာသီဥတု အချက်အလက် ပါဝင်သည်
+- [ ] တုံ့ပြန်ချက်တွင် မိုးလေဝသ အချက်အလက် ပါရှိသည်
 
 ### လေ့ကျင့်ခန်း 3: RAG အေဂျင့် တည်ဆောက်ခြင်း (45 မိနစ်)
 
-**ရည်ရွယ်ချက်:** သင့်စာရွက်များမှ မေးခွန်းများကို ဖြေကြားနိုင်သည့် အေဂျင့်တစ်ခု ဖန်တီးပါ
+**ရည်မှန်းချက်:** သင့်စာရွက်စာတမ်းများမှ မေးခွန်းများကို ဖြေဆိုနိုင်သည့် အေဂျင့် တစ်ခု ဖန်တီးပါ
 
 ```bash
-# အဆင့် 1: RAG template ကို တပ်ဆင်ပါ
+# အဆင့် 1: RAG နမူနာကို ဖြန့်ချိပါ
 azd init --template azure-search-openai-demo
 azd up
 
-# အဆင့် 2: မိမိ၏ စာရွက်စာတမ်းများကို တင်ပါ
-# PDF/TXT ဖိုင်များကို data/ ဖိုလ်ဒါထဲသို့ ထားပြီး၊ ထို့နောက် အောက်ပါအတိုင်း အမိန့်ကို လုပ်ဆောင်ပါ:
+# အဆင့် 2: သင့်စာရွက်စာတမ်းများကို တင်ပါ
+# PDF/TXT ဖိုင်များကို data/ ဖိုဒါထဲထားပြီး၊ ထို့နောက် အောက်ပါအတိုင်း ပြေးဆောင်ပါ:
 python scripts/prepdocs.py
 
-# အဆင့် 3: အထူးကဏ္ဍဆိုင်ရာ မေးခွန်းများဖြင့် စမ်းသပ်ပါ
-# azd up output ထဲမှ web app URL ကို ဖွင့်ပါ
-# သင့်တင်ထားသော စာရွက်စာတမ်းများအကြောင်း မေးမြန်းပါ
-# တုံ့ပြန်ချက်များတွင် [doc.pdf] ကဲ့သို့ ထောက်အထားများ ပါဝင်သင့်သည်
+# အဆင့် 3: ဒိုမိန်း-သီးသန့် မေးခွန်းများဖြင့် စမ်းသပ်ပါ
+# azd up output မှ ရရှိသော ဝက်ဘ်အက်ပ် URL ကို ဖွင့်ပါ
+# တင်ထားသော စာရွက်စာတမ်းများအကြောင်း မေးမြန်းပါ
+# တုံ့ပြန်ချက်များတွင် [doc.pdf] ကဲ့သို့ ကိုးကားချက်များ ပါဝင်သင့်သည်
 ```
 
-**အောင်မြင်မှု အခြေအနေများ:**
-- [ ] အေဂျင့်သည် တင်သွင်းထားသော စာရွက်များမှ ဖြေကြားသည်
-- [ ] တုံ့ပြန်မှုများတွင် citation များ ပါဝင်သည်
-- [ ] အကွာအဝေးတွင်မကျသော မေးခွန်းများအပေါ် hallucination မဖြစ်ပေါ်စေပါ
+**အောင်မြင်မှု ရည်မှန်းချက်များ:**
+- [ ] အေဂျင့်သည် တင်သွင်းထားသော စာရွက်စာတမ်းများမှ ဖြေဆိုနိုင်သည်
+- [ ] တုံ့ပြန်ချက်များတွင် ရည်ညွှန်းချက်များ ပါရှိသည်
+- [ ] အရပ်မပါသော မေးခွန်းများတွင် hallucination မဖြစ်စေရ
 
 ---
 
-## 📚 နောက်တစ်ဆင့်များ
+## 📚 ဆက်လက် လုပ်ဆောင်ရန်
 
-AI အေဂျင့်များကို နားလည်ပြီးပါက အောက်ပါ တိုးတက်ဆက်လက်ဘာများကို လေ့လာပါ:
+အခု AI အေဂျင့်များကို နားလည်သွားပါပြီဆိုလျှင် အောက်ပါ အဆင့်မြှင့် အရာများကို စူးစမ်းပါ။
 
-| Topic | Description | Link |
+| ခေါင်းစဉ် | ဖော်ပြချက် | Link |
 |-------|-------------|------|
-| **Multi-Agent Systems** | အခြား အေဂျင့်များနှင့် ပူးပေါင်းထားသည့် စနစ်များတည်ဆောက်ခြင်း | [Retail Multi-Agent Example](../../examples/retail-scenario.md) |
-| **Coordination Patterns** | orchestration နှင့် ဆက်သွယ်ရေး ပုံစံများကို လေ့လာရန် | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) |
-| **Production Deployment** | အဖွဲ့အစည်းအဆင့် အသင့်တော်ဆုံး agent deployment | [Production AI Practices](../chapter-08-production/production-ai-practices.md) |
-| **Agent Evaluation** | အေဂျင့်အလုပ်လုပ်ပုံကို စမ်းသပ်နှင့် အကဲဖြတ်ရန် | [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) |
-| **AI Workshop Lab** | လက်တွေ့လုပ်ငန်း: သင့် AI ဖြေရှင်းချက်ကို AZD-အဆင်ပြေအောင် ပြင်ဆင်ပါ | [AI Workshop Lab](ai-workshop-lab.md) |
+| **Multi-Agent စနစ်များ** | အမြောက်အများ အေဂျင့်များနှင့် ပူးပေါင်းရန် စနစ်များ တည်ဆောက်ခြင်း | [လက်လီရောင်းချရေး Multi-Agent ဥပမာ](../../examples/retail-scenario.md) |
+| **ညှိနှိုင်းမှု ပုံစံများ** | ညှိနှိုင်းခြင်းနှင့် ဆက်သွယ်ရေး ပုံစံများကို သင်ယူပါ | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **ထုတ်လုပ်မှု တင်သွင်းမှု** | စီးပွားရေးအသင့် အေဂျင့် တင်သွင်းခြင်း | [Production AI Practices](../chapter-08-production/production-ai-practices.md) |
+| **အေဂျင့် အကဲဖြတ်ခြင်း** | အေဂျင့် စွမ်းဆောင်ရည် စမ်းသပ်ခြင်းနှင့် အကဲဖြတ်ခြင်း | [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **AI Workshop Lab** | လက်တွေ့လုပ်ငန်း: သင့် AI ဖြေရှင်းချက်ကို AZD အတွက် ပြင်ဆင်ပါ | [AI Workshop Lab](ai-workshop-lab.md) |
 
 ---
 
-## 📖 ထပ်မံ အရင်းအမြစ်များ
+## 📖 ပိုမို အသုံးဝင်သော အရင်းအမြစ်များ
 
-### တရားဝင် မှတ်တမ်းစာမျက်နှာများ
-- [Azure AI Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
-- [Azure AI Foundry Agent Service Quickstart](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
+### တရားဝင် စာရွက်စာတမ်းများ
+- [Microsoft Foundry Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
+- [Microsoft Foundry Agent Service Quickstart](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
 - [Semantic Kernel Agent Framework](https://learn.microsoft.com/semantic-kernel/)
 
-### အေဂျင့်များအတွက် AZD Templates
+### AZD အေဂျင့် မော်ဒယ် Templates
 - [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents)
 - [Agent OpenAI Python Prompty](https://github.com/Azure-Samples/agent-openai-python-prompty)
 - [Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-### အသိုက်အဖွဲ့ အရင်းအမြစ်များ
+### ကွန်မယူနီတီ အရင်းအမြစ်များ
 - [Awesome AZD - Agent Templates](https://azure.github.io/awesome-azd/?tags=ai-agents)
 - [Azure AI Discord](https://discord.gg/microsoft-azure)
 - [Microsoft Foundry Discord](https://discord.gg/nTYy5BXMWG)
 
-### သင့် Editor အတွက် Agent Skills
-- [**Microsoft Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - GitHub Copilot, Cursor သို့မဟုတ် ထောက်ခံသော agent မည်သူမဆိုတွင် Azure ဖွံ့ဖြိုးရေးအတွက် ပြန်လည်အသုံးပြုနိုင်သော AI agent skills များ ထည့်သွင်းနိုင်သည်။ ၎င်းတွင် [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [deployment](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), နှင့် [diagnostics](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) အတွက် skills များ ပါဝင်သည်:
+### သင့် Editor အတွက် အေဂျင့် ကျွမ်းကျင်မှုများ
+- [**Microsoft Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - GitHub Copilot, Cursor သို့မဟုတ် မည်သည့် ထောက်ပံ့ထားသော agent မဆို အသုံးပြုရန် ပြန်လည်အသုံးချနိုင်သော AI အေဂျင့် ကျွမ်းကျင်မှုများကို ထည့်သွင်းပါ။ အပါအဝင် [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [deployment](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), နှင့် [diagnostics](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) အတွက် ကျွမ်းကျင်မှုများပါဝင်သည်:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
 
 ---
 
-**သွားရာလမ်းညွှန်**
-- **ယခင် သင်ခန်းစာ**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **နောက်တစ်ခန်း**: [AI Model Deployment](ai-model-deployment.md)
+**Navigation**
+- **ယခင် သင်ခန်းစာ**: [Microsoft Foundry ပေါင်းစည်းမှု](microsoft-foundry-integration.md)
+- **နောက်တစ်ခု သင်ခန်းစာ**: [AI မော်ဒယ် တင်သွင်းခြင်း](ai-model-deployment.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-ဤစာရွက်ကို AI ဘာသာပြန်ဆိုင်ရာ ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးပမ်းသော်လည်း အလိုအလျောက်ဘာသာပြန်ချက်များတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ပါဝင်နိုင်ကြောင်း ကျေးဇူးပြု၍ သတိပြုပါ။ မူရင်းဘာသာဖြင့် ရေးသားထားသော မူလစာရွက်ကို တရားဝင် အရင်းအမြစ်အဖြစ် သတ်မှတ်စဉ်းစားသင့်သည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ပညာရှင် ပရော်ဖက်ရှင်နල් ဘာသာပြန်သူမှ ဘာသာပြန်ပေးစေရန် အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာနိုင်သည့် နားမလည်မှုများ သို့မဟုတ် မှားယွင်းဖတ်ရှုမှုများအတွက် ကျွန်ုပ်တို့ တာဝန်မယူပါ။
+**ပြောကြားချက်**
+ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးပမ်းနေသော်လည်း၊ စက်ကိရိယာဘာသာပြန်ခြင်းများတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ပါဝင်နိုင်ကြောင်း သတိပြုပါရန် လိုအပ်ပါသည်။ မူလစာတမ်းကို မူရင်းဘာသာဖြင့်သာ ယုံကြည်စိတ်ချရသော အချက်အလက်အဖြစ် သတ်မှတ်သင့်သည်။ အရေးကြီးသည့် သတင်းအချက်အလက်များအတွက် ပရော်ဖက်ရှင်နယ် လူသားဘာသာပြန်သူဝန်ဆောင်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော နားလည်မှုကွာခြားမှုများ သို့မဟုတ် မမှန်ကန်သော အသုံးပြုမှုများအတွက် ကျွန်ုပ်တို့ တာဝန်မခံပါ။
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

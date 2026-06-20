@@ -1,82 +1,82 @@
-# Configuration Guide
+# Configuratiehandleiding
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 3 - Configuration & Authentication
-- **⬅️ Previous**: [Your First Project](first-project.md)
-- **➡️ Next**: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
-- **🚀 Next Chapter**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
+**Hoofdstuknavigatie:**
+- **📚 Cursusoverzicht**: [AZD For Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 3 - Configuratie & Authenticatie
+- **⬅️ Vorige**: [Jouw Eerste Project](first-project.md)
+- **➡️ Volgende**: [Implementatiehandleiding](../chapter-04-infrastructure/deployment-guide.md)
+- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 4: Infrastructuur als Code](../chapter-04-infrastructure/deployment-guide.md)
 
-## Introduction
+## Inleiding
 
-Deze uitgebreide gids behandelt alle aspecten van het configureren van Azure Developer CLI voor optimale ontwikkel- en deploy-workflows. Je leert over de configuratiehiërarchie, omgevingbeheer, authenticatiemethoden en geavanceerde configuratiepatronen die efficiënte en veilige Azure-deployments mogelijk maken.
+Deze uitgebreide handleiding behandelt alle aspecten van het configureren van de Azure Developer CLI voor optimale ontwikkel- en uitrolworkflows. Je leert over de configuratiehiërarchie, omgevingsbeheer, authenticatiemethoden en geavanceerde configuratiepatronen die efficiënte en veilige Azure-implementaties mogelijk maken.
 
-## Learning Goals
+## Leerdoelen
 
 Aan het einde van deze les zul je:
 - De azd-configuratiehiërarchie beheersen en begrijpen hoe instellingen worden geprioriteerd
-- Globale en projectspecifieke instellingen effectief configureren
+- Globale en project-specifieke instellingen effectief configureren
 - Meerdere omgevingen met verschillende configuraties beheren
-- Veilige authenticatie- en autorisatiemethoden implementeren
+- Veilige authenticatie- en autorisatiepatronen implementeren
 - Geavanceerde configuratiepatronen voor complexe scenario's begrijpen
 
-## Learning Outcomes
+## Leerresultaten
 
-Na het voltooien van deze les zul je in staat zijn om:
-- azd te configureren voor optimale ontwikkelworkflows
-- Meerdere deploymentomgevingen op te zetten en te beheren
-- Veilige configuratiemanagementpraktijken te implementeren
-- Problemen gerelateerd aan configuratie op te lossen
-- Het gedrag van azd aan te passen aan specifieke organisatorische vereisten
+Na het voltooien van deze les kun je:
+- azd configureren voor optimale ontwikkelworkflows
+- Meerdere implementatieomgevingen opzetten en beheren
+- Veilige configuratiebeheerpraktijken implementeren
+- Problemen met configuratie oplossen
+- Het gedrag van azd aanpassen aan specifieke organisatorische vereisten
 
-Deze uitgebreide gids behandelt alle aspecten van het configureren van Azure Developer CLI voor optimale ontwikkel- en deploy-workflows.
+Deze uitgebreide handleiding behandelt alle aspecten van het configureren van Azure Developer CLI voor optimale ontwikkel- en uitrolworkflows.
 
-## Understanding AI Agents in an azd Project
+## Begrijpen van AI-agents in een azd-project
 
-Als je nieuw bent met AI-agenten, is hier een eenvoudige manier om erover na te denken binnen de azd-wereld.
+Als je nieuw bent met AI-agents, is hier een eenvoudige manier om erover na te denken binnen de azd-wereld.
 
-### What Is an Agent?
+### Wat is een agent?
 
-Een agent is een stuk software dat een verzoek kan ontvangen, erover kan redeneren en acties kan ondernemen—vaak door een AI-model aan te roepen, gegevens op te zoeken of andere services aan te roepen. In een azd-project is een agent gewoon een andere **service** naast je webfrontend of API-backend.
+Een agent is een stuk software dat een verzoek kan ontvangen, erover kan redeneren en acties kan uitvoeren—vaak door een AI-model aan te roepen, gegevens op te zoeken of andere services te gebruiken. In een azd-project is een agent gewoon een andere **service** naast je webfrontend of API-backend.
 
-### How Agents Fit Into the azd Project Structure
+### Hoe agents passen in de azd-projectstructuur
 
-Een azd-project bestaat uit drie lagen: **infrastructure**, **code**, en **configuration**. Agenten sluiten op dezelfde manier op deze lagen aan als elke andere service:
+Een azd-project bestaat uit drie lagen: **infrastructure**, **code**, en **configuration**. Agents pluggen op dezelfde manier in deze lagen als elk ander servicecomponent:
 
-| Layer | What It Does for a Traditional App | What It Does for an Agent |
+| Laag | Wat het doet voor een traditionele app | Wat het doet voor een agent |
 |-------|-------------------------------------|---------------------------|
-| **Infrastructure** (`infra/`) | Provisions a web app and database | Provisions an AI model endpoint, search index, or agent host |
-| **Code** (`src/`) | Contains your frontend and API source code | Contains your agent logic and prompt definitions |
-| **Configuration** (`azure.yaml`) | Lists your services and their hosting targets | Lists your agent as a service, pointing to its code and host |
+| **Infrastructure** (`infra/`) | Voorziet in een webapp en database | Voorziet een AI-modelendpoint, zoekindex of agent-host |
+| **Code** (`src/`) | Bevat je frontend- en API-broncode | Bevat je agentlogica en promptdefinities |
+| **Configuration** (`azure.yaml`) | Lijst van je services en hun hostingdoelen | Lijst je agent als een service, verwijzend naar de code en host |
 
-### The Role of `azure.yaml`
+### De rol van `azure.yaml`
 
-Je hoeft de syntax nu niet te onthouden. Conceptueel is `azure.yaml` het bestand waarin je azd vertelt: *"Hier zijn de services die mijn applicatie vormen, en hier kun je hun code vinden."*
+Je hoeft de syntax nu nog niet uit je hoofd te leren. Conceptueel is `azure.yaml` het bestand waarin je azd vertelt: *"Hier zijn de services die mijn applicatie vormen, en hier is te vinden waar hun code staat."*
 
-Wanneer je project een AI-agent bevat, vermeldt `azure.yaml` die agent gewoon als een van de services. azd weet dan welke infrastructuur geprovisioned moet worden (zoals een Microsoft Foundry Models endpoint of een Container App om de agent te hosten) en deployed je agentcode—precies zoals het dat voor een webapp of API zou doen.
+Wanneer je project een AI-agent omvat, vermeldt `azure.yaml` die agent gewoon als een van de services. azd weet dan welke infrastructuur moet worden ingericht (zoals een Microsoft Foundry Models-endpoint of een Container App om de agent te hosten) en zet je agentcode uit—net zoals het dat voor een webapp of API zou doen.
 
-Dit betekent dat er niets fundamenteel nieuws te leren is. Als je begrijpt hoe azd een webservice beheert, begrijp je al hoe het een agent beheert.
+Dit betekent dat er fundamenteel niets nieuws te leren is. Als je begrijpt hoe azd een webservice beheert, begrijp je al hoe het een agent beheert.
 
-## Configuration Hierarchy
+## Configuratiehiërarchie
 
 azd gebruikt een hiërarchisch configuratiesysteem:
-1. **Command-line flags** (highest priority)
-2. **Environment variables**
-3. **Local project configuration** (`.azd/config.json`)
-4. **Global user configuration** (`~/.azd/config.json`)
-5. **Default values** (lowest priority)
+1. **Opdrachtregelvlaggen** (hoogste prioriteit)
+2. **Omgevingsvariabelen**
+3. **Lokale projectconfiguratie** (`.azd/config.json`)
+4. **Globale gebruikersconfiguratie** (`~/.azd/config.json`)
+5. **Standaardwaarden** (laagste prioriteit)
 
-## Global Configuration
+## Globale configuratie
 
-### Setting Global Defaults
+### Globale standaardwaarden instellen
 ```bash
-# Stel standaardabonnement in
+# Stel het standaardabonnement in
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# Stel standaardlocatie in
+# Stel de standaardlocatie in
 azd config set defaults.location "eastus2"
 
-# Stel standaardnaamgevingsconventie voor resourcegroepen in
+# Stel de standaardnaamgevingsconventie voor resourcegroepen in
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
 # Bekijk alle globale configuraties
@@ -86,26 +86,26 @@ azd config show
 azd config unset defaults.location
 ```
 
-### Common Global Settings
+### Veelvoorkomende globale instellingen
 ```bash
 # Ontwikkelingsvoorkeuren
-azd config set alpha.enable true                    # Schakel alpha-functies in
-azd config set telemetry.enabled false             # Schakel telemetrie uit
-azd config set output.format json                  # Stel uitvoerformaat in
+azd config set alpha.enable true                    # Alpha-functies inschakelen
+azd config set telemetry.enabled false             # Telemetrie uitschakelen
+azd config set output.format json                  # Uitvoerformaat instellen
 
 # Beveiligingsinstellingen
 azd config set auth.useAzureCliCredential true     # Gebruik Azure CLI voor authenticatie
-azd config set tls.insecure false                  # Dwing TLS-verificatie af
+azd config set tls.insecure false                  # TLS-verificatie afdwingen
 
 # Prestatieoptimalisatie
-azd config set provision.parallelism 5             # Parallelle resourcecreatie
+azd config set provision.parallelism 5             # Parallelle aanmaak van resources
 azd config set deploy.timeout 30m                  # Time-out voor implementatie
 ```
 
-## 🏗️ Project Configuration
+## 🏗️ Projectconfiguratie
 
-### azure.yaml Structure
-The `azure.yaml` file is the heart of your azd project:
+### Structuur van azure.yaml
+Het `azure.yaml`-bestand is het hart van je azd-project:
 
 ```yaml
 # Minimum configuration
@@ -181,9 +181,9 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Service Configuration Options
+### Opties voor serviceconfiguratie
 
-#### Host Types
+#### Hosttypen
 ```yaml
 services:
   web-static:
@@ -202,7 +202,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Language-Specific Settings
+#### Taalspecifieke instellingen
 ```yaml
 services:
   node-app:
@@ -226,22 +226,22 @@ services:
     startCommand: java -jar target/app.jar
 ```
 
-## 🌟 Environment Management
+## 🌟 Omgevingsbeheer
 
-### Creating Environments
+### Omgevingen aanmaken
 ```bash
 # Maak een nieuwe omgeving
 azd env new development
 
-# Maak op een specifieke locatie
+# Maak met een specifieke locatie
 azd env new staging --location "westus2"
 
-# Maak vanuit een sjabloon
+# Maak vanuit sjabloon
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### Environment Configuration
-Each environment has its own configuration in `.azure/<env-name>/config.json`:
+### Omgevingsconfiguratie
+Elke omgeving heeft zijn eigen configuratie in `.azure/<env-name>/config.json`:
 
 ```json
 {
@@ -263,7 +263,7 @@ Each environment has its own configuration in `.azure/<env-name>/config.json`:
 }
 ```
 
-### Environment Variables
+### Omgevingsvariabelen
 ```bash
 # Stel omgevingsspecifieke variabelen in
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
@@ -286,8 +286,8 @@ azd env get-values | grep DEBUG
 # (moet niets teruggeven)
 ```
 
-### Environment Templates
-Create `.azure/env.template` for consistent environment setup:
+### Omgevingssjablonen
+Maak `.azure/env.template` voor consistente omgevingsinstelling:
 ```bash
 # Vereiste variabelen
 AZURE_SUBSCRIPTION_ID=
@@ -303,9 +303,54 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 Authentication Configuration
+### Omgevingen delen binnen een team
 
-### Azure CLI Integration
+Wanneer meer dan één persoon aan een project werkt, moet je het eens worden over **wat met de repository meereist en wat lokaal blijft**. azd houdt elke omgeving onder een `.azure/`-map, en niet alles daarvan zou gecommit moeten worden.
+
+**Wat zit er in `.azure/`:**
+
+```
+.azure/
+├── config.json              # which env is currently selected (local)
+└── <env-name>/
+    ├── config.json          # subscription, location, resource IDs
+    └── .env                 # environment variables (may contain secrets!)
+```
+
+**Wat te gitignore-en.** azd's standaard `.gitignore` sluit `.azure/` al uit. Laat dat zo—de `.env`-bestanden kunnen geheimen bevatten, en resource-ID's zijn specifiek voor degene die ze heeft voorzien. Elke teamgenoot creëert lokaal zijn **eigen** omgeving:
+
+```bash
+# Elke ontwikkelaar voert dit één keer uit om een eigen geïsoleerde omgeving te krijgen
+azd env new dev-alice
+azd up
+```
+
+**Schakelen tussen omgevingen.** Een ontwikkelaar die meerdere omgevingen beheert selecteert de actieve omgeving voordat hij opdrachten uitvoert:
+
+```bash
+azd env list                 # bekijk alle lokale omgevingen en welke de standaard is
+azd env select staging       # maak 'staging' de actieve omgeving
+azd env get-values           # controleer of je op de juiste omgeving gericht bent
+```
+
+**Niet-geheime standaarden aan het team geven.** Commit een sjabloon (zoals de `.azure/env.template` hierboven) zodat iedereen weet welke variabelen ingesteld moeten worden—maar commit nooit de ingevulde waarden. Nieuwe teamgenoten kopiëren het sjabloon en vullen hun eigen waarden in.
+
+**Omgevingen in CI/CD.** Pipelines lezen je lokale `.azure/`-map niet. Geef in plaats daarvan de omgevingswaarden als pipeline-variabelen/geheimen, en azd leest ze uit de procesomgeving:
+
+```bash
+# In CI, azd leest deze uit de omgeving, niet uit .azure/
+export AZURE_ENV_NAME=production
+export AZURE_LOCATION=eastus2
+export AZURE_SUBSCRIPTION_ID=<sub-id>
+azd provision --no-prompt
+azd deploy --no-prompt
+```
+
+> **Vuistregel:** infrastructuurcode (`infra/`, `azure.yaml`) wordt gedeeld in Git; omgeving *staat en geheimen* (`.azure/`) zijn per ontwikkelaar en per pipeline. `azd pipeline config` zet de pipeline-variabelen automatisch voor je op.
+
+## 🔐 Authenticatieconfiguratie
+
+### Azure CLI-integratie
 ```bash
 # Gebruik Azure CLI-referenties (standaard)
 azd config set auth.useAzureCliCredential true
@@ -317,31 +362,31 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### Service Principal Authentication
-For CI/CD pipelines:
+### Authenticatie met Service Principal
+Voor CI/CD-pipelines:
 ```bash
 # Stel omgevingsvariabelen in
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Of configureer rechtstreeks
+# Of configureer direct
 azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
-### Managed Identity
-For Azure-hosted environments:
+### Beheerde identiteit
+Voor in Azure gehoste omgevingen:
 ```bash
 # Schakel authenticatie met beheerde identiteit in
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ Infrastructure Configuration
+## 🏗️ Infrastructuurconfiguratie
 
-### Bicep Parameters
-Configure infrastructure parameters in `infra/main.parameters.json`:
+### Bicep-parameters
+Configureer infrastructuurparameters in `infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -363,8 +408,8 @@ Configure infrastructure parameters in `infra/main.parameters.json`:
 }
 ```
 
-### Terraform Configuration
-For Terraform projects, configure in `infra/terraform.tfvars`:
+### Terraform-configuratie
+Voor Terraform-projecten, configureer in `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -372,9 +417,9 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 Deployment Configuration
+## 🚀 Implementatieconfiguratie
 
-### Build Configuration
+### Buildconfiguratie
 ```yaml
 # In azure.yaml
 services:
@@ -397,7 +442,7 @@ services:
       PYTHONPATH: src
 ```
 
-### Docker Configuration
+### Docker-configuratie
 ```yaml
 services:
   api:
@@ -411,11 +456,11 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
-Example `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
+Voorbeeld `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
-## 🔧 Advanced Configuration
+## 🔧 Geavanceerde configuratie
 
-### Custom Resource Naming
+### Aangepaste resourcebenamingen
 ```bash
 # Stel naamgevingsconventies in
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -423,7 +468,7 @@ azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
 ```
 
-### Network Configuration
+### Netwerkconfiguratie
 ```yaml
 # In azure.yaml
 infra:
@@ -434,7 +479,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### Monitoring Configuration
+### Monitoringconfiguratie
 ```yaml
 # In azure.yaml
 monitoring:
@@ -446,9 +491,9 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Environment-Specific Configurations
+## 🎯 Omgevingsspecifieke configuraties
 
-### Development Environment
+### Ontwikkelomgeving
 ```bash
 # .azure/ontwikkeling/.env
 DEBUG=true
@@ -457,7 +502,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Staging Environment
+### Stagingomgeving
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -466,31 +511,31 @@ ENABLE_MONITORING=true
 USE_PRODUCTION_APIS=true
 ```
 
-### Production Environment
+### Productieomgeving
 ```bash
-# .azure/productie/.env
+# .azure/production/.env
 DEBUG=false
 LOG_LEVEL=error
 ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Configuration Validation
+## 🔍 Configuratievalidatie
 
-### Validate Configuration
+### Configuratie valideren
 ```bash
-# Controleer de configuratiesyntaxis
+# Controleer configuratiesyntaxis
 azd config validate
 
-# Test de omgevingsvariabelen
+# Test omgevingsvariabelen
 azd env get-values
 
-# Valideer de infrastructuur
+# Valideer infrastructuur
 azd provision --dry-run
 ```
 
-### Configuration Scripts
-Create validation scripts in `scripts/`:
+### Configuratiescripts
+Maak validatiescripts in `scripts/`:
 
 ```bash
 #!/bin/bash
@@ -498,13 +543,13 @@ Create validation scripts in `scripts/`:
 
 echo "Validating configuration..."
 
-# Controleer vereiste omgevingsvariabelen
+# Controleer de vereiste omgevingsvariabelen
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# Valideer syntaxis van azure.yaml
+# Valideer de syntaxis van azure.yaml
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -513,9 +558,9 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Best Practices
+## 🎓 Beste praktijken
 
-### 1. Use Environment Variables
+### 1. Gebruik omgevingsvariabelen
 ```yaml
 # Good: Use environment variables
 database:
@@ -526,7 +571,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organize Configuration Files
+### 2. Organiseer configuratiebestanden
 ```
 .azure/
 ├── config.json              # Global project config
@@ -542,7 +587,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Version Control Considerations
+### 3. Overwegingen voor versiebeheer
 ```bash
 # .gitignore
 .azure/*/config.json         # Omgevingsconfiguraties (bevatten resource-ID's)
@@ -550,8 +595,8 @@ database:
 .env                        # Lokaal omgevingsbestand
 ```
 
-### 4. Configuration Documentation
-Document your configuration in `CONFIG.md`:
+### 4. Configuratiedocumentatie
+Documenteer je configuratie in `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -566,26 +611,26 @@ Document your configuration in `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
-## 🎯 Hands-On Practice Exercises
+## 🎯 Praktijkoefeningen
 
-### Exercise 1: Multi-Environment Configuration (15 minutes)
+### Oefening 1: Multi-omgevingconfiguratie (15 minuten)
 
-**Goal**: Create and configure three environments with different settings
+**Doel**: Maak en configureer drie omgevingen met verschillende instellingen
 
 ```bash
-# Maak ontwikkelomgeving aan
+# Maak een ontwikkelomgeving
 azd env new dev
 azd env set LOG_LEVEL debug
 azd env set ENABLE_TELEMETRY false
 azd env set APP_INSIGHTS_SAMPLING 100
 
-# Maak stagingomgeving aan
+# Maak een stagingomgeving
 azd env new staging
 azd env set LOG_LEVEL info
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 50
 
-# Maak productieomgeving aan
+# Maak een productieomgeving
 azd env new production
 azd env set LOG_LEVEL error
 azd env set ENABLE_TELEMETRY true
@@ -597,15 +642,15 @@ azd env select staging && azd env get-values
 azd env select production && azd env get-values
 ```
 
-**Success Criteria:**
-- [ ] Three environments created successfully
-- [ ] Each environment has unique configuration
-- [ ] Can switch between environments without errors
-- [ ] `azd env list` shows all three environments
+**Succescriteria:**
+- [ ] Drie omgevingen succesvol aangemaakt
+- [ ] Elke omgeving heeft een unieke configuratie
+- [ ] Kan schakelen tussen omgevingen zonder fouten
+- [ ] `azd env list` toont alle drie de omgevingen
 
-### Exercise 2: Secret Management (10 minutes)
+### Oefening 2: Geheimbeheer (10 minuten)
 
-**Goal**: Practice secure configuration with sensitive data
+**Doel**: Oefen veilige configuratie met gevoelige gegevens
 
 ```bash
 # Stel geheimen in (niet weergegeven in uitvoer)
@@ -623,18 +668,18 @@ azd env get-values
 azd env get DB_PASSWORD  # Moet de werkelijke waarde tonen
 ```
 
-**Success Criteria:**
-- [ ] Secrets stored without displaying in terminal
-- [ ] `azd env get-values` shows redacted secrets
-- [ ] Individual `azd env get <SECRET_NAME>` retrieves actual value
+**Succescriteria:**
+- [ ] Geheimen opgeslagen zonder weergave in de terminal
+- [ ] `azd env get-values` toont afgeschermde geheimen
+- [ ] Individuele `azd env get <SECRET_NAME>` haalt de werkelijke waarde op
 
-## Next Steps
+## Volgende stappen
 
-- [Your First Project](first-project.md) - Apply configuration in practice
-- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Use configuration for deployment
-- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - Production-ready configurations
+- [Jouw Eerste Project](first-project.md) - Pas de configuratie in de praktijk toe
+- [Implementatiehandleiding](../chapter-04-infrastructure/deployment-guide.md) - Gebruik configuratie voor implementatie
+- [Provisioning van resources](../chapter-04-infrastructure/provisioning.md) - Productieklare configuraties
 
-## References
+## Referenties
 
 - [azd Configuration Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
@@ -642,16 +687,16 @@ azd env get DB_PASSWORD  # Moet de werkelijke waarde tonen
 
 ---
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 3 - Configuration & Authentication
-- **⬅️ Previous**: [Your First Project](first-project.md)
-- **➡️ Next Chapter**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
-- **Next Lesson**: [Your First Project](first-project.md)
+**Hoofdstuknavigatie:**
+- **📚 Cursusoverzicht**: [AZD For Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 3 - Configuratie & Authenticatie
+- **⬅️ Vorige**: [Jouw Eerste Project](first-project.md)
+- **➡️ Volgend Hoofdstuk**: [Hoofdstuk 4: Infrastructuur als Code](../chapter-04-infrastructure/deployment-guide.md)
+- **Volgende Les**: [Jouw Eerste Project](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat automatische vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de originele taal moet als de gezaghebbende bron worden beschouwd. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI vertaaldienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

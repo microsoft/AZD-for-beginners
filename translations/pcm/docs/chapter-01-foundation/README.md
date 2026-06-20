@@ -1,38 +1,40 @@
 # Chapta 1: Foundation & Quick Start
 
-**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 30-45 minutes | **⭐ Complexity**: Beginner
+**📚 Kɔrs**: [AZD For Beginners](../../README.md) | **⏱️ Taim**: 30-45 minutes | **⭐ Level**: Beginner
 
 ---
 
-## Overview
+## Wetin Dis Chapta Dey Talk
 
-Dis chapta dey introduce Azure Developer CLI (azd) basics. You go learn the main koncepts, how to install the tools, an how to deploy your first application to Azure.
+Dis chapta go introduce Azure Developer CLI (azd) fundamentals. You go learn di main concepts, install di tools, and deploy your first application to Azure.
 
-> Validated against `azd 1.23.12` in March 2026.
+> Dem don validate this one with `azd 1.25.6` for June 2026.
 
-## Learning Objectives
+## Wetin You Go Learn
 
-If you finish dis chapta, you go:
-- Understand wetin Azure Developer CLI be an how e different from Azure CLI
-- Install an configure AZD for your platform
+By completing this chapta, you go:
+- Understand wetin Azure Developer CLI be and how e different from Azure CLI
+- Install and configure AZD for your platform
 - Deploy your first application to Azure with `azd up`
 - Clean up resources with `azd down`
 
 ---
 
-## 📚 Lessons
+## 📚 Lekshon
 
-| # | Lesson | Description | Time |
+| # | Lekshon | Description | Time |
 |---|--------|-------------|------|
-| 1 | [AZD Basics](azd-basics.md) | Main concepts, common terms, and how project dey structured | 15 min |
-| 2 | [Installation & Setup](installation.md) | How to install for each platform | 10 min |
-| 3 | [Your First Project](first-project.md) | Practical: Deploy a web app go Azure | 20 min |
+| 1 | [AZD Basics](azd-basics.md) | Di main concepts, terminology, and project structure | 15 min |
+| 2 | [Installation & Setup](installation.md) | Installation guide for each platform | 10 min |
+| 3 | [Your First Project](first-project.md) | Hands-on: Deploy web app go Azure | 20 min |
+| 4 | [Bring Your Own App](bring-your-own-app.md) | Add azd to di project wey you don already get | 15 min |
+| 5 | [Dev Containers & Codespaces](dev-containers.md) | Reproducible azd environments with dev containers | 15 min |
 
 ---
 
-## ✅ Start Here: Validate Your Setup
+## ✅ Start Here: Check Your Setup
 
-Before you begin, check say your local machine don ready for the Chapter 1 template:
+Before you start, make sure say your local machine ready for the Chapter 1 template:
 
 **Windows:**
 ```powershell
@@ -44,40 +46,40 @@ Before you begin, check say your local machine don ready for the Chapter 1 templ
 bash ./validate-setup.sh
 ```
 
-If the script show say tools dey missing, install those tools first before you continue the chapta.
+If the script report say tools dey miss, install dem first before you continue with di chapta.
 
 ---
 
 ## 🚀 Quick Start
 
 ```bash
-# Make sure say installation don finish
+# Make sure say installation don work
 azd version
 
-# Make sure say you authenticate for AZD
-# Optional: run 'az login' if you wan run Azure CLI commands direct
+# Make you log in to AZD
+# Optional: run "az login" if you dey plan to run Azure CLI commands direct
 azd auth login
 
-# Deploy your first app
+# Deploy di first app
 azd init --template todo-nodejs-mongo
 azd up
 
-# Clean up when you don finish
+# Clean up after you don finish
 azd down --force --purge
 ```
 
 ---
 
-## ✅ Success Criteria
+## ✅ How You Go Know Say You Don Succeed
 
-After you finish dis chapta, you go fit:
+After you finish dis chapta, you suppose fit do:
 
 ```bash
-azd version              # E dey show di version wey don install
-azd init --template todo-nodejs-mongo  # E dey set up di project
-azd up                   # E dey deploy go Azure
-azd show                 # E dey show di URL wey di app dey run
-azd down --force --purge # E dey clean up di resources
+azd version              # Dey show di version wey don install
+azd init --template todo-nodejs-mongo  # Dey set up di project
+azd up                   # Dey deploy go Azure
+azd show                 # Dey show di URL for di app wey dey run
+azd down --force --purge # Dey clean up di resources
 ```
 
 ---
@@ -101,5 +103,5 @@ azd down --force --purge # E dey clean up di resources
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Dis document don translate using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am accurate, abeg note say automated translations fit get errors or inaccuracies. The original document for im native language suppose be di authoritative source. For critical information, we recommend say una use professional human translation. We no go responsible for any misunderstandings or misinterpretations wey fit arise from the use of dis translation.
+Dis document don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even tho we dey try make am correct, abeg make you know say automated translation fit get errors or mistakes. Di original document for dia own language na im be di correct source. For important info, make person wey sabi human translation do am. We no go responsible for any misunderstanding or wrong understanding wey fit happen because of dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

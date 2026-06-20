@@ -1,48 +1,48 @@
-# Kabanata 6: Pagpaplano at Pagpapatunay Bago Mag-deploy
+# Kabanata 6: Pagpaplano at Pagpapatunay Bago ang Pag-deploy
 
-**📚 Kurso**: [AZD For Beginners](../../README.md) | **⏱️ Tagal**: 1 oras | **⭐ Antas ng Kahirapan**: Katamtaman
+**📚 Kurso**: [AZD Para sa Mga Nagsisimula](../../README.md) | **⏱️ Tagal**: 1 oras | **⭐ Antas ng Kahirapan**: Katamtaman
 
 ---
 
 ## Pangkalahatang-ideya
 
-Saklaw ng kabanatang ito ang mahahalagang hakbang sa pagpaplano at pagpapatunay bago i-deploy ang iyong aplikasyon. Matutunan kung paano iwasan ang magastos na pagkakamali sa pamamagitan ng wastong capacity planning, pagpili ng SKU, at preflight checks.
+Saklaw ng kabanatang ito ang mahahalagang hakbang sa pagpaplano at pagpapatunay bago i-deploy ang iyong aplikasyon. Matutunan kung paano iwasan ang magastos na pagkakamali sa pamamagitan ng tamang pagpaplano ng kapasidad, pagpili ng SKU, at mga preflight check.
 
-> Napatunayan laban sa `azd 1.23.12` noong Marso 2026.
+> Napatunayan laban sa `azd 1.25.6` noong Hunyo 2026.
 
 ## Mga Layunin sa Pagkatuto
 
-Sa pagtatapos ng kabanatang ito, magagawa mong:
-- Patakbuhin ang preflight checks bago mag-deploy
-- Magplano ng kapasidad at tantyahin ang mga pangangailangan ng resources
+Sa pagtatapos ng kabanatang ito, magagawa mo:
+- Patakbuhin ang mga preflight check bago ang pag-deploy
+- Magplano ng kapasidad at magtantya ng pangangailangan ng mga resources
 - Pumili ng angkop na SKUs para sa pag-optimize ng gastos
-- I-configure ang Application Insights para sa pagsubaybay
+- I-configure ang Application Insights para sa monitoring
 - Maunawaan ang mga pattern ng koordinasyon ng koponan
 
 ---
 
 ## 📚 Mga Aralin
 
-| # | Aralin | Deskripsyon | Oras |
+| # | Aralin | Paglalarawan | Oras |
 |---|--------|-------------|------|
-| 1 | [Pagsusuri bago mag-deploy](preflight-checks.md) | Patunayan ang konfigurasyon bago ang pag-deploy | 15 min |
-| 2 | [Pagpaplano ng Kapasidad](capacity-planning.md) | Tantyahin ang mga pangangailangan sa resources | 20 min |
-| 3 | [Pagpili ng SKU](sku-selection.md) | Pumili ng angkop na antas ng presyo | 15 min |
-| 4 | [Application Insights](application-insights.md) | I-configure ang pagsubaybay | 20 min |
-| 5 | [Mga Pattern ng Koordinasyon](coordination-patterns.md) | Mga workflow ng koponan para sa pag-deploy | 15 min |
+| 1 | [Mga Preflight Check](preflight-checks.md) | Suriin ang konfigurasyon bago i-deploy | 15 min |
+| 2 | [Pagpaplano ng Kapasidad](capacity-planning.md) | Tantyahin ang pangangailangan ng mga resources | 20 min |
+| 3 | [Pagpili ng SKU](sku-selection.md) | Pumili ng angkop na pricing tiers | 15 min |
+| 4 | [Application Insights](application-insights.md) | I-configure ang monitoring | 20 min |
+| 5 | [Mga Pattern ng Koordinasyon](coordination-patterns.md) | Mga workflow ng pag-deploy ng koponan | 15 min |
 
 ---
 
-## 🚀 Mabilis na Pagsisimula
+## 🚀 Mabilis na Panimula
 
 ```bash
 # Suriin ang mga quota ng subscription
 az vm list-usage --location eastus --output table
 
-# I-preview ang deployment (hindi lilikha ng anumang resource)
+# I-preview ang deployment (walang nilikhang resources)
 azd provision --preview
 
-# Suriin ang sintaks ng Bicep
+# Suriin ang syntax ng Bicep
 az bicep build --file infra/main.bicep
 
 # Suriin ang konfigurasyon ng kapaligiran
@@ -51,28 +51,28 @@ azd env get-values
 
 ---
 
-## ☑️ Tseklista Bago Mag-deploy
+## ☑️ Pre-Deployment Checklist
 
-### Bago `azd provision`
+### Bago ang `azd provision`
 
 - [ ] Na-verify ang quota para sa rehiyon
-- [ ] Napili ang mga SKU nang naaangkop
-- [ ] Nirepaso ang pagtatantya ng gastos
-- [ ] Magkakatugma ang naming convention
-- [ ] Na-configure ang seguridad/RBAC
+- [ ] Angkop na napiling SKUs
+- [ ] Nasuri ang pagtataya ng gastos
+- [ ] Pare-pareho ang konbensiyon ng pagbibigay ng pangalan
+- [ ] Nakakonpigura ang Seguridad/RBAC
 
-### Bago `azd deploy`
+### Bago ang `azd deploy`
 
-- [ ] Nakatalaga ang mga environment variable
-- [ ] Nasa Key Vault ang mga secret
-- [ ] Na-verify ang mga connection string
-- [ ] Na-configure ang mga health check
+- [ ] Nakatakda ang mga environment variable
+- [ ] Mga secret na nasa Key Vault
+- [ ] Napatunayan ang mga connection string
+- [ ] Nakakonpigura ang health checks
 
 ---
 
 ## 💰 Gabay sa Pagpili ng SKU
 
-| Workload | Development | Production |
+| Gawain | Pag-unlad | Produksyon |
 |----------|-------------|------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
@@ -81,12 +81,12 @@ azd env get-values
 
 ---
 
-## 🔗 Nabigasyon
+## 🔗 Navigasyon
 
 | Direksyon | Kabanata |
 |-----------|---------|
-| **Nakaraan** | [Chapter 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
-| **Susunod** | [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/README.md) |
+| **Nakaraan** | [Kabanata 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
+| **Susunod** | [Kabanata 7: Paglutas ng Mga Suliranin](../chapter-07-troubleshooting/README.md) |
 
 ---
 
@@ -94,11 +94,11 @@ azd env get-values
 
 - [Gabay sa Konfigurasyon](../chapter-03-configuration/configuration.md)
 - [Gabay sa Pag-deploy](../chapter-04-infrastructure/deployment-guide.md)
-- [Karaniwang Mga Isyu](../chapter-07-troubleshooting/common-issues.md)
+- [Mga Karaniwang Isyu](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Isinalin ang dokumentong ito gamit ang AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa katumpakan, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o mga di-tumpak na bahagi. Ang orihinal na dokumento sa sariling wika nito ang dapat ituring na opisyal na sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
+**Pagtatanggi**:
+Ang dokumentong ito ay isinalin gamit ang serbisyo ng AI translation na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't nagsusumikap kami para sa katumpakan, pakatandaan na ang awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na pangunahing sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang maling pagkakaintindi o maling interpretasyon na nagmula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

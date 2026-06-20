@@ -1,57 +1,57 @@
 # Örnekler - Pratik AZD Şablonları ve Yapılandırmaları
 
-**Örnekle Öğrenme - Bölümlere Göre Düzenlendi**
+**Örneklerle Öğrenme - Bölümlere Göre Düzenlenmiş**
 - **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar](../README.md)
-- **📖 Bölüm Haritası**: Örnekler öğrenme karmaşıklığına göre düzenlenmiştir
-- **🚀 Yerel Örnek**: [Perakende Çoklu Ajan Çözümü](retail-scenario.md)
-- **🤖 Dış AI Örnekleri**: Azure Samples depolarına bağlantılar
+- **📖 Bölüm Haritası**: Örnekler öğrenme zorluğuna göre düzenlenmiştir
+- **🚀 Yerel Örnek**: [Perakende Çoklu-Ajan Çözümü](retail-scenario.md)
+- **🤖 Harici AI Örnekleri**: Azure Samples depolarına bağlantılar
 
-> **📍 ÖNEMLİ: Yerel ve Dış Örnekler**  
-> Bu depo tam uygulamalı **4 eksiksiz yerel örnek** içerir:  
-> - **Microsoft Foundry Models Chat** (gpt-4.1 dağıtımı ile sohbet arayüzü)  
+> **📍 ÖNEMLİ: Yerel ve Harici Örnekler**  
+> Bu depo tam uygulamalarla birlikte **4 eksiksiz yerel örnek** içerir:  
+> - **Microsoft Foundry Models Chat** (gpt-4.1 dağıtımı ve sohbet arayüzü)  
 > - **Container Apps** (Basit Flask API + Mikroservisler)  
-> - **Database App** (Web + SQL Veritabanı)  
-> - **Retail Multi-Agent** (Kurumsal AI Çözümü)  
->  
-> Ek örnekler, klonlayabileceğiniz Azure-Samples depolarına yapılan **dış referanslardır**.
+> - **Database Uygulaması** (Web + SQL Database)  
+> - **Perakende Çoklu-Ajan** (Kurumsal AI Çözümü)  
+>   
+> Ek örnekler, klonlayabileceğiniz Azure-Samples depolarına yapılan **harici referanslardır**.
 
 ## Giriş
 
-Bu dizin, Azure Developer CLI'yi uygulamalı pratikle öğrenmenize yardımcı olacak pratik örnekler ve referanslar sağlar. Retail Multi-Agent senaryosu, bu depoda yer alan eksiksiz, üretime hazır bir uygulamadır. Ek örnekler, çeşitli AZD desenlerini gösteren resmi Azure Samples depolarına referans verir.
+Bu dizin, Azure Developer CLI'yi uygulamalı olarak öğrenmenize yardımcı olacak pratik örnekler ve referanslar sağlar. Perakende Çoklu-Ajan senaryosu, bu depoda bulunan eksiksiz, üretime hazır bir uygulamadır. Ek örnekler, çeşitli AZD desenlerini gösteren resmi Azure Samples depolarına referans verir.
 
-### Karmaşıklık Derecelendirme Açıklaması
+### Karmaşıklık Derecesi Açıklaması
 
 - ⭐ **Başlangıç** - Temel kavramlar, tek servis, 15-30 dakika
-- ⭐⭐ **Orta** - Çoklu servisler, veritabanı entegrasyonu, 30-60 dakika
+- ⭐⭐ **Orta** - Birden fazla servis, veritabanı entegrasyonu, 30-60 dakika
 - ⭐⭐⭐ **İleri** - Karmaşık mimari, AI entegrasyonu, 1-2 saat
 - ⭐⭐⭐⭐ **Uzman** - Üretime hazır, kurumsal desenler, 2+ saat
 
-## 🎯 Bu Depoda Gerçekte Neler Var
+## 🎯 Bu Depoda Aslında Neler Var
 
-### ✅ Yerel Uygulama (Kullanıma Hazır)
+### ✅ Yerel Uygulama (Kullanmaya Hazır)
 
 #### [Microsoft Foundry Models Sohbet Uygulaması](azure-openai-chat/README.md) 🆕
-**Bu depoda sohbet arayüzü ile eksiksiz gpt-4.1 dağıtımı bulunmaktadır**
+**Bu depoda sohbet arayüzü dahil tam gpt-4.1 dağıtımı bulunmaktadır**
 
 - **Konum:** `examples/azure-openai-chat/`
 - **Karmaşıklık:** ⭐⭐ (Orta)
-- **İçindekiler:**
+- **Neler Dahil:**
   - Tam Microsoft Foundry Models dağıtımı (gpt-4.1)
   - Python komut satırı sohbet arayüzü
   - Güvenli API anahtarları için Key Vault entegrasyonu
   - Bicep altyapı şablonları
   - Token kullanımı ve maliyet takibi
-  - Hız sınırlama ve hata yönetimi
+  - İstek sınırlandırma ve hata yönetimi
 
 **Hızlı Başlangıç:**
 ```bash
-# example dizinine gidin
+# Örneğe git
 cd examples/azure-openai-chat
 
-# Her şeyi dağıtın
+# Her şeyi dağıt
 azd up
 
-# Bağımlılıkları yükleyin ve sohbete başlayın
+# Bağımlılıkları yükle ve sohbet etmeye başla
 pip install -r src/requirements.txt
 python src/chat.py
 ```
@@ -59,15 +59,15 @@ python src/chat.py
 **Teknolojiler:** Microsoft Foundry Models, gpt-4.1, Key Vault, Python, Bicep
 
 #### [Container App Örnekleri](container-app/README.md) 🆕
-**Bu depoda kapsamlı konteyner dağıtım örnekleri bulunmaktadır**
+**Bu depoda kapsamlı konteyner dağıtım örnekleri bulunur**
 
 - **Konum:** `examples/container-app/`
-- **Karmaşıklık:** ⭐-⭐⭐⭐⭐ (Başlangıçtan Uzmana)
-- **İçindekiler:**
-  - [Ana Rehber](container-app/README.md) - Konteyner dağıtımlarının tam genel bakışı
-  - [Simple Flask API](../../../examples/container-app/simple-flask-api) - Temel REST API örneği
-  - [Microservices Architecture](../../../examples/container-app/microservices) - Üretime hazır çok servisli dağıtım
-  - Hızlı Başlangıç, Üretim ve İleri desenler
+- **Karmaşıklık:** ⭐-⭐⭐⭐⭐ (Başlangıçtan Uzmanlığa)
+- **Neler Dahil:**
+  - [Ana Kılavuz](container-app/README.md) - Konteyner dağıtımlarının tam genel bakışı
+  - [Basit Flask API](../../../examples/container-app/simple-flask-api) - Temel REST API örneği
+  - [Mikroservis Mimarisi](../../../examples/container-app/microservices) - Prodüksiyon hazır çok servisli dağıtım
+  - Hızlı Başlangıç, Prodüksiyon ve İleri desenler
   - İzleme, güvenlik ve maliyet optimizasyonu
 
 **Hızlı Başlangıç:**
@@ -75,7 +75,7 @@ python src/chat.py
 # Ana kılavuzu görüntüle
 cd examples/container-app
 
-# Basit Flask API'sini dağıt
+# Basit Flask API'yi dağıt
 cd simple-flask-api
 azd up
 
@@ -86,16 +86,16 @@ azd up
 
 **Teknolojiler:** Azure Container Apps, Docker, Python Flask, Node.js, C#, Go, Application Insights
 
-#### [Retail Multi-Agent Çözümü](retail-scenario.md) 🆕
+#### [Perakende Çoklu-Ajan Çözümü](retail-scenario.md) 🆕
 **Bu depoda üretime hazır eksiksiz uygulama bulunmaktadır**
 
 - **Konum:** `examples/retail-multiagent-arm-template/`
 - **Karmaşıklık:** ⭐⭐⭐⭐ (İleri)
-- **İçindekiler:**
+- **Neler Dahil:**
   - Tam ARM dağıtım şablonu
   - Çoklu ajan mimarisi (Müşteri + Envanter)
   - Microsoft Foundry Models entegrasyonu
-  - RAG ile AI Search
+  - RAG ile AI Arama
   - Kapsamlı izleme
   - Tek tıklamayla dağıtım betiği
 
@@ -109,7 +109,7 @@ cd examples/retail-multiagent-arm-template
 
 ---
 
-## 🔗 Dış Azure Örnekleri (Kullanmak İçin Klonlayın)
+## 🔗 Harici Azure Örnekleri (Kullanmak için Klonlayın)
 
 Aşağıdaki örnekler resmi Azure-Samples depolarında tutulmaktadır. Farklı AZD desenlerini keşfetmek için bunları klonlayın:
 
@@ -118,7 +118,7 @@ Aşağıdaki örnekler resmi Azure-Samples depolarında tutulmaktadır. Farklı 
 | Şablon | Depo | Karmaşıklık | Servisler |
 |:---------|:-----------|:-----------|:---------|
 | **Python Flask API** | [Yerel: simple-flask-api](../../../examples/container-app/simple-flask-api) | ⭐ | Python, Container Apps, Application Insights |
-| **Microservices** | [Yerel: microservices](../../../examples/container-app/microservices) | ⭐⭐⭐⭐ | Çok servisli, Service Bus, Cosmos DB, SQL |
+| **Microservices** | [Yerel: microservices](../../../examples/container-app/microservices) | ⭐⭐⭐⭐ | Çoklu servis, Service Bus, Cosmos DB, SQL |
 | **Node.js + MongoDB** | [todo-nodejs-mongo](https://github.com/Azure-Samples/todo-nodejs-mongo) | ⭐ | Express, Cosmos DB, Container Apps |
 | **React + Functions** | [todo-csharp-sql-swa-func](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) | ⭐ | Static Web Apps, Functions, SQL |
 | **Python Flask Container** | [container-apps-store-api](https://github.com/Azure-Samples/container-apps-store-api-microservice) | ⭐ | Python, Container Apps, API |
@@ -138,39 +138,39 @@ azd up
 | Şablon | Depo | Karmaşıklık | Odak |
 |:---------|:-----------|:-----------|:------|
 | **Microsoft Foundry Models Chat** | [Yerel: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | gpt-4.1 dağıtımı |
-| **AI Chat Hızlı Başlangıç** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | Temel AI sohbeti |
+| **AI Chat Quickstart** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | Temel AI sohbeti |
 | **AI Agents** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | Ajan çerçevesi |
 | **Search + OpenAI Demo** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | RAG deseni |
 | **Contoso Chat** | [contoso-chat](https://github.com/Azure-Samples/contoso-chat) | ⭐⭐⭐⭐ | Kurumsal AI |
 
-### Veritabanı & Gelişmiş Desenler (Bölümler 3-8)
+### Veritabanı ve İleri Desenler (Bölümler 3-8)
 
 | Şablon | Depo | Karmaşıklık | Odak |
 |:---------|:-----------|:-----------|:------|
 | **C# + SQL** | [todo-csharp-sql](https://github.com/Azure-Samples/todo-csharp-sql) | ⭐⭐ | Veritabanı entegrasyonu |
-| **Python + Cosmos** | [todo-python-mongo-swa-func](https://github.com/Azure-Samples/todo-python-mongo-swa-func) | ⭐⭐ | Sunucusuz NoSQL |
-| **Java Microservices** | [java-microservices-aca-lab](https://github.com/Azure-Samples/java-microservices-aca-lab) | ⭐⭐⭐ | Çok servisli |
+| **Python + Cosmos** | [todo-python-mongo-swa-func](https://github.com/Azure-Samples/todo-python-mongo-swa-func) | ⭐⭐ | NoSQL sunucusuz |
+| **Java Microservices** | [java-microservices-aca-lab](https://github.com/Azure-Samples/java-microservices-aca-lab) | ⭐⭐⭐ | Çoklu servis |
 | **ML Pipeline** | [mlops-v2](https://github.com/Azure-Samples/mlops-v2) | ⭐⭐⭐⭐ | MLOps |
 
 ## Öğrenme Hedefleri
 
-Bu örnekleri çalıştırarak:
-- Gerçekçi uygulama senaryolarıyla Azure Developer CLI iş akışlarını uygulayacaksınız
-- Farklı uygulama mimarilerini ve bunların azd uygulamalarını anlayacaksınız
-- Çeşitli Azure servisleri için Kod Olarak Altyapı desenlerini ustalaştıracaksınız
-- Yapılandırma yönetimi ve ortama özel dağıtım stratejilerini uygulayacaksınız
-- Pratik bağlamlarda izleme, güvenlik ve ölçeklendirme desenlerini uygulayacaksınız
-- Gerçek dağıtım senaryolarında sorun giderme ve hata ayıklama deneyimi kazanacaksınız
+Bu örnekleri uygulayarak şunları yapabileceksiniz:
+- Azure Developer CLI iş akışlarını gerçekçi uygulama senaryolarında uygulamalı olarak çalışın
+- Farklı uygulama mimarilerini ve bunların azd uygulamalarını anlayın
+- Farklı Azure servisleri için Infrastructure as Code (IaC) desenlerinde ustalaşın
+- Konfigürasyon yönetimi ve ortama özel dağıtım stratejilerini uygulayın
+- İzleme, güvenlik ve ölçeklendirme desenlerini pratik bağlamlarda uygulayın
+- Gerçek dağıtım senaryolarında sorun giderme ve hata ayıklama tecrübesi kazanın
 
 ## Öğrenme Çıktıları
 
 Bu örnekleri tamamladıktan sonra şunları yapabileceksiniz:
-- Azure Developer CLI kullanarak çeşitli uygulama türlerini güvenle dağıtmak
-- Sağlanan şablonları kendi uygulama gereksinimlerinize uyarlamak
-- Bicep kullanarak özel altyapı desenleri tasarlamak ve uygulamak
-- Uygun bağımlılıklarla karmaşık çok servisli uygulamaları yapılandırmak
-- Gerçek senaryolarda güvenlik, izleme ve performans en iyi uygulamalarını uygulamak
-- Pratik deneyime dayalı olarak dağıtımları sorun gidermek ve optimize etmek
+- Azure Developer CLI kullanarak çeşitli uygulama türlerini güvenle dağıtın
+- Sağlanan şablonları kendi uygulama gereksinimlerinize uyarlayın
+- Bicep kullanarak özel altyapı desenleri tasarlayın ve uygulayın
+- Doğru bağımlılıklar ile karmaşık çok servisli uygulamaları yapılandırın
+- Gerçek senaryolarda güvenlik, izleme ve performans en iyi uygulamalarını uygulayın
+- Pratik deneyime dayalı olarak dağıtımları sorun giderin ve optimize edin
 
 ## Dizin Yapısı
 
@@ -190,113 +190,114 @@ Azure Samples AZD Templates (linked externally):
 
 ## Hızlı Başlangıç Örnekleri
 
-> **💡 AZD'ye yeni misiniz?** 1 numaralı örnekle başlayın (Flask API) - yaklaşık 20 dakika sürer ve temel kavramları öğretir.
+> **💡 AZD'ye yeni misiniz?** Örnek #1 (Flask API) ile başlayın - yaklaşık 20 dakika sürer ve temel kavramları öğretir.
 
 ### Yeni Başlayanlar İçin
 1. **[Container App - Python Flask API](../../../examples/container-app/simple-flask-api)** (Yerel) ⭐  
    Scale-to-zero ile basit bir REST API dağıtın  
    **Süre:** 20-25 dakika | **Maliyet:** $0-5/ay  
-   **Neler Öğreneceksiniz:** Temel azd iş akışı, konteynerleştirme, sağlık kontrolleri  
-   **Beklenen Sonuç:** İzleme ile "Hello, World!" döndüren çalışan bir API uç noktası
+   **Öğrenecekleriniz:** Temel azd iş akışı, konteynerleştirme, sağlık kontrolleri  
+   **Beklenen Sonuç:** İzleme ile birlikte "Hello, World!" döndüren çalışan bir API uç noktası
 
 2. **[Simple Web App - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** ⭐  
    MongoDB ile bir Node.js Express web uygulaması dağıtın  
    **Süre:** 25-35 dakika | **Maliyet:** $10-30/ay  
-   **Neler Öğreneceksiniz:** Veritabanı entegrasyonu, ortam değişkenleri, bağlantı dizeleri  
-   **Beklenen Sonuç:** Oluşturma/okuma/güncelleme/silme işlevselliğine sahip Todo listesi uygulaması
+   **Öğrenecekleriniz:** Veritabanı entegrasyonu, ortam değişkenleri, bağlantı dizeleri  
+   **Beklenen Sonuç:** Oluşturma/okuma/güncelleme/silme işlevleri olan Todo liste uygulaması
 
-3. **[Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** ⭐  
-   Azure Static Web Apps ile bir React statik web sitesi barındırın  
+3. **[Statik Web Sitesi - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** ⭐  
+   Azure Static Web Apps ile bir React statik sitesi barındırın  
    **Süre:** 20-30 dakika | **Maliyet:** $0-10/ay  
-   **Neler Öğreneceksiniz:** Statik barındırma, sunucusuz fonksiyonlar, CDN dağıtımı  
-   **Beklenen Sonuç:** API arka ucuna sahip React UI, otomatik SSL, küresel CDN
+   **Öğrenecekleriniz:** Statik barındırma, serverless fonksiyonlar, CDN dağıtımı  
+   **Beklenen Sonuç:** API arka ucu ile React UI, otomatik SSL, küresel CDN
 
 ### Orta Düzey Kullanıcılar İçin
 4. **[Microsoft Foundry Models Sohbet Uygulaması](../../../examples/azure-openai-chat)** (Yerel) ⭐⭐  
    gpt-4.1'i sohbet arayüzü ve güvenli API anahtarı yönetimi ile dağıtın  
    **Süre:** 35-45 dakika | **Maliyet:** $50-200/ay  
-   **Neler Öğreneceksiniz:** Microsoft Foundry Models dağıtımı, Key Vault entegrasyonu, token takibi  
-   **Beklenen Sonuç:** gpt-4.1 ve maliyet izlemesi ile çalışan sohbet uygulaması
+   **Öğrenecekleriniz:** Microsoft Foundry Models dağıtımı, Key Vault entegrasyonu, token takibi  
+   **Beklenen Sonuç:** gpt-4.1 ve maliyet takibi ile çalışan bir sohbet uygulaması
 
 5. **[Container App - Microservices](../../../examples/container-app/microservices)** (Yerel) ⭐⭐⭐⭐  
-   Üretime hazır çok servisli mimari  
+   Prodüksiyon hazır çok servisli mimari  
    **Süre:** 45-60 dakika | **Maliyet:** $50-150/ay  
-   **Neler Öğreneceksiniz:** Servis iletişimi, mesaj kuyruğu, dağıtık izleme  
-   **Beklenen Sonuç:** İzleme ile 2 servisli sistem (API Gateway + Ürün Servisi)
+   **Öğrenecekleriniz:** Servis iletişimi, mesaj kuyruğu, dağıtık izleme  
+   **Beklenen Sonuç:** İzleme ile birlikte 2 servisli sistem (API Gateway + Product Service)
 
 6. **[Database App - C# with Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** ⭐⭐  
-   C# API ve Azure SQL Veritabanı ile web uygulaması  
+   C# API ve Azure SQL Veritabanı içeren web uygulaması  
    **Süre:** 30-45 dakika | **Maliyet:** $20-80/ay  
-   **Neler Öğreneceksiniz:** Entity Framework, veritabanı geçişleri, bağlantı güvenliği  
+   **Öğrenecekleriniz:** Entity Framework, veritabanı migrasyonları, bağlantı güvenliği  
    **Beklenen Sonuç:** Azure SQL arka uçlu C# API, otomatik şema dağıtımı
 
 7. **[Serverless Function - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** ⭐⭐  
    HTTP tetikleyicili Python Azure Functions ve Cosmos DB  
    **Süre:** 30-40 dakika | **Maliyet:** $10-40/ay  
-   **Neler Öğreneceksiniz:** Olay odaklı mimari, sunucusuz ölçekleme, NoSQL entegrasyonu  
-   **Beklenen Sonuç:** HTTP isteklerine yanıt veren ve Cosmos DB kullanan bir Function uygulaması
+   **Öğrenecekleriniz:** Olay güdümlü mimari, sunucusuz ölçekleme, NoSQL entegrasyonu  
+   **Beklenen Sonuç:** HTTP isteklerine yanıt veren ve Cosmos DB'de depolama yapan bir Function uygulaması
 
 8. **[Microservices - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** ⭐⭐⭐  
    Container Apps ve API gateway ile çok servisli Java uygulaması  
    **Süre:** 60-90 dakika | **Maliyet:** $80-200/ay  
-   **Neler Öğreneceksiniz:** Spring Boot dağıtımı, servis ağı, yük dengeleme  
-   **Beklenen Sonuç:** Servis keşfi ve yönlendirmeye sahip çok servisli Java sistemi
+   **Öğrenecekleriniz:** Spring Boot dağıtımı, servis mesh, yük dengeleme  
+   **Beklenen Sonuç:** Servis keşfi ve yönlendirme ile çok servisli Java sistemi
 
 ### Microsoft Foundry Şablonları
 
-1. **[Microsoft Foundry Models Chat App - Yerel Örnek](../../../examples/azure-openai-chat)** ⭐⭐  
-   Sohbet arayüzü ile eksiksiz gpt-4.1 dağıtımı  
+1. **[Microsoft Foundry Models Chat App - Local Example](../../../examples/azure-openai-chat)** ⭐⭐  
+   Sohbet arayüzü dahil tam gpt-4.1 dağıtımı  
    **Süre:** 35-45 dakika | **Maliyet:** $50-200/ay  
    **Beklenen Sonuç:** Token takibi ve maliyet izleme ile çalışan sohbet uygulaması
 
 2. **[Azure Search + OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** ⭐⭐⭐  
-   RAG mimarili zeki sohbet uygulaması  
+   RAG mimarisi ile zeki sohbet uygulaması  
    **Süre:** 60-90 dakika | **Maliyet:** $100-300/ay  
-   **Beklenen Sonuç:** Belge arama ve atıf veren RAG destekli sohbet arayüzü
+   **Beklenen Sonuç:** Belge arama ve atıflarla RAG destekli sohbet arayüzü
 
 3. **[AI Document Processing](https://github.com/Azure-Samples/azure-ai-document-processing)** ⭐⭐  
-   Azure AI servisleri kullanarak belge analizi  
+   Azure AI servislerini kullanarak belge analizi  
    **Süre:** 40-60 dakika | **Maliyet:** $20-80/ay  
    **Beklenen Sonuç:** Yüklenen belgelerden metin, tablo ve varlık çıkaran API
 
 4. **[Machine Learning Pipeline](https://github.com/Azure-Samples/mlops-v2)** ⭐⭐⭐⭐  
    Azure Machine Learning ile MLOps iş akışı  
    **Süre:** 2-3 saat | **Maliyet:** $150-500/ay  
-   **Beklenen Sonuç:** Eğitim, dağıtım ve izlemeyle otomatikleştirilmiş ML boru hattı
+   **Beklenen Sonuç:** Eğitim, dağıtım ve izleme içeren otomatik ML boru hattı
 
 ### Gerçek Dünya Senaryoları
 
-#### **Retail Multi-Agent Çözümü** 🆕  
+#### **Perakende Çoklu-Ajan Çözümü** 🆕  
 **[Tam Uygulama Kılavuzu](./retail-scenario.md)**
 
-AZD ile kurumsal düzeyde AI uygulama dağıtımını gösteren kapsamlı, üretime hazır çok ajanlı müşteri destek çözümü. Bu senaryo şunları sağlar:
-- **Tam Mimari**: Özelleşmiş müşteri hizmetleri ve envanter yönetimi ajanlarına sahip çoklu ajan sistemi
-- **Üretim Altyapısı**: Çok bölgeli Microsoft Foundry Models dağıtımları, AI Search, Container Apps ve kapsamlı izleme
-- **Dağıtıma Hazır ARM Şablonu**: Tek tıklamayla dağıtım ve birden çok yapılandırma modu (Minimal/Standart/Premium)
-- **Gelişmiş Özellikler**: Red teaming güvenlik doğrulaması, ajan değerlendirme çerçevesi, maliyet optimizasyonu ve sorun giderme kılavuzları
-- **Gerçek İş Bağlamı**: Dosya yüklemeleri, arama entegrasyonu ve dinamik ölçeklendirme içeren perakendeci müşteri destek kullanım senaryosu
+AZD ile kurumsal düzeyde AI uygulama dağıtımını gösteren kapsamlı, üretime hazır çoklu ajan müşteri destek çözümü. Bu senaryo şunları sağlar:
+
+- **Tam Mimari**: Uzmanlaşmış müşteri hizmetleri ve envanter yönetimi ajanlarına sahip çoklu ajan sistemi
+- **Üretim Altyapısı**: Çok bölgelik Microsoft Foundry Models dağıtımları, AI Search, Container Apps ve kapsamlı izleme
+- **Dağıtıma Hazır ARM Şablonu**: Tek tıkla dağıtım ve birden fazla yapılandırma modu (Minimal/Standard/Premium)
+- **Gelişmiş Özellikler**: Kırmızı takım güvenlik doğrulaması, ajan değerlendirme altyapısı, maliyet optimizasyonu ve sorun giderme rehberleri
+- **Gerçek İş Bağlamı**: Dosya yüklemeleri, arama entegrasyonu ve dinamik ölçeklendirme ile perakendeci müşteri destek kullanım senaryosu
 
 **Teknolojiler**: Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
 
-**Karmaşıklık**: ⭐⭐⭐⭐ (İleri - Kurumsal Üretim Hazır)
+**Karmaşıklık**: ⭐⭐⭐⭐ (Gelişmiş - Kurumsal Üretim İçin Hazır)
 
-**İçin Mükemmel**: Yapay zeka geliştiricileri, çözüm mimarları ve üretim çoklu ajan sistemleri kuran ekipler
+**İçin ideal**: Yapay zeka geliştiricileri, çözüm mimarları ve üretim çok ajanlı sistemler kuran ekipler
 
-**Hızlı Başlangıç**: Dahil edilen ARM şablonu ile `./deploy.sh -g myResourceGroup` komutunu kullanarak komple çözümü 30 dakikadan kısa sürede dağıtın
+**Hızlı Başlangıç**: Dahil edilen ARM şablonunu kullanarak `./deploy.sh -g myResourceGroup` ile tüm çözümü 30 dakikadan kısa sürede dağıtın
 
 ## 📋 Kullanım Talimatları
 
-### Önkoşullar
+### Ön Koşullar
 
 Herhangi bir örneği çalıştırmadan önce:
-- ✅ Sahip (Owner) veya Katılımcı (Contributor) erişimine sahip bir Azure aboneliği
-- ✅ Azure Developer CLI yüklü ([Kurulum Kılavuzu](../docs/chapter-01-foundation/installation.md))
+- ✅ Azure aboneliği (Owner veya Contributor erişimi)
+- ✅ Azure Developer CLI yüklü ([Kurulum Rehberi](../docs/chapter-01-foundation/installation.md))
 - ✅ Docker Desktop çalışıyor (konteyner örnekleri için)
-- ✅ Uygun Azure kota limitleri (örnek özel gereksinimlerini kontrol edin)
+- ✅ Uygun Azure kota limitleri (örnek bazlı gereksinimleri kontrol edin)
 
-> **💰 Maliyet Uyarısı:** Tüm örnekler ücretlendirme gerektiren gerçek Azure kaynakları oluşturur. Maliyet tahminleri için ilgili README dosyalarına bakın. Süregelen maliyetlerden kaçınmak için işiniz bittiğinde `azd down` komutunu çalıştırmayı unutmayın.
+> **💰 Maliyet Uyarısı:** Tüm örnekler ücretlendirme yapan gerçek Azure kaynakları oluşturur. Maliyet tahminleri için bireysel README dosyalarına bakın. Sürekli ücretlerden kaçınmak için işiniz bittikten sonra `azd down` çalıştırmayı unutmayın.
 
-### Örnekleri Yerel Olarak Çalıştırma
+### Örnekleri Yerelde Çalıştırma
 
 1. **Örneği Klonlayın veya Kopyalayın**
    ```bash
@@ -309,7 +310,7 @@ Herhangi bir örneği çalıştırmadan önce:
    # Mevcut şablonla başlat
    azd init
    
-   # Veya yeni bir ortam oluştur
+   # Ya da yeni bir ortam oluştur
    azd env new my-environment
    ```
 
@@ -322,7 +323,7 @@ Herhangi bir örneği çalıştırmadan önce:
 
 4. **Dağıtın**
    ```bash
-   # Altyapıyı ve uygulamayı dağıt
+   # Altyapı ve uygulamayı dağıt
    azd up
    ```
 
@@ -341,14 +342,14 @@ Herhangi bir örneği çalıştırmadan önce:
    - ✅ Azure Portal "Running" durumunu gösterir
    - ✅ Application Insights telemetri alıyor
 
-> **⚠️ Sorunlar mı var?** Dağıtım sorunları için [Ortak Sorunlar](../docs/chapter-07-troubleshooting/common-issues.md) sayfasına bakın
+> **⚠️ Sorun mu?** Dağıtım sorunlarını gidermek için [Yaygın Sorunlar](../docs/chapter-07-troubleshooting/common-issues.md) sayfasına bakın
 
 ### Örnekleri Uyarlama
 
 Her örnek şunları içerir:
 - **README.md** - Ayrıntılı kurulum ve özelleştirme talimatları
-- **azure.yaml** - Yorumlu AZD yapılandırması
-- **infra/** - Parametre açıklamalı Bicep şablonları
+- **azure.yaml** - Yorumlarla AZD yapılandırması
+- **infra/** - Parametre açıklamalarıyla Bicep şablonları
 - **src/** - Örnek uygulama kodu
 - **scripts/** - Yaygın görevler için yardımcı betikler
 
@@ -357,22 +358,22 @@ Her örnek şunları içerir:
 ### Örnek Kategorileri
 
 #### **Temel Dağıtımlar**
-- Tek servisli uygulamalar
+- Tek hizmetli uygulamalar
 - Basit altyapı kalıpları
 - Temel yapılandırma yönetimi
-- Maliyet-etkin geliştirme kurulumları
+- Maliyet açısından verimli geliştirme kurulumları
 
 #### **Gelişmiş Senaryolar**
-- Çok servisli mimariler
-- Karmaşık ağlandırma konfigürasyonları
-- Veri tabanı entegrasyon kalıpları
+- Çok hizmetli mimariler
+- Karmaşık ağ yapılandırmaları
+- Veritabanı entegrasyon kalıpları
 - Güvenlik ve uyumluluk uygulamaları
 
 #### **Üretime Hazır Kalıplar**
-- Yüksek erişilebilirlik konfigürasyonları
+- Yüksek kullanılabilirlik yapılandırmaları
 - İzleme ve gözlemlenebilirlik
 - CI/CD entegrasyonu
-- Felaket kurtarma düzenleri
+- Felaket kurtarma kurulumları
 
 ## 📖 Örnek Açıklamaları
 
@@ -384,29 +385,29 @@ Her örnek şunları içerir:
 ### Statik Web Sitesi - React SPA
 **Teknolojiler**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
 **Karmaşıklık**: Başlangıç  
-**Kavramlar**: Statik barındırma, sunucusuz arka uç, modern web geliştirme
+**Kavramlar**: Statik barındırma, serverless backend, modern web geliştirme
 
-### Konteyner Uygulaması - Python Flask
+### Container Uygulaması - Python Flask
 **Teknolojiler**: Python Flask, Docker, Container Apps, Container Registry, Application Insights  
 **Karmaşıklık**: Başlangıç  
-**Kavramlar**: Kapsayıcılaştırma, REST API, scale-to-zero, health probe'lar, izleme  
+**Kavramlar**: Konteynerleştirme, REST API, scale-to-zero, sağlık kontrolleri, izleme  
 **Konum**: [Yerel Örnek](../../../examples/container-app/simple-flask-api)
 
-### Konteyner Uygulaması - Mikroservis Mimarisi
+### Container Uygulaması - Mikroservis Mimarisi
 **Teknolojiler**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, Container Apps  
 **Karmaşıklık**: Gelişmiş  
-**Kavramlar**: Çok servisli mimari, servis iletişimi, mesaj kuyruğu, dağıtık izleme  
+**Kavramlar**: Çok hizmetli mimari, hizmet iletişimi, mesaj kuyruğu, dağıtık izleme  
 **Konum**: [Yerel Örnek](../../../examples/container-app/microservices)
 
-### Veritabanı Uygulaması - C# ile Azure SQL
+### Veritabanı Uygulaması - C# ve Azure SQL
 **Teknolojiler**: C# ASP.NET Core, Azure SQL Database, App Service  
 **Karmaşıklık**: Orta  
 **Kavramlar**: Entity Framework, veritabanı bağlantıları, web API geliştirme
 
-### Sunucusuz Fonksiyon - Python Azure Functions
+### Serverless Fonksiyon - Python Azure Functions
 **Teknolojiler**: Python, Azure Functions, Cosmos DB, Static Web Apps  
 **Karmaşıklık**: Orta  
-**Kavramlar**: Olay-tabanlı mimari, sunucusuz hesaplama, tam yığın geliştirme
+**Kavramlar**: Olay tabanlı mimari, serverless hesaplama, full-stack geliştirme
 
 ### Mikroservisler - Java Spring Boot
 **Teknolojiler**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
@@ -416,19 +417,19 @@ Her örnek şunları içerir:
 ### Microsoft Foundry Örnekleri
 
 #### Microsoft Foundry Models Sohbet Uygulaması
-**Teknolojiler**: Microsoft Foundry Models, Cognitive Search, App Service  
+**Teknolojiler**: Microsoft Foundry Models, Azure AI Search, App Service  
 **Karmaşıklık**: Orta  
 **Kavramlar**: RAG mimarisi, vektör arama, LLM entegrasyonu
 
-#### Yapay Zeka Doküman İşleme
+#### AI Belge İşleme
 **Teknolojiler**: Azure AI Document Intelligence, Storage, Functions  
 **Karmaşıklık**: Orta  
-**Kavramlar**: Doküman analizi, OCR, veri çıkarımı
+**Kavramlar**: Belge analizi, OCR, veri çıkarımı
 
-#### Makine Öğrenimi İş Akışı
+#### Makine Öğrenimi Boru Hattı
 **Teknolojiler**: Azure ML, MLOps, Container Registry  
 **Karmaşıklık**: Gelişmiş  
-**Kavramlar**: Model eğitimi, dağıtım iş akışları, izleme
+**Kavramlar**: Model eğitimi, dağıtım boru hatları, izleme
 
 ## 🛠 Yapılandırma Örnekleri
 
@@ -436,49 +437,49 @@ The `configurations/` directory contains reusable components:
 
 ### Ortam Yapılandırmaları
 - Geliştirme ortamı ayarları
-- Staging ortam yapılandırmaları
+- Sahneleme ortamı yapılandırmaları
 - Üretime hazır yapılandırmalar
-- Çok bölgeli dağıtım ayarları
+- Çok bölgelik dağıtım kurulumları
 
 ### Bicep Modülleri
 - Yeniden kullanılabilir altyapı bileşenleri
 - Yaygın kaynak kalıpları
-- Güvenlik açısından sertleştirilmiş şablonlar
-- Maliyet optimize edilmiş yapılandırmalar
+- Güvenlik güçlendirilmiş şablonlar
+- Maliyet açısından optimize edilmiş yapılandırmalar
 
 ### Yardımcı Betikler
-- Ortam kurulum otomasyonu
+- Ortam kurulumu otomasyonu
 - Veritabanı taşıma betikleri
 - Dağıtım doğrulama araçları
 - Maliyet izleme yardımcıları
 
-## 🔧 Özelleştirme Kılavuzu
+## 🔧 Özelleştirme Rehberi
 
 ### Örnekleri Kendi Kullanım Durumunuza Uyarlama
 
-1. **Önkoşulları Gözden Geçirin**
-   - Azure servis gereksinimlerini kontrol edin
+1. **Ön Koşulları Gözden Geçirin**
+   - Azure hizmet gereksinimlerini kontrol edin
    - Abonelik limitlerini doğrulayın
    - Maliyet etkilerini anlayın
 
 2. **Yapılandırmayı Değiştirin**
-   - `azure.yaml` hizmet tanımlarını güncelleyin
+   - `azure.yaml` servis tanımlarını güncelleyin
    - Bicep şablonlarını özelleştirin
    - Ortam değişkenlerini ayarlayın
 
-3. **Kapsamlı Test Yapın**
+3. **İyice Test Edin**
    - Önce geliştirme ortamına dağıtın
-   - İşlevselliği doğrulayın
+   - Fonksiyonelliği doğrulayın
    - Ölçeklenebilirlik ve performansı test edin
 
 4. **Güvenlik İncelemesi**
    - Erişim kontrollerini gözden geçirin
-   - Gizli anahtar yönetimini uygulayın
+   - Gizli yönetimini uygulayın
    - İzlemeyi ve uyarıları etkinleştirin
 
 ## 📊 Karşılaştırma Matrisi
 
-| Örnek | Servisler | Veritabanı | Kimlik Doğrulama | İzleme | Karmaşıklık |
+| Örnek | Hizmetler | Veritabanı | Kimlik Doğrulama | İzleme | Karmaşıklık |
 |---------|----------|----------|------|------------|------------|
 | **Microsoft Foundry Models Chat** (Yerel) | 2 | ❌ | Key Vault | Tam | ⭐⭐ |
 | **Python Flask API** (Yerel) | 1 | ❌ | Temel | Tam | ⭐ |
@@ -498,8 +499,8 @@ The `configurations/` directory contains reusable components:
 
 ### Önerilen İlerleme
 
-1. **Basit Web Uygulamasıyla Başlayın**
-   - AZD'nin temel kavramlarını öğrenin
+1. **Basit Web Uygulaması ile Başlayın**
+   - Temel AZD kavramlarını öğrenin
    - Dağıtım iş akışını anlayın
    - Ortam yönetimi pratiği yapın
 
@@ -508,23 +509,23 @@ The `configurations/` directory contains reusable components:
    - CDN entegrasyonunu öğrenin
    - DNS yapılandırmasını anlayın
 
-3. **Konteyner Uygulamaya Geçin**
-   - Kapsayıcılaştırma temellerini öğrenin
+3. **Container Uygulamasına Geçin**
+   - Konteynerleştirme temellerini öğrenin
    - Ölçeklendirme kavramlarını anlayın
    - Docker ile pratik yapın
 
 4. **Veritabanı Entegrasyonu Ekleyin**
-   - Veritabanı sağlama süreçlerini öğrenin
+   - Veritabanı sağlama işlemlerini öğrenin
    - Bağlantı dizelerini anlayın
-   - Gizli anahtar yönetimi pratiği yapın
+   - Gizli yönetimi pratiği yapın
 
-5. **Sunucusuzu Keşfedin**
-   - Olay-tabanlı mimariyi anlayın
-   - Trigger ve binding'leri öğrenin
+5. **Serverless'i Keşfedin**
+   - Olay tabanlı mimariyi anlayın
+   - Tetikleyiciler ve bağlamaları öğrenin
    - API'lerle pratik yapın
 
 6. **Mikroservisler Oluşturun**
-   - Servis iletişimini öğrenin
+   - Hizmet iletişimini öğrenin
    - Dağıtık sistemleri anlayın
    - Karmaşık dağıtımlarla pratik yapın
 
@@ -532,7 +533,7 @@ The `configurations/` directory contains reusable components:
 
 ### Teknoloji Yığınına Göre
 - **Container Apps**: [Python Flask API (Yerel)](../../../examples/container-app/simple-flask-api), [Microservices (Yerel)](../../../examples/container-app/microservices), Java Microservices
-- **Node.js**: Node.js Express Todo App, [Microservices API Gateway (Yerel)](../../../examples/container-app/microservices)
+- **Node.js**: Node.js Express Todo Uygulaması, [Microservices API Gateway (Yerel)](../../../examples/container-app/microservices)
 - **Python**: [Python Flask API (Yerel)](../../../examples/container-app/simple-flask-api), [Microservices Product Service (Yerel)](../../../examples/container-app/microservices), Python Functions + SPA
 - **C#**: [Microservices Order Service (Yerel)](../../../examples/container-app/microservices), C# Web API + SQL Database, Microsoft Foundry Models Chat App, ML Pipeline
 - **Go**: [Microservices User Service (Yerel)](../../../examples/container-app/microservices)
@@ -545,21 +546,21 @@ The `configurations/` directory contains reusable components:
 - **OpenAI Integration**: **[Microsoft Foundry Models Chat (Yerel)](../../../examples/azure-openai-chat)**, Retail Multi-Agent Solution
 - **Enterprise Production**: [Microservices (Yerel)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
 
-### Mimari Desenine Göre
-- **Basit REST API**: [Python Flask API (Yerel)](../../../examples/container-app/simple-flask-api)
-- **Monolitik**: Node.js Express Todo, C# Web API + SQL
-- **Statik + Sunucusuz**: React SPA + Functions, Python Functions + SPA
-- **Mikroservisler**: [Production Microservices (Yerel)](../../../examples/container-app/microservices), Java Spring Boot Microservices
-- **Konteynerlenmiş**: [Python Flask (Yerel)](../../../examples/container-app/simple-flask-api), [Microservices (Yerel)](../../../examples/container-app/microservices)
-- **Yapay Zeka Destekli**: **[Microsoft Foundry Models Chat (Yerel)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
-- **Çoklu Ajan Mimarisi**: **Retail Multi-Agent Solution**
-- **Kurumsal Çoklu Servis**: [Microservices (Yerel)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
+### Mimari Desene Göre
+- **Simple REST API**: [Python Flask API (Yerel)](../../../examples/container-app/simple-flask-api)
+- **Monolithic**: Node.js Express Todo, C# Web API + SQL
+- **Static + Serverless**: React SPA + Functions, Python Functions + SPA
+- **Microservices**: [Production Microservices (Yerel)](../../../examples/container-app/microservices), Java Spring Boot Microservices
+- **Containerized**: [Python Flask (Yerel)](../../../examples/container-app/simple-flask-api), [Microservices (Yerel)](../../../examples/container-app/microservices)
+- **AI-Powered**: **[Microsoft Foundry Models Chat (Yerel)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **Multi-Agent Architecture**: **Retail Multi-Agent Solution**
+- **Enterprise Multi-Service**: [Microservices (Yerel)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
 
 ### Karmaşıklık Düzeyine Göre
 - **Başlangıç**: [Python Flask API (Yerel)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions
 - **Orta**: **[Microsoft Foundry Models Chat (Yerel)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Microservices, Microsoft Foundry Models Chat App, AI Document Processing
 - **Gelişmiş**: ML Pipeline
-- **Kurumsal Üretim-Hazır**: [Microservices (Yerel)](../../../examples/container-app/microservices) (Mesaj kuyruğu ile çok servisli), **Retail Multi-Agent Solution** (ARM şablonu dağıtımıyla tam çoklu ajan sistemi)
+- **Kurumsal Üretim İçin Hazır**: [Microservices (Yerel)](../../../examples/container-app/microservices) (Mesaj kuyruğuyla çok hizmetli), **Retail Multi-Agent Solution** (ARM şablonu ile tam çok ajanlı sistem dağıtımı)
 
 ## 📚 Ek Kaynaklar
 
@@ -570,29 +571,29 @@ The `configurations/` directory contains reusable components:
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Topluluk Örnekleri
-- [Azure Örnekleri AZD Şablonları](https://github.com/Azure-Samples/azd-templates)
-- [Microsoft Foundry Şablonları](https://github.com/Azure/ai-foundry-templates)
-- [Azure Developer CLI Galerisi](https://azure.github.io/awesome-azd/)
-- [C# ve Azure SQL ile Todo Uygulaması](https://github.com/Azure-Samples/todo-csharp-sql)
-- [Python ve MongoDB ile Todo Uygulaması](https://github.com/Azure-Samples/todo-python-mongo)
-- [Node.js ve PostgreSQL ile Todo Uygulaması](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
+- [Microsoft Foundry Templates](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
+- [Todo App with C# and Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
+- [Todo App with Python and MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
+- [Todo App with Node.js and PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
 - [C# API ile React Web Uygulaması](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
-- [Azure Container Apps İş](https://github.com/Azure-Samples/container-apps-jobs)
+- [Azure Container Apps Görevi](https://github.com/Azure-Samples/container-apps-jobs)
 - [Java ile Azure Functions](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### En İyi Uygulamalar
-- [Azure Well-Architected Çerçevesi](https://learn.microsoft.com/en-us/azure/well-architected/)
-- [Bulut Benimseme Çerçevesi](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Cloud Adoption Framework](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
 ## 🤝 Örnek Katkıları
 
-Paylaşacak yararlı bir örneğiniz mi var? Katkılara açığız!
+Paylaşacak faydalı bir örneğiniz mi var? Katkılarınızı bekliyoruz!
 
-### Gönderim Yönergeleri
-1. Belirlenmiş dizin yapısını izleyin
-2. Kapsamlı bir README.md ekleyin
-3. Yapılandırma dosyalarına yorum ekleyin
-4. Göndermeden önce kapsamlı test yapın
+### Gönderim Kuralları
+1. Belirlenmiş dizin yapısını takip edin
+2. Kapsamlı bir README.md dahil edin
+3. Yapılandırma dosyalarına açıklamalar ekleyin
+4. Göndermeden önce kapsamlı şekilde test edin
 5. Maliyet tahminleri ve önkoşulları ekleyin
 
 ### Örnek Şablon Yapısı
@@ -611,37 +612,37 @@ example-name/
 
 ---
 
-**Pro İpucu**: Teknoloji yığınınıza uyan en basit örnekle başlayın, ardından kademeli olarak daha karmaşık senaryolara ilerleyin. Her örnek, önceki örneklerdeki kavramların üzerine kuruludur!
+**İpucu**: Teknoloji yığınına en uygun en basit örnekle başlayın, ardından kademeli olarak daha karmaşık senaryolara geçin. Her örnek önceki örneklerin kavramları üzerine inşa edilir!
 
 ## 🚀 Başlamaya Hazır mısınız?
 
 ### Öğrenme Yolunuz
 
 1. **Tamamen Yeni Başlayan mı?** → [Flask API](../../../examples/container-app/simple-flask-api) ile başlayın (⭐, 20 dk)
-2. **Temel AZD Bilginiz mi var?** → [Mikroservisler](../../../examples/container-app/microservices) deneyin (⭐⭐⭐⭐, 60 dk)
-3. **Yapay Zeka Uygulamaları mı Geliştiriyorsunuz?** → [Microsoft Foundry Models Chat](../../../examples/azure-openai-chat) ile başlayın (⭐⭐, 35 dk) veya inceleyin [Retail Multi-Agent](retail-scenario.md) (⭐⭐⭐⭐, 2+ saat)
-4. **Belirli Bir Teknoloji Yığını mı Gerekiyor?** → Üstteki [Doğru Örneği Bulma](#-finding-the-right-example) bölümünü kullanın
+2. **Temel AZD Bilginiz mi Var?** → [Microservices](../../../examples/container-app/microservices) deneyin (⭐⭐⭐⭐, 60 dk)
+3. **Yapay Zeka Uygulamaları mı Geliştiriyorsunuz?** → [Microsoft Foundry Models Chat](../../../examples/azure-openai-chat) ile başlayın (⭐⭐, 35 dk) veya [Retail Multi-Agent](retail-scenario.md) keşfedin (⭐⭐⭐⭐, 2+ saat)
+4. **Belirli Bir Teknoloji Yığınına mı İhtiyacınız Var?** → Yukarıdaki [Doğru Örneği Bulma](#-finding-the-right-example) bölümünü kullanın
 
 ### Sonraki Adımlar
 
-- ✅ Yukarıdaki [Önkoşullar](#önkoşullar) bölümünü gözden geçirin
-- ✅ Beceri seviyenize uygun bir örnek seçin (bkz. [Karmaşıklık Açıklaması](#karmaşıklık-derecelendirme-açıklaması))
-- ✅ Dağıtmadan önce örneğin README dosyasını dikkatle okuyun
-- ✅ Test ettikten sonra `azd down` çalıştırmayı hatırlatacak bir hatırlatıcı ayarlayın
-- ✅ Deneyiminizi GitHub Issues veya Discussions aracılığıyla paylaşın
+- ✅ Yukarıdaki [Önkoşulları](#ön-koşullar) gözden geçirin
+- ✅ Beceri seviyenize uygun bir örnek seçin (bkz. [Karmaşıklık Açıklaması](#karmaşıklık-derecesi-açıklaması))
+- ✅ Dağıtmadan önce örneğin README dosyasını iyice okuyun
+- ✅ Testten sonra `azd down` çalıştırmayı hatırlatacak bir hatırlatıcı ayarlayın
+- ✅ Deneyiminizi GitHub Issues veya Discussions üzerinden paylaşın
 
-### Yardım mı Gerekiyor?
+### Yardıma mı İhtiyacınız Var?
 
-- 📖 [SSS](../resources/faq.md) - Yaygın sorulara cevaplar
-- 🐛 [Sorun Giderme Rehberi](../docs/chapter-07-troubleshooting/common-issues.md) - Dağıtım sorunlarını giderin
+- 📖 [SSS](../resources/faq.md) - Sık sorulan soruların yanıtları
+- 🐛 [Sorun Giderme Kılavuzu](../docs/chapter-07-troubleshooting/common-issues.md) - Dağıtım sorunlarını giderin
 - 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - Topluluğa sorun
-- 📚 [Çalışma Kılavuzu](../resources/study-guide.md) - Öğreniminizi pekiştirin
+- 📚 [Çalışma Rehberi](../resources/study-guide.md) - Öğreniminizi pekiştirin
 
 ---
 
 **Gezinme**
 - **📚 Kurs Ana Sayfası**: [AZD For Beginners](../README.md)
-- **📖 Çalışma Materyalleri**: [Çalışma Kılavuzu](../resources/study-guide.md) | [Hızlı Başvuru](../resources/cheat-sheet.md) | [Sözlük](../resources/glossary.md)
+- **📖 Çalışma Materyalleri**: [Çalışma Rehberi](../resources/study-guide.md) | [Hızlı Başvuru](../resources/cheat-sheet.md) | [Sözlük](../resources/glossary.md)
 - **🔧 Kaynaklar**: [SSS](../resources/faq.md) | [Sorun Giderme](../docs/chapter-07-troubleshooting/common-issues.md)
 
 ---
@@ -651,6 +652,6 @@ example-name/
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Bu belge, [Co-op Translator](https://github.com/Azure/co-op-translator) adlı yapay zeka çeviri hizmeti kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belgenin ana dilindeki sürümü yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi tavsiye edilir. Bu çevirinin kullanımı sonucunda ortaya çıkabilecek herhangi bir yanlış anlama veya yanlış yorumlama nedeniyle sorumluluk kabul etmiyoruz.
+**Feragatname**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

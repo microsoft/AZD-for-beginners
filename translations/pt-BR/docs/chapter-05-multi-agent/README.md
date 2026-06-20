@@ -1,32 +1,34 @@
-# Chapter 5: Multi-Agent AI Solutions
+# Capítulo 5: Soluções de IA Multiagente
 
 **📚 Curso**: [AZD For Beginners](../../README.md) | **⏱️ Duração**: 2-3 horas | **⭐ Complexidade**: Avançado
 
 ---
 
-## Overview
+## Visão geral
 
-This chapter covers advanced multi-agent architecture patterns, agent orchestration, and production-ready AI deployments for complex scenarios.
+Este capítulo aborda padrões avançados de arquitetura multiagente, orquestração de agentes e implantações de IA prontas para produção para cenários complexos.
 
-> Validated against `azd 1.23.12` in March 2026.
+> Validado contra `azd 1.25.6` em junho de 2026.
 
-## Learning Objectives
+## Objetivos de aprendizagem
 
-By completing this chapter, you will:
-- Understand multi-agent architecture patterns
-- Deploy coordinated AI agent systems
-- Implement agent-to-agent communication
-- Build production-ready multi-agent solutions
+Ao concluir este capítulo, você:
+- Entender padrões de arquitetura multiagente
+- Implantar sistemas coordenados de agentes de IA
+- Implementar comunicação entre agentes
+- Construir soluções multiagente prontas para produção
 
 ---
 
-## 📚 Lessons
+## 📚 Lições
 
-| # | Lesson | Description | Time |
+| # | Lição | Descrição | Tempo |
 |---|--------|-------------|------|
-| 1 | [Solução Multi-Agente de Varejo](../../examples/retail-scenario.md) | Complete implementation walkthrough | 90 min |
-| 2 | [Padrões de Coordenação](../chapter-06-pre-deployment/coordination-patterns.md) | Agent orchestration strategies | 30 min |
-| 3 | [Implantação com Template ARM](../../examples/retail-multiagent-arm-template/README.md) | One-click deployment | 30 min |
+| 1 | [Multi-Agent Basics](multi-agent-basics.md) | Prático: implantar um app multiagente funcional com `azd up` | 45 min |
+| 2 | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) | Estratégias de orquestração de agentes (continua no Capítulo 6) | 30 min |
+| 3 | [ARM Template Deployment](../../examples/retail-multiagent-arm-template/README.md) | Exemplo de implantação com um clique | 30 min |
+
+> **Comece pela Lição 1.** É a única lição totalmente prática e implantável neste capítulo. A Lição 2 está no Capítulo 6 (é compartilhada com o planejamento pré-implantação), e a [Retail Multi-Agent Solution](../../examples/retail-scenario.md) é um blueprint de arquitetura — uma referência de design, não um modelo de um único comando.
 
 ---
 
@@ -43,36 +45,37 @@ azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **Qual abordagem?** Use `azd init --template` to start from a working sample. Use `azd ai agent init` when you have your own agent manifest. See the [referência do AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for full details.
+> **Qual abordagem?** Use `azd init --template` para começar a partir de um exemplo funcional. Use `azd ai agent init` quando você tiver seu próprio manifesto de agente. Veja o [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) para detalhes completos.
 
 ---
 
-## 🤖 Arquitetura Multi-Agente
+## 🤖 Arquitetura Multiagente
 
 ```mermaid
 graph TD
     Orchestrator[Agente Orquestrador<br/>Encaminha solicitações, gerencia o fluxo de trabalho] --> Customer[Agente do Cliente<br/>Consultas do usuário, preferências]
     Orchestrator --> Inventory[Agente de Inventário<br/>Níveis de estoque, pedidos]
 ```
+
 ---
 
-## 🎯 Solução em Destaque: Multi-Agente de Varejo
+## 🎯 Solução em destaque: Multiagente para Varejo
 
-The [Solução Multi-Agente de Varejo](../../examples/retail-scenario.md) demonstrates:
+A [Retail Multi-Agent Solution](../../examples/retail-scenario.md) demonstra:
 
-- **Agente do Cliente**: Gerencia interações com o usuário e preferências
-- **Agente de Inventário**: Gerencia estoque e processamento de pedidos
+- **Agente do Cliente**: Lida com interações e preferências do usuário
+- **Agente de Estoque**: Gerencia estoque e processamento de pedidos
 - **Orquestrador**: Coordena entre os agentes
 - **Memória Compartilhada**: Gerenciamento de contexto entre agentes
 
 ### Serviços Utilizados
 
-| Service | Purpose |
+| Serviço | Finalidade |
 |---------|---------|
 | Microsoft Foundry Models | Compreensão de linguagem |
 | Azure AI Search | Catálogo de produtos |
 | Cosmos DB | Estado e memória do agente |
-| Container Apps | Hospedagem dos agentes |
+| Container Apps | Hospedagem de agentes |
 | Application Insights | Monitoramento |
 
 ---
@@ -81,20 +84,20 @@ The [Solução Multi-Agente de Varejo](../../examples/retail-scenario.md) demons
 
 | Direction | Chapter |
 |-----------|---------|
-| **Previous** | [Capítulo 4: Infraestrutura](../chapter-04-infrastructure/README.md) |
-| **Next** | [Capítulo 6: Pré-Implantação](../chapter-06-pre-deployment/README.md) |
+| **Previous** | [Chapter 4: Infrastructure](../chapter-04-infrastructure/README.md) |
+| **Next** | [Chapter 6: Pre-Deployment](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 Recursos Relacionados
 
-- [Guia de Agentes de IA](../chapter-02-ai-development/agents.md)
-- [Práticas de IA para Produção](../chapter-08-production/production-ai-practices.md)
-- [Solução de Problemas de IA](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [AI Agents Guide](../chapter-02-ai-development/agents.md)
+- [Production AI Practices](../chapter-08-production/production-ai-practices.md)
+- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+**Aviso Legal**:
+Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, por favor, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

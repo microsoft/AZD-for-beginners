@@ -1,26 +1,26 @@
-# 2. Επικύρωση προτύπου
+# 2. Επικύρωση ενός προτύπου
 
-> Επικυρώθηκε με `azd 1.23.12` τον Μάρτιο του 2026.
+> Επικυρώθηκε έναντι `azd 1.25.6` τον Ιούνιο του 2026.
 
-!!! tip "ΣΤΟ ΤΕΛΟΣ ΑΥΤΟΥ ΤΟΥ ΜΟΝΤΟΥΛΟΥ ΘΑ ΜΠΟΡΕΙΤΕ ΝΑ"
+!!! tip "ΣΤΟ ΤΕΛΟΣ ΑΥΤΟΥ ΤΟΥ ΜΟΝΑΔΙΟΥ ΘΑ ΜΠΟΡΕΙΤΕ ΝΑ"
 
-    - [ ] Αναλύσετε την αρχιτεκτονική λύσης AI
-    - [ ] Κατανοήσετε τη ροή εργασίας ανάπτυξης με το AZD
+    - [ ] Αναλύσετε την Αρχιτεκτονική της Λύσης Τεχνητής Νοημοσύνης
+    - [ ] Κατανοήσετε τη ροή ανάπτυξης AZD
     - [ ] Χρησιμοποιήσετε το GitHub Copilot για βοήθεια στη χρήση του AZD
-    - [ ] **Εργαστήριο 2:** Αναπτύξετε και Επικυρώσετε το πρότυπο AI Agents
+    - [ ] **Εργαστήριο 2:** Ανάπτυξη & Επικύρωση του προτύπου AI Agents
 
 ---
 
 
 ## 1. Εισαγωγή
 
-The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) or `azd` is an open-source commandline tool that streamlines the developer workflow when building and deploying applications to Azure. 
+Το [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) ή `azd` είναι ένα εργαλείο γραμμής εντολών ανοιχτού κώδικα που απλοποιεί τη ροή εργασίας των προγραμματιστών κατά την κατασκευή και ανάπτυξη εφαρμογών στο Azure. 
 
-[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) are standardized repositories that include sample application code, _infrastructure-as-code_ assets, and `azd` configuration files for a cohesive solution architecture. Provisioning the infrastructure becomes as simple as an `azd provision` command - while using `azd up` allows you to provision infrastructure **and** deploy your application at one shot!
+[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) είναι τυποποιημένα αποθετήρια που περιλαμβάνουν δείγματα κώδικα εφαρμογής, _υποδομή-ως-κώδικα_ στοιχεία, και αρχεία ρύθμισης `azd` για μια συνεκτική αρχιτεκτονική λύσης. Η παροχή της υποδομής γίνεται τόσο απλή όσο μια εντολή `azd provision` - ενώ η χρήση του `azd up` σας επιτρέπει να προμηθεύσετε υποδομή **και** να αναπτύξετε την εφαρμογή σας με ένα βήμα!
 
-As a result, jumpstarting your application development process can be as simple as finding the right _AZD Starter template_ that comes closest to your application and infrastructure needs - then customizing the repository to suit your scenario requirements.
+Ως αποτέλεσμα, η εκκίνηση της διαδικασίας ανάπτυξης της εφαρμογής σας μπορεί να είναι τόσο απλή όσο το να βρείτε το κατάλληλο _AZD Starter template_ που ταιριάζει περισσότερο στις ανάγκες εφαρμογής και υποδομής σας - και στη συνέχεια να προσαρμόσετε το αποθετήριο για να καλύψετε τις απαιτήσεις του σεναρίου σας.
 
-Before we begin, let's make sure you have the Azure Developer CLI installed.
+Πριν ξεκινήσουμε, ας βεβαιωθούμε ότι έχετε εγκαταστήσει το Azure Developer CLI.
 
 1. Open a VS Code terminal and type this command:
 
@@ -28,32 +28,32 @@ Before we begin, let's make sure you have the Azure Developer CLI installed.
       azd version
       ```
 
-1. You should see something like this!
+1. Θα δείτε κάτι σαν κι αυτό!
 
       ```bash title="" linenums="0"
-      azd version 1.23.12 (commit <current-build>)
+      azd version 1.25.6 (commit <current-build>)
       ```
 
-**Τώρα είστε έτοιμοι να επιλέξετε και να αναπτύξετε ένα πρότυπο με το azd**
+**Τώρα είστε έτοιμοι να επιλέξετε και να αναπτύξετε ένα πρότυπο με azd**
 
 ---
 
 ## 2. Επιλογή Προτύπου
 
-The Microsoft Foundry platform comes with a [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that cover popular solution scenarios like _multi-agent workflow atomation_ and _multi-modal content processing_. You can also discover these templates by visiting the Microsoft Foundry portal.
+Η πλατφόρμα Microsoft Foundry έρχεται με ένα [σετ συνιστώμενων προτύπων AZD](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) που καλύπτουν δημοφιλή σενάρια λύσεων όπως _αυτοματισμός ροής εργασίας πολλαπλών πρακτόρων_ και _πολυτροπική επεξεργασία περιεχομένου_. Μπορείτε επίσης να ανακαλύψετε αυτά τα πρότυπα επισκεπτόμενοι το portal του Microsoft Foundry.
 
-1. Visit [https://ai.azure.com/templates](https://ai.azure.com/templates)
-1. Log into the Microsoft Foundry portal when prompted - you will see something like this.
+1. Επισκεφθείτε [https://ai.azure.com/templates](https://ai.azure.com/templates)
+1. Συνδεθείτε στο portal του Microsoft Foundry όταν σας ζητηθεί - θα δείτε κάτι σαν κι αυτό.
 
 ![Επιλογή](../../../../../translated_images/el/01-pick-template.60d2d5fff5ebc374.webp)
 
 
-The **Basic** options are your starter templates:
+Οι επιλογές **Basic** είναι τα πρότυπα εκκίνησής σας:
 
-1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) that deploys a basic chat application _with your data_ to Azure Container Apps. Use this to explore a basic AI chatbot scenario.
-1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) that also deploys a standard AI Agent (with the Foundry Agents). Use this to get familiar with agentic AI solutions involving tools and models.
+1. [ ] [Ξεκινήστε με το AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) που αναπτύσσει μια βασική εφαρμογή συνομιλίας _με τα δεδομένα σας_ στο Azure Container Apps. Χρησιμοποιήστε το για να εξερευνήσετε ένα βασικό σενάριο chatbot AI.
+1. [X] [Ξεκινήστε με τους AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) που επίσης αναπτύσσει έναν τυπικό AI Agent (με τους Foundry Agents). Χρησιμοποιήστε το για να εξοικειωθείτε με λύσεις AI που βασίζονται σε πράκτορες και περιλαμβάνουν εργαλεία και μοντέλα.
 
-Visit the second link in a new browser tab (or click `Open in GitHub` for the related card). You should see the repository for this AZD Template. Take a minute to explore the README. The application architecture looks like this:
+Επισκεφθείτε τον δεύτερο σύνδεσμο σε μια νέα καρτέλα του προγράμματος περιήγησης (ή κάντε κλικ στο `Open in GitHub` για την σχετική κάρτα). Θα δείτε το αποθετήριο για αυτό το AZD Template. Πάρτε ένα λεπτό για να εξερευνήσετε το README. Η αρχιτεκτονική της εφαρμογής μοιάζει με αυτό:
 
 ![Αρχιτεκτονική](../../../../../translated_images/el/architecture.8cec470ec15c65c7.webp)
 
@@ -61,14 +61,14 @@ Visit the second link in a new browser tab (or click `Open in GitHub` for the re
 
 ## 3. Ενεργοποίηση Προτύπου
 
-Let's try to deploy this template and make sure it is valid. We'll follow the guidelines in the [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) section.
+Ας δοκιμάσουμε να αναπτύξουμε αυτό το πρότυπο και να βεβαιωθούμε ότι είναι έγκυρο. Θα ακολουθήσουμε τις οδηγίες στην ενότητα [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started).
 
-1. Choose a working environment for the template repository:
+1. Επιλέξτε ένα περιβάλλον εργασίας για το αποθετήριο προτύπου:
 
-      - **GitHub Codespaces**: Click [this link](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) and confirm `Create codespace`
-      - **Local clone or dev container**: Clone `Azure-Samples/get-started-with-ai-agents` and open it in VS Code
+      - **GitHub Codespaces**: Κάντε κλικ [σε αυτόν τον σύνδεσμο](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) και επιβεβαιώστε `Create codespace`
+      - **Τοπικό clone ή dev container**: Κλωνοποιήστε `Azure-Samples/get-started-with-ai-agents` και ανοίξτε το στο VS Code
 
-1. Wait until the VS Code terminal is ready, then type the following command:
+1. Περιμένετε μέχρι το τερματικό του VS Code να είναι έτοιμο, στη συνέχεια πληκτρολογήστε την ακόλουθη εντολή:
 
    ```bash title="" linenums="0"
    azd up
@@ -77,43 +77,43 @@ Let's try to deploy this template and make sure it is valid. We'll follow the gu
 Complete the workflow steps that this will trigger:
 
 1. Θα σας ζητηθεί να συνδεθείτε στο Azure - ακολουθήστε τις οδηγίες για να αυθεντικοποιηθείτε
-1. Εισαγάγετε ένα μοναδικό όνομα περιβάλλοντος για εσάς - π.χ., εγώ χρησιμοποίησα `nitya-mshack-azd`
+1. Εισάγετε ένα μοναδικό όνομα περιβάλλοντος για εσάς - π.χ., εγώ χρησιμοποίησα `nitya-mshack-azd`
 1. Αυτό θα δημιουργήσει έναν φάκελο `.azure/` - θα δείτε έναν υποφάκελο με το όνομα του περιβάλλοντος
 1. Θα σας ζητηθεί να επιλέξετε ένα όνομα συνδρομής - επιλέξτε το προεπιλεγμένο
 1. Θα σας ζητηθεί μια τοποθεσία - χρησιμοποιήστε `East US 2`
 
-Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
+Τώρα, περιμένετε να ολοκληρωθεί η παροχή υποδομής. **Αυτό διαρκεί 10-15 λεπτά**
 
-1. When done, your console will show a SUCCESS message like this:
+1. Όταν ολοκληρωθεί, το κονσόλα σας θα δείξει ένα μήνυμα SUCCESS όπως το παρακάτω:
       ```bash title="" linenums="0"
       SUCCESS: Your up workflow to provision and deploy to Azure completed in 10 minutes 17 seconds.
       ```
-1. Your Azure Portal will now have a provisioned resource group with that env name:
+1. Το Azure Portal σας θα έχει τώρα μια προμηθευμένη ομάδα πόρων με αυτό το όνομα περιβάλλοντος:
 
       ![Υποδομή](../../../../../translated_images/el/02-provisioned-infra.46c706b14f56e0bf.webp)
 
-1. **Τώρα είστε έτοιμοι να επικυρώσετε την αναπτυγμένη υποδομή και την εφαρμογή**.
+1. **Τώρα είστε έτοιμοι να επικυρώσετε την αναπτυγμένη υποδομή και εφαρμογή**.
 
 ---
 
 ## 4. Επικύρωση Προτύπου
 
-1. Visit Azure Portal [Resource Groups](https://portal.azure.com/#browse/resourcegroups) page - log in when prompted
-1. Click on RG for your environment name - you see the page above
+1. Επισκεφθείτε τη σελίδα [Resource Groups](https://portal.azure.com/#browse/resourcegroups) στο Azure Portal - συνδεθείτε όταν σας ζητηθεί
+1. Κάντε κλικ στο RG για το όνομα του περιβάλλοντός σας - θα δείτε τη σελίδα παραπάνω
 
-      - click on the Azure Container Apps resource
-      - click on the Application Url in the _Essentials_ section (top right)
+      - κάντε κλικ στο πόρο Azure Container Apps
+      - κάντε κλικ στη Διεύθυνση URL Εφαρμογής στην ενότητα _Βασικά_ (επάνω δεξιά)
 
-1. You should see a hosted application front-end UI like this:
+1. Θα δείτε ένα φιλοξενούμενο front-end UI της εφαρμογής όπως αυτό:
 
    ![Εφαρμογή](../../../../../translated_images/el/03-test-application.471910da12c3038e.webp)
 
-1. Try asking a couple of [sample questions](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
+1. Δοκιμάστε να κάνετε μερικές από τις [πρότυπες ερωτήσεις](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
-      1. Ask: ```Ποια είναι η πρωτεύουσα της Γαλλίας;``` 
-      1. Ask: ```Ποιο είναι το καλύτερο αντίσκηνο κάτω από $200 για δύο άτομα, και τι χαρακτηριστικά περιλαμβάνει;```
+      1. Ρωτήστε: ```What is the capital of France?``` 
+      1. Ρωτήστε: ```What's the best tent under $200 for two people, and what features does it include?```
 
-1. You should get answers similar to what is shown below. _But how does this work?_ 
+1. Θα λάβετε απαντήσεις παρόμοιες με αυτές που εμφανίζονται παρακάτω. _Αλλά πώς λειτουργεί αυτό;_ 
 
       ![Εφαρμογή](../../../../../translated_images/el/03-test-question.521c1e863cbaddb6.webp)
 
@@ -121,64 +121,64 @@ Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
 
 ## 5.  Επικύρωση Πράκτορα
 
-The Azure Container App deploys an endpoint that connects to the AI Agent provisioned in the Microsoft Foundry project for this template. Let's take a look at what that means.
+Η Azure Container App αναπτύσσει ένα endpoint που συνδέεται με τον AI Agent που προμηθεύτηκε στο έργο Microsoft Foundry για αυτό το πρότυπο. Ας δούμε τι σημαίνει αυτό.
 
-1. Return to the Azure Portal _Overview_ page for your resource group
+1. Επιστρέψτε στη σελίδα _Overview_ στο Azure Portal για την ομάδα πόρων σας
 
-1. Click on the `Microsoft Foundry` resource in that list
+1. Κάντε κλικ στον πόρο `Microsoft Foundry` στη λίστα
 
-1. You should see this. Click the `Go to Microsoft Foundry Portal` button. 
+1. Θα δείτε αυτό. Κάντε κλικ στο κουμπί `Go to Microsoft Foundry Portal`. 
    ![Foundry](../../../../../translated_images/el/04-view-foundry-project.fb94ca41803f28f3.webp)
 
-1. You should see the Foundry Project page for your AI application
+1. Θα δείτε τη σελίδα του έργου Foundry για την εφαρμογή AI σας
    ![Έργο](../../../../../translated_images/el/05-visit-foundry-portal.d734e98135892d7e.webp)
 
-1. Click on `Agents` - you see the default Agent provisioned in your project
+1. Κάντε κλικ στο `Agents` - θα δείτε τον προεπιλεγμένο Πράκτορα που έχει προμηθευτεί στο έργο σας
    ![Πράκτορες](../../../../../translated_images/el/06-visit-agents.bccb263f77b00a09.webp)
 
-1. Select it - and you see the Agent details. Note the following:
+1. Επιλέξτε τον - και θα δείτε τις λεπτομέρειες του Πράκτορα. Σημειώστε τα εξής:
 
-      - The agent uses File Search by default (always)
-      - The agent `Knowledge` indicates it has 32 files uploaded (for file search)
-      ![Πράκτορας](../../../../../translated_images/el/07-view-agent-details.0e049f37f61eae62.webp)
+      - Ο πράκτορας χρησιμοποιεί File Search από προεπιλογή (πάντα)
+      - Το `Knowledge` του πράκτορα δείχνει ότι έχουν φορτωθεί 32 αρχεία (για file search)
+      ![Πράκτορες](../../../../../translated_images/el/07-view-agent-details.0e049f37f61eae62.webp)
 
-1. Look for the `Data+indexes` option in the left menu and click for details. 
+1. Ψάξτε την επιλογή `Data+indexes` στο αριστερό μενού και κάντε κλικ για λεπτομέρειες. 
 
-      - You should see the 32 data files uploaded for knowledge.
-      - These will correspond to the 12 customer files and 20 product files under `src/files` 
+      - Θα δείτε τα 32 αρχεία δεδομένων που έχουν φορτωθεί για γνώση.
+      - Αυτά θα αντιστοιχούν στα 12 αρχεία πελατών και 20 αρχεία προϊόντων κάτω από `src/files` 
       ![Δεδομένα](../../../../../translated_images/el/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
 **Επικυρώσατε τη λειτουργία του Πράκτορα!** 
 
-1. The agent responses are grounded in the knowledge in those files. 
-1. You can now ask questions related to that data, and get grounded responses.
-1. Example: `customer_info_10.json` describes the 3 purchases made by "Amanda Perez"
+1. Οι απαντήσεις του πράκτορα βασίζονται στη γνώση που περιέχεται σε αυτά τα αρχεία. 
+1. Μπορείτε τώρα να κάνετε ερωτήσεις σχετικές με αυτά τα δεδομένα και να λάβετε τεκμηριωμένες απαντήσεις.
+1. Παράδειγμα: `customer_info_10.json` περιγράφει τις 3 αγορές που έκανε η "Amanda Perez"
 
-Revisit the browser tab with the Container App endpoint and ask: `Ποια προϊόντα έχει στην ιδιοκτησία της η Amanda Perez;`. You should see something like this:
+Επιστρέψτε στην καρτέλα του προγράμματος περιήγησης με το endpoint του Container App και ρωτήστε: `What products does Amanda Perez own?`. Θα δείτε κάτι σαν αυτό:
 
 ![Δεδομένα](../../../../../translated_images/el/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
-## 6. Περιβάλλον Δοκιμών Πράκτορα
+## 6. Agent Playground
 
-Let's build a bit more intuition for the capabilities of Microsoft Foundry, by taking the Agent for a spin in the Agents Playground. 
+Ας αποκτήσουμε λίγη περισσότερη διαίσθηση για τις δυνατότητες του Microsoft Foundry, δοκιμάζοντας τον Πράκτορα στο Agents Playground. 
 
-1. Return to the `Agents` page in Microsoft Foundry - select the default agent
-1. Click the `Try in Playground` option - you should get a Playground UI like this
-1. Ask the same question: `Ποια προϊόντα έχει στην ιδιοκτησία της η Amanda Perez;`
+1. Επιστρέψτε στη σελίδα `Agents` στο Microsoft Foundry - επιλέξτε τον προεπιλεγμένο πράκτορα
+1. Κάντε κλικ στην επιλογή `Try in Playground` - θα εμφανιστεί ένα UI Playground όπως αυτό
+1. Ρωτήστε την ίδια ερώτηση: `What products does Amanda Perez own?`
 
     ![Δεδομένα](../../../../../translated_images/el/09-ask-in-playground.a1b93794f78fa676.webp)
 
-You get the same (or similar) response - but you also get additional information that you can use to understand the quality, cost, and performance of your agentic app. For example:
+Θα λάβετε την ίδια (ή παρόμοια) απάντηση - αλλά θα λάβετε επίσης επιπλέον πληροφορίες που μπορείτε να χρησιμοποιήσετε για να κατανοήσετε την ποιότητα, το κόστος και την απόδοση της agentic εφαρμογής σας. Για παράδειγμα:
 
-1. Note that the response cites data files used to "ground" the response
-1. Hover over any of these file labels - does the data match your query and displayed response?
+1. Σημειώστε ότι η απάντηση αναφέρει αρχεία δεδομένων που χρησιμοποιήθηκαν για να "εμπεδωθεί" η απάντηση
+1. Τοποθετήστε το δείκτη πάνω από οποιαδήποτε από αυτές τις ετικέτες αρχείων - τα δεδομένα ταιριάζουν με το ερώτημα και την εμφανιζόμενη απάντηση;
 
-You also see a _stats_ row below the response. 
+Επίσης βλέπετε μια σειρά _στατιστικών_ κάτω από την απάντηση. 
 
-1. Hover over any metric - e.g., Safety. You see something like this
-1. Does the assessed rating match your intuition for the response safety level?
+1. Τοποθετήστε το δείκτη πάνω από οποιοδήποτε μέτρο - π.χ., Safety. Θα δείτε κάτι σαν αυτό
+1. Εφαρμόζεται η βαθμολογία που εκτιμήθηκε στην ένδειξη ασφάλειας σύμφωνα με την δική σας εκτίμηση;
 
       ![Δεδομένα](../../../../../translated_images/el/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
@@ -186,30 +186,30 @@ You also see a _stats_ row below the response.
 
 ## 7. Ενσωματωμένη Παρατηρησιμότητα
 
-Observability is about instrumenting your application to generate data that can be used to understand, debug, and optimize, its operations. To get a sense for this:
+Η παρατηρησιμότητα αφορά τον εξοπλισμό της εφαρμογής σας ώστε να παράγει δεδομένα που μπορούν να χρησιμοποιηθούν για την κατανόηση, την αποσφαλμάτωση και τη βελτιστοποίηση των λειτουργιών της. Για να πάρετε μια αίσθηση:
 
-1. Click the `View Run Info` button - you should see this view. This is an example of [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) in action. _You can also get this view by clicking Thread Logs in the top-level menu_.
+1. Κάντε κλικ στο κουμπί `View Run Info` - θα δείτε αυτή την προβολή. Αυτή είναι ένα παράδειγμα [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) σε δράση. _Μπορείτε επίσης να λάβετε αυτή την προβολή κάνοντας κλικ στο Thread Logs στο μενού κορυφαίου επιπέδου_.
 
-   - Get a sense for the run steps and tools engaged by the agent
-   - Understand total Token count (vs. output tokens usage) for response
-   - Understand the latency and where time is being spent in execution
+   - Πάρτε μια αίσθηση για τα βήματα εκτέλεσης και τα εργαλεία που ενεργοποιήθηκαν από τον πράκτορα
+   - Κατανοήστε το συνολικό πλήθος Token (σε σχέση με τη χρήση εξόδου tokens) για την απάντηση
+   - Κατανοήστε τη λανθάνουσα κατάσταση και που δαπανάται ο χρόνος στην εκτέλεση
 
       ![Πράκτορας](../../../../../translated_images/el/10-view-run-info.b20ebd75fef6a1cc.webp)
 
-1. Click the `Metadata` tab to see additional attributes for the run, that may provide useful context for debugging issues later.   
+1. Κάντε κλικ στην καρτέλα `Metadata` για να δείτε επιπλέον χαρακτηριστικά για την εκτέλεση, που μπορεί να παρέχουν χρήσιμο πλαίσιο για αποσφαλμάτωση αργότερα.   
 
       ![Πράκτορας](../../../../../translated_images/el/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 
-1. Click the `Evaluations` tab to see auto-assessments made on the agent response. These include safety evaluations (e.g., Self-harm) and agent-specifc evaluations (e.g., Intent resolution, Task adherence).
+1. Κάντε κλικ στην καρτέλα `Evaluations` για να δείτε αυτοαξιολογήσεις που έγιναν για την απάντηση του πράκτορα. Αυτές περιλαμβάνουν αξιολογήσεις ασφάλειας (π.χ., αυτοτραυματισμός) και αξιολογήσεις ειδικές για πράκτορες (π.χ., επίλυση προθέσεων, συμμόρφωση με την εργασία).
 
       ![Πράκτορας](../../../../../translated_images/el/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
-1. Last but not least, click the `Monitoring` tab in the sidebar menu.
+1. Τέλος, κάντε κλικ στην καρτέλα `Monitoring` στο πλευρικό μενού.
 
-      - Select `Resource usage` tab in the displayed page - and view the metrics.
-      - Track application usage in terms of costs (tokens) and load (requests).
-      - Track applicaton latency to first byte (input processing) and last byte (output).
+      - Επιλέξτε την καρτέλα `Resource usage` στη σελίδα που εμφανίζεται - και δείτε τα μετρήσιμα στοιχεία.
+      - Παρακολουθήστε τη χρήση της εφαρμογής σε όρους κόστους (tokens) και φόρτου (αιτήματα).
+      - Παρακολουθήστε τη χρονική καθυστέρηση της εφαρμογής έως το πρώτο byte (επεξεργασία εισόδου) και το τελευταίο byte (έξοδος).
 
       ![Πράκτορας](../../../../../translated_images/el/13-monitoring-resources.5148015f7311807f.webp)
 
@@ -217,24 +217,24 @@ Observability is about instrumenting your application to generate data that can 
 
 ## 8. Μεταβλητές Περιβάλλοντος
 
-So far, we've walked through the deployment in the browser - and validated that our infrastructure is provisioned and the application is operational. But to work with the application _code-first_, we need to configure our local development environment with the relevant variables required to work with these resources. Using `azd` makes it easy.
+Μέχρι στιγμής, έχουμε περάσει από την ανάπτυξη στο πρόγραμμα περιήγησης - και επικυρώσαμε ότι η υποδομή μας έχει προμηθευτεί και η εφαρμογή λειτουργεί. Αλλά για να εργαστούμε με τον κώδικα της εφαρμογής _πρώτα_, πρέπει να διαμορφώσουμε το τοπικό μας περιβάλλον ανάπτυξης με τις σχετικές μεταβλητές που απαιτούνται για να λειτουργήσουμε με αυτούς τους πόρους. Η χρήση του `azd` το καθιστά εύκολο.
 
-1. The Azure Developer CLI [uses environment variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) to store and manage configuration settings for  the application deployments.
+1. Το Azure Developer CLI [χρησιμοποιεί μεταβλητές περιβάλλοντος](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) για την αποθήκευση και διαχείριση ρυθμίσεων διαμόρφωσης για τις αναπτύξεις εφαρμογών.
 
-1. Environment variables are stored in `.azure/<env-name>/.env` - this scopes them to the `env-name` environment used during deployment and helps you isolate environments between different deployment targets in the same repo.
+1. Οι μεταβλητές περιβάλλοντος αποθηκεύονται σε `.azure/<env-name>/.env` - αυτό τις περιορίζει στο περιβάλλον `env-name` που χρησιμοποιήθηκε κατά την ανάπτυξη και σας βοηθά να απομονώσετε περιβάλλοντα μεταξύ διαφορετικών στόχων ανάπτυξης στο ίδιο repo.
 
-1. Environment variables are automatically loaded by the `azd` command whenever it executes a specific command (e.g., `azd up`). Note that `azd` does not automatically read _OS-level_ environment variables (e.g., set in the shell) - instead use `azd set env` and `azd get env` to transfer information within scripts.
+1. Οι μεταβλητές περιβάλλοντος φορτώνονται αυτόματα από την εντολή `azd` όποτε εκτελείται μια συγκεκριμένη εντολή (π.χ., `azd up`). Σημειώστε ότι το `azd` δεν διαβάζει αυτόματα μεταβλητές περιβάλλοντος σε επίπεδο OS (π.χ., ορισμένες στο shell) - αντίθετα χρησιμοποιήστε `azd set env` και `azd get env` για να μεταφέρετε πληροφορίες μέσα σε scripts.
 
 
-Let's try out a few commands:
+Ας δοκιμάσουμε μερικές εντολές:
 
-1. Get all the environment variables set for `azd` in this environment:
+1. Πάρτε όλες τις μεταβλητές περιβάλλοντος που έχουν οριστεί για `azd` σε αυτό το περιβάλλον:
 
       ```bash title="" linenums="0"
       azd env get-values
       ```
       
-      You see something like:
+      Θα δείτε κάτι σαν:
 
       ```bash title="" linenums="0"
       AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4.1-mini"
@@ -244,19 +244,19 @@ Let's try out a few commands:
       ...
       ```
 
-1. Get a specific value - e.g., I want to know if we set the `AZURE_AI_AGENT_MODEL_NAME` value
+1. Πάρτε μια συγκεκριμένη τιμή - π.χ., θέλω να ξέρω αν ορίσαμε την τιμή `AZURE_AI_AGENT_MODEL_NAME`
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
       
-      You see something like this - it was not set by default!
+      Θα δείτε κάτι σαν αυτό - δεν είχε οριστεί από προεπιλογή!
 
       ```bash title="" linenums="0"
       ERROR: key 'AZURE_AI_AGENT_MODEL_NAME' not found in the environment values
       ```
 
-1. Set a new environment variable for `azd`. Here, we update the agent model name. _Note: any changes made will be immediately reflected in the `.azure/<env-name>/.env` file.
+1. Ορίστε μια νέα μεταβλητή περιβάλλοντος για το `azd`. Εδώ, ενημερώνουμε το όνομα του μοντέλου πράκτορα. _Σημείωση: οποιεσδήποτε αλλαγές γίνουν θα αντικατοπτριστούν αμέσως στο αρχείο `.azure/<env-name>/.env`._
 
       ```bash title="" linenums="0"
       azd env set AZURE_AI_AGENT_MODEL_NAME gpt-4.1
@@ -264,35 +264,35 @@ Let's try out a few commands:
       azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
       ```
 
-      Now, we should find the value is set:
+      Τώρα, θα πρέπει να βρούμε ότι η τιμή έχει οριστεί:
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
 
-1. Note that some resources are persistent (e.g., model deployments) and will require more than just an `azd up` to force the redeployment. Let's try tearing down the original deployment and redeploying with changed env vars.
+1. Σημειώστε ότι κάποιοι πόροι είναι επίμονοι (π.χ., αναπτύξεις μοντέλων) και θα απαιτήσουν περισσότερο από ένα απλό `azd up` για να αναγκάσουν την επανα-ανάπτυξη. Ας δοκιμάσουμε να διαλύσουμε την αρχική ανάπτυξη και να επανααναπτύξουμε με αλλαγμένες μεταβλητές περιβάλλοντος.
 
-1. **Refresh** If you had previously deployed infrastructure using an azd template - you can _refresh_ the state of your local environment variables based on the current state of your Azure deployment using this command:
+1. **Refresh** Αν είχατε προηγουμένως αναπτύξει υποδομή χρησιμοποιώντας ένα πρότυπο azd - μπορείτε να _refresh_ την κατάσταση των τοπικών μεταβλητών περιβάλλοντος βασισμένη στην τρέχουσα κατάσταση της ανάπτυξης σας στο Azure χρησιμοποιώντας αυτή την εντολή:
 
       ```bash title="" linenums="0"
       azd env refresh
       ```
 
-      Αυτός είναι ένας ισχυρός τρόπος για να _συγχρονίσετε_ τις μεταβλητές περιβάλλοντος σε δύο ή περισσότερα τοπικά περιβάλλοντα ανάπτυξης (π.χ., ομάδα με πολλούς προγραμματιστές) - επιτρέποντας στην αναπτυγμένη υποδομή να λειτουργεί ως η απόλυτη πηγή αλήθειας για την κατάσταση των μεταβλητών περιβάλλοντος. Τα μέλη της ομάδας απλώς _ανανεώνουν_ τις μεταβλητές για να επανέλθουν σε συγχρονισμό.
+      Πρόκειται για έναν ισχυρό τρόπο να _συγχρονίσετε_ τις μεταβλητές περιβάλλοντος ανάμεσα σε δύο ή περισσότερα τοπικά περιβάλλοντα ανάπτυξης (π.χ., ομάδα με πολλούς προγραμματιστές) - επιτρέποντας στην αναπτυγμένη υποδομή να λειτουργεί ως η έγκυρη πηγή για την κατάσταση των μεταβλητών περιβάλλοντος. Τα μέλη της ομάδας απλώς _ανανέωνουν_ τις μεταβλητές για να επανέλθουν σε συγχρονισμό.
 
 ---
 
 ## 9. Συγχαρητήρια 🏆
 
-Μόλις ολοκληρώσατε μια ολοκληρωμένη ροή εργασίας όπου:
+Μόλις ολοκληρώσατε μια ολοκληρωμένη ροή εργασίας στην οποία:
 
 - [X] Επιλέξατε το πρότυπο AZD που θέλετε να χρησιμοποιήσετε
-- [X] Άνοιξατε το πρότυπο σε ένα υποστηριζόμενο περιβάλλον ανάπτυξης
+- [X] Ανοίξατε το πρότυπο σε ένα υποστηριζόμενο περιβάλλον ανάπτυξης
 - [X] Αναπτύξατε το πρότυπο και επιβεβαιώσατε ότι λειτουργεί
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Το παρόν έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης με τεχνητή νοημοσύνη [Co-op Translator](https://github.com/Azure/co-op-translator). Ενώ επιδιώκουμε την ακρίβεια, παρακαλούμε να γνωρίζετε ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στην αρχική του γλώσσα πρέπει να θεωρείται η επίσημη πηγή. Για κρίσιμες πληροφορίες συνιστάται επαγγελματική μετάφραση από ανθρώπινο μεταφραστή. Δεν φέρουμε ευθύνη για τυχόν παρανοήσεις ή λανθασμένες ερμηνείες που προκύψουν από τη χρήση αυτής της μετάφρασης.
+**Αποποίηση ευθυνών**:
+Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης με τεχνητή νοημοσύνη [Co-op Translator](https://github.com/Azure/co-op-translator). Ενώ επιδιώκουμε την ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

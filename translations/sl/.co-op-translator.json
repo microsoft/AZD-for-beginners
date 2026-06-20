@@ -12,8 +12,8 @@
     "language_code": "sl"
   },
   "README.md": {
-    "original_hash": "c947dfc9c55b17f8f90b1a0f3f815a42",
-    "translation_date": "2026-04-01T19:03:13+00:00",
+    "original_hash": "e7f0643ffc3f1653dc754bd9f91e6c26",
+    "translation_date": "2026-06-17T08:38:12+00:00",
     "source_file": "README.md",
     "language_code": "sl"
   },
@@ -30,8 +30,8 @@
     "language_code": "sl"
   },
   "changelog.md": {
-    "original_hash": "fb80e7751bcc279c56d08c2082725b2d",
-    "translation_date": "2026-04-01T19:24:52+00:00",
+    "original_hash": "35c242a9f109e51b5b4bdaf534a26b84",
+    "translation_date": "2026-06-17T08:48:14+00:00",
     "source_file": "changelog.md",
     "language_code": "sl"
   },
@@ -42,20 +42,32 @@
     "language_code": "sl"
   },
   "docs/chapter-01-foundation/README.md": {
-    "original_hash": "88d5c7035b26412c875b242609c0205e",
-    "translation_date": "2026-04-01T21:18:54+00:00",
+    "original_hash": "91d1cfab9a74183001a17661643c4f08",
+    "translation_date": "2026-06-17T09:42:31+00:00",
     "source_file": "docs/chapter-01-foundation/README.md",
     "language_code": "sl"
   },
   "docs/chapter-01-foundation/azd-basics.md": {
-    "original_hash": "c1dcb04cb937007cecc93bfe4764c81c",
-    "translation_date": "2026-04-01T21:10:04+00:00",
+    "original_hash": "0fc7e6760b9baaa8e3f77c3df44bd539",
+    "translation_date": "2026-06-17T09:58:14+00:00",
     "source_file": "docs/chapter-01-foundation/azd-basics.md",
     "language_code": "sl"
   },
+  "docs/chapter-01-foundation/bring-your-own-app.md": {
+    "original_hash": "d9b10b1aff0a2e46ab2df7ec561781e2",
+    "translation_date": "2026-06-17T10:49:57+00:00",
+    "source_file": "docs/chapter-01-foundation/bring-your-own-app.md",
+    "language_code": "sl"
+  },
+  "docs/chapter-01-foundation/dev-containers.md": {
+    "original_hash": "815b6b0653721de21bfea8b5241717b4",
+    "translation_date": "2026-06-17T10:45:18+00:00",
+    "source_file": "docs/chapter-01-foundation/dev-containers.md",
+    "language_code": "sl"
+  },
   "docs/chapter-01-foundation/first-project.md": {
-    "original_hash": "c898efe5a4aca578617d4c8b3ac4b422",
-    "translation_date": "2026-04-01T21:17:29+00:00",
+    "original_hash": "bb756ca0754c1bf256c6651e59c17750",
+    "translation_date": "2026-06-17T09:46:56+00:00",
     "source_file": "docs/chapter-01-foundation/first-project.md",
     "language_code": "sl"
   },
@@ -66,14 +78,14 @@
     "language_code": "sl"
   },
   "docs/chapter-02-ai-development/README.md": {
-    "original_hash": "fb77a3616d8b4c792b8e3ba4542918ec",
-    "translation_date": "2026-04-01T20:19:10+00:00",
+    "original_hash": "07a5664e15b4e1ab3195745f214d8381",
+    "translation_date": "2026-06-17T10:14:50+00:00",
     "source_file": "docs/chapter-02-ai-development/README.md",
     "language_code": "sl"
   },
   "docs/chapter-02-ai-development/agents.md": {
-    "original_hash": "a9c8e638e43e906d601f8931a70463ab",
-    "translation_date": "2026-04-01T20:10:02+00:00",
+    "original_hash": "d0593658083704997b49212a061d5ca6",
+    "translation_date": "2026-06-17T10:20:16+00:00",
     "source_file": "docs/chapter-02-ai-development/agents.md",
     "language_code": "sl"
   },
@@ -84,62 +96,74 @@
     "language_code": "sl"
   },
   "docs/chapter-02-ai-development/ai-workshop-lab.md": {
-    "original_hash": "f9f84ea0f688681ad418c523776d34f2",
-    "translation_date": "2026-04-01T20:17:38+00:00",
+    "original_hash": "2587a79908b3cde677e33ae80d8ac531",
+    "translation_date": "2026-06-17T10:14:03+00:00",
     "source_file": "docs/chapter-02-ai-development/ai-workshop-lab.md",
     "language_code": "sl"
   },
   "docs/chapter-02-ai-development/microsoft-foundry-integration.md": {
-    "original_hash": "182f15ea3e476ffadd05d563507b55ac",
-    "translation_date": "2026-04-01T20:26:09+00:00",
+    "original_hash": "4df164622f8895bf0b6f287779dcfb8d",
+    "translation_date": "2026-06-17T10:10:03+00:00",
     "source_file": "docs/chapter-02-ai-development/microsoft-foundry-integration.md",
     "language_code": "sl"
   },
   "docs/chapter-03-configuration/README.md": {
-    "original_hash": "689e064921c4699f56e4fb6ddff09228",
-    "translation_date": "2026-04-01T20:46:31+00:00",
+    "original_hash": "61ae73a314e12314f51e28367f270b10",
+    "translation_date": "2026-06-17T10:21:32+00:00",
     "source_file": "docs/chapter-03-configuration/README.md",
     "language_code": "sl"
   },
   "docs/chapter-03-configuration/authsecurity.md": {
-    "original_hash": "488566a19526a16a0db7386025c8c2fd",
-    "translation_date": "2026-03-18T01:38:12+00:00",
+    "original_hash": "adc7a316de5dbc24ba740acb0c177e68",
+    "translation_date": "2026-06-17T10:28:34+00:00",
     "source_file": "docs/chapter-03-configuration/authsecurity.md",
     "language_code": "sl"
   },
   "docs/chapter-03-configuration/configuration.md": {
-    "original_hash": "f9c65cbda81ed6679de2879a252b554c",
-    "translation_date": "2026-04-01T20:45:04+00:00",
+    "original_hash": "6d290b5905bed6005e18966e966ef40f",
+    "translation_date": "2026-06-17T10:32:54+00:00",
     "source_file": "docs/chapter-03-configuration/configuration.md",
     "language_code": "sl"
   },
   "docs/chapter-04-infrastructure/README.md": {
-    "original_hash": "c5ff79211ef3c2e6e811b28a5db13450",
-    "translation_date": "2026-04-01T21:47:26+00:00",
+    "original_hash": "6275050990f8b00f527b076908d5174c",
+    "translation_date": "2026-06-17T10:06:35+00:00",
     "source_file": "docs/chapter-04-infrastructure/README.md",
     "language_code": "sl"
   },
+  "docs/chapter-04-infrastructure/custom-templates.md": {
+    "original_hash": "83dff69032b06e15170e4f079b9c6d33",
+    "translation_date": "2026-06-17T10:54:56+00:00",
+    "source_file": "docs/chapter-04-infrastructure/custom-templates.md",
+    "language_code": "sl"
+  },
   "docs/chapter-04-infrastructure/deployment-guide.md": {
-    "original_hash": "fd479f75c255cdf42085dac8ec41c0f7",
-    "translation_date": "2026-04-01T21:46:00+00:00",
+    "original_hash": "b510c2b9c39b4c19ed19ed0e48cd2b49",
+    "translation_date": "2026-06-17T10:04:12+00:00",
     "source_file": "docs/chapter-04-infrastructure/deployment-guide.md",
     "language_code": "sl"
   },
   "docs/chapter-04-infrastructure/provisioning.md": {
-    "original_hash": "4b889c8e23a6003f6554e1919fea1a51",
-    "translation_date": "2026-04-01T21:37:15+00:00",
+    "original_hash": "84e8cdc5911262642042522e10112eda",
+    "translation_date": "2026-06-17T10:05:53+00:00",
     "source_file": "docs/chapter-04-infrastructure/provisioning.md",
     "language_code": "sl"
   },
   "docs/chapter-05-multi-agent/README.md": {
-    "original_hash": "066dea0137688e60b9d9b2db89e1a880",
-    "translation_date": "2026-04-01T21:20:16+00:00",
+    "original_hash": "5982d771a1cb686ea2c8facee31c5fd3",
+    "translation_date": "2026-06-17T09:33:08+00:00",
     "source_file": "docs/chapter-05-multi-agent/README.md",
     "language_code": "sl"
   },
+  "docs/chapter-05-multi-agent/multi-agent-basics.md": {
+    "original_hash": "6db0d27e6474291553aaa97a160d6129",
+    "translation_date": "2026-06-17T10:40:32+00:00",
+    "source_file": "docs/chapter-05-multi-agent/multi-agent-basics.md",
+    "language_code": "sl"
+  },
   "docs/chapter-06-pre-deployment/README.md": {
-    "original_hash": "73b2f9123fd826475a758a4bf224b321",
-    "translation_date": "2026-04-01T20:32:07+00:00",
+    "original_hash": "1bb495e6462e366ab358a3014e5c04d4",
+    "translation_date": "2026-06-17T10:34:11+00:00",
     "source_file": "docs/chapter-06-pre-deployment/README.md",
     "language_code": "sl"
   },
@@ -174,8 +198,8 @@
     "language_code": "sl"
   },
   "docs/chapter-07-troubleshooting/README.md": {
-    "original_hash": "3d3cb2480e9636a584f7c9bf667ffb9d",
-    "translation_date": "2026-04-01T21:34:50+00:00",
+    "original_hash": "a59d64c37432b31e13a60e4aee8324e4",
+    "translation_date": "2026-06-17T09:34:17+00:00",
     "source_file": "docs/chapter-07-troubleshooting/README.md",
     "language_code": "sl"
   },
@@ -198,26 +222,26 @@
     "language_code": "sl"
   },
   "docs/chapter-08-production/README.md": {
-    "original_hash": "629ed979a3cdfdda1ab5639f1e938377",
-    "translation_date": "2026-04-01T20:40:12+00:00",
+    "original_hash": "f906126665dafdfc4e0cf596c0f0d204",
+    "translation_date": "2026-06-17T09:41:11+00:00",
     "source_file": "docs/chapter-08-production/README.md",
     "language_code": "sl"
   },
   "docs/chapter-08-production/production-ai-practices.md": {
-    "original_hash": "9dfbd9bf67d55844e93d1a7818c8f39a",
-    "translation_date": "2026-04-01T20:38:22+00:00",
+    "original_hash": "fff54557a5adf5d227f16a0ee3bd574c",
+    "translation_date": "2026-06-17T09:40:06+00:00",
     "source_file": "docs/chapter-08-production/production-ai-practices.md",
     "language_code": "sl"
   },
   "examples/README.md": {
-    "original_hash": "7d86ba29df25aab7fa4519ec0a7d4e08",
-    "translation_date": "2026-03-18T00:04:03+00:00",
+    "original_hash": "974adee88a48a93b3ee18eafea0da113",
+    "translation_date": "2026-06-17T08:53:40+00:00",
     "source_file": "examples/README.md",
     "language_code": "sl"
   },
   "examples/azure-openai-chat/README.md": {
-    "original_hash": "9d786c2e22b33575974d0cd5a682487b",
-    "translation_date": "2026-03-18T00:29:50+00:00",
+    "original_hash": "c7a1d4eec3c9509b19f9a64a78183242",
+    "translation_date": "2026-06-17T09:22:37+00:00",
     "source_file": "examples/azure-openai-chat/README.md",
     "language_code": "sl"
   },
@@ -234,14 +258,14 @@
     "language_code": "sl"
   },
   "examples/container-app/simple-flask-api/README.md": {
-    "original_hash": "4b7a16f811ed4fa56ad097d69ac93e72",
-    "translation_date": "2026-03-18T00:40:22+00:00",
+    "original_hash": "16c397337ff0c78284292241d6debec5",
+    "translation_date": "2026-06-17T09:27:11+00:00",
     "source_file": "examples/container-app/simple-flask-api/README.md",
     "language_code": "sl"
   },
   "examples/database-app/README.md": {
-    "original_hash": "0166fcb5a833768e593fbfd62b2087bb",
-    "translation_date": "2026-04-01T20:03:26+00:00",
+    "original_hash": "abfa2c6c3930424edaaa4cce64941134",
+    "translation_date": "2026-06-17T09:16:10+00:00",
     "source_file": "examples/database-app/README.md",
     "language_code": "sl"
   },
@@ -258,14 +282,14 @@
     "language_code": "sl"
   },
   "examples/retail-scenario.md": {
-    "original_hash": "3dc9f6339886f92d56d870e64ece2028",
-    "translation_date": "2026-03-17T23:56:53+00:00",
+    "original_hash": "31e5bb316faae7444621e0ff69117a76",
+    "translation_date": "2026-06-17T09:02:06+00:00",
     "source_file": "examples/retail-scenario.md",
     "language_code": "sl"
   },
   "resources/cheat-sheet.md": {
-    "original_hash": "1712ea9dc2e12e751ac09d08fbc876be",
-    "translation_date": "2026-04-01T19:38:56+00:00",
+    "original_hash": "d1dd0956b291e04414a697326ae23978",
+    "translation_date": "2026-06-17T09:09:33+00:00",
     "source_file": "resources/cheat-sheet.md",
     "language_code": "sl"
   },
@@ -276,8 +300,8 @@
     "language_code": "sl"
   },
   "resources/glossary.md": {
-    "original_hash": "a9e358557d6b779e8b3921781c445987",
-    "translation_date": "2026-02-11T21:34:56+00:00",
+    "original_hash": "bee74c2b465a4943fca1c1c45a46720c",
+    "translation_date": "2026-06-17T09:10:23+00:00",
     "source_file": "resources/glossary.md",
     "language_code": "sl"
   },
@@ -294,8 +318,8 @@
     "language_code": "sl"
   },
   "workshop/docs/index.md": {
-    "original_hash": "911db39170b1e9ca55b9dccac5b28bf3",
-    "translation_date": "2026-04-01T19:40:28+00:00",
+    "original_hash": "15de00ea8b0c3bdd1d63d4de950ac9fc",
+    "translation_date": "2026-06-17T09:28:01+00:00",
     "source_file": "workshop/docs/index.md",
     "language_code": "sl"
   },
@@ -312,8 +336,8 @@
     "language_code": "sl"
   },
   "workshop/docs/instructions/2-Validate-AI-Template.md": {
-    "original_hash": "4df8313347638a2019a82e162f2e58f7",
-    "translation_date": "2026-04-01T19:49:44+00:00",
+    "original_hash": "b5448a5616cbf6e86ba2c73489c695ab",
+    "translation_date": "2026-06-17T09:31:10+00:00",
     "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
     "language_code": "sl"
   },
@@ -336,8 +360,8 @@
     "language_code": "sl"
   },
   "workshop/docs/instructions/6-Teardown-Infrastructure.md": {
-    "original_hash": "fcbcaeaa378cbb1fcf932a5df4abb8a9",
-    "translation_date": "2026-02-11T21:59:06+00:00",
+    "original_hash": "5f7c2836539c2d6d5bdbe612cefdaf4c",
+    "translation_date": "2026-06-17T09:32:00+00:00",
     "source_file": "workshop/docs/instructions/6-Teardown-Infrastructure.md",
     "language_code": "sl"
   },

@@ -1,42 +1,42 @@
-# Chapter 8: Production & Enterprise Patterns
+# Chapta 8: Production & Enterprise Patterns
 
-**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 2-3 hours | **⭐ Complexity**: Advanced
+**📚 Kọs**: [AZD For Beginners](../../README.md) | **⏱️ Taim**: 2-3 hours | **⭐ Kompleksiti**: Advanced
 
 ---
 
 ## Overview
 
-Dis chapter dey cover enterprise-ready deployment patterns, how to harden security, monitoring, and how to optimize cost for production AI workloads.
+Dis chapta go cover enterprise-ready deployment patterns, how to harden security, monitoring, and how to optimize cost for production AI workloads.
 
-> Dem validate am wit `azd 1.23.12` for March 2026.
+> Dem don validate am wit `azd 1.25.6` for June 2026.
 
 ## Learning Objectives
 
-By completing this chapter, you go:
-- Deploy multi-region resilient applications
-- Implement enterprise security patterns
-- Configure comprehensive monitoring
-- Optimize costs at scale
-- Set up CI/CD pipelines with AZD
+If you finish dis chapta, you go:
+- Deploy app wey dey resilient across many regions
+- Implement enterprise security pattern dem
+- Configure full monitoring
+- Optimize cost when things dey scale
+- Set up CI/CD pipelines wit AZD
 
 ---
 
-## 📚 Lessons
+## 📚 Lekshon dem
 
-| # | Lekshon | Tori | Time |
+| # | Lekshon | Tori | Taim |
 |---|--------|-------------|------|
-| 1 | [Production AI Practices](production-ai-practices.md) | Enterprise deployment patterns | 90 min |
+| 1 | [Production AI Practices](production-ai-practices.md) | Enterprise deployment pattern dem | 90 min |
 
 ---
 
 ## 🚀 Production Checklist
 
-- [ ] Multi-region deployment for resilience
-- [ ] Managed identity for authentication (no keys)
+- [ ] Deploy for many regions make app resilient
+- [ ] Use managed identity to authenticate (no keys)
 - [ ] Application Insights for monitoring
-- [ ] Cost budgets and alerts configured
-- [ ] Security scanning enabled
-- [ ] CI/CD pipeline integration
+- [ ] Set cost budgets and alerts
+- [ ] Enable security scanning
+- [ ] Integrate CI/CD pipeline
 - [ ] Disaster recovery plan
 
 ---
@@ -47,16 +47,18 @@ By completing this chapter, you go:
 
 ```mermaid
 graph LR
-    Gateway[API Gatewey] --> AI[AI Sabis] --> Models[Microsoft Foundry Model dem]
+    Gateway[API Geitwe] --> AI[AI Sabis] --> Models[Microsoft Foundry Model dem]
     Gateway --> Auth[Auth Sabis]
-    AI --> Data[Data Stɔ]
+    AI --> Data[Data Sto]
 ```
+
 ### Pattern 2: Event-Driven AI
 
 ```mermaid
 graph LR
-    EventGrid[Grid wey dey handle events] --> Functions[Function dem] --> Pipeline[AI pipeline]
+    EventGrid[Grid wey dey handle events] --> Functions[Function dem] --> Pipeline[Pipeline wey dey run AI]
 ```
+
 ---
 
 ## 🔐 Security Best Practices
@@ -88,7 +90,7 @@ properties: {
 | Reserved capacity | 20-40% |
 
 ```bash
-# Put budget alert dem
+# Put alert dem for budget
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -107,7 +109,7 @@ azd monitor --logs
 # Check di Application Insights
 azd monitor --overview
 
-# View di metrics
+# See di metrics
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -133,5 +135,5 @@ az monitor metrics list --resource <resource-id>
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Dis document don translate by AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg sabi say automated translations fit get errors or mistakes. Di original document for im own native language suppose be di authoritative source. For critical information, we recommend say una use professional human translation. We no dey liable for any misunderstandings or wrong interpretations wey fit come from the use of this translation.
+Dis document don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even tho we dey try make am correct, abeg make you know say automated translation fit get errors or mistakes. Di original document for dia own language na im be di correct source. For important info, make person wey sabi human translation do am. We no go responsible for any misunderstanding or wrong understanding wey fit happen because of dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

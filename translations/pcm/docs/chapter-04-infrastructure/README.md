@@ -1,31 +1,32 @@
 # Chapter 4: Infrastructure as Code & Deployment
 
-**📚 Kọs**: [AZD For Beginners](../../README.md) | **⏱️ Taim**: 1-1.5 hours | **⭐ Komplesiti**: Medium
+**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 1-1.5 hours | **⭐ Complexity**: Intermediate
 
 ---
 
-## Wetin dis chapter dey cover
+## Overview
 
-Dis chapter go show Infrastructure as Code (IaC) patterns wit Bicep templates, how to provision resources, an deployment strategies wey you fit use wit Azure Developer CLI.
+Dis chapter go cover Infrastructure as Code (IaC) patterns wit Bicep templates, how to provision resources, and deployment strategies usin the Azure Developer CLI.
 
-> Dem validate am wit `azd 1.23.12` for March 2026.
+> Dem don validate am wit `azd 1.25.6` for June 2026.
 
-## Wetin You Go Learn
+## Learning Objectives
 
-By finish dis chapter, you go:
-- Understand how Bicep templates take arrangement and how the syntax dey work
-- Provision Azure resources with `azd provision`
-- Deploy application dem with `azd deploy`
-- Implement blue-green and rolling deployment strategies
+If you finish dis chapter, you go:
+- Understand how Bicep templates dey structured and how di syntax be
+- Provision Azure resources wit `azd provision`
+- Deploy application dem wit `azd deploy`
+- Use blue-green and rolling deployment strategies
 
 ---
 
-## 📚 Lekshon dem
+## 📚 Lessons
 
-| # | Lekshon | Tok | Taim |
+| # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [Provisioning Resources](provisioning.md) | How to manage Azure resources wit AZD | 45 min |
-| 2 | [Deployment Guide](deployment-guide.md) | Strategy wey you go take deploy apps | 45 min |
+| 1 | [Provisioning Resources](provisioning.md) | Manage Azure resources wit AZD | 45 min |
+| 2 | [Deployment Guide](deployment-guide.md) | Strategies for deployin application dem | 45 min |
+| 3 | [Authoring Your Own Template](custom-templates.md) | Build and publish reusable azd templates | 30 min |
 
 ---
 
@@ -35,13 +36,13 @@ By finish dis chapter, you go:
 # Start from di template
 azd init --template azure-functions-python-v2-http
 
-# See wetin dem go create
+# Preview wetin dem go create
 azd provision --preview
 
-# Just set up di infrastructure
+# Set up di infrastructure only
 azd provision
 
-# Just deploy di code
+# Deploy di code only
 azd deploy
 
 # Or do both together
@@ -67,13 +68,13 @@ my-project/
 
 ---
 
-## 🔧 Commands Wey You Need
+## 🔧 Essential Commands
 
 | Command | Description |
 |---------|-------------|
-| `azd init` | Initialize di project |
+| `azd init` | Set up di project |
 | `azd provision` | Create Azure resources |
-| `azd deploy` | Deploy di app code |
+| `azd deploy` | Deploy di application code |
 | `azd up` | provision + deploy |
 | `azd down` | Delete all resources |
 
@@ -98,5 +99,5 @@ my-project/
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Dis dokument don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am accurate, abeg sabi say automated translations fit get errors or inaccuracies. Di original dokument for im native language suppose be di authoritative source. If na critical information, we recommend make professional human translator do am. We no dey liable for any misunderstanding or misinterpretation wey fit arise from di use of dis translation.
+Dis document don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even tho we dey try make am correct, abeg make you know say automated translation fit get errors or mistakes. Di original document for dia own language na im be di correct source. For important info, make person wey sabi human translation do am. We no go responsible for any misunderstanding or wrong understanding wey fit happen because of dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

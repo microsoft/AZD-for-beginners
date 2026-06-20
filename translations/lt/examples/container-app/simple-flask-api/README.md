@@ -2,65 +2,66 @@
 
 **Mokymosi kelias:** Pradedantiesiems ⭐ | **Laikas:** 25-35 minučių | **Kaina:** $0-15/mėn
 
-Pilnas, veikiantis Python Flask REST API, diegiamas į Azure Container Apps naudojant Azure Developer CLI (azd). Šis pavyzdys demonstruoja konteinerių diegimą, automatinį mastelio keitimą ir stebėjimo pagrindus.
+Pilnas, veikiantis Python Flask REST API, išdiegtas į Azure Container Apps naudojant Azure Developer CLI (azd). Šis pavyzdys demonstruoja konteinerio diegimą, automatinį skalavimą ir monitoringo pagrindus.
 
-## 🎯 Ką išmoksite
+## 🎯 Ką sužinosite
 
-- Diegti konteineryje supakuotą Python programą į Azure
-- Konfigūruoti automatinį mastelio keitimą su scale-to-zero
-- Įdiegti sveikatos patikras ir pasirengimo patikrinimus
+- Išdiegti konteinerizuotą Python programą į Azure
+- Konfigūruoti automatinį skalavimą (scale-to-zero)
+- Įdiegti būklės patikrinimus (health probes) ir pasirengimo patikras (readiness checks)
 - Stebėti programos žurnalus ir metrikas
 - Naudoti Azure Developer CLI greitam diegimui
 
 ## 📦 Kas įtraukta
 
-✅ **Flask Application** - Pilnas REST API su CRUD operacijomis (`src/app.py`)  
-✅ **Dockerfile** - Gamybai pasiruošusi konteinerio konfigūracija  
-✅ **Bicep Infrastructure** - Container Apps aplinka ir API diegimas  
-✅ **AZD Configuration** - Vieno komandos diegimo nustatymas  
-✅ **Health Probes** - Konfigūruoti liveness ir readiness patikrinimai  
-✅ **Auto-scaling** - 0-10 replikų pagal HTTP apkrovą  
+✅ **Flask programa** - Pilnas REST API su CRUD operacijomis (`src/app.py`)  
+✅ **Dockerfile** - Gamybai paruošta konteinerio konfigūracija  
+✅ **Bicep infrastruktūra** - Container Apps aplinka ir API diegimas  
+✅ **AZD konfigūracija** - Vienos komandos diegimo nustatymas  
+✅ **Būklės patikrinimai** - Sukonfigūruoti liveness ir readiness patikrinimai  
+✅ **Automatinis skalavimas** - 0-10 replikų pagal HTTP apkrovą  
 
 ## Architektūra
 
 ```mermaid
 graph TD
     subgraph ACA[Azure Container Apps aplinka]
-        Flask[Flask API konteineris<br/>Sveikatos galiniai taškai<br/>REST API<br/>Automatinis skalavimas 0-10 replikų]
-        AppInsights[Programų įžvalgos]
+        Flask[Flask API konteineris<br/>Sveikatos galiniai taškai<br/>REST API<br/>Automatinis mastelio keitimas 0-10 kopijų]
+        AppInsights[Programos įžvalgos]
     end
 ```
+
 ## Reikalavimai
 
 ### Reikalinga
-- **Azure Developer CLI (azd)** - [Įdiegimo vadovas](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+- **Azure Developer CLI (azd)** - [Diegimo vadovas](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
 - **Azure subscription** - [Nemokama paskyra](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Install Docker](https://www.docker.com/products/docker-desktop/) (lokaliam testavimui)
+- **Docker Desktop** - [Įdiegti Docker](https://www.docker.com/products/docker-desktop/) (lokaliniam testavimui)
 
 ### Patikrinkite reikalavimus
 
 ```bash
-# Patikrinkite azd versiją (reikalinga 1.5.0 arba naujesnė)
+# Patikrinkite azd versiją (reikia 1.5.0 arba naujesnės)
 azd version
 
 # Patikrinkite prisijungimą prie Azure
 azd auth login
 
-# Patikrinkite Docker (nebūtina, vietiniam testavimui)
+# Patikrinkite Docker (neprivaloma, vietiniam testavimui)
 docker --version
 ```
 
 ## ⏱️ Diegimo laikas
 
-| Phase | Duration | What Happens |
+| Fazė | Trukmė | Kas vyksta |
 |-------|----------|--------------||
 | Environment setup | 30 seconds | Create azd environment |
 | Build container | 2-3 minutes | Docker build Flask app |
 | Provision infrastructure | 3-5 minutes | Create Container Apps, registry, monitoring |
 | Deploy application | 2-3 minutes | Push image and deploy to Container Apps |
-| **Total** | **8-12 minutes** | Complete deployment ready |
+| **Iš viso** | **8-12 minutes** | Diegimas baigtas |
 
-## Greitas startas
+## Greita pradžia
 
 ```bash
 # Eikite į pavyzdį
@@ -69,12 +70,12 @@ cd examples/container-app/simple-flask-api
 # Inicializuokite aplinką (pasirinkite unikalų pavadinimą)
 azd env new myflaskapi
 
-# Diegti viską (infrastruktūrą + programą)
+# Įdiekite viską (infrastruktūrą + programą)
 azd up
 # Jums bus paprašyta:
 # 1. Pasirinkite Azure prenumeratą
 # 2. Pasirinkite vietą (pvz., eastus2)
-# 3. Palaukite 8–12 minučių, kol diegimas bus baigtas
+# 3. Palaukite 8–12 minučių, kol vyks diegimas
 
 # Gaukite savo API galinį tašką
 azd env get-values
@@ -83,7 +84,7 @@ azd env get-values
 curl $(azd env get-value API_ENDPOINT)/health
 ```
 
-**Tikėtinas rezultatas:**
+**Tikėtinas išvestis:**
 ```json
 {
   "status": "healthy",
@@ -95,28 +96,28 @@ curl $(azd env get-value API_ENDPOINT)/health
 
 ## ✅ Patikrinkite diegimą
 
-### 1. žingsnis: Patikrinkite diegimo būseną
+### 1 žingsnis: Patikrinkite diegimo būseną
 
 ```bash
 # Peržiūrėti įdiegtas paslaugas
 azd show
 
-# Tikėtina išvestis rodo:
+# Laukiamas išvesties rezultatas:
 # - Paslauga: api
 # - Galinis taškas: https://ca-api-[env].xxx.azurecontainerapps.io
 # - Būsena: Veikia
 ```
 
-### 2. žingsnis: Išbandykite API galinius taškus
+### 2 žingsnis: Išbandykite API galinius taškus
 
 ```bash
 # Gauti API galinį tašką
 API_URL=$(azd env get-value API_ENDPOINT)
 
-# Sveikatos patikra
+# Patikrinti sveikatą
 curl $API_URL/health
 
-# Šaknies galinio taško patikra
+# Patikrinti pagrindinį galinį tašką
 curl $API_URL/
 
 # Sukurti elementą
@@ -129,21 +130,21 @@ curl $API_URL/api/items
 ```
 
 **Sėkmės kriterijai:**
-- ✅ Sveikatos galinis taškas grąžina HTTP 200
-- ✅ Šakninis galinis taškas rodo API informaciją
+- ✅ /health galinis taškas grąžina HTTP 200
+- ✅ Root endpoint rodo API informaciją
 - ✅ POST sukuria elementą ir grąžina HTTP 201
 - ✅ GET grąžina sukurtus elementus
 
-### 3. žingsnis: Peržiūrėkite žurnalus
+### 3 žingsnis: Peržiūrėkite žurnalus
 
 ```bash
-# Tiesiogiai srautiniu būdu peržiūrėkite žurnalus naudodami azd monitor
+# Srautiniu būdu transliuokite gyvus žurnalus naudodami azd monitor
 azd monitor --logs
 
 # Arba naudokite Azure CLI:
 az containerapp logs show --name api --resource-group $RG_NAME --follow
 
-# Turėtumėte matyti:
+# Turėtumėte pamatyti:
 # - Gunicorn paleidimo pranešimus
 # - HTTP užklausų žurnalus
 # - Programos informacijos žurnalus
@@ -168,7 +169,7 @@ simple-flask-api/
 
 ## API galiniai taškai
 
-| Endpoint | Method | Description |
+| Galinis taškas | Metodas | Aprašymas |
 |----------|--------|-------------|
 | `/health` | GET | Sveikatos patikra |
 | `/api/items` | GET | Išvardinti visus elementus |
@@ -188,16 +189,16 @@ azd env set LOG_LEVEL info
 azd env set MAX_REPLICAS 20
 ```
 
-### Mastelio konfigūracija
+### Skalavimo konfigūracija
 
-API automatiškai masteliuojasi pagal HTTP srautą:
-- **Min Replicas**: 0 (masteliuojasi iki nulio kai nenaudojama)
-- **Max Replicas**: 10
-- **Concurrent Requests per Replica**: 50
+API automatiškai skalauja pagal HTTP srautą:
+- **Min. replikų skaičius**: 0 (skalavimas iki nulio, kai neveikia)
+- **Maks. replikų skaičius**: 10
+- **Vienu metu užklausų per repliką**: 50
 
-## Vystymas
+## Kūrimas
 
-### Paleisti lokaliai
+### Vykdyti lokaliai
 
 ```bash
 # Įdiegti priklausomybes
@@ -229,24 +230,24 @@ curl http://localhost:8000/health
 ### Pilnas diegimas
 
 ```bash
-# Diegti infrastruktūrą ir programą
+# Įdiegti infrastruktūrą ir taikomąją programą
 azd up
 ```
 
 ### Tik kodo diegimas
 
 ```bash
-# Diegti tik programos kodą (infrastruktūra nepakitusi)
+# Diegti tik programos kodą (infrastruktūra nekeičiama)
 azd deploy api
 ```
 
 ### Atnaujinti konfigūraciją
 
 ```bash
-# Atnaujinti aplinkos kintamuosius
+# Atnaujinkite aplinkos kintamuosius
 azd env set API_KEY "new-api-key"
 
-# Perdiegti su nauja konfigūracija
+# Įdiekite iš naujo su nauja konfigūracija
 azd deploy api
 ```
 
@@ -255,10 +256,10 @@ azd deploy api
 ### Peržiūrėti žurnalus
 
 ```bash
-# Srautiniu būdu peržiūrėkite tiesioginius žurnalus naudodami azd monitor
+# Transliuokite gyvus žurnalus naudodami azd monitor
 azd monitor --logs
 
-# Arba naudokite Azure CLI, skirtą Container Apps:
+# Arba naudokite Azure CLI Container Apps:
 az containerapp logs show --name api --resource-group $RG_NAME --follow
 
 # Peržiūrėkite paskutines 100 eilučių
@@ -271,7 +272,7 @@ az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 # Atidaryti Azure Monitor prietaisų skydelį
 azd monitor --overview
 
-# Peržiūrėti konkrečius rodiklius
+# Peržiūrėti konkrečias metrikas
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "Requests,ResponseTime"
@@ -279,7 +280,7 @@ az monitor metrics list \
 
 ## Testavimas
 
-### Sveikatos patikra
+### Būklės patikra
 
 ```bash
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
@@ -307,21 +308,21 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/item
 curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
 ```
 
-## Išlaidų optimizavimas
+## Kaštų optimizavimas
 
-Šis diegimas naudoja scale-to-zero, todėl mokate tik tada, kai API apdoroja užklausas:
+Šis diegimas naudoja scale-to-zero, tad mokate tik tada, kai API apdoroja užklausas:
 
-- **Budėjimo kaina**: ~$0/mėn (masteliuojama iki nulio)
+- **Neaktyvumo kaina**: ~$0/mėn. (skalavimas iki nulio)
 - **Aktyvi kaina**: ~$0.000024/sekundę už repliką
 - **Tikėtinos mėnesinės išlaidos** (mažas naudojimas): $5-15
 
-### Dar labiau sumažinti išlaidas
+### Tolimesnis išlaidų mažinimas
 
 ```bash
 # Sumažinti maksimalų replikų skaičių vystymo aplinkai
 azd env set MAX_REPLICAS 3
 
-# Naudoti trumpesnį neveikimo laiko limitą
+# Naudoti trumpesnį neveiklumo laiką
 azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 minutės
 ```
 
@@ -337,23 +338,23 @@ az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 docker build -t test ./src
 ```
 
-### API nepasiekiamas
+### API nepasiekiama
 
 ```bash
-# Patikrinkite, ar ingress yra išorinis
+# Patikrinkite, ar Ingress yra išorinis
 az containerapp show --name api --resource-group rg-simple-flask-api \
   --query properties.configuration.ingress.external
 ```
 
-### Ilgi atsakymo laikai
+### Ilgi atsako laikai
 
 ```bash
-# Patikrinti CPU/atminties naudojimą
+# Patikrinkite procesoriaus/atminties naudojimą
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# Padidinti išteklius, jei reikia
+# Padidinkite išteklius, jei reikia
 az containerapp update --name api --resource-group rg-simple-flask-api \
   --cpu 1.0 --memory 2Gi
 ```
@@ -365,23 +366,23 @@ az containerapp update --name api --resource-group rg-simple-flask-api \
 azd down --force --purge
 ```
 
-## Kiti žingsniai
+## Tolimesni žingsniai
 
 ### Išplėsti šį pavyzdį
 
-1. **Pridėti duomenų bazę** - Integruoti Azure Cosmos DB arba SQL Database
+1. **Pridėti duomenų bazę** - Integruoti Azure Cosmos DB arba SQL duomenų bazę
    ```bash
    # Pridėti Cosmos DB modulį į infra/main.bicep
    # Atnaujinti app.py su duomenų bazės prisijungimu
    ```
 
-2. **Pridėti autentifikaciją** - Įgyvendinti Azure AD arba API raktus
+2. **Pridėti autentifikaciją** - Įdiegti Microsoft Entra ID arba API raktus
    ```python
-   # Pridėti autentifikavimo middleware į app.py
+   # Pridėti autentifikacijos tarpinį sluoksnį į app.py
    from functools import wraps
    ```
 
-3. **Sukurti CI/CD** - GitHub Actions darbo eiga
+3. **Sukurti CI/CD** - GitHub Actions workflow
    ```yaml
    # Create .github/workflows/deploy.yml
    name: Deploy to Azure
@@ -396,26 +397,26 @@ azd down --force --purge
 
 ### Susiję pavyzdžiai
 
-- **[Duomenų bazės programa](../../../../../examples/database-app)** - Pilnas pavyzdys su SQL Database
-- **[Mikropaslaugos](../../../../../examples/container-app/microservices)** - Daugiapaslaugė architektūra
-- **[Container Apps pagrindinis vadovas](../README.md)** - Visi konteinerių šablonai
+- **[Duomenų bazės programa](../../../../../examples/database-app)** - Pilnas pavyzdys su SQL duomenų baze
+- **[Mikropaslaugos](../../../../../examples/container-app/microservices)** - Daugiaservisė architektūra
+- **[Container Apps pagrindinis vadovas](../README.md)** - Visi konteinerių modeliai
 
 ### Mokymosi ištekliai
 
-- 📚 [AZD pradedantiesiems kursas](../../../README.md) - Pagrindinė kurso pradžia
-- 📚 [Container Apps Patterns](../README.md) - Daugiau diegimo šablonų
-- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - Bendruomenės šablonai
+- 📚 [AZD Pradedantiesiems kursas](../../../README.md) - Pagrindinis kurso puslapis
+- 📚 [Container Apps modeliai](../README.md) - Daugiau diegimo modelių
+- 📚 [AZD šablonų galerija](https://azure.github.io/awesome-azd/) - Bendruomenės šablonai
 
 ## Papildomi ištekliai
 
 ### Dokumentacija
-- **[Flask Documentation](https://flask.palletsprojects.com/)** - Flask karkaso vadovas
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Oficialūs Azure dokumentai
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd komandų referencija
+- **[Flask dokumentacija](https://flask.palletsprojects.com/)** - Flask karkaso vadovas
+- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Oficiali Azure dokumentacija
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd komandų aprašymas
 
-### Vadovėliai
-- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Išdiekite savo pirmąją programą
-- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Python vystymo gidas
+### Mokymai
+- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Įdiekite savo pirmąją programą
+- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Python kūrimo vadovas
 - **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastruktūra kaip kodas
 
 ### Įrankiai
@@ -424,13 +425,13 @@ azd down --force --purge
 
 ---
 
-**🎉 Sveikiname!** Jūs įdiegėte gamybai parengtą Flask API į Azure Container Apps su automatinio mastelio keitimu ir stebėjimu.
+**🎉 Sveikiname!** Jūs išdiegėte gamybai paruoštą Flask API į Azure Container Apps su automatinio skalavimo ir stebėjimo galimybėmis.
 
-**Klausimų?** [Atidaryti problemą](https://github.com/microsoft/AZD-for-beginners/issues) arba peržiūrėkite [DUK](../../../resources/faq.md)
+**Klausimų?** [Atidarykite problemą](https://github.com/microsoft/AZD-for-beginners/issues) arba peržiūrėkite [DUK](../../../resources/faq.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Atsakomybės apribojimas**:
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatizuoti vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojamas profesionalus žmogaus atliktas vertimas. Mes neatsakome už jokius nesusipratimus ar neteisingas interpretacijas, kilusias dėl šio vertimo naudojimo.
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojama naudoti profesionalų žmogiškąjį vertimą. Mes neatsakome už jokius nesusipratimus ar neteisingą interpretaciją, kilusią naudojantis šiuo vertimu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

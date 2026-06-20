@@ -1,22 +1,22 @@
-# 第三章：配置與身份驗證
+# 第 3 章：組態與認證
 
-**📚 課程**： [AZD 初學者指南](../../README.md) | **⏱️ 時長**：45-60 分鐘 | **⭐ 複雜度**：中級
+**📚 課程**: [AZD 初學者指南](../../README.md) | **⏱️ 時間**: 45-60 分鐘 | **⭐ 複雜度**: 中等
 
 ---
 
 ## 概述
 
-本章涵蓋 Azure Developer CLI 部署的環境配置、身份驗證模式與安全最佳實踐。
+本章涵蓋 Azure Developer CLI 部署的環境組態、認證模式與安全最佳實務。
 
-> 於 2026 年 3 月驗證通過 `azd 1.23.12`。
+> 已於 2026 年 6 月使用 `azd 1.25.6` 驗證。
 
 ## 學習目標
 
 完成本章後，您將能夠：
-- 精通 AZD 配置層級
-- 管理多個環境（開發、測試、正式）
-- 實作使用受管身分的安全身份驗證
-- 配置特定環境設定
+- 精通 AZD 組態階層
+- 管理多個環境（dev、staging、prod）
+- 使用受管理識別實作安全認證
+- 設定環境專屬的設定值
 
 ---
 
@@ -24,8 +24,8 @@
 
 | # | 課程 | 說明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [配置指南](configuration.md) | 環境設置與管理 | 30 分鐘 |
-| 2 | [身份驗證與安全](authsecurity.md) | 受管身分與 RBAC 模式 | 30 分鐘 |
+| 1 | [Configuration Guide](configuration.md) | 環境設定與管理 | 30 分鐘 |
+| 2 | [Authentication & Security](authsecurity.md) | 受管理識別（Managed Identity）與 RBAC 範式 | 30 分鐘 |
 
 ---
 
@@ -44,61 +44,61 @@ azd env select prod
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# 查看配置
+# 檢視設定
 azd env get-values
 ```
 
 ---
 
-## 🔧 配置層級
+## 🔧 組態階層
 
-AZD 按此順序套用設定（後者覆蓋前者）：
+AZD 以此順序套用設定（後者會覆蓋前者）：
 
-1. <strong>預設值</strong>（內嵌模板）
-2. **azure.yaml**（專案配置）
+1. <strong>預設值</strong>（內建於範本）
+2. **azure.yaml**（專案組態）
 3. <strong>環境變數</strong>（`azd env set`）
-4. <strong>命令列參數</strong>（`--location eastus`）
+4. <strong>命令列旗標</strong>（`--location eastus`）
 
 ---
 
-## 🔐 安全最佳實踐
+## 🔐 安全最佳實務
 
 ```bash
-# 使用受管理身份（建議）
+# 使用受管理身分識別（建議）
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# 檢查 AZD 認證狀態
+# 檢查 AZD 驗證狀態
 azd auth status
 
-# 選擇性：如果您打算執行 az 命令，請驗證 Azure CLI 環境
+# 可選：若您打算執行 az 命令，請驗證 Azure CLI 的上下文
 az account show
 
-# 如有需要，重新認證
+# 如有需要，請重新驗證
 azd auth login
 
-# 選擇性：為 az 命令刷新 Azure CLI 認證
+# 可選：為 az 命令重新整理 Azure CLI 的驗證
 az login
 ```
 
 ---
 
-## 🔗 導航
+## 🔗 導覽
 
 | 方向 | 章節 |
 |-----------|---------|
-| <strong>上一章</strong> | [第二章：AI 開發](../chapter-02-ai-development/README.md) |
-| <strong>下一章</strong> | [第四章：基礎建設](../chapter-04-infrastructure/README.md) |
+| <strong>上章</strong> | [Chapter 2: AI Development](../chapter-02-ai-development/README.md) |
+| <strong>下章</strong> | [Chapter 4: Infrastructure](../chapter-04-infrastructure/README.md) |
 
 ---
 
 ## 📖 相關資源
 
-- [部署前檢查](../chapter-06-pre-deployment/README.md)
-- [故障排解](../chapter-07-troubleshooting/common-issues.md)
+- [Pre-Deployment Checks](../chapter-06-pre-deployment/README.md)
+- [Troubleshooting](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責聲明**：  
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們努力確保準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應視為權威來源。對於重要資訊，建議使用專業人工翻譯。我們不對因使用此翻譯而引起的任何誤解或錯誤詮釋負責。
+**免責聲明**：
+本文件使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們力求準確，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要資訊，建議尋求專業人工翻譯。我們不對因使用本翻譯而引起的任何誤解或曲解承擔責任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

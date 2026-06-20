@@ -1,20 +1,20 @@
-# Kapitel 8: Produktion & virksomhedsmønstre
+# Kapitel 8: Produktion & Virksomhedsmønstre
 
-**📚 Kursus**: [AZD for begyndere](../../README.md) | **⏱️ Varighed**: 2-3 hours | **⭐ Kompleksitet**: Avanceret
+**📚 Kursus**: [AZD For Beginners](../../README.md) | **⏱️ Varighed**: 2-3 timer | **⭐ Kompleksitet**: Avanceret
 
 ---
 
 ## Oversigt
 
-Dette kapitel dækker virksomhedsklare udrulningsmønstre, sikkerhedshærdning, overvågning og omkostningsoptimering for produktions-AI-workloads.
+Dette kapitel dækker virksomhedsklare udrulningsmønstre, sikkerhedshærdning, overvågning og omkostningsoptimering for produktions-AI-arbejdsmængder.
 
-> Valideret mod `azd 1.23.12` i marts 2026.
+> Valideret mod `azd 1.25.6` i juni 2026.
 
 ## Læringsmål
 
 Ved at gennemføre dette kapitel vil du:
-- Udrulle robuste applikationer i flere regioner
-- Implementere sikkerhedsmønstre til virksomheder
+- Udrulle modstandsdygtige applikationer på tværs af flere regioner
+- Implementere sikkerhedsmønstre for virksomheder
 - Konfigurere omfattende overvågning
 - Optimere omkostninger i stor skala
 - Opsætte CI/CD-pipelines med AZD
@@ -25,38 +25,40 @@ Ved at gennemføre dette kapitel vil du:
 
 | # | Lektion | Beskrivelse | Tid |
 |---|--------|-------------|------|
-| 1 | [Produktions-AI-praksis](production-ai-practices.md) | Udrulningsmønstre til virksomheder | 90 min |
+| 1 | [Produktions-AI-praksis](production-ai-practices.md) | Virksomhedsudrulningsmønstre | 90 min |
 
 ---
 
 ## 🚀 Produktionscheckliste
 
-- [ ] Udrulning i flere regioner for robusthed
+- [ ] Udrulning på tværs af flere regioner for robusthed
 - [ ] Administreret identitet til autentificering (ingen nøgler)
 - [ ] Application Insights til overvågning
-- [ ] Omkostningsbudgetter og alarmer konfigureret
+- [ ] Omkostningsbudgetter og advarsler konfigureret
 - [ ] Sikkerhedsscanning aktiveret
-- [ ] CI/CD-pipelineintegration
-- [ ] Katastrofegendannelsesplan
+- [ ] Integration af CI/CD-pipeline
+- [ ] Plan for genopretning efter katastrofe
 
 ---
 
 ## 🏗️ Arkitekturmønstre
 
-### Mønster 1: Mikrotjenester-AI
+### Mønster 1: Mikrotjenester AI
 
 ```mermaid
 graph LR
     Gateway[API-gateway] --> AI[AI-tjeneste] --> Models[Microsoft Foundry-modeller]
-    Gateway --> Auth[Godkendelsestjeneste]
+    Gateway --> Auth[Autentificeringstjeneste]
     AI --> Data[Datalager]
 ```
-### Mønster 2: Begivenhedsdrevet AI
+
+### Mønster 2: Event-drevet AI
 
 ```mermaid
 graph LR
-    EventGrid[Begivenhedsgitter] --> Functions[Funktioner] --> Pipeline[AI-pipeline]
+    EventGrid[Begivenhedsnet] --> Functions[Funktioner] --> Pipeline[AI-pipeline]
 ```
+
 ---
 
 ## 🔐 Bedste sikkerhedspraksis
@@ -81,14 +83,14 @@ properties: {
 ## 💰 Omkostningsoptimering
 
 | Strategi | Besparelser |
-|----------|-------------|
-| Skaler til nul (Container Apps) | 60-80% |
+|----------|---------|
+| Skalér til nul (Container Apps) | 60-80% |
 | Brug forbrugsniveauer til udvikling | 50-70% |
 | Planlagt skalering | 30-50% |
 | Reserveret kapacitet | 20-40% |
 
 ```bash
-# Indstil budgetalarmer
+# Indstil budgetadvarsler
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -101,13 +103,13 @@ az consumption budget create \
 ## 📊 Overvågningsopsætning
 
 ```bash
-# Streaming af logfiler
+# Stream logfiler
 azd monitor --logs
 
-# Tjek Application Insights
+# Kontroller Application Insights
 azd monitor --overview
 
-# Vis metrikker
+# Vis målinger
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -126,12 +128,12 @@ az monitor metrics list --resource <resource-id>
 
 - [Guide til AI-agenter](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Multi-agent-løsninger](../chapter-05-multi-agent/README.md)
+- [Multi-agentløsninger](../chapter-05-multi-agent/README.md)
 - [Mikrotjenester-eksempel](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på originalsproget bør betragtes som den autoritative kilde. For kritisk information anbefales en professionel menneskelig oversættelse. Vi er ikke ansvarlige for misforståelser eller fejlfortolkninger, der måtte opstå som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

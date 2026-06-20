@@ -1,21 +1,21 @@
-# Luku 2: AI-ensijainen kehitys
+# Luku 2: AI-Ensisijainen kehitys
 
-**📚 Kurssi**: [AZD aloittelijoille](../../README.md) | **⏱️ Kesto**: 1-2 hours | **⭐ Vaativuus**: Keskitaso
+**📚 Kurssi**: [AZD For Beginners](../../README.md) | **⏱️ Kesto**: 1–2 tuntia | **⭐ Vaativuus**: Keskitaso
 
 ---
 
 ## Yleiskatsaus
 
-Tämä luku keskittyy AI-kykyisten sovellusten käyttöönottoon Azure Developer CLI:n ja Microsoft Foundry -palvelujen avulla. Yksinkertaisista AI-chat-sovelluksista työkaluihin integroituihin älykkäisiin agenteihin.
+Tämä luku keskittyy AI-ominaisuuksia hyödyntävien sovellusten käyttöönottoon Azure Developer CLI:n ja Microsoft Foundry -palvelujen avulla. Yksinkertaisista AI-chat-sovelluksista työkalujen kanssa toimiviin älykkäisiin agenteihin.
 
-> **Tarkistushuomautus (2026-03-25):** The command flow and extension guidance in this chapter were reviewed against `azd` `1.23.12` and the current preview AI agent extension release `azure.ai.agents` `0.1.18-preview`. If you are on an older AZD build, update first and then continue with the exercises.
+> **Vahvistusmerkintä (2026-06-15):** The command flow and extension guidance in this chapter were reviewed against `azd` `1.25.6` and the current preview AI agent extension release `azure.ai.agents` `0.1.40-preview`. If you are on an older AZD build, update first and then continue with the exercises.
 
 ## Oppimistavoitteet
 
-Suorittamalla tämän luvun:
+By completing this chapter, you will:
 - Ota käyttöön AI-sovelluksia valmiiden AZD-mallien avulla
 - Ymmärtää Microsoft Foundryn integrointi AZD:hen
-- Konfiguroida ja mukauttaa AI-agentteja työkaluilla
+- Määritä ja räätälöi AI-agentteja työkaluilla
 - Ota käyttöön RAG (Retrieval-Augmented Generation) -sovelluksia
 
 ---
@@ -24,14 +24,14 @@ Suorittamalla tämän luvun:
 
 | # | Oppitunti | Kuvaus | Aika |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundryn integrointi](microsoft-foundry-integration.md) | Yhdistä AZD Foundry-palveluihin | 30 min |
-| 2 | [AI-agenttien opas](agents.md) | Ota käyttöön älykkäitä agentteja työkaluilla | 45 min |
-| 3 | [AI-mallien käyttöönotto](ai-model-deployment.md) | Ota käyttöön ja määritä AI-malleja | 30 min |
-| 4 | [AI-työpaja](ai-workshop-lab.md) | Käytännön harjoitus: tee AI-ratkaisustasi AZD-valmis | 60 min |
+| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | Yhdistä AZD Foundry-palveluihin | 30 minuuttia |
+| 2 | [AI Agents Guide](agents.md) | Ota käyttöön älykkäitä agentteja työkaluineen | 45 minuuttia |
+| 3 | [AI Model Deployment](ai-model-deployment.md) | Ota käyttöön ja konfiguroi AI-malleja | 30 minuuttia |
+| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Käytännön harjoitus: Tee AI-ratkaisustasi AZD-valmis | 60 minuuttia |
 
 ---
 
-## 🚀 Nopea aloitus
+## 🚀 Pika-aloitus
 
 ```bash
 # Vaihtoehto 1: RAG-keskustelusovellus
@@ -49,12 +49,12 @@ azd up
 
 ---
 
-## 🤖 Esitellyt AI-mallipohjat
+## 🤖 Suositellut AI-mallit
 
-| Template | Description | Services |
+| Mallipohja | Kuvaus | Palvelut |
 |----------|-------------|----------|
 | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG-keskustelu lähdeviitteillä | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI-agentti työkaluilla | AI Agent Service |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI-agentti työkaluineen | AI Agent Service |
 | [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Perus AI-chat | OpenAI + Container Apps |
 
 ---
@@ -64,7 +64,7 @@ azd up
 | Ympäristö | Arvioidut kuukausikustannukset |
 |-------------|----------------------|
 | Kehitys | $80-150 |
-| Esituotanto | $150-300 |
+| Testaus | $150-300 |
 | Tuotanto | $300-3,500+ |
 
 **Vinkki:** Suorita `azd down` testauksen jälkeen välttääksesi kuluja.
@@ -75,21 +75,21 @@ azd up
 
 | Suunta | Luku |
 |-----------|---------|
-| **Edellinen** | [Luku 1: Perusta](../chapter-01-foundation/README.md) |
-| **Seuraava** | [Luku 3: Konfigurointi](../chapter-03-configuration/README.md) |
-| **Siirry kohtaan** | [Luku 8: Tuotantomallit](../chapter-08-production/README.md) |
+| **Edellinen** | [Chapter 1: Foundation](../chapter-01-foundation/README.md) |
+| **Seuraava** | [Chapter 3: Configuration](../chapter-03-configuration/README.md) |
+| **Siirry kohtaan** | [Chapter 8: Production Patterns](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Aiheeseen liittyvät resurssit
+## 📖 Aiheeseen liittyvät materiaalit
 
-- [AI-vianmääritys](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [AI:n tuotantokäytännöt](../chapter-08-production/production-ai-practices.md)
+- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Production AI Practices](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastuuvapauslauseke**:
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, otathan huomioon, että automaattisissa käännöksissä voi esiintyä virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä tulee pitää virallisena lähteenä. Keskeisten tietojen osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa mahdollisista väärinymmärryksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, otathan huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäiskielellä on virallinen lähde. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

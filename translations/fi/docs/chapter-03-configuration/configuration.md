@@ -1,70 +1,70 @@
-# Konfigurointiohje
+# Konfigurointiopas
 
 **Luvun navigointi:**
 - **📚 Kurssin etusivu**: [AZD aloittelijoille](../../README.md)
-- **📖 Nykyinen luku**: Luku 3 - Konfigurointi & Todennus
+- **📖 Nykyinen luku**: Luku 3 - Konfigurointi ja todennus
 - **⬅️ Edellinen**: [Ensimmäinen projektisi](first-project.md)
-- **➡️ Seuraava**: [Julkistusopas](../chapter-04-infrastructure/deployment-guide.md)
-- **🚀 Seuraava luku**: [Luku 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
+- **➡️ Seuraava**: [Julkaisuopas](../chapter-04-infrastructure/deployment-guide.md)
+- **🚀 Seuraava luku**: [Luku 4: Infrastruktuuri koodina](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Johdanto
 
-Tämä kattava opas käsittelee kaikkia Azure Developer CLI:n konfigurointiin liittyviä osa-alueita optimaalisten kehitys- ja julkaisuprosessien varmistamiseksi. Opit konfiguraation hierarkian, ympäristöjen hallinnan, todennusmenetelmät ja edistyneet konfigurointimalleja, jotka mahdollistavat tehokkaat ja turvalliset Azure-julkaisut.
+Tämä kattava opas kattaa kaikki Azure Developer CLI:n konfigurointiin liittyvät osa-alueet optimoitujen kehitys- ja julkaisuvirtausten tukemiseksi. Opit konfiguraation hierarkiasta, ympäristöjen hallinnasta, todennusmenetelmistä ja edistyneistä konfigurointimalleista, jotka mahdollistavat tehokkaat ja turvalliset Azure-julkaisut.
 
 ## Oppimistavoitteet
 
-Tämän oppitunnin lopussa osaat:
-- Hallita azd:n konfiguraatiohierarkiaa ja ymmärtää, miten asetukset priorisoidaan
-- Konfiguroida globaalit ja projektikohtaiset asetukset tehokkaasti
-- Hallita useita ympäristöjä eri konfiguraatioilla
+Tämän oppitunnin jälkeen osaat:
+- Hallita azd:n konfigurointihierarkiaa ja ymmärtää, miten asetusten priorisointi toimii
+- Konfiguroida globaaleja ja projekti-kohtaisia asetuksia tehokkaasti
+- Hallita useita ympäristöjä eri asetuksilla
 - Toteuttaa turvallisia todennus- ja valtuutusmalleja
-- Ymmärtää edistyneitä konfiguraatiomalleja monimutkaisiin skenaarioihin
+- Ymmärtää edistyneitä konfigurointimalleja monimutkaisille skenaarioille
 
 ## Oppimistulokset
 
 Oppitunnin suorittamisen jälkeen pystyt:
-- Konfiguroimaan azd:n optimoidaksesi kehitysprosessit
-- Luomaan ja hallitsemaan useita käyttöönottoyhteyksiä
+- Konfiguroimaan azd:n optimoiduiksi kehitysvirtauksiksi
+- Asettamaan ja hallitsemaan useita julkaisuympäristöjä
 - Toteuttamaan turvallisia konfiguraationhallintakäytäntöjä
-- Vianmäärittämään konfiguraatioon liittyviä ongelmia
+- Vianmääräämään konfiguraatioihin liittyviä ongelmia
 - Mukauttamaan azd:n toimintaa organisaation vaatimusten mukaan
 
-Tämä kattava opas käsittelee kaikkia Azure Developer CLI:n konfigurointiin liittyviä osa-alueita optimaalisten kehitys- ja julkaisuprosessien varmistamiseksi.
+Tämä kattava opas kattaa kaikki Azure Developer CLI:n konfigurointiin liittyvät osa-alueet optimoitujen kehitys- ja julkaisuvirtausten tukemiseksi.
 
-## Tekoälyagenttien ymmärtäminen azd-projektissa
+## AI-agenttien ymmärtäminen azd-projektissa
 
-Jos olet uusi tekoälyagenttien kanssa, tässä on yksinkertainen tapa ajatella niitä azd-maailmassa.
+Jos olet uusi AI-agenttien kanssa, tässä on yksinkertainen tapa ymmärtää niiden rooli azd-maailmassa.
 
 ### Mikä on agentti?
 
-Agentti on ohjelmisto, joka voi vastaanottaa pyynnön, päättää sen käsittelystä ja suorittaa toimintoja—usein kutsumalla tekoälymallia, hakemalla tietoja tai kutsumalla muita palveluja. azd-projektissa agentti on vain toinen **palvelu** web-käyttöliittymäsi tai API-backendin rinnalla.
+Agentti on ohjelmisto, joka voi vastaanottaa pyynnön, käsitellä sitä ja suorittaa toimintoja—usein kutsumalla AI-mallia, hakemalla tietoja tai kutsumalla muita palveluja. Azd-projektissa agentti on vain toinen **palvelu** web-frontendisi tai API-backendisi rinnalla.
 
-### Miten agentit sopivat azd-projektirakenteeseen
+### Kuinka agentit sopivat azd-projektin rakenteeseen
 
-azd-projekti koostuu kolmesta tasosta: **infrastruktuuri**, **koodi** ja **konfiguraatio**. Agentit liitetään näihin tasoihin aivan kuten muutkin palvelut:
+Azd-projekti koostuu kolmesta tasosta: **infrastruktuuri**, **koodi** ja **konfiguraatio**. Agentit liitetään näihin tasoihin samalla tavalla kuin muut palvelut:
 
-| Layer | What It Does for a Traditional App | What It Does for an Agent |
+| Kerros | Mitä se tekee perinteiselle sovellukselle | Mitä se tekee agentille |
 |-------|-------------------------------------|---------------------------|
-| **Infrastructure** (`infra/`) | Luo web-sovelluksen ja tietokannan | Luo tekoälymallin päätepisteen, hakemiston tai agentin isäntäympäristön |
-| **Code** (`src/`) | Sisältää frontend- ja API-lähdekoodin | Sisältää agentin logiikan ja prompt-määritelmät |
-| **Configuration** (`azure.yaml`) | Listaa palvelusi ja niiden hosting-kohteet | Listaa agenttisi palveluna, osoittaen sen koodiin ja isäntään |
+| **Infrastructure** (`infra/`) | Provisionoi verkkosovelluksen ja tietokannan | Provisionoi AI-mallin päätepisteen, hakemiston indeksin tai agentin isännän |
+| **Code** (`src/`) | Sisältää frontendisi ja API:n lähdekoodin | Sisältää agenttilogiikkasi ja kehotteiden määrittelyt |
+| **Configuration** (`azure.yaml`) | Luettelee palvelusi ja niiden isäntäympäristöt | Luettelee agenttisi palveluna, osoittaen sen koodiin ja isäntään |
 
 ### `azure.yaml`-tiedoston rooli
 
-Sinun ei tarvitse opetella syntaksia ulkoa juuri nyt. Käsitteellisesti `azure.yaml` on tiedosto, jossa kerrot azd:lle: "Tässä ovat sovellukseni palvelut, ja tässä on, mistä löytää niiden koodi."
+Sinun ei tarvitse muistaa syntaksia juuri nyt. Käsitteellisesti `azure.yaml` on tiedosto, jossa kerrot azd:lle: *"Tässä ovat sovellukseni palvelut, ja tässä on niiden koodin sijainti."*
 
-Kun projektiisi kuuluu tekoälyagentti, `azure.yaml` listaa sen palveluiden joukossa. azd tietää sitten provisionoida oikean infrastruktuurin (kuten Microsoft Foundry Models -päätepisteen tai Container Appin agentin isännöintiin) ja ottaa agenttikoodisi käyttöön—ihan kuten se tekisi web-sovelluksen tai API:n kohdalla.
+Kun projektiisi sisältyy AI-agentti, `azure.yaml` yksinkertaisesti listaa agentin yhtenä palveluna. Azd tietää tämän jälkeen provisionoida oikean infrastruktuurin (kuten Microsoft Foundry Models -päätepisteen tai Container Appin agentin isännöimiseksi) ja julkaista agenttisi koodin—täsmälleen samalla tavalla kuin web-sovelluksen tai API:n kanssa.
 
-Tämä tarkoittaa, ettei ole mitään periaatteellisesti uutta opittavaa. Jos ymmärrät, miten azd hallinnoi web-palvelua, ymmärrät jo, miten se hallinnoi agenttia.
+Tämä tarkoittaa, ettei ole mitään olennaisesti uutta opittavaa. Jos ymmärrät, miten azd hallinnoi web-palvelua, ymmärrät jo miten se hallitsee agenttia.
 
-## Konfiguraation hierarkia
+## Konfigurointihierarkia
 
 azd käyttää hierarkkista konfiguraatiojärjestelmää:
-1. **Komentorivin liput** (korkein prioriteetti)
+1. **Komentorivivalitsimet** (korkein prioriteetti)
 2. **Ympäristömuuttujat**
-3. **Paikallinen projektin konfiguraatio** (`.azd/config.json`)
-4. **Globaali käyttäjän konfiguraatio** (`~/.azd/config.json`)
-5. **Oletusarvot** (alin prioriteetti)
+3. **Paikallinen projektikonfiguraatio** (`.azd/config.json`)
+4. **Käyttäjän globaali konfiguraatio** (`~/.azd/config.json`)
+5. **Oletusarvot** (matalin prioriteetti)
 
 ## Globaali konfiguraatio
 
@@ -76,7 +76,7 @@ azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 # Aseta oletussijainti
 azd config set defaults.location "eastus2"
 
-# Aseta oletusresurssiryhmän nimeämiskäytäntö
+# Aseta resurssiryhmien oletusnimeämiskäytäntö
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
 # Näytä kaikki globaalit määritykset
@@ -88,24 +88,24 @@ azd config unset defaults.location
 
 ### Yleiset globaalit asetukset
 ```bash
-# Kehitysasetukset
-azd config set alpha.enable true                    # Ota alfa-ominaisuudet käyttöön
+# Kehitysmieltymykset
+azd config set alpha.enable true                    # Ota alfaominaisuudet käyttöön
 azd config set telemetry.enabled false             # Poista telemetria käytöstä
 azd config set output.format json                  # Aseta ulostulomuoto
 
-# Turvallisuusasetukset
+# Suojausasetukset
 azd config set auth.useAzureCliCredential true     # Käytä Azure CLI:tä todennukseen
 azd config set tls.insecure false                  # Pakota TLS-tarkistus
 
-# Suorituskyvyn hienosäätö
-azd config set provision.parallelism 5             # Resurssien rinnakkainen luominen
+# Suorituskyvyn viritys
+azd config set provision.parallelism 5             # Resurssien rinnakkainen luonti
 azd config set deploy.timeout 30m                  # Käyttöönoton aikakatkaisu
 ```
 
-## 🏗️ Projektin konfiguraatio
+## 🏗️ Projektikonfiguraatio
 
 ### azure.yaml-rakenne
-Tiedosto `azure.yaml` on azd-projektisi sydän:
+Tiedosto `azure.yaml` on azd-projektisi ydin:
 
 ```yaml
 # Minimum configuration
@@ -181,9 +181,9 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Palvelun konfiguraatiovaihtoehdot
+### Palvelun konfiguraatioasetukset
 
-#### Hosting-tyypit
+#### Isäntätyypit
 ```yaml
 services:
   web-static:
@@ -202,7 +202,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Kieleen liittyvät asetukset
+#### Kielekohtaiset asetukset
 ```yaml
 services:
   node-app:
@@ -240,8 +240,8 @@ azd env new staging --location "westus2"
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### Ympäristön konfiguraatio
-Jokaisella ympäristöllä on oma konfiguraationsa hakemistossa `.azure/<env-name>/config.json`:
+### Ympäristöjen konfiguraatio
+Jokaisella ympäristöllä on oma konfiguraationsa tiedostossa `.azure/<env-name>/config.json`:
 
 ```json
 {
@@ -273,7 +273,7 @@ azd env set DEBUG "true"
 # Näytä ympäristömuuttujat
 azd env get-values
 
-# Odotettu tulos:
+# Odotettu tuloste:
 # DATABASE_URL=postgresql://user:pass@host:5432/db
 # API_KEY=secret-api-key
 # DEBUG=true
@@ -281,13 +281,13 @@ azd env get-values
 # Poista ympäristömuuttuja
 azd env unset DEBUG
 
-# Varmista poisto
+# Vahvista poisto
 azd env get-values | grep DEBUG
 # (ei pitäisi palauttaa mitään)
 ```
 
-### Ympäristöpohjat
-Luo `.azure/env.template` yhdenmukaista ympäristöasetusta varten:
+### Ympäristömallit
+Luo `.azure/env.template` yhdenmukaisen ympäristöasetuksen takaamiseksi:
 ```bash
 # Pakolliset muuttujat
 AZURE_SUBSCRIPTION_ID=
@@ -303,21 +303,66 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 Todennuksen konfigurointi
+### Ympäristöjen jakaminen tiimin kesken
+
+Kun useampi kuin yksi henkilö työskentelee projektissa, pitää sopia **mitä versionhallinnassa jaetaan ja mitä pidetään paikallisena**. azd pitää jokaisen ympäristön `.azure/`-kansion alla, eikä kaikkea siitä pitäisi sitoa versionhallintaan.
+
+**Mitä `.azure/` sisältää:**
+
+```
+.azure/
+├── config.json              # which env is currently selected (local)
+└── <env-name>/
+    ├── config.json          # subscription, location, resource IDs
+    └── .env                 # environment variables (may contain secrets!)
+```
+
+**Mitä gitignoreen laitetaan.** azd:n oletus `.gitignore` sulkee jo `.azure/`-kansion. Pidä se niin — `.env`-tiedostot voivat sisältää salaisuuksia, ja resurssitunnukset ovat spesifisiä sille, joka provisionoi ne. Jokainen tiimiläinen luo **oman** ympäristönsä paikallisesti:
+
+```bash
+# Jokainen kehittäjä suorittaa tämän kerran saadakseen oman eristetyn ympäristön
+azd env new dev-alice
+azd up
+```
+
+**Ympäristöjen vaihtaminen.** Kehittäjä, joka ylläpitää useita ympäristöjä, valitsee aktiivisen ennen komentojen suorittamista:
+
+```bash
+azd env list                 # näytä kaikki paikalliset ympäristöt ja mikä niistä on oletus
+azd env select staging       # aseta 'staging' aktiiviseksi ympäristöksi
+azd env get-values           # varmista, että osoitat oikeaan ympäristöön
+```
+
+**Ei-salaisten oletusarvojen tarjoaminen tiimille.** Committaa malli (kuten yllä oleva `.azure/env.template`), jotta kaikki tietävät, mitkä muuttujat pitää asettaa — mutta älä koskaan commitoi täytettyjä arvoja. Uudet tiimiläiset kopioivat mallin ja täyttävät omat arvonsa.
+
+**Ympäristöt CI/CD:ssä.** Putket eivät lue paikallista `.azure/`-kansiotasi. Sen sijaan tarjoa ympäristöarvot putken muuttujina/salaisuuksina, ja azd lukee ne prosessin ympäristöstä:
+
+```bash
+# CI:ssä azd lukee nämä ympäristömuuttujista, ei .azure/-hakemistosta.
+export AZURE_ENV_NAME=production
+export AZURE_LOCATION=eastus2
+export AZURE_SUBSCRIPTION_ID=<sub-id>
+azd provision --no-prompt
+azd deploy --no-prompt
+```
+
+> **Nyrkkisääntö:** infrastruktuurikoodi (`infra/`, `azure.yaml`) jaetaan Gitissä; ympäristöjen *tila ja salaisuudet* (`.azure/`) ovat kehittäjäkohtaisia ja putkikohtaisia. `azd pipeline config` asettaa putken muuttujat puolestasi automaattisesti.
+
+## 🔐 Todennusasetukset
 
 ### Azure CLI -integraatio
 ```bash
 # Käytä Azure CLI -tunnistetietoja (oletus)
 azd config set auth.useAzureCliCredential true
 
-# Kirjaudu sisään tietylle vuokraajalle
+# Kirjaudu tiettyyn vuokraajaan
 az login --tenant <tenant-id>
 
 # Aseta oletustilaus
 az account set --subscription <subscription-id>
 ```
 
-### Service Principal -todennus
+### Palvelutunnuksen todennus
 CI/CD-putkille:
 ```bash
 # Aseta ympäristömuuttujat
@@ -330,15 +375,15 @@ azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
-### Managed Identity
+### Hallittu identiteetti
 Azure-isännöidyille ympäristöille:
 ```bash
-# Ota käyttöön hallitun identiteetin todennus
+# Ota käyttöön hallinnoidun identiteetin todennus
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ Infrastruktuurin konfigurointi
+## 🏗️ Infrastruktuuriasetukset
 
 ### Bicep-parametrit
 Määritä infrastruktuurin parametrit tiedostossa `infra/main.parameters.json`:
@@ -364,7 +409,7 @@ Määritä infrastruktuurin parametrit tiedostossa `infra/main.parameters.json`:
 ```
 
 ### Terraform-konfiguraatio
-Terraform-projekteille, määritä `infra/terraform.tfvars`:
+Terraform-projekteissa määrittele `infra/terraform.tfvars`-tiedostossa:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -372,7 +417,7 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 Julkaisun konfigurointi
+## 🚀 Julkaisuasetukset
 
 ### Build-asetukset
 ```yaml
@@ -411,13 +456,13 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
-Esimerkkinen `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
+Esimerkki `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 Edistynyt konfigurointi
 
-### Mukautettu resurssien nimeäminen
+### Mukautettu resurssin nimeäminen
 ```bash
-# Aseta nimeämiskäytännöt
+# Määritä nimeämiskäytännöt
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
@@ -434,7 +479,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### Monitoroinnin konfiguraatio
+### Valvonta-asetukset
 ```yaml
 # In azure.yaml
 monitoring:
@@ -450,16 +495,16 @@ monitoring:
 
 ### Kehitysympäristö
 ```bash
-# .azure/development/.env
+# .azure/kehitys/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Staging-ympäristö
+### Esituotantoympäristö
 ```bash
-# .azure/staging/.env
+# .azure/esituotanto/.env
 DEBUG=false
 LOG_LEVEL=info
 ENABLE_MONITORING=true
@@ -468,7 +513,7 @@ USE_PRODUCTION_APIS=true
 
 ### Tuotantoympäristö
 ```bash
-# .azure/tuotanto/.env
+# .azure/production/.env
 DEBUG=false
 LOG_LEVEL=error
 ENABLE_MONITORING=true
@@ -477,7 +522,7 @@ ENABLE_SECURITY_HEADERS=true
 
 ## 🔍 Konfiguraation validointi
 
-### Vahvista konfiguraatio
+### Konfiguraation validointi
 ```bash
 # Tarkista konfiguraation syntaksi
 azd config validate
@@ -485,12 +530,12 @@ azd config validate
 # Testaa ympäristömuuttujat
 azd env get-values
 
-# Validoi infrastruktuuri
+# Vahvista infrastruktuuri
 azd provision --dry-run
 ```
 
-### Konfiguraatioskiptit
-Luo validointiskriptit hakemistoon `scripts/`:
+### Konfiguraatioskriptit
+Luo validointiskriptit kansioon `scripts/`:
 
 ```bash
 #!/bin/bash
@@ -542,16 +587,16 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Versionhallinnan näkökohdat
+### 3. Versionhallinnan huomioita
 ```bash
 # .gitignore
-.azure/*/config.json         # Ympäristömääritykset (sisältävät resurssien tunnuksia)
-.azure/*/.env               # Ympäristömuuttujat (saattavat sisältää salaisuuksia)
+.azure/*/config.json         # Ympäristömääritykset (sisältävät resurssitunnuksia)
+.azure/*/.env               # Ympäristömuuttujat (saattaa sisältää salaisuuksia)
 .env                        # Paikallinen ympäristötiedosto
 ```
 
 ### 4. Konfiguraation dokumentointi
-Dokumentoi konfiguraatiosi tiedostossa `CONFIG.md`:
+Dokumentoi konfiguraatiosi tiedostoon `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -579,7 +624,7 @@ azd env set LOG_LEVEL debug
 azd env set ENABLE_TELEMETRY false
 azd env set APP_INSIGHTS_SAMPLING 100
 
-# Luo staging-ympäristö
+# Luo esituotantoympäristö
 azd env new staging
 azd env set LOG_LEVEL info
 azd env set ENABLE_TELEMETRY true
@@ -600,12 +645,12 @@ azd env select production && azd env get-values
 **Onnistumiskriteerit:**
 - [ ] Kolme ympäristöä luotu onnistuneesti
 - [ ] Jokaisella ympäristöllä on ainutlaatuinen konfiguraatio
-- [ ] Ympäristöjen välillä voi vaihtaa ilman virheitä
+- [ ] Voi vaihtaa ympäristöjen välillä ilman virheitä
 - [ ] `azd env list` näyttää kaikki kolme ympäristöä
 
-### Harjoitus 2: Salaisuuksien hallinta (10 minuuttia)
+### Harjoitus 2: Salausten hallinta (10 minuuttia)
 
-**Tavoite**: Harjoitella turvallista konfiguraatiota arkaluonteisilla tiedoilla
+**Tavoite**: Harjoittele turvallista konfigurointia arkaluonteisten tietojen kanssa
 
 ```bash
 # Aseta salaisuudet (ei näytetä tulosteessa)
@@ -616,7 +661,7 @@ azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# Näytä ympäristö (salaisuudet pitäisi peittää)
+# Näytä ympäristö (salaisuudet tulisi peittää)
 azd env get-values
 
 # Varmista, että salaisuudet on tallennettu
@@ -624,34 +669,34 @@ azd env get DB_PASSWORD  # Pitäisi näyttää todellinen arvo
 ```
 
 **Onnistumiskriteerit:**
-- [ ] Salaisuudet tallennetaan ilman näyttämistä terminaalissa
+- [ ] Salaisuudet tallennettu näyttämättä niitä terminaalissa
 - [ ] `azd env get-values` näyttää sensuroidut salaisuudet
-- [ ] Yksittäinen `azd env get <SECRET_NAME>` palauttaa todellisen arvon
+- [ ] Yksittäinen `azd env get <SECRET_NAME>` hakee todellisen arvon
 
 ## Seuraavat askeleet
 
-- [Ensimmäinen projektisi](first-project.md) - Käytä konfiguraatiota käytännössä
-- [Julkistusopas](../chapter-04-infrastructure/deployment-guide.md) - Käytä konfiguraatiota julkaisussa
-- [Resurssien provisiointi](../chapter-04-infrastructure/provisioning.md) - Tuotantovalmiit konfiguraatiot
+- [Ensimmäinen projektisi](first-project.md) - Sovella konfiguraatiota käytännössä
+- [Julkaisuopas](../chapter-04-infrastructure/deployment-guide.md) - Käytä konfiguraatiota käyttöönotossa
+- [Resurssien provisointi](../chapter-04-infrastructure/provisioning.md) - Tuotantovalmiit konfiguraatiot
 
-## Lähteet
+## Viitteet
 
-- [azd Configuration Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Environment Variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [azd-konfiguraatioreferenssi](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azure.yaml-skeema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [Ympäristömuuttujat](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
 **Luvun navigointi:**
 - **📚 Kurssin etusivu**: [AZD aloittelijoille](../../README.md)
-- **📖 Nykyinen luku**: Luku 3 - Konfigurointi & Todennus
+- **📖 Nykyinen luku**: Luku 3 - Konfigurointi ja todennus
 - **⬅️ Edellinen**: [Ensimmäinen projektisi](first-project.md)
-- **➡️ Seuraava luku**: [Luku 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
+- **➡️ Seuraava luku**: [Luku 4: Infrastruktuuri koodina](../chapter-04-infrastructure/deployment-guide.md)
 - **Seuraava oppitunti**: [Ensimmäinen projektisi](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastuuvapauslauseke**:
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä tulisi pitää luotettavana lähteenä. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tästä käännöksestä johtuvista väärinymmärryksistä tai virhetulkinnoista.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, otathan huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäiskielellä on virallinen lähde. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

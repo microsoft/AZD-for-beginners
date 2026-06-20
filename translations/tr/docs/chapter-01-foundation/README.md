@@ -1,22 +1,22 @@
-# Bölüm 1: Temel & Hızlı Başlangıç
+# Bölüm 1: Temel ve Hızlı Başlangıç
 
-**📚 Kurs**: [AZD Yeni Başlayanlar İçin](../../README.md) | **⏱️ Süre**: 30-45 dakika | **⭐ Zorluk**: Başlangıç
+**📚 Kurs**: [AZD Yeni Başlayanlar](../../README.md) | **⏱️ Süre**: 30-45 dakika | **⭐ Zorluk**: Başlangıç
 
 ---
 
 ## Genel Bakış
 
-Bu bölüm Azure Developer CLI (azd) temel bilgilerini tanıtır. Temel kavramları öğrenecek, araçları kuracak ve ilk uygulamanızı Azure'a dağıtacaksınız.
+Bu bölüm Azure Developer CLI (azd) temellerini tanıtır. Temel kavramları öğrenecek, araçları yükleyecek ve ilk uygulamanızı Azure'a dağıtacaksınız.
 
-> Mart 2026'da `azd 1.23.12` ile doğrulanmıştır.
+> Haziran 2026'da `azd 1.25.6` ile doğrulanmıştır.
 
 ## Öğrenme Hedefleri
 
-Bu bölümü tamamladığınızda şunları yapabileceksiniz:
-- Azure Developer CLI'nin ne olduğunu ve Azure CLI'den nasıl farklı olduğunu anlayacaksınız
-- Platformunuzda AZD'yi yükleyecek ve yapılandıracaksınız
-- İlk uygulamanızı `azd up` ile Azure'a dağıtacaksınız
-- Kaynakları `azd down` ile temizleyeceksiniz
+Bu bölümü tamamladıktan sonra şunları yapabileceksiniz:
+- Azure Developer CLI'nin ne olduğunu ve Azure CLI'den nasıl farklı olduğunu anlayın
+- Platformunuzda AZD'yi yükleyin ve yapılandırın
+- `azd up` ile ilk uygulamanızı Azure'a dağıtın
+- `azd down` ile kaynakları temizleyin
 
 ---
 
@@ -25,12 +25,14 @@ Bu bölümü tamamladığınızda şunları yapabileceksiniz:
 | # | Ders | Açıklama | Süre |
 |---|--------|-------------|------|
 | 1 | [AZD Temelleri](azd-basics.md) | Temel kavramlar, terminoloji ve proje yapısı | 15 dk |
-| 2 | [Kurulum ve Ayarlar](installation.md) | Platforma özel kurulum kılavuzları | 10 dk |
-| 3 | [İlk Projeniz](first-project.md) | Uygulamalı: Bir web uygulamasını Azure'a dağıtma | 20 dk |
+| 2 | [Yükleme ve Kurulum](installation.md) | Platforma özel kurulum rehberleri | 10 dk |
+| 3 | [İlk Projeniz](first-project.md) | Uygulamalı: Bir web uygulamasını Azure'a dağıtın | 20 dk |
+| 4 | [Kendi Uygulamanızı Getirme](bring-your-own-app.md) | Zaten sahip olduğunuz mevcut bir projeye azd ekleyin | 15 dk |
+| 5 | [Geliştirici Konteynerleri ve Codespaces](dev-containers.md) | Dev konteynerleri ile tekrarlanabilir azd ortamları | 15 dk |
 
 ---
 
-## ✅ Buradan Başlayın: Kurulumu Doğrulayın
+## ✅ Buradan Başlayın: Kurulumunuzu Doğrulayın
 
 Başlamadan önce, yerel makinenizin Bölüm 1 şablonu için hazır olduğunu doğrulayın:
 
@@ -44,7 +46,7 @@ Başlamadan önce, yerel makinenizin Bölüm 1 şablonu için hazır olduğunu d
 bash ./validate-setup.sh
 ```
 
-Betik eksik araçlar bildiriyorsa, önce bunları düzeltin ve sonra bölüme devam edin.
+If the script reports missing tools, fix those first and then continue with the chapter.
 
 ---
 
@@ -55,7 +57,7 @@ Betik eksik araçlar bildiriyorsa, önce bunları düzeltin ve sonra bölüme de
 azd version
 
 # AZD için kimlik doğrulaması yap
-# İsteğe bağlı: Azure CLI komutlarını doğrudan çalıştırmayı planlıyorsanız az login yapın
+# İsteğe bağlı: Azure CLI komutlarını doğrudan çalıştırmayı planlıyorsanız 'az login'
 azd auth login
 
 # İlk uygulamanızı dağıtın
@@ -70,7 +72,7 @@ azd down --force --purge
 
 ## ✅ Başarı Kriterleri
 
-Bu bölümü tamamladıktan sonra şunları yapabiliyor olmalısınız:
+Bu bölümü tamamladıktan sonra şunları yapabilmelisiniz:
 
 ```bash
 azd version              # Yüklü sürümü gösterir
@@ -86,7 +88,7 @@ azd down --force --purge # Kaynakları temizler
 
 | Yön | Bölüm |
 |-----------|---------|
-| **Sonraki** | [Bölüm 2: Yapay Zeka-Öncelikli Geliştirme](../chapter-02-ai-development/README.md) |
+| **Sonraki** | [Bölüm 2: Yapay Zeka Odaklı Geliştirme](../chapter-02-ai-development/README.md) |
 | **Atla** | [Bölüm 3: Yapılandırma](../chapter-03-configuration/README.md) |
 
 ---
@@ -101,5 +103,5 @@ azd down --force --purge # Kaynakları temizler
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Feragatname**:
-Bu belge [Co-op Translator](https://github.com/Azure/co-op-translator) adlı Yapay Zeka çeviri hizmeti kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hata veya yanlışlıklar içerebileceğinin farkında olun. Orijinal belge, kendi ana dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucunda ortaya çıkan herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

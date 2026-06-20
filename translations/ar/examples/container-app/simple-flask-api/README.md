@@ -1,64 +1,65 @@
 # Simple Flask API - Container App Example
 
-**مسار التعلم:** مبتدئ ⭐ | **الوقت:** 25-35 دقيقة | **التكلفة:** $0-15/شهريًا
+**مسار التعلم:** مبتدئ ⭐ | **الوقت:** 25-35 دقيقة | **التكلفة:** $0-15/شهر
 
-نموذج كامل لواجهة REST API بلغة Python باستخدام Flask مُنتشر على Azure Container Apps عبر Azure Developer CLI (azd). يوضح هذا المثال نشر الحاويات، القياس التلقائي، وأسُس المراقبة.
+تطبيق Python Flask REST API كامل وعامل مُعبأ في حاوية ومُشغَّل على Azure Container Apps باستخدام Azure Developer CLI (azd). يوضح هذا المثال نشر الحاويات، التحجيم التلقائي، وأساسيات المراقبة.
 
-## 🎯 ما الذي ستتعلمه
+## 🎯 ما ستتعلمونه
 
-- نشر تطبيق Python مُحاكى داخل حاوية إلى Azure
-- تكوين القياس التلقائي مع مبدأ scale-to-zero
+- نشر تطبيق Python مُحوَّل إلى حاوية على Azure
+- تكوين التحجيم التلقائي مع التحجيم إلى الصفر
 - تنفيذ فحوصات الصحة وفحوصات الجاهزية
 - مراقبة سجلات التطبيق والمقاييس
 - استخدام Azure Developer CLI للنشر السريع
 
-## 📦 ما المضمن
+## 📦 ما هو مدرج
 
-✅ **تطبيق Flask** - REST API كامل بعمليات CRUD (`src/app.py`)  
+✅ **Flask Application** - REST API كامل مع عمليات CRUD (`src/app.py`)  
 ✅ **Dockerfile** - تكوين الحاوية جاهز للإنتاج  
-✅ **بِسِب للبنية التحتية** - بيئة Container Apps ونشر API  
-✅ **تكوين AZD** - إعداد نشر بأمر واحد  
-✅ **فحوصات الصحة** - فحوصات Liveness و Readiness مكوَّنة  
-✅ **القياس التلقائي** - من 0 إلى 10 نسخ بناءً على حمل HTTP  
+✅ **Bicep Infrastructure** - بيئة Container Apps ونشر API  
+✅ **AZD Configuration** - إعداد نشر بأمر واحد  
+✅ **Health Probes** - تم تكوين فحوصات liveness وreadiness  
+✅ **Auto-scaling** - 0-10 نسخ بناءً على حمل HTTP  
 
-## المعمارية
+## البنية
 
 ```mermaid
 graph TD
-    subgraph ACA[بيئة Azure Container Apps]
-        Flask[حاوية واجهة برمجة تطبيقات Flask<br/>نقاط التحقق من الصحة<br/>واجهة برمجة تطبيقات REST<br/>التحجيم التلقائي من 0 إلى 10 نسخ]
+    subgraph ACA[بيئة تطبيقات الحاويات على Azure]
+        Flask[حاوية واجهة برمجة تطبيقات Flask<br/>نقاط نهاية الحالة الصحية<br/>واجهة برمجة تطبيقات REST<br/>التحجيم التلقائي من 0 إلى 10 نسخ]
         AppInsights[رؤى التطبيق]
     end
 ```
+
 ## المتطلبات المسبقة
 
 ### مطلوب
 - **Azure Developer CLI (azd)** - [دليل التثبيت](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
 - **اشتراك Azure** - [حساب مجاني](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [تثبيت Docker](https://www.docker.com/products/docker-desktop/) (لاختبار محلي)
+- **Docker Desktop** - [Install Docker](https://www.docker.com/products/docker-desktop/) (لاختبار محلي)
 
 ### التحقق من المتطلبات المسبقة
 
 ```bash
-# تحقق من إصدار azd (يجب أن يكون 1.5.0 أو أعلى)
+# تحقق من إصدار azd (يتطلب 1.5.0 أو أعلى)
 azd version
 
-# التحقق من تسجيل الدخول إلى Azure
+# تحقق من تسجيل الدخول إلى Azure
 azd auth login
 
-# التحقق من Docker (اختياري، للاختبار المحلي)
+# تحقق من Docker (اختياري، للاختبار المحلي)
 docker --version
 ```
 
 ## ⏱️ الجدول الزمني للنشر
 
-| المرحلة | المدة | ما يحدث |
+| المرحلة | المدة | ما الذي يحدث |
 |-------|----------|--------------||
-| Environment setup | 30 seconds | Create azd environment |
-| Build container | 2-3 minutes | Docker build Flask app |
-| Provision infrastructure | 3-5 minutes | Create Container Apps, registry, monitoring |
-| Deploy application | 2-3 minutes | Push image and deploy to Container Apps |
-| **الإجمالي** | **8-12 دقيقة** | جاهز النشر كاملة |
+| إعداد البيئة | 30 ثانية | إنشاء azd environment |
+| بناء الحاوية | 2-3 دقائق | Docker build تطبيق Flask |
+| توفير البنية التحتية | 3-5 دقائق | إنشاء Container Apps، registry، المراقبة |
+| نشر التطبيق | 2-3 دقائق | دفع الصورة ونشرها على Container Apps |
+| **الإجمالي** | **8-12 دقائق** | نشر مكتمل وجاهز |
 
 ## البدء السريع
 
@@ -66,17 +67,17 @@ docker --version
 # انتقل إلى المثال
 cd examples/container-app/simple-flask-api
 
-# هيئ البيئة (اختر اسمًا فريدًا)
+# تهيئة البيئة (اختر اسمًا فريدًا)
 azd env new myflaskapi
 
 # انشر كل شيء (البنية التحتية + التطبيق)
 azd up
 # سيُطلب منك:
 # 1. اختر اشتراك Azure
-# 2. اختر المنطقة (مثل: eastus2)
-# انتظر من 8 إلى 12 دقيقة حتى يكتمل النشر
+# 2. اختر الموقع (مثل eastus2)
+# 3. انتظر 8-12 دقيقة لإتمام النشر
 
-# احصل على نقطة نهاية API الخاصة بك
+# احصل على نقطة النهاية لواجهة برمجة التطبيقات الخاصة بك
 azd env get-values
 
 # اختبر واجهة برمجة التطبيقات
@@ -101,22 +102,22 @@ curl $(azd env get-value API_ENDPOINT)/health
 # عرض الخدمات المنشورة
 azd show
 
-# الناتج المتوقع يظهر:
+# الإخراج المتوقع يظهر:
 # - الخدمة: api
 # - نقطة النهاية: https://ca-api-[env].xxx.azurecontainerapps.io
 # - الحالة: قيد التشغيل
 ```
 
-### الخطوة 2: اختبار نقاط نهاية الـ API
+### الخطوة 2: اختبار نقاط نهاية API
 
 ```bash
-# الحصول على نقطة النهاية لواجهة برمجة التطبيقات
+# الحصول على نقطة نهاية واجهة برمجة التطبيقات
 API_URL=$(azd env get-value API_ENDPOINT)
 
-# اختبار صحة الخدمة
+# اختبار الصحة
 curl $API_URL/health
 
-# اختبار نقطة النهاية الجذرية
+# اختبار نقطة نهاية الجذر
 curl $API_URL/
 
 # إنشاء عنصر
@@ -129,10 +130,10 @@ curl $API_URL/api/items
 ```
 
 **معايير النجاح:**
-- ✅ تُعيد نقطة /health حالة HTTP 200
-- ✅ تعرض نقطة الجذر معلومات الـ API
-- ✅ POST ينشئ عنصرًا ويُعيد HTTP 201
-- ✅ GET يعيد العناصر المنشأة
+- ✅ نقطة نهاية الصحة تُرجع HTTP 200
+- ✅ نقطة النهاية الجذرية تعرض معلومات عن API
+- ✅ عملية POST تنشئ عنصرًا وتُرجع HTTP 201
+- ✅ عملية GET تُرجع العناصر التي تم إنشاؤها
 
 ### الخطوة 3: عرض السجلات
 
@@ -166,16 +167,16 @@ simple-flask-api/
     └── Dockerfile
 ```
 
-## نقاط نهاية الـ API
+## نقاط نهاية API
 
 | نقطة النهاية | الطريقة | الوصف |
 |----------|--------|-------------|
 | `/health` | GET | فحص الصحة |
-| `/api/items` | GET | سرد جميع العناصر |
+| `/api/items` | GET | قائمة بكل العناصر |
 | `/api/items` | POST | إنشاء عنصر جديد |
-| `/api/items/{id}` | GET | جلب عنصر محدد |
-| `/api/items/{id}` | PUT | تحديث عنصر |
-| `/api/items/{id}` | DELETE | حذف عنصر |
+| `/api/items/{id}` | GET | الحصول على عنصر محدد |
+| `/api/items/{id}` | PUT | تحديث العنصر |
+| `/api/items/{id}` | DELETE | حذف العنصر |
 
 ## التكوين
 
@@ -188,11 +189,11 @@ azd env set LOG_LEVEL info
 azd env set MAX_REPLICAS 20
 ```
 
-### تكوين القياس
+### تكوين التحجيم
 
-يتدرج الـ API تلقائيًا بناءً على حركة HTTP:
-- **الحد الأدنى من النسخ**: 0 (يتدرج إلى الصفر عند الخمول)
-- **الحد الأقصى من النسخ**: 10
+يتوسع API تلقائيًا بناءً على حركة مرور HTTP:
+- **الحد الأدنى لنسخ**: 0 (يتوسع إلى الصفر عند الخمول)
+- **الحد الأقصى لنسخ**: 10
 - **الطلبات المتزامنة لكل نسخة**: 50
 
 ## التطوير
@@ -233,10 +234,10 @@ curl http://localhost:8000/health
 azd up
 ```
 
-### نشر الشيفرة فقط
+### نشر الكود فقط
 
 ```bash
-# نشر شفرة التطبيق فقط (البنية التحتية دون تغيير)
+# نشر كود التطبيق فقط (البنية التحتية دون تغيير)
 azd deploy api
 ```
 
@@ -246,7 +247,7 @@ azd deploy api
 # تحديث متغيرات البيئة
 azd env set API_KEY "new-api-key"
 
-# إعادة النشر بالتكوين الجديد
+# إعادة النشر باستخدام التكوين الجديد
 azd deploy api
 ```
 
@@ -271,7 +272,7 @@ az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 # افتح لوحة معلومات Azure Monitor
 azd monitor --overview
 
-# عرض المقاييس المحددة
+# عرض مقاييس محددة
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "Requests,ResponseTime"
@@ -301,7 +302,7 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/item
   -d '{"name": "Test Item", "description": "A test item"}'
 ```
 
-### جلب كل العناصر
+### الحصول على كل العناصر
 
 ```bash
 curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
@@ -309,19 +310,19 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
 
 ## تحسين التكلفة
 
-يستخدم هذا النشر مبدأ scale-to-zero، لذلك تدفع فقط عند معالجة الـ API للطلبات:
+يستخدم هذا النشر ميزة التحجيم إلى الصفر، لذا تدفع فقط عندما يعالج API الطلبات:
 
-- **تكلفة الخمول**: ~$0/شهر (يتدرج إلى الصفر)
-- **تكلفة التشغيل**: ~$0.000024/ثانية لكل نسخة
+- **تكلفة الخمول**: ~$0/الشهر (يتم التحجيم إلى الصفر)
+- **تكلفة النشاط**: ~$0.000024/ثانية لكل نسخة
 - **التكلفة الشهرية المتوقعة** (استخدام خفيف): $5-15
 
 ### تقليل التكاليف أكثر
 
 ```bash
-# تقليل الحد الأقصى لعدد النسخ لبيئة التطوير
+# خفض الحد الأقصى لعدد النسخ لبيئة التطوير
 azd env set MAX_REPLICAS 3
 
-# استخدم مهلة خمول أقصر
+# استخدم مهلة الخمول الأقصر
 azd env set SCALE_TO_ZERO_TIMEOUT 300  # ٥ دقائق
 ```
 
@@ -333,19 +334,19 @@ azd env set SCALE_TO_ZERO_TIMEOUT 300  # ٥ دقائق
 # تحقق من سجلات الحاوية باستخدام Azure CLI
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 
-# تأكد من بناء صورة Docker محليًا
+# تحقق من بناء صور Docker محليًا
 docker build -t test ./src
 ```
 
-### واجهة API غير قابلة للوصول
+### API غير متاح
 
 ```bash
-# تحقّق من أن الـ Ingress خارجي
+# تحقق من أن نقطة الدخول خارجية
 az containerapp show --name api --resource-group rg-simple-flask-api \
   --query properties.configuration.ingress.external
 ```
 
-### زمن استجابة مرتفع
+### أوقات استجابة مرتفعة
 
 ```bash
 # تحقق من استخدام وحدة المعالجة المركزية/الذاكرة
@@ -353,15 +354,15 @@ az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# قم بزيادة الموارد إذا لزم الأمر
+# قم بزيادة الموارد عند الحاجة
 az containerapp update --name api --resource-group rg-simple-flask-api \
   --cpu 1.0 --memory 2Gi
 ```
 
-## التنظيف
+## تنظيف الموارد
 
 ```bash
-# حذف جميع الموارد
+# احذف جميع الموارد
 azd down --force --purge
 ```
 
@@ -369,15 +370,15 @@ azd down --force --purge
 
 ### توسيع هذا المثال
 
-1. **أضف قاعدة بيانات** - دمج Azure Cosmos DB أو SQL Database
+1. **إضافة قاعدة بيانات** - دمج Azure Cosmos DB أو SQL Database
    ```bash
    # إضافة وحدة Cosmos DB إلى infra/main.bicep
    # تحديث app.py لإضافة اتصال بقاعدة البيانات
    ```
 
-2. **أضف المصادقة** - تنفيذ Azure AD أو مفاتيح API
+2. **إضافة المصادقة** - تنفيذ Microsoft Entra ID أو مفاتيح API
    ```python
-   # أضف برنامجًا وسيطًا للمصادقة إلى app.py
+   # أضف وسيط المصادقة إلى app.py
    from functools import wraps
    ```
 
@@ -388,7 +389,7 @@ azd down --force --purge
    on: [push]
    ```
 
-4. **أضف Managed Identity** - تأمين الوصول إلى خدمات Azure
+4. **إضافة Managed Identity** - تأمين الوصول إلى خدمات Azure
    ```bicep
    # Update infra/app/api.bicep
    identity: { type: 'SystemAssigned' }
@@ -400,7 +401,7 @@ azd down --force --purge
 - **[الخدمات المصغرة](../../../../../examples/container-app/microservices)** - بنية متعددة الخدمات
 - **[دليل Container Apps الرئيسي](../README.md)** - جميع أنماط الحاويات
 
-### موارد التعلم
+### مصادر التعلم
 
 - 📚 [دورة AZD للمبتدئين](../../../README.md) - الصفحة الرئيسية للدورة
 - 📚 [أنماط Container Apps](../README.md) - المزيد من أنماط النشر
@@ -409,28 +410,28 @@ azd down --force --purge
 ## موارد إضافية
 
 ### التوثيق
-- **[Flask Documentation](https://flask.palletsprojects.com/)** - دليل إطار عمل Flask
+- **[توثيق Flask](https://flask.palletsprojects.com/)** - دليل إطار عمل Flask
 - **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - وثائق Azure الرسمية
 - **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - مرجع أوامر azd
 
-### الدروس
+### دروس
 - **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - انشر تطبيقك الأول
 - **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - دليل تطوير Python
 - **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - البنية التحتية ككود
 
 ### الأدوات
-- **[بوابة Azure](https://portal.azure.com)** - إدارة الموارد بصريًا
-- **[امتداد Azure لـ VS Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - تكامل بيئة التطوير
+- **[Azure Portal](https://portal.azure.com)** - إدارة الموارد بصريًا
+- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - تكامل IDE
 
 ---
 
-**🎉 تهانينا!** لقد نشرت واجهة Flask جاهزة للإنتاج على Azure Container Apps مع قياس تلقائي ومراقبة.
+**🎉 تهانينا!** لقد قمت بنشر API Flask جاهز للإنتاج على Azure Container Apps مع التحجيم التلقائي والمراقبة.
 
-**أسئلة؟** [افتح قضية](https://github.com/microsoft/AZD-for-beginners/issues) أو اطلع على [الأسئلة الشائعة](../../../resources/faq.md)
+**أسئلة؟** [افتح مشكلة](https://github.com/microsoft/AZD-for-beginners/issues) أو راجع [الأسئلة الشائعة](../../../resources/faq.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-إخلاء المسؤولية:
-تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية Co-op Translator (https://github.com/Azure/co-op-translator). بينما نسعى إلى الدقة، يُرجى ملاحظة أن الترجمات الآلية قد تحتوي على أخطاء أو معلومات غير دقيقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الموثوق. للمعلومات الحساسة أو الحرجة، يُنصح بالاستعانة بترجمة بشرية محترفة. لن نكون مسؤولين عن أي سوء فهم أو تفسير ينشأ عن استخدام هذه الترجمة.
+**تنويه**:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى للدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي والمعتمد. للمعلومات الهامة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

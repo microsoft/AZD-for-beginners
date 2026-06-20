@@ -1,47 +1,48 @@
 # Deployment Guide - Mastering AZD Deployments
 
 **Chapter Navigation:**
-- **📚 Trang Khóa Học**: [AZD cho Người mới bắt đầu](../../README.md)
-- **📖 Chương Hiện Tại**: Chương 4 - Hạ tầng như mã & Triển khai
-- **⬅️ Chương Trước**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
-- **➡️ Tiếp theo**: [Provisioning Resources](provisioning.md)
-- **🚀 Chương Tiếp Theo**: [Chương 5: Giải pháp AI đa tác nhân](../../examples/retail-scenario.md)
+- **📚 Course Home**: [AZD Cho Người Mới Bắt Đầu](../../README.md)
+- **📖 Current Chapter**: Chương 4 - Hạ tầng như Mã & Triển khai
+- **⬅️ Previous Chapter**: [Chương 3: Cấu hình](../chapter-03-configuration/configuration.md)
+- **➡️ Next**: [Provisioning Resources](provisioning.md)
+- **🧩 Also in this chapter**: [Tạo Mẫu Tùy Chỉnh Của Bạn](custom-templates.md)
+- **🚀 Next Chapter**: [Chương 5: Giải pháp AI đa tác nhân](../../examples/retail-scenario.md)
 
 ## Giới thiệu
 
-Hướng dẫn toàn diện này bao quát mọi thứ bạn cần biết về triển khai ứng dụng bằng Azure Developer CLI, từ các triển khai cơ bản bằng một lệnh đến các kịch bản sản xuất nâng cao với hooks tùy chỉnh, nhiều môi trường và tích hợp CI/CD. Làm chủ toàn bộ vòng đời triển khai với các ví dụ thực tế và các thực hành tốt nhất.
+Hướng dẫn toàn diện này bao gồm mọi thứ bạn cần biết về việc triển khai ứng dụng bằng Azure Developer CLI, từ việc triển khai bằng một lệnh cơ bản đến các kịch bản production nâng cao với hook tùy chỉnh, nhiều môi trường và tích hợp CI/CD. Làm chủ toàn bộ vòng đời triển khai với các ví dụ thực tế và các thực hành tốt nhất.
 
 ## Mục tiêu học tập
 
 Khi hoàn thành hướng dẫn này, bạn sẽ:
-- Làm chủ tất cả các lệnh và luồng công việc triển khai của Azure Developer CLI
-- Hiểu toàn bộ vòng đời triển khai từ cấp phát đến giám sát
-- Triển khai các hooks triển khai tùy chỉnh cho tự động hóa trước và sau triển khai
-- Cấu hình nhiều môi trường với các tham số riêng cho từng môi trường
+- Thành thạo tất cả các lệnh và luồng công việc triển khai của Azure Developer CLI
+- Hiểu toàn bộ vòng đời triển khai từ việc cấp phát đến giám sát
+- Triển khai hook triển khai tùy chỉnh cho tự động hóa trước và sau khi triển khai
+- Cấu hình nhiều môi trường với các tham số theo môi trường
 - Thiết lập các chiến lược triển khai nâng cao bao gồm blue-green và canary
 - Tích hợp các triển khai azd với pipeline CI/CD và quy trình DevOps
 
 ## Kết quả học tập
 
 Sau khi hoàn thành, bạn sẽ có thể:
-- Thực thi và khắc phục sự cố tất cả các luồng triển khai azd một cách độc lập
+- Thực thi và khắc phục sự cố tất cả các luồng công việc triển khai azd một cách độc lập
 - Thiết kế và triển khai tự động hóa triển khai tùy chỉnh bằng cách sử dụng hooks
-- Cấu hình các triển khai sẵn sàng cho sản xuất với bảo mật và giám sát thích hợp
-- Quản lý các kịch bản triển khai phức tạp đa môi trường
-- Tối ưu hóa hiệu suất triển khai và triển khai các chiến lược hoàn tác
+- Cấu hình các triển khai sẵn sàng cho production với bảo mật và giám sát phù hợp
+- Quản lý các kịch bản triển khai phức tạp nhiều môi trường
+- Tối ưu hóa hiệu năng triển khai và triển khai chiến lược rollback
 - Tích hợp các triển khai azd vào thực tiễn DevOps doanh nghiệp
 
 ## Tổng quan về Triển khai
 
-Azure Developer CLI cung cấp nhiều lệnh triển khai:
-- `azd up` - Luồng hoàn chỉnh (provision + deploy)
+Azure Developer CLI cung cấp một số lệnh triển khai:
+- `azd up` - Quy trình hoàn chỉnh (provision + deploy)
 - `azd provision` - Chỉ tạo/cập nhật tài nguyên Azure
 - `azd deploy` - Chỉ triển khai mã ứng dụng
 - `azd package` - Xây dựng và đóng gói ứng dụng
 
-## Luồng Triển khai Cơ bản
+## Các luồng triển khai cơ bản
 
-### Triển khai Hoàn chỉnh (azd up)
+### Triển khai hoàn chỉnh (azd up)
 Luồng phổ biến nhất cho các dự án mới:
 ```bash
 # Triển khai mọi thứ từ đầu
@@ -54,51 +55,51 @@ azd up --environment production
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Triển khai Chỉ Hạ tầng
-Khi bạn chỉ cần cập nhật các tài nguyên Azure:
+### Triển khai chỉ hạ tầng
+Khi bạn chỉ cần cập nhật tài nguyên Azure:
 ```bash
 # Triển khai/cập nhật hạ tầng
 azd provision
 
-# Triển khai ở chế độ chạy thử để xem trước các thay đổi
+# Triển khai với chạy thử (dry-run) để xem trước các thay đổi
 azd provision --preview
 
 # Triển khai các dịch vụ cụ thể
 azd provision --service database
 ```
 
-### Triển khai Chỉ Mã
+### Triển khai chỉ mã
 Cho các cập nhật ứng dụng nhanh:
 ```bash
 # Triển khai tất cả dịch vụ
 azd deploy
 
-# Đầu ra mong đợi:
+# Kết quả mong đợi:
 # Đang triển khai các dịch vụ (azd deploy)
-# - web: Đang triển khai... Hoàn thành
-# - api: Đang triển khai... Hoàn thành
-# THÀNH CÔNG: Việc triển khai của bạn đã hoàn thành trong 2 phút 15 giây
+# - web: Đang triển khai... Hoàn tất
+# - api: Đang triển khai... Hoàn tất
+# THÀNH CÔNG: Việc triển khai của bạn hoàn tất trong 2 phút 15 giây
 
 # Triển khai dịch vụ cụ thể
 azd deploy --service web
 azd deploy --service api
 
-# Triển khai với các tham số xây dựng tùy chỉnh
+# Triển khai với các tham số build tùy chỉnh
 azd deploy --service api --build-arg NODE_ENV=production
 
-# Xác minh việc triển khai
+# Xác minh triển khai
 azd show --output json | jq '.services'
 ```
 
-### ✅ Xác minh Triển khai
+### ✅ Xác minh triển khai
 
-Sau bất kỳ triển khai nào, hãy xác minh thành công:
+Sau bất kỳ triển khai nào, xác minh thành công:
 
 ```bash
 # Kiểm tra tất cả các dịch vụ đang chạy
 azd show
 
-# Kiểm tra các endpoint sức khỏe
+# Kiểm tra các điểm cuối về tình trạng sức khỏe
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -111,13 +112,42 @@ azd monitor --logs
 
 **Tiêu chí thành công:**
 - ✅ Tất cả dịch vụ hiển thị trạng thái "Running"
-- ✅ Các endpoint sức khỏe trả về HTTP 200
-- ✅ Không có nhật ký lỗi trong 5 phút qua
-- ✅ Ứng dụng phản hồi các yêu cầu kiểm tra
+- ✅ Các endpoint kiểm tra sức khỏe trả về HTTP 200
+- ✅ Không có log lỗi trong 5 phút gần nhất
+- ✅ Ứng dụng phản hồi các yêu cầu thử nghiệm
 
-## 🏗️ Hiểu về Quá trình Triển khai
+## 🏗️ Hiểu về Quy trình Triển khai
 
-### Giai đoạn 1: Hooks trước khi cấp phát
+### Mới với hooks? Bắt đầu ở đây
+
+Một **hook** là một lệnh mà azd chạy tự động tại một thời điểm cụ thể trong quá trình triển khai — trước hoặc sau khi provisioning, và trước hoặc sau khi triển khai mã của bạn. Chúng cho phép bạn tự động hóa các công việc nhỏ luôn đi kèm với một triển khai: khởi tạo dữ liệu cho cơ sở dữ liệu, chạy migration, xây dựng tài sản, hoặc chạy kiểm tra nhanh ứng dụng đang chạy.
+
+| Hook | Runs… | Mục đích phổ biến |
+|------|-------|-------------------|
+| `preprovision` | Trước khi tài nguyên được tạo | Xác thực các tiền điều kiện, đăng nhập vào registry |
+| `postprovision` | Sau khi tài nguyên tồn tại | Cấu hình tài nguyên, thiết lập cơ sở dữ liệu |
+| `predeploy` | Trước khi mã được triển khai | Xây dựng tài sản front-end, chạy unit test |
+| `postdeploy` | Sau khi mã đã live | Chạy migration DB, kiểm tra nhanh endpoint |
+
+Hooks nằm trong `azure.yaml` của bạn. Đây là ví dụ nhỏ nhất có thể — nó chỉ in một thông báo sau khi triển khai:
+
+```yaml
+# azure.yaml
+hooks:
+  postdeploy:
+    shell: sh
+    run: echo "Deployment finished! 🎉"
+```
+
+Xong — lần sau khi bạn chạy `azd up`, thông điệp sẽ được in tự động. Bạn cũng có thể chạy một hook riêng lẻ, không cần chạy toàn bộ deploy, điều này rất hữu ích cho việc kiểm thử:
+
+```bash
+azd hooks run postdeploy
+```
+
+Các pha bên dưới hiển thị các hook thực tế trong thế giới thực (migrations, test, xác thực) cho mỗi giai đoạn.
+
+### Pha 1: Hook trước Provision
 ```yaml
 # azure.yaml
 hooks:
@@ -131,13 +161,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Giai đoạn 2: Cấp phát Hạ tầng
+### Pha 2: Provision Hạ tầng
 - Đọc các mẫu hạ tầng (Bicep/Terraform)
-- Tạo hoặc cập nhật các tài nguyên Azure
+- Tạo hoặc cập nhật tài nguyên Azure
 - Cấu hình mạng và bảo mật
-- Thiết lập giám sát và ghi nhật ký
+- Thiết lập giám sát và logging
 
-### Giai đoạn 3: Hooks sau khi cấp phát
+### Pha 3: Hook sau Provision
 ```yaml
 hooks:
   postprovision:
@@ -150,12 +180,12 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### Giai đoạn 4: Đóng gói Ứng dụng
+### Pha 4: Đóng gói Ứng dụng
 - Xây dựng mã ứng dụng
 - Tạo artifact triển khai
-- Đóng gói cho nền tảng mục tiêu (containers, ZIP files, v.v.)
+- Đóng gói cho nền tảng mục tiêu (container, tệp ZIP, v.v.)
 
-### Giai đoạn 5: Hooks trước khi triển khai
+### Pha 5: Hook trước Triển khai
 ```yaml
 hooks:
   predeploy:
@@ -168,12 +198,12 @@ hooks:
       npm run db:migrate
 ```
 
-### Giai đoạn 6: Triển khai Ứng dụng
-- Triển khai các ứng dụng đã đóng gói lên các dịch vụ Azure
-- Cập nhật các cài đặt cấu hình
-- Bắt đầu/khởi động lại dịch vụ
+### Pha 6: Triển khai Ứng dụng
+- Triển khai các ứng dụng đã đóng gói lên dịch vụ Azure
+- Cập nhật cài đặt cấu hình
+- Khởi động/khởi động lại dịch vụ
 
-### Giai đoạn 7: Hooks sau khi triển khai
+### Pha 7: Hook sau Triển khai
 ```yaml
 hooks:
   postdeploy:
@@ -185,6 +215,54 @@ hooks:
       echo "Warming up applications..."
       curl https://${WEB_URL}/health
 ```
+
+### Xử lý lỗi Hook
+
+Mặc định, **nếu một lệnh hook kết thúc với mã khác 0, azd sẽ dừng toàn bộ thao tác.** Đây thường là điều bạn muốn — một migration thất bại nên dừng deploy, không nên đưa một ứng dụng lỗi vào production. Nhưng điều đó có nghĩa là các hook cần được viết cẩn thận.
+
+**1. Làm cho lỗi rõ ràng và có chủ đích.** Một hook thất bại khi lệnh cuối cùng của nó trả về mã khác 0. Trong các script shell, thêm `set -e` để hook dừng ngay khi gặp lệnh lỗi thay vì tiếp tục im lặng:
+
+```yaml
+hooks:
+  predeploy:
+    shell: sh
+    run: |
+      set -e                      # stop on the first error
+      npm run test:unit           # if tests fail, the deploy halts here
+      npm run db:migrate
+```
+
+**2. Cho phép một hook thất bại mà không dừng azd.** Với các bước không quan trọng (khởi động cache tùy chọn, thông báo nỗ lực tốt nhất), đặt `continueOnError: true`. azd sẽ ghi log lỗi nhưng tiếp tục thực hiện:
+
+```yaml
+hooks:
+  postdeploy:
+    shell: sh
+    continueOnError: true         # a failure here won't fail 'azd up'
+    run: curl -f https://${WEB_URL}/warmup || echo "Warm-up skipped"
+```
+
+**3. Kiểm tra hook riêng lẻ trước khi chạy toàn bộ.** Bạn không cần chạy `azd up` để gỡ lỗi một hook — chạy riêng hook đó và lặp nhanh:
+
+```bash
+azd hooks run predeploy          # chỉ chạy hook predeploy
+azd hooks run postdeploy --service api
+```
+
+**4. Chú ý shell phụ thuộc OS.** Một hook sử dụng `shell: pwsh` cần PowerShell được cài trên máy chạy hook (bao gồm cả agent CI). Dùng `shell: sh` để tương thích rộng nhất, hoặc cung cấp cả biến thể `windows` và `posix`:
+
+```yaml
+hooks:
+  postprovision:
+    posix:
+      shell: sh
+      run: ./scripts/setup.sh
+    windows:
+      shell: pwsh
+      run: ./scripts/setup.ps1
+```
+
+> **Mẹo gỡ lỗi:** chạy bất kỳ lệnh azd nào với `--debug` để xem dòng lệnh hook chính xác và toàn bộ output — rất hữu ích khi một hook chạy được cục bộ nhưng thất bại trong CI.
 
 ## 🎛️ Cấu hình Triển khai
 
@@ -225,7 +303,7 @@ azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# Môi trường thử nghiệm
+# Môi trường kiểm thử
 azd env new staging
 azd env set NODE_ENV staging
 azd env set DEBUG false
@@ -238,9 +316,9 @@ azd env set DEBUG false
 azd env set LOG_LEVEL error
 ```
 
-## 🔧 Kịch bản Triển khai Nâng cao
+## 🔧 Các kịch bản Triển khai Nâng cao
 
-### Ứng dụng nhiều dịch vụ
+### Ứng dụng đa dịch vụ
 ```yaml
 # Complex application with multiple services
 services:
@@ -278,17 +356,17 @@ services:
 
 ### Triển khai Blue-Green
 ```bash
-# Tạo môi trường blue
+# Tạo môi trường xanh dương
 azd env new production-blue
 azd up --environment production-blue
 
-# Kiểm tra môi trường blue
+# Kiểm tra môi trường xanh dương
 ./scripts/test-environment.sh production-blue
 
-# Chuyển lưu lượng sang blue (cập nhật DNS/cân bằng tải thủ công)
+# Chuyển lưu lượng sang môi trường xanh dương (cập nhật DNS/cân bằng tải thủ công)
 ./scripts/switch-traffic.sh production-blue
 
-# Dọn dẹp môi trường green
+# Dọn dẹp môi trường xanh lá cây
 azd env select production-green
 azd down --force
 ```
@@ -307,7 +385,7 @@ services:
         percentage: 10
 ```
 
-### Triển khai theo Staged
+### Triển khai theo giai đoạn
 ```bash
 #!/bin/bash
 # deploy-staged.sh
@@ -402,7 +480,7 @@ azd deploy --service api
 azd deploy
 ```
 
-### Bộ nhớ đệm Build
+### Cache khi xây dựng
 ```yaml
 # azure.yaml - Configure build commands
 services:
@@ -414,8 +492,8 @@ services:
 
 ### Triển khai mã hiệu quả
 ```bash
-# Sử dụng azd deploy (không phải azd up) cho các thay đổi chỉ liên quan đến mã
-# Thao tác này bỏ qua việc triển khai hạ tầng và nhanh hơn nhiều
+# Sử dụng azd deploy (không phải azd up) cho các thay đổi chỉ về mã nguồn
+# Điều này bỏ qua việc thiết lập hạ tầng và nhanh hơn nhiều
 azd deploy
 
 # Triển khai dịch vụ cụ thể để lặp nhanh nhất
@@ -424,7 +502,7 @@ azd deploy --service api
 
 ## 🔍 Giám sát Triển khai
 
-### Giám sát Triển khai theo thời gian thực
+### Giám sát triển khai theo thời gian thực
 ```bash
 # Giám sát ứng dụng theo thời gian thực
 azd monitor --live
@@ -450,7 +528,7 @@ services:
       retries: 3
 ```
 
-### Xác thực sau Triển khai
+### Xác thực sau triển khai
 ```bash
 #!/bin/bash
 # scripts/validate-deployment.sh
@@ -483,11 +561,11 @@ npm run test:integration
 echo "✅ Deployment validation completed successfully"
 ```
 
-## 🔐 Các vấn đề Bảo mật
+## 🔐 Các cân nhắc về Bảo mật
 
-### Quản lý bí mật
+### Quản lý Secrets
 ```bash
-# Lưu trữ các bí mật một cách an toàn
+# Lưu trữ bí mật một cách an toàn
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
 azd env set API_KEY "your-api-key" --secret
@@ -531,34 +609,34 @@ services:
           - external-api-key
 ```
 
-## 🚨 Chiến lược Hoàn tác
+## 🚨 Chiến lược Rollback
 
-### Hoàn tác Nhanh
+### Rollback Nhanh
 ```bash
-# AZD không có cơ chế rollback tích hợp sẵn. Các phương pháp được khuyến nghị:
+# AZD không có tính năng rollback tích hợp. Các cách tiếp cận được khuyến nghị:
 
-# Tùy chọn 1: Triển khai lại từ Git (khuyến nghị)
-git revert HEAD  # Hoàn tác commit gặp sự cố
+# Lựa chọn 1: Triển khai lại từ Git (khuyến nghị)
+git revert HEAD  # Hoàn tác commit gây sự cố
 git push
 azd deploy
 
-# Tùy chọn 2: Triển khai lại commit cụ thể
+# Lựa chọn 2: Triển khai lại commit cụ thể
 git checkout <previous-commit-hash>
 azd deploy
 git checkout main
 ```
 
-### Hoàn tác Hạ tầng
+### Rollback Hạ tầng
 ```bash
 # Xem trước các thay đổi hạ tầng trước khi áp dụng
 azd provision --preview
 
-# Để hoàn tác hạ tầng, hãy sử dụng hệ thống quản lý phiên bản:
+# Để khôi phục hạ tầng, hãy sử dụng hệ thống kiểm soát phiên bản:
 git revert HEAD  # Hoàn tác các thay đổi hạ tầng
 azd provision    # Áp dụng trạng thái hạ tầng trước đó
 ```
 
-### Hoàn tác Di cư Cơ sở dữ liệu
+### Rollback Migration Cơ sở dữ liệu
 ```bash
 #!/bin/bash
 # scripts/rollback-database.sh
@@ -572,9 +650,9 @@ npm run db:validate
 echo "Database rollback completed"
 ```
 
-## 📊 Chỉ số Triển khai
+## 📊 Số liệu Triển khai
 
-### Theo dõi Hiệu suất Triển khai
+### Theo dõi hiệu suất triển khai
 ```bash
 # Xem trạng thái triển khai hiện tại
 azd show
@@ -582,11 +660,11 @@ azd show
 # Giám sát ứng dụng bằng Application Insights
 azd monitor --overview
 
-# Xem số liệu trực tiếp
+# Xem số liệu thời gian thực
 azd monitor --live
 ```
 
-### Thu thập Chỉ số Tùy chỉnh
+### Thu thập số liệu tùy chỉnh
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -603,22 +681,22 @@ hooks:
         -d "{\"timestamp\": $DEPLOY_TIME, \"service_count\": $SERVICE_COUNT}"
 ```
 
-## 🎯 Thực hành Tốt nhất
+## 🎯 Thực hành tốt nhất
 
-### 1. Tính nhất quán của Môi trường
+### 1. Đảm bảo nhất quán giữa các môi trường
 ```bash
-# Sử dụng cách đặt tên nhất quán
+# Sử dụng quy tắc đặt tên nhất quán
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Duy trì tính tương đồng giữa các môi trường
+# Duy trì tính nhất quán giữa các môi trường
 ./scripts/sync-environments.sh
 ```
 
 ### 2. Xác thực Hạ tầng
 ```bash
-# Xem trước các thay đổi hạ tầng trước khi triển khai
+# Xem trước các thay đổi cơ sở hạ tầng trước khi triển khai
 azd provision --preview
 
 # Sử dụng linting cho ARM/Bicep
@@ -657,9 +735,9 @@ hooks:
       npm run test:smoke
 ```
 
-### 4. Tài liệu và Ghi nhật ký
+### 4. Tài liệu và Logging
 ```bash
-# Tài liệu hóa các quy trình triển khai
+# Tài liệu hóa quy trình triển khai
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env get-value AZURE_ENV_NAME)" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
@@ -667,15 +745,15 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Bước tiếp theo
 
-- [Provisioning Resources](provisioning.md) - Tìm hiểu sâu về quản lý hạ tầng
-- [Pre-Deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - Lập kế hoạch chiến lược triển khai của bạn
+- [Provisioning Resources](provisioning.md) - Khám phá sâu về quản lý hạ tầng
+- [Pre-Deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - Lên kế hoạch chiến lược triển khai của bạn
 - [Common Issues](../chapter-07-troubleshooting/common-issues.md) - Giải quyết các vấn đề triển khai
-- [Best Practices](../chapter-07-troubleshooting/debugging.md) - Chiến lược triển khai sẵn sàng cho sản xuất
+- [Best Practices](../chapter-07-troubleshooting/debugging.md) - Chiến lược triển khai sẵn sàng cho production
 
-## 🎯 Bài tập Thực hành Triển khai
+## 🎯 Bài tập Triển khai thực hành
 
 ### Bài tập 1: Luồng Triển khai Tăng dần (20 phút)
-**Mục tiêu**: Nắm vững sự khác biệt giữa triển khai toàn bộ và tăng dần
+**Mục tiêu**: Nắm vững sự khác biệt giữa triển khai đầy đủ và triển khai tăng dần
 
 ```bash
 # Triển khai ban đầu
@@ -703,22 +781,22 @@ azd down --force --purge
 **Tiêu chí thành công:**
 - [ ] Triển khai đầy đủ mất 5-15 phút
 - [ ] Triển khai chỉ mã mất 2-5 phút
-- [ ] Thay đổi mã hiển thị trong ứng dụng đã triển khai
+- [ ] Thay đổi mã được phản ánh trong ứng dụng đã triển khai
 - [ ] Hạ tầng không thay đổi sau `azd deploy`
 
-**Kết quả học tập**: `azd deploy` nhanh hơn 50-70% so với `azd up` đối với thay đổi mã
+**Kết quả học tập**: `azd deploy` nhanh hơn `azd up` 50-70% cho các thay đổi mã
 
 ### Bài tập 2: Hooks Triển khai Tùy chỉnh (30 phút)
-**Mục tiêu**: Triển khai tự động hóa trước và sau triển khai
+**Mục tiêu**: Triển khai tự động hóa trước và sau khi triển khai
 
 ```bash
-# Tạo tập lệnh xác thực trước khi triển khai
+# Tạo script xác thực trước khi triển khai
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
 echo "⚠️ Running pre-deployment checks..."
 
-# Kiểm tra xem các bài kiểm tra có thành công hay không
+# Kiểm tra xem các bài kiểm tra có chạy thành công hay không
 if ! npm run test:unit; then
     echo "❌ Tests failed! Aborting deployment."
     exit 1
@@ -766,21 +844,21 @@ hooks:
     run: ./scripts/post-deploy-test.sh
 EOF
 
-# Kiểm tra triển khai với hooks
+# Kiểm tra việc triển khai với các hooks
 azd deploy
 ```
 
 **Tiêu chí thành công:**
-- [ ] Script trước khi triển khai chạy trước khi triển khai
-- [ ] Triển khai bị hủy nếu các test thất bại
-- [ ] Kiểm tra smoke sau triển khai xác thực sức khỏe
-- [ ] Hooks thực thi theo thứ tự đúng
+- [ ] Script pre-deploy chạy trước khi triển khai
+- [ ] Triển khai bị hủy nếu tests thất bại
+- [ ] Kiểm tra nhanh post-deploy xác nhận sức khỏe
+- [ ] Hooks chạy theo thứ tự đúng
 
-### Bài tập 3: Chiến lược Triển khai Đa Môi trường (45 phút)
-**Mục tiêu**: Thiết lập luồng triển khai theo giai đoạn (dev → staging → production)
+### Bài tập 3: Chiến lược Triển khai Nhiều Môi trường (45 phút)
+**Mục tiêu**: Triển khai luồng theo giai đoạn (dev → staging → production)
 
 ```bash
-# Tạo tập lệnh triển khai
+# Tạo script triển khai
 cat > deploy-staged.sh << 'EOF'
 #!/bin/bash
 set -e
@@ -788,7 +866,7 @@ set -e
 echo "🚀 Staged Deployment Workflow"
 echo "=============================="
 
-# Bước 1: Triển khai lên dev
+# Bước 1: Triển khai lên môi trường dev
 echo "
 🛠️ Step 1: Deploying to development..."
 azd env select dev
@@ -797,7 +875,7 @@ azd up --no-prompt
 echo "Running dev tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# Bước 2: Triển khai lên staging
+# Bước 2: Triển khai lên môi trường staging
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
@@ -806,7 +884,7 @@ azd up --no-prompt
 echo "Running staging tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# Bước 3: Phê duyệt thủ công cho production
+# Bước 3: Phê duyệt thủ công cho môi trường production
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -843,27 +921,27 @@ azd env new production
 - [ ] Môi trường Staging triển khai thành công
 - [ ] Yêu cầu phê duyệt thủ công cho production
 - [ ] Tất cả môi trường có kiểm tra sức khỏe hoạt động
-- [ ] Có thể hoàn tác nếu cần
+- [ ] Có thể rollback nếu cần
 
-### Bài tập 4: Chiến lược Hoàn tác (25 phút)
-**Mục tiêu**: Triển khai và kiểm thử hoàn tác triển khai bằng Git
+### Bài tập 4: Chiến lược Rollback (25 phút)
+**Mục tiêu**: Triển khai và kiểm tra rollback bằng Git
 
 ```bash
 # Triển khai v1
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# Lưu hash commit v1
+# Lưu hash commit của v1
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# Triển khai v2 với thay đổi phá vỡ tương thích
+# Triển khai v2 với thay đổi không tương thích
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
 azd deploy
 
-# Phát hiện lỗi và quay lui
+# Phát hiện sự cố và quay lui
 if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
     echo "❌ v2 deployment failed! Rolling back..."
     
@@ -882,13 +960,13 @@ fi
 
 **Tiêu chí thành công:**
 - [ ] Có thể phát hiện lỗi triển khai
-- [ ] Script hoàn tác thực thi tự động
+- [ ] Script rollback chạy tự động
 - [ ] Ứng dụng trở về trạng thái hoạt động
-- [ ] Các kiểm tra sức khỏe thành công sau khi hoàn tác
+- [ ] Kiểm tra sức khỏe vượt sau khi rollback
 
-## 📊 Theo dõi Chỉ số Triển khai
+## 📊 Theo dõi Số liệu Triển khai
 
-### Theo dõi Hiệu suất Triển khai của bạn
+### Theo dõi hiệu suất triển khai của bạn
 
 ```bash
 # Tạo tập lệnh thu thập số liệu triển khai
@@ -908,7 +986,7 @@ echo "Timestamp: $(date)"
 echo "Environment: $(azd env get-value AZURE_ENV_NAME)"
 echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
 
-# Ghi nhật ký vào tệp
+# Ghi vào tệp nhật ký
 echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
 EOF
 
@@ -918,7 +996,7 @@ chmod +x track-deployment.sh
 ./track-deployment.sh
 ```
 
-**Phân tích các chỉ số của bạn:**
+**Phân tích số liệu của bạn:**
 ```bash
 # Xem lịch sử triển khai
 cat deployment-metrics.csv
@@ -929,20 +1007,20 @@ awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-
 
 ## Tài nguyên bổ sung
 
-- [Tài liệu tham khảo Triển khai Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Triển khai Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Triển khai Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Triển khai Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Azure Developer CLI Deployment Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Azure App Service Deployment](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Azure Container Apps Deployment](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Azure Functions Deployment](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
 **Navigation**
-- **Bài học Trước**: [Dự án đầu tiên của bạn](../chapter-01-foundation/first-project.md)
-- **Bài học Tiếp theo**: [Provisioning Resources](provisioning.md)
+- **Previous Lesson**: [Dự án đầu tiên của bạn](../chapter-01-foundation/first-project.md)
+- **Next Lesson**: [Provisioning Resources](provisioning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Miễn trừ trách nhiệm**:
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi nỗ lực để đạt được độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ gốc nên được coi là nguồn có thẩm quyền. Đối với thông tin quan trọng, khuyến nghị sử dụng bản dịch chuyên nghiệp do con người thực hiện. Chúng tôi không chịu trách nhiệm cho bất kỳ hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
+**Tuyên bố miễn trừ trách nhiệm**:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng bản dịch tự động có thể chứa lỗi hoặc sai sót. Tài liệu gốc bằng ngôn ngữ gốc nên được coi là nguồn tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

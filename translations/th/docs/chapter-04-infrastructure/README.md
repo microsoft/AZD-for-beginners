@@ -1,47 +1,48 @@
-# Chapter 4: Infrastructure as Code & Deployment
+# Chapter 4: โครงสร้างพื้นฐานเป็นโค้ด & การปรับใช้
 
-**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 1-1.5 hours | **⭐ Complexity**: Intermediate
+**📚 หลักสูตร**: [AZD สำหรับผู้เริ่มต้น](../../README.md) | **⏱️ เวลาเรียน**: 1-1.5 ชั่วโมง | **⭐ ความซับซ้อน**: ระดับกลาง
 
 ---
 
-## Overview
+## ภาพรวม
 
-บทนี้ครอบคลุมรูปแบบ Infrastructure as Code (IaC) ด้วยเทมเพลต Bicep, การจัดสรรทรัพยากร และกลยุทธ์การปรับใช้โดยใช้ Azure Developer CLI
+บทนี้ครอบคลุมรูปแบบโครงสร้างพื้นฐานเป็นโค้ด (IaC) ด้วยเทมเพลต Bicep การจัดเตรียมทรัพยากร และกลยุทธ์การปรับใช้โดยใช้ Azure Developer CLI
 
-> ตรวจสอบความถูกต้องกับ `azd 1.23.12` ในเดือนมีนาคม 2026
+> ตรวจสอบความถูกต้องกับ `azd 1.25.6` ในเดือนมิถุนายน 2026
 
-## Learning Objectives
+## วัตถุประสงค์การเรียนรู้
 
-เมื่อผ่านบทนี้แล้ว คุณจะ:
-- เข้าใจโครงสร้างและไวยากรณ์ของเทมเพลต Bicep
-- จัดสรรทรัพยากร Azure ด้วย `azd provision`
+เมื่อเรียนบทนี้จบ คุณจะสามารถ:
+- เข้าใจโครงสร้างและไวยากรณ์เทมเพลต Bicep
+- จัดเตรียมทรัพยากร Azure ด้วย `azd provision`
 - ปรับใช้แอปพลิเคชันด้วย `azd deploy`
 - นำกลยุทธ์การปรับใช้แบบ blue-green และ rolling มาใช้งาน
 
 ---
 
-## 📚 Lessons
+## 📚 บทเรียน
 
-| # | Lesson | Description | Time |
+| # | บทเรียน | คำอธิบาย | เวลา |
 |---|--------|-------------|------|
-| 1 | [Provisioning Resources](provisioning.md) | การจัดการทรัพยากร Azure ด้วย AZD | 45 min |
-| 2 | [Deployment Guide](deployment-guide.md) | กลยุทธ์การปรับใช้แอปพลิเคชัน | 45 min |
+| 1 | [การจัดเตรียมทรัพยากร](provisioning.md) | การจัดการทรัพยากร Azure ด้วย AZD | 45 นาที |
+| 2 | [คู่มือการปรับใช้](deployment-guide.md) | กลยุทธ์การปรับใช้แอปพลิเคชัน | 45 นาที |
+| 3 | [สร้างเทมเพลตของคุณเอง](custom-templates.md) | สร้างและเผยแพร่เทมเพลต azd ที่นำกลับมาใช้ใหม่ได้ | 30 นาที |
 
 ---
 
-## 🚀 Quick Start
+## 🚀 เริ่มต้นอย่างรวดเร็ว
 
 ```bash
-# เริ่มต้นจากแม่แบบ
+# เริ่มต้นจากเทมเพลต
 azd init --template azure-functions-python-v2-http
 
-# แสดงตัวอย่างสิ่งที่จะถูกสร้าง
+# ดูตัวอย่างสิ่งที่จะถูกสร้างขึ้น
 azd provision --preview
 
 # จัดเตรียมโครงสร้างพื้นฐานเท่านั้น
 azd provision
 
-# นำรหัสขึ้นใช้งานเท่านั้น
+# ดีพลอยโค้ดเท่านั้น
 azd deploy
 
 # หรือทั้งสองอย่างพร้อมกัน
@@ -50,7 +51,7 @@ azd up
 
 ---
 
-## 📁 AZD Project Structure
+## 📁 โครงสร้างโปรเจ็กต์ AZD
 
 ```
 my-project/
@@ -67,36 +68,36 @@ my-project/
 
 ---
 
-## 🔧 Essential Commands
+## 🔧 คำสั่งสำคัญ
 
-| Command | Description |
+| คำสั่ง | คำอธิบาย |
 |---------|-------------|
-| `azd init` | เริ่มต้นโปรเจกต์ |
+| `azd init` | เริ่มต้นโปรเจ็กต์ |
 | `azd provision` | สร้างทรัพยากร Azure |
 | `azd deploy` | ปรับใช้โค้ดแอปพลิเคชัน |
-| `azd up` | provision + deploy |
+| `azd up` | จัดเตรียม + ปรับใช้ |
 | `azd down` | ลบทรัพยากรทั้งหมด |
 
 ---
 
-## 🔗 Navigation
+## 🔗 การนำทาง
 
-| Direction | Chapter |
+| ทิศทาง | บท |
 |-----------|---------|
-| **Previous** | [Chapter 3: Configuration](../chapter-03-configuration/README.md) |
-| **Next** | [Chapter 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md) |
+| **ก่อนหน้า** | [บทที่ 3: การกำหนดค่า](../chapter-03-configuration/README.md) |
+| **ถัดไป** | [บทที่ 5: โซลูชันหลายตัวแทน](../chapter-05-multi-agent/README.md) |
 
 ---
 
-## 📖 Related Resources
+## 📖 แหล่งข้อมูลที่เกี่ยวข้อง
 
-- [Pre-Deployment Checks](../chapter-06-pre-deployment/README.md)
-- [Container App Examples](../../examples/container-app/README.md)
-- [Database App Example](../../examples/database-app/README.md)
+- [การตรวจสอบก่อนการปรับใช้](../chapter-06-pre-deployment/README.md)
+- [ตัวอย่าง Container App](../../examples/container-app/README.md)
+- [ตัวอย่าง Database App](../../examples/database-app/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ข้อจำกัดความรับผิดชอบ**:  
-เอกสารนี้ได้รับการแปลโดยใช้บริการแปลภาษา AI [Co-op Translator](https://github.com/Azure/co-op-translator) แม้เราจะพยายามให้ความถูกต้อง แต่กรุณาทราบว่าการแปลอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้อง เอกสารต้นฉบับในภาษาต้นทางถือเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลที่มีความสำคัญ ควรใช้บริการแปลโดยมืออาชีพทางภาษา เราจะไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความที่ผิดพลาดใด ๆ ที่เกิดขึ้นจากการใช้การแปลนี้
+**ปฏิเสธความรับผิดชอบ**:
+เอกสารนี้ได้รับการแปลโดยใช้บริการแปลภาษา AI [Co-op Translator](https://github.com/Azure/co-op-translator) ขณะที่เราพยายามให้ความถูกต้อง โปรดทราบว่าการแปลโดยอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้อง เอกสารต้นฉบับในภาษาต้นทางควรถูกพิจารณาเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลที่สำคัญ แนะนำให้ใช้การแปลโดยมนุษย์มืออาชีพ เราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความที่ผิดพลาดที่เกิดขึ้นจากการใช้การแปลนี้
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,40 +1,41 @@
 # Microsoft Foundry Models 聊天应用
 
-**学习路径：** 中级 ⭐⭐ | **时间：** 35-45 分钟 | **费用：** $50-200/月
+**学习路线：** 中级 ⭐⭐ | **时间：** 35-45 分钟 | **费用：** $50-200/月
 
-一个使用 Azure Developer CLI (azd) 部署的完整 Microsoft Foundry Models 聊天应用示例。该示例演示了 gpt-4.1 的部署、API 的安全访问以及一个简单的聊天界面。
+一个使用 Azure Developer CLI (azd) 部署的完整 Microsoft Foundry Models 聊天应用。此示例演示 gpt-4.1 部署、API 的安全访问以及一个简单的聊天界面。
 
-## 🎯 你将学到的内容
+## 🎯 你将学到什么
 
-- 部署 Microsoft Foundry Models 服务并使用 gpt-4.1 模型
+- 部署带有 gpt-4.1 模型的 Microsoft Foundry Models 服务
 - 使用 Key Vault 保护 OpenAI API 密钥
 - 使用 Python 构建一个简单的聊天界面
-- 监控令牌使用情况和费用
+- 监控令牌使用和成本
 - 实现速率限制和错误处理
 
 ## 📦 包含内容
 
-✅ **Microsoft Foundry Models 服务** - gpt-4.1 模型部署  
-✅ **Python 聊天应用** - 简单的命令行聊天界面  
-✅ **Key Vault 集成** - 安全的 API 密钥存储  
-✅ **ARM 模板** - 完整的基础设施即代码  
-✅ <strong>费用监控</strong> - 令牌使用跟踪  
-✅ <strong>速率限制</strong> - 防止配额耗尽  
+✅ **Microsoft Foundry Models Service** - gpt-4.1 模型部署  
+✅ **Python Chat App** - 简单的命令行聊天界面  
+✅ **Key Vault Integration** - 安全的 API 密钥存储  
+✅ **ARM Templates** - 完整的基础设施即代码  
+✅ **Cost Monitoring** - 令牌使用跟踪  
+✅ **Rate Limiting** - 防止配额耗尽  
 
-## 架构
+## Architecture
 
 ```mermaid
 graph TD
-    App[Python 聊天应用程序<br/>本地/云端<br/>命令行界面<br/>对话历史<br/>令牌使用跟踪] -- "HTTPS（API 密钥）" --> Foundry[Microsoft Foundry 模型服务<br/>gpt-4.1 模型<br/>每分钟 2 万令牌容量<br/>多区域故障切换]
+    App[Python 聊天应用程序<br/>本地/云<br/>命令行界面<br/>会话历史<br/>令牌使用追踪] -- "HTTPS（API 密钥）" --> Foundry[Microsoft Foundry 模型服务<br/>gpt-4.1 模型<br/>每分钟 20K 令牌容量<br/>多区域故障转移]
     Foundry --> KV[Azure 密钥保管库<br/>OpenAI API 密钥<br/>端点 URL]
     Foundry -. 托管标识 .-> KV
 ```
+
 ## 前提条件
 
 ### 必需
 
 - **Azure Developer CLI (azd)** - [安装指南](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **具有 OpenAI 访问权限的 Azure 订阅** - [申请访问](https://aka.ms/oai/access)
+- **Azure 订阅**（具备 OpenAI 访问权限） - [请求访问](https://aka.ms/oai/access)
 - **Python 3.9+** - [安装 Python](https://www.python.org/downloads/)
 
 ### 验证前提条件
@@ -55,18 +56,18 @@ az cognitiveservices account list-skus \
   --location eastus
 ```
 
-> **⚠️ 重要：** Microsoft Foundry Models 需要应用审批。如果你尚未申请，请访问 [aka.ms/oai/access](https://aka.ms/oai/access)。审批通常需要 1-2 个工作日。
+> **⚠️ 重要：** Microsoft Foundry Models 需要申请批准。如果你还未申请，请访问 [aka.ms/oai/access](https://aka.ms/oai/access)。批准通常需要 1-2 个工作日。
 
-## ⏱️ 部署时间线
+## ⏱️ 部署时间表
 
 | 阶段 | 持续时间 | 发生的事情 |
 |-------|----------|--------------|
 | 前提检查 | 2-3 分钟 | 验证 OpenAI 配额可用性 |
 | 部署基础设施 | 8-12 分钟 | 创建 OpenAI、Key Vault、模型部署 |
-| 配置应用 | 2-3 分钟 | 设置环境和依赖 |
+| 配置应用程序 | 2-3 分钟 | 设置环境和依赖项 |
 | <strong>总计</strong> | **12-18 分钟** | 准备好与 gpt-4.1 聊天 |
 
-**注意：** 第一次部署 OpenAI 可能由于模型预配而需要更长时间。
+**注意：** 初次部署 OpenAI 可能由于模型配置而需要更长时间。
 
 ## 快速开始
 
@@ -77,14 +78,14 @@ cd examples/azure-openai-chat
 # 初始化环境
 azd env new myopenai
 
-# 部署所有内容（基础设施和配置）
+# 部署所有内容（基础设施 + 配置）
 azd up
-# 你将被提示：
+# 您将看到提示：
 # 1. 选择 Azure 订阅
-# 2. 选择支持 OpenAI 的区域（例如：eastus、eastus2、westus）
-# 3. 等待 12–18 分钟以完成部署
+# 2. 选择具有 OpenAI 可用性的区域（例如：eastus、eastus2、westus）
+# 3. 等待 12-18 分钟以完成部署
 
-# 安装 Python 依赖项
+# 安装 Python 依赖
 pip install -r requirements.txt
 
 # 开始聊天！
@@ -111,11 +112,11 @@ Assistant: Microsoft Foundry Models Service provides REST API access to OpenAI's
 # 查看已部署的资源
 azd show
 
-# 预期输出显示:
-# - OpenAI 服务: (资源名称)
-# - 密钥保管库: (资源名称)
-# - 部署: gpt-4.1
-# - 位置: eastus (或您选择的区域)
+# 预期输出显示：
+# - OpenAI 服务：（资源名称）
+# - 密钥保管库：（资源名称）
+# - 部署：gpt-4.1
+# - 位置：eastus（或您选择的区域）
 ```
 
 ### 步骤 2：测试 OpenAI API
@@ -157,7 +158,7 @@ curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2
 ### 步骤 3：验证 Key Vault 访问
 
 ```bash
-# 在 Key Vault 中列出机密
+# 列出密钥保管库中的机密
 KV_NAME=$(azd env get-value AZURE_KEY_VAULT_NAME)
 
 az keyvault secret list \
@@ -171,10 +172,10 @@ az keyvault secret list \
 - `openai-endpoint`
 
 **成功标准：**
-- ✅ 已使用 gpt-4.1 部署 OpenAI 服务
+- ✅ 已部署带 gpt-4.1 的 OpenAI 服务
 - ✅ API 调用返回有效的完成结果
 - ✅ 密钥已存储在 Key Vault 中
-- ✅ 令牌使用跟踪正常
+- ✅ 令牌使用跟踪正常工作
 
 ## 项目结构
 
@@ -197,21 +198,21 @@ azure-openai-chat/
 
 ### 聊天界面 (`chat.py`)
 
-聊天应用包括：
+聊天应用包含：
 
-- <strong>对话历史</strong> - 在消息间保持上下文
+- <strong>会话历史</strong> - 在消息之间保持上下文
 - <strong>令牌计数</strong> - 跟踪使用情况并估算费用
 - <strong>错误处理</strong> - 优雅地处理速率限制和 API 错误
-- <strong>费用估算</strong> - 每条消息的实时费用计算
+- <strong>成本估算</strong> - 每条消息的实时成本计算
 - <strong>流式支持</strong> - 可选的流式响应
 
 ### 命令
 
-在聊天时，你可以使用：
+聊天时可使用：
 - `quit` 或 `exit` - 结束会话
-- `clear` - 清除对话历史
+- `clear` - 清除会话历史
 - `tokens` - 显示总令牌使用量
-- `cost` - 显示估算的总费用
+- `cost` - 显示估计总成本
 
 ### 配置 (`config.py`)
 
@@ -219,8 +220,8 @@ azure-openai-chat/
 ```python
 AZURE_OPENAI_ENDPOINT  # 来自密钥保管库
 AZURE_OPENAI_API_KEY   # 来自密钥保管库
-AZURE_OPENAI_MODEL     # 默认: gpt-4.1
-AZURE_OPENAI_MAX_TOKENS # 默认: 800
+AZURE_OPENAI_MODEL     # 默认：gpt-4.1
+AZURE_OPENAI_MAX_TOKENS # 默认：800
 ```
 
 ## 使用示例
@@ -270,22 +271,22 @@ Total session: 156 tokens | $0.0047
 
 ### 令牌定价（gpt-4.1）
 
-| 模型 | 输入（每1K 令牌） | 输出（每1K 令牌） |
+| 模型 | 输入（每 1K 令牌） | 输出（每 1K 令牌） |
 |-------|----------------------|------------------------|
 | gpt-4.1 | $0.03 | $0.06 |
 | GPT-3.5-Turbo | $0.0015 | $0.002 |
 
-### 估算的月度费用
+### 估计每月费用
 
 基于使用模式：
 
-| 使用水平 | 每天消息数 | 每天令牌数 | 月度费用 |
+| 使用级别 | 每天消息数 | 每天令牌数 | 月费用 |
 |-------------|--------------|------------|--------------|
 | <strong>轻度</strong> | 20 条消息 | 3,000 令牌 | $3-5 |
-| <strong>中等</strong> | 100 条消息 | 15,000 令牌 | $15-25 |
+| <strong>中度</strong> | 100 条消息 | 15,000 令牌 | $15-25 |
 | <strong>重度</strong> | 500 条消息 | 75,000 令牌 | $75-125 |
 
-**基础基础设施费用：** $1-2/月（Key Vault + 最低计算）
+**基础设施成本：** $1-2/月（Key Vault + 最小计算）
 
 ### 成本优化建议
 
@@ -299,7 +300,7 @@ export AZURE_OPENAI_MAX_TOKENS=400
 # 3. 监控令牌使用情况
 python chat.py --show-tokens
 
-# 4. 设置预算提醒
+# 4. 设置预算警报
 az consumption budget create \
   --budget-name "openai-budget" \
   --amount 50 \
@@ -308,11 +309,11 @@ az consumption budget create \
 
 ## 监控
 
-### 查看令牌使用
+### 查看令牌使用情况
 
 ```bash
 # 在 Azure 门户：
-# OpenAI 资源 → 指标 → 选择 "Token Transaction"
+# OpenAI 资源 → 指标 → 选择“令牌事务”
 
 # 或通过 Azure CLI：
 az monitor metrics list \
@@ -325,7 +326,7 @@ az monitor metrics list \
 ### 查看 API 日志
 
 ```bash
-# 流式诊断日志
+# 流式传输诊断日志
 az monitor diagnostic-settings create \
   --resource $(azd env get-value AZURE_OPENAI_RESOURCE_ID) \
   --name openai-logs \
@@ -340,13 +341,13 @@ az monitor log-analytics query \
 
 ## 故障排除
 
-### 问题："Access Denied" 错误
+### 问题："访问被拒绝" 错误
 
 **症状：** 调用 API 时返回 403 Forbidden
 
 **解决方案：**
 ```bash
-# 1. 验证 OpenAI 访问是否已获批准
+# 1. 验证是否批准了对 OpenAI 的访问
 az cognitiveservices account show \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
@@ -356,10 +357,10 @@ azd env get-value AZURE_OPENAI_API_KEY
 
 # 3. 验证端点 URL 格式
 azd env get-value AZURE_OPENAI_ENDPOINT
-# 应为： https://[name].openai.azure.com/
+# 应为: https://[name].openai.azure.com/
 ```
 
-### 问题："Rate Limit Exceeded"
+### 问题："超过速率限制"
 
 **症状：** 429 Too Many Requests
 
@@ -375,12 +376,12 @@ az cognitiveservices account deployment show \
 # 转到 Azure 门户 → OpenAI 资源 → 配额 → 请求增加
 
 # 3. 实现重试逻辑（已在 chat.py 中实现）
-# 应用程序会自动采用指数退避进行重试
+# 应用程序会自动以指数退避方式重试
 ```
 
-### 问题："Model Not Found"
+### 问题："未找到模型"
 
-**症状：** 部署返回 404 错误
+**症状：** 部署时返回 404 错误
 
 **解决方案：**
 ```bash
@@ -389,7 +390,7 @@ az cognitiveservices account deployment list \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
 
-# 2. 在环境中验证模型名称
+# 2. 验证环境中的模型名称
 echo $AZURE_OPENAI_MODEL
 
 # 3. 更新为正确的部署名称
@@ -398,12 +399,12 @@ export AZURE_OPENAI_MODEL=gpt-4.1  # 或 gpt-35-turbo
 
 ### 问题：高延迟
 
-**症状：** 响应时间慢（>5 秒）
+**症状：** 响应时间缓慢（>5 秒）
 
 **解决方案：**
 ```bash
 # 1. 检查区域延迟
-# 部署到最接近用户的区域
+# 部署到最靠近用户的区域
 
 # 2. 减少 max_tokens 以获得更快的响应
 export AZURE_OPENAI_MAX_TOKENS=400
@@ -417,7 +418,7 @@ python chat.py --stream
 ### 1. 保护 API 密钥
 
 ```bash
-# 切勿将密钥提交到版本控制
+# 切勿将密钥提交到版本控制系统
 # 使用 Key Vault（已配置）
 
 # 定期轮换密钥
@@ -430,21 +431,21 @@ az cognitiveservices account keys regenerate \
 ### 2. 实施内容过滤
 
 ```python
-# Microsoft Foundry 模型包含内置的内容过滤功能
-# 在 Azure 门户中配置:
+# Microsoft Foundry 模型包含内置内容过滤
+# 在 Azure 门户中配置：
 # OpenAI 资源 → 内容过滤器 → 创建自定义过滤器
 
-# 类别: 仇恨、性、暴力、自我伤害
-# 过滤级别: 低、中、高
+# 类别：仇恨、性内容、暴力、自残
+# 级别：低、中、高
 ```
 
-### 3. 使用托管身份（生产环境）
+### 3. 使用托管标识（生产）
 
 ```bash
 # 对于生产部署，请使用托管标识
-# 而不是 API 密钥（需要将应用托管在 Azure 上）
+# 而不是使用 API 密钥（需要在 Azure 上托管应用）
 
-# 更新 infra/openai.bicep 以包含：
+# 更新 infra/openai.bicep 以包含:
 # identity: { type: 'SystemAssigned' }
 ```
 
@@ -468,13 +469,13 @@ python src/chat.py
 ### 运行测试
 
 ```bash
-# 安装测试依赖项
+# 安装测试依赖
 pip install pytest pytest-cov
 
 # 运行测试
 pytest tests/ -v
 
-# 启用代码覆盖率
+# 带覆盖率
 pytest tests/ --cov=src --cov-report=html
 ```
 
@@ -501,24 +502,24 @@ azd down --force --purge
 
 # 这将移除：
 # - OpenAI 服务
-# - Key Vault（含 90 天软删除）
+# - Key Vault（具有 90 天的软删除）
 # - 资源组
 # - 所有部署和配置
 ```
 
-## 后续步骤
+## 下一步
 
 ### 扩展此示例
 
 1. **添加 Web 界面** - 构建 React/Vue 前端
    ```bash
    # 将前端服务添加到 azure.yaml
-   # 部署到 Azure 静态 Web 应用
+   # 部署到 Azure Static Web Apps
    ```
 
-2. **实现 RAG（检索增强生成）** - 添加带 Azure AI Search 的文档搜索
+2. **实现 RAG** - 使用 Azure AI Search 添加文档搜索
    ```python
-   # 集成 Azure 认知搜索
+   # 集成 Azure AI 搜索
    # 上传文档并创建向量索引
    ```
 
@@ -536,34 +537,34 @@ azd down --force --purge
 
 ### 相关示例
 
-- **[Retail Multi-Agent](../retail-scenario.md)** - 高级多代理架构
-- **[Database App](../../../../examples/database-app)** - 添加持久化存储
-- **[Container Apps](../../../../examples/container-app)** - 作为容器化服务部署
+- **[零售多代理](../retail-scenario.md)** - 高级多代理架构
+- **[数据库应用](../../../../examples/database-app)** - 添加持久存储
+- **[容器应用](../../../../examples/container-app)** - 作为容器化服务部署
 
 ### 学习资源
 
-- 📚 [AZD 初学者课程](../../README.md) - 主要课程主页
+- 📚 [AZD 初学者课程](../../README.md) - 课程首页
 - 📚 [Microsoft Foundry Models 文档](https://learn.microsoft.com/azure/ai-services/openai/) - 官方文档
-- 📚 [OpenAI API 参考](https://platform.openai.com/docs/api-reference) - API 详细信息
+- 📚 [OpenAI API 参考](https://platform.openai.com/docs/api-reference) - API 详情
 - 📚 [负责任的 AI](https://www.microsoft.com/ai/responsible-ai) - 最佳实践
 
-## 附加资源
+## 其他资源
 
 ### 文档
-- **[Microsoft Foundry Models 服务](https://learn.microsoft.com/azure/ai-services/openai/)** - 完整指南
+- **[Microsoft Foundry Models Service](https://learn.microsoft.com/azure/ai-services/openai/)** - 完整指南
 - **[gpt-4.1 模型](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - 模型能力
 - **[内容过滤](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - 安全功能
 - **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd 参考
 
 ### 教程
-- **[OpenAI 快速入门](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - 第一次部署
-- **[聊天完成](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - 构建聊天应用
+- **[OpenAI 快速入门](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - 首次部署
+- **[聊天补全](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - 构建聊天应用
 - **[函数调用](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - 高级功能
 
 ### 工具
-- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - 基于 Web 的游乐场
-- **[提示工程指南](https://platform.openai.com/docs/guides/prompt-engineering)** - 编写更好提示
-- **[令牌计算器](https://platform.openai.com/tokenizer)** - 估算令牌使用
+- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - 基于 Web 的演示平台
+- **[提示工程指南](https://platform.openai.com/docs/guides/prompt-engineering)** - 编写更好的提示
+- **[令牌计算器](https://platform.openai.com/tokenizer)** - 估算令牌使用量
 
 ### 社区
 - **[Azure AI Discord](https://discord.gg/azure)** - 从社区获得帮助
@@ -572,15 +573,15 @@ azd down --force --purge
 
 ---
 
-**🎉 成功！** 你已部署 Microsoft Foundry Models 并构建了一个可用的聊天应用。开始探索 gpt-4.1 的能力，并尝试不同的提示和用例。
+**🎉 成功！** 你已部署 Microsoft Foundry Models 并构建了一个可用的聊天应用。开始探索 gpt-4.1 的功能，并尝试不同的提示和用例。
 
-**有问题？** [提交 issue](https://github.com/microsoft/AZD-for-beginners/issues) 或查看 [常见问题](../../resources/faq.md)
+**有问题？** [提交一个 issue](https://github.com/microsoft/AZD-for-beginners/issues) 或查看 [常见问题解答](../../resources/faq.md)
 
-**费用提醒：** 测试完成后请记得运行 `azd down` 以避免持续产生费用（活动使用大约 $50-100/月）。
+**费用提醒：** 完成测试后请运行 `azd down` 以避免持续收费（活跃使用时约 $50-100/月）。
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免责声明**:
-本文件已使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的原文应被视为权威来源。对于关键信息，建议使用专业人工翻译。对于因使用本翻译而产生的任何误解或误释，我们概不负责。
+**免责声明**：
+本文件由 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 翻译完成。尽管我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。原始语言版文件应视为权威来源。对于重要信息，建议使用专业人工翻译。我们对因使用本翻译而产生的任何误解或误释不承担责任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

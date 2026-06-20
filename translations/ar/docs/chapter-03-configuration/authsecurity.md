@@ -1,42 +1,42 @@
 # أنماط المصادقة والهوية المُدارة
 
-⏱️ **الوقت المقدر**: 45-60 دقيقة | 💰 **تأثير التكلفة**: مجاني (لا توجد رسوم إضافية) | ⭐ **التعقيد**: متوسط
+⏱️ **الوقت المقدر**: 45-60 دقيقة | 💰 **تأثير التكلفة**: مجاني (لا تكاليف إضافية) | ⭐ **التعقيد**: متوسط
 
 **📚 مسار التعلم:**
 - ← السابق: [إدارة التكوين](configuration.md) - إدارة متغيرات البيئة والأسرار
-- 🎯 **أنت هنا**: المصادقة والأمان (الهوية المُدارة، خزانة مفاتيح Azure، أنماط الأمان)
-- → التالي: [المشروع الأول](first-project.md) - ابنِ تطبيق AZD الأول الخاص بك
+- 🎯 **أنت هنا**: المصادقة والأمان (الهوية المُدارة، Key Vault، أنماط آمنة)
+- → التالي: [المشروع الأول](first-project.md) - أنشئ تطبيق AZD الأول الخاص بك
 - 🏠 [الصفحة الرئيسية للدورة](../../README.md)
 
 ---
 
 ## ما ستتعلم
 
-بإكمال هذا الدرس، ستتمكن من:
+بإكمال هذا الدرس، سوف:
 - فهم أنماط المصادقة في Azure (المفاتيح، سلاسل الاتصال، الهوية المُدارة)
 - تنفيذ **الهوية المُدارة** للمصادقة بدون كلمات مرور
-- تأمين الأسرار بتكامل **خزانة مفاتيح Azure**
-- تكوين **التحكم في الوصول بناءً على الدور (RBAC)** لنشرات AZD
-- تطبيق أفضل ممارسات الأمان في تطبيقات الحاويات وخدمات Azure
+- تأمين الأسرار باستخدام تكامل **Azure Key Vault**
+- تكوين **التحكم في الوصول القائم على الأدوار (RBAC)** لنشر AZD
+- تطبيق أفضل ممارسات الأمان في Container Apps وخدمات Azure
 - الانتقال من المصادقة المعتمدة على المفاتيح إلى المصادقة المعتمدة على الهوية
 
-## لماذا تهم الهوية المُدارة
+## لماذا تُهم الهوية المُدارة
 
 ### المشكلة: المصادقة التقليدية
 
 **قبل الهوية المُدارة:**
 ```javascript
-// ❌ خطر أمني: أسرار مضمنة مباشرة في الكود
+// ❌ خطر أمني: أسرار مضمّنة في الشيفرة
 const connectionString = "Server=mydb.database.windows.net;User=admin;Password=P@ssw0rd123";
 const storageKey = "xK7mN9pQ2wR5tY8uI0oP3aS6dF1gH4jK...";
 const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 ```
 
-**المشكلات:**
-- 🔴 **تعرّض الأسرار** في الشيفرة، ملفات التكوين، متغيرات البيئة
-- 🔴 **تدوير بيانات الاعتماد** يتطلب تغييرات في الشيفرة وإعادة النشر
-- 🔴 **كابوس المراجعة** - من وصل إلى ماذا ومتى؟
-- 🔴 **تشتت** - الأسرار مبعثرة عبر أنظمة متعددة
+**المشاكل:**
+- 🔴 **الأسرار المكشوفة** في الشفرة، ملفات التكوين، متغيرات البيئة
+- 🔴 **تدوير بيانات الاعتماد** يتطلب تغييرات في الشفرة وإعادة النشر
+- 🔴 **كابوس التدقيق** - من الذي وصل لأي شيء ومتى؟
+- 🔴 **التشتت** - الأسرار مبعثرة عبر أنظمة متعددة
 - 🔴 **مخاطر الامتثال** - يفشل في تدقيقات الأمان
 
 ### الحل: الهوية المُدارة
@@ -47,81 +47,83 @@ const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 const credential = new DefaultAzureCredential();
 const client = new BlobServiceClient(
   "https://mystorageaccount.blob.core.windows.net",
-  credential  // تتعامل Azure تلقائيًا مع المصادقة
+  credential  // يتولى Azure المصادقة تلقائيًا
 );
 ```
 
 **الفوائد:**
-- ✅ **لا أسرار** في الشيفرة أو التكوين
-- ✅ **تدوير تلقائي** - يتولى Azure إدارته
-- ✅ **سجل تدقيق كامل** في سجلات Azure AD
-- ✅ **أمان مركزي** - إدارة عبر بوابة Azure
+- ✅ **لا أسرار** في الشفرة أو التكوين
+- ✅ **تدوير تلقائي** - Azure يتعامل معه
+- ✅ **سجل تدقيق كامل** في سجلات Microsoft Entra ID
+- ✅ **أمان مركزي** - الإدارة عبر بوابة Azure
 - ✅ **جاهز للامتثال** - يفي بمعايير الأمان
 
-**تشبيه**: المصادقة التقليدية تشبه حمل مفاتيح مادية متعددة لأبواب مختلفة. الهوية المُدارة تشبه وجود بطاقة أمنية تمنح الوصول تلقائيًا بناءً على هويتك—لا مفاتيح لتضيع، أو تُنسخ، أو تُدوَّر.
+**تشبيه**: المصادقة التقليدية تشبه حمل مفاتيح فعلية متعددة لأبواب مختلفة. الهوية المُدارة تشبه شارة أمان تمنح الوصول تلقائيًا بناءً على هويتك—لا مفاتيح لتضيع أو تُنسخ أو تُدوّر.
 
 ---
 
-## نظرة عامة على البنية
+## نظرة عامة على المعمارية
 
-### تدفق المصادقة باستخدام الهوية المُدارة
+### تدفق المصادقة بالهوية المُدارة
 
 ```mermaid
 sequenceDiagram
     participant App as تطبيقك<br/>(تطبيق الحاوية)
-    participant MI as الهوية المُدارة<br/>(Azure AD)
+    participant MI as الهوية المدارة<br/>(Microsoft Entra ID)
     participant KV as مخزن المفاتيح
     participant Storage as تخزين Azure
     participant DB as قاعدة بيانات Azure SQL
     
     App->>MI: طلب رمز وصول<br/>(تلقائي)
     MI->>MI: التحقق من الهوية<br/>(لا حاجة لكلمة مرور)
-    MI-->>App: إرجاع الرمز<br/>(صالح لمدة ساعة واحدة)
+    MI-->>App: إرجاع الرمز<br/>(صالح لمدة ساعة)
     
-    App->>KV: الحصول على السرّ<br/>(باستخدام الرمز)
+    App->>KV: الحصول على السر<br/>(باستخدام الرمز)
     KV->>KV: التحقق من أذونات RBAC
-    KV-->>App: إرجاع قيمة السرّ
+    KV-->>App: إرجاع قيمة السر
     
-    App->>Storage: تحميل blob<br/>(باستخدام الرمز)
+    App->>Storage: تحميل كتلة<br/>(باستخدام الرمز)
     Storage->>Storage: التحقق من أذونات RBAC
-    Storage-->>App: نجاح
+    Storage-->>App: تم بنجاح
     
-    App->>DB: استعلام عن البيانات<br/>(باستخدام الرمز)
+    App->>DB: استعلام بيانات<br/>(باستخدام الرمز)
     DB->>DB: التحقق من أذونات SQL
     DB-->>App: إرجاع النتائج
     
-    Note over App,DB: جميع المصادقات بدون كلمات مرور!
+    Note over App,DB: جميع عمليات المصادقة بدون كلمة مرور!
 ```
+
 ### أنواع الهويات المُدارة
 
 ```mermaid
 graph TB
     MI[الهوية المُدارة]
-    SystemAssigned[هوية مُعيّنة من النظام]
-    UserAssigned[هوية مُعيّنة للمستخدم]
+    SystemAssigned[هوية مُعينة من النظام]
+    UserAssigned[هوية مُعينة من المستخدم]
     
     MI --> SystemAssigned
     MI --> UserAssigned
     
     SystemAssigned --> SA1[دورة حياة مرتبطة بالمورد]
-    SystemAssigned --> SA2[إنشاء وحذف تلقائيان]
-    SystemAssigned --> SA3[أفضل لمورد واحد]
+    SystemAssigned --> SA2[إنشاء/حذف تلقائي]
+    SystemAssigned --> SA3[الأفضل لمورد واحد]
     
     UserAssigned --> UA1[دورة حياة مستقلة]
-    UserAssigned --> UA2[إنشاء وحذف يدويان]
+    UserAssigned --> UA2[إنشاء/حذف يدوي]
     UserAssigned --> UA3[مشتركة عبر الموارد]
     
     style SystemAssigned fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style UserAssigned fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
 ```
-| الميزة | مُعيَّن للنظام | مُعيَّن للمستخدم |
+
+| الخدمة | معينة للنظام | معينة للمستخدم |
 |---------|----------------|---------------|
-| **دورة الحياة** | مرتبط بالمورد | مستقل |
+| **دورة الحياة** | مربوطة بالمورد | مستقلة |
 | **الإنشاء** | تلقائي مع المورد | إنشاء يدوي |
-| **الحذف** | يتم حذفه مع المورد | يستمر بعد حذف المورد |
+| **الحذف** | تحذف مع المورد | تستمر بعد حذف المورد |
 | **المشاركة** | مورد واحد فقط | موارد متعددة |
-| **حالة الاستخدام** | سيناريوهات بسيطة | سيناريوهات متعددة الموارد ومعقدة |
-| **الإعداد الافتراضي في AZD** | ✅ موصى به | اختياري |
+| **حالة الاستخدام** | سيناريوهات بسيطة | سيناريوهات معقدة متعددة الموارد |
+| **إعداد افتراضي لـ AZD** | ✅ موصى به | اختياري |
 
 ---
 
@@ -129,7 +131,7 @@ graph TB
 
 ### الأدوات المطلوبة
 
-يجب أن تكون قد قمت بتثبيت ما يلي بالفعل من الدروس السابقة:
+يجب أن تكون قد قمت بتثبيت ما يلي من الدروس السابقة:
 
 ```bash
 # تحقق من Azure Developer CLI
@@ -138,17 +140,17 @@ azd version
 
 # تحقق من Azure CLI
 az --version
-# ✅ المتوقع: azure-cli 2.50.0 أو أعلى
+# ✅ المتوقع: إصدار azure-cli 2.50.0 أو أعلى
 ```
 
 ### متطلبات Azure
 
 - اشتراك Azure نشط
-- أذونات لـ:
+- الأذونات لـ:
   - إنشاء هويات مُدارة
   - تعيين أدوار RBAC
-  - إنشاء موارد خزانة المفاتيح
-  - نشر تطبيقات الحاويات
+  - إنشاء موارد Key Vault
+  - نشر Container Apps
 
 ### المتطلبات المعرفية
 
@@ -161,7 +163,7 @@ az --version
 
 ## الدرس 1: فهم أنماط المصادقة
 
-### النمط 1: سلاسل الاتصال (قديم - تجنب)
+### النمط 1: سلاسل الاتصال (تقليدية - تجنّب)
 
 **كيف يعمل:**
 ```bash
@@ -171,17 +173,17 @@ COSMOS_CONNECTION_STRING="AccountEndpoint=https://myaccount.documents.azure.com:
 SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=P@ssw0rd..."
 ```
 
-**المشكلات:**
+**المشاكل:**
 - ❌ الأسرار مرئية في متغيرات البيئة
-- ❌ تسجل في أنظمة النشر
-- ❌ صعب التدوير
+- ❌ يتم تسجيلها في أنظمة النشر
+- ❌ صعبة التدوير
 - ❌ لا يوجد سجل تدقيق للوصول
 
-**متى تستخدم:** فقط للتطوير المحلي، وليس للإنتاج أبدًا.
+**متى تُستخدم:** فقط للتطوير المحلي، وليس في الإنتاج أبداً.
 
 ---
 
-### النمط 2: مراجع خزانة المفاتيح (أفضل)
+### النمط 2: مراجع Key Vault (أفضل)
 
 **كيف يعمل:**
 ```bicep
@@ -203,15 +205,15 @@ env: [
 ```
 
 **الفوائد:**
-- ✅ تُخزن الأسرار بأمان في خزانة المفاتيح
-- ✅ إدارة أسرار مُركزّة
-- ✅ تدوير دون تغييرات على الشيفرة
+- ✅ تُخزن الأسرار بأمان في Key Vault
+- ✅ إدارة أسرار مركزية
+- ✅ تدوير بدون تغييرات في الشفرة
 
 **القيود:**
-- ⚠️ لا يزال يستخدم المفاتيح/كلمات المرور
-- ⚠️ تحتاج لإدارة الوصول إلى خزانة المفاتيح
+- ⚠️ لا تزال تستخدم مفاتيح/كلمات مرور
+- ⚠️ تحتاج لإدارة وصول Key Vault
 
-**متى تستخدم:** خطوة انتقالية من سلاسل الاتصال إلى الهوية المُدارة.
+**متى تُستخدم:** خطوة انتقالية من سلاسل الاتصال إلى الهوية المُدارة.
 
 ---
 
@@ -237,7 +239,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-**شيفرة التطبيق:**
+**شفرة التطبيق:**
 ```javascript
 // لا حاجة إلى أسرار!
 const { DefaultAzureCredential } = require('@azure/identity');
@@ -251,13 +253,66 @@ const blobServiceClient = new BlobServiceClient(
 ```
 
 **الفوائد:**
-- ✅ لا أسرار في الشيفرة/التكوين
+- ✅ لا أسرار في الشفرة/التكوين
 - ✅ تدوير بيانات الاعتماد تلقائيًا
 - ✅ سجل تدقيق كامل
-- ✅ أذونات مبنية على RBAC
+- ✅ أذونات قائمة على RBAC
 - ✅ جاهز للامتثال
 
-**متى تستخدم:** دائمًا، لتطبيقات الإنتاج.
+**متى تُستخدم:** دائماً، لتطبيقات الإنتاج.
+
+---
+
+### النمط 4: Service Principals (CI/CD & Automation)
+
+الهوية المُدارة هي المعيار الذهبي *للموارد التي تعمل داخل Azure*. ولكن ماذا عن الأشياء التي تعمل **خارج** Azure—مثل خط أنابيب CI/CD على عامل بناء، أو سكربت على حاسوبك المحمول لا يمكنه استخدام تسجيل الدخول التفاعلي؟ هنا يأتي دور **service principal**: هوية غير بشرية تحتوي على بيانات اعتماد خاصة بها يمكن لعملية مؤتمتة تسجيل الدخول بها.
+
+**كيف يعمل:**
+
+أنشئ service principal ضمن مجموعة موارد (أقل امتيازات):
+
+```bash
+az ad sp create-for-rbac \
+  --name "myapp-cicd" \
+  --role contributor \
+  --scopes /subscriptions/<sub-id>/resourceGroups/<rg-name>
+```
+
+سيطبع هذا معرف العميل (client ID)، وسر العميل (client secret)، ومعرّف المستأجر (tenant ID). يمكن لـ azd تسجيل الدخول بها دون تفاعل:
+
+```bash
+azd auth login \
+  --client-id "<appId>" \
+  --client-secret "<password>" \
+  --tenant-id "<tenant>"
+```
+
+**فضلًا استخدم بيانات اعتماد موحّدة (OIDC) بدلاً من الأسرار.** بدلاً من سر عميل طويل الأمد، قم بتكوين بيانات اعتماد موحّدة حتى يتبادل خط الأنابيب رمزًا قصير العمر—لا سر يمكن تسريبه أو تدويره:
+
+```bash
+azd auth login \
+  --client-id "<appId>" \
+  --federated-credential-provider "github" \
+  --tenant-id "<tenant>"
+```
+
+> `azd pipeline config` يكوّن هذا تلقائيًا لك. راجع إرشادات CI/CD في [الفصل 8](../chapter-08-production/production-ai-practices.md).
+
+**الفوائد:**
+- ✅ يعمل خارج Azure (عوامل البناء، البنية المحلية، سُحُب أخرى)
+- ✅ يمكن تقييده إلى مجموعة موارد واحدة بدور واحد
+- ✅ النسخة الموحّدة (OIDC) لا تستخدم أي سر مخزن
+
+**المقايضات:**
+- ⚠️ النسخة المعتمدة على الأسرار تتطلب تخزينًا وتدويرًا حذرًا
+- ⚠️ سر مسرَّب يمنح ما يمكن للـ SP فعله—اجعل النطاقات ضيقة
+
+**متى تُستخدم:** خطوط أنابيب CI/CD والأتمتة التي لا يمكنها استخدام الهوية المُدارة. فَضِّل دائمًا النسخة **الموحّدة/OIDC** على سر العميل، وفضّل الهوية المُدارة كلما كان عبء العمل يعمل داخل Azure.
+
+**تخزين بيانات الاعتماد بأمان:**
+- لا تلتزم الأسرار أبداً—استخدم مخزن الأسرار في خط أنابيبك (GitHub Actions secrets، مجموعات متغيرات Azure DevOps / Key Vault).
+- قيّد SP إلى أقل دور ومجموعة موارد يحتاجها.
+- حدد انتهاء صلاحية ودوّرها، أو تخلّص من السر تمامًا باستخدام OIDC.
 
 ---
 
@@ -265,7 +320,7 @@ const blobServiceClient = new BlobServiceClient(
 
 ### التنفيذ خطوة بخطوة
 
-دعنا نبني تطبيق حاويات آمن يستخدم الهوية المُدارة للوصول إلى تخزين Azure وخزانة المفاتيح.
+دعنا نبني تطبيق Container App آمنًا يستخدم الهوية المُدارة للوصول إلى Azure Storage وKey Vault.
 
 ### هيكل المشروع
 
@@ -302,7 +357,7 @@ services:
 # Enable managed identity (AZD handles this automatically)
 ```
 
-### 2. البنية التحتية: تمكين الهوية المُدارة
+### 2. البنية التحتية: تفعيل الهوية المُدارة
 
 **الملف: `infra/main.bicep`**
 
@@ -384,7 +439,7 @@ output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output APP_URL string = containerApp.outputs.url
 ```
 
-### 3. تطبيق الحاوية بهوية مُعيَّنة للنظام
+### 3. تطبيق Container App بهوية مُعيّنة للنظام
 
 **الملف: `infra/app/container-app.bicep`**
 
@@ -463,7 +518,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 output id string = roleAssignment.id
 ```
 
-### 5. شيفرة التطبيق مع الهوية المُدارة
+### 5. شفرة التطبيق بالهوية المُدارة
 
 **الملف: `src/app.js`**
 
@@ -476,7 +531,7 @@ const { SecretClient } = require('@azure/keyvault-secrets');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🔑 تهيئة بيانات الاعتماد (يعمل تلقائيًا مع الهوية المُدارة)
+// 🔑 تهيئة بيانات الاعتماد (يعمل تلقائيًا مع الهوية المدارة)
 const credential = new DefaultAzureCredential();
 
 // إعداد تخزين Azure
@@ -498,7 +553,7 @@ app.get('/health', (req, res) => {
   res.json({ status: 'healthy', authentication: 'managed-identity' });
 });
 
-// تحميل ملف إلى تخزين Blob
+// رفع ملف إلى تخزين Blob
 app.post('/upload', async (req, res) => {
   try {
     const containerClient = blobServiceClient.getContainerClient('uploads');
@@ -537,7 +592,7 @@ app.get('/secret/:name', async (req, res) => {
   }
 });
 
-// قائمة حاويات Blob (يوضح إمكانية الوصول للقراءة)
+// سرد حاويات Blob (يوضح إمكانية الوصول للقراءة)
 app.get('/containers', async (req, res) => {
   try {
     const containers = [];
@@ -589,14 +644,14 @@ azd init
 # نشر البنية التحتية والتطبيق
 azd up
 
-# الحصول على رابط التطبيق
+# الحصول على عنوان URL للتطبيق
 APP_URL=$(azd env get-values | grep APP_URL | cut -d '=' -f2 | tr -d '"')
 
 # اختبار فحص الحالة الصحية
 curl $APP_URL/health
 ```
 
-**✅ الناتج المتوقع:**
+**✅ الإخراج المتوقع:**
 ```json
 {
   "status": "healthy",
@@ -604,12 +659,12 @@ curl $APP_URL/health
 }
 ```
 
-**اختبار تحميل Blob:**
+**اختبار تحميل blob:**
 ```bash
 curl -X POST $APP_URL/upload
 ```
 
-**✅ الناتج المتوقع:**
+**✅ الإخراج المتوقع:**
 ```json
 {
   "success": true,
@@ -623,7 +678,7 @@ curl -X POST $APP_URL/upload
 curl $APP_URL/containers
 ```
 
-**✅ الناتج المتوقع:**
+**✅ الإخراج المتوقع:**
 ```json
 {
   "containers": ["uploads"],
@@ -638,17 +693,17 @@ curl $APP_URL/containers
 
 ### معرّفات الأدوار المضمنة للهوية المُدارة
 
-| الخدمة | اسم الدور | مُعرف الدور | الأذونات |
+| الخدمة | اسم الدور | معرّف الدور | الأذونات |
 |---------|-----------|---------|-------------|
-| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | قراءة الـ blobs والحاويات |
-| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | قراءة وكتابة وحذف الـ blobs |
-| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | قراءة وكتابة وحذف رسائل قائمة الانتظار |
+| **التخزين** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | قراءة blobs والحاويات |
+| **التخزين** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | قراءة، كتابة، حذف blobs |
+| **التخزين** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | قراءة، كتابة، حذف رسائل الطابور |
 | **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | قراءة الأسرار |
-| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | قراءة وكتابة وحذف الأسرار |
+| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | قراءة، كتابة، حذف الأسرار |
 | **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | قراءة بيانات Cosmos DB |
 | **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | قراءة وكتابة بيانات Cosmos DB |
-| **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | إدارة قواعد بيانات SQL |
-| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | إرسال واستقبال وإدارة الرسائل |
+| **قاعدة بيانات SQL** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | إدارة قواعد بيانات SQL |
+| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | إرسال، استقبال، إدارة الرسائل |
 
 ### كيفية العثور على معرّفات الأدوار
 
@@ -656,7 +711,7 @@ curl $APP_URL/containers
 # عرض جميع الأدوار المدمجة
 az role definition list --query "[].{Name:roleName, ID:name}" --output table
 
-# البحث عن دور معين
+# البحث عن دور محدد
 az role definition list --query "[?contains(roleName, 'Storage Blob')].{Name:roleName, ID:name}" --output table
 
 # الحصول على تفاصيل الدور
@@ -667,13 +722,13 @@ az role definition list --name "Storage Blob Data Contributor"
 
 ## تمارين عملية
 
-### التمرين 1: تمكين الهوية المُدارة لتطبيق موجود ⭐⭐ (متوسط)
+### التمرين 1: تفعيل الهوية المُدارة لتطبيق موجود ⭐⭐ (متوسط)
 
-**الهدف**: إضافة هوية مُدارة إلى نشر تطبيق حاويات موجود
+**الهدف**: إضافة هوية مُدارة إلى نشر Container App موجود
 
-**السيناريو**: لديك تطبيق حاويات يستخدم سلاسل الاتصال. قم بتحويله إلى الهوية المُدارة.
+**السيناريو**: لديك Container App يستخدم سلاسل الاتصال. حوّله إلى الهوية المُدارة.
 
-**نقطة البداية**: تطبيق حاويات بهذا التكوين:
+**نقطة البداية**: Container App بهذا التكوين:
 
 ```bicep
 // ❌ Current: Using connection string
@@ -687,7 +742,7 @@ env: [
 
 **الخطوات**:
 
-1. **تمكين الهوية المُدارة في Bicep:**
+1. **تفعيل الهوية المُدارة في Bicep:**
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -699,7 +754,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-2. **منح الوصول إلى التخزين:**
+2. **منح وصول للتخزين:**
 
 ```bicep
 // Get storage account reference
@@ -719,7 +774,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-3. **تحديث شيفرة التطبيق:**
+3. **تحديث شفرة التطبيق:**
 
 **قبل (سلسلة الاتصال):**
 ```javascript
@@ -754,10 +809,10 @@ env: [
 ]
 ```
 
-5. **نشر واختبار:**
+5. **النشر والاختبار:**
 
 ```bash
-# أعد النشر
+# إعادة النشر
 azd up
 
 # اختبر أنه لا يزال يعمل
@@ -765,41 +820,41 @@ curl https://myapp.azurecontainerapps.io/upload
 ```
 
 **✅ معايير النجاح:**
-- ✅ يتم نشر التطبيق دون أخطاء
-- ✅ عمليات التخزين تعمل (رفع، سرد، تنزيل)
+- ✅ يتم نشر التطبيق بدون أخطاء
+- ✅ عمليات التخزين تعمل (تحميل، سرد، تنزيل)
 - ✅ لا توجد سلاسل اتصال في متغيرات البيئة
-- ✅ الهوية مرئية في بوابة Azure ضمن لوحة "Identity"
+- ✅ الهوية مرئية في بوابة Azure ضمن لوح "Identity"
 
 **التحقق:**
 
 ```bash
-# تحقق من تمكين الهوية المدارة
+# تحقق من تمكين الهوية المُدارة
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
-# ✅ المتوقع: "SystemAssigned"
+# ✅ متوقع: "SystemAssigned"
 
 # تحقق من تعيين الدور
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv) \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.Storage/storageAccounts/mystorageaccount
-# ✅ المتوقع: يعرض الدور "Storage Blob Data Contributor"
+# ✅ متوقع: يعرض دور "Storage Blob Data Contributor"
 ```
 
 **الوقت**: 20-30 دقيقة
 
 ---
 
-### التمرين 2: وصول متعدد الخدمات باستخدام هوية مُعيَّنة للمستخدم ⭐⭐⭐ (متقدم)
+### التمرين 2: وصول متعدد الخدمات بهوية مخصصة للمستخدم ⭐⭐⭐ (متقدم)
 
-**الهدف**: إنشاء هوية مُعيَّنة للمستخدم يتم مشاركتها عبر عدة تطبيقات حاويات
+**الهدف**: إنشاء هوية مخصصة للمستخدم مشتركة عبر عدة Container Apps
 
-**السيناريو**: لديك 3 خدمات مصغرة تحتاج جميعها للوصول إلى نفس حساب التخزين وخزانة المفاتيح.
+**السيناريو**: لديك 3 خدمات مصغرة تحتاج جميعها الوصول إلى نفس حساب التخزين وKey Vault.
 
 **الخطوات**:
 
-1. **إنشاء هوية مُعيَّنة للمستخدم:**
+1. **إنشاء هوية مخصصة للمستخدم:**
 
 **الملف: `infra/core/identity.bicep`**
 
@@ -819,7 +874,7 @@ output principalId string = userAssignedIdentity.properties.principalId
 output clientId string = userAssignedIdentity.properties.clientId
 ```
 
-2. **تعيين أدوار للهوية المُعيَّنة للمستخدم:**
+2. **تعيين الأدوار إلى الهوية المخصصة:**
 
 ```bicep
 // In main.bicep
@@ -856,7 +911,7 @@ resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' =
 }
 ```
 
-3. **تعيين الهوية لعدة تطبيقات حاويات:**
+3. **تعيين الهوية إلى عدة Container Apps:**
 
 ```bicep
 resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
@@ -893,14 +948,14 @@ resource orderService 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-4. **شيفرة التطبيق (جميع الخدمات تستخدم نفس النمط):**
+4. **شفرة التطبيق (جميع الخدمات تستخدم نفس النمط):**
 
 ```javascript
 const { DefaultAzureCredential, ManagedIdentityCredential } = require('@azure/identity');
 
-// لهوية معيّنة من قِبَل المستخدم، حدّد معرف العميل
+// لهوية مُعيّنة من قِبَل المستخدم، حدد معرف العميل
 const credential = new ManagedIdentityCredential(
-  process.env.AZURE_CLIENT_ID  // معرف عميل الهوية المعيّنة من المستخدم
+  process.env.AZURE_CLIENT_ID  // معرف عميل الهوية المُعيّنة من قِبَل المستخدم
 );
 
 // أو استخدم DefaultAzureCredential (يكتشف تلقائيًا)
@@ -912,12 +967,12 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-5. **نشر والتحقق:**
+5. **النشر والتحقق:**
 
 ```bash
 azd up
 
-# اختبر أن جميع الخدمات يمكنها الوصول إلى التخزين
+# اختبار أن جميع الخدمات قادرة على الوصول إلى التخزين
 curl https://api-gateway.azurecontainerapps.io/upload
 curl https://product-service.azurecontainerapps.io/upload
 curl https://order-service.azurecontainerapps.io/upload
@@ -925,11 +980,11 @@ curl https://order-service.azurecontainerapps.io/upload
 
 **✅ معايير النجاح:**
 - ✅ هوية واحدة مشتركة عبر 3 خدمات
-- ✅ جميع الخدمات يمكنها الوصول إلى التخزين وخزانة المفاتيح
-- ✅ تستمر الهوية إذا قمت بحذف خدمة واحدة
-- ✅ إدارة أذونات مُركزّة
+- ✅ جميع الخدمات يمكنها الوصول إلى التخزين وKey Vault
+- ✅ تستمر الهوية إذا حذفت خدمة واحدة
+- ✅ إدارة أذونات مركزية
 
-**فوائد الهوية المُعيَّنة للمستخدم:**
+**فوائد الهوية المخصصة للمستخدم:**
 - هوية واحدة للإدارة
 - أذونات متسقة عبر الخدمات
 - تستمر بعد حذف الخدمة
@@ -939,15 +994,15 @@ curl https://order-service.azurecontainerapps.io/upload
 
 ---
 
-### التمرين 3: تنفيذ تدوير أسرار خزانة المفاتيح ⭐⭐⭐ (متقدم)
+### التمرين 3: تنفيذ تدوير أسرار Key Vault ⭐⭐⭐ (متقدم)
 
-**الهدف**: تخزين مفاتيح واجهات برمجة تطبيقات الطرف الثالث في خزانة المفاتيح والوصول إليها باستخدام الهوية المُدارة
+**الهدف**: تخزين مفاتيح واجهات برمجة التطبيقات من طرف ثالث في Key Vault والوصول إليها باستخدام الهوية المُدارة
 
-**السيناريو**: يحتاج تطبيقك لاستدعاء واجهة برمجة تطبيقات خارجية (OpenAI, Stripe, SendGrid) تتطلب مفاتيح API.
+**السيناريو**: يحتاج تطبيقك لاستدعاء API خارجي (OpenAI، Stripe، SendGrid) الذي يتطلب مفاتيح API.
 
 **الخطوات**:
 
-1. **إنشاء خزانة مفاتيح مع RBAC:**
+1. **إنشاء Key Vault مع RBAC:**
 
 **الملف: `infra/core/keyvault.bicep`**
 
@@ -978,13 +1033,13 @@ output name string = keyVault.name
 output uri string = keyVault.properties.vaultUri
 ```
 
-2. **تخزين الأسرار في خزانة المفاتيح:**
+2. **تخزين الأسرار في Key Vault:**
 
 ```bash
 # الحصول على اسم Key Vault
 KV_NAME=$(azd env get-values | grep AZURE_KEY_VAULT_NAME | cut -d '=' -f2 | tr -d '"')
 
-# تخزين مفاتيح واجهة برمجة التطبيقات لجهات خارجية
+# تخزين مفاتيح واجهات برمجة التطبيقات لجهات خارجية
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
@@ -1001,7 +1056,7 @@ az keyvault secret set \
   --value "SG.xxxxxxxxxxxxx"
 ```
 
-3. **شيفرة التطبيق لاسترجاع الأسرار:**
+3. **شفرة التطبيق لاسترجاع الأسرار:**
 
 **الملف: `src/config.js`**
 
@@ -1096,33 +1151,33 @@ app.listen(3000, () => {
 });
 ```
 
-5. **نشر واختبار:**
+5. **النشر والاختبار:**
 
 ```bash
 azd up
 
-# تحقّق من أن مفاتيح واجهة برمجة التطبيقات تعمل
+# اختبار عمل مفاتيح API
 curl -X POST https://myapp.azurecontainerapps.io/chat \
   -H "Content-Type: application/json" \
   -d '{"message":"Hello AI"}'
 ```
 
 **✅ معايير النجاح:**
-- ✅ لا توجد مفاتيح API في الشيفرة أو متغيرات البيئة
-- ✅ يسترجع التطبيق المفاتيح من خزانة المفاتيح
-- ✅ تعمل واجهات برمجة تطبيقات الطرف الثالث بشكل صحيح
-- ✅ إمكانية تدوير المفاتيح دون تغييرات في الشيفرة
+- ✅ لا مفاتيح API في الكود أو متغيرات البيئة
+- ✅ التطبيق يسترجع المفاتيح من Key Vault
+- ✅ واجهات برمجة تطبيقات الطرف الثالث تعمل بشكل صحيح
+- ✅ يمكن تدوير المفاتيح دون تغييرات في الكود
 
-**تدوير سر:**
+**تدوير سِرّ:**
 
 ```bash
-# تحديث السر في خزنة المفاتيح
+# تحديث السر في Key Vault
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
   --value "sk-proj-NEW_KEY_HERE"
 
-# أعد تشغيل التطبيق لتحميل المفتاح الجديد
+# أعد تشغيل التطبيق لاستخدام المفتاح الجديد
 az containerapp revision restart \
   --name myapp \
   --resource-group rg-myapp
@@ -1132,18 +1187,20 @@ az containerapp revision restart \
 
 ---
 
-## نقطة تحقق المعرفة
+## نقطة التحقق المعرفي
 
 ### 1. أنماط المصادقة ✓
 
 اختبر فهمك:
 
-- [ ] **Q1**: ما هي الأنماط الثلاثة الرئيسية للمصادقة؟ 
-  - **A**: سلاسل الاتصال (قديم)، مراجع خزانة المفاتيح (انتقال)، الهوية المُدارة (أفضل)
-- [ ] **Q2**: لماذا الهوية المُدارة أفضل من سلاسل الاتصال؟
-  - **A**: لا أسرار في الشيفرة، تدوير تلقائي، سجل تدقيق كامل، أذونات RBAC
-- [ ] **Q3**: متى تستخدم الهوية المُعيَّنة للمستخدم بدلًا من المُعيَّنة للنظام؟
-  - **A**: عند مشاركة الهوية عبر موارد متعددة أو عندما تكون دورة حياة الهوية مستقلة عن دورة حياة المورد
+- [ ] **السؤال 1**: ما هي الأنماط الثلاثة الرئيسية للمصادقة؟ 
+  - **الإجابة**: سلاسل الاتصال (قديمة)، مراجع Key Vault (انتقال)، الهوية المُدارة (الأفضل)
+
+- [ ] **السؤال 2**: لماذا الهوية المُدارة أفضل من سلاسل الاتصال؟
+  - **الإجابة**: لا أسرار في الكود، تدوير تلقائي، سجل تدقيق كامل، أذونات RBAC
+
+- [ ] **السؤال 3**: متى تستخدم هوية مخصصة للمستخدم بدلاً من هوية مُعينة للنظام؟
+  - **الإجابة**: عند مشاركة الهوية عبر موارد متعددة أو عندما تكون دورة حياة الهوية مستقلة عن دورة حياة المورد
 
 **التحقق العملي:**
 ```bash
@@ -1153,7 +1210,7 @@ az containerapp show \
   --resource-group rg-myapp \
   --query "identity.type"
 
-# أدرج جميع تعيينات الأدوار للهوية
+# سرد جميع تعيينات الأدوار للهوية
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 ```
@@ -1164,18 +1221,18 @@ az role assignment list \
 
 اختبر فهمك:
 
-- [ ] **Q1**: ما هو مُعرف الدور لـ "Storage Blob Data Contributor"؟
-  - **A**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
+- [ ] **السؤال 1**: ما هو معرف الدور لـ "Storage Blob Data Contributor"؟
+  - **الإجابة**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
 
-- [ ] **Q2**: ما الأذونات التي يوفرها "Key Vault Secrets User"؟
-  - **A**: وصول قراءة فقط للأسرار (لا يمكن الإنشاء أو التحديث أو الحذف)
+- [ ] **السؤال 2**: ما الأذونات التي يقدمها "Key Vault Secrets User"؟
+  - **الإجابة**: وصول للقراءة فقط إلى الأسرار (لا يمكن الإنشاء أو التحديث أو الحذف)
 
-- [ ] **Q3**: كيف تمنح تطبيق حاوية الوصول إلى Azure SQL؟
-  - **A**: تعيين دور "SQL DB Contributor" أو تكوين مصادقة Azure AD لـ SQL
+- [ ] **السؤال 3**: كيف تمنح تطبيق Container App وصولًا إلى Azure SQL؟
+  - **الإجابة**: تعيين دور "SQL DB Contributor" أو تكوين مصادقة Microsoft Entra ID لـ SQL
 
 **التحقق العملي:**
 ```bash
-# ابحث عن دور محدد
+# العثور على دور محدد
 az role definition list --name "Storage Blob Data Contributor"
 
 # تحقق من الأدوار المعينة لهويتك
@@ -1185,15 +1242,18 @@ az role assignment list --assignee $PRINCIPAL_ID --output table
 
 ---
 
-### 3. تكامل خزانة المفاتيح ✓
-- [ ] **Q1**: كيف تقوم بتمكين RBAC لـ Key Vault بدلًا من سياسات الوصول؟
-  - **A**: اضبط `enableRbacAuthorization: true` في Bicep
+### 3. تكامل Key Vault ✓
 
-- [ ] **Q2**: أي مكتبة Azure SDK تتعامل مع مصادقة الهوية المُدارة؟
-  - **A**: `@azure/identity` مع الفئة `DefaultAzureCredential`
+اختبر فهمك:
 
-- [ ] **Q3**: كم مدة بقاء أسرار Key Vault في ذاكرة التخزين المؤقت؟
-  - **A**: يعتمد على التطبيق؛ نفّذ استراتيجية التخزين المؤقت الخاصة بك
+- [ ] **السؤال 1**: كيف تُمكّن RBAC على Key Vault بدلاً من سياسات الوصول؟
+  - **الإجابة**: اضبط `enableRbacAuthorization: true` في Bicep
+
+- [ ] **السؤال 2**: أي مكتبة في Azure SDK تتعامل مع مصادقة الهوية المُدارة؟
+  - **الإجابة**: `@azure/identity` مع فئة `DefaultAzureCredential`
+
+- [ ] **السؤال 3**: كم من الوقت تبقى أسرار Key Vault في ذاكرة التخزين المؤقت؟
+  - **الإجابة**: يعتمد على التطبيق؛ نفّذ استراتيجية التخزين المؤقت الخاصة بك
 
 **التحقق العملي:**
 ```bash
@@ -1203,7 +1263,7 @@ az keyvault secret show \
   --name "OpenAI-ApiKey" \
   --query "value"
 
-# تحقق من تمكين التحكم في الوصول القائم على الأدوار (RBAC)
+# تحقق من تمكين RBAC
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
@@ -1223,9 +1283,9 @@ az keyvault show \
    }
    ```
 
-2. **استخدم أدوار RBAC بأقل امتيازات**
-   - استخدم أدوار "Reader" متى أمكن
-   - تجنب "Owner" أو "Contributor" إلا إذا لزم الأمر
+2. **استخدم أدوار RBAC بأقل امتياز ممكن**
+   - استخدم "Reader" roles كلما أمكن
+   - تجنّب "Owner" أو "Contributor" إلا إذا كانت ضرورية
 
 3. **خزن مفاتيح الطرف الثالث في Key Vault**
    ```javascript
@@ -1246,21 +1306,21 @@ az keyvault show \
    azd env new prod
    ```
 
-6. **قم بتدوير الأسرار بانتظام**
-   - اضبط تواريخ الانتهاء على أسرار Key Vault
-   - أتمتة التدوير باستخدام Azure Functions
+6. **دوّر الأسرار بانتظام**
+   - ضع تواريخ انتهاء صلاحية على أسرار Key Vault
+   - آتم عملية التدوير باستخدام Azure Functions
 
 ### ❌ لا تفعل:
 
-1. **لا تقم أبدًا بتضمين الأسرار بشكل ثابت (hardcode)**
+1. **لا تُدرج الأسرار مباشرة في الكود**
    ```javascript
    // ❌ سيئ
    const apiKey = "sk-proj-xxxxxxxxxxxxx";
    ```
 
-2. **لا تستخدم سلاسل الاتصال في الإنتاج**
+2. **لا تستخدم سلاسل الاتصال في البيئة الإنتاجية**
    ```javascript
-   // ❌ سيئ
+   // سيئ ❌
    BlobServiceClient.fromConnectionString(process.env.STORAGE_CONNECTION_STRING)
    ```
 
@@ -1273,16 +1333,16 @@ az keyvault show \
    roleDefinitionId: 'Storage Blob Data Reader'
    ```
 
-4. **لا تسجل الأسرار**
+4. **لا تسجل الأسرار في السجلات**
    ```javascript
-   // سيئ ❌
+   // ❌ سيئ
    console.log('API Key:', apiKey);
    
-   // جيد ✅
+   // ✅ جيد
    console.log('API Key retrieved successfully');
    ```
 
-5. **لا تشارك هويات الإنتاج عبر البيئات**
+5. **لا تُشارك هويات الإنتاج عبر البيئات**
    ```bicep
    // ❌ BAD - same identity for dev and prod
    // ✅ GOOD - separate identities per environment
@@ -1303,18 +1363,18 @@ AuthorizationPermissionMismatch: This request is not authorized to perform this 
 **التشخيص:**
 
 ```bash
-# تحقق مما إذا كانت الهوية المُدارة مُفعّلة
+# تحقق مما إذا كانت الهوية المُدارة مُمكّنة
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
-# ✅ متوقع: "SystemAssigned" أو "UserAssigned"
+# ✅ المتوقع: "SystemAssigned" أو "UserAssigned"
 
-# تحقق من تعيينات الدور
+# تحقق من تعيينات الأدوار
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID
 
-# متوقع: يجب أن ترى "Storage Blob Data Contributor" أو دور مشابه
+# المتوقع: يجب أن ترى "Storage Blob Data Contributor" أو دور مشابه
 ```
 
 **الحلول:**
@@ -1353,7 +1413,7 @@ The user, group or application does not have secrets get permission
 **التشخيص:**
 
 ```bash
-# تحقق من تمكين التحكم في الوصول بناءً على الدور (RBAC) لمخزن المفاتيح
+# تحقق من تمكين التحكم في الوصول القائم على الدور (RBAC) لمخزن المفاتيح
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
@@ -1367,7 +1427,7 @@ az role assignment list \
 
 **الحلول:**
 
-1. **قم بتمكين RBAC على Key Vault:**
+1. **مكّن RBAC على Key Vault:**
 ```bash
 az keyvault update \
   --name $KV_NAME \
@@ -1396,7 +1456,7 @@ CredentialUnavailableError: No credential available
 **التشخيص:**
 
 ```bash
-# تحقق مما إذا كنت مسجلاً للدخول
+# تحقق مما إذا كنت قد سجلت الدخول
 az account show
 
 # تحقق من مصادقة Azure CLI
@@ -1438,18 +1498,18 @@ const credential = process.env.NODE_ENV === 'production'
 
 **الأعراض:**
 - تم تعيين الدور بنجاح
-- لا زلت تتلقى أخطاء 403
+- ما زلت تحصل على أخطاء 403
 - وصول متقطع (يعمل أحيانًا ولا يعمل أحيانًا)
 
 **الشرح:**
-قد تستغرق تغييرات Azure RBAC من 5 إلى 10 دقائق للانتشار عالميًا.
+تغييرات Azure RBAC قد تستغرق من 5 إلى 10 دقائق للانتشار عالميًا.
 
 **الحل:**
 
 ```bash
-# انتظر وأعد المحاولة
+# انتظر وحاول مرة أخرى
 echo "Waiting for RBAC propagation..."
-sleep 300  # انتظر ٥ دقائق
+sleep 300  # انتظر 5 دقائق
 
 # اختبر الوصول
 curl https://myapp.azurecontainerapps.io/upload
@@ -1468,36 +1528,36 @@ az containerapp revision restart \
 
 | المورد | التكلفة |
 |----------|------|
-| **الهوية المُدارة** | 🆓 **مجاني** - لا توجد رسوم |
-| **تعيينات أدوار RBAC** | 🆓 **مجاني** - لا توجد رسوم |
-| **طلبات رموز Azure AD** | 🆓 **مجاني** - مشمول |
+| **الهوية المُدارة** | 🆓 **مجانًا** - بدون رسوم |
+| **تعيينات أدوار RBAC** | 🆓 **مجانًا** - بدون رسوم |
+| **طلبات رمز Microsoft Entra ID** | 🆓 **مجانًا** - مشمولة |
 | **عمليات Key Vault** | $0.03 لكل 10,000 عملية |
-| **تخزين Key Vault** | $0.024 لكل سر شهريًا |
+| **تخزين Key Vault** | $0.024 لكل سر في الشهر |
 
-**توفر الهوية المُدارة المال من خلال:**
-- ✅ إلغاء عمليات Key Vault للمصادقة بين الخدمات
-- ✅ تقليل حوادث الأمان (لا توجد بيانات اعتماد مسربة)
+الهوية المُدارة توفر المال عن طريق:
+- ✅ التخلص من عمليات Key Vault لمصادقة الخدمة إلى الخدمة
+- ✅ تقليل حوادث الأمان (لا تسرب بيانات اعتماد)
 - ✅ تقليل العبء التشغيلي (لا تدوير يدوي)
 
-**مقارنة تكاليف مثال (شهريًا):**
+مثال مقارنة التكاليف (شهريًا):
 
 | السيناريو | سلاسل الاتصال | الهوية المُدارة | التوفير |
 |----------|-------------------|-----------------|---------|
-| تطبيق صغير (1M طلبات) | ~$50 (Key Vault + عمليات) | ~$0 | $50/شهريًا |
-| تطبيق متوسط (10M طلبات) | ~$200 | ~$0 | $200/شهريًا |
-| تطبيق كبير (100M طلبات) | ~$1,500 | ~$0 | $1,500/شهريًا |
+| تطبيق صغير (1M requests) | ~$50 (Key Vault + عمليات) | ~$0 | $50/شهر |
+| تطبيق متوسط (10M requests) | ~$200 | ~$0 | $200/شهر |
+| تطبيق كبير (100M requests) | ~$1,500 | ~$0 | $1,500/شهر |
 
 ---
 
-## تعلّم المزيد
+## تعرّف أكثر
 
 ### الوثائق الرسمية
 - [الهوية المُدارة في Azure](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
-- [Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)
-- [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)
+- [RBAC في Azure](https://learn.microsoft.com/azure/role-based-access-control/overview)
+- [Key Vault في Azure](https://learn.microsoft.com/azure/key-vault/general/overview)
 - [DefaultAzureCredential](https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential)
 
-### توثيق SDK
+### وثائق SDK
 - [@azure/identity (Node.js)](https://www.npmjs.com/package/@azure/identity)
 - [Azure.Identity (C#)](https://www.nuget.org/packages/Azure.Identity/)
 - [azure-identity (Python)](https://pypi.org/project/azure-identity/)
@@ -1508,36 +1568,36 @@ az containerapp revision restart \
 - 🏠 [الصفحة الرئيسية للدورة](../../README.md)
 
 ### أمثلة ذات صلة
-- [مثال دردشة نماذج Microsoft Foundry](../../../../examples/azure-openai-chat) - يستخدم الهوية المُدارة لنماذج Microsoft Foundry
-- [مثال الخدمات الصغيرة](../../../../examples/microservices) - أنماط مصادقة متعددة الخدمات
+- [مثال محادثة نماذج Microsoft Foundry](../../../../examples/azure-openai-chat) - يستخدم الهوية المُدارة لنماذج Microsoft Foundry
+- [مثال الميكروسيرفيس](../../../../examples/microservices) - أنماط المصادقة متعددة الخدمات
 
 ---
 
-## ملخص
+## الملخص
 
 **لقد تعلمت:**
-- ✅ ثلاث أنماط للمصادقة (سلاسل الاتصال، Key Vault، الهوية المُدارة)
+- ✅ ثلاثة أنماط للمصادقة (سلاسل الاتصال، Key Vault، الهوية المُدارة)
 - ✅ كيفية تمكين وتكوين الهوية المُدارة في AZD
 - ✅ تعيينات أدوار RBAC لخدمات Azure
-- ✅ تكامل Key Vault لأسرار طرف ثالث
-- ✅ الهويات المعينة من قبل المستخدم مقابل الهويات المعينة من النظام
+- ✅ تكامل Key Vault للأسرار من طرف ثالث
+- ✅ الهويات المخصصة للمستخدم مقابل الهويات المعينة للنظام
 - ✅ أفضل ممارسات الأمان واستكشاف الأخطاء وإصلاحها
 
-**أهم النقاط:**
-1. **استخدم دائمًا الهوية المُدارة في الإنتاج** - صفر أسرار، تدوير تلقائي
-2. **استخدم أدوار RBAC بأقل امتيازات** - امنح فقط الأذونات الضرورية
+**النقاط الرئيسية:**
+1. **استخدم دائمًا الهوية المُدارة في الإنتاج** - لا أسرار، تدوير تلقائي
+2. **استخدم أدوار RBAC بأقل امتياز ممكن** - امنح الأذونات الضرورية فقط
 3. **خزن مفاتيح الطرف الثالث في Key Vault** - إدارة أسرار مركزية
-4. **افصل الهويات لكل بيئة** - عزل التطوير، الاختبار، الإنتاج
+4. **فصل الهويات حسب البيئة** - Dev, staging, prod عزلة
 5. **فعّل تسجيل التدقيق** - تتبع من الذي وصل إلى ماذا
 
 **الخطوات التالية:**
 1. أكمل التمارين العملية أعلاه
 2. قم بترحيل تطبيق قائم من سلاسل الاتصال إلى الهوية المُدارة
-3. أنشئ مشروع AZD الأول مع الأمن منذ اليوم الأول: [المشروع الأول](first-project.md)
+3. أنشئ مشروع AZD الأول مع الأمان من اليوم الأول: [المشروع الأول](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-إخلاء المسؤولية:
-تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تتضمن أخطاء أو معلومات غير دقيقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الموثوق. بالنسبة للمعلومات الحرجة، يُنصح بالاستعانة بترجمة بشرية محترفة. لسنا مسؤولين عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
+**تنويه**:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى للدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي والمعتمد. للمعلومات الهامة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

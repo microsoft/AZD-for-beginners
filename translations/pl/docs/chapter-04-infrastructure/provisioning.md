@@ -2,42 +2,42 @@
 
 **Nawigacja po rozdziale:**
 - **📚 Strona kursu**: [AZD dla początkujących](../../README.md)
-- **📖 Bieżący rozdział**: Rozdział 4 - Infrastruktura jako kod i wdrożenie
+- **📖 Aktualny rozdział**: Rozdział 4 - Infrastruktura jako kod i wdrożenie
 - **⬅️ Poprzedni**: [Przewodnik wdrożenia](deployment-guide.md)
-- **➡️ Następny rozdział**: [Rozdział 5: Wieloagentowe rozwiązania AI](../../examples/retail-scenario.md)
+- **➡️ Następny rozdział**: [Rozdział 5: Rozwiązania Multi-Agent AI](../../examples/retail-scenario.md)
 - **🔧 Powiązane**: [Rozdział 6: Walidacja przed wdrożeniem](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## Wprowadzenie
 
-Ten kompleksowy przewodnik obejmuje wszystko, co musisz wiedzieć o provisioningu i zarządzaniu zasobami Azure za pomocą Azure Developer CLI. Naucz się wdrażać wzorce Infrastructure as Code (IaC) od podstawowego tworzenia zasobów po zaawansowane architektury infrastruktury klasy korporacyjnej z użyciem Bicep, szablonów ARM, Terraform i Pulumi.
+Ten obszerny przewodnik obejmuje wszystko, co musisz wiedzieć o provisioningu i zarządzaniu zasobami Azure przy użyciu Azure Developer CLI. Naucz się wdrażać wzorce Infrastructure as Code (IaC) — od podstawowego tworzenia zasobów po zaawansowane architektury infrastruktury klasy korporacyjnej przy użyciu Bicep, szablonów ARM, Terraform i Pulumi.
 
 ## Cele nauki
 
-Po ukończeniu tego przewodnika będziesz:
-- Mistrzem zasad Infrastructure as Code i provisioningu zasobów Azure
-- Znał różnych dostawców IaC obsługiwanych przez Azure Developer CLI
-- Projektował i wdrażał szablony Bicep dla powszechnych architektur aplikacji
-- Konfigurował parametry zasobów, zmienne i ustawienia specyficzne dla środowiska
-- Wdrażał zaawansowane wzorce infrastruktury, w tym sieci i zabezpieczeń
-- Zarządzał cyklem życia zasobów, aktualizacjami i rozwiązywaniem zależności
+Po ukończeniu tego przewodnika:
+- Opanujesz zasady Infrastructure as Code oraz provisioning zasobów Azure
+- Zrozumiesz wielu dostawców IaC wspieranych przez Azure Developer CLI
+- Zaprojektujesz i zaimplementujesz szablony Bicep dla typowych architektur aplikacji
+- Skonfigurujesz parametry zasobów, zmienne i ustawienia specyficzne dla środowiska
+- Wdrożysz zaawansowane wzorce infrastruktury, w tym sieci i bezpieczeństwo
+- Zarządzisz cyklem życia zasobów, aktualizacjami i rozwiązywaniem zależności
 
-## Efekty nauki
+## Rezultaty nauki
 
 Po ukończeniu będziesz potrafił:
 - Projektować i provisionować infrastrukturę Azure za pomocą Bicep i szablonów ARM
-- Konfigurować złożone, wieloserwisowe architektury z odpowiednimi zależnościami zasobów
-- Wdrażać szablony parametryzowane dla wielu środowisk i konfiguracji
-- Rozwiązywać problemy z provisioningiem infrastruktury i naprawiać błędy wdrożeń
+- Konfigurować złożone architektury wielousługowe z prawidłowymi zależnościami zasobów
+- Wdrażać parametryzowane szablony dla różnych środowisk i konfiguracji
+- Rozwiązywać problemy z provisioningiem infrastruktury oraz usuwać błędy wdrożenia
 - Stosować zasady Azure Well-Architected Framework w projektowaniu infrastruktury
 - Zarządzać aktualizacjami infrastruktury i wdrażać strategie wersjonowania infrastruktury
 
-## Przegląd provisioningu infrastruktury
+## Przegląd provisioning infrastruktury
 
-Azure Developer CLI obsługuje wielu dostawców Infrastructure as Code (IaC):
-- **Bicep** (zalecany) - język specyficzny dla domeny od Azure
-- **Szablony ARM** - oparte na JSON szablony Azure Resource Manager
-- **Terraform** - narzędzie wielochmurowe do infrastruktury
-- **Pulumi** - nowoczesny infrastructure as code z użyciem języków programowania
+Azure Developer CLI wspiera wielu dostawców Infrastructure as Code (IaC):
+- **Bicep** (zalecany) – specyficzny język dla Azure
+- **Szablony ARM** – szablony Azure Resource Manager w formacie JSON
+- **Terraform** – narzędzie wielochmurowe do infrastruktury
+- **Pulumi** – nowoczesna infrastruktura jako kod z użyciem języków programowania
 
 ## Zrozumienie zasobów Azure
 
@@ -52,9 +52,9 @@ Azure Account
 ### Popularne usługi Azure dla aplikacji
 - **Compute**: App Service, Container Apps, Functions, Maszyny wirtualne
 - **Storage**: Konto magazynu, Cosmos DB, SQL Database, PostgreSQL
-- **Sieć**: Wirtualna sieć, Application Gateway, CDN
+- **Sieci**: Wirtualna sieć, Application Gateway, CDN
 - **Bezpieczeństwo**: Key Vault, Application Insights, Log Analytics
-- **AI/ML**: Cognitive Services, OpenAI, Machine Learning
+- **AI/ML**: Azure AI Services, Azure OpenAI, Azure Machine Learning
 
 ## Szablony infrastruktury Bicep
 
@@ -200,7 +200,201 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ Provisioning bazy danych
+## 🌐 Używanie Terraform z azd
+
+Bicep jest domyślnym wyborem azd, ale azd wspiera też **Terraform** — przydatny, jeśli Twój zespół już go stosuje lub zarządza infrastrukturą wielochmurową. Workflow azd (`azd up`, `azd provision`, `azd down`) pozostaje taki sam; zmienia się tylko język infrastruktury i układ folderów.
+
+### Poleć azd korzystanie z Terraform
+
+Dodaj sekcję `infra` do `azure.yaml` wskazującą dostawcę Terraform:
+
+```yaml
+# azure.yaml
+name: my-terraform-app
+infra:
+  provider: terraform   # default is "bicep"
+  path: infra           # folder containing your .tf files
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### Układ folderów Terraform
+
+Dla dostawcy Terraform w folderze `infra/` znajdują się pliki `.tf` zamiast Bicep:
+
+```
+infra/
+├── main.tf            # resource definitions
+├── variables.tf       # input variables
+├── outputs.tf         # outputs azd reads back (endpoints, names)
+├── provider.tf        # azurerm/azurecaf providers + backend
+└── main.tfvars.json   # values azd injects per environment
+```
+
+### Minimalny `main.tf`
+
+```hcl
+# infra/main.tf
+resource "azurerm_resource_group" "rg" {
+  name     = "rg-${var.environment_name}"
+  location = var.location
+  tags     = { "azd-env-name" = var.environment_name }
+}
+
+resource "azurerm_service_plan" "plan" {
+  name                = "plan-${var.environment_name}"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  os_type             = "Linux"
+  sku_name            = "B1"
+}
+```
+
+### Jak azd łączy się z wyjściami Terraform
+
+azd odczytuje wyjścia Terraform, aby poznać swoje punkty końcowe i przekazać wartości środowiskowe z powrotem do aplikacji. Nazwy wyjść są ważne — azd szuka konkretnych:
+
+```hcl
+# infra/outputs.tf
+output "AZURE_LOCATION" {
+  value = var.location
+}
+
+output "SERVICE_WEB_ENDPOINT_URL" {
+  value = azurerm_linux_web_app.web.default_hostname
+}
+```
+
+> **Ważne:** azd używa tagu `azd-env-name` i wyjść `AZURE_*`, aby śledzić zasoby dla każdego środowiska. Zawsze oznacz swoją grupę zasobów `"azd-env-name" = var.environment_name`, aby `azd down` mógł znaleźć i usunąć wszystko.
+
+### Wdrażanie z Terraform
+
+Polecenia są dokładnie takie same, jak dla Bicep:
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd uruchamia 'terraform plan' w tle
+azd up                    # przygotowuje + wdraża
+azd down --force          # usuwa zasoby zarządzane przez Terraform
+```
+
+> **Wymaganie wstępne:** Terraform musi być zainstalowany i dostępny w Twojej ścieżce `PATH`. azd zarządza *workflow* Terraform, ale nie instaluje Terraform. Dla stanu azd domyślnie używa stanu lokalnego; dla zespołów skonfiguruj zdalny backend (np. backend Azure Storage) w `provider.tf`.
+
+Aby znaleźć kompletne, działające startery oparte na Terraform, odwiedź [Awesome AZD gallery](https://azure.github.io/awesome-azd/) i filtruj po Terraform lub zobacz oficjalną [dokumentację azd dla Terraform](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
+
+## 🧩 Używanie Pulumi z azd
+
+Jeśli Twój zespół pisze infrastrukturę w języku ogólnego przeznaczenia (TypeScript, Python, Go lub C#) zamiast DSL, azd wspiera także **Pulumi**. Podobnie jak przy Terraform, workflow `azd up` / `azd provision` / `azd down` pozostaje niezmieniony — różni się tylko narzędzie do infrastruktury i układ folderów.
+
+### Poleć azd korzystanie z Pulumi
+
+```yaml
+# azure.yaml
+name: my-pulumi-app
+infra:
+  provider: pulumi      # default is "bicep"
+  path: infra           # folder containing your Pulumi program
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### Układ folderów Pulumi
+
+```
+infra/
+├── Pulumi.yaml          # project definition
+├── Pulumi.dev.yaml      # stack config (one per environment)
+├── index.ts             # your resource program (or __main__.py, main.go, etc.)
+├── package.json         # dependencies (for TypeScript)
+└── tsconfig.json
+```
+
+### Minimalny `index.ts`
+
+```typescript
+import * as azure from "@pulumi/azure-native";
+import * as pulumi from "@pulumi/pulumi";
+
+const environmentName = pulumi.getStack();
+
+// Oznacz każde zasoby, aby azd mógł je śledzić i usuwać
+const tags = { "azd-env-name": environmentName };
+
+const rg = new azure.resources.ResourceGroup("rg", {
+  resourceGroupName: `rg-${environmentName}`,
+  tags,
+});
+
+// azd wczytuje te wyjścia z powrotem do twojego środowiska
+export const AZURE_LOCATION = rg.location;
+export const SERVICE_WEB_ENDPOINT_URL = "https://...";
+```
+
+### Stacks odpowiadają środowiskom azd
+
+Pulumi organizuje wdrożenia w **stacks**, a azd przypisuje każde środowisko azd do stosu Pulumi o tej samej nazwie. Kiedy wykonujesz `azd env new staging`, azd wybiera (lub tworzy) stos Pulumi `staging`. Obowiązują te same zasady tagowania `azd-env-name` i wyjść `AZURE_*`, by `azd down` mógł znaleźć i usunąć wszystko.
+
+### Wdrażanie z Pulumi
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd uruchamia 'pulumi preview' w tle
+azd up                    # przygotowanie + wdrożenie
+azd down --force          # uruchamia 'pulumi destroy'
+```
+
+> **Wymaganie wstępne:** Pulumi musi być zainstalowany i dostępny w Twojej ścieżce `PATH`, potrzebujesz też backendu stanu (Pulumi Cloud lub samodzielnie zarządzany backend, np. Azure Blob Storage). azd zarządza *workflow* Pulumi, nie instalacją. Zobacz oficjalną [dokumentację azd dla Pulumi](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-pulumi-for-azd).
+
+## 🎯 Wybór hosta dla Twojej usługi
+
+Pole `host` w `azure.yaml` decyduje, gdzie działa Twój kod. azd obsługuje kilka hostów — wybór właściwego jest ważniejszy niż język infrastruktury. Oto porównanie dla początkujących:
+
+| wartość `host` | Najlepsze dla | Dlaczego |
+|--------------|--------------|----------|
+| `appservice` | Tradycyjne aplikacje webowe i API | Najprostszy PaaS; nie wymaga kontenerów |
+| `staticwebapp` | Front-end SPAs (React, Vue, Angular) | Globalne CDN + darmowy SSL, wbudowane wsparcie API |
+| `function` | Obciążenia zdarzeniowe i bezserwerowe | Skalowanie do zera, płatność za wykonanie |
+| `containerapp` | Konteneryzowane mikrousługi | Bezserwerowe kontenery, skalowanie do zera, wbudowany ingress |
+| `aks` | Złożone potrzeby orkiestracji | Pełna kontrola Kubernetes, gdy jej naprawdę potrzebujesz |
+| `springapp` | Aplikacje Java Spring Boot | Zarządzane Azure Spring Apps dopasowane do Spring |
+
+### Kiedy wybrać AKS
+
+**Azure Kubernetes Service (`host: aks`)** daje pełną moc Kubernetes — niestandardowe kontrolery, service meshes, złożone sieci i precyzyjne harmonogramowanie. Ta moc niesie ze sobą narzut operacyjny: musisz zarządzać pulami węzłów, aktualizacjami i siecią klastra.
+
+```yaml
+services:
+  api:
+    project: ./src/api
+    language: js
+    host: aks          # deploys to an existing AKS cluster
+```
+
+> **Zacznij od prostszych rozwiązań, jeśli możesz.** Dla większości mikrousług **Container Apps** oferuje kontenery, autoskalowanie i skalowanie do zera bez zarządzania klastrem. AKS wybierz tylko, gdy potrzebujesz funkcji specyficznych dla Kubernetes.
+
+### Kiedy używać Azure Spring Apps
+
+**Azure Spring Apps (`host: springapp`)** to zarządzane środowisko uruchomieniowe stworzone dla Spring Boot. Obsługuje service discovery, config server i wdrożenia blue-green, dzięki czemu zespoły Java nie muszą zarządzać własną infrastrukturą.
+
+```yaml
+services:
+  catalog:
+    project: ./src/catalog
+    language: java
+    host: springapp
+```
+
+> Używaj `springapp`, jeśli masz istniejące aplikacje Spring Boot i chcesz środowisko uruchomieniowe zoptymalizowane dla nich. Dla nowych aplikacji Java w kontenerach bez specyficznych wymagań Spring często prostszym wyborem jest `containerapp`.
+
+## 🗃️ Provisionowanie baz danych
 
 ### Cosmos DB
 ```bicep
@@ -298,7 +492,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 Zarządzanie bezpieczeństwem i sekretami
+## 🔒 Bezpieczeństwo i zarządzanie sekretami
 
 ### Integracja z Key Vault
 ```bicep
@@ -368,7 +562,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 Sieć i łączność
+## 🌍 Sieci i łączność
 
 ### Konfiguracja wirtualnej sieci
 ```bicep
@@ -496,7 +690,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Monitorowanie i obserwowalność
+## 📊 Monitoring i obserwowalność
 
 ### Application Insights
 ```bicep
@@ -527,7 +721,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Niestandardowe metryki i alerty
+### Własne metryki i alerty
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -561,7 +755,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Konfiguracje specyficzne dla środowiska
+## 🔧 Konfiguracje specyficzne dla środowisk
 
 ### Pliki parametrów dla różnych środowisk
 ```json
@@ -617,7 +811,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Warunkowy provisioning zasobów
+### Warunkowe provisionowanie zasobów
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -649,9 +843,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Zaawansowane wzorce provisioningu
+## 🚀 Zaawansowane wzorce provisioning
 
-### Deployment wieloregionalny
+### Wdrożenie wieloregionowe
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -759,36 +953,36 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ### Podgląd zmian infrastruktury przed wdrożeniem
 
-Funkcja `azd provision --preview` pozwala **symulować provisioning infrastruktury** przed faktycznym wdrożeniem zasobów. Jest to podobne do `terraform plan` lub `bicep what-if`, dając **podgląd suchych danych** jakie zmiany zostałyby wprowadzone w środowisku Azure.
+Funkcja `azd provision --preview` pozwala **symulować provisioning infrastruktury** zanim zasoby faktycznie zostaną wdrożone. Jest podobna do `terraform plan` lub `bicep what-if`, dając **podgląd, jakie zmiany** zostaną wprowadzone w środowisku Azure.
 
 #### 🛠️ Co robi
 - **Analizuje Twoje szablony IaC** (Bicep lub Terraform)
-- **Wyświetla podgląd zmian w zasobach**: dodania, usunięcia, aktualizacje
-- **Nie stosuje zmian** — działa w trybie tylko do odczytu i jest bezpieczne w użyciu
+- **Pokazuje podgląd zmian zasobów**: dodania, usunięcia, aktualizacje
+- **Nie wprowadza żadnych zmian** — jest tylko do odczytu i bezpieczna do uruchomienia
 
-#### Zastosowania
+#### Przypadki użycia
 ```bash
-# Podgląd zmian w infrastrukturze przed wdrożeniem
+# Podejrzyj zmiany w infrastrukturze przed wdrożeniem
 azd provision --preview
 
-# Podgląd dla określonego środowiska
+# Podgląd dla konkretnego środowiska
 azd provision --preview -e production
 ```
 
-To polecenie pomaga Ci:
+To polecenie pomaga:
 - **Zweryfikować zmiany infrastruktury** przed zatwierdzeniem zasobów
-- **Wykryć błędy konfiguracji wcześnie** w cyklu rozwojowym
+- **Wcześnie wykryć błędy konfiguracji** w cyklu rozwoju
 - **Bezpiecznie współpracować** w zespołach
-- **Zapewnić wdrożenia o najmniejszych uprawnieniach** bez niespodzianek
+- **Zapewnić wdrożenia z minimalnymi uprawnieniami** bez niespodzianek
 
-Jest szczególnie przydatne gdy:
-- Pracujesz złożonymi środowiskami wieloserwisowymi
-- Dokonujesz zmian w produkcyjnej infrastrukturze
+Jest szczególnie przydatne, gdy:
+- Pracujesz z złożonymi środowiskami wielousługowymi
+- Wprowadzasz zmiany w produkcyjnej infrastrukturze
 - Weryfikujesz modyfikacje szablonów przed zatwierdzeniem PR
 - Szkolisz nowych członków zespołu w wzorcach infrastruktury
 
-### Przykładowy podgląd wyniku
-Dokładny wynik podglądu zależy od dostawcy i struktury projektu, ale wynik powinien jasno pokazywać proponowane zmiany przed ich zastosowaniem.
+### Przykładowy podgląd outputu
+Dokładny podgląd zależy od dostawcy i struktury projektu, ale wynik powinien jasno wskazać proponowane zmiany przed wdrożeniem.
 
 ```bash
 $ azd provision --preview
@@ -813,18 +1007,18 @@ The following resources will be destroyed:
 ✅ Preview completed successfully!
 ```
 
-## 🔄 Aktualizacje i migracje zasobów
+## �🔄 Aktualizacje i migracje zasobów
 
 ### Bezpieczne aktualizacje zasobów
 ```bash
-# Najpierw wyświetl podgląd zmian w infrastrukturze (ZALECANE)
+# Najpierw podglądaj zmiany w infrastrukturze (ZALecane)
 azd provision --preview
 
 # Zastosuj zmiany po potwierdzeniu podglądu
 azd provision --confirm-with-no-prompt
 
-# Aby cofnąć zmiany, użyj Git do przywrócenia zmian w infrastrukturze:
-git revert HEAD  # Cofnij ostatni commit infrastruktury
+# Aby cofnąć, użyj Git do przywrócenia zmian w infrastrukturze:
+git revert HEAD  # Cofnij ostatni commit w infrastrukturze
 azd provision    # Zastosuj poprzedni stan infrastruktury
 ```
 
@@ -899,7 +1093,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Organizacja outputów
+### 4. Organizacja wyjść
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -917,9 +1111,9 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ## Kolejne kroki
 
 - [Planowanie przed wdrożeniem](../chapter-06-pre-deployment/capacity-planning.md) - Weryfikacja dostępności zasobów
-- [Częste problemy](../chapter-07-troubleshooting/common-issues.md) - Rozwiązywanie problemów z infrastrukturą
-- [Przewodnik debugowania](../chapter-07-troubleshooting/debugging.md) - Debugowanie problemów provisioningowych
-- [Wybór SKU](../chapter-06-pre-deployment/sku-selection.md) - Wybór odpowiednich poziomów usług
+- [Typowe problemy](../chapter-07-troubleshooting/common-issues.md) - Rozwiązywanie problemów z infrastrukturą
+- [Przewodnik debugowania](../chapter-07-troubleshooting/debugging.md) - Debugowanie problemów z provisioningiem
+- [Wybór SKU](../chapter-06-pre-deployment/sku-selection.md) - Dobór odpowiednich poziomów usług
 
 ## Dodatkowe zasoby
 
@@ -938,5 +1132,5 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Zastrzeżenie**:
-Ten dokument został przetłumaczony przy użyciu automatycznej usługi tłumaczeniowej [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dążymy do dokładności, prosimy mieć na uwadze, że tłumaczenia automatyczne mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego ojczystym języku należy uważać za źródło wiążące. W przypadku informacji krytycznych zaleca się skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Choć dążymy do dokładności, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub niedokładności. Oryginalny dokument w jego języku źródłowym należy uznawać za autorytatywne źródło. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

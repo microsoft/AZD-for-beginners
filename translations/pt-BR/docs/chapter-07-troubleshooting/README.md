@@ -4,19 +4,19 @@
 
 ---
 
-## Visão Geral
+## Visão geral
 
-Este capítulo ajuda você a diagnosticar e resolver problemas comuns ao trabalhar com Azure Developer CLI. De falhas de implantação a problemas específicos de IA.
+Este capítulo ajuda você a diagnosticar e resolver problemas comuns ao trabalhar com o Azure Developer CLI. Desde falhas de implantação até problemas específicos de IA.
 
-> Validado contra `azd 1.23.12` em março de 2026.
+> Validado com `azd 1.25.6` em junho de 2026.
 
-## Objetivos de Aprendizagem
+## Objetivos de aprendizagem
 
 Ao concluir este capítulo, você irá:
 - Diagnosticar falhas comuns de implantação do AZD
 - Depurar problemas de autenticação e permissões
-- Resolver problemas de conectividade com serviços de IA
-- Usar o Azure Portal e a CLI para solução de problemas
+- Resolver problemas de conectividade de serviços de IA
+- Usar o Portal do Azure e a CLI para solução de problemas
 
 ---
 
@@ -24,7 +24,7 @@ Ao concluir este capítulo, você irá:
 
 | # | Lição | Descrição | Tempo |
 |---|--------|-------------|------|
-| 1 | [Problemas Comuns](common-issues.md) | Problemas comumente encontrados | 30 min |
+| 1 | [Problemas Comuns](common-issues.md) | Problemas frequentemente encontrados | 30 min |
 | 2 | [Guia de Depuração](debugging.md) | Estratégias de depuração passo a passo | 45 min |
 | 3 | [Solução de Problemas de IA](ai-troubleshooting.md) | Problemas específicos de IA | 30 min |
 
@@ -70,12 +70,12 @@ azd up
 
 | Erro | Causa | Solução |
 |-------|-------|----------|
-| `AuthenticationError` | Não logado | `azd auth login` |
-| `ResourceNotFound` | Recurso ausente | Verifique os nomes dos recursos |
+| `AuthenticationError` | Não autenticado | `azd auth login` |
+| `ResourceNotFound` | Recurso ausente | Verificar nomes dos recursos |
 | `QuotaExceeded` | Limites da assinatura | Solicitar aumento de cota |
 | `InvalidTemplate` | Erro de sintaxe do Bicep | `az bicep build` |
-| `Conflict` | Recurso já existe | Use um novo nome ou exclua |
-| `Forbidden` | Permissões insuficientes | Verifique as funções do RBAC |
+| `Conflict` | Recurso existe | Usar novo nome ou excluir |
+| `Forbidden` | Permissões insuficientes | Verificar funções RBAC |
 
 ---
 
@@ -105,11 +105,11 @@ azd up
 
 - [Verificações Pré-Implantação](../chapter-06-pre-deployment/preflight-checks.md)
 - [Guia de Configuração](../chapter-03-configuration/configuration.md)
-- [Issues do GitHub do AZD](https://github.com/Azure/azure-dev/issues)
+- [Problemas do AZD no GitHub](https://github.com/Azure/azure-dev/issues)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se tradução profissional realizada por um tradutor humano. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+**Aviso Legal**:
+Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, por favor, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

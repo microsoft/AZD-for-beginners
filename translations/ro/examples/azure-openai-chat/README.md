@@ -1,72 +1,73 @@
 # Microsoft Foundry Models Chat Application
 
-**Traseu de învățare:** Intermediar ⭐⭐ | **Timp:** 35-45 minute | **Cost:** 50-200 $/lună
+**Cale de învățare:** Intermediar ⭐⭐ | **Timp:** 35-45 minute | **Cost:** 50-200 USD/lună
 
-O aplicație completă de chat Microsoft Foundry Models implementată folosind Azure Developer CLI (azd). Acest exemplu demonstrează implementarea gpt-4.1, acces API securizat și o interfață simplă de chat.
+O aplicație completă de chat Microsoft Foundry Models implementată folosind Azure Developer CLI (azd). Acest exemplu demonstrează implementarea gpt-4.1, accesul securizat la API și o interfață simplă de chat.
 
 ## 🎯 Ce vei învăța
 
-- Implementarea serviciului Microsoft Foundry Models cu modelul gpt-4.1
-- Protejarea cheilor API OpenAI cu Key Vault
-- Construirea unei interfețe simple de chat cu Python
-- Monitorizarea utilizării token-ilor și a costurilor
-- Implementarea limitării ratei și gestionarea erorilor
+- Implementarea serviciului Microsoft Foundry Models cu modelul gpt-4.1  
+- Securizarea cheilor API OpenAI cu Key Vault  
+- Construirea unei interfețe simple de chat cu Python  
+- Monitorizarea utilizării token-urilor și a costurilor  
+- Implementarea limitării ratei și gestionarea erorilor  
 
-## 📦 Ce este inclus
+## 📦 Ce include
 
-✅ **Serviciu Microsoft Foundry Models** - implementare model gpt-4.1  
-✅ **Aplicație Chat Python** - Interfață simplă de chat în linia de comandă  
-✅ **Integrare Key Vault** - Stocare securizată a cheilor API  
-✅ **Template ARM** - Infrastructură completă ca cod  
-✅ **Monitorizare Costuri** - Urmărirea utilizării token-ilor  
-✅ **Limitare Rată** - Prevenirea epuizării cotelor  
+✅ **Serviciul Microsoft Foundry Models** - implementare model gpt-4.1  
+✅ **Aplicația de chat Python** - interfață simplă în linie de comandă  
+✅ **Integrare Key Vault** - stocare securizată a cheilor API  
+✅ **Șabloane ARM** - infrastructură completă ca și cod  
+✅ **Monitorizarea costurilor** - urmărirea utilizării token-urilor  
+✅ **Limitarea ratei** - prevenirea epuizării cotei  
 
 ## Arhitectură
 
 ```mermaid
 graph TD
-    App[Aplicație chat Python<br/>Local/Nor<br/>Interfață linie de comandă<br/>Istoric conversație<br/>Urmărire utilizare tokeni] -- "HTTPS (Cheie API)" --> Foundry[Serviciu modele Microsoft Foundry<br/>Model gpt-4.1<br/>Capacitate 20K tokeni/min<br/>Failover multi-regiune]
+    App[Aplicație de Chat Python<br/>Local/Nor<br/>Interfață linie de comandă<br/>Istoric conversații<br/>Urmărire utilizare tokeni] -- "HTTPS (Cheie API)" --> Foundry[Serviciu Modele Microsoft Foundry<br/>Model gpt-4.1<br/>Capacitate 20K tokeni/min<br/>Failover multi-regiune]
     Foundry --> KV[Azure Key Vault<br/>Cheie API OpenAI<br/>URL punct final]
-    Foundry -. Identitate gestionată .-> KV
+    Foundry -. Identitate Gestionată .-> KV
 ```
+
 ## Cerințe preliminare
 
 ### Necesare
 
-- **Azure Developer CLI (azd)** - [Ghid instalare](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Abonament Azure** cu acces OpenAI - [Solicită acces](https://aka.ms/oai/access)
-- **Python 3.9+** - [Instalează Python](https://www.python.org/downloads/)
+- **Azure Developer CLI (azd)** - [Ghid de instalare](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)  
+- **Abonament Azure** cu acces OpenAI - [Solicită acces](https://aka.ms/oai/access)  
+- **Python 3.9+** - [Instalează Python](https://www.python.org/downloads/)  
 
-### Verificare cerințe preliminare
+### Verificarea cerințelor preliminare
 
 ```bash
-# Verificați versiunea azd (este necesar 1.5.0 sau mai mare)
+# Verifică versiunea azd (este necesar 1.5.0 sau mai mare)
 azd version
 
-# Verificați autentificarea Azure
+# Verifică autentificarea Azure
 azd auth login
 
-# Verificați versiunea Python
+# Verifică versiunea Python
 python --version  # sau python3 --version
 
-# Verificați accesul OpenAI (verificați în Portalul Azure)
+# Verifică accesul OpenAI (verifică în Portalul Azure)
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus
 ```
 
-> **⚠️ Important:** Microsoft Foundry Models necesită aprobarea aplicației. Dacă nu ai aplicat, vizitează [aka.ms/oai/access](https://aka.ms/oai/access). Aprobarea durează de obicei 1-2 zile lucrătoare.
+> **⚠️ Important:** Microsoft Foundry Models necesită aprobare pentru aplicație. Dacă nu ai aplicat, vizitează [aka.ms/oai/access](https://aka.ms/oai/access). Aprobare durează de obicei 1-2 zile lucrătoare.
 
-## ⏱️ Cronologia implementării
+## ⏱️ Timp estimat de implementare
 
 | Fază | Durată | Ce se întâmplă |
 |-------|----------|--------------|
-| Verificare cerințe preliminare | 2-3 minute | Verificarea cotei disponibile OpenAI |
+| Verificare cerințe preliminare | 2-3 minute | Verifică disponibilitatea cotei OpenAI |
 | Implementare infrastructură | 8-12 minute | Creare OpenAI, Key Vault, implementare model |
 | Configurare aplicație | 2-3 minute | Configurare mediu și dependențe |
-| **Total** | **12-18 minute** | Gata de chat cu gpt-4.1 |
+| **Total** | **12-18 minute** | Pregătit pentru chat cu gpt-4.1 |
 
-**Notă:** Prima implementare OpenAI poate dura mai mult din cauza aprovizionării modelului.
+**Notă:** Prima implementare OpenAI poate dura mai mult datorită provizionării modelului.
 
 ## Pornire rapidă
 
@@ -77,9 +78,9 @@ cd examples/azure-openai-chat
 # Inițializează mediul
 azd env new myopenai
 
-# Desfășoară totul (infrastructură + configurație)
+# Desfășoară totul (infrastructură + configurare)
 azd up
-# Vei fi solicitat să:
+# Vei fi întrebat să:
 # 1. Selectezi abonamentul Azure
 # 2. Alegi locația cu disponibilitate OpenAI (de ex., eastus, eastus2, westus)
 # 3. Aștepți 12-18 minute pentru desfășurare
@@ -87,11 +88,11 @@ azd up
 # Instalează dependențele Python
 pip install -r requirements.txt
 
-# Începe să conversezi!
+# Începe conversația!
 python chat.py
 ```
 
-**Rezultat așteptat:**
+**Rezultat așteptat:**  
 ```
 🤖 Microsoft Foundry Models Chat Application
 Connected to: gpt-4.1 (eastus)
@@ -112,7 +113,7 @@ Assistant: Microsoft Foundry Models Service provides REST API access to OpenAI's
 azd show
 
 # Ieșirea așteptată arată:
-# - Serviciu OpenAI: (numele resursei)
+# - Serviciul OpenAI: (numele resursei)
 # - Key Vault: (numele resursei)
 # - Implementare: gpt-4.1
 # - Locație: eastus (sau regiunea selectată)
@@ -135,7 +136,7 @@ curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2
   }'
 ```
 
-**Răspuns așteptat:**
+**Răspuns așteptat:**  
 ```json
 {
   "choices": [
@@ -154,7 +155,7 @@ curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2
 }
 ```
 
-### Pasul 3: Verifică accesul Key Vault
+### Pasul 3: Verifică accesul la Key Vault
 
 ```bash
 # Listează secretele din Key Vault
@@ -166,15 +167,15 @@ az keyvault secret list \
   --output table
 ```
 
-**Secrete așteptate:**
-- `openai-api-key`
-- `openai-endpoint`
+**Secreții așteptați:**  
+- `openai-api-key`  
+- `openai-endpoint`  
 
-**Criterii de succes:**
-- ✅ Serviciul OpenAI implementat cu gpt-4.1
-- ✅ Apelul API returnează o completare validă
-- ✅ Secrete stocate în Key Vault
-- ✅ Urmărirea utilizării token-ilor funcționează
+**Criterii de succes:**  
+- ✅ Serviciul OpenAI implementat cu gpt-4.1  
+- ✅ Apelul API returnează completare validă  
+- ✅ Secreții stocați în Key Vault  
+- ✅ Monitorizarea utilizării token-urilor funcționează  
 
 ## Structura proiectului
 
@@ -193,29 +194,29 @@ azure-openai-chat/
 └── .gitignore                  ✅ Git ignore rules
 ```
 
-## Funcționalități aplicație
+## Caracteristici ale aplicației
 
-### Interfață Chat (`chat.py`)
+### Interfață de chat (`chat.py`)
 
 Aplicația de chat include:
 
-- **Istoric conversații** - Mentine contextul între mesaje
-- **Numărare tokeni** - Urmărește utilizarea și estimează costurile
-- **Gestionare erori** - Tratarea elegantă a limitelor de rată și erorilor API
-- **Estimare costuri** - Calcul în timp real cost per mesaj
-- **Suport streaming** - Răspunsuri în streaming opționale
+- **Istoric conversații** - Păstrează contextul pe durata mesajelor  
+- **Numărare token-uri** - Urmărește utilizarea și estimează costurile  
+- **Gestionarea erorilor** - Tratarea elegantă a limitărilor de rată și erorilor API  
+- **Estimare costuri** - Calcul în timp real a costului per mesaj  
+- **Suport streaming** - Răspunsuri în flux opțional  
 
 ### Comenzi
 
-În timpul chatului, poți folosi:
-- `quit` sau `exit` - Încheie sesiunea
-- `clear` - Curăță istoricul conversațiilor
-- `tokens` - Afișează total tokeni utilizați
-- `cost` - Afișează costul total estimat
+În timpul chat-ului poți folosi:  
+- `quit` sau `exit` - Încheie sesiunea  
+- `clear` - Șterge istoricul conversației  
+- `tokens` - Arată totalul token-urilor utilizate  
+- `cost` - Arată costul total estimat  
 
 ### Configurare (`config.py`)
 
-Încarcă configurația din variabilele de mediu:
+Încarcă configurația din variabile de mediu:  
 ```python
 AZURE_OPENAI_ENDPOINT  # Din Key Vault
 AZURE_OPENAI_API_KEY   # Din Key Vault
@@ -244,7 +245,7 @@ python chat.py
 python chat.py --stream
 ```
 
-### Conversație exemplu
+### Exemplu de conversație
 
 ```
 You: Explain Microsoft Foundry Models Service in 3 sentences.
@@ -268,38 +269,38 @@ Total session: 156 tokens | $0.0047
 
 ## Gestionarea costurilor
 
-### Prețuri tokeni (gpt-4.1)
+### Preț token-uri (gpt-4.1)
 
-| Model | Input (la 1K tokeni) | Output (la 1K tokeni) |
-|-------|----------------------|------------------------|
-| gpt-4.1 | 0,03 $ | 0,06 $ |
-| GPT-3.5-Turbo | 0,0015 $ | 0,002 $ |
+| Model | Input (per 1K token-uri) | Output (per 1K token-uri) |
+|-------|--------------------------|---------------------------|
+| gpt-4.1 | 0,03 USD | 0,06 USD |
+| GPT-3.5-Turbo | 0,0015 USD | 0,002 USD |
 
 ### Costuri lunare estimate
 
-Bazat pe modele de utilizare:
+Pe baza modelelor de utilizare:
 
-| Nivel de utilizare | Mesaje/zi | Tokeni/zi | Cost lunar |
-|-------------|--------------|------------|--------------|
-| **Ușor** | 20 mesaje | 3.000 tokeni | 3-5 $ |
-| **Moderată** | 100 mesaje | 15.000 tokeni | 15-25 $ |
-| **Intensivă** | 500 mesaje | 75.000 tokeni | 75-125 $ |
+| Nivel de utilizare | Mesaje/zi | Token-uri/zi | Cost lunar |
+|--------------------|------------|--------------|------------|
+| **Ușor** | 20 mesaje | 3.000 token-uri | 3-5 USD |
+| **Moderată** | 100 mesaje | 15.000 token-uri | 15-25 USD |
+| **Intensiv** | 500 mesaje | 75.000 token-uri | 75-125 USD |
 
-**Cost infrastructură de bază:** 1-2 $/lună (Key Vault + resurse minime compute)
+**Cost de bază infrastructură:** 1-2 USD/lună (Key Vault + calcul minim)
 
 ### Sfaturi pentru optimizarea costurilor
 
 ```bash
-# 1. Folosește GPT-3.5-Turbo pentru sarcini mai simple (de 20 de ori mai ieftin)
+# 1. Folosește GPT-3.5-Turbo pentru sarcini mai simple (de 20 ori mai ieftin)
 export AZURE_OPENAI_MODEL=gpt-35-turbo
 
 # 2. Redu numărul maxim de tokeni pentru răspunsuri mai scurte
 export AZURE_OPENAI_MAX_TOKENS=400
 
-# 3. Monitorizează consumul de tokeni
+# 3. Monitorizează utilizarea tokenilor
 python chat.py --show-tokens
 
-# 4. Configurează alerte pentru buget
+# 4. Configurează alerte de buget
 az consumption budget create \
   --budget-name "openai-budget" \
   --amount 50 \
@@ -308,11 +309,11 @@ az consumption budget create \
 
 ## Monitorizare
 
-### Vizualizează utilizarea tokenilor
+### Vizualizează utilizarea token-urilor
 
 ```bash
-# În Portalul Azure:
-# Resursa OpenAI → Metrici → Selectați "Tranzacția token"
+# În Azure Portal:
+# Resursă OpenAI → Metrice → Selectați „Token Transaction”
 
 # Sau prin Azure CLI:
 az monitor metrics list \
@@ -325,14 +326,14 @@ az monitor metrics list \
 ### Vizualizează jurnalele API
 
 ```bash
-# Transmiteți jurnalele de diagnosticare
+# Flux de jurnale de diagnosticare
 az monitor diagnostic-settings create \
   --resource $(azd env get-value AZURE_OPENAI_RESOURCE_ID) \
   --name openai-logs \
   --logs '[{"category": "Audit", "enabled": true}]' \
   --workspace $(azd env get-value LOG_ANALYTICS_WORKSPACE_ID)
 
-# Jurnalele interogărilor
+# Jurnale de interogare
 az monitor log-analytics query \
   --workspace $(azd env get-value LOG_ANALYTICS_WORKSPACE_ID) \
   --analytics-query "AzureDiagnostics | where Category == 'Audit' | top 10 by TimeGenerated"
@@ -344,17 +345,17 @@ az monitor log-analytics query \
 
 **Simptome:** 403 Forbidden la apelul API
 
-**Soluții:**
+**Soluții:**  
 ```bash
-# 1. Verificați dacă accesul OpenAI este aprobat
+# 1. Verifică dacă accesul OpenAI este aprobat
 az cognitiveservices account show \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
 
-# 2. Verificați dacă cheia API este corectă
+# 2. Verifică dacă cheia API este corectă
 azd env get-value AZURE_OPENAI_API_KEY
 
-# 3. Verificați formatul URL-ului endpoint
+# 3. Verifică formatul URL-ului endpoint
 azd env get-value AZURE_OPENAI_ENDPOINT
 # Ar trebui să fie: https://[name].openai.azure.com/
 ```
@@ -363,7 +364,7 @@ azd env get-value AZURE_OPENAI_ENDPOINT
 
 **Simptome:** 429 Too Many Requests
 
-**Soluții:**
+**Soluții:**  
 ```bash
 # 1. Verifică cota curentă
 az cognitiveservices account deployment show \
@@ -372,17 +373,17 @@ az cognitiveservices account deployment show \
   --deployment-name gpt-4.1
 
 # 2. Solicită creșterea cotei (dacă este necesar)
-# Accesați Azure Portal → Resursă OpenAI → Cote → Solicită creștere
+# Accesează Azure Portal → Resursa OpenAI → Cote → Solicita creșterea
 
 # 3. Implementează logica de reîncercare (deja în chat.py)
-# Aplicația încearcă automat din nou cu pauză exponențială
+# Aplicația reîncearcă automat cu reîncercări exponentiale
 ```
 
 ### Problemă: "Model Not Found"
 
-**Simptome:** eroare 404 pentru implementare
+**Simptome:** Eroare 404 pentru implementare
 
-**Soluții:**
+**Soluții:**  
 ```bash
 # 1. Listează implementările disponibile
 az cognitiveservices account deployment list \
@@ -396,19 +397,19 @@ echo $AZURE_OPENAI_MODEL
 export AZURE_OPENAI_MODEL=gpt-4.1  # sau gpt-35-turbo
 ```
 
-### Problemă: Latență ridicată
+### Problemă: Latență mare
 
 **Simptome:** Timp de răspuns lent (>5 secunde)
 
-**Soluții:**
+**Soluții:**  
 ```bash
-# 1. Verificați latența regională
-# Implementați în regiunea cea mai apropiată de utilizatori
+# 1. Verifică latența regională
+# Desfășoară în regiunea cea mai apropiată de utilizatori
 
-# 2. Reduceți max_tokens pentru răspunsuri mai rapide
+# 2. Reduce max_tokens pentru răspunsuri mai rapide
 export AZURE_OPENAI_MAX_TOKENS=400
 
-# 3. Folosiți streaming pentru o experiență mai bună a utilizatorului
+# 3. Folosește streaming pentru o experiență utilizator mai bună
 python chat.py --stream
 ```
 
@@ -417,10 +418,10 @@ python chat.py --stream
 ### 1. Protejează cheile API
 
 ```bash
-# Nu trimiteți niciodată cheile în controlul sursei
-# Folosiți Key Vault (configurat deja)
+# Nu salva niciodată cheile în controlul sursei
+# Folosește Key Vault (configurat deja)
 
-# Rotiți cheile periodic
+# Rotește cheile regulat
 az cognitiveservices account keys regenerate \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
@@ -431,18 +432,18 @@ az cognitiveservices account keys regenerate \
 
 ```python
 # Microsoft Foundry Models include filtrare încorporată a conținutului
-# Configurați în Azure Portal:
-# Resursa OpenAI → Filtre de conținut → Creați filtru personalizat
+# Configurați în Portalul Azure:
+# Resursă OpenAI → Filtre de conținut → Creează filtru personalizat
 
-# Categorii: Ură, Sexual, Violență, Auto-vătămare
-# Niveluri: Filtrare scăzută, medie, ridicată
+# Categorii: Ură, Sexual, Violent, Auto-vătămare
+# Niveluri: Filtrare scăzută, medie, înaltă
 ```
 
-### 3. Folosește identitate gestionată (Producție)
+### 3. Folosește identitate gestionată (producție)
 
 ```bash
 # Pentru implementările în producție, folosiți identitatea gestionată
-# în loc de chei API (necesită găzduirea aplicației pe Azure)
+# în loc de cheile API (necesită găzduirea aplicației pe Azure)
 
 # Actualizați infra/openai.bicep pentru a include:
 # identity: { type: 'SystemAssigned' }
@@ -468,7 +469,7 @@ python src/chat.py
 ### Rulează teste
 
 ```bash
-# Instalează dependențele pentru testare
+# Instalează dependențele pentru teste
 pip install pytest pytest-cov
 
 # Rulează testele
@@ -481,7 +482,7 @@ pytest tests/ --cov=src --cov-report=html
 ### Actualizează implementarea modelului
 
 ```bash
-# Implementați versiuni diferite ale modelului
+# Distribuie o versiune diferită a modelului
 az cognitiveservices account deployment create \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
@@ -506,81 +507,81 @@ azd down --force --purge
 # - Toate implementările și configurațiile
 ```
 
-## Pași următori
+## Pașii următori
 
 ### Extinde acest exemplu
 
-1. **Adaugă interfață web** - Creează frontend React/Vue
+1. **Adaugă interfață web** - Construiește frontend React/Vue  
    ```bash
    # Adaugă serviciul frontend în azure.yaml
-   # Deploy către Azure Static Web Apps
+   # Deplasează la Azure Static Web Apps
    ```
 
-2. **Implementează RAG** - Adaugă căutare documente cu Azure AI Search
+2. **Implementează RAG** - Adaugă căutare documente cu Azure AI Search  
    ```python
-   # Integrează Azure Cognitive Search
+   # Integrează Azure AI Search
    # Încarcă documente și creează un index vectorial
    ```
 
-3. **Adaugă apelare funcții** - Activează utilizarea instrumentelor
+3. **Adaugă apelare de funcții** - Permite utilizarea uneltelor  
    ```python
    # Definește funcții în chat.py
    # Permite gpt-4.1 să apeleze API-uri externe
    ```
 
-4. **Suport multi-model** - Implementează modele multiple
+4. **Suport multi-model** - Implementează multiple modele  
    ```bash
    # Adaugă modelele gpt-35-turbo, embeddings
-   # Implementează logica de rutare a modelelor
+   # Implementează logica de rutare a modelului
    ```
 
 ### Exemple conexe
 
-- **[Retail Multi-Agent](../retail-scenario.md)** - Arhitectură multi-agent avansată
-- **[Database App](../../../../examples/database-app)** - Adaugă stocare persistentă
-- **[Container Apps](../../../../examples/container-app)** - Implementare ca serviciu containerizat
+- **[Retail Multi-Agent](../retail-scenario.md)** - Arhitectură multi-agent avansată  
+- **[Aplicație bază de date](../../../../examples/database-app)** - Adaugă stocare persistentă  
+- **[Container Apps](../../../../examples/container-app)** - Implementare ca serviciu containerizat  
 
-### Resurse pentru învățare
+### Resurse de învățare
 
-- 📚 [Curs AZD pentru începători](../../README.md) - Pagina principală curs
-- 📚 [Documentație Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/) - Documentație oficială
-- 📚 [Referință API OpenAI](https://platform.openai.com/docs/api-reference) - Detalii API
-- 📚 [AI Responsabil](https://www.microsoft.com/ai/responsible-ai) - Cele mai bune practici
+- 📚 [AZD For Beginners Course](../../README.md) - Curs principal  
+- 📚 [Documentația Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/) - Documentație oficială  
+- 📚 [Referință API OpenAI](https://platform.openai.com/docs/api-reference) - Detalii API  
+- 📚 [Inteligență Artificială responsabilă](https://www.microsoft.com/ai/responsible-ai) - Cele mai bune practici  
 
 ## Resurse suplimentare
 
 ### Documentație
-- **[Serviciul Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/)** - Ghid complet
-- **[Modele gpt-4.1](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - Capacități modele
-- **[Filtrare conținut](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - Funcții de siguranță
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - Referință azd
+- **[Serviciul Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/)** - Ghid complet  
+- **[Modele gpt-4.1](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - Capacitățile modelelor  
+- **[Filtrarea conținutului](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - Măsuri de siguranță  
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - Referință azd  
 
 ### Tutoriale
-- **[OpenAI Quickstart](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - Prima implementare
-- **[Chat Completions](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - Construirea aplicațiilor de chat
-- **[Function Calling](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - Funcții avansate
+- **[OpenAI Quickstart](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - Prima implementare  
+- **[Chat Completions](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - Construirea aplicațiilor de chat  
+- **[Function Calling](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - Funcționalități avansate  
 
 ### Unelte
-- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - Playground web
-- **[Ghid Prompt Engineering](https://platform.openai.com/docs/guides/prompt-engineering)** - Scrierea prompturilor mai bune
-- **[Calculator Tokeni](https://platform.openai.com/tokenizer)** - Estimare utilizare tokeni
+- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - Platformă web de testare  
+- **[Ghid de prompt engineering](https://platform.openai.com/docs/guides/prompt-engineering)** - Scrierea prompturilor mai bune  
+- **[Calculator token-uri](https://platform.openai.com/tokenizer)** - Estimare utilizare token-uri  
 
 ### Comunitate
-- **[Azure AI Discord](https://discord.gg/azure)** - Ajutor din comunitate
-- **[GitHub Discussions](https://github.com/Azure-Samples/openai/discussions)** - Forum Q&A
-- **[Blog Azure](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - Ultimele noutăți
+- **[Discord Azure AI](https://discord.gg/azure)** - Ajutor din comunitate  
+- **[GitHub Discussions](https://github.com/Azure-Samples/openai/discussions)** - Forum de întrebări și răspunsuri  
+- **[Blog Azure](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - Ultimele noutăți  
 
 ---
 
-**🎉 Succes!** Ai implementat Microsoft Foundry Models și ai construit o aplicație funcțională de chat. Începe să explorezi capabilitățile gpt-4.1 și experimentează cu diverse prompturi și cazuri de utilizare.
+**🎉 Succes!** Ai implementat Microsoft Foundry Models și ai construit o aplicație de chat funcțională. Începe să explorezi capabilitățile gpt-4.1 și experimentează cu diferite prompturi și cazuri de utilizare.
 
-**Întrebări?** [Deschide un issue](https://github.com/microsoft/AZD-for-beginners/issues) sau consultă [FAQ](../../resources/faq.md)
+**Ai întrebări?** [Deschide un issue](https://github.com/microsoft/AZD-for-beginners/issues) sau consultă [FAQ](../../resources/faq.md)
 
-**Alertă costuri:** Nu uita să rulezi `azd down` când termini testarea pentru a evita costuri continue (~50-100 $/lună pentru utilizare activă).
+**Avertisment costuri:** Nu uita să rulezi `azd down` când termini testarea pentru a evita taxe în curs (~50-100 USD/lună pentru utilizare activă).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Declinare de responsabilitate**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventuale neînțelegeri sau interpretări greșite rezultate din utilizarea acestei traduceri.
+**Declinare a responsabilității**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). În timp ce ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un om. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care decurg din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

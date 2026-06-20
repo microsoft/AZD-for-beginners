@@ -1,65 +1,67 @@
 # 8. peatükk: Tootmine ja ettevõtte mustrid
 
-**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 2-3 tundi | **⭐ Keerukus**: Edasijõudnud
+**📚 Kursus**: [AZD alustajatele](../../README.md) | **⏱️ Kestus**: 2-3 tundi | **⭐ Tase**: Täiustatud
 
 ---
 
 ## Ülevaade
 
-Selles peatükis käsitletakse ettevõttevalmis juurutusmustrid, turvamineerimist, jälgimist ja kulude optimeerimist tootmis-AI töökoormuste jaoks.
+Selles peatükis käsitletakse ettevõttevalmis juurutusmustreid, turvalisuse tugevdamist, jälgimist ja kulude optimeerimist tootmise AI töökoormustele.
 
-> Kontrollitud `azd 1.23.12` vastu märtsis 2026.
+> Kontrollitud versiooniga `azd 1.25.6` 2026. aasta juunis.
 
-## Õpieesmärgid
+## Õppe eesmärgid
 
-Selle peatüki läbimisel õpite:
-- Juurutama mitme regiooni vastupidavaid rakendusi
-- Rakendama ettevõtte turvamustreid
-- Konfigureerima põhjalikku jälgimist
-- Optimeerima kulusid suures mahus
-- Seadistama CI/CD torujaamu AZD-ga
+Selle peatüki lõpetamisel oskad:
+- Juurutada mitme regiooniga vastupidavaid rakendusi
+- Rakendada ettevõtte turvamustreid
+- Konfigureerida põhjalikku jälgimist
+- Optimeerida kulusid suures mahus
+- Seadistada AZD abil CI/CD torujuhtmeid
 
 ---
 
-## 📚 Õppetunnid
+## 📚 Tunnid
 
-| # | Õppetund | Kirjeldus | Aeg |
+| # | Õppetükk | Kirjeldus | Aeg |
 |---|----------|-----------|-----|
-| 1 | [Tootmis-AI tavad](production-ai-practices.md) | Ettevõtte juurutusmustrid | 90 min |
+| 1 | [Tootmise AI praktikad](production-ai-practices.md) | Ettevõtte juurutusmustrid | 90 min |
 
 ---
 
 ## 🚀 Tootmise kontrollnimekiri
 
 - [ ] Mitme regiooni juurutus vastupidavuse tagamiseks
-- [ ] Haldusega identiteet autentimiseks (ilma võtmeteta)
+- [ ] Halduse identiteet autentimiseks (võtmeid mitte)
 - [ ] Application Insights jälgimiseks
-- [ ] Kulueelarved ja hoiatused seadistatud
-- [ ] Turvaskaneerimine lubatud
-- [ ] CI/CD torujaama integreerimine
+- [ ] Kulude eelarved ja hoiatused seadistatud
+- [ ] Turvaskannimine lubatud
+- [ ] CI/CD torujuhtme integreerimine
 - [ ] Katastroofide taastamise plaan
 
 ---
 
-## 🏗️ Arhitektuurimustrid
+## 🏗️ Arhitektuuri mustrid
 
 ### Muster 1: Mikroteenused AI
 
 ```mermaid
 graph LR
-    Gateway[API värav] --> AI[AI teenus] --> Models[Microsoft Foundry mudelid]
-    Gateway --> Auth[Autentimise teenus]
-    AI --> Data[Andmehoidla]
+    Gateway[API Värav] --> AI[AI Teenus] --> Models[Microsoft Foundry Mudelid]
+    Gateway --> Auth[Autentimisteenus]
+    AI --> Data[Andmepood]
 ```
-### Muster 2: Sündmuspõhine AI
+
+### Muster 2: Sündmustepõhine AI
 
 ```mermaid
 graph LR
-    EventGrid[Event Grid] --> Functions[Funktsioonid] --> Pipeline[AI Torujuhe]
+    EventGrid[Event Grid] --> Functions[Funktsioonid] --> Pipeline[AI torujuhe]
 ```
+
 ---
 
-## 🔐 Turva parimad praktikad
+## 🔐 Turbe parimad praktikad
 
 ```bicep
 // Use managed identity
@@ -78,17 +80,17 @@ properties: {
 
 ---
 
-## 💰 Kulu optimeerimine
+## 💰 Kuluoptimeerimine
 
 | Strateegia | Sääst |
-|------------|--------|
-| Skaala nulli (Container Apps) | 60-80% |
+|------------|-------|
+| Skaala nullini (Container Apps) | 60-80% |
 | Kasuta tarbimiskihte arenduseks | 50-70% |
-| Ajastatud skaala muutmine | 30-50% |
-| Reserveeritud mahtuvus | 20-40% |
+| Ajakavastatud skaleerimine | 30-50% |
+| Reserveeritud maht | 20-40% |
 
 ```bash
-# Määra eelarvehoiatused
+# Sea eelarvehoiatused
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -107,24 +109,24 @@ azd monitor --logs
 # Kontrolli Application Insightsi
 azd monitor --overview
 
-# Vaata mõõdikuid
+# Vaata meetrikaid
 az monitor metrics list --resource <resource-id>
 ```
 
 ---
 
-## 🔗 Navigeerimine
+## 🔗 Navigatsioon
 
 | Suund | Peatükk |
-|-------|----------|
+|-------|---------|
 | **Eelmine** | [7. peatükk: Tõrkeotsing](../chapter-07-troubleshooting/README.md) |
-| **Kursus lõpetatud** | [Kursuse avaaken](../../README.md) |
+| **Kursus lõpetatud** | [Kursuse avaleht](../../README.md) |
 
 ---
 
 ## 📖 Seotud ressursid
 
-- [AI Agendid juhend](../chapter-02-ai-development/agents.md)
+- [AI agendid juhend](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 - [Mitme agendi lahendused](../chapter-05-multi-agent/README.md)
 - [Mikroteenuste näide](../../examples/microservices/README.md)
@@ -132,6 +134,6 @@ az monitor metrics list --resource <resource-id>
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vastutusest vabastamine**:  
-See dokument on tõlgitud tehisintellektil põhineva tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palun arvestage, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle algkeeles tuleks pidada autoriteetseks allikaks. Kriitilise teabe jaoks soovitatakse professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tekkivate arusaamatuste või moonutuste eest.
+**Lahtiütlus**:
+See dokument on tõlgitud kasutades AI tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi me püüdleme täpsuse poole, palun pange tähele, et automatiseeritud tõlgetes võib esineda vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlkega seotud eksimustest või valesti mõistmistest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

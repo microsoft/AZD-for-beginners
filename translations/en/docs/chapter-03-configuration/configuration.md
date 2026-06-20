@@ -303,6 +303,51 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
+### Sharing Environments Across a Team
+
+When more than one person works on a project, you need to agree on **what travels with the repo and what stays local**. azd keeps each environment under a `.azure/` folder, and not all of it should be committed.
+
+**What's in `.azure/`:**
+
+```
+.azure/
+├── config.json              # which env is currently selected (local)
+└── <env-name>/
+    ├── config.json          # subscription, location, resource IDs
+    └── .env                 # environment variables (may contain secrets!)
+```
+
+**What to gitignore.** azd's default `.gitignore` already excludes `.azure/`. Keep it that way—the `.env` files can contain secrets, and resource IDs are specific to whoever provisioned them. Each teammate creates their **own** environment locally:
+
+```bash
+# Every developer runs this once to get their own isolated environment
+azd env new dev-alice
+azd up
+```
+
+**Switching between environments.** A developer who manages several environments selects the active one before running commands:
+
+```bash
+azd env list                 # see all local environments and which is default
+azd env select staging       # make 'staging' the active environment
+azd env get-values           # confirm you're pointed at the right one
+```
+
+**Providing non-secret defaults to the team.** Commit a template (like the `.azure/env.template` above) so everyone knows which variables to set—but never commit the filled-in values. New teammates copy the template and fill in their own.
+
+**Environments in CI/CD.** Pipelines don't read your local `.azure/` folder. Instead, provide the environment values as pipeline variables/secrets, and azd reads them from the process environment:
+
+```bash
+# In CI, azd reads these from the environment, not from .azure/
+export AZURE_ENV_NAME=production
+export AZURE_LOCATION=eastus2
+export AZURE_SUBSCRIPTION_ID=<sub-id>
+azd provision --no-prompt
+azd deploy --no-prompt
+```
+
+> **Rule of thumb:** infrastructure code (`infra/`, `azure.yaml`) is shared in Git; environment *state and secrets* (`.azure/`) are per-developer and per-pipeline. `azd pipeline config` sets the pipeline variables up for you automatically.
+
 ## 🔐 Authentication Configuration
 
 ### Azure CLI Integration
@@ -493,7 +538,7 @@ azd provision --dry-run
 Create validation scripts in `scripts/`:
 
 ```bash
-#!/bin/bash
+#/bin/bash
 # scripts/validate-config.sh
 
 echo "Validating configuration..."

@@ -1,49 +1,49 @@
-# Autentifikavimo modeliai ir Tvarkoma tapatybė
+# Autentifikacijos modeliai ir valdomoji tapatybė
 
-⏱️ **Apskaičiuotas laikas**: 45-60 minučių | 💰 **Kainos poveikis**: Nemokama (be papildomų mokesčių) | ⭐ **Sudėtingumas**: Vidutinis
+⏱️ **Apskaičiuotas laikas**: 45–60 minučių | 💰 **Kainos poveikis**: Nemokama (jokių papildomų mokesčių) | ⭐ **Sudėtingumas**: Vidutinis
 
 **📚 Mokymosi kelias:**
-- ← Ankstesnis: [Konfigūracijų valdymas](configuration.md) - Aplinkos kintamųjų ir slaptumų valdymas
-- 🎯 **Jūs esate čia**: Autentifikavimas ir saugumas (Tvarkoma tapatybė, Key Vault, saugūs modeliai)
-- → Kitas: [Pirmasis projektas](first-project.md) - Sukurkite pirmąją AZD programą
+- ← Ankstesnis: [Konfigūracijų valdymas](configuration.md) - Aplinkos kintamųjų ir slaptųjų duomenų valdymas
+- 🎯 **Jūs esate čia**: Autentifikacija ir saugumas (valdomoji tapatybė, Key Vault, saugūs modeliai)
+- → Toliau: [Pirmasis projektas](first-project.md) - Sukurkite savo pirmąją AZD programą
 - 🏠 [Kurso pradžia](../../README.md)
 
 ---
 
-## Ko išmoksite
+## Ko išmoksit
 
 Baigę šią pamoką jūs:
-- Suprasite Azure autentifikavimo modelius (raktai, ryšio eilutės, tvarkoma tapatybė)
-- Įgyvendinsite **Tvarkomą tapatybę** autentifikacijai be slaptažodžių
-- Apsaugosite slaptuosius duomenis integruodami **Azure Key Vault**
-- Konfigūruosite **vaidmenų pagrindu veikiančią prieigos kontrolę (RBAC)** AZD diegimams
-- Taikysite saugumo geriausias praktikas Container Apps ir Azure paslaugose
-- Migravote nuo raktų pagrindu veikiančios prieigos prie tapatybės pagrindu veikiančios autentifikacijos
+- Suprasite Azure autentifikacijos modelius (raktai, ryšio eilutės, valdomoji tapatybė)
+- Įgyvendinsite **valdomąją tapatybę** be slaptažodžių
+- Apsaugosite slaptus duomenis integruojant su **Azure Key Vault**
+- Konfigūruosite **pagrindu paremtą prieigos valdymą (RBAC)** AZD diegimams
+- Taikysite saugumo gerąsias praktikas Container Apps ir Azure paslaugoms
+- Migracijos iš raktų pagrindo į identiteto pagrindu veikiančią autentifikaciją
 
-## Kodėl tvarkoma tapatybė yra svarbi
+## Kodėl valdomoji tapatybė yra svarbi
 
-### Problema: tradicinis autentifikavimas
+### Problema: tradicinė autentifikacija
 
-**Prieš Tvarkomą tapatybę:**
+**Prieš valdomąją tapatybę:**
 ```javascript
-// ❌ SAUGUMO RIZIKA: Į kodą įrašytos slaptys
+// ❌ SAUGUMO RIZIKA: Kode tiesiogiai įrašytos paslaptys
 const connectionString = "Server=mydb.database.windows.net;User=admin;Password=P@ssw0rd123";
 const storageKey = "xK7mN9pQ2wR5tY8uI0oP3aS6dF1gH4jK...";
 const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 ```
 
 **Problemos:**
-- 🔴 **Slaptieji duomenys atviri** kode, konfigūracijos failuose, aplinkos kintamuosiuose
+- 🔴 **Išryškinti slaptieji duomenys** kode, konfigūracijos failuose, aplinkos kintamuosiuose
 - 🔴 **Kredencialų keitimas** reikalauja kodo pakeitimų ir pakartotinio diegimo
-- 🔴 **Audito košmarai** - kas prie ko prisijungė ir kada?
-- 🔴 **Išsibarsčiusi** - slaptieji duomenys paskirstyti keliuose sistemose
-- 🔴 **Atitikties rizika** - nepraeina saugumo auditų
+- 🔴 **Auditavimo košmarai** - kas ką ir kada pasiekė?
+- 🔴 **Išsibarsčiusios saugyklos** - slaptieji duomenys pasklidę po daugelį sistemų
+- 🔴 **Atitikties rizikos** - nepraeina saugumo auditų
 
-### Sprendimas: tvarkoma tapatybė
+### Sprendimas: valdomoji tapatybė
 
-**Po Tvarkomos tapatybės:**
+**Po valdomosios tapatybės:**
 ```javascript
-// ✅ SAUGU: Kode nėra jokių slaptų duomenų
+// ✅ SAUGU: Nėra slaptų duomenų kode
 const credential = new DefaultAzureCredential();
 const client = new BlobServiceClient(
   "https://mystorageaccount.blob.core.windows.net",
@@ -52,39 +52,39 @@ const client = new BlobServiceClient(
 ```
 
 **Privalumai:**
-- ✅ **Nėra slaptųjų duomenų** kode ar konfigūracijose
-- ✅ **Automatinis keitimas** - Azure rūpinasi tuo
-- ✅ **Pilnas audito įrašas** Azure AD žurnaluose
-- ✅ **Centralizuotas saugumas** - valdykite per Azure portalą
-- ✅ **Atitiktims pasiruošę** - atitinka saugumo standartus
+- ✅ **Nėra jokių slaptažodžių** kode ar konfiguracijoje
+- ✅ **Automatinis keitimas** - Azure tvarko
+- ✅ **Pilnas auditavimo įrašas** Microsoft Entra ID žurnaluose
+- ✅ **Centralizuotas saugumas** - valdykite per Azure Portal
+- ✅ **Paruošta atitiktims** - atitinka saugumo standartus
 
-**Palyginimas**: Tradicinis autentifikavimas yra kaip nešiotis kelis fizinius raktus skirtingoms durims. Tvarkoma tapatybė yra kaip turėti saugumo kortelę, kuri automatiškai suteikia prieigą pagal tai, kas jūs esate — nėra raktų, kuriuos galima pamesti, kopijuoti ar keisti.
+**Analogija**: Tradicinė autentifikacija panaši į kelių fizinių raktų nešiojimąsi skirtingoms durims. Valdomoji tapatybė yra kaip saugumo ženklelis, kuris automatiškai suteikia prieigą pagal jūsų tapatybę — nėra raktų, kuriuos būtų galima pamesti, nukopijuoti ar keisti.
 
 ---
 
 ## Architektūros apžvalga
 
-### Autentifikavimo srautas su Tvarkoma tapatybe
+### Autentifikacijos srautas su valdomąja tapatybe
 
 ```mermaid
 sequenceDiagram
     participant App as Jūsų programa<br/>(konteinerio programa)
-    participant MI as Valdoma tapatybė<br/>(Azure AD)
+    participant MI as Valdomasis identitetas<br/>(Microsoft Entra ID)
     participant KV as Raktų saugykla
     participant Storage as Azure saugykla
     participant DB as Azure SQL
     
     App->>MI: Prašyti prieigos žetono<br/>(automatiškai)
-    MI->>MI: Patikrinti tapatybę<br/>(slaptažodis nereikalingas)
+    MI->>MI: Patikrinti tapatybę<br/>(nereikia slaptažodžio)
     MI-->>App: Grąžinti žetoną<br/>(galioja 1 val.)
     
     App->>KV: Gauti slaptą reikšmę<br/>(naudojant žetoną)
     KV->>KV: Patikrinti RBAC leidimus
     KV-->>App: Grąžinti slaptą reikšmę
     
-    App->>Storage: Įkelti blobą<br/>(naudojant žetoną)
+    App->>Storage: Įkelti blob'ą<br/>(naudojant žetoną)
     Storage->>Storage: Patikrinti RBAC leidimus
-    Storage-->>App: Pavyko
+    Storage-->>App: Sėkmingai
     
     App->>DB: Užklausti duomenų<br/>(naudojant žetoną)
     DB->>DB: Patikrinti SQL leidimus
@@ -92,36 +92,38 @@ sequenceDiagram
     
     Note over App,DB: Visa autentifikacija be slaptažodžių!
 ```
-### Tvarkomų tapatybių tipai
+
+### Valdomųjų tapatybių tipai
 
 ```mermaid
 graph TB
-    MI[Valdoma tapatybė]
+    MI[Valdomoji tapatybė]
     SystemAssigned[Sistemos priskirta tapatybė]
     UserAssigned[Vartotojo priskirta tapatybė]
     
     MI --> SystemAssigned
     MI --> UserAssigned
     
-    SystemAssigned --> SA1[Gyvavimo ciklas susietas su resursu]
-    SystemAssigned --> SA2[Automatinis kūrimas/pašalinimas]
-    SystemAssigned --> SA3[Geriausia vienam resursui]
+    SystemAssigned --> SA1[Gyvavimo ciklas susietas su ištekliu]
+    SystemAssigned --> SA2[Automatinis sukūrimas/šalinimas]
+    SystemAssigned --> SA3[Geriausia vienam ištekliui]
     
     UserAssigned --> UA1[Nepriklausomas gyvavimo ciklas]
-    UserAssigned --> UA2[Rankinis kūrimas/pašalinimas]
-    UserAssigned --> UA3[Bendrinama tarp resursų]
+    UserAssigned --> UA2[Rankinis kūrimas/šalinimas]
+    UserAssigned --> UA3[Bendrai naudojama tarp išteklių]
     
     style SystemAssigned fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style UserAssigned fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
 ```
-| Funkcija | Sistemos priskirta | Vartotojui priskirta |
+
+| Funkcija | Sistemos priskirta | Vartotojo priskirta |
 |---------|----------------|---------------|
-| **Gyvavimo ciklas** | Susieta su ištekliumi | Nepriklausoma |
-| **Sukūrimas** | Automatiškai su ištekliumi | Rankinis sukūrimas |
-| **Ištrynimas** | Ištrinamas kartu su ištekliu | Išlieka po ištrynimo |
-| **Dalijimasis** | Tik vienam ištekliui | Kelis išteklius galima naudoti |
-| **Naudojimo atvejis** | Paprasti scenarijai | Sudėtingi kelių išteklių scenarijai |
-| **AZD numatyta** | ✅ Rekomenduojama | Neprivaloma |
+| **Gyvavimo ciklas** | Priklauso resursui | Nepriklausoma |
+| **Sukūrimas** | Automatinis kartu su resursu | Sukuriama rankiniu būdu |
+| **Ištrynimas** | Ištrinama kartu su resursu | Išlieka po resurso ištrynimo |
+| **Bendrinimas** | Tik vienam resursui | Keliems resursams |
+| **Naudojimo scenarijus** | Paprasti scenarijai | Sudėtingi kelių resursų scenarijai |
+| **AZD numatytasis** | ✅ Rekomenduojama | Pasirinktinai |
 
 ---
 
@@ -129,7 +131,7 @@ graph TB
 
 ### Reikalingi įrankiai
 
-Jūs turėtumėte jau turėti tai įdiegtą iš ankstesnių pamokų:
+Turėtumėte jau būti įdiegę šiuos dalykus iš ankstesnių pamokų:
 
 ```bash
 # Patikrinkite Azure Developer CLI
@@ -138,44 +140,44 @@ azd version
 
 # Patikrinkite Azure CLI
 az --version
-# ✅ Tikimasi: azure-cli 2.50.0 arba naujesnė
+# ✅ Tikimasi: azure-cli versija 2.50.0 arba naujesnė
 ```
 
 ### Azure reikalavimai
 
 - Aktyvi Azure prenumerata
 - Teisės:
-  - Kurti tvarkomas tapatybes
+  - Kurti valdomąsias tapatybes
   - Priskirti RBAC vaidmenis
   - Kurti Key Vault išteklius
   - Diegti Container Apps
 
 ### Reikalingos žinios
 
-Jūs turėtumėte būti pabaigę:
-- [Diegimo vadovas](installation.md) - AZD nustatymas
+Turėtumėte būti baigę:
+- [Įdiegimo vadovas](installation.md) - AZD sąranka
 - [AZD pagrindai](azd-basics.md) - Pagrindinės sąvokos
 - [Konfigūracijų valdymas](configuration.md) - Aplinkos kintamieji
 
 ---
 
-## Pamoka 1: Autentifikavimo modelių supratimas
+## Pamoka 1: Autentifikacijos modelių supratimas
 
-### Modelis 1: Ryšio eilutės (senstelėjęs - Venkite)
+### Modelis 1: Ryšio eilutės (senoviškas - vengti)
 
 **Kaip tai veikia:**
 ```bash
-# Jungties eilutėje yra prisijungimo duomenys
+# Ryšio eilutė turi autentifikavimo duomenis
 STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=xK7mN9pQ2wR5..."
 COSMOS_CONNECTION_STRING="AccountEndpoint=https://myaccount.documents.azure.com:443/;AccountKey=C2x7..."
 SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=P@ssw0rd..."
 ```
 
 **Problemos:**
-- ❌ Slaptieji duomenys matomi aplinkos kintamuosiuose
-- ❌ Užfiksuojama diegimo sistemose
-- ❌ Sunku pakeisti (rotuoti)
-- ❌ Nėra prieigos audito įrašo
+- ❌ Slapti duomenys matomi aplinkos kintamuosiuose
+- ❌ Įrašomi diegimo sistemose
+- ❌ Sunku keisti periodiškai
+- ❌ Nėra prieigos auditavimo įrašo
 
 **Kada naudoti:** Tik vietiniam vystymui, niekada gamyboje.
 
@@ -203,19 +205,19 @@ env: [
 ```
 
 **Privalumai:**
-- ✅ Slaptieji duomenys saugomi saugiai Key Vault saugykloje
-- ✅ Centrinis slaptųjų duomenų valdymas
+- ✅ Slaptieji duomenys saugomi saugiai Key Vault
+- ✅ Centralizuotas slaptųjų duomenų valdymas
 - ✅ Keitimas be kodo pakeitimų
 
 **Apribojimai:**
-- ⚠️ Vis tiek naudojami raktai/slaptažodžiai
+- ⚠️ Vis tiek naudojami raktai / slaptažodžiai
 - ⚠️ Reikia valdyti prieigą prie Key Vault
 
-**Kada naudoti:** Perėjimo žingsnis nuo ryšio eilutės prie tvarkomos tapatybės.
+**Kada naudoti:** Pereinamasis žingsnis nuo ryšio eilutės prie valdomosios tapatybės.
 
 ---
 
-### Modelis 3: Tvarkoma tapatybė (geriausia praktika)
+### Modelis 3: Valdomoji tapatybė (geriausia praktika)
 
 **Kaip tai veikia:**
 ```bicep
@@ -239,7 +241,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 **Programos kodas:**
 ```javascript
-// Nereikia jokių paslapčių!
+// Jokių paslapčių nereikia!
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -251,21 +253,74 @@ const blobServiceClient = new BlobServiceClient(
 ```
 
 **Privalumai:**
-- ✅ Nėra slaptųjų duomenų kode/konfigūracijoje
+- ✅ Nėra slaptažodžių kode / konfiguracijoje
 - ✅ Automatinis kredencialų keitimas
-- ✅ Pilnas audito įrašas
-- ✅ Leidimai, valdomi per RBAC
+- ✅ Pilnas auditavimo įrašas
+- ✅ Leidimai pagal RBAC
 - ✅ Paruošta atitiktims
 
-**Kada naudoti:** Visada, gamybos taikymuose.
+**Kada naudoti:** Visada, gamybos programoms.
 
 ---
 
-## Pamoka 2: Tvarkomos tapatybės įgyvendinimas su AZD
+### Modelis 4: Service Principals (CI/CD ir automatizavimas)
 
-### Žingsnis po žingsnio įgyvendinimas
+Valdomoji tapatybė yra auksinė norma resursams, veikiančioms Azure viduje. Bet kas, jei kažkas veikia už Azure ribų — pvz., CI/CD pipeline ant build agento, arba skriptas jūsų nešiojamajame kompiuteryje, kuris negali naudoti interaktyvaus prisijungimo? Tuomet praverčia **service principal**: nežmogiška tapatybė su savo kredencialais, kaip kuria automatizuotas procesas gali prisijungti.
 
-Sukurkime saugią Container App, kuri naudoja tvarkomą tapatybę prieigai prie Azure Storage ir Key Vault.
+**Kaip tai veikia:**
+
+Sukurkite service principal, apribotą resursų grupei (mažiausios privilegijos):
+
+```bash
+az ad sp create-for-rbac \
+  --name "myapp-cicd" \
+  --role contributor \
+  --scopes /subscriptions/<sub-id>/resourceGroups/<rg-name>
+```
+
+Tai atspausdins client ID, client secret ir tenant ID. azd gali prisijungti su jais be sąveikos:
+
+```bash
+azd auth login \
+  --client-id "<appId>" \
+  --client-secret "<password>" \
+  --tenant-id "<tenant>"
+```
+
+**Pirmenybę teikite federuotoms kredencialams (OIDC) vietoje slaptažodžių.** Vietoje ilgalaikio kliento slaptažodžio sukonfigūruokite federuotą kredencialą, kad pipeline apsikeistų trumpalaikiu žetonu — nėra slaptaždžio, kurį reikėtų nutekinti ar keisti:
+
+```bash
+azd auth login \
+  --client-id "<appId>" \
+  --federated-credential-provider "github" \
+  --tenant-id "<tenant>"
+```
+
+> `azd pipeline config` tai nustato jums automatiškai. Peržiūrėkite CI/CD pamokas [8 skyriuje](../chapter-08-production/production-ai-practices.md).
+
+**Privalumai:**
+- ✅ Veikia už Azure ribų (build agentai, on-prem, kiti debesys)
+- ✅ Gali būti apribotas vienai resursų grupei su vienu vaidmeniu
+- ✅ Federuotas (OIDC) variantas nenaudoja saugomų slaptažodžių
+
+**Kompromisai:**
+- ⚠️ Slaptažodais pagrįstas variantas reikalauja kruopštaus saugojimo ir keitimo
+- ⚠️ Nutekėjęs slaptažodis suteikia visas service principal galimybes — ribokite apimtis
+
+**Kada naudoti:** CI/CD pipelines ir automatizavimas, kurie negali naudoti valdomosios tapatybės. Visada teikite pirmenybę **federuotam/OIDC** variantui vietoje kliento slaptažodžio, ir teikite pirmenybę valdomajai tapatybei, kai darbo krūvis veikia Azure.
+
+**Kaip saugiai saugoti kredencialus:**
+- Niekada neįtraukti slaptažodžių į versijų valdymą — naudokite jūsų pipeline slaptažodžių saugyklą (GitHub Actions secrets, Azure DevOps variable groups / Key Vault).
+- Apribokite SP prie mažiausio reikalingo vaidmens ir resursų grupės.
+- Nustatykite galiojimo laiką ir keiskite, arba visiškai atsisakykite slaptažodžio naudodami OIDC.
+
+---
+
+## Pamoka 2: Valdomosios tapatybės įgyvendinimas su AZD
+
+### Įgyvendinimas žingsnis po žingsnio
+
+Sukurkime saugią Container App, kuri naudoja valdomąją tapatybę prieigai prie Azure Storage ir Key Vault.
 
 ### Projekto struktūra
 
@@ -302,9 +357,9 @@ services:
 # Enable managed identity (AZD handles this automatically)
 ```
 
-### 2. Infrastruktūra: Įjungti tvarkomą tapatybę
+### 2. Infrastruktūra: įgalinti valdomąją tapatybę
 
-Failas: `infra/main.bicep`
+**Failas: `infra/main.bicep`**
 
 ```bicep
 targetScope = 'subscription'
@@ -386,7 +441,7 @@ output APP_URL string = containerApp.outputs.url
 
 ### 3. Container App su sistemos priskirta tapatybe
 
-Failas: `infra/app/container-app.bicep`
+**Failas: `infra/app/container-app.bicep`**
 
 ```bicep
 param name string
@@ -443,7 +498,7 @@ output url string = 'https://${containerApp.properties.configuration.ingress.fqd
 
 ### 4. RBAC vaidmenų priskyrimo modulis
 
-Failas: `infra/core/role-assignment.bicep`
+**Failas: `infra/core/role-assignment.bicep`**
 
 ```bicep
 param principalId string
@@ -463,9 +518,9 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 output id string = roleAssignment.id
 ```
 
-### 5. Programos kodas su tvarkoma tapatybe
+### 5. Programos kodas su valdomąja tapatybe
 
-Failas: `src/app.js`
+**Failas: `src/app.js`**
 
 ```javascript
 const express = require('express');
@@ -537,7 +592,7 @@ app.get('/secret/:name', async (req, res) => {
   }
 });
 
-// Išvardinti blob konteinerius (demonstruoja skaitymo prieigą)
+// Išvardinti blob konteinerius (parodo skaitymo prieigą)
 app.get('/containers', async (req, res) => {
   try {
     const containers = [];
@@ -562,7 +617,7 @@ app.listen(PORT, () => {
 });
 ```
 
-Failas: `src/package.json`
+**Failas: `src/package.json`**
 
 ```json
 {
@@ -580,10 +635,10 @@ Failas: `src/package.json`
 }
 ```
 
-### 6. Diegti ir išbandyti
+### 6. Diegimas ir testavimas
 
 ```bash
-# Inicializuoti AZD aplinką
+# Inicijuoti AZD aplinką
 azd init
 
 # Diegti infrastruktūrą ir programą
@@ -596,7 +651,7 @@ APP_URL=$(azd env get-values | grep APP_URL | cut -d '=' -f2 | tr -d '"')
 curl $APP_URL/health
 ```
 
-**✅ Tikėtinas išvestis:**
+**✅ Tikėtinas rezultatas:**
 ```json
 {
   "status": "healthy",
@@ -604,12 +659,12 @@ curl $APP_URL/health
 }
 ```
 
-**Testinis blob įkėlimas:**
+**Blob įkėlimo testas:**
 ```bash
 curl -X POST $APP_URL/upload
 ```
 
-**✅ Tikėtinas išvestis:**
+**✅ Tikėtinas rezultatas:**
 ```json
 {
   "success": true,
@@ -618,12 +673,12 @@ curl -X POST $APP_URL/upload
 }
 ```
 
-**Testuoti konteinerio sąrašą:**
+**Konteinerių sąrašo testas:**
 ```bash
 curl $APP_URL/containers
 ```
 
-**✅ Tikėtinas išvestis:**
+**✅ Tikėtinas rezultatas:**
 ```json
 {
   "containers": ["uploads"],
@@ -634,21 +689,21 @@ curl $APP_URL/containers
 
 ---
 
-## Įprasti Azure RBAC vaidmenys
+## Dažnai naudojami Azure RBAC vaidmenys
 
-### Paruoštų vaidmenų ID tvarkomai tapatybei
+### Numatyti vaidmenų ID valdomajai tapatybei
 
-| Paslauga | Vaidmens pavadinimas | Vaidmens ID | Leidimai |
+| Paslauga | Vaidmens pavadinimas | Role ID | Leidimai |
 |---------|-----------|---------|-------------|
-| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Skaityti blobs ir konteinerius |
-| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Skaityti, rašyti, trinti blobs |
-| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Skaityti, rašyti, trinti eilės žinutes |
-| **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Skaityti slaptąsias reikšmes |
-| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Skaityti, rašyti, trinti slaptąsias reikšmes |
+| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Skaityti blob'us ir konteinerius |
+| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Skaityti, rašyti, šalinti blob'us |
+| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Skaityti, rašyti, šalinti eilių žinutes |
+| **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Skaityti slaptuosius duomenis |
+| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Skaityti, rašyti, šalinti slaptuosius duomenis |
 | **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Skaityti Cosmos DB duomenis |
-| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Skaityti, rašyti Cosmos DB duomenis |
+| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Skaityti ir rašyti Cosmos DB duomenis |
 | **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Tvarkyti SQL duomenų bazes |
-| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Siųsti, gauti, valdyti žinutes |
+| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Siųsti, gauti ir valdyti žinutes |
 
 ### Kaip rasti vaidmenų ID
 
@@ -659,19 +714,19 @@ az role definition list --query "[].{Name:roleName, ID:name}" --output table
 # Ieškoti konkretaus vaidmens
 az role definition list --query "[?contains(roleName, 'Storage Blob')].{Name:roleName, ID:name}" --output table
 
-# Gauti vaidmens detales
+# Gauti vaidmens informaciją
 az role definition list --name "Storage Blob Data Contributor"
 ```
 
 ---
 
-## Praktinės užduotys
+## Praktiniai uždaviniai
 
-### Užduotis 1: Įgalinti tvarkomą tapatybę esamai programai ⭐⭐ (Vidutinė)
+### Uždavinys 1: Įgalinti valdomąją tapatybę esamai programai ⭐⭐ (Vidutinio sudėtingumo)
 
-**Tikslas**: Pridėti tvarkomą tapatybę prie esamo Container App diegimo
+**Tikslas**: Pridėti valdomąją tapatybę esamame Container App diegime
 
-**Scenarijus**: Turite Container App, naudojančią ryšio eilutes. Konvertuokite ją į tvarkomą tapatybę.
+**Scenarijus**: Turite Container App, naudojančią ryšio eilutes. Konvertuokite ją į valdomąją tapatybę.
 
 **Pradinė būsena**: Container App su šia konfigūracija:
 
@@ -687,7 +742,7 @@ env: [
 
 **Veiksmai**:
 
-1. **Įgalinti tvarkomą tapatybę Bicep faile:**
+1. **Įgalinkite valdomąją tapatybę Bicep:**
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -699,7 +754,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-2. **Suteikti prieigą prie Storage:**
+2. **Suteikite prieigą prie Storage:**
 
 ```bicep
 // Get storage account reference
@@ -719,7 +774,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-3. **Atnaujinti programos kodą:**
+3. **Atnaujinkite programos kodą:**
 
 **Prieš (ryšio eilutė):**
 ```javascript
@@ -730,7 +785,7 @@ const blobServiceClient = BlobServiceClient.fromConnectionString(
 );
 ```
 
-**Po (tvarkoma tapatybė):**
+**Po (valdomoji tapatybė):**
 ```javascript
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
@@ -742,7 +797,7 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-4. **Atnaujinti aplinkos kintamuosius:**
+4. **Atnaujinkite aplinkos kintamuosius:**
 
 ```bicep
 env: [
@@ -754,26 +809,26 @@ env: [
 ]
 ```
 
-5. **Diegti ir išbandyti:**
+5. **Diegti ir testuoti:**
 
 ```bash
-# Perdiegti
+# Įdiegti iš naujo
 azd up
 
-# Patikrinti, ar vis dar veikia
+# Patikrinkite, ar vis dar veikia
 curl https://myapp.azurecontainerapps.io/upload
 ```
 
 **✅ Sėkmės kriterijai:**
 - ✅ Programa diegiama be klaidų
 - ✅ Storage operacijos veikia (įkėlimas, sąrašas, atsisiuntimas)
-- ✅ Aplinkos kintamuosiuose nėra ryšio eilutės
-- ✅ Tapatybė matoma Azure portale skiltyje "Identity"
+- ✅ Nėra ryšio eilutės aplinkos kintamuosiuose
+- ✅ Tapatybė matoma Azure Portale po „Identity“ skiltimi
 
 **Patikrinimas:**
 
 ```bash
-# Patikrinkite, ar valdomoji tapatybė įjungta
+# Patikrinkite, ar įjungta tvarkoma tapatybė
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
@@ -787,21 +842,21 @@ az role assignment list \
 # ✅ Tikimasi: Rodo "Storage Blob Data Contributor" vaidmenį
 ```
 
-**Laikas**: 20-30 minučių
+**Laikas**: 20–30 minučių
 
 ---
 
-### Užduotis 2: Prieiga kelioms paslaugoms naudojant vartotojo priskirtą tapatybę ⭐⭐⭐ (Išplėstinė)
+### Uždavinys 2: Daugia paslaugų prieiga su vartotojo priskirta tapatybe ⭐⭐⭐ (Sudėtinga)
 
-**Tikslas**: Sukurti vartotojui priskirtą tapatybę, bendrą kelioms Container App
+**Tikslas**: Sukurti vartotojo priskirtą tapatybę, dalinamą tarp kelių Container Apps
 
-**Scenarijus**: Turite 3 mikroservisus, kuriems visiems reikia prieigos prie to paties Storage paskyros ir Key Vault.
+**Scenarijus**: Turite 3 mikroservisus, kuriems visiems reikalinga prieiga prie to paties Storage paskyros ir Key Vault.
 
 **Veiksmai**:
 
-1. **Sukurti vartotojui priskirtą tapatybę:**
+1. **Sukurkite vartotojo priskirtą tapatybę:**
 
-Failas: `infra/core/identity.bicep`
+**Failas: `infra/core/identity.bicep`**
 
 ```bicep
 param name string
@@ -819,7 +874,7 @@ output principalId string = userAssignedIdentity.properties.principalId
 output clientId string = userAssignedIdentity.properties.clientId
 ```
 
-2. **Priskirti vaidmenis vartotojui priskirtai tapatybei:**
+2. **Priskirkite vaidmenis vartotojo priskirtai tapatybei:**
 
 ```bicep
 // In main.bicep
@@ -856,7 +911,7 @@ resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' =
 }
 ```
 
-3. **Priskirti tapatybę keliems Container App:**
+3. **Priskirkite tapatybę keliems Container Apps:**
 
 ```bicep
 resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
@@ -893,7 +948,7 @@ resource orderService 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-4. **Programos kodas (visos paslaugos naudoja tą patį modelį):**
+4. **Programos kodas (visi servisai naudoja tą patį modelį):**
 
 ```javascript
 const { DefaultAzureCredential, ManagedIdentityCredential } = require('@azure/identity');
@@ -917,39 +972,39 @@ const blobServiceClient = new BlobServiceClient(
 ```bash
 azd up
 
-# Patikrinti, ar visos paslaugos gali pasiekti saugyklą
+# Patikrinkite, ar visos paslaugos gali pasiekti saugyklą
 curl https://api-gateway.azurecontainerapps.io/upload
 curl https://product-service.azurecontainerapps.io/upload
 curl https://order-service.azurecontainerapps.io/upload
 ```
 
 **✅ Sėkmės kriterijai:**
-- ✅ Viena tapatybė bendrina 3 paslaugas
-- ✅ Visos paslaugos gali prieiti prie Storage ir Key Vault
-- ✅ Tapatybė išlieka, jei ištrinate vieną paslaugą
-- ✅ Centrinis teisių valdymas
+- ✅ Viena tapatybė dalinama tarp 3 servisų
+- ✅ Visi servisai gali pasiekti Storage ir Key Vault
+- ✅ Tapatybė išlieka, jei ištrinsite vieną servisą
+- ✅ Centralizuotas leidimų valdymas
 
-Vartotojui priskirtos tapatybės privalumai:
+**Vartotojo priskirtos tapatybės privalumai:**
 - Viena tapatybė valdymui
-- Nuoseklūs leidimai visoms paslaugoms
-- Išlieka po paslaugos ištrynimo
+- Nuoseklūs leidimai tarp servisų
+- Išlieka po serviso ištrynimo
 - Geriau tinka sudėtingoms architektūroms
 
-**Laikas**: 30-40 minučių
+**Laikas**: 30–40 minučių
 
 ---
 
-### Užduotis 3: Įgyvendinti Key Vault slaptųjų reikšmių rotaciją ⭐⭐⭐ (Išplėstinė)
+### Uždavinys 3: Key Vault slaptųjų duomenų rotacijos įgyvendinimas ⭐⭐⭐ (Sudėtinga)
 
-**Tikslas**: Laikyti trečiosios šalies API raktus Key Vault ir pasiekti juos naudojant tvarkomą tapatybę
+**Tikslas**: Saugojimui trečiųjų šalių API raktai Key Vault ir prieigos jiems naudojant valdomąją tapatybę
 
 **Scenarijus**: Jūsų programa turi kviesti išorinį API (OpenAI, Stripe, SendGrid), kuriam reikalingi API raktai.
 
 **Veiksmai**:
 
-1. **Sukurti Key Vault su RBAC:**
+1. **Sukurkite Key Vault su RBAC:**
 
-Failas: `infra/core/keyvault.bicep`
+**Failas: `infra/core/keyvault.bicep`**
 
 ```bicep
 param name string
@@ -978,13 +1033,13 @@ output name string = keyVault.name
 output uri string = keyVault.properties.vaultUri
 ```
 
-2. **Įrašyti slaptąsias reikšmes į Key Vault:**
+2. **Saugojimo slaptieji duomenys Key Vault:**
 
 ```bash
 # Gauti Key Vault pavadinimą
 KV_NAME=$(azd env get-values | grep AZURE_KEY_VAULT_NAME | cut -d '=' -f2 | tr -d '"')
 
-# Saugo trečiųjų šalių API raktus
+# Saugoti trečiųjų šalių API raktus
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
@@ -1001,9 +1056,9 @@ az keyvault secret set \
   --value "SG.xxxxxxxxxxxxx"
 ```
 
-3. **Programos kodas slaptųjų reikšmių gavimui:**
+3. **Programos kodas, kad gautų slaptuosius duomenis:**
 
-Failas: `src/config.js`
+**Failas: `src/config.js`**
 
 ```javascript
 const { DefaultAzureCredential } = require('@azure/identity');
@@ -1052,9 +1107,9 @@ class Config {
 module.exports = new Config();
 ```
 
-4. **Naudoti slaptąsias reikšmes programoje:**
+4. **Naudokite slaptuosius duomenis programoje:**
 
-Failas: `src/app.js`
+**Failas: `src/app.js`**
 
 ```javascript
 const express = require('express');
@@ -1063,7 +1118,7 @@ const { OpenAI } = require('openai');
 
 const app = express();
 
-// Inicializuokite OpenAI naudodami raktą iš Key Vault
+// Inicializuoti OpenAI naudodami raktą iš Key Vault
 let openaiClient;
 
 async function initializeServices() {
@@ -1072,7 +1127,7 @@ async function initializeServices() {
   console.log('✅ Services initialized with secrets from Key Vault');
 }
 
-// Iškvieskite paleidimo metu
+// Kviesti paleidimo metu
 initializeServices().catch(console.error);
 
 app.post('/chat', async (req, res) => {
@@ -1108,21 +1163,21 @@ curl -X POST https://myapp.azurecontainerapps.io/chat \
 ```
 
 **✅ Sėkmės kriterijai:**
-- ✅ Nėra API raktų kode ar aplinkos kintamuosiuose
+- ✅ Jokio API rakto kode ar aplinkos kintamuosiuose
 - ✅ Programa gauna raktus iš Key Vault
-- ✅ Trečiųjų šalių API veikia teisingai
-- ✅ Galima rotuoti raktus be kodo pakeitimų
+- ✅ Trečiųjų šalių API veikia tinkamai
+- ✅ Rakto sukimą galima atlikti nekeičiant kodo
 
-Rotuoti slaptąją reikšmę:
+**Rotate a secret:**
 
 ```bash
-# Atnaujinti slaptą reikšmę Key Vault
+# Atnaujinti slaptį Key Vault'e
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
   --value "sk-proj-NEW_KEY_HERE"
 
-# Paleisti programą iš naujo, kad ji naudotų naują raktą
+# Perkrauti programą, kad ji gautų naują raktą
 az containerapp revision restart \
   --name myapp \
   --resource-group rg-myapp
@@ -1136,26 +1191,26 @@ az containerapp revision restart \
 
 ### 1. Autentifikavimo modeliai ✓
 
-Išbandykite savo supratimą:
+Patikrinkite savo supratimą:
 
-- [ ] **K1**: Kokie yra trys pagrindiniai autentifikavimo modeliai? 
-  - **A**: Ryšio eilutės (senstelėjęs), Key Vault nuorodos (perėjimas), Tvarkoma tapatybė (geriausia praktika)
+- [ ] **Q1**: Kokie yra trys pagrindiniai autentifikavimo modeliai? 
+  - **A**: Connection strings (legacy), Key Vault references (transition), Managed Identity (best)
 
-- [ ] **K2**: Kodėl tvarkoma tapatybė geresnė už ryšio eilutes?
-  - **A**: Nėra slaptųjų duomenų kode, automatinis keitimas, pilnas audito įrašas, RBAC leidimai
+- [ ] **Q2**: Kodėl managed identity geriau nei connection strings?
+  - **A**: Nėra slaptumų kode, automatinis sukimasis, pilnas audito įrašas, RBAC teisės
 
-- [ ] **K3**: Kada naudotumėte vartotojui priskirtą tapatybę vietoje sistemos priskirtos?
-  - **A**: Kai tapatybę reikia dalintis tarp kelių išteklių arba kai tapatybės gyvavimo ciklas nepriklauso nuo ištekliaus
+- [ ] **Q3**: Kada naudotumėte user-assigned identity vietoje system-assigned?
+  - **A**: Kai tapatybė dalijama tarp kelių išteklių arba kai tapatybės gyvavimo ciklas nepriklauso nuo ištekliaus gyvavimo ciklo
 
 **Praktinis patikrinimas:**
 ```bash
-# Patikrinkite, kokio tipo identitetą naudoja jūsų programa
+# Patikrinkite, kokio tipo tapatybę naudoja jūsų programa
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
 
-# Išvardinkite visus vaidmenų priskyrimus šiam identitetui
+# Išvardykite visus vaidmenų priskyrimus šiai tapatybei
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 ```
@@ -1164,23 +1219,23 @@ az role assignment list \
 
 ### 2. RBAC ir leidimai ✓
 
-Išbandykite savo supratimą:
+Patikrinkite savo supratimą:
 
-- [ ] **K1**: Koks yra vaidmens ID "Storage Blob Data Contributor"?
+- [ ] **Q1**: Koks yra role ID "Storage Blob Data Contributor"?
   - **A**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
 
-- [ ] **K2**: Kokias teises suteikia "Key Vault Secrets User"?
-  - **A**: Tik skaitymo teisė prie slaptųjų reikšmių (negali kurti, atnaujinti ar trinti)
+- [ ] **Q2**: Kokias teises suteikia "Key Vault Secrets User"?
+  - **A**: Skaitymo prieiga prie slaptų reikšmių (negali kurti, atnaujinti ar ištrinti)
 
-- [ ] **K3**: Kaip suteikti Container App prieigą prie Azure SQL?
-  - **A**: Priskirti vaidmenį "SQL DB Contributor" arba konfigūruoti Azure AD autentifikaciją SQL
+- [ ] **Q3**: Kaip suteikti Container App prieigą prie Azure SQL?
+  - **A**: Priskirti "SQL DB Contributor" rolę arba sukonfigūruoti Microsoft Entra ID autentifikavimą SQL
 
 **Praktinis patikrinimas:**
 ```bash
-# Rasti konkrečią rolę
+# Rasti konkretų vaidmenį
 az role definition list --name "Storage Blob Data Contributor"
 
-# Patikrinkite, kokios rolės priskirtos jūsų tapatybei
+# Patikrinkite, kokie vaidmenys priskirti jūsų tapatybei
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID --output table
 ```
@@ -1189,19 +1244,20 @@ az role assignment list --assignee $PRINCIPAL_ID --output table
 
 ### 3. Key Vault integracija ✓
 
-Išbandykite savo supratimą:
+Patikrinkite savo supratimą:
+
 - [ ] **Q1**: Kaip įjungti RBAC Key Vault vietoje prieigos politikų?
-  - **A**: Nustatykite `enableRbacAuthorization: true` Bicep
+  - **A**: Nustatykite `enableRbacAuthorization: true` Bicep faile
 
-- [ ] **Q2**: Kuri Azure SDK biblioteka tvarko autentifikaciją su tvarkoma tapatybe?
-  - **A**: `@azure/identity` su klase `DefaultAzureCredential`
+- [ ] **Q2**: Kuri Azure SDK biblioteka tvarko managed identity autentifikaciją?
+  - **A**: `@azure/identity` su `DefaultAzureCredential` klase
 
-- [ ] **Q3**: Kiek laiko Key Vault paslaptys išlieka talpykloje?
+- [ ] **Q3**: Kiek laiko Key Vault secretai lieka talpykloje?
   - **A**: Priklauso nuo programos; įgyvendinkite savo talpyklos strategiją
 
-**Hands-On Verification:**
+**Praktinis patikrinimas:**
 ```bash
-# Patikrinti prieigą prie Key Vault
+# Patikrinti Key Vault prieigą
 az keyvault secret show \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
@@ -1211,64 +1267,64 @@ az keyvault secret show \
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ Laukiamas rezultatas: true
+# ✅ Tikėtinas rezultatas: true
 ```
 
 ---
 
-## Geriausios saugumo praktikos
+## Saugumo geriausios praktikos
 
 ### ✅ DARYTI:
 
-1. **Visada naudokite tvarkomą tapatybę produkcijoje**
+1. **Visada naudokite managed identity gamyboje**
    ```bicep
    identity: {
      type: 'SystemAssigned'
    }
    ```
 
-2. **Naudokite mažiausiai privilegijų reikalaujančius RBAC vaidmenis**
-   - Naudokite "Reader" vaidmenis, kai įmanoma
-   - Venkite "Owner" ar "Contributor", nebent būtina
+2. **Naudokite mažiausių privilegijų RBAC roles**
+   - Naudokite "Reader" roles, kai įmanoma
+   - Venkite "Owner" arba "Contributor", nebent būtina
 
-3. **Saugokite trečiųjų šalių raktus Key Vault**
+3. **Laikykite trečiųjų šalių raktus Key Vault**
    ```javascript
    const apiKey = await secretClient.getSecret('ThirdPartyApiKey');
    ```
 
-4. **Įgalinkite audito žurnalavimą**
+4. **Įjunkite audito žurnalavimą**
    ```bicep
    diagnosticSettings: {
      logs: [{ category: 'AuditEvent', enabled: true }]
    }
    ```
 
-5. **Naudokite skirtingas tapatybes dev/staging/prod**
+5. **Naudokite skirtingas tapatybes dev/staging/prod aplinkoms**
    ```bash
    azd env new dev
    azd env new staging
    azd env new prod
    ```
 
-6. **Reguliariai keiskite paslaptis**
-   - Nustatykite galiojimo datas Key Vault paslaptims
-   - Automatizuokite rotaciją su Azure Functions
+6. **Reguliariai rotuokite slaptinius**
+   - Nustatykite galiojimo datas Key Vault slaptiniams
+   - Automatizuokite sukimą su Azure Functions
 
-### ❌ NEDARYTI:
+### ❌ NEDARYKITE:
 
-1. **Niekada neįrašykite paslapčių į kodą**
+1. **Niekada neįkelkite slaptumų tiesiogiai į kodą**
    ```javascript
-   // ❌ BLOGAI
+   // ❌ BLOGAS
    const apiKey = "sk-proj-xxxxxxxxxxxxx";
    ```
 
-2. **Nenaudokite connection strings produkcijoje**
+2. **Nenaudokite connection strings gamyboje**
    ```javascript
-   // ❌ BLOGAI
+   // ❌ BLOGAS
    BlobServiceClient.fromConnectionString(process.env.STORAGE_CONNECTION_STRING)
    ```
 
-3. **Nesuteikite perteklinių leidimų**
+3. **Nesuteikite perteklinių teisių**
    ```bicep
    // ❌ BAD - too much access
    roleDefinitionId: 'Owner'
@@ -1277,7 +1333,7 @@ az keyvault show \
    roleDefinitionId: 'Storage Blob Data Reader'
    ```
 
-4. **Neloginkite paslapčių**
+4. **Neloginkite slaptumų**
    ```javascript
    // ❌ BLOGAI
    console.log('API Key:', apiKey);
@@ -1286,7 +1342,7 @@ az keyvault show \
    console.log('API Key retrieved successfully');
    ```
 
-5. **Nesidalinkite produkcijos tapatybėmis tarp aplinkų**
+5. **Nedalykite gamybinių tapatybių tarp aplinkų**
    ```bicep
    // ❌ BAD - same identity for dev and prod
    // ✅ GOOD - separate identities per environment
@@ -1296,7 +1352,7 @@ az keyvault show \
 
 ## Trikčių šalinimo vadovas
 
-### Problema: "Unauthorized" prisijungiant prie Azure Storage
+### Problema: "Unauthorized" bandant pasiekti Azure Storage
 
 **Simptomai:**
 ```
@@ -1304,10 +1360,10 @@ Error: Unauthorized (403)
 AuthorizationPermissionMismatch: This request is not authorized to perform this operation
 ```
 
-**Diagnostika:**
+**Diagnozė:**
 
 ```bash
-# Patikrinkite, ar valdomoji tapatybė įjungta
+# Patikrinkite, ar įjungta valdomoji tapatybė
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
@@ -1323,7 +1379,7 @@ az role assignment list --assignee $PRINCIPAL_ID
 
 **Sprendimai:**
 
-1. **Suteikite tinkamą RBAC vaidmenį:**
+1. **Suteikite tinkamą RBAC rolę:**
 ```bash
 STORAGE_ID=$(az storage account show --name mystorageaccount --resource-group rg-myapp --query "id" -o tsv)
 az role assignment create \
@@ -1332,13 +1388,13 @@ az role assignment create \
   --scope $STORAGE_ID
 ```
 
-2. **Palaukite propagacijos (gali užtrukti 5-10 minučių):**
+2. **Palaukite propagacijos (gali užtrukti 5–10 minučių):**
 ```bash
-# Patikrinti vaidmens priskyrimo būseną
+# Patikrinti rolės priskyrimo būseną
 az role assignment list --assignee $PRINCIPAL_ID --scope $STORAGE_ID
 ```
 
-3. **Patikrinkite, kad programos kodas naudoja teisingą kredencialą:**
+3. **Patikrinkite, ar programos kodas naudoja tinkamą kredencialą:**
 ```javascript
 // Įsitikinkite, kad naudojate DefaultAzureCredential
 const credential = new DefaultAzureCredential();
@@ -1346,7 +1402,7 @@ const credential = new DefaultAzureCredential();
 
 ---
 
-### Problema: Prieiga prie Key Vault atmesta
+### Problema: Key Vault prieiga atmesta
 
 **Simptomai:**
 ```
@@ -1354,7 +1410,7 @@ Error: Forbidden (403)
 The user, group or application does not have secrets get permission
 ```
 
-**Diagnostika:**
+**Diagnozė:**
 
 ```bash
 # Patikrinkite, ar Key Vault RBAC įjungtas
@@ -1371,14 +1427,14 @@ az role assignment list \
 
 **Sprendimai:**
 
-1. **Įgalinkite RBAC Key Vault:**
+1. **Įjunkite RBAC Key Vault:**
 ```bash
 az keyvault update \
   --name $KV_NAME \
   --enable-rbac-authorization true
 ```
 
-2. **Suteikite Key Vault Secrets User vaidmenį:**
+2. **Suteikite Key Vault Secrets User rolę:**
 ```bash
 KV_ID=$(az keyvault show --name $KV_NAME --query "id" -o tsv)
 az role assignment create \
@@ -1389,7 +1445,7 @@ az role assignment create \
 
 ---
 
-### Problema: DefaultAzureCredential neveikia lokaliai
+### Problema: DefaultAzureCredential nepavyksta lokaliai
 
 **Simptomai:**
 ```
@@ -1397,10 +1453,10 @@ Error: DefaultAzureCredential failed to retrieve a token
 CredentialUnavailableError: No credential available
 ```
 
-**Diagnostika:**
+**Diagnozė:**
 
 ```bash
-# Patikrinkite, ar esate prisijungę
+# Patikrinkite, ar prisijungta
 az account show
 
 # Patikrinkite Azure CLI autentifikaciją
@@ -1426,7 +1482,7 @@ export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 ```
 
-4. **Arba lokaliai naudokite kitą kredencialą:**
+4. **Arba naudokite kitą kredencialą lokaliai:**
 ```javascript
 const { DefaultAzureCredential, AzureCliCredential } = require('@azure/identity');
 
@@ -1438,20 +1494,20 @@ const credential = process.env.NODE_ENV === 'production'
 
 ---
 
-### Problema: Vaidmens priskyrimo propagacija užtrunka per ilgai
+### Problema: Rolės priskyrimas per ilgai nepropaguojamas
 
 **Simptomai:**
-- Vaidmuo sėkmingai priskirtas
-- Vis tiek gaunama 403 klaida
-- Periodiška prieiga (kartais veikia, kartais neveikia)
+- Rolė priskirta sėkmingai
+- Vis tiek gaunami 403 klaidos
+- Prieiga periodiškai (kartais veikia, kartais ne)
 
 **Paaiškinimas:**
-Azure RBAC pakeitimams gali prireikti 5-10 minučių, kol jie pasklinda visame pasaulyje.
+Azure RBAC pakeitimams gali prireikti 5–10 minučių, kad jie būtų propaguoti visame pasaulyje.
 
 **Sprendimas:**
 
 ```bash
-# Palaukite ir bandykite iš naujo
+# Palaukite ir bandykite dar kartą
 echo "Waiting for RBAC propagation..."
 sleep 300  # Palaukite 5 minučių
 
@@ -1468,35 +1524,35 @@ az containerapp revision restart \
 
 ## Kainų svarstymai
 
-### Tvarkomų tapatybių kaštai
+### Managed Identity sąnaudos
 
-| Ištekliai | Kaina |
+| Resource | Cost |
 |----------|------|
-| **Tvarkoma tapatybė** | 🆓 **NEMOKAMA** - Nėra mokesčio |
+| **Managed Identity** | 🆓 **NEMOKAMA** - Nėra mokesčio |
 | **RBAC Role Assignments** | 🆓 **NEMOKAMA** - Nėra mokesčio |
-| **Azure AD Token Requests** | 🆓 **NEMOKAMA** - Įskaičiuota |
-| **Key Vault Operations** | $0.03 per 10,000 operacijų |
-| **Key Vault Storage** | $0.024 už paslaptį per mėnesį |
+| **Microsoft Entra ID Token Requests** | 🆓 **NEMOKAMA** - Įtraukta |
+| **Key Vault Operations** | $0.03 per 10,000 operations |
+| **Key Vault Storage** | $0.024 per secret per month |
 
-**Tvarkoma tapatybė leidžia sutaupyti, nes:**
-- ✅ Pašalina poreikį naudoti Key Vault operacijas tarnybų autentifikacijai
-- ✅ Mažina saugumo incidentus (nėra nutekėjusių kredencialų)
-- ✅ Sumažina operacinę naštą (nėra rankinės rotacijos)
+**Managed identity sutaupo pinigų dėl:**
+- ✅ Mažina Key Vault operacijų poreikį paslaugų tarpusavio autentifikacijai
+- ✅ Sumažina saugumo incidentus (nėra nutekėjusių kredencialų)
+- ✅ Sumažina operacinį krūvį (nereikia rankinio sukimą)
 
-**Pavyzdinis kaštų palyginimas (mėnesinis):**
+**Pavyzdinis mėnesinių kainų palyginimas:**
 
-| Scenarijus | Connection Strings | Tvarkoma tapatybė | Sutaupymai |
+| Scenario | Connection Strings | Managed Identity | Savings |
 |----------|-------------------|-----------------|---------|
-| Maža programa (1M užklausų) | ~$50 (Key Vault + ops) | ~$0 | $50/mėn |
-| Vidutinė programa (10M užklausų) | ~$200 | ~$0 | $200/mėn |
-| Didelė programa (100M užklausų) | ~$1,500 | ~$0 | $1,500/mėn |
+| Small app (1M requests) | ~$50 (Key Vault + ops) | ~$0 | $50/month |
+| Medium app (10M requests) | ~$200 | ~$0 | $200/month |
+| Large app (100M requests) | ~$1,500 | ~$0 | $1,500/month |
 
 ---
 
 ## Sužinokite daugiau
 
 ### Oficialioji dokumentacija
-- [Azure tvarkoma tapatybė](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
+- [Azure Managed Identity](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
 - [Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)
 - [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)
 - [DefaultAzureCredential](https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential)
@@ -1508,40 +1564,40 @@ az containerapp revision restart \
 
 ### Kiti žingsniai šiame kurse
 - ← Ankstesnis: [Konfigūracijos valdymas](configuration.md)
-- → Toliau: [Pirmasis projektas](first-project.md)
+- → Kitas: [Pirmas projektas](first-project.md)
 - 🏠 [Kurso pradžia](../../README.md)
 
 ### Susiję pavyzdžiai
-- [Microsoft Foundry Models Chat Example](../../../../examples/azure-openai-chat) - Naudoja tvarkomą tapatybę Microsoft Foundry Models
-- [Mikroservisų pavyzdys](../../../../examples/microservices) - Daugiapaslaugės autentifikacijos šablonai
+- [Microsoft Foundry Models Chat Example](../../../../examples/azure-openai-chat) - Naudoja managed identity Microsoft Foundry Models
+- [Microservices Example](../../../../examples/microservices) - Autentifikavimo modeliai kelioms paslaugoms
 
 ---
 
 ## Santrauka
 
 **Jūs sužinojote:**
-- ✅ Trys autentifikacijos schemos (connection strings, Key Vault, tvarkoma tapatybė)
-- ✅ Kaip įjungti ir sukonfigūruoti tvarkomą tapatybę AZD
-- ✅ RBAC vaidmenų priskyrimas Azure paslaugoms
-- ✅ Key Vault integracija trečiųjų šalių paslaptims
-- ✅ Vartotojo priskirtos vs sistemos priskirtos tapatybės
-- ✅ Saugumo geros praktikos ir trikčių šalinimas
+- ✅ Trys autentifikavimo modeliai (connection strings, Key Vault, managed identity)
+- ✅ Kaip įjungti ir konfigūruoti managed identity AZD
+- ✅ RBAC rolės priskyrimai Azure paslaugoms
+- ✅ Key Vault integracija trečiųjų šalių slaptiniams
+- ✅ User-assigned vs system-assigned tapatybės
+- ✅ Saugumo geriausios praktikos ir trikčių šalinimas
 
 **Pagrindinės išvados:**
-1. **Visada naudokite tvarkomą tapatybę produkcijoje** - Jokios slaptos informacijos, automatinė rotacija
-2. **Naudokite mažiausiai privilegijų reikalaujančius RBAC vaidmenis** - Suteikite tik būtinus leidimus
-3. **Laikykite trečiųjų šalių raktus Key Vault** - Centralizuotas slaptųjų duomenų valdymas
+1. **Visada naudokite managed identity gamyboje** - Nėra slaptumų, automatinis sukimasis
+2. **Naudokite mažiausių privilegijų RBAC roles** - Suteikite tik būtiniausias teises
+3. **Laikykite trečiųjų šalių raktus Key Vault** - Centralizuota slaptinių valdymas
 4. **Atskirkite tapatybes pagal aplinką** - Dev, staging, prod izoliacija
 5. **Įjunkite audito žurnalavimą** - Sekite, kas ir ką pasiekė
 
-**Tolimesni žingsniai:**
-1. Užbaikite aukščiau pateiktas praktines užduotis
-2. Migriruokite esamą programą nuo connection strings prie tvarkomos tapatybės
-3. Sukurkite pirmąjį AZD projektą, saugumą užtikrinant nuo pat pradžių: [Pirmasis projektas](first-project.md)
+**Kiti žingsniai:**
+1. Atlikite aukščiau nurodytas praktines užduotis
+2. Migravimas esamos programos nuo connection strings prie managed identity
+3. Sukurkite pirmąjį AZD projektą su saugumu nuo pradžios: [Pirmas projektas](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Atsakomybės atsisakymas**:
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipkite dėmesį, kad automatizuoti vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl kritinės informacijos rekomenduojama kreiptis į profesionalų žmogaus vertėją. Mes neatsakome už jokius nesusipratimus ar neteisingas interpretacijas, kylančias dėl šio vertimo naudojimo.
+**Atsakomybės apribojimas**:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojama naudoti profesionalų žmogiškąjį vertimą. Mes neatsakome už jokius nesusipratimus ar neteisingą interpretaciją, kilusią naudojantis šiuo vertimu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

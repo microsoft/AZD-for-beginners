@@ -1,24 +1,24 @@
 # Corak Pengesahan dan Identiti Terurus
 
-⏱️ **Anggaran Masa**: 45-60 minit | 💰 **Kesan Kos**: Percuma (tiada caj tambahan) | ⭐ **Kerumitan**: Sederhana
+⏱️ **Anggaran Masa**: 45-60 minit | 💰 **Impak Kos**: Percuma (tiada caj tambahan) | ⭐ **Kerumitan**: Sederhana
 
 **📚 Laluan Pembelajaran:**
 - ← Sebelumnya: [Pengurusan Konfigurasi](configuration.md) - Mengurus pembolehubah persekitaran dan rahsia
 - 🎯 **Anda Di Sini**: Pengesahan & Keselamatan (Identiti Terurus, Key Vault, corak selamat)
-- → Seterusnya: [Projek Pertama](first-project.md) - Membina aplikasi AZD pertama anda
-- 🏠 [Halaman Kursus](../../README.md)
+- → Seterusnya: [Projek Pertama](first-project.md) - Bangunkan aplikasi AZD pertama anda
+- 🏠 [Laman Utama Kursus](../../README.md)
 
 ---
 
-## Apa Yang Anda Akan Pelajari
+## Apa Yang Akan Anda Pelajari
 
-Dengan menyelesaikan pelajaran ini, anda akan:
-- Memahami corak pengesahan Azure (kunci, string sambungan, identiti terurus)
+Dengan menyiapkan pelajaran ini, anda akan:
+- Memahami corak pengesahan Azure (kunci, rentetan sambungan, identiti terurus)
 - Melaksanakan **Identiti Terurus** untuk pengesahan tanpa kata laluan
-- Melindungi rahsia dengan integrasi **Azure Key Vault**
-- Mengkonfigurasi **kawalan akses berasaskan peranan (RBAC)** untuk penempatan AZD
-- Menerapkan amalan keselamatan terbaik dalam Container Apps dan perkhidmatan Azure
-- Memindahkan dari pengesahan berasaskan kunci ke berasaskan identiti
+- Mengamankan rahsia dengan integrasi **Azure Key Vault**
+- Mengkonfigurasi **kendalian akses berasaskan peranan (RBAC)** untuk penghantaran AZD
+- Mengaplikasikan amalan keselamatan terbaik dalam Container Apps dan perkhidmatan Azure
+- Berpindah dari pengesahan berasaskan kunci ke berasaskan identiti
 
 ## Mengapa Identiti Terurus Penting
 
@@ -26,7 +26,7 @@ Dengan menyelesaikan pelajaran ini, anda akan:
 
 **Sebelum Identiti Terurus:**
 ```javascript
-// ❌ RISIKO KESELAMATAN: Rahsia keras dalam kod
+// ❌ RISIKO KESELAMATAN: Rahsia yang dikodkan keras dalam kod
 const connectionString = "Server=mydb.database.windows.net;User=admin;Password=P@ssw0rd123";
 const storageKey = "xK7mN9pQ2wR5tY8uI0oP3aS6dF1gH4jK...";
 const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
@@ -34,9 +34,9 @@ const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 
 **Masalah:**
 - 🔴 **Rahsia terdedah** dalam kod, fail konfigurasi, pembolehubah persekitaran
-- 🔴 **Rotasi kelayakan** memerlukan perubahan kod dan penempatan semula
+- 🔴 **Putaran kelayakan** memerlukan perubahan kod dan penghantaran semula
 - 🔴 **Mimpi ngeri audit** - siapa mengakses apa, bila?
-- 🔴 **Sebaran** - rahsia tersebar di pelbagai sistem
+- 🔴 **Bersebar** - rahsia bertaburan di pelbagai sistem
 - 🔴 **Risiko pematuhan** - gagal audit keselamatan
 
 ### Penyelesaian: Identiti Terurus
@@ -51,14 +51,14 @@ const client = new BlobServiceClient(
 );
 ```
 
-**Kelebihan:**
+**Faedah:**
 - ✅ **Tiada rahsia** dalam kod atau konfigurasi
-- ✅ **Rotasi automatik** - Azure uruskan
-- ✅ **Jejak audit penuh** dalam log Azure AD
-- ✅ **Keselamatan berpusat** - urus dalam Azure Portal
+- ✅ **Putaran automatik** - Azure yang uruskan
+- ✅ **Jejak audit penuh** dalam log Microsoft Entra ID
+- ✅ **Keselamatan berpusat** - urus melalui Portal Azure
 - ✅ **Sedia patuh** - memenuhi piawaian keselamatan
 
-**Analoginya**: Pengesahan tradisional adalah seperti membawa banyak kunci fizikal untuk pintu berbeza. Identiti Terurus seperti mempunyai lencana keselamatan yang secara automatik memberikan akses berdasarkan siapa anda—tiada kunci untuk hilang, salin, atau putar.
+**Analogi**: Pengesahan tradisional seperti membawa banyak kunci fizikal untuk pelbagai pintu. Identiti Terurus seperti mempunyai kad keselamatan yang secara automatik memberi akses berdasarkan siapa anda—tiada kunci untuk hilang, salin atau putar.
 
 ---
 
@@ -68,10 +68,10 @@ const client = new BlobServiceClient(
 
 ```mermaid
 sequenceDiagram
-    participant App as Apl Anda<br/>(Apl Kontena)
-    participant MI as Identiti Terurus<br/>(Azure AD)
-    participant KV as Kunci Simpanan
-    participant Storage as Storan Azure
+    participant App as Aplikasi Anda<br/>(Aplikasi Kontena)
+    participant MI as Identiti Dikawal<br/>(Microsoft Entra ID)
+    participant KV as Kunci Peti
+    participant Storage as Penyimpanan Azure
     participant DB as Azure SQL
     
     App->>MI: Minta token akses<br/>(automatik)
@@ -79,49 +79,51 @@ sequenceDiagram
     MI-->>App: Pulangkan token<br/>(sah 1 jam)
     
     App->>KV: Dapatkan rahsia<br/>(menggunakan token)
-    KV->>KV: Semak kebenaran RBAC
+    KV->>KV: Periksa kebenaran RBAC
     KV-->>App: Pulangkan nilai rahsia
     
     App->>Storage: Muat naik blob<br/>(menggunakan token)
-    Storage->>Storage: Semak kebenaran RBAC
+    Storage->>Storage: Periksa kebenaran RBAC
     Storage-->>App: Berjaya
     
     App->>DB: Pertanyaan data<br/>(menggunakan token)
-    DB->>DB: Semak kebenaran SQL
-    DB-->>App: Pulangkan hasil
+    DB->>DB: Periksa kebenaran SQL
+    DB-->>App: Pulangkan keputusan
     
     Note over App,DB: Semua pengesahan tanpa kata laluan!
 ```
+
 ### Jenis-jenis Identiti Terurus
 
 ```mermaid
 graph TB
-    MI[Identiti Terurus]
+    MI[Identiti Diuruskan]
     SystemAssigned[Identiti Ditugaskan Sistem]
     UserAssigned[Identiti Ditugaskan Pengguna]
     
     MI --> SystemAssigned
     MI --> UserAssigned
     
-    SystemAssigned --> SA1[Siklus hidup terikat kepada sumber]
-    SystemAssigned --> SA2[Penciptaan/penghapusan automatik]
+    SystemAssigned --> SA1[Siklus hayat terikat kepada sumber]
+    SystemAssigned --> SA2[Penciptaan/pemadaman automatik]
     SystemAssigned --> SA3[Terbaik untuk satu sumber]
     
-    UserAssigned --> UA1[Siklus hidup bebas]
-    UserAssigned --> UA2[Penciptaan/penghapusan manual]
-    UserAssigned --> UA3[Digunakan bersama sumber-sumber]
+    UserAssigned --> UA1[Siklus hayat bebas]
+    UserAssigned --> UA2[Penciptaan/pemadaman manual]
+    UserAssigned --> UA3[Digunakan bersama sumber]
     
     style SystemAssigned fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style UserAssigned fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
 ```
-| Ciri | Ditugaskan Sistem | Ditugaskan Pengguna |
+
+| Ciri | Sistem Ditugaskan | Pengguna Ditugaskan |
 |---------|----------------|---------------|
-| **Kitaran Hayat** | Terikat pada sumber | Bebas |
+| **Kitar Hayat** | Terikat pada sumber | Bebas |
 | **Penciptaan** | Automatik dengan sumber | Penciptaan manual |
-| **Pemadaman** | Dipadam dengan sumber | Kekal selepas sumber dipadam |
+| **Penghapusan** | Dipadam bersama sumber | Kekal selepas penghapusan sumber |
 | **Perkongsian** | Satu sumber sahaja | Pelbagai sumber |
-| **Kegunaan** | Senario mudah | Senario pelbagai sumber kompleks |
-| **Lalai AZD** | ✅ Disyorkan | Pilihan |
+| **Kes Penggunaan** | Senario mudah | Senario kompleks pelbagai sumber |
+| **AZD Lalai** | ✅ Disyorkan | Pilihan |
 
 ---
 
@@ -129,7 +131,7 @@ graph TB
 
 ### Alat Diperlukan
 
-Anda sepatutnya sudah memasang ini dari pelajaran sebelumnya:
+Anda sepatutnya sudah memasang ini dari pelajaran sebelum:
 
 ```bash
 # Sahkan Azure Developer CLI
@@ -145,14 +147,14 @@ az --version
 
 - Langganan Azure aktif
 - Kebenaran untuk:
-  - Mewujudkan identiti terurus
-  - Menugaskan peranan RBAC
-  - Mewujudkan sumber Key Vault
-  - Menempatkan Container Apps
+  - Mencipta identiti terurus
+  - Menetapkan peranan RBAC
+  - Mencipta sumber Key Vault
+  - Menghantar Container Apps
 
 ### Prasyarat Pengetahuan
 
-Anda harus telah menyelesaikan:
+Anda sepatutnya telah melengkapkan:
 - [Panduan Pemasangan](installation.md) - Persediaan AZD
 - [Asas AZD](azd-basics.md) - Konsep teras
 - [Pengurusan Konfigurasi](configuration.md) - Pembolehubah persekitaran
@@ -161,11 +163,11 @@ Anda harus telah menyelesaikan:
 
 ## Pelajaran 1: Memahami Corak Pengesahan
 
-### Corak 1: String Sambungan (Lama - Elakkan)
+### Corak 1: Rentetan Sambungan (Warisan - Elak)
 
-**Bagaimana ia berfungsi:**
+**Cara kerjanya:**
 ```bash
-# Rentetan sambungan mengandungi kelayakan
+# String sambungan mengandungi kelayakan
 STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=xK7mN9pQ2wR5..."
 COSMOS_CONNECTION_STRING="AccountEndpoint=https://myaccount.documents.azure.com:443/;AccountKey=C2x7..."
 SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=P@ssw0rd..."
@@ -173,17 +175,17 @@ SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=
 
 **Masalah:**
 - ❌ Rahsia kelihatan dalam pembolehubah persekitaran
-- ❌ Direkod dalam sistem penempatan
-- ❌ Sukar untuk diputar
+- ❌ Dicatat dalam sistem penghantaran
+- ❌ Sukar diputar
 - ❌ Tiada jejak audit akses
 
-**Kapan guna:** Hanya untuk pembangunan tempatan, tidak untuk produksi.
+**Kapan digunakan:** Hanya untuk pembangunan setempat, tidak pernah produksi.
 
 ---
 
 ### Corak 2: Rujukan Key Vault (Lebih Baik)
 
-**Bagaimana ia berfungsi:**
+**Cara kerjanya:**
 ```bicep
 // Store secret in Key Vault
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
@@ -202,22 +204,22 @@ env: [
 ]
 ```
 
-**Kelebihan:**
+**Faedah:**
 - ✅ Rahsia disimpan dengan selamat dalam Key Vault
 - ✅ Pengurusan rahsia berpusat
-- ✅ Rotasi tanpa perubahan kod
+- ✅ Putaran tanpa perubahan kod
 
 **Keterbatasan:**
 - ⚠️ Masih menggunakan kunci/kata laluan
 - ⚠️ Perlu mengurus akses Key Vault
 
-**Kapan guna:** Langkah peralihan dari string sambungan ke identiti terurus.
+**Kapan digunakan:** Langkah peralihan dari rentetan sambungan ke identiti terurus.
 
 ---
 
 ### Corak 3: Identiti Terurus (Amalan Terbaik)
 
-**Bagaimana ia berfungsi:**
+**Cara kerjanya:**
 ```bicep
 // Enable managed identity
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -250,22 +252,75 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-**Kelebihan:**
+**Faedah:**
 - ✅ Tiada rahsia dalam kod/konfigurasi
-- ✅ Rotasi kelayakan automatik
+- ✅ Putaran kelayakan automatik
 - ✅ Jejak audit penuh
 - ✅ Kebenaran berasaskan RBAC
 - ✅ Sedia patuh
 
-**Kapan guna:** Sentiasa, untuk aplikasi produksi.
+**Kapan digunakan:** Sentiasa, untuk aplikasi produksi.
+
+---
+
+### Corak 4: Prinsipal Perkhidmatan (CI/CD & Automasi)
+
+Identiti terurus adalah piawai emas *untuk sumber yang berjalan dalam Azure*. Tetapi bagaimana dengan perkara yang berjalan **di luar** Azure—seperti pipeline CI/CD pada agen binaan, atau skrip pada laptop anda yang tidak boleh guna log masuk interaktif? Di sinilah **prinsipal perkhidmatan** digunakan: identiti bukan manusia dengan kelayakan sendiri yang boleh digunakan oleh proses automatik untuk log masuk.
+
+**Cara kerjanya:**
+
+Cipta prinsipal perkhidmatan yang dipautkan ke kumpulan sumber (kelebihan paling minimum):
+
+```bash
+az ad sp create-for-rbac \
+  --name "myapp-cicd" \
+  --role contributor \
+  --scopes /subscriptions/<sub-id>/resourceGroups/<rg-name>
+```
+
+Ini mencetak ID klien, rahsia klien dan ID penyewa. azd boleh log masuk secara bukan interaktif dengan ini:
+
+```bash
+azd auth login \
+  --client-id "<appId>" \
+  --client-secret "<password>" \
+  --tenant-id "<tenant>"
+```
+
+**Utamakan kredensial berpersekutuan (OIDC) berbanding rahsia.** Gantikan rahsia klien jangka panjang dengan konfigurasi kredensial berpersekutuan supaya pipeline bertukar token jangka pendek—tiada rahsia bocor atau perlu diputar:
+
+```bash
+azd auth login \
+  --client-id "<appId>" \
+  --federated-credential-provider "github" \
+  --tenant-id "<tenant>"
+```
+
+> `azd pipeline config` menyediakan ini secara automatik. Lihat panduan CI/CD di [Bab 8](../chapter-08-production/production-ai-practices.md).
+
+**Faedah:**
+- ✅ Berfungsi di luar Azure (agen binaan, premis, awan lain)
+- ✅ Boleh dipautkan pada satu kumpulan sumber dengan satu peranan
+- ✅ Varian berpersekutuan (OIDC) tiada rahsia disimpan
+
+**Pertukaran:**
+- ⚠️ Varian berasaskan rahsia memerlukan penyimpanan dan putaran yang teliti
+- ⚠️ Rahsia bocor memberi akses sepenuhnya pada apa yang SP boleh lakukan—jaga skop ketat
+
+**Kapan digunakan:** Pipeline CI/CD dan automasi yang tidak boleh guna identiti terurus. Sentiasa utamakan varian **berpersekutuan/OIDC** berbanding rahsia klien, dan utamakan identiti terurus apabila beban kerja berjalan dalam Azure.
+
+**Menyimpan kelayakan dengan selamat:**
+- Jangan pernah komit rahsia—gunakan kedai rahsia pipeline anda (GitHub Actions secrets, kumpulan pembolehubah Azure DevOps / Key Vault).
+- Pautkan SP pada peranan terkecil dan kumpulan sumber yang diperlukan.
+- Tetapkan tarikh luput dan putar, atau hapuskan rahsia sepenuhnya dengan OIDC.
 
 ---
 
 ## Pelajaran 2: Melaksanakan Identiti Terurus dengan AZD
 
-### Pelaksanaan Langkah-demi-Langkah
+### Pelaksanaan Langkah Demi Langkah
 
-Mari bina Container App yang selamat menggunakan identiti terurus untuk mengakses Azure Storage dan Key Vault.
+Mari bina Container App selamat yang menggunakan identiti terurus untuk mengakses Azure Storage dan Key Vault.
 
 ### Struktur Projek
 
@@ -286,7 +341,7 @@ secure-app/
     └── Dockerfile
 ```
 
-### 1. Konfigurasikan AZD (azure.yaml)
+### 1. Konfigurasi AZD (azure.yaml)
 
 ```yaml
 name: secure-app
@@ -441,7 +496,7 @@ output id string = containerApp.id
 output url string = 'https://${containerApp.properties.configuration.ingress.fqdn}'
 ```
 
-### 4. Modul Penugasan Peranan RBAC
+### 4. Modul Penetapan Peranan RBAC
 
 **Fail: `infra/core/role-assignment.bicep`**
 
@@ -476,7 +531,7 @@ const { SecretClient } = require('@azure/keyvault-secrets');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🔑 Inisialisasi kelayakan (berfungsi secara automatik dengan identiti yang diurus)
+// 🔑 Inisialisasi kelayakan (berfungsi secara automatik dengan identiti yang diuruskan)
 const credential = new DefaultAzureCredential();
 
 // Persediaan Azure Storage
@@ -493,7 +548,7 @@ const secretClient = new SecretClient(
   credential  // Tiada kunci diperlukan!
 );
 
-// Semakan kesihatan
+// Pemeriksaan kesihatan
 app.get('/health', (req, res) => {
   res.json({ status: 'healthy', authentication: 'managed-identity' });
 });
@@ -580,10 +635,10 @@ app.listen(PORT, () => {
 }
 ```
 
-### 6. Tempatkan dan Uji
+### 6. Hantar dan Uji
 
 ```bash
-# Inisialisasi persekitaran AZD
+# Mulakan persekitaran AZD
 azd init
 
 # Lancarkan infrastruktur dan aplikasi
@@ -596,7 +651,7 @@ APP_URL=$(azd env get-values | grep APP_URL | cut -d '=' -f2 | tr -d '"')
 curl $APP_URL/health
 ```
 
-**✅ Keluaran dijangka:**
+**✅ Output dijangka:**
 ```json
 {
   "status": "healthy",
@@ -609,7 +664,7 @@ curl $APP_URL/health
 curl -X POST $APP_URL/upload
 ```
 
-**✅ Keluaran dijangka:**
+**✅ Output dijangka:**
 ```json
 {
   "success": true,
@@ -618,12 +673,12 @@ curl -X POST $APP_URL/upload
 }
 ```
 
-**Uji senarai kontena:**
+**Uji senarai bekas:**
 ```bash
 curl $APP_URL/containers
 ```
 
-**✅ Keluaran dijangka:**
+**✅ Output dijangka:**
 ```json
 {
   "containers": ["uploads"],
@@ -636,19 +691,19 @@ curl $APP_URL/containers
 
 ## Peranan RBAC Azure Biasa
 
-### ID Peranan Terbina Dalam untuk Identiti Terurus
+### ID Peranan Bina Dalam untuk Identiti Terurus
 
 | Perkhidmatan | Nama Peranan | ID Peranan | Kebenaran |
 |---------|-----------|---------|-------------|
-| **Storage** | Penyumbang Data Blob Storage | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Baca blob dan kontena |
-| **Storage** | Penyumbang Data Blob Storage | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Baca, tulis, hapus blob |
-| **Storage** | Penyumbang Data Antrian Storage | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Baca, tulis, hapus mesej antrian |
-| **Key Vault** | Pengguna Rahsia Key Vault | `4633458b-17de-408a-b874-0445c86b69e6` | Baca rahsia |
-| **Key Vault** | Pegawai Rahsia Key Vault | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Baca, tulis, hapus rahsia |
-| **Cosmos DB** | Pembaca Data Terbina Dalam Cosmos DB | `00000000-0000-0000-0000-000000000001` | Baca data Cosmos DB |
-| **Cosmos DB** | Penyumbang Data Terbina Dalam Cosmos DB | `00000000-0000-0000-0000-000000000002` | Baca, tulis data Cosmos DB |
-| **Pangkalan Data SQL** | Penyumbang SQL DB | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Urus pangkalan data SQL |
-| **Service Bus** | Pemilik Data Azure Service Bus | `090c5cfd-751d-490a-894a-3ce6f1109419` | Hantar, terima, urus mesej |
+| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Baca blob dan bekas |
+| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Baca, tulis, hapus blob |
+| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Baca, tulis, hapus mesej antrian |
+| **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Baca rahsia |
+| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Baca, tulis, hapus rahsia |
+| **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Baca data Cosmos DB |
+| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Baca, tulis data Cosmos DB |
+| **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Urus pangkalan data SQL |
+| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Hantar, terima, urus mesej |
 
 ### Cara Cari ID Peranan
 
@@ -669,11 +724,11 @@ az role definition list --name "Storage Blob Data Contributor"
 
 ### Latihan 1: Aktifkan Identiti Terurus untuk Aplikasi Sedia Ada ⭐⭐ (Sederhana)
 
-**Matlamat**: Tambah identiti terurus kepada penempatan Container App sedia ada
+**Matlamat**: Tambah identiti terurus pada penghantaran Container App sedia ada
 
-**Senario**: Anda ada Container App yang menggunakan string sambungan. Tukar kepada identiti terurus.
+**Senario**: Anda mempunyai Container App yang menggunakan rentetan sambungan. Tukar ke identiti terurus.
 
-**Titik Permulaan**: Container App dengan konfigurasi ini:
+**Titik Mula**: Container App dengan konfigurasi ini:
 
 ```bicep
 // ❌ Current: Using connection string
@@ -721,7 +776,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 3. **Kemas kini kod aplikasi:**
 
-**Sebelum (string sambungan):**
+**Sebelum (rentetan sambungan):**
 ```javascript
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -754,52 +809,52 @@ env: [
 ]
 ```
 
-5. **Tempatkan dan uji:**
+5. **Hantar dan uji:**
 
 ```bash
-# Lancarkan semula
+# Susun semula
 azd up
 
 # Uji bahawa ia masih berfungsi
 curl https://myapp.azurecontainerapps.io/upload
 ```
 
-**✅ Kriteria kejayaan:**
-- ✅ Aplikasi ditempatkan tanpa ralat
+**✅ Kriteria Kejayaan:**
+- ✅ Aplikasi dihantar tanpa ralat
 - ✅ Operasi Storage berfungsi (muat naik, senarai, muat turun)
-- ✅ Tiada string sambungan dalam pembolehubah persekitaran
-- ✅ Identiti kelihatan dalam Azure Portal di bawah blade "Identity"
+- ✅ Tiada rentetan sambungan dalam pembolehubah persekitaran
+- ✅ Identiti kelihatan di Portal Azure di bawah blad "Identity"
 
-**Pengesahan:**
+**Verifikasi:**
 
 ```bash
-# Semak identiti terurus diaktifkan
+# Periksa identiti yang diuruskan diaktifkan
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
 # ✅ Dijangka: "SystemAssigned"
 
-# Semak tugasan peranan
+# Periksa tugasan peranan
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv) \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.Storage/storageAccounts/mystorageaccount
-# ✅ Dijangka: Memaparkan peranan "Storage Blob Data Contributor"
+# ✅ Dijangka: Menunjukkan peranan "Storage Blob Data Contributor"
 ```
 
 **Masa**: 20-30 minit
 
 ---
 
-### Latihan 2: Akses Pelbagai Perkhidmatan dengan Identiti Ditugaskan Pengguna ⭐⭐⭐ (Lanjutan)
+### Latihan 2: Akses Pelbagai Perkhidmatan dengan Identiti Pengguna Ditugaskan ⭐⭐⭐ (Lanjutan)
 
-**Matlamat**: Cipta identiti ditugaskan pengguna dikongsi merentas beberapa Container Apps
+**Matlamat**: Cipta identiti pengguna ditugaskan yang dikongsi merentasi pelbagai Container Apps
 
-**Senario**: Anda ada 3 mikrosistem yang semua perlu akses ke akaun Storage dan Key Vault yang sama.
+**Senario**: Anda mempunyai 3 perkhidmatan mikro yang memerlukan akses ke akaun Storage dan Key Vault yang sama.
 
 **Langkah-langkah**:
 
-1. **Cipta identiti ditugaskan pengguna:**
+1. **Cipta identiti pengguna ditugaskan:**
 
 **Fail: `infra/core/identity.bicep`**
 
@@ -819,7 +874,7 @@ output principalId string = userAssignedIdentity.properties.principalId
 output clientId string = userAssignedIdentity.properties.clientId
 ```
 
-2. **Tugaskan peranan kepada identiti ditugaskan pengguna:**
+2. **Tetapkan peranan kepada identiti pengguna ditugaskan:**
 
 ```bicep
 // In main.bicep
@@ -856,7 +911,7 @@ resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' =
 }
 ```
 
-3. **Tugaskan identiti kepada beberapa Container Apps:**
+3. **Tetapkan identiti ke beberapa Container Apps:**
 
 ```bicep
 resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
@@ -893,14 +948,14 @@ resource orderService 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-4. **Kod aplikasi (semua perkhidmatan gunakan corak sama):**
+4. **Kod aplikasi (semua perkhidmatan guna corak sama):**
 
 ```javascript
 const { DefaultAzureCredential, ManagedIdentityCredential } = require('@azure/identity');
 
-// Untuk identiti yang ditugaskan pengguna, nyatakan ID klien
+// Untuk identiti yang ditetapkan pengguna, nyatakan ID klien
 const credential = new ManagedIdentityCredential(
-  process.env.AZURE_CLIENT_ID  // ID klien identiti yang ditugaskan pengguna
+  process.env.AZURE_CLIENT_ID  // ID klien identiti yang ditetapkan pengguna
 );
 
 // Atau gunakan DefaultAzureCredential (mengesan secara automatik)
@@ -912,7 +967,7 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-5. **Tempatkan dan sahkan:**
+5. **Hantar dan sahkan:**
 
 ```bash
 azd up
@@ -923,27 +978,27 @@ curl https://product-service.azurecontainerapps.io/upload
 curl https://order-service.azurecontainerapps.io/upload
 ```
 
-**✅ Kriteria kejayaan:**
-- ✅ Satu identiti dikongsi merentas 3 perkhidmatan
+**✅ Kriteria Kejayaan:**
+- ✅ Satu identiti dikongsi untuk 3 perkhidmatan
 - ✅ Semua perkhidmatan boleh akses Storage dan Key Vault
-- ✅ Identiti kekal jika satu perkhidmatan dipadam
+- ✅ Identiti kekal jika anda padam satu perkhidmatan
 - ✅ Pengurusan kebenaran berpusat
 
-**Kelebihan Identiti Ditugaskan Pengguna:**
-- Identiti tunggal untuk diurus
-- Kebenaran konsisten merentas perkhidmatan
+**Faedah Identiti Pengguna Ditugaskan:**
+- Satu identiti untuk diurus
+- Kebenaran konsisten merentasi perkhidmatan
 - Kekal selepas pemadaman perkhidmatan
-- Sesuai untuk seni bina kompleks
+- Lebih baik untuk seni bina kompleks
 
 **Masa**: 30-40 minit
 
 ---
 
-### Latihan 3: Laksanakan Rotasi Rahsia Key Vault ⭐⭐⭐ (Lanjutan)
+### Latihan 3: Laksanakan Putaran Rahsia Key Vault ⭐⭐⭐ (Lanjutan)
 
-**Matlamat**: Simpan kunci API pihak ketiga di Key Vault dan akses menggunakan identiti terurus
+**Matlamat**: Simpan kunci API pihak ketiga dalam Key Vault dan akses menggunakan identiti terurus
 
-**Senario**: Aplikasi anda perlu panggil API luaran (OpenAI, Stripe, SendGrid) yang memerlukan kunci API.
+**Senario**: Aplikasi anda perlu memanggil API luaran (OpenAI, Stripe, SendGrid) yang memerlukan kunci API.
 
 **Langkah-langkah**:
 
@@ -1020,7 +1075,7 @@ class Config {
   }
 
   async getSecret(secretName) {
-    // Semak cache terlebih dahulu
+    // Periksa cache terlebih dahulu
     if (this.cache[secretName]) {
       return this.cache[secretName];
     }
@@ -1096,22 +1151,22 @@ app.listen(3000, () => {
 });
 ```
 
-5. **Tempatkan dan uji:**
+5. **Hantar dan uji:**
 
 ```bash
 azd up
 
-# Uji bahawa kekunci API berfungsi
+# Uji bahawa kunci API berfungsi
 curl -X POST https://myapp.azurecontainerapps.io/chat \
   -H "Content-Type: application/json" \
   -d '{"message":"Hello AI"}'
 ```
 
-**✅ Kriteria kejayaan:**
-- ✅ Tiada kunci API dalam kod atau pembolehubah persekitaran
-- ✅ Aplikasi dapatkan kunci dari Key Vault
+**✅ Kriteria Kejayaan:**
+- ✅ Tiada kekunci API dalam kod atau pembolehubah persekitaran
+- ✅ Aplikasi mendapatkan kekunci dari Key Vault
 - ✅ API pihak ketiga berfungsi dengan betul
-- ✅ Boleh putar kunci tanpa ubah kod
+- ✅ Boleh mengubah kekunci tanpa perubahan kod
 
 **Putar rahsia:**
 
@@ -1122,7 +1177,7 @@ az keyvault secret set \
   --name "OpenAI-ApiKey" \
   --value "sk-proj-NEW_KEY_HERE"
 
-# Mulakan semula aplikasi untuk menggunakan kunci baru
+# Mulakan semula aplikasi untuk mengambil kunci baru
 az containerapp revision restart \
   --name myapp \
   --resource-group rg-myapp
@@ -1132,30 +1187,30 @@ az containerapp revision restart \
 
 ---
 
-## Titik Semak Pengetahuan
+## Titik Pemeriksaan Pengetahuan
 
 ### 1. Corak Pengesahan ✓
 
 Uji pemahaman anda:
 
 - [ ] **S1**: Apakah tiga corak pengesahan utama? 
-  - **J**: String sambungan (lama), rujukan Key Vault (peralihan), Identiti Terurus (terbaik)
+  - **J**: Talian sambungan (warisan), Rujukan Key Vault (peralihan), Identiti Terurus (terbaik)
 
-- [ ] **S2**: Mengapa identiti terurus lebih baik daripada string sambungan?
-  - **J**: Tiada rahsia dalam kod, rotasi automatik, jejak audit penuh, kebenaran RBAC
+- [ ] **S2**: Kenapa identiti terurus lebih baik daripada taliannya sambungan?
+  - **J**: Tiada rahsia dalam kod, putaran automatik, jejak audit penuh, kebenaran RBAC
 
-- [ ] **S3**: Bila guna identiti ditugaskan pengguna berbanding ditugaskan sistem?
-  - **J**: Bila berkongsi identiti merentas pelbagai sumber atau kitaran hayat identiti bebas dari sumber
+- [ ] **S3**: Bila anda gunakan identiti yang ditetapkan pengguna berbanding sistem ditetapkan?
+  - **J**: Apabila berkongsi identiti merentasi pelbagai sumber atau apabila kitar hayat identiti bebas daripada kitar hayat sumber
 
-**Pengesahan Praktikal:**
+**Pengesahan Amali:**
 ```bash
-# Semak jenis identiti yang digunakan oleh aplikasi anda
+# Semak jenis Identiti yang digunakan oleh aplikasi anda
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
 
-# Senaraikan semua tugasan peranan untuk identiti tersebut
+# Senaraikan semua penugasan peranan untuk identiti tersebut
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 ```
@@ -1166,16 +1221,16 @@ az role assignment list \
 
 Uji pemahaman anda:
 
-- [ ] **S1**: Apakah ID peranan untuk "Penyumbang Data Blob Storage"?
+- [ ] **S1**: Apakah ID peranan untuk "Storage Blob Data Contributor"?
   - **J**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
 
-- [ ] **S2**: Apakah kebenaran yang diberikan oleh "Pengguna Rahsia Key Vault"?
-  - **J**: Akses baca sahaja kepada rahsia (tidak boleh cipta, kemas kini, atau hapus)
+- [ ] **S2**: Apakah kebenaran yang diberikan oleh "Key Vault Secrets User"?
+  - **J**: Akses baca sahaja kepada rahsia (tidak boleh buat, kemas kini, atau padam)
 
-- [ ] **S3**: Bagaimana untuk memberikan aplikasi Container akses ke Azure SQL?
-  - **J**: Tugaskan peranan "Penyumbang SQL DB" atau konfigurasikan pengesahan Azure AD untuk SQL
+- [ ] **S3**: Bagaimana anda memberi akses App Kontena ke Azure SQL?
+  - **J**: Berikan peranan "SQL DB Contributor" atau konfigurasikan pengesahan Microsoft Entra ID untuk SQL
 
-**Pengesahan Praktikal:**
+**Pengesahan Amali:**
 ```bash
 # Cari peranan tertentu
 az role definition list --name "Storage Blob Data Contributor"
@@ -1190,14 +1245,15 @@ az role assignment list --assignee $PRINCIPAL_ID --output table
 ### 3. Integrasi Key Vault ✓
 
 Uji pemahaman anda:
-- [ ] **Q1**: Bagaimana anda mengaktifkan RBAC untuk Key Vault dan bukannya polisi akses?
-  - **A**: Tetapkan `enableRbacAuthorization: true` dalam Bicep
 
-- [ ] **Q2**: Perpustakaan SDK Azure manakah yang mengendalikan pengesahan identiti terurus?
-  - **A**: `@azure/identity` dengan kelas `DefaultAzureCredential`
+- [ ] **S1**: Bagaimana anda mengaktifkan RBAC untuk Key Vault bukannya polisi akses?
+  - **J**: Tetapkan `enableRbacAuthorization: true` dalam Bicep
 
-- [ ] **Q3**: Berapa lama rahsia Key Vault disimpan dalam cache?
-  - **A**: Bergantung pada aplikasi; laksanakan strategi caching anda sendiri
+- [ ] **S2**: Perpustakaan SDK Azure mana yang mengendalikan pengesahan identiti terurus?
+  - **J**: `@azure/identity` dengan kelas `DefaultAzureCredential`
+
+- [ ] **S3**: Berapa lama rahsia Key Vault tersimpan dalam cache?
+  - **J**: Bergantung pada aplikasi; laksanakan strategi cache anda sendiri
 
 **Pengesahan Amali:**
 ```bash
@@ -1207,7 +1263,7 @@ az keyvault secret show \
   --name "OpenAI-ApiKey" \
   --query "value"
 
-# Semak sama ada RBAC diaktifkan
+# Semak RBAC diaktifkan
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
@@ -1220,23 +1276,23 @@ az keyvault show \
 
 ### ✅ LAKUKAN:
 
-1. **Sentiasa gunakan identiti terurus dalam produksi**
+1. **Sentiasa gunakan identiti terurus dalam pengeluaran**
    ```bicep
    identity: {
      type: 'SystemAssigned'
    }
    ```
 
-2. **Gunakan peranan RBAC keistimewaan terendah**
+2. **Gunakan peranan RBAC sekurang-kurangnya keistimewaan**
    - Gunakan peranan "Reader" bila boleh
    - Elakkan "Owner" atau "Contributor" kecuali perlu
 
-3. **Simpan kunci pihak ketiga dalam Key Vault**
+3. **Simpan kekunci pihak ketiga dalam Key Vault**
    ```javascript
    const apiKey = await secretClient.getSecret('ThirdPartyApiKey');
    ```
 
-4. **Aktifkan log audit**
+4. **Hidupkan log audit**
    ```bicep
    diagnosticSettings: {
      logs: [{ category: 'AuditEvent', enabled: true }]
@@ -1250,19 +1306,19 @@ az keyvault show \
    azd env new prod
    ```
 
-6. **Katakan rahsia secara berkala**
-   - Tetapkan tarikh tamat tempoh pada rahsia Key Vault
-   - Automatikkan putaran menggunakan Azure Functions
+6. **Putar rahsia secara berkala**
+   - Tetapkan tarikh tamat untuk rahsia Key Vault
+   - Automatikkan putaran dengan Azure Functions
 
 ### ❌ JANGAN:
 
-1. **Jangan sesekali menulis rahsia keras**
+1. **Jangan pernah kodkan rahsia secara keras**
    ```javascript
    // ❌ BURUK
    const apiKey = "sk-proj-xxxxxxxxxxxxx";
    ```
 
-2. **Jangan gunakan rentetan sambungan dalam produksi**
+2. **Jangan gunakan taliannya sambungan dalam pengeluaran**
    ```javascript
    // ❌ BURUK
    BlobServiceClient.fromConnectionString(process.env.STORAGE_CONNECTION_STRING)
@@ -1286,7 +1342,7 @@ az keyvault show \
    console.log('API Key retrieved successfully');
    ```
 
-5. **Jangan kongsi identiti produksi merentas persekitaran**
+5. **Jangan berkongsi identiti pengeluaran merentasi persekitaran**
    ```bicep
    // ❌ BAD - same identity for dev and prod
    // ✅ GOOD - separate identities per environment
@@ -1296,7 +1352,7 @@ az keyvault show \
 
 ## Panduan Penyelesaian Masalah
 
-### Masalah: "Tidak Dibenarkan" apabila mengakses Azure Storage
+### Masalah: "Unauthorized" ketika mengakses Azure Storage
 
 **Gejala:**
 ```
@@ -1312,13 +1368,13 @@ az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
-# ✅ Jangkaan: "SystemAssigned" atau "UserAssigned"
+# ✅ Dijangka: "SystemAssigned" atau "UserAssigned"
 
 # Semak tugasan peranan
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID
 
-# Jangkaan: Perlu melihat peranan "Storage Blob Data Contributor" atau peranan serupa
+# Dijangka: Perlu lihat "Storage Blob Data Contributor" atau peranan yang serupa
 ```
 
 **Penyelesaian:**
@@ -1332,9 +1388,9 @@ az role assignment create \
   --scope $STORAGE_ID
 ```
 
-2. **Tunggu untuk penyebaran (boleh ambil masa 5-10 minit):**
+2. **Tunggu penularan (boleh ambil masa 5-10 minit):**
 ```bash
-# Semak status tugasan peranan
+# Semak status penugasan peranan
 az role assignment list --assignee $PRINCIPAL_ID --scope $STORAGE_ID
 ```
 
@@ -1357,13 +1413,13 @@ The user, group or application does not have secrets get permission
 **Diagnosis:**
 
 ```bash
-# Semak sama ada RBAC Key Vault diaktifkan
+# Semak jika RBAC Key Vault diaktifkan
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
 # ✅ Dijangka: benar
 
-# Semak peranan yang ditetapkan
+# Semak penugasan peranan
 az role assignment list \
   --assignee $PRINCIPAL_ID \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.KeyVault/vaults/$KV_NAME
@@ -1400,7 +1456,7 @@ CredentialUnavailableError: No credential available
 **Diagnosis:**
 
 ```bash
-# Semak jika anda sudah log masuk
+# Semak jika anda telah log masuk
 az account show
 
 # Semak pengesahan Azure CLI
@@ -1438,15 +1494,15 @@ const credential = process.env.NODE_ENV === 'production'
 
 ---
 
-### Masalah: Penugasan peranan mengambil masa lama untuk disebarkan
+### Masalah: Penugasan peranan mengambil masa lama untuk tersebar
 
 **Gejala:**
-- Peranan berjaya ditugaskan
-- Masih menerima ralat 403
-- Akses berselang-seli (kadang berfungsi, kadang tidak)
+- Peranan berjaya diberikan
+- Masih mendapat ralat 403
+- Akses berselang-seli (kadang berhasil, kadang tidak)
 
 **Penjelasan:**
-Perubahan Azure RBAC boleh mengambil masa 5-10 minit untuk disebarkan secara global.
+Perubahan Azure RBAC boleh mengambil masa 5-10 minit untuk beredar secara global.
 
 **Penyelesaian:**
 
@@ -1472,22 +1528,22 @@ az containerapp revision restart \
 
 | Sumber | Kos |
 |----------|------|
-| **Identiti Terurus** | 🆓 **PERCUMA** - Tiada bayaran |
-| **Penugasan Peranan RBAC** | 🆓 **PERCUMA** - Tiada bayaran |
-| **Permintaan Token Azure AD** | 🆓 **PERCUMA** - Termasuk |
-| **Operasi Key Vault** | $0.03 bagi 10,000 operasi |
-| **Penyimpanan Key Vault** | $0.024 bagi setiap rahsia sebulan |
+| **Identiti Terurus** | 🆓 **PERCUMA** - Tiada caj |
+| **Penugasan Peranan RBAC** | 🆓 **PERCUMA** - Tiada caj |
+| **Permintaan Token Microsoft Entra ID** | 🆓 **PERCUMA** - Termasuk |
+| **Operasi Key Vault** | $0.03 setiap 10,000 operasi |
+| **Penyimpanan Key Vault** | $0.024 per rahsia sebulan |
 
 **Identiti terurus menjimatkan wang dengan:**
-- ✅ Menghapuskan operasi Key Vault untuk pengesahan perkhidmatan ke perkhidmatan
-- ✅ Mengurangkan insiden keselamatan (tiada pendedahan kelayakan)
+- ✅ Menghapuskan operasi Key Vault untuk pengesahan perkhidmatan-ke-perkhidmatan
+- ✅ Mengurangkan insiden keselamatan (tiada kebocoran kelayakan)
 - ✅ Mengurangkan beban operasi (tiada putaran manual)
 
-**Perbandingan Kos Contoh (bulanan):**
+**Contoh Perbandingan Kos (bulanan):**
 
-| Senario | Rentetan Sambungan | Identiti Terurus | Penjimatan |
+| Senario | Talian Sambungan | Identiti Terurus | Penjimatan |
 |----------|-------------------|-----------------|---------|
-| Aplikasi kecil (1M permintaan) | ~$50 (Key Vault + operasi) | ~$0 | $50/bulan |
+| Aplikasi kecil (1M permintaan) | ~$50 (Key Vault + ops) | ~$0 | $50/bulan |
 | Aplikasi sederhana (10M permintaan) | ~$200 | ~$0 | $200/bulan |
 | Aplikasi besar (100M permintaan) | ~$1,500 | ~$0 | $1,500/bulan |
 
@@ -1496,7 +1552,7 @@ az containerapp revision restart \
 ## Ketahui Lebih Lanjut
 
 ### Dokumentasi Rasmi
-- [Identiti Terurus Azure](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
+- [Azure Managed Identity](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
 - [Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)
 - [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)
 - [DefaultAzureCredential](https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential)
@@ -1506,42 +1562,42 @@ az containerapp revision restart \
 - [Azure.Identity (C#)](https://www.nuget.org/packages/Azure.Identity/)
 - [azure-identity (Python)](https://pypi.org/project/azure-identity/)
 
-### Langkah Seterusnya Dalam Kursus Ini
+### Langkah Seterusnya dalam Kursus Ini
 - ← Sebelumnya: [Pengurusan Konfigurasi](configuration.md)
 - → Seterusnya: [Projek Pertama](first-project.md)
-- 🏠 [Halaman Utama Kursus](../../README.md)
+- 🏠 [Laman Utama Kursus](../../README.md)
 
 ### Contoh Berkaitan
-- [Contoh Chat Model Microsoft Foundry](../../../../examples/azure-openai-chat) - Menggunakan identiti terurus untuk Model Microsoft Foundry
-- [Contoh Mikrosistem](../../../../examples/microservices) - Corak pengesahan pelbagai perkhidmatan
+- [Contoh Sembang Model Microsoft Foundry](../../../../examples/azure-openai-chat) - Menggunakan identiti terurus untuk Model Microsoft Foundry
+- [Contoh Microservices](../../../../examples/microservices) - Corak pengesahan perkhidmatan berbilang
 
 ---
 
-## Ringkasan
+## Rumusan
 
-**Anda telah mempelajari:**
-- ✅ Tiga corak pengesahan (rentetan sambungan, Key Vault, identiti terurus)
-- ✅ Cara mengaktifkan dan mengkonfigurasi identiti terurus dalam AZD
+**Anda telah belajar:**
+- ✅ Tiga corak pengesahan (talian sambungan, Key Vault, identiti terurus)
+- ✅ Cara mengaktifkan dan konfigurasi identiti terurus dalam AZD
 - ✅ Penugasan peranan RBAC untuk perkhidmatan Azure
 - ✅ Integrasi Key Vault untuk rahsia pihak ketiga
-- ✅ Identiti pengguna ditugaskan vs identiti sistem
-- ✅ Amalan keselamatan terbaik dan penyelesaian masalah
+- ✅ Identiti yang ditetapkan pengguna vs sistem
+- ✅ Amalan terbaik keselamatan dan penyelesaian masalah
 
-**Pengajaran Utama:**
-1. **Sentiasa gunakan identiti terurus dalam produksi** - Tiada rahsia, putaran automatik
-2. **Gunakan peranan RBAC keistimewaan terendah** - Beri hanya kebenaran yang perlu
-3. **Simpan kunci pihak ketiga dalam Key Vault** - Pengurusan rahsia berpusat
+**Isi Utama:**
+1. **Sentiasa gunakan identiti terurus dalam pengeluaran** - Tiada rahsia, putaran automatik
+2. **Gunakan peranan RBAC sekurang-kurangnya keistimewaan** - Berikan kebenaran yang perlu sahaja
+3. **Simpan kekunci pihak ketiga dalam Key Vault** - Pengurusan rahsia berpusat
 4. **Pisahkan identiti mengikut persekitaran** - Pengasingan dev, staging, prod
-5. **Aktifkan log audit** - Jejaki siapa mengakses apa
+5. **Aktifkan log audit** - Jejak siapa akses apa
 
 **Langkah Seterusnya:**
-1. Lengkapkan latihan praktikal di atas
-2. Migrasi aplikasi sedia ada daripada rentetan sambungan ke identiti terurus
-3. Bangunkan projek AZD pertama anda dengan keselamatan dari hari pertama: [Projek Pertama](first-project.md)
+1. Selesaikan latihan praktikal di atas
+2. Migrasi aplikasi sedia ada dari taliannya sambungan ke identiti terurus
+3. Bina projek AZD pertama anda dengan keselamatan dari hari pertama: [Projek Pertama](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sah. Untuk maklumat penting, terjemahan profesional oleh manusia adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+**Penafian**:
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan oleh manusia profesional adalah disyorkan. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

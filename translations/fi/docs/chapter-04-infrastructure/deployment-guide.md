@@ -1,48 +1,49 @@
-# Julkaisuopas - Hallitse AZD-julkaisuja
+# Deployment Guide - Mastering AZD Deployments
 
-**Lukujen navigointi:**
-- **📚 Kurssin etusivu**: [AZD Aloittelijoille](../../README.md)
-- **📖 Nykyinen luku**: Luku 4 - Infrastruktuuri koodina ja käyttöönotto
-- **⬅️ Edellinen luku**: [Luku 3: Konfigurointi](../chapter-03-configuration/configuration.md)
-- **➡️ Seuraava**: [Resurssien provisiointi](provisioning.md)
-- **🚀 Seuraava luku**: [Luku 5: Moni-agenttiset tekoälyratkaisut](../../examples/retail-scenario.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Luku 4 - Infrastructure as Code & Deployment
+- **⬅️ Previous Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+- **➡️ Next**: [Provisioning Resources](provisioning.md)
+- **🧩 Also in this chapter**: [Authoring Your Own Template](custom-templates.md)
+- **🚀 Next Chapter**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
 
-## Johdanto
+## Introduction
 
-Tämä kattava opas kattaa kaiken, mitä sinun tarvitsee tietää sovellusten julkaisemisesta Azure Developer CLI:llä, yksinkertaisista yhdellä komennolla suoritettavista julkaisuista aina tuotantoympäristöjen kehittyneisiin skenaarioihin mukautettujen hookeiden, useiden ympäristöjen ja CI/CD-integraation kanssa. Hallitse koko julkaisun elinkaari käytännön esimerkkien ja parhaiden käytäntöjen avulla.
+Tämä kattava opas käsittelee kaiken, mitä tarvitset sovellusten käyttöönottoon Azure Developer CLI:llä — yksinkertaisista yhden komennon käyttöönotosta edistyneisiin tuotantotilanteisiin, joissa käytetään mukautettuja hookeja, useita ympäristöjä ja CI/CD-integraatiota. Hallitse koko käyttöönoton elinkaari käytännön esimerkkien ja parhaiden käytäntöjen avulla.
 
-## Oppimistavoitteet
+## Learning Goals
 
-Kun suoritat tämän oppaan loppuun, osaat:
-- Hallitse kaikki Azure Developer CLI:n julkaisu­komennot ja -työvirrat
-- Ymmärrä koko julkaisun elinkaari provisioinnista valvontaan
-- Toteuta mukautetut julkaisu-hookit ennen ja jälkeen julkaisun tapahtuvaan automaatioon
-- Konfiguroi useita ympäristöjä ympäristökohtaisilla parametreilla
-- Ota käyttöön kehittyneitä julkaisustrategioita, kuten blue-green- ja canary-julkaisut
-- Integroi azd-julkaisut CI/CD-putkiin ja DevOps-työvirtoihin
+Kun käyt tämän oppaan läpi, osaat:
+- Hallita kaikki Azure Developer CLI:n käyttöönotto-komennot ja -työnkulut
+- Ymmärtää koko käyttöönoton elinkaaren provisioinnista monitorointiin
+- Toteuttaa mukautettuja käyttöönotto-hookeja esija jälkitoimintojen automatisointiin
+- Konfiguroida useita ympäristöjä ympäristökohtaisilla parametreilla
+- Ottaa käyttöön edistyneitä käyttöönotto-strategioita, kuten blue-green ja canary
+- Integroida azd-käyttöönotot CI/CD-putkiin ja DevOps-työnkulkuihin
 
-## Oppimistulokset
+## Learning Outcomes
 
-Oppimisen jälkeen osaat:
-- Suorittaa ja ratkaista ongelmia kaikissa azd-julkaisutyövirroissa itsenäisesti
-- Suunnitella ja toteuttaa mukautettua julkaisuautomaatiota hookeilla
-- Konfiguroida tuotantovalmiit julkaisut asianmukaisella turvallisuudella ja valvonnalla
-- Hallita monimutkaisia moniympäristöisiä julkaisuskenaarioita
-- Optimoida julkaisun suorituskykyä ja toteuttaa palautusstrategioita
-- Integroi azd-julkaisut yritystason DevOps-käytäntöihin
+Oppaan suorittamisen jälkeen osaat:
+- Suorittaa ja vianetsiyttää kaikki azd-käyttöönottojen työnkulut itsenäisesti
+- Suunnitella ja toteuttaa mukautettua käyttöönotto-automaatioita hookien avulla
+- Konfiguroida tuotantovalmiit käyttöönotot oikealla turvallisuudella ja monitoroinnilla
+- Hallita monimutkaisia usean ympäristön käyttöönotto-skenaarioita
+- Optimoida käyttöönottojen suorituskykyä ja toteuttaa rollback-strategioita
+- Integrioida azd-käyttöönotot yrityksen DevOps-käytäntöihin
 
-## Julkaisun yleiskatsaus
+## Deployment Overview
 
-Azure Developer CLI tarjoaa useita julkaisu­komentoja:
-- `azd up` - Koko työvirta (provisiointi + julkaisu)
+Azure Developer CLI tarjoaa useita käyttöönotto-komentoja:
+- `azd up` - Täydellinen työnkulku (provision + deploy)
 - `azd provision` - Luo/päivittää vain Azure-resursseja
-- `azd deploy` - Julkaise vain sovelluskoodi
+- `azd deploy` - Ottaa käyttöön vain sovelluskoodin
 - `azd package` - Kokoa ja pakkaa sovellukset
 
-## Perusjulkaisutyövirrat
+## Basic Deployment Workflows
 
-### Täydellinen julkaisu (azd up)
-Yleisin työvirta uusille projekteille:
+### Complete Deployment (azd up)
+Yleisimmät työnkulut uusille projekteille:
 ```bash
 # Ota kaikki käyttöön alusta alkaen
 azd up
@@ -54,70 +55,99 @@ azd up --environment production
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Pelkkä infrastruktuurin julkaisu
-Kun sinun tarvitsee vain päivittää Azure-resursseja:
+### Infrastructure-Only Deployment
+Kun tarvitset vain Azure-resurssien päivityksen:
 ```bash
-# Ota käyttöön/päivitä infrastruktuuri
+# Ota infrastruktuuri käyttöön tai päivitä se
 azd provision
 
-# Ota käyttöön kuiva-ajona muutosten esikatselua varten
+# Ota käyttöön kuiva-ajolla esikatsellaksesi muutoksia
 azd provision --preview
 
 # Ota tietyt palvelut käyttöön
 azd provision --service database
 ```
 
-### Pelkkä koodin julkaisu
-Nopeita sovelluspäivityksiä varten:
+### Code-Only Deployment
+Nopeisiin sovelluspäivityksiin:
 ```bash
 # Ota kaikki palvelut käyttöön
 azd deploy
 
-# Odotettu tulos:
+# Odotettu tuloste:
 # Palveluiden käyttöönotto (azd deploy)
-# - web: Otetaan käyttöön... Valmis
-# - api: Otetaan käyttöön... Valmis
-# ONNISTUI: Käyttöönotto valmistui 2 minuutissa ja 15 sekunnissa
+# - web: Käyttöönotetaan... Valmis
+# - api: Käyttöönotetaan... Valmis
+# ONNISTUI: Käyttöönotto valmistui 2 minuutissa 15 sekunnissa
 
 # Ota tietty palvelu käyttöön
 azd deploy --service web
 azd deploy --service api
 
-# Ota käyttöön mukautetuilla rakennusparametreilla
+# Ota käyttöön mukautetuilla rakennusargumenteilla
 azd deploy --service api --build-arg NODE_ENV=production
 
-# Tarkista käyttöönotto
+# Varmista käyttöönotto
 azd show --output json | jq '.services'
 ```
 
-### ✅ Julkaisun tarkistus
+### ✅ Deployment Verification
 
-Vahvista onnistuminen jokaisen julkaisun jälkeen:
+Minkä tahansa käyttöönoton jälkeen varmista onnistuminen:
 
 ```bash
 # Tarkista, että kaikki palvelut ovat käynnissä
 azd show
 
-# Testaa terveystilarajapinnat
+# Testaa terveystarkastus-päätepisteet
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
 curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
 curl -f "$API_URL/health" || echo "❌ API health check failed"
 
-# Valvo virheitä (avautuu oletuksena selaimeen)
+# Valvo virheiden varalta (avautuu oletuksena selaimessa)
 azd monitor --logs
 ```
 
-**Onnistumiskriteerit:**
-- ✅ Kaikki palvelut näyttävät tilan 'Käynnissä'
-- ✅ Health-päätepisteet palauttavat HTTP 200
-- ✅ Ei virhelokeja viimeisen 5 minuutin aikana
-- ✅ Sovellus vastaa testipyyntöihin
+**Success Criteria:**
+- ✅ All services show "Running" status
+- ✅ Health endpoints return HTTP 200
+- ✅ No error logs in the last 5 minutes
+- ✅ Application responds to test requests
 
-## 🏗️ Julkaisuprosessin ymmärtäminen
+## 🏗️ Understanding the Deployment Process
 
-### Vaihe 1: Esiprovisiointihookit
+### New to hooks? Start here
+
+A **hook** on komento, jonka azd suorittaa automaattisesti tiettynä hetkenä käyttöönoton aikana — ennen tai jälkeen provisioinnin, ja ennen tai jälkeen koodin käyttöönoton. Ne mahdollistavat pienten rutiinitehtävien automatisoinnin, jotka liittyvät aina käyttöönottoon: tietokannan alustaminen, migraatioiden suoritus, assettien rakentaminen tai live-sovelluksen smoke-testit.
+
+| Hook | Runs… | Common use |
+|------|-------|------------|
+| `preprovision` | Ennen resurssien luomista | Tarkista esivaatimukset, kirjaudu rekisteriin |
+| `postprovision` | Kun resurssit ovat olemassa | Määritä resurssit, asenna tietokanta |
+| `predeploy` | Ennen koodin käyttöönottoa | Rakenna front-end-resurssit, suorita yksikkötestit |
+| `postdeploy` | Kun koodi on käytössä | Suorita tietokantamigraatiot, tee smoke-test päätepisteelle |
+
+Hookit sijaitsevat `azure.yaml`-tiedostossasi. Tässä pienin mahdollinen esimerkki — se tulostaa viestin käytön jälkeen:
+
+```yaml
+# azure.yaml
+hooks:
+  postdeploy:
+    shell: sh
+    run: echo "Deployment finished! 🎉"
+```
+
+Siinä se — seuraavalla kerralla kun ajat `azd up`, viesti tulostuu automaattisesti. Voit myös ajaa hookin erikseen ilman kokonaista käyttöönottoa, mikä on loistavaa testaukseen:
+
+```bash
+azd hooks run postdeploy
+```
+
+Alla olevat vaiheet näyttävät tosielämän hook-esimerkkejä (migraatiot, testit, validointi) jokaiselle vaiheelle.
+
+### Phase 1: Pre-Provision Hooks
 ```yaml
 # azure.yaml
 hooks:
@@ -131,13 +161,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Vaihe 2: Infrastruktuurin provisiointi
-- Lukee infrastruktuurin malleja (Bicep/Terraform)
+### Phase 2: Infrastructure Provisioning
+- Lukee infrastruktuurimallit (Bicep/Terraform)
 - Luo tai päivittää Azure-resursseja
-- Konfiguroi verkot ja tietoturvan
-- Määrittää valvonnan ja lokituksen
+- Konfiguroi verkot ja turvallisuuden
+- Ota käyttöön monitorointi ja lokitus
 
-### Vaihe 3: Jälkiprovisiointihookit
+### Phase 3: Post-Provision Hooks
 ```yaml
 hooks:
   postprovision:
@@ -150,12 +180,12 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### Vaihe 4: Sovelluksen pakkaus
-- Kokoaa sovelluskoodin
-- Luo julkaisuartifakteja
-- Paketoidaan kohdealustalle (kontit, ZIP-tiedostot, jne.)
+### Phase 4: Application Packaging
+- Kokoa sovelluskoodi
+- Luo käyttöönotto-artifaktit
+- Paketoi kohdealustalle (kontit, ZIP-tiedostot jne.)
 
-### Vaihe 5: Esijulkaisu-hookit
+### Phase 5: Pre-Deploy Hooks
 ```yaml
 hooks:
   predeploy:
@@ -168,12 +198,12 @@ hooks:
       npm run db:migrate
 ```
 
-### Vaihe 6: Sovelluksen julkaisu
-- Julkaisee pakatut sovellukset Azure-palveluihin
-- Päivittää konfiguraatioasetukset
-- Käynnistää/uudelleenkäynnistää palveluita
+### Phase 6: Application Deployment
+- Ota pakatut sovellukset käyttöön Azure-palveluissa
+- Päivittää konfiguraatioasetuksia
+- Käynnistää/uudelleenkäynnistää palvelut
 
-### Vaihe 7: Jälkijulkaisu-hookit
+### Phase 7: Post-Deploy Hooks
 ```yaml
 hooks:
   postdeploy:
@@ -186,9 +216,57 @@ hooks:
       curl https://${WEB_URL}/health
 ```
 
-## 🎛️ Julkaisukonfiguraatio
+### Handling Hook Errors
 
-### Palvelukohtaiset julkaisuasetukset
+Oletuksena **jos hook-komento päättyy ei-nollaan paluuarvolla, azd pysäyttää koko operaation.** Tämä on yleensä toivottavaa — epäonnistunut migraatio pitäisi pysäyttää käyttöönotto, ei toimittaa rikkinäistä sovellusta. Mutta tämä tarkoittaa, että hookit on kirjoitettava huolellisesti.
+
+**1. Tee virheistä äänekkäitä ja tarkoituksellisia.** Hook epäonnistuu, kun sen viimeinen komento palauttaa ei-nollan poistumiskoodin. Shell-skripteissä lisää `set -e`, jotta hook pysähtyy ensimmäiseen epäonnistuvaan komentoon sen sijaan, että jatkaisi hiljaa:
+
+```yaml
+hooks:
+  predeploy:
+    shell: sh
+    run: |
+      set -e                      # stop on the first error
+      npm run test:unit           # if tests fail, the deploy halts here
+      npm run db:migrate
+```
+
+**2. Salli hookin epäonnistua ilman azd:n pysäyttämistä.** Ei-kriittisille vaiheille (valinnainen välimuistin lämmitys, best-effort-ilmoitus) aseta `continueOnError: true`. azd kirjaa epäonnistumisen mutta jatkaa:
+
+```yaml
+hooks:
+  postdeploy:
+    shell: sh
+    continueOnError: true         # a failure here won't fail 'azd up'
+    run: curl -f https://${WEB_URL}/warmup || echo "Warm-up skipped"
+```
+
+**3. Testaa hookeja erillisinä ennen kokonaissuoritusta.** Sinun ei tarvitse ajaa `azd up` debugataksesi hookia — aja se erikseen ja iteroi nopeasti:
+
+```bash
+azd hooks run predeploy          # suorittaa vain predeploy-hookin
+azd hooks run postdeploy --service api
+```
+
+**4. Varo käyttöjärjestelmäkohtaisia shellejä.** Hook, joka käyttää `shell: pwsh`, vaatii PowerShellin koneelta, joka suorittaa sen (mukaan lukien CI-agentit). Käytä `shell: sh` laajinta yhteensopivuutta varten, tai tarjoa sekä `windows` että `posix` -variantit:
+
+```yaml
+hooks:
+  postprovision:
+    posix:
+      shell: sh
+      run: ./scripts/setup.sh
+    windows:
+      shell: pwsh
+      run: ./scripts/setup.ps1
+```
+
+> **Debugging tip:** aja mikä tahansa azd-komento `--debug`-lipun kanssa nähdäksesi tarkan hook-komentorivin ja sen täydet tulosteet — korvaamatonta, kun hook toimii paikallisesti mutta epäonnistuu CI:ssä.
+
+## 🎛️ Deployment Configuration
+
+### Service-Specific Deployment Settings
 ```yaml
 # azure.yaml
 services:
@@ -218,14 +296,14 @@ services:
     buildCommand: npm install --production
 ```
 
-### Ympäristökohtaiset konfiguraatiot
+### Environment-Specific Configurations
 ```bash
 # Kehitysympäristö
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# Esikatseluympäristö
+# Esituotantoympäristö
 azd env new staging
 azd env set NODE_ENV staging
 azd env set DEBUG false
@@ -238,9 +316,9 @@ azd env set DEBUG false
 azd env set LOG_LEVEL error
 ```
 
-## 🔧 Kehittyneet julkaisuskenaariot
+## 🔧 Advanced Deployment Scenarios
 
-### Monipalveluiset sovellukset
+### Multi-Service Applications
 ```yaml
 # Complex application with multiple services
 services:
@@ -276,16 +354,16 @@ services:
     host: function
 ```
 
-### Blue-Green-julkaisut
+### Blue-Green Deployments
 ```bash
 # Luo sininen ympäristö
 azd env new production-blue
 azd up --environment production-blue
 
-# Testaa sininen ympäristö
+# Testaa sinistä ympäristöä
 ./scripts/test-environment.sh production-blue
 
-# Ohjaa liikenne siniseen (manuaalinen DNS/kuormantasaajan päivitys)
+# Ohjaa liikenne siniseen (päivitä DNS/kuormantasaaja manuaalisesti)
 ./scripts/switch-traffic.sh production-blue
 
 # Siivoa vihreä ympäristö
@@ -293,7 +371,7 @@ azd env select production-green
 azd down --force
 ```
 
-### Canary-julkaisut
+### Canary Deployments
 ```yaml
 # azure.yaml - Configure traffic splitting
 services:
@@ -307,7 +385,7 @@ services:
         percentage: 10
 ```
 
-### Vaiheistetut julkaisut
+### Staged Deployments
 ```bash
 #!/bin/bash
 # deploy-staged.sh
@@ -338,9 +416,9 @@ if [[ $confirm == [yY] ]]; then
 fi
 ```
 
-## 🐳 Konttijulkaisut
+## 🐳 Container Deployments
 
-### Konttisovellusten julkaisut
+### Container App Deployments
 ```yaml
 services:
   api:
@@ -364,7 +442,7 @@ services:
       maxReplicas: 10
 ```
 
-### Monivaiheinen Dockerfile-optimointi
+### Multi-Stage Dockerfile Optimization
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -390,19 +468,19 @@ EXPOSE 3000
 CMD ["npm", "start"]
 ```
 
-## ⚡ Suorituskyvyn optimointi
+## ⚡ Performance Optimization
 
-### Palvelukohtaiset julkaisut
+### Service-Specific Deployments
 ```bash
 # Ota käyttöön tietty palvelu nopeampaa iterointia varten
 azd deploy --service web
 azd deploy --service api
 
-# Ota kaikki palvelut käyttöön
+# Ota käyttöön kaikki palvelut
 azd deploy
 ```
 
-### Rakennusvälimuisti
+### Build Caching
 ```yaml
 # azure.yaml - Configure build commands
 services:
@@ -412,21 +490,21 @@ services:
     outputPath: dist
 ```
 
-### Tehokkaat koodijulkaisut
+### Efficient Code Deployments
 ```bash
-# Käytä azd deploy (ei azd up) pelkkien koodimuutosten kohdalla
+# Käytä azd deploy -komentoa (ei azd up) pelkkiin koodimuutoksiin
 # Tämä ohittaa infrastruktuurin provisioinnin ja on paljon nopeampi
 azd deploy
 
-# Julkaise tietty palvelu nopeinta iterointia varten
+# Ota käyttöön tietty palvelu nopeinta iterointia varten
 azd deploy --service api
 ```
 
-## 🔍 Julkaisun valvonta
+## 🔍 Deployment Monitoring
 
-### Reaaliaikainen julkaisun valvonta
+### Real-Time Deployment Monitoring
 ```bash
-# Seuraa sovellusta reaaliajassa
+# Valvo sovellusta reaaliajassa
 azd monitor --live
 
 # Näytä sovelluksen lokit
@@ -436,7 +514,7 @@ azd monitor --logs
 azd show
 ```
 
-### Terveystarkastukset
+### Health Checks
 ```yaml
 # azure.yaml - Configure health checks
 services:
@@ -450,7 +528,7 @@ services:
       retries: 3
 ```
 
-### Julkaisun jälkeinen validointi
+### Post-Deployment Validation
 ```bash
 #!/bin/bash
 # scripts/validate-deployment.sh
@@ -483,9 +561,9 @@ npm run test:integration
 echo "✅ Deployment validation completed successfully"
 ```
 
-## 🔐 Turvallisuusnäkökohdat
+## 🔐 Security Considerations
 
-### Salaisuuksien hallinta
+### Secrets Management
 ```bash
 # Tallenna salaisuudet turvallisesti
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
@@ -505,7 +583,7 @@ services:
         value: ${JWT_SECRET}
 ```
 
-### Verkon turvallisuus
+### Network Security
 ```yaml
 # azure.yaml - Configure network security
 infra:
@@ -516,7 +594,7 @@ infra:
       - "198.51.100.0/24" # VPN IP range
 ```
 
-### Identiteetin ja pääsynhallinta
+### Identity and Access Management
 ```yaml
 services:
   api:
@@ -531,14 +609,14 @@ services:
           - external-api-key
 ```
 
-## 🚨 Palautusstrategiat
+## 🚨 Rollback Strategies
 
-### Nopea palautus
+### Quick Rollback
 ```bash
-# AZD:llä ei ole sisäänrakennettua palautustoimintoa. Suositellut lähestymistavat:
+# AZD:llä ei ole sisäänrakennettua palautusta. Suositellut lähestymistavat:
 
-# Vaihtoehto 1: Uudelleenasenna Gitistä (suositeltavaa)
-git revert HEAD  # Palauta ongelmallinen commit
+# Vaihtoehto 1: Uudelleenasenna Gitistä (suositeltu)
+git revert HEAD  # Peruuta ongelmallinen commit
 git push
 azd deploy
 
@@ -548,17 +626,17 @@ azd deploy
 git checkout main
 ```
 
-### Infrastruktuurin palautus
+### Infrastructure Rollback
 ```bash
 # Esikatsele infrastruktuurin muutokset ennen niiden käyttöönottoa
 azd provision --preview
 
 # Infrastruktuurin palautukseen käytä versionhallintaa:
-git revert HEAD  # Palauta infrastruktuurin muutokset
+git revert HEAD  # Kumoa infrastruktuurin muutokset
 azd provision    # Ota käyttöön aiempi infrastruktuurin tila
 ```
 
-### Tietokantasiirron palautus
+### Database Migration Rollback
 ```bash
 #!/bin/bash
 # scripts/rollback-database.sh
@@ -572,9 +650,9 @@ npm run db:validate
 echo "Database rollback completed"
 ```
 
-## 📊 Julkaisumetriikat
+## 📊 Deployment Metrics
 
-### Seuraa julkaisun suorituskykyä
+### Track Deployment Performance
 ```bash
 # Näytä nykyinen käyttöönoton tila
 azd show
@@ -586,7 +664,7 @@ azd monitor --overview
 azd monitor --live
 ```
 
-### Mukautettujen metriikoiden keruu
+### Custom Metrics Collection
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -603,11 +681,11 @@ hooks:
         -d "{\"timestamp\": $DEPLOY_TIME, \"service_count\": $SERVICE_COUNT}"
 ```
 
-## 🎯 Parhaat käytännöt
+## 🎯 Best Practices
 
-### 1. Ympäristöjen yhdenmukaisuus
+### 1. Environment Consistency
 ```bash
-# Käytä johdonmukaista nimeämistä
+# Käytä yhdenmukaista nimeämistä
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
@@ -616,19 +694,19 @@ azd env new production-v1
 ./scripts/sync-environments.sh
 ```
 
-### 2. Infrastruktuurin validointi
+### 2. Infrastructure Validation
 ```bash
-# Esikatsele infrastruktuurin muutokset ennen käyttöönottoa
+# Esikatsele infrastruktuurin muutoksia ennen käyttöönottoa
 azd provision --preview
 
 # Käytä ARM/Bicep-linttausta
 az bicep lint --file infra/main.bicep
 
-# Tarkista Bicep-syntaksi
+# Tarkista Bicep-syntaksin oikeellisuus
 az bicep build --file infra/main.bicep
 ```
 
-### 3. Testauksen integrointi
+### 3. Testing Integration
 ```yaml
 hooks:
   predeploy:
@@ -657,33 +735,33 @@ hooks:
       npm run test:smoke
 ```
 
-### 4. Dokumentointi ja lokitus
+### 4. Documentation and Logging
 ```bash
-# Dokumentoi käyttöönotto-ohjeet
+# Dokumentoi käyttöönoton menettelyt
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env get-value AZURE_ENV_NAME)" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
 ```
 
-## Seuraavat askeleet
+## Next Steps
 
-- [Resurssien provisiointi](provisioning.md) - Syväluotaus infrastruktuurin hallintaan
-- [Esijulkaisu­suunnittelu](../chapter-06-pre-deployment/capacity-planning.md) - Suunnittele julkaisustrategiasi
-- [Yleiset ongelmat](../chapter-07-troubleshooting/common-issues.md) - Ratkaise julkaisun ongelmat
-- [Parhaat käytännöt](../chapter-07-troubleshooting/debugging.md) - Tuotantovalmis julkaisustrategiat
+- [Provisioning Resources](provisioning.md) - Syväsukellus infrastruktuurin hallintaan
+- [Pre-Deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - Suunnittele käyttöönotto-strategiasi
+- [Common Issues](../chapter-07-troubleshooting/common-issues.md) - Ratkaise käyttöönotto-ongelmia
+- [Best Practices](../chapter-07-troubleshooting/debugging.md) - Tuotantovalmiit käyttöönotto-strategiat
 
-## 🎯 Käytännön julkaisuharjoitukset
+## 🎯 Hands-On Deployment Exercises
 
-### Harjoitus 1: Inkrementaalinen julkaisutyövirta (20 minuuttia)
-**Tavoite**: Hallitse ero täydellisen ja inkrementaalisen julkaisun välillä
+### Exercise 1: Incremental Deployment Workflow (20 minutes)
+**Goal**: Hallitse ero täyden ja inkrementaalisen käyttöönoton välillä
 
 ```bash
-# Ensimmäinen käyttöönotto
+# Alkuperäinen käyttöönotto
 mkdir deployment-practice && cd deployment-practice
 azd init --template todo-nodejs-mongo
 azd up
 
-# Tallenna ensimmäisen käyttöönoton aika
+# Tallenna alkuperäisen käyttöönoton aika
 echo "Full deployment: $(date)" > deployment-log.txt
 
 # Tee koodimuutos
@@ -693,26 +771,26 @@ echo "// Updated $(date)" >> src/api/src/server.js
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
-# Vertaile aikoja
+# Vertaa aikoja
 cat deployment-log.txt
 
 # Siivoa
 azd down --force --purge
 ```
 
-**Onnistumiskriteerit:**
-- [ ] Täydellinen julkaisu kestää 5–15 minuuttia
-- [ ] Pelkkä koodijulkaisu kestää 2–5 minuuttia
-- [ ] Koodimuutokset näkyvät julkaistussa sovelluksessa
-- [ ] Infrastruktuuri pysyy muuttumattomana `azd deploy`-komennon jälkeen
+**Success Criteria:**
+- [ ] Täysi käyttöönotto kestää 5–15 minuuttia
+- [ ] Pelkkä koodin käyttöönotto kestää 2–5 minuuttia
+- [ ] Koodimuutokset näkyvät käytössä olevassa sovelluksessa
+- [ ] Infrastruktuuri pysyy muuttumattomana `azd deploy`-suorituksen jälkeen
 
-**Oppimistulos**: `azd deploy` on 50–70% nopeampi kuin `azd up` koodimuutoksissa
+**Learning Outcome**: `azd deploy` on 50–70 % nopeampi kuin `azd up` koodimuutoksissa
 
-### Harjoitus 2: Mukautetut julkaisu-hookit (30 minuuttia)
-**Tavoite**: Toteuta ennen ja jälkeen julkaisun tapahtuva automaatio
+### Exercise 2: Custom Deployment Hooks (30 minutes)
+**Goal**: Toteuta esija jälkikäyttöönoton automaatio
 
 ```bash
-# Luo käyttöönottoa edeltävä validointiskripti
+# Luo ennen käyttöönottoa suoritettava validointiskripti
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
@@ -724,7 +802,7 @@ if ! npm run test:unit; then
     exit 1
 fi
 
-# Tarkista, onko commitoimattomia muutoksia
+# Tarkista, onko muutoksia, joita ei ole commitoitu
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -766,21 +844,21 @@ hooks:
     run: ./scripts/post-deploy-test.sh
 EOF
 
-# Testaa käyttöönotto hookeilla
+# Testaa käyttöönotto hookkien kanssa
 azd deploy
 ```
 
-**Onnistumiskriteerit:**
-- [ ] Esijulkaisu-skripti suoritetaan ennen julkaisua
-- [ ] Julkaisu peruutetaan, jos testit epäonnistuvat
-- [ ] Jälkijulkaisun savutesti varmistaa sovelluksen kunnon
-- [ ] Hookit suorittuvat oikeassa järjestyksessä
+**Success Criteria:**
+- [ ] Pre-deploy-skripti suoritetaan ennen käyttöönottoa
+- [ ] Käyttöönotto peruutetaan, jos testit epäonnistuvat
+- [ ] Post-deploy smoke-test varmistaa terveydentilan
+- [ ] Hookit suoritetaan oikeassa järjestyksessä
 
-### Harjoitus 3: Moni-ympäristöinen julkaisustrategia (45 minuuttia)
-**Tavoite**: Toteuta vaiheistettu julkaisutyövirta (dev → staging → production)
+### Exercise 3: Multi-Environment Deployment Strategy (45 minutes)
+**Goal**: Toteuta vaiheistettu käyttöönotto-työnkulku (dev → staging → production)
 
 ```bash
-# Luo käyttöönoton skripti
+# Luo käyttöönotto-skripti
 cat > deploy-staged.sh << 'EOF'
 #!/bin/bash
 set -e
@@ -834,30 +912,30 @@ azd env new dev
 azd env new staging
 azd env new production
 
-# Suorita vaiheistettu käyttöönotto
+# Suorita vaiheittainen käyttöönotto
 ./deploy-staged.sh
 ```
 
-**Onnistumiskriteerit:**
-- [ ] Dev-ympäristö julkaistaan onnistuneesti
-- [ ] Staging-ympäristö julkaistaan onnistuneesti
-- [ ] Tuotantoon vaaditaan manuaalinen hyväksyntä
-- [ ] Kaikissa ympäristöissä toimii terveystarkastus
-- [ ] Mahdollisuus palauttaa tarvittaessa
+**Success Criteria:**
+- [ ] Dev-ympäristöön käyttöönotto onnistuu
+- [ ] Staging-ympäristöön käyttöönotto onnistuu
+- [ ] Manuaalinen hyväksyntä vaaditaan tuotantoon
+- [ ] Kaikilla ympäristöillä on toimivat health checkit
+- [ ] Voidaan palauttaa takaisin tarvittaessa
 
-### Harjoitus 4: Palautusstrategia (25 minuuttia)
-**Tavoite**: Toteuta ja testaa julkaisun palautus Gitin avulla
+### Exercise 4: Rollback Strategy (25 minutes)
+**Goal**: Toteuta ja testaa käyttöönoton rollback Gitin avulla
 
 ```bash
 # Ota käyttöön v1
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# Tallenna v1:n commitin hash
+# Tallenna v1:n commit-hash
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# Ota käyttöön v2, joka sisältää yhteensopivuuden rikkovan muutoksen
+# Ota käyttöön v2, joka sisältää taaksepäin yhteensopimattoman muutoksen
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
@@ -867,7 +945,7 @@ azd deploy
 if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # Palauta gitillä
+    # Palauta gitin avulla
     git revert HEAD --no-edit
     
     # Palauta ympäristö
@@ -880,18 +958,18 @@ if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; 
 fi
 ```
 
-**Onnistumiskriteerit:**
-- [ ] Osaa havaita julkaisun epäonnistumiset
-- [ ] Palautusskripti suoritetaan automaattisesti
-- [ ] Sovellus palaa toimivaan tilaan
-- [ ] Terveystarkastukset läpäisevät palautuksen jälkeen
+**Success Criteria:**
+- [ ] Pystyy havaitsemaan käyttöönoton virheet
+- [ ] Rollback-skripti suoritetaan automaattisesti
+- [ ] Sovellus palautuu toimivaan tilaan
+- [ ] Health checkit läpäistään rollbackin jälkeen
 
-## 📊 Julkaisumetriikoiden seuranta
+## 📊 Deployment Metrics Tracking
 
-### Seuraa julkaisusi suorituskykyä
+### Track Your Deployment Performance
 
 ```bash
-# Luo käyttöönoton mittareita keräävä skripti
+# Luo käyttöönoton mittareiden skripti
 cat > track-deployment.sh << 'EOF'
 #!/bin/bash
 START_TIME=$(date +%s)
@@ -918,7 +996,7 @@ chmod +x track-deployment.sh
 ./track-deployment.sh
 ```
 
-**Analysoi metriikkasi:**
+**Analyze your metrics:**
 ```bash
 # Näytä käyttöönottohistoria
 cat deployment-metrics.csv
@@ -927,22 +1005,22 @@ cat deployment-metrics.csv
 awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
 ```
 
-## Lisäresurssit
+## Additional Resources
 
-- [Azure Developer CLI - Julkaisuviite](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Azure App Servicen julkaisu](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Azure Container Apps - Julkaisu](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Azure Functions - Julkaisu](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Azure Developer CLI Deployment Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Azure App Service Deployment](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Azure Container Apps Deployment](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Azure Functions Deployment](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
-**Navigointi**
-- **Edellinen oppitunti**: [Ensimmäinen projektisi](../chapter-01-foundation/first-project.md)
-- **Seuraava oppitunti**: [Resurssien provisiointi](provisioning.md)
+**Navigation**
+- **Previous Lesson**: [Your First Project](../chapter-01-foundation/first-project.md)
+- **Next Lesson**: [Provisioning Resources](provisioning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Tämä asiakirja on käännetty tekoälykäännöspalvelulla [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulee pitää määräävänä lähteenä. Tärkeiden tietojen osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai virhetulkinnoista.
+**Vastuuvapauslauseke**:
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, otathan huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäiskielellä on virallinen lähde. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

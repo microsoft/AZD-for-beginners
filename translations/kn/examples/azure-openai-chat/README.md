@@ -1,74 +1,75 @@
-# Microsoft Foundry Models ಚಾಟ್ ಅಪ್ಲಿಕೇಶನ್
+# Microsoft Foundry Models Chat Application
 
-**ಅಭ್ಯಾಸ ಮಾರ್ಗ:** ಮಧ್ಯಮ ⭐⭐ | **ಸಮಯ:** 35-45 ನಿಮಿಷಗಳು | **ಖರ್ಚು:** $50-200/ತಿಂಗಳು
+**Learning Path:** ಮಧ್ಯಮ ⭐⭐ | **Time:** 35-45 minutes | **Cost:** $50-200/month
 
-A complete Microsoft Foundry Models chat application deployed using Azure Developer CLI (azd). This example demonstrates gpt-4.1 deployment, secure API access, and a simple chat interface.
+Azure Developer CLI (azd) ಬಳಸಿಕೊಂಡು ನಿಯೋಜಿಸಲಾದ ಸಂಪೂರ್ಣ Microsoft Foundry Models ಚಾಟ್ ಅಪ್ಲಿಕೇಶನ್. ಈ ಉದಾಹರಣೆ gpt-4.1 ನಿಯೋಜನೆ, ಸುರಕ್ಷಿತ API ಪ್ರವೇಶ ಮತ್ತು ಸರಳ ಚಾಟ್ ಇಂಟರ್ಫೇಸ್ ಅನ್ನು ಪ್ರದರ್ಶಿಸುತ್ತದೆ.
 
 ## 🎯 ನೀವು ಏನು ಕಲಿಯುತ್ತೀರಿ
 
-- gpt-4.1 ಮಾದರಿಯೊಂದಿಗೆ Microsoft Foundry Models ಸೇವೆಯನ್ನು ನಿಯೋಜಿಸುವುದು
-- Key Vault ಬಳಸಿ OpenAI API ಕೀಗಳನ್ನು ಸುರಕ್ಷಿತಗೊಳಿಸುವುದು
-- Python ಬಳಸಿ ಸರಳ ಚಾಟ್ ಇಂಟರ್ಫೇಸ್ ನಿರ್ಮಿಸುವುದು
-- ಟೋಕನ್ ಬಳಕೆ ಮತ್ತು ಖರ್ಚುಗಳನ್ನು നിരೀಕ್ಷಿಸುವುದು
-- ರೇಟ್ ಲಿಮಿಟಿಂಗ್ ಮತ್ತು ದೋಷ ನಿರ್ವಹಣೆಯನ್ನು ಜಾರಿಗೆ ತರುವುದು
+- gpt-4.1 ಮಾದರಿಯನ್ನು ಬಳಸಿಕೊಂಡು Microsoft Foundry Models ಸೇವೆಯನ್ನು ನಿಯೋಜಿಸುವುದು  
+- Key Vault ಬಳಸಿ OpenAI API ಕೀಗಳನ್ನು ಸುರಕ್ಷಿತಗೊಳಿಸುವುದು  
+- Python ಬಳಸಿ ಸರಳ ಚಾಟ್ ಇಂಟರ್ಫೇಸ್ ನಿರ್ಮಿಸುವುದು  
+- ಟೋಕನ್ ಬಳಕೆ ಮತ್ತು ವೆಚ್ಚಗಳನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡುವುದು  
+- ರೇಟ್ ಲಿಮಿಟಿಂಗ್ ಮತ್ತು ದೋಷ ನಿರ್ವಹಣೆ ಅನುಷ್ಠಾನಗೊಳಿಸುವುದು
 
-## 📦 ಏನು ಒಳಗೊಂಡಿದೆ
+## 📦 ಏನು ಸೇರಿದೆ
 
 ✅ **Microsoft Foundry Models Service** - gpt-4.1 ಮಾದರಿ ನಿಯೋಜನೆ  
 ✅ **Python Chat App** - ಸರಳ ಕಮಾಂಡ್-ಲೈನ್ ಚಾಟ್ ಇಂಟರ್ಫೇಸ್  
-✅ **Key Vault Integration** - API ಕೀಗಳನ್ನು ಸುರಕ್ಷಿತವಾಗಿ ಸಂಗ್ರಹಿಸುವುದು  
-✅ **ARM Templates** - ಸಂಪೂರ್ಣ ಇನ್ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ಅನ್ನು ಕೋಡ್ ಆಗಿ  
-✅ **Cost Monitoring** - ಟೋಕನ್ ಬಳಕೆ ಟ್ರ್ಯಾಕಿಂಗ್  
-✅ **Rate Limiting** - ಕ್ವೋಟಾ ಕೊನೆಗೊಳ್ಳುವುದನ್ನು ತಡೆಯುವುದು  
+✅ **Key Vault Integration** - API ಕೀಲಿಗಳನ್ನು ಸುರಕ್ಷಿತ ಪ್ರ хранства  
+✅ **ARM Templates** - ಕೋಡ್ ರೂಪದಲ್ಲಿ ಸಂಪೂರ್ಣ ಮೂಲಸೌಕರ್ಯ  
+✅ **Cost Monitoring** - ಟೋಕನ್ ಬಳಕೆಯನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡುವುದು  
+✅ **Rate Limiting** - ಕೋಟಾ ಉತ್ಸಾಹದ ನಿರೋಧನೆ  
 
 ## Architecture
 
 ```mermaid
 graph TD
-    App[Python ಚಾಟ್ ಅಪ್ಲಿಕೇಶನ್<br/>ಸ್ಥಳೀಯ/ಕ್ಲೌಡ್<br/>ಕಮಾಂಡ್-ಲೈನ್ ಇಂಟರ್ಫೇಸ್<br/>ಸಂವಾದದ ಇತಿಹಾಸ<br/>ಟೋಕನ್ ಬಳಕೆಯ ಟ್ರ್ಯಾಕಿಂಗ್] -- "HTTPS (API ಕೀ)" --> Foundry[Microsoft Foundry ಮಾದರಿ ಸೇವೆ<br/>gpt-4.1 ಮಾದರಿ<br/>20K ಟೋಕನ್ಗಳು/ನಿಮಿಷ ಸಾಮರ್ಥ್ಯ<br/>ಬಹು-ಪ್ರದೇಶ ಫೇಲ್ಓವರ್]
-    Foundry --> KV[Azure ಕೀ ವಾಲ್ಟ್<br/>OpenAI API ಕೀ<br/>ಎಂಡ್‌ಪಾಯಿಂಟ್ URL]
+    App[Python ಚಾಟ್ ಅಪ್ಲಿಕೇಶನ್<br/>ಲೋಕಲ್/ಕ್ಲೌಡ್<br/>ಕಮಾಂಡ್-ಲೈನ್ ಇಂಟರ್ಫೇಸ್<br/>ಸಂವಾದ ಇತಿಹಾಸ<br/>ಟೋಕನ್ ಬಳಕೆ ಟ್ರ್ಯಾಕಿಂಗ್] -- "HTTPS (API ಕೀ)" --> Foundry[Microsoft Foundry ಮಾದರಿ ಸೇವೆ<br/>gpt-4.1 ಮಾದರಿ<br/>20K ಟೋಕನ್ಗಳು/ನಿಮಿಷ ಸಾಮರ್ಥ್ಯ<br/>ಬಹು-ಪ್ರದೇಶ ಫೇಲ್ಓವರ್]
+    Foundry --> KV[Azure ಕೀ ವಾಲ್ಟ್<br/>OpenAI API ಕೀ<br/>ಎಂಡ್ಪಾಯಿಂಟ್ URL]
     Foundry -. ನಿರ್ವಹಿತ ಐಡೆಂಟಿಟಿ .-> KV
 ```
-## ಪೂರ್ವಾಪೇಕ್ಷೆಗಳು
 
-### ಅಗತ್ಯವಿರುವವು
+## Prerequisites
 
-- **Azure Developer CLI (azd)** - [ಇನ್‌ಸ್ಟಾಲ್ ಮಾರ್ಗದರ್ಶಿ](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure subscription** with OpenAI access - [Request access](https://aka.ms/oai/access)
-- **Python 3.9+** - [Python ಅನ್ನು ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿ](https://www.python.org/downloads/)
+### Required
 
-### ಪೂರ್ವಾಪೇಕ್ಷಣೆಗಳ ಪರಿಶೀಲನೆ
+- **Azure Developer CLI (azd)** - [ಸ್ಥಾಪನೆ ಮಾರ್ಗದರ್ಶಿ](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+- **Azure ಚಂದಾದಾರಿಕೆ** with OpenAI access - [ಪ್ರವೇಶಕ್ಕಾಗಿ ವಿನಂತಿ](https://aka.ms/oai/access)
+- **Python 3.9+** - [Python ಸ್ಥಾಪಿಸಿ](https://www.python.org/downloads/)
+
+### Verify Prerequisites
 
 ```bash
-# azd ಆವೃತ್ತಿ ಪರಿಶೀಲಿಸಿ (1.5.0 ಅಥವಾ ಅದಕ್ಕಿಂತ ಮೇಲಿನ ಆವೃತ್ತಿ ಬೇಕು)
+# azd ಆವೃತ್ತಿಯನ್ನು ಪರಿಶೀಲಿಸಿ (ಕನಿಷ್ಠ 1.5.0 ಅಥವಾ ಅದಕ್ಕಿಂತ ಮೇಲಿನದು ಬೇಕು)
 azd version
 
 # Azure ಲಾಗಿನ್ ಪರಿಶೀಲಿಸಿ
 azd auth login
 
-# Python ಆವೃತ್ತಿ ಪರಿಶೀಲಿಸಿ
+# Python ಆವೃತ್ತಿಯನ್ನು ಪರಿಶೀಲಿಸಿ
 python --version  # ಅಥವಾ python3 --version
 
-# OpenAI ಪ್ರವೇಶ ಪರಿಶೀಲಿಸಿ (Azure ಪೋರ್ಟಲ್‌ನಲ್ಲಿ ಪರಿಶೀಲಿಸಿ)
+# OpenAI ಪ್ರವೇಶವನ್ನು ಪರಿಶೀಲಿಸಿ (Azure ಪೋರ್ಟಲ್‌ನಲ್ಲಿ ಪರಿಶೀಲಿಸಿ)
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus
 ```
 
-> **⚠️ ಮಹತ್ವದ್ದು:** Microsoft Foundry Models requires application approval. If you haven't applied, visit [aka.ms/oai/access](https://aka.ms/oai/access). Approval typically takes 1-2 business days.
+> **⚠️ Important:** Microsoft Foundry Models ಅಪ್ಲಿಕೇಶನ್ ಅಫ್ರೂವಲ್ ಅಗತ್ಯವಿದೆ. ನೀವು ಅರ್ಜಿ ಸಲ್ಲಿಸದಿದ್ದರೆ, ಭೇಟಿ ನೀಡಿ [aka.ms/oai/access](https://aka.ms/oai/access). ಅಫ್ರೂವಲ್ ಸಾಮಾನ್ಯವಾಗಿ 1-2 ಕೆಲಸದ ದಿನಗಳು ತೆಗೆದುಕೊಂಡಿದೆ.
 
 ## ⏱️ ನಿಯೋಜನೆ ಸಮಯರೇಖೆ
 
 | ಹಂತ | ಅವಧಿ | ಏನಾಗುತ್ತದೆ |
 |-------|----------|--------------|
-| ಪೂರ್ವಾಪೇಕ್ಷಣೆಗಳ ಪರಿಶೀಲನೆ | 2-3 ನಿಮಿಷಗಳು | OpenAI ಕ್ವೋಟಾ ಲಭ್ಯತೆಯನ್ನು ಪರಿಶೀಲಿಸಿ |
-| ಇನ್‌ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ನಿಯೋಜನೆ | 8-12 ನಿಮಿಷಗಳು | OpenAI, Key Vault ಮತ್ತು ಮಾದರಿ ನಿಯೋಜನೆಯನ್ನು ರಚಿಸಿ |
-| ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಕಾನ್ಫಿಗರ್ ಮಾಡಿ | 2-3 ನಿಮಿಷಗಳು | ಪರಿಸರ ಮತ್ತು ಅವಲಂಬನೆಗಳನ್ನು ಸೆಟ್ ಅಪ್ ಮಾಡಿ |
-| **ಒಟ್ಟು** | **12-18 ನಿಮಿಷಗಳು** | gpt-4.1 ಜೊತೆ ಚಾಟ್ ಮಾಡಲು ಸಿದ್ಧ |
+| ಆವಶ್ಯಕತೆಗಳ ಪರಿಶೀಲನೆ | 2-3 minutes | OpenAI ಕೊಟಾ ಲಭ್ಯತೆಯನ್ನು ಪರಿಶೀಲಿಸಲಾಗುತ್ತದೆ |
+| ಮೂಲಸೌಕರ್ಯ ನಿಯೋಜನೆ | 8-12 minutes | OpenAI, Key Vault, ಮಾದರಿ ನಿಯೋಜನೆವನ್ನು ರಚಿಸಲಾಗುತ್ತದೆ |
+| ಅಪ್ಲಿಕೇಶನ್ ಸಂರಚನೆ | 2-3 minutes | ಪರಿಸರ ಮತ್ತು ಅವಲಂಬನೆಗಳನ್ನು ಹೊಂದಿಸಲಾಗುತ್ತದೆ |
+| **ಒಟ್ಟು** | **12-18 minutes** | gpt-4.1 ಜೊತೆ ಚಾಟ್ ಮಾಡಲು ಸಿದ್ದವಾಗಿದೆ |
 
-**ಟಿಪ್ಪಣಿ:** ಮೊದಲ ಬಾರಿ OpenAI ನಿಯೋಜನೆಗೆ ಮಾದರಿ ಒದಗಿಸುವಿಕೆ ಕಾರಣವಾಗಿ ಹೆಚ್ಚು ಸಮಯ ಬೇಕಾಗಬಹುದು.
+** ಟಿಪ್ಪಣಿ:** ಮೊದಲಬಾರಿಗೆ OpenAI ನಿಯೋಜನೆಗೆ ಮಾದರಿ ಒದಗಿಸುವಿಕೆಯ ಕಾರಣ ಹೆಚ್ಚು ಸಮಯ ಬೇಕಾಗಬಹುದು.
 
-## ತ್ವರಿತ ಪ್ರಾರಂಭ
+## ವೇಗದ ಪ್ರಾರಂಭ
 
 ```bash
 # ಉದಾಹರಣೆಗೆ ಹೋಗಿ
@@ -79,19 +80,19 @@ azd env new myopenai
 
 # ಎಲ್ಲವನ್ನೂ ನಿಯೋಜಿಸಿ (ಆಧಾರಸೌಕರ್ಯ + ಸಂರಚನೆ)
 azd up
-# ನಿಮಗೆ ಕೆಳಕಂಡವು ಕೇಳಲಾಗುತ್ತದೆ:
-# 1. Azure ಚಂದಾದಾರಿಕೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ
-# 2. OpenAI ಲಭ್ಯತೆ ಇರುವ ಸ್ಥಳವನ್ನು ಆಯ್ಕೆಮಾಡಿ (ಉದಾ., eastus, eastus2, westus)
-# 3. ನಿಯೋಜನಿಗಾಗಿ 12-18 ನಿಮಿಷಗಳವರೆಗೆ ಕಾಯಿರಿ
+# ನಿಮಗೆ ಈ ಕೆಳಕಂಡವು ಕೇಳಲಾಗುತ್ತದೆ:
+# 1. Azure ಚಂದಾದಾರಿಕೆಯನ್ನು ಆಯ್ಕೆ ಮಾಡಿ
+# 2. OpenAI ಲಭ್ಯತೆ ಇರುವ ಸ್ಥಳವನ್ನು ಆಯ್ಕೆ ಮಾಡಿ (ಉದಾ., eastus, eastus2, westus)
+# 3. ನಿಯೋಜನೆಗಾಗಿ 12-18 ನಿಮಿಷ ಕಾಯಿರಿ
 
-# Python ಅವಲಂಬನೆಗಳನ್ನು ಸ್ಥಾಪಿಸಿ
+# Python ಅವಲಂಬನೆಗಳನ್ನು ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿ
 pip install -r requirements.txt
 
 # ಚಾಟ್ ಪ್ರಾರಂಭಿಸಿ!
 python chat.py
 ```
 
-**ನಿರೀಕ್ಷಿತ ಔಟ್‌ಪುಟ್:**
+**ನಿರೀಕ್ಷಿತ ಔಟ್‍ಪುಟ್:**
 ```
 🤖 Microsoft Foundry Models Chat Application
 Connected to: gpt-4.1 (eastus)
@@ -108,14 +109,14 @@ Assistant: Microsoft Foundry Models Service provides REST API access to OpenAI's
 ### ಹಂತ 1: Azure ಸಂಪನ್ಮೂಲಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
 
 ```bash
-# ನಿಯೋಜಿತ ಸಂಪನ್ಮೂಲಗಳನ್ನು ವೀಕ್ಷಿಸಿ
+# ನಿಯೋಜಿಸಲಾದ ಸಂಪನ್ಮೂಲಗಳನ್ನು ವೀಕ್ಷಿಸಿ
 azd show
 
 # ನಿರೀಕ್ಷಿತ ಔಟ್‌ಪುಟ್ ತೋರಿಸುತ್ತದೆ:
 # - OpenAI ಸೇವೆ: (ಸಂಪನ್ಮೂಲದ ಹೆಸರು)
 # - ಕೀ ವಾಲ್ಟ್: (ಸಂಪನ್ಮೂಲದ ಹೆಸರು)
 # - ನಿಯೋಜನೆ: gpt-4.1
-# - ಸ್ಥಳ: eastus (ಅಥವಾ ನೀವು ಆಯ್ದ ಪ್ರದೇಶ)
+# - ಸ್ಥಳ: eastus (ಅಥವಾ ನೀವು ಆಯ್ಕೆ ಮಾಡಿದ ಪ್ರದೇಶ)
 ```
 
 ### ಹಂತ 2: OpenAI API ಅನ್ನು ಪರೀಕ್ಷಿಸಿ
@@ -157,7 +158,7 @@ curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2
 ### ಹಂತ 3: Key Vault ಪ್ರವೇಶವನ್ನು ಪರಿಶೀಲಿಸಿ
 
 ```bash
-# ಕೀ ವಾಲ್ಟ್‌ನಲ್ಲಿನ ರಹಸ್ಯಗಳನ್ನು ಪಟ್ಟಿ ಮಾಡಿ
+# Key Vault ನಲ್ಲಿ ರಹಸ್ಯಗಳನ್ನು ಪಟ್ಟಿ ಮಾಡಿ
 KV_NAME=$(azd env get-value AZURE_KEY_VAULT_NAME)
 
 az keyvault secret list \
@@ -171,12 +172,12 @@ az keyvault secret list \
 - `openai-endpoint`
 
 **ಯಶಸ್ಸಿನ ಮಾನದಂಡಗಳು:**
-- ✅ gpt-4.1 ಸಹಿತ OpenAI ಸೇವೆ ನಿಯೋಜಿಸಲಾಗಿದೆ
-- ✅ API ಕರೆ ಮಾನ್ಯ ಪೂರ್ಣ ಸಮರ್ಪಣೆಯನ್ನು ಹಿಂತಿರುಗಿಸುತ್ತದೆ
-- ✅ ರಹಸ್ಯಗಳು Key Vault ನಲ್ಲಿ ಸಂಗ್ರಹಿಸಲ್ಪಟ್ಟಿವೆ
-- ✅ ಟೋಕನ್ ಬಳಕೆ ಟ್ರ್ಯಾಕಿಂಗ್ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ
+- ✅ OpenAI ಸೇವೆ gpt-4.1 ಜೊತೆಗೆ ನಿಯೋಜಿಸಲಾಗಿದೆ  
+- ✅ API ಕರೆ ಮಾನ್ಯ ಪ್ರತಿಕ್ರಿಯೆ 반환ಿಸುತ್ತದೆ  
+- ✅ ರಹಸ್ಯಗಳು Key Vault ನಲ್ಲಿ ಸಂಗ್ರಹಿಸಲ್ಪಟ್ಟಿವೆ  
+- ✅ ಟೋಕನ್ ಬಳಕೆ ಟ್ರ್ಯಾಕಿಂಗ್ ಕೆಲಸ ಮಾಡುತ್ತಿದೆ
 
-## ಪ್ರಾಜೆಕ್ಟ್ ರಚನೆ
+## Project Structure
 
 ```
 azure-openai-chat/
@@ -197,25 +198,25 @@ azure-openai-chat/
 
 ### ಚಾಟ್ ಇಂಟರ್ಫೇಸ್ (`chat.py`)
 
-ಚಾಟ್ ಅಪ್ಲಿಕೇಶನ್ ಒಳಗೊಂಡಿದೆ:
+ಚಾಟ್ ಅಪ್ಲಿಕೇಶನ್ ಒಳಗೊಂಡಿರುತ್ತದೆ:
 
-- **ಚರ್ಚೆಯ ಇತಿಹಾಸ** - ಸಂದೇಶಗಳ ನಡುವೆ ಸಂದರ್ಭವನ್ನು ಕಾಪಾಡುತ್ತದೆ
-- **ಟೋಕನ್ ಗಣನೆ** - ಬಳಕೆಯನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡಿ ಖರ್ಚುಗಳನ್ನು ಅಂದಾಜು ಮಾಡುತ್ತದೆ
-- **ದೋಷ ನಿರ್ವಹಣೆ** - ರೇಟ್ ಲಿಮಿಟ್ಗಳನ್ನು ಮತ್ತು API ದೋಷಗಳನ್ನು ಸಮರ್ಪಕವಾಗಿ ನಿರ್ವಹಿಸುತ್ತದೆ
-- **ಖರ್ಚಿನ ಅಂದಾಜು** - ಪ್ರತಿ ಸಂದೇಶಕ್ಕೆ ರಿಯಲ್-ಟೈಮ್ ಖರ್ಚು ಲೆಕ್ಕಾಚಾರ
+- **ಸಂವಾದ ಇತಿಹಾಸ** - ಸಂದೇಶಗಳ ಮಧ್ಯೆ ಪ್ರಾಸಂಗಿಕತೆಯನ್ನು ಕಾಪಾಡುತ್ತದೆ  
+- **ಟೋಕನ್ ಎಣಿಕೆ** - ಬಳಕೆಯನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡಿ ವೆಚ್ಚಗಳನ್ನು ಅಂದಾಜು ಮಾಡುತ್ತದೆ  
+- **ದೋಷ ನಿರ್ವಹಣೆ** - ರೇಟ್ ಲಿಮಿಟ್‌ಗಳು ಮತ್ತು API ದೋಷಗಳನ್ನು ಮೃದುವಾಗಿ ನಿರ್ವಹಿಸುತ್ತದೆ  
+- **ವೆಚ್ಚ ಅಂದಾಜು** - ಪ್ರತಿ ಸಂದೇಶದ ರಿಯಲ್-ಟೈಮ್ ವೆಚ್ಚ ಲೆಕ್ಕಾಚಾರ  
 - **ಸ್ಟ್ರೀಮಿಂಗ್ ಬೆಂಬಲ** - ಐಚ್ಛಿಕ ಸ್ಟ್ರೀಮಿಂಗ್ ಪ್ರತಿಕ್ರಿಯೆಗಳು
 
-### ಕಮಾಂಡ್ಗಳು
+### ಕಮಾಂಡ್‌ಗಳು
 
-ಚಾಟ್ ಮಾಡುತ್ತಿರುವಾಗ, ನೀವು ಬಳಸಬಹುದು:
-- `quit` or `exit` - ಸೆಶನ್ ಅಂತ್ಯಗೊಳಿಸಿ
-- `clear` - ಚರ್ಚೆಯ ಇತಿಹಾಸವನ್ನು ಅಳಿಸಿ
-- `tokens` - ಒಟ್ಟು ಟೋಕನ್ ಬಳಕೆಯನ್ನು ತೋರಿಸಿ
-- `cost` - ಒಟ್ಟು ಅಂದಾಜಿತ ಖರ್ಚನ್ನು ತೋರಿಸಿ
+ಚಾಟ್ ಮಾಡುವಾಗ, ನೀವು ಬಳಸಬಹುದು:
+- `quit` or `exit` - ಸೆಷನ್ ಮುಗಿಸಲು  
+- `clear` - ಸಂವಾದ ಇತಿಹಾಸವನ್ನು ತೆರವುಗೊಳಿಸಲು  
+- `tokens` - ಒಟ್ಟು ಟೋಕನ್ ಬಳಕೆಯನ್ನು ತೋರಿಸಲು  
+- `cost` - ಅಂದಾಜು ಒಟ್ಟು ವೆಚ್ಚವನ್ನು ತೋರಿಸಲು
 
 ### ಸಂರಚನೆ (`config.py`)
 
-ಪರಿಸರ ಚರಗಳಿಂದ ಸಂರಚನೆಯನ್ನು ಲೋಡ್ ಮಾಡುತ್ತದೆ:
+ಪರಿಸರ ವೇರಿಯಬಲ್ಗಳಿಂದ ಸಂರಚನೆಯನ್ನು ಲೋಡ್ ಮಾಡುತ್ತದೆ:
 ```python
 AZURE_OPENAI_ENDPOINT  # ಕೀ ವಾಲ್ಟ್‌ನಿಂದ
 AZURE_OPENAI_API_KEY   # ಕೀ ವಾಲ್ಟ್‌ನಿಂದ
@@ -223,7 +224,7 @@ AZURE_OPENAI_MODEL     # ಡೀಫಾಲ್ಟ್: gpt-4.1
 AZURE_OPENAI_MAX_TOKENS # ಡೀಫಾಲ್ಟ್: 800
 ```
 
-## ಬಳಕೆ ಉದಾಹರಣೆಗಳು
+## ಬಳಸುವ ಉದಾಹರಣೆಗಳು
 
 ### ಮೂಲಭೂತ ಚಾಟ್
 
@@ -270,33 +271,33 @@ Total session: 156 tokens | $0.0047
 
 ### ಟೋಕನ್ ಬೆಲೆ (gpt-4.1)
 
-| ಮಾದರಿ | ಇನ್‌ಪುಟ್ (ಪ್ರತಿ 1K ಟೋಕನ್ಗಳಿಗೆ) | ಔಟ್‌ಪುಟ್ (ಪ್ರತಿ 1K ಟೋಕನ್ಗಳಿಗೆ) |
+| ಮಾದರಿ | ಇನ್‌ಪುಟ್ (ಪ್ರತಿ 1K ಟೋಕನ್‌ಗಳು) | ಔಟ್‌ಪುಟ್ (ಪ್ರತಿ 1K ಟೋಕನ್‌ಗಳು) |
 |-------|----------------------|------------------------|
 | gpt-4.1 | $0.03 | $0.06 |
 | GPT-3.5-Turbo | $0.0015 | $0.002 |
 
-### ಅಂದಾಜಿತ ಮಾಸಿಕ ವೆಚ್ಚಗಳು
+### ಅಂದಾಜು ಮಾಸಿಕ ವೆಚ್ಚಗಳು
 
-ಬಳಕೆ ಮಾದರಿಗಳ ಆಧಾರದಲ್ಲಿ:
+ಬಳಕೆ ಮಾದರಿಗಳ ಆಧಾರದ ಮೇಲೆ:
 
-| ಬಳಕೆ ಮಟ್ಟ | ಸಂದೇಶಗಳು/ದಿನ | ಟೋಕನ್‌ಗಳು/ದಿನ | ಮಾಸಿಕ ವೆಚ್ಚ |
+| ಬಳಕೆ ಮಟ್ಟ | Messages/Day | Tokens/Day | Monthly Cost |
 |-------------|--------------|------------|--------------|
-| **ಹಗುರ** | 20 messages | 3,000 tokens | $3-5 |
+| **ಲಘು** | 20 messages | 3,000 tokens | $3-5 |
 | **ಮಧ್ಯಮ** | 100 messages | 15,000 tokens | $15-25 |
 | **ಭಾರಿ** | 500 messages | 75,000 tokens | $75-125 |
 
-**ಮೂಲ ಇನ್ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ವೆಚ್ಚ:** $1-2/ತಿಂಗಳು (Key Vault + ಕನಿಷ್ಠ ಕಂಪ್ಯೂಟ್)
+**ಮೂಲಸೌಕರ್ಯ ಮೂಲ ವೆಚ್ಚ:** $1-2/month (Key Vault + minimal compute)
 
-### ವೆಚ್ಚ ಲಘೂಕರಣ ಸಲಹೆಗಳು
+### ವೆಚ್ಚ ಮಿತಿಗೊಳಿಸುವ ಸಲಹೆಗಳು
 
 ```bash
-# 1. ಸರಳ ಕಾರ್ಯಗಳಿಗಾಗಿ GPT-3.5-Turbo ಅನ್ನು ಬಳಸಿರಿ (20 ಪಟ್ಟು ಸस्तಾಗಿದೆ)
+# 1. ಸರಳ ಕಾರ್ಯಗಳಿಗಾಗಿ GPT-3.5-Turbo ಅನ್ನು ಬಳಸಿ (20 ಪಟ್ಟು ಕಡಿಮೆ ವೆಚ್ಚ)
 export AZURE_OPENAI_MODEL=gpt-35-turbo
 
-# 2. ಚಿಕ್ಕ ಉತ್ತರಗಳಿಗೆ ಗರಿಷ್ಠ ಟೋಕನ್‌ಗಳನ್ನು ಕಡಿಮೆ ಮಾಡಿ
+# 2. ಸಣ್ಣ ಉತ್ತರಗಳಿಗಾಗಿ ಗರಿಷ್ಠ ಟೋಕನ್ಗಳನ್ನು ಕಡಿಮೆ ಮಾಡಿ
 export AZURE_OPENAI_MAX_TOKENS=400
 
-# 3. ಟೋಕನ್ ಬಳಕೆಯನ್ನು ನಿಗಾ ವಹಿಸಿ
+# 3. ಟೋಕನ್ ಬಳಕೆಯನ್ನು ಗಮನಿಸಿ
 python chat.py --show-tokens
 
 # 4. ಬಜೆಟ್ ಎಚ್ಚರಿಕೆಗಳನ್ನು ಹೊಂದಿಸಿ
@@ -306,13 +307,13 @@ az consumption budget create \
   --time-grain Monthly
 ```
 
-## ಮೇಲ್ವಿಚಾರಣೆ
+## ನಿಗಾವಣಾ
 
-### ಟೋಕನ್ ಬಳಕೆಯನ್ನು ವೀಕ್ಷಿಸಿ
+### ಟೋಕನ್ ಬಳಕೆ ವೀಕ್ಷಿಸಿ
 
 ```bash
 # Azure ಪೋರ್ಟಲ್‌ನಲ್ಲಿ:
-# OpenAI ಸಂಪನ್ಮೂಲ → ಮೆಟ್ರಿಕ್‌ಗಳು → "ಟೋಕನ್ ವ್ಯವಹಾರ" ಆಯ್ಕೆ ಮಾಡಿ
+# OpenAI ಸಂಪನ್ಮೂಲ → ಮಾಪಕಗಳು → "ಟೋಕನ್ ವ್ಯವಹಾರ" ಅನ್ನು ಆಯ್ಕೆ ಮಾಡಿ
 
 # ಅಥವಾ Azure CLI ಮೂಲಕ:
 az monitor metrics list \
@@ -322,10 +323,10 @@ az monitor metrics list \
   --interval PT1M
 ```
 
-### API ಲಾಗ್‌ಗಳನ್ನು ವೀಕ್ಷಿಸಿ
+### API ಲಾಗ್‌ಗಳು ವೀಕ್ಷಿಸಿ
 
 ```bash
-# ಡಯಾಗ್ನೋಸ್ಟಿಕ್ ಲಾಗ್‌ಗಳನ್ನು ಸ್ಟ್ರೀಮ್ ಮಾಡಿ
+# ತಪಾಸಣಾ ಲಾಗ್‌ಗಳನ್ನು ಸ್ಟ್ರೀಮ್ ಮಾಡಿ
 az monitor diagnostic-settings create \
   --resource $(azd env get-value AZURE_OPENAI_RESOURCE_ID) \
   --name openai-logs \
@@ -338,23 +339,23 @@ az monitor log-analytics query \
   --analytics-query "AzureDiagnostics | where Category == 'Audit' | top 10 by TimeGenerated"
 ```
 
-## ತೊಂದರೆ ಪರಿಹಾರ
+## ದೋಷ ಪರಿಹಾರ
 
 ### ಸಮಸ್ಯೆ: "Access Denied" ದೋಷ
 
 **ಲಕ್ಷಣಗಳು:** API ಕರೆ ಮಾಡಿದಾಗ 403 Forbidden
 
-**ಉಪಾಯಗಳು:**
+**ಪರಿಹಾರಗಳು:**
 ```bash
-# 1. OpenAI ಪ್ರವೇಶವು ಅನುಮೋದಿಸಲಾಗಿದೆ ಎಂದು ಪರಿಶೀಲಿಸಿ
+# 1. OpenAI ಪ್ರವೇಶ ಅನುಮೋದಿತವಾಗಿದೆ ಎಂದು ಪರಿಶೀಲಿಸಿ
 az cognitiveservices account show \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
 
-# 2. API ಕೀ ಸರಿಯಾದದ್ದೇ ಎಂದು ಪರಿಶೀಲಿಸಿ
+# 2. API ಕೀ ಸರಿಯಾಗಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸಿ
 azd env get-value AZURE_OPENAI_API_KEY
 
-# 3. ಎಂಡ್‌ಪಾಯಿಂ್ಟ್ URL ರೂಪವನ್ನು ಪರಿಶೀಲಿಸಿ
+# 3. ಎಂಡ್‌ಪಾಯಿಂಟ್ URL ಫಾರ್ಮ್ಯಾಟ್ ಅನ್ನು ಪರಿಶೀಲಿಸಿ
 azd env get-value AZURE_OPENAI_ENDPOINT
 # ಇದಾಗಿರಬೇಕು: https://[name].openai.azure.com/
 ```
@@ -363,7 +364,7 @@ azd env get-value AZURE_OPENAI_ENDPOINT
 
 **ಲಕ್ಷಣಗಳು:** 429 Too Many Requests
 
-**ಉಪಾಯಗಳು:**
+**ಪರಿಹಾರಗಳು:**
 ```bash
 # 1. ಪ್ರಸ್ತುತ ಕ್ವೋಟಾವನ್ನು ಪರಿಶೀಲಿಸಿ
 az cognitiveservices account deployment show \
@@ -371,41 +372,41 @@ az cognitiveservices account deployment show \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
   --deployment-name gpt-4.1
 
-# 2. ಕ್ವೋಟಾ ವೃದ್ಧಿಯನ್ನು ವಿನಂತಿ ಮಾಡಿ (ಅಗತ್ಯವಿದ್ದರೆ)
-# Azure ಪೋರ್ಟಲ್‌ಗೆ ಹೋಗಿ → OpenAI ಸಂಪನ್ಮೂಲ → ಕ್ವೋಟಾಗಳು → ವೃದ್ಧಿಗಾಗಿ ವಿನಂತಿ ಮಾಡಿ
+# 2. ಕ್ವೋಟಾ ಹೆಚ್ಚಳಕ್ಕಾಗಿ ವಿನಂತಿ ಮಾಡಿ (ಅವಶ್ಯಕವಾದರೆ)
+# Go to Azure Portal → OpenAI Resource → Quotas → Request Increase
 
-# 3. ಮರುಪ್ರಯತ್ನ ಲಾಜಿಕ್ ಅನ್ನು ಜಾರಿಗೆ ತರು (ಈಗಾಗಲೇ chat.py ನಲ್ಲಿ ಇದೆ)
-# ಅಪ್ಲಿಕೇಶನ್ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಘಾತಾಕಾರ ಹಿಂಜರಿಕೆಯೊಂದಿಗೆ ಮರುಪ್ರಯತ್ನ ಮಾಡುತ್ತದೆ
+# 3. ಮರುಪ್ರಯತ್ನ ಲಾಜಿಕ್ ಜಾರಿಗೆ ತರ (chat.py ನಲ್ಲಿ ಈಗಾಗಲೇ ಇದೆ)
+# ಅಪ್ಲಿಕೇಶನ್ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಘಾತೀಯ ಹಿಂದಿಕ್ಕುವಿಕೆಯಿಂದ ಮರುಪ್ರಯತ್ನಿಸುತ್ತದೆ
 ```
 
 ### ಸಮಸ್ಯೆ: "Model Not Found"
 
-**ಲಕ್ಷಣಗಳು:** ನಿಯೋಜನೆಗಾಗಿ 404 ದೋಷ
+**ಲಕ್ಷಣಗಳು:** ನಿಯೋಜನೆಗೆ 404 ದೋಷ
 
-**ಉಪಾಯಗಳು:**
+**ಪರಿಹಾರಗಳು:**
 ```bash
 # 1. ಲಭ್ಯವಿರುವ ನಿಯೋಜನೆಗಳನ್ನು ಪಟ್ಟಿ ಮಾಡಿ
 az cognitiveservices account deployment list \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
 
-# 2. ಪರಿಸರದಲ್ಲಿನ ಮಾದರಿ ಹೆಸರನ್ನು ಪರಿಶೀಲಿಸಿ
+# 2. ಪರಿಸರದಲ್ಲಿ ಮಾದರಿ ಹೆಸರನ್ನು ಪರಿಶೀಲಿಸಿ
 echo $AZURE_OPENAI_MODEL
 
 # 3. ಸರಿಯಾದ ನಿಯೋಜನೆ ಹೆಸರಿಗೆ ನವೀಕರಿಸಿ
 export AZURE_OPENAI_MODEL=gpt-4.1  # ಅಥವಾ gpt-35-turbo
 ```
 
-### ಸಮಸ್ಯೆ: ಹೆಚ್ಚಿದ ವಿಳಂಬ
+### ಸಮಸ್ಯೆ: ಉನ್ನತ ವಿಳಂಬ (High Latency)
 
-**ಲಕ್ಷಣಗಳು:** ಪ್ರತಿಕ್ರಿಯೆ ಸಮಯಗಳು ನಿಧಾನ (>5 ಸೆಕೆಂಡುಗಳು)
+**ಲಕ್ಷಣಗಳು:** ನಿಧಾನ ಪ್ರತಿಕ್ರಿಯಾ ಸಮಯಗಳು (>5 seconds)
 
-**ಉಪಾಯಗಳು:**
+**ಪರಿಹಾರಗಳು:**
 ```bash
 # 1. ಪ್ರಾದೇಶಿಕ ವಿಳಂಬವನ್ನು ಪರಿಶೀಲಿಸಿ
-# ಬಳಕೆದಾರರಿಗೆ ಅತಿ ಸಮೀಪದ ಪ್ರದೇಶಕ್ಕೆ ನಿಯೋಜಿಸಿ
+# ಬಳಕೆದಾರರಿಗೆ ಅತ್ಯಂತ ಹತ್ತಿರ ಇರುವ ಪ್ರದೇಶದಲ್ಲಿ ನಿಯೋಜಿಸಿ
 
-# 2. ವೇಗದ ಪ್ರತಿಕ್ರಿಯೆಗಳಿಗಾಗಿ max_tokens ಅನ್ನು ಕಡಿಮೆ ಮಾಡಿ
+# 2. ವೇಗವಾದ ಪ್ರತಿಕ್ರಿಯೆಗಳಿಗೆ max_tokens ಅನ್ನು ಕಡಿಮೆ ಮಾಡಿ
 export AZURE_OPENAI_MAX_TOKENS=400
 
 # 3. ಉತ್ತಮ ಬಳಕೆದಾರ ಅನುಭವಕ್ಕಾಗಿ ಸ್ಟ್ರೀಮಿಂಗ್ ಬಳಸಿ
@@ -417,40 +418,40 @@ python chat.py --stream
 ### 1. API ಕೀಲಿಗಳನ್ನು ರಕ್ಷಿಸಿ
 
 ```bash
-# ಎಂದಿಗೂ ಕೀಲಿಗಳನ್ನು ಸೋರ್ಸ್ ಕಂಟ್ರೋಲ್‌ಗೆ ಕಮಿಟ್ ಮಾಡಬೇಡಿ
-# Key Vault ಬಳಸಿ (ಈಗಾಗಲೇ ಸಂರಚಿಸಲಾಗಿದೆ)
+# ಕೀಲಿಗಳನ್ನು ಎಂದಿಗೂ ಸೋರ್ಸ್ ಕಂಟ್ರೋಲ್‌ಗೆ ಕಮಿಟ್ ಮಾಡಬೇಡಿ
+# Key Vault ಅನ್ನು ಬಳಸಿ (ಈಗಾಗಲೇ ಸಂರಚಿಸಲಾಗಿದೆ)
 
-# ಕೀಲಿಗಳನ್ನು ನಿಯಮಿತವಾಗಿ ಮರುಬದಲಾಯಿಸಿ
+# ಕೀಲಿಗಳನ್ನು ನಿಯಮಿತವಾಗಿ ಬದಲಿಸಿ
 az cognitiveservices account keys regenerate \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
   --key-name key1
 ```
 
-### 2. ವಿಷಯ ಫಿಲ್ಟರಿಂಗ್ ಅನ್ನು ಜಾರಿಗೆ ತರು
+### 2. ವಿಷಯ ಫಿಲ್ಟರಿಂಗ್ ಅನುಷ್ಠಾನಗೊಳಿಸಿ
 
 ```python
-# Microsoft Foundry ಮಾದರಿಗಳು ಒಳನಿರ್ಮಿತ ವಿಷಯ ಫಿಲ್ಟರಿಂಗ್ ಅನ್ನು ಒಳಗೊಂಡಿವೆ
+# Microsoft Foundry ಮಾದರಿಗಳಲ್ಲಿ ನಿರ್ಮಿತ ವಿಷಯ ಫಿಲ್ಟರಿಂಗ್ ಇದೆ
 # Azure ಪೋರ್ಟಲ್‌ನಲ್ಲಿ ಸಂರಚಿಸಿ:
-# OpenAI ಸಂಪನ್ಮೂಲ → ವಿಷಯ ಫಿಲ್ಟರ್‌ಗಳು → ಕಸ್ಟಮ್ ಫಿಲ್ಟರ್ ಸೃಷ್ಟಿಸಿ
+# OpenAI ಸಂಪನ್ಮೂಲ → ವಿಷಯ ಫಿಲ್ಟರ್‌ಗಳು → ಕಸ್ಟಮ್ ಫಿಲ್ಟರ್ ರಚಿಸಿ
 
-# ವರ್ಗಗಳು: ದ್ವೇಷ, ಲೈಂಗಿಕ, ಹಿಂಸಾಚಾರ, ಸ್ವಯಂ ಹಾನಿ
-# ಮಟ್ಟಗಳು: ಕಡಿಮೆ, ಮಧ್ಯಮ, ಹೆಚ್ಚು ಫಿಲ್ಟರಿಂಗ್
+# ವರ್ಗಗಳು: ದ್ವೇಷ, ಯೌನ, ಹಿಂಸೆ, ಸ್ವಯಂ ಹಾನಿ
+# ಮಟ್ಟಗಳು: ಕಡಿಮೆ, ಮಧ್ಯಮ, ಉನ್ನತ ಫಿಲ್ಟರಿಂಗ್
 ```
 
 ### 3. Managed Identity ಬಳಸಿ (ಉತ್ಪಾದನೆ)
 
 ```bash
-# ಉತ್ಪಾದನಾ ನಿಯೋಜನೆಗಳಿಗಾಗಿ ನಿರ್ವಹಿತ ಗುರುತನ್ನು ಬಳಸಿ
-# API ಕೀಲಿಗಳ ಬದಲು (Azure‌ನಲ್ಲಿ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಹೋಸ್ಟ್ ಮಾಡುವ ಅಗತ್ಯವಿದೆ)
+# ಉತ್ಪಾದನಾ ನಿಯೋಜನೆಗಳಿಗಾಗಿ ನಿರ್ವಹಿತ ಐಡೆಂಟಿಟಿಯನ್ನು ಬಳಸಿ
+# API ಕೀಲಿಗಳ ಬದಲಿಗೆ (ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು Azure ನಲ್ಲಿ ಹೋಸ್ಟ್ ಮಾಡುವ ಅಗತ್ಯವಿದೆ)
 
-# infra/openai.bicep ಫೈಲ್‌ನಲ್ಲಿ ಕೆಳಕಂಡುದನ್ನು ಸೇರಿಸಲು ನವೀಕರಿಸಿ:
+# infra/openai.bicep ಅನ್ನು ಒಳಗೊಂಡಂತೆ ನವೀಕರಿಸಿ:
 # identity: { type: 'SystemAssigned' }
 ```
 
 ## ಅಭಿವೃದ್ಧಿ
 
-### ಸ್ಥಳೀಯವಾಗಿ ಚಾಲನೆ
+### ಸ್ಥಳೀಯವಾಗಿ ಚಲಾಯಿಸಿ
 
 ```bash
 # ಅವಲಂಬನೆಗಳನ್ನು ಸ್ಥಾಪಿಸಿ
@@ -461,20 +462,20 @@ export AZURE_OPENAI_ENDPOINT="https://[name].openai.azure.com/"
 export AZURE_OPENAI_API_KEY="your-api-key"
 export AZURE_OPENAI_MODEL="gpt-4.1"
 
-# ಅನ್ವಯಿಕೆಯನ್ನು ಚಾಲನೆಗೊಳಿಸಿ
+# ಅರ್ಜಿಯನ್ನು ಚಲಾಯಿಸಿ
 python src/chat.py
 ```
 
-### ಪರೀಕ್ಷೆಗಳನ್ನು ನಡೆಸಿ
+### ಪರೀಕ್ಷೆಗಳನ್ನು ಚಲಾಯಿಸಿ
 
 ```bash
-# ಟೆಸ್ಟ್ ನಿರ್ಭರತೆಗಳನ್ನು ಸ್ಥಾಪಿಸಿ
+# ಟೆಸ್ಟ್ ಅವಲಂಬನೆಗಳನ್ನು ಸ್ಥಾಪಿಸಿ
 pip install pytest pytest-cov
 
 # ಟೆಸ್ಟ್‌ಗಳನ್ನು ನಡೆಸಿ
 pytest tests/ -v
 
-# ಕವರೆಜ್ ಸಹಿತ
+# ಕೋಡ್ ಕವರೆಜ್ ಸಹಿತ
 pytest tests/ --cov=src --cov-report=html
 ```
 
@@ -493,15 +494,15 @@ az cognitiveservices account deployment create \
   --sku-name "Standard"
 ```
 
-## ಸ್ವಚ್ಛತೆ
+## ಸಾಫ್ಫರ್ ಅಪ್ (Clean Up)
 
 ```bash
 # ಎಲ್ಲಾ Azure ಸಂಪನ್ಮೂಲಗಳನ್ನು ಅಳಿಸಿ
 azd down --force --purge
 
-# ಇದು ಕೆಳಗಿನವುಗಳನ್ನು ತೆಗೆದುಹಾಕುತ್ತದೆ:
+# ಇದರಿಂದ ಕೆಳಕಂಡವುಗಳು ತೆಗೆದುಹಾಕಲಾಗುತ್ತದೆ:
 # - OpenAI ಸೇವೆ
-# - ಕೀ ವಾಲ್ಟ್ (90-ದಿನಗಳ ಸಾಫ್ಟ್‌ಡಿಲೀಟ್ ಜೊತೆಗೆ)
+# - ಕೀ ವಾಲ್ಟ್ (90-ದಿನ ಸಾಫ್ಟ್ ಡಿಲೀಟ್ ಸಹಿತ)
 # - ಸಂಪನ್ಮೂಲ ಗುಂಪು
 # - ಎಲ್ಲಾ ನಿಯೋಜನೆಗಳು ಮತ್ತು ಸಂರಚನೆಗಳು
 ```
@@ -510,77 +511,77 @@ azd down --force --purge
 
 ### ಈ ಉದಾಹರಣೆಯನ್ನು ವಿಸ್ತರಿಸಿ
 
-1. **ವೆಬ್ ಇಂಟರ್ಫೇಸ್ ಸೇರಿಸಿ** - React/Vue ಫ್ರಂಟ್‌ಎಂಡ್ ನಿರ್ಮಿಸಿ
+1. **ವೆಬ್ ಇಂಟರ್ಫೇಸ್ ಸೇರಿಸಿ** - React/Vue ಫ್ರಂಟ್‌ಎಂಡ್ ನಿರ್ಮಿಸಿ  
    ```bash
    # azure.yaml ಗೆ ಫ್ರಂಟ್‌ಎಂಡ್ ಸೇವೆಯನ್ನು ಸೇರಿಸಿ
-   # Azure Static Web Apps ಗೆ ನಿಯೋಜಿಸಿ
+   # Azure Static Web Apps ಗೆ ಡಿಪ್ಲಾಯ್ ಮಾಡಿ
    ```
 
-2. **RAG ಅನುಷ್ಠಾನ ಮಾಡಿ** - Azure AI Search ಸಹಿತ ಡಾಕ್ಯುಮೆಂಟ್ ಹುಡುಕಾಟ ಸೇರಿಸಿ
+2. **RAG ಅನ್ನು ಅನುಷ್ಠಾನಗೊಳಿಸಿ** - Azure AI Search ಬಳಸಿ ದಾಖಲೆ ಹುಡುಕುವುದನ್ನು ಸೇರಿಸಿ  
    ```python
-   # Azure Cognitive Search ಅನ್ನು ಸಂಯೋಜಿಸಿ
-   # ದಾಖಲೆಗಳನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ ಮತ್ತು ವೆಕ್ಟರ್ ಸೂಚ್ಯಂಕವನ್ನು ರಚಿಸಿ
+   # Azure AI Search ಅನ್ನು ಏಕೀಕರಿಸಿ
+   # ದಾಖಲೆಗಳನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಿ ಮತ್ತು ವೆಕ್ಟರ್ ಸೂಚ್ಯಂಕವನ್ನು ರಚಿಸಿ
    ```
 
-3. **ಫಂಕ್ಷನ್ ಕಾಲಿಂಗ್ ಸೇರಿಸಿ** - ಟೂಲ್ಗಳ ಬಳಕೆಗೆ ಅನುಮತಿಸಿ
+3. **ಫಂಕ್ಷನ್ ಕಾಲಿಂಗ್ ಸೇರಿಸಿ** - ಟೂಲ್ ಬಳಕೆಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ  
    ```python
    # chat.py ನಲ್ಲಿ ಫಂಕ್ಷನ್‌ಗಳನ್ನು ವ್ಯಾಖ್ಯಾನಿಸಿ
-   # gpt-4.1 ಗೆ ಬಾಹ್ಯ APIಗಳನ್ನು ಕರೆ ಮಾಡಲು ಅನುಮತಿಸಿ
+   # gpt-4.1 ಗೆ ಬಾಹ್ಯ APIಗಳನ್ನು ಕರೆಮಾಡಲು ಅನುಮತಿ ನೀಡಿ
    ```
 
-4. **ಬಹು-ಮಾದರಿ ಬೆಂಬಲ** - ಬಹು ಮಾದರಿಗಳನ್ನು ನಿಯೋಜಿಸಿ
+4. **ಬಹು-ಮಾದರಿ ಬೆಂಬಲ** - ಹಲವಾರು ಮಾದರಿಗಳನ್ನು ನಿಯೋಜಿಸಿ  
    ```bash
-   # gpt-35-turbo ಮತ್ತು ಎಂಬೆಡ್ಡಿಂಗ್ ಮಾದರಿಗಳನ್ನು ಸೇರಿಸಿ
-   # ಮಾದರಿ ರೌಟಿಂಗ್ ಲಾಜಿಕ್ ಅನ್ನು ಅನುಷ್ಠಾನಗೊಳಿಸಿ
+   # gpt-35-turbo ಮತ್ತು ಎಂಬೆಡಿಂಗ್ ಮಾದರಿಗಳನ್ನು ಸೇರಿಸಿ
+   # ಮಾದರಿ ಮಾರ್ಗನಿರ್ದೇಶನ ತರ್ಕವನ್ನು ಅನುಷ್ಠಾನಗೊಳಿಸಿ
    ```
 
 ### ಸಂಬಂಧಿತ ಉದಾಹರಣೆಗಳು
 
-- **[Retail Multi-Agent](../retail-scenario.md)** - ಉನ್ನತ ಮಟ್ಟದ ಬಹು-ಏಜೆಂಟ್ ಆರ್ಕಿಟೆಕ್ಚರ್
-- **[Database App](../../../../examples/database-app)** - ಸ್ಥಿರ ಸಂಗ್ರಹಣೆ ಸೇರಿಸಿ
-- **[Container Apps](../../../../examples/container-app)** - ಕಂಟೈನರೈಸ್ ಮಾಡಿದ ಸೇವೆಯಾಗಿ ನಿಯೋಜಿಸಿ
+- **[Retail Multi-Agent](../retail-scenario.md)** - ಉನ್ನತ ಮಟ್ಟದ ಬಹು-ಏಜೆಂಟ್ ಆರ್ಕಿಟೆಕ್ಚರ್  
+- **[Database App](../../../../examples/database-app)** - ಸ್ಥಿರ ಸಂಗ್ರಹಣೆಯನ್ನು ಸೇರಿಸಿ  
+- **[Container Apps](../../../../examples/container-app)** - ಕಂಟೇನರ್ ಸಾಧನೆ ಯಾಗಿ ನಿಯೋಜಿಸಿ
 
-### ಅಧ್ಯಯನ ಸಂಪನ್ಮೂಲಗಳು
+### ಅಭ್ಯಾಸ ಸಂಪನ್ಮೂಲಗಳು
 
-- 📚 [AZD For Beginners Course](../../README.md) - ಮುಖ್ಯ ಕೋರ್ಸ್ ಮುಖಪುಟ
-- 📚 [Microsoft Foundry Models Documentation](https://learn.microsoft.com/azure/ai-services/openai/) - ಅಧಿಕೃತ ಡಾಕ್ಯುಮೆಂಟ್‌ಗಳು
-- 📚 [OpenAI API Reference](https://platform.openai.com/docs/api-reference) - API ವಿವರಗಳು
+- 📚 [AZD For Beginners Course](../../README.md) - ಮುಖ್ಯ ಕೋರ್ಸ್ ಮನೆ  
+- 📚 [Microsoft Foundry Models Documentation](https://learn.microsoft.com/azure/ai-services/openai/) - ಅಧಿಕೃತ ಡಾಕ್ಯುಮೆಂಟೇಶನ್  
+- 📚 [OpenAI API Reference](https://platform.openai.com/docs/api-reference) - API ವಿವರಗಳು  
 - 📚 [Responsible AI](https://www.microsoft.com/ai/responsible-ai) - ಉತ್ತಮ ಅಭ್ಯಾಸಗಳು
 
-## ಹೆಚ್ಚುವರಿ ಸಂಪನ್ಮೂಲಗಳು
+## ನೆರೆಯ ಸಂಪನ್ಮೂಲಗಳು
 
-### ಡಾಕ್ಯುಮೆಂಟೇಷನ್
-- **[Microsoft Foundry Models Service](https://learn.microsoft.com/azure/ai-services/openai/)** - ಸಂಪೂರ್ಣ ಮಾರ್ಗದರ್ಶಿ
-- **[gpt-4.1 Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - ಮಾದರಿ ಸಾಮರ್ಥ್ಯಗಳು
-- **[Content Filtering](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - ಸುರಕ್ಷತಾ ವೈಶಿಷ್ಟ್ಯಗಳು
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd ಉಲ್ಲೇಖ
+### ಡಾಕ್ಯುಮೆಂಟೇಶನ್
+- **[Microsoft Foundry Models Service](https://learn.microsoft.com/azure/ai-services/openai/)** - ಸಂಪೂರ್ಣ ಮಾರ್ಗದರ್ಶಿ  
+- **[gpt-4.1 Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - ಮಾದರಿ ಸಾಮರ್ಥ್ಯಗಳು  
+- **[Content Filtering](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - ಭದ್ರತಾ ವೈಶಿಷ್ಟ್ಯಗಳು  
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd ರೆಫರೆನ್ಸ್
 
-### ತರಬೇತಿಗಳು
-- **[OpenAI Quickstart](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - ಪ್ರಥಮ ನಿಯೋಜನೆ
-- **[Chat Completions](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - ಚಾಟ್ ಅಪ್ಲಿಕೇಶನ್ಗಳನ್ನು ನಿರ್ಮಿಸುವುದು
+### ಟ್ಯುಟೋರಿಯಲ್ಸ್
+- **[OpenAI Quickstart](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - ಮೊದಲ ನಿಯೋಜನೆ  
+- **[Chat Completions](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - ಚಾಟ್ ಅಪ್ಲಿಕೇಶನ್ ನಿರ್ಮಿಸುವುದು  
 - **[Function Calling](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - ಉನ್ನತ ವೈಶಿಷ್ಟ್ಯಗಳು
 
 ### ಸಾಧನಗಳು
-- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - ವೆಬ್-ಆಧಾರಿತ ಪ್ಲೇಗ್ರೌಂಡ್
-- **[Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)** - ಉತ್ತಮ ಪ್ರಾಂಪ್ಟ್ ಬರೆಯುವುದು
+- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - ವೆಬ್ ಆಧಾರಿತ ಪ್ಲೇಗ್ರೌಂಡ್  
+- **[Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)** - ಉತ್ತಮ ಪ್ರಾಂಪ್ಟ್ ಬರೆಯುವ ಮಾರ್ಗದರ್ಶಿ  
 - **[Token Calculator](https://platform.openai.com/tokenizer)** - ಟೋಕನ್ ಬಳಕೆಯನ್ನು ಅಂದಾಜು ಮಾಡಿ
 
 ### ಸಮುದಾಯ
-- **[Azure AI Discord](https://discord.gg/azure)** - ಸಮುದായದಿಂದ ಸಹಾಯ ಪಡೆಯಿರಿ
-- **[GitHub Discussions](https://github.com/Azure-Samples/openai/discussions)** - ಪ್ರಶ್ನೋತ್ತರ ವೇದಿಕೆ
-- **[Azure Blog](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - ಇತ್ತೀಚಿನ ಅಪ್ಡೇಟ್ಗಳು
+- **[Azure AI Discord](https://discord.gg/azure)** - ಸಮುದಾಯದಿಂದ ಸಹಾಯ ಪಡೆಯಿರಿ  
+- **[GitHub Discussions](https://github.com/Azure-Samples/openai/discussions)** - Q&A ಫೋರಮ್  
+- **[Azure Blog](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - تازಾ ನವೀಕರಣಗಳು
 
 ---
 
-**🎉 ಯಶಸ್ಸು!** ನೀವು Microsoft Foundry Models ಅನ್ನು ನಿಯೋಜಿಸಿದ್ದೀರಿ ಮತ್ತು ಕಾರ್ಯನಿರ್ವಹಿಸುವ ಚಾಟ್ ಅಪ್ಲಿಕೇಶನ್ ನಿರ್ಮಿಸಿದ್ದೀರಿ. gpt-4.1 ಯ ಸಾಮರ್ಥ್ಯಗಳನ್ನು ಅನ್ವೇಷಿಸಿ ಮತ್ತು ವಿಭಿನ್ನ ಪ್ರಾಂಪ್ಟ್‌ಗಳು ಮತ್ತು ಉಪಯೋಗಗಳೊಂದಿಗೆ ಪ್ರಯೋಗ ಮಾಡಿ.
+**🎉 ಯಶಸ್ಸು!** ನೀವು Microsoft Foundry Models ಅನ್ನು ನಿಯೋಜಿಸಿದ್ದೀರಿ ಮತ್ತು ಕಾರ್ಯನಿರ್ವಹಿಸುವ ಚಾಟ್ ಅಪ್ಲಿಕೇಶನ್ ನಿರ್ಮಿಸಿರುವಿರಿ. gpt-4.1 ನ ಸಾಮರ್ಥ್ಯಗಳನ್ನು ಅನ್ವೇಷಿಸಿ ಮತ್ತು ವಿಭಿನ್ನ ಪ್ರಾಂಪ್ಟ್‌ಗಳು ಮತ್ತು ಬಳಕೆ ಪ್ರಕರಣಗಳೊಂದಿಗೆ ಪ್ರಯೋಗ ಮಾಡಿ.
 
-**ಪ್ರಶ್ನೆಗಳು?** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) ಅಥವಾ [FAQ](../../resources/faq.md) を ಪರಿಶೀಲಿಸಿ
+**ಪ್ರಶ್ನೆಗಳಿವೆಯೇ?** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) ಅಥವಾ [FAQ](../../resources/faq.md) ಪರಿಶೀಲಿಸಿ
 
-**ಖರ್ಚು ಎಚ್ಚರಿಕೆ:** ಪರೀಕ್ಷೆ ಮುಗಿಸಿದ ನಂತರ ನಿರಂತರ ಶುಲ್ಕಗಳನ್ನು ತಪ್ಪಿಸಲು `azd down` ಅನ್ನು ಚಲಾಯಿಸುವುದನ್ನು ನೆನಪಿಡಿ (~ಸಕ್ರಿಯ ಬಳಕೆಗೆ $50-100/ತಿಂಗಳಿಗೆ).
+**ಕೆಲವಚೇತಾವಣಿ:** ಪರೀಕ್ಷೆ ಮುಗಿಸಿದ ಮೇಲೆ ನಿರಂತರ ಶುಲ್ಕಗಳನ್ನು ತಪ್ಪಿಸಲು `azd down` ಅನ್ನು ಓಡಿಸಲು ಮರೆತಬೇಡಿ (~$50-100/month ಸಕ್ರಿಯ ಬಳಕೆಗಾಗಿ).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-ಈ ದಾಖಲೆ [Co-op Translator](https://github.com/Azure/co-op-translator) ಎಂಬ AI ಅನುವಾದ ಸೇವೆಯನ್ನು ಬಳಸಿ ಅನುವಾದಿಸಲಾಗಿದೆ. ನಾವು ನಿಖರತೆಗೆ ಪ್ರಯತ್ನಿಸಿದರೂ, ದಯವಿಟ್ಟು ತಿಳಿದುಕೊಳ್ಳಿ — ಸ್ವಯಂಚಾಲಿತ ಅನುವಾದಗಳಲ್ಲಿ ತಪ್ಪುಗಳು ಅಥವಾ ಅಸಮರ್ಪಕತೆಗಳು ಇರಬಹುದು. ಮೂಲ ಭಾಷೆಯಲ್ಲಿರುವ ಮೂಲ ದಾಖಲೆನ್ನು ಪ್ರಾಧಿಕಾರೀಕೃತ ಮೂಲವೆಂದು ಪರಿಗಣಿಸಬೇಕು. ಗಂಭೀರ ಮಾಹಿತಿಗಾಗಿ, ವೃತ್ತಿಪರ ಮಾನವ ಅನುವಾದವನ್ನು ಶಿಫಾರಸು ಮಾಡಲಾಗುತ್ತದೆ. ಈ ಅನುವಾದವನ್ನು ಬಳಸುವುದರಿಂದ ಉಂಟಾದ ಯಾವುದೇ ತಪ್ಪು ಗ್ರಹಿಕೆಗಳು ಅಥವಾ ತಪ್ಪು ವ್ಯಾಖ್ಯಾನಗಳಿಗಾಗಿ ನಾವು ಜವಾಬ್ದಾರರಾಗಿರುವುದಿಲ್ಲ.
+**ಅಸ್ವೀಕಾರ**:
+ಈ ದಸ್ತಾವೇಜು AI ಅನುವಾದ ಸೇವೆ [Co-op Translator](https://github.com/Azure/co-op-translator) ಬಳಸಿ ಅನುವಾದಿಸಲಾಗಿದೆ. ನಾವು ನಿಖರತೆಯನ್ನು ಸಾಧಿಸಲು ಪ್ರಯತ್ನಿಸುತ್ತಿದ್ದರೂ, ದಯವಿಟ್ಟು ಗಮನಿಸಿ, ಸ್ವಯಂಚಾಲಿತ ಅನುವಾದಗಳಲ್ಲಿ ದೋಷಗಳು ಅಥವಾ ಅಸಡ್ಡೆಗಳು ಇರಬಹುದು. ಮೂಲ ಭಾಷೆಯಲ್ಲಿರುವ ಮೂಲ ದಸ್ತಾವೇಜು ಪ್ರಾಮಾಣಿಕ ಮೂಲವೆಂದು ಪರಿಗಣಿಸಬೇಕು. ಪ್ರಮುಖ ಮಾಹಿತಿಗಾಗಿ, ವೃತ್ತಿಪರ ಮಾನವ ಅನುವಾದವನ್ನು ಶಿಫಾರಸು ಮಾಡಲಾಗುತ್ತದೆ. ಈ ಅನುವಾದವನ್ನು ಬಳಸುವ ಮೂಲಕ ಉಂಟಾಗುವ ಯಾವುದೇ ತಪ್ಪು ಅರ್ಥಗಳ ಅಥವಾ ತಪ್ಪು ವ್ಯಾಖ್ಯಾನಗಳ ಬಗ್ಗೆ ನಾವು ಹೊಣೆಗಾರರಲ್ಲ.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

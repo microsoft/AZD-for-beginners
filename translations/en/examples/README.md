@@ -266,45 +266,46 @@ Azure Samples AZD Templates (linked externally):
 
 ### Real-World Scenarios
 
-#### **Retail Multi-Agent Solution** 🆕  
+#### **Retail Multi-Agent Solution** 🆕
 **[Complete Implementation Guide](./retail-scenario.md)**
 
 A comprehensive, production-ready multi-agent customer support solution that demonstrates enterprise-grade AI application deployment with AZD. This scenario provides:
-- **Complete Architecture**: Multi-agent system with specialized customer service and inventory management agents  
-- **Production Infrastructure**: Multi-region Microsoft Foundry Models deployments, AI Search, Container Apps, and comprehensive monitoring  
-- **Ready-to-Deploy ARM Template**: One-click deployment with multiple configuration modes (Minimal/Standard/Premium)  
-- **Advanced Features**: Red teaming security validation, agent evaluation framework, cost optimization, and troubleshooting guides  
-- **Real Business Context**: Retailer customer support use case with file uploads, search integration, and dynamic scaling  
 
-**Technologies**: Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API  
+- **Complete Architecture**: Multi-agent system with specialized customer service and inventory management agents
+- **Production Infrastructure**: Multi-region Microsoft Foundry Models deployments, AI Search, Container Apps, and comprehensive monitoring
+- **Ready-to-Deploy ARM Template**: One-click deployment with multiple configuration modes (Minimal/Standard/Premium)
+- **Advanced Features**: Red teaming security validation, agent evaluation framework, cost optimization, and troubleshooting guides
+- **Real Business Context**: Retailer customer support use case with file uploads, search integration, and dynamic scaling
 
-**Complexity**: ⭐⭐⭐⭐ (Advanced - Enterprise Production Ready)  
+**Technologies**: Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
 
-**Perfect for**: AI developers, solution architects, and teams building production multi-agent systems  
+**Complexity**: ⭐⭐⭐⭐ (Advanced - Enterprise Production Ready)
 
-**Quick Start**: Deploy the complete solution in under 30 minutes using the included ARM template with `./deploy.sh -g myResourceGroup`  
+**Perfect for**: AI developers, solution architects, and teams building production multi-agent systems
 
-## 📋 Usage Instructions  
+**Quick Start**: Deploy the complete solution in under 30 minutes using the included ARM template with `./deploy.sh -g myResourceGroup`
 
-### Prerequisites  
+## 📋 Usage Instructions
 
-Before running any example:  
-- ✅ Azure subscription with Owner or Contributor access  
-- ✅ Azure Developer CLI installed ([Installation Guide](../docs/chapter-01-foundation/installation.md))  
-- ✅ Docker Desktop running (for container examples)  
-- ✅ Appropriate Azure quotas (check example-specific requirements)  
+### Prerequisites
 
-> **💰 Cost Warning:** All examples create real Azure resources that incur charges. See individual README files for cost estimates. Remember to run `azd down` when done to avoid ongoing costs.  
+Before running any example:
+- ✅ Azure subscription with Owner or Contributor access
+- ✅ Azure Developer CLI installed ([Installation Guide](../docs/chapter-01-foundation/installation.md))
+- ✅ Docker Desktop running (for container examples)
+- ✅ Appropriate Azure quotas (check example-specific requirements)
 
-### Running Examples Locally  
+> **💰 Cost Warning:** All examples create real Azure resources that incur charges. See individual README files for cost estimates. Remember to run `azd down` when done to avoid ongoing costs.
 
-1. **Clone or Copy Example**  
+### Running Examples Locally
+
+1. **Clone or Copy Example**
    ```bash
    # Navigate to desired example
    cd examples/simple-web-app
    ```
-  
-2. **Initialize AZD Environment**  
+
+2. **Initialize AZD Environment**
    ```bash
    # Initialize with existing template
    azd init
@@ -312,21 +313,21 @@ Before running any example:
    # Or create new environment
    azd env new my-environment
    ```
-  
-3. **Configure Environment**  
+
+3. **Configure Environment**
    ```bash
    # Set required variables
    azd env set AZURE_LOCATION eastus
    azd env set AZURE_SUBSCRIPTION_ID your-subscription-id
    ```
-  
-4. **Deploy**  
+
+4. **Deploy**
    ```bash
    # Deploy infrastructure and application
    azd up
    ```
-  
-5. **Verify Deployment**  
+
+5. **Verify Deployment**
    ```bash
    # Get service endpoints
    azd env get-values
@@ -335,241 +336,241 @@ Before running any example:
    curl https://your-app-url.azurecontainer.io/health
    ```
    
-   **Expected Success Indicators:**  
-   - ✅ `azd up` completes without errors  
-   - ✅ Service endpoint returns HTTP 200  
-   - ✅ Azure Portal shows "Running" status  
-   - ✅ Application Insights receiving telemetry  
+   **Expected Success Indicators:**
+   - ✅ `azd up` completes without errors
+   - ✅ Service endpoint returns HTTP 200
+   - ✅ Azure Portal shows "Running" status
+   - ✅ Application Insights receiving telemetry
 
-> **⚠️ Issues?** See [Common Issues](../docs/chapter-07-troubleshooting/common-issues.md) for deployment troubleshooting  
+> **⚠️ Issues?** See [Common Issues](../docs/chapter-07-troubleshooting/common-issues.md) for deployment troubleshooting
 
-### Adapting Examples  
+### Adapting Examples
 
-Each example includes:  
-- **README.md** - Detailed setup and customization instructions  
-- **azure.yaml** - AZD configuration with comments  
-- **infra/** - Bicep templates with parameter explanations  
-- **src/** - Sample application code  
-- **scripts/** - Helper scripts for common tasks  
+Each example includes:
+- **README.md** - Detailed setup and customization instructions
+- **azure.yaml** - AZD configuration with comments
+- **infra/** - Bicep templates with parameter explanations
+- **src/** - Sample application code
+- **scripts/** - Helper scripts for common tasks
 
-## 🎯 Learning Objectives  
+## 🎯 Learning Objectives
 
-### Example Categories  
+### Example Categories
 
-#### **Basic Deployments**  
-- Single-service applications  
-- Simple infrastructure patterns  
-- Basic configuration management  
-- Cost-effective development setups  
+#### **Basic Deployments**
+- Single-service applications
+- Simple infrastructure patterns
+- Basic configuration management
+- Cost-effective development setups
 
-#### **Advanced Scenarios**  
-- Multi-service architectures  
-- Complex networking configurations  
-- Database integration patterns  
-- Security and compliance implementations  
+#### **Advanced Scenarios**
+- Multi-service architectures
+- Complex networking configurations
+- Database integration patterns
+- Security and compliance implementations
 
-#### **Production-Ready Patterns**  
-- High availability configurations  
-- Monitoring and observability  
-- CI/CD integration  
-- Disaster recovery setups  
+#### **Production-Ready Patterns**
+- High availability configurations
+- Monitoring and observability
+- CI/CD integration
+- Disaster recovery setups
 
-## 📖 Example Descriptions  
+## 📖 Example Descriptions
 
-### Simple Web App - Node.js Express  
+### Simple Web App - Node.js Express
 **Technologies**: Node.js, Express, MongoDB, Container Apps  
 **Complexity**: Beginner  
-**Concepts**: Basic deployment, REST API, NoSQL database integration  
+**Concepts**: Basic deployment, REST API, NoSQL database integration
 
-### Static Website - React SPA  
+### Static Website - React SPA
 **Technologies**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
 **Complexity**: Beginner  
-**Concepts**: Static hosting, serverless backend, modern web development  
+**Concepts**: Static hosting, serverless backend, modern web development
 
-### Container App - Python Flask  
+### Container App - Python Flask
 **Technologies**: Python Flask, Docker, Container Apps, Container Registry, Application Insights  
 **Complexity**: Beginner  
 **Concepts**: Containerization, REST API, scale-to-zero, health probes, monitoring  
-**Location**: [Local Example](../../../examples/container-app/simple-flask-api)  
+**Location**: [Local Example](../../../examples/container-app/simple-flask-api)
 
-### Container App - Microservices Architecture  
+### Container App - Microservices Architecture
 **Technologies**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, Container Apps  
 **Complexity**: Advanced  
 **Concepts**: Multi-service architecture, service communication, message queuing, distributed tracing  
-**Location**: [Local Example](../../../examples/container-app/microservices)  
+**Location**: [Local Example](../../../examples/container-app/microservices)
 
-### Database App - C# with Azure SQL  
+### Database App - C# with Azure SQL
 **Technologies**: C# ASP.NET Core, Azure SQL Database, App Service  
 **Complexity**: Intermediate  
-**Concepts**: Entity Framework, database connections, web API development  
+**Concepts**: Entity Framework, database connections, web API development
 
-### Serverless Function - Python Azure Functions  
+### Serverless Function - Python Azure Functions
 **Technologies**: Python, Azure Functions, Cosmos DB, Static Web Apps  
 **Complexity**: Intermediate  
-**Concepts**: Event-driven architecture, serverless computing, full-stack development  
+**Concepts**: Event-driven architecture, serverless computing, full-stack development
 
-### Microservices - Java Spring Boot  
+### Microservices - Java Spring Boot
 **Technologies**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
 **Complexity**: Intermediate  
-**Concepts**: Microservices communication, distributed systems, enterprise patterns  
+**Concepts**: Microservices communication, distributed systems, enterprise patterns
 
-### Microsoft Foundry Examples  
+### Microsoft Foundry Examples
 
-#### Microsoft Foundry Models Chat App  
-**Technologies**: Microsoft Foundry Models, Cognitive Search, App Service  
+#### Microsoft Foundry Models Chat App
+**Technologies**: Microsoft Foundry Models, Azure AI Search, App Service  
 **Complexity**: Intermediate  
-**Concepts**: RAG architecture, vector search, LLM integration  
+**Concepts**: RAG architecture, vector search, LLM integration
 
-#### AI Document Processing  
+#### AI Document Processing
 **Technologies**: Azure AI Document Intelligence, Storage, Functions  
 **Complexity**: Intermediate  
-**Concepts**: Document analysis, OCR, data extraction  
+**Concepts**: Document analysis, OCR, data extraction
 
-#### Machine Learning Pipeline  
+#### Machine Learning Pipeline
 **Technologies**: Azure ML, MLOps, Container Registry  
 **Complexity**: Advanced  
-**Concepts**: Model training, deployment pipelines, monitoring  
+**Concepts**: Model training, deployment pipelines, monitoring
 
-## 🛠 Configuration Examples  
+## 🛠 Configuration Examples
 
-The `configurations/` directory contains reusable components:  
+The `configurations/` directory contains reusable components:
 
-### Environment Configurations  
-- Development environment settings  
-- Staging environment configurations  
-- Production-ready configurations  
-- Multi-region deployment setups  
+### Environment Configurations
+- Development environment settings
+- Staging environment configurations
+- Production-ready configurations
+- Multi-region deployment setups
 
-### Bicep Modules  
-- Reusable infrastructure components  
-- Common resource patterns  
-- Security-hardened templates  
-- Cost-optimized configurations  
+### Bicep Modules
+- Reusable infrastructure components
+- Common resource patterns
+- Security-hardened templates
+- Cost-optimized configurations
 
-### Helper Scripts  
-- Environment setup automation  
-- Database migration scripts  
-- Deployment validation tools  
-- Cost monitoring utilities  
+### Helper Scripts
+- Environment setup automation
+- Database migration scripts
+- Deployment validation tools
+- Cost monitoring utilities
 
-## 🔧 Customization Guide  
+## 🔧 Customization Guide
 
-### Adapting Examples for Your Use Case  
+### Adapting Examples for Your Use Case
 
-1. **Review Prerequisites**  
-   - Check Azure service requirements  
-   - Verify subscription limits  
-   - Understand cost implications  
+1. **Review Prerequisites**
+   - Check Azure service requirements
+   - Verify subscription limits
+   - Understand cost implications
 
-2. **Modify Configuration**  
-   - Update `azure.yaml` service definitions  
-   - Customize Bicep templates  
-   - Adjust environment variables  
+2. **Modify Configuration**
+   - Update `azure.yaml` service definitions
+   - Customize Bicep templates
+   - Adjust environment variables
 
-3. **Test Thoroughly**  
-   - Deploy to development environment first  
-   - Validate functionality  
-   - Test scaling and performance  
+3. **Test Thoroughly**
+   - Deploy to development environment first
+   - Validate functionality
+   - Test scaling and performance
 
-4. **Security Review**  
-   - Review access controls  
-   - Implement secrets management  
-   - Enable monitoring and alerting  
+4. **Security Review**
+   - Review access controls
+   - Implement secrets management
+   - Enable monitoring and alerting
 
-## 📊 Comparison Matrix  
+## 📊 Comparison Matrix
 
-| Example | Services | Database | Auth | Monitoring | Complexity |  
-|---------|----------|----------|------|------------|------------|  
-| **Microsoft Foundry Models Chat** (Local) | 2 | ❌ | Key Vault | Full | ⭐⭐ |  
-| **Python Flask API** (Local) | 1 | ❌ | Basic | Full | ⭐ |  
-| **Microservices** (Local) | 5+ | ✅ | Enterprise | Advanced | ⭐⭐⭐⭐ |  
-| Node.js Express Todo | 2 | ✅ | Basic | Basic | ⭐ |  
-| React SPA + Functions | 3 | ✅ | Basic | Full | ⭐ |  
-| Python Flask Container | 2 | ❌ | Basic | Full | ⭐ |  
-| C# Web API + SQL | 2 | ✅ | Full | Full | ⭐⭐ |  
-| Python Functions + SPA | 3 | ✅ | Full | Full | ⭐⭐ |  
-| Java Microservices | 5+ | ✅ | Full | Full | ⭐⭐ |  
-| Microsoft Foundry Models Chat | 3 | ✅ | Full | Full | ⭐⭐⭐ |  
-| AI Document Processing | 2 | ❌ | Basic | Full | ⭐⭐ |  
-| ML Pipeline | 4+ | ✅ | Full | Full | ⭐⭐⭐⭐ |  
-| **Retail Multi-Agent** (Local) | **8+** | **✅** | **Enterprise** | **Advanced** | **⭐⭐⭐⭐** |  
+| Example | Services | Database | Auth | Monitoring | Complexity |
+|---------|----------|----------|------|------------|------------|
+| **Microsoft Foundry Models Chat** (Local) | 2 | ❌ | Key Vault | Full | ⭐⭐ |
+| **Python Flask API** (Local) | 1 | ❌ | Basic | Full | ⭐ |
+| **Microservices** (Local) | 5+ | ✅ | Enterprise | Advanced | ⭐⭐⭐⭐ |
+| Node.js Express Todo | 2 | ✅ | Basic | Basic | ⭐ |
+| React SPA + Functions | 3 | ✅ | Basic | Full | ⭐ |
+| Python Flask Container | 2 | ❌ | Basic | Full | ⭐ |
+| C# Web API + SQL | 2 | ✅ | Full | Full | ⭐⭐ |
+| Python Functions + SPA | 3 | ✅ | Full | Full | ⭐⭐ |
+| Java Microservices | 5+ | ✅ | Full | Full | ⭐⭐ |
+| Microsoft Foundry Models Chat | 3 | ✅ | Full | Full | ⭐⭐⭐ |
+| AI Document Processing | 2 | ❌ | Basic | Full | ⭐⭐ |
+| ML Pipeline | 4+ | ✅ | Full | Full | ⭐⭐⭐⭐ |
+| **Retail Multi-Agent** (Local) | **8+** | **✅** | **Enterprise** | **Advanced** | **⭐⭐⭐⭐** |
 
-## 🎓 Learning Path  
+## 🎓 Learning Path
 
-### Recommended Progression  
+### Recommended Progression
 
-1. **Start with Simple Web App**  
-   - Learn basic AZD concepts  
-   - Understand deployment workflow  
-   - Practice environment management  
+1. **Start with Simple Web App**
+   - Learn basic AZD concepts
+   - Understand deployment workflow
+   - Practice environment management
 
-2. **Try Static Website**  
-   - Explore different hosting options  
-   - Learn about CDN integration  
-   - Understand DNS configuration  
+2. **Try Static Website**
+   - Explore different hosting options
+   - Learn about CDN integration
+   - Understand DNS configuration
 
-3. **Move to Container App**  
-   - Learn containerization basics  
-   - Understand scaling concepts  
-   - Practice with Docker  
+3. **Move to Container App**
+   - Learn containerization basics
+   - Understand scaling concepts
+   - Practice with Docker
 
-4. **Add Database Integration**  
-   - Learn database provisioning  
-   - Understand connection strings  
-   - Practice secrets management  
+4. **Add Database Integration**
+   - Learn database provisioning
+   - Understand connection strings
+   - Practice secrets management
 
-5. **Explore Serverless**  
-   - Understand event-driven architecture  
-   - Learn about triggers and bindings  
-   - Practice with APIs  
+5. **Explore Serverless**
+   - Understand event-driven architecture
+   - Learn about triggers and bindings
+   - Practice with APIs
 
-6. **Build Microservices**  
-   - Learn service communication  
-   - Understand distributed systems  
-   - Practice complex deployments  
+6. **Build Microservices**
+   - Learn service communication
+   - Understand distributed systems
+   - Practice complex deployments
 
-## 🔍 Finding the Right Example  
+## 🔍 Finding the Right Example
 
-### By Technology Stack  
-- **Container Apps**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices), Java Microservices  
-- **Node.js**: Node.js Express Todo App, [Microservices API Gateway (Local)](../../../examples/container-app/microservices)  
-- **Python**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), [Microservices Product Service (Local)](../../../examples/container-app/microservices), Python Functions + SPA  
-- **C#**: [Microservices Order Service (Local)](../../../examples/container-app/microservices), C# Web API + SQL Database, Microsoft Foundry Models Chat App, ML Pipeline  
-- **Go**: [Microservices User Service (Local)](../../../examples/container-app/microservices)  
-- **Java**: Java Spring Boot Microservices  
-- **React**: React SPA + Functions  
-- **Containers**: [Python Flask (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices), Java Microservices  
-- **Databases**: [Microservices (Local)](../../../examples/container-app/microservices), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB  
-- **AI/ML**: **[Microsoft Foundry Models Chat (Local)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**  
-- **Multi-Agent Systems**: **Retail Multi-Agent Solution**  
-- **OpenAI Integration**: **[Microsoft Foundry Models Chat (Local)](../../../examples/azure-openai-chat)**, Retail Multi-Agent Solution  
-- **Enterprise Production**: [Microservices (Local)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**  
+### By Technology Stack
+- **Container Apps**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices), Java Microservices
+- **Node.js**: Node.js Express Todo App, [Microservices API Gateway (Local)](../../../examples/container-app/microservices)
+- **Python**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), [Microservices Product Service (Local)](../../../examples/container-app/microservices), Python Functions + SPA
+- **C#**: [Microservices Order Service (Local)](../../../examples/container-app/microservices), C# Web API + SQL Database, Microsoft Foundry Models Chat App, ML Pipeline
+- **Go**: [Microservices User Service (Local)](../../../examples/container-app/microservices)
+- **Java**: Java Spring Boot Microservices
+- **React**: React SPA + Functions
+- **Containers**: [Python Flask (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices), Java Microservices
+- **Databases**: [Microservices (Local)](../../../examples/container-app/microservices), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
+- **AI/ML**: **[Microsoft Foundry Models Chat (Local)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **Multi-Agent Systems**: **Retail Multi-Agent Solution**
+- **OpenAI Integration**: **[Microsoft Foundry Models Chat (Local)](../../../examples/azure-openai-chat)**, Retail Multi-Agent Solution
+- **Enterprise Production**: [Microservices (Local)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
 
-### By Architecture Pattern  
-- **Simple REST API**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api)  
-- **Monolithic**: Node.js Express Todo, C# Web API + SQL  
-- **Static + Serverless**: React SPA + Functions, Python Functions + SPA  
-- **Microservices**: [Production Microservices (Local)](../../../examples/container-app/microservices), Java Spring Boot Microservices  
-- **Containerized**: [Python Flask (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices)  
-- **AI-Powered**: **[Microsoft Foundry Models Chat (Local)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**  
-- **Multi-Agent Architecture**: **Retail Multi-Agent Solution**  
-- **Enterprise Multi-Service**: [Microservices (Local)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**  
+### By Architecture Pattern
+- **Simple REST API**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api)
+- **Monolithic**: Node.js Express Todo, C# Web API + SQL
+- **Static + Serverless**: React SPA + Functions, Python Functions + SPA
+- **Microservices**: [Production Microservices (Local)](../../../examples/container-app/microservices), Java Spring Boot Microservices
+- **Containerized**: [Python Flask (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices)
+- **AI-Powered**: **[Microsoft Foundry Models Chat (Local)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **Multi-Agent Architecture**: **Retail Multi-Agent Solution**
+- **Enterprise Multi-Service**: [Microservices (Local)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
 
-### By Complexity Level  
-- **Beginner**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions  
-- **Intermediate**: **[Microsoft Foundry Models Chat (Local)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Microservices, Microsoft Foundry Models Chat App, AI Document Processing  
-- **Advanced**: ML Pipeline  
-- **Enterprise Production-Ready**: [Microservices (Local)](../../../examples/container-app/microservices) (Multi-service with message queuing), **Retail Multi-Agent Solution** (Complete multi-agent system with ARM template deployment)  
+### By Complexity Level
+- **Beginner**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions
+- **Intermediate**: **[Microsoft Foundry Models Chat (Local)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Microservices, Microsoft Foundry Models Chat App, AI Document Processing
+- **Advanced**: ML Pipeline
+- **Enterprise Production-Ready**: [Microservices (Local)](../../../examples/container-app/microservices) (Multi-service with message queuing), **Retail Multi-Agent Solution** (Complete multi-agent system with ARM template deployment)
 
-## 📚 Additional Resources  
+## 📚 Additional Resources
 
-### Documentation Links  
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)  
-- [Microsoft Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)  
-- [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)  
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)  
+### Documentation Links
+- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
+- [Microsoft Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
+- [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
-### Community Examples  
+### Community Examples
 - [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
 - [Microsoft Foundry Templates](https://github.com/Azure/ai-foundry-templates)
 - [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
@@ -620,12 +621,12 @@ example-name/
 1. **Complete Beginner?** → Start with [Flask API](../../../examples/container-app/simple-flask-api) (⭐, 20 mins)
 2. **Have Basic AZD Knowledge?** → Try [Microservices](../../../examples/container-app/microservices) (⭐⭐⭐⭐, 60 mins)
 3. **Building AI Apps?** → Start with [Microsoft Foundry Models Chat](../../../examples/azure-openai-chat) (⭐⭐, 35 mins) or explore [Retail Multi-Agent](retail-scenario.md) (⭐⭐⭐⭐, 2+ hours)
-4. **Need Specific Tech Stack?** → Use [Finding the Right Example](../../../examples) section above
+4. **Need Specific Tech Stack?** → Use [Finding the Right Example](#-finding-the-right-example) section above
 
 ### Next Steps
 
-- ✅ Review [Prerequisites](../../../examples) above
-- ✅ Choose an example matching your skill level (see [Complexity Legend](../../../examples))
+- ✅ Review [Prerequisites](#prerequisites) above
+- ✅ Choose an example matching your skill level (see [Complexity Legend](#complexity-rating-legend))
 - ✅ Read the example's README thoroughly before deploying
 - ✅ Set a reminder to run `azd down` after testing
 - ✅ Share your experience via GitHub Issues or Discussions
@@ -652,5 +653,5 @@ example-name/
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

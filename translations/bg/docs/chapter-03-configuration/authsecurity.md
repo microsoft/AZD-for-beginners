@@ -1,30 +1,30 @@
-# Модели за удостоверяване и управлявана идентичност
+# Authentication Patterns and Managed Identity
 
-⏱️ **Очаквано време**: 45-60 минути | 💰 **Разходи**: Безплатно (няма допълнителни такси) | ⭐ **Сложност**: Средно
+⏱️ **Оценено време**: 45-60 минути | 💰 **Влияние върху разходите**: Безплатно (няма допълнителни такси) | ⭐ **Сложност**: Средно
 
-**📚 Учебен път:**
-- ← Предишна: [Управление на конфигурацията](configuration.md) - Управление на променливи на средата и тайни
-- 🎯 **Вие сте тук**: Удостоверяване и сигурност (управлявана идентичност, Key Vault, защитени модели)
-- → Следваща: [Първи проект](first-project.md) - Създайте първото си AZD приложение
-- 🏠 [Начало на курса](../../README.md)
+**📚 Път на обучение:**
+- ← Предишна: [Configuration Management](configuration.md) - Управление на променливи на средата и тайни
+- 🎯 **Тук сте**: Аутентикация и сигурност (Managed Identity, Key Vault, сигурни модели)
+- → Следваща: [First Project](first-project.md) - Създайте първото си AZD приложение
+- 🏠 [Course Home](../../README.md)
 
 ---
 
 ## Какво ще научите
 
-Като завършите този урок, вие ще:
-- Разберете моделите за удостоверяване в Azure (ключове, connection strings, управлявана идентичност)
-- Прилагате **управлявана идентичност** за удостоверяване без парола
+Като завършите този урок, ще:
+- Разберете моделите за аутентикация в Azure (ключове, connection strings, managed identity)
+- Имплементирате **Managed Identity** за автентикация без пароли
 - Защитите тайните с интеграция на **Azure Key Vault**
-- Конфигурирате **контрол на достъпа на база роли (RBAC)** за AZD деплойменти
-- Прилагате най-добри практики за сигурност в Container Apps и услугите на Azure
-- Мигрирате от автентикация, базирана на ключове, към автентикация, базирана на идентичност
+- Конфигурирате **ролево базиран контрол на достъпа (RBAC)** за AZD разгръщания
+- Приложите добри практики за сигурност в Container Apps и Azure услуги
+- Мигрирате от автентикация с ключове към базирана на идентичност автентикация
 
-## Защо управляваната идентичност е важна
+## Защо Managed Identity е важно
 
-### Проблемът: Традиционно удостоверяване
+### Проблемът: Традиционна аутентикация
 
-**Преди управляваната идентичност:**
+**Преди Managed Identity:**
 ```javascript
 // ❌ РИСК ЗА СИГУРНОСТ: Твърдо зададени тайни в кода
 const connectionString = "Server=mydb.database.windows.net;User=admin;Password=P@ssw0rd123";
@@ -34,14 +34,14 @@ const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 
 **Проблеми:**
 - 🔴 **Изложени тайни** в кода, конфигурационни файлове, променливи на средата
-- 🔴 **Ротация на идентификационни данни** изисква промяна на кода и повторно внедряване
-- 🔴 **Кошмар за одит** - кой получи достъп до какво и кога?
-- 🔴 **Разпръснатост** - тайни разпръснати в множество системи
-- 🔴 **Рискове за съответствие** - провал в одити за сигурност
+- 🔴 **Ротация на идентификационни данни** изисква промени в кода и повторно разгръщане
+- 🔴 **Кошмар при одити** - кой е имал достъп до какво и кога?
+- 🔴 **Разпокъсаност** - тайните разпръснати в множество системи
+- 🔴 **Рискове за съответствие** - не преминава сигурностни одити
 
-### Решението: Управлявана идентичност
+### Решението: Managed Identity
 
-**След управляваната идентичност:**
+**След Managed Identity:**
 ```javascript
 // ✅ БЕЗОПАСНО: Няма тайни в кода
 const credential = new DefaultAzureCredential();
@@ -51,77 +51,79 @@ const client = new BlobServiceClient(
 );
 ```
 
-**Ползи:**
+**Предимства:**
 - ✅ **Никакви тайни** в кода или конфигурацията
 - ✅ **Автоматична ротация** - Azure се грижи за това
-- ✅ **Пълен одитен запис** в логовете на Azure AD
-- ✅ **Централизирана сигурност** - управлявайте в Azure Portal
+- ✅ **Пълен одитен след** в логовете на Microsoft Entra ID
+- ✅ **Централизирана сигурност** - управление в Azure Portal
 - ✅ **Готово за съответствие** - отговаря на стандарти за сигурност
 
-**Аналогия**: Традиционното удостоверяване е като да носиш множество физически ключове за различни врати. Управляваната идентичност е като да имаш бадж за сигурност, който автоматично дава достъп въз основа на това кой си—няма ключове за загуба, копиране или ротация.
+**Аналогия**: Традиционната аутентикация е като носене на множество физически ключове за различни врати. Managed Identity е като служебна пропуск, която автоматично дава достъп в зависимост от това кой сте — без ключове, които да се губят, копират или въртят.
 
 ---
 
 ## Преглед на архитектурата
 
-### Поток на удостоверяване с управлявана идентичност
+### Поток на аутентикация с Managed Identity
 
 ```mermaid
 sequenceDiagram
     participant App as Вашето приложение<br/>(Контейнерно приложение)
-    participant MI as Управлявана идентичност<br/>(Azure AD)
-    participant KV as Хранилище за ключове
-    participant Storage as Съхранение в Azure
+    participant MI as Управлявана идентичност<br/>(Microsoft Entra ID)
+    participant KV as Хранилище на ключове
+    participant Storage as Azure Storage
     participant DB as Azure SQL
     
     App->>MI: Искане на токен за достъп<br/>(автоматично)
-    MI->>MI: Потвърждаване на идентичността<br/>(не е необходима парола)
+    MI->>MI: Потвърждаване на идентичността<br/>(без нужда от парола)
     MI-->>App: Връщане на токен<br/>(валиден 1 час)
     
-    App->>KV: Извличане на тайна<br/>(използвайки токена)
+    App->>KV: Извличане на тайна<br/>(използвайки токен)
     KV->>KV: Проверка на RBAC разрешенията
     KV-->>App: Връщане на стойността на тайната
     
-    App->>Storage: Качване на blob<br/>(използвайки токена)
+    App->>Storage: Качване на blob<br/>(използвайки токен)
     Storage->>Storage: Проверка на RBAC разрешенията
-    Storage-->>App: Успех
+    Storage-->>App: Успешно
     
-    App->>DB: Запитване на данни<br/>(използвайки токена)
+    App->>DB: Запитване за данни<br/>(използвайки токен)
     DB->>DB: Проверка на SQL разрешенията
     DB-->>App: Връщане на резултатите
     
-    Note over App,DB: Цялата автентификация е без пароли!
+    Note over App,DB: Цялата автентикация е без пароли!
 ```
-### Видове управлявани идентичности
+
+### Видове Managed Identities
 
 ```mermaid
 graph TB
     MI[Управлявана идентичност]
-    SystemAssigned[Системно присвоена идентичност]
-    UserAssigned[Потребителски присвоена идентичност]
+    SystemAssigned[Системно зададена идентичност]
+    UserAssigned[Потребителски зададена идентичност]
     
     MI --> SystemAssigned
     MI --> UserAssigned
     
-    SystemAssigned --> SA1[Животен цикъл, свързан с ресурса]
+    SystemAssigned --> SA1[Жизнен цикъл, свързан с ресурса]
     SystemAssigned --> SA2[Автоматично създаване/изтриване]
-    SystemAssigned --> SA3[Най-подходяща за един ресурс]
+    SystemAssigned --> SA3[Подходяща за един ресурс]
     
-    UserAssigned --> UA1[Независим животен цикъл]
+    UserAssigned --> UA1[Независим жизнен цикъл]
     UserAssigned --> UA2[Ръчно създаване/изтриване]
-    UserAssigned --> UA3[Споделяна между ресурси]
+    UserAssigned --> UA3[Споделя се между ресурси]
     
     style SystemAssigned fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style UserAssigned fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
 ```
-| Характеристика | System-Assigned | User-Assigned |
+
+| Feature | System-Assigned | User-Assigned |
 |---------|----------------|---------------|
-| **Жизнен цикъл** | Свързана с ресурса | Независима |
-| **Създаване** | Автоматично с ресурса | Ръчно създаване |
-| **Изтриване** | Изтрива се с ресурса | Запазва се след изтриване на ресурса |
-| **Споделяне** | Само един ресурс | Множество ресурси |
-| **Случай на употреба** | Прости сценарии | Сложни сценарии с множество ресурси |
-| **AZD по подразбиране** | ✅ Препоръчително | По избор |
+| **Lifecycle** | Свързан с ресурса | Независим |
+| **Creation** | Автоматично с ресурса | Ръчно създаване |
+| **Deletion** | Изтрива се с ресурса | Запазва се след изтриване на ресурса |
+| **Sharing** | Само един ресурс | Множество ресурси |
+| **Use Case** | Прости сценарии | Комплексни сценарии с множество ресурси |
+| **AZD Default** | ✅ Препоръчително | По избор |
 
 ---
 
@@ -129,59 +131,59 @@ graph TB
 
 ### Необходими инструменти
 
-Трябва вече да имате следните инсталирани от предишните уроци:
+Трябва вече да имате инсталирано следното от предишните уроци:
 
 ```bash
 # Проверете Azure Developer CLI
 azd version
-# ✅ Очаква се: azd версия 1.0.0 или по-нова
+# ✅ Очаквано: azd версия 1.0.0 или по-нова
 
 # Проверете Azure CLI
 az --version
-# ✅ Очаква се: azure-cli 2.50.0 или по-нова
+# ✅ Очаквано: azure-cli 2.50.0 или по-нова
 ```
 
 ### Изисквания за Azure
 
-- Активен абонамент за Azure
-- Права за:
-  - Създаване на управлявани идентичности
-  - Присвояване на RBAC роли
-  - Създаване на ресурси в Key Vault
-  - Разгръщане на Container Apps
+- Активен абонамент в Azure
+- Права да:
+  - Създавате managed identities
+  - Присвоявате RBAC роли
+  - Създавате Key Vault ресурси
+  - Разгръщате Container Apps
 
-### Предварителни знания
+### Предишни знания
 
 Трябва да сте завършили:
-- [Ръководство за инсталация](installation.md) - Настройка на AZD
-- [Основи на AZD](azd-basics.md) - Основни концепции
-- [Управление на конфигурацията](configuration.md) - Променливи на средата
+- [Installation Guide](installation.md) - Настройка на AZD
+- [AZD Basics](azd-basics.md) - Основни концепции
+- [Configuration Management](configuration.md) - Променливи на средата
 
 ---
 
-## Урок 1: Разбиране на моделите за удостоверяване
+## Урок 1: Разбиране на моделите за аутентикация
 
-### Модел 1: Connection Strings (Остарял - Избягвайте)
+### Модел 1: Connection Strings (Остарял - да се избягва)
 
 **Как работи:**
 ```bash
-# Низът за връзка съдържа идентификационни данни
+# Низът за връзка съдържа учетни данни
 STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=xK7mN9pQ2wR5..."
 COSMOS_CONNECTION_STRING="AccountEndpoint=https://myaccount.documents.azure.com:443/;AccountKey=C2x7..."
 SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=P@ssw0rd..."
 ```
 
 **Проблеми:**
-- ❌ Тайни видими в променливите на средата
-- ❌ Логвани в системите за деплой
+- ❌ Тайните видими в променливите на средата
+- ❌ Логнати в системи за разгръщане
 - ❌ Трудно за ротация
-- ❌ Няма одитен запис за достъп
+- ❌ Няма одитен след на достъпа
 
 **Кога да се използва:** Само за локална разработка, никога в продукция.
 
 ---
 
-### Модел 2: Key Vault References (По-добро)
+### Модел 2: Key Vault References (По-добър)
 
 **Как работи:**
 ```bicep
@@ -202,20 +204,20 @@ env: [
 ]
 ```
 
-**Ползи:**
-- ✅ Тайните се съхраняват сигурно в Key Vault
-- ✅ Централизирано управление на тайните
+**Предимства:**
+- ✅ Тайните съхранявани сигурно в Key Vault
+- ✅ Централизирано управление на тайни
 - ✅ Ротация без промени в кода
 
 **Ограничения:**
 - ⚠️ Все още се използват ключове/пароли
-- ⚠️ Необходимо е управление на достъпа до Key Vault
+- ⚠️ Трябва да се управлява достъп до Key Vault
 
-**Кога да се използва:** Стъпка за преход от connection strings към управлявана идентичност.
+**Кога да се използва:** Стъпка за трансформация от connection strings към managed identity.
 
 ---
 
-### Модел 3: Управлявана идентичност (Най-добра практика)
+### Модел 3: Managed Identity (Най-добра практика)
 
 **Как работи:**
 ```bicep
@@ -239,7 +241,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 **Код на приложението:**
 ```javascript
-// Не са необходими тайни!
+// Няма нужда от тайни!
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -250,22 +252,75 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-**Ползи:**
-- ✅ Никакви тайни в кода/конфигурацията
+**Предимства:**
+- ✅ Никакви тайни в код/конфигурация
 - ✅ Автоматична ротация на идентификационни данни
-- ✅ Пълен одитен запис
+- ✅ Пълен одитен след
 - ✅ Разрешения базирани на RBAC
-- ✅ Подготвено за съответствие
+- ✅ Готово за съответствие
 
 **Кога да се използва:** Винаги, за продукционни приложения.
 
 ---
 
-## Урок 2: Прилагане на управлявана идентичност с AZD
+### Модел 4: Service Principals (CI/CD и автоматизация)
 
-### Стъпка по стъпка изпълнение
+Managed identity е златният стандарт за ресурси, работещи в Azure. Но какво да правим с неща, които работят извън Azure — като CI/CD pipeline на билд агент, или скрипт на лаптоп, който не може да използва интерактивно вписване? Тук влиза **service principal**: не-хуманна идентичност със собствени идентификационни данни, в чие име автоматизиран процес може да се впише.
 
-Нека създадем сигурно Container App, което използва управлявана идентичност за достъп до Azure Storage и Key Vault.
+**Как работи:**
+
+Създайте service principal с обхват на resource group (най-малко привилегии):
+
+```bash
+az ad sp create-for-rbac \
+  --name "myapp-cicd" \
+  --role contributor \
+  --scopes /subscriptions/<sub-id>/resourceGroups/<rg-name>
+```
+
+Това отпечатва client ID, client secret и tenant ID. azd може да се впише с тях неинтерактивно:
+
+```bash
+azd auth login \
+  --client-id "<appId>" \
+  --client-secret "<password>" \
+  --tenant-id "<tenant>"
+```
+
+**Предпочитайте федеративни данни за удостоверяване (OIDC) пред тайни.** Вместо дългоживеещ client secret, конфигурирайте федеративно удостоверяване, така че pipeline-ът да обменя късовременен токен — няма тайна, която да изтече или да се върти:
+
+```bash
+azd auth login \
+  --client-id "<appId>" \
+  --federated-credential-provider "github" \
+  --tenant-id "<tenant>"
+```
+
+> `azd pipeline config` конфигурира това автоматично за вас. Вижте CI/CD уроците в [Глава 8](../chapter-08-production/production-ai-practices.md).
+
+**Предимства:**
+- ✅ Работи извън Azure (билд агенти, on-prem, други облаци)
+- ✅ Може да се ограничи до една resource group с една роля
+- ✅ Федеративната (OIDC) версия не използва съхранявана тайна
+
+**Размени:**
+- ⚠️ Вариант с тайна изисква внимателно съхранение и ротация
+- ⚠️ Изтекла тайна дава възможност да се извършат всички действия, които SP може да прави — пазете обхватите стегнати
+
+**Кога да се използва:** CI/CD pipelines и автоматизации, които не могат да използват managed identity. Винаги предпочитайте варианта с **federated/OIDC** пред client secret и предпочитайте managed identity, когато товара работи в Azure.
+
+**Съхраняване на идентификационните данни безопасно:**
+- Никога не коммитвайте тайни — използвайте секретното хранилище на вашия pipeline (GitHub Actions secrets, Azure DevOps variable groups / Key Vault).
+- Ограничете SP до най-малката роля и resource group, от които се нуждае.
+- Задайте срок на валидност и ротация, или премахнете тайната напълно с OIDC.
+
+---
+
+## Урок 2: Имплементиране на Managed Identity с AZD
+
+### Стъпка по стъпка имплементация
+
+Нека изградим сигурен Container App, който използва managed identity за достъп до Azure Storage и Key Vault.
 
 ### Структура на проекта
 
@@ -302,7 +357,7 @@ services:
 # Enable managed identity (AZD handles this automatically)
 ```
 
-### 2. Инфраструктура: Активиране на управлявана идентичност
+### 2. Инфраструктура: Активиране на Managed Identity
 
 **Файл: `infra/main.bicep`**
 
@@ -384,7 +439,7 @@ output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output APP_URL string = containerApp.outputs.url
 ```
 
-### 3. Container App със системно-назначена идентичност
+### 3. Container App със системно присвоена идентичност
 
 **Файл: `infra/app/container-app.bicep`**
 
@@ -463,7 +518,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 output id string = roleAssignment.id
 ```
 
-### 5. Код на приложението с управлявана идентичност
+### 5. Код на приложението с Managed Identity
 
 **Файл: `src/app.js`**
 
@@ -483,22 +538,22 @@ const credential = new DefaultAzureCredential();
 const storageAccountName = process.env.AZURE_STORAGE_ACCOUNT_NAME;
 const blobServiceClient = new BlobServiceClient(
   `https://${storageAccountName}.blob.core.windows.net`,
-  credential  // Не са необходими ключове!
+  credential  // Ключове не са необходими!
 );
 
 // Настройка на Key Vault
 const keyVaultName = process.env.AZURE_KEY_VAULT_NAME;
 const secretClient = new SecretClient(
   `https://${keyVaultName}.vault.azure.net`,
-  credential  // Не са необходими ключове!
+  credential  // Ключове не са необходими!
 );
 
-// Проверка на състоянието
+// Проверка на здравето
 app.get('/health', (req, res) => {
   res.json({ status: 'healthy', authentication: 'managed-identity' });
 });
 
-// Качване на файл в blob хранилище
+// Качване на файл в Blob хранилище
 app.post('/upload', async (req, res) => {
   try {
     const containerClient = blobServiceClient.getContainerClient('uploads');
@@ -580,19 +635,19 @@ app.listen(PORT, () => {
 }
 ```
 
-### 6. Разгръщане и тестване
+### 6. Разгръщане и тест
 
 ```bash
-# Инициализирайте AZD среда
+# Инициализиране на AZD среда
 azd init
 
-# Разположете инфраструктурата и приложението
+# Разгръщане на инфраструктурата и приложението
 azd up
 
-# Вземете URL адреса на приложението
+# Получаване на URL на приложението
 APP_URL=$(azd env get-values | grep APP_URL | cut -d '=' -f2 | tr -d '"')
 
-# Тествайте проверката на състоянието
+# Тестване на проверката за здраве
 curl $APP_URL/health
 ```
 
@@ -618,7 +673,7 @@ curl -X POST $APP_URL/upload
 }
 ```
 
-**Тест за изброяване на контейнерите:**
+**Тест за изброяване на контейнери:**
 ```bash
 curl $APP_URL/containers
 ```
@@ -634,32 +689,32 @@ curl $APP_URL/containers
 
 ---
 
-## Често срещани RBAC роли в Azure
+## Често срещани Azure RBAC роли
 
-### Вградени идентификатори на роли за управлявана идентичност
+### Вградени Role ID-та за Managed Identity
 
-| Услуга | Име на ролята | ID на ролята | Разрешения |
+| Service | Role Name | Role ID | Permissions |
 |---------|-----------|---------|-------------|
-| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Чете blob-ове и контейнери |
-| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Чете, записва, изтрива blob-ове |
-| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Чете, записва, изтрива съобщения в опашката |
-| **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Чете тайни |
-| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Чете, записва, изтрива тайни |
-| **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Чете данни от Cosmos DB |
-| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Чете, записва данни в Cosmos DB |
-| **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Управлява SQL бази данни |
-| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Изпраща, получава и управлява съобщения |
+| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Четене на blob-ове и контейнери |
+| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Четене, запис, изтриване на blob-ове |
+| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Четене, запис, изтриване на съобщения в опашки |
+| **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Четене на тайни |
+| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Четене, запис, изтриване на тайни |
+| **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Четене на данни в Cosmos DB |
+| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Четене и запис на данни в Cosmos DB |
+| **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Управление на SQL бази данни |
+| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Изпращане, получаване и управление на съобщения |
 
-### Как да намерите идентификаторите на роли
+### Как да откриете Role ID-та
 
 ```bash
-# Изброяване на всички вградени роли
+# Изброи всички вградени роли
 az role definition list --query "[].{Name:roleName, ID:name}" --output table
 
-# Търсене на конкретна роля
+# Търси конкретна роля
 az role definition list --query "[?contains(roleName, 'Storage Blob')].{Name:roleName, ID:name}" --output table
 
-# Получаване на подробности за ролята
+# Вземи подробности за ролята
 az role definition list --name "Storage Blob Data Contributor"
 ```
 
@@ -667,13 +722,13 @@ az role definition list --name "Storage Blob Data Contributor"
 
 ## Практически упражнения
 
-### Упражнение 1: Активиране на управлявана идентичност за съществуващо приложение ⭐⭐ (Средно)
+### Упражнение 1: Активиране на Managed Identity за съществуващо приложение ⭐⭐ (Средно)
 
-**Цел**: Добавете управлявана идентичност към съществуващо разгръщане на Container App
+**Цел**: Добавете managed identity към съществуващо разгръщане на Container App
 
-**Сценарий**: Имате Container App, използващ connection strings. Конвертирайте го към управлявана идентичност.
+**Сценарий**: Имате Container App, който използва connection strings. Превърнете го в managed identity.
 
-**Начална точка**: Container App с тази конфигурация:
+**Изходна точка**: Container App с тази конфигурация:
 
 ```bicep
 // ❌ Current: Using connection string
@@ -687,7 +742,7 @@ env: [
 
 **Стъпки**:
 
-1. **Активирайте управляваната идентичност в Bicep:**
+1. **Активирайте managed identity в Bicep:**
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -699,7 +754,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-2. **Предоставете достъп до Storage:**
+2. **Дайте достъп до Storage:**
 
 ```bicep
 // Get storage account reference
@@ -730,7 +785,7 @@ const blobServiceClient = BlobServiceClient.fromConnectionString(
 );
 ```
 
-**След (управлявана идентичност):**
+**След (managed identity):**
 ```javascript
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
@@ -757,7 +812,7 @@ env: [
 5. **Разгръщане и тест:**
 
 ```bash
-# Повторно внедряване
+# Повторно разгръщане
 azd up
 
 # Провери дали все още работи
@@ -768,9 +823,9 @@ curl https://myapp.azurecontainerapps.io/upload
 - ✅ Приложението се разгръща без грешки
 - ✅ Операциите със Storage работят (качване, изброяване, изтегляне)
 - ✅ Няма connection strings в променливите на средата
-- ✅ Идентичността е видима в Azure Portal под "Identity" blade
+- ✅ Идентичността е видима в Azure Portal под "Identity" панела
 
-**Верификация:**
+**Потвърждение:**
 
 ```bash
 # Проверете дали управляваната идентичност е активирана
@@ -780,7 +835,7 @@ az containerapp show \
   --query "identity.type"
 # ✅ Очаквано: "SystemAssigned"
 
-# Проверете назначаването на роля
+# Проверете присвояването на роля
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv) \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.Storage/storageAccounts/mystorageaccount
@@ -791,15 +846,15 @@ az role assignment list \
 
 ---
 
-### Упражнение 2: Достъп за множество услуги с потребителски назначена идентичност ⭐⭐⭐ (Напреднало)
+### Упражнение 2: Мулти-услугов достъп с User-Assigned Identity ⭐⭐⭐ (Напреднал)
 
-**Цел**: Създайте потребителски назначена идентичност, споделена между множество Container Apps
+**Цел**: Създайте user-assigned identity, споделена между множество Container Apps
 
-**Сценарий**: Имате 3 микросервиза, които се нуждаят от достъп до един и същ Storage акаунт и Key Vault.
+**Сценарий**: Имате 3 микросервиза, които всички се нуждаят от достъп до същия Storage акаунт и Key Vault.
 
 **Стъпки**:
 
-1. **Създайте потребителски назначена идентичност:**
+1. **Създайте user-assigned identity:**
 
 **Файл: `infra/core/identity.bicep`**
 
@@ -819,7 +874,7 @@ output principalId string = userAssignedIdentity.properties.principalId
 output clientId string = userAssignedIdentity.properties.clientId
 ```
 
-2. **Присвоете роли на потребителски назначената идентичност:**
+2. **Присвоете роли на user-assigned identity:**
 
 ```bicep
 // In main.bicep
@@ -898,9 +953,9 @@ resource orderService 'Microsoft.App/containerApps@2023-05-01' = {
 ```javascript
 const { DefaultAzureCredential, ManagedIdentityCredential } = require('@azure/identity');
 
-// За идентичност, присвоена на потребителя, посочете идентификатора на клиента
+// За потребителски присвоена идентичност, посочете идентификатора на клиента
 const credential = new ManagedIdentityCredential(
-  process.env.AZURE_CLIENT_ID  // Идентификатор на клиента за идентичност, присвоена на потребителя
+  process.env.AZURE_CLIENT_ID  // Идентификатор на клиента за потребителски присвоена идентичност
 );
 
 // Или използвайте DefaultAzureCredential (автоматично открива)
@@ -912,12 +967,12 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-5. **Разгръщане и верификация:**
+5. **Разгръщане и проверка:**
 
 ```bash
 azd up
 
-# Провери дали всички услуги имат достъп до хранилището
+# Проверете дали всички услуги имат достъп до хранилището
 curl https://api-gateway.azurecontainerapps.io/upload
 curl https://product-service.azurecontainerapps.io/upload
 curl https://order-service.azurecontainerapps.io/upload
@@ -925,23 +980,23 @@ curl https://order-service.azurecontainerapps.io/upload
 
 **✅ Критерии за успех:**
 - ✅ Една идентичност, споделена между 3 услуги
-- ✅ Всички услуги могат да достъпят Storage и Key Vault
-- ✅ Идентичността се запазва, ако изтриете една услуга
+- ✅ Всички услуги могат да достъпват Storage и Key Vault
+- ✅ Идентичността се запазва ако изтриете една услуга
 - ✅ Централизирано управление на разрешенията
 
-**Ползи от потребителски назначена идентичност:**
+**Предимства на User-Assigned Identity:**
 - Една идентичност за управление
-- Последователни разрешения в услугите
-- Остава активна след изтриване на услуга
-- По-добра за сложни архитектури
+- Последователни разрешения между услуги
+- Оцеляване при изтриване на услуга
+- По-подходящо за сложни архитектури
 
 **Време**: 30-40 минути
 
 ---
 
-### Упражнение 3: Имплементиране на ротация на тайни в Key Vault ⭐⭐⭐ (Напреднало)
+### Упражнение 3: Имплементиране на ротация на тайни в Key Vault ⭐⭐⭐ (Напреднал)
 
-**Цел**: Съхранявайте API ключове на трети страни в Key Vault и достъпвайте до тях чрез управлявана идентичност
+**Цел**: Съхранявайте API ключове на трети страни в Key Vault и ги достъпвайте чрез managed identity
 
 **Сценарий**: Вашето приложение трябва да извиква външен API (OpenAI, Stripe, SendGrid), който изисква API ключове.
 
@@ -978,13 +1033,13 @@ output name string = keyVault.name
 output uri string = keyVault.properties.vaultUri
 ```
 
-2. **Съхранете тайни в Key Vault:**
+2. **Съхраняване на тайни в Key Vault:**
 
 ```bash
-# Получаване на името на Key Vault
+# Получете името на Key Vault
 KV_NAME=$(azd env get-values | grep AZURE_KEY_VAULT_NAME | cut -d '=' -f2 | tr -d '"')
 
-# Съхраняване на API ключове от трети страни
+# Съхранете API ключове от трети страни
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
@@ -1108,12 +1163,12 @@ curl -X POST https://myapp.azurecontainerapps.io/chat \
 ```
 
 **✅ Критерии за успех:**
-- ✅ Няма API ключове в кода или променливите на средата
+- ✅ Никакви API ключове в кода или променливите на средата
 - ✅ Приложението извлича ключовете от Key Vault
-- ✅ Външните API-та работят правилно
-- ✅ Възможност за ротация на ключове без промяна на кода
+- ✅ Външните API работят правилно
+- ✅ Може да въртите ключове без промени в кода
 
-**Ротирайте тайна:**
+**Въртене на таен ключ:**
 
 ```bash
 # Актуализирайте тайната в Key Vault
@@ -1122,7 +1177,7 @@ az keyvault secret set \
   --name "OpenAI-ApiKey" \
   --value "sk-proj-NEW_KEY_HERE"
 
-# Рестартирайте приложението, за да зареди новия ключ
+# Рестартирайте приложението, за да приложи новия ключ
 az containerapp revision restart \
   --name myapp \
   --resource-group rg-myapp
@@ -1138,16 +1193,16 @@ az containerapp revision restart \
 
 Проверете разбирането си:
 
-- [ ] **В1**: Какви са трите основни модела за удостоверяване? 
-  - **О**: Connection strings (остарял), Key Vault references (преход), Managed Identity (най-добро)
+- [ ] **Q1**: Кои са трите основни модела за удостоверяване?
+  - **A**: Connection strings (остарял), Key Vault references (преход), Managed Identity (най-добър)
 
-- [ ] **В2**: Защо управляваната идентичност е по-добра от connection strings?
-  - **О**: Няма тайни в кода, автоматична ротация, пълен одитен запис, разрешения базирани на RBAC
+- [ ] **Q2**: Защо managed identity е по-добър от connection strings?
+  - **A**: Няма тайни в кода, автоматично въртене, пълен одит, RBAC разрешения
 
-- [ ] **В3**: Кога бихте използвали потребителски назначена идентичност вместо системно-назначена?
-  - **О**: Когато споделяте идентичност между множество ресурси или когато жизненият цикъл на идентичността е независим от жизнения цикъл на ресурса
+- [ ] **Q3**: Кога бихте използвали user-assigned identity вместо system-assigned?
+  - **A**: Когато споделяте идентичност между няколко ресурса или когато жизненият цикъл на идентичността е независим от жизнения цикъл на ресурса
 
-**Практическа верификация:**
+**Практическа проверка:**
 ```bash
 # Проверете какъв тип идентичност използва вашето приложение
 az containerapp show \
@@ -1155,7 +1210,7 @@ az containerapp show \
   --resource-group rg-myapp \
   --query "identity.type"
 
-# Изброете всички назначения на роли за идентичността
+# Избройте всички назначения на роли за идентичността
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 ```
@@ -1166,21 +1221,21 @@ az role assignment list \
 
 Проверете разбирането си:
 
-- [ ] **В1**: Кой е ID на ролята за "Storage Blob Data Contributor"?
-  - **О**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
+- [ ] **Q1**: Какъв е role ID за "Storage Blob Data Contributor"?
+  - **A**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
 
-- [ ] **В2**: Какви разрешения дава "Key Vault Secrets User"?
-  - **О**: Достъп само за четене до тайни (не може да създава, обновява или изтрива)
+- [ ] **Q2**: Какви разрешения дава "Key Vault Secrets User"?
+  - **A**: Достъп само за четене до тайните (не може да създава, обновява или изтрива)
 
-- [ ] **В3**: Как да предоставите на Container App достъп до Azure SQL?
-  - **О**: Присвояване на ролята "SQL DB Contributor" или конфигуриране на Azure AD удостоверяване за SQL
+- [ ] **Q3**: Как да дадете на Container App достъп до Azure SQL?
+  - **A**: Присвоете ролята "SQL DB Contributor" или конфигурирайте удостоверяване на Microsoft Entra ID за SQL
 
-**Практическа верификация:**
+**Практическа проверка:**
 ```bash
-# Намерете конкретна роля
+# Намери конкретна роля
 az role definition list --name "Storage Blob Data Contributor"
 
-# Проверете кои роли са присвоени на вашата идентичност
+# Провери кои роли са присвоени на вашата идентичност
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID --output table
 ```
@@ -1190,24 +1245,25 @@ az role assignment list --assignee $PRINCIPAL_ID --output table
 ### 3. Интеграция с Key Vault ✓
 
 Проверете разбирането си:
-- [ ] **Q1**: Как да активирате RBAC за Key Vault вместо политики за достъп?
-  - **A**: Set `enableRbacAuthorization: true` in Bicep
 
-- [ ] **Q2**: Коя библиотека на Azure SDK обработва удостоверяване с управлявана идентичност?
-  - **A**: `@azure/identity` with `DefaultAzureCredential` class
+- [ ] **Q1**: Как да активирате RBAC за Key Vault вместо access policies?
+  - **A**: Задайте `enableRbacAuthorization: true` в Bicep
 
-- [ ] **Q3**: Колко дълго остават тайните от Key Vault в кеша?
-  - **A**: Зависи от приложението; имплементирайте собствена стратегия за кеширане
+- [ ] **Q2**: Коя библиотека на Azure SDK обработва удостоверяване с managed identity?
+  - **A**: `@azure/identity` с класа `DefaultAzureCredential`
+
+- [ ] **Q3**: Колко дълго тайните от Key Vault остават в кеша?
+  - **A**: Зависимо от приложението; имплементирайте собствена стратегия за кеширане
 
 **Практическа проверка:**
 ```bash
-# Проверете достъпа до Key Vault
+# Тествай достъпа до Key Vault
 az keyvault secret show \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
   --query "value"
 
-# Проверете дали RBAC е активиран
+# Провери дали RBAC е активиран
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
@@ -1218,25 +1274,25 @@ az keyvault show \
 
 ## Най-добри практики за сигурност
 
-### ✅ НАПРАВИ:
+### ✅ ДА:
 
-1. **Винаги използвайте управлявана идентичност в продукция**
+1. **Винаги използвайте managed identity в продукция**
    ```bicep
    identity: {
      type: 'SystemAssigned'
    }
    ```
 
-2. **Използвайте RBAC роли с най-малко привилегии**
+2. **Използвайте RBAC роли с най-малко необходими права**
    - Използвайте роли "Reader", когато е възможно
-   - Избягвайте "Owner" или "Contributor", освен ако не е необходимо
+   - Избягвайте "Owner" или "Contributor", освен ако не са необходими
 
-3. **Съхранявайте ключове от трети страни в Key Vault**
+3. **Съхранявайте ключовете на трети страни в Key Vault**
    ```javascript
    const apiKey = await secretClient.getSecret('ThirdPartyApiKey');
    ```
 
-4. **Активирайте одитното регистриране**
+4. **Включете запис на одит**
    ```bicep
    diagnosticSettings: {
      logs: [{ category: 'AuditEvent', enabled: true }]
@@ -1250,19 +1306,19 @@ az keyvault show \
    azd env new prod
    ```
 
-6. **Редовно сменяйте тайните**
-   - Задайте дати на изтичане за тайните в Key Vault
-   - Автоматизирайте ротацията с Azure Functions
+6. **Въртете тайните редовно**
+   - Задавайте срок на валидност на тайните в Key Vault
+   - Автоматизирайте въртенето с Azure Functions
 
-### ❌ НЕ ПРАВИ:
+### ❌ НЕ ПРАВЕТЕ:
 
-1. **Никога не вграждайте тайни в кода**
+1. **Никога не вградувайте тайни в кода**
    ```javascript
    // ❌ ЛОШО
    const apiKey = "sk-proj-xxxxxxxxxxxxx";
    ```
 
-2. **Не използвайте низове за връзка в продукция**
+2. **Не използвайте connection strings в продукция**
    ```javascript
    // ❌ ЛОШО
    BlobServiceClient.fromConnectionString(process.env.STORAGE_CONNECTION_STRING)
@@ -1277,7 +1333,7 @@ az keyvault show \
    roleDefinitionId: 'Storage Blob Data Reader'
    ```
 
-4. **Не записвайте тайни в логове**
+4. **Не логвайте тайни**
    ```javascript
    // ❌ ЛОШО
    console.log('API Key:', apiKey);
@@ -1286,7 +1342,7 @@ az keyvault show \
    console.log('API Key retrieved successfully');
    ```
 
-5. **Не споделяйте продукционни идентичности между среди**
+5. **Не споделяйте production идентичности между среди**
    ```bicep
    // ❌ BAD - same identity for dev and prod
    // ✅ GOOD - separate identities per environment
@@ -1312,18 +1368,18 @@ az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
-# ✅ Очаква се: "SystemAssigned" или "UserAssigned"
+# ✅ Очаквано: "SystemAssigned" или "UserAssigned"
 
 # Проверете присвояванията на роли
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID
 
-# Очаква се: трябва да видите "Storage Blob Data Contributor" или подобна роля
+# Очаквано: Трябва да виждате "Storage Blob Data Contributor" или подобна роля
 ```
 
 **Решения:**
 
-1. **Присвойте правилната RBAC роля:**
+1. **Дайте правилната RBAC роля:**
 ```bash
 STORAGE_ID=$(az storage account show --name mystorageaccount --resource-group rg-myapp --query "id" -o tsv)
 az role assignment create \
@@ -1332,13 +1388,13 @@ az role assignment create \
   --scope $STORAGE_ID
 ```
 
-2. **Изчакайте разпространението (може да отнеме 5-10 минути):**
+2. **Изчакайте разпространение (може да отнеме 5-10 минути):**
 ```bash
-# Проверете статуса на назначението на роля.
+# Проверете статуса на назначаването на ролята
 az role assignment list --assignee $PRINCIPAL_ID --scope $STORAGE_ID
 ```
 
-3. **Проверете дали кодът на приложението използва правилните учетни данни:**
+3. **Проверете дали кодът на приложението използва правилния credential:**
 ```javascript
 // Уверете се, че използвате DefaultAzureCredential
 const credential = new DefaultAzureCredential();
@@ -1357,13 +1413,13 @@ The user, group or application does not have secrets get permission
 **Диагноза:**
 
 ```bash
-# Проверете дали RBAC за Key Vault е активиран
+# Проверете дали RBAC за Key Vault е активирано
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
 # ✅ Очаквано: true
 
-# Проверете присвояванията на роли
+# Проверете назначенията на роли
 az role assignment list \
   --assignee $PRINCIPAL_ID \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.KeyVault/vaults/$KV_NAME
@@ -1378,7 +1434,7 @@ az keyvault update \
   --enable-rbac-authorization true
 ```
 
-2. **Присвойте ролята Key Vault Secrets User:**
+2. **Дайте ролята Key Vault Secrets User:**
 ```bash
 KV_ID=$(az keyvault show --name $KV_NAME --query "id" -o tsv)
 az role assignment create \
@@ -1389,7 +1445,7 @@ az role assignment create \
 
 ---
 
-### Проблем: DefaultAzureCredential се проваля локално
+### Проблем: DefaultAzureCredential не работи локално
 
 **Симптоми:**
 ```
@@ -1414,7 +1470,7 @@ az ad signed-in-user show
 az login
 ```
 
-2. **Задайте Azure абонамента:**
+2. **Задайте абонамента в Azure:**
 ```bash
 az account set --subscription "Your Subscription Name"
 ```
@@ -1426,7 +1482,7 @@ export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 ```
 
-4. **Или използвайте различни учетни данни локално:**
+4. **Или използвайте различен credential локално:**
 ```javascript
 const { DefaultAzureCredential, AzureCliCredential } = require('@azure/identity');
 
@@ -1438,15 +1494,15 @@ const credential = process.env.NODE_ENV === 'production'
 
 ---
 
-### Проблем: Присвояването на роли отнема твърде много време да се разпространи
+### Проблем: Присвояването на роля отнема твърде дълго за разпространение
 
 **Симптоми:**
 - Ролята е присвоена успешно
 - Все още получавате 403 грешки
-- Непостоянен достъп (понякога работи, понякога не)
+- Нестабилен достъп (понякога работи, понякога не)
 
 **Обяснение:**
-Промените в Azure RBAC могат да отнемат 5-10 минути, за да се разпространят глобално.
+Промените в Azure RBAC могат да отнемат 5-10 минути за глобално разпространение.
 
 **Решение:**
 
@@ -1466,22 +1522,22 @@ az containerapp revision restart \
 
 ---
 
-## Съображения за разходите
+## Съображения за разходи
 
-### Разходи за управлявана идентичност
+### Разходи за Managed Identity
 
 | Resource | Cost |
 |----------|------|
-| **Managed Identity** | 🆓 **FREE** - No charge |
-| **RBAC Role Assignments** | 🆓 **FREE** - No charge |
-| **Azure AD Token Requests** | 🆓 **FREE** - Included |
+| **Managed Identity** | 🆓 **БЕЗПЛАТНО** - Няма такса |
+| **RBAC Role Assignments** | 🆓 **БЕЗПЛАТНО** - Няма такса |
+| **Microsoft Entra ID Token Requests** | 🆓 **БЕЗПЛАТНО** - Включено |
 | **Key Vault Operations** | $0.03 per 10,000 operations |
 | **Key Vault Storage** | $0.024 per secret per month |
 
-**Управляваната идентичност спестява пари чрез:**
-- ✅ Премахване на операции с Key Vault за удостоверяване между услуги
-- ✅ Намаляване на инцидентите със сигурността (няма изтекли креденшъли)
-- ✅ Намаляване на оперативната сложност (няма ръчно въртене)
+**Managed identity спестява пари като:**
+- ✅ Премахва Key Vault операции за удостоверяване услуга-към-услуга
+- ✅ Намалява инцидентите със сигурността (няма изтекли креденции)
+- ✅ Намалява оперативното натоварване (няма ръчно въртене)
 
 **Примерно сравнение на разходите (месечно):**
 
@@ -1496,7 +1552,7 @@ az containerapp revision restart \
 ## Научете повече
 
 ### Официална документация
-- [Управлявана идентичност на Azure](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
+- [Azure Managed Identity](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
 - [Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)
 - [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)
 - [DefaultAzureCredential](https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential)
@@ -1507,41 +1563,41 @@ az containerapp revision restart \
 - [azure-identity (Python)](https://pypi.org/project/azure-identity/)
 
 ### Следващи стъпки в този курс
-- ← Предишно: [Управление на конфигурацията](configuration.md)
-- → Следващо: [Първи проект](first-project.md)
-- 🏠 [Начална страница на курса](../../README.md)
+- ← Предишна: [Configuration Management](configuration.md)
+- → Следваща: [First Project](first-project.md)
+- 🏠 [Course Home](../../README.md)
 
 ### Свързани примери
-- [Пример за чат с Microsoft Foundry Models](../../../../examples/azure-openai-chat) - Използва управлявана идентичност за Microsoft Foundry Models
-- [Пример за микросервизи](../../../../examples/microservices) - Модели за удостоверяване в многосервисни среди
+- [Microsoft Foundry Models Chat Example](../../../../examples/azure-openai-chat) - Използва управлявана идентичност за Microsoft Foundry Models
+- [Microservices Example](../../../../examples/microservices) - Примери за удостоверяване в многоуслуги
 
 ---
 
-## Резюме
+## Обобщение
 
-**Научихте:**
-- ✅ Три модела за удостоверяване (строки за връзка, Key Vault, управлявана идентичност)
-- ✅ Как да активирате и конфигурирате управлявана идентичност в AZD
+**Вие научихте:**
+- ✅ Трите модела за удостоверяване (connection strings, Key Vault, управлявана идентичност)
+- ✅ Как да активирате и конфигурирате managed identity в AZD
 - ✅ Присвоявания на RBAC роли за Azure услуги
-- ✅ Интеграция на Key Vault за тайни от трети страни
-- ✅ Потребителски присвоени срещу системно присвоени идентичности
+- ✅ Интеграция с Key Vault за тайни на трети страни
+- ✅ User-assigned срещу system-assigned идентичности
 - ✅ Най-добри практики за сигурност и отстраняване на проблеми
 
 **Ключови изводи:**
-1. **Винаги използвайте управлявана идентичност в продукция** - Нула тайни, автоматично въртене
-2. **Използвайте RBAC роли с най-малко привилегии** - Давайте само необходимите разрешения
-3. **Съхранявайте ключове от трети страни в Key Vault** - Централизирано управление на тайните
-4. **Разделяйте идентичностите по среди** - Изолация между dev, staging, prod
-5. **Активирайте одитното регистриране** - Следете кой какво е достъпвал
+1. **Винаги използвайте managed identity в продукция** - Никакви тайни, автоматично въртене
+2. **Използвайте RBAC роли с най-малко необходими права** - Давайте само необходимите разрешения
+3. **Съхранявайте ключовете на трети страни в Key Vault** - Централизирано управление на тайните
+4. **Разделяйте идентичностите по среди** - Изолация за dev, staging, prod
+5. **Включете запис на одит** - Проследявайте кой и какво е достъпвал
 
 **Следващи стъпки:**
 1. Завършете практическите упражнения по-горе
-2. Мигрирайте съществуващо приложение от низове за връзка към управлявана идентичност
-3. Създайте първия си AZD проект със сигурност от първия ден: [Първи проект](first-project.md)
+2. Мигрирайте съществуващо приложение от connection strings към managed identity
+3. Създайте първия си AZD проект със сигурност от първия ден: [First Project](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Отказ от отговорност**:
-Този документ е преведен с помощта на AI преводаческа услуга [Co-op Translator](https://github.com/Azure/co-op-translator). Въпреки че се стремим към точност, имайте предвид, че автоматизираните преводи могат да съдържат грешки или неточности. Оригиналният документ на неговия език трябва да се счита за авторитетен източник. За критична информация се препоръчва професионален превод от човек. Не носим отговорност за каквито и да е недоразумения или неправилни тълкувания, произтичащи от използването на този превод.
+Този документ е преведен с помощта на AI преводачески услуга [Co-op Translator](https://github.com/Azure/co-op-translator). Въпреки че се стремим към точност, моля имайте предвид, че автоматизираните преводи могат да съдържат грешки или неточности. Оригиналният документ на неговия роден език трябва да се счита за авторитетен източник. За критична информация се препоръчва професионален човешки превод. Ние не носим отговорност за каквито и да е недоразумения или неправилни тълкувания, произтичащи от използването на този превод.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

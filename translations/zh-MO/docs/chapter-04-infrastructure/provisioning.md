@@ -1,45 +1,45 @@
-# 使用 AZD 配置 Azure 資源
+# 使用 AZD 佈建 Azure 資源
 
 **章節導覽:**
-- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
-- **📖 目前章節**: 第4章 - 以程式碼管理基礎架構及部署
-- **⬅️ 前一頁**: [部署指南](deployment-guide.md)
-- **➡️ 下一章**: [第5章：多代理 AI 解決方案](../../examples/retail-scenario.md)
-- **🔧 相關章節**: [第6章：部署前驗證](../chapter-06-pre-deployment/capacity-planning.md)
+- **📚 課程首頁**: [AZD 入門](../../README.md)
+- **📖 目前章節**: 第 4 章 - 基礎設施即程式碼與部署
+- **⬅️ 上一節**: [部署指南](deployment-guide.md)
+- **➡️ 下一章**: [第 5 章：多代理 AI 解決方案](../../examples/retail-scenario.md)
+- **🔧 相關章節**: [第 6 章：部署前驗證](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## 介紹
 
-本全面指南涵蓋使用 Azure Developer CLI 配置及管理 Azure 資源的所有必備知識。學習如何從基礎資源建立，到使用 Bicep、ARM 模板、Terraform 與 Pulumi 實作企業級基礎架構架構，落實以程式碼管理基礎架構 (IaC) 的模式。
+本綜合指南涵蓋使用 Azure Developer CLI 佈建與管理 Azure 資源的一切。學習如何從基本資源建立到使用 Bicep、ARM 模板、Terraform 和 Pulumi 的進階企業等級基礎設施設計，實作基礎設施即程式碼（IaC）模式。
 
 ## 學習目標
 
-完成本指南後，您將能：
-- 精通以程式碼管理基礎架構的原理及 Azure 資源配置
-- 了解多種 Azure Developer CLI 支援的 IaC 提供者
-- 設計及實作常見應用架構的 Bicep 模板
-- 調整資源參數、變數及環境特定設定
-- 實作進階基礎架構模式，包括網絡與安全性
-- 管理資源生命週期、更新及依賴解析
+完成本指南後，你將能夠：
+- 精通基礎設施即程式碼原則與 Azure 資源佈建
+- 了解 Azure Developer CLI 支援的多種 IaC 提供者
+- 設計並實作常見應用架構的 Bicep 範本
+- 設定資源參數、變數與環境專屬設定
+- 實作包含網路與安全性的進階基礎設施設計模式
+- 管理資源生命週期、更新與相依性解析
 
 ## 學習成果
 
-完成後，您將能：
-- 使用 Bicep 與 ARM 模板設計及配置 Azure 基礎架構
-- 設計具適當資源依賴的複雜多服務架構
-- 為多種環境與配置實作參數化模板
-- 排解基礎架構配置問題及解決部署失敗
-- 將 Azure 優良架構框架原則應用於基礎架構設計
-- 管理基礎架構更新並實作版本控制策略
+完成後，你將能：
+- 使用 Bicep 與 ARM 模板設計並佈建 Azure 基礎設施
+- 設定具有正確資源相依性的複雜多服務架構
+- 為多種環境與組態實作參數化範本
+- 疑難排解基礎設施佈建問題並解決部署失敗
+- 將 Azure 良好架構框架原則應用於基礎設施設計
+- 管理基礎設施更新並實作基礎設施版本策略
 
-## 基礎架構配置概覽
+## 基礎設施佈建概覽
 
-Azure Developer CLI 支援多種以程式碼管理基礎架構 (IaC) 的提供者：
-- **Bicep**（推薦）- Azure 專屬領域特定語言
-- **ARM Templates** - 基於 JSON 的 Azure 資源管理模板
-- **Terraform** - 多雲基礎架構工具
-- **Pulumi** - 使用程式語言的現代基礎架構即代碼
+Azure Developer CLI 支援多種基礎設施即程式碼（IaC）提供者：
+- **Bicep**（建議）- Azure 的領域專用語言
+- **ARM Templates** - 基於 JSON 的 Azure Resource Manager 範本
+- **Terraform** - 支援多雲的基礎設施工具
+- **Pulumi** - 使用一般程式語言的現代基礎設施即程式碼
 
-## 認識 Azure 資源
+## 了解 Azure 資源
 
 ### 資源階層
 ```
@@ -49,16 +49,16 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### 常見應用的 Azure 服務
-- <strong>計算</strong>: 應用服務、容器應用、函數、虛擬機
-- <strong>儲存</strong>: 儲存帳號、Cosmos DB、SQL 資料庫、PostgreSQL
-- <strong>網絡</strong>: 虛擬網絡、應用閘道、CDN
-- <strong>安全</strong>: 金鑰保管庫、應用程式洞察、日誌分析
-- **人工智慧/機器學習**: 認知服務、OpenAI、機器學習
+### 應用程式常見的 Azure 服務
+- **計算 (Compute)**: App Service, Container Apps, Functions, Virtual Machines
+- **儲存 (Storage)**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
+- **網路 (Networking)**: Virtual Network, Application Gateway, CDN
+- **安全 (Security)**: Key Vault, Application Insights, Log Analytics
+- **AI/ML**: Azure AI Services, Azure OpenAI, Azure Machine Learning
 
-## Bicep 基礎架構模板
+## Bicep 基礎設施範本
 
-### 基本 Bicep 模板結構
+### 基本 Bicep 範本結構
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -130,7 +130,7 @@ output WEB_NAME string = webApp.name
 
 ### 進階 Bicep 模式
 
-#### 模組化基礎架構
+#### 模組化基礎設施
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -200,7 +200,201 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ 資料庫配置
+## 🌐 在 azd 中使用 Terraform
+
+Bicep 是 azd 的預設，但 azd 也支援 **Terraform**—當你的團隊已標準化使用 Terraform 或你管理多雲基礎設施時非常有用。azd 的工作流程（`azd up`、`azd provision`、`azd down`）相同；只有基礎設施語言與資料夾結構會改變。
+
+### 告訴 azd 使用 Terraform
+
+在 `azure.yaml` 新增一個指向 Terraform 提供者的 `infra` 區段：
+
+```yaml
+# azure.yaml
+name: my-terraform-app
+infra:
+  provider: terraform   # default is "bicep"
+  path: infra           # folder containing your .tf files
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### Terraform 資料夾佈局
+
+使用 Terraform 提供者時，你的 `infra/` 資料夾會使用 `.tf` 檔案而非 Bicep：
+
+```
+infra/
+├── main.tf            # resource definitions
+├── variables.tf       # input variables
+├── outputs.tf         # outputs azd reads back (endpoints, names)
+├── provider.tf        # azurerm/azurecaf providers + backend
+└── main.tfvars.json   # values azd injects per environment
+```
+
+### 一個最小的 `main.tf`
+
+```hcl
+# infra/main.tf
+resource "azurerm_resource_group" "rg" {
+  name     = "rg-${var.environment_name}"
+  location = var.location
+  tags     = { "azd-env-name" = var.environment_name }
+}
+
+resource "azurerm_service_plan" "plan" {
+  name                = "plan-${var.environment_name}"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  os_type             = "Linux"
+  sku_name            = "B1"
+}
+```
+
+### azd 如何連接你的 Terraform 輸出
+
+azd 會讀取 Terraform 的 **outputs** 以了解你的端點，並將環境值回寫到應用程式中。輸出名稱非常重要——azd 會尋找特定的名稱：
+
+```hcl
+# infra/outputs.tf
+output "AZURE_LOCATION" {
+  value = var.location
+}
+
+output "SERVICE_WEB_ENDPOINT_URL" {
+  value = azurerm_linux_web_app.web.default_hostname
+}
+```
+
+> **重要：** azd 使用 `azd-env-name` 標籤與 `AZURE_*` 輸出來追蹤每個環境的資源。請務必在資源群組上標記 `"azd-env-name" = var.environment_name`，以便 `azd down` 能找到並移除所有項目。
+
+### 使用 Terraform 部署
+
+指令與 Bicep 完全相同：
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd 在背後執行 'terraform plan'
+azd up                    # 佈建 + 部署
+azd down --force          # 銷毀由 Terraform 管理的資源
+```
+
+> **先決條件：** 必須在 `PATH` 中安裝 Terraform。azd 管理 Terraform 的 <em>工作流程</em>，但不會為你安裝 Terraform。對於狀態，azd 預設為本地狀態；對於團隊，請在 `provider.tf` 中設定遠端 backend（例如 Azure Storage backend）。
+
+欲取得完整可執行的 Terraform 範本，請瀏覽 [Awesome AZD gallery](https://azure.github.io/awesome-azd/) 並篩選 Terraform，或參閱官方的 [azd Terraform documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd)。
+
+## 🧩 在 azd 中使用 Pulumi
+
+如果你的團隊以通用程式語言（TypeScript、Python、Go 或 C#）撰寫基礎設施而非 DSL，azd 也支援 **Pulumi**。如同 Terraform，`azd up` / `azd provision` / `azd down` 的工作流程不變—只有基礎設施工具與資料夾結構不同。
+
+### 告訴 azd 使用 Pulumi
+
+```yaml
+# azure.yaml
+name: my-pulumi-app
+infra:
+  provider: pulumi      # default is "bicep"
+  path: infra           # folder containing your Pulumi program
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### Pulumi 資料夾佈局
+
+```
+infra/
+├── Pulumi.yaml          # project definition
+├── Pulumi.dev.yaml      # stack config (one per environment)
+├── index.ts             # your resource program (or __main__.py, main.go, etc.)
+├── package.json         # dependencies (for TypeScript)
+└── tsconfig.json
+```
+
+### 一個最小的 `index.ts`
+
+```typescript
+import * as azure from "@pulumi/azure-native";
+import * as pulumi from "@pulumi/pulumi";
+
+const environmentName = pulumi.getStack();
+
+// 標記每個資源，以便 azd 可以追蹤並清理它們
+const tags = { "azd-env-name": environmentName };
+
+const rg = new azure.resources.ResourceGroup("rg", {
+  resourceGroupName: `rg-${environmentName}`,
+  tags,
+});
+
+// azd 將這些輸出讀回到你的環境中
+export const AZURE_LOCATION = rg.location;
+export const SERVICE_WEB_ENDPOINT_URL = "https://...";
+```
+
+### Stacks 對應 azd 環境
+
+Pulumi 將部署組織為 **stacks**，而 azd 會將每個 azd 環境對應到同名的 Pulumi stack。當你執行 `azd env new staging` 時，azd 會選擇（或建立）名為 `staging` 的 Pulumi stack。相同的 `azd-env-name` 標記與 `AZURE_*` 輸出規則也適用，讓 `azd down` 能找到並移除所有項目。
+
+### 使用 Pulumi 部署
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd 在背後執行 'pulumi preview'
+azd up                    # 配置 + 部署
+azd down --force          # 執行 'pulumi destroy'
+```
+
+> **先決條件：** 必須在 `PATH` 中安裝 Pulumi，並且你需要一個狀態後端（Pulumi Cloud 或自主管理的後端，例如 Azure Blob Storage）。azd 管理 Pulumi 的 <em>工作流程</em>，但不負責安裝。請參閱官方的 [azd Pulumi documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-pulumi-for-azd)。
+
+## 🎯 為你的服務選擇主機
+
+`host` 欄位在 `azure.yaml` 中決定你的程式碼在哪裡運行。azd 支援多種主機—選對主機比選擇基礎設施語言更重要。以下為初學者友善的比較：
+
+| `host` value | 最適用於 | 原因 |
+|--------------|----------|-----|
+| `appservice` | 傳統的 Web 應用與 API | 最簡單的 PaaS；不需要容器 |
+| `staticwebapp` | 前端單頁應用（React、Vue、Angular） | 全球 CDN + 免費 SSL，內建 API 支援 |
+| `function` | 事件驅動與無伺服器工作負載 | 支援 scale-to-zero，按執行次數付費 |
+| `containerapp` | 容器化的微服務 | 無伺服器容器，支援 scale-to-zero，內建 ingress |
+| `aks` | 需要複雜協調的情境 | 當你確實需要時，提供完整的 Kubernetes 控制 |
+| `springapp` | Java Spring Boot 應用程式 | 為 Spring 調校的 Azure Spring Apps 管理型執行環境 |
+
+### 何時考慮使用 AKS
+
+**Azure Kubernetes Service (`host: aks`)** 提供你 Kubernetes 的完整能力—自訂控制器、服務網格、複雜網路與細緻的排程。這些能力會帶來操作上的負擔：你需要管理 node pool、升級與叢集網路。
+
+```yaml
+services:
+  api:
+    project: ./src/api
+    language: js
+    host: aks          # deploys to an existing AKS cluster
+```
+
+> **如果能更簡單就先從簡。** 對於大多數微服務，**Container Apps** 提供容器、彈性伸縮與 scale-to-zero，而無須管理叢集。只有在需要 Kubernetes 特有功能時才選 AKS。
+
+### 何時使用 Azure Spring Apps
+
+**Azure Spring Apps (`host: springapp`)** 是為 Spring Boot 量身打造的管理型執行環境。它處理服務發現、設定伺服器與藍綠部署，讓 Java 團隊無需自行維運基礎設施。
+
+```yaml
+services:
+  catalog:
+    project: ./src/catalog
+    language: java
+    host: springapp
+```
+
+> 當你已經有現有的 Spring Boot 應用且想要專為它們調校的執行環境時，使用 `springapp`。若是新的容器化 Java 應用且無 Spring 特有需求，`containerapp` 通常是更簡單的選擇。
+
+## 🗃️ 資料庫佈建
 
 ### Cosmos DB
 ```bicep
@@ -298,9 +492,9 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 安全性與密鑰管理
+## 🔒 安全性與機密管理
 
-### 金鑰保管庫整合
+### Key Vault 整合
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -342,7 +536,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### 托管身分識別設定
+### 設定 Managed Identity
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -368,9 +562,9 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 網絡與連接性
+## 🌍 網路與連線
 
-### 虛擬網絡配置
+### 虛擬網路設定
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -433,7 +627,7 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### 支援 SSL 的應用閘道
+### 搭配 SSL 的 Application Gateway
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -498,7 +692,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ## 📊 監控與可觀察性
 
-### 應用程式洞察
+### Application Insights
 ```bicep
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
   name: '${applicationName}-logs-${resourceToken}'
@@ -561,9 +755,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 環境特定配置
+## 🔧 環境專屬設定
 
-### 不同環境的參數文件
+### 不同環境的參數檔
 ```json
 // infra/main.parameters.dev.json
 {
@@ -617,7 +811,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 條件式資源配置
+### 條件式資源佈建
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -649,7 +843,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 進階配置模式
+## 🚀 進階佈建模式
 
 ### 多區域部署
 ```bicep
@@ -719,7 +913,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### 基礎架構測試
+### 基礎設施測試
 ```bicep
 // infra/test/main.test.bicep
 param location string = resourceGroup().location
@@ -755,40 +949,40 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 基礎架構預覽與驗證（新功能）
+## 🧪 基礎設施預覽與驗證（新功能）
 
-### 部署前預覽基礎架構變更
+### 在部署前預覽基礎設施變更
 
-`azd provision --preview` 功能讓您<strong>模擬基礎架構配置</strong>，無須實際部署資源。其精神類似 `terraform plan` 或 `bicep what-if`，提供一個對 Azure 環境變更的<strong>模擬執行畫面</strong>。
+`azd provision --preview` 功能讓你在實際部署資源前 <strong>模擬基礎設施佈建</strong>。它的概念類似 `terraform plan` 或 `bicep what-if`，可提供一個 **dry-run 檢視**，顯示將對你的 Azure 環境做出的變更。
 
-#### 🛠️ 功能說明
-- **分析 IaC 模板**（Bicep 或 Terraform）
+#### 🛠️ 它會做什麼
+- **分析你的 IaC 範本**（Bicep 或 Terraform）
 - <strong>顯示資源變更預覽</strong>：新增、刪除、更新
-- <strong>不會套用變更</strong> — 僅限閱讀、安全執行
+- <strong>不會套用變更</strong> — 這是唯讀的，執行安全
 
 #### 使用情境
 ```bash
-# 部署前預覽基礎設施更改
+# 在部署前預覽基礎設施的變更
 azd provision --preview
 
-# 預覽特定環境
+# 針對特定環境的預覽
 azd provision --preview -e production
 ```
 
-此指令協助您：
-- <strong>驗證基礎架構變更</strong>，部署前先檢查
-- <strong>及早發現配置錯誤</strong>
-- <strong>安全地在團隊中協作</strong>
-- **確保以最小權限部署，無意外**
+此指令可以幫助你：
+- <strong>在提交資源前驗證基礎設施變更</strong>
+- <strong>於開發週期早期抓到錯誤設定</strong>
+- <strong>在團隊環境中安全協作</strong>
+- **確保以最小權限進行部署，避免意外**
 
-特別適用於：
-- 處理複雜多服務環境
-- 更改生產環境基礎架構時
-- PR 審查前驗證模板變更
-- 教育新團隊成員基礎架構模式
+它特別有用於：
+- 處理複雜的多服務環境
+- 對生產基礎設施進行變更時
+- 在 PR 批准前驗證範本修改
+- 訓練新成員熟悉基礎設施設計模式
 
-### 範例預覽輸出
-預覽輸出依提供者及專案架構有所不同，但結果應清楚標示出擬議變更，部署前一目了然。
+### 預覽範例輸出
+實際預覽輸出會依提供者與專案結構而異，但結果應清楚識別在套用前建議的變更。
 
 ```bash
 $ azd provision --preview
@@ -813,19 +1007,19 @@ The following resources will be destroyed:
 ✅ Preview completed successfully!
 ```
 
-## 🔄 資源更新與遷移
+## �🔄 資源更新與遷移
 
 ### 安全的資源更新
 ```bash
-# 先預覽基礎設施更改（建議）
+# 先預覽基礎架構變更（建議）
 azd provision --preview
 
-# 在預覽確認後應用更改
+# 在預覽確認後套用變更
 azd provision --confirm-with-no-prompt
 
-# 如需回滾，使用 Git 來還原基礎設施更改：
-git revert HEAD  # 還原最後一次基礎設施提交
-azd provision    # 應用先前的基礎設施狀態
+# 若要回滾，使用 Git 回退基礎架構的變更：
+git revert HEAD  # 回退最後一個基礎架構提交
+azd provision    # 套用先前的基礎架構狀態
 ```
 
 ### 資料庫遷移
@@ -859,7 +1053,7 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🎯 最佳實務
 
-### 1. 資源命名規則
+### 1. 資源命名慣例
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -870,7 +1064,7 @@ var naming = {
 }
 ```
 
-### 2. 標籤策略
+### 2. 標記策略
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -914,29 +1108,29 @@ output DATABASE_NAME string = database.name
 output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
 ```
 
-## 後續步驟
+## 下一步
 
 - [部署前規劃](../chapter-06-pre-deployment/capacity-planning.md) - 驗證資源可用性
-- [常見問題](../chapter-07-troubleshooting/common-issues.md) - 排解基礎架構問題
-- [除錯指南](../chapter-07-troubleshooting/debugging.md) - 除錯配置問題
-- [SKU 選擇](../chapter-06-pre-deployment/sku-selection.md) - 選擇適合服務等級
+- [常見問題](../chapter-07-troubleshooting/common-issues.md) - 疑難排解基礎設施問題
+- [偵錯指南](../chapter-07-troubleshooting/debugging.md) - 偵錯佈建問題
+- [SKU 選擇](../chapter-06-pre-deployment/sku-selection.md) - 選擇適當的服務等級
 
-## 其他資源
+## 額外資源
 
-- [Azure Bicep 文件](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure 資源管理器模板](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure 架構中心](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure 優良架構框架](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
 <strong>導覽</strong>
-- <strong>上一篇課程</strong>: [部署指南](deployment-guide.md)
-- <strong>下一篇課程</strong>: [容量規劃](../chapter-06-pre-deployment/capacity-planning.md)
+- <strong>上一課</strong>: [部署指南](deployment-guide.md)
+- <strong>下一課</strong>: [容量規劃](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責聲明**：  
-本文件由 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。以文件的原始語言版本為權威來源。對於重要資訊，建議使用專業人工翻譯。我們不對因使用本翻譯而引起的任何誤解或誤釋承擔責任。
+**免責聲明**：
+本文件使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們力求準確，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要資訊，建議尋求專業人工翻譯。我們不對因使用本翻譯而引起的任何誤解或曲解承擔責任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

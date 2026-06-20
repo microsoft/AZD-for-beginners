@@ -1,51 +1,51 @@
-# Chapter 6: Plánovanie a overovanie pred nasadením
+# Kapitola 6: Plánovanie a overenie pred nasadením
 
-**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Trvanie**: 1 hodina | **⭐ Zložitosť**: Stredne pokročilý
+**📚 Kurz**: [AZD For Beginners](../../README.md) | **⏱️ Dĺžka**: 1 hodina | **⭐ Zložitosť**: Stredná
 
 ---
 
 ## Prehľad
 
-Táto kapitola pokrýva základné kroky plánovania a overovania pred nasadením vašej aplikácie. Naučte sa vyhnúť nákladným chybám pomocou správneho plánovania kapacity, výberu SKU a predbežných kontrol.
+Táto kapitola pokrýva základné kroky plánovania a overenia pred nasadením vašej aplikácie. Naučíte sa predchádzať nákladným chybám pomocou správneho plánovania kapacity, výberu SKU a prednasadzovacích kontrol.
 
-> Overené s `azd 1.23.12` v marci 2026.
+> Overené proti `azd 1.25.6` v júni 2026.
 
-## Výukové ciele
+## Ciele učenia
 
-Úspešným dokončením tejto kapitoly budete vedieť:
-- Spustiť predbežné kontroly pred nasadením
-- Plánovať kapacitu a odhadnúť požiadavky na zdroje
-- Vybrať vhodné SKU pre optimalizáciu nákladov
+Po dokončení tejto kapitoly budete:
+- Spúšťať prednasadzovacie kontroly pred nasadením
+- Plánovať kapacitu a odhadovať požiadavky na zdroje
+- Vyberať vhodné SKU na optimalizáciu nákladov
 - Konfigurovať Application Insights na monitorovanie
-- Pochopiť vzorce koordinácie tímu
+- Pochopiť vzory koordinácie tímu
 
 ---
 
 ## 📚 Lekcie
 
-| # | Lekcia | Popis | Čas |
+| # | Lekcia | Popis | Trvanie |
 |---|--------|-------------|------|
-| 1 | [Predbežné kontroly](preflight-checks.md) | Overenie konfigurácie pred nasadením | 15 min |
-| 2 | [Plánovanie kapacity](capacity-planning.md) | Odhad požiadaviek na zdroje | 20 min |
-| 3 | [Výber SKU](sku-selection.md) | Výber vhodných cenových úrovní | 15 min |
-| 4 | [Application Insights](application-insights.md) | Konfigurácia monitorovania | 20 min |
-| 5 | [Vzorce koordinácie](coordination-patterns.md) | Pracovné postupy tímového nasadenia | 15 min |
+| 1 | [Preflight Checks](preflight-checks.md) | Overiť konfiguráciu pred nasadením | 15 min |
+| 2 | [Capacity Planning](capacity-planning.md) | Odhadnúť požiadavky na zdroje | 20 min |
+| 3 | [SKU Selection](sku-selection.md) | Vybrať vhodné cenové hladiny | 15 min |
+| 4 | [Application Insights](application-insights.md) | Konfigurovať monitorovanie | 20 min |
+| 5 | [Coordination Patterns](coordination-patterns.md) | Pracovné postupy tímu pri nasadení | 15 min |
 
 ---
 
 ## 🚀 Rýchly štart
 
 ```bash
-# Skontrolujte kvóty predplatného
+# Skontrolovať kvóty predplatného
 az vm list-usage --location eastus --output table
 
-# Náhľad nasadenia (neboli vytvorené žiadne zdroje)
+# Náhľad nasadenia (nebudú vytvorené žiadne zdroje)
 azd provision --preview
 
-# Overte syntax Bicep
+# Overiť syntax Bicep
 az bicep build --file infra/main.bicep
 
-# Skontrolujte konfiguráciu prostredia
+# Skontrolovať konfiguráciu prostredia
 azd env get-values
 ```
 
@@ -55,24 +55,24 @@ azd env get-values
 
 ### Pred `azd provision`
 
-- [ ] Overená kvóta pre región
-- [ ] Vhodne vybrané SKU
-- [ ] Preskúmaný odhad nákladov
+- [ ] Kvóta overená pre región
+- [ ] SKU správne vybrané
+- [ ] Nákladový odhad skontrolovaný
 - [ ] Konzistentná konvencia pomenovania
-- [ ] Nastavené zabezpečenie/RBAC
+- [ ] Bezpečnosť/RBAC nakonfigurované
 
 ### Pred `azd deploy`
 
 - [ ] Nastavené premenné prostredia
 - [ ] Tajomstvá v Key Vault
-- [ ] Overené pripojovacie reťazce
-- [ ] Nakonfigurované zdravotné kontroly
+- [ ] Overené connection strings
+- [ ] Nakonfigurované health checky
 
 ---
 
 ## 💰 Sprievodca výberom SKU
 
-| Zaťaženie | Vývoj | Produkcia |
+| Pracovná záťaž | Vývoj | Produkcia |
 |----------|-------------|------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
@@ -85,8 +85,8 @@ azd env get-values
 
 | Smer | Kapitola |
 |-----------|---------|
-| **Predchádzajúca** | [Kapitola 5: Viacagentný](../chapter-05-multi-agent/README.md) |
-| **Nasledujúca** | [Kapitola 7: Riešenie problémov](../chapter-07-troubleshooting/README.md) |
+| **Predchádzajúca** | [Kapitola 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
+| **Ďalšia** | [Kapitola 7: Riešenie problémov](../chapter-07-troubleshooting/README.md) |
 
 ---
 
@@ -99,6 +99,6 @@ azd env get-values
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Upozornenie**:  
-Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, prosím, majte na pamäti, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nezodpovedáme za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+**Vyhlásenie o zodpovednosti**:
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, vezmite prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho natívnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,38 +1,40 @@
-# Chapter 1: Základy & Rýchly štart
+# Kapitola 1: Základy & Rýchly štart
 
-**📚 Kurz**: [AZD Pre začiatočníkov](../../README.md) | **⏱️ Trvanie**: 30-45 minút | **⭐ Náročnosť**: Začiatočník
+**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Dĺžka**: 30-45 minút | **⭐ Úroveň zložitosti**: Začiatočník
 
 ---
 
 ## Prehľad
 
-Táto kapitola predstavuje základy Azure Developer CLI (azd). Naučíte sa základné pojmy, nainštalujete nástroje a nasadíte svoju prvú aplikáciu do Azure.
+Táto kapitola predstavuje základy Azure Developer CLI (azd). Naučíte sa kľúčové koncepty, nainštalujete nástroje a nasadíte svoju prvú aplikáciu do Azure.
 
-> Overené na `azd 1.23.12` v marci 2026.
+> Overené voči `azd 1.25.6` v júni 2026.
 
 ## Ciele učenia
 
 Po dokončení tejto kapitoly budete:
-- Rozumieť, čo je Azure Developer CLI a ako sa líši od Azure CLI
+- Pochopiť, čo je Azure Developer CLI a ako sa odlišuje od Azure CLI
 - Nainštalovať a nakonfigurovať AZD na vašej platforme
-- Nasadiť svoju prvú aplikáciu do Azure pomocou `azd up`
-- Vyčistiť zdroje pomocou `azd down`
+- Nasadiť vašu prvú aplikáciu do Azure pomocou `azd up`
+- Upratať zdroje pomocou `azd down`
 
 ---
 
 ## 📚 Lekcie
 
-| # | Lekcia | Popis | Čas |
-|---|--------|--------|------|
-| 1 | [Základy AZD](azd-basics.md) | Základné pojmy, terminológia a štruktúra projektu | 15 min |
-| 2 | [Inštalácia & Nastavenie](installation.md) | Platformovo špecifické návody na inštaláciu | 10 min |
-| 3 | [Váš prvý projekt](first-project.md) | Prakticky: Nasadenie webovej aplikácie do Azure | 20 min |
+| # | Lekcia | Popis | Time |
+|---|--------|-------------|------|
+| 1 | [Základy AZD](azd-basics.md) | Hlavné koncepty, terminológia a štruktúra projektu | 15 min |
+| 2 | [Inštalácia & Nastavenie](installation.md) | Návody na inštaláciu pre konkrétne platformy | 10 min |
+| 3 | [Váš prvý projekt](first-project.md) | Prakticky: Nasadiť webovú aplikáciu do Azure | 20 min |
+| 4 | [Použite azd v existujúcom projekte](bring-your-own-app.md) | Pridajte azd do existujúceho projektu, ktorý už máte | 15 min |
+| 5 | [Dev kontajnery a Codespaces](dev-containers.md) | Reprodukovateľné prostredia azd s dev kontajnermi | 15 min |
 
 ---
 
-## ✅ Začnite tu: Overenie nastavenia
+## ✅ Začnite tu: Overte svoje nastavenie
 
-Pred začatím si overte, či je váš lokálny stroj pripravený na šablónu Kapitoly 1:
+Predtým, než začnete, potvrďte, že váš lokálny počítač je pripravený pre šablónu kapitoly 1:
 
 **Windows:**
 ```powershell
@@ -44,25 +46,25 @@ Pred začatím si overte, či je váš lokálny stroj pripravený na šablónu K
 bash ./validate-setup.sh
 ```
 
-Ak skript hlási chýbajúce nástroje, najprv ich opravte a potom pokračujte v kapitole.
+Ak skript oznámi chýbajúce nástroje, opravte ich najprv a potom pokračujte v kapitole.
 
 ---
 
 ## 🚀 Rýchly štart
 
 ```bash
-# Skontrolovať inštaláciu
+# Skontrolujte inštaláciu
 azd version
 
-# Overiť autentifikáciu pre AZD
-# Voliteľné: az login, ak plánujete spúšťať priamo príkazy Azure CLI
+# Prihláste sa do AZD
+# Voliteľné: použite az login, ak plánujete priamo spúšťať príkazy Azure CLI
 azd auth login
 
-# Nasadiť svoju prvú aplikáciu
+# Nasadenie vašej prvej aplikácie
 azd init --template todo-nodejs-mongo
 azd up
 
-# Vyčistiť po dokončení
+# Vyčistite po dokončení
 azd down --force --purge
 ```
 
@@ -70,14 +72,14 @@ azd down --force --purge
 
 ## ✅ Kritériá úspechu
 
-Po dokončení tejto kapitoly by ste mali vedieť:
+Po dokončení tejto kapitoly by ste mali byť schopní:
 
 ```bash
 azd version              # Zobrazuje nainštalovanú verziu
 azd init --template todo-nodejs-mongo  # Inicializuje projekt
 azd up                   # Nasadzuje do Azure
 azd show                 # Zobrazuje URL bežiacej aplikácie
-azd down --force --purge # Čistí zdroje
+azd down --force --purge # Odstráni zdroje
 ```
 
 ---
@@ -85,21 +87,21 @@ azd down --force --purge # Čistí zdroje
 ## 🔗 Navigácia
 
 | Smer | Kapitola |
-|-------|----------|
-| **Ďalej** | [Kapitola 2: AI-First Development](../chapter-02-ai-development/README.md) |
+|-----------|---------|
+| **Ďalej** | [Kapitola 2: Vývoj orientovaný na AI](../chapter-02-ai-development/README.md) |
 | **Preskočiť na** | [Kapitola 3: Konfigurácia](../chapter-03-configuration/README.md) |
 
 ---
 
 ## 📖 Súvisiace zdroje
 
-- [Přehľad príkazov](../../resources/cheat-sheet.md)
-- [FAQ](../../resources/faq.md)
+- [Rýchly prehľad príkazov](../../resources/cheat-sheet.md)
+- [Často kladené otázky](../../resources/faq.md)
 - [Glosár](../../resources/glossary.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Zrieknutie sa zodpovednosti**:  
-Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, prosím, majte na pamäti, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nezodpovedáme za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+**Vyhlásenie o zodpovednosti**:
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, vezmite prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho natívnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

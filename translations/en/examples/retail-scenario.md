@@ -197,6 +197,7 @@ graph TB
     style AISearch fill:#fce4ec
     style Storage fill:#f1f8e9
 ```
+
 ### Component Overview
 
 | Component | Purpose | Technology | Region |
@@ -205,7 +206,7 @@ graph TB
 | **Agent Router** | Routes requests to appropriate agent | Container Apps | Primary Region |
 | **Customer Agent** | Handles customer service queries | Container Apps + gpt-4.1 | Primary Region |
 | **Inventory Agent** | Manages stock and fulfillment | Container Apps + gpt-4.1-mini | Primary Region |
-| **Microsoft Foundry Models** | LLM inference for agents | Cognitive Services | Multi-region |
+| **Microsoft Foundry Models** | LLM inference for agents | Azure AI Services | Multi-region |
 | **AI Search** | Vector search and RAG | AI Search Service | Primary Region |
 | **Storage Account** | File uploads and documents | Blob Storage | Primary Region |
 | **Application Insights** | Monitoring and telemetry | Monitor | Primary Region |
@@ -571,7 +572,7 @@ MODEL_CAPACITY_REQUIREMENTS='{"gpt-4.1": 35, "text-embedding-ada-002": 30}'
 #### Pre-Provisioning Hook:
 
 ```bash
-#!/bin/bash
+#Shebang for /bin/bash
 # hooks/preprovision.sh
 
 echo "Setting up AI Search configuration..."
@@ -2181,6 +2182,6 @@ cd retail-multiagent-arm-template
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+**Disclaimer**:
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

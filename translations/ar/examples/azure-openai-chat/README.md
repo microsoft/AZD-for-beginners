@@ -1,90 +1,91 @@
-# تطبيق دردشة Microsoft Foundry Models
+# تطبيق الدردشة لخدمات Microsoft Foundry Models
 
-**مسار التعلم:** متوسط ⭐⭐ | **الوقت:** 35-45 دقيقة | **التكلفة:** $50-200/month
+**مسار التعلم:** متوسط ⭐⭐ | **المدة:** 35-45 دقيقة | **التكلفة:** $50-200/شهريًا
 
-تطبيق دردشة كامل لـ Microsoft Foundry Models تم نشره باستخدام Azure Developer CLI (azd). يوضح هذا المثال نشر gpt-4.1، والوصول الآمن إلى API، وواجهة دردشة بسيطة.
+تطبيق دردشة كامل لـ Microsoft Foundry Models منصّب باستخدام Azure Developer CLI (azd). يوضّح هذا المثال نشر gpt-4.1، والوصول الآمن إلى API، وواجهة دردشة بسيطة.
 
-## 🎯 ما ستتعلمه
+## 🎯 ما ستتعلم
 
 - نشر خدمة Microsoft Foundry Models باستخدام نموذج gpt-4.1
 - تأمين مفاتيح OpenAI API باستخدام Key Vault
 - بناء واجهة دردشة بسيطة باستخدام Python
-- مراقبة استخدام التوكنات والتكاليف
-- تنفيذ تحديد المعدل ومعالجة الأخطاء
+- مراقبة استخدام التوكن والتكاليف
+- تنفيذ حد للسرعة والتعامل مع الأخطاء
 
-## 📦 ما الذي يتضمنه
+## 📦 ما هو متضمن
 
 ✅ **خدمة Microsoft Foundry Models** - نشر نموذج gpt-4.1  
-✅ **تطبيق دردشة Python** - واجهة دردشة بسيطة لسطر الأوامر  
+✅ **تطبيق دردشة Python** - واجهة دردشة بسيطة من سطر الأوامر  
 ✅ **تكامل Key Vault** - تخزين آمن لمفاتيح API  
 ✅ **قوالب ARM** - بنية تحتية كاملة ككود  
-✅ **مراقبة التكاليف** - تتبع استخدام التوكنات  
-✅ **تحديد المعدل** - منع استنفاد الحصة  
+✅ **مراقبة التكلفة** - تتبع استخدام التوكن  
+✅ **حد للسرعة** - منع استنزاف الحصة  
 
 ## Architecture
 
 ```mermaid
 graph TD
-    App[تطبيق دردشة بايثون<br/>محلي/سحابي<br/>واجهة سطر الأوامر<br/>سجل المحادثات<br/>تتبع استخدام التوكنات] -- "HTTPS (مفتاح API)" --> Foundry[خدمة نماذج Microsoft Foundry<br/>نموذج gpt-4.1<br/>سعة 20 ألف توكن/دقيقة<br/>التبديل عند الفشل عبر مناطق متعددة]
-    Foundry --> KV[خزنة مفاتيح Azure<br/>مفتاح API الخاص بـ OpenAI<br/>عنوان URL لنقطة النهاية]
+    App[تطبيق دردشة بايثون<br/>محلي/سحابي<br/>واجهة سطر الأوامر<br/>سجل المحادثات<br/>تتبع استخدام التوكينات] -- "HTTPS (مفتاح API)" --> Foundry[خدمة نماذج Microsoft Foundry<br/>نموذج gpt-4.1<br/>سعة 20K توكن/دقيقة<br/>التبديل عند الفشل عبر مناطق متعددة]
+    Foundry --> KV[مخزن مفاتيح Azure<br/>مفتاح OpenAI API<br/>رابط نقطة النهاية]
     Foundry -. الهوية المُدارة .-> KV
 ```
+
 ## المتطلبات المسبقة
 
 ### مطلوب
 
 - **Azure Developer CLI (azd)** - [دليل التثبيت](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **اشتراك Azure** مع وصول OpenAI - [Request access](https://aka.ms/oai/access)
-- **Python 3.9+** - [Install Python](https://www.python.org/downloads/)
+- **اشتراك Azure** مع وصول إلى OpenAI - [طلب الوصول](https://aka.ms/oai/access)
+- **Python 3.9+** - [تثبيت Python](https://www.python.org/downloads/)
 
-### التحقق من المتطلبات المسبقة
+### تحقق من المتطلبات
 
 ```bash
-# تحقق من إصدار azd (يجب أن يكون 1.5.0 أو أعلى)
+# تحقّق من إصدار azd (مطلوب 1.5.0 أو أحدث)
 azd version
 
-# تحقق من تسجيل الدخول إلى Azure
+# تحقّق من تسجيل الدخول إلى Azure
 azd auth login
 
-# تحقق من إصدار Python
+# تحقّق من إصدار Python
 python --version  # أو python3 --version
 
-# تحقق من إمكانية الوصول إلى OpenAI (افحص ذلك في بوابة Azure)
+# تحقّق من إمكانية الوصول إلى OpenAI (افحص ذلك في بوابة Azure)
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus
 ```
 
-> **⚠️ مهم:** تتطلب Microsoft Foundry Models موافقة على التطبيق. إذا لم تقم بالتقديم، قم بزيارة [aka.ms/oai/access](https://aka.ms/oai/access). عادةً ما تستغرق الموافقة يومًا إلى يومي عمل.
+> **⚠️ هام:** يتطلب Microsoft Foundry Models موافقة على الطلب. إذا لم تقدم طلبًا بعد، قم بزيارة [aka.ms/oai/access](https://aka.ms/oai/access). عادةً ما تستغرق الموافقة 1-2 أيام عمل.
 
 ## ⏱️ الجدول الزمني للنشر
 
 | المرحلة | المدة | ما يحدث |
 |-------|----------|--------------|
-| فحص المتطلبات المسبقة | 2-3 minutes | التحقق من توفر حصة OpenAI |
-| نشر البنية التحتية | 8-12 minutes | Create OpenAI, Key Vault, model deployment |
-| تكوين التطبيق | 2-3 minutes | إعداد البيئة والتبعيات |
-| **الإجمالي** | **12-18 minutes** | جاهز للدردشة مع gpt-4.1 |
+| التحقق من المتطلبات | 2-3 دقائق | التحقق من توفر حصة OpenAI |
+| نشر البنية التحتية | 8-12 دقيقة | إنشاء OpenAI وKey Vault ونشر النموذج |
+| تهيئة التطبيق | 2-3 دقائق | إعداد البيئة والتبعيات |
+| **الإجمالي** | **12-18 دقيقة** | جاهز للدردشة مع gpt-4.1 |
 
-**ملاحظة:** قد يستغرق نشر OpenAI لأول مرة وقتًا أطول بسبب توفير النموذج.
+**ملاحظة:** قد يستغرق نشر OpenAI لأول مرة وقتًا أطول بسبب تجهيز النموذج.
 
-## بداية سريعة
+## بدء سريع
 
 ```bash
 # انتقل إلى المثال
 cd examples/azure-openai-chat
 
-# هيئ البيئة
+# تهيئة البيئة
 azd env new myopenai
 
-# انشر كل شيء (البنية التحتية + التكوين)
+# نشر كل شيء (البنية التحتية + التكوين)
 azd up
 # سيُطلب منك:
 # 1. اختر اشتراك Azure
-# 2. اختر موقعًا تتوفر فيه خدمة OpenAI (مثل: eastus, eastus2, westus)
-# 3. انتظر 12-18 دقيقة لإتمام النشر
+# 2. اختر موقعًا تتوفر فيه خدمة OpenAI (مثل: eastus، eastus2، westus)
+# 3. انتظر من 12 إلى 18 دقيقة لإتمام النشر
 
-# ثبّت تبعيات Python
+# قم بتثبيت تبعيات Python
 pip install -r requirements.txt
 
 # ابدأ الدردشة!
@@ -105,15 +106,15 @@ Assistant: Microsoft Foundry Models Service provides REST API access to OpenAI's
 
 ## ✅ التحقق من النشر
 
-### الخطوة 1: التحقق من موارد Azure
+### الخطوة 1: تحقق من موارد Azure
 
 ```bash
 # عرض الموارد المنشورة
 azd show
 
-# الناتج المتوقع يظهر:
+# المخرجات المتوقعة:
 # - خدمة OpenAI: (اسم المورد)
-# - خزنة المفاتيح: (اسم المورد)
+# - مخزن المفاتيح: (اسم المورد)
 # - النشر: gpt-4.1
 # - الموقع: eastus (أو المنطقة التي اخترتها)
 ```
@@ -157,7 +158,7 @@ curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2
 ### الخطوة 3: التحقق من وصول Key Vault
 
 ```bash
-# سرد الأسرار في Key Vault
+# عرض الأسرار في مخزن المفاتيح
 KV_NAME=$(azd env get-value AZURE_KEY_VAULT_NAME)
 
 az keyvault secret list \
@@ -171,10 +172,10 @@ az keyvault secret list \
 - `openai-endpoint`
 
 **معايير النجاح:**
-- ✅ تم نشر خدمة OpenAI بنموذج gpt-4.1
-- ✅ تُرجع مكالمة API استجابة صالحة
+- ✅ تم نشر خدمة OpenAI مع gpt-4.1
+- ✅ استدعاء API يعيد إكمالًا صالحًا
 - ✅ تم تخزين الأسرار في Key Vault
-- ✅ يعمل تتبع استخدام التوكنات
+- ✅ تتبع استخدام التوكن يعمل
 
 ## هيكل المشروع
 
@@ -200,22 +201,22 @@ azure-openai-chat/
 يتضمن تطبيق الدردشة:
 
 - **سجل المحادثة** - يحافظ على السياق عبر الرسائل
-- **عدّ التوكنات** - يتتبع الاستخدام ويقدّر التكاليف
-- **معالجة الأخطاء** - تعامل أنيق مع حدود المعدل وأخطاء API
-- **تقدير التكلفة** - حساب التكلفة في الوقت الحقيقي لكل رسالة
-- **دعم البث** - استجابات بث اختيارية
+- **عدّ التوكن** - يتتبع الاستخدام ويقدّر التكاليف
+- **التعامل مع الأخطاء** - معالجة لطيفة لحدود السرعة وأخطاء API
+- **تقدير التكلفة** - حساب التكلفة في الوقت الفعلي لكل رسالة
+- **دعم التدفق** - استجابات بتدفّق اختياري
 
 ### الأوامر
 
 أثناء الدردشة، يمكنك استخدام:
-- `quit` أو `exit` - إنهاء الجلسة
+- `quit` or `exit` - إنهاء الجلسة
 - `clear` - مسح سجل المحادثة
-- `tokens` - عرض إجمالي استخدام التوكنات
-- `cost` - عرض التكلفة التقديرية الإجمالية
+- `tokens` - عرض إجمالي استخدام التوكن
+- `cost` - عرض التقدير الإجمالي للتكلفة
 
 ### الإعداد (`config.py`)
 
-يحمل الإعدادات من متغيرات البيئة:
+يحمّل الإعدادات من متغيرات البيئة:
 ```python
 AZURE_OPENAI_ENDPOINT  # من مخزن المفاتيح
 AZURE_OPENAI_API_KEY   # من مخزن المفاتيح
@@ -238,13 +239,13 @@ export AZURE_OPENAI_MODEL=gpt-35-turbo
 python chat.py
 ```
 
-### دردشة مع البث
+### دردشة بتدفّق (Streaming)
 
 ```bash
 python chat.py --stream
 ```
 
-### مثال على محادثة
+### مثال محادثة
 
 ```
 You: Explain Microsoft Foundry Models Service in 3 sentences.
@@ -266,11 +267,11 @@ for vector search. Each model has different capabilities, pricing, and token lim
 Total session: 156 tokens | $0.0047
 ```
 
-## إدارة التكاليف
+## إدارة التكلفة
 
-### تسعير التوكنات (gpt-4.1)
+### تسعير التوكن (gpt-4.1)
 
-| النموذج | الإدخال (لكل 1K tokens) | المخرجات (لكل 1K tokens) |
+| النموذج | المدخلات (لكل 1K توكن) | المخرجات (لكل 1K توكن) |
 |-------|----------------------|------------------------|
 | gpt-4.1 | $0.03 | $0.06 |
 | GPT-3.5-Turbo | $0.0015 | $0.002 |
@@ -279,13 +280,13 @@ Total session: 156 tokens | $0.0047
 
 بناءً على أنماط الاستخدام:
 
-| مستوى الاستخدام | الرسائل/اليوم | التوكنات/اليوم | التكلفة الشهرية |
+| مستوى الاستخدام | رسائل/اليوم | توكنات/اليوم | التكلفة الشهرية |
 |-------------|--------------|------------|--------------|
-| **خفيف** | 20 messages | 3,000 tokens | $3-5 |
-| **متوسط** | 100 messages | 15,000 tokens | $15-25 |
-| **عالي** | 500 messages | 75,000 tokens | $75-125 |
+| **خفيف** | 20 رسائل | 3,000 توكن | $3-5 |
+| **متوسط** | 100 رسائل | 15,000 توكن | $15-25 |
+| **عالي** | 500 رسائل | 75,000 توكن | $75-125 |
 
-**تكلفة البنية التحتية الأساسية:** $1-2/month (Key Vault + minimal compute)
+**تكلفة البنية الأساسية الأساسية:** $1-2/شهريًا (Key Vault + قدرة حوسبة بسيطة)
 
 ### نصائح تحسين التكلفة
 
@@ -293,13 +294,13 @@ Total session: 156 tokens | $0.0047
 # 1. استخدم GPT-3.5-Turbo للمهام الأبسط (أرخص 20 مرة)
 export AZURE_OPENAI_MODEL=gpt-35-turbo
 
-# 2. قلل الحد الأقصى لعدد التوكنات للحصول على ردود أقصر
+# 2. قلل الحد الأقصى للتوكنات للحصول على ردود أقصر
 export AZURE_OPENAI_MAX_TOKENS=400
 
 # 3. راقب استخدام التوكنات
 python chat.py --show-tokens
 
-# 4. قم بإعداد تنبيهات الميزانية
+# 4. اضبط تنبيهات الميزانية
 az consumption budget create \
   --budget-name "openai-budget" \
   --amount 50 \
@@ -308,11 +309,11 @@ az consumption budget create \
 
 ## المراقبة
 
-### عرض استخدام التوكنات
+### عرض استخدام التوكن
 
 ```bash
 # في بوابة Azure:
-# مورد OpenAI → المقاييس → اختر "معاملة الرمز"
+# مورد OpenAI → المقاييس → اختر "Token Transaction"
 
 # أو عبر Azure CLI:
 az monitor metrics list \
@@ -342,19 +343,19 @@ az monitor log-analytics query \
 
 ### المشكلة: "Access Denied" Error
 
-**الأعراض:** 403 Forbidden when calling API
+**الأعراض:** 403 Forbidden عند استدعاء API
 
 **الحلول:**
 ```bash
-# 1. تحقق من أن الوصول إلى OpenAI موافق عليه
+# 1. التحقق من الموافقة على الوصول إلى OpenAI
 az cognitiveservices account show \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
 
-# 2. تحقق من أن مفتاح API صحيح
+# 2. التحقق من أن مفتاح واجهة برمجة التطبيقات صحيح
 azd env get-value AZURE_OPENAI_API_KEY
 
-# 3. تحقق من صيغة عنوان URL لنقطة النهاية
+# 3. التحقق من صيغة عنوان URL لنقطة النهاية
 azd env get-value AZURE_OPENAI_ENDPOINT
 # يجب أن يكون: https://[name].openai.azure.com/
 ```
@@ -365,50 +366,50 @@ azd env get-value AZURE_OPENAI_ENDPOINT
 
 **الحلول:**
 ```bash
-# 1. التحقق من الحصة الحالية
+# 1. تحقق من الحصة الحالية
 az cognitiveservices account deployment show \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
   --deployment-name gpt-4.1
 
-# 2. طلب زيادة الحصة (إذا لزم الأمر)
-# اذهب إلى بوابة Azure → مورد OpenAI → الحصص → طلب زيادة
+# 2. اطلب زيادة الحصة (إذا لزم الأمر)
+# انتقل إلى بوابة Azure → مورد OpenAI → الحصص → طلب زيادة
 
-# 3. تنفيذ منطق إعادة المحاولة (موجود بالفعل في chat.py)
-# يقوم التطبيق بإعادة المحاولة تلقائيًا مع تزايد فترات الانتظار بشكل أُسّي
+# 3. نفّذ منطق إعادة المحاولة (موجود بالفعل في chat.py)
+# يقوم التطبيق بإعادة المحاولة تلقائيًا باستخدام تراجع أُسّي
 ```
 
 ### المشكلة: "Model Not Found"
 
-**الأعراض:** 404 error for deployment
+**الأعراض:** خطأ 404 للنشر
 
 **الحلول:**
 ```bash
-# 1. عرض عمليات النشر المتاحة
+# 1. سرد عمليات النشر المتاحة
 az cognitiveservices account deployment list \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
 
-# 2. تحقق من اسم النموذج في البيئة
+# 2. التحقق من اسم النموذج في البيئة
 echo $AZURE_OPENAI_MODEL
 
-# 3. حدّث إلى اسم النشر الصحيح
+# 3. حدّث اسم النشر إلى الاسم الصحيح
 export AZURE_OPENAI_MODEL=gpt-4.1  # أو gpt-35-turbo
 ```
 
-### المشكلة: زمن استجابة مرتفع
+### المشكلة: High Latency
 
-**الأعراض:** أوقات استجابة بطيئة (>5 seconds)
+**الأعراض:** أوقات استجابة بطيئة (>5 ثوانٍ)
 
 **الحلول:**
 ```bash
-# 1. تحقق من الكمون الإقليمي
+# ١. تحقق من زمن الاستجابة الإقليمي
 # انشر في المنطقة الأقرب إلى المستخدمين
 
-# 2. قلل قيمة max_tokens للحصول على استجابات أسرع
+# ٢. قلل الحد الأقصى لـ max_tokens للحصول على استجابات أسرع
 export AZURE_OPENAI_MAX_TOKENS=400
 
-# 3. استخدم التدفق للحصول على تجربة مستخدم أفضل
+# ٣. استخدم البث لتحسين تجربة المستخدم
 python chat.py --stream
 ```
 
@@ -417,8 +418,8 @@ python chat.py --stream
 ### 1. حماية مفاتيح API
 
 ```bash
-# لا تقم بإضافة المفاتيح إلى نظام التحكم بالمصدر
-# استخدم Key Vault (معدّ بالفعل)
+# لا تقم بتضمين المفاتيح في نظام التحكم بالمصدر أبداً
+# استخدم Key Vault (مُعدّ بالفعل)
 
 # قم بتدوير المفاتيح بانتظام
 az cognitiveservices account keys regenerate \
@@ -427,24 +428,24 @@ az cognitiveservices account keys regenerate \
   --key-name key1
 ```
 
-### 2. تنفيذ ترشيح المحتوى
+### 2. تنفيذ تصفية المحتوى
 
 ```python
-# تتضمن Microsoft Foundry Models نظام تصفية محتوى مضمّن
-# قم بالتكوين في بوابة Azure:
+# تتضمن نماذج Microsoft Foundry تصفية محتوى مدمجة
+# التكوين في بوابة Azure:
 # مورد OpenAI → مرشحات المحتوى → إنشاء مرشح مخصص
 
-# الفئات: الكراهية، المحتوى الجنسي، العنف، وإيذاء النفس
-# المستويات: تصفية منخفضة، متوسطة، وعالية
+# الفئات: الكراهية، المحتوى الجنسي، العنف، إيذاء النفس
+# المستويات: منخفضة، متوسطة، عالية
 ```
 
 ### 3. استخدام Managed Identity (للإنتاج)
 
 ```bash
-# في عمليات النشر الإنتاجية، استخدم الهوية المُدارة
+# لنشر في بيئة الإنتاج، استخدم الهوية المُدارة
 # بدلاً من مفاتيح API (يتطلب استضافة التطبيق على Azure)
 
-# حدّث ملف infra/openai.bicep ليشمل:
+# قم بتحديث infra/openai.bicep ليشمل:
 # identity: { type: 'SystemAssigned' }
 ```
 
@@ -474,7 +475,7 @@ pip install pytest pytest-cov
 # تشغيل الاختبارات
 pytest tests/ -v
 
-# مع التغطية
+# مع تغطية الكود
 pytest tests/ --cov=src --cov-report=html
 ```
 
@@ -496,7 +497,7 @@ az cognitiveservices account deployment create \
 ## التنظيف
 
 ```bash
-# احذف جميع موارد Azure
+# حذف كل موارد Azure
 azd down --force --purge
 
 # هذا يزيل:
@@ -513,32 +514,32 @@ azd down --force --purge
 1. **إضافة واجهة ويب** - بناء واجهة أمامية بـ React/Vue
    ```bash
    # أضف خدمة الواجهة الأمامية إلى azure.yaml
-   # انشر إلى تطبيقات الويب الثابتة من Azure
+   # انشر إلى Azure Static Web Apps
    ```
 
-2. **تنفيذ RAG** - إضافة بحث في المستندات باستخدام Azure AI Search
+2. **تنفيذ RAG** - إضافة بحث في الوثائق باستخدام Azure AI Search
    ```python
-   # دمج Azure Cognitive Search
+   # دمج Azure AI Search
    # تحميل المستندات وإنشاء فهرس المتجهات
    ```
 
-3. **إضافة استدعاء الدوال** - تمكين استخدام الأدوات
+3. **إضافة استدعاء الدوال (Function Calling)** - تمكين استخدام الأدوات
    ```python
    # عرّف الدوال في chat.py
-   # اسمح لـ gpt-4.1 بالاتصال بواجهات برمجة التطبيقات الخارجية
+   # اسمح لـ gpt-4.1 باستدعاء واجهات برمجة التطبيقات الخارجية
    ```
 
 4. **دعم متعدد النماذج** - نشر نماذج متعددة
    ```bash
-   # أضف نماذج gpt-35-turbo ونماذج التضمين
+   # أضف gpt-35-turbo ونماذج التضمين
    # نفّذ منطق توجيه النماذج
    ```
 
 ### أمثلة ذات صلة
 
-- **[Retail Multi-Agent](../retail-scenario.md)** - بنية متقدمة متعددة الوكلاء
+- **[Retail Multi-Agent](../retail-scenario.md)** - هندسة متعددة الوكلاء متقدمة
 - **[Database App](../../../../examples/database-app)** - إضافة تخزين دائم
-- **[Container Apps](../../../../examples/container-app)** - النشر كخدمة مُحاوية
+- **[Container Apps](../../../../examples/container-app)** - النشر كخدمة محوّية بالحاويات
 
 ### موارد التعلم
 
@@ -549,38 +550,38 @@ azd down --force --purge
 
 ## موارد إضافية
 
-### التوثيق
+### الوثائق
 - **[Microsoft Foundry Models Service](https://learn.microsoft.com/azure/ai-services/openai/)** - الدليل الكامل
-- **[gpt-4.1 Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - قدرات النماذج
+- **[gpt-4.1 Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - قدرات النموذج
 - **[Content Filtering](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - ميزات الأمان
 - **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - مرجع azd
 
-### الدروس
-- **[OpenAI Quickstart](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - النشر الأول
+### البرامج التعليمية
+- **[OpenAI Quickstart](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - أول نشر
 - **[Chat Completions](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - بناء تطبيقات الدردشة
 - **[Function Calling](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - ميزات متقدمة
 
 ### الأدوات
-- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - مساحة لعب عبر الويب
+- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - واجهة تجريبية على الويب
 - **[Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)** - كتابة مطالبات أفضل
-- **[Token Calculator](https://platform.openai.com/tokenizer)** - تقدير استخدام التوكنات
+- **[Token Calculator](https://platform.openai.com/tokenizer)** - تقدير استخدام التوكن
 
 ### المجتمع
 - **[Azure AI Discord](https://discord.gg/azure)** - احصل على مساعدة من المجتمع
 - **[GitHub Discussions](https://github.com/Azure-Samples/openai/discussions)** - منتدى الأسئلة والأجوبة
-- **[Azure Blog](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - آخر التحديثات
+- **[Azure Blog](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - أحدث التحديثات
 
 ---
 
-**🎉 نجاح!** لقد نشرت Microsoft Foundry Models وبنيت تطبيق دردشة يعمل. ابدأ في استكشاف قدرات gpt-4.1 وجرب مطالبات وحالات استخدام مختلفة.
+**🎉 نجحت!** لقد نشرت Microsoft Foundry Models وبنيت تطبيق دردشة يعمل. ابدأ باستكشاف قدرات gpt-4.1 وجرّب مطالبات وحالات استخدام مختلفة.
 
-**أسئلة؟** [افتح مشكلة](https://github.com/microsoft/AZD-for-beginners/issues) أو تحقق من [الأسئلة الشائعة](../../resources/faq.md)
+**أسئلة؟** [افتح تذكرة](https://github.com/microsoft/AZD-for-beginners/issues) أو راجع [الأسئلة الشائعة](../../resources/faq.md)
 
-**تنبيه التكلفة:** تذكّر تشغيل `azd down` عند الانتهاء من الاختبار لتجنب الرسوم المستمرة (~$50-100/month للاستخدام النشط).
+**تنبيه التكلفة:** تذكّر تشغيل `azd down` عند الانتهاء من الاختبار لتجنب تكاليف مستمرة (~$50-100/شهريًا للاستخدام النشط).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-إخلاء المسؤولية:
-تمت ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي Co-op Translator (https://github.com/Azure/co-op-translator). بينما نسعى إلى الدقة، يُرجى ملاحظة أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الموثوق به. بالنسبة للمعلومات الحرجة، يُنصح بالاستعانة بترجمة احترافية بشرية. نحن غير مسؤولين عن أي سوء فهم أو تفسير ينشأ عن استخدام هذه الترجمة.
+**تنويه**:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى للدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي والمعتمد. للمعلومات الهامة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

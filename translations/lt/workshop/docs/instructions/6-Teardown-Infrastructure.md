@@ -2,41 +2,41 @@
 
 !!! tip "MODULIO PABAIGOJE JŪS GALĖSITE"
 
-    - [ ] Suprasti išteklių valymo ir kaštų valdymo svarbą
-    - [ ] Naudoti `azd down`, kad saugiai pašalintumėte infrastruktūrą
-    - [ ] Atkurti minkštai ištrintas kognityvines paslaugas, jei reikia
-    - [ ] **Laboratorija 6:** Išvalyti Azure išteklius ir patikrinti jų pašalinimą
+    - [ ] Suprasti išteklių išvalymo ir kaštų valdymo svarbą
+    - [ ] Naudoti `azd down`, kad saugiai išardytumėte infrastruktūrą
+    - [ ] Atkurti minkštai ištrintas Azure AI paslaugas, jei reikia
+    - [ ] **Laboratorija 6:** Išvalyti Azure išteklius ir patvirtinti pašalinimą
 
 ---
 
-## Papildomi pratimai
+## Papildomos užduotys
 
-Prieš išardydami projektą, skirkite kelias minutes atvirai tyrinėjimui.
+Prieš išardydami projektą, skirkite kelias minutes laisvam tyrinėjimui.
 
-!!! info "Išbandykite šias tyrinėjimo užklausas"
+!!! info "Išbandykite šias tyrinėjimo užuominas"
 
     **Eksperimentuokite su GitHub Copilot:**
     
-    1. Paklauskite: `Kokius kitus AZD šablonus galėčiau išbandyti daugiaagentiniams scenarijams?`
-    2. Paklauskite: `Kaip galiu pritaikyti agento nurodymus sveikatos priežiūros scenarijai?`
+    1. Paklauskite: `Kokius kitus AZD šablonus galėčiau išbandyti daugiaagentėms scenarijams?`
+    2. Paklauskite: `Kaip galėčiau pritaikyti agentų instrukcijas sveikatos priežiūros atvejui?`
     3. Paklauskite: `Kokie aplinkos kintamieji valdo kaštų optimizavimą?`
     
-    **Išnagrinėkite Azure portalą:**
+    **Ištirkite Azure portalą:**
     
     1. Peržiūrėkite Application Insights metrikas savo diegimui
-    2. Patikrinkite paskirtų išteklių kaštų analizę
-    3. Dar kartą ištirkite Microsoft Foundry portalo agentų žaidimų aikštelę
+    2. Patikrinkite kaštų analizę sukurtų išteklių
+    3. Dar kartą ištirkite Microsoft Foundry portalo agentų bandymų aikštelę
 
 ---
 
-## Infrastruktūros pašalinimas
+## Išardyti infrastruktūrą
 
 1. Infrastruktūros išardymas yra toks paprastas:
       
       ```bash title="" linenums="0"
       azd down --purge
       ```
-1. `--purge` vėliava užtikrina, kad taip pat bus pašalinti minkštai ištrinti kognityvinių paslaugų ištekliai, taip atlaisvinant šių išteklių užimtą kvotą. Kai procesas bus baigtas, pamatysite kažką panašaus į tai:
+1. Jungiklis `--purge` užtikrina, kad jis taip pat pašalintų minkštai ištrintas Cognitive Service išteklius, taip atlaisvindamas šių išteklių užimamą kvotą. Baigus pamatysite kažką panašaus:
       
       ```bash title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
@@ -47,9 +47,9 @@ Prieš išardydami projektą, skirkite kelias minutes atvirai tyrinėjimui.
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Pasirinktinai) Jei dabar vėl paleisite `azd up`, pastebėsite, kad diegiamas gpt-4.1 modelis, nes aplinkos kintamasis buvo pakeistas (ir išsaugotas) vietiniame `.azure` aplanke. 
+1. (Pasirinktinai) Jei dabar vėl paleisite `azd up`, pastebėsite, kad diegiamas modelis gpt-4.1, nes aplinkos kintamasis buvo pakeistas (ir išsaugotas) lokaliame `.azure` kataloge. 
 
-      Čia yra modelių diegimai **prieš**:
+      Štai modelio diegimai **prieš**:
 
       ![Pradinis](../../../../../translated_images/lt/14-deploy-initial.30e4cf1c29b587bc.webp)
 
@@ -59,6 +59,6 @@ Prieš išardydami projektą, skirkite kelias minutes atvirai tyrinėjimui.
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Atsakomybės apribojimas:
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimų paslaugą Co-op Translator (https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, atkreipkite dėmesį, kad automatizuoti vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Esant kritinei informacijai, rekomenduojamas profesionalus žmogaus vertimas. Mes neatsakome už jokius nesusipratimus ar neteisingus aiškinimus, kylančius dėl šio vertimo naudojimo.
+**Atsakomybės apribojimas**:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojama naudoti profesionalų žmogiškąjį vertimą. Mes neatsakome už jokius nesusipratimus ar neteisingą interpretaciją, kilusią naudojantis šiuo vertimu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

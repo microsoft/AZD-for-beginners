@@ -1,93 +1,94 @@
-# Deploying a Microsoft SQL Database and Web App with AZD
+# Implementarea unei baze de date Microsoft SQL și a unei aplicații web cu AZD
 
-⏱️ **Estimated Time**: 20-30 minutes | 💰 **Estimated Cost**: ~$15-25/month | ⭐ **Complexity**: Intermediate
+⏱️ **Timp estimat**: 20-30 minute | 💰 **Cost estimat**: ~15-25 USD/lună | ⭐ **Complexitate**: Intermediar
 
-This **complete, working example** demonstrates how to use the [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) to deploy a Python Flask web application with a Microsoft SQL Database to Azure. All code is included and tested—no external dependencies required.
+Acest **exemplu complet, funcțional** demonstrează cum să folosiți [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) pentru a implementa o aplicație web Python Flask cu o bază de date Microsoft SQL în Azure. Tot codul este inclus și testat—fără dependențe externe necesare.
 
-## What You'll Learn
+## Ce vei învăța
 
-By completing this example, you will:
-- Deploy a multi-tier application (web app + database) using infrastructure-as-code
-- Configure secure database connections without hardcoding secrets
-- Monitor application health with Application Insights
-- Manage Azure resources efficiently with AZD CLI
-- Follow Azure best practices for security, cost optimization, and observability
+Prin finalizarea acestui exemplu, vei:
+- Implementa o aplicație multi-strat (aplicație web + bază de date) folosind infrastructură ca cod
+- Configura conexiuni securizate către baza de date fără a introduce secrete direct în cod
+- Monitoriza starea aplicației cu Application Insights
+- Gestiona eficient resursele Azure cu AZD CLI
+- Urma bune practici Azure pentru securitate, optimizare costuri și observabilitate
 
-## Scenario Overview
-- **Web App**: Python Flask REST API with database connectivity
-- **Database**: Azure SQL Database with sample data
-- **Infrastructure**: Provisioned using Bicep (modular, reusable templates)
-- **Deployment**: Fully automated with `azd` commands
-- **Monitoring**: Application Insights for logs and telemetry
+## Prezentare scenariu
+- **Aplicație web**: API REST Python Flask cu conectivitate către baza de date
+- **Bază de date**: Azure SQL Database cu date de probă
+- **Infrastructură**: Provisionată folosind Bicep (șabloane modulare, reutilizabile)
+- **Implementare**: Complet automatizată prin comenzi `azd`
+- **Monitorizare**: Application Insights pentru jurnale și telemetrie
 
-## Prerequisites
+## Cerințe prealabile
 
-### Required Tools
+### Unelte necesare
 
-Before starting, verify you have these tools installed:
+Înainte de a începe, asigură-te că ai instalate următoarele unelte:
 
-1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (version 2.50.0 or higher)
+1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (versiunea 2.50.0 sau mai nouă)
    ```sh
    az --version
-   # Rezultatul așteptat: azure-cli 2.50.0 sau mai recent
+   # Rezultat așteptat: azure-cli 2.50.0 sau versiune superioară
    ```
 
-2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (version 1.0.0 or higher)
+2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (versiunea 1.0.0 sau mai nouă)
    ```sh
    azd version
-   # Ieșire așteptată: azd versiunea 1.0.0 sau mai mare
+   # Ieșire așteptată: versiunea azd 1.0.0 sau mai mare
    ```
 
-3. **[Python 3.8+](https://www.python.org/downloads/)** (for local development)
+3. **[Python 3.8+](https://www.python.org/downloads/)** (pentru dezvoltare locală)
    ```sh
    python --version
-   # Rezultatul așteptat: Python 3.8 sau o versiune mai recentă
+   # Ieșire așteptată: Python 3.8 sau mai nou
    ```
 
-4. **[Docker](https://www.docker.com/get-started)** (optional, for local containerized development)
+4. **[Docker](https://www.docker.com/get-started)** (opțional, pentru dezvoltare locală containerizată)
    ```sh
    docker --version
-   # Ieșire așteptată: versiunea Docker 20.10 sau mai nouă
+   # Rezultat așteptat: versiunea Docker 20.10 sau mai nouă
    ```
 
-### Azure Requirements
+### Cerințe Azure
 
-- An active **Azure subscription** ([create a free account](https://azure.microsoft.com/free/))
-- Permissions to create resources in your subscription
-- **Owner** or **Contributor** role on the subscription or resource group
+- Un **abonament Azure** activ ([creează un cont gratuit](https://azure.microsoft.com/free/))
+- Permisiuni pentru a crea resurse în abonamentul tău
+- Rolul **Owner** sau **Contributor** pe abonament sau grupul de resurse
 
-### Knowledge Prerequisites
+### Cunoștințe prealabile
 
-This is an **intermediate-level** example. You should be familiar with:
-- Basic command-line operations
-- Fundamental cloud concepts (resources, resource groups)
-- Basic understanding of web applications and databases
+Acesta este un exemplu de nivel intermediar. Ar trebui să cunoști:
+- Operațiuni de bază în linia de comandă
+- Noțiuni fundamentale despre cloud (resurse, grupuri de resurse)
+- Înțelegere de bază a aplicațiilor web și baze de date
 
-**New to AZD?** Start with the [Getting Started guide](../../docs/chapter-01-foundation/azd-basics.md) first.
+**Ești nou în AZD?** Începe cu [Ghidul de început](../../docs/chapter-01-foundation/azd-basics.md).
 
-## Architecture
+## Arhitectură
 
-This example deploys a two-tier architecture with a web application and SQL database:
+Acest exemplu implementează o arhitectură în două niveluri cu o aplicație web și o bază de date SQL:
 
 ```mermaid
 graph TD
-    Browser[Browser utilizator] <--> WebApp[Aplicație Web Azure<br/>API Flask<br/>/health<br/>/products]
-    WebApp -- Conexiune securizată<br/>Criptată --> SQL[Bază de date Azure SQL<br/>Tabel produse<br/>Date de exemplu]
+    Browser[Navigare utilizator] <--> WebApp[Aplicație Web Azure<br/>API Flask<br/>/sănătate<br/>/produse]
+    WebApp -- Conexiune securizată<br/>Criptată --> SQL[Bază de date SQL Azure<br/>Tabel produse<br/>Date de probă]
 ```
-**Resource Deployment:**
-- **Resource Group**: Container for all resources
-- **App Service Plan**: Linux-based hosting (B1 tier for cost efficiency)
-- **Web App**: Python 3.11 runtime with Flask application
-- **SQL Server**: Managed database server with TLS 1.2 minimum
-- **SQL Database**: Basic tier (2GB, suitable for development/testing)
-- **Application Insights**: Monitoring and logging
-- **Log Analytics Workspace**: Centralized log storage
 
-**Analogy**: Think of this like a restaurant (web app) with a walk-in freezer (database). Customers order from the menu (API endpoints), and the kitchen (Flask app) retrieves ingredients (data) from the freezer. The restaurant manager (Application Insights) tracks everything that happens.
+**Implementarea resurselor:**
+- **Grup de resurse**: Container pentru toate resursele
+- **App Service Plan**: Găzduire pe Linux (nivel B1 pentru eficiență de cost)
+- **Aplicație Web**: Runtime Python 3.11 cu aplicație Flask
+- **SQL Server**: Server de bază de date gestionat cu TLS 1.2 minim
+- **SQL Database**: Nivel Basic (2GB, potrivit pentru dezvoltare/testare)
+- **Application Insights**: Monitorizare și jurnalizare
+- **Log Analytics Workspace**: Stocare centralizată de jurnale
 
-## Folder Structure
+**Analogie**: Gândește-te la asta ca la un restaurant (aplicație web) cu o congelator la rece (bază de date). Clienții comandă de pe meniu (endpoint-uri API), iar bucătăria (aplicația Flask) ia ingredientele (datele) din congelator. Managerul restaurantului (Application Insights) urmărește tot ce se întâmplă.
 
-All files are included in this example—no external dependencies required:
+## Structura folderelor
+
+Toate fișierele sunt incluse în acest exemplu—nu sunt necesare dependențe externe:
 
 ```
 examples/database-app/
@@ -114,118 +115,118 @@ examples/database-app/
         └── Dockerfile          # Container definition
 ```
 
-**What Each File Does:**
-- **azure.yaml**: Tells AZD what to deploy and where
-- **infra/main.bicep**: Orchestrates all Azure resources
-- **infra/resources/*.bicep**: Individual resource definitions (modular for reuse)
-- **src/web/app.py**: Flask application with database logic
-- **requirements.txt**: Python package dependencies
-- **Dockerfile**: Containerization instructions for deployment
+**Ce face fiecare fișier:**
+- **azure.yaml**: Spune AZD ce să implementeze și unde
+- **infra/main.bicep**: Orchestrarea tuturor resurselor Azure
+- **infra/resources/*.bicep**: Definiții individuale ale resurselor (modular pentru reutilizare)
+- **src/web/app.py**: Aplicația Flask cu logica bazei de date
+- **requirements.txt**: Dependențe Python
+- **Dockerfile**: Instrucțiuni de containerizare pentru implementare
 
-## Quickstart (Step-by-Step)
+## Pornire rapidă (pas cu pas)
 
-### Step 1: Clone and Navigate
+### Pasul 1: Clonează și navighează
 
 ```sh
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/database-app
 ```
 
-**✓ Success Check**: Verify you see `azure.yaml` and `infra/` folder:
+**✓ Verificare succes**: Confirmă că vezi `azure.yaml` și folderul `infra/`:
 ```sh
 ls
-# Se așteaptă: README.md, azure.yaml, infra/, src/
+# Așteptat: README.md, azure.yaml, infra/, src/
 ```
 
-### Step 2: Authenticate with Azure
+### Pasul 2: Autentificare în Azure
 
 ```sh
 azd auth login
 ```
 
-This opens your browser for Azure authentication. Sign in with your Azure credentials.
+Acest pas deschide browserul pentru autentificare Azure. Conectează-te cu acreditările tale Azure.
 
-**✓ Success Check**: You should see:
+**✓ Verificare succes**: Ar trebui să vezi:
 ```
 Logged in to Azure.
 ```
 
-### Step 3: Initialize the Environment
+### Pasul 3: Inițializează mediul
 
 ```sh
 azd init
 ```
 
-**What happens**: AZD creates a local configuration for your deployment.
+**Ce se întâmplă**: AZD creează o configurație locală pentru implementare.
 
-**Prompts you'll see**:
-- **Environment name**: Enter a short name (e.g., `dev`, `myapp`)
-- **Azure subscription**: Select your subscription from the list
-- **Azure location**: Choose a region (e.g., `eastus`, `westeurope`)
+**Întrebări pe care le vei vedea**:
+- **Numele mediului**: Introdu un nume scurt (ex., `dev`, `myapp`)
+- **Abonamentul Azure**: Selectează abonamentul din listă
+- **Regiunea Azure**: Alege o regiune (ex., `eastus`, `westeurope`)
 
-**✓ Success Check**: You should see:
+**✓ Verificare succes**: Ar trebui să vezi:
 ```
 SUCCESS: New project initialized!
 ```
 
-### Step 4: Provision Azure Resources
+### Pasul 4: Provisionează resursele Azure
 
 ```sh
 azd provision
 ```
 
-**What happens**: AZD deploys all infrastructure (takes 5-8 minutes):
-1. Creates resource group
-2. Creates SQL Server and Database
-3. Creates App Service Plan
-4. Creates Web App
-5. Creates Application Insights
-6. Configures networking and security
+**Ce se întâmplă**: AZD implementează toată infrastructura (5-8 minute):
+1. Creează grupul de resurse
+2. Creează SQL Server și baza de date
+3. Creează App Service Plan
+4. Creează aplicația Web
+5. Creează Application Insights
+6. Configurează rețelistica și securitatea
 
-**You'll be prompted for**:
-- **SQL admin username**: Enter a username (e.g., `sqladmin`)
-- **SQL admin password**: Enter a strong password (save this!)
+**Se vor cere**:
+- **Nume utilizator admin SQL**: Introdu un nume (ex., `sqladmin`)
+- **Parolă admin SQL**: Introdu o parolă puternică (păstreaz-o!)
 
-**✓ Success Check**: You should see:
+**✓ Verificare succes**: Ar trebui să vezi:
 ```
 SUCCESS: Your application was provisioned in Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
 https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-name>
 ```
 
-**⏱️ Time**: 5-8 minutes
+**⏱️ Timp**: 5-8 minute
 
-### Step 5: Deploy the Application
+### Pasul 5: Implementează aplicația
 
 ```sh
 azd deploy
 ```
 
-**What happens**: AZD builds and deploys your Flask application:
-1. Packages the Python application
-2. Builds the Docker container
-3. Pushes to Azure Web App
-4. Initializes the database with sample data
-5. Starts the application
+**Ce se întâmplă**: AZD construiește și implementează aplicația ta Flask:
+1. Împachetează aplicația Python
+2. Construiește containerul Docker
+3. Împinge containerul în Azure Web App
+4. Inițializează baza de date cu date de probă
+5. Pornește aplicația
 
-**✓ Success Check**: You should see:
+**✓ Verificare succes**: Ar trebui să vezi:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
 https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-name>
 ```
 
-**⏱️ Time**: 3-5 minutes
+**⏱️ Timp**: 3-5 minute
 
-### Step 6: Browse the Application
+### Pasul 6: Accesează aplicația
 
 ```sh
 azd browse
 ```
 
-This opens your deployed web app in the browser at `https://app-<unique-id>.azurewebsites.net`
+Se deschide aplicația ta web implementată în browser la `https://app-<unique-id>.azurewebsites.net`
 
-**✓ Success Check**: You should see JSON output:
+**✓ Verificare succes**: Vei vedea un rezultat JSON:
 ```json
 {
   "message": "Welcome to the Database App API",
@@ -238,14 +239,14 @@ This opens your deployed web app in the browser at `https://app-<unique-id>.azur
 }
 ```
 
-### Step 7: Test the API Endpoints
+### Pasul 7: Testează endpoint-urile API
 
-**Health Check** (verify database connection):
+**Verificare stare** (verifică conexiunea la baza de date):
 ```sh
 curl https://app-<your-id>.azurewebsites.net/health
 ```
 
-**Expected Response**:
+**Răspuns așteptat**:
 ```json
 {
   "status": "healthy",
@@ -253,12 +254,12 @@ curl https://app-<your-id>.azurewebsites.net/health
 }
 ```
 
-**List Products** (sample data):
+**Lista produse** (date de probă):
 ```sh
 curl https://app-<your-id>.azurewebsites.net/products
 ```
 
-**Expected Response**:
+**Răspuns așteptat**:
 ```json
 [
   {
@@ -272,44 +273,44 @@ curl https://app-<your-id>.azurewebsites.net/products
 ]
 ```
 
-**Get Single Product**:
+**Obține un produs individual**:
 ```sh
 curl https://app-<your-id>.azurewebsites.net/products/1
 ```
 
-**✓ Success Check**: All endpoints return JSON data without errors.
+**✓ Verificare succes**: Toate endpoint-urile returnează date JSON fără erori.
 
 ---
 
-**🎉 Congratulations!** You've successfully deployed a web application with a database to Azure using AZD.
+**🎉 Felicitări!** Ai implementat cu succes o aplicație web cu bază de date în Azure folosind AZD.
 
-## Configuration Deep-Dive
+## Detalii despre configurare
 
-### Environment Variables
+### Variabile de mediu
 
-Secrets are managed securely via Azure App Service configuration—**never hardcoded in source code**.
+Secretele sunt gestionate securizat prin configurarea Azure App Service—**niciodată hardcodate în codul sursă**.
 
-**Configured Automatically by AZD**:
-- `SQL_CONNECTION_STRING`: Database connection with encrypted credentials
-- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Monitoring telemetry endpoint
-- `SCM_DO_BUILD_DURING_DEPLOYMENT`: Enables automatic dependency installation
+**Configurează automat de AZD**:
+- `SQL_CONNECTION_STRING`: Conexiune la baza de date cu credențiale criptate
+- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Endpoint telemetrie monitorizare
+- `SCM_DO_BUILD_DURING_DEPLOYMENT`: Permite instalarea automată a dependențelor
 
-**Where Secrets Are Stored**:
-1. During `azd provision`, you provide SQL credentials via secure prompts
-2. AZD stores these in your local `.azure/<env-name>/.env` file (git-ignored)
-3. AZD injects them into Azure App Service configuration (encrypted at rest)
-4. Application reads them via `os.getenv()` at runtime
+**Unde se stochează secretele**:
+1. În timpul `azd provision`, introduci credențialele SQL prin prompturi securizate
+2. AZD le salvează local în fișierul `.azure/<env-name>/.env` (ignorată de Git)
+3. AZD le injectează în configurația App Service Azure (criptate la repaus)
+4. Aplicația le citește prin `os.getenv()` la runtime
 
-### Local Development
+### Dezvoltare locală
 
-For local testing, create a `.env` file from the sample:
+Pentru testare locală, creează un fișier `.env` din cel de probă:
 
 ```sh
 cp .env.sample .env
-# Editează .env cu conexiunea ta la baza de date locală
+# Editează .env cu conexiunea la baza ta de date locală
 ```
 
-**Local Development Workflow**:
+**Flux de lucru dezvoltare locală**:
 ```sh
 # Instalează dependențele
 cd src/web
@@ -322,23 +323,23 @@ export SQL_CONNECTION_STRING="your-local-connection-string"
 python app.py
 ```
 
-**Test locally**:
+**Testează local**:
 ```sh
 curl http://localhost:8000/health
-# Așteptat: {"status": "sănătos", "database": "conectată"}
+# Așteptat: {"status": "sănătos", "bază de date": "conectată"}
 ```
 
-### Infrastructure as Code
+### Infrastructură ca cod
 
-All Azure resources are defined in **Bicep templates** (`infra/` folder):
+Toate resursele Azure sunt definite în **șabloane Bicep** (`infra/` folder):
 
-- **Modular Design**: Each resource type has its own file for reusability
-- **Parameterized**: Customize SKUs, regions, naming conventions
-- **Best Practices**: Follows Azure naming standards and security defaults
-- **Version Controlled**: Infrastructure changes are tracked in Git
+- **Design modular**: Fiecare tip de resursă are propriul fișier pentru reutilizare
+- **Parametrizat**: Personalizează SKU-uri, regiuni, convenții de denumire
+- **Bune practici**: Urmează standardele de denumire și securitate Azure
+- **Control versiuni**: Modificările infrastructurii sunt urmărite în Git
 
-**Customization Example**:
-To change the database tier, edit `infra/resources/sql-database.bicep`:
+**Exemplu de personalizare**:
+Pentru a schimba nivelul bazei de date, editează `infra/resources/sql-database.bicep`:
 ```bicep
 sku: {
   name: 'Standard'  // Changed from 'Basic'
@@ -347,121 +348,121 @@ sku: {
 }
 ```
 
-## Security Best Practices
+## Bune practici de securitate
 
-This example follows Azure security best practices:
+Acest exemplu urmează bune practici Azure privind securitatea:
 
-### 1. **No Secrets in Source Code**
-- ✅ Credentials stored in Azure App Service configuration (encrypted)
-- ✅ `.env` files excluded from Git via `.gitignore`
-- ✅ Secrets passed via secure parameters during provisioning
+### 1. **Fără secrete în codul sursă**
+- ✅ Credențiale stocate în configurația Azure App Service (criptat)
+- ✅ Fișiere `.env` excluse din Git prin `.gitignore`
+- ✅ Secrete transmise prin parametri securizați la provisionare
 
-### 2. **Encrypted Connections**
-- ✅ TLS 1.2 minimum for SQL Server
-- ✅ HTTPS-only enforced for Web App
-- ✅ Database connections use encrypted channels
+### 2. **Conexiuni criptate**
+- ✅ TLS 1.2 minim pentru SQL Server
+- ✅ HTTPS obligatoriu pentru aplicația web
+- ✅ Conexiuni către baza de date prin canale criptate
 
-### 3. **Network Security**
-- ✅ SQL Server firewall configured to allow Azure services only
-- ✅ Public network access restricted (can be further locked down with Private Endpoints)
-- ✅ FTPS disabled on Web App
+### 3. **Securitatea rețelei**
+- ✅ Firewall SQL Server configurat să permită doar servicii Azure
+- ✅ Acces public restricționat (poate fi blocat suplimentar cu Private Endpoints)
+- ✅ FTPS dezactivat pe App Service
 
-### 4. **Authentication & Authorization**
-- ⚠️ **Current**: SQL authentication (username/password)
-- ✅ **Production Recommendation**: Use Azure Managed Identity for passwordless authentication
+### 4. **Autentificare și autorizare**
+- ⚠️ **Curent**: autentificare SQL (utilizator/parolă)
+- ✅ **Recomandare producție**: folosește Azure Managed Identity pentru autentificare fără parolă
 
-**To Upgrade to Managed Identity** (for production):
-1. Enable managed identity on Web App
-2. Grant identity SQL permissions
-3. Update connection string to use managed identity
-4. Remove password-based authentication
+**Pentru upgrade la Managed Identity** (în producție):
+1. Activează identitate gestionată pe Web App
+2. Acordă permisiuni SQL identității
+3. Actualizează connection string să folosească identitate gestionată
+4. Elimină autentificarea bazată pe parolă
 
-### 5. **Auditing & Compliance**
-- ✅ Application Insights logs all requests and errors
-- ✅ SQL Database auditing enabled (can be configured for compliance)
-- ✅ All resources tagged for governance
+### 5. **Audit și conformitate**
+- ✅ Application Insights înregistrează toate cererile și erorile
+- ✅ Audit SQL Database activat (configurabil pentru conformitate)
+- ✅ Toate resursele sunt etichetate pentru guvernanță
 
-**Security Checklist Before Production**:
-- [ ] Enable Azure Defender for SQL
-- [ ] Configure Private Endpoints for SQL Database
-- [ ] Enable Web Application Firewall (WAF)
-- [ ] Implement Azure Key Vault for secret rotation
-- [ ] Configure Azure AD authentication
-- [ ] Enable diagnostic logging for all resources
+**Lista verificare securitate înainte de producție**:
+- [ ] Activează Azure Defender pentru SQL
+- [ ] Configurează Private Endpoints pentru SQL Database
+- [ ] Activează Web Application Firewall (WAF)
+- [ ] Implementează Azure Key Vault pentru rotația secretelor
+- [ ] Configurează autentificarea Microsoft Entra ID
+- [ ] Activează jurnalizarea diagnostic pentru toate resursele
 
-## Cost Optimization
+## Optimizarea costurilor
 
-**Estimated Monthly Costs** (as of November 2025):
+**Costuri lunare estimate** (noiembrie 2025):
 
-| Resource | SKU/Tier | Estimated Cost |
-|----------|----------|----------------|
-| App Service Plan | B1 (Basic) | ~$13/month |
-| SQL Database | Basic (2GB) | ~$5/month |
-| Application Insights | Pay-as-you-go | ~$2/month (low traffic) |
-| **Total** | | **~$20/month** |
+| Resursă | SKU/Nivel | Cost estimat |
+|----------|----------|--------------|
+| App Service Plan | B1 (Basic) | ~13 USD/lună |
+| SQL Database | Basic (2GB) | ~5 USD/lună |
+| Application Insights | Pay-as-you-go | ~2 USD/lună (trafic mic) |
+| **Total** | | **~20 USD/lună** |
 
-**💡 Cost-Saving Tips**:
+**💡 Sfaturi pentru reducerea costurilor**:
 
-1. **Use Free Tier for Learning**:
-   - App Service: F1 tier (free, limited hours)
-   - SQL Database: Use Azure SQL Database serverless
-   - Application Insights: 5GB/month free ingestion
+1. **Folosește nivelul gratuit pentru învățare**:
+   - App Service: nivel F1 (gratuit, ore limitate)
+   - SQL Database: folosește Azure SQL Database serverless
+   - Application Insights: 5GB/lună ingestie gratuită
 
-2. **Stop Resources When Not in Use**:
+2. **Oprește resursele când nu le folosești**:
    ```sh
-   # Oprește aplicația web (baza de date continuă să fie facturată)
+   # Opriți aplicația web (baza de date încă percepe costuri)
    az webapp stop --name <app-name> --resource-group <rg-name>
    
-   # Repornește când este necesar
+   # Repornire la nevoie
    az webapp start --name <app-name> --resource-group <rg-name>
    ```
 
-3. **Delete Everything After Testing**:
+3. **Șterge tot după testare**:
    ```sh
    azd down
    ```
-   This removes ALL resources and stops charges.
+   Aceasta elimină TOATE resursele și oprește taxele.
 
-4. **Development vs. Production SKUs**:
-   - **Development**: Basic tier (used in this example)
-   - **Production**: Standard/Premium tier with redundancy
+4. **SKU-uri dezvoltare vs. producție**:
+   - **Dezvoltare**: nivel Basic (folosit în acest exemplu)
+   - **Producție**: nivel Standard/Premium cu redundanță
 
-**Cost Monitoring**:
-- View costs in [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
-- Set up cost alerts to avoid surprises
-- Tag all resources with `azd-env-name` for tracking
+**Monitorizarea costurilor**:
+- Vezi costurile în [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
+- Configurează alerte de cost pentru a evita surprizele
+- Etichetează toate resursele cu `azd-env-name` pentru urmărire
 
-**Free Tier Alternative**:
-For learning purposes, you can modify `infra/resources/app-service-plan.bicep`:
+**Alternativă nivel gratuit**:
+Pentru învățare, poți modifica `infra/resources/app-service-plan.bicep`:
 ```bicep
 sku: {
   name: 'F1'  // Free tier
   tier: 'Free'
 }
 ```
-**Notă**: Free tier has limitations (60 min/day CPU, no always-on).
+**Notă**: nivelul gratuit are limitări (CPU 60 min/zi, fără always-on).
 
-## Monitoring & Observability
+## Monitorizare și observabilitate
 
-### Application Insights Integration
+### Integrare Application Insights
 
-This example includes **Application Insights** for comprehensive monitoring:
+Acest exemplu include **Application Insights** pentru monitorizare completă:
 
-**What's Monitored**:
-- ✅ HTTP requests (latency, status codes, endpoints)
-- ✅ Application errors and exceptions
-- ✅ Custom logging from Flask app
-- ✅ Database connection health
-- ✅ Performance metrics (CPU, memory)
+**Ce se monitorizează**:
+- ✅ Cereri HTTP (latenta, coduri status, endpointuri)
+- ✅ Erori și excepții aplicație
+- ✅ Jurnalizare custom din aplicația Flask
+- ✅ Starea conexiunii bazei de date
+- ✅ Metrice de performanță (CPU, memorie)
 
-**Access Application Insights**:
-1. Open [Azure Portal](https://portal.azure.com)
-2. Navigate to your resource group (`rg-<env-name>`)
-3. Click on Application Insights resource (`appi-<unique-id>`)
+**Acces Application Insights**:
+1. Deschide [Portal Azure](https://portal.azure.com)
+2. Navighează la grupul tău de resurse (`rg-<env-name>`)
+3. Dă click pe resursa Application Insights (`appi-<unique-id>`)
 
-**Useful Queries** (Application Insights → Logs):
+**Interogări utile** (Application Insights → Logs):
 
-**View All Requests**:
+**Vezi toate cererile**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -469,7 +470,7 @@ requests
 | project timestamp, name, url, resultCode, duration
 ```
 
-**Find Errors**:
+**Localizează erorile**:
 ```kusto
 exceptions
 | where timestamp > ago(24h)
@@ -477,38 +478,38 @@ exceptions
 | project timestamp, type, outerMessage, operation_Name
 ```
 
-**Check Health Endpoint**:
+**Verifică endpoint-ul de stare**:
 ```kusto
 requests
 | where name contains "health"
 | summarize count() by resultCode, bin(timestamp, 1h)
 ```
 
-### SQL Database Auditing
+### Audit baza de date SQL
 
-**SQL Database auditing is enabled** to track:
-- Database access patterns
-- Failed login attempts
-- Schema changes
-- Data access (for compliance)
+**Auditul bazei de date SQL este activat** pentru a monitoriza:
+- Modele de acces în baza de date
+- Tentative eșuate de autentificare
+- Modificări schema
+- Accesul la date (pentru conformitate)
 
-**Access Audit Logs**:
-1. Azure Portal → SQL Database → Auditing
-2. View logs in Log Analytics workspace
+**Accesează jurnalele de audit**:
+1. Portal Azure → SQL Database → Auditing
+2. Vizualizează jurnalele în Log Analytics workspace
 
-### Real-Time Monitoring
+### Monitorizare în timp real
 
-**View Live Metrics**:
+**Vezi metrice live**:
 1. Application Insights → Live Metrics
-2. See requests, failures, and performance in real-time
+2. Vezi cereri, erori și performanță în timp real
 
-**Set Up Alerts**:
-Create alerts for critical events:
-- HTTP 500 errors > 5 in 5 minutes
-- Database connection failures
-- High response times (>2 seconds)
+**Configurează alerte**:
+Crează alerte pentru evenimente critice:
+- Erori HTTP 500 > 5 în 5 minute
+- Probleme conexiune baza de date
+- Timp de răspuns ridicat (>2 secunde)
 
-**Example Alert Creation**:
+**Exemplu creare alertă**:
 ```sh
 az monitor metrics alert create \
   --name "High-Response-Time" \
@@ -518,85 +519,85 @@ az monitor metrics alert create \
   --description "Alert when response time exceeds 2 seconds"
 ```
 
-## Troubleshooting
+## Depanare
 ### Probleme comune și soluții
 
-#### 1. `azd provision` eșuează cu "Locație indisponibilă"
+#### 1. `azd provision` eșuează cu mesajul "Location not available"
 
-**Simptom**:
+**Simptom**:  
 ```
 Error: The subscription is not registered for the resource type 'components' in the location 'centralus'.
 ```
-
-**Soluție**:
-Alegeți o regiune Azure diferită sau înregistrați furnizorul de resurse:
+  
+**Soluție**:  
+Alege o regiune Azure diferită sau înregistrează furnizorul de resurse:  
 ```sh
 az provider register --namespace Microsoft.Insights
 ```
-
+  
 #### 2. Conexiunea SQL eșuează în timpul implementării
 
-**Simptom**:
+**Simptom**:  
 ```
 pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL Server]TCP Provider...')
 ```
+  
+**Soluție**:  
+- Verifică dacă firewall-ul SQL Server permite serviciile Azure (configurat automat)  
+- Verifică dacă parola administratorului SQL a fost introdusă corect în timpul `azd provision`  
+- Asigură-te că SQL Server este complet provisionat (poate dura 2-3 minute)  
 
-**Soluție**:
-- Verificați dacă firewall-ul serverului SQL permite serviciilor Azure (configurat automat)
-- Verificați dacă parola administratorului SQL a fost introdusă corect în timpul `azd provision`
-- Asigurați-vă că SQL Server este complet provisionat (poate dura 2-3 minute)
-
-**Verificați conexiunea**:
+**Verifică conexiunea**:  
 ```sh
-# Din portalul Azure, navigați la SQL Database → Editor interogări
-# Încercați să vă conectați cu datele de autentificare.
+# Din portalul Azure, accesați SQL Database → Editor interogări
+# Încercați să vă conectați cu acreditările dvs.
 ```
+  
+#### 3. Web App afișează "Application Error"
 
-#### 3. Aplicația web afișează "Eroare aplicație"
+**Simptom**:  
+Browser-ul afișează o pagină generică de eroare.
 
-**Simptom**:
-Browserul afișează o pagină de eroare generică.
-
-**Soluție**:
-Verificați jurnalele aplicației:
+**Soluție**:  
+Verifică jurnalele aplicației:  
 ```sh
-# Vizualizați jurnalele recente
+# Vizualizează jurnalele recente
 az webapp log tail --name <app-name> --resource-group <rg-name>
 ```
+  
+**Cauze comune**:  
+- Variabile de mediu lipsă (verifică App Service → Configuration)  
+- Instalarea pachetelor Python a eșuat (verifică jurnalele de implementare)  
+- Eroare la inițializarea bazei de date (verifică conectivitatea SQL)  
 
-**Cauze comune**:
-- Variabile de mediu lipsă (verificați App Service → Configurare)
-- Instalarea pachetelor Python a eșuat (verificați jurnalele de implementare)
-- Eroare la inițializarea bazei de date (verificați conectivitatea SQL)
+#### 4. `azd deploy` eșuează cu "Build Error"
 
-#### 4. `azd deploy` eșuează cu "Eroare de compilare"
-
-**Simptom**:
+**Simptom**:  
 ```
 Error: Failed to build project
 ```
+  
+**Soluție**:  
+- Asigură-te că `requirements.txt` nu conține erori de sintaxă  
+- Verifică că Python 3.11 este specificat în `infra/resources/web-app.bicep`  
+- Verifică dacă Dockerfile utilizează imaginea de bază corectă  
 
-**Soluție**:
-- Asigurați-vă că `requirements.txt` nu conține erori de sintaxă
-- Verificați că Python 3.11 este specificat în `infra/resources/web-app.bicep`
-- Verificați că Dockerfile are imaginea de bază corectă
-
-**Depanați local**:
+**Debug local**:  
 ```sh
 cd src/web
 docker build -t test-app .
 docker run -p 8000:8000 test-app
 ```
+  
+#### 5. "Unauthorized" la rularea comenzilor AZD
 
-#### 5. "Unauthorized" When Running AZD Commands
-
-**Simptom**:
+**Simptom**:  
 ```
 ERROR: (Unauthorized) The client '<id>' with object id '<id>' does not have authorization
 ```
-
-**Soluție**:
-Reautentificați-vă cu Azure:
+  
+**Soluție**:  
+Reautentifică-te în Azure:  
 ```sh
 # Necesar pentru fluxurile de lucru AZD
 azd auth login
@@ -604,56 +605,56 @@ azd auth login
 # Opțional dacă utilizați și comenzile Azure CLI direct
 az login
 ```
-
-Verificați că aveți permisiunile corecte (rol Contributor) pe abonament.
+  
+Verifică dacă ai permisiunile corecte (rol Contributor) pe abonament.
 
 #### 6. Costuri mari pentru baza de date
 
-**Simptom**:
+**Simptom**:  
 Factură Azure neașteptată.
 
-**Soluție**:
-- Verificați dacă ați uitat să rulați `azd down` după testare
-- Verificați că SQL Database folosește nivelul Basic (nu Premium)
-- Revizuiți costurile în Azure Cost Management
-- Configurați alerte de cost
+**Soluție**:  
+- Verifică dacă ai uitat să rulezi `azd down` după testare  
+- Confirmă că baza de date SQL folosește nivelul Basic (nu Premium)  
+- Analizează costurile în Azure Cost Management  
+- Configurează alerte de costuri  
 
 ### Obținerea ajutorului
 
-**Vizualizați toate variabilele de mediu AZD**:
+**Vezi toate variabilele de mediu AZD**:  
 ```sh
 azd env get-values
 ```
-
-**Verificați starea implementării**:
+  
+**Verifică starea implementării**:  
 ```sh
 az webapp show --name <app-name> --resource-group <rg-name> --query state
 ```
-
-**Accesați jurnalele aplicației**:
+  
+**Accesează jurnalele aplicației**:  
 ```sh
 az webapp log download --name <app-name> --resource-group <rg-name> --log-file app-logs.zip
 ```
-
-**Aveți nevoie de mai mult ajutor?**
-- [Ghid de depanare AZD](../../docs/chapter-07-troubleshooting/common-issues.md)
-- [Depanare Azure App Service](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
-- [Depanare Azure SQL](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
+  
+**Ai nevoie de ajutor suplimentar?**  
+- [Ghid de depanare AZD](../../docs/chapter-07-troubleshooting/common-issues.md)  
+- [Depanare Azure App Service](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)  
+- [Depanare Azure SQL](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)  
 
 ## Exerciții practice
 
-### Exercițiul 1: Verificați implementarea (Începător)
+### Exercițiul 1: Verifică implementarea (Începător)
 
-**Obiectiv**: Confirmați că toate resursele sunt implementate și aplicația funcționează.
+**Obiectiv**: Confirmă că toate resursele sunt implementate și aplicația funcționează.
 
-**Pași**:
-1. Listați toate resursele din grupul dvs. de resurse:
+**Pași**:  
+1. Listează toate resursele din grupul tău de resurse:  
    ```sh
    az resource list --resource-group rg-<env-name> --output table
    ```
    **Așteptat**: 6-7 resurse (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
 
-2. Testați toate endpoint-urile API:
+2. Testează toate endpoint-urile API:  
    ```sh
    curl https://app-<your-id>.azurewebsites.net/
    curl https://app-<your-id>.azurewebsites.net/health
@@ -662,24 +663,24 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    ```
    **Așteptat**: Toate returnează JSON valid fără erori
 
-3. Verificați Application Insights:
-   - Navigați la Application Insights în Azure Portal
-   - Mergeți la "Live Metrics"
-   - Reîmprospătați browserul pe aplicația web
-   **Așteptat**: Veți vedea cereri care apar în timp real
+3. Verifică Application Insights:  
+   - Navighează la Application Insights în portalul Azure  
+   - Accesează "Live Metrics"  
+   - Reîncarcă browser-ul pe aplicația web  
+   **Așteptat**: Vezi cereri în timp real  
 
-**Criterii de succes**: Toate cele 6-7 resurse există, toate endpoint-urile returnează date, Live Metrics arată activitate.
+**Criterii de succes**: Toate cele 6-7 resurse există, toate endpoint-urile returnează date, Live Metrics afișează activitate.
 
 ---
 
-### Exercițiul 2: Adăugați un nou endpoint API (Intermediar)
+### Exercițiul 2: Adaugă un endpoint API nou (Intermediar)
 
-**Obiectiv**: Extindeți aplicația Flask cu un nou endpoint.
+**Obiectiv**: Extinde aplicația Flask cu un endpoint nou.
 
-**Cod de pornire**: Endpoint-urile curente în `src/web/app.py`
+**Cod de start**: Endpoint-urile curente în `src/web/app.py`
 
-**Pași**:
-1. Editați `src/web/app.py` și adăugați un nou endpoint după funcția `get_product()`:
+**Pași**:  
+1. Editează `src/web/app.py` și adaugă un endpoint nou după funcția `get_product()`:  
    ```python
    @app.route('/products/search/<keyword>')
    def search_products(keyword):
@@ -712,36 +713,36 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
            logger.error(f"Error searching products: {str(e)}")
            return jsonify({'error': str(e)}), 500
    ```
-
-2. Implementați aplicația actualizată:
+  
+2. Implementază aplicația actualizată:  
    ```sh
    azd deploy
    ```
-
-3. Testați noul endpoint:
+  
+3. Testează endpoint-ul nou:  
    ```sh
    curl https://app-<your-id>.azurewebsites.net/products/search/laptop
    ```
-   **Așteptat**: Returnează produse care corespund criteriului "laptop"
+   **Așteptat**: Returnează produse care corespund "laptop"
 
-**Criterii de succes**: Noul endpoint funcționează, returnează rezultate filtrate, apare în jurnalele Application Insights.
+**Criterii de succes**: Endpoint-ul nou funcționează, returnează rezultate filtrate, apare în jurnalele Application Insights.
 
 ---
 
-### Exercițiul 3: Adăugați monitorizare și alerte (Avansat)
+### Exercițiul 3: Adaugă monitorizare și alerte (Avansat)
 
-**Obiectiv**: Configurați monitorizare proactivă cu alerte.
+**Obiectiv**: Configurează monitorizare proactivă cu alerte.
 
-**Pași**:
-1. Creați o alertă pentru erori HTTP 500:
+**Pași**:  
+1. Creează o alertă pentru erori HTTP 500:  
    ```sh
-   # Obține ID-ul resursei Application Insights
+   # Obțineți ID-ul resursei Application Insights
    AI_ID=$(az monitor app-insights component show \
      --app appi-<your-id> \
      --resource-group rg-<env-name> \
      --query id -o tsv)
    
-   # Creează alertă
+   # Creați alertă
    az monitor metrics alert create \
      --name "High-Error-Rate" \
      --resource-group rg-<env-name> \
@@ -751,29 +752,29 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
      --evaluation-frequency 1m \
      --description "Alert when >5 failed requests in 5 minutes"
    ```
-
-2. Declanșați alerta cauzând erori:
+  
+2. Generează eroarea pentru a declanșa alerta:  
    ```sh
-   # Solicitați un produs inexistent
+   # Solicitare pentru un produs inexistent
    for i in {1..10}; do curl https://app-<your-id>.azurewebsites.net/products/999; done
    ```
-
-3. Verificați dacă alerta a fost declanșată:
-   - Azure Portal → Alerts → Alert Rules
-   - Verificați e-mailul (dacă este configurat)
+  
+3. Verifică dacă alerta a fost declanșată:  
+   - Portal Azure → Alerts → Alert Rules  
+   - Verifică-ți emailul (dacă este configurat)  
 
 **Criterii de succes**: Regula de alertă este creată, se declanșează la erori, notificările sunt primite.
 
 ---
 
-### Exercițiul 4: Modificări ale schemei bazei de date (Avansat)
+### Exercițiul 4: Modificări în schema bazei de date (Avansat)
 
-**Obiectiv**: Adăugați un tabel nou și modificați aplicația pentru a-l folosi.
+**Obiectiv**: Adaugă un tabel nou și modifică aplicația pentru a-l utiliza.
 
-**Pași**:
-1. Conectați-vă la SQL Database prin Query Editor din Azure Portal
+**Pași**:  
+1. Conectează-te la baza de date SQL prin Query Editor din portalul Azure
 
-2. Creați un nou tabel `categories`:
+2. Creează un tabel nou `categories`:  
    ```sql
    CREATE TABLE categories (
        id INT PRIMARY KEY IDENTITY(1,1),
@@ -789,111 +790,112 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    ALTER TABLE products ADD category_id INT;
    UPDATE products SET category_id = 1; -- Set all to Electronics
    ```
+  
+3. Actualizează `src/web/app.py` pentru a include informațiile despre categorii în răspunsuri
 
-3. Actualizați `src/web/app.py` pentru a include informații despre categorie în răspunsuri
+4. Implementează și testează
 
-4. Implementați și testați
-
-**Criterii de succes**: Noul tabel există, produsele afișează informații despre categorie, aplicația funcționează în continuare.
+**Criterii de succes**: Tabelul nou există, produsele afișează informații despre categorii, aplicația funcționează în continuare.
 
 ---
 
-### Exercițiul 5: Implementați caching (Expert)
+### Exercițiul 5: Implementează caching (Expert)
 
-**Obiectiv**: Adăugați Azure Redis Cache pentru a îmbunătăți performanța.
+**Obiectiv**: Adaugă Azure Redis Cache pentru a îmbunătăți performanța.
 
-**Pași**:
-1. Adăugați Redis Cache în `infra/main.bicep`
-2. Actualizați `src/web/app.py` pentru a face cache la interogările de produse
-3. Măsurați îmbunătățirea performanței cu Application Insights
-4. Comparați timpii de răspuns înainte/după caching
+**Pași**:  
+1. Adaugă Redis Cache în `infra/main.bicep`  
+2. Actualizează `src/web/app.py` pentru a face caching la interogările de produse  
+3. Măsoară îmbunătățirea performanței cu Application Insights  
+4. Compară timpii de răspuns înainte și după caching  
 
-**Criterii de succes**: Redis este implementat, caching-ul funcționează, timpii de răspuns se îmbunătățesc cu >50%.
+**Criterii de succes**: Redis este implementat, caching-ul funcționează, timpii de răspuns se îmbunătățesc cu peste 50%.
 
-**Sfat**: Începeți cu [documentația Azure Cache for Redis](https://learn.microsoft.com/azure/azure-cache-for-redis/).
+**Sugestie**: Începe cu [documentația Azure Cache for Redis](https://learn.microsoft.com/azure/azure-cache-for-redis/).
 
 ---
 
 ## Curățare
 
-Pentru a evita costuri continue, ștergeți toate resursele când ați terminat:
+Pentru a evita taxe continue, șterge toate resursele când ai terminat:
 
 ```sh
 azd down
 ```
-
-**Prompt de confirmare**:
+  
+**Prompt de confirmare**:  
 ```
 ? Total resources to delete: 7, are you sure you want to continue? (y/N)
 ```
+  
+Tastează `y` pentru a confirma.
 
-Tastați `y` pentru a confirma.
+**✓ Verificare succes**:  
+- Toate resursele sunt șterse din portalul Azure  
+- Nu există costuri continue  
+- Dosarul local `.azure/<env-name>` poate fi șters  
 
-**✓ Verificare de succes**: 
-- Toate resursele sunt șterse din Azure Portal
-- Nicio taxă în curs
-- Folderul local `.azure/<env-name>` poate fi șters
-
-**Alternativă** (păstrați infrastructura, ștergeți datele):
+**Alternativ** (păstrează infrastructura, șterge datele):  
 ```sh
 # Șterge doar grupul de resurse (păstrează configurația AZD)
 az group delete --name rg-<env-name> --yes
 ```
+  
 ## Aflați mai multe
 
-### Documentație asociată
-- [Documentația Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Documentația Azure SQL Database](https://learn.microsoft.com/azure/azure-sql/database/)
-- [Documentația Azure App Service](https://learn.microsoft.com/azure/app-service/)
-- [Documentația Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Referință limbaj Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+### Documentație conexă  
+- [Documentația Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)  
+- [Documentația Azure SQL Database](https://learn.microsoft.com/azure/azure-sql/database/)  
+- [Documentația Azure App Service](https://learn.microsoft.com/azure/app-service/)  
+- [Documentația Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)  
+- [Referință limbaj Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)  
 
-### Pașii următori în acest curs
-- **[Exemplu Container Apps](../../../../examples/container-app)**: Implementați microservicii cu Azure Container Apps
-- **[Ghid de integrare AI](../../../../docs/ai-foundry)**: Adăugați capabilități AI aplicației dvs.
-- **[Practici recomandate pentru implementare](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Modele pentru implementare în producție
+### Pașii următori în acest curs  
+- **[Exemplu Container Apps](../../../../examples/container-app)**: Implementare microservicii cu Azure Container Apps  
+- **[Ghid Integrare AI](../../../../docs/ai-foundry)**: Adaugă capabilități AI aplicației tale  
+- **[Practici recomandate pentru implementare](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Modele de implementare în producție  
 
-### Subiecte avansate
-- **Identitate gestionată**: Eliminați parolele și folosiți autentificarea Azure AD
-- **Endpoints private**: Securizați conexiunile la baza de date în cadrul unei rețele virtuale
-- **Integrare CI/CD**: Automatizați implementările cu GitHub Actions sau Azure DevOps
-- **Medii multiple**: Configurați medii de dezvoltare, staging și producție
-- **Migrații de bază de date**: Utilizați Alembic sau Entity Framework pentru versionarea schemei
+### Subiecte avansate  
+- **Managed Identity**: Elimină parolele și folosește autentificare Microsoft Entra ID  
+- **Private Endpoints**: Securizează conexiunile către baza de date în rețea virtuală  
+- **Integrare CI/CD**: Automatizează implementările cu GitHub Actions sau Azure DevOps  
+- **Mediu multi-env**: Configurează medii dev, staging și producție  
+- **Migrații baze de date**: Folosește Alembic sau Entity Framework pentru versionarea schemelor  
 
 ### Comparație cu alte abordări
 
-**AZD vs. ARM Templates**:
-- ✅ AZD: Abstracție la nivel înalt, comenzi mai simple
-- ⚠️ ARM: Mai detaliat, control granular
+**AZD vs. ARM Templates**:  
+- ✅ AZD: Abstracție la nivel înalt, comenzi mai simple  
+- ⚠️ ARM: Mai detaliat, control granular  
 
-**AZD vs. Terraform**:
-- ✅ AZD: Nativ pentru Azure, integrat cu serviciile Azure
-- ⚠️ Terraform: Suport multi-cloud, ecosistem mai mare
+**AZD vs. Terraform**:  
+- ✅ AZD: Nativ Azure, integrat cu serviciile Azure  
+- ⚠️ Terraform: Suport multi-cloud, ecosistem mai mare  
 
-**AZD vs. Azure Portal**:
-- ✅ AZD: Repetabil, controlat prin versiuni, automatizabil
-- ⚠️ Portal: Click-uri manuale, dificil de reprodus
+**AZD vs. Portal Azure**:  
+- ✅ AZD: Repetabil, versionat, automatizabil  
+- ⚠️ Portal: Interfață manuală, dificil de reprodus  
 
-Gândiți-vă la AZD ca la Docker Compose pentru Azure—configurare simplificată pentru implementări complexe.
+**Gândește-te la AZD ca la**: Docker Compose pentru Azure—configurare simplificată pentru implementări complexe.
 
 ---
 
 ## Întrebări frecvente
 
-**Q: Pot folosi un limbaj de programare diferit?**  
-A: Da! Înlocuiți `src/web/` cu Node.js, C#, Go sau orice limbaj. Actualizați `azure.yaml` și Bicep în consecință.
+**Î: Pot folosi un alt limbaj de programare?**  
+R: Da! Înlocuiește `src/web/` cu Node.js, C#, Go sau orice limbaj dorești. Actualizează `azure.yaml` și Bicep corespunzător.
 
-**Q: Cum adaug mai multe baze de date?**  
-A: Adăugați un alt modul SQL Database în `infra/main.bicep` sau folosiți PostgreSQL/MySQL din serviciile Azure Database.
+**Î: Cum adaug mai multe baze de date?**  
+R: Adaugă un modul SQL Database suplimentar în `infra/main.bicep` sau folosește PostgreSQL/MySQL din serviciile Azure Database.
 
-**Q: Pot folosi asta în producție?**  
-A: Aceasta este un punct de plecare. Pentru producție, adăugați: identitate gestionată, endpoint-uri private, redundanță, strategie de backup, WAF și monitorizare îmbunătățită.
+**Î: Pot folosi asta în producție?**  
+R: Acesta este un punct de pornire. Pentru producție, adaugă: managed identity, private endpoints, redundanță, strategie de backup, WAF și monitorizare îmbunătățită.
 
-**Q: Ce se întâmplă dacă vreau să folosesc containere în loc de implementare prin cod?**  
-A: Consultați [Exemplu Container Apps](../../../../examples/container-app) care folosește containere Docker pe tot parcursul.
+**Î: Ce fac dacă vreau să folosesc containere în loc de implementare cod?**  
+R: Vezi [Exemplul Container Apps](../../../../examples/container-app) care folosește containere Docker pe tot parcursul.
 
-**Q: Cum mă conectez la baza de date de pe mașina locală?**  
-A: Adăugați IP-ul dvs. în firewall-ul SQL Server:
+**Î: Cum mă conectez la baza de date de pe calculatorul local?**  
+R: Adaugă IP-ul tău în firewall-ul SQL Server:  
 ```sh
 az sql server firewall-rule create \
   --resource-group rg-<env-name> \
@@ -902,20 +904,22 @@ az sql server firewall-rule create \
   --start-ip-address <your-ip> \
   --end-ip-address <your-ip>
 ```
+  
+**Î: Pot folosi o bază de date existentă în loc să creez una nouă?**  
+R: Da, modifică `infra/main.bicep` să referențieze un SQL Server existent și actualizează parametrii stringului de conexiune.
 
-**Q: Pot folosi o bază de date existentă în loc să creez una nouă?**  
-A: Da, modificați `infra/main.bicep` pentru a face referire la un SQL Server existent și actualizați parametrii șirului de conexiune.
+---
 
-> **Notă:** Acest exemplu demonstrează bune practici pentru implementarea unei aplicații web cu o bază de date folosind AZD. Include cod funcțional, documentație cuprinzătoare și exerciții practice pentru consolidarea învățării. Pentru implementările în producție, revizuiți cerințele de securitate, scalare, conformitate și cost specifice organizației dvs.
+> **Notă:** Acest exemplu demonstrează cele mai bune practici pentru implementarea unei aplicații web cu o bază de date folosind AZD. Include cod funcțional, documentație amplă și exerciții practice pentru consolidarea cunoștințelor. Pentru implementări în producție, analizează cerințele de securitate, scalare, conformitate și cost specifice organizației tale.
 
-**📚 Navigare curs:**
-- ← Anterior: [Exemplu Container Apps](../../../../examples/container-app)
-- → Următor: [Ghid de integrare AI](../../../../docs/ai-foundry)
-- 🏠 [Pagina principală a cursului](../../README.md)
+**📚 Navigare curs:**  
+- ← Anterior: [Exemplu Container Apps](../../../../examples/container-app)  
+- → Următor: [Ghid Integrare AI](../../../../docs/ai-foundry)  
+- 🏠 [Acasă curs](../../README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Declinare de responsabilitate**:
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă o traducere profesională realizată de un traducător uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite care decurg din utilizarea acestei traduceri.
+**Declinare a responsabilității**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). În timp ce ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un om. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care decurg din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

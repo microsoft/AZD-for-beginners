@@ -1,63 +1,63 @@
 # AZD Basics - Pag-unawa sa Azure Developer CLI
 
-# AZD Basics - Mga Pangunahing Konsepto at Fundamentals
+# AZD Basics - Pangunahing Konsepto at Mga Pundasyon
 
 **Pag-navigate ng Kabanata:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
-- **⬅️ Previous**: [Course Overview](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Next**: [Installation & Setup](installation.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📚 Course Home**: [AZD Para sa Mga Nagsisimula](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 1 - Pundasyon at Mabilis na Pagsisimula
+- **⬅️ Previous**: [Pangkalahatang-ideya ng Kurso](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Next**: [Pag-install at Pag-setup](installation.md)
+- **🚀 Next Chapter**: [Kabanata 2: Pag-unlad na Nauuna ang AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-## Panimula
+## Introduksyon
 
-Ipinapakilala ng araling ito ang Azure Developer CLI (azd), isang makapangyarihang command-line na kasangkapan na nagpapabilis ng iyong paglalakbay mula sa lokal na pag-develop hanggang sa deployment sa Azure. Matututuhan mo ang mga pangunahing konsepto, pangunahing tampok, at mauunawaan kung paano pinapasimple ng azd ang pag-deploy ng cloud-native na application.
+Itong aralin ay ipinakikilala sa iyo ang Azure Developer CLI (azd), isang makapangyarihang command-line tool na nagpapabilis ng iyong paglalakbay mula sa lokal na pag-develop hanggang sa pag-deploy sa Azure. Matututuhan mo ang mga pangunahing konsepto, pangunahing tampok, at maiintindihan kung paano pinapasimple ng azd ang pag-deploy ng cloud-native na aplikasyon.
 
 ## Mga Layunin sa Pagkatuto
 
 Sa pagtatapos ng araling ito, ikaw ay:
-- Mauunawaan kung ano ang Azure Developer CLI at ang pangunahing layunin nito
-- Matutunan ang mga pangunahing konsepto ng mga template, mga environment, at mga serbisyo
+- Maiintindihan kung ano ang Azure Developer CLI at ang pangunahing layunin nito
+- Matututo ng mga pangunahing konsepto ng mga template, mga kapaligiran, at mga serbisyo
 - Susuriin ang mga pangunahing tampok kabilang ang template-driven development at Infrastructure as Code
-- Mauunawaan ang istruktura ng proyekto at workflow ng azd
-- Handa nang i-install at i-configure ang azd para sa iyong development environment
+- Maiintindihan ang estruktura ng proyekto ng azd at workflow
+- Handa na mag-install at mag-configure ng azd para sa iyong development environment
 
 ## Mga Kinalabasan ng Pagkatuto
 
 Pagkatapos makumpleto ang araling ito, magagawa mong:
-- Ipaliwanag ang papel ng azd sa modernong workflow ng cloud development
-- Tukuyin ang mga bahagi ng isang azd project structure
-- Ilarawan kung paano nagtutulungan ang mga template, environment, at serbisyo
-- Mauunawaan ang mga benepisyo ng Infrastructure as Code gamit ang azd
-- Kilalanin ang iba't ibang azd na utos at ang kanilang mga layunin
+- Ipaliwanag ang papel ng azd sa modernong cloud development workflows
+- Tukuyin ang mga bahagi ng estruktura ng isang azd project
+- Ilarawan kung paano nagtutulungan ang mga template, kapaligiran, at serbisyo
+- Maunawaan ang mga benepisyo ng Infrastructure as Code gamit ang azd
+- Makilala ang iba't ibang azd commands at ang kanilang mga layunin
 
 ## Ano ang Azure Developer CLI (azd)?
 
-Ang Azure Developer CLI (azd) ay isang command-line na kasangkapan na idinisenyo upang pabilisin ang iyong paglalakbay mula sa lokal na pag-develop hanggang sa deployment sa Azure. Pinapasimple nito ang proseso ng pagbuo, pag-deploy, at pamamahala ng cloud-native na mga application sa Azure.
+Azure Developer CLI (azd) ay isang command-line tool na idinisenyo upang pabilisin ang iyong paglalakbay mula sa lokal na pag-develop hanggang sa pag-deploy sa Azure. Pinapasimple nito ang proseso ng pagbuo, pag-deploy, at pamamahala ng mga cloud-native na aplikasyon sa Azure.
 
 ### Ano ang Maaari Mong I-deploy gamit ang azd?
 
-Sinusuportahan ng azd ang malawak na hanay ng mga workload—at patuloy ang paglago ng listahan. Ngayon, maaari mong gamitin ang azd upang i-deploy:
+azd ay sumusuporta sa malawak na hanay ng mga workload—at patuloy na lumalawak ang listahan. Ngayon, maaari mong gamitin ang azd para mag-deploy ng:
 
 | Uri ng Workload | Mga Halimbawa | Parehong Workflow? |
 |---------------|----------|----------------|
-| **Tradisyonal na mga aplikasyon** | Web apps, REST APIs, static sites | ✅ `azd up` |
-| **Mga serbisyo at microservices** | Container Apps, Function Apps, multi-service backends | ✅ `azd up` |
-| **Mga aplikasyong may AI** | Chat apps na may Microsoft Foundry Models, RAG solutions na may AI Search | ✅ `azd up` |
-| **Mga intelligent agents** | Foundry-hosted agents, multi-agent orchestrations | ✅ `azd up` |
+| **Tradisyonal na mga aplikasyon** | Mga web app, REST API, mga static na site | ✅ `azd up` |
+| **Mga serbisyo at microservices** | Container Apps, Function Apps, mga multi-service backend | ✅ `azd up` |
+| **Mga aplikasyon na pinapagana ng AI** | Mga chat app na may Microsoft Foundry Models, mga solusyon ng RAG gamit ang AI Search | ✅ `azd up` |
+| **Matalinong mga ahente** | Mga agent na naka-host sa Foundry, mga orchestrasyon ng multi-agent | ✅ `azd up` |
 
-Ang pangunahing pananaw ay na **pareho ang lifecycle ng azd kahit ano pa man ang dini-deploy mo**. Ini-initialize mo ang proyekto, nagpo-provision ng imprastruktura, dine-deploy ang iyong code, mino-monitor ang iyong app, at nililinis—mapa-simpleng website man o sopistikadong AI agent.
+Ang mahalagang pananaw ay na **pareho ang lifecycle ng azd anuman ang dini-deploy mo**. Ini-initialize mo ang isang proyekto, nagpo-provision ng imprastruktura, nagde-deploy ng iyong code, mino-monitor ang iyong app, at nililinis—mapa-simpleng website man o sopistikadong AI agent.
 
-Ang tuloy-tuloy na ito ay by design. Tinitingnan ng azd ang mga kakayahan ng AI bilang isa pang uri ng serbisyo na maaaring gamitin ng iyong application, hindi bilang isang bagay na ibang-iba sa pinakapayak. Ang isang chat endpoint na pinapagana ng Microsoft Foundry Models ay, mula sa perspektibo ng azd, isa lamang pang serbisyo na i-configure at i-deploy.
+Ang pagkakaparehong ito ay idinisenyo. Tinuturing ng azd ang mga kakayahan ng AI bilang isa pang uri ng serbisyo na maaaring gamitin ng iyong aplikasyon, hindi bilang isang bagay na ganap na naiiba. Ang isang chat endpoint na sinusuportahan ng Microsoft Foundry Models ay, mula sa perspektibo ng azd, isa lamang pang serbisyo na i-configure at i-deploy.
 
 ### 🎯 Bakit Gamitin ang AZD? Isang Paghahambing sa Totoong Mundo
 
 Ihambing natin ang pag-deploy ng isang simpleng web app na may database:
 
-#### ❌ KUNG WALANG AZD: Manu-manong Azure Deployment (30+ minuto)
+#### ❌ WALANG AZD: Manwal na Pag-deploy sa Azure (30+ minuto)
 
 ```bash
-# Hakbang 1: Lumikha ng grupo ng mga resource
+# Hakbang 1: Lumikha ng grupo ng mga mapagkukunan
 az group create --name myapp-rg --location eastus
 
 # Hakbang 2: Lumikha ng plano ng App Service
@@ -71,7 +71,7 @@ az webapp create --name myapp-web-unique123 \
   --plan myapp-plan \
   --runtime "NODE:18-lts"
 
-# Hakbang 4: Lumikha ng Cosmos DB account (10-15 minuto)
+# Hakbang 4: Lumikha ng account ng Cosmos DB (10-15 minuto)
 az cosmosdb create --name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --kind MongoDB
@@ -89,7 +89,7 @@ az cosmosdb mongodb collection create \
   --database-name tododb \
   --name todos
 
-# Hakbang 7: Kunin ang connection string
+# Hakbang 7: Kunin ang string ng koneksyon
 CONN_STR=$(az cosmosdb keys list \
   --name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
@@ -108,13 +108,13 @@ az webapp log config --name myapp-web-unique123 \
   --application-logging filesystem \
   --detailed-error-messages true
 
-# Hakbang 10: I-setup ang Application Insights
+# Hakbang 10: I-set up ang Application Insights
 az monitor app-insights component create \
   --app myapp-insights \
   --location eastus \
   --resource-group myapp-rg
 
-# Hakbang 11: I-link ang App Insights sa Web App
+# Hakbang 11: I-link ang Application Insights sa Web App
 INSTRUMENTATION_KEY=$(az monitor app-insights component show \
   --app myapp-insights \
   --resource-group myapp-rg \
@@ -125,11 +125,11 @@ az webapp config appsettings set \
   --resource-group myapp-rg \
   --settings APPINSIGHTS_INSTRUMENTATIONKEY="$INSTRUMENTATION_KEY"
 
-# Hakbang 12: I-build ang aplikasyon nang lokal
+# Hakbang 12: Buuin ang aplikasyon nang lokal
 npm install
 npm run build
 
-# Hakbang 13: Lumikha ng package ng deployment
+# Hakbang 13: Lumikha ng pakete ng deployment
 zip -r app.zip . -x "*.git*" "node_modules/*"
 
 # Hakbang 14: I-deploy ang aplikasyon
@@ -139,22 +139,22 @@ az webapp deployment source config-zip \
   --src app.zip
 
 # Hakbang 15: Maghintay at manalangin na gumana ito 🙏
-# (Walang awtomatikong pag-validate, kailangan ng manu-manong pagsubok)
+# (Walang awtomatikong pag-validate, kinakailangan ang manu-manong pagsubok)
 ```
 
 **Mga Problema:**
-- ❌ 15+ mga utos na kailangang tandaan at isagawa nang sunod-sunod
-- ❌ 30-45 minuto ng manu-manong trabaho
-- ❌ Madaling magkamali (mga typographical error, maling mga parameter)
-- ❌ Nakalantad ang mga connection string sa kasaysayan ng terminal
-- ❌ Walang awtomatikong rollback kung may pumalya
-- ❌ Mahirap ulitin para sa mga kasapi ng team
-- ❌ Iba-iba sa bawat pagkakataon (hindi reproducible)
+- ❌ Higit sa 15 utos na dapat tandaan at isagawa ayon sa pagkakasunod
+- ❌ 30-45 minuto ng manwal na trabaho
+- ❌ Madaling magkamali (pagkakamali sa pag-type, maling mga parameter)
+- ❌ Mga connection string na nakikita sa kasaysayan ng terminal
+- ❌ Walang awtomatikong rollback kung may mabigo
+- ❌ Mahirap ulitin para sa mga miyembro ng koponan
+- ❌ Iba-iba tuwing pagkakataon (hindi nare-reproduce)
 
-#### ✅ KUNG GUMAMIT NG AZD: Awtomatikong Deployment (5 utos, 10-15 minuto)
+#### ✅ GAMIT ANG AZD: Awtomatikong Pag-deploy (5 utos, 10-15 minuto)
 
 ```bash
-# Hakbang 1: I-inisyalisa mula sa template
+# Hakbang 1: I-initialize mula sa template
 azd init --template todo-nodejs-mongo
 
 # Hakbang 2: Patunayan ang pagkakakilanlan
@@ -163,122 +163,122 @@ azd auth login
 # Hakbang 3: Lumikha ng kapaligiran
 azd env new dev
 
-# Hakbang 4: Tingnan ang mga pagbabago (opsyonal ngunit inirerekomenda)
+# Hakbang 4: I-preview ang mga pagbabago (opsyonal ngunit inirerekomenda)
 azd provision --preview
 
 # Hakbang 5: I-deploy ang lahat
 azd up
 
-# ✨ Tapos na! Ang lahat ay na-deploy, na-configure, at minomonitor
+# ✨ Tapos na! Ang lahat ay na-deploy, na-configure, at binabantayan.
 ```
 
 **Mga Benepisyo:**
-- ✅ **5 utos** kumpara sa 15+ na manu-manong hakbang
-- ✅ **10-15 minuto** kabuuang oras (kadalasan naghihintay na lang sa Azure)
-- ✅ **Mas kaunting manu-manong pagkakamali** - consistent, template-driven na workflow
-- ✅ **Secure na paghawak ng mga secret** - maraming template ang gumagamit ng Azure-managed secret storage
-- ✅ **Maaaring ulitin ang deployment** - pareho ang workflow sa bawat pagkakataon
-- ✅ **Ganap na reproducible** - pareho ang resulta sa bawat pagkakataon
-- ✅ **Handa para sa team** - kahit sino ay maaaring mag-deploy gamit ang parehong mga utos
-- ✅ **Infrastructure as Code** - version controlled na mga Bicep template
-- ✅ **Built-in monitoring** - Application Insights na naka-configure nang awtomatiko
+- ✅ **5 utos** vs. 15+ manwal na hakbang
+- ✅ **10-15 minuto** kabuuang oras (kadalasan naghihintay sa Azure)
+- ✅ **Mas kaunting manwal na pagkakamali** - pare-pareho, daloy na pinapatakbo ng template
+- ✅ **Ligtas na paghawak ng mga lihim** - maraming template ang gumagamit ng Azure-managed secret storage
+- ✅ **Maaari ulitin na mga pag-deploy** - pareho ang daloy sa bawat pagkakataon
+- ✅ **Ganap na nare-reproduce** - pareho ang resulta sa bawat pagkakataon
+- ✅ **Handa para sa koponan** - kahit sino ay maaaring mag-deploy gamit ang parehong mga utos
+- ✅ **Imprastruktura bilang Code** - mga Bicep template na naka-version control
+- ✅ **Naka-built-in na monitoring** - awtomatikong na-configure ang Application Insights
 
-### 📊 Pagbabawas ng Oras at Error
+### 📊 Pagbawas ng Oras at Error
 
-| Sukatan | Manu-manong Pag-deploy | Pag-deploy gamit ang AZD | Pagbuti |
+| Metriko | Manwal na Pag-deploy | Pag-deploy gamit ang AZD | Pagpabuti |
 |:-------|:------------------|:---------------|:------------|
-| **Mga Utos** | 15+ | 5 | 67% mas kaunti |
+| **Utos** | 15+ | 5 | 67% mas kaunti |
 | **Oras** | 30-45 min | 10-15 min | 60% mas mabilis |
 | **Rate ng Error** | ~40% | <5% | 88% pagbawas |
-| **Konsistensi** | Mababa (manu-mano) | 100% (awtomatiko) | Perpekto |
-| **Pag-onboard ng Team** | 2-4 oras | 30 minuto | 75% mas mabilis |
-| **Oras ng Rollback** | 30+ min (manu-mano) | 2 min (awtomatiko) | 93% mas mabilis |
+| **Konsistensya** | Mababa (manwal) | 100% (awtomatiko) | Perpekto |
+| **Onboarding ng Koponan** | 2-4 oras | 30 minuto | 75% mas mabilis |
+| **Oras ng Rollback** | 30+ min (manwal) | 2 min (awtomatiko) | 93% mas mabilis |
 
-## Mga Pangunahing Konsepto
+## Pangunahing Konsepto
 
 ### Mga Template
 Ang mga template ang pundasyon ng azd. Naglalaman ang mga ito ng:
-- **Application code** - Ang iyong source code at mga dependency
-- **Mga kahulugan ng imprastruktura** - Mga Azure resource na tinukoy sa Bicep o Terraform
+- **Code ng Aplikasyon** - Ang iyong source code at mga dependency
+- **Mga definisyon ng imprastruktura** - Mga Azure resource na nade-define sa Bicep o Terraform
 - **Mga configuration file** - Mga setting at environment variable
-- **Mga deployment script** - Mga awtomatikong workflow ng deployment
+- **Mga deployment script** - Awtomatikong mga workflow sa pag-deploy
 
-### Mga Environment
-Kinakatawan ng mga environment ang iba't ibang target ng deployment:
-- **Development** - Para sa testing at pag-develop
-- **Staging** - Pre-production na environment
-- **Production** - Live na production environment
+### Mga Kapaligiran
+Ang mga kapaligiran ay kumakatawan sa iba't ibang target ng pag-deploy:
+- **Development** - Para sa pag-test at pag-develop
+- **Staging** - Kapaligiran bago produksyon
+- **Production** - Live na kapaligiran ng produksyon
 
-Bawat environment ay may sariling:
-- Azure resource group
+Bawat kapaligiran ay may sariling:
+- resource group ng Azure
 - Mga setting ng configuration
-- Estado ng deployment
+- Estado ng pag-deploy
 
 ### Mga Serbisyo
-Ang mga serbisyo ang mga gusali ng iyong application:
-- **Frontend** - Mga web application, SPA
+Ang mga serbisyo ang mga bloke ng pagbuo ng iyong aplikasyon:
+- **Frontend** - Mga web application, mga SPA
 - **Backend** - Mga API, microservices
 - **Database** - Mga solusyon sa pag-iimbak ng data
 - **Storage** - File at blob storage
 
-## Mga Pangunahing Tampok
+## Pangunahing Mga Tampok
 
-### 1. Template-Driven Development
+### 1. Pag-develop na Pinapatakbo ng Template
 ```bash
 # Mag-browse ng mga magagamit na template
 azd template list
 
-# Magsimula mula sa isang template
+# Simulan mula sa isang template
 azd init --template <template-name>
 ```
 
-### 2. Infrastructure as Code
-- **Bicep** - Domain-specific language ng Azure
-- **Terraform** - Multi-cloud na kasangkapan para sa imprastruktura
-- **ARM Templates** - Azure Resource Manager templates
+### 2. Imprastruktura bilang Code
+- **Bicep** - Ang domain-specific na wika ng Azure
+- **Terraform** - Tool para sa imprastruktura na multi-cloud
+- **ARM Templates** - Mga template ng Azure Resource Manager
 
-### 3. Integrated Workflows
+### 3. Pinagsamang Mga Workflow
 ```bash
 # Kumpletong daloy ng pag-deploy
-azd up            # I-provision at i-deploy — walang mano-manong kailangan para sa unang pag-setup
+azd up            # Mag-provision + Mag-deploy — awtomatiko ito para sa unang pagsasaayos
 
-# 🧪 BAGO: I-preview ang mga pagbabago sa imprastruktura bago ang pag-deploy (LIGTAS)
-azd provision --preview    # I-simulate ang pag-deploy ng imprastruktura nang hindi gumagawa ng mga pagbabago
+# 🧪 BAGO: I-preview ang mga pagbabago sa imprastruktura bago i-deploy (LIGTAS)
+azd provision --preview    # Simulahin ang pag-deploy ng imprastruktura nang hindi gumagawa ng mga pagbabago
 
-azd provision     # Gumawa ng mga resource sa Azure — gamitin ito kapag ina-update mo ang imprastruktura
-azd deploy        # I-deploy o i-redeploy ang code ng aplikasyon matapos ang pag-update
+azd provision     # Lumikha ng mga resource sa Azure — gamitin ito kapag ina-update mo ang imprastruktura
+azd deploy        # I-deploy ang code ng aplikasyon o muling i-deploy ang code kapag na-update
 azd down          # Linisin ang mga resource
 ```
 
 #### 🛡️ Ligtas na Pagpaplano ng Imprastruktura gamit ang Preview
-Ang utos na `azd provision --preview` ay isang malaking pagbabago para sa ligtas na deployment:
+Ang utos na `azd provision --preview` ay malaking pagbabago para sa ligtas na mga pag-deploy:
 - **Dry-run analysis** - Ipinapakita kung ano ang malilikha, mababago, o mabubura
-- **Walang panganib** - Walang aktwal na pagbabago ang isinasagawa sa iyong Azure environment
-- **Kolaborasyon ng team** - Maaaring ibahagi ang resulta ng preview bago mag-deploy
-- **Tantiyang gastos** - Mauunawaan ang gastos ng mga resource bago mag-commit
+- **Zero risk** - Walang aktwal na pagbabago ang gagawin sa iyong Azure environment
+- **Team collaboration** - Ibahagi ang mga resulta ng preview bago i-deploy
+- **Cost estimation** - Unawain ang mga gastos ng resource bago mag-commit
 
 ```bash
-# Halimbawang daloy ng trabaho para sa preview
+# Halimbawa ng workflow ng preview
 azd provision --preview           # Tingnan kung ano ang magbabago
-# Suriin ang output, talakayin kasama ang koponan
+# Suriin ang output, talakayin ito kasama ang koponan
 azd provision                     # Ipatupad ang mga pagbabago nang may kumpiyansa
 ```
 
-### 📊 Visual: AZD Development Workflow
+### 📊 Biswal: AZD Development Workflow
 
 ```mermaid
 graph LR
-    A[azd init] -->|Simulan ang proyekto| B[azd auth login]
-    B -->|I-verify ang pagkakakilanlan| C[azd env new]
+    A[azd init] -->|I-initialize ang proyekto| B[azd auth login]
+    B -->|Patunayan ang pagkakakilanlan| C[azd env new]
     C -->|Lumikha ng kapaligiran| D{Unang pag-deploy?}
     D -->|Oo| E[azd up]
     D -->|Hindi| F[azd provision --preview]
     F -->|Suriin ang mga pagbabago| G[azd provision]
-    E -->|Naglalaan at nagde-deploy| H[Mga tumatakbong resources]
+    E -->|Naglalaan at nagde-deploy| H[Mga resources na tumatakbo]
     G -->|Ina-update ang imprastruktura| H
     H -->|Subaybayan| I[azd monitor]
     I -->|Gumawa ng mga pagbabago sa code| J[azd deploy]
-    J -->|Muling i-deploy ang code lamang| H
+    J -->|I-redeploy ang code lamang| H
     H -->|Linisin| K[azd down]
     
     style A fill:#e1f5fe
@@ -287,18 +287,19 @@ graph LR
     style H fill:#c5e1a5
     style K fill:#ffcdd2
 ```
+
 **Paliwanag ng Workflow:**
 1. **Init** - Magsimula gamit ang template o bagong proyekto
 2. **Auth** - Mag-authenticate sa Azure
 3. **Environment** - Gumawa ng hiwalay na deployment environment
-4. **Preview** - 🆕 Laging i-preview muna ang mga pagbabago sa imprastruktura (ligtas na kasanayan)
-5. **Provision** - Gumawa/update ng mga Azure resources
+4. **Preview** - 🆕 Laging i-preview muna ang mga pagbabago sa imprastruktura (ligtas na gawi)
+5. **Provision** - Lumikha/i-update ang mga Azure resource
 6. **Deploy** - I-push ang iyong application code
-7. **Monitor** - Obserbahan ang performance ng application
+7. **Monitor** - Obserbahan ang performance ng aplikasyon
 8. **Iterate** - Gumawa ng mga pagbabago at i-redeploy ang code
 9. **Cleanup** - Alisin ang mga resource kapag tapos na
 
-### 4. Pamamahala ng Environment
+### 4. Pamamahala ng Kapaligiran
 ```bash
 # Lumikha at pamahalaan ang mga kapaligiran
 azd env new <environment-name>
@@ -306,29 +307,43 @@ azd env select <environment-name>
 azd env list
 ```
 
-### 5. Mga Extension at Mga Utos para sa AI
+### 5. Mga Extension at mga Utos para sa AI
 
-Gumagamit ang azd ng extension system upang magdagdag ng kakayahan lampas sa core CLI. Kapaki-pakinabang ito lalo na para sa mga workload na may AI:
+azd ay gumagamit ng isang extension system para magdagdag ng mga kakayahan lampas sa core CLI. Ito ay lalong kapaki-pakinabang para sa mga workload ng AI:
 
 ```bash
 # Ilista ang mga magagamit na extension
 azd extension list
 
-# I-install ang extension ng Foundry agents
+# I-install ang Foundry agents na ekstensyon
 azd extension install azure.ai.agents
 
 # I-initialize ang isang proyekto ng AI agent mula sa manifest
 azd ai agent init -m agent-manifest.yaml
 
+# Subukan ang isang naka-deploy na agent (ipapakita ang pagkaantala at oras hanggang unang byte)
+azd ai agent invoke
+
 # Simulan ang MCP server para sa pag-develop na may tulong ng AI (Alpha)
 azd mcp start
 ```
 
-> Ang mga extension ay tinalakay nang detalyado sa [Kabanata 2: AI-First Development](../chapter-02-ai-development/agents.md) at sa [Mga Utos ng AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) sanggunian.
+**Ang lifecycle ng agent, mula simula hanggang dulo.** Kapag na-install mo na ang `azure.ai.agents`, isang workflow lang ang magdadala sa iyo mula sa ideya hanggang sa isang tumatakbo at mino-monitor na agent. Hindi mo kailangang gamitin lahat ng ito sa unang araw—alamin lang na umiiral sila:
 
-## 📁 Istruktura ng Proyekto
+| Yugto | Utos | Ginagawa nito |
+|-------|---------|--------------|
+| **Scaffold** | `azd ai agent init -m <manifest>` | Gumawa ng agent project mula sa isang manifest |
+| **Test** | `azd ai agent invoke` | Tawagan ang agent at tingnan ang oras ng tugon |
+| **Measure** | `azd ai agent eval generate` | Gumawa ng evaluation dataset para sa agent |
+| **Improve** | `azd ai agent optimize` | I-optimize ang mga instruction ng agent batay sa iyong data |
+| **Inspect** | `azd ai agent endpoint show` | Tingnan ang live na configuration ng endpoint |
+| **Clean up** | `azd ai agent delete` | Tanggalin ang isang naka-host na agent at lahat ng mga bersyon nito |
 
-Karaniwang istruktura ng isang azd na proyekto:
+> Tinalakay nang detalyado ang mga extension sa [Kabanata 2: Pag-unlad na Nauuna ang AI](../chapter-02-ai-development/agents.md) at ang sanggunian na [Mga Utos ng AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
+
+## 📁 Estruktura ng Proyekto
+
+Isang tipikal na estruktura ng proyekto ng azd:
 ```
 my-app/
 ├── .azd/                    # azd configuration
@@ -348,10 +363,10 @@ my-app/
 └── README.md
 ```
 
-## 🔧 Mga Configuration File
+## 🔧 Mga File ng Konfigurasyon
 
 ### azure.yaml
-Ang pangunahing project configuration file:
+Ang pangunahing configuration file ng proyekto:
 ```yaml
 name: my-awesome-app
 metadata:
@@ -374,7 +389,7 @@ hooks:
 ```
 
 ### .azure/config.json
-Environment-specific na configuration:
+Kalikasan ng configuration na pang-kapaligiran:
 ```json
 {
   "version": 1,
@@ -388,61 +403,61 @@ Environment-specific na configuration:
 }
 ```
 
-## 🎪 Karaniwang Workflow na may Mga Hands-On na Ehersisyo
+## 🎪 Karaniwang Mga Workflow na may Praktikal na Mga Ehersisyo
 
-> **💡 Tip sa Pagkatuto:** Sundin ang mga ehersisyong ito nang sunod-sunod upang unti-unting bumuo ng iyong mga kakayahan sa AZD.
+> **💡 Tip sa Pagkatuto:** Sundin ang mga ehersisyong ito nang sunod-sunod upang unti-unting buuin ang iyong mga kasanayan sa AZD.
 
 ### 🎯 Ehersisyo 1: I-initialize ang Iyong Unang Proyekto
 
-**Layunin:** Lumikha ng AZD project at siyasatin ang istruktura nito
+**Layunin:** Lumikha ng isang AZD proyekto at alamin ang estruktura nito
 
 **Mga Hakbang:**
 ```bash
 # Gumamit ng napatunayan na template
 azd init --template todo-nodejs-mongo
 
-# Galugarin ang mga nabuo na file
-ls -la  # Tingnan ang lahat ng file kasama ang mga nakatagong file
+# Tuklasin ang mga nabuo na file
+ls -la  # Tingnan ang lahat ng file kasama na ang mga nakatagong file
 
-# Mga pangunahing file na nalikha:
+# Mga pangunahing file na nilikha:
 # - azure.yaml (pangunahing konfigurasyon)
 # - infra/ (kodigo ng imprastruktura)
 # - src/ (kodigo ng aplikasyon)
 ```
 
-**✅ Tagumpay:** Mayroon ka nang azure.yaml, infra/, at src/ na mga direktoryo
+**✅ Tagumpay:** Mayroon kang azure.yaml, infra/, at src/ mga direktoryo
 
 ---
 
 ### 🎯 Ehersisyo 2: I-deploy sa Azure
 
-**Layunin:** Kumpletuhin ang end-to-end na deployment
+**Layunin:** Kumpletuhin ang end-to-end na pag-deploy
 
 **Mga Hakbang:**
 ```bash
-# 1. Mag-authenticate
+# 1. Patunayan ang pagkakakilanlan
 az login && azd auth login
 
 # 2. Lumikha ng kapaligiran
 azd env new dev
 azd env set AZURE_LOCATION eastus
 
-# 3. Tingnan ang mga pagbabago (INIREREKOMENDA)
+# 3. Suriin muna ang mga pagbabago (INIREREKOMENDA)
 azd provision --preview
 
 # 4. I-deploy ang lahat
 azd up
 
-# 5. Suriin ang deployment
-azd show    # Tingnan ang URL ng iyong app
+# 5. Tiyakin ang pag-deploy
+azd show    # 6. Tingnan ang URL ng iyong app
 ```
 
 **Inaasahang Oras:** 10-15 minuto  
-**✅ Tagumpay:** Gumagana ang URL ng application at bumubukas sa browser
+**✅ Tagumpay:** Nagbubukas ang URL ng aplikasyon sa browser
 
 ---
 
-### 🎯 Ehersisyo 3: Maramihang Mga Environment
+### 🎯 Ehersisyo 3: Maramihang Kapaligiran
 
 **Layunin:** Mag-deploy sa dev at staging
 
@@ -458,7 +473,7 @@ azd env list
 azd env select dev
 ```
 
-**✅ Tagumpay:** Dalawang magkahiwalay na resource group sa Azure Portal
+**✅ Tagumpay:** Dalawang hiwalay na resource group sa Azure Portal
 
 ---
 
@@ -471,17 +486,17 @@ azd down --force --purge
 ```
 
 **Ano ang ginagawa nito:**
-- `--force`: Walang mga prompt ng kumpirmasyon
-- `--purge`: Binubura ang lahat ng lokal na estado at mga Azure resource
+- `--force`: Walang mga prompt para sa kumpirmasyon
+- `--purge`: Tinatanggal ang lahat ng lokal na estado at mga Azure resource
 
 **Gamitin kapag:**
-- Nabigo ang deployment sa kalagitnaan
-- Lumilipat ng proyekto
+- Nabigo ang pag-deploy sa gitna
+- Nagpapalit ng mga proyekto
 - Kailangan ng bagong simula
 
 ---
 
-## 🎪 Sanggunian ng Orihinal na Workflow
+## 🎪 Orihinal na Sanggunian ng Workflow
 
 ### Pagsisimula ng Bagong Proyekto
 ```bash
@@ -495,9 +510,9 @@ azd init
 azd init .
 ```
 
-### Sirkulo ng Pag-unlad
+### Siklo ng Pag-develop
 ```bash
-# Ihanda ang kapaligiran ng pag-develop
+# Ihanda ang kapaligiran para sa pag-develop
 azd auth login
 azd env new dev
 azd env select dev
@@ -509,35 +524,35 @@ azd up
 azd deploy
 
 # Linisin kapag tapos na
-azd down --force --purge # Ang command sa Azure Developer CLI ay isang **kompletong pag-reset** para sa iyong kapaligiran—lalo na kapaki-pakinabang kapag nagte-troubleshoot ka ng mga nabigong deployment, nililinis ang mga naiwan na resource, o naghahanda para sa isang bagong redeploy.
+azd down --force --purge # Ang utos sa Azure Developer CLI ay isang **kumpletong pag-reset** para sa iyong kapaligiran—partikular na kapaki-pakinabang kapag nagte-troubleshoot ka ng mga nabigong deployment, nililinis ang mga naiwan na resource, o naghahanda para sa muling pag-deploy.
 ```
 
 ## Pag-unawa sa `azd down --force --purge`
-Ang utos na `azd down --force --purge` ay isang makapangyarihang paraan upang ganap na gibain ang iyong azd environment at lahat ng kaakibat na resources. Narito ang paliwanag kung ano ang ginagawa ng bawat flag:
+Ang utos na `azd down --force --purge` ay isang makapangyarihang paraan upang lubusang buwagin ang iyong azd environment at lahat ng kaugnay na resources. Narito ang paliwanag kung ano ang ginagawa ng bawat flag:
 ```
 --force
 ```
-- Tinalaktakan ang mga prompt ng kumpirmasyon.
-- Kapaki-pakinabang para sa automation o scripting kung saan hindi posible ang manwal na input.
-- Tinitiyak na magpapatuloy ang teardown nang walang patid, kahit na makakita ang CLI ng mga inconsistency.
+- Lumlaktaw sa mga prompt ng kumpirmasyon.
+- Kapaki-pakinabang para sa automation o scripting kung saan hindi praktikal ang manwal na input.
+- Tinitiyak na ang teardown ay nagpapatuloy nang hindi napuputol, kahit na may makita ang CLI na hindi pagkakatugma.
 
 ```
 --purge
 ```
-Binubura **lahat ng kaugnay na metadata**, kasama ang:
-Estado ng environment
+Tinatanggal **lahat ng kaugnay na metadata**, kasama ang:
+Estado ng kapaligiran
 Lokal na `.azure` folder
-Cached deployment info
-Pinipigilan ang azd mula sa "pag-alala" ng mga naunang deployment, na maaaring magdulot ng mga isyu tulad ng hindi tugmang mga resource group o lumang mga reference sa registry.
+Na-cache na impormasyon ng deployment
+Pinipigilan ang azd na "maalala" ang mga naunang pag-deploy, na maaaring magdulot ng mga isyu tulad ng hindi tumutugmang resource group o mga luma/maling sanggunian sa registry.
 
-### Bakit gamitin ang pareho?
-Kapag naharap ka sa hadlang sa `azd up` dahil sa natitirang estado o partial na mga deployment, tinitiyak ng kombinasyong ito ang isang **malinis na simula**.
+### Bakit gamitin pareho?
+Kapag na-stuck ka sa `azd up` dahil sa natitirang estado o partial na mga pag-deploy, tinitiyak ng kombinasyong ito ang isang **malinis na simula**.
 
-Labis itong nakakatulong pagkatapos ng manwal na pagtanggal ng mga resource sa Azure portal o kapag nagpapalit ng mga template, environment, o mga konbensiyon sa pagpe-penomina ng resource group.
+Partikular itong kapaki-pakinabang pagkatapos ng manwal na pagtanggal ng mga resource sa Azure portal o kapag nagpapalit ng mga template, kapaligiran, o mga convention sa pag-name ng resource group.
 
-### Pamamahala ng Maramihang Mga Environment
+### Pamamahala ng Maramihang Kapaligiran
 ```bash
-# Lumikha ng staging na kapaligiran
+# Gumawa ng staging na kapaligiran
 azd env new staging
 azd env select staging
 azd up
@@ -549,59 +564,60 @@ azd env select dev
 azd env list
 ```
 
-## 🔐 Authentication at Mga Kredensyal
+## 🔐 Pag-authenticate at Mga Kredensyal
 
-Mahalaga ang pag-unawa sa authentication para sa matagumpay na mga azd deployment. Gumagamit ang Azure ng maraming paraan ng authentication, at sinasamantala ng azd ang parehong credential chain na ginagamit ng iba pang mga kasangkapan ng Azure.
+Ang pag-unawa sa authentication ay mahalaga para sa matagumpay na pag-deploy gamit ang azd. Gumagamit ang Azure ng maraming paraan ng authentication, at ginagamit ng azd ang parehong credential chain na ginagamit ng iba pang Azure tools.
 
-### Azure CLI Authentication (`az login`)
+### Pag-authenticate gamit ang Azure CLI (`az login`)
 
-Bago gamitin ang azd, kailangan mong mag-authenticate sa Azure. Ang pinaka-karaniwang paraan ay ang paggamit ng Azure CLI:
+Bago gamitin ang azd, kailangan mong mag-authenticate sa Azure. Ang pinakakaraniwang paraan ay ang paggamit ng Azure CLI:
 
 ```bash
-# Interaktibong pag-login (magbubukas ng browser)
+# Interaktibong pag-login (nagbubukas ng browser)
 az login
 
-# Mag-login gamit ang tinukoy na tenant
+# Mag-log in sa isang partikular na tenant
 az login --tenant <tenant-id>
 
-# Mag-login gamit ang service principal
+# Mag-log in gamit ang service principal
 az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
 
-# Tingnan ang kasalukuyang katayuan ng pag-login
+# Suriin ang kasalukuyang status ng pag-login
 az account show
 
-# Ilista ang mga magagamit na subscription
+# Ilista ang mga available na subscription
 az account list --output table
 
 # Itakda ang default na subscription
 az account set --subscription <subscription-id>
 ```
 
-### Daloy ng Authentication
-1. **Interactive Login**: Binubuksan ang iyong default browser para sa authentication
-2. **Device Code Flow**: Para sa mga environment na walang browser access
-3. **Service Principal**: Para sa automation at CI/CD na mga scenario
-4. **Managed Identity**: Para sa mga application na naka-host sa Azure
+### Daloy ng Pag-authenticate
+1. **Interactive Login**: Binubuksan ang iyong default na browser para sa pag-authenticate
+2. **Device Code Flow**: Para sa mga kapaligiran na walang access sa browser
+3. **Service Principal**: Para sa automation at mga senaryo ng CI/CD
+4. **Managed Identity**: Para sa mga aplikasyon na naka-host sa Azure
 
 ### DefaultAzureCredential Chain
 
-Ang `DefaultAzureCredential` ay isang uri ng kredensyal na nagbibigay ng pinasimpleng karanasan sa authentication sa pamamagitan ng awtomatikong pagsubok sa maraming pinanggagalingan ng kredensyal sa isang partikular na pagkakasunod-sunod:
+`DefaultAzureCredential` ay isang uri ng kredensyal na nagbibigay ng pinasimpleng karanasan sa pag-authenticate sa pamamagitan ng awtomatikong pagsubok ng maramihang pinagkukunan ng kredensyal sa isang partikular na pagkakasunod-sunod:
 
-#### Pagkakasunod-sunod ng Credential Chain
+#### Pagkakasunod-sunod ng Kadena ng Kredensyal
 ```mermaid
 graph TD
-    A[DefaultAzureCredential] --> B[Mga Variable ng Kapaligiran]
-    B --> C[Pagkakakilanlan ng Workload]
-    C --> D[Pinamamahalaang Pagkakilanlan]
+    A[Default na Kredensyal ng Azure] --> B[Mga Variable ng Kapaligiran]
+    B --> C[Identidad ng Workload]
+    C --> D[Pinamamahalaang Identidad]
     D --> E[Visual Studio]
     E --> F[Visual Studio Code]
     F --> G[Azure CLI]
     G --> H[Azure PowerShell]
     H --> I[Interaktibong Browser]
 ```
-#### 1. Mga environment variable
+
+#### 1. Mga Environment Variable
 ```bash
-# Itakda ang mga environment variable para sa service principal
+# Itakda ang mga variable ng kapaligiran para sa service principal
 export AZURE_CLIENT_ID="<app-id>"
 export AZURE_CLIENT_SECRET="<password>"
 export AZURE_TENANT_ID="<tenant-id>"
@@ -609,13 +625,13 @@ export AZURE_TENANT_ID="<tenant-id>"
 
 #### 2. Workload Identity (Kubernetes/GitHub Actions)
 Ginagamit nang awtomatiko sa:
-- Azure Kubernetes Service (AKS) na may Workload Identity
-- GitHub Actions na may OIDC federation
+- Azure Kubernetes Service (AKS) with Workload Identity
+- GitHub Actions with OIDC federation
 - Iba pang mga senaryo ng federated identity
 
 #### 3. Managed Identity
 Para sa mga Azure resource tulad ng:
-- Virtual Machines
+- Mga Virtual Machine
 - App Service
 - Azure Functions
 - Container Instances
@@ -623,44 +639,44 @@ Para sa mga Azure resource tulad ng:
 ```bash
 # Suriin kung tumatakbo sa isang Azure resource na may managed identity
 az account show --query "user.type" --output tsv
-# Bumabalik: "servicePrincipal" kung gumagamit ng managed identity
+# Ibinabalik: "servicePrincipal" kung gumagamit ng managed identity
 ```
 
 #### 4. Integrasyon ng Mga Developer Tool
-- **Visual Studio**: Awtomatikong ginagamit ang naka-sign in na account
-- **VS Code**: Ginagamit ang Azure Account extension credentials
-- **Azure CLI**: Ginagamit ang mga kredensyal mula sa `az login` (pinaka-karaniwan para sa lokal na pag-develop)
+- **Visual Studio**: Awtomatikong ginagamit ang naka-sign-in na account
+- **VS Code**: Gumagamit ng mga kredensyal mula sa Azure Account extension
+- **Azure CLI**: Gumagamit ng mga kredensyal mula sa `az login` (pinakakaraniwan para sa lokal na pag-develop)
 
-### AZD Authentication Setup
+### Setup ng Pag-authenticate para sa AZD
 
 ```bash
-# Paraan 1: Gamitin ang Azure CLI (Inirerekomenda para sa pag-develop)
+# Paraan 1: Gumamit ng Azure CLI (Inirerekomenda para sa pag-develop)
 az login
 azd auth login  # Gumagamit ng umiiral na mga kredensyal ng Azure CLI
 
-# Paraan 2: Direktang azd na pagpapatotoo
-azd auth login --use-device-code  # Para sa mga kapaligirang walang GUI
+# Paraan 2: Direktang awtentikasyon ng azd
+azd auth login --use-device-code  # Para sa walang UI na mga kapaligiran
 
-# Paraan 3: Suriin ang katayuan ng pagpapatotoo
+# Paraan 3: Suriin ang katayuan ng awtentikasyon
 azd auth login --check-status
 
-# Paraan 4: Mag-logout at muling magpatotoo
+# Paraan 4: Mag-logout at muling mag-authenticate
 azd auth logout
 azd auth login
 ```
 
-### Pinakamahusay na Kasanayan sa Authentication
+### Pinakamahusay na Kasanayan sa Pag-authenticate
 
 #### Para sa Lokal na Pag-develop
 ```bash
 # 1. Mag-login gamit ang Azure CLI
 az login
 
-# 2. Tiyakin ang tamang subscription
+# 2. Kumpirmahin ang tamang subscription
 az account show
 az account set --subscription "Your Subscription Name"
 
-# 3. Gumamit ng azd gamit ang umiiral na mga kredensyal
+# 3. Gamitin ang azd gamit ang umiiral na mga kredensyal
 azd auth login
 ```
 
@@ -681,14 +697,14 @@ azd auth login
 ```
 
 #### Para sa Mga Production Environment
-- Gumamit ng **Managed Identity** kapag tumatakbo sa mga Azure resource
-- Gumamit ng **Service Principal** para sa mga automation na scenario
-- Iwasang iimbak ang mga kredensyal sa code o mga configuration file
-- Gumamit ng **Azure Key Vault** para sa sensitibong configuration
+- Gumamit ng **Managed Identity** kapag nagpapatakbo sa mga Azure resources
+- Gumamit ng **Service Principal** para sa mga automation na senaryo
+- Iwasang mag-imbak ng mga kredensyal sa code o mga configuration file
+- Gumamit ng **Azure Key Vault** para sa sensitibong konfigurasyon
 
-### Karaniwang Mga Isyu sa Authentication at Mga Solusyon
+### Karaniwang Mga Isyu sa Autentikasyon at mga Solusyon
 
-#### Issue: "No subscription found"
+#### Isyu: "No subscription found"
 ```bash
 # Solusyon: Itakda ang default na subskripsyon
 az account list --output table
@@ -696,26 +712,26 @@ az account set --subscription "<subscription-id>"
 azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 ```
 
-#### Issue: "Insufficient permissions"
+#### Isyu: "Insufficient permissions"
 ```bash
 # Solusyon: Suriin at italaga ang mga kinakailangang tungkulin
 az role assignment list --assignee $(az account show --query user.name --output tsv)
 
-# Mga karaniwang kinakailangang tungkulin:
+# Karaniwang kinakailangang tungkulin:
 # - Contributor (para sa pamamahala ng mga resource)
 # - User Access Administrator (para sa pagtatalaga ng mga tungkulin)
 ```
 
-#### Issue: "Token expired"
+#### Isyu: "Token expired"
 ```bash
-# Solusyon: Muling patunayan ang pagkakakilanlan
+# Solusyon: Muling pagpapatunay ng pagkakakilanlan
 az logout
 az login
 azd auth logout
 azd auth login
 ```
 
-### Authentication sa Iba't Ibang Senaryo
+### Autentikasyon sa Iba't Ibang Mga Senaryo
 
 #### Lokal na Pag-develop
 ```bash
@@ -724,9 +740,9 @@ az login
 azd auth login
 ```
 
-#### Pag-develop ng Team
+#### Pangkatang Pag-develop
 ```bash
-# Gumamit ng tiyak na tenant para sa organisasyon
+# Gumamit ng partikular na tenant para sa organisasyon
 az login --tenant contoso.onmicrosoft.com
 azd auth login
 ```
@@ -744,53 +760,54 @@ azd up
 ```
 
 ### Mga Pagsasaalang-alang sa Seguridad
-1. **Pag-iimbak ng Kredensyal**: Huwag kailanman mag-imbak ng mga kredensyal sa source code
-2. **Limitasyon ng Saklaw**: Gamitin ang prinsipyo ng pinakamababang pribilehiyo para sa mga service principal
-3. **Pag-ikot ng Token**: Palitan nang regular ang mga lihim ng service principal
-4. **Audit Trail**: Subaybayan ang mga aktibidad ng pagpapatotoo at deployment
-5. **Seguridad ng Network**: Gumamit ng mga private endpoint kapag posible
 
-### Pag-troubleshoot ng Pagpapatotoo
+1. **Credential Storage**: Huwag kailanman mag-imbak ng mga kredensyal sa source code
+2. **Scope Limitation**: Gamitin ang prinsipyong least-privilege para sa mga service principal
+3. **Token Rotation**: Regular na i-rotate ang mga secret ng service principal
+4. **Audit Trail**: I-monitor ang mga aktibidad sa autentikasyon at deployment
+5. **Network Security**: Gumamit ng private endpoints kapag posible
+
+### Pag-troubleshoot ng Autentikasyon
 
 ```bash
-# I-debug ang mga isyu sa awtentikasyon
+# I-debug ang mga isyu sa pagpapatotoo
 azd auth login --check-status
 az account show
 az account get-access-token
 
-# Karaniwang mga utos para sa pagsusuri
+# Karaniwang mga utos ng diagnostiko
 whoami                          # Kasalukuyang konteksto ng gumagamit
-az ad signed-in-user show      # Mga detalye ng gumagamit ng Azure AD
+az ad signed-in-user show      # Mga detalye ng gumagamit ng Microsoft Entra ID
 az group list                  # Subukan ang pag-access sa resource
 ```
 
 ## Pag-unawa sa `azd down --force --purge`
 
-### Pagdiskubre
+### Pagtuklas
 ```bash
 azd template list              # Mag-browse ng mga template
 azd template show <template>   # Mga detalye ng template
-azd init --help               # Mga pagpipilian sa inisyalisasyon
+azd init --help               # Mga opsyon sa inisyalisasyon
 ```
 
 ### Pamamahala ng Proyekto
 ```bash
 azd show                     # Pangkalahatang-ideya ng proyekto
-azd env list                # Mga magagamit na kapaligiran at napiling default
+azd env list                # Magagamit na mga kapaligiran at ang napiling default
 azd config show            # Mga setting ng konfigurasyon
 ```
 
-### Pagmamanman
+### Pagmo-monitor
 ```bash
-azd monitor                  # Buksan ang pagmamanman sa Azure portal
+azd monitor                  # Buksan ang monitoring sa Azure portal
 azd monitor --logs           # Tingnan ang mga log ng aplikasyon
 azd monitor --live           # Tingnan ang mga real-time na sukatan
 azd pipeline config          # Itakda ang CI/CD
 ```
 
-## Mga Pinakamahuhusay na Kasanayan
+## Mga Pinakamainam na Kasanayan
 
-### 1. Gumamit ng Makabuluhang Pangalan
+### 1. Gumamit ng Makabuluhang Mga Pangalan
 ```bash
 # Mabuti
 azd env new production-east
@@ -801,84 +818,84 @@ azd env new env1
 azd init --template template1
 ```
 
-### 2. Gamitin ang mga Template
-- Magsimula sa mga umiiral na template
+### 2. Samantalahin ang Mga Template
+- Magsimula sa umiiral na mga template
 - I-customize ayon sa iyong pangangailangan
-- Lumikha ng mga template na muling magagamit para sa iyong organisasyon
+- Gumawa ng mga reusable na template para sa iyong organisasyon
 
-### 3. Pag-iisa ng Kapaligiran
+### 3. Paghiwalay ng Kapaligiran
 - Gumamit ng hiwalay na mga environment para sa dev/staging/prod
-- Huwag kailanman direktang mag-deploy sa production mula sa lokal na makina
-- Gumamit ng CI/CD pipelines para sa mga deployment sa production
+- Huwag mag-deploy nang direkta sa production mula sa lokal na makina
+- Gumamit ng CI/CD pipelines para sa mga production deployment
 
 ### 4. Pamamahala ng Konfigurasyon
-- Gumamit ng mga environment variable para sa sensitibong data
-- Ilagay ang konfigurasyon sa version control
-- I-dokumento ang mga setting na partikular sa environment
+- Gumamit ng environment variables para sa sensitibong datos
+- Panatilihin ang konfigurasyon sa version control
+- I-dokumento ang environment-specific na mga setting
 
-## Pag-unlad ng Pagkatuto
+## Pag-unlad sa Pagkatuto
 
 ### Nagsisimula (Linggo 1-2)
 1. I-install ang azd at mag-authenticate
 2. I-deploy ang isang simpleng template
-3. Unawain ang istraktura ng proyekto
-4. Matutunan ang mga pangunahing utos (up, down, deploy)
+3. Unawain ang estruktura ng proyekto
+4. Matutunan ang mga pangunahing command (up, down, deploy)
 
-### Katamtaman (Linggo 3-4)
+### Intermediate (Linggo 3-4)
 1. I-customize ang mga template
-2. Pamahalaan ang maraming environment
-3. Unawain ang kodigo ng imprastruktura
-4. I-set up ang CI/CD pipelines
+2. Pamahalaan ang maraming mga environment
+3. Unawain ang infrastructure code
+4. Mag-setup ng CI/CD pipelines
 
 ### Advanced (Linggo 5+)
-1. Lumikha ng custom na mga template
-2. Mga advanced na pattern ng imprastruktura
+1. Lumikha ng mga custom na template
+2. Advanced na mga pattern ng imprastruktura
 3. Mga deployment sa maraming rehiyon
-4. Mga konfigurasyong pang-enterprise
+4. Enterprise-grade na mga konfigurasyon
 
 ## Mga Susunod na Hakbang
 
-**📖 Ipagpatuloy ang Pag-aaral ng Kabanata 1:**
-- [Pag-install at Pag-setup](installation.md) - I-install at i-configure ang azd
-- [Ang Iyong Unang Proyekto](first-project.md) - Kumpletuhin ang praktikal na tutorial
-- [Gabay sa Konfigurasyon](configuration.md) - Mga advanced na opsyon sa konfigurasyon
+**📖 Ipagpatuloy ang Kabanata 1 na Pag-aaral:**
+- [Installation & Setup](installation.md) - I-install at i-configure ang azd
+- [Your First Project](first-project.md) - Kumpletuhin ang hands-on na tutorial
+- [Configuration Guide](configuration.md) - Mga advanced na opsyon sa konfigurasyon
 
-**🎯 Handa na ba para sa Susunod na Kabanata?**
-- [Kabanata 2: Pag-develop na Nakauna ang AI](../chapter-02-ai-development/microsoft-foundry-integration.md) - Simulan ang paggawa ng mga aplikasyon ng AI
+**🎯 Handa na para sa Susunod na Kabanata?**
+- [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md) - Magsimulang bumuo ng mga AI application
 
 ## Karagdagang Mga Mapagkukunan
 
-- [Pangkalahatang-ideya ng Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Galeria ng Template](https://azure.github.io/awesome-azd/)
-- [Mga Sample ng Komunidad](https://github.com/Azure-Samples)
+- [Azure Developer CLI Overview](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Template Gallery](https://azure.github.io/awesome-azd/)
+- [Community Samples](https://github.com/Azure-Samples)
 
 ---
 
-## 🙋 Mga Madalas na Tanong
+## 🙋 Madalas na Itanong
 
-### Pangkalahatang Mga Tanong
+### Mga Pangkalahatang Tanong
 
 **Q: Ano ang pagkakaiba ng AZD at Azure CLI?**
 
-A: Ang Azure CLI (`az`) ay para sa pamamahala ng indibidwal na mga resource ng Azure. Ang AZD (`azd`) ay para sa pamamahala ng buong mga aplikasyon:
+A: Ang Azure CLI (`az`) ay para sa pamamahala ng mga indibidwal na Azure resources. Ang AZD (`azd`) ay para sa pamamahala ng buong mga application:
 
 ```bash
-# Azure CLI - Mababang antas na pamamahala ng mga resource
+# Azure CLI - Mababang antas na pamamahala ng mga mapagkukunan
 az webapp create --name myapp --resource-group rg
 az sql server create --name myserver --resource-group rg
 # ...kailangan pa ng maraming utos
 
 # AZD - Pamamahala sa antas ng aplikasyon
-azd up  # Ina-deploy ang buong app kasama ang lahat ng mga resource
+azd up  # Inilulunsad ang buong aplikasyon kasama ang lahat ng mga mapagkukunan
 ```
 
-**Isipin ito sa ganitong paraan:**
-- `az` = Gumagawa sa mga indibidwal na piraso ng Lego
-- `azd` = Gumagamit ng kumpletong set ng Lego
+**Isipin mo ito sa ganitong paraan:**
+- `az` = Pag-ooperate sa mga indibidwal na Lego bricks
+- `azd` = Pagtatrabaho sa kumpletong mga Lego set
 
 ---
 
-**Q: Kailangan ko bang malaman ang Bicep o Terraform para gamitin ang AZD?**
+**Q: Kailangan ko bang marunong ng Bicep o Terraform para gumamit ng AZD?**
 
 A: Hindi! Magsimula sa mga template:
 ```bash
@@ -887,52 +904,52 @@ azd init --template todo-nodejs-mongo
 azd up
 ```
 
-Maaari mong pag-aralan ang Bicep mamaya para i-customize ang imprastruktura. Nagbibigay ang mga template ng mga gumaganang halimbawa na mapag-aaralan.
+Maaari kang matuto ng Bicep mamaya para i-customize ang imprastruktura. Nagbibigay ang mga template ng gumaganang mga halimbawa na mapag-aaralan.
 
 ---
 
-**Q: Magkano ang gastos sa pagpapatakbo ng mga template ng AZD?**
+**Q: Magkano ang gastos ng pagpapatakbo ng mga AZD template?**
 
-A: Nag-iiba ang gastos depende sa template. Karamihan sa mga development template ay nagkakahalaga ng $50-150/buwan:
+A: Nagkakaiba ang gastos ayon sa template. Karamihan sa mga development template ay nagkakahalaga ng $50-150/buwan:
 
 ```bash
-# Tingnan muna ang mga gastos bago i-deploy
+# I-preview ang mga gastos bago mag-deploy
 azd provision --preview
 
-# Laging maglinis kapag hindi ginagamit
-azd down --force --purge  # Inaalis ang lahat ng mga resource
+# Laging linisin kapag hindi ginagamit
+azd down --force --purge  # Tinatanggal ang lahat ng mga resource
 ```
 
-**Pro tip:** Gumamit ng mga libreng tier kung mayroon:
+**Pro tip:** Gumamit ng mga free tier kung available:
 - App Service: F1 (Free) tier
 - Microsoft Foundry Models: Azure OpenAI 50,000 tokens/month free
 - Cosmos DB: 1000 RU/s free tier
 
 ---
 
-**Q: Maaari ko bang gamitin ang AZD sa umiiral na mga resource ng Azure?**
+**Q: Maaari ko bang gamitin ang AZD sa umiiral na Azure resources?**
 
-A: Oo, pero mas madali magsimula ng bago. Mas mahusay gumagana ang AZD kapag ito ang nagmamanage ng buong lifecycle. Para sa umiiral na mga resource:
+A: Oo, ngunit mas madali magsimula mula sa simula. Pinakamainam ang AZD kapag pinamamahalaan nito ang buong lifecycle. Para sa umiiral na resources:
 
 ```bash
-# Opsyon 1: I-import ang mga umiiral na mapagkukunan (para sa may karanasan)
+# Opsyon 1: I-import ang umiiral na mga mapagkukunan (avansado)
 azd init
-# Pagkatapos, baguhin ang infra/ upang sumangguni sa umiiral na mga mapagkukunan
+# Pagkatapos, baguhin ang infra/ upang tumukoy sa umiiral na mga mapagkukunan
 
-# Opsyon 2: Magsimula mula sa simula (inirerekomenda)
+# Opsyon 2: Magsimula muli (inirerekomenda)
 azd init --template matching-your-stack
 azd up  # Lumilikha ng bagong kapaligiran
 ```
 
 ---
 
-**Q: Paano ko ibabahagi ang aking proyekto sa mga kasama sa koponan?**
+**Q: Paano ko ibabahagi ang aking proyekto sa mga kasamahan?**
 
-A: I-commit ang proyekto ng AZD sa Git (ngunit HUWAG ang .azure folder):
+A: I-commit ang AZD project sa Git (ngunit HUWAG ang .azure folder):
 
 ```bash
-# Nasa .gitignore na bilang default
-.azure/        # Naglalaman ng mga lihim at data ng kapaligiran
+# Kasama na sa .gitignore bilang default
+.azure/        # Naglalaman ng mga lihim at datos ng kapaligiran
 *.env          # Mga variable ng kapaligiran
 
 # Mga miyembro ng koponan noon:
@@ -942,27 +959,27 @@ azd env new <their-name>-dev
 azd up
 ```
 
-Lahat ay makakatanggap ng magkatulad na imprastruktura mula sa parehong mga template.
+Lahat ay makakakuha ng identikal na imprastruktura mula sa parehong mga template.
 
 ---
 
 ### Mga Tanong sa Pag-troubleshoot
 
-**Q: "azd up" failed halfway. What do I do?**
+**Q: Nabigo ang "azd up" habang nasa kalagitnaan. Ano ang gagawin ko?**
 
-A: Suriin ang error, ayusin ito, pagkatapos subukang muli:
+A: Suriin ang error, ayusin ito, saka ulitin:
 
 ```bash
-# Tingnan ang mga detalyadong log
+# Tingnan ang detalyadong mga log
 azd show
 
-# Mga karaniwang pag-aayos:
+# Karaniwang pag-aayos:
 
-# 1. Kung lumampas ang quota:
+# 1. Kung lumagpas ang quota:
 azd env set AZURE_LOCATION "westus2"  # Subukan ang ibang rehiyon
 
-# 2. Kung may salungatan sa pangalan ng resource:
-azd down --force --purge  # Magsimula muli
+# 2. Kung may konflikto sa pangalan ng resource:
+azd down --force --purge  # Magsimula mula sa simula
 azd up  # Subukan muli
 
 # 3. Kung nag-expire ang awtentikasyon:
@@ -971,7 +988,7 @@ azd auth login
 azd up
 ```
 
-**Pinakamadalas na isyu:** Napiling maling Azure subscription
+**Karamihang sanhi:** Mali ang napiling Azure subscription
 ```bash
 az account list --output table
 az account set --subscription "<correct-subscription>"
@@ -979,25 +996,25 @@ az account set --subscription "<correct-subscription>"
 
 ---
 
-**Q: Paano ko i-de-deploy lamang ang mga pagbabago sa code nang hindi nire-reprovision?**
+**Q: Paano ko ide-deploy ang mga pagbabago sa code nang hindi nire-reprovision?**
 
-A: Gumamit ng `azd deploy` sa halip na `azd up`:
+A: Gamitin ang `azd deploy` sa halip na `azd up`:
 
 ```bash
-azd up          # Sa unang pagkakataon: maglaan ng mga resources at mag-deploy (mabagal)
+azd up          # Unang beses: maghanda ng mga resources at ilunsad (mabagal)
 
 # Gumawa ng mga pagbabago sa code...
 
-azd deploy      # Sa mga susunod na pagkakataon: mag-deploy lamang (mabilis)
+azd deploy      # Sa mga sumunod na pagkakataon: ilunsad lamang (mabilis)
 ```
 
 Paghahambing ng bilis:
 - `azd up`: 10-15 minuto (nagpo-provision ng imprastruktura)
-- `azd deploy`: 2-5 minuto (code lang)
+- `azd deploy`: 2-5 minuto (code lamang)
 
 ---
 
-**Q: Maaari ko bang i-customize ang mga template ng imprastruktura?**
+**Q: Maaari ko bang i-customize ang mga infrastructure template?**
 
 A: Oo! I-edit ang mga Bicep file sa `infra/`:
 
@@ -1006,14 +1023,14 @@ A: Oo! I-edit ang mga Bicep file sa `infra/`:
 cd infra/
 code main.bicep  # I-edit sa VS Code
 
-# I-preview ang mga pagbabago
+# Tingnan ang mga pagbabago
 azd provision --preview
 
-# I-apply ang mga pagbabago
+# Ilapat ang mga pagbabago
 azd provision
 ```
 
-**Tip:** Magsimula sa maliit - baguhin muna ang mga SKU:
+**Tip:** Magsimula sa maliit - palitan muna ang mga SKU:
 ```bicep
 // infra/main.bicep
 sku: {
@@ -1025,30 +1042,30 @@ sku: {
 
 **Q: Paano ko buburahin ang lahat ng nilikha ng AZD?**
 
-A: Isang utos ang mag-aalis ng lahat ng resource:
+A: Isang command ang nag-aalis ng lahat ng resources:
 
 ```bash
 azd down --force --purge
 
-# Binubura nito:
-# - Lahat ng mga Azure resources
-# - Grupo ng resource
+# Tinatanggal nito:
+# - Lahat ng mga Azure na resource
+# - Grupo ng mga resource
 # - Lokal na estado ng kapaligiran
-# - Naka-cache na datos ng deployment
+# - Na-cache na data ng pag-deploy
 ```
 
-**Palaging patakbuhin ito kapag:**
-- Natapos na ang pag-test ng isang template
+**Laging patakbuhin ito kapag:**
+- Tapos na ang pag-test ng isang template
 - Lumilipat sa ibang proyekto
 - Nais magsimula mula sa simula
 
-**Tipid sa gastos:** Ang pagbura ng hindi ginagamit na mga resource = $0 singil
+**Pagtitipid sa gastos:** Ang pagtanggal ng hindi ginagamit na resources = $0 charge
 
 ---
 
-**Q: Paano kung aksidenteng nabura ko ang mga resource sa Azure Portal?**
+**Q: Ano ang gagawin ko kung aksidenteng nabura ko ang mga resources sa Azure Portal?**
 
-A: Maaaring mag-out of sync ang estado ng AZD. Para sa malinis na simula:
+A: Maaaring magkaiba ang estado ng AZD. Para sa malinis na simula:
 
 ```bash
 # 1. Alisin ang lokal na estado
@@ -1057,8 +1074,8 @@ azd down --force --purge
 # 2. Magsimula muli
 azd up
 
-# Alternatibo: Hayaan ang AZD na tuklasin at ayusin
-azd provision  # Lilikha ng mga nawawalang resources
+# Alternatibo: Hayaan ang AZD tuklasin at ayusin
+azd provision  # Lilikha ng mga nawawalang resource
 ```
 
 ---
@@ -1067,7 +1084,7 @@ azd provision  # Lilikha ng mga nawawalang resources
 
 **Q: Maaari ko bang gamitin ang AZD sa CI/CD pipelines?**
 
-A: Oo! Halimbawa sa GitHub Actions:
+A: Oo! Halimbawa para sa GitHub Actions:
 
 ```yaml
 # .github/workflows/deploy.yml
@@ -1101,29 +1118,29 @@ jobs:
 
 **Q: Paano ko hinahandle ang mga secret at sensitibong data?**
 
-A: Ang AZD ay may integrasyon sa Azure Key Vault nang awtomatiko:
+A: Ang AZD ay nag-iintegrate sa Azure Key Vault nang awtomatiko:
 
 ```bash
-# Ang mga lihim ay naka-imbak sa Key Vault, hindi sa code
+# Ang mga lihim ay nakaimbak sa Key Vault, hindi sa code
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)"
 
 # Awtomatikong ginagawa ng AZD:
 # 1. Lumilikha ng Key Vault
 # 2. Nag-iimbak ng lihim
-# 3. Nagbibigay ng access sa app sa pamamagitan ng Managed Identity
+# 3. Nagbibigay sa app ng access sa pamamagitan ng Managed Identity
 # 4. Ini-inject sa runtime
 ```
 
 **Huwag kailanman i-commit:**
 - `.azure/` folder (naglalaman ng environment data)
-- `.env` files (lokal na mga lihim)
-- Mga connection string
+- `.env` files (mga lokal na secret)
+- Connection strings
 
 ---
 
 **Q: Maaari ba akong mag-deploy sa maraming rehiyon?**
 
-A: Oo, lumikha ng environment para sa bawat rehiyon:
+A: Oo, gumawa ng environment bawat rehiyon:
 
 ```bash
 # Kapaligiran ng Silangang Estados Unidos
@@ -1136,21 +1153,21 @@ azd env new prod-westeurope
 azd env set AZURE_LOCATION westeurope
 azd up
 
-# Ang bawat kapaligiran ay independiyente
+# Bawat kapaligiran ay independiyente
 azd env list
 ```
 
-Para sa totoong multi-region na app, i-customize ang mga Bicep template upang mag-deploy sa maraming rehiyon nang sabay-sabay.
+Para sa totoong multi-region apps, i-customize ang mga Bicep template upang mag-deploy sa maraming rehiyon nang sabay-sabay.
 
 ---
 
-**Q: Saan ako makakakuha ng tulong kung ako'y natigil?**
+**Q: Saan ako maaaring humingi ng tulong kung ako'y na-stuck?**
 
-1. **Dokumentasyon ng AZD:** https://learn.microsoft.com/azure/developer/azure-developer-cli/
-2. **Mga Isyu sa GitHub:** https://github.com/Azure/azure-dev/issues
-3. **Discord:** [Discord ng Azure](https://discord.gg/microsoft-azure) - channel na #azure-developer-cli
+1. **AZD Documentation:** https://learn.microsoft.com/azure/developer/azure-developer-cli/
+2. **GitHub Issues:** https://github.com/Azure/azure-dev/issues
+3. **Discord:** [Azure Discord](https://discord.gg/microsoft-azure) - #azure-developer-cli channel
 4. **Stack Overflow:** Tag `azure-developer-cli`
-5. **Ang Kurso na ito:** [Gabay sa Pag-troubleshoot](../chapter-07-troubleshooting/common-issues.md)
+5. **This Course:** [Troubleshooting Guide](../chapter-07-troubleshooting/common-issues.md)
 
 **Pro tip:** Bago magtanong, patakbuhin:
 ```bash
@@ -1166,32 +1183,32 @@ Isama ang impormasyong ito sa iyong tanong para sa mas mabilis na tulong.
 Nauunawaan mo na ang mga pundasyon ng AZD. Piliin ang iyong landas:
 
 ### 🎯 Para sa Mga Nagsisimula:
-1. **Susunod:** [Pag-install at Pag-setup](installation.md) - I-install ang AZD sa iyong makina
-2. **Pagkatapos:** [Ang Iyong Unang Proyekto](first-project.md) - I-deploy ang iyong unang app
-3. **Magsanay:** Kumpletuhin ang lahat ng 3 pagsasanay sa araling ito
+1. **Susunod:** [Installation & Setup](installation.md) - I-install ang AZD sa iyong makina
+2. **Sunod:** [Your First Project](first-project.md) - I-deploy ang iyong unang app
+3. **Magpraktis:** Kumpletuhin ang lahat ng 3 ehersisyo sa leksyong ito
 
-### 🚀 Para sa Mga Developer ng AI:
-1. **Laktawan patungo sa:** [Kabanata 2: Pag-develop na Nakauna ang AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+### 🚀 Para sa Mga AI Developer:
+1. **Laktawan sa:** [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 2. **I-deploy:** Magsimula sa `azd init --template get-started-with-ai-chat`
-3. **Matuto:** Bumuo habang nagde-deploy ka
+3. **Matuto:** Bumuo habang nagde-deploy
 
-### 🏗️ Para sa Mga Naghahasa na Developer:
-1. **Balikan:** [Gabay sa Konfigurasyon](configuration.md) - Mga advanced na setting
-2. **Siyasatin:** [Infrastructure as Code](../chapter-04-infrastructure/provisioning.md) - Malalim na pagtalakay sa Bicep
-3. **Bumuo:** Lumikha ng custom na mga template para sa iyong stack
+### 🏗️ Para sa Mga May Karanasang Developer:
+1. **Suriin:** [Configuration Guide](configuration.md) - Mga advanced na setting
+2. **I-explore:** [Infrastructure as Code](../chapter-04-infrastructure/provisioning.md) - Malalim sa Bicep
+3. **Bumuo:** Lumikha ng mga custom na template para sa iyong stack
 
 ---
 
-**Pag-navigate ng Kabanata:**
-- **📚 Course Home**: [AZD Para sa Mga Nagsisimula](../../README.md)
-- **📖 Kasalukuyang Kabanata**: Kabanata 1 - Pundasyon at Mabilis na Pagsisimula  
-- **⬅️ Nakaraan**: [Pangkalahatang-ideya ng Kurso](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Susunod**: [Pag-install at Pag-setup](installation.md)
-- **🚀 Next Chapter**: [Kabanata 2: Pag-develop na Nakauna ang AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Pag-navigate sa Kabanata:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 1 - Foundation & Quick Start  
+- **⬅️ Nakaraan**: [Course Overview](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Susunod**: [Installation & Setup](installation.md)
+- **🚀 Susunod na Kabanata**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Paunawa**:
-Isinalin ang dokumentong ito gamit ang serbisyong pagsasalin ng AI [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa katumpakan, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o di-katumpakan. Ang orihinal na dokumento sa katutubong wika nito ang dapat ituring na awtoritatibong sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasaling-tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
+**Pagtatanggi**:
+Ang dokumentong ito ay isinalin gamit ang serbisyo ng AI translation na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't nagsusumikap kami para sa katumpakan, pakatandaan na ang awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na pangunahing sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang maling pagkakaintindi o maling interpretasyon na nagmula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

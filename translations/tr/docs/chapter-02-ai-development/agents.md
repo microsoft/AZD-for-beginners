@@ -1,42 +1,42 @@
-# AI Agents with Azure Developer CLI
+# AI Ajanları ile Azure Developer CLI
 
-**Bölüm Gezinimi:**
-- **📚 Ders Anasayfası**: [AZD For Beginners](../../README.md)
-- **📖 Mevcut Bölüm**: Bölüm 2 - AI-First Development
-- **⬅️ Önceki**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Sonraki**: [AI Model Deployment](ai-model-deployment.md)
-- **🚀 İleri Düzey**: [Multi-Agent Solutions](../../examples/retail-scenario.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD Yeni Başlayanlar](../../README.md)
+- **📖 Current Chapter**: Bölüm 2 - AI-İlk Geliştirme
+- **⬅️ Previous**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ Next**: [AI Model Deployment](ai-model-deployment.md)
+- **🚀 Advanced**: [Multi-Agent Solutions](../../examples/retail-scenario.md)
 
 ---
 
 ## Giriş
 
-AI ajanlar, çevrelerini algılayabilen, kararlar alabilen ve belirli hedeflere ulaşmak için eylemler gerçekleştirebilen otonom programlardır. İsteklere yanıt veren basit sohbet botlarının aksine, ajanlar:
+AI ajanları, çevrelerini algılayabilen, karar verebilen ve belirli hedeflere ulaşmak için eylemler gerçekleştirebilen otonom programlardır. İstemlere yanıt veren basit sohbet botlarının aksine, ajanlar:
 
-- **Araç kullanır** - API'leri çağırır, veritabanlarında arama yapar, kod yürütür
-- **Planlama ve muhakeme yapar** - Karmaşık görevleri adımlara böler
-- **Bağlamdan öğrenir** - Bellek tutar ve davranışı uyarlayabilir
-- **İşbirliği yapar** - Diğer ajanlarla (çok ajanlı sistemler) çalışabilir
+- **Araç kullanır** - API çağırma, veritabanı arama, kod çalıştırma
+- **Plan yapar ve muhakeme eder** - Karmaşık görevleri adımlara böler
+- **Bağlamdan öğrenir** - Bellek tutar ve davranışı uyarlır
+- **İşbirliği yapar** - Diğer ajanlarla birlikte çalışır (çok ajanlı sistemler)
 
-Bu rehber, Azure Developer CLI (azd) kullanarak AI ajanlarını Azure'a nasıl dağıtacağınızı gösterir.
+Bu kılavuz, Azure Developer CLI (azd) kullanarak AI ajanlarını Azure'a nasıl dağıtacağınızı gösterir.
 
-> **Doğrulama notu (2026-03-25):** Bu rehber `azd` `1.23.12` ve `azure.ai.agents` `0.1.18-preview` ile gözden geçirilmiştir. `azd ai` deneyimi hâlâ önizleme odaklıdır, bu yüzden yüklü uzantı bayraklarınız farklıysa uzantı yardımını kontrol edin.
+> **Doğrulama notu (2026-03-25):** Bu kılavuz `azd` `1.23.12` ve `azure.ai.agents` `0.1.18-preview` ile gözden geçirildi. `azd ai` deneyimi hâlâ önizleme odaklıdır, bu nedenle yüklü uzantı bayraklarınız farklıysa uzantı yardımını kontrol edin.
 
 ## Öğrenme Hedefleri
 
-Bu rehberi tamamlayarak:
-- AI ajanlarının ne olduğunu ve sohbet botlarından nasıl farklılaştığını anlayacaksınız
-- AZD kullanarak önceden hazırlanmış AI ajan şablonlarını dağıtacaksınız
-- Özel ajanlar için Foundry Ajanlarını yapılandıracaksınız
-- Temel ajan kalıplarını (araç kullanımı, RAG, çok ajanlı) uygulayacaksınız
-- Dağıtılan ajanları izlemeyi ve hata ayıklamayı öğreneceksiniz
+Bu kılavuzu tamamlayarak şunları yapabileceksiniz:
+- AI ajanlarının ne olduğunu ve sohbet botlarından nasıl farklılaştığını anlamak
+- AZD kullanarak önceden hazırlanmış AI ajan şablonlarını dağıtmak
+- Özel ajanlar için Foundry Ajanlarını yapılandırmak
+- Temel ajan desenlerini uygulamak (araç kullanımı, RAG, çok ajanlı)
+- Dağıtılan ajanları izlemek ve hata ayıklamak
 
-## Öğrenme Çıktıları
+## Öğrenim Çıktıları
 
-Tamamlandığında şunları yapabileceksiniz:
-- Tek bir komutla AI ajan uygulamalarını Azure'a dağıtmak
+Tamamlandığında, şunları yapabileceksiniz:
+- Tek bir komutla Azure'a AI ajan uygulamaları dağıtmak
 - Ajan araçlarını ve yeteneklerini yapılandırmak
-- Ajanlarla retrieval-augmented generation (RAG) uygulamak
+- Ajanlarla birlikte retrieval-augmented generation (RAG) uygulamak
 - Karmaşık iş akışları için çok ajanlı mimariler tasarlamak
 - Yaygın ajan dağıtım sorunlarını gidermek
 
@@ -44,24 +44,24 @@ Tamamlandığında şunları yapabileceksiniz:
 
 ## 🤖 Bir Ajanı Sohbet Botundan Farklı Kılan Nedir?
 
-| Özellik | Sohbet Botu | Yapay Zeka Ajanı |
-|---------|-------------|------------------|
-| **Davranış** | İsteklere yanıt verir | Otonom eylemler gerçekleştirir |
+| Özellik | Sohbet Botu | AI Ajanı |
+|---------|-------------|----------|
+| **Davranış** | İstemlere yanıt verir | Otonom eylemler gerçekleştirir |
 | **Araçlar** | Yok | API çağırabilir, arama yapabilir, kod çalıştırabilir |
-| **Bellek** | Yalnızca oturum bazlı | Oturumlar arasında kalıcı bellek |
+| **Bellek** | Sadece oturum bazlı | Oturumlar arasında kalıcı bellek |
 | **Planlama** | Tek yanıt | Çok adımlı muhakeme |
 | **İşbirliği** | Tek bir varlık | Diğer ajanlarla çalışabilir |
 
 ### Basit Benzetme
 
-- **Sohbet Botu** = Bilgi masasında soruları yanıtlayan yardımsever bir kişi
-- **Yapay Zeka Ajanı** = Sizin için arama yapan, randevu ayarlayan ve görevleri tamamlayabilen kişisel asistan
+- **Sohbet Botu** = Bilgi masasında soruları cevaplayan yardımsever bir görevli
+- **AI Ajanı** = Sizin için arama yapabilen, randevu ayarlayabilen ve görevleri tamamlayabilen kişisel asistan
 
 ---
 
 ## 🚀 Hızlı Başlangıç: İlk Ajanınızı Dağıtın
 
-### Seçenek 1: Foundry Agents Şablonu (Önerilen)
+### Seçenek 1: Foundry Agents Şablonu (Önerilir)
 
 ```bash
 # Yapay zeka ajanları şablonunu başlat
@@ -71,7 +71,7 @@ azd init --template get-started-with-ai-agents
 azd up
 ```
 
-**Dağıtılanlar:**
+**Ne dağıtılıyor:**
 - ✅ Foundry Agents
 - ✅ Microsoft Foundry Models (gpt-4.1)
 - ✅ Azure AI Search (RAG için)
@@ -91,8 +91,8 @@ azd init --template agent-openai-python-prompty
 azd up
 ```
 
-**Dağıtılanlar:**
-- ✅ Azure Functions (serverless ajan yürütme)
+**Ne dağıtılıyor:**
+- ✅ Azure Functions (sunucusuz ajan yürütme)
 - ✅ Microsoft Foundry Models
 - ✅ Prompty yapılandırma dosyaları
 - ✅ Örnek ajan uygulaması
@@ -103,56 +103,61 @@ azd up
 ### Seçenek 3: RAG Sohbet Ajanı
 
 ```bash
-# RAG sohbet şablonunu başlat
+# RAG sohbet şablonunu başlatın
 azd init --template azure-search-openai-demo
 
-# Azure'a dağıt
+# Azure'a dağıtın
 azd up
 ```
 
-**Dağıtılanlar:**
+**Ne dağıtılıyor:**
 - ✅ Microsoft Foundry Models
 - ✅ Örnek verilerle Azure AI Search
-- ✅ Doküman işleme hattı
-- ✅ Atıflı sohbet arayüzü
+- ✅ Belge işleme hattı
+- ✅ Atıflarla sohbet arayüzü
 
 **Süre:** ~15-25 dakika
 **Maliyet:** ~$80-150/ay (geliştirme)
 
 ### Seçenek 4: AZD AI Agent Init (Manifest- veya Şablon Tabanlı Önizleme)
 
-Bir ajan manifest dosyanız varsa, `azd ai` komutunu kullanarak doğrudan bir Foundry Agent Service proje taslağı oluşturabilirsiniz. Son önizleme sürümleri ayrıca şablon tabanlı başlatma desteği ekledi, bu nedenle tam istem akışı yüklü uzantı sürümünüze bağlı olarak biraz farklı olabilir.
+Ajan manifest dosyanız varsa, `azd ai` komutunu kullanarak doğrudan Foundry Agent Service projesi oluşturabilirsiniz. Son önizleme sürümleri ayrıca şablon tabanlı başlatma desteği ekledi, bu nedenle tam istem akışı yüklü uzantı sürümünüze bağlı olarak biraz farklı olabilir.
 
 ```bash
-# AI ajanları uzantısını yükle
+# AI ajanları uzantısını yükleyin
 azd extension install azure.ai.agents
 
-# İsteğe bağlı: yüklü önizleme sürümünü doğrula
+# İsteğe bağlı: yüklü önizleme sürümünü doğrulayın
 azd extension show azure.ai.agents
 
-# Bir ajan manifestinden başlat
+# Ajan manifestinden başlatın
 azd ai agent init -m agent-manifest.yaml
 
-# Azure'a dağıt
+# Azure'a dağıtın
 azd up
+
+# Dağıtılan ajanı test edin (gecikmeyi ve ilk bayta ulaşma süresini gösterir)
+azd ai agent invoke
 ```
 
-**`azd ai agent init` ile `azd init --template` ne zaman kullanılır:**
+**Ne zaman `azd ai agent init` vs `azd init --template` kullanmalı:**
 
 | Yaklaşım | En İyi Kullanım | Nasıl Çalışır |
 |----------|-----------------|---------------|
-| `azd init --template` | Çalışan bir örnek uygulamadan başlarken | Kod + altyapı içeren tam bir şablon deposunu klonlar |
-| `azd ai agent init -m` | Kendi ajan manifestinizden oluştururken | Ajan tanımınızdan proje yapısını taslaklandırır |
+| `azd init --template` | Çalışan bir örnek uygulamadan başlamak | Kod + altyapı ile tam bir şablon deposunu klonlar |
+| `azd ai agent init -m` | Kendi ajan manifestinizden oluşturma | Ajan tanımınızdan proje yapısını iskeletler |
 
-> **İpucu:** Öğrenirken (yukarıdaki Seçenek 1-3) `azd init --template` kullanın. Kendi manifestlerinizle üretim ajanları oluştururken `azd ai agent init` kullanın. Tam referans için [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) bakınız.
+> **İpucu:** Öğrenirken (yukarıdaki Seçenekler 1-3) `azd init --template` kullanın. Kendi manifestlerinizle üretim ajanları oluştururken `azd ai agent init` kullanın.
+
+`azd up` sonrası, aynı uzantı ajan yaşam döngüsünün geri kalanında size rehberlik eder: test için `azd ai agent invoke`, kaliteyi ölçüp geliştirmek için `azd ai agent eval generate` ve `azd ai agent optimize`, ve temizlik için `azd ai agent delete`. Tam referans için bkz. [AZD AI CLI Komutları](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
 
 ---
 
-## 🏗️ Ajan Mimari Kalıpları
+## 🏗️ Ajan Mimari Desenleri
 
-### Kalıp 1: Araçlara Sahip Tek Ajan
+### Desen 1: Araçlara Sahip Tek Ajan
 
-En basit ajan kalıbı - birden fazla araç kullanabilen tek bir ajan.
+En basit ajan deseni - birden fazla aracı kullanabilen tek bir ajan.
 
 ```mermaid
 graph TD
@@ -161,43 +166,46 @@ graph TD
     Agent --> Database[Veritabanı Aracı]
     Agent --> API[API Aracı]
 ```
-**En iyi kullanım:**
+
+**En uygun kullanım:**
 - Müşteri destek botları
 - Araştırma asistanları
-- Veri analiz ajanları
+- Veri analizi ajanları
 
 **AZD Şablonu:** `azure-search-openai-demo`
 
-### Kalıp 2: RAG Ajanı (Retrieval-Augmented Generation)
+### Desen 2: RAG Ajanı (Retrieval-Augmented Generation)
 
-Yanıt üretmeden önce ilgili belgeleri getiren bir ajan.
+Cevap üretmeden önce ilgili belgeleri getiren bir ajan.
 
 ```mermaid
 graph TD
     Query[Kullanıcı Sorgusu] --> RAG[RAG Ajanı]
-    RAG --> Vector[Vektör Araması]
-    RAG --> LLM[Büyük Dil Modeli<br/>gpt-4.1]
+    RAG --> Vector[Vektör Arama]
+    RAG --> LLM[LLM<br/>gpt-4.1]
     Vector -- Belgeler --> LLM
-    LLM --> Response[Atıflarla Yanıt]
+    LLM --> Response[Kaynaklarla Yanıt]
 ```
-**En iyi kullanım:**
+
+**En uygun kullanım:**
 - Kurumsal bilgi tabanları
-- Doküman SSS sistemleri
-- Uyumluluk ve hukuki araştırma
+- Belge SSS sistemleri
+- Uyumluluk ve hukuk araştırmaları
 
 **AZD Şablonu:** `azure-search-openai-demo`
 
-### Kalıp 3: Çok Ajanlı Sistem
+### Desen 3: Çok Ajanlı Sistem
 
-Birden fazla uzmanlaşmış ajanın karmaşık görevlerde birlikte çalışması.
+Karmaşık görevlerde birlikte çalışan birden fazla uzman ajan.
 
 ```mermaid
 graph TD
-    Orchestrator[Orkestratör Ajanı] --> Research[Araştırma Ajanı<br/>gpt-4.1]
-    Orchestrator --> Writer[Yazar Ajanı<br/>gpt-4.1-mini]
-    Orchestrator --> Reviewer[İnceleyici Ajanı<br/>gpt-4.1]
+    Orchestrator[Orkestratör Ajan] --> Research[Araştırma Ajan<br/>gpt-4.1]
+    Orchestrator --> Writer[Yazar Ajan<br/>gpt-4.1-mini]
+    Orchestrator --> Reviewer[İnceleme Ajan<br/>gpt-4.1]
 ```
-**En iyi kullanım:**
+
+**En uygun kullanım:**
 - Karmaşık içerik üretimi
 - Çok adımlı iş akışları
 - Farklı uzmanlık gerektiren görevler
@@ -210,14 +218,14 @@ graph TD
 
 Ajanlar, araçları kullanabildiklerinde güçlü hale gelir. İşte yaygın araçların nasıl yapılandırılacağı:
 
-### Foundry Agents'ta Araç Yapılandırması
+### Foundry Agents İçin Araç Yapılandırması
 
 ```python
 # agent_config.py
 from azure.ai.projects import AIProjectClient
 from azure.ai.projects.models import FunctionTool, CodeInterpreterTool
 
-# Özel araçları tanımla
+# Özel araçları tanımlayın
 search_tool = FunctionTool(
     name="search_knowledge_base",
     description="Search the company knowledge base for relevant documents",
@@ -233,7 +241,7 @@ search_tool = FunctionTool(
     }
 )
 
-# Araçlarla ajan oluştur
+# Araçlarla ajan oluşturun
 agent = project_client.agents.create_agent(
     model="gpt-4.1",
     name="Support Agent",
@@ -245,13 +253,13 @@ agent = project_client.agents.create_agent(
 ### Ortam Yapılandırması
 
 ```bash
-# Ajan'a özgü ortam değişkenlerini ayarlayın
+# Ajanlara özgü ortam değişkenlerini ayarla
 azd env set AZURE_OPENAI_MODEL "gpt-4.1"
 azd env set AGENT_INSTRUCTIONS "You are a helpful assistant..."
 azd env set ENABLE_CODE_INTERPRETER "true"
 azd env set ENABLE_FILE_SEARCH "true"
 
-# Güncellenmiş yapılandırmayla dağıtın
+# Güncellenmiş yapılandırmayla dağıt
 azd deploy
 ```
 
@@ -274,24 +282,24 @@ azd monitor --logs
 azd monitor --live
 ```
 
-### İzlenecek Temel Metrikler
+### İzlenecek Ana Metrikler
 
 | Metrik | Açıklama | Hedef |
 |--------|----------|-------|
 | Yanıt Gecikmesi | Yanıt üretme süresi | < 5 saniye |
 | Token Kullanımı | İstek başına token sayısı | Maliyet için izleyin |
-| Araç Çağrısı Başarı Oranı | Başarılı araç yürütme %si | > %95 |
+| Araç Çağrısı Başarı Oranı | Başarılı araç yürütmeleri yüzdesi | > %95 |
 | Hata Oranı | Başarısız ajan istekleri | < %1 |
 | Kullanıcı Memnuniyeti | Geri bildirim puanları | > 4.0/5.0 |
 
-### Ajanlar için Özel Kayıtlama
+### Ajanlar için Özel Günlükleme
 
 ```python
 import os
 from azure.monitor.opentelemetry import configure_azure_monitor
 from opentelemetry import trace
 
-# Azure Monitor'u OpenTelemetry ile yapılandırın
+# OpenTelemetry ile Azure Monitor'u yapılandırın
 configure_azure_monitor(
     connection_string=os.environ["APPLICATIONINSIGHTS_CONNECTION_STRING"]
 )
@@ -308,22 +316,22 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
         })
 ```
 
-> **Not:** Gerekli paketleri kurun: `pip install azure-monitor-opentelemetry opentelemetry`
+> **Not:** Gerekli paketleri yükleyin: `pip install azure-monitor-opentelemetry opentelemetry`
 
 ---
 
-## 💰 Maliyet Dikkate Alınması
+## 💰 Maliyet Düşünceleri
 
-### Kalıba Göre Tahmini Aylık Maliyetler
+### Desene Göre Tahmini Aylık Maliyetler
 
-| Kalıp | Geliştirme Ortamı | Üretim |
+| Desen | Geliştirme Ortamı | Üretim |
 |-------|-------------------|--------|
 | Tek Ajan | $50-100 | $200-500 |
 | RAG Ajan | $80-150 | $300-800 |
 | Çok Ajanlı (2-3 ajan) | $150-300 | $500-1,500 |
 | Kurumsal Çok Ajanlı | $300-500 | $1,500-5,000+ |
 
-### Maliyet Optimizasyon İpuçları
+### Maliyet Optimizasyonu İpuçları
 
 1. **Basit görevler için gpt-4.1-mini kullanın**
    ```bash
@@ -341,7 +349,7 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
 
 3. **Çalışma başına token sınırları belirleyin**
    ```python
-   # max_completion_tokens'i ajanı çalıştırırken ayarlayın, oluşturma sırasında değil
+   # max_completion_tokens'i ajan çalıştırılırken ayarlayın, oluşturma sırasında değil
    run = project_client.agents.create_run(
        thread_id=thread.id,
        agent_id=agent.id,
@@ -349,7 +357,7 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
    )
    ```
 
-4. **Kullanılmadığında sıfıra ölçeklendirin**
+4. **Kullanılmadığında sıfıra ölçekleyin**
    ```bash
    # Container Apps otomatik olarak sıfıra ölçeklenir
    azd env set MIN_REPLICAS "0"
@@ -357,23 +365,23 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
 
 ---
 
-## 🔧 Ajanlarda Sorun Giderme
+## 🔧 Ajan Sorun Giderme
 
-### Yaygın Sorunlar ve Çözümleri
+### Yaygın Sorunlar ve Çözümler
 
 <details>
 <summary><strong>❌ Ajan araç çağrılarına yanıt vermiyor</strong></summary>
 
 ```bash
-# Araçların düzgün kaydedildiğini kontrol et
+# Araçların doğru şekilde kayıtlı olup olmadığını kontrol edin
 azd show
 
-# OpenAI dağıtımını doğrula
+# OpenAI dağıtımını doğrulayın
 az cognitiveservices account deployment list \
   --name $AZURE_OPENAI_NAME \
   --resource-group $RG_NAME
 
-# Ajan günlüklerini kontrol et
+# Ajan günlüklerini kontrol edin
 azd monitor --logs
 ```
 
@@ -387,7 +395,7 @@ azd monitor --logs
 <summary><strong>❌ Ajan yanıtlarında yüksek gecikme</strong></summary>
 
 ```bash
-# Darboğazlar için Application Insights'ı kontrol edin
+# Application Insights'ta darboğazları kontrol edin
 azd monitor --live
 
 # Daha hızlı bir model kullanmayı düşünün
@@ -396,13 +404,13 @@ azd deploy
 ```
 
 **Optimizasyon ipuçları:**
-- Akışlı yanıtlar kullanın
+- Akışlı yanıtları kullanın
 - Yanıt önbellekleme uygulayın
-- Bağlam penceresi boyutunu azaltın
+- Bağlam pencere boyutunu azaltın
 </details>
 
 <details>
-<summary><strong>❌ Ajan yanlış veya hayali bilgi döndürüyor</strong></summary>
+<summary><strong>❌ Ajan yanlış veya uydurma bilgi döndürüyor</strong></summary>
 
 ```python
 # Daha iyi sistem istemleriyle geliştirin
@@ -414,11 +422,11 @@ You are a helpful assistant. IMPORTANT:
 - Never make up information
 """
 
-# Temellendirme için veri getirme ekle
+# Yanıtları kaynaklara dayandırmak için alma (retrieval) ekleyin
 agent = project_client.agents.create_agent(
     model="gpt-4.1",
     instructions=instructions,
-    tools=[FileSearchTool()]  # Yanıtları belgelerde temellendir
+    tools=[FileSearchTool()]  # Yanıtları belgelere dayandırın
 )
 ```
 </details>
@@ -427,7 +435,7 @@ agent = project_client.agents.create_agent(
 <summary><strong>❌ Token limiti aşıldı hataları</strong></summary>
 
 ```python
-# Bağlam pencere yönetimini uygulayın
+# Bağlam penceresi yönetimini uygula
 def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
     """Keep only recent messages within token limit."""
     import tiktoken
@@ -452,7 +460,7 @@ def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
 
 ### Alıştırma 1: Temel Bir Ajan Dağıtın (20 dakika)
 
-**Hedef:** AZD kullanarak ilk AI ajanınızı dağıtın
+**Amaç:** AZD kullanarak ilk AI ajanınızı dağıtmak
 
 ```bash
 # Adım 1: Şablonu başlatın
@@ -460,7 +468,7 @@ azd init --template get-started-with-ai-agents
 
 # Adım 2: Azure'a giriş yapın
 azd auth login
-# Kiracılar arasında çalışıyorsanız, --tenant-id <tenant-id> ekleyin
+# Birden fazla kiracıda çalışıyorsanız, --tenant-id <tenant-id> ekleyin
 
 # Adım 3: Dağıtın
 azd up
@@ -485,21 +493,21 @@ azd down --force --purge
 
 ### Alıştırma 2: Özel Bir Araç Ekleyin (30 dakika)
 
-**Hedef:** Bir ajana özel bir araç ekleyin
+**Amaç:** Bir ajanı özel bir araçla genişletmek
 
 1. Ajan şablonunu dağıtın:
    ```bash
    azd init --template get-started-with-ai-agents
    azd up
    ```
-2. Ajan kodunuza yeni bir araç fonksiyonu oluşturun:
+2. Ajan kodunuzda yeni bir araç fonksiyonu oluşturun:
    ```python
    def get_weather(location: str) -> str:
        """Get current weather for a location."""
-       # Hava durumu servisine API çağrısı
+       # API çağrısı hava durumu servisine
        return f"Weather in {location}: Sunny, 72°F"
    ```
-3. Aracı ajana kaydedin:
+3. Aracı ajan ile kaydedin:
    ```python
    from azure.ai.projects.models import FunctionTool
 
@@ -524,18 +532,18 @@ azd down --force --purge
 4. Yeniden dağıtın ve test edin:
    ```bash
    azd deploy
-   # Sor: "Seattle'da hava durumu nedir?"
+   # Sor: "Seattle'da hava nasıl?"
    # Beklenen: Ajan get_weather("Seattle") fonksiyonunu çağırır ve hava bilgisini döndürür
    ```
 
 **Başarı Kriterleri:**
 - [ ] Ajan hava durumu ile ilgili sorguları tanıyor
 - [ ] Araç doğru şekilde çağrılıyor
-- [ ] Yanıtta hava durumu bilgisi yer alıyor
+- [ ] Yanıt hava durumu bilgisi içeriyor
 
 ### Alıştırma 3: Bir RAG Ajanı Oluşturun (45 dakika)
 
-**Hedef:** Belgelerinizden sorulara cevap veren bir ajan oluşturun
+**Amaç:** Belgelerinizden yanıt veren bir ajan oluşturmak
 
 ```bash
 # Adım 1: RAG şablonunu dağıtın
@@ -543,41 +551,41 @@ azd init --template azure-search-openai-demo
 azd up
 
 # Adım 2: Belgelerinizi yükleyin
-# PDF/TXT dosyalarını data/ dizinine koyun, ardından şunu çalıştırın:
+# PDF/TXT dosyalarını data/ dizinine yerleştirin, sonra çalıştırın:
 python scripts/prepdocs.py
 
 # Adım 3: Alanına özgü sorularla test edin
-# azd up çıktısından web uygulama URL'sini açın
-# Yüklediğiniz belgeler hakkında sorular sorun
-# Yanıtlar [doc.pdf] gibi atıf referansları içermelidir
+# azd up çıktısındaki web uygulama URL'sini açın
+# Yüklediğiniz belgelerle ilgili sorular sorun
+# Yanıtlar [doc.pdf] gibi kaynak gösterimleri içermelidir
 ```
 
 **Başarı Kriterleri:**
 - [ ] Ajan yüklenen belgelerden yanıt veriyor
 - [ ] Yanıtlar atıf içeriyor
-- [ ] Kapsam dışı sorularda hayal gücüne dayalı yanlış bilgi yok
+- [ ] Kapsam dışı sorularda uydurma yok
 
 ---
 
 ## 📚 Sonraki Adımlar
 
-Artık AI ajanlarını anladığınıza göre, bu ileri konuları keşfedin:
+Artık AI ajanlarını anladığınıza göre, şu gelişmiş konuları keşfedin:
 
 | Konu | Açıklama | Bağlantı |
-|------|----------|----------|
-| **Multi-Agent Systems** | Birden çok işbirlikçi ajan ile sistemler oluşturma | [Retail Multi-Agent Example](../../examples/retail-scenario.md) |
-| **Coordination Patterns** | Orkestrasyon ve iletişim kalıplarını öğrenin | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) |
-| **Production Deployment** | Kurumsal kullanıma uygun ajan dağıtımı | [Production AI Practices](../chapter-08-production/production-ai-practices.md) |
-| **Agent Evaluation** | Ajan performansını test ve değerlendirme | [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) |
-| **AI Workshop Lab** | Uygulamalı: AI çözümünüzü AZD'ye hazır hale getirin | [AI Workshop Lab](ai-workshop-lab.md) |
+|------|---------|----------|
+| **Çok Ajanlı Sistemler** | Birden fazla işbirlikçi ajanla sistemler oluşturun | [Retail Multi-Agent Example](../../examples/retail-scenario.md) |
+| **Koordinasyon Desenleri** | Orkestrasyon ve iletişim desenlerini öğrenin | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **Üretim Dağıtımı** | Kurumsal hazır ajan dağıtımı | [Production AI Practices](../chapter-08-production/production-ai-practices.md) |
+| **Ajan Değerlendirmesi** | Ajan performansını test ve değerlendirin | [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **AI Workshop Lab** | Uygulamalı: AI çözümünüzü AZD-uyumlu hale getirin | [AI Workshop Lab](ai-workshop-lab.md) |
 
 ---
 
 ## 📖 Ek Kaynaklar
 
-### Resmi Dokümantasyon
-- [Azure AI Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
-- [Azure AI Foundry Agent Service Quickstart](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
+### Resmi Belgeler
+- [Microsoft Foundry Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
+- [Microsoft Foundry Agent Service Quickstart](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
 - [Semantic Kernel Agent Framework](https://learn.microsoft.com/semantic-kernel/)
 
 ### Ajanlar için AZD Şablonları
@@ -591,20 +599,20 @@ Artık AI ajanlarını anladığınıza göre, bu ileri konuları keşfedin:
 - [Microsoft Foundry Discord](https://discord.gg/nTYy5BXMWG)
 
 ### Editörünüz için Ajan Becerileri
-- [**Microsoft Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - GitHub Copilot, Cursor veya desteklenen herhangi bir ajan için Azure geliştirme amaçlı yeniden kullanılabilir AI ajan becerileri yükleyin. İçerir: [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [deployment](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy) ve [diagnostics](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
+- [**Microsoft Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Azure geliştirme için GitHub Copilot, Cursor veya desteklenen herhangi bir ajan için yeniden kullanılabilir AI ajan becerilerini yükleyin. İçerir [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [deployment](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy) ve [diagnostics](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) için beceriler:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
 
 ---
 
-**Gezinim**
-- **Önceki Ders**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **Sonraki Ders**: [AI Model Deployment](ai-model-deployment.md)
+**Navigation**
+- **Previous Lesson**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **Next Lesson**: [AI Model Deployment](ai-model-deployment.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Feragatname**:
-Bu belge, yapay zeka çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini unutmayın. Orijinal belge, kendi dilindeki haliyle yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan herhangi bir yanlış anlaşılma veya yanlış yorumdan sorumlu değiliz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

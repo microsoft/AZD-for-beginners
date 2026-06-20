@@ -6,26 +6,27 @@
 
 ## Visão Geral
 
-Este capítulo cobre padrões de Infraestrutura como Código (IaC) com templates Bicep, provisão de recursos e estratégias de implantação usando Azure Developer CLI.
+Este capítulo cobre padrões de Infraestrutura como Código (IaC) com templates Bicep, provisionamento de recursos e estratégias de implantação usando o Azure Developer CLI.
 
-> Validado contra `azd 1.23.12` em março de 2026.
+> Validado com `azd 1.25.6` em junho de 2026.
 
 ## Objetivos de Aprendizagem
 
-Ao concluir este capítulo, irá:
-- Compreender a estrutura e sintaxe do template Bicep
-- Prover recursos do Azure com `azd provision`
+Ao concluir este capítulo, você irá:
+- Compreender a estrutura e sintaxe dos templates Bicep
+- Provisionar recursos Azure com `azd provision`
 - Implantar aplicações com `azd deploy`
 - Implementar estratégias de implantação blue-green e rolling
 
 ---
 
-## 📚 lições
+## 📚 Lições
 
 | # | Lição | Descrição | Tempo |
 |---|--------|-------------|------|
-| 1 | [Provisionamento de Recursos](provisioning.md) | Gestão de recursos Azure com AZD | 45 min |
+| 1 | [Provisionar Recursos](provisioning.md) | Gestão de recursos Azure com AZD | 45 min |
 | 2 | [Guia de Implantação](deployment-guide.md) | Estratégias de implantação de aplicações | 45 min |
+| 3 | [Criar o Seu Próprio Template](custom-templates.md) | Construir e publicar templates azd reutilizáveis | 30 min |
 
 ---
 
@@ -41,10 +42,10 @@ azd provision --preview
 # Provisionar apenas a infraestrutura
 azd provision
 
-# Desdobrar apenas o código
+# Implementar apenas o código
 azd deploy
 
-# Ou ambos juntos
+# Ou ambos em conjunto
 azd up
 ```
 
@@ -75,7 +76,7 @@ my-project/
 | `azd provision` | Criar recursos Azure |
 | `azd deploy` | Implantar código da aplicação |
 | `azd up` | provisionar + implantar |
-| `azd down` | Eliminar todos os recursos |
+| `azd down` | Apagar todos os recursos |
 
 ---
 
@@ -91,12 +92,12 @@ my-project/
 ## 📖 Recursos Relacionados
 
 - [Verificações Pré-Implantação](../chapter-06-pre-deployment/README.md)
-- [Exemplos de Container App](../../examples/container-app/README.md)
+- [Exemplos de Aplicações em Container](../../examples/container-app/README.md)
 - [Exemplo de Aplicação de Base de Dados](../../examples/database-app/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução automática [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, por favor tenha em consideração que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações erradas decorrentes do uso desta tradução.
+**Aviso Legal**:
+Este documento foi traduzido utilizando o serviço de tradução automática [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas resultantes da utilização desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

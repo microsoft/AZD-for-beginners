@@ -1,22 +1,22 @@
-# Luku 4: Infrastruktuuri koodina ja käyttöönotto
+# Luku 4: Infrastruktuuri koodina & Käyttöönotto
 
-**📚 Kurssi**: [AZD For Beginners](../../README.md) | **⏱️ Kesto**: 1–1,5 tuntia | **⭐ Vaativuus**: Keskitaso
+**📚 Kurssi**: [AZD Aloittelijoille](../../README.md) | **⏱️ Kesto**: 1–1,5 tuntia | **⭐ Vaativuus**: Keskitaso
 
 ---
 
 ## Yleiskatsaus
 
-Tässä luvussa käsitellään Infrastructure as Code (IaC) -malleja Bicep-mallien avulla, resurssien provisiointia sekä käyttöönotto-strategioita Azure Developer CLI:n avulla.
+Tässä luvussa käsitellään Infrastructure as Code (IaC) -malleja Bicep-templaatteilla, resurssien provisiointia sekä käyttöönotto­strategioita Azure Developer CLI:n avulla.
 
-> Vahvistettu `azd 1.23.12`:lla maaliskuussa 2026.
+> Varmennettu `azd 1.25.6`:lla kesäkuussa 2026.
 
 ## Oppimistavoitteet
 
-Tämän luvun suorittamisen jälkeen osaat:
-- Ymmärtää Bicep-mallien rakenteen ja syntaksin
-- Provisionoida Azure-resursseja komennolla `azd provision`
-- Ota sovellukset käyttöön komennolla `azd deploy`
-- Toteuttaa blue-green- ja rolling-käyttöönotto-strategioita
+Kun olet suorittanut tämän luvun, osaat:
+- Ymmärtää Bicep-templaatin rakenteen ja syntaksin
+- Provisioida Azure-resursseja `azd provision` -komennolla
+- Ota käyttöön sovelluksia `azd deploy` -komennolla
+- Toteuttaa blue-green- ja rolling-käyttöönotto­strategiat
 
 ---
 
@@ -25,11 +25,12 @@ Tämän luvun suorittamisen jälkeen osaat:
 | # | Oppitunti | Kuvaus | Aika |
 |---|--------|-------------|------|
 | 1 | [Resurssien provisiointi](provisioning.md) | Azure-resurssien hallinta AZD:llä | 45 min |
-| 2 | [Käyttöönotto-opas](deployment-guide.md) | Sovelluksen käyttöönotto-strategiat | 45 min |
+| 2 | [Käyttöönotto-opas](deployment-guide.md) | Sovellusten käyttöönotto-strategiat | 45 min |
+| 3 | [Oman mallin laatiminen](custom-templates.md) | Rakenna ja julkaise uudelleenkäytettäviä azd-malleja | 30 min |
 
 ---
 
-## 🚀 Pika-aloitus
+## 🚀 Pikaopas
 
 ```bash
 # Alusta mallipohjasta
@@ -38,10 +39,10 @@ azd init --template azure-functions-python-v2-http
 # Esikatsele, mitä luodaan
 azd provision --preview
 
-# Ota käyttöön vain infrastruktuuri
+# Perusta vain infrastruktuuri
 azd provision
 
-# Ota käyttöön vain koodi
+# Ota vain koodi käyttöön
 azd deploy
 
 # Tai molemmat yhdessä
@@ -67,15 +68,15 @@ my-project/
 
 ---
 
-## 🔧 Tärkeät komennot
+## 🔧 Keskeiset komennot
 
 | Komento | Kuvaus |
 |---------|-------------|
 | `azd init` | Alusta projekti |
 | `azd provision` | Luo Azure-resursseja |
-| `azd deploy` | Ota sovelluskoodi käyttöön |
-| `azd up` | provisiointi + käyttöönotto |
-| `azd down` | Poista kaikki resurssit |
+| `azd deploy` | Ota käyttöön sovelluskoodi |
+| `azd up` | provisioi + ota käyttöön |
+| `azd down` | Poistaa kaikki resurssit |
 
 ---
 
@@ -83,14 +84,14 @@ my-project/
 
 | Suunta | Luku |
 |-----------|---------|
-| **Edellinen** | [Luku 3: Konfigurointi](../chapter-03-configuration/README.md) |
-| **Seuraava** | [Luku 5: Moni-agenttiratkaisut](../chapter-05-multi-agent/README.md) |
+| **Edellinen** | [Chapter 3: Configuration](../chapter-03-configuration/README.md) |
+| **Seuraava** | [Chapter 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md) |
 
 ---
 
-## 📖 Aiheeseen liittyvät resurssit
+## 📖 Lisäresurssit
 
-- [Ennen käyttöönottoa tehtävät tarkastukset](../chapter-06-pre-deployment/README.md)
+- [Ennakkotarkistukset](../chapter-06-pre-deployment/README.md)
 - [Container-sovellus-esimerkit](../../examples/container-app/README.md)
 - [Tietokantasovellus-esimerkki](../../examples/database-app/README.md)
 
@@ -98,5 +99,5 @@ my-project/
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastuuvapauslauseke**:
-Tämä asiakirja on käännetty tekoälypohjaisella käännöspalvelulla [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisessä kielessä tulee pitää auktoriteettina. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä johtuvista väärinymmärryksistä tai virhetulkinnoista.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, otathan huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäiskielellä on virallinen lähde. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,4 +1,4 @@
-# Provisioning Azure Resources with AZD
+# Provision Azure Resources wit AZD
 
 **Chapter Navigation:**
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
@@ -9,35 +9,35 @@
 
 ## Introduction
 
-Dis complete guide go cover everything wey you need sabi about how to provision and manage Azure resources with Azure Developer CLI. You go learn how to implement Infrastructure as Code (IaC) patterns from simple resource creation go reach advanced enterprise-grade infrastructure architectures using Bicep, ARM templates, Terraform, and Pulumi.
+Dis complete guide go explain everytin wey you need sabi about how to provision and manage Azure resources using Azure Developer CLI. You go learn how to use Infrastructure as Code (IaC) patterns from basic resource creation reach advanced enterprise-grade infrastructure using Bicep, ARM templates, Terraform, and Pulumi.
 
 ## Learning Goals
 
-If you finish dis guide, you go:
-- Become pro for Infrastructure as Code principles and provisioning Azure resources
+After you finish dis guide, you go:
+- Master Infrastructure as Code principles and how to provision Azure resources
 - Understand the different IaC providers wey Azure Developer CLI support
 - Design and implement Bicep templates for common application architectures
 - Configure resource parameters, variables, and environment-specific settings
 - Implement advanced infrastructure patterns like networking and security
-- Manage resource lifecycle, updates, and resolve dependency issues
+- Manage resource lifecycle, updates, and dependency resolution
 
 ## Learning Outcomes
 
-After you don complete, you go fit:
+When you don finish, you go fit:
 - Design and provision Azure infrastructure using Bicep and ARM templates
 - Configure complex multi-service architectures with correct resource dependencies
 - Implement parameterized templates for different environments and configurations
-- Troubleshoot provisioning issues and solve deployment failures
-- Apply Azure Well-Architected Framework principles to your infrastructure design
-- Manage infrastructure updates and apply infrastructure versioning strategies
+- Troubleshoot infrastructure provisioning wahala and fix deployment failures
+- Apply Azure Well-Architected Framework principles for infrastructure design
+- Manage infrastructure updates and implement versioning strategies for infra
 
 ## Infrastructure Provisioning Overview
 
-Azure Developer CLI support plenty Infrastructure as Code (IaC) providers:
-- **Bicep** (recommended) - Azure's domain-specific language
+Azure Developer CLI support plenti Infrastructure as Code (IaC) providers:
+- **Bicep** (recommended) - Azure domain-specific language
 - **ARM Templates** - JSON-based Azure Resource Manager templates
 - **Terraform** - Multi-cloud infrastructure tool
-- **Pulumi** - Modern infrastructure as code with programming languages
+- **Pulumi** - Modern infrastructure as code wey use programming languages
 
 ## Understanding Azure Resources
 
@@ -54,7 +54,7 @@ Azure Account
 - **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
 - **Networking**: Virtual Network, Application Gateway, CDN
 - **Security**: Key Vault, Application Insights, Log Analytics
-- **AI/ML**: Cognitive Services, OpenAI, Machine Learning
+- **AI/ML**: Azure AI Services, Azure OpenAI, Azure Machine Learning
 
 ## Bicep Infrastructure Templates
 
@@ -199,6 +199,200 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
   }
 }
 ```
+
+## 🌐 Using Terraform with azd
+
+Bicep na azd default, but azd still support **Terraform**—good if your team don already standardize on am or you dey manage multi-cloud infra. The azd workflow (`azd up`, `azd provision`, `azd down`) na the same; only the infrastructure language and folder layout dey change.
+
+### Tell azd to use Terraform
+
+Add an `infra` section to `azure.yaml` wey point to the Terraform provider:
+
+```yaml
+# azure.yaml
+name: my-terraform-app
+infra:
+  provider: terraform   # default is "bicep"
+  path: infra           # folder containing your .tf files
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### Terraform folder layout
+
+With the Terraform provider, your `infra/` folder go use `.tf` files instead of Bicep:
+
+```
+infra/
+├── main.tf            # resource definitions
+├── variables.tf       # input variables
+├── outputs.tf         # outputs azd reads back (endpoints, names)
+├── provider.tf        # azurerm/azurecaf providers + backend
+└── main.tfvars.json   # values azd injects per environment
+```
+
+### A minimal `main.tf`
+
+```hcl
+# infra/main.tf
+resource "azurerm_resource_group" "rg" {
+  name     = "rg-${var.environment_name}"
+  location = var.location
+  tags     = { "azd-env-name" = var.environment_name }
+}
+
+resource "azurerm_service_plan" "plan" {
+  name                = "plan-${var.environment_name}"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  os_type             = "Linux"
+  sku_name            = "B1"
+}
+```
+
+### How azd connects to your Terraform outputs
+
+azd dey read Terraform **outputs** to sabi your endpoints and to wire environment values back into your app. The output names matter—azd dey look for specific ones:
+
+```hcl
+# infra/outputs.tf
+output "AZURE_LOCATION" {
+  value = var.location
+}
+
+output "SERVICE_WEB_ENDPOINT_URL" {
+  value = azurerm_linux_web_app.web.default_hostname
+}
+```
+
+> **Important:** azd dey use the `azd-env-name` tag and `AZURE_*` outputs to track resources per environment. Make sure say you tag your resource group with `"azd-env-name" = var.environment_name` so `azd down` fit find and remove everything.
+
+### Deploy with Terraform
+
+The commands na exactly the same as Bicep:
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd dey run 'terraform plan' for background
+azd up                    # set up + deploy
+azd down --force          # dey destroy di resources wey Terraform dey manage
+```
+
+> **Prerequisite:** Terraform must dey installed and dey your `PATH`. azd dey manage the Terraform *workflow* but e no go install Terraform for you. For state, azd default to local state; for teams, configure a remote backend (for example, an Azure Storage backend) in `provider.tf`.
+
+For complete, runnable Terraform-based starters, browse the [Awesome AZD gallery](https://azure.github.io/awesome-azd/) and filter for Terraform, or see the official [azd Terraform documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
+
+## 🧩 Using Pulumi with azd
+
+If your team dey write infrastructure in general-purpose language (TypeScript, Python, Go, or C#) rather than DSL, azd still support **Pulumi**. Same as Terraform, the `azd up` / `azd provision` / `azd down` workflow no change—only the infra tooling and folder layout differ.
+
+### Tell azd to use Pulumi
+
+```yaml
+# azure.yaml
+name: my-pulumi-app
+infra:
+  provider: pulumi      # default is "bicep"
+  path: infra           # folder containing your Pulumi program
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### Pulumi folder layout
+
+```
+infra/
+├── Pulumi.yaml          # project definition
+├── Pulumi.dev.yaml      # stack config (one per environment)
+├── index.ts             # your resource program (or __main__.py, main.go, etc.)
+├── package.json         # dependencies (for TypeScript)
+└── tsconfig.json
+```
+
+### A minimal `index.ts`
+
+```typescript
+import * as azure from "@pulumi/azure-native";
+import * as pulumi from "@pulumi/pulumi";
+
+const environmentName = pulumi.getStack();
+
+// Tag every resource so azd go fit track dem an clean dem up
+const tags = { "azd-env-name": environmentName };
+
+const rg = new azure.resources.ResourceGroup("rg", {
+  resourceGroupName: `rg-${environmentName}`,
+  tags,
+});
+
+// azd go read these outputs back inside your environment
+export const AZURE_LOCATION = rg.location;
+export const SERVICE_WEB_ENDPOINT_URL = "https://...";
+```
+
+### Stacks map to azd environments
+
+Pulumi dey organize deployments into **stacks**, and azd go map each azd environment to a Pulumi stack with the same name. When you run `azd env new staging`, azd go select (or create) the `staging` Pulumi stack. The same `azd-env-name` tagging and `AZURE_*` output rules still apply, so `azd down` fit find and remove everything.
+
+### Deploy with Pulumi
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd dey run 'pulumi preview' behind di scenes
+azd up                    # set up + deploy
+azd down --force          # e dey run 'pulumi destroy'
+```
+
+> **Prerequisite:** Pulumi must dey installed and dey your `PATH`, and you go need state backend (Pulumi Cloud or self-managed backend like Azure Blob Storage). azd dey manage the Pulumi *workflow*, e no dey install am for you. See the official [azd Pulumi documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-pulumi-for-azd).
+
+## 🎯 Choosing a Host for Your Service
+
+The `host` field for `azure.yaml` dey decide where your code go run. azd support several hosts—choosing the right one dey important pass the infra language. Below na simple comparison for beginners:
+
+| `host` value | Best for | Why |
+|--------------|----------|-----|
+| `appservice` | Traditional web apps and APIs | Simplest PaaS; no containers required |
+| `staticwebapp` | Front-end SPAs (React, Vue, Angular) | Global CDN + free SSL, built-in API support |
+| `function` | Event-driven and serverless workloads | Scale-to-zero, pay-per-execution |
+| `containerapp` | Containerized microservices | Serverless containers, scale-to-zero, built-in ingress |
+| `aks` | Complex orchestration needs | Full Kubernetes control when you really need am |
+| `springapp` | Java Spring Boot apps | Managed Azure Spring Apps runtime tuned for Spring |
+
+### When to reach for AKS
+
+**Azure Kubernetes Service (`host: aks`)** dey give you the full power of Kubernetes—custom controllers, service meshes, complex networking, and fine-grained scheduling. That power dey come with operational overhead: you go manage node pools, upgrades, and cluster networking.
+
+```yaml
+services:
+  api:
+    project: ./src/api
+    language: js
+    host: aks          # deploys to an existing AKS cluster
+```
+
+> **Start simpler if you can.** For most microservices, **Container Apps** go give you containers, autoscaling, and scale-to-zero without you managing cluster. Choose AKS only when you need Kubernetes-specific features.
+
+### When to use Azure Spring Apps
+
+**Azure Spring Apps (`host: springapp`)** na managed runtime wey dem build for Spring Boot. E dey handle service discovery, config server, and blue-green deployment so Java teams no go need run dia own infra.
+
+```yaml
+services:
+  catalog:
+    project: ./src/catalog
+    language: java
+    host: springapp
+```
+
+> Use `springapp` when you get existing Spring Boot apps and you want runtime wey dem tune for dem. For new containerized Java apps wey no get Spring-specific needs, `containerapp` normally dey simpler.
 
 ## 🗃️ Database Provisioning
 
@@ -759,36 +953,36 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ### Preview Infrastructure Changes Before Deployment
 
-Di `azd provision --preview` feature dey allow you **simulate di provisioning of infrastructure** before you actually deploy resources. E dey similar to `terraform plan` or `bicep what-if`, and e go give you a **dry-run view** of wetin dem go change for your Azure environment.
+The `azd provision --preview` feature let you **simulate infrastructure provisioning** before you really deploy resources. E similar to `terraform plan` or `bicep what-if`, e give you a **dry-run view** of wetin go change for your Azure environment.
 
 #### 🛠️ What It Does
-- **E go analyze your IaC templates** (Bicep or Terraform)
-- **Dey show preview of resource changes**: additions, deletions, updates
-- **No dey apply changes** — e read-only and safe to run
+- **Analyses your IaC templates** (Bicep or Terraform)
+- **Shows a preview of resource changes**: additions, deletions, updates
+- **No dey apply changes** — na read-only and e safe to run
 
 #### Use Cases
 ```bash
-# See wetin don change for infrastructure before dem deploy am
+# See di infrastructure changes before dem deploy am
 azd provision --preview
 
-# See am for particular environment
+# See for di specific environment
 azd provision --preview -e production
 ```
 
-Dis command dey help you:
+Dis command go help you:
 - **Validate infrastructure changes** before you commit resources
-- **Catch misconfigurations early** for your development cycle
-- **Collaborate safely** when you dey work as team
-- **Ensure least-privilege deployments** make e no shock anybody
+- **Catch misconfigurations early** for development cycle
+- **Collaborate safely** when una dey work as team
+- **Ensure least-privilege deployments** without surprises
 
 E especially useful when:
 - You dey work with complex multi-service environments
 - You dey make changes to production infrastructure
 - You dey validate template modifications before PR approval
-- You dey train new team members for infrastructure patterns
+- You dey train new team members on infrastructure patterns
 
 ### Example Preview Output
-Exact preview output fit change based on provider and project structure, but the result suppose clear show the proposed changes before anything dey applied.
+Exact preview output go vary by provider and project structure, but the result suppose clear show the proposed changes before anything apply.
 
 ```bash
 $ azd provision --preview
@@ -813,11 +1007,11 @@ The following resources will be destroyed:
 ✅ Preview completed successfully!
 ```
 
-## �🔄 How to update resources and migrate dem
+## �🔄 Resource Updates and Migrations
 
 ### Safe Resource Updates
 ```bash
-# First make you preview di infrastructure changes (DEY REKOMEND)
+# Make you first preview di infrastructure changes (we dey recommend am)
 azd provision --preview
 
 # Apply di changes after you don confirm di preview
@@ -938,5 +1132,5 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Dis document don translate by AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make everything accurate, abeg sabi say automated translations fit get errors or inaccuracies. Di original document for im native language suppose be di authoritative source. If na critical information, we recommend make professional human translation do am. We no dey liable for any misunderstandings or misinterpretations wey fit arise from the use of this translation.
+Dis document don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even tho we dey try make am correct, abeg make you know say automated translation fit get errors or mistakes. Di original document for dia own language na im be di correct source. For important info, make person wey sabi human translation do am. We no go responsible for any misunderstanding or wrong understanding wey fit happen because of dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

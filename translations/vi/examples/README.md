@@ -1,13 +1,13 @@
-# Ví dụ - Mẫu và Cấu hình AZD thực tiễn
+# Ví dụ - Mẫu AZD Thực hành và Cấu hình
 
-**Học qua ví dụ - Sắp xếp theo chương**
-- **📚 Trang Khóa học**: [AZD dành cho người mới](../README.md)
-- **📖 Bản đồ chương**: Ví dụ được sắp xếp theo độ phức tạp học tập
-- **🚀 Ví dụ cục bộ**: [Giải pháp bán lẻ đa tác nhân](retail-scenario.md)
-- **🤖 Ví dụ AI bên ngoài**: Liên kết đến kho mẫu Azure Samples
+**Học qua Ví dụ - Sắp xếp theo Chương**
+- **📚 Trang Khóa Học**: [AZD For Beginners](../README.md)
+- **📖 Bản đồ Chương**: Ví dụ được sắp xếp theo độ phức tạp học tập
+- **🚀 Ví dụ Cục bộ**: [Retail Multi-Agent Solution](retail-scenario.md)
+- **🤖 Ví dụ AI Bên ngoài**: Liên kết tới các kho Azure Samples
 
-> **📍 QUAN TRỌNG: Ví dụ cục bộ và bên ngoài**  
-> Kho lưu trữ này bao gồm **4 ví dụ cục bộ hoàn chỉnh** với triển khai đầy đủ:  
+> **📍 QUAN TRỌNG: Ví dụ Cục bộ vs Bên ngoài**  
+> Kho lưu trữ này chứa **4 ví dụ cục bộ hoàn chỉnh** với triển khai đầy đủ:  
 > - **Microsoft Foundry Models Chat** (triển khai gpt-4.1 với giao diện chat)  
 > - **Container Apps** (API Flask đơn giản + Microservices)  
 > - **Database App** (Web + SQL Database)  
@@ -17,31 +17,31 @@
 
 ## Giới thiệu
 
-Thư mục này cung cấp các ví dụ thực tế và tham chiếu để giúp bạn học Azure Developer CLI thông qua thực hành. Kịch bản Retail Multi-Agent là một triển khai hoàn chỉnh, sẵn sàng cho sản xuất được bao gồm trong kho này. Các ví dụ bổ sung tham chiếu các Azure Samples chính thức minh họa các kiểu mẫu AZD khác nhau.
+Thư mục này cung cấp các ví dụ thực hành và tham chiếu để giúp bạn học Azure Developer CLI thông qua thực hành trực tiếp. Kịch bản Retail Multi-Agent là một triển khai hoàn chỉnh, sẵn sàng cho môi trường production có trong kho này. Các ví dụ bổ sung tham chiếu các Azure Samples chính thức minh họa các kiểu mẫu AZD khác nhau.
 
-### Chú giải mức độ phức tạp
+### Huy hiệu Đánh giá Độ phức tạp
 
-- ⭐ **Người mới** - Khái niệm cơ bản, một dịch vụ, 15-30 phút
+- ⭐ **Người mới** - Khái niệm cơ bản, dịch vụ đơn lẻ, 15-30 phút
 - ⭐⭐ **Trung cấp** - Nhiều dịch vụ, tích hợp cơ sở dữ liệu, 30-60 phút
 - ⭐⭐⭐ **Nâng cao** - Kiến trúc phức tạp, tích hợp AI, 1-2 giờ
-- ⭐⭐⭐⭐ **Chuyên gia** - Sẵn sàng cho sản xuất, mẫu doanh nghiệp, 2+ giờ
+- ⭐⭐⭐⭐ **Chuyên gia** - Sẵn sàng production, mẫu doanh nghiệp, 2+ giờ
 
-## 🎯 Những gì thực sự có trong kho này
+## 🎯 Những gì thực sự có trong Kho này
 
-### ✅ Triển khai cục bộ (Sẵn sàng sử dụng)
+### ✅ Triển khai Cục bộ (Sẵn sàng sử dụng)
 
 #### [Microsoft Foundry Models Chat Application](azure-openai-chat/README.md) 🆕
-**Triển khai gpt-4.1 hoàn chỉnh với giao diện chat được bao gồm trong repo này**
+**Triển khai gpt-4.1 đầy đủ với giao diện chat được bao gồm trong repo này**
 
-- **Location:** `examples/azure-openai-chat/`
-- **Complexity:** ⭐⭐ (Trung cấp)
-- **What's Included:**
-  - Complete Microsoft Foundry Models deployment (gpt-4.1)
-  - Python command-line chat interface
-  - Key Vault integration for secure API keys
-  - Bicep infrastructure templates
-  - Token usage and cost tracking
-  - Rate limiting and error handling
+- **Vị trí:** `examples/azure-openai-chat/`
+- **Độ phức tạp:** ⭐⭐ (Trung cấp)
+- **Bao gồm:**
+  - Triển khai Microsoft Foundry Models hoàn chỉnh (gpt-4.1)
+  - Giao diện chat dòng lệnh Python
+  - Tích hợp Key Vault để bảo mật API keys
+  - Mẫu hạ tầng Bicep
+  - Theo dõi sử dụng token và chi phí
+  - Giới hạn tốc độ và xử lý lỗi
 
 **Bắt đầu nhanh:**
 ```bash
@@ -61,14 +61,14 @@ python src/chat.py
 #### [Container App Examples](container-app/README.md) 🆕
 **Các ví dụ triển khai container toàn diện được bao gồm trong repo này**
 
-- **Location:** `examples/container-app/`
-- **Complexity:** ⭐-⭐⭐⭐⭐ (Từ Người mới đến Nâng cao)
-- **What's Included:**
-  - [Master Guide](container-app/README.md) - Tổng quan hoàn chỉnh về triển khai container
+- **Vị trí:** `examples/container-app/`
+- **Độ phức tạp:** ⭐-⭐⭐⭐⭐ (Từ Người mới đến Nâng cao)
+- **Bao gồm:**
+  - [Master Guide](container-app/README.md) - Tổng quan đầy đủ về triển khai container
   - [Simple Flask API](../../../examples/container-app/simple-flask-api) - Ví dụ REST API cơ bản
-  - [Microservices Architecture](../../../examples/container-app/microservices) - Triển khai đa dịch vụ sẵn sàng cho sản xuất
-  - Quick Start, Production, and Advanced patterns
-  - Monitoring, security, and cost optimization
+  - [Microservices Architecture](../../../examples/container-app/microservices) - Triển khai đa dịch vụ sẵn sàng production
+  - Mẫu Bắt đầu Nhanh, Production và Nâng cao
+  - Giám sát, bảo mật và tối ưu chi phí
 
 **Bắt đầu nhanh:**
 ```bash
@@ -79,7 +79,7 @@ cd examples/container-app
 cd simple-flask-api
 azd up
 
-# Triển khai ví dụ về dịch vụ vi mô
+# Triển khai ví dụ microservices
 cd ../microservices
 azd up
 ```
@@ -87,17 +87,17 @@ azd up
 **Công nghệ:** Azure Container Apps, Docker, Python Flask, Node.js, C#, Go, Application Insights
 
 #### [Retail Multi-Agent Solution](retail-scenario.md) 🆕
-**Triển khai hoàn chỉnh sẵn sàng cho sản xuất được bao gồm trong repo này**
+**Triển khai sẵn sàng production hoàn chỉnh được bao gồm trong repo này**
 
-- **Location:** `examples/retail-multiagent-arm-template/`
-- **Complexity:** ⭐⭐⭐⭐ (Nâng cao)
-- **What's Included:**
-  - Complete ARM deployment template
-  - Multi-agent architecture (Customer + Inventory)
-  - Microsoft Foundry Models integration
-  - AI Search with RAG
-  - Comprehensive monitoring
-  - One-click deployment script
+- **Vị trí:** `examples/retail-multiagent-arm-template/`
+- **Độ phức tạp:** ⭐⭐⭐⭐ (Nâng cao)
+- **Bao gồm:**
+  - Mẫu triển khai ARM hoàn chỉnh
+  - Kiến trúc đa tác nhân (Customer + Inventory)
+  - Tích hợp Microsoft Foundry Models
+  - AI Search với RAG
+  - Giám sát toàn diện
+  - Script triển khai một cú nhấp
 
 **Bắt đầu nhanh:**
 ```bash
@@ -109,16 +109,16 @@ cd examples/retail-multiagent-arm-template
 
 ---
 
-## 🔗 Azure Samples bên ngoài (Clone để sử dụng)
+## 🔗 Các Azure Samples Bên ngoài (Clone để sử dụng)
 
-Các ví dụ sau được duy trì trong các kho Azure-Samples chính thức. Clone chúng để khám phá các kiểu mẫu AZD khác nhau:
+Các ví dụ sau được duy trì trong các kho Azure-Samples chính thức. Clone chúng để khám phá các mẫu AZD khác nhau:
 
 ### Ứng dụng đơn giản (Chương 1-2)
 
 | Template | Repository | Complexity | Services |
 |:---------|:-----------|:-----------|:---------|
-| **Python Flask API** | [Cục bộ: simple-flask-api](../../../examples/container-app/simple-flask-api) | ⭐ | Python, Container Apps, Application Insights |
-| **Microservices** | [Cục bộ: microservices](../../../examples/container-app/microservices) | ⭐⭐⭐⭐ | Multi-service, Service Bus, Cosmos DB, SQL |
+| **Python Flask API** | [Local: simple-flask-api](../../../examples/container-app/simple-flask-api) | ⭐ | Python, Container Apps, Application Insights |
+| **Microservices** | [Local: microservices](../../../examples/container-app/microservices) | ⭐⭐⭐⭐ | Multi-service, Service Bus, Cosmos DB, SQL |
 | **Node.js + MongoDB** | [todo-nodejs-mongo](https://github.com/Azure-Samples/todo-nodejs-mongo) | ⭐ | Express, Cosmos DB, Container Apps |
 | **React + Functions** | [todo-csharp-sql-swa-func](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) | ⭐ | Static Web Apps, Functions, SQL |
 | **Python Flask Container** | [container-apps-store-api](https://github.com/Azure-Samples/container-apps-store-api-microservice) | ⭐ | Python, Container Apps, API |
@@ -137,13 +137,13 @@ azd up
 
 | Template | Repository | Complexity | Focus |
 |:---------|:-----------|:-----------|:------|
-| **Microsoft Foundry Models Chat** | [Cục bộ: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | gpt-4.1 deployment |
+| **Microsoft Foundry Models Chat** | [Local: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | gpt-4.1 deployment |
 | **AI Chat Quickstart** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | Basic AI chat |
 | **AI Agents** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | Agent framework |
 | **Search + OpenAI Demo** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | RAG pattern |
 | **Contoso Chat** | [contoso-chat](https://github.com/Azure-Samples/contoso-chat) | ⭐⭐⭐⭐ | Enterprise AI |
 
-### Cơ sở dữ liệu & Mẫu nâng cao (Chương 3-8)
+### Cơ sở dữ liệu & Mẫu Nâng cao (Chương 3-8)
 
 | Template | Repository | Complexity | Focus |
 |:---------|:-----------|:-----------|:------|
@@ -154,25 +154,25 @@ azd up
 
 ## Mục tiêu học tập
 
-Thông qua việc làm các ví dụ này, bạn sẽ:
+Bằng cách làm việc qua các ví dụ này, bạn sẽ:
 - Thực hành các workflow Azure Developer CLI với các kịch bản ứng dụng thực tế
-- Hiểu các kiến trúc ứng dụng khác nhau và các triển khai azd của chúng
-- Thành thạo các mẫu Infrastructure as Code cho các dịch vụ Azure khác nhau
+- Hiểu các kiến trúc ứng dụng khác nhau và cách triển khai chúng bằng azd
+- Làm chủ các mẫu Infrastructure as Code cho các dịch vụ Azure khác nhau
 - Áp dụng quản lý cấu hình và chiến lược triển khai theo môi trường
 - Triển khai các mẫu giám sát, bảo mật và mở rộng trong ngữ cảnh thực tế
-- Xây dựng kinh nghiệm xử lý sự cố và gỡ lỗi các kịch bản triển khai thực tế
+- Xây dựng kinh nghiệm khắc phục sự cố và gỡ lỗi các kịch bản triển khai thực tế
 
 ## Kết quả học tập
 
-Khi hoàn thành các ví dụ này, bạn sẽ có thể:
-- Triển khai nhiều loại ứng dụng khác nhau bằng Azure Developer CLI một cách tự tin
-- Điều chỉnh các mẫu được cung cấp cho yêu cầu ứng dụng của bạn
-- Thiết kế và triển khai các mẫu hạ tầng tùy chỉnh bằng Bicep
+Sau khi hoàn thành các ví dụ này, bạn sẽ có thể:
+- Triển khai các loại ứng dụng khác nhau bằng Azure Developer CLI một cách tự tin
+- Điều chỉnh các mẫu cung cấp để phù hợp yêu cầu ứng dụng của bạn
+- Thiết kế và triển khai các mẫu hạ tầng tùy chỉnh sử dụng Bicep
 - Cấu hình các ứng dụng đa dịch vụ phức tạp với các phụ thuộc đúng đắn
-- Áp dụng các thực hành tốt nhất về bảo mật, giám sát và hiệu năng trong các kịch bản thực tế
-- Xử lý sự cố và tối ưu hóa triển khai dựa trên kinh nghiệm thực tế
+- Áp dụng các thực hành tốt về bảo mật, giám sát và hiệu suất trong các kịch bản thực tế
+- Khắc phục sự cố và tối ưu hóa các triển khai dựa trên kinh nghiệm thực tiễn
 
-## Cấu trúc thư mục
+## Cấu trúc Thư mục
 
 ```
 Azure Samples AZD Templates (linked externally):
@@ -190,38 +190,38 @@ Azure Samples AZD Templates (linked externally):
 
 ## Ví dụ Bắt đầu Nhanh
 
-> **💡 Mới làm quen với AZD?** Bắt đầu với ví dụ #1 (Flask API) - mất ~20 phút và dạy các khái niệm cốt lõi.
+> **💡 Mới với AZD?** Bắt đầu với ví dụ #1 (Flask API) - mất khoảng ~20 phút và dạy các khái niệm cốt lõi.
 
 ### Dành cho Người mới
 1. **[Container App - Python Flask API](../../../examples/container-app/simple-flask-api)** (Cục bộ) ⭐  
-   Triển khai một REST API đơn giản với khả năng scale-to-zero  
+   Triển khai REST API đơn giản với scale-to-zero  
    **Thời gian:** 20-25 phút | **Chi phí:** $0-5/tháng  
-   **Bạn sẽ học:** Workflow azd cơ bản, container hóa, health probes  
+   **Bạn sẽ học:** Workflow azd cơ bản, containerization, health probes  
    **Kết quả mong đợi:** Endpoint API hoạt động trả về "Hello, World!" với giám sát
 
 2. **[Simple Web App - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** ⭐  
    Triển khai ứng dụng web Node.js Express với MongoDB  
    **Thời gian:** 25-35 phút | **Chi phí:** $10-30/tháng  
    **Bạn sẽ học:** Tích hợp cơ sở dữ liệu, biến môi trường, chuỗi kết nối  
-   **Kết quả mong đợi:** Ứng dụng danh sách Todo với chức năng tạo/đọc/cập nhật/xóa
+   **Kết quả mong đợi:** Ứng dụng Todo với chức năng tạo/đọc/cập nhật/xóa
 
 3. **[Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** ⭐  
    Lưu trữ website tĩnh React với Azure Static Web Apps  
    **Thời gian:** 20-30 phút | **Chi phí:** $0-10/tháng  
-   **Bạn sẽ học:** Lưu trữ tĩnh, function serverless, triển khai CDN  
+   **Bạn sẽ học:** Hosting tĩnh, functions serverless, triển khai CDN  
    **Kết quả mong đợi:** Giao diện React với backend API, SSL tự động, CDN toàn cầu
 
 ### Dành cho Người dùng Trung cấp
 4. **[Microsoft Foundry Models Chat Application](../../../examples/azure-openai-chat)** (Cục bộ) ⭐⭐  
-   Triển khai gpt-4.1 với giao diện chat và quản lý khóa API an toàn  
+   Triển khai gpt-4.1 với giao diện chat và quản lý API key an toàn  
    **Thời gian:** 35-45 phút | **Chi phí:** $50-200/tháng  
    **Bạn sẽ học:** Triển khai Microsoft Foundry Models, tích hợp Key Vault, theo dõi token  
    **Kết quả mong đợi:** Ứng dụng chat hoạt động với gpt-4.1 và giám sát chi phí
 
 5. **[Container App - Microservices](../../../examples/container-app/microservices)** (Cục bộ) ⭐⭐⭐⭐  
-   Kiến trúc đa dịch vụ sẵn sàng cho sản xuất  
+   Kiến trúc đa dịch vụ sẵn sàng production  
    **Thời gian:** 45-60 phút | **Chi phí:** $50-150/tháng  
-   **Bạn sẽ học:** Giao tiếp dịch vụ, xếp hàng tin nhắn, theo dõi phân tán  
+   **Bạn sẽ học:** Giao tiếp dịch vụ, hàng đợi tin nhắn, theo dõi phân tán  
    **Kết quả mong đợi:** Hệ thống 2 dịch vụ (API Gateway + Product Service) với giám sát
 
 6. **[Database App - C# with Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** ⭐⭐  
@@ -234,25 +234,25 @@ Azure Samples AZD Templates (linked externally):
    Python Azure Functions với HTTP triggers và Cosmos DB  
    **Thời gian:** 30-40 phút | **Chi phí:** $10-40/tháng  
    **Bạn sẽ học:** Kiến trúc hướng sự kiện, scale serverless, tích hợp NoSQL  
-   **Kết quả mong đợi:** Function app phản hồi các yêu cầu HTTP với lưu trữ Cosmos DB
+   **Kết quả mong đợi:** Function app phản hồi yêu cầu HTTP với lưu trữ Cosmos DB
 
 8. **[Microservices - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** ⭐⭐⭐  
-   Ứng dụng đa dịch vụ Java với Container Apps và API gateway  
+   Ứng dụng Java đa dịch vụ với Container Apps và API gateway  
    **Thời gian:** 60-90 phút | **Chi phí:** $80-200/tháng  
    **Bạn sẽ học:** Triển khai Spring Boot, service mesh, cân bằng tải  
-   **Kết quả mong đợi:** Hệ thống đa dịch vụ Java với phát hiện dịch vụ và định tuyến
+   **Kết quả mong đợi:** Hệ thống đa dịch vụ Java với khám phá dịch vụ và routing
 
 ### Mẫu Microsoft Foundry
 
 1. **[Microsoft Foundry Models Chat App - Local Example](../../../examples/azure-openai-chat)** ⭐⭐  
-   Triển khai gpt-4.1 hoàn chỉnh với giao diện chat  
+   Triển khai gpt-4.1 đầy đủ với giao diện chat  
    **Thời gian:** 35-45 phút | **Chi phí:** $50-200/tháng  
    **Kết quả mong đợi:** Ứng dụng chat hoạt động với theo dõi token và giám sát chi phí
 
 2. **[Azure Search + OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** ⭐⭐⭐  
    Ứng dụng chat thông minh với kiến trúc RAG  
    **Thời gian:** 60-90 phút | **Chi phí:** $100-300/tháng  
-   **Kết quả mong đợi:** Giao diện chat sử dụng RAG với tìm kiếm tài liệu và trích dẫn
+   **Kết quả mong đợi:** Giao diện chat dùng RAG với tìm kiếm tài liệu và trích dẫn
 
 3. **[AI Document Processing](https://github.com/Azure-Samples/azure-ai-document-processing)** ⭐⭐  
    Phân tích tài liệu sử dụng dịch vụ Azure AI  
@@ -262,49 +262,50 @@ Azure Samples AZD Templates (linked externally):
 4. **[Machine Learning Pipeline](https://github.com/Azure-Samples/mlops-v2)** ⭐⭐⭐⭐  
    Quy trình MLOps với Azure Machine Learning  
    **Thời gian:** 2-3 giờ | **Chi phí:** $150-500/tháng  
-   **Kết quả mong đợi:** Pipeline ML tự động với huấn luyện, triển khai và giám sát
+   **Kết quả mong đợi:** Pipeline ML tự động với đào tạo, triển khai và giám sát
 
 ### Kịch bản Thực tế
 
 #### **Retail Multi-Agent Solution** 🆕
-**[Hướng dẫn triển khai hoàn chỉnh](./retail-scenario.md)**
+**[Hướng dẫn Triển khai Hoàn chỉnh](./retail-scenario.md)**
 
-Một giải pháp hỗ trợ khách hàng đa tác nhân toàn diện, sẵn sàng cho sản xuất, minh họa triển khai ứng dụng AI cấp doanh nghiệp với AZD. Kịch bản này cung cấp:
-- **Kiến trúc hoàn chỉnh**: Hệ thống đa tác nhân với các tác nhân chuyên trách dịch vụ khách hàng và quản lý tồn kho
-- **Hạ tầng sản xuất**: Triển khai Microsoft Foundry Models nhiều khu vực, Azure AI Search, Container Apps và giám sát toàn diện
-- **Mẫu ARM sẵn sàng triển khai**: Triển khai một lần nhấp với nhiều chế độ cấu hình (Minimal/Standard/Premium)
-- **Tính năng nâng cao**: Xác thực bảo mật red teaming, khung đánh giá tác nhân, tối ưu hóa chi phí và hướng dẫn khắc phục sự cố
-- **Ngữ cảnh kinh doanh thực tế**: Trường hợp sử dụng hỗ trợ khách hàng bán lẻ với tải lên tệp, tích hợp tìm kiếm và mở rộng động
+Một giải pháp hỗ trợ khách hàng đa tác nhân toàn diện, sẵn sàng cho production, minh họa triển khai ứng dụng AI cấp doanh nghiệp bằng AZD. Kịch bản này cung cấp:
 
-**Technologies**: Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
+- **Kiến trúc Hoàn chỉnh**: Hệ thống đa tác nhân với các tác nhân chuyên trách dịch vụ khách hàng và quản lý tồn kho
+- **Hạ tầng Sản xuất**: Triển khai Microsoft Foundry Models đa vùng, Azure AI Search, Container Apps, và giám sát toàn diện
+- **Mẫu ARM Sẵn để Triển khai**: Triển khai một lần nhấp với nhiều chế độ cấu hình (Minimal/Standard/Premium)
+- **Tính năng Nâng cao**: Xác thực an ninh red teaming, khung đánh giá agent, tối ưu hóa chi phí, và hướng dẫn khắc phục sự cố
+- **Bối cảnh Kinh doanh Thực tế**: Trường hợp hỗ trợ khách hàng của nhà bán lẻ với tải lên tệp, tích hợp tìm kiếm, và mở rộng động
 
-**Complexity**: ⭐⭐⭐⭐ (Nâng cao - Sẵn sàng cho sản xuất doanh nghiệp)
+**Công nghệ**: Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
 
-**Phù hợp cho**: Nhà phát triển AI, kiến trúc sư giải pháp và các nhóm xây dựng hệ thống đa tác nhân cho môi trường sản xuất
+**Độ phức tạp**: ⭐⭐⭐⭐ (Nâng cao - Sẵn sàng Sản xuất Doanh nghiệp)
 
-**Bắt đầu nhanh**: Triển khai giải pháp hoàn chỉnh trong dưới 30 phút bằng mẫu ARM kèm theo với `./deploy.sh -g myResourceGroup`
+**Phù hợp cho**: Nhà phát triển AI, kiến trúc sư giải pháp, và các nhóm xây dựng hệ thống đa-agent ở môi trường sản xuất
 
-## 📋 Hướng dẫn sử dụng
+**Bắt đầu Nhanh**: Triển khai giải pháp hoàn chỉnh trong dưới 30 phút bằng mẫu ARM kèm theo với `./deploy.sh -g myResourceGroup`
+
+## 📋 Hướng dẫn Sử dụng
 
 ### Yêu cầu tiên quyết
 
 Trước khi chạy bất kỳ ví dụ nào:
 - ✅ Đăng ký Azure với quyền Owner hoặc Contributor
-- ✅ Azure Developer CLI đã được cài đặt ([Installation Guide](../docs/chapter-01-foundation/installation.md))
+- ✅ Azure Developer CLI đã được cài ([Hướng dẫn Cài đặt](../docs/chapter-01-foundation/installation.md))
 - ✅ Docker Desktop đang chạy (cho các ví dụ container)
-- ✅ Hạn mức Azure phù hợp (kiểm tra yêu cầu cụ thể theo ví dụ)
+- ✅ Hạn ngạch Azure phù hợp (kiểm tra yêu cầu riêng cho từng ví dụ)
 
-> **💰 Cảnh báo chi phí:** Tất cả ví dụ tạo tài nguyên Azure thực tế sẽ phát sinh phí. Xem các README riêng lẻ để ước tính chi phí. Nhớ chạy `azd down` khi xong để tránh phát sinh chi phí liên tục.
+> **💰 Cảnh báo Chi phí:** Tất cả các ví dụ tạo tài nguyên Azure thực tế sẽ phát sinh chi phí. Xem file README riêng cho từng ví dụ để biết ước tính chi phí. Hãy nhớ chạy `azd down` khi hoàn tất để tránh phát sinh chi phí liên tục.
 
-### Chạy ví dụ cục bộ
+### Chạy Ví dụ Cục bộ
 
-1. **Sao chép hoặc copy ví dụ**
+1. **Sao chép hoặc Nhân bản Ví dụ**
    ```bash
    # Đi tới ví dụ mong muốn
    cd examples/simple-web-app
    ```
 
-2. **Khởi tạo môi trường AZD**
+2. **Khởi tạo Môi trường AZD**
    ```bash
    # Khởi tạo bằng mẫu hiện có
    azd init
@@ -313,9 +314,9 @@ Trước khi chạy bất kỳ ví dụ nào:
    azd env new my-environment
    ```
 
-3. **Cấu hình môi trường**
+3. **Cấu hình Môi trường**
    ```bash
-   # Đặt các biến cần thiết
+   # Thiết lập các biến cần thiết
    azd env set AZURE_LOCATION eastus
    azd env set AZURE_SUBSCRIPTION_ID your-subscription-id
    ```
@@ -326,163 +327,163 @@ Trước khi chạy bất kỳ ví dụ nào:
    azd up
    ```
 
-5. **Xác minh triển khai**
+5. **Xác minh Triển khai**
    ```bash
-   # Lấy các điểm cuối của dịch vụ
+   # Lấy các điểm cuối dịch vụ
    azd env get-values
    
    # Kiểm tra điểm cuối (ví dụ)
    curl https://your-app-url.azurecontainer.io/health
    ```
    
-   **Chỉ số thành công mong đợi:**
-   - ✅ `azd up` hoàn thành mà không có lỗi
+   **Chỉ số Thành công Mong đợi:**
+   - ✅ `azd up` hoàn tất không có lỗi
    - ✅ Endpoint dịch vụ trả về HTTP 200
    - ✅ Azure Portal hiển thị trạng thái "Running"
-   - ✅ Application Insights đang nhận telemetry
+   - ✅ Application Insights nhận dữ liệu telemetry
 
-> **⚠️ Gặp sự cố?** Xem [Common Issues](../docs/chapter-07-troubleshooting/common-issues.md) để khắc phục triển khai
+> **⚠️ Gặp sự cố?** Xem [Các Vấn đề Thường Gặp](../docs/chapter-07-troubleshooting/common-issues.md) để khắc phục khi triển khai
 
-### Thích ứng các ví dụ
+### Điều chỉnh Ví dụ
 
 Mỗi ví dụ bao gồm:
 - **README.md** - Hướng dẫn thiết lập và tùy chỉnh chi tiết
 - **azure.yaml** - Cấu hình AZD có chú thích
 - **infra/** - Mẫu Bicep với giải thích tham số
 - **src/** - Mã ứng dụng mẫu
-- **scripts/** - Script hỗ trợ cho các tác vụ thường gặp
+- **scripts/** - Script hỗ trợ cho các tác vụ chung
 
-## 🎯 Mục tiêu học tập
+## 🎯 Mục tiêu Học tập
 
-### Các loại ví dụ
+### Các Loại Ví dụ
 
-#### **Triển khai cơ bản**
+#### **Triển khai Cơ bản**
 - Ứng dụng dịch vụ đơn
 - Mẫu hạ tầng đơn giản
 - Quản lý cấu hình cơ bản
 - Thiết lập phát triển tiết kiệm chi phí
 
-#### **Kịch bản nâng cao**
-- Kiến trúc nhiều dịch vụ
+#### **Kịch bản Nâng cao**
+- Kiến trúc đa dịch vụ
 - Cấu hình mạng phức tạp
 - Mẫu tích hợp cơ sở dữ liệu
-- Thực thi bảo mật và tuân thủ
+- Triển khai bảo mật và tuân thủ
 
-#### **Mẫu sẵn sàng cho sản xuất**
+#### **Mô hình Sẵn sàng cho Sản xuất**
 - Cấu hình độ sẵn sàng cao
 - Giám sát và khả năng quan sát
 - Tích hợp CI/CD
 - Thiết lập phục hồi thảm họa
 
-## 📖 Mô tả ví dụ
+## 📖 Mô tả Ví dụ
 
-### Simple Web App - Node.js Express
-**Technologies**: Node.js, Express, MongoDB, Container Apps  
-**Complexity**: Người mới bắt đầu  
-**Concepts**: Triển khai cơ bản, REST API, tích hợp cơ sở dữ liệu NoSQL
+### Ứng dụng Web Đơn giản - Node.js Express
+**Công nghệ**: Node.js, Express, MongoDB, Container Apps  
+**Độ phức tạp**: Người mới bắt đầu  
+**Khái niệm**: Triển khai cơ bản, REST API, tích hợp cơ sở dữ liệu NoSQL
 
-### Static Website - React SPA
-**Technologies**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
-**Complexity**: Người mới bắt đầu  
-**Concepts**: Lưu trữ tĩnh, backend serverless, phát triển web hiện đại
+### Website Tĩnh - React SPA
+**Công nghệ**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
+**Độ phức tạp**: Người mới bắt đầu  
+**Khái niệm**: Lưu trữ tĩnh, backend serverless, phát triển web hiện đại
 
 ### Container App - Python Flask
-**Technologies**: Python Flask, Docker, Container Apps, Container Registry, Application Insights  
-**Complexity**: Người mới bắt đầu  
-**Concepts**: Container hóa, REST API, scale-to-zero, health probes, giám sát  
-**Location**: [Local Example](../../../examples/container-app/simple-flask-api)
+**Công nghệ**: Python Flask, Docker, Container Apps, Container Registry, Application Insights  
+**Độ phức tạp**: Người mới bắt đầu  
+**Khái niệm**: Containerization, REST API, scale-to-zero, health probes, giám sát  
+**Vị trí**: [Ví dụ Cục bộ](../../../examples/container-app/simple-flask-api)
 
-### Container App - Microservices Architecture
-**Technologies**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, Container Apps  
-**Complexity**: Nâng cao  
-**Concepts**: Kiến trúc đa dịch vụ, giao tiếp giữa dịch vụ, hàng đợi tin nhắn, phân tích theo dõi phân tán  
-**Location**: [Local Example](../../../examples/container-app/microservices)
+### Container App - Kiến trúc Microservices
+**Công nghệ**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, Container Apps  
+**Độ phức tạp**: Nâng cao  
+**Khái niệm**: Kiến trúc đa dịch vụ, giao tiếp dịch vụ, hàng đợi thông điệp, phân tán tracing  
+**Vị trí**: [Ví dụ Cục bộ](../../../examples/container-app/microservices)
 
-### Database App - C# with Azure SQL
-**Technologies**: C# ASP.NET Core, Azure SQL Database, App Service  
-**Complexity**: Trung cấp  
-**Concepts**: Entity Framework, kết nối cơ sở dữ liệu, phát triển web API
+### Ứng dụng Cơ sở dữ liệu - C# với Azure SQL
+**Công nghệ**: C# ASP.NET Core, Azure SQL Database, App Service  
+**Độ phức tạp**: Trung cấp  
+**Khái niệm**: Entity Framework, kết nối cơ sở dữ liệu, phát triển web API
 
-### Serverless Function - Python Azure Functions
-**Technologies**: Python, Azure Functions, Cosmos DB, Static Web Apps  
-**Complexity**: Trung cấp  
-**Concepts**: Kiến trúc hướng sự kiện, điện toán serverless, phát triển full-stack
+### Function Serverless - Python Azure Functions
+**Công nghệ**: Python, Azure Functions, Cosmos DB, Static Web Apps  
+**Độ phức tạp**: Trung cấp  
+**Khái niệm**: Kiến trúc hướng sự kiện, điện toán serverless, phát triển full-stack
 
 ### Microservices - Java Spring Boot
-**Technologies**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
-**Complexity**: Trung cấp  
-**Concepts**: Giao tiếp microservices, hệ thống phân tán, mẫu doanh nghiệp
+**Công nghệ**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
+**Độ phức tạp**: Trung cấp  
+**Khái niệm**: Giao tiếp microservices, hệ thống phân tán, mẫu doanh nghiệp
 
-### Microsoft Foundry Examples
+### Ví dụ Microsoft Foundry
 
-#### Microsoft Foundry Models Chat App
-**Technologies**: Microsoft Foundry Models, Cognitive Search, App Service  
-**Complexity**: Trung cấp  
-**Concepts**: Kiến trúc RAG, tìm kiếm vector, tích hợp LLM
+#### Ứng dụng Chat Microsoft Foundry Models
+**Công nghệ**: Microsoft Foundry Models, Azure AI Search, App Service  
+**Độ phức tạp**: Trung cấp  
+**Khái niệm**: Kiến trúc RAG, tìm kiếm vector, tích hợp LLM
 
-#### AI Document Processing
-**Technologies**: Azure AI Document Intelligence, Storage, Functions  
-**Complexity**: Trung cấp  
-**Concepts**: Phân tích tài liệu, OCR, trích xuất dữ liệu
+#### Xử lý Tài liệu AI
+**Công nghệ**: Azure AI Document Intelligence, Storage, Functions  
+**Độ phức tạp**: Trung cấp  
+**Khái niệm**: Phân tích tài liệu, OCR, trích xuất dữ liệu
 
-#### Machine Learning Pipeline
-**Technologies**: Azure ML, MLOps, Container Registry  
-**Complexity**: Nâng cao  
-**Concepts**: Huấn luyện mô hình, đường ống triển khai, giám sát
+#### Pipeline Máy học
+**Công nghệ**: Azure ML, MLOps, Container Registry  
+**Độ phức tạp**: Nâng cao  
+**Khái niệm**: Huấn luyện mô hình, pipeline triển khai, giám sát
 
-## 🛠 Ví dụ cấu hình
+## 🛠 Ví dụ Cấu hình
 
-Thư mục `configurations/` chứa các thành phần tái sử dụng:
+Thư mục `configurations/` chứa các thành phần có thể tái sử dụng:
 
-### Cấu hình môi trường
-- Cài đặt môi trường Development
-- Cấu hình môi trường Staging
+### Cấu hình Môi trường
+- Cài đặt cho môi trường Development
+- Cấu hình cho môi trường Staging
 - Cấu hình sẵn sàng cho Production
-- Thiết lập triển khai đa khu vực
+- Thiết lập triển khai đa vùng
 
-### Module Bicep
+### Mô-đun Bicep
 - Thành phần hạ tầng tái sử dụng
 - Mẫu tài nguyên phổ biến
-- Templates gia cố bảo mật
+- Template được harden về bảo mật
 - Cấu hình tối ưu chi phí
 
-### Script hỗ trợ
-- Tự động hóa thiết lập môi trường
-- Script di trú cơ sở dữ liệu
+### Script Hỗ trợ
+- Tự động thiết lập môi trường
+- Script di chuyển cơ sở dữ liệu
 - Công cụ xác thực triển khai
-- Tiện ích theo dõi chi phí
+- Tiện ích giám sát chi phí
 
-## 🔧 Hướng dẫn tùy chỉnh
+## 🔧 Hướng dẫn Tùy chỉnh
 
-### Thích ứng ví dụ cho trường hợp sử dụng của bạn
+### Điều chỉnh Ví dụ cho Trường hợp Sử dụng của Bạn
 
-1. **Xem lại yêu cầu tiên quyết**
+1. **Xem lại Yêu cầu tiên quyết**
    - Kiểm tra yêu cầu dịch vụ Azure
    - Xác minh giới hạn subscription
    - Hiểu tác động về chi phí
 
-2. **Thay đổi cấu hình**
+2. **Sửa đổi Cấu hình**
    - Cập nhật định nghĩa dịch vụ trong `azure.yaml`
-   - Tùy chỉnh mẫu Bicep
+   - Tùy chỉnh template Bicep
    - Điều chỉnh biến môi trường
 
-3. **Kiểm tra kỹ lưỡng**
-   - Triển khai trước vào môi trường phát triển
+3. **Kiểm thử Kỹ lưỡng**
+   - Triển khai trước vào môi trường development
    - Xác thực chức năng
-   - Kiểm thử mở rộng và hiệu năng
+   - Kiểm thử khả năng scale và hiệu năng
 
-4. **Đánh giá bảo mật**
-   - Xem xét kiểm soát truy cập
-   - Thực hiện quản lý bí mật
+4. **Đánh giá Bảo mật**
+   - Xem lại kiểm soát truy cập
+   - Triển khai quản lý secrets
    - Bật giám sát và cảnh báo
 
-## 📊 Ma trận so sánh
+## 📊 Bảng So sánh
 
 | Ví dụ | Dịch vụ | Cơ sở dữ liệu | Xác thực | Giám sát | Độ phức tạp |
-|-------|---------|---------------|---------|----------|-------------|
-| **Microsoft Foundry Models Chat** (Local) | 2 | ❌ | Key Vault | Đầy đủ | ⭐⭐ |
-| **Python Flask API** (Local) | 1 | ❌ | Cơ bản | Đầy đủ | ⭐ |
-| **Microservices** (Local) | 5+ | ✅ | Enterprise | Nâng cao | ⭐⭐⭐⭐ |
+|---------|----------|----------|------|------------|------------|
+| **Microsoft Foundry Models Chat** (Cục bộ) | 2 | ❌ | Key Vault | Đầy đủ | ⭐⭐ |
+| **Python Flask API** (Cục bộ) | 1 | ❌ | Cơ bản | Đầy đủ | ⭐ |
+| **Microservices** (Cục bộ) | 5+ | ✅ | Doanh nghiệp | Nâng cao | ⭐⭐⭐⭐ |
 | Node.js Express Todo | 2 | ✅ | Cơ bản | Cơ bản | ⭐ |
 | React SPA + Functions | 3 | ✅ | Cơ bản | Đầy đủ | ⭐ |
 | Python Flask Container | 2 | ❌ | Cơ bản | Đầy đủ | ⭐ |
@@ -492,31 +493,31 @@ Thư mục `configurations/` chứa các thành phần tái sử dụng:
 | Microsoft Foundry Models Chat | 3 | ✅ | Đầy đủ | Đầy đủ | ⭐⭐⭐ |
 | AI Document Processing | 2 | ❌ | Cơ bản | Đầy đủ | ⭐⭐ |
 | ML Pipeline | 4+ | ✅ | Đầy đủ | Đầy đủ | ⭐⭐⭐⭐ |
-| **Retail Multi-Agent** (Local) | **8+** | **✅** | **Enterprise** | **Nâng cao** | **⭐⭐⭐⭐** |
+| **Retail Multi-Agent** (Cục bộ) | **8+** | **✅** | **Doanh nghiệp** | **Nâng cao** | **⭐⭐⭐⭐** |
 
-## 🎓 Lộ trình học
+## 🎓 Lộ trình Học tập
 
-### Trình tự đề xuất
+### Thứ tự Đề xuất
 
-1. **Bắt đầu với Simple Web App**
+1. **Bắt đầu với Ứng dụng Web Đơn giản**
    - Học các khái niệm AZD cơ bản
    - Hiểu quy trình triển khai
    - Thực hành quản lý môi trường
 
-2. **Thử Static Website**
-   - Khám phá các tùy chọn lưu trữ khác nhau
-   - Tìm hiểu về tích hợp CDN
+2. **Thử Website Tĩnh**
+   - Khám phá các tùy chọn hosting khác nhau
+   - Tìm hiểu tích hợp CDN
    - Hiểu cấu hình DNS
 
 3. **Chuyển sang Container App**
-   - Học các khái niệm cơ bản về container
-   - Hiểu các khái niệm mở rộng
+   - Học các khái niệm containerization cơ bản
+   - Hiểu khái niệm scale
    - Thực hành với Docker
 
-4. **Thêm tích hợp cơ sở dữ liệu**
-   - Học cách provision cơ sở dữ liệu
+4. **Thêm Tích hợp Cơ sở dữ liệu**
+   - Học cách cung cấp cơ sở dữ liệu
    - Hiểu chuỗi kết nối
-   - Thực hành quản lý bí mật
+   - Thực hành quản lý secrets
 
 5. **Khám phá Serverless**
    - Hiểu kiến trúc hướng sự kiện
@@ -524,76 +525,76 @@ Thư mục `configurations/` chứa các thành phần tái sử dụng:
    - Thực hành với API
 
 6. **Xây dựng Microservices**
-   - Học giao tiếp giữa dịch vụ
+   - Học giao tiếp dịch vụ
    - Hiểu hệ thống phân tán
    - Thực hành triển khai phức tạp
 
-## 🔍 Tìm ví dụ phù hợp
+## 🔍 Tìm Ví dụ Phù hợp
 
-### Theo ngăn xếp công nghệ
-- **Container Apps**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices), Java Microservices
-- **Node.js**: Node.js Express Todo App, [Microservices API Gateway (Local)](../../../examples/container-app/microservices)
-- **Python**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), [Microservices Product Service (Local)](../../../examples/container-app/microservices), Python Functions + SPA
-- **C#**: [Microservices Order Service (Local)](../../../examples/container-app/microservices), C# Web API + SQL Database, Microsoft Foundry Models Chat App, ML Pipeline
-- **Go**: [Microservices User Service (Local)](../../../examples/container-app/microservices)
+### Theo Ngăn xếp Công nghệ
+- **Container Apps**: [Python Flask API (Cục bộ)](../../../examples/container-app/simple-flask-api), [Microservices (Cục bộ)](../../../examples/container-app/microservices), Java Microservices
+- **Node.js**: Node.js Express Todo App, [Microservices API Gateway (Cục bộ)](../../../examples/container-app/microservices)
+- **Python**: [Python Flask API (Cục bộ)](../../../examples/container-app/simple-flask-api), [Microservices Product Service (Cục bộ)](../../../examples/container-app/microservices), Python Functions + SPA
+- **C#**: [Microservices Order Service (Cục bộ)](../../../examples/container-app/microservices), C# Web API + SQL Database, Microsoft Foundry Models Chat App, ML Pipeline
+- **Go**: [Microservices User Service (Cục bộ)](../../../examples/container-app/microservices)
 - **Java**: Java Spring Boot Microservices
 - **React**: React SPA + Functions
-- **Containers**: [Python Flask (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices), Java Microservices
-- **Databases**: [Microservices (Local)](../../../examples/container-app/microservices), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
-- **AI/ML**: **[Microsoft Foundry Models Chat (Local)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **Containers**: [Python Flask (Cục bộ)](../../../examples/container-app/simple-flask-api), [Microservices (Cục bộ)](../../../examples/container-app/microservices), Java Microservices
+- **Databases**: [Microservices (Cục bộ)](../../../examples/container-app/microservices), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
+- **AI/ML**: **[Microsoft Foundry Models Chat (Cục bộ)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
 - **Multi-Agent Systems**: **Retail Multi-Agent Solution**
-- **OpenAI Integration**: **[Microsoft Foundry Models Chat (Local)](../../../examples/azure-openai-chat)**, Retail Multi-Agent Solution
-- **Enterprise Production**: [Microservices (Local)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
+- **OpenAI Integration**: **[Microsoft Foundry Models Chat (Cục bộ)](../../../examples/azure-openai-chat)**, Retail Multi-Agent Solution
+- **Enterprise Production**: [Microservices (Cục bộ)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
 
-### Theo mô hình kiến trúc
-- **Simple REST API**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api)
+### Theo Mẫu Kiến trúc
+- **Simple REST API**: [Python Flask API (Cục bộ)](../../../examples/container-app/simple-flask-api)
 - **Monolithic**: Node.js Express Todo, C# Web API + SQL
 - **Static + Serverless**: React SPA + Functions, Python Functions + SPA
-- **Microservices**: [Production Microservices (Local)](../../../examples/container-app/microservices), Java Spring Boot Microservices
-- **Containerized**: [Python Flask (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices)
-- **AI-Powered**: **[Microsoft Foundry Models Chat (Local)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
-- **Kiến trúc đa tác nhân**: **Retail Multi-Agent Solution**
-- **Doanh nghiệp nhiều dịch vụ**: [Microservices (Local)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
+- **Microservices**: [Production Microservices (Cục bộ)](../../../examples/container-app/microservices), Java Spring Boot Microservices
+- **Containerized**: [Python Flask (Cục bộ)](../../../examples/container-app/simple-flask-api), [Microservices (Cục bộ)](../../../examples/container-app/microservices)
+- **AI-Powered**: **[Microsoft Foundry Models Chat (Cục bộ)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **Multi-Agent Architecture**: **Retail Multi-Agent Solution**
+- **Enterprise Multi-Service**: [Microservices (Cục bộ)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
 
-### Theo mức độ phức tạp
-- **Người mới**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions
-- **Trung cấp**: **[Microsoft Foundry Models Chat (Local)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Microservices, Microsoft Foundry Models Chat App, AI Document Processing
+### Theo Mức Độ Phức tạp
+- **Người mới bắt đầu**: [Python Flask API (Cục bộ)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions
+- **Trung cấp**: **[Microsoft Foundry Models Chat (Cục bộ)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Microservices, Microsoft Foundry Models Chat App, AI Document Processing
 - **Nâng cao**: ML Pipeline
-- **Sẵn sàng cho sản xuất doanh nghiệp**: [Microservices (Local)](../../../examples/container-app/microservices) (Nhiều dịch vụ với hàng đợi tin nhắn), **Retail Multi-Agent Solution** (Hệ thống đa tác nhân hoàn chỉnh với mẫu ARM để triển khai)
+- **Sẵn sàng cho Sản xuất Doanh nghiệp**: [Microservices (Cục bộ)](../../../examples/container-app/microservices) (Đa dịch vụ với hàng đợi thông điệp), **Retail Multi-Agent Solution** (Hệ thống đa-agent hoàn chỉnh với triển khai mẫu ARM)
 
-## 📚 Tài nguyên bổ sung
+## 📚 Tài nguyên Bổ sung
 
-### Liên kết tài liệu
+### Liên kết Tài liệu
 - [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
 - [Microsoft Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
 - [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
-### Ví dụ cộng đồng
-- [Mẫu AZD Azure Samples](https://github.com/Azure-Samples/azd-templates)
-- [Mẫu Microsoft Foundry](https://github.com/Azure/ai-foundry-templates)
-- [Thư viện Azure Developer CLI](https://azure.github.io/awesome-azd/)
-- [Ứng dụng Todo với C# và Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
-- [Ứng dụng Todo với Python và MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
-- [Ứng dụng Todo với Node.js và PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
-- [Ứng dụng Web React với API C#](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
-- [Tác vụ Azure Container Apps](https://github.com/Azure-Samples/container-apps-jobs)
+### Ví dụ từ Cộng đồng
+- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
+- [Microsoft Foundry Templates](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
+- [Todo App with C# and Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
+- [Todo App with Python and MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
+- [Todo App with Node.js and PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [Ứng dụng web React với API C#](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- [Azure Container Apps Job](https://github.com/Azure-Samples/container-apps-jobs)
 - [Azure Functions với Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
-### Thực tiễn tốt nhất
-- [Khung Well-Architected của Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
-- [Khung Thích ứng Đám mây](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
+### Thực hành tốt nhất
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Cloud Adoption Framework](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
 ## 🤝 Góp ví dụ
 
-Bạn có ví dụ hữu ích muốn chia sẻ? Chúng tôi hoan nghênh mọi đóng góp!
+Bạn có một ví dụ hữu ích để chia sẻ? Chúng tôi chào đón đóng góp!
 
 ### Hướng dẫn gửi bài
 1. Tuân theo cấu trúc thư mục đã thiết lập
-2. Bao gồm README.md toàn diện
+2. Bao gồm README.md đầy đủ
 3. Thêm chú thích vào các tệp cấu hình
 4. Kiểm tra kỹ lưỡng trước khi gửi
-5. Bao gồm ước tính chi phí và các yêu cầu tiên quyết
+5. Bao gồm ước tính chi phí và các điều kiện tiên quyết
 
 ### Cấu trúc mẫu ví dụ
 ```
@@ -611,46 +612,46 @@ example-name/
 
 ---
 
-**Mẹo chuyên nghiệp**: Bắt đầu với ví dụ đơn giản nhất phù hợp với ngăn xếp công nghệ của bạn, sau đó dần dần lên tới các kịch bản phức tạp hơn. Mỗi ví dụ xây dựng trên các khái niệm từ các ví dụ trước!
+**Mẹo chuyên nghiệp**: Bắt đầu với ví dụ đơn giản nhất phù hợp với ngăn xếp công nghệ của bạn, sau đó từ từ mở rộng sang các kịch bản phức tạp hơn. Mỗi ví dụ xây dựng trên các khái niệm từ các ví dụ trước đó!
 
 ## 🚀 Sẵn sàng bắt đầu?
 
 ### Lộ trình học của bạn
 
-1. **Hoàn toàn mới bắt đầu?** → Bắt đầu với [Flask API](../../../examples/container-app/simple-flask-api) (⭐, 20 phút)
+1. **Hoàn toàn mới?** → Bắt đầu với [Flask API](../../../examples/container-app/simple-flask-api) (⭐, 20 phút)
 2. **Đã có kiến thức cơ bản về AZD?** → Thử [Microservices](../../../examples/container-app/microservices) (⭐⭐⭐⭐, 60 phút)
-3. **Xây dựng ứng dụng AI?** → Bắt đầu với [Microsoft Foundry Models Chat](../../../examples/azure-openai-chat) (⭐⭐, 35 phút) hoặc khám phá [Retail Multi-Agent](retail-scenario.md) (⭐⭐⭐⭐, hơn 2 giờ)
-4. **Cần ngăn xếp công nghệ cụ thể?** → Sử dụng [Tìm ví dụ phù hợp](#-finding-the-right-example) mục ở trên
+3. **Xây dựng ứng dụng AI?** → Bắt đầu với [Microsoft Foundry Models Chat](../../../examples/azure-openai-chat) (⭐⭐, 35 phút) hoặc khám phá [Retail Multi-Agent](retail-scenario.md) (⭐⭐⭐⭐, 2+ giờ)
+4. **Cần ngăn xếp công nghệ cụ thể?** → Sử dụng phần [Tìm ví dụ phù hợp](#-finding-the-right-example) ở trên
 
-### Các bước tiếp theo
+### Bước tiếp theo
 
 - ✅ Xem lại [Yêu cầu tiên quyết](#yêu-cầu-tiên-quyết) ở trên
-- ✅ Chọn một ví dụ phù hợp với trình độ của bạn (xem [Chú giải mức độ phức tạp](#chú-giải-mức-độ-phức-tạp))
+- ✅ Chọn ví dụ phù hợp với trình độ của bạn (xem [Chú thích độ phức tạp](#huy-hiệu-đánh-giá-độ-phức-tạp))
 - ✅ Đọc kỹ README của ví dụ trước khi triển khai
 - ✅ Đặt lời nhắc để chạy `azd down` sau khi kiểm tra
-- ✅ Chia sẻ trải nghiệm của bạn thông qua GitHub Issues hoặc Discussions
+- ✅ Chia sẻ trải nghiệm của bạn qua GitHub Issues hoặc Discussions
 
 ### Cần trợ giúp?
 
-- 📖 [FAQ](../resources/faq.md) - Các câu hỏi thường gặp được trả lời
-- 🐛 [Hướng dẫn khắc phục sự cố](../docs/chapter-07-troubleshooting/common-issues.md) - Khắc phục sự cố triển khai
+- 📖 [Câu hỏi thường gặp](../resources/faq.md) - Giải đáp các câu hỏi phổ biến
+- 🐛 [Hướng dẫn khắc phục sự cố](../docs/chapter-07-troubleshooting/common-issues.md) - Sửa các vấn đề triển khai
 - 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - Hỏi cộng đồng
 - 📚 [Hướng dẫn học tập](../resources/study-guide.md) - Củng cố kiến thức của bạn
 
 ---
 
-**Navigation**
-- **📚 Trang khoá học**: [AZD dành cho người mới bắt đầu](../README.md)
-- **📖 Tài liệu học**: [Hướng dẫn học tập](../resources/study-guide.md) | [Bảng tóm tắt](../resources/cheat-sheet.md) | [Thuật ngữ](../resources/glossary.md)
-- **🔧 Tài nguyên**: [FAQ](../resources/faq.md) | [Khắc phục sự cố](../docs/chapter-07-troubleshooting/common-issues.md)
+**Điều hướng**
+- **📚 Trang khóa học**: [AZD For Beginners](../README.md)
+- **📖 Tài liệu học tập**: [Hướng dẫn học tập](../resources/study-guide.md) | [Bảng tóm tắt](../resources/cheat-sheet.md) | [Thuật ngữ](../resources/glossary.md)
+- **🔧 Tài nguyên**: [Câu hỏi thường gặp](../resources/faq.md) | [Khắc phục sự cố](../docs/chapter-07-troubleshooting/common-issues.md)
 
 ---
 
-*Cập nhật lần cuối: Tháng 11 năm 2025 | [Báo cáo sự cố](https://github.com/microsoft/AZD-for-beginners/issues) | [Góp ví dụ](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
+*Cập nhật lần cuối: November 2025 | [Báo cáo sự cố](https://github.com/microsoft/AZD-for-beginners/issues) | [Góp ví dụ](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Miễn trừ trách nhiệm**:
-Tài liệu này được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi nỗ lực đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Văn bản gốc bằng ngôn ngữ gốc nên được coi là nguồn có thẩm quyền. Đối với các thông tin quan trọng, nên sử dụng bản dịch chuyên nghiệp do người dịch thực hiện. Chúng tôi không chịu trách nhiệm về bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+**Tuyên bố miễn trừ trách nhiệm**:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng bản dịch tự động có thể chứa lỗi hoặc sai sót. Tài liệu gốc bằng ngôn ngữ gốc nên được coi là nguồn tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

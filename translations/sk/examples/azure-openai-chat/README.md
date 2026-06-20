@@ -1,12 +1,12 @@
 # Chatovacia aplikácia Microsoft Foundry Models
 
-**Vzdelávacia cesta:** Stredne pokročilý ⭐⭐ | **Čas:** 35-45 minutes | **Náklady:** $50-200/month
+**Vzdelávacia cesta:** Pokročilá ⭐⭐ | **Čas:** 35-45 minút | **Cena:** $50-200/mesiac
 
 Kompletná chatovacia aplikácia Microsoft Foundry Models nasadená pomocou Azure Developer CLI (azd). Tento príklad demonštruje nasadenie gpt-4.1, zabezpečený prístup k API a jednoduché chatové rozhranie.
 
 ## 🎯 Čo sa naučíte
 
-- Nasadiť Microsoft Foundry Models Service s modelom gpt-4.1
+- Nasadiť službu Microsoft Foundry Models s modelom gpt-4.1
 - Zabezpečiť OpenAI API kľúče pomocou Key Vault
 - Vytvoriť jednoduché chatové rozhranie v Pythone
 - Monitorovať používanie tokenov a náklady
@@ -14,36 +14,37 @@ Kompletná chatovacia aplikácia Microsoft Foundry Models nasadená pomocou Azur
 
 ## 📦 Čo je zahrnuté
 
-✅ **Microsoft Foundry Models Service** - gpt-4.1 model deployment  
-✅ **Python Chat App** - Simple command-line chat interface  
-✅ **Key Vault Integration** - Secure API key storage  
-✅ **ARM Templates** - Complete infrastructure as code  
-✅ **Cost Monitoring** - Token usage tracking  
-✅ **Rate Limiting** - Prevent quota exhaustion  
+✅ **Microsoft Foundry Models Service** - nasadenie modelu gpt-4.1  
+✅ **Python Chat App** - Jednoduché chatové rozhranie v príkazovom riadku  
+✅ **Key Vault Integration** - Bezpečné ukladanie API kľúčov  
+✅ **ARM Templates** - Kompletná infraštruktúra ako kód  
+✅ **Cost Monitoring** - Sledovanie využitia tokenov  
+✅ **Rate Limiting** - Predísť vyčerpaniu kvóty  
 
 ## Architektúra
 
 ```mermaid
 graph TD
-    App[Python chatovacia aplikácia<br/>Lokálne/Cloud<br/>Príkazové rozhranie<br/>História konverzácií<br/>Sledovanie využitia tokenov] -- "HTTPS (API kľúč)" --> Foundry[Služba Microsoft Foundry Models<br/>Model gpt-4.1<br/>Kapacita 20K tokenov/min<br/>Failover v viacerých regiónoch]
+    App[Chatová aplikácia v Pythone<br/>Lokálne/Cloud<br/>Príkazové rozhranie<br/>História konverzácií<br/>Sledovanie využitia tokenov] -- "HTTPS (API kľúč)" --> Foundry[Služba Microsoft Foundry Models<br/>Model gpt-4.1<br/>Kapacita 20K tokenov/min<br/>Núdzové prepínanie medzi regiónmi]
     Foundry --> KV[Azure Key Vault<br/>API kľúč OpenAI<br/>URL koncového bodu]
     Foundry -. Spravovaná identita .-> KV
 ```
+
 ## Predpoklady
 
-### Požadované
+### Vyžadované
 
 - **Azure Developer CLI (azd)** - [Návod na inštaláciu](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure subscription** with OpenAI access - [Request access](https://aka.ms/oai/access)
-- **Python 3.9+** - [Inštalácia Pythonu](https://www.python.org/downloads/)
+- **Azure subscription** s prístupom k OpenAI - [Požiadať o prístup](https://aka.ms/oai/access)
+- **Python 3.9+** - [Nainštalovať Python](https://www.python.org/downloads/)
 
 ### Overenie predpokladov
 
 ```bash
-# Skontrolujte verziu azd (potrebná verzia 1.5.0 alebo novšia)
+# Skontrolujte verziu azd (vyžaduje sa 1.5.0 alebo novšia)
 azd version
 
-# Overte prihlásenie do Azure
+# Skontrolujte prihlásenie do Azure
 azd auth login
 
 # Skontrolujte verziu Pythonu
@@ -55,36 +56,36 @@ az cognitiveservices account list-skus \
   --location eastus
 ```
 
-> **⚠️ Dôležité:** Microsoft Foundry Models vyžaduje schválenie žiadosti. Ak ste to ešte neurobili, navštívte [aka.ms/oai/access](https://aka.ms/oai/access). Schválenie obvykle trvá 1-2 pracovné dni.
+> **⚠️ Dôležité:** Microsoft Foundry Models vyžaduje schválenie žiadosti. Ak ste o prístup nepožiadali, navštívte [aka.ms/oai/access](https://aka.ms/oai/access). Schválenie zvyčajne trvá 1–2 pracovné dni.
 
-## ⏱️ Časový harmonogram nasadenia
+## ⏱️ Časový plán nasadenia
 
-| Phase | Duration | What Happens |
+| Fáza | Trvanie | Čo sa deje |
 |-------|----------|--------------|
-| Prerequisites check | 2-3 minutes | Verify OpenAI quota availability |
-| Deploy infrastructure | 8-12 minutes | Vytvorenie služieb OpenAI, Key Vault a nasadenie modelu |
-| Configure application | 2-3 minutes | Nastavenie prostredia a závislostí |
+| Kontrola predpokladov | 2-3 minúty | Overenie dostupnosti kvóty OpenAI |
+| Nasadiť infraštruktúru | 8-12 minút | Vytvorenie OpenAI, Key Vault, nasadenie modelu |
+| Konfigurácia aplikácie | 2-3 minúty | Nastavenie prostredia a závislostí |
 | **Celkom** | **12-18 minút** | Pripravené na chat s gpt-4.1 |
 
-**Poznámka:** Prvé nasadenie služby OpenAI môže trvať dlhšie kvôli príprave modelu.
+**Poznámka:** Prvé nasadenie OpenAI môže trvať dlhšie kvôli príprave modelu.
 
 ## Rýchly štart
 
 ```bash
-# Prejdite k príkladu
+# Prejdite na príklad
 cd examples/azure-openai-chat
 
 # Inicializujte prostredie
 azd env new myopenai
 
-# Nasadiť všetko (infraštruktúra + konfigurácia)
+# Nasaďte všetko (infraštruktúra + konfigurácia)
 azd up
 # Budete vyzvaní na:
 # 1. Vyberte predplatné Azure
-# 2. Zvoľte lokalitu, kde je dostupný OpenAI (napr. eastus, eastus2, westus)
+# 2. Zvoľte lokalitu s dostupnosťou OpenAI (napr. eastus, eastus2, westus)
 # 3. Počkajte 12-18 minút na nasadenie
 
-# Nainštalujte závislosti Pythonu
+# Nainštalujte závislosti pre Python
 pip install -r requirements.txt
 
 # Začnite chatovať!
@@ -103,17 +104,17 @@ Assistant: Microsoft Foundry Models Service provides REST API access to OpenAI's
 [Tokens used: 145 | Estimated cost: $0.0044]
 ```
 
-## ✅ Overenie nasadenia
+## ✅ Overiť nasadenie
 
-### Krok 1: Skontrolujte zdroje v Azure
+### Krok 1: Skontrolujte zdroje Azure
 
 ```bash
-# Zobraziť nasadené prostriedky
+# Zobraziť nasadené zdroje
 azd show
 
 # Očakávaný výstup zobrazuje:
-# - Služba OpenAI: (názov prostriedku)
-# - Trezor kľúčov: (názov prostriedku)
+# - Služba OpenAI: (názov zdroja)
+# - Key Vault: (názov zdroja)
 # - Nasadenie: gpt-4.1
 # - Lokalita: eastus (alebo váš vybraný región)
 ```
@@ -121,7 +122,7 @@ azd show
 ### Krok 2: Otestujte OpenAI API
 
 ```bash
-# Získať koncový bod OpenAI a kľúč
+# Získať OpenAI endpoint a kľúč
 OPENAI_ENDPOINT=$(azd env get-value AZURE_OPENAI_ENDPOINT)
 OPENAI_KEY=$(azd env get-value AZURE_OPENAI_API_KEY)
 
@@ -154,10 +155,10 @@ curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2
 }
 ```
 
-### Krok 3: Overte prístup k Key Vault
+### Krok 3: Overiť prístup ku Key Vault
 
 ```bash
-# Zobraziť tajomstvá v Key Vault
+# Zoznam tajomstiev v Key Vault
 KV_NAME=$(azd env get-value AZURE_KEY_VAULT_NAME)
 
 az keyvault secret list \
@@ -171,10 +172,10 @@ az keyvault secret list \
 - `openai-endpoint`
 
 **Kritériá úspechu:**
-- ✅ Služba OpenAI nasadená s gpt-4.1
-- ✅ Volanie API vráti platnú odpoveď
+- ✅ OpenAI služba nasadená s gpt-4.1
+- ✅ API volanie vracia platnú odpoveď
 - ✅ Tajomstvá uložené v Key Vault
-- ✅ Sledovanie používania tokenov funguje
+- ✅ Sledovanie využitia tokenov funguje
 
 ## Štruktúra projektu
 
@@ -195,30 +196,30 @@ azure-openai-chat/
 
 ## Funkcie aplikácie
 
-### Chatové rozhranie (`chat.py`)
+### Chatovacie rozhranie (`chat.py`)
 
-Chatová aplikácia obsahuje:
+Chatovacia aplikácia obsahuje:
 
-- **História konverzácie** - Zachováva kontext medzi správami
-- **Počítanie tokenov** - Sleduje používanie a odhaduje náklady
-- **Spracovanie chýb** - Ošetrenie obmedzení rýchlosti a chýb API
-- **Odhad nákladov** - Výpočet nákladov v reálnom čase na správu
-- **Podpora streamovania** - Voliteľné streamovanie odpovedí
+- **História konverzácie** - Udržuje kontext medzi správami
+- **Počítanie tokenov** - Sleduje využitie a odhaduje náklady
+- **Spracovanie chýb** - Elegantné riešenie limitov rýchlosti a chýb API
+- **Odhad nákladov** - Výpočet reálnych nákladov za správu
+- **Podpora streamovania** - Voliteľné streamované odpovede
 
 ### Príkazy
 
 Počas chatovania môžete použiť:
 - `quit` or `exit` - Ukončiť reláciu
 - `clear` - Vymazať históriu konverzácie
-- `tokens` - Zobraziť celkové používanie tokenov
+- `tokens` - Zobraziť celkové využitie tokenov
 - `cost` - Zobraziť odhadované celkové náklady
 
 ### Konfigurácia (`config.py`)
 
-Načítava konfiguráciu z premenných prostredia:
+Načíta konfiguráciu z premenných prostredia:
 ```python
-AZURE_OPENAI_ENDPOINT  # Zo služby Key Vault
-AZURE_OPENAI_API_KEY   # Zo služby Key Vault
+AZURE_OPENAI_ENDPOINT  # Z úložiska kľúčov
+AZURE_OPENAI_API_KEY   # Z úložiska kľúčov
 AZURE_OPENAI_MODEL     # Predvolené: gpt-4.1
 AZURE_OPENAI_MAX_TOKENS # Predvolené: 800
 ```
@@ -279,13 +280,13 @@ Total session: 156 tokens | $0.0047
 
 Na základe vzorov používania:
 
-| Úroveň používania | Správy/Deň | Tokens/Deň | Mesačné náklady |
+| Úroveň používania | Správy/deň | Tokeny/deň | Mesačné náklady |
 |-------------|--------------|------------|--------------|
-| **Ľahké** | 20 messages | 3,000 tokens | $3-5 |
-| **Stredné** | 100 messages | 15,000 tokens | $15-25 |
-| **Náročné** | 500 messages | 75,000 tokens | $75-125 |
+| **Ľahké** | 20 správ | 3,000 tokenov | $3-5 |
+| **Stredné** | 100 správ | 15,000 tokenov | $15-25 |
+| **Ťažké** | 500 správ | 75,000 tokenov | $75-125 |
 
-**Základné náklady na infraštruktúru:** $1-2/month (Key Vault + minimálny výpočtový výkon)
+**Základné náklady na infraštruktúru:** $1-2/mesiac (Key Vault + minimálne výpočtové prostriedky)
 
 ### Tipy na optimalizáciu nákladov
 
@@ -293,13 +294,13 @@ Na základe vzorov používania:
 # 1. Použite GPT-3.5-Turbo pre jednoduchšie úlohy (20× lacnejšie)
 export AZURE_OPENAI_MODEL=gpt-35-turbo
 
-# 2. Znížte max. počet tokenov pre kratšie odpovede
+# 2. Znížte maximálny počet tokenov pre kratšie odpovede
 export AZURE_OPENAI_MAX_TOKENS=400
 
-# 3. Sledujte používanie tokenov
+# 3. Sledujte spotrebu tokenov
 python chat.py --show-tokens
 
-# 4. Nastavte rozpočtové upozornenia
+# 4. Nastavte upozornenia pre rozpočet
 az consumption budget create \
   --budget-name "openai-budget" \
   --amount 50 \
@@ -308,10 +309,10 @@ az consumption budget create \
 
 ## Monitorovanie
 
-### Zobraziť používanie tokenov
+### Zobraziť využitie tokenov
 
 ```bash
-# V Azure Portáli:
+# V Azure portáli:
 # OpenAI zdroj → Metriky → Vyberte "Transakcia tokenov"
 
 # Alebo cez Azure CLI:
@@ -340,13 +341,13 @@ az monitor log-analytics query \
 
 ## Riešenie problémov
 
-### Problém: Chyba "Access Denied"
+### Problém: "Prístup odmietnutý"
 
 **Príznaky:** 403 Forbidden pri volaní API
 
 **Riešenia:**
 ```bash
-# 1. Overte, či je prístup k OpenAI schválený
+# 1. Overte, že prístup k OpenAI je schválený
 az cognitiveservices account show \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
@@ -359,7 +360,7 @@ azd env get-value AZURE_OPENAI_ENDPOINT
 # Malo by byť: https://[name].openai.azure.com/
 ```
 
-### Problém: Chyba "Rate Limit Exceeded"
+### Problém: "Prekročený limit požiadaviek"
 
 **Príznaky:** 429 Too Many Requests
 
@@ -372,43 +373,43 @@ az cognitiveservices account deployment show \
   --deployment-name gpt-4.1
 
 # 2. Požiadajte o zvýšenie kvóty (ak je to potrebné)
-# Prejdite na Azure Portal → zdroj OpenAI → Kvóty → Požiadajte o zvýšenie
+# Prejdite do Azure portálu → zdroj OpenAI → Kvóty → Požiadať o zvýšenie
 
-# 3. Implementujte logiku opätovných pokusov (už v chat.py)
+# 3. Implementujte logiku opakovaných pokusov (už v chat.py)
 # Aplikácia automaticky opakuje pokusy s exponenciálnym oneskorením
 ```
 
-### Problém: Chyba "Model Not Found"
+### Problém: "Model nenájdený"
 
-**Príznaky:** 404 error pri nasadení
+**Príznaky:** 404 chyba pre nasadenie
 
 **Riešenia:**
 ```bash
-# 1. Zobrazte dostupné nasadenia
+# 1. Zobraziť dostupné nasadenia
 az cognitiveservices account deployment list \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
 
-# 2. Overte názov modelu v prostredí
+# 2. Overiť názov modelu v prostredí
 echo $AZURE_OPENAI_MODEL
 
-# 3. Aktualizujte na správny názov nasadenia
+# 3. Aktualizovať na správny názov nasadenia
 export AZURE_OPENAI_MODEL=gpt-4.1  # alebo gpt-35-turbo
 ```
 
 ### Problém: Vysoká latencia
 
-**Príznaky:** Pomalé reakčné časy (>5 seconds)
+**Príznaky:** Pomalé odpovede (>5 sekúnd)
 
 **Riešenia:**
 ```bash
-# 1. Skontrolujte regionálnu latenciu
-# Nasadiť do regiónu najbližšie k používateľom
+# 1. Skontrolovať regionálnu latenciu
+# Nasadiť do regiónu, ktorý je najbližšie používateľom
 
-# 2. Znížte max_tokens pre rýchlejšie odpovede
+# 2. Znížiť max_tokens pre rýchlejšie odpovede
 export AZURE_OPENAI_MAX_TOKENS=400
 
-# 3. Použite streamovanie pre lepší používateľský zážitok
+# 3. Použiť streamovanie pre lepší používateľský zážitok
 python chat.py --stream
 ```
 
@@ -418,7 +419,7 @@ python chat.py --stream
 
 ```bash
 # Nikdy neukladajte kľúče do systému správy verzií
-# Použite Key Vault (už nakonfigurované)
+# Použite Key Vault (už nakonfigurovaný)
 
 # Pravidelne obmieňajte kľúče
 az cognitiveservices account keys regenerate \
@@ -431,18 +432,18 @@ az cognitiveservices account keys regenerate \
 
 ```python
 # Microsoft Foundry Models obsahuje vstavané filtrovanie obsahu
-# Konfigurujte v Azure portáli:
-# OpenAI zdroj → Filtre obsahu → Vytvoriť vlastný filter
+# Konfigurujte v Azure Portáli:
+# OpenAI Resource → Filtre obsahu → Vytvoriť vlastný filter
 
-# Kategórie: nenávisť, sexuálny obsah, násilie, sebaubližovanie
-# Úrovne: nízke, stredné, vysoké filtrovanie
+# Kategórie: Nenávisť, Sexuálny obsah, Násilie, Sebapoškodzovanie
+# Úrovne filtrovania: Nízke, Stredné, Vysoké
 ```
 
-### 3. Používajte Managed Identity (produkcia)
+### 3. Použite Managed Identity (produkcia)
 
 ```bash
 # Pre produkčné nasadenia používajte spravovanú identitu
-# namiesto API kľúčov (vyžaduje hosťovanie aplikácie na Azure)
+# namiesto API kľúčov (vyžaduje hostovanie aplikácie v Azure)
 
 # Aktualizujte infra/openai.bicep, aby obsahoval:
 # identity: { type: 'SystemAssigned' }
@@ -450,7 +451,7 @@ az cognitiveservices account keys regenerate \
 
 ## Vývoj
 
-### Spustenie lokálne
+### Spustiť lokálne
 
 ```bash
 # Nainštalovať závislosti
@@ -465,10 +466,10 @@ export AZURE_OPENAI_MODEL="gpt-4.1"
 python src/chat.py
 ```
 
-### Spustenie testov
+### Spustiť testy
 
 ```bash
-# Nainštalovať testovacie závislosti
+# Nainštalovať závislosti pre testovanie
 pip install pytest pytest-cov
 
 # Spustiť testy
@@ -478,7 +479,7 @@ pytest tests/ -v
 pytest tests/ --cov=src --cov-report=html
 ```
 
-### Aktualizácia nasadenia modelu
+### Aktualizovať nasadenie modelu
 
 ```bash
 # Nasadiť inú verziu modelu
@@ -496,91 +497,91 @@ az cognitiveservices account deployment create \
 ## Vyčistenie
 
 ```bash
-# Odstrániť všetky Azure prostriedky
+# Odstrániť všetky prostriedky Azure
 azd down --force --purge
 
 # Toto odstráni:
 # - Služba OpenAI
-# - Key Vault (s 90-dňovým mäkkým zmazaním)
+# - Key Vault (s 90-dňovým mäkkým vymazaním)
 # - Skupina prostriedkov
 # - Všetky nasadenia a konfigurácie
 ```
 
 ## Ďalšie kroky
 
-### Rozšírenie tohto príkladu
+### Rozšíriť tento príklad
 
 1. **Pridať webové rozhranie** - Vytvoriť frontend v React/Vue
    ```bash
    # Pridať frontend službu do azure.yaml
-   # Nasadiť na Azure Static Web Apps
+   # Nasadiť do Azure Static Web Apps
    ```
 
-2. **Implementovať RAG** - Pridať vyhľadávanie v dokumentoch pomocou Azure AI Search
+2. **Implementovať RAG** - Pridať vyhľadávanie dokumentov pomocou Azure AI Search
    ```python
-   # Integrovať Azure Cognitive Search
-   # Nahrať dokumenty a vytvoriť vektorový index
+   # Integrujte Azure AI Search
+   # Nahrajte dokumenty a vytvorte vektorový index
    ```
 
-3. **Pridať volanie funkcií** - Povoliť používanie nástrojov
+3. **Pridať volanie funkcií** - Povoliť použitie nástrojov
    ```python
    # Definujte funkcie v chat.py
-   # Povoľte gpt-4.1 volať externé API
+   # Nechajte gpt-4.1 volať externé API
    ```
 
 4. **Podpora viacerých modelov** - Nasadiť viacero modelov
    ```bash
-   # Pridať gpt-35-turbo a modely embeddings
+   # Pridať modely gpt-35-turbo a embeddings
    # Implementovať logiku smerovania modelov
    ```
 
-### Súvisiace príklady
+### Služobné príklady
 
 - **[Retail Multi-Agent](../retail-scenario.md)** - Pokročilá architektúra viacerých agentov
 - **[Database App](../../../../examples/database-app)** - Pridať perzistentné úložisko
-- **[Container Apps](../../../../examples/container-app)** - Nasadiť ako kontajnerovú službu
+- **[Container Apps](../../../../examples/container-app)** - Nasadiť ako kontajnerizovanú službu
 
 ### Vzdelávacie zdroje
 
 - 📚 [AZD For Beginners Course](../../README.md) - Hlavná stránka kurzu
 - 📚 [Microsoft Foundry Models Documentation](https://learn.microsoft.com/azure/ai-services/openai/) - Oficiálna dokumentácia
-- 📚 [OpenAI API Reference](https://platform.openai.com/docs/api-reference) - Detaily API
+- 📚 [OpenAI API Reference](https://platform.openai.com/docs/api-reference) - Referencia API
 - 📚 [Responsible AI](https://www.microsoft.com/ai/responsible-ai) - Najlepšie postupy
 
-## Dodatočné zdroje
+## Ďalšie zdroje
 
 ### Dokumentácia
 - **[Microsoft Foundry Models Service](https://learn.microsoft.com/azure/ai-services/openai/)** - Kompletný sprievodca
 - **[gpt-4.1 Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - Schopnosti modelu
 - **[Content Filtering](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - Bezpečnostné funkcie
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd reference
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - Referencia azd
 
 ### Tutoriály
 - **[OpenAI Quickstart](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - Prvé nasadenie
-- **[Chat Completions](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - Vytváranie chat aplikácií
+- **[Chat Completions](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - Budovanie chatovacích aplikácií
 - **[Function Calling](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - Pokročilé funkcie
 
 ### Nástroje
-- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - Webové testovacie prostredie
-- **[Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)** - Písanie lepších promptov
-- **[Token Calculator](https://platform.openai.com/tokenizer)** - Odhad používania tokenov
+- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - Webové prostredie na testovanie
+- **[Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)** - Ako písať lepšie požiadavky
+- **[Token Calculator](https://platform.openai.com/tokenizer)** - Odhadovanie využitia tokenov
 
 ### Komunita
-- **[Azure AI Discord](https://discord.gg/azure)** - Získajte pomoc od komunity
+- **[Azure AI Discord](https://discord.gg/azure)** - Pomoc od komunity
 - **[GitHub Discussions](https://github.com/Azure-Samples/openai/discussions)** - Fórum otázok a odpovedí
 - **[Azure Blog](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - Najnovšie aktualizácie
 
 ---
 
-**🎉 Úspech!** Nasadili ste Microsoft Foundry Models a vytvorili funkčnú chatovaciu aplikáciu. Začnite objavovať možnosti gpt-4.1 a experimentujte s rôznymi promptami a prípadmi použitia.
+**🎉 Úspech!** Nasadili ste Microsoft Foundry Models a vytvorili fungujúcu chatovaciu aplikáciu. Začnite skúmať schopnosti gpt-4.1 a experimentujte s rôznymi promptami a prípadmi použitia.
 
-**Máte otázky?** [Otvorte issue](https://github.com/microsoft/AZD-for-beginners/issues) alebo skontrolujte [FAQ](../../resources/faq.md)
+**Otázky?** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) alebo skontrolujte [FAQ](../../resources/faq.md)
 
-**Upozornenie na náklady:** Nezabudnite spustiť `azd down`, keď skončíte testovanie, aby ste sa vyhli priebežným poplatkom (~$50-100/mesiac pri aktívnom používaní).
+**Upozornenie na náklady:** Pamätajte, že po dokončení testovania spustite `azd down`, aby ste sa vyhli priebežným poplatkom (~$50-100/mesiac pri aktívnom používaní).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vylúčenie zodpovednosti**:
-Tento dokument bol preložený pomocou AI prekladovej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa usilujeme o presnosť, vezmite prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Originálny dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+**Vyhlásenie o zodpovednosti**:
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, vezmite prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho natívnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

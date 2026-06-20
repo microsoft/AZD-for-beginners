@@ -1,45 +1,45 @@
-# AZDを使ったAzureリソースのプロビジョニング
+# AZD を使った Azure リソースのプロビジョニング
 
-**章のナビゲーション:**
-- **📚 コースホーム**: [AZD For Beginners](../../README.md)
-- **📖 現在の章**: 第4章 - インフラストラクチャをコードとして＆デプロイメント
-- **⬅️ 前へ**: [デプロイメントガイド](deployment-guide.md)
-- **➡️ 次の章**: [第5章: マルチエージェントAIソリューション](../../examples/retail-scenario.md)
-- **🔧 関連**: [第6章: 展開前の検証](../chapter-06-pre-deployment/capacity-planning.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: 第4章 - インフラストラクチャをコード化 & デプロイ
+- **⬅️ Previous**: [デプロイメントガイド](deployment-guide.md)
+- **➡️ Next Chapter**: [第5章: マルチエージェント AI ソリューション](../../examples/retail-scenario.md)
+- **🔧 Related**: [第6章: デプロイ前検証](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## はじめに
 
-この総合的なガイドでは、Azure Developer CLIを使用してAzureリソースをプロビジョニングおよび管理するために知っておくべきすべてを取り扱います。基本的なリソース作成からBicep、ARMテンプレート、Terraform、Pulumiを使った高度なエンタープライズグレードのインフラアーキテクチャの実装まで、インフラをコードとして（IaC）実現する方法を学びます。
+この包括的ガイドでは、Azure Developer CLI を使用して Azure リソースをプロビジョニングおよび管理するために必要なすべてを取り扱います。Bicep、ARM テンプレート、Terraform、Pulumi を使って、基本的なリソース作成から高度なエンタープライズ向けインフラストラクチャアーキテクチャまで、Infrastructure as Code (IaC) パターンを実装する方法を学びます。
 
 ## 学習目標
 
-このガイドを完了すると、以下が習得できます：
-- インフラをコードとしての原則とAzureリソースのプロビジョニングをマスター
-- Azure Developer CLIがサポートする複数のIaCプロバイダーを理解
-- 一般的なアプリケーションアーキテクチャ用のBicepテンプレートの設計と実装
-- リソースのパラメーター、変数、環境固有の設定の構成
-- ネットワーキングやセキュリティを含む高度なインフラパターンの実装
-- リソースのライフサイクル管理、更新、および依存関係解決
+このガイドを完了すると、次のことができるようになります:
+- Infrastructure as Code の原則と Azure リソースのプロビジョニングを習得する
+- Azure Developer CLI がサポートする複数の IaC プロバイダーを理解する
+- 一般的なアプリケーションアーキテクチャ向けに Bicep テンプレートを設計・実装する
+- リソースのパラメータ、変数、および環境固有の設定を構成する
+- ネットワーキングやセキュリティを含む高度なインフラパターンを実装する
+- リソースのライフサイクル、更新、および依存関係の解決を管理する
 
 ## 学習成果
 
-完了後には以下ができるようになります：
-- BicepおよびARMテンプレートを使ったAzureインフラの設計とプロビジョニング
-- 適切なリソース依存関係を持つ複雑なマルチサービスアーキテクチャの構成
-- 複数環境や構成向けのパラメータライズドテンプレートの実装
-- インフラプロビジョニングの問題のトラブルシューティングとデプロイ失敗の解決
-- Azure Well-Architected Frameworkの原則をインフラ設計に適用
-- インフラの更新管理とバージョニング戦略の実装
+完了後、次のことができるようになります:
+- Bicep と ARM テンプレートを使用して Azure インフラを設計・プロビジョニングする
+- 適切なリソース依存関係を持つ複雑なマルチサービスアーキテクチャを構成する
+- 複数の環境と構成に対するパラメータ化されたテンプレートを実装する
+- インフラプロビジョニングの問題をトラブルシューティングし、デプロイ失敗を解決する
+- インフラ設計に Azure Well-Architected Framework の原則を適用する
+- インフラの更新を管理し、インフラのバージョニング戦略を実装する
 
-## インフラプロビジョニング概要
+## インフラプロビジョニングの概要
 
-Azure Developer CLIは複数のインフラをコードとして管理する（IaC）プロバイダーをサポートしています：
-- **Bicep**（推奨） - Azureのドメイン特化言語
-- **ARMテンプレート** - JSONベースのAzure Resource Managerテンプレート
-- **Terraform** - マルチクラウド対応のインフラ管理ツール
-- **Pulumi** - プログラミング言語を用いた最新のインフラコード
+Azure Developer CLI は複数の Infrastructure as Code (IaC) プロバイダーをサポートしています:
+- **Bicep**（推奨） - Azure のドメイン固有言語
+- **ARM Templates** - JSON ベースの Azure Resource Manager テンプレート
+- **Terraform** - マルチクラウド向けインフラツール
+- **Pulumi** - プログラミング言語で記述するモダンなインフラストラクチャ as code
 
-## Azureリソースを理解する
+## Azure リソースの理解
 
 ### リソース階層
 ```
@@ -49,16 +49,16 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### アプリケーション向け一般的なAzureサービス
-- <strong>コンピュート</strong>: App Service、Container Apps、Functions、Virtual Machines
-- <strong>ストレージ</strong>: Storage Account、Cosmos DB、SQL Database、PostgreSQL
-- <strong>ネットワーキング</strong>: Virtual Network、Application Gateway、CDN
-- <strong>セキュリティ</strong>: Key Vault、Application Insights、Log Analytics
-- **AI/ML**: Cognitive Services、OpenAI、Machine Learning
+### アプリケーション向けの一般的な Azure サービス
+- **Compute**: App Service, Container Apps, Functions, Virtual Machines
+- **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
+- **Networking**: Virtual Network, Application Gateway, CDN
+- **Security**: Key Vault, Application Insights, Log Analytics
+- **AI/ML**: Azure AI Services, Azure OpenAI, Azure Machine Learning
 
-## Bicepインフラテンプレート
+## Bicep インフラテンプレート
 
-### 基本的なBicepテンプレート構造
+### 基本的な Bicep テンプレート構造
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -128,7 +128,7 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### 高度なBicepパターン
+### 高度な Bicep パターン
 
 #### モジュラーインフラ
 ```bicep
@@ -199,6 +199,200 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
   }
 }
 ```
+
+## 🌐 azd での Terraform の使用
+
+Bicep は azd のデフォルトですが、チームがすでに Terraform を標準化している場合やマルチクラウドのインフラを管理している場合には、azd は **Terraform** もサポートします。azd のワークフロー（`azd up`、`azd provision`、`azd down`）は同一で、変更されるのはインフラ言語とフォルダー構成だけです。
+
+### azd に Terraform を使わせる
+
+Terraform プロバイダーを指す `infra` セクションを `azure.yaml` に追加します:
+
+```yaml
+# azure.yaml
+name: my-terraform-app
+infra:
+  provider: terraform   # default is "bicep"
+  path: infra           # folder containing your .tf files
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### Terraform のフォルダー構成
+
+Terraform プロバイダーを使用する場合、`infra/` フォルダーは Bicep の代わりに `.tf` ファイルを使用します:
+
+```
+infra/
+├── main.tf            # resource definitions
+├── variables.tf       # input variables
+├── outputs.tf         # outputs azd reads back (endpoints, names)
+├── provider.tf        # azurerm/azurecaf providers + backend
+└── main.tfvars.json   # values azd injects per environment
+```
+
+### 最小限の `main.tf`
+
+```hcl
+# infra/main.tf
+resource "azurerm_resource_group" "rg" {
+  name     = "rg-${var.environment_name}"
+  location = var.location
+  tags     = { "azd-env-name" = var.environment_name }
+}
+
+resource "azurerm_service_plan" "plan" {
+  name                = "plan-${var.environment_name}"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  os_type             = "Linux"
+  sku_name            = "B1"
+}
+```
+
+### azd が Terraform の outputs に接続する方法
+
+azd は Terraform の **outputs** を読み取り、エンドポイントを認識して環境値をアプリに配線します。出力名は重要です — azd は特定の名前を探します:
+
+```hcl
+# infra/outputs.tf
+output "AZURE_LOCATION" {
+  value = var.location
+}
+
+output "SERVICE_WEB_ENDPOINT_URL" {
+  value = azurerm_linux_web_app.web.default_hostname
+}
+```
+
+> **重要:** azd は環境ごとのリソースを追跡するために `azd-env-name` タグと `AZURE_*` 出力を使用します。常にリソースグループに "azd-env-name" = var.environment_name のタグを付けて、`azd down` がすべてを見つけて削除できるようにしてください。
+
+### Terraform でのデプロイ
+
+コマンドは Bicep とまったく同じです:
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd は内部で 'terraform plan' を実行します
+azd up                    # プロビジョニング + デプロイ
+azd down --force          # Terraform が管理するリソースを破棄します
+```
+
+> **前提条件:** Terraform はインストールされ、`PATH` に登録されている必要があります。azd は Terraform の <em>ワークフロー</em> を管理しますが、Terraform のインストールは行いません。状態管理については、azd はデフォルトでローカルステートを使用します。チームで使用する場合は `provider.tf` 内でリモートバックエンド（例えば Azure Storage バックエンド）を構成してください。
+
+完全な実行可能な Terraform ベースのスターターについては、[Awesome AZD gallery](https://azure.github.io/awesome-azd/) を参照して Terraform でフィルターするか、公式の [azd Terraform documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd) を参照してください。
+
+## 🧩 azd での Pulumi の使用
+
+チームが DSL の代わりに一般目的言語（TypeScript、Python、Go、または C#）でインフラを書いている場合、azd は **Pulumi** もサポートします。Terraform と同様に、`azd up` / `azd provision` / `azd down` のワークフローは変更されず、違うのはインフラツールとフォルダー構成だけです。
+
+### azd に Pulumi を使わせる
+
+```yaml
+# azure.yaml
+name: my-pulumi-app
+infra:
+  provider: pulumi      # default is "bicep"
+  path: infra           # folder containing your Pulumi program
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### Pulumi のフォルダー構成
+
+```
+infra/
+├── Pulumi.yaml          # project definition
+├── Pulumi.dev.yaml      # stack config (one per environment)
+├── index.ts             # your resource program (or __main__.py, main.go, etc.)
+├── package.json         # dependencies (for TypeScript)
+└── tsconfig.json
+```
+
+### 最小限の `index.ts`
+
+```typescript
+import * as azure from "@pulumi/azure-native";
+import * as pulumi from "@pulumi/pulumi";
+
+const environmentName = pulumi.getStack();
+
+// azd が追跡してクリーンアップできるように、すべてのリソースにタグを付ける
+const tags = { "azd-env-name": environmentName };
+
+const rg = new azure.resources.ResourceGroup("rg", {
+  resourceGroupName: `rg-${environmentName}`,
+  tags,
+});
+
+// azd はこれらの出力を読み取り、あなたの環境に取り込みます
+export const AZURE_LOCATION = rg.location;
+export const SERVICE_WEB_ENDPOINT_URL = "https://...";
+```
+
+### スタックは azd の環境にマッピングされる
+
+Pulumi はデプロイを <strong>スタック</strong> に整理し、azd は各 azd 環境を同名の Pulumi スタックにマッピングします。`azd env new staging` を実行すると、azd は `staging` Pulumi スタックを選択（または作成）します。同じく `azd-env-name` タグ付けと `AZURE_*` 出力ルールが適用されるため、`azd down` はすべてを見つけて削除できます。
+
+### Pulumi でのデプロイ
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd は内部で 'pulumi preview' を実行します
+azd up                    # プロビジョニング + デプロイ
+azd down --force          # 'pulumi destroy' を実行します
+```
+
+> **前提条件:** Pulumi はインストールされ、`PATH` に登録されている必要があり、状態バックエンド（Pulumi Cloud または Azure Blob Storage のようなセルフ管理バックエンド）が必要です。azd は Pulumi の <em>ワークフロー</em> を管理しますが、インストールは行いません。公式の [azd Pulumi documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-pulumi-for-azd) を参照してください。
+
+## 🎯 サービスのホスト選択
+
+`host` フィールドはコードの実行先を決定します。azd はいくつかのホストをサポートしており、適切なホストを選ぶことはインフラ言語よりも重要です。ここでは初心者向けの比較を示します:
+
+| `host` value | 適しているケース | 理由 |
+|--------------|------------------|-----|
+| `appservice` | 従来型のウェブアプリと API | 最も簡単な PaaS。コンテナ不要 |
+| `staticwebapp` | フロントエンド SPA（React、Vue、Angular） | グローバル CDN + 無料 SSL、組み込みの API サポート |
+| `function` | イベント駆動・サーバーレスワークロード | ゼロまでスケールダウン、実行ごとに課金 |
+| `containerapp` | コンテナ化されたマイクロサービス | サーバーレスコンテナ、ゼロまでスケールダウン、組み込みのイングレス |
+| `aks` | 複雑なオーケストレーションが必要な場合 | 真に必要な場合にフルな Kubernetes 制御を提供 |
+| `springapp` | Java Spring Boot アプリ | Spring 向けに調整されたマネージド Azure Spring Apps ランタイム |
+
+### AKS を選ぶべきとき
+
+**Azure Kubernetes Service (`host: aks`)** は Kubernetes のフルパワーを提供します — カスタムコントローラー、サービスメッシュ、複雑なネットワーキング、詳細なスケジューリングなど。その力は運用上のオーバーヘッドを伴います: ノードプール、アップグレード、クラスタネットワーキングを管理する必要があります。
+
+```yaml
+services:
+  api:
+    project: ./src/api
+    language: js
+    host: aks          # deploys to an existing AKS cluster
+```
+
+> **可能ならよりシンプルに始めてください。** 多くのマイクロサービスでは、**Container Apps** がクラスタを管理せずにコンテナ、オートスケーリング、ゼロまでのスケールダウンを提供します。Kubernetes 固有の機能が必要な場合のみ AKS を選んでください。
+
+### Azure Spring Apps を使うとき
+
+**Azure Spring Apps (`host: springapp`)** は Spring Boot のために作られたマネージドランタイムです。サービスディスカバリ、コンフィグサーバー、ブルーグリーンデプロイなどを扱うため、Java チームが自分でインフラを運用する必要がありません。
+
+```yaml
+services:
+  catalog:
+    project: ./src/catalog
+    language: java
+    host: springapp
+```
+
+> 既存の Spring Boot アプリがあり、それらに最適化されたランタイムを求めている場合は `springapp` を使用してください。Spring 固有のニーズがない新しいコンテナ化された Java アプリの場合、`containerapp` の方がシンプルな選択となることが多いです。
 
 ## 🗃️ データベースのプロビジョニング
 
@@ -300,7 +494,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 
 ## 🔒 セキュリティとシークレット管理
 
-### Key Vaultの統合
+### Key Vault 統合
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -342,7 +536,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### マネージドIDの構成
+### マネージド ID の構成
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -370,7 +564,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 
 ## 🌍 ネットワーキングと接続
 
-### Virtual Networkの構成
+### Virtual Network の構成
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -433,7 +627,7 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### SSL対応のApplication Gateway
+### SSL を使った Application Gateway
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -496,7 +690,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 監視と可観測性
+## 📊 モニタリングと可観測性
 
 ### Application Insights
 ```bicep
@@ -527,7 +721,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### カスタムメトリックとアラート
+### カスタムメトリクスとアラート
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -561,9 +755,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 環境固有の設定
+## 🔧 環境固有の構成
 
-### 環境別パラメータファイル
+### 異なる環境向けのパラメータファイル
 ```json
 // infra/main.parameters.dev.json
 {
@@ -651,7 +845,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 
 ## 🚀 高度なプロビジョニングパターン
 
-### マルチリージョンデプロイメント
+### マルチリージョンデプロイ
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -719,7 +913,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### インフラテスト
+### インフラのテスト
 ```bicep
 // infra/test/main.test.bicep
 param location string = resourceGroup().location
@@ -755,40 +949,40 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 インフラプレビューと検証（新機能）
+## 🧪 インフラのプレビューと検証（新機能）
 
-### デプロイ前にインフラ変更をプレビュー
+### デプロイ前にインフラの変更をプレビューする
 
-`azd provision --preview` 機能は、実際にリソースをデプロイする前に<strong>インフラプロビジョニングをシミュレーション</strong>することができます。これは `terraform plan` や `bicep what-if` と同様で、Azure環境に対してどのような変更が行われるかを<strong>ドライランで確認</strong>できます。
+`azd provision --preview` 機能を使うと、実際にリソースをデプロイする前に <strong>インフラプロビジョニングをシミュレート</strong> できます。これは `terraform plan` や `bicep what-if` の精神に似ており、Azure 環境に加えられる変更の <strong>ドライランビュー</strong> を提供します。
 
-#### 🛠️ 機能内容
-- **IaCテンプレート**（BicepまたはTerraform）を解析
-- <strong>リソース変更のプレビュー表示</strong>：追加、削除、更新
-- <strong>変更の適用は行わない</strong> — 読み取り専用で安全に実行可能
+#### 🛠️ 機能概要
+- **IaC テンプレートを解析します**（Bicep または Terraform）
+- <strong>リソース変更のプレビューを表示します</strong>: 追加、削除、更新
+- <strong>変更は適用されません</strong> — 読み取り専用で安全に実行できます
 
-#### 利用シーン
+#### ユースケース
 ```bash
-# デプロイ前にインフラストラクチャの変更をプレビューする
+# デプロイ前にインフラの変更をプレビューする
 azd provision --preview
 
-# 特定の環境のプレビュー
+# 特定の環境向けのプレビュー
 azd provision --preview -e production
 ```
 
-このコマンドは以下に役立ちます：
-- <strong>リソースをコミットする前にインフラ変更を検証</strong>
-- <strong>開発サイクルの早期に設定ミスを検出</strong>
-- <strong>チーム環境で安全に共同作業を実施</strong>
-- <strong>予期せぬ権限問題がないか最小権限での展開を保証</strong>
+このコマンドは次のことに役立ちます:
+- <strong>リソースをコミットする前にインフラ変更を検証する</strong>
+- <strong>開発サイクルの早い段階で設定ミスを検出する</strong>
+- <strong>チーム環境で安全に協力する</strong>
+- **意図しない権限でのデプロイを防ぎ、最小権限のデプロイを確実にする**
 
-特に役立つ場面：
-- 複雑なマルチサービス環境を操作する場合
-- 本番環境インフラに変更を加える場合
-- PR承認前にテンプレート変更を検証する場合
-- 新規メンバーにインフラパターンを教える場合
+特に有用なのは次の場合です:
+- 複雑なマルチサービス環境で作業しているとき
+- 本番インフラに変更を加えるとき
+- PR 承認前にテンプレート変更を検証するとき
+- インフラパターンを新しいチームメンバーに教育するとき
 
-### プレビュー結果の例
-プロバイダーやプロジェクト構造によりプレビュー結果は異なりますが、適用前に提案された変更点がはっきり識別できるはずです。
+### プレビュー出力の例
+正確なプレビュー出力はプロバイダーやプロジェクト構成によって異なりますが、結果は何かが適用される前に提案される変更を明確に示すべきです。
 
 ```bash
 $ azd provision --preview
@@ -813,22 +1007,22 @@ The following resources will be destroyed:
 ✅ Preview completed successfully!
 ```
 
-## 🔄 リソース更新とマイグレーション
+## �🔄 リソースの更新と移行
 
 ### 安全なリソース更新
 ```bash
-# インフラ変更を最初にプレビューする（推奨）
+# まずインフラの変更をプレビューしてください（推奨）
 azd provision --preview
 
-# プレビュー確認後に変更を適用する
+# プレビューを確認した後に変更を適用する
 azd provision --confirm-with-no-prompt
 
-# ロールバックするには、Gitを使ってインフラ変更を元に戻します：
-git revert HEAD  # 最後のインフラコミットを元に戻す
-azd provision    # 以前のインフラ状態を適用する
+# ロールバックするには、Git を使ってインフラの変更を元に戻してください:
+git revert HEAD  # 最後のインフラのコミットを元に戻す
+azd provision    # 以前のインフラの状態を適用する
 ```
 
-### データベースマイグレーション
+### データベースのマイグレーション
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -870,7 +1064,7 @@ var naming = {
 }
 ```
 
-### 2. タグ付け戦略
+### 2. タグ戦略
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -916,27 +1110,27 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## 次のステップ
 
-- [展開前の計画](../chapter-06-pre-deployment/capacity-planning.md) - リソースの可用性を検証
-- [よくある問題](../chapter-07-troubleshooting/common-issues.md) - インフラ問題のトラブルシュート
-- [デバッグガイド](../chapter-07-troubleshooting/debugging.md) - プロビジョニング問題のデバッグ
-- [SKU選択](../chapter-06-pre-deployment/sku-selection.md) - 適切なサービス層の選択
+- [デプロイ前の計画](../chapter-06-pre-deployment/capacity-planning.md) - リソースの可用性を検証する
+- [一般的な問題](../chapter-07-troubleshooting/common-issues.md) - インフラの問題をトラブルシュートする
+- [デバッグガイド](../chapter-07-troubleshooting/debugging.md) - プロビジョニングの問題をデバッグする
+- [SKU 選択](../chapter-06-pre-deployment/sku-selection.md) - 適切なサービス階層を選択する
 
 ## 追加リソース
 
-- [Azure Bicep ドキュメント](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager テンプレート](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azureアーキテクチャセンター](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-<strong>ナビゲーション</strong>
-- <strong>前のレッスン</strong>: [デプロイメントガイド](deployment-guide.md)
-- <strong>次のレッスン</strong>: [キャパシティプランニング](../chapter-06-pre-deployment/capacity-planning.md)
+**Navigation**
+- **Previous Lesson**: [デプロイメントガイド](deployment-guide.md)
+- **Next Lesson**: [キャパシティプランニング](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責事項**:  
-本書類は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を目指しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご了承ください。原文の母国語版が正式な情報源とみなされます。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の使用に起因するいかなる誤解や誤訳についても、当方は責任を負いかねます。
+**免責事項**：
+本書類は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を期していますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知おきください。原文の原語版が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じたいかなる誤解や解釈違いについても、当方は責任を負いかねます。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

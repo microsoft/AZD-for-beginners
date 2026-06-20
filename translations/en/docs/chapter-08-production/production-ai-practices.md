@@ -37,6 +37,7 @@ graph TD
     Image --> Vision[Computer Vision]
     Text --> DocIntel[Document Intelligence]
 ```
+
 **AZD Implementation**:
 
 ```yaml
@@ -979,9 +980,22 @@ azd extension upgrade --all
 | Extension | Purpose | Status |
 |-----------|---------|--------|
 | `azure.ai.agents` | Foundry Agent Service management | Preview |
+| `azure.ai.skills` | Reusable agent skills | Preview |
+| `azure.ai.connections` | Foundry connections (data sources, tools) | Preview |
 | `azure.ai.finetune` | Foundry model fine-tuning | Preview |
 | `azure.ai.models` | Foundry custom models | Preview |
 | `azure.coding-agent` | Coding agent configuration | Available |
+
+> The `azure.ai.agents` extension evolves quickly. This course is validated against `0.1.40-preview`. Run `azd extension upgrade --all` to pick up the latest command set, and `azd extension show azure.ai.agents` to confirm your installed version.
+
+**What are the newer `skills` and `connections` extensions?**
+
+Two preview extensions appeared alongside the agent tooling and are worth understanding even as a beginner:
+
+- **`azure.ai.skills`** — A **skill** is a reusable capability (a packaged tool or behavior) you can attach to one or more agents instead of re-implementing it each time. Think of it as a shared building block: define a "search the docs" or "look up an order" skill once, then reuse it across agents. This keeps multi-agent systems (Chapter 5) consistent and avoids copy-paste.
+- **`azure.ai.connections`** — A **connection** is a managed link from your Foundry project to an external resource your agents need—a data source (like Azure AI Search), a tool endpoint, or another service. Connections centralize *where* and *how* agents access data, so credentials and endpoints live in one governed place rather than scattered through code.
+
+You don't need these to deploy your first agents—stick with `azure.ai.agents` while learning. Reach for `skills` when you find yourself duplicating the same tool across agents, and `connections` when several agents share the same data source.
 
 ### Initializing Agent Projects with `azd ai agent init`
 
@@ -1013,8 +1027,48 @@ azd ai agent init -m agent-manifest.yaml --host containerapp
 
 **Production tip**: Use `--project-id` to connect directly to an existing Foundry project, keeping your agent code and cloud resources linked from the start.
 
-### Model Context Protocol (MCP) with `azd mcp`
+### Managing the Agent Lifecycle
 
+Beyond `init`, the `azure.ai.agents` extension provides commands for the full lifecycle of a hosted agent—testing, evaluating, optimizing, and retiring it:
+
+```bash
+# Invoke a deployed agent and view server response timing
+# (total latency and time to first byte)
+azd ai agent invoke
+
+# Show the live endpoint configuration before changing it
+azd ai agent endpoint show
+
+# Generate an evaluation dataset for the agent
+azd ai agent eval generate --dataset ./eval/dataset.jsonl
+
+# Optimize agent instructions against your evaluation data
+# (requires an optimization_model in the agent project)
+azd ai agent optimize
+
+# Download the deployed source of a code-based hosted agent
+# (with SHA-256 verification)
+azd ai agent code download
+
+# Delete a hosted agent and all of its versions
+# (--force terminates active sessions)
+azd ai agent delete --force
+```
+
+**Lifecycle at a glance:**
+
+| Stage | Command | Production use |
+|-------|---------|----------------|
+| Test | `azd ai agent invoke` | Validate responses and measure latency before release |
+| Inspect | `azd ai agent endpoint show` | Review endpoint auth/config; spot breaking changes early |
+| Measure | `azd ai agent eval generate` | Build a repeatable evaluation set from real traces |
+| Improve | `azd ai agent optimize` | Tune instructions against measured quality |
+| Recover | `azd ai agent code download` | Retrieve the exact deployed source for audit/rollback |
+| Retire | `azd ai agent delete --force` | Tear down an agent and its versions cleanly |
+
+> These are preview commands and may change between extension releases. Run `azd ai agent --help` to see the exact subcommands available in your installed version.
+
+### Model Context Protocol (MCP) with `azd mcp`
 AZD includes built-in MCP server support (Alpha), enabling AI agents and tools to interact with your Azure resources through a standardized protocol:
 
 ```bash
@@ -1108,6 +1162,81 @@ This command:
 - Generates or updates your pipeline definition file
 - Sets required environment variables in your CI/CD system
 
+#### Step-by-step: your first GitHub Actions pipeline
+
+Here's the full walkthrough from a working azd project to automated deployments on every push.
+
+**1. Make sure your project is on GitHub**
+
+```bash
+git init
+git add .
+git commit -m "Initial azd project"
+gh repo create my-ai-app --private --source=. --push
+```
+
+**2. Run pipeline config**
+
+```bash
+azd pipeline config --provider github
+```
+
+azd will, interactively:
+- Ask which Azure subscription and environment to target
+- Create an Entra **app registration + service principal** for the pipeline
+- Set up **federated credentials (OIDC)**—so GitHub authenticates to Azure with short-lived tokens and **no secrets are stored**
+- Push the required **variables** to your GitHub repo (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `AZURE_ENV_NAME`, `AZURE_LOCATION`)
+
+**3. Understand the generated workflow**
+
+azd adds `.github/workflows/azure-dev.yml`. The key parts look like this:
+
+```yaml
+# .github/workflows/azure-dev.yml
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:        # lets you run it manually too
+
+permissions:
+  id-token: write           # required for OIDC federated login
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
+      AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install azd
+        uses: Azure/setup-azd@v2
+      - name: Log in with OIDC
+        run: azd auth login --client-id "$AZURE_CLIENT_ID" --federated-credential-provider "github" --tenant-id "$AZURE_TENANT_ID"
+      - name: Provision infrastructure
+        run: azd provision --no-prompt
+      - name: Deploy application
+        run: azd deploy --no-prompt
+```
+
+**4. Verify it works**
+
+```bash
+# Push a change to trigger the pipeline
+git commit -am "Trigger pipeline" --allow-empty
+git push
+```
+
+Open the **Actions** tab in your GitHub repo and watch the workflow run `azd provision` and `azd deploy` automatically.
+
+> **Why federated credentials matter:** older pipelines stored a client secret in GitHub. OIDC federated credentials remove that secret entirely—GitHub requests a short-lived token at runtime, which is both more secure and nothing to rotate or leak. This is the default `azd pipeline config` sets up.
+
+> **Secrets vs. variables:** non-sensitive identifiers (`AZURE_CLIENT_ID`, etc.) go in repo **variables**. If your app genuinely needs a secret at build time, add it as a GitHub **secret** and reference it with `${{ secrets.NAME }}`—but prefer Key Vault + managed identity at runtime (see [Chapter 3](../chapter-03-configuration/authsecurity.md)).
+
 **Production workflow with pipeline config:**
 
 ```bash
@@ -1121,6 +1250,72 @@ azd pipeline config --provider github
 # 3. Pipeline runs azd deploy on every push to main
 ```
 
+#### Step-by-step: Azure DevOps Pipelines
+
+Prefer Azure DevOps over GitHub Actions? azd supports it natively with the `azdo` provider. The flow is nearly identical—azd generates the pipeline file, creates a service connection, and wires up authentication.
+
+**1. Make sure you have an Azure DevOps project**
+
+You need an organization and a project at `https://dev.azure.com/<your-org>`. Generate a Personal Access Token (PAT) with **Build (Read & execute)**, **Code (Read & write)**, and **Service Connections (Read, query & manage)** scopes—azd will prompt you for it.
+
+**2. Configure the pipeline**
+
+```bash
+azd pipeline config --provider azdo
+```
+
+azd will:
+- Ask for your Azure DevOps organization and project
+- Create (or reuse) a **service connection** to Azure using a service principal
+- Configure **workload identity federation (OIDC)** so no client secret is stored
+- Commit an `azure-dev.yml` pipeline definition to your repo
+
+**3. Review the generated `azure-dev.yml`**
+
+azd writes a pipeline that provisions and deploys on every push to `main`:
+
+```yaml
+# azure-dev.yml
+trigger:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: setup-azd@1
+    displayName: Install azd
+
+  - script: azd provision --no-prompt
+    displayName: Provision Infrastructure
+    env:
+      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
+      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
+      AZURE_LOCATION: $(AZURE_LOCATION)
+
+  - script: azd deploy --no-prompt
+    displayName: Deploy Application
+    env:
+      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
+      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
+      AZURE_LOCATION: $(AZURE_LOCATION)
+```
+
+**4. Where the variables come from**
+
+azd stores the environment values (`AZURE_ENV_NAME`, `AZURE_LOCATION`, `AZURE_SUBSCRIPTION_ID`) as a **variable group** in Azure DevOps so the pipeline can read them. You can view and edit them under **Pipelines → Library**.
+
+> **Same OIDC benefit as GitHub:** the `azdo` provider also configures workload identity federation by default, so there's no client secret stored in the service connection—Azure DevOps exchanges a short-lived token at runtime. Pass `--auth-type client-credentials` only if your organization can't use OIDC yet.
+
+**5. Run it**
+
+```bash
+git commit -am "Add Azure DevOps pipeline" --allow-empty
+git push
+```
+
+Open **Pipelines** in Azure DevOps to watch `azd provision` and `azd deploy` run.
+
 ### Adding Components with `azd add`
 
 Incrementally add Azure services to an existing project:
@@ -1133,6 +1328,7 @@ azd add
 This is particularly useful for expanding production AI applications—for example, adding a vector search service, a new agent endpoint, or a monitoring component to an existing deployment.
 
 ## Additional Resources
+
 - **Azure Well-Architected Framework**: [AI workload guidance](https://learn.microsoft.com/azure/well-architected/ai/)
 - **Microsoft Foundry Documentation**: [Official docs](https://learn.microsoft.com/azure/ai-studio/)
 - **Community Templates**: [Azure Samples](https://github.com/Azure-Samples)

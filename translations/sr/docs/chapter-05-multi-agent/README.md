@@ -1,22 +1,22 @@
-# Поглавље 5: Више-agentна AI решења
+# Поглавље 5: Мулти-агентна AI решења
 
-**📚 Курс**: [AZD For Beginners](../../README.md) | **⏱️ Трајање**: 2-3 сата | **⭐ Сложеност**: Напредни
+**📚 Курс**: [AZD за почетнике](../../README.md) | **⏱️ Трајање**: 2-3 сата | **⭐ Сложеност**: Напредно
 
 ---
 
 ## Преглед
 
-Ово поглавље покрива напредне шаблоне више-agentне архитектуре, оркестрацију агената и продукционо спремне AI разгортке за сложене сценаријe.
+Ово поглавље покрива напредне шеме архитектуре мулти-агента, оркестрацију агената и продукционо спремна AI решења за сложене сценарије.
 
-> Верификовано против `azd 1.23.12` у марту 2026.
+> Проверено са `azd 1.25.6` у јуну 2026.
 
 ## Циљеви учења
 
-Завршавањем овог поглавља, ви ћете:
-- Разумети више-agentне архитектонске шаблоне
-- Разместити координисане системе AI агената
-- Имплементирати комуникацију агент->агент
-- Изградити продукционо спремна више-agentна решења
+Завршетком овог поглавља, ви ћете:
+- Разумети шеме архитектуре мулти-агената
+- Распоредити координисане AI агентске системе
+- Имплементирати комуникацију међу агентима
+- Изградити мулти-агентска решења спремна за производну употребу
 
 ---
 
@@ -24,78 +24,80 @@
 
 | # | Лекција | Опис | Време |
 |---|--------|-------------|------|
-| 1 | [Više-agentno maloprodajno rešenje](../../examples/retail-scenario.md) | Kompletan vodič kroz implementaciju | 90 min |
-| 2 | [Šabloni koordinacije](../chapter-06-pre-deployment/coordination-patterns.md) | Strategije orkestracije agenata | 30 min |
-| 3 | [Razmestanje ARM šablona](../../examples/retail-multiagent-arm-template/README.md) | Razmeštanje jednim klikom | 30 min |
+| 1 | [Основе мулти-агената](multi-agent-basics.md) | Практичан: распоредите радну мулти-агент апликацију помоћу `azd up` | 45 min |
+| 2 | [Обрасци координације](../chapter-06-pre-deployment/coordination-patterns.md) | Стратегије оркестрације агената (наставља се у Поглављу 6) | 30 min |
+| 3 | [Распоређивање ARM шаблона](../../examples/retail-multiagent-arm-template/README.md) | Пример распоређивања једним кликом | 30 min |
+
+> **Почните са Лекцијом 1.** То је једина потпуно практична, распоредива лекција у овом поглављу. Лекција 2 се налази у Поглављу 6 (дели се са планирањем пре-распоређивања), а [Мулти-агент решење за малопродају](../../examples/retail-scenario.md) је архитектонски план — референца дизајна, а не шаблон за распоређивање једном командом.
 
 ---
 
-## 🚀 Brzi početak
+## 🚀 Брзи почетак
 
 ```bash
-# Опција 1: Разместите из шаблона
+# Опција 1: Размештање из шаблона
 azd init --template agent-openai-python-prompty
 azd up
 
-# Опција 2: Разместите из манифеста агента (захтева екстензију azure.ai.agents)
+# Опција 2: Размештање из манифеста агента (захтева проширење azure.ai.agents)
 azd extension install azure.ai.agents
 azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **Који приступ?** Користите `azd init --template` да почнете од радног примера. Користите `azd ai agent init` када имате свој манифест агента. Погледајте [Referenca za AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) за детаљне информације.
+> **Који приступ?** Користите `azd init --template` да започнете из радног примера. Користите `azd ai agent init` када имате свој манифест агента. Погледајте [Референцу за AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) за пуне детаље.
 
 ---
 
-## 🤖 Више-agentна архитектура
+## 🤖 Архитектура мулти-агената
 
 ```mermaid
 graph TD
-    Orchestrator[Агент оркестратора<br/>Усмерава захтеве, управља током рада] --> Customer[Агент корисника<br/>Упити корисника, преференције]
-    Orchestrator --> Inventory[Агент залиха<br/>Ниво залиха, наруџбине]
+    Orchestrator[Агент оркестратора<br/>Усмерава захтеве, управља радним током] --> Customer[Агент корисника<br/>Упити корисника, преференције]
+    Orchestrator --> Inventory[Агент инвентара<br/>Ниво залиха, поруџбине]
 ```
 
 ---
 
-## 🎯 Истакнуто решење: Малопродајно више-agentно решење
+## 🎯 Истакнуто решење: Мулти-агент за малопродају
 
-[Maloprodajno više-agentno rešenje](../../examples/retail-scenario.md) демонстрира:
+[Мулти-агент решење за малопродају](../../examples/retail-scenario.md) илуструје:
 
-- **Agent za kupce**: Рукује интеракцијама са корисницима и преференцијама
-- **Agent za inventar**: Управља залихама и обрадом наруџбина
-- **Orkestrator**: Координише између агената
-- **Deljena memorija**: Управљање контекстом између агената
+- **Агент за купце**: Руководи интеракцијама са корисницима и преференцијама
+- **Агент за инвентар**: Управља залихама и обрадом поруџбина
+- **Оркестратор**: Координише међу агентима
+- **Заједничка меморија**: Управљање контекстом између агената
 
-### Korišćene usluge
+### Услуге које се користе
 
-| Usluga | Svrha |
+| Услуга | Намена |
 |---------|---------|
-| Microsoft Foundry Models | Razumevanje jezika |
-| Azure AI Search | Katalog proizvoda |
-| Cosmos DB | Stanje i memorija agenata |
-| Container Apps | Hostovanje agenata |
-| Application Insights | Nadgledanje |
+| Microsoft Foundry Models | Разумевање језика |
+| Azure AI Search | Каталог производа |
+| Cosmos DB | Стање агената и меморија |
+| Container Apps | Хостовање агената |
+| Application Insights | Надгледање |
 
 ---
 
-## 🔗 Navigacija
+## 🔗 Навигација
 
-| Smer | Poglavlje |
+| Смер | Поглавље |
 |-----------|---------|
-| **Prethodno** | [Poglavlje 4: Infrastructure](../chapter-04-infrastructure/README.md) |
-| **Sledeće** | [Poglavlje 6: Pre-raspoređivanje](../chapter-06-pre-deployment/README.md) |
+| **Претходно** | [Поглавље 4: Инфраструктура](../chapter-04-infrastructure/README.md) |
+| **Следеће** | [Поглавље 6: Пе-распоређивање](../chapter-06-pre-deployment/README.md) |
 
 ---
 
-## 📖 Povezani resursi
+## 📖 Повезани ресурси
 
-- [Vodič za AI agente](../chapter-02-ai-development/agents.md)
-- [Produkcione AI prakse](../chapter-08-production/production-ai-practices.md)
-- [Otklanjanje problema sa AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Водич за AI агенте](../chapter-02-ai-development/agents.md)
+- [Практике за производни AI](../chapter-08-production/production-ai-practices.md)
+- [Решавање проблема са AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Одрицање од одговорности**:
-Овај документ је преведен помоћу АИ сервиса за превођење [Co-op Translator](https://github.com/Azure/co-op-translator). Иако се трудимо да обезбедимо тачност, имајте у виду да аутоматизовани преводи могу садржати грешке или нетачности. Изворни документ на свом матичном језику треба сматрати меродавним извором. За критичне информације препоручује се професионални људски превод. Не сносимо одговорност за никакве неспоразууме или погрешна тумачења која произилазе из коришћења овог превода.
+**Изјава о одрицању одговорности**:
+Овај документ је преведен коришћењем услуге за аутоматски превод [Co-op Translator](https://github.com/Azure/co-op-translator). Иако тежимо тачности, имајте у виду да аутоматски преводи могу садржати грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати ауторитативним извором. За критичне информације препоручује се професионални људски превод. Нисмо одговорни за било каква неспоразума или погрешна тумачења која произилазе из коришћења овог превода.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

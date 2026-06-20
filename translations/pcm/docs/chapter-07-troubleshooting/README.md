@@ -1,32 +1,32 @@
-# Chapter 7: Find & Fix Wahala (Troubleshooting & Debugging)
+# Chapter 7: How to Fix Wahala & Debug
 
-**📚 Kɔs**: [AZD For Beginners](../../README.md) | **⏱️ Taim**: 1-1.5 hours | **⭐ Level**: Medium
+**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 1-1.5 hours | **⭐ Complexity**: Intermediate
 
 ---
 
-## Overview
+## Wetin dis chapter dey cover
 
-Dis chapter go help you find and resolve common wahala wen you dey work with Azure Developer CLI. E cover things from deployment wey fail reach AI-specific problems.
+This chapter go help you diagnose and resolve common wahala wen you dey work wit Azure Developer CLI. E cover wetin to do from deployment failures to AI-specific problems.
 
-> Validated against `azd 1.23.12` in March 2026.
+> Dem don validate am with `azd 1.25.6` for June 2026.
 
 ## Learning Objectives
 
-By finish dis chapter, you go fit:
-- Find common AZD deployment failures
+By completing this chapter, you go:
+- Find wetin dey cause common AZD deployment failures
 - Debug authentication and permission wahala
 - Solve AI service connectivity problems
-- Use Azure Portal and CLI for troubleshooting
+- Use Azure Portal and CLI to do troubleshooting
 
 ---
 
-## 📚 Lessons
+## 📚 Lekshon dem
 
 | # | Lekshon | Tori | Time |
 |---|--------|-------------|------|
-| 1 | [Common Issues](common-issues.md) | Problems wey people dey meet often | 30 min |
-| 2 | [Debugging Guide](debugging.md) | Step-by-step ways to debug | 45 min |
-| 3 | [AI Troubleshooting](ai-troubleshooting.md) | AI-specific problems | 30 min |
+| 1 | [Common Wahala](common-issues.md) | Problems wey dey happen often | 30 min |
+| 2 | [Debugging Guide](debugging.md) | Step-by-step strategy to debug | 45 min |
+| 3 | [AI Troubleshooting](ai-troubleshooting.md) | AI-specific wahala | 30 min |
 
 ---
 
@@ -34,10 +34,10 @@ By finish dis chapter, you go fit:
 
 ### Authentication Issues
 ```bash
-# E necessary for AZD workflows
+# Dem need am for AZD workflows
 azd auth login
 
-# E optional if you sef dey use Azure CLI commands direct
+# E optional if you dey also use Azure CLI commands direct
 az login
 
 azd auth status
@@ -71,21 +71,21 @@ azd up
 | Error | Cause | Solution |
 |-------|-------|----------|
 | `AuthenticationError` | You never log in | `azd auth login` |
-| `ResourceNotFound` | Resource no dey | Check resource names |
-| `QuotaExceeded` | Subscription get limit | Request quota increase |
+| `ResourceNotFound` | Resource no dey | Check say resource names correct |
+| `QuotaExceeded` | Subscription limits don full | Request make dem increase quota |
 | `InvalidTemplate` | Bicep syntax error | `az bicep build` |
-| `Conflict` | Resource don already dey | Use new name or delete |
-| `Forbidden` | You no get enough permission | Check RBAC roles |
+| `Conflict` | Resource don already exist | Give am new name or delete the old one |
+| `Forbidden` | You no get enough permission | Check your RBAC roles |
 
 ---
 
-## 🔄 Reset and Recovery
+## 🔄 How to Reset & Recover
 
 ```bash
-# Soft reset (resources go still dey, just redeploy di code)
+# Soft reset (leave di resources, deploy di code again)
 azd deploy --force
 
-# Hard reset (delete everytin, start again from scratch)
+# Hard reset (delete everytin, start again from zero)
 azd down --force --purge
 azd up
 ```
@@ -111,5 +111,5 @@ azd up
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Dis document don translate using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make everything correct, abeg note say automated translations fit get errors or inaccuracies. Di original document for im native language suppose be di authoritative source. For critical information, make you use professional human translation. We no dey liable for any misunderstandings or misinterpretations wey fit arise from di use of this translation.
+Dis document don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even tho we dey try make am correct, abeg make you know say automated translation fit get errors or mistakes. Di original document for dia own language na im be di correct source. For important info, make person wey sabi human translation do am. We no go responsible for any misunderstanding or wrong understanding wey fit happen because of dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

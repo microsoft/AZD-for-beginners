@@ -1,50 +1,50 @@
-# Multi-Agent kundsupportlösning - detaljhandlarscenario
+# Multi-Agent Customer Support Solution - Retailer Scenario
 
-**Kapitel 5: Multi-Agent AI-lösningar**
-- **📚 Course Home**: [AZD For Beginners](../README.md)
-- **📖 Current Chapter**: [Kapitel 5: Multi-Agent AI-lösningar](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **⬅️ Förkunskaper**: [Chapter 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
-- **➡️ Nästa kapitel**: [Chapter 6: Pre-Deployment Validation](../docs/pre-deployment/capacity-planning.md)
+**Kapitel 5: Multi-Agent AI Solutions**
+- **📚 Kursstartsida**: [AZD For Beginners](../README.md)
+- **📖 Nuvarande kapitel**: [Kapitel 5: Multi-Agent AI Solutions](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **⬅️ Förkunskapskrav**: [Kapitel 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **➡️ Nästa kapitel**: [Kapitel 6: Pre-Deployment Validation](../docs/pre-deployment/capacity-planning.md)
 - **🚀 ARM-mallar**: [Deployment Package](retail-multiagent-arm-template/README.md)
 
-> **⚠️ ARKITEKTURGUIDE - INTE EN FUNGERANDE IMPLEMENTERING**  
-> Detta dokument ger en **omfattande arkitekturplan** för att bygga ett multi-agent-system.  
+> **⚠️ ARKITEKTURGUIDE - INTE EN FUNGERANDE IMPLEMENTATION**  
+> Detta dokument ger en **omfattande arkitekturblåkopi** för att bygga ett multi-agent-system.  
 > **Vad som finns:** ARM-mall för infrastrukturdistribution (Microsoft Foundry Models, AI Search, Container Apps, etc.)  
-> **Vad du måste bygga:** Agentkod, routinglogik, frontend-UI, datapipelines (uppskattat 80–120 timmar)  
+> **Vad du måste bygga:** Agentkod, routningslogik, frontend-UI, datapipelines (uppskattat 80–120 timmar)  
 >  
 > **Använd detta som:**
 > - ✅ Arkitekturreferens för ditt eget multi-agent-projekt
-> - ✅ Lärandeguide för multi-agent designmönster
+> - ✅ Lärande guide för multi-agent designmönster
 > - ✅ Infrastrukturmall för att distribuera Azure-resurser
-> - ❌ INTE en färdig att köra-applikation (kräver betydande utveckling)
+> - ❌ INTE en färdig-applikation (kräver betydande utvecklingsarbete)
 
 ## Översikt
 
-**Lärandemål:** Förstå arkitekturen, designvalen och implementationssättet för att bygga en produktionsklar multi-agent kundsupportchatt för en detaljhandlare med avancerade AI-funktioner inklusive lagershantering, dokumentbearbetning och intelligenta kundinteraktioner.
+**Lärandemål:** Förstå arkitekturen, designbeslut och implementeringssätt för att bygga en produktionsklar multi-agent kundsupportchatbot för en återförsäljare med avancerade AI-funktioner inklusive lagerhantering, dokumentbearbetning och intelligenta kundinteraktioner.
 
-**Tid att slutföra:** Läsning + förståelse (2–3 timmar) | Bygga komplett implementation (80–120 timmar)
+**Tid att slutföra:** Läsning + Förståelse (2–3 timmar) | Bygga komplett implementation (80–120 timmar)
 
-**Det du lär dig:**
+**Vad du kommer att lära dig:**
 - Multi-agent arkitekturmönster och designprinciper
-- Strategier för distribution av Microsoft Foundry Models i flera regioner
+- Strategier för multi-region Microsoft Foundry Models-distribution
 - AI Search-integration med RAG (Retrieval-Augmented Generation)
-- Agentutvärdering och säkerhetstestningsramverk
-- Produktionsdistributionsöverväganden och kostnadsoptimering
+- Agentutvärderings- och säkerhetstestningsramverk
+- Produktionsdistribution överväganden och kostnadsoptimering
 
 ## Arkitekturmål
 
-**Utbildningsfokus:** Denna arkitektur demonstrerar företagsmönster för multi-agent-system.
+**Pedagogiskt fokus:** Denna arkitektur demonstrerar företagsmönster för multi-agent-system.
 
-### Systemkrav (för din implementering)
+### Systemkrav (för din implementation)
 
-En kundsupportlösning i produktion kräver:
-- **Flera specialiserade agenter** för olika kundbehov (kundservice + lagerhantering)
-- **Flera modeller i distribution** med korrekt kapacitetsplanering (gpt-4.1, gpt-4.1-mini, embeddings över regioner)
-- **Dynamisk dataintegration** med AI Search och filuppladdningar (vektorsök + dokumentbearbetning)
+En produktionsklar kundsupportlösning kräver:
+- **Flera specialiserade agenter** för olika kundbehov (kundtjänst + lagerhantering)
+- **Multi-modells-distribution** med korrekt kapacitetsplanering (gpt-4.1, gpt-4.1-mini, embeddings över regioner)
+- **Dynamisk dataintegration** med AI Search och filuppladdningar (vektorsökning + dokumentbearbetning)
 - **Omfattande övervakning** och utvärderingsmöjligheter (Application Insights + anpassade mätvärden)
-- **Produktionsklass säkerhet** med red teaming-validering (sårbarhetsskanning + agentevaluering)
+- **Produktionsklassad säkerhet** med red teaming-validering (sårbarhetsskanning + agentutvärdering)
 
-### Vad denna guide erbjuder
+### Vad denna guide tillhandahåller
 
 ✅ **Arkitekturmönster** - Beprövad design för skalbara multi-agent-system  
 ✅ **Infrastrukturmallar** - ARM-mallar som distribuerar alla Azure-tjänster  
@@ -54,23 +54,23 @@ En kundsupportlösning i produktion kräver:
 
 ❌ **Ingår inte** - Komplett fungerande applikation (kräver utvecklingsinsats)
 
-## 🗺️ Implementeringsplan
+## 🗺️ Implementeringsfärdplan
 
 ### Fas 1: Studera arkitekturen (2–3 timmar) - BÖRJA HÄR
 
-**Mål:** Förstå systemdesignen och komponenternas interaktioner
+**Mål:** Förstå systemdesignen och komponenternas samspel
 
-- [ ] Läs detta kompletta dokument
-- [ ] Granska arkitekturdiagrammet och komponentrelationerna
-- [ ] Förstå multi-agentmönster och designbesluten
+- [ ] Läs hela detta dokument
+- [ ] Granska arkitekturdiagram och komponentrelationer
+- [ ] Förstå multi-agent-mönster och designbeslut
 - [ ] Studera kodexempel för agentverktyg och routing
 - [ ] Granska kostnadsuppskattningar och kapacitetsplaneringsvägledning
 
-**Resultat:** Klar förståelse av vad du behöver bygga
+**Resultat:** Klar förståelse för vad du behöver bygga
 
 ### Fas 2: Distribuera infrastruktur (30–45 minuter)
 
-**Mål:** Provisionera Azure-resurser med ARM-mall
+**Mål:** Provisonera Azure-resurser med ARM-mallen
 
 ```bash
 cd retail-multiagent-arm-template
@@ -97,7 +97,7 @@ cd retail-multiagent-arm-template
 
 1. **Agentimplementering** (30–40 timmar)
    - Basagentklass och gränssnitt
-   - Kundserviceagent med gpt-4.1
+   - Kundtjänstagent med gpt-4.1
    - Lageragent med gpt-4.1-mini
    - Verktygsintegrationer (AI Search, Bing, filbearbetning)
 
@@ -109,28 +109,28 @@ cd retail-multiagent-arm-template
 3. **Frontendutveckling** (20–30 timmar)
    - Chattgränssnitt UI
    - Filuppladdningsfunktionalitet
-   - Visning av svar
+   - Rendering av svar
 
 4. **Datapipeline** (8–12 timmar)
-   - Skapande av AI Search-index
+   - AI Search-indexskapande
    - Dokumentbearbetning med Document Intelligence
-   - Generering av embeddings och indexering
+   - Embeddinggenerering och indexering
 
 5. **Övervakning & utvärdering** (10–15 timmar)
-   - Implementering av anpassad telemetri
+   - Implementation av anpassad telemetri
    - Agentutvärderingsramverk
-   - Red teaming-säkerhetsskanner
+   - Red team säkerhetsskanner
 
-### Fas 4: Distribuera och testa (8–12 timmar)
+### Fas 4: Distribuera & testa (8–12 timmar)
 
 - Bygg Docker-bilder för alla tjänster
 - Pusha till Azure Container Registry
 - Uppdatera Container Apps med riktiga bilder
 - Konfigurera miljövariabler och hemligheter
-- Kör utvärderingstestsuite
+- Kör utvärderings testsvit
 - Utför säkerhetsskanning
 
-**Totalt beräknad arbetsinsats:** 80–120 timmar för erfarna utvecklare
+**Total uppskattad insats:** 80–120 timmar för erfarna utvecklare
 
 ## Lösningsarkitektur
 
@@ -142,33 +142,33 @@ graph TB
     LB --> WebApp[Webbfrontend<br/>Containerapp]
     
     WebApp --> Router[Agentrouter<br/>Containerapp]
-    Router --> CustomerAgent[Kundagent<br/>Kundservice]
+    Router --> CustomerAgent[Kundagent<br/>Kundtjänst]
     Router --> InvAgent[Lageragent<br/>Lagerhantering]
     
     CustomerAgent --> OpenAI1[Microsoft Foundry-modeller<br/>gpt-4.1<br/>Östra USA 2]
     InvAgent --> OpenAI2[Microsoft Foundry-modeller<br/>gpt-4.1-mini<br/>Västra USA 2]
     
-    CustomerAgent --> AISearch[Azure AI Search<br/>Produktkatalog]
-    CustomerAgent --> BingSearch[Bing Search API<br/>Information i realtid]
+    CustomerAgent --> AISearch[Azure AI-sökning<br/>Produktkatalog]
+    CustomerAgent --> BingSearch[Bing Search API<br/>Realtidsinformation]
     InvAgent --> AISearch
     
     AISearch --> Storage[Azure Storage<br/>Dokument & filer]
     Storage --> DocIntel[Dokumentintelligens<br/>Innehållsbehandling]
     
-    OpenAI1 --> Embeddings[Text-embeddingar<br/>ada-002<br/>Frankrike Central]
+    OpenAI1 --> Embeddings[Textinbäddningar<br/>ada-002<br/>Frankrike Central]
     OpenAI2 --> Embeddings
     
     Router --> AppInsights[Application Insights<br/>Övervakning]
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
-    GraderModel[gpt-4.1-bedömare<br/>Schweiz Norra] --> Evaluation[Utvärderingsramverk]
-    RedTeam[Red Team-scanner] --> SecurityReports[Säkerhetsrapporter]
+    GraderModel[gpt-4.1 Bedömare<br/>Schweiz Nord] --> Evaluation[Evaluation Framework]
+    RedTeam[Red Team-skanner] --> SecurityReports[Säkerhetsrapporter]
     
     subgraph "Datalager"
         Storage
         AISearch
-        CosmosDB[Cosmos DB<br/>Chathistorik]
+        CosmosDB[Cosmos DB<br/>Chatthistorik]
     end
     
     subgraph "AI-tjänster"
@@ -182,8 +182,8 @@ graph TB
     
     subgraph "Övervakning & Säkerhet"
         AppInsights
-        LogAnalytics[Log Analytics Workspace]
-        KeyVault[Azure Key Vault<br/>Hemligheter & Konfiguration]
+        LogAnalytics[Log Analytics-arbetsyta]
+        KeyVault[Azure Key Vault<br/>Hemligheter & konfiguration]
         RedTeam
         Evaluation
     end
@@ -197,23 +197,24 @@ graph TB
     style AISearch fill:#fce4ec
     style Storage fill:#f1f8e9
 ```
+
 ### Komponentöversikt
 
 | Component | Purpose | Technology | Region |
 |-----------|---------|------------|---------|
-| **Web Frontend** | User interface for customer interactions | Container Apps | Primary Region |
-| **Agent Router** | Routes requests to appropriate agent | Container Apps | Primary Region |
-| **Customer Agent** | Handles customer service queries | Container Apps + gpt-4.1 | Primary Region |
-| **Inventory Agent** | Manages stock and fulfillment | Container Apps + gpt-4.1-mini | Primary Region |
-| **Microsoft Foundry Models** | LLM inference for agents | Cognitive Services | Multi-region |
-| **AI Search** | Vector search and RAG | AI Search Service | Primary Region |
-| **Storage Account** | File uploads and documents | Blob Storage | Primary Region |
-| **Application Insights** | Monitoring and telemetry | Monitor | Primary Region |
-| **Grader Model** | Agent evaluation system | Microsoft Foundry Models | Secondary Region |
+| **Web Frontend** | Användargränssnitt för kundinteraktioner | Container Apps | Primär region |
+| **Agent Router** | Rutar förfrågningar till rätt agent | Container Apps | Primär region |
+| **Customer Agent** | Hanterar kundtjänstförfrågningar | Container Apps + gpt-4.1 | Primär region |
+| **Inventory Agent** | Hanterar lager och orderutförande | Container Apps + gpt-4.1-mini | Primär region |
+| **Microsoft Foundry Models** | LLM-inferens för agenter | Azure AI Services | Multi-region |
+| **AI Search** | Vektorsökning och RAG | AI Search Service | Primär region |
+| **Storage Account** | Filuppladdningar och dokument | Blob Storage | Primär region |
+| **Application Insights** | Övervakning och telemetri | Monitor | Primär region |
+| **Grader Model** | Agentutvärderingssystem | Microsoft Foundry Models | Sekundär region |
 
 ## 📁 Projektstruktur
 
-> **📍 Statuslegend:**  
+> **📍 Statuslegenda:**  
 > ✅ = Finns i repository  
 > 📝 = Referensimplementation (kodexempel i detta dokument)  
 > 🔨 = Du behöver skapa detta
@@ -363,21 +364,21 @@ retail-multiagent-solution/              🔨 Your project directory
 
 ---
 
-## 🚀 Kom igång snabbt: Vad du kan göra just nu
+## 🚀 Snabbstart: Vad du kan göra just nu
 
-### Alternativ 1: Distribuera endast infrastrukturen (30 minuter)
+### Alternativ 1: Distribuera endast infrastruktur (30 minuter)
 
 **Vad du får:** Alla Azure-tjänster provisionerade och redo för utveckling
 
 ```bash
-# Klona kodförrådet
+# Klona repository
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/retail-multiagent-arm-template
 
-# Rulla ut infrastrukturen
+# Driftsätt infrastruktur
 ./deploy.sh -g myResourceGroup -m standard
 
-# Verifiera distributionen
+# Verifiera driftsättning
 az resource list --resource-group myResourceGroup --output table
 ```
 
@@ -390,26 +391,26 @@ az resource list --resource-group myResourceGroup --output table
 
 ### Alternativ 2: Studera arkitekturen (2–3 timmar)
 
-**Vad du får:** Djup förståelse för multi-agentmönster
+**Vad du får:** Djup förståelse för multi-agent-mönster
 
-1. Läs detta kompletta dokument
+1. Läs hela detta dokument
 2. Granska kodexempel för varje komponent
 3. Förstå designbeslut och avvägningar
 4. Studera kostnadsoptimeringsstrategier
-5. Planera din implementationsstrategi
+5. Planera din implementationsmetod
 
 **Förväntat resultat:**
 - ✅ Klar mental modell av systemarkitekturen
 - ✅ Förståelse för nödvändiga komponenter
-- ✅ Realistiska arbetsuppskattningar
-- ✅ Implementeringsplan
+- ✅ Realistiska tidsuppskattningar
+- ✅ Implementationsplan
 
 ### Alternativ 3: Bygg komplett system (80–120 timmar)
 
 **Vad du får:** Produktionsklar multi-agent-lösning
 
 1. **Fas 1:** Distribuera infrastruktur (gjort ovan)
-2. **Fas 2:** Implementera agenter med kodexempel nedan (30–40 timmar)
+2. **Fas 2:** Implementera agenter med kodexemplen nedan (30–40 timmar)
 3. **Fas 3:** Bygg routingtjänst (12–16 timmar)
 4. **Fas 4:** Skapa frontend-UI (20–30 timmar)
 5. **Fas 5:** Konfigurera datapipelines (8–12 timmar)
@@ -417,23 +418,23 @@ az resource list --resource-group myResourceGroup --output table
 
 **Förväntat resultat:**
 - ✅ Fullt fungerande multi-agent-system
-- ✅ Produktionsklass övervakning
+- ✅ Produktionsklassad övervakning
 - ✅ Säkerhetsvalidering
 - ✅ Kostnadsoptimerad distribution
 
 ---
 
-## 📚 Arkitekturreferens och implementationsguide
+## 📚 Arkitekturreferens & implementationsguide
 
 Följande avsnitt ger detaljerade arkitekturmönster, konfigurationsexempel och referenskod för att vägleda din implementation.
 
-## Inledande konfigurationskrav
+## Initiala konfigurationskrav
 
-### 1. Flera agenter och konfiguration
+### 1. Flera agenter & konfiguration
 
-**Mål**: Distribuera 2 specialiserade agenter - "Kundagent" (kundservice) och "Lager" (lagerhantering)
+**Mål**: Distribuera 2 specialiserade agenter - "Customer Agent" (kundservice) och "Inventory" (lagerhantering)
 
-> **📝 Obs:** Följande azure.yaml och Bicep-konfigurationer är **referensexempel** som visar hur du kan strukturera multi-agent-distributioner. Du behöver skapa dessa filer och motsvarande agentimplementationer.
+> **📝 Notera:** Följande azure.yaml och Bicep-konfigurationer är **referensexempel** som visar hur man strukturerar multi-agent-distributioner. Du behöver skapa dessa filer och motsvarande agentimplementationer.
 
 #### Konfigurationssteg:
 
@@ -467,7 +468,7 @@ services:
         }
 ```
 
-#### Uppdateringar av Bicep-mall:
+#### Uppdateringar i Bicep-mall:
 
 ```bicep
 // infra/agents.bicep
@@ -509,9 +510,9 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 
 ### 2. Flera modeller med kapacitetsplanering
 
-**Mål**: Distribuera chattmodell (Kund), embeddingsmodell (sök) och resonemangsmodell (grader) med korrekt kvot hantering
+**Mål**: Distribuera chattmodell (Customer), embeddingsmodell (sök) och resonemangsmodell (grader) med korrekt kvotförvaltning
 
-#### Strategi för flera regioner:
+#### Multi-regionstrategi:
 
 ```bicep
 // infra/models.bicep
@@ -555,7 +556,7 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
 }
 ```
 
-#### Konfiguration för regionsfallback:
+#### Regionfallback-konfiguration:
 
 ```yaml
 # .azure/env/.env.production
@@ -566,9 +567,9 @@ MODEL_CAPACITY_REQUIREMENTS='{"gpt-4.1": 35, "text-embedding-ada-002": 30}'
 
 ### 3. AI Search med dataindexkonfiguration
 
-**Mål**: Konfigurera AI Search för datauppdateringar och automatiserad indexering
+**Mål**: Konfigurera AI Search för datauppdateringar och automatisk indexering
 
-#### Förprovisioneringshook:
+#### Pre-provisioning-hook:
 
 ```bash
 #!/bin/bash
@@ -585,7 +586,7 @@ az search service create \
   --replica-count 1
 ```
 
-#### Datainställning efter provisionering:
+#### Post-provisioning data-setup:
 
 ```bash
 #!/bin/bash
@@ -636,9 +637,9 @@ python ./scripts/upload_search_data.py \
 
 ### 4. Agentverktygskonfiguration för AI Search
 
-**Mål**: Konfigurera agenter att använda AI Search som ett grundläggande verktyg
+**Mål**: Konfigurera agenter att använda AI Search som ett grundläggningsverktyg
 
-#### Implementering av agentens sökverktyg:
+#### Agent Search Tool-implementation:
 
 ```python
 # src/agents/tools/search_tool.py
@@ -698,7 +699,7 @@ class CustomerAgent:
         # Sök först efter relevant kontext
         search_results = await self.search_tool.search_products(user_query)
         
-        # Förbered kontext för LLM
+        # Förbered kontexten för LLM
         context = "\n".join([doc['content'] for doc in search_results[:3]])
         
         # Generera svar med förankring
@@ -713,9 +714,9 @@ class CustomerAgent:
         return response.choices[0].message.content
 ```
 
-### 5. Integration av filuppladdningslagring
+### 5. Lagringsintegration för filuppladdningar
 
-**Mål**: Möjliggöra för agenter att bearbeta uppladdade filer (manualer, dokument) för RAG-kontext
+**Mål**: Möjliggör för agenter att bearbeta uppladdade filer (manualer, dokument) för RAG-kontext
 
 #### Lagringskonfiguration:
 
@@ -796,7 +797,7 @@ class DocumentProcessor:
             for line in page.lines:
                 text_content += line.content + "\n"
         
-        # Generera embeddingar
+        # Generera inbäddningar
         embedding_response = await self.openai_client.embeddings.create(
             model="text-embedding-ada-002",
             input=text_content
@@ -814,11 +815,11 @@ class DocumentProcessor:
         await self.search_client.upload_documents([document])
 ```
 
-### 6. Bing-sökintegration
+### 6. Bing Search-integration
 
-**Mål**: Lägg till Bing Search-funktionalitet för realtidsinformation
+**Mål**: Lägg till Bing Search-möjligheter för realtidsinformation
 
-#### Tillägg av Bicep-resurs:
+#### Bicep-resursaddition:
 
 ```bicep
 // infra/bing-search.bicep
@@ -836,7 +837,7 @@ output bingSearchKey string = bingSearchService.listKeys().key1
 output bingSearchEndpoint string = 'https://api.bing.microsoft.com/v7.0/search'
 ```
 
-#### Bing-sökverktyg:
+#### Bing Search-verktyg:
 
 ```python
 # src/agents/tools/bing_search_tool.py
@@ -880,7 +881,7 @@ class BingSearchTool:
 
 ---
 
-## Övervakning & observerbarhet
+## Övervakning & Observability
 
 ### 7. Spårning och Application Insights
 
@@ -939,7 +940,7 @@ resource agentPerformanceAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-#### Implementering av anpassad telemetri:
+#### Implementation av anpassad telemetri:
 
 ```python
 # src/telemetry/agent_telemetry.py
@@ -984,7 +985,7 @@ class AgentTelemetry:
         """Track search operation performance"""
         properties = {
             'search_type': search_type,
-            'query': query[:100],  # Avkorta av integritetsskäl
+            'query': query[:100],  # Avkapa av integritetsskäl
             'results_found': str(results_count > 0)
         }
         
@@ -1045,11 +1046,11 @@ class AgentTelemetry:
         return len(text) // 4
 ```
 
-### 8. Red teaming-säkerhetsvalidering
+### 8. Red Teaming säkerhetsvalidering
 
-**Mål**: Automatiserad säkerhetstestning för agenter och modeller
+**Mål**: Automatisk säkerhetstestning för agenter och modeller
 
-#### Konfiguration för red teaming:
+#### Red Teaming-konfiguration:
 
 ```python
 # src/security/red_team_scanner.py
@@ -1097,7 +1098,7 @@ class RedTeamScanner:
                     'details': strategy_result['details']
                 })
         
-        # Beräkna övergripande säkerhetspoäng
+        # Beräkna det totala säkerhetsbetyget
         scan_results['overall_score'] = self._calculate_security_score(scan_results)
         
         return scan_results
@@ -1240,7 +1241,7 @@ class RedTeamScanner:
         return round(final_score, 2)
 ```
 
-#### Automatiserad säkerhetspipeline:
+#### Automatisk säkerhetspipeline:
 
 ```bash
 #!/bin/bash
@@ -1248,7 +1249,7 @@ class RedTeamScanner:
 
 echo "Starting Red Team Security Scan..."
 
-# Hämta agentens slutpunkt från driftsättningen
+# Hämta agentens slutpunkt från distributionen
 AGENT_ENDPOINT=$(az containerapp show \
   --name "agent-customer" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1264,7 +1265,7 @@ python -m src.security.red_team_scanner \
 echo "Security scan completed. Check security_reports/ for results."
 ```
 
-### 9. Agentutvärdering med grader-modell
+### 9. Agentutvärdering med Grader-modell
 
 **Mål**: Distribuera utvärderingssystem med en dedikerad grader-modell
 
@@ -1354,7 +1355,7 @@ class AgentEvaluator:
         # Hämta agentens svar
         agent_response = await self._get_agent_response(user_query)
         
-        # Gradera svaret
+        # Betygsätt svaret
         grading_result = await self._grade_response(
             user_query, 
             agent_response, 
@@ -1425,7 +1426,7 @@ class AgentEvaluator:
                 max_tokens=500
             )
             
-            # Parsa JSON-svaret
+            # Parsa JSON-svar
             grading_text = grader_response.choices[0].message.content
             grading_result = json.loads(grading_text)
             
@@ -1487,7 +1488,7 @@ class AgentEvaluator:
         return summary
 ```
 
-#### Testfalls-konfiguration:
+#### Testfallskonfiguration:
 
 ```json
 // tests/evaluation_test_cases.json
@@ -1528,9 +1529,9 @@ class AgentEvaluator:
 
 ## Anpassning & uppdateringar
 
-### 10. Anpassning av Container App
+### 10. Container App-anpassning
 
-**Mål**: Uppdatera containerappens konfiguration och ersätt med anpassat UI
+**Mål**: Uppdatera container app-konfiguration och ersätta med anpassad UI
 
 #### Dynamisk konfiguration:
 
@@ -1548,7 +1549,7 @@ services:
       CUSTOM_LOGO_URL: ${LOGO_URL}
 ```
 
-#### Anpassad frontendbyggnad:
+#### Anpassad frontend-bygge:
 
 ```dockerfile
 # src/frontend/Dockerfile
@@ -1575,7 +1576,7 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 ```
 
-#### Script för bygg och distribution:
+#### Bygg- och deploy-skript:
 
 ```bash
 #!/bin/bash
@@ -1583,7 +1584,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 echo "Building and deploying custom frontend..."
 
-# Bygg anpassad bild med miljövariabler
+# Bygg en anpassad bild med miljövariabler
 docker build \
   --build-arg AGENT_NAME="$CUSTOMER_AGENT_NAME" \
   --build-arg COMPANY_NAME="retail Retail" \
@@ -1612,9 +1613,9 @@ echo "Frontend deployed successfully!"
 
 ### Vanliga problem och lösningar
 
-#### 1. Kvotbegränsningar för Container Apps
+#### 1. Kvotgränser för Container Apps
 
-**Problem**: Distribution misslyckas på grund av regionala kvotbegränsningar
+**Problem**: Distribution misslyckas på grund av regionala kvotgränser
 
 **Lösning**:
 ```bash
@@ -1624,7 +1625,7 @@ az containerapp env show \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.workloadProfiles"
 
-# Begär ökning av kvoten
+# Begär ökad kvot
 az support tickets create \
   --ticket-name "ContainerApps-Quota-Increase" \
   --severity "minimal" \
@@ -1635,9 +1636,9 @@ az support tickets create \
   --description "Request quota increase for Container Apps in region X"
 ```
 
-#### 2. Modellutplaceringens utgång
+#### 2. Modelldistributionsutgång
 
-**Problem**: Modellutplacering misslyckas på grund av utgången API-version
+**Problem**: Modelldistribution misslyckas på grund av utgånget API-version
 
 **Lösning**:
 ```python
@@ -1664,7 +1665,7 @@ def update_bicep_templates(latest_versions):
     """Update Bicep templates with latest versions"""
     template_path = "./infra/models.bicep"
     
-    # Läs och uppdatera mallen
+    # Läs och uppdatera mall
     with open(template_path, 'r') as f:
         content = f.read()
     
@@ -1684,7 +1685,7 @@ if __name__ == "__main__":
     update_bicep_templates(versions)
 ```
 
-#### 3. Integrering av finjustering
+#### 3. Fine-tuning-integration
 
 **Problem**: Hur integrera finjusterade modeller i AZD-distribution
 
@@ -1736,13 +1737,13 @@ class FineTuningPipeline:
 
 ---
 
-## FAQ & öppet utforskande
+## FAQ & öppna utforskningar
 
 ### Vanliga frågor
 
-#### Q: Finns det ett enkelt sätt att distribuera flera agenter (designmönster)?
+#### F: Finns det ett enkelt sätt att distribuera flera agenter (designmönster)?
 
-**A: Ja! Använd Multi-Agent-mönstret:**
+**S: Ja! Använd Multi-Agent Pattern:**
 
 ```yaml
 # azure.yaml - Multi-Agent Configuration
@@ -1759,9 +1760,9 @@ services:
         }
 ```
 
-#### Q: Kan jag distribuera "model router" som en modell (kostnadsimplikationer)?
+#### F: Kan jag distribuera "model router" som en modell (kostnadsimplikationer)?
 
-**A: Ja, med noggrann övervägning:**
+**S: Ja, med noggrann övervägning:**
 
 ```python
 # Implementering av modellrouter
@@ -1789,13 +1790,13 @@ class ModelRouter:
 ```
 
 **Kostnadsimplikationer:**
-- **Besparingar**: 60–80 % kostnadsreducering för enkla förfrågningar
-- **Nackdelar**: Lätt ökad latens för routinglogiken
-- **Övervakning**: Spåra noggrannhet kontra kostnadsmått
+- **Besparingar**: 60–80% kostnadsreduktion för enkla frågor
+- **Avvägningar**: Liten ökning av latens för routningslogik
+- **Övervakning**: Följ noggrannhet vs. kostnadsmätvärden
 
-#### Q: Kan jag starta ett finjusteringsjobb från en azd-mall?
+#### F: Kan jag starta ett fine-tuning-jobb från en azd-mall?
 
-**A: Ja, med post-provisioning-hooks:**
+**S: Ja, med post-provisioning-hooks:**
 
 ```bash
 #!/bin/bash
@@ -1822,7 +1823,7 @@ echo "Monitor progress with: azd hooks run monitor-fine-tuning"
 
 ### Avancerade scenarier
 
-#### Strategi för distribution i flera regioner
+#### Multi-region-distributionsstrategi
 
 ```bicep
 // infra/multi-region.bicep
@@ -1858,10 +1859,10 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-#### Ramverk för kostnadsoptimering
+#### Kostnadsoptimeringsramverk
 
 ```python
-# src/optimization/cost_optimizer.py
+# src/optimering/kostnads_optimerare.py
 class CostOptimizer:
     def __init__(self, usage_analytics):
         self.analytics = usage_analytics
@@ -1904,37 +1905,37 @@ class CostOptimizer:
 
 ---
 
-## ✅ Färdig att distribuera ARM-mall
+## ✅ ARM-mall redo för distribution
 
-> **✨ DET HÄR FINNS OCH FUNGERAR VERKLIGEN!**  
-> Till skillnad från de konceptuella kodexemplen ovan är ARM-mallen en **verklig, fungerande infrastrukturdistribution** som ingår i det här repositoryt.
+> **✨ DETTA FINNS VERKLIGEN OCH FUNGERAR!**  
+> Till skillnad från de konceptuella kodexemplen ovan är ARM-mallen en **verklig, fungerande infrastrukturdistribution** som ingår i det här repot.
 
 ### Vad den här mallen faktiskt gör
 
-ARM-mallen på [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) tillhandahåller **all Azure-infrastruktur** som behövs för multiagentssystemet. Detta är den **enda komponenten som är klar att köra** - allt annat kräver utveckling.
+ARM-mallen i [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) provisionerar **all Azure-infrastruktur** som behövs för multi-agent-systemet. Detta är den **enda komponenten som är redo att köras** - allt annat kräver utveckling.
 
 ### Vad som ingår i ARM-mallen
 
-ARM-mallen som finns i [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) inkluderar:
+ARM-mallen som finns i [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) innehåller:
 
 #### **Komplett infrastruktur**
-- ✅ **Distribuering i flera regioner av Microsoft Foundry Models** (gpt-4.1, gpt-4.1-mini, embeddings, grader)
+- ✅ **Multi-region Microsoft Foundry Models**-utrullningar (gpt-4.1, gpt-4.1-mini, embeddings, grader)
 - ✅ **Azure AI Search** med vektorsökningsfunktioner
-- ✅ **Azure Storage** med behållare för dokument och uppladdningar
+- ✅ **Azure Storage** med dokument- och uppladdningscontainrar
 - ✅ **Container Apps Environment** med automatisk skalning
 - ✅ **Agent Router & Frontend** containerappar
-- ✅ **Cosmos DB** för lagring av chatthistorik
+- ✅ **Cosmos DB** för lagring av chattlogg
 - ✅ **Application Insights** för omfattande övervakning
 - ✅ **Key Vault** för säker hantering av hemligheter
 - ✅ **Document Intelligence** för filbearbetning
 - ✅ **Bing Search API** för realtidsinformation
 
 #### **Distributionslägen**
-| Mode | Use Case | Resources | Estimated Cost/Month |
+| Läge | Användningsfall | Resurser | Beräknad kostnad/månad |
 |------|----------|-----------|---------------------|
-| **Minimal** | Development, Testing | Basic SKUs, Single region | $100-370 |
-| **Standard** | Production, Moderate scale | Standard SKUs, Multi-region | $420-1,450 |
-| **Premium** | Enterprise, High scale | Premium SKUs, HA setup | $1,150-3,500 |
+| **Minimal** | Utveckling, testning | Basic SKUs, en region | $100-370 |
+| **Standard** | Produktion, måttlig skala | Standard SKUs, flera regioner | $420-1,450 |
+| **Premium** | Företag, hög skala | Premium SKUs, HA-upplägg | $1,150-3,500 |
 
 ### 🎯 Snabba distributionsalternativ
 
@@ -1945,7 +1946,7 @@ ARM-mallen som finns i [`retail-multiagent-arm-template/`](../../../examples/ret
 #### Alternativ 2: Distribution med Azure CLI
 
 ```bash
-# Klona repositoryt
+# Klona repot
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/examples/retail-multiagent-arm-template
 
@@ -1962,7 +1963,7 @@ chmod +x deploy.sh
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
-#### Alternativ 3: Direkt ARM-mall-distribution
+#### Alternativ 3: Direkt distribution av ARM-mall
 
 ```bash
 # Skapa resursgrupp
@@ -1976,7 +1977,7 @@ az deployment group create \
   --parameters projectName=retail environmentName=prod
 ```
 
-### Mallens utdata
+### Mallutdata
 
 Efter lyckad distribution får du:
 
@@ -1998,7 +1999,7 @@ ARM-mallen hanterar infrastrukturprovisionering. Efter distribution:
 
 1. **Konfigurera sökindex**:
    ```bash
-   # Använd det medföljande sökschemat
+   # Använd det angivna sökschemat
    curl -X POST "${SEARCH_ENDPOINT}/indexes?api-version=2023-11-01" \
      -H "Content-Type: application/json" \
      -H "api-key: ${SEARCH_KEY}" \
@@ -2016,7 +2017,7 @@ ARM-mallen hanterar infrastrukturprovisionering. Efter distribution:
 
 3. **Distribuera agentkod**:
    ```bash
-   # Bygg och distribuera faktiska agentapplikationer
+   # Bygg och distribuera riktiga agentapplikationer
    docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
    az containerapp update \
      --name retail-router \
@@ -2043,78 +2044,78 @@ Redigera `azuredeploy.parameters.json` för att anpassa din distribution:
 ### 📊 Distributionsfunktioner
 
 - ✅ **Validering av förutsättningar** (Azure CLI, kvoter, behörigheter)
-- ✅ **Hög tillgänglighet i flera regioner** med automatisk failover
+- ✅ **Multi-region hög tillgänglighet** med automatisk failover
 - ✅ **Omfattande övervakning** med Application Insights och Log Analytics
-- ✅ **Bästa praxis för säkerhet** med Key Vault och RBAC
-- ✅ **Kostnadsoptimering** med konfigurerbara distributionslägen
-- ✅ **Automatisk skalning** baserat på efterfrågemönster
+- ✅ **Säkerhetsbästa praxis** med Key Vault och RBAC
+- ✅ **Kostoptimering** med konfigurerbara distributionslägen
+- ✅ **Automatisk skalning** baserad på efterfrågemönster
 - ✅ **Uppdateringar utan driftstopp** med Container Apps-revisioner
 
 ### 🔍 Övervakning och hantering
 
 När distributionen är klar, övervaka din lösning via:
 
-- **Application Insights**: Prestandamått, beroendespårning och anpassad telemetri
+- **Application Insights**: Prestandamått, beroendespårning och egen telemetri
 - **Log Analytics**: Centraliserad loggning från alla komponenter
-- **Azure Monitor**: Övervakning av resursstatus och tillgänglighet
-- **Cost Management**: Realtidskostnadsuppföljning och budgetvarningar
+- **Azure Monitor**: Övervakning av resursers hälsa och tillgänglighet
+- **Cost Management**: Realtidskostnadsspårning och budgetvarningar
 
 ---
 
 ## 📚 Komplett implementeringsguide
 
-Detta scenariosdokument tillsammans med ARM-mallen ger allt som behövs för att distribuera en produktionsredo multi-agent kundsupportlösning. Implementeringen omfattar:
+Detta scenariodokument tillsammans med ARM-mallen tillhandahåller allt som behövs för att distribuera en produktionsfärdig multi-agent kundsupportlösning. Implementeringen omfattar:
 
 ✅ **Arkitekturdesign** - Omfattande systemdesign med komponentrelationer  
-✅ **Infrastrukturprovisionering** - Komplett ARM-mall för enklicksdistribution  
-✅ **Agentkonfiguration** - Detaljerad setup för Customer- och Inventory-agenter  
-✅ **Multi-modell-distribution** - Strategisk placering av modeller över regioner  
+✅ **Infrastrukturprovisionering** - Fullständig ARM-mall för enklicksdistribution  
+✅ **Agentkonfiguration** - Detaljerad setup för Customer och Inventory-agenter  
+✅ **Multi-modellsdistribution** - Strategisk modellplacering över regioner  
 ✅ **Sökintegration** - AI Search med vektorfunktioner och dataindexering  
-✅ **Säkerhetsimplementering** - Red teaming, sårbarhetsskanning och säkra rutiner  
-✅ **Övervakning & utvärdering** - Omfattande telemetri och agentutvärderingsramverk  
-✅ **Produktionsberedskap** - Enterprise-klass distribution med HA och katastrofåterställning  
-✅ **Kostnadsoptimering** - Intelligenta ruttnings- och användningsbaserade skalningsstrategier  
-✅ **Felsökningsguide** - Vanliga problem och lösningsstrategier
+✅ **Säkerhetsimplementering** - Red teaming, sårbarhetsskanning och säkra metoder  
+✅ **Övervakning & utvärdering** - Omfattande telemetri och ramverk för agentutvärdering  
+✅ **Produktionsberedskap** - Företagsklassdistribution med hög tillgänglighet och katastrofåterställning  
+✅ **Kostoptimering** - Intelligent routing och användningsbaserad skalning  
+✅ **Felsökningsguide** - Vanliga problem och åtgärdsstrategier
 
 ---
 
 ## 📊 Sammanfattning: Vad du har lärt dig
 
-### Arkitekturmönster som täcks
+### Täckta arkitekturmönster
 
-✅ **Multi-Agent System Design** - Specialiserade agenter (Customer + Inventory) med dedikerade modeller  
-✅ **Multi-Region Deployment** - Strategisk modellplacering för kostnadsoptimering och redundans  
-✅ **RAG Architecture** - AI Search-integration med vektor-embeddings för faktabaserade svar  
-✅ **Agent Evaluation** - Dedikerad grader-modell för kvalitetsbedömning  
-✅ **Security Framework** - Red teaming och sårbarhetsskanningsmönster  
-✅ **Cost Optimization** - Modellroutning och kapacitetsplaneringsstrategier  
-✅ **Production Monitoring** - Application Insights med anpassad telemetri  
+✅ **Multi-agent-systemdesign** - Specialiserade agenter (Customer + Inventory) med dedikerade modeller  
+✅ **Multi-region-distribution** - Strategisk modellplacering för kostoptimering och redundans  
+✅ **RAG-arkitektur** - AI Search-integration med vektorembeddingar för förankrade svar  
+✅ **Agentutvärdering** - Dedikerad grader-modell för kvalitetsbedömning  
+✅ **Säkerhetsramverk** - Mönster för red teaming och sårbarhetsskanning  
+✅ **Kostoptimering** - Modellroutning och strategier för kapacitetsplanering  
+✅ **Produktionsövervakning** - Application Insights med egen telemetri  
 
-### Vad detta dokument tillhandahåller
+### Vad detta dokument erbjuder
 
-| Component | Status | Where to Find It |
+| Komponent | Status | Var du hittar det |
 |-----------|--------|------------------|
-| **Infrastructure Template** | ✅ Ready to Deploy | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
-| **Architecture Diagrams** | ✅ Complete | Mermaid diagram above |
-| **Code Examples** | ✅ Reference Implementations | Throughout this document |
-| **Configuration Patterns** | ✅ Detailed Guidance | Sections 1-10 above |
-| **Agent Implementations** | 🔨 You Build This | ~40 hours development |
-| **Frontend UI** | 🔨 You Build This | ~25 hours development |
-| **Data Pipelines** | 🔨 You Build This | ~10 hours development |
+| **Infrastructure Template** | ✅ Redo för distribution | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
+| **Architecture Diagrams** | ✅ Komplett | Mermaid-diagram ovan |
+| **Code Examples** | ✅ Referensimplementationer | Genom hela dokumentet |
+| **Configuration Patterns** | ✅ Detaljerad vägledning | Avsnitt 1-10 ovan |
+| **Agent Implementations** | 🔨 Du bygger detta | ~40 timmars utveckling |
+| **Frontend UI** | 🔨 Du bygger detta | ~25 timmars utveckling |
+| **Data Pipelines** | 🔨 Du bygger detta | ~10 timmars utveckling |
 
 ### Verklighetskontroll: Vad som faktiskt finns
 
-**I repositoryn (Redo nu):**
+**I repositoryt (Redo nu):**
 - ✅ ARM-mall som distribuerar 15+ Azure-tjänster (azuredeploy.json)
 - ✅ Distributionsskript med validering (deploy.sh)
 - ✅ Parameterkonfiguration (azuredeploy.parameters.json)
 
 **Refererat i dokumentet (du skapar):**
-- 🔨 Agentimplementeringskod (~30-40 timmar)
-- 🔨 Routingtjänst (~12-16 timmar)
-- 🔨 Frontend-applikation (~20-30 timmar)
-- 🔨 Datasättningsskript (~8-12 timmar)
-- 🔨 Övervakningsramverk (~10-15 timmar)
+- 🔨 Agentimplementationskod (~30–40 timmar)
+- 🔨 Routingtjänst (~12–16 timmar)
+- 🔨 Frontendapplikation (~20–30 timmar)
+- 🔨 Datasetup-skript (~8–12 timmar)
+- 🔨 Övervakningsramverk (~10–15 timmar)
 
 ### Dina nästa steg
 
@@ -2124,9 +2125,9 @@ cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
 
-#### Om du vill bygga hela systemet (80-120 timmar)
-1. ✅ Läs och förstå detta arkitekturdokument (2-3 timmar)
-2. ✅ Distribuera infrastruktur med ARM-mallen (30 minuter)
+#### Om du vill bygga hela systemet (80–120 timmar)
+1. ✅ Läs och förstå detta arkitekturdokument (2–3 timmar)
+2. ✅ Distribuera infrastrukturen med ARM-mallen (30 minuter)
 3. 🔨 Implementera agenter med referenskodsmönster (~40 timmar)
 4. 🔨 Bygg routingtjänst med FastAPI/Express (~15 timmar)
 5. 🔨 Skapa frontend UI med React/Vue (~25 timmar)
@@ -2134,53 +2135,53 @@ cd retail-multiagent-arm-template
 7. 🔨 Lägg till övervakning och utvärdering (~15 timmar)
 8. ✅ Testa, säkra och optimera (~10 timmar)
 
-#### Om du vill lära dig multiagentmönster (Studera)
+#### Om du vill lära dig multi-agentmönster (studera)
 - 📖 Granska arkitekturdiagrammet och komponentrelationerna
 - 📖 Studera kodexempel för SearchTool, BingTool, AgentEvaluator
-- 📖 Förstå multi-region distributionsstrategi
+- 📖 Förstå strategin för multi-region-distribution
 - 📖 Lär dig utvärderings- och säkerhetsramverk
 - 📖 Tillämpa mönstren i dina egna projekt
 
 ### Viktiga slutsatser
 
-1. **Infrastruktur vs. applikation** - ARM-mallen tillhandahåller infrastrukturen; agenter kräver utveckling  
-2. **Multi-region-strategi** - Strategisk modellplacering minskar kostnader och förbättrar tillförlitlighet  
+1. **Infrastruktur vs. applikation** - ARM-mallen tillhandahåller infrastrukturen; agenterna kräver utveckling  
+2. **Multi-regionstrategi** - Strategisk modellplacering minskar kostnader och förbättrar tillförlitlighet  
 3. **Utvärderingsramverk** - Dedikerad grader-modell möjliggör kontinuerlig kvalitetsbedömning  
 4. **Säkerhet först** - Red teaming och sårbarhetsskanning är avgörande för produktion  
-5. **Kostnadsoptimering** - Intelligenta rutter mellan gpt-4.1 och gpt-4.1-mini sparar 60-80%
+5. **Kostoptimering** - Intelligent routning mellan gpt-4.1 och gpt-4.1-mini sparar 60–80%
 
 ### Uppskattade kostnader
 
-| Deployment Mode | Infrastructure/Month | Development (One-Time) | Total First Month |
+| Distributionsläge | Infrastruktur/månad | Utveckling (engångs) | Totalt första månaden |
 |-----------------|---------------------|------------------------|-------------------|
-| **Minimal** | $100-370 | $15K-25K (80-120 hrs) | $15.1K-25.4K |
-| **Standard** | $420-1,450 | $15K-25K (same effort) | $15.4K-26.5K |
-| **Premium** | $1,150-3,500 | $15K-25K (same effort) | $16.2K-28.5K |
+| **Minimal** | $100-370 | $15K-25K (80–120 timmar) | $15.1K-25.4K |
+| **Standard** | $420-1,450 | $15K-25K (samma insats) | $15.4K-26.5K |
+| **Premium** | $1,150-3,500 | $15K-25K (samma insats) | $16.2K-28.5K |
 
-**Obs:** Infrastruktur utgör <5% av totala kostnaden för nya implementationer. Utvecklingsinsatsen är den största investeringen.
+**Obs:** Infrastrukturen utgör <5% av totalkostnaden för nya implementationer. Utvecklingsinsatsen är den största investeringen.
 
 ### Relaterade resurser
 
-- 📚 [ARM Template Deployment Guide](retail-multiagent-arm-template/README.md) - Infrastrukturuppsättning
-- 📚 [Microsoft Foundry Models Best Practices](https://learn.microsoft.com/azure/ai-services/openai/) - Bästa praxis för Microsoft Foundry-modeller
-- 📚 [AI Search Documentation](https://learn.microsoft.com/azure/search/) - Konfiguration för vektorsökning
-- 📚 [Container Apps Patterns](https://learn.microsoft.com/azure/container-apps/) - Distribution av mikrotjänster
-- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Övervakningsinställning
+- 📚 [ARM-mallens distributionsguide](retail-multiagent-arm-template/README.md) - Infrastrukturuppsättning
+- 📚 [Microsoft Foundry Models Best Practices](https://learn.microsoft.com/azure/ai-services/openai/) - Modelldistribution
+- 📚 [AI Search Documentation](https://learn.microsoft.com/azure/search/) - Vektorsökningskonfiguration
+- 📚 [Container Apps Patterns](https://learn.microsoft.com/azure/container-apps/) - Mikrotjänstdistribution
+- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Övervakningsuppsättning
 
 ### Frågor eller problem?
 
-- 🐛 [Report Issues](https://github.com/microsoft/AZD-for-beginners/issues) - Mallbuggar eller dokumentationsfel
-- 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - Arkitekturfrågor
+- 🐛 [Rapportera problem](https://github.com/microsoft/AZD-for-beginners/issues) - Mallfel eller dokumentationsfel
+- 💬 [GitHub-diskussioner](https://github.com/microsoft/AZD-for-beginners/discussions) - Arkitekturfrågor
 - 📖 [FAQ](../resources/faq.md) - Vanliga frågor besvarade
-- 🔧 [Troubleshooting Guide](../docs/troubleshooting/common-issues.md) - Distributionsproblem
+- 🔧 [Felsökningsguide](../docs/troubleshooting/common-issues.md) - Distributionsproblem
 
 ---
 
-**Detta omfattande scenario ger en enterprise-klass arkitekturplan för multi-agent AI-system, komplett med infrastrukturmallar, implementeringsvägledning och produktionspraxis för att bygga sofistikerade kundsupportlösningar med Azure Developer CLI.**
+**Detta omfattande scenario ger en företagsklassarkitektur för multi-agent AI-system, komplett med infrastrukturella mallar, implementeringsvägledning och produktionsbästa praxis för att bygga sofistikerade kundsupportlösningar med Azure Developer CLI.**
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Ansvarsfriskrivning:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten Co-op Translator (https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet bör du vara medveten om att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet i sitt originalspråk bör betraktas som den auktoritativa källan. För viktig information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användning av denna översättning.
+**Ansvarsfriskrivning**:
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var vänlig notera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

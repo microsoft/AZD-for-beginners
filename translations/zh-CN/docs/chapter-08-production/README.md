@@ -1,6 +1,6 @@
-# 第8章：生产与企业模式
+# Chapter 8: 生产与企业模式
 
-**📚 Course**: [AZD 入门](../../README.md) | **⏱️ Duration**: 2-3 小时 | **⭐ Complexity**: 高级
+**📚 Course**: [AZD 入门](../../README.md) | **⏱️ 时长**: 2-3 小时 | **⭐ 复杂度**: 高级
 
 ---
 
@@ -8,15 +8,15 @@
 
 本章涵盖面向企业的部署模式、安全加固、监控以及针对生产 AI 工作负载的成本优化。
 
-> 经验证于 2026 年 3 月，使用 `azd 1.23.12`。
+> 已于 2026 年 6 月在 `azd 1.25.6` 上验证。
 
 ## 学习目标
 
-完成本章后，您将能够：
-- 部署多区域弹性应用
-- 实施企业安全模式
+完成本章后，您将：
+- 部署多区域高可用应用
+- 实现企业级安全模式
 - 配置全面的监控
-- 实现规模化成本优化
+- 在规模化场景下优化成本
 - 使用 AZD 设置 CI/CD 管道
 
 ---
@@ -29,10 +29,10 @@
 
 ---
 
-## 🚀 生产核对清单
+## 🚀 生产清单
 
-- [ ] 多区域部署以实现弹性
-- [ ] 使用托管身份进行认证（无密钥）
+- [ ] 多区域部署以提高弹性
+- [ ] 用于身份验证的托管标识（无需密钥）
 - [ ] 使用 Application Insights 进行监控
 - [ ] 配置成本预算和警报
 - [ ] 启用安全扫描
@@ -48,15 +48,17 @@
 ```mermaid
 graph LR
     Gateway[API 网关] --> AI[AI 服务] --> Models[微软 Foundry 模型]
-    Gateway --> Auth[身份验证服务]
+    Gateway --> Auth[认证服务]
     AI --> Data[数据存储]
 ```
+
 ### 模式 2：事件驱动 AI
 
 ```mermaid
 graph LR
     EventGrid[事件网格] --> Functions[函数] --> Pipeline[AI 管道]
 ```
+
 ---
 
 ## 🔐 安全最佳实践
@@ -82,9 +84,9 @@ properties: {
 
 | 策略 | 节省 |
 |----------|---------|
-| 缩减到零（Container Apps） | 60-80% |
-| 开发使用消费层 | 50-70% |
-| 计划性伸缩 | 30-50% |
+| 缩容到零（Container Apps） | 60-80% |
+| 为开发使用按量计费层 | 50-70% |
+| 定时伸缩 | 30-50% |
 | 预留容量 | 20-40% |
 
 ```bash
@@ -98,7 +100,7 @@ az consumption budget create \
 
 ---
 
-## 📊 监控设置
+## 📊 监控配置
 
 ```bash
 # 流式日志
@@ -118,7 +120,7 @@ az monitor metrics list --resource <resource-id>
 | 方向 | 章节 |
 |-----------|---------|
 | <strong>上一章</strong> | [第7章：故障排除](../chapter-07-troubleshooting/README.md) |
-| <strong>课程完成</strong> | [课程首页](../../README.md) |
+| <strong>课程完成</strong> | [课程主页](../../README.md) |
 
 ---
 
@@ -132,6 +134,6 @@ az monitor metrics list --resource <resource-id>
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-本文件使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。虽然我们努力追求准确性，但请注意自动翻译可能包含错误或不准确之处。原始文档的原生语言版本应被视为权威来源。对于重要信息，建议使用专业人工翻译。对于因使用本翻译而产生的任何误解或曲解，我们不承担任何责任。
+**免责声明**：
+本文件由 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 翻译完成。尽管我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。原始语言版文件应视为权威来源。对于重要信息，建议使用专业人工翻译。我们对因使用本翻译而产生的任何误解或误释不承担责任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

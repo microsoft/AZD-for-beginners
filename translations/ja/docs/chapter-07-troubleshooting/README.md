@@ -1,32 +1,32 @@
-# Chapter 7: トラブルシューティングとデバッグ
+# 第7章: トラブルシューティング & デバッグ
 
-**📚 コース**: [AZD入門](../../README.md) | **⏱️ 所要時間**: 1～1.5時間 | **⭐ 難易度**: 中級
+**📚 Course**: [AZD 初心者向け](../../README.md) | **⏱️ Duration**: 1〜1.5時間 | **⭐ Complexity**: 中級
 
 ---
 
 ## 概要
 
-この章では Azure Developer CLI を使用する際の一般的な問題の診断と解決を支援します。デプロイ失敗からAI特有の問題までカバーします。
+この章では Azure Developer CLI を使用する際に発生する一般的な問題の診断と解決方法を説明します。デプロイ失敗から AI 固有の問題まで扱います。
 
-> 2026年3月の `azd 1.23.12` にて検証済みです。
+> 2026年6月に `azd 1.25.6` で検証済み。
 
 ## 学習目標
 
-この章を完了すると以下ができるようになります：
-- 一般的な AZD のデプロイ失敗を診断する
-- 認証とアクセス権限の問題をデバッグする
-- AIサービスの接続問題を解決する
-- トラブルシューティングにAzureポータルとCLIを活用する
+この章を修了すると、次のことができるようになります:
+- AZD の一般的なデプロイ失敗を診断する
+- 認証および権限の問題をデバッグする
+- AI サービスの接続問題を解決する
+- トラブルシューティングに Azure Portal と CLI を使用する
 
 ---
 
 ## 📚 レッスン
 
-| # | レッスン | 内容 | 所要時間 |
+| # | レッスン | 説明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [一般的な問題](common-issues.md) | よくある問題の解説 | 30分 |
-| 2 | [デバッグガイド](debugging.md) | ステップバイステップのデバッグ手法 | 45分 |
-| 3 | [AIのトラブルシューティング](ai-troubleshooting.md) | AI特有の問題 | 30分 |
+| 1 | [一般的な問題](common-issues.md) | よく遭遇する問題 | 30 min |
+| 2 | [デバッグガイド](debugging.md) | ステップバイステップのデバッグ戦略 | 45 min |
+| 3 | [AI トラブルシューティング](ai-troubleshooting.md) | AI 固有の問題 | 30 min |
 
 ---
 
@@ -34,10 +34,10 @@
 
 ### 認証の問題
 ```bash
-# AZD ワークフローに必要です
+# AZD ワークフローに必須
 azd auth login
 
-# Azure CLI コマンドを直接使用する場合はオプションです
+# Azure CLI コマンドを直接使用する場合は任意
 az login
 
 azd auth status
@@ -66,26 +66,26 @@ azd up
 
 ---
 
-## 📋 エラーコードリファレンス
+## 📋 エラーコード参照
 
 | エラー | 原因 | 解決策 |
 |-------|-------|----------|
-| `AuthenticationError` | ログインしていない | `azd auth login` |
-| `ResourceNotFound` | リソースが存在しない | リソース名を確認 |
-| `QuotaExceeded` | サブスクリプションの制限 | クォータの増加を依頼 |
-| `InvalidTemplate` | Bicep 構文エラー | `az bicep build` |
-| `Conflict` | リソースが既に存在 | 新しい名前を使うか削除 |
-| `Forbidden` | 権限不足 | RBACロールを確認 |
+| `AuthenticationError` | ログインしていません | `azd auth login` |
+| `ResourceNotFound` | リソースが見つかりません | リソース名を確認してください |
+| `QuotaExceeded` | サブスクリプションの制限 | クォータ増加を依頼する |
+| `InvalidTemplate` | Bicep の構文エラー | `az bicep build` |
+| `Conflict` | リソースが既に存在します | 新しい名前を使用するか削除してください |
+| `Forbidden` | 権限が不足しています | RBAC ロールを確認してください |
 
 ---
 
-## 🔄 リセットと復旧
+## 🔄 リセットと回復
 
 ```bash
-# ソフトリセット（リソースを保持し、コードを再デプロイ）
+# ソフトリセット（リソースは維持し、コードを再デプロイ）
 azd deploy --force
 
-# ハードリセット（すべて削除し、初期状態から開始）
+# ハードリセット（すべてを削除して最初からやり直す）
 azd down --force --purge
 azd up
 ```
@@ -94,22 +94,22 @@ azd up
 
 ## 🔗 ナビゲーション
 
-| 方向 | 章タイトル |
+| 方向 | 章 |
 |-----------|---------|
-| <strong>前</strong> | [第6章: デプロイ前準備](../chapter-06-pre-deployment/README.md) |
-| <strong>次</strong> | [第8章: 本番環境](../chapter-08-production/README.md) |
+| <strong>前へ</strong> | [第6章: 展開前](../chapter-06-pre-deployment/README.md) |
+| <strong>次へ</strong> | [第8章: 本番](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 関連リソース
 
-- [デプロイ前チェック](../chapter-06-pre-deployment/preflight-checks.md)
+- [展開前チェック](../chapter-06-pre-deployment/preflight-checks.md)
 - [構成ガイド](../chapter-03-configuration/configuration.md)
-- [AZD GitHub Issues](https://github.com/Azure/azure-dev/issues)
+- [AZD の GitHub Issues](https://github.com/Azure/azure-dev/issues)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責事項**:  
-本書類は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確さを期しておりますが、自動翻訳には誤りや不正確な箇所が含まれる可能性があることをご承知ください。原文の言語で書かれたオリジナルの文書が正本とみなされます。重要な情報については、専門の人力翻訳を推奨します。本翻訳の使用により生じたいかなる誤解や誤訳についても、一切責任を負いかねます。
+**免責事項**：
+本書類は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を期していますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知おきください。原文の原語版が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じたいかなる誤解や解釈違いについても、当方は責任を負いかねます。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

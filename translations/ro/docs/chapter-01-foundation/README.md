@@ -1,38 +1,40 @@
 # Capitolul 1: Fundamente & Pornire Rapidă
 
-**📚 Curs**: [AZD pentru începători](../../README.md) | **⏱️ Durata**: 30-45 de minute | **⭐ Complexitate**: Începător
+**📚 Curs**: [AZD Pentru Începători](../../README.md) | **⏱️ Durată**: 30-45 minute | **⭐ Complexitate**: Începător
 
 ---
 
 ## Prezentare generală
 
-Acest capitol prezintă fundamentele Azure Developer CLI (azd). Veți învăța conceptele de bază, veți instala instrumentele și veți implementa prima aplicație în Azure.
+Acest capitol introduce elementele de bază ale Azure Developer CLI (azd). Vei învăța conceptele principale, vei instala uneltele și vei implementa prima ta aplicație în Azure.
 
-> Validat cu `azd 1.23.12` în martie 2026.
+> Validat cu `azd 1.25.6` în iunie 2026.
 
 ## Obiective de învățare
 
-Prin parcurgerea acestui capitol, veți:
-- Înțelegeți ce este Azure Developer CLI și cum se diferențiază de Azure CLI
-- Instalați și configurați AZD pe platforma dvs.
-- Implementați prima aplicație în Azure cu `azd up`
-- Eliminați resursele cu `azd down`
+Parcurgând acest capitol, vei putea:
+- Înțelege ce este Azure Developer CLI și cum diferă de Azure CLI
+- Instala și configura AZD pe platforma ta
+- Implementa prima ta aplicație în Azure cu `azd up`
+- Curăța resursele cu `azd down`
 
 ---
 
 ## 📚 Lecții
 
 | # | Lecție | Descriere | Timp |
-|---|--------|-------------|------|
-| 1 | [Bazele AZD](azd-basics.md) | Concepte de bază, terminologie și structura proiectului | 15 min |
+|---|--------|-----------|------|
+| 1 | [Bazele AZD](azd-basics.md) | Concepte de bază, terminologie și structură a proiectului | 15 min |
 | 2 | [Instalare & Configurare](installation.md) | Ghiduri de instalare specifice platformei | 10 min |
-| 3 | [Primul tău proiect](first-project.md) | Exercițiu practic: Implementați o aplicație web în Azure | 20 min |
+| 3 | [Primul Tău Proiect](first-project.md) | Practic: Implementare aplicație web în Azure | 20 min |
+| 4 | [Adaugă-ți Propria Aplicație](bring-your-own-app.md) | Adaugă azd unui proiect existent pe care îl ai deja | 15 min |
+| 5 | [Containere pentru Dezvoltare & Codespaces](dev-containers.md) | Medii azd reproducibile cu containere pentru dezvoltare | 15 min |
 
 ---
 
-## ✅ Începeți aici: Verificați configurația
+## ✅ Începe Aici: Verifică-ți Configurația
 
-Înainte de a începe, confirmați că mașina dvs. locală este pregătită pentru șablonul Capitolului 1:
+Înainte de a începe, confirmă că mașina locală este pregătită pentru șablonul Capitolului 1:
 
 **Windows:**
 ```powershell
@@ -44,39 +46,39 @@ Prin parcurgerea acestui capitol, veți:
 bash ./validate-setup.sh
 ```
 
-Dacă scriptul raportează instrumente lipsă, remediați acele lipsuri mai întâi, apoi continuați cu capitolul.
+Dacă scriptul indică lipsa unor unelte, remediază acele probleme mai întâi, apoi continuă cu acest capitol.
 
 ---
 
-## 🚀 Pornire rapidă
+## 🚀 Pornire Rapidă
 
 ```bash
-# Verificați instalarea
+# Verifică instalarea
 azd version
 
-# Autentificați-vă pentru AZD
-# Opțional: folosiți az login dacă intenționați să rulați direct comenzi Azure CLI
+# Autentifică-te pentru AZD
+# Opțional: az login dacă intenționezi să rulezi comenzi Azure CLI direct
 azd auth login
 
-# Implementați prima aplicație
+# Publică prima ta aplicație
 azd init --template todo-nodejs-mongo
 azd up
 
-# Curățați când ați terminat
+# Curăță după ce ai terminat
 azd down --force --purge
 ```
 
 ---
 
-## ✅ Criterii de succes
+## ✅ Criterii de Succes
 
-După finalizarea acestui capitol, ar trebui să puteți:
+După finalizarea acestui capitol, ar trebui să poți:
 
 ```bash
 azd version              # Afișează versiunea instalată
 azd init --template todo-nodejs-mongo  # Inițializează proiectul
-azd up                   # Desfășoară în Azure
-azd show                 # Afișează URL-ul aplicației care rulează
+azd up                   # Realizează implementarea în Azure
+azd show                 # Afișează URL-ul aplicației în funcțiune
 azd down --force --purge # Curăță resursele
 ```
 
@@ -85,15 +87,15 @@ azd down --force --purge # Curăță resursele
 ## 🔗 Navigare
 
 | Direcție | Capitol |
-|-----------|---------|
-| **Următor** | [Capitolul 2: Dezvoltare orientată pe AI](../chapter-02-ai-development/README.md) |
-| **Sări la** | [Capitolul 3: Configurare](../chapter-03-configuration/README.md) |
+|----------|---------|
+| **Următor** | [Capitolul 2: Dezvoltare cu AI în Prim-Plan](../chapter-02-ai-development/README.md) |
+| **Salt la** | [Capitolul 3: Configurare](../chapter-03-configuration/README.md) |
 
 ---
 
-## 📖 Resurse conexe
+## 📖 Resurse Aflate în Legătură
 
-- [Fișă de comenzi](../../resources/cheat-sheet.md)
+- [Fișă de Comenzi](../../resources/cheat-sheet.md)
 - [Întrebări frecvente](../../resources/faq.md)
 - [Glosar](../../resources/glossary.md)
 
@@ -101,5 +103,5 @@ azd down --force --purge # Curăță resursele
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Declinare a responsabilității**:
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autoritară. Pentru informații critice, se recomandă o traducere profesională realizată de un traducător uman. Nu ne asumăm răspunderea pentru orice neînțelegeri sau interpretări eronate rezultate din utilizarea acestei traduceri.
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). În timp ce ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un om. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care decurg din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

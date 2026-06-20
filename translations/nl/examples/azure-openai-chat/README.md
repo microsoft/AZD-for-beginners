@@ -1,43 +1,44 @@
-# Microsoft Foundry Models Chat Application
+# Microsoft Foundry Models Chatapplicatie
 
-**Leerpad:** Intermediate ⭐⭐ | **Tijd:** 35-45 minuten | **Kosten:** $50-200/month
+**Leerpad:** Gevorderd ⭐⭐ | **Tijd:** 35-45 minuten | **Kosten:** $50-200/maand
 
-Een complete Microsoft Foundry Models chatapplicatie uitgerold met behulp van Azure Developer CLI (azd). Dit voorbeeld demonstreert gpt-4.1-implementatie, beveiligde API-toegang en een eenvoudige chatinterface.
+Een volledige Microsoft Foundry Models chatapplicatie uitgerold met behulp van Azure Developer CLI (azd). Dit voorbeeld laat zien hoe je gpt-4.1 implementeert, veilige API-toegang configureert en een eenvoudige chatinterface bouwt.
 
-## 🎯 Wat Je Zal Leren
+## 🎯 Wat je zult leren
 
-- Implementeer Microsoft Foundry Models Service met het gpt-4.1-model
-- Beveilig OpenAI API-sleutels met Key Vault
-- Bouw een eenvoudige chatinterface met Python
-- Monitor tokengebruik en kosten
-- Implementeer rate limiting en foutafhandeling
+- Microsoft Foundry Models Service implementeren met het gpt-4.1-model
+- OpenAI API-sleutels beveiligen met Key Vault
+- Een eenvoudige chatinterface bouwen met Python
+- Tokengebruik en kosten monitoren
+- Rate limiting en foutafhandeling implementeren
 
-## 📦 Wat Is Inbegrepen
+## 📦 Inbegrepen
 
-✅ **Microsoft Foundry Models Service** - gpt-4.1 model deployment  
-✅ **Python Chat App** - Eenvoudige commandoregel-chatinterface  
-✅ **Key Vault Integratie** - Beveiligde opslag van API-sleutels  
-✅ **ARM Templates** - Complete infrastructuur als code  
-✅ **Kostenmonitoring** - Tracking van tokengebruik  
-✅ **Rate Limiting** - Voorkom quotumuitputting  
+✅ **Microsoft Foundry Models Service** - gpt-4.1 modelimplementatie  
+✅ **Python Chat App** - Eenvoudige chatinterface voor de opdrachtregel  
+✅ **Key Vault-integratie** - Beveiligde opslag van API-sleutels  
+✅ **ARM-sjablonen** - Volledige infrastructuur als code  
+✅ **Kostenbewaking** - Bijhouden van tokengebruik  
+✅ **Rate Limiting** - Voorkom opbranden van quota  
 
-## Architecture
+## Architectuur
 
 ```mermaid
 graph TD
-    App[Python-chatapplicatie<br/>Lokaal/Cloud<br/>Opdrachtregelinterface<br/>Gespreksgeschiedenis<br/>Tokengebruik bijhouden] -- "HTTPS (API-sleutel)" --> Foundry[Microsoft Foundry-modellenservice<br/>gpt-4.1-model<br/>Capaciteit 20K tokens/min<br/>Failover over meerdere regio's]
+    App[Python chatapplicatie<br/>Lokaal/Cloud<br/>Opdrachtregelinterface<br/>Gespreksgeschiedenis<br/>Tokengebruik bijhouden] -- "HTTPS (API-sleutel)" --> Foundry[Microsoft Foundry modelservice<br/>gpt-4.1-model<br/>20K tokens/min capaciteit<br/>Multi-regio failover]
     Foundry --> KV[Azure Key Vault<br/>OpenAI API-sleutel<br/>Endpoint-URL]
     Foundry -. Beheerde identiteit .-> KV
 ```
-## Prerequisites
 
-### Vereist
+## Vereisten
+
+### Benodigd
 
 - **Azure Developer CLI (azd)** - [Install guide](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure subscription** met OpenAI-toegang - [Request access](https://aka.ms/oai/access)
+- **Azure-abonnement** met OpenAI-toegang - [Request access](https://aka.ms/oai/access)
 - **Python 3.9+** - [Install Python](https://www.python.org/downloads/)
 
-### Verify Prerequisites
+### Controleer vereisten
 
 ```bash
 # Controleer azd-versie (vereist 1.5.0 of hoger)
@@ -49,13 +50,13 @@ azd auth login
 # Controleer Python-versie
 python --version  # of python3 --version
 
-# Controleer OpenAI-toegang (controleer in de Azure Portal)
+# Controleer OpenAI-toegang (controleer in de Azure-portal)
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus
 ```
 
-> **⚠️ Belangrijk:** Microsoft Foundry Models vereist goedkeuring voor applicaties. Als je nog niet hebt aangevraagd, bezoek [aka.ms/oai/access](https://aka.ms/oai/access). Goedkeuring duurt meestal 1-2 werkdagen.
+> **⚠️ Belangrijk:** Microsoft Foundry Models vereist goedkeuring voor applicaties. Als je nog niet hebt aangevraagd, bezoek [aka.ms/oai/access](https://aka.ms/oai/access). Goedkeuring duurt doorgaans 1-2 werkdagen.
 
 ## ⏱️ Implementatietijdlijn
 
@@ -66,7 +67,7 @@ az cognitiveservices account list-skus \
 | Configure application | 2-3 minutes | Set up environment and dependencies |
 | **Total** | **12-18 minutes** | Ready to chat with gpt-4.1 |
 
-**Opmerking:** De eerste OpenAI-implementatie kan langer duren vanwege modelprovisioning.
+**Opmerking:** Een eerste OpenAI-implementatie kan langer duren vanwege modelprovisioning.
 
 ## Quick Start
 
@@ -81,7 +82,7 @@ azd env new myopenai
 azd up
 # Je wordt gevraagd om:
 # 1. Selecteer een Azure-abonnement
-# 2. Kies een locatie waar OpenAI beschikbaar is (bijv. eastus, eastus2, westus)
+# 2. Kies een locatie met OpenAI-beschikbaarheid (bijv. eastus, eastus2, westus)
 # 3. Wacht 12-18 minuten op de implementatie
 
 # Installeer Python-afhankelijkheden
@@ -103,7 +104,7 @@ Assistant: Microsoft Foundry Models Service provides REST API access to OpenAI's
 [Tokens used: 145 | Estimated cost: $0.0044]
 ```
 
-## ✅ Verifieer Implementatie
+## ✅ Verifieer implementatie
 
 ### Stap 1: Controleer Azure-resources
 
@@ -113,7 +114,7 @@ azd show
 
 # Verwachte uitvoer toont:
 # - OpenAI-service: (naam van de resource)
-# - Key Vault: (naam van de resource)
+# - Key Vault: (naam van the resource)
 # - Implementatie: gpt-4.1
 # - Locatie: eastus (of uw geselecteerde regio)
 ```
@@ -121,7 +122,7 @@ azd show
 ### Stap 2: Test OpenAI API
 
 ```bash
-# Haal OpenAI-endpoint en sleutel op
+# Haal OpenAI-eindpunt en sleutel op
 OPENAI_ENDPOINT=$(azd env get-value AZURE_OPENAI_ENDPOINT)
 OPENAI_KEY=$(azd env get-value AZURE_OPENAI_API_KEY)
 
@@ -135,7 +136,7 @@ curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2
   }'
 ```
 
-**Verwachte response:**
+**Verwachte reactie:**
 ```json
 {
   "choices": [
@@ -157,7 +158,7 @@ curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2
 ### Stap 3: Verifieer Key Vault-toegang
 
 ```bash
-# Geheimen in Key Vault weergeven
+# Geef geheimen in Key Vault weer
 KV_NAME=$(azd env get-value AZURE_KEY_VAULT_NAME)
 
 az keyvault secret list \
@@ -171,8 +172,8 @@ az keyvault secret list \
 - `openai-endpoint`
 
 **Succescriteria:**
-- ✅ OpenAI-service uitgerold met gpt-4.1
-- ✅ API-aanroep geeft een geldige completion terug
+- ✅ OpenAI-service geïmplementeerd met gpt-4.1
+- ✅ API-aanroep retourneert geldige completion
 - ✅ Secrets opgeslagen in Key Vault
 - ✅ Tracking van tokengebruik werkt
 
@@ -199,17 +200,17 @@ azure-openai-chat/
 
 De chatapplicatie bevat:
 
-- **Gespreksgeschiedenis** - Behoudt context tussen berichten
+- **Gesprekshistorie** - Handhaaft context over berichten heen
 - **Tokentelling** - Houdt gebruik bij en schat kosten
-- **Foutafhandeling** - Elegant omgaan met rate limits en API-fouten
-- **Kostenraming** - Realtime kostenberekening per bericht
-- **Streaming-ondersteuning** - Optionele streaming-antwoorden
+- **Foutafhandeling** - Verzorgde afhandeling van rate limits en API-fouten
+- **Kostenschatting** - Realtime kostencalculatie per bericht
+- **Streaming-ondersteuning** - Optionele streamingreacties
 
 ### Commando's
 
 Tijdens het chatten kun je gebruiken:
-- `quit` of `exit` - Beëindig de sessie
-- `clear` - Wis de gespreksgeschiedenis
+- `quit` of `exit` - Sessie beëindigen
+- `clear` - Gesprekshistorie wissen
 - `tokens` - Toon totaal tokengebruik
 - `cost` - Toon geschatte totale kosten
 
@@ -223,7 +224,7 @@ AZURE_OPENAI_MODEL     # Standaard: gpt-4.1
 AZURE_OPENAI_MAX_TOKENS # Standaard: 800
 ```
 
-## Voorbeelden van Gebruik
+## Gebruikvoorbeelden
 
 ### Basis Chat
 
@@ -231,14 +232,14 @@ AZURE_OPENAI_MAX_TOKENS # Standaard: 800
 python chat.py
 ```
 
-### Chat met Aangepast Model
+### Chat met aangepast model
 
 ```bash
 export AZURE_OPENAI_MODEL=gpt-35-turbo
 python chat.py
 ```
 
-### Chat met Streaming
+### Chat met streaming
 
 ```bash
 python chat.py --stream
@@ -275,9 +276,9 @@ Total session: 156 tokens | $0.0047
 | gpt-4.1 | $0.03 | $0.06 |
 | GPT-3.5-Turbo | $0.0015 | $0.002 |
 
-### Geschatte Maandelijkse Kosten
+### Geschatte maandelijkse kosten
 
-Gebaseerd op gebruikspatronen:
+Op basis van gebruikspatronen:
 
 | Usage Level | Messages/Day | Tokens/Day | Monthly Cost |
 |-------------|--------------|------------|--------------|
@@ -285,21 +286,21 @@ Gebaseerd op gebruikspatronen:
 | **Moderate** | 100 messages | 15,000 tokens | $15-25 |
 | **Heavy** | 500 messages | 75,000 tokens | $75-125 |
 
-**Basisinfrastructuurkosten:** $1-2/month (Key Vault + minimale compute)
+**Basiskosten infrastructuur:** $1-2/maand (Key Vault + minimale compute)
 
-### Tips voor Kostenoptimalisatie
+### Tips voor kostenoptimalisatie
 
 ```bash
 # 1. Gebruik GPT-3.5-Turbo voor eenvoudigere taken (20x goedkoper)
 export AZURE_OPENAI_MODEL=gpt-35-turbo
 
-# 2. Verminder het maximaal aantal tokens voor kortere antwoorden
+# 2. Verminder het maximale aantal tokens voor kortere antwoorden
 export AZURE_OPENAI_MAX_TOKENS=400
 
 # 3. Houd het tokenverbruik in de gaten
 python chat.py --show-tokens
 
-# 4. Stel budgetwaarschuwingen in
+# 4. Stel budgetmeldingen in
 az consumption budget create \
   --budget-name "openai-budget" \
   --amount 50 \
@@ -311,10 +312,10 @@ az consumption budget create \
 ### Bekijk tokengebruik
 
 ```bash
-# In de Azure Portal:
-# OpenAI-resource → Metrics → Selecteer "Token Transaction"
+# In het Azure-portaal:
+# OpenAI-resource → Metrieken → Selecteer "Token Transaction"
 
-# Of via de Azure CLI:
+# Of via Azure CLI:
 az monitor metrics list \
   --resource $(azd env get-value AZURE_OPENAI_RESOURCE_ID) \
   --metric "TokenTransaction" \
@@ -325,14 +326,14 @@ az monitor metrics list \
 ### Bekijk API-logs
 
 ```bash
-# Diagnostische logs streamen
+# Stuur diagnostische logbestanden
 az monitor diagnostic-settings create \
   --resource $(azd env get-value AZURE_OPENAI_RESOURCE_ID) \
   --name openai-logs \
   --logs '[{"category": "Audit", "enabled": true}]' \
   --workspace $(azd env get-value LOG_ANALYTICS_WORKSPACE_ID)
 
-# Querylogs
+# Logbestanden van queries
 az monitor log-analytics query \
   --workspace $(azd env get-value LOG_ANALYTICS_WORKSPACE_ID) \
   --analytics-query "AzureDiagnostics | where Category == 'Audit' | top 10 by TimeGenerated"
@@ -340,13 +341,13 @@ az monitor log-analytics query \
 
 ## Problemen oplossen
 
-### Probleem: "Access Denied" Fout
+### Probleem: "Access Denied" fout
 
 **Symptomen:** 403 Forbidden bij het aanroepen van de API
 
 **Oplossingen:**
 ```bash
-# 1. Controleer of de OpenAI-toegang is goedgekeurd
+# 1. Controleer of OpenAI-toegang is goedgekeurd
 az cognitiveservices account show \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
@@ -372,7 +373,7 @@ az cognitiveservices account deployment show \
   --deployment-name gpt-4.1
 
 # 2. Vraag een verhoging van de quota aan (indien nodig)
-# Ga naar het Azure Portal → OpenAI-resource → Quota's → Verhoging aanvragen
+# Ga naar het Azure-portaal → OpenAI-resource → Quota → Verhoging aanvragen
 
 # 3. Implementeer retry-logica (reeds in chat.py)
 # De applicatie probeert automatisch opnieuw met exponentiële backoff
@@ -384,35 +385,35 @@ az cognitiveservices account deployment show \
 
 **Oplossingen:**
 ```bash
-# 1. Geef beschikbare implementaties weer
+# 1. Toon beschikbare implementaties
 az cognitiveservices account deployment list \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
 
-# 2. Controleer de modelnaam in de omgeving
+# 2. Controleer modelnaam in de omgeving
 echo $AZURE_OPENAI_MODEL
 
-# 3. Werk bij naar de juiste naam van de implementatie
+# 3. Werk de naam van de implementatie bij
 export AZURE_OPENAI_MODEL=gpt-4.1  # of gpt-35-turbo
 ```
 
-### Probleem: Hoge Latentie
+### Probleem: Hoge latency
 
-**Symptomen:** Langzame responstijden (>5 seconden)
+**Symptomen:** Trage reactietijden (>5 seconden)
 
 **Oplossingen:**
 ```bash
 # 1. Controleer regionale latentie
-# Implementeer in de regio die het dichtst bij de gebruikers ligt
+# Implementeer naar de regio die het dichtst bij gebruikers ligt
 
-# 2. Verlaag max_tokens voor snellere reacties
+# 2. Verlaag max_tokens voor snellere antwoorden
 export AZURE_OPENAI_MAX_TOKENS=400
 
 # 3. Gebruik streaming voor een betere gebruikerservaring
 python chat.py --stream
 ```
 
-## Security Best Practices
+## Beveiligingsbest practices
 
 ### 1. Bescherm API-sleutels
 
@@ -420,7 +421,7 @@ python chat.py --stream
 # Plaats nooit sleutels in versiebeheer
 # Gebruik Key Vault (al geconfigureerd)
 
-# Wissel sleutels regelmatig
+# Roteer sleutels regelmatig
 az cognitiveservices account keys regenerate \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
@@ -430,27 +431,27 @@ az cognitiveservices account keys regenerate \
 ### 2. Implementeer contentfiltering
 
 ```python
-# Microsoft Foundry-modellen bevatten ingebouwde contentfiltering
+# Microsoft Foundry Models bevat ingebouwde contentfiltering
 # Configureren in de Azure-portal:
-# OpenAI-resource → Inhoudsfilters → Aangepast filter maken
+# OpenAI-resource → Contentfilters → Aangepaste filter maken
 
 # Categorieën: Haat, Seksueel, Geweld, Zelfbeschadiging
-# Niveaus: Lage, Gemiddelde, Hoge filtering
+# Niveaus: lage, gemiddelde en hoge filtering
 ```
 
-### 3. Gebruik Managed Identity (Productie)
+### 3. Gebruik een Managed Identity (productie)
 
 ```bash
 # Gebruik voor productie-implementaties een beheerde identiteit
 # in plaats van API-sleutels (vereist dat de app op Azure wordt gehost)
 
-# Werk infra/openai.bicep bij en voeg het volgende toe:
+# Werk infra/openai.bicep bij om het volgende op te nemen:
 # identity: { type: 'SystemAssigned' }
 ```
 
 ## Ontwikkeling
 
-### Lokaal uitvoeren
+### lokaal uitvoeren
 
 ```bash
 # Installeer afhankelijkheden
@@ -481,7 +482,7 @@ pytest tests/ --cov=src --cov-report=html
 ### Update modelimplementatie
 
 ```bash
-# Implementeer een andere modelversie
+# Rol een andere modelversie uit
 az cognitiveservices account deployment create \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
@@ -496,7 +497,7 @@ az cognitiveservices account deployment create \
 ## Opruimen
 
 ```bash
-# Verwijder alle Azure-resources
+# Verwijder alle Azure-bronnen
 azd down --force --purge
 
 # Dit verwijdert:
@@ -510,39 +511,39 @@ azd down --force --purge
 
 ### Breid dit voorbeeld uit
 
-1. **Voeg webinterface toe** - Bouw een React/Vue-frontend
+1. **Add Web Interface** - Build React/Vue frontend
    ```bash
    # Voeg frontend-service toe aan azure.yaml
-   # Rol uit naar Azure Static Web Apps
+   # Implementeer in Azure Static Web Apps
    ```
 
-2. **Implementeer RAG** - Voeg documentzoekfunctie toe met Azure AI Search
+2. **Implement RAG** - Add document search with Azure AI Search
    ```python
-   # Integreer Azure Cognitive Search
-   # Upload documenten en maak een vectorindex aan
+   # Integreer Azure AI Search
+   # Upload documenten en maak een vectorindex
    ```
 
-3. **Voeg Function Calling toe** - Schakel het gebruik van tools in
+3. **Add Function Calling** - Enable tool use
    ```python
    # Definieer functies in chat.py
    # Laat gpt-4.1 externe API's aanroepen
    ```
 
-4. **Ondersteuning voor meerdere modellen** - Rol meerdere modellen uit
+4. **Multi-Model Support** - Deploy multiple models
    ```bash
    # Voeg gpt-35-turbo en embeddings-modellen toe
-   # Implementeer de routeringslogica voor modellen
+   # Implementeer modelrouteringslogica
    ```
 
 ### Gerelateerde voorbeelden
 
 - **[Retail Multi-Agent](../retail-scenario.md)** - Geavanceerde multi-agent architectuur
 - **[Database App](../../../../examples/database-app)** - Voeg persistente opslag toe
-- **[Container Apps](../../../../examples/container-app)** - Implementeer als geconteineriseerde service
+- **[Container Apps](../../../../examples/container-app)** - Deploy als gecontaineriseerde service
 
-### Leermaterialen
+### Leerbronnen
 
-- 📚 [AZD For Beginners Course](../../README.md) - Hoofdcursus home
+- 📚 [AZD For Beginners Course](../../README.md) - Hoofdcursus startpagina
 - 📚 [Microsoft Foundry Models Documentation](https://learn.microsoft.com/azure/ai-services/openai/) - Officiële documentatie
 - 📚 [OpenAI API Reference](https://platform.openai.com/docs/api-reference) - API-details
 - 📚 [Responsible AI](https://www.microsoft.com/ai/responsible-ai) - Best practices
@@ -550,18 +551,18 @@ azd down --force --purge
 ## Aanvullende bronnen
 
 ### Documentatie
-- **[Microsoft Foundry Models Service](https://learn.microsoft.com/azure/ai-services/openai/)** - Complete gids
+- **[Microsoft Foundry Models Service](https://learn.microsoft.com/azure/ai-services/openai/)** - Volledige gids
 - **[gpt-4.1 Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - Modelmogelijkheden
-- **[Content Filtering](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - Veiligheidsfeatures
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd referentie
+- **[Content Filtering](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - Veiligheidsfuncties
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd-referentie
 
 ### Tutorials
 - **[OpenAI Quickstart](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - Eerste implementatie
-- **[Chat Completions](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - Chat-apps bouwen
-- **[Function Calling](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - Geavanceerde features
+- **[Chat Completions](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - Chatapps bouwen
+- **[Function Calling](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - Geavanceerde functies
 
 ### Tools
-- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - Web-based playground
+- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - Webgebaseerde playground
 - **[Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)** - Beter prompts schrijven
 - **[Token Calculator](https://platform.openai.com/tokenizer)** - Schat tokengebruik
 
@@ -572,15 +573,15 @@ azd down --force --purge
 
 ---
 
-**🎉 Succes!** Je hebt Microsoft Foundry Models uitgerold en een werkende chatapplicatie gebouwd. Begin met het verkennen van de mogelijkheden van gpt-4.1 en experimenteer met verschillende prompts en use-cases.
+**🎉 Gefeliciteerd!** Je hebt Microsoft Foundry Models uitgerold en een werkende chatapplicatie gebouwd. Begin met het verkennen van de mogelijkheden van gpt-4.1 en experimenteer met verschillende prompts en use cases.
 
-**Vragen?** [Open een issue](https://github.com/microsoft/AZD-for-beginners/issues) of bekijk de [FAQ](../../resources/faq.md)
+**Vragen?** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) of bekijk de [FAQ](../../resources/faq.md)
 
-**Kostenwaarschuwing:** Vergeet niet `azd down` uit te voeren wanneer je klaar bent met testen om doorlopende kosten te voorkomen (~$50-100/month bij actief gebruik).
+**Kostenwaarschuwing:** Vergeet niet `azd down` uit te voeren wanneer je klaar bent met testen om doorlopende kosten te voorkomen (~$50-100/maand voor actief gebruik).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, houd er rekening mee dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de oorspronkelijke taal moet als de gezaghebbende bron worden beschouwd. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI vertaaldienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

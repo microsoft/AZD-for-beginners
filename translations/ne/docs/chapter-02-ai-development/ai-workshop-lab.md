@@ -1,54 +1,54 @@
-# AI कार्यशाला ल्याब: तपाईंको AI समाधानहरू AZD-Deployable कसरी बनाउने
+# AI Workshop Lab: Making Your AI Solutions AZD-Deployable
 
-**अध्याय नेभिगेशन:**
-- **📚 कोर्स होम**: [AZD For Beginners](../../README.md)
-- **📖 वर्तमान अध्याय**: अध्याय २ - AI-First विकास
-- **⬅️ अघिल्लो**: [AI मोडेल डिप्लॉयमेन्ट](ai-model-deployment.md)
-- **➡️ अर्को**: [प्रोडक्सन AI राम्रो अभ्यासहरू](production-ai-practices.md)
-- **🚀 अर्को अध्याय**: [अध्याय ३: कन्फिगरेसन](../chapter-03-configuration/configuration.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 2 - AI-First Development
+- **⬅️ Previous**: [AI Model Deployment](ai-model-deployment.md)
+- **➡️ Next**: [Production AI Best Practices](production-ai-practices.md)
+- **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
-## कार्यशाला अवलोकन
+## Workshop Overview
 
-यो व्यावहारिक ल्याबले विकासकर्ताहरुलाई Azure Developer CLI (AZD) प्रयोग गरेर एक विद्यमान AI टेम्प्लेट लिइ त्यसलाई डिप्लॉय गर्ने प्रक्रियामा मार्गदर्शन गर्दछ। तपाईं Microsoft Foundry सेवाहरू प्रयोग गरी प्रोडक्सन AI डिप्लॉयमेन्टका आधारभूत ढाँचाहरू सिक्नुहुनेछ।
+यो ह्यान्ड्स-ऑन ल्याब विकासकर्ताहरु लाई अवस्थित AI टेम्पलेट लिएर Azure Developer CLI (AZD) प्रयोग गरेर तैनाथ गर्ने प्रक्रियाबाट मार्गदर्शन गर्छ। तपाईंले Microsoft Foundry सेवाहरू प्रयोग गरी उत्पादन-तयार AI तैनाथीका लागि आवश्यक ढाँचाहरू सिक्नुहुनेछ।
 
-> **प्रमाणीकरण नोट (२०२६-०३-२५):** यो कार्यशाला `azd` को `1.23.12` भर्सनसँग समीक्षा गरिएको हो। यदि तपाईंको स्थानीय स्थापना पुरानो छ भने, auth, टेम्प्लेट र डिप्लॉयमेन्ट वर्कफ्लो तलका चरणहरूसँग मेल खानको लागि AZD अपडेट गरेर सुरु गर्नुहोस्।
+> **Validation note (2026-03-25):** यो कार्यशालालाई `azd` `1.23.12` सँग समीक्षा गरिएको थियो। यदि तपाइँको स्थानीय इन्स्टलेशन पुरानो छ भने, सुरु गर्नु अघि AZD अपडेट गर्नुहोस् ताकि प्रमाणीकरण, टेम्पलेट, र तैनाथी वर्कफ्लो तलका चरणहरूसँग मेल खान्छ।
 
-**अवधि:** २-३ घण्टा  
-**स्तर:** मध्यम  
-**पूर्वशर्तहरू:** Azure को आधारभूत ज्ञान, AI/ML अवधारणाहरूको परिचितपन
+**Duration:** 2-3 hours  
+**Level:** Intermediate  
+**Prerequisites:** Basic Azure knowledge, familiarity with AI/ML concepts
 
-## 🎓 सिकाइ उद्देश्यहरू
+## 🎓 Learning Objectives
 
-यो कार्यशाला सकिएपछि, तपाईं गर्न सक्नुहुनेछ:  
-- ✅ विद्यमान AI एप्लिकेशनलाई AZD टेम्प्लेटमा रूपान्तरण गर्ने  
-- ✅ AZD प्रयोग गरी Microsoft Foundry सेवाहरू कन्फिगर गर्ने  
-- ✅ AI सेवाहरूको लागि सुरक्षित क्रेडेन्सियल व्यवस्थापन कार्यान्वयन गर्ने  
-- ✅ निरीक्षण सहित प्रोडक्सन-तयार AI एप्लिकेशन डिप्लॉय गर्ने  
-- ✅ सामान्य AI डिप्लॉयमेन्ट समस्याहरूको समाधान गर्ने
+By the end of this workshop, you will be able to:
+- ✅ Convert an existing AI application to use AZD templates
+- ✅ Configure Microsoft Foundry services with AZD
+- ✅ Implement secure credential management for AI services
+- ✅ Deploy production-ready AI applications with monitoring
+- ✅ Troubleshoot common AI deployment issues
 
-## पूर्वशर्तहरू
+## Prerequisites
 
-### आवश्यक उपकरणहरू
-- [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) स्थापना गरिएको  
-- [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) स्थापना गरिएको  
-- [Git](https://git-scm.com/) स्थापना गरिएको  
-- कोड सम्पादक (VS Code सिफारिस गरिएको)
+### Required Tools
+- [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) installed
+- [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) installed
+- [Git](https://git-scm.com/) installed
+- Code editor (VS Code recommended)
 
-### Azure स्रोतहरू
-- Azure सदस्यता र योगदानकर्ता पहुँच  
-- Microsoft Foundry Models सेवा पहुँच (वा पहुँचका लागि अनुरोध गर्ने क्षमता)  
-- स्रोत समूह सिर्जना अनुमतिहरू
+### Azure Resources
+- Azure subscription with contributor access
+- Access to Microsoft Foundry Models services (or ability to request access)
+- Resource group creation permissions
 
-### ज्ञान पूर्वशर्तहरू
-- Azure सेवाहरूको आधारभूत बुझाइ  
-- कमाण्ड-लाइन इन्टरफेससँग परिचित  
-- आधारभूत AI/ML अवधारणाहरू (API, मोडेल, प्रम्प्ट)
+### Knowledge Prerequisites
+- Basic understanding of Azure services
+- Familiarity with command-line interfaces
+- Basic AI/ML concepts (APIs, models, prompts)
 
-## ल्याब सेटअप
+## Lab Setup
 
-### चरण १: वातावरण तयारी
+### Step 1: Environment Preparation
 
-1. **उपकरण स्थापना प्रमाणित गर्नुहोस्:**  
+1. **Verify tool installations:**
 ```bash
 # AZD स्थापना जाँच गर्नुहोस्
 azd version
@@ -59,23 +59,23 @@ az --version
 # AZD कार्यप्रवाहहरूको लागि Azure मा लगइन गर्नुहोस्
 azd auth login
 
-# डाइग्नोस्टिक्सको समयमा az आदेशहरू चलाउने योजना भएमा मात्र Azure CLI मा लगइन गर्नुहोस्
+# डायग्नोस्टिक्सको क्रममा az आदेशहरू चलाउने योजना भए मात्र Azure CLI मा लगइन गर्नुहोस्
 az login
 ```
-  
-यदि तपाईं बहु टेनेन्टहरूमा काम गर्नुहुन्छ वा तपाईंको सदस्यता स्वचालित रूपमा डिटेक्टर हुँदैन भने, `azd auth login --tenant-id <tenant-id>` प्रयोग गरेर पुन: प्रयास गर्नुहोस्।
 
-2. **कार्यशाला रिपोजिटरी क्लोन गर्नुहोस्:**  
+If you work across multiple tenants or your subscription is not detected automatically, retry with `azd auth login --tenant-id <tenant-id>`.
+
+2. **Clone the workshop repository:**
 ```bash
 git clone https://github.com/Azure-Samples/azure-search-openai-demo
 cd azure-search-openai-demo
 ```
-  
-## मोड्युल १: AI एप्लिकेशनहरूको लागि AZD संरचनाको बुझाई
 
-### AI AZD टेम्प्लेटको संरचना
+## Module 1: Understanding AZD Structure for AI Applications
 
-AI-तयार AZD टेम्प्लेटका मुख्य फाइलहरू अन्वेषण गर्नुहोस्:  
+### Anatomy of an AI AZD Template
+
+Explore the key files in an AI-ready AZD template:
 
 ```
 azure-search-openai-demo/
@@ -85,108 +85,108 @@ azure-search-openai-demo/
 │   ├── main.parameters.json # Environment parameters
 │   └── modules/            # Reusable Bicep modules
 │       ├── openai.bicep    # Microsoft Foundry Models configuration
-│       ├── search.bicep    # Cognitive Search setup
+│       ├── search.bicep    # Azure AI Search setup
 │       └── webapp.bicep    # Web app configuration
 ├── app/                    # Application code
 ├── scripts/               # Deployment scripts
 └── .azure/               # AZD environment files
 ```
-  
-### **ल्याब अभ्यास १.१: कन्फिगरेसन अन्वेषण**
 
-1. **azure.yaml फाइल जाँच गर्नुहोस्:**  
+### **Lab Exercise 1.1: Explore the Configuration**
+
+1. **Examine the azure.yaml file:**
 ```bash
 cat azure.yaml
 ```
-  
-**के हेर्नुहोस्:**  
-- AI कम्पोनेन्टहरूको सेवा परिभाषाहरू  
-- वातावरण चरहरूको म्यापिङ  
-- होस्ट कन्फिगरेसनहरू
 
-2. **main.bicep पूर्वाधार समीक्षा गर्नुहोस्:**  
+**What to look for:**
+- Service definitions for AI components
+- Environment variable mappings
+- Host configurations
+
+2. **Review the main.bicep infrastructure:**
 ```bash
 cat infra/main.bicep
 ```
-  
-**मुख्य AI ढाँचाहरू पहिचान गर्न:**  
-- Microsoft Foundry Models सेवा प्रावधान  
-- Cognitive Search एकीकरण  
-- सुरक्षित कुञ्जी व्यवस्थापन  
-- नेटवर्क सुरक्षा कन्फिगरेसनहरू
 
-### **चर्चा बिन्दु:** यी ढाँचाहरू किन AI का लागि महत्त्वपूर्ण छन्
+**Key AI patterns to identify:**
+- Microsoft Foundry Models service provisioning
+- Azure AI Search integration
+- Secure key management
+- Network security configurations
 
-- **सेवा निर्भरताहरू:** AI एपहरू प्रायः धेरै समन्वित सेवाहरू आवश्यक पर्छन्  
-- **सुरक्षा:** API कुञ्जी र अन्त बिन्दुहरूको सुरक्षित व्यवस्थापन आवश्यक हुन्छ  
-- **स्केलेबिलिटी:** AI कार्यभारहरूका लागि अनन्य स्केलिङ आवश्यकताहरू हुन्छन्  
-- **लागत व्यवस्थापन:** AI सेवाहरू सही प्रकारले कन्फिगर नगरिए महँगो पर्न सक्छ
+### **Discussion Point:** Why These Patterns Matter for AI
 
-## मोड्युल २: तपाईंको पहिलो AI एप्लिकेशन डिप्लॉय गर्नुहोस्
+- **Service Dependencies**: AI apps often require multiple coordinated services
+- **Security**: API keys and endpoints need secure management
+- **Scalability**: AI workloads have unique scaling requirements
+- **Cost Management**: AI services can be expensive if not properly configured
 
-### चरण २.१: वातावरण इनिशियलाइज गर्नुहोस्
+## Module 2: Deploy Your First AI Application
 
-1. **नयाँ AZD वातावरण सिर्जना गर्नुहोस्:**  
+### Step 2.1: Initialize the Environment
+
+1. **Create a new AZD environment:**
 ```bash
 azd env new myai-workshop
 ```
-  
-2. **आवश्यक प्यारामिटरहरू सेट गर्नुहोस्:**  
+
+2. **Set required parameters:**
 ```bash
-# तपाईंको रोजाइको Azure क्षेत्र सेट गर्नुहोस्
+# आफ्नो प्राथमिक Azure क्षेत्र सेट गर्नुहोस्
 azd env set AZURE_LOCATION eastus
 
 # वैकल्पिक: विशिष्ट OpenAI मोडेल सेट गर्नुहोस्
 azd env set AZURE_OPENAI_MODEL gpt-4.1-mini
 ```
-  
-### चरण २.२: पूर्वाधार र एप्लिकेशन डिप्लॉय गर्नुहोस्
 
-1. **AZD बाट डिप्लॉय गर्नुहोस्:**  
+### Step 2.2: Deploy the Infrastructure and Application
+
+1. **Deploy with AZD:**
 ```bash
 azd up
 ```
-  
-**`azd up` गर्दा के हुन्छ:**  
-- ✅ Microsoft Foundry Models सेवा प्रावधान हुन्छ  
-- ✅ Cognitive Search सेवा सिर्जना हुन्छ  
-- ✅ वेब एप्लिकेशनको लागि App Service सेटअप हुन्छ  
-- ✅ नेटवर्किङ र सुरक्षा कन्फिगर हुन्छ  
-- ✅ एप्लिकेशन कोड डिप्लॉय हुन्छ  
-- ✅ निरीक्षण र लगिङ सेटअप हुन्छ
 
-2. **डिप्लॉयमेन्ट प्रगति अनुगमन गर्नुहोस्** र सिर्जना हुँदै गएका स्रोतहरू नोट गर्नुहोस्।
+**What happens during `azd up`:**
+- ✅ Provisions Microsoft Foundry Models service
+- ✅ Creates Azure AI Search service
+- ✅ Sets up App Service for the web application
+- ✅ Configures networking and security
+- ✅ Deploys application code
+- ✅ Sets up monitoring and logging
 
-### चरण २.३: तपाईंको डिप्लॉयमेन्ट प्रमाणित गर्नुहोस्
+2. **Monitor the deployment progress** and note the resources being created.
 
-1. **डिप्लॉय भएका स्रोतहरू जाँच गर्नुहोस्:**  
+### Step 2.3: Verify Your Deployment
+
+1. **Check the deployed resources:**
 ```bash
 azd show
 ```
-  
-2. **डिप्लॉय गरिएको एप्लिकेशन खोल्नुहोस्:**  
+
+2. **Open the deployed application:**
 ```bash
 azd show
 ```
-  
-`azd show` आउटपुटमा देखाइएको वेब अन्तबिन्दु खोल्नुहोस्।
 
-3. **AI कार्यक्षमता परीक्षण गर्नुहोस्:**  
-   - वेब एप्लिकेशनमा जानुहोस्  
-   - नमुना क्वेरीहरू प्रयास गर्नुहोस्  
-   - AI प्रतिक्रियाहरू काम गरिरहेको छ कि छैन जाँच्नुहोस्
+Open the web endpoint shown in the `azd show` output.
 
-### **ल्याब अभ्यास २.१: समस्या समाधान अभ्यास**
+3. **Test the AI functionality:**
+   - Navigate to the web application
+   - Try sample queries
+   - Verify AI responses are working
 
-**परिदृश्य:** तपाईंको डिप्लॉयमेन्ट सफल भयो तर AI प्रतिक्रिया दिँदैन।
+### **Lab Exercise 2.1: Troubleshooting Practice**
 
-**सामान्य जाँच्नुपर्ने समस्याहरू:**  
-1. **OpenAI API कुञ्जीहरू:** सही रूपमा सेट छन् कि छैनन् जाँच गर्नुहोस्  
-2. **मोडेल उपलब्धता:** तपाईंको क्षेत्रले मोडेल सपोर्ट गर्छ कि छैन जाँच गर्नुहोस्  
-3. **नेटवर्क कनेक्टिभिटी:** सेवाहरू आपसमा सञ्चार गर्न सक्षम छन् कि छैन जाँच्नुहोस्  
-4. **RBAC अनुमतिहरू:** एप्लिकेशन OpenAI पहुँच्न सक्छ कि छैन पुष्टि गर्नुहोस्
+**Scenario**: Your deployment succeeded but the AI isn't responding.
 
-**समस्यासूचक कमाण्डहरू:**  
+**Common issues to check:**
+1. **OpenAI API keys**: Verify they're correctly set
+2. **Model availability**: Check if your region supports the model
+3. **Network connectivity**: Ensure services can communicate
+4. **RBAC permissions**: Verify the app can access OpenAI
+
+**Debugging commands:**
 ```bash
 # वातावरण चरहरू जाँच गर्नुहोस्
 azd env get-values
@@ -194,26 +194,26 @@ azd env get-values
 # परिनियोजन लगहरू हेर्नुहोस्
 az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 
-# OpenAI परिनियोजन स्थिति जाँच गर्नुहोस्
+# OpenAI को परिनियोजन स्थिति जाँच गर्नुहोस्
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
-  
-## मोड्युल ३: तपाईंको आवश्यकताका लागि AI एप्लिकेशन अनुकूलन गर्नुहोस्
 
-### चरण ३.१: AI कन्फिगरेसन परिमार्जन गर्नुहोस्
+## Module 3: Customizing AI Applications for Your Needs
 
-1. **OpenAI मोडेल अपडेट गर्नुहोस्:**  
+### Step 3.1: Modify the AI Configuration
+
+1. **Update the OpenAI model:**
 ```bash
-# फरक मोडेलमा परिवर्तन गर्नुहोस् (यदि तपाईंको क्षेत्रमा उपलब्ध छ भने)
+# अर्को मोडेलमा परिवर्तन गर्नुहोस् (यदि तपाईंको क्षेत्रमा उपलब्ध भएमा)
 azd env set AZURE_OPENAI_MODEL gpt-4.1
 
 # नयाँ कन्फिगरेसनसहित पुनः तैनाथ गर्नुहोस्
 azd deploy
 ```
-  
-2. **थप AI सेवाहरू थप्नुहोस्:**
 
-`infra/main.bicep` सम्पादन गर्न Document Intelligence थप्नुहोस्:  
+2. **Add additional AI services:**
+
+Edit `infra/main.bicep` to add Document Intelligence:
 
 ```bicep
 // Add to main.bicep
@@ -229,65 +229,65 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
   }
 }
 ```
-  
-### चरण ३.२: वातावरण-विशिष्ट कन्फिगरेसनहरू
 
-**राम्रो अभ्यास:** विकास र प्रोडक्सनका लागि फरक कन्फिगरेसनहरू।
+### Step 3.2: Environment-Specific Configurations
 
-1. **प्रोडक्सन वातावरण सिर्जना गर्नुहोस्:**  
+**Best Practice**: Different configurations for development vs production.
+
+1. **Create a production environment:**
 ```bash
 azd env new myai-production
 ```
-  
-2. **प्रोडक्सन-विशिष्ट प्यारामिटरहरू सेट गर्नुहोस्:**  
+
+2. **Set production-specific parameters:**
 ```bash
-# उत्पादन सामान्यतया उच्च SKU हरू प्रयोग गर्छ
+# उत्पादन वातावरण सामान्यतया उच्च-स्तरका SKUहरू प्रयोग गर्छ
 azd env set AZURE_OPENAI_SKU S0
 azd env set AZURE_SEARCH_SKU standard
 
-# थप सुरक्षा सुविधाहरू सक्षम पार्नुहोस्
+# थप सुरक्षा सुविधाहरू सक्षम गर्नुहोस्
 azd env set ENABLE_PRIVATE_ENDPOINTS true
 ```
-  
-### **ल्याब अभ्यास ३.१: लागत अनुकूलन**
 
-**चुनौती:** लागत प्रभावकारी विकासका लागि टेम्प्लेट कन्फिगर गर्नुहोस्।
+### **Lab Exercise 3.1: Cost Optimization**
 
-**कार्यहरू:**  
-1. कुन SKUहरूलाई निःशुल्क/आधारभूत तहमा सेट गर्न सकिन्छ पहिचान गर्नुहोस्  
-2. न्यूनतम लागतका लागि वातावरण चरहरू कन्फिगर गर्नुहोस्  
-3. डिप्लॉय गरेर प्रोडक्सन कन्फिगरेसनसँग लागत तुलना गर्नुहोस्
+**Challenge**: Configure the template for cost-effective development.
 
-**समाधान सङ्केतहरू:**  
-- सम्भव भए Cognitive Services का लागि F0 (नि:शुल्क) तह प्रयोग गर्नुहोस्  
-- विकासमा Search सेवाका लागि आधारभूत तह प्रयोग गर्नुहोस्  
-- Functions का लागि Consumption योजना विचार गर्नुहोस्
+**Tasks:**
+1. Identify which SKUs can be set to free/basic tiers
+2. Configure environment variables for minimal cost
+3. Deploy and compare costs with the production configuration
 
-## मोड्युल ४: सुरक्षा र प्रोडक्सन राम्रो अभ्यासहरू
+**Solution hints:**
+- Use F0 (free) tier for Azure AI Services when possible
+- Use Basic tier for Search Service in development
+- Consider using Consumption plan for Functions
 
-### चरण ४.१: सुरक्षित क्रेडेन्सियल व्यवस्थापन
+## Module 4: Security and Production Best Practices
 
-**वर्तमान चुनौती:** धेरै AI एपहरूले API कुञ्जीहरू हार्डकोड गर्छन् वा असुरक्षित भण्डारण गर्छन्।
+### Step 4.1: Secure Credential Management
 
-**AZD समाधान:** Managed Identity + Key Vault एकीकरण।
+**Current challenge**: Many AI apps hardcode API keys or use insecure storage.
 
-1. ** तपाईंको टेम्प्लेटमा सुरक्षा कन्फिगरेसन समीक्षा गर्नुहोस्:**  
+**AZD Solution**: Managed Identity + Key Vault integration.
+
+1. **Review the security configuration in your template:**
 ```bash
-# की भल्ट र व्यवस्थापित पहिचान कन्फिगरेसन खोज्नुहोस्
+# Key Vault र Managed Identity को कन्फिगरेसन खोज्नुहोस्
 grep -r "keyVault\|managedIdentity" infra/
 ```
-  
-2. **Managed Identity काम गरिरहेको छ कि छैन प्रमाणित गर्नुहोस्:**  
+
+2. **Verify Managed Identity is working:**
 ```bash
-# वेब एपमा सही पहिचान कन्फिगरेसन छ कि छैन जाँच गर्नुहोस्
+# वेब एपमा सही पहिचान कन्फिगरेसन छ कि छैन जाँच्नुहोस्
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 ```
-  
-### चरण ४.२: नेटवर्क सुरक्षा
 
-1. **प्राइभेट अन्तबिन्दु सक्षम गर्नुहोस्** (यदि पहिले नै कन्फिगर गरिएको छैन भने):  
+### Step 4.2: Network Security
 
-तपाईंको bicep टेम्प्लेटमा थप गर्नुहोस्:  
+1. **Enable private endpoints** (if not already configured):
+
+Add to your bicep template:
 ```bicep
 // Private endpoint for OpenAI
 resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
@@ -309,19 +309,19 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
   }
 }
 ```
-  
-### चरण ४.३: निरीक्षण र अधिगम्यता
 
-1. **Application Insights कन्फिगर गर्नुहोस्:**  
+### Step 4.3: Monitoring and Observability
+
+1. **Configure Application Insights:**
 ```bash
-# आवेदन अन्तर्दृष्टिहरू स्वचालित रूपमा कन्फिगर गरिनु पर्छ
+# Application Insights स्वचालित रूपमा कन्फिगर हुनुपर्छ
 # कन्फिगरेसन जाँच गर्नुहोस्:
 az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
 ```
-  
-2. **AI-विशेष निगरानी सेटअप गर्नुहोस्:**
 
-AI सञ्चालनहरूको लागि अनुकूल मेट्रिक्स थप्नुहोस्:  
+2. **Set up AI-specific monitoring:**
+
+Add custom metrics for AI operations:
 ```bicep
 // In your web app configuration
 resource webApp 'Microsoft.Web/sites@2023-01-01' = {
@@ -341,54 +341,54 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
   }
 }
 ```
-  
-### **ल्याब अभ्यास ४.१: सुरक्षा अडिट**
 
-**कार्य:** तपाईंको डिप्लॉयमेन्टका लागि सुरक्षा राम्रो अभ्यासहरू समीक्षा गर्नुहोस्।
+### **Lab Exercise 4.1: Security Audit**
 
-**चेकलिस्ट:**  
-- [ ] कोड वा कन्फिगरेसनमा कुनै हार्डकोड गरिएको गोप्य जानकारी छैन  
-- [ ] सेवा-देखि-सेवा प्रमाणीकरणका लागि Managed Identity प्रयोग गरिएको छ  
-- [ ] संवेदनशील कन्फिगरेसनहरू Key Vault मा सुरक्षित गरिएको छ  
-- [ ] नेटवर्क पहुँच उचित रूपमा प्रतिबन्धित छ  
-- [ ] निरीक्षण र लगिङ सक्षम छ
+**Task**: Review your deployment for security best practices.
 
-## मोड्युल ५: तपाईंको आफ्नै AI एप्लिकेशन रूपान्तरण
+**Checklist:**
+- [ ] No hardcoded secrets in code or configuration
+- [ ] Managed Identity used for service-to-service authentication
+- [ ] Key Vault stores sensitive configuration
+- [ ] Network access is properly restricted
+- [ ] Monitoring and logging are enabled
 
-### चरण ५.१: मूल्याङ्कन कार्यपत्र
+## Module 5: Converting Your Own AI Application
 
-**तपाईंको एप रूपान्तरण गर्नु अघि**, यी प्रश्नहरूको उत्तर दिनुहोस्:
+### Step 5.1: Assessment Worksheet
 
-1. **एप्लिकेशन वास्तुकला:**  
-   - तपाईंको एपले कुन AI सेवाहरू प्रयोग गर्छ?  
-   - यसलाई कुन कम्प्युट स्रोतहरू आवश्यक छन्?  
-   - यसलाई डाटाबेस चाहिन्छ?  
-   - सेवाहरूबीच कस्ता निर्भरता छन्?
+**Before converting your app**, answer these questions:
 
-2. **सुरक्षा आवश्यकताहरू:**  
-   - तपाईंको एपले कुन संवेदनशील डेटा सम्हाल्छ?  
-   - तपाईंका कता-कता अनुपालन आवश्यकताहरू छन्?  
-   - तपाईंलाई निजी नेटवर्किङ चाहिन्छ?
+1. **Application Architecture:**
+   - What AI services does your app use?
+   - What compute resources does it need?
+   - Does it require a database?
+   - What are the dependencies between services?
 
-3. **स्केलिङ आवश्यकताहरू:**  
-   - तपाईंको अपेक्षित लोड कति हो?  
-   - के तपाईंलाई स्वत: स्केलिङ चाहिन्छ?  
-   - क्षेत्रीय आवश्यकताहरू के छन्?
+2. **Security Requirements:**
+   - What sensitive data does your app handle?
+   - What compliance requirements do you have?
+   - Do you need private networking?
 
-### चरण ५.२: तपाईंको AZD टेम्प्लेट सिर्जना गर्नुहोस्
+3. **Scaling Requirements:**
+   - What's your expected load?
+   - Do you need auto-scaling?
+   - Are there regional requirements?
 
-**तपाईंको एप रूपान्तरण गर्न यो ढाँचा पछ्याउनुहोस्:**
+### Step 5.2: Create Your AZD Template
 
-1. **आधारभूत संरचना सिर्जना गर्नुहोस्:**  
+**Follow this pattern to convert your app:**
+
+1. **Create the basic structure:**
 ```bash
 mkdir my-ai-app-azd
 cd my-ai-app-azd
 
-# AZD टेम्प्लेट शुरू गर्नुहोस्
+# AZD टेम्पलेट आरम्भ गर्नुहोस्
 azd init --template minimal
 ```
-  
-2. **azure.yaml सिर्जना गर्नुहोस्:**  
+
+2. **Create azure.yaml:**
 ```yaml
 # Metadata
 name: my-ai-app
@@ -410,10 +410,10 @@ hooks:
     shell: sh
     run: echo "Preparing AI models..."
 ```
-  
-3. **पूर्वाधार टेम्प्लेटहरू सिर्जना गर्नुहोस्:**
 
-**infra/main.bicep** - मुख्य टेम्प्लेट:  
+3. **Create infrastructure templates:**
+
+**infra/main.bicep** - Main template:
 ```bicep
 @description('Primary location for all resources')
 param location string = resourceGroup().location
@@ -430,8 +430,8 @@ module openAI 'modules/openai.bicep' = {
   }
 }
 ```
-  
-**infra/modules/openai.bicep** - OpenAI मोड्युल:  
+
+**infra/modules/openai.bicep** - OpenAI module:
 ```bicep
 @description('Name of the OpenAI service')
 param name string
@@ -454,42 +454,42 @@ resource openAIAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
 output endpoint string = openAIAccount.properties.endpoint
 output name string = openAIAccount.name
 ```
-  
-### **ल्याब अभ्यास ५.१: टेम्प्लेट सिर्जना चुनौती**
 
-**चुनौती:** एउटा कागजात प्रशोधन AI एपका लागि AZD टेम्प्लेट सिर्जना गर्नुहोस्।
+### **Lab Exercise 5.1: Template Creation Challenge**
 
-**आवश्यकताहरू:**  
-- सामग्री विश्लेषणका लागि Microsoft Foundry Models  
-- OCR का लागि Document Intelligence  
-- कागजात अपलोडका लागि स्टोरेज अकाउन्ट  
-- प्रशोधन तर्कका लागि Function App  
-- प्रयोगकर्ता इन्टरफेसका लागि वेब एप
+**Challenge**: Create an AZD template for a document processing AI app.
 
-**बोनस पोइन्टहरू:**  
-- उचित त्रुटि ह्यान्डलिंग थप्नुहोस्  
-- लागत अनुमान समावेश गर्नुहोस्  
-- अनुगमन ड्यासबोर्डहरू सेटअप गर्नुहोस्
+**Requirements:**
+- Microsoft Foundry Models for content analysis
+- Document Intelligence for OCR
+- Storage Account for document uploads
+- Function App for processing logic
+- Web app for user interface
 
-## मोड्युल ६: सामान्य समस्याहरू समाधान
+**Bonus points:**
+- Add proper error handling
+- Include cost estimation
+- Set up monitoring dashboards
 
-### सामान्य डिप्लॉयमेन्ट समस्याहरू
+## Module 6: Troubleshooting Common Issues
 
-#### समस्या १: OpenAI सेवा क्वोटा अतिक्रमण  
-**लक्षणहरू:** डिप्लॉय फेल हुन्छ क्वोटा त्रुटिसँग  
-**समाधानहरू:**  
+### Common Deployment Issues
+
+#### Issue 1: OpenAI Service Quota Exceeded
+**Symptoms:** Deployment fails with quota error
+**Solutions:**
 ```bash
 # हालको कोटा जाँच गर्नुहोस्
 az cognitiveservices usage list --location eastus
 
-# कोटा वृद्धि अनुरोध गर्नुहोस् वा फरक क्षेत्र प्रयास गर्नुहोस्
+# कोटा वृद्धि अनुरोध गर्नुहोस् वा फरक क्षेत्रमा प्रयास गर्नुहोस्
 azd env set AZURE_LOCATION westus2
 azd up
 ```
-  
-#### समस्या २: क्षेत्रमै मोडेल उपलब्ध छैन  
-**लक्षणहरू:** AI प्रतिक्रिया असफल वा मोडेल डिप्लॉय त्रुटि  
-**समाधानहरू:**  
+
+#### Issue 2: Model Not Available in Region
+**Symptoms:** AI responses fail or model deployment errors
+**Solutions:**
 ```bash
 # क्षेत्र अनुसार मोडेल उपलब्धता जाँच गर्नुहोस्
 az cognitiveservices model list --location eastus
@@ -498,62 +498,62 @@ az cognitiveservices model list --location eastus
 azd env set AZURE_OPENAI_MODEL gpt-4.1-mini
 azd deploy
 ```
-  
-#### समस्या ३: अनुमति समस्या  
-**लक्षणहरू:** AI सेवाहरू कल गर्दा 403 Forbidden त्रुटिहरू  
-**समाधानहरू:**  
+
+#### Issue 3: Permission Issues
+**Symptoms:** 403 Forbidden errors when calling AI services
+**Solutions:**
 ```bash
-# भूमिका आवंटन जाँच गर्नुहोस्
+# भूमिका आवंटनहरू जाँच गर्नुहोस्
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# हराएका भूमिकाहरू थप्नुहोस्
+# गुमेका भूमिकाहरू थप्नुहोस्
 az role assignment create \
   --assignee YOUR_PRINCIPAL_ID \
   --role "Cognitive Services OpenAI User" \
   --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 ```
-  
-### प्रदर्शन समस्याहरू
 
-#### समस्या ४: AI प्रतिक्रियाहरू ढिला  
-**जाँचका चरणहरू:**  
-1. Application Insights मा प्रदर्शन मेट्रिक्स जाँच्नुहोस्  
-2. Azure पोर्टलमा OpenAI सेवा मेट्रिक्स समीक्षा गर्नुहोस्  
-3. नेटवर्क कनेक्टिभिटी र विलम्बता प्रमाणित गर्नुहोस्
+### Performance Issues
 
-**समाधानहरू:**  
-- सामान्य क्वेरीका लागि क्याचिङ लागू गर्नुहोस्  
-- तपाईंको प्रयोग केसमा उपयुक्त OpenAI मोडेल प्रयोग गर्नुहोस्  
-- उच्च लोड परिस्थितिको लागि रिड रप्लिका विचार गर्नुहोस्
+#### Issue 4: Slow AI Responses
+**Investigation steps:**
+1. Check Application Insights for performance metrics
+2. Review OpenAI service metrics in Azure portal
+3. Verify network connectivity and latency
 
-### **ल्याब अभ्यास ६.१: समस्या समाधान चुनौती**
+**Solutions:**
+- Implement caching for common queries
+- Use appropriate OpenAI model for your use case
+- Consider read replicas for high-load scenarios
 
-**परिदृश्य:** तपाईंको डिप्लॉयमेन्ट सफल भयो, तर एप्लिकेशन 500 त्रुटि फर्काउँछ।
+### **Lab Exercise 6.1: Debugging Challenge**
 
-**समस्या समाधान कार्यहरू:**  
-1. एप्लिकेशन लगहरू जाँच्नुहोस्  
-2. सेवा कनेक्टिभिटी प्रमाणित गर्नुहोस्  
-3. प्रमाणीकरण परीक्षण गर्नुहोस्  
-4. कन्फिगरेसन समीक्षा गर्नुहोस्
+**Scenario**: Your deployment succeeded, but the application returns 500 errors.
 
-**प्रयोग गर्ने उपकरणहरू:**  
-- `azd show` डिप्लॉयमेन्ट अवलोकनका लागि  
-- Azure पोर्टल विस्तृत सेवा लगका लागि  
-- Application Insights एप्लिकेशन टेलिमेट्रीका लागि
+**Debugging tasks:**
+1. Check application logs
+2. Verify service connectivity
+3. Test authentication
+4. Review configuration
 
-## मोड्युल ७: निरीक्षण र अनुकूलन
+**Tools to use:**
+- `azd show` for deployment overview
+- Azure portal for detailed service logs
+- Application Insights for application telemetry
 
-### चरण ७.१: व्यापक निरीक्षण सेटअप गर्नुहोस्
+## Module 7: Monitoring and Optimization
 
-1. **अनुकूल ड्यासबोर्डहरू सिर्जना गर्नुहोस्:**  
+### Step 7.1: Set Up Comprehensive Monitoring
 
-Azure पोर्टलमा जानुहोस् र यस्तो ड्यासबोर्ड बनाउनुहोस्:  
-- OpenAI अनुरोध संख्या र विलम्बता  
-- एप्लिकेशन त्रुटि दर  
-- स्रोत उपयोग  
-- लागत ट्र्याकिङ
+1. **Create custom dashboards:**
 
-2. **अलर्टहरू सेटअप गर्नुहोस्:**  
+Navigate to Azure portal and create a dashboard with:
+- OpenAI request count and latency
+- Application error rates
+- Resource utilization
+- Cost tracking
+
+2. **Set up alerts:**
 ```bash
 # उच्च त्रुटि दरको लागि चेतावनी
 az monitor metrics alert create \
@@ -563,81 +563,81 @@ az monitor metrics alert create \
   --condition "avg Http5xx greater than 10" \
   --description "Alert when error rate is high"
 ```
-  
-### चरण ७.२: लागत अनुकूलन
 
-1. **हालको लागत विश्लेषण गर्नुहोस्:**  
+### Step 7.2: Cost Optimization
+
+1. **Analyze current costs:**
 ```bash
 # लागत डेटा प्राप्त गर्न Azure CLI प्रयोग गर्नुहोस्
 az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 ```
-  
-2. **लागत नियन्त्रण लागू गर्नुहोस्:**  
-- बजेट अलर्ट सेटअप गर्नुहोस्  
-- स्वचालित स्केलिंग नीति प्रयोग गर्नुहोस्  
-- अनुरोध क्याचिङ लागू गर्नुहोस्  
-- OpenAI टोकन प्रयोग अनुगमन गर्नुहोस्
 
-### **ल्याब अभ्यास ७.१: प्रदर्शन अनुकूलन**
+2. **Implement cost controls:**
+- Set up budget alerts
+- Use autoscaling policies
+- Implement request caching
+- Monitor token usage for OpenAI
 
-**कार्य:** तपाईंको AI एप प्रदर्शनी र लागत दुवैका लागि अनुकूलन गर्नुहोस्।
+### **Lab Exercise 7.1: Performance Optimization**
 
-**सुधार गर्नुपर्ने मेट्रिक्स:**  
-- औसत प्रतिक्रिया समय २०% घटाउनुहोस्  
-- मासिक लागत १५% घटाउनुहोस्  
-- ९९.९% अपटाइम कायम राख्नुहोस्
+**Task**: Optimize your AI application for both performance and cost.
 
-**प्रयोग गर्नुपर्ने रणनीतिहरू:**  
-- प्रतिक्रिया क्याचिङ लागू गर्नुहोस्  
-- टोकन दक्षताका लागि प्रम्प्टहरू अनुकूलित गर्नुहोस्  
-- उपयुक्त कम्प्युट SKU प्रयोग गर्नुहोस्  
-- उचित स्वचालित स्केलिंग सेटअप गर्नुहोस्
+**Metrics to improve:**
+- Reduce average response time by 20%
+- Reduce monthly costs by 15%
+- Maintain 99.9% uptime
 
-## अन्तिम चुनौती: एन्ड-टु-एन्ड कार्यान्वयन
+**Strategies to try:**
+- Implement response caching
+- Optimize prompts for token efficiency
+- Use appropriate compute SKUs
+- Set up proper autoscaling
 
-### चुनौती परिदृश्य
+## Final Challenge: End-to-End Implementation
 
-तपाईंलाई उत्पादन-तयार AI-चालित ग्राहक सेवा च्याटबोट बनाउन भनिएको छ जसमा यी आवश्यकताहरू छन्:
+### Challenge Scenario
 
-**कार्यात्मक आवश्यकताहरू:**  
-- ग्राहक अन्तरक्रियाका लागि वेब अन्तरफलक  
-- प्रतिक्रियाका लागि Microsoft Foundry Models एकीकरण  
-- Cognitive Search प्रयोग गरी कागजात खोज क्षमता  
-- अवस्थित ग्राहक डाटाबेसको साथ एकीकरण  
-- बहुभाषी समर्थन
+You're tasked with creating a production-ready AI-powered customer service chatbot with these requirements:
 
-**गैर-कार्यात्मक आवश्यकताहरू:**  
-- १००० समसामयिक प्रयोगकर्ताहरूको सम्हाल्ने क्षमता  
-- ९९.९% अपटाइम SLA  
-- SOC 2 अनुपालन  
-- मासिक $५०० भित्र लागत  
-- बहु वातावरणहरूमा डिप्लॉय (विकास, स्टेजिङ, प्रोडक्सन)
+**Functional Requirements:**
+- Web interface for customer interactions
+- Integration with Microsoft Foundry Models for responses
+- Document search capability using Azure AI Search
+- Integration with existing customer database
+- Multi-language support
 
-### कार्यान्वयन चरणहरू
+**Non-Functional Requirements:**
+- Handle 1000 concurrent users
+- 99.9% uptime SLA
+- SOC 2 compliance
+- Cost under $500/month
+- Deploy to multiple environments (dev, staging, prod)
 
-1. आर्किटेक्चर डिजाइन गर्नुहोस्  
-2. AZD टेम्प्लेट सिर्जना गर्नुहोस्  
-3. सुरक्षा उपायहरू कार्यान्वयन गर्नुहोस्  
-4. निरीक्षण र चेतावनी सेटअप गर्नुहोस्  
-5. डिप्लॉयमेन्ट पाइपलाइनहरू सिर्जना गर्नुहोस्  
-6. समाधान दस्तावेजीकरण गर्नुहोस्
+### Implementation Steps
 
-### मूल्याङ्कन मापदण्ड
+1. **Design the architecture**
+2. **Create the AZD template**
+3. **Implement security measures**
+4. **Set up monitoring and alerting**
+5. **Create deployment pipelines**
+6. **Document the solution**
 
-- ✅ **कार्यक्षमता:** के यसले सबै आवश्यकताहरू पूरा गर्दछ?  
-- ✅ **सुरक्षा:** के राम्रो अभ्यासहरू लागू गरिएको छ?  
-- ✅ **स्केलेबिलिटी:** के यसले लोड सम्हाल्न सक्छ?  
-- ✅ **रखरखावयोग्यता:** के कोड र पूर्वाधार राम्रो संरचित छ?  
-- ✅ **लागत:** के यो बजेट भित्र छ?
+### Evaluation Criteria
 
-## थप स्रोतहरू
+- ✅ **Functionality**: Does it meet all requirements?
+- ✅ **Security**: Are best practices implemented?
+- ✅ **Scalability**: Can it handle the load?
+- ✅ **Maintainability**: Is the code and infrastructure well-organized?
+- ✅ **Cost**: Does it stay within budget?
 
-### Microsoft कागजातहरू
-- [Azure Developer CLI कागजातहरू](https://learn.microsoft.com/azure/developer/azure-developer-cli/)  
-- [Microsoft Foundry Models सेवा कागजात](https://learn.microsoft.com/azure/cognitive-services/openai/)  
-- [Microsoft Foundry कागजात](https://learn.microsoft.com/azure/ai-studio/)
+## Additional Resources
 
-### नमुना टेम्प्लेटहरू
+### Microsoft Documentation
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Microsoft Foundry Models Service Documentation](https://learn.microsoft.com/azure/cognitive-services/openai/)
+- [Microsoft Foundry Documentation](https://learn.microsoft.com/azure/ai-studio/)
+
+### Sample Templates
 - [Microsoft Foundry Models Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
 - [OpenAI Chat App Quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart)
 - [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
@@ -647,40 +647,40 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
 - [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
 
-## 🎓 समाप्ति प्रमाणपत्र
+## 🎓 सम्पन्नता प्रमाणपत्र
 
-बधाई छ! तपाईंले AI कार्यशाला प्रयोगशाला पूरा गर्नुभयो। अब तपाईंले गर्न सक्नुहुन्छ:
+बधाई छ! तपाईंले AI कार्यशाला प्रयोगशाला पूरा गर्नुभयो। अब तपाईं निम्न कुराहरू गर्न सक्षम हुनुहुनेछ:
 
-- ✅ विद्यमान AI एप्लिकेशनहरूलाई AZD टेम्प्लेटहरूमा रूपान्तरण गर्नुहोस्
-- ✅ उत्पादन-तयार AI एप्लिकेशनहरू तैनाथ गर्नुहोस्
-- ✅ AI कार्यभारहरूको लागि सुरक्षा उत्तम अभ्यासहरू कार्यान्वयन गर्नुहोस्
-- ✅ AI एप्लिकेशन प्रदर्शनको अनुगमन र अनुकूलन गर्नुहोस्
-- ✅ साधारण तैनाथ समस्या समाधान गर्नुहोस्
+- ✅ अस्तित्वमा रहेका AI अनुप्रयोगहरूलाई AZD टेम्पलेटमा रूपान्तरण गर्न
+- ✅ उत्पादन-दर्जाको AI अनुप्रयोगहरू तैनाथ गर्न
+- ✅ AI कार्यभारहरूको लागि सुरक्षा सर्वोत्तम अभ्यासहरू लागू गर्न
+- ✅ AI अनुप्रयोग प्रदर्शन निगरानी र अनुकूलन गर्न
+- ✅ सामान्य तैनाती समस्याहरू निवारण गर्न
 
-### पछिल्ला कदमहरू
-1. यी पद्धतिहरू आफ्नो AI परियोजनाहरूमा लागू गर्नुहोस्
-2. समुदायमा टेम्प्लेटहरू फिर्ता योगदान गर्नुहोस्
-3. निरन्तर समर्थनको लागि Microsoft Foundry Discord मा सामेल हुनुहोस्
-4. बहु-क्षेत्रीय तैनाथी जस्ता उन्नत विषयहरू अन्वेषण गर्नुहोस्
-
----
-
-**कार्यशाला प्रतिक्रिया**: कृपया आफ्नो अनुभव [Microsoft Foundry Discord #Azure च्यानल](https://discord.gg/microsoft-azure) मा साझा गरेर हामीलाई यो कार्यशाला सुधार गर्न मद्दत गर्नुहोस्।
+### अर्को कदमहरू
+1. यी ढाँचाहरू आफ्ना AI परियोजनाहरूमा लागू गर्नुहोस्
+2. टेम्पलेटहरू समुदायमा फर्केर योगदान गर्नुहोस्
+3. सतत समर्थनका लागि Microsoft Foundry Discord मा सहभागी हुनुहोस्
+4. बहु-क्षेत्र तैनातीजस्ता उन्नत विषयहरू अन्वेषण गर्नुहोस्
 
 ---
 
-**अध्याय नेभिगेसन:**
-- **📚 कोर्स होम**: [AZD प्रारम्भकर्ताहरूका लागि](../../README.md)
-- **📖 वर्तमान अध्याय**: अध्याय २ - AI-प्रथम विकास
-- **⬅️ पहिलेको**: [AI मोडेल तैनाथी](ai-model-deployment.md)
-- **➡️ अर्को**: [उत्पादन AI उत्तम अभ्यासहरू](production-ai-practices.md)
-- **🚀 अर्को अध्याय**: [अध्याय ३: कन्फिगरेसन](../chapter-03-configuration/configuration.md)
+**Workshop Feedback**: हाम्रो कार्यशाला सुधार गर्न कृपया आफ्नो अनुभव [Microsoft Foundry Discord #Azure channel](https://discord.gg/microsoft-azure) मा साझा गर्नुहोस्।
 
-**मद्दत चाहिन्छ?** AZD र AI तैनाथीहरू बारे समर्थन र छलफलहरूको लागि हाम्रो समुदायमा सामेल हुनुहोस्।
+---
+
+**अध्याय नेभिगेशन:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: अध्याय २ - AI-प्रथम विकास
+- **⬅️ Previous**: [AI Model Deployment](ai-model-deployment.md)
+- **➡️ Next**: [Production AI Best Practices](production-ai-practices.md)
+- **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+
+**मदत चाहिन्छ?** हाम्रो समुदायमा AZD र AI तैनातीहरूबारे समर्थन र छलफलको लागि सामेल हुनुहोस्।
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**अस्वीकरण**:  
-यस दस्तावेज़लाई AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) प्रयोग गरी अनुवाद गरिएको छ। हामी शुद्धताको लागि प्रयासरत छौं, तर कृपया बुझ्नुहोस् कि स्वचालित अनुवादहरूमा त्रुटिहरू वा असठिकताहरू हुनसक्छन्। मूल दस्तावेज़ यसको मूल भाषामा विश्वसनीय स्रोत मानिनुपर्छ। महत्वपूर्ण जानकारीको लागि, व्यावसायिक मानवीय अनुवाद सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न कुनै पनि गलतफहमी वा गलत व्याख्याहरूका लागि हामी जिम्मेवार छैनौं।
+**अस्वीकरण**:
+यो दस्तावेज़ AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) प्रयोग गरेर अनुवाद गरिएको हो। हामी सही हुन प्रयास गर्छौं, तर कृपया जानकार हुनुस् कि स्वचालित अनुवादमा त्रुटिहरू वा अशुद्धताहरू हुन सक्छन्। मूल दस्तावेज़ यसको मूल भाषामा आधिकारिक स्रोत मानिनुपर्छ। महत्वपूर्ण जानकारीका लागि व्यावसायिक मानव अनुवाद सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न कुनै पनि गलत बुझाइ वा त्रुटिको लागि हामी जिम्मेवार छैनौं।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

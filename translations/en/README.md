@@ -39,13 +39,20 @@
 
 ## 🆕 What's New in azd Today
 
+> 📌 This course is validated against **`azd 1.25.6`** (June 2026). Run `azd version` to check your build, and `azd upgrade` to get the latest.
+
 Azure Developer CLI has grown beyond traditional web apps and APIs. Today, azd is the single tool for deploying **any** application to Azure—including AI-powered applications and intelligent agents.
 
 Here's what that means for you:
 
 - **AI agents are now first-class azd workloads.** You can initialize, deploy, and manage AI agent projects using the same `azd init` → `azd up` workflow you already know.
+- **A complete agent lifecycle from the CLI.** The `azure.ai.agents` extension now covers the whole journey—`azd ai agent init` to scaffold, `azd ai agent invoke` to test (with response-timing output), `azd ai agent eval generate` and `azd ai agent optimize` to measure and improve quality, and `azd ai agent delete` to clean up.
+- **More AI building blocks.** New preview extensions—`azure.ai.skills` and `azure.ai.connections`—let you manage reusable agent skills and Foundry connections directly with azd.
 - **Microsoft Foundry integration** brings model deployment, agent hosting, and AI service configuration directly into the azd template ecosystem.
+- **Smoother day-to-day basics.** Recent releases made `azd init` idempotent (safe to re-run), made `azd auth login` clear stale tokens automatically, and added a friendly `azd tool` first-run setup prompt.
 - **The core workflow hasn't changed.** Whether you're deploying a todo app, a microservice, or a multi-agent AI solution, the commands are the same.
+
+> **Note for Aspire users:** Microsoft now refers to the product simply as **Aspire** (formerly ".NET Aspire"). azd's Aspire support is unchanged—only the name was updated.
 
 If you've used azd before, AI support is a natural extension—not a separate tool or an advanced track. If you're starting fresh, you'll learn one workflow that works for everything.
 
@@ -234,7 +241,6 @@ This course is designed for **progressive learning** - start where you're comfor
 ## Course Overview
 
 Master Azure Developer CLI (azd) through structured chapters designed for progressive learning. **Special focus on AI application deployment with Microsoft Foundry integration.**
-
 ### Why This Course is Essential for Modern Developers
 
 Based on Microsoft Foundry Discord community insights, **45% of developers want to use AZD for AI workloads** but encounter challenges with:
@@ -257,6 +263,7 @@ By completing this structured course, you will:
 ## Before You Start: Accounts, Access, and Assumptions
 
 Before you begin Chapter 1, make sure you have the following in place. The installation steps later in this guide assume these basics are already handled.
+
 - **An Azure subscription**: You can use an existing subscription from work or your own account, or create a [free trial](https://aka.ms/azurefreetrial) to get started.
 - **Permission to create Azure resources**: For most exercises, you should have at least **Contributor** access on the target subscription or resource group. Some chapters may also assume you can create resource groups, managed identities, and RBAC assignments.
 - [**A GitHub account**](https://github.com): This is useful for forking the repository, tracking your own changes, and using GitHub Codespaces for the workshop.
@@ -465,9 +472,6 @@ az consumption budget list --resource-group <your-rg>
 - Implement blue-green deployment strategies
 
 **💡 Chapter Outcome**: Deploy complex multi-service applications using custom infrastructure templates
-
----
-
 ### 🎯 Chapter 5: Multi-Agent AI Solutions (Advanced)
 **Prerequisites**: Chapters 1-2 completed  
 **Duration**: 2-3 hours  
@@ -501,6 +505,7 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 **Prerequisites**: Chapter 4 completed  
 **Duration**: 1 hour  
 **Complexity**: ⭐⭐
+
 #### What You'll Learn
 - Capacity planning and resource validation
 - SKU selection strategies
@@ -658,7 +663,7 @@ Beyond the basics, AZD provides powerful features for production deployments:
 
 **Why AZD for AI Solutions?** AZD addresses the top challenges AI developers face:
 
-- **AI-Ready Templates** - Pre-configured templates for Microsoft Foundry Models, Cognitive Services, and ML workloads
+- **AI-Ready Templates** - Pre-configured templates for Microsoft Foundry Models, Azure AI Services, and ML workloads
 - **Secure AI Deployments** - Built-in security patterns for AI services, API keys, and model endpoints  
 - **Production AI Patterns** - Best practices for scalable, cost-effective AI application deployments
 - **End-to-End AI Workflows** - From model development to production deployment with proper monitoring
@@ -722,7 +727,7 @@ Beyond the basics, AZD provides powerful features for production deployments:
 - [Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - Static content deployment
 - [Container App - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - REST API deployment
 
-#### External Examples - Database Integration (Chapter 3-4)
+#### External Examples - Database Integration (Chapter 3-4)  
 - [Database App - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - Database connectivity patterns
 - [Functions + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - Serverless data workflow
 

@@ -1,58 +1,58 @@
-# AZD Temelleri - Azure Developer CLI'yi Anlamak
+# AZD Temelleri - Azure Developer CLI'yi Anlama
 
-# AZD Temelleri - Temel Kavramlar ve İlkeler
+# AZD Temelleri - Temel Kavramlar ve Temeller
 
-**Bölüm Gezintisi:**
-- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar](../../README.md)
-- **📖 Mevcut Bölüm**: Bölüm 1 - Temel & Hızlı Başlangıç
-- **⬅️ Önceki**: [Kurs Genel Bakışı](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Sonraki**: [Yükleme ve Kurulum](installation.md)
-- **🚀 Sonraki Bölüm**: [Bölüm 2: Yapay Zeka Öncelikli Geliştirme](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD Yeni Başlayanlar](../../README.md)
+- **📖 Current Chapter**: Bölüm 1 - Temel ve Hızlı Başlangıç
+- **⬅️ Previous**: [Kurs Genel Bakışı](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Next**: [Kurulum ve Ayarlar](installation.md)
+- **🚀 Next Chapter**: [Bölüm 2: Yapay Zeka-Öncelikli Geliştirme](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Giriş
 
-Bu ders, yerel geliştiricilikten Azure dağıtımına kadar yolculuğunuzu hızlandıran güçlü bir komut satırı aracı olan Azure Developer CLI (azd) ile tanıştırır. Temel kavramları, çekirdek özellikleri öğrenecek ve azd'nin bulut yerel uygulama dağıtımını nasıl basitleştirdiğini anlayacaksınız.
+Bu ders, sizi yerel geliştirmeden Azure dağıtımına hızlandıran güçlü bir komut satırı aracı olan Azure Developer CLI (azd) ile tanıştırır. Temel kavramları, ana özellikleri öğrenecek ve azd'nin buluta özgü uygulama dağıtımını nasıl basitleştirdiğini anlayacaksınız.
 
 ## Öğrenme Hedefleri
 
-Bu dersin sonunda şunları yapabileceksiniz:
-- Azure Developer CLI'nin ne olduğunu ve temel amacını anlamak
-- şablonlar, ortamlar ve servisler gibi temel kavramları öğrenmek
-- şablon odaklı geliştirme ve Kod olarak Altyapı dahil olmak üzere ana özellikleri keşfetmek
-- azd proje yapısını ve iş akışını anlamak
-- geliştirme ortamınız için azd'yi yüklemeye ve yapılandırmaya hazır olmak
+Bu dersin sonunda:
+- Azure Developer CLI'nin ne olduğunu ve birincil amacını anlayacaksınız
+- Şablonlar, ortamlar ve servisler gibi temel kavramları öğreneceksiniz
+- Şablon tabanlı geliştirme ve Kod Olarak Altyapı dahil olmak üzere ana özellikleri keşfedeceksiniz
+- azd proje yapısını ve iş akışını anlayacaksınız
+- Geliştirme ortamınız için azd'yi kurmaya ve yapılandırmaya hazır olacaksınız
 
 ## Öğrenme Çıktıları
 
 Bu dersi tamamladıktan sonra şunları yapabileceksiniz:
-- Modern bulut geliştirme iş akışlarındaki azd'nin rolünü açıklamak
+- Modern bulut geliştirme iş akışlarında azd'nin rolünü açıklamak
 - bir azd proje yapısının bileşenlerini tanımlamak
-- şablonların, ortamların ve servislerin birlikte nasıl çalıştığını tarif etmek
-- azd ile Kod olarak Altyapı'nın faydalarını anlamak
+- şablonların, ortamların ve servislerin nasıl birlikte çalıştığını açıklamak
+- azd ile Kod Olarak Altyapı'nın faydalarını anlamak
 - farklı azd komutlarını ve amaçlarını tanımak
 
-## Azure Developer CLI (azd) Nedir?
+## Azure Developer CLI (azd) nedir?
 
-Azure Developer CLI (azd), yerel geliştirmeden Azure dağıtımına kadar yolculuğunuzu hızlandırmak için tasarlanmış bir komut satırı aracıdır. Azure'da bulut yerel uygulamaları oluşturma, dağıtma ve yönetme sürecini basitleştirir.
+Azure Developer CLI (azd), yerel geliştirmeden Azure dağıtımına yolunuzu hızlandırmak için tasarlanmış bir komut satırı aracıdır. Azure'da buluta özgü uygulamaları oluşturma, dağıtma ve yönetme sürecini basitleştirir.
 
-### azd ile Neler Dağıtabilirsiniz?
+### azd ile neleri dağıtabilirsiniz?
 
-azd çok çeşitli iş yüklerini destekler—ve liste sürekli genişliyor. Bugün azd ile şu tür dağıtımları yapabilirsiniz:
+azd geniş bir iş yükü yelpazesini destekler—ve liste sürekli büyüyor. Bugün azd'yi şu türleri dağıtmak için kullanabilirsiniz:
 
 | İş Yükü Türü | Örnekler | Aynı İş Akışı? |
 |---------------|----------|----------------|
 | **Geleneksel uygulamalar** | Web uygulamaları, REST API'ler, statik siteler | ✅ `azd up` |
 | **Servisler ve mikroservisler** | Container Apps, Function Apps, çok servisli arka uçlar | ✅ `azd up` |
-| **Yapay zeka destekli uygulamalar** | Microsoft Foundry Modelleri ile sohbet uygulamaları, AI Search ile RAG çözümleri | ✅ `azd up` |
-| **Akıllı ajanlar** | Foundry barındırılan ajanlar, çoklu ajan orkestrasyonları | ✅ `azd up` |
+| **Yapay zekâ destekli uygulamalar** | Microsoft Foundry Models ile sohbet uygulamaları, AI Search ile RAG çözümleri | ✅ `azd up` |
+| **Akıllı ajanlar** | Foundry barındırmalı ajanlar, çok ajanlı orkestrasyonlar | ✅ `azd up` |
 
-Ana fikir şudur: **azd yaşam döngüsü, ne dağıttığınıza bakılmaksızın aynı kalır**. Bir projeyi başlatır, altyapıyı sağlarsınız, kodunuzu dağıtırsınız, uygulamanızı izlersiniz ve temizlersiniz—ister basit bir web sitesi ister sofistike bir AI ajan olsun.
+Temel çıkarım şudur: **ne dağıttığınızdan bağımsız olarak azd yaşam döngüsü aynı kalır**. Bir projeyi başlatırsınız, altyapıyı sağlarsınız, kodunuzu dağıtırsınız, uygulamanızı izlersiniz ve temizlersiniz—ister basit bir web sitesi ister gelişmiş bir yapay zekâ ajanı olsun.
 
-Bu süreklilik tasarım gereğidir. azd, AI yeteneklerini uygulamanızın kullanabileceği başka bir servis olarak ele alır; temelde farklı bir şey olarak değil. Microsoft Foundry Modelleri ile desteklenen bir sohbet uç noktası, azd'nin perspektifinden yapılandırılması ve dağıtılması gereken başka bir servistir.
+Bu süreklilik tasarım gereğidir. azd, yapay zekâ yeteneklerini uygulamanızın kullanabileceği başka bir hizmet türü olarak ele alır, temelde farklı bir şey olarak değil. Microsoft Foundry Models tarafından desteklenen bir sohbet uç noktası, azd açısından yapılandırılması ve dağıtılması gereken başka bir hizmettir.
 
 ### 🎯 Neden AZD Kullanmalı? Gerçek Dünya Karşılaştırması
 
-Basit bir web uygulaması ile veritabanı dağıtımını karşılaştıralım:
+Basit bir web uygulamasını veritabanı ile dağıtmayı karşılaştıralım:
 
 #### ❌ AZD OLMADAN: Manuel Azure Dağıtımı (30+ dakika)
 
@@ -102,7 +102,7 @@ az webapp config appsettings set \
   --resource-group myapp-rg \
   --settings MONGODB_URI="$CONN_STR"
 
-# Adım 9: Günlüğü etkinleştirin
+# Adım 9: Kayıtlamayı etkinleştirin
 az webapp log config --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --application-logging filesystem \
@@ -114,7 +114,7 @@ az monitor app-insights component create \
   --location eastus \
   --resource-group myapp-rg
 
-# Adım 11: Application Insights'ı Web uygulamasına bağlayın
+# Adım 11: App Insights'ı Web uygulamasına bağlayın
 INSTRUMENTATION_KEY=$(az monitor app-insights component show \
   --app myapp-insights \
   --resource-group myapp-rg \
@@ -139,51 +139,51 @@ az webapp deployment source config-zip \
   --src app.zip
 
 # Adım 15: Bekleyin ve çalışması için dua edin 🙏
-# (Otomatik doğrulama yok, manuel test gereklidir)
+# (Otomatik doğrulama yok, manuel test gerekli)
 ```
 
 **Sorunlar:**
-- ❌ Hatırlanması ve sırayla yürütülmesi gereken 15+ komut
-- ❌ 30-45 dakika süren manuel çalışma
+- ❌ 15+ komutu hatırlayıp sırayla çalıştırma gereksinimi
+- ❌ 30-45 dakika manuel çalışma
 - ❌ Hatalar yapmak kolay (yazım hataları, yanlış parametreler)
-- ❌ Bağlantı dizeleri terminal geçmişinde ortaya çıkabilir
-- ❌ Bir şey ters giderse otomatik geri alma yok
-- ❌ Ekip üyeleri için kopyalanması zor
-- ❌ Her seferinde farklı (yeniden üretilebilir değil)
+- ❌ Bağlantı dizeleri terminal geçmişinde görünür
+- ❌ Bir şey başarısız olursa otomatik geri alma yok
+- ❌ Ekip üyeleri için çoğaltması zor
+- ❌ Her seferinde farklı (tekrarlanamaz)
 
 #### ✅ AZD İLE: Otomatik Dağıtım (5 komut, 10-15 dakika)
 
 ```bash
-# Adım 1: Şablondan başlat
+# Adım 1: Şablondan başlatın
 azd init --template todo-nodejs-mongo
 
-# Adım 2: Kimlik doğrula
+# Adım 2: Kimlik doğrulayın
 azd auth login
 
-# Adım 3: Ortam oluştur
+# Adım 3: Ortam oluşturun
 azd env new dev
 
-# Adım 4: Değişiklikleri önizle (isteğe bağlı ama önerilir)
+# Adım 4: Değişiklikleri önizleyin (isteğe bağlı ama önerilir)
 azd provision --preview
 
-# Adım 5: Her şeyi dağıt
+# Adım 5: Her şeyi dağıtın
 azd up
 
-# ✨ Tamam! Her şey dağıtıldı, yapılandırıldı ve izleniyor
+# ✨ Tamamlandı! Her şey dağıtıldı, yapılandırıldı ve izleniyor
 ```
 
-**Faydalar:**
+**Yararları:**
 - ✅ **5 komut** vs. 15+ manuel adım
-- ✅ **10-15 dakika** toplam süre (çoğunlukla Azure bekleme süresi)
-- ✅ **Daha az manuel hata** - tutarlı, şablon odaklı iş akışı
-- ✅ **Güvenli gizli yönetimi** - birçok şablon Azure tarafından yönetilen gizli depolamayı kullanır
+- ✅ **10-15 dakika** toplam süre (çoğunlukla Azure beklemesi)
+- ✅ **Daha az manuel hata** - tutarlı, şablon tabanlı iş akışı
+- ✅ **Güvenli gizli yönetimi** - birçok şablon Azure tarafından yönetilen gizli depolama kullanır
 - ✅ **Tekrarlanabilir dağıtımlar** - her seferinde aynı iş akışı
 - ✅ **Tamamen yeniden üretilebilir** - her seferinde aynı sonuç
-- ✅ **Ekip hazır** - herkes aynı komutlarla dağıtım yapabilir
-- ✅ **Kod olarak Altyapı** - sürüm kontrolü altında Bicep şablonları
+- ✅ **Ekip hazır** - herhangi birisi aynı komutlarla dağıtım yapabilir
+- ✅ **Kod Olarak Altyapı** - sürüm kontrollü Bicep şablonları
 - ✅ **Yerleşik izleme** - Application Insights otomatik olarak yapılandırılır
 
-### 📊 Zaman ve Hata Azaltma
+### 📊 Zaman ve Hata Azaltımı
 
 | Metrik | Manuel Dağıtım | AZD Dağıtımı | İyileşme |
 |:-------|:------------------|:---------------|:------------|
@@ -191,25 +191,25 @@ azd up
 | **Süre** | 30-45 dk | 10-15 dk | %60 daha hızlı |
 | **Hata Oranı** | ~%40 | <%5 | %88 azalma |
 | **Tutarlılık** | Düşük (manuel) | %100 (otomatik) | Mükemmel |
-| **Ekip Katılımı** | 2-4 saat | 30 dakika | %75 daha hızlı |
+| **Ekip İçin Başlangıç Süresi** | 2-4 saat | 30 dakika | %75 daha hızlı |
 | **Geri Alma Süresi** | 30+ dk (manuel) | 2 dk (otomatik) | %93 daha hızlı |
 
 ## Temel Kavramlar
 
 ### Şablonlar
-Şablonlar azd'nin temelidir. Bunlar şunları içerir:
+Şablonlar azd'nin temelini oluşturur. İçerikleri:
 - **Uygulama kodu** - Kaynak kodunuz ve bağımlılıklarınız
-- **Altyapı tanımları** - Bicep veya Terraform ile tanımlanmış Azure kaynakları
+- **Altyapı tanımları** - Bicep veya Terraform ile tanımlanan Azure kaynakları
 - **Yapılandırma dosyaları** - Ayarlar ve ortam değişkenleri
-- **Dağıtım betikleri** - Otomatikleştirilmiş dağıtım iş akışları
+- **Dağıtım betikleri** - Otomatik dağıtım iş akışları
 
 ### Ortamlar
 Ortamlar farklı dağıtım hedeflerini temsil eder:
 - **Development** - Test ve geliştirme için
-- **Staging** - Üretim öncesi ortam
+- **Staging** - Üretime geçmeden önceki ortam
 - **Production** - Canlı üretim ortamı
 
-Her ortam kendi şunları korur:
+Her ortam kendi aşağıdakileri yönetir:
 - Azure kaynak grubu
 - Yapılandırma ayarları
 - Dağıtım durumu
@@ -223,7 +223,7 @@ Servisler uygulamanızın yapı taşlarıdır:
 
 ## Temel Özellikler
 
-### 1. Şablon Odaklı Geliştirme
+### 1. Şablon Tabanlı Geliştirme
 ```bash
 # Mevcut şablonlara göz at
 azd template list
@@ -233,33 +233,33 @@ azd init --template <template-name>
 ```
 
 ### 2. Kod Olarak Altyapı
-- **Bicep** - Azure'ın alan özel dili
+- **Bicep** - Azure'ın alanına özel dili
 - **Terraform** - Çoklu bulut altyapı aracı
 - **ARM Templates** - Azure Resource Manager şablonları
 
 ### 3. Entegre İş Akışları
 ```bash
 # Tam dağıtım iş akışı
-azd up            # Kaynak sağlama + Dağıtım, ilk kurulum için elle müdahale gerektirmez
+azd up            # Kaynak sağlama + Dağıtım: ilk kurulum için müdahalesiz
 
 # 🧪 YENİ: Dağıtımdan önce altyapı değişikliklerini önizleyin (GÜVENLİ)
 azd provision --preview    # Değişiklik yapmadan altyapı dağıtımını simüle edin
 
-azd provision     # Altyapıyı güncellerseniz Azure kaynaklarını oluşturmak için bunu kullanın
-azd deploy        # Uygulama kodunu dağıtın veya güncelleme sonrasında yeniden dağıtın
-azd down          # Kaynakları temizleyin
+azd provision     # Azure kaynakları oluşturun; altyapıyı güncellerseniz bunu kullanın
+azd deploy        # Uygulama kodunu dağıtın veya güncelleme sonrası yeniden dağıtın
+azd down          # Kaynakları temizle
 ```
 
-#### 🛡️ Önizlemeyle Güvenli Altyapı Planlaması
-`azd provision --preview` komutu güvenli dağıtımlar için oyunu değiştirir:
-- **Kuru çalıştırma analizi** - Ne oluşturulacağını, değiştirileceğini veya silineceğini gösterir
-- **Sıfır risk** - Azure ortamınız üzerinde gerçek değişiklikler yapılmaz
-- **Ekip iş birliği** - Dağıtımdan önce önizleme sonuçlarını paylaşın
-- **Maliyet tahmini** - Taahhüt öncesi kaynak maliyetlerini anlayın
+#### 🛡️ Önizleme ile Güvenli Altyapı Planlama
+`azd provision --preview` komutu güvenli dağıtımlar için iş akışını değiştirir:
+- **Kuru çalıştırma analizi** - Nelerin oluşturulacağını, değiştirileceğini veya silineceğini gösterir
+- **Sıfır risk** - Azure ortamınızda gerçek değişiklik yapılmaz
+- **Ekip işbirliği** - Dağıtımdan önce önizleme sonuçlarını paylaşın
+- **Maliyet tahmini** - Taahhütte bulunmadan önce kaynak maliyetlerini anlayın
 
 ```bash
 # Örnek önizleme iş akışı
-azd provision --preview           # Nelerin değişeceğini görün
+azd provision --preview           # Ne değişeceğini görün
 # Çıktıyı gözden geçirin, ekiple tartışın
 azd provision                     # Değişiklikleri güvenle uygulayın
 ```
@@ -273,11 +273,11 @@ graph LR
     C -->|Ortam oluştur| D{İlk dağıtım mı?}
     D -->|Evet| E[azd up]
     D -->|Hayır| F[azd provision --preview]
-    F -->|Değişiklikleri gözden geçir| G[azd provision]
+    F -->|Değişiklikleri incele| G[azd provision]
     E -->|Hazırlar ve dağıtır| H[Kaynaklar çalışıyor]
     G -->|Altyapıyı günceller| H
     H -->|İzle| I[azd monitor]
-    I -->|Kod değişiklikleri yap| J[azd deploy]
+    I -->|Kodda değişiklik yap| J[azd deploy]
     J -->|Sadece kodu yeniden dağıt| H
     H -->|Temizle| K[azd down]
     
@@ -287,14 +287,15 @@ graph LR
     style H fill:#c5e1a5
     style K fill:#ffcdd2
 ```
+
 **İş Akışı Açıklaması:**
-1. **Init** - Şablon veya yeni projeyle başlatın
-2. **Auth** - Azure ile kimlik doğrulaması yapın
+1. **Init** - Şablon veya yeni proje ile başlatın
+2. **Auth** - Azure ile kimlik doğrulayın
 3. **Environment** - İzole bir dağıtım ortamı oluşturun
-4. **Preview** - 🆕 Altyapı değişikliklerini her zaman önce önizleyin (güvenli uygulama)
+4. **Preview** - 🆕 İlk olarak her zaman altyapı değişikliklerini önizleyin (güvenli uygulama)
 5. **Provision** - Azure kaynaklarını oluştur/güncelle
 6. **Deploy** - Uygulama kodunuzu gönderin
-7. **Monitor** - Uygulama performansını izleyin
+7. **Monitor** - Uygulama performansını gözlemleyin
 8. **Iterate** - Değişiklik yapın ve kodu yeniden dağıtın
 9. **Cleanup** - İşiniz bittiğinde kaynakları kaldırın
 
@@ -308,23 +309,37 @@ azd env list
 
 ### 5. Eklentiler ve Yapay Zeka Komutları
 
-azd, çekirdek CLI'nin ötesinde yetenekler eklemek için bir eklenti sistemi kullanır. Bu, özellikle AI iş yükleri için faydalıdır:
+azd, çekirdek CLI'nin ötesinde yetenekler eklemek için bir eklenti sistemi kullanır. Bu, özellikle yapay zekâ iş yükleri için kullanışlıdır:
 
 ```bash
-# Mevcut eklentileri listele
+# Kullanılabilir uzantıları listele
 azd extension list
 
-# Foundry ajanları eklentisini yükle
+# Foundry agents uzantısını yükle
 azd extension install azure.ai.agents
 
 # Bir manifestten bir yapay zeka ajanı projesi başlat
 azd ai agent init -m agent-manifest.yaml
 
+# Dağıtılmış bir ajanı test et (gecikme ve ilk bayta ulaşma süresini gösterir)
+azd ai agent invoke
+
 # Yapay zeka destekli geliştirme için MCP sunucusunu başlat (Alfa)
 azd mcp start
 ```
 
-> Eklentiler, [Bölüm 2: Yapay Zeka Öncelikli Geliştirme](../chapter-02-ai-development/agents.md) ve [AZD AI CLI Komutları](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) referansında ayrıntılı olarak ele alınmıştır.
+**Ajan yaşam döngüsü, baştan sona.** `azure.ai.agents` paketini yükledikten sonra tek bir iş akışı sizi fikrinizden çalışan, izlenen bir ajana taşır. İlk günden bunların hepsine ihtiyacınız yok—sadece var olduklarını bilin:
+
+| Aşama | Komut | Ne yapar |
+|-------|---------|--------------|
+| **İskele oluşturma** | `azd ai agent init -m <manifest>` | Bir manifestten ajan projesi oluşturur |
+| **Test** | `azd ai agent invoke` | Ajanı çağırır ve yanıt zamanlamasını görüntüler |
+| **Ölçme** | `azd ai agent eval generate` | Ajan için bir değerlendirme veri seti oluşturur |
+| **İyileştir** | `azd ai agent optimize` | Ajan talimatlarını verileriniz doğrultusunda optimize eder |
+| **İncele** | `azd ai agent endpoint show` | Canlı uç nokta yapılandırmasını gösterir |
+| **Temizle** | `azd ai agent delete` | Barındırılan bir ajanı ve tüm sürümlerini siler |
+
+> Eklentiler ayrıntılı olarak [Bölüm 2: Yapay Zeka-Öncelikli Geliştirme](../chapter-02-ai-development/agents.md) ve [AZD AI CLI Komutları](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) referansında ele alınır.
 
 ## 📁 Proje Yapısı
 
@@ -374,7 +389,7 @@ hooks:
 ```
 
 ### .azure/config.json
-Ortam özel yapılandırması:
+Ortamlara özgü yapılandırma:
 ```json
 {
   "version": 1,
@@ -388,21 +403,21 @@ Ortam özel yapılandırması:
 }
 ```
 
-## 🎪 Yaygın İş Akışları ve Uygulamalı Egzersizler
+## 🎪 Uygulamalı Alıştırmalarla Ortak İş Akışları
 
-> **💡 Öğrenme İpucu:** Bu egzersizleri sırasıyla takip ederek AZD becerilerinizi kademeli olarak geliştirin.
+> **💡 Öğrenme İpucu:** AZD becerilerinizi kademeli olarak geliştirmek için bu alıştırmaları sırasıyla uygulayın.
 
 ### 🎯 Alıştırma 1: İlk Projenizi Başlatın
 
-**Amaç:** Bir AZD projesi oluşturup yapısını keşfetmek
+**Amaç:** Bir AZD projesi oluşturmak ve yapısını keşfetmek
 
 **Adımlar:**
 ```bash
-# Kanıtlanmış bir şablon kullanın
+# Kanıtlanmış bir şablon kullan
 azd init --template todo-nodejs-mongo
 
-# Oluşturulan dosyaları keşfedin
-ls -la  # Gizli dosyalar da dahil olmak üzere tüm dosyaları görüntüleyin
+# Oluşturulan dosyaları inceleyin
+ls -la  # Gizli olanlar da dahil olmak üzere tüm dosyaları görüntüleyin
 
 # Oluşturulan ana dosyalar:
 # - azure.yaml (ana yapılandırma)
@@ -414,27 +429,27 @@ ls -la  # Gizli dosyalar da dahil olmak üzere tüm dosyaları görüntüleyin
 
 ---
 
-### 🎯 Alıştırma 2: Azure'a Dağıtım
+### 🎯 Alıştırma 2: Azure'a Dağıtım Yapın
 
 **Amaç:** Uçtan uca dağıtımı tamamlamak
 
 **Adımlar:**
 ```bash
-# 1. Kimlik doğrula
+# 1. Kimlik doğrulayın
 az login && azd auth login
 
-# 2. Ortam oluştur
+# 2. Ortam oluşturun
 azd env new dev
 azd env set AZURE_LOCATION eastus
 
-# 3. Değişiklikleri önizle (TAVSİYE EDİLİR)
+# 3. Değişiklikleri önizleyin (TAVSİYE EDİLİR)
 azd provision --preview
 
-# 4. Her şeyi dağıt
+# 4. Her şeyi dağıtın
 azd up
 
-# 5. Dağıtımı doğrula
-azd show    # Uygulamanızın URL'sini görüntüle
+# 5. Dağıtımı doğrulayın
+azd show    # Uygulamanızın URL'sini görüntüleyin
 ```
 
 **Beklenen Süre:** 10-15 dakika  
@@ -442,13 +457,13 @@ azd show    # Uygulamanızın URL'sini görüntüle
 
 ---
 
-### 🎯 Alıştırma 3: Birden Fazla Ortam
+### 🎯 Alıştırma 3: Çoklu Ortamlar
 
-**Amaç:** dev ve staging ortamlarına dağıtım yapmak
+**Amaç:** dev ve staging'e dağıtım yapmak
 
 **Adımlar:**
 ```bash
-# Dev zaten var, staging oluştur
+# Zaten dev var, staging oluştur
 azd env new staging
 azd env set AZURE_LOCATION westus2
 azd up
@@ -476,8 +491,8 @@ azd down --force --purge
 
 **Kullanım durumları:**
 - Dağıtım yarıda başarısız olduysa
-- Projeler arası geçiş yapılıyorsa
-- Temiz bir başlangıca ihtiyaç duyuluyorsa
+- Projeler arasında geçiş yapıyorsanız
+- Temiz bir başlangıca ihtiyacınız varsa
 
 ---
 
@@ -497,44 +512,44 @@ azd init .
 
 ### Geliştirme Döngüsü
 ```bash
-# Geliştirme ortamını kurun
+# Geliştirme ortamını kur
 azd auth login
 azd env new dev
 azd env select dev
 
-# Her şeyi dağıtın
+# Her şeyi dağıt
 azd up
 
-# Değişiklik yapın ve yeniden dağıtın
+# Değişiklik yap ve yeniden dağıt
 azd deploy
 
-# İşiniz bittiğinde temizleyin
-azd down --force --purge # Azure Developer CLI'deki komut, ortamınız için bir **tam sıfırlamadır**—özellikle başarısız dağıtımları giderirken, sahipsiz kaynakları temizlerken veya temiz bir yeniden dağıtım için hazırlık yaparken kullanışlıdır.
+# İşin bittiğinde temizle
+azd down --force --purge # Azure Developer CLI'deki komut, ortamınız için bir **sert sıfırlamadır**—özellikle başarısız dağıtımları giderirken, sahipsiz kaynakları temizlerken veya temiz bir yeniden dağıtıma hazırlanırken faydalıdır.
 ```
 
-## `azd down --force --purge` Komutunu Anlamak
-`azd down --force --purge` komutu, azd ortamınızı ve ilişkili tüm kaynakları tamamen kaldırmak için güçlü bir yoldur. Her bayrağın ne yaptığını aşağıda bulabilirsiniz:
+## `azd down --force --purge` Komutunu Anlama
+`azd down --force --purge` komutu, azd ortamınızı ve ilişkili tüm kaynakları tamamen kaldırmak için güçlü bir yoldur. Her bayrağın ne yaptığının dökümü aşağıdadır:
 ```
 --force
 ```
 - Onay istemlerini atlar.
-- Otomasyon veya betikleme için, manuel girişin mümkün olmadığı durumlarda kullanışlıdır.
-- CLI tutarsızlıkları algılasa bile, temizleme işleminin kesintisiz ilerlemesini sağlar.
+- Elle girişin mümkün olmadığı otomasyon veya betiklerde kullanışlıdır.
+- CLI tutarsızlıklar algılasa bile temizleme işleminin kesintisiz ilerlemesini sağlar.
 
 ```
 --purge
 ```
-Tüm ilişkili **meta verilerini** siler, bunlar arasında:
+**Tüm ilişkili meta verileri** siler, bunlar şunları içerir:
 Ortam durumu
 Yerel `.azure` klasörü
-Önbelleğe alınmış dağıtım bilgileri
-azd'nin önceki dağıtımları "hatırlamasını" engeller; bu, eşleşmeyen kaynak grupları veya eski kayıt defteri referansları gibi sorunlara yol açabilir.
+Önbelleğe alınmış dağıtım bilgisi
+azd'nin önceki dağıtımları "hatırlamasını" engeller; bu, eşleşmeyen kaynak grupları veya güncel olmayan kayıt defteri referansları gibi sorunlara yol açabilir.
 
 
-### Neden her ikisini kullanmalı?
-`azd up` komutuyla kalıcı durum veya kısmi dağıtımlar nedeniyle sorun yaşadığınızda, bu kombinasyon **temiz bir başlangıç** sağlar.
+### Neden her ikisini birlikte kullanmalı?
+`azd up` ile artık bir duvara çarptığınızda, kalan durum veya kısmi dağıtımlar yüzünden bu kombinasyon **temiz bir başlangıç** sağlar.
 
-Azure portalında manuel kaynak silme sonrası veya şablonlar, ortamlar ya da kaynak grubu adlandırma kurallarını değiştirirken özellikle yardımcı olur.
+Azure portalında manuel kaynak silmelerinden sonra veya şablonları, ortamları veya kaynak grubu adlandırma kurallarını değiştirirken özellikle faydalıdır.
 
 
 ### Birden Fazla Ortamı Yönetme
@@ -553,7 +568,7 @@ azd env list
 
 ## 🔐 Kimlik Doğrulama ve Kimlik Bilgileri
 
-Kimlik doğrulamayı anlamak, başarılı azd dağıtımları için çok önemlidir. Azure birden çok kimlik doğrulama yöntemi kullanır ve azd, diğer Azure araçlarının kullandığı aynı kimlik bilgisi zincirinden yararlanır.
+Kimlik doğrulamayı anlamak, başarılı azd dağıtımları için çok önemlidir. Azure birden fazla kimlik doğrulama yöntemi kullanır ve azd diğer Azure araçları tarafından kullanılan aynı kimlik zincirinden yararlanır.
 
 ### Azure CLI Kimlik Doğrulama (`az login`)
 
@@ -566,10 +581,10 @@ az login
 # Belirli bir kiracı ile oturum açma
 az login --tenant <tenant-id>
 
-# Hizmet kimliği ile oturum açma
+# Hizmet sorumlusu ile oturum açma
 az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
 
-# Mevcut oturum açma durumunu kontrol et
+# Mevcut oturum durumunu kontrol et
 az account show
 
 # Kullanılabilir abonelikleri listele
@@ -583,13 +598,13 @@ az account set --subscription <subscription-id>
 1. **Etkileşimli Giriş**: Kimlik doğrulama için varsayılan tarayıcınızı açar
 2. **Cihaz Kodu Akışı**: Tarayıcı erişimi olmayan ortamlar için
 3. **Servis Prensibi**: Otomasyon ve CI/CD senaryoları için
-4. **Yönetilen Kimlik**: Azure'da barındırılan uygulamalar için
+4. **Managed Identity**: Azure barındırmalı uygulamalar için
 
 ### DefaultAzureCredential Zinciri
 
-`DefaultAzureCredential`, belirli bir sırayla birden çok kimlik bilgisi kaynağını otomatik olarak deneyerek basitleştirilmiş bir kimlik doğrulama deneyimi sağlayan bir kimlik bilgisi türüdür:
+`DefaultAzureCredential`, belirli bir sırada otomatik olarak birden çok kimlik kaynağını deneyerek basitleştirilmiş bir kimlik deneyimi sağlayan bir kimlik türüdür:
 
-#### Kimlik Bilgisi Zinciri Sıralaması
+#### Kimlik Bilgisi Zinciri Sırası
 ```mermaid
 graph TD
     A[Varsayılan Azure Kimlik Bilgisi] --> B[Ortam Değişkenleri]
@@ -597,41 +612,42 @@ graph TD
     C --> D[Yönetilen Kimlik]
     D --> E[Visual Studio]
     E --> F[Visual Studio Code]
-    F --> G[Azure Komut Satırı (CLI)]
+    F --> G[Azure CLI]
     G --> H[Azure PowerShell]
-    H --> I[İnteraktif Tarayıcı]
+    H --> I[Etkileşimli Tarayıcı]
 ```
+
 #### 1. Ortam Değişkenleri
 ```bash
-# Servis ana kimliği için ortam değişkenlerini ayarla
+# Servis kimliği için ortam değişkenlerini ayarla
 export AZURE_CLIENT_ID="<app-id>"
 export AZURE_CLIENT_SECRET="<password>"
 export AZURE_TENANT_ID="<tenant-id>"
 ```
 
-#### 2. Workload Identity (Kubernetes/GitHub Actions)
-Otomatik olarak kullanıldığı yerler:
-- Azure Kubernetes Service (AKS) üzerinde Workload Identity ile
-- GitHub Actions'ta OIDC federasyonu ile
+#### 2. İş Yükü Kimliği (Kubernetes/GitHub Actions)
+Otomatik olarak kullanılır:
+- Workload Identity ile Azure Kubernetes Service (AKS)
+- OIDC federasyonu ile GitHub Actions
 - Diğer federasyonlu kimlik senaryoları
 
 #### 3. Yönetilen Kimlik
 Aşağıdaki Azure kaynakları için:
-- Sanal Makineler
+- Virtual Machines
 - App Service
 - Azure Functions
 - Container Instances
 
 ```bash
-# Yönetilen kimlik ile bir Azure kaynağında çalışıp çalışmadığını kontrol et
+# Yönetilen kimlikle Azure kaynağında çalışıp çalışmadığını kontrol et
 az account show --query "user.type" --output tsv
 # Döndürür: "servicePrincipal" eğer yönetilen kimlik kullanılıyorsa
 ```
 
 #### 4. Geliştirici Araçları Entegrasyonu
 - **Visual Studio**: Otomatik olarak oturum açmış hesabı kullanır
-- **VS Code**: Azure Account eklentisi kimlik bilgilerini kullanır
-- **Azure CLI**: `az login` kimlik bilgilerini kullanır (yerel geliştirme için en yaygın)
+- **VS Code**: Azure Account uzantısı kimlik bilgilerini kullanır
+- **Azure CLI**: `az login` kimlik bilgilerini kullanır (yerel geliştirme için en yaygın olan)
 
 ### AZD Kimlik Doğrulama Kurulumu
 
@@ -641,12 +657,12 @@ az login
 azd auth login  # Mevcut Azure CLI kimlik bilgilerini kullanır
 
 # Yöntem 2: Doğrudan azd kimlik doğrulaması
-azd auth login --use-device-code  # Başsız ortamlar için
+azd auth login --use-device-code  # Başsız ortamlarda
 
-# Yöntem 3: Kimlik doğrulama durumunu kontrol edin
+# Yöntem 3: Kimlik doğrulama durumunu kontrol et
 azd auth login --check-status
 
-# Yöntem 4: Oturumdan çıkın ve yeniden kimlik doğrulayın
+# Yöntem 4: Oturumu kapat ve yeniden kimlik doğrula
 azd auth logout
 azd auth login
 ```
@@ -662,11 +678,11 @@ az login
 az account show
 az account set --subscription "Your Subscription Name"
 
-# 3. Mevcut kimlik bilgileriyle azd kullanın
+# 3. Mevcut kimlik bilgileriyle azd'yi kullanın
 azd auth login
 ```
 
-#### CI/CD Boru Hatları
+#### CI/CD Boru Hatları için
 ```yaml
 # GitHub Actions example
 - name: Azure Login
@@ -683,10 +699,10 @@ azd auth login
 ```
 
 #### Üretim Ortamları için
-- Azure kaynaklarında çalıştırırken **Managed Identity** kullanın
-- Otomasyon senaryoları için **Service Principal** kullanın
+- **Yönetilen Kimlik** kullanın (Azure kaynaklarında çalışırken)
+- Otomasyon senaryoları için **Servis Prensibi** kullanın
 - Kimlik bilgilerini kodda veya yapılandırma dosyalarında saklamaktan kaçının
-- Hassas yapılandırma için **Azure Key Vault** kullanın
+- Hassas yapılandırmalar için **Azure Key Vault** kullanın
 
 ### Yaygın Kimlik Doğrulama Sorunları ve Çözümleri
 
@@ -703,14 +719,14 @@ azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 # Çözüm: Gerekli rolleri kontrol edin ve atayın
 az role assignment list --assignee $(az account show --query user.name --output tsv)
 
-# Yaygın gerekli roller:
+# Yaygın olarak gerekli roller:
 # - Contributor (kaynak yönetimi için)
 # - User Access Administrator (rol atamaları için)
 ```
 
 #### Sorun: "Token expired"
 ```bash
-# Çözüm: Yeniden kimlik doğrulayın
+# Çözüm: Yeniden kimlik doğrulama
 az logout
 az login
 azd auth logout
@@ -728,12 +744,12 @@ azd auth login
 
 #### Ekip Geliştirme
 ```bash
-# Kuruluş için belirli bir kiracı kullanın
+# Organizasyon için belirli bir kiracı kullanın
 az login --tenant contoso.onmicrosoft.com
 azd auth login
 ```
 
-#### Çok kiracılı Senaryolar
+#### Çok kiracılı senaryolar
 ```bash
 # Kiracılar arasında geçiş yap
 az login --tenant tenant1.onmicrosoft.com
@@ -746,27 +762,28 @@ azd up
 ```
 
 ### Güvenlik Hususları
-1. **Kimlik Bilgileri Depolama**: Kimlik bilgilerini kaynak kodda asla saklamayın
-2. **Kapsam Sınırlaması**: Servis ilkeleri için en az ayrıcalık ilkesini kullanın
-3. **Jeton Yenileme**: Servis ilkesi gizli anahtarlarını düzenli olarak değiştirin
+
+1. **Kimlik Bilgisi Depolama**: Kimlik bilgilerini asla kaynak kodunda saklamayın
+2. **Kapsam Sınırlandırması**: Servis prensipleri için en az ayrıcalık ilkesini kullanın
+3. **Jeton Döndürme**: Servis prensibi sırlarını düzenli olarak değiştirin
 4. **Denetim Kaydı**: Kimlik doğrulama ve dağıtım etkinliklerini izleyin
-5. **Ağ Güvenliği**: Mümkün olduğunda özel uç noktalar kullanın
+5. **Ağ Güvenliği**: Mümkünse özel uç noktalar kullanın
 
 ### Kimlik Doğrulama Sorun Giderme
 
 ```bash
-# Kimlik doğrulama hatalarını ayıkla
+# Kimlik doğrulama sorunlarını ayıkla
 azd auth login --check-status
 az account show
 az account get-access-token
 
-# Yaygın tanılama komutları
+# Yaygın teşhis komutları
 whoami                          # Mevcut kullanıcı bağlamı
-az ad signed-in-user show      # Azure AD kullanıcı ayrıntıları
+az ad signed-in-user show      # Microsoft Entra ID kullanıcı ayrıntıları
 az group list                  # Kaynak erişimini test et
 ```
 
-## `azd down --force --purge` Komutunu Anlama
+## `azd down --force --purge` Komutunu Anlamak
 
 ### Keşif
 ```bash
@@ -778,13 +795,13 @@ azd init --help               # Başlatma seçenekleri
 ### Proje Yönetimi
 ```bash
 azd show                     # Proje genel bakışı
-azd env list                # Mevcut ortamlar ve seçili varsayılan
+azd env list                # Kullanılabilir ortamlar ve seçili varsayılan
 azd config show            # Yapılandırma ayarları
 ```
 
 ### İzleme
 ```bash
-azd monitor                  # Azure Portal izleme sayfasını aç
+azd monitor                  # Azure portal izleme sayfasını aç
 azd monitor --logs           # Uygulama günlüklerini görüntüle
 azd monitor --live           # Canlı metrikleri görüntüle
 azd pipeline config          # CI/CD'yi kur
@@ -798,25 +815,25 @@ azd pipeline config          # CI/CD'yi kur
 azd env new production-east
 azd init --template web-app-secure
 
-# Kaçın
+# Kaçının
 azd env new env1
 azd init --template template1
 ```
 
-### 2. Şablonlardan Yararlanın
+### 2. Şablonlardan Yararlanma
 - Mevcut şablonlarla başlayın
 - İhtiyaçlarınıza göre özelleştirin
-- Kurumunuz için yeniden kullanılabilir şablonlar oluşturun
+- Kuruluşunuz için yeniden kullanılabilir şablonlar oluşturun
 
 ### 3. Ortam İzolasyonu
-- dev/staging/prod için ayrı ortamlar kullanın
-- Yerel makineden doğrudan üretime dağıtım yapmayın
+- Geliştirme/test/üretim için ayrı ortamlar kullanın
+- Yerel makineden doğrudan üretime asla dağıtım yapmayın
 - Üretim dağıtımları için CI/CD boru hatları kullanın
 
 ### 4. Yapılandırma Yönetimi
 - Hassas veriler için ortam değişkenleri kullanın
 - Yapılandırmayı sürüm kontrolünde tutun
-- Ortama özgü ayarları belgelendirin
+- Ortama özel ayarları belgeleyin
 
 ## Öğrenme İlerlemesi
 
@@ -826,31 +843,31 @@ azd init --template template1
 3. Proje yapısını anlayın
 4. Temel komutları öğrenin (up, down, deploy)
 
-### Orta Düzey (3-4. Hafta)
+### Orta (3-4. Hafta)
 1. Şablonları özelleştirin
-2. Birden fazla ortamı yönetin
+2. Birden çok ortamı yönetin
 3. Altyapı kodunu anlayın
 4. CI/CD boru hatları kurun
 
-### İleri Düzey (5+ Hafta)
+### İleri (5+ Hafta)
 1. Özel şablonlar oluşturun
-2. İleri altyapı desenleri
-3. Çok bölgeli dağıtımlar
+2. İleri düzey altyapı desenleri
+3. Çok bölgelere dağıtımlar
 4. Kurumsal düzeyde yapılandırmalar
 
 ## Sonraki Adımlar
 
 **📖 Bölüm 1 Öğrenimine Devam:**
-- [Kurulum ve Yapılandırma](installation.md) - azd'nin kurulmasını ve yapılandırılmasını sağlayın
-- [İlk Projeniz](first-project.md) - Uygulamalı eğitimi tamamlayın
-- [Yapılandırma Kılavuzu](configuration.md) - İleri yapılandırma seçenekleri
+- [Kurulum ve Ayarlar](installation.md) - azd'i yükleyin ve yapılandırın
+- [İlk Projeniz](first-project.md) - Uygulamalı öğretici tamamlayın
+- [Yapılandırma Kılavuzu](configuration.md) - İleri düzey yapılandırma seçenekleri
 
-**🎯 Sonraki Bölüme Hazır mısınız?**
-- [Bölüm 2: AI-Öncelikli Geliştirme](../chapter-02-ai-development/microsoft-foundry-integration.md) - AI uygulamaları geliştirmeye başlayın
+**🎯 Bir Sonraki Bölüme Hazır Mısınız?**
+- [Bölüm 2: Yapay Zekâ Odaklı Geliştirme](../chapter-02-ai-development/microsoft-foundry-integration.md) - Yapay zeka uygulamaları oluşturmaya başlayın
 
 ## Ek Kaynaklar
 
-- [Azure Developer CLI Genel Bakış](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Azure Developer CLI Genel Bakışı](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Şablon Galerisi](https://azure.github.io/awesome-azd/)
 - [Topluluk Örnekleri](https://github.com/Azure-Samples)
 
@@ -860,82 +877,83 @@ azd init --template template1
 
 ### Genel Sorular
 
-**S: AZD ile Azure CLI arasındaki fark nedir?**
+**Q: AZD ile Azure CLI arasındaki fark nedir?**
 
-C: Azure CLI (`az`) tekil Azure kaynaklarını yönetmek içindir. AZD (`azd`) ise tüm uygulamaları yönetmek içindir:
+A: Azure CLI (`az`) bireysel Azure kaynaklarını yönetmek içindir. AZD (`azd`) tüm uygulamaları yönetmek içindir:
 
 ```bash
 # Azure CLI - Düşük seviyeli kaynak yönetimi
 az webapp create --name myapp --resource-group rg
 az sql server create --name myserver --resource-group rg
-# ...daha birçok komut gerekiyor
+# ...çok daha fazla komut gerekiyor
 
 # AZD - Uygulama düzeyinde yönetim
-azd up  # Uygulamayı tüm kaynaklarıyla birlikte dağıtır
+azd up  # Tüm kaynaklarıyla birlikte tüm uygulamayı dağıtır
 ```
 
-**Bunu şöyle düşünebilirsiniz:**
-- `az` = Bireysel Lego tuğlaları üzerinde işlem yapmak
-- `azd` = Tam Lego setleri ile çalışmak
+**Bunu şöyle düşünün:**
+- `az` = Bireysel Lego tuğlalarıyla çalışmak
+- `azd` = Tam Lego setleriyle çalışmak
 
 ---
 
-**S: AZD'yi kullanmak için Bicep veya Terraform bilmem gerekiyor mu?**
+**Q: AZD'yi kullanmak için Bicep veya Terraform bilmem gerekiyor mu?**
 
-C: Hayır! Şablonlarla başlayın:
+A: Hayır! Şablonlarla başlayın:
 ```bash
-# Mevcut şablonu kullanın - IaC bilgisine gerek yok
+# Mevcut şablonu kullan - IaC bilgisi gerekmez.
 azd init --template todo-nodejs-mongo
 azd up
 ```
 
-Altyapıyı özelleştirmek için Bicep'i sonradan öğrenebilirsiniz. Şablonlar öğrenmek için çalışan örnekler sağlar.
+Altyapıyı özelleştirmek için Bicep'i daha sonra öğrenebilirsiniz. Şablonlar öğrenmek için çalışan örnekler sağlar.
 
 ---
 
-**S: AZD şablonlarını çalıştırmanın maliyeti ne kadar?**
+**Q: AZD şablonlarını çalıştırmak ne kadar tutar?**
 
-C: Maliyet şablona göre değişir. Çoğu geliştirme şablonu aylık $50-150 tutarındadır:
+A: Maliyetler şablona göre değişir. Çoğu geliştirme şablonu aylık 50-150$ arasındadır:
 
 ```bash
-# Dağıtımdan önce maliyetleri önizle
+# Dağıtım yapmadan önce maliyetleri önizleyin
 azd provision --preview
 
-# Kullanılmadığında her zaman temizle
+# Kullanmadığınızda her zaman temizleyin
 azd down --force --purge  # Tüm kaynakları kaldırır
 ```
 
-**İpucu:** Mümkün olan yerlerde ücretsiz katmanları kullanın:
+**İpucu:** Mevcutsa ücretsiz katmanları kullanın:
 - App Service: F1 (Ücretsiz) katman
-- Microsoft Foundry Modelleri: Azure OpenAI 50.000 token/ay ücretsiz
+- Microsoft Foundry Modelleri: Azure OpenAI ayda 50.000 token ücretsiz
 - Cosmos DB: 1000 RU/s ücretsiz katman
 
 ---
 
-**S: Mevcut Azure kaynaklarıyla AZD kullanabilir miyim?**
+**Q: AZD'yi mevcut Azure kaynaklarıyla kullanabilir miyim?**
 
-C: Evet, ancak sıfırdan başlamak daha kolaydır. AZD, tam yaşam döngüsünü yönettiğinde en iyi şekilde çalışır. Mevcut kaynaklar için:
+A: Evet, ama sıfırdan başlamak daha kolay. AZD, tüm yaşam döngüsünü yönettiğinde en iyi şekilde çalışır. Mevcut kaynaklar için:
+
 ```bash
-# Seçenek 1: Mevcut kaynakları içe aktar (gelişmiş)
+# Seçenek 1: Var olan kaynakları içe aktar (gelişmiş)
 azd init
-# Sonra infra/ dizinini mevcut kaynaklara referans verecek şekilde değiştirin
+# Ardından infra/ dizinini var olan kaynaklara referans verecek şekilde değiştirin
 
-# Seçenek 2: Sıfırdan başla (önerilir)
+# Seçenek 2: Sıfırdan başla (önerilen)
 azd init --template matching-your-stack
 azd up  # Yeni bir ortam oluşturur
 ```
 
 ---
 
-**S: Projemi ekip arkadaşlarımla nasıl paylaşırım?**
+**Q: Projemi ekip arkadaşlarımla nasıl paylaşırım?**
 
-C: AZD projesini Git'e commit edin (ancak .azure klasörünü EKLEMEYİN):
+A: AZD projesini Git'e commit edin (ancak `.azure` klasörünü DEĞİL):
 ```bash
 # Varsayılan olarak zaten .gitignore'da
-.azure/        # Sırlar ve ortam verilerini içerir
+.azure/        # Gizli bilgileri ve ortam verilerini içerir
 *.env          # Ortam değişkenleri
 
-# O zamanki takım üyeleri:
+# O zaman ekip üyeleri:
 git clone <your-repo>
 azd auth login
 azd env new <their-name>-dev
@@ -948,9 +966,9 @@ Herkes aynı şablonlardan aynı altyapıyı alır.
 
 ### Sorun Giderme Soruları
 
-**S: "azd up" yarıda kaldı. Ne yapmalıyım?**
+**Q: "azd up" yarıda başarısız oldu. Ne yapmalıyım?**
 
-C: Hata mesajını kontrol edin, düzeltin ve tekrar deneyin:
+A: Hata mesajını kontrol edin, düzeltin ve tekrar deneyin:
 ```bash
 # Ayrıntılı günlükleri görüntüle
 azd show
@@ -961,7 +979,7 @@ azd show
 azd env set AZURE_LOCATION "westus2"  # Farklı bir bölge deneyin
 
 # 2. Kaynak adı çakışması varsa:
-azd down --force --purge  # Sıfırdan başlatın
+azd down --force --purge  # Temiz bir başlangıç yapın
 azd up  # Tekrar deneyin
 
 # 3. Kimlik doğrulaması süresi dolduysa:
@@ -978,11 +996,11 @@ az account set --subscription "<correct-subscription>"
 
 ---
 
-**S: Yeniden provision etmeden sadece kod değişikliklerini nasıl dağıtırım?**
+**Q: Altyapıyı yeniden oluşturmak zorunda kalmadan sadece kod değişikliklerini nasıl dağıtırım?**
 
-C: `azd up` yerine `azd deploy` kullanın:
+A: `azd up` yerine `azd deploy` kullanın:
 ```bash
-azd up          # İlk kez: kaynak sağlama + dağıtım (yavaş)
+azd up          # İlk sefer: kurulum + dağıtım (yavaş)
 
 # Kodda değişiklik yap...
 
@@ -995,11 +1013,11 @@ Hız karşılaştırması:
 
 ---
 
-**S: Altyapı şablonlarını özelleştirebilir miyim?**
+**Q: Altyapı şablonlarını özelleştirebilir miyim?**
 
-C: Evet! `infra/` içindeki Bicep dosyalarını düzenleyin:
+A: Evet! `infra/` içindeki Bicep dosyalarını düzenleyin:
 ```bash
-# azd init'ten sonra
+# azd init komutundan sonra
 cd infra/
 code main.bicep  # VS Code'da düzenle
 
@@ -1020,9 +1038,9 @@ sku: {
 
 ---
 
-**S: AZD'nin oluşturduklarının tamamını nasıl silerim?**
+**Q: AZD'nin oluşturduğu her şeyi nasıl silerim?**
 
-C: Tek bir komut tüm kaynakları kaldırır:
+A: Tek bir komut tüm kaynakları kaldırır:
 ```bash
 azd down --force --purge
 
@@ -1033,36 +1051,36 @@ azd down --force --purge
 # - Önbelleğe alınmış dağıtım verileri
 ```
 
-**Bunu her zaman çalıştırın:**
-- Bir şablonun testini tamamladığınızda
+**Bunu her zaman şu durumlarda çalıştırın:**
+- Bir şablonla testi bitirdiğinizde
 - Farklı bir projeye geçerken
 - Yeniden başlamak istediğinizde
 
-**Maliyet tasarrufu:** Kullanılmayan kaynakları silmek = $0 ücret
+**Maliyet tasarrufu:** Kullanılmayan kaynakları silmek = 0$ ücret
 
 ---
 
-**S: Azure Portal'da kaynakları yanlışlıkla sildiysem ne olur?**
+**Q: Azure Portal'da kaynakları yanlışlıkla silersem ne olur?**
 
-C: AZD durumu senkron dışı kalabilir. Temiz başlangıç yaklaşımı:
+A: AZD durumu senkronizasyonunu kaybedebilir. Temiz bir başlangıç yaklaşımı:
 ```bash
 # 1. Yerel durumu kaldır
 azd down --force --purge
 
-# 2. Sıfırdan başla
+# 2. Baştan başla
 azd up
 
-# Alternatif: AZD'nin tespit edip düzeltmesine izin ver
+# Alternatif: AZD'nin tespit etmesine ve düzeltmesine izin ver
 azd provision  # Eksik kaynakları oluşturacak
 ```
 
 ---
 
-### Gelişmiş Sorular
+### İleri Sorular
 
-**S: AZD'yi CI/CD boru hatlarında kullanabilir miyim?**
+**Q: AZD'yi CI/CD boru hatlarında kullanabilir miyim?**
 
-C: Evet! GitHub Actions örneği:
+A: Evet! GitHub Actions örneği:
 ```yaml
 # .github/workflows/deploy.yml
 name: Deploy with AZD
@@ -1093,30 +1111,30 @@ jobs:
 
 ---
 
-**S: Gizli ve hassas verileri nasıl yönetirim?**
+**Q: Gizli ve hassas verileri nasıl yönetirim?**
 
-C: AZD otomatik olarak Azure Key Vault ile entegre olur:
+A: AZD otomatik olarak Azure Key Vault ile entegre olur:
 ```bash
-# Sırlar kodda değil Key Vault'ta saklanır
+# Gizli veriler kodda değil Key Vault'ta saklanır
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)"
 
 # AZD otomatik olarak:
 # 1. Key Vault oluşturur
-# 2. Sırrı saklar
-# 3. Yönetilen Kimlik aracılığıyla uygulamaya erişim verir
+# 2. Gizli değeri saklar
+# 3. Managed Identity aracılığıyla uygulamaya erişim verir
 # 4. Çalışma zamanında enjekte eder
 ```
 
 **Asla commit etmeyin:**
 - `.azure/` klasörü (ortam verilerini içerir)
-- `.env` dosyaları (yerel gizli veriler)
-- Bağlantı dizeleri
+- `.env` dosyaları (yerel gizli bilgiler)
+- Connection strings
 
 ---
 
-**S: Birden fazla bölgeye dağıtım yapabilir miyim?**
+**Q: Birden fazla bölgeye dağıtım yapabilir miyim?**
 
-C: Evet, her bölge için bir ortam oluşturun:
+A: Evet, her bölge için ortam oluşturun:
 ```bash
 # Doğu ABD ortamı
 azd env new prod-eastus
@@ -1132,58 +1150,58 @@ azd up
 azd env list
 ```
 
-Gerçek çok bölgeli uygulamalar için, Bicep şablonlarını aynı anda birden fazla bölgeye dağıtacak şekilde özelleştirin.
+Gerçek çok bölgeli uygulamalar için, aynı anda birden fazla bölgeye dağıtmak üzere Bicep şablonlarını özelleştirin.
 
 ---
 
-**S: Takılırsam nereden yardım alabilirim?**
+**Q: Takılırsam nereden yardım alabilirim?**
 
 1. **AZD Belgeleri:** https://learn.microsoft.com/azure/developer/azure-developer-cli/
 2. **GitHub Sorunları:** https://github.com/Azure/azure-dev/issues
 3. **Discord:** [Azure Discord](https://discord.gg/microsoft-azure) - #azure-developer-cli kanalı
-4. **Stack Overflow:** Etiket `azure-developer-cli`
+4. **Stack Overflow:** `azure-developer-cli` etiketi
 5. **Bu Kurs:** [Sorun Giderme Kılavuzu](../chapter-07-troubleshooting/common-issues.md)
 
-**İpucu:** Sormadan önce şunu çalıştırın:
+**İpucu:** Sormadan önce şu komutları çalıştırın:
 ```bash
 azd show       # Mevcut durumu gösterir
 azd version    # Sürümünüzü gösterir
 ```
-Bu bilgileri sorunuza ekleyin, daha hızlı yardım almak için.
+Sorununuz için daha hızlı yardım almak adına bu bilgileri sorununuza ekleyin.
 
 ---
 
 ## 🎓 Sırada Ne Var?
 
-Artık AZD temellerini anlıyorsunuz. Yolunuzu seçin:
+Artık AZD temel bilgilerini anlıyorsunuz. Yolunuzu seçin:
 
-### 🎯 Yeni Başlayanlar için:
-1. **Sonraki:** [Kurulum ve Yapılandırma](installation.md) - Makinenize AZD'yi kurun
+### 🎯 Yeni Başlayanlar İçin:
+1. **Sonraki:** [Kurulum ve Ayarlar](installation.md) - Makinenize AZD'yi yükleyin
 2. **Sonra:** [İlk Projeniz](first-project.md) - İlk uygulamanızı dağıtın
-3. **Uygulama:** Bu dersteki tüm 3 alıştırmayı tamamlayın
+3. **Alıştırma:** Bu dersteki tüm 3 alıştırmayı tamamlayın
 
-### 🚀 AI Geliştiricileri için:
-1. **Atla:** [Bölüm 2: AI-Öncelikli Geliştirme](../chapter-02-ai-development/microsoft-foundry-integration.md)
-2. **Dağıtın:** `azd init --template get-started-with-ai-chat` ile başlayın
-3. **Öğrenin:** Dağıtırken inşa edin
+### 🚀 Yapay Zeka Geliştiricileri için:
+1. **Atla:** [Bölüm 2: Yapay Zekâ Odaklı Geliştirme](../chapter-02-ai-development/microsoft-foundry-integration.md)
+2. **Dağıt:** `azd init --template get-started-with-ai-chat` ile başlayın
+3. **Öğren:** Dağıtırken inşa edin
 
 ### 🏗️ Deneyimli Geliştiriciler için:
-1. **Gözden Geçirin:** [Yapılandırma Kılavuzu](configuration.md) - İleri düzey ayarlar
-2. **Keşfedin:** [Infrastructure as Code](../chapter-04-infrastructure/provisioning.md) - Bicep derinlemesine inceleme
-3. **Oluşturun:** Yığınınız için özel şablonlar oluşturun
+1. **İncele:** [Yapılandırma Kılavuzu](configuration.md) - İleri ayarlar
+2. **Keşfet:** [Altyapı olarak Kod](../chapter-04-infrastructure/provisioning.md) - Bicep derin dalışı
+3. **Oluştur:** Yığına özel şablonlar oluşturun
 
 ---
 
-**Chapter Navigation:**
-- **📚 Kurs Ana Sayfa**: [AZD Yeni Başlayanlar](../../README.md)
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfa**: [AZD For Beginners](../../README.md)
 - **📖 Geçerli Bölüm**: Bölüm 1 - Temel & Hızlı Başlangıç  
-- **⬅️ Önceki**: [Kurs Genel Bakış](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Sonraki**: [Kurulum ve Yapılandırma](installation.md)
-- **🚀 Sonraki Bölüm**: [Bölüm 2: AI-Öncelikli Geliştirme](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **⬅️ Önceki**: [Kurs Genel Bakışı](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Sonraki**: [Kurulum ve Ayarlar](installation.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 2: Yapay Zekâ Odaklı Geliştirme](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Feragatname**:
-Bu belge, yapay zeka çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hata veya yanlışlıklar içerebileceğinin farkında olun. Orijinal belgenin kendi dilindeki sürümü yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanılması sonucunda ortaya çıkan herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

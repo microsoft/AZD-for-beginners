@@ -1,21 +1,21 @@
-# Kapitel 7: Felsökning och debugging
+# Kapitel 7: Felsökning & Debugging
 
-**📚 Kurs**: [AZD för nybörjare](../../README.md) | **⏱️ Varaktighet**: 1–1,5 timmar | **⭐ Komplexitet**: Medel
+**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Varaktighet**: 1-1.5 hours | **⭐ Komplexitet**: Medel
 
 ---
 
 ## Översikt
 
-Detta kapitel hjälper dig att diagnostisera och lösa vanliga problem när du arbetar med Azure Developer CLI. Från distributionsfel till AI-specifika problem.
+Detta kapitel hjälper dig att diagnostisera och åtgärda vanliga problem när du arbetar med Azure Developer CLI. Från distributionsfel till AI-specifika problem.
 
-> Validerad mot `azd 1.23.12` i mars 2026.
+> Validerad mot `azd 1.25.6` i juni 2026.
 
 ## Lärandemål
 
 Genom att slutföra detta kapitel kommer du att:
 - Diagnostisera vanliga AZD-distributionsfel
-- Felsöka autentiserings- och åtkomstproblem
-- Lösa anslutningsproblem för AI-tjänster
+- Felsöka autentiserings- och behörighetsproblem
+- Åtgärda AI-tjänstanslutningsproblem
 - Använda Azure Portal och CLI för felsökning
 
 ---
@@ -66,15 +66,15 @@ azd up
 
 ---
 
-## 📋 Felkodreferens
+## 📋 Referens för felkoder
 
 | Fel | Orsak | Lösning |
 |-------|-------|----------|
 | `AuthenticationError` | Inte inloggad | `azd auth login` |
 | `ResourceNotFound` | Saknad resurs | Kontrollera resursnamn |
-| `QuotaExceeded` | Begränsningar i prenumerationen | Begär kvotökning |
+| `QuotaExceeded` | Prenumerationsgränser | Begär kvotökning |
 | `InvalidTemplate` | Bicep-syntaxfel | `az bicep build` |
-| `Conflict` | Resurs finns | Använd nytt namn eller ta bort |
+| `Conflict` | Resursen finns | Använd nytt namn eller ta bort |
 | `Forbidden` | Otillräckliga behörigheter | Kontrollera RBAC-roller |
 
 ---
@@ -94,9 +94,9 @@ azd up
 
 ## 🔗 Navigering
 
-| Direction | Chapter |
+| Direction | Kapitel |
 |-----------|---------|
-| **Föregående** | [Kapitel 6: Fördistribution](../chapter-06-pre-deployment/README.md) |
+| **Föregående** | [Kapitel 6: Förberedelser före distribution](../chapter-06-pre-deployment/README.md) |
 | **Nästa** | [Kapitel 8: Produktion](../chapter-08-production/README.md) |
 
 ---
@@ -111,5 +111,5 @@ azd up
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfriskrivning**:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi eftersträvar noggrannhet, bör du vara medveten om att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på originalspråket bör ses som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var vänlig notera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

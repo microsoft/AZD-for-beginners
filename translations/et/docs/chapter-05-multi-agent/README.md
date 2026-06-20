@@ -1,100 +1,103 @@
-# 5. peatükk: Mitme agendi AI lahendused
+# Chapter 5: Mitmeagendilised AI lahendused
 
-**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 2–3 tundi | **⭐ Raskeusaste**: Edasijõudnud
+**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 2-3 tundi | **⭐ Tase**: Edasijõudnud
 
 ---
 
 ## Ülevaade
 
-See peatükk käsitleb keerukaid mitme agendi arhitektuurimustreid, agentide koordineerimist ja tootmiskõlblikke AI lahendusi keeruliste stsenaariumite jaoks.
+Selles peatükis käsitletakse keerukaid mitmeagendilise arhitektuuri mustreid, agentide orkestreerimist ja tootmiskõlblikke AI lahendusi keerukate stsenaariumide jaoks.
 
-> Kontrollitud versiooniga `azd 1.23.12` märts 2026.
+> Kontrollitud versiooniga `azd 1.25.6` 2026. aasta juunis.
 
 ## Õpieesmärgid
 
-Selle peatüki lõpetamisega saad:
-- Mõista mitme agendi arhitektuurimustreid
-- Juurutada koordineeritud AI agendite süsteeme
-- Rakendada agendi-agnedi suhtlust
-- Luua tootmiskõlblikke mitme agendi lahendusi
+Selle peatüki läbimisel:
+- Mõistate mitmeagendilisi arhitektuuri mustreid
+- Teete kasutusele koordineeritud AI agentide süsteemi
+- Rakendate agentide omavahelist suhtlust
+- Loote tootmiskõlblikke mitmeagendilisi lahendusi
 
 ---
 
-## 📚 Tunnid
+## 📚 Õppetunnid
 
-| # | Tund | Kirjeldus | Aeg |
-|---|------|-----------|-----|
-| 1 | [Jaekaubanduse mitme agendi lahendus](../../examples/retail-scenario.md) | Täielik rakenduse läbivaatus | 90 min |
-| 2 | [Koordineerimise mustrid](../chapter-06-pre-deployment/coordination-patterns.md) | Agentide orkestreerimise strateegiad | 30 min |
-| 3 | [ARM malle juurutamine](../../examples/retail-multiagent-arm-template/README.md) | Ühe klõpsuga juurutamine | 30 min |
+| # | Õppetund | Kirjeldus | Aeg |
+|---|----------|-----------|-----|
+| 1 | [Mitmeagendiliste alused](multi-agent-basics.md) | Praktiline: töötava mitmeagendilise rakenduse juurutamine `azd up`-ga | 45 min |
+| 2 | [Koordineerimisstrateegiad](../chapter-06-pre-deployment/coordination-patterns.md) | Agentide orkestreerimise strateegiad (jätkub peatükis 6) | 30 min |
+| 3 | [ARM-malli juurutamine](../../examples/retail-multiagent-arm-template/README.md) | Ühe klõpsuga juurutamise näide | 30 min |
+
+> **Alustage õppetunnist 1.** See on ainus täielikult praktiline ja juurutatav õppetund selles peatükis. Õppetund 2 asub peatükis 6 (jagatud eeljuurutuse planeerimisega) ja [Jaemüügi mitmeagendiline lahendus](../../examples/retail-scenario.md) on arhitektuuri mall — disainiviide, mitte ühe käsuga mall.
 
 ---
 
-## 🚀 Kiiralgus
+## 🚀 Kiire algus
 
 ```bash
 # Valik 1: Paigalda mallist
 azd init --template agent-openai-python-prompty
 azd up
 
-# Valik 2: Paigalda agendi manifestist (nõuab azure.ai.agents laiendit)
+# Valik 2: Paigalda agendi manifestist (nõuab azure.ai.agents laiendust)
 azd extension install azure.ai.agents
 azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **Millist lähenemist kasutada?** Kasuta `azd init --template`, et alustada toimiva näiteks. Kasuta `azd ai agent init`, kui sul on olemas oma agendi manifest. Täpse info saamiseks vaata [AZD AI CLI juhendit](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
+> **Millist lähenemist valida?** Kasutage `azd init --template`, et alustada töökäibivast näidisegist. Kasutage `azd ai agent init`, kui teil on oma agentide manifest. Täieliku ülevaate saamiseks vaadake [AZD AI CLI viidet](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
 
 ---
 
-## 🤖 Mitme agendi arhitektuur
+## 🤖 Mitmeagendiline arhitektuur
 
 ```mermaid
 graph TD
-    Orchestrator[Orkestreerija Agendi<br/>Jyude marsruutimine, töövoogude haldamine] --> Customer[Kliendiagent<br/>Kasutajapäringud, eelistused]
-    Orchestrator --> Inventory[Laoseis Agendi<br/>Laoseis, tellimused]
+    Orchestrator[Orkestreerija Agent<br/>Suunab päringuid, haldab töövoogu] --> Customer[Kliendi Agent<br/>Kasutaja päringud, eelistused]
+    Orchestrator --> Inventory[Inventuuri Agent<br/>Laoseisud, tellimused]
 ```
+
 ---
 
-## 🎯 Esiletõstetud lahendus: Jaekaubanduse mitme agendi lahendus
+## 🎯 Esitletud lahendus: Jaemüügi mitmeagent
 
-[Jaekaubanduse mitme agendi lahendus](../../examples/retail-scenario.md) demonstreerib:
+[Jaemüügi mitmeagent](../../examples/retail-scenario.md) demonstreerib:
 
-- **Kliendi agent**: Käsitleb kasutajate suhtlust ja eelistusi
-- **Varude agent**: Halda lao ja tellimuste töötlemist
-- **Orkestreerija**: Koordineerib agentide tööd
-- **Jagatud mälu**: Agenditevaheline konteksti haldus
+- **Kliendiagent**: Halda kasutajate suhtlust ja eelistusi
+- **Laoseis agent**: Haldab laoseisu ja tellimuste töötlemist
+- **Orkestreerija**: Koordineerib agentide tegevusi
+- **Jagatud mälu**: Agentidevaheline konteksti haldus
 
-### Kasutatud teenused
+### Kasutatavad teenused
 
 | Teenus | Eesmärk |
 |--------|---------|
 | Microsoft Foundry mudelid | Keele mõistmine |
-| Azure AI Search | Toodete kataloog |
-| Cosmos DB | Agendi seisund ja mälu |
-| Container Apps | Agentide majutamine |
+| Azure AI Search | Tootekataloog |
+| Cosmos DB | Agendi olek ja mälu |
+| Container Apps | Agendi majutamine |
 | Application Insights | Jälgimine |
 
 ---
 
-## 🔗 Navigeerimine
+## 🔗 Navigatsioon
 
 | Suund | Peatükk |
-|-------|---------|
-| **Eelmine** | [4. peatükk: Taristu](../chapter-04-infrastructure/README.md) |
-| **Järgmine** | [6. peatükk: Eeljätkusuunamine](../chapter-06-pre-deployment/README.md) |
+|--------|---------|
+| **Eelmine** | [Peatükk 4: Infrastruktuur](../chapter-04-infrastructure/README.md) |
+| **Järgmine** | [Peatükk 6: Eeljuurutus](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 Seotud ressursid
 
 - [AI agentide juhend](../chapter-02-ai-development/agents.md)
-- [Tootmise AI tavad](../chapter-08-production/production-ai-practices.md)
+- [Tootmise AI praktikad](../chapter-08-production/production-ai-practices.md)
 - [AI tõrkeotsing](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vastutusest loobumine**:
-See dokument on tõlgitud kasutades AI tõlke teenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi me püüame täpsust, palun pidage meeles, et automatiseeritud tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Tähtsa teabe puhul on soovitatav kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tingitud arusaamatuste või valesti mõistmiste eest.
+**Lahtiütlus**:
+See dokument on tõlgitud kasutades AI tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi me püüdleme täpsuse poole, palun pange tähele, et automatiseeritud tõlgetes võib esineda vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlkega seotud eksimustest või valesti mõistmistest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

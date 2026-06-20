@@ -1,4 +1,4 @@
-# Bab 8: Pola Pengeluaran & Perusahaan
+# Bab 8: Corak Pengeluaran & Perusahaan
 
 **📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 2-3 jam | **⭐ Kerumitan**: Lanjutan
 
@@ -6,57 +6,59 @@
 
 ## Gambaran Keseluruhan
 
-Bab ini merangkumi pola pengeluaran sedia perusahaan, pengukuhan keselamatan, pemantauan, dan pengoptimuman kos untuk beban kerja AI produksi.
+Bab ini merangkumi corak penyebaran bersedia perusahaan, pengukuhan keselamatan, pemantauan, dan pengoptimuman kos untuk beban kerja AI pengeluaran.
 
-> Disahkan melawan `azd 1.23.12` pada Mac 2026.
+> Disahkan terhadap `azd 1.25.6` pada Jun 2026.
 
 ## Objektif Pembelajaran
 
-Dengan menyelesaikan bab ini, anda akan:
-- Mengeluarkan aplikasi tahan kerosakan berbilang wilayah
-- Melaksanakan pola keselamatan perusahaan
+Dengan menamatkan bab ini, anda akan mampu:
+- Menyebarkan aplikasi tahan lasak merentas wilayah
+- Melaksanakan corak keselamatan perusahaan
 - Mengkonfigurasi pemantauan menyeluruh
 - Mengoptimumkan kos pada skala besar
-- Menyediakan jalur CI/CD dengan AZD
+- Menyediakan saluran CI/CD dengan AZD
 
 ---
 
 ## 📚 Pelajaran
 
-| # | Pelajaran | Perihalan | Masa |
-|---|-----------|-----------|------|
-| 1 | [Amalan AI Pengeluaran](production-ai-practices.md) | Pola pengeluaran perusahaan | 90 min |
+| # | Pelajaran | Penerangan | Masa |
+|---|-----------|------------|------|
+| 1 | [Amalan AI Pengeluaran](production-ai-practices.md) | Corak penyebaran perusahaan | 90 min |
 
 ---
 
 ## 🚀 Senarai Semak Pengeluaran
 
-- [ ] Pengeluaran berbilang wilayah untuk ketahanan
-- [ ] Identiti terurus untuk pengesahan (tanpa kunci)
+- [ ] Penyebaran merentas wilayah untuk ketahanan
+- [ ] Identiti terurus untuk pengesahan (tanpa kekunci)
 - [ ] Application Insights untuk pemantauan
 - [ ] Bajet kos dan amaran dikonfigurasi
-- [ ] Pengimbasan keselamatan diaktifkan
-- [ ] Integrasi jalur CI/CD
+- [ ] Imbasan keselamatan diaktifkan
+- [ ] Integrasi saluran CI/CD
 - [ ] Pelan pemulihan bencana
 
 ---
 
-## 🏗️ Pola Seni Bina
+## 🏗️ Corak Seni Bina
 
-### Pola 1: AI Mikroservis
+### Corak 1: Microservices AI
 
 ```mermaid
 graph LR
-    Gateway[Gerbang API] --> AI[Perkhidmatan AI] --> Models[Model Microsoft Foundry]
+    Gateway[API Gateway] --> AI[Perkhidmatan AI] --> Models[Model Microsoft Foundry]
     Gateway --> Auth[Perkhidmatan Pengesahan]
-    AI --> Data[Stor Data]
+    AI --> Data[Penyimpanan Data]
 ```
-### Pola 2: AI Berpacu Acara
+
+### Corak 2: Event-Driven AI
 
 ```mermaid
 graph LR
-    EventGrid[Grid Acara] --> Functions[Fungsi] --> Pipeline[Saluran AI]
+    EventGrid[Event Grid] --> Functions[Fungsi] --> Pipeline[Saluran AI]
 ```
+
 ---
 
 ## 🔐 Amalan Terbaik Keselamatan
@@ -82,10 +84,10 @@ properties: {
 
 | Strategi | Penjimatan |
 |----------|------------|
-| Skala kepada sifar (Aplikasi Bekas) | 60-80% |
-| Gunakan tahap penggunaan untuk dev | 50-70% |
-| Penjadualan penskalaan | 30-50% |
-| Kapasiti terpelihara | 20-40% |
+| Skala ke sifar (Aplikasi Kontena) | 60-80% |
+| Gunakan tier penggunaan untuk dev | 50-70% |
+| Skala berjadual | 30-50% |
+| Kapasiti tempahan | 20-40% |
 
 ```bash
 # Tetapkan amaran bajet
@@ -98,7 +100,7 @@ az consumption budget create \
 
 ---
 
-## 📊 Penetapan Pemantauan
+## 📊 Penyediaan Pemantauan
 
 ```bash
 # Alirkan log
@@ -116,9 +118,9 @@ az monitor metrics list --resource <resource-id>
 ## 🔗 Navigasi
 
 | Arah | Bab |
-|-------|------|
+|------|-----|
 | **Sebelum** | [Bab 7: Penyelesaian Masalah](../chapter-07-troubleshooting/README.md) |
-| **Kursus Lengkap** | [Laman Utama Kursus](../../README.md) |
+| **Kursus Selesai** | [Laman Utama Kursus](../../README.md) |
 
 ---
 
@@ -126,12 +128,12 @@ az monitor metrics list --resource <resource-id>
 
 - [Panduan Ejen AI](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Penyelesaian Pelbagai Ejen](../chapter-05-multi-agent/README.md)
-- [Contoh Mikroservis](../../examples/microservices/README.md)
+- [Penyelesaian Multi-Ejen](../chapter-05-multi-agent/README.md)
+- [Contoh Microservices](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya hendaklah dianggap sebagai sumber yang sahih. Untuk maklumat kritikal, terjemahan profesional oleh manusia adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+**Penafian**:
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan oleh manusia profesional adalah disyorkan. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

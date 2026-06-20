@@ -2,36 +2,36 @@
 
 !!! tip "BU MODÜLÜN SONUNDA ŞUNLARI YAPABİLECEKSİNİZ"
 
-    - [ ] Kaynak temizliği ve maliyet yönetiminin önemini anlayın
-    - [ ] Altyapıyı güvenle kaldırmak için `azd down` kullanın
-    - [ ] Gerekirse soft silinmiş Cognitive Services kaynaklarını geri yükleyin
-    - [ ] **Laboratuvar 6:** Azure kaynaklarını temizleyin ve kaldırılmayı doğrulayın
+    - [ ] Kaynak temizliğinin ve maliyet yönetiminin önemini anlayın
+    - [ ] `azd down` komutunu kullanarak altyapıyı güvenli şekilde kaldırın
+    - [ ] Gerekirse yumuşak silinmiş Azure AI Hizmetlerini kurtarın
+    - [ ] **Lab 6:** Azure kaynaklarını temizleyin ve kaldırılmasını doğrulayın
 
 ---
 
-## Bonus Exercises
+## Bonus Alıştırmalar
 
 Before we tear down the project, take a few minutes to do some open-ended exploration.
 
-!!! info "Bu Keşif İpuçlarını Deneyin"
+!!! info "Bu Keşif Yönlendirmelerini Deneyin"
 
-    **GitHub Copilot ile Deney Yapın:**
+    **GitHub Copilot ile Deneyin:**
     
-    1. Ask: `Çoklu ajan senaryoları için başka hangi AZD şablonlarını deneyebilirim?`
-    2. Ask: `Bir sağlık kullanım durumu için ajan talimatlarını nasıl özelleştirebilirim?`
-    3. Ask: `Hangi ortam değişkenleri maliyet optimizasyonunu kontrol eder?`
+    1. Sor: `Çoklu ajan senaryoları için başka hangi AZD şablonlarını deneyebilirim?`
+    2. Sor: `Ajan talimatlarını sağlık kullanım durumu için nasıl özelleştirebilirim?`
+    3. Sor: `Maliyet optimizasyonunu hangi ortam değişkenleri kontrol ediyor?`
     
     **Azure Portalını Keşfedin:**
     
-    1. Dağıtımınız için Application Insights metriklerini inceleyin
+    1. Dağıtımınız için Application Insights metriklerini gözden geçirin
     2. Sağlanan kaynaklar için maliyet analizini kontrol edin
-    3. Microsoft Foundry portalının ajan oyun alanını bir kez daha keşfedin
+    3. Microsoft Foundry portalı ajan oyun alanını bir kez daha keşfedin
 
 ---
 
-## Deprovision Infra
+## Altyapıyı Kaldır
 
-1. Tearing down infrastructure is as easy as:
+1. Altyapıyı sökmek şu kadar kolaydır:
       
       ```bash title="" linenums="0"
       azd down --purge
@@ -47,7 +47,7 @@ Before we tear down the project, take a few minutes to do some open-ended explor
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Optional) If you now run `azd up` again, you will notice the gpt-4.1 model gets deployed since the environment variable was changed (and saved) in the local `.azure` folder. 
+1. (İsteğe bağlı) Eğer şimdi tekrar `azd up` çalıştırırsanız, ortam değişkeni yerel `.azure` klasöründe değiştirildiği (ve kaydedildiği) için gpt-4.1 modelinin dağıtıldığını fark edeceksiniz. 
 
       Here is the model deployments **before**:
 
@@ -59,6 +59,6 @@ Before we tear down the project, take a few minutes to do some open-ended explor
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Feragatname:
-Bu belge, yapay zeka çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, yerel dilindeki haliyle yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı nedeniyle ortaya çıkabilecek herhangi bir yanlış anlaşılma veya yanlış yorumlamadan sorumlu değiliz.
+**Feragatname**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

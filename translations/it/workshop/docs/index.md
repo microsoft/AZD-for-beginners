@@ -1,35 +1,35 @@
-# AZD per sviluppatori AI Workshop
+# AZD for AI Developers Workshop
 
-> Validato con `azd 1.23.12` a marzo 2026.
+> Validated against `azd 1.25.6` in June 2026.
 
 > [!IMPORTANT]  
-> **Questo workshop include una guida che puoi visualizzare in anteprima nel tuo browser locale. Per iniziare, apri il repo in GitHub Codespaces, in un dev container o in una copia locale con MkDocs installato—poi attendi finché non vedi un terminale VS Code attivo e digita:**  
+> **Questo workshop è dotato di una guida che puoi visualizzare in anteprima nel tuo browser locale. Per iniziare, apri il repository in GitHub Codespaces, in un dev container o in una copia locale con MkDocs installato—quindi attendi fino a quando non vedi un terminale VS Code attivo e digita:**  
 > `mkdocs serve > /dev/null 2>&1 &`  
-> **Dovresti vedere un dialogo a comparsa per aprire la pagina di anteprima in un browser.**
+> **Dovresti vedere una finestra popup che ti propone di aprire la pagina di anteprima in un browser.**
 
-Benvenuto al workshop pratico per apprendere Azure Developer CLI (AZD) con un focus sul deployment di applicazioni AI. Questo workshop ti aiuta a ottenere una comprensione applicata dei template AZD in 3 passaggi:
+Benvenuto al workshop pratico per apprendere Azure Developer CLI (AZD) con un focus sul deployment di applicazioni AI. Questo workshop ti aiuta a ottenere una comprensione pratica dei template AZD in 3 passaggi:
 
-1. **Scoperta** - trova il template giusto per te.
-1. **Distribuzione** - distribuisci e verifica che funzioni
+1. **Scoperta** - trova il template più adatto a te.
+1. **Deploy** - distribuisci e verifica che funzioni
 1. **Personalizzazione** - modifica e itera per renderlo tuo!
 
-Nel corso di questo workshop, ti verranno inoltre introdotti strumenti e flussi di lavoro fondamentali per sviluppatori, per aiutarti a semplificare il tuo percorso di sviluppo end-to-end.
+Nel corso di questo workshop, ti verranno inoltre presentati gli strumenti e i flussi di lavoro principali per sviluppatori, per aiutarti a semplificare il tuo percorso di sviluppo end-to-end.
 
 | | | 
 |:---|:---|
-| **📚 Home del corso**| [AZD Per Principianti](../README.md)|
-| **📖 Documentazione** | [Inizia con i template AI](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️ Template AI** | [Template Microsoft Foundry](https://ai.azure.com/templates) |
-|**🚀 Prossimi passi** | [Accetta la sfida](#workshop-challenge) |
+| **📚 Course Home**| [AZD per principianti](../README.md)|
+| **📖 Documentation** | [Get started with AI templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️AI Templates** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
+|**🚀 Next Steps** | [Prendi la sfida](#workshop-challenge) |
 | | |
 
-## Panoramica del workshop
+## Workshop Overview
 
-**Durata:** 3-4 ore  
-**Livello:** Principiante a Intermedio  
-**Prerequisiti:** Familiarità con Azure, concetti di AI, VS Code e strumenti da riga di comando.
+**Duration:** 3-4 hours  
+**Level:** Beginner to Intermediate  
+**Prerequisites:** Familiarity with Azure, AI concepts, VS Code & command-line tools.
 
-Questo è un workshop pratico in cui si impara facendo. Una volta completati gli esercizi, consigliamo di rivedere il curriculum AZD per principianti per continuare il tuo percorso di apprendimento verso le migliori pratiche di sicurezza e produttività.
+Questo è un workshop pratico in cui si impara facendo. Una volta completati gli esercizi, ti consigliamo di rivedere il curriculum AZD For Beginners per proseguire il tuo percorso di apprendimento nelle best practice di Sicurezza e Produttività.
 
 | Time| Module  | Objective |
 |:---|:---|:---|
@@ -43,39 +43,39 @@ Questo è un workshop pratico in cui si impara facendo. Una volta completati gli
 | 15 mins | Wrap-Up & Next Steps | Learning resources, Workshop challenge |
 | | |
 
-## Cosa imparerai
+## What You'll Learn
 
-Considera il template AZD come una sandbox di apprendimento per esplorare varie capacità e strumenti per lo sviluppo end-to-end su Microsoft Foundry. Al termine del workshop, dovresti avere una sensazione intuitiva riguardo i vari strumenti e concetti in questo contesto.
+Think of the AZD Template as a learning sandbox to explore various capabilities and tools for end-to-end development on Microsoft Foundry. By the end of this workshop, you should have an intuitive sense for various tools and concepts in this context.
 
 | Concept  | Objective |
 |:---|:---|
-| **Azure Developer CLI** | Capire i comandi dello strumento e i workflow|
-| **AZD Templates**| Comprendere la struttura del progetto e la configurazione|
-| **Azure AI Agent**| Provisioning e distribuzione del progetto Microsoft Foundry  |
-| **Azure AI Search**| Abilitare l'ingegneria del contesto con gli agenti |
-| **Observability**| Esplorare tracciamento, monitoraggio e valutazioni |
-| **Red Teaming**| Esplorare test avversariali e mitigazioni |
+| **Azure Developer CLI** | Understand tool commands and workflows|
+| **AZD Templates**| Understand project structure and config|
+| **Azure AI Agent**| Provision & deploy Microsoft Foundry project  |
+| **Azure AI Search**| Enable context engineering with agents |
+| **Observability**| Explore tracing, monitoring and evaluations |
+| **Red Teaming**| Explore adversarial testing and mitigations |
 | | |
 
-## Moduli del workshop
+## Workshop Modules
 
-Pronto per iniziare? Naviga tra i moduli del workshop:
+Ready to get started? Navigate through the workshop modules:
 
-- [Modulo 1: Seleziona template AI](instructions/1-Select-AI-Template.md)
-- [Modulo 2: Valida template AI](instructions/2-Validate-AI-Template.md) 
-- [Modulo 3: Decomponi template AI](instructions/3-Deconstruct-AI-Template.md)
-- [Modulo 4: Configura template AI](instructions/4-Configure-AI-Template.md)
-- [Modulo 5: Personalizza template AI](instructions/5-Customize-AI-Template.md)
-- [Modulo 6: Rimozione dell'infrastruttura](instructions/6-Teardown-Infrastructure.md)
-- [Modulo 7: Conclusione e prossimi passi](instructions/7-Wrap-up.md)
+- [Modulo 1: Seleziona il template AI](instructions/1-Select-AI-Template.md)
+- [Modulo 2: Valida il template AI](instructions/2-Validate-AI-Template.md) 
+- [Modulo 3: Deconstruiisci il template AI](instructions/3-Deconstruct-AI-Template.md)
+- [Modulo 4: Configura il template AI](instructions/4-Configure-AI-Template.md)
+- [Modulo 5: Personalizza il template AI](instructions/5-Customize-AI-Template.md)
+- [Modulo 6: Smantella l'infrastruttura](instructions/6-Teardown-Infrastructure.md)
+- [Modulo 7: Riepilogo e prossimi passi](instructions/7-Wrap-up.md)
 
-## Hai feedback?
+## Have feedback?
 
-Apri un issue in questo repo (etichettalo con `Workshop`) o unisciti a noi su [Discord](https://aka.ms/foundry/discord) e pubblica nel canale `#get-help`
+Pubblica un issue su questo repository (etichettalo `Workshop`) o unisciti a noi su [Discord](https://aka.ms/foundry/discord) e pubblica nel nostro canale `#get-help`
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Questo documento è stato tradotto utilizzando il servizio di traduzione automatica [Co-op Translator](https://github.com/Azure/co-op-translator). Pur impegnandoci per l'accuratezza, si tenga presente che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua deve essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale eseguita da un traduttore umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
+Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire la precisione, si prega di notare che le traduzioni automatizzate possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa deve essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un essere umano. Non siamo responsabili per eventuali malintesi o interpretazioni errate derivanti dall’uso di questa traduzione.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

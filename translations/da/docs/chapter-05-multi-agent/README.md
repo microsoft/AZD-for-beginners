@@ -1,22 +1,22 @@
-# Chapter 5: Multi-Agent AI Solutions
+# Kapitel 5: Multi-agent AI-løsninger
 
-**📚 Kursus**: [AZD for begyndere](../../README.md) | **⏱️ Varighed**: 2-3 hours | **⭐ Kompleksitet**: Advanced
+**📚 Kursus**: [AZD for begyndere](../../README.md) | **⏱️ Varighed**: 2-3 timer | **⭐ Kompleksitet**: Avanceret
 
 ---
 
 ## Oversigt
 
-This chapter covers advanced multi-agent architecture patterns, agent orchestration, and production-ready AI deployments for complex scenarios.
+Dette kapitel dækker avancerede multi-agent arkitekturmønstre, agentorkestrering og produktionsklare AI-implementeringer til komplekse scenarier.
 
-> Valideret mod `azd 1.23.12` i marts 2026.
+> Valideret mod `azd 1.25.6` i juni 2026.
 
 ## Læringsmål
 
-By completing this chapter, you will:
+Ved at gennemføre dette kapitel vil du:
 - Forstå multi-agent arkitekturmønstre
-- Udrulle koordinerede AI-agent systemer
+- Udrulle koordinerede AI-agent-systemer
 - Implementere agent-til-agent kommunikation
-- Bygge produktionsklare multi-agent løsninger
+- Opbygge produktionsklare multi-agent løsninger
 
 ---
 
@@ -24,9 +24,11 @@ By completing this chapter, you will:
 
 | # | Lektion | Beskrivelse | Tid |
 |---|--------|-------------|------|
-| 1 | [Multi-agent-løsning til detailhandel](../../examples/retail-scenario.md) | Fuld implementeringsgennemgang | 90 min |
-| 2 | [Koordinationsmønstre](../chapter-06-pre-deployment/coordination-patterns.md) | Strategier for agentorkestrering | 30 min |
-| 3 | [ARM Template Deployment](../../examples/retail-multiagent-arm-template/README.md) | Én-klik-udrulning | 30 min |
+| 1 | [Multi-Agent Basics](multi-agent-basics.md) | Hands-on: udrul en fungerende multi-agent-app med `azd up` | 45 min |
+| 2 | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) | Strategier for agentorkestrering (fortsætter i Kapitel 6) | 30 min |
+| 3 | [ARM Template Deployment](../../examples/retail-multiagent-arm-template/README.md) | Eksempel på ét-klik-udrulning | 30 min |
+
+> **Start med Lektion 1.** Det er den eneste fuldt praktiske, udrulningsklare lektion i dette kapitel. Lektion 2 findes i Kapitel 6 (den deles med forudrulningsplanlægning), og [Retail Multi-Agent Solution](../../examples/retail-scenario.md) er et arkitekturblåtryk — en designreference, ikke en ét-kommando-skabelon.
 
 ---
 
@@ -43,31 +45,32 @@ azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **Hvilken tilgang?** Brug `azd init --template` for at starte fra et fungerende eksempel. Brug `azd ai agent init` når du har din egen agent-manifest. Se [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for fulde detaljer.
+> **Hvilken tilgang?** Use `azd init --template` to start from a working sample. Use `azd ai agent init` when you have your own agent manifest. See the [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for fuldstændige oplysninger.
 
 ---
 
-## 🤖 Multi-agentarkitektur
+## 🤖 Multi-agent arkitektur
 
 ```mermaid
 graph TD
-    Orchestrator[Orkestratoragent<br/>Ruter forespørgsler, styrer arbejdsgang] --> Customer[Kundeagent<br/>Brugerforespørgsler, præferencer]
+    Orchestrator[Orkestratoragent<br/>Ruter forespørgsler, administrerer arbejdsgang] --> Customer[Kundeagent<br/>Brugerforespørgsler, præferencer]
     Orchestrator --> Inventory[Lageragent<br/>Lagerbeholdning, ordrer]
 ```
+
 ---
 
-## 🎯 Fremhævet løsning: Multi-agent til detailhandel
+## 🎯 Fremhævet løsning: Detailhandels Multi-Agent
 
-Løsningen [Multi-agent-løsning til detailhandel](../../examples/retail-scenario.md) demonstrerer:
+The [Retail Multi-Agent Solution](../../examples/retail-scenario.md) demonstrerer:
 
-- **Kundeagent**: Håndterer brugerinteraktioner og præferencer
-- **Lageragent**: Styrer lager og ordrebehandling
-- **Orkestrator**: Koordinerer mellem agenter
-- **Delt hukommelse**: Håndtering af kontekst på tværs af agenter
+- **Customer Agent**: Håndterer brugerinteraktioner og præferencer
+- **Inventory Agent**: Administrerer lager og ordrebehandling
+- **Orchestrator**: Koordinerer mellem agenter
+- **Shared Memory**: Tvær-agent kontekststyring
 
-### Brugte tjenester
+### Anvendte tjenester
 
-| Tjeneste | Formål |
+| Service | Formål |
 |---------|---------|
 | Microsoft Foundry Models | Sprogforståelse |
 | Azure AI Search | Produktkatalog |
@@ -82,7 +85,7 @@ Løsningen [Multi-agent-løsning til detailhandel](../../examples/retail-scenari
 | Retning | Kapitel |
 |-----------|---------|
 | **Forrige** | [Kapitel 4: Infrastruktur](../chapter-04-infrastructure/README.md) |
-| **Næste** | [Kapitel 6: Forud-implementering](../chapter-06-pre-deployment/README.md) |
+| **Næste** | [Kapitel 6: Forudrulning](../chapter-06-pre-deployment/README.md) |
 
 ---
 
@@ -96,5 +99,5 @@ Løsningen [Multi-agent-løsning til detailhandel](../../examples/retail-scenari
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, bedes du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på originalsproget bør betragtes som den autoritative kilde. For kritisk information anbefales en professionel, menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

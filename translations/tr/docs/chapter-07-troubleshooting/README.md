@@ -1,36 +1,36 @@
 # Bölüm 7: Sorun Giderme ve Hata Ayıklama
 
-**📚 Kurs**: [AZD Yeni Başlayanlar](../../README.md) | **⏱️ Süre**: 1-1.5 saat | **⭐ Zorluk**: Orta
+**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Süre**: 1-1.5 saat | **⭐ Zorluk**: Orta
 
 ---
 
 ## Genel Bakış
 
-Bu bölüm, Azure Developer CLI ile çalışırken ortaya çıkan yaygın sorunları tanılamanıza ve çözmenize yardımcı olur. Dağıtım hatalarından AI'ye özgü sorunlara kadar.
+Bu bölüm, Azure Developer CLI ile çalışırken karşılaşılan yaygın sorunları teşhis etmenize ve çözmenize yardımcı olur. Dağıtım hatalarından yapay zekâya özgü sorunlara kadar.
 
-> `azd 1.23.12` ile Mart 2026'da doğrulandı.
+> Haziran 2026'da `azd 1.25.6` ile doğrulanmıştır.
 
 ## Öğrenme Hedefleri
 
-Bu bölümü tamamlayarak şunları yapabileceksiniz:
+Bu bölümü tamamladığınızda:
 - Yaygın AZD dağıtım hatalarını teşhis etmek
 - Kimlik doğrulama ve izin sorunlarını hata ayıklamak
-- AI hizmeti bağlantı sorunlarını çözmek
+- Yapay zekâ hizmeti bağlantı sorunlarını çözmek
 - Sorun giderme için Azure Portal ve CLI'yi kullanmak
 
 ---
 
 ## 📚 Dersler
 
-| # | Ders | Açıklama | Süre |
+| # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [Yaygın Sorunlar](common-issues.md) | Sık karşılaşılan problemler | 30 dk |
-| 2 | [Hata Ayıklama Rehberi](debugging.md) | Adım adım hata ayıklama stratejileri | 45 dk |
-| 3 | [AI Sorun Giderme](ai-troubleshooting.md) | AI'ye özgü sorunlar | 30 dk |
+| 1 | [Yaygın Sorunlar](common-issues.md) | Sık karşılaşılan problemler | 30 dakika |
+| 2 | [Hata Ayıklama Rehberi](debugging.md) | Adım adım hata ayıklama stratejileri | 45 dakika |
+| 3 | [AI Sorun Giderme](ai-troubleshooting.md) | AI'ye özgü sorunlar | 30 dakika |
 
 ---
 
-## 🚨 Hızlı Çözümler
+## 🚨 Hızlı Düzeltmeler
 
 ### Kimlik Doğrulama Sorunları
 ```bash
@@ -68,11 +68,11 @@ azd up
 
 ## 📋 Hata Kodu Referansı
 
-| Hata | Neden | Çözüm |
+| Error | Cause | Solution |
 |-------|-------|----------|
 | `AuthenticationError` | Giriş yapılmamış | `azd auth login` |
-| `ResourceNotFound` | Eksik kaynak | Kaynak adlarını kontrol edin |
-| `QuotaExceeded` | Abonelik sınırları | Kota artışı isteğinde bulunun |
+| `ResourceNotFound` | Kaynak eksik | Kaynak adlarını kontrol edin |
+| `QuotaExceeded` | Abonelik sınırları | Kota artışı talep edin |
 | `InvalidTemplate` | Bicep sözdizimi hatası | `az bicep build` |
 | `Conflict` | Kaynak mevcut | Yeni bir ad kullanın veya silin |
 | `Forbidden` | Yetersiz izinler | RBAC rollerini kontrol edin |
@@ -94,16 +94,16 @@ azd up
 
 ## 🔗 Gezinme
 
-| Yön | Bölüm |
+| Direction | Chapter |
 |-----------|---------|
-| **Önceki** | [Bölüm 6: Ön Dağıtım](../chapter-06-pre-deployment/README.md) |
+| **Önceki** | [Bölüm 6: Dağıtım Öncesi](../chapter-06-pre-deployment/README.md) |
 | **Sonraki** | [Bölüm 8: Üretim](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 İlgili Kaynaklar
 
-- [Ön Dağıtım Kontrolleri](../chapter-06-pre-deployment/preflight-checks.md)
+- [Dağıtım Öncesi Kontrolleri](../chapter-06-pre-deployment/preflight-checks.md)
 - [Yapılandırma Kılavuzu](../chapter-03-configuration/configuration.md)
 - [AZD GitHub Sorunları](https://github.com/Azure/azure-dev/issues)
 
@@ -111,5 +111,5 @@ azd up
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Feragatname**:
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Orijinal belge, kendi dilindeki haliyle yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkan herhangi bir yanlış anlama veya yanlış yorumdan dolayı sorumluluk kabul etmiyoruz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

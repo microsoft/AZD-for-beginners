@@ -1,74 +1,74 @@
-# Λύση Υποστήριξης Πελατών Πολλαπλών Πρακτόρων - Σενάριο Λιανοπωλητή
+# Multi-Agent Customer Support Solution - Retailer Scenario
 
-**Κεφάλαιο 5: Λύσεις Πολλαπλών Πρακτόρων AI**
+**Chapter 5: Multi-Agent AI Solutions**
 - **📚 Αρχική Μαθήματος**: [AZD για Αρχάριους](../README.md)
-- **📖 Τρέχον Κεφάλαιο**: [Κεφάλαιο 5: Λύσεις Πολλαπλών Πρακτόρων AI](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **⬅️ Προαπαιτούμενα**: [Κεφάλαιο 2: Ανάπτυξη με προτεραιότητα το AI](../docs/microsoft-foundry/microsoft-foundry-integration.md)
-- **➡️ Επόμενο Κεφάλαιο**: [Κεφάλαιο 6: Επαλήθευση πριν την Ανάπτυξη](../docs/pre-deployment/capacity-planning.md)
-- **🚀 ARM Templates**: [Πακέτο Ανάπτυξης](retail-multiagent-arm-template/README.md)
+- **📖 Τρέχον Κεφάλαιο**: [Κεφάλαιο 5: Λύσεις AI με Πολλαπλούς Πράκτορες](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **⬅️ Προαπαιτούμενα**: [Κεφάλαιο 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **➡️ Επόμενο Κεφάλαιο**: [Κεφάλαιο 6: Προ-επικύρωση Ανάπτυξης](../docs/pre-deployment/capacity-planning.md)
+- **🚀 Πρότυπα ARM**: [Πακέτο Ανάπτυξης](retail-multiagent-arm-template/README.md)
 
 > **⚠️ ΟΔΗΓΟΣ ΑΡΧΙΤΕΚΤΟΝΙΚΗΣ - ΟΧΙ ΛΕΙΤΟΥΡΓΙΚΗ ΥΛΟΠΟΙΗΣΗ**  
-> Το έγγραφο αυτό παρέχει ένα **ολοκληρωμένο σχέδιο αρχιτεκτονικής** για την κατασκευή ενός συστήματος πολλαπλών πρακτόρων.  
-> **Αυτό που υπάρχει:** ARM πρότυπο για ανάπτυξη υποδομής (Microsoft Foundry Models, AI Search, Container Apps, κτλ.)  
-> **Αυτό που πρέπει να κατασκευάσετε:** Κώδικας πρακτόρων, λογική δρομολόγησης, frontend UI, pipelines δεδομένων (εκτίμηση 80-120 ώρων)  
+> Αυτό το έγγραφο παρέχει ένα **συνολικό σχέδιο αρχιτεκτονικής** για την κατασκευή ενός συστήματος πολλαπλών πρακτόρων.  
+> **Τι υπάρχει:** ARM template για ανάπτυξη υποδομής (Microsoft Foundry Models, AI Search, Container Apps, κ.λπ.)  
+> **Τι πρέπει να κατασκευάσετε:** Κώδικας πρακτόρων, λογική δρομολόγησης, frontend UI, pipelines δεδομένων (εκτιμώμενες 80-120 ώρες)  
 >  
-> **Χρησιμοποιήστε αυτό ως:**
+> **Χρησιμοποιήστε το ως:**
 > - ✅ Αναφορά αρχιτεκτονικής για το δικό σας έργο πολλαπλών πρακτόρων
 > - ✅ Οδηγό μάθησης για μοτίβα σχεδίασης πολλαπλών πρακτόρων
 > - ✅ Πρότυπο υποδομής για ανάπτυξη πόρων Azure
-> - ❌ ΟΧΙ μια έτοιμη προς εκτέλεση εφαρμογή (απαιτεί σημαντική ανάπτυξη)
+> - ❌ ΟΧΙ έτοιμη προς εκτέλεση εφαρμογή (απαιτεί σημαντική ανάπτυξη)
 
-## Επισκόπηση
+## Overview
 
-**Στόχος Μάθησης:** Κατανόηση της αρχιτεκτονικής, των σχεδιαστικών αποφάσεων και της προσέγγισης υλοποίησης για την κατασκευή ενός παραγωγικού chatbot υποστήριξης πελατών πολλαπλών πρακτόρων για έναν λιανοπωλητή με προηγμένες AI δυνατότητες όπως διαχείριση αποθέματος, επεξεργασία εγγράφων και έξυπνες αλληλεπιδράσεις με πελάτες.
+**Στόχος Μάθησης:** Κατανόηση της αρχιτεκτονικής, των σχεδιαστικών αποφάσεων και της προσέγγισης υλοποίησης για την κατασκευή ενός παραγωγικού chatbot υποστήριξης πελατών με πολλαπλούς πράκτορες για έναν λιανοπωλητή, με προηγμένες δυνατότητες AI όπως διαχείριση αποθέματος, επεξεργασία εγγράφων και ευφυείς αλληλεπιδράσεις με πελάτες.
 
-**Χρόνος Ολοκλήρωσης:** Ανάγνωση + Κατανόηση (2-3 ώρες) | Κατασκευή Ολοκληρωμένης Υλοποίησης (80-120 ώρες)
+**Χρόνος Ολοκλήρωσης:** Ανάγνωση + Κατανόηση (2-3 ώρες) | Ολοκληρωμένη Υλοποίηση (80-120 ώρες)
 
 **Τι θα Μάθετε:**
 - Μοτίβα αρχιτεκτονικής πολλαπλών πρακτόρων και αρχές σχεδίασης
 - Στρατηγικές ανάπτυξης Microsoft Foundry Models σε πολλαπλές περιοχές
 - Ενσωμάτωση AI Search με RAG (Retrieval-Augmented Generation)
 - Πλαίσια αξιολόγησης πρακτόρων και δοκιμών ασφάλειας
-- Θεωρήσεις για παραγωγική ανάπτυξη και βελτιστοποίηση κόστους
+- Σκέψεις για παραγωγική ανάπτυξη και βελτιστοποίηση κόστους
 
-## Στόχοι Αρχιτεκτονικής
+## Architecture Goals
 
-**Εκπαιδευτική Εστίαση:** Αυτή η αρχιτεκτονική παρουσιάζει επιχειρησιακά μοτίβα για συστήματα πολλαπλών πρακτόρων.
+**Εκπαιδευτική Εστίαση:** Αυτή η αρχιτεκτονική επιδεικνύει επιχειρησιακά μοτίβα για συστήματα πολλαπλών πρακτόρων.
 
-### Απαιτήσεις Συστήματος (Για την Υλοποίησή σας)
+### System Requirements (For Your Implementation)
 
 Μια παραγωγική λύση υποστήριξης πελατών απαιτεί:
-- **Πολλαπλούς εξειδικευμένους πράκτορες** για διαφορετικές ανάγκες πελατών (Εξυπηρέτηση Πελατών + Διαχείριση Αποθέματος)
-- **Ανάπτυξη πολλαπλών μοντέλων** με σωστό σχεδιασμό χωρητικότητας (gpt-4.1, gpt-4.1-mini, embeddings σε πολλές περιοχές)
-- **Δυναμική ενσωμάτωση δεδομένων** με AI Search και μεταφορτώσεις αρχείων (αναζήτηση διανυσμάτων + επεξεργασία εγγράφων)
-- **Ολοκληρωμένη παρακολούθηση** και δυνατότητες αξιολόγησης (Application Insights + προσαρμοσμένα μετρικά)
-- **Ασφάλεια παραγωγικής ποιότητας** με red teaming επικύρωση (σάρωση ευπαθειών + αξιολόγηση πρακτόρων)
+- **Πολλούς εξειδικευμένους πράκτορες** για διαφορετικές ανάγκες πελατών (Υποστήριξη Πελατών + Διαχείριση Αποθέματος)
+- **Ανάπτυξη πολλαπλών μοντέλων** με κατάλληλο προγραμματισμό χωρητικότητας (gpt-4.1, gpt-4.1-mini, embeddings σε διάφορες περιοχές)
+- **Δυναμική ενσωμάτωση δεδομένων** με AI Search και ανεβάσματα αρχείων (vector search + επεξεργασία εγγράφων)
+- **Ολοκληρωμένη παρακολούθηση** και δυνατότητες αξιολόγησης (Application Insights + προσαρμοσμένες μετρήσεις)
+- **Ασφάλεια παραγωγικού επιπέδου** με red teaming επικύρωση (σάρωση ευπαθειών + αξιολόγηση πρακτόρων)
 
-### Τι Παρέχει Αυτός ο Οδηγός
+### What This Guide Provides
 
-✅ **Μοτίβα Αρχιτεκτονικής** - Δοκιμασμένος σχεδιασμός για κλιμακώσιμα συστήματα πολλαπλών πρακτόρων  
+✅ **Μοτίβα Αρχιτεκτονικής** - Αποδεδειγμένος σχεδιασμός για κλιμακούμενα συστήματα πολλαπλών πρακτόρων  
 ✅ **Πρότυπα Υποδομής** - ARM templates που αναπτύσσουν όλες τις υπηρεσίες Azure  
-✅ **Παραδείγματα Κώδικα** - Συναφείς υλοποιήσεις για βασικά στοιχεία  
-✅ **Καθοδήγηση Διαμόρφωσης** - Βήμα-βήμα οδηγίες ρύθμισης  
+✅ **Παραδείγματα Κώδικα** - Υλοποιήσεις αναφοράς για βασικά συστατικά  
+✅ **Οδηγίες Διαμόρφωσης** - Βήμα προς βήμα οδηγίες εγκατάστασης  
 ✅ **Καλές Πρακτικές** - Ασφάλεια, παρακολούθηση, στρατηγικές βελτιστοποίησης κόστους  
 
-❌ **Δεν Περιλαμβάνεται** - Πλήρης λειτουργική εφαρμογή (απαιτεί προσπάθεια ανάπτυξης)
+❌ **Δεν Περιλαμβάνεται** - Πλήρης λειτουργική εφαρμογή (απαιτείται εργασία ανάπτυξης)
 
-## 🗺️ Οδικός Χάρτης Υλοποίησης
+## 🗺️ Implementation Roadmap
 
-### Phase 1: Μελέτη της Αρχιτεκτονικής (2-3 ώρες) - ΞΕΚΙΝΗΣΤΕ ΕΔΩ
+### Phase 1: Study Architecture (2-3 hours) - START HERE
 
-**Στόχος:** Κατανόηση του σχεδιασμού του συστήματος και των αλληλεπιδράσεων μεταξύ των συστατικών
+**Στόχος:** Κατανόηση του σχεδιασμού του συστήματος και των αλληλεπιδράσεων των συνιστωσών
 
-- [ ] Διαβάστε ολόκληρο αυτό το έγγραφο
-- [ ] Επανεξετάστε το διάγραμμα αρχιτεκτονικής και τις σχέσεις μεταξύ των συνιστωσών
+- [ ] Διαβάστε αυτό το έγγραφο ολόκληρο
+- [ ] Εξετάστε το διάγραμμα αρχιτεκτονικής και τις σχέσεις των συστατικών
 - [ ] Κατανοήστε τα μοτίβα πολλαπλών πρακτόρων και τις σχεδιαστικές αποφάσεις
-- [ ] Μελετήστε παραδείγματα κώδικα για εργαλεία πρακτόρων και δρομολόγηση
-- [ ] Επανεξετάστε τις εκτιμήσεις κόστους και τις οδηγίες σχεδιασμού χωρητικότητας
+- [ ] Μελετήστε τα παραδείγματα κώδικα για εργαλεία πρακτόρων και δρομολόγηση
+- [ ] Ελέγξτε τις εκτιμήσεις κόστους και τις οδηγίες προγραμματισμού χωρητικότητας
 
 **Αποτέλεσμα:** Σαφής κατανόηση του τι πρέπει να κατασκευάσετε
 
-### Phase 2: Ανάπτυξη Υποδομής (30-45 λεπτά)
+### Phase 2: Deploy Infrastructure (30-45 minutes)
 
 **Στόχος:** Παροχή πόρων Azure χρησιμοποιώντας το ARM template
 
@@ -79,74 +79,74 @@ cd retail-multiagent-arm-template
 
 **Τι Αναπτύσσεται:**
 - ✅ Microsoft Foundry Models (3 περιοχές: gpt-4.1, gpt-4.1-mini, embeddings)
-- ✅ Υπηρεσία AI Search (άδειο, χρειάζεται διαμόρφωση ευρετηρίου)
+- ✅ Υπηρεσία AI Search (κενή, χρειάζεται ρύθμιση index)
 - ✅ Περιβάλλον Container Apps (εικόνες placeholder)
 - ✅ Λογαριασμοί αποθήκευσης, Cosmos DB, Key Vault
-- ✅ Application Insights για παρακολούθηση
+- ✅ Παρακολούθηση Application Insights
 
 **Τι Λείπει:**
 - ❌ Κώδικας υλοποίησης πρακτόρων
 - ❌ Λογική δρομολόγησης
 - ❌ Frontend UI
-- ❌ Σχήμα ευρετηρίου αναζήτησης
+- ❌ Σχήμα index αναζήτησης
 - ❌ Pipelines δεδομένων
 
-### Phase 3: Κατασκευή Εφαρμογής (80-120 ώρες)
+### Phase 3: Build Application (80-120 hours)
 
 **Στόχος:** Υλοποίηση του συστήματος πολλαπλών πρακτόρων βάσει αυτής της αρχιτεκτονικής
 
-1. **Υλοποίηση Πρακτόρων** (30-40 ώρες)
-   - Βασική κλάση πράκτορα και διεπαφές
-   - Πράκτορας εξυπηρέτησης πελατών με gpt-4.1
+1. **Υλοποίηση Πρακτόρα** (30-40 ώρες)
+   - Βασική κλάση πρακτόρα και διεπαφές
+   - Πράκτορας υποστήριξης πελατών με gpt-4.1
    - Πράκτορας αποθέματος με gpt-4.1-mini
    - Ενσωματώσεις εργαλείων (AI Search, Bing, επεξεργασία αρχείων)
 
 2. **Υπηρεσία Δρομολόγησης** (12-16 ώρες)
-   - Λογική ταξινόμησης αιτημάτων
-   - Επιλογή και ορχήστρωση πρακτόρων
+   - Λογική ταξινόμησης αιτήσεων
+   - Επιλογή πράκτορα και ορχήστρωση
    - Backend FastAPI/Express
 
 3. **Ανάπτυξη Frontend** (20-30 ώρες)
    - UI διεπαφής συνομιλίας
-   - Λειτουργία μεταφόρτωσης αρχείων
-   - Απόδοση αποκρίσεων
+   - Λειτουργία ανεβάσματος αρχείων
+   - Απόδοση απαντήσεων
 
 4. **Pipeline Δεδομένων** (8-12 ώρες)
-   - Δημιουργία ευρετηρίου AI Search
+   - Δημιουργία index AI Search
    - Επεξεργασία εγγράφων με Document Intelligence
-   - Παραγωγή embeddings και ευρετηρίαση
+   - Δημιουργία embeddings και ευρετηρίαση
 
 5. **Παρακολούθηση & Αξιολόγηση** (10-15 ώρες)
    - Υλοποίηση προσαρμοσμένης τηλεμετρίας
    - Πλαίσιο αξιολόγησης πρακτόρων
-   - Σαρωτής ασφάλειας red team
+   - Scanner red team ασφάλειας
 
-### Phase 4: Ανάπτυξη & Δοκιμές (8-12 ώρες)
+### Phase 4: Deploy & Test (8-12 hours)
 
 - Δημιουργία Docker images για όλες τις υπηρεσίες
 - Push στο Azure Container Registry
 - Ενημέρωση Container Apps με πραγματικές εικόνες
 - Διαμόρφωση μεταβλητών περιβάλλοντος και μυστικών
-- Εκτέλεση σετ αξιολόγησης δοκιμών
+- Εκτέλεση test suite αξιολόγησης
 - Εκτέλεση σάρωσης ασφάλειας
 
 **Συνολική Εκτιμώμενη Προσπάθεια:** 80-120 ώρες για έμπειρους προγραμματιστές
 
-## Αρχιτεκτονική Λύσης
+## Solution Architecture
 
-### Διάγραμμα Αρχιτεκτονικής
+### Architecture Diagram
 
 ```mermaid
 graph TB
     User[👤 Πελάτης] --> LB[Azure Front Door]
-    LB --> WebApp[Διαδικτυακό Frontend<br/>Εφαρμογή κοντέινερ]
+    LB --> WebApp[Frontend Web<br/>Εφαρμογή κοντέινερ]
     
-    WebApp --> Router[Δρομολογητής Πρακτόρων<br/>Εφαρμογή κοντέινερ]
+    WebApp --> Router[Δρομολογητής Πράκτορα<br/>Εφαρμογή κοντέινερ]
     Router --> CustomerAgent[Πράκτορας Πελάτη<br/>Εξυπηρέτηση Πελατών]
     Router --> InvAgent[Πράκτορας Αποθεμάτων<br/>Διαχείριση Αποθεμάτων]
     
-    CustomerAgent --> OpenAI1[Microsoft Foundry Models<br/>gpt-4.1<br/>Ανατολικά ΗΠΑ 2]
-    InvAgent --> OpenAI2[Microsoft Foundry Models<br/>gpt-4.1-mini<br/>Δυτικά ΗΠΑ 2]
+    CustomerAgent --> OpenAI1[Μοντέλα Microsoft Foundry<br/>gpt-4.1<br/>Ανατολικά ΗΠΑ 2]
+    InvAgent --> OpenAI2[Μοντέλα Microsoft Foundry<br/>gpt-4.1-mini<br/>Δυτικά ΗΠΑ 2]
     
     CustomerAgent --> AISearch[Azure AI Search<br/>Κατάλογος Προϊόντων]
     CustomerAgent --> BingSearch[Bing Search API<br/>Πληροφορίες σε πραγματικό χρόνο]
@@ -162,16 +162,16 @@ graph TB
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
-    GraderModel[gpt-4.1 Βαθμολογητής<br/>Ελβετία Βόρεια] --> Evaluation[Evaluation Framework]
+    GraderModel[gpt-4.1 Βαθμολογητής<br/>Βόρεια Ελβετία] --> Evaluation[Πλαίσιο Αξιολόγησης]
     RedTeam[Σαρωτής Red Team] --> SecurityReports[Αναφορές Ασφαλείας]
     
     subgraph "Στρώμα Δεδομένων"
         Storage
         AISearch
-        CosmosDB[Cosmos DB<br/>Ιστορικό Συνομιλιών]
+        CosmosDB[Cosmos DB<br/>Ιστορικό Συζητήσεων]
     end
     
-    subgraph "Υπηρεσίες ΤΝ"
+    subgraph "Υπηρεσίες AI"
         OpenAI1
         OpenAI2
         Embeddings
@@ -182,8 +182,8 @@ graph TB
     
     subgraph "Παρακολούθηση & Ασφάλεια"
         AppInsights
-        LogAnalytics[Χώρος Εργασίας Log Analytics]
-        KeyVault[Azure Key Vault<br/>Μυστικά & Ρυθμίσεις]
+        LogAnalytics[Χώρος εργασίας Log Analytics]
+        KeyVault[Azure Key Vault<br/>Μυστικά & Διαμόρφωση]
         RedTeam
         Evaluation
     end
@@ -197,23 +197,24 @@ graph TB
     style AISearch fill:#fce4ec
     style Storage fill:#f1f8e9
 ```
-### Επισκόπηση Συνιστωσών
 
-| Συνιστώσα | Σκοπός | Τεχνολογία | Περιοχή |
+### Component Overview
+
+| Component | Purpose | Technology | Region |
 |-----------|---------|------------|---------|
-| **Frontend Ιστού** | Διεπαφή χρήστη για αλληλεπιδράσεις με πελάτες | Container Apps | Κύρια Περιοχή |
-| **Δρομολογητής Πρακτόρων** | Δρομολογεί αιτήματα στον κατάλληλο πράκτορα | Container Apps | Κύρια Περιοχή |
-| **Πράκτορας Εξυπηρέτησης Πελατών** | Διαχειρίζεται ερωτήματα εξυπηρέτησης πελατών | Container Apps + gpt-4.1 | Κύρια Περιοχή |
-| **Πράκτορας Αποθέματος** | Διαχειρίζεται απόθεμα και εκπλήρωση | Container Apps + gpt-4.1-mini | Κύρια Περιοχή |
-| **Microsoft Foundry Models** | Εκτέλεση LLM για τους πράκτορες | Cognitive Services | Πολυπεριοχική |
-| **AI Search** | Αναζήτηση διανυσμάτων και RAG | AI Search Service | Κύρια Περιοχή |
-| **Λογαριασμός Αποθήκευσης** | Μεταφορτώσεις αρχείων και έγγραφα | Blob Storage | Κύρια Περιοχή |
-| **Application Insights** | Παρακολούθηση και τηλεμετρία | Monitor | Κύρια Περιοχή |
-| **Grader Model** | Σύστημα αξιολόγησης πρακτόρων | Microsoft Foundry Models | Δευτερεύουσα Περιοχή |
+| **Web Frontend** | Διεπαφή χρήστη για αλληλεπιδράσεις με πελάτες | Container Apps | Primary Region |
+| **Agent Router** | Δρομολογεί αιτήματα στον κατάλληλο πράκτορα | Container Apps | Primary Region |
+| **Customer Agent** | Διαχειρίζεται ερωτήματα εξυπηρέτησης πελατών | Container Apps + gpt-4.1 | Primary Region |
+| **Inventory Agent** | Διαχειρίζεται απόθεμα και εκπλήρωση παραγγελιών | Container Apps + gpt-4.1-mini | Primary Region |
+| **Microsoft Foundry Models** | Εκτέλεση LLM για τους πράκτορες | Azure AI Services | Multi-region |
+| **AI Search** | Vector search και RAG | AI Search Service | Primary Region |
+| **Storage Account** | Ανεβάσματα αρχείων και έγγραφα | Blob Storage | Primary Region |
+| **Application Insights** | Παρακολούθηση και τηλεμετρία | Monitor | Primary Region |
+| **Grader Model** | Σύστημα αξιολόγησης πρακτόρων | Microsoft Foundry Models | Secondary Region |
 
-## 📁 Δομή Έργου
+## 📁 Project Structure
 
-> **📍 Υπόμνημα Κατάστασης:**  
+> **📍 Επεξήγηση Κατάστασης:**  
 > ✅ = Υπάρχει στο αποθετήριο  
 > 📝 = Υλοποίηση αναφοράς (παράδειγμα κώδικα σε αυτό το έγγραφο)  
 > 🔨 = Πρέπει να το δημιουργήσετε
@@ -363,11 +364,11 @@ retail-multiagent-solution/              🔨 Your project directory
 
 ---
 
-## 🚀 Γρήγορη Εκκίνηση: Τι Μπορείτε να Κάνετε Τώρα
+## 🚀 Quick Start: What You Can Do Right Now
 
-### Επιλογή 1: Μόνο Ανάπτυξη Υποδομής (30 λεπτά)
+### Option 1: Deploy Infrastructure Only (30 minutes)
 
-**Τι θα λάβετε:** Όλες οι υπηρεσίες Azure παρομοιάζονται και είναι έτοιμες για ανάπτυξη
+**Τι θα αποκτήσετε:** Όλες οι υπηρεσίες Azure παροικτούν και είναι έτοιμες για ανάπτυξη
 
 ```bash
 # Κλωνοποίηση αποθετηρίου
@@ -383,59 +384,59 @@ az resource list --resource-group myResourceGroup --output table
 
 **Αναμενόμενο αποτέλεσμα:**
 - ✅ Υπηρεσίες Microsoft Foundry Models αναπτυγμένες (3 περιοχές)
-- ✅ Υπηρεσία AI Search δημιουργημένη (άδεια)
+- ✅ Υπηρεσία AI Search δημιουργημένη (κενή)
 - ✅ Περιβάλλον Container Apps έτοιμο
-- ✅ Αποθήκευση, Cosmos DB, Key Vault ρυθμισμένα
-- ❌ Κανένας λειτουργικός πράκτορας ακόμη (μόνο υποδομή)
+- ✅ Storage, Cosmos DB, Key Vault διαμορφωμένα
+- ❌ Δεν υπάρχουν λειτουργικοί πράκτορες ακόμα (μόνο υποδομή)
 
-### Επιλογή 2: Μελέτη Αρχιτεκτονικής (2-3 ώρες)
+### Option 2: Study Architecture (2-3 hours)
 
 **Τι θα αποκτήσετε:** Βαθιά κατανόηση των μοτίβων πολλαπλών πρακτόρων
 
-1. Διαβάστε ολόκληρο αυτό το έγγραφο
-2. Επανεξετάστε παραδείγματα κώδικα για κάθε συνιστώσα
-3. Κατανοήστε τις σχεδιαστικές αποφάσεις και τα trade-offs
+1. Διαβάστε αυτό το έγγραφο ολόκληρο
+2. Εξετάστε παραδείγματα κώδικα για κάθε συστατικό
+3. Κατανοήστε σχεδιαστικές αποφάσεις και συμβιβασμούς
 4. Μελετήστε στρατηγικές βελτιστοποίησης κόστους
 5. Σχεδιάστε την προσέγγιση υλοποίησής σας
 
 **Αναμενόμενο αποτέλεσμα:**
-- ✅ Σαφές νοητικό μοντέλο της αρχιτεκτονικής του συστήματος
-- ✅ Κατανόηση των απαιτούμενων συνιστωσών
+- ✅ Σαφές νοητικό μοντέλο της αρχιτεκτονικής συστήματος
+- ✅ Κατανόηση των απαιτούμενων συστατικών
 - ✅ Ρεαλιστικές εκτιμήσεις προσπάθειας
 - ✅ Σχέδιο υλοποίησης
 
-### Επιλογή 3: Κατασκευή Ολοκληρωμένου Συστήματος (80-120 ώρες)
+### Option 3: Build Complete System (80-120 hours)
 
-**Τι θα αποκτήσετε:** Παραγωγικής ποιότητας λύση πολλαπλών πρακτόρων
+**Τι θα αποκτήσετε:** Παραγωγική λύση πολλαπλών πρακτόρων
 
 1. **Φάση 1:** Ανάπτυξη υποδομής (όπως παραπάνω)
 2. **Φάση 2:** Υλοποίηση πρακτόρων χρησιμοποιώντας τα παραδείγματα κώδικα παρακάτω (30-40 ώρες)
 3. **Φάση 3:** Κατασκευή υπηρεσίας δρομολόγησης (12-16 ώρες)
-4. **Φάση 4:** Δημιουργία frontend UI (20-30 ώρες)
+4. **Φάση 4:** Δημιουργία UI frontend (20-30 ώρες)
 5. **Φάση 5:** Διαμόρφωση pipelines δεδομένων (8-12 ώρες)
 6. **Φάση 6:** Προσθήκη παρακολούθησης & αξιολόγησης (10-15 ώρες)
 
 **Αναμενόμενο αποτέλεσμα:**
 - ✅ Πλήρως λειτουργικό σύστημα πολλαπλών πρακτόρων
-- ✅ Παραγωγικής ποιότητας παρακολούθηση
+- ✅ Παραγωγική παρακολούθηση
 - ✅ Επικύρωση ασφάλειας
 - ✅ Βελτιστοποιημένη ανάπτυξη κόστους
 
 ---
 
-## 📚 Αναφορά Αρχιτεκτονικής & Οδηγός Υλοποίησης
+## 📚 Architecture Reference & Implementation Guide
 
-Οι ακόλουθες ενότητες παρέχουν λεπτομερή μοτίβα αρχιτεκτονικής, παραδείγματα διαμόρφωσης και αναφορά κώδικα για να καθοδηγήσουν την υλοποίησή σας.
+Οι παρακάτω ενότητες παρέχουν λεπτομερή μοτίβα αρχιτεκτονικής, παραδείγματα διαμόρφωσης και κώδικα αναφοράς για να καθοδηγήσουν την υλοποίησή σας.
 
-## Αρχικές Απαιτήσεις Ρύθμισης
+## Initial Configuration Requirements
 
-### 1. Πολλαπλοί Πράκτορες & Ρύθμιση
+### 1. Multiple Agents & Configuration
 
 **Στόχος**: Ανάπτυξη 2 εξειδικευμένων πρακτόρων - "Customer Agent" (εξυπηρέτηση πελατών) και "Inventory" (διαχείριση αποθέματος)
 
-> **📝 Σημείωση:** Τα ακόλουθα azure.yaml και Bicep αρχεία είναι **παραδείγματα αναφοράς** που δείχνουν πώς να δομήσετε αναπτύξεις πολλαπλών πρακτόρων. Θα χρειαστεί να δημιουργήσετε αυτά τα αρχεία και τις αντίστοιχες υλοποιήσεις πρακτόρων.
+> **📝 Σημείωση:** Τα ακόλουθα azure.yaml και Bicep configurations είναι **παραδείγματα αναφοράς** που δείχνουν πώς να δομήσετε αναπτύξεις πολλαπλών πρακτόρων. Θα χρειαστεί να δημιουργήσετε αυτά τα αρχεία και τις αντίστοιχες υλοποιήσεις πρακτόρων.
 
-#### Βήματα Ρύθμισης:
+#### Βήματα Διαμόρφωσης:
 
 ```yaml
 # azure.yaml - Agent Configuration
@@ -507,11 +508,11 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 }]
 ```
 
-### 2. Πολλαπλά Μοντέλα με Σχεδιασμό Χωρητικότητας
+### 2. Multiple Models with Capacity Planning
 
-**Στόχος**: Ανάπτυξη μοντέλου συνομιλίας (Customer), μοντέλου embeddings (αναζήτηση) και μοντέλου ανάλυσης (grader) με σωστή διαχείριση ποσοστώσεων
+**Στόχος**: Ανάπτυξη μοντέλου συνομιλίας (Customer), μοντέλου embeddings (search) και μοντέλου αξιολόγησης (grader) με σωστή διαχείριση quotα
 
-#### Στρατηγική Πολλαπλών Περιοχών:
+#### Στρατηγική Multi-Region:
 
 ```bicep
 // infra/models.bicep
@@ -555,7 +556,7 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
 }
 ```
 
-#### Διαμόρφωση Εφεδρείας Περιοχής:
+#### Διαμόρφωση Fallback Περιφερειών:
 
 ```yaml
 # .azure/env/.env.production
@@ -564,9 +565,9 @@ AZURE_OPENAI_FALLBACK_ENABLED=true
 MODEL_CAPACITY_REQUIREMENTS='{"gpt-4.1": 35, "text-embedding-ada-002": 30}'
 ```
 
-### 3. AI Search με Διαμόρφωση Ευρετηρίου Δεδομένων
+### 3. AI Search with Data Index Configuration
 
-**Στόχος**: Διαμόρφωση AI Search για ενημερώσεις δεδομένων και αυτοματοποιημένη ευρετηρίαση
+**Στόχος**: Διαμόρφωση AI Search για ενημερώσεις δεδομένων και αυτοματοποιημένη δεικτοδότηση
 
 #### Pre-Provisioning Hook:
 
@@ -576,7 +577,7 @@ MODEL_CAPACITY_REQUIREMENTS='{"gpt-4.1": 35, "text-embedding-ada-002": 30}'
 
 echo "Setting up AI Search configuration..."
 
-# Δημιουργήστε υπηρεσία αναζήτησης με συγκεκριμένο SKU
+# Δημιουργία υπηρεσίας αναζήτησης με συγκεκριμένο SKU
 az search service create \
   --name "$AZURE_SEARCH_SERVICE_NAME" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -609,7 +610,7 @@ python ./scripts/upload_search_data.py \
   --data-path "./data/initial-docs"
 ```
 
-#### Σχήμα Ευρετηρίου Αναζήτησης:
+#### Σχήμα Index Αναζήτησης:
 
 ```json
 {
@@ -634,14 +635,14 @@ python ./scripts/upload_search_data.py \
 }
 ```
 
-### 4. Ρύθμιση Εργαλείων Πρακτόρων για AI Search
+### 4. Agent Tool Configuration for AI Search
 
-**Στόχος**: Διαμόρφωση των πρακτόρων ώστε να χρησιμοποιούν το AI Search ως εργαλείο βασιζόμενο στα δεδομένα
+**Στόχος**: Διαμόρφωση των πρακτόρων για χρήση του AI Search ως εργαλείο γείωσης
 
 #### Υλοποίηση Εργαλείου Αναζήτησης Πράκτορα:
 
 ```python
-# πηγές/πράκτορες/εργαλεία/εργαλείο_αναζήτησης.py
+# πηγή/πράκτορες/εργαλεία/εργαλείο_αναζήτησης.py
 import asyncio
 from azure.search.documents.aio import SearchClient
 from azure.core.credentials import AzureKeyCredential
@@ -713,9 +714,9 @@ class CustomerAgent:
         return response.choices[0].message.content
 ```
 
-### 5. Ενσωμάτωση Αποθήκευσης Μεταφόρτωσης Αρχείων
+### 5. File Upload Storage Integration
 
-**Στόχος**: Επιτρέψτε στους πράκτορες να επεξεργάζονται μεταφορτωμένα αρχεία (manuals, έγγραφα) για RAG context
+**Στόχος**: Επιτρέψτε στους πράκτορες να επεξεργάζονται ανεβασμένα αρχεία (manuals, έγγραφα) για πλαίσιο RAG
 
 #### Διαμόρφωση Αποθήκευσης:
 
@@ -776,7 +777,7 @@ class DocumentProcessor:
     async def process_uploaded_file(self, container_name: str, blob_name: str):
         """Process uploaded file and add to search index"""
         
-        # Λήψη αρχείου από το Blob Storage
+        # Λήψη αρχείου από την αποθήκη blob
         blob_client = self.storage_client.get_blob_client(
             container=container_name, 
             blob=blob_name
@@ -802,7 +803,7 @@ class DocumentProcessor:
             input=text_content
         )
         
-        # Ευρετηρίαση στο AI Search
+        # Δημιουργία ευρετηρίου στο AI Search
         document = {
             "id": blob_name.replace(".", "_"),
             "title": blob_name,
@@ -814,7 +815,7 @@ class DocumentProcessor:
         await self.search_client.upload_documents([document])
 ```
 
-### 6. Ενσωμάτωση Bing Search
+### 6. Bing Search Integration
 
 **Στόχος**: Προσθήκη δυνατοτήτων Bing Search για πληροφορίες σε πραγματικό χρόνο
 
@@ -839,7 +840,7 @@ output bingSearchEndpoint string = 'https://api.bing.microsoft.com/v7.0/search'
 #### Εργαλείο Bing Search:
 
 ```python
-# src/agents/tools/bing_search_tool.py
+# πηγή/πράκτορες/εργαλεία/bing_αναζήτηση_εργαλείο.py
 import aiohttp
 import asyncio
 
@@ -880,9 +881,9 @@ class BingSearchTool:
 
 ---
 
-## Παρακολούθηση & Παρατηρησιμότητα
+## Monitoring & Observability
 
-### 7. Tracing και Application Insights
+### 7. Tracing and Application Insights
 
 **Στόχος**: Ολοκληρωμένη παρακολούθηση με trace logs και application insights
 
@@ -953,7 +954,7 @@ class AgentTelemetry:
     def __init__(self, instrumentation_key: str):
         self.telemetry_client = TelemetryClient(instrumentation_key)
         
-        # Ρύθμιση καταγραφής
+        # Διαμόρφωση καταγραφής
         handler = LoggingHandler(instrumentation_key)
         logging.basicConfig(handlers=[handler], level=logging.INFO)
         self.logger = logging.getLogger(__name__)
@@ -984,7 +985,7 @@ class AgentTelemetry:
         """Track search operation performance"""
         properties = {
             'search_type': search_type,
-            'query': query[:100],  # Περικοπή για λόγους απορρήτου
+            'query': query[:100],  # Περικοπή για λόγους ιδιωτικότητας
             'results_found': str(results_count > 0)
         }
         
@@ -1045,7 +1046,7 @@ class AgentTelemetry:
         return len(text) // 4
 ```
 
-### 8. Red Teaming - Επικύρωση Ασφάλειας
+### 8. Red Teaming Security Validation
 
 **Στόχος**: Αυτοματοποιημένες δοκιμές ασφάλειας για πράκτορες και μοντέλα
 
@@ -1097,7 +1098,7 @@ class RedTeamScanner:
                     'details': strategy_result['details']
                 })
         
-        # Υπολογισμός συνολικής βαθμολογίας ασφάλειας
+        # Υπολογισμός συνολικού σκορ ασφάλειας
         scan_results['overall_score'] = self._calculate_security_score(scan_results)
         
         return scan_results
@@ -1165,8 +1166,8 @@ class RedTeamScanner:
     
     async def _send_test_prompt(self, prompt: str) -> str:
         """Send test prompt to target agent"""
-        # Η υλοποίηση θα έστελνε ένα αίτημα HTTP στο σημείο τερματισμού του πράκτορα
-        # Για σκοπούς επίδειξης, επιστρέφεται ένα προσωρινό αποτέλεσμα
+        # Η υλοποίηση θα στέλνει αίτημα HTTP στο endpoint του agent
+        # Για σκοπούς επίδειξης, επιστρέφεται συμβολική τιμή
         import aiohttp
         
         async with aiohttp.ClientSession() as session:
@@ -1223,14 +1224,14 @@ class RedTeamScanner:
         total_strategies = len(scan_results['strategies_tested'])
         vulnerabilities = len(scan_results['vulnerabilities_found'])
         
-        # Βασική βαθμολόγηση: 100 - (vulnerabilities / total * 100)
+        # Βασική βαθμολόγηση: 100 - (ευπάθειες / σύνολο * 100)
         if total_strategies == 0:
             return 100.0
         
         vulnerability_ratio = vulnerabilities / total_strategies
         base_score = max(0, 100 - (vulnerability_ratio * 100))
         
-        # Μείωση της βαθμολογίας με βάση τη σοβαρότητα
+        # Μείωση του σκορ βάσει της σοβαρότητας
         severity_penalty = 0
         for vuln in scan_results['vulnerabilities_found']:
             severity_weights = {'low': 5, 'medium': 15, 'high': 30, 'critical': 50}
@@ -1240,7 +1241,7 @@ class RedTeamScanner:
         return round(final_score, 2)
 ```
 
-#### Αυτοματοποιημένο Pipeline Ασφάλειας:
+#### Αυτοματοποιημένο Pipeline Ασφαλείας:
 
 ```bash
 #!/bin/bash
@@ -1248,7 +1249,7 @@ class RedTeamScanner:
 
 echo "Starting Red Team Security Scan..."
 
-# Λήψη του endpoint του πράκτορα από την ανάπτυξη
+# Λήψη του τελικού σημείου του πράκτορα από την ανάπτυξη
 AGENT_ENDPOINT=$(az containerapp show \
   --name "agent-customer" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1264,9 +1265,9 @@ python -m src.security.red_team_scanner \
 echo "Security scan completed. Check security_reports/ for results."
 ```
 
-### 9. Αξιολόγηση Πρακτόρων με Grader Model
+### 9. Agent Evaluation with Grader Model
 
-**Στόχος**: Ανάπτυξη συστήματος αξιολόγησης με αφιερωμένο grader model
+**Στόχος**: Ανάπτυξη συστήματος αξιολόγησης με αφιερωμένο μοντέλο grader
 
 #### Διαμόρφωση Grader Model:
 
@@ -1341,7 +1342,7 @@ class AgentEvaluator:
             case_result = await self._evaluate_single_case(test_case)
             evaluation_results['results'].append(case_result)
         
-        # Υπολογισμός συνοπτικών μετρικών
+        # Υπολόγισε συνοπτικά στατιστικά
         evaluation_results['summary'] = self._calculate_summary(evaluation_results['results'])
         
         return evaluation_results
@@ -1351,10 +1352,10 @@ class AgentEvaluator:
         user_query = test_case['input']
         expected_criteria = test_case.get('criteria', {})
         
-        # Λήψη της απάντησης του πράκτορα
+        # Λήψη απόκρισης του πράκτορα
         agent_response = await self._get_agent_response(user_query)
         
-        # Βαθμολόγηση της απάντησης
+        # Βαθμολόγησε την απάντηση
         grading_result = await self._grade_response(
             user_query, 
             agent_response, 
@@ -1425,7 +1426,7 @@ class AgentEvaluator:
                 max_tokens=500
             )
             
-            # Ανάλυση της απάντησης JSON
+            # Ανάλυσε την απόκριση JSON
             grading_text = grader_response.choices[0].message.content
             grading_result = json.loads(grading_text)
             
@@ -1471,7 +1472,7 @@ class AgentEvaluator:
             if criterion_scores:
                 summary['criteria_averages'][criterion] = sum(criterion_scores) / len(criterion_scores)
         
-        # Βαθμολογία απόδοσης
+        # Αξιολόγηση απόδοσης
         avg_score = summary['average_overall_score']
         if avg_score >= 4.5:
             summary['performance_rating'] = 'Excellent'
@@ -1487,7 +1488,7 @@ class AgentEvaluator:
         return summary
 ```
 
-#### Διαμόρφωση Περιστατικών Δοκιμών:
+#### Διαμόρφωση Περιπτώσεων Δοκιμών:
 
 ```json
 // tests/evaluation_test_cases.json
@@ -1526,9 +1527,9 @@ class AgentEvaluator:
 
 ---
 
-## Προσαρμογή & Ενημερώσεις
+## Customization & Updates
 
-### 10. Προσαρμογή Container App
+### 10. Container App Customization
 
 **Στόχος**: Ενημέρωση διαμόρφωσης container app και αντικατάσταση με προσαρμοσμένο UI
 
@@ -1548,7 +1549,7 @@ services:
       CUSTOM_LOGO_URL: ${LOGO_URL}
 ```
 
-#### Κατασκευή Προσαρμοσμένου Frontend:
+#### Προσαρμοσμένη Κατασκευή Frontend:
 
 ```dockerfile
 # src/frontend/Dockerfile
@@ -1575,7 +1576,7 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 ```
 
-#### Σενάριο Κατασκευής και Ανάπτυξης:
+#### Script Κατασκευής και Ανάπτυξης:
 
 ```bash
 #!/bin/bash
@@ -1583,7 +1584,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 echo "Building and deploying custom frontend..."
 
-# Δημιουργήστε προσαρμοσμένη εικόνα με μεταβλητές περιβάλλοντος
+# Κατασκευή προσαρμοσμένης εικόνας με μεταβλητές περιβάλλοντος
 docker build \
   --build-arg AGENT_NAME="$CUSTOMER_AGENT_NAME" \
   --build-arg COMPANY_NAME="retail Retail" \
@@ -1591,13 +1592,13 @@ docker build \
   -t retail-frontend:latest \
   ./src/frontend
 
-# Ανεβάστε στο Azure Container Registry
+# Ανέβασμα στο Azure Container Registry
 az acr build \
   --registry "$AZURE_CONTAINER_REGISTRY" \
   --image "retail-frontend:latest" \
   ./src/frontend
 
-# Ενημερώστε την εφαρμογή κοντέινερ
+# Ενημέρωση εφαρμογής κοντέινερ
 az containerapp update \
   --name "retail-frontend" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1608,13 +1609,13 @@ echo "Frontend deployed successfully!"
 
 ---
 
-## 🔧 Οδηγός Επίλυσης Προβλημάτων
+## 🔧 Troubleshooting Guide
 
-### Συνηθισμένα Προβλήματα και Λύσεις
+### Common Issues and Solutions
 
-#### 1. Όρια Ποσόστωσης Container Apps
+#### 1. Container Apps Quota Limits
 
-**Πρόβλημα**: Η ανάπτυξη αποτυγχάνει λόγω ορίων ποσόστωσης ανά περιοχή
+**Πρόβλημα**: Η ανάπτυξη αποτυγχάνει λόγω ορίων quotα περιοχής
 
 **Λύση**:
 ```bash
@@ -1635,9 +1636,9 @@ az support tickets create \
   --description "Request quota increase for Container Apps in region X"
 ```
 
-#### 2. Λήξη Ανάπτυξης Μοντέλου
+#### 2. Model Deployment Expiry
 
-**Πρόβλημα**: Η ανάπτυξη του μοντέλου αποτυγχάνει λόγω ληγμένης έκδοσης API
+**Πρόβλημα**: Αποτυχία ανάπτυξης μοντέλου λόγω ληγμένης έκδοσης API
 
 **Λύση**:
 ```python
@@ -1664,12 +1665,12 @@ def update_bicep_templates(latest_versions):
     """Update Bicep templates with latest versions"""
     template_path = "./infra/models.bicep"
     
-    # Διάβασε και ενημέρωσε το πρότυπο
+    # Διαβάστε και ενημερώστε το πρότυπο
     with open(template_path, 'r') as f:
         content = f.read()
     
     for model, version in latest_versions.items():
-        # Ενημέρωσε την έκδοση στο πρότυπο
+        # Ενημερώστε την έκδοση στο πρότυπο
         old_pattern = f"version: '[^']*'  // {model}"
         new_pattern = f"version: '{version}'  // {model}"
         content = content.replace(old_pattern, new_pattern)
@@ -1684,9 +1685,9 @@ if __name__ == "__main__":
     update_bicep_templates(versions)
 ```
 
-#### 3. Ενσωμάτωση Fine-tuning
+#### 3. Fine-tuning Integration
 
-**Πρόβλημα**: Πώς να ενσωματώσετε fine-tuned μοντέλα σε ανάπτυξη AZD
+**Πρόβλημα**: Πώς να ενσωματώσετε fine-tuned μοντέλα στην ανάπτυξη AZD
 
 **Λύση**:
 ```python
@@ -1726,7 +1727,7 @@ class FineTuningPipeline:
             fine_tuned_model = job.fine_tuned_model
             print(f"Fine-tuned model ready: {fine_tuned_model}")
             
-            # Ενημέρωση της ανάπτυξης για να χρησιμοποιεί το προσαρμοσμένο μοντέλο
+            # Ενημερώστε την ανάπτυξη ώστε να χρησιμοποιεί το προσαρμοσμένο μοντέλο
             # Αυτό θα καλούσε το Azure CLI για να ενημερώσει την ανάπτυξη
             return fine_tuned_model
         else:
@@ -1736,13 +1737,13 @@ class FineTuningPipeline:
 
 ---
 
-## Συχνές Ερωτήσεις & Ανοικτή Εξερεύνηση
+## FAQ & Open-Ended Exploration
 
 ### Συχνές Ερωτήσεις
 
-#### Ε: Υπάρχει εύκολος τρόπος να αναπτύξω πολλαπλούς πράκτορες (μοτίβο σχεδίασης);
+#### Ε: Υπάρχει εύκολος τρόπος να αναπτύξω πολλαπλούς πράκτορες (σχέδιο σχεδίασης);
 
-**Α:** Ναι! Χρησιμοποιήστε το Πολυ-Πρακτορικό Μοτίβο:
+**Α:** Ναι! Χρησιμοποιήστε το Μοτίβο Πολλαπλών Πρακτόρων:
 
 ```yaml
 # azure.yaml - Multi-Agent Configuration
@@ -1759,12 +1760,12 @@ services:
         }
 ```
 
-#### Ε: Μπορώ να αναπτύξω "model router" ως μοντέλο (οικονομικές επιπτώσεις);
+#### Ε: Μπορώ να αναπτύξω "model router" ως μοντέλο (συνέπειες κόστους);
 
 **Α:** Ναι, με προσεκτική εξέταση:
 
 ```python
-# Υλοποίηση δρομολογητή μοντέλου
+# Υλοποίηση Δρομολογητή Μοντέλου
 class ModelRouter:
     def __init__(self):
         self.routing_rules = {
@@ -1784,22 +1785,22 @@ class ModelRouter:
     
     def estimate_cost_savings(self, usage_patterns: dict):
         """Estimate cost savings from intelligent routing"""
-        # Η υλοποίηση θα υπολόγιζε τις πιθανές εξοικονομήσεις
+        # Η υλοποίηση θα υπολόγιζε πιθανές εξοικονομήσεις
         pass
 ```
 
-**Οικονομικές Επιπτώσεις:**
-- **Εξοικονόμηση**: Μείωση κόστους 60-80% για απλά ερωτήματα
+**Οικονομικές Συνέπειες:**
+- **Εξοικονομήσεις**: Μείωση κόστους 60-80% για απλά ερωτήματα
 - **Συμβιβασμοί**: Ελαφρώς αυξημένη καθυστέρηση για τη λογική δρομολόγησης
 - **Παρακολούθηση**: Παρακολουθήστε ακρίβεια έναντι μετρικών κόστους
 
-#### Ε: Μπορώ να ξεκινήσω μια δουλειά fine-tuning από ένα πρότυπο azd;
+#### Ε: Μπορώ να ξεκινήσω μια εργασία fine-tuning από ένα πρότυπο azd;
 
-**Α:** Ναι, χρησιμοποιώντας hooks μετά την παροχή (post-provisioning):
+**Α:** Ναι, χρησιμοποιώντας hooks μετά την παροχή:
 
 ```bash
 #!/bin/bash
-# hooks/postprovision.sh - Ενσωμάτωση λεπτής ρύθμισης
+# hooks/postprovision.sh - Ενσωμάτωση προσαρμογής μοντέλου
 
 echo "Starting fine-tuning pipeline..."
 
@@ -1808,7 +1809,7 @@ TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
   --data-path "./data/fine_tuning/training.jsonl" \
   --openai-key "$AZURE_OPENAI_API_KEY")
 
-# Έναρξη εργασίας λεπτής ρύθμισης
+# Εκκίνηση εργασίας προσαρμογής
 FINE_TUNE_JOB_ID=$(python scripts/start_fine_tuning.py \
   --training-file-id "$TRAINING_FILE_ID" \
   --model "gpt-4.1-mini")
@@ -1822,7 +1823,7 @@ echo "Monitor progress with: azd hooks run monitor-fine-tuning"
 
 ### Προχωρημένα Σενάρια
 
-#### Στρατηγική Ανάπτυξης Πολλαπλών Περιοχών
+#### Στρατηγική Ανάπτυξης Πολλαπλών Περιφερειών
 
 ```bicep
 // infra/multi-region.bicep
@@ -1861,7 +1862,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 #### Πλαίσιο Βελτιστοποίησης Κόστους
 
 ```python
-# src/optimization/cost_optimizer.py
+# src/βελτιστοποίηση/βελτιστοποιητής_κόστους.py
 class CostOptimizer:
     def __init__(self, usage_analytics):
         self.analytics = usage_analytics
@@ -1882,7 +1883,7 @@ class CostOptimizer:
                     'estimated_savings': usage['monthly_cost'] * 0.3
                 })
         
-        # Ανάλυση χρόνου αιχμής
+        # Ανάλυση περιόδων αιχμής
         peak_patterns = self.analytics.get_peak_patterns()
         if peak_patterns['variance'] > 0.6:
             recommendations.append({
@@ -1904,41 +1905,41 @@ class CostOptimizer:
 
 ---
 
-## ✅ Πρότυπο ARM Έτοιμο για Ανάπτυξη
+## ✅ Έτοιμο για Ανάπτυξη ARM Template
 
-> **✨ ΑΥΤΟ ΠΡΑΓΜΑΤΙΚΑ ΥΠΑΡΧΕΙ ΚΑΙ ΛΕΙΤΟΥΡΓΕΙ!**  
-> Σε αντίθεση με τα ενδεικτικά παραδείγματα κώδικα παραπάνω, το πρότυπο ARM είναι μια **πραγματική, λειτουργική ανάπτυξη υποδομής** που περιλαμβάνεται σε αυτό το αποθετήριο.
+> **✨ ΑΥΤΟ ΥΠΑΡΧΕΙ ΠΡΑΓΜΑΤΙΚΑ ΚΑΙ ΛΕΙΤΟΥΡΓΕΙ!**  
+> Σε αντίθεση με τα εννοιολογικά παραδείγματα κώδικα παραπάνω, το ARM template είναι μια **πραγματική, λειτουργική ανάπτυξη υποδομής** που περιλαμβάνεται σε αυτό το αποθετήριο.
 
-### Τι κάνει πραγματικά αυτό το πρότυπο
+### Τι Κάνει Πραγματικά Αυτό το Πρότυπο
 
-Το πρότυπο ARM στο [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) προμηθεύει **όλη την υποδομή Azure** που απαιτείται για το σύστημα πολλαπλών πρακτόρων. Αυτό είναι το **μοναδικό έτοιμο για εκτέλεση συστατικό** - όλα τα υπόλοιπα απαιτούν ανάπτυξη.
+Το ARM template στο [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) προμηθεύει **όλη την υποδομή Azure** που απαιτείται για το σύστημα πολλαπλών πρακτόρων. Αυτό είναι το **μόνο έτοιμο για εκτέλεση συστατικό** - όλα τα υπόλοιπα απαιτούν ανάπτυξη.
 
-### Τι περιλαμβάνεται στο πρότυπο ARM
+### Τι Περιλαμβάνεται στο ARM Template
 
-Το πρότυπο ARM που βρίσκεται στο [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) περιλαμβάνει:
+Το ARM template που βρίσκεται στο [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) περιλαμβάνει:
 
 #### **Πλήρης Υποδομή**
-- ✅ **Αναπτύξεις πολλαπλών περιοχών Microsoft Foundry Models** (gpt-4.1, gpt-4.1-mini, embeddings, grader)
-- ✅ **Azure AI Search** με δυνατότητες αναζήτησης μέσω διανυσμάτων
-- ✅ **Azure Storage** με κοντέινερ για έγγραφα και μεταφορτώσεις
-- ✅ **Container Apps Environment** με αυτόματη κλιμάκωση
+- ✅ **Αναπτύξεις Microsoft Foundry Models πολλαπλών περιοχών** (gpt-4.1, gpt-4.1-mini, embeddings, grader)
+- ✅ **Azure AI Search** με δυνατότητες αναζήτησης με διανύσματα
+- ✅ **Azure Storage** με κοντέινερ για έγγραφα και ανεβάσματα
+- ✅ **Container Apps Environment** με αυτόματο scaling
 - ✅ **Agent Router & Frontend** container apps
-- ✅ **Cosmos DB** για επιμονή ιστορικού συνομιλιών
+- ✅ **Cosmos DB** για την αποθήκευση ιστορικού συνομιλιών
 - ✅ **Application Insights** για ολοκληρωμένη παρακολούθηση
 - ✅ **Key Vault** για ασφαλή διαχείριση μυστικών
 - ✅ **Document Intelligence** για επεξεργασία αρχείων
 - ✅ **Bing Search API** για πληροφορίες σε πραγματικό χρόνο
 
-#### **Λειτουργίες Ανάπτυξης**
+#### **Κα режимы Ανάπτυξης**
 | Mode | Use Case | Resources | Estimated Cost/Month |
 |------|----------|-----------|---------------------|
-| **Minimal** | Development, Testing | Basic SKUs, Single region | $100-370 |
-| **Standard** | Production, Moderate scale | Standard SKUs, Multi-region | $420-1,450 |
-| **Premium** | Enterprise, High scale | Premium SKUs, HA setup | $1,150-3,500 |
+| **Minimal** | Ανάπτυξη, Δοκιμές | Basic SKUs, Single region | $100-370 |
+| **Standard** | Παραγωγή, Μέτρης κλίμακας | Standard SKUs, Multi-region | $420-1,450 |
+| **Premium** | Επιχείρηση, Υψηλή κλίμακα | Premium SKUs, HA setup | $1,150-3,500 |
 
 ### 🎯 Γρήγορες Επιλογές Ανάπτυξης
 
-#### Επιλογή 1: Μία-Κλικ Ανάπτυξη στο Azure
+#### Επιλογή 1: Μία-Κλίκ Ανάπτυξη στο Azure
 
 [![Ανάπτυξη στο Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
@@ -1955,10 +1956,10 @@ chmod +x deploy.sh
 # Αναπτύξτε με τις προεπιλεγμένες ρυθμίσεις (Τυπική λειτουργία)
 ./deploy.sh -g myResourceGroup
 
-# Αναπτύξτε για παραγωγή με προνομιακές λειτουργίες
+# Αναπτύξτε για παραγωγή με λειτουργίες premium
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 
-# Αναπτύξτε ελάχιστη έκδοση για ανάπτυξη
+# Αναπτύξτε την ελάχιστη έκδοση για ανάπτυξη
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
@@ -1978,7 +1979,7 @@ az deployment group create \
 
 ### Έξοδοι Προτύπου
 
-Μετά από επιτυχή ανάπτυξη, θα λάβετε:
+Μετά από επιτυχημένη ανάπτυξη, θα λάβετε:
 
 ```json
 {
@@ -1992,11 +1993,11 @@ az deployment group create \
 }
 ```
 
-### 🔧 Μετά την Ανάπτυξη — Διαμόρφωση
+### 🔧 Διαμόρφωση Μετά την Ανάπτυξη
 
-Το πρότυπο ARM αναλαμβάνει την παροχή υποδομής. Μετά την ανάπτυξη:
+Το ARM template χειρίζεται την προμήθεια της υποδομής. Μετά την ανάπτυξη:
 
-1. **Διαμορφώστε το Ευρετήριο Αναζήτησης**:
+1. **Διαμόρφωση Ευρετηρίου Αναζήτησης**:
    ```bash
    # Χρησιμοποιήστε το παρεχόμενο σχήμα αναζήτησης
    curl -X POST "${SEARCH_ENDPOINT}/indexes?api-version=2023-11-01" \
@@ -2005,18 +2006,18 @@ az deployment group create \
      -d @../data/search-schema.json
    ```
 
-2. **Ανεβάστε Αρχικά Έγγραφα**:
+2. **Ανέβασμα Αρχικών Εγγράφων**:
    ```bash
-   # Ανεβάστε εγχειρίδια προϊόντων και τη βάση γνώσεων
+   # Μεταφόρτωση εγχειριδίων προϊόντων και βάσης γνώσης
    az storage blob upload-batch \
      --destination documents \
      --source ../data/initial-docs \
      --account-name ${STORAGE_ACCOUNT}
    ```
 
-3. **Αναπτύξτε τον Κώδικα των Πρακτόρων**:
+3. **Ανάπτυξη Κώδικα Πρακτόρων**:
    ```bash
-   # Κατασκευάστε και αναπτύξτε πραγματικές εφαρμογές πράκτορα
+   # Δημιουργήστε και αναπτύξτε πραγματικές εφαρμογές πρακτόρων
    docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
    az containerapp update \
      --name retail-router \
@@ -2026,7 +2027,7 @@ az deployment group create \
 
 ### 🎛️ Επιλογές Προσαρμογής
 
-Επεξεργαστείτε `azuredeploy.parameters.json` για να προσαρμόσετε την ανάπτυξή σας:
+Επεξεργαστείτε το `azuredeploy.parameters.json` για να προσαρμόσετε την ανάπτυξή σας:
 
 ```json
 {
@@ -2042,112 +2043,112 @@ az deployment group create \
 
 ### 📊 Χαρακτηριστικά Ανάπτυξης
 
-- ✅ **Έλεγχος προϋποθέσεων** (Azure CLI, όρια, δικαιώματα)
-- ✅ **Υψηλή διαθεσιμότητα σε πολλαπλές περιοχές** με αυτόματη αποκατάσταση
+- ✅ **Έλεγχος προαπαιτούμενων** (Azure CLI, όρια, δικαιώματα)
+- ✅ **Υψηλή διαθεσιμότητα πολλαπλών περιοχών** με αυτόματο failover
 - ✅ **Ολοκληρωμένη παρακολούθηση** με Application Insights και Log Analytics
-- ✅ **Καλές πρακτικές ασφάλειας** με Key Vault και RBAC
-- ✅ **Βελτιστοποίηση κόστους** με ρυθμιζόμενες λειτουργίες ανάπτυξης
-- ✅ **Αυτόματη κλιμάκωση** βάσει προτύπων ζήτησης
-- ✅ **Ενημερώσεις χωρίς διακοπή** με Container Apps revisions
+- ✅ **Καλές πρακτικές ασφαλείας** με Key Vault και RBAC
+- ✅ **Βελτιστοποίηση κόστους** με ρυθμιζόμενους τρόπους ανάπτυξης
+- ✅ **Αυτοματοποιημένο scaling** βάσει προτύπων ζήτησης
+- ✅ **Ενημερώσεις χωρίς διακοπή λειτουργίας** με Container Apps revisions
 
 ### 🔍 Παρακολούθηση και Διαχείριση
 
 Μόλις αναπτυχθεί, παρακολουθήστε τη λύση σας μέσω:
 
 - **Application Insights**: Μετρικές απόδοσης, παρακολούθηση εξαρτήσεων και προσαρμοσμένη τηλεμετρία
-- **Log Analytics**: Κεντρική καταγραφή από όλα τα συστατικά
-- **Azure Monitor**: Υγεία πόρων και παρακολούθηση διαθεσιμότητας
+- **Log Analytics**: Κεντρικοποιημένη καταγραφή από όλα τα συστατικά
+- **Azure Monitor**: Υγεία και διαθεσιμότητα πόρων
 - **Cost Management**: Παρακολούθηση κόστους σε πραγματικό χρόνο και ειδοποιήσεις προϋπολογισμού
 
 ---
 
 ## 📚 Ολοκληρωμένος Οδηγός Υλοποίησης
 
-Αυτό το σενάριο σε συνδυασμό με το πρότυπο ARM παρέχει όλα όσα χρειάζεστε για να αναπτύξετε μια λύση υποστήριξης πελατών πολλαπλών πρακτόρων έτοιμη για παραγωγή. Η υλοποίηση καλύπτει:
+Αυτό το έγγραφο σεναρίου μαζί με το ARM template παρέχει ό,τι χρειάζεται για να αναπτύξετε μια έτοιμη για παραγωγή λύση υποστήριξης πελατών πολλαπλών πρακτόρων. Η υλοποίηση καλύπτει:
 
-✅ **Σχεδίαση Αρχιτεκτονικής** - Ολοκληρωμένος σχεδιασμός συστήματος με σχέσεις μεταξύ συστατικών  
-✅ **Προμήθεια Υποδομής** - Ολοκληρωμένο πρότυπο ARM για ανάπτυξη με ένα κλικ  
-✅ **Διαμόρφωση Πρακτόρων** - Αναλυτική ρύθμιση για Πράκτορες Πελατών και Αποθεμάτων  
-✅ **Αναπτύξεις Πολλαπλών Μοντέλων** - Στρατηγική τοποθέτηση μοντέλων ανά περιοχές  
-✅ **Ενσωμάτωση Αναζήτησης** - AI Search με vector capabilities και ευρετηρίαση δεδομένων  
-✅ **Υλοποίηση Ασφάλειας** - Red teaming, ανίχνευση ευπαθειών και ασφαλείς πρακτικές  
+✅ **Σχεδίαση Αρχιτεκτονικής** - Ολοκληρωμένος σχεδιασμός συστήματος με σχέσεις συστατικών  
+✅ **Προμήθεια Υποδομής** - Πλήρες ARM template για ανάπτυξη με ένα κλικ  
+✅ **Διαμόρφωση Πρακτόρων** - Λεπτομερής ρύθμιση για πράκτορες Πελάτη και Αποθεμάτων  
+✅ **Ανάπτυξη Πολλαπλών Μοντέλων** - Στρατηγική τοποθέτηση μοντέλων ανά περιοχές  
+✅ **Ενσωμάτωση Αναζήτησης** - AI Search με vector capabilities και δεικτοδότηση δεδομένων  
+✅ **Υλοποίηση Ασφαλείας** - Red teaming, σάρωση ευπαθειών και ασφαλείς πρακτικές  
 ✅ **Παρακολούθηση & Αξιολόγηση** - Ολοκληρωμένη τηλεμετρία και πλαίσιο αξιολόγησης πρακτόρων  
-✅ **Ετοιμότητα για Παραγωγή** - Ανάπτυξη επιπέδου επιχείρησης με HA και ανάκτηση από καταστροφές  
-✅ **Βελτιστοποίηση Κόστους** - Έξυπνος καθοδηγητής και κλιμάκωση βάσει χρήσης  
-✅ **Οδηγός Επίλυσης Προβλημάτων** - Συνηθισμένα ζητήματα και στρατηγικές επίλυσής τους
+✅ **Ετοιμότητα Παραγωγής** - Υλοποίηση επιπέδου επιχείρησης με HA και ανάκτηση από καταστροφή  
+✅ **Βελτιστοποίηση Κόστους** - Έξυπνος δρομολόγηση και scaling με βάση χρήση  
+✅ **Οδηγός Αντιμετώπισης Προβλημάτων** - Συνήθη ζητήματα και στρατηγικές επίλυσής τους
 
 ---
 
-## 📊 Περίληψη: Τι μάθατε
+## 📊 Περίληψη: Τι Μάθατε
 
-### Καλυπτόμενα Πρότυπα Αρχιτεκτονικής
+### Πρότυπα Αρχιτεκτονικής που Καλύφθηκαν
 
-✅ **Σχεδίαση Συστήματος Πολλαπλών Πρακτόρων** - Εξειδικευμένοι πράκτορες (Customer + Inventory) με αφιερωμένα μοντέλα  
-✅ **Ανάπτυξη σε Πολλαπλές Περιοχές** - Στρατηγική τοποθέτηση μοντέλων για βελτιστοποίηση κόστους και πλεονασμό  
+✅ **Σχεδίαση Συστήματος Πολλαπλών Πρακτόρων** - Εξειδικευμένοι πράκτορες (Πελάτης + Αποθέματα) με αφιερωμένα μοντέλα  
+✅ **Ανάπτυξη Πολλαπλών Περιοχών** - Στρατηγική τοποθέτηση μοντέλων για βελτιστοποίηση κόστους και πλεονασμό  
 ✅ **RAG Αρχιτεκτονική** - Ενσωμάτωση AI Search με vector embeddings για τεκμηριωμένες απαντήσεις  
 ✅ **Αξιολόγηση Πρακτόρων** - Αφιερωμένο μοντέλο grader για αξιολόγηση ποιότητας  
-✅ **Πλαίσιο Ασφαλείας** - Πρότυπα red teaming και ανίχνευσης ευπαθειών  
-✅ **Βελτιστοποίηση Κόστους** - Δρομολόγηση μοντέλων και στρατηγικές προγραμματισμού χωρητικότητας  
-✅ **Παραγωγική Παρακολούθηση** - Application Insights με προσαρμοσμένη τηλεμετρία  
+✅ **Πλαίσιο Ασφαλείας** - Προτύπα red teaming και σάρωσης ευπαθειών  
+✅ **Βελτιστοποίηση Κόστους** - Δρομολόγηση μοντέλων και στρατηγικές σχεδιασμού δυναμικότητας  
+✅ **Παρακολούθηση Παραγωγής** - Application Insights με προσαρμοσμένη τηλεμετρία  
 
-### Τι Παρέχει Αυτό το Έγγραφο
+### Τι Παρέχει Αυτό Το Έγγραφο
 
 | Component | Status | Where to Find It |
 |-----------|--------|------------------|
-| **Infrastructure Template** | ✅ Ready to Deploy | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
-| **Architecture Diagrams** | ✅ Complete | Mermaid diagram above |
-| **Code Examples** | ✅ Reference Implementations | Throughout this document |
-| **Configuration Patterns** | ✅ Detailed Guidance | Sections 1-10 above |
-| **Agent Implementations** | 🔨 You Build This | ~40 hours development |
-| **Frontend UI** | 🔨 You Build This | ~25 hours development |
-| **Data Pipelines** | 🔨 You Build This | ~10 hours development |
+| **Infrastructure Template** | ✅ Έτοιμο για Ανάπτυξη | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
+| **Architecture Diagrams** | ✅ Ολοκληρωμένα | Διάγραμμα Mermaid παραπάνω |
+| **Code Examples** | ✅ Παραδείγματα Αναφοράς | Σε όλο αυτό το έγγραφο |
+| **Configuration Patterns** | ✅ Λεπτομερής Οδηγία | Τμήματα 1-10 παραπάνω |
+| **Agent Implementations** | 🔨 Εσείς το κατασκευάζετε | ~40 ώρες ανάπτυξης |
+| **Frontend UI** | 🔨 Εσείς το κατασκευάζετε | ~25 ώρες ανάπτυξης |
+| **Data Pipelines** | 🔨 Εσείς το κατασκευάζετε | ~10 ώρες ανάπτυξης |
 
-### Έλεγχος Πραγματικότητας: Τι υπάρχει πραγματικά
+### Έλεγχος Πραγματικότητας: Τι Υπάρχει Πραγματικά
 
-**Στο Αποθετήριο (Έτοιμο τώρα):**
+**Στο Αποθετήριο (Έτοιμο Τώρα):**
 - ✅ ARM template που αναπτύσσει 15+ υπηρεσίες Azure (azuredeploy.json)
-- ✅ Σενάριο ανάπτυξης με έλεγχο (deploy.sh)
+- ✅ Script ανάπτυξης με επικύρωση (deploy.sh)
 - ✅ Διαμόρφωση παραμέτρων (azuredeploy.parameters.json)
 
-**Αναφερόμενα στο Έγγραφο (Εσείς τα δημιουργείτε):**
+**Αναφερόμενα στο Έγγραφο (Τα Δημιουργείτε Εσείς):**
 - 🔨 Κώδικας υλοποίησης πρακτόρων (~30-40 ώρες)
 - 🔨 Υπηρεσία δρομολόγησης (~12-16 ώρες)
 - 🔨 Εφαρμογή frontend (~20-30 ώρες)
-- 🔨 Σενάρια ρύθμισης δεδομένων (~8-12 ώρες)
+- 🔨 Scripts ρύθμισης δεδομένων (~8-12 ώρες)
 - 🔨 Πλαίσιο παρακολούθησης (~10-15 ώρες)
 
-### Τα Επόμενά σας Βήματα
+### Τα Επόμενά Σας Βήματα
 
-#### Εάν θέλετε να αναπτύξετε την υποδομή (30 λεπτά)
+#### Αν Θέλετε να Αναπτύξετε την Υποδομή (30 λεπτά)
 ```bash
 cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
 
-#### Εάν θέλετε να κατασκευάσετε ολόκληρο το σύστημα (80-120 ώρες)
+#### Αν Θέλετε να Κατασκευάσετε το Πλήρες Σύστημα (80-120 ώρες)
 1. ✅ Διαβάστε και κατανοήστε αυτό το έγγραφο αρχιτεκτονικής (2-3 ώρες)
-2. ✅ Αναπτύξτε την υποδομή χρησιμοποιώντας το πρότυπο ARM (30 λεπτά)
-3. 🔨 Υλοποιήστε τους πράκτορες χρησιμοποιώντας πρότυπα αναφοράς (~40 ώρες)
-4. 🔨 Κατασκευάστε υπηρεσία δρομολόγησης με FastAPI/Express (~15 ώρες)
-5. 🔨 Δημιουργήστε το frontend UI με React/Vue (~25 ώρες)
+2. ✅ Αναπτύξτε την υποδομή χρησιμοποιώντας το ARM template (30 λεπτά)
+3. 🔨 Υλοποιήστε πράκτορες χρησιμοποιώντας πρότυπα κώδικα αναφοράς (~40 ώρες)
+4. 🔨 Χτίστε υπηρεσία δρομολόγησης με FastAPI/Express (~15 ώρες)
+5. 🔨 Δημιουργήστε frontend UI με React/Vue (~25 ώρες)
 6. 🔨 Διαμορφώστε pipeline δεδομένων και ευρετήριο αναζήτησης (~10 ώρες)
 7. 🔨 Προσθέστε παρακολούθηση και αξιολόγηση (~15 ώρες)
 8. ✅ Δοκιμάστε, ασφαλίστε και βελτιστοποιήστε (~10 ώρες)
 
-#### Εάν θέλετε να μάθετε μοτίβα πολυ-πρακτόρων (Μελέτη)
-- 📖 Επανεξετάστε το διάγραμμα αρχιτεκτονικής και τις σχέσεις μεταξύ συστατικών
-- 📖 Μελετήστε τα παραδείγματα κώδικα για SearchTool, BingTool, AgentEvaluator
+#### Αν Θέλετε να Μάθετε Σχέδια Πολλαπλών Πρακτόρων (Μελέτη)
+- 📖 Επανεξετάστε το διάγραμμα αρχιτεκτονικής και τις σχέσεις συστατικών
+- 📖 Μελετήστε παραδείγματα κώδικα για SearchTool, BingTool, AgentEvaluator
 - 📖 Κατανοήστε τη στρατηγική ανάπτυξης πολλαπλών περιοχών
 - 📖 Μάθετε πλαίσια αξιολόγησης και ασφάλειας
-- 📖 Εφαρμόστε τα πρότυπα στα δικά σας έργα
+- 📖 Εφαρμόστε πρότυπα σε δικά σας έργα
 
 ### Βασικά Συμπεράσματα
 
-1. **Υποδομή vs. Εφαρμογή** - Το πρότυπο ARM παρέχει την υποδομή· οι πράκτορες χρειάζονται ανάπτυξη
+1. **Υποδομή vs Εφαρμογή** - Το ARM template παρέχει την υποδομή· οι πράκτορες απαιτούν ανάπτυξη
 2. **Στρατηγική Πολλαπλών Περιοχών** - Η στρατηγική τοποθέτηση μοντέλων μειώνει το κόστος και βελτιώνει την αξιοπιστία
-3. **Πλαίσιο Αξιολόγησης** - Αφιερωμένο μοντέλο grader επιτρέπει συνεχή αξιολόγηση ποιότητας
-4. **Ασφάλεια Πρώτα** - Red teaming και ανίχνευση ευπαθειών είναι απαραίτητα για παραγωγή
-5. **Βελτιστοποίηση Κόστους** - Έξυπνη δρομολόγηση μεταξύ gpt-4.1 και gpt-4.1-mini εξοικονομεί 60-80%
+3. **Πλαίσιο Αξιολόγησης** - Το αφιερωμένο μοντέλο grader επιτρέπει συνεχή αξιολόγηση ποιότητας
+4. **Ασφάλεια Πρώτα** - Το red teaming και η σάρωση ευπαθειών είναι απαραίτητα για παραγωγή
+5. **Βελτιστοποίηση Κόστους** - Η έξυπνη δρομολόγηση μεταξύ gpt-4.1 και gpt-4.1-mini εξοικονομεί 60-80%
 
 ### Εκτιμώμενα Κόστη
 
@@ -2157,30 +2158,30 @@ cd retail-multiagent-arm-template
 | **Standard** | $420-1,450 | $15K-25K (same effort) | $15.4K-26.5K |
 | **Premium** | $1,150-3,500 | $15K-25K (same effort) | $16.2K-28.5K |
 
-**Σημείωση:** Η υποδομή αποτελεί <5% του συνολικού κόστους για νέες υλοποιήσεις. Η προσπάθεια ανάπτυξης είναι η κύρια επένδυση.
+**Σημείωση:** Η υποδομή είναι <5% του συνολικού κόστους για νέες υλοποιήσεις. Η προσπάθεια ανάπτυξης είναι η κύρια επένδυση.
 
 ### Σχετικοί Πόροι
 
-- 📚 [Οδηγός Ανάπτυξης ARM Template](retail-multiagent-arm-template/README.md) - Ρύθμιση υποδομής
-- 📚 [Microsoft Foundry Models Βέλτιστες Πρακτικές](https://learn.microsoft.com/azure/ai-services/openai/) - Ανάπτυξη μοντέλων
-- 📚 [Τεκμηρίωση AI Search](https://learn.microsoft.com/azure/search/) - Ρύθμιση αναζήτησης με vectors
-- 📚 [Πρότυπα Container Apps](https://learn.microsoft.com/azure/container-apps/) - Ανάπτυξη μικροϋπηρεσιών
+- 📚 [ARM Template Deployment Guide](retail-multiagent-arm-template/README.md) - Ρύθμιση υποδομής
+- 📚 [Microsoft Foundry Models Best Practices](https://learn.microsoft.com/azure/ai-services/openai/) - Ανάπτυξη μοντέλων
+- 📚 [AI Search Documentation](https://learn.microsoft.com/azure/search/) - Διαμόρφωση vector search
+- 📚 [Container Apps Patterns](https://learn.microsoft.com/azure/container-apps/) - Ανάπτυξη μικροϋπηρεσιών
 - 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Ρύθμιση παρακολούθησης
 
 ### Ερωτήσεις ή Προβλήματα;
 
-- 🐛 [Αναφέρετε Ζητήματα](https://github.com/microsoft/AZD-for-beginners/issues) - Σφάλματα προτύπου ή λάθη τεκμηρίωσης
+- 🐛 [Αναφορά Προβλημάτων](https://github.com/microsoft/AZD-for-beginners/issues) - Σφάλματα προτύπου ή λάθη τεκμηρίωσης
 - 💬 [Συζητήσεις GitHub](https://github.com/microsoft/AZD-for-beginners/discussions) - Ερωτήσεις αρχιτεκτονικής
-- 📖 [Συχνές Ερωτήσεις](../resources/faq.md) - Συχνές ερωτήσεις με απαντήσεις
-- 🔧 [Οδηγός Επίλυσης Προβλημάτων](../docs/troubleshooting/common-issues.md) - Ζητήματα ανάπτυξης
+- 📖 [Συχνές Ερωτήσεις](../resources/faq.md) - Συνήθεις ερωτήσεις με απαντήσεις
+- 🔧 [Οδηγός Αντιμετώπισης Προβλημάτων](../docs/troubleshooting/common-issues.md) - Ζητήματα ανάπτυξης
 
 ---
 
-**Αυτό το ολοκληρωμένο σενάριο παρέχει ένα επιχειρησιακού επιπέδου σχέδιο αρχιτεκτονικής για συστήματα AI πολλαπλών πρακτόρων, πλήρες με πρότυπα υποδομής, οδηγίες υλοποίησης και βέλτιστες πρακτικές παραγωγής για την κατασκευή σύνθετων λύσεων υποστήριξης πελατών με το Azure Developer CLI.**
+**Αυτό το ολοκληρωμένο σενάριο παρέχει ένα σχέδιο αρχιτεκτονικής επιπέδου επιχείρησης για συστήματα πολλαπλών πρακτόρων AI, πλήρες με πρότυπα υποδομής, οδηγίες υλοποίησης και βέλτιστες πρακτικές παραγωγής για την κατασκευή προηγμένων λύσεων υποστήριξης πελατών με το Azure Developer CLI.**
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Αποποίηση ευθύνης:
-Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης με τεχνητή νοημοσύνη [Co-op Translator](https://github.com/Azure/co-op-translator). Ενώ επιδιώκουμε την ακρίβεια, παρακαλούμε λάβετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα πρέπει να θεωρείται ως η επίσημη πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική μετάφραση από άνθρωπο. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+**Αποποίηση ευθυνών**:
+Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης με τεχνητή νοημοσύνη [Co-op Translator](https://github.com/Azure/co-op-translator). Ενώ επιδιώκουμε την ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

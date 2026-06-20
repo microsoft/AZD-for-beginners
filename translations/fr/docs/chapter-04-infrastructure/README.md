@@ -1,14 +1,14 @@
-# Chapitre 4 : Infrastructure as Code & Déploiement
+# Chapitre 4 : Infrastructure en tant que Code & Déploiement
 
 **📚 Cours** : [AZD Pour Débutants](../../README.md) | **⏱️ Durée** : 1-1,5 heures | **⭐ Complexité** : Intermédiaire
 
 ---
 
-## Aperçu
+## Vue d'ensemble
 
-Ce chapitre couvre les modèles Infrastructure as Code (IaC) avec des templates Bicep, la mise en service des ressources et les stratégies de déploiement utilisant Azure Developer CLI.
+Ce chapitre couvre les modèles Infrastructure en tant que Code (IaC) avec les templates Bicep, la mise en service des ressources et les stratégies de déploiement utilisant Azure Developer CLI.
 
-> Validé avec `azd 1.23.12` en mars 2026.
+> Validé avec `azd 1.25.6` en juin 2026.
 
 ## Objectifs d'apprentissage
 
@@ -16,7 +16,7 @@ En terminant ce chapitre, vous allez :
 - Comprendre la structure et la syntaxe des templates Bicep
 - Mettre en service des ressources Azure avec `azd provision`
 - Déployer des applications avec `azd deploy`
-- Mettre en œuvre des stratégies de déploiement blue-green et rolling
+- Mettre en œuvre des stratégies de déploiement blue-green et roulante
 
 ---
 
@@ -26,6 +26,7 @@ En terminant ce chapitre, vous allez :
 |---|--------|-------------|------|
 | 1 | [Mise en service des ressources](provisioning.md) | Gestion des ressources Azure avec AZD | 45 min |
 | 2 | [Guide de déploiement](deployment-guide.md) | Stratégies de déploiement d'applications | 45 min |
+| 3 | [Créer votre propre template](custom-templates.md) | Construire et publier des templates azd réutilisables | 30 min |
 
 ---
 
@@ -38,7 +39,7 @@ azd init --template azure-functions-python-v2-http
 # Prévisualiser ce qui sera créé
 azd provision --preview
 
-# Provisionner uniquement l'infrastructure
+# Approvisionner uniquement l'infrastructure
 azd provision
 
 # Déployer uniquement le code
@@ -67,12 +68,12 @@ my-project/
 
 ---
 
-## 🔧 Commandes essentielles
+## 🔧 Commandes Essentielles
 
 | Commande | Description |
 |---------|-------------|
 | `azd init` | Initialiser le projet |
-| `azd provision` | Créer les ressources Azure |
+| `azd provision` | Créer des ressources Azure |
 | `azd deploy` | Déployer le code de l'application |
 | `azd up` | provision + déploiement |
 | `azd down` | Supprimer toutes les ressources |
@@ -88,15 +89,15 @@ my-project/
 
 ---
 
-## 📖 Ressources associées
+## 📖 Ressources Associées
 
-- [Contrôles préalables au déploiement](../chapter-06-pre-deployment/README.md)
-- [Exemples d’application Container](../../examples/container-app/README.md)
-- [Exemple d’application base de données](../../examples/database-app/README.md)
+- [Contrôles Avant Déploiement](../chapter-06-pre-deployment/README.md)
+- [Exemples d'Applications Conteneurisées](../../examples/container-app/README.md)
+- [Exemple d'Application Base de Données](../../examples/database-app/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Avertissement** :  
-Ce document a été traduit à l’aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforçons d’assurer l’exactitude, veuillez noter que les traductions automatiques peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue native doit être considéré comme la source faisant foi. Pour des informations critiques, une traduction professionnelle réalisée par un humain est recommandée. Nous déclinons toute responsabilité en cas de malentendus ou d’interprétations erronées découlant de l’utilisation de cette traduction.
+**Avertissement** :
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforçions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue native doit être considéré comme la source faisant autorité. Pour les informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous ne saurions être tenus responsables des malentendus ou erreurs d'interprétation découlant de l'utilisation de cette traduction.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

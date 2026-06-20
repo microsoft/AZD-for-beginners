@@ -4,7 +4,7 @@
 
     - [ ] Understand the importance of resource cleanup and cost management
     - [ ] Use `azd down` to deprovision infrastructure safely
-    - [ ] Recover soft-deleted cognitive services if needed
+    - [ ] Recover soft-deleted Azure AI Services if needed
     - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---

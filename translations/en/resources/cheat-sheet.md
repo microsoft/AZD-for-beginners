@@ -113,12 +113,23 @@ azd deploy --all
 
 ### Build and Package
 ```bash
-# Build applications
+# Restore (download) application dependencies
+azd restore
+
+# Restore a specific service
+azd restore --service api
+
+# Build a deployable artifact without deploying
 azd package
 
 # Build specific service
 azd package --service api
 ```
+
+> **`azd restore`** downloads your app's dependencies (npm, pip, NuGet, Maven, etc.). It runs automatically during `azd package` and `azd deploy`, so you rarely call it directly—run it manually to pre-fetch dependencies (for example, to warm a CI cache or work offline afterward).
+
+> **`azd package`** builds the deployable artifact (a container image or zip) **without** pushing it to Azure. Use it on its own to verify a build succeeds, inspect the output, or produce an artifact a separate process will deploy later. `azd deploy` packages automatically, so you only need `azd package` when you want the artifact without deploying.
+
 
 ## 🌍 Environment Management
 
@@ -310,6 +321,12 @@ azd extension list
 # Install the Foundry agents extension
 azd extension install azure.ai.agents
 
+# Install the agent skills extension (preview)
+azd extension install azure.ai.skills
+
+# Install the Foundry connections extension (preview)
+azd extension install azure.ai.connections
+
 # Install the fine-tuning extension
 azd extension install azure.ai.finetune
 
@@ -333,6 +350,22 @@ azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
 
 # Choose a hosting target
 azd ai agent init -m agent-manifest.yaml --host containerapp
+
+# Test a deployed agent (prints latency + time-to-first-byte)
+azd ai agent invoke
+
+# Show the live endpoint configuration
+azd ai agent endpoint show
+
+# Generate an evaluation dataset, then optimize the agent
+azd ai agent eval generate
+azd ai agent optimize
+
+# Download the deployed source of a code-based hosted agent
+azd ai agent code download
+
+# Delete a hosted agent and all its versions (--force ends active sessions)
+azd ai agent delete --force
 ```
 
 ### MCP Server (Alpha)

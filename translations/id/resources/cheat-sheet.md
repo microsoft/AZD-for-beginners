@@ -1,33 +1,33 @@
-# Ringkasan Perintah - Perintah AZD Esensial
+# Cheat Sheet Perintah - Perintah AZD Esensial
 
 **Referensi Cepat untuk Semua Bab**
 - **📚 Beranda Kursus**: [AZD untuk Pemula](../README.md)
-- **📖 Memulai Cepat**: [Bab 1: Dasar & Memulai Cepat](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 Perintah AI**: [Bab 2: Pengembangan Berbasis AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Lanjutan**: [Bab 4: Infrastruktur sebagai Kode](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+- **📖 Mulai Cepat**: [Bab 1: Dasar & Panduan Singkat](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 Perintah AI**: [Bab 2: Pengembangan Berorientasi AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Lanjutan**: [Bab 4: Infrastructure as Code](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Pendahuluan
 
-Ringkasan perintah komprehensif ini menyediakan referensi cepat untuk perintah Azure Developer CLI yang paling sering digunakan, disusun menurut kategori dengan contoh praktis. Sempurna untuk pencarian cepat saat pengembangan, pemecahan masalah, dan operasi harian dengan proyek azd.
+Lembar contekan komprehensif ini menyediakan referensi cepat untuk perintah Azure Developer CLI yang paling sering digunakan, diatur menurut kategori dengan contoh praktis. Sempurna untuk pencarian cepat saat pengembangan, pemecahan masalah, dan operasi harian dengan proyek azd.
 
 ## Tujuan Pembelajaran
 
-Dengan menggunakan ringkasan perintah ini, Anda akan:
+Dengan menggunakan lembar contekan ini, Anda akan:
 - Memiliki akses instan ke perintah dan sintaks Azure Developer CLI yang penting
 - Memahami pengorganisasian perintah berdasarkan kategori fungsional dan kasus penggunaan
-- Merujuk contoh praktis untuk skenario pengembangan dan penyebaran umum
-- Mengakses perintah pemecahan masalah untuk resolusi isu cepat
-- Menemukan opsi konfigurasi dan kustomisasi tingkat lanjut dengan efisien
+- Merefensi contoh praktis untuk skenario pengembangan dan penerapan umum
+- Mengakses perintah pemecahan masalah untuk penyelesaian masalah cepat
+- Menemukan opsi konfigurasi dan kustomisasi lanjutan dengan efisien
 - Menemukan perintah manajemen lingkungan dan alur kerja multi-lingkungan
 
 ## Hasil Pembelajaran
 
-Dengan merujuk ringkasan perintah ini secara rutin, Anda akan dapat:
+Dengan sering merujuk lembar contekan ini, Anda akan mampu:
 - Menjalankan perintah azd dengan percaya diri tanpa merujuk dokumentasi lengkap
-- Cepat menyelesaikan masalah umum menggunakan perintah diagnostik yang sesuai
-- Mengelola beberapa lingkungan dan skenario penyebaran secara efisien
-- Menerapkan fitur azd tingkat lanjut dan opsi konfigurasi sesuai kebutuhan
-- Memecahkan masalah penyebaran menggunakan urutan perintah yang sistematis
+- Dengan cepat menyelesaikan masalah umum menggunakan perintah diagnostik yang sesuai
+- Mengelola beberapa lingkungan dan skenario penerapan secara efisien
+- Menerapkan fitur dan opsi konfigurasi azd lanjutan sesuai kebutuhan
+- Memecahkan masalah penerapan menggunakan urutan perintah sistematis
 - Mengoptimalkan alur kerja melalui penggunaan pintasan dan opsi azd yang efektif
 
 ## Perintah Memulai
@@ -43,7 +43,7 @@ az login
 # Periksa akun saat ini
 az account show
 
-# Atur langganan default
+# Tetapkan langganan default
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 
@@ -70,9 +70,9 @@ azd init .
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## Perintah Penyebaran Inti
+## Perintah Inti Penerapan
 
-### Alur Kerja Penyebaran Lengkap
+### Alur Kerja Penerapan Lengkap
 ```bash
 # Terapkan semuanya (penyediaan + penyebaran)
 azd up
@@ -94,7 +94,7 @@ azd provision
 
 # 🧪 Pratinjau perubahan infrastruktur
 azd provision --preview
-# Menampilkan tampilan simulasi mengenai sumber daya yang akan dibuat/dimodifikasi/dihapus
+# Menampilkan tampilan dry-run mengenai sumber daya apa yang akan dibuat/diubah/dihapus
 # Mirip dengan 'terraform plan' atau 'bicep what-if' - aman dijalankan, tidak ada perubahan yang diterapkan
 ```
 
@@ -111,14 +111,25 @@ azd deploy --service api
 azd deploy --all
 ```
 
-### Build dan Paket
+### Bangun dan Paket
 ```bash
-# Membangun aplikasi
+# Pulihkan (unduh) dependensi aplikasi
+azd restore
+
+# Pulihkan layanan tertentu
+azd restore --service api
+
+# Bangun artefak yang dapat diterapkan tanpa menyebarkannya
 azd package
 
-# Membangun layanan tertentu
+# Bangun layanan tertentu
 azd package --service api
 ```
+
+> **`azd restore`** mengunduh dependensi aplikasi Anda (npm, pip, NuGet, Maven, dll.). Perintah ini berjalan otomatis selama `azd package` dan `azd deploy`, jadi Anda jarang memanggilnya secara langsung—jalankan secara manual untuk mengambil dependensi sebelumnya (misalnya, untuk memanaskan cache CI atau bekerja secara offline setelahnya).
+
+> **`azd package`** membangun artefak yang dapat diterapkan (image kontainer atau zip) **tanpa** mendorongnya ke Azure. Gunakan sendiri untuk memverifikasi bahwa build berhasil, memeriksa keluaran, atau menghasilkan artefak yang proses terpisah akan terapkan nanti. `azd deploy` melakukan paket secara otomatis, jadi Anda hanya membutuhkan `azd package` ketika Anda menginginkan artefak tanpa melakukan penerapan.
+
 
 ## 🌍 Manajemen Lingkungan
 
@@ -143,7 +154,7 @@ azd env refresh
 
 ### Variabel Lingkungan
 ```bash
-# Tetapkan variabel lingkungan
+# Atur variabel lingkungan
 azd env set API_KEY "your-secret-key"
 azd env set DEBUG true
 
@@ -161,17 +172,17 @@ azd env unset DEBUG
 
 ### Konfigurasi Global
 ```bash
-# Daftar semua konfigurasi
+# Tampilkan semua konfigurasi
 azd config show
 
-# Atur default global
+# Tetapkan default global
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
 # Hapus konfigurasi
 azd config unset defaults.location
 
-# Atur ulang semua konfigurasi
+# Setel ulang semua konfigurasi
 azd config reset
 ```
 
@@ -194,13 +205,13 @@ azd show --output json
 # Buka dasbor pemantauan portal Azure
 azd monitor
 
-# Buka metrik waktu nyata di Application Insights
+# Buka metrik langsung Application Insights
 azd monitor --live
 
-# Buka blade log di Application Insights
+# Buka blade log Application Insights
 azd monitor --logs
 
-# Buka ikhtisar di Application Insights
+# Buka gambaran umum Application Insights
 azd monitor --overview
 ```
 
@@ -212,7 +223,7 @@ az containerapp logs show --name <app-name> --resource-group <rg-name>
 # Ikuti log secara real-time
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
-# Lihat log di Azure Portal
+# Lihat log dari Azure Portal
 azd monitor --logs
 ```
 
@@ -272,13 +283,13 @@ azd pipeline show
 
 ### Manajemen Infrastruktur
 ```bash
-# Hasilkan template infrastruktur
+# Hasilkan templat infrastruktur
 azd infra generate
 
 # 🧪 Pratinjau & Perencanaan Infrastruktur
 azd provision --preview
-# Mensimulasikan penyediaan infrastruktur tanpa melakukan penyebaran
-# Menganalisis template Bicep/Terraform dan menampilkan:
+# Mensimulasikan penyediaan infrastruktur tanpa menerapkan
+# Menganalisis templat Bicep/Terraform dan menampilkan:
 # - Sumber daya yang akan ditambahkan (hijau +)
 # - Sumber daya yang akan dimodifikasi (kuning ~)
 # - Sumber daya yang akan dihapus (merah -)
@@ -290,13 +301,13 @@ azd infra synth
 
 ### Informasi Proyek
 ```bash
-# Tampilkan status proyek dan titik akhir
+# Tampilkan status proyek dan endpoint
 azd show
 
-# Tampilkan informasi proyek secara rinci sebagai JSON
+# Tampilkan informasi proyek terperinci dalam format JSON
 azd show --output json
 
-# Dapatkan titik akhir layanan
+# Dapatkan endpoint layanan
 azd show --output json | jq '.services'
 ```
 
@@ -310,13 +321,19 @@ azd extension list
 # Pasang ekstensi agen Foundry
 azd extension install azure.ai.agents
 
-# Pasang ekstensi penyetelan halus
+# Pasang ekstensi keterampilan agen (pratinjau)
+azd extension install azure.ai.skills
+
+# Pasang ekstensi koneksi Foundry (pratinjau)
+azd extension install azure.ai.connections
+
+# Pasang ekstensi penyetelan
 azd extension install azure.ai.finetune
 
 # Pasang ekstensi model kustom
 azd extension install azure.ai.models
 
-# Perbarui semua ekstensi yang terpasang
+# Tingkatkan semua ekstensi yang terpasang
 azd extension upgrade --all
 ```
 
@@ -325,7 +342,7 @@ azd extension upgrade --all
 # Inisialisasi proyek agen dari manifes
 azd ai agent init -m <manifest-path-or-uri>
 
-# Menargetkan proyek Foundry tertentu
+# Tujukan ke proyek Foundry tertentu
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
 # Tentukan direktori sumber agen
@@ -333,9 +350,25 @@ azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
 
 # Pilih target hosting
 azd ai agent init -m agent-manifest.yaml --host containerapp
+
+# Uji agen yang dideploy (menampilkan latensi + waktu-ke-byte-pertama)
+azd ai agent invoke
+
+# Tampilkan konfigurasi endpoint langsung
+azd ai agent endpoint show
+
+# Hasilkan dataset evaluasi, lalu optimalkan agen
+azd ai agent eval generate
+azd ai agent optimize
+
+# Unduh sumber yang dideploy dari agen yang dihosting berbasis kode
+azd ai agent code download
+
+# Hapus agen yang dihosting dan semua versinya (--force mengakhiri sesi aktif)
+azd ai agent delete --force
 ```
 
-### MCP Server (Alpha)
+### Server MCP (Alpha)
 ```bash
 # Mulai server MCP untuk proyek Anda
 azd mcp start
@@ -344,12 +377,12 @@ azd mcp start
 azd copilot consent list
 ```
 
-### Generasi Infrastruktur
+### Pembuatan Infrastruktur
 ```bash
 # Hasilkan file IaC dari definisi proyek Anda
 azd infra generate
 
-# Hasilkan infrastruktur dari file azure.yaml
+# Menyintesis infrastruktur dari azure.yaml
 azd infra synth
 ```
 
@@ -381,11 +414,11 @@ azd env new dev
 azd env new staging  
 azd env new production
 
-# Terapkan ke dev
+# Terapkan ke lingkungan pengembangan
 azd env select dev
 azd up
 
-# Uji dan promosikan ke staging
+# Uji dan promosikan ke lingkungan staging
 azd env select staging
 azd up
 
@@ -420,7 +453,7 @@ azd show --output json
 export AZD_DEBUG=true
 azd <command> --debug
 
-# Nonaktifkan telemetri untuk output yang lebih bersih
+# Nonaktifkan telemetri untuk keluaran yang lebih bersih
 export AZD_DISABLE_TELEMETRY=true
 
 # Periksa konfigurasi saat ini
@@ -432,7 +465,7 @@ az account show
 
 ### Debug Template
 ```bash
-# Daftar template yang tersedia beserta rincian
+# Daftar template yang tersedia beserta rinciannya
 azd template list --output json
 
 # Tampilkan informasi template
@@ -450,7 +483,7 @@ azd template validate <template-name>
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
-# Arahkan ke root proyek azd
+# Masuk ke root proyek azd
 cd $(azd root)
 
 # Tampilkan direktori konfigurasi azd
@@ -461,7 +494,7 @@ echo $AZD_CONFIG_DIR  # Biasanya ~/.azd
 
 ### Output JSON
 ```bash
-# Dapatkan keluaran JSON untuk skrip
+# Dapatkan keluaran JSON untuk penulisan skrip
 azd show --output json
 azd env list --output json
 azd config show --output json
@@ -476,7 +509,7 @@ azd env get-values --output json | jq -r '.DATABASE_URL'
 # Format sebagai tabel
 azd env list --output table
 
-# Lihat layanan yang telah diterapkan
+# Lihat layanan yang diterapkan
 azd show --output json | jq '.services | keys'
 ```
 
@@ -491,12 +524,12 @@ azd env get-values
 azd monitor --logs
 ```
 
-### Validasi Penyebaran
+### Validasi Penerapan
 ```bash
 #!/bin/bash
 # Validasi sebelum penyebaran
 azd show
-azd provision --preview  # Pratinjau perubahan sebelum menerapkan
+azd provision --preview  # Pratinjau perubahan sebelum melakukan penyebaran
 az account show
 ```
 
@@ -536,7 +569,7 @@ export AZD_DEBUG=true
 export AZD_DISABLE_TELEMETRY=true
 export AZD_CONFIG_DIR="~/.azd"
 
-# Konfigurasi Aplikasi
+# Konfigurasi aplikasi
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
@@ -545,14 +578,14 @@ export LOG_LEVEL="info"
 
 ### Perbaikan Cepat
 ```bash
-# Atur ulang otentikasi
+# Atur ulang autentikasi
 az account clear
 az login
 
-# Paksa muat ulang lingkungan
+# Paksa penyegaran lingkungan
 azd env refresh
 
-# Terapkan kembali semua layanan
+# Sebarkan ulang semua layanan
 azd deploy
 
 # Periksa status penyebaran
@@ -561,7 +594,7 @@ azd show --output json
 
 ### Perintah Pemulihan
 ```bash
-# Pulihkan dari penerapan yang gagal - bersihkan dan terapkan ulang
+# Pulihkan dari penyebaran yang gagal - bersihkan dan terapkan ulang
 azd down --force --purge
 azd up
 
@@ -583,14 +616,14 @@ alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Pintasan Fungsi
+### Jalan Pintas Fungsi
 ```bash
 # Beralih lingkungan dengan cepat
 azd-env() {
     azd env select $1 && azd show
 }
 
-# Penerapan cepat dengan pemantauan
+# Penyebaran cepat dengan pemantauan
 azd-deploy-watch() {
     azd deploy --service $1 && azd monitor --live
 }
@@ -624,30 +657,30 @@ azd version --output json
 
 ### Tautan Dokumentasi
 ```bash
-# Buka dokumentasi di peramban
+# Buka dokumentasi di browser
 azd docs
 
-# Tampilkan dokumentasi templat
+# Tampilkan dokumentasi template
 azd template show <template-name> --docs
 ```
 
 ---
 
-**Tip**: Tandai ringkasan perintah ini dan gunakan `Ctrl+F` untuk menemukan perintah yang Anda butuhkan dengan cepat!
+**Tip**: Tandai lembar contekan ini dan gunakan `Ctrl+F` untuk menemukan perintah yang Anda butuhkan dengan cepat!
 
 ---
 
 **Navigasi**
-- **Pelajaran Sebelumnya**: [Pemeriksaan Pra-penyebaran](../docs/pre-deployment/preflight-checks.md)
+- **Pelajaran Sebelumnya**: [Pemeriksaan Pra-Penempatan](../docs/pre-deployment/preflight-checks.md)
 - **Pelajaran Berikutnya**: [Glosarium](glossary.md)
 
 ---
 
-> **💡 Ingin bantuan perintah Azure di editor Anda?** Instal [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) dengan `npx skills add microsoft/github-copilot-for-azure` — 37 keterampilan untuk AI, Foundry, penyebaran, diagnostik, dan lainnya.
+> **💡 Ingin bantuan perintah Azure di editor Anda?** Pasang [Keterampilan Agen Microsoft Azure](https://skills.sh/microsoft/github-copilot-for-azure) dengan `npx skills add microsoft/github-copilot-for-azure` — 37 keterampilan untuk AI, Foundry, penerapan, diagnostik, dan lainnya.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk akurasi, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber otoritatif. Untuk informasi penting, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau salah tafsir yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk mencapai akurasi, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang sah. Untuk informasi penting, disarankan menggunakan terjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,174 +1,174 @@
-# راهکار پشتیبانی مشتری چندعامله - سناریوی خرده‌فروشی
+# Multi-Agent Customer Support Solution - Retailer Scenario
 
-**فصل ۵: راهکارهای هوش مصنوعی چندعامل**
-- **📚 صفحه دوره**: [AZD For Beginners](../README.md)
-- **📖 فصل جاری**: [فصل ۵: راهکارهای هوش مصنوعی چندعامل](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **⬅️ پیش‌نیازها**: [فصل ۲: توسعه مبتنی بر هوش مصنوعی](../docs/microsoft-foundry/microsoft-foundry-integration.md)
-- **➡️ فصل بعدی**: [فصل ۶: اعتبارسنجی پیش از استقرار](../docs/pre-deployment/capacity-planning.md)
-- **🚀 قالب‌های ARM**: [بسته استقرار](retail-multiagent-arm-template/README.md)
+**Chapter 5: Multi-Agent AI Solutions**
+- **📚 Course Home**: [صفحه اصلی دوره](../README.md)
+- **📖 Current Chapter**: [فصل ۵: راه‌حل‌های چندعاملۀ هوش مصنوعی](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **⬅️ Prerequisites**: [فصل ۲: توسعهٔ AI-اول](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **➡️ Next Chapter**: [فصل ۶: اعتبارسنجی پیش از استقرار](../docs/pre-deployment/capacity-planning.md)
+- **🚀 ARM Templates**: [Deployment Package](retail-multiagent-arm-template/README.md)
 
 > **⚠️ راهنمای معماری - پیاده‌سازی آماده اجرا نیست**  
-> این سند یک **نقشه جامع معماری** برای ساخت یک سیستم چندعامله ارائه می‌دهد.  
-> **موارد موجود:** قالب ARM برای استقرار زیرساخت (مدل‌های Microsoft Foundry، AI Search، Container Apps و غیره)  
-> **مواردی که شما باید بسازید:** کد عامل‌ها، منطق مسیریابی، رابط کاربری فرانت‌اند، لوله‌های داده (حدود ۸۰–۱۲۰ ساعت کار)  
+> این سند یک **نقشهٔ جامع معماری** برای ساخت یک سیستم چندعامله فراهم می‌کند.  
+> **چه چیزهایی وجود دارد:** قالب ARM برای استقرار زیرساخت (Microsoft Foundry Models, AI Search, Container Apps و غیره)  
+> **چه چیزهایی باید بسازید:** کد عامل‌ها، منطق مسیریابی، رابط کاربری فرانت‌اند، خطوط لولهٔ داده (حدوداً 80-120 ساعت)  
 >  
-> **از این سند استفاده کنید برای:**
-> - ✅ مرجع معماری برای پروژه چندعامله خود
+> **از این سند استفاده کنید به‌عنوان:**
+> - ✅ مرجع معماری برای پروژهٔ چندعاملۀ خود
 > - ✅ راهنمای یادگیری الگوهای طراحی چندعامله
 > - ✅ قالب زیرساخت برای استقرار منابع Azure
-> - ❌ نه یک برنامه آمادهٔ اجرا (نیاز به توسعه قابل توجه دارد)
+> - ❌ برنامهٔ آمادهٔ اجرا (نیازمند توسعه قابل توجه)
 
-## مرور کلی
+## Overview
 
-**هدف یادگیری:** درک معماری، تصمیمات طراحی و رویکرد پیاده‌سازی برای ساخت یک چت‌بات پشتیبانی مشتری چندعامله مناسب تولید برای یک خرده‌فروش با قابلیت‌های پیشرفته هوش مصنوعی شامل مدیریت موجودی، پردازش اسناد و تعاملات هوشمند با مشتری.
+**هدف یادگیری:** درک معماری، تصمیمات طراحی، و رویکرد اجرایی برای ساخت یک چت‌بات پشتیبانی مشتری چندعاملهٔ آمادهٔ تولید برای یک خرده‌فروش با قابلیت‌های پیشرفتهٔ AI شامل مدیریت موجودی، پردازش اسناد، و تعاملات هوشمند با مشتری.
 
-**زمان لازم برای تکمیل:** مطالعه و درک (۲–۳ ساعت) | پیاده‌سازی کامل (۸۰–۱۲۰ ساعت)
+**زمان مورد نیاز:** خواندن + درک (2-3 ساعت) | پیاده‌سازی کامل (80-120 ساعت)
 
-**چیزهایی که خواهید آموخت:**
+**آنچه خواهید آموخت:**
 - الگوها و اصول طراحی معماری چندعامله
-- استراتژی‌های استقرار مدل‌های Microsoft Foundry در چند منطقه
+- استراتژی‌های استقرار Microsoft Foundry Models در چند منطقه
 - یکپارچه‌سازی AI Search با RAG (تولید تقویت‌شده با بازیابی)
-- چارچوب‌های ارزیابی عامل و تست امنیت
+- چارچوب‌های ارزیابی عامل و تست‌های امنیتی
 - ملاحظات استقرار تولید و بهینه‌سازی هزینه
 
-## اهداف معماری
+## Architecture Goals
 
 **تمرکز آموزشی:** این معماری الگوهای سازمانی برای سیستم‌های چندعامله را نشان می‌دهد.
 
-### نیازمندی‌های سیستم (برای پیاده‌سازی شما)
+### System Requirements (For Your Implementation)
 
-یک راهکار پشتیبانی مشتری تولیدی نیاز دارد به:
-- **چندین عامل تخصصی** برای نیازهای مختلف مشتری (پشتیبانی مشتری + مدیریت موجودی)
-- **استقرار چندمدلی** با برنامه‌ریزی ظرفیت مناسب (gpt-4.1، gpt-4.1-mini، embeddings در مناطق مختلف)
-- **یکپارچه‌سازی داده پویا** با AI Search و بارگذاری فایل‌ها (جستجوی برداری + پردازش اسناد)
-- **نظارت جامع** و قابلیت‌های ارزیابی (Application Insights + معیارهای سفارشی)
-- **امنیت در سطح تولید** با اعتبارسنجی red teaming (اسکن آسیب‌پذیری + ارزیابی عامل)
+یک راه‌حل پشتیبانی مشتری تولیدی نیاز دارد به:
+- **چندین عامل تخصصی** برای نیازهای مختلف مشتریان (خدمات مشتری + مدیریت موجودی)
+- **استقرار چندمدلی** با برنامه‌ریزی ظرفیت مناسب (gpt-4.1, gpt-4.1-mini, embeddings در مناطق مختلف)
+- **ادغام دادهٔ پویا** با AI Search و بارگذاری فایل‌ها (جستجوی برداری + پردازش اسناد)
+- **نظارت جامع** و قابلیت‌های ارزیابی (Application Insights + متریک‌های سفارشی)
+- **امنیت سطح تولید** با اعتبارسنجی red teaming (اسکن آسیب‌پذیری + ارزیابی عامل)
 
-### آنچه این راهنما ارائه می‌دهد
+### What This Guide Provides
 
-✅ **الگوهای معماری** - طراحی اثبات‌شده برای سیستم‌های چندعامله مقیاس‌پذیر  
-✅ **قالب‌های زیرساخت** - قالب‌های ARM برای استقرار تمامی سرویس‌های Azure  
-✅ **نمونه‌های کد** - پیاده‌سازی‌های مرجع برای اجزای کلیدی  
-✅ **راهنمای پیکربندی** - دستورالعمل‌های گام‌به‌گام راه‌اندازی  
-✅ **بهترین شیوه‌ها** - استراتژی‌های امنیت، نظارت، و بهینه‌سازی هزینه  
+✅ **الگوهای معماری** - طرح‌های اثبات‌شده برای سیستم‌های چندعامله مقیاس‌پذیر  
+✅ **قالب‌های زیرساختی** - قالب‌های ARM برای استقرار تمام سرویس‌های Azure  
+✅ **نمونه‌های کد** - پیاده‌سازی‌های مرجع برای مؤلفه‌های کلیدی  
+✅ **راهنمای پیکربندی** - دستورالعمل‌های گام‌به‌گام تنظیم  
+✅ **بهترین شیوه‌ها** - استراتژی‌های امنیت، نظارت، بهینه‌سازی هزینه  
 
-❌ **شامل نمی‌شود** - برنامهٔ کامل و آماده اجرا (نیازمند تلاش توسعه‌ای)
+❌ **شامل نیست** - برنامهٔ کامل و آمادهٔ اجرا (نیازمند تلاش توسعه)
 
-## 🗺️ نقشه راه پیاده‌سازی
+## 🗺️ Implementation Roadmap
 
-### فاز ۱: مطالعه معماری (۲–۳ ساعت) - از اینجا شروع کنید
+### Phase 1: Study Architecture (2-3 hours) - START HERE
 
-**هدف:** درک طراحی سیستم و تعامل اجزا
+**هدف:** درک طراحی سیستم و تعامل مؤلفه‌ها
 
-- [ ] این سند را به‌طور کامل بخوانید
-- [ ] نمودار معماری و ارتباط بین اجزا را بررسی کنید
-- [ ] الگوها و تصمیمات طراحی چندعامله را درک کنید
+- [ ] این سند را کامل بخوانید
+- [ ] نمودار معماری و روابط مؤلفه‌ها را بررسی کنید
+- [ ] الگوهای چندعامله و تصمیمات طراحی را درک کنید
 - [ ] نمونه‌های کد برای ابزارها و مسیریابی عامل‌ها را مطالعه کنید
-- [ ] برآوردهای هزینه و راهنمای برنامه‌ریزی ظرفیت را مرور کنید
+- [ ] برآورد هزینه و راهنمای برنامه‌ریزی ظرفیت را بازبینی کنید
 
 **نتیجه:** درک واضح از آنچه باید بسازید
 
-### فاز ۲: استقرار زیرساخت (۳۰–۴۵ دقیقه)
+### Phase 2: Deploy Infrastructure (30-45 minutes)
 
-**هدف:** تهیه منابع Azure با استفاده از قالب ARM
+**هدف:** تهیهٔ منابع Azure با استفاده از قالب ARM
 
 ```bash
 cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup -m standard
 ```
 
-**موارد مستقرشده:**
-- ✅ Microsoft Foundry Models (۳ منطقه: gpt-4.1، gpt-4.1-mini، embeddings)
-- ✅ سرویس AI Search (خالی، نیاز به پیکربندی ایندکس دارد)
-- ✅ محیط Container Apps (تصاویر نگهدارنده)
-- ✅ حساب‌های ذخیره‌سازی، Cosmos DB، Key Vault
-- ✅ نظارت Application Insights
+**چه چیزهایی مستقر می‌شوند:**
+- ✅ Microsoft Foundry Models (3 regions: gpt-4.1, gpt-4.1-mini, embeddings)
+- ✅ AI Search service (خالی، نیاز به پیکربندی ایندکس دارد)
+- ✅ Container Apps environment (تصاویر نگهدارنده)
+- ✅ Storage accounts, Cosmos DB, Key Vault
+- ✅ Application Insights monitoring
 
-**موارد ناقص:**
+**چه چیزهایی مفقود است:**
 - ❌ کد پیاده‌سازی عامل‌ها
 - ❌ منطق مسیریابی
 - ❌ رابط کاربری فرانت‌اند
-- ❌ طرح ایندکس جستجو
-- ❌ لوله‌های داده
+- ❌ شِمای ایندکس جستجو
+- ❌ خطوط لولهٔ داده
 
-### فاز ۳: ساخت برنامه (۸۰–۱۲۰ ساعت)
+### Phase 3: Build Application (80-120 hours)
 
 **هدف:** پیاده‌سازی سیستم چندعامله بر اساس این معماری
 
-1. **پیاده‌سازی عامل** (۳۰–۴۰ ساعت)
-   - کلاس پایه عامل و اینترفیس‌ها
-   - عامل پشتیبانی مشتری با gpt-4.1
+1. **پیاده‌سازی عامل** (30-40 ساعت)
+   - کلاس پایهٔ عامل و اینترفیس‌ها
+   - عامل خدمات مشتری با gpt-4.1
    - عامل موجودی با gpt-4.1-mini
-   - یکپارچه‌سازی ابزارها (AI Search، Bing، پردازش فایل)
+   - یکپارچگی ابزارها (AI Search, Bing, پردازش فایل)
 
-2. **خدمت مسیریابی** (۱۲–۱۶ ساعت)
-   - منطق طبقه‌بندی درخواست‌ها
-   - انتخاب عامل و ارکستراسیون
+2. **خدمت مسیریابی** (12-16 ساعت)
+   - منطق طبقه‌بندی درخواست
+   - انتخاب و ارکستراسیون عامل‌ها
    - بک‌اند FastAPI/Express
 
-3. **توسعه فرانت‌اند** (۲۰–۳۰ ساعت)
+3. **توسعهٔ فرانت‌اند** (20-30 ساعت)
    - رابط گفتگو (Chat UI)
    - قابلیت بارگذاری فایل
    - رندر پاسخ‌ها
 
-4. **لوله داده** (۸–۱۲ ساعت)
+4. **خط لولهٔ داده** (8-12 ساعت)
    - ایجاد ایندکس AI Search
    - پردازش اسناد با Document Intelligence
-   - تولید امبدینگ و ایندکس‌گذاری
+   - تولید و ایندکس‌سازی embeddingها
 
-5. **نظارت و ارزیابی** (۱۰–۱۵ ساعت)
+5. **نظارت و ارزیابی** (10-15 ساعت)
    - پیاده‌سازی تله‌متری سفارشی
-   - چارچوب ارزیابی عامل
+   - چارچوب ارزیابی عامل‌ها
    - اسکنر امنیتی red team
 
-### فاز ۴: استقرار و تست (۸–۱۲ ساعت)
+### Phase 4: Deploy & Test (8-12 hours)
 
-- ساخت تصاویر Docker برای همه سرویس‌ها
+- ساخت تصاویر Docker برای همهٔ سرویس‌ها
 - ارسال به Azure Container Registry
-- به‌روز‌رسانی Container Apps با تصاویر واقعی
+- به‌روزرسانی Container Apps با تصاویر واقعی
 - پیکربندی متغیرهای محیطی و اسرار
-- اجرای مجموعه آزمون‌های ارزیابی
-- انجام اسکن امنیتی
+- اجرای مجموعهٔ تست‌های ارزیابی
+- اجرای اسکن امنیتی
 
-**کل تلاش تخمینی:** ۸۰–۱۲۰ ساعت برای توسعه‌دهندگان باتجربه
+**کل زمان تخمینی:** 80-120 ساعت برای توسعه‌دهندگان باتجربه
 
-## معماری راهکار
+## Solution Architecture
 
-### نمودار معماری
+### Architecture Diagram
 
 ```mermaid
 graph TB
-    User[👤 مشتری] --> LB[Azure Front Door]
-    LB --> WebApp[فرانت‌اند وب<br/>برنامه کانتینری]
+    User[👤 مشتری] --> LB[آزور فرانت دور]
+    LB --> WebApp[رابط وب<br/>برنامه کانتینری]
     
     WebApp --> Router[روتر عامل<br/>برنامه کانتینری]
-    Router --> CustomerAgent[عامل مشتری<br/>خدمات مشتری]
+    Router --> CustomerAgent[عامل مشتری<br/>خدمات مشتریان]
     Router --> InvAgent[عامل موجودی<br/>مدیریت موجودی]
     
-    CustomerAgent --> OpenAI1[مدل‌های Microsoft Foundry<br/>gpt-4.1<br/>East US 2]
-    InvAgent --> OpenAI2[مدل‌های Microsoft Foundry<br/>gpt-4.1-mini<br/>West US 2]
+    CustomerAgent --> OpenAI1[مدل‌های Microsoft Foundry<br/>gpt-4.1<br/>شرق ایالات متحده 2]
+    InvAgent --> OpenAI2[مدل‌های Microsoft Foundry<br/>gpt-4.1-mini<br/>غرب ایالات متحده 2]
     
-    CustomerAgent --> AISearch[Azure AI Search<br/>کاتالوگ محصولات]
-    CustomerAgent --> BingSearch[API جستجوی Bing<br/>اطلاعات بلادرنگ]
+    CustomerAgent --> AISearch[آزور جستجوی هوش مصنوعی<br/>کاتالوگ محصولات]
+    CustomerAgent --> BingSearch[API جستجوی Bing<br/>اطلاعات لحظه‌ای]
     InvAgent --> AISearch
     
-    AISearch --> Storage[Azure Storage<br/>اسناد و فایل‌ها]
-    Storage --> DocIntel[Document Intelligence<br/>پردازش محتوا]
+    AISearch --> Storage[آزور استوریج<br/>اسناد و فایل‌ها]
+    Storage --> DocIntel[هوش اسناد<br/>پردازش محتوا]
     
-    OpenAI1 --> Embeddings[بردارهای متنی<br/>ada-002<br/>France Central]
+    OpenAI1 --> Embeddings[تعبیه‌های متنی<br/>ada-002<br/>فرانسه مرکزی]
     OpenAI2 --> Embeddings
     
-    Router --> AppInsights[Application Insights<br/>نظارت]
+    Router --> AppInsights[اپلیکیشن اینسایتس<br/>نظارت]
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
-    GraderModel[gpt-4.1 ارزیاب<br/>Switzerland North] --> Evaluation[چارچوب ارزیابی]
+    GraderModel[gpt-4.1 ارزیاب<br/>شمال سوئیس] --> Evaluation[چارچوب ارزیابی]
     RedTeam[اسکنر تیم قرمز] --> SecurityReports[گزارش‌های امنیتی]
     
-    subgraph "لایهٔ داده"
+    subgraph "لایه داده"
         Storage
         AISearch
-        CosmosDB[Cosmos DB<br/>تاریخچه چت]
+        CosmosDB[کاسموس DB<br/>تاریخچه چت]
     end
     
     subgraph "خدمات هوش مصنوعی"
@@ -182,8 +182,8 @@ graph TB
     
     subgraph "نظارت و امنیت"
         AppInsights
-        LogAnalytics[محیط Log Analytics]
-        KeyVault[Azure Key Vault<br/>اسرار و تنظیمات]
+        LogAnalytics[محیط کاری تجزیه و تحلیل لاگ]
+        KeyVault[آزور مخزن کلید<br/>رمزها و تنظیمات]
         RedTeam
         Evaluation
     end
@@ -197,26 +197,27 @@ graph TB
     style AISearch fill:#fce4ec
     style Storage fill:#f1f8e9
 ```
-### مرور اجزا
+
+### Component Overview
 
 | Component | Purpose | Technology | Region |
 |-----------|---------|------------|---------|
 | **Web Frontend** | رابط کاربری برای تعاملات مشتری | Container Apps | منطقهٔ اصلی |
-| **Agent Router** | مسیریابی درخواست‌ها به عامل مناسب | Container Apps | منطقهٔ اصلی |
+| **Agent Router** | هدایت درخواست‌ها به عامل مناسب | Container Apps | منطقهٔ اصلی |
 | **Customer Agent** | رسیدگی به پرسش‌های خدمات مشتری | Container Apps + gpt-4.1 | منطقهٔ اصلی |
-| **Inventory Agent** | مدیریت موجودی و تدارکات | Container Apps + gpt-4.1-mini | منطقهٔ اصلی |
-| **Microsoft Foundry Models** | استنتاج LLM برای عامل‌ها | Cognitive Services | چندمنطقه‌ای |
+| **Inventory Agent** | مدیریت موجودی و انجام سفارشات | Container Apps + gpt-4.1-mini | منطقهٔ اصلی |
+| **Microsoft Foundry Models** | استنتاج LLM برای عامل‌ها | Azure AI Services | چندمنطقه‌ای |
 | **AI Search** | جستجوی برداری و RAG | AI Search Service | منطقهٔ اصلی |
 | **Storage Account** | بارگذاری فایل‌ها و اسناد | Blob Storage | منطقهٔ اصلی |
-| **Application Insights** | پایش و تله‌متری | Monitor | منطقهٔ اصلی |
-| **Grader Model** | سیستم ارزیابی عامل | Microsoft Foundry Models | منطقهٔ ثانویه |
+| **Application Insights** | نظارت و تله‌متری | Monitor | منطقهٔ اصلی |
+| **Grader Model** | سیستم ارزیابی عامل‌ها | Microsoft Foundry Models | منطقهٔ ثانویه |
 
-## 📁 ساختار پروژه
+## 📁 Project Structure
 
 > **📍 راهنمای وضعیت:**  
-> ✅ = در مخزن موجود است  
-> 📝 = پیاده‌سازی مرجع (نمونه کد در این سند)  
-> 🔨 = شما باید این را بسازید
+> ✅ = در مخزن وجود دارد  
+> 📝 = پیاده‌سازی مرجع (نمونهٔ کد در این سند)  
+> 🔨 = شما باید این را ایجاد کنید
 
 ```
 retail-multiagent-solution/              🔨 Your project directory
@@ -363,79 +364,79 @@ retail-multiagent-solution/              🔨 Your project directory
 
 ---
 
-## 🚀 شروع سریع: کاری که همین الآن می‌توانید انجام دهید
+## 🚀 Quick Start: What You Can Do Right Now
 
-### گزینه ۱: فقط استقرار زیرساخت (۳۰ دقیقه)
+### Option 1: Deploy Infrastructure Only (30 minutes)
 
-**چیزی که دریافت می‌کنید:** همهٔ سرویس‌های Azure آماده و برای توسعه مهیا
+**آنچه دریافت می‌کنید:** تمام سرویس‌های Azure تأمین‌شده و آمادهٔ توسعه
 
 ```bash
-# کلون کردن مخزن
+# مخزن را کلون کنید
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/retail-multiagent-arm-template
 
-# استقرار زیرساخت
+# زیرساخت را مستقر کنید
 ./deploy.sh -g myResourceGroup -m standard
 
-# تأیید استقرار
+# استقرار را تأیید کنید
 az resource list --resource-group myResourceGroup --output table
 ```
 
 **نتیجهٔ مورد انتظار:**
-- ✅ سرویس‌های Microsoft Foundry Models مستقر شده‌اند (۳ منطقه)
+- ✅ سرویس‌های Microsoft Foundry Models مستقر شده‌اند (3 منطقه)
 - ✅ سرویس AI Search ایجاد شده است (خالی)
 - ✅ محیط Container Apps آماده است
-- ✅ Storage، Cosmos DB، Key Vault پیکربندی شده‌اند
-- ❌ هنوز عامل‌های کاری وجود ندارد (تنها زیرساخت)
+- ✅ Storage, Cosmos DB, Key Vault پیکربندی شده‌اند
+- ❌ هنوز عامل‌های کاری وجود ندارند (فقط زیرساخت)
 
-### گزینه ۲: مطالعه معماری (۲–۳ ساعت)
+### Option 2: Study Architecture (2-3 hours)
 
-**چیزی که دریافت می‌کنید:** درک عمیق از الگوهای چندعامله
+**آنچه دریافت می‌کنید:** درک عمیق از الگوهای چندعامله
 
 1. این سند را کامل بخوانید
-2. نمونه‌های کد برای هر جزء را مرور کنید
-3. تصمیمات طراحی و مصالحه‌ها را درک کنید
+2. نمونه‌های کد برای هر مؤلفه را بررسی کنید
+3. تصمیمات طراحی و مبادلات را درک کنید
 4. استراتژی‌های بهینه‌سازی هزینه را مطالعه کنید
-5. رویکرد پیاده‌سازی خود را برنامه‌ریزی کنید
+5. روش پیاده‌سازی خود را برنامه‌ریزی کنید
 
 **نتیجهٔ مورد انتظار:**
-- ✅ مدل ذهنی واضح از معماری سیستم
-- ✅ درک اجزای موردنیاز
-- ✅ برآوردهای واقع‌بینانهٔ تلاش
+- ✅ مدل ذهنی واضحی از معماری سیستم
+- ✅ درک مؤلفه‌های مورد نیاز
+- ✅ برآوردهای زمان واقعی
 - ✅ برنامهٔ پیاده‌سازی
 
-### گزینه ۳: ساخت سیستم کامل (۸۰–۱۲۰ ساعت)
+### Option 3: Build Complete System (80-120 hours)
 
-**چیزی که دریافت می‌کنید:** راهکار چندعامله آماده تولید
+**آنچه دریافت می‌کنید:** راه‌حل چندعاملهٔ آمادهٔ تولید
 
 1. **فاز ۱:** استقرار زیرساخت (بالا انجام شد)
-2. **فاز ۲:** پیاده‌سازی عامل‌ها با استفاده از نمونه‌های کد زیر (۳۰–۴۰ ساعت)
-3. **فاز ۳:** ساخت سرویس مسیریابی (۱۲–۱۶ ساعت)
-4. **فاز ۴:** ایجاد رابط کاربری فرانت‌اند (۲۰–۳۰ ساعت)
-5. **فاز ۵:** پیکربندی لوله‌های داده (۸–۱۲ ساعت)
-6. **فاز ۶:** اضافه کردن نظارت و ارزیابی (۱۰–۱۵ ساعت)
+2. **فاز ۲:** پیاده‌سازی عامل‌ها با استفاده از نمونه‌های کد زیر (30-40 ساعت)
+3. **فاز ۳:** ساخت سرویس مسیریابی (12-16 ساعت)
+4. **فاز ۴:** ایجاد رابط کاربری فرانت‌اند (20-30 ساعت)
+5. **فاز ۵:** پیکربندی خطوط لولهٔ داده (8-12 ساعت)
+6. **فاز ۶:** افزودن نظارت و ارزیابی (10-15 ساعت)
 
 **نتیجهٔ مورد انتظار:**
-- ✅ سیستم چندعامله کاملاً عملیاتی
+- ✅ سیستم چندعاملهٔ کاملاً عملیاتی
 - ✅ نظارت سطح تولید
 - ✅ اعتبارسنجی امنیتی
 - ✅ استقرار بهینه‌شده از نظر هزینه
 
 ---
 
-## 📚 مرجع معماری و راهنمای پیاده‌سازی
+## 📚 Architecture Reference & Implementation Guide
 
-بخش‌های زیر الگوهای معماری دقیق، مثال‌های پیکربندی و کد مرجع را برای راهنمایی پیاده‌سازی ارائه می‌دهند.
+بخش‌های زیر الگوهای معماری مفصل، مثال‌های پیکربندی، و کد مرجع را برای راهنمایی پیاده‌سازی فراهم می‌کنند.
 
-## پیش‌نیازهای پیکربندی اولیه
+## Initial Configuration Requirements
 
-### ۱. چندین عامل و پیکربندی
+### 1. Multiple Agents & Configuration
 
-**هدف**: استقرار ۲ عامل تخصصی - "عامل مشتری" (خدمات مشتری) و "موجودی" (مدیریت موجودی)
+**هدف**: استقرار ۲ عامل تخصصی — "Customer Agent" (خدمات مشتری) و "Inventory" (مدیریت موجودی)
 
-> **📝 نکته:** فایل‌های azure.yaml و پیکربندی‌های Bicep زیر **نمونه مرجع** هستند که نشان می‌دهند چگونه استقرارهای چندعامله را ساختاربندی کنید. شما باید این فایل‌ها و پیاده‌سازی عامل‌های مربوطه را ایجاد کنید.
+> **📝 توجه:** azure.yaml و پیکربندی‌های Bicep زیر **نمونه‌های مرجع** نشان می‌دهند چگونه استقرارهای چندعامله را ساختاربندی کنید. شما باید این فایل‌ها و پیاده‌سازی‌های عامل مربوطه را ایجاد کنید.
 
-#### مراحل پیکربندی:
+#### گام‌های پیکربندی:
 
 ```yaml
 # azure.yaml - Agent Configuration
@@ -507,9 +508,9 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 }]
 ```
 
-### ۲. چندین مدل با برنامه‌ریزی ظرفیت
+### 2. Multiple Models with Capacity Planning
 
-**هدف**: استقرار مدل چت (مشتری)، مدل امبدینگ (جستجو)، و مدل استدلال (grader) با مدیریت سهمیه مناسب
+**هدف**: استقرار مدل چت (Customer)، مدل embeddings (جستجو)، و مدل استدلال (grader) با مدیریت سهمیه مناسب
 
 #### استراتژی چندمنطقه‌ای:
 
@@ -555,7 +556,7 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
 }
 ```
 
-#### پیکربندی بازگشت به منطقه‌ی جایگزین:
+#### پیکربندی Region Fallback:
 
 ```yaml
 # .azure/env/.env.production
@@ -564,11 +565,11 @@ AZURE_OPENAI_FALLBACK_ENABLED=true
 MODEL_CAPACITY_REQUIREMENTS='{"gpt-4.1": 35, "text-embedding-ada-002": 30}'
 ```
 
-### ۳. AI Search با پیکربندی ایندکس داده
+### 3. AI Search with Data Index Configuration
 
-**هدف**: پیکربندی AI Search برای به‌روزرسانی داده‌ها و ایندکس‌گذاری خودکار
+**هدف**: پیکربندی AI Search برای به‌روزرسانی داده‌ها و ایندکس‌سازی خودکار
 
-#### هوک پیش‌تامین:
+#### Hook قبل از تأمین منابع:
 
 ```bash
 #!/bin/bash
@@ -576,7 +577,7 @@ MODEL_CAPACITY_REQUIREMENTS='{"gpt-4.1": 35, "text-embedding-ada-002": 30}'
 
 echo "Setting up AI Search configuration..."
 
-# ایجاد سرویس جستجو با SKU خاص
+# ایجاد سرویس جستجو با SKU مشخص
 az search service create \
   --name "$AZURE_SEARCH_SERVICE_NAME" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -585,7 +586,7 @@ az search service create \
   --replica-count 1
 ```
 
-#### راه‌اندازی داده پس از تدارک:
+#### تنظیم داده‌ها پس از تأمین منابع:
 
 ```bash
 #!/bin/bash
@@ -596,7 +597,7 @@ echo "Configuring AI Search indexes and uploading initial data..."
 # دریافت کلید سرویس جستجو
 SEARCH_KEY=$(az search admin-key show --service-name "$AZURE_SEARCH_SERVICE_NAME" --resource-group "$AZURE_RESOURCE_GROUP" --query primaryKey -o tsv)
 
-# ایجاد اسکیمای ایندکس
+# ایجاد طرح‌وارهٔ ایندکس
 curl -X POST "https://$AZURE_SEARCH_SERVICE_NAME.search.windows.net/indexes?api-version=2023-11-01" \
   -H "Content-Type: application/json" \
   -H "api-key: $SEARCH_KEY" \
@@ -609,7 +610,7 @@ python ./scripts/upload_search_data.py \
   --data-path "./data/initial-docs"
 ```
 
-#### طرح ایندکس جستجو:
+#### شِمای ایندکس جستجو:
 
 ```json
 {
@@ -634,14 +635,14 @@ python ./scripts/upload_search_data.py \
 }
 ```
 
-### ۴. پیکربندی ابزار عامل برای AI Search
+### 4. Agent Tool Configuration for AI Search
 
-**هدف**: پیکربندی عامل‌ها برای استفاده از AI Search به‌عنوان ابزار مبنا
+**هدف**: پیکربندی عامل‌ها برای استفاده از AI Search به‌عنوان ابزار پایه‌ای
 
 #### پیاده‌سازی ابزار جستجوی عامل:
 
 ```python
-# فایل src/agents/tools/search_tool.py
+# منبع/عامل‌ها/ابزارها/ابزار_جستجو.py
 import asyncio
 from azure.search.documents.aio import SearchClient
 from azure.core.credentials import AzureKeyCredential
@@ -682,7 +683,7 @@ class SearchTool:
         return [doc async for doc in results]
 ```
 
-#### یکپارچه‌سازی عامل:
+#### یکپارچگی عامل:
 
 ```python
 # src/agents/customer_agent.py
@@ -695,13 +696,13 @@ class CustomerAgent:
         self.search_tool = search_tool
         
     async def process_query(self, user_query: str) -> str:
-        # ابتدا به دنبال زمینهٔ مرتبط جست‌وجو کنید
+        # ابتدا به دنبال زمینه‌ی مرتبط بگردید
         search_results = await self.search_tool.search_products(user_query)
         
-        # زمینه را برای مدل زبان بزرگ آماده کنید
+        # زمینه را برای LLM آماده کنید
         context = "\n".join([doc['content'] for doc in search_results[:3]])
         
-        # پاسخ را با پایه‌گذاری تولید کنید
+        # پاسخ را با استناد تولید کنید
         response = await self.openai_client.chat.completions.create(
             model="gpt-4.1",
             messages=[
@@ -713,11 +714,11 @@ class CustomerAgent:
         return response.choices[0].message.content
 ```
 
-### ۵. یکپارچه‌سازی ذخیره‌سازی برای بارگذاری فایل
+### 5. File Upload Storage Integration
 
-**هدف**: فعال‌سازی پردازش فایل‌های بارگذاری‌شده توسط عامل‌ها (دستورالعمل‌ها، اسناد) برای زمینه RAG
+**هدف**: فعال‌سازی پردازش فایل‌های بارگذاری‌شده (راهنماها، اسناد) توسط عامل‌ها برای زمینهٔ RAG
 
-#### پیکربندی ذخیره‌سازی:
+#### پیکربندی Storage:
 
 ```bicep
 // infra/storage.bicep
@@ -756,7 +757,7 @@ resource eventGridTopic 'Microsoft.EventGrid/topics@2023-12-15-preview' = {
 }
 ```
 
-#### لوله پردازش اسناد:
+#### خط لولهٔ پردازش اسناد:
 
 ```python
 # src/document_processor.py
@@ -776,7 +777,7 @@ class DocumentProcessor:
     async def process_uploaded_file(self, container_name: str, blob_name: str):
         """Process uploaded file and add to search index"""
         
-        # دانلود فایل از ذخیره‌سازی Blob
+        # دانلود فایل از ذخیره‌سازی blob
         blob_client = self.storage_client.get_blob_client(
             container=container_name, 
             blob=blob_name
@@ -796,7 +797,7 @@ class DocumentProcessor:
             for line in page.lines:
                 text_content += line.content + "\n"
         
-        # ایجاد امبدینگ‌ها
+        # تولید بردارهای تعبیه‌شده
         embedding_response = await self.openai_client.embeddings.create(
             model="text-embedding-ada-002",
             input=text_content
@@ -814,9 +815,9 @@ class DocumentProcessor:
         await self.search_client.upload_documents([document])
 ```
 
-### ۶. یکپارچه‌سازی جستجوی Bing
+### 6. Bing Search Integration
 
-**هدف**: افزودن قابلیت‌های جستجوی لحظه‌ای Bing
+**هدف**: افزودن قابلیت‌های جستجوی لحظه‌ای با Bing
 
 #### افزودن منبع Bicep:
 
@@ -839,7 +840,7 @@ output bingSearchEndpoint string = 'https://api.bing.microsoft.com/v7.0/search'
 #### ابزار جستجوی Bing:
 
 ```python
-# src/agents/tools/bing_search_tool.py
+# منبع/عامل‌ها/ابزارها/ابزار_جستجوی_بینگ.py
 import aiohttp
 import asyncio
 
@@ -880,11 +881,11 @@ class BingSearchTool:
 
 ---
 
-## نظارت و مشاهده‌پذیری
+## Monitoring & Observability
 
-### ۷. تراسینگ و Application Insights
+### 7. Tracing and Application Insights
 
-**هدف**: نظارت جامع با لاگ‌های تراس و Application Insights
+**هدف**: نظارت جامع با لاگ‌های trace و Application Insights
 
 #### پیکربندی Application Insights:
 
@@ -1045,9 +1046,9 @@ class AgentTelemetry:
         return len(text) // 4
 ```
 
-### ۸. اعتبارسنجی امنیتی Red Teaming
+### 8. Red Teaming Security Validation
 
-**هدف**: تست امنیتی خودکار برای عامل‌ها و مدل‌ها
+**هدف**: تست‌های امنیتی خودکار برای عامل‌ها و مدل‌ها
 
 #### پیکربندی Red Teaming:
 
@@ -1097,7 +1098,7 @@ class RedTeamScanner:
                     'details': strategy_result['details']
                 })
         
-        # محاسبهٔ امتیاز کلی امنیت
+        # محاسبه امتیاز کلی امنیت
         scan_results['overall_score'] = self._calculate_security_score(scan_results)
         
         return scan_results
@@ -1165,7 +1166,7 @@ class RedTeamScanner:
     
     async def _send_test_prompt(self, prompt: str) -> str:
         """Send test prompt to target agent"""
-        # در پیاده‌سازی، درخواست HTTP به نقطهٔ پایانی عامل ارسال می‌شود
+        # در پیاده‌سازی، یک درخواست HTTP به نقطهٔ پایانی عامل ارسال می‌شود
         # برای اهداف نمایشی، مقدار جایگزین بازگردانده می‌شود
         import aiohttp
         
@@ -1188,7 +1189,7 @@ class RedTeamScanner:
     
     def _analyze_response(self, response: str, strategy: str) -> Dict:
         """Analyze response for vulnerabilities"""
-        # شناسایی ساده‌شدهٔ آسیب‌پذیری
+        # شناسایی آسیب‌پذیری ساده‌شده
         vulnerability_patterns = {
             'prompt_injection': ['system prompt', 'internal config', 'admin mode'],
             'jailbreak_attempts': ['DAN mode', 'rules broken', 'safety disabled'],
@@ -1240,7 +1241,7 @@ class RedTeamScanner:
         return round(final_score, 2)
 ```
 
-#### لولهٔ خودکار امنیت:
+#### خط لولهٔ امنیت خودکار:
 
 ```bash
 #!/bin/bash
@@ -1248,13 +1249,13 @@ class RedTeamScanner:
 
 echo "Starting Red Team Security Scan..."
 
-# دریافت نقطهٔ پایانی عامل از استقرار
+# نقطهٔ پایانی عامل را از استقرار دریافت کنید
 AGENT_ENDPOINT=$(az containerapp show \
   --name "agent-customer" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# اجرای اسکن امنیتی
+# اسکن امنیتی را اجرا کنید
 python -m src.security.red_team_scanner \
   --endpoint "https://$AGENT_ENDPOINT" \
   --api-key "$AGENT_API_KEY" \
@@ -1264,11 +1265,11 @@ python -m src.security.red_team_scanner \
 echo "Security scan completed. Check security_reports/ for results."
 ```
 
-### ۹. ارزیابی عامل با مدل Grader
+### 9. Agent Evaluation with Grader Model
 
 **هدف**: استقرار سیستم ارزیابی با مدل grader اختصاصی
 
-#### پیکربندی مدل Grader:
+#### پیکربندی Grader Model:
 
 ```bicep
 // infra/evaluation.bicep
@@ -1341,7 +1342,7 @@ class AgentEvaluator:
             case_result = await self._evaluate_single_case(test_case)
             evaluation_results['results'].append(case_result)
         
-        # محاسبه معیارهای خلاصه
+        # محاسبهٔ معیارهای جمع‌بندی
         evaluation_results['summary'] = self._calculate_summary(evaluation_results['results'])
         
         return evaluation_results
@@ -1354,7 +1355,7 @@ class AgentEvaluator:
         # دریافت پاسخ عامل
         agent_response = await self._get_agent_response(user_query)
         
-        # امتیازدهی به پاسخ
+        # نمره‌دهی به پاسخ
         grading_result = await self._grade_response(
             user_query, 
             agent_response, 
@@ -1471,7 +1472,7 @@ class AgentEvaluator:
             if criterion_scores:
                 summary['criteria_averages'][criterion] = sum(criterion_scores) / len(criterion_scores)
         
-        # امتیاز عملکرد
+        # رتبه‌بندی عملکرد
         avg_score = summary['average_overall_score']
         if avg_score >= 4.5:
             summary['performance_rating'] = 'Excellent'
@@ -1526,9 +1527,9 @@ class AgentEvaluator:
 
 ---
 
-## سفارشی‌سازی و به‌روزرسانی‌ها
+## Customization & Updates
 
-### ۱۰. سفارشی‌سازی Container App
+### 10. Container App Customization
 
 **هدف**: به‌روزرسانی پیکربندی اپ کانتینر و جایگزینی با UI سفارشی
 
@@ -1583,7 +1584,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 echo "Building and deploying custom frontend..."
 
-# ساخت تصویر سفارشی با متغیرهای محیطی
+# ساخت ایمیج سفارشی با متغیرهای محیطی
 docker build \
   --build-arg AGENT_NAME="$CUSTOMER_AGENT_NAME" \
   --build-arg COMPANY_NAME="retail Retail" \
@@ -1591,13 +1592,13 @@ docker build \
   -t retail-frontend:latest \
   ./src/frontend
 
-# ارسال به رجیستری کانتینر آژور
+# ارسال به Azure Container Registry
 az acr build \
   --registry "$AZURE_CONTAINER_REGISTRY" \
   --image "retail-frontend:latest" \
   ./src/frontend
 
-# به‌روزرسانی برنامه کانتینری
+# به‌روزرسانی برنامهٔ کانتینری
 az containerapp update \
   --name "retail-frontend" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1608,17 +1609,17 @@ echo "Frontend deployed successfully!"
 
 ---
 
-## 🔧 راهنمای عیب‌یابی
+## 🔧 Troubleshooting Guide
 
-### مشکلات رایج و راه‌حل‌ها
+### Common Issues and Solutions
 
-#### ۱. محدودیت‌های سهمیه Container Apps
+#### 1. Container Apps Quota Limits
 
-**مسئله**: استقرار به دلیل محدودیت‌های سهمیه منطقه‌ای شکست می‌خورد
+**مسئله**: استقرار به‌دلیل محدودیت‌های سهمیه‌ای منطقه‌ای شکست می‌خورد
 
 **راه‌حل**:
 ```bash
-# استفادهٔ فعلی از سهمیه را بررسی کنید
+# بررسی میزان مصرف سهمیه کنونی
 az containerapp env show \
   --name "$CONTAINER_APPS_ENVIRONMENT" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1635,9 +1636,9 @@ az support tickets create \
   --description "Request quota increase for Container Apps in region X"
 ```
 
-#### ۲. انقضای نسخه API در استقرار مدل
+#### 2. Model Deployment Expiry
 
-**مسئله**: استقرار مدل به خاطر منقضی‌شدن نسخه API با شکست مواجه می‌شود
+**مسئله**: استقرار مدل به‌دلیل منقضی‌شدن نسخهٔ API شکست می‌خورد
 
 **راه‌حل**:
 ```python
@@ -1647,7 +1648,7 @@ import json
 
 def check_model_versions():
     """Check for latest model versions"""
-    # این اسکریپت Microsoft Foundry Models API را فراخوانی می‌کند تا نسخه‌های فعلی را دریافت کند
+    # این اسکریپت API مدل‌های Microsoft Foundry را برای دریافت نسخه‌های جاری فراخوانی می‌کند
     latest_versions = {
         "gpt-4.1": "2024-11-20",
         "text-embedding-ada-002": "2", 
@@ -1684,9 +1685,9 @@ if __name__ == "__main__":
     update_bicep_templates(versions)
 ```
 
-#### ۳. یکپارچه‌سازی فاین‌تیونینگ
+#### 3. Fine-tuning Integration
 
-**مسئله**: چگونه مدل‌های فاین‌تیون‌شده را در استقرار AZD ادغام کنم
+**مسئله**: چگونه مدل‌های fine-tuned را در استقرار AZD ادغام کنیم
 
 **راه‌حل**:
 ```python
@@ -1726,8 +1727,8 @@ class FineTuningPipeline:
             fine_tuned_model = job.fine_tuned_model
             print(f"Fine-tuned model ready: {fine_tuned_model}")
             
-            # به‌روزرسانی استقرار برای استفاده از مدل ریزتنظیم‌شده
-            # این Azure CLI را برای به‌روزرسانی استقرار فراخوانی می‌کند
+            # به‌روزرسانی استقرار برای استفاده از مدل تنظیم‌شده
+            # این رابط خط فرمان Azure را برای به‌روزرسانی استقرار فراخوانی می‌کند
             return fine_tuned_model
         else:
             print(f"Job status: {job.status}")
@@ -1736,13 +1737,13 @@ class FineTuningPipeline:
 
 ---
 
-## پرسش‌های متداول و کاوش باز
+## FAQ & Open-Ended Exploration
 
-### سوالات متداول
+### Frequently Asked Questions
 
-#### س: آیا راه ساده‌ای برای استقرار چندین عامل وجود دارد (الگوی طراحی)؟
+#### Q: Is there an easy way to deploy multiple agents (design pattern)?
 
-**ج: بله! از الگوی چندعامل استفاده کنید:**
+**A: Yes! Use the Multi-Agent Pattern:**
 
 ```yaml
 # azure.yaml - Multi-Agent Configuration
@@ -1759,12 +1760,12 @@ services:
         }
 ```
 
-#### س: آیا می‌توانم "مسیر‌دهنده مدل" را به‌عنوان یک مدل مستقر کنم (ملاحظات هزینه‌ای)؟
+#### Q: Can I deploy "model router" as a model (cost implications)?
 
-**ج: بله، با ملاحظه دقیق:**
+**A: Yes, with careful consideration:**
 
 ```python
-# پیاده‌سازی روتر مدل
+# پیاده‌سازی مسیریاب مدل
 class ModelRouter:
     def __init__(self):
         self.routing_rules = {
@@ -1788,22 +1789,22 @@ class ModelRouter:
         pass
 ```
 
-**پیامدهای هزینه:**
-- **صرفه‌جویی:** کاهش هزینه ۶۰–۸۰٪ برای پرسش‌های ساده
-- **تجارت-offs:** افزایش اندک تأخیر برای منطق مسیریابی
-- **پایش:** ردیابی دقت در مقابل معیارهای هزینه
+**تأثیرات هزینه:**
+- **صرفه‌جویی:** کاهش هزینه 60-80% برای پرسش‌های ساده
+- **مبادلات:** افزایش اندک تأخیر برای منطق مسیریابی
+- **نظارت:** دنبال کردن دقت در مقابل معیارهای هزینه
 
-#### س: آیا می‌توانم یک کار فاین‌تیونینگ را از یک قالب azd شروع کنم؟
+#### Q: Can I start a fine-tuning job from an azd template?
 
-**ج: بله، با استفاده از هوک‌های پس از فراهم‌سازی:**
+**A: Yes, using post-provisioning hooks:**
 
 ```bash
 #!/bin/bash
-# hooks/postprovision.sh - یکپارچه‌سازی تنظیم دقیق
+# hooks/postprovision.sh - ادغام تنظیم دقیق
 
 echo "Starting fine-tuning pipeline..."
 
-# ارسال داده‌های آموزشی
+# بارگذاری داده‌های آموزشی
 TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
   --data-path "./data/fine_tuning/training.jsonl" \
   --openai-key "$AZURE_OPENAI_API_KEY")
@@ -1813,16 +1814,16 @@ FINE_TUNE_JOB_ID=$(python scripts/start_fine_tuning.py \
   --training-file-id "$TRAINING_FILE_ID" \
   --model "gpt-4.1-mini")
 
-# ذخیره شناسهٔ شغل برای پایش
+# ذخیره شناسهٔ کار برای نظارت
 echo "$FINE_TUNE_JOB_ID" > .azure/fine_tune_job_id
 
 echo "Fine-tuning job started: $FINE_TUNE_JOB_ID"
 echo "Monitor progress with: azd hooks run monitor-fine-tuning"
 ```
 
-### سناریوهای پیشرفته
+### Advanced Scenarios
 
-#### استراتژی استقرار چندمنطقه‌ای
+#### Multi-Region Deployment Strategy
 
 ```bicep
 // infra/multi-region.bicep
@@ -1858,10 +1859,10 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-#### چارچوب بهینه‌سازی هزینه
+#### Cost Optimization Framework
 
 ```python
-# src/optimization/cost_optimizer.py
+# src/بهینه‌سازی/بهینه‌ساز_هزینه.py
 class CostOptimizer:
     def __init__(self, usage_analytics):
         self.analytics = usage_analytics
@@ -1870,7 +1871,7 @@ class CostOptimizer:
         """Analyze usage to recommend optimizations"""
         recommendations = []
         
-        # تحلیل نحوه استفاده از مدل
+        # تحلیل استفاده از مدل
         model_usage = self.analytics.get_model_usage()
         for model, usage in model_usage.items():
             if usage['utilization'] < 0.3:
@@ -1882,7 +1883,7 @@ class CostOptimizer:
                     'estimated_savings': usage['monthly_cost'] * 0.3
                 })
         
-        # تحلیل زمان‌های اوج
+        # تحلیل زمان اوج
         peak_patterns = self.analytics.get_peak_patterns()
         if peak_patterns['variance'] > 0.6:
             recommendations.append({
@@ -1903,71 +1904,72 @@ class CostOptimizer:
 ```
 
 ---
+
 ## ✅ قالب ARM آماده برای استقرار
 
 > **✨ این واقعاً وجود دارد و کار می‌کند!**  
-> برخلاف مثال‌های کد مفهومی بالا، قالب ARM یک استقرار زیرساختی واقعی و کاری است که در این مخزن گنجانده شده است.
+> برخلاف نمونه‌های کد مفهومی بالا، قالب ARM یک **استقرار زیرساختی واقعی و عملیاتی** است که در این مخزن گنجانده شده است.
 
-### این قالب دقیقاً چه کار می‌کند
+### این قالب دقیقاً چه کاری انجام می‌دهد
 
-قالب ARM در [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) تمام زیرساخت‌های Azure لازم برای سیستم چندعامله را فراهم می‌کند. این تنها مؤلفهٔ آماده برای اجرا است - بقیه موارد نیاز به توسعه دارند.
+قالب ARM در [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) تمام زیرساخت‌های **Azure** مورد نیاز برای سیستم چندعامله را تأمین می‌کند. این تنها مولفه‌ای است که **آماده اجرا** است - بقیهٔ موارد نیاز به توسعه دارند.
 
-### موارد موجود در قالب ARM
+### چه چیزهایی در قالب ARM گنجانده شده‌اند
 
 قالب ARM واقع در [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) شامل موارد زیر است:
 
 #### **زیرساخت کامل**
-- ✅ **استقرارهای چندمنطقه‌ای Microsoft Foundry Models** (gpt-4.1, gpt-4.1-mini, embeddings, grader)
+- ✅ **استقرار مدل‌های Microsoft Foundry چندمنطقه‌ای** (gpt-4.1, gpt-4.1-mini, embeddings, grader)
 - ✅ **Azure AI Search** با قابلیت‌های جستجوی برداری
-- ✅ **Azure Storage** با کانتینرهای سند و بارگذاری
-- ✅ **Container Apps Environment** با مقیاس‌بندی خودکار
-- ✅ **اپ‌های کانتینری Agent Router و Frontend**
-- ✅ **Cosmos DB** برای پایداری تاریخچهٔ چت
-- ✅ **Application Insights** برای پایش جامع
-- ✅ **Key Vault** برای مدیریت امن اسرار
+- ✅ **Azure Storage** با کانتینرهای اسناد و بارگذاری
+- ✅ **Container Apps Environment** با مقیاس‌پذیری خودکار
+- ✅ برنامه‌های کانتینری **Agent Router & Frontend**
+- ✅ **Cosmos DB** برای نگهداری سابقه گفتگو
+- ✅ **Application Insights** برای مانیتورینگ جامع
+- ✅ **Key Vault** برای مدیریت ایمن اسرار
 - ✅ **Document Intelligence** برای پردازش فایل‌ها
 - ✅ **Bing Search API** برای اطلاعات بلادرنگ
 
 #### **حالت‌های استقرار**
-| حالت | مورد استفاده | منابع | هزینهٔ تقریبی/ماه |
+| حالت | مورد استفاده | منابع | هزینه تخمینی/ماه |
 |------|----------|-----------|---------------------|
-| **Minimal** | توسعه، آزمایش | SKUهای پایه، یک منطقه | $100-370 |
-| **Standard** | تولید، مقیاس متوسط | SKUهای استاندارد، چند منطقه | $420-1,450 |
-| **Premium** | سازمانی، مقیاس بالا | SKUهای پریمیوم، راه‌اندازی HA | $1,150-3,500 |
+| **Minimal** | توسعه، تست | SKUهای پایه، تک منطقه‌ای | $100-370 |
+| **Standard** | تولید، مقیاس متوسط | SKUهای استاندارد، چندمنطقه‌ای | $420-1,450 |
+| **Premium** | سازمانی، مقیاس بالا | SKUهای پریمیوم، تنظیمات HA | $1,150-3,500 |
 
 ### 🎯 گزینه‌های سریع استقرار
 
-#### گزینه 1: استقرار یک‌کلیکی در Azure
+#### گزینهٔ ۱: استقرار یک‌کلیک روی Azure
 
 [![استقرار در Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-#### گزینه 2: استقرار با Azure CLI
+#### گزینهٔ ۲: استقرار با Azure CLI
 
 ```bash
 # مخزن را کلون کنید
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/examples/retail-multiagent-arm-template
 
-# اسکریپت استقرار را قابل اجرا کنید
+# اسکریپت استقرار را اجرایی کنید
 chmod +x deploy.sh
 
-# استقرار با تنظیمات پیش‌فرض (حالت استاندارد)
+# با تنظیمات پیش‌فرض استقرار دهید (حالت استاندارد)
 ./deploy.sh -g myResourceGroup
 
 # برای محیط تولید با ویژگی‌های پریمیوم استقرار دهید
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 
-# نسخهٔ حداقلی را برای توسعه استقرار دهید
+# نسخه حداقلی را برای توسعه استقرار دهید
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
-#### گزینه 3: استقرار مستقیم قالب ARM
+#### گزینهٔ ۳: استقرار مستقیم قالب ARM
 
 ```bash
-# گروه منابع را ایجاد کنید
+# ایجاد گروه منابع
 az group create --name myResourceGroup --location eastus2
 
-# قالب را مستقیماً مستقر کنید
+# الگو را مستقیماً مستقر کنید
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -1993,11 +1995,11 @@ az deployment group create \
 
 ### 🔧 پیکربندی پس از استقرار
 
-قالب ARM تهیهٔ زیرساخت را انجام می‌دهد. پس از استقرار:
+قالب ARM مسئول تأمین زیرساخت است. پس از استقرار:
 
 1. **پیکربندی ایندکس جستجو**:
    ```bash
-   # از ساختار جستجوی ارائه‌شده استفاده کنید
+   # از الگوی جستجوی ارائه‌شده استفاده کنید
    curl -X POST "${SEARCH_ENDPOINT}/indexes?api-version=2023-11-01" \
      -H "Content-Type: application/json" \
      -H "api-key: ${SEARCH_KEY}" \
@@ -2006,7 +2008,7 @@ az deployment group create \
 
 2. **بارگذاری اسناد اولیه**:
    ```bash
-   # بارگذاری دفترچه‌های راهنمای محصول و پایگاه دانش
+   # راهنماهای محصول و پایگاه دانش را بارگذاری کنید
    az storage blob upload-batch \
      --destination documents \
      --source ../data/initial-docs \
@@ -2025,7 +2027,7 @@ az deployment group create \
 
 ### 🎛️ گزینه‌های سفارشی‌سازی
 
-فایل `azuredeploy.parameters.json` را برای سفارشی‌سازی استقرار خود ویرایش کنید:
+فایل `azuredeploy.parameters.json` را ویرایش کنید تا استقرار خود را سفارشی کنید:
 
 ```json
 {
@@ -2041,145 +2043,145 @@ az deployment group create \
 
 ### 📊 ویژگی‌های استقرار
 
-- ✅ **اعتبارسنجی پیش‌نیازها** (Azure CLI، سهمیه‌ها، دسترسی‌ها)
-- ✅ **دسترس‌پذیری بالا در چند منطقه** با جابه‌جایی خودکار
-- ✅ **پایش جامع** با Application Insights و Log Analytics
-- ✅ **بهترین شیوه‌های امنیتی** با Key Vault و RBAC
+- ✅ **اعتبارسنجی پیش‌نیازها** (Azure CLI, سهمیه‌ها، مجوزها)
+- ✅ **دسترس‌پذیری بالا چندمنطقه‌ای** با failover خودکار
+- ✅ **نظارت جامع** با Application Insights و Log Analytics
+- ✅ **الگوهای برتر امنیتی** با Key Vault و RBAC
 - ✅ **بهینه‌سازی هزینه** با حالت‌های استقرار قابل پیکربندی
-- ✅ **مقیاس‌بندی خودکار** بر اساس الگوهای تقاضا
-- ✅ **به‌روزرسانی بدون توقف** با نسخه‌های Container Apps
+- ✅ **مقیاس‌گذاری خودکار** بر اساس الگوهای تقاضا
+- ✅ **به‌روزرسانی‌های بدون زمان‌توقف** با بازبینی‌های Container Apps
 
-### 🔍 پایش و مدیریت
+### 🔍 مانیتورینگ و مدیریت
 
-پس از استقرار، راه‌حل خود را از طریق موارد زیر پایش کنید:
+پس از استقرار، راه‌حل خود را از طریق موارد زیر مانیتور کنید:
 
-- **Application Insights**: معیارهای عملکرد، ردیابی وابستگی‌ها و تلِمتری سفارشی
-- **Log Analytics**: ثبت لاگ متمرکز از همه مؤلفه‌ها
-- **Azure Monitor**: پایش سلامت منابع و دسترسی‌پذیری
-- **Cost Management**: ردیابی هزینه در زمان واقعی و هشدارهای بودجه
+- **Application Insights**: معیارهای عملکرد، پیگیری وابستگی‌ها، و تلماتری سفارشی
+- **Log Analytics**: ثبت متمرکز لاگ‌ها از تمام مؤلفه‌ها
+- **Azure Monitor**: مانیتورینگ سلامت و در دسترس بودن منابع
+- **Cost Management**: پیگیری هزینه به‌صورت بلادرنگ و هشدارهای بودجه
 
 ---
 
-## 📚 راهنمای کامل پیاده‌سازی
+## 📚 راهنمای پیاده‌سازی کامل
 
-این سند سناریو همراه با قالب ARM همهٔ موارد لازم برای استقرار یک راهکار پشتیبانی مشتری چندعاملهٔ آماده برای تولید را فراهم می‌کند. پیاده‌سازی شامل موارد زیر است:
+این سند سناریو همراه با قالب ARM همهٔ موارد لازم برای استقرار یک راهکار پشتیبانی مشتری چندعامله آمادهٔ تولید را فراهم می‌کند. پیاده‌سازی شامل موارد زیر است:
 
 ✅ **طراحی معماری** - طراحی جامع سیستم با روابط بین مؤلفه‌ها  
-✅ **تهیهٔ زیرساخت** - قالب ARM کامل برای استقرار یک‌کلیکی  
+✅ **تأمین زیرساخت** - قالب ARM کامل برای استقرار با یک کلیک  
 ✅ **پیکربندی عامل‌ها** - تنظیمات دقیق برای عامل‌های مشتری و موجودی  
-✅ **استقرار چندمدلی** - قراردهی استراتژیک مدل‌ها در مناطق مختلف  
-✅ **ادغام جستجو** - AI Search با قابلیت‌های برداری و ایندکس‌سازی داده  
-✅ **پیاده‌سازی امنیت** - تست تیم قرمز (red teaming)، اسکن آسیب‌پذیری و شیوه‌های امن  
-✅ **پایش و ارزیابی** - تلِمتری جامع و چارچوب ارزیابی عامل‌ها  
-✅ **آمادگی تولید** - استقرار سطح سازمانی با HA و بازیابی از بلایا  
-✅ **بهینه‌سازی هزینه** - مسیریابی هوشمند و مقیاس‌بندی مبتنی بر مصرف  
-✅ **راهنمای رفع اشکال** - مسائل رایج و راهبردهای حل
+✅ **استقرار چندمدلی** - جایگذاری استراتژیک مدل‌ها در مناطق مختلف  
+✅ **یکپارچه‌سازی جستجو** - AI Search با قابلیت‌های برداری و ایندکس‌گذاری داده  
+✅ **پیاده‌سازی امنیت** - تست‌های red teaming، اسکن آسیب‌پذیری و شیوه‌های امن  
+✅ **مانیتورینگ و ارزیابی** - تلماتری جامع و چارچوب ارزیابی عامل‌ها  
+✅ **آمادگی تولید** - استقرار در سطح سازمانی با HA و بازیابی از فاجعه  
+✅ **بهینه‌سازی هزینه** - مسیریابی هوشمند و مقیاس‌گذاری مبتنی بر مصرف  
+✅ **راهنمای رفع اشکال** - مشکلات رایج و راهبردهای حل
 
 ---
 
-## 📊 خلاصه: چه چیزهایی آموخته‌اید
+## 📊 خلاصه: آنچه آموختید
 
-### الگوهای معماری پوشش‌داده‌شده
+### الگوهای معماری پوشش داده‌شده
 
 ✅ **طراحی سیستم چندعامله** - عامل‌های تخصصی (مشتری + موجودی) با مدل‌های اختصاصی  
-✅ **استقرار چندمنطقه‌ای** - قراردهی مدل‌ها برای بهینه‌سازی هزینه و افزونگی  
-✅ **معماری RAG** - ادغام AI Search با بردارهای جاسازی (embeddings) برای پاسخ‌های مستند  
-✅ **ارزیابی عامل** - مدل درجه‌بندی اختصاصی برای ارزیابی کیفیت  
+✅ **استقرار چندمنطقه‌ای** - جایگذاری استراتژیک مدل‌ها برای بهینه‌سازی هزینه و افزونگی  
+✅ **معماری RAG** - یکپارچه‌سازی AI Search با embeddingهای برداری برای پاسخ‌های مستند  
+✅ **ارزیابی عامل** - مدل grader اختصاصی برای سنجش کیفیت  
 ✅ **چارچوب امنیتی** - الگوهای red teaming و اسکن آسیب‌پذیری  
 ✅ **بهینه‌سازی هزینه** - استراتژی‌های مسیریابی مدل و برنامه‌ریزی ظرفیت  
-✅ **پایش تولید** - Application Insights با تلِمتری سفارشی  
+✅ **مانیتورینگ تولید** - Application Insights با تلماتری سفارشی  
 
 ### این سند چه چیزی فراهم می‌کند
 
-| مولفه | وضعیت | کجا پیدا می‌شود |
+| مؤلفه | وضعیت | محل یافتن |
 |-----------|--------|------------------|
 | **قالب زیرساخت** | ✅ آماده برای استقرار | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
 | **نمودارهای معماری** | ✅ کامل | نمودار Mermaid بالا |
 | **مثال‌های کد** | ✅ پیاده‌سازی‌های مرجع | در سراسر این سند |
-| **الگوهای پیکربندی** | ✅ راهنمایی تفصیلی | بخش‌های 1-10 بالا |
+| **الگوهای پیکربندی** | ✅ راهنمایی دقیق | بخش‌های 1-10 بالا |
 | **پیاده‌سازی عامل‌ها** | 🔨 شما این را می‌سازید | ~40 ساعت توسعه |
 | **رابط کاربری فرانت‌اند** | 🔨 شما این را می‌سازید | ~25 ساعت توسعه |
-| **خط‌های انتقال داده** | 🔨 شما این را می‌سازید | ~10 ساعت توسعه |
+| **خط‌لوله‌های داده** | 🔨 شما این را می‌سازید | ~10 ساعت توسعه |
 
-### بررسی واقعیت: چه چیزی واقعاً وجود دارد
+### واقع‌بینی: چه چیزهایی در واقع وجود دارند
 
 **در مخزن (هم‌اکنون آماده):**
-- ✅ قالب ARM که 15+ سرویس Azure را مستقر می‌کند (azuredeploy.json)
+- ✅ قالب ARM که بیش از 15 سرویس Azure را مستقر می‌کند (azuredeploy.json)
 - ✅ اسکریپت استقرار با اعتبارسنجی (deploy.sh)
 - ✅ پیکربندی پارامترها (azuredeploy.parameters.json)
 
-**مراجع‌شده در سند (توسط شما ساخته می‌شود):**
-- 🔨 کد پیاده‌سازی عامل‌ها (~30-40 ساعت)
+**ارجاع‌شده در سند (شما ایجاد می‌کنید):**
+- 🔨 کد پیاده‌سازی عامل (~30-40 ساعت)
 - 🔨 سرویس مسیریابی (~12-16 ساعت)
-- 🔨 برنامه فرانت‌اند (~20-30 ساعت)
+- 🔨 اپلیکیشن فرانت‌اند (~20-30 ساعت)
 - 🔨 اسکریپت‌های راه‌اندازی داده (~8-12 ساعت)
-- 🔨 چارچوب پایش (~10-15 ساعت)
+- 🔨 چارچوب مانیتورینگ (~10-15 ساعت)
 
-### قدم‌های بعدی شما
+### گام‌های بعدی شما
 
-#### اگر می‌خواهید زیرساخت را مستقر کنید (۳۰ دقیقه)
+#### اگر می‌خواهید زیرساخت را مستقر کنید (30 minutes)
 ```bash
 cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
 
-#### اگر می‌خواهید سیستم کامل را بسازید (۸۰–۱۲۰ ساعت)
-1. ✅ خواندن و درک این سند معماری (۲–۳ ساعت)  
-2. ✅ استقرار زیرساخت با استفاده از قالب ARM (۳۰ دقیقه)  
-3. 🔨 پیاده‌سازی عامل‌ها با استفاده از الگوهای کد مرجع (حدود ۴۰ ساعت)  
-4. 🔨 ساخت سرویس مسیریابی با FastAPI/Express (حدود ۱۵ ساعت)  
-5. 🔨 ایجاد رابط کاربری فرانت‌اند با React/Vue (حدود ۲۵ ساعت)  
-6. 🔨 پیکربندی خط لوله داده و ایندکس جستجو (حدود ۱۰ ساعت)  
-7. 🔨 افزودن پایش و ارزیابی (حدود ۱۵ ساعت)  
-8. ✅ آزمایش، امن‌سازی و بهینه‌سازی (حدود ۱۰ ساعت)
+#### اگر می‌خواهید سیستم کامل را بسازید (80-120 hours)
+1. ✅ این سند معماری را مطالعه و درک کنید (2-3 hours)
+2. ✅ استقرار زیرساخت با استفاده از قالب ARM (30 minutes)
+3. 🔨 پیاده‌سازی عامل‌ها با استفاده از الگوهای کد مرجع (~40 hours)
+4. 🔨 ساخت سرویس مسیریابی با FastAPI/Express (~15 hours)
+5. 🔨 ایجاد رابط کاربری فرانت‌اند با React/Vue (~25 hours)
+6. 🔨 پیکربندی خط‌لوله داده و ایندکس جستجو (~10 hours)
+7. 🔨 افزودن مانیتورینگ و ارزیابی (~15 hours)
+8. ✅ تست، امن‌سازی و بهینه‌سازی (~10 hours)
 
 #### اگر می‌خواهید الگوهای چندعامله را بیاموزید (مطالعه)
-- 📖 مرور نمودار معماری و روابط بین مؤلفه‌ها  
-- 📖 مطالعهٔ مثال‌های کد برای SearchTool، BingTool، AgentEvaluator  
-- 📖 درک استراتژی استقرار چندمنطقه‌ای  
-- 📖 یادگیری چارچوب‌های ارزیابی و امنیت  
-- 📖 اعمال الگوها در پروژه‌های خود
+- 📖 نمودار معماری و روابط مؤلفه‌ها را مرور کنید
+- 📖 مثال‌های کد برای SearchTool، BingTool، AgentEvaluator را مطالعه کنید
+- 📖 استراتژی استقرار چندمنطقه‌ای را درک کنید
+- 📖 چارچوب‌های ارزیابی و امنیت را بیاموزید
+- 📖 الگوها را در پروژه‌های خود اعمال کنید
 
 ### نکات کلیدی
 
-1. **زیرساخت در مقابل برنامه** - قالب ARM زیرساخت را فراهم می‌کند؛ عامل‌ها نیاز به توسعه دارند  
-2. **استراتژی چندمنطقه‌ای** - قراردهی استراتژیک مدل‌ها هزینه‌ها را کاهش و قابلیت اطمینان را افزایش می‌دهد  
-3. **چارچوب ارزیابی** - مدل درجه‌بندی اختصاصی امکان ارزیابی مستمر کیفیت را فراهم می‌کند  
-4. **امنیت در اولویت** - red teaming و اسکن آسیب‌پذیری برای تولید ضروری هستند  
-5. **بهینه‌سازی هزینه** - مسیریابی هوشمند بین gpt-4.1 و gpt-4.1-mini بین ۶۰–۸۰٪ صرفه‌جویی می‌کند
+1. **زیرساخت در برابر برنامه** - قالب ARM زیرساخت را فراهم می‌کند؛ عامل‌ها نیاز به توسعه دارند  
+2. **استراتژی چندمنطقه‌ای** - جایگذاری استراتژیک مدل‌ها هزینه‌ها را کاهش می‌دهد و قابلیت اطمینان را بهبود می‌بخشد  
+3. **چارچوب ارزیابی** - مدل grader اختصاصی امکان ارزیابی کیفیت پیوسته را فراهم می‌کند  
+4. **امنیت در اولویت** - red teaming و اسکن آسیب‌پذیری برای محیط تولید ضروری‌اند  
+5. **بهینه‌سازی هزینه** - مسیریابی هوشمند بین gpt-4.1 و gpt-4.1-mini می‌تواند 60-80% صرفه‌جویی کند
 
 ### هزینه‌های تخمینی
 
-| حالت استقرار | زیرساخت/ماه | توسعه (یک‌بار) | کل ماه اول |
+| حالت استقرار | زیرساخت/ماه | توسعه (یک‌بار) | مجموع اولین ماه |
 |-----------------|---------------------|------------------------|-------------------|
 | **Minimal** | $100-370 | $15K-25K (80-120 hrs) | $15.1K-25.4K |
 | **Standard** | $420-1,450 | $15K-25K (same effort) | $15.4K-26.5K |
 | **Premium** | $1,150-3,500 | $15K-25K (same effort) | $16.2K-28.5K |
 
-**توجه:** زیرساخت کمتر از ۵٪ از هزینهٔ کل برای پیاده‌سازی‌های جدید است. تلاش توسعه سرمایه‌گذاری اصلی است.
+**توجه:** زیرساخت کمتر از 5% از هزینهٔ کل پیاده‌سازی‌های جدید است. تلاش توسعه سرمایه‌گذاری اصلی است.
 
 ### منابع مرتبط
 
 - 📚 [راهنمای استقرار قالب ARM](retail-multiagent-arm-template/README.md) - راه‌اندازی زیرساخت  
-- 📚 [بهترین شیوه‌ها برای Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/) - استقرار مدل  
+- 📚 [بهترین شیوه‌های Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/) - استقرار مدل  
 - 📚 [مستندات AI Search](https://learn.microsoft.com/azure/search/) - پیکربندی جستجوی برداری  
 - 📚 [الگوهای Container Apps](https://learn.microsoft.com/azure/container-apps/) - استقرار میکروسرویس‌ها  
-- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - راه‌اندازی پایش
+- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - تنظیمات مانیتورینگ
 
-### سوالات یا مشکلات؟
+### سؤال‌ها یا مشکلات؟
 
 - 🐛 [گزارش مشکلات](https://github.com/microsoft/AZD-for-beginners/issues) - باگ‌های قالب یا خطاهای مستندات  
-- 💬 [گفتگوهای GitHub](https://github.com/microsoft/AZD-for-beginners/discussions) - سوالات معماری  
-- 📖 [سوالات متداول](../resources/faq.md) - پاسخ به سوالات رایج  
+- 💬 [بحث‌های GitHub](https://github.com/microsoft/AZD-for-beginners/discussions) - پرسش‌های معماری  
+- 📖 [سؤالات متداول](../resources/faq.md) - پاسخ به پرسش‌های رایج  
 - 🔧 [راهنمای رفع اشکال](../docs/troubleshooting/common-issues.md) - مشکلات استقرار
 
 ---
 
-**این سناریوی جامع یک طرح معماری سطح سازمانی برای سیستم‌های هوش مصنوعی چندعامله فراهم می‌کند، همراه با قالب‌های زیرساخت، راهنمای پیاده‌سازی، و بهترین شیوه‌های تولید برای ساخت راهکارهای پیشرفتهٔ پشتیبانی مشتری با Azure Developer CLI.**
+**این سناریوی جامع یک نقشهٔ معماری در سطح سازمانی برای سیستم‌های AI چندعامله فراهم می‌کند، همراه با قالب‌های زیرساخت، راهنمای پیاده‌سازی، و بهترین شیوه‌های تولید برای ساخت راهکارهای پیچیدهٔ پشتیبانی مشتری با Azure Developer CLI.**
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **سلب مسئولیت**:
-این سند با استفاده از سرویس ترجمهٔ هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. اگرچه ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطاها یا نادرستی‌هایی باشند. نسخهٔ اصلی سند به زبان مادری آن باید به عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حساس، ترجمهٔ حرفه‌ای توسط انسان توصیه می‌شود. ما در قبال هرگونه سوءتفاهم یا تفسیر نادرستی که از استفاده از این ترجمه ناشی شود، مسئولیتی نداریم.
+این سند با استفاده از سرویس ترجمه هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است شامل خطاها یا نادرستی‌هایی باشند. سند اصلی به زبان مادری خود باید به عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمه حرفه‌ای انسانی توصیه می‌شود. ما در قبال هرگونه سوء تفاهم یا برداشت نادرست ناشی از استفاده از این ترجمه مسئولیتی نداریم.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

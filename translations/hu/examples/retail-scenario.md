@@ -1,174 +1,174 @@
 # Többügynökös Ügyfélszolgálati Megoldás - Kiskereskedői Forgatókönyv
 
-**5. fejezet: Többügynökös Mesterséges Intelligencia Megoldások**
-- **📚 Tanfolyam kezdőlapja**: [AZD Kezdőknek](../README.md)
-- **📖 Aktuális fejezet**: [5. fejezet: Többügynökös MI megoldások](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **⬅️ Előfeltételek**: [2. fejezet: MI-első fejlesztés](../docs/microsoft-foundry/microsoft-foundry-integration.md)
-- **➡️ Következő fejezet**: [6. fejezet: Üzembe helyezés előtti érvényesítés](../docs/pre-deployment/capacity-planning.md)
-- **🚀 ARM sablonok**: [Telepítési csomag](retail-multiagent-arm-template/README.md)
+**5. fejezet: Többügynökös MI Megoldások**
+- **📚 Tanfolyam főoldal**: [AZD Kezdőknek](../README.md)
+- **📖 Jelenlegi fejezet**: [5. fejezet: Többügynökös MI megoldások](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **⬅️ Előfeltételek**: [2. fejezet: AI-First fejlesztés](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **➡️ Következő fejezet**: [6. fejezet: Telepítés előtti validálás](../docs/pre-deployment/capacity-planning.md)
+- **🚀 ARM sablonok**: [Telepítő csomag](retail-multiagent-arm-template/README.md)
 
-> **⚠️ ARCHITEKTÚRAI ÚTMUTATÓ - NEM MŰKÖDŐ MEGVALÓSÍTÁS**  
-> Ez a dokumentum **átfogó architektúra tervet** ad egy többügynökös rendszer kiépítéséhez.  
-> **Mi létezik:** ARM sablon az infrastruktúra telepítéséhez (Microsoft Foundry Modellek, AI Keresés, Konténeralkalmazások stb.)  
-> **Mit kell megépítened:** Ügynök kód, útválasztási logika, front-end UI, adatfolyamok (becsült 80-120 óra)  
+> **⚠️ ARCHITEKTÚRA ÚTMUTATÓ - NEM MŰKÖDŐ MEGVALÓSÍTÁS**  
+> Ez a dokumentum egy **átfogó architektúra tervrajzot** nyújt egy többügynökös rendszer felépítéséhez.  
+> **Mi létezik:** ARM sablon az infrastruktúra telepítéséhez (Microsoft Foundry modellek, AI Search, Container Apps, stb.)  
+> **Amit neked kell megépítened:** Ügynök kód, irányítási logika, frontend UI, adatcsatornák (becsült 80-120 óra)  
 >  
-> **Használd ezt:**
-> - ✅ Többügynökös saját projekt architektúra referenciájaként
-> - ✅ Többügynökös tervezési minták tanulási útmutatójaként
-> - ✅ Azure erőforrások telepítésének infrastruktúra sablonjaként
-> - ❌ NEM egy kész, azonnal futtatható alkalmazás (jelentős fejlesztést igényel)
+> **Ezt használd:**
+> - ✅ Saját többügynökös projekt architektúra referenciájaként
+> - ✅ Tanulási útmutatóként többügynökös tervezési mintákhoz
+> - ✅ Infrastruktúra sablonként Azure erőforrások telepítéséhez
+> - ❌ Nem egy kész alkalmazás (jelentős fejlesztés szükséges)
 
 ## Áttekintés
 
-**Tanulási cél:** Értsd meg a többügynökös ügyféltámogató chatbot architektúráját, tervezési döntéseit és megvalósítási megközelítését egy kiskereskedő számára, fejlett MI képességekkel, beleértve a készletkezelést, dokumentumfeldolgozást és intelligens ügyfélinterakciókat.
+**Tanulási cél:** Megérteni az architektúrát, tervezési döntéseket és megvalósítási megközelítést egy termelésre kész többügynökös ügyfélszolgálati chatbot felépítéséhez kiskereskedő számára, mely fejlett MI képességeket tartalmaz, mint készletkezelés, dokumentumfeldolgozás és intelligens ügyfélkommunikáció.
 
-**Teljesítés ideje:** Olvasás + Megértés (2-3 óra) | Teljes megvalósítás (80-120 óra)
+**Becsült idő:** Olvasás + megértés (2-3 óra) | Teljes megvalósítás (80-120 óra)
 
-**Mit tanulsz:**
-- Többügynökös architektúra minták és tervezési alapelvek
-- Több régiós Microsoft Foundry Modellek telepítési stratégiái
-- AI Keresés integrálása RAG-gal (Retrieval-Augmented Generation)
-- Ügynökértékelés és biztonsági tesztelési keretrendszerek
-- Termelési üzembe helyezés és költségoptimalizálás szempontjai
+**Amit tanulni fogsz:**
+- Többügynökös architektúra minták és tervezési elvek
+- Többrégiós Microsoft Foundry Modellek telepítési stratégiái
+- AI Search integráció RAG-gal (Retrieval-Augmented Generation)
+- Ügynöki értékelési és biztonsági teszt keretrendszerek
+- Telepítési megfontolások és költségoptimalizálás
 
 ## Architektúra célok
 
-**Oktatási fókusz:** Ez az architektúra bemutatja a vállalati mintákat többügynökös rendszerekhez.
+**Oktatási fókusz:** Ez az architektúra vállalati mintákat mutat be többügynökös rendszerekhez.
 
-### Rendszerkövetelmények (a te megvalósításodhoz)
+### Rendszerkövetelmények (a megvalósításhoz)
 
-Egy termelési ügyféltámogatási megoldás szükséges:
-- **Több, specializált ügynök** különböző ügyféligényekhez (Ügyfélszolgálat + Készletkezelés)
-- **Több modell telepítése** megfelelő kapacitás tervezéssel (gpt-4.1, gpt-4.1-mini, beágyazások régiók között)
-- **Dinamikus adat integráció** AI Kereséssel és fájlfeltöltéssel (vektoros keresés + dokumentumfeldolgozás)
-- **Átfogó megfigyelés** és értékelés (Application Insights + egyéni metrikák)
-- **Termelési szintű biztonság** vörös csapat validációval (sebezhetőség vizsgálat + ügynökértékelés)
+Egy termelésre kész ügyfélszolgálati megoldás igényei:
+- **Több specializált ügynök** különféle ügyféligényekhez (Ügyfélszolgálat + Készletkezelés)
+- **Több modellű telepítés** megfelelő kapacitástervezéssel (gpt-4.1, gpt-4.1-mini, beágyazások régiónként)
+- **Dinamikus adat integráció** AI Search-sel és fájlfeltöltéssel (vektoralapú keresés + dokumentumfeldolgozás)
+- **Átfogó monitorozás** és értékelési képességek (Application Insights + egyéni metrikák)
+- **Termelés szintű biztonság** red teaming teszteléssel (sebezhetőségvizsgálat + ügynök értékelés)
 
-### Mit nyújt ez az útmutató
+### Amit ez az útmutató nyújt
 
-✅ **Architektúra minták** - bevált tervezés skálázható többügynökös rendszerekhez  
-✅ **Infrastruktúra sablonok** - ARM sablonok minden Azure szolgáltatás telepítéséhez  
-✅ **Kód példák** - kulcskomponensek referenciamegvalósításai  
-✅ **Konfigurációs útmutató** - lépésről lépésre beállítási instrukciók  
-✅ **Legjobb gyakorlatok** - biztonság, megfigyelés, költségoptimalizálás stratégiák  
+✅ **Architektúra minták** - Bebizonyított tervezés skálázható többügynökös rendszerekhez  
+✅ **Infrastruktúra sablonok** - ARM sablonok az összes Azure szolgáltatás telepítéséhez  
+✅ **Kódpéldák** - Referencia megvalósítások a kulcskomponensekhez  
+✅ **Konfigurációs útmutatás** - Lépésről lépésre beállítási instrukciók  
+✅ **Legjobb gyakorlatok** - Biztonság, monitorozás, költségoptimalizálás  
 
-❌ **Nincs benne** - teljes működő alkalmazás (fejlesztést igényel)
+❌ **Nem tartalmazza** - Teljes működő alkalmazás (fejlesztési munka szükséges)
 
-## 🗺️ Megvalósítási ütemterv
+## 🗺️ Megvalósítási Ütemterv
 
-### 1. szakasz: Architektúra tanulmányozása (2-3 óra) - IDE KEZD
+### 1. fázis: Architektúra tanulmányozás (2-3 óra) - IDE KEZDD
 
-**Cél:** Értsd meg a rendszertervet és a komponensek kölcsönhatását
+**Cél:** Megérteni a rendszer felépítését és az egyes komponensek kölcsönhatásait
 
 - [ ] Olvasd el ezt a teljes dokumentumot
-- [ ] Nézd át az architektúra diagramot és a komponenskapcsolatokat
-- [ ] Értsd meg a többügynökös mintákat és tervezési döntéseket
-- [ ] Tanulmányozd az ügynökökhöz és útválasztáshoz kapcsolódó kód példákat
-- [ ] Vizsgáld meg a költségbecsléseket és kapacitástervezési iránymutatásokat
+- [ ] Nézd át az architektúra diagramot és komponens kapcsolódásokat
+- [ ] Ismerkedj meg a többügynökös mintákkal és tervezési döntésekkel
+- [ ] Tanulmányozd az ügynök eszközök és irányítás kódpéldáit
+- [ ] Tekintsd át a költségbecsléseket és kapacitástervezési útmutatókat
 
 **Eredmény:** Világos kép arról, mit kell megépítened
 
-### 2. szakasz: Infrastruktúra telepítése (30-45 perc)
+### 2. fázis: Infrastruktúra telepítése (30-45 perc)
 
-**Cél:** Azure erőforrások létrehozása ARM sablon használatával
+**Cél:** Azure erőforrások létrehozása ARM sablon segítségével
 
 ```bash
 cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup -m standard
 ```
 
-**Mi települ:**
+**Telepített elemek:**
 - ✅ Microsoft Foundry Modellek (3 régió: gpt-4.1, gpt-4.1-mini, beágyazások)
-- ✅ AI Keresés szolgáltatás (üres, index konfiguráció szükséges)
-- ✅ Konténeralkalmazások környezet (helyőrző képek)
-- ✅ Tároló fiókok, Cosmos DB, Kulcstár
-- ✅ Application Insights megfigyelés
+- ✅ AI Search szolgáltatás (üres, index konfiguráció szükséges)
+- ✅ Container Apps környezet (helyőrző képek)
+- ✅ Tárfiókok, Cosmos DB, Key Vault
+- ✅ Application Insights monitorozás
 
-**Mi hiányzik:**
+**Hiányzó elemek:**
 - ❌ Ügynök megvalósítási kód
-- ❌ Útválasztási logika
+- ❌ Irányítási logika
 - ❌ Frontend UI
-- ❌ Kereső index séma
-- ❌ Adatfolyamok
+- ❌ Keresőindex séma
+- ❌ Adatcsatornák
 
-### 3. szakasz: Alkalmazás fejlesztése (80-120 óra)
+### 3. fázis: Alkalmazás fejlesztése (80-120 óra)
 
-**Cél:** Többügynökös rendszer implementálása az architektúra alapján
+**Cél:** A többügynökös rendszer megvalósítása az architektúra alapján
 
 1. **Ügynökök implementálása** (30-40 óra)
-   - Alap ügynök osztályok és interfészek
-   - Ügyfélszolgálati ügynök gpt-4.1-el
-   - Készletkezelő ügynök gpt-4.1-mini-vel
-   - Eszköz integrációk (AI Keresés, Bing, fájlfeldolgozás)
+   - Alap ügynök osztály és interfészek
+   - Ügyfélszolgálati ügynök gpt-4.1-gyel
+   - Készletügynök gpt-4.1-mini-vel
+   - Eszköz integrációk (AI Search, Bing, fájlfeldolgozás)
 
-2. **Útválasztó szolgáltatás** (12-16 óra)
-   - Kérések osztályozási logikája
-   - Ügynök választás és koordináció
+2. **Irányítási szolgáltatás** (12-16 óra)
+   - Kérések osztályozása
+   - Ügynök kiválasztás és koordinálás
    - FastAPI/Express backend
 
 3. **Frontend fejlesztés** (20-30 óra)
    - Chat felület UI
    - Fájlfeltöltési funkciók
-   - Válasz renderelés
+   - Válaszok megjelenítése
 
-4. **Adatfolyam kialakítása** (8-12 óra)
-   - AI Kereső index létrehozás
-   - Dokumentum feldolgozás Document Intelligence segítségével
-   - Beágyazás generálás és indexelés
+4. **Adatcsatorna fejlesztés** (8-12 óra)
+   - AI Search index létrehozás
+   - Dokumentumfeldolgozás Document Intelligence-nel
+   - Beágyazás generálás és indexálás
 
-5. **Megfigyelés és értékelés** (10-15 óra)
+5. **Monitorozás és értékelés** (10-15 óra)
    - Egyéni telemetria implementáció
    - Ügynök értékelési keretrendszer
-   - Vörös csapat biztonsági szkenner
+   - Red team biztonsági szkenner
 
-### 4. szakasz: Telepítés és tesztelés (8-12 óra)
+### 4. fázis: Telepítés és tesztelés (8-12 óra)
 
-- Konténer képek építése minden szolgáltatáshoz
-- Feltöltés az Azure Container Registry-be
-- Konténeralkalmazások frissítése valódi képekkel
+- Docker képek építése minden szolgáltatáshoz
+- Feltöltés Azure Container Registry-be
+- Container Apps frissítése valós képekkel
 - Környezeti változók és titkok konfigurálása
-- Értékelő tesztkészlet futtatása
-- Biztonsági vizsgálat végrehajtása
+- Értékelő tesztcsomag futtatása
+- Biztonsági szkennelés végrehajtása
 
-**Becsült teljes erőforrásigény:** 80-120 óra tapasztalt fejlesztőknek
+**Teljes becsült ráfordítás:** 80-120 óra tapasztalt fejlesztőknek
 
-## Megoldás architektúra
+## Megoldás Architektúra
 
-### Architektúra diagram
+### Architektúra Diagram
 
 ```mermaid
 graph TB
     User[👤 Ügyfél] --> LB[Azure Front Door]
-    LB --> WebApp[Webes Előoldal<br/>Konténer Alkalmazás]
+    LB --> WebApp[Webes Felület<br/>Konténer Alkalmazás]
     
-    WebApp --> Router[Ügynök Router<br/>Konténer Alkalmazás]
+    WebApp --> Router[Ügynök Útválasztó<br/>Konténer Alkalmazás]
     Router --> CustomerAgent[Ügyfél Ügynök<br/>Ügyfélszolgálat]
     Router --> InvAgent[Készlet Ügynök<br/>Készletkezelés]
     
-    CustomerAgent --> OpenAI1[Microsoft Foundry Modellek<br/>gpt-4.1<br/>East US 2]
-    InvAgent --> OpenAI2[Microsoft Foundry Modellek<br/>gpt-4.1-mini<br/>West US 2]
+    CustomerAgent --> OpenAI1[Microsoft Foundry Modellek<br/>gpt-4.1<br/>Kelet USA 2]
+    InvAgent --> OpenAI2[Microsoft Foundry Modellek<br/>gpt-4.1-mini<br/>Nyugat USA 2]
     
     CustomerAgent --> AISearch[Azure AI Keresés<br/>Termékkatalógus]
-    CustomerAgent --> BingSearch[Bing Keresés API<br/>Valós idejű Info]
+    CustomerAgent --> BingSearch[Bing Kereső API<br/>Valós idejű információ]
     InvAgent --> AISearch
     
     AISearch --> Storage[Azure Tároló<br/>Dokumentumok & Fájlok]
     Storage --> DocIntel[Dokumentum Intelligencia<br/>Tartalom Feldolgozás]
     
-    OpenAI1 --> Embeddings[Szöveg Beágyazások<br/>ada-002<br/>Közép-Franciaország]
+    OpenAI1 --> Embeddings[Szöveg Beágyazások<br/>ada-002<br/>Franciaország Közép]
     OpenAI2 --> Embeddings
     
-    Router --> AppInsights[Alkalmazás Elemzések<br/>Felügyelet]
+    Router --> AppInsights[Alkalmazás Elemzések<br/>Figyelés]
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
     GraderModel[gpt-4.1 Értékelő<br/>Svájc Észak] --> Evaluation[Értékelési Keretrendszer]
-    RedTeam[Piros Csapat Vizsgáló] --> SecurityReports[Biztonsági Jelentések]
+    RedTeam[Piros Csapat Ellenőrző] --> SecurityReports[Biztonsági Jelentések]
     
-    subgraph "Adat Réteg"
+    subgraph "Adatréteg"
         Storage
         AISearch
-        CosmosDB[Cosmos DB<br/>Beszélgetés Előzmények]
+        CosmosDB[Cosmos DB<br/>Csevegés Előzmények]
     end
     
     subgraph "MI Szolgáltatások"
@@ -180,10 +180,10 @@ graph TB
         BingSearch
     end
     
-    subgraph "Felügyelet & Biztonság"
+    subgraph "Figyelés & Biztonság"
         AppInsights
-        LogAnalytics[Log Elemzés Munkaterület]
-        KeyVault[Azure Kulcstár<br/>Titkok & Beállítások]
+        LogAnalytics[Log Elemző Munkaterület]
+        KeyVault[Azure Kulcstár<br/>Titkok & Konfiguráció]
         RedTeam
         Evaluation
     end
@@ -197,26 +197,27 @@ graph TB
     style AISearch fill:#fce4ec
     style Storage fill:#f1f8e9
 ```
+
 ### Komponens áttekintés
 
-| Komponens | Cél | Technológia | Régió |
+| Komponens | Célja | Technológia | Régió |
 |-----------|---------|------------|---------|
-| **Web frontend** | Felhasználói felület ügyfél interakciókhoz | Konténeralkalmazások | Elsődleges régió |
-| **Ügynök útválasztó** | Kérések továbbítása megfelelő ügynökhöz | Konténeralkalmazások | Elsődleges régió |
-| **Ügyfélszolgálati ügynök** | Ügyfélkérdések kezelése | Konténeralkalmazások + gpt-4.1 | Elsődleges régió |
-| **Készletkezelő ügynök** | Készlet és teljesítés menedzsment | Konténeralkalmazások + gpt-4.1-mini | Elsődleges régió |
-| **Microsoft Foundry Modellek** | Nagy nyelvi modell inferencia az ügynökök számára | Kognitív szolgáltatások | Több régió |
-| **AI Keresés** | Vektoros keresés és RAG | AI Keresés Szolgáltatás | Elsődleges régió |
-| **Tároló fiók** | Fájlfeltöltések és dokumentumok | Blob Storage | Elsődleges régió |
-| **Application Insights** | Megfigyelés és telemetria | Monitor | Elsődleges régió |
-| **Értékelő modell** | Ügynökértékelő rendszer | Microsoft Foundry Modellek | Másodlagos régió |
+| **Web Frontend** | Felhasználói felület ügyfél kommunikációhoz | Container Apps | Elsődleges régió |
+| **Ügynök Irányító** | Kérésirányítás a megfelelő ügynökhöz | Container Apps | Elsődleges régió |
+| **Ügyfélügynök** | Ügyfélszolgálati kérdések kezelése | Container Apps + gpt-4.1 | Elsődleges régió |
+| **Készletügynök** | Készlet és teljesítés kezelése | Container Apps + gpt-4.1-mini | Elsődleges régió |
+| **Microsoft Foundry Modellek** | Szöveges generálás ügynököknek | Azure AI Szolgáltatások | Többrégiós |
+| **AI Search** | Vektorkeresés és RAG | AI Search szolgáltatás | Elsődleges régió |
+| **Tárolófiók** | Fájlfeltöltések és dokumentumok | Blob Storage | Elsődleges régió |
+| **Application Insights** | Monitorozás és telemetria | Monitor | Elsődleges régió |
+| **Értékelő Modell** | Ügynökök értékelő rendszere | Microsoft Foundry Modellek | Másodlagos régió |
 
-## 📁 Projektszerkezet
+## 📁 Projekt struktúra
 
-> **📍 Állapot jelölő:**  
-> ✅ = Létezik a repóban  
+> **📍 Állapotjelző:**  
+> ✅ = Létezik a repositoryban  
 > 📝 = Referencia megvalósítás (kód példa ebben a dokumentumban)  
-> 🔨 = Ezt neked kell létrehozni
+> 🔨 = Neked kell létrehoznod
 
 ```
 retail-multiagent-solution/              🔨 Your project directory
@@ -363,14 +364,14 @@ retail-multiagent-solution/              🔨 Your project directory
 
 ---
 
-## 🚀 Gyors indulás: Amit már most megtehetsz
+## 🚀 Gyorsindítás: Mit tehetsz most azonnal
 
 ### 1. lehetőség: Csak infrastruktúra telepítése (30 perc)
 
-**Amit kapsz:** Minden Azure szolgáltatás előkészítve, fejlesztésre készen
+**Amit kapsz:** Minden Azure szolgáltatás kiépítve és fejlesztésre készen
 
 ```bash
-# Klónozza a tárolót
+# Klónozza a tárat
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/retail-multiagent-arm-template
 
@@ -381,61 +382,61 @@ cd AZD-for-beginners/examples/retail-multiagent-arm-template
 az resource list --resource-group myResourceGroup --output table
 ```
 
-**Várható eredmény:**
-- ✅ Microsoft Foundry Modellek szolgáltatásai telepítve (3 régió)
-- ✅ AI Keresés szolgáltatás létrehozva (üres)
-- ✅ Konténeralkalmazások környezet készen
-- ✅ Tároló, Cosmos DB, Kulcstár konfigurálva
-- ❌ Még nincsenek működő ügynökök (csak infrastruktúra)
+**Várt eredmény:**
+- ✅ Microsoft Foundry Modellek szolgáltatások telepítve (3 régió)
+- ✅ AI Search szolgáltatás létrehozva (üres)
+- ✅ Container Apps környezet kész
+- ✅ Tárhely, Cosmos DB, Key Vault konfigurálva
+- ❌ Még nincs működő ügynök (csak infrastruktúra)
 
 ### 2. lehetőség: Architektúra tanulmányozása (2-3 óra)
 
-**Amit kapsz:** Mélyebb ismeret a többügynökös mintákról
+**Amit kapsz:** Mély ismeret többügynökös mintákról
 
 1. Olvasd el ezt a teljes dokumentumot
-2. Tanulmányozd a komponensekhez tartozó kód példákat
+2. Tekintsd át a kódpéldákat minden komponenshez
 3. Értsd meg a tervezési döntéseket és kompromisszumokat
-4. Tanulmányozd a költségoptimalizációs stratégiákat
-5. Tervezd meg a megvalósítási hozzáállásodat
+4. Tanulmányozd a költségoptimalizálási stratégiákat
+5. Tervezd meg a megvalósítási megközelítésed
 
-**Várható eredmény:**
+**Várt eredmény:**
 - ✅ Világos mentális modell az architektúráról
-- ✅ A szükséges komponensek megértése
-- ✅ Reális erőforrás becslések
+- ✅ Ismeret a szükséges komponensekről
+- ✅ Reális ráfordítási becslések
 - ✅ Megvalósítási terv
 
 ### 3. lehetőség: Teljes rendszer megépítése (80-120 óra)
 
 **Amit kapsz:** Termelésre kész többügynökös megoldás
 
-1. **1. fázis:** Infrastrukturális telepítés (korábban kész)
-2. **2. fázis:** Ügynökök implementálása a lentiek kód példái alapján (30-40 óra)
-3. **3. fázis:** Útválasztó szolgáltatás építése (12-16 óra)
-4. **4. fázis:** Frontend UI létrehozása (20-30 óra)
-5. **5. fázis:** Adatfolyam konfiguráció (8-12 óra)
-6. **6. fázis:** Megfigyelés és értékelés hozzáadása (10-15 óra)
+1. **1. fázis:** Infrastruktúra telepítése (feljebb)
+2. **2. fázis:** Ügynökök implementálása kódpéldák alapján (30-40 óra)
+3. **3. fázis:** Irányítási szolgáltatás építése (12-16 óra)
+4. **4. fázis:** Frontend UI fejlesztése (20-30 óra)
+5. **5. fázis:** Adatcsatornák konfigurálása (8-12 óra)
+6. **6. fázis:** Monitorozás és értékelés hozzáadása (10-15 óra)
 
-**Várható eredmény:**
-- ✅ Teljesértékű többügynökös rendszer
-- ✅ Termelési szintű megfigyelés
+**Várt eredmény:**
+- ✅ Teljesen működő többügynökös rendszer
+- ✅ Termelés szintű monitorozás
 - ✅ Biztonsági validáció
-- ✅ Költségoptimalizált telepítés
+- ✅ Költséghatékony telepítés
 
 ---
 
-## 📚 Architektúra referenciák és megvalósítási útmutató
+## 📚 Architektúra referencia és megvalósítási útmutató
 
-A következő szakaszok részletes architektúra mintákat, konfigurációs példákat és referenciakódot tartalmaznak megvalósítási segítségként.
+A következő részek részletes architektúra mintákat, konfigurációs példákat és referencia kódokat tartalmaznak a megvalósítás segítésére.
 
 ## Kezdeti konfigurációs követelmények
 
-### 1. Több ügynök & konfiguráció
+### 1. Több ügynök és konfiguráció
 
-**Cél**: 2 specializált ügynök telepítése - "Ügyfél ügynök" (ügyfélszolgálat) és "Készlet" (készletkezelés)
+**Cél:** Két specializált ügynök telepítése - "Ügyfélügynök" (ügyfélszolgálat) és "Készlet" (készletkezelés)
 
-> **📝 Megjegyzés:** Az alábbi azure.yaml és Bicep konfigurációk **példák** arra, hogyan strukturálják a többügynökös telepítéseket. Ezeket a fájlokat és az ügynök megvalósításokat neked kell elkészíteni.
+> **📝 Megjegyzés:** Az alábbi azure.yaml és Bicep konfigurációk **referencia példák**, amelyek bemutatják a többügynökös telepítés szerkezetét. Neked kell létrehoznod ezeket a fájlokat és az ügynökök megvalósítását.
 
-#### Konfigurációs lépések:
+#### Konfiguráció lépések:
 
 ```yaml
 # azure.yaml - Agent Configuration
@@ -509,9 +510,9 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 
 ### 2. Több modell kapacitástervezéssel
 
-**Cél**: Chat modell (Ügyfél), beágyazás modell (keresés), és értékelő modell (grader) telepítése megfelelő kvóta kezeléssel
+**Cél:** Chat modell (ügyfél), beágyazás modell (keresés), és értékelő modell (grader) telepítése kvóta kezelés mellett
 
-#### Több régiós stratégia:
+#### Többrégiós stratégia:
 
 ```bicep
 // infra/models.bicep
@@ -555,7 +556,7 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
 }
 ```
 
-#### Régió visszaesési konfiguráció:
+#### Régió tartalék konfiguráció:
 
 ```yaml
 # .azure/env/.env.production
@@ -564,11 +565,11 @@ AZURE_OPENAI_FALLBACK_ENABLED=true
 MODEL_CAPACITY_REQUIREMENTS='{"gpt-4.1": 35, "text-embedding-ada-002": 30}'
 ```
 
-### 3. AI Keresés és adatindex konfiguráció
+### 3. AI Search adat index konfigurációval
 
-**Cél**: AI Keresés konfigurálása adatfrissítésekhez és automatizált indexeléshez
+**Cél:** AI Search konfigurálása adatfrissítéshez és automatikus indexeléshez
 
-#### Elő-teljesítés hook:
+#### Előzetes előkészítő horgony:
 
 ```bash
 #!/bin/bash
@@ -585,7 +586,7 @@ az search service create \
   --replica-count 1
 ```
 
-#### Utó-teljesítés adatbeállítás:
+#### Utólagos adat beállítás:
 
 ```bash
 #!/bin/bash
@@ -593,7 +594,7 @@ az search service create \
 
 echo "Configuring AI Search indexes and uploading initial data..."
 
-# Keresési szolgáltatás kulcs beszerzése
+# Keresési szolgáltatás kulcsának lekérése
 SEARCH_KEY=$(az search admin-key show --service-name "$AZURE_SEARCH_SERVICE_NAME" --resource-group "$AZURE_RESOURCE_GROUP" --query primaryKey -o tsv)
 
 # Index séma létrehozása
@@ -602,14 +603,14 @@ curl -X POST "https://$AZURE_SEARCH_SERVICE_NAME.search.windows.net/indexes?api-
   -H "api-key: $SEARCH_KEY" \
   -d @"./infra/search-schema.json"
 
-# Kezdeti dokumentumok feltöltése
+# Kiindulási dokumentumok feltöltése
 python ./scripts/upload_search_data.py \
   --search-service "$AZURE_SEARCH_SERVICE_NAME" \
   --search-key "$SEARCH_KEY" \
   --data-path "./data/initial-docs"
 ```
 
-#### Keresési index séma:
+#### Kereső index séma:
 
 ```json
 {
@@ -634,14 +635,14 @@ python ./scripts/upload_search_data.py \
 }
 ```
 
-### 4. Ügynök eszköz konfiguráció AI Kereséshez
+### 4. Ügynök eszköz konfiguráció AI Search használathoz
 
-**Cél**: Ügynökök konfigurálása AI Keresés használatára alapként
+**Cél:** Ügynökök konfigurálása az AI Search alapú eszköz használatra
 
-#### Ügynök kereső eszköz megvalósítása:
+#### Ügynök kereső eszköz implementáció:
 
 ```python
-# src/agentek/eszkozok/kereses_eszkoz.py
+# src/agents/tools/search_tool.py
 import asyncio
 from azure.search.documents.aio import SearchClient
 from azure.core.credentials import AzureKeyCredential
@@ -701,7 +702,7 @@ class CustomerAgent:
         # Készítse elő a kontextust az LLM számára
         context = "\n".join([doc['content'] for doc in search_results[:3]])
         
-        # Válasz generálása alappal
+        # Válasz generálása alapozással
         response = await self.openai_client.chat.completions.create(
             model="gpt-4.1",
             messages=[
@@ -713,11 +714,11 @@ class CustomerAgent:
         return response.choices[0].message.content
 ```
 
-### 5. Fájlfeltöltés tárhely integráció
+### 5. Fájlfeltöltő tárhely integráció
 
-**Cél**: Ügynökök képesek legyenek feldolgozni a feltöltött fájlokat (kézikönyvek, dokumentumok) RAG kontextushoz
+**Cél:** Áttöltött fájlok (kézikönyvek, dokumentumok) feldolgozása RAG kontextushoz
 
-#### Tároló konfiguráció:
+#### Tárhely konfiguráció:
 
 ```bicep
 // infra/storage.bicep
@@ -756,7 +757,7 @@ resource eventGridTopic 'Microsoft.EventGrid/topics@2023-12-15-preview' = {
 }
 ```
 
-#### Dokumentumfeldolgozó adatfolyam:
+#### Dokumentumfeldolgozó adatcsatorna:
 
 ```python
 # src/document_processor.py
@@ -796,7 +797,7 @@ class DocumentProcessor:
             for line in page.lines:
                 text_content += line.content + "\n"
         
-        # Beágyazások létrehozása
+        # Beágyazások generálása
         embedding_response = await self.openai_client.embeddings.create(
             model="text-embedding-ada-002",
             input=text_content
@@ -814,11 +815,11 @@ class DocumentProcessor:
         await self.search_client.upload_documents([document])
 ```
 
-### 6. Bing kereső integráció
+### 6. Bing Search integráció
 
-**Cél**: Bing kereső képességek hozzáadása valós idejű információkhoz
+**Cél:** Bing Search képességek hozzáadása valós idejű információkhoz
 
-#### Bicep erőforrás hozzáadása:
+#### Bicep erőforrás hozzáadás:
 
 ```bicep
 // infra/bing-search.bicep
@@ -836,7 +837,7 @@ output bingSearchKey string = bingSearchService.listKeys().key1
 output bingSearchEndpoint string = 'https://api.bing.microsoft.com/v7.0/search'
 ```
 
-#### Bing kereső eszköz:
+#### Bing Search eszköz:
 
 ```python
 # src/agents/tools/bing_search_tool.py
@@ -880,11 +881,11 @@ class BingSearchTool:
 
 ---
 
-## Megfigyelés és megfigyelhetőség
+## Monitorozás és megfigyelhetőség
 
 ### 7. Tracing és Application Insights
 
-**Cél**: Átfogó megfigyelés trace naplókkal és alkalmazás betekintéssel
+**Cél:** Átfogó monitorozás trace logokkal és alkalmazásinsight-tal
 
 #### Application Insights konfiguráció:
 
@@ -939,7 +940,7 @@ resource agentPerformanceAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-#### Egyedi telemetria implementáció:
+#### Egyéni telemetria implementáció:
 
 ```python
 # src/telemetry/agent_telemetry.py
@@ -984,7 +985,7 @@ class AgentTelemetry:
         """Track search operation performance"""
         properties = {
             'search_type': search_type,
-            'query': query[:100],  # Levágás a magánélet védelmében
+            'query': query[:100],  # Adatvédelem miatt levágás
             'results_found': str(results_count > 0)
         }
         
@@ -1045,11 +1046,11 @@ class AgentTelemetry:
         return len(text) // 4
 ```
 
-### 8. Vörös csapat biztonsági validáció
+### 8. Red Team biztonsági tesztelés
 
-**Cél**: Automatizált biztonsági tesztek ügynökökre és modellekre
+**Cél:** Automatikus biztonsági tesztelés ügynökök és modellek számára
 
-#### Vörös csapat konfiguráció:
+#### Red Team konfiguráció:
 
 ```python
 # src/security/red_team_scanner.py
@@ -1097,7 +1098,7 @@ class RedTeamScanner:
                     'details': strategy_result['details']
                 })
         
-        # Összesített biztonsági pontszám kiszámítása
+        # Az összesített biztonsági pontszám kiszámítása
         scan_results['overall_score'] = self._calculate_security_score(scan_results)
         
         return scan_results
@@ -1165,8 +1166,8 @@ class RedTeamScanner:
     
     async def _send_test_prompt(self, prompt: str) -> str:
         """Send test prompt to target agent"""
-        # A megvalósítás HTTP kérést küldene az agent végponthoz
-        # Demó célokra helyőrző értéket ad vissza
+        # A megvalósítás HTTP kérést küldene az ügynök végpontjához
+        # Demó célokra helyőrző érték visszaadása
         import aiohttp
         
         async with aiohttp.ClientSession() as session:
@@ -1188,7 +1189,7 @@ class RedTeamScanner:
     
     def _analyze_response(self, response: str, strategy: str) -> Dict:
         """Analyze response for vulnerabilities"""
-        # Egyszerűsített sebezhetőség-észlelés
+        # Egyszerűsített sérülékenység-észlelés
         vulnerability_patterns = {
             'prompt_injection': ['system prompt', 'internal config', 'admin mode'],
             'jailbreak_attempts': ['DAN mode', 'rules broken', 'safety disabled'],
@@ -1223,14 +1224,14 @@ class RedTeamScanner:
         total_strategies = len(scan_results['strategies_tested'])
         vulnerabilities = len(scan_results['vulnerabilities_found'])
         
-        # Alap pontozás: 100 - (sebezhetőségek / összes * 100)
+        # Alappontozás: 100 - (sebezhetőségek / összes * 100)
         if total_strategies == 0:
             return 100.0
         
         vulnerability_ratio = vulnerabilities / total_strategies
         base_score = max(0, 100 - (vulnerability_ratio * 100))
         
-        # A pontszám csökkentése a súlyosság alapján
+        # A pontszám csökkentése súlyosság alapján
         severity_penalty = 0
         for vuln in scan_results['vulnerabilities_found']:
             severity_weights = {'low': 5, 'medium': 15, 'high': 30, 'critical': 50}
@@ -1240,7 +1241,7 @@ class RedTeamScanner:
         return round(final_score, 2)
 ```
 
-#### Automatizált biztonsági folyamat:
+#### Automatikus biztonsági pipeline:
 
 ```bash
 #!/bin/bash
@@ -1248,13 +1249,13 @@ class RedTeamScanner:
 
 echo "Starting Red Team Security Scan..."
 
-# Szerezze be az ügynök végpontját a telepítésből
+# Lekéri az ügynök végpontját a telepítésből
 AGENT_ENDPOINT=$(az containerapp show \
   --name "agent-customer" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# Biztonsági vizsgálat futtatása
+# Futtatja a biztonsági vizsgálatot
 python -m src.security.red_team_scanner \
   --endpoint "https://$AGENT_ENDPOINT" \
   --api-key "$AGENT_API_KEY" \
@@ -1264,11 +1265,11 @@ python -m src.security.red_team_scanner \
 echo "Security scan completed. Check security_reports/ for results."
 ```
 
-### 9. Ügynök értékelés értékelő modellel
+### 9. Ügynök értékelés grader modellel
 
-**Cél**: Értékelő rendszer telepítése dedikált értékelő modellel
+**Cél:** Értékelő rendszer telepítése dedikált grader modellel
 
-#### Értékelő modell konfiguráció:
+#### Grader modell konfiguráció:
 
 ```bicep
 // infra/evaluation.bicep
@@ -1341,7 +1342,7 @@ class AgentEvaluator:
             case_result = await self._evaluate_single_case(test_case)
             evaluation_results['results'].append(case_result)
         
-        # Összefoglaló mutatók számítása
+        # Összefoglaló metrikák kiszámítása
         evaluation_results['summary'] = self._calculate_summary(evaluation_results['results'])
         
         return evaluation_results
@@ -1354,7 +1355,7 @@ class AgentEvaluator:
         # Ügynök válaszának lekérése
         agent_response = await self._get_agent_response(user_query)
         
-        # A válasz értékelése
+        # Válasz értékelése
         grading_result = await self._grade_response(
             user_query, 
             agent_response, 
@@ -1425,7 +1426,7 @@ class AgentEvaluator:
                 max_tokens=500
             )
             
-            # JSON válasz feldolgozása
+            # JSON válasz elemzése
             grading_text = grader_response.choices[0].message.content
             grading_result = json.loads(grading_text)
             
@@ -1471,7 +1472,7 @@ class AgentEvaluator:
             if criterion_scores:
                 summary['criteria_averages'][criterion] = sum(criterion_scores) / len(criterion_scores)
         
-        # Teljesítmény értékelése
+        # Teljesítmény értékelés
         avg_score = summary['average_overall_score']
         if avg_score >= 4.5:
             summary['performance_rating'] = 'Excellent'
@@ -1528,9 +1529,9 @@ class AgentEvaluator:
 
 ## Testreszabás és frissítések
 
-### 10. Konténeralkalmazás testreszabás
+### 10. Container App testreszabás
 
-**Cél**: Konténeralkalmazás konfiguráció frissítése és egyedi UI-ra cserélése
+**Cél:** Container app konfiguráció frissítése és egyedi UI telepítése
 
 #### Dinamikus konfiguráció:
 
@@ -1583,7 +1584,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 echo "Building and deploying custom frontend..."
 
-# Egyéni kép létrehozása környezeti változókkal
+# Egyedi kép építése környezeti változókkal
 docker build \
   --build-arg AGENT_NAME="$CUSTOMER_AGENT_NAME" \
   --build-arg COMPANY_NAME="retail Retail" \
@@ -1597,7 +1598,7 @@ az acr build \
   --image "retail-frontend:latest" \
   ./src/frontend
 
-# Konténer alkalmazás frissítése
+# Konténeralkalmazás frissítése
 az containerapp update \
   --name "retail-frontend" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1612,19 +1613,19 @@ echo "Frontend deployed successfully!"
 
 ### Gyakori problémák és megoldások
 
-#### 1. Konténeralkalmazás kvóta korlátok
+#### 1. Container Apps kvóta korlátok
 
-**Probléma**: A telepítés régiós kvóta korlátok miatt sikertelen
+**Probléma:** Telepítés meghiúsul regionális kvóta korlát miatt
 
-**Megoldás**:
+**Megoldás:**
 ```bash
-# Jelenlegi kvótahasználat ellenőrzése
+# Aktuális kvóta használat ellenőrzése
 az containerapp env show \
   --name "$CONTAINER_APPS_ENVIRONMENT" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.workloadProfiles"
 
-# Kvóta növelésének kérése
+# Kvóta növelésének kérelmezése
 az support tickets create \
   --ticket-name "ContainerApps-Quota-Increase" \
   --severity "minimal" \
@@ -1635,11 +1636,11 @@ az support tickets create \
   --description "Request quota increase for Container Apps in region X"
 ```
 
-#### 2. Modell telepítési lejárat
+#### 2. Modell telepítés lejárat
 
-**Probléma**: Modell telepítés sikertelen lejárt API verzió miatt
+**Probléma:** Modell telepítés meghiúsul lejárt API verzió miatt
 
-**Megoldás**:
+**Megoldás:**
 ```python
 # scripts/update_model_versions.py
 import requests
@@ -1647,7 +1648,7 @@ import json
 
 def check_model_versions():
     """Check for latest model versions"""
-    # Ez meghívná a Microsoft Foundry Models API-t az aktuális verziók lekéréséhez
+    # Ez meghívná a Microsoft Foundry Models API-t a jelenlegi verziók lekéréséhez
     latest_versions = {
         "gpt-4.1": "2024-11-20",
         "text-embedding-ada-002": "2", 
@@ -1686,9 +1687,9 @@ if __name__ == "__main__":
 
 #### 3. Finomhangolás integrációja
 
-**Probléma**: Hogyan integráljuk finomhangolt modelleket az AZD telepítésbe
+**Probléma:** Hogyan integráljuk a finomhangolt modelleket az AZD telepítésbe
 
-**Megoldás**:
+**Megoldás:**
 ```python
 # scripts/fine_tuning_pipeline.py
 import asyncio
@@ -1726,8 +1727,8 @@ class FineTuningPipeline:
             fine_tuned_model = job.fine_tuned_model
             print(f"Fine-tuned model ready: {fine_tuned_model}")
             
-            # A telepítés frissítése a finomhangolt modell használatára
-            # Ez az Azure CLI-t hívná meg a telepítés frissítéséhez
+            # A telepítés frissítése finomhangolt modell használatára
+            # Ez az Azure CLI hívásával frissítené a telepítést
             return fine_tuned_model
         else:
             print(f"Job status: {job.status}")
@@ -1736,13 +1737,13 @@ class FineTuningPipeline:
 
 ---
 
-## GYIK és nyitott kutatás
+## GYIK & Nyitott kérdések
 
-### Gyakran feltett kérdések
+### Gyakran ismételt kérdések
 
 #### K: Van egyszerű mód több ügynök telepítésére (tervezési minta)?
 
-**V:** Igen! Használd a Többügynökös Mintát:
+**V: Igen! Használd a Többügynökös Mintát:**
 
 ```yaml
 # azure.yaml - Multi-Agent Configuration
@@ -1759,12 +1760,12 @@ services:
         }
 ```
 
-#### K: Telepíthetek "modell útválasztót" modellként (költség szempontok)?
+#### K: Telepíthetek "modell irányítót" modellként (költség szempont)?
 
-**V:** Igen, megfontoltan:
+**V: Igen, odafigyeléssel:**
 
 ```python
-# Modell Router megvalósítás
+# Modell router megvalósítása
 class ModelRouter:
     def __init__(self):
         self.routing_rules = {
@@ -1789,21 +1790,21 @@ class ModelRouter:
 ```
 
 **Költség szempontok:**
-- **Megtakarítás:** 60-80% költségcsökkentés egyszerű lekérdezések esetén
-- **Kompromisszum:** Kismértékű késleltetés az útválasztási logikában
-- **Megfigyelés:** Pontosság vs. költség mutatók követése
+- **Megtakarítás:** 60-80% költségcsökkentés egyszerű lekérdezéseknél
+- **Kompromisszum:** Kis késleltetés növekedés az irányításnál
+- **Monitorozás:** Kísérd az pontosság és költség mutatókat
 
 #### K: Indíthatok finomhangolási munkát az azd sablonból?
 
-**V:** Igen, post-provisioning hook használatával:
+**V: Igen, post-provisioning horgony használatával:**
 
 ```bash
 #!/bin/bash
-# hooks/postprovision.sh - Finomhangolás integráció
+# hooks/postprovision.sh - Finomhangolási integráció
 
 echo "Starting fine-tuning pipeline..."
 
-# Tanító adat feltöltése
+# Tréningadatok feltöltése
 TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
   --data-path "./data/fine_tuning/training.jsonl" \
   --openai-key "$AZURE_OPENAI_API_KEY")
@@ -1813,7 +1814,7 @@ FINE_TUNE_JOB_ID=$(python scripts/start_fine_tuning.py \
   --training-file-id "$TRAINING_FILE_ID" \
   --model "gpt-4.1-mini")
 
-# Feladatazonosító tárolása a megfigyeléshez
+# Feladatazonosító tárolása a monitorozáshoz
 echo "$FINE_TUNE_JOB_ID" > .azure/fine_tune_job_id
 
 echo "Fine-tuning job started: $FINE_TUNE_JOB_ID"
@@ -1822,7 +1823,7 @@ echo "Monitor progress with: azd hooks run monitor-fine-tuning"
 
 ### Haladó forgatókönyvek
 
-#### Több régiós telepítési stratégia
+#### Többrégiós telepítési stratégia
 
 ```bicep
 // infra/multi-region.bicep
@@ -1858,10 +1859,10 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-#### Költségoptimalizációs keretrendszer
+#### Költségoptimalizáló keretrendszer
 
 ```python
-# src/optimization/cost_optimizer.py
+# src/optimalizáció/költség_optimalizáló.py
 class CostOptimizer:
     def __init__(self, usage_analytics):
         self.analytics = usage_analytics
@@ -1882,7 +1883,7 @@ class CostOptimizer:
                     'estimated_savings': usage['monthly_cost'] * 0.3
                 })
         
-        # Csúcsidő elemzés
+        # Csúcsidei elemzés
         peak_patterns = self.analytics.get_peak_patterns()
         if peak_patterns['variance'] > 0.6:
             recommendations.append({
@@ -1903,65 +1904,66 @@ class CostOptimizer:
 ```
 
 ---
-## ✅ Azonnal telepíthető ARM-sablon
 
-> **✨ EZ VALÓBAN LÉTEZIK ÉS MŰKÖDIK!**  
-> Az előző, koncepcionális kódpéldákkal ellentétben az ARM-sablon egy **valódi, működő infrastruktúra telepítést** tartalmaz ebben a tárházban.
+## ✅ Készre Telepíthető ARM Sablon
 
-### Mit tesz pontosan ez a sablon
+> **✨ EZ TÉNYLEG LÉTEZIK ÉS MŰKÖDIK!**  
+> Az előző koncepcionális kódpéldákkal ellentétben az ARM sablon egy **valós, működő infrastruktúra telepítés**, amely megtalálható ebben a tárolóban.
 
-A [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) könyvtárban található ARM-sablon biztosítja a **multi-agent rendszerhez szükséges összes Azure infrastruktúrát**. Ez az **egyetlen azonnal futtatható komponens** – minden más fejlesztést igényel.
+### Mit Csinál Valójában Ez a Sablon
 
-### Mit tartalmaz az ARM-sablon
+A [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) mappában található ARM sablon biztosítja a **multi-agent rendszerhez szükséges összes Azure infrastruktúrát**. Ez az **egyetlen készen álló futtatható komponens** - minden más fejlesztést igényel.
 
-A [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) könyvtárban található ARM-sablon a következőket tartalmazza:
+### Mi Tartozik az ARM Sablonhoz
 
-#### **Teljes infrastruktúra**
-- ✅ **Több régióba telepített Microsoft Foundry Modellek** (gpt-4.1, gpt-4.1-mini, embeddings, grader)
-- ✅ **Azure AI Search** vektoralapú keresési funkciókkal
-- ✅ **Azure Storage** dokumentum- és feltöltési tárolókkal
+A [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) mappában található ARM sablon tartalmazza:
+
+#### **Teljes Infrastruktúra**
+- ✅ **Több régióban telepített Microsoft Foundry Modellek** (gpt-4.1, gpt-4.1-mini, beágyazások, értékelő)
+- ✅ **Azure AI Search** vektoros keresési képességekkel
+- ✅ **Azure Storage** dokumentum és feltöltési konténerekkel
 - ✅ **Container Apps Környezet** automatikus skálázással
 - ✅ **Agent Router & Frontend** konténeralkalmazások
-- ✅ **Cosmos DB** a csevegési előzmények tárolásához
-- ✅ **Application Insights** átfogó megfigyeléshez
-- ✅ **Key Vault** biztonságos titkos kezeléshez
+- ✅ **Cosmos DB** a csevegési előzmények tárolására
+- ✅ **Application Insights** átfogó monitorozáshoz
+- ✅ **Key Vault** biztonságos titokkezeléshez
 - ✅ **Document Intelligence** fájl feldolgozáshoz
-- ✅ **Bing Search API** valós idejű információkhoz
+- ✅ **Bing Search API** valós idejű információhoz
 
-#### **Telepítési módok**
-| Mód | Használati eset | Erőforrások | Becslés költség/hó |
+#### **Telepítési Módok**
+| Mód | Használati eset | Erőforrások | Becslés havi költség |
 |------|----------|-----------|---------------------|
-| **Minimális** | Fejlesztés, tesztelés | Alap SKU-k, egy régió | 100-370 $ |
-| **Standard** | Termelés, közepes skála | Standard SKU-k, több régió | 420-1,450 $ |
-| **Prémium** | Vállalati, nagy skála | Prémium SKU-k, HA beállítás | 1,150-3,500 $ |
+| **Minimális** | Fejlesztés, Tesztelés | Alap SKU-k, Egy régió | 100-370 USD |
+| **Standard** | Éles környezet, Közepes méret | Standard SKU-k, Több régió | 420-1450 USD |
+| **Prémium** | Vállalati, Nagy méret | Prémium SKU-k, Magas rendelkezésre állás | 1150-3500 USD |
 
-### 🎯 Gyors telepítési lehetőségek
+### 🎯 Gyors Telepítési Opciók
 
-#### 1. opció: Egylépéses Azure telepítés
+#### Opció 1: Egykattintásos Azure Telepítés
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-#### 2. opció: Azure CLI telepítés
+#### Opció 2: Azure CLI Telepítés
 
 ```bash
 # Klónozza a tárolót
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/examples/retail-multiagent-arm-template
 
-# Tegye végrehajthatóvá a telepítő szkriptet
+# Tegye futtathatóvá a telepítési scriptet
 chmod +x deploy.sh
 
 # Telepítés alapértelmezett beállításokkal (Standard mód)
 ./deploy.sh -g myResourceGroup
 
-# Telepítés termelési környezetre prémium funkciókkal
+# Telepítés termelési környezetbe prémium funkciókkal
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 
 # Minimális verzió telepítése fejlesztéshez
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
-#### 3. opció: Közvetlen ARM sablon telepítés
+#### Opció 3: Közvetlen ARM Sablon Telepítés
 
 ```bash
 # Erőforráscsoport létrehozása
@@ -1975,9 +1977,9 @@ az deployment group create \
   --parameters projectName=retail environmentName=prod
 ```
 
-### Sablon kimenetei
+### Sablon Kimenetek
 
-Sikeres telepítés után a következőket kapja:
+Sikeres telepítés után az alábbiakat kapja meg:
 
 ```json
 {
@@ -1991,31 +1993,31 @@ Sikeres telepítés után a következőket kapja:
 }
 ```
 
-### 🔧 Telepítés utáni konfiguráció
+### 🔧 Telepítés Utáni Beállítás
 
-Az ARM-sablon az infrastruktúra kiépítését végzi. A telepítés után:
+Az ARM sablon kezeli az infrastruktúra kiépítését. A telepítés után:
 
-1. **Keresési index konfigurálása**:
+1. **Keresési Index Konfigurálása**:  
    ```bash
-   # Használja a megadott keresési sémát
+   # Használd a megadott keresési sémát
    curl -X POST "${SEARCH_ENDPOINT}/indexes?api-version=2023-11-01" \
      -H "Content-Type: application/json" \
      -H "api-key: ${SEARCH_KEY}" \
      -d @../data/search-schema.json
    ```
 
-2. **Kezdeti dokumentumok feltöltése**:
+2. **Kezdeti Dokumentumok Feltöltése**:  
    ```bash
-   # Termékleírások és tudásbázis feltöltése
+   # Termékkézikönyvek és tudásbázis feltöltése
    az storage blob upload-batch \
      --destination documents \
      --source ../data/initial-docs \
      --account-name ${STORAGE_ACCOUNT}
    ```
 
-3. **Agent kód telepítése**:
+3. **Agent Kód Telepítése**:  
    ```bash
-   # Valós ügynökalkalmazások építése és telepítése
+   # Valódi ügynökalkalmazások építése és telepítése
    docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
    az containerapp update \
      --name retail-router \
@@ -2023,9 +2025,9 @@ Az ARM-sablon az infrastruktúra kiépítését végzi. A telepítés után:
      --image myregistry.azurecr.io/agent-router:latest
    ```
 
-### 🎛️ Testreszabási lehetőségek
+### 🎛️ Testreszabási Lehetőségek
 
-Az `azuredeploy.parameters.json` fájl szerkesztésével testreszabhatja a telepítést:
+Az `azuredeploy.parameters.json` fájl szerkesztésével testre szabhatja a telepítését:
 
 ```json
 {
@@ -2039,147 +2041,147 @@ Az `azuredeploy.parameters.json` fájl szerkesztésével testreszabhatja a telep
 }
 ```
 
-### 📊 Telepítési jellemzők
+### 📊 Telepítési Jellemzők
 
 - ✅ **Előfeltételek ellenőrzése** (Azure CLI, kvóták, jogosultságok)
-- ✅ **Több régió magas rendelkezésre állással** automatikus átváltással
-- ✅ **Átfogó megfigyelés** Application Insights és Log Analytics segítségével
+- ✅ **Több régiós magas rendelkezésre állás** automatikus failover-rel
+- ✅ **Átfogó monitorozás** Application Insights és Log Analytics segítségével
 - ✅ **Biztonsági legjobb gyakorlatok** Key Vault és RBAC használatával
-- ✅ **Költségoptimalizálás** konfigurálható telepítési módokkal
-- ✅ **Automatikus skálázás** a terhelési minták alapján
-- ✅ **Zero-downtime frissítések** Container Apps változatokkal
+- ✅ **Költséghatékonyság** konfigurálható telepítési módokkal
+- ✅ **Automatikus skálázás** igények alapján
+- ✅ **Nulla kieséses frissítések** Container Apps verziókezeléssel
 
-### 🔍 Megfigyelés és kezelés
+### 🔍 Monitorozás és Kezelés
 
-A telepítés után az alábbi eszközökkel figyelheti meg megoldását:
+A telepítés után kövesse nyomon megoldását az alábbi eszközökkel:
 
-- **Application Insights**: teljesítményadatok, függőség követés és egyedi telemetria
-- **Log Analytics**: az összes komponens központosított naplózása
-- **Azure Monitor**: erőforrás-egészség és rendelkezésre állás figyelése
-- **Költségkezelés**: valós idejű költségkövetés és költségfigyelmeztetések
-
----
-
-## 📚 Teljes megvalósítási útmutató
-
-Ez a forgatókönyv dokumentum és az ARM-sablon együtt mindent biztosítanak egy termelésre kész multi-agent ügyféltámogató megoldás telepítéséhez. A megvalósítás magában foglalja:
-
-✅ **Architektúra tervezés** – Részletes rendszerterv és komponens kapcsolatok  
-✅ **Infrastruktúra kiépítés** – Kész ARM-sablon az egylépéses telepítéshez  
-✅ **Agent konfiguráció** – Részletes beállítási lépések Ügyfél és Készlet agentekhez  
-✅ **Több modell telepítés** – Modell elhelyezés stratégiája régiók között  
-✅ **Keresés integráció** – AI Search vektoralapú kereséssel és adatindexeléssel  
-✅ **Biztonsági megvalósítás** – Red teaming, sérülékenységvizsgálat és biztonsági gyakorlatok  
-✅ **Megfigyelés és értékelés** – Átfogó telemetria és agent értékelő keretrendszer  
-✅ **Termelési készség** – Vállalati szintű telepítés HA-val és katasztrófa-helyreállítással  
-✅ **Költségoptimalizálás** – Intelligens útválasztás és használaton alapuló skálázás  
-✅ **Hibakeresési útmutató** – Gyakori problémák és megoldási stratégiák
+- **Application Insights**: Teljesítménymutatók, függőségek követése és egyedi telemetria  
+- **Log Analytics**: Minden komponens központosított naplózása  
+- **Azure Monitor**: Erőforrások állapotának és elérhetőségének figyelése  
+- **Költségkezelés**: Valós idejű költségkövetés és költségvetési riasztások  
 
 ---
 
-## 📊 Összegzés: Amit megtanultál
+## 📚 Teljes Megvalósítási Útmutató
 
-### Tárgyalt architektúra minták
+Ez a forgatókönyv dokumentum az ARM sablonnal együtt mindent biztosít, ami a termeléskész multi-agent ügyféltámogatási megoldás telepítéséhez szükséges. A megvalósítás lefedi:
 
-✅ **Multi-agent rendszer tervezés** – Speciális ügynökök (Ügyfél + Készlet) dedikált modellekkel  
-✅ **Több régiós telepítés** – Stratégiai modell elhelyezés költségoptimalizálás és redundancia céljából  
-✅ **RAG architektúra** – AI Search integráció vektoralapú beágyazásokkal megalapozott válaszokért  
-✅ **Agent értékelés** – Dedikált grader modell a minőség felmérésére  
-✅ **Biztonsági keretrendszer** – Red teaming és sérülékenységvizsgálat minták  
-✅ **Költségoptimalizálás** – Modell útválasztás és kapacitástervezési stratégiák  
-✅ **Termelési megfigyelés** – Application Insights egyedi telemetriával  
+✅ **Architektúra Tervezés** - Átfogó rendszerterv, komponensek kapcsolatai  
+✅ **Infrastruktúra Kiépítés** - Teljes ARM sablon egykattintásos telepítéshez  
+✅ **Agent Konfiguráció** - Részletes beállítás ügyfél- és készletkezelő agentekhez  
+✅ **Több Modell Telepítés** - Stratégiai modell elhelyezés régiók között  
+✅ **Keresési Integráció** - AI Search vektoros kereséssel és adatindexeléssel  
+✅ **Biztonsági Megvalósítás** - Red teaming, sebezhetőség vizsgálat és biztonságos gyakorlatok  
+✅ **Monitorozás és Értékelés** - Átfogó telemetria és agent értékelési keretrendszer  
+✅ **Termeléskészség** - Vállalati szintű telepítés HA és katasztrófa-helyreállítással  
+✅ **Költséghatékonyság** - Intelligens útvonalkiválasztás és használat alapú skálázás  
+✅ **Hibakeresési Útmutató** - Gyakori problémák és megoldási stratégiák  
 
-### Amit ez a dokumentum nyújt
+---
+
+## 📊 Összegzés: Amit Tanultál
+
+### Lefedett Architektúra Minták
+
+✅ **Multi-Agent Rendszer Tervezés** - Specializált agentek (Ügyfél + Készlet) dedikált modellekkel  
+✅ **Több Régiós Telepítés** - Stratégiai modell elhelyezés költségoptimalizálásra és redundanciára  
+✅ **RAG Architektúra** - AI Search integráció vektoros beágyazásokkal a megalapozott válaszokhoz  
+✅ **Agent Értékelés** - Dedikált értékelő modell a minőség méréséhez  
+✅ **Biztonsági Keretrendszer** - Red teaming és sebezhetőség vizsgálati minták  
+✅ **Költséghatékonyság** - Modell útvonalválasztás és kapacitástervezési stratégiák  
+✅ **Termelési Monitorozás** - Application Insights egyedi telemetriával  
+
+### Amit Ez a Dokumentum Nyújt
 
 | Komponens | Állapot | Hol található |
 |-----------|--------|------------------|
-| **Infrastruktúra sablon** | ✅ Azonnal telepíthető | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
-| **Architektúra diagramok** | ✅ Teljes | Felül a Mermaid diagram |
-| **Kód példák** | ✅ Referencia megvalósítások | A dokumentum egészében |
-| **Konfigurációs minták** | ✅ Részletes útmutatás | 1-10. szekciók fent |
-| **Agent megvalósítások** | 🔨 Neked kell elkészíteni | kb. 40 óra fejlesztés |
-| **Frontend felület** | 🔨 Neked kell elkészíteni | kb. 25 óra fejlesztés |
-| **Adatcsővezetékek** | 🔨 Neked kell elkészíteni | kb. 10 óra fejlesztés |
+| **Infrastruktúra Sablon** | ✅ Készen áll a telepítésre | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
+| **Architektúra Diagramok** | ✅ Teljes | Fent található Mermaid diagram |
+| **Kód Példák** | ✅ Referencia Megvalósítások | A dokumentum egészében |
+| **Konfigurációs Minták** | ✅ Részletes Útmutató | A fenti 1-10 szekciókban |
+| **Agent Implementációk** | 🔨 Neked kell elkészíteni | kb. 40 óra fejlesztés |
+| **Frontend UI** | 🔨 Neked kell elkészíteni | kb. 25 óra fejlesztés |
+| **Adatfeldolgozó Pipeline** | 🔨 Neked kell elkészíteni | kb. 10 óra fejlesztés |
 
-### Valóságellenőrzés: Mi létezik valójában
+### Valóságellenőrzés: Mi Létezik Valójában
 
-**A tárházban (azonnal elérhető):**
-- ✅ ARM sablon, amely 15+ Azure szolgáltatást telepít (azuredeploy.json)
-- ✅ Telepítési szkript ellenőrzéssel (deploy.sh)
-- ✅ Paraméter konfiguráció (azuredeploy.parameters.json)
+**Tárolóban (Most készen áll):**  
+- ✅ ARM sablon 15+ Azure szolgáltatás telepítésére (azuredeploy.json)  
+- ✅ Telepítési script ellenőrzéssel (deploy.sh)  
+- ✅ Paraméter konfiguráció (azuredeploy.parameters.json)  
 
-**A dokumentumban hivatkozott (neked kell létrehozni):**
-- 🔨 Agent megvalósító kód (~30-40 óra)
-- 🔨 Routing szolgáltatás (~12-16 óra)
-- 🔨 Frontend alkalmazás (~20-30 óra)
-- 🔨 Adat előkészítő szkriptek (~8-12 óra)
-- 🔨 Megfigyelési keretrendszer (~10-15 óra)
+**Dokumentumban hivatkozva (Neked kell létrehozni):**  
+- 🔨 Agent implementációs kód (~30-40 óra)  
+- 🔨 Router szolgáltatás (~12-16 óra)  
+- 🔨 Frontend alkalmazás (~20-30 óra)  
+- 🔨 Adat beállító szkriptek (~8-12 óra)  
+- 🔨 Monitorozási keretrendszer (~10-15 óra)  
 
-### Következő lépések
+### Következő Lépéseid
 
-#### Ha infrastruktúrát akarsz telepíteni (30 perc)
+#### Ha Infrastruktúrát Akarsz Telepíteni (30 perc)
 ```bash
 cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
 
-#### Ha a teljes rendszert akarod megépíteni (80-120 óra)
-1. ✅ Olvasd el és értsd meg az architektúra dokumentumot (2-3 óra)
-2. ✅ Telepítsd az infrastruktúrát ARM sablonnal (30 perc)
-3. 🔨 Fejleszd agenteket referencia kódminták alapján (~40 óra)
-4. 🔨 Építs routing szolgáltatást FastAPI/Express segítségével (~15 óra)
-5. 🔨 Készíts frontend UI-t React/Vue használatával (~25 óra)
-6. 🔨 Konfiguráld az adatcsővezetékeket és keresési indexet (~10 óra)
-7. 🔨 Adj hozzá megfigyelést és értékelést (~15 óra)
-8. ✅ Tesztelj, biztonságosíts és optimalizálj (~10 óra)
+#### Ha A Teljes Rendszert Szeretnéd Kialakítani (80-120 óra)
+1. ✅ Olvasd el és értsd meg ezt az architektúra dokumentumot (2-3 óra)  
+2. ✅ Telepítsd az infrastruktúrát ARM sablon segítségével (30 perc)  
+3. 🔨 Implementáld az agenteket referencia kódminták alapján (~40 óra)  
+4. 🔨 Építsd meg az útválasztó szolgáltatást FastAPI/Express-szel (~15 óra)  
+5. 🔨 Készíts frontend UI-t React/Vue-val (~25 óra)  
+6. 🔨 Állítsd be az adat pipeline-t és a keresési indexet (~10 óra)  
+7. 🔨 Adj hozzá monitorozást és értékelést (~15 óra)  
+8. ✅ Tesztelj, biztonságosíts és optimalizálj (~10 óra)  
 
-#### Ha multi-agent mintákat szeretnél tanulni (tanulmányozás)
-- 📖 Tanulmányozd az architektúra diagramot és a komponensek kapcsolatait
-- 📖 Nézd át a SearchTool, BingTool, AgentEvaluator kódpéldákat
-- 📖 Értsd meg a több régiós telepítési stratégiát
-- 📖 Tanuld meg az értékelési és biztonsági keretrendszereket
-- 📖 Alkalmazd a mintákat saját projektjeidben
+#### Ha A Multi-Agent Mintákat Szeretnéd Tanulni (Tanulmányozás)
+- 📖 Tanulmányozd az architektúra diagramot és a komponensek kapcsolatait  
+- 📖 Tanulmányozd a SearchTool, BingTool, AgentEvaluator kódpéldákat  
+- 📖 Értsd meg a több régiós telepítési stratégiát  
+- 📖 Tanulj az értékelési és biztonsági keretrendszerekről  
+- 📖 Alkalmazd a mintákat saját projektjeidben  
 
-### Főbb tanulságok
+### Fő Tanulságok
 
-1. **Infrastruktúra kontra alkalmazás** – ARM sablon az infrastruktúrát adja, az agentek fejlesztést igényelnek  
-2. **Több régiós stratégia** – Stratégiai modell elhelyezés csökkenti a költségeket és javítja a megbízhatóságot  
-3. **Értékelési keretrendszer** – Dedikált grader modell lehetővé teszi a folyamatos minőségellenőrzést  
-4. **Biztonság elsőként** – Red teaming és sérülékenységvizsgálat alapkövetelmény termelési környezetben  
-5. **Költségoptimalizálás** – Intelligens útválasztás gpt-4.1 és gpt-4.1-mini között 60-80% megtakarítást jelent
+1. **Infrastruktúra vs. Alkalmazás** - Az ARM sablon biztosítja az infrastruktúrát; agentek fejlesztést igényelnek  
+2. **Több Régiós Stratégia** - A stratégiai modell elhelyezés csökkenti a költségeket és növeli a megbízhatóságot  
+3. **Értékelési Keretrendszer** - Dedikált értékelő modell folyamatos minőségellenőrzést tesz lehetővé  
+4. **Biztonság Elsőbbsége** - Red teaming és sebezhetőség vizsgálat alapvető a termeléshez  
+5. **Költséghatékonyság** - Intelligens útvonalválasztás gpt-4.1 és gpt-4.1-mini között 60-80%-os megtakarítást eredményez  
 
-### Becslés költségek
+### Becslések Költségekről
 
-| Telepítési mód | Infrastruktúra/hó | Fejlesztés (egyszeri) | Összes első hónap |
+| Telepítési Mód | Infrastruktúra / Hónap | Fejlesztés (Egyszeri) | Összes Első Hónap |
 |-----------------|---------------------|------------------------|-------------------|
-| **Minimális** | 100-370 $ | 15K-25K $ (80-120 óra) | 15,1K-25,4K $ |
-| **Standard** | 420-1,450 $ | 15K-25K $ (ugyanaz az erőfeszítés) | 15,4K-26,5K $ |
-| **Prémium** | 1,150-3,500 $ | 15K-25K $ (ugyanaz az erőfeszítés) | 16,2K-28,5K $ |
+| **Minimális** | 100-370 USD | 15K-25K USD (80-120 óra) | 15,1K-25,4K USD |
+| **Standard** | 420-1,450 USD | 15K-25K USD (ugyanannyi erőfeszítés) | 15,4K-26,5K USD |
+| **Prémium** | 1,150-3,500 USD | 15K-25K USD (ugyanannyi erőfeszítés) | 16,2K-28,5K USD |
 
-**Megjegyzés:** Az infrastruktúra az új fejlesztések teljes költségének <5%-a. A fejlesztési erőfeszítés a fő befektetés.
+**Megjegyzés:** Az infrastruktúra új implementációk költségének <5%-a. A fejlesztői erőfeszítés a fő befektetés.
 
-### Kapcsolódó források
+### Kapcsolódó Források
 
-- 📚 [ARM sablon telepítési útmutató](retail-multiagent-arm-template/README.md) – Infrastrukturális beállítás  
-- 📚 [Microsoft Foundry Modellek legjobb gyakorlatok](https://learn.microsoft.com/azure/ai-services/openai/) – Modell telepítés  
-- 📚 [AI Search dokumentáció](https://learn.microsoft.com/azure/search/) – Vektoralapú keresés konfiguráció  
-- 📚 [Container Apps minták](https://learn.microsoft.com/azure/container-apps/) – Microservices telepítés  
-- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) – Megfigyelési beállítás
+- 📚 [ARM Sablon Telepítési Útmutató](retail-multiagent-arm-template/README.md) - Infrastrukturális beállítás  
+- 📚 [Microsoft Foundry Modellek Legjobb Gyakorlatai](https://learn.microsoft.com/azure/ai-services/openai/) - Modell telepítés  
+- 📚 [AI Search Dokumentáció](https://learn.microsoft.com/azure/search/) - Vektoros keresés beállítása  
+- 📚 [Container Apps Minták](https://learn.microsoft.com/azure/container-apps/) - Mikro-szolgáltatások telepítése  
+- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Monitorozás beállítása  
 
-### Kérdések vagy problémák?
+### Kérdések vagy Problémák?
 
-- 🐛 [Hibajelentés](https://github.com/microsoft/AZD-for-beginners/issues) – Sablon hibák vagy dokumentációs tévedések  
-- 💬 [GitHub Beszélgetések](https://github.com/microsoft/AZD-for-beginners/discussions) – Architektúra kérdések  
-- 📖 [GYIK](../resources/faq.md) – Gyakori kérdések válaszokkal  
-- 🔧 [Hibakeresési útmutató](../docs/troubleshooting/common-issues.md) – Telepítési problémák
+- 🐛 [Hibabejelentés](https://github.com/microsoft/AZD-for-beginners/issues) - Sablon hibák vagy dokumentációs problémák  
+- 💬 [GitHub Beszélgetések](https://github.com/microsoft/AZD-for-beginners/discussions) - Architektúra kérdések  
+- 📖 [GYIK](../resources/faq.md) - Gyakori kérdésekre válaszok  
+- 🔧 [Hibakeresési Útmutató](../docs/troubleshooting/common-issues.md) - Telepítési problémák  
 
 ---
 
-**Ez az átfogó forgatókönyv egy vállalati szintű architektúra tervet kínál multi-agent AI rendszerekhez, teljes infrastruktúra sablonokkal, megvalósítási útmutatóval és termelési legjobb gyakorlatokkal az Azure Developer CLI használata mellett összetett ügyféltámogató megoldások építéséhez.**
+**Ez az átfogó forgatókönyv vállalati szintű architektúrás sablont tartalmaz multi-agent AI rendszerekhez, teljes infrastrukturális sablonokkal, megvalósítási útmutatóval és termelési legjobb gyakorlatokkal, hogy kifinomult ügyféltámogatási megoldásokat építsen Azure Developer CLI segítségével.**
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Jogi nyilatkozat**:  
-Ezt a dokumentumot az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével fordítottuk le. Bár igyekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások tartalmazhatnak hibákat vagy pontatlanságokat. Az eredeti dokumentum az anyanyelvén tekinthető a hiteles forrásnak. Kritikus információk esetén javasolt a szakmai, emberi fordítás igénybevétele. Nem vállalunk felelősséget az ebből a fordításból eredő félreértésekért vagy félreértelmezésekért.
+**Jogi nyilatkozat**:
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Fontos információk esetén professzionális emberi fordítást javasolunk. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely ebből a fordításból ered.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

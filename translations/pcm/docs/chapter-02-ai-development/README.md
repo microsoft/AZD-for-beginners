@@ -1,31 +1,31 @@
-# Chapta 2: AI-First Development
+# Chapter 2: AI-Fust Development
 
-**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 1-2 hours | **⭐ Complexity**: Intermediate
-
----
-
-## Overview
-
-Dis chapta dey focus on how to deploy AI-powered applications using Azure Developer CLI and Microsoft Foundry services. E cover from simple AI chat apps reach intelligent agents wey get tools.
-
-> **Validation note (2026-03-25):** Di command flow and extension guidance for dis chapta don review against `azd` `1.23.12` and di current preview AI agent extension release `azure.ai.agents` `0.1.18-preview`. If you dey use older AZD build, update am first before you continue with di exercises.
-
-## Learning Objectives
-
-If you finish dis chapta, you go:
-- Deploy AI apps using di pre-built AZD templates
-- Understand how Microsoft Foundry dey integrate with AZD
-- Set up and customize AI agents make dem fit use tools
-- Deploy RAG (Retrieval-Augmented Generation) applications
+**📚 Kọs**: [AZD For Beginners](../../README.md) | **⏱️ Taim**: 1-2 hours | **⭐ Level**: Intermediate
 
 ---
 
-## 📚 Lessons
+## Wetin dis chapter dey about
+
+Dis chapter dey focus on how to deploy AI-powered applications wit Azure Developer CLI and Microsoft Foundry services. E cover everything from small AI chat apps go reach intelligent agents wey get tools.
+
+> **Validation note (2026-06-15):** The command flow and extension guidance in this chapter were reviewed against `azd` `1.25.6` and the current preview AI agent extension release `azure.ai.agents` `0.1.40-preview`. If you are on an older AZD build, update first and then continue with the exercises.
+
+## Wetin you go learn
+
+By completing this chapter, you will:
+- Deploy AI applications using pre-built AZD templates
+- Understand how Microsoft Foundry take integrate with AZD
+- Configure and customize AI agents wit tools
+- Deploy RAG (Retrieval-Augmented Generation) apps
+
+---
+
+## 📚 Lekshon
 
 | # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | Connect AZD with Foundry services | 30 min |
-| 2 | [AI Agents Guide](agents.md) | Deploy intelligent agents with tools | 45 min |
+| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | Make AZD connect wit Foundry services | 30 min |
+| 2 | [AI Agents Guide](agents.md) | Deploy smart agents wit tools | 45 min |
 | 3 | [AI Model Deployment](ai-model-deployment.md) | Deploy and configure AI models | 30 min |
 | 4 | [AI Workshop Lab](ai-workshop-lab.md) | Hands-on: Make your AI solution AZD-ready | 60 min |
 
@@ -34,15 +34,15 @@ If you finish dis chapta, you go:
 ## 🚀 Quick Start
 
 ```bash
-# Option 1: RAG Chat app
+# Option 1: RAG Chat App
 azd init --template azure-search-openai-demo
 azd up
 
-# Option 2: AI agents dem
+# Option 2: AI Agents dem
 azd init --template get-started-with-ai-agents
 azd up
 
-# Option 3: Quick Chat app
+# Option 3: Sharp-sharp Chat App
 azd init --template openai-chat-app-quickstart
 azd up
 ```
@@ -53,13 +53,13 @@ azd up
 
 | Template | Description | Services |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG chat with citations | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI agent with tools | AI Agent Service |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG chat wey dey give citations | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI agent wit tools | AI Agent Service |
 | [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Basic AI chat | OpenAI + Container Apps |
 
 ---
 
-## 💰 Cost Awareness
+## 💰 How e go cost
 
 | Environment | Estimated Monthly Cost |
 |-------------|----------------------|
@@ -67,7 +67,7 @@ azd up
 | Staging | $150-300 |
 | Production | $300-3,500+ |
 
-**Tip:** Run `azd down` after testing make you no dey incur extra charges.
+**Tip:** After you don test, run `azd down` make you no dey incur charges.
 
 ---
 
@@ -91,5 +91,5 @@ azd up
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Dis document don translate using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am accurate, abeg note say automated translations fit get errors or inaccuracies. Di original document for im native language na di authoritative source wey you suppose consider. If na critical information, make professional human translation do am. We no dey liable for any misunderstandings or misinterpretations wey fit arise from the use of this translation.
+Dis document don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even tho we dey try make am correct, abeg make you know say automated translation fit get errors or mistakes. Di original document for dia own language na im be di correct source. For important info, make person wey sabi human translation do am. We no go responsible for any misunderstanding or wrong understanding wey fit happen because of dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

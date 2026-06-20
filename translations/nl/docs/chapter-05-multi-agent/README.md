@@ -1,22 +1,22 @@
 # Hoofdstuk 5: Multi-Agent AI-oplossingen
 
-**📚 Cursus**: [AZD voor beginners](../../README.md) | **⏱️ Duur**: 2-3 uur | **⭐ Complexiteit**: Gevorderd
+**📚 Course**: [AZD Voor Beginners](../../README.md) | **⏱️ Duration**: 2-3 uur | **⭐ Complexity**: Gevorderd
 
 ---
 
 ## Overzicht
 
-Dit hoofdstuk behandelt geavanceerde multi-agent architectuurpatronen, agentorchestratie en productieklare AI-implementaties voor complexe scenario's.
+Dit hoofdstuk behandelt geavanceerde multi-agent architectuurpatronen, agentorkestratie en productieklare AI-implementaties voor complexe scenario's.
 
-> Gevalideerd tegen `azd 1.23.12` in maart 2026.
+> Gevalideerd tegen `azd 1.25.6` in juni 2026.
 
 ## Leerdoelen
 
-Na het voltooien van dit hoofdstuk, zul je:
-- Begrijpen van multi-agent architectuurpatronen
-- Gecoördineerde AI-agentensystemen uitrollen
-- Agent-naar-agentcommunicatie implementeren
-- Productieklaar multi-agentoplossingen bouwen
+Door dit hoofdstuk te voltooien, zul je:
+- Multi-agent architectuurpatronen begrijpen
+- Gecoördineerde AI-agentensystemen implementeren
+- Agent-naar-agent communicatie implementeren
+- Productieklare multi-agent oplossingen bouwen
 
 ---
 
@@ -24,13 +24,15 @@ Na het voltooien van dit hoofdstuk, zul je:
 
 | # | Les | Beschrijving | Tijd |
 |---|--------|-------------|------|
-| 1 | [Retail Multi-Agent-oplossing](../../examples/retail-scenario.md) | Volledige implementatiedoorloop | 90 min |
-| 2 | [Coördinatiepatronen](../chapter-06-pre-deployment/coordination-patterns.md) | Strategieën voor agentorchestratie | 30 min |
-| 3 | [ARM-sjabloonuitrol](../../examples/retail-multiagent-arm-template/README.md) | Uitrol met één klik | 30 min |
+| 1 | [Multi-Agent Basisprincipes](multi-agent-basics.md) | Hands-on: implementeer een werkende multi-agent app met `azd up` | 45 min |
+| 2 | [Coördinatiepatronen](../chapter-06-pre-deployment/coordination-patterns.md) | Agent-orkestratiestrategieën (gaat verder in Hoofdstuk 6) | 30 min |
+| 3 | [ARM-sjabloonimplementatie](../../examples/retail-multiagent-arm-template/README.md) | Voorbeeld van een één-klik-implementatie | 30 min |
+
+> **Begin met Les 1.** Het is de enige volledig hands-on, implementeerbare les in dit hoofdstuk. Les 2 staat in Hoofdstuk 6 (het wordt gedeeld met planning voor pre-deployment), en de [Retail Multi-Agent Oplossing](../../examples/retail-scenario.md) is een architectuursjabloon — een ontwerpgids, geen één-commando sjabloon.
 
 ---
 
-## 🚀 Snelle start
+## 🚀 Snel Aan de Slag
 
 ```bash
 # Optie 1: Implementeren vanuit een sjabloon
@@ -43,7 +45,7 @@ azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **Welke aanpak?** Gebruik `azd init --template` om te beginnen vanaf een werkend voorbeeld. Gebruik `azd ai agent init` wanneer je je eigen agentmanifest hebt. Zie de [AZD AI CLI-referentie](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) voor volledige details.
+> **Welke aanpak?** Gebruik `azd init --template` om te beginnen met een werkend voorbeeld. Gebruik `azd ai agent init` wanneer je je eigen agentmanifest hebt. Zie de [AZD AI CLI-referentie](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) voor volledige details.
 
 ---
 
@@ -51,19 +53,20 @@ azd up
 
 ```mermaid
 graph TD
-    Orchestrator[Orchestrator-agent<br/>Leidt verzoeken, beheert de werkstroom] --> Customer[Klantagent<br/>Gebruikersvragen, voorkeuren]
-    Orchestrator --> Inventory[Voorraadagent<br/>Voorraadniveaus, bestellingen]
+    Orchestrator[Orchestrator Agent<br/>Leidt verzoeken, beheert workflow] --> Customer[Customer Agent<br/>Gebruikersvragen, voorkeuren]
+    Orchestrator --> Inventory[Inventory Agent<br/>Voorraadniveaus, bestellingen]
 ```
+
 ---
 
-## 🎯 Uitgelichte oplossing: Retail Multi-Agent
+## 🎯 Uitgelichte Oplossing: Retail Multi-Agent
 
-De [Retail Multi-Agent-oplossing](../../examples/retail-scenario.md) toont:
+De [Retail Multi-Agent Oplossing](../../examples/retail-scenario.md) demonstreert:
 
 - **Klantagent**: Behandelt gebruikersinteracties en voorkeuren
 - **Voorraadagent**: Beheert voorraad en orderverwerking
-- **Orchestrator**: Coördineert tussen agenten
-- **Gedeeld geheugen**: Beheer van context tussen agenten
+- **Orkestrator**: Coördineert tussen agenten
+- **Gedeeld Geheugen**: Contextbeheer tussen agenten
 
 ### Gebruikte services
 
@@ -82,19 +85,19 @@ De [Retail Multi-Agent-oplossing](../../examples/retail-scenario.md) toont:
 | Richting | Hoofdstuk |
 |-----------|---------|
 | **Vorige** | [Hoofdstuk 4: Infrastructuur](../chapter-04-infrastructure/README.md) |
-| **Volgende** | [Hoofdstuk 6: Pre-deployment](../chapter-06-pre-deployment/README.md) |
+| **Volgende** | [Hoofdstuk 6: Pre-Deployment](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 Gerelateerde bronnen
 
-- [AI-agentengids](../chapter-02-ai-development/agents.md)
-- [Productie-AI-praktijken](../chapter-08-production/production-ai-practices.md)
+- [Gids voor AI-agenten](../chapter-02-ai-development/agents.md)
+- [AI-praktijken voor productie](../chapter-08-production/production-ai-practices.md)
 - [AI-probleemoplossing](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de originele taal moet als de gezaghebbende bron worden beschouwd. Voor cruciale informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor enige misverstanden of foutieve interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI vertaaldienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

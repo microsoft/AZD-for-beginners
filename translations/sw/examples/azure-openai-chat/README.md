@@ -1,40 +1,41 @@
-# Programu ya Mazungumzo ya Microsoft Foundry Models
+# Microsoft Foundry Models Programu ya Mazungumzo
 
-**Njia ya Kujifunzia:** Wastani ⭐⭐ | **Muda:** 35-45 dakika | **Gharama:** $50-200/mwezi
+**Njia ya Kujifunza:** Kati ⭐⭐ | **Muda:** 35-45 dakika | **Gharama:** $50-200/mwezi
 
-Programu ya mazungumzo ya Microsoft Foundry Models iliyokamilika iliyowekwa kwa kutumia Azure Developer CLI (azd). Mfano huu unaonyesha uanzishaji wa gpt-4.1, ufikiaji salama wa API, na kiolesura rahisi cha mazungumzo.
+Programu kamili ya mazungumzo ya Microsoft Foundry Models iliyosambazwa kwa kutumia Azure Developer CLI (azd). Mfano huu unaonyesha uanzishaji wa gpt-4.1, upatikanaji salama wa API, na kiolesura rahisi cha mazungumzo.
 
-## 🎯 Utakachojifunza
+## 🎯 Utajifunza
 
-- Sambaza Microsoft Foundry Models Service na modeli gpt-4.1
+- Sambaza huduma ya Microsoft Foundry Models na modeli gpt-4.1
 - Linda funguo za OpenAI API kwa Key Vault
 - Jenga kiolesura rahisi cha mazungumzo kwa Python
-- Fuatilia matumizi ya tokeni na gharama
-- Tekeleza ukomo wa kiwango na kushughulikia makosa
+- Fuata matumizi ya tokeni na gharama
+- Tekeleza ukomo wa viwango (rate limiting) na usimamizi wa makosa
 
-## 📦 Kile Kilichojumuishwa
+## 📦 Kinachojumuishwa
 
 ✅ **Microsoft Foundry Models Service** - uanzishaji wa modeli gpt-4.1  
-✅ **Python Chat App** - Kiolesura rahisi cha mazungumzo kwenye mstari wa amri  
+✅ **Python Chat App** - Kiolesura rahisi cha mazungumzo katika mstari wa amri  
 ✅ **Key Vault Integration** - Uhifadhi salama wa funguo za API  
 ✅ **ARM Templates** - Miundombinu kamili kama msimbo  
 ✅ **Cost Monitoring** - Ufuatiliaji wa matumizi ya tokeni  
-✅ **Rate Limiting** - Kuzuia kumalizika kwa kiasi cha ruhusa  
+✅ **Rate Limiting** - Kuzuia kumalizika kwa quota  
 
-## Usanifu
+## Architecture
 
 ```mermaid
 graph TD
-    App[Programu ya Chat ya Python<br/>Ndani/Wingu<br/>Kiolesura cha mstari wa amri<br/>Historia ya mazungumzo<br/>Ufuatiliaji wa matumizi ya tokeni] -- "HTTPS (Ufunguo wa API)" --> Foundry[Huduma ya Miundo ya Microsoft Foundry<br/>Modeli gpt-4.1<br/>Uwezo wa tokeni 20K kwa dakika<br/>Urejeshaji wa huduma kwa kanda nyingi]
-    Foundry --> KV[Hazina ya Vifunguo ya Azure<br/>Ufunguo wa API wa OpenAI<br/>URL ya mwisho]
+    App[Programu ya Chat ya Python<br/>Ndani/Mawingu<br/>Kiolesura cha mstari wa amri<br/>Historia ya mazungumzo<br/>Ufuatiliaji wa matumizi ya tokeni] -- "HTTPS (Funguo ya API)" --> Foundry[Huduma ya Mifano ya Microsoft Foundry<br/>Mfano wa gpt-4.1<br/>Uwezo: tokeni 20K kwa dakika<br/>Failover kwa maeneo mengi]
+    Foundry --> KV[Hifadhi ya Funguo ya Azure<br/>Funguo ya API ya OpenAI<br/>URL ya Endpoint]
     Foundry -. Utambulisho uliosimamiwa .-> KV
 ```
+
 ## Mahitaji
 
-### Zinazohitajika
+### Inahitajika
 
 - **Azure Developer CLI (azd)** - [Mwongozo wa usakinishaji](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure subscription** with OpenAI access - [Omba ufikiaji](https://aka.ms/oai/access)
+- **Azure subscription** yenye upatikanaji wa OpenAI - [Omba upatikanaji](https://aka.ms/oai/access)
 - **Python 3.9+** - [Sakinisha Python](https://www.python.org/downloads/)
 
 ### Thibitisha Mahitaji
@@ -43,30 +44,30 @@ graph TD
 # Angalia toleo la azd (linahitaji 1.5.0 au zaidi)
 azd version
 
-# Thibitisha kuingia kwa Azure
+# Thibitisha umeingia kwenye Azure
 azd auth login
 
 # Angalia toleo la Python
 python --version  # au python3 --version
 
-# Thibitisha upatikanaji wa OpenAI (angalia kwenye Azure Portal)
+# Thibitisha ufikiaji wa OpenAI (angalia kwenye Azure Portal)
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus
 ```
 
-> **⚠️ Muhimu:** Microsoft Foundry Models inahitaji idhini ya maombi. Ikiwa hujawaomba, tembelea [aka.ms/oai/access](https://aka.ms/oai/access). Uidhinishaji kawaida huchukua siku 1-2 za kazi.
+> **⚠️ Muhimu:** Microsoft Foundry Models inahitaji idhini ya uteuzi. Ikiwa haujawaomba, tembelea [aka.ms/oai/access](https://aka.ms/oai/access). Idhini kwa kawaida huchukua siku 1-2 za biashara.
 
-## ⏱️ Muda wa Utekelezaji
+## ⏱️ Ratiba ya Uwekaji
 
 | Awamu | Muda | Kinachotokea |
 |-------|----------|--------------|
-| Prerequisites check | 2-3 minutes | Thibitisha upatikanaji wa quota ya OpenAI |
-| Deploy infrastructure | 8-12 minutes | Create OpenAI, Key Vault, model deployment |
-| Configure application | 2-3 minutes | Set up environment and dependencies |
-| **Total** | **12-18 minutes** | Ime tayari kuzungumza na gpt-4.1 |
+| Kukagua mahitaji | 2-3 dakika | Thibitisha upatikanaji wa quota ya OpenAI |
+| Sambaza miundombinu | 8-12 dakika | Tengeneza huduma ya OpenAI, Key Vault, uanzishaji wa modeli |
+| Sanidi programu | 2-3 dakika | Weka mazingira na utegemezi |
+| **Jumla** | **12-18 dakika** | Tayari kuzungumza na gpt-4.1 |
 
-**Kumbuka:** Utekelezaji wa OpenAI kwa mara ya kwanza unaweza kuchukua muda mrefu zaidi kutokana na upatikanaji wa modeli.
+**Kumbuka:** Uwekaji wa kwanza wa OpenAI unaweza kuchukua muda mrefu zaidi kutokana na upatanisho wa modeli.
 
 ## Anza Haraka
 
@@ -79,10 +80,10 @@ azd env new myopenai
 
 # Sambaza kila kitu (miundombinu + usanidi)
 azd up
-# Utaombwa kufanya:
+# Utaulizwa kufanya:
 # 1. Chagua usajili wa Azure
-# 2. Chagua eneo lenye upatikanaji wa OpenAI (kwa mfano, eastus, eastus2, westus)
-# 3. Subiri dakika 12–18 kwa ajili ya usambazaji
+# 2. Chagua eneo lenye upatikanaji wa OpenAI (kwa mfano: eastus, eastus2, westus)
+# 3. Subiri dakika 12-18 kwa ajili ya usambazaji
 
 # Sakinisha utegemezi wa Python
 pip install -r requirements.txt
@@ -103,9 +104,9 @@ Assistant: Microsoft Foundry Models Service provides REST API access to OpenAI's
 [Tokens used: 145 | Estimated cost: $0.0044]
 ```
 
-## ✅ Thibitisha Utekelezaji
+## ✅ Thibitisha Uwekaji
 
-### Hatua 1: Angalia Rasilimali za Azure
+### Hatua 1: Kagua Rasilimali za Azure
 
 ```bash
 # Tazama rasilimali zilizowekwa
@@ -114,7 +115,7 @@ azd show
 # Matokeo yanayotarajiwa yanaonyesha:
 # - Huduma ya OpenAI: (jina la rasilimali)
 # - Hazina ya Funguo: (jina la rasilimali)
-# - Uwekaji: gpt-4.1
+# - Utekelezaji: gpt-4.1
 # - Eneo: eastus (au eneo ulilochagua)
 ```
 
@@ -125,7 +126,7 @@ azd show
 OPENAI_ENDPOINT=$(azd env get-value AZURE_OPENAI_ENDPOINT)
 OPENAI_KEY=$(azd env get-value AZURE_OPENAI_API_KEY)
 
-# Jaribu wito wa API
+# Jaribu mwito wa API
 curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
   -H "Content-Type: application/json" \
   -H "api-key: $OPENAI_KEY" \
@@ -154,7 +155,7 @@ curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2
 }
 ```
 
-### Hatua 3: Thibitisha Ufikiaji wa Key Vault
+### Hatua 3: Thibitisha Upatikanaji wa Key Vault
 
 ```bash
 # Orodhesha siri katika Key Vault
@@ -172,8 +173,8 @@ az keyvault secret list \
 
 **Vigezo vya Mafanikio:**
 - ✅ Huduma ya OpenAI imesambazwa na gpt-4.1
-- ✅ Mwito wa API unarudisha ukamilishaji halali
-- ✅ Siri zimehifadhiwa katika Key Vault
+- ✅ Wito wa API hurejesha ukamilisho halali
+- ✅ Siri zimehifadhiwa kwenye Key Vault
 - ✅ Ufuatiliaji wa matumizi ya tokeni unafanya kazi
 
 ## Muundo wa Mradi
@@ -199,11 +200,11 @@ azure-openai-chat/
 
 Programu ya mazungumzo inajumuisha:
 
-- **Historia ya Mazungumzo** - Inadumisha muktadha kwenye ujumbe
-- **Kuhesabu Tokeni** - Inafuatilia matumizi na kukadiria gharama
-- **Kushughulikia Makosa** - Kushughulikia kwa utaratibu ukomo wa kiwango na makosa ya API
-- **Kadiria Gharama** - Uhakiki wa gharama kwa wakati halisi kwa kila ujumbe
-- **Msaada wa Mtiririko** - Majibu ya mtiririko ya hiari
+- **Historia ya Mazungumzo** - Inadumisha muktadha kati ya ujumbe
+- **Uhesabu wa Tokeni** - Inafuata matumizi na kukadiria gharama
+- **Usimamizi wa Makosa** - Usimamizi mzuri wa vikwazo vya viwango na makosa ya API
+- **Kadirio la Gharama** - Mwenendo wa wakati halisi wa kuhesabu gharama kwa ujumbe
+- **Msaada wa Streaming** - Majibu ya mtiririko ya hiari
 
 ### Amri
 
@@ -213,38 +214,38 @@ Wakati wa kuzungumza, unaweza kutumia:
 - `tokens` - Onyesha jumla ya matumizi ya tokeni
 - `cost` - Onyesha gharama jumla inayokadiriwa
 
-### Uwekaji Mipangilio (`config.py`)
+### Usanidi (`config.py`)
 
-Inapakia mipangilio kutoka kwa vigezo vya mazingira:
+Inapakia usanidi kutoka kwa vigezo vya mazingira:
 ```python
-AZURE_OPENAI_ENDPOINT  # Kutoka kwa Key Vault
-AZURE_OPENAI_API_KEY   # Kutoka kwa Key Vault
+AZURE_OPENAI_ENDPOINT  # Kutoka kwenye Key Vault
+AZURE_OPENAI_API_KEY   # Kutoka kwenye Key Vault
 AZURE_OPENAI_MODEL     # Chaguo-msingi: gpt-4.1
 AZURE_OPENAI_MAX_TOKENS # Chaguo-msingi: 800
 ```
 
 ## Mifano ya Matumizi
 
-### Basic Chat
+### Mazungumzo Msingi
 
 ```bash
 python chat.py
 ```
 
-### Chat with Custom Model
+### Mazungumzo na Modeli ya Kibinafsi
 
 ```bash
 export AZURE_OPENAI_MODEL=gpt-35-turbo
 python chat.py
 ```
 
-### Chat with Streaming
+### Mazungumzo kwa Mtiririko
 
 ```bash
 python chat.py --stream
 ```
 
-### Example Conversation
+### Mfano wa Mazungumzo
 
 ```
 You: Explain Microsoft Foundry Models Service in 3 sentences.
@@ -270,27 +271,27 @@ Total session: 156 tokens | $0.0047
 
 ### Bei za Tokeni (gpt-4.1)
 
-| Modeli | Ingizo (kwa tokeni 1K) | Matokeo (kwa tokeni 1K) |
+| Model | Ingizo (kwa 1K tokeni) | Utoke (kwa 1K tokeni) |
 |-------|----------------------|------------------------|
 | gpt-4.1 | $0.03 | $0.06 |
 | GPT-3.5-Turbo | $0.0015 | $0.002 |
 
-### Makisio ya Gharama za Mwezi
+### Makadirio ya Gharama za Mwezi
 
 Kulingana na mifumo ya matumizi:
 
-| Kiwango cha Matumizi | Ujumbe/Kila Siku | Tokeni/Kila Siku | Gharama ya Mwezi |
+| Kiwango cha Matumizi | Ujumbe/Kwa Siku | Tokeni/Kwa Siku | Gharama ya Mwezi |
 |-------------|--------------|------------|--------------|
-| **Nyepesi** | 20 messages | 3,000 tokens | $3-5 |
-| **Wastani** | 100 messages | 15,000 tokens | $15-25 |
-| **Zito** | 500 messages | 75,000 tokens | $75-125 |
+| **Nyepesi** | 20 ujumbe | 3,000 tokeni | $3-5 |
+| **Wastani** | 100 ujumbe | 15,000 tokeni | $15-25 |
+| **Mzito** | 500 ujumbe | 75,000 tokeni | $75-125 |
 
-**Gharama ya Msingi ya Miundombinu:** $1-2/month (Key Vault + rasilimali ndogo za kompyuta)
+**Gharama ya Miundombinu Msingi:** $1-2/mwezi (Key Vault + hesabu ndogo)
 
-### Vidokezo vya Kuongeza Ufanisi wa Gharama
+### Vidokezo vya Kupunguza Gharama
 
 ```bash
-# 1. Tumia GPT-3.5-Turbo kwa kazi rahisi (kwa gharama nafuu mara 20)
+# 1. Tumia GPT-3.5-Turbo kwa kazi rahisi (nafuu mara 20)
 export AZURE_OPENAI_MODEL=gpt-35-turbo
 
 # 2. Punguza idadi ya juu ya tokeni kwa majibu mafupi
@@ -299,7 +300,7 @@ export AZURE_OPENAI_MAX_TOKENS=400
 # 3. Fuatilia matumizi ya tokeni
 python chat.py --show-tokens
 
-# 4. Sanidi arifa za bajeti
+# 4. Sanidi arifu za bajeti
 az consumption budget create \
   --budget-name "openai-budget" \
   --amount 50 \
@@ -312,7 +313,7 @@ az consumption budget create \
 
 ```bash
 # Katika Portal ya Azure:
-# Rasilimali ya OpenAI → Metriki → Chagua "Token Transaction"
+# Rasilimali ya OpenAI → Metriki → Chagua "Muamala wa Tokeni"
 
 # Au kupitia Azure CLI:
 az monitor metrics list \
@@ -322,17 +323,17 @@ az monitor metrics list \
   --interval PT1M
 ```
 
-### Tazama Rejista za API
+### Tazama Rekodi za API
 
 ```bash
-# Tiririsha logi za uchunguzi
+# Tiririsha kumbukumbu za uchunguzi
 az monitor diagnostic-settings create \
   --resource $(azd env get-value AZURE_OPENAI_RESOURCE_ID) \
   --name openai-logs \
   --logs '[{"category": "Audit", "enabled": true}]' \
   --workspace $(azd env get-value LOG_ANALYTICS_WORKSPACE_ID)
 
-# Logi za miulizo
+# Kumbukumbu za maombi
 az monitor log-analytics query \
   --workspace $(azd env get-value LOG_ANALYTICS_WORKSPACE_ID) \
   --analytics-query "AzureDiagnostics | where Category == 'Audit' | top 10 by TimeGenerated"
@@ -340,18 +341,18 @@ az monitor log-analytics query \
 
 ## Utatuzi wa Matatizo
 
-### Tatizo: 'Access Denied'
+### Tatizo: "Access Denied" Error
 
 **Dalili:** 403 Forbidden wakati wa kuita API
 
 **Suluhisho:**
 ```bash
-# 1. Thibitisha ufikiaji wa OpenAI umeidhinishwa
+# 1. Thibitisha kuwa ufikiaji wa OpenAI umeidhinishwa
 az cognitiveservices account show \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
 
-# 2. Angalia ufunguo wa API ni sahihi
+# 2. Hakikisha ufunguo wa API ni sahihi
 azd env get-value AZURE_OPENAI_API_KEY
 
 # 3. Thibitisha muundo wa URL ya endpoint
@@ -359,32 +360,32 @@ azd env get-value AZURE_OPENAI_ENDPOINT
 # Inapaswa kuwa: https://[name].openai.azure.com/
 ```
 
-### Tatizo: 'Rate Limit Exceeded'
+### Tatizo: "Rate Limit Exceeded"
 
 **Dalili:** 429 Too Many Requests
 
 **Suluhisho:**
 ```bash
-# 1. Angalia kikomo cha sasa
+# 1. Angalia ukomo wa sasa
 az cognitiveservices account deployment show \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
   --deployment-name gpt-4.1
 
-# 2. Omba ongezeko la kikomo (ikiwa inahitajika)
-# Nenda kwenye Azure Portal → Rasilimali ya OpenAI → Vikomo → Omba Ongezeko
+# 2. Omba ongezeko la ukomo (ikiwa inahitajika)
+# Nenda kwenye Portal ya Azure → Rasilimali ya OpenAI → Vikomo → Omba Ongezeko
 
-# 3. Tekeleza mantiki ya kujaribu tena (tayari ipo katika chat.py)
-# Programu inajaribu tena kiotomatiki kwa kuchelewesha kwa idadi inayoongezeka
+# 3. Tekeleza mantiki ya jaribu tena (tayari iko katika chat.py)
+# Programu inajaribu tena kiotomatiki kwa kuchelewesha kwa namna ya eksponentiali
 ```
 
-### Tatizo: 'Model Not Found'
+### Tatizo: "Model Not Found"
 
-**Dalili:** kosa la 404 kwa uanzishaji
+**Dalili:** hitilafu 404 kwa uanzishaji
 
 **Suluhisho:**
 ```bash
-# 1. Orodhesha utekelezaji yanayopatikana
+# 1. Orodhesha uenezaji unaopatikana
 az cognitiveservices account deployment list \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
@@ -392,7 +393,7 @@ az cognitiveservices account deployment list \
 # 2. Thibitisha jina la modeli katika mazingira
 echo $AZURE_OPENAI_MODEL
 
-# 3. Sasisha hadi jina sahihi la utekelezaji
+# 3. Sasisha hadi jina sahihi la uenezaji
 export AZURE_OPENAI_MODEL=gpt-4.1  # au gpt-35-turbo
 ```
 
@@ -402,23 +403,23 @@ export AZURE_OPENAI_MODEL=gpt-4.1  # au gpt-35-turbo
 
 **Suluhisho:**
 ```bash
-# 1. Angalia ucheleweshaji wa kikanda
-# Weka kwenye eneo lililo karibu zaidi na watumiaji
+# 1. Angalia uchelewaji wa kikanda
+# Sambaza kwenye kanda iliyo karibu zaidi na watumiaji
 
 # 2. Punguza max_tokens ili kupata majibu ya haraka
 export AZURE_OPENAI_MAX_TOKENS=400
 
-# 3. Tumia utiririshaji kwa uzoefu bora wa mtumiaji
+# 3. Tumia mtiririko wa data kwa uzoefu bora wa mtumiaji
 python chat.py --stream
 ```
 
-## Mbinu Bora za Usalama
+## Mazoea Bora ya Usalama
 
 ### 1. Linda Funguo za API
 
 ```bash
-# Usiweka funguo kwenye udhibiti wa chanzo
-# Tumia Key Vault (tayari imesanidiwa)
+# Usiwahi kufanya commit ya funguo katika udhibiti wa toleo
+# Tumia Key Vault (imesanidiwa tayari)
 
 # Badilisha funguo mara kwa mara
 az cognitiveservices account keys regenerate \
@@ -427,33 +428,33 @@ az cognitiveservices account keys regenerate \
   --key-name key1
 ```
 
-### 2. Tekeleza Uchakataji wa Yaliyomo
+### 2. Tekeleza Uchanjuzi wa Maudhui
 
 ```python
-# Microsoft Foundry Models ina vichujio vya maudhui vilivyojengwa ndani
-# Sanidi kwenye Azure Portal:
-# Rasilimali ya OpenAI → Vichujio vya Maudhui → Unda Chujio Maalum
+# Microsoft Foundry Models inajumuisha uchujaji wa yaliyomo uliojengewa ndani
+# Sanidi kwenye Portal ya Azure:
+# Rasilimali ya OpenAI → Vichujio vya yaliyomo → Unda Chujio Maalum
 
-# Aina: Chuki, Ngono, Ukatili, Kujidhuru
-# Viwango vya kuchuja: Chini, Kati, Juu
+# Makundi: Chuki, Ngono, Vurugu, Kujidhuru mwenyewe
+# Viwango: Uchujaji mdogo, wa kati, wa juu
 ```
 
-### 3. Tumia Managed Identity (uzalishaji)
+### 3. Tumia Managed Identity (Uzalisaji)
 
 ```bash
-# Kwa utoaji wa uzalishaji, tumia utambulisho uliosimamiwa
-# Badala ya funguo za API (inahitaji programu kuendeshwa kwenye Azure)
+# Kwa utoaji wa uzalishaji, tumia kitambulisho kinachosimamiwa
+# badala ya funguo za API (inahitaji kuendesha programu kwenye Azure)
 
 # Sasisha infra/openai.bicep ili ijumuishe:
 # identity: { type: 'SystemAssigned' }
 ```
 
-## Uendelezaji
+## Maendeleo
 
-### Endesha Kwenye Kompyuta Yako
+### Endesha Kwenye Kifaa Chako
 
 ```bash
-# Sakinisha mategemezi
+# Sakinisha utegemezi
 pip install -r src/requirements.txt
 
 # Weka vigezo vya mazingira
@@ -468,7 +469,7 @@ python src/chat.py
 ### Endesha Majaribio
 
 ```bash
-# Sakinisha mategemeo ya mtihani
+# Sakinisha utegemezi wa mtihani
 pip install pytest pytest-cov
 
 # Endesha mitihani
@@ -478,10 +479,10 @@ pytest tests/ -v
 pytest tests/ --cov=src --cov-report=html
 ```
 
-### Sasisha Utekelezaji wa Modeli
+### Sasisha Uwekaji wa Modeli
 
 ```bash
-# Weka toleo tofauti la modeli
+# Sambaza toleo tofauti la modeli
 az cognitiveservices account deployment create \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
@@ -493,7 +494,7 @@ az cognitiveservices account deployment create \
   --sku-name "Standard"
 ```
 
-## Kusafisha
+## Safisha
 
 ```bash
 # Futa rasilimali zote za Azure
@@ -501,51 +502,51 @@ azd down --force --purge
 
 # Hii inaondoa:
 # - Huduma ya OpenAI
-# - Key Vault (na ufutaji mpole wa siku 90)
+# - Key Vault (kufutwa kwa muda kwa siku 90)
 # - Kundi la Rasilimali
-# - Utekelezaji wote na usanidi
+# - Uzinduzi na usanidi vyote
 ```
 
 ## Hatua Zifuatazo
 
 ### Panua Mfano Huu
 
-1. **Ongeza Kiolesura cha Wavuti** - Build React/Vue frontend
+1. **Add Web Interface** - Build React/Vue frontend
    ```bash
    # Ongeza huduma ya frontend kwenye azure.yaml
-   # Weka kwenye Azure Static Web Apps
+   # Sambaza kwenye Azure Static Web Apps
    ```
 
-2. **Tekeleza RAG** - Ongeza utafutaji wa nyaraka kwa Azure AI Search
+2. **Implement RAG** - Add document search with Azure AI Search
    ```python
-   # Unganisha Azure Cognitive Search
-   # Pakia nyaraka na unda indeksi ya vektri
+   # Unganisha Azure AI Search
+   # Pakia nyaraka na tengeneza faharasa ya vekta
    ```
 
-3. **Ongeza Kuitwa kwa Funsi** - Wezesha matumizi ya zana
+3. **Add Function Calling** - Enable tool use
    ```python
-   # Fafanua kazi ndani ya chat.py
-   # Ruhusu gpt-4.1 kuita API za nje
+   # Fafanua kazi katika chat.py
+   # Mruhusu gpt-4.1 kuita API za nje
    ```
 
-4. **Msaada wa Modeli Nyingi** - Sambaza modeli nyingi
+4. **Multi-Model Support** - Deploy multiple models
    ```bash
-   # Ongeza gpt-35-turbo na modeli za embeddings
-   # Tekeleza mantiki ya uelekezaji wa modeli
+   # Ongeza gpt-35-turbo, mifano ya embeddings
+   # Tekeleza mantiki ya kuelekeza modeli
    ```
 
-### Mifano Inayohusiana
+### Mifano Zinazohusiana
 
-- **[Retail Multi-Agent](../retail-scenario.md)** - Usanifu wa wakala wengi wa juu
+- **[Retail Multi-Agent](../retail-scenario.md)** - Mimariko ya multi-agent ya juu
 - **[Database App](../../../../examples/database-app)** - Ongeza uhifadhi wa kudumu
-- **[Container Apps](../../../../examples/container-app)** - Sambaza kama huduma ya kontena
+- **[Container Apps](../../../../examples/container-app)** - Sambaza kama huduma iliyohifadhiwa ndani ya kontena
 
-### Rasilimali za Kujifunzia
+### Vyanzo vya Kujifunza
 
-- 📚 [AZD For Beginners Course](../../README.md) - ukurasa kuu wa kozi
+- 📚 [AZD For Beginners Course](../../README.md) - Nyumbani wa kozi kuu
 - 📚 [Microsoft Foundry Models Documentation](https://learn.microsoft.com/azure/ai-services/openai/) - Nyaraka rasmi
 - 📚 [OpenAI API Reference](https://platform.openai.com/docs/api-reference) - Maelezo ya API
-- 📚 [Responsible AI](https://www.microsoft.com/ai/responsible-ai) - Mbinu bora
+- 📚 [Responsible AI](https://www.microsoft.com/ai/responsible-ai) - Vidokezo bora
 
 ## Rasilimali Zaidi
 
@@ -553,16 +554,16 @@ azd down --force --purge
 - **[Microsoft Foundry Models Service](https://learn.microsoft.com/azure/ai-services/openai/)** - Mwongozo kamili
 - **[gpt-4.1 Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - Uwezo wa modeli
 - **[Content Filtering](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - Vipengele vya usalama
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd reference
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - Marejeleo ya azd
 
 ### Mafunzo
-- **[OpenAI Quickstart](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - Utekelezaji wa kwanza
+- **[OpenAI Quickstart](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - Uwekaji wa kwanza
 - **[Chat Completions](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - Kujenga programu za mazungumzo
 - **[Function Calling](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - Vipengele vya juu
 
 ### Zana
-- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - Uwanja wa majaribio wa wavuti
-- **[Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)** - Kuandika maagizo bora
+- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - Uwanja wa mtandaoni
+- **[Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)** - Kuandika prompts bora
 - **[Token Calculator](https://platform.openai.com/tokenizer)** - Kadiria matumizi ya tokeni
 
 ### Jamii
@@ -572,15 +573,15 @@ azd down --force --purge
 
 ---
 
-**🎉 Hongera!** Umesambaza Microsoft Foundry Models na kujenga programu ya mazungumzo inayofanya kazi. Anza kuchunguza uwezo wa gpt-4.1 na jaribu maagizo na matumizi tofauti.
+**🎉 Mafanikio!** Umesambaza Microsoft Foundry Models na kujenga programu ya mazungumzo inayofanya kazi. Anza kuchunguza uwezo wa gpt-4.1 na jaribu prompts na matumizi tofauti.
 
 **Maswali?** [Fungua tatizo](https://github.com/microsoft/AZD-for-beginners/issues) au angalia [FAQ](../../resources/faq.md)
 
-**Onyo la Gharama:** Kumbuka kuendesha `azd down` ukimaliza majaribio ili kuepuka malipo yanayoendelea (~$50-100/mwezi kwa matumizi endelevu).
+**Onyo la Gharama:** Kumbuka kuendesha `azd down` baada ya kumaliza majaribio ili kuepuka malipo ya kuendelea (~$50-100/mwezi kwa matumizi ya kawaida).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Wakati tunajitahidi kuwa sahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Nyaraka ya asili katika lugha yake ya asili inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, inapendekezwa kupata tafsiri ya kitaalamu ya binadamu. Hatuwajibiki kwa kutoelewana au tafsiri potofu zitokanazo na matumizi ya tafsiri hii.
+**Kionyozo**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Hati ya asili katika lugha yake halisi inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatutojibu kwa kuelewa vibaya au tafsiri potofu zinazotokea kutokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

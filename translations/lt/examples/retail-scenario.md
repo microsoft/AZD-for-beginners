@@ -1,76 +1,76 @@
-# Daugiagentė klientų aptarnavimo sistema - mažmenininko scenarijus
+# Daugialypė agentų klientų aptarnavimo sistema - mažmenininko scenarijus
 
-**5 skyrius: Daugiagentės DI sprendimai**
-- **📚 Kurso pradžia**: [AZD For Beginners](../README.md)
-- **📖 Dabartinis skyrius**: [5 skyrius: Daugiagentės DI sprendimai](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **⬅️ Išankstiniai reikalavimai**: [2 skyrius: AI-pirmas vystymas](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+**5 skyrius: Daugialių agentų AI sprendimai**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../README.md)
+- **📖 Dabartinis skyrius**: [5 skyrius: Daugialių agentų AI sprendimai](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **⬅️ Išankstiniai reikalavimai**: [2 skyrius: AI-pirmasis kūrimas](../docs/microsoft-foundry/microsoft-foundry-integration.md)
 - **➡️ Kitas skyrius**: [6 skyrius: Patikra prieš diegimą](../docs/pre-deployment/capacity-planning.md)
-- **🚀 ARM šablonai**: [Deployment Package](retail-multiagent-arm-template/README.md)
+- **🚀 ARM šablonai**: [Diegimo paketas](retail-multiagent-arm-template/README.md)
 
 > **⚠️ ARCHITEKTŪROS GIDAS - NEVEIKIANTIS ĮGYVENDINIMAS**  
-> Šis dokumentas pateikia **išsamų architektūros planą** daugiagentės sistemos kūrimui.  
-> **Kas yra:** ARM šablonas infrastruktūros diegimui (Microsoft Foundry Models, AI Search, Container Apps ir kt.)  
-> **Ką turite sukurti jūs:** agentų kodas, maršrutizavimo logika, frontend sąsaja, duomenų srautai (apytiksliai 80–120 val.)  
+> Šis dokumentas pateikia **išsamų architektūros planą**, skirtą daugialypės agentų sistemos kūrimui.  
+> **Ką turite:** ARM šablonas infrastruktūros diegimui (Microsoft Foundry Models, AI Search, Container Apps ir kt.)  
+> **Ką turite sukurti jūs:** Agento kodas, maršrutizacijos logika, vartotojo sąsaja, duomenų srautai (numatoma 80–120 val.)  
 >  
 > **Naudokite tai kaip:**
-> - ✅ Architektūros nuorodą savo daugiagentės projekto įgyvendinimui
-> - ✅ Mokymosi vadovą apie daugiagentės dizaino šablonus
-> - ✅ Infrastruktūros šabloną Azure resursams diegti
+> - ✅ Architektūros nuorodą savo daugialypiam agentų projektui
+> - ✅ Mokymosi vadovą daugialypių agentų dizaino modeliams
+> - ✅ Infrastruktūros šabloną Azure išteklių diegimui
 > - ❌ NE paruoštą paleisti programą (reikalauja reikšmingo vystymo)
 
 ## Apžvalga
 
-**Mokymosi tikslas:** Suprasti architektūrą, dizaino sprendimus ir įgyvendinimo būdą, reikalingą gamybai paruoštos daugiagentės klientų aptarnavimo pokalbių programos mažmenininkui su pažangiomis DI galimybėmis, įskaitant inventoriaus valdymą, dokumentų apdorojimą ir protingą klientų sąveiką.
+**Mokymosi tikslas:** Suprasti architektūrą, dizaino sprendimus ir įgyvendinimo metodiką kuriant gamybinį daugialypį klientų aptarnavimo chatbot’ą mažmenininkui su pažangiomis AI galimybėmis, įskaitant inventoriaus valdymą, dokumentų apdorojimą ir intelektualias klientų sąveikas.
 
-**Įvykdymo trukmė:** Skaitymas + supratimas (2–3 val.) | Viso įgyvendinimo kūrimas (80–120 val.)
+**Reikalingas laikas:** Skaitymas + supratimas (2–3 val.) | Viso sprendimo įgyvendinimas (80–120 val.)
 
-**Ką išmoksite:**
-- Daugiagentės architektūros šablonai ir dizaino principai
-- Daugiaplokštuminis Microsoft Foundry Models diegimas keliuose regionuose
+**Ko išmoksite:**
+- Daugialypių agentų architektūros modeliai ir dizaino principai
+- Daugiaregionė Microsoft Foundry Models diegimo strategija
 - AI Search integracija su RAG (Retrieval-Augmented Generation)
-- Agentų vertinimo ir saugumo testavimo sistemos
-- Gamybinio diegimo apsvarstymai ir sąnaudų optimizavimas
+- Agentų vertinimo ir saugumo testavimo pagrindai
+- Gamybinio diegimo aspektai ir kaštų optimizavimas
 
 ## Architektūros tikslai
 
-**Mokomasis akcentas:** ši architektūra demonstruoja įmonės lygio šablonus daugiagentėms sistemoms.
+**Mokymosi akcentas:** Ši architektūra demonstruoja įmonės lygmens modelius daugialypėms agentų sistemoms.
 
 ### Sistemos reikalavimai (jūsų įgyvendinimui)
 
-Gamybai skirta klientų aptarnavimo sistema reikalauja:
-- **Kelių specializuotų agentų** skirtingiems klientų poreikiams (klientų aptarnavimas + inventoriaus valdymas)
-- **Kelių modelių diegimo** su tinkamu pajėgumo planavimu (gpt-4.1, gpt-4.1-mini, embeddings keliuose regionuose)
-- **Dinaminės duomenų integracijos** su AI Search ir failų įkėlimu (vektorinė paieška + dokumentų apdorojimas)
-- **Išsamios stebėsenos** ir vertinimo galimybės (Application Insights + pasirinktinių metrikų)
-- **Gamybinio lygio saugumas** su red teaming patikrinimu (pažeidžiamumo skenavimas + agentų vertinimas)
+Gamybinis klientų aptarnavimo sprendimas reikalauja:
+- **Kelių specializuotų agentų** skirtingoms klientų užklausoms (Klientų aptarnavimas + Inventoriaus valdymas)
+- **Daugmodelių diegimo** su tinkamu pajėgumų planavimu (gpt-4.1, gpt-4.1-mini, embeddings keliuose regionuose)
+- **Dinaminės duomenų integracijos** su AI Search ir failų įkėlimais (vektorinė paieška + dokumentų apdorojimas)
+- **Išsamios stebėsenos** ir vertinimo galimybės (Application Insights + custom metrikos)
+- **Gamybinio lygio saugumas** su red teaming validacija (pažeidžiamumų skenavimas + agentų vertinimas)
 
-### Ką pateikia šis gidas
+### Ką suteikia šis gidas
 
-✅ **Architektūros šablonai** - patikrinti dizainai skalai pritaikomoms daugiagentėms sistemoms  
-✅ **Infrastruktūros šablonai** - ARM šablonai diegiant visas Azure paslaugas  
-✅ **Kodo pavyzdžiai** - atskirų komponentų etaloniniai įgyvendinimai  
-✅ **Konfigūracijos gairės** - žingsnis po žingsnio nustatymo instrukcijos  
-✅ **Geriausios praktikos** - saugumo, stebėjimo, sąnaudų optimizavimo strategijos  
+✅ **Architektūros modeliai** - Patikrinti dizainai skalėms daugialypėms agentų sistemoms  
+✅ **Infrastruktūros šablonai** - ARM šablonai, diegiantys visus Azure servisus  
+✅ **Kodo pavyzdžiai** - Referenciniai įgyvendinimai pagrindinėms dalims  
+✅ **Konfigūracijos gairės** - Žingsnis po žingsnio nustatymo instrukcijos  
+✅ **Geriausios praktikos** - Saugumas, stebėsena, kaštų optimizavimo strategijos  
 
-❌ **Neįtraukta** - pilnai veikianti programa (reikalauja vystymo pastangų)
+❌ **Neįtraukta** - Pilnai veikianti programa (reikalauja vystymo pastangų)
 
 ## 🗺️ Įgyvendinimo planas
 
-### 1 etapas: Studijuokite architektūrą (2–3 val.) - PRADĖKITE ČIA
+### 1 fazė: Studijuokite architektūrą (2–3 val.) - PRADĖKITE ČIA
 
-**Tikslas:** suprasti sistemos dizainą ir komponentų tarpusavio ryšius
+**Tikslas:** Suprasti sistemos dizainą ir komponentų tarpusavio ryšius
 
-- [ ] Perskaitykite šį dokumentą pilnai
+- [ ] Perskaitykite šį dokumentą nuo pradžios iki pabaigos
 - [ ] Peržiūrėkite architektūros diagramą ir komponentų santykius
-- [ ] Supraskite daugiagentės šablonus ir dizaino sprendimus
-- [ ] Išnagrinėkite kodo pavyzdžius agentų įrankiams ir maršrutizavimui
-- [ ] Peržiūrėkite sąnaudų apskaičiavimus ir pajėgumo planavimo gaires
+- [ ] Supraskite daugialypių agentų modelius ir dizaino sprendimus
+- [ ] Išnagrinėkite kodo pavyzdžius agentų įrankiams ir maršrutizacijai
+- [ ] Peržiūrėkite kaštų sąmatą ir pajėgumų planavimo gaires
 
-**Rezultatas:** aiškus supratimas, ką reikia sukurti
+**Rezultatas:** Aiškus supratimas, ką reikia sukurti
 
-### 2 etapas: Diegti infrastruktūrą (30–45 min.)
+### 2 fazė: Diegti infrastruktūrą (30–45 min.)
 
-**Tikslas:** sukurti Azure resursus naudojant ARM šabloną
+**Tikslas:** Paruošti Azure išteklius naudojant ARM šabloną
 
 ```bash
 cd retail-multiagent-arm-template
@@ -80,57 +80,57 @@ cd retail-multiagent-arm-template
 **Kas diegiama:**
 - ✅ Microsoft Foundry Models (3 regionai: gpt-4.1, gpt-4.1-mini, embeddings)
 - ✅ AI Search paslauga (tuščia, reikia indekso konfigūracijos)
-- ✅ Container Apps aplinka (vietos rezervavimo atvaizdai)
-- ✅ Storage accounts, Cosmos DB, Key Vault
-- ✅ Application Insights stebėjimas
+- ✅ Container Apps aplinka (laikinosios nuotraukos)
+- ✅ Saugyklos paskyros, Cosmos DB, Key Vault
+- ✅ Application Insights stebėsena
 
 **Ko trūksta:**
-- ❌ Agentų įgyvendinimo kodo
-- ❌ Maršrutizavimo logikos
-- ❌ Frontend sąsajos
-- ❌ Paieškos indekso schemos
-- ❌ Duomenų srautų
+- ❌ Agento įgyvendinimo kodas
+- ❌ Maršrutizacijos logika
+- ❌ Frontendo vartotojo sąsaja
+- ❌ Paieškos indekso schema
+- ❌ Duomenų srautai
 
-### 3 etapas: Kuriama programa (80–120 val.)
+### 3 fazė: Kurti programą (80–120 val.)
 
-**Tikslas:** įgyvendinti daugiagentę sistemą remiantis šia architektūra
+**Tikslas:** Įgyvendinti daugialypę agentų sistemą pagal šią architektūrą
 
 1. **Agentų įgyvendinimas** (30–40 val.)
-   - Bazinė agentų klasė ir sąsajos
+   - Bazinis agentų klasės ir sąsajų įgyvendinimas
    - Klientų aptarnavimo agentas su gpt-4.1
    - Inventoriaus agentas su gpt-4.1-mini
    - Įrankių integracijos (AI Search, Bing, failų apdorojimas)
 
-2. **Maršrutizavimo paslauga** (12–16 val.)
+2. **Maršrutizacijos paslauga** (12–16 val.)
    - Užklausų klasifikavimo logika
-   - Agentų parinkimas ir orkestracija
+   - Agento pasirinkimas ir orkestracija
    - FastAPI/Express backend
 
 3. **Frontend kūrimas** (20–30 val.)
    - Pokalbių sąsajos UI
    - Failų įkėlimo funkcionalumas
-   - Atsakymų atvaizdavimas
+   - Atsakymų pateikimas
 
-4. **Duomenų srautas** (8–12 val.)
+4. **Duomenų vamzdis** (8–12 val.)
    - AI Search indekso kūrimas
    - Dokumentų apdorojimas su Document Intelligence
-   - Įterpinių generavimas ir indeksavimas
+   - Embedingų generavimas ir indeksavimas
 
 5. **Stebėsena ir vertinimas** (10–15 val.)
-   - Pasirinktinių telemetrijos įgyvendinimas
+   - Vartotojiškos telemetrijos įgyvendinimas
    - Agentų vertinimo sistema
    - Red team saugumo skeneris
 
-### 4 etapas: Diegimas ir testavimas (8–12 val.)
+### 4 fazė: Diegimas ir testavimas (8–12 val.)
 
-- Sukurti Docker atvaizdus visoms paslaugoms
-- Įkelti į Azure Container Registry
+- Sukurti Docker atvaizdus visiems servisams
+- Pushed į Azure Container Registry
 - Atnaujinti Container Apps su realiais atvaizdais
-- Konfigūruoti aplinkos kintamuosius ir paslaptis
+- Konfigūruoti aplinkos kintamuosius ir slaptus duomenis
 - Vykdyti vertinimo testų rinkinį
 - Atlikti saugumo skenavimą
 
-**Bendras apytikslis darbo laikas:** 80–120 val. patyrusiems kūrėjams
+**Bendras apskaičiuotas darbo kiekis:** 80–120 val. patyrusiems kūrėjams
 
 ## Sprendimo architektūra
 
@@ -139,31 +139,31 @@ cd retail-multiagent-arm-template
 ```mermaid
 graph TB
     User[👤 Klientas] --> LB[Azure Front Door]
-    LB --> WebApp[Žiniatinklio priekinė dalis<br/>Container App]
+    LB --> WebApp[Žiniatinklio priekinė dalis<br/>Konteinerių programa]
     
-    WebApp --> Router[Agentų maršrutizatorius<br/>Container App]
+    WebApp --> Router[Agentų maršrutizatorius<br/>Konteinerių programa]
     Router --> CustomerAgent[Klientų agentas<br/>Klientų aptarnavimas]
     Router --> InvAgent[Inventoriaus agentas<br/>Atsargų valdymas]
     
-    CustomerAgent --> OpenAI1[Microsoft Foundry modeliаi<br/>gpt-4.1<br/>East US 2]
-    InvAgent --> OpenAI2[Microsoft Foundry modeliаi<br/>gpt-4.1-mini<br/>West US 2]
+    CustomerAgent --> OpenAI1[Microsoft Foundry modeliai<br/>gpt-4.1<br/>Rytų JAV 2]
+    InvAgent --> OpenAI2[Microsoft Foundry modeliai<br/>gpt-4.1-mini<br/>Vakarų JAV 2]
     
     CustomerAgent --> AISearch[Azure AI Search<br/>Produktų katalogas]
-    CustomerAgent --> BingSearch[Bing Search API<br/>Informacija realiuoju laiku]
+    CustomerAgent --> BingSearch[Bing Search API<br/>Realaus laiko informacija]
     InvAgent --> AISearch
     
     AISearch --> Storage[Azure Storage<br/>Dokumentai ir failai]
-    Storage --> DocIntel[Document Intelligence<br/>Turinio apdorojimas]
+    Storage --> DocIntel[Dokumentų intelektas<br/>Turinio apdorojimas]
     
-    OpenAI1 --> Embeddings[Teksto įterpiniai<br/>ada-002<br/>France Central]
+    OpenAI1 --> Embeddings[Teksto įterpos<br/>ada-002<br/>Prancūzijos centras]
     OpenAI2 --> Embeddings
     
-    Router --> AppInsights[Application Insights<br/>Stebėsena]
+    Router --> AppInsights[Application Insights<br/>Stebėjimas]
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
-    GraderModel[gpt-4.1 Grader<br/>Switzerland North] --> Evaluation[Vertinimo sistema]
-    RedTeam[Raudonosios komandos skeneris] --> SecurityReports[Saugumo ataskaitos]
+    GraderModel[gpt-4.1 Vertintojas<br/>Šveicarijos šiaurė] --> Evaluation[Įvertinimo sistema]
+    RedTeam[Raudonos komandos skeneris] --> SecurityReports[Saugumo ataskaitos]
     
     subgraph "Duomenų sluoksnis"
         Storage
@@ -197,6 +197,7 @@ graph TB
     style AISearch fill:#fce4ec
     style Storage fill:#f1f8e9
 ```
+
 ### Komponentų apžvalga
 
 | Komponentas | Paskirtis | Technologija | Regionas |
@@ -204,8 +205,8 @@ graph TB
 | **Web Frontend** | Vartotojo sąsaja klientų sąveikai | Container Apps | Pagrindinis regionas |
 | **Agent Router** | Nukreipia užklausas tinkamam agentui | Container Apps | Pagrindinis regionas |
 | **Customer Agent** | Tvarko klientų aptarnavimo užklausas | Container Apps + gpt-4.1 | Pagrindinis regionas |
-| **Inventory Agent** | Valdo atsargas ir įvykdymą | Container Apps + gpt-4.1-mini | Pagrindinis regionas |
-| **Microsoft Foundry Models** | LLM inferencija agentams | Cognitive Services | Daugiarajonis |
+| **Inventory Agent** | Valdo atsargas ir vykdymą | Container Apps + gpt-4.1-mini | Pagrindinis regionas |
+| **Microsoft Foundry Models** | LLM inferencija agentams | Azure AI Services | Daugiaregionė |
 | **AI Search** | Vektorinė paieška ir RAG | AI Search Service | Pagrindinis regionas |
 | **Storage Account** | Failų įkėlimai ir dokumentai | Blob Storage | Pagrindinis regionas |
 | **Application Insights** | Stebėsena ir telemetrija | Monitor | Pagrindinis regionas |
@@ -215,8 +216,8 @@ graph TB
 
 > **📍 Būsenos legenda:**  
 > ✅ = Yra saugykloje  
-> 📝 = Etaloninis įgyvendinimas (kodo pavyzdys šiame dokumente)  
-> 🔨 = Turite sukurti tai
+> 📝 = Referencinė įgyvendinimo versija (kodo pavyzdys šiame dokumente)  
+> 🔨 = Jūs turite sukurti tai
 
 ```
 retail-multiagent-solution/              🔨 Your project directory
@@ -363,11 +364,11 @@ retail-multiagent-solution/              🔨 Your project directory
 
 ---
 
-## 🚀 Greitas pradžia: ką galite padaryti dabar
+## 🚀 Greitas startas: ką galite padaryti dabar
 
 ### Parinktis 1: Diegti tik infrastruktūrą (30 min.)
 
-**Ką gaunate:** Visos Azure paslaugos paruoštos vystymui
+**Ką gaunate:** Visi Azure servisai paruošti vystymui
 
 ```bash
 # Klonuoti saugyklą
@@ -381,59 +382,59 @@ cd AZD-for-beginners/examples/retail-multiagent-arm-template
 az resource list --resource-group myResourceGroup --output table
 ```
 
-**Laukiamas rezultatas:**
+**Tikėtinas rezultatas:**
 - ✅ Microsoft Foundry Models paslaugos įdiegtos (3 regionai)
 - ✅ AI Search paslauga sukurta (tuščia)
 - ✅ Container Apps aplinka paruošta
-- ✅ Storage, Cosmos DB, Key Vault sukonfigūruoti
-- ❌ Dar nėra veikiančių agentų (tik infrastruktūra)
+- ✅ Saugykla, Cosmos DB, Key Vault sukonfigūruoti
+- ❌ Veikiančių agentų dar nėra (tik infrastruktūra)
 
-### Parinktis 2: Studijuokite architektūrą (2–3 val.)
+### Parinktis 2: Studijuoti architektūrą (2–3 val.)
 
-**Ką gaunate:** Gilų supratimą apie daugiagentės šablonus
+**Ką gaunate:** Gilaus supratimo apie daugialypių agentų modelius
 
-1. Perskaitykite šį dokumentą pilnai
+1. Perskaitykite šį dokumentą nuo pradžios iki pabaigos
 2. Peržiūrėkite kodo pavyzdžius kiekvienam komponentui
 3. Supraskite dizaino sprendimus ir kompromisus
-4. Išnagrinėkite sąnaudų optimizavimo strategijas
-5. Sudarykite įgyvendinimo plano gairę
+4. Išnagrinėkite kaštų optimizavimo strategijas
+5. Suplanuokite savo įgyvendinimo metodiką
 
-**Laukiamas rezultatas:**
-- ✅ Aiškus sistemos architektūros mentalinis modelis
-- ✅ Supratimas apie reikalingus komponentus
-- ✅ Realistiški darbo sąnaudų įvertinimai
+**Tikėtinas rezultatas:**
+- ✅ Aiški sistemos architektūros mentalinė schema
+- ✅ Supratimas apie reikiamus komponentus
+- ✅ Realistiški darbo laiko įverčiai
 - ✅ Įgyvendinimo planas
 
-### Parinktis 3: Sukurkite pilną sistemą (80–120 val.)
+### Parinktis 3: Sukurti pilną sistemą (80–120 val.)
 
-**Ką gaunate:** Gamybai paruošta daugiagentė sistema
+**Ką gaunate:** Gamybinės būklės daugialypis agentų sprendimas
 
-1. **1 etapas:** Diegti infrastruktūrą (aukščiau atlikta)
-2. **2 etapas:** Įgyvendinti agentus naudojant kodo pavyzdžius (30–40 val.)
-3. **3 etapas:** Sukurti maršrutizavimo paslaugą (12–16 val.)
-4. **4 etapas:** Sukurti frontend sąsają (20–30 val.)
-5. **5 etapas:** Konfigūruoti duomenų srautus (8–12 val.)
-6. **6 etapas:** Pridėti stebėseną ir vertinimą (10–15 val.)
+1. **Fazė 1:** Diegti infrastruktūrą (žr. aukščiau)
+2. **Fazė 2:** Įgyvendinti agentus naudodami žemiau pateiktus kodo pavyzdžius (30–40 val.)
+3. **Fazė 3:** Sukurti maršrutizacijos servisą (12–16 val.)
+4. **Fazė 4:** Sukurti frontend UI (20–30 val.)
+5. **Fazė 5:** Konfigūruoti duomenų srautus (8–12 val.)
+6. **Fazė 6:** Pridėti stebėseną ir vertinimą (10–15 val.)
 
-**Laukiamas rezultatas:**
-- ✅ Pilnai veikianti daugiagentė sistema
+**Tikėtinas rezultatas:**
+- ✅ Pilnai veikianti daugialypė agentų sistema
 - ✅ Gamybinio lygio stebėsena
-- ✅ Saugumo patikra
-- ✅ Sąnaudų optimizuotas diegimas
+- ✅ Saugumo validacija
+- ✅ Kaštų optimizuotas diegimas
 
 ---
 
-## 📚 Architektūros nuoroda ir įgyvendinimo vadovas
+## 📚 Architektūros nuoroda ir įgyvendinimo gidas
 
-Toliau pateiktos skyriai suteikia detalias architektūros schemas, konfigūracijos pavyzdžius ir etaloninį kodą, kurie padės įgyvendinti jūsų sprendimą.
+Toliau pateiktose dalyse išsamiai aptariami architektūros modeliai, konfigūracijos pavyzdžiai ir referencinis kodas, padėsiantys įgyvendinti sprendimą.
 
 ## Pradiniai konfigūracijos reikalavimai
 
-### 1. Keli agentai ir konfigūracija
+### 1. Daug agentų ir konfigūracija
 
-**Tikslas**: Diegti 2 specializuotus agentus - "Customer Agent" (klientų aptarnavimas) ir "Inventory" (atsargų valdymas)
+**Tikslas**: Išdiegti 2 specializuotus agentus - "Customer Agent" (klientų aptarnavimas) ir "Inventory" (atsargų valdymas)
 
-> **📝 Pastaba:** žemiau pateikti azure.yaml ir Bicep konfigūracijos yra **etaloniniai pavyzdžiai**, rodantys, kaip struktūrizuoti daugiagentės diegimus. Turėsite sukurti šiuos failus ir atitinkamus agentų įgyvendinimus.
+> **📝 Pastaba:** Toliau pateikti azure.yaml ir Bicep konfigūracijos yra **referenciniai pavyzdžiai**, rodantys, kaip struktūruoti daugialypius agentų diegimus. Jums reikės sukurti šiuos failus ir atitinkamus agentų įgyvendinimus.
 
 #### Konfigūracijos žingsniai:
 
@@ -507,11 +508,11 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 }]
 ```
 
-### 2. Keli modeliai su pajėgumo planavimu
+### 2. Keli modeliai su pajėgumų planavimu
 
-**Tikslas**: Diegti pokalbių modelį (Customer), įterpinių modelį (paieškai) ir dėstymo modelį (grader) su tinkamu kvotų valdymu
+**Tikslas**: Diegti pokalbių modelį (Customer), embeddings modelį (paieškai) ir sprendimų modelį (grader) su tinkamu kvotų valdymu
 
-#### Daugiarajoninė strategija:
+#### Daugiaregioninė strategija:
 
 ```bicep
 // infra/models.bicep
@@ -555,7 +556,7 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
 }
 ```
 
-#### Regiono atsarginė konfigūracija:
+#### Regiono atsarginės konfigūracija:
 
 ```yaml
 # .azure/env/.env.production
@@ -566,9 +567,9 @@ MODEL_CAPACITY_REQUIREMENTS='{"gpt-4.1": 35, "text-embedding-ada-002": 30}'
 
 ### 3. AI Search su duomenų indekso konfigūracija
 
-**Tikslas**: Konfigūruoti AI Search duomenų atnaujinimams ir automatinio indeksavimo procesui
+**Tikslas**: Konfigūruoti AI Search duomenų atnaujinimams ir automatiniam indeksavimui
 
-#### Išankstinio paruošimo hook'as:
+#### Išankstinio diegimo mechanizmas:
 
 ```bash
 #!/bin/bash
@@ -636,7 +637,7 @@ python ./scripts/upload_search_data.py \
 
 ### 4. Agentų įrankių konfigūracija AI Search
 
-**Tikslas**: Konfigūruoti agentus naudoti AI Search kaip pagrindžiančią priemonę
+**Tikslas**: Konfigūruoti agentus naudoti AI Search kaip pagrindinį įrankį
 
 #### Agentų paieškos įrankio įgyvendinimas:
 
@@ -682,7 +683,7 @@ class SearchTool:
         return [doc async for doc in results]
 ```
 
-#### Agentų integracija:
+#### Agento integracija:
 
 ```python
 # src/agents/customer_agent.py
@@ -698,10 +699,10 @@ class CustomerAgent:
         # Pirmiausia suraskite atitinkamą kontekstą
         search_results = await self.search_tool.search_products(user_query)
         
-        # Paruoškite kontekstą LLM modeliui
+        # Paruoškite kontekstą LLM
         context = "\n".join([doc['content'] for doc in search_results[:3]])
         
-        # Sugeneruokite atsakymą su pagrindimu
+        # Generuokite atsakymą, pagrįstą šaltiniais
         response = await self.openai_client.chat.completions.create(
             model="gpt-4.1",
             messages=[
@@ -715,7 +716,7 @@ class CustomerAgent:
 
 ### 5. Failų įkėlimo saugyklos integracija
 
-**Tikslas**: Leisti agentams apdoroti įkeltus failus (vadovėlius, dokumentus) RAG kontekstui
+**Tikslas**: Leisti agentams apdoroti įkeltus failus (instrukcijos, dokumentai) RAG kontekstui
 
 #### Saugyklos konfigūracija:
 
@@ -756,7 +757,7 @@ resource eventGridTopic 'Microsoft.EventGrid/topics@2023-12-15-preview' = {
 }
 ```
 
-#### Dokumentų apdorojimo srautas:
+#### Dokumentų apdorojimo grandinė:
 
 ```python
 # src/document_processor.py
@@ -796,13 +797,13 @@ class DocumentProcessor:
             for line in page.lines:
                 text_content += line.content + "\n"
         
-        # Sugeneruoti įterpimus
+        # Generuoti įterpinius
         embedding_response = await self.openai_client.embeddings.create(
             model="text-embedding-ada-002",
             input=text_content
         )
         
-        # Indeksuoti AI Search'e
+        # Indeksuoti AI Search sistemoje
         document = {
             "id": blob_name.replace(".", "_"),
             "title": blob_name,
@@ -814,11 +815,11 @@ class DocumentProcessor:
         await self.search_client.upload_documents([document])
 ```
 
-### 6. Bing Search integracija
+### 6. Bing paieškos integracija
 
-**Tikslas**: Pridėti Bing Search galimybes realaus laiko informacijai
+**Tikslas**: Pridėti Bing paieškos galimybes realaus laiko informacijai
 
-#### Bicep resursų pridėjimas:
+#### Bicep išteklių pridėjimas:
 
 ```bicep
 // infra/bing-search.bicep
@@ -836,10 +837,10 @@ output bingSearchKey string = bingSearchService.listKeys().key1
 output bingSearchEndpoint string = 'https://api.bing.microsoft.com/v7.0/search'
 ```
 
-#### Bing Search įrankis:
+#### Bing paieškos įrankis:
 
 ```python
-# šaltinis/agentai/įrankiai/bing_paieškos_įrankis.py
+# src/agentai/įrankiai/bing_paieškos_įrankis.py
 import aiohttp
 import asyncio
 
@@ -882,9 +883,9 @@ class BingSearchTool:
 
 ## Stebėsena ir matomumas
 
-### 7. Trace ir Application Insights
+### 7. Sekimas ir Application Insights
 
-**Tikslas**: Išsami stebėsena su trasavimo žurnalais ir Application Insights
+**Tikslas**: Išsami stebėsena su transakcijų žurnalais ir Application Insights
 
 #### Application Insights konfigūracija:
 
@@ -939,7 +940,7 @@ resource agentPerformanceAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-#### Pasirinktinių telemetrijos įgyvendinimas:
+#### Vartotojiškos telemetrijos įgyvendinimas:
 
 ```python
 # src/telemetry/agent_telemetry.py
@@ -1045,11 +1046,11 @@ class AgentTelemetry:
         return len(text) // 4
 ```
 
-### 8. Red Team saugumo vertinimas
+### 8. Red Teaming saugumo validacija
 
-**Tikslas**: Automatizuotas saugumo testavimas agentams ir modeliams
+**Tikslas**: Automatizuoti agentų ir modelių saugumo testavimą
 
-#### Red Team konfigūracija:
+#### Red Teaming konfigūracija:
 
 ```python
 # src/security/red_team_scanner.py
@@ -1166,7 +1167,7 @@ class RedTeamScanner:
     async def _send_test_prompt(self, prompt: str) -> str:
         """Send test prompt to target agent"""
         # Įgyvendinimas siųstų HTTP užklausą agento galiniam taškui
-        # Dėl demonstravimo tikslų grąžinamas laikinas vietos užpildas
+        # Demonstravimo tikslais grąžinamas pakaitinis rezultatas
         import aiohttp
         
         async with aiohttp.ClientSession() as session:
@@ -1223,14 +1224,14 @@ class RedTeamScanner:
         total_strategies = len(scan_results['strategies_tested'])
         vulnerabilities = len(scan_results['vulnerabilities_found'])
         
-        # Pagrindinis balų skaičiavimas: 100 - (vulnerabilities / total * 100)
+        # Pagrindinis įvertinimas: 100 - (vulnerabilities / total * 100)
         if total_strategies == 0:
             return 100.0
         
         vulnerability_ratio = vulnerabilities / total_strategies
         base_score = max(0, 100 - (vulnerability_ratio * 100))
         
-        # Sumažinti balą pagal pažeidžiamumo sunkumą
+        # Mažinti balą pagal pažeidžiamumų rimtumą
         severity_penalty = 0
         for vuln in scan_results['vulnerabilities_found']:
             severity_weights = {'low': 5, 'medium': 15, 'high': 30, 'critical': 50}
@@ -1240,7 +1241,7 @@ class RedTeamScanner:
         return round(final_score, 2)
 ```
 
-#### Automatizuotas saugumo pipeline'as:
+#### Automatizuotas saugumo procesas:
 
 ```bash
 #!/bin/bash
@@ -1254,7 +1255,7 @@ AGENT_ENDPOINT=$(az containerapp show \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# Paleisti saugumo skenavimą
+# Vykdyti saugumo skenavimą
 python -m src.security.red_team_scanner \
   --endpoint "https://$AGENT_ENDPOINT" \
   --api-key "$AGENT_API_KEY" \
@@ -1266,7 +1267,7 @@ echo "Security scan completed. Check security_reports/ for results."
 
 ### 9. Agentų vertinimas su Grader modeliu
 
-**Tikslas**: Diegti vertinimo sistemą su atskiru grader modeliu
+**Tikslas**: Diegti vertinimo sistemą su dedikuotu grader modeliu
 
 #### Grader modelio konfigūracija:
 
@@ -1471,7 +1472,7 @@ class AgentEvaluator:
             if criterion_scores:
                 summary['criteria_averages'][criterion] = sum(criterion_scores) / len(criterion_scores)
         
-        # Veikimo įvertinimas
+        # Veiklos įvertinimas
         avg_score = summary['average_overall_score']
         if avg_score >= 4.5:
             summary['performance_rating'] = 'Excellent'
@@ -1487,7 +1488,7 @@ class AgentEvaluator:
         return summary
 ```
 
-#### Testų atvejų konfigūracija:
+#### Testinių atvejų konfigūracija:
 
 ```json
 // tests/evaluation_test_cases.json
@@ -1526,11 +1527,11 @@ class AgentEvaluator:
 
 ---
 
-## Tinkrinimas ir atnaujinimai
+## Priderinimas ir atnaujinimai
 
 ### 10. Container App pritaikymas
 
-**Tikslas**: Atnaujinti container app konfigūraciją ir pakeisti į pritaikytą UI
+**Tikslas**: Atnaujinti container app konfigūraciją ir pakeisti su custom UI
 
 #### Dinaminė konfigūracija:
 
@@ -1548,7 +1549,7 @@ services:
       CUSTOM_LOGO_URL: ${LOGO_URL}
 ```
 
-#### Pritaikytas frontend build'as:
+#### Individualus frontend build'as:
 
 ```dockerfile
 # src/frontend/Dockerfile
@@ -1583,7 +1584,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 echo "Building and deploying custom frontend..."
 
-# Sukurkite pasirinktinį vaizdą su aplinkos kintamaisiais
+# Sukurti pasirinktinį atvaizdą su aplinkos kintamaisiais
 docker build \
   --build-arg AGENT_NAME="$CUSTOMER_AGENT_NAME" \
   --build-arg COMPANY_NAME="retail Retail" \
@@ -1591,13 +1592,13 @@ docker build \
   -t retail-frontend:latest \
   ./src/frontend
 
-# Įkelkite į Azure Container Registry
+# Įkelti į Azure konteinerių registrą
 az acr build \
   --registry "$AZURE_CONTAINER_REGISTRY" \
   --image "retail-frontend:latest" \
   ./src/frontend
 
-# Atnaujinkite konteinerinę programą
+# Atnaujinti konteinerio programą
 az containerapp update \
   --name "retail-frontend" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1608,17 +1609,17 @@ echo "Frontend deployed successfully!"
 
 ---
 
-## 🔧 Trikčių šalinimo gidas
+## 🔧 Gedimų šalinimo gidas
 
 ### Dažnos problemos ir sprendimai
 
-#### 1. Container Apps kvotų apribojimai
+#### 1. Container Apps kvotų ribos
 
-**Problema**: diegimas nepavyksta dėl regioninių kvotų ribų
+**Problema**: Diegimas nepavyksta dėl regioninių kvotų apribojimų
 
 **Sprendimas**:
 ```bash
-# Patikrinkite esamą kvotos naudojimą
+# Patikrinti dabartinį kvotos naudojimą
 az containerapp env show \
   --name "$CONTAINER_APPS_ENVIRONMENT" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1635,9 +1636,9 @@ az support tickets create \
   --description "Request quota increase for Container Apps in region X"
 ```
 
-#### 2. Modelio diegimo galiojimo pasibaigimas
+#### 2. Modelio diegimo galiojimo pabaiga
 
-**Problema**: modelio diegimas nepavyksta dėl pasenusios API versijos
+**Problema**: Modelio diegimas nepavyksta dėl pasenusios API versijos
 
 **Sprendimas**:
 ```python
@@ -1647,7 +1648,7 @@ import json
 
 def check_model_versions():
     """Check for latest model versions"""
-    # Tai kreipsis į Microsoft Foundry Models API, kad gautų dabartines versijas
+    # Tai iškvies Microsoft Foundry Models API, kad gautų dabartines versijas
     latest_versions = {
         "gpt-4.1": "2024-11-20",
         "text-embedding-ada-002": "2", 
@@ -1686,7 +1687,7 @@ if __name__ == "__main__":
 
 #### 3. Fine-tuning integracija
 
-**Problema**: kaip integruoti fino-tunintus modelius į AZD diegimą
+**Problema**: Kaip integruoti fine-tuned modelius į AZD diegimą
 
 **Sprendimas**:
 ```python
@@ -1726,8 +1727,8 @@ class FineTuningPipeline:
             fine_tuned_model = job.fine_tuned_model
             print(f"Fine-tuned model ready: {fine_tuned_model}")
             
-            # Atnaujinti diegimą, kad būtų naudojamas papildomai apmokytas modelis
-            # Tai iškvies Azure CLI, kad atnaujintų diegimą
+            # Atnaujinti diegimą, kad jis naudotų papildomai apmokytą modelį
+            # Tai iškviestų Azure CLI, kad atnaujintų diegimą
             return fine_tuned_model
         else:
             print(f"Job status: {job.status}")
@@ -1736,13 +1737,13 @@ class FineTuningPipeline:
 
 ---
 
-## DUK ir atviros galimybės
+## DUK & atviros tyrinėjimo galimybės
 
-### Dažniausiai užduodami klausimai
+### Dažnai užduodami klausimai
 
-#### K: Ar yra paprastas būdas diegti kelis agentus (dizaino šablonas)?
+#### K: Ar yra paprastas būdas išdiegti kelis agentus (dizaino šablonas)?
 
-**A: Taip! Naudokite daugiagentės modelį:**
+**A: Taip! Naudokite daugialypių agentų šabloną:**
 
 ```yaml
 # azure.yaml - Multi-Agent Configuration
@@ -1759,9 +1760,9 @@ services:
         }
 ```
 
-#### K: Ar galiu diegti "model router" kaip modelį (kainų pasekmės)?
+#### K: Ar galiu išdiegti "model router" kaip modelį (kaštų implikacijos)?
 
-**A: Taip, su atida:**
+**A: Taip, reikia atidumo:**
 
 ```python
 # Modelio maršrutizatoriaus įgyvendinimas
@@ -1784,18 +1785,18 @@ class ModelRouter:
     
     def estimate_cost_savings(self, usage_patterns: dict):
         """Estimate cost savings from intelligent routing"""
-        # Įgyvendinimas apskaičiuotų galimas sutaupas
+        # Įgyvendinimas apskaičiuotų potencialias sutaupas
         pass
 ```
 
-**Kainų pasekmės:**
-- **Sutaupymas**: 60–80% kaštų sumažinimas paprastoms užklausoms
-- **Kompromisai**: nežymus delsos padidėjimas maršrutizavimo logikoje
-- **Stebėsena**: sekti tikslumą prieš kaštus
+**Kaštų implikacijos:**
+- **Sutaupymas**: 60–80% kaštų sumažėjimas paprastiems užklausimams
+- **Kompromisai**: Šiek tiek didesnis vėlinimas maršrutizacijos logikai
+- **Stebėsena**: Stebėkite tikslumą vs. kaštų metrikas
 
 #### K: Ar galiu pradėti fine-tuning užduotį iš azd šablono?
 
-**A: Taip, naudojant po diegimo hook'us:**
+**A: Taip, naudojant po-diegimo hook'us:**
 
 ```bash
 #!/bin/bash
@@ -1808,7 +1809,7 @@ TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
   --data-path "./data/fine_tuning/training.jsonl" \
   --openai-key "$AZURE_OPENAI_API_KEY")
 
-# Pradėti smulkaus derinimo užduotį
+# Paleisti smulkaus derinimo užduotį
 FINE_TUNE_JOB_ID=$(python scripts/start_fine_tuning.py \
   --training-file-id "$TRAINING_FILE_ID" \
   --model "gpt-4.1-mini")
@@ -1822,7 +1823,7 @@ echo "Monitor progress with: azd hooks run monitor-fine-tuning"
 
 ### Pažangios scenarijai
 
-#### Daugiarajoninė diegimo strategija
+#### Daugiaregioninė diegimo strategija
 
 ```bicep
 // infra/multi-region.bicep
@@ -1861,7 +1862,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 #### Sąnaudų optimizavimo sistema
 
 ```python
-# src/optimizavimas/sąnaudų_optimizatorius.py
+# src/optimization/cost_optimizer.py
 class CostOptimizer:
     def __init__(self, usage_analytics):
         self.analytics = usage_analytics
@@ -1903,45 +1904,46 @@ class CostOptimizer:
 ```
 
 ---
+
 ## ✅ Paruoštas diegti ARM šablonas
 
 > **✨ TAI IŠ TIESŲ YRA IR VEIKIA!**  
-> Skirtingai nuo aukščiau pateiktų konceptualių kodo pavyzdžių, ARM šablonas yra **tikras, veikiantis infrastruktūros diegimas**, įtrauktas į šią saugyklą.
+> Skirtingai nei aukščiau pateikti konceptiniai kodo pavyzdžiai, ARM šablonas yra **tikras, veikiantis infrastruktūros diegimas**, įtrauktas į šį saugyklą.
 
 ### Ką šis šablonas iš tikrųjų daro
 
-The ARM template at [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) provisions **all Azure infrastructure** needed for the multi-agent system. This is the **only ready-to-run component** - everything else requires development.
+ARM šablonas kataloge [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) paruošia **visą Azure infrastruktūrą**, reikalingą daugiaagentinei sistemai. Tai yra **vienintelis paruoštas paleisti komponentas** - viskas kitas reikalauja vystymo.
 
 ### Kas įtraukta į ARM šabloną
 
-The ARM template located in [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) includes:
+ARM šablonas, esantis [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template), apima:
 
 #### **Pilna infrastruktūra**
-- ✅ **Daugregionės Microsoft Foundry modelių** diegimai (gpt-4.1, gpt-4.1-mini, embeddings, grader)
+- ✅ **Daugiregioniniai Microsoft Foundry modelių diegimai** (gpt-4.1, gpt-4.1-mini, embeddings, grader)
 - ✅ **Azure AI Search** su vektorinės paieškos galimybėmis
 - ✅ **Azure Storage** su dokumentų ir įkėlimo konteineriais
-- ✅ **Container Apps Environment** su automatinio mastelio keitimu
+- ✅ **Container Apps Environment** su automatinio skalavimo galimybe
 - ✅ **Agent Router & Frontend** konteinerių programos
-- ✅ **Cosmos DB** pokalbių istorijos saugojimui
-- ✅ **Application Insights** išsamiam stebėjimui
-- ✅ **Key Vault** slaptų reikšmių saugiam valdymui
+- ✅ **Cosmos DB** pokalbių istorijos išsaugojimui
+- ✅ **Application Insights** visapusiškai stebėsenai
+- ✅ **Key Vault** saugiam slaptų raktų valdymui
 - ✅ **Document Intelligence** failų apdorojimui
 - ✅ **Bing Search API** realaus laiko informacijai
 
 #### **Diegimo režimai**
-| Režimas | Panaudojimas | Ištekliai | Apskaičiuotos išlaidos/mėn. |
+| Režimas | Naudojimo scenarijus | Ištekliai | Apskaičiuotos išlaidos per mėnesį |
 |------|----------|-----------|---------------------|
-| **Minimalus** | Vystymui, testavimui | Pagrindiniai SKU, viena sritis | $100-370 |
-| **Standartinis** | Gamyba, vidutinė apimtis | Standartiniai SKU, daug regionų | $420-1,450 |
-| **Premium** | Įmonė, didelė apimtis | Premium SKU, HA konfigūracija | $1,150-3,500 |
+| **Minimal** | Kūrimas, testavimas | Basic SKUs, vienas regionas | $100-370 |
+| **Standard** | Produkcija, vidutinis mastas | Standard SKUs, keli regionai | $420-1,450 |
+| **Premium** | Įmoninis, didelis mastas | Premium SKUs, aukštas prieinamumas (HA) | $1,150-3,500 |
 
-### 🎯 Greiti diegimo variantai
+### 🎯 Greitos diegimo parinktys
 
-#### Variantas 1: Vieno paspaudimo Azure diegimas
+#### Parinktis 1: Vieno mygtuko Azure diegimas
 
 [![Diegti į Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-#### Variantas 2: Azure CLI diegimas
+#### Parinktis 2: Azure CLI diegimas
 
 ```bash
 # Klonuoti saugyklą
@@ -1951,17 +1953,17 @@ cd azd-for-beginners/examples/retail-multiagent-arm-template
 # Padaryti diegimo skriptą vykdomu
 chmod +x deploy.sh
 
-# Diegti naudojant numatytuosius nustatymus (standartinis režimas)
+# Diegti su numatytaisiais nustatymais (standartinis režimas)
 ./deploy.sh -g myResourceGroup
 
-# Diegti produkcijai su premium funkcijomis
+# Diegti gamybai su premiuminėmis funkcijomis
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 
-# Diegti minimalų variantą kūrimui
+# Diegti minimalią versiją vystymui
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
-#### Variantas 3: Tiesioginis ARM šablono diegimas
+#### Parinktis 3: Tiesioginis ARM šablono diegimas
 
 ```bash
 # Sukurti išteklių grupę
@@ -1977,7 +1979,7 @@ az deployment group create \
 
 ### Šablono išvestys
 
-After successful deployment, you'll receive:
+Sėkmingai įdiegus, gausite:
 
 ```json
 {
@@ -1991,11 +1993,11 @@ After successful deployment, you'll receive:
 }
 ```
 
-### 🔧 Konfigūracija po diegimo
+### 🔧 Po diegimo konfigūracija
 
-The ARM template handles infrastructure provisioning. After deployment:
+ARM šablonas rūpinasi infrastruktūros teikimu. Po diegimo:
 
-1. **Sukonfigūruoti paieškos indeksą**:
+1. **Konfigūruoti paieškos indeksą**:
    ```bash
    # Naudokite pateiktą paieškos schemą
    curl -X POST "${SEARCH_ENDPOINT}/indexes?api-version=2023-11-01" \
@@ -2013,9 +2015,9 @@ The ARM template handles infrastructure provisioning. After deployment:
      --account-name ${STORAGE_ACCOUNT}
    ```
 
-3. **Diegti agentų kodą**:
+3. **Įdiegti agentų kodą**:
    ```bash
-   # Sukurti ir diegti tikras agentų programas
+   # Kurti ir diegti tikras agentų programas
    docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
    az containerapp update \
      --name retail-router \
@@ -2023,9 +2025,9 @@ The ARM template handles infrastructure provisioning. After deployment:
      --image myregistry.azurecr.io/agent-router:latest
    ```
 
-### 🎛️ Pritaikymo parinktys
+### 🎛️ Asmeninimo parinktys
 
-Edit `azuredeploy.parameters.json` to customize your deployment:
+Redaguokite `azuredeploy.parameters.json`, kad pritaikytumėte diegimą:
 
 ```json
 {
@@ -2041,39 +2043,39 @@ Edit `azuredeploy.parameters.json` to customize your deployment:
 
 ### 📊 Diegimo ypatybės
 
-- ✅ **Reikalingų sąlygų tikrinimas** (Azure CLI, kvotos, leidimai)
-- ✅ **Daugregionis aukštas prieinamumas** su automatiniu persijungimu
-- ✅ **Išsamus stebėjimas** su Application Insights ir Log Analytics
-- ✅ **Geriausios saugumo praktikos** su Key Vault ir RBAC
+- ✅ **Priešdiegimo tikrinimas** (Azure CLI, kvotos, leidimai)
+- ✅ **Daugiregioninis aukšto prieinamumo palaikymas** su automatiniu persijungimu
+- ✅ **Išsami stebėsena** su Application Insights ir Log Analytics
+- ✅ **Saugumo geriausios praktikos** su Key Vault ir RBAC
 - ✅ **Išlaidų optimizavimas** su konfigūruojamais diegimo režimais
-- ✅ **Automatinis mastelio keitimas** pagal paklausos modelius
-- ✅ **Atnaujinimai be prastovų** su Container Apps revizijomis
+- ✅ **Automatinis skalavimas** pagal paklausos modelius
+- ✅ **Atnaujinimai be prastovų** su Container Apps versijų valdymu
 
-### 🔍 Stebėjimas ir valdymas
+### 🔍 Stebėsena ir valdymas
 
-Once deployed, monitor your solution through:
+Įdiegus, stebėkite sprendimą per:
 
-- **Application Insights**: našumo metrika, priklausomybių sekimas ir pasirinktine telemetrija
-- **Log Analytics**: centralizuotas visų komponentų žurnalas
-- **Azure Monitor**: išteklių sveikatos ir prieinamumo stebėjimas
-- **Cost Management**: realaus laiko išlaidų sekimas ir biudžeto įspėjimai
+- **Application Insights**: našumo metrika, priklausomybių stebėjimas ir pasirinktine telemetrija
+- **Log Analytics**: centralizuotas žurnalas iš visų komponentų
+- **Azure Monitor**: išteklių būklės ir prieinamumo stebėsena
+- **Cost Management**: realaus laiko išlaidų stebėsena ir biudžeto įspėjimai
 
 ---
 
-## 📚 Pilnas įgyvendinimo vadovas
+## 📚 Išsamus įgyvendinimo vadovas
 
-This scenario document combined with the ARM template provides everything needed to deploy a production-ready multi-agent customer support solution. The implementation covers:
+Šis scenarijaus dokumentas kartu su ARM šablonu suteikia viską, ko reikia gamybai paruoštam daugiaagentės klientų aptarnavimo sprendimui įdiegti. Įgyvendinimas apima:
 
-✅ **Architektūros dizainas** - Išsamus sistemos dizainas su komponentų santykiais  
-✅ **Infrastruktūros paruošimas** - Pilnas ARM šablonas vieno paspaudimo diegimui  
-✅ **Agentų konfigūracija** - Išsamus Customer ir Inventory agentų nustatymas  
-✅ **Daugelio modelių diegimas** - Strateginis modelių išdėstymas regionuose  
+✅ **Architektūros dizainas** - Išsamus sistemos dizainas su komponentų sąveika  
+✅ **Infrastruktūros teikimas** - Pilnas ARM šablonas vieno mygtuko diegimui  
+✅ **Agentų konfigūracija** - Išsamus kliento ir inventoriaus agentų nustatymas  
+✅ **Daugiamodelių diegimas** - Strateginis modelių išdėstymas regionuose  
 ✅ **Paieškos integracija** - AI Search su vektorinėmis galimybėmis ir duomenų indeksavimu  
-✅ **Saugumo įgyvendinimas** - Red teaming, pažeidžiamumų skenavimas ir saugios praktikos  
-✅ **Stebėjimas ir vertinimas** - Išsami telemetrija ir agentų vertinimo sistema  
-✅ **Paruošimas gamybai** - Įmonės lygio diegimas su HA ir atkūrimu po katastrofos  
-✅ **Išlaidų optimizavimas** - Inteligentiškas maršrutizavimas ir mastelio keitimas pagal naudojimą  
-✅ **Gedimų šalinimo vadovas** - Dažnos problemos ir sprendimų strategijos
+✅ **Saugumo įgyvendinimas** - Red teaming, pažeidžiamumų skanavimas ir saugios praktikos  
+✅ **Stebėsena ir vertinimas** - Išsamus telemetrijos ir agentų vertinimo karkasas  
+✅ **Parengimas produkcijai** - Įmoninio lygio diegimas su aukštu prieinamumu ir katastrofų atstatymu  
+✅ **Išlaidų optimizavimas** - Išmanus maršrutavimas ir mastelio keitimas pagal naudojimą  
+✅ **Gedimų šalinimo vadovas** - Dažnos problemos ir jų sprendimo strategijos
 
 ---
 
@@ -2081,90 +2083,90 @@ This scenario document combined with the ARM template provides everything needed
 
 ### Aptartos architektūros šablonai
 
-✅ **Daugiaagentė sistemos architektūra** - Specializuoti agentai (Customer + Inventory) su priskirtais modeliais  
-✅ **Daugregionis diegimas** - Strateginis modelių išdėstymas išlaidų optimizavimui ir atsargumui  
-✅ **RAG architektūra** - AI Search integracija su vektoriniais įterpimais pagrįstiems atsakymams  
-✅ **Agentų vertinimas** - Skirtas grader modelis kokybės vertinimui  
-✅ **Saugumo sistema** - Red teaming ir pažeidžiamumų skenavimo šablonai  
-✅ **Išlaidų optimizavimas** - Modelių maršrutizavimo ir pajėgumų planavimo strategijos  
-✅ **Gamybinis stebėjimas** - Application Insights su pasirinktine telemetrija  
+✅ **Daugiagentės sistemos dizainas** - Specializuoti agentai (Klientas + Inventorius) su dedikuotais modeliais  
+✅ **Daugiregioninis diegimas** - Strateginis modelių išdėstymas siekiant išlaidų optimizavimo ir atsparumo  
+✅ **RAG architektūra** - AI Search integracija su vektorinėmis įterptimis (embeddings) grindžiamiems atsakymams  
+✅ **Agentų vertinimas** - Dedikuotas grader modelis kokybės vertinimui  
+✅ **Saugumo sistema** - Red teaming ir pažeidžiamumų skanavimo modeliai  
+✅ **Išlaidų optimizavimas** - Modelių maršrutavimo ir talpos planavimo strategijos  
+✅ **Produkcinė stebėsena** - Application Insights su pasirinktine telemetrija  
 
 ### Ką pateikia šis dokumentas
 
 | Komponentas | Būsena | Kur rasti |
 |-----------|--------|------------------|
-| **Infrastruktūros šablonas** | ✅ Paruošta diegti | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
-| **Architektūros diagramos** | ✅ Užbaigtos | Aukščiau esanti Mermaid diagrama |
-| **Kodo pavyzdžiai** | ✅ Referencinės įgyvendinimo versijos | Visame šiame dokumente |
-| **Konfigūracijos šablonai** | ✅ Išsamios gairės | 1-10 skyriai aukščiau |
-| **Agentų įgyvendinimai** | 🔨 Jūs tai kuriate | ~40 val. vystymo |
-| **Frontend UI** | 🔨 Jūs tai kuriate | ~25 val. vystymo |
-| **Duomenų srautai** | 🔨 Jūs tai kuriate | ~10 val. vystymo |
+| **Infrastructure Template** | ✅ Paruošta diegti | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
+| **Architecture Diagrams** | ✅ Pilna | Mermaid diagrama aukščiau |
+| **Code Examples** | ✅ Referenciniai įgyvendinimo pavyzdžiai | Visame šiame dokumente |
+| **Configuration Patterns** | ✅ Išsami gairė | 1-10 skyriai aukščiau |
+| **Agent Implementations** | 🔨 Jūs kuriate tai | ~40 valandų kūrimo |
+| **Frontend UI** | 🔨 Jūs kuriate tai | ~25 valandų kūrimo |
+| **Data Pipelines** | 🔨 Jūs kuriate tai | ~10 valandų kūrimo |
 
-### Realybės patikra: Kas iš tikrųjų yra
+### Realistinė patikra: kas iš tikrųjų yra
 
-**Repozitorijoje (paruošta dabar):**
-- ✅ ARM šablonas, diegiantis 15+ Azure paslaugų (azuredeploy.json)
-- ✅ Diegimo skriptas su patikrinimu (deploy.sh)
+**Saugykloje (paruošta dabar):**
+- ✅ ARM šablonas diegiantis 15+ Azure paslaugų (azuredeploy.json)
+- ✅ Diegimo skriptas su validacija (deploy.sh)
 - ✅ Parametrų konfigūracija (azuredeploy.parameters.json)
 
-**Nurodyta dokumente (jūs kuriate):**
-- 🔨 Agentų įgyvendinimo kodas (~30–40 valandų)
-- 🔨 Maršrutizavimo paslauga (~12–16 val.)
-- 🔨 Frontendo aplikacija (~20–30 val.)
-- 🔨 Duomenų paruošimo skriptai (~8–12 val.)
-- 🔨 Stebėjimo sistema (~10–15 val.)
+**Nurodyta dokumente (Jūs kuriate):**
+- 🔨 Agentų įgyvendinimo kodas (~30-40 valandų)
+- 🔨 Maršrutavimo paslauga (~12-16 valandų)
+- 🔨 Frontendo aplikacija (~20-30 valandų)
+- 🔨 Duomenų paruošimo skriptai (~8-12 valandų)
+- 🔨 Stebėsenos karkasas (~10-15 valandų)
 
-### Jūsų tolimesni žingsniai
+### Jūsų tolesni žingsniai
 
-#### Jei norite diegti infrastruktūrą (30 minučių)
+#### Jei norite įdiegti infrastruktūrą (30 minučių)
 ```bash
 cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
 
-#### Jei norite sukurti visą sistemą (80–120 val.)
+#### Jei norite sukurti visą sistemą (80–120 valandų)
 1. ✅ Perskaitykite ir supraskite šį architektūros dokumentą (2–3 val.)
-2. ✅ Diegti infrastruktūrą naudojant ARM šabloną (30 min.)
-3. 🔨 Įgyvendinti agentus naudojant referencinius kodo šablonus (~40 val.)
-4. 🔨 Sukurti maršrutizavimo paslaugą su FastAPI/Express (~15 val.)
-5. 🔨 Sukurti frontend vartotojo sąsają su React/Vue (~25 val.)
-6. 🔨 Konfigūruoti duomenų srautą ir paieškos indeksą (~10 val.)
-7. 🔨 Pridėti stebėjimą ir vertinimą (~15 val.)
-8. ✅ Išbandyti, užtikrinti saugumą ir optimizuoti (~10 val.)
+2. ✅ Įdiekite infrastruktūrą naudodami ARM šabloną (30 minučių)
+3. 🔨 Įgyvendinkite agentus naudodami referencinius kodo šablonus (~40 val.)
+4. 🔨 Sukurkite maršrutavimo paslaugą su FastAPI/Express (~15 val.)
+5. 🔨 Sukurkite frontendo naudotojo sąsają su React/Vue (~25 val.)
+6. 🔨 Konfigūruokite duomenų srautą ir paieškos indeksą (~10 val.)
+7. 🔨 Pridėkite stebėseną ir vertinimą (~15 val.)
+8. ✅ Išbandykite, užtikrinkite saugumą ir optimizuokite (~10 val.)
 
-#### Jei norite išmokti daugiaagentės architektūros šablonų (studijai)
-- 📖 Peržiūrėkite architektūros diagramą ir komponentų santykius
-- 📖 Studijuokite kodo pavyzdžius SearchTool, BingTool, AgentEvaluator
-- 📖 Supraskite daugregionio diegimo strategiją
+#### Jei norite išmokti daugiagenčių modelių šablonų (Studijoms)
+- 📖 Peržiūrėkite architektūros diagramą ir komponentų tarpusavio ryšius
+- 📖 Išstudijuokite kodo pavyzdžius: SearchTool, BingTool, AgentEvaluator
+- 📖 Supraskite daugiregioninio diegimo strategiją
 - 📖 Išmokite vertinimo ir saugumo sistemas
 - 📖 Taikykite šablonus savo projektams
 
 ### Pagrindinės išvados
 
-1. **Infrastruktūra vs. Programėlė** - ARM šablonas suteikia infrastruktūrą; agentams reikalingas vystymas  
-2. **Daugregionė strategija** - Strateginis modelių išdėstymas sumažina išlaidas ir pagerina patikimumą  
-3. **Vertinimo sistema** - Skirtas grader modelis leidžia nuolatinę kokybės vertinimą  
-4. **Saugumas pirmiausia** - Red teaming ir pažeidžiamumų skenavimas yra būtini gamyboje  
-5. **Išlaidų optimizavimas** - Inteligentiškas maršrutizavimas tarp gpt-4.1 ir gpt-4.1-mini sutaupo 60–80%
+1. **Infrastruktūra vs. programa** - ARM šablonas teikia infrastruktūrą; agentams reikalingas vystymas
+2. **Daugiregionė strategija** - Strateginis modelių išdėstymas mažina išlaidas ir gerina patikimumą
+3. **Vertinimo sistema** - Dedikuotas grader modelis leidžia nuolatinę kokybės vertinimą
+4. **Saugumas pirmiausia** - Red teaming ir pažeidžiamumų skanavimas yra būtini produkcijoje
+5. **Išlaidų optimizavimas** - Išmanus maršrutavimas tarp gpt-4.1 ir gpt-4.1-mini sutaupo 60–80%
 
 ### Apskaičiuotos išlaidos
 
-| Diegimo režimas | Infrastruktūra/mėn. | Vystymas (vienkartinis) | Bendra pirmam mėnesiui |
+| Diegimo režimas | Infrastruktūra/mėn. | Vystymas (vienkartinis) | Iš viso pirmą mėnesį |
 |-----------------|---------------------|------------------------|-------------------|
-| **Minimalus** | $100-370 | $15K-25K (80-120 val.) | $15.1K-25.4K |
-| **Standartinis** | $420-1,450 | $15K-25K (same effort) | $15.4K-26.5K |
+| **Minimal** | $100-370 | $15K-25K (80-120 val.) | $15.1K-25.4K |
+| **Standard** | $420-1,450 | $15K-25K (same effort) | $15.4K-26.5K |
 | **Premium** | $1,150-3,500 | $15K-25K (same effort) | $16.2K-28.5K |
 
-**Pastaba:** Infrastruktūra sudaro <5% visų išlaidų naujiems įgyvendinimams. Pagrindinė investicija yra vystymo pastangos.
+**Pastaba:** Infrastruktūra sudaro <5% visų išlaidų naujiems įgyvendinimams. Pagrindinė investicija yra vystymo darbas.
 
 ### Susiję ištekliai
 
-- 📚 [ARM šablono diegimo vadovas](retail-multiagent-arm-template/README.md) - Infrastruktūros nustatymas
-- 📚 [Microsoft Foundry modelių gerosios praktikos](https://learn.microsoft.com/azure/ai-services/openai/) - Modelių diegimas
+- 📚 [ARM šablono diegimo vadovas](retail-multiagent-arm-template/README.md) - Infrastruktūros paruošimas
+- 📚 [Microsoft Foundry modelių geriausios praktikos](https://learn.microsoft.com/azure/ai-services/openai/) - Modelių diegimas
 - 📚 [AI Search dokumentacija](https://learn.microsoft.com/azure/search/) - Vektorinės paieškos konfigūracija
-- 📚 [Container Apps šablonai](https://learn.microsoft.com/azure/container-apps/) - Mikropaslaugų diegimas
-- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Stebėjimo nustatymas
+- 📚 [Container Apps modeliai](https://learn.microsoft.com/azure/container-apps/) - Mikroservisų diegimas
+- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Stebėsenos paruošimas
 
 ### Klausimai ar problemos?
 
@@ -2175,11 +2177,11 @@ cd retail-multiagent-arm-template
 
 ---
 
-**Šis išsamus scenarijus pateikia įmonės lygio architektūros schemą daugiaagentėms AI sistemoms, kartu su infrastruktūros šablonais, įgyvendinimo gairėmis ir gamybos geriausiomis praktikomis kuriant pažangius klientų aptarnavimo sprendimus su Azure Developer CLI.**
+**Šis išsamus scenarijus suteikia įmoninio lygio architektūrinį planą daugiaagentėms AI sistemoms, kartu su infrastruktūros šablonais, įgyvendinimo gairėmis ir produkcijos geriausiomis praktikomis, skirtomis kurti sudėtingus klientų aptarnavimo sprendimus naudojant Azure Developer CLI.**
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Atsakomybės apribojimas**:
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipkite dėmesį, kad automatizuoti vertimai gali turėti klaidų arba netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl kritinės informacijos rekomenduojamas profesionalus žmogaus vertimas. Mes neatsakome už jokius nesusipratimus ar neteisingą aiškinimą, kilusius naudojantis šiuo vertimu.
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojama naudoti profesionalų žmogiškąjį vertimą. Mes neatsakome už jokius nesusipratimus ar neteisingą interpretaciją, kilusią naudojantis šiuo vertimu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

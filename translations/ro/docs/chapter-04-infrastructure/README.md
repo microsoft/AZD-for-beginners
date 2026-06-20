@@ -1,6 +1,6 @@
 # Capitolul 4: Infrastructură ca Cod și Implementare
 
-**📚 Curs**: [AZD For Beginners](../../README.md) | **⏱️ Durată**: 1–1,5 ore | **⭐ Complexitate**: Intermediar
+**📚 Curs**: [AZD Pentru Începători](../../README.md) | **⏱️ Durată**: 1-1.5 ore | **⭐ Complexitate**: Intermediar
 
 ---
 
@@ -8,15 +8,15 @@
 
 Acest capitol acoperă modele Infrastructure as Code (IaC) cu șabloane Bicep, aprovizionarea resurselor și strategii de implementare folosind Azure Developer CLI.
 
-> Validat cu `azd 1.23.12` în martie 2026.
+> Validat cu `azd 1.25.6` în iunie 2026.
 
 ## Obiective de învățare
 
-Parcurgând acest capitol, veți:
+Prin parcurgerea acestui capitol, vei:
 - Înțelege structura și sintaxa șabloanelor Bicep
-- Veți aproviziona resurse Azure cu `azd provision`
-- Veți implementa aplicații cu `azd deploy`
-- Implementa strategii de tip blue-green și rolling
+- Aproviziona resurse Azure cu `azd provision`
+- Implementa aplicații cu `azd deploy`
+- Implementa strategii de implementare blue-green și rolling
 
 ---
 
@@ -24,24 +24,25 @@ Parcurgând acest capitol, veți:
 
 | # | Lecție | Descriere | Timp |
 |---|--------|-------------|------|
-| 1 | [Aprovizionarea resurselor](provisioning.md) | Gestionarea resurselor Azure cu AZD | 45 min |
-| 2 | [Ghid de implementare](deployment-guide.md) | Strategii de implementare a aplicațiilor | 45 min |
+| 1 | [Aprovizionarea Resurselor](provisioning.md) | Managementul resurselor Azure cu AZD | 45 min |
+| 2 | [Ghid de Implementare](deployment-guide.md) | Strategii de implementare a aplicațiilor | 45 min |
+| 3 | [Crearea Propriului Șablon](custom-templates.md) | Construiește și publică șabloane azd reutilizabile | 30 min |
 
 ---
 
-## 🚀 Pornire rapidă
+## 🚀 Pornire Rapidă
 
 ```bash
-# Inițializare din șablon
+# Inițializează din șablon
 azd init --template azure-functions-python-v2-http
 
-# Previzualizare a ceea ce va fi creat
+# Previzualizează ce va fi creat
 azd provision --preview
 
-# Provisionare doar a infrastructurii
+# Provisionează doar infrastructura
 azd provision
 
-# Implementare doar a codului
+# Distribuie doar codul
 azd deploy
 
 # Sau ambele împreună
@@ -50,7 +51,7 @@ azd up
 
 ---
 
-## 📁 Structura proiectului AZD
+## 📁 Structura Proiectului AZD
 
 ```
 my-project/
@@ -67,7 +68,7 @@ my-project/
 
 ---
 
-## 🔧 Comenzi esențiale
+## 🔧 Comenzi Esențiale
 
 | Comandă | Descriere |
 |---------|-------------|
@@ -84,19 +85,19 @@ my-project/
 | Direcție | Capitol |
 |-----------|---------|
 | **Anterior** | [Capitolul 3: Configurare](../chapter-03-configuration/README.md) |
-| **Următor** | [Capitolul 5: Soluții multi-agent](../chapter-05-multi-agent/README.md) |
+| **Următor** | [Capitolul 5: Soluții Multi-Agent](../chapter-05-multi-agent/README.md) |
 
 ---
 
-## 📖 Resurse conexe
+## 📖 Resurse Asemănătoare
 
-- [Verificări înainte de implementare](../chapter-06-pre-deployment/README.md)
-- [Exemple pentru Container App](../../examples/container-app/README.md)
-- [Exemplu pentru Database App](../../examples/database-app/README.md)
+- [Verificări Pre-Implementare](../chapter-06-pre-deployment/README.md)
+- [Exemple Container App](../../examples/container-app/README.md)
+- [Exemplu Aplicație Bază de Date](../../examples/database-app/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Declinare de responsabilitate**:
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă ar trebui considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un traducător uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite care rezultă din utilizarea acestei traduceri.
+**Declinare a responsabilității**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). În timp ce ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un om. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care decurg din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,41 +1,41 @@
 # Capítulo 8: Padrões de Produção e Empresariais
 
-**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 2-3 hours | **⭐ Complexidade**: Avançado
+**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 2-3 horas | **⭐ Complexidade**: Avançado
 
 ---
 
-## Visão geral
+## Visão Geral
 
 Este capítulo aborda padrões de implantação prontos para empresas, fortalecimento de segurança, monitoramento e otimização de custos para cargas de trabalho de IA em produção.
 
-> Validado com `azd 1.23.12` em março de 2026.
+> Validado contra `azd 1.25.6` em junho de 2026.
 
-## Objetivos de aprendizagem
+## Objetivos de Aprendizagem
 
 Ao concluir este capítulo, você irá:
-- Implantar aplicações resilientes em várias regiões
+- Implantar aplicações resilientes em múltiplas regiões
 - Implementar padrões de segurança empresariais
 - Configurar monitoramento abrangente
 - Otimizar custos em escala
-- Configurar pipelines de CI/CD com AZD
+- Configurar pipelines CI/CD com AZD
 
 ---
 
 ## 📚 Lições
 
-| # | Aula | Descrição | Tempo |
+| # | Lição | Descrição | Tempo |
 |---|--------|-------------|------|
-| 1 | [Práticas de IA em Produção](production-ai-practices.md) | Padrões de implantação empresariais | 90 min |
+| 1 | [Práticas de IA para Produção](production-ai-practices.md) | Padrões de implantação empresariais | 90 min |
 
 ---
 
 ## 🚀 Checklist de Produção
 
-- [ ] Implantação multi-região para resiliência
+- [ ] Implantação em múltiplas regiões para resiliência
 - [ ] Identidade gerenciada para autenticação (sem chaves)
 - [ ] Application Insights para monitoramento
-- [ ] Orçamentos de custo e alertas configurados
-- [ ] Varredura de segurança habilitada
+- [ ] Orçamentos e alertas de custo configurados
+- [ ] Verificação de segurança habilitada
 - [ ] Integração com pipeline CI/CD
 - [ ] Plano de recuperação de desastres
 
@@ -43,20 +43,22 @@ Ao concluir este capítulo, você irá:
 
 ## 🏗️ Padrões de Arquitetura
 
-### Padrão 1: IA em Microsserviços
+### Padrão 1: IA de Microsserviços
 
 ```mermaid
 graph LR
-    Gateway[Gateway de API] --> AI[Serviço de IA] --> Models[Modelos da Microsoft Foundry]
+    Gateway[Gateway de API] --> AI[Serviço de IA] --> Models[Modelos do Foundry da Microsoft]
     Gateway --> Auth[Serviço de Autenticação]
     AI --> Data[Armazenamento de Dados]
 ```
+
 ### Padrão 2: IA Orientada a Eventos
 
 ```mermaid
 graph LR
     EventGrid[Grade de Eventos] --> Functions[Funções] --> Pipeline[Pipeline de IA]
 ```
+
 ---
 
 ## 🔐 Melhores Práticas de Segurança
@@ -80,10 +82,10 @@ properties: {
 
 ## 💰 Otimização de Custos
 
-| Strategy | Savings |
+| Estratégia | Economias |
 |----------|---------|
 | Escalar para zero (Container Apps) | 60-80% |
-| Usar níveis de consumo para desenvolvimento | 50-70% |
+| Usar camadas de consumo para desenvolvimento | 50-70% |
 | Escalonamento programado | 30-50% |
 | Capacidade reservada | 20-40% |
 
@@ -107,7 +109,7 @@ azd monitor --logs
 # Verificar o Application Insights
 azd monitor --overview
 
-# Ver métricas
+# Exibir métricas
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -132,6 +134,6 @@ az monitor metrics list --resource <resource-id>
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Isenção de responsabilidade**:
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, por favor, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se uma tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+**Aviso Legal**:
+Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, por favor, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

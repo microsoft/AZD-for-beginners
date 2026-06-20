@@ -1,35 +1,35 @@
-# 3. fejezet: Konfiguráció és hitelesítés
+# 3. Fejezet: Konfiguráció és hitelesítés
 
-**📚 Tanfolyam**: [AZD kezdőknek](../../README.md) | **⏱️ Időtartam**: 45-60 perc | **⭐ Nehézségi szint**: Középhaladó
+**📚 Tanfolyam**: [AZD Kezdőknek](../../README.md) | **⏱️ Időtartam**: 45-60 perc | **⭐ Nehézségi szint**: Középhaladó
 
 ---
 
 ## Áttekintés
 
-Ez a fejezet a környezet konfigurációját, hitelesítési mintákat és biztonsági legjobb gyakorlatokat tárgyalja az Azure Developer CLI telepítésekhez.
+Ez a fejezet a környezet konfigurációját, a hitelesítési mintákat és az Azure Developer CLI telepítések biztonsági ajánlásait tárgyalja.
 
-> Érvényesítve az `azd 1.23.12` verzióval, 2026 márciusában.
+> Ellenőrizve `azd 1.25.6` verzióval 2026 júniusában.
 
 ## Tanulási célok
 
-A fejezet elvégzésével Ön:
-- Elsajátítja az AZD konfigurációs hierarchiáját
-- Kezeli a több környezetet (fejlesztés, tesztelés, éles)
-- Megvalósít biztonságos hitelesítést kezelt identitásokkal
-- Konfigurálja a környezet-specifikus beállításokat
+A fejezet elvégzése után Ön képes lesz:
+- Az AZD konfigurációs hierarchiájának elsajátítására
+- Több környezet (fejlesztő, teszt, éles) kezelésére
+- Biztonságos hitelesítés megvalósítására kezelt identitásokkal
+- Környezet-specifikus beállítások konfigurálására
 
 ---
 
-## 📚 Leckék
+## 📚 Tananyagok
 
-| # | Lecke | Leírás | Idő |
+| # | Tananyag | Leírás | Idő |
 |---|--------|-------------|------|
-| 1 | [Konfiguráció útmutató](configuration.md) | Környezet beállítása és kezelése | 30 perc |
+| 1 | [Konfigurációs útmutató](configuration.md) | Környezet beállítása és kezelése | 30 perc |
 | 2 | [Hitelesítés és biztonság](authsecurity.md) | Kezelt identitás és RBAC minták | 30 perc |
 
 ---
 
-## 🚀 Gyors kezdés
+## 🚀 Gyors indulás
 
 ```bash
 # Több környezet létrehozása
@@ -52,9 +52,9 @@ azd env get-values
 
 ## 🔧 Konfigurációs hierarchia
 
-AZD a beállításokat ebben a sorrendben alkalmazza (a későbbi felülírja a korábbit):
+Az AZD a beállításokat az alábbi sorrendben alkalmazza (a későbbi felülírja az előzőt):
 
-1. **Alapértelmezett értékek** (a sablonokban beépítve)
+1. **Alapértelmezett értékek** (beépítve a sablonokba)
 2. **azure.yaml** (projekt konfiguráció)
 3. **Környezeti változók** (`azd env set`)
 4. **Parancssori kapcsolók** (`--location eastus`)
@@ -64,16 +64,16 @@ AZD a beállításokat ebben a sorrendben alkalmazza (a későbbi felülírja a 
 ## 🔐 Biztonsági legjobb gyakorlatok
 
 ```bash
-# Használjon felügyelt identitást (ajánlott)
+# Használjon kezelt identitást (ajánlott)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
 # Ellenőrizze az AZD hitelesítési állapotát
 azd auth status
 
-# Opcionális: ellenőrizze az Azure CLI környezetét, ha az az parancsokat kíván futtatni
+# Opcionális: az Azure CLI kontextus ellenőrzése, ha az az parancsokat tervezi futtatni
 az account show
 
-# Ha szükséges, jelentkezzen be újra
+# Szükség esetén újra hitelesítse magát
 azd auth login
 
 # Opcionális: frissítse az Azure CLI hitelesítést az az parancsokhoz
@@ -86,12 +86,12 @@ az login
 
 | Irány | Fejezet |
 |-----------|---------|
-| **Előző** | [2. fejezet: AI fejlesztés](../chapter-02-ai-development/README.md) |
-| **Következő** | [4. fejezet: Infrastruktúra](../chapter-04-infrastructure/README.md) |
+| **Előző** | [2. Fejezet: AI fejlesztés](../chapter-02-ai-development/README.md) |
+| **Következő** | [4. Fejezet: Infrastruktúra](../chapter-04-infrastructure/README.md) |
 
 ---
 
-## 📖 Kapcsolódó anyagok
+## 📖 Kapcsolódó források
 
 - [Telepítés előtti ellenőrzések](../chapter-06-pre-deployment/README.md)
 - [Hibaelhárítás](../chapter-07-troubleshooting/common-issues.md)
@@ -99,6 +99,6 @@ az login
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Felelősség kizárása**:  
-Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások tartalmazhatnak hibákat vagy pontatlanságokat. Az eredeti dokumentum az anyanyelvén tekintendő hivatalos forrásnak. Kritikus információk esetén szakmai, emberi fordítást javaslunk. Nem vállalunk felelősséget az ebből a fordításból eredő félreértésekért vagy félreértelmezésekért.
+**Jogi nyilatkozat**:
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Fontos információk esetén professzionális emberi fordítást javasolunk. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely ebből a fordításból ered.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

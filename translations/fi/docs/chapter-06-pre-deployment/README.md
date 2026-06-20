@@ -1,35 +1,35 @@
-# Luku 6: Käyttöönottoa edeltävä suunnittelu & validointi
+# Luku 6: Käyttöönottoa edeltävä suunnittelu ja validointi
 
-**📚 Kurssi**: [AZD For Beginners](../../README.md) | **⏱️ Kesto**: 1 tunti | **⭐ Vaikeustaso**: Keskitaso
+**📚 Kurssi**: [AZD Aloittelijoille](../../README.md) | **⏱️ Kesto**: 1 tunti | **⭐ Vaikeustaso**: Keskitaso
 
 ---
 
 ## Yleiskatsaus
 
-Tässä luvussa käsitellään olennaisia suunnittelu- ja validointivaiheita ennen sovelluksesi käyttöönottoa. Opi välttämään kalliita virheitä oikealla kapasiteettisuunnittelulla, SKU-valinnoilla ja esitarkastuksilla.
+Tässä luvussa käsitellään olennaiset suunnittelu- ja validointivaiheet ennen sovelluksen käyttöönottoa. Opit välttämään kalliita virheitä oikealla kapasiteettisuunnittelulla, SKU-valinnoilla ja esitarkistuksilla.
 
-> Vahvistettu `azd 1.23.12` maaliskuussa 2026.
+> Vahvistettu `azd 1.25.6`:lla kesäkuussa 2026.
 
 ## Oppimistavoitteet
 
-Kun olet suorittanut tämän luvun, osaat:
-- Suorittaa esitarkastukset ennen käyttöönottoa
-- Suunnitella kapasiteetin ja arvioida resurssivaatimuksia
-- Valita sopivat SKU:t kustannusten optimointiin
-- Konfiguroida Application Insightsin valvontaa varten
-- Ymmärtää tiimin koordinointimalleja
+Suoritettuasi tämän luvun osaat:
+- Suorittaa esitarkistuksia ennen käyttöönottoa
+- Suunnitella kapasiteetin ja arvioida resurssitarpeet
+- Valita sopivat SKU:t kustannusten optimoimiseksi
+- Konfiguroida Application Insightsin seuranta varten
+- Ymmärtää tiimikoordinaation käytänteitä
 
 ---
 
 ## 📚 Oppitunnit
 
-| # | Oppitunti | Kuvaus | Aika |
+| # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [Esitarkistukset](preflight-checks.md) | Varmista kokoonpano ennen käyttöönottoa | 15 min |
-| 2 | [Kapasiteetin suunnittelu](capacity-planning.md) | Arvioi resurssivaatimukset | 20 min |
-| 3 | [SKU-valinta](sku-selection.md) | Valitse sopivat hintatasot | 15 min |
-| 4 | [Application Insights](application-insights.md) | Määritä valvonta | 20 min |
-| 5 | [Koordinointimallit](coordination-patterns.md) | Tiimin käyttöönotto‑työnkulut | 15 min |
+| 1 | [Preflight Checks](preflight-checks.md) | Validate configuration before deployment | 15 min |
+| 2 | [Capacity Planning](capacity-planning.md) | Estimate resource requirements | 20 min |
+| 3 | [SKU Selection](sku-selection.md) | Choose appropriate pricing tiers | 15 min |
+| 4 | [Application Insights](application-insights.md) | Configure monitoring | 20 min |
+| 5 | [Coordination Patterns](coordination-patterns.md) | Team deployment workflows | 15 min |
 
 ---
 
@@ -45,7 +45,7 @@ azd provision --preview
 # Tarkista Bicep-syntaksi
 az bicep build --file infra/main.bicep
 
-# Tarkista ympäristön konfiguraatio
+# Tarkista ympäristöasetukset
 azd env get-values
 ```
 
@@ -59,14 +59,14 @@ azd env get-values
 - [ ] SKU:t valittu asianmukaisesti
 - [ ] Kustannusarvio tarkistettu
 - [ ] Nimeämiskäytäntö yhdenmukainen
-- [ ] Suojaus/RBAC määritetty
+- [ ] Suojaus/RBAC konfiguroitu
 
 ### Ennen `azd deploy`
 
 - [ ] Ympäristömuuttujat asetettu
 - [ ] Salaisuudet Key Vaultissa
-- [ ] Yhteysmerkkijonot varmennettu
-- [ ] Terveystarkastukset määritetty
+- [ ] Yhteysmerkkijonot tarkistettu
+- [ ] Terveystarkastukset konfiguroitu
 
 ---
 
@@ -85,20 +85,20 @@ azd env get-values
 
 | Suunta | Luku |
 |-----------|---------|
-| **Edellinen** | [Luku 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
+| **Edellinen** | [Luku 5: Moniagentti](../chapter-05-multi-agent/README.md) |
 | **Seuraava** | [Luku 7: Vianmääritys](../chapter-07-troubleshooting/README.md) |
 
 ---
 
 ## 📖 Aiheeseen liittyvät resurssit
 
-- [Konfiguraatio-opas](../chapter-03-configuration/configuration.md)
+- [Konfigurointiopas](../chapter-03-configuration/configuration.md)
 - [Käyttöönotto-opas](../chapter-04-infrastructure/deployment-guide.md)
-- [Yleisiä ongelmia](../chapter-07-troubleshooting/common-issues.md)
+- [Yleiset ongelmat](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastuuvapauslauseke**:
-Tämä asiakirja on käännetty tekoälypohjaisella käännöspalvelulla [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, ota huomioon, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tästä käännöksestä aiheutuvista väärinymmärryksistä tai virhetulkinnoista.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, otathan huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäiskielellä on virallinen lähde. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,22 +1,22 @@
 # ਅਧਿਆਇ 2: ਏਆਈ-ਪਹਿਲਾ ਵਿਕਾਸ
 
-**📚 ਕੋਰਸ**: [AZD For Beginners](../../README.md) | **⏱️ ਸਮਾਂ**: 1-2 ਘੰਟੇ | **⭐ ਜਟਿਲਤਾ**: ਮੱਧਮ
+**📚 Course**: [AZD ਸ਼ੁਰੂਆਤੀਆਂ ਲਈ](../../README.md) | **⏱️ Duration**: 1-2 hours | **⭐ Complexity**: Intermediate
 
 ---
 
-## ਸਰਵੇਖਣ
+## ਸਾਰ
 
-ਇਸ ਅਧਿਆਇ ਦਾ ਧਿਆਨ Azure Developer CLI ਅਤੇ Microsoft Foundry ਸੇਵਾਵਾਂ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਏਆਈ-ਸੰਚਾਲਿਤ ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਤੈਨਾਤ ਕਰਨ 'ਤੇ ਹੈ। ਸਧਾਰਨ ਏਆਈ ਚੈਟ ਐਪ ਤੋਂ ਲੈ ਕੇ ਟੂਲਜ਼ ਵਾਲੇ ਬੁੱਧੀਮਾਨ ਏਜੰਟ ਤੱਕ।
+ਇਹ ਅਧਿਆਇ Azure Developer CLI ਅਤੇ Microsoft Foundry ਸੇਵਾਵਾਂ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਏਆਈ-ਸੰਚਾਲਿਤ ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਡਿਪਲੋਇ ਕਰਨ 'ਤੇ ਧਿਆਨ ਕੇਂਦ੍ਰਿਤ ਕਰਦਾ ਹੈ। ਸਾਦੇ ਏਆਈ ਚੈਟ ਐਪਸ ਤੋਂ ਲੈ ਕੇ ਟੂਲਾਂ ਵਾਲੇ ਸਿਆਣੇ ਏਜੰਟਾਂ ਤੱਕ।
 
-> **ਤਸਦੀਕ ਨੋਟ (2026-03-25):** The command flow and extension guidance in this chapter were reviewed against `azd` `1.23.12` and the current preview AI agent extension release `azure.ai.agents` `0.1.18-preview`. If you are on an older AZD build, update first and then continue with the exercises.
+> **ਮਨਜ਼ੂਰੀ ਨੋਟ (2026-06-15):** The command flow and extension guidance in this chapter were reviewed against `azd` `1.25.6` and the current preview AI agent extension release `azure.ai.agents` `0.1.40-preview`. If you are on an older AZD build, update first and then continue with the exercises.
 
-## ਸਿੱਖਣ ਦੇ ਉਦੇਸ਼
+## ਸਿੱਖਣ ਦੇ ਉਦੇਸ਼
 
 By completing this chapter, you will:
-- Pre-built AZD ਟੈਂਪਲੇਟਾਂ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਏਆਈ ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਤੈਨਾਤ ਕਰੋ
-- AZD ਨਾਲ Microsoft Foundry ਦੇ ਇੰਟੀਗ੍ਰੇਸ਼ਨ ਨੂੰ ਸਮਝੋ
-- ਟੂਲਜ਼ ਦੇ ਨਾਲ ਏਆਈ ਏਜੰਟਾਂ ਨੂੰ ਸੰਰਚਿਤ ਅਤੇ ਕਸਟਮਾਈਜ਼ ਕਰੋ
-- RAG (Retrieval-Augmented Generation) ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਤੈਨਾਤ ਕਰੋ
+- ਪ੍ਰੀ-ਬਿਲਟ AZD ਟੈਮਪਲੇਟਸ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਏਆਈ ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਡਿਪਲੋਇ ਕਰੋ
+- AZD ਨਾਲ Microsoft Foundry ਇੰਟਿਗ੍ਰੇਸ਼ਨ ਨੂੰ ਸਮਝੋ
+- ਟੂਲਾਂ ਨਾਲ ਏਆਈ ਏਜੰਟਾਂ ਨੂੰ ਕੰਫਿਗਰ ਅਤੇ ਕਸਟਮਾਈਜ਼ ਕਰੋ
+- RAG (ਰੀਟਰੀਵਲ-ਅਗਮੈਂਟਡ ਜਨਰੇਸ਼ਨ) ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਡਿਪਲੋਇ ਕਰੋ
 
 ---
 
@@ -24,21 +24,21 @@ By completing this chapter, you will:
 
 | # | ਪਾਠ | ਵਰਣਨ | ਸਮਾਂ |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | AZD ਨੂੰ Foundry ਸੇਵਾਵਾਂ ਨਾਲ ਜੋੜੋ | 30 ਮਿੰਟ |
-| 2 | [AI Agents Guide](agents.md) | ਟੂਲਜ਼ ਨਾਲ ਬੁੱਧੀਮਾਨ ਏਜੰਟ ਤੈਨਾਤ ਕਰੋ | 45 ਮਿੰਟ |
-| 3 | [AI Model Deployment](ai-model-deployment.md) | AI ਮਾਡਲਾਂ ਨੂੰ ਤੈਨਾਤ ਅਤੇ ਸੰਰਚਿਤ ਕਰੋ | 30 ਮਿੰਟ |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | ਹੈਂਡਸ-ਆਨ: ਆਪਣਾ AI ਹੱਲ AZD-ਤਿਆਰ ਬਣਾਓ | 60 ਮਿੰਟ |
+| 1 | [Microsoft Foundry ਇੰਟਿਗ੍ਰੇਸ਼ਨ](microsoft-foundry-integration.md) | AZD ਨੂੰ Foundry ਸੇਵਾਵਾਂ ਨਾਲ ਜੋੜੋ | 30 ਮਿੰਟ |
+| 2 | [ਏਆਈ ਏਜੰਟਾਂ ਗਾਈਡ](agents.md) | ਟੂਲਾਂ ਨਾਲ ਸਿਆਣੇ ਏਜੰਟ ਡਿਪਲੋਇ ਕਰੋ | 45 ਮਿੰਟ |
+| 3 | [AI ਮਾਡਲ ਡਿਪਲੋਇਮੈਂਟ](ai-model-deployment.md) | ਏਆਈ ਮਾਡਲਾਂ ਨੂੰ ਡਿਪਲੋਇ ਅਤੇ ਕੰਫਿਗਰ ਕਰੋ | 30 ਮਿੰਟ |
+| 4 | [AI ਵਰਕਸ਼ਾਪ ਲੈਬ](ai-workshop-lab.md) | ਹੱਥ-ਵਰਕ: ਆਪਣੇ ਏਆਈ ਹੱਲ ਨੂੰ AZD-ਤਿਆਰ ਬਣਾਓ | 60 ਮਿੰਟ |
 
 ---
 
-## 🚀 ਤੁਰੰਤ ਸ਼ੁਰੂਆਤ
+## 🚀 ਤੇਜ਼ ਸ਼ੁਰੂਆਤ
 
 ```bash
 # ਵਿਕਲਪ 1: RAG ਚੈਟ ਐਪਲੀਕੇਸ਼ਨ
 azd init --template azure-search-openai-demo
 azd up
 
-# ਵਿਕਲਪ 2: ਕ੍ਰਿਤ੍ਰਿਮ ਬੁੱਧੀ ਏਜੰਟਾਂ
+# ਵਿਕਲਪ 2: AI ਏਜੰਟਸ
 azd init --template get-started-with-ai-agents
 azd up
 
@@ -49,29 +49,29 @@ azd up
 
 ---
 
-## 🤖 ਵਿਸ਼ੇਸ਼ AI ਟੈਂਪਲੇਟ
+## 🤖 ਫੀਚਰਡ AI ਟੈਮਪਲੇਟ
 
 | ਟੈਮਪਲੇਟ | ਵਰਣਨ | ਸੇਵਾਵਾਂ |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ਉਲਲੇਖਾਂ ਨਾਲ RAG ਚੈਟ | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ਟੂਲਜ਼ ਨਾਲ AI ਏਜੰਟ | AI Agent Service |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | ਮੁੱਢਲਾ AI ਚੈਟ | OpenAI + Container Apps |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ਹਵਾਲਿਆਂ ਨਾਲ RAG ਚੈਟ | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ਟੂਲਾਂ ਨਾਲ ਏਆਈ ਏਜੰਟ | AI Agent Service |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | ਬੁਨਿਆਦੀ ਏਆਈ ਚੈਟ | OpenAI + Container Apps |
 
 ---
 
-## 💰 ਲਾਗਤ ਬਾਰੇ ਜਾਣਕਾਰੀ
+## 💰 ਲਾਗਤ ਸੂਝਬੂਝ
 
-| ਵਾਤਾਵਰਣ | ਅੰਦਾਜ਼ਤੀ ਮਹੀਨਾਵਾਰ ਲਾਗਤ |
+| ਮਾਹੌਲ | ਅਨੁਮਾਨਤ ਮਹੀਨਾਵਾਰ ਲਾਗਤ |
 |-------------|----------------------|
-| ਡਿਵੈਲਪਮੈਂਟ | $80-150 |
-| ਸਟੇਜਿੰਗ | $150-300 |
-| ਉਤਪਾਦਨ | $300-3,500+ |
+| Development | $80-150 |
+| Staging | $150-300 |
+| Production | $300-3,500+ |
 
-**ਸਲਾਹ:** ਟੈਸਟ ਕਰਨ ਤੋਂ ਬਾਅਦ ਖਰਚਾਂ ਤੋਂ ਬਚਣ ਲਈ `azd down` ਚਲਾਓ।
+**ਸੁਝਾਅ:** ਟੈਸਟ ਕਰਨ ਮਗਰੋਂ ਖਰਚ ਤੋਂ ਬਚਣ ਲਈ `azd down` ਚਲਾਓ।
 
 ---
 
-## 🔗 ਨੈਵੀਗੇਸ਼ਨ
+## 🔗 ਨੈਵੀਗੇਸ਼ਨ
 
 | ਦਿਸ਼ਾ | ਅਧਿਆਇ |
 |-----------|---------|
@@ -81,15 +81,15 @@ azd up
 
 ---
 
-## 📖 ਸੰਬੰਧਤ ਸਰੋਤ
+## 📖 ਸੰਬੰਧਿਤ ਸਰੋਤ
 
-- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Production AI Practices](../chapter-08-production/production-ai-practices.md)
+- [AI ਸਮੱਸਿਆ-ਨਿਵਾਰਣ](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [ਪ੍ਰੋਡਕਸ਼ਨ ਏਆਈ ਅਭਿਆਸ](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-ਇਹ ਦਸਤਾਵੇਜ਼ AI ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਅਸੀਂ ਸ਼ੁੱਧਤਾ ਲਈ ਯਤਨਸ਼ੀਲ ਹਾਂ, ਪਰ ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਰੱਖੋ ਕਿ ਸਵੈਚਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਤਰੁਟੀਆਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਆਪਣੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਧਿਕਾਰਕ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਜਰੂਰੀ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੀ ਵਰਤੋਂ ਨਾਲ ਹੋਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫਹਮੀ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆ ਲਈ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
+**ਅਸਵੀਕਾਰੋਪਣ**:
+ਇਸ ਦਸਤਾਵੇਜ਼ ਦਾ ਅਨੁਵਾਦ ਏਆਈ ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸਹੀਤਾਵਾਂ ਲਈ ਯਤਨਸ਼ੀਲ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਰੱਖੋ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸਮੱਤਿਆਵਾਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਆਪਣੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਧਿਕਾਰਕ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਜਰੂਰੀ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੇ ਉਪਯੋਗ ਤੋਂ ਪੈਦਾ ਹੋਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀਆਂ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆਵਾਂ ਲਈ ਜਵਾਬਦੇਹ ਨਹੀਂ ਹਾਂ।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

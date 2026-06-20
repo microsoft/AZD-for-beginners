@@ -1,14 +1,14 @@
-# Chapter 3: Konfigurasi & Pengesahan
+# Bab 3: Konfigurasi & Pengesahan
 
-**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 45-60 minit | **⭐ Tahap Kesukaran**: Sederhana
+**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 45-60 minit | **⭐ Kerumitan**: Sederhana
 
 ---
 
 ## Gambaran Keseluruhan
 
-Bab ini merangkumi konfigurasi persekitaran, corak pengesahan, dan amalan terbaik keselamatan untuk penempatan Azure Developer CLI.
+Bab ini merangkumi konfigurasi persekitaran, corak pengesahan, dan amalan terbaik keselamatan untuk pelaksanaan Azure Developer CLI.
 
-> Disahkan terhadap `azd 1.23.12` pada Mac 2026.
+> Disahkan dengan `azd 1.25.6` pada Jun 2026.
 
 ## Objektif Pembelajaran
 
@@ -29,7 +29,7 @@ Dengan menamatkan bab ini, anda akan:
 
 ---
 
-## 🚀 Mula Dengan Cepat
+## 🚀 Mula Cepat
 
 ```bash
 # Cipta pelbagai persekitaran
@@ -52,7 +52,7 @@ azd env get-values
 
 ## 🔧 Hierarki Konfigurasi
 
-AZD menggunakan tetapan dalam susunan ini (yang kemudian menggantikan yang sebelumnya):
+AZD melaksanakan tetapan mengikut susunan ini (yang kemudian menggantikan yang sebelumnya):
 
 1. **Nilai lalai** (terbina dalam templat)
 2. **azure.yaml** (konfigurasi projek)
@@ -64,16 +64,16 @@ AZD menggunakan tetapan dalam susunan ini (yang kemudian menggantikan yang sebel
 ## 🔐 Amalan Terbaik Keselamatan
 
 ```bash
-# Gunakan identiti terurus (disyorkan)
+# Gunakan identiti yang diurus (disyorkan)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
 # Semak status pengesahan AZD
 azd auth status
 
-# Pilihan: sahkan konteks Azure CLI jika anda bercadang untuk menjalankan arahan az
+# Pilihan: sahkan konteks Azure CLI jika anda merancang untuk menjalankan arahan az
 az account show
 
-# Sahkan semula jika perlu
+# Autentikasi semula jika perlu
 azd auth login
 
 # Pilihan: segarkan pengesahan Azure CLI untuk arahan az
@@ -86,19 +86,19 @@ az login
 
 | Arah | Bab |
 |-------|-----|
-| **Sebelumnya** | [Bab 2: Pembangunan AI](../chapter-02-ai-development/README.md) |
+| **Sebelum** | [Bab 2: Pembangunan AI](../chapter-02-ai-development/README.md) |
 | **Seterusnya** | [Bab 4: Infrastruktur](../chapter-04-infrastructure/README.md) |
 
 ---
 
 ## 📖 Sumber Berkaitan
 
-- [Pemeriksaan Pra-Penyelewengan](../chapter-06-pre-deployment/README.md)
+- [Pemeriksaan Pra-Pelaksanaan](../chapter-06-pre-deployment/README.md)
 - [Penyelesaian Masalah](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk memastikan ketepatan, sila maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat kritikal, terjemahan profesional oleh manusia adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau tafsiran yang salah yang timbul daripada penggunaan terjemahan ini.
+**Penafian**:
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan oleh manusia profesional adalah disyorkan. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

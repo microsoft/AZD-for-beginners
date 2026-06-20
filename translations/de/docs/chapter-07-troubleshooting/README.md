@@ -1,22 +1,22 @@
 # Kapitel 7: Fehlerbehebung & Debugging
 
-**📚 Kurs**: [AZD Für Anfänger](../../README.md) | **⏱️ Dauer**: 1–1,5 Stunden | **⭐ Komplexität**: Mittel
+**📚 Kurs**: [AZD für Einsteiger](../../README.md) | **⏱️ Dauer**: 1–1,5 Stunden | **⭐ Komplexität**: Mittel
 
 ---
 
-## Überblick
+## Übersicht
 
-Dieses Kapitel hilft Ihnen, häufige Probleme bei der Arbeit mit der Azure Developer CLI zu diagnostizieren und zu beheben. Von Bereitstellungsfehlern bis hin zu KI-spezifischen Problemen.
+Dieses Kapitel hilft Ihnen, häufige Probleme bei der Arbeit mit Azure Developer CLI zu diagnostizieren und zu beheben. Von Bereitstellungsfehlern bis hin zu AI-spezifischen Problemen.
 
-> Validiert gegen `azd 1.23.12` im März 2026.
+> Validiert gegen `azd 1.25.6` im Juni 2026.
 
 ## Lernziele
 
-Durch das Abschließen dieses Kapitels werden Sie:
+Nach Abschluss dieses Kapitels können Sie:
 - Häufige AZD-Bereitstellungsfehler diagnostizieren
 - Authentifizierungs- und Berechtigungsprobleme debuggen
-- Konnektivitätsprobleme mit KI-Diensten lösen
-- Portal und CLI von Azure für die Fehlersuche verwenden
+- Verbindungsprobleme mit AI-Diensten beheben
+- Azure-Portal und CLI für die Fehlerbehebung verwenden
 
 ---
 
@@ -24,20 +24,20 @@ Durch das Abschließen dieses Kapitels werden Sie:
 
 | # | Lektion | Beschreibung | Zeit |
 |---|--------|-------------|------|
-| 1 | [Häufige Probleme](common-issues.md) | Häufig auftretende Probleme | 30 Min |
-| 2 | [Debugging-Leitfaden](debugging.md) | Schritt-für-Schritt-Fehlersuchstrategien | 45 Min |
-| 3 | [KI-Fehlerbehebung](ai-troubleshooting.md) | KI-spezifische Probleme | 30 Min |
+| 1 | [Common Issues](common-issues.md) | Häufig auftretende Probleme | 30 Min |
+| 2 | [Debugging Guide](debugging.md) | Schritt-für-Schritt-Debugging-Strategien | 45 Min |
+| 3 | [AI Troubleshooting](ai-troubleshooting.md) | AI-spezifische Probleme | 30 Min |
 
 ---
 
-## 🚨 Schnelllösungen
+## 🚨 Schnelle Lösungen
 
 ### Authentifizierungsprobleme
 ```bash
 # Erforderlich für AZD-Workflows
 azd auth login
 
-# Optional, wenn Sie auch Azure CLI-Befehle direkt verwenden
+# Optional, wenn Sie auch Azure-CLI-Befehle direkt verwenden
 az login
 
 azd auth status
@@ -71,8 +71,8 @@ azd up
 | Fehler | Ursache | Lösung |
 |-------|-------|----------|
 | `AuthenticationError` | Nicht angemeldet | `azd auth login` |
-| `ResourceNotFound` | Fehlende Ressource | Überprüfen Sie die Ressourcennamen |
-| `QuotaExceeded` | Abonnementlimits | Erhöhung des Kontingents anfordern |
+| `ResourceNotFound` | Ressource fehlt | Ressourcennamen überprüfen |
+| `QuotaExceeded` | Beschränkungen des Abonnements | Erhöhung des Kontingents anfordern |
 | `InvalidTemplate` | Bicep-Syntaxfehler | `az bicep build` |
 | `Conflict` | Ressource existiert | Neuen Namen verwenden oder löschen |
 | `Forbidden` | Unzureichende Berechtigungen | RBAC-Rollen überprüfen |
@@ -82,10 +82,10 @@ azd up
 ## 🔄 Zurücksetzen und Wiederherstellung
 
 ```bash
-# Soft-Reset (Ressourcen behalten, Code neu bereitstellen)
+# Soft-Reset (Ressourcen beibehalten, Code neu bereitstellen)
 azd deploy --force
 
-# Hard-Reset (alles löschen, von vorn beginnen)
+# Hard-Reset (alles löschen, von vorne beginnen)
 azd down --force --purge
 azd up
 ```
@@ -94,7 +94,7 @@ azd up
 
 ## 🔗 Navigation
 
-| Direction | Chapter |
+| Richtung | Kapitel |
 |-----------|---------|
 | **Previous** | [Kapitel 6: Vorbereitungen vor der Bereitstellung](../chapter-06-pre-deployment/README.md) |
 | **Next** | [Kapitel 8: Produktion](../chapter-08-production/README.md) |
@@ -110,6 +110,6 @@ azd up
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, sollten Sie beachten, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Ursprungssprache ist als maßgebliche Quelle zu betrachten. Bei kritischen Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Verwendung dieser Übersetzung entstehen.
+**Haftungsausschluss**:
+Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Ursprungssprache gilt als maßgebliche Quelle. Bei kritischen Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Verwendung dieser Übersetzung entstehen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

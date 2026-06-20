@@ -1,20 +1,20 @@
-# Hoofdstuk 6: Pre-implementatieplanning & Validatie
+# Hoofdstuk 6: Pre-deploymentplanning & validatie
 
-**📚 Cursus**: [AZD voor Beginners](../../README.md) | **⏱️ Duur**: 1 uur | **⭐ Moeilijkheid**: Gemiddeld
+**📚 Cursus**: [AZD For Beginners](../../README.md) | **⏱️ Duur**: 1 uur | **⭐ Complexiteit**: Gemiddeld
 
 ---
 
 ## Overzicht
 
-Dit hoofdstuk behandelt essentiële plannings- en validatiestappen voordat je je applicatie implementeert. Leer hoe je kostbare fouten voorkomt met juiste capaciteitsplanning, SKU-selectie en preflight-controles.
+Dit hoofdstuk behandelt essentiële plannings- en validatiestappen voordat u uw applicatie implementeert. Leer kostbare fouten te vermijden met juiste capaciteitsplanning, SKU-selectie en preflightcontroles.
 
-> Gevalideerd tegen `azd 1.23.12` in maart 2026.
+> Gevalideerd tegen `azd 1.25.6` in juni 2026.
 
 ## Leerdoelen
 
-Door dit hoofdstuk te voltooien, zul je:
-- Preflight-controles uitvoeren vóór implementatie
-- Capaciteit plannen en resourcevereisten schatten
+Door dit hoofdstuk te voltooien zult u:
+- Preflightcontroles uitvoeren vóór implementatie
+- Capaciteit plannen en benodigde resources inschatten
 - Geschikte SKUs selecteren voor kostenoptimalisatie
 - Application Insights configureren voor monitoring
 - Patronen voor teamcoördinatie begrijpen
@@ -24,16 +24,16 @@ Door dit hoofdstuk te voltooien, zul je:
 ## 📚 Lessen
 
 | # | Les | Beschrijving | Tijd |
-|---|-----|--------------|------|
-| 1 | [Preflight-controles](preflight-checks.md) | Controleer de configuratie vóór implementatie | 15 min |
+|---|--------|-------------|------|
+| 1 | [Preflightcontroles](preflight-checks.md) | Valideer configuratie vóór implementatie | 15 min |
 | 2 | [Capaciteitsplanning](capacity-planning.md) | Schat resourcevereisten | 20 min |
 | 3 | [SKU-selectie](sku-selection.md) | Kies geschikte prijsniveaus | 15 min |
 | 4 | [Application Insights](application-insights.md) | Configureer monitoring | 20 min |
-| 5 | [Coördinatiepatronen](coordination-patterns.md) | Implementatieworkflows voor teams | 15 min |
+| 5 | [Coördinatiepatronen](coordination-patterns.md) | Workflows voor teamimplementatie | 15 min |
 
 ---
 
-## 🚀 Snel aan de slag
+## 🚀 Snelstart
 
 ```bash
 # Controleer abonnementsquota
@@ -51,13 +51,13 @@ azd env get-values
 
 ---
 
-## ☑️ Pre-implementatiechecklist
+## ☑️ Controlelijst vóór implementatie
 
 ### Voor `azd provision`
 
-- [ ] Quota gecontroleerd voor regio
+- [ ] Quota geverifieerd voor regio
 - [ ] SKUs correct geselecteerd
-- [ ] Kostenraming beoordeeld
+- [ ] Kostenschatting beoordeeld
 - [ ] Naamgevingsconventie consistent
 - [ ] Beveiliging/RBAC geconfigureerd
 
@@ -72,8 +72,8 @@ azd env get-values
 
 ## 💰 SKU-selectiegids
 
-| Werklast | Ontwikkeling | Productie |
-|----------|--------------|-----------|
+| Workload | Ontwikkeling | Productie |
+|----------|-------------|------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
 | Microsoft Foundry Models | Standard | Standard + PTU |
@@ -84,7 +84,7 @@ azd env get-values
 ## 🔗 Navigatie
 
 | Richting | Hoofdstuk |
-|----------|-----------|
+|-----------|---------|
 | **Vorige** | [Hoofdstuk 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
 | **Volgende** | [Hoofdstuk 7: Probleemoplossing](../chapter-07-troubleshooting/README.md) |
 
@@ -100,5 +100,5 @@ azd env get-values
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we naar nauwkeurigheid streven, wees ervan bewust dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de oorspronkelijke taal moet als de gezaghebbende bron worden beschouwd. Voor kritieke informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI vertaaldienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

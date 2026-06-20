@@ -1,76 +1,79 @@
-# ਅਧਿਆਇ 5: ਬਹੁ-ਏਜੰਟ ਏਆਈ ਸਮਾਧਾਨ
+# ਅਧਿਆਇ 5: ਮਲਟੀ-ਏਜੰਟ ਏਆਈ ਸਮਾਧਾਨ
 
-**📚 ਕੋਰਸ**: [AZD ਸ਼ੁਰੂਆਤੀਆਂ ਲਈ](../../README.md) | **⏱️ ਸਮਾਂ**: 2-3 ਘੰਟੇ | **⭐ ਕਠਿਨਾਈ**: ਉੱਚ
+**📚 ਕੋਰਸ**: [AZD ਸ਼ੁਰੂਆਤੀਆਂ ਲਈ](../../README.md) | **⏱️ ਅਵਧੀ**: 2-3 ਘੰਟੇ | **⭐ ਜਟਿਲਤਾ**: ਉੱਨਤ
 
 ---
 
-## ਜਾਇਜ਼ਾ
+## ਵੇਰਵਾ
 
-ਇਸ ਅਧਿਆਇ ਵਿੱਚ ਉੱਨਤ ਬਹੁ-ਏਜੰਟ ਆਰਕੀਟੈਕਚਰ ਪੈਟਰਨ, ਏਜੰਟ ਔਰਕੈਸਟ੍ਰੇਸ਼ਨ, ਅਤੇ ਜਟਿਲ ਸਥਿਤੀਆਂ ਲਈ ਪ੍ਰੋਡਕਸ਼ਨ-ਰੇਡੀ ਏਆਈ ਡਿਪਲੋਇਮੈਂਟ ਦਿੱਤੇ ਗਏ ਹਨ।
+This chapter covers advanced multi-agent architecture patterns, agent orchestration, and production-ready AI deployments for complex scenarios.
 
-> `azd 1.23.12` ਦੇ ਖਿਲਾਫ ਮਾਰਚ 2026 ਵਿੱਚ ਪੁਸ਼ਟੀ ਕੀਤੀ ਗਈ।
+> ਜੂਨ 2026 ਵਿੱਚ `azd 1.25.6` ਦੇ ਖਿਲਾਫ ਵੈਰੀਫਾਈ ਕੀਤਾ ਗਿਆ।
 
 ## ਸਿੱਖਣ ਦੇ ਉਦੇਸ਼
 
-ਇਸ ਅਧਿਆਇ ਨੂੰ ਪੂਰਾ ਕਰਨ ਤੋਂ ਬਾਦ, ਤੁਸੀਂ:
-- ਬਹੁ-ਏਜੰਟ ਆਰਕੀਟੈਕਚਰ ਪੈਟਰਨ ਨੂੰ ਸਮਝੋਗੇ
-- ਸਮਨ੍ਵੀ ਏਜੰਟ ਸਿਸਟਮ ਤੈਅਨਾਤ ਕਰੋਗੇ
-- ਏਜੰਟ-ਤੋਂ-ਏਜੰਟ ਸੰਚਾਰ ਲਾਗੂ ਕਰੋਗੇ
-- ਪ੍ਰੋਡਕਸ਼ਨ-ਰੇਡੀ ਬਹੁ-ਏਜੰਟ ਸਮਾਧਾਨ ਬਣਾਉਗੇ
+By completing this chapter, you will:
+- ਸਮਝੋ ਮਲਟੀ-ਏਜੰਟ ਆਰਕੀਟੈਕਚਰ ਪੈਟਰਨ
+- ਤਾਇਨਾਤ ਕਰੋ ਸਮਨ્વਿਤ ਏਆਈ ਏਜੰਟ ਸਿਸਟਮ
+- ਲਾਗੂ ਕਰੋ ਏਜੰਟ-ਤੋਂ-ਏਜੰਟ ਸੰਚਾਰ
+- ਬਣਾਓ ਉਤਪਾਦਨ-ਤਈ ਤਿਆਰ ਮਲਟੀ-ਏਜੰਟ ਸਮਾਧਾਨ
 
 ---
 
-## 📚 ਸਬਕ
+## 📚 ਪਾਠ
 
-| # | ਸਬਕ | ਵੇਰਵਾ | ਸਮਾਂ |
+| # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [ਰੀਟੇਲ ਮਲਟੀ-ਏਜੰਟ ਸਮਾਧਾਨ](../../examples/retail-scenario.md) | ਪੂਰੀ ਤਰ੍ਹਾਂ ਲਾਗੂ ਕਰਨ ਦੀ ਰਾਹਦਰਸ਼ਨ | 90 min |
-| 2 | [ਸਮਨ੍ਵੀ ਪੈਟਰਨ](../chapter-06-pre-deployment/coordination-patterns.md) | ਏਜੰਟ ਸਮਨਵੇਂ ਰਣਨੀਤੀਆਂ | 30 min |
-| 3 | [ARM ਟੈਮਪਲੇਟ ਡਿਪਲੋਇਮੈਂਟ](../../examples/retail-multiagent-arm-template/README.md) | ਇੱਕ-ਕਲਿੱਕ ਤैनਾਤੀ | 30 min |
+| 1 | [Multi-Agent Basics](multi-agent-basics.md) | Hands-on: deploy a working multi-agent app with `azd up` | 45 ਮਿੰਟ |
+| 2 | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) | ਏਜੰਟ ਆਰਕੀਸਟ੍ਰੇਸ਼ਨ ਰਣਨੀਤੀਆਂ (ਅਧਿਆਇ 6 ਵਿੱਚ ਜਾਰੀ) | 30 ਮਿੰਟ |
+| 3 | [ARM Template Deployment](../../examples/retail-multiagent-arm-template/README.md) | ਇੱਕ-ਕਲਿੱਕ ਤਾਇਨਾਤ ਉਦਾਹਰਣ | 30 ਮਿੰਟ |
+
+> **ਪਾਠ 1 ਨਾਲ ਸ਼ੁਰੂ ਕਰੋ।** ਇਹ ਇਸ ਅਧਿਆਇ ਦਾ ਇੱਕੋ ਹੀ ਪੂਰੀ ਤਰ੍ਹਾਂ ਹੈਂਡਸ-ਆਨ, ਤਾਇਨਾਤ ਕੀਤਿਆਂ ਯੋਗ ਪਾਠ ਹੈ। ਪਾਠ 2 ਅਧਿਆਇ 6 ਵਿੱਚ ਹੈ (ਇਹ ਪ੍ਰੀ-ਡਿਪਲਾਏਮੈਂਟ ਯੋਜਨਾ ਨਾਲ ਸਾਂਝਾ ਕੀਤਾ ਗਿਆ ਹੈ), ਅਤੇ [ਰਿਟੇਲ ਮਲਟੀ-ਏਜੰਟ ਸਮਾਧਾਨ](../../examples/retail-scenario.md) ਇੱਕ ਆਰਕੀਟੈਕਚਰ ਬਲੂਪ੍ਰਿੰਟ ਹੈ—ਡਿਜ਼ਾਇਨ ਸੰਦਰਭ, ਇੱਕ-ਕਮਾਂਡ ਟੈਂਪਲੇਟ ਨਹੀਂ।
 
 ---
 
-## 🚀 ਤੁਰੰਤ ਸ਼ੁਰੂਆਤ
+## 🚀 ਤੁਰੰਤ ਸ਼ੁਰੂਆਤ
 
 ```bash
-# ਚੋਣ 1: ਟੈਂਪਲੇਟ ਤੋਂ ਤੈਨਾਤ ਕਰੋ
+# ਵਿਕਲਪ 1: ਟੈਮਪਲੇਟ ਤੋਂ ਤੈਨਾਤ ਕਰੋ
 azd init --template agent-openai-python-prompty
 azd up
 
-# ਚੋਣ 2: ਏਜੰਟ ਮੈਨਿਫੈਸਟ ਤੋਂ ਤੈਨਾਤ ਕਰੋ (azure.ai.agents ਐਕਸਟੈਂਸ਼ਨ ਦੀ ਲੋੜ)
+# ਵਿਕਲਪ 2: ਏਜੈਂਟ ਮੈਨੀਫੈਸਟ ਤੋਂ ਤੈਨात ਕਰੋ (azure.ai.agents ਐਕਸਟੇਸ਼ਨ ਦੀ ਲੋੜ ਹੈ)
 azd extension install azure.ai.agents
 azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **ਕਿਹੜਾ ਰੁਖ?** ਵਰਕਿੰਗ ਸੈਂਪਲ ਤੋਂ ਸ਼ੁਰੂ ਕਰਨ ਲਈ `azd init --template` ਵਰਤੋ। ਜਦੋਂ ਤੁਹਾਡੇ ਕੋਲ ਆਪਣਾ ਏਜੰਟ ਮੈਨਿਫੈਸਟ ਹੋਵੇ ਤਾਂ `azd ai agent init` ਵਰਤੋ। ਪੂਰੀ ਜਾਣਕਾਰੀ ਲਈ ਵੇਖੋ [AZD ਏਆਈ CLI ਸੰਦਰਭ](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions)।
+> **ਕਿਹੜਾ ਤਰੀਕਾ?** Use `azd init --template` to start from a working sample. Use `azd ai agent init` when you have your own agent manifest. ਪੂਰੀ ਜਾਣਕਾਰੀ ਲਈ ਦੇਖੋ [AZD AI CLI ਸੰਦਰਭ](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions)।
 
 ---
 
-## 🤖 ਬਹੁ-ਏਜੰਟ ਆਰਕੀਟੈਕਚਰ
+## 🤖 ਮਲਟੀ-ਏਜੰਟ ਆਰਕੀਟੈਕਚਰ
 
 ```mermaid
 graph TD
-    Orchestrator[ਸੰਚਾਲਕ ਏਜੰਟ<br/>ਬੇਨਤੀਆਂ ਨੂੰ ਰੂਟ ਕਰਦਾ ਹੈ, ਵਰਕਫਲੋ ਦਾ ਪ੍ਰਬੰਧ ਕਰਦਾ ਹੈ] --> Customer[ਗਾਹਕ ਏਜੰਟ<br/>ਉਪਭੋਗਤਾ ਪੁੱਛਗਿੱਛ, ਪਸੰਦਾਂ]
-    Orchestrator --> Inventory[ਇਨਵੈਂਟਰੀ ਏਜੰਟ<br/>ਸਟਾਕ ਪੱਧਰ, ਆਰਡਰ]
+    Orchestrator[ਸੰਚਾਲਕ ਏਜੰਟ<br/>ਬੇਨਤੀਆਂ ਮਾਰਗ-ਨਿਰਦੇਸ਼ਿਤ ਕਰਦਾ, ਵਰਕਫਲੋ ਸੰਭਾਲਦਾ] --> Customer[ਗਾਹਕ ਏਜੰਟ<br/>ਉਪਭੋਗੀ ਦੇ ਪ੍ਰਸ਼ਨ, ਪਸੰਦਾਂ]
+    Orchestrator --> Inventory[ਇਨਵੈਂਟਰੀ ਏਜੰਟ<br/>ਸਟਾਕ ਦੀਆਂ ਸਤਰਾਂ, ਆਰਡਰ]
 ```
+
 ---
 
-## 🎯 ਵਿਸ਼ੇਸ਼ ਸਮਾਧਾਨ: ਰੀਟੇਲ ਮਲਟੀ-ਏਜੰਟ
+## 🎯 ਪ੍ਰਮੁੱਖ ਸਮਾਧਾਨ: ਰਿਟੇਲ ਮਲਟੀ-ਏਜੰਟ
 
-[ਰੀਟੇਲ ਮਲਟੀ-ਏਜੰਟ ਸਮਾਧਾਨ](../../examples/retail-scenario.md) ਦਰਸਾਉਂਦਾ ਹੈ:
+The [ਰਿਟੇਲ ਮਲਟੀ-ਏਜੰਟ ਸਮਾਧਾਨ](../../examples/retail-scenario.md) ਦਿਖਾਉਂਦਾ ਹੈ:
 
-- **ਗਾਹਕ ਏਜੰਟ**: ਉਪਭੋਗਤਾ ਇੰਟਰੇਕਸ਼ਨਾਂ ਅਤੇ ਪਸੰਦਾਂ ਨੂੰ ਸੰਭਾਲਦਾ ਹੈ
-- **ਇਨਵੈਂਟਰੀ ਏਜੰਟ**: ਸਟਾਕ ਅਤੇ ਆਰਡਰ ਪ੍ਰੋਸੈਸਿੰਗ ਦਾ ਪ੍ਰਬੰਧ ਕਰਦਾ ਹੈ
-- **ਆਰਕੈਸਟਰੇਟਰ**: ਏਜੰਟਾਂ ਦੇ ਵਿਚਕਾਰ ਤਾਲਮੇਲ ਕਰਦਾ ਹੈ
-- **ਸਾਂਝੀ ਮੈਮੋਰੀ**: ਕ੍ਰਾਸ-ਏਜੰਟ ਸੰਦਰਭ ਪ੍ਰਬੰਧ
+- **ਗਾਹਕ ਏਜੰਟ**: ਉਪਭੋਗਤਾ ਇੰਟਰੈਕਸ਼ਨ ਅਤੇ ਪਸੰਦ-ਨਾਪਸੰਦ ਸੰਭਾਲਦਾ ਹੈ
+- **ਇਨਵੈਂਟਰੀ ਏਜੰਟ**: ਸਟਾਕ ਅਤੇ ਆਰਡਰ ਪ੍ਰੋਸੈਸਿੰਗ ਪ੍ਰਬੰਧ ਕਰਦਾ ਹੈ
+- **ਆਰਕੀਸਟਰੇਟਰ**: ਏਜੰਟਾਂ ਦੇ ਵਿਚਕਾਰ ਸਮਨ੍ਵਯ ਕਰਦਾ ਹੈ
+- **ਸਾਂਝੀ ਮੈਮੋਰੀ**: ਏਜੰਟ-ਪਾਰ ਸੰਦਰਭ ਪ੍ਰਬੰਧਨ
 
-### ਵਰਤੇ ਗਏ ਸੇਵਾਵਾਂ
+### ਵਰਤੀਆਂ ਗਈਆਂ ਸੇਵਾਵਾਂ
 
-| ਸੇਵਾ | ਮਕਸਦ |
+| Service | Purpose |
 |---------|---------|
 | Microsoft Foundry Models | ਭਾਸ਼ਾ ਸਮਝ |
-| Azure AI Search | ਉਤਪਾਦ ਕੈਟਲੌਗ |
+| Azure AI Search | ਉਤਪਾਦ ਕੈਟਾਲੌਗ |
 | Cosmos DB | ਏਜੰਟ ਸਥਿਤੀ ਅਤੇ ਮੈਮੋਰੀ |
 | Container Apps | ਏਜੰਟ ਹੋਸਟਿੰਗ |
 | Application Insights | ਨਿਗਰਾਨੀ |
@@ -79,22 +82,22 @@ graph TD
 
 ## 🔗 ਨੈਵੀਗੇਸ਼ਨ
 
-| ਦਿਸ਼ਾ | ਅਧਿਆਇ |
+| Direction | Chapter |
 |-----------|---------|
-| **ਪਿਛਲਾ** | [ਅਧਿਆਇ 4: ਢਾਂਚਾ](../chapter-04-infrastructure/README.md) |
-| **ਅਗਲਾ** | [ਅਧਿਆਇ 6: ਪੂਰਵ-ਤੈਨਾਤੀ](../chapter-06-pre-deployment/README.md) |
+| **Previous** | [ਅਧਿਆਇ 4: ਬੁਨਿਆਦੀ ਢਾਂਚਾ](../chapter-04-infrastructure/README.md) |
+| **Next** | [ਅਧਿਆਇ 6: ਪ੍ਰੀ-ਡਿਪਲਾਏਮੈਂਟ](../chapter-06-pre-deployment/README.md) |
 
 ---
 
-## 📖 ਸੰਬੰਧਤ ਸਰੋਤ
+## 📖 ਸੰਬੰਧਿਤ ਸਰੋਤ
 
-- [ਏਆਈ ਏਜੰਟਸ ਗਾਈਡ](../chapter-02-ai-development/agents.md)
-- [ਪ੍ਰੋਡਕਸ਼ਨ ਏਆਈ ਅਭਿਆਸ](../chapter-08-production/production-ai-practices.md)
-- [ਏਆਈ ਸਮੱਸਿਆ-ਨਿਰਾਕਰਨ](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [AI ਏਜੰਟ ਗਾਈਡ](../chapter-02-ai-development/agents.md)
+- [ਉਤਪਾਦਨ ਏਆਈ ਅਭਿਆਸ](../chapter-08-production/production-ai-practices.md)
+- [ਏਆਈ ਟ੍ਰਬਲਸ਼ੂਟਿੰਗ](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ਅਸਵੀਕਰਨ**:
-ਇਹ ਦਸਤਾਵੇਜ਼ AI ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਅਸੀਂ ਸ਼ੁੱਧਤਾ ਲਈ ਕੋਸ਼ਿਸ਼ ਕਰਦੇ ਹਾਂ, ਪਰ ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਦਿਓ ਕਿ ਸਵਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸਥਿਰਤਾਵਾਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਨੂੰ ਇਸ ਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਪ੍ਰਮਾਣਿਕ ਸੂਤਰ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੇ ਉਪਯੋਗ ਤੋਂ ਉਤਪੰਨ ਕਿਸੇ ਵੀ ਗਲਤਫਹਮੀ ਜਾਂ ਭ੍ਰਮ ਲਈ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
+**ਅਸਵੀਕਾਰੋਪਣ**:
+ਇਸ ਦਸਤਾਵੇਜ਼ ਦਾ ਅਨੁਵਾਦ ਏਆਈ ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸਹੀਤਾਵਾਂ ਲਈ ਯਤਨਸ਼ੀਲ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਰੱਖੋ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸਮੱਤਿਆਵਾਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਆਪਣੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਧਿਕਾਰਕ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਜਰੂਰੀ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੇ ਉਪਯੋਗ ਤੋਂ ਪੈਦਾ ਹੋਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀਆਂ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆਵਾਂ ਲਈ ਜਵਾਬਦੇਹ ਨਹੀਂ ਹਾਂ।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

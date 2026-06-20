@@ -1,38 +1,39 @@
-# Exemplo Simples de API Flask - Container App
+# Exemplo Simples de API Flask - Aplicação Container
 
-**Percurso de Aprendizagem:** Principiante ⭐ | **Duração:** 25-35 minutos | **Custo:** 0-15$/mês
+**Caminho de Aprendizagem:** Iniciante ⭐ | **Duração:** 25-35 minutos | **Custo:** 0-15$/mês
 
-Uma API REST Python Flask completa e funcional, implementada em Azure Container Apps usando Azure Developer CLI (azd). Este exemplo demonstra a implementação de containers, o autoescalamento e os fundamentos da monitorização.
+Uma API REST Python Flask completa e funcional, implantada em Azure Container Apps usando Azure Developer CLI (azd). Este exemplo demonstra o deployment de containers, auto-escalagem e noções básicas de monitorização.
 
 ## 🎯 O Que Vai Aprender
 
-- Implementar uma aplicação Python em container para Azure  
-- Configurar autoescalamento com escala para zero  
-- Implementar sondas de saúde e verificações de prontidão  
-- Monitorizar registos e métricas de aplicação  
-- Usar Azure Developer CLI para implementação rápida
+- Implantar uma aplicação Python em container na Azure
+- Configurar auto-escalagem com escala para zero
+- Implementar sondas de saúde e verificações de prontidão
+- Monitorizar logs e métricas da aplicação
+- Usar Azure Developer CLI para deployment rápido
 
 ## 📦 O Que Está Incluído
 
 ✅ **Aplicação Flask** - API REST completa com operações CRUD (`src/app.py`)  
 ✅ **Dockerfile** - Configuração do container pronta para produção  
-✅ **Infraestrutura Bicep** - Ambiente Container Apps e implementação da API  
-✅ **Configuração AZD** - Implementação com um único comando  
+✅ **Infraestrutura Bicep** - Ambiente Container Apps e deployment da API  
+✅ **Configuração AZD** - Deployment com um comando  
 ✅ **Sondas de Saúde** - Verificações de liveness e readiness configuradas  
-✅ **Autoescalamento** - 0-10 réplicas baseado no tráfego HTTP  
+✅ **Auto-escalagem** - 0-10 réplicas baseado na carga HTTP  
 
 ## Arquitetura
 
 ```mermaid
 graph TD
-    subgraph ACA[Ambiente Azure Container Apps]
-        Flask[Contentor API Flask<br/>Pontos de verificação de saúde<br/>API REST<br/>Escalonamento automático 0-10 réplicas]
+    subgraph ACA[Azure Container Apps Environment]
+        Flask[Contentor API Flask<br/>Endpoints de saúde<br/>API REST<br/>Auto-escalonamento 0-10 réplicas]
         AppInsights[Application Insights]
     end
 ```
+
 ## Pré-requisitos
 
-### Necessário
+### Obrigatórios
 - **Azure Developer CLI (azd)** - [Guia de instalação](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
 - **Subscrição Azure** - [Conta gratuita](https://azure.microsoft.com/free/)
 - **Docker Desktop** - [Instalar Docker](https://www.docker.com/products/docker-desktop/) (para testes locais)
@@ -40,7 +41,7 @@ graph TD
 ### Verificar Pré-requisitos
 
 ```bash
-# Verificar a versão do azd (necessário 1.5.0 ou superior)
+# Verificar versão do azd (necessário 1.5.0 ou superior)
 azd version
 
 # Verificar login no Azure
@@ -50,15 +51,15 @@ azd auth login
 docker --version
 ```
 
-## ⏱️ Cronologia de Implementação
+## ⏱️ Cronologia do Deployment
 
 | Fase | Duração | O Que Acontece |
 |-------|----------|--------------||
 | Configuração do ambiente | 30 segundos | Criar ambiente azd |
 | Construção do container | 2-3 minutos | Docker build da aplicação Flask |
-| Provisionamento da infraestrutura | 3-5 minutos | Criar Container Apps, registo, monitorização |
-| Implementar aplicação | 2-3 minutos | Enviar imagem e implementar em Container Apps |
-| **Total** | **8-12 minutos** | Implementação completa pronta |
+| Provisão da infraestrutura | 3-5 minutos | Criar Container Apps, registo, monitorização |
+| Deployment da aplicação | 2-3 minutos | Fazer push da imagem e deploy no Container Apps |
+| **Total** | **8-12 minutos** | Deployment completo e pronto |
 
 ## Início Rápido
 
@@ -66,17 +67,17 @@ docker --version
 # Navegar para o exemplo
 cd examples/container-app/simple-flask-api
 
-# Inicializar o ambiente (escolher nome único)
+# Inicializar ambiente (escolher nome único)
 azd env new myflaskapi
 
-# Desplegar tudo (infraestrutura + aplicação)
+# Implantar tudo (infraestrutura + aplicação)
 azd up
-# Ser-lhe-á pedido para:
-# 1. Selecionar subscrição Azure
-# 2. Escolher localização (ex., eastus2)
-# 3. Esperar 8-12 minutos pela implantação
+# Será solicitado que:
+# 1. Selecione a subscrição Azure
+# 2. Escolha a localização (ex., eastus2)
+# 3. Espere 8-12 minutos para a implantação
 
-# Obter o seu endpoint da API
+# Obtenha o seu endpoint da API
 azd env get-values
 
 # Testar a API
@@ -93,18 +94,18 @@ curl $(azd env get-value API_ENDPOINT)/health
 }
 ```
 
-## ✅ Verificar Implementação
+## ✅ Verificar Deployment
 
-### Passo 1: Verificar Estado da Implementação
+### Passo 1: Verificar Estado do Deployment
 
 ```bash
-# Ver serviços implementados
+# Ver serviços implantados
 azd show
 
 # A saída esperada mostra:
 # - Serviço: api
-# - Endpoint: https://ca-api-[env].xxx.azurecontainerapps.io
-# - Estado: Em execução
+# - Ponto de acesso: https://ca-api-[env].xxx.azurecontainerapps.io
+# - Estado: A correr
 ```
 
 ### Passo 2: Testar Endpoints da API
@@ -113,7 +114,7 @@ azd show
 # Obter endpoint da API
 API_URL=$(azd env get-value API_ENDPOINT)
 
-# Testar saúde
+# Testar estado de saúde
 curl $API_URL/health
 
 # Testar endpoint raiz
@@ -130,23 +131,23 @@ curl $API_URL/api/items
 
 **Critérios de Sucesso:**
 - ✅ Endpoint de health retorna HTTP 200
-- ✅ Endpoint root mostra informações da API
+- ✅ Endpoint raiz mostra informação da API
 - ✅ POST cria item e retorna HTTP 201
-- ✅ GET retorna os itens criados
+- ✅ GET retorna itens criados
 
-### Passo 3: Ver Logs
+### Passo 3: Consultar Logs
 
 ```bash
-# Transmita logs em direto usando azd monitor
+# Transmitir registos em direto usando azd monitor
 azd monitor --logs
 
-# Ou use o Azure CLI:
+# Ou usar Azure CLI:
 az containerapp logs show --name api --resource-group $RG_NAME --follow
 
-# Deve ver:
+# Deverá ver:
 # - Mensagens de arranque do Gunicorn
-# - Logs de pedidos HTTP
-# - Logs de informações da aplicação
+# - Registos de pedidos HTTP
+# - Registos de informações da aplicação
 ```
 
 ## Estrutura do Projeto
@@ -175,7 +176,7 @@ simple-flask-api/
 | `/api/items` | POST | Criar novo item |
 | `/api/items/{id}` | GET | Obter item específico |
 | `/api/items/{id}` | PUT | Atualizar item |
-| `/api/items/{id}` | DELETE | Eliminar item |
+| `/api/items/{id}` | DELETE | Apagar item |
 
 ## Configuração
 
@@ -188,12 +189,12 @@ azd env set LOG_LEVEL info
 azd env set MAX_REPLICAS 20
 ```
 
-### Configuração de Escalamento
+### Configuração de Escalagem
 
-A API escala automaticamente com base no tráfego HTTP:  
-- **Réplicas mínimas**: 0 (escala para zero quando ocioso)  
-- **Réplicas máximas**: 10  
-- **Pedidos concorrentes por réplica**: 50  
+A API escala automaticamente com base no tráfego HTTP:
+- **Mínimo de Réplicas**: 0 (escala para zero quando inativa)
+- **Máximo de Réplicas**: 10
+- **Pedidos concorrentes por réplica**: 50
 
 ## Desenvolvimento
 
@@ -224,19 +225,19 @@ docker run -p 8000:8000 flask-api:local
 curl http://localhost:8000/health
 ```
 
-## Implementação
+## Deployment
 
-### Implementação Completa
+### Deployment Completo
 
 ```bash
-# Implementar a infraestrutura e a aplicação
+# Desplegar infraestrutura e aplicação
 azd up
 ```
 
-### Implementação Apenas Código
+### Deployment Apenas do Código
 
 ```bash
-# Implantar apenas o código da aplicação (infraestrutura inalterada)
+# Deploy apenas o código da aplicação (infraestrutura inalterada)
 azd deploy api
 ```
 
@@ -252,23 +253,23 @@ azd deploy api
 
 ## Monitorização
 
-### Ver Logs
+### Visualizar Logs
 
 ```bash
-# Transmita logs em direto utilizando azd monitor
+# Transmitir logs em direto usando azd monitor
 azd monitor --logs
 
-# Ou utilize a Azure CLI para Container Apps:
+# Ou use a Azure CLI para Aplicações de Contentores:
 az containerapp logs show --name api --resource-group $RG_NAME --follow
 
-# Veja as últimas 100 linhas
+# Ver as últimas 100 linhas
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 ```
 
 ### Monitorizar Métricas
 
 ```bash
-# Abrir dashboard do Azure Monitor
+# Abrir painel do Azure Monitor
 azd monitor --overview
 
 # Ver métricas específicas
@@ -285,7 +286,7 @@ az monitor metrics list \
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-Resposta esperada:  
+Resposta esperada:
 ```json
 {
   "status": "healthy",
@@ -301,7 +302,7 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/item
   -d '{"name": "Test Item", "description": "A test item"}'
 ```
 
-### Obter Todos os Items
+### Obter Todos os Itens
 
 ```bash
 curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
@@ -309,19 +310,19 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
 
 ## Otimização de Custos
 
-Esta implementação usa escala para zero, assim só paga quando a API está a processar pedidos:
+Este deployment utiliza escala para zero, pelo que só paga quando a API está a processar pedidos:
 
-- **Custo ocioso**: ~0$/mês (escala para zero)  
-- **Custo ativo**: ~0,000024$/segundo por réplica  
+- **Custo em repouso**: ~0$/mês (escala para zero)
+- **Custo ativo**: ~0.000024$/segundo por réplica
 - **Custo mensal esperado** (uso leve): 5-15$
 
-### Reduzir Custos Mais
+### Reduzir Custos Ainda Mais
 
 ```bash
-# Reduzir o número máximo de réplicas para desenvolvimento
+# Reduzir o número máximo de réplicas para dev
 azd env set MAX_REPLICAS 3
 
-# Usar tempo de espera ocioso mais curto
+# Usar um tempo de inatividade mais curto
 azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 minutos
 ```
 
@@ -330,10 +331,10 @@ azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 minutos
 ### Container Não Arranca
 
 ```bash
-# Verificar logs do contentor usando Azure CLI
+# Verificar logs do contentor utilizando Azure CLI
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 
-# Verificar a construção da imagem Docker localmente
+# Verificar builds de imagem Docker localmente
 docker build -t test ./src
 ```
 
@@ -361,7 +362,7 @@ az containerapp update --name api --resource-group rg-simple-flask-api \
 ## Limpeza
 
 ```bash
-# Apagar todos os recursos
+# Eliminar todos os recursos
 azd down --force --purge
 ```
 
@@ -372,16 +373,16 @@ azd down --force --purge
 1. **Adicionar Base de Dados** - Integrar Azure Cosmos DB ou SQL Database  
    ```bash
    # Adicionar módulo Cosmos DB ao infra/main.bicep
-   # Atualizar app.py com ligação à base de dados
+   # Atualizar app.py com a ligação à base de dados
    ```
 
-2. **Adicionar Autenticação** - Implementar Azure AD ou chaves API  
+2. **Adicionar Autenticação** - Implementar Microsoft Entra ID ou chaves API  
    ```python
    # Adicionar middleware de autenticação ao app.py
    from functools import wraps
    ```
 
-3. **Configurar CI/CD** - Workflow GitHub Actions  
+3. **Configurar CI/CD** - Workflow com GitHub Actions  
    ```yaml
    # Create .github/workflows/deploy.yml
    name: Deploy to Azure
@@ -396,41 +397,41 @@ azd down --force --purge
 
 ### Exemplos Relacionados
 
-- **[Aplicação Base de Dados](../../../../../examples/database-app)** - Exemplo completo com SQL Database  
-- **[Microserviços](../../../../../examples/container-app/microservices)** - Arquitetura multi-serviço  
-- **[Guia Mestre Container Apps](../README.md)** - Todos os padrões de containers  
+- **[Aplicação Base de Dados](../../../../../examples/database-app)** - Exemplo completo com SQL Database
+- **[Microserviços](../../../../../examples/container-app/microservices)** - Arquitetura multi-serviço
+- **[Guia Mestre Container Apps](../README.md)** - Todos os padrões de containers
 
 ### Recursos de Aprendizagem
 
-- 📚 [Curso AZD Para Principiantes](../../../README.md) - Página principal do curso  
-- 📚 [Padrões Container Apps](../README.md) - Mais padrões de implementação  
-- 📚 [Galeria de Templates AZD](https://azure.github.io/awesome-azd/) - Templates da comunidade  
+- 📚 [Curso AZD para Iniciantes](../../../README.md) - Página principal do curso
+- 📚 [Padrões Container Apps](../README.md) - Mais padrões de deployment
+- 📚 [Galeria de Templates AZD](https://azure.github.io/awesome-azd/) - Templates da comunidade
 
 ## Recursos Adicionais
 
 ### Documentação
-- **[Documentação Flask](https://flask.palletsprojects.com/)** - Guia do framework Flask  
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Documentação oficial Azure  
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - Referência dos comandos azd  
+- **[Documentação Flask](https://flask.palletsprojects.com/)** - Guia do framework Flask
+- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Documentação oficial da Azure
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - Referência dos comandos azd
 
 ### Tutoriais
-- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Implementar a tua primeira aplicação  
-- **[Python no Azure](https://learn.microsoft.com/azure/developer/python/)** - Guia de desenvolvimento Python  
-- **[Linguagem Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infraestrutura como código  
+- **[Início Rápido Container Apps](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Deploy da sua primeira app
+- **[Python na Azure](https://learn.microsoft.com/azure/developer/python/)** - Guia de desenvolvimento Python
+- **[Linguagem Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infraestrutura como código
 
 ### Ferramentas
-- **[Portal Azure](https://portal.azure.com)** - Gerir recursos visualmente  
-- **[Extensão Azure VS Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - Integração IDE  
+- **[Portal Azure](https://portal.azure.com)** - Gestão visual de recursos
+- **[Extensão Azure para VS Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - Integração no IDE
 
 ---
 
-**🎉 Parabéns!** Implementou uma API Flask pronta para produção em Azure Container Apps com autoescalamento e monitorização.
+**🎉 Parabéns!** Implantou uma API Flask pronta para produção nos Azure Container Apps com auto-escalagem e monitorização.
 
-**Perguntas?** [Abra um issue](https://github.com/microsoft/AZD-for-beginners/issues) ou consulte o [FAQ](../../../resources/faq.md)
+**Dúvidas?** [Abra uma issue](https://github.com/microsoft/AZD-for-beginners/issues) ou consulte o [FAQ](../../../resources/faq.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução automática [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, por favor note que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autorizada. Para informação crítica, recomenda-se a tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.
+**Aviso Legal**:
+Este documento foi traduzido utilizando o serviço de tradução automática [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas resultantes da utilização desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

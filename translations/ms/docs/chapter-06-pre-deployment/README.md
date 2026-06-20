@@ -1,19 +1,19 @@
-# Chapter 6: Perancangan & Pengesahan Sebelum Pelaksanaan
+# Bab 6: Perancangan & Pengesahan Pra-Penerapan
 
-**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 1 jam | **⭐ Tahap Kesukaran**: Sederhana
+**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 1 jam | **⭐ Kerumitan**: Pertengahan
 
 ---
 
 ## Gambaran Keseluruhan
 
-Bab ini merangkumi langkah-langkah penting perancangan dan pengesahan sebelum melaksanakan aplikasi anda. Pelajari cara mengelakkan kesilapan mahal dengan perancangan kapasiti yang betul, pemilihan SKU, dan pemeriksaan awal.
+Bab ini merangkumi langkah-langkah perancangan dan pengesahan penting sebelum menerapkan aplikasi anda. Pelajari cara mengelakkan kesilapan mahal dengan perancangan kapasiti yang betul, pemilihan SKU, dan pemeriksaan pra-penerbangan.
 
-> Disahkan dengan `azd 1.23.12` pada Mac 2026.
+> Disahkan menggunakan `azd 1.25.6` pada Jun 2026.
 
 ## Objektif Pembelajaran
 
 Dengan menyelesaikan bab ini, anda akan:
-- Melakukan pemeriksaan awal sebelum pelaksanaan
+- Melakukan pemeriksaan pra-penerbangan sebelum penerapan
 - Merancang kapasiti dan menganggarkan keperluan sumber
 - Memilih SKU yang sesuai untuk pengoptimuman kos
 - Mengkonfigurasi Application Insights untuk pemantauan
@@ -25,15 +25,15 @@ Dengan menyelesaikan bab ini, anda akan:
 
 | # | Pelajaran | Penerangan | Masa |
 |---|-----------|------------|------|
-| 1 | [Pemeriksaan Awal](preflight-checks.md) | Mengesahkan konfigurasi sebelum pelaksanaan | 15 min |
-| 2 | [Perancangan Kapasiti](capacity-planning.md) | Menganggarkan keperluan sumber | 20 min |
-| 3 | [Pemilihan SKU](sku-selection.md) | Memilih tier harga yang sesuai | 15 min |
-| 4 | [Application Insights](application-insights.md) | Mengkonfigurasi pemantauan | 20 min |
-| 5 | [Corak Penyelarasan](coordination-patterns.md) | Aliran kerja pelaksanaan pasukan | 15 min |
+| 1 | [Pemeriksaan Pra-penerbangan](preflight-checks.md) | Sahkan konfigurasi sebelum penerapan | 15 min |
+| 2 | [Perancangan Kapasiti](capacity-planning.md) | Anggar keperluan sumber | 20 min |
+| 3 | [Pemilihan SKU](sku-selection.md) | Pilih tahap harga yang sesuai | 15 min |
+| 4 | [Application Insights](application-insights.md) | Konfigurasi pemantauan | 20 min |
+| 5 | [Corak Penyelarasan](coordination-patterns.md) | Aliran kerja penerapan pasukan | 15 min |
 
 ---
 
-## 🚀 Mula Dengan Cepat
+## 🚀 Mula Pantas
 
 ```bash
 # Semak kuota langganan
@@ -51,11 +51,11 @@ azd env get-values
 
 ---
 
-## ☑️ Senarai Semak Sebelum Pelaksanaan
+## ☑️ Senarai Semak Pra-Penerapan
 
 ### Sebelum `azd provision`
 
-- [ ] Kuota disahkan untuk rantau
+- [ ] Kuota disahkan untuk wilayah
 - [ ] SKU dipilih dengan sesuai
 - [ ] Anggaran kos disemak
 - [ ] Konvensyen penamaan konsisten
@@ -63,7 +63,7 @@ azd env get-values
 
 ### Sebelum `azd deploy`
 
-- [ ] Pembolehubah persekitaran ditetapkan
+- [ ] Pembolehubah persekitaran disetkan
 - [ ] Rahsia dalam Key Vault
 - [ ] Rentetan sambungan disahkan
 - [ ] Pemeriksaan kesihatan dikonfigurasi
@@ -76,7 +76,7 @@ azd env get-values
 |-------------|-------------|-------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
-| Model Microsoft Foundry | Standard | Standard + PTU |
+| Microsoft Foundry Models | Standard | Standard + PTU |
 | AI Search | Basic | Standard S2+ |
 
 ---
@@ -84,8 +84,8 @@ azd env get-values
 ## 🔗 Navigasi
 
 | Arah | Bab |
-|-------|-----|
-| **Sebelumnya** | [Bab 5: Multi-Ejen](../chapter-05-multi-agent/README.md) |
+|------|-----|
+| **Sebelum** | [Bab 5: Multi-Ejen](../chapter-05-multi-agent/README.md) |
 | **Seterusnya** | [Bab 7: Penyelesaian Masalah](../chapter-07-troubleshooting/README.md) |
 
 ---
@@ -93,12 +93,12 @@ azd env get-values
 ## 📖 Sumber Berkaitan
 
 - [Panduan Konfigurasi](../chapter-03-configuration/configuration.md)
-- [Panduan Pelaksanaan](../chapter-04-infrastructure/deployment-guide.md)
-- [Isu Umum](../chapter-07-troubleshooting/common-issues.md)
+- [Panduan Penerapan](../chapter-04-infrastructure/deployment-guide.md)
+- [Isu Lazim](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidakakuratan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan profesional oleh manusia adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+**Penafian**:
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan oleh manusia profesional adalah disyorkan. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

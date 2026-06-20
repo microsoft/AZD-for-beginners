@@ -1,15 +1,15 @@
-# Integração do Microsoft Foundry com AZD
+# Integração do Microsoft Foundry com o AZD
 
 **Navegação do Capítulo:**
-- **📚 Início do Curso**: [AZD Para Iniciantes](../../README.md)
-- **📖 Capítulo Atual**: Capítulo 2 - Desenvolvimento com Foco em IA
-- **⬅️ Capítulo Anterior**: [Chapter 1: Your First Project](../chapter-01-foundation/first-project.md)
-- **➡️ Próximo**: [AI Model Deployment](ai-model-deployment.md)
+- **📚 Página do Curso**: [AZD Para Iniciantes](../../README.md)
+- **📖 Capítulo Atual**: Capítulo 2 - Desenvolvimento com IA em Primeiro Lugar
+- **⬅️ Capítulo Anterior**: [Capítulo 1: Seu Primeiro Projeto](../chapter-01-foundation/first-project.md)
+- **➡️ Próximo**: [Implantação de Modelos de IA](ai-model-deployment.md)
 - **🚀 Próximo Capítulo**: [Capítulo 3: Configuração](../chapter-03-configuration/configuration.md)
 
 ## Visão Geral
 
-Este guia demonstra como integrar os serviços do Microsoft Foundry com o Azure Developer CLI (AZD) para implantações de aplicativos de IA mais simples. O Microsoft Foundry fornece uma plataforma abrangente para construir, implantar e gerenciar aplicativos de IA, enquanto o AZD simplifica o processo de infraestrutura e implantação.
+Este guia demonstra como integrar os serviços do Microsoft Foundry com o Azure Developer CLI (AZD) para implantações de aplicações de IA mais simplificadas. O Microsoft Foundry fornece uma plataforma abrangente para construir, implantar e gerenciar aplicações de IA, enquanto o AZD simplifica o processo de infraestrutura e implantação.
 
 ## O que é o Microsoft Foundry?
 
@@ -17,32 +17,32 @@ O Microsoft Foundry é a plataforma unificada da Microsoft para desenvolvimento 
 
 - **Catálogo de Modelos**: Acesso a modelos de IA de ponta
 - **Prompt Flow**: Designer visual para fluxos de trabalho de IA
-- **Microsoft Foundry Portal**: Ambiente de desenvolvimento integrado para aplicativos de IA
+- **Portal Microsoft Foundry**: Ambiente de desenvolvimento integrado para aplicações de IA
 - **Opções de Implantação**: Múltiplas opções de hospedagem e escalabilidade
-- **Segurança e Confiabilidade**: Recursos integrados de IA responsável
+- **Segurança e Proteção**: Recursos integrados de IA responsável
 
 ## AZD + Microsoft Foundry: Melhor Juntos
 
-| Recurso | Microsoft Foundry | Benefício da Integração com AZD |
+| Funcionalidade | Microsoft Foundry | Benefício da Integração com AZD |
 |---------|-----------------|------------------------|
-| **Model Deployment** | Implantação manual pelo portal | Implantações automatizadas e repetíveis |
-| **Infrastructure** | Provisionamento por cliques | Infraestrutura como Código (Bicep) |
+| **Model Deployment** | Implantação manual pelo portal | Implantações automatizadas e reproduzíveis |
+| **Infrastructure** | Provisionamento via cliques | Infraestrutura como Código (Bicep) |
 | **Environment Management** | Foco em um único ambiente | Multi-ambiente (dev/staging/prod) |
-| **CI/CD Integration** | Limitado | Suporte nativo a GitHub Actions |
+| **CI/CD Integration** | Limitada | Suporte nativo ao GitHub Actions |
 | **Cost Management** | Monitoramento básico | Otimização de custos por ambiente |
 
 ## Pré-requisitos
 
 - Assinatura do Azure com permissões apropriadas
 - Azure Developer CLI instalado
-- Acesso aos serviços Microsoft Foundry Models
+- Acesso aos serviços de Modelos do Microsoft Foundry
 - Familiaridade básica com o Microsoft Foundry
 
-> **Baseline atual do AZD:** Estes exemplos foram revisados contra `azd` `1.23.12`. Para o fluxo de trabalho de agente de IA, use a versão atual da extensão em preview e verifique sua versão instalada antes de começar.
+> **Base atual do AZD:** Esses exemplos foram verificados com `azd` `1.23.12`. Para o fluxo de trabalho do agente de IA, use a versão atual da extensão preview e verifique sua versão instalada antes de começar.
 
-## Padrões Centrais de Integração
+## Padrões Principais de Integração
 
-### Padrão 1: Integração com Microsoft Foundry Models
+### Padrão 1: Integração com Modelos do Microsoft Foundry
 
 **Caso de Uso**: Implantar aplicações de chat com modelos do Microsoft Foundry Models
 
@@ -122,7 +122,7 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 }
 ```
 
-### Padrão 3: Integração de Document Intelligence
+### Padrão 3: Integração com Document Intelligence
 
 **Caso de Uso**: Fluxos de trabalho de processamento e análise de documentos
 
@@ -166,7 +166,7 @@ azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_SEARCH_ENDPOINT "https://your-search.search.windows.net"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT "https://your-formrec.cognitiveservices.azure.com/"
 
-# Configurações de modelos
+# Configurações de modelo
 azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
 azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-3-large"
 
@@ -177,7 +177,7 @@ azd env set AZURE_SEARCH_SKU "standard"
 
 **Configuração de Desenvolvimento:**
 ```bash
-# Configurações otimizadas em custo para desenvolvimento
+# Configurações otimizadas para custo para desenvolvimento
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set AZURE_SEARCH_SKU "basic"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Camada gratuita
@@ -222,10 +222,10 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ### Extensões AZD para Foundry
 
-O AZD fornece extensões que adicionam capacidades específicas de IA para trabalhar com os serviços do Microsoft Foundry:
+O AZD fornece extensões que adicionam recursos específicos de IA para trabalhar com os serviços do Microsoft Foundry:
 
 ```bash
-# Instalar a extensão Foundry Agents
+# Instalar a extensão Foundry agents
 azd extension install azure.ai.agents
 
 # Instalar a extensão de ajuste fino
@@ -241,33 +241,33 @@ azd extension list --installed
 azd extension show azure.ai.agents
 ```
 
-As extensões de IA ainda estão evoluindo rapidamente em preview. Se um comando se comportar de maneira diferente do mostrado aqui, atualize a extensão relevante antes de solucionar problemas do projeto em si.
+As extensões de IA ainda estão em rápida evolução no preview. Se um comando se comportar de maneira diferente do mostrado aqui, atualize a extensão relevante antes de solucionar problemas no próprio projeto.
 
-### Implantação com Agente em Primeiro Lugar com `azd ai`
+### Implantação com Foco em Agentes usando `azd ai`
 
-Se você tiver um manifesto de agente, use `azd ai agent init` para scaffoldar um projeto conectado ao Foundry Agent Service:
+Se você tiver um manifesto de agente, use `azd ai agent init` para estruturar um projeto conectado ao Foundry Agent Service:
 
 ```bash
-# Inicializar a partir de um manifesto do agente
+# Inicializar a partir de um manifesto de agente
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
 # Implantar no Azure
 azd up
 ```
 
-Lançamentos recentes em preview de `azure.ai.agents` também adicionaram suporte de inicialização baseado em templates para `azd ai agent init`. Se você estiver seguindo exemplos de agente mais novos, verifique a ajuda da extensão para as flags exatas disponíveis na sua versão instalada.
+Lançamentos recentes em preview de `azure.ai.agents` também adicionaram suporte de inicialização baseado em templates para `azd ai agent init`. Se você estiver seguindo exemplos de agentes mais recentes, verifique a ajuda da extensão para as flags exatas disponíveis na versão instalada.
 
 Consulte [Comandos AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) para a referência completa de comandos e flags.
 
-### Implantação com um Único Comando
+### Implantação com Um Único Comando
 
 ```bash
-# Implante tudo com um único comando
+# Implante tudo com um comando
 azd up
 
 # Ou implante incrementalmente
-azd provision  # Apenas infraestrutura
-azd deploy     # Apenas aplicação
+azd provision  # Somente infraestrutura
+azd deploy     # Somente aplicação
 
 # Para implantações de aplicativos de IA de longa duração no azd 1.23.11+
 azd deploy --timeout 1800
@@ -432,7 +432,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 }
 ```
 
-### Configuração de Autoescalonamento
+### Configuração de Auto-escala
 
 ```bicep
 // Container App with auto-scaling
@@ -471,19 +471,19 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 ### Problema 1: Cota do OpenAI Excedida
 
 **Sintomas:**
-- Implantação falha com erros de cota
+- A implantação falha com erros de cota
 - Erros 429 nos logs da aplicação
 
 **Soluções:**
 ```bash
-# Verificar uso atual da cota
+# Verificar o uso atual da cota
 az cognitiveservices usage list --location eastus
 
 # Tentar outra região
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Reduzir capacidade temporariamente
+# Reduzir a capacidade temporariamente
 azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
@@ -492,7 +492,7 @@ azd deploy
 
 **Sintomas:**
 - Erros 401/403 ao chamar serviços de IA
-- Mensagens "Access denied"
+- Mensagens de "Acesso negado"
 
 **Soluções:**
 ```bash
@@ -502,11 +502,11 @@ az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 # Verificar a configuração da identidade gerenciada
 az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 
-# Validar o acesso ao Key Vault
+# Validar acesso ao Key Vault
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
-### Problema 3: Problemas de Implantação de Modelos
+### Problema 3: Problemas na Implantação de Modelos
 
 **Sintomas:**
 - Modelos não disponíveis na implantação
@@ -517,19 +517,19 @@ az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 # Listar modelos disponíveis por região
 az cognitiveservices model list --location eastus
 
-# Atualizar a versão do modelo no template Bicep
+# Atualizar a versão do modelo no template bicep
 # Verificar requisitos de capacidade do modelo
 ```
 
 ## Modelos de Exemplo
 
-### Aplicação de Chat RAG (Python)
+### Aplicativo RAG de Chat (Python)
 
 **Repositório**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
 **Serviços**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
 
-**Descrição**: O sample de IA mais popular do Azure — um app de chat RAG pronto para produção que permite fazer perguntas sobre seus próprios documentos. Usa GPT-4.1-mini para chat, text-embedding-3-large para embeddings e Azure AI Search para recuperação. Suporta documentos multimodais, entrada/saída de voz, autenticação Microsoft Entra e rastreamento com Application Insights.
+**Descrição**: O sample de IA do Azure mais popular — um aplicativo de chat RAG pronto para produção que permite fazer perguntas sobre seus próprios documentos. Usa GPT-4.1-mini para chat, text-embedding-3-large para embeddings e Azure AI Search para recuperação. Suporta documentos multimodais, entrada/saída de voz, autenticação Microsoft Entra e rastreamento com Application Insights.
 
 **Início Rápido**:
 ```bash
@@ -537,13 +537,13 @@ azd init --template azure-search-openai-demo
 azd up
 ```
 
-### Aplicação de Chat RAG (.NET)
+### Aplicativo RAG de Chat (.NET)
 
 **Repositório**: [azure-search-openai-demo-csharp](https://github.com/Azure-Samples/azure-search-openai-demo-csharp)
 
 **Serviços**: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
 
-**Descrição**: Equivalente .NET/C# do sample RAG em Python. Construído com ASP.NET Core Minimal API e frontend Blazor WebAssembly. Inclui chat por voz, suporte a GPT-4o-mini vision e um cliente desktop/mobile companion em .NET MAUI Blazor Hybrid.
+**Descrição**: Equivalente em .NET/C# do sample RAG em Python. Construído com ASP.NET Core Minimal API e frontend Blazor WebAssembly. Inclui chat por voz, suporte GPT-4o-mini vision e um cliente companion .NET MAUI Blazor Hybrid para desktop/móvel.
 
 **Início Rápido**:
 ```bash
@@ -551,13 +551,13 @@ azd init --template azure-search-openai-demo-csharp
 azd up
 ```
 
-### Aplicação de Chat RAG (Java)
+### Aplicativo RAG de Chat (Java)
 
 **Repositório**: [azure-search-openai-demo-java](https://github.com/Azure-Samples/azure-search-openai-demo-java)
 
 **Serviços**: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
 
-**Descrição**: Versão Java do sample RAG usando Langchain4J para orquestração de IA. Suporta arquitetura de microsserviços orientada a eventos, múltiplas estratégias de busca (texto, vetorial, híbrida), upload de documentos com Azure Document Intelligence e implantação tanto em Azure Container Apps quanto em Azure Kubernetes Service.
+**Descrição**: Versão Java do sample RAG usando Langchain4J para orquestração de IA. Suporta arquitetura de microsserviços orientada a eventos, múltiplas estratégias de busca (texto, vetor, híbrida), upload de documentos com Azure Document Intelligence e implantação em Azure Container Apps ou Azure Kubernetes Service.
 
 **Início Rápido**:
 ```bash
@@ -565,13 +565,13 @@ azd init --template azure-search-openai-demo-java
 azd up
 ```
 
-### Copilot de Varejo Empresarial com Azure AI Foundry
+### Copilot de Varejo Empresarial com Microsoft Foundry
 
 **Repositório**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
-**Serviços**: Azure OpenAI + Azure AI Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
+**Serviços**: Azure OpenAI + Microsoft Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
 
-**Descrição**: Copilot de varejo RAG ponta-a-ponta usando Azure AI Foundry e Prompty. Um chatbot da Contoso Outdoor que fundamenta respostas no catálogo de produtos e nos dados de pedidos de clientes. Demonstra o fluxo completo de GenAIOps — prototipar com Prompty, avaliar com avaliadores assistidos por IA e implantar via AZD para Container Apps.
+**Descrição**: Copilot RAG de varejo de ponta a ponta usando Microsoft Foundry e Prompty. Um chatbot para o varejista Contoso Outdoor que fundamenta respostas no catálogo de produtos e nos dados de pedidos de clientes. Demonstra o fluxo completo GenAIOps — prototipagem com Prompty, avaliação com avaliadores assistidos por IA e implantação via AZD para Container Apps.
 
 **Início Rápido**:
 ```bash
@@ -593,13 +593,13 @@ azd init --template contoso-creative-writer
 azd up
 ```
 
-### RAG Chat Serverless (JavaScript/TypeScript)
+### Chat RAG Serverless (JavaScript/TypeScript)
 
 **Repositório**: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
 
-**Serviços**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB para NoSQL + LangChain.js
+**Serviços**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB for NoSQL + LangChain.js
 
-**Descrição**: Chatbot RAG totalmente serverless usando LangChain.js com Azure Functions para a API e Azure Static Web Apps para hospedagem. Usa Azure Cosmos DB como loja vetorial e banco de histórico de chat. Suporta desenvolvimento local com Ollama para testes sem custos.
+**Descrição**: Chatbot RAG totalmente serverless usando LangChain.js com Azure Functions para a API e Azure Static Web Apps para hospedagem. Usa Azure Cosmos DB tanto como armazenamento vetorial quanto como banco de histórico de chat. Suporta desenvolvimento local com Ollama para testes sem custo.
 
 **Início Rápido**:
 ```bash
@@ -607,13 +607,13 @@ azd init --template serverless-chat-langchainjs
 azd up
 ```
 
-### Chat with Your Data Solution Accelerator
+### Acelerador de Solução Chat com Seus Dados
 
 **Repositório**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
 
 **Serviços**: Azure OpenAI + Azure AI Search + Azure App Service + Azure Document Intelligence + Azure Functions + Azure Cosmos DB / PostgreSQL
 
-**Descrição**: Acelerador de solução RAG de nível empresarial com portal de administração para upload/gerenciamento de documentos, múltiplas opções de orquestrador (Semantic Kernel, LangChain, Prompt Flow), speech-to-text, integração com Microsoft Teams e escolha de backend PostgreSQL ou Cosmos DB. Projetado como ponto de partida customizável para cenários RAG de produção.
+**Descrição**: Acelerador de solução RAG de nível empresarial com portal administrativo para upload/gerenciamento de documentos, múltiplas opções de orquestrador (Semantic Kernel, LangChain, Prompt Flow), conversão de fala para texto, integração com Microsoft Teams e escolha de backend entre PostgreSQL ou Cosmos DB. Projetado como ponto de partida personalizável para cenários RAG de produção.
 
 **Início Rápido**:
 ```bash
@@ -621,13 +621,13 @@ azd init --template chat-with-your-data-solution-accelerator
 azd up
 ```
 
-### Agentes de Viagem de IA — Orquestração Multi-Agente MCP
+### Agentes de Viagem com IA — Orquestração Multi-Agente MCP
 
 **Repositório**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
 
-**Serviços**: Azure OpenAI + Azure AI Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
+**Serviços**: Azure OpenAI + Microsoft Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
 
-**Descrição**: Aplicação de referência para orquestração multi-agente de IA usando três frameworks (LangChain.js, LlamaIndex.TS e Microsoft Agent Framework). Apresenta servidores MCP (Model Context Protocol) em quatro linguagens implantados como Azure Container Apps serverless com monitoramento OpenTelemetry.
+**Descrição**: Aplicação de referência para orquestração multi-agente de IA usando três frameworks (LangChain.js, LlamaIndex.TS e Microsoft Agent Framework). Inclui servidores MCP (Model Context Protocol) em quatro linguagens implantados como Azure Container Apps serverless com monitoramento OpenTelemetry.
 
 **Início Rápido**:
 ```bash
@@ -641,7 +641,7 @@ azd up
 
 **Serviços**: Azure AI Services + Azure OpenAI
 
-**Descrição**: Template Bicep minimalista que implanta serviços Azure AI com modelos de machine learning configurados. Um ponto de partida leve quando você só precisa da infraestrutura Azure AI provisionada sem uma pilha completa de aplicativo.
+**Descrição**: Template Bicep minimalista que implanta serviços Azure AI com modelos de machine learning configurados. Um ponto de partida leve quando você precisa apenas da infraestrutura Azure AI provisionada sem uma stack completa de aplicação.
 
 **Início Rápido**:
 ```bash
@@ -649,24 +649,24 @@ azd init --template azd-ai-starter
 azd up
 ```
 
-> **Navegue por mais templates**: Visite a [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) para mais de 80 templates AZD específicos de IA em várias linguagens e cenários.
+> **Navegue por mais modelos**: Visite a [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) para 80+ modelos AZD específicos para IA em diversas linguagens e cenários.
 
 ## Próximos Passos
 
-1. **Teste os Exemplos**: Comece com um template pré-construído que corresponda ao seu caso de uso
-2. **Personalize conforme suas Necessidades**: Modifique a infraestrutura e o código do aplicativo
+1. **Experimente os Exemplos**: Comece com um template pré-construído que corresponda ao seu caso de uso
+2. **Personalize para Suas Necessidades**: Modifique a infraestrutura e o código da aplicação
 3. **Adicione Monitoramento**: Implemente observabilidade abrangente
-4. **Otimize Custos**: Ajuste as configurações para seu orçamento
-5. **Proteja sua Implantação**: Implemente padrões de segurança corporativa
+4. **Otimize Custos**: Ajuste configurações para seu orçamento
+5. **Proteja Sua Implantação**: Implemente padrões de segurança corporativa
 6. **Escale para Produção**: Adicione recursos de multi-região e alta disponibilidade
 
 ## 🎯 Exercícios Práticos
 
-### Exercício 1: Implantar Aplicação de Chat com Microsoft Foundry Models (30 minutos)
-**Objetivo**: Implantar e testar uma aplicação de chat de IA pronta para produção
+### Exercício 1: Implantar Aplicativo de Chat com Modelos do Microsoft Foundry (30 minutos)
+**Objetivo**: Implantar e testar um aplicativo de chat de IA pronto para produção
 
 ```bash
-# Inicializar o template
+# Inicializar template
 mkdir ai-chat-demo && cd ai-chat-demo
 azd init --template azure-search-openai-demo
 
@@ -689,15 +689,15 @@ azd down --force --purge
 ```
 
 **Critérios de Sucesso:**
-- [ ] Implantação concluída sem erros de cota
+- [ ] A implantação é concluída sem erros de cota
 - [ ] É possível acessar a interface de chat no navegador
-- [ ] É possível fazer perguntas e obter respostas alimentadas por IA
-- [ ] Application Insights mostra dados de telemetria
+- [ ] É possível fazer perguntas e obter respostas com IA
+- [ ] O Application Insights mostra dados de telemetria
 - [ ] Recursos limpos com sucesso
 
-**Custo Estimado**: US$5-10 por 30 minutos de testes
+**Custo Estimado**: $5-10 por 30 minutos de teste
 
-### Exercício 2: Configurar Implantação Multi-Modelo (45 minutos)
+### Exercício 2: Configurar Implantação Multi-Modelos (45 minutos)
 **Objetivo**: Implantar múltiplos modelos de IA com diferentes configurações
 
 ```bash
@@ -752,13 +752,13 @@ azd show
 ```
 
 **Critérios de Sucesso:**
-- [ ] Múltiplos modelos implantados com sucesso
+- [ ] Vários modelos implantados com sucesso
 - [ ] Diferentes configurações de capacidade aplicadas
 - [ ] Modelos acessíveis via API
 - [ ] É possível chamar ambos os modelos a partir da aplicação
 
 ### Exercício 3: Implementar Monitoramento de Custos (20 minutos)
-**Objetivo**: Configurar alertas de orçamento e acompanhamento de custos
+**Objetivo**: Configurar alertas de orçamento e rastreamento de custos
 
 ```bash
 # Adicionar alerta de orçamento ao Bicep
@@ -801,20 +801,20 @@ az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-d
 
 **Critérios de Sucesso:**
 - [ ] Alerta de orçamento criado no Azure
-- [ ] Notificações por e-mail configuradas
+- [ ] Notificações por email configuradas
 - [ ] É possível visualizar dados de custo no Azure Portal
-- [ ] Limiares de orçamento configurados adequadamente
+- [ ] Limiares de orçamento definidos adequadamente
 
 ## 💡 Perguntas Frequentes
 
 <details>
-<summary><strong>Como reduzo os custos do Microsoft Foundry Models durante o desenvolvimento?</strong></summary>
+<summary><strong>Como reduzo os custos dos Modelos do Microsoft Foundry durante o desenvolvimento?</strong></summary>
 
-1. **Use o Nível Gratuito**: Microsoft Foundry Models oferece 50.000 tokens/mês grátis
-2. **Reduza a Capacidade**: Defina a capacidade para 10 TPM em vez de 30+ para desenvolvimento
-3. **Use azd down**: Desalocar recursos quando não estiver desenvolvendo ativamente
-4. **Cache de Respostas**: Implemente cache Redis para consultas repetidas
-5. **Use Engenharia de Prompt**: Reduza o uso de tokens com prompts eficientes
+1. **Use Free Tier**: Microsoft Foundry Models oferece 50.000 tokens/mês gratuitos
+2. **Reduce Capacity**: Defina a capacidade para 10 TPM em vez de 30+ para dev
+3. **Use azd down**: Desaloque recursos quando não estiver desenvolvendo ativamente
+4. **Cache Responses**: Implemente cache Redis para consultas repetidas
+5. **Use Prompt Engineering**: Reduza o uso de tokens com prompts eficientes
 
 
 ```bash
@@ -825,48 +825,48 @@ azd env set ENABLE_RESPONSE_CACHE true
 </details>
 
 <details>
-<summary><strong>Qual é a diferença entre Microsoft Foundry Models e OpenAI API?</strong></summary>
+<summary><strong>Qual é a diferença entre Microsoft Foundry Models e a API da OpenAI?</strong></summary>
 
 **Microsoft Foundry Models**:
-- Segurança e conformidade empresarial
+- Segurança empresarial e conformidade
 - Integração com rede privada
 - Garantias de SLA
-- Autenticação com Managed Identity
-- Cotas maiores disponíveis
+- Autenticação por Managed Identity
+- Cotas mais altas disponíveis
 
 **OpenAI API**:
 - Acesso mais rápido a novos modelos
 - Configuração mais simples
-- Menor barreira de entrada
-- Apenas internet pública
+- Barreira de entrada menor
+- Somente internet pública
 
-Para aplicativos em produção, **Microsoft Foundry Models é recomendado**.
+Para aplicativos de produção, **recomenda-se Microsoft Foundry Models**.
 </details>
 
 <details>
 <summary><strong>Como lidar com erros de cota excedida do Microsoft Foundry Models?</strong></summary>
 
 ```bash
-# Verificar cota atual
+# Verifique a cota atual
 az cognitiveservices usage list --location eastus2
 
-# Tentar outra região
+# Tente outra região
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Reduzir capacidade temporariamente
+# Reduza a capacidade temporariamente
 azd env set AZURE_OPENAI_CAPACITY 10
 azd provision
 
-# Solicitar aumento de cota
-# Vá para o Portal do Azure > Cotas > Solicitar aumento
+# Solicite aumento da cota
+# Vá para o Azure Portal > Cotas > Solicitar aumento
 ```
 </details>
 
 <details>
-<summary><strong>Posso usar meus próprios dados com o Microsoft Foundry Models?</strong></summary>
+<summary><strong>Posso usar meus próprios dados com Microsoft Foundry Models?</strong></summary>
 
-Sim! Use o **Azure AI Search** para Geração Aumentada por Recuperação (RAG):
+Sim! Use o **Azure AI Search** para RAG (Retrieval Augmented Generation):
 
 ```yaml
 # azure.yaml
@@ -882,14 +882,14 @@ Veja o template [azure-search-openai-demo](https://github.com/Azure-Samples/azur
 </details>
 
 <details>
-<summary><strong>Como proteger endpoints de modelos de IA?</strong></summary>
+<summary><strong>Como proteger os endpoints dos modelos de IA?</strong></summary>
 
 **Melhores práticas**:
 1. Use Managed Identity (sem chaves de API)
-2. Ative Private Endpoints
+2. Habilite Private Endpoints
 3. Configure grupos de segurança de rede
 4. Implemente limitação de taxa
-5. Use o Azure Key Vault para segredos
+5. Use Azure Key Vault para segredos
 
 ```bicep
 // Managed Identity authentication
@@ -912,9 +912,9 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 ## Comunidade e Suporte
 
 - **Microsoft Foundry Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
-- **AZD GitHub**: [Issues e discussões](https://github.com/Azure/azure-dev)
+- **AZD GitHub**: [Issues and discussions](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Documentação oficial](https://learn.microsoft.com/azure/ai-studio/)
-- **Agent Skills**: [Microsoft Foundry skill on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Instale as skills de agente Azure + Foundry no seu editor com `npx skills add microsoft/github-copilot-for-azure`
+- **Agent Skills**: [Microsoft Foundry skill on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Instale as skills de agente do Azure + Foundry no seu editor com `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
@@ -922,7 +922,7 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 - **📚 Início do Curso**: [AZD For Beginners](../../README.md)
 - **📖 Capítulo Atual**: Capítulo 2 - Desenvolvimento com foco em IA
 - **⬅️ Capítulo Anterior**: [Capítulo 1: Seu Primeiro Projeto](../chapter-01-foundation/first-project.md)
-- **➡️ Próximo**: [Implantação de Modelo de IA](ai-model-deployment.md)
+- **➡️ Próximo**: [Implantação de Modelos de IA](ai-model-deployment.md)
 - **🚀 Próximo Capítulo**: [Capítulo 3: Configuração](../chapter-03-configuration/configuration.md)
 
 **Precisa de ajuda?** Participe das discussões da comunidade ou abra uma issue no repositório. A comunidade Azure AI + AZD está aqui para ajudar você a ter sucesso!
@@ -930,6 +930,6 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para alcançar precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em sua língua nativa deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se tradução humana profissional. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.
+**Aviso Legal**:
+Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, por favor, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,26 +1,26 @@
-# 2. Validate a Template
+# 2. Validasi Template
 
-> Validated against `azd 1.23.12` in March 2026.
+> Tervalidasi terhadap `azd 1.25.6` pada Juni 2026.
 
-!!! tip "DI AKHIR MODUL INI ANDA AKAN BISA"
+!!! tip "PADA AKHIR MODUL INI ANDA AKAN DAPAT"
 
     - [ ] Menganalisis Arsitektur Solusi AI
-    - [ ] Memahami Alur Kerja Deploy AZD
-    - [ ] Menggunakan GitHub Copilot untuk mendapatkan bantuan tentang penggunaan AZD
-    - [ ] **Lab 2:** Deploy & Validasi template AI Agents
+    - [ ] Memahami Alur Kerja Penyebaran AZD
+    - [ ] Menggunakan GitHub Copilot untuk membantu penggunaan AZD
+    - [ ] **Lab 2:** Menerapkan & Memvalidasi template AI Agents
 
 ---
 
 
-## 1. Introduction
+## 1. Pendahuluan
 
-The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) or `azd` is an open-source commandline tool that streamlines the developer workflow when building and deploying applications to Azure. 
+The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) atau `azd` adalah alat baris perintah sumber terbuka yang mempermudah alur kerja pengembang saat membangun dan menerapkan aplikasi ke Azure. 
 
-[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) are standardized repositories that include sample application code, _infrastructure-as-code_ assets, and `azd` configuration files for a cohesive solution architecture. Provisioning the infrastructure becomes as simple as an `azd provision` command - while using `azd up` allows you to provision infrastructure **and** deploy your application at one shot!
+[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) adalah repositori terstandarisasi yang menyertakan kode aplikasi contoh, aset _infrastructure-as-code_, dan file konfigurasi `azd` untuk arsitektur solusi yang kohesif. Penyediaan infrastruktur menjadi sesederhana perintah `azd provision` - sementara menggunakan `azd up` memungkinkan Anda untuk menyediakan infrastruktur **dan** menerapkan aplikasi Anda sekaligus!
 
-As a result, jumpstarting your application development process can be as simple as finding the right _AZD Starter template_ that comes closest to your application and infrastructure needs - then customizing the repository to suit your scenario requirements.
+Sebagai hasilnya, memulai proses pengembangan aplikasi Anda bisa sesederhana menemukan _AZD Starter template_ yang paling mendekati kebutuhan aplikasi dan infrastruktur Anda - lalu menyesuaikan repositori untuk memenuhi persyaratan skenario Anda.
 
-Before we begin, let's make sure you have the Azure Developer CLI installed.
+Sebelum kita mulai, pastikan Anda telah menginstal Azure Developer CLI.
 
 1. Open a VS Code terminal and type this command:
 
@@ -31,16 +31,16 @@ Before we begin, let's make sure you have the Azure Developer CLI installed.
 1. You should see something like this!
 
       ```bash title="" linenums="0"
-      azd version 1.23.12 (commit <current-build>)
+      azd version 1.25.6 (commit <current-build>)
       ```
 
-**You are now ready to select and deploy a template with azd**
+**Sekarang Anda siap untuk memilih dan menerapkan template dengan azd**
 
 ---
 
-## 2. Template Selection
+## 2. Pemilihan Template
 
-The Microsoft Foundry platform comes with a [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that cover popular solution scenarios like _multi-agent workflow atomation_ and _multi-modal content processing_. You can also discover these templates by visiting the Microsoft Foundry portal.
+Platform Microsoft Foundry dilengkapi dengan [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) yang mencakup skenario solusi populer seperti _multi-agent workflow atomation_ dan _multi-modal content processing_. Anda juga dapat menemukan template ini dengan mengunjungi portal Microsoft Foundry.
 
 1. Visit [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Log into the Microsoft Foundry portal when prompted - you will see something like this.
@@ -50,8 +50,8 @@ The Microsoft Foundry platform comes with a [set of recommended AZD templates](h
 
 The **Basic** options are your starter templates:
 
-1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) that deploys a basic chat application _with your data_ to Azure Container Apps. Use this to explore a basic AI chatbot scenario.
-1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) that also deploys a standard AI Agent (with the Foundry Agents). Use this to get familiar with agentic AI solutions involving tools and models.
+1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) yang menerapkan aplikasi chat dasar _dengan data Anda_ ke Azure Container Apps. Gunakan ini untuk mengeksplorasi skenario chatbot AI dasar.
+1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) yang juga menerapkan Agen AI standar (dengan Foundry Agents). Gunakan ini untuk membiasakan diri dengan solusi AI agenik yang melibatkan alat dan model.
 
 Visit the second link in a new browser tab (or click `Open in GitHub` for the related card). You should see the repository for this AZD Template. Take a minute to explore the README. The application architecture looks like this:
 
@@ -59,7 +59,7 @@ Visit the second link in a new browser tab (or click `Open in GitHub` for the re
 
 ---
 
-## 3. Template Activation
+## 3. Aktivasi Template
 
 Let's try to deploy this template and make sure it is valid. We'll follow the guidelines in the [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) section.
 
@@ -90,28 +90,28 @@ Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
       ```
 1. Your Azure Portal will now have a provisioned resource group with that env name:
 
-      ![Infra](../../../../../translated_images/id/02-provisioned-infra.46c706b14f56e0bf.webp)
+      ![Infrastruktur](../../../../../translated_images/id/02-provisioned-infra.46c706b14f56e0bf.webp)
 
-1. **You are now ready to validate the deployed infrastructure and application**.
+1. **Anda sekarang siap untuk memvalidasi infrastruktur dan aplikasi yang dideploy**.
 
 ---
 
-## 4. Template Validation
+## 4. Validasi Template
 
-1. Visit Azure Portal [Resource Groups](https://portal.azure.com/#browse/resourcegroups) page - log in when prompted
-1. Click on RG for your environment name - you see the page above
+1. Kunjungi halaman Azure Portal [Grup Sumber Daya](https://portal.azure.com/#browse/resourcegroups) - masuk ketika diminta
+1. Klik pada RG untuk nama lingkungan Anda - Anda akan melihat halaman seperti di atas
 
-      - click on the Azure Container Apps resource
-      - click on the Application Url in the _Essentials_ section (top right)
+      - klik pada resource Azure Container Apps
+      - klik pada Application Url di bagian _Essentials_ (kanan atas)
 
 1. You should see a hosted application front-end UI like this:
 
    ![Aplikasi](../../../../../translated_images/id/03-test-application.471910da12c3038e.webp)
 
-1. Try asking a couple of [sample questions](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
+1. Coba ajukan beberapa [pertanyaan contoh](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
-      1. Ask: ```What is the capital of France?``` 
-      1. Ask: ```What's the best tent under $200 for two people, and what features does it include?```
+      1. Ask: ```Apa ibu kota Prancis?``` 
+      1. Ask: ```Tenda terbaik di bawah $200 untuk dua orang, dan fitur apa yang dimilikinya?```
 
 1. You should get answers similar to what is shown below. _But how does this work?_ 
 
@@ -119,7 +119,7 @@ Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
 
 ---
 
-## 5.  Agent Validation
+## 5.  Validasi Agen
 
 The Azure Container App deploys an endpoint that connects to the AI Agent provisioned in the Microsoft Foundry project for this template. Let's take a look at what that means.
 
@@ -131,16 +131,16 @@ The Azure Container App deploys an endpoint that connects to the AI Agent provis
    ![Foundry](../../../../../translated_images/id/04-view-foundry-project.fb94ca41803f28f3.webp)
 
 1. You should see the Foundry Project page for your AI application
-   ![Project](../../../../../translated_images/id/05-visit-foundry-portal.d734e98135892d7e.webp)
+   ![Proyek](../../../../../translated_images/id/05-visit-foundry-portal.d734e98135892d7e.webp)
 
 1. Click on `Agents` - you see the default Agent provisioned in your project
-   ![Agents](../../../../../translated_images/id/06-visit-agents.bccb263f77b00a09.webp)
+   ![Agen](../../../../../translated_images/id/06-visit-agents.bccb263f77b00a09.webp)
 
 1. Select it - and you see the Agent details. Note the following:
 
       - The agent uses File Search by default (always)
       - The agent `Knowledge` indicates it has 32 files uploaded (for file search)
-      ![Agents](../../../../../translated_images/id/07-view-agent-details.0e049f37f61eae62.webp)
+      ![Agen](../../../../../translated_images/id/07-view-agent-details.0e049f37f61eae62.webp)
 
 1. Look for the `Data+indexes` option in the left menu and click for details. 
 
@@ -148,13 +148,13 @@ The Azure Container App deploys an endpoint that connects to the AI Agent provis
       - These will correspond to the 12 customer files and 20 product files under `src/files` 
       ![Data](../../../../../translated_images/id/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
-**You validated Agent operation!** 
+**Anda telah memvalidasi operasi Agent!** 
 
 1. The agent responses are grounded in the knowledge in those files. 
 1. You can now ask questions related to that data, and get grounded responses.
 1. Example: `customer_info_10.json` describes the 3 purchases made by "Amanda Perez"
 
-Revisit the browser tab with the Container App endpoint and ask: `What products does Amanda Perez own?`. You should see something like this:
+Revisit the browser tab with the Container App endpoint and ask: `Produk apa yang dimiliki Amanda Perez?`. You should see something like this:
 
 ![Data](../../../../../translated_images/id/09-ask-in-aca.4102297fc465a4d5.webp)
 
@@ -166,7 +166,7 @@ Let's build a bit more intuition for the capabilities of Microsoft Foundry, by t
 
 1. Return to the `Agents` page in Microsoft Foundry - select the default agent
 1. Click the `Try in Playground` option - you should get a Playground UI like this
-1. Ask the same question: `What products does Amanda Perez own?`
+1. Ask the same question: `Produk apa yang dimiliki Amanda Perez?`
 
     ![Data](../../../../../translated_images/id/09-ask-in-playground.a1b93794f78fa676.webp)
 
@@ -184,26 +184,26 @@ You also see a _stats_ row below the response.
 
 ---
 
-## 7. Built-in Observability
+## 7. Observabilitas Bawaan
 
-Observability is about instrumenting your application to generate data that can be used to understand, debug, and optimize, its operations. To get a sense for this:
+Observability berkaitan dengan menginstrumentasi aplikasi Anda untuk menghasilkan data yang dapat digunakan untuk memahami, men-debug, dan mengoptimalkan operasinya. Untuk mendapatkan gambaran tentang ini:
 
 1. Click the `View Run Info` button - you should see this view. This is an example of [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) in action. _You can also get this view by clicking Thread Logs in the top-level menu_.
 
-   - Get a sense for the run steps and tools engaged by the agent
-   - Understand total Token count (vs. output tokens usage) for response
-   - Understand the latency and where time is being spent in execution
+   - Dapatkan gambaran tentang langkah-langkah run dan alat yang digunakan oleh agent
+   - Pahami jumlah Token total (vs. penggunaan token output) untuk respons
+   - Pahami latensi dan di mana waktu dihabiskan dalam eksekusi
 
-      ![Agent](../../../../../translated_images/id/10-view-run-info.b20ebd75fef6a1cc.webp)
+      ![Agen](../../../../../translated_images/id/10-view-run-info.b20ebd75fef6a1cc.webp)
 
 1. Click the `Metadata` tab to see additional attributes for the run, that may provide useful context for debugging issues later.   
 
-      ![Agent](../../../../../translated_images/id/11-view-run-info-metadata.7966986122c7c2df.webp)
+      ![Agen](../../../../../translated_images/id/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 
 1. Click the `Evaluations` tab to see auto-assessments made on the agent response. These include safety evaluations (e.g., Self-harm) and agent-specifc evaluations (e.g., Intent resolution, Task adherence).
 
-      ![Agent](../../../../../translated_images/id/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
+      ![Agen](../../../../../translated_images/id/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
 1. Last but not least, click the `Monitoring` tab in the sidebar menu.
 
@@ -211,11 +211,11 @@ Observability is about instrumenting your application to generate data that can 
       - Track application usage in terms of costs (tokens) and load (requests).
       - Track applicaton latency to first byte (input processing) and last byte (output).
 
-      ![Agent](../../../../../translated_images/id/13-monitoring-resources.5148015f7311807f.webp)
+      ![Agen](../../../../../translated_images/id/13-monitoring-resources.5148015f7311807f.webp)
 
 ---
 
-## 8. Environment Variables
+## 8. Variabel Lingkungan
 
 So far, we've walked through the deployment in the browser - and validated that our infrastructure is provisioned and the application is operational. But to work with the application _code-first_, we need to configure our local development environment with the relevant variables required to work with these resources. Using `azd` makes it easy.
 
@@ -234,7 +234,7 @@ Let's try out a few commands:
       azd env get-values
       ```
       
-      You see something like:
+      Anda akan melihat sesuatu seperti:
 
       ```bash title="" linenums="0"
       AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4.1-mini"
@@ -250,7 +250,7 @@ Let's try out a few commands:
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
       
-      You see something like this - it was not set by default!
+      Anda akan melihat sesuatu seperti ini - tidak disetel secara default!
 
       ```bash title="" linenums="0"
       ERROR: key 'AZURE_AI_AGENT_MODEL_NAME' not found in the environment values
@@ -264,7 +264,7 @@ Let's try out a few commands:
       azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
       ```
 
-      Now, we should find the value is set:
+      Sekarang, kita harus menemukan nilainya disetel:
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
@@ -278,7 +278,7 @@ Let's try out a few commands:
       azd env refresh
       ```
 
-      Ini adalah cara yang ampuh untuk _menyinkronkan_ variabel lingkungan di antara dua atau lebih lingkungan pengembangan lokal (mis., tim dengan beberapa pengembang) - memungkinkan infrastruktur yang dideploy berfungsi sebagai sumber kebenaran untuk status variabel lingkungan. Anggota tim cukup _menyegarkan_ variabel untuk kembali sinkron.
+      Ini adalah cara yang ampuh untuk _menyinkronkan_ variabel lingkungan di antara dua atau lebih lingkungan pengembangan lokal (mis., tim dengan beberapa pengembang) - memungkinkan infrastruktur yang dideploy berfungsi sebagai sumber kebenaran untuk status variabel lingkungan. Anggota tim cukup _menyegarkan_ variabel untuk kembali tersinkronisasi.
 
 ---
 
@@ -286,13 +286,13 @@ Let's try out a few commands:
 
 Anda baru saja menyelesaikan alur kerja ujung-ke-ujung di mana Anda:
 
-- [X] Memilih AZD Template yang ingin Anda gunakan
+- [X] Memilih AZD Template yang Ingin Anda Gunakan
 - [X] Membuka template di lingkungan pengembangan yang didukung
-- [X] Menerapkan Template dan memvalidasi bahwa itu berfungsi
+- [X] Mendeploy Template dan memvalidasi bahwa itu berfungsi
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk akurat, harap diingat bahwa terjemahan otomatis dapat mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi yang krusial, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang salah yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk mencapai akurasi, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang sah. Untuk informasi penting, disarankan menggunakan terjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

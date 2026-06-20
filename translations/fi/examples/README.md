@@ -1,49 +1,49 @@
-# Esimerkit - Käytännön AZD-mallit ja -kokoonpanot
+# Esimerkit - Käytännön AZD-mallit ja asetukset
 
-**Oppiminen esimerkkien kautta - Järjestetty luvuittain**
-- **📚 Kurssin etusivu**: [AZD Aloittelijoille](../README.md)
-- **📖 Lukujen kartoitus**: Esimerkit järjestetty oppimisen vaativuuden mukaan
-- **🚀 Paikallinen esimerkki**: [Vähittäiskaupan moniagenttiratkaisu](retail-scenario.md)
-- **🤖 Ulkoiset tekoälyesimerkit**: Linkkejä Azure Samples -repositorioihin
+**Oppiminen esimerkkien kautta - järjestetty luvun mukaan**
+- **📚 Kurssin koti**: [AZD aloittelijoille](../README.md)
+- **📖 Lukujen kartoitus**: Esimerkit järjestetty oppimisen vaikeustason mukaan
+- **🚀 Paikallinen esimerkki**: [Vähittäiskaupan moni-agenttiratkaisu](retail-scenario.md)
+- **🤖 Ulkoiset AI-esimerkit**: Linkkejä Azure Samples -repositorioihin
 
 > **📍 TÄRKEÄÄ: Paikalliset vs ulkoiset esimerkit**  
-> Tämä repositorio sisältää **4 täydellistä paikallista esimerkkiä** täydellisillä toteutuksilla:  
-> - **Microsoft Foundry Models Chat** (gpt-4.1 käyttöönotto keskustelukäyttöliittymällä)  
+> Tämä repositorio sisältää **4 täydellistä paikallista esimerkkiä** täysillä toteutuksilla:  
+> - **Microsoft Foundry Models Chat** (gpt-4.1-käyttöönotto keskustelukäyttöliittymällä)  
 > - **Container Apps** (Yksinkertainen Flask-API + mikropalvelut)  
-> - **Tietokantasovellus** (Web + SQL-tietokanta)  
-> - **Retail Multi-Agent** (Yritysratkaisu tekoälyllä)  
+> - **Database App** (Web + SQL-tietokanta)  
+> - **Retail Multi-Agent** (yritystason AI-ratkaisu)  
 >  
-> Lisäesimerkit ovat **ulkoisia viitteitä** Azure-Samples -repositorioihin, jotka voit kloonata.
+> Lisäesimerkit ovat **ulkoisia viitteitä** Azure-Samples-repositoreihin, jotka voit kloonata.
 
 ## Johdanto
 
-Tämä hakemisto tarjoaa käytännön esimerkkejä ja viitteitä, jotka auttavat oppimaan Azure Developer CLI:n käytännön kautta. Retail Multi-Agent -skenaario on täydellinen, tuotantovalmiiksi tarkoitettu toteutus, joka sisältyy tähän repositorioon. Lisäesimerkit viittaavat virallisiin Azure Samples -repositorioihin, jotka demonstroivat erilaisia AZD-malleja.
+Tämä hakemisto tarjoaa käytännön esimerkkejä ja viitteitä auttaakseen sinua oppimaan Azure Developer CLI:tä käytännön harjoitusten kautta. Retail Multi-Agent -skenaario on täydellinen, tuotantovalmiiksi tehty toteutus, joka sisältyy tähän repositorioon. Lisäesimerkit viittaavat virallisiin Azure Samples -repositorioihin, jotka demonstroivat erilaisia AZD-malleja.
 
-### Vaikeustason selite
+### Monimutkaisuuden selite
 
-- ⭐ **Aloittelija** - Peruskonseptit, yksi palvelu, 15-30 minuuttia
-- ⭐⭐ **Keskitaso** - Useita palveluja, tietokantaintegraatio, 30-60 minuuttia
-- ⭐⭐⭐ **Edistynyt** - Monimutkainen arkkitehtuuri, tekoälyintegraatio, 1-2 tuntia
+- ⭐ **Aloittelija** - Peruskäsitteet, yksittäinen palvelu, 15-30 minuuttia
+- ⭐⭐ **Keskitaso** - Useita palveluita, tietokantaintegraatio, 30-60 minuuttia
+- ⭐⭐⭐ **Edistynyt** - Monimutkainen arkkitehtuuri, AI-integraatio, 1-2 tuntia
 - ⭐⭐⭐⭐ **Asiantuntija** - Tuotantovalmiit, yritystason mallit, 2+ tuntia
 
-## 🎯 Mitä tässä repositoriossa on käytännössä
+## 🎯 Mitä tässä repositoriossa oikeastaan on
 
 ### ✅ Paikallinen toteutus (valmis käytettäväksi)
 
 #### [Microsoft Foundry Models Chat -sovellus](azure-openai-chat/README.md) 🆕
-**Tässä repositoriossa mukana täydellinen gpt-4.1-käyttöönotto keskustelukäyttöliittymällä**
+**Täydellinen gpt-4.1-käyttöönotto keskustelukäyttöliittymällä sisältyy tähän repoihin**
 
 - **Sijainti:** `examples/azure-openai-chat/`
-- **Vaikeustaso:** ⭐⭐ (Keskitaso)
+- **Monimutkaisuus:** ⭐⭐ (Keskitaso)
 - **Sisältö:**
   - Täydellinen Microsoft Foundry Models -käyttöönotto (gpt-4.1)
-  - Python-komentorivinen keskustelukäyttöliittymä
+  - Python-komentorivikäyttöliittymä keskusteluun
   - Key Vault -integraatio suojattuja API-avaimia varten
   - Bicep-infrastruktuurimallit
-  - Tokenien käyttö- ja kustannusseuranta
+  - Token-käyttö- ja kustannusseuranta
   - Rajoitusten asettaminen ja virheenkäsittely
 
-**Nopea aloitus:**
+**Pika-aloitus:**
 ```bash
 # Siirry esimerkkiin
 cd examples/azure-openai-chat
@@ -59,18 +59,18 @@ python src/chat.py
 **Teknologiat:** Microsoft Foundry Models, gpt-4.1, Key Vault, Python, Bicep
 
 #### [Container App -esimerkit](container-app/README.md) 🆕
-**Tässä repositoriossa mukana kattavat säiliöiden käyttöönottoesimerkit**
+**Laajat konttien käyttöönottoesimerkit sisältyvät tähän repoihin**
 
 - **Sijainti:** `examples/container-app/`
-- **Vaikeustaso:** ⭐-⭐⭐⭐⭐ (Aloittelijasta edistyneeseen)
+- **Monimutkaisuus:** ⭐-⭐⭐⭐⭐ (Aloittelijasta asiantuntijaan)
 - **Sisältö:**
-  - [Master Guide](container-app/README.md) - Kattava yleiskatsaus säilöjen käyttöönotosta
-  - [Yksinkertainen Flask-API](../../../examples/container-app/simple-flask-api) - Perus REST-API esimerkki
-  - [Mikropalveluarkkitehtuuri](../../../examples/container-app/microservices) - Tuotantovalmiiksi monipalveluinen käyttöönotto
-  - Nopea aloitus, tuotantokäytännöt ja edistyneet mallit
-  - Valvonta, tietoturva ja kustannusoptimointi
+  - [Pääopas](container-app/README.md) - Täydellinen yleiskatsaus konttien käyttöönotosta
+  - [Yksinkertainen Flask-API](../../../examples/container-app/simple-flask-api) - Perusesimerkki REST-API:sta
+  - [Mikropalveluarkkitehtuuri](../../../examples/container-app/microservices) - Tuotantovalmis monipalvelujärjestelmä
+  - Pika-aloitus-, tuotanto- ja edistyneet mallit
+  - Monitorointi, turvallisuus ja kustannusoptimointi
 
-**Nopea aloitus:**
+**Pika-aloitus:**
 ```bash
 # Näytä pääopas
 cd examples/container-app
@@ -79,27 +79,27 @@ cd examples/container-app
 cd simple-flask-api
 azd up
 
-# Ota käyttöön mikropalveluesimerkki
+# Ota käyttöön esimerkki mikropalveluista
 cd ../microservices
 azd up
 ```
 
 **Teknologiat:** Azure Container Apps, Docker, Python Flask, Node.js, C#, Go, Application Insights
 
-#### [Retail Multi-Agent -ratkaisu](retail-scenario.md) 🆕
-**Tässä repositoriossa mukana täydellinen tuotantovalmiiksi tarkoitettu toteutus**
+#### [Vähittäiskaupan moni-agenttiratkaisu](retail-scenario.md) 🆕
+**Täydellinen tuotantovalmis toteutus sisältyy tähän repoihin**
 
 - **Sijainti:** `examples/retail-multiagent-arm-template/`
-- **Vaikeustaso:** ⭐⭐⭐⭐ (Edistynyt)
+- **Monimutkaisuus:** ⭐⭐⭐⭐ (Edistynyt)
 - **Sisältö:**
-  - Täydellinen ARM-käyttöönotto-malli
-  - Moniagenttiarkkitehtuuri (Asiakas + Varasto)
+  - Täydellinen ARM-käyttöönoton malli
+  - Moni-agenttiarkkitehtuuri (asiakas + varasto)
   - Microsoft Foundry Models -integraatio
-  - AI-haku RAG-mallilla
-  - Kattava valvonta
-  - Yhden klikkauksen käyttöönotto-skripti
+  - AI-haku RAG-menetelmällä
+  - Laaja valvonta
+  - Yhden napsautuksen käyttöönotto-skripti
 
-**Nopea aloitus:**
+**Pika-aloitus:**
 ```bash
 cd examples/retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
@@ -109,16 +109,16 @@ cd examples/retail-multiagent-arm-template
 
 ---
 
-## 🔗 Ulkoiset Azure Samples (Kloonaa käyttääksesi)
+## 🔗 Ulkoiset Azure Samples -esimerkit (kloonaa käyttääksesi)
 
-Seuraavia esimerkkejä ylläpidetään virallisissa Azure-Samples -repositorioissa. Kloonaa ne tutkiaksesi erilaisia AZD-malleja:
+Seuraavia esimerkkejä ylläpidetään virallisissa Azure-Samples -repositoriumeissa. Kloonaa ne tutkiaksesi erilaisia AZD-malleja:
 
 ### Yksinkertaiset sovellukset (luvut 1-2)
 
-| Malli | Repositorio | Vaikeustaso | Palvelut |
+| Mallipohja | Repositorio | Monimutkaisuus | Palvelut |
 |:---------|:-----------|:-----------|:---------|
-| **Python Flask -API** | [Paikallinen: simple-flask-api](../../../examples/container-app/simple-flask-api) | ⭐ | Python, Container Apps, Application Insights |
-| **Mikropalvelut** | [Paikallinen: microservices](../../../examples/container-app/microservices) | ⭐⭐⭐⭐ | Monipalvelu, Service Bus, Cosmos DB, SQL |
+| **Python Flask API** | [Paikallinen: simple-flask-api](../../../examples/container-app/simple-flask-api) | ⭐ | Python, Container Apps, Application Insights |
+| **Mikropalvelut** | [Paikallinen: microservices](../../../examples/container-app/microservices) | ⭐⭐⭐⭐ | Monipalveluinen, Service Bus, Cosmos DB, SQL |
 | **Node.js + MongoDB** | [todo-nodejs-mongo](https://github.com/Azure-Samples/todo-nodejs-mongo) | ⭐ | Express, Cosmos DB, Container Apps |
 | **React + Functions** | [todo-csharp-sql-swa-func](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) | ⭐ | Static Web Apps, Functions, SQL |
 | **Python Flask Container** | [container-apps-store-api](https://github.com/Azure-Samples/container-apps-store-api-microservice) | ⭐ | Python, Container Apps, API |
@@ -133,44 +133,44 @@ cd todo-nodejs-mongo
 azd up
 ```
 
-### Tekoälysovellus-esimerkit (luvut 2, 5, 8)
+### AI-sovellus-esimerkit (luvut 2, 5, 8)
 
-| Malli | Repositorio | Vaikeustaso | Tavoite |
+| Mallipohja | Repositorio | Monimutkaisuus | Kohde |
 |:---------|:-----------|:-----------|:------|
-| **Microsoft Foundry Models Chat** | [Paikallinen: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | gpt-4.1 käyttöönotto |
-| **AI Chat -pika-aloitus** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | Perus AI-keskustelu |
-| **AI-agentit** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | Agenttikehys |
-| **Search + OpenAI -demo** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | RAG-malli |
+| **Microsoft Foundry Models Chat** | [Paikallinen: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | gpt-4.1-käyttöönotto |
+| **AI Chat Quickstart** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | Perus AI-keskustelu |
+| **AI Agents** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | Agenttikehys |
+| **Search + OpenAI Demo** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | RAG-malli |
 | **Contoso Chat** | [contoso-chat](https://github.com/Azure-Samples/contoso-chat) | ⭐⭐⭐⭐ | Yritystason AI |
 
-### Tietokanta- ja edistyneet mallit (luvut 3-8)
+### Tietokannat & kehittyneet mallit (luvut 3-8)
 
-| Malli | Repositorio | Vaikeustaso | Tavoite |
+| Mallipohja | Repositorio | Monimutkaisuus | Kohde |
 |:---------|:-----------|:-----------|:------|
 | **C# + SQL** | [todo-csharp-sql](https://github.com/Azure-Samples/todo-csharp-sql) | ⭐⭐ | Tietokantaintegraatio |
-| **Python + Cosmos** | [todo-python-mongo-swa-func](https://github.com/Azure-Samples/todo-python-mongo-swa-func) | ⭐⭐ | NoSQL serveriton |
-| **Java-mikropalvelut** | [java-microservices-aca-lab](https://github.com/Azure-Samples/java-microservices-aca-lab) | ⭐⭐⭐ | Monipalvelu |
-| **ML-putki** | [mlops-v2](https://github.com/Azure-Samples/mlops-v2) | ⭐⭐⭐⭐ | MLOps |
+| **Python + Cosmos** | [todo-python-mongo-swa-func](https://github.com/Azure-Samples/todo-python-mongo-swa-func) | ⭐⭐ | NoSQL-serveriton |
+| **Java Microservices** | [java-microservices-aca-lab](https://github.com/Azure-Samples/java-microservices-aca-lab) | ⭐⭐⭐ | Monipalveluinen |
+| **ML Pipeline** | [mlops-v2](https://github.com/Azure-Samples/mlops-v2) | ⭐⭐⭐⭐ | MLOps |
 
 ## Oppimistavoitteet
 
-Työskentelemällä näiden esimerkkien parissa opit:
-- Harjoittele Azure Developer CLI -työnkulkuja realististen sovellusskenaarioiden parissa
-- Ymmärrä erilaisia sovellusarkkitehtuureja ja niiden azd-toteutuksia
-- Hallitse Infrastructure as Code -mallit eri Azure-palveluille
-- Käytä konfiguraationhallintaa ja ympäristökohtaisia käyttöönotto­strategioita
-- Toteuta valvonta-, tietoturva- ja skaalautuvuusmalleja käytännön tilanteissa
-- Kehitä kokemusta vianetsinnästä ja virheenkorjauksesta todellisissa käyttöönotto­skenaarioissa
+Työskentelemällä näiden esimerkkien parissa sinä:
+- Harjoittelet Azure Developer CLI -työnkulkuja realistisissa sovellus-skenaarioissa
+- Ymmärrät erilaisia sovellusarkkitehtuureja ja niiden azd-toteutuksia
+- Hallitset Infrastructure as Code -mallit eri Azure-palveluille
+- Sovellat konfiguraationhallintaa ja ympäristökohtaisia käyttöönotto-strategioita
+- Toteutat monitorointi-, turvallisuus- ja skaalausmalleja käytännön tilanteissa
+- Käsittelet ja debuggaat todellisia käyttöönottoja ja opit vianmääritystä
 
 ## Oppimistulokset
 
-Näiden esimerkkien läpikäynnin jälkeen osaat:
-- Ota käyttöön eri tyyppisiä sovelluksia Azure Developer CLI:llä itsevarmasti
-- Mukauta toimitettuja malleja omien sovellusvaatimustesi mukaan
-- Suunnittele ja toteuta räätälöityjä infrastruktuurimalleja käyttäen Bicep:iä
-- Määritä monimutkaisia monipalvelusovelluksia oikeilla riippuvuuksilla
-- Käytä tietoturva-, valvonta- ja suorituskykyparhaiden käytäntöjen periaatteita todellisissa tilanteissa
-- Vianetsintä ja käyttöönottojen optimointi käytännön kokemuksen perusteella
+Esimerkkien läpikäynnin jälkeen pystyt:
+- Julkaisemaan erilaisia sovellustyyppejä Azure Developer CLI:llä luottavaisesti
+- Muokkaamaan annettuja malleja omien sovellusvaatimustesi mukaisesti
+- Suunnittelemaan ja toteuttamaan räätälöityjä infrastruktuurimalleja Bicepillä
+- Konfiguroimaan monimutkaisia monipalvelusovelluksia oikeilla riippuvuuksilla
+- Soveltamaan turvallisuus-, monitorointi- ja suorituskykysuosituksia todellisissa tilanteissa
+- Vianmäärityksen ja optimoinnin perusteet käytännön kokemuksen pohjalta
 
 ## Hakemistorakenne
 
@@ -188,71 +188,71 @@ Azure Samples AZD Templates (linked externally):
     └── scripts/
 ```
 
-## Nopeat aloitusesimerkit
+## Pika-aloitus-esimerkit
 
-> **💡 Uusi AZD:ssä?** Aloita esimerkistä #1 (Flask API) - se vie ~20 minuuttia ja opettaa ydinkäsitteet.
+> **💡 Uusi AZD:ssä?** Aloita esimerkistä #1 (Flask API) - se vie ~20 minuuttia ja opettaa keskeiset käsitteet.
 
 ### Aloittelijoille
 1. **[Container App - Python Flask API](../../../examples/container-app/simple-flask-api)** (Paikallinen) ⭐  
    Ota käyttöön yksinkertainen REST-API, joka skaalautuu nollaan  
    **Aika:** 20-25 minuuttia | **Kustannus:** $0-5/kuukausi  
-   **Opit:** Perus azd-työnkulku, säiliöinti, terveystarkastukset  
-   **Odotettu lopputulos:** Toimiva API-päätepiste, joka palauttaa "Hello, World!" valvonnalla
+   **Opit:** Perus azd-työnkulku, kontitus, terveystarkastukset  
+   **Odotettu lopputulos:** Toimiva API-päätepiste palauttaa "Hello, World!" valvonnalla
 
 2. **[Simple Web App - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** ⭐  
-   Ota käyttöön Node.js Express -web-sovellus MongoDB:llä  
+   Julkaise Node.js Express -websovellus MongoDB:llä  
    **Aika:** 25-35 minuuttia | **Kustannus:** $10-30/kuukausi  
    **Opit:** Tietokantaintegraatio, ympäristömuuttujat, yhteysmerkkijonot  
-   **Odotettu lopputulos:** Todo-listasovellus, jossa on luo/lue/päivitä/poista -toiminnot
+   **Odotettu lopputulos:** Todo-lista-sovellus luo/lukee/muokkaa/poistaa toiminnallisuudella
 
 3. **[Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** ⭐  
    Isännöi React-pohjaista staattista sivustoa Azure Static Web Appsilla  
    **Aika:** 20-30 minuuttia | **Kustannus:** $0-10/kuukausi  
-   **Opit:** Staattinen isännöinti, serverittömät funktiot, CDN-käyttöönotto  
-   **Odotettu lopputulos:** React-käyttöliittymä API-taustapalvelulla, automaattinen SSL ja maailmanlaajuinen CDN
+   **Opit:** Staattinen isännöinti, serverless-funktiot, CDN-julkaisu  
+   **Odotettu lopputulos:** React-käyttöliittymä API-taustapalvelulla, automaattinen SSL, globaali CDN
 
 ### Keskitasoisille käyttäjille
-4. **[Microsoft Foundry Models Chat Application](../../../examples/azure-openai-chat)** (Paikallinen) ⭐⭐  
-   Ota käyttöön gpt-4.1 keskustelukäyttöliittymällä ja turvallisella API-avainten hallinnalla  
+4. **[Microsoft Foundry Models Chat -sovellus](../../../examples/azure-openai-chat)** (Paikallinen) ⭐⭐  
+   Julkaise gpt-4.1 keskustelukäyttöliittymällä ja turvallisella API-avainten hallinnalla  
    **Aika:** 35-45 minuuttia | **Kustannus:** $50-200/kuukausi  
-   **Opit:** Microsoft Foundry Models -käyttöönotto, Key Vault -integraatio, tokenien seuranta  
+   **Opit:** Microsoft Foundry Models -käyttöönotto, Key Vault -integraatio, token-seuranta  
    **Odotettu lopputulos:** Toimiva keskustelusovellus gpt-4.1:llä ja kustannusseurannalla
 
-5. **[Container App - Microservices](../../../examples/container-app/microservices)** (Paikallinen) ⭐⭐⭐⭐  
-   Tuotantovalmiiksi monipalveluarkkitehtuuri  
+5. **[Container App - Mikropalvelut](../../../examples/container-app/microservices)** (Paikallinen) ⭐⭐⭐⭐  
+   Tuotantovalmis monipalveluarkkitehtuuri  
    **Aika:** 45-60 minuuttia | **Kustannus:** $50-150/kuukausi  
-   **Opit:** Palveluiden välinen viestintä, viestijonotus, hajautettu jäljitys  
-   **Odotettu lopputulos:** 2-palvelun järjestelmä (API Gateway + Product Service) valvonnalla
+   **Opit:** Palveluiden välinen kommunikointi, viestijonot, hajautettu seuranta  
+   **Odotettu lopputulos:** 2-palvelun järjestelmä (API Gateway + Tuotepalvelu) valvonnalla
 
 6. **[Database App - C# with Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** ⭐⭐  
-   Web-sovellus C#-API:lla ja Azure SQL -tietokannalla  
+   Web-sovellus C# API:lla ja Azure SQL -tietokannalla  
    **Aika:** 30-45 minuuttia | **Kustannus:** $20-80/kuukausi  
-   **Opit:** Entity Framework, tietokantamigraatiot, yhteyksien turvallisuus  
-   **Odotettu lopputulos:** C#-API Azure SQL -taustajärjestelmällä, automaattinen skeeman käyttöönotto
+   **Opit:** Entity Framework, tietokantamigraatiot, yhteysturva  
+   **Odotettu lopputulos:** C# API Azure SQL -taustalla, automaattinen skeeman käyttöönotto
 
 7. **[Serverless Function - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** ⭐⭐  
-   Python Azure Functions HTTP-triggereillä ja Cosmos DB:llä  
+   Python Azure Functions HTTP-triggeröinneillä ja Cosmos DB:llä  
    **Aika:** 30-40 minuuttia | **Kustannus:** $10-40/kuukausi  
-   **Opit:** Tapahtumapohjainen arkkitehtuuri, serveriton skaalautuvuus, NoSQL-integraatio  
-   **Odotettu lopputulos:** Funktiosovellus vastaa HTTP-pyyntöihin ja käyttää Cosmos DB -tallennusta
+   **Opit:** Tapahtumapohjainen arkkitehtuuri, serverless-skaalaus, NoSQL-integraatio  
+   **Odotettu lopputulos:** Funktiosovellus vastaa HTTP-pyyntöihin ja tallentaa Cosmos DB:hen
 
 8. **[Microservices - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** ⭐⭐⭐  
    Monipalveluinen Java-sovellus Container Appsilla ja API-gatewaylla  
    **Aika:** 60-90 minuuttia | **Kustannus:** $80-200/kuukausi  
-   **Opit:** Spring Boot -käyttöönotto, palveluverkko (service mesh), kuormantasapainotus  
-   **Odotettu lopputulos:** Monipalveluinen Java-järjestelmä palvelunlöytämisellä ja reitityksellä
+   **Opit:** Spring Boot -julkaisu, palveluverkko, kuormantasapainotus  
+   **Odotettu lopputulos:** Monipalveluinen Java-järjestelmä palveluiden löytymisen ja reitityksen kanssa
 
 ### Microsoft Foundry -mallit
 
 1. **[Microsoft Foundry Models Chat App - paikallinen esimerkki](../../../examples/azure-openai-chat)** ⭐⭐  
    Täydellinen gpt-4.1-käyttöönotto keskustelukäyttöliittymällä  
    **Aika:** 35-45 minuuttia | **Kustannus:** $50-200/kuukausi  
-   **Odotettu lopputulos:** Toimiva keskustelusovellus token-seurannalla ja kustannusseurannalla
+   **Odotettu lopputulos:** Toimiva keskustelusovellus token-seurannalla ja kustannusmonitoroinnilla
 
 2. **[Azure Search + OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** ⭐⭐⭐  
    Älykäs keskustelusovellus RAG-arkkitehtuurilla  
    **Aika:** 60-90 minuuttia | **Kustannus:** $100-300/kuukausi  
-   **Odotettu lopputulos:** RAG-vetoinen keskustelukäyttöliittymä asiakirjahakuineen ja lähdeviitteineen
+   **Odotettu lopputulos:** RAG-pohjainen keskustelukäyttöliittymä dokumenttihakutoiminnolla ja viitteillä
 
 3. **[AI Document Processing](https://github.com/Azure-Samples/azure-ai-document-processing)** ⭐⭐  
    Asiakirja-analyysi Azure AI -palveluilla  
@@ -260,41 +260,42 @@ Azure Samples AZD Templates (linked externally):
    **Odotettu lopputulos:** API, joka poimii tekstiä, taulukoita ja entiteettejä ladatuista asiakirjoista
 
 4. **[Machine Learning Pipeline](https://github.com/Azure-Samples/mlops-v2)** ⭐⭐⭐⭐  
-   MLOps-työnkulku Azure Machine Learningillä  
+   MLOps-työnkulku Azure Machine Learningin kanssa  
    **Aika:** 2-3 tuntia | **Kustannus:** $150-500/kuukausi  
-   **Odotettu lopputulos:** Automaattinen ML-putki koulutuksella, käyttöönotolla ja valvonnalla
+   **Odotettu lopputulos:** Automaattinen ML-putki koulutuksella, käyttöönotolla ja monitoroinnilla
 
-### Todelliset käyttöskenaariot
+### Todelliset skenaariot
 
-#### **Retail Multi-Agent -ratkaisu** 🆕
+#### **Retail Multi-Agent Solution** 🆕
 **[Täydellinen toteutusopas](./retail-scenario.md)**
 
-Kaikkiaan tuotantovalmiiksi tarkoitettu moniagenttinen asiakastuen ratkaisu, joka demonstroi yritystason tekoälysovelluksen käyttöönottoa AZD:llä. Tämä skenaario tarjoaa:
-- **Täydellinen arkkitehtuuri**: Moni-agenttijärjestelmä, jossa erikoistuneita asiakaspalvelu- ja varastonhallinta-agentteja
-- **Tuotantoinfrastruktuuri**: Monialueiset Microsoft Foundry Models -käyttöönotot, AI Search, Container Apps ja kattava valvonta
-- **Valmis käyttöön otettavaksi ARM-malli**: Yhden napsautuksen käyttöönotto useilla konfigurointitiloilla (Minimal/Standard/Premium)
-- **Edistyneet ominaisuudet**: Red teaming -tietoturvatarkastus, agenttien arviointikehys, kustannusoptimointi ja vianmääritysohjeet
-- **Todellinen liiketoimintakonteksti**: Vähittäiskauppiaan asiakastuen käyttötapaus tiedostojen latauksilla, hakujen integraatiolla ja dynaamisella skaalaamisella
+Kattava, tuotantovalmis moni-agenttipohjainen asiakastukiratkaisu, joka demonstroi yritystason AI-sovelluksen käyttöönottoa AZD:llä. Tämä skenaario tarjoaa:
+
+- **Täydellinen arkkitehtuuri**: Moni-agenttijärjestelmä, jossa on erikoistuneet asiakaspalvelu- ja varastonhallinta-agentit
+- **Tuotantoinfrastruktuuri**: Monialueiset Microsoft Foundry Models -asennukset, AI Search, Container Apps ja kattava seuranta
+- **Valmis käyttöönotettava ARM Template**: Yhden napsautuksen käyttöönotto useilla kokoonpanotiloilla (Minimal/Standard/Premium)
+- **Kehittyneet ominaisuudet**: Red teaming -tietoturvan validointi, agenttien arviointikehys, kustannusoptimointi ja vianmääritysohjeet
+- **Todellinen liiketoimintakonteksti**: Vähittäiskaupan asiakaspalvelun käyttötapaus tiedostojen latauksilla, hakuintgraatiolla ja dynaamisella skaalaamisella
 
 **Teknologiat**: Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
 
-**Monimutkaisuus**: ⭐⭐⭐⭐ (Edistynyt - Yritystason tuotantovalmis)
+**Vaikeustaso**: ⭐⭐⭐⭐ (Edistynyt - Yrityksen tuotantovalmis)
 
-**Täydellinen valinta**: AI-kehittäjille, ratkaisusuunnittelijoille ja tiimeille, jotka rakentavat tuotantoon tarkoitettuja moni-agenttijärjestelmiä
+**Täydellinen kohderyhmä**: AI-kehittäjille, ratkaisukehittäjille ja tiimeille, jotka rakentavat tuotantokelpoisia moniedustajajärjestelmiä
 
-**Pika-aloitus**: Ota täysi ratkaisu käyttöön alle 30 minuutissa käyttämällä mukana tulevaa ARM-mallia komennolla `./deploy.sh -g myResourceGroup`
+**Nopea aloitus**: Ota koko ratkaisu käyttöön alle 30 minuutissa mukana tulevalla ARM-templatella komennolla `./deploy.sh -g myResourceGroup`
 
 ## 📋 Käyttöohjeet
 
 ### Esivaatimukset
 
-Before running any example:
+Ennen kuin suoritat mitään esimerkkiä:
 - ✅ Azure-tilaus, jossa on Owner- tai Contributor-oikeudet
-- ✅ Azure Developer CLI asennettuna ([Asennusohje](../docs/chapter-01-foundation/installation.md))
-- ✅ Docker Desktop käynnissä (konttiesimerkkejä varten)
-- ✅ Soveltuvat Azure-kiintiöt (tarkista esimerkkikohtaiset vaatimukset)
+- ✅ Azure Developer CLI asennettuna ([Installation Guide](../docs/chapter-01-foundation/installation.md))
+- ✅ Docker Desktop käynnissä (konttiesimerkeille)
+- ✅ Sopivat Azure-kvot (tarkista esimerkkiin liittyvät vaatimukset)
 
-> **💰 Kustannusvaroitus:** Kaikki esimerkit luovat todellisia Azure-resursseja, joista aiheutuu kustannuksia. Katso kustannusarviot kunkin README-tiedoston kohdasta. Muista suorittaa `azd down` käytön jälkeen välttääksesi jatkuvat kustannukset.
+> **💰 Kustannusvaroitus:** Kaikki esimerkit luovat oikeita Azure-resursseja, joista aiheutuu kustannuksia. Katso kunkin README-tiedoston kustannusarviot. Muista ajaa `azd down` valmiina ollessasi, jotta jatkuvat kulut vältetään.
 
 ### Esimerkkien suorittaminen paikallisesti
 
@@ -313,7 +314,7 @@ Before running any example:
    azd env new my-environment
    ```
 
-3. **Määritä ympäristö**
+3. **Konfiguroi ympäristö**
    ```bash
    # Aseta tarvittavat muuttujat
    azd env set AZURE_LOCATION eastus
@@ -322,7 +323,7 @@ Before running any example:
 
 4. **Ota käyttöön**
    ```bash
-   # Ota käyttöön infrastruktuuri ja sovellus
+   # Ota infrastruktuuri ja sovellus käyttöön
    azd up
    ```
 
@@ -335,13 +336,13 @@ Before running any example:
    curl https://your-app-url.azurecontainer.io/health
    ```
    
-   **Odotetut onnistumisen indikaattorit:**
-   - ✅ `azd up` suoritetaan ilman virheitä
-   - ✅ Palvelun päätepiste vastaa HTTP 200 -koodilla
-   - ✅ Azure-portaali näyttää tilan "Running"
+   **Odotetut onnistumisen merkit:**
+   - ✅ `azd up` suorittuu ilman virheitä
+   - ✅ Palvelun päätepiste palauttaa HTTP 200
+   - ✅ Azure Portal näyttää "Running" -tilan
    - ✅ Application Insights vastaanottaa telemetriaa
 
-> **⚠️ Ongelmia?** Katso [Yleiset ongelmat](../docs/chapter-07-troubleshooting/common-issues.md) käyttöönottovianmääritystä varten
+> **⚠️ Ongelmia?** Katso [Common Issues](../docs/chapter-07-troubleshooting/common-issues.md) käyttöönoton vianmääritykseen
 
 ### Esimerkkien mukauttaminen
 
@@ -350,139 +351,139 @@ Jokainen esimerkki sisältää:
 - **azure.yaml** - AZD-konfiguraatio kommenttien kera
 - **infra/** - Bicep-mallit parametriselityksineen
 - **src/** - Esimerkkisovelluksen koodi
-- **scripts/** - Apuskkriptit yleisiin tehtäviin
+- **scripts/** - Apuohjelmat yleisiin tehtäviin
 
 ## 🎯 Oppimistavoitteet
 
 ### Esimerkkiluokat
 
-#### **Peruskäyttöönotot**
-- Yksipalvelusovellukset
+#### **Perusasennukset**
+- Yksipalveluiset sovellukset
 - Yksinkertaiset infrastruktuurimallit
 - Peruskonfiguraation hallinta
 - Kustannustehokkaat kehitysympäristöt
 
 #### **Edistyneet skenaariot**
 - Monipalveluarkkitehtuurit
-- Monimutkaiset verkkoasetukset
+- Monimutkaiset verkotuskokoonpanot
 - Tietokantaintegraatiomallit
-- Tietoturva- ja vaatimustenmukaisuuden toteutukset
+- Tietoturva- ja vaatimustenmukaisuusratkaisut
 
 #### **Tuotantovalmiit mallit**
 - Korkean käytettävyyden kokoonpanot
-- Valvonta ja havaittavuus
+- Monitorointi ja observability
 - CI/CD-integraatio
-- Hätäpalautusasetukset
+- Liiketoiminnan jatkuvuuden varmistus
 
 ## 📖 Esimerkkikuvaukset
 
-### Yksinkertainen web-sovellus - Node.js Express
+### Simple Web App - Node.js Express
 **Teknologiat**: Node.js, Express, MongoDB, Container Apps  
-**Monimutkaisuus**: Aloittelija  
-**Käsitteet**: Peruskäyttöönotto, REST-API, NoSQL-tietokanta-integraatio
+**Vaikeustaso**: Aloittelija  
+**Käsitteet**: Perusasennus, REST-API, NoSQL-tietokantaintegraatio
 
-### Staattinen verkkosivusto - React SPA
+### Static Website - React SPA
 **Teknologiat**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
-**Monimutkaisuus**: Aloittelija  
-**Käsitteet**: Staattinen hosting, serverless-backend, moderni web-kehitys
+**Vaikeustaso**: Aloittelija  
+**Käsitteet**: Staattinen isännöinti, serverless-taustapalvelu, moderni web-kehitys
 
 ### Container App - Python Flask
 **Teknologiat**: Python Flask, Docker, Container Apps, Container Registry, Application Insights  
-**Monimutkaisuus**: Aloittelija  
-**Käsitteet**: Konttiteknologia, REST-API, scale-to-zero, terveystarkastukset, valvonta  
-**Sijainti**: [Paikallinen esimerkki](../../../examples/container-app/simple-flask-api)
+**Vaikeustaso**: Aloittelija  
+**Käsitteet**: Kontittaminen, REST-API, scale-to-zero, health probe -tarkistukset, monitorointi  
+**Sijainti**: [Local Example](../../../examples/container-app/simple-flask-api)
 
-### Container App - Mikropalveluarkkitehtuuri
+### Container App - Microservices Architecture
 **Teknologiat**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, Container Apps  
-**Monimutkaisuus**: Edistynyt  
-**Käsitteet**: Monipalveluarkkitehtuuri, palvelujen välinen viestintä, viestijonot, hajautettu jäljitys  
-**Sijainti**: [Paikallinen esimerkki](../../../examples/container-app/microservices)
+**Vaikeustaso**: Edistynyt  
+**Käsitteet**: Monipalveluarkkitehtuuri, palveluiden välinen viestintä, viestijonotus, hajautettu seuranta  
+**Sijainti**: [Local Example](../../../examples/container-app/microservices)
 
-### Tietokantasovellus - C# Azure SQL:llä
+### Database App - C# with Azure SQL
 **Teknologiat**: C# ASP.NET Core, Azure SQL Database, App Service  
-**Monimutkaisuus**: Keskitaso  
+**Vaikeustaso**: Keskitaso  
 **Käsitteet**: Entity Framework, tietokantayhteydet, web-API-kehitys
 
-### Serverless-funktio - Python Azure Functions
+### Serverless Function - Python Azure Functions
 **Teknologiat**: Python, Azure Functions, Cosmos DB, Static Web Apps  
-**Monimutkaisuus**: Keskitaso  
+**Vaikeustaso**: Keskitaso  
 **Käsitteet**: Tapahtumapohjainen arkkitehtuuri, serverless-laskenta, full-stack-kehitys
 
-### Mikropalvelut - Java Spring Boot
+### Microservices - Java Spring Boot
 **Teknologiat**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
-**Monimutkaisuus**: Keskitaso  
-**Käsitteet**: Mikropalvelujen viestintä, hajautetut järjestelmät, yritystason mallit
+**Vaikeustaso**: Keskitaso  
+**Käsitteet**: Mikropalveluiden kommunikointi, hajautetut järjestelmät, yritystason mallit
 
-### Microsoft Foundry -esimerkit
+### Microsoft Foundry Examples
 
-#### Microsoft Foundry Models Chat -sovellus
-**Teknologiat**: Microsoft Foundry Models, Cognitive Search, App Service  
-**Monimutkaisuus**: Keskitaso  
+#### Microsoft Foundry Models Chat App
+**Teknologiat**: Microsoft Foundry Models, Azure AI Search, App Service  
+**Vaikeustaso**: Keskitaso  
 **Käsitteet**: RAG-arkkitehtuuri, vektorihaku, LLM-integraatio
 
-#### AI-dokumenttien käsittely
+#### AI Document Processing
 **Teknologiat**: Azure AI Document Intelligence, Storage, Functions  
-**Monimutkaisuus**: Keskitaso  
-**Käsitteet**: Asiakirjojen analyysi, OCR, tiedon poiminta
+**Vaikeustaso**: Keskitaso  
+**Käsitteet**: Asiakirjojen analysointi, OCR, tiedon poiminta
 
-#### Koneoppimisputki
+#### Machine Learning Pipeline
 **Teknologiat**: Azure ML, MLOps, Container Registry  
-**Monimutkaisuus**: Edistynyt  
-**Käsitteet**: Mallin koulutus, käyttöönotto-putket, valvonta
+**Vaikeustaso**: Edistynyt  
+**Käsitteet**: Mallin koulutus, käyttöönotto-putket, monitorointi
 
 ## 🛠 Konfiguraatioesimerkit
 
-The `configurations/` directory contains reusable components:
+Hakemisto `configurations/` sisältää uudelleenkäytettäviä komponentteja:
 
 ### Ympäristökonfiguraatiot
 - Kehitysympäristön asetukset
 - Staging-ympäristön konfiguraatiot
 - Tuotantovalmiit konfiguraatiot
-- Monialueiset käyttöönottojärjestelyt
+- Monialueiset käyttöönotot
 
 ### Bicep-moduulit
 - Uudelleenkäytettävät infrastruktuurikomponentit
 - Yleiset resurssimallit
-- Turvallisuusvahvistetut mallit
-- Kustannusoptimoidut konfiguraatiot
+- Tietoturvakovetetut templatet
+- Kustannustehokkaat kokoonpanot
 
-### Apuskriptit
-- Ympäristön asennuksen automatisointi
+### Apuohjelmaskriptit
+- Ympäristön asetusten automatisointi
 - Tietokantamigraatio-skriptit
 - Käyttöönoton validointityökalut
-- Kustannusten seurantatyökalut
+- Kustannusseurantatyökalut
 
 ## 🔧 Mukautusopas
 
 ### Esimerkkien mukauttaminen omaan käyttötapaukseesi
 
 1. **Tarkista esivaatimukset**
-   - Tarkista Azure-palveluiden vaatimukset
-   - Varmista tilin rajoitukset
+   - Tarkista Azure-palvelujen vaatimukset
+   - Varmista tilauksen rajat
    - Ymmärrä kustannusvaikutukset
 
 2. **Muokkaa konfiguraatiota**
-   - Päivitä `azure.yaml`-palvelumäärittelyt
-   - Mukauta Bicep-malleja
-   - Muokkaa ympäristömuuttujia
+   - Päivitä `azure.yaml` -palvelumäärittelyt
+   - Muokkaa Bicep-malleja
+   - Säädä ympäristömuuttujia
 
-3. **Testaa huolellisesti**
+3. **Testaa perusteellisesti**
    - Ota ensin käyttöön kehitysympäristöön
-   - Varmista toiminnallisuus
-   - Testaa skaalaus ja suorituskyky
+   - Vahvista toiminnallisuus
+   - Testaa skaalautuvuus ja suorituskyky
 
-4. **Tietoturvatarkastus**
+4. **Tietoturvakatselmus**
    - Tarkista käyttöoikeudet
    - Ota käyttöön salaisuuksien hallinta
-   - Aktiivoi valvonta ja hälytykset
+   - Ota monitorointi ja hälytykset käyttöön
 
 ## 📊 Vertailumatriisi
 
-| Esimerkki | Palvelut | Tietokanta | Todennus | Valvonta | Monimutkaisuus |
+| Esimerkki | Palvelut | Tietokanta | Autentikointi | Valvonta | Vaikeustaso |
 |---------|----------|----------|------|------------|------------|
 | **Microsoft Foundry Models Chat** (Paikallinen) | 2 | ❌ | Key Vault | Täysi | ⭐⭐ |
 | **Python Flask API** (Paikallinen) | 1 | ❌ | Perus | Täysi | ⭐ |
-| **Microservices** (Paikallinen) | 5+ | ✅ | Yritystason | Edistynyt | ⭐⭐⭐⭐ |
+| **Microservices** (Paikallinen) | 5+ | ✅ | Yritys | Edistynyt | ⭐⭐⭐⭐ |
 | Node.js Express Todo | 2 | ✅ | Perus | Perus | ⭐ |
 | React SPA + Functions | 3 | ✅ | Perus | Täysi | ⭐ |
 | Python Flask Container | 2 | ❌ | Perus | Täysi | ⭐ |
@@ -492,110 +493,110 @@ The `configurations/` directory contains reusable components:
 | Microsoft Foundry Models Chat | 3 | ✅ | Täysi | Täysi | ⭐⭐⭐ |
 | AI Document Processing | 2 | ❌ | Perus | Täysi | ⭐⭐ |
 | ML Pipeline | 4+ | ✅ | Täysi | Täysi | ⭐⭐⭐⭐ |
-| **Retail Multi-Agent** (Paikallinen) | **8+** | **✅** | **Yritystason** | **Edistynyt** | **⭐⭐⭐⭐** |
+| **Retail Multi-Agent** (Paikallinen) | **8+** | **✅** | **Yritys** | **Edistynyt** | **⭐⭐⭐⭐** |
 
 ## 🎓 Oppimispolku
 
-### Suositeltu etenemisjärjestys
+### Suositeltu eteneminen
 
-1. **Aloita yksinkertaisella web-sovelluksella**
-   - Opi perus-AZD-käsitteet
-   - Ymmärrä käyttöönoton työnkulku
+1. **Aloita Simple Web Appilla**
+   - Opettele perus AZD-käsitteet
+   - Ymmärrä käyttöönoton työflow
    - Harjoittele ympäristön hallintaa
 
-2. **Kokeile staattista verkkosivustoa**
-   - Tutki eri hosting-vaihtoehtoja
-   - Opi CDN-integraatiosta
+2. **Kokeile Static Websitea**
+   - Tutki eri isännöintivaihtoehtoja
+   - Opettele CDN-integraatiota
    - Ymmärrä DNS-konfigurointi
 
-3. **Siirry Container App -sovellukseen**
-   - Opi konttiteknologian perusteet
-   - Ymmärrä skaalauskonseptit
-   - Harjoittele Dockerilla
+3. **Siirry Container Appiin**
+   - Opi kontittamisen perusteet
+   - Ymmärrä skaalauskäsitteet
+   - Harjoittele Dockerin kanssa
 
 4. **Lisää tietokantaintegraatio**
    - Opi tietokannan provisiointi
    - Ymmärrä yhteysmerkkijonot
    - Harjoittele salaisuuksien hallintaa
 
-5. **Tutki serverlessiä**
+5. **Tutustu serverlessiin**
    - Ymmärrä tapahtumapohjainen arkkitehtuuri
-   - Opi triggereistä ja bindingeista
-   - Harjoittele API:illa
+   - Opettele triggerit ja bindingit
+   - Harjoittele API:ien kanssa
 
-6. **Rakenna mikropalveluja**
-   - Opi palvelujen välistä viestintää
+6. **Rakenna mikropalveluita**
+   - Opi palveluiden välistä kommunikointia
    - Ymmärrä hajautetut järjestelmät
    - Harjoittele monimutkaisia käyttöönottoja
 
 ## 🔍 Oikean esimerkin löytäminen
 
 ### Teknologiapinon mukaan
-- **Container Apps**: [Python Flask API (Paikallinen)](../../../examples/container-app/simple-flask-api), [Microservices (Paikallinen)](../../../examples/container-app/microservices), Java Microservices
-- **Node.js**: Node.js Express Todo App, [Microservices API Gateway (Paikallinen)](../../../examples/container-app/microservices)
-- **Python**: [Python Flask API (Paikallinen)](../../../examples/container-app/simple-flask-api), [Microservices Product Service (Paikallinen)](../../../examples/container-app/microservices), Python Functions + SPA
-- **C#**: [Microservices Order Service (Paikallinen)](../../../examples/container-app/microservices), C# Web API + SQL Database, Microsoft Foundry Models Chat App, ML Pipeline
-- **Go**: [Microservices User Service (Paikallinen)](../../../examples/container-app/microservices)
+- **Container Apps**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices), Java Microservices
+- **Node.js**: Node.js Express Todo App, [Microservices API Gateway (Local)](../../../examples/container-app/microservices)
+- **Python**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), [Microservices Product Service (Local)](../../../examples/container-app/microservices), Python Functions + SPA
+- **C#**: [Microservices Order Service (Local)](../../../examples/container-app/microservices), C# Web API + SQL Database, Microsoft Foundry Models Chat App, ML Pipeline
+- **Go**: [Microservices User Service (Local)](../../../examples/container-app/microservices)
 - **Java**: Java Spring Boot Microservices
 - **React**: React SPA + Functions
-- **Containers**: [Python Flask (Paikallinen)](../../../examples/container-app/simple-flask-api), [Microservices (Paikallinen)](../../../examples/container-app/microservices), Java Microservices
-- **Databases**: [Microservices (Paikallinen)](../../../examples/container-app/microservices), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
-- **AI/ML**: **[Microsoft Foundry Models Chat (Paikallinen)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
-- **Multi-Agent Systems**: **Retail Multi-Agent Solution**
-- **OpenAI Integration**: **[Microsoft Foundry Models Chat (Paikallinen)](../../../examples/azure-openai-chat)**, Retail Multi-Agent Solution
-- **Enterprise Production**: [Microservices (Paikallinen)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
+- **Containers**: [Python Flask (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices), Java Microservices
+- **Tietokannat**: [Microservices (Local)](../../../examples/container-app/microservices), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
+- **AI/ML**: **[Microsoft Foundry Models Chat (Local)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **Moniedustajajärjestelmät**: **Retail Multi-Agent Solution**
+- **OpenAI-integraatio**: **[Microsoft Foundry Models Chat (Local)](../../../examples/azure-openai-chat)**, Retail Multi-Agent Solution
+- **Yrityksen tuotantokäyttöön**: [Microservices (Local)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
 
 ### Arkkitehtuurimallin mukaan
-- **Simple REST API**: [Python Flask API (Paikallinen)](../../../examples/container-app/simple-flask-api)
-- **Monoliittinen**: Node.js Express Todo, C# Web API + SQL
+- **Yksinkertainen REST-API**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api)
+- **Monoliitti**: Node.js Express Todo, C# Web API + SQL
 - **Staattinen + Serverless**: React SPA + Functions, Python Functions + SPA
-- **Microservices**: [Production Microservices (Paikallinen)](../../../examples/container-app/microservices), Java Spring Boot Microservices
-- **Containerized**: [Python Flask (Paikallinen)](../../../examples/container-app/simple-flask-api), [Microservices (Paikallinen)](../../../examples/container-app/microservices), Java Microservices
-- **AI-Powered**: **[Microsoft Foundry Models Chat (Paikallinen)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
-- **Multi-Agent Architecture**: **Retail Multi-Agent Solution**
-- **Enterprise Multi-Service**: [Microservices (Paikallinen)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
+- **Mikropalvelut**: [Production Microservices (Local)](../../../examples/container-app/microservices), Java Spring Boot Microservices
+- **Konttioitu**: [Python Flask (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices)
+- **AI-vetoinen**: **[Microsoft Foundry Models Chat (Local)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **Moniedustaja-arkkitehtuuri**: **Retail Multi-Agent Solution**
+- **Yrityksen monipalveluarkkitehtuuri**: [Microservices (Local)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
 
-### Monimutkaisuustason mukaan
-- **Aloittelija**: [Python Flask API (Paikallinen)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions
-- **Keskitaso**: **[Microsoft Foundry Models Chat (Paikallinen)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Microservices, Microsoft Foundry Models Chat App, AI Document Processing
+### Vaikeustason mukaan
+- **Aloittelija**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions
+- **Keskitaso**: **[Microsoft Foundry Models Chat (Local)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Microservices, Microsoft Foundry Models Chat App, AI Document Processing
 - **Edistynyt**: ML Pipeline
-- **Yritystason tuotantovalmis**: [Microservices (Paikallinen)](../../../examples/container-app/microservices) (Monipalvelu viestijonotuksella), **Retail Multi-Agent Solution** (Täydellinen moni-agenttijärjestelmä ARM-mallilla käyttöönotettavaksi)
+- **Yrityksen tuotantovalmiit**: [Microservices (Local)](../../../examples/container-app/microservices) (Monipalvelu viestijonotuksella), **Retail Multi-Agent Solution** (Täydellinen moniedustajajärjestelmä ARM-templaten käyttöönotolla)
 
 ## 📚 Lisäresurssit
 
-### Dokumentaatiolinkit
+### Dokumentaatio-linkit
 - [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
 - [Microsoft Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
-- [Bicep-dokumentaatio](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure-arkkitehtuurikeskus](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Yhteisön esimerkit
-- [Azure Samples AZD -mallit](https://github.com/Azure-Samples/azd-templates)
-- [Microsoft Foundry -mallit](https://github.com/Azure/ai-foundry-templates)
-- [Azure Developer CLI -galleria](https://azure.github.io/awesome-azd/)
-- [Todo-sovellus C#:lla ja Azure SQL:llä](https://github.com/Azure-Samples/todo-csharp-sql)
-- [Todo-sovellus Pythonilla ja MongoDB:llä](https://github.com/Azure-Samples/todo-python-mongo)
-- [Todo-sovellus Node.js:llä ja PostgreSQL:llä](https://github.com/Azure-Samples/todo-nodejs-mongo)
-- [React-verkkosovellus C#-rajapinnalla](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
+- [Microsoft Foundry Templates](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
+- [Todo App with C# and Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
+- [Todo App with Python and MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
+- [Todo App with Node.js and PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [React-verkkosovellus C#-API:lla](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
 - [Azure Container Apps -tehtävä](https://github.com/Azure-Samples/container-apps-jobs)
-- [Azure Functions Java-kielellä](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
+- [Azure Functions Java:lla](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### Parhaat käytännöt
-- [Azure Well-Architected -viitekehys](https://learn.microsoft.com/en-us/azure/well-architected/)
-- [Pilven käyttöönoton viitekehys](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Cloud Adoption Framework](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
 ## 🤝 Esimerkkien lähettäminen
 
-Onko sinulla hyödyllinen esimerkki jaettavaksi? Otamme mielellämme vastaan kontribuutioita!
+Onko sinulla hyödyllinen esimerkki jaettavaksi? Otamme mielellämme vastaan esimerkkejä!
 
 ### Lähetysohjeet
-1. Noudata määriteltyä hakemistorakennetta
-2. Sisällytä kattava README.md
-3. Lisää kommentteja konfigurointitiedostoihin
+1. Noudata vakiintunutta hakemistorakennetta
+2. Lisää kattava README.md
+3. Lisää kommentteja konfiguraatiotiedostoihin
 4. Testaa huolellisesti ennen lähettämistä
-5. Lisää kustannusarviot ja esivaatimukset
+5. Sisällytä kustannusarviot ja edellytykset
 
-### Esimerkkipohjan rakenne
+### Esimerkin mallirakenne
 ```
 example-name/
 ├── README.md           # Detailed setup instructions
@@ -611,38 +612,38 @@ example-name/
 
 ---
 
-**Pro-vinkki**: Aloita yksinkertaisimmasta esimerkistä, joka vastaa teknologiakokonaisuuttasi, ja etene vähitellen monimutkaisempiin skenaarioihin. Jokainen esimerkki rakentuu edellisten käsitteiden päälle!
+**Vinkki**: Aloita yksinkertaisimmasta esimerkistä, joka vastaa teknologiapinoasi, ja etene vähitellen monimutkaisempiin skenaarioihin. Jokainen esimerkki rakentuu edellisten käsitteiden päälle!
 
-## 🚀 Valmis aloittamaan?
+## 🚀 Valmiina aloittamaan?
 
 ### Oppimispolkusi
 
-1. **Täysin aloittelija?** → Aloita with [Flask API](../../../examples/container-app/simple-flask-api) (⭐, 20 min)
-2. **Onko sinulla perustiedot AZD:stä?** → Kokeile [Microservices](../../../examples/container-app/microservices) (⭐⭐⭐⭐, 60 min)
+1. **Täysin aloittelija?** → Aloita [Flask API](../../../examples/container-app/simple-flask-api) (⭐, 20 min)
+2. **Onko sinulla perustiedot AZD:stä?** → Kokeile [Mikropalvelut](../../../examples/container-app/microservices) (⭐⭐⭐⭐, 60 min)
 3. **Rakennatko tekoälysovelluksia?** → Aloita [Microsoft Foundry Models Chat](../../../examples/azure-openai-chat) (⭐⭐, 35 min) tai tutustu [Retail Multi-Agent](retail-scenario.md) (⭐⭐⭐⭐, yli 2 tuntia)
-4. **Tarvitsetko tiettyä teknologista pinoa?** → Käytä yllä olevaa osiota [Oikean esimerkin löytäminen](#-finding-the-right-example)
+4. **Tarvitsetko tiettyä teknologiaa?** → Käytä yllä olevaa osiota [Löydä oikea esimerkki](#-finding-the-right-example)
 
 ### Seuraavat askeleet
 
-- ✅ Käy läpi yllä olevat [Esivaatimukset](#esivaatimukset)
-- ✅ Valitse taitotasollesi sopiva esimerkki (katso [Monimutkaisuusmerkintä](#vaikeustason-selite))
+- ✅ Käy läpi yllä olevat [Prerequisites](#esivaatimukset)
+- ✅ Valitse taitotasoasi vastaava esimerkki (katso [Complexity Legend](#monimutkaisuuden-selite))
 - ✅ Lue esimerkin README huolellisesti ennen käyttöönottoa
 - ✅ Aseta muistutus suorittaa `azd down` testauksen jälkeen
-- ✅ Jaa kokemuksesi GitHub Issuesin tai Discussionsin kautta
+- ✅ Jaa kokemuksesi GitHub Issues- tai Discussions-keskusteluissa
 
 ### Tarvitsetko apua?
 
-- 📖 [UKK](../resources/faq.md) - Vastauksia yleisiin kysymyksiin
-- 🐛 [Vianmääritysohje](../docs/chapter-07-troubleshooting/common-issues.md) - Korjaa käyttöönotto-ongelmat
+- 📖 [FAQ](../resources/faq.md) - Yleisimmät kysymykset ja vastaukset
+- 🐛 [Vianmääritysopas](../docs/chapter-07-troubleshooting/common-issues.md) - Korjaa käyttöönotto-ongelmia
 - 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - Kysy yhteisöltä
-- 📚 [Opas](../resources/study-guide.md) - Vahvista oppimistasi
+- 📚 [Opiskeluopas](../resources/study-guide.md) - Vahvista oppimistasi
 
 ---
 
 **Navigointi**
 - **📚 Kurssin etusivu**: [AZD For Beginners](../README.md)
-- **📖 Opintomateriaalit**: [Opas](../resources/study-guide.md) | [Pikaopas](../resources/cheat-sheet.md) | [Sanasto](../resources/glossary.md)
-- **🔧 Resurssit**: [UKK](../resources/faq.md) | [Vianmääritys](../docs/chapter-07-troubleshooting/common-issues.md)
+- **📖 Opintomateriaalit**: [Opiskeluopas](../resources/study-guide.md) | [Pikaopas](../resources/cheat-sheet.md) | [Sanasto](../resources/glossary.md)
+- **🔧 Resurssit**: [FAQ](../resources/faq.md) | [Vianmääritys](../docs/chapter-07-troubleshooting/common-issues.md)
 
 ---
 
@@ -652,5 +653,5 @@ example-name/
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastuuvapauslauseke**:
-Tämä asiakirja on käännetty käyttämällä tekoälykäännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää auktoritatiivisena lähteenä. Kriittisten tietojen osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai virhetulkkinnoista.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, otathan huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäiskielellä on virallinen lähde. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,23 +1,23 @@
 # Bölüm 8: Üretim ve Kurumsal Desenler
 
-**📚 Kurs**: [AZD Yeni Başlayanlar İçin](../../README.md) | **⏱️ Süre**: 2-3 saat | **⭐ Zorluk**: İleri
+**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Süre**: 2-3 saat | **⭐ Zorluk**: İleri
 
 ---
 
 ## Genel Bakış
 
-Bu bölüm, üretim AI iş yükleri için kurumsal düzeyde dağıtım desenleri, güvenlik sertleştirme, izleme ve maliyet optimizasyonunu kapsar.
+Bu bölüm, kurumsal kullanıma hazır dağıtım desenleri, güvenlik sertleştirmesi, izleme ve üretim AI iş yükleri için maliyet optimizasyonunu kapsar.
 
-> `azd 1.23.12` ile Mart 2026'da doğrulandı.
+> `azd 1.25.6` ile Haziran 2026'da doğrulanmıştır.
 
 ## Öğrenme Hedefleri
 
-Bu bölümü tamamladığınızda:
-- Çok bölgeli dayanıklı uygulamalar dağıtın
-- Kurumsal güvenlik desenlerini uygulayın
-- Kapsamlı izleme yapılandırın
-- Ölçekli maliyet optimizasyonu yapın
-- AZD ile CI/CD boru hatları kurun
+Bu bölümü tamamlayarak:
+- Çok bölgeli dayanıklı uygulamalar dağıtacaksınız
+- Kurumsal güvenlik desenlerini uygulayacaksınız
+- Kapsamlı izlemeyi yapılandıracaksınız
+- Ölçekte maliyetleri optimize edeceksiniz
+- AZD ile CI/CD hattı kuracaksınız
 
 ---
 
@@ -35,8 +35,8 @@ Bu bölümü tamamladığınızda:
 - [ ] Kimlik doğrulama için yönetilen kimlik (anahtar yok)
 - [ ] İzleme için Application Insights
 - [ ] Maliyet bütçeleri ve uyarılar yapılandırıldı
-- [ ] Güvenlik taraması etkinleştirildi
-- [ ] CI/CD boru hattı entegrasyonu
+- [ ] Güvenlik taraması etkin
+- [ ] CI/CD hattı entegrasyonu
 - [ ] Felaket kurtarma planı
 
 ---
@@ -47,16 +47,18 @@ Bu bölümü tamamladığınızda:
 
 ```mermaid
 graph LR
-    Gateway[API Ağ Geçidi] --> AI[Yapay Zeka Servisi] --> Models[Microsoft Foundry Modelleri]
+    Gateway[API Ağ Geçidi] --> AI[Yapay Zeka Hizmeti] --> Models[Microsoft Foundry Modelleri]
     Gateway --> Auth[Kimlik Doğrulama Servisi]
     AI --> Data[Veri Deposu]
 ```
+
 ### Desen 2: Olay Tabanlı AI
 
 ```mermaid
 graph LR
     EventGrid[Olay Izgarası] --> Functions[Fonksiyonlar] --> Pipeline[Yapay Zeka Boru Hattı]
 ```
+
 ---
 
 ## 🔐 Güvenlik En İyi Uygulamaları
@@ -83,12 +85,12 @@ properties: {
 | Strateji | Tasarruf |
 |----------|---------|
 | Sıfıra ölçekleme (Container Apps) | 60-80% |
-| Geliştirme için tüketim katmanlarını kullan | 50-70% |
-| Zamanlanmış ölçekleme | 30-50% |
+| Geliştirme için tüketim katmanlarını kullanın | 50-70% |
+| Zamanlanmış ölçeklendirme | 30-50% |
 | Rezerve kapasite | 20-40% |
 
 ```bash
-# Bütçe uyarılarını ayarla
+# Bütçe uyarıları ayarla
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -98,10 +100,10 @@ az consumption budget create \
 
 ---
 
-## 📊 İzleme Yapılandırması
+## 📊 İzleme Kurulumu
 
 ```bash
-# Günlükleri gerçek zamanlı izle
+# Günlükleri izle
 azd monitor --logs
 
 # Application Insights'ı kontrol et
@@ -124,7 +126,7 @@ az monitor metrics list --resource <resource-id>
 
 ## 📖 İlgili Kaynaklar
 
-- [AI Ajanları Rehberi](../chapter-02-ai-development/agents.md)
+- [Yapay Zeka Ajanları Rehberi](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 - [Çok Ajanlı Çözümler](../chapter-05-multi-agent/README.md)
 - [Mikroservis Örneği](../../examples/microservices/README.md)
@@ -133,5 +135,5 @@ az monitor metrics list --resource <resource-id>
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Feragatname**:
-Bu belge AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi ana dilindeki sürümü yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,73 +1,74 @@
-# Guida al Deployment - Padroneggiare le distribuzioni AZD
+# Guida al Deployment - Padroneggiare i Deploy con AZD
 
-**Navigazione del Capitolo:**
+**Navigazione del capitolo:**
 - **📚 Home del corso**: [AZD per principianti](../../README.md)
-- **📖 Capitolo corrente**: Capitolo 4 - Infrastructure as Code e distribuzione
+- **📖 Capitolo corrente**: Capitolo 4 - Infrastruttura come codice e deployment
 - **⬅️ Capitolo precedente**: [Capitolo 3: Configurazione](../chapter-03-configuration/configuration.md)
 - **➡️ Successivo**: [Provisioning delle risorse](provisioning.md)
+- **🧩 Anche in questo capitolo**: [Creazione del proprio template](custom-templates.md)
 - **🚀 Capitolo successivo**: [Capitolo 5: Soluzioni AI multi-agente](../../examples/retail-scenario.md)
 
 ## Introduzione
 
-Questa guida completa copre tutto ciò che devi sapere sul deploy delle applicazioni usando Azure Developer CLI, dai semplici deployment con un solo comando agli scenari di produzione avanzati con hook personalizzati, più ambienti e integrazione CI/CD. Padroneggia l'intero ciclo di vita del deployment con esempi pratici e best practice.
+Questa guida completa copre tutto ciò che devi sapere sul deployment di applicazioni usando Azure Developer CLI, dai deploy di base con un singolo comando agli scenari di produzione avanzati con hook personalizzati, ambienti multipli e integrazione CI/CD. Padroneggia l'intero ciclo di vita del deployment con esempi pratici e best practice.
 
 ## Obiettivi di apprendimento
 
-Completando questa guida, potrai:
+Completando questa guida, sarai in grado di:
 - Padroneggiare tutti i comandi e i workflow di deployment di Azure Developer CLI
 - Comprendere l'intero ciclo di vita del deployment dal provisioning al monitoraggio
-- Implementare hook di deployment personalizzati per l'automazione pre e post-deployment
+- Implementare hook di deployment personalizzati per automazioni pre e post-deploy
 - Configurare più ambienti con parametri specifici per ambiente
-- Impostare strategie di deployment avanzate, incluse blue-green e canary
-- Integrare le distribuzioni azd con pipeline CI/CD e workflow DevOps
+- Impostare strategie di deployment avanzate inclusi blue-green e canary
+- Integrare i deploy azd con pipeline CI/CD e workflow DevOps
 
-## Risultati di apprendimento
+## Risultati dell'apprendimento
 
-Al termine, sarai in grado di:
-- Eseguire e risolvere problemi di tutti i workflow di deployment azd in autonomia
+Al termine, sarai capace di:
+- Eseguire e risolvere problemi su tutti i workflow di deployment azd in autonomia
 - Progettare e implementare automazioni di deployment personalizzate usando hook
-- Configurare deployment pronti per la produzione con adeguata sicurezza e monitoraggio
+- Configurare deployment pronti per la produzione con sicurezza e monitoraggio adeguati
 - Gestire scenari di deployment complessi multi-ambiente
-- Ottimizzare le prestazioni del deployment e implementare strategie di rollback
-- Integrare le distribuzioni azd nelle pratiche DevOps aziendali
+- Ottimizzare le prestazioni di deployment e implementare strategie di rollback
+- Integrare i deploy azd nelle pratiche DevOps aziendali
 
-## Panoramica sul Deployment
+## Panoramica del deployment
 
 Azure Developer CLI fornisce diversi comandi di deployment:
-- `azd up` - Complete workflow (provision + deploy)
-- `azd provision` - Create/update Azure resources only
-- `azd deploy` - Deploy application code only
-- `azd package` - Build and package applications
+- `azd up` - Flusso completo (provision + deploy)
+- `azd provision` - Crea/aggiorna solo le risorse Azure
+- `azd deploy` - Distribuisce solo il codice dell'applicazione
+- `azd package` - Compila e impacchetta le applicazioni
 
 ## Flussi di deployment di base
 
 ### Deployment completo (azd up)
-Il flusso di lavoro più comune per i nuovi progetti:
+Il flusso più comune per i nuovi progetti:
 ```bash
 # Distribuire tutto da zero
 azd up
 
-# Distribuire in un ambiente specifico
+# Distribuire con un ambiente specifico
 azd up --environment production
 
 # Distribuire con parametri personalizzati
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Deployment solo infrastruttura
-Quando è necessario aggiornare solo le risorse Azure:
+### Deployment solo dell'infrastruttura
+Quando devi solo aggiornare le risorse Azure:
 ```bash
 # Provisionare/aggiornare l'infrastruttura
 azd provision
 
-# Provisionare con dry-run per visualizzare in anteprima le modifiche
+# Provisionare con simulazione per visualizzare in anteprima le modifiche
 azd provision --preview
 
 # Provisionare servizi specifici
 azd provision --service database
 ```
 
-### Deployment solo codice
+### Deployment solo del codice
 Per aggiornamenti rapidi dell'applicazione:
 ```bash
 # Distribuisci tutti i servizi
@@ -75,8 +76,8 @@ azd deploy
 
 # Output previsto:
 # Distribuzione dei servizi (azd deploy)
-# - web: Distribuzione... Fatto
-# - api: Distribuzione... Fatto
+# - web: Distribuzione in corso... Fatto
+# - api: Distribuzione in corso... Fatto
 # SUCCESSO: La tua distribuzione è stata completata in 2 minuti e 15 secondi
 
 # Distribuisci un servizio specifico
@@ -95,17 +96,17 @@ azd show --output json | jq '.services'
 Dopo ogni deployment, verifica il successo:
 
 ```bash
-# Controllare che tutti i servizi siano in esecuzione
+# Verificare che tutti i servizi siano in esecuzione
 azd show
 
-# Testare gli endpoint di integrità
+# Testare gli endpoint di stato
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
 curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
 curl -f "$API_URL/health" || echo "❌ API health check failed"
 
-# Monitorare eventuali errori (si apre nel browser per impostazione predefinita)
+# Monitorare la presenza di errori (si apre nel browser per impostazione predefinita)
 azd monitor --logs
 ```
 
@@ -116,6 +117,35 @@ azd monitor --logs
 - ✅ L'applicazione risponde alle richieste di test
 
 ## 🏗️ Comprendere il processo di deployment
+
+### Nuovo agli hook? Inizia qui
+
+Un **hook** è un comando che azd esegue automaticamente in un momento specifico del processo di deploy—prima o dopo il provisioning, e prima o dopo il deploy del tuo codice. Consentono di automatizzare le piccole attività che sempre accompagnano un deployment: popolare un database, eseguire migrazioni, costruire asset o effettuare smoke-test sull'app live.
+
+| Hook | Esegue… | Uso comune |
+|------|---------|------------|
+| `preprovision` | Prima che le risorse vengano create | Validare i prerequisiti, effettuare il login in un registry |
+| `postprovision` | Dopo che le risorse esistono | Configurare le risorse, impostare il database |
+| `predeploy` | Prima che il codice venga distribuito | Compilare gli asset front-end, eseguire i test unitari |
+| `postdeploy` | Dopo che il codice è attivo | Eseguire migrazioni DB, smoke-test dell'endpoint |
+
+Gli hook risiedono nel tuo `azure.yaml`. Ecco l'esempio più piccolo possibile—stampa semplicemente un messaggio dopo il deployment:
+
+```yaml
+# azure.yaml
+hooks:
+  postdeploy:
+    shell: sh
+    run: echo "Deployment finished! 🎉"
+```
+
+Questo è tutto—la prossima volta che esegui `azd up`, il messaggio verrà stampato automaticamente. Puoi anche eseguire uno hook da solo, senza un deploy completo, il che è ottimo per i test:
+
+```bash
+azd hooks run postdeploy
+```
+
+Le fasi qui sotto mostrano hook del mondo reale (migrazioni, test, validazione) per ogni stadio.
 
 ### Fase 1: Hook pre-provision
 ```yaml
@@ -132,10 +162,10 @@ hooks:
 ```
 
 ### Fase 2: Provisioning dell'infrastruttura
-- Legge i template di infrastruttura (Bicep/Terraform)
+- Legge i template dell'infrastruttura (Bicep/Terraform)
 - Crea o aggiorna le risorse Azure
-- Configura rete e sicurezza
-- Configura monitoraggio e logging
+- Configura networking e sicurezza
+- Imposta monitoraggio e logging
 
 ### Fase 3: Hook post-provision
 ```yaml
@@ -153,7 +183,7 @@ hooks:
 ### Fase 4: Packaging dell'applicazione
 - Compila il codice dell'applicazione
 - Crea gli artefatti di deployment
-- Impacchetta per la piattaforma di destinazione (container, file ZIP, ecc.)
+- Impacchetta per la piattaforma target (container, file ZIP, ecc.)
 
 ### Fase 5: Hook pre-deploy
 ```yaml
@@ -169,7 +199,7 @@ hooks:
 ```
 
 ### Fase 6: Deployment dell'applicazione
-- Distribuisce le applicazioni impacchettate sui servizi Azure
+- Distribuisce le applicazioni impacchettate ai servizi Azure
 - Aggiorna le impostazioni di configurazione
 - Avvia/riavvia i servizi
 
@@ -186,9 +216,57 @@ hooks:
       curl https://${WEB_URL}/health
 ```
 
+### Gestire gli errori degli hook
+
+Per impostazione predefinita, **se un comando hook termina con un codice non zero, azd ferma l'intera operazione.** Questo è di solito ciò che vuoi—una migrazione fallita dovrebbe fermare il deploy, non distribuire un'app difettosa. Ma significa che gli hook devono essere scritti con attenzione.
+
+**1. Rendere i fallimenti chiari e intenzionali.** Uno hook fallisce quando il suo ultimo comando restituisce un codice di uscita non zero. Negli script shell, aggiungi `set -e` così lo hook si ferma al primo comando fallito invece di proseguire silenziosamente:
+
+```yaml
+hooks:
+  predeploy:
+    shell: sh
+    run: |
+      set -e                      # stop on the first error
+      npm run test:unit           # if tests fail, the deploy halts here
+      npm run db:migrate
+```
+
+**2. Permettere a uno hook di fallire senza fermare azd.** Per passaggi non critici (un riscaldamento cache opzionale, una notifica best-effort), imposta `continueOnError: true`. azd registra il fallimento ma continua:
+
+```yaml
+hooks:
+  postdeploy:
+    shell: sh
+    continueOnError: true         # a failure here won't fail 'azd up'
+    run: curl -f https://${WEB_URL}/warmup || echo "Warm-up skipped"
+```
+
+**3. Testare gli hook in isolamento prima di una run completa.** Non è necessario eseguire `azd up` per eseguire il debug di uno hook—eseguilo da solo e itera rapidamente:
+
+```bash
+azd hooks run predeploy          # esegue solo l'hook predeploy
+azd hooks run postdeploy --service api
+```
+
+**4. Fare attenzione alle shell specifiche del sistema operativo.** Uno hook che usa `shell: pwsh` necessita di PowerShell installato sulla macchina che lo esegue (inclusi gli agent CI). Usa `shell: sh` per la massima portabilità, o fornisci varianti per `windows` e `posix`:
+
+```yaml
+hooks:
+  postprovision:
+    posix:
+      shell: sh
+      run: ./scripts/setup.sh
+    windows:
+      shell: pwsh
+      run: ./scripts/setup.ps1
+```
+
+> **Suggerimento per il debug:** esegui qualsiasi comando azd con `--debug` per vedere la riga di comando esatta dello hook e il suo output completo—inestimabile quando uno hook funziona localmente ma fallisce in CI.
+
 ## 🎛️ Configurazione del deployment
 
-### Impostazioni di deployment specifiche per servizio
+### Impostazioni di deployment specifiche per il servizio
 ```yaml
 # azure.yaml
 services:
@@ -285,7 +363,7 @@ azd up --environment production-blue
 # Testa l'ambiente blu
 ./scripts/test-environment.sh production-blue
 
-# Sposta il traffico sull'ambiente blu (aggiornamento manuale di DNS/bilanciatore di carico)
+# Reindirizza il traffico all'ambiente blu (aggiornamento manuale del DNS/del bilanciatore di carico)
 ./scripts/switch-traffic.sh production-blue
 
 # Pulisci l'ambiente verde
@@ -338,9 +416,9 @@ if [[ $confirm == [yY] ]]; then
 fi
 ```
 
-## 🐳 Deployment con container
+## 🐳 Deployment di container
 
-### Deployment di Container App
+### Deployment per Container App
 ```yaml
 services:
   api:
@@ -364,7 +442,7 @@ services:
       maxReplicas: 10
 ```
 
-### Ottimizzazione di Dockerfile multi-stage
+### Ottimizzazione del Dockerfile multi-stage
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -394,11 +472,11 @@ CMD ["npm", "start"]
 
 ### Deployment specifici per servizio
 ```bash
-# Distribuire un servizio specifico per iterazioni più rapide
+# Distribuisci un servizio specifico per iterazioni più rapide
 azd deploy --service web
 azd deploy --service api
 
-# Distribuire tutti i servizi
+# Distribuisci tutti i servizi
 azd deploy
 ```
 
@@ -412,13 +490,13 @@ services:
     outputPath: dist
 ```
 
-### Deploy di codice efficienti
+### Deployment di codice efficienti
 ```bash
-# Usa azd deploy (non azd up) per modifiche esclusivamente al codice
+# Usa azd deploy (non azd up) per modifiche solo al codice
 # Questo evita il provisioning dell'infrastruttura ed è molto più veloce
 azd deploy
 
-# Distribuisci un servizio specifico per l'iterazione più veloce
+# Distribuisci un servizio specifico per iterazioni più rapide
 azd deploy --service api
 ```
 
@@ -432,11 +510,11 @@ azd monitor --live
 # Visualizza i log dell'applicazione
 azd monitor --logs
 
-# Verifica lo stato della distribuzione
+# Controlla lo stato del deployment
 azd show
 ```
 
-### Health Checks
+### Health Check
 ```yaml
 # azure.yaml - Configure health checks
 services:
@@ -450,14 +528,14 @@ services:
       retries: 3
 ```
 
-### Validazione post-deployment
+### Validazione post-deploy
 ```bash
 #!/bin/bash
 # scripts/validate-deployment.sh
 
 echo "Validating deployment..."
 
-# Verifica lo stato di salute dell'applicazione
+# Verifica la salute dell'applicazione
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -535,14 +613,14 @@ services:
 
 ### Rollback rapido
 ```bash
-# AZD non dispone di rollback integrato. Approcci consigliati:
+# AZD non dispone di un ripristino integrato. Approcci consigliati:
 
-# Opzione 1: Ridistribuire da Git (consigliato)
-git revert HEAD  # Annulla il commit problematico
+# Opzione 1: Ridispiegare da Git (consigliato)
+git revert HEAD  # Esegui il revert del commit problematico
 git push
 azd deploy
 
-# Opzione 2: Ridistribuire un commit specifico
+# Opzione 2: Ridispiegare un commit specifico
 git checkout <previous-commit-hash>
 azd deploy
 git checkout main
@@ -550,11 +628,11 @@ git checkout main
 
 ### Rollback dell'infrastruttura
 ```bash
-# Visualizza in anteprima le modifiche all'infrastruttura prima di applicarle
+# Anteprima delle modifiche all'infrastruttura prima di applicarle
 azd provision --preview
 
 # Per il rollback dell'infrastruttura, usa il controllo di versione:
-git revert HEAD  # Ripristina le modifiche all'infrastruttura
+git revert HEAD  # Annulla le modifiche all'infrastruttura
 azd provision    # Applica lo stato precedente dell'infrastruttura
 ```
 
@@ -572,9 +650,9 @@ npm run db:validate
 echo "Database rollback completed"
 ```
 
-## 📊 Metriche di deployment
+## 📊 Metriche del deployment
 
-### Tracciare le prestazioni del deployment
+### Traccia le prestazioni del deployment
 ```bash
 # Visualizza lo stato attuale della distribuzione
 azd show
@@ -618,7 +696,7 @@ azd env new production-v1
 
 ### 2. Validazione dell'infrastruttura
 ```bash
-# Visualizza in anteprima le modifiche all'infrastruttura prima della distribuzione
+# Anteprima delle modifiche all'infrastruttura prima della distribuzione
 azd provision --preview
 
 # Usa il linting per ARM/Bicep
@@ -683,7 +761,7 @@ mkdir deployment-practice && cd deployment-practice
 azd init --template todo-nodejs-mongo
 azd up
 
-# Registra l'ora della distribuzione iniziale
+# Registra il tempo della distribuzione iniziale
 echo "Full deployment: $(date)" > deployment-log.txt
 
 # Apporta una modifica al codice
@@ -696,23 +774,23 @@ echo "Code-only deployment: $(date)" >> deployment-log.txt
 # Confronta i tempi
 cat deployment-log.txt
 
-# Ripulisci
+# Pulisci
 azd down --force --purge
 ```
 
 **Criteri di successo:**
-- [ ] Il deployment completo dura 5-15 minuti
-- [ ] Il deployment solo codice dura 2-5 minuti
+- [ ] Il deployment completo richiede 5-15 minuti
+- [ ] Il deployment solo codice richiede 2-5 minuti
 - [ ] Le modifiche al codice sono riflesse nell'app distribuita
-- [ ] Infrastruttura invariata dopo `azd deploy`
+- [ ] L'infrastruttura rimane invariata dopo `azd deploy`
 
-**Risultato dell'apprendimento**: `azd deploy` è 50-70% più veloce di `azd up` per le modifiche al codice
+**Risultato dell'apprendimento**: `azd deploy` è dal 50% al 70% più veloce di `azd up` per le modifiche al codice
 
 ### Esercizio 2: Hook di deployment personalizzati (30 minuti)
-**Obiettivo**: Implementare automazioni pre e post-deployment
+**Obiettivo**: Implementare automazioni pre e post-deploy
 
 ```bash
-# Crea uno script di validazione pre-distribuzione
+# Crea uno script di convalida pre-distribuzione
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
@@ -724,7 +802,7 @@ if ! npm run test:unit; then
     exit 1
 fi
 
-# Verifica la presenza di modifiche non commesse
+# Controlla la presenza di modifiche non commesse
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -734,7 +812,7 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# Crea uno smoke test post-distribuzione
+# Crea smoke test post-distribuzione
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
 echo "💨 Running smoke tests..."
@@ -753,7 +831,7 @@ EOF
 
 chmod +x scripts/post-deploy-test.sh
 
-# Aggiungi gli hook in azure.yaml
+# Aggiungi hook a azure.yaml
 cat >> azure.yaml << 'EOF'
 
 hooks:
@@ -772,8 +850,8 @@ azd deploy
 
 **Criteri di successo:**
 - [ ] Lo script pre-deploy viene eseguito prima del deployment
-- [ ] Il deployment viene interrotto se i test falliscono
-- [ ] Il test smoke post-deploy valida la salute
+- [ ] Il deployment si interrompe se i test falliscono
+- [ ] Il smoke test post-deploy valida la salute
 - [ ] Gli hook vengono eseguiti nell'ordine corretto
 
 ### Esercizio 3: Strategia di deployment multi-ambiente (45 minuti)
@@ -788,7 +866,7 @@ set -e
 echo "🚀 Staged Deployment Workflow"
 echo "=============================="
 
-# Passo 1: Distribuisci su dev
+# Passo 1: Distribuire su dev
 echo "
 🛠️ Step 1: Deploying to development..."
 azd env select dev
@@ -797,7 +875,7 @@ azd up --no-prompt
 echo "Running dev tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# Passo 2: Distribuisci su staging
+# Passo 2: Distribuire su staging
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
@@ -839,11 +917,11 @@ azd env new production
 ```
 
 **Criteri di successo:**
-- [ ] L'ambiente Dev viene distribuito con successo
-- [ ] L'ambiente Staging viene distribuito con successo
-- [ ] Approvazione manuale richiesta per la produzione
+- [ ] L'ambiente Dev si distribuisce correttamente
+- [ ] L'ambiente Staging si distribuisce correttamente
+- [ ] È richiesta approvazione manuale per la produzione
 - [ ] Tutti gli ambienti hanno health check funzionanti
-- [ ] È possibile effettuare il rollback se necessario
+- [ ] È possibile eseguire il rollback se necessario
 
 ### Esercizio 4: Strategia di rollback (25 minuti)
 **Obiettivo**: Implementare e testare il rollback del deployment usando Git
@@ -857,23 +935,23 @@ azd up
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# Distribuisci v2 con una modifica incompatibile
+# Distribuisci v2 con modifica incompatibile
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
 azd deploy
 
-# Rileva il guasto e ripristina
+# Rileva il fallimento ed esegui il rollback
 if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # Ripristina usando git
+    # Esegui il rollback usando git
     git revert HEAD --no-edit
     
     # Ripristina l'ambiente
     azd env set APP_VERSION "1.0.0"
     
-    # Ridispiega v1
+    # Ridistribuisci v1
     azd deploy
     
     echo "✅ Rolled back to v1.0.0"
@@ -881,10 +959,10 @@ fi
 ```
 
 **Criteri di successo:**
-- [ ] È possibile rilevare i fallimenti di deployment
+- [ ] È possibile rilevare i fallimenti del deployment
 - [ ] Lo script di rollback viene eseguito automaticamente
-- [ ] L'applicazione ritorna a uno stato funzionante
-- [ ] I controlli di integrità passano dopo il rollback
+- [ ] L'applicazione torna in uno stato funzionante
+- [ ] Gli health check passano dopo il rollback
 
 ## 📊 Monitoraggio delle metriche di deployment
 
@@ -908,7 +986,7 @@ echo "Timestamp: $(date)"
 echo "Environment: $(azd env get-value AZURE_ENV_NAME)"
 echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
 
-# Registra su file
+# Scrivi nel file di log
 echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
 EOF
 
@@ -929,7 +1007,7 @@ awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-
 
 ## Risorse aggiuntive
 
-- [Riferimento al Deployment di Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Riferimento al deployment di Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [Deployment di Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
 - [Deployment di Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
 - [Deployment di Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
@@ -938,11 +1016,11 @@ awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-
 
 **Navigazione**
 - **Lezione precedente**: [Il tuo primo progetto](../chapter-01-foundation/first-project.md)
-- **Prossima lezione**: [Provisioning delle risorse](provisioning.md)
+- **Lezione successiva**: [Provisioning delle risorse](provisioning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Dichiarazione di non responsabilità**:
-Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Pur impegnandoci per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o inesattezze. Il documento originale nella sua lingua d'origine deve essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda la traduzione professionale da parte di un traduttore umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
+**Disclaimer**:
+Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire la precisione, si prega di notare che le traduzioni automatizzate possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa deve essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un essere umano. Non siamo responsabili per eventuali malintesi o interpretazioni errate derivanti dall’uso di questa traduzione.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

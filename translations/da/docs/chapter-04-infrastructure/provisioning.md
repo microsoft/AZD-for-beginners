@@ -1,40 +1,40 @@
-# Provisioning Azure Resources with AZD
+# Provisionering af Azure-ressourcer med AZD
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD for begyndere](../../README.md)
-- **📖 Current Chapter**: Kapitel 4 - Infrastruktur som kode & Udrulning
-- **⬅️ Previous**: [Udrulningsvejledning](deployment-guide.md)
-- **➡️ Next Chapter**: [Kapitel 5: Multi-agent AI-løsninger](../../examples/retail-scenario.md)
-- **🔧 Related**: [Kapitel 6: Validering før udrulning](../chapter-06-pre-deployment/capacity-planning.md)
+**Kapitelnavigation:**
+- **📚 Kursushjem**: [AZD For Beginners](../../README.md)
+- **📖 Nuværende kapitel**: Kapitel 4 - Infrastruktur som kode & udrulning
+- **⬅️ Forrige**: [Deployment Guide](deployment-guide.md)
+- **➡️ Næste kapitel**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
+- **🔧 Relateret**: [Chapter 6: Pre-Deployment Validation](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## Introduktion
 
-Denne omfattende guide dækker alt, du skal vide om at provisionere og administrere Azure-ressourcer ved hjælp af Azure Developer CLI. Lær at implementere Infrastructure as Code (IaC)-mønstre fra grundlæggende oprettelse af ressourcer til avancerede infrastrukturer i virksomhedsklasse ved hjælp af Bicep, ARM-skabeloner, Terraform og Pulumi.
+Denne omfattende guide dækker alt, du skal vide om at provisionere og administrere Azure-ressourcer ved hjælp af Azure Developer CLI. Lær at implementere Infrastructure as Code (IaC) mønstre fra grundlæggende ressourceoprettelse til avancerede enterprise-infrastrukturer ved hjælp af Bicep, ARM-skabeloner, Terraform og Pulumi.
 
 ## Læringsmål
 
 Ved at gennemføre denne guide vil du:
-- Mestre Infrastructure as Code-principper og provisioning af Azure-ressourcer
-- Forstå de forskellige IaC-udbydere, som Azure Developer CLI understøtter
+- Mestre principperne for Infrastructure as Code og provisioning af Azure-ressourcer
+- Forstå de flere IaC-udbydere, som Azure Developer CLI understøtter
 - Designe og implementere Bicep-skabeloner til almindelige applikationsarkitekturer
-- Konfigurere resourceparametre, variabler og miljøspecifikke indstillinger
+- Konfigurere ressourceparametre, variabler og miljøspecifikke indstillinger
 - Implementere avancerede infrastrukturmønstre inklusive netværk og sikkerhed
 - Administrere ressourcelivscyklus, opdateringer og afhængighedsopløsning
 
 ## Læringsudbytte
 
-Efter gennemførelsen vil du kunne:
+Efter gennemførelse vil du være i stand til at:
 - Designe og provisionere Azure-infrastruktur ved hjælp af Bicep og ARM-skabeloner
 - Konfigurere komplekse multi-service arkitekturer med korrekte ressourceafhængigheder
 - Implementere parameteriserede skabeloner til flere miljøer og konfigurationer
 - Fejlsøge problemer med infrastrukturprovisionering og løse udrulningsfejl
-- Anvende Azure Well-Architected Framework-principper til infrastrukturoptimering
-- Administrere infrastrukturopdateringer og implementere strategier for versionering af infrastruktur
+- Anvende Azure Well-Architected Framework-principper til infrastrukturdesign
+- Administrere infrastrukturopdateringer og implementere strategier for versionsstyring af infrastruktur
 
-## Oversigt over infrastrukturprovisionering
+## Oversigt over provisioning af infrastruktur
 
-Azure Developer CLI understøtter flere Infrastructure as Code (IaC)-udbydere:
-- **Bicep** (anbefalet) - Azures domænespecifikke sprog
+Azure Developer CLI understøtter flere Infrastructure as Code (IaC) udbydere:
+- **Bicep** (anbefalet) - Azure's domænespecifikke sprog
 - **ARM Templates** - JSON-baserede Azure Resource Manager-skabeloner
 - **Terraform** - Multi-cloud infrastrukturværktøj
 - **Pulumi** - Moderne infrastructure as code med programmeringssprog
@@ -49,12 +49,12 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### Almindelige Azure-tjenester til applikationer
-- **Beregning**: App Service, Container Apps, Functions, Virtual Machines
-- **Lagring**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Netværk**: Virtual Network, Application Gateway, CDN
-- **Sikkerhed**: Key Vault, Application Insights, Log Analytics
-- **AI/ML**: Cognitive Services, OpenAI, Machine Learning
+### Almindelige Azure-tjenester for applikationer
+- **Compute**: App Service, Container Apps, Functions, Virtual Machines
+- **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
+- **Networking**: Virtual Network, Application Gateway, CDN
+- **Security**: Key Vault, Application Insights, Log Analytics
+- **AI/ML**: Azure AI Services, Azure OpenAI, Azure Machine Learning
 
 ## Bicep-infrastrukturskabeloner
 
@@ -179,7 +179,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### Betinget oprettelse af ressourcer
+#### Betinget ressourceoprettelse
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -200,7 +200,201 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ Databaseprovisionering
+## 🌐 Brug af Terraform med azd
+
+Bicep er azd's standard, men azd understøtter også **Terraform**—nyttigt hvis dit team allerede standardiserer på det, eller hvis du håndterer multi-cloud infrastruktur. azd-workflowet (`azd up`, `azd provision`, `azd down`) er identisk; kun infrastrukturen sproget og mappestrukturen ændres.
+
+### Fortæl azd at bruge Terraform
+
+Tilføj en `infra` sektion til `azure.yaml` som peger på Terraform-provider:
+
+```yaml
+# azure.yaml
+name: my-terraform-app
+infra:
+  provider: terraform   # default is "bicep"
+  path: infra           # folder containing your .tf files
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### Terraform-mappelayout
+
+Med Terraform-provideren bruger din `infra/`-mappe `.tf`-filer i stedet for Bicep:
+
+```
+infra/
+├── main.tf            # resource definitions
+├── variables.tf       # input variables
+├── outputs.tf         # outputs azd reads back (endpoints, names)
+├── provider.tf        # azurerm/azurecaf providers + backend
+└── main.tfvars.json   # values azd injects per environment
+```
+
+### En minimal `main.tf`
+
+```hcl
+# infra/main.tf
+resource "azurerm_resource_group" "rg" {
+  name     = "rg-${var.environment_name}"
+  location = var.location
+  tags     = { "azd-env-name" = var.environment_name }
+}
+
+resource "azurerm_service_plan" "plan" {
+  name                = "plan-${var.environment_name}"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  os_type             = "Linux"
+  sku_name            = "B1"
+}
+```
+
+### Hvordan azd forbinder til dine Terraform-outputs
+
+azd læser Terraform **outputs** for at lære dine endpoints og for at koble miljøværdier tilbage ind i din app. Output-navnene betyder noget—azd leder efter bestemte navne:
+
+```hcl
+# infra/outputs.tf
+output "AZURE_LOCATION" {
+  value = var.location
+}
+
+output "SERVICE_WEB_ENDPOINT_URL" {
+  value = azurerm_linux_web_app.web.default_hostname
+}
+```
+
+> **Vigtigt:** azd bruger `azd-env-name` tagget og `AZURE_*` outputs til at spore ressourcer pr. miljø. Tag altid din ressourcegruppe med "azd-env-name" = var.environment_name så `azd down` kan finde og fjerne alt.
+
+### Udrul med Terraform
+
+Kommandoerne er præcis de samme som for Bicep:
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd kører 'terraform plan' bag kulisserne
+azd up                    # provisionering + udrulning
+azd down --force          # sletter de af Terraform administrerede ressourcer
+```
+
+> **Forudsætning:** Terraform skal være installeret og være på din `PATH`. azd håndterer Terraform *workflow'et*, men installerer ikke Terraform for dig. Til state bruger azd som standard lokal state; for teams skal du konfigurere en fjern-backend (fx en Azure Storage-backend) i `provider.tf`.
+
+For komplette, kørende Terraform-baserede starters, gennemse [Awesome AZD gallery](https://azure.github.io/awesome-azd/) og filtrer efter Terraform, eller se den officielle [azd Terraform documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
+
+## 🧩 Brug af Pulumi med azd
+
+Hvis dit team skriver infrastruktur i et generelt sprog (TypeScript, Python, Go eller C#) i stedet for et DSL, understøtter azd også **Pulumi**. Som med Terraform er `azd up` / `azd provision` / `azd down` workflowet uændret—kun infrastrukturværktøjerne og mappestrukturen er forskellige.
+
+### Fortæl azd at bruge Pulumi
+
+```yaml
+# azure.yaml
+name: my-pulumi-app
+infra:
+  provider: pulumi      # default is "bicep"
+  path: infra           # folder containing your Pulumi program
+services:
+  web:
+    project: ./src
+    language: js
+    host: containerapp
+```
+
+### Pulumi-mappelayout
+
+```
+infra/
+├── Pulumi.yaml          # project definition
+├── Pulumi.dev.yaml      # stack config (one per environment)
+├── index.ts             # your resource program (or __main__.py, main.go, etc.)
+├── package.json         # dependencies (for TypeScript)
+└── tsconfig.json
+```
+
+### En minimal `index.ts`
+
+```typescript
+import * as azure from "@pulumi/azure-native";
+import * as pulumi from "@pulumi/pulumi";
+
+const environmentName = pulumi.getStack();
+
+// Mærk hver ressource, så azd kan spore dem og rydde dem op
+const tags = { "azd-env-name": environmentName };
+
+const rg = new azure.resources.ResourceGroup("rg", {
+  resourceGroupName: `rg-${environmentName}`,
+  tags,
+});
+
+// azd læser disse uddata tilbage ind i dit miljø
+export const AZURE_LOCATION = rg.location;
+export const SERVICE_WEB_ENDPOINT_URL = "https://...";
+```
+
+### Stacks svarer til azd-miljøer
+
+Pulumi organiserer udrulninger i **stacks**, og azd mapper hvert azd-miljø til en Pulumi-stack med samme navn. Når du kører `azd env new staging`, vælger azd (eller opretter) Pulumi-stacket `staging`. De samme `azd-env-name` tagging- og `AZURE_*` output-regler gælder, så `azd down` kan finde og fjerne alt.
+
+### Udrul med Pulumi
+
+```bash
+azd auth login
+azd env new dev
+azd provision --preview   # azd kører 'pulumi preview' bag kulisserne
+azd up                    # provisionering + udrulning
+azd down --force          # kører 'pulumi destroy'
+```
+
+> **Forudsætning:** Pulumi skal være installeret og være på din `PATH`, og du får brug for en state-backend (Pulumi Cloud eller en selvstyret backend såsom Azure Blob Storage). azd håndterer Pulumi *workflow'et*, ikke installationen. Se den officielle [azd Pulumi documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-pulumi-for-azd).
+
+## 🎯 Valg af vært til din tjeneste
+
+Feltet `host` i `azure.yaml` afgør, hvor din kode kører. azd understøtter flere værter—at vælge den rigtige er vigtigere end infrastruktur-sproget. Her er en begynder-venlig sammenligning:
+
+| `host` value | Bedst til | Hvorfor |
+|--------------|----------|-----|
+| `appservice` | Traditionelle webapps og API'er | Simpleste PaaS; ingen containere kræves |
+| `staticwebapp` | Front-end SPA'er (React, Vue, Angular) | Global CDN + gratis SSL, indbygget API-understøttelse |
+| `function` | Event-drevne og serverløse workloads | Scale-to-zero, betaling pr. eksekvering |
+| `containerapp` | Containeriserede mikrotjenester | Serverløse containere, scale-to-zero, indbygget ingress |
+| `aks` | Kompleks orkestrering | Fuld Kubernetes-kontrol når du virkelig har brug for det |
+| `springapp` | Java Spring Boot apps | Managed Azure Spring Apps runtime optimeret til Spring |
+
+### Hvornår man skal vælge AKS
+
+**Azure Kubernetes Service (`host: aks`)** giver dig fuld kraft fra Kubernetes—custom controllere, service meshes, kompleks netværk og finmasket scheduling. Den kraft kommer med operationelt overhead: du administrerer node pools, opgraderinger og cluster-netværk.
+
+```yaml
+services:
+  api:
+    project: ./src/api
+    language: js
+    host: aks          # deploys to an existing AKS cluster
+```
+
+> **Start enklere hvis du kan.** For de fleste mikrotjenester giver **Container Apps** dig containere, autoscaling og scale-to-zero uden at skulle administrere et cluster. Vælg AKS kun når du har brug for Kubernetes-specifikke funktioner.
+
+### Hvornår man skal bruge Azure Spring Apps
+
+**Azure Spring Apps (`host: springapp`)** er en managed runtime bygget til Spring Boot. Den håndterer service discovery, config server og blue-green deployment, så Java-teams ikke skal køre deres egen infrastruktur.
+
+```yaml
+services:
+  catalog:
+    project: ./src/catalog
+    language: java
+    host: springapp
+```
+
+> Brug `springapp` når du har eksisterende Spring Boot-apps og ønsker en runtime optimeret til dem. For nye containeriserede Java-apps uden Spring-specifikke behov er `containerapp` ofte det enklere valg.
+
+## 🗃️ Database-provisionering
 
 ### Cosmos DB
 ```bicep
@@ -298,7 +492,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 Sikkerhed og hemmelighedshåndtering
+## 🔒 Sikkerhed og håndtering af hemmeligheder
 
 ### Key Vault-integration
 ```bicep
@@ -342,7 +536,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Konfiguration af managed identity
+### Konfiguration af Managed Identity
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -368,7 +562,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 Netværk og forbindelser
+## 🌍 Netværk og forbindelighed
 
 ### Virtual Network-konfiguration
 ```bicep
@@ -496,7 +690,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Overvågning og observerbarhed
+## 📊 Overvågning og observabilitet
 
 ### Application Insights
 ```bicep
@@ -527,7 +721,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Tilpassede metrics og alerts
+### Brugerdefinerede metrics og alarmer
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -617,7 +811,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Betinget resource-provisionering
+### Betinget ressourceprovisionering
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -649,7 +843,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Avancerede provisioning-mønstre
+## 🚀 Avancerede provisioningmønstre
 
 ### Multi-region udrulning
 ```bicep
@@ -759,36 +953,36 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ### Forhåndsvis infrastrukturændringer før udrulning
 
-Funktionen `azd provision --preview` lader dig **simulere infrastrukturprovisionering** før du rent faktisk deployer ressourcer. Den minder om `terraform plan` eller `bicep what-if` og giver dig et **dry-run overblik** over, hvilke ændringer der ville blive foretaget i dit Azure-miljø.
+Funktionen `azd provision --preview` lader dig **simulere infrastrukturprovisionering** før du rent faktisk udruller ressourcer. Den svarer i ånden til `terraform plan` eller `bicep what-if`, og giver dig et **dry-run overblik** over hvilke ændringer der ville blive foretaget i dit Azure-miljø.
 
-#### 🛠️ Hvad den gør
+#### 🛠️ Hvad det gør
 - **Analyserer dine IaC-skabeloner** (Bicep eller Terraform)
-- **Viser en forhåndsvisning af resourceændringer**: tilføjelser, sletninger, opdateringer
-- **Anvender ikke ændringer** — den er skrivebeskyttet og sikker at køre
+- **Viser en forhåndsvisning af ressourceskift**: tilføjelser, sletninger, opdateringer
+- **Anvender ikke ændringer** — det er skrivebeskyttet og sikkert at køre
 
-#### Anvendelsestilfælde
+#### Brugstilfælde
 ```bash
-# Forhåndsvis infrastrukturændringer før udrulning
+# Forhåndsvis ændringer i infrastrukturen før udrulning
 azd provision --preview
 
-# Forhåndsvisning for et specifikt miljø
+# Forhåndsvis for et specifikt miljø
 azd provision --preview -e production
 ```
 
 Denne kommando hjælper dig med at:
-- **Validere infrastrukturændringer** før du commit'er ressourcer
-- **Fange fejlkonfigurationer tidligt** i udviklingscyklussen
+- **Validere infrastrukturændringer** før du committer ressourcer
+- **Fange fejlkonstruktioner tidligt** i udviklingscyklussen
 - **Samarbejde sikkert** i teammiljøer
-- **Sikre least-privilege udrulninger** uden overraskelser
+- **Sikre least-privilege deployment** uden overraskelser
 
-Den er især nyttig når:
-- Du arbejder med komplekse multi-service miljøer
-- Du foretager ændringer i produktionsinfrastruktur
-- Du validerer skabelonændringer før PR-godkendelse
-- Du træner nye teammedlemmer i infrastrukturmønstre
+Den er især nyttig når du:
+- Arbejder med komplekse multi-service miljøer
+- Ændrer produktionsinfrastruktur
+- Validerer skabelonændringer før PR-godkendelse
+- Træner nye teammedlemmer i infrastrukturmønstre
 
 ### Eksempel på forhåndsvisningsoutput
-Det nøjagtige preview-output varierer efter udbyder og projektstruktur, men resultatet bør klart identificere de foreslåede ændringer, før noget anvendes.
+Det præcise preview-output varierer efter udbyder og projektstruktur, men resultatet bør klart identificere foreslåede ændringer før noget bliver anvendt.
 
 ```bash
 $ azd provision --preview
@@ -815,16 +1009,16 @@ The following resources will be destroyed:
 
 ## �🔄 Ressourceopdateringer og migrationer
 
-### Sikker resourceopdatering
+### Sikre opdateringer af ressourcer
 ```bash
-# Forhåndsvis infrastrukturændringer først (ANBEFALES)
+# Forhåndsvis infrastrukturændringer først (ANBEFALET)
 azd provision --preview
 
 # Anvend ændringer efter bekræftelse af forhåndsvisningen
 azd provision --confirm-with-no-prompt
 
-# For at rulle tilbage, brug Git til at tilbageføre infrastrukturændringer:
-git revert HEAD  # Tilbagefør det sidste infrastrukturcommit
+# Ved rollback, brug Git til at rulle infrastrukturændringer tilbage:
+git revert HEAD  # Fortryd sidste infrastrukturcommit
 azd provision    # Anvend tidligere infrastrukturtilstand
 ```
 
@@ -859,7 +1053,7 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🎯 Bedste praksis
 
-### 1. Konventioner for ressourcenavne
+### 1. Navnekonventioner for ressourcer
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -916,10 +1110,10 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Næste skridt
 
-- [Pre-deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - Valider tilgængelighed af ressourcer
+- [Pre-deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - Valider resource-tilgængelighed
 - [Common Issues](../chapter-07-troubleshooting/common-issues.md) - Fejlsøg infrastrukturproblemer
 - [Debugging Guide](../chapter-07-troubleshooting/debugging.md) - Debug provisioning-problemer
-- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - Vælg passende servicetier
+- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - Vælg passende servicetiers
 
 ## Yderligere ressourcer
 
@@ -931,12 +1125,12 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Navigation**
-- **Previous Lesson**: [Udrulningsvejledning](deployment-guide.md)
-- **Next Lesson**: [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md)
+- **Forrige lektion**: [Deployment Guide](deployment-guide.md)
+- **Næste lektion**: [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi stræber efter nøjagtighed, skal du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på originalsproget bør betragtes som den autoritative kilde. For kritiske oplysninger anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

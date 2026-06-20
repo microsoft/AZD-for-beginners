@@ -1,314 +1,314 @@
-# Glossary - Azure and AZD Terminology
+# ਸ਼ਬਦਾਵਲੀ - Azure ਅਤੇ AZD ਟਰਮੀਨੋਲੋਜੀ
 
-**Reference for All Chapters**
-- **📚 Course Home**: [AZD For Beginners](../README.md)
-- **📖 Learn Basics**: [Chapter 1: AZD Basics](../docs/getting-started/azd-basics.md)
-- **🤖 AI Terms**: [Chapter 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+**ਸਾਰਿਆਂ ਅਧਿਆਏ ਲਈ ਸੰਦਰਭ**
+- **📚 ਕੋਰਸ ਹੋਮ**: [AZD For Beginners](../README.md)
+- **📖 ਬੁਨਿਆਦਾਂ ਸਿੱਖੋ**: [Chapter 1: AZD Basics](../docs/getting-started/azd-basics.md)
+- **🤖 AI ਸ਼ਬਦਾਵਲੀ**: [Chapter 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
 
-## Introduction
+## ਜਾਣ ਪਹਿਚਾਣ
 
-This comprehensive glossary provides definitions for terms, concepts, and acronyms used in Azure Developer CLI and Azure cloud development. Essential reference for understanding technical documentation, troubleshooting issues, and communicating effectively about azd projects and Azure services.
+ਇਹ ਵਿਸਤਾਰਪੂਰਕ ਸ਼ਬਦਾਵਲੀ Azure Developer CLI ਅਤੇ Azure ਕਲਾਉਡ ਵਿਕਾਸ ਵਿੱਚ ਵਰਤੇ ਜਾਣ ਵਾਲੇ ਸ਼ਬਦਾਂ, ਧਾਰਣਾਵਾਂ ਅਤੇ ਸੰਜ्ञਾਵਾਂ ਲਈ ਪਰਿਭਾਸ਼ਾਵਾਂ ਪ੍ਰਦਾਨ ਕਰਦੀ ਹੈ। ਤਕਨੀਕੀ ਦਸਤਾਵੇਜ਼ੀकरण ਸਮਝਣ, ਸਮੱਸਿਆਨਿਰਾਕਰਨ ਅਤੇ azd ਪ੍ਰੋਜੈਕਟਾਂ ਅਤੇ Azure ਸੇਵਾਵਾਂ ਬਾਰੇ ਪ੍ਰਭਾਵਸ਼ਾਲੀ ਸੰਚਾਰ ਲਈ ਇਹ ਇੱਕ ਜ਼ਰੂਰੀ ਸੰਦਰਭ ਹੈ।
 
-## Learning Goals
+## ਸਿੱਖਣ ਦੇ ਲਕੜੀ
 
-By using this glossary, you will:
-- Understand essential Azure Developer CLI terminology and concepts
-- Master Azure cloud development vocabulary and technical terms
-- Reference Infrastructure as Code and deployment terminology efficiently
-- Comprehend Azure service names, acronyms, and their purposes
-- Access definitions for troubleshooting and debugging terminology
-- Learn advanced Azure architecture and development concepts
+ਇਸ ਸ਼ਬਦਾਵਲੀ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਤੁਸੀਂ:
+- Azure Developer CLI ਦੀਆਂ ਅਹੰਕਾਰਜਨਕ ਟਰਮੀਨੋਲੋਜੀ ਅਤੇ ਧਾਰਣਾਵਾਂ ਸਮਝ ਸਕੋਗੇ
+- Azure ਕਲਾਉਡ ਵਿਕਾਸ ਦੀ ਵਾਕ-ਸੰਭਾਲ ਅਤੇ ਤਕਨੀਕੀ ਸ਼ਬਦਾਵਲੀ ਵਿੱਚ ਨਿਪੁੰਨ ਹੋਵੋਗੇ
+- Infrastructure as Code ਅਤੇ ਡਿਪਲੋਇਮੈਂਟ ਟਰਮੀਨੋਲੋਜੀ ਨੂੰ ਪ੍ਰਭਾਵਸ਼ਾਲੀ ਤਰੀਕੇ ਨਾਲ ਰਿਫਰੈਂਸ ਕਰ ਸਕੋਗੇ
+- Azure ਸੇਵਾਵਾਂ ਦੇ ਨਾਮ, ਸੰਜ्ञਾਵਾਂ ਅਤੇ ਉਨਾਂ ਦੇ ਉਦੇਸ਼ ਨੂੰ ਸਮਝ ਸਕੋਗੇ
+- ਸਮੱਸਿਆਨਿਰਾਕਰਨ ਅਤੇ ਡੀਬੱਗਿੰਗ ਟਰਮੀਨੋਲੋਜੀ ਲਈ ਪਰਿਭਾਸ਼ਾਵਾਂ ਤੱਕ ਪਹੁੰਚ ਕਰੋਗੇ
+- ਅਡਵਾਂਸ Azure ਆਰਿਖਟੀਚਰ ਅਤੇ ਵਿਕਾਸ ਸੰਕਲਪ ਸਿੱਖੋਗੇ
 
-## Learning Outcomes
+## ਸਿੱਖਣ ਨਤੀਜੇ
 
-With regular reference to this glossary, you will be able to:
-- Communicate effectively using proper Azure Developer CLI terminology
-- Understand technical documentation and error messages more clearly
-- Navigate Azure services and concepts with confidence
-- Troubleshoot issues using appropriate technical vocabulary
-- Contribute to team discussions with accurate technical language
-- Expand your Azure cloud development knowledge systematically
+ਇਸ ਸ਼ਬਦਾਵਲੀ ਨੂੰ ਨਿਯਮਿਤ ਰੂਪ ਨਾਲ ਦੇਖਣ ਨਾਲ, ਤੁਸੀਂ ਸਮਰੱਥ ਹੋਵੋਗੇ:
+- ਸਹੀ Azure Developer CLI ਟਰਮੀਨੋਲੋਜੀ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਪ੍ਰਭਾਵਸ਼ਾਲੀ ਸੰਚਾਰ ਕਰਨਾ
+- ਤਕਨੀਕੀ ਦਸਤਾਵੇਜ਼ ਅਤੇ ਐਰਰ ਸੁਨੇਹਿਆਂ ਨੂੰ ਹੋਰ ਸਪਸ਼ਟਤਾ ਨਾਲ ਸਮਝਣਾ
+- Azure ਸੇਵਾਵਾਂ ਅਤੇ ਧਾਰਣਾਵਾਂ ਵਿੱਚ ਭਰੋਸੇ ਨਾਲ ਨੇਵੀਗੇਟ ਕਰਨਾ
+- ਢੁੱਕਵੀਂ ਤਕਨੀਕੀ ਸ਼ਬਦਾਵਲੀ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਸਮੱਸਿਆਵਾਂ ਦਾ ਨਿਪਟਾਰਾ ਕਰਨਾ
+- ਟੀਮ ਚਰਚਿਆਂ ਵਿੱਚ ਸਹੀ ਤਕਨੀਕੀ ਭਾਸ਼ਾ ਨਾਲ ਯੋਗਦਾਨ ਪਾਉਣਾ
+- ਪੱਧਰੀ ਤਰੀਕੇ ਨਾਲ ਆਪਣਾ Azure ਕਲਾਉਡ ਵਿਕਾਸ ਗਿਆਨ ਵਧਾਉਣਾ
 
 ## A
 
 **ARM Template**  
-Azure Resource Manager template. JSON-based Infrastructure as Code format used to define and deploy Azure resources declaratively.
+Azure Resource Manager template. JSON-ਆਧਾਰਿਤ Infrastructure as Code ਫਾਰਮੈਟ ਜੋ ਡਿਕਲੇਅਰੇਟਿਵ ਤਰੀਕੇ ਨਾਲ Azure ਰਿਸੋਰਸز ਨੂੰ ਪਰਿਭਾਸ਼ਿਤ ਅਤੇ ਡਿਪਲੋਇ ਕਰਦਾ ਹੈ।
 
 **App Service**  
-Azure's platform-as-a-service (PaaS) offering for hosting web applications, REST APIs, and mobile backends without managing infrastructure.
+Azure ਦੀ platform-as-a-service (PaaS) ਪੇਸ਼ਕਸ਼ ਵੈੱਬ ਐਪਲੀਕੇਸ਼ਨਾਂ, REST APIs ਅਤੇ ਮੋਬਾਈਲ ਬੈਕਐਂਡਜ਼ ਨੂੰ ਹੋਸਟ ਕਰਨ ਲਈ ਬਿਨਾਂ ਇੰਫ੍ਰਾਸਟਰਕਚਰ ਦਾ ਪ੍ਰਬੰਧ ਕੀਤੇ।
 
 **Application Insights**  
-Azure's application performance monitoring (APM) service that provides deep insights into application performance, availability, and usage.
+Azure ਦੀ ਐਪਲੀਕੇਸ਼ਨ ਪਰਫਾਰਮੈਂਸ ਮੋਨਿਟਰਿੰਗ (APM) ਸੇਵਾ ਜੋ ਐਪਲੀਕੇਸ਼ਨ ਪ੍ਰਦਰਸ਼ਨ, ਉਪਲਬਧਤਾ ਅਤੇ ਵਰਤੋਂ ਬਾਰੇ ਡੂੰਘੀ ਜਾਣਕਾਰੀ ਪ੍ਰਦਾਨ ਕਰਦੀ ਹੈ।
 
 **Azure CLI**  
-Command-line interface for managing Azure resources. Used by azd for authentication and some operations.
+Azure ਰਿਸੋਰਸਜ਼ ਦੇ ਪ੍ਰਬੰਧ ਲਈ ਕਮਾਂਡ-ਲਾਈਨ ਇੰਟਰਫੇਸ। azd ਦੁਆਰਾ ਪ੍ਰਮਾਣਿਕਤਾ ਅਤੇ ਕੁਝ ਆਪਰੇਸ਼ਨਾਂ ਲਈ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ।
 
 **Azure Developer CLI (azd)**  
-Developer-centric command-line tool that accelerates the process of building and deploying applications to Azure using templates and Infrastructure as Code.
+ਡਿਵੈਲਪਰ-ਕੇਂਦਰਤ ਕਮਾਂਡ-ਲਾਈਨ ਟੂਲ ਜੋ ਟੈਮਪਲੇਟਾਂ ਅਤੇ Infrastructure as Code ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ Azure 'ਤੇ ਬਿਲਡ ਅਤੇ ਡਿਪਲੋਇ ਕਰਨ ਦੀ ਪ੍ਰਕ੍ਰਿਆ ਤੇਜ਼ ਕਰਦਾ ਹੈ।
 
 **azure.yaml**  
-The main configuration file for an azd project that defines services, infrastructure, and deployment hooks.
+azd ਪ੍ਰੋਜੈਕਟ ਲਈ ਮੁੱਖ ਸੰਰਚਨਾ ਫਾਈਲ ਜੋ ਸੇਵਾਵਾਂ, ਇੰਫ੍ਰਾਸਟਰਕਚਰ ਅਤੇ ਡਿਪਲੋਇਮੈਂਟ ਹੁਕਾਂ ਨੂੰ ਪਰਿਭਾਸ਼ਿਤ ਕਰਦੀ ਹੈ।
 
 **Azure Resource Manager (ARM)**  
-Azure's deployment and management service that provides a management layer for creating, updating, and deleting resources.
+Azure ਦੀ ਡਿਪਲੋਇਮੈਂਟ ਅਤੇ ਪ੍ਰਬੰਧਨ ਸੇਵਾ ਜੋ ਰਿਸੋਰਸ ਬਣਾਉਣ, ਅਪਡੇਟ ਅਤੇ ਮਿਟਾਉਣ ਲਈ ਇੱਕ ਪ੍ਰਬੰਧਨ ਲੇਅਰ ਪ੍ਰਦਾਨ ਕਰਦੀ ਹੈ।
 
 ## B
 
 **Bicep**  
-Domain-specific language (DSL) developed by Microsoft for deploying Azure resources. Provides simpler syntax than ARM templates while compiling to ARM.
+Microsoft ਦੁਆਰਾ ਵਿਕਸਿਤ ਡੋਮੇਨ-ਵਿਸ਼ੇਸ਼ ਭਾਸ਼ਾ (DSL) ਜੋ Azure ਰਿਸੋਰਸਜ਼ ਨੂੰ ਡਿਪਲੋਇ ਕਰਨ ਲਈ ਹੈ। ARM ਟੈਮਪਲੇਟਾਂ ਨਾਲੋਂ ਸਧਾਰਣ ਸਿੰਟੈਕਸ ਪ੍ਰਦਾਨ ਕਰਦੀ ਹੈ ਅਤੇ ARM ਨੂੰ ਕੰਪਾਈਲ ਹੁੰਦੀ ਹੈ।
 
 **Build**  
-The process of compiling source code, installing dependencies, and preparing applications for deployment.
+ਸਰੋਤ ਕੋਡ ਨੂੰ ਕੰਪਾਇਲ ਕਰਨ, ਡੀਪੈਂਡੇੰਸੀਜ਼ ਇੰਸਟਾਲ ਕਰਨ ਅਤੇ ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਡਿਪਲੋਇਮੈਂਟ ਲਈ ਤਿਆਰ ਕਰਨ ਦੀ ਪ੍ਰਕ੍ਰਿਆ।
 
 **Blue-Green Deployment**  
-Deployment strategy that uses two identical production environments (blue and green) to minimize downtime and risk.
+ਇੱਕ ਡਿਪਲੋਇਮੈਂਟ ਰਣਨੀਤੀ ਜੋ ਦੋ ਇੱਕੋ ਜਿਹੇ ਪ੍ਰੋਡਕਸ਼ਨ ਮਾਹੌਲਾਂ (blue ਅਤੇ green) ਦੀ ਵਰਤੋਂ ਕਰਦੀ ਹੈ ਜਿਸ ਨਾਲ ਡਾਊਨਟਾਈਮ ਅਤੇ ਖ਼ਤਰੇ ਘਟਦੇ ਹਨ।
 
 ## C
 
 **Container Apps**  
-Azure's serverless container service that enables running containerized applications without managing complex infrastructure.
+Azure ਦੀ ਸਰਵਰਲੈਸ ਕੰਟੇਨਰ ਸੇਵਾ ਜੋ ਘਨਸ਼ੀਲ ਇੰਫ੍ਰਾਸਟਰਕਚਰ ਦੇ ਪ੍ਰਬੰਧ ਦੇ ਬਿਨਾਂ ਕੰਟੇਨਰਾਈਜ਼ਡ ਐਪਲੀਕੇਸ਼ਨਾਂ ਚਲਾਉਣ ਦੀ ਯੋਗਤਾ ਦਿੰਦੀ ਹੈ।
 
 **CI/CD**  
-Continuous Integration/Continuous Deployment. Automated practices for integrating code changes and deploying applications.
+Continuous Integration/Continuous Deployment. ਕੋਡ ਬਦਲਾਵਾਂ ਨੂੰ ਇੱਕਠਾ ਕਰਨ ਅਤੇ ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਆਟੋਮੇਟਿਕ ਤਰੀਕੇ ਨਾਲ ਡਿਪਲੋਇ ਕਰਨ ਦੇ ਆਟੋਮੇਟਡ ਅਭਿਆਸ।
 
 **Cosmos DB**  
-Azure's globally distributed, multi-model database service that provides comprehensive SLAs for throughput, latency, availability, and consistency.
+Azure ਦੀ ਗਲੋਬਲੀ ਤੌਰ 'ਤੇ ਵੰਡੀ ਹੋਈ, ਮਲਟੀ-ਮਾਡਲ ਡਾਟਾਬੇਸ ਸੇਵਾ ਜੋ throughput, latency, ਉਪਲਬਧਤਾ ਅਤੇ ਕਨਸਿਸਟੈਂਸੀ ਲਈ ਵਿਸਤ੍ਰਿਤ SLA ਪ੍ਰਦਾਨ ਕਰਦੀ ਹੈ।
 
 **Configuration**  
-Settings and parameters that control application behavior and deployment options.
+ਸੈਟਿੰਗਾਂ ਅਤੇ ਪੈਰਾਮੀਟਰ ਜੋ ਐਪਲੀਕੇਸ਼ਨ ਦੇ ਵਿਹਾਰ ਅਤੇ ਡਿਪਲੋਇਮੈਂਟ ਵਿਕਲਪਾਂ ਨੂੰ ਕੰਟਰੋਲ ਕਰਦੇ ਹਨ।
 
 ## D
 
 **Deployment**  
-The process of installing and configuring applications and their dependencies on target infrastructure.
+ਟਾਰਗਟ ਇੰਫ੍ਰਾਸਟਰਕਚਰ 'ਤੇ ਐਪਲੀਕੇਸ਼ਨਾਂ ਅਤੇ ਉਨ੍ਹਾਂ ਦੀਆਂ ਡੀਪੈਂਡੇੰਸੀਜ਼ ਨੂੰ ਇੰਸਟਾਲ ਅਤੇ ਸੰਰਚਿਤ ਕਰਨ ਦੀ ਪ੍ਰਕਿਰਿਆ।
 
 **Docker**  
-Platform for developing, shipping, and running applications using containerization technology.
+ਕੰਟੇਨਰਾਈਜ਼ੇਸ਼ਨ ਤਕਨੀਕ ਦੀ ਵਰਤੋਂ ਕਰਦਿਆਂ ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਵਿਕਸਿਤ, ਸ਼ਿਪ ਅਤੇ ਚਲਾਉਣ ਲਈ ਪਲੇਟਫਾਰਮ।
 
 **Dockerfile**  
-Text file containing instructions for building a Docker container image.
+Docker ਕੰਟੇਨਰ ਇਮੇਜ ਬਣਾਉਣ ਲਈ ਹੁਕਮਾਂ ਵਾਲੀ ਟੈਕਸਟ ਫਾਈਲ।
 
 ## E
 
 **Environment**  
-A deployment target that represents a specific instance of your application (e.g., development, staging, production).
+ਇੱਕ ਡਿਪਲੋਇਮੈਂਟ ਟਾਰਗਟ ਜੋ ਤੁਹਾਡੇ ਐਪਲੀਕੇਸ਼ਨ ਦੇ ਇੱਕ ਨਿਰਦਿਸ਼ਟ ਉਦਾਹਰਨ ਨੂੰ ਦਰਸਾਉਂਦਾ ਹੈ (ਉਦਾਹਰਣ ਲਈ, development, staging, production)।
 
 **Environment Variables**  
-Configuration values stored as key-value pairs that applications can access at runtime.
+ਕੰਜੀ-ਮੁੱਲ ਜੋ runtime 'ਤੇ ਐਪਲੀਕੇਸ਼ਨਾਂ ਦੁਆਰਾ ਐਕਸੈਸ ਕੀਤੀਆਂ ਜਾ ਸਕਦੀਆਂ ਹਨ।
 
 **Endpoint**  
-URL or network address where an application or service can be accessed.
+URL ਜਾਂ ਨੈਟਵਰਕ ਪਤਾ ਜਿੱਥੇ ਇੱਕ ਐਪਲੀਕੇਸ਼ਨ ਜਾਂ ਸੇਵਾ ਨੂੰ ਪਹੁੰਚਿਆ ਜਾ ਸਕਦਾ ਹੈ।
 
 ## F
 
 **Function App**  
-Azure's serverless compute service that enables running event-driven code without managing infrastructure.
+Azure ਦੀ ਸਰਵਰਲੈਸ ਕੰਪਿਊਟ ਸੇਵਾ ਜੋ ਇਵੈਂਟ-ਚਲਤ ਕੋਡ ਚਲਾਉਣ ਦੀ ਯੋਗਤਾ ਦਿੰਦੀ ਹੈ ਬਿਨਾਂ ਇੰਫ੍ਰਾਸਟਰਕਚਰ ਦਾ ਪ੍ਰਬੰਧ ਕੀਤੇ।
 
 ## G
 
 **GitHub Actions**  
-CI/CD platform integrated with GitHub repositories for automating workflows.
+GitHub ਰੈਪੋਜ਼ਟਰੀਜ਼ ਨਾਲ ਇੰਟਿਗ੍ਰੇਟ ਕੀਤੀ CI/CD ਪਲੇਟਫਾਰਮ ਜੋ ਵਰਕਫਲੋਜ਼ ਨੂੰ ਆਟੋਮੇਟ ਕਰਦੀ ਹੈ।
 
 **Git**  
-Distributed version control system used for tracking changes in source code.
+ਡਿਸਟਰਿਬਿਊਟਡ ਵਰਜ਼ਨ ਕੰਟਰੋਲ ਸਿਸਟਮ ਜੋ ਸਰੋਤ ਕੋਡ ਵਿੱਚ ਹੋ ਰਹੇ ਬਦਲਾਵਾਂ ਨੂੰ ਟਰੈਕ ਕਰਨ ਲਈ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ।
 
 ## H
 
 **Hooks**  
-Custom scripts or commands that run at specific points during the deployment lifecycle (preprovision, postprovision, predeploy, postdeploy).
+ਕਸਟਮ ਸਕ੍ਰਿਪਟ ਜਾਂ ਕਮਾਂਡਾਂ ਜੋ ਡਿਪਲੋਇਮੈਂਟ ਲਾਈਫਸਾਈਕਲ ਦੇ ਨਿਰਦਿਸ਼ਟ ਬਿੰਦੂਆਂ 'ਤੇ ਚਲਦੀਆਂ ਹਨ (preprovision, postprovision, predeploy, postdeploy)।
 
 **Host**  
-The Azure service type where an application will be deployed (e.g., appservice, containerapp, function).
+ਉਹ Azure ਸੇਵਾ ਕਿਸਮ ਜਿੱਥੇ ਇੱਕ ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ ਡਿਪਲੋਇ ਕੀਤਾ ਜਾਵੇਗਾ (ਉਦਾਹਰਣ ਲਈ, appservice, containerapp, function)।
 
 ## I
 
 **Infrastructure as Code (IaC)**  
-Practice of defining and managing infrastructure through code rather than manual processes.
+ਇੰਫ੍ਰਾਸਟਰਕਚਰ ਨੂੰ ਹੱਥੋਂ-ਹੱਥ ਕਰਵਾਉਣ ਦੀ ਥਾਂ ਕੋਡ ਰਾਹੀਂ ਪਰਿਭਾਸ਼ਿਤ ਅਤੇ ਪ੍ਰਬੰਧ ਕਰਨ ਦਾ ਅਭਿਆਸ।
 
 **Init**  
-The process of initializing a new azd project, typically from a template.
+ਨਵੇਂ azd ਪ੍ਰੋਜੈਕਟ ਨੂੰ ਸ਼ੁਰੂ ਕਰਨ ਦੀ ਪ੍ਰਕਿਰਿਆ, ਆਮ ਤੌਰ 'ਤੇ ਇੱਕ ਟੈਮਪਲੇਟ ਤੋਂ।
 
 ## J
 
 **JSON**  
-JavaScript Object Notation. Data interchange format commonly used for configuration files and API responses.
+JavaScript Object Notation. ਡਾਟਾ ਇੰਟਰਚੇਜ਼ ਫਾਰਮੈਟ ਜੋ ਆਮ ਤੌਰ 'ਤੇ ਸੰਰਚਨਾ ਫਾਈਲਾਂ ਅਤੇ API ਜਵਾਬਾਂ ਲਈ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ।
 
 **JWT**  
-JSON Web Token. Standard for securely transmitting information between parties as a JSON object.
+JSON Web Token. ਪੱਖਾਂ ਵਿੱਚ ਸੁਰੱਖਿਅਤ ਤਰੀਕੇ ਨਾਲ ਜਾਣਕਾਰੀ ਟ੍ਰਾਂਸਮਿਟ ਕਰਨ ਲਈ ਇੱਕ ਮਿਆਰੀ ਫਾਰਮੈਟ।
 
 ## K
 
 **Key Vault**  
-Azure's service for securely storing and managing secrets, keys, and certificates.
+Azure ਦੀ ਸੇਵਾ ਜੋ ਗੁਪਤ-ਮੁੱਲਾਂ, ਕੀਜ਼ ਅਤੇ ਸਰਟੀਫਿਕੇਟਾਂ ਨੂੰ ਸੁਰੱਖਿਅਤ ਢੰਗ ਨਾਲ ਸਟੋਰ ਅਤੇ ਪ੍ਰਬੰਧਤ ਕਰਨ ਲਈ ਹੈ।
 
 **Kusto Query Language (KQL)**  
-Query language used for analyzing data in Azure Monitor, Application Insights, and other Azure services.
+Azure Monitor, Application Insights ਅਤੇ ਹੋਰ Azure ਸੇਵਾਵਾਂ ਵਿੱਚ ਡਾਟਾ ਵਿਸ਼ਲੇਸ਼ਣ ਲਈ ਵਰਤੀ ਜਾਣ ਵਾਲੀ ਕ੍ਵੈਰੀ ਭਾਸ਼ਾ।
 
 ## L
 
 **Load Balancer**  
-Service that distributes incoming network traffic across multiple servers or instances.
+ਉਹ ਸੇਵਾ ਜੋ ਆਉਣ ਵਾਲੇ ਨੈਟਵਰਕ ਟ੍ਰੈਫਿਕ ਨੂੰ ਕਈ ਸਰਵਰਾਂ ਜਾਂ ਇਨਸਟੈਂਸਾਂ ਵਿੱਚ ਵੰਡਦੀ ਹੈ।
 
 **Log Analytics**  
-Azure service for collecting, analyzing, and acting on telemetry data from cloud and on-premises environments.
+ਕਲਾਉਡ ਅਤੇ ਆਨ-ਪ੍ਰੇਮਾਈਸ ਵਾਤਾਵਰਣਾਂ ਤੋਂ ਟੈਲੀਮੇਟਰੀ ਡਾਟਾ ਇਕੱਠਾ, ਵਿਸ਼ਲੇਸ਼ਣ ਅਤੇ ਕਾਰਵਾਈ ਲਈ Azure ਸੇਵਾ।
 
 ## M
 
 **Managed Identity**  
-Azure feature that provides Azure services with an automatically managed identity for authenticating to other Azure services.
+Azure ਫੀਚਰ ਜੋ ਹੋਰ Azure ਸੇਵਾਵਾਂ ਲਈ ਪ੍ਰਮਾਣਿਕਤਾ ਦੇਣ ਲਈ ਆਟੋਮੈਟਿਕ ਤਰੀਕੇ ਨਾਲ ਪ੍ਰਬੰਧਤ ਕੀਤੀ ਜਾਣ ਵਾਲੀ ਆਈਡੈਂਟੀਟੀ ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ।
 
 **Microservices**  
-Architectural approach where applications are built as a collection of small, independent services.
+ਆਰਕੀਟੈਕਚਰਲ ਪਹੁੰਚ ਜਿੱਥੇ ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਛੋਟੇ, ਸੁਤੰਤਰ ਸਰਵਿਸਜ਼ ਦੇ ਸੰਗ੍ਰਹਿ ਵਜੋਂ ਬਣਾਇਆ ਜਾਂਦਾ ਹੈ।
 
 **Monitor**  
-Azure's unified monitoring solution that provides full-stack observability across applications and infrastructure.
+Azure ਦਾ ਇਕਾਈਕ੍ਰਿਤ ਮੋਨਿਟਰਿੰਗ ਹੱਲ ਜੋ ਐਪਲੀਕੇਸ਼ਨਾਂ ਅਤੇ ਇੰਫ੍ਰਾਸਟਰਕਚਰ 'ਤੇ ਪੂਰਾ-ਸਟੈਕ ਨਿਰੀਖਣ ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ।
 
 ## N
 
 **Node.js**  
-JavaScript runtime built on Chrome's V8 JavaScript engine for building server-side applications.
+Chrome ਦੇ V8 JavaScript ਇੰਜਣ 'ਤੇ ਅਧਾਰਿਤ JavaScript ਰਨਟਾਈਮ ਜੋ ਸਰਵਰ-ਸਾਇਡ ਐਪਲੀਕੇਸ਼ਨਾਂ ਬਣਾਉਣ ਲਈ ਹੈ।
 
 **npm**  
-Package manager for Node.js that manages dependencies and packages.
+Node.js ਲਈ ਪੈਕੇਜ ਮੈਨੇਜਰ ਜੋ ਡੀਪੈਂਡੇੰਸੀਜ਼ ਅਤੇ ਪੈਕੇਜਾਂ ਨੂੰ ਪ੍ਰਬੰਧਿਤ ਕਰਦਾ ਹੈ।
 
 ## O
 
 **Output**  
-Values returned from infrastructure deployment that can be used by applications or other resources.
+ਇਹ ਮੁੱਲ ਹਨ ਜੋ ਇੰਫ੍ਰਾਸਟਰਕਚਰ ਡਿਪਲੋਇਮੈਂਟ ਤੋਂ ਵਾਪਸ ਕੀਤੇ ਜਾਂਦੇ ਹਨ ਅਤੇ ਜਿਨ੍ਹਾਂ ਨੂੰ ਐਪਲੀਕੇਸ਼ਨ ਜਾਂ ਹੋਰ ਰਿਸੋਰਸز ਦੁਆਰਾ ਵਰਤਿਆ ਜਾ ਸਕਦਾ ਹੈ।
 
 ## P
 
 **Package**  
-The process of preparing application code and dependencies for deployment.
+ਐਪਲੀਕੇਸ਼ਨ ਕੋਡ ਅਤੇ ਡੀਪੈਂਡੇੰਸੀਜ਼ ਨੂੰ ਡਿਪਲੋਇਮੈਂਟ ਲਈ ਤਿਆਰ ਕਰਨ ਦੀ ਪ੍ਰਕਿਰਿਆ।
 
 **Parameters**  
-Input values passed to infrastructure templates to customize deployments.
+ਇਨਾਂ ਮੁੱਲਾਂ ਨੂੰ ਇੰਫ੍ਰਾਸਟਰਕਚਰ ਟੈਮਪਲੇਟਾਂ ਨੂੰ ਪਾਸ ਕੀਤਾ ਜਾਂਦਾ ਹੈ ਤਾਂ ਜੋ ਡਿਪਲੋਇਮੈਂਟ ਕਸਟਮਾਇਜ਼ ਕੀਤੇ ਜਾ ਸਕਣ।
 
 **PostgreSQL**  
-Open-source relational database system supported as a managed service in Azure.
+ਓਪਨ-ਸੋਰਸ ਰਿਲੇਸ਼ਨਲ ਡੇਟਾਬੇਸ ਸਿਸਟਮ ਜੋ Azure 'ਤੇ ਮੈਨੇਜ ਕੀਤੀ ਸੇਵਾ ਵਜੋਂ ਸਮਰਥਿਤ ਹੈ।
 
 **Provisioning**  
-The process of creating and configuring Azure resources defined in infrastructure templates.
+ਇੰਫ੍ਰਾਸਟਰਕਚਰ ਟੈਮਪਲੇਟਾਂ ਵਿੱਚ ਪਰਿਭਾਸ਼ਿਤ Azure ਰਿਸੋਰਸਜ਼ ਨੂੰ ਬਣਾਉਣ ਅਤੇ ਸੰਰਚਿਤ ਕਰਨ ਦੀ ਪ੍ਰਕਿਰਿਆ।
 
 ## Q
 
 **Quota**  
-Limits on the amount of resources that can be created in an Azure subscription or region.
+Azure ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਜਾਂ ਖੇਤਰ ਵਿੱਚ ਬਣਾਏ ਜਾ ਸਕਣ ਵਾਲੇ ਰਿਸੋਰਸ ਦੀ ਮਾਤਰਾ 'ਤੇ ਲਗਾਏ ਜਾਣ ਵਾਲੇ ਸੀਮਤ।
 
 ## R
 
 **Resource Group**  
-Logical container for Azure resources that share the same lifecycle, permissions, and policies.
+Azure ਰਿਸੋਰਸਜ਼ ਲਈ ਤਰਤਬੀ ਕੰਟੇਨਰ ਜੋ ਇੱਕੋ lifecycle, permissions ਅਤੇ ਪੋਲਿਸੀਆਂ ਸਾਂਝੀਆਂ ਕਰਦੇ ਹਨ।
 
 **Resource Token**  
-Unique string generated by azd to ensure resource names are unique across deployments.
+azd ਦੁਆਰਾ ਜਨਰੇਟ ਕੀਤੀ ਇੱਕ ਵਿਲੱਖਣ ਸਟਰਿੰਗ ਜੋ ਇਹ ਯਕੀਨੀ ਬਣਾਉਂਦੀ ਹੈ ਕਿ ਡਿਪਲੋਇਮੈਂਟਾਂ 'ਚ ਰਿਸੋਰਸ ਨਾਮ ਯੂਨੀਕ ਹਨ।
 
 **REST API**  
-Architectural style for designing networked applications using HTTP methods.
+HTTP ਵਿਧੀਆਂ ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋਏ ਨੈਟਵਰਕ ਐਪਲੀਕੇਸ਼ਨਾਂ ਦੀ ਡਿਜ਼ਾਈਨ ਲਈ ਇੱਕ ਆਰਕੀਟੈਕਚਰਲ ਸਟਾਈਲ।
 
 **Rollback**  
-Process of reverting to a previous version of an application or infrastructure configuration.
+ਐਪਲੀਕੇਸ਼ਨ ਜਾਂ ਇੰਫ੍ਰਾਸਟਰਕਚਰ ਸੰਰਚਨਾ ਦੇ ਪਿਛਲੇ ਵਰਜ਼ਨ ਵੱਲ ਵਾਪਸੀ ਕਰਨ ਦੀ ਪ੍ਰਕਿਰਿਆ।
 
 ## S
 
 **Service**  
-A component of your application defined in azure.yaml (e.g., web frontend, API backend, database).
+ਆਪਣੇ azure.yaml ਵਿੱਚ ਪਰਿਭਾਸ਼ਿਤ ਤੁਹਾਡੇ ਐਪਲੀਕੇਸ਼ਨ ਦਾ ਇਕ ਘਟਕ (ਉਦਾਹਰਣ ਲਈ, web frontend, API backend, database)।
 
 **SKU**  
-Stock Keeping Unit. Represents different service tiers or performance levels for Azure resources.
+Stock Keeping Unit. Azure ਰਿਸੋਰਸਜ਼ ਲਈ ਵੱਖ-ਵੱਖ ਸੇਵਾ ਟੀਅਰਾਂ ਜਾਂ ਪ੍ਰਦਰਸ਼ਨ ਪੱਧਰਾਂ ਦਾ ਪ੍ਰਤੀਨਿਧਿਤਾ ਕਰਦਾ ਹੈ।
 
 **SQL Database**  
-Azure's managed relational database service based on Microsoft SQL Server.
+Microsoft SQL Server 'ਤੇ ਆਧਾਰਿਤ Azure ਦੀ ਮੈਨੇਜਡ ਰਿਲੇਸ਼ਨਲ ਡੇਟਾਬੇਸ ਸੇਵਾ।
 
 **Static Web Apps**  
-Azure service for building and deploying full-stack web applications from source code repositories.
+ਜ਼ਰੂਰੀ ਸਰੋਤ ਕੋਡ ਰੈਪੋਜ਼ਟਰੀਜ਼ ਤੋਂ ਫੁੱਲ-ਸਟੈਕ ਵੈੱਬ ਐਪਲੀਕੇਸ਼ਨਾਂ ਬਣਾਉਣ ਅਤੇ ਡਿਪਲੋਇ ਕਰਨ ਲਈ Azure ਸੇਵਾ।
 
 **Storage Account**  
-Azure service that provides cloud storage for data objects including blobs, files, queues, and tables.
+Data objects ਜਿਵੇਂ blobs, files, queues ਅਤੇ tables ਲਈ ਕਲਾਉਡ ਸਟੋਰੇਜ ਪ੍ਰਦਾਨ ਕਰਨ ਵਾਲੀ Azure ਸੇਵਾ।
 
 **Subscription**  
-Azure account container that holds resource groups and resources, with associated billing and access management.
+Azure ਖਾਤਾ ਕੰਟੇਨਰ ਜੋ ਰਿਸੋਰਸ ਗਰੂਪ ਅਤੇ ਰਿਸੋਰਸਜ਼ ਨੂੰ ਰੱਖਦਾ ਹੈ, ਜਿਸ ਨਾਲ ਸੰਬੰਧਤ ਬਿਲਿੰਗ ਅਤੇ ਐਕਸੇਸ ਪ੍ਰਬੰਧਨ ਹੁੰਦਾ ਹੈ।
 
 ## T
 
 **Template**  
-Pre-built project structure containing application code, infrastructure definitions, and configuration for common scenarios.
+ਪ੍ਰੀ-ਬਿਲਟ ਪ੍ਰੋਜੈਕਟ ਸੰਰਚਨਾ ਜੋ ਆਮ ਪਰਿਦ੍ਰਿਸ਼ਿਆਂ ਲਈ ਐਪਲੀਕੇਸ਼ਨ ਕੋਡ, ਇੰਫ੍ਰਾਸਟਰਕਚਰ ਪਰਿਭਾਸ਼ਾਵਾਂ ਅਤੇ ਸੰਰਚਨਾ ਸ਼ਾਮਲ ਕਰਦੀ ਹੈ।
 
 **Terraform**  
-Open-source Infrastructure as Code tool that supports multiple cloud providers including Azure.
+Open-source Infrastructure as Code ਟੂਲ ਜੋ Azure ਸਮੇਤ ਕਈ ਕਲਾਉਡ ਪ੍ਰੋਵਾਈਡਰਾਂ ਨੂੰ ਸਮਰਥਨ ਕਰਦਾ ਹੈ।
 
 **Traffic Manager**  
-Azure's DNS-based traffic load balancer for distributing traffic across global Azure regions.
+ਦੁਨੀਆ ਭਰ ਦੇ Azure ਖੇਤਰਾਂ ਵਿੱਚ ਟ੍ਰੈਫਿਕ ਵੰਡਣ ਲਈ Azure ਦਾ DNS-ਅਧਾਰਿਤ ਟ੍ਰੈਫਿਕ ਲੋਡ ਬੈਲੈਂਸਰ।
 
 ## U
 
 **URI**  
-Uniform Resource Identifier. String that identifies a particular resource.
+Uniform Resource Identifier. ਇੱਕ ਸਟਰਿੰਗ ਜੋ ਕਿਸੇ ਵਿਸ਼ੇਸ਼ ਰਿਸੋਰਸ ਦੀ ਪਛਾਣ ਕਰਦੀ ਹੈ।
 
 **URL**  
-Uniform Resource Locator. Type of URI that specifies where a resource is located and how to retrieve it.
+Uniform Resource Locator. URI ਦੀ ਇੱਕ ਕਿਸਮ ਜੋ ਇਹ ਦਰਸਾਉਂਦੀ ਹੈ ਕਿ ਰਿਸੋਰਸ ਕਿੱਥੇ ਸਥਿਤ ਹੈ ਅਤੇ ਉਸਨੂੰ ਕਿਵੇਂ ਪ੍ਰਾਪਤ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ।
 
 ## V
 
 **Virtual Network (VNet)**  
-Fundamental building block for private networks in Azure, providing isolation and segmentation.
+Azure ਵਿੱਚ ਪ੍ਰਾਈਵੇਟ ਨੈਟਵਰਕਾਂ ਲਈ ਮੂਲ ਨਿਰਮਾਣ ਬਲੌਕ, ਜੋ ਇਕਾਨਤ ਅਤੇ ਵਿਭਾਜਨ ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ।
 
 **VS Code**  
-Visual Studio Code. Popular code editor with excellent Azure and azd integration.
+Visual Studio Code. ਇੱਕ ਪੁਪੁਲਰ ਕੋਡ ਏਡੀਟਰ ਜੋ Azure ਅਤੇ azd ਲਈ ਉੱਤਮ ਇੰਟੀਗ੍ਰੇਸ਼ਨ ਰੱਖਦਾ ਹੈ।
 
 ## W
 
 **Webhook**  
-HTTP callback triggered by specific events, commonly used in CI/CD pipelines.
+KHਾਸ ਘਟਨਾਵਾਂ ਦੁਆਰਾ ਟ੍ਰਿਗਰ ਕੀਤਾ ਗਿਆ HTTP ਕਾਲਬੈਕ, ਆਮ ਤੌਰ 'ਤੇ CI/CD ਪਾਈਪਲਾਈਨਾਂ ਵਿੱਚ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ।
 
 **What-if**  
-Azure feature that shows what changes would be made by a deployment without actually executing it.
+Azure ਫੀਚਰ ਜੋ ਇਹ ਦਿਖਾਉਂਦਾ ਹੈ ਕਿ ਡਿਪਲੋਇਮੈਂਟ ਦੁਆਰਾ ਕਿਹੜੇ ਬਦਲਾਵ ਕੀਤੇ ਜਾਣਗੇ ਬਿਨਾਂ ਉਹਨਾਂ ਨੂੰ ਅਸਲ ਵਿੱਚ ਚਲਾਏ।
 
 ## Y
 
 **YAML**  
-YAML Ain't Markup Language. Human-readable data serialization standard used for configuration files like azure.yaml.
+YAML Ain't Markup Language. ਮਨੁੱਖ-ਪੜ੍ਹਨ ਯੋਗ ਡਾਟਾ ਸੀਰੀਅਲਾਈਜੇਸ਼ਨ ਮਿਆਰ ਜੋ azure.yaml ਵਰਗੀਆਂ ਸੰਰਚਨਾ ਫਾਈਲਾਂ ਲਈ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ।
 
 ## Z
 
 **Zone**  
-Physically separate locations within an Azure region that provide redundancy and high availability.
+Azure ਖੇਤਰ ਦੇ ਅੰਦਰ ਭੌਤਿਕ ਤੌਰ 'ਤੇ ਵੱਖ-ਵੱਖ ਥਾਵਾਂ ਜੋ redundancy ਅਤੇ ਉਚੀ ਉਪਲਬਧਤਾ ਪ੍ਰਦਾਨ ਕਰਦੀਆਂ ਹਨ।
 
 ---
 
-## Common Acronyms
+## ਆਮ ਸਰਟੀਫਿਕੇਸ਼ਨ ਸ਼ਬਦ (Acronyms)
 
 | Acronym | Full Form | Description |
 |---------|-----------|-------------|
-| AAD | Azure Active Directory | Identity and access management service |
-| ACR | Azure Container Registry | Container image registry service |
-| AKS | Azure Kubernetes Service | Managed Kubernetes service |
-| API | Application Programming Interface | Set of protocols for building software |
-| ARM | Azure Resource Manager | Azure's deployment and management service |
-| CDN | Content Delivery Network | Distributed network of servers |
-| CI/CD | Continuous Integration/Continuous Deployment | Automated development practices |
-| CLI | Command Line Interface | Text-based user interface |
-| DNS | Domain Name System | System for translating domain names to IP addresses |
-| HTTPS | Hypertext Transfer Protocol Secure | Secure version of HTTP |
-| IaC | Infrastructure as Code | Managing infrastructure through code |
-| JSON | JavaScript Object Notation | Data interchange format |
-| JWT | JSON Web Token | Token format for secure information transmission |
-| KQL | Kusto Query Language | Query language for Azure data services |
-| RBAC | Role-Based Access Control | Access control method based on user roles |
-| REST | Representational State Transfer | Architectural style for web services |
-| SDK | Software Development Kit | Collection of development tools |
-| SLA | Service Level Agreement | Commitment to service availability/performance |
-| SQL | Structured Query Language | Language for managing relational databases |
-| SSL/TLS | Secure Sockets Layer/Transport Layer Security | Cryptographic protocols |
-| URI | Uniform Resource Identifier | String identifying a resource |
-| URL | Uniform Resource Locator | Type of URI specifying resource location |
-| VM | Virtual Machine | Emulation of a computer system |
-| VNet | Virtual Network | Private network in Azure |
-| YAML | YAML Ain't Markup Language | Data serialization standard |
+| AAD | Azure Active Directory (now Microsoft Entra ID) | ਆਈਡੈਂਟੀਟੀ ਅਤੇ ਐਕਸੇਸ ਪ੍ਰਬੰਧਨ ਸੇਵਾ |
+| ACR | Azure Container Registry | ਕੰਟੇਨਰ ਇਮੇਜ ਰਜਿਸਟਰੀ ਸੇਵਾ |
+| AKS | Azure Kubernetes Service | ਮੈਨੇਜਡ Kubernetes ਸੇਵਾ |
+| API | Application Programming Interface | ਸਾਫਟਵੇਅਰ ਬਣਾਉਣ ਲਈ ਪ੍ਰੋਟੋਕੋਲਾਂ ਦਾ ਸੈੱਟ |
+| ARM | Azure Resource Manager | Azure ਦੀ ਡਿਪਲੋਇਮੈਂਟ ਅਤੇ ਪ੍ਰਬੰਧਨ ਸੇਵਾ |
+| CDN | Content Delivery Network | ਸਰਵਰਾਂ ਦਾ ਵੰਡਿਆ ਹੋਇਆ ਨੈੱਟਵਰਕ |
+| CI/CD | Continuous Integration/Continuous Deployment | ਆਟੋਮੇਟਡ ਵਿਕਾਸ ਅਭਿਆਸ |
+| CLI | Command Line Interface | ਟੈਕਸਟ-ਆਧਾਰਿਤ ਯੂਜ਼ਰ ਇੰਟਰਫੇਸ |
+| DNS | Domain Name System | ਡੋਮੇਨ ਨਾਂਵਾਂ ਨੂੰ IP ਐਡਰੈੱਸ ਵਿੱਚ ਬਦਲਣ ਦੀ ਪ੍ਰਣਾਲੀ |
+| HTTPS | Hypertext Transfer Protocol Secure | HTTP ਦਾ ਸੁਰੱਖਿਅਤ ਵਰਜ਼ਨ |
+| IaC | Infrastructure as Code | ਕੋਡ ਰਾਹੀਂ ਇੰਫ੍ਰਾਸਟਰਕਚਰ ਦੀ ਪ੍ਰਬੰਧਨਾ |
+| JSON | JavaScript Object Notation | ਡਾਟਾ ਇੰਟਰਚੇਜ਼ ਫਾਰਮੈਟ |
+| JWT | JSON Web Token | ਸੁਰੱਖਿਅਤ ਜਾਣਕਾਰੀ ਪ੍ਰਸਾਰਿਤ ਕਰਨ ਲਈ ਟੋਕਨ ਫਾਰਮੈਟ |
+| KQL | Kusto Query Language | Azure ਡਾਟਾ ਸੇਵਾਵਾਂ ਲਈ ਕ੍ਵੈਰੀ ਭਾਸ਼ਾ |
+| RBAC | Role-Based Access Control | ਯੂਜ਼ਰ ਰੋਲਾਂ ਅਧਾਰਿਤ ਐਕਸੇਸ ਕੰਟਰੋਲ ਤਰੀਕਾ |
+| REST | Representational State Transfer | ਵੈੱਬ ਸੇਵਾਵਾਂ ਲਈ ਆਰਕੀਟੈਕਚਰਲ ਸਟਾਈਲ |
+| SDK | Software Development Kit | ਵਿਕਾਸ ਟੂਲਾਂ ਦਾ ਸੰਗ੍ਰਹਿ |
+| SLA | Service Level Agreement | ਸੇਵਾ ਉਪਲਬਧਤਾ/ਪਰਫਾਰਮੈਂਸ ਲਈ ਵਚਨਬੱਧਤਾ |
+| SQL | Structured Query Language | ਰਿਲੇਸ਼ਨਲ ਡੇਟਾਬੇਸ ਪ੍ਰਬੰਧਨ ਲਈ ਭਾਸ਼ਾ |
+| SSL/TLS | Secure Sockets Layer/Transport Layer Security | ਕ੍ਰਿਪਟੋਗ੍ਰਾਫਿਕ ਪ੍ਰੋਟੋਕੋਲ |
+| URI | Uniform Resource Identifier | ਰਿਸੋਰਸ ਦੀ ਪਛਾਣ ਕਰਨ ਵਾਲੀ ਸਟਰਿੰਗ |
+| URL | Uniform Resource Locator | ਰਿਸੋਰਸ ਦੀ ਥਾਂ ਦਰਸਾਉਂਦੀ URI ਦੀ ਕਿਸਮ |
+| VM | Virtual Machine | ਕੰਪਿਊਟਰ ਸਿਸਟਮ ਦੀ ਨਕਲ |
+| VNet | Virtual Network | Azure ਵਿੱਚ ਪ੍ਰਾਈਵੇਟ ਨੈੱਟਵਰਕ |
+| YAML | YAML Ain't Markup Language | ਡਾਟਾ ਸੀਰੀਅਲਾਈਜੇਸ਼ਨ ਮਿਆਰ |
 
 ---
 
-## Azure Service Name Mappings
+## Azure ਸੇਵਾ ਨਾਂ ਮੇਪਿੰਗ
 
 | Common Name | Official Azure Service Name | azd Host Type |
 |-------------|------------------------------|---------------|
@@ -321,50 +321,50 @@ Physically separate locations within an Azure region that provide redundancy and
 | NoSQL DB | Azure Cosmos DB | `cosmosdb` |
 | Storage | Azure Storage Account | `storage` |
 | Cache | Azure Cache for Redis | `redis` |
-| Search | Azure Cognitive Search | `search` |
+| Search | Azure AI Search | `search` |
 | Messaging | Azure Service Bus | `servicebus` |
 
 ---
 
-## Context-Specific Terms
+## ਸੰਦਰਭ-ਨਿਰਧਾਰਿਤ ਸ਼ਬਦ
 
-### Development Terms
-- **Hot Reload**: Automatically updating applications during development without restart
-- **Build Pipeline**: Automated process for building and testing code
-- **Deployment Slot**: Staging environment within an App Service
-- **Environment Parity**: Keeping development, staging, and production environments similar
+### ਵਿਕਾਸ ਸਬੰਧੀ ਸ਼ਬਦ
+- **Hot Reload**: ਵਿਕਾਸ ਦੌਰਾਨ ਦੁਬਾਰਾ ਸ਼ੁਰੂ ਕੀਤੇ ਬਿਨਾਂ ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਆਟੋਮੈਟਿਕ ਤੌਰ 'ਤੇ ਅਪਡੇਟ ਕਰਨਾ
+- **Build Pipeline**: ਕੋਡ ਨੂੰ ਬਿਲਡ ਅਤੇ ਟੈਸਟ ਕਰਨ ਲਈ ਆਟੋਮੇਟਡ ਪ੍ਰਕਿਰਿਆ
+- **Deployment Slot**: App Service ਵਿੱਚ ਇੱਕ ਸਟੇਜਿੰਗ ਇਨਵਾਇਰਨਮੈਂਟ
+- **Environment Parity**: ਵਿਕਾਸ, ਸਟੇਜਿੰਗ ਅਤੇ ਪ੍ਰੋਡਕਸ਼ਨ ਵਾਤਾਵਰਨਾਂ ਨੂੰ ਸਮਾਨ ਰੱਖਣਾ
 
-### Security Terms
-- **Managed Identity**: Azure feature providing automatic credential management
-- **Key Vault**: Secure storage for secrets, keys, and certificates
-- **RBAC**: Role-based access control for Azure resources
-- **Network Security Group**: Virtual firewall for controlling network traffic
+### ਸੁਰੱਖਿਆ ਸਬੰਧੀ ਸ਼ਬਦ
+- **Managed Identity**: ਆਟੋਮੈਟਿਕ ਪ੍ਰਮਾਣਪੱਤਰ ਪ੍ਰਬੰਧਨ ਪ੍ਰਦਾਨ ਕਰਨ ਵਾਲਾ Azure ਫੀਚਰ
+- **Key Vault**: ਗੋਪਨੀਆਂ, ਕੀਜ਼ ਅਤੇ ਸਰਟੀਫਿਕੇਟਾਂ ਲਈ ਸੁਰੱਖਿਅਤ ਸਟੋਰੇਜ
+- **RBAC**: Azure ਰਿਸੋਰਸਜ਼ ਲਈ ਰੋਲ-ਆਧਾਰਤ ਐਕਸੇਸ ਕੰਟਰੋਲ
+- **Network Security Group**: ਨੈੱਟਵਰਕ ਟ੍ਰੈਫਿਕ ਨੂੰ ਕੰਟਰੋਲ ਕਰਨ ਲਈ ਵਰਚੁਅਲ ਫਾਇਰਵਾਲ
 
-### Monitoring Terms
-- **Telemetry**: Automated collection of measurements and data
-- **Application Performance Monitoring (APM)**: Monitoring software performance
-- **Log Analytics**: Service for collecting and analyzing log data
-- **Alert Rules**: Automated notifications based on metrics or conditions
+### ਨਿਰੀਖਣ ਸਬੰਧੀ ਸ਼ਬਦ
+- **Telemetry**: ਮਾਪਦੰਡਾਂ ਅਤੇ ਡਾਟਾ ਦਾ ਆਟੋਮੈਟਿਕ संग्रह
+- **Application Performance Monitoring (APM)**: ਸਾਫਟਵੇਅਰ ਦੇ ਪ੍ਰਦਰਸ਼ਨ ਦੀ ਨਿਗਰਾਨੀ
+- **Log Analytics**: ਲੌਗ ਡਾਟਾ ਇਕੱਠਾ ਅਤੇ ਵਿਸ਼ਲੇਸ਼ਣ ਕਰਨ ਲਈ ਸੇਵਾ
+- **Alert Rules**: ਮੈਟ੍ਰਿਕਸ ਜਾਂ ਸ਼ਰਤਾਂ ਦੇ ਆਧਾਰ 'ਤੇ ਆਟੋਮੇਟਿਕ ਸੂਚਨਾਵਾਂ
 
-### Deployment Terms
-- **Blue-Green Deployment**: Zero-downtime deployment strategy
-- **Canary Deployment**: Gradual rollout to subset of users
-- **Rolling Update**: Sequential replacement of application instances
-- **Rollback**: Reverting to previous application version
-
----
-
-**Usage Tip**: Use `Ctrl+F` to quickly search for specific terms in this glossary. Terms are cross-referenced where applicable.
+### ਡਿਪਲੋਇਮੈਂਟ ਸਬੰਧੀ ਸ਼ਬਦ
+- **Blue-Green Deployment**: ਜ਼ੀਰੋ-ਡਾਊਨਟਾਈਮ ਡਿਪਲੋਇਮੈਂਟ ਰਣਨੀਤੀ
+- **Canary Deployment**: ਯੂਜ਼ਰਾਂ ਦੇ ਇੱਕ ਹਿੱਸੇ ਨੂੰ ਧੀਰੇ-ਧੀਰੇ ਰੋਲਆਊਟ
+- **Rolling Update**: ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਟੈਂਸਾਂ ਦੀ ਕ੍ਰਮਬੱਧ ਬਦਲੀ
+- **Rollback**: ਪਿਛਲੇ ਐਪਲੀਕੇਸ਼ਨ ਵਰਜ਼ਨ ਵੱਲ ਵਾਪਸੀ
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [Cheat Sheet](cheat-sheet.md)
-- **Next Lesson**: [FAQ](faq.md)
+**ਵਰਤੋਂ ਟਿਪ**: ਤੇਜ਼ੀ ਨਾਲ ਕਿਸੇ ਖਾਸ ਸ਼ਬਦ ਨੂੰ ਖੋਜਣ ਲਈ `Ctrl+F` ਦੀ ਵਰਤੋਂ ਕਰੋ। ਸ਼ਬਦਾਂ ਜਿੱਥੇ ਲਾਗੂ ਹੋ ਸਕਦੇ ਹਨ ਉਥੇ-ਉਥੇ ਕ੍ਰਾਸ-ਰਿਫਰੈਂਸ ਕੀਤੇ ਗਏ ਹਨ।
+
+---
+
+**ਨੈਵੀਗੇਸ਼ਨ**
+- **ਪਿਛਲਾ ਪਾਠ**: [Cheat Sheet](cheat-sheet.md)
+- **ਅਗਲਾ ਪਾਠ**: [FAQ](faq.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ਅਸਵੀਕਾਰ**:
-ਇਸ ਦਸਤਾਵੇਜ਼ ਦਾ ਅਨੁਵਾਦ AI ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਕੀਤਾ ਗਿਆ ਹੈ। ਅਸੀਂ ਸ਼ੁੱਧਤਾ ਲਈ ਯਤਨਸ਼ੀਲ ਹਾਂ, ਪਰ ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਰੱਖੋ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਣਸ਼ੁੱਧਤੀਆਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਨੂੰ ਉਸ ਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਧਿਕਾਰਕ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੀ ਵਰਤੋਂ ਕਾਰਨ ਹੋਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆ ਲਈ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
+**ਅਸਵੀਕਾਰੋਪਣ**:
+ਇਸ ਦਸਤਾਵੇਜ਼ ਦਾ ਅਨੁਵਾਦ ਏਆਈ ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸਹੀਤਾਵਾਂ ਲਈ ਯਤਨਸ਼ੀਲ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਰੱਖੋ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸਮੱਤਿਆਵਾਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਆਪਣੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਧਿਕਾਰਕ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਜਰੂਰੀ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੇ ਉਪਯੋਗ ਤੋਂ ਪੈਦਾ ਹੋਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀਆਂ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆਵਾਂ ਲਈ ਜਵਾਬਦੇਹ ਨਹੀਂ ਹਾਂ।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

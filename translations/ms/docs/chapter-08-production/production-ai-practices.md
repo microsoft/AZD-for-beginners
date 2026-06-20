@@ -5,38 +5,39 @@
 - **📖 Bab Semasa**: Bab 8 - Corak Produksi & Perusahaan
 - **⬅️ Bab Sebelumnya**: [Bab 7: Penyelesaian Masalah](../chapter-07-troubleshooting/debugging.md)
 - **⬅️ Juga Berkaitan**: [Makmal Bengkel AI](ai-workshop-lab.md)
-- **🎯 Kursus Selesai**: [AZD Untuk Pemula](../../README.md)
+- **🎯 Kursus Lengkap**: [AZD Untuk Pemula](../../README.md)
 
 ## Gambaran Keseluruhan
 
-Panduan ini menyediakan amalan terbaik yang komprehensif untuk melaksanakan beban kerja AI sedia produksi menggunakan Azure Developer CLI (AZD). Berdasarkan maklum balas daripada komuniti Microsoft Foundry Discord dan penyebaran pelanggan sebenar, amalan ini menangani cabaran paling biasa dalam sistem AI produksi.
+Panduan ini menyediakan amalan terbaik yang menyeluruh untuk mengendalikan beban kerja AI yang sedia produksi menggunakan Azure Developer CLI (AZD). Berdasarkan maklum balas dari komuniti Microsoft Foundry Discord dan pengendalian pelanggan dunia sebenar, amalan ini menangani cabaran paling lazim dalam sistem AI produksi.
 
 ## Cabaran Utama yang Ditangani
 
-Berdasarkan keputusan undian komuniti kami, ini adalah cabaran utama yang dihadapi pembangun:
+Berdasarkan keputusan tinjauan komuniti kami, ini adalah cabaran utama yang dihadapi oleh pembangun:
 
-- **45%** menghadapi kesukaran dengan penyebaran AI pelbagai perkhidmatan  
-- **38%** mempunyai masalah dengan pengurusan kelayakan dan rahsia  
-- **35%** mendapati kesukaran dalam kesiapan produksi dan penyesuaian skala  
-- **32%** memerlukan strategi pengoptimuman kos yang lebih baik  
-- **29%** memerlukan pemantauan dan penyelesian masalah yang lebih baik  
+- **45%** menghadapi masalah dengan pengendalian AI pelbagai perkhidmatan
+- **38%** ada isu dengan pengurusan kelayakan dan rahsia  
+- **35%** mendapati kesukaran dengan kesediaan produksi dan skala
+- **32%** memerlukan strategi pengoptimuman kos yang lebih baik
+- **29%** memerlukan pemantauan dan penyelesaian masalah yang dipertingkatkan
 
-## Corak Seni Bina untuk AI Produksi
+## Corak Senibina untuk AI Produksi
 
-### Corak 1: Seni Bina AI Mikroservis
+### Corak 1: Senibina AI Mikroservis
 
-**Bila digunakan**: Aplikasi AI kompleks dengan pelbagai keupayaan
+**Kapan digunakan**: Aplikasi AI kompleks dengan pelbagai kemampuan
 
 ```mermaid
 graph TD
-    Frontend[Frontend Web] --- Gateway[Pintu Gerbang API] --- LB[Penyeimbang Beban]
+    Frontend[Web Hadapan] --- Gateway[Pintu Gerbang API] --- LB[Penyeimbang Beban]
     Gateway --> Chat[Perkhidmatan Sembang]
     Gateway --> Image[Perkhidmatan Imej]
     Gateway --> Text[Perkhidmatan Teks]
     Chat --> OpenAI[Model Microsoft Foundry]
     Image --> Vision[Penglihatan Komputer]
     Text --> DocIntel[Kecerdasan Dokumen]
-```  
+```
+
 **Pelaksanaan AZD**:
 
 ```yaml
@@ -59,10 +60,10 @@ services:
     project: ./services/text
     host: containerapp
 ```
-  
-### Corak 2: Pemprosesan AI Berdasarkan Acara
 
-**Bila digunakan**: Pemprosesan secara kelompok, analisis dokumen, aliran kerja asinkron
+### Corak 2: Pemprosesan AI Berpandukan Peristiwa
+
+**Kapan digunakan**: Pemprosesan batch, analisis dokumen, alur kerja async
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -108,35 +109,35 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
   }
 }
 ```
-  
+
 ## Berfikir Tentang Kesihatan Ejen AI
 
-Apabila aplikasi web tradisional rosak, simptomnya biasa: halaman tidak dimuat, API memulangkan ralat, atau penyebaran gagal. Aplikasi berkuasa AI boleh rosak dengan semua cara yang sama itu—tetapi mereka juga boleh berkelakuan kurang tepat dengan cara yang halus yang tidak menghasilkan mesej ralat yang jelas.
+Apabila aplikasi web tradisional rosak, simptomnya biasa: halaman tidak dimuat, API mengembalikan ralat, atau pengedaran gagal. Aplikasi berkuasa AI boleh rosak dengan semua cara tersebut—tetapi ia juga boleh berkelakuan dengan cara lebih halus yang tidak menghasilkan mesej ralat yang jelas.
 
-Bahagian ini membantu anda membina model mental untuk memantau beban kerja AI supaya anda tahu di mana perlu melihat apabila perkara kelihatan tidak betul.
+Bahagian ini membantu anda membina model mental untuk memantau beban kerja AI supaya anda tahu ke mana hendak melihat apabila perkara tidak kelihatan betul.
 
-### Bagaimana Kesihatan Ejen Berbeza Dari Kesihatan Aplikasi Tradisional
+### Bagaimana Kesihatan Ejen Berbeza dari Kesihatan Aplikasi Tradisional
 
-Aplikasi tradisional sama ada berfungsi atau tidak. Ejen AI boleh nampak berfungsi tetapi menghasilkan keputusan yang buruk. Fikirkan kesihatan ejen dalam dua lapisan:
+Aplikasi tradisional sama ada berfungsi atau tidak. Ejen AI boleh nampak berfungsi tetapi menghasilkan keputusan yang lemah. Fikirkan kesihatan ejen dalam dua lapisan:
 
-| Lapisan | Apa yang Dipantau | Di mana Nak Lihat |
-|---------|-------------------|-------------------|
-| **Kesihatan infrastruktur** | Adakah perkhidmatan berjalan? Adakah sumber diperuntukkan? Adakah titik hujung boleh dicapai? | `azd monitor`, kesihatan sumber di Portal Azure, log kontena/aplikasi |
-| **Kesihatan tingkah laku** | Adakah ejen memberi respons tepat? Adakah respons tepat masa? Adakah model dipanggil dengan betul? | Jejak Application Insights, metrik kelewatan panggilan model, log kualiti respons |
+| Lapisan | Apa yang Perlu Dipantau | Di Mana Hendak Melihat |
+|---------|------------------------|-----------------------|
+| **Kesihatan Infrastruktur** | Adakah perkhidmatan berjalan? Adakah sumber diperuntukkan? Adakah titik akhir boleh diakses? | `azd monitor`, kesihatan sumber di Portal Azure, log kontena/aplikasi |
+| **Kesihatan Tingkah Laku** | Adakah ejen memberi respons tepat? Adakah respons tepat masa? Adakah model dipanggil dengan betul? | Penjejakan Application Insights, metrik kelewatan panggilan model, log kualiti respons |
 
-Kesihatan infrastruktur adalah biasa—ia sama untuk mana-mana aplikasi azd. Kesihatan tingkah laku adalah lapisan baharu yang diperkenalkan oleh beban kerja AI.
+Kesihatan infrastruktur adalah biasa—ia sama untuk mana-mana aplikasi azd. Kesihatan tingkah laku adalah lapisan baru yang diperkenalkan oleh beban kerja AI.
 
-### Di Mana Nak Lihat Apabila Aplikasi AI Tidak Berkelakuan Seperti Dijangka
+### Di Mana Hendak Melihat Apabila Aplikasi AI Tidak Berkelakuan Seperti Dijangka
 
-Jika aplikasi AI anda tidak menghasilkan keputusan yang anda harapkan, berikut adalah senarai semak konseptual:
+Jika aplikasi AI anda tidak menghasilkan keputusan yang anda jangkakan, berikut ialah senarai semak konseptual:
 
-1. **Mulakan dengan asas.** Adakah aplikasi berjalan? Bolehkah ia mencapai pergantungan? Semak `azd monitor` dan kesihatan sumber seperti mana-mana aplikasi.  
-2. **Semak sambungan model.** Adakah aplikasi anda berjaya memanggil model AI? Panggilan model yang gagal atau tamat masa adalah punca paling biasa isu aplikasi AI dan akan muncul dalam log aplikasi anda.  
-3. **Lihat apa yang diterima model.** Respons AI bergantung pada input (awalan dan sebarang konteks yang diperoleh). Jika keluaran salah, input biasanya salah. Semak sama ada aplikasi anda menghantar data yang betul kepada model.  
-4. **Ulas kelewatan respons.** Panggilan model AI lebih perlahan daripada panggilan API tipikal. Jika aplikasi anda terasa perlahan, semak sama ada masa respons model meningkat—ini boleh menunjukkan pengawalan, had kapasiti, atau kesesakan di peringkat rantau.  
-5. **Perhatikan isyarat kos.** Lonjakan penggunaan token atau panggilan API yang tidak dijangka boleh menunjukkan gelung, awalan yang salah konfigurasi, atau percubaan berulang berlebihan.
+1. **Mula dengan asas.** Adakah aplikasi berjalan? Bolehkah ia mencapai kebergantungan? Semak `azd monitor` dan kesihatan sumber seperti biasa untuk mana-mana aplikasi.
+2. **Periksa sambungan model.** Adakah aplikasi anda berjaya memanggil model AI? Panggilan model yang gagal atau tamat masa adalah penyebab paling biasa bagi isu aplikasi AI dan akan muncul dalam log aplikasi anda.
+3. **Lihat apa yang diterima model.** Respons AI bergantung pada input (prompt dan mana-mana konteks yang diambil). Jika keluaran salah, input biasanya salah. Semak sama ada aplikasi anda menghantar data yang betul ke model.
+4. **Kaji kelewatan respons.** Panggilan model AI lebih perlahan daripada panggilan API biasa. Jika aplikasi anda terasa perlahan, periksa sama ada masa respons model meningkat—ini boleh menunjukkan pengekangan, had kapasiti, atau kesesakan peringkat rantau.
+5. **Perhatikan isyarat kos.** Lonjakan tak dijangka dalam penggunaan token atau panggilan API boleh menunjukkan gelung, prompt yang salah konfigurasi, atau cubaan berlebihan.
 
-Anda tidak perlu menguasai peralatan pemerhatian dengan serta-merta. Intipati utama adalah aplikasi AI mempunyai lapisan tingkah laku tambahan untuk dipantau, dan pemantauan terbina dalam azd (`azd monitor`) memberikan titik permulaan untuk menyiasat kedua-dua lapisan.
+Anda tidak perlu menguasai alat pemerhatian segera. Intipati utamanya ialah aplikasi AI mempunyai lapisan tingkah laku tambahan untuk dipantau, dan pemantauan terbina dalam azd (`azd monitor`) memberikan anda titik permulaan untuk menyiasat kedua-dua lapisan.
 
 ---
 
@@ -144,11 +145,11 @@ Anda tidak perlu menguasai peralatan pemerhatian dengan serta-merta. Intipati ut
 
 ### 1. Model Keselamatan Zero-Trust
 
-**Strategi Pelaksanaan**:  
-- Tiada komunikasi perkhidmatan ke perkhidmatan tanpa pengesahan  
-- Semua panggilan API menggunakan identiti terkawal  
-- Pengasingan rangkaian dengan titik hujung persendirian  
-- Kawalan akses keistimewaan paling minimum  
+**Strategi Pelaksanaan**:
+- Tiada komunikasi perkhidmatan-ke-perkhidmatan tanpa pengesahan
+- Semua panggilan API menggunakan identiti terurus
+- Pengasingan rangkaian dengan titik akhir peribadi
+- Kawalan akses sekurang-kurangnya keistimewaan
 
 ```bicep
 // Managed Identity for each service
@@ -168,7 +169,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   }
 }
 ```
-  
+
 ### 2. Pengurusan Rahsia Selamat
 
 **Corak Integrasi Key Vault**:
@@ -203,10 +204,10 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
   }
 }
 ```
-  
+
 ### 3. Keselamatan Rangkaian
 
-**Konfigurasi Titik Hujung Persendirian**:
+**Konfigurasi Titik Akhir Peribadi**:
 
 ```bicep
 // Virtual Network for AI services
@@ -263,12 +264,12 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
   }
 }
 ```
-  
-## Prestasi dan Penyesuaian Skala
 
-### 1. Strategi Auto-Skala
+## Prestasi dan Skala
 
-**Auto-skala untuk Container Apps**:
+### 1. Strategi Auto-Penskalaan
+
+**Auto-scaling Aplikasi Kontena**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -311,8 +312,8 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   }
 }
 ```
-  
-### 2. Strategi Caching
+
+### 2. Strategi Penyimpanan Cache
 
 **Redis Cache untuk Respons AI**:
 
@@ -341,10 +342,10 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 // Cache configuration in application
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
-  
+
 ### 3. Pengimbangan Beban dan Pengurusan Trafik
 
-**Application Gateway dengan WAF**:
+**Gerbang Aplikasi dengan WAF**:
 
 ```bicep
 // Application Gateway with Web Application Firewall
@@ -379,12 +380,12 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
   }
 }
 ```
-  
+
 ## 💰 Pengoptimuman Kos
 
-### 1. Penyelarasan Saiz Sumber
+### 1. Penentuan Saiz Sumber yang Betul
 
-**Konfigurasi Spesifik Persekitaran**:
+**Konfigurasi Khusus Persekitaran**:
 
 ```bash
 # Persekitaran pembangunan
@@ -395,7 +396,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Persekitaran pengeluaran
+# Persekitaran produksi
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -403,7 +404,7 @@ azd env set AZURE_SEARCH_SKU "standard"
 azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
-  
+
 ### 2. Pemantauan Kos dan Bajet
 
 ```bicep
@@ -444,13 +445,13 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
   }
 }
 ```
-  
+
 ### 3. Pengoptimuman Penggunaan Token
 
 **Pengurusan Kos OpenAI**:
 
 ```typescript
-// Pengoptimuman token di peringkat aplikasi
+// Pengoptimuman token peringkat aplikasi
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -460,7 +461,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Pangkas konteks, bukan input pengguna
+      // Potong konteks, bukan input pengguna
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -473,10 +474,10 @@ class TokenOptimizer {
   }
 }
 ```
-  
-## Pemantauan dan Observabiliti
 
-### 1. Application Insights Komprehensif
+## Pemantauan dan Pengamatan
+
+### 1. Application Insights Menyeluruh
 
 ```bicep
 // Application Insights with advanced features
@@ -520,10 +521,10 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   }
 }
 ```
-  
+
 ### 2. Pemantauan Khusus AI
 
-**Papan Pemuka Khusus untuk Metrik AI**:
+**Paparan Tersuai untuk Metrik AI**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -551,8 +552,8 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   }
 }
 ```
-  
-### 3. Pemeriksaan Kesihatan dan Pemantauan Masa Beroperasi
+
+### 3. Pemeriksaan Kesihatan dan Pemantauan Masa Aktif
 
 ```bicep
 // Application Insights availability tests
@@ -620,10 +621,10 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
   }
 }
 ```
-  
+
 ## Pemulihan Bencana dan Kebolehpercayaan Tinggi
 
-### 1. Penyebaran Berbilang Rantau
+### 1. Pengedaran Pelbagai Rantau
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -640,7 +641,7 @@ services:
     env:
       - AZURE_REGION=westus2
 ```
-  
+
 ```bicep
 // Traffic Manager for global load balancing
 resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = {
@@ -684,7 +685,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
   }
 }
 ```
-  
+
 ### 2. Sandaran dan Pemulihan Data
 
 ```bicep
@@ -735,10 +736,10 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
   }
 }
 ```
-  
-## DevOps dan Integrasi CI/CD
 
-### 1. Aliran Kerja GitHub Actions
+## Integrasi DevOps dan CI/CD
+
+### 1. Alur Kerja GitHub Actions
 
 ```yaml
 # .github/workflows/deploy-ai-app.yml
@@ -818,7 +819,7 @@ jobs:
         run: |
           python scripts/health_check.py --env production
 ```
-  
+
 ### 2. Pengesahan Infrastruktur
 
 ```bash
@@ -827,7 +828,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Periksa jika semua perkhidmatan yang diperlukan sedang berjalan
+# Semak jika semua perkhidmatan yang diperlukan sedang berjalan
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -851,56 +852,56 @@ python scripts/test_connectivity.py
 
 echo "Infrastructure validation completed successfully!"
 ```
-  
-## Senarai Semak Kesiapan Produksi
 
-### Keselamatan ✅  
-- [ ] Semua perkhidmatan menggunakan identiti terkawal  
-- [ ] Rahsia disimpan dalam Key Vault  
-- [ ] Titik hujung persendirian dikonfigurasi  
-- [ ] Kumpulan keselamatan rangkaian dilaksanakan  
-- [ ] RBAC dengan hak istimewa paling minimum  
-- [ ] WAF diaktifkan pada titik hujung awam  
+## Senarai Semak Kesediaan Produksi
 
-### Prestasi ✅  
-- [ ] Auto-skala dikonfigurasi  
-- [ ] Caching dilaksanakan  
-- [ ] Pengimbangan beban disediakan  
-- [ ] CDN untuk kandungan statik  
-- [ ] Penampungan sambungan pangkalan data  
-- [ ] Pengoptimuman penggunaan token  
+### Keselamatan ✅
+- [ ] Semua perkhidmatan menggunakan identiti terurus
+- [ ] Rahsia disimpan dalam Key Vault
+- [ ] Titik akhir peribadi dikonfigurasikan
+- [ ] Kumpulan keselamatan rangkaian dilaksanakan
+- [ ] RBAC dengan hak istimewa paling rendah
+- [ ] WAF dihidupkan pada titik akhir awam
 
-### Pemantauan ✅  
-- [ ] Application Insights dikonfigurasi  
-- [ ] Metrik khusus ditakrifkan  
-- [ ] Peraturan amaran disediakan  
-- [ ] Papan pemuka dibuat  
-- [ ] Pemeriksaan kesihatan dilaksanakan  
-- [ ] Polisi pengekalan log  
+### Prestasi ✅
+- [ ] Auto-scaling dikonfigurasikan
+- [ ] Penyimpanan cache dilaksanakan
+- [ ] Pengimbangan beban ditetapkan
+- [ ] CDN untuk kandungan statik
+- [ ] Pengumpulan sambungan pangkalan data
+- [ ] Pengoptimuman penggunaan token
 
-### Kebolehpercayaan ✅  
-- [ ] Penyebaran berbilang rantau  
-- [ ] Pelan sandaran dan pemulihan  
-- [ ] Pemutus litar dilaksanakan  
-- [ ] Polisi percubaan semula dikonfigurasi  
-- [ ] Pengurangan degradasi secara berperingkat  
-- [ ] Titik hujung pemeriksaan kesihatan  
+### Pemantauan ✅
+- [ ] Application Insights dikonfigurasikan
+- [ ] Metrik tersuai ditakrifkan
+- [ ] Peraturan pemberitahuan disediakan
+- [ ] Paparan dicipta
+- [ ] Pemeriksaan kesihatan dilaksanakan
+- [ ] Polisi penyimpanan log
 
-### Pengurusan Kos ✅  
-- [ ] Amaran bajet dikonfigurasi  
-- [ ] Penyelarasan saiz sumber  
-- [ ] Diskaun dev/test digunakan  
-- [ ] Instans terpelihara dibeli  
-- [ ] Papan pemuka pemantauan kos  
-- [ ] Semakan kos berkala  
+### Kebolehpercayaan ✅
+- [ ] Pengedaran pelbagai rantau
+- [ ] Pelan sandaran dan pemulihan
+- [ ] Pemutus litar dilaksanakan
+- [ ] Polisi cubaan semula dikonfigurasikan
+- [ ] Degradasi lancar
+- [ ] Titik akhir pemeriksaan kesihatan
 
-### Pematuhan ✅  
-- [ ] Keperluan pemastautin data dipenuhi  
-- [ ] Log audit diaktifkan  
-- [ ] Polisi pematuhan digunakan  
-- [ ] Garis asas keselamatan dilaksanakan  
-- [ ] Penilaian keselamatan berkala  
-- [ ] Pelan tindak balas insiden  
+### Pengurusan Kos ✅
+- [ ] Amaran bajet dikonfigurasikan
+- [ ] Penentuan saiz sumber yang betul
+- [ ] Diskaun dev/test digunakan
+- [ ] Instans terhad dibeli
+- [ ] Paparan pemantauan kos
+- [ ] Kajian kos berkala
+
+### Pematuhan ✅
+- [ ] Keperluan kediaman data dipatuhi
+- [ ] Perekodan audit diaktifkan
+- [ ] Polisi pematuhan digunakan
+- [ ] Asas keselamatan dilaksanakan
+- [ ] Penilaian keselamatan berkala
+- [ ] Pelan tindak balas insiden
 
 ## Penanda Aras Prestasi
 
@@ -909,7 +910,7 @@ echo "Infrastructure validation completed successfully!"
 | Metrik | Sasaran | Pemantauan |
 |--------|---------|------------|
 | **Masa Respons** | < 2 saat | Application Insights |
-| **Ketersediaan** | 99.9% | Pemantauan masa beroperasi |
+| **Ketersediaan** | 99.9% | Pemantauan masa aktif |
 | **Kadar Ralat** | < 0.1% | Log aplikasi |
 | **Penggunaan Token** | < $500/bulan | Pengurusan kos |
 | **Pengguna Serentak** | 1000+ | Ujian beban |
@@ -925,34 +926,34 @@ python scripts/load_test.py \
   --duration 300 \
   --ramp-up 60
 ```
-  
+
 ## 🤝 Amalan Terbaik Komuniti
 
 Berdasarkan maklum balas komuniti Microsoft Foundry Discord:
 
 ### Cadangan Teratas dari Komuniti:
 
-1. **Mula Kecil, Skala Secara Berperingkat**: Mulakan dengan SKU asas dan skala mengikut penggunaan sebenar  
-2. **Pantau Segala-galanya**: Tetapkan pemantauan menyeluruh dari hari pertama  
-3. **Automatikkan Keselamatan**: Gunakan infrastruktur sebagai kod untuk keselamatan yang konsisten  
-4. **Uji Secara Teliti**: Sertakan ujian khusus AI dalam aliran kerja anda  
-5. **Rancang untuk Kos**: Pantau penggunaan token dan tetapkan amaran bajet lebih awal  
+1. **Mula Kecil, Skala Secara Beransur-ansur**: Mulakan dengan SKU asas dan naikkan mengikut penggunaan sebenar
+2. **Pantau Segalanya**: Sediakan pemantauan menyeluruh dari hari pertama
+3. **Automasi Keselamatan**: Gunakan infrastruktur sebagai kod untuk keselamatan konsisten
+4. **Uji Secara Menyeluruh**: Sertakan ujian khusus AI dalam alur kerja anda
+5. **Rancang Untuk Kos**: Pantau penggunaan token dan tetapkan amaran bajet awal
 
-### Perangkap Lazim yang Perlu Dielakkan:
+### Perangkap Lazim Untuk Dielakkan:
 
-- ❌ Menetapkan kekunci API secara keras dalam kod  
-- ❌ Tidak menyediakan pemantauan yang betul  
-- ❌ Mengabaikan pengoptimuman kos  
-- ❌ Tidak menguji senario kegagalan  
-- ❌ Menyebarkan tanpa pemeriksaan kesihatan  
+- ❌ Menulis keras kunci API dalam kod
+- ❌ Tidak menyediakan pemantauan yang tepat
+- ❌ Mengabaikan pengoptimuman kos
+- ❌ Tidak menguji senario kegagalan
+- ❌ Mengendalikan tanpa pemeriksaan kesihatan
 
-## Perintah dan Sambungan CLI AI AZD
+## Perintah CLI AZD AI dan Sambungan
 
-AZD termasuk set perintah dan sambungan khusus AI yang semakin berkembang yang mempermudah aliran kerja AI produksi. Alat ini menjembatani jurang antara pembangunan tempatan dan penyebaran produksi untuk beban kerja AI.
+AZD termasuk set perintah dan sambungan khusus AI yang berkembang yang mempermudah alur kerja AI produksi. Alat-alat ini merapatkan jurang antara pembangunan tempatan dan pengedaran produksi untuk beban kerja AI.
 
 ### Sambungan AZD untuk AI
 
-AZD menggunakan sistem sambungan untuk menambah keupayaan khusus AI. Pasang dan urus sambungan dengan:
+AZD menggunakan sistem sambungan untuk menambah kemampuan khusus AI. Pasang dan urus sambungan dengan:
 
 ```bash
 # Senaraikan semua sambungan yang tersedia (termasuk AI)
@@ -964,7 +965,7 @@ azd extension show azure.ai.agents
 # Pasang sambungan agen Foundry
 azd extension install azure.ai.agents
 
-# Pasang sambungan penyelarasan halus
+# Pasang sambungan penalaan halus
 azd extension install azure.ai.finetune
 
 # Pasang sambungan model tersuai
@@ -973,48 +974,101 @@ azd extension install azure.ai.models
 # Tingkatkan semua sambungan yang dipasang
 azd extension upgrade --all
 ```
-  
-**Sambungan AI yang tersedia:**
+
+**Sambungan AI tersedia:**
 
 | Sambungan | Tujuan | Status |
 |-----------|---------|--------|
 | `azure.ai.agents` | Pengurusan Perkhidmatan Ejen Foundry | Pratonton |
-| `azure.ai.finetune` | Penalaan Halus model Foundry | Pratonton |
-| `azure.ai.models` | Model khas Foundry | Pratonton |
-| `azure.coding-agent` | Konfigurasi ejen pengkodan | Tersedia |
+| `azure.ai.skills` | Kemahiran ejen boleh guna semula | Pratonton |
+| `azure.ai.connections` | Sambungan Foundry (sumber data, alat) | Pratonton |
+| `azure.ai.finetune` | Penalaan halus model Foundry | Pratonton |
+| `azure.ai.models` | Model khusus Foundry | Pratonton |
+| `azure.coding-agent` | Konfigurasi ejen pengekodan | Tersedia |
+
+> Sambungan `azure.ai.agents` berkembang dengan pesat. Kursus ini disahkan terhadap versi `0.1.40-preview`. Jalankan `azd extension upgrade --all` untuk mengambil set perintah terkini, dan `azd extension show azure.ai.agents` untuk mengesahkan versi yang dipasang.
+
+**Apakah sambungan `skills` dan `connections` yang lebih baru?**
+
+Dua sambungan pratonton muncul bersama alat ejen dan patut difahami walaupun anda baru:
+
+- **`azure.ai.skills`** — Sebuah **kemahiran** adalah keupayaan boleh guna semula (alat atau tingkah laku yang dibungkus) yang boleh anda lampirkan ke satu atau lebih ejen sebagai ganti melaksanakan semula setiap kali. Fikirkan ia sebagai blok binaan berkongsi: definisikan kemahiran "carian dokumen" atau "pemeriksaan pesanan" sekali, kemudian gunakan semula di antara ejen. Ini mengekalkan konsistensi sistem multi-ejen (Bab 5) dan mengelakkan salin tampal.
+- **`azure.ai.connections`** — Sebuah **sambungan** adalah pautan terurus dari projek Foundry anda ke sumber luar yang diperlukan ejen anda—sumber data (seperti Azure AI Search), titik akhir alat, atau perkhidmatan lain. Sambungan memusatkan *di mana* dan *bagaimana* ejen mengakses data, supaya kelayakan dan titik akhir hidup dalam satu tempat yang dikawal dan bukan tersebar dalam kod.
+
+Anda tidak perlu ini untuk mengedarkan ejen pertama anda—teruskan dengan `azure.ai.agents` semasa belajar. Gunakan `skills` apabila anda mendapati diri mengulangi alat sama bagi ejen berlainan, dan `connections` apabila beberapa ejen berkongsi sumber data yang sama.
 
 ### Memulakan Projek Ejen dengan `azd ai agent init`
 
-Perintah `azd ai agent init` mengatur projek ejen AI sedia produksi yang diintegrasikan dengan Perkhidmatan Ejen Microsoft Foundry:
+Perintah `azd ai agent init` membina rangka kerja projek ejen AI sedia produksi yang bersambung dengan Perkhidmatan Ejen Microsoft Foundry:
 
 ```bash
-# Inisialisasi projek ejen baru dari manifest ejen
+# Mulakan projek ejen baru dari manifesto ejen
 azd ai agent init -m <manifest-path-or-uri>
 
-# Inisialisasi dan sasarkan projek Foundry tertentu
+# Mulakan dan sasarkan projek Foundry tertentu
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# Inisialisasi dengan direktori sumber tersuai
+# Mulakan dengan direktori sumber tersuai
 azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
 
 # Sasarkan Container Apps sebagai hos
 azd ai agent init -m agent-manifest.yaml --host containerapp
 ```
-  
-**Bendera utama:**
 
-| Bendera | Penerangan |
+**Penanda utama:**
+
+| Penanda | Keterangan |
 |---------|------------|
 | `-m, --manifest` | Laluan atau URI kepada manifest ejen untuk ditambah ke projek anda |
 | `-p, --project-id` | ID Projek Microsoft Foundry sedia ada untuk persekitaran azd anda |
-| `-s, --src` | Direktori untuk memuat turun definisi ejen (lalai ke `src/<agent-id>`) |
-| `--host` | Gantikan hos lalai (contoh: `containerapp`) |
+| `-s, --src` | Direktori untuk memuat turun definisi ejen (default ke `src/<agent-id>`) |
+| `--host` | Menimpa hos lalai (contoh: `containerapp`) |
 | `-e, --environment` | Persekitaran azd yang hendak digunakan |
 
-**Petua produksi**: Gunakan `--project-id` untuk bersambung terus ke projek Foundry yang sedia ada, menjadikan kod ejen dan sumber awan anda terhubung sejak permulaan.
+**Petua produksi**: Gunakan `--project-id` untuk sambungkan terus ke projek Foundry sedia ada, memastikan kod ejen dan sumber awan anda terikat sejak mula.
+
+### Mengurus Kitaran Hayat Ejen
+
+Selain `init`, sambungan `azure.ai.agents` menyediakan perintah untuk kitaran hayat penuh ejen yang dihoskan—ujian, penilaian, pengoptimuman, dan pemberhentian:
+
+```bash
+# Panggil ejen yang telah dikerahkan dan lihat masa tindak balas pelayan
+# (jumlah kelewatan dan masa untuk bait pertama)
+azd ai agent invoke
+
+# Tunjukkan konfigurasi titik hujung langsung sebelum menukarnya
+azd ai agent endpoint show
+
+# Hasilkan set data penilaian untuk ejen
+azd ai agent eval generate --dataset ./eval/dataset.jsonl
+
+# Optimumkan arahan ejen berdasarkan data penilaian anda
+# (memerlukan optimization_model dalam projek ejen)
+azd ai agent optimize
+
+# Muat turun sumber yang dikerahkan bagi ejen yang dihoskan berasaskan kod
+# (dengan pengesahan SHA-256)
+azd ai agent code download
+
+# Padamkan ejen yang dihoskan dan semua versinya
+# (--force menamatkan sesi aktif)
+azd ai agent delete --force
+```
+
+**Kitaran hayat sekilas:**
+
+| Tahap | Perintah | Kegunaan produksi |
+|-------|----------|-------------------|
+| Uji | `azd ai agent invoke` | Sahkan respons dan ukur kelewatan sebelum lepasan |
+| Periksa | `azd ai agent endpoint show` | Semak autentikasi/konfigurasi titik akhir; kenal pasti perubahan pecah awal |
+| Ukur | `azd ai agent eval generate` | Bina set penilaian boleh ulang dari jejak sebenar |
+| Baiki | `azd ai agent optimize` | Laraskan arahan berdasarkan kualiti diukur |
+| Pulih | `azd ai agent code download` | Dapatkan sumber terpasang tepat untuk audit/pembalikan |
+| Berhenti | `azd ai agent delete --force` | Hapus ejen dan versinya dengan bersih |
+
+> Ini adalah perintah pratonton dan mungkin berubah antara keluaran sambungan. Jalankan `azd ai agent --help` untuk lihat subperintah tepat dalam versi yang dipasang anda.
 
 ### Protokol Konteks Model (MCP) dengan `azd mcp`
-
 AZD termasuk sokongan pelayan MCP terbina dalam (Alpha), membolehkan ejen dan alat AI berinteraksi dengan sumber Azure anda melalui protokol piawai:
 
 ```bash
@@ -1024,31 +1078,31 @@ azd mcp start
 # Semak semula peraturan persetujuan Copilot semasa untuk pelaksanaan alat
 azd copilot consent list
 ```
-  
-Pelayan MCP mendedahkan konteks projek azd anda—persekitaran, perkhidmatan, dan sumber Azure—kepada alat pembangunan berkuasa AI. Ini membolehkan:
 
-- **Penyebaran dibantu AI**: Membolehkan ejen pengkodan bertanya tentang keadaan projek anda dan mencetuskan penyebaran  
-- **Penemuan sumber**: Alat AI boleh menemui sumber Azure yang digunakan projek anda  
-- **Pengurusan persekitaran**: Ejen boleh bertukar antara persekitaran dev/staging/produksi  
+Pelayan MCP mendedahkan konteks projek azd anda—persekitaran, perkhidmatan, dan sumber Azure—kepada alat pembangunan yang dikuasakan AI. Ini membolehkan:
+
+- **Penggunaan AI dalam penyebaran**: Benarkan ejen pengekodan untuk bertanya tentang keadaan projek anda dan mencetuskan penyebaran
+- **Penemuan sumber**: Alat AI boleh menemui sumber Azure yang digunakan oleh projek anda
+- **Pengurusan persekitaran**: Ejen boleh beralih antara persekitaran pembangunan/persediaan/produksi
 
 ### Penjanaan Infrastruktur dengan `azd infra generate`
 
-Untuk beban kerja AI produksi, anda boleh menjana dan menyesuaikan Infrastruktur sebagai Kod berbanding bergantung pada penyediaan automatik:
+Untuk beban kerja AI produksi, anda boleh menjana dan menyesuaikan Infrastruktur sebagai Kod (IaC) daripada bergantung kepada penyediaan automatik:
 
 ```bash
-# Jana fail Bicep/Terraform dari definisi projek anda
+# Hasilkan fail Bicep/Terraform daripada definisi projek anda
 azd infra generate
 ```
-  
-Ini menulis IaC ke cakera supaya anda boleh:  
-- Menyemak dan mengaudit infrastruktur sebelum menerapkan  
-- Menambah polisi keselamatan tersuai (peraturan rangkaian, titik hujung persendirian)  
-- Mengintegrasi dengan proses semakan IaC sedia ada  
-- Mengawal versi perubahan infrastruktur secara berasingan daripada kod aplikasi  
 
-### Hooks Kitaran Hayat Produksi
+Ini menulis IaC ke cakera supaya anda boleh:
+- Menyemak dan mengaudit infrastruktur sebelum penyebaran
+- Menambah polisi keselamatan khas (peraturan rangkaian, titik akhir peribadi)
+- Mengintegrasikan dengan proses semakan IaC sedia ada
+- Memantau perubahan infrastruktur secara berasingan daripada kod aplikasi
 
-Hooks AZD membolehkan anda memasukkan logik tersuai pada setiap peringkat kitaran hayat penyebaran—kritikal untuk aliran kerja AI produksi:
+### Kait Hayat Produksi
+
+Kait AZD membolehkan anda menyuntik logik tersuai pada setiap peringkat hayat penyebaran—penting untuk aliran kerja AI produksi:
 
 ```yaml
 # azure.yaml - Production hooks example
@@ -1075,20 +1129,20 @@ services:
         shell: sh
         run: scripts/validate-model-access.sh  # Per-service hook
 ```
-  
+
 ```bash
 # Jalankan hook tertentu secara manual semasa pembangunan
 azd hooks run predeploy
 ```
-  
-**Hooks produksi yang disyorkan untuk beban kerja AI:**
 
-| Hook         | Kes Penggunaan                                 |
-|--------------|-----------------------------------------------|
+**Kait produksi yang disyorkan untuk beban kerja AI:**
+
+| Kait | Kes Penggunaan |
+|------|----------|
 | `preprovision` | Sahkan kuota langganan untuk kapasiti model AI |
-| `postprovision` | Konfigurasikan titik hujung persendirian, sebarkan berat model |
-| `predeploy`   | Jalankan ujian keselamatan AI, sahkan templat awalan |
-| `postdeploy`  | Ujian asap respons ejen, sahkan sambungan model |
+| `postprovision` | Konfigurasikan titik akhir peribadi, sebar berat model |
+| `predeploy` | Jalankan ujian keselamatan AI, sahkan templat arahan |
+| `postdeploy` | Uji respons ejen secara ringkas, periksa sambungan model |
 
 ### Konfigurasi Saluran CI/CD
 
@@ -1101,12 +1155,87 @@ azd pipeline config
 # Konfigurasikan dengan penyedia tertentu
 azd pipeline config --provider github
 ```
-  
-Perintah ini:  
-- Mencipta prinsipal perkhidmatan dengan akses keistimewaan paling minimum  
-- Mengkonfigurasikan kelayakan persekutuan (tanpa rahsia disimpan)  
-- Menjana atau mengemas kini fail definisi saluran anda  
-- Menetapkan pembolehubah persekitaran diperlukan dalam sistem CI/CD anda  
+
+Perintah ini:
+- Membuat prinsip perkhidmatan dengan akses least-privilege
+- Menyediakan kelayakan persekutuan (tiada rahsia disimpan)
+- Menjana atau mengemas kini fail definisi saluran anda
+- Tetapkan pemboleh ubah persekitaran yang diperlukan dalam sistem CI/CD anda
+
+#### Langkah demi langkah: saluran GitHub Actions pertama anda
+
+Berikut adalah panduan penuh dari projek azd yang berfungsi kepada penyebaran automatik setiap kali push.
+
+**1. Pastikan projek anda berada di GitHub**
+
+```bash
+git init
+git add .
+git commit -m "Initial azd project"
+gh repo create my-ai-app --private --source=. --push
+```
+
+**2. Jalankan konfigurasi saluran**
+
+```bash
+azd pipeline config --provider github
+```
+
+azd akan, secara interaktif:
+- Tanya langganan Azure dan persekitaran yang hendak disasarkan
+- Membuat pendaftaran aplikasi Entra **+ prinsip perkhidmatan** untuk saluran ini
+- Sediakan **kelayakan persekutuan (OIDC)**—supaya GitHub mengesahkan ke Azure dengan token jangka pendek dan **tiada rahsia disimpan**
+- Tolak **pemboleh ubah** yang diperlukan ke repo GitHub anda (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `AZURE_ENV_NAME`, `AZURE_LOCATION`)
+
+**3. Fahami aliran kerja yang dijana**
+
+azd menambah `.github/workflows/azure-dev.yml`. Bahagian utama kelihatan seperti ini:
+
+```yaml
+# .github/workflows/azure-dev.yml
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:        # lets you run it manually too
+
+permissions:
+  id-token: write           # required for OIDC federated login
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
+      AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install azd
+        uses: Azure/setup-azd@v2
+      - name: Log in with OIDC
+        run: azd auth login --client-id "$AZURE_CLIENT_ID" --federated-credential-provider "github" --tenant-id "$AZURE_TENANT_ID"
+      - name: Provision infrastructure
+        run: azd provision --no-prompt
+      - name: Deploy application
+        run: azd deploy --no-prompt
+```
+
+**4. Sahkan ia berfungsi**
+
+```bash
+# Tolak perubahan untuk mencetuskan saluran paip
+git commit -am "Trigger pipeline" --allow-empty
+git push
+```
+
+Buka tab **Actions** dalam repo GitHub anda dan tonton aliran kerja menjalankan `azd provision` dan `azd deploy` secara automatik.
+
+> **Mengapa kelayakan persekutuan penting:** saluran lama menyimpan rahsia klien di GitHub. Kelayakan persekutuan OIDC menghapuskan rahsia itu sepenuhnya—GitHub meminta token jangka pendek pada masa jalan, yang lebih selamat dan tiada keperluan untuk putar atau bocor. Ini adalah tetapan lalai `azd pipeline config`.
+
+> **Rahsia vs. pemboleh ubah:** pengecam bukan sensitif (`AZURE_CLIENT_ID`, dll.) diletakkan dalam **pemboleh ubah** repo. Jika aplikasi anda benar-benar memerlukan rahsia ketika binaan, tambahkan sebagai **rahsia** GitHub dan rujuk dengan `${{ secrets.NAME }}`—tetapi lebih suka Key Vault + identiti terurus ketika masa jalan (lihat [Bab 3](../chapter-03-configuration/authsecurity.md)).
 
 **Aliran kerja produksi dengan konfigurasi saluran:**
 
@@ -1118,25 +1247,92 @@ azd env set AZURE_OPENAI_CAPACITY 100
 # 2. Konfigurasikan saluran paip
 azd pipeline config --provider github
 
-# 3. Saluran paip menjalankan azd deploy setiap kali tolak ke main
+# 3. Saluran paip menjalankan azd deploy pada setiap push ke main
 ```
-  
+
+#### Langkah demi langkah: Pipelines Azure DevOps
+
+Lebih suka Azure DevOps berbanding GitHub Actions? azd menyokongnya secara asli dengan penyedia `azdo`. Alirannya hampir sama—azd menjana fail saluran, membuat sambungan servis, dan menyediakan pengesahan.
+
+**1. Pastikan anda ada projek Azure DevOps**
+
+Anda perlukan organisasi dan projek di `https://dev.azure.com/<your-org>`. Jangkitkan Token Akses Peribadi (PAT) dengan skop **Build (Baca & jalankan)**, **Code (Baca & tulis)**, dan **Service Connections (Baca, soal & urus)**—azd akan minta anda memasukkannya.
+
+**2. Konfigurasikan saluran**
+
+```bash
+azd pipeline config --provider azdo
+```
+
+azd akan:
+- Tanya organisasi dan projek Azure DevOps anda
+- Membuat (atau guna semula) **sambungan perkhidmatan** ke Azure menggunakan prinsip perkhidmatan
+- Konfigurasikan **federasi identiti beban kerja (OIDC)** supaya tiada rahsia klien disimpan
+- Komit definisi saluran `azure-dev.yml` ke repo anda
+
+**3. Semak `azure-dev.yml` yang dijana**
+
+azd menulis saluran yang menyediakan dan menyebar setiap kali push ke `main`:
+
+```yaml
+# azure-dev.yml
+trigger:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: setup-azd@1
+    displayName: Install azd
+
+  - script: azd provision --no-prompt
+    displayName: Provision Infrastructure
+    env:
+      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
+      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
+      AZURE_LOCATION: $(AZURE_LOCATION)
+
+  - script: azd deploy --no-prompt
+    displayName: Deploy Application
+    env:
+      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
+      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
+      AZURE_LOCATION: $(AZURE_LOCATION)
+```
+
+**4. Dari mana asal pemboleh ubah**
+
+azd menyimpan nilai persekitaran (`AZURE_ENV_NAME`, `AZURE_LOCATION`, `AZURE_SUBSCRIPTION_ID`) sebagai **kumpulan pemboleh ubah** dalam Azure DevOps supaya saluran dapat membacanya. Anda boleh lihat dan edit di bawah **Pipelines → Library**.
+
+> **Manfaat OIDC sama seperti GitHub:** penyedia `azdo` juga secara lalai konfigurasi federasi identiti beban kerja, jadi tiada rahsia klien disimpan dalam sambungan perkhidmatan—Azure DevOps bertukar token jangka pendek masa jalan. Gunakan `--auth-type client-credentials` hanya jika organisasi anda belum boleh guna OIDC.
+
+**5. Jalankan ia**
+
+```bash
+git commit -am "Add Azure DevOps pipeline" --allow-empty
+git push
+```
+
+Buka **Pipelines** dalam Azure DevOps untuk tonton `azd provision` dan `azd deploy` berjalan.
+
 ### Menambah Komponen dengan `azd add`
 
-Tambah perkhidmatan Azure secara berperingkat kepada projek sedia ada:
+Tambah perkhidmatan Azure secara berperingkat ke projek sedia ada:
 
 ```bash
 # Tambah komponen perkhidmatan baru secara interaktif
 azd add
 ```
-  
-Ini amat berguna untuk mengembangkan aplikasi AI produksi—contoh, menambah perkhidmatan carian vektor, titik hujung ejen baru, atau komponen pemantauan kepada penyebaran sedia ada.
+
+Ini sangat berguna untuk memperluas aplikasi AI produksi—contohnya, menambah perkhidmatan carian vektor, titik akhir ejen baru, atau komponen pemantauan ke penyebaran sedia ada.
 
 ## Sumber Tambahan
-- **Kerangka Azure Well-Architected**: [panduan beban kerja AI](https://learn.microsoft.com/azure/well-architected/ai/)
+
+- **Kerangka Kerja Azure Well-Architected**: [Panduan beban kerja AI](https://learn.microsoft.com/azure/well-architected/ai/)
 - **Dokumentasi Microsoft Foundry**: [Dokumen rasmi](https://learn.microsoft.com/azure/ai-studio/)
 - **Templat Komuniti**: [Contoh Azure](https://github.com/Azure-Samples)
-- **Komuniti Discord**: [saluran #Azure](https://discord.gg/microsoft-azure)
+- **Komuniti Discord**: [Saluran #Azure](https://discord.gg/microsoft-azure)
 - **Kemahiran Ejen untuk Azure**: [microsoft/github-copilot-for-azure di skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 kemahiran ejen terbuka untuk Azure AI, Foundry, penyebaran, pengoptimuman kos, dan diagnostik. Pasang dalam editor anda:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
@@ -1146,16 +1342,16 @@ Ini amat berguna untuk mengembangkan aplikasi AI produksi—contoh, menambah per
 
 **Navigasi Bab:**
 - **📚 Laman Utama Kursus**: [AZD Untuk Pemula](../../README.md)
-- **📖 Bab Semasa**: Bab 8 - Corak Pengeluaran & Perusahaan
+- **📖 Bab Semasa**: Bab 8 - Corak Produksi & Perusahaan
 - **⬅️ Bab Sebelumnya**: [Bab 7: Penyelesaian Masalah](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Juga Berkaitan**: [Makmal Bengkel AI](ai-workshop-lab.md)
+- **⬅️ Berkaitan Juga**: [Makmal Bengkel AI](ai-workshop-lab.md)
 - **� Kursus Lengkap**: [AZD Untuk Pemula](../../README.md)
 
-**Ingat**: Beban kerja AI pengeluaran memerlukan perancangan yang teliti, pemantauan, dan pengoptimuman berterusan. Mulakan dengan corak-corak ini dan sesuaikan dengan keperluan khusus anda.
+**Ingat**: Beban kerja AI produksi memerlukan perancangan teliti, pemantauan, dan pengoptimuman berterusan. Mulakan dengan corak ini dan sesuaikan dengan keperluan khusus anda.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan profesional oleh manusia adalah disyorkan. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+**Penafian**:
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan oleh manusia profesional adalah disyorkan. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
