@@ -127,22 +127,22 @@
 #### Beginner Onboarding Clarification, Setup Validation & Final AZD Command Cleanup
 **このバージョンは AZD 1.23 の検証スイープを受けた初心者向けドキュメント修正を行っています: AZD を最初に考慮した認証ガイダンスを明確化し、ローカルセットアップ検証スクリプトを追加し、主要コマンドをライブの AZD CLI と照合して検証し、チェンジログ外の最後の廃止された英語ソースのコマンド参照を削除しています。**
 
-#### Added
+#### 追加
 - **🧪 初心者向けセットアップ検証スクリプト** `validate-setup.ps1` と `validate-setup.sh` を追加し、学習者が第1章を開始する前に必要なツールを確認できるようにしました
 - **✅ 事前セットアップ検証ステップ** をルート README と第1章 README に追加し、`azd up` の前に前提条件の欠落を検出できるようにしました
 
-#### Changed
+#### 変更
 - **🔐 初心者向け認証ガイダンス** を一貫して `azd auth login` を AZD ワークフローの主要経路として扱うようにし、Azure CLI コマンドを直接使用する場合を除き `az login` はオプションとして明示しました
 - **📚 第1章のオンボーディングフロー** が、インストール、認証、最初のデプロイ手順の前にローカルセットアップを検証するよう学習者を案内するようになりました
 - **🛠️ 検証ツールのメッセージ** が、AZD 専用の初心者パスにおけるブロッキング要件とオプションの Azure CLI 警告を明確に分離するようになりました
 - **📖 設定、トラブルシューティング、サンプルドキュメント** が、必要な AZD 認証とオプションの Azure CLI サインインを区別するように更新され、両者が文脈なしに提示されていた箇所を改善しました
 
-#### Fixed
+#### 修正
 - **📋 残っていた英語ソースのコマンド参照** を現在の AZD 形式に更新しました。チートシートの `azd config show` や、Azure ポータルの概要ガイダンス意図の箇所での `azd monitor --overview` を含みます
 - **🧭 第1章の初心者向けの主張** を緩め、すべてのテンプレートや Azure リソースに対してエラーゼロやロールバック保証を過剰に断言しないようにしました
 - **🔎 ライブ CLI 検証** により、`azd env get-values`, `azd template list`, `azd extension list --installed`, `azd copilot consent list`, `azd mcp start`, `azd provision --preview`, `azd monitor --logs`, および `azd down --force --purge` の現在のサポートを確認しました
 
-#### Files Updated
+#### 更新ファイル
 - `README.md`
 - `changelog.md`
 - `docs/chapter-01-foundation/README.md`
@@ -164,13 +164,13 @@
 #### AZD 1.23.12 Validation, Workshop Environment Expansion & AI Model Refresh
 **このバージョンは `azd` `1.23.12` に対するドキュメント検証スイープを実行し、古くなった AZD コマンド例を更新し、AI モデルガイダンスを現在のデフォルトにリフレッシュし、ワークショップの手順を GitHub Codespaces から dev コンテナやローカルクローンにも対応するように拡張します。**
 
-#### Added
+#### 追加
 - **✅ コア章とワークショップドキュメント全体への検証メモ** を追加し、新しいまたは古い CLI ビルドを使用する学習者のためにテストされた AZD ベースラインを明示しました
 - **⏱️ 長時間実行される AI アプリのデプロイ向けタイムアウトガイダンス** を `azd deploy --timeout 1800` として追加しました
 - **🔎 拡張機能検査ステップ** を AI ワークフロードキュメントに `azd extension show azure.ai.agents` で追加しました
 - **🌐 ワークショップ環境ガイダンスの拡張** により、GitHub Codespaces、dev コンテナ、MkDocs を使ったローカルクローンを網羅しました
 
-#### Changed
+#### 変更
 - **📚 章イントロ README** が、基礎、設定、インフラストラクチャ、マルチエージェント、事前デプロイ、トラブルシューティング、本番セクションにわたって `azd 1.23.12` に対する検証を一貫して注記するようになりました
 - **🛠️ AZD コマンド参照** をドキュメント全体で現在の形式に更新しました:
   - `azd config list` → `azd config show`
@@ -181,7 +181,7 @@
 - **🧭 ワークショップフロー** を更新し、学習者が Codespaces、dev コンテナ、またはローカルクローンのいずれでもラボを完了できるようにしました（Codespaces のみを想定しない）
 - **🔐 認証ガイダンス** を、AZD ワークフローに対して `azd auth login` を優先し、Azure CLI コマンドを直接使用する場合にのみ `az login` を位置づけるように変更しました
 
-#### Fixed
+#### 修正
 - **🪟 Windows インストールコマンド** をインストールガイド内で現在の `winget` パッケージ表記に正規化しました
 - **🐧 Linux インストールガイダンス** を、サポートされていないディストリビューション固有の `azd` パッケージマネージャー指示を避け、適切な場合にリリースアセットを参照するように修正しました
 - **📦 AI モデル例** を `gpt-35-turbo` や `text-embedding-ada-002` のような古いデフォルトから、`gpt-4.1-mini`, `gpt-4.1`, `text-embedding-3-large` といった現在の例に更新しました
@@ -189,12 +189,12 @@
 - **⚙️ GitHub Actions ガイダンス** を `Azure/setup-azd@v1.0.0` から `Azure/setup-azd@v2` に更新しました
 - **🤖 MCP/Copilot 同意ガイダンス** を `azd mcp consent` から `azd copilot consent list` に更新しました
 
-#### Improved
+#### 改善
 - **🧠 AI 章のガイダンス** を改善し、プレビューに依存する `azd ai` の挙動、テナント固有のログイン、現在の拡張機能使用法、モデルデプロイの推奨をより明確に説明するようにしました
 - **🧪 ワークショップ手順** をより現実的なバージョン例と明確な環境セットアップ言語で更新し、ハンズオンラボを改善しました
 - **📈 本番運用およびトラブルシューティング文書** を、現在の監視、フォールバックモデル、およびコスト層の例に合わせて整合させました
 
-#### Files Updated
+#### 更新ファイル
 - `docs/chapter-01-foundation/README.md`
 - `docs/chapter-01-foundation/azd-basics.md`
 - `docs/chapter-01-foundation/installation.md`
@@ -230,7 +230,7 @@
 #### AZD AI CLI Commands, Content Validation & Template Expansion
 **このバージョンは、AI 関連の章全体に `azd ai`, `azd extension`, `azd mcp` コマンドのカバレッジを追加し、agents.md の壊れたリンクと廃止コードを修正し、チートシートを更新し、検証済みの説明と新しい Azure AI AZD テンプレートで Example Templates セクションを大幅に改訂します。**
 
-#### Added
+#### 追加
 - **🤖 AZD AI CLI カバレッジ** を 7 ファイルに拡張（以前は第8章のみ）:
   - `docs/chapter-01-foundation/azd-basics.md` — `azd extension`, `azd ai agent init`, `azd mcp` を紹介する新しい「Extensions and AI Commands」セクション
   - `docs/chapter-02-ai-development/agents.md` — オプション 4: テンプレート対マニフェストアプローチの比較表を含む `azd ai agent init`
@@ -249,7 +249,7 @@
   - **azd-ai-starter** — 最小限の Azure AI インフラ Bicep スターターテンプレート
   - **🔗 Awesome AZD AI Gallery link** — 参照: [awesome-azd AI gallery](https://azure.github.io/awesome-azd/?tags=ai)（80以上のテンプレート）
 
-#### Fixed
+#### 修正
 - **🔗 agents.md のナビゲーション**: 前/次リンクが第2章 README のレッスン順（Microsoft Foundry Integration → Agents → AI Model Deployment）に一致するように修正
 - **🔗 agents.md の壊れたリンク**: `production-ai-practices.md` を `../chapter-08-production/production-ai-practices.md` に修正（3箇所）
 - **📦 agents.md の廃止コード**: `opencensus` を `azure-monitor-opentelemetry` + OpenTelemetry SDK に置換
@@ -258,15 +258,15 @@
 - **azure-search-openai-demo**: サービス記述を "Cognitive Search + App Service" から "Azure AI Search + Azure Container Apps" に修正（デフォルトホストは 2024年10月 に変更）
 - **contoso-chat**: 説明を Azure AI Foundry + Prompty を参照するよう更新し、リポジトリの実際のタイトルと技術スタックに一致させました
 
-#### Removed
+#### 削除
 - **ai-document-processing**: 非機能のテンプレート参照（リポジトリが公開されておらず AZD テンプレートとして利用不可）を削除しました
 
-#### Improved
+#### 改善
 - **📝 agents.md の演習**: 演習1に期待される出力と `azd monitor` ステップを表示、演習2に完全な `FunctionTool` 登録コードを追加、演習3は曖昧なガイダンスを具体的な `prepdocs.py` コマンドに置換
 - **📚 agents.md のリソース**: ドキュメントリンクを最新の Azure AI Agent Service ドキュメントとクイックスタートに更新
 - **📋 agents.md の Next Steps テーブル**: 完全な章カバレッジのために AI ワークショップラボへのリンクを追加
 
-#### Files Updated
+#### 更新ファイル
 - `docs/chapter-01-foundation/azd-basics.md`
 - `docs/chapter-02-ai-development/agents.md`
 - `docs/chapter-02-ai-development/microsoft-foundry-integration.md`
@@ -1015,8 +1015,8 @@
 
 ### [v2.0.0] - 2025-09-09
 
-#### Major Changes - Repository Restructure and Professional Enhancement
-**This version represents a significant overhaul of the repository structure and content presentation.**
+#### 大きな変更 - リポジトリの再構成とプロフェッショナルな改善
+**本バージョンでは、リポジトリの構成およびコンテンツの提示方法を大幅に刷新しました。**
 
 #### 追加
 - **Structured Learning Framework**: すべてのドキュメントページに導入、学習目標、学習成果セクションを追加
@@ -1156,7 +1156,7 @@
 
 1. <strong>バージョン番号</strong>: セマンティックバージョニングに従う（major.minor.patch）
 2. <strong>日付</strong>: リリースまたは更新日（YYYY-MM-DD形式）
-3. <strong>カテゴリ</strong>: Added, Changed, Deprecated, Removed, Fixed, Security
+3. <strong>カテゴリ</strong>: 追加、変更、廃止予定、削除、修正、セキュリティ
 4. <strong>明確な説明</strong>: 何が変更されたかの簡潔な説明
 5. <strong>影響評価</strong>: 変更が既存ユーザーに与える影響
 
