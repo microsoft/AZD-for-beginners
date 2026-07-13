@@ -1,34 +1,34 @@
-# Chapter 5: 다중 에이전트 AI 솔루션
+# 5장: 다중 에이전트 AI 솔루션
 
-**📚 강의**: [AZD 초보자용](../../README.md) | **⏱️ 소요시간**: 2-3시간 | **⭐ 난이도**: 고급
+**📚 강의**: [초보자를 위한 AZD](../../README.md) | **⏱️ 소요 시간**: 2-3 시간 | **⭐ 난이도**: 고급
 
 ---
 
 ## 개요
 
-이 장에서는 고급 다중 에이전트 아키텍처 패턴, 에이전트 오케스트레이션, 복잡한 시나리오를 위한 프로덕션 준비 AI 배포를 다룹니다.
+이 장에서는 고급 다중 에이전트 아키텍처 패턴, 에이전트 조정, 복잡한 시나리오를 위한 프로덕션 준비 AI 배포를 다룹니다.
 
-> `azd 1.25.6` 기준, 2026년 6월 검증됨.
+> 2026년 7월, `azd 1.27.1` 버전으로 검증됨.
 
 ## 학습 목표
 
 이 장을 완료하면 다음을 할 수 있습니다:
 - 다중 에이전트 아키텍처 패턴 이해
-- 협업하는 AI 에이전트 시스템 배포
+- 협력하는 AI 에이전트 시스템 배포
 - 에이전트 간 통신 구현
 - 프로덕션 준비 다중 에이전트 솔루션 구축
 
 ---
 
-## 📚 강의 목록
+## 📚 강의들
 
 | # | 강의 | 설명 | 시간 |
 |---|--------|-------------|------|
-| 1 | [다중 에이전트 기본](multi-agent-basics.md) | 실습: `azd up`으로 작동하는 다중 에이전트 앱 배포 | 45분 |
-| 2 | [조정 패턴](../chapter-06-pre-deployment/coordination-patterns.md) | 에이전트 오케스트레이션 전략 (6장에 계속) | 30분 |
-| 3 | [ARM 템플릿 배포](../../examples/retail-multiagent-arm-template/README.md) | 원클릭 배포 예제 | 30분 |
+| 1 | [다중 에이전트 기초](multi-agent-basics.md) | 실습: `azd up`으로 작동하는 다중 에이전트 앱 배포 | 45 분 |
+| 2 | [조정 패턴](../chapter-06-pre-deployment/coordination-patterns.md) | 에이전트 조정 전략 (6장에서 계속) | 30 분 |
+| 3 | [ARM 템플릿 배포](../../examples/retail-multiagent-arm-template/README.md) | 원클릭 배포 예제 | 30 분 |
 
-> **1강부터 시작하세요.** 이 장에서 유일하게 완전한 실습 및 배포가 가능한 강의입니다. 2강은 6장에 있으며(사전 배포 계획과 공유), [리테일 다중 에이전트 솔루션](../../examples/retail-scenario.md)은 아키텍처 청사진—설계 참조이며 원클릭 템플릿이 아닙니다.
+> **1강부터 시작하세요.** 이 장에서 유일하게 완전 실습 가능한 배포 강의입니다. 2강은 6장에 있습니다(사전 배포 계획과 공유). [소매 다중 에이전트 솔루션](../../examples/retail-scenario.md)은 아키텍처 청사진으로—설계 참고 자료이며 원클릭 템플릿이 아닙니다.
 
 ---
 
@@ -45,7 +45,7 @@ azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **어떤 방식을 선택할까요?** 작동하는 샘플에서 시작하려면 `azd init --template`을 사용하세요. 자체 에이전트 매니페스트가 있다면 `azd ai agent init`을 사용하세요. 전체 내용은 [AZD AI CLI 참조](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions)를 참조하세요.
+> **어떤 방식을 선택할까요?** 작동하는 샘플로 시작하려면 `azd init --template`을 사용하세요. 자체 에이전트 매니페스트가 있을 때는 `azd ai agent init`을 사용하세요. 전체 내용은 [AZD AI CLI 참조](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions)를 참고하세요.
 
 ---
 
@@ -54,16 +54,16 @@ azd up
 ```mermaid
 graph TD
     Orchestrator[오케스트레이터 에이전트<br/>요청 라우팅, 워크플로우 관리] --> Customer[고객 에이전트<br/>사용자 문의, 선호도]
-    Orchestrator --> Inventory[재고 에이전트<br/>재고 수준, 주문]
+    Orchestrator --> Inventory[재고 에이전트<br/>재고 수준, 주문 사항]
 ```
 
 ---
 
-## 🎯 주요 솔루션: 리테일 다중 에이전트
+## 🎯 추천 솔루션: 소매 다중 에이전트
 
-[리테일 다중 에이전트 솔루션](../../examples/retail-scenario.md)은 다음을 보여줍니다:
+[소매 다중 에이전트 솔루션](../../examples/retail-scenario.md)은 다음을 시연합니다:
 
-- **고객 에이전트**: 사용자 상호작용 및 선호 처리
+- **고객 에이전트**: 사용자 상호작용 및 선호 관리
 - **재고 에이전트**: 재고 및 주문 처리 관리
 - <strong>오케스트레이터</strong>: 에이전트 간 조정
 - **공유 메모리**: 에이전트 간 컨텍스트 관리
@@ -80,7 +80,7 @@ graph TD
 
 ---
 
-## 🔗 네비게이션
+## 🔗 탐색
 
 | 방향 | 장 |
 |-----------|---------|
@@ -92,7 +92,7 @@ graph TD
 ## 📖 관련 자료
 
 - [AI 에이전트 가이드](../chapter-02-ai-development/agents.md)
-- [프로덕션 AI 실습](../chapter-08-production/production-ai-practices.md)
+- [프로덕션 AI 실전](../chapter-08-production/production-ai-practices.md)
 - [AI 문제 해결](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---

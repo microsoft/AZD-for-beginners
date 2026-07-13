@@ -1,48 +1,48 @@
-# azd 向け Dev Containers と GitHub Codespaces
+# azd の Dev Containers と GitHub Codespaces
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD 入門](../../README.md)
-- **📖 Current Chapter**: 第1章 - 基礎とクイックスタート
-- **⬅️ Previous**: [自分のアプリを持ち込む](bring-your-own-app.md)
-- **🚀 Next Chapter**: [第2章: AIファースト開発](../chapter-02-ai-development/README.md)
+**章のナビゲーション：**
+- **📚 コースホーム**: [AZD For Beginners](../../README.md)
+- **📖 現在の章**: 第1章 - 基礎とクイックスタート
+- **⬅️ 前へ**: [Bring Your Own App](bring-your-own-app.md)
+- **🚀 次の章**: [第2章：AIファースト開発](../chapter-02-ai-development/README.md)
 
-> 2026年6月に `azd 1.25.6` で検証済み。
+> 2026年7月、`azd 1.27.1`で検証済み。
 
 ## はじめに
 
-azd、適切な言語ランタイム、Docker、および Azure CLI を各マシンにインストールするのは手間であり、チュートリアルが「自分の環境では動く」のに他人の環境で動かない一番の理由です。**dev container** はツールチェーン全体をファイルで記述することでこれを解決します。プロジェクトを VS Code や GitHub Codespaces で開く誰もが、azd が既にインストールされた全く同じ環境を得られます。このレッスンでは、その追加方法を示します。
+azd、適切な言語ランタイム、Docker、Azure CLI をすべてのマシンにインストールするのは手間であり、「自分のマシンでは動くのに他の人で動かない」というチュートリアルが失敗する最大の理由です。**dev container** は、この問題をリポジトリ内のファイルでツールチェーン全体を定義することで解決します。VS CodeやGitHub Codespacesでプロジェクトを開く人は誰でも、azdがすでにインストールされた全く同じ環境を得られます。このレッスンでは、それを追加する方法をお見せします。
 
 ## 学習目標
 
-このレッスンの終了時までに、あなたは以下を行えるようになります:
-- dev container が何であり、azd にどう役立つかを理解する
+このレッスンの終わりには、
+- dev containerとは何か、azdのためにどのように役立つか理解する
 - プロジェクトに最小限の `.devcontainer/devcontainer.json` を追加する
 - Dev Container *features* を使って azd、Azure CLI、Docker を含める
-- プロジェクトを GitHub Codespaces または VS Code で開く
+- GitHub CodespacesやVS Codeでプロジェクトを開く
 
-## 学習成果
+## 学習到達点
 
-このレッスンを完了すると、次のことができるようになります:
-- azd プロジェクト用の `devcontainer.json` を作成する
-- 手動インストールなしで azd と Azure ツール群を追加する
-- コンテナ内または Codespace 内から `azd up` を実行する
+レッスン修了後には、
+- azd プロジェクト用の `devcontainer.json` を作成できる
+- 手動でインストールせずに azd と Azure ツールを追加できる
+- コンテナやCodespace内から `azd up` を実行できる
 
 ---
 
-## Dev コンテナとは何か?
+## Dev Containerとは？
 
-Dev コンテナは、リポジトリ内の `.devcontainer/devcontainer.json` ファイルで定義される Docker ベースの開発環境です。プロジェクトを開くと:
+Dev containerとは、リポジトリの `.devcontainer/devcontainer.json` ファイルで定義する Docker ベースの開発環境のことです。プロジェクトを開くと：
 
-- **VS Code**（Dev Containers 拡張機能を使用）はコンテナをビルドしてアタッチします。
-- **GitHub Codespaces** はクラウドで同じコンテナをビルドし、ブラウザベースのエディタを提供します。
+- **VS Code**（Dev Containers拡張機能あり）がコンテナをビルドしてアタッチします。
+- **GitHub Codespaces** が同じコンテナをクラウド上でビルドし、ブラウザベースのエディターを提供します。
 
-どちらの場合でも、すべての貢献者が同一のツールを得られるため、「azd をインストールしましたか？」のようなトラブルシューティングは不要になります。
+どちらの場合も、全参加者がまったく同じツールを使い、"azdをインストールした？" といったトラブルシューティングが不要になります。
 
 ```mermaid
 graph LR
     Repo[あなたのリポジトリ<br/>+ devcontainer.json] --> VSCode[VS Code<br/>開発コンテナ]
     Repo --> Codespaces[GitHub<br/>Codespaces]
-    VSCode --> Env[同一の環境：<br/>azd + az + Docker]
+    VSCode --> Env[Identical environment:<br/>azd + az + Docker]
     Codespaces --> Env
 ```
 
@@ -50,7 +50,7 @@ graph LR
 
 ## ステップ1: devcontainer ファイルを作成する
 
-プロジェクトのルートに `.devcontainer/devcontainer.json` を作成します:
+プロジェクトのルートに `.devcontainer/devcontainer.json` を作成します：
 
 ```json
 {
@@ -75,23 +75,23 @@ graph LR
 }
 ```
 
-What each part does:
+各部分の役割：
 
-| キー | 目的 |
+| キー | 役割 |
 |-----|---------|
-| `image` | コンテナのベース OS |
-| `features` | 事前構築されたインストーラ—ここでは Azure CLI、**azd**、Docker、および Node.js |
-| `customizations.vscode.extensions` | azd と Bicep の VS Code 拡張機能を自動インストールします |
-| `forwardPorts` | アプリのポートをブラウザに公開します |
-| `postCreateCommand` | コンテナ作成後に一度実行されます（ここでは動作確認） |
+| `image` | コンテナのベースOS |
+| `features` | 事前構築済みインストーラー—ここではAzure CLI、**azd**、Docker、Node.js |
+| `customizations.vscode.extensions` | azd と Bicep の VS Code 拡張機能自動インストール |
+| `forwardPorts` | アプリのポートをブラウザに公開 |
+| `postCreateCommand` | コンテナがビルドされた後に一度だけ実行されるコマンド（ここでは簡単な動作確認） |
 
-> `ghcr.io/azure/azure-dev/azd:latest` 機能はコンテナ内で azd を入手する公式の方法です。再現性が必要な場合は特定のバージョン（例：`azd:1.25.6`）を固定してください。
+> `ghcr.io/azure/azure-dev/azd:latest` featureはコンテナ内でazdを入手する公式な方法です。再現性が必要な場合は特定のバージョン（例：`azd:1.27.1`）で固定してください。
 
 ---
 
-## ステップ2: アプリの言語に機能を合わせる
+## ステップ2: アプリの言語に合わせてFeatureを変更
 
-`node` の機能をアプリが使用するものに置き換えてください:
+アプリの言語に合わせて `node` feature を置き換えます：
 
 ```jsonc
 // Python project
@@ -107,54 +107,54 @@ What each part does:
 "ghcr.io/devcontainers/features/go:1": {}
 ```
 
-`host` が `containerapp`、`aks`、またはコンテナイメージをビルドする何かであれば、`docker-in-docker` を保持してください—azd はイメージのビルドとプッシュに Docker を必要とします。
+`host` が `containerapp`、`aks`、あるいはコンテナイメージをビルドするものの場合は `docker-in-docker` を残します—azdはイメージのビルド・プッシュにDockerが必要です。
 
 ---
 
 ## ステップ3: 開く
 
-**VS Code で:**
+**VS Codeで：**
 1. **Dev Containers** 拡張機能をインストールします。
-2. プロジェクトフォルダを開きます。
-3. プロンプトが表示されたら **Reopen in Container** をクリックします（または *Dev Containers: Reopen in Container* を実行）。
+2. プロジェクトフォルダーを開きます。
+3. プロンプトが出たら **Reopen in Container** をクリックするか、 *Dev Containers: Reopen in Container* を実行します。
 
-**GitHub Codespaces で:**
-1. リポジトリを GitHub にプッシュします。
+**GitHub Codespacesで：**
+1. リポジトリをGitHubにプッシュします。
 2. **Code → Codespaces → Create codespace on main** をクリックします。
-3. コンテナのビルドが完了するまで待ちます—ターミナルで azd が利用可能になります。
+3. コンテナのビルドが完了するまで待ちます — ターミナルにazdが準備されています。
 
 ---
 
 ## ステップ4: コンテナ内からデプロイする
 
-コンテナには azd が事前インストールされているため、通常のワークフローがそのまま動作します:
+このコンテナにはazdがプリインストールされているため、通常のワークフローがそのまま使えます：
 
 ```bash
-azd auth login --use-device-code   # Codespaces内ではデバイスコードが便利です
+azd auth login --use-device-code   # Codespaces内でデバイスコードは便利です
 azd up
 ```
 
-> **なぜ `--use-device-code` を使うのか？** リモートコンテナや Codespace にはリダイレクトできるローカルブラウザがないため、device-code ログインが確実な方法です。サインインを完了するために、ブラウザのタブにコードを貼り付けます。
+> **なぜ `--use-device-code`？** リモートコンテナやCodespaceではローカルブラウザがなくリダイレクトできないため、device-codeログインが確実な方法です。ブラウザのタブにコードを貼り付けてサインインを完了します。
 
 ---
 
 ## よくある落とし穴
 
-| 問題 | 対処 |
+| 落とし穴 | 解決策 |
 |---------|-----|
-| `azd up` がイメージをビルドできない | `docker-in-docker` 機能を追加する |
-| Codespaces でブラウザログインがハングする | `azd auth login --use-device-code` を使用する |
-| チームメンバー間でツールが異なる | 機能のバージョンを固定する（例：`azd:1.25.6`） |
-| アプリにブラウザからアクセスできない | `forwardPorts` にポートを追加する |
+| `azd up` がイメージをビルドできない | `docker-in-docker` feature を追加する |
+| Codespacesでブラウザログインが固まる | `azd auth login --use-device-code` を使う |
+| チームメンバー間でツールが異なる | featureのバージョンを固定する（例：`azd:1.27.1`） |
+| ブラウザでアプリにアクセスできない | 使用するポートを `forwardPorts` に追加する |
 
 ---
 
 ## まとめ
 
-- dev コンテナは azd のツールチェーンを誰でも再現可能にします。
-- Dev Container の *features* を通じて azd、Azure CLI、Docker を追加します。
-- 言語に対応する機能をアプリに合わせ、コンテナホストの場合は `docker-in-docker` を維持してください。
-- Codespaces 内で実行する際は device-code ログインを使用してください。
+- dev containerはあなたのazdツールチェーンを誰にとっても再現可能にします。
+- Dev Container *features* を使って azd、Azure CLI、Docker を追加します。
+- アプリの言語featureに合わせ、コンテナホストの場合は `docker-in-docker` を維持します。
+- Codespaces内で動かすときは device-code ログインを使います。
 
 ---
 
@@ -162,16 +162,16 @@ azd up
 
 | 方向 | リソース |
 |-----------|----------|
-| <strong>前の章</strong> | [自分のアプリを持ち込む](bring-your-own-app.md) |
-| <strong>章のホーム</strong> | [第1章 - 基礎とクイックスタート](README.md) |
-| <strong>次の章</strong> | [第2章: AIファースト開発](../chapter-02-ai-development/README.md) |
+| <strong>前へ</strong> | [Bring Your Own App](bring-your-own-app.md) |
+| <strong>章ホーム</strong> | [第1章: 基礎とクイックスタート](README.md) |
+| <strong>次章</strong> | [第2章：AIファースト開発](../chapter-02-ai-development/README.md) |
 
-## 📖 関連リソース
+## 📖 関連資料
 
 - [インストールとセットアップ](installation.md)
-- [コマンド チートシート](../../resources/cheat-sheet.md)
+- [コマンドチートシート](../../resources/cheat-sheet.md)
 - [公式 Dev Containers 仕様](https://containers.dev/)
-- [azd の Dev Container 機能](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
+- [azd Dev Container feature](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
 
 ---
 

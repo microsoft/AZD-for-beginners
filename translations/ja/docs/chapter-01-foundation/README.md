@@ -1,40 +1,40 @@
 # 第1章: 基礎とクイックスタート
 
-**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 30-45 minutes | **⭐ Complexity**: Beginner
+**📚 コース**: [AZD入門](../../README.md) | **⏱️ 所要時間**: 30-45分 | **⭐ 難易度**: 初心者
 
 ---
 
 ## 概要
 
-この章では Azure Developer CLI (azd) の基本を紹介します。コアコンセプトを学び、ツールをインストールし、最初のアプリケーションを Azure にデプロイします。
+本章ではAzure Developer CLI (azd) の基本を紹介します。コアコンセプトを学び、ツールをインストールし、最初のアプリケーションをAzureにデプロイします。
 
-> `azd 1.25.6` に対して 2026年6月に検証済み。
+> 2026年7月時点で `azd 1.27.1` にて検証済み。
 
 ## 学習目標
 
-この章を完了すると、以下ができるようになります:
-- Azure Developer CLI が何であるか、Azure CLI とどのように異なるかを理解する
-- 使用しているプラットフォームに AZD をインストールして設定する
-- `azd up` で最初のアプリケーションを Azure にデプロイする
+本章を終えることで、以下ができるようになります:
+- Azure Developer CLIとは何か、Azure CLIとどう違うか理解する
+- プラットフォームに応じてAZDをインストール・設定する
+- `azd up` で最初のアプリケーションをAzureにデプロイする
 - `azd down` でリソースをクリーンアップする
 
 ---
 
-## 📚 レッスン
+## 📚 レッスン一覧
 
 | # | レッスン | 説明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [AZD Basics](azd-basics.md) | コア概念、用語、プロジェクト構成 | 15分 |
-| 2 | [Installation & Setup](installation.md) | プラットフォーム別のインストールガイド | 10分 |
-| 3 | [Your First Project](first-project.md) | ハンズオン: Web アプリを Azure にデプロイ | 20分 |
-| 4 | [Bring Your Own App](bring-your-own-app.md) | 既存のプロジェクトに azd を追加する | 15分 |
-| 5 | [Dev Containers & Codespaces](dev-containers.md) | 開発コンテナを使った再現可能な azd 環境 | 15分 |
+| 1 | [AZDの基本](azd-basics.md) | コアコンセプト、用語、プロジェクト構成 | 15分 |
+| 2 | [インストール＆セットアップ](installation.md) | プラットフォーム別インストールガイド | 10分 |
+| 3 | [最初のプロジェクト](first-project.md) | ハンズオン：WebアプリをAzureにデプロイ | 20分 |
+| 4 | [既存のアプリへのazd導入](bring-your-own-app.md) | 既存プロジェクトにazdを追加 | 15分 |
+| 5 | [開発コンテナとCodespaces](dev-containers.md) | 再現性あるazd環境を開発コンテナで構築 | 15分 |
 
 ---
 
-## ✅ ここから開始: セットアップの検証
+## ✅ ここから始めよう: 環境の検証
 
-始める前に、ローカルマシンが第1章のテンプレートに対応していることを確認してください:
+作業を始める前に、ローカルマシンが第1章のテンプレート用に準備できているか確認してください：
 
 **Windows:**
 ```powershell
@@ -46,25 +46,25 @@
 bash ./validate-setup.sh
 ```
 
-スクリプトがツールの欠如を報告した場合は、まずそれらを修正してから章を続けてください。
+ツールが不足と報告された場合は、まずそれを修正してから章の作業を続けてください。
 
 ---
 
 ## 🚀 クイックスタート
 
 ```bash
-# インストールを確認
+# インストールを確認する
 azd version
 
-# AZD の認証
-# 任意: Azure CLI コマンドを直接実行する場合は az login
+# AZDの認証を行う
+# オプション: 直接Azure CLIコマンドを実行する場合はaz login
 azd auth login
 
 # 最初のアプリをデプロイする
 azd init --template todo-nodejs-mongo
 azd up
 
-# 完了したらクリーンアップ
+# 完了後にクリーンアップする
 azd down --force --purge
 ```
 
@@ -72,10 +72,10 @@ azd down --force --purge
 
 ## ✅ 成功基準
 
-この章を完了した後、次のことができるはずです:
+本章を終えた後、以下ができるはずです：
 
 ```bash
-azd version              # インストール済みのバージョンを表示します
+azd version              # インストールされているバージョンを表示します
 azd init --template todo-nodejs-mongo  # プロジェクトを初期化します
 azd up                   # Azure にデプロイします
 azd show                 # 実行中のアプリの URL を表示します
@@ -86,18 +86,18 @@ azd down --force --purge # リソースをクリーンアップします
 
 ## 🔗 ナビゲーション
 
-| Direction | Chapter |
+| 方向 | チャプター |
 |-----------|---------|
-| **Next** | [Chapter 2: AI-First Development](../chapter-02-ai-development/README.md) |
-| **Skip to** | [Chapter 3: Configuration](../chapter-03-configuration/README.md) |
+| <strong>次へ</strong> | [第2章: AIファースト開発](../chapter-02-ai-development/README.md) |
+| <strong>スキップして</strong> | [第3章: 設定](../chapter-03-configuration/README.md) |
 
 ---
 
-## 📖 関連資料
+## 📖 関連リソース
 
-- [Command Cheat Sheet](../../resources/cheat-sheet.md)
-- [FAQ](../../resources/faq.md)
-- [Glossary](../../resources/glossary.md)
+- [コマンド早見表](../../resources/cheat-sheet.md)
+- [よくある質問](../../resources/faq.md)
+- [用語集](../../resources/glossary.md)
 
 ---
 
