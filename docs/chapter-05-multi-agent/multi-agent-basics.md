@@ -6,7 +6,7 @@
 - **⬅️ Previous**: [Chapter 4: Infrastructure](../chapter-04-infrastructure/README.md)
 - **➡️ Next**: [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md)
 
-> Validated against `azd 1.25.6` in June 2026.
+> Validated against `azd 1.27.1` in July 2026.
 
 ## Introduction
 

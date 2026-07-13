@@ -9,7 +9,7 @@
 
 This guide provides comprehensive instructions for deploying AI models using AZD templates, covering everything from model selection to production deployment patterns.
 
-> **Validation note (2026-03-25):** The AZD workflow in this guide was checked against `azd` `1.23.12`. For AI deployments that take longer than the default service deployment window, current AZD releases support `azd deploy --timeout <seconds>`.
+> **Validation note (2026-07-13):** The AZD workflow in this guide was checked against `azd` `1.27.1`. For AI deployments that take longer than the default service deployment window, current AZD releases support `azd deploy --timeout <seconds>`.
 
 ## Table of Contents
 

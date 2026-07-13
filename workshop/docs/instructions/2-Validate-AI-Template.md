@@ -1,6 +1,6 @@
 # 2. Validate a Template
 
-> Validated against `azd 1.25.6` in June 2026.
+> Validated against `azd 1.27.1` in July 2026.
 
 !!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
 
@@ -31,7 +31,7 @@ Before we begin, let's make sure you have the Azure Developer CLI installed.
 1. You should see something like this!
 
       ```bash title="" linenums="0"
-      azd version 1.25.6 (commit <current-build>)
+      azd version 1.27.1 (commit <current-build>)
       ```
 
 **You are now ready to select and deploy a template with azd**

@@ -6,7 +6,7 @@
 - **⬅️ Previous**: [Bring Your Own App](bring-your-own-app.md)
 - **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/README.md)
 
-> Validated against `azd 1.25.6` in June 2026.
+> Validated against `azd 1.27.1` in July 2026.
 
 ## Introduction
 
@@ -85,7 +85,7 @@ What each part does:
 | `forwardPorts` | Exposes your app's port to your browser |
 | `postCreateCommand` | Runs once after the container is built (here, a sanity check) |
 
-> The `ghcr.io/azure/azure-dev/azd:latest` feature is the official way to get azd in a container. Pin a specific version (for example `azd:1.25.6`) if you need reproducibility.
+> The `ghcr.io/azure/azure-dev/azd:latest` feature is the official way to get azd in a container. Pin a specific version (for example `azd:1.27.1`) if you need reproducibility.
 
 ---
 
@@ -144,7 +144,7 @@ azd up
 |---------|-----|
 | `azd up` can't build an image | Add the `docker-in-docker` feature |
 | Browser login hangs in Codespaces | Use `azd auth login --use-device-code` |
-| Tools differ between teammates | Pin feature versions (e.g. `azd:1.25.6`) |
+| Tools differ between teammates | Pin feature versions (e.g. `azd:1.27.1`) |
 | App not reachable in browser | Add the port to `forwardPorts` |
 
 ---

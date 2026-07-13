@@ -8,7 +8,7 @@
 
 This chapter helps you diagnose and resolve common issues when working with Azure Developer CLI. From deployment failures to AI-specific problems.
 
-> Validated against `azd 1.25.6` in June 2026.
+> Validated against `azd 1.27.1` in July 2026.
 
 ## Learning Objectives
 

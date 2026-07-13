@@ -20,7 +20,7 @@ AI agents are autonomous programs that can perceive their environment, make deci
 
 This guide shows you how to deploy AI agents to Azure using Azure Developer CLI (azd).
 
-> **Validation note (2026-03-25):** This guide was reviewed against `azd` `1.23.12` and `azure.ai.agents` `0.1.18-preview`. The `azd ai` experience is still preview-driven, so check extension help if your installed flags differ.
+> **Validation note (2026-07-13):** This guide was reviewed against `azd` `1.27.1` and `azure.ai.agents` `1.0.0-beta.5`. The `azd ai` experience is still preview-driven, so check extension help if your installed flags differ.
 
 ## Learning Goals
 

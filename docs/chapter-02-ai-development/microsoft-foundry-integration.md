@@ -38,7 +38,7 @@ Microsoft Foundry is Microsoft's unified platform for AI development that includ
 - Access to Microsoft Foundry Models services
 - Basic familiarity with Microsoft Foundry
 
-> **Current AZD baseline:** These examples were reviewed against `azd` `1.23.12`. For the AI agent workflow, use the current preview extension release and check your installed version before you begin.
+> **Current AZD baseline:** These examples were reviewed against `azd` `1.27.1`. For the AI agent workflow, use the current preview extension release and check your installed version before you begin.
 
 ## Core Integration Patterns
 

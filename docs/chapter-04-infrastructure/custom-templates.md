@@ -6,7 +6,7 @@
 - **⬅️ Previous**: [Deployment Guide](deployment-guide.md)
 - **🚀 Next Chapter**: [Chapter 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md)
 
-> Validated against `azd 1.25.6` in June 2026.
+> Validated against `azd 1.27.1` in July 2026.
 
 ## Introduction
 

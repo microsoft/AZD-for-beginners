@@ -11,7 +11,7 @@
 
 This hands-on lab guides developers through the process of taking an existing AI template and deploying it using Azure Developer CLI (AZD). You'll learn essential patterns for production AI deployments using Microsoft Foundry services.
 
-> **Validation note (2026-03-25):** This workshop was reviewed against `azd` `1.23.12`. If your local installation is older, update AZD before starting so the auth, template, and deployment workflow matches the steps below.
+> **Validation note (2026-07-13):** This workshop was reviewed against `azd` `1.27.1`. If your local installation is older, update AZD before starting so the auth, template, and deployment workflow matches the steps below.
 
 **Duration:** 2-3 hours  
 **Level:** Intermediate  

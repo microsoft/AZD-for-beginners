@@ -39,7 +39,7 @@
 
 ## 🆕 What's New in azd Today
 
-> 📌 This course is validated against **`azd 1.25.6`** (June 2026). Run `azd version` to check your build, and `azd upgrade` to get the latest.
+> 📌 This course is validated against **`azd 1.27.1`** (July 2026). Run `azd version` to check your build, and `azd upgrade` to get the latest.
 
 Azure Developer CLI has grown beyond traditional web apps and APIs. Today, azd is the single tool for deploying **any** application to Azure—including AI-powered applications and intelligent agents.
 
