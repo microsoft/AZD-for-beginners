@@ -6,57 +6,57 @@
 
 ## Yleiskatsaus
 
-Tässä luvussa käsitellään yrityskäyttöön sopivia käyttöönotto- (deployment) malleja, tietoturvan koventamista, valvontaa ja kustannusten optimointia tuotantotason AI-kuormituksille.
+Tässä luvussa käsitellään yritysvalmiita käyttöönotto-malleja, tietoturvan vahvistamista, valvontaa sekä kustannusten optimointia tuotannon tekoälytyökuormille.
 
-> Vahvistettu `azd 1.25.6` kesäkuussa 2026.
+> Vahvistettu `azd 1.27.1`:llä heinäkuussa 2026.
 
 ## Oppimistavoitteet
 
-Tämän luvun läpikäytyäsi osaat:
-- Käyttöönottaa monialueisia, vikasietoisia sovelluksia
-- Toteuttaa yritystason tietoturvamalleja
-- Määrittää kattavan valvonnan
-- Optimoida kustannuksia suuressa mittakaavassa
-- Asettaa CI/CD-putket AZD:llä
+Kun olet suorittanut tämän luvun, osaat:
+- Ottaa käyttöön monialueiset vikasietoiset sovellukset
+- Toteuttaa yritystason tietoturvamallit
+- Konfiguroida kattava valvonta
+- Optimoida kustannuksia laajassa mittakaavassa
+- Määrittää CI/CD-putket AZD:llä
 
 ---
 
 ## 📚 Oppitunnit
 
-| # | Oppitunti | Kuvaus | Aika |
+| # | Oppitunti | Kuvaus | Kesto |
 |---|--------|-------------|------|
-| 1 | [Tuotantotason AI-käytännöt](production-ai-practices.md) | Yrityksen käyttöönotto-mallit | 90 min |
+| 1 | [Tuotannon tekoälykäytännöt](production-ai-practices.md) | Yritystason käyttöönotto-mallit | 90 min |
 
 ---
 
-## 🚀 Tuotannon tarkistuslista
+## 🚀 Tuotantotarkistuslista
 
-- [ ] Monialueinen käyttöönotto vikasietoisuuden varmistamiseksi
+- [ ] Monialueinen käyttöönotto vikasietoisuuteen
 - [ ] Hallittu identiteetti todennukseen (ei avaimia)
 - [ ] Application Insights valvontaan
-- [ ] Kustannusbudjetit ja hälytykset määritelty
+- [ ] Kustannusbudjetit ja hälytykset määritetty
 - [ ] Tietoturvaskannaus käytössä
-- [ ] CI/CD-putkien integrointi
-- [ ] Toipumissuunnitelma
+- [ ] CI/CD-putken integrointi
+- [ ] Varmuuskopiointisuunnitelma
 
 ---
 
 ## 🏗️ Arkkitehtuurimallit
 
-### Malli 1: Mikropalvelu-AI
+### Malli 1: Mikroservice-pohjainen tekoäly
 
 ```mermaid
 graph LR
-    Gateway[API-väylä] --> AI[Tekoälypalvelu] --> Models[Microsoft Foundry -mallit]
-    Gateway --> Auth[Todennuspalvelu]
+    Gateway[API-väylä] --> AI[AI-palvelu] --> Models[Microsoft Foundry -mallit]
+    Gateway --> Auth[Autentikointipalvelu]
     AI --> Data[Tietovarasto]
 ```
 
-### Malli 2: Tapahtumapohjainen AI
+### Malli 2: Tapahtumapohjainen tekoäly
 
 ```mermaid
 graph LR
-    EventGrid[Tapahtuma-ruudukko] --> Functions[Funktiot] --> Pipeline[AI-putkisto]
+    EventGrid[Tapahtumaruudukko] --> Functions[Funktiot] --> Pipeline[AI-putki]
 ```
 
 ---
@@ -84,7 +84,7 @@ properties: {
 
 | Strategia | Säästöt |
 |----------|---------|
-| Skaalaa nollaan (Container Apps) | 60-80% |
+| Skaalaus nollaan (Container Apps) | 60-80% |
 | Käytä kulutusperusteisia tasoja kehityksessä | 50-70% |
 | Aikataulutettu skaalaus | 30-50% |
 | Varattu kapasiteetti | 20-40% |
@@ -100,10 +100,10 @@ az consumption budget create \
 
 ---
 
-## 📊 Valvonnan asetukset
+## 📊 Valvonnan määritys
 
 ```bash
-# Seuraa lokivirtaa
+# Suoratoista lokit
 azd monitor --logs
 
 # Tarkista Application Insights
@@ -124,11 +124,11 @@ az monitor metrics list --resource <resource-id>
 
 ---
 
-## 📖 Aiheeseen liittyvät resurssit
+## 📖 Aiheeseen liittyvät materiaalit
 
-- [AI-agenttien opas](../chapter-02-ai-development/agents.md)
+- [Tekoälyagenttien opas](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Moni-agenttiset ratkaisut](../chapter-05-multi-agent/README.md)
+- [Moniagenttiratkaisut](../chapter-05-multi-agent/README.md)
 - [Mikropalveluesimerkki](../../examples/microservices/README.md)
 
 ---

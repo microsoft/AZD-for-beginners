@@ -1,78 +1,78 @@
-# Luku 6: Käyttöönottoa edeltävä suunnittelu ja validointi
+# Luku 6: Ennen käyttöönottoa suunnittelu ja validointi
 
-**📚 Kurssi**: [AZD Aloittelijoille](../../README.md) | **⏱️ Kesto**: 1 tunti | **⭐ Vaikeustaso**: Keskitaso
+**📚 Kurssi**: [AZD aloittelijoille](../../README.md) | **⏱️ Kesto**: 1 tunti | **⭐ Vaativuus**: Keskitaso
 
 ---
 
 ## Yleiskatsaus
 
-Tässä luvussa käsitellään olennaiset suunnittelu- ja validointivaiheet ennen sovelluksen käyttöönottoa. Opit välttämään kalliita virheitä oikealla kapasiteettisuunnittelulla, SKU-valinnoilla ja esitarkistuksilla.
+Tässä luvussa käsitellään keskeiset suunnittelu- ja validointivaiheet ennen sovelluksen käyttöönottoa. Opi välttämään kalliita virheitä asianmukaisen kapasiteettisuunnittelun, SKU-valinnan ja lähtötarkastusten avulla.
 
-> Vahvistettu `azd 1.25.6`:lla kesäkuussa 2026.
+> Vahvistettu `azd 1.27.1` -versiolla heinäkuussa 2026.
 
 ## Oppimistavoitteet
 
-Suoritettuasi tämän luvun osaat:
-- Suorittaa esitarkistuksia ennen käyttöönottoa
-- Suunnitella kapasiteetin ja arvioida resurssitarpeet
-- Valita sopivat SKU:t kustannusten optimoimiseksi
-- Konfiguroida Application Insightsin seuranta varten
-- Ymmärtää tiimikoordinaation käytänteitä
+Tämän luvun suorittamisen jälkeen osaat:
+- Suorittaa lähtötarkastukset ennen käyttöönottoa
+- Suunnitella kapasiteetti ja arvioida resurssitarpeet
+- Valita sopivat SKU:t kustannusten optimointiin
+- Määrittää Application Insights -valvonnan
+- Ymmärtää tiimiyhteistyön mallit
 
 ---
 
 ## 📚 Oppitunnit
 
-| # | Lesson | Description | Time |
+| # | Oppitunti | Kuvaus | Kesto |
 |---|--------|-------------|------|
-| 1 | [Preflight Checks](preflight-checks.md) | Validate configuration before deployment | 15 min |
-| 2 | [Capacity Planning](capacity-planning.md) | Estimate resource requirements | 20 min |
-| 3 | [SKU Selection](sku-selection.md) | Choose appropriate pricing tiers | 15 min |
-| 4 | [Application Insights](application-insights.md) | Configure monitoring | 20 min |
-| 5 | [Coordination Patterns](coordination-patterns.md) | Team deployment workflows | 15 min |
+| 1 | [Lähtötarkastukset](preflight-checks.md) | Varmista kokoonpano ennen käyttöönottoa | 15 min |
+| 2 | [Kapasiteettisuunnittelu](capacity-planning.md) | Arvioi resurssitarpeet | 20 min |
+| 3 | [SKU-valinta](sku-selection.md) | Valitse sopivat hinnoittelutasot | 15 min |
+| 4 | [Application Insights](application-insights.md) | Määritä valvonta | 20 min |
+| 5 | [Yhteistyön mallit](coordination-patterns.md) | Tiimin käyttöönoton työnkulut | 15 min |
 
 ---
 
 ## 🚀 Pika-aloitus
 
 ```bash
-# Tarkista tilauksen kiintiöt
+# Tarkista tilauskuormat
 az vm list-usage --location eastus --output table
 
-# Esikatsele käyttöönottoa (ei luoda resursseja)
+# Esikatsele käyttöönotto (ei luoda resursseja)
 azd provision --preview
 
-# Tarkista Bicep-syntaksi
+# Vahvista Bicep-syntaksi
 az bicep build --file infra/main.bicep
 
-# Tarkista ympäristöasetukset
+# Tarkista ympäristön kokoonpano
 azd env get-values
 ```
 
 ---
 
-## ☑️ Ennen käyttöönottoa - tarkistuslista
+## ☑️ Ennen käyttöönottoa tarkistuslista
 
 ### Ennen `azd provision`
 
-- [ ] Kiintiö vahvistettu alueella
+- [ ] Alueen kiintiö tarkistettu
 - [ ] SKU:t valittu asianmukaisesti
-- [ ] Kustannusarvio tarkistettu
+- [ ] Kustannusarvio käyty läpi
 - [ ] Nimeämiskäytäntö yhdenmukainen
-- [ ] Suojaus/RBAC konfiguroitu
+- [ ] Turvallisuus/RBAC määritetty
 
 ### Ennen `azd deploy`
 
 - [ ] Ympäristömuuttujat asetettu
 - [ ] Salaisuudet Key Vaultissa
 - [ ] Yhteysmerkkijonot tarkistettu
-- [ ] Terveystarkastukset konfiguroitu
+- [ ] Terveystarkastukset määritetty
 
 ---
 
 ## 💰 SKU-valintaopas
 
-| Workload | Development | Production |
+| Kuorma | Kehitys | Tuotanto |
 |----------|-------------|------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
@@ -85,14 +85,14 @@ azd env get-values
 
 | Suunta | Luku |
 |-----------|---------|
-| **Edellinen** | [Luku 5: Moniagentti](../chapter-05-multi-agent/README.md) |
+| **Edellinen** | [Luku 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
 | **Seuraava** | [Luku 7: Vianmääritys](../chapter-07-troubleshooting/README.md) |
 
 ---
 
 ## 📖 Aiheeseen liittyvät resurssit
 
-- [Konfigurointiopas](../chapter-03-configuration/configuration.md)
+- [Konfigurointiohje](../chapter-03-configuration/configuration.md)
 - [Käyttöönotto-opas](../chapter-04-infrastructure/deployment-guide.md)
 - [Yleiset ongelmat](../chapter-07-troubleshooting/common-issues.md)
 

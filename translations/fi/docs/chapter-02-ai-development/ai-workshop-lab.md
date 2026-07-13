@@ -1,54 +1,54 @@
-# AI-työpaja: Tee AI-ratkaisustasi AZD-asennuskelpoinen
+# AI-työpajalaboratorio: Tehdään AI-ratkaisuistasi AZD-jakelukelpoisia
 
 **Lukuvalikko:**
 - **📚 Kurssin etusivu**: [AZD Aloittelijoille](../../README.md)
-- **📖 Nykyinen luku**: Luku 2 - AI-ensijainen kehitys
+- **📖 Nykyinen luku**: Luku 2 - AI-ensimmäinen kehitys
 - **⬅️ Edellinen**: [AI-mallin käyttöönotto](ai-model-deployment.md)
 - **➡️ Seuraava**: [Tuotannon AI:n parhaat käytännöt](production-ai-practices.md)
 - **🚀 Seuraava luku**: [Luku 3: Konfigurointi](../chapter-03-configuration/configuration.md)
 
 ## Työpajan yleiskatsaus
 
-Tämä käytännön lab-opas ohjaa kehittäjiä prosessin läpi, jossa otetaan olemassa oleva AI-mallipohja ja otetaan se käyttöön Azure Developer CLI:n (AZD) avulla. Opit olennaiset mallit tuotantokelpoisiin AI-käyttöönottoihin käyttäen Microsoft Foundry -palveluita.
+Tämä käytännön laboratorio ohjaa kehittäjiä läpi prosessin, jossa olemassa oleva AI-malli otetaan käyttöön Azure Developer CLI:n (AZD) avulla. Opit oleellisia tuotantovalmiita AI-jakelun malleja Microsoft Foundry -palveluita hyödyntäen.
 
-> **Vahvistusmuistio (2026-03-25):** Tämä työpaja tarkistettiin `azd` `1.23.12` -version mukaisesti. Jos paikallinen asennuksesi on vanhempi, päivitä AZD ennen aloittamista, jotta autentikointi-, template- ja käyttöönotto-työnkulku vastaavat alla olevia vaiheita.
+> **Vahvistusmuistutus (2026-07-13):** Tämä työpaja tarkastettiin `azd` `1.27.1` -version perusteella. Jos paikallinen asennuksesi on vanhempi, päivitä AZD ennen aloittamista, jotta todennukset, mallit ja käyttöönoton työnkulku vastaavat alla olevia ohjeita.
 
 **Kesto:** 2-3 tuntia  
 **Taso:** Keskitaso  
-**Vaatimukset:** Perustiedot Azuresta, tuntemus AI/ML-käsitteistä
+**Esivaatimukset:** Perustiedot Azuresta, AI/ML-käsitteiden tuntemus
 
 ## 🎓 Oppimistavoitteet
 
-By the end of this workshop, you will be able to:
-- ✅ Muuntaa olemassa olevan AI-sovelluksen käyttämään AZD-malleja
-- ✅ Konfiguroida Microsoft Foundry -palvelut AZD:llä
+Työpajan lopussa osaat:
+- ✅ Muuttaa olemassa olevan AI-sovelluksen AZD-mallia käyttäväksi
+- ✅ Konfiguroida Microsoft Foundry -palveluita AZD:llä
 - ✅ Toteuttaa turvallinen tunnistetietojen hallinta AI-palveluille
-- ✅ Ota käyttöön tuotantovalmiit AI-sovellukset valvonnan kanssa
-- ✅ Vianmääritys yleisille AI-käyttöönotto-ongelmille
+- ✅ Ottaa käyttöön tuotantovalmiit AI-sovellukset seurannan kanssa
+- ✅ Ratkaista yleisiä AI-käyttöönoton ongelmia
 
 ## Esivaatimukset
 
-### Vaadittavat työkalut
+### Tarvittavat työkalut
 - [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) asennettuna
 - [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) asennettuna
 - [Git](https://git-scm.com/) asennettuna
-- Koodieditori (VS Code suositeltu)
+- Koodieditori (suositus VS Code)
 
 ### Azure-resurssit
-- Azure-tilaus, jolla on osallistujan (Contributor) oikeudet
+- Azure-tilaus, jossa on osallistujan käyttöoikeudet
 - Pääsy Microsoft Foundry Models -palveluihin (tai mahdollisuus pyytää pääsyä)
 - Oikeudet resurssiryhmän luomiseen
 
-### Tietovaatimukset
+### Tietämyksen esivaatimukset
 - Perustiedot Azure-palveluista
-- Tuttu komentorivien käyttöön
-- Perustiedot AI/ML-käsitteistä (API:t, mallit, kehotteet)
+- Komentorivien käytön tuntemus
+- Peruskäsitykset AI/ML-käsitteistä (API:t, mallit, kehotteet)
 
-## Laboratorioasetukset
+## Laboratorion valmistelu
 
 ### Vaihe 1: Ympäristön valmistelu
 
-1. **Tarkista työkalujen asennukset:**
+1. **Varmista työkalujen asennukset:**
 ```bash
 # Tarkista AZD-asennus
 azd version
@@ -56,14 +56,14 @@ azd version
 # Tarkista Azure CLI
 az --version
 
-# Kirjaudu Azureen AZD-työnkulkuja varten
+# Kirjaudu Azureen AZD-työnkuluille
 azd auth login
 
-# Kirjaudu Azure CLI:hin vain, jos aiot suorittaa az-komentoja diagnostiikan aikana
+# Kirjaudu Azure CLI:hin vain, jos aiot suorittaa az-komentoja diagnostisoinnin aikana
 az login
 ```
 
-Jos työskentelet useiden tenanttien välillä tai tilauksesi ei tunnistu automaattisesti, kokeile uudelleen komennolla `azd auth login --tenant-id <tenant-id>`.
+Jos työskentelet useamman vuokralaisen välillä tai tilaus ei löydy automaattisesti, kokeile uudelleen komennolla `azd auth login --tenant-id <tenant-id>`.
 
 2. **Kloonaa työpajan repositorio:**
 ```bash
@@ -73,9 +73,9 @@ cd azure-search-openai-demo
 
 ## Moduuli 1: AZD-rakenteen ymmärtäminen AI-sovelluksille
 
-### AI-AZD-mallipohjan rakenne
+### AI-valmiin AZD-mallin rakenne
 
-Tutustu tärkeisiin tiedostoihin AI-valmiissa AZD-mallipohjassa:
+Tutustu keskeisiin tiedostoihin AI-valmiissa AZD-mallissa:
 
 ```
 azure-search-openai-demo/
@@ -92,7 +92,7 @@ azure-search-openai-demo/
 └── .azure/               # AZD environment files
 ```
 
-### **Lab-harjoitus 1.1: Tutki konfiguraatiota**
+### **Labraharkka 1.1: Tutustu konfiguraatioon**
 
 1. **Tarkastele azure.yaml-tiedostoa:**
 ```bash
@@ -100,31 +100,31 @@ cat azure.yaml
 ```
 
 **Mihin kiinnittää huomiota:**
-- AI-komponenttien palvelumäärittelyt
+- Palveluiden määritelmät AI-komponenteille
 - Ympäristömuuttujien kartoitukset
-- Isäntäkonfiguraatiot
+- Isäntäasetukset
 
-2. **Tarkista main.bicep-infrastruktuuri:**
+2. **Käy läpi main.bicep-infrastruktuuri:**
 ```bash
 cat infra/main.bicep
 ```
 
-**Tunnistettavat keskeiset AI-mallit:**
-- Microsoft Foundry Models -palvelun provisiointi
+**Tärkeät AI-mallit tunnistettavaksi:**
+- Microsoft Foundry Models -palvelun käyttöönotto
 - Azure AI Search -integraatio
-- Turvallinen avainten hallinta
+- Turvallinen avainhallinta
 - Verkon suojausasetukset
 
-### **Keskustelunaihe:** Miksi nämä mallit ovat tärkeitä AI-sovelluksille
+### **Keskustelunaihe:** Miksi nämä mallit ovat tärkeitä AI:ssa
 
-- **Palvelurisiteet**: AI-sovellukset vaativat usein useita yhteensovitettuja palveluita
-- **Suojaus**: API-avaimet ja päätepisteet tarvitsevat turvallista hallintaa
-- **Skaalautuvuus**: AI-kuormilla on erityiset skaalausvaatimukset
+- **Palveluiden riippuvuudet**: AI-sovellukset tarvitsevat usein useita yhteensovittuja palveluita
+- **Suojaus**: API-avaimet ja päätepisteet tarvitsevat turvallisen hallinnan
+- **Skaalautuvuus**: AI-kuormat vaativat erityisiä skaalausratkaisuja
 - **Kustannusten hallinta**: AI-palvelut voivat olla kalliita, jos niitä ei konfiguroida oikein
 
 ## Moduuli 2: Ota ensimmäinen AI-sovelluksesi käyttöön
 
-### Vaihe 2.1: Alusta ympäristö
+### Vaihe 2.1: Aloita ympäristö
 
 1. **Luo uusi AZD-ympäristö:**
 ```bash
@@ -142,20 +142,20 @@ azd env set AZURE_OPENAI_MODEL gpt-4.1-mini
 
 ### Vaihe 2.2: Ota infrastruktuuri ja sovellus käyttöön
 
-1. **Ota käyttöön AZD:llä:**
+1. **Käynnistä käyttöönotto AZD:llä:**
 ```bash
 azd up
 ```
 
-**Mitä tapahtuu komennon `azd up` aikana:**
-- ✅ Provisionoi Microsoft Foundry Models -palvelun
-- ✅ Luo Azure AI Search -palvelun
-- ✅ Määrittää App Servicen web-sovellukselle
-- ✅ Konfiguroi verkon ja turvallisuuden
-- ✅ Julkaisee sovelluskoodin
-- ✅ Määrittää valvonnan ja lokituksen
+**Mitä tapahtuu `azd up` -komennon aikana:**
+- ✅ Microsoft Foundry Models -palvelu provisionoidaan
+- ✅ Azure AI Search -palvelu luodaan
+- ✅ App Service web-sovellukselle muodostetaan
+- ✅ Verkko- ja suojausasetukset tehdään
+- ✅ Sovelluskoodi otetaan käyttöön
+- ✅ Seuranta ja lokitus käynnistetään
 
-2. **Valvo käyttöönoton etenemistä** ja kirjaa luotavat resurssit.
+2. **Seuraa käyttöönoton edistymistä** ja tarkkaile luotuja resursseja.
 
 ### Vaihe 2.3: Vahvista käyttöönotto
 
@@ -169,36 +169,36 @@ azd show
 azd show
 ```
 
-Avaa web-päätepiste, joka näkyy `azd show` -komennon tulosteessa.
+Avaa `azd show` -komennon antama web-päätepiste.
 
 3. **Testaa AI-toiminnallisuutta:**
    - Siirry web-sovellukseen
    - Kokeile esimerkkikyselyjä
-   - Varmista, että AI-vastaukset toimivat
+   - Vahvista AI-vastausten toimivuus
 
-### **Lab-harjoitus 2.1: Vianetsintäharjoitus**
+### **Labraharkka 2.1: Ongelmanratkaisu**
 
-**Tilanne**: Käyttöönotto onnistui, mutta AI ei vastaa.
+**Tapaus**: Käyttöönotto onnistui, mutta AI ei vastaa.
 
-**Yleisimmät tarkistettavat ongelmat:**
-1. **OpenAI API -avaimet**: Varmista, että ne on asetettu oikein
-2. **Mallin saatavuus**: Tarkista, tukeeko alueesi mallia
+**Yleiset tarkistettavat asiat:**
+1. **OpenAI API-avaimet**: Varmista, että ne ovat oikein asetettu
+2. **Mallin saatavuus**: Tarkista, tukeeko alue mallia
 3. **Verkkoyhteydet**: Varmista, että palvelut voivat kommunikoida
-4. **RBAC-oikeudet**: Varmista, että sovellus pääsee OpenAI:hin
+4. **RBAC-oikeudet**: Varmista, että sovellus pääsee OpenAI:in
 
-**Vianmäärityskomennot:**
+**Debuggauskomennot:**
 ```bash
 # Tarkista ympäristömuuttujat
 azd env get-values
 
-# Näytä käyttöönoton lokit
+# Katso käyttöönoton lokit
 az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 
-# Tarkista OpenAI:n käyttöönoton tila
+# Tarkista OpenAI-käyttöönoton tila
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
 
-## Moduuli 3: Mukauta AI-sovelluksia tarpeidesi mukaan
+## Moduuli 3: AI-sovellusten räätälöinti tarpeisiisi
 
 ### Vaihe 3.1: Muokkaa AI-konfiguraatiota
 
@@ -207,13 +207,14 @@ az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-
 # Vaihda toiseen malliin (jos saatavilla alueellasi)
 azd env set AZURE_OPENAI_MODEL gpt-4.1
 
-# Ota uudelleen käyttöön uusi konfiguraatio
+# Ota uusi kokoonpano käyttöön uudelleen
 azd deploy
 ```
 
-2. **Lisää lisä-AI-palveluita:**
+2. **Lisää muita AI-palveluita:**
 
-Muokkaa `infra/main.bicep`-tiedostoa lisätäksesi Document Intelligence:
+Muokkaa `infra/main.bicep` lisätäksesi Document Intelligence:
+
 ```bicep
 // Add to main.bicep
 resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
@@ -229,9 +230,9 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-### Vaihe 3.2: Ympäristökohtaiset konfiguraatiot
+### Vaihe 3.2: Ympäristökohtaiset asetukset
 
-**Parhaat käytännöt**: Eri asetukset kehitykseen ja tuotantoon.
+**Hyvä käytäntö**: Erilaiset asetukset kehitykseen ja tuotantoon.
 
 1. **Luo tuotantoympäristö:**
 ```bash
@@ -240,53 +241,53 @@ azd env new myai-production
 
 2. **Aseta tuotantokohtaiset parametrit:**
 ```bash
-# Tuotannossa käytetään yleensä korkeampia SKU-tasoja
+# Tuotannossa käytetään tyypillisesti korkeampia SKU-koodeja
 azd env set AZURE_OPENAI_SKU S0
 azd env set AZURE_SEARCH_SKU standard
 
-# Ota käyttöön lisätietoturvaominaisuudet
+# Ota käyttöön lisäturvaominaisuudet
 azd env set ENABLE_PRIVATE_ENDPOINTS true
 ```
 
-### **Lab-harjoitus 3.1: Kustannusoptimointi**
+### **Labraharkka 3.1: Kustannusten optimointi**
 
-**Haaste**: Konfiguroi mallipohja kustannustehokkaaseen kehitykseen.
+**Haaste**: Konfiguroi malli kustannustehokkaaseen kehitykseen.
 
 **Tehtävät:**
-1. Tunnista, mitkä SKU:t voidaan asettaa ilmais- tai perustasoille
-2. Konfiguroi ympäristömuuttujat minimoidaksesi kustannukset
+1. Tunnista mitkä SKU:t voidaan asettaa ilmaiselle/perustasolle
+2. Määritä ympäristömuuttujat minimikustannusten takaamiseksi
 3. Ota käyttöön ja vertaa kustannuksia tuotantokonfiguraatioon
 
-**Ratkaisuvihjeitä:**
-- Käytä F0 (ilmainen) -tasoa Azure AI Services -palveluissa, kun mahdollista
-- Käytä Basic-tasoa Search Service -palvelussa kehityksessä
-- Harkitse Consumption-suunnitelmaa Functionsille
+**Ratkaisuvinkit:**
+- Käytä F0 (ilmainen) tasoa Azure AI Services -palveluissa kun mahdollista
+- Käytä Basic-tasoa Search Service -kehityksessä
+- Harkitse kulutusperusteista suunnitelmaa Functions-palveluille
 
 ## Moduuli 4: Turvallisuus ja tuotannon parhaat käytännöt
 
 ### Vaihe 4.1: Turvallinen tunnistetietojen hallinta
 
-**Nykyinen haaste**: Monet AI-sovellukset kovakoodavat API-avaimia tai käyttävät epävarmaa tallennusta.
+**Nykyinen haaste**: Monet AI-sovellukset kovakoodaa API-avaimia tai käyttävät turvatonta säilytystä.
 
 **AZD-ratkaisu**: Managed Identity + Key Vault -integraatio.
 
-1. **Tarkista suojauskonfiguraatio mallipohjassasi:**
+1. **Tarkista mallisi turvallisuusasetukset:**
 ```bash
-# Etsi Key Vaultin ja hallinnoidun identiteetin määritykset
+# Etsi Key Vaultin ja Managed Identityn asetukset
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
-2. **Varmista, että Managed Identity toimii:**
+2. **Varmista Managed Identityn toimivuus:**
 ```bash
-# Tarkista, ovatko verkkosovelluksen identiteettiasetukset oikein
+# Tarkista, onko verkkosovelluksella oikea identiteettikonfiguraatio
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
 ### Vaihe 4.2: Verkon turvallisuus
 
-1. **Ota yksityiset päätepisteet käyttöön** (jos ei ole jo konfiguroitu):
+1. **Ota käyttöön yksityiset päätepisteet** (jos ei vielä asetettu):
 
-Lisää bicep-mallipohjaasi:
+Lisää se bicep-malliisi:
 ```bicep
 // Private endpoint for OpenAI
 resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
@@ -309,18 +310,18 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-### Vaihe 4.3: Valvonta ja havaittavuus
+### Vaihe 4.3: Seuranta ja havaittavuus
 
 1. **Konfiguroi Application Insights:**
 ```bash
 # Application Insights tulisi konfiguroida automaattisesti
-# Tarkista asetukset:
+# Tarkista konfiguraatio:
 az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
-2. **Ota käyttöön AI-kohtainen valvonta:**
+2. **Perusta AI-kohtainen seuranta:**
 
-Lisää mukautetut mittarit AI-toiminnoille:
+Lisää räätälöidyt mittarit AI-toiminnoille:
 ```bicep
 // In your web app configuration
 resource webApp 'Microsoft.Web/sites@2023-01-01' = {
@@ -341,49 +342,49 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-### **Lab-harjoitus 4.1: Turvallisuustarkastus**
+### **Labraharkka 4.1: Turvallisuustarkastus**
 
 **Tehtävä**: Tarkista käyttöönotto turvallisuuden parhaiden käytäntöjen mukaan.
 
 **Tarkistuslista:**
 - [ ] Ei kovakoodattuja salaisuuksia koodissa tai konfiguraatiossa
-- [ ] Managed Identity käytössä palveluiden välisessä autentikoinnissa
-- [ ] Key Vault säilyttää arkaluonteiset asetukset
-- [ ] Verkon pääsy on asianmukaisesti rajoitettu
-- [ ] Valvonta ja lokitus ovat käytössä
+- [ ] Managed Identity käytössä palveluiden väliseen todennukseen
+- [ ] Key Vault säilyttää arkaluontoiset asetukset
+- [ ] Verkon pääsy on asianmukaisesti rajattu
+- [ ] Seuranta ja lokitus ovat käytössä
 
-## Moduuli 5: Muunna oma AI-sovelluksesi
+## Moduuli 5: Oman AI-sovelluksen muuntaminen
 
-### Vaihe 5.1: Arviointilomake
+### Vaihe 5.1: Arviointityökalu
 
-**Ennen sovelluksesi muuntamista**, vastaa näihin kysymyksiin:
+**Ennen sovelluksen muuttamista**, vastaa näihin kysymyksiin:
 
-1. **Sovelluksen arkkitehtuuri:**
+1. **Sovellusarkkitehtuuri:**
    - Mitä AI-palveluita sovelluksesi käyttää?
    - Mitä laskentaresursseja se tarvitsee?
-   - Tarvitseeko se tietokannan?
+   - Tarvitaanko tietokantaa?
    - Mitkä ovat palveluiden väliset riippuvuudet?
 
 2. **Turvallisuusvaatimukset:**
-   - Millaisia arkaluonteisia tietoja sovelluksesi käsittelee?
-   - Mitä vaatimuksia noudattamiselle (compliance) sinulla on?
-   - Tarvitsetko yksityisverkon?
+   - Mitä arkaluontoisia tietoja sovelluksesi käsittelee?
+   - Mitä vaatimuksia noudatat?
+   - Tarvitsetko yksityisen verkon?
 
 3. **Skaalausvaatimukset:**
-   - Mikä on odotettu kuormituksesi?
-   - Tarvitsetko automaattisen skaalaamisen?
+   - Mikä on odotettu kuormitus?
+   - Tarvitsetko automaattisen skaalauksen?
    - Onko alueellisia vaatimuksia?
 
-### Vaihe 5.2: Luo AZD-mallipohjasi
+### Vaihe 5.2: Luo oma AZD-malli
 
-**Noudata tätä kaaviota muuntaaksesi sovelluksesi:**
+**Seuraa tätä mallia muuttaessasi sovellusta:**
 
 1. **Luo perusrakenne:**
 ```bash
 mkdir my-ai-app-azd
 cd my-ai-app-azd
 
-# Alusta AZD-mallipohja
+# Alusta AZD-malli
 azd init --template minimal
 ```
 
@@ -410,9 +411,9 @@ hooks:
     run: echo "Preparing AI models..."
 ```
 
-3. **Luo infrastruktuurimallit:**
+3. **Luo infrastruktuurin mallit:**
 
-**infra/main.bicep** - Päämalli:
+**infra/main.bicep** - päämalli:
 ```bicep
 @description('Primary location for all resources')
 param location string = resourceGroup().location
@@ -454,28 +455,28 @@ output endpoint string = openAIAccount.properties.endpoint
 output name string = openAIAccount.name
 ```
 
-### **Lab-harjoitus 5.1: Mallipohjan luontihaaste**
+### **Labraharkka 5.1: Mallin luonti**
 
-**Haaste**: Luo AZD-mallipohja asiakirjakäsittelyä tekevälle AI-sovellukselle.
+**Haaste**: Luo AZD-malli asiakirjojen prosessointiin AI-sovellukselle.
 
 **Vaatimukset:**
 - Microsoft Foundry Models sisällön analysointiin
-- Document Intelligence OCR:ää varten
-- Storage Account asiakirjalatauksia varten
+- Document Intelligence OCR-toimintoon
+- Storage Account asiakirjojen latauksia varten
 - Function App käsittelylogiikalle
-- Web-sovellus käyttöliittymää varten
+- Web-sovellus käyttäjärajapintaan
 
-**Lisäpisteitä:**
-- Lisää asianmukainen virheenkäsittely
+**Lisäpisteet:**
+- Lisää kunnollinen virheenkäsittely
 - Sisällytä kustannusarvio
-- Ota käyttöön valvontapaneelit
+- Perusta seurantapaneelit
 
-## Moduuli 6: Yleisten ongelmien vianetsintä
+## Moduuli 6: Yleisten ongelmien ratkaisu
 
-### Yleiset käyttöönotto-ongelmat
+### Yleisiä käyttöönotto-ongelmia
 
-#### Ongelma 1: OpenAI-palvelun kiintiö ylittynyt
-**Oireet:** Käyttöönotto epäonnistuu kiintiövirheen vuoksi
+#### Ongelma 1: OpenAI-palvelun käyttöoikeus ylittynyt
+**Oireet:** Käyttöönotto epäonnistuu käyttöoikeusvirheeseen
 **Ratkaisut:**
 ```bash
 # Tarkista nykyiset kiintiöt
@@ -487,7 +488,7 @@ azd up
 ```
 
 #### Ongelma 2: Malli ei ole saatavilla alueella
-**Oireet:** AI-vastaukset epäonnistuvat tai mallin käyttöönotossa esiintyy virheitä
+**Oireet:** AI-vastaukset epäonnistuvat tai mallin käyttöönotto virheilee
 **Ratkaisut:**
 ```bash
 # Tarkista mallin saatavuus alueittain
@@ -499,10 +500,10 @@ azd deploy
 ```
 
 #### Ongelma 3: Oikeusongelmat
-**Oireet:** 403 Forbidden -virheitä AI-palveluita kutsuttaessa
+**Oireet:** 403 Forbiddeen virheet AI-palveluiden kutsuissa
 **Ratkaisut:**
 ```bash
-# Tarkista roolien määritykset
+# Tarkista roolijako
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
 # Lisää puuttuvat roolit
@@ -517,42 +518,42 @@ az role assignment create \
 #### Ongelma 4: Hitaat AI-vastaukset
 **Tutkimusvaiheet:**
 1. Tarkista Application Insightsin suorituskykymittarit
-2. Tarkastele OpenAI-palvelun mittareita Azure-portaalissa
-3. Varmista verkkoyhteydet ja latenssi
+2. Käy läpi OpenAI-palvelun mittarit Azure-portaalissa
+3. Varmista verkkoyhteys ja viiveet
 
 **Ratkaisut:**
-- Toteuta välimuisti yleisille kyselyille
-- Käytä käyttötapaukseesi sopivaa OpenAI-mallia
-- Harkitse read-replikoita korkean kuorman tilanteissa
+- Ota välimuisti käyttöön yleisille kyselyille
+- Käytä käyttötarkoitukseen sopivaa OpenAI-mallia
+- Harkitse lukupeilejä korkean kuorman tilanteisiin
 
-### **Lab-harjoitus 6.1: Vianetsintähaaste**
+### **Labraharkka 6.1: Debuggaushaaste**
 
-**Tilanne**: Käyttöönotto onnistui, mutta sovellus palauttaa 500-virheitä.
+**Tapaus**: Käyttöönotto onnistui, mutta sovellus palauttaa 500-virheitä.
 
-**Vianetsintätehtävät:**
-1. Tarkista sovelluslokit
-2. Varmista palveluiden yhteydet
-3. Testaa autentikointi
+**Debuggaustehtävät:**
+1. Tarkista lokitiedostot
+2. Varmista palveluyhteydet
+3. Testaa todennus
 4. Tarkista konfiguraatio
 
 **Käytettävät työkalut:**
-- `azd show` käyttöönoton yleiskatsaukseen
-- Azure-portaali yksityiskohtaisia palvelulokeja varten
-- Application Insights sovellustelemetriaa varten
+- `azd show` käyttöönottokatsaukseen
+- Azure-portaali yksityiskohtaisiin palvelulokeihin
+- Application Insights sovellustietojen seurantaan
 
-## Moduuli 7: Valvonta ja optimointi
+## Moduuli 7: Seuranta ja optimointi
 
-### Vaihe 7.1: Ota käyttöön kattava valvonta
+### Vaihe 7.1: Perusteellinen seurannan perustaminen
 
-1. **Luo mukautetut kojelaudat:**
+1. **Luo räätälöidyt hallintapaneelit:**
 
-Siirry Azure-portaaliin ja luo kojelauta, joka sisältää:
-- OpenAI-pyyntöjen määrä ja latenssi
-- Sovelluksen virheiden prosenttiosuus
-- Resurssien käyttöaste
-- Kustannusseuranta
+Siirry Azure-portaaliin ja luo hallintapaneeli, jossa on:
+- OpenAI-kutsujen määrä ja viive
+- Sovelluksen virhetasot
+- Resurssien käyttöasteet
+- Kustannusten seuranta
 
-2. **Määritä hälytykset:**
+2. **Perusta hälytykset:**
 ```bash
 # Hälytys korkeasta virheprosentista
 az monitor metrics alert create \
@@ -563,7 +564,7 @@ az monitor metrics alert create \
   --description "Alert when error rate is high"
 ```
 
-### Vaihe 7.2: Kustannusoptimointi
+### Vaihe 7.2: Kustannusten optimointi
 
 1. **Analysoi nykyiset kustannukset:**
 ```bash
@@ -571,74 +572,75 @@ az monitor metrics alert create \
 az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 ```
 
-2. **Ota käyttöön kustannusvalvonta:**
-- Määritä budjettihälytykset
-- Käytä automaattisen skaalaamisen politiikkoja
-- Toteuta pyyntöjen välimuistitus
-- Seuraa OpenAI-tokenien käyttöä
+2. **Ota käyttöön kustannusten hallinta:**
+- Aseta budjettihälytykset
+- Käytä automaattisen skaalauspolitiikkoja
+- Toteuta pyynnön välimuisti
+- Seuraa token-kulutusta OpenAI:ssa
 
-### **Lab-harjoitus 7.1: Suorituskyvyn optimointi**
+### **Labraharkka 7.1: Suorituskyvyn optimointi**
 
-**Tehtävä**: Optimoi AI-sovelluksesi sekä suorituskyvyn että kustannusten osalta.
+**Tehtävä**: Optimoi AI-sovelluksesi suorituskyky ja kustannustehokkuus.
 
 **Parannettavat mittarit:**
-- Vähennä keskimääräistä vasteaikaa 20 %:lla
-- Vähennä kuukausikustannuksia 15 %:lla
-- Säilytä 99,9 %:n käytettävyys
+- Laske keskimääräinen vasteaika 20%:lla
+- Pienennä kuukausittaisia kustannuksia 15%:lla
+- Säilytä 99,9% käyttöaika
 
-**Kokeiltavia strategioita:**
-- Toteuta vastausten välimuisti
-- Optimoi kehotteet tokenien käytön tehokkuudeksi
-- Käytä sopivia laskenta-SKUja
-- Määritä asianmukainen automaattinen skaalaus
+**Kokeiltavat strategiat:**
+- Ota vasteen välimuisti käyttöön
+- Optimoi kehotteet tokenien tehokkuuden parantamiseksi
+- Käytä sopivia laskentatyyppejä (SKU:t)
+- Konfiguroi asianmukainen automaattinen skaalaus
 
-## Loppuhaaste: Päästä päähän -toteutus
+## Lopullinen haaste: Päätepisteestä toiseen toteutus
 
-### Haasteen tilanne
+### Haasteen tilannekuva
 
-Tehtäväsi on luoda tuotantovalmiiksi tarkoitettu AI-pohjainen asiakaspalveluchatbot, jolla on seuraavat vaatimukset:
+Sinulle on annettu tehtäväksi luoda tuotantovalmiiksi AI-tehoinen asiakaspalveluchatbot näillä vaatimuksilla:
 
 **Toiminnalliset vaatimukset:**
-- Web-käyttöliittymä asiakasvuorovaikutusta varten
-- Integraatio Microsoft Foundry Models -palveluun vastauksia varten
+- Web-käyttöliittymä asiakaskohtaamisille
+- Integrointi Microsoft Foundry Modelsin kanssa vastausten tuottamiseksi
 - Asiakirjahaku Azure AI Searchin avulla
-- Integraatio olemassa olevaan asiakastietokantaan
+- Integrointi olemassa olevaan asiakastietokantaan
 - Monikielinen tuki
 
 **Ei-toiminnalliset vaatimukset:**
 - Käsittele 1000 samanaikaista käyttäjää
-- 99,9 % käytettävyystakuu (SLA)
-- SOC 2 -yhteensopivuus
-- Kustannus alle $500/kuukausi
-- Ota käyttöön useisiin ympäristöihin (dev, staging, prod)
+- 99,9% käyttöaikatakuu (SLA)
+- SOC 2 -vaatimustenmukaisuus
+- Kustannukset alle 500 $/kuukausi
+- Käyttöönotto useisiin ympäristöihin (kehitys, testaus, tuotanto)
 
 ### Toteutusvaiheet
 
 1. **Suunnittele arkkitehtuuri**
-2. **Luo AZD-mallipohja**
+2. **Luo AZD-malli**
 3. **Toteuta turvallisuustoimenpiteet**
-4. **Ota käyttöön valvonta ja hälytykset**
-5. **Luo käyttöönotto-putket**
+4. **Perusta seuranta ja hälytykset**
+5. **Luo käyttöönotto putket**
 6. **Dokumentoi ratkaisu**
 
 ### Arviointikriteerit
 
-- ✅ **Toiminnallisuus**: Täyttääkö se kaikki vaatimukset?
+- ✅ **Toiminnallisuus**: Täyttääkö kaikki vaatimukset?
 - ✅ **Turvallisuus**: Onko parhaat käytännöt otettu käyttöön?
-- ✅ **Skaalautuvuus**: Kestääkö se kuorman?
-- ✅ **Ylläpidettävyys**: Onko koodi ja infrastruktuuri hyvin järjestetty?
-- ✅ **Kustannukset**: Pysyykö se budjetissa?
+- ✅ **Skaalautuvuus**: Pystyykö käsittelemään kuormituksen?
+- ✅ **Ylläpidettävyys**: Onko koodi ja infrastruktuuri hyvin organisoitu?
+- ✅ **Kustannukset**: Pysyykö budjetissa?
 
 ## Lisäresurssit
 
 ### Microsoftin dokumentaatio
-- [Azure Developer CLI -dokumentaatio](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Microsoft Foundry Models -palvelun dokumentaatio](https://learn.microsoft.com/azure/cognitive-services/openai/)
-- [Microsoft Foundry -dokumentaatio](https://learn.microsoft.com/azure/ai-studio/)
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Microsoft Foundry Models Service Documentation](https://learn.microsoft.com/azure/cognitive-services/openai/)
+- [Microsoft Foundry Documentation](https://learn.microsoft.com/azure/ai-studio/)
 
-### Mallipohjat
+### Malliesimerkit
 - [Microsoft Foundry Models Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
 - [OpenAI Chat App Quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart)
+
 - [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
 
 ### Yhteisön resurssit
@@ -646,36 +648,36 @@ Tehtäväsi on luoda tuotantovalmiiksi tarkoitettu AI-pohjainen asiakaspalveluch
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
 - [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
 
-## 🎓 Suoritustodistus
+## 🎓 Valmistumistodistus
 
-Onneksi olkoon! Olet suorittanut AI-työpajan laboratorion. Sinun pitäisi nyt osata:
+Onnittelut! Olet suorittanut AI-työpajan. Sinun pitäisi nyt osata:
 
 - ✅ Muuntaa olemassa olevat tekoälysovellukset AZD-malleiksi
-- ✅ Ottaa käyttöön tuotantovalmiit tekoälysovellukset
-- ✅ Toteuttaa tietoturvan parhaat käytännöt tekoälykuormille
+- ✅ Ottaa käyttöön tuotantovalmiita tekoälysovelluksia
+- ✅ Toteuttaa turvallisuuden parhaat käytännöt tekoälykuormille
 - ✅ Valvoa ja optimoida tekoälysovellusten suorituskykyä
-- ✅ Tunnistaa ja korjata yleisiä käyttöönotto-ongelmia
+- ✅ Ratkaista yleisiä käyttöönotto-ongelmia
 
-### Seuraavat askeleet
+### Seuraavat vaiheet
 1. Sovella näitä malleja omiin tekoälyprojekteihisi
-2. Lähetä malleja takaisin yhteisölle
-3. Liity Microsoft Foundryn Discordiin jatkuvaa tukea varten
-4. Tutki kehittyneitä aiheita, kuten monialueiset käyttöönotot
+2. Anna malleja takaisin yhteisölle
+3. Liity Microsoft Foundry Discordiin saadaksesi jatkuvaa tukea
+4. Tutustu edistyneisiin aiheisiin, kuten monialueisiin käyttöönottoihin
 
 ---
 
-**Workshop Feedback**: Autathan meitä parantamaan tätä työpajaa jakamalla kokemuksesi [Microsoft Foundryn Discordin #Azure-kanavalla](https://discord.gg/microsoft-azure).
+**Työpajan palaute**: Auta meitä parantamaan tätä työpajaa jakamalla kokemuksesi [Microsoft Foundry Discord #Azure -kanavalla](https://discord.gg/microsoft-azure).
 
 ---
 
 **Luvun navigointi:**
-- **📚 Kurssin etusivu**: [AZD Aloittelijoille](../../README.md)
-- **📖 Nykyinen luku**: Luku 2 - Tekoälylähtöinen kehitys
-- **⬅️ Edellinen**: [Tekoälymallin käyttöönotto](ai-model-deployment.md)
+- **📚 Kurssin kotisivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 2 - AI-Ensisijainen kehitys
+- **⬅️ Edellinen**: [AI-mallin käyttöönotto](ai-model-deployment.md)
 - **➡️ Seuraava**: [Tuotannon tekoälyn parhaat käytännöt](production-ai-practices.md)
 - **🚀 Seuraava luku**: [Luku 3: Konfigurointi](../chapter-03-configuration/configuration.md)
 
-**Tarvitsetko apua?** Liity yhteisöömme saadaksesi tukea ja keskustellaksesi AZD:stä ja tekoälyn käyttöönotosta.
+**Tarvitsetko apua?** Liity yhteisöömme saadaksesi tukea ja keskustelua AZD:stä ja tekoälyn käyttöönotosta.
 
 ---
 

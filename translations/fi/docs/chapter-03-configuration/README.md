@@ -1,22 +1,22 @@
-# Luku 3: Konfigurointi ja todennus
+# Luku 3: Konfigurointi & Todennus
 
-**📚 Kurssi**: [AZD aloittelijoille](../../README.md) | **⏱️ Kesto**: 45–60 minuuttia | **⭐ Vaikeustaso**: Keskitaso
+**📚 Kurssi**: [AZD Aloittelijoille](../../README.md) | **⏱️ Kesto**: 45-60 minuuttia | **⭐ Vaativuus**: Keskitaso
 
 ---
 
 ## Yleiskatsaus
 
-Tämä luku käsittelee ympäristön konfiguraatiota, todennusmalleja ja tietoturvan parhaita käytäntöjä Azure Developer CLI -käyttöönottoihin.
+Tämä luku käsittelee ympäristön konfigurointia, todennusmalleja ja turvallisuuden parhaita käytäntöjä Azure Developer CLI -käyttöönotoissa.
 
-> Varmennettu versiolla `azd 1.25.6` kesäkuussa 2026.
+> Varmistettu `azd 1.27.1` -versiolla heinäkuussa 2026.
 
 ## Oppimistavoitteet
 
-Tämän luvun suorittamisen jälkeen osaat:
-- Hallita AZD:n konfiguraatiohierarkiaa
-- Hallita useita ympäristöjä (dev, staging, prod)
-- Toteuttaa turvallisen todennuksen hallittujen identiteettien avulla
-- Määrittää ympäristökohtaiset asetukset
+Tässä luvussa opit:
+- Hallitsemaan AZD:n konfigurointihierarkiaa
+- Hallitsemaan useita ympäristöjä (kehitys, testaus, tuotanto)
+- Toteuttamaan turvallisen todennuksen hallittujen identiteettien avulla
+- Konfiguroimaan ympäristökohtaiset asetukset
 
 ---
 
@@ -24,12 +24,12 @@ Tämän luvun suorittamisen jälkeen osaat:
 
 | # | Oppitunti | Kuvaus | Aika |
 |---|--------|-------------|------|
-| 1 | [Konfiguraatio-opas](configuration.md) | Ympäristön määritys ja hallinta | 30 min |
-| 2 | [Todennus ja tietoturva](authsecurity.md) | Hallittujen identiteettien ja RBAC-mallien käytännöt | 30 min |
+| 1 | [Konfigurointiohje](configuration.md) | Ympäristön asennus ja hallinta | 30 min |
+| 2 | [Todennus & Turvallisuus](authsecurity.md) | Hallitut identiteetit ja RBAC-mallit | 30 min |
 
 ---
 
-## 🚀 Pika-aloitus
+## 🚀 Nopea Aloitus
 
 ```bash
 # Luo useita ympäristöjä
@@ -37,34 +37,34 @@ azd env new dev
 azd env new staging
 azd env new prod
 
-# Vaihda ympäristöä
+# Vaihda ympäristöjä
 azd env select prod
 
 # Aseta ympäristömuuttujat
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Näytä kokoonpano
+# Näytä konfiguraatio
 azd env get-values
 ```
 
 ---
 
-## 🔧 Konfiguraation hierarkia
+## 🔧 Konfigurointihierarkia
 
-AZD käyttää asetuksia tässä järjestyksessä (myöhemmät korvaavat aiemmat):
+AZD käyttää asetuksia tässä järjestyksessä (myöhemmät korvaavat aikaisemmat):
 
-1. **Oletusarvot** (sisältyvät malleihin)
-2. **azure.yaml** (projektin konfiguraatio)
+1. **Oletusarvot** (mallipohjissa)
+2. **azure.yaml** (projektin konfigurointi)
 3. **Ympäristömuuttujat** (`azd env set`)
-4. **Komentoriviliput** (`--location eastus`)
+4. **Komentorivivaihtoehdot** (`--location eastus`)
 
 ---
 
-## 🔐 Tietoturvan parhaat käytännöt
+## 🔐 Turvallisuuden parhaat käytännöt
 
 ```bash
-# Käytä hallittua identiteettiä (suositeltu)
+# Käytä hallittua identiteettiä (suositellaan)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
 # Tarkista AZD-todennuksen tila
@@ -91,10 +91,10 @@ az login
 
 ---
 
-## 📖 Aiheeseen liittyvät resurssit
+## 📖 Liittyvät Resurssit
 
-- [Tarkistukset ennen käyttöönottoa](../chapter-06-pre-deployment/README.md)
-- [Vianetsintä](../chapter-07-troubleshooting/common-issues.md)
+- [Esiasennustarkistukset](../chapter-06-pre-deployment/README.md)
+- [Vianmääritys](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

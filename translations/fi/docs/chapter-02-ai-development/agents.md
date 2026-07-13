@@ -1,70 +1,70 @@
-# AI-agentit Azure Developer CLI:llä
+# AI-agentit Azure Developer CLI:n kanssa
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD Aloittelijoille](../../README.md)
-- **📖 Current Chapter**: Chapter 2 - AI-First Development
-- **⬅️ Previous**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Next**: [AI Model Deployment](ai-model-deployment.md)
-- **🚀 Advanced**: [Multi-Agent Solutions](../../examples/retail-scenario.md)
+**Lukuvalikko:**
+- **📚 Kurssin etusivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 2 - AI-ensimmäinen kehitys
+- **⬅️ Edellinen**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ Seuraava**: [AI-mallin käyttöönotto](ai-model-deployment.md)
+- **🚀 Edistynyt**: [Moniagenttiratkaisut](../../examples/retail-scenario.md)
 
 ---
 
 ## Johdanto
 
-AI-agentit ovat autonomisia ohjelmia, jotka voivat havaita ympäristönsä, tehdä päätöksiä ja suorittaa toimia tiettyjen tavoitteiden saavuttamiseksi. Toisin kuin yksinkertaiset chatbotit, jotka vastaavat kehotteisiin, agentit voivat:
+AI-agentit ovat autonomisia ohjelmia, jotka voivat havaita ympäristönsä, tehdä päätöksiä ja toteuttaa toimia saavuttaakseen tiettyjä tavoitteita. Toisin kuin yksinkertaiset chatbotit, jotka vastaavat kehotteisiin, agentit voivat:
 
-- **Käyttää työkaluja** - Kutsua API:ita, hakea tietokantoja, suorittaa koodia
-- **Suunnitella ja päättellä** - Jakaa monimutkaiset tehtävät vaiheisiin
-- **Oppia kontekstista** - Säilyttää muistin ja mukauttaa toimintaa
-- **Tehdä yhteistyötä** - Työskennellä muiden agenttien kanssa (moni-agenttijärjestelmät)
+- **Käyttää työkaluja** - Kutsua API-rajapintoja, hakea tietokannoista, suorittaa koodi
+- **Suunnitella ja tehdä päätelmiä** - Pilkkoa monimutkaiset tehtävät vaiheisiin
+- **Oppia kontekstista** - Säilyttää muistin ja mukauttaa käyttäytymistään
+- **Tehdä yhteistyötä** - Työskennellä muiden agenttien kanssa (moniagenttijärjestelmät)
 
-Tämä opas näyttää, kuinka ottaa AI-agentit käyttöön Azureen Azure Developer CLI:llä (azd).
+Tämä opas näyttää, kuinka AI-agentit otetaan käyttöön Azureen Azure Developer CLI:n (azd) avulla.
 
-> **Vahvistusmerkintä (2026-03-25):** Tämä opas tarkistettiin `azd` `1.23.12` ja `azure.ai.agents` `0.1.18-preview` -versioita vasten. `azd ai` -kokemus on edelleen esikatseluvetoinen, joten tarkista laajennuksen ohjeet, jos asennetut liput poikkeavat.
+> **Vahvistusmerkintä (2026-07-13):** Tätä opasta on tarkistettu `azd` `1.27.1` ja `azure.ai.agents` `1.0.0-beta.5` versioita vasten. `azd ai` -kokemus on yhä esikatseluvaiheessa, joten tarkista laajennuksen ohje, jos asennetut liput eroavat.
 
 ## Oppimistavoitteet
 
-Suoritettuasi tämän oppaan:
-- Ymmärrät, mitä AI-agentit ovat ja miten ne eroavat chatboteista
-- Otat käyttöön valmiita AI-agenttipohjia AZD:n avulla
-- Määrität Foundry-agentit mukautetuille agenteille
+Tämän oppaan suorittamalla:
+- Ymmärrät mitä AI-agentit ovat ja miten ne eroavat chatteista
+- Otat käyttöön valmiita AI-agenttimallipohjia AZD:llä
+- Määrität Foundry Agents -agentteja oman agentin tarpeisiin
 - Toteutat perusagenttimalleja (työkalujen käyttö, RAG, moni-agentti)
-- Valvot ja virheenkorjaat käyttöönotettuja agentteja
+- Valvot ja virheenkorjaat käyttöönotettuja agenteja
 
 ## Oppimistulokset
 
-Oppaan suorittamisen jälkeen osaat:
-- Ota AI-agenttisovellukset käyttöön Azureen yhdellä komennolla
-- Määrittää agenttien työkaluja ja ominaisuuksia
-- Toteuttaa retrieval-augmented generation (RAG) agenttien kanssa
-- Suunnitella moni-agenttiarkkitehtuurin monimutkaisille työprosesseille
-- Ratkaista yleisiä agenttien käyttöönottoon liittyviä ongelmia
+Suoritettuasi opit:
+- Ottamaan AI-agenttisovelluksia käyttöön Azureen yhdellä komennolla
+- Määrittämään agenttien työkalut ja toiminnot
+- Toteuttamaan hakua tukevan generoinnin (RAG) agenteilla
+- Suunnittelemaan moni-agenttiarkkitehtuurit monimutkaisiin työnkulkuihin
+- Ratkaisemaan yleisimpiä agenttikäyttöönoton ongelmia
 
 ---
 
-## 🤖 Mikä tekee agentista erilaisen kuin chatbot?
+## 🤖 Mikä erottaa agentin chatbotista?
 
 | Ominaisuus | Chatbot | AI-agentti |
 |---------|---------|----------|
-| **Käyttäytyminen** | Vastaa kehotteisiin | Suorittaa autonomisia toimia |
-| **Työkalut** | Ei käytössä | Voi kutsua API:ita, hakea ja suorittaa koodia |
-| **Muisti** | Vain istuntopohjainen | Pysyvä muisti istuntojen välillä |
+| **Käyttäytyminen** | Vastaa kehotteisiin | Tekee autonomisia toimia |
+| **Työkalut** | Ei käytössä | Voi kutsua API-rajapintoja, hakea ja suorittaa koodia |
+| **Muisti** | Istuntopohjainen | Pysyvä muisti istuntojen välillä |
 | **Suunnittelu** | Yksittäinen vastaus | Monivaiheinen päättely |
-| **Yhteistyö** | Yksittäinen toimija | Voi työskennellä muiden agenttien kanssa |
+| **Yhteistyö** | Yksi yksikkö | Voi työskennellä muiden agenttien kanssa |
 
-### Yksinkertainen vertaus
+### Yksinkertainen vertauskuva
 
-- **Chatbot** = Avulias henkilö vastaamassa kysymyksiin neuvontapisteessä
-- **AI Agent** = Henkilökohtainen avustaja, joka voi soittaa, varata aikoja ja suorittaa tehtäviä puolestasi
+- **Chatbot** = Avulias henkilö vastaamassa kysymyksiin infopisteellä
+- **AI-agentti** = Henkilökohtainen avustaja, joka voi soittaa, varata aikatauluja ja hoitaa tehtäviä puolestasi
 
 ---
 
-## 🚀 Pika-aloitus: Ota ensimmäinen agenttisi käyttöön
+## 🚀 Nopeasti alkuun: Ota ensimmäinen agentti käyttöön
 
-### Vaihtoehto 1: Foundry Agents -malli (suositeltu)
+### Vaihtoehto 1: Foundry Agents -mallipohja (suositeltu)
 
 ```bash
-# Alusta tekoälyagenttien malli
+# Alusta AI-agenttipohja
 azd init --template get-started-with-ai-agents
 
 # Ota käyttöön Azureen
@@ -72,16 +72,16 @@ azd up
 ```
 
 **Mitä otetaan käyttöön:**
-- ✅ Foundry-agentit
+- ✅ Foundry Agents
 - ✅ Microsoft Foundry -mallit (gpt-4.1)
 - ✅ Azure AI Search (RAG:ia varten)
 - ✅ Azure Container Apps (verkkokäyttöliittymä)
 - ✅ Application Insights (valvonta)
 
-**Aika:** ~15–20 minuuttia
-**Kustannus:** ~100–150 $/kk (kehitys)
+**Aika:** ~15-20 minuuttia
+**Kustannus:** ~$100-150/kuukausi (kehitys)
 
-### Vaihtoehto 2: OpenAI Agent with Prompty
+### Vaihtoehto 2: OpenAI-agentti Promptyllä
 
 ```bash
 # Alusta Prompty-pohjainen agenttipohja
@@ -92,18 +92,18 @@ azd up
 ```
 
 **Mitä otetaan käyttöön:**
-- ✅ Azure Functions (serverless-agentin ajaminen)
+- ✅ Azure Functions (palvelimeton agenttien suoritus)
 - ✅ Microsoft Foundry -mallit
 - ✅ Prompty-konfiguraatiotiedostot
-- ✅ Esimerkkiesimerkki agentin toteutuksesta
+- ✅ Näyteagentin toteutus
 
-**Aika:** ~10–15 minuuttia
-**Kustannus:** ~50–100 $/kk (kehitys)
+**Aika:** ~10-15 minuuttia
+**Kustannus:** ~$50-100/kuukausi (kehitys)
 
-### Vaihtoehto 3: RAG Chat Agent
+### Vaihtoehto 3: RAG-chatagentti
 
 ```bash
-# Alusta RAG-keskustelupohja
+# Alusta RAG-keskustelumalli
 azd init --template azure-search-openai-demo
 
 # Ota käyttöön Azureen
@@ -112,22 +112,22 @@ azd up
 
 **Mitä otetaan käyttöön:**
 - ✅ Microsoft Foundry -mallit
-- ✅ Azure AI Search esimerkkidatan kanssa
-- ✅ Dokumenttien käsittelyputki
-- ✅ Chattikäyttöliittymä lähdeviitteillä
+- ✅ Azure AI Search näyteaineistolla
+- ✅ Asiakirjojen käsittelyputki
+- ✅ Chat-käyttöliittymä lähdeviitteillä
 
-**Aika:** ~15–25 minuuttia
-**Kustannus:** ~80–150 $/kk (kehitys)
+**Aika:** ~15-25 minuuttia
+**Kustannus:** ~$80-150/kuukausi (kehitys)
 
-### Vaihtoehto 4: AZD AI Agent Init (manifesti- tai mallipohjainen esikatselu)
+### Vaihtoehto 4: AZD AI Agent Init (Manifesti- tai mallipohjainen esikatselu)
 
-Jos sinulla on agentin manifestitiedosto, voit käyttää `azd ai` -komentoa Foundry Agent Service -projektin luonnin aloittamiseen suoraan. Uudemmat esikatseluversiot ovat myös lisänneet mallipohjaista alustuksen tukea, joten tarkka kehotteiden kulku voi vaihdella asennetun laajennusversion mukaan.
+Jos sinulla on agentin manifestitiedosto, voit käyttää `azd ai` -komentoa suoraan Foundry Agent Service -projektin luomiseen. Viimeaikaiset esikatseluversiot tukevat myös mallipohjaista aloitusta, joten tarkka kehotteen kulku voi hieman vaihdella asennetun laajennuksen version mukaan.
 
 ```bash
-# Asenna AI-agenttien laajennus
+# Asenna tekoälyagenttien laajennus
 azd extension install azure.ai.agents
 
-# Valinnainen: tarkista asennettu esikatseluversio
+# Valinnainen: varmista asennettu esikatseluversio
 azd extension show azure.ai.agents
 
 # Alusta agenttimanifestista
@@ -136,28 +136,28 @@ azd ai agent init -m agent-manifest.yaml
 # Ota käyttöön Azureen
 azd up
 
-# Testaa käyttöön otettu agentti (näyttää viiveen ja ensimmäisen tavun saapumisajan)
+# Testaa käyttöönotettu agentti (näyttää viiveen + ensimmäisen tavun saapumisajan)
 azd ai agent invoke
 ```
 
 **Milloin käyttää `azd ai agent init` vs `azd init --template`:**
 
-| Lähestymistapa | Paras käyttötarkoitus | Miten se toimii |
+| Lähestymistapa | Paras käyttö | Miten toimii |
 |----------|----------|------|
-| `azd init --template` | Aloittaminen toimivasta esimerkkisovelluksesta | Kloonaa täydellisen mallirepon, joka sisältää koodin + infrastruktuurin |
-| `azd ai agent init -m` | Rakentaminen omasta agenttimanifestistasi | Luo projektirakenteen agenttisi määritelmän pohjalta |
+| `azd init --template` | Aloittaessa toimivasta näytösovelluksesta | Kloonaa kokonaisen mallipohjarepositorion, sisältäen koodin ja infrastruktuurin |
+| `azd ai agent init -m` | Rakentaessa omasta agentin manifestista | Luo projektirakenteen agentin määritelmän pohjalta |
 
-> **Vinkki:** Käytä `azd init --template` -komentoa oppimiseen (vaihtoehdot 1–3 yllä). Käytä `azd ai agent init` -komentoa, kun rakennat tuotantoagentteja omilla manifesteillasi.
+> **Vinkki:** Käytä `azd init --template` oppimiseen (vaihtoehdot 1-3 yllä). Käytä `azd ai agent init` tuotantoagenttien rakentamiseen omilla manifesteillasi.
 
-Kun suoritat `azd up`, sama laajennus opastaa agentin elinkaaren läpi: `azd ai agent invoke` testaukseen, `azd ai agent eval generate` ja `azd ai agent optimize` laadun mittaamiseen ja parantamiseen, ja `azd ai agent delete` siivoukseen. Katso [AZD AI CLI -komennot](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) täydellisestä viitteestä.
+Komennon `azd up` jälkeen sama laajennus ohjaa sinut agentin elinkaaren läpi: `azd ai agent invoke` testaukseen, `azd ai agent eval generate` ja `azd ai agent optimize` laadun mittaukseen ja parantamiseen, sekä `azd ai agent delete` siivoukseen. Katso [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) täydellinen viite.
 
 ---
 
-## 🏗️ Agentin arkkitehtuurimallit
+## 🏗️ Agenttien arkkitehtuurimallit
 
 ### Malli 1: Yksittäinen agentti työkaluilla
 
-Yksinkertaisin agenttimalli — yksi agentti, joka voi käyttää useita työkaluja.
+Yksinkertaisin agenttimalli – yksi agentti, joka voi käyttää useita työkaluja.
 
 ```mermaid
 graph TD
@@ -167,65 +167,65 @@ graph TD
     Agent --> API[API-työkalu]
 ```
 
-**Paras käyttötarkoitus:**
-- Asiakaspalvelubotit
-- Tutkimusassistentit
-- Data-analyysiedustajat
+**Paras käyttö:**
+- Asiakaspalvelurobotit
+- Tutkimusapulaiset
+- Data-analyysin agentit
 
 **AZD-malli:** `azure-search-openai-demo`
 
-### Malli 2: RAG-agentti (Retrieval-Augmented Generation)
+### Malli 2: RAG-agentti (hakuavusteinen generointi)
 
-Agentti, joka hakee olennaiset dokumentit ennen vastausten luomista.
+Agentti, joka hakee olennaisia asiakirjoja ennen vastauksen generointia.
 
 ```mermaid
 graph TD
     Query[Käyttäjän kysely] --> RAG[RAG-agentti]
     RAG --> Vector[Vektorihaku]
     RAG --> LLM[LLM<br/>gpt-4.1]
-    Vector -- Asiakirjat --> LLM
-    LLM --> Response[Vastaus lähdeviitteillä]
+    Vector -- Documents --> LLM
+    LLM --> Response[Vastaus viitteineen]
 ```
 
-**Paras käyttötarkoitus:**
-- Yrityksen tietopankit
-- Dokumentti Q&A -järjestelmät
-- Compliance- ja oikeustutkimus
+**Paras käyttö:**
+- Yrityksen tietokannat
+- Asiakirjakyselyjärjestelmät
+- Säädösten ja oikeudellisen tutkimuksen apu
 
 **AZD-malli:** `azure-search-openai-demo`
 
 ### Malli 3: Moni-agenttijärjestelmä
 
-Useita erikoistuneita agentteja, jotka työskentelevät yhdessä monimutkaisissa tehtävissä.
+Useita erikoistuneita agentteja työskentelemässä yhdessä monimutkaisissa tehtävissä.
 
 ```mermaid
 graph TD
-    Orchestrator[Orkestroija-agentti] --> Research[Tutkimusagentti<br/>gpt-4.1]
-    Orchestrator --> Writer[Kirjoittaja-agentti<br/>gpt-4.1-mini]
-    Orchestrator --> Reviewer[Arvioija-agentti<br/>gpt-4.1]
+    Orchestrator[Orkestrointiedustaja] --> Research[Tutkimusedustaja<br/>gpt-4.1]
+    Orchestrator --> Writer[Kirjoitusedustaja<br/>gpt-4.1-mini]
+    Orchestrator --> Reviewer[Arvioijakedustaja<br/>gpt-4.1]
 ```
 
-**Paras käyttötarkoitus:**
+**Paras käyttö:**
 - Monimutkainen sisällöntuotanto
 - Monivaiheiset työnkulut
-- Tehtävät, jotka vaativat eri asiantuntemusta
+- Tehtävät, jotka vaativat eri tietotaitoja
 
-**Lisätietoja:** [Multi-Agent Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md)
+**Lue lisää:** [Moniagenttien koordinointimallit](../chapter-06-pre-deployment/coordination-patterns.md)
 
 ---
 
 ## ⚙️ Agenttien työkalujen konfigurointi
 
-Agentit muuttuvat tehokkaiksi, kun ne osaavat käyttää työkaluja. Tässä, miten yleisimmät työkalut konfiguroidaan:
+Agentit saavat voimaa, kun ne voivat käyttää työkaluja. Näin konfiguroit yleiset työkalut:
 
-### Työkalujen konfigurointi Foundry-agentteihin
+### Työkalun konfigurointi Foundry Agentsissa
 
 ```python
 # agent_config.py
 from azure.ai.projects import AIProjectClient
 from azure.ai.projects.models import FunctionTool, CodeInterpreterTool
 
-# Määrittele mukautetut työkalut
+# Määritä mukautetut työkalut
 search_tool = FunctionTool(
     name="search_knowledge_base",
     description="Search the company knowledge base for relevant documents",
@@ -250,7 +250,7 @@ agent = project_client.agents.create_agent(
 )
 ```
 
-### Ympäristön määritys
+### Ympäristöasetukset
 
 ```bash
 # Määritä agenttikohtaiset ympäristömuuttujat
@@ -267,9 +267,9 @@ azd deploy
 
 ## 📊 Agenttien valvonta
 
-### Application Insights -integraatio
+### Application Insights -integrointi
 
-Kaikki AZD-agenttipohjat sisältävät Application Insightsin valvontaa varten:
+Kaikki AZD-agenttimallit sisältävät Application Insightsin valvontaan:
 
 ```bash
 # Avaa valvontapaneeli
@@ -286,20 +286,20 @@ azd monitor --live
 
 | Mittari | Kuvaus | Tavoite |
 |--------|-------------|--------|
-| Vasteviive | Aika vastauksen luomiseen | < 5 sekuntia |
-| Token-käyttö | Tokenit per pyyntö | Seuraa kustannuksia |
-| Työkalukutsujen onnistumisprosentti | % onnistuneista työkalukutsuista | > 95% |
-| Virheprosentti | Epäonnistuneet agenttipyynnöt | < 1% |
-| Käyttäjätyytyväisyys | Palautepisteytykset | > 4.0/5.0 |
+| Vastausviive | Aika vastauksen generoimiseen | < 5 sekuntia |
+| Tokenien käyttö | Tokenien määrä per pyyntö | Seuraa kustannuksia |
+| Työkalujen suorituksen onnistumisprosentti | % onnistuneista työkalukutsuista | > 95% |
+| Virheiden määrä | Epäonnistuneet agenttipyynnöt | < 1% |
+| Käyttäjätyytyväisyys | Palautearvioinnit | > 4.0/5.0 |
 
-### Mukautettu lokitus agenteille
+### Räätälöity lokitus agenteille
 
 ```python
 import os
 from azure.monitor.opentelemetry import configure_azure_monitor
 from opentelemetry import trace
 
-# Määritä Azure Monitor OpenTelemetryn avulla
+# Määritä Azure Monitor OpenTelemetrillä
 configure_azure_monitor(
     connection_string=os.environ["APPLICATIONINSIGHTS_CONNECTION_STRING"]
 )
@@ -316,13 +316,13 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
         })
 ```
 
-> **Huom:** Asenna vaaditut paketit: `pip install azure-monitor-opentelemetry opentelemetry`
+> **Huom:** Asenna tarvittavat paketit: `pip install azure-monitor-opentelemetry opentelemetry`
 
 ---
 
-## 💰 Kustannusseikat
+## 💰 Kustannusnäkökulmat
 
-### Arvioidut kuukausikustannukset mallin mukaan
+### Arvioidut kuukausikustannukset mallikohtaisesti
 
 | Malli | Kehitysympäristö | Tuotanto |
 |---------|-----------------|------------|
@@ -331,14 +331,14 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
 | Moni-agentti (2-3 agenttia) | $150-300 | $500-1,500 |
 | Yrityksen moni-agentti | $300-500 | $1,500-5,000+ |
 
-### Kustannusten optimointivinkit
+### Kustannusten optimoinnin vinkit
 
-1. **Käytä gpt-4.1-mini -mallia yksinkertaisiin tehtäviin**
+1. **Käytä gpt-4.1-miniä yksinkertaisiin tehtäviin**
    ```bash
    azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
    ```
 
-2. **Ota välimuistitus käyttöön toistuville hauille**
+2. **Ota käyttöön välimuisti toistuviin kyselyihin**
    ```python
    from functools import lru_cache
    
@@ -347,19 +347,19 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
        return agent.run(query_hash)
    ```
 
-3. **Aseta token-rajoitukset per suoritus**
+3. **Aseta token-rajoitukset suoritukselle**
    ```python
-   # Aseta max_completion_tokens agentin suorittamisen yhteydessä, ei luomisvaiheessa
+   # Aseta max_completion_tokens agentin suorittamisen aikana, ei luomisen yhteydessä
    run = project_client.agents.create_run(
        thread_id=thread.id,
        agent_id=agent.id,
-       max_completion_tokens=1000  # Rajoita vastausten pituutta
+       max_completion_tokens=1000  # Rajoita vastausmäärä
    )
    ```
 
-4. **Skaalaa nollaan, kun ei ole käytössä**
+4. **Skaalaa nollaan, kun agenttia ei käytetä**
    ```bash
-   # Container Apps skaalautuvat automaattisesti nollaan
+   # Container-sovellukset skaalautuvat automaattisesti nollaan
    azd env set MIN_REPLICAS "0"
    ```
 
@@ -367,7 +367,7 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
 
 ## 🔧 Agenttien vianmääritys
 
-### Yleisimmät ongelmat ja ratkaisut
+### Yleiset ongelmat ja ratkaisut
 
 <details>
 <summary><strong>❌ Agentti ei vastaa työkalukutsuihin</strong></summary>
@@ -376,7 +376,7 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
 # Tarkista, että työkalut on rekisteröity oikein
 azd show
 
-# Varmista OpenAI:n käyttöönotto
+# Vahvista OpenAI:n käyttöönotto
 az cognitiveservices account deployment list \
   --name $AZURE_OPENAI_NAME \
   --resource-group $RG_NAME
@@ -385,17 +385,17 @@ az cognitiveservices account deployment list \
 azd monitor --logs
 ```
 
-**Yleisiä syitä:**
-- Työkalutoiminnon allekirjoitus ei täsmää
-- Puuttuvat vaaditut käyttöoikeudet
-- API-päätepiste ei ole saavutettavissa
+**Yleisimmät syyt:**
+- Työkalufunktion allekirjoitus ei vastaa
+- Puuttuvat tarvittavat käyttöoikeudet
+- API-päätepistettä ei ole saavutettavissa
 </details>
 
 <details>
 <summary><strong>❌ Korkea viive agentin vastauksissa</strong></summary>
 
 ```bash
-# Tarkista Application Insights mahdollisten pullonkaulojen varalta
+# Tarkista Application Insights pullonkaulojen varalta
 azd monitor --live
 
 # Harkitse nopeamman mallin käyttämistä
@@ -403,14 +403,14 @@ azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
 azd deploy
 ```
 
-**Optimointivinkkejä:**
+**Optimointivinkit:**
 - Käytä suoratoistovastauksia
-- Ota vastausten välimuisti käyttöön
-- Pienennä kontekstin ikkunakokoa
+- Toteuta vastausten välimuistitus
+- Pienennä kontekstin ikkunan kokoa
 </details>
 
 <details>
-<summary><strong>❌ Agentti palauttaa virheellistä tai keksittyä tietoa</strong></summary>
+<summary><strong>❌ Agentti palauttaa virheellistä tai kuviteltua tietoa</strong></summary>
 
 ```python
 # Paranna paremmilla järjestelmäkehotteilla
@@ -422,20 +422,20 @@ You are a helpful assistant. IMPORTANT:
 - Never make up information
 """
 
-# Lisää hakutoiminto pohjauksen varten
+# Lisää haku perustaksi
 agent = project_client.agents.create_agent(
     model="gpt-4.1",
     instructions=instructions,
-    tools=[FileSearchTool()]  # Perusta vastaukset dokumentteihin
+    tools=[FileSearchTool()]  # Perusta vastaukset asiakirjoihin
 )
 ```
 </details>
 
 <details>
-<summary><strong>❌ Token-rajojen ylitysvirheet</strong></summary>
+<summary><strong>❌ Token-rajan ylitykset</strong></summary>
 
 ```python
-# Toteuta konteksti-ikkunan hallinta
+# Toteuta kontekstin ikkunanhallinta
 def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
     """Keep only recent messages within token limit."""
     import tiktoken
@@ -468,13 +468,13 @@ azd init --template get-started-with-ai-agents
 
 # Vaihe 2: Kirjaudu Azureen
 azd auth login
-# Jos työskentelet useiden vuokraajien kanssa, lisää --tenant-id <tenant-id>
+# Jos työskentelet eri vuokralaisten välillä, lisää --tenant-id <tenant-id>
 
 # Vaihe 3: Ota käyttöön
 azd up
 
 # Vaihe 4: Testaa agentti
-# Odotettu tuloste käyttöönoton jälkeen:
+# Odotettu tulos käyttöönoton jälkeen:
 #   Käyttöönotto valmis!
 #   Päätepiste: https://<app-name>.<region>.azurecontainerapps.io
 # Avaa tulosteessa näkyvä URL-osoite ja kokeile esittää kysymys
@@ -486,21 +486,21 @@ azd monitor --overview
 azd down --force --purge
 ```
 
-**Onnistumiskriteerit:**
+**Onnistumisen kriteerit:**
 - [ ] Agentti vastaa kysymyksiin
-- [ ] Pääsee valvontapaneeliin komennolla `azd monitor`
-- [ ] Resurssit siivottiin onnistuneesti
+- [ ] Pääsee valvontapaneeliin `azd monitor` -komennolla
+- [ ] Resurssit siivottu onnistuneesti
 
-### Harjoitus 2: Lisää mukautettu työkalu (30 minuuttia)
+### Harjoitus 2: Lisää oma työkalu (30 minuuttia)
 
-**Tavoite:** Laajenna agenttia mukautetulla työkalulla
+**Tavoite:** Laajenna agenttia omalla työkalulla
 
-1. Ota agenttipohja käyttöön:
+1. Ota agenttimalli käyttöön:
    ```bash
    azd init --template get-started-with-ai-agents
    azd up
    ```
-2. Luo uusi työkalufunktio agenttikoodissasi:
+2. Luo uusi työkalufunktio agenttikoodiin:
    ```python
    def get_weather(location: str) -> str:
        """Get current weather for a location."""
@@ -529,86 +529,86 @@ azd down --force --purge
        tools=[weather_tool]
    )
    ```
-4. Ota käyttöön uudelleen ja testaa:
+4. Ota uudelleen käyttöön ja testaa:
    ```bash
    azd deploy
    # Kysy: "Millainen sää on Seattlessa?"
-   # Odotettu: Agentti kutsuu get_weather("Seattle") ja palauttaa säätiedot
+   # Odotettu: Agentti kutsuu get_weather("Seattle") ja palauttaa sää tiedot
    ```
 
-**Onnistumiskriteerit:**
-- [ ] Agentti tunnistaa sääaiheiset kyselyt
-- [ ] Työkalua kutsutaan oikein
+**Onnistumisen kriteerit:**
+- [ ] Agentti tunnistaa säähän liittyvät kyselyt
+- [ ] Työkalu kutsutaan oikein
 - [ ] Vastaus sisältää säätiedot
 
-### Harjoitus 3: RAG-agentin rakentaminen (45 minuuttia)
+### Harjoitus 3: Rakenna RAG-agentti (45 minuuttia)
 
-**Tavoite:** Luo agentti, joka vastaa kysymyksiin dokumenteistasi
+**Tavoite:** Luo agentti, joka vastaa kysymyksiin asiakirjoistasi
 
 ```bash
-# Vaihe 1: Ota RAG-pohja käyttöön
+# Vaihe 1: Ota RAG-malli käyttöön
 azd init --template azure-search-openai-demo
 azd up
 
 # Vaihe 2: Lataa asiakirjasi
-# Aseta PDF/TXT-tiedostot data/-hakemistoon, sitten suorita:
+# Aseta PDF/TXT-tiedostot data/ -hakemistoon, sitten suorita:
 python scripts/prepdocs.py
 
 # Vaihe 3: Testaa toimialakohtaisilla kysymyksillä
-# Avaa web-sovelluksen URL azd up -komennon tulosteesta
+# Avaa verkkosovelluksen URL osoite azd up -tulosteesta
 # Kysy kysymyksiä ladatuista asiakirjoistasi
-# Vastauksissa tulisi olla lähdeviittauksia, esimerkiksi [doc.pdf]
+# Vastauksissa tulisi olla lähdeviitteitä, kuten [doc.pdf]
 ```
 
-**Onnistumiskriteerit:**
-- [ ] Agentti vastaa ladattujen dokumenttien perusteella
-- [ ] Vastauksissa on lähdeviitteet
-- [ ] Ei keksintöjä niihin kysymyksiin, jotka ovat rajauksen ulkopuolella
+**Onnistumisen kriteerit:**
+- [ ] Agentti vastaa ladattujen asiakirjojen perusteella
+- [ ] Vastaukset sisältävät lähdeviitteet
+- [ ] Ei virheellisiä vastauksia rajojen ulkopuolisissa kysymyksissä
 
 ---
 
 ## 📚 Seuraavat askeleet
 
-Nyt kun ymmärrät AI-agentit, tutustu näihin edistyneempiin aiheisiin:
+Nyt kun ymmärrät AI-agentit, tutustu näihin edistyneisiin aiheisiin:
 
 | Aihe | Kuvaus | Linkki |
 |-------|-------------|------|
-| **Multi-Agent Systems** | Rakenna järjestelmiä, joissa on useita yhteistyötä tekeviä agentteja | [Retail Multi-Agent Example](../../examples/retail-scenario.md) |
-| **Coordination Patterns** | Opi orkestrointi- ja viestintämalleja | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) |
-| **Production Deployment** | Tuotantovalmiit agenttien käyttöönotot | [Production AI Practices](../chapter-08-production/production-ai-practices.md) |
-| **Agent Evaluation** | Testaa ja arvioi agentin suorituskykyä | [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) |
-| **AI Workshop Lab** | Käytännön harjoitus: tee AI-ratkaisustasi AZD-valmis | [AI Workshop Lab](ai-workshop-lab.md) |
+| **Moni-agenttijärjestelmät** | Rakenna järjestelmiä, joissa useat agentit tekevät yhteistyötä | [Retail Multi-Agent Esimerkki](../../examples/retail-scenario.md) |
+| **Koordinointimallit** | Opettele orkestrointi- ja viestintämallit | [Koordinointimallit](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **Tuotantokäyttöönotto** | Yrityskäyttövalmiiden agenttien käyttöönotto | [Tuotanto AI-käytännöt](../chapter-08-production/production-ai-practices.md) |
+| **Agentin arviointi** | Testaa ja arvioi agenttien suorituskykyä | [AI-vianmääritys](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **AI-työpajan labra** | Käytännön harjoitus: Tee AI-ratkaisustasi AZD-valmis | [AI Workshop Lab](ai-workshop-lab.md) |
 
 ---
 
-## 📖 Lisäresurssit
+## 📖 Lisää resursseja
 
-### Virallinen dokumentaatio
+### Viralliset dokumentit
 - [Microsoft Foundry Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
-- [Microsoft Foundry Agent Service Quickstart](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
+- [Microsoft Foundry Agent Service Pikakirja](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
 - [Semantic Kernel Agent Framework](https://learn.microsoft.com/semantic-kernel/)
 
 ### AZD-mallit agenteille
-- [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents)
+- [Aloita AI-agenttien kanssa](https://github.com/Azure-Samples/get-started-with-ai-agents)
 - [Agent OpenAI Python Prompty](https://github.com/Azure-Samples/agent-openai-python-prompty)
 - [Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-### Yhteisöresurssit
-- [Awesome AZD - Agent Templates](https://azure.github.io/awesome-azd/?tags=ai-agents)
+### Yhteisön resurssit
+- [Awesome AZD - Agenttimallit](https://azure.github.io/awesome-azd/?tags=ai-agents)
 - [Azure AI Discord](https://discord.gg/microsoft-azure)
 - [Microsoft Foundry Discord](https://discord.gg/nTYy5BXMWG)
 
-### Agenttitaidot editorillesi
-- [**Microsoft Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Asenna uudelleenkäytettäviä AI-agenttien taitoja Azure-kehitystä varten GitHub Copilotiin, Cursoriin tai mihin tahansa tuettuun agenttiin. Sisältää taidot [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [deployment](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy) ja [diagnostics](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
+### Agenttien taidot editorillesi
+- [**Microsoft Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) – Asenna uudelleenkäytettäviä AI-agenttien taitoja Azure-kehitykseen GitHub Copilotille, Cursorille tai mille tahansa tuetulle agentille. Sisältää taidot [Azure AI:lle](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundrylle](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [käyttöönottoon](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy) ja [diagnostiikkaan](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
 
 ---
 
-**Navigaatio**
+**Navigointi**
 - **Edellinen oppitunti**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **Seuraava oppitunti**: [AI Model Deployment](ai-model-deployment.md)
+- **Seuraava oppitunti**: [AI-mallin käyttöönotto](ai-model-deployment.md)
 
 ---
 

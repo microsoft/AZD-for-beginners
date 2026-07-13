@@ -1,33 +1,33 @@
 # Oman azd-mallin luominen
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD Aloittelijoille](../../README.md)
-- **📖 Current Chapter**: Luku 4 - Infrastruktuuri koodina & Deployment
-- **⬅️ Previous**: [Deployment-opas](deployment-guide.md)
-- **🚀 Next Chapter**: [Luku 5: Moni-agenttiset ratkaisut](../chapter-05-multi-agent/README.md)
+**Luvun navigointi:**
+- **📚 Kurssin etusivu**: [AZD aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 4 - Infrastruktuuri koodina & käyttöönotto
+- **⬅️ Edellinen**: [Käyttöönotto-opas](deployment-guide.md)
+- **🚀 Seuraava luku**: [Luku 5: Moni-agenttiratkaisut](../chapter-05-multi-agent/README.md)
 
-> Vahvistettu `azd 1.25.6` kesäkuussa 2026.
+> Vahvistettu `azd 1.27.1` -versiolla heinäkuussa 2026.
 
 ## Johdanto
 
-Tähän mennessä olet *kuluttanut* malleja komennolla `azd init --template <name>`. Kun tiimilläsi on kuitenkin projektirakenne, josta pidätte — esimerkiksi Container App, Cosmos DB ja oikea seuranta — haluat todennäköisesti muuttaa sen uudelleenkäytettäväksi malliksi. Malli on käytännössä Git-repositorio, jolla on ennakoitava rakenne, jonka azd osaa lukea. Tämä oppitunti näyttää, miten rakennat sellaisen alusta alkaen, testaat sitä ja (valinnaisesti) julkaiset sen yhteisön galleriaan.
+Olet tähän mennessä *käyttänyt* malleja komennolla `azd init --template <nimi>`. Mutta kun sinulla on projektirakenne, josta tiimisi pitää—esimerkiksi Container App Cosmos DB:llä ja sopivalla valvonnalla—haluat muuttaa sen omaksi uudelleenkäytettäväksi malliksi. Malli on vain Git-repositorio, jolla on ennustettava rakenne, jonka azd osaa lukea. Tässä oppitunnissa näytetään, miten sellainen rakennetaan alusta lähtien, testataan ja (valinnaisesti) julkaistaan yhteisön galleriaan.
 
 ## Oppimistavoitteet
 
-Oppitunnin lopussa osaat:
-- Ymmärtää, mikä tekee kansiosta "azd-mallin"
-- Tietää tarvittavat tiedostot ja kansiorakenteen
-- Lisätä `azure.yaml`-tiedoston ja `infra/`-kansion, joita muut voivat käyttää
-- Testata mallisi paikallisesti ennen jakamista
-- Julkaista sen ja (valinnaisesti) lähettää sen Awesome AZD:hen
+Tämä oppitunti auttaa sinua:
+- Ymmärtämään, mikä tekee kansiosta "azd-mallin"
+- Tietämään vaaditut tiedostot ja kansiorakenteen
+- Lisäämään `azure.yaml` ja `infra/` uudelleenkäytettäväksi muille
+- Testaamaan malli paikallisesti ennen jakamista
+- Julkaisemaan sen ja (valinnaisesti) lähettämään Awesome AZD -kokoelmaan
 
 ## Oppimistulokset
 
-Oppitunnin suorittamisen jälkeen pystyt:
-- Luomaan uuden mallirepositorion
-- Parametrisoimaan infrastruktuurin niin, että se toimii missä tahansa tilauksessa
-- Validioimaan mallin `azd init`- ja `azd up` -komennoilla
-- Lisäämään metatiedot, joita yhteisön galleria vaatii
+Oppitunnin jälkeen osaat:
+- Luoda uuden mallirepositorion
+- Parametrisoida infrastruktuurin toimimaan missä tahansa tilauksessa
+- Vahvistaa mallin `azd init` ja `azd up` -komennoilla
+- Lisätä metatiedot, joita yhteisön galleria vaatii
 
 ---
 
@@ -37,21 +37,21 @@ azd-malli on **Git-repositorio**, joka sisältää vähintään:
 
 | Tiedosto / kansio | Tarkoitus | Pakollinen? |
 |---------------|---------|-----------|
-| `azure.yaml` | Kuvaa palveluita, isäntiä ja infrastruktuuritoimittajaa | ✅ Kyllä |
-| `infra/` | Bicep, Terraform tai Pulumi, joka provisioi resurssit | ✅ Kyllä |
+| `azure.yaml` | Kuvaa palvelut, isännät ja infrastruktuuripalveluntarjoajan | ✅ Kyllä |
+| `infra/` | Bicep, Terraform tai Pulumi, joka määrittää resurssit | ✅ Kyllä |
 | `src/` (tai koodisi) | Sovelluskoodi, jonka azd ottaa käyttöön | ✅ Kyllä |
-| `README.md` | Kuinka käyttää mallia | ✅ Erittäin suositeltava |
+| `README.md` | Mallin käyttöohje | ✅ Suositellaan vahvasti |
 | `.azdo/` tai `.github/` | CI/CD-putkistojen määrittelyt | Valinnainen |
-| `.devcontainer/` | Toistettavissa oleva kehitysympäristö | Valinnainen |
-| `azure.yaml` `metadata` | Gallerian ja telemetrian tiedot | Valinnainen (vaaditaan julkaisemiseen) |
+| `.devcontainer/` | Toistettava kehitysympäristö | Valinnainen |
+| `azure.yaml` `metadata` | Galleria- ja telemetriatiedot | Valinnainen (pakollinen julkaisemiseen) |
 
-Tässä ei ole mitään taikaa: kun ajat `azd init --template you/your-repo`, azd kloonaa repoon ja lukee `azure.yaml`-tiedoston.
+Tässä ei ole mitään taikaa: kun suoritat `azd init --template you/your-repo`, azd kloonaa repositorion ja lukee `azure.yaml`-tiedoston.
 
 ---
 
-## Vaihe 1: Luo repositorion rakenne
+## Vaihe 1: Luo repositoriorakenne
 
-Luo kansiorakenne käsin tai aloita minimalistisesta mallista ja muokkaa sitä:
+Luo kansiorakenne käsin tai aloita minimimallista ja muokkaa sitä:
 
 ```bash
 mkdir my-azd-template && cd my-azd-template
@@ -61,7 +61,7 @@ git init
 mkdir -p src infra
 ```
 
-Tyypillinen valmis rakenne näyttää tältä:
+Tyypillinen valmiin mallin rakenne näyttää tältä:
 
 ```
 my-azd-template/
@@ -83,7 +83,7 @@ my-azd-template/
 
 ## Vaihe 2: Kirjoita `azure.yaml`
 
-Tämä on mallin ydin. Se kertoo azd:lle, mitä ottaa käyttöön ja miten:
+Tämä on mallin sydän. Se kertoo azd:lle, mitä ottaa käyttöön ja miten:
 
 ```yaml
 # azure.yaml
@@ -101,13 +101,13 @@ services:
     host: containerapp              # appservice | containerapp | function | aks | staticwebapp
 ```
 
-> Kenttää `metadata.template` käytetään gallerian telemetriassa käytön laskemiseen. Käytä `name@version`-käytäntöä.
+> `metadata.template` -kenttää gallerian telemetria käyttää käyttökertojen laskemiseen. Käytä muotoa `nimi@versio`.
 
 ---
 
 ## Vaihe 3: Parametrisoi infrastruktuuri
 
-Yksi tärkeimmistä säännöistä *uudelleenkäytettävälle* mallille: **älä koskaan kovakoodaa nimiä, alueita tai tilauskohtaisia arvoja.** Käytä parametreja ja resurssitunnuskuviota, jotta sama malli toimii kenen tahansa tilauksessa.
+Yksi tärkeimmistä säännöistä *uudelleenkäytettävälle* mallille: **älä koskaan kovakoodaa nimiä, alueita tai tilaukseen kohdistuvia arvoja.** Käytä parametreja ja resurssien tunnusmallia, jotta sama malli toimii kenen tahansa tilauksessa.
 
 ```bicep
 // infra/main.bicep
@@ -138,12 +138,12 @@ module web 'modules/web.bicep' = {
 output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 ```
 
-Kaksi asiaa tekevät mallista malliin sopivan:
+Kaksi asiaa tekevät tästä mallista mallille sopivan:
 
-1. **`azd-env-name`-tunniste** — azd käyttää sitä ympäristökohtaiseen resurssien seurantaan ja siivoukseen.
-2. **`uniqueString(...)`-resurssitunnus** — tuottaa vakaan, globaali-uniikin jälkiliitteen, jotta nimet eivät törmää.
+1. **`azd-env-name`-tunniste** — azd käyttää sitä seuraamaan ja puhdistamaan resursseja ympäristöittäin.
+2. **`uniqueString(...)` resurssitunnus** — tuottaa vakaasti globaalisti ainutlaatuisen takaliitteen, jotta nimet eivät törmää.
 
-Toimita vastaava parametrien tiedosto, joka lukee azd:n ympäristöstä injektoimat arvot:
+Lisää vastaava parametritiedosto, joka lukee arvot, jotka azd täyttää ympäristöstä:
 
 ```json
 // infra/main.parameters.json
@@ -157,47 +157,47 @@ Toimita vastaava parametrien tiedosto, joka lukee azd:n ympäristöstä injektoi
 }
 ```
 
-azd korvaa `${AZURE_ENV_NAME}` ja `${AZURE_LOCATION}` nykyisestä ympäristöstä automaattisesti.
+azd korvaa automaattisesti `${AZURE_ENV_NAME}` ja `${AZURE_LOCATION}` nykyisestä ympäristöstä.
 
 ---
 
-## Vaihe 4: Testaa malliasi paikallisesti
+## Vaihe 4: Testaa mallisi paikallisesti
 
-Ennen jakamista varmista, että malli toimii puhtaalta tilalta.
+Ennen jakamista osoita, että malli toimii puhtaasta tilasta.
 
-**Testaa paikallisesta kansiosta** (ei vaadi Git-pushia):
+**Testaa paikallisesta kansiosta** (ei tarvitse pushata Git:iin):
 
 ```bash
-# Tyhjästä hakemistosta alusta käyttäen paikallista mallipolkua
+# Tyhjästä hakemistosta alustetaan paikallisen mallipolun avulla
 mkdir /tmp/test-run && cd /tmp/test-run
 azd init --template /path/to/my-azd-template
 
-# Provisiointi + käyttöönotto päästä päähän
+# Käyttöönotto + käyttöönotto kokonaisuudessaan
 azd auth login
 azd up
 ```
 
-**Testaa sitten siivous**—hyvä malli siivoaa kokonaan:
+**Sitten testaa purku**—hyvä malli siivoaa kaiken kokonaan:
 
 ```bash
 azd down --force --purge
 ```
 
-Jos `azd down` jättää resursseja jälkeensä, olet todennäköisesti unohtanut lisätä `azd-env-name`-tunnisteen johonkin resurssiin.
+Jos `azd down` jättää resursseja jäljelle, olet todennäköisesti unohtanut `azd-env-name`-tunnisteen jostakin resurssista.
 
-> **Vinkki:** suorita ensin `azd provision --preview`. Se tekee what-if-tarkistuksen ja tuo esiin mallivirheet ennen kuin mitään resurssia luodaan.
+> **Vinkki:** suorita ensin `azd provision --preview`. Se tekee mitä-jos -simuloinnin ja näyttää mallin virheet ennen resurssien luontia.
 
 ---
 
 ## Vaihe 5: Julkaise malli
 
-Työnnä repositorio GitHubiin (julkiseksi, jos haluat muiden käyttävän sitä):
+Puske repositorio GitHubiin (julkinen, jos haluat muiden käyttävän sitä):
 
 ```bash
 gh repo create my-azd-template --public --source=. --push
 ```
 
-Kuka tahansa voi nyt käyttää sitä:
+Nyt kuka tahansa voi käyttää sitä:
 
 ```bash
 azd init --template your-github-username/my-azd-template
@@ -205,39 +205,39 @@ azd init --template your-github-username/my-azd-template
 
 ---
 
-## Vaihe 6 (valinnainen): Lähetä Awesome AZD -galleriaan
+## Vaihe 6 (valinnainen): Lähetä Awesome AZD:lle
 
-[Awesome AZD -galleria](https://azure.github.io/awesome-azd/) listaa yhteisön malleja. Jotta repositoriosi listattaisiin, sen tulisi sisältää:
+[Awesome AZD -galleria](https://azure.github.io/awesome-azd/) listaa yhteisön malleja. Jotta malli voi tulla listatuksi, repossasi tulisi olla mukana:
 
 - ✅ Selkeä `README.md`, jossa on vaatimukset, arkkitehtuurikaavio ja kustannustiedot
 - ✅ Toimiva `azure.yaml`, jossa on `metadata.template`
-- ✅ Infrastruktuuri, joka provisioituu puhtaasti uudessa tilauksessa
+- ✅ Infrastruktuuri, joka ottaa käyttöön puhtaasti uudessa tilauksessa
 - ✅ `LICENSE`-tiedosto
-- ✅ (Suositeltavaa) `.devcontainer/` yhden napsautuksen Codespacesia varten
+- ✅ (Suositeltu) `.devcontainer/` yhdellä klikkauksella Codespacesiin
 
-Lähetä avaamalla pull request, joka lisää mallisi gallerian data-tiedostoon, noudattaen kontribuutio-opasta osoitteessa [Awesome AZD -repositorio](https://github.com/Azure/awesome-azd).
+Lähetä mallisi avaamalla pull request, joka lisää mallisi gallerian datatiedostoon noudattaen ohjeita [Awesome AZD -repositoriossa](https://github.com/Azure/awesome-azd).
 
 ---
 
-## Yleiset sudenkuopat
+## Yleisiä sudenkuoppia
 
-| Ongelma | Korjaus |
+| Sudenkuoppa | Korjaus |
 |---------|-----|
-| Kovakoodatut resurssinimet | Käytä `uniqueString()`-resurssitunnusta |
-| `azd down` jättää resursseja | Merkitse jokainen resurssi (tai resurssiryhmä) `azd-env-name`-tunnisteella |
-| Malli toimii sinulla, mutta epäonnistuu muilla | Poista tilaus-ID:t, vuokralais-ID:t ja alueoletukset |
-| Ulostulot eivät ole kytketty sovellukseen | Vie `SERVICE_<NAME>_ENDPOINT_URL` ja muut `AZURE_*`-ulostulot |
-| Gallerian lähetys hylätty | Lisää `README.md`, `LICENSE` ja `metadata.template` |
+| Kovakoodatut resurssinimet | Käytä `uniqueString()` resurssitunnusta |
+| `azd down` jättää resursseja | Merkitse jokainen resurssi (tai resurssiryhmä) `azd-env-name` -tunnisteella |
+| Malleja toimii sinulla, ei muilla | Poista tilaus- ja vuokralais-ID:t sekä alue-olettamukset |
+| Tulosteet eivät ole kytketty sovellukseen | Vie `SERVICE_<NIMI>_ENDPOINT_URL` ja muut `AZURE_*` tulosteet |
+| Gallerian hyväksyntä evätty | Lisää `README.md`, `LICENSE` ja `metadata.template` |
 
 ---
 
 ## Yhteenveto
 
 - Malli on vain Git-repositorio, jossa on `azure.yaml`, `infra/` ja koodisi.
-- Parametrisoi kaikki—nimet, alueet ja tunnukset—jotta se toimii missä tahansa.
+- Parametrisoi kaikki—nimet, alueet ja tunnukset—jotta malli toimii missä vain.
 - Merkitse aina resurssit `azd-env-name`-tunnisteella, jotta `azd down` toimii.
-- Testaa paikallisesti `azd init --template <local-path>` ennen julkaisemista.
-- Lisää metatiedot ja README, jotta voit lähettää mallin Awesome AZD:hen.
+- Testaa paikallisesti komennolla `azd init --template <local-path>` ennen julkaisua.
+- Lisää metatiedot ja README lähettämistä varten Awesome AZD:lle.
 
 ---
 
@@ -245,15 +245,15 @@ Lähetä avaamalla pull request, joka lisää mallisi gallerian data-tiedostoon,
 
 | Suunta | Resurssi |
 |-----------|----------|
-| **Edellinen** | [Deployment-opas](deployment-guide.md) |
+| **Edellinen** | [Käyttöönotto-opas](deployment-guide.md) |
 | **Luvun etusivu** | [Luku 4: Infrastruktuuri koodina](README.md) |
-| **Seuraava luku** | [Luku 5: Moni-agenttiset ratkaisut](../chapter-05-multi-agent/README.md) |
+| **Seuraava luku** | [Luku 5: Moni-agenttiratkaisut](../chapter-05-multi-agent/README.md) |
 
 ## 📖 Aiheeseen liittyvät resurssit
 
-- [Resurssien provisiointi](provisioning.md)
-- [Awesome AZD -galleria](https://azure.github.io/awesome-azd/)
-- [Virallinen azd-mallien dokumentaatio](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
+- [Resurssien käyttöönotto](provisioning.md)
+- [Awesome AZD Gallery](https://azure.github.io/awesome-azd/)
+- [Virallinen azd-mallin dokumentaatio](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
 
 ---
 

@@ -1,42 +1,42 @@
-# Kapitel 6: Planlegging og validering før distribusjon
+# Kapittel 6: Planlegging og Validering før Distribusjon
 
-**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Varighet**: 1 time | **⭐ Vanskelighetsgrad**: Middels
+**📚 Kurs**: [AZD For Begynnere](../../README.md) | **⏱️ Varighet**: 1 time | **⭐ Vanskelighetsgrad**: Middels
 
 ---
 
 ## Oversikt
 
-Dette kapitlet dekker viktige planleggings- og valideringstrinn før du distribuerer applikasjonen din. Lær å unngå kostbare feil med riktig kapasitetsplanlegging, valg av SKU og preflight-sjekker.
+Dette kapittelet dekker viktige planleggings- og valideringstrinn før du distribuerer applikasjonen din. Lær å unngå kostbare feil med riktig kapasitetplanlegging, SKU-valg og preflight-sjekker.
 
-> Validert mot `azd 1.25.6` i juni 2026.
+> Validert med `azd 1.27.1` i juli 2026.
 
 ## Læringsmål
 
-Ved å fullføre dette kapitlet vil du:
+Ved å fullføre dette kapittelet vil du:
 - Kjøre preflight-sjekker før distribusjon
 - Planlegge kapasitet og estimere ressursbehov
-- Velge riktige SKU-er for kostnadsoptimalisering
+- Velge passende SKUer for kostnadsoptimalisering
 - Konfigurere Application Insights for overvåking
-- Forstå mønstre for teamkoordinering
+- Forstå teamkoordinasjonsmønstre
 
 ---
 
 ## 📚 Leksjoner
 
 | # | Leksjon | Beskrivelse | Tid |
-|---|---------|-------------|------|
-| 1 | [Preflight Checks](preflight-checks.md) | Validere konfigurasjon før distribusjon | 15 min |
-| 2 | [Capacity Planning](capacity-planning.md) | Estimere ressursbehov | 20 min |
-| 3 | [SKU Selection](sku-selection.md) | Velge passende prismodeller | 15 min |
+|---|---------|-------------|-----|
+| 1 | [Preflight-sjekker](preflight-checks.md) | Valider konfigurasjon før distribusjon | 15 min |
+| 2 | [Kapasitetsplanlegging](capacity-planning.md) | Estimere ressursbehov | 20 min |
+| 3 | [SKU-valg](sku-selection.md) | Velge passende prisnivåer | 15 min |
 | 4 | [Application Insights](application-insights.md) | Konfigurere overvåking | 20 min |
-| 5 | [Coordination Patterns](coordination-patterns.md) | Teamets distribusjonsarbeidsflyt | 15 min |
+| 5 | [Koordinasjonsmønstre](coordination-patterns.md) | Teamets distribusjonsarbeidsflyter | 15 min |
 
 ---
 
 ## 🚀 Kom i gang raskt
 
 ```bash
-# Sjekk abonnementsgrenser
+# Sjekk abonnementskvoter
 az vm list-usage --location eastus --output table
 
 # Forhåndsvis distribusjon (ingen ressurser opprettet)
@@ -55,10 +55,10 @@ azd env get-values
 
 ### Før `azd provision`
 
-- [ ] Kvote bekreftet for region
-- [ ] SKU-er valgt riktig
+- [ ] Kvote verifisert for region
+- [ ] SKUer valgt riktig
 - [ ] Kostnadsestimat gjennomgått
-- [ ] Navnekonvensjon konsekvent
+- [ ] Konsistent navnekonvensjon
 - [ ] Sikkerhet/RBAC konfigurert
 
 ### Før `azd deploy`
@@ -66,17 +66,17 @@ azd env get-values
 - [ ] Miljøvariabler satt
 - [ ] Hemmeligheter i Key Vault
 - [ ] Tilkoblingsstrenger verifisert
-- [ ] Helsekontroller konfigurert
+- [ ] Helsesjekker konfigurert
 
 ---
 
-## 💰 Veiledning for valg av SKU
+## 💰 Veiledning for SKU-valg
 
 | Arbeidsbelastning | Utvikling | Produksjon |
-|-------------------|-----------|------------|
+|------------------|-----------|------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Modeller | Standard | Standard + PTU |
+| Microsoft Foundry Models | Standard | Standard + PTU |
 | AI Search | Basic | Standard S2+ |
 
 ---
@@ -90,7 +90,7 @@ azd env get-values
 
 ---
 
-## 📖 Relaterte ressurser
+## 📖 Relaterte Ressurser
 
 - [Konfigurasjonsveiledning](../chapter-03-configuration/configuration.md)
 - [Distribusjonsveiledning](../chapter-04-infrastructure/deployment-guide.md)

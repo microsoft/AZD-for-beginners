@@ -1,48 +1,48 @@
-# Luku 4: Infrastruktuuri koodina & Käyttöönotto
+# Luku 4: Infrastructure as Code & Julkaisu
 
-**📚 Kurssi**: [AZD Aloittelijoille](../../README.md) | **⏱️ Kesto**: 1–1,5 tuntia | **⭐ Vaativuus**: Keskitaso
+**📚 Kurssi**: [AZD Aloittelijoille](../../README.md) | **⏱️ Kesto**: 1-1,5 tuntia | **⭐ Vaativuus**: Keskitaso
 
 ---
 
 ## Yleiskatsaus
 
-Tässä luvussa käsitellään Infrastructure as Code (IaC) -malleja Bicep-templaatteilla, resurssien provisiointia sekä käyttöönotto­strategioita Azure Developer CLI:n avulla.
+Tässä luvussa käsitellään Infrastructure as Code (IaC) -malleja Bicep-mallipohjien avulla, resurssien provisiointia sekä julkaisuja Azure Developer CLI:n avulla.
 
-> Varmennettu `azd 1.25.6`:lla kesäkuussa 2026.
+> Vahvistettu versiossa `azd 1.27.1` heinäkuussa 2026.
 
 ## Oppimistavoitteet
 
-Kun olet suorittanut tämän luvun, osaat:
-- Ymmärtää Bicep-templaatin rakenteen ja syntaksin
-- Provisioida Azure-resursseja `azd provision` -komennolla
-- Ota käyttöön sovelluksia `azd deploy` -komennolla
-- Toteuttaa blue-green- ja rolling-käyttöönotto­strategiat
+Tämän luvun suorittamisen jälkeen osaat:
+- Ymmärtää Bicep-mallipohjan rakenteen ja syntaksin
+- Provisioida Azure-resursseja komennolla `azd provision`
+- Julkaista sovelluksia komennolla `azd deploy`
+- Toteuttaa sinivihreä- ja rullautuva julkaisutavat
 
 ---
 
 ## 📚 Oppitunnit
 
 | # | Oppitunti | Kuvaus | Aika |
-|---|--------|-------------|------|
+|---|----------|--------|------|
 | 1 | [Resurssien provisiointi](provisioning.md) | Azure-resurssien hallinta AZD:llä | 45 min |
-| 2 | [Käyttöönotto-opas](deployment-guide.md) | Sovellusten käyttöönotto-strategiat | 45 min |
-| 3 | [Oman mallin laatiminen](custom-templates.md) | Rakenna ja julkaise uudelleenkäytettäviä azd-malleja | 30 min |
+| 2 | [Julkaisun opas](deployment-guide.md) | Sovelluksen julkaisustrategiat | 45 min |
+| 3 | [Oman mallin laatiminen](custom-templates.md) | Rakentaminen ja julkaisukoettavien azd-mallien teko | 30 min |
 
 ---
 
-## 🚀 Pikaopas
+## 🚀 Pika-aloitus
 
 ```bash
-# Alusta mallipohjasta
+# Alusta mallista
 azd init --template azure-functions-python-v2-http
 
 # Esikatsele, mitä luodaan
 azd provision --preview
 
-# Perusta vain infrastruktuuri
+# Tarjoa vain infrastruktuuri
 azd provision
 
-# Ota vain koodi käyttöön
+# Ota käyttöön vain koodi
 azd deploy
 
 # Tai molemmat yhdessä
@@ -71,27 +71,27 @@ my-project/
 ## 🔧 Keskeiset komennot
 
 | Komento | Kuvaus |
-|---------|-------------|
+|---------|--------|
 | `azd init` | Alusta projekti |
-| `azd provision` | Luo Azure-resursseja |
-| `azd deploy` | Ota käyttöön sovelluskoodi |
-| `azd up` | provisioi + ota käyttöön |
-| `azd down` | Poistaa kaikki resurssit |
+| `azd provision` | Luo Azure-resurssit |
+| `azd deploy` | Julkaise sovelluskoodi |
+| `azd up` | provisioi + julkaise |
+| `azd down` | Poista kaikki resurssit |
 
 ---
 
 ## 🔗 Navigointi
 
 | Suunta | Luku |
-|-----------|---------|
-| **Edellinen** | [Chapter 3: Configuration](../chapter-03-configuration/README.md) |
-| **Seuraava** | [Chapter 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md) |
+|---------|------|
+| **Edellinen** | [Luku 3: Konfigurointi](../chapter-03-configuration/README.md) |
+| **Seuraava** | [Luku 5: Multi-Agent -ratkaisut](../chapter-05-multi-agent/README.md) |
 
 ---
 
-## 📖 Lisäresurssit
+## 📖 Aiheeseen liittyvät resurssit
 
-- [Ennakkotarkistukset](../chapter-06-pre-deployment/README.md)
+- [Ennakkotarkastukset ennen julkaisua](../chapter-06-pre-deployment/README.md)
 - [Container-sovellus-esimerkit](../../examples/container-app/README.md)
 - [Tietokantasovellus-esimerkki](../../examples/database-app/README.md)
 

@@ -1,67 +1,67 @@
 # Lage din egen azd-mal
 
 **Kapittelnavigasjon:**
-- **📚 Kurs Hjem**: [AZD for nybegynnere](../../README.md)
+- **📚 Kursstart**: [AZD for nybegynnere](../../README.md)
 - **📖 Nåværende kapittel**: Kapittel 4 - Infrastruktur som kode og distribusjon
-- **⬅️ Forrige**: [Deployment Guide](deployment-guide.md)
-- **🚀 Neste kapittel**: [Kapittel 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md)
+- **⬅️ Forrige**: [Distribusjonsguide](deployment-guide.md)
+- **🚀 Neste kapittel**: [Kapittel 5: Multi-agent løsninger](../chapter-05-multi-agent/README.md)
 
-> Validert mot `azd 1.25.6` i juni 2026.
+> Validert mot `azd 1.27.1` i juli 2026.
 
 ## Introduksjon
 
-Så langt har du *brukt* maler med `azd init --template <name>`. Men når du har en prosjektstruktur teamet ditt liker — for eksempel en Container App med en Cosmos DB og riktig overvåking — vil du gjøre det om til en gjenbrukbar mal. En mal er bare et Git-repositorium med en forutsigbar struktur som azd vet hvordan den skal lese. Denne leksjonen viser hvordan du bygger en fra bunnen av, tester den, og (valgfritt) publiserer den til community-galleriet.
+Så langt har du *brukt* maler med `azd init --template <navn>`. Men når du har et prosjektoppsett teamet ditt liker—si, en Container App med Cosmos DB og riktig overvåking—vil du gjøre det til en gjenbrukbar mal selv. En mal er bare et Git-repositorium med en forutsigbar struktur som azd vet hvordan lese. Denne leksjonen viser deg hvordan du bygger en fra bunnen av, tester den, og (valgfritt) publiserer den til fellesskapsgalleriet.
 
 ## Læringsmål
 
-Etter denne leksjonen vil du:
+På slutten av denne leksjonen vil du:
 - Forstå hva som gjør en mappe til en "azd-mal"
-- Vite hvilke filer og mappestruktur som kreves
+- Kjenne til nødvendige filer og mappestruktur
 - Legge til en `azure.yaml` og `infra/` som andre kan gjenbruke
-- Teste malen lokalt før deling
+- Teste malen din lokalt før deling
 - Publisere den og (valgfritt) sende den til Awesome AZD
 
-## Læringsutbytte
+## Læringsresultater
 
-Etter å ha fullført denne leksjonen vil du kunne:
-- Skape et nytt mal-repositorium
-- Parameterisere infrastruktur slik at det fungerer i enhver abonnement
+Etter fullført leksjon vil du kunne:
+- Skissere et nytt mal-repositorium
+- Parametrisere infrastrukturen slik at den fungerer i enhver abonnement
 - Validere en mal med `azd init` og `azd up`
-- Legge til metadata som kreves av community-galleriet
+- Legge til metadata som fellesskapsgalleriet krever
 
 ---
 
-## Hva er en mal, egentlig?
+## Hva er egentlig en mal?
 
-En azd-mal er **et Git-repositorium** som inneholder, minst:
+En azd-mal er **et Git-repositorium** som inneholder, som minimum:
 
-| File / folder | Purpose | Required? |
+| Fil / mappe | Formål | Påkrevd? |
 |---------------|---------|-----------|
-| `azure.yaml` | Describes services, hosts, and infra provider | ✅ Ja |
-| `infra/` | Bicep, Terraform, or Pulumi that provisions resources | ✅ Ja |
-| `src/` (or your code) | The application code azd deploys | ✅ Ja |
-| `README.md` | How to use the template | ✅ Sterkt anbefalt |
-| `.azdo/` or `.github/` | CI/CD pipeline definitions | Valgfritt |
-| `.devcontainer/` | Reproducible dev environment | Valgfritt |
-| `azure.yaml` `metadata` | Gallery + telemetry info | Valgfritt (påkrevd for publisering) |
+| `azure.yaml` | Beskriver tjenester, verter og infrastrukturleverandør | ✅ Ja |
+| `infra/` | Bicep, Terraform eller Pulumi som provisjonerer ressurser | ✅ Ja |
+| `src/` (eller koden din) | Applikasjonskoden som azd distribuerer | ✅ Ja |
+| `README.md` | Hvordan bruke malen | ✅ Sterkt anbefalt |
+| `.azdo/` eller `.github/` | CI/CD pipeline definisjoner | Valgfritt |
+| `.devcontainer/` | Reproduserbart utviklingsmiljø | Valgfritt |
+| `azure.yaml` `metadata` | Galleri- og telemetriinfo | Valgfritt (påkrevd for publisering) |
 
 Det er ingenting magisk her: når du kjører `azd init --template you/your-repo`, kloner azd repoet og leser `azure.yaml`.
 
 ---
 
-## Trinn 1: Opprett depotstrukturen
+## Steg 1: Skissere Repositoriet
 
-Lag mappestrukturen for hånd eller start fra en minimal mal og rediger den:
+Lag mappestrukturen manuelt eller start fra en minimal mal og rediger den:
 
 ```bash
 mkdir my-azd-template && cd my-azd-template
 git init
 
-# Opprett standardoppsettet
+# Lag standardoppsettet
 mkdir -p src infra
 ```
 
-En typisk ferdig layout ser slik ut:
+Et typisk ferdig oppsett ser slik ut:
 
 ```
 my-azd-template/
@@ -81,9 +81,9 @@ my-azd-template/
 
 ---
 
-## Trinn 2: Skriv `azure.yaml`
+## Steg 2: Skriv `azure.yaml`
 
-Dette er hjertet i malen. Det forteller azd hva som skal deployes og hvordan:
+Dette er kjernen i malen. Den forteller azd hva som skal distribueres og hvordan:
 
 ```yaml
 # azure.yaml
@@ -101,13 +101,13 @@ services:
     host: containerapp              # appservice | containerapp | function | aks | staticwebapp
 ```
 
-> Feltet `metadata.template` er det galleriets telemetri bruker for å telle bruk. Bruk konvensjonen `name@version`.
+> `metadata.template`-feltet er det galleriets telemetri bruker for å telle bruk. Bruk `name@version` konvensjonen.
 
 ---
 
-## Trinn 3: Parameteriser infrastrukturen
+## Steg 3: Parametrisere Infrastrukturen
 
-Den enkelt viktigste regelen for en *gjenbrukbar* mal: **aldri hardkode navn, regioner eller abonnementsspesifikke verdier.** Bruk parametere og resource token-mønsteret slik at samme mal fungerer i noens abonnement.
+Den viktigste regelen for en *gjenbrukbar* mal: **aldri hardkode navn, regioner eller abonnementsspesifikke verdier.** Bruk parametere og ressurs-tokenmønsteret slik at samme mal fungerer i alle abonnement.
 
 ```bicep
 // infra/main.bicep
@@ -140,10 +140,10 @@ output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 
 To ting gjør denne malen malvennlig:
 
-1. **`azd-env-name` tag** — azd bruker den for å spore og rydde opp ressurser per miljø.
-2. **`uniqueString(...)` resource token** — gir en stabil, globalt unik suffiks slik at navn ikke kolliderer.
+1. **`azd-env-name` tag** — azd bruker den til å spore og rydde opp ressurser per miljø.
+2. **`uniqueString(...)` ressurs-token** — lager en stabil, globalt unik suffiks slik at navn ikke kolliderer.
 
-Gi en tilsvarende parameterfil som leser verdier azd injiserer fra miljøet:
+Lever en tilsvarende parameterfil som leser verdier azd injiserer fra miljøet:
 
 ```json
 // infra/main.parameters.json
@@ -157,27 +157,27 @@ Gi en tilsvarende parameterfil som leser verdier azd injiserer fra miljøet:
 }
 ```
 
-azd erstatter `${AZURE_ENV_NAME}` og `${AZURE_LOCATION}` fra gjeldende miljø automatisk.
+azd erstatter `${AZURE_ENV_NAME}` og `${AZURE_LOCATION}` automatisk fra gjeldende miljø.
 
 ---
 
-## Trinn 4: Test malen lokalt
+## Steg 4: Test Malen Din Lokalt
 
-Før du deler, bevis at malen fungerer fra en ren tilstand.
+Før deling, bevis at malen fungerer fra en ren tilstand.
 
-**Test fra den lokale mappen** (ingen Git-push nødvendig):
+**Test fra lokal mappe** (ingen Git push nødvendig):
 
 ```bash
-# Fra en tom katalog, initialiser ved å bruke den lokale malstien
+# Fra en tom katalog, initialiser ved å bruke din lokale malbane
 mkdir /tmp/test-run && cd /tmp/test-run
 azd init --template /path/to/my-azd-template
 
-# Sett opp og distribuer fra ende til ende
+# Provisjoner + distribuer ende-til-ende
 azd auth login
 azd up
 ```
 
-**Test så nedriving**—en god mal rydder helt opp:
+**Test så 'oppryddingen'**—en god mal rydder opp fullstendig:
 
 ```bash
 azd down --force --purge
@@ -185,19 +185,19 @@ azd down --force --purge
 
 Hvis `azd down` etterlater ressurser, har du sannsynligvis glemt `azd-env-name` taggen på en ressurs.
 
-> **Tips:** kjør `azd provision --preview` først. Den utfører en what-if og viser malfeil før noen ressurser opprettes.
+> **Tips:** kjør `azd provision --preview` først. Det gjør en hva-hvis analyse og viser feil i malen før noen ressurser opprettes.
 
 ---
 
-## Trinn 5: Publiser malen
+## Steg 5: Publiser Malen
 
-Push repositoriet til GitHub (offentlig hvis du vil at andre skal bruke det):
+Push repoet til GitHub (offentlig dersom du vil at andre skal bruke det):
 
 ```bash
 gh repo create my-azd-template --public --source=. --push
 ```
 
-Nå kan alle bruke den:
+Nå kan hvem som helst bruke det:
 
 ```bash
 azd init --template your-github-username/my-azd-template
@@ -205,55 +205,55 @@ azd init --template your-github-username/my-azd-template
 
 ---
 
-## Trinn 6 (valgfritt): Send til Awesome AZD
+## Steg 6 (valgfritt): Send inn til Awesome AZD
 
-[Awesome AZD gallery](https://azure.github.io/awesome-azd/) lister community-maler. For å bli oppført bør repoet ditt inkludere:
+[Awesome AZD-galleriet](https://azure.github.io/awesome-azd/) lister opp fellesskapets maler. For å bli listet bør repoet inkludere:
 
-- ✅ En tydelig `README.md` med forutsetninger, et arkitekturdiagram og kostnadsnotater
+- ✅ En klar `README.md` med forutsetninger, et arkitekturskjema og kostnadsnotater
 - ✅ En fungerende `azure.yaml` med `metadata.template`
-- ✅ Infrastruktur som provisjonerer ryddig i et nytt abonnement
-- ✅ En `LICENSE`-fil
+- ✅ Infrastruktur som provisionsfritt kan settes opp i et nytt abonnement
+- ✅ En `LICENSE` fil
 - ✅ (Anbefalt) En `.devcontainer/` for ett-klikk Codespaces
 
-Send inn ved å åpne en pull request som legger til malen din i galleriets datafil, og følg bidragsveiledningen i [Awesome AZD repository](https://github.com/Azure/awesome-azd).
+Send inn ved å åpne en pull request som legger til malen i galleriets datafil, i henhold til bidragsguiden i [Awesome AZD-repoet](https://github.com/Azure/awesome-azd).
 
 ---
 
 ## Vanlige fallgruver
 
-| Pitfall | Fix |
+| Fallgruve | Løsning |
 |---------|-----|
-| Hardcoded resource names | Use the `uniqueString()` resource token |
-| `azd down` leaves resources | Tag every resource (or the resource group) with `azd-env-name` |
-| Template works for you, fails for others | Remove subscription IDs, tenant IDs, and region assumptions |
-| Outputs not wired into the app | Export `SERVICE_<NAME>_ENDPOINT_URL` and other `AZURE_*` outputs |
-| Gallery submission rejected | Add `README.md`, `LICENSE`, and `metadata.template` |
+| Hardkodede ressursnavn | Bruk `uniqueString()` ressurs-token |
+| `azd down` etterlater ressurser | Tagg alle ressurser (eller ressursgruppen) med `azd-env-name` |
+| Malen fungerer for deg, feiler for andre | Fjern abonnement-IDer, tenant-IDer og regionantakelser |
+| Output ikke koblet til appen | Eksporter `SERVICE_<NAME>_ENDPOINT_URL` og andre `AZURE_*` outputs |
+| Innsending til galleri avvist | Legg til `README.md`, `LICENSE` og `metadata.template` |
 
 ---
 
-## Oppsummering
+## Sammendrag
 
-- En mal er bare et Git-repo med `azure.yaml`, `infra/`, og koden din.
-- Parameteriser alt—navn, regioner og ID-er—slik at det kan kjøres hvor som helst.
-- Tagg alltid ressurser med `azd-env-name` slik at `azd down` fungerer.
+- En mal er bare et Git-repo med `azure.yaml`, `infra/` og koden din.
+- Parametrisér alt—navn, regioner og IDer—slik at den kjører overalt.
+- Tagg alltid ressurser med `azd-env-name` så `azd down` fungerer.
 - Test lokalt med `azd init --template <local-path>` før publisering.
-- Legg til metadata og en README for å sende til Awesome AZD.
+- Legg til metadata og README for å sende inn til Awesome AZD.
 
 ---
 
 ## 🔗 Navigasjon
 
-| Direction | Resource |
+| Retning | Ressurs |
 |-----------|----------|
-| **Previous** | [Deployment Guide](deployment-guide.md) |
-| **Chapter Home** | [Chapter 4: Infrastructure as Code](README.md) |
-| **Next Chapter** | [Chapter 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md) |
+| **Forrige** | [Distribusjonsguide](deployment-guide.md) |
+| **Kapittel-start** | [Kapittel 4: Infrastruktur som kode](README.md) |
+| **Neste kapittel** | [Kapittel 5: Multi-agent løsninger](../chapter-05-multi-agent/README.md) |
 
 ## 📖 Relaterte ressurser
 
-- [Provisioning Resources](provisioning.md)
-- [Awesome AZD Gallery](https://azure.github.io/awesome-azd/)
-- [Offisiell dokumentasjon for azd-maler](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
+- [Allokering av ressurser](provisioning.md)
+- [Awesome AZD-galleri](https://azure.github.io/awesome-azd/)
+- [Offisiell azd maldokumentasjon](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
 
 ---
 

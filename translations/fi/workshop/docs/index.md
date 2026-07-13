@@ -1,77 +1,77 @@
-# AZD AI-kehittäjien työpaja
+# AZD AI-kehittäjille -työpaja
 
-> Vahvistettu versiolla `azd 1.25.6` kesäkuussa 2026.
+> Varmennettu versiolla `azd 1.27.1` heinäkuussa 2026.
 
 > [!IMPORTANT]  
-> **Tässä työpajassa on mukana opas, jonka voit esikatsella paikallisessa selaimessasi. Aloittaaksesi avaa repositorio GitHub Codespacesissa, dev containerissa tai paikallisessa kloonissa, jossa MkDocs on asennettuna—sitten odota kunnes näet aktiivisen VS Code -terminaalin ja kirjoita:**  
+> **Tämä työpaja on varustettu työpajaoppaalla, jonka voit esikatsella paikallisessa selaimessasi. Aloittaaksesi avaa repositorio GitHub Codespacesissa, kehityskontissa tai paikallisessa kloonissa, jossa MkDocs on asennettuna — odota kunnes näet aktiivisen VS Code -päätteen ja kirjoita:**  
 > `mkdocs serve > /dev/null 2>&1 &`  
-> **Näet ponnahdusikkunan, jolla voit avata esikatselusivun selaimessa.**
+> **Sinun pitäisi nähdä ponnahdusikkuna, joka kysyy, haluatko avata esikatselusivun selaimessa.**
 
-Tervetuloa käytännönläheiseen työpajaan, jossa opit Azure Developer CLI:tä (AZD) keskittyen AI-sovellusten käyttöönottoon. Tämä työpaja auttaa sinua saamaan käytännön ymmärryksen AZD-malleista kolmessa vaiheessa:
+Tervetuloa käytännönläheiseen työpajaan, jossa opit Azure Developer CLI:n (AZD) käytön AI-sovellusten käyttöönottoon. Tässä työpajassa saat käytännön ymmärryksen AZD-malleista kolmessa vaiheessa:
 
-1. **Tutustuminen** - löydä sinulle sopiva malli.
-1. **Käyttöönotto** - ota ratkaisu käyttöön ja varmista, että se toimii
-1. **Mukauttaminen** - muokkaa ja iteroi tehdäksesi siitä oman!
+1. **Tutkiminen** – löydä sinulle sopiva malli.
+1. **Käyttöönotto** – ota malli käyttöön ja varmista, että se toimii.
+1. **Mukauttaminen** – muokkaa ja kehitä sitä omasi näköiseksi!
 
-Tämän työpajan aikana tutustut myös ydinkehitystyökaluihin ja työnkulkuihin, jotta voit tehostaa loppuun asti ulottuvaa kehitysprosessia.
+Työpajan aikana tutustut myös keskeisiin kehittäjätyökaluihin ja työnkulkuun, jotka auttavat sinua sujuvoittamaan koko kehitysprosessiasi.
 
 | | | 
 |:---|:---|
-| **📚 Kurssin etusivu**| [AZD For Beginners](../README.md)|
-| **📖 Dokumentaatio** | [Get started with AI templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️AI-mallit** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
-|**🚀 Seuraavat askeleet** | [Take The Challenge](#workshop-challenge) |
+| **📚 Kurssin kotisivu**| [AZD Aloittelijoille](../README.md)|
+| **📖 Dokumentaatio** | [Aloita AI-malleilla](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️AI-mallit** | [Microsoft Foundryn mallit](https://ai.azure.com/templates) |
+|**🚀 Seuraavat askeleet** | [Ota haaste vastaan](#workshop-challenge) |
 | | |
 
 ## Työpajan yleiskatsaus
 
 **Kesto:** 3-4 tuntia  
-**Taso:** Aloittelija–keskitaso  
-**Esivaatimukset:** Tuntemus Azuresta, tekoälystä, VS Codesta ja komentorivityökaluista.
+**Taso:** Aloittelija–Keskitaso  
+**Esivaatimukset:** Tuntemus Azuresta, tekoälykäsitteistä, VS Codesta ja komentorivityökaluista.
 
-Tämä on käytännönläheinen työpaja, jossa opit tekemällä. Kun olet suorittanut harjoitukset, suosittelemme tutustumaan AZD For Beginners -sisältöön jatkaaksesi oppimista tietoturvaan ja tuottavuuteen liittyvissä parhaissa käytännöissä.
+Tämä on käytännönläheinen työpaja, jossa opit tekemällä. Kun olet suorittanut harjoitukset, suosittelemme käymään läpi AZD Aloittelijoille -opintokokonaisuuden jatkaaksesi oppimista suojaus- ja tuottavuuskäytänteistä.
 
 | Aika| Moduuli  | Tavoite |
 |:---|:---|:---|
-| 15 mins | Johdanto | Aseta lähtökohdat ja ymmärrä tavoitteet |
-| 30 mins | Valitse AI-malli | Tutki vaihtoehtoja ja valitse lähtömalli | 
-| 30 mins | Varmista AI-malli | Ota oletusratkaisu käyttöön Azureen |
-| 30 mins | Pura AI-malli | Tutki rakennetta ja konfiguraatiota |
-| 30 mins | Konfiguroi AI-malli | Aktivoi ja kokeile käytettävissä olevia ominaisuuksia |
-| 30 mins | Mukauta AI-malli | Sovita malli tarpeisiisi |
-| 30 mins | Infrastruktuurin purku | Siivoa ja vapauta resurssit |
-| 15 mins | Yhteenveto & seuraavat askeleet | Oppimateriaalit, työpajahaaste |
+| 15 min | Johdanto | Aseta tavoitteet, ymmärrä tarkoitus |
+| 30 min | Valitse AI-malli | Tutki vaihtoehtoja ja valitse aloitusmalli | 
+| 30 min | Varmenna AI-malli | Ota oletusratkaisu käyttöön Azureen |
+| 30 min | Pure AI-malli | Tutki rakennetta ja asetuksia |
+| 30 min | Määritä AI-malli | Aktivoi ja kokeile ominaisuuksia |
+| 30 min | Mukauta AI-malli | Sovita malli tarpeisiisi |
+| 30 min | Purka infrastruktuuri | Siivoa ja vapauta resurssit |
+| 15 min | Yhteenveto & Seuraavat askeleet | Oppimisresurssit, työpajahaarastus |
 | | |
 
 ## Mitä opit
 
-Ajattele AZD-mallia oppimisalueena, jossa voit tutkia erilaisia ominaisuuksia ja työkaluja end-to-end -kehitykseen Microsoft Foundryssa. Tämän työpajan päätteeksi sinulla pitäisi olla intuitiivinen käsitys eri työkaluista ja käsitteistä tässä kontekstissa.
+Ajattele AZD-mallia oppimisympäristönä, jossa voit tutkia erilaisia Microsoft Foundryn lopusta-päähän kehitykseen liittyviä ominaisuuksia ja työkaluja. Tämän työpajan jälkeen sinulla tulisi olla intuitiivinen käsitys aiheesta.
 
 | Käsite  | Tavoite |
 |:---|:---|
-| **Azure Developer CLI** | Ymmärrä työkalun komennot ja työnkulut|
-| **AZD Templates**| Ymmärrä projektin rakenne ja konfiguraatio|
-| **Azure AI Agent**| Provisioi ja ota käyttöön Microsoft Foundry -projekti |
-| **Azure AI Search**| Ota käyttöön kontekstin rakentaminen agenteilla |
-| **Havaittavuus**| Tutustu jäljitykseen, valvontaan ja arviointeihin |
-| **Red Teaming**| Tutustu hyökkäystestaukseen ja lieventämistoimiin |
+| **Azure Developer CLI** | Ymmärrä komentojen käyttö ja työnkulut|
+| **AZD-mallit**| Ymmärrä projektin rakenne ja asetukset|
+| **Azure AI Agent**| Projektin provisiointi ja käyttöönotto Microsoft Foundryssa  |
+| **Azure AI Search**| Mahdollistaa kontekstiinsinöörityksen agenteilla |
+| **Havaittavuus**| Tutki seurantaa, valvontaa ja evaluointeja |
+| **Red Teaming**| Tutki vastustajien testausta ja torjuntakeinoja |
 | | |
 
 ## Työpajan moduulit
 
-Valmiina aloittamaan? Siirry työpajan moduuleihin:
+Valmis aloittamaan? Siirry työpajamoduuleihin:
 
 - [Moduuli 1: Valitse AI-malli](instructions/1-Select-AI-Template.md)
-- [Moduuli 2: Varmista AI-malli](instructions/2-Validate-AI-Template.md) 
-- [Moduuli 3: Pura AI-malli](instructions/3-Deconstruct-AI-Template.md)
-- [Moduuli 4: Konfiguroi AI-malli](instructions/4-Configure-AI-Template.md)
+- [Moduuli 2: Varmenna AI-malli](instructions/2-Validate-AI-Template.md) 
+- [Moduuli 3: Pure AI-malli](instructions/3-Deconstruct-AI-Template.md)
+- [Moduuli 4: Määritä AI-malli](instructions/4-Configure-AI-Template.md)
 - [Moduuli 5: Mukauta AI-malli](instructions/5-Customize-AI-Template.md)
-- [Moduuli 6: Infrastruktuurin purku](instructions/6-Teardown-Infrastructure.md)
-- [Moduuli 7: Yhteenveto & seuraavat askeleet](instructions/7-Wrap-up.md)
+- [Moduuli 6: Pura infrastruktuuri](instructions/6-Teardown-Infrastructure.md)
+- [Moduuli 7: Yhteenveto & Seuraavat askeleet](instructions/7-Wrap-up.md)
 
-## Onko sinulla palautetta?
+## Onko palautetta?
 
-Lähetä issue tähän repositorioon (merkitse se `Workshop`) tai liity [Discordiin](https://aka.ms/foundry/discord) ja julkaise viesti kanavallemme `#get-help`
+Lähetä ongelma tähän repositorioon (merkitse `Workshop`) tai liity Discordiin [Discord](https://aka.ms/foundry/discord) ja kirjoita viesti kanavallemme `#get-help`
 
 ---
 

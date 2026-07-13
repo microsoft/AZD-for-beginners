@@ -1,30 +1,30 @@
-# AI-mallien käyttöönotto Azure Developer CLI:llä
+# AI-mallin käyttöönotto Azure Developer CLI:llä
 
-**Lukujen navigointi:**
+**Luvun navigointi:**
 - **📚 Kurssin etusivu**: [AZD Aloittelijoille](../../README.md)
-- **📖 Nykyinen luku**: Luku 2 - AI-First Development
+- **📖 Nykyinen luku**: Luku 2 - AI-ensimmäinen kehitys
 - **⬅️ Edellinen**: [Microsoft Foundry -integraatio](microsoft-foundry-integration.md)
-- **➡️ Seuraava**: [AI-työpaja](ai-workshop-lab.md)
+- **➡️ Seuraava**: [AI-työpajan labra](ai-workshop-lab.md)
 - **🚀 Seuraava luku**: [Luku 3: Konfigurointi](../chapter-03-configuration/configuration.md)
 
-Tässä oppaassa on kattavat ohjeet AI-mallien käyttöönottoon AZD-malleilla, kattaen kaiken mallin valinnasta tuotantoon vietäviin käyttöönottoihin.
+Tämä opas tarjoaa kattavat ohjeet AI-mallien käyttöönottoon AZD-mallipohjien avulla kattaen kaiken mallin valinnasta tuotantoon käyttöönottoon.
 
-> **Varmistusmerkintä (2026-03-25):** Tässä oppaassa oleva AZD-työnkulku tarkistettiin versiota `azd` `1.23.12` vastaan. AI-käyttöönottoihin, jotka kestävät pidempään kuin oletusarvoinen palvelun käyttöönottoaika, nykyiset AZD-versiot tukevat `azd deploy --timeout <seconds>`.
+> **Vahvistusmerkintä (2026-07-13):** Tässä oppaassa esitetty AZD-työnkulku tarkistettiin versiolla `azd` `1.27.1`. AI-käyttöönottoihin, jotka kestävät kauemmin kuin oletuspalvelun käyttöönottoikkuna, nykyiset AZD-versiot tukevat komentoa `azd deploy --timeout <sekunteja>`.
 
-## Sisällysluettelo
+## Sisällys
 
 - [Mallin valintastrategia](#mallin-valintastrategia)
-- [AZD-määritykset AI-malleille](#azd-määritykset-ai-malleille)
-- [Käyttöönotto-mallit](#käyttöönotto-mallit)
+- [AZD-konfigurointi AI-malleille](#azd-konfigurointi-ai-malleille)
+- [Käyttöönottokuvioita](#käyttöönottokuvioita)
 - [Mallinhallinta](#mallinhallinta)
-- [Tuotantoon liittyvät näkökohdat](#tuotantoon-liittyvät-näkökohdat)
+- [Tuotannon huomioita](#tuotannon-huomioita)
 - [Valvonta ja havaittavuus](#valvonta-ja-havaittavuus)
 
 ## Mallin valintastrategia
 
 ### Microsoft Foundry -mallit
 
-Valitse oikea malli käyttötapaukseesi:
+Valitse oikea malli käyttötarkoitukseesi:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -54,18 +54,18 @@ services:
 
 ### Mallin kapasiteettisuunnittelu
 
-| Mallityyppi | Käyttötapaus | Suositeltu kapasiteetti | Kustannusnäkökohdat |
-|------------|--------------|------------------------|---------------------|
-| gpt-4.1-mini | Chat, kysymykset ja vastaukset | 10-50 TPM | Kustannustehokas useimmille työmäärille |
+| Mallityyppi | Käyttötarkoitus | Suositeltu kapasiteetti | Kustannusharkinnat |
+|------------|----------|---------------------|-------------------|
+| gpt-4.1-mini | Keskustelu, Kysymys & Vastaus | 10-50 TPM | Hintatehokas useimmille työkuormille |
 | gpt-4.1 | Monimutkainen päättely | 20-100 TPM | Korkeammat kustannukset, käytä premium-ominaisuuksiin |
-| text-embedding-3-large | Haku, RAG | 30-120 TPM | Vahva oletusvalinta semanttiseen hakuun ja noutoon |
-| Whisper | Puheesta tekstiin | 10-50 TPM | Äänen käsittelyyn liittyvät työkuormat |
+| text-embedding-3-large | Haku, RAG | 30-120 TPM | Vahva oletusvalinta semanttiseen hakuun ja hakuun |
+| Whisper | Puhteen tekstiin | 10-50 TPM | Äänenkäsittelytyökuormat |
 
-## AZD-määritykset AI-malleille
+## AZD-konfigurointi AI-malleille
 
-### Bicep-mallin määritys
+### Bicep-mallipohjan konfigurointi
 
-Luo mallien käyttöönotot Bicep-malleilla:
+Luo mallien käyttöönotot Bicep-mallipohjien avulla:
 
 ```bicep
 // infra/main.bicep
@@ -126,19 +126,19 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### Ympäristömuuttujat
 
-Määritä sovelluksesi ympäristö:
+Konfiguroi sovellusympäristösi:
 
 ```bash
-# .env-konfiguraatio
+# .env-konfigurointi
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## Käyttöönotto-mallit
+## Käyttöönottokuvioita
 
-### Malli 1: Yhden alueen käyttöönotto
+### Kuvio 1: Yhden alueen käyttöönotto
 
 ```yaml
 # azure.yaml - Single region
@@ -152,11 +152,11 @@ services:
 ```
 
 Parhaiten sopii:
-- Kehitys ja testaus
-- Yhden markkinan sovellukset
-- Kustannusoptimointi
+- Kehitykseen ja testaukseen
+- Yhden markkinan sovelluksiin
+- Kustannusten optimointiin
 
-### Malli 2: Monialueinen käyttöönotto
+### Kuvio 2: Monialueen käyttöönotto
 
 ```bicep
 // Multi-region deployment
@@ -170,11 +170,11 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 ```
 
 Parhaiten sopii:
-- Maailmanlaajuiset sovellukset
-- Korkean käytettävyyden vaatimukset
-- Kuormituksen jakaminen
+- Globaaleihin sovelluksiin
+- Korkean käytettävyyden vaatimuksiin
+- Kuorman jakeluun
 
-### Malli 3: Hybridikäyttöönotto
+### Kuvio 3: Hybridikäyttöönotto
 
 Yhdistä Microsoft Foundry -mallit muihin AI-palveluihin:
 
@@ -209,7 +209,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Versiohallinta
 
-Seuraa malliversioita AZD-määrityksessäsi:
+Seuraa malliversioita AZD-konfiguraatiossasi:
 
 ```json
 {
@@ -269,11 +269,11 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Tuotantoon liittyvät näkökohdat
+## Tuotannon huomioita
 
 ### Kapasiteettisuunnittelu
 
-Laske tarvittava kapasiteetti käyttötapojen perusteella:
+Laske tarvittava kapasiteetti käyttökuvioiden perusteella:
 
 ```python
 # Esimerkki kapasiteetin laskemisesta
@@ -288,7 +288,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Käyttöesimerkki
+# Esimerkin käyttö
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -298,9 +298,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Automaattisen skaalaamisen määritys
+### Automaattisen skaalaamisen konfigurointi
 
-Määritä automaattinen skaalaus Container Appsille:
+Konfiguroi automaattinen skaalaus Container Appsille:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -336,9 +336,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Kustannusoptimointi
+### Kustannusten optimointi
 
-Ota käyttöön kustannusvalvonta:
+Toteuta kustannusten hallinta:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -372,7 +372,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ### Application Insights -integraatio
 
-Määritä valvonta AI-työkuormille:
+Konfiguroi valvonta AI-työkuormille:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -408,9 +408,9 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### Mukautetut mittarit
+### Räätälöidyt mittarit
 
-Seuraa AI-kohtaisia mittareita:
+Seuraa AI-spesifisiä mittareita:
 
 ```python
 # Mukautettu telemetria tekoälymalleille
@@ -445,12 +445,12 @@ class AITelemetry:
         )
 ```
 
-### Terveystarkistukset
+### Terveystarkastukset
 
-Ota käyttöön AI-palveluiden kunnon valvonta:
+Toteuta AI-palvelun terveystila-valvonta:
 
 ```python
-# Terveystarkastus-päätepisteet
+# Terveystarkastus päätepisteet
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -460,7 +460,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Testaa OpenAI-yhteyttä
+        # Testaa OpenAI-yhteys
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -476,32 +476,32 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## Seuraavat askeleet
+## Seuraavat vaiheet
 
-1. **Tutustu [Microsoft Foundry -integraatio-oppaaseen](microsoft-foundry-integration.md)** palvelujen integraatiomalleihin
-2. **Suorita [AI-työpaja](ai-workshop-lab.md)** saadaksesi käytännön kokemusta
-3. **Ota käyttöön [Tuotannon AI-käytännöt](production-ai-practices.md)** yritystason käyttöönottoja varten
-4. **Tutustu [AI-vianetsintäoppaaseen](../chapter-07-troubleshooting/ai-troubleshooting.md)** yleisten ongelmien varalta
+1. **Tutustu [Microsoft Foundry -integraatio-oppaaseen](microsoft-foundry-integration.md)** palveluiden integraatiokuvioita varten
+2. **Suorita [AI-työpajan labra](ai-workshop-lab.md)** käytännön kokemusta varten
+3. **Ota käyttöön [Tuotannon AI-käytännöt](production-ai-practices.md)** yrityskäyttöönottoon
+4. **Tutki [AI-vianmääritysohjeita](../chapter-07-troubleshooting/ai-troubleshooting.md)** yleisiä ongelmia varten
 
 ## Resurssit
 
-- [Microsoft Foundry -mallien saatavuus](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Microsoft Foundry Modelien mallien saatavuus](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Azure Developer CLI -dokumentaatio](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Container Apps -skaalaus](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [AI-mallien kustannusoptimointi](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [AI-mallien kustannusten optimointi](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Lukujen navigointi:**
+**Luvun navigointi:**
 - **📚 Kurssin etusivu**: [AZD Aloittelijoille](../../README.md)
-- **📖 Nykyinen luku**: Luku 2 - AI-First Development
+- **📖 Nykyinen luku**: Luku 2 - AI-ensimmäinen kehitys
 - **⬅️ Edellinen**: [Microsoft Foundry -integraatio](microsoft-foundry-integration.md)
-- **➡️ Seuraava**: [AI-työpaja](ai-workshop-lab.md)
+- **➡️ Seuraava**: [AI-työpajan labra](ai-workshop-lab.md)
 - **🚀 Seuraava luku**: [Luku 3: Konfigurointi](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Tämä asiakirja on käännetty tekoälykäännöspalvelulla [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, automatisoiduissa käännöksissä saattaa esiintyä virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulee pitää määräysvaltana. Tärkeän tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai virhetulkinnasta.
+**Vastuuvapauslauseke**:
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, otathan huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäiskielellä on virallinen lähde. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

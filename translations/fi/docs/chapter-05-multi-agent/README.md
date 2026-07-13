@@ -1,22 +1,22 @@
-# Luku 5: Moni-agenttiset tekoälyratkaisut
+# Luku 5: Moniagenttiset tekoälyratkaisut
 
-**📚 Kurssi**: [AZD Aloittelijoille](../../README.md) | **⏱️ Kesto**: 2–3 tuntia | **⭐ Monimutkaisuus**: Edistynyt
+**📚 Kurssi**: [AZD Aloittelijoille](../../README.md) | **⏱️ Kesto**: 2-3 tuntia | **⭐ Vaativuus**: Edistynyt
 
 ---
 
 ## Yleiskatsaus
 
-Tämä luku käsittelee edistyneitä moni-agenttiarkkitehtuurimalleja, agenttien orkestrointia ja tuotantovalmiita tekoälykäyttöönottoja monimutkaisiin skenaarioihin.
+Tässä luvussa käsitellään edistyneitä moniagenttisen arkkitehtuurin malleja, agenttien orkestrointia sekä tuotantovalmiita tekoälykäyttöönottoja monimutkaisiin tilanteisiin.
 
-> Varmennettu `azd 1.25.6`:lla kesäkuussa 2026.
+> Vahvistettu `azd 1.27.1` -version kanssa heinäkuussa 2026.
 
 ## Oppimistavoitteet
 
-Suoritettuasi tämän luvun osaat:
-- Ymmärtää moni-agenttiarkkitehtuurimalleja
-- Ottaa käyttöön koordinoituja tekoälyagenttijärjestelmiä
-- Toteuttaa agenttien välistä viestintää
-- Rakentaa tuotantovalmiita moni-agenttiratkaisuja
+Tässä luvussa opit:
+- Ymmärtämään moniagenttisen arkkitehtuurin malleja
+- Ottaamaan käyttöön koordinoituja tekoälyagenttijärjestelmiä
+- Toteuttamaan agenttien välistä viestintää
+- Rakentamaan tuotantovalmiita moniagenttiratkaisuja
 
 ---
 
@@ -24,18 +24,18 @@ Suoritettuasi tämän luvun osaat:
 
 | # | Oppitunti | Kuvaus | Aika |
 |---|--------|-------------|------|
-| 1 | [Moni-agentin perusteet](multi-agent-basics.md) | Käytännön harjoitus: ota käyttöön toimiva moni-agenttisovellus komennolla `azd up` | 45 min |
+| 1 | [Moniagentin perusteet](multi-agent-basics.md) | Käytännössä: ota käyttöön toimiva moniagenttisovellus komennolla `azd up` | 45 min |
 | 2 | [Koordinointimallit](../chapter-06-pre-deployment/coordination-patterns.md) | Agenttien orkestrointistrategiat (jatkuu luvussa 6) | 30 min |
-| 3 | [ARM-mallin käyttöönotto](../../examples/retail-multiagent-arm-template/README.md) | Yhden napsautuksen käyttöönottoesimerkki | 30 min |
+| 3 | [ARM-mallipohjan käyttöönotto](../../examples/retail-multiagent-arm-template/README.md) | Yhden klikkauksen käyttöönottoesimerkki | 30 min |
 
-> **Aloita Oppitunnista 1.** Se on ainoa täysin käytännönläheinen, käyttöön otettavissa oleva oppitunti tässä luvussa. Oppitunti 2 löytyy luvusta 6 (se on jaettu esivalmistelun kanssa), ja [Retail Multi-Agent Solution](../../examples/retail-scenario.md) on arkkitehtuuripiirros — suunnittelun viitemateriaali, ei yhden komennon mallipohja.
+> **Aloita oppitunnista 1.** Se on ainoa täysin käytännönläheinen ja käyttöön otettava oppitunti tässä luvussa. Oppitunti 2 on luvussa 6 (jaettu alustavan käyttöönoton suunnittelun kanssa), ja [Retail Multi-Agent Solution](../../examples/retail-scenario.md) on arkkitehtuurin suunnittelumalli — suunnittelun viite, ei yhdellä komennolla käytettävä malli.
 
 ---
 
-## 🚀 Nopea aloitus
+## 🚀 Aloita nopeasti
 
 ```bash
-# Vaihtoehto 1: Ota käyttöön mallista
+# Vaihtoehto 1: Ota käyttöön mallipohjasta
 azd init --template agent-openai-python-prompty
 azd up
 
@@ -45,55 +45,55 @@ azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **Mikä lähestymistapa?** Käytä `azd init --template` aloittaaksesi toimivasta esimerkistä. Käytä `azd ai agent init` kun sinulla on oma agenttimanifesti. Katso täydelliset tiedot [AZD AI CLI -viitteestä](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
+> **Mikä lähestymistapa?** Käytä `azd init --template` aloittaaksesi toimivasta esimerkistä. Käytä `azd ai agent init` kun sinulla on oma agenttimentiteetti. Katso [AZD AI CLI -viite](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) saadaksesi täydelliset tiedot.
 
 ---
 
-## 🤖 Moni-agenttiarkkitehtuuri
+## 🤖 Moniagenttinen arkkitehtuuri
 
 ```mermaid
 graph TD
-    Orchestrator[Orkestrointiagentti<br/>Reitittää pyynnöt, hallinnoi työnkulkua] --> Customer[Asiakasagentti<br/>Käyttäjän kyselyt, mieltymykset]
-    Orchestrator --> Inventory[Varastoagentti<br/>Varastotasot, tilaukset]
+    Orchestrator[Orkestrointiedustaja<br/>Reitittää pyyntöjä, hallinnoi työnkulkua] --> Customer[Asiakkaan edustaja<br/>Käyttäjän kyselyt, mieltymykset]
+    Orchestrator --> Inventory[Varaston edustaja<br/>Varastotasot, tilaukset]
 ```
 
 ---
 
-## 🎯 Esitelty ratkaisu: Vähittäiskaupan moni-agenttiratkaisu
+## 🎯 Esitelty ratkaisu: Retail Multi-Agent
 
-The [Retail Multi-Agent Solution](../../examples/retail-scenario.md) esittelee:
+[Retail Multi-Agent Solution](../../examples/retail-scenario.md) osoittaa:
 
-- **Customer Agent**: Käsittelee käyttäjävuorovaikutuksia ja mieltymyksiä
-- **Inventory Agent**: Hallinnoi varastoa ja tilausten käsittelyä
-- **Orchestrator**: Koordinoi agenttien välistä toimintaa
-- **Shared Memory**: Agenttien välinen kontekstinhallinta
+- **Asiakasagentti**: Käsittelee käyttäjän vuorovaikutuksen ja mieltymykset
+- **Varastoagentti**: Hallinnoi varastoa ja tilausten käsittelyä
+- **Orkestroija**: Koordinoi agenttien toimintaa
+- **Jaettu Muisti**: Agenttien välinen kontekstinhallinta
 
 ### Käytetyt palvelut
 
-| Service | Purpose |
+| Palvelu | Tarkoitus |
 |---------|---------|
-| Microsoft Foundry Models | Kielen ymmärrys |
+| Microsoft Foundry Models | Kielen ymmärtäminen |
 | Azure AI Search | Tuotekatalogi |
 | Cosmos DB | Agentin tila ja muisti |
-| Container Apps | Agenttien isännöinti |
-| Application Insights | Seuranta |
+| Container Apps | Agentin hosting |
+| Application Insights | Monitorointi |
 
 ---
 
 ## 🔗 Navigointi
 
-| Direction | Chapter |
+| Suunta | Luku |
 |-----------|---------|
-| **Previous** | [Luku 4: Infrastruktuuri](../chapter-04-infrastructure/README.md) |
-| **Next** | [Luku 6: Esivalmistelu](../chapter-06-pre-deployment/README.md) |
+| **Edellinen** | [Luku 4: Infrastruktuuri](../chapter-04-infrastructure/README.md) |
+| **Seuraava** | [Luku 6: Esikattelu](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 Aiheeseen liittyvät resurssit
 
-- [AI-agenttien opas](../chapter-02-ai-development/agents.md)
+- [Tekoälyagenttien opas](../chapter-02-ai-development/agents.md)
 - [Tuotannon tekoälykäytännöt](../chapter-08-production/production-ai-practices.md)
-- [Tekoälyn vianetsintä](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Tekoälyn vianmääritys](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

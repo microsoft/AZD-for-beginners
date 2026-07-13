@@ -1,49 +1,49 @@
-# Luku 7: Vianmääritys ja virheenkorjaus
+# Luku 7: Vianmääritys ja Debuggaus
 
-**📚 Kurssi**: [AZD aloittelijoille](../../README.md) | **⏱️ Kesto**: 1-1.5 tuntia | **⭐ Vaikeustaso**: Keskitaso
+**📚 Kurssi**: [AZD Aloittelijoille](../../README.md) | **⏱️ Kesto**: 1-1,5 tuntia | **⭐ Vaativuus**: Keskitaso
 
 ---
 
 ## Yleiskatsaus
 
-Tämä luku auttaa diagnosoimaan ja ratkaisemaan yleisiä ongelmia Azure Developer CLI:n kanssa työskenneltäessä. Käyttöönoton epäonnistumisista tekoälykohtaisiin ongelmiin.
+Tämä luku auttaa sinua diagnosoimaan ja ratkaisemaan yleisiä ongelmia työskennellessäsi Azure Developer CLI:n kanssa. Julkaisun epäonnistumisista AI-spesifisiin ongelmiin.
 
-> Varmennettu `azd 1.25.6`:lla kesäkuussa 2026.
+> Varmistettu `azd 1.27.1` -versiolla heinäkuussa 2026.
 
 ## Oppimistavoitteet
 
-By completing this chapter, you will:
-- Tunnistaa yleiset AZD-käyttöönoton epäonnistumiset
-- Etsiä ja korjata todennukseen ja käyttöoikeuksiin liittyviä ongelmia
-- Ratkaista tekoälypalveluiden yhteysongelmat
-- Käyttää Azure-portaalia ja CLI:tä vianmääritykseen
+Suoritettuasi tämän luvun:
+- Osaat diagnosoida yleiset AZD-julkaisun epäonnistumiset
+- Osaat debugata tunnistautumis- ja käyttöoikeusongelmat
+- Osaat ratkaista AI-palvelujen yhteysongelmat
+- Osaat käyttää Azure-portaalia ja CLI-työkaluja vianmääritykseen
 
 ---
 
 ## 📚 Oppitunnit
 
-| # | Oppitunti | Kuvaus | Aika |
-|---|--------|-------------|------|
-| 1 | [Yleiset ongelmat](common-issues.md) | Usein esiintyvät ongelmat | 30 min |
-| 2 | [Vianmääritysopas](debugging.md) | Vaiheittaiset vianmääritysstrategiat | 45 min |
-| 3 | [Tekoälyn vianmääritys](ai-troubleshooting.md) | Tekoälykohtaiset ongelmat | 30 min |
+| # | Oppitunti | Kuvaus | Kesto |
+|---|----------|---------|-------|
+| 1 | [Yleiset Ongelmät](common-issues.md) | Usein vastaan tulevat ongelmat | 30 min |
+| 2 | [Debuggausohjeet](debugging.md) | Askeltavat debuggausstrategiat | 45 min |
+| 3 | [AI Vianmääritys](ai-troubleshooting.md) | AI-spesifiset ongelmat | 30 min |
 
 ---
 
-## 🚨 Nopeat korjaukset
+## 🚨 Nopeat Ratkaisut
 
-### Todennusongelmat
+### Tunnistautumisongelmat
 ```bash
 # Vaaditaan AZD-työnkuluille
 azd auth login
 
-# Valinnainen, jos käytät myös Azure CLI -komentoja suoraan
+# Valinnainen, jos käytät myös suoraan Azure CLI -komentoja
 az login
 
 azd auth status
 ```
 
-### Provisioinnin epäonnistumiset
+### Julkaisun epäonnistumiset
 ```bash
 azd show
 azd monitor --logs
@@ -57,7 +57,7 @@ azd env new different-name
 azd up
 ```
 
-### Kiintiö ylitetty
+### Käytön ylitys
 ```bash
 az vm list-usage --location eastus --output table
 azd env set AZURE_LOCATION westus2
@@ -69,17 +69,17 @@ azd up
 ## 📋 Virhekoodiviite
 
 | Virhe | Syy | Ratkaisu |
-|-------|-------|----------|
+|-------|------|----------|
 | `AuthenticationError` | Ei kirjautunut sisään | `azd auth login` |
-| `ResourceNotFound` | Puuttuva resurssi | Tarkista resurssien nimet |
-| `QuotaExceeded` | Tilausrajoitukset | Pyydä kiintiön korotusta |
+| `ResourceNotFound` | Puuttuva resurssi | Tarkista resurssin nimet |
+| `QuotaExceeded` | Tilausrajat ylitetty | Pyydä käyttöoikeuden lisäystä |
 | `InvalidTemplate` | Bicep-syntaksivirhe | `az bicep build` |
-| `Conflict` | Resurssi on olemassa | Käytä uutta nimeä tai poista se |
-| `Forbidden` | Riittämättömät käyttöoikeudet | Tarkista RBAC-roolit |
+| `Conflict` | Resurssi on jo olemassa | Käytä uutta nimeä tai poista |
+| `Forbidden` | Puuttuvat oikeudet | Tarkista RBAC-roolit |
 
 ---
 
-## 🔄 Nollaus ja palautus
+## 🔄 Nollaus ja Palautus
 
 ```bash
 # Pehmeä nollaus (säilytä resurssit, ota koodi uudelleen käyttöön)
@@ -92,20 +92,20 @@ azd up
 
 ---
 
-## 🔗 Navigointi
+## 🔗 Navigaatio
 
 | Suunta | Luku |
-|-----------|---------|
-| **Edellinen** | [Luku 6: Ennen käyttöönottoa](../chapter-06-pre-deployment/README.md) |
+|--------|------|
+| **Edellinen** | [Luku 6: Esijulkaisu](../chapter-06-pre-deployment/README.md) |
 | **Seuraava** | [Luku 8: Tuotanto](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Aiheeseen liittyvät resurssit
+## 📖 Liittyvät resurssit
 
-- [Ennen käyttöönottoa tarkistukset](../chapter-06-pre-deployment/preflight-checks.md)
+- [Esijulkaisun Tarkistukset](../chapter-06-pre-deployment/preflight-checks.md)
 - [Konfigurointiopas](../chapter-03-configuration/configuration.md)
-- [AZD GitHub -ongelmat](https://github.com/Azure/azure-dev/issues)
+- [AZD GitHub-ongelmat](https://github.com/Azure/azure-dev/issues)
 
 ---
 

@@ -1,59 +1,59 @@
 # Tuo oma sovellus - Lisää azd olemassa olevaan projektiin
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD Aloittelijoille](../../README.md)
-- **📖 Current Chapter**: Luku 1 - Perusta ja pika-aloitus
-- **⬅️ Previous**: [Your First Project](first-project.md)
-- **➡️ Next**: [Dev Containers & Codespaces](dev-containers.md)
+**Luku Navigointi:**
+- **📚 Kurssin etusivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Tämänhetkinen luku**: Luku 1 - Perusta & Nopeasti alkuun
+- **⬅️ Edellinen**: [Ensimmäinen projektisi](first-project.md)
+- **➡️ Seuraava**: [Dev Containers & Codespaces](dev-containers.md)
 
-> Vahvistettu `azd 1.25.6`:llä kesäkuussa 2026.
+> Tarkistettu `azd 1.27.1` version avulla heinäkuussa 2026.
 
 ## Johdanto
 
-[Your First Project](first-project.md) -oppaassa otit sovelluksen käyttöön aloittamalla mallista. Mutta useimmiten sinulla jo on sovellus — Node.js API, Python Flask -palvelu, .NET-verkkosovellus — joka sijaitsee kansiossa koneellasi. Tämä opas näyttää, miten lisäät azd:n olemassa olevaan koodiin, jotta voit ottaa sen käyttöön `azd up` -komennolla, ilman mallia.
+[Ensimmäisessä projektissasi](first-project.md) otit käyttöön sovelluksen aloittamalla mallipohjasta. Mutta useimmiten sinulla on jo olemassa *oma* sovellus—Node.js API, Python Flask -palvelu, .NET-verkkosovellus—kansiossa omalla koneellasi. Tässä oppitunnissa näytetään, miten lisäät azd:n olemassa olevaan koodiin, jotta voit ottaa sen käyttöön komennolla `azd up` ilman mallipohjaa.
 
 ## Oppimistavoitteet
 
-Tämän oppitunnin jälkeen osaat:
+Oppitunnin lopuksi osaat:
 - Ymmärtää kolme tapaa aloittaa azd-projekti
-- Suorittaa `azd init` olemassa olevan koodikannan sisällä
-- Ymmärtää, mitä `azure.yaml` ja `infra/`-kansio tekevät sovelluksellesi
-- Tietää, milloin antaa azd:n luoda infrastruktuurin ja milloin kirjoittaa oman
-- Ottaa olemassa olevan sovelluksesi käyttöön Azureen `azd up` -komennolla
+- Suorittaa `azd init` olemassa olevan koodin sisällä
+- Ymmärtää mitä `azure.yaml` ja `infra/` -kansio tekevät sovelluksellesi
+- Tietää milloin antaa azd:n luoda infrastruktuuri ja milloin kirjoittaa itse
+- Ottaessa olemassa oleva sovellus käyttöön Azureen komennolla `azd up`
 
 ## Oppimistulokset
 
-Oppitunnin suorittamisen jälkeen pystyt:
-- Alustamaan azd:n projektissa, joka sinulla jo on
-- Lukemaan ja muokkaamaan perus-`azure.yaml`-tiedostoa
-- Generoimaan lähtöinfrastruktuurin komennolla `azd infra generate`
-- Valitsemaan sopivan Azure-hostin sovelluksellesi
-- Ottaamaan oman sovelluksesi käyttöön ja siivoamaan sen jäljet
+Oppitunnin jälkeen osaat:
+- Alustaa azd olemassa olevaan projektiin
+- Lukea ja muokata perus `azure.yaml` -tiedostoa
+- Luoda aloitusinfrastruktuurin komennolla `azd infra generate`
+- Valita sopivan Azure-isännän sovelluksellesi
+- Otta oman sovelluksesi käyttöön ja siivota ympäristön
 
 ---
 
 ## Kolme tapaa aloittaa azd-projekti
 
-| Starting point | Command | When to use |
-|----------------|---------|-------------|
-| **From a template** | `azd init --template <name>` | Oppimiseen tai uuden sovelluksen aloittamiseen valmiista mallista |
-| **From your existing code** | `azd init` (in your project folder) | Sinulla on jo sovellus ja haluat ottaa sen käyttöön |
-| **From a Git repo** | `azd init --from-code` (in a cloned repo) | Ota azd käyttöön olemassa olevassa repositoriossa |
+| Aloituskohta | Komento | Milloin käyttää |
+|-------------|---------|-------------------|
+| **Mallipohjasta** | `azd init --template <nimi>` | Oppimiseen tai uuden sovelluksen aloittamiseen todistetusta mallista |
+| **Olemassa olevasta koodista** | `azd init` (projektikansiossa) | Sinulla on jo sovellus ja haluat ottaa sen käyttöön |
+| **Git-reposta** | `azd init --from-code` (klonatussa repossa) | Azd:n käyttöönotto olemassa olevassa koodivarastossa |
 
-Harjoittelit jo ensimmäistä vaihtoehtoa. Tämä oppitunti kattaa toisen—yleisimmän todellisen tilanteen.
+Olet jo harjoitellut ensimmäistä vaihtoehtoa. Tässä oppitunnissa käsitellään toista vaihtoehtoa—useimmiten käytettyä todellista tilannetta.
 
 ---
 
 ## Vaihe 1: Suorita `azd init` projektissasi
 
-Avaa terminaali **olemassa olevan projektikansiosi sisällä** ja suorita:
+Avaa terminaali **olemassa olevan projektikansion sisällä** ja aja:
 
 ```bash
 cd my-existing-app
 azd init
 ```
 
-azd kysyy, miten haluat alustaa. Valitse:
+Azd kysyy, miten haluat alustaa. Valitse:
 
 ```
 ? How do you want to initialize your app?
@@ -61,26 +61,26 @@ azd kysyy, miten haluat alustaa. Valitse:
   Select a template
 ```
 
-Valitse **"Käytä koodia nykyisestä hakemistosta."** azd skannaa sitten kansiosi, tunnistaa kielen ja kehyksen sekä ehdottaa isäntää.
+Valitse **"Use code in the current directory."** Azd skannaa kansiosi, tunnistaa kielesi ja kehysrakenteesi, ja ehdottaa isäntää.
 
 ### Mitä azd tunnistaa
 
-azd etsii merkkejä kuten `package.json`, `requirements.txt`, `pom.xml`, `*.csproj` tai `Dockerfile` ja ehdottaa vastaavaa Azure-isäntää:
+Azd etsii merkkejä, kuten `package.json`, `requirements.txt`, `pom.xml`, `*.csproj` tai `Dockerfile`, ja ehdottaa sopivaa Azure-isäntää:
 
-| Your app | Likely detected host |
-|----------|----------------------|
-| Node.js / Python / .NET web app | Azure App Service tai Container Apps |
-| Containerized app (`Dockerfile`) | Azure Container Apps |
+| Sovelluksesi | Todennäköisesti tunnistettu isäntä |
+|-------------|-----------------------------|
+| Node.js / Python / .NET-verkkosovellus | Azure App Service tai Container Apps |
+| Konttisoitu sovellus (`Dockerfile`) | Azure Container Apps |
 | Function app | Azure Functions |
-| Static site (React/Vue build output) | Azure Static Web Apps |
+| Staattinen sivusto (React/Vue rakennustulos) | Azure Static Web Apps |
 
-Vahvista havaitut palvelut, ja azd luo tarvitsemasi tiedostot.
+Vahvista tunnistetut palvelut, ja azd luo tarvitsemasi tiedostot.
 
 ---
 
-## Vaihe 2: Ymmärrä, mitä azd loi
+## Vaihe 2: Ymmärrä mitä azd loi
 
-Initin jälkeen projektissasi on kaksi uutta asiaa:
+Initoinnin jälkeen projektissasi on kaksi uutta asiaa:
 
 ```
 my-existing-app/
@@ -94,7 +94,7 @@ my-existing-app/
 
 ### `azure.yaml` — projektin määritelmä
 
-Tämä on azd-projektin ydin. Minimaalinen versio näyttää tältä:
+Tämä on azd-projektin sydän. Minimaalinen versio näyttää tältä:
 
 ```yaml
 # azure.yaml
@@ -106,13 +106,13 @@ services:
     host: appservice         # appservice | containerapp | function | staticwebapp
 ```
 
-`services`-lohko on avainosa: jokainen merkintä yhdistää koodikansion Azure-isäntään. Jos sovelluksellasi on sekä frontend että API, sinulla on kaksi palvelua.
+`services`-lohko on keskeinen: jokainen kohde yhdistää koodin kansion Azure-isäntään. Jos sovelluksessasi on frontend ja API, sinulla on kaksi palvelua.
 
 ### `infra/` — Azure-resurssisi koodina
 
-`infra/`-kansio sisältää Bicep-tiedostoja, jotka määrittelevät Azure-resurssit, joita sovelluksesi tarvitsee (App Service, tietokanta jne.). Sinun ei tarvitse kirjoittaa näitä käsin—azd generoi toimivan lähtökohdan. Voit muokata niitä myöhemmin lisätäksesi resursseja tai tiukentaaksesi suojausta (käsitellään [Luvussa 4](../chapter-04-infrastructure/README.md)).
+`infra/`-kansiossa ovat Bicep-tiedostot, jotka määrittelevät Azure-resurssit, joita sovelluksesi tarvitsee (App Service, tietokanta, jne.). Näitä ei tarvitse kirjoittaa käsin—azd generoi toimivan lähtökohdan. Voit *muokata* näitä myöhemmin lisätäksesi resursseja tai kiristääksesi tietoturvaa (käsitellään [luvussa 4](../chapter-04-infrastructure/README.md)).
 
-> **Vinkki:** Haluatko tarkastella tai muokata generoituja infrastruktuuritiedostoja ennen käyttöönottoa? Suorita `azd infra generate` (saatavilla myös nimellä `azd infra synth`), jolloin IaC kirjoitetaan levylle, jotta voit tarkistaa ja versiohallita sen.
+> **Vinkki:** Haluatko nähdä tai muokata generoitua infrastruktuuria ennen käyttöönottoa? Suorita `azd infra generate` (tai `azd infra synth`) kirjoittaaksesi infrastruktuurina koodin levytilaan, jotta voit tarkistaa sen ja hallita versionhallinnassa.
 
 ---
 
@@ -128,16 +128,16 @@ azd env new dev
 azd env set API_VERSION 1.0.0
 ```
 
-Todellisille salaisuuksille tallenna ne Key Vaultiin ja viittaa niihin infrastruktuuristasi — katso [Luku 3: Konfigurointi & todennus](../chapter-03-configuration/authsecurity.md).
+Todellisille salaisuuksille tallenna ne Key Vaultiin ja viittaa niihin infrastruktuuristasi—katso [luku 3: Asetukset & Todennus](../chapter-03-configuration/authsecurity.md).
 
 ---
 
-## Vaihe 4: Ota käyttöön
+## Vaihe 4: Käyttöönotto
 
-Käytä nyt samaa työnkulkua, jonka jo tunnet:
+Käytä nyt samaa työskentelytapaa, jonka jo osaat:
 
 ```bash
-# Tunnistaudu (vaaditaan azd:lle)
+# Todennus (vaaditaan azd:lle)
 azd auth login
 
 # Esikatsele luotavat resurssit
@@ -147,7 +147,7 @@ azd provision --preview
 azd up
 ```
 
-Kun se valmistuu, azd tulostaa sovelluksesi URL-osoitteen. Vahvista se samalla tavalla kuin mitä tahansa azd-sovellusta:
+Kun se on valmis, azd tulostaa sovelluksesi URL-osoitteen. Varmista toimivuus samalla tavalla kuin muiden azd-sovellusten kanssa:
 
 ```bash
 azd show           # näytä päätepisteet
@@ -156,20 +156,20 @@ azd monitor --logs # tarkista lokit tarvittaessa
 
 ---
 
-## Yleisimmät ensikertalaisten ongelmat
+## Yleisimpiä aloittelevan ongelmia
 
-| Symptom | Likely cause | Fix |
-|---------|--------------|-----|
-| azd ei tunnistanut sovellustani | Puuttuva manifesti (esim. `package.json`) | Lisää manifesti tai valitse isäntä manuaalisesti `azd init` -vaiheessa |
-| Build epäonnistuu `azd up`-komennon aikana | Sovellus tarvitsee build-vaiheen | Lisää `buildCommand`/`outputPath` palvelun alle `azure.yaml`-tiedostoon |
-| Sovellus käynnistyy mutta palauttaa virheitä | Puuttuva konfiguraatio/salaistus | Aseta arvot `azd env set` -komennolla tai yhdistä Key Vaultiin |
-| Väärä isäntä valittu | Automaattinen tunnistus arvasi väärin | Muokkaa `host:`-kenttää `azure.yaml`-tiedostossa ja suorita `azd up` uudelleen |
+| Oire | Todennäköinen syy | Korjaus |
+|------|-----------------|---------|
+| azd ei tunnistanut sovellustani | Puuttuva manifesti (esim. `package.json`) | Lisää manifesti tai valitse isäntä manuaalisesti `azd init`-komennolla |
+| Käännös epäonnistuu `azd up` aikana | Sovellus tarvitsee rakennusvaiheen | Lisää `buildCommand`/`outputPath` `azure.yaml`-palvelun alle |
+| Sovellus käynnistyy mutta palauttaa virheitä | Puuttuva asetukset/salaisuudet | Aseta arvot `azd env set` komennolla tai yhdistä Key Vault |
+| Väärä isäntä valittu | Automaattinen tunnistus arvasi väärin | Muokkaa `host:`-arvoa `azure.yaml` tiedostossa ja suorita `azd up` uudelleen |
 
-Lisätietoja on [Luvussa 7: Vianmääritys](../chapter-07-troubleshooting/README.md).
+Lisätietoja on [luvussa 7: Ongelmien ratkaisu](../chapter-07-troubleshooting/README.md).
 
 ---
 
-## Siivoaminen
+## Puhdista
 
 ```bash
 azd down --force --purge
@@ -179,26 +179,26 @@ azd down --force --purge
 
 ## Yhteenveto
 
-- `azd init` → **"Käytä koodia nykyisestä hakemistosta"** lisää azd:n sovellukseen, joka sinulla jo on.
-- `azure.yaml` yhdistää koodikansiot Azure-isäntöihin; `infra/` määrittelee resurssit Bicep-muodossa.
-- `azd infra generate` antaa sinun tarkistaa tai mukauttaa generoitu infrastruktuuri.
-- Kun projekti on alustettu, olemassa oleva sovelluksesi käyttää täsmälleen samaa `azd up` / `azd down` -työnkulkua kuin malli-pohjainen sovellus.
+- `azd init` → **"Use code in the current directory"** lisää azd:n sovellukseen, joka sinulla jo on.
+- `azure.yaml` yhdistää koodikansiot Azure-isäntiin; `infra/` määrittelee resurssit Bicep-koodina.
+- `azd infra generate` antaa sinun tarkistaa tai muokata luotua infrastruktuuria.
+- Kun azd on alustettu, olemassa oleva sovelluksesi käyttää samaa `azd up` / `azd down` -työnkulkua kuin mallipohjainen sovellus.
 
 ---
 
 ## 🔗 Navigointi
 
-| Direction | Lesson |
-|-----------|--------|
-| **Previous** | [Your First Project](first-project.md) |
-| **Next** | [Dev Containers & Codespaces](dev-containers.md) |
+| Suunta | Oppitunti |
+|--------|----------|
+| **Edellinen** | [Ensimmäinen projektisi](first-project.md) |
+| **Seuraava** | [Dev Containers & Codespaces](dev-containers.md) |
 
-## 📖 Liittyvät resurssit
+## 📖 Aiheeseen liittyvät materiaalit
 
-- [AZD Basics](azd-basics.md)
-- [Luku 4: Infrastructure as Code](../chapter-04-infrastructure/README.md)
-- [Konfigurointi & todennus](../chapter-03-configuration/authsecurity.md)
-- [Komentojen pikaopas](../../resources/cheat-sheet.md)
+- [AZD Perusteet](azd-basics.md)
+- [Luku 4: Infrastruktuuri koodina](../chapter-04-infrastructure/README.md)
+- [Asetukset & Todennus](../chapter-03-configuration/authsecurity.md)
+- [Komentojen pikaohje](../../resources/cheat-sheet.md)
 
 ---
 
