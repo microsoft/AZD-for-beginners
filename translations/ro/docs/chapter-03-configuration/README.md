@@ -6,13 +6,13 @@
 
 ## Prezentare generală
 
-Acest capitol acoperă configurarea mediului, tiparele de autentificare și cele mai bune practici de securitate pentru implementările Azure Developer CLI.
+Acest capitol acoperă configurarea mediului, modelele de autentificare și cele mai bune practici de securitate pentru implementările Azure Developer CLI.
 
-> Validat cu `azd 1.25.6` în iunie 2026.
+> Validat pe `azd 1.27.1` în iulie 2026.
 
 ## Obiective de învățare
 
-După finalizarea acestui capitol, vei:
+Prin parcurgerea acestui capitol, vei:
 - Stăpâni ierarhia de configurare AZD
 - Gestiona mai multe medii (dev, staging, prod)
 - Implementa autentificare sigură cu identități gestionate
@@ -24,15 +24,15 @@ După finalizarea acestui capitol, vei:
 
 | # | Lecție | Descriere | Timp |
 |---|--------|-------------|------|
-| 1 | [Ghid de Configurare](configuration.md) | Configurarea și gestionarea mediului | 30 min |
-| 2 | [Autentificare & Securitate](authsecurity.md) | Tipare de identitate gestionată și RBAC | 30 min |
+| 1 | [Ghid de configurare](configuration.md) | Configurarea și gestionarea mediului | 30 min |
+| 2 | [Autentificare & Securitate](authsecurity.md) | Modele de identitate gestionată și RBAC | 30 min |
 
 ---
 
 ## 🚀 Pornire rapidă
 
 ```bash
-# Creează mai multe medii
+# Creați medii multiple
 azd env new dev
 azd env new staging
 azd env new prod
@@ -52,19 +52,19 @@ azd env get-values
 
 ## 🔧 Ierarhia Configurării
 
-AZD aplică setările în această ordine (ulterior suprascrie anterior):
+AZD aplică setările în această ordine (cele ulterioare suprascriu pe cele anterioare):
 
 1. **Valori implicite** (încorporate în șabloane)
-2. **azure.yaml** (configurarea proiectului)
+2. **azure.yaml** (configurația proiectului)
 3. **Variabile de mediu** (`azd env set`)
-4. **Flaguri din linia de comandă** (`--location eastus`)
+4. **Steaguri din linia de comandă** (`--location eastus`)
 
 ---
 
 ## 🔐 Cele mai bune practici de securitate
 
 ```bash
-# Folosește identitate gestionată (recomandat)
+# Folosește identitatea gestionată (recomandat)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
 # Verifică starea autentificării AZD
@@ -73,7 +73,7 @@ azd auth status
 # Opțional: verifică contextul Azure CLI dacă intenționezi să rulezi comenzi az
 az account show
 
-# Re-autentifică-te dacă este nevoie
+# Reautentifică-te dacă este nevoie
 azd auth login
 
 # Opțional: reîmprospătează autentificarea Azure CLI pentru comenzile az

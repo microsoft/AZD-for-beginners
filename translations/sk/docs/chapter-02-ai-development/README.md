@@ -1,14 +1,14 @@
-# Kapitola 2: Vývoj orientovaný na AI
+# Kapitola 2: Vývoj s prioritou AI
 
-**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Doba trvania**: 1-2 hours | **⭐ Náročnosť**: Stredne pokročilý
+**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Trvanie**: 1-2 hodiny | **⭐ Zložitosť**: Stredne pokročilý
 
 ---
 
 ## Prehľad
 
-Táto kapitola sa zameriava na nasadzovanie aplikácií poháňaných AI pomocou Azure Developer CLI a služieb Microsoft Foundry. Od jednoduchých AI chatovacích aplikácií po inteligentných agentov s nástrojmi.
+Táto kapitola sa zameriava na nasadzovanie aplikácií poháňaných AI pomocou Azure Developer CLI a služieb Microsoft Foundry. Od jednoduchých AI chat aplikácií po inteligentných agentov s nástrojmi.
 
-> **Validation note (2026-06-15):** The command flow and extension guidance in this chapter were reviewed against `azd` `1.25.6` and the current preview AI agent extension release `azure.ai.agents` `0.1.40-preview`. If you are on an older AZD build, update first and then continue with the exercises.
+> **Poznámka k overeniu (2026-07-13):** Tok príkazov a návody k rozšíreniam v tejto kapitole boli preskúmané vzhľadom na `azd` `1.27.1` a aktuálne vydanie rozšírenia AI agentov v preview `azure.ai.agents` `1.0.0-beta.5`. Ak používate staršiu verziu AZD, najprv ju aktualizujte a potom pokračujte v cvičeniach.
 
 ## Ciele učenia
 
@@ -24,17 +24,17 @@ Po dokončení tejto kapitoly budete:
 
 | # | Lekcia | Popis | Čas |
 |---|--------|-------------|------|
-| 1 | [Integrácia Microsoft Foundry](microsoft-foundry-integration.md) | Prepojte AZD so službami Foundry | 30 min |
-| 2 | [Sprievodca AI agentmi](agents.md) | Nasadiť inteligentných agentov s nástrojmi | 45 min |
-| 3 | [Nasadenie AI modelu](ai-model-deployment.md) | Nasadiť a nakonfigurovať AI modely | 30 min |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Prakticky: Pripravte svoje AI riešenie pre AZD | 60 min |
+| 1 | [Integrácia Microsoft Foundry](microsoft-foundry-integration.md) | Prepojenie AZD so službami Foundry | 30 min |
+| 2 | [Sprievodca AI agentmi](agents.md) | Nasadenie inteligentných agentov s nástrojmi | 45 min |
+| 3 | [Nasadenie AI modelov](ai-model-deployment.md) | Nasadenie a konfigurácia AI modelov | 30 min |
+| 4 | [AI workshop laboratórium](ai-workshop-lab.md) | Prakticky: Pripravte vaše AI riešenie pre AZD | 60 min |
 
 ---
 
 ## 🚀 Rýchly štart
 
 ```bash
-# Možnosť 1: RAG chatová aplikácia
+# Možnosť 1: RAG Chat aplikácia
 azd init --template azure-search-openai-demo
 azd up
 
@@ -42,14 +42,14 @@ azd up
 azd init --template get-started-with-ai-agents
 azd up
 
-# Možnosť 3: Rýchla chatová aplikácia
+# Možnosť 3: Rýchla chat aplikácia
 azd init --template openai-chat-app-quickstart
 azd up
 ```
 
 ---
 
-## 🤖 Vybrané AI šablóny
+## 🤖 Odporúčané AI šablóny
 
 | Šablóna | Popis | Služby |
 |----------|-------------|----------|
@@ -62,12 +62,12 @@ azd up
 ## 💰 Informácie o nákladoch
 
 | Prostredie | Odhadované mesačné náklady |
-|-------------|----------------------|
-| Vývoj | $80-150 |
-| Testovacie prostredie | $150-300 |
-| Produkčné | $300-3,500+ |
+|-------------|--------------------------|
+| Vývoj | 80-150 $ |
+| Testovacie prostredie | 150-300 $ |
+| Produkcia | 300-3 500+ $ |
 
-**Tip:** Spustite `azd down` po testovaní, aby ste sa vyhli poplatkom.
+**Tip:** Po testovaní spustite `azd down`, aby ste sa vyhli poplatkom.
 
 ---
 
@@ -76,15 +76,15 @@ azd up
 | Smer | Kapitola |
 |-----------|---------|
 | **Predchádzajúca** | [Kapitola 1: Základy](../chapter-01-foundation/README.md) |
-| **Ďalšia** | [Kapitola 3: Konfigurácia](../chapter-03-configuration/README.md) |
-| **Prejsť na** | [Kapitola 8: Produkčné vzory](../chapter-08-production/README.md) |
+| **Nasledujúca** | [Kapitola 3: Konfigurácia](../chapter-03-configuration/README.md) |
+| **Preskočiť na** | [Kapitola 8: Produkčné vzory](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Súvisiace zdroje
 
 - [Riešenie problémov s AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Praktiky pre produkčné AI](../chapter-08-production/production-ai-practices.md)
+- [Produkčné praktiky AI](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---

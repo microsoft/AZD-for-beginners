@@ -1,51 +1,51 @@
 # Kapitola 6: Plánovanie a overenie pred nasadením
 
-**📚 Kurz**: [AZD For Beginners](../../README.md) | **⏱️ Dĺžka**: 1 hodina | **⭐ Zložitosť**: Stredná
+**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Trvanie**: 1 hodina | **⭐ Zložitosť**: Stredne pokročilý
 
 ---
 
 ## Prehľad
 
-Táto kapitola pokrýva základné kroky plánovania a overenia pred nasadením vašej aplikácie. Naučíte sa predchádzať nákladným chybám pomocou správneho plánovania kapacity, výberu SKU a prednasadzovacích kontrol.
+Táto kapitola zahŕňa základné kroky plánovania a overenia pred nasadením vašej aplikácie. Naučte sa vyhnúť nákladným chybám správnym plánovaním kapacity, výberom SKU a kontrolami pred letom.
 
-> Overené proti `azd 1.25.6` v júni 2026.
+> Overené na `azd 1.27.1` v júli 2026.
 
 ## Ciele učenia
 
-Po dokončení tejto kapitoly budete:
-- Spúšťať prednasadzovacie kontroly pred nasadením
-- Plánovať kapacitu a odhadovať požiadavky na zdroje
-- Vyberať vhodné SKU na optimalizáciu nákladov
-- Konfigurovať Application Insights na monitorovanie
-- Pochopiť vzory koordinácie tímu
+Po dokončení tejto kapitoly budete vedieť:
+- Spustiť kontroly pred nasadením
+- Plánovať kapacitu a odhadnúť požiadavky na zdroje
+- Vybrať vhodné SKU pre optimalizáciu nákladov
+- Nastaviť Application Insights na monitorovanie
+- Pochopiť vzorce koordinácie tímu
 
 ---
 
 ## 📚 Lekcie
 
-| # | Lekcia | Popis | Trvanie |
+| # | Lekcia | Popis | Čas |
 |---|--------|-------------|------|
-| 1 | [Preflight Checks](preflight-checks.md) | Overiť konfiguráciu pred nasadením | 15 min |
-| 2 | [Capacity Planning](capacity-planning.md) | Odhadnúť požiadavky na zdroje | 20 min |
-| 3 | [SKU Selection](sku-selection.md) | Vybrať vhodné cenové hladiny | 15 min |
-| 4 | [Application Insights](application-insights.md) | Konfigurovať monitorovanie | 20 min |
-| 5 | [Coordination Patterns](coordination-patterns.md) | Pracovné postupy tímu pri nasadení | 15 min |
+| 1 | [Kontroly pred nasadením](preflight-checks.md) | Overenie konfigurácie pred nasadením | 15 min |
+| 2 | [Plánovanie kapacity](capacity-planning.md) | Odhad požiadaviek na zdroje | 20 min |
+| 3 | [Výber SKU](sku-selection.md) | Výber vhodných cenových úrovní | 15 min |
+| 4 | [Application Insights](application-insights.md) | Nastavenie monitorovania | 20 min |
+| 5 | [Vzorce koordinácie](coordination-patterns.md) | Pracovné postupy tímového nasadenia | 15 min |
 
 ---
 
-## 🚀 Rýchly štart
+## 🚀 Rýchly začiatok
 
 ```bash
-# Skontrolovať kvóty predplatného
+# Skontrolujte kvóty predplatného
 az vm list-usage --location eastus --output table
 
-# Náhľad nasadenia (nebudú vytvorené žiadne zdroje)
+# Náhľad nasadenia (nevytvárajú sa žiadne zdroje)
 azd provision --preview
 
-# Overiť syntax Bicep
+# Overte syntax Bicep
 az bicep build --file infra/main.bicep
 
-# Skontrolovať konfiguráciu prostredia
+# Skontrolujte konfiguráciu prostredia
 azd env get-values
 ```
 
@@ -53,20 +53,20 @@ azd env get-values
 
 ## ☑️ Kontrolný zoznam pred nasadením
 
-### Pred `azd provision`
+### Pred spustením `azd provision`
 
-- [ ] Kvóta overená pre región
-- [ ] SKU správne vybrané
-- [ ] Nákladový odhad skontrolovaný
-- [ ] Konzistentná konvencia pomenovania
-- [ ] Bezpečnosť/RBAC nakonfigurované
+- [ ] Overená kvóta pre región
+- [ ] Správny výber SKU
+- [ ] Preskúmaný odhad nákladov
+- [ ] Dodržanie konvencie názvov
+- [ ] Nastavené zabezpečenie/RBAC
 
-### Pred `azd deploy`
+### Pred spustením `azd deploy`
 
 - [ ] Nastavené premenné prostredia
 - [ ] Tajomstvá v Key Vault
-- [ ] Overené connection strings
-- [ ] Nakonfigurované health checky
+- [ ] Overené reťazce pripojení
+- [ ] Nastavené kontroly zdravotného stavu
 
 ---
 
@@ -76,8 +76,8 @@ azd env get-values
 |----------|-------------|------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standard | Standard + PTU |
-| AI Search | Basic | Standard S2+ |
+| Microsoft Foundry Models | Štandardný | Štandardný + PTU |
+| AI Search | Základný | Štandardný S2+ |
 
 ---
 
@@ -85,8 +85,8 @@ azd env get-values
 
 | Smer | Kapitola |
 |-----------|---------|
-| **Predchádzajúca** | [Kapitola 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
-| **Ďalšia** | [Kapitola 7: Riešenie problémov](../chapter-07-troubleshooting/README.md) |
+| **Predchádzajúca** | [Kapitola 5: Multi-agent](../chapter-05-multi-agent/README.md) |
+| **Nasledujúca** | [Kapitola 7: Riešenie problémov](../chapter-07-troubleshooting/README.md) |
 
 ---
 

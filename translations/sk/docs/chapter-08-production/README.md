@@ -1,23 +1,23 @@
 # Kapitola 8: Produkčné a podnikové vzory
 
-**📚 Kurz**: [AZD For Beginners](../../README.md) | **⏱️ Trvanie**: 2-3 hodiny | **⭐ Zložitosť**: Pokročilá
+**📚 Kurz**: [AZD Pre Začiatočníkov](../../README.md) | **⏱️ Trvanie**: 2-3 hodiny | **⭐ Zložitosť**: Pokročilý
 
 ---
 
 ## Prehľad
 
-Táto kapitola pokrýva podnikové vzory nasadenia pripravené na produkciu, spevňovanie bezpečnosti, monitorovanie a optimalizáciu nákladov pre produkčné AI pracovné záťaže.
+Táto kapitola pokrýva vzory nasadenia vhodné pre podnikové prostredie, zabezpečenie, monitorovanie a optimalizáciu nákladov pre produkčné AI záťaže.
 
-> Overené s `azd 1.25.6` v júni 2026.
+> Overené na `azd 1.27.1` v júli 2026.
 
 ## Ciele učenia
 
 Po dokončení tejto kapitoly budete:
-- Nasadzovať odolné aplikácie v viacerých regiónoch
+- Nasadzovať viacregionálne odolné aplikácie
 - Implementovať podnikové bezpečnostné vzory
 - Konfigurovať komplexné monitorovanie
 - Optimalizovať náklady v rozsahu
-- Nastaviť CI/CD pipeline s AZD
+- Nastaviť CI/CD pipeline pomocou AZD
 
 ---
 
@@ -25,13 +25,13 @@ Po dokončení tejto kapitoly budete:
 
 | # | Lekcia | Popis | Čas |
 |---|--------|-------------|------|
-| 1 | [Produkčné praktiky AI](production-ai-practices.md) | Podnikové vzory nasadenia | 90 min |
+| 1 | [Produkčné AI Praktiky](production-ai-practices.md) | Podnikové vzory nasadenia | 90 min |
 
 ---
 
-## 🚀 Kontrolný zoznam pre produkciu
+## 🚀 Produkčný kontrolný zoznam
 
-- [ ] Nasadenie v viacerých regiónoch pre odolnosť
+- [ ] Viacregionálne nasadenie pre odolnosť
 - [ ] Spravovaná identita pre autentifikáciu (bez kľúčov)
 - [ ] Application Insights pre monitorovanie
 - [ ] Nastavené rozpočty a upozornenia na náklady
@@ -43,11 +43,11 @@ Po dokončení tejto kapitoly budete:
 
 ## 🏗️ Architektonické vzory
 
-### Vzor 1: Mikroslužby AI
+### Vzor 1: Ai mikroservisy
 
 ```mermaid
 graph LR
-    Gateway[API brána] --> AI[Služba AI] --> Models[Modely Microsoft Foundry]
+    Gateway[Brána API] --> AI[AI služba] --> Models[Modely Microsoft Foundry]
     Gateway --> Auth[Autentifikačná služba]
     AI --> Data[Úložisko dát]
 ```
@@ -56,7 +56,7 @@ graph LR
 
 ```mermaid
 graph LR
-    EventGrid[Mriežka udalostí] --> Functions[Funkcie] --> Pipeline[AI pracovný tok]
+    EventGrid[Udalostná sieť] --> Functions[Funkcie] --> Pipeline[AI Potrubie]
 ```
 
 ---
@@ -85,12 +85,12 @@ properties: {
 | Stratégia | Úspory |
 |----------|---------|
 | Škálovanie na nulu (Container Apps) | 60-80% |
-| Použiť spotrebné úrovne pre vývoj | 50-70% |
+| Použitie spotrebných úrovní pre dev | 50-70% |
 | Plánované škálovanie | 30-50% |
 | Rezervovaná kapacita | 20-40% |
 
 ```bash
-# Nastaviť upozornenia pre rozpočet
+# Nastaviť upozornenia rozpočtu
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -103,13 +103,13 @@ az consumption budget create \
 ## 📊 Nastavenie monitorovania
 
 ```bash
-# Sledujte denníky
+# Streamujte protokoly
 azd monitor --logs
 
 # Skontrolujte Application Insights
 azd monitor --overview
 
-# Zobrazte metriky
+# Zobraziť metriky
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -128,8 +128,8 @@ az monitor metrics list --resource <resource-id>
 
 - [Sprievodca AI agentmi](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Riešenia s viacerými agentmi](../chapter-05-multi-agent/README.md)
-- [Príklad mikroslužieb](../../examples/microservices/README.md)
+- [Multi-Agent Riešenia](../chapter-05-multi-agent/README.md)
+- [Príklad Mikroservisov](../../examples/microservices/README.md)
 
 ---
 

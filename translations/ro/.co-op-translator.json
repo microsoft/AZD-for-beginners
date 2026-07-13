@@ -29,9 +29,22 @@
     "source_file": "SUPPORT.md",
     "language_code": "ro"
   },
+  "__translation_failures__": {
+    "README.md": {
+      "original_hash": "de39d21c7bbb6bd8790f999b35c9903b",
+      "source_file": "README.md",
+      "language_code": "ro",
+      "failure_date": "2026-07-13T21:51:03+00:00",
+      "status": "failed",
+      "error_type": "TranslationIncompleteError",
+      "error_message": "Markdown translation remained incomplete for chunk 5 of 'README.md', and the chunk could not be split further.",
+      "translator_version": "0.20.0",
+      "failure_policy_version": 1
+    }
+  },
   "changelog.md": {
-    "original_hash": "35c242a9f109e51b5b4bdaf534a26b84",
-    "translation_date": "2026-06-18T13:28:04+00:00",
+    "original_hash": "460aa99fe12308b419fe320188a81702",
+    "translation_date": "2026-07-13T21:55:10+00:00",
     "source_file": "changelog.md",
     "language_code": "ro"
   },
@@ -42,8 +55,8 @@
     "language_code": "ro"
   },
   "docs/chapter-01-foundation/README.md": {
-    "original_hash": "91d1cfab9a74183001a17661643c4f08",
-    "translation_date": "2026-06-18T13:47:06+00:00",
+    "original_hash": "89e1719c5a89ec8347b97e4f13a546e4",
+    "translation_date": "2026-07-13T21:58:52+00:00",
     "source_file": "docs/chapter-01-foundation/README.md",
     "language_code": "ro"
   },
@@ -54,14 +67,14 @@
     "language_code": "ro"
   },
   "docs/chapter-01-foundation/bring-your-own-app.md": {
-    "original_hash": "d9b10b1aff0a2e46ab2df7ec561781e2",
-    "translation_date": "2026-06-18T16:25:32+00:00",
+    "original_hash": "9e541a0194eeaabfd94a03dfe0cd4e3b",
+    "translation_date": "2026-07-13T21:58:37+00:00",
     "source_file": "docs/chapter-01-foundation/bring-your-own-app.md",
     "language_code": "ro"
   },
   "docs/chapter-01-foundation/dev-containers.md": {
-    "original_hash": "815b6b0653721de21bfea8b5241717b4",
-    "translation_date": "2026-06-18T16:20:50+00:00",
+    "original_hash": "28531c5f61c99b03433f5f38c2627559",
+    "translation_date": "2026-07-13T21:58:11+00:00",
     "source_file": "docs/chapter-01-foundation/dev-containers.md",
     "language_code": "ro"
   },
@@ -78,38 +91,38 @@
     "language_code": "ro"
   },
   "docs/chapter-02-ai-development/README.md": {
-    "original_hash": "07a5664e15b4e1ab3195745f214d8381",
-    "translation_date": "2026-06-18T13:58:56+00:00",
+    "original_hash": "40d8c960ff10647e14a8351b829e0078",
+    "translation_date": "2026-07-13T22:02:31+00:00",
     "source_file": "docs/chapter-02-ai-development/README.md",
     "language_code": "ro"
   },
   "docs/chapter-02-ai-development/agents.md": {
-    "original_hash": "d0593658083704997b49212a061d5ca6",
-    "translation_date": "2026-06-18T14:00:42+00:00",
+    "original_hash": "d64024d64be3b51476aef26dd13c9f26",
+    "translation_date": "2026-07-13T22:04:32+00:00",
     "source_file": "docs/chapter-02-ai-development/agents.md",
     "language_code": "ro"
   },
   "docs/chapter-02-ai-development/ai-model-deployment.md": {
-    "original_hash": "15982c7a2a3eebfa730785f4ab35a430",
-    "translation_date": "2026-04-02T19:33:41+00:00",
+    "original_hash": "eec217895ec6823988f8fa05b2131c20",
+    "translation_date": "2026-07-13T22:02:58+00:00",
     "source_file": "docs/chapter-02-ai-development/ai-model-deployment.md",
     "language_code": "ro"
   },
   "docs/chapter-02-ai-development/ai-workshop-lab.md": {
-    "original_hash": "2587a79908b3cde677e33ae80d8ac531",
-    "translation_date": "2026-06-18T13:58:38+00:00",
+    "original_hash": "f097a565d64af925a880366c81ceeb94",
+    "translation_date": "2026-07-13T22:02:17+00:00",
     "source_file": "docs/chapter-02-ai-development/ai-workshop-lab.md",
     "language_code": "ro"
   },
   "docs/chapter-02-ai-development/microsoft-foundry-integration.md": {
-    "original_hash": "4df164622f8895bf0b6f287779dcfb8d",
-    "translation_date": "2026-06-18T13:57:06+00:00",
+    "original_hash": "587493753592edf28d4ae3751060c7a6",
+    "translation_date": "2026-07-13T22:00:53+00:00",
     "source_file": "docs/chapter-02-ai-development/microsoft-foundry-integration.md",
     "language_code": "ro"
   },
   "docs/chapter-03-configuration/README.md": {
-    "original_hash": "61ae73a314e12314f51e28367f270b10",
-    "translation_date": "2026-06-18T14:00:55+00:00",
+    "original_hash": "60b35e51123475e4568e29fc19f77e80",
+    "translation_date": "2026-07-13T22:04:46+00:00",
     "source_file": "docs/chapter-03-configuration/README.md",
     "language_code": "ro"
   },
@@ -126,14 +139,14 @@
     "language_code": "ro"
   },
   "docs/chapter-04-infrastructure/README.md": {
-    "original_hash": "6275050990f8b00f527b076908d5174c",
-    "translation_date": "2026-06-18T13:55:30+00:00",
+    "original_hash": "0270a2a937fc1089566c069ae493ba78",
+    "translation_date": "2026-07-13T21:59:04+00:00",
     "source_file": "docs/chapter-04-infrastructure/README.md",
     "language_code": "ro"
   },
   "docs/chapter-04-infrastructure/custom-templates.md": {
-    "original_hash": "83dff69032b06e15170e4f079b9c6d33",
-    "translation_date": "2026-06-18T16:30:27+00:00",
+    "original_hash": "a5dc607fb71e6886bf5ac8f6e6629440",
+    "translation_date": "2026-07-13T21:59:29+00:00",
     "source_file": "docs/chapter-04-infrastructure/custom-templates.md",
     "language_code": "ro"
   },
@@ -150,20 +163,20 @@
     "language_code": "ro"
   },
   "docs/chapter-05-multi-agent/README.md": {
-    "original_hash": "5982d771a1cb686ea2c8facee31c5fd3",
-    "translation_date": "2026-06-18T13:44:02+00:00",
+    "original_hash": "85a78b167c21ce7eefb578ec12fccccd",
+    "translation_date": "2026-07-13T21:56:25+00:00",
     "source_file": "docs/chapter-05-multi-agent/README.md",
     "language_code": "ro"
   },
   "docs/chapter-05-multi-agent/multi-agent-basics.md": {
-    "original_hash": "6db0d27e6474291553aaa97a160d6129",
-    "translation_date": "2026-06-18T16:15:23+00:00",
+    "original_hash": "95bdd9e25bd394ab3d75b109c1963d1d",
+    "translation_date": "2026-07-13T21:57:07+00:00",
     "source_file": "docs/chapter-05-multi-agent/multi-agent-basics.md",
     "language_code": "ro"
   },
   "docs/chapter-06-pre-deployment/README.md": {
-    "original_hash": "1bb495e6462e366ab358a3014e5c04d4",
-    "translation_date": "2026-06-18T14:05:38+00:00",
+    "original_hash": "88286fe6faf9d65f8de88f4d74ced5cc",
+    "translation_date": "2026-07-13T22:05:00+00:00",
     "source_file": "docs/chapter-06-pre-deployment/README.md",
     "language_code": "ro"
   },
@@ -198,8 +211,8 @@
     "language_code": "ro"
   },
   "docs/chapter-07-troubleshooting/README.md": {
-    "original_hash": "a59d64c37432b31e13a60e4aee8324e4",
-    "translation_date": "2026-06-18T13:44:18+00:00",
+    "original_hash": "bf730f70682907ebc28e824cf8329f3d",
+    "translation_date": "2026-07-13T21:57:21+00:00",
     "source_file": "docs/chapter-07-troubleshooting/README.md",
     "language_code": "ro"
   },
@@ -222,8 +235,8 @@
     "language_code": "ro"
   },
   "docs/chapter-08-production/README.md": {
-    "original_hash": "f906126665dafdfc4e0cf596c0f0d204",
-    "translation_date": "2026-06-18T13:46:48+00:00",
+    "original_hash": "2be2743c3681602c6cfae53f88d37d08",
+    "translation_date": "2026-07-13T21:57:48+00:00",
     "source_file": "docs/chapter-08-production/README.md",
     "language_code": "ro"
   },
@@ -318,8 +331,8 @@
     "language_code": "ro"
   },
   "workshop/docs/index.md": {
-    "original_hash": "15de00ea8b0c3bdd1d63d4de950ac9fc",
-    "translation_date": "2026-06-18T13:42:30+00:00",
+    "original_hash": "7d1e406235b80bb954883211e728a85c",
+    "translation_date": "2026-07-13T21:55:24+00:00",
     "source_file": "workshop/docs/index.md",
     "language_code": "ro"
   },
@@ -336,8 +349,8 @@
     "language_code": "ro"
   },
   "workshop/docs/instructions/2-Validate-AI-Template.md": {
-    "original_hash": "b5448a5616cbf6e86ba2c73489c695ab",
-    "translation_date": "2026-06-18T13:43:32+00:00",
+    "original_hash": "979324fb4ae43facc08b21f6e1a8efbb",
+    "translation_date": "2026-07-13T21:56:08+00:00",
     "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
     "language_code": "ro"
   },

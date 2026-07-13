@@ -1,50 +1,50 @@
 # Integrarea Microsoft Foundry cu AZD
 
-**Navigare capitole:**
-- **📚 Acasă curs**: [AZD Pentru Începători](../../README.md)
-- **📖 Capitolul curent**: Capitolul 2 - Dezvoltare AI-First
-- **⬅️ Capitol anterior**: [Capitolul 1: Primul Proiect](../chapter-01-foundation/first-project.md)
-- **➡️ Următor**: [Implementarea Modelului AI](ai-model-deployment.md)
-- **🚀 Capitol următor**: [Capitolul 3: Configurare](../chapter-03-configuration/configuration.md)
+**Navigare Capitol:**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
+- **📖 Capitolul Curent**: Capitolul 2 - Dezvoltare AI-First
+- **⬅️ Capitolul Anterior**: [Capitolul 1: Primul Tău Proiect](../chapter-01-foundation/first-project.md)
+- **➡️ Următorul**: [Dezvoltarea Modelului AI](ai-model-deployment.md)
+- **🚀 Capitolul Următor**: [Capitolul 3: Configurare](../chapter-03-configuration/configuration.md)
 
-## Prezentare generală
+## Prezentare Generală
 
-Acest ghid demonstrează cum să integrați serviciile Microsoft Foundry cu Azure Developer CLI (AZD) pentru implementări eficiente ale aplicațiilor AI. Microsoft Foundry oferă o platformă cuprinzătoare pentru construirea, implementarea și gestionarea aplicațiilor AI, în timp ce AZD simplifică procesul de infrastructură și implementare.
+Acest ghid demonstrează cum să integrezi serviciile Microsoft Foundry cu Azure Developer CLI (AZD) pentru implementări simplificate ale aplicațiilor AI. Microsoft Foundry oferă o platformă completă pentru construirea, implementarea și gestionarea aplicațiilor AI, în timp ce AZD simplifică infrastructura și procesul de implementare.
 
 ## Ce este Microsoft Foundry?
 
-Microsoft Foundry este platforma unificată a Microsoft pentru dezvoltarea AI, care include:
+Microsoft Foundry este platforma unificată Microsoft pentru dezvoltarea AI care include:
 
-- **Catalog de modele**: Acces la modele AI de ultimă generație
+- **Catalog de Modele**: Acces la modele AI de ultimă generație
 - **Prompt Flow**: Designer vizual pentru fluxuri de lucru AI
 - **Portal Microsoft Foundry**: Mediu integrat de dezvoltare pentru aplicații AI
-- **Opțiuni de implementare**: Multipli hosting și opțiuni de scalare
-- **Securitate și siguranță**: Funcții integrate de AI responsabilă
+- **Opțiuni de Implementare**: Multiple opțiuni de hosting și scalare
+- **Siguranță și Securitate**: Funcții responsabile AI integrate
 
-## AZD + Microsoft Foundry: Mai bune împreună
+## AZD + Microsoft Foundry: Mai Bine Împreună
 
-| Caracteristică | Microsoft Foundry | Beneficiu integrare AZD |
-|----------------|-------------------|------------------------|
-| **Implementare model** | Implementare manuală în portal | Implementări automate și repetitive |
-| **Infrastructură** | Provisionare prin click | Infrastructură ca cod (Bicep) |
-| **Gestionare medii** | Focalizare pe un singur mediu | Medii multiple (dev/staging/prod) |
-| **Integrare CI/CD** | Limitată | Suport nativ pentru GitHub Actions |
-| **Gestionare costuri** | Monitorizare de bază | Optimizare costuri specifică mediilor |
+| Caracteristică | Microsoft Foundry | Beneficiul Integrării AZD |
+|---------|-----------------|------------------------|
+| **Implementare Model** | Implementare manuală din portal | Implementări automate, repetabile |
+| **Infrastructură** | Provizionare prin click | Infrastructură ca și Cod (Bicep) |
+| **Gestionare Mediu** | Focus pe un singur mediu | Medii multiple (dev/staging/prod) |
+| **Integrare CI/CD** | Limitat | Suport nativ pentru GitHub Actions |
+| **Gestionare Costuri** | Monitorizare de bază | Optimizare costuri pe medii specifice |
 
-## Cerințe prealabile
+## Precondiții
 
-- Abonament Azure cu permisiuni potrivite
+- Abonament Azure cu permisiuni corespunzătoare
 - Azure Developer CLI instalat
 - Acces la serviciile Microsoft Foundry Models
-- Familiarizare de bază cu Microsoft Foundry
+- Familiaritate de bază cu Microsoft Foundry
 
-> **Versiunea curentă AZD:** Exemplele au fost testate cu `azd` `1.23.12`. Pentru fluxul AI agent, folosiți ultima versiune de previzualizare a extensiei și verificați versiunea instalată înainte de a începe.
+> **Versiunea curentă AZD:** Aceste exemple au fost verificate cu `azd` `1.27.1`. Pentru fluxul de lucru al agentului AI, folosește lansarea curentă preview a extensiei și verifică versiunea instalată înainte de a începe.
 
-## Tipare cheie de integrare
+## Modele de Integrare de Bază
 
-### Tipar 1: Integrare Microsoft Foundry Models
+### Model 1: Integrare Microsoft Foundry Models
 
-**Caz de utilizare**: Implementarea aplicațiilor chat cu modele Microsoft Foundry Models
+**Caz de Utilizare**: Implementarea aplicațiilor de chat cu modele Microsoft Foundry Models
 
 ```yaml
 # azure.yaml
@@ -92,9 +92,9 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 }
 ```
 
-### Tipar 2: Integrare AI Search + RAG
+### Model 2: Integrare AI Search + RAG
 
-**Caz de utilizare**: Implementarea aplicațiilor retrieval-augmented generation (RAG)
+**Caz de Utilizare**: Implementarea aplicațiilor cu generare augmentată prin recuperare (RAG)
 
 ```bicep
 // Azure AI Search
@@ -122,9 +122,9 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 }
 ```
 
-### Tipar 3: Integrare Document Intelligence
+### Model 3: Integrare Inteligență Documentară
 
-**Caz de utilizare**: Fluxuri de procesare și analiză documente
+**Caz de Utilizare**: Fluxuri de lucru pentru procesarea și analiza documentelor
 
 ```bicep
 // Document Intelligence service
@@ -155,18 +155,18 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 }
 ```
 
-## 🔧 Tipare de configurare
+## 🔧 Modele de Configurare
 
-### Setarea variabilelor de mediu
+### Configurarea Variabilelor de Mediu
 
-**Configurare producție:**
+**Configurare Producție:**
 ```bash
 # Servicii AI de bază
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_SEARCH_ENDPOINT "https://your-search.search.windows.net"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT "https://your-formrec.cognitiveservices.azure.com/"
 
-# Configurări model
+# Configurații ale modelelor
 azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
 azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-3-large"
 
@@ -175,15 +175,15 @@ azd env set AZURE_OPENAI_CAPACITY 30
 azd env set AZURE_SEARCH_SKU "standard"
 ```
 
-**Configurare dezvoltare:**
+**Configurare Dezvoltare:**
 ```bash
-# Setări optimizate pentru costuri pentru dezvoltare
+# Setări optimizate pentru cost, pentru dezvoltare
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set AZURE_SEARCH_SKU "basic"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Nivel gratuit
 ```
 
-### Configurare sigură cu Key Vault
+### Configurare Securizată cu Key Vault
 
 ```bicep
 // Key Vault for secrets
@@ -218,7 +218,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-## Fluxuri de implementare
+## Fluxuri de Implementare
 
 ### Extensii AZD pentru Foundry
 
@@ -228,38 +228,38 @@ AZD oferă extensii care adaugă capabilități specifice AI pentru lucrul cu se
 # Instalează extensia agenților Foundry
 azd extension install azure.ai.agents
 
-# Instalează extensia de fine-tuning
+# Instalează extensia pentru reglare fină
 azd extension install azure.ai.finetune
 
-# Instalează extensia pentru modele personalizate
+# Instalează extensia modelelor personalizate
 azd extension install azure.ai.models
 
 # Listează extensiile instalate
 azd extension list --installed
 
-# Inspectează versiunea extensiei agentului instalată în prezent
+# Inspectează versiunea extensiei agentului instalate în prezent
 azd extension show azure.ai.agents
 ```
 
-Extensiile AI sunt încă în evoluție rapidă în faza de previzualizare. Dacă o comandă funcționează diferit față de cele prezentate aici, actualizați extensia relevantă înainte de a investiga problema proiectului.
+Extensiile AI sunt încă în evoluție rapidă în preview. Dacă o comandă se comportă diferit față de descrierea de aici, actualizează extensia relevantă înainte de a face depanare proiectului propriu-zis.
 
-### Implementare orientată agent cu `azd ai`
+### Implementare Agent-First cu `azd ai`
 
-Dacă aveți un manifest de agent, folosiți `azd ai agent init` pentru a crea un proiect conectat la Foundry Agent Service:
+Dacă ai un manifest de agent, folosește `azd ai agent init` pentru a genera un proiect conectat la Foundry Agent Service:
 
 ```bash
-# Inițializare dintr-un manifest de agent
+# Inițializează dintr-un manifest de agent
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# Implementare în Azure
+# Desfășoară pe Azure
 azd up
 ```
 
-Versiunile recente de previzualizare ale `azure.ai.agents` au adăugat suport pentru inițializare pe bază de șabloane cu `azd ai agent init`. Dacă urmați exemple mai noi de agenți, verificați ajutorul extensiei pentru semnalele exacte disponibile în versiunea instalată.
+Lansările recente preview ale `azure.ai.agents` au adăugat suport inițial pentru template-uri la `azd ai agent init`. Dacă urmezi exemple noi pentru agenți, verifică ajutorul extensiei pentru flagurile exacte disponibile în versiunea ta instalată.
 
-Consultați [Comenzile AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pentru referința completă de comenzi și semnale.
+Vezi [Comenzi AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pentru referința completă de comenzi și flaguri.
 
-### Implementare cu o singură comandă
+### Implementare cu o Singură Comandă
 
 ```bash
 # Desfășurați totul cu o singură comandă
@@ -269,11 +269,11 @@ azd up
 azd provision  # Doar infrastructura
 azd deploy     # Doar aplicația
 
-# Pentru desfășurări aplicații AI pe termen lung în azd 1.23.11+
+# Pentru desfășurări de aplicații AI care rulează pe termen lung în azd 1.23.11+
 azd deploy --timeout 1800
 ```
 
-### Implementări specifice mediului
+### Implementări Specifice Mediului
 
 ```bash
 # Mediu de dezvoltare
@@ -290,7 +290,7 @@ azd env set AZURE_OPENAI_CAPACITY 100
 azd up
 ```
 
-## Monitorizare și observabilitate
+## Monitorizare și Observabilitate
 
 ### Integrare Application Insights
 
@@ -325,7 +325,7 @@ resource customMetrics 'Microsoft.Insights/components/analyticsItems@2015-05-01'
 }
 ```
 
-### Monitorizarea costurilor
+### Monitorizarea Costurilor
 
 ```bicep
 // Budget alert for AI services
@@ -353,9 +353,9 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-## 🔐 Cele mai bune practici de securitate
+## 🔐 Cele Mai Bune Practici de Securitate
 
-### Configurare identitate gestionată
+### Configurarea Identității Gestionate
 
 ```bicep
 // Managed identity for the web application
@@ -376,7 +376,7 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-### Securitatea rețelei
+### Securitatea Rețelei
 
 ```bicep
 // Private endpoints for AI services
@@ -400,9 +400,9 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## Optimizarea performanței
+## Optimizarea Performanței
 
-### Strategii de caching
+### Strategii de Caching
 
 ```yaml
 # azure.yaml - Redis cache integration
@@ -432,7 +432,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 }
 ```
 
-### Configurare auto-scalare
+### Configurarea Auto-scalării
 
 ```bicep
 // Container App with auto-scaling
@@ -466,33 +466,33 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-## Depanare probleme comune
+## Depanarea Problemelor Comune
 
-### Problema 1: Depășirea cotei OpenAI
+### Problema 1: Cota OpenAI Depășită
 
 **Simptome:**
-- Implementare eșuează cu erori de cota
+- Implementarea eșuează cu erori legate de cotă
 - Erori 429 în jurnalele aplicației
 
 **Soluții:**
 ```bash
-# Verifică utilizarea curentă a cotei
+# Verifică utilizarea actuală a cotei
 az cognitiveservices usage list --location eastus
 
 # Încearcă o regiune diferită
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Redu capacitatea temporar
+# Reduce capacitatea temporar
 azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
 
-### Problema 2: Eșecuri de autentificare
+### Problema 2: Eșecuri de Autentificare
 
 **Simptome:**
 - Erori 401/403 la apelarea serviciilor AI
-- Mesaje "Acces refuzat"
+- Mesaje de „Acces refuzat”
 
 **Soluții:**
 ```bash
@@ -502,15 +502,15 @@ az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 # Verificați configurația identității gestionate
 az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 
-# Validați accesul la Key Vault
+# Validarea accesului la Key Vault
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
-### Problema 3: Probleme la implementarea modelelor
+### Problema 3: Probleme la Implementarea Modelului
 
 **Simptome:**
-- Modele indisponibile în implementare
-- Versiuni specifice de model care eșuează
+- Modelele nu sunt disponibile în implementare
+- Versiuni specifice de modele care eșuează
 
 **Soluții:**
 ```bash
@@ -521,65 +521,65 @@ az cognitiveservices model list --location eastus
 # Verifică cerințele de capacitate ale modelului
 ```
 
-## Șabloane exemplu
+## Șabloane Exemplu
 
-### Aplicație chat RAG (Python)
+### Aplicație Chat RAG (Python)
 
 **Depozit**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
 **Servicii**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
 
-**Descriere**: Cel mai popular exemplu Azure AI — o aplicație chat RAG gata de producție care permite întrebări asupra propriilor documente. Folosește GPT-4.1-mini pentru chat, text-embedding-3-large pentru embeddings și Azure AI Search pentru căutare. Suportă documente multimodale, input/output vocal, autentificare Microsoft Entra și urmărire Application Insights.
+**Descriere**: Cel mai popular exemplu Azure AI — o aplicație chat RAG gata pentru producție care permite punerea de întrebări pe propriile documente. Utilizează GPT-4.1-mini pentru chat, text-embedding-3-large pentru încorporări și Azure AI Search pentru recuperare. Suportă documente multimodale, intrare/ieșire voce, autentificare Microsoft Entra și trasabilitate Application Insights.
 
-**Pornire rapidă**:
+**Începere Rapidă**:
 ```bash
 azd init --template azure-search-openai-demo
 azd up
 ```
 
-### Aplicație chat RAG (.NET)
+### Aplicație Chat RAG (.NET)
 
 **Depozit**: [azure-search-openai-demo-csharp](https://github.com/Azure-Samples/azure-search-openai-demo-csharp)
 
 **Servicii**: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
 
-**Descriere**: Echivalentul .NET/C# al exemplului Python RAG chat. Construit cu ASP.NET Core Minimal API și frontend Blazor WebAssembly. Include chat vocal, suport GPT-4o-mini vision și client desktop/mobile .NET MAUI Blazor Hybrid.
+**Descriere**: Echivalentul .NET/C# al exemplului Python RAG chat. Construit cu ASP.NET Core Minimal API și interfata Blazor WebAssembly. Include chat vocal, suport GPT-4o-mini viziune și un client desktop/mobil companion .NET MAUI Blazor Hybrid.
 
-**Pornire rapidă**:
+**Începere Rapidă**:
 ```bash
 azd init --template azure-search-openai-demo-csharp
 azd up
 ```
 
-### Aplicație chat RAG (Java)
+### Aplicație Chat RAG (Java)
 
 **Depozit**: [azure-search-openai-demo-java](https://github.com/Azure-Samples/azure-search-openai-demo-java)
 
 **Servicii**: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
 
-**Descriere**: Versiunea Java a exemplului RAG chat folosind Langchain4J pentru orchestrare AI. Suportă arhitectură microservicii eveniment-driven, strategii multiple de căutare (text, vector, hibrid), încărcare documente cu Azure Document Intelligence și implementare pe Azure Container Apps sau Azure Kubernetes Service.
+**Descriere**: Versiunea Java a exemplului RAG chat folosind Langchain4J pentru orchestrarea AI. Suportă arhitectură microservicii orientată pe evenimente, strategii multiple de căutare (text, vector, hibrid), încărcare documente cu Azure Document Intelligence și implementare pe Azure Container Apps sau Azure Kubernetes Service.
 
-**Pornire rapidă**:
+**Începere Rapidă**:
 ```bash
 azd init --template azure-search-openai-demo-java
 azd up
 ```
 
-### Copilot Enterprise Retail cu Microsoft Foundry
+### Copilot Retail Enterprise cu Microsoft Foundry
 
 **Depozit**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
 **Servicii**: Azure OpenAI + Microsoft Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
 
-**Descriere**: Copilot retail RAG end-to-end folosind Microsoft Foundry și Prompty. Chatbot pentru retailerul Contoso Outdoor care ancorează răspunsuri în catalogul de produse și datele comenzilor clienților. Demonstrează întregul flux GenAIOps — prototipare cu Prompty, evaluare cu evaluatori asistați AI și implementare cu AZD la Container Apps.
+**Descriere**: Copilot RAG complet retail folosind Microsoft Foundry și Prompty. Un chatbot Contoso Outdoor care bazează răspunsurile pe catalogul de produse și datele comenzilor clienților. Demonstrează fluxul complet GenAIOps — prototip cu Prompty, evaluare cu evaluatori asistați AI și implementare prin AZD către Container Apps.
 
-**Pornire rapidă**:
+**Începere Rapidă**:
 ```bash
 azd init --template contoso-chat
 azd up
 ```
 
-### Aplicație multi-agent pentru scriere creativă
+### Aplicație Multi-Agent pentru Scriere Creativă
 
 **Depozit**: [contoso-creative-writer](https://github.com/Azure-Samples/contoso-creative-writer)
 
@@ -587,63 +587,63 @@ azd up
 
 **Descriere**: Exemplu multi-agent demonstrând orchestrarea agenților AI cu Prompty. Folosește un agent de cercetare (Bing Grounding în Azure AI Agent Service), un agent de produs (Azure AI Search), un agent scriitor și un agent editor pentru a produce colaborativ articole bine documentate. Include CI/CD cu evaluare în GitHub Actions.
 
-**Pornire rapidă**:
+**Începere Rapidă**:
 ```bash
 azd init --template contoso-creative-writer
 azd up
 ```
 
-### Chat RAG serverless (JavaScript/TypeScript)
+### Chat RAG Serverless (JavaScript/TypeScript)
 
 **Depozit**: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
 
 **Servicii**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB pentru NoSQL + LangChain.js
 
-**Descriere**: Chatbot RAG complet serverless folosind LangChain.js cu Azure Functions pentru API și Azure Static Web Apps pentru hosting. Folosește Azure Cosmos DB ca stoc vectorial și bază de date istoric chat. Suportă dezvoltare locală cu Ollama pentru testare fără costuri.
+**Descriere**: Chatbot RAG complet serverless folosind LangChain.js cu Azure Functions pentru API și Azure Static Web Apps pentru hosting. Folosește Azure Cosmos DB atât ca magazin vectorial, cât și ca bază de date a istoricului chat. Suportă dezvoltare locală cu Ollama pentru testare fără costuri.
 
-**Pornire rapidă**:
+**Începere Rapidă**:
 ```bash
 azd init --template serverless-chat-langchainjs
 azd up
 ```
 
-### Accelerator soluție Chat cu Datele Tale
+### Accelerator Soluție Chat cu Datele Tale
 
 **Depozit**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
 
 **Servicii**: Azure OpenAI + Azure AI Search + Azure App Service + Azure Document Intelligence + Azure Functions + Azure Cosmos DB / PostgreSQL
 
-**Descriere**: Accelerator soluție RAG de nivel enterprise cu portal admin pentru încărcare/gestionare documente, opțiuni multiple de orchestrator (Semantic Kernel, LangChain, Prompt Flow), speech-to-text, integrare Microsoft Teams și alegere backend PostgreSQL sau Cosmos DB. Creat ca punct de start personalizabil pentru scenarii RAG de producție.
+**Descriere**: Accelerator de soluție RAG grad enterprise cu portal admin pentru încărcare/gestionare documente, opțiuni multiple de orchestrator (Semantic Kernel, LangChain, Prompt Flow), conversie vorbire-text, integrare Microsoft Teams și alegere backend PostgreSQL sau Cosmos DB. Conceput ca punct personalizabil de pornire pentru scenarii RAG de producție.
 
-**Pornire rapidă**:
+**Începere Rapidă**:
 ```bash
 azd init --template chat-with-your-data-solution-accelerator
 azd up
 ```
 
-### Agenți de turism AI — Orchestrare Multi-Agent MCP
+### Agenți AI de Călătorie — Orchestrare Multi-Agent MCP
 
 **Depozit**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
 
-**Servicii**: Azure OpenAI + Microsoft Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
+**Servicii**: Azure OpenAI + Microsoft Foundry + Azure Container Apps + Servere MCP (.NET, Python, Java, TypeScript)
 
-**Descriere**: Aplicație de referință pentru orchestrarea multi-agent AI folosind trei framework-uri (LangChain.js, LlamaIndex.TS și Microsoft Agent Framework). Include servere MCP (Model Context Protocol) în patru limbaje implementate ca Azure Container Apps serverless cu monitorizare OpenTelemetry.
+**Descriere**: Aplicație de referință pentru orchestrarea AI multi-agent folosind trei cadre (LangChain.js, LlamaIndex.TS și Microsoft Agent Framework). Are servere MCP (Model Context Protocol) în patru limbi implementate ca Azure Container Apps serverless cu monitorizare OpenTelemetry.
 
-**Pornire rapidă**:
+**Începere Rapidă**:
 ```bash
 azd init --template azure-ai-travel-agents
 azd up
 ```
 
-### Starter Azure AI
+### Azure AI Starter
 
 **Depozit**: [azd-ai-starter](https://github.com/Azure/azd-ai-starter)
 
-**Servicii**: Azure AI Services + Azure OpenAI
+**Servicii**: Servicii Azure AI + Azure OpenAI
 
-**Descriere**: Șablon Bicep minimal care implementează servicii Azure AI cu modele de machine learning configurate. Un punct de plecare ușor când ai nevoie doar de infrastructura Azure AI fără un întreg stack aplicațional.
+**Descriere**: Șablon Bicep minimal care implementează servicii Azure AI cu modele de machine learning configurate. Un punct de pornire ușor când ai nevoie doar de infrastructura Azure AI provisionată, fără un stack complet de aplicație.
 
-**Pornire rapidă**:
+**Începere Rapidă**:
 ```bash
 azd init --template azd-ai-starter
 azd up
@@ -651,19 +651,19 @@ azd up
 
 > **Răsfoiește mai multe șabloane**: Vizitează [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) pentru peste 80 de șabloane AZD specifice AI în diverse limbaje și scenarii.
 
-## Pașii următori
+## Următorii Pași
 
-1. **Încearcă exemplele**: Pornește cu un șablon preconstruit care se potrivește cazului tău de utilizare
-2. **Personalizează conform nevoilor**: Modifică infrastructura și codul aplicației
-3. **Adaugă monitorizare**: Implementează observabilitate completă
-4. **Optimizează costurile**: Ajustează configurările pentru bugetul tău
-5. **Asigură implementarea**: Pune în aplicare modele de securitate enterprise
-6. **Scalare în producție**: Adaugă caracteristici multi-regiune și de înaltă disponibilitate
+1. **Încearcă Exemplele**: Pornește cu un șablon pre-construit care se potrivește cazului tău de utilizare
+2. **Personalizează pentru Nevoile Tale**: Modifică infrastructura și codul aplicației
+3. **Adaugă Monitorizare**: Implementează observabilitate completă
+4. **Optimizează Costurile**: Ajustează configurațiile pentru bugetul tău
+5. **Securizează Implementarea**: Aplică modele de securitate enterprise
+6. **Scalează Pentru Producție**: Adaugă caracteristici multi-regiune și înaltă disponibilitate
 
-## 🎯 Exerciții practice
+## 🎯 Exerciții Practice
 
-### Exercițiul 1: Implementarea Microsoft Foundry Models Chat App (30 minute)
-**Scop**: Implementarea și testarea unei aplicații chat AI gata de producție
+### Exercițiul 1: Implementarea Aplicației Chat Microsoft Foundry Models (30 minute)
+**Scop**: Implementarea și testarea unei aplicații AI chat gata de producție
 
 ```bash
 # Inițializează șablonul
@@ -674,7 +674,7 @@ azd init --template azure-search-openai-demo
 azd env set AZURE_LOCATION eastus2
 azd env set AZURE_OPENAI_CAPACITY 30
 
-# Deploy (Lansare)
+# Desfășurare
 azd up
 
 # Testează aplicația
@@ -684,24 +684,24 @@ echo "Chat app: $WEB_URL"
 # Monitorizează operațiunile AI
 azd monitor
 
-# Curăță (Elimină)
+# Curățare
 azd down --force --purge
 ```
 
-**Criterii de succes:**
-- [ ] Implementarea se finalizează fără erori de cota
-- [ ] Se poate accesa interfața chat în browser
-- [ ] Se pot pune întrebări și primi răspunsuri generate de AI
-- [ ] Application Insights afișează date de telemetrie
-- [ ] Resursele au fost curățate cu succes
+**Criterii de Succes:**
+- [ ] Implementarea se finalizează fără erori de cotă
+- [ ] Se poate accesa interfața de chat în browser
+- [ ] Se pot pune întrebări și primi răspunsuri AI
+- [ ] Application Insights afișează datele telemetriei
+- [ ] Resursele sunt curățate cu succes
 
-**Cost estimat**: 5-10 USD pentru 30 de minute de testare
+**Cost Estimat**: 5-10$ pentru 30 de minute de testare
 
-### Exercițiul 2: Configurare implementare multi-model (45 minute)
+### Exercițiul 2: Configurarea Implementării Multi-Model (45 minute)
 **Scop**: Implementarea mai multor modele AI cu configurații diferite
 
 ```bash
-# Creează configurație Bicep personalizată
+# Creează o configurație Bicep personalizată
 cat > infra/ai-models.bicep << 'EOF'
 param openAiAccountName string
 param location string
@@ -751,17 +751,17 @@ azd provision
 azd show
 ```
 
-**Criterii de succes:**
+**Criterii de Succes:**
 - [ ] Mai multe modele implementate cu succes
-- [ ] Setări diferite de capacitate aplicate
+- [ ] Setări de capacitate diferite aplicate
 - [ ] Modele accesibile prin API
 - [ ] Se pot apela ambele modele din aplicație
 
-### Exercițiul 3: Implementarea monitorizării costurilor (20 minute)
-**Scop**: Configurarea alertelor de buget și urmărirea costurilor
+### Exercițiul 3: Implementarea Monitorizării Costurilor (20 minute)
+**Scop**: Configurarea alertelor bugetare și urmărirea costurilor
 
 ```bash
-# Adăugați alertă bugetară la Bicep
+# Adaugă alertă de buget la Bicep
 cat >> infra/main.bicep << 'EOF'
 
 resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
@@ -792,31 +792,33 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 EOF
 
-# Implementați alerta bugetară
+# Desfășoară alerta de buget
 azd provision
 
-# Verificați costurile curente
+# Verifică costurile curente
 az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-date $(date +%Y-%m-%d)
 ```
 
-**Criterii de succes:**
+**Criterii de Succes:**
 - [ ] Alertă buget creată în Azure
 - [ ] Notificări prin email configurate
-- [ ] Datele costurilor vizualizabile în Azure Portal
-- [ ] Pragurile de buget setate corect
+- [ ] Se pot vizualiza datele costurilor în Portalul Azure
+- [ ] Pragurile bugetare setate corect
 
-## 💡 Întrebări frecvente
+## 💡 Întrebări Frecvente
 
 <details>
 <summary><strong>Cum pot reduce costurile Microsoft Foundry Models în timpul dezvoltării?</strong></summary>
 
-1. **Folosește nivelul gratuit**: Microsoft Foundry Models oferă 50.000 de tokeni pe lună gratuit
-2. **Reduce capacitatea**: Setează capacitatea la 10 TPM în loc de 30+ pentru dezvoltare
-3. **Folosește azd down**: De alocă resursele când nu dezvolți activ
-4. **Cachează răspunsuri**: Implementează cache Redis pentru interogări repetate
-5. **Folosește inginerie de prompturi**: Redu utilizarea tokenilor cu prompturi eficiente
+1. **Folosește Nivelul Gratuit**: Microsoft Foundry Models oferă 50.000 tokens/lună gratuit
+2. **Reduce Capacitatea**: Setează capacitatea la 10 TPM în loc de 30+ pentru dezvoltare
+3. **Folosește azd down**: Dezalocă resursele când nu dezvolți activ
+4. **Cachează Răspunsurile**: Implementează cache Redis pentru interogări repetate
+5. **Folosește Engineering pentru Prompturi**: Redu consumul de tokens cu prompturi eficiente
+
+
 ```bash
-# Configurație de dezvoltare
+# Configurație pentru dezvoltare
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set ENABLE_RESPONSE_CACHE true
 ```
@@ -826,7 +828,7 @@ azd env set ENABLE_RESPONSE_CACHE true
 <summary><strong>Care este diferența dintre Microsoft Foundry Models și OpenAI API?</strong></summary>
 
 **Microsoft Foundry Models**:
-- Securitate și conformitate pentru întreprinderi
+- Securitate și conformitate pentru mediul enterprise
 - Integrare în rețea privată
 - Garanții SLA
 - Autentificare cu identitate gestionată
@@ -835,14 +837,14 @@ azd env set ENABLE_RESPONSE_CACHE true
 **OpenAI API**:
 - Acces mai rapid la modele noi
 - Configurare mai simplă
-- Barieră de intrare mai mică
+- Barieră de intrare mai scăzută
 - Doar internet public
 
 Pentru aplicații de producție, **Microsoft Foundry Models este recomandat**.
 </details>
 
 <details>
-<summary><strong>Cum gestionez erorile de depășire a cotei în Microsoft Foundry Models?</strong></summary>
+<summary><strong>Cum gestionez erorile de depășire a cotei la Microsoft Foundry Models?</strong></summary>
 
 ```bash
 # Verifică cota curentă
@@ -852,19 +854,19 @@ az cognitiveservices usage list --location eastus2
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Reduce capacitatea temporar
+# Redu capacitatea temporar
 azd env set AZURE_OPENAI_CAPACITY 10
 azd provision
 
 # Solicită creșterea cotei
-# Mergi la Portalul Azure > Cote > Solicită creșterea
+# Accesează Azure Portal > Cote > Solicită creșterea
 ```
 </details>
 
 <details>
 <summary><strong>Pot folosi propriile mele date cu Microsoft Foundry Models?</strong></summary>
 
-Da! Folosește **Azure AI Search** pentru RAG (Generare augmentată prin recuperare):
+Da! Folosește **Azure AI Search** pentru RAG (Retrieval Augmented Generation):
 
 ```yaml
 # azure.yaml
@@ -880,12 +882,12 @@ Vezi șablonul [azure-search-openai-demo](https://github.com/Azure-Samples/azure
 </details>
 
 <details>
-<summary><strong>Cum securizez punctele finale ale modelelor AI?</strong></summary>
+<summary><strong>Cum securizez endpoint-urile modelelor AI?</strong></summary>
 
 **Cele mai bune practici**:
-1. Folosește Identitate Gestionată (fără chei API)
-2. Activează Puncte Finale Private
-3. Configurează grupuri de securitate pentru rețea
+1. Folosește Managed Identity (fără chei API)
+2. Activează Private Endpoints
+3. Configurează grupurile de securitate a rețelei
 4. Implementează limitarea ratei
 5. Folosește Azure Key Vault pentru secrete
 
@@ -909,19 +911,19 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 ## Comunitate și Suport
 
-- **Microsoft Foundry Discord**: [canalul #Azure](https://discord.gg/microsoft-azure)
-- **AZD GitHub**: [Probleme și discuții](https://github.com/Azure/azure-dev)
+- **Microsoft Foundry Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
+- **AZD GitHub**: [Issues and discussions](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Documentație oficială](https://learn.microsoft.com/azure/ai-studio/)
-- **Agent Skills**: [Competența Microsoft Foundry pe skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Instalează competențele agenților Azure + Foundry în editorul tău cu `npx skills add microsoft/github-copilot-for-azure`
+- **Agent Skills**: [Microsoft Foundry skill on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Instalează abilități de agent Azure + Foundry în editorul tău cu `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**Navigare capitole:**
-- **📚 Acasă curs**: [AZD Pentru Începători](../../README.md)
-- **📖 Capitolul curent**: Capitolul 2 - Dezvoltare AI-First
-- **⬅️ Capitolul anterior**: [Capitolul 1: Primul tău proiect](../chapter-01-foundation/first-project.md)
-- **➡️ Următorul**: [Implementare model AI](ai-model-deployment.md)
-- **🚀 Capitolul următor**: [Capitolul 3: Configurare](../chapter-03-configuration/configuration.md)
+**Navigarea capitolului:**
+- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
+- **📖 Capitolul Curent**: Capitolul 2 - Dezvoltare AI-First
+- **⬅️ Capitolul Anterior**: [Capitolul 1: Primul tău proiect](../chapter-01-foundation/first-project.md)
+- **➡️ Următorul**: [Dezvoltarea Modelului AI](ai-model-deployment.md)
+- **🚀 Capitolul Următor**: [Capitolul 3: Configurare](../chapter-03-configuration/configuration.md)
 
 **Ai nevoie de ajutor?** Alătură-te discuțiilor comunității sau deschide o problemă în depozit. Comunitatea Azure AI + AZD este aici să te ajute să reușești!
 

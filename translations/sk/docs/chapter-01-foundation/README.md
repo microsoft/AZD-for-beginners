@@ -1,40 +1,40 @@
-# Kapitola 1: Základy & Rýchly štart
+# Kapitola 1: Základy a Rýchly štart
 
-**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Dĺžka**: 30-45 minút | **⭐ Úroveň zložitosti**: Začiatočník
+**📚 Kurz**: [AZD pre Začiatočníkov](../../README.md) | **⏱️ Trvanie**: 30-45 minút | **⭐ Zložitosť**: Začiatočník
 
 ---
 
 ## Prehľad
 
-Táto kapitola predstavuje základy Azure Developer CLI (azd). Naučíte sa kľúčové koncepty, nainštalujete nástroje a nasadíte svoju prvú aplikáciu do Azure.
+Táto kapitola predstavuje základy Azure Developer CLI (azd). Naučíte sa základné koncepty, nainštalujete nástroje a nasadíte svoju prvú aplikáciu do Azure.
 
-> Overené voči `azd 1.25.6` v júni 2026.
+> Overené s `azd 1.27.1` v júli 2026.
 
 ## Ciele učenia
 
 Po dokončení tejto kapitoly budete:
-- Pochopiť, čo je Azure Developer CLI a ako sa odlišuje od Azure CLI
+- Rozumieť, čo je Azure Developer CLI a ako sa líši od Azure CLI
 - Nainštalovať a nakonfigurovať AZD na vašej platforme
-- Nasadiť vašu prvú aplikáciu do Azure pomocou `azd up`
-- Upratať zdroje pomocou `azd down`
+- Nasadiť svoju prvú aplikáciu do Azure pomocou `azd up`
+- Vyčistiť zdroje pomocou `azd down`
 
 ---
 
 ## 📚 Lekcie
 
-| # | Lekcia | Popis | Time |
+| # | Lekcia | Popis | Čas |
 |---|--------|-------------|------|
-| 1 | [Základy AZD](azd-basics.md) | Hlavné koncepty, terminológia a štruktúra projektu | 15 min |
-| 2 | [Inštalácia & Nastavenie](installation.md) | Návody na inštaláciu pre konkrétne platformy | 10 min |
-| 3 | [Váš prvý projekt](first-project.md) | Prakticky: Nasadiť webovú aplikáciu do Azure | 20 min |
-| 4 | [Použite azd v existujúcom projekte](bring-your-own-app.md) | Pridajte azd do existujúceho projektu, ktorý už máte | 15 min |
-| 5 | [Dev kontajnery a Codespaces](dev-containers.md) | Reprodukovateľné prostredia azd s dev kontajnermi | 15 min |
+| 1 | [Základy AZD](azd-basics.md) | Základné koncepty, terminológia a štruktúra projektu | 15 min |
+| 2 | [Inštalácia a nastavenie](installation.md) | Platformovo špecifické návody na inštaláciu | 10 min |
+| 3 | [Váš prvý projekt](first-project.md) | Prakticky: Nasadenie webovej aplikácie do Azure | 20 min |
+| 4 | [Použite svoju vlastnú aplikáciu](bring-your-own-app.md) | Pridajte azd do existujúceho projektu, ktorý už máte | 15 min |
+| 5 | [Vývojové kontajnery a Codespaces](dev-containers.md) | Reprodukovateľné prostredia azd s vývojovými kontajnermi | 15 min |
 
 ---
 
-## ✅ Začnite tu: Overte svoje nastavenie
+## ✅ Začnite tu: Overte svoju konfiguráciu
 
-Predtým, než začnete, potvrďte, že váš lokálny počítač je pripravený pre šablónu kapitoly 1:
+Pred začiatkom si overte, že je váš lokálny počítač pripravený pre šablónu Kapitoly 1:
 
 **Windows:**
 ```powershell
@@ -46,7 +46,7 @@ Predtým, než začnete, potvrďte, že váš lokálny počítač je pripravený
 bash ./validate-setup.sh
 ```
 
-Ak skript oznámi chýbajúce nástroje, opravte ich najprv a potom pokračujte v kapitole.
+Ak skript hlási chýbajúce nástroje, najprv ich opravte a potom pokračujte v kapitole.
 
 ---
 
@@ -56,11 +56,11 @@ Ak skript oznámi chýbajúce nástroje, opravte ich najprv a potom pokračujte 
 # Skontrolujte inštaláciu
 azd version
 
-# Prihláste sa do AZD
-# Voliteľné: použite az login, ak plánujete priamo spúšťať príkazy Azure CLI
+# Overte sa pre AZD
+# Voliteľné: az login, ak plánujete priamo spúšťať príkazy Azure CLI
 azd auth login
 
-# Nasadenie vašej prvej aplikácie
+# Nasadzujte svoju prvú aplikáciu
 azd init --template todo-nodejs-mongo
 azd up
 
@@ -72,14 +72,14 @@ azd down --force --purge
 
 ## ✅ Kritériá úspechu
 
-Po dokončení tejto kapitoly by ste mali byť schopní:
+Po dokončení tejto kapitoly by ste mali vedieť:
 
 ```bash
 azd version              # Zobrazuje nainštalovanú verziu
 azd init --template todo-nodejs-mongo  # Inicializuje projekt
 azd up                   # Nasadzuje do Azure
 azd show                 # Zobrazuje URL bežiacej aplikácie
-azd down --force --purge # Odstráni zdroje
+azd down --force --purge # Čistí zdroje
 ```
 
 ---
@@ -88,14 +88,14 @@ azd down --force --purge # Odstráni zdroje
 
 | Smer | Kapitola |
 |-----------|---------|
-| **Ďalej** | [Kapitola 2: Vývoj orientovaný na AI](../chapter-02-ai-development/README.md) |
+| **Ďalšia** | [Kapitola 2: Vývoj so zameraním na AI](../chapter-02-ai-development/README.md) |
 | **Preskočiť na** | [Kapitola 3: Konfigurácia](../chapter-03-configuration/README.md) |
 
 ---
 
 ## 📖 Súvisiace zdroje
 
-- [Rýchly prehľad príkazov](../../resources/cheat-sheet.md)
+- [Prehľad príkazov](../../resources/cheat-sheet.md)
 - [Často kladené otázky](../../resources/faq.md)
 - [Glosár](../../resources/glossary.md)
 

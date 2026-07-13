@@ -1,4 +1,4 @@
-# Capitolul 4: Infrastructură ca Cod și Implementare
+# Capitolul 4: Infrastructura ca Cod & Implementare
 
 **📚 Curs**: [AZD Pentru Începători](../../README.md) | **⏱️ Durată**: 1-1.5 ore | **⭐ Complexitate**: Intermediar
 
@@ -6,9 +6,9 @@
 
 ## Prezentare generală
 
-Acest capitol acoperă modele Infrastructure as Code (IaC) cu șabloane Bicep, aprovizionarea resurselor și strategii de implementare folosind Azure Developer CLI.
+Acest capitol acoperă tiparele Infrastructure as Code (IaC) cu șabloane Bicep, aprovizionarea resurselor și strategiile de implementare folosind Azure Developer CLI.
 
-> Validat cu `azd 1.25.6` în iunie 2026.
+> Validat cu `azd 1.27.1` în iulie 2026.
 
 ## Obiective de învățare
 
@@ -22,15 +22,15 @@ Prin parcurgerea acestui capitol, vei:
 
 ## 📚 Lecții
 
-| # | Lecție | Descriere | Timp |
-|---|--------|-------------|------|
-| 1 | [Aprovizionarea Resurselor](provisioning.md) | Managementul resurselor Azure cu AZD | 45 min |
-| 2 | [Ghid de Implementare](deployment-guide.md) | Strategii de implementare a aplicațiilor | 45 min |
-| 3 | [Crearea Propriului Șablon](custom-templates.md) | Construiește și publică șabloane azd reutilizabile | 30 min |
+| # | Lecție | Descriere | Durată |
+|---|--------|-------------|--------|
+| 1 | [Aprovizionarea resurselor](provisioning.md) | Administrarea resurselor Azure cu AZD | 45 min |
+| 2 | [Ghid de implementare](deployment-guide.md) | Strategii de implementare a aplicațiilor | 45 min |
+| 3 | [Crearea propriului șablon](custom-templates.md) | Construirea și publicarea șabloanelor azd reutilizabile | 30 min |
 
 ---
 
-## 🚀 Pornire Rapidă
+## 🚀 Început rapid
 
 ```bash
 # Inițializează din șablon
@@ -39,10 +39,10 @@ azd init --template azure-functions-python-v2-http
 # Previzualizează ce va fi creat
 azd provision --preview
 
-# Provisionează doar infrastructura
+# Provoacă doar infrastructura
 azd provision
 
-# Distribuie doar codul
+# Deploiază doar codul
 azd deploy
 
 # Sau ambele împreună
@@ -51,7 +51,7 @@ azd up
 
 ---
 
-## 📁 Structura Proiectului AZD
+## 📁 Structura proiectului AZD
 
 ```
 my-project/
@@ -68,10 +68,10 @@ my-project/
 
 ---
 
-## 🔧 Comenzi Esențiale
+## 🔧 Comenzi esențiale
 
 | Comandă | Descriere |
-|---------|-------------|
+|---------|------------|
 | `azd init` | Inițializează proiectul |
 | `azd provision` | Creează resurse Azure |
 | `azd deploy` | Implementează codul aplicației |
@@ -83,17 +83,17 @@ my-project/
 ## 🔗 Navigare
 
 | Direcție | Capitol |
-|-----------|---------|
+|----------|---------|
 | **Anterior** | [Capitolul 3: Configurare](../chapter-03-configuration/README.md) |
 | **Următor** | [Capitolul 5: Soluții Multi-Agent](../chapter-05-multi-agent/README.md) |
 
 ---
 
-## 📖 Resurse Asemănătoare
+## 📖 Resurse conexe
 
-- [Verificări Pre-Implementare](../chapter-06-pre-deployment/README.md)
+- [Verificări pre-implementare](../chapter-06-pre-deployment/README.md)
 - [Exemple Container App](../../examples/container-app/README.md)
-- [Exemplu Aplicație Bază de Date](../../examples/database-app/README.md)
+- [Exemplu aplicație bază de date](../../examples/database-app/README.md)
 
 ---
 

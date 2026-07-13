@@ -1,19 +1,19 @@
-# Capitolul 6: Planificare și Validare Pre-Implementare
+# Capitolul 6: Planificarea și Validarea înainte de Implementare
 
-**📚 Curs**: [AZD Pentru Începători](../../README.md) | **⏱️ Durată**: 1 oră | **⭐ Complexitate**: Intermediar
+**📚 Curs**: [AZD Pentru Începători](../../README.md) | **⏱️ Durata**: 1 oră | **⭐ Complexitate**: Intermediar
 
 ---
 
 ## Prezentare generală
 
-Acest capitol acoperă pașii esențiali de planificare și validare înainte de implementarea aplicației tale. Învață să eviți greșelile costisitoare prin planificarea corectă a capacității, selectarea SKU-urilor și verificările prealabile.
+Acest capitol acoperă pașii esențiali de planificare și validare înainte de a implementa aplicația. Învățați să evitați greșelile costisitoare cu planificarea corectă a capacității, selecția SKU și verificările prealabile.
 
-> Validat cu `azd 1.25.6` în iunie 2026.
+> Validat cu `azd 1.27.1` în iulie 2026.
 
-## Obiectivele de învățare
+## Obiective de învățare
 
-Prin parcurgerea acestui capitol, vei:
-- Executa verificări prealabile înainte de implementare
+Prin finalizarea acestui capitol, veți:
+- Rula verificări prealabile înainte de implementare
 - Planifica capacitatea și estima cerințele de resurse
 - Selecta SKU-urile potrivite pentru optimizarea costurilor
 - Configura Application Insights pentru monitorizare
@@ -23,23 +23,23 @@ Prin parcurgerea acestui capitol, vei:
 
 ## 📚 Lecții
 
-| # | Lecție | Descriere | Timp |
-|---|--------|------------|------|
-| 1 | [Verificări Prealabile](preflight-checks.md) | Validarea configurației înainte de implementare | 15 min |
-| 2 | [Planificare Capacitate](capacity-planning.md) | Estimarea cerințelor de resurse | 20 min |
-| 3 | [Selectarea SKU](sku-selection.md) | Alegerea nivelurilor de preț potrivite | 15 min |
+| # | Lecție | Descriere | Durată |
+|---|--------|-------------|------|
+| 1 | [Verificări prealabile](preflight-checks.md) | Validarea configurației înainte de implementare | 15 min |
+| 2 | [Planificarea capacității](capacity-planning.md) | Estimarea cerințelor de resurse | 20 min |
+| 3 | [Selecția SKU](sku-selection.md) | Alegerea nivelurilor de preț potrivite | 15 min |
 | 4 | [Application Insights](application-insights.md) | Configurarea monitorizării | 20 min |
-| 5 | [Modele de Coordonare](coordination-patterns.md) | Fluxuri de lucru pentru implementare în echipă | 15 min |
+| 5 | [Modele de coordonare](coordination-patterns.md) | Fluxuri de lucru în echipa de implementare | 15 min |
 
 ---
 
-## 🚀 Pornire Rapidă
+## 🚀 Pornire rapidă
 
 ```bash
 # Verifică cotele abonamentului
 az vm list-usage --location eastus --output table
 
-# Previzualizează implementarea (fără resurse create)
+# Previzualizează implementarea (nu se creează resurse)
 azd provision --preview
 
 # Validează sintaxa Bicep
@@ -51,21 +51,21 @@ azd env get-values
 
 ---
 
-## ☑️ Lista de verificare pre-implementare
+## ☑️ Listă de verificare înainte de implementare
 
 ### Înainte de `azd provision`
 
-- [ ] Cota verificată pentru regiune
-- [ ] SKU-uri selectate corespunzător
+- [ ] Cotă verificată pentru regiune
+- [ ] SKU-urile selectate corespunzător
 - [ ] Estimarea costurilor revizuită
 - [ ] Convenția de denumire consistentă
-- [ ] Configurare securitate/RBAC
+- [ ] Securitate/RBAC configurat
 
 ### Înainte de `azd deploy`
 
 - [ ] Variabilele de mediu setate
 - [ ] Secrete în Key Vault
-- [ ] Șirurile de conexiune verificate
+- [ ] Lanțurile de conexiune verificate
 - [ ] Verificări de sănătate configurate
 
 ---
@@ -73,11 +73,11 @@ azd env get-values
 ## 💰 Ghid de selecție SKU
 
 | Sarcină | Dezvoltare | Producție |
-|----------|-------------|-----------|
-| Container Apps | Consumption | Dedicated D4 |
+|----------|-------------|------------|
+| Container Apps | Consumpție | Dedicat D4 |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standard | Standard + PTU |
-| AI Search | Basic | Standard S2+ |
+| Modele Microsoft Foundry | Standard | Standard + PTU |
+| Căutare AI | Basic | Standard S2+ |
 
 ---
 
@@ -86,15 +86,15 @@ azd env get-values
 | Direcție | Capitol |
 |-----------|---------|
 | **Anterior** | [Capitolul 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
-| **Următor** | [Capitolul 7: Depanare](../chapter-07-troubleshooting/README.md) |
+| **Următor** | [Capitolul 7: Remediere probleme](../chapter-07-troubleshooting/README.md) |
 
 ---
 
 ## 📖 Resurse conexe
 
-- [Ghid de Configurare](../chapter-03-configuration/configuration.md)
-- [Ghid de Implementare](../chapter-04-infrastructure/deployment-guide.md)
-- [Probleme Comune](../chapter-07-troubleshooting/common-issues.md)
+- [Ghid de configurare](../chapter-03-configuration/configuration.md)
+- [Ghid de implementare](../chapter-04-infrastructure/deployment-guide.md)
+- [Probleme comune](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

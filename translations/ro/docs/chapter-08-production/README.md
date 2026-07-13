@@ -1,4 +1,4 @@
-# Capitolul 8: Modele de Producție & Enterprise
+# Capitolul 8: Modele de Producție și Enterprise
 
 **📚 Curs**: [AZD Pentru Începători](../../README.md) | **⏱️ Durată**: 2-3 ore | **⭐ Complexitate**: Avansat
 
@@ -6,26 +6,26 @@
 
 ## Prezentare generală
 
-Acest capitol acoperă modele de implementare pregătite pentru mediul enterprise, întărirea securității, monitorizarea și optimizarea costurilor pentru sarcini de lucru AI în producție.
+Acest capitol acoperă modele de implementare pregătite pentru întreprinderi, consolidarea securității, monitorizarea și optimizarea costurilor pentru sarcini de lucru AI în producție.
 
-> Validat cu `azd 1.25.6` în iunie 2026.
+> Validat cu `azd 1.27.1` în iulie 2026.
 
 ## Obiective de învățare
 
-Prin parcurgerea acestui capitol, vei:
-- Implementa aplicații reziliente multi-regiune
+Parcurgând acest capitol, vei:
+- Implementa aplicații rezistente multi-regiune
 - Implementa modele de securitate enterprise
 - Configura monitorizare cuprinzătoare
-- Optimiza costurile la scară
+- Optimiza costurile la scară largă
 - Configura pipeline-uri CI/CD cu AZD
 
 ---
 
 ## 📚 Lecții
 
-| # | Lecție | Descriere | Timp |
-|---|--------|-----------|------|
-| 1 | [Practici AI pentru producție](production-ai-practices.md) | Modele de implementare enterprise | 90 min |
+| # | Lecție | Descriere | Durată |
+|---|--------|-------------|------|
+| 1 | [Practici AI în Producție](production-ai-practices.md) | Modele de implementare enterprise | 90 min |
 
 ---
 
@@ -41,22 +41,22 @@ Prin parcurgerea acestui capitol, vei:
 
 ---
 
-## 🏗️ Modele de arhitectură
+## 🏗️ Modele arhitecturale
 
 ### Modelul 1: Microservicii AI
 
 ```mermaid
 graph LR
-    Gateway[API Gateway] --> AI[Serviciu AI] --> Models[Modele Microsoft Foundry]
-    Gateway --> Auth[Serviciu Autentificare]
-    AI --> Data[Stocare Date]
+    Gateway[Poarta API] --> AI[Serviciu AI] --> Models[Modele Microsoft Foundry]
+    Gateway --> Auth[Serviciu de Autentificare]
+    AI --> Data[Depozit de Date]
 ```
 
-### Modelul 2: AI bazat pe evenimente
+### Modelul 2: AI Eveniment-Condus
 
 ```mermaid
 graph LR
-    EventGrid[Grid de Evenimente] --> Functions[Funcții] --> Pipeline[Flux AI]
+    EventGrid[Grilă de Evenimente] --> Functions[Funcții] --> Pipeline[Pipeline AI]
 ```
 
 ---
@@ -84,7 +84,7 @@ properties: {
 
 | Strategie | Economii |
 |----------|---------|
-| Scalarea la zero (Container Apps) | 60-80% |
+| Scalare până la zero (Container Apps) | 60-80% |
 | Folosirea nivelurilor de consum pentru dev | 50-70% |
 | Scalare programată | 30-50% |
 | Capacitate rezervată | 20-40% |
@@ -100,7 +100,7 @@ az consumption budget create \
 
 ---
 
-## 📊 Configurare monitorizare
+## 📊 Configurarea monitorizării
 
 ```bash
 # Flux de jurnale
@@ -119,17 +119,17 @@ az monitor metrics list --resource <resource-id>
 
 | Direcție | Capitol |
 |-----------|---------|
-| **Anterior** | [Capitolul 7: Depanare](../chapter-07-troubleshooting/README.md) |
-| **Curs finalizat** | [Pagina principală a cursului](../../README.md) |
+| **Anterior** | [Capitolul 7: Rezolvarea problemelor](../chapter-07-troubleshooting/README.md) |
+| **Curs terminat** | [Pagina principală a cursului](../../README.md) |
 
 ---
 
-## 📖 Resurse relevante
+## 📖 Resurse conexe
 
-- [Ghid agenți AI](../chapter-02-ai-development/agents.md)
+- [Ghid Agenți AI](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Soluții multi-agent](../chapter-05-multi-agent/README.md)
-- [Exemplu microservicii](../../examples/microservices/README.md)
+- [Soluții Multi-Agent](../chapter-05-multi-agent/README.md)
+- [Exemplu Microservicii](../../examples/microservices/README.md)
 
 ---
 

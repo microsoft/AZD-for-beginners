@@ -1,21 +1,21 @@
-# Chapter 3: Configuration & Authentication
+# Kapitola 3: Konfigurácia a autentifikácia
 
-**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Trvanie**: 45-60 minút | **⭐ Náročnosť**: Stredne pokročilá
+**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Dĺžka**: 45-60 minút | **⭐ Zložitosť**: Stredne pokročilý
 
 ---
 
 ## Prehľad
 
-Táto kapitola pokrýva konfiguráciu prostredia, vzory overovania a najlepšie bezpečnostné postupy pri nasadení pomocou Azure Developer CLI.
+Táto kapitola pokrýva konfiguráciu prostredia, vzory autentifikácie a najlepšie postupy zabezpečenia pre nasadenia Azure Developer CLI.
 
-> Overené voči `azd 1.25.6` v júni 2026.
+> Overené na `azd 1.27.1` v júli 2026.
 
 ## Ciele učenia
 
 Po dokončení tejto kapitoly budete:
-- Zvládnuť hierarchiu konfigurácie AZD
-- Spravovať viacero prostredí (dev, staging, prod)
-- Implementovať bezpečné overovanie s riadenými identitami
+- Ovládať hierarchiu konfigurácie AZD
+- Spravovať viaceré prostredia (dev, staging, prod)
+- Implementovať bezpečnú autentifikáciu s riadenými identitami
 - Konfigurovať nastavenia špecifické pre prostredie
 
 ---
@@ -25,7 +25,7 @@ Po dokončení tejto kapitoly budete:
 | # | Lekcia | Popis | Čas |
 |---|--------|-------------|------|
 | 1 | [Sprievodca konfiguráciou](configuration.md) | Nastavenie a správa prostredia | 30 min |
-| 2 | [Overovanie a bezpečnosť](authsecurity.md) | Vzory spravovaných identít a RBAC | 30 min |
+| 2 | [Autentifikácia a zabezpečenie](authsecurity.md) | Vzory riadenej identity a RBAC | 30 min |
 
 ---
 
@@ -52,12 +52,12 @@ azd env get-values
 
 ## 🔧 Hierarchia konfigurácie
 
-AZD uplatňuje nastavenia v tomto poradí (neskoršie prepisuje skoršie):
+AZD uplatňuje nastavenia v tomto poradí (neskoršie prepíše skoršie):
 
 1. **Predvolené hodnoty** (zabudované v šablónach)
 2. **azure.yaml** (konfigurácia projektu)
 3. **Premenné prostredia** (`azd env set`)
-4. **Prepínače príkazového riadku** (`--location eastus`)
+4. **Príkazové prepínače** (`--location eastus`)
 
 ---
 
@@ -70,10 +70,10 @@ azd env set AZURE_USE_MANAGED_IDENTITY true
 # Skontrolujte stav autentifikácie AZD
 azd auth status
 
-# Voliteľné: overte kontext Azure CLI, ak plánujete spúšťať príkazy az
+# Voliteľné: overte kontext Azure CLI, ak plánujete spustiť príkazy az
 az account show
 
-# Znovu sa autentifikujte, ak je to potrebné
+# Znova sa autentifikujte, ak je to potrebné
 azd auth login
 
 # Voliteľné: obnovte autentifikáciu Azure CLI pre príkazy az
@@ -87,13 +87,13 @@ az login
 | Smer | Kapitola |
 |-----------|---------|
 | **Predchádzajúca** | [Kapitola 2: Vývoj AI](../chapter-02-ai-development/README.md) |
-| **Ďalšia** | [Kapitola 4: Infrastruktúra](../chapter-04-infrastructure/README.md) |
+| **Nasledujúca** | [Kapitola 4: Infrastruktúra](../chapter-04-infrastructure/README.md) |
 
 ---
 
 ## 📖 Súvisiace zdroje
 
-- [Kontroly pred nasadením](../chapter-06-pre-deployment/README.md)
+- [Prednasadzovacie kontroly](../chapter-06-pre-deployment/README.md)
 - [Riešenie problémov](../chapter-07-troubleshooting/common-issues.md)
 
 ---
