@@ -6,11 +6,11 @@
 
 ## Aperçu
 
-Ce chapitre couvre les modèles de déploiement prêts pour l'entreprise, le renforcement de la sécurité, la surveillance, et l'optimisation des coûts pour les charges de travail IA en production.
+Ce chapitre couvre les modèles de déploiement prêts pour l'entreprise, le renforcement de la sécurité, la surveillance et l'optimisation des coûts pour les charges de travail IA en production.
 
-> Validé avec `azd 1.25.6` en juin 2026.
+> Validé avec `azd 1.27.1` en juillet 2026.
 
-## Objectifs d'apprentissage
+## Objectifs d'Apprentissage
 
 En terminant ce chapitre, vous serez capable de :
 - Déployer des applications résilientes multi-régions
@@ -23,15 +23,15 @@ En terminant ce chapitre, vous serez capable de :
 
 ## 📚 Leçons
 
-| # | Leçon | Description | Durée |
-|---|--------|-------------|-------|
-| 1 | [Pratiques IA en production](production-ai-practices.md) | Modèles de déploiement en entreprise | 90 min |
+| # | Leçon | Description | Temps |
+|---|--------|-------------|------|
+| 1 | [Pratiques d'IA en Production](production-ai-practices.md) | Modèles de déploiement d'entreprise | 90 min |
 
 ---
 
-## 🚀 Liste de contrôle pour la production
+## 🚀 Checklist de Production
 
-- [ ] Déploiement multi-régions pour la résilience
+- [ ] Déploiement multi-région pour la résilience
 - [ ] Identité gérée pour l'authentification (pas de clés)
 - [ ] Application Insights pour la surveillance
 - [ ] Budgets et alertes de coûts configurés
@@ -41,7 +41,7 @@ En terminant ce chapitre, vous serez capable de :
 
 ---
 
-## 🏗️ Modèles d'architecture
+## 🏗️ Modèles d'Architecture
 
 ### Modèle 1 : Microservices IA
 
@@ -49,10 +49,10 @@ En terminant ce chapitre, vous serez capable de :
 graph LR
     Gateway[Passerelle API] --> AI[Service IA] --> Models[Modèles Microsoft Foundry]
     Gateway --> Auth[Service d'authentification]
-    AI --> Data[Magasin de données]
+    AI --> Data[Base de données]
 ```
 
-### Modèle 2 : IA pilotée par événements
+### Modèle 2 : IA Événementielle
 
 ```mermaid
 graph LR
@@ -61,7 +61,7 @@ graph LR
 
 ---
 
-## 🔐 Meilleures pratiques de sécurité
+## 🔐 Bonnes Pratiques de Sécurité
 
 ```bicep
 // Use managed identity
@@ -80,14 +80,14 @@ properties: {
 
 ---
 
-## 💰 Optimisation des coûts
+## 💰 Optimisation des Coûts
 
 | Stratégie | Économies |
 |----------|-----------|
-| Passage à zéro (Container Apps) | 60-80 % |
-| Utilisation des niveaux à la consommation pour le dev | 50-70 % |
-| Mise à l'échelle programmée | 30-50 % |
-| Capacité réservée | 20-40 % |
+| Échelle à zéro (Container Apps) | 60-80% |
+| Utilisation des niveaux de consommation pour dev | 50-70% |
+| Mise à l'échelle planifiée | 30-50% |
+| Capacité réservée | 20-40% |
 
 ```bash
 # Définir des alertes budgétaires
@@ -100,16 +100,16 @@ az consumption budget create \
 
 ---
 
-## 📊 Configuration de la surveillance
+## 📊 Configuration de la Surveillance
 
 ```bash
 # Diffuser les journaux
 azd monitor --logs
 
-# Vérifier Application Insights
+# Vérifier les informations sur l'application
 azd monitor --overview
 
-# Afficher les métriques
+# Voir les métriques
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -120,16 +120,16 @@ az monitor metrics list --resource <resource-id>
 | Direction | Chapitre |
 |-----------|----------|
 | **Précédent** | [Chapitre 7 : Dépannage](../chapter-07-troubleshooting/README.md) |
-| **Cours terminé** | [Accueil du cours](../../README.md) |
+| **Cours Terminé** | [Page d'Accueil du Cours](../../README.md) |
 
 ---
 
-## 📖 Ressources associées
+## 📖 Ressources Associées
 
-- [Guide des agents IA](../chapter-02-ai-development/agents.md)
+- [Guide des Agents IA](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Solutions multi-agents](../chapter-05-multi-agent/README.md)
-- [Exemple de microservices](../../examples/microservices/README.md)
+- [Solutions Multi-Agents](../chapter-05-multi-agent/README.md)
+- [Exemple de Microservices](../../examples/microservices/README.md)
 
 ---
 

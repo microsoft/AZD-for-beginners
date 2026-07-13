@@ -1,6 +1,6 @@
 # 2. Validate a Template
 
-> Validated against `azd 1.25.6` in June 2026.
+> Validated against `azd 1.27.1` in July 2026.
 
 !!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
 
@@ -14,9 +14,9 @@
 
 ## 1. Introduction
 
-The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) or `azd` is an open-source commandline tool that streamlines the developer workflow when building and deploying applications to Azure. 
+The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) or `azd` is an open-source command-line tool that streamlines the developer workflow when building and deploying applications to Azure.
 
-[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) are standardized repositories that include sample application code, _infrastructure-as-code_ assets, and `azd` configuration files for a cohesive solution architecture. Provisioning the infrastructure becomes as simple as an `azd provision` command - while using `azd up` allows you to provision infrastructure **and** deploy your application at one shot!
+[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) are standardized repositories that include sample application code, _infrastructure-as-code_ assets, and `azd` configuration files for a cohesive solution architecture. Provisioning the infrastructure becomes as simple as an `azd provision` command - while using `azd up` allows you to provision infrastructure **and** deploy your application in one shot!
 
 As a result, jumpstarting your application development process can be as simple as finding the right _AZD Starter template_ that comes closest to your application and infrastructure needs - then customizing the repository to suit your scenario requirements.
 
@@ -31,7 +31,7 @@ Before we begin, let's make sure you have the Azure Developer CLI installed.
 1. You should see something like this!
 
       ```bash title="" linenums="0"
-      azd version 1.25.6 (commit <current-build>)
+      azd version 1.27.1 (commit <current-build>)
       ```
 
 **You are now ready to select and deploy a template with azd**
@@ -40,7 +40,7 @@ Before we begin, let's make sure you have the Azure Developer CLI installed.
 
 ## 2. Template Selection
 
-The Microsoft Foundry platform comes with a [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that cover popular solution scenarios like _multi-agent workflow atomation_ and _multi-modal content processing_. You can also discover these templates by visiting the Microsoft Foundry portal.
+The Microsoft Foundry platform comes with a [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that cover popular solution scenarios like _multi-agent workflow automation_ and _multi-modal content processing_. You can also discover these templates by visiting the Microsoft Foundry portal.
 
 1. Visit [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Log into the Microsoft Foundry portal when prompted - you will see something like this.
@@ -110,10 +110,10 @@ Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
 
 1. Try asking a couple of [sample questions](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
-      1. Ask: ```What is the capital of France?``` 
+      1. Ask: ```What is the capital of France?```
       1. Ask: ```What's the best tent under $200 for two people, and what features does it include?```
 
-1. You should get answers similar to what is shown below. _But how does this work?_ 
+1. You should get answers similar to what is shown below. _But how does this work?_
 
       ![App](../../../../../translated_images/en/03-test-question.521c1e863cbaddb6.webp)
 
@@ -127,7 +127,7 @@ The Azure Container App deploys an endpoint that connects to the AI Agent provis
 
 1. Click on the `Microsoft Foundry` resource in that list
 
-1. You should see this. Click the `Go to Microsoft Foundry Portal` button. 
+1. You should see this. Click the `Go to Microsoft Foundry Portal` button.
    ![Foundry](../../../../../translated_images/en/04-view-foundry-project.fb94ca41803f28f3.webp)
 
 1. You should see the Foundry Project page for your AI application
@@ -142,15 +142,15 @@ The Azure Container App deploys an endpoint that connects to the AI Agent provis
       - The agent `Knowledge` indicates it has 32 files uploaded (for file search)
       ![Agents](../../../../../translated_images/en/07-view-agent-details.0e049f37f61eae62.webp)
 
-1. Look for the `Data+indexes` option in the left menu and click for details. 
+1. Look for the `Data+indexes` option in the left menu and click for details.
 
       - You should see the 32 data files uploaded for knowledge.
-      - These will correspond to the 12 customer files and 20 product files under `src/files` 
+      - These will correspond to the 12 customer files and 20 product files under `src/files`
       ![Data](../../../../../translated_images/en/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
-**You validated Agent operation!** 
+**You validated Agent operation!**
 
-1. The agent responses are grounded in the knowledge in those files. 
+1. The agent responses are grounded in the knowledge in those files.
 1. You can now ask questions related to that data, and get grounded responses.
 1. Example: `customer_info_10.json` describes the 3 purchases made by "Amanda Perez"
 
@@ -162,7 +162,7 @@ Revisit the browser tab with the Container App endpoint and ask: `What products 
 
 ## 6. Agent Playground
 
-Let's build a bit more intuition for the capabilities of Microsoft Foundry, by taking the Agent for a spin in the Agents Playground. 
+Let's build a bit more intuition for the capabilities of Microsoft Foundry, by taking the Agent for a spin in the Agents Playground.
 
 1. Return to the `Agents` page in Microsoft Foundry - select the default agent
 1. Click the `Try in Playground` option - you should get a Playground UI like this
@@ -175,7 +175,7 @@ You get the same (or similar) response - but you also get additional information
 1. Note that the response cites data files used to "ground" the response
 1. Hover over any of these file labels - does the data match your query and displayed response?
 
-You also see a _stats_ row below the response. 
+You also see a _stats_ row below the response.
 
 1. Hover over any metric - e.g., Safety. You see something like this
 1. Does the assessed rating match your intuition for the response safety level?
@@ -196,12 +196,12 @@ Observability is about instrumenting your application to generate data that can 
 
       ![Agent](../../../../../translated_images/en/10-view-run-info.b20ebd75fef6a1cc.webp)
 
-1. Click the `Metadata` tab to see additional attributes for the run, that may provide useful context for debugging issues later.   
+1. Click the `Metadata` tab to see additional attributes for the run, that may provide useful context for debugging issues later.
 
       ![Agent](../../../../../translated_images/en/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 
-1. Click the `Evaluations` tab to see auto-assessments made on the agent response. These include safety evaluations (e.g., Self-harm) and agent-specifc evaluations (e.g., Intent resolution, Task adherence).
+1. Click the `Evaluations` tab to see auto-assessments made on the agent response. These include safety evaluations (e.g., Self-harm) and agent-specific evaluations (e.g., Intent resolution, Task adherence).
 
       ![Agent](../../../../../translated_images/en/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
@@ -209,7 +209,7 @@ Observability is about instrumenting your application to generate data that can 
 
       - Select `Resource usage` tab in the displayed page - and view the metrics.
       - Track application usage in terms of costs (tokens) and load (requests).
-      - Track applicaton latency to first byte (input processing) and last byte (output).
+      - Track application latency to first byte (input processing) and last byte (output).
 
       ![Agent](../../../../../translated_images/en/13-monitoring-resources.5148015f7311807f.webp)
 
@@ -219,7 +219,7 @@ Observability is about instrumenting your application to generate data that can 
 
 So far, we've walked through the deployment in the browser - and validated that our infrastructure is provisioned and the application is operational. But to work with the application _code-first_, we need to configure our local development environment with the relevant variables required to work with these resources. Using `azd` makes it easy.
 
-1. The Azure Developer CLI [uses environment variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) to store and manage configuration settings for  the application deployments.
+1. The Azure Developer CLI [uses environment variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) to store and manage configuration settings for the application deployments.
 
 1. Environment variables are stored in `.azure/<env-name>/.env` - this scopes them to the `env-name` environment used during deployment and helps you isolate environments between different deployment targets in the same repo.
 
@@ -233,7 +233,7 @@ Let's try out a few commands:
       ```bash title="" linenums="0"
       azd env get-values
       ```
-      
+
       You see something like:
 
       ```bash title="" linenums="0"
@@ -249,7 +249,7 @@ Let's try out a few commands:
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
-      
+
       You see something like this - it was not set by default!
 
       ```bash title="" linenums="0"
@@ -277,6 +277,7 @@ Let's try out a few commands:
       ```bash title="" linenums="0"
       azd env refresh
       ```
+
 
       This is a powerful way to _sync_ environment variables across two or more local development environments (e.g., team with multiple developers) - allowing the deployed infrastructure to serve as the ground truth for env variable state. Team members simply _refresh_ variables to get back in sync.
 

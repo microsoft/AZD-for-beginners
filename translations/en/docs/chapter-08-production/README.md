@@ -8,7 +8,7 @@
 
 This chapter covers enterprise-ready deployment patterns, security hardening, monitoring, and cost optimization for production AI workloads.
 
-> Validated against `azd 1.25.6` in June 2026.
+> Validated against `azd 1.27.1` in July 2026.
 
 ## Learning Objectives
 
@@ -90,7 +90,7 @@ properties: {
 | Reserved capacity | 20-40% |
 
 ```bash
-# Set budget alerts
+# Establecer alertas de presupuesto
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \

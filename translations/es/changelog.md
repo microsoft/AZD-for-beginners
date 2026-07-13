@@ -1,107 +1,146 @@
-# Registro de cambios - AZD For Beginners
+# Registro de cambios - AZD Para Principiantes
 
 ## Introducción
 
-Este registro de cambios documenta todos los cambios, actualizaciones y mejoras notables del repositorio AZD For Beginners. Seguimos los principios de versionado semántico y mantenemos este registro para ayudar a los usuarios a entender qué ha cambiado entre versiones.
+Este registro de cambios documenta todos los cambios, actualizaciones y mejoras notables en el repositorio AZD Para Principiantes. Seguimos los principios de versionado semántico y mantenemos este registro para ayudar a los usuarios a entender qué ha cambiado entre versiones.
 
 ## Objetivos de aprendizaje
 
 Al revisar este registro de cambios, usted:
-- Mantenerse informado sobre nuevas características y adiciones de contenido
-- Entender las mejoras realizadas en la documentación existente
-- Rastrear correcciones de errores y ajustes para asegurar la exactitud
-- Seguir la evolución de los materiales de aprendizaje a lo largo del tiempo
+- Se mantendrá informado sobre nuevas características y adiciones de contenido
+- Entenderá las mejoras realizadas en la documentación existente
+- Podrá rastrear correcciones de errores para garantizar la precisión
+- Seguirá la evolución de los materiales de aprendizaje a lo largo del tiempo
 
-## Resultados de aprendizaje
+## Resultados del aprendizaje
 
-Después de revisar las entradas del registro de cambios, usted podrá:
-- Identificar contenido y recursos nuevos disponibles para el aprendizaje
+Después de revisar las entradas del registro de cambios, podrá:
+- Identificar nuevos contenidos y recursos disponibles para el aprendizaje
 - Entender qué secciones han sido actualizadas o mejoradas
-- Planear su ruta de aprendizaje basándose en los materiales más actuales
-- Contribuir con comentarios y sugerencias para mejoras futuras
+- Planear su ruta de aprendizaje basada en los materiales más actuales
+- Contribuir con comentarios y sugerencias para futuras mejoras
 
-## Historial de versiones
+## Historia de versiones
+
+### [v3.23.0] - 2026-07-13
+
+#### Actualización AZD 1.27.1: Actualización de versión vigente
+**Esta versión revalida el curso contra `azd` `1.27.1` (julio 2026, última versión estable) y la extensión preview actual del agente AI `azure.ai.agents` `1.0.0-beta.5`, actualizando cada banner "validado contra" después de los lanzamientos 1.26.0, 1.27.0 y 1.27.1.**
+
+#### Cambiado
+- **✅ Línea base de validación actualizada** de `azd 1.25.6` (junio 2026) a `azd 1.27.1` (julio 2026) en el README raíz, todos los README de capítulos, la lección de dev-container del Capítulo 1 (incluidos ejemplos con versión fijada), la lección de plantillas personalizadas del Capítulo 4, la lección de multi-agentes del Capítulo 5 y la documentación del taller
+- **🤖 Línea base del Capítulo 2 actualizada** de `azd 1.23.12` (marzo 2026) a `azd 1.27.1` en `agents.md`, `ai-model-deployment.md`, `ai-workshop-lab.md` y `microsoft-foundry-integration.md`; fechas en notas de validación actualizadas al 2026-07-13
+- **🧩 Extensión de agentes AI actualizada** de `azure.ai.agents` `0.1.40-preview`/`0.1.18-preview` a la versión actual `1.0.0-beta.5` en el README y `agents.md` del Capítulo 2
+- **🧪 Ejemplo de validación en taller** (salida de `azd version`) actualizado a `1.27.1`
+
+#### Notas sobre lanzamientos relevantes de azd (1.26.0 → 1.27.1)
+- **1.26.0 (2026-06-24):** Soporte Go para Azure Functions sobre Flex Consumption, filtros de suscripción por inquilino en `azd config sub-filter`, paquetes de extensiones autocontenidos (`azd x pack --bundle`) y `azd tool install azure-skills`
+- **1.27.0 (2026-06-30):** Modelado directo de proyectos/agentes Azure AI Foundry en `azure.yaml` (inicialización sin Bicep/Terraform), soporte de despliegue en contenedor para App Service (`host: appservice` + `language: docker`), opción directa `-s/--source` para comandos `azd extension` y `azd tool uninstall`
+- **1.27.1 (2026-07-09):** Flag `--no-dependencies` para `azd extension install`, modelos desaprobados excluidos por defecto de mensajes de catálogo/cuota y varias correcciones de errores
+
+#### Archivos actualizados
+- `README.md`
+- `changelog.md`
+- `docs/chapter-01-foundation/README.md`
+- `docs/chapter-01-foundation/bring-your-own-app.md`
+- `docs/chapter-01-foundation/dev-containers.md`
+- `docs/chapter-02-ai-development/README.md`
+- `docs/chapter-02-ai-development/agents.md`
+- `docs/chapter-02-ai-development/ai-model-deployment.md`
+- `docs/chapter-02-ai-development/ai-workshop-lab.md`
+- `docs/chapter-02-ai-development/microsoft-foundry-integration.md`
+- `docs/chapter-03-configuration/README.md`
+- `docs/chapter-04-infrastructure/custom-templates.md`
+- `docs/chapter-04-infrastructure/README.md`
+- `docs/chapter-05-multi-agent/multi-agent-basics.md`
+- `docs/chapter-05-multi-agent/README.md`
+- `docs/chapter-06-pre-deployment/README.md`
+- `docs/chapter-07-troubleshooting/README.md`
+- `docs/chapter-08-production/README.md`
+- `workshop/docs/index.md`
+- `workshop/docs/instructions/2-Validate-AI-Template.md`
 
 ### [v3.22.0] - 2026-06-16
 
-#### Beginner Gap-Fill #2: Template Authoring, Dev Containers, Pulumi, Azure DevOps, Service Principals, and More
-**Esta versión cierra las brechas intermedias restantes identificadas por el análisis azd-coverage: cómo crear y publicar tu propia plantilla, entornos reproducibles de dev-container/Codespaces, el proveedor de infraestructura Pulumi, un recorrido de Azure DevOps CI/CD, autenticación con service principals, orientación para la selección de host (AKS/Spring Apps), explicaciones de `azd restore`/`azd package`, manejo de errores en hooks y prácticas para equipos/entornos compartidos.**
+#### Completar huecos para principiantes #2: Creación de plantillas, dev containers, Pulumi, Azure DevOps, Principales de servicio y más
+**Esta versión cierra los huecos intermedios restantes detectados por el análisis de cobertura azd: cómo crear y publicar su propia plantilla, entornos reproducibles con dev containers/Codespaces, el proveedor de infraestructura Pulumi, un recorrido por Azure DevOps CI/CD, autenticación con principal de servicio, guía de selección de host (AKS/Spring Apps), explicaciones de `azd restore` / `azd package`, manejo de errores en hooks y prácticas de equipo/entorno compartido.**
 
 #### Añadido
-- **🧱 New Chapter 4 lesson** `docs/chapter-04-infrastructure/custom-templates.md` — creación de tu propia plantilla azd: estructura requerida (`azure.yaml`, `infra/`, `src/`), el campo `metadata.template`, parametrizar la infraestructura con el token de recurso `uniqueString()` y la etiqueta `azd-env-name`, pruebas locales con `azd init --template <local-path>`, publicar en GitHub y enviar al catálogo Awesome AZD
-- **📦 New Chapter 1 lesson** `docs/chapter-01-foundation/dev-containers.md` — entornos azd reproducibles con Dev Containers y GitHub Codespaces: un `.devcontainer/devcontainer.json` mínimo usando la feature oficial `ghcr.io/azure/azure-dev/azd`, características específicas por lenguaje, `docker-in-docker` para hosts de contenedores, y `azd auth login --use-device-code` para inicio de sesión remoto
-- **🧩 Pulumi with azd** section in `docs/chapter-04-infrastructure/provisioning.md` — `infra.provider: pulumi`, estructura de carpetas de Pulumi, stacks mapeados a entornos azd, salidas/etiquetado requeridos, y el idéntico flujo de trabajo `azd up` / `azd down`
-- **🎯 Host-selection guidance** in `docs/chapter-04-infrastructure/provisioning.md` — una comparación amigable para principiantes de `appservice`, `staticwebapp`, `function`, `containerapp`, `aks`, y `springapp`, con orientación sobre cuándo elegir AKS o Azure Spring Apps
-- **🛠️ Azure DevOps CI/CD walkthrough** in `docs/chapter-08-production/production-ai-practices.md` — `azd pipeline config --provider azdo`, conexión de servicio con federación de identidad de carga de trabajo (OIDC), el `azure-dev.yml` generado, y configuración de variable-group
-- **🔑 Service Principals (Pattern 4)** added to `docs/chapter-03-configuration/authsecurity.md` — `az ad sp create-for-rbac`, `azd auth login` no interactivo con client secret vs. credenciales federadas/OIDC, cuándo usarlo y almacenamiento seguro de credenciales
-- **🪝 Hook error-handling** subsection in `docs/chapter-04-infrastructure/deployment-guide.md` — códigos de salida y `set -e`, `continueOnError`, probar hooks en aislamiento con `azd hooks run`, shells específicos del SO, y `--debug`
-- **👥 Team / shared environments** section in `docs/chapter-03-configuration/configuration.md` — qué vive en `.azure/`, qué ignorar en git, entornos por desarrollador, `azd env list`/`select`, y proveer valores de entorno en CI/CD
-- **🧰 `azd restore` and expanded `azd package`** explanations in `resources/cheat-sheet.md` — restaurar dependencias y construir un artefacto desplegable sin desplegar
+- **🧱 Nueva lección del Capítulo 4** `docs/chapter-04-infrastructure/custom-templates.md` — creación de su propia plantilla azd: estructura requerida (`azure.yaml`, `infra/`, `src/`), el campo `metadata.template`, parametrización de la infraestructura con el token de recurso `uniqueString()` y la etiqueta `azd-env-name`, pruebas locales con `azd init --template <local-path>`, publicación en GitHub y envío a la galería Awesome AZD
+- **📦 Nueva lección del Capítulo 1** `docs/chapter-01-foundation/dev-containers.md` — entornos azd reproducibles con Dev Containers y GitHub Codespaces: un `.devcontainer/devcontainer.json` mínimo que utiliza la característica oficial `ghcr.io/azure/azure-dev/azd`, características específicas para lenguajes, `docker-in-docker` para hosts de contenedor y `azd auth login --use-device-code` para inicio de sesión remoto
+- **🧩 Pulumi con azd** sección en `docs/chapter-04-infrastructure/provisioning.md` — `infra.provider: pulumi`, organización de carpetas Pulumi, stacks mapeados a entornos azd, salidas/re-etiquetado requeridos y el mismo flujo de trabajo `azd up` / `azd down`
+- **🎯 Guía de selección de host** en `docs/chapter-04-infrastructure/provisioning.md` — comparación amigable para principiantes de `appservice`, `staticwebapp`, `function`, `containerapp`, `aks` y `springapp`, con orientación sobre cuándo elegir AKS o Azure Spring Apps
+- **🛠️ Recorrido por Azure DevOps CI/CD** en `docs/chapter-08-production/production-ai-practices.md` — `azd pipeline config --provider azdo`, conexión de servicio con federación de identidad de carga de trabajo (OIDC), el `azure-dev.yml` generado y configuración del grupo de variables
+- **🔑 Principales de servicio (Patrón 4)** añadido a `docs/chapter-03-configuration/authsecurity.md` — `az ad sp create-for-rbac`, `azd auth login` no interactivo con secreto de cliente vs. credenciales federadas/OIDC, cuándo usar y almacenamiento seguro de credenciales
+- **🪝 Manejo de errores en hooks** subsección en `docs/chapter-04-infrastructure/deployment-guide.md` — códigos de salida y `set -e`, `continueOnError`, prueba de hooks de forma aislada con `azd hooks run`, shells específicos del SO y `--debug`
+- **👥 Equipo / entornos compartidos** sección en `docs/chapter-03-configuration/configuration.md` — qué vive en `.azure/`, qué ignorar en git, entornos por desarrollador, `azd env list`/`select` y suministro de valores para entornos en CI/CD
+- **🧰 Explicaciones de `azd restore` y ampliación de `azd package`** en `resources/cheat-sheet.md` — restauración de dependencias y creación de artefacto desplegable sin desplegar
 
 #### Cambiado
-- **🧭 Chapter 4 lessons table** updated to include the new "Authoring Your Own Template" lesson (Lesson 3)
-- **🧭 Chapter 1 lessons table** updated to include the new "Dev Containers & Codespaces" lesson (Lesson 5); navigation footers wired between `bring-your-own-app.md` and `dev-containers.md`
+- **🧭 Tabla de lecciones del Capítulo 4** actualizada para incluir la nueva lección "Creación de tu propia plantilla" (Lección 3)
+- **🧭 Tabla de lecciones del Capítulo 1** actualizada para incluir la nueva lección "Dev Containers y Codespaces" (Lección 5); pies de navegación enlazados entre `bring-your-own-app.md` y `dev-containers.md`
 
 ### [v3.21.0] - 2026-06-16
 
-#### Beginner Gap-Fill: Hands-On Multi-Agent Lesson, "Bring Your Own App," Terraform, and CI/CD Walkthrough
-**Esta versión cierra las mayores brechas para una guía completa para principiantes añadiendo dos nuevas lecciones prácticas (un recorrido desplegable multi-agente y cómo añadir azd a una app existente), una introducción amigable a hooks, una sección de Terraform con azd, un recorrido paso a paso del pipeline de GitHub Actions, un explicador de las nuevas extensiones en preview, y una lista de verificación explícita para la verificación del despliegue.**
+#### Completar huecos para principiantes: Lección práctica de multi-agentes, "Trae tu propia app", Terraform y recorrido de CI/CD
+**Esta versión cierra las mayores brechas para una guía completa para principiantes añadiendo dos nuevas lecciones prácticas (un recorrido desplegable multi-agente y la incorporación de azd a una app existente), una introducción amigable a hooks, una sección Terraform con azd, un recorrido paso a paso por pipeline de GitHub Actions, una explicación para las nuevas extensiones preview y una lista explícita de verificación para la validación del despliegue.**
 
 #### Añadido
-- **🤝 New Chapter 5 lesson** `docs/chapter-05-multi-agent/multi-agent-basics.md` — un recorrido totalmente práctico y desplegable de dos agentes (orquestador + especialistas) usando una plantilla real (`contoso-creative-writer`), cubriendo cuándo usar multi-agent, el flujo `azd up`, entender los recursos desplegados, trazado entre agentes, personalización y limpieza
-- **📦 New Chapter 1 lesson** `docs/chapter-01-foundation/bring-your-own-app.md` — cómo añadir azd a un proyecto existente con `azd init` ("use code in the current directory"), entender `azure.yaml` y `infra/`, `azd infra generate`, detección de host y desplegar con `azd up`
-- **🌐 Terraform with azd** section added to `docs/chapter-04-infrastructure/provisioning.md` — configuración `infra.provider: terraform`, estructura de carpetas `.tf`, salidas `AZURE_*` requeridas y etiquetado `azd-env-name`, y el idéntico flujo de trabajo `azd up` / `azd down` (cierra la brecha donde se afirmaba soporte de Terraform pero solo se mostró Bicep)
-- **⚙️ Step-by-step GitHub Actions walkthrough** in `docs/chapter-08-production/production-ai-practices.md` — desde el repositorio de GitHub hasta despliegues automatizados: `azd pipeline config`, credenciales federadas OIDC (sin secretos almacenados), el `azure-dev.yml` generado, y orientación sobre secretos vs variables
-- **🪝 Beginner "New to hooks?" introduction** in `docs/chapter-04-infrastructure/deployment-guide.md` — qué es un hook, una tabla de etapas de hooks, un hook mínimo inicial, y ejecutar hooks manualmente con `azd hooks run`
-- **✅ "Verify Your Deployment" checklist** added to Step 5 of `docs/chapter-01-foundation/first-project.md` — prueba básica, comprobación del endpoint de salud y criterios de éxito explícitos
-- **🧩 Explainer for new preview extensions** `azure.ai.skills` and `azure.ai.connections` (qué son y cuándo recurrir a ellas) in `docs/chapter-08-production/production-ai-practices.md`
+- **🤝 Nueva lección Capítulo 5** `docs/chapter-05-multi-agent/multi-agent-basics.md` — un recorrido completamente práctico y desplegable con dos agentes (orquestador + especialistas) usando una plantilla real (`contoso-creative-writer`), cubriendo cuándo usar multi-agente, el flujo de trabajo `azd up`, comprensión de recursos desplegados, trazabilidad entre agentes, personalización y limpieza
+- **📦 Nueva lección Capítulo 1** `docs/chapter-01-foundation/bring-your-own-app.md` — cómo agregar azd a un proyecto existente con `azd init` ("usar código en el directorio actual"), comprensión de `azure.yaml` e `infra/`, `azd infra generate`, detección de host y despliegue con `azd up`
+- **🌐 Sección Terraform con azd** añadida a `docs/chapter-04-infrastructure/provisioning.md` — configuración `infra.provider: terraform`, organización de carpetas `.tf`, salidas `AZURE_*` y etiquetado `azd-env-name` necesarios, y flujo de trabajo idéntico `azd up` / `azd down` (cierra la brecha donde se afirmaba soporte Terraform pero solo se mostraba Bicep)
+- **⚙️ Recorrido paso a paso GitHub Actions** en `docs/chapter-08-production/production-ai-practices.md` — desde repositorio GitHub a despliegues automatizados: `azd pipeline config`, credenciales federadas OIDC (sin secretos almacenados), el `azure-dev.yml` generado y guía sobre secretos vs variables
+- **🪝 Introducción para principiantes "¿Nuevo en hooks?"** en `docs/chapter-04-infrastructure/deployment-guide.md` — qué es un hook, tabla de etapas de hook, un primer hook mínimo y ejecución manual de hooks con `azd hooks run`
+- **✅ Lista de verificación "Verifica tu despliegue"** añadida al Paso 5 de `docs/chapter-01-foundation/first-project.md` — prueba rápida, comprobación del endpoint de salud y criterios explícitos de éxito
+- **🧩 Explicación de nuevas extensiones preview** `azure.ai.skills` y `azure.ai.connections` (qué son y cuándo usarlas) en `docs/chapter-08-production/production-ai-practices.md`
 
 #### Cambiado
-- **🧭 Chapter 5 lessons table** corrected: `multi-agent-basics.md` is now Lesson 1 (the only fully hands-on lesson), with honest labeling that Lesson 2 lives in Chapter 6 and the Retail scenario is an architecture blueprint, not a one-command template
-- **🧭 Chapter 1 lessons table** now includes the new "Bring Your Own App" lesson (Lesson 4)
-- **🔗 Navigation footers** updated: `first-project.md` now links forward to `bring-your-own-app.md`
+- **🧭 Tabla de lecciones del Capítulo 5** corregida: `multi-agent-basics.md` es ahora la Lección 1 (la única lección completamente práctica), con etiquetado claro que la Lección 2 está en el Capítulo 6 y el escenario Retail es un plano arquitectónico, no una plantilla de un solo comando
+- **🧭 Tabla de lecciones del Capítulo 1** ahora incluye la nueva lección "Trae tu propia app" (Lección 4)
+- **🔗 Pies de navegación** actualizados: `first-project.md` ahora enlaza adelante a `bring-your-own-app.md`
 
 #### Corregido
-- **🧱 Closed the "claimed but missing" Terraform gap** — the course previously referenced Terraform support without showing it
-- **🔀 Corrected misleading Chapter 5 cross-links** that implied a full multi-agent implementation existed when only an architecture blueprint did
+- **🧱 Cerrada la brecha de Terraform "anunciada pero ausente"** — el curso antes mencionaba soporte Terraform sin mostrarlo
+- **🔀 Corrección de enlaces cruzados engañosos en Capítulo 5** que sugerían que existía una implementación multi-agente completa cuando solo había un plano arquitectónico
 
 #### Archivos actualizados
 - `changelog.md`
 - `docs/chapter-01-foundation/README.md`
-- `docs/chapter-01-foundation/bring-your-own-app.md` *(new)*
+- `docs/chapter-01-foundation/bring-your-own-app.md` *(nuevo)*
 - `docs/chapter-01-foundation/first-project.md`
 - `docs/chapter-04-infrastructure/deployment-guide.md`
 - `docs/chapter-04-infrastructure/provisioning.md`
 - `docs/chapter-05-multi-agent/README.md`
-- `docs/chapter-05-multi-agent/multi-agent-basics.md` *(new)*
+- `docs/chapter-05-multi-agent/multi-agent-basics.md` *(nuevo)*
 - `docs/chapter-08-production/production-ai-practices.md`
 
 ---
 
 ### [v3.20.0] - 2026-06-16
 
-#### AZD 1.25.6 Refresh, Full Agent Lifecycle Commands & Aspire Rebrand
-**Esta versión revalida el curso contra `azd` `1.25.6` (junio 2026) y la extensión `azure.ai.agents` `0.1.40-preview`, expande la orientación de IA de "esqueletizar un agente" al ciclo de vida completo del agente (test → evaluate → optimize → inspect → delete), da visibilidad a las nuevas extensiones en preview `azure.ai.skills` y `azure.ai.connections`, y anota el rebranding del producto ".NET Aspire" → "Aspire".**
+#### Actualización AZD 1.25.6, comandos completos de ciclo de vida de agentes y rebranding Aspire
+
+**Esta versión revalida el curso con `azd` `1.25.6` (junio de 2026) y la extensión `azure.ai.agents` `0.1.40-preview`, amplía la guía de IA de "desarrollar un agente" a todo el ciclo de vida del agente (probar → evaluar → optimizar → inspeccionar → eliminar), muestra las nuevas extensiones de vista previa `azure.ai.skills` y `azure.ai.connections`, y señala el cambio de marca del producto ".NET Aspire" a "Aspire".**
 
 #### Añadido
-- **🔁 Full agent lifecycle coverage** for beginners and AI engineers across the docs:
-  - `docs/chapter-01-foundation/azd-basics.md` — Tabla de ciclo de vida (scaffold → test → measure → improve → inspect → clean up) añadida a la sección Extensions and AI Commands
-  - `docs/chapter-08-production/production-ai-practices.md` — Nueva sección "Managing the Agent Lifecycle" cubriendo `azd ai agent invoke`, `endpoint show`, `eval generate`, `optimize`, `code download`, y `delete --force`
-  - `resources/cheat-sheet.md` — Comandos ampliados de AI Agent con `invoke`, `endpoint show`, `eval generate`, `optimize`, `code download`, y `delete --force`
-- **🧩 New preview extensions** documented: `azure.ai.skills` (reusable agent skills) and `azure.ai.connections` (Foundry connections) added to the extensions table and cheat sheet
-- **⏱️ Response-timing guidance** — los ejemplos de `azd ai agent invoke` ahora indican que imprime latencia total y time-to-first-byte
-- **📌 Version banner** in the root README pointing learners at `azd version` and `azd upgrade`
+- **🔁 Cobertura completa del ciclo de vida del agente** para principiantes e ingenieros de IA en toda la documentación:
+  - `docs/chapter-01-foundation/azd-basics.md` — Tabla del ciclo de vida (desarrollar → probar → medir → mejorar → inspeccionar → limpiar) añadida a la sección de Extensiones y comandos de IA
+  - `docs/chapter-08-production/production-ai-practices.md` — Nueva sección "Gestión del ciclo de vida del agente" que cubre `azd ai agent invoke`, `endpoint show`, `eval generate`, `optimize`, `code download`, y `delete --force`
+  - `resources/cheat-sheet.md` — Comandos de agente de IA ampliados con `invoke`, `endpoint show`, `eval generate`, `optimize`, `code download`, y `delete --force`
+- **🧩 Nuevas extensiones en vista previa** documentadas: `azure.ai.skills` (habilidades reutilizables de agente) y `azure.ai.connections` (conexiones Foundry) añadidas a la tabla de extensiones y la hoja de trucos
+- **⏱️ Guía de tiempos de respuesta** — Los ejemplos de `azd ai agent invoke` ahora indican que imprime la latencia total y el tiempo hasta el primer byte
+- **📌 Banner de versión** en el README raíz que dirige a los estudiantes a `azd version` y `azd upgrade`
 
 #### Cambiado
-- **✅ Validation baseline updated** from `azd 1.23.12` (March 2026) to `azd 1.25.6` (June 2026) across all chapter READMEs and the workshop docs
-- **🤖 Chapter 2 extension note** updated from `azure.ai.agents` `0.1.18-preview` to `0.1.40-preview`
-- **🧪 Workshop validation example** (`azd version` output) updated to `1.25.6`
-- **🧭 README "What's New in azd Today"** refreshed to highlight the end-to-end agent lifecycle, new AI extensions, and recent quality-of-life fixes (`azd init` idempotency, `azd auth login` stale-token clearing, `azd tool` first-run prompt)
-- **📖 Chapter 2 agents.md (Option 4)** now points learners to the post-deploy lifecycle commands rather than stopping at `azd up`
+- **✅ Línea base de validación actualizada** de `azd 1.23.12` (marzo de 2026) a `azd 1.25.6` (junio de 2026) en todos los README de capítulos y documentación del taller
+- **🤖 Nota de extensión en el capítulo 2** actualizada de `azure.ai.agents` `0.1.18-preview` a `0.1.40-preview`
+- **🧪 Ejemplo de validación del taller** (salida de `azd version`) actualizado a `1.25.6`
+- **🧭 README "Qué hay de nuevo en azd hoy"** actualizado para destacar el ciclo de vida completo del agente, nuevas extensiones de IA y recientes mejoras de calidad de vida (`azd init` idempotencia, limpieza de token obsoleto en `azd auth login`, aviso de primera ejecución en `azd tool`)
+- **📖 agents.md del capítulo 2 (Opción 4)** ahora dirige a los estudiantes a los comandos posteriores al despliegue en lugar de detenerse en `azd up`
 
 #### Corregido
-- **🏷️ Product naming** — added an Aspire rebrand note (".NET Aspire" is now simply "Aspire"); azd's Aspire support is unchanged
-- **🔎 Live release validation** confirmed against the Azure Developer CLI release feed: stable CLI `1.25.6` (2026-06-12) and `azure.ai.agents` `0.1.40-preview` (2026-06-15)
+- **🏷️ Nomenclatura de producto** — se agregó una nota de cambio de marca para Aspire (".NET Aspire" ahora es simplemente "Aspire"); el soporte de azd para Aspire no ha cambiado
+- **🔎 Validación de lanzamiento en vivo** confirmada contra el feed de versiones de Azure Developer CLI: CLI estable `1.25.6` (2026-06-12) y `azure.ai.agents` `0.1.40-preview` (2026-06-15)
 
 #### Archivos actualizados
 - `README.md`
@@ -124,23 +163,24 @@ Después de revisar las entradas del registro de cambios, usted podrá:
 ---
 
 ### [v3.19.1] - 2026-03-27
+
 #### Aclaración de incorporación para principiantes, validación de configuración y limpieza final de comandos AZD
-**Esta versión da seguimiento a la inspección de validación de AZD 1.23 con una pasada de documentación enfocada en principiantes: aclara la guía de autenticación centrada en AZD, agrega scripts de validación de configuración local, verifica comandos clave contra el CLI AZD en vivo y elimina las últimas referencias a comandos en inglés obsoletos fuera del registro de cambios.**
+**Esta versión da seguimiento a la barrida de validación AZD 1.23 con una pasada de documentación enfocada en principiantes: aclara la guía de autenticación primero con AZD, añade scripts de validación de configuración local, verifica comandos clave contra la CLI AZD en vivo y elimina las últimas referencias obsoletas a comandos en inglés fuera del registro de cambios.**
 
 #### Añadido
-- **🧪 Scripts de validación de configuración para principiantes** con `validate-setup.ps1` y `validate-setup.sh` para que los alumnos puedan confirmar las herramientas requeridas antes de comenzar el Capítulo 1
-- **✅ Pasos de validación de configuración inicial** en el README raíz y en el README del Capítulo 1 para que los prerrequisitos faltantes se detecten antes de `azd up`
+- **🧪 Scripts de validación de configuración para principiantes** con `validate-setup.ps1` y `validate-setup.sh` para que los estudiantes puedan confirmar las herramientas requeridas antes de comenzar el Capítulo 1
+- **✅ Pasos de validación previa de configuración** en el README raíz y README del Capítulo 1 para que los prerequisitos faltantes se detecten antes de `azd up`
 
 #### Cambiado
-- **🔐 Guía de autenticación para principiantes** ahora trata de forma consistente a `azd auth login` como la ruta principal para los flujos de trabajo de AZD, con `az login` señalado como opcional a menos que se utilicen comandos de Azure CLI directamente
-- **📚 Flujo de incorporación del Capítulo 1** ahora dirige a los alumnos a validar su configuración local antes de la instalación, autenticación y los primeros pasos de despliegue
-- **🛠️ Mensajería del validador** ahora separa claramente los requisitos bloqueantes de las advertencias opcionales de Azure CLI para la ruta de principiante solo con AZD
-- **📖 Documentos de configuración, solución de problemas y ejemplos** ahora distinguen entre la autenticación requerida de AZD y el inicio de sesión opcional de Azure CLI cuando ambos se presentaban previamente sin contexto
+- **🔐 Guía de autenticación para principiantes** que ahora trata consistentemente `azd auth login` como la vía principal para los flujos de trabajo con AZD, mencionando que `az login` es opcional a menos que se usen comandos de Azure CLI directamente
+- **📚 Flujo de incorporación del Capítulo 1** que ahora indica a los estudiantes validar su configuración local antes de la instalación, autenticación y primeros pasos de despliegue
+- **🛠️ Mensajes del validador** que ahora separan claramente los requisitos bloqueantes de las advertencias opcionales de Azure CLI para el camino de principiantes solo con AZD
+- **📖 Documentos de configuración, resolución de problemas y ejemplos** que ahora distinguen entre la autenticación requerida con AZD y el inicio de sesión opcional con Azure CLI cuando ambos se presentaban previamente sin contexto
 
 #### Corregido
-- **📋 Referencias restantes a comandos en fuente inglesa** actualizadas a las formas actuales de AZD, incluyendo `azd config show` en la hoja de referencia y `azd monitor --overview` donde se pretendía la guía de vista general del Portal de Azure
-- **🧭 Afirmaciones para principiantes en el Capítulo 1** atenuadas para evitar prometer en exceso comportamiento garantizado de cero errores o reversión en todos los templates y recursos de Azure
-- **🔎 Validación del CLI en vivo** confirmó soporte actual para `azd env get-values`, `azd template list`, `azd extension list --installed`, `azd copilot consent list`, `azd mcp start`, `azd provision --preview`, `azd monitor --logs`, y `azd down --force --purge`
+- **📋 Referencias restantes a comandos en fuente inglesa** actualizadas a las formas actuales de AZD, incluyendo `azd config show` en la hoja de trucos y `azd monitor --overview` donde se pretendía guía de visión general en Portal de Azure
+- **🧭 Declaraciones para principiantes en Capítulo 1** suavizadas para evitar prometer comportamiento garantizado de cero errores o reversión en todas las plantillas y recursos de Azure
+- **🔎 Validación en vivo de CLI** confirmada para soporte actual de `azd env get-values`, `azd template list`, `azd extension list --installed`, `azd copilot consent list`, `azd mcp start`, `azd provision --preview`, `azd monitor --logs` y `azd down --force --purge`
 
 #### Archivos actualizados
 - `README.md`
@@ -161,38 +201,38 @@ Después de revisar las entradas del registro de cambios, usted podrá:
 
 ### [v3.19.0] - 2026-03-26
 
-#### Validación AZD 1.23.12, expansión del entorno del taller y actualización de modelos de IA
-**Esta versión realiza una pasada de validación documental contra `azd` `1.23.12`, actualiza ejemplos de comandos AZD desactualizados, refresca la orientación sobre modelos de IA a los valores predeterminados actuales y amplía las instrucciones del taller más allá de GitHub Codespaces para también soportar dev containers y clones locales.**
+#### Validación AZD 1.23.12, expansión del entorno del taller y actualización del modelo de IA
+**Esta versión realiza una barrida de validación de documentación contra `azd` `1.23.12`, actualiza ejemplos de comandos AZD desactualizados, refresca la guía del modelo de IA a los valores predeterminados actuales y amplía las instrucciones del taller más allá de GitHub Codespaces para soportar también contenedores de desarrollo y clones locales.**
 
 #### Añadido
-- **✅ Notas de validación en capítulos centrales y documentación del taller** para hacer explícita la base AZD probada para los alumnos que usen builds del CLI más nuevos o más antiguos
-- **⏱️ Orientación sobre tiempos de espera de despliegue** para despliegues de aplicaciones de IA de larga duración usando `azd deploy --timeout 1800`
-- **🔎 Pasos de inspección de extensiones** con `azd extension show azure.ai.agents` en la documentación de flujos de trabajo de IA
-- **🌐 Orientación más amplia del entorno del taller** que cubre GitHub Codespaces, dev containers y clones locales con MkDocs
+- **✅ Notas de validación en capítulos clave y documentos del taller** para hacer explícita la línea base de AZD probada para estudiantes que usan versiones más nuevas o más antiguas del CLI
+- **⏱️ Guía de tiempo de espera de despliegue** para despliegues prolongados de aplicaciones de IA con `azd deploy --timeout 1800`
+- **🔎 Pasos de inspección de extensiones** con `azd extension show azure.ai.agents` en documentación de flujos de trabajo de IA
+- **🌐 Guía ampliada del entorno del taller** que cubre GitHub Codespaces, contenedores de desarrollo y clones locales con MkDocs
 
 #### Cambiado
-- **📚 READMEs de introducción de capítulos** ahora indican de forma consistente la validación contra `azd 1.23.12` en foundation, configuration, infrastructure, multi-agent, pre-deployment, troubleshooting y production
-- **🛠️ Referencias de comandos AZD** actualizadas a las formas actuales en los docs:
+- **📚 README intro de capítulos** que ahora indica consistentemente validación contra `azd 1.23.12` en secciones de fundación, configuración, infraestructura, multi-agente, pre-despliegue, solución de problemas y producción
+- **🛠️ Referencias a comandos AZD** actualizadas a formas actuales en toda la documentación:
   - `azd config list` → `azd config show`
-  - `azd env show` → `azd env list` o `azd env get-value(s)` dependiendo del contexto
+  - `azd env show` → `azd env list` o `azd env get-value(s)` según el contexto
   - `azd auth whoami` → `azd auth status`
-  - `azd monitor` → `azd monitor --overview` cuando se pretende una vista general de Application Insights
-- **🧪 Ejemplos de vista previa de aprovisionamiento** simplificados al uso compatible actual, como `azd provision --preview` y `azd provision --preview -e production`
-- **🧭 Flujo del taller** actualizado para que los alumnos puedan completar los laboratorios en Codespaces, un dev container o un clone local en lugar de asumir ejecución solo en Codespaces
-- **🔐 Guía de autenticación** ahora prefiere `azd auth login` para flujos de trabajo AZD, con `az login` posicionado como opcional cuando se usan comandos de Azure CLI directamente
+  - `azd monitor` → `azd monitor --overview` donde se pretende visión general de Application Insights
+- **🧪 Ejemplos de provisión en vista previa** simplificados a usos soportados actuales como `azd provision --preview` y `azd provision --preview -e production`
+- **🧭 Flujo del taller** actualizado para que los estudiantes puedan completar los laboratorios en Codespaces, un contenedor dev o un clon local en lugar de asumir ejecución solo en Codespaces
+- **🔐 Guía de autenticación** que ahora prefiere `azd auth login` para flujos AZD, con `az login` como opcional cuando se usan comandos Azure CLI directamente
 
 #### Corregido
-- **🪟 Comandos de instalación en Windows** normalizados a la capitalización actual del paquete `winget` en la guía de instalación
-- **🐧 Guía de instalación en Linux** corregida para evitar instrucciones de gestores de paquetes `azd` específicas de distro no soportadas y en su lugar apuntar a los assets de release cuando corresponda
-- **📦 Ejemplos de modelos de IA** actualizados desde valores antiguos como `gpt-35-turbo` y `text-embedding-ada-002` a ejemplos actuales como `gpt-4.1-mini`, `gpt-4.1` y `text-embedding-3-large`
-- **📋 Fragmentos de despliegue y diagnóstico** corregidos para usar comandos actuales de entorno y estado en logs, scripts y pasos de solución de problemas
-- **⚙️ Orientación de GitHub Actions** actualizada de `Azure/setup-azd@v1.0.0` a `Azure/setup-azd@v2`
+- **🪟 Comandos de instalación en Windows** normalizados al uso actual del paquete `winget` en la guía de instalación
+- **🐧 Guía de instalación en Linux** corregida para evitar indicaciones disfrazadas de gestión de paquetes de `azd` específicas de distro no soportadas y en su lugar apuntar a los activos de lanzamiento donde corresponda
+- **📦 Ejemplos de modelos de IA** actualizados de valores predeterminados antiguos como `gpt-35-turbo` y `text-embedding-ada-002` a ejemplos actuales como `gpt-4.1-mini`, `gpt-4.1` y `text-embedding-3-large`
+- **📋 Fragmentos de despliegue y diagnóstico** corregidos para usar comandos actuales de entorno y estado en registros, scripts y pasos de solución de problemas
+- **⚙️ Guía de GitHub Actions** actualizada de `Azure/setup-azd@v1.0.0` a `Azure/setup-azd@v2`
 - **🤖 Guía de consentimiento MCP/Copilot** actualizada de `azd mcp consent` a `azd copilot consent list`
 
 #### Mejorado
-- **🧠 Orientación del capítulo de IA** ahora explica mejor el comportamiento sensible a preview de `azd ai`, el inicio de sesión específico de tenant, el uso actual de extensiones y recomendaciones actualizadas de despliegue de modelos
-- **🧪 Instrucciones del taller** ahora usan ejemplos de versiones más realistas y un lenguaje de configuración de entorno más claro para laboratorios prácticos
-- **📈 Documentos de producción y solución de problemas** ahora se alinean mejor con monitoreo actual, modelos de respaldo y ejemplos de niveles de coste
+- **🧠 Guía de capítulos de IA** que ahora explica mejor el comportamiento sensible al modo de vista previa de `azd ai`, inicio de sesión específico de inquilino, uso actual de extensiones y recomendaciones actualizadas para despliegue de modelos
+- **🧪 Instrucciones del taller** que ahora usan ejemplos de versiones más realistas y lenguaje de configuración de entorno más claro para laboratorios prácticos
+- **📈 Documentos de producción y solución de problemas** que ahora se alinean mejor con monitoreo actual, modelo de reserva y ejemplos de niveles de costo
 
 #### Archivos actualizados
 - `docs/chapter-01-foundation/README.md`
@@ -227,44 +267,45 @@ Después de revisar las entradas del registro de cambios, usted podrá:
 
 ### [v3.18.0] - 2026-03-16
 
-#### Comandos AZD AI CLI, validación de contenido y expansión de templates
-**Esta versión agrega cobertura de `azd ai`, `azd extension` y `azd mcp` en todos los capítulos relacionados con IA, corrige enlaces rotos y código obsoleto en agents.md, actualiza la hoja de referencia y renueva la sección de Plantillas de Ejemplo con descripciones validadas y nuevos templates de Azure AI AZD.**
+#### Comandos CLI AZD AI, validación de contenido y expansión de plantilla
+**Esta versión añade cobertura de comandos `azd ai`, `azd extension` y `azd mcp` en todos los capítulos relacionados con IA, corrige enlaces rotos y código obsoleto en agents.md, actualiza la hoja de trucos y revisa la sección de Plantillas de ejemplo con descripciones validadas y nuevas plantillas AZD de Azure AI.**
 
 #### Añadido
-- **🤖 Cobertura del CLI AZD AI** en 7 archivos (anteriormente solo en el Capítulo 8):
-  - `docs/chapter-01-foundation/azd-basics.md` — Nueva sección "Extensions and AI Commands" que introduce `azd extension`, `azd ai agent init`, y `azd mcp`
-  - `docs/chapter-02-ai-development/agents.md` — Opción 4: `azd ai agent init` con tabla comparativa (enfoque por template vs manifest)
-  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — Subsecciones "AZD Extensions for Foundry" y "Agent-First Deployment"
-  - `docs/chapter-05-multi-agent/README.md` — Quick Start ahora muestra rutas de despliegue basadas en template y en manifest
-  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — La sección de Deploy ahora incluye la opción `azd ai agent init`
-  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — Subsección "AZD AI Extension Commands for Diagnostics"
-  - `resources/cheat-sheet.md` — Nueva sección "AI & Extensions Commands" con `azd extension`, `azd ai agent init`, `azd mcp`, y `azd infra generate`
+- **🤖 Cobertura de CLI AZD AI** en 7 archivos (anteriormente solo en el Capítulo 8):
+  - `docs/chapter-01-foundation/azd-basics.md` — Nueva sección "Extensiones y comandos de IA" que introduce `azd extension`, `azd ai agent init` y `azd mcp`
+  - `docs/chapter-02-ai-development/agents.md` — Opción 4: `azd ai agent init` con tabla comparativa (enfoque plantilla vs manifiesto)
+  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — Subsecciones "Extensiones AZD para Foundry" y "Despliegue primero con agente"
+
+  - `docs/chapter-05-multi-agent/README.md` — Inicio rápido ahora muestra rutas de despliegue basadas en plantillas y manifiestos
+  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — La sección de despliegue ahora incluye opción `azd ai agent init`
+  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — Subsección "Comandos de Extensión AZD AI para Diagnósticos"
+  - `resources/cheat-sheet.md` — Nueva sección "Comandos de AI y Extensiones" con `azd extension`, `azd ai agent init`, `azd mcp` y `azd infra generate`
 - **📦 Nuevas plantillas de ejemplo AZD AI** en `microsoft-foundry-integration.md`:
-  - **azure-search-openai-demo-csharp** — chat RAG .NET con Blazor WebAssembly, Semantic Kernel y soporte de chat por voz
-  - **azure-search-openai-demo-java** — chat RAG en Java usando Langchain4J con opciones de despliegue en ACA/AKS
-  - **contoso-creative-writer** — aplicación multi-agente de escritura creativa usando Azure AI Agent Service, Bing Grounding y Prompty
+  - **azure-search-openai-demo-csharp** — Chat RAG .NET con Blazor WebAssembly, Semantic Kernel y soporte de chat de voz
+  - **azure-search-openai-demo-java** — Chat RAG en Java usando Langchain4J con opciones de despliegue ACA/AKS
+  - **contoso-creative-writer** — Aplicación de escritura creativa multiagente usando Azure AI Agent Service, Bing Grounding y Prompty
   - **serverless-chat-langchainjs** — RAG sin servidor usando Azure Functions + LangChain.js + Cosmos DB con soporte de desarrollo local Ollama
-  - **chat-with-your-data-solution-accelerator** — acelerador empresarial RAG con portal de administración, integración con Teams y opciones PostgreSQL/Cosmos DB
-  - **azure-ai-travel-agents** — app de referencia de orquestación MCP multi-agente con servidores en .NET, Python, Java y TypeScript
-  - **azd-ai-starter** — plantilla inicial Bicep mínima de infraestructura Azure AI
-  - **🔗 Enlace a la Awesome AZD AI Gallery** — referencia a la [awesome-azd AI gallery](https://azure.github.io/awesome-azd/?tags=ai) (80+ templates)
+  - **chat-with-your-data-solution-accelerator** — Acelerador RAG empresarial con portal de administración, integración con Teams y opciones PostgreSQL/Cosmos DB
+  - **azure-ai-travel-agents** — Aplicación de referencia para orquestación MCP multiagente con servidores en .NET, Python, Java y TypeScript
+  - **azd-ai-starter** — Plantilla inicial mínima para infraestructura Azure AI con Bicep
+  - **🔗 Enlace a la increíble galería AZD AI** — Referencia a la [galería increíble awesome-azd AI](https://azure.github.io/awesome-azd/?tags=ai) (más de 80 plantillas)
 
 #### Corregido
-- **🔗 Navegación de agents.md**: los enlaces Anterior/Siguiente ahora coinciden con el orden de lecciones del README del Capítulo 2 (Microsoft Foundry Integration → Agents → AI Model Deployment)
+- **🔗 Navegación en agents.md**: Enlaces Anterior/Siguiente ahora coinciden con el orden de la lección en el README del Capítulo 2 (Integración Microsoft Foundry → Agentes → Despliegue de modelo AI)
 - **🔗 Enlaces rotos en agents.md**: `production-ai-practices.md` corregido a `../chapter-08-production/production-ai-practices.md` (3 ocurrencias)
-- **📦 Código obsoleto en agents.md**: `opencensus` reemplazado por `azure-monitor-opentelemetry` + OpenTelemetry SDK
+- **📦 Código obsoleto en agents.md**: Reemplazado `opencensus` por `azure-monitor-opentelemetry` + SDK OpenTelemetry
 - **🐛 API inválida en agents.md**: `max_tokens` movido de `create_agent()` a `create_run()` como `max_completion_tokens`
-- **🔢 Conteo de tokens en agents.md**: sustitución de la estimación aproximada `len//4` por `tiktoken.encoding_for_model()`
-- **azure-search-openai-demo**: servicios corregidos de "Cognitive Search + App Service" a "Azure AI Search + Azure Container Apps" (host predeterminado cambiado en oct 2024)
-- **contoso-chat**: descripción actualizada para referenciar Azure AI Foundry + Prompty, coincidiendo con el título y stack tecnológico real del repo
+- **🔢 Conteo de tokens en agents.md**: Reemplazada la estimación aproximada `len//4` por `tiktoken.encoding_for_model()`
+- **azure-search-openai-demo**: Servicios corregidos de "Cognitive Search + App Service" a "Azure AI Search + Azure Container Apps" (host predeterminado cambiado en oct 2024)
+- **contoso-chat**: Actualizada descripción para hacer referencia a Azure AI Foundry + Prompty, coincidiendo con título y stack tecnológico real del repositorio
 
 #### Eliminado
-- **ai-document-processing**: eliminado el template no funcional (repo no accesible públicamente como template AZD)
+- **ai-document-processing**: Eliminada referencia a plantilla no funcional (repositorio no accesible públicamente como plantilla AZD)
 
 #### Mejorado
-- **📝 Ejercicios en agents.md**: El Ejercicio 1 ahora muestra la salida esperada y el paso `azd monitor`; el Ejercicio 2 incluye el código completo de registro de `FunctionTool`; el Ejercicio 3 reemplaza la guía vaga con comandos `prepdocs.py` concretos
-- **📚 Recursos en agents.md**: enlaces de documentación actualizados a los docs actuales de Azure AI Agent Service y quickstart
-- **📋 Tabla de Next Steps en agents.md**: añadida vinculación al AI Workshop Lab para cobertura completa del capítulo
+- **📝 Ejercicios en agents.md**: El ejercicio 1 ahora muestra la salida esperada y el paso `azd monitor`; El ejercicio 2 incluye código completo de registro de `FunctionTool`; El ejercicio 3 reemplaza las indicaciones vagas por comandos concretos `prepdocs.py`
+- **📚 Recursos en agents.md**: Actualizados enlaces de documentación a los documentos actuales del Azure AI Agent Service y guía rápida
+- **📋 Tabla de pasos siguientes en agents.md**: Se agregó enlace al laboratorio del taller AI para cubrir el capítulo completo
 
 #### Archivos actualizados
 - `docs/chapter-01-foundation/azd-basics.md`
@@ -278,28 +319,29 @@ Después de revisar las entradas del registro de cambios, usted podrá:
 ---
 
 ### [v3.17.0] - 2026-02-05
-#### Mejora de la navegación del curso
-**Esta versión mejora la navegación por capítulos de README.md con un formato de tabla mejorado.**
 
-#### Cambios
-- **Course Map Table**: Mejorada con enlaces directos a las lecciones, estimaciones de duración y calificaciones de complejidad
-- **Folder Cleanup**: Eliminadas carpetas antiguas redundantes (deployment/, getting-started/, pre-deployment/, troubleshooting/)
-- **Link Validation**: Se verificaron todos los 21+ enlaces internos en la tabla del mapa del curso
+#### Mejora en la navegación del curso
+**Esta versión mejora la navegación del README.md de capítulos con un formato de tabla mejorado.**
+
+#### Cambiado
+- **Tabla de mapa del curso**: Mejorada con enlaces directos a lecciones, estimaciones de duración y valoraciones de complejidad
+- **Limpieza de carpetas**: Eliminadas carpetas antiguas redundantes (deployment/, getting-started/, pre-deployment/, troubleshooting/)
+- **Validación de enlaces**: Verificados todos los más de 21 enlaces internos en la tabla del mapa del curso
 
 ### [v3.16.0] - 2026-02-05
 
-#### Actualizaciones de nombres de producto
-**Esta versión actualiza las referencias de producto al branding actual de Microsoft.**
+#### Actualizaciones en nombres de productos
+**Esta versión actualiza las referencias a productos con la marca actual de Microsoft.**
 
-#### Cambios
+#### Cambiado
 - **Microsoft Foundry → Microsoft Foundry**: Todas las referencias actualizadas en archivos que no son de traducción
-- **Azure AI Agent Service → Foundry Agents**: Nombre del servicio actualizado para reflejar el branding actual
+- **Azure AI Agent Service → Foundry Agents**: Nombre de servicio actualizado para reflejar la marca actual
 
 #### Archivos actualizados
 - `README.md` - Página principal del curso
 - `changelog.md` - Historial de versiones
 - `course-outline.md` - Estructura del curso
-- `docs/chapter-02-ai-development/agents.md` - Guía de agentes de IA
+- `docs/chapter-02-ai-development/agents.md` - Guía de agentes AI
 - `examples/README.md` - Documentación de ejemplos
 - `workshop/README.md` - Página principal del taller
 - `workshop/docs/index.md` - Índice del taller
@@ -309,20 +351,20 @@ Después de revisar las entradas del registro de cambios, usted podrá:
 
 ### [v3.15.0] - 2026-02-05
 
-#### Reestructuración mayor del repositorio: Nombres de carpetas por capítulo
-**Esta versión reestructura la documentación en carpetas por capítulos dedicadas para una navegación más clara.**
+#### Reestructuración mayor del repositorio: nombres de carpetas basados en capítulos
+**Esta versión reestructura la documentación en carpetas de capítulos dedicados para una navegación más clara.**
 
-#### Renombrado de carpetas
-Las carpetas antiguas han sido reemplazadas por carpetas numeradas por capítulo:
+#### Cambios en nombres de carpetas
+Las carpetas antiguas han sido reemplazadas por carpetas numeradas por capítulos:
 - `docs/getting-started/` → `docs/chapter-01-foundation/` + `docs/chapter-03-configuration/`
 - `docs/microsoft-foundry/` → `docs/chapter-02-ai-development/` + `docs/chapter-08-production/`
 - `docs/deployment/` → `docs/chapter-04-infrastructure/`
 - `docs/pre-deployment/` → `docs/chapter-06-pre-deployment/`
 - `docs/troubleshooting/` → `docs/chapter-07-troubleshooting/`
-- Added new: `docs/chapter-05-multi-agent/`
+- Se agregó nueva carpeta: `docs/chapter-05-multi-agent/`
 
-#### Migraciones de archivos
-| Archivo | Origen | Destino |
+#### Migración de archivos
+| Archivo | De | A |
 |------|------|---|
 | azd-basics.md | getting-started/ | chapter-01-foundation/ |
 | installation.md | getting-started/ | chapter-01-foundation/ |
@@ -336,77 +378,77 @@ Las carpetas antiguas han sido reemplazadas por carpetas numeradas por capítulo
 | production-ai-practices.md | microsoft-foundry/ | chapter-08-production/ |
 | deployment-guide.md | deployment/ | chapter-04-infrastructure/ |
 | provisioning.md | deployment/ | chapter-04-infrastructure/ |
-| All pre-deployment files | pre-deployment/ | chapter-06-pre-deployment/ |
-| All troubleshooting files | troubleshooting/ | chapter-07-troubleshooting/ |
+| Todos los archivos de pre-despliegue | pre-deployment/ | chapter-06-pre-deployment/ |
+| Todos los archivos de resolución de problemas | troubleshooting/ | chapter-07-troubleshooting/ |
 
 #### Añadido
-- **📚 Archivos README de capítulo**: Creado README.md en cada carpeta de capítulo con:
+- **📚 Archivos README de capítulo**: Creación de README.md en cada carpeta de capítulo con:
   - Objetivos de aprendizaje y duración
   - Tabla de lecciones con descripciones
   - Comandos de inicio rápido
   - Navegación a otros capítulos
 
-#### Cambios
-- **🔗 Actualizados todos los enlaces internos**: 78+ rutas actualizadas en todos los archivos de documentación
-- **🗺️ README.md principal**: Mapa del curso actualizado con la nueva estructura de capítulos
-- **📝 examples/README.md**: Actualizadas las referencias cruzadas a las carpetas de capítulo
+#### Cambiado
+- **🔗 Actualizados todos los enlaces internos**: Más de 78 rutas actualizadas en todos los archivos de documentación
+- **🗺️ README.md principal**: Mapa del curso actualizado con nueva estructura de capítulos
+- **📝 examples/README.md**: Referencias cruzadas actualizadas a carpetas de capítulos
 
-#### Eliminados
-- Estructura de carpetas antigua (getting-started/, microsoft-foundry/, deployment/, pre-deployment/, troubleshooting/, ai-foundry/)
+#### Eliminado
+- Estructura antigua de carpetas (getting-started/, microsoft-foundry/, deployment/, pre-deployment/, troubleshooting/, ai-foundry/)
 
 ---
 
 ### [v3.14.0] - 2026-02-05
 
 #### Reestructuración del repositorio: Navegación por capítulos
-**Esta versión añadió archivos README de navegación por capítulos (reemplazados por la v3.15.0).**
+**Esta versión añadió archivos README para navegación por capítulos (sucedido por v3.15.0).**
 
 ---
 
 ### [v3.13.0] - 2026-02-05
 
-#### Nueva guía de agentes de IA
-**Esta versión añade una guía completa para desplegar agentes de IA con Azure Developer CLI.**
+#### Nueva guía de agentes AI
+**Esta versión añade una guía integral para desplegar agentes AI con Azure Developer CLI.**
 
 #### Añadido
 - **🤖 docs/microsoft-foundry/agents.md**: Guía completa que cubre:
-  - Qué son los agentes de IA y cómo se diferencian de los chatbots
-  - Tres plantillas de agente de inicio rápido (Foundry Agents, Prompty, RAG)
-  - Patrones de arquitectura de agentes (agente único, RAG, multi-agent)
+  - Qué son los agentes AI y cómo se diferencian de los chatbots
+  - Tres plantillas rápidas para empezar con agentes (Foundry Agents, Prompty, RAG)
+  - Patrones arquitectónicos para agentes (agente único, RAG, multiagente)
   - Configuración y personalización de herramientas
-  - Monitorización y seguimiento de métricas
-  - Consideraciones de coste y optimización
+  - Monitoreo y seguimiento de métricas
+  - Consideraciones de costos y optimización
   - Escenarios comunes de resolución de problemas
   - Tres ejercicios prácticos con criterios de éxito
 
 #### Estructura del contenido
 - **Introducción**: Conceptos de agentes para principiantes
-- **Inicio rápido**: Despliega agentes con `azd init --template get-started-with-ai-agents`
-- **Patrones de arquitectura**: Diagramas visuales de patrones de agentes
+- **Inicio rápido**: Desplegar agentes con `azd init --template get-started-with-ai-agents`
+- **Patrones arquitectónicos**: Diagramas visuales de patrones de agentes
 - **Configuración**: Configuración de herramientas y variables de entorno
-- **Monitorización**: Integración con Application Insights
+- **Monitoreo**: Integración con Application Insights
 - **Ejercicios**: Aprendizaje práctico progresivo (20-45 minutos cada uno)
 
 ---
 
 ### [v3.12.0] - 2026-02-05
 
-#### Actualización del entorno DevContainer
-**Esta versión actualiza la configuración del contenedor de desarrollo con herramientas modernas y valores predeterminados mejorados para la experiencia de aprendizaje de AZD.**
+#### Actualización de entorno DevContainer
+**Esta versión actualiza la configuración del contenedor de desarrollo con herramientas modernas y mejores valores predeterminados para la experiencia de aprendizaje AZD.**
 
-#### Cambios
-- **🐳 Imagen base**: Actualizada de `python:3.12-bullseye` a `python:3.12-bookworm` (última Debian estable)
-- **📛 Nombre del contenedor**: Renombrado de "Python 3" a "AZD for Beginners" para mayor claridad
+#### Cambiado
+- **🐳 Imagen base**: Actualizada de `python:3.12-bullseye` a `python:3.12-bookworm` (última estable de Debian)
+- **📛 Nombre del contenedor**: Renombrado de "Python 3" a "AZD para principiantes" para mayor claridad
 
 #### Añadido
-- **🔧 Nuevas características del Dev Container**:
-  - `azure-cli` con soporte Bicep habilitado
+- **🔧 Nuevas características del contenedor Dev**:
+  - `azure-cli` con soporte para Bicep habilitado
   - `node:20` (versión LTS para plantillas AZD)
   - `github-cli` para gestión de plantillas
   - `docker-in-docker` para despliegues de aplicaciones en contenedores
 
 - **🔌 Reenvío de puertos**: Puertos preconfigurados para desarrollo común:
-  - 8000 (vista previa de MkDocs)
+  - 8000 (vista previa MkDocs)
   - 3000 (aplicaciones web)
   - 5000 (Python Flask)
   - 8080 (APIs)
@@ -414,93 +456,97 @@ Las carpetas antiguas han sido reemplazadas por carpetas numeradas por capítulo
 - **🧩 Nuevas extensiones de VS Code**:
   - `ms-python.vscode-pylance` - IntelliSense mejorado para Python
   - `ms-azuretools.vscode-azurefunctions` - Soporte para Azure Functions
-  - `ms-azuretools.vscode-docker` - Soporte de Docker
-  - `ms-azuretools.vscode-bicep` - Soporte para el lenguaje Bicep
-  - `ms-azure-devtools.azure-resource-groups` - Gestión de recursos de Azure
-  - `yzhang.markdown-all-in-one` - Edición de Markdown
-  - `DavidAnson.vscode-markdownlint` - Linting de Markdown
+  - `ms-azuretools.vscode-docker` - Soporte Docker
+  - `ms-azuretools.vscode-bicep` - Soporte para lenguaje Bicep
+  - `ms-azure-devtools.azure-resource-groups` - Gestión de recursos Azure
+  - `yzhang.markdown-all-in-one` - Edición Markdown
+  - `DavidAnson.vscode-markdownlint` - Linter para Markdown
   - `bierner.markdown-mermaid` - Soporte para diagramas Mermaid
   - `redhat.vscode-yaml` - Soporte YAML (para azure.yaml)
   - `eamodio.gitlens` - Visualización de Git
   - `mhutchie.git-graph` - Historial de Git
 
-- **⚙️ Configuración de VS Code**: Añadida configuración predeterminada para el intérprete de Python, formateo al guardar y recorte de espacios en blanco
+- **⚙️ Configuración en VS Code**: Añadidas configuraciones predeterminadas para intérprete Python, formateo al guardar y recorte de espacios en blanco
 
 - **📦 requirements-dev.txt actualizado**:
-  - Se añadió el plugin de minificación para MkDocs
-  - Se añadió pre-commit para calidad de código
-  - Se añadieron paquetes del SDK de Azure (azure-identity, azure-mgmt-resource)
+  - Añadido plugin para minificar MkDocs
+  - Añadido pre-commit para calidad de código
+  - Añadidos paquetes SDK de Azure (azure-identity, azure-mgmt-resource)
 
 #### Corregido
-- **Comando Post-Create**: Ahora verifica la instalación de AZD y Azure CLI al iniciar el contenedor
+- **Comando post-creación**: Ahora verifica la instalación de AZD y Azure CLI al iniciar el contenedor
 
 ---
 
 ### [v3.11.0] - 2026-02-05
 
-#### Revisión del README orientada a principiantes
-**Esta versión mejora significativamente el README.md para que sea más accesible para principiantes y agrega recursos esenciales para desarrolladores de IA.**
+#### Revisión del README para principiantes
+**Esta versión mejora significativamente el README.md para ser más accesible para principiantes y añade recursos esenciales para desarrolladores AI.**
 
 #### Añadido
 - **🆚 Comparación Azure CLI vs AZD**: Explicación clara de cuándo usar cada herramienta con ejemplos prácticos
-- **🌟 Enlaces Awesome AZD**: Enlaces directos a la galería de plantillas de la comunidad y recursos para contribuir:
-  - [Galería Awesome AZD](https://azure.github.io/awesome-azd/) - 200+ plantillas listas para desplegar
+- **🌟 Increíbles enlaces de AZD**: Enlaces directos a la galería comunitaria de plantillas y recursos para contribuir:
+  - [Galería increíble AZD](https://azure.github.io/awesome-azd/) - Más de 200 plantillas listas para desplegar
   - [Enviar una plantilla](https://github.com/Azure/awesome-azd/issues) - Contribución de la comunidad
-- **🎯 Guía de inicio rápido**: Sección de 3 pasos simplificada para comenzar (Instalar → Iniciar sesión → Desplegar)
-- **📊 Tabla de navegación basada en la experiencia**: Guía clara sobre dónde comenzar según la experiencia del desarrollador
+- **🎯 Guía de inicio rápido**: Sección simplificada de 3 pasos para comenzar (Instalar → Iniciar sesión → Desplegar)
+- **📊 Tabla de navegación basada en experiencia**: Guía clara sobre dónde comenzar según la experiencia del desarrollador
 
-#### Cambios
-- **Estructura del README**: Reorganizada para divulgación progresiva: información clave primero
+#### Cambiado
+- **Estructura del README**: Reorganizada para divulgación progresiva: primero la información clave
 - **Sección de introducción**: Reescrita para explicar "La magia de `azd up`" para principiantes completos
-- **Eliminado contenido duplicado**: Se eliminó la sección duplicada de resolución de problemas
-- **Comandos de resolución de problemas**: Se corrigió la referencia `azd logs` para usar el válido `azd monitor --logs`
+- **Eliminado contenido duplicado**: Eliminada sección duplicada de solución de problemas
+- **Comandos de solución de problemas**: Corregido el uso de `azd logs` para usar el válido `azd monitor --logs`
 
 #### Corregido
-- **🔐 Comandos de autenticación**: Se añadieron `azd auth login` y `azd auth logout` a cheat-sheet.md
-- **Referencias a comandos inválidos**: Se eliminó el resto de `azd logs` de la sección de resolución de problemas del README
+
+- **🔐 Comandos de Autenticación**: Se agregaron `azd auth login` y `azd auth logout` a cheat-sheet.md
+- **Referencias a Comandos Inválidos**: Se eliminaron los restos de `azd logs` en la sección de solución de problemas del README
 
 #### Notas
 - **Alcance**: Cambios aplicados al README.md principal y a resources/cheat-sheet.md
-- **Público objetivo**: Mejoras dirigidas específicamente a desarrolladores nuevos en AZD
+- **Público Objetivo**: Mejoras dirigidas específicamente a desarrolladores nuevos en AZD
 
 ---
 
 ### [v3.10.0] - 2026-02-05
 
-#### Actualización de la precisión de comandos del Azure Developer CLI
-**Esta versión corrige comandos AZD inexistentes en la documentación, asegurando que todos los ejemplos de código usen la sintaxis válida del Azure Developer CLI.**
+#### Actualización de Exactitud de Comandos de Azure Developer CLI
+**Esta versión corrige comandos AZD inexistentes en toda la documentación, asegurando que todos los ejemplos de código usen una sintaxis válida de Azure Developer CLI.**
 
 #### Corregido
-- **🔧 Eliminación de comandos AZD inexistentes**: Auditoría y corrección exhaustiva de comandos inválidos:
-  - `azd logs` (no existe) → reemplazado por `azd monitor --logs` o alternativas de Azure CLI
-  - Subcomandos `azd service` (no existen) → reemplazados por `azd show` y Azure CLI
+- **🔧 Comandos AZD Inexistentes Eliminados**: Auditoría exhaustiva y corrección de comandos inválidos:
+  - `azd logs` (no existe) → reemplazado con `azd monitor --logs` o alternativas de Azure CLI
+  - Subcomandos de `azd service` (no existen) → reemplazados con `azd show` y Azure CLI
   - `azd infra import/export/validate` (no existen) → eliminados o reemplazados por alternativas válidas
   - Flags `azd deploy --rollback/--incremental/--parallel/--detect-changes` (no existen) → eliminados
   - Flags `azd provision --what-if/--rollback` (no existen) → actualizados para usar `--preview`
-  - `azd config validate` (no existe) → reemplazado por `azd config list`
+  - `azd config validate` (no existe) → reemplazado con `azd config list`
   - `azd info`, `azd history`, `azd metrics` (no existen) → eliminados
 
-- **📚 Archivos actualizados con correcciones de comandos**:
-  - `resources/cheat-sheet.md`: Major overhaul of command reference
-  - `docs/deployment/deployment-guide.md`: Fixed rollback and deployment strategies
-  - `docs/troubleshooting/debugging.md`: Corrected log analysis sections
-  - `docs/troubleshooting/common-issues.md`: Updated troubleshooting commands
-  - `docs/troubleshooting/ai-troubleshooting.md`: Fixed AZD debugging section
-  - `docs/getting-started/azd-basics.md`: Corrected monitoring commands
-  - `docs/getting-started/first-project.md`: Updated monitoring and debugging examples
-  - `docs/getting-started/installation.md`: Fixed help and version examples
-  - `docs/pre-deployment/application-insights.md`: Corrected log viewing commands
-  - `docs/pre-deployment/coordination-patterns.md`: Fixed agent debugging commands
+- **📚 Archivos Actualizados con Correcciones de Comandos**:
+  - `resources/cheat-sheet.md`: Renovación mayor de referencia de comandos
+  - `docs/deployment/deployment-guide.md`: Corrección de estrategias de rollback y despliegue
+  - `docs/troubleshooting/debugging.md`: Corrección de secciones de análisis de logs
+  - `docs/troubleshooting/common-issues.md`: Actualización de comandos para solución de problemas
+  - `docs/troubleshooting/ai-troubleshooting.md`: Corrección de sección de depuración AZD
+  - `docs/getting-started/azd-basics.md`: Corrección de comandos de monitoreo
+  - `docs/getting-started/first-project.md`: Actualización de ejemplos de monitoreo y depuración
+  - `docs/getting-started/installation.md`: Corrección de ejemplos de ayuda y versión
+  - `docs/pre-deployment/application-insights.md`: Corrección de comandos para visualizar logs
+  - `docs/pre-deployment/coordination-patterns.md`: Corrección de comandos de depuración de agentes
 
-#### Cambios
-- **Estrategias de rollback**: Documentación actualizada para usar rollback basado en Git (AZD no tiene rollback nativo)
-- **Visualización de logs**: Se reemplazaron referencias a `azd logs` por `azd monitor --logs`, `azd monitor --live` y comandos de Azure CLI
-- **Sección de rendimiento**: Se eliminaron flags de despliegue paralelos/incrementales inexistentes y se proporcionaron alternativas válidas
+- **📝 Referencia de Versión Actualizada**: 
+  - `docs/getting-started/installation.md`: Cambiada la versión fija `1.5.0` a genérica `1.x.x` con enlace a releases
 
-#### Detalles técnicos
-- **Comandos AZD válidos**: `init`, `up`, `auth`, `deploy`, `down`, `provision`, `publish`, `completion`, `config`, `env`, `show`, `version`, `monitor`
-- **Flags válidos de azd monitor**: `--live`, `--logs`, `--overview`
-- **Características eliminadas**: `azd logs`, `azd service`, `azd infra import/export/validate`, `azd history`, `azd metrics`, `azd info`, `azd config validate`
+#### Cambiado
+- **Estrategias de Rollback**: Documentación actualizada para usar rollback basado en Git (AZD no tiene rollback nativo)
+- **Visualización de Logs**: Reemplazadas referencias de `azd logs` con `azd monitor --logs`, `azd monitor --live`, y comandos de Azure CLI
+- **Sección de Rendimiento**: Eliminadas flags de despliegue paralelo/incremental inexistentes, con alternativas válidas propuestas
+
+#### Detalles Técnicos
+- **Comandos AZD Válidos**: `init`, `up`, `auth`, `deploy`, `down`, `provision`, `publish`, `completion`, `config`, `env`, `show`, `version`, `monitor`
+- **Flags válidas de azd monitor**: `--live`, `--logs`, `--overview`
+- **Características Eliminadas**: `azd logs`, `azd service`, `azd infra import/export/validate`, `azd history`, `azd metrics`, `azd info`, `azd config validate`
 
 #### Notas
 - **Verificación**: Comandos validados contra Azure Developer CLI v1.23.x
@@ -509,760 +555,765 @@ Las carpetas antiguas han sido reemplazadas por carpetas numeradas por capítulo
 
 ### [v3.9.0] - 2026-02-05
 
-#### Finalización del taller y mejora de la calidad de la documentación
-**Esta versión completa los módulos interactivos del taller, corrige todos los enlaces rotos de la documentación y mejora la calidad general del contenido para desarrolladores de IA que usan Microsoft AZD.**
+#### Finalización de Taller y Actualización de Calidad Documental
+**Esta versión completa los módulos interactivos del taller, corrige todos los enlaces rotos en la documentación y mejora la calidad general del contenido para desarrolladores de IA que usan Microsoft AZD.**
 
 #### Añadido
-- **📝 CONTRIBUTING.md**: Nuevo documento de directrices para contribuciones con:
-  - Directrices de ejemplos de código y convenciones de mensajes de commit
-  - Información sobre participación de la comunidad
+- **📝 CONTRIBUTING.md**: Nuevo documento con directrices de contribución:
+  - Instrucciones claras para reportar problemas y proponer cambios
+  - Estándares de documentación para contenido nuevo
+  - Guías para ejemplos de código y convenciones en mensajes de commit
+  - Información para participación comunitaria
 
 #### Completado
-- **🎯 Workshop Module 7 (Resumen)**: Módulo de cierre completamente completado con:
-  - Resumen integral de los logros del taller
-  - Sección de conceptos clave dominados que cubre AZD, plantillas y Microsoft Foundry
-  - Recomendaciones para la continuación del aprendizaje
-  - Ejercicios de desafío del taller con calificaciones de dificultad
-  - Enlaces de retroalimentación de la comunidad y soporte
+- **🎯 Módulo 7 del Taller (Conclusión)**: Módulo de cierre completamente finalizado con:
+  - Resumen completo de los logros del taller
+  - Sección de conceptos clave dominados sobre AZD, plantillas y Microsoft Foundry
+  - Recomendaciones para continuar el viaje de aprendizaje
+  - Ejercicios de desafío del taller con calificación de dificultad
+  - Enlaces para retroalimentación y apoyo comunitario
 
-- **📚 Workshop Module 3 (Deconstruct)**: Objetivos de aprendizaje actualizados con:
+- **📚 Módulo 3 del Taller (Desconstrucción)**: Objetivos de aprendizaje actualizados con:
   - Guía para activar GitHub Copilot con servidores MCP
   - Comprensión de la estructura de carpetas de plantillas AZD
-  - Patrones de organización de Infrastructure-as-Code (Bicep)
-  - Instrucciones para laboratorios prácticos
+  - Patrones de organización de infraestructura como código (Bicep)
+  - Instrucciones para laboratorio práctico
 
-- **🔧 Workshop Module 6 (Desmontaje)**: Completado con:
+- **🔧 Módulo 6 del Taller (Desmontaje)**: Completado con:
   - Objetivos de limpieza de recursos y gestión de costos
-  - Uso de `azd down` para el desaprovisionamiento seguro de infraestructura
-  - Guía para la recuperación de servicios cognitivos eliminados de forma suave
-  - Sugerencias de exploración adicionales para GitHub Copilot y Azure Portal
+  - Uso de `azd down` para desprovisionamiento seguro de infraestructura
+  - Guía para recuperación de servicios cognitivos borrados suavemente
+  - Pistas adicionales para exploración con GitHub Copilot y Azure Portal
 
 #### Corregido
-- **🔗 Corrección de enlaces rotos**: Se resolvieron más de 15 enlaces internos rotos:
-  - `docs/ai-foundry/ai-model-deployment.md`: Corregidos los caminos a microsoft-foundry-integration.md
-  - `docs/troubleshooting/ai-troubleshooting.md`: Corregidos los caminos ai-model-deployment.md y production-ai-practices.md
-  - `docs/getting-started/first-project.md`: Reemplazado el inexistente cicd-integration.md por deployment-guide.md
-  - `examples/retail-scenario.md`: Corregidos los caminos de FAQ y la guía de resolución de problemas
-  - `examples/container-app/microservices/README.md`: Corregidos los caminos del inicio del curso y de la guía de despliegue
-  - `resources/faq.md` y `resources/glossary.md`: Actualizadas las referencias del capítulo de IA
-  - `course-outline.md`: Corregidas las referencias de la guía del instructor y del laboratorio del taller de IA
+- **🔗 Corrección de Enlaces Rotos**: Resueltos más de 15 enlaces rotos internos en la documentación:
+  - `docs/ai-foundry/ai-model-deployment.md`: Corrección de rutas a microsoft-foundry-integration.md
+  - `docs/troubleshooting/ai-troubleshooting.md`: Corrección de rutas en ai-model-deployment.md y production-ai-practices.md
+  - `docs/getting-started/first-project.md`: Reemplazada cicd-integration.md no existente por deployment-guide.md
+  - `examples/retail-scenario.md`: Corrección de rutas en FAQ y guía de solución de problemas
+  - `examples/container-app/microservices/README.md`: Corrección de rutas en curso home y guía de despliegue
+  - `resources/faq.md` y `resources/glossary.md`: Actualización de referencias en capítulo de IA
+  - `course-outline.md`: Corrección de referencias de guía del instructor y laboratorio del taller de IA
 
-- **📅 Banner de estado del taller**: Actualizado de "Under Construction" a estado activo del taller con fecha febrero de 2026
+- **📅 Banner de Estado del Taller**: Actualización de "En Construcción" a estado activo con fecha febrero de 2026
 
-- **🔗 Navegación del taller**: Corregidos los enlaces de navegación rotos en workshop README.md que apuntaban a la carpeta inexistente lab-1-azd-basics
+- **🔗 Navegación del Taller**: Corrección de enlaces rotos en README.md del taller que apuntaban al carpeta lab-1-azd-basics inexistente
 
 #### Cambiado
-- **Presentación del taller**: Eliminada la advertencia "under construction", el taller ahora está completo y listo para usarse
-- **Consistencia de navegación**: Asegurado que todos los módulos del taller tengan navegación inter-modular adecuada
-- **Referencias de la ruta de aprendizaje**: Actualizadas las referencias cruzadas de capítulos para usar las rutas correctas de microsoft-foundry
+- **Presentación del Taller**: Eliminada advertencia de "en construcción", el taller ahora está completo y listo para usar
+- **Consistencia en Navegación**: Asegurado que todos los módulos del taller tengan navegación adecuada entre módulos
+- **Referencias de Ruta de Aprendizaje**: Actualización de referencias cruzadas de capítulos para usar rutas correctas de microsoft-foundry
 
 #### Validado
 - ✅ Todos los archivos markdown en inglés tienen enlaces internos válidos
-- ✅ Los módulos del taller 0-7 están completos con objetivos de aprendizaje
-- ✅ La navegación entre capítulos y módulos funciona correctamente
-- ✅ El contenido es adecuado para desarrolladores de IA que usan Microsoft AZD
-- ✅ Se mantuvo un lenguaje y estructura amigables para principiantes en todo el contenido
-- ✅ CONTRIBUTING.md proporciona orientación clara para colaboradores de la comunidad
+- ✅ Módulos del taller 0-7 completos con objetivos de aprendizaje
+- ✅ Navegación entre capítulos y módulos funcionando correctamente
+- ✅ Contenido adecuado para desarrolladores de IA que usan Microsoft AZD
+- ✅ Lenguaje y estructura amigables para principiantes mantenidos en todo el contenido
+- ✅ CONTRIBUTING.md proporciona instrucciones claras para colaboradores comunitarios
 
-#### Implementación técnica
-- **Validación de enlaces**: Script de PowerShell automatizado verificó todos los enlaces internos .md
-- **Auditoría de contenido**: Revisión manual de la integridad del taller y la idoneidad para principiantes
-- **Sistema de navegación**: Se aplicaron patrones consistentes de navegación entre capítulos y módulos
+#### Implementación Técnica
+- **Validación de Enlaces**: Script automatizado PowerShell verificó todos los enlaces internos .md
+- **Auditoría de Contenido**: Revisión manual de completitud del taller y adecuación para principiantes
+- **Sistema de Navegación**: Aplicados patrones consistentes de navegación entre capítulos y módulos
 
 #### Notas
-- **Alcance**: Cambios aplicados solo a la documentación en inglés
-- **Traducciones**: Las carpetas de traducción no se actualizaron en esta versión (la traducción automatizada se sincronizará más tarde)
-- **Duración del taller**: El taller completo ahora ofrece 3-4 horas de aprendizaje práctico
+- **Alcance**: Cambios aplicados solo a documentación en inglés
+- **Traducciones**: Las carpetas de traducción no se actualizaron en esta versión (sincronización automática después)
+- **Duración del Taller**: Taller completo ahora provee 3-4 horas de aprendizaje práctico
 
 ---
 
 ### [v3.8.0] - 2025-11-19
 
-#### Documentación avanzada: Monitoreo, seguridad y patrones multi-agente
-**Esta versión añade lecciones integrales de calidad A sobre la integración con Application Insights, patrones de autenticación y coordinación multi-agente para despliegues de producción.**
+#### Documentación Avanzada: Monitoreo, Seguridad y Patrones Multi-Agente
+**Esta versión añade lecciones completas de grado A sobre integración con Application Insights, patrones de autenticación y coordinación multi-agente para despliegues en producción.**
 
 #### Añadido
-- **📊 Lección de integración de Application Insights**: en `docs/pre-deployment/application-insights.md`:
+- **📊 Lección de Integración de Application Insights**: en `docs/pre-deployment/application-insights.md`:
   - Despliegue enfocado en AZD con aprovisionamiento automático
   - Plantillas Bicep completas para Application Insights + Log Analytics
-  - Aplicaciones Python funcionales con telemetría personalizada (1,200+ líneas)
-  - Patrones de monitoreo para IA/LLM (seguimiento de tokens/costes de Microsoft Foundry Models)
+  - Aplicaciones Python funcionales con telemetría personalizada (más de 1,200 líneas)
+  - Patrones de monitoreo AI/LLM (seguimiento de tokens/costos de Microsoft Foundry Models)
   - 6 diagramas Mermaid (arquitectura, trazado distribuido, flujo de telemetría)
-  - 3 ejercicios prácticos (alertas, paneles, monitoreo de IA)
-  - Ejemplos de consultas Kusto y estrategias de optimización de costes
-  - Transmisión de métricas en vivo y depuración en tiempo real
-  - 40-50 minutos de tiempo de aprendizaje con patrones listos para producción
+  - 3 ejercicios prácticos (alertas, dashboards, monitoreo AI)
+  - Ejemplos de consultas Kusto y estrategias de optimización de costos
+  - Streaming de métricas en vivo y depuración en tiempo real
+  - Tiempo de aprendizaje de 40-50 minutos con patrones listos para producción
 
-- **🔐 Lección de patrones de autenticación y seguridad**: en `docs/getting-started/authsecurity.md`:
+- **🔐 Lección de Patrones de Autenticación y Seguridad**: en `docs/getting-started/authsecurity.md`:
   - 3 patrones de autenticación (cadenas de conexión, Key Vault, identidad administrada)
-  - Plantillas Bicep completas de infraestructura para despliegues seguros
-  - Código de aplicación Node.js con integración del Azure SDK
-  - 3 ejercicios completos (habilitar identidad administrada, identidad asignada por el usuario, rotación de Key Vault)
+  - Plantillas completas de infraestructura Bicep para despliegues seguros
+  - Código de aplicación Node.js con integración Azure SDK
+  - 3 ejercicios completos (habilitar identidad administrada, identidad asignada por usuario, rotación de Key Vault)
   - Mejores prácticas de seguridad y configuraciones RBAC
-  - Guía de resolución de problemas y análisis de costes
+  - Guía de solución de problemas y análisis de costos
   - Patrones de autenticación sin contraseña listos para producción
 
-- **🤖 Lección de patrones de coordinación multi-agente**: en `docs/pre-deployment/coordination-patterns.md`:
-  - 5 patrones de coordinación (secuencial, paralelo, jerárquico, dirigido por eventos, consenso)
-  - Implementación completa de servicio orquestador (Python/Flask, 1,500+ líneas)
-  - 3 implementaciones de agentes especializados (Research, Writer, Editor)
-  - Integración con Service Bus para encolado de mensajes
-  - Gestión de estado en Cosmos DB para sistemas distribuidos
-  - 6 diagramas Mermaid que muestran interacciones entre agentes
-  - 3 ejercicios avanzados (manejo de timeouts, lógica de reintento, circuit breaker)
-  - Desglose de costos ($240-565/month) con estrategias de optimización
+- **🤖 Lección de Patrones de Coordinación Multi-Agente**: en `docs/pre-deployment/coordination-patterns.md`:
+  - 5 patrones de coordinación (secuencial, paralelo, jerárquico, basado en eventos, consenso)
+  - Implementación completa de servicio orquestador (Python/Flask, más de 1,500 líneas)
+  - 3 implementaciones especializadas de agentes (Investigador, Escritor, Editor)
+  - Integración con Service Bus para colas de mensajes
+  - Gestión de estado con Cosmos DB para sistemas distribuidos
+  - 6 diagramas Mermaid mostrando interacciones de agentes
+  - 3 ejercicios avanzados (manejo de tiempo de espera, lógica de reintentos, disyuntor)
+  - Desglose de costos ($240-565/mes) con estrategias de optimización
   - Integración con Application Insights para monitoreo
 
 #### Mejorado
-- **Capítulo de pre-despliegue**: Ahora incluye patrones integrales de monitoreo y coordinación
-- **Capítulo de inicio**: Mejorado con patrones de autenticación profesionales
-- **Preparación para producción**: Cobertura completa desde seguridad hasta observabilidad
-- **Esquema del curso**: Actualizado para referenciar las nuevas lecciones en los Capítulos 3 y 6
+- **Capítulo de Pre-despliegue**: Ahora incluye patrones completos de monitoreo y coordinación
+- **Capítulo de Primeros Pasos**: Mejorado con patrones profesionales de autenticación
+- **Preparación para Producción**: Cobertura completa desde seguridad hasta observabilidad
+- **Esquema del Curso**: Actualizado para referenciar nuevas lecciones en los Capítulos 3 y 6
 
 #### Cambiado
-- **Progresión de aprendizaje**: Mejor integración de seguridad y monitoreo a lo largo del curso
-- **Calidad de la documentación**: Estándares consistentes de grado A (95-97%) en las nuevas lecciones
-- **Patrones de producción**: Cobertura completa de extremo a extremo para despliegues empresariales
+- **Progresión de Aprendizaje**: Mejor integración de seguridad y monitoreo a lo largo del curso
+- **Calidad de Documentación**: Estándares consistentes de grado A (95-97%) en nuevas lecciones
+- **Patrones de Producción**: Cobertura completa de punta a punta para despliegues empresariales
 
 #### Mejorado
-- **Experiencia del desarrollador**: Ruta clara desde el desarrollo hasta el monitoreo en producción
-- **Estándares de seguridad**: Patrones profesionales para autenticación y gestión de secretos
+- **Experiencia de Desarrollador**: Ruta clara de desarrollo a monitoreo en producción
+- **Estándares de Seguridad**: Patrones profesionales para autenticación y gestión de secretos
 - **Observabilidad**: Integración completa de Application Insights con AZD
-- **Cargas de trabajo de IA**: Monitoreo especializado para Microsoft Foundry Models y sistemas multi-agente
+- **Cargas de Trabajo AI**: Monitoreo especializado para Microsoft Foundry Models y sistemas multi-agente
 
 #### Validado
-- ✅ Todas las lecciones incluyen código completo y funcional (no fragmentos)
-- ✅ Diagramas Mermaid para aprendizaje visual (19 en total en 3 lecciones)
-- ✅ Ejercicios prácticos con pasos de verificación (9 en total)
-- ✅ Plantillas Bicep listas para producción desplegables mediante `azd up`
+- ✅ Todas las lecciones incluyen código completo funcional (no fragmentos)
+- ✅ Diagramas Mermaid para aprendizaje visual (19 totales en 3 lecciones)
+- ✅ Ejercicios prácticos con pasos de verificación (9 totales)
+- ✅ Plantillas Bicep listas para producción desplegables con `azd up`
 - ✅ Análisis de costos y estrategias de optimización
-- ✅ Guías de resolución de problemas y mejores prácticas
+- ✅ Guías de solución de problemas y mejores prácticas
 - ✅ Puntos de control de conocimiento con comandos de verificación
 
-#### Resultados de la calificación de la documentación
-- **docs/pre-deployment/application-insights.md**: - Guía de monitoreo integral
-- **docs/getting-started/authsecurity.md**: - Patrones de seguridad profesionales
-- **docs/pre-deployment/coordination-patterns.md**: - Arquitecturas multi-agente avanzadas
-- **Contenido nuevo en general**: - Estándares de alta calidad consistentes
+#### Resultados de Calificación de la Documentación
+- **docs/pre-deployment/application-insights.md**: - Guía completa de monitoreo
+- **docs/getting-started/authsecurity.md**: - Patrones profesionales de seguridad
+- **docs/pre-deployment/coordination-patterns.md**: - Arquitecturas avanzadas multi-agente
+- **Contenido Nuevo General**: - Estándares de alta calidad consistentes
 
-#### Implementación técnica
+#### Implementación Técnica
 - **Application Insights**: Log Analytics + telemetría personalizada + trazado distribuido
-- **Autenticación**: Identidad administrada + Key Vault + patrones RBAC
+- **Autenticación**: Identidad Administrada + Key Vault + patrones RBAC
 - **Multi-Agente**: Service Bus + Cosmos DB + Container Apps + orquestación
-- **Monitoreo**: Métricas en vivo + consultas Kusto + alertas + paneles
-- **Gestión de costos**: Estrategias de muestreo, políticas de retención, controles de presupuesto
+- **Monitoreo**: Métricas en vivo + consultas Kusto + alertas + dashboards
+- **Gestión de Costos**: Estrategias de muestreo, políticas de retención, controles presupuestarios
 
 ### [v3.7.0] - 2025-11-19
 
-#### Mejoras de calidad documental y nuevo ejemplo de Microsoft Foundry Models
-**Esta versión mejora la calidad de la documentación en todo el repositorio y añade un ejemplo completo de despliegue de Microsoft Foundry Models con interfaz de chat gpt-4.1.**
+#### Mejoras en Calidad Documental y Nuevo Ejemplo de Microsoft Foundry Models
+**Esta versión mejora la calidad documental en todo el repositorio y añade un ejemplo completo de despliegue de Microsoft Foundry Models con interfaz de chat gpt-4.1.**
 
 #### Añadido
-- **🤖 Ejemplo de chat con Microsoft Foundry Models**: Despliegue completo de gpt-4.1 con implementación funcional en `examples/azure-openai-chat/`:
-  - Infraestructura completa de Microsoft Foundry Models (despliegue del modelo gpt-4.1)
-  - Interfaz de chat de línea de comandos en Python con historial de conversaciones
-  - Integración con Key Vault para almacenamiento seguro de claves de API
-  - Seguimiento del uso de tokens y estimación de costes
+- **🤖 Ejemplo de Chat Microsoft Foundry Models**: Despliegue completo gpt-4.1 con implementación funcional en `examples/azure-openai-chat/`:
+  - Infraestructura completa Microsoft Foundry Models (despliegue modelo gpt-4.1)
+  - Interfaz chat línea de comandos en Python con historial de conversación
+  - Integración Key Vault para almacenamiento seguro de claves API
+  - Seguimiento de uso de tokens y estimación de costos
   - Limitación de tasa y manejo de errores
   - README completo con guía de despliegue de 35-45 minutos
   - 11 archivos listos para producción (plantillas Bicep, app Python, configuración)
-- **📚 Ejercicios de documentación**: Se añadieron ejercicios prácticos a la guía de configuración:
+- **📚 Ejercicios Documentales**: Añadidos ejercicios prácticos en guía de configuración:
   - Ejercicio 1: Configuración multi-entorno (15 minutos)
   - Ejercicio 2: Práctica de gestión de secretos (10 minutos)
-  - Criterios de éxito claros y pasos de verificación
-- **✅ Verificación de despliegue**: Se añadió sección de verificación a la guía de despliegue:
-  - Procedimientos de comprobación de estado
-  - Lista de verificación de criterios de éxito
-  - Salidas esperadas para todos los comandos de despliegue
-  - Referencia rápida de resolución de problemas
+  - Criterios claros de éxito y pasos de verificación
+- **✅ Verificación de Despliegue**: Añadida sección de verificación en guía de despliegue:
+  - Procedimientos de chequeo de salud
+  - Lista de criterios de éxito
+  - Resultados esperados para todos los comandos de despliegue
+  - Referencia rápida para solución de problemas
 
 #### Mejorado
 - **examples/README.md**: Actualizado a calidad de grado A (93%):
-  - Agregado azure-openai-chat a todas las secciones relevantes
+  - Añadido azure-openai-chat en todas las secciones relevantes
   - Actualizado el conteo de ejemplos locales de 3 a 4
-  - Añadido a la tabla de ejemplos de aplicaciones de IA
-  - Integrado en el Inicio Rápido para usuarios intermedios
-  - Añadido a la sección de plantillas de Microsoft Foundry
-  - Actualizadas la Matriz de Comparación y las secciones de hallazgos tecnológicos
-- **Calidad de la documentación**: Mejorada B+ (87%) → A- (92%) en la carpeta docs:
-  - Añadidas salidas esperadas a ejemplos de comandos críticos
-  - Incluidos pasos de verificación para cambios de configuración
-  - Aprendizaje práctico mejorado con ejercicios prácticos
+  - Añadido a tabla de Ejemplos de Aplicaciones AI
+  - Integrado en Inicio Rápido para Usuarios Intermedios
+  - Añadido a sección de Plantillas Microsoft Foundry
+  - Actualizadas matriz comparativa y secciones de detección tecnológica
+- **Calidad Documental**: Mejorada de B+ (87%) a A- (92%) en carpeta docs:
+
+  - Se añadieron resultados esperados a ejemplos de comandos críticos
+  - Se incluyeron pasos de verificación para cambios de configuración
+  - Se mejoró el aprendizaje práctico con ejercicios prácticos
 
 #### Cambiado
-- **Progresión del aprendizaje**: Mejor integración de ejemplos de IA para estudiantes intermedios
-- **Estructura de la documentación**: Ejercicios más accionables con resultados claros
-- **Proceso de verificación**: Criterios de éxito explícitos añadidos a flujos de trabajo clave
+- **Progresión de Aprendizaje**: Mejor integración de ejemplos de IA para aprendices intermedios
+- **Estructura de la Documentación**: Más ejercicios accionables con resultados claros
+- **Proceso de Verificación**: Criterios de éxito explícitos añadidos a flujos de trabajo clave
 
 #### Mejorado
-- **Experiencia del desarrollador**: El despliegue de Microsoft Foundry Models ahora toma 35-45 minutos (vs 60-90 para alternativas complejas)
-- **Transparencia de costos**: Estimaciones de costos claras ($50-200/month) para el ejemplo de Microsoft Foundry Models
-- **Ruta de aprendizaje**: Los desarrolladores de IA tienen un punto de entrada claro con azure-openai-chat
-- **Estándares de documentación**: Salidas esperadas y pasos de verificación consistentes
+- **Experiencia del Desarrollador**: Despliegue de Microsoft Foundry Models ahora toma 35-45 minutos (vs 60-90 para alternativas complejas)
+- **Transparencia de Costos**: Estimaciones claras de costos ($50-200/mes) para ejemplo Microsoft Foundry Models
+- **Ruta de Aprendizaje**: Los desarrolladores de IA tienen un punto de entrada claro con azure-openai-chat
+- **Estándares de Documentación**: Resultados esperados y pasos de verificación consistentes
 
 #### Validado
-- ✅ El ejemplo de Microsoft Foundry Models es completamente funcional con `azd up`
+- ✅ Ejemplo Microsoft Foundry Models completamente funcional con `azd up`
 - ✅ Los 11 archivos de implementación son sintácticamente correctos
-- ✅ Las instrucciones del README coinciden con la experiencia real de despliegue
+- ✅ Instrucciones del README coinciden con la experiencia real de despliegue
 - ✅ Enlaces de documentación actualizados en más de 8 ubicaciones
-- ✅ El índice de ejemplos refleja con precisión 4 ejemplos locales
-- ✅ No hay enlaces externos duplicados en las tablas
+- ✅ Índice de ejemplos refleja con precisión 4 ejemplos locales
+- ✅ No hay enlaces externos duplicados en tablas
 - ✅ Todas las referencias de navegación son correctas
 
-#### Implementación técnica
-- **Arquitectura de Microsoft Foundry Models**: gpt-4.1 + Key Vault + patrón Container Apps
-- **Seguridad**: Preparado para Managed Identity, secretos en Key Vault
+#### Implementación Técnica
+- **Arquitectura Microsoft Foundry Models**: patrón gpt-4.1 + Key Vault + Container Apps
+- **Seguridad**: Identidad Administrada lista, secretos en Key Vault
 - **Monitoreo**: Integración con Application Insights
-- **Gestión de costos**: Seguimiento de tokens y optimización de uso
-- **Despliegue**: Un solo comando `azd up` para la configuración completa
+- **Gestión de Costos**: Seguimiento de tokens y optimización de uso
+- **Despliegue**: Comando único `azd up` para configuración completa
 
 ### [v3.6.0] - 2025-11-19
 
 #### Actualización mayor: Ejemplos de despliegue de Container App
-**Esta versión introduce ejemplos completos de despliegue de aplicaciones en contenedores listos para producción usando Azure Developer CLI (AZD), con documentación completa e integración en la ruta de aprendizaje.**
+**Esta versión presenta ejemplos completos de despliegue de aplicaciones contenedorizadas listas para producción utilizando Azure Developer CLI (AZD), con documentación completa e integración en la ruta de aprendizaje.**
 
 #### Añadido
 - **🚀 Ejemplos de Container App**: Nuevos ejemplos locales en `examples/container-app/`:
-  - [Master Guide](examples/container-app/README.md): Descripción completa de despliegues en contenedores, inicio rápido, producción y patrones avanzados
-  - [Simple Flask API](../../examples/container-app/simple-flask-api): API REST amigable para principiantes con scale-to-zero, sondas de estado, monitoreo y resolución de problemas
-  - [Microservices Architecture](../../examples/container-app/microservices): Despliegue multi-servicio listo para producción (API Gateway, Product, Order, User, Notification), mensajería asíncrona, Service Bus, Cosmos DB, Azure SQL, trazado distribuido, despliegue blue-green/canary
-- **Buenas prácticas**: Seguridad, monitoreo, optimización de costos y orientación de CI/CD para cargas en contenedores
-- **Muestras de código**: `azure.yaml` completo, plantillas Bicep e implementaciones de servicios en varios lenguajes (Python, Node.js, C#, Go)
-- **Pruebas y resolución de problemas**: Escenarios de prueba de extremo a extremo, comandos de monitoreo, guía de resolución de problemas
+  - [Guía Maestra](examples/container-app/README.md): Visión completa de despliegues contenedorizados, inicio rápido, producción y patrones avanzados
+  - [API Flask Simple](../../examples/container-app/simple-flask-api): API REST amigable para principiantes con escalado a cero, sondas de salud, monitoreo y solución de problemas
+  - [Arquitectura Microservicios](../../examples/container-app/microservices): Despliegue multi-servicio listo para producción (API Gateway, Producto, Pedido, Usuario, Notificación), mensajería asíncrona, Service Bus, Cosmos DB, Azure SQL, trazabilidad distribuida, despliegue blue-green/canario
+- **Mejores Prácticas**: Orientación sobre seguridad, monitoreo, optimización de costos y CI/CD para cargas contenedorizadas
+- **Ejemplos de Código**: `azure.yaml` completo, plantillas Bicep e implementaciones de servicios en varios lenguajes (Python, Node.js, C#, Go)
+- **Pruebas y Solución de Problemas**: Escenarios de pruebas end-to-end, comandos de monitoreo, orientación para resolución de fallas
 
 #### Cambiado
-- **README.md**: Actualizado para presentar y enlazar los nuevos ejemplos de Container App bajo "Local Examples - Container Applications"
-- **examples/README.md**: Actualizado para resaltar los ejemplos de Container App, añadir entradas en la matriz de comparación y actualizar referencias de tecnología/arquitectura
-- **Esquema del curso y guía de estudio**: Actualizados para referenciar nuevos ejemplos de Container App y patrones de despliegue en los capítulos relevantes
+- **README.md**: Actualizado para presentar y enlazar los nuevos ejemplos de container app bajo "Ejemplos Locales - Aplicaciones Contenedorizadas"
+- **examples/README.md**: Actualizado para destacar ejemplos de container app, añadir entradas en matriz comparativa y actualizar referencias de tecnología/arquitectura
+- **Índice del Curso y Guía de Estudio**: Actualizado para referenciar nuevos ejemplos de container app y patrones de despliegue en capítulos relevantes
 
 #### Validado
-- ✅ Todos los nuevos ejemplos desplegables con `azd up` y que siguen las mejores prácticas
-- ✅ Enlaces cruzados de documentación y navegación actualizados
-- ✅ Los ejemplos cubren escenarios de principiante a avanzado, incluidos microservicios de producción
+- ✅ Todos los nuevos ejemplos desplegables con `azd up` y siguen las mejores prácticas
+- ✅ Enlaces cruzados y navegación de documentación actualizados
+- ✅ Ejemplos cubren escenarios desde principiantes hasta avanzados, incluyendo microservicios en producción
 
 #### Notas
-- **Alcance**: Documentación y ejemplos en inglés solamente
-- **Próximos pasos**: Ampliar con patrones avanzados adicionales de contenedores y automatización CI/CD en futuras versiones
+- **Alcance**: Documentación y ejemplos solo en inglés
+- **Próximos Pasos**: Expandir con patrones avanzados de contenedores y automatización CI/CD en futuras versiones
 
 ### [v3.5.0] - 2025-11-19
 
-#### Rebranding de producto: Microsoft Foundry
-**Esta versión implementa un cambio de nombre de producto integral de "Microsoft Foundry" a "Microsoft Foundry" en toda la documentación en inglés, reflejando el rebranding oficial de Microsoft.**
+#### Rebranding de Producto: Microsoft Foundry
+**Esta versión implementa un cambio integral del nombre del producto de "Microsoft Foundry" a "Microsoft Foundry" en toda la documentación en inglés, reflejando la reorganización oficial de Microsoft.**
 
 #### Cambiado
-- **🔄 Actualización del nombre del producto**: Rebranding completo de "Microsoft Foundry" a "Microsoft Foundry"
-  - Actualizadas todas las referencias en la documentación en inglés en la carpeta `docs/`
-  - Renombrada la carpeta: `docs/ai-foundry/` → `docs/microsoft-foundry/`
-  - Renamed file: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - Total: 23 content references updated across 7 documentation files
+- **🔄 Actualización de Nombre de Producto**: Rebranding completo de "Microsoft Foundry" a "Microsoft Foundry"
+  - Se actualizaron todas las referencias en la documentación en inglés dentro de la carpeta `docs/`
+  - Carpeta renombrada: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+  - Archivo renombrado: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+  - Total: 23 referencias de contenido actualizadas en 7 archivos de documentación
 
-- **📁 Folder Structure Changes**:
-  - `docs/ai-foundry/` renamed to `docs/microsoft-foundry/`
-  - All cross-references updated to reflect new folder structure
-  - Navigation links validated across all documentation
+- **📁 Cambios en Estructura de Carpetas**:
+  - `docs/ai-foundry/` renombrada a `docs/microsoft-foundry/`
+  - Se actualizaron todas las referencias cruzadas para reflejar la nueva estructura de carpetas
+  - Enlaces de navegación validados en toda la documentación
 
-- **📄 File Renames**:
+- **📄 Renombramiento de Archivos**:
   - `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - All internal links updated to reference new filename
+  - Todos los enlaces internos actualizados para referenciar el nuevo nombre de archivo
 
-#### Updated Files
-- **Chapter Documentation** (7 files):
+#### Archivos Actualizados
+- **Documentación de Capítulos** (7 archivos):
   - `docs/microsoft-foundry/ai-model-deployment.md` - 3 actualizaciones de enlaces de navegación
-  - `docs/microsoft-foundry/ai-workshop-lab.md` - 4 referencias de nombre de producto actualizadas
-  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - Already using Microsoft Foundry (from previous updates)
-  - `docs/microsoft-foundry/production-ai-practices.md` - 3 referencias actualizadas (resumen, comentarios de la comunidad, documentación)
+  - `docs/microsoft-foundry/ai-workshop-lab.md` - 4 referencias al nombre del producto actualizadas
+  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - Ya usa Microsoft Foundry (de actualizaciones previas)
+  - `docs/microsoft-foundry/production-ai-practices.md` - 3 referencias actualizadas (visión general, retroalimentación comunitaria, documentación)
   - `docs/getting-started/azd-basics.md` - 4 enlaces de referencia cruzada actualizados
-  - `docs/getting-started/first-project.md` - 2 enlaces de navegación de capítulo actualizados
-  - `docs/getting-started/installation.md` - 2 enlaces del siguiente capítulo actualizados
-  - `docs/troubleshooting/ai-troubleshooting.md` - 3 referencias actualizadas (navegación, comunidad de Discord)
+  - `docs/getting-started/first-project.md` - 2 enlaces de navegación de capítulos actualizados
+  - `docs/getting-started/installation.md` - 2 enlaces a capítulos siguientes actualizados
+  - `docs/troubleshooting/ai-troubleshooting.md` - 3 referencias actualizadas (navegación, comunidad Discord)
   - `docs/troubleshooting/common-issues.md` - 1 enlace de navegación actualizado
   - `docs/troubleshooting/debugging.md` - 1 enlace de navegación actualizado
 
-- **Course Structure Files** (2 files):
-  - `README.md` - 17 referencias actualizadas (resumen del curso, títulos de capítulos, sección de plantillas, perspectivas de la comunidad)
+- **Archivos de Estructura del Curso** (2 archivos):
+  - `README.md` - 17 referencias actualizadas (resumen del curso, títulos de capítulos, sección de plantillas, insights comunitarios)
   - `course-outline.md` - 14 referencias actualizadas (visión general, objetivos de aprendizaje, recursos del capítulo)
 
-#### Validated
-- ✅ Cero referencias restantes a la ruta de la carpeta "ai-foundry" en la documentación en inglés
-- ✅ Cero referencias restantes del nombre de producto "Microsoft Foundry" en la documentación en inglés
-- ✅ Todos los enlaces de navegación funcionales con la nueva estructura de carpetas
-- ✅ Renombrado de archivos y carpetas completado con éxito
+#### Validado
+- ✅ No quedan referencias al camino de carpeta "ai-foundry" en documentos en inglés
+- ✅ No quedan referencias al nombre del producto "Microsoft Foundry" en documentos en inglés
+- ✅ Todos los enlaces de navegación funcionan con la nueva estructura de carpetas
+- ✅ Renombramientos de archivos y carpetas completados exitosamente
 - ✅ Referencias cruzadas entre capítulos validadas
 
-#### Notes
-- **Scope**: Changes applied to English documentation in `docs/` folder only
-- **Translations**: Translation folders (`translations/`) not updated in this version
-- **Workshop**: Workshop materials (`workshop/`) not updated in this version
-- **Examples**: Example files may still reference legacy naming (to be addressed in future update)
-- **External Links**: External URLs and GitHub repository references remain unchanged
+#### Notas
+- **Alcance**: Cambios aplicados solo en documentación en inglés dentro de la carpeta `docs/`
+- **Traducciones**: Carpetas de traducción (`translations/`) no actualizadas en esta versión
+- **Talleres**: Materiales de taller (`workshop/`) no actualizados en esta versión
+- **Ejemplos**: Archivos de ejemplo pueden aún referenciar nombres legados (será abordado en futuras actualizaciones)
+- **Enlaces Externos**: URLs externas y referencias al repositorio GitHub permanecen sin cambios
 
-#### Migration Guide for Contributors
-If you have local branches or documentation referencing the old structure:
-1. Update folder references: `docs/ai-foundry/` → `docs/microsoft-foundry/`
-2. Update file references: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-3. Replace product name: "Microsoft Foundry" → "Microsoft Foundry"
-4. Validate all internal documentation links still work
+#### Guía de Migración para Colaboradores
+Si tienes ramas locales o documentación que hacen referencia a la estructura antigua:
+1. Actualiza las referencias de carpeta: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+2. Actualiza las referencias de archivo: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+3. Sustituye el nombre del producto: "Microsoft Foundry" → "Microsoft Foundry"
+4. Valida que todos los enlaces internos de documentación funcionen correctamente
 
 ---
 
 ### [v3.4.0] - 2025-10-24
 
-#### Infrastructure Preview and Validation Enhancements
-**This version introduces comprehensive support for the new Azure Developer CLI preview feature and enhances workshop user experience.**
+#### Mejoras en Vista Previa e Infraestructura y Validación
+**Esta versión introduce soporte completo para la nueva función de vista previa Azure Developer CLI y mejora la experiencia del usuario en el taller.**
 
-#### Added
-- **🧪 azd provision --preview Feature Documentation**: Comprehensive coverage of the new infrastructure preview capability
-  - Command reference and usage examples in cheat sheet
-  - Detailed integration in provisioning guide with use cases and benefits
-  - Pre-flight check integration for safer deployment validation
-  - Getting started guide updates with safety-first deployment practices
-- **🚧 Workshop Status Banner**: Professional HTML banner indicating workshop development status
-  - Gradient design with construction indicators for clear user communication
-  - Last updated timestamp for transparency
-  - Mobile-responsive design for all device types
+#### Añadido
+- **🧪 Documentación de la función azd provision --preview**: Cobertura completa de la nueva capacidad de vista previa de infraestructura
+  - Referencia de comando y ejemplos de uso en hoja de trucos
+  - Integración detallada en guía de aprovisionamiento con casos de uso y beneficios
+  - Integración de chequeo previo para despliegue más seguro
+  - Actualizaciones en guía de inicio con prácticas de despliegue seguro
+- **🚧 Banner de Estado del Taller**: Banner HTML profesional indicando estado de desarrollo del taller
+  - Diseño en gradiente con indicadores de construcción para comunicación clara al usuario
+  - Fecha de última actualización para transparencia
+  - Diseño adaptativo a móviles para todo tipo de dispositivos
 
-#### Enhanced
-- **Infrastructure Safety**: Preview functionality integrated throughout deployment documentation
-- **Pre-deployment Validation**: Automated scripts now include infrastructure preview testing
-- **Developer Workflow**: Updated command sequences to include preview as best practice
-- **Workshop Experience**: Clear expectations set for users about content development status
+#### Mejorado
+- **Seguridad de Infraestructura**: Funcionalidad de vista previa integrada en toda la documentación de despliegue
+- **Validación Pre-despliegue**: Scripts automatizados ahora incluyen pruebas de vista previa de infraestructura
+- **Flujo de trabajo para desarrolladores**: Secuencias de comandos actualizadas para incluir vista previa como mejor práctica
+- **Experiencia en Taller**: Expectativas claras establecidas para usuarios sobre estado de contenido y desarrollo
 
-#### Changed
-- **Deployment Best Practices**: Preview-first workflow now recommended approach
-- **Documentation Flow**: Infrastructure validation moved earlier in learning process
-- **Workshop Presentation**: Professional status communication with clear development timeline
+#### Cambiado
+- **Mejores Prácticas de Despliegue**: Flujo de trabajo con vista previa como enfoque recomendado
+- **Flujo de Documentación**: Validación de infraestructura movida a etapa más temprana del proceso de aprendizaje
+- **Presentación del Taller**: Comunicación profesional del estado con línea de tiempo clara de desarrollo
 
-#### Improved
-- **Safety-First Approach**: Infrastructure changes can now be validated before deployment
-- **Team Collaboration**: Preview results can be shared for review and approval
-- **Cost Awareness**: Better understanding of resource costs before provisioning
-- **Risk Mitigation**: Reduced deployment failures through advance validation
+#### Mejorado
+- **Enfoque de Seguridad Primero**: Cambios en infraestructura ahora validables antes del despliegue
+- **Colaboración en Equipo**: Resultados de vista previa pueden compartirse para revisión y aprobación
+- **Conciencia de Costos**: Mejor comprensión de costos de recursos antes del aprovisionamiento
+- **Mitigación de Riesgos**: Reducción de fallas en despliegues mediante validación anticipada
 
-#### Technical Implementation
-- **Multi-document Integration**: Preview feature documented across 4 key files
-- **Command Patterns**: Consistent syntax and examples throughout documentation
-- **Best Practice Integration**: Preview included in validation workflows and scripts
-- **Visual Indicators**: Clear NEW feature markings for discoverability
+#### Implementación Técnica
+- **Integración Multidocumental**: Función vista previa documentada en 4 archivos clave
+- **Patrones de Comandos**: Sintaxis y ejemplos consistentes en toda la documentación
+- **Integración de Mejores Prácticas**: Vista previa incluida en flujos de validación y scripts
+- **Indicadores Visuales**: Marcadores claros de NUEVA función para mejor descubribilidad
 
-#### Workshop Infrastructure
-- **Status Communication**: Professional HTML banner with gradient styling
-- **User Experience**: Clear development status prevents confusion
-- **Professional Presentation**: Maintains repository credibility while setting expectations
-- **Timeline Transparency**: October 2025 last updated timestamp for accountability
+#### Infraestructura del Taller
+- **Comunicación de Estado**: Banner HTML profesional con estilo en gradiente
+- **Experiencia de Usuario**: Estado de desarrollo claro para evitar confusiones
+- **Presentación Profesional**: Mantiene credibilidad del repositorio mientras establece expectativas
+- **Transparencia en la Línea de Tiempo**: Fecha de última actualización octubre 2025 para responsabilidad
 
 ### [v3.3.0] - 2025-09-24
 
-#### Enhanced Workshop Materials and Interactive Learning Experience
-**This version introduces comprehensive workshop materials with browser-based interactive guides and structured learning paths.**
+#### Material de Taller Mejorado y Experiencia de Aprendizaje Interactiva
+**Esta versión presenta materiales de taller completos con guías interactivas basadas en navegador y rutas de aprendizaje estructuradas.**
 
-#### Added
-- **🎥 Interactive Workshop Guide**: Browser-based workshop experience with MkDocs preview capability
-- **📝 Structured Workshop Instructions**: 7-step guided learning path from discovery to customization
-  - 0-Introduction: Workshop overview and setup
-  - 1-Select-AI-Template: Template discovery and selection process
-  - 2-Validate-AI-Template: Deployment and validation procedures
-  - 3-Deconstruct-AI-Template: Understanding template architecture
-  - 4-Configure-AI-Template: Configuration and customization
-  - 5-Customize-AI-Template: Advanced modifications and iterations
-  - 6-Teardown-Infrastructure: Cleanup and resource management
-  - 7-Wrap-up: Summary and next steps
-- **🛠️ Workshop Tooling**: MkDocs configuration with Material theme for enhanced learning experience
-- **🎯 Hands-On Learning Path**: 3-step methodology (Discovery → Deployment → Customization)
-- **📱 GitHub Codespaces Integration**: Seamless development environment setup
+#### Añadido
+- **🎥 Guía Interactiva para Taller**: Experiencia en navegador con capacidad de vista previa MkDocs
+- **📝 Instrucciones Estructuradas para Taller**: Ruta de aprendizaje guiada en 7 pasos desde descubrimiento hasta personalización
+  - 0-Introducción: Visión general del taller y configuración
+  - 1-Seleccionar Plantilla IA: Descubrimiento y proceso de selección de plantilla
+  - 2-Validar Plantilla IA: Procedimientos de despliegue y validación
+  - 3-Deconstruir Plantilla IA: Comprensión de la arquitectura de la plantilla
+  - 4-Configurar Plantilla IA: Configuración y personalización
+  - 5-Personalizar Plantilla IA: Modificaciones avanzadas e iteraciones
+  - 6-Demoler Infraestructura: Limpieza y gestión de recursos
+  - 7-Cierre: Resumen y próximos pasos
+- **🛠️ Herramientas para Taller**: Configuración de MkDocs con tema Material para mejorar experiencia de aprendizaje
+- **🎯 Ruta de Aprendizaje Práctica**: Metodología en 3 pasos (Descubrimiento → Despliegue → Personalización)
+- **📱 Integración con GitHub Codespaces**: Configuración fluida del entorno de desarrollo
 
-#### Enhanced
-- **AI Workshop Lab**: Extended with comprehensive 2-3 hour structured learning experience
-- **Workshop Documentation**: Professional presentation with navigation and visual aids
-- **Learning Progression**: Clear step-by-step guidance from template selection to production deployment
-- **Developer Experience**: Integrated tooling for streamlined development workflows
+#### Mejorado
+- **Laboratorio de Taller IA**: Ampliado con experiencia estructurada completa de 2-3 horas
+- **Documentación del Taller**: Presentación profesional con navegación y ayudas visuales
+- **Progresión de Aprendizaje**: Guía clara paso a paso desde selección de plantilla hasta despliegue en producción
+- **Experiencia del Desarrollador**: Herramientas integradas para flujos de trabajo de desarrollo más eficientes
 
-#### Improved
-- **Accessibility**: Browser-based interface with search, copy functionality, and theme toggle
-- **Self-Paced Learning**: Flexible workshop structure accommodating different learning speeds
-- **Practical Application**: Real-world AI template deployment scenarios
-- **Community Integration**: Discord integration for workshop support and collaboration
+#### Mejorado
+- **Accesibilidad**: Interfaz basada en navegador con búsqueda, función de copiar y cambio de tema
+- **Aprendizaje Autodidacta**: Estructura flexible que acomoda diferentes ritmos de aprendizaje
+- **Aplicación Práctica**: Escenarios reales de despliegue de plantillas IA
+- **Integración Comunitaria**: Integración con Discord para soporte y colaboración en el taller
 
-#### Workshop Features
-- **Built-in Search**: Quick keyword and lesson discovery
-- **Copy Code Blocks**: Hover-to-copy functionality for all code examples
-- **Theme Toggle**: Dark/light mode support for different preferences
-- **Visual Assets**: Screenshots and diagrams for enhanced understanding
-- **Help Integration**: Direct Discord access for community support
+#### Características del Taller
+- **Búsqueda Incorporada**: Descubrimiento rápido de palabras clave y lecciones
+- **Copiar Bloques de Código**: Función de copiar al pasar el cursor para todos los ejemplos de código
+- **Cambio de Tema**: Soporte modo oscuro/claro para diferentes preferencias
+- **Recursos Visuales**: Capturas de pantalla y diagramas para mejor comprensión
+- **Integración de Ayuda**: Acceso directo a Discord para soporte comunitario
 
 ### [v3.2.0] - 2025-09-17
 
-#### Major Navigation Restructuring and Chapter-Based Learning System
-**This version introduces a comprehensive chapter-based learning structure with enhanced navigation throughout the entire repository.**
+#### Reestructuración mayor de navegación y sistema de aprendizaje basado en capítulos
+**Esta versión introduce una estructura de aprendizaje integral basada en capítulos con navegación mejorada en todo el repositorio.**
 
-#### Added
-- **📚 Chapter-Based Learning System**: Restructured entire course into 8 progressive learning chapters
-  - Capítulo 1: Foundation & Quick Start (⭐ - 30-45 mins)
-  - Capítulo 2: AI-First Development (⭐⭐ - 1-2 hours)
-  - Capítulo 3: Configuration & Authentication (⭐⭐ - 45-60 mins)
-  - Capítulo 4: Infrastructure as Code & Deployment (⭐⭐⭐ - 1-1.5 hours)
-  - Capítulo 5: Multi-Agent AI Solutions (⭐⭐⭐⭐ - 2-3 hours)
-  - Capítulo 6: Pre-Deployment Validation & Planning (⭐⭐ - 1 hour)
-  - Capítulo 7: Troubleshooting & Debugging (⭐⭐ - 1-1.5 hours)
-  - Capítulo 8: Production & Enterprise Patterns (⭐⭐⭐⭐ - 2-3 hours)
-- **📚 Comprehensive Navigation System**: Consistent navigation headers and footers across all documentation
-- **🎯 Progress Tracking**: Course completion checklist and learning verification system
-- **🗺️ Learning Path Guidance**: Clear entry points for different experience levels and goals
-- **🔗 Cross-Reference Navigation**: Related chapters and prerequisites clearly linked
+#### Añadido
+- **📚 Sistema de Aprendizaje por Capítulos**: Estructuración completa del curso en 8 capítulos progresivos
+  - Capítulo 1: Fundamentos y Inicio Rápido (⭐ - 30-45 minutos)
+  - Capítulo 2: Desarrollo con IA como Prioridad (⭐⭐ - 1-2 horas)
+  - Capítulo 3: Configuración y Autenticación (⭐⭐ - 45-60 minutos)
+  - Capítulo 4: Infraestructura como Código y Despliegue (⭐⭐⭐ - 1-1.5 horas)
+  - Capítulo 5: Soluciones IA Multi-Agente (⭐⭐⭐⭐ - 2-3 horas)
+  - Capítulo 6: Validación y Planificación Pre-Despliegue (⭐⭐ - 1 hora)
+  - Capítulo 7: Resolución de Problemas y Depuración (⭐⭐ - 1-1.5 horas)
+  - Capítulo 8: Patrones de Producción y Empresa (⭐⭐⭐⭐ - 2-3 horas)
+- **📚 Sistema de Navegación Completo**: Encabezados y pies de página consistentes en toda la documentación
+- **🎯 Seguimiento de Progreso**: Lista de verificación de finalización de curso y sistema de verificación de aprendizaje
+- **🗺️ Guía de Ruta de Aprendizaje**: Puntos de entrada claros para diferentes niveles de experiencia y objetivos
+- **🔗 Navegación Cruzada**: Capítulos relacionados y prerrequisitos enlazados claramente
 
-#### Enhanced
-- **README Structure**: Transformed into a structured learning platform with chapter-based organization
-- **Documentation Navigation**: Every page now includes chapter context and progression guidance
-- **Template Organization**: Examples and templates mapped to appropriate learning chapters
-- **Resource Integration**: Cheat sheets, FAQs, and study guides connected to relevant chapters
-- **Workshop Integration**: Hands-on labs mapped to multiple chapter learning objectives
+#### Mejorado
+- **Estructura del README**: Transformado en plataforma de aprendizaje estructurada con organización basada en capítulos
+- **Navegación de Documentación**: Cada página ahora incluye contexto de capítulo y guía de progresión
+- **Organización de Plantillas**: Ejemplos y plantillas mapeados a capítulos de aprendizaje apropiados
 
-#### Changed
-- **Learning Progression**: Moved from linear documentation to flexible chapter-based learning
-- **Configuration Placement**: Repositioned configuration guide as Chapter 3 for better learning flow
-- **AI Content Integration**: Better integration of AI-specific content throughout the learning journey
-- **Production Content**: Advanced patterns consolidated in Chapter 8 for enterprise learners
+- **Integración de Recursos**: Hojas de referencia, preguntas frecuentes y guías de estudio vinculadas a los capítulos relevantes
+- **Integración de Talleres**: Laboratorios prácticos mapeados a múltiples objetivos de aprendizaje de capítulos
 
-#### Improved
-- **User Experience**: Clear navigation breadcrumbs and chapter progression indicators
-- **Accessibility**: Consistent navigation patterns for easier course traversal
-- **Professional Presentation**: University-style course structure suitable for academic and corporate training
-- **Learning Efficiency**: Reduced time to find relevant content through improved organization
+#### Cambios
+- **Progresión de Aprendizaje**: Pasó de documentación lineal a aprendizaje flexible basado en capítulos
+- **Ubicación de Configuración**: Reposicionada la guía de configuración como Capítulo 3 para un mejor flujo de aprendizaje
+- **Integración de Contenido AI**: Mejor integración de contenido específico de IA a lo largo del recorrido de aprendizaje
+- **Contenido de Producción**: Patrones avanzados consolidados en el Capítulo 8 para aprendices empresariales
 
-#### Technical Implementation
-- **Navigation Headers**: Standardized chapter navigation across 40+ documentation files
-- **Footer Navigation**: Consistent progression guidance and chapter completion indicators
-- **Cross-Linking**: Comprehensive internal linking system connecting related concepts
-- **Chapter Mapping**: Templates and examples clearly associated with learning objectives
+#### Mejoras
+- **Experiencia de Usuario**: Migas de pan claras y indicadores de progresión de capítulos
+- **Accesibilidad**: Patrones de navegación consistentes para facilitar el recorrido del curso
+- **Presentación Profesional**: Estructura de curso al estilo universitario adecuada para formación académica y corporativa
+- **Eficiencia de Aprendizaje**: Reducción del tiempo para encontrar contenido relevante gracias a mejor organización
 
-#### Study Guide Enhancement
-- **📚 Comprehensive Learning Objectives**: Restructured study guide to align with 8-chapter system
-- **🎯 Chapter-Based Assessment**: Each chapter includes specific learning objectives and practical exercises
-- **📋 Progress Tracking**: Weekly learning schedule with measurable outcomes and completion checklists
-- **❓ Assessment Questions**: Knowledge validation questions for each chapter with professional outcomes
-- **🛠️ Practical Exercises**: Hands-on activities with real deployment scenarios and troubleshooting
-- **📊 Skill Progression**: Clear advancement from basic concepts to enterprise patterns with career development focus
-- **🎓 Certification Framework**: Professional development outcomes and community recognition system
-- **⏱️ Timeline Management**: Structured 10-week learning plan with milestone validation
+#### Implementación Técnica
+- **Encabezados de Navegación**: Navegación estándar de capítulos en más de 40 archivos de documentación
+- **Navegación en el Pie de Página**: Guía de progresión consistente e indicadores de finalización de capítulo
+- **Enlaces Cruzados**: Sistema integral de enlaces internos conectando conceptos relacionados
+- **Mapeo de Capítulos**: Plantillas y ejemplos claramente asociados con objetivos de aprendizaje
+
+#### Mejora de la Guía de Estudio
+- **📚 Objetivos de Aprendizaje Integrales**: Guía de estudio reestructurada para alinearse con sistema de 8 capítulos
+- **🎯 Evaluación Basada en Capítulos**: Cada capítulo incluye objetivos específicos de aprendizaje y ejercicios prácticos
+- **📋 Seguimiento de Progreso**: Calendario de aprendizaje semanal con resultados medibles y listas de verificación de finalización
+- **❓ Preguntas de Evaluación**: Preguntas de validación de conocimiento para cada capítulo con resultados profesionales
+- **🛠️ Ejercicios Prácticos**: Actividades prácticas con escenarios reales de despliegue y solución de problemas
+- **📊 Progresión de Habilidades**: Avance claro desde conceptos básicos hasta patrones empresariales con enfoque en desarrollo profesional
+- **🎓 Marco de Certificación**: Resultados de desarrollo profesional y sistema de reconocimiento comunitario
+- **⏱️ Gestión de Cronograma**: Plan de aprendizaje estructurado de 10 semanas con validación de hitos
 
 ### [v3.1.0] - 2025-09-17
 
-#### Enhanced Multi-Agent AI Solutions
-**This version improves the multi-agent retail solution with better agent naming and enhanced documentation.**
+#### Soluciones Avanzadas de IA Multi-Agente
+**Esta versión mejora la solución multi-agente para retail con mejor denominación de agentes y documentación mejorada.**
 
-#### Changed
-- **Multi-Agent Terminology**: Replaced "Cora agent" with "Customer agent" throughout retail multi-agent solution for clearer understanding
-- **Agent Architecture**: Updated all documentation, ARM templates, and code examples to use consistent "Customer agent" naming
-- **Configuration Examples**: Modernized agent configuration patterns with updated naming conventions
-- **Documentation Consistency**: Ensured all references use professional, descriptive agent names
+#### Cambios
+- **Terminología Multi-Agente**: Se reemplazó "agente Cora" por "agente Cliente" en toda la solución multi-agente retail para mayor claridad
+- **Arquitectura de Agentes**: Actualización de toda la documentación, plantillas ARM y ejemplos de código para usar denominación consistente "agente Cliente"
+- **Ejemplos de Configuración**: Modernización de patrones de configuración de agente con convenciones de nombre actualizadas
+- **Consistencia en la Documentación**: Asegurado que todas las referencias usen nombres profesionales y descriptivos para agentes
 
-#### Enhanced
-- **ARM Template Package**: Updated retail-multiagent-arm-template with Customer agent references
-- **Architecture Diagrams**: Refreshed Mermaid diagrams with updated agent naming
-- **Code Examples**: Python classes and implementation examples now use CustomerAgent naming
-- **Environment Variables**: Updated all deployment scripts to use CUSTOMER_AGENT_NAME conventions
+#### Mejoras
+- **Paquete de Plantillas ARM**: Actualizado retail-multiagent-arm-template con referencias a agente Cliente
+- **Diagramas de Arquitectura**: Diagramas Mermaid actualizados con denominación de agentes
+- **Ejemplos de Código**: Clases Python y ejemplos de implementación ahora usan nombres CustomerAgent
+- **Variables de Entorno**: Actualizados todos los scripts de despliegue para usar convenciones CUSTOMER_AGENT_NAME
 
-#### Improved
-- **Developer Experience**: Clearer agent roles and responsibilities in documentation
-- **Production Readiness**: Better alignment with enterprise naming conventions
-- **Learning Materials**: More intuitive agent naming for educational purposes
-- **Template Usability**: Simplified understanding of agent functions and deployment patterns
+#### Mejoras
+- **Experiencia del Desarrollador**: Claridad en roles y responsabilidades de agentes en la documentación
+- **Preparación para Producción**: Mejor alineación con convenciones de nombres empresariales
+- **Materiales de Aprendizaje**: Nombres de agentes más intuitivos para fines educativos
+- **Usabilidad de Plantillas**: Comprensión simplificada de funciones de agentes y patrones de despliegue
 
-#### Technical Details
-- Updated Mermaid architecture diagrams with CustomerAgent references
-- Replaced CoraAgent class names with CustomerAgent in Python examples
-- Modified ARM template JSON configurations to use "customer" agent type
-- Updated environment variables from CORA_AGENT_* to CUSTOMER_AGENT_* patterns
-- Refreshed all deployment commands and container configurations
+#### Detalles Técnicos
+- Diagramas Mermaid de arquitectura actualizados con referencias CustomerAgent
+- Reemplazo de nombres de clase CoraAgent por CustomerAgent en ejemplos Python
+- Modificaciones en configuraciones JSON de plantillas ARM para usar tipo de agente "customer"
+- Actualización de variables de entorno de CORA_AGENT_* a CUSTOMER_AGENT_*
+- Actualización de todos los comandos de despliegue y configuraciones de contenedores
 
 ### [v3.0.0] - 2025-09-12
 
-#### Major Changes - AI Developer Focus and Microsoft Foundry Integration
-**This version transforms the repository into a comprehensive AI-focused learning resource with Microsoft Foundry integration.**
+#### Cambios Importantes - Enfoque en Desarrolladores de IA e Integración con Microsoft Foundry
+**Esta versión transforma el repositorio en un recurso integral enfocado en IA con integración de Microsoft Foundry.**
 
-#### Added
-- **🤖 AI-First Learning Path**: Complete restructure prioritizing AI developers and engineers
-- **Microsoft Foundry Integration Guide**: Comprehensive documentation for connecting AZD with Microsoft Foundry services
-- **AI Model Deployment Patterns**: Detailed guide covering model selection, configuration, and production deployment strategies
-- **AI Workshop Lab**: Taller práctico de 2-3 horas para convertir aplicaciones de IA en soluciones desplegables con AZD
-- **Production AI Best Practices**: Patrones listos para la empresa para escalar, supervisar y asegurar cargas de trabajo de IA
-- **AI-Specific Troubleshooting Guide**: Guía integral de resolución de problemas específica para IA: modelos de Microsoft Foundry, Cognitive Services y problemas de despliegue de IA
-- **AI Template Gallery**: Colección destacada de plantillas de Microsoft Foundry con valoraciones de complejidad
-- **Workshop Materials**: Estructura completa del taller con laboratorios prácticos y materiales de referencia
+#### Añadidos
+- **🤖 Ruta de Aprendizaje AI-First**: Reestructuración completa priorizando desarrolladores e ingenieros de IA
+- **Guía de Integración Microsoft Foundry**: Documentación completa para conectar AZD con servicios Microsoft Foundry
+- **Patrones de Despliegue de Modelos AI**: Guía detallada cubriendo selección, configuración y estrategias de despliegue en producción
+- **Taller AI**: Taller práctico de 2-3 horas para convertir aplicaciones AI en soluciones desplegables con AZD
+- **Buenas Prácticas de Producción AI**: Patrones listos para empresa para escalar, monitorear y asegurar cargas de trabajo AI
+- **Guía de Solución de Problemas Específica de AI**: Solución integral para modelos Microsoft Foundry, Cognitive Services y despliegues AI
+- **Galería de Plantillas AI**: Colección destacada de plantillas Microsoft Foundry con calificaciones de complejidad
+- **Materiales de Taller**: Estructura completa de taller con laboratorios prácticos y materiales de referencia
 
-#### Enhanced
-- **README Structure**: Enfocado en desarrolladores de IA con datos de interés comunitario del 45% del Discord de Microsoft Foundry
-- **Learning Paths**: Trayectoria dedicada para desarrolladores de IA junto a caminos tradicionales para estudiantes e ingenieros DevOps
-- **Template Recommendations**: Plantillas de IA destacadas que incluyen azure-search-openai-demo, contoso-chat y openai-chat-app-quickstart
-- **Community Integration**: Soporte mejorado de la comunidad en Discord con canales y discusiones específicas para IA
+#### Mejoras
+- **Estructura del README**: Enfocada en desarrolladores AI con 45% de interés comunitario desde Microsoft Foundry Discord
+- **Rutas de Aprendizaje**: Trayectoria dedicada para desarrolladores AI junto a caminos tradicionales para estudiantes e ingenieros DevOps
+- **Recomendaciones de Plantillas**: Plantillas AI destacadas incluyendo azure-search-openai-demo, contoso-chat y openai-chat-app-quickstart
+- **Integración Comunitaria**: Soporte mejorado para comunidad Discord con canales y discusiones específicas de AI
 
-#### Security & Production Focus
-- **Managed Identity Patterns**: Patrones de identidad administrada: configuraciones de autenticación y seguridad específicas para IA
-- **Cost Optimization**: Seguimiento del uso de tokens y controles de presupuesto para cargas de trabajo de IA
-- **Multi-Region Deployment**: Estrategias para el despliegue global de aplicaciones de IA
-- **Performance Monitoring**: Métricas específicas de IA e integración con Application Insights
+#### Seguridad y Enfoque en Producción
+- **Patrones de Identidad Administrada**: Autenticación y configuraciones de seguridad específicas de AI
+- **Optimización de Costos**: Seguimiento de tokens y controles presupuestarios para cargas de trabajo AI
+- **Despliegue Multi-Región**: Estrategias para despliegue global de aplicaciones AI
+- **Monitoreo de Rendimiento**: Métricas específicas de AI e integración con Application Insights
 
-#### Documentation Quality
-- **Linear Course Structure**: Progresión lógica desde patrones de despliegue de IA para principiantes hasta avanzados
-- **Validated URLs**: Todos los enlaces externos a repositorios verificados y accesibles
-- **Complete Reference**: Todos los enlaces de la documentación interna validados y funcionales
-- **Production Ready**: Patrones de despliegue empresariales con ejemplos del mundo real
+#### Calidad de la Documentación
+- **Estructura Lineal de Curso**: Progresión lógica desde principiantes hasta patrones avanzados de despliegue AI
+- **URLs Validadas**: Todos los enlaces externos a repositorios verificados y accesibles
+- **Referencia Completa**: Todos los enlaces internos de documentación validados y funcionales
+- **Listo para Producción**: Patrones empresariales con ejemplos reales
 
 ### [v2.0.0] - 2025-09-09
 
-#### Major Changes - Repository Restructure and Professional Enhancement
-**This version represents a significant overhaul of the repository structure and content presentation.**
+#### Cambios Importantes - Reestructuración del Repositorio y Mejora Profesional
+**Esta versión representa una revisión significativa de la estructura y presentación de contenido del repositorio.**
 
-#### Added
-- **Structured Learning Framework**: Todas las páginas de documentación ahora incluyen secciones de Introducción, Objetivos de aprendizaje y Resultados de aprendizaje
-- **Navigation System**: Se añadieron enlaces de Lección anterior/Siguiente en toda la documentación para una progresión de aprendizaje guiada
-- **Study Guide**: study-guide.md completo con objetivos de aprendizaje, ejercicios prácticos y materiales de evaluación
-- **Professional Presentation**: Se eliminaron todos los iconos emoji para mejorar la accesibilidad y la apariencia profesional
-- **Enhanced Content Structure**: Mejora en la organización y el flujo de los materiales de aprendizaje
+#### Añadidos
+- **Marco de Aprendizaje Estructurado**: Todas las páginas de documentación incluyen secciones de Introducción, Metas de Aprendizaje y Resultados de Aprendizaje
+- **Sistema de Navegación**: Añadidos enlaces de Lección Anterior/Siguiente en toda la documentación para progresión guiada
+- **Guía de Estudio**: study-guide.md completo con objetivos de aprendizaje, ejercicios prácticos y materiales de evaluación
+- **Presentación Profesional**: Eliminados todos los iconos emoji para mejor accesibilidad y apariencia profesional
+- **Estructura Mejorada de Contenido**: Organización y flujo de materiales de aprendizaje mejorados
 
-#### Changed
-- **Documentation Format**: Estandarizada toda la documentación con una estructura consistente centrada en el aprendizaje
-- **Navigation Flow**: Implementada una progresión lógica a través de todos los materiales de aprendizaje
-- **Content Presentation**: Eliminados elementos decorativos en favor de un formato claro y profesional
-- **Link Structure**: Actualizados todos los enlaces internos para soportar el nuevo sistema de navegación
+#### Cambios
+- **Formato de Documentación**: Estandarización de toda la documentación con estructura consistente enfocada en aprendizaje
+- **Flujo de Navegación**: Implementación de progresión lógica en todo el material de aprendizaje
+- **Presentación de Contenido**: Eliminados elementos decorativos en favor de formato claro y profesional
+- **Estructura de Enlaces**: Actualizados todos los enlaces internos para soportar nuevo sistema de navegación
 
-#### Improved
-- **Accessibility**: Eliminadas las dependencias de emoji para una mejor compatibilidad con lectores de pantalla
-- **Professional Appearance**: Presentación limpia, de estilo académico, adecuada para el aprendizaje empresarial
-- **Learning Experience**: Enfoque estructurado con objetivos y resultados claros para cada lección
-- **Content Organization**: Mejor flujo lógico y conexión entre temas relacionados
+#### Mejoras
+- **Accesibilidad**: Eliminadas dependencias de emoji para mejor compatibilidad con lectores de pantalla
+- **Apariencia Profesional**: Presentación limpia al estilo académico, adecuada para aprendizaje empresarial
+- **Experiencia de Aprendizaje**: Enfoque estructurado con objetivos y resultados claros para cada lección
+- **Organización del Contenido**: Mejor flujo lógico y conexión entre temas relacionados
 
 ### [v1.0.0] - 2025-09-09
 
-#### Initial Release - Comprehensive AZD Learning Repository
+#### Lanzamiento Inicial - Repositorio Completo para Aprendizaje de AZD
 
-#### Added
-- **Core Documentation Structure**
+#### Añadidos
+- **Estructura Central de Documentación**
   - Serie completa de guías para empezar
   - Documentación completa de despliegue y aprovisionamiento
-  - Recursos detallados de resolución de problemas y guías de depuración
-  - Herramientas y procedimientos de validación previos al despliegue
+  - Recursos detallados para solución de problemas y depuración
+  - Herramientas y procedimientos de validación pre-despliegue
 
-- **Getting Started Module**
-  - AZD Basics: Conceptos y terminología fundamentales
-  - Installation Guide: Instrucciones de configuración específicas por plataforma
-  - Configuration Guide: Configuración del entorno y autenticación
-  - First Project Tutorial: Aprendizaje práctico paso a paso
+- **Módulo de Introducción**
+  - Conceptos básicos de AZD: Conceptos clave y terminología
+  - Guía de Instalación: Instrucciones de configuración por plataforma
+  - Guía de Configuración: Configuración de entorno y autenticación
+  - Tutorial del Primer Proyecto: Aprendizaje práctico paso a paso
 
-- **Deployment and Provisioning Module**
-  - Deployment Guide: Documentación completa del flujo de trabajo
-  - Provisioning Guide: Infraestructura como Código con Bicep
+- **Módulo de Despliegue y Aprovisionamiento**
+  - Guía de Despliegue: Documentación integral del flujo de trabajo
+  - Guía de Aprovisionamiento: Infraestructura como Código con Bicep
   - Mejores prácticas para despliegues en producción
   - Patrones de arquitectura multi-servicio
 
-- **Pre-deployment Validation Module**
-  - Capacity Planning: Validación de disponibilidad de recursos de Azure
-  - SKU Selection: Guía completa de niveles de servicio
-  - Pre-flight Checks: Scripts de validación automatizada (PowerShell y Bash)
-  - Herramientas de estimación de costes y planificación presupuestaria
+- **Módulo de Validación Pre-Despliegue**
+  - Planificación de Capacidad: Validación de disponibilidad de recursos Azure
+  - Selección de SKU: Guía completa de niveles de servicio
+  - Chequeos Previo al Vuelo: Scripts de validación automatizados (PowerShell y Bash)
+  - Herramientas de estimación de costos y planificación presupuestal
 
-- **Troubleshooting Module**
-  - Common Issues: Problemas frecuentes y soluciones
-  - Debugging Guide: Metodologías sistemáticas de resolución de problemas
-  - Técnicas y herramientas de diagnóstico avanzadas
+- **Módulo de Solución de Problemas**
+  - Problemas Comunes: Problemas frecuentes y soluciones
+  - Guía de Depuración: Metodologías sistemáticas para solución de problemas
+  - Técnicas y herramientas avanzadas de diagnóstico
   - Monitorización y optimización del rendimiento
 
-- **Resources and References**
-  - Command Cheat Sheet: Hoja de referencia rápida para comandos esenciales
-  - Glossary: Glosario completo de terminología y definiciones de siglas
-  - FAQ: Respuestas detalladas a preguntas frecuentes
+- **Recursos y Referencias**
+  - Hoja de Comandos: Referencia rápida para comandos esenciales
+  - Glosario: Definiciones integrales de términos y acrónimos
+  - Preguntas Frecuentes: Respuestas detalladas a dudas comunes
   - Enlaces a recursos externos y conexiones comunitarias
 
-- **Examples and Templates**
-  - Ejemplo de aplicación web simple
-  - Plantilla de despliegue para sitio web estático
-  - Configuración de aplicación en contenedor
+- **Ejemplos y Plantillas**
+  - Ejemplo de Aplicación Web Simple
+  - Plantilla de despliegue de Sitio Web Estático
+  - Configuración de Aplicación en contenedor
   - Patrones de integración de bases de datos
   - Ejemplos de arquitectura de microservicios
   - Implementaciones de funciones serverless
 
-#### Features
-- **Multi-Platform Support**: Guías de instalación y configuración para Windows, macOS y Linux
-- **Multiple Skill Levels**: Contenido diseñado para desde estudiantes hasta desarrolladores profesionales
-- **Practical Focus**: Ejemplos prácticos y escenarios del mundo real
-- **Comprehensive Coverage**: Desde conceptos básicos hasta patrones empresariales avanzados
-- **Security-First Approach**: Mejores prácticas de seguridad integradas en todo el contenido
-- **Cost Optimization**: Orientación para despliegues rentables y gestión de recursos
+#### Características
+- **Soporte Multiplataforma**: Guías de instalación y configuración para Windows, macOS y Linux
+- **Niveles Múltiples de Habilidad**: Contenido diseñado desde estudiantes hasta desarrolladores profesionales
+- **Enfoque Práctico**: Ejemplos prácticos y escenarios reales
+- **Cobertura Completa**: Desde conceptos básicos hasta patrones avanzados empresariales
+- **Enfoque de Seguridad Primero**: Mejores prácticas de seguridad integradas en todo el contenido
+- **Optimización de Costos**: Guía para despliegues rentables y gestión de recursos
 
-#### Documentation Quality
-- **Detailed Code Examples**: Ejemplos de código detallados, prácticos y probados
-- **Step-by-Step Instructions**: Instrucciones claras y accionables
-- **Comprehensive Error Handling**: Manejo integral de errores: resolución de problemas comunes
-- **Best Practices Integration**: Integración de mejores prácticas: estándares y recomendaciones de la industria
-- **Version Compatibility**: Actualizado con los últimos servicios de Azure y las funciones de azd
+#### Calidad de la Documentación
+- **Ejemplos Detallados de Código**: Muestras de código prácticas y testeadas
+- **Instrucciones Paso a Paso**: Guía clara y accionable
+- **Manejo Completo de Errores**: Solución de problemas para afecciones comunes
+- **Integración de Mejores Prácticas**: Estándares y recomendaciones de la industria
+- **Compatibilidad de Versiones**: Actualizado con los últimos servicios de Azure y características de azd
 
-## Planned Future Enhancements
+## Mejoras Futuras Planeadas
 
-### Version 3.1.0 (Planned)
-#### AI Platform Expansion
-- **Multi-Model Support**: Patrones de integración para Hugging Face, Azure Machine Learning y modelos personalizados
-- **AI Agent Frameworks**: Plantillas para despliegues con LangChain, Semantic Kernel y AutoGen
-- **Advanced RAG Patterns**: Opciones de bases de datos vectoriales más allá de Azure AI Search (Pinecone, Weaviate, etc.)
-- **AI Observability**: Monitorización mejorada del rendimiento de modelos, uso de tokens y calidad de las respuestas
+### Versión 3.1.0 (Planeada)
+#### Expansión de Plataforma AI
+- **Soporte Multi-Modelo**: Patrones de integración para Hugging Face, Azure Machine Learning y modelos personalizados
+- **Marcos de Agentes AI**: Plantillas para implementaciones LangChain, Semantic Kernel y AutoGen
+- **Patrones Avanzados RAG**: Opciones de bases de datos vectoriales más allá de Azure AI Search (Pinecone, Weaviate, etc.)
+- **Observabilidad AI**: Monitoreo mejorado para rendimiento de modelos, uso de tokens y calidad de respuesta
 
-#### Developer Experience
-- **VS Code Extension**: Experiencia de desarrollo integrada AZD + Microsoft Foundry
-- **GitHub Copilot Integration**: Generación de plantillas AZD asistida por IA
-- **Interactive Tutorials**: Ejercicios prácticos de codificación con validación automatizada para escenarios de IA
-- **Video Content**: Tutoriales en vídeo complementarios para aprendices visuales centrados en despliegues de IA
+#### Experiencia del Desarrollador
+- **Extensión VS Code**: Experiencia integrada de desarrollo AZD + Microsoft Foundry
+- **Integración GitHub Copilot**: Generación asistida por IA de plantillas AZD
+- **Tutoriales Interactivos**: Ejercicios de codificación prácticos con validación automatizada para escenarios AI
+- **Contenido en Video**: Tutoriales suplementarios en video para aprendices visuales enfocados en despliegues AI
 
-### Version 4.0.0 (Planned)
-#### Enterprise AI Patterns
-- **Governance Framework**: Gobernanza de modelos de IA, cumplimiento y registros de auditoría
-- **Multi-Tenant AI**: Patrones para atender múltiples clientes con servicios de IA aislados
-- **Edge AI Deployment**: Integración con Azure IoT Edge e instancias de contenedores
-- **Hybrid Cloud AI**: Patrones de despliegue multi-cloud e híbrido para cargas de trabajo de IA
+### Versión 4.0.0 (Planeada)
+#### Patrones Empresariales AI
+- **Marco de Gobernanza**: Gobernanza, cumplimiento y auditoría de modelos AI
+- **AI Multiinquilino**: Patrones para servicios AI aislados para múltiples clientes
+- **Despliegue AI en el Borde**: Integración con Azure IoT Edge e instancias de contenedores
+- **IA en Nube Híbrida**: Patrones de despliegue multi-nube e híbridos para cargas AI
 
-#### Advanced Features
-- **AI Pipeline Automation**: Integración MLOps con pipelines de Azure Machine Learning
-- **Advanced Security**: Patrones de confianza cero, endpoints privados y protección avanzada contra amenazas
-- **Performance Optimization**: Ajustes avanzados y estrategias de escalado para aplicaciones de IA de alto rendimiento
-- **Global Distribution**: Patrones de distribución de contenido y caché en el edge para aplicaciones de IA
+#### Funciones Avanzadas
+- **Automatización de Pipelines AI**: Integración MLOps con pipelines de Azure Machine Learning
+- **Seguridad Avanzada**: Patrones de confianza cero, endpoints privados y protección avanzada contra amenazas
+- **Optimización de Rendimiento**: Ajuste y escalamiento avanzado para aplicaciones AI de alto rendimiento
+- **Distribución Global**: Patrones de entrega de contenido y caché en el borde para aplicaciones AI
 
-### Version 3.0.0 (Planned) - Superseded by Current Release
-#### Proposed Additions - Now Implemented in v3.0.0
-- ✅ **AI-Focused Content**: Contenido centrado en IA: integración completa con Microsoft Foundry (Completado)
-- ✅ **Interactive Tutorials**: Tutoriales interactivos: laboratorio práctico de IA (Completado)
-- ✅ **Advanced Security Module**: Módulo de seguridad avanzada: patrones de seguridad específicos para IA (Completado)
-- ✅ **Performance Optimization**: Optimización de rendimiento: estrategias de afinamiento para cargas de trabajo de IA (Completado)
+### Versión 3.0.0 (Planeada) - Suplantada por la Versión Actual
+#### Adiciones Propuestas - Ahora Implementadas en v3.0.0
+- ✅ **Contenido Enfocado en AI**: Integración completa con Microsoft Foundry (Completado)
+- ✅ **Tutoriales Interactivos**: Taller práctico de AI (Completado)
+- ✅ **Módulo Avanzado de Seguridad**: Patrones de seguridad específicos AI (Completado)
+- ✅ **Optimización de Rendimiento**: Estrategias de ajuste para cargas AI (Completado)
 
-### Version 2.1.0 (Planned) - Partially Implemented in v3.0.0
-#### Minor Enhancements - Some Completed in Current Release
-- ✅ **Additional Examples**: Ejemplos adicionales: escenarios de despliegue centrados en IA (Completado)
-- ✅ **Extended FAQ**: FAQ ampliada: preguntas específicas de IA y resolución de problemas (Completado)
-- **Tool Integration**: Integración de herramientas: guías mejoradas de integración con IDE y editores
-- ✅ **Monitoring Expansion**: Expansión de monitorización: patrones de monitorización y alertas específicos para IA (Completado)
+### Versión 2.1.0 (Planeada) - Parcialmente Implementada en v3.0.0
+#### Mejoras Menores - Algunas Completadas en Versión Actual
+- ✅ **Ejemplos Adicionales**: Escenarios de despliegue enfocados en AI (Completado)
+- ✅ **FAQ Extendida**: Preguntas y solución de problemas específicos AI (Completado)
+- **Integración de Herramientas**: Guías mejoradas de integración IDE y editores
+- ✅ **Expansión de Monitoreo**: Patrones de monitoreo y alertas específicos de AI (Completado)
 
-#### Still Planned for Future Release
-- **Mobile-Friendly Documentation**: Documentación optimizada para móviles: diseño responsive para aprendizaje en móvil
-- **Offline Access**: Acceso sin conexión: paquetes de documentación descargables
-- **Enhanced IDE Integration**: Integración mejorada del IDE: extensión de VS Code para flujos de trabajo AZD + IA
-- **Community Dashboard**: Panel comunitario: métricas en tiempo real y seguimiento de contribuciones
+#### Aún Planeado para Lanzamiento Futuro
+- **Documentación Amigable con Móviles**: Diseño responsivo para aprendizaje móvil
+- **Acceso Offline**: Paquetes de documentación descargables
+- **Mejor Integración IDE**: Extensión VS Code para flujos de trabajo AZD + AI
+- **Panel Comunitario**: Métricas comunitarias en tiempo real y seguimiento de contribuciones
 
-## Contributing to the Changelog
+## Contribuir al Registro de Cambios
 
-### Reporting Changes
-Al contribuir a este repositorio, asegúrese de que las entradas del registro de cambios incluyan:
+### Reporte de Cambios
+Al contribuir a este repositorio, asegúrese que las entradas del registro de cambios incluyan:
 
-1. **Version Number**: Siguiendo el versionado semántico (major.minor.patch)
-2. **Date**: Fecha de lanzamiento o actualización en formato YYYY-MM-DD
-3. **Category**: Añadido, Cambiado, Deprecado, Eliminado, Corregido, Seguridad
-4. **Clear Description**: Descripción concisa de lo que cambió
-5. **Impact Assessment**: Cómo afectan los cambios a los usuarios existentes
+1. **Número de Versión**: Siguiendo versionado semántico (mayor.menor.parche)
+2. **Fecha**: Fecha de lanzamiento o actualización en formato AAAA-MM-DD
+3. **Categoría**: Añadido, Cambiado, Obsoleto, Removido, Corregido, Seguridad
+4. **Descripción Clara**: Descripción concisa de lo que cambió
+5. **Evaluación de Impacto**: Cómo afectarán los cambios a los usuarios existentes
 
-### Change Categories
+### Categorías de Cambio
 
-#### Added
+#### Añadido
 - Nuevas características, secciones de documentación o capacidades
 - Nuevos ejemplos, plantillas o recursos de aprendizaje
-- Herramientas, scripts o utilidades adicionales
+- Herramientas adicionales, scripts o utilidades
 
-#### Changed
-- Modificaciones a la funcionalidad existente o la documentación
-- Actualizaciones para mejorar la claridad o la precisión
-- Reestructuración del contenido u organización
+#### Cambiado
+- Modificaciones en funcionalidad o documentación existente
+- Actualizaciones para mejorar claridad o precisión
+- Reestructuración de contenido u organización
 
-#### Deprecated
-- Funcionalidades o enfoques que están siendo eliminados progresivamente
-- Secciones de documentación programadas para eliminación
+#### Obsoleto
+- Características o enfoques que están siendo eliminados progresivamente
+- Secciones de documentación programadas para removerse
 - Métodos que tienen mejores alternativas
 
-#### Removed
-- Funcionalidades, documentación o ejemplos que ya no son relevantes
+#### Removido
+- Características, documentación o ejemplos que ya no son relevantes
 - Información desactualizada o enfoques obsoletos
 - Contenido redundante o consolidado
 
-#### Fixed
-- Correcciones de errores en la documentación o el código
-- Resolución de problemas o incidencias reportadas
-- Mejoras en la precisión o funcionalidad
+#### Corregido
+- Correcciones de errores en documentación o código
+- Resolución de problemas reportados o fallas
+- Mejoras en precisión o funcionalidad
 
-#### Security
+
+#### Seguridad
 - Mejoras o correcciones relacionadas con la seguridad
 - Actualizaciones de las mejores prácticas de seguridad
 - Resolución de vulnerabilidades de seguridad
 
-### Semantic Versioning Guidelines
+### Directrices de Versionado Semántico
 
-#### Major Version (X.0.0)
-- Cambios incompatibles que requieren acción por parte del usuario
+#### Versión Mayor (X.0.0)
+- Cambios importantes que requieren acción del usuario
 - Reestructuración significativa del contenido u organización
 - Cambios que alteran el enfoque o la metodología fundamental
 
-#### Minor Version (X.Y.0)
-- Nuevas características o adiciones de contenido
-- Mejoras que mantienen la compatibilidad hacia atrás
+#### Versión Menor (X.Y.0)
+- Nuevas funcionalidades o adiciones de contenido
+- Mejoras que mantienen compatibilidad hacia atrás
 - Ejemplos, herramientas o recursos adicionales
 
-#### Patch Version (X.Y.Z)
-- Correcciones de errores y ajustes
-- Mejoras menores en el contenido existente
+#### Versión de Parche (X.Y.Z)
+- Corrección de errores y rectificaciones
+- Mejoras menores en contenido existente
 - Aclaraciones y pequeñas mejoras
 
-## Community Feedback and Suggestions
+## Retroalimentación y Sugerencias de la Comunidad
 
-Alentamos activamente los comentarios de la comunidad para mejorar este recurso de aprendizaje:
+Animamos activamente a la comunidad a proporcionar retroalimentación para mejorar este recurso de aprendizaje:
 
-### How to Provide Feedback
-- **GitHub Issues**: Informar problemas o sugerir mejoras (se aceptan problemas específicos de IA)
-- **Discord Discussions**: Compartir ideas y participar con la comunidad de Microsoft Foundry
-- **Pull Requests**: Contribuir mejoras directas al contenido, especialmente plantillas y guías de IA
-- **Microsoft Foundry Discord**: Participar en el canal #Azure para discusiones sobre AZD + IA
-- **Community Forums**: Participar en discusiones más amplias de desarrolladores de Azure
+### Cómo Proporcionar Retroalimentación
+- **GitHub Issues**: Reporta problemas o sugiere mejoras (problemas específicos de IA son bienvenidos)
+- **Discord Discussions**: Comparte ideas y participa con la comunidad de Microsoft Foundry
+- **Pull Requests**: Contribuye mejoras directas al contenido, especialmente plantillas y guías de IA
+- **Microsoft Foundry Discord**: Participa en el canal #Azure para discusiones de AZD + IA
+- **Community Forums**: Participa en discusiones más amplias de desarrolladores de Azure
 
-### Feedback Categories
-- **AI Content Accuracy**: Correcciones a la integración de servicios de IA e información de despliegue
-- **Learning Experience**: Sugerencias para mejorar el flujo de aprendizaje para desarrolladores de IA
-- **Missing AI Content**: Solicitudes de plantillas, patrones o ejemplos adicionales de IA
-- **Accessibility**: Mejoras para necesidades de aprendizaje diversas
-- **AI Tool Integration**: Sugerencias para una mejor integración de flujos de trabajo de desarrollo de IA
-- **Production AI Patterns**: Solicitudes de patrones de despliegue de IA empresariales
+### Categorías de Retroalimentación
+- **Precisión de Contenido de IA**: Correcciones en la integración y despliegue de servicios IA
+- **Experiencia de Aprendizaje**: Sugerencias para mejorar el flujo de aprendizaje para desarrolladores de IA
+- **Contenido de IA faltante**: Solicitudes de plantillas, patrones o ejemplos adicionales de IA
+- **Accesibilidad**: Mejoras para necesidades de aprendizaje diversas
+- **Integración de Herramientas de IA**: Sugerencias para mejor integración del flujo de desarrollo de IA
+- **Patrones de IA para Producción**: Solicitudes de patrones empresariales para despliegue de IA
 
-### Response Commitment
-- **Issue Response**: Dentro de las 48 horas para problemas reportados
-- **Feature Requests**: Evaluación dentro de una semana
-- **Community Contributions**: Revisión dentro de una semana
-- **Security Issues**: Prioridad inmediata con respuesta acelerada
+### Compromiso de Respuesta
+- **Respuesta a Incidencias**: Dentro de 48 horas para problemas reportados
+- **Solicitudes de Funcionalidad**: Evaluación en una semana
+- **Contribuciones Comunitarias**: Revisión en una semana
+- **Asuntos de Seguridad**: Prioridad inmediata con respuesta acelerada
 
-## Maintenance Schedule
+## Calendario de Mantenimiento
 
-### Regular Updates
-- **Monthly Reviews**: Revisiones mensuales: exactitud del contenido y validación de enlaces
-- **Quarterly Updates**: Adiciones e mejoras de contenido importantes
-- **Semi-Annual Reviews**: Reestructuración y mejoras completas
-- **Annual Releases**: Versiones mayores con mejoras significativas
+### Actualizaciones Regulares
+- **Revisiones Mensuales**: Precisión del contenido y validación de enlaces
+- **Actualizaciones Trimestrales**: Adiciones e mejoras importantes de contenido
+- **Revisiones Semestrales**: Reestructuración y mejoras comprensivas
+- **Versiones Anuales**: Actualizaciones de versión mayor con mejoras significativas
 
-### Monitoring and Quality Assurance
-- **Automated Testing**: Validación regular de ejemplos de código y enlaces
-- **Community Feedback Integration**: Incorporación regular de sugerencias de usuarios
-- **Technology Updates**: Alineación con los últimos servicios de Azure y las versiones de azd
-- **Accessibility Audits**: Revisión regular de principios de diseño inclusivo
+### Monitoreo y Aseguramiento de Calidad
+- **Pruebas Automatizadas**: Validación regular de ejemplos de código y enlaces
+- **Integración de Retroalimentación Comunitaria**: Incorporación regular de sugerencias de usuarios
+- **Actualizaciones Tecnológicas**: Alineación con los últimos servicios de Azure y lanzamientos de azd
+- **Auditorías de Accesibilidad**: Revisión regular para principios de diseño inclusivo
 
-## Version Support Policy
+## Política de Soporte de Versiones
 
-### Current Version Support
-- **Latest Major Version**: Soporte completo con actualizaciones regulares
-- **Previous Major Version**: Actualizaciones de seguridad y correcciones críticas durante 12 meses
-- **Legacy Versions**: Solo soporte comunitario, sin actualizaciones oficiales
+### Soporte de Versión Actual
+- **Última Versión Mayor**: Soporte completo con actualizaciones regulares
+- **Versión Mayor Anterior**: Actualizaciones de seguridad y correcciones críticas por 12 meses
+- **Versiones Legadas**: Solo soporte comunitario, sin actualizaciones oficiales
 
-### Migration Guidance
-Cuando se publican versiones principales, proporcionamos:
-- **Migration Guides**: Guías de migración paso a paso
-- **Compatibility Notes**: Detalles sobre cambios incompatibles
-- **Tool Support**: Scripts o utilidades para ayudar con la migración
-- **Community Support**: Foros dedicados para preguntas sobre migración
+### Guía de Migración
+Cuando se lanzan versiones principales, proporcionamos:
+- **Guías de Migración**: Instrucciones paso a paso para la transición
+- **Notas de Compatibilidad**: Detalles sobre cambios incompatibles
+- **Soporte de Herramientas**: Scripts o utilidades para facilitar la migración
+- **Soporte Comunitario**: Foros dedicados a preguntas sobre migración
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [Guía de estudio](resources/study-guide.md)
-- **Next Lesson**: Volver a [README principal](README.md)
+**Navegación**
+- **Lección Anterior**: [Guía de Estudio](resources/study-guide.md)
+- **Próxima Lección**: Regresa al [README Principal](README.md)
 
-**Stay Updated**: Vigila este repositorio para recibir notificaciones sobre nuevas versiones y actualizaciones importantes de los materiales de aprendizaje.
+**Mantente Actualizado**: Sigue este repositorio para recibir notificaciones sobre nuevas versiones y actualizaciones importantes del material de aprendizaje.
 
 ---
 

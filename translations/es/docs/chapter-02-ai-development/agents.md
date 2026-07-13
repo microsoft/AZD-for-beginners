@@ -1,60 +1,60 @@
-# AI Agents with Azure Developer CLI
+# Agentes de IA con Azure Developer CLI
 
-**Navegación del capítulo:**
+**Navegación del Capítulo:**
 - **📚 Inicio del curso**: [AZD para principiantes](../../README.md)
-- **📖 Capítulo actual**: Capítulo 2 - Desarrollo centrado en IA
-- **⬅️ Anterior**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Siguiente**: [AI Model Deployment](ai-model-deployment.md)
+- **📖 Capítulo Actual**: Capítulo 2 - Desarrollo con IA como prioridad
+- **⬅️ Anterior**: [Integración con Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Siguiente**: [Despliegue de modelo de IA](ai-model-deployment.md)
 - **🚀 Avanzado**: [Soluciones Multi-Agente](../../examples/retail-scenario.md)
 
 ---
 
 ## Introducción
 
-Los agentes de IA son programas autónomos que pueden percibir su entorno, tomar decisiones y realizar acciones para lograr objetivos específicos. A diferencia de los chatbots simples que responden a indicaciones, los agentes pueden:
+Los agentes de IA son programas autónomos que pueden percibir su entorno, tomar decisiones y realizar acciones para alcanzar objetivos específicos. A diferencia de los chatbots simples que responden a indicaciones, los agentes pueden:
 
-- **Usar herramientas** - Llamar API, buscar en bases de datos, ejecutar código
+- **Usar herramientas** - Llamar APIs, buscar bases de datos, ejecutar código
 - **Planificar y razonar** - Dividir tareas complejas en pasos
-- **Aprender del contexto** - Mantener memoria y adaptar su comportamiento
+- **Aprender del contexto** - Mantener memoria y adaptar comportamiento
 - **Colaborar** - Trabajar con otros agentes (sistemas multi-agente)
 
-Esta guía muestra cómo desplegar agentes de IA en Azure usando Azure Developer CLI (azd).
+Esta guía te muestra cómo desplegar agentes de IA en Azure usando Azure Developer CLI (azd).
 
-> **Nota de validación (2026-03-25):** Esta guía fue revisada contra `azd` `1.23.12` y `azure.ai.agents` `0.1.18-preview`. La experiencia `azd ai` aún está impulsada por previews, así que verifica la ayuda de la extensión si tus flags instalados difieren.
+> **Nota de validación (2026-07-13):** Esta guía fue revisada con `azd` `1.27.1` y `azure.ai.agents` `1.0.0-beta.5`. La experiencia `azd ai` aún está en vista previa, así que revisa la ayuda de la extensión si tus flags instalados difieren.
 
 ## Objetivos de aprendizaje
 
-Al completar esta guía, usted:
-- Entenderá qué son los agentes de IA y cómo se diferencian de los chatbots
-- Desplegará plantillas de agentes preconstruidas usando AZD
-- Configurará Foundry Agents para agentes personalizados
-- Implementará patrones básicos de agente (uso de herramientas, RAG, multi-agente)
-- Monitorizará y depurará agentes desplegados
+Al completar esta guía, podrás:
+- Entender qué son los agentes de IA y cómo difieren de los chatbots
+- Desplegar plantillas de agentes de IA preconstruidas usando AZD
+- Configurar Foundry Agents para agentes personalizados
+- Implementar patrones básicos para agentes (uso de herramientas, RAG, multi-agente)
+- Supervisar y depurar agentes desplegados
 
 ## Resultados de aprendizaje
 
-Al finalizar, podrá:
+Al finalizar, serás capaz de:
 - Desplegar aplicaciones de agentes de IA en Azure con un solo comando
-- Configurar herramientas y capacidades de los agentes
+- Configurar herramientas y capacidades del agente
 - Implementar generación aumentada por recuperación (RAG) con agentes
 - Diseñar arquitecturas multi-agente para flujos de trabajo complejos
-- Resolver problemas comunes de despliegue de agentes
+- Solucionar problemas comunes en despliegues de agentes
 
 ---
 
-## 🤖 ¿Qué hace a un agente diferente de un chatbot?
+## 🤖 ¿Qué hace diferente a un agente de un chatbot?
 
-| Feature | Chatbot | AI Agent |
-|---------|---------|----------|
-| **Comportamiento** | Responde a indicaciones | Realiza acciones autónomas |
+| Característica | Chatbot | Agente de IA |
+|--------------|---------|--------------|
+| **Comportamiento** | Responde a indicaciones | Toma acciones autónomas |
 | **Herramientas** | Ninguna | Puede llamar APIs, buscar, ejecutar código |
-| **Memoria** | Solo por sesión | Memoria persistente entre sesiones |
+| **Memoria** | Solo en sesión | Memoria persistente entre sesiones |
 | **Planificación** | Respuesta única | Razonamiento en múltiples pasos |
 | **Colaboración** | Entidad única | Puede trabajar con otros agentes |
 
 ### Analogía simple
 
-- **Chatbot** = Una persona servicial respondiendo preguntas en un mostrador de información
+- **Chatbot** = Una persona amable respondiendo preguntas en un mostrador de información
 - **Agente de IA** = Un asistente personal que puede hacer llamadas, reservar citas y completar tareas por ti
 
 ---
@@ -67,24 +67,24 @@ Al finalizar, podrá:
 # Inicializar la plantilla de agentes de IA
 azd init --template get-started-with-ai-agents
 
-# Implementar en Azure
+# Desplegar en Azure
 azd up
 ```
 
 **Qué se despliega:**
 - ✅ Foundry Agents
-- ✅ Microsoft Foundry Models (gpt-4.1)
+- ✅ Modelos Microsoft Foundry (gpt-4.1)
 - ✅ Azure AI Search (para RAG)
 - ✅ Azure Container Apps (interfaz web)
-- ✅ Application Insights (monitorización)
+- ✅ Application Insights (monitoreo)
 
 **Tiempo:** ~15-20 minutos
-**Coste:** ~$100-150/mes (desarrollo)
+**Costo:** ~$100-150/mes (desarrollo)
 
 ### Opción 2: Agente OpenAI con Prompty
 
 ```bash
-# Inicializar la plantilla de agente basada en Prompty
+# Inicializar la plantilla del agente basado en Prompty
 azd init --template agent-openai-python-prompty
 
 # Desplegar en Azure
@@ -93,12 +93,12 @@ azd up
 
 **Qué se despliega:**
 - ✅ Azure Functions (ejecución serverless del agente)
-- ✅ Microsoft Foundry Models
-- ✅ Archivos de configuración de Prompty
-- ✅ Implementación de agente de ejemplo
+- ✅ Modelos Microsoft Foundry
+- ✅ Archivos de configuración Prompty
+- ✅ Implementación de ejemplo de agente
 
 **Tiempo:** ~10-15 minutos
-**Coste:** ~$50-100/mes (desarrollo)
+**Costo:** ~$50-100/mes (desarrollo)
 
 ### Opción 3: Agente de Chat RAG
 
@@ -111,17 +111,17 @@ azd up
 ```
 
 **Qué se despliega:**
-- ✅ Microsoft Foundry Models
+- ✅ Modelos Microsoft Foundry
 - ✅ Azure AI Search con datos de ejemplo
 - ✅ Canalización de procesamiento de documentos
 - ✅ Interfaz de chat con citas
 
 **Tiempo:** ~15-25 minutos
-**Coste:** ~$80-150/mes (desarrollo)
+**Costo:** ~$80-150/mes (desarrollo)
 
-### Opción 4: AZD AI Agent Init (Vista previa basada en manifiesto o plantilla)
+### Opción 4: Inicialización AZD AI Agent (Vista previa basada en manifiesto o plantilla)
 
-Si tienes un archivo de manifiesto de agente, puedes usar el comando `azd ai` para generar un proyecto Foundry Agent Service directamente. Las versiones recientes en preview también añadieron soporte de inicialización basada en plantillas, por lo que el flujo exacto de indicaciones puede diferir ligeramente según la versión de la extensión que tengas instalada.
+Si tienes un archivo manifiesto de agente, puedes usar el comando `azd ai` para generar directamente un proyecto Foundry Agent Service. Las versiones recientes en vista previa también añadieron soporte para inicialización basada en plantillas, así que el flujo exacto puede variar ligeramente según la versión de la extensión instalada.
 
 ```bash
 # Instalar la extensión de agentes de IA
@@ -133,7 +133,7 @@ azd extension show azure.ai.agents
 # Inicializar desde un manifiesto de agente
 azd ai agent init -m agent-manifest.yaml
 
-# Implementar en Azure
+# Desplegar en Azure
 azd up
 
 # Probar el agente desplegado (muestra latencia + tiempo hasta el primer byte)
@@ -142,14 +142,14 @@ azd ai agent invoke
 
 **Cuándo usar `azd ai agent init` vs `azd init --template`:**
 
-| Approach | Best For | How It Works |
-|----------|----------|------|
-| `azd init --template` | Empezar desde una aplicación de ejemplo funcional | Clona un repositorio de plantilla completo con código + infraestructura |
-| `azd ai agent init -m` | Construir desde tu propio manifiesto de agente | Genera la estructura del proyecto a partir de tu definición de agente |
+| Enfoque | Mejor para | Cómo funciona |
+|---------|-----------|--------------|
+| `azd init --template` | Comenzar desde una app de ejemplo funcional | Clona un repositorio de plantilla con código + infraestructura |
+| `azd ai agent init -m` | Construir desde tu propio manifiesto de agente | Crea estructura de proyecto desde tu definición de agente |
 
-> **Consejo:** Usa `azd init --template` cuando estás aprendiendo (Opciones 1-3 arriba). Usa `azd ai agent init` cuando construyas agentes de producción con tus propios manifiestos.
+> **Consejo:** Usa `azd init --template` al aprender (Opciones 1-3 arriba). Usa `azd ai agent init` al construir agentes de producción con tus propios manifiestos.
 
-Después de `azd up`, la misma extensión te guía a través del resto del ciclo de vida del agente: `azd ai agent invoke` para probar, `azd ai agent eval generate` y `azd ai agent optimize` para medir y mejorar la calidad, y `azd ai agent delete` para limpiar. Consulta [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) para la referencia completa.
+Después de `azd up`, la misma extensión te guía por el resto del ciclo de vida del agente: `azd ai agent invoke` para probar, `azd ai agent eval generate` y `azd ai agent optimize` para medir y mejorar la calidad, y `azd ai agent delete` para limpiar. Consulta [Comandos AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) para referencia completa.
 
 ---
 
@@ -168,35 +168,35 @@ graph TD
 ```
 
 **Ideal para:**
-- Bots de soporte al cliente
+- Bots de atención al cliente
 - Asistentes de investigación
 - Agentes de análisis de datos
 
 **Plantilla AZD:** `azure-search-openai-demo`
 
-### Patrón 2: Agente RAG (Generación aumentada por recuperación)
+### Patrón 2: Agente RAG (Generación Aumentada por Recuperación)
 
 Un agente que recupera documentos relevantes antes de generar respuestas.
 
 ```mermaid
 graph TD
     Query[Consulta del usuario] --> RAG[Agente RAG]
-    RAG --> Vector[Búsqueda vectorial]
+    RAG --> Vector[Búsqueda Vectorial]
     RAG --> LLM[LLM<br/>gpt-4.1]
-    Vector -- Documentos --> LLM
-    LLM --> Response[Respuesta con citas]
+    Vector -- Documents --> LLM
+    LLM --> Response[Respuesta con Citas]
 ```
 
 **Ideal para:**
 - Bases de conocimiento empresariales
-- Sistemas de preguntas y respuestas sobre documentos
-- Investigación legal y de cumplimiento
+- Sistemas de preguntas y respuestas con documentos
+- Investigación legal y cumplimiento
 
 **Plantilla AZD:** `azure-search-openai-demo`
 
 ### Patrón 3: Sistema Multi-Agente
 
-Múltiples agentes especializados que trabajan juntos en tareas complejas.
+Múltiples agentes especializados trabajando juntos en tareas complejas.
 
 ```mermaid
 graph TD
@@ -206,17 +206,17 @@ graph TD
 ```
 
 **Ideal para:**
-- Generación de contenido complejo
-- Flujos de trabajo en varios pasos
-- Tareas que requieren diferentes áreas de expertise
+- Generación de contenido compleja
+- Flujos de trabajo en múltiples pasos
+- Tareas que requieren diferentes especialidades
 
-**Más información:** [Multi-Agent Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md)
+**Más información:** [Patrones de coordinación multi-agente](../chapter-06-pre-deployment/coordination-patterns.md)
 
 ---
 
 ## ⚙️ Configuración de herramientas del agente
 
-Los agentes se vuelven poderosos cuando pueden usar herramientas. Aquí se explica cómo configurar herramientas comunes:
+Los agentes se vuelven poderosos cuando pueden usar herramientas. Aquí te mostramos cómo configurar herramientas comunes:
 
 ### Configuración de herramientas en Foundry Agents
 
@@ -259,37 +259,37 @@ azd env set AGENT_INSTRUCTIONS "You are a helpful assistant..."
 azd env set ENABLE_CODE_INTERPRETER "true"
 azd env set ENABLE_FILE_SEARCH "true"
 
-# Desplegar con la configuración actualizada
+# Desplegar con configuración actualizada
 azd deploy
 ```
 
 ---
 
-## 📊 Monitorización de agentes
+## 📊 Monitoreo de agentes
 
 ### Integración con Application Insights
 
-Todas las plantillas de agentes AZD incluyen Application Insights para monitorización:
+Todas las plantillas de agentes AZD incluyen Application Insights para monitoreo:
 
 ```bash
-# Abrir panel de supervisión
+# Abrir panel de monitoreo
 azd monitor --overview
 
-# Ver registros en tiempo real
+# Ver registros en vivo
 azd monitor --logs
 
-# Ver métricas en tiempo real
+# Ver métricas en vivo
 azd monitor --live
 ```
 
-### Métricas clave a rastrear
+### Métricas clave para monitorear
 
-| Metric | Description | Target |
-|--------|-------------|--------|
-| Latencia de respuesta | Tiempo para generar la respuesta | < 5 segundos |
-| Uso de tokens | Tokens por solicitud | Monitorear por coste |
-| Tasa de éxito de llamadas a herramientas | % de ejecuciones de herramientas exitosas | > 95% |
-| Tasa de error | Solicitudes de agente fallidas | < 1% |
+| Métrica | Descripción | Objetivo |
+|---------|-------------|---------|
+| Latencia de respuesta | Tiempo para generar una respuesta | < 5 segundos |
+| Uso de tokens | Tokens por solicitud | Monitorizar para costo |
+| Tasa de éxito de llamadas a herramientas | % de ejecuciones exitosas de herramientas | > 95% |
+| Tasa de error | Solicitudes fallidas del agente | < 1% |
 | Satisfacción del usuario | Puntuaciones de retroalimentación | > 4.0/5.0 |
 
 ### Registro personalizado para agentes
@@ -320,18 +320,18 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
 
 ---
 
-## 💰 Consideraciones de coste
+## 💰 Consideraciones de costos
 
-### Costes mensuales estimados por patrón
+### Costos mensuales estimados por patrón
 
-| Pattern | Dev Environment | Production |
-|---------|-----------------|------------|
+| Patrón | Entorno de desarrollo | Producción |
+|--------|----------------------|------------|
 | Agente único | $50-100 | $200-500 |
 | Agente RAG | $80-150 | $300-800 |
-| Multi-Agente (2-3 agentes) | $150-300 | $500-1,500 |
-| Multi-Agente empresarial | $300-500 | $1,500-5,000+ |
+| Multi-agente (2-3 agentes) | $150-300 | $500-1,500 |
+| Multi-agente empresarial | $300-500 | $1,500-5,000+ |
 
-### Consejos para optimizar costes
+### Consejos para optimización de costos
 
 1. **Usa gpt-4.1-mini para tareas simples**
    ```bash
@@ -349,23 +349,23 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
 
 3. **Establece límites de tokens por ejecución**
    ```python
-   # Establezca max_completion_tokens al ejecutar el agente, no durante la creación
+   # Establecer max_completion_tokens al ejecutar el agente, no durante la creación
    run = project_client.agents.create_run(
        thread_id=thread.id,
        agent_id=agent.id,
-       max_completion_tokens=1000  # Limite la longitud de la respuesta
+       max_completion_tokens=1000  # Limitar la longitud de la respuesta
    )
    ```
 
 4. **Escala a cero cuando no esté en uso**
    ```bash
-   # Container Apps se escalan automáticamente a cero
+   # Las aplicaciones de contenedor se escalan automáticamente a cero
    azd env set MIN_REPLICAS "0"
    ```
 
 ---
 
-## 🔧 Solución de problemas para agentes
+## 🔧 Solución de problemas con agentes
 
 ### Problemas comunes y soluciones
 
@@ -373,26 +373,26 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
 <summary><strong>❌ El agente no responde a llamadas de herramientas</strong></summary>
 
 ```bash
-# Comprueba si las herramientas están registradas correctamente
+# Verificar si las herramientas están registradas correctamente
 azd show
 
-# Verifica la implementación de OpenAI
+# Verificar implementación de OpenAI
 az cognitiveservices account deployment list \
   --name $AZURE_OPENAI_NAME \
   --resource-group $RG_NAME
 
-# Comprueba los registros del agente
+# Revisar los registros del agente
 azd monitor --logs
 ```
 
 **Causas comunes:**
-- Firma de la función de la herramienta incompatible
-- Permisos requeridos faltantes
-- Punto de enlace de la API no accesible
+- Desajuste en la firma de la función de la herramienta
+- Permisos requeridos ausentes
+- Punto de acceso API inaccesible
 </details>
 
 <details>
-<summary><strong>❌ Latencia alta en las respuestas del agente</strong></summary>
+<summary><strong>❌ Latencia alta en respuestas del agente</strong></summary>
 
 ```bash
 # Revisar Application Insights para detectar cuellos de botella
@@ -404,16 +404,16 @@ azd deploy
 ```
 
 **Consejos de optimización:**
-- Usar respuestas por streaming
+- Usar respuestas en streaming
 - Implementar caché de respuestas
-- Reducir el tamaño de la ventana de contexto
+- Reducir tamaño de ventana de contexto
 </details>
 
 <details>
-<summary><strong>❌ El agente devuelve información incorrecta o alucinaciones</strong></summary>
+<summary><strong>❌ El agente devuelve información incorrecta o alucinada</strong></summary>
 
 ```python
-# Mejorar con mejores mensajes del sistema
+# Mejorar con mejores indicaciones del sistema
 instructions = """
 You are a helpful assistant. IMPORTANT:
 - Only answer based on provided context
@@ -422,17 +422,17 @@ You are a helpful assistant. IMPORTANT:
 - Never make up information
 """
 
-# Agregar recuperación para el anclaje
+# Agregar recuperación para fundamentación
 agent = project_client.agents.create_agent(
     model="gpt-4.1",
     instructions=instructions,
-    tools=[FileSearchTool()]  # Fundamentar las respuestas en documentos
+    tools=[FileSearchTool()]  # Fundamentar respuestas en documentos
 )
 ```
 </details>
 
 <details>
-<summary><strong>❌ Errores por exceder el límite de tokens</strong></summary>
+<summary><strong>❌ Errores por límite de tokens excedido</strong></summary>
 
 ```python
 # Implementar la gestión de la ventana de contexto
@@ -468,30 +468,30 @@ azd init --template get-started-with-ai-agents
 
 # Paso 2: Iniciar sesión en Azure
 azd auth login
-# Si trabaja con varios inquilinos, agregue --tenant-id <tenant-id>
+# Si trabaja en varios inquilinos, agregue --tenant-id <tenant-id>
 
 # Paso 3: Desplegar
 azd up
 
 # Paso 4: Probar el agente
 # Salida esperada después del despliegue:
-#   ¡Despliegue completado!
-#   Punto de enlace: https://<app-name>.<region>.azurecontainerapps.io
-# Abra la URL que aparece en la salida y pruebe a hacer una pregunta
+#   ¡Despliegue completo!
+#   Punto final: https://<app-name>.<region>.azurecontainerapps.io
+# Abra la URL que se muestra en la salida y pruebe hacer una pregunta
 
-# Paso 5: Ver el monitoreo
+# Paso 5: Ver monitoreo
 azd monitor --overview
 
-# Paso 6: Eliminar recursos
+# Paso 6: Limpiar
 azd down --force --purge
 ```
 
 **Criterios de éxito:**
-- [ ] El agente responde a preguntas
-- [ ] Puede acceder al panel de monitorización mediante `azd monitor`
-- [ ] Los recursos se limpian correctamente
+- [ ] El agente responde preguntas
+- [ ] Puede acceder al panel de monitoreo vía `azd monitor`
+- [ ] Recursos limpiados exitosamente
 
-### Ejercicio 2: Añadir una herramienta personalizada (30 minutos)
+### Ejercicio 2: Agregar una herramienta personalizada (30 minutos)
 
 **Objetivo:** Extender un agente con una herramienta personalizada
 
@@ -500,11 +500,11 @@ azd down --force --purge
    azd init --template get-started-with-ai-agents
    azd up
    ```
-2. Crea una nueva función de herramienta en el código de tu agente:
+2. Crea una nueva función de herramienta en el código del agente:
    ```python
    def get_weather(location: str) -> str:
        """Get current weather for a location."""
-       # Llamada a la API del servicio meteorológico
+       # Llamada API al servicio meteorológico
        return f"Weather in {location}: Sunny, 72°F"
    ```
 3. Registra la herramienta con el agente:
@@ -532,14 +532,14 @@ azd down --force --purge
 4. Vuelve a desplegar y prueba:
    ```bash
    azd deploy
-   # Pregunta: "¿Qué tiempo hace en Seattle?"
-   # Esperado: El agente llama a get_weather("Seattle") y devuelve la información meteorológica.
+   # Preguntar: "¿Cuál es el clima en Seattle?"
+   # Esperado: El agente llama a get_weather("Seattle") y devuelve la información del clima
    ```
 
 **Criterios de éxito:**
-- [ ] El agente reconoce consultas relacionadas con el tiempo
+- [ ] El agente reconoce consultas relacionadas con el clima
 - [ ] La herramienta se llama correctamente
-- [ ] La respuesta incluye información meteorológica
+- [ ] La respuesta incluye información sobre el clima
 
 ### Ejercicio 3: Construir un agente RAG (45 minutos)
 
@@ -550,34 +550,34 @@ azd down --force --purge
 azd init --template azure-search-openai-demo
 azd up
 
-# Paso 2: Sube tus documentos
+# Paso 2: Subir tus documentos
 # Coloca archivos PDF/TXT en el directorio data/, luego ejecuta:
 python scripts/prepdocs.py
 
-# Paso 3: Prueba con preguntas específicas del dominio
+# Paso 3: Probar con preguntas específicas del dominio
 # Abre la URL de la aplicación web desde la salida de azd up
 # Haz preguntas sobre tus documentos subidos
-# Las respuestas deben incluir referencias de citación como [doc.pdf]
+# Las respuestas deben incluir referencias de citas como [doc.pdf]
 ```
 
 **Criterios de éxito:**
-- [ ] El agente responde a partir de los documentos subidos
+- [ ] El agente responde desde documentos subidos
 - [ ] Las respuestas incluyen citas
-- [ ] No hay alucinaciones en preguntas fuera del alcance
+- [ ] No hay alucinaciones en preguntas fuera de alcance
 
 ---
 
-## 📚 Próximos pasos
+## 📚 Siguientes pasos
 
 Ahora que entiendes los agentes de IA, explora estos temas avanzados:
 
-| Topic | Description | Link |
-|-------|-------------|------|
-| **Sistemas multi-agente** | Construye sistemas con múltiples agentes que colaboran | [Retail Multi-Agent Example](../../examples/retail-scenario.md) |
-| **Patrones de coordinación** | Aprende patrones de orquestación y comunicación | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) |
-| **Despliegue en producción** | Despliegue de agentes listo para empresa | [Production AI Practices](../chapter-08-production/production-ai-practices.md) |
-| **Evaluación de agentes** | Probar y evaluar el rendimiento del agente | [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) |
-| **Laboratorio del taller de IA** | Práctica: Prepara tu solución de IA para AZD | [AI Workshop Lab](ai-workshop-lab.md) |
+| Tema | Descripción | Enlace |
+|------|-------------|--------|
+| **Sistemas Multi-Agente** | Construir sistemas con múltiples agentes colaborativos | [Ejemplo Multi-Agente en Retail](../../examples/retail-scenario.md) |
+| **Patrones de Coordinación** | Aprender patrones de orquestación y comunicación | [Patrones de Coordinación](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **Despliegue en Producción** | Despliegue empresarial de agentes | [Prácticas de IA para producción](../chapter-08-production/production-ai-practices.md) |
+| **Evaluación de Agentes** | Probar y evaluar rendimiento de agentes | [Solución de problemas AI](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **Laboratorio de Taller AI** | Prácticas: Prepara tu solución IA para AZD | [Laboratorio de Taller AI](ai-workshop-lab.md) |
 
 ---
 
@@ -585,21 +585,21 @@ Ahora que entiendes los agentes de IA, explora estos temas avanzados:
 
 ### Documentación oficial
 - [Microsoft Foundry Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
-- [Microsoft Foundry Agent Service Quickstart](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
-- [Semantic Kernel Agent Framework](https://learn.microsoft.com/semantic-kernel/)
+- [Inicio rápido Microsoft Foundry Agent Service](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
+- [Framework Semantic Kernel Agent](https://learn.microsoft.com/semantic-kernel/)
 
 ### Plantillas AZD para agentes
-- [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents)
+- [Comienza con agentes de IA](https://github.com/Azure-Samples/get-started-with-ai-agents)
 - [Agent OpenAI Python Prompty](https://github.com/Azure-Samples/agent-openai-python-prompty)
 - [Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-### Recursos de la comunidad
-- [Awesome AZD - Agent Templates](https://azure.github.io/awesome-azd/?tags=ai-agents)
+### Recursos comunitarios
+- [Awesome AZD - Plantillas de agentes](https://azure.github.io/awesome-azd/?tags=ai-agents)
 - [Azure AI Discord](https://discord.gg/microsoft-azure)
 - [Microsoft Foundry Discord](https://discord.gg/nTYy5BXMWG)
 
-### Habilidades de agente para tu editor
-- [**Microsoft Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Instala habilidades reutilizables de agentes de IA para el desarrollo en Azure en GitHub Copilot, Cursor o cualquier agente compatible. Incluye habilidades para [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [despliegue](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy) y [diagnósticos](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
+### Habilidades de agentes para tu editor
+- [**Habilidades de agente Microsoft Azure**](https://skills.sh/microsoft/github-copilot-for-azure) - Instala habilidades reutilizables de agentes IA para desarrollo en Azure con GitHub Copilot, Cursor o cualquier agente compatible. Incluye habilidades para [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [despliegue](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), y [diagnósticos](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
@@ -607,8 +607,8 @@ Ahora que entiendes los agentes de IA, explora estos temas avanzados:
 ---
 
 **Navegación**
-- **Lección anterior**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **Siguiente lección**: [AI Model Deployment](ai-model-deployment.md)
+- **Lección Anterior**: [Integración Microsoft Foundry](microsoft-foundry-integration.md)
+- **Lección Siguiente**: [Despliegue de modelo de IA](ai-model-deployment.md)
 
 ---
 

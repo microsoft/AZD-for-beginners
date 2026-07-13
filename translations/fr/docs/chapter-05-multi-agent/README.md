@@ -4,18 +4,18 @@
 
 ---
 
-## Vue d'ensemble
+## Aperçu
 
-Ce chapitre couvre les modèles d'architecture multi-agents avancés, l'orchestration des agents et les déploiements IA prêts pour la production dans des scénarios complexes.
+Ce chapitre couvre les modèles avancés d'architecture multi-agent, l'orchestration des agents, et les déploiements d'IA prêts pour la production dans des scénarios complexes.
 
-> Validé avec `azd 1.25.6` en juin 2026.
+> Validé avec `azd 1.27.1` en juillet 2026.
 
 ## Objectifs d'apprentissage
 
-En terminant ce chapitre, vous allez :
-- Comprendre les modèles d'architecture multi-agents
-- Déployer des systèmes d’agents IA coordonnés
-- Implémenter la communication entre agents
+En complétant ce chapitre, vous allez :
+- Comprendre les modèles d'architecture multi-agent
+- Déployer des systèmes d'agents IA coordonnés
+- Implémenter la communication agent-à-agent
 - Construire des solutions multi-agents prêtes pour la production
 
 ---
@@ -24,11 +24,11 @@ En terminant ce chapitre, vous allez :
 
 | # | Leçon | Description | Durée |
 |---|--------|-------------|-------|
-| 1 | [Bases du Multi-Agent](multi-agent-basics.md) | Pratique : déployer une application multi-agent fonctionnelle avec `azd up` | 45 min |
-| 2 | [Modèles de Coordination](../chapter-06-pre-deployment/coordination-patterns.md) | Stratégies d'orchestration des agents (se poursuit au Chapitre 6) | 30 min |
-| 3 | [Déploiement avec Template ARM](../../examples/retail-multiagent-arm-template/README.md) | Exemple de déploiement en un clic | 30 min |
+| 1 | [Bases Multi-Agent](multi-agent-basics.md) | Pratique : déployez une application multi-agent fonctionnelle avec `azd up` | 45 min |
+| 2 | [Modèles de Coordination](../chapter-06-pre-deployment/coordination-patterns.md) | Stratégies d'orchestration des agents (suite au Chapitre 6) | 30 min |
+| 3 | [Déploiement du Template ARM](../../examples/retail-multiagent-arm-template/README.md) | Exemple de déploiement en un clic | 30 min |
 
-> **Commencez par la Leçon 1.** C’est la seule leçon entièrement pratique et déployable de ce chapitre. La Leçon 2 se trouve dans le Chapitre 6 (elle est partagée avec la planification pré-déploiement), et la [Solution Multi-Agent Retail](../../examples/retail-scenario.md) est une référence d’architecture — un modèle de conception, pas un template exécutable en une commande.
+> **Commencez par la Leçon 1.** C'est la seule leçon entièrement pratique et déployable de ce chapitre. La Leçon 2 se trouve au Chapitre 6 (partagée avec la planification pré-déploiement), et la [Solution Multi-Agent Retail](../../examples/retail-scenario.md) est une architecture de référence — une conception de modèle, pas un template à une commande.
 
 ---
 
@@ -45,7 +45,7 @@ azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **Quelle approche ?** Utilisez `azd init --template` pour démarrer à partir d’un exemple fonctionnel. Utilisez `azd ai agent init` lorsque vous avez votre propre manifeste d’agent. Consultez la [référence CLI AZD AI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pour tous les détails.
+> **Quelle approche ?** Utilisez `azd init --template` pour démarrer à partir d'un exemple fonctionnel. Utilisez `azd ai agent init` lorsque vous avez votre propre manifeste d'agent. Consultez la [référence AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pour tous les détails.
 
 ---
 
@@ -53,22 +53,22 @@ azd up
 
 ```mermaid
 graph TD
-    Orchestrator[Agent Orchestrateur<br/>Dirige les requêtes, gère le flux de travail] --> Customer[Agent Client<br/>Requêtes utilisateur, préférences]
-    Orchestrator --> Inventory[Agent Inventaire<br/>Niveaux de stock, commandes]
+    Orchestrator[Agent d'Orchestration<br/>Dirige les requêtes, gère le flux de travail] --> Customer[Agent Client<br/>Requêtes utilisateur, préférences]
+    Orchestrator --> Inventory[Agent d'Inventaire<br/>Niveaux de stock, commandes]
 ```
 
 ---
 
-## 🎯 Solution à l'honneur : Multi-Agent Retail
+## 🎯 Solution en vedette : Multi-Agent Retail
 
-La [Solution Multi-Agent Retail](../../examples/retail-scenario.md) illustre :
+La [Solution Multi-Agent Retail](../../examples/retail-scenario.md) démontre :
 
 - **Agent Client** : Gère les interactions utilisateur et les préférences
-- **Agent Inventaire** : Gère les stocks et le traitement des commandes
-- **Orchestrateur** : Coordonne les agents
-- **Mémoire Partagée** : Gestion du contexte inter-agent
+- **Agent Inventaire** : Gère le stock et le traitement des commandes
+- **Orchestrateur** : Coordonne entre les agents
+- **Mémoire Partagée** : Gestion du contexte entre agents
 
-### Services Utilisés
+### Services utilisés
 
 | Service | Objectif |
 |---------|----------|
@@ -76,7 +76,7 @@ La [Solution Multi-Agent Retail](../../examples/retail-scenario.md) illustre :
 | Azure AI Search | Catalogue produit |
 | Cosmos DB | État et mémoire des agents |
 | Container Apps | Hébergement des agents |
-| Application Insights | Supervision |
+| Application Insights | Surveillance |
 
 ---
 
@@ -85,14 +85,14 @@ La [Solution Multi-Agent Retail](../../examples/retail-scenario.md) illustre :
 | Direction | Chapitre |
 |-----------|----------|
 | **Précédent** | [Chapitre 4 : Infrastructure](../chapter-04-infrastructure/README.md) |
-| **Suivant** | [Chapitre 6 : Pré-Déploiement](../chapter-06-pre-deployment/README.md) |
+| **Suivant** | [Chapitre 6 : Pré-déploiement](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 Ressources associées
 
-- [Guide Agents IA](../chapter-02-ai-development/agents.md)
-- [Pratiques IA Production](../chapter-08-production/production-ai-practices.md)
+- [Guide des Agents IA](../chapter-02-ai-development/agents.md)
+- [Pratiques d'IA en Production](../chapter-08-production/production-ai-practices.md)
 - [Dépannage IA](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---

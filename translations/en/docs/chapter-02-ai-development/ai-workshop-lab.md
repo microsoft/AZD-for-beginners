@@ -11,7 +11,7 @@
 
 This hands-on lab guides developers through the process of taking an existing AI template and deploying it using Azure Developer CLI (AZD). You'll learn essential patterns for production AI deployments using Microsoft Foundry services.
 
-> **Validation note (2026-03-25):** This workshop was reviewed against `azd` `1.23.12`. If your local installation is older, update AZD before starting so the auth, template, and deployment workflow matches the steps below.
+> **Validation note (2026-07-13):** This workshop was reviewed against `azd` `1.27.1`. If your local installation is older, update AZD before starting so the auth, template, and deployment workflow matches the steps below.
 
 **Duration:** 2-3 hours  
 **Level:** Intermediate  
@@ -503,7 +503,7 @@ azd deploy
 **Symptoms:** 403 Forbidden errors when calling AI services
 **Solutions:**
 ```bash
-# Check role assignments
+# Verify role assignments
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
 # Add missing roles
@@ -555,7 +555,7 @@ Navigate to Azure portal and create a dashboard with:
 
 2. **Set up alerts:**
 ```bash
-# Alert for high error rate
+# Alerta por alta tasa de error
 az monitor metrics alert create \
   --name "AI-App-High-Error-Rate" \
   --resource-group YOUR_RG \
@@ -640,6 +640,7 @@ You're tasked with creating a production-ready AI-powered customer service chatb
 ### Sample Templates
 - [Microsoft Foundry Models Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
 - [OpenAI Chat App Quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart)
+
 - [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
 
 ### Community Resources

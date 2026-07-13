@@ -8,7 +8,7 @@
 
 This chapter focuses on deploying AI-powered applications using Azure Developer CLI and Microsoft Foundry services. From simple AI chat apps to intelligent agents with tools.
 
-> **Validation note (2026-06-15):** The command flow and extension guidance in this chapter were reviewed against `azd` `1.25.6` and the current preview AI agent extension release `azure.ai.agents` `0.1.40-preview`. If you are on an older AZD build, update first and then continue with the exercises.
+> **Validation note (2026-07-13):** The command flow and extension guidance in this chapter were reviewed against `azd` `1.27.1` and the current preview AI agent extension release `azure.ai.agents` `1.0.0-beta.5`. If you are on an older AZD build, update first and then continue with the exercises.
 
 ## Learning Objectives
 

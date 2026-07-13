@@ -6,17 +6,17 @@
 
 ## Aperçu
 
-Ce chapitre traite de la configuration de l’environnement, des modèles d’authentification et des meilleures pratiques de sécurité pour les déploiements Azure Developer CLI.
+Ce chapitre couvre la configuration de l'environnement, les modèles d'authentification et les meilleures pratiques de sécurité pour les déploiements Azure Developer CLI.
 
-> Validé avec `azd 1.25.6` en juin 2026.
+> Validé avec `azd 1.27.1` en juillet 2026.
 
-## Objectifs d’apprentissage
+## Objectifs d'Apprentissage
 
-En terminant ce chapitre, vous allez :
+En complétant ce chapitre, vous allez :
 - Maîtriser la hiérarchie de configuration AZD
 - Gérer plusieurs environnements (dev, staging, prod)
-- Mettre en œuvre une authentification sécurisée avec des identités gérées
-- Configurer des paramètres spécifiques à l’environnement
+- Implémenter une authentification sécurisée avec identités gérées
+- Configurer des paramètres spécifiques à l'environnement
 
 ---
 
@@ -24,8 +24,8 @@ En terminant ce chapitre, vous allez :
 
 | # | Leçon | Description | Durée |
 |---|--------|-------------|-------|
-| 1 | [Guide de Configuration](configuration.md) | Configuration et gestion de l’environnement | 30 min |
-| 2 | [Authentification & Sécurité](authsecurity.md) | Modèles d’identité gérée et RBAC | 30 min |
+| 1 | [Guide de Configuration](configuration.md) | Configuration et gestion de l'environnement | 30 min |
+| 2 | [Authentification & Sécurité](authsecurity.md) | Modèles d'identité gérée et RBAC | 30 min |
 
 ---
 
@@ -37,10 +37,10 @@ azd env new dev
 azd env new staging
 azd env new prod
 
-# Changer d'environnements
+# Changer d'environnement
 azd env select prod
 
-# Définir des variables d'environnement
+# Définir les variables d'environnement
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
@@ -52,11 +52,11 @@ azd env get-values
 
 ## 🔧 Hiérarchie de Configuration
 
-AZD applique les paramètres dans cet ordre (le dernier remplace le précédent) :
+AZD applique les paramètres dans cet ordre (les suivants écrasent les précédents) :
 
-1. **Valeurs par défaut** (intégrées dans les modèles)
+1. **Valeurs par défaut** (intégrées aux modèles)
 2. **azure.yaml** (configuration du projet)
-3. **Variables d’environnement** (`azd env set`)
+3. **Variables d'environnement** (`azd env set`)
 4. **Options en ligne de commande** (`--location eastus`)
 
 ---
@@ -64,7 +64,7 @@ AZD applique les paramètres dans cet ordre (le dernier remplace le précédent)
 ## 🔐 Meilleures Pratiques de Sécurité
 
 ```bash
-# Utiliser l'identité gérée (recommandé)
+# Utiliser une identité gérée (recommandé)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
 # Vérifier le statut d'authentification AZD
@@ -93,7 +93,7 @@ az login
 
 ## 📖 Ressources Associées
 
-- [Vérifications Pré-Déploiement](../chapter-06-pre-deployment/README.md)
+- [Vérifications Avant Déploiement](../chapter-06-pre-deployment/README.md)
 - [Dépannage](../chapter-07-troubleshooting/common-issues.md)
 
 ---

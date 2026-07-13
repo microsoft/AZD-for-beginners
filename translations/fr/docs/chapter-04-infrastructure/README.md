@@ -1,36 +1,36 @@
-# Chapitre 4 : Infrastructure en tant que Code & Déploiement
+# Chapitre 4 : Infrastructure as Code & Déploiement
 
-**📚 Cours** : [AZD Pour Débutants](../../README.md) | **⏱️ Durée** : 1-1,5 heures | **⭐ Complexité** : Intermédiaire
+**📚 Cours** : [AZD Pour Débutants](../../README.md) | **⏱️ Durée** : 1-1.5 heures | **⭐ Complexité** : Intermédiaire
 
 ---
 
 ## Vue d'ensemble
 
-Ce chapitre couvre les modèles Infrastructure en tant que Code (IaC) avec les templates Bicep, la mise en service des ressources et les stratégies de déploiement utilisant Azure Developer CLI.
+Ce chapitre couvre les modèles Infrastructure as Code (IaC) avec des templates Bicep, la provision des ressources, et les stratégies de déploiement utilisant Azure Developer CLI.
 
-> Validé avec `azd 1.25.6` en juin 2026.
+> Validé avec `azd 1.27.1` en juillet 2026.
 
 ## Objectifs d'apprentissage
 
-En terminant ce chapitre, vous allez :
+En complétant ce chapitre, vous allez :
 - Comprendre la structure et la syntaxe des templates Bicep
-- Mettre en service des ressources Azure avec `azd provision`
+- Provisionner des ressources Azure avec `azd provision`
 - Déployer des applications avec `azd deploy`
-- Mettre en œuvre des stratégies de déploiement blue-green et roulante
+- Mettre en œuvre des stratégies de déploiement blue-green et rolling
 
 ---
 
 ## 📚 Leçons
 
-| # | Leçon | Description | Temps |
+| # | Leçon | Description | Durée |
 |---|--------|-------------|------|
-| 1 | [Mise en service des ressources](provisioning.md) | Gestion des ressources Azure avec AZD | 45 min |
-| 2 | [Guide de déploiement](deployment-guide.md) | Stratégies de déploiement d'applications | 45 min |
-| 3 | [Créer votre propre template](custom-templates.md) | Construire et publier des templates azd réutilisables | 30 min |
+| 1 | [Provisionnement des Ressources](provisioning.md) | Gestion des ressources Azure avec AZD | 45 min |
+| 2 | [Guide de Déploiement](deployment-guide.md) | Stratégies de déploiement d’application | 45 min |
+| 3 | [Créer Votre Propre Template](custom-templates.md) | Construire et publier des templates azd réutilisables | 30 min |
 
 ---
 
-## 🚀 Démarrage rapide
+## 🚀 Démarrage Rapide
 
 ```bash
 # Initialiser à partir du modèle
@@ -39,7 +39,7 @@ azd init --template azure-functions-python-v2-http
 # Prévisualiser ce qui sera créé
 azd provision --preview
 
-# Approvisionner uniquement l'infrastructure
+# Fournir uniquement l'infrastructure
 azd provision
 
 # Déployer uniquement le code
@@ -51,7 +51,7 @@ azd up
 
 ---
 
-## 📁 Structure du projet AZD
+## 📁 Structure du Projet AZD
 
 ```
 my-project/
@@ -74,7 +74,7 @@ my-project/
 |---------|-------------|
 | `azd init` | Initialiser le projet |
 | `azd provision` | Créer des ressources Azure |
-| `azd deploy` | Déployer le code de l'application |
+| `azd deploy` | Déployer le code de l’application |
 | `azd up` | provision + déploiement |
 | `azd down` | Supprimer toutes les ressources |
 
@@ -91,9 +91,9 @@ my-project/
 
 ## 📖 Ressources Associées
 
-- [Contrôles Avant Déploiement](../chapter-06-pre-deployment/README.md)
-- [Exemples d'Applications Conteneurisées](../../examples/container-app/README.md)
-- [Exemple d'Application Base de Données](../../examples/database-app/README.md)
+- [Vérifications Avant Déploiement](../chapter-06-pre-deployment/README.md)
+- [Exemples Container App](../../examples/container-app/README.md)
+- [Exemple d’Application Base de Données](../../examples/database-app/README.md)
 
 ---
 

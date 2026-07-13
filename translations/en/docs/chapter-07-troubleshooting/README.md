@@ -8,7 +8,7 @@
 
 This chapter helps you diagnose and resolve common issues when working with Azure Developer CLI. From deployment failures to AI-specific problems.
 
-> Validated against `azd 1.25.6` in June 2026.
+> Validated against `azd 1.27.1` in July 2026.
 
 ## Learning Objectives
 
@@ -82,10 +82,10 @@ azd up
 ## 🔄 Reset and Recovery
 
 ```bash
-# Soft reset (keep resources, redeploy code)
+# Soft reset (retain resources, redeploy the code)
 azd deploy --force
 
-# Hard reset (delete everything, start fresh)
+# Hard reset (delete everything, start from scratch)
 azd down --force --purge
 azd up
 ```

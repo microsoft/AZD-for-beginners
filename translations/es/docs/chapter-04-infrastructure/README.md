@@ -1,36 +1,36 @@
 # Capítulo 4: Infraestructura como Código y Despliegue
 
-**📚 Curso**: [AZD For Beginners](../../README.md) | **⏱️ Duración**: 1-1.5 horas | **⭐ Complejidad**: Intermedio
+**📚 Curso**: [AZD Para Principiantes](../../README.md) | **⏱️ Duración**: 1-1.5 horas | **⭐ Complejidad**: Intermedio
 
 ---
 
-## Descripción general
+## Resumen
 
-This chapter covers Infrastructure as Code (IaC) patterns with Bicep templates, resource provisioning, and deployment strategies using Azure Developer CLI.
+Este capítulo cubre patrones de Infraestructura como Código (IaC) con plantillas Bicep, provisión de recursos y estrategias de despliegue usando Azure Developer CLI.
 
-> Validado con `azd 1.25.6` en junio de 2026.
+> Validado con `azd 1.27.1` en julio de 2026.
 
-## Objetivos de aprendizaje
+## Objetivos de Aprendizaje
 
-Al completar este capítulo, podrás:
-- Entender la estructura y la sintaxis de las plantillas Bicep
-- Provisionar recursos de Azure con `azd provision`
-- Desplegar aplicaciones con `azd deploy`
-- Implementar estrategias de despliegue blue-green y rolling
+Al completar este capítulo, usted:
+- Entenderá la estructura y sintaxis de plantillas Bicep
+- Proveerá recursos de Azure con `azd provision`
+- Desplegará aplicaciones con `azd deploy`
+- Implementará estrategias de despliegue blue-green y rolling
 
 ---
 
 ## 📚 Lecciones
 
-| # | Lesson | Description | Time |
+| # | Lección | Descripción | Tiempo |
 |---|--------|-------------|------|
-| 1 | [Provisioning Resources](provisioning.md) | Azure resource management with AZD | 45 min |
-| 2 | [Deployment Guide](deployment-guide.md) | Application deployment strategies | 45 min |
-| 3 | [Authoring Your Own Template](custom-templates.md) | Build and publish reusable azd templates | 30 min |
+| 1 | [Provisión de Recursos](provisioning.md) | Gestión de recursos Azure con AZD | 45 min |
+| 2 | [Guía de Despliegue](deployment-guide.md) | Estrategias de despliegue de aplicaciones | 45 min |
+| 3 | [Escribiendo Tu Propia Plantilla](custom-templates.md) | Crear y publicar plantillas azd reutilizables | 30 min |
 
 ---
 
-## 🚀 Inicio rápido
+## 🚀 Inicio Rápido
 
 ```bash
 # Inicializar desde plantilla
@@ -39,10 +39,10 @@ azd init --template azure-functions-python-v2-http
 # Previsualizar lo que se creará
 azd provision --preview
 
-# Aprovisionar solo la infraestructura
+# Aprovisionar solo infraestructura
 azd provision
 
-# Desplegar solo el código
+# Desplegar solo código
 azd deploy
 
 # O ambos juntos
@@ -51,7 +51,7 @@ azd up
 
 ---
 
-## 📁 Estructura del proyecto AZD
+## 📁 Estructura del Proyecto AZD
 
 ```
 my-project/
@@ -68,32 +68,32 @@ my-project/
 
 ---
 
-## 🔧 Comandos esenciales
+## 🔧 Comandos Esenciales
 
-| Command | Description |
+| Comando | Descripción |
 |---------|-------------|
-| `azd init` | Inicializar proyecto |
-| `azd provision` | Crear recursos de Azure |
-| `azd deploy` | Desplegar el código de la aplicación |
-| `azd up` | provisionar + desplegar |
-| `azd down` | Eliminar todos los recursos |
+| `azd init` | Inicializa el proyecto |
+| `azd provision` | Crea recursos en Azure |
+| `azd deploy` | Despliega código de la aplicación |
+| `azd up` | provisiona + despliega |
+| `azd down` | Elimina todos los recursos |
 
 ---
 
 ## 🔗 Navegación
 
-| Direction | Chapter |
+| Dirección | Capítulo |
 |-----------|---------|
-| **Previous** | [Chapter 3: Configuration](../chapter-03-configuration/README.md) |
-| **Next** | [Chapter 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md) |
+| **Anterior** | [Capítulo 3: Configuración](../chapter-03-configuration/README.md) |
+| **Siguiente** | [Capítulo 5: Soluciones Multi-Agente](../chapter-05-multi-agent/README.md) |
 
 ---
 
-## 📖 Recursos relacionados
+## 📖 Recursos Relacionados
 
-- [Pre-Deployment Checks](../chapter-06-pre-deployment/README.md)
-- [Container App Examples](../../examples/container-app/README.md)
-- [Database App Example](../../examples/database-app/README.md)
+- [Cheques Pre-Despliegue](../chapter-06-pre-deployment/README.md)
+- [Ejemplos de Aplicaciones en Contenedores](../../examples/container-app/README.md)
+- [Ejemplo de Aplicación de Base de Datos](../../examples/database-app/README.md)
 
 ---
 
