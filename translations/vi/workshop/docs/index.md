@@ -1,77 +1,77 @@
-# Workshop AZD cho Nhà phát triển AI
+# AZD cho Nhà phát triển AI Workshop
 
-> Đã xác minh với `azd 1.25.6` vào tháng 6 năm 2026.
+> Được xác minh với `azd 1.27.1` vào tháng 7 năm 2026.
 
 > [!IMPORTANT]  
-> **Workshop này được trang bị một hướng dẫn thực hành mà bạn có thể xem trước trong trình duyệt cục bộ của mình. Để bắt đầu, mở repo trong GitHub Codespaces, một dev container, hoặc một bản sao cục bộ với MkDocs đã được cài đặt—sau đó chờ đến khi bạn thấy một terminal VS Code hoạt động và gõ:**  
+> **Workshop này được trang bị hướng dẫn dành cho workshop mà bạn có thể xem trước trên trình duyệt cục bộ của mình. Để bắt đầu, hãy mở repo trong GitHub Codespaces, một dev container hoặc bản sao cục bộ với MkDocs đã được cài đặt — sau đó đợi đến khi bạn thấy một terminal VS Code hoạt động và nhập:**  
 > `mkdocs serve > /dev/null 2>&1 &`  
 > **Bạn sẽ thấy một hộp thoại bật lên để mở trang xem trước trong trình duyệt.**
 
-Chào mừng bạn đến với buổi workshop thực hành để học Azure Developer CLI (AZD) với trọng tâm là triển khai ứng dụng AI. Buổi workshop này giúp bạn có hiểu biết ứng dụng về các mẫu AZD qua 3 bước:
+Chào mừng đến với workshop thực hành để học Azure Developer CLI (AZD) với trọng tâm là triển khai ứng dụng AI. Workshop này giúp bạn có hiểu biết áp dụng về các mẫu AZD trong 3 bước:
 
 1. **Khám phá** - tìm mẫu phù hợp với bạn.
-1. **Triển khai** - triển khai và xác thực rằng nó hoạt động
-1. **Tùy chỉnh** - sửa đổi và lặp để biến nó thành của bạn!
+1. **Triển khai** - triển khai và xác nhận nó hoạt động
+1. **Tùy chỉnh** - chỉnh sửa và lặp lại để làm cho nó thuộc về bạn!
 
-Trong suốt buổi workshop này, bạn cũng sẽ được giới thiệu về các công cụ và quy trình làm việc cốt lõi cho nhà phát triển, giúp bạn tinh giản hành trình phát triển đầu-cuối của mình.
+Trong suốt quá trình workshop, bạn cũng sẽ được giới thiệu các công cụ và quy trình công việc chính của nhà phát triển, giúp bạn đơn giản hóa hành trình phát triển toàn diện.
 
 | | | 
 |:---|:---|
-| **📚 Course Home**| [AZD Dành cho Người Mới](../README.md)|
-| **📖 Documentation** | [Bắt đầu với các mẫu AI](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️ Mẫu AI** | [Mẫu Microsoft Foundry](https://ai.azure.com/templates) |
-|**🚀 Bước tiếp theo** | [Tham gia Thử thách](#workshop-challenge) |
+| **📚 Trang chủ khóa học**| [AZD Cho Người mới bắt đầu](../README.md)|
+| **📖 Tài liệu** | [Bắt đầu với các mẫu AI](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️Mẫu AI** | [Mẫu Microsoft Foundry](https://ai.azure.com/templates) |
+|**🚀 Bước tiếp theo** | [Tham gia thử thách](#workshop-challenge) |
 | | |
 
-## Tổng quan hội thảo
+## Tổng quan Workshop
 
 **Thời lượng:** 3-4 giờ  
-**Trình độ:** Từ cơ bản đến trung cấp  
-**Yêu cầu tiên quyết:** Quen thuộc với Azure, các khái niệm AI, VS Code & công cụ dòng lệnh.
+**Trình độ:** Người mới bắt đầu đến Trung cấp  
+**Yêu cầu trước:** Hiểu biết về Azure, khái niệm AI, VS Code & công cụ dòng lệnh.
 
-Đây là một buổi workshop thực hành nơi bạn học thông qua thực hành. Sau khi hoàn thành các bài tập, chúng tôi khuyến nghị bạn xem lại chương trình AZD Dành cho Người Mới để tiếp tục hành trình học tập của mình về các phương pháp hay nhất về Bảo mật và Năng suất.
+Đây là một workshop thực hành nơi bạn học bằng cách làm. Khi đã hoàn thành các bài tập, chúng tôi khuyến nghị bạn xem lại chương trình AZD Cho Người mới bắt đầu để tiếp tục hành trình học tập về các thực hành tốt nhất về Bảo mật và Năng suất.
 
-| Thời gian| Mô-đun  | Mục tiêu |
+| Thời gian| Module  | Mục tiêu |
 |:---|:---|:---|
-| 15 phút | Giới thiệu | Thiết lập bối cảnh, hiểu các mục tiêu |
-| 30 phút | Chọn Mẫu AI | Khám phá các tùy chọn và chọn mẫu khởi đầu | 
+| 15 phút | Giới thiệu | Thiết lập bối cảnh, hiểu mục tiêu |
+| 30 phút | Chọn Mẫu AI | Khám phá lựa chọn và chọn khởi đầu | 
 | 30 phút | Xác nhận Mẫu AI | Triển khai giải pháp mặc định lên Azure |
 | 30 phút | Phân tích Mẫu AI | Khám phá cấu trúc và cấu hình |
 | 30 phút | Cấu hình Mẫu AI | Kích hoạt và thử các tính năng có sẵn |
 | 30 phút | Tùy chỉnh Mẫu AI | Điều chỉnh mẫu theo nhu cầu của bạn |
-| 30 phút | Dỡ bỏ Cơ sở hạ tầng | Dọn dẹp và giải phóng tài nguyên |
-| 15 phút | Kết thúc & Bước tiếp theo | Tài nguyên học tập, thử thách hội thảo |
+| 30 phút | Dọn dẹp Cơ sở hạ tầng | Làm sạch và giải phóng tài nguyên |
+| 15 phút | Kết thúc & Bước tiếp theo | Tài nguyên học tập, Thử thách Workshop |
 | | |
 
-## Những gì bạn sẽ học
+## Những điều bạn sẽ học
 
-Hãy coi Mẫu AZD như một sandbox học tập để khám phá các khả năng và công cụ khác nhau cho phát triển đầu-cuối trên Microsoft Foundry. Kết thúc buổi workshop, bạn sẽ có cảm nhận trực quan về các công cụ và khái niệm khác nhau trong ngữ cảnh này.
+Hãy coi Mẫu AZD như một hộp cát học tập để khám phá các năng lực và công cụ khác nhau cho phát triển toàn bộ trên Microsoft Foundry. Đến cuối workshop này, bạn sẽ có cảm nhận trực quan về các công cụ và khái niệm trong bối cảnh này.
 
 | Khái niệm  | Mục tiêu |
 |:---|:---|
-| **Azure Developer CLI** | Hiểu các lệnh và luồng công việc của công cụ|
-| **AZD Templates**| Hiểu cấu trúc dự án và cấu hình|
-| **Azure AI Agent**| Cấp phát & triển khai dự án Microsoft Foundry  |
-| **Azure AI Search**| Kích hoạt kỹ thuật ngữ cảnh với các agent |
-| **Observability**| Khám phá theo dõi, giám sát và đánh giá |
-| **Red Teaming**| Khám phá kiểm thử đối kháng và các biện pháp giảm thiểu |
+| **Azure Developer CLI** | Hiểu các lệnh công cụ và quy trình làm việc|
+| **Mẫu AZD**| Hiểu cấu trúc dự án và cấu hình|
+| **Tác nhân Azure AI**| Cung cấp & triển khai dự án Microsoft Foundry  |
+| **Tìm kiếm Azure AI**| Kích hoạt kỹ thuật ngữ cảnh với tác nhân |
+| **Khả năng quan sát**| Khám phá theo dõi, giám sát và đánh giá |
+| **Đội Đỏ**| Khám phá thử nghiệm đối kháng và biện pháp giảm thiểu |
 | | |
 
-## Các mô-đun của hội thảo
+## Các Module Workshop
 
-Sẵn sàng bắt đầu? Điều hướng qua các mô-đun của hội thảo:
+Sẵn sàng bắt đầu? Điều hướng qua các module workshop:
 
-- [Mô-đun 1: Chọn Mẫu AI](instructions/1-Select-AI-Template.md)
-- [Mô-đun 2: Xác nhận Mẫu AI](instructions/2-Validate-AI-Template.md) 
-- [Mô-đun 3: Phân tích Mẫu AI](instructions/3-Deconstruct-AI-Template.md)
-- [Mô-đun 4: Cấu hình Mẫu AI](instructions/4-Configure-AI-Template.md)
-- [Mô-đun 5: Tùy chỉnh Mẫu AI](instructions/5-Customize-AI-Template.md)
-- [Mô-đun 6: Dỡ bỏ Cơ sở hạ tầng](instructions/6-Teardown-Infrastructure.md)
-- [Mô-đun 7: Kết thúc & Bước tiếp theo](instructions/7-Wrap-up.md)
+- [Module 1: Chọn Mẫu AI](instructions/1-Select-AI-Template.md)
+- [Module 2: Xác nhận Mẫu AI](instructions/2-Validate-AI-Template.md) 
+- [Module 3: Phân tích Mẫu AI](instructions/3-Deconstruct-AI-Template.md)
+- [Module 4: Cấu hình Mẫu AI](instructions/4-Configure-AI-Template.md)
+- [Module 5: Tùy chỉnh Mẫu AI](instructions/5-Customize-AI-Template.md)
+- [Module 6: Dọn dẹp Cơ sở hạ tầng](instructions/6-Teardown-Infrastructure.md)
+- [Module 7: Kết thúc & Bước tiếp theo](instructions/7-Wrap-up.md)
 
-## Bạn có phản hồi?
+## Có phản hồi?
 
-Đăng một issue trên repo này (gắn thẻ `Workshop`) hoặc tham gia cùng chúng tôi trên [Discord](https://aka.ms/foundry/discord) và đăng lên kênh `#get-help` của chúng tôi
+Đăng một issue trên repo này (gắn thẻ `Workshop`) hoặc tham gia chúng tôi trên [Discord](https://aka.ms/foundry/discord) và đăng vào kênh `#get-help`
 
 ---
 

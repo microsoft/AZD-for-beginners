@@ -1,61 +1,61 @@
 # Chương 2: Phát triển Ưu tiên AI
 
-**📚 Khóa học**: [AZD For Beginners](../../README.md) | **⏱️ Thời lượng**: 1-2 hours | **⭐ Độ phức tạp**: Trung cấp
+**📚 Khóa học**: [AZD For Beginners](../../README.md) | **⏱️ Thời lượng**: 1-2 giờ | **⭐ Độ phức tạp**: Trung cấp
 
 ---
 
 ## Tổng quan
 
-Chương này tập trung vào việc triển khai các ứng dụng hỗ trợ AI sử dụng Azure Developer CLI và dịch vụ Microsoft Foundry. Từ các ứng dụng trò chuyện AI đơn giản đến các tác nhân thông minh có công cụ.
+Chương này tập trung vào việc triển khai các ứng dụng được hỗ trợ bởi AI sử dụng Azure Developer CLI và dịch vụ Microsoft Foundry. Từ các ứng dụng chat AI đơn giản đến các đại lý thông minh với công cụ.
 
-> **Ghi chú xác thực (2026-06-15):** The command flow and extension guidance in this chapter were reviewed against `azd` `1.25.6` and the current preview AI agent extension release `azure.ai.agents` `0.1.40-preview`. Nếu bạn đang dùng bản AZD cũ hơn, hãy cập nhật trước rồi tiếp tục với các bài tập.
+> **Lưu ý xác nhận (2026-07-13):** Các hướng dẫn về luồng lệnh và tiện ích mở rộng trong chương này đã được kiểm tra đối chiếu với `azd` `1.27.1` và bản phát hành bản xem trước tiện ích AI agent hiện tại `azure.ai.agents` `1.0.0-beta.5`. Nếu bạn đang dùng bản AZD cũ hơn, hãy cập nhật trước rồi tiếp tục với các bài tập.
 
 ## Mục tiêu học tập
 
-By completing this chapter, you will:
-- Triển khai ứng dụng AI sử dụng mẫu AZD có sẵn
-- Hiểu cách tích hợp Microsoft Foundry với AZD
-- Cấu hình và tùy chỉnh các tác nhân AI với công cụ
-- Triển khai ứng dụng RAG (Tăng cường tạo sinh dựa trên truy xuất)
+Khi hoàn thành chương này, bạn sẽ:
+- Triển khai ứng dụng AI sử dụng mẫu AZD đã xây dựng sẵn
+- Hiểu tích hợp Microsoft Foundry với AZD
+- Cấu hình và tùy chỉnh các AI agent với công cụ
+- Triển khai ứng dụng RAG (Retrieval-Augmented Generation)
 
 ---
 
-## 📚 Bài học
+## 📚 Các bài học
 
-| # | Bài | Mô tả | Thời gian |
+| # | Bài học | Mô tả | Thời gian |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | Kết nối AZD với dịch vụ Foundry | 30 phút |
-| 2 | [AI Agents Guide](agents.md) | Triển khai các tác nhân thông minh với công cụ | 45 phút |
-| 3 | [AI Model Deployment](ai-model-deployment.md) | Triển khai và cấu hình mô hình AI | 30 phút |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Thực hành: Chuẩn bị giải pháp AI của bạn sẵn sàng cho AZD | 60 phút |
+| 1 | [Tích hợp Microsoft Foundry](microsoft-foundry-integration.md) | Kết nối AZD với dịch vụ Foundry | 30 phút |
+| 2 | [Hướng dẫn AI Agents](agents.md) | Triển khai đại lý thông minh với công cụ | 45 phút |
+| 3 | [Triển khai mô hình AI](ai-model-deployment.md) | Triển khai và cấu hình mô hình AI | 30 phút |
+| 4 | [Phòng thí nghiệm AI Workshop](ai-workshop-lab.md) | Thực hành: Chuẩn bị giải pháp AI sẵn sàng với AZD | 60 phút |
 
 ---
 
 ## 🚀 Bắt đầu nhanh
 
 ```bash
-# Tùy chọn 1: Ứng dụng chat RAG
+# Lựa chọn 1: Ứng dụng Chat RAG
 azd init --template azure-search-openai-demo
 azd up
 
-# Tùy chọn 2: Tác nhân AI
+# Lựa chọn 2: Đại lý AI
 azd init --template get-started-with-ai-agents
 azd up
 
-# Tùy chọn 3: Ứng dụng chat nhanh
+# Lựa chọn 3: Ứng dụng Chat Nhanh
 azd init --template openai-chat-app-quickstart
 azd up
 ```
 
 ---
 
-## 🤖 Mẫu AI Nổi bật
+## 🤖 Các mẫu AI nổi bật
 
 | Mẫu | Mô tả | Dịch vụ |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Trò chuyện RAG với trích dẫn | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Tác nhân AI với công cụ | AI Agent Service |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Trò chuyện AI cơ bản | OpenAI + Container Apps |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Chat RAG với trích dẫn | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Đại lý AI với công cụ | Dịch vụ AI Agent |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chat AI cơ bản | OpenAI + Container Apps |
 
 ---
 
@@ -63,11 +63,11 @@ azd up
 
 | Môi trường | Chi phí ước tính hàng tháng |
 |-------------|----------------------|
-| Development | $80-150 |
-| Staging | $150-300 |
-| Production | $300-3,500+ |
+| Phát triển | $80-150 |
+| Kiểm thử | $150-300 |
+| Sản xuất | $300-3,500+ |
 
-**Mẹo:** Chạy `azd down` sau khi kiểm thử để tránh bị tính phí.
+**Mẹo:** Chạy `azd down` sau khi thử để tránh phát sinh chi phí.
 
 ---
 
@@ -77,14 +77,14 @@ azd up
 |-----------|---------|
 | **Trước** | [Chương 1: Nền tảng](../chapter-01-foundation/README.md) |
 | **Tiếp theo** | [Chương 3: Cấu hình](../chapter-03-configuration/README.md) |
-| **Chuyển tới** | [Chương 8: Mẫu sản xuất](../chapter-08-production/README.md) |
+| **Chuyển tới** | [Chương 8: Mô hình sản xuất](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Tài nguyên liên quan
 
 - [Khắc phục sự cố AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Thực hành AI cho sản xuất](../chapter-08-production/production-ai-practices.md)
+- [Thực hành AI sản xuất](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---

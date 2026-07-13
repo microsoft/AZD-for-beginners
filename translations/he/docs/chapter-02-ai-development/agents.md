@@ -1,231 +1,231 @@
 # סוכני AI עם Azure Developer CLI
 
-**ניווט פרקים:**
-- **📚 דף הקורס הראשי**: [AZD למתחילים](../../README.md)
-- **📖 פרק נוכחי**: פרק 2 - פיתוח מונחה AI
-- **⬅️ קודם**: [שילוב Microsoft Foundry](microsoft-foundry-integration.md)
+**ניווט בפרקים:**
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+- **📖 פרק נוכחי**: פרק 2 - פיתוח מבוסס AI תחילה
+- **⬅️ הקודם**: [אינטגרציה עם Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ הבא**: [פריסת מודל AI](ai-model-deployment.md)
-- **🚀 מתקדם**: [פתרונות מולטי-סוכן](../../examples/retail-scenario.md)
+- **🚀 מתקדם**: [פתרונות מרובי סוכנים](../../examples/retail-scenario.md)
 
 ---
 
 ## מבוא
 
-סוכני AI הם תוכניות אוטונומיות שיכולות לתפוס את סביבתן, לקבל החלטות ולנקוט בפעולות להשגת מטרות ספציפיות. בשונה מצ'אטבוטים פשוטים שמגיבים להודעות, הסוכנים יכולים:
+סוכני AI הם תוכניות אוטונומיות שיכולות לתפוס את סביבתן, לקבל החלטות, ולנקוט בפעולות להשגת מטרות מסוימות. בניגוד לבוטים פשוטים שמגיבים להנחיות, סוכנים יכולים:
 
-- **להשתמש בכלים** - לקרוא ל-APIs, לחפש בבסיסי נתונים, להריץ קוד
-- **לתכנן ולהיגיון** - לפרק משימות מורכבות לשלבים
-- **ללמוד מהקשר** - לשמור זיכרון ולהתאים התנהגות
-- **לשתף פעולה** - לעבוד עם סוכנים אחרים (מערכות מולטי-סוכן)
+- **להשתמש בכלים** - לקרוא ל-APIs, לחפש במסדי נתונים, להריץ קוד
+- **לתכנן ולנמק** - לפרק משימות מורכבות לשלבים
+- **ללמוד מההקשר** - לשמור זיכרון ולהסתגל להתנהגות
+- **לשתף פעולה** - לעבוד עם סוכנים אחרים (מערכות מרובי סוכנים)
 
 מדריך זה מראה כיצד לפרוס סוכני AI ל-Azure באמצעות Azure Developer CLI (azd).
 
-> **הערת אימות (25-03-2026):** מדריך זה נבדק מול `azd` `1.23.12` ו-`azure.ai.agents` `0.1.18-preview`. חווית `azd ai` עדיין בבדיקת תצוגה מוקדמת, לכן יש לבדוק עזרה בהרחבה אם הדגלים שהותקנו שונים.
+> **הערת אימות (2026-07-13):** מדריך זה נבדק מול `azd` `1.27.1` ו-`azure.ai.agents` `1.0.0-beta.5`. חוויית `azd ai` עדיין נמצאת בשלב תצוגה מוקדמת, לכן יש לבדוק עזרה של תוסף אם הדגלים שהותקנו שונים.
 
-## מטרות הלמידה
+## מטרות למידה
 
-בסיום מדריך זה, תוכל:
-- להבין מה הם סוכני AI וכיצד הם שונים מצ'אטבוטים
-- לפרוס תבניות סוכני AI מוכנות באמצעות AZD
-- להגדיר סוכני Foundry לסוכנים מותאמים
-- לממש תבניות סוכן בסיסיות (שימוש בכלי, RAG, מולטי-סוכן)
-- לנטר ולתקן סוכנים שפורסמו
+בסיום מדריך זה, תלמד:
+- להבין מה הם סוכני AI וכיצד הם שונים מבוטים
+- לפרוס תבניות סוכני AI מוכנות מראש באמצעות AZD
+- להגדיר סוכני Foundry לסוכנים מותאמים אישית
+- ליישם דפוסי סוכן בסיסיים (שימוש בכלים, RAG, מרובי סוכנים)
+- לנטר ולפתור בעיות בסוכנים שמופעלים
 
-## תוצאות הלמידה
+## תוצאות למידה
 
-בסיום, תוכל:
-- לפרוס יישומי סוכני AI ל-Azure עם פקודה אחת
-- להגדיר כלים ויכולות סוכן
-- לממש יצירת תוכן משולבת שליפה (RAG) עם סוכנים
-- לתכנן ארכיטקטורות מולטי-סוכן עבור זרימות עבודה מורכבות
-- לטפל בבעיות נפוצות בפריסת סוכנים
+עם השלמת המדריך, תוכל:
+- לפרוס יישומי סוכני AI ל-Azure בפקודה אחת
+- להגדיר כלים ויכולות לסוכן
+- ליישם יצירת תוכן מוקטנת (RAG) עם סוכנים
+- לעצב ארכיטקטורות מרובי סוכנים לתהליכים מורכבים
+- לפתור בעיות נפוצות בפריסת סוכנים
 
 ---
 
-## 🤖 מה מבדיל סוכן מצ'אטבוט?
+## 🤖 מה מפריד בין סוכן לבוט שיחה?
 
-| תכונה | צ'אטבוט | סוכן AI |
-|-------|---------|---------|
-| **התנהגות** | מגיב להודעות | נוקט פעולות אוטונומיות |
+| תכונה | בוט שיחה | סוכן AI |
+|---------|---------|----------|
+| **התנהגות** | מגיב להנחיות | נוקט פעולות אוטונומיות |
 | **כלים** | אין | יכול לקרוא ל-APIs, לחפש, להריץ קוד |
-| **זיכרון** | מבוסס מושב בלבד | זיכרון מתמשך בין מושבים |
-| **תכנון** | תגובה בודדת | חשיבה מרובת שלבים |
-| **שיתוף פעולה** | ישות יחידה | יכול לעבוד עם סוכנים נוספים |
+| **זיכרון** | מבוסס מפגש בלבד | זיכרון מתמשך בין מפגשים |
+| **תכנון** | תגובה אחת | חשיבה מרובת שלבים |
+| **שיתוף פעולה** | ישות יחידה | יכול לעבוד עם סוכנים אחרים |
 
 ### אנלוגיה פשוטה
 
-- **צ'אטבוט** = אדם עוזר שעונה על שאלות בדלפק מידע
-- **סוכן AI** = עוזר אישי שיכול לבצע שיחות, לקבוע פגישות ולבצע משימות עבורך
+- **בוט שיחה** = אדם מועיל שעונה על שאלות בדלפק מידע
+- **סוכן AI** = עוזר אישי שמסוגל לבצע שיחות, לתאם פגישות, ולהשלים משימות עבורך
 
 ---
 
-## 🚀 התחלה מהירה: פרוס את הסוכן הראשון שלך
+## 🚀 התחלה מהירה: פרוס את סוכן ה-AI הראשון שלך
 
 ### אפשרות 1: תבנית סוכני Foundry (מומלץ)
 
 ```bash
-# לאתחל את תבנית הסוכני ה-AI
+# אתחול תבנית סוכני ה-AI
 azd init --template get-started-with-ai-agents
-
-# לפרוס ל-Azure
-azd up
-```
-
-**מה נפוץ לפרוס:**
-- ✅ סוכני Foundry
-- ✅ דגמי Microsoft Foundry (gpt-4.1)
-- ✅ Azure AI Search (ל-RAG)
-- ✅ Azure Container Apps (ממשק ווב)
-- ✅ Application Insights (ניטור)
-
-**זמן:** כ-15-20 דקות  
-**עלות:** כ-100-150$ לחודש (פיתוח)
-
-### אפשרות 2: סוכן OpenAI עם Prompty
-
-```bash
-# אתחול תבנית הסוכן מבוסס Prompty
-azd init --template agent-openai-python-prompty
 
 # פריסה ל-Azure
 azd up
 ```
 
-**מה נפוץ לפרוס:**
-- ✅ Azure Functions (הרצת סוכן ללא שרת)
-- ✅ דגמי Microsoft Foundry
-- ✅ קבצי הגדרות Prompty
-- ✅ דוגמת מימוש סוכן
+**מה מיוצר לפריסה:**
+- ✅ סוכני Foundry
+- ✅ מודלים של Microsoft Foundry (gpt-4.1)
+- ✅ Azure AI Search (ל-RAG)
+- ✅ Azure Container Apps (ממשק וובי)
+- ✅ Application Insights (ניטור)
 
-**זמן:** כ-10-15 דקות  
-**עלות:** כ-50-100$ לחודש (פיתוח)
+**זמן:** כ-15-20 דקות
+**עלות:** כ-100-150 דולר לחודש (פיתוח)
 
-### אפשרות 3: סוכן צ'אט RAG
+### אפשרות 2: סוכן OpenAI עם Prompty
 
 ```bash
-# אתחל תבנית שיחה RAG
-azd init --template azure-search-openai-demo
+# אתחול התבנית של הסוכן מבוסס פרומפטי
+azd init --template agent-openai-python-prompty
 
-# פרוס ל-Azure
+# פריסה לאז'ור
 azd up
 ```
 
-**מה נפוץ לפרוס:**
-- ✅ דגמי Microsoft Foundry
-- ✅ Azure AI Search עם נתוני דוגמה
-- ✅ צינור עיבוד מסמכים
-- ✅ ממשק צ'אט עם הפניות
+**מה מיוצר לפריסה:**
+- ✅ Azure Functions (הרצת סוכן ללא שרת)
+- ✅ מודלים של Microsoft Foundry
+- ✅ קבצי תצורה של Prompty
+- ✅ יישום דוגמה של סוכן
 
-**זמן:** כ-15-25 דקות  
-**עלות:** כ-80-150$ לחודש (פיתוח)
+**זמן:** כ-10-15 דקות
+**עלות:** כ-50-100 דולר לחודש (פיתוח)
 
-### אפשרות 4: התחלת סוכן AZD AI (תצוגה מוקדמת מבוססת מניפסט או תבנית)
-
-אם יש ברשותך קובץ מניפסט של סוכן, תוכל להשתמש בפקודת `azd ai` ליצירת פרויקט שירות סוכן Foundry ישירות. גרסאות תצוגה מוקדמת אחרונות הוסיפו גם תמיכה באתחול מבוסס תבניות, כך שהמהלך המדויק של התהליך עשוי להשתנות בהתאם לגרסת ההרחבה שהותקנה.
+### אפשרות 3: סוכן RAG לשיחה
 
 ```bash
-# התקן את התוסף של סוכני הבינה המלאכותית
+# אתחול תבנית שיחה RAG
+azd init --template azure-search-openai-demo
+
+# פריסה ל-Azure
+azd up
+```
+
+**מה מיוצר לפריסה:**
+- ✅ מודלים של Microsoft Foundry
+- ✅ Azure AI Search עם נתוני דוגמה
+- ✅ צנרת עיבוד מסמכים
+- ✅ ממשק שיחה עם ציטוטים
+
+**זמן:** כ-15-25 דקות
+**עלות:** כ-80-150 דולר לחודש (פיתוח)
+
+### אפשרות 4: התחלת סוכן AI של AZD (תצוגה מוקדמת מבוססת מאניפסט או תבנית)
+
+אם יש לך קובץ מאניפסט לסוכן, תוכל להשתמש בפקודת `azd ai` ליצירת פרויקט שירות סוכן Foundry ישירות. שחרורים מוקדמים נוספים כללו תמיכה באתחול מבוסס תבנית, כך שזרימת ההנחיה המדויקת עשויה להשתנות מעט בהתאם לגרסת התוסף שהותקנה.
+
+```bash
+# התקן את התוסף של סוכני ה-AI
 azd extension install azure.ai.agents
 
-# אופציונלי: אמת את גרסת התצוגה המקדימה שהותקנה
+# אופציונלי: אמת את גרסת התצוגה המקדימה המותקנת
 azd extension show azure.ai.agents
 
-# אתחל ממניפסט של סוכן
+# אתחל מתוך מפרט סוכן
 azd ai agent init -m agent-manifest.yaml
 
 # פרוס ל-Azure
 azd up
 
-# בדוק את הסוכן שהופעל (מציג השהייה + זמן לבייט ראשון)
+# בדוק את הסוכן הפרוס (מציג השהייה + זמן לביט ראשון)
 azd ai agent invoke
 ```
 
-**מתי להשתמש ב-`azd ai agent init` מול `azd init --template`:**
+**מתי להשתמש ב-`azd ai agent init` לעומת `azd init --template`:**
 
-| גישה | מתאים ל- | איך זה עובד |
-|-------|----------|------------|
-| `azd init --template` | התחלה מדוגמת עבודה קיימת | משכפל מאגר תבנית מלא עם קוד ותשתית |
-| `azd ai agent init -m` | בנייה מניפסט סוכן משלך | מייצר מבנה פרויקט לפי הגדרת הסוכן שלך |
+| גישה | מתאים ל- | אופן הפעולה |
+|----------|----------|------|
+| `azd init --template` | התחלה מאפליקציית דוגמה עובדת | מייצר עותק של מאגר תבנית מלא עם קוד ותשתית |
+| `azd ai agent init -m` | בנייה ממאניפסט סוכן משלך | מייצר מבנה פרויקט מהגדרת הסוכן שלך |
 
-> **הערה:** השתמש ב-`azd init --template` ללימוד (אפשרויות 1-3 למעלה). השתמש ב-`azd ai agent init` לבניית סוכנים ייצור עם מניפסטים אישיים.
+> **טיפ:** השתמש ב-`azd init --template` בעת למידה (אפשרויות 1-3 למעלה). השתמש ב-`azd ai agent init` כאשר בונים סוכנים יצרניים עם מאניפסטים משלך.
 
-לאחר `azd up`, ההרחבה מתקיימת לאורך שאר מחזור חיי הסוכן: `azd ai agent invoke` לבדיקה, `azd ai agent eval generate` ו-`azd ai agent optimize` למדידה ושיפור איכות, ו-`azd ai agent delete` לניקוי. ראה [פקודות AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) לעיון מלא.
+לאחר `azd up`, אותו התוסף מלווה אותך בשאר מחזור חיי הסוכן: `azd ai agent invoke` לבדיקה, `azd ai agent eval generate` ו-`azd ai agent optimize` למדידה ושיפור איכות, ו-`azd ai agent delete` לניקוי. ראה [פקודות CLI של AZD AI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) לקבלת הפניה מלאה.
 
 ---
 
-## 🏗️ תבניות ארכיטקטורת סוכן
+## 🏗️ דפוסי ארכיטקטורת סוכן
 
-### תבנית 1: סוכן יחיד עם כלים
+### דפוס 1: סוכן יחיד עם כלים
 
-הדפוס הפשוט ביותר - סוכן אחד שיכול להשתמש בכלים מרובים.
+דפוס הסוכן הפשוט ביותר - סוכן יחיד שיכול להשתמש בכלים מרובים.
 
 ```mermaid
 graph TD
-    UI[ממשק משתמש] --> Agent[סוכן AI<br/>gpt-4.1]
+    UI[ממשק משתמש] --> Agent[סוכן בינה מלאכותית<br/>gpt-4.1]
     Agent --> Search[כלי חיפוש]
     Agent --> Database[כלי מסד נתונים]
     Agent --> API[כלי API]
 ```
 
 **מתאים ל:**
-- רובוטי תמיכה בלקוחות
+- בוטי תמיכה בלקוחות
 - עוזרי מחקר
 - סוכני ניתוח נתונים
 
 **תבנית AZD:** `azure-search-openai-demo`
 
-### תבנית 2: סוכן RAG (יצירה משולבת שליפה)
+### דפוס 2: סוכן RAG (יצירת תוכן מוגבר על ידי שליפה)
 
-סוכן שמביא מסמכים רלוונטיים לפני יצירת תגובות.
+סוכן שמוציא למסמכים רלוונטיים לפני יצירת תגובות.
 
 ```mermaid
 graph TD
     Query[שאילתת משתמש] --> RAG[סוכן RAG]
-    RAG --> Vector[חיפוש וקטור]
+    RAG --> Vector[חיפוש וקטורי]
     RAG --> LLM[LLM<br/>gpt-4.1]
-    Vector -- מסמכים --> LLM
-    LLM --> Response[תשובה עם ציטוטים]
+    Vector -- Documents --> LLM
+    LLM --> Response[תגובה עם מקורות]
 ```
 
 **מתאים ל:**
-- בסיסי ידע ארגוניים
-- מערכות שאלות ותשובות מסמכים
-- ניהול ציות ומחקר משפטי
+- מאגרי ידע ארגוניים
+- מערכות שאלות ותשובות על מסמכים
+- מחקר משפטי וציות
 
 **תבנית AZD:** `azure-search-openai-demo`
 
-### תבנית 3: מערכת מולטי-סוכן
+### דפוס 3: מערכת מרובי סוכנים
 
-מספר סוכנים מתמחים העובדים יחד על משימות מורכבות.
+מספר סוכנים מתמחים שעובדים יחד על משימות מורכבות.
 
 ```mermaid
 graph TD
     Orchestrator[סוכן מנחה] --> Research[סוכן מחקר<br/>gpt-4.1]
-    Orchestrator --> Writer[סוכן כתיבה<br/>gpt-4.1-mini]
-    Orchestrator --> Reviewer[סוכן ביקורת<br/>gpt-4.1]
+    Orchestrator --> Writer[סוכן כותב<br/>gpt-4.1-mini]
+    Orchestrator --> Reviewer[סוכן בוחן<br/>gpt-4.1]
 ```
 
 **מתאים ל:**
 - יצירת תוכן מורכב
-- זרימות עבודה מרובות שלבים
+- תהליכים מרובי שלבים
 - משימות שדורשות מומחיות שונה
 
-**למידע נוסף:** [תבניות תיאום מולטי-סוכן](../chapter-06-pre-deployment/coordination-patterns.md)
+**למידע נוסף:** [דפוסי תיאום מרובי סוכנים](../chapter-06-pre-deployment/coordination-patterns.md)
 
 ---
 
-## ⚙️ הגדרת כלים לסוכן
+## ⚙️ הגדרת כלים לסוכנים
 
-הסוכנים הופכים חזקים כשהם יכולים להשתמש בכלים. כך מגדירים כלים נפוצים:
+סוכנים נעשים רבי עוצמה כאשר הם יכולים להשתמש בכלים. כך אפשר להגדיר כלים נפוצים:
 
-### הגדרות כלים בסוכני Foundry
+### הגדרת כלים בסוכני Foundry
 
 ```python
 # agent_config.py
 from azure.ai.projects import AIProjectClient
 from azure.ai.projects.models import FunctionTool, CodeInterpreterTool
 
-# הגדרת כלי מותאמים אישית
+# הגדר כלים מותאמים אישית
 search_tool = FunctionTool(
     name="search_knowledge_base",
     description="Search the company knowledge base for relevant documents",
@@ -241,7 +241,7 @@ search_tool = FunctionTool(
     }
 )
 
-# יצירת סוכן עם כלים
+# צור סוכן עם כלים
 agent = project_client.agents.create_agent(
     model="gpt-4.1",
     name="Support Agent",
@@ -267,32 +267,32 @@ azd deploy
 
 ## 📊 ניטור סוכנים
 
-### אינטגרציה עם Application Insights
+### שילוב Application Insights
 
-כל תבניות הסוכן ב-AZD כוללות Application Insights לניטור:
+כל תבניות סוכני AZD כוללות Application Insights לניטור:
 
 ```bash
-# פתח את לוח הבקרה של המוניטורינג
+# פתח לוח בקרה לניטור
 azd monitor --overview
 
-# הצג יומנים בזמן אמת
+# הצג יומנים חיים
 azd monitor --logs
 
-# הצג מדדים בזמן אמת
+# הצג מדדים חיים
 azd monitor --live
 ```
 
 ### מדדי מפתח למעקב
 
 | מדד | תיאור | יעד |
-|------|--------|-----|
-| עיכוב תגובה | זמן ליצירת תגובה | < 5 שניות |
-| שימוש בטוקנים | טוקנים לבקשה | ניטור עלות |
-| אחוז הצלחת קריאות לכלים | % קריאות שהושלמו בהצלחה | > 95% |
+|--------|-------------|--------|
+| זמן תגובה | זמן ליצירת תגובה | < 5 שניות |
+| שימוש בטוקנים | טוקנים לכל בקשה | מעקב לעלות |
+| שיעור הצלחה בקריאות כלים | % ביצועי כלים מוצלחים | > 95% |
 | שיעור שגיאות | בקשות סוכן שנכשלו | < 1% |
-| שביעות רצון משתמש | ציוני משוב | > 4.0/5.0 |
+| שביעות רצון משתמש | ציון משוב | > 4.0/5.0 |
 
-### רישום מותאם אישית לסוכנים
+### לוגינג מותאם אישית לסוכנים
 
 ```python
 import os
@@ -320,25 +320,25 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
 
 ---
 
-## 💰 שיקולי עלות
+## 💰 התחשבות בעלויות
 
-### עלויות חודשיות משוערות לפי תבנית
+### עלויות חודשיות משוערות לפי דפוס
 
-| תבנית | סביבת פיתוח | הפקה |
-|--------|-------------|-------|
-| סוכן יחיד | 50-100$ | 200-500$ |
-| סוכן RAG | 80-150$ | 300-800$ |
-| מולטי-סוכן (2-3 סוכנים) | 150-300$ | 500-1,500$ |
-| מולטי-סוכן ארגוני | 300-500$ | 1,500-5,000$+ |
+| דפוס | סביבת פיתוח | ייצור |
+|---------|-----------------|------------|
+| סוכן יחיד | $50-100 | $200-500 |
+| סוכן RAG | $80-150 | $300-800 |
+| מרובי סוכנים (2-3 סוכנים) | $150-300 | $500-1,500 |
+| מרובי סוכנים ארגוניים | $300-500 | $1,500-5,000+ |
 
-### טיפים לאופטימיזציית עלויות
+### טיפים לאופטימיזציה של עלויות
 
-1. **השתמש ב-gpt-4.1-mini למשימות פשוטות**  
+1. **השתמש ב-gpt-4.1-mini למשימות פשוטות**
    ```bash
    azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
    ```
-  
-2. **מימוש מטמון לשאילתות חוזרות**  
+
+2. **יישם קאשינג לשאילתות חוזרות**
    ```python
    from functools import lru_cache
    
@@ -346,23 +346,23 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
    def get_cached_response(query_hash):
        return agent.run(query_hash)
    ```
-  
-3. **קבע מגבלות טוקן להרצה**  
+
+3. **קבע מגבלות טוקנים לכל ריצה**
    ```python
-   # קבע את max_completion_tokens בעת הרצת הסוכן, לא בזמן היצירה
+   # הגדר max_completion_tokens בעת הרצת הסוכן, לא במהלך יצירה
    run = project_client.agents.create_run(
        thread_id=thread.id,
        agent_id=agent.id,
-       max_completion_tokens=1000  # הגבל את אורך התגובה
+       max_completion_tokens=1000  # הגבל את אורך התשובה
    )
    ```
-  
-4. **התאפס למצב לא פעיל כשלא בשימוש**  
+
+4. **סקל לדאון לאפס כשלא בשימוש**
    ```bash
-   # אפליקציות מכולה מתכווננות אוטומטית לאפס
+   # אפליקציות מכולה מתרחבות אוטומטית לאפס
    azd env set MIN_REPLICAS "0"
    ```
-  
+
 ---
 
 ## 🔧 פתרון תקלות בסוכנים
@@ -370,7 +370,7 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
 ### בעיות נפוצות ופתרונות
 
 <details>
-<summary><strong>❌ הסוכן לא מגיב לקריאות כלים</strong></summary>
+<summary><strong>❌ הסוכן אינו מגיב לקריאות כלים</strong></summary>
 
 ```bash
 # בדוק אם הכלים רשומים כראוי
@@ -384,29 +384,29 @@ az cognitiveservices account deployment list \
 # בדוק יומני סוכן
 azd monitor --logs
 ```
-  
-**גורמים נפוצים:**  
-- חוסר התאמה בחתימת פונקציית הכלי  
-- הרשאות חסרות  
-- נקודת קצה API לא נגישה  
+
+**סיבות נפוצות:**
+- חוסר התאמה בחתימת פונקציית הכלי
+- הרשאות חסרות נדרשות
+- נקודת קצה של API אינה נגישה
 </details>
 
 <details>
-<summary><strong>❌ עיכוב גבוה בתגובות הסוכן</strong></summary>
+<summary><strong>❌ זמן תגובה גבוה בתגובות הסוכן</strong></summary>
 
 ```bash
-# בדוק בבדיקות Application Insights צווארי בקבוק
+# בדוק את Application Insights עבור צווארי בקבוק
 azd monitor --live
 
 # שקול להשתמש במודל מהיר יותר
 azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
 azd deploy
 ```
-  
-**טיפים לאופטימיזציה:**  
-- השתמש בתגובות סטרימינג  
-- הטמע מטמון לתגובות  
-- הקטן את גודל חלון ההקשר  
+
+**טיפים לאופטימיזציה:**
+- השתמש בתגובות סטרימינג
+- יישם קאשינג לתגובות
+- הקטן את חלון ההקשר
 </details>
 
 <details>
@@ -422,20 +422,20 @@ You are a helpful assistant. IMPORTANT:
 - Never make up information
 """
 
-# הוסף שליפה לעיגון
+# הוסף אחזור להנחיית המערכת
 agent = project_client.agents.create_agent(
     model="gpt-4.1",
     instructions=instructions,
-    tools=[FileSearchTool()]  # עגן תגובות במסמכים
+    tools=[FileSearchTool()]  # הנחל תגובות במסמכים
 )
 ```
 </details>
 
 <details>
-<summary><strong>❌ שגיאות עקב חריגה ממגבלת טוקנים</strong></summary>
+<summary><strong>❌ שגיאות עקב חריגות מגבלת טוקנים</strong></summary>
 
 ```python
-# יישם ניהול חלון הקשר
+# ניהול חלון ההקשר יישם
 def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
     """Keep only recent messages within token limit."""
     import tiktoken
@@ -456,19 +456,19 @@ def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
 
 ---
 
-## 🎓 תרגילים מעשיים
+## 🎓 תרגולים מעשיים
 
 ### תרגיל 1: פרוס סוכן בסיסי (20 דקות)
 
-**מטרה:** לפרוס את סוכן ה-AI הראשון שלך באמצעות AZD
+**מטרה:** פרוס את סוכן ה-AI הראשון שלך באמצעות AZD
 
 ```bash
 # שלב 1: אתחל תבנית
 azd init --template get-started-with-ai-agents
 
-# שלב 2: היכנס ל-Azure
+# שלב 2: התחבר ל-Azure
 azd auth login
-# אם אתה עובד על פני שוכנים, הוסף --tenant-id <tenant-id>
+# אם אתה עובד בין שוכרים, הוסף --tenant-id <tenant-id>
 
 # שלב 3: פרוס
 azd up
@@ -477,39 +477,37 @@ azd up
 # פלט צפוי לאחר הפריסה:
 #   הפריסה הושלמה!
 #   נקודת קצה: https://<app-name>.<region>.azurecontainerapps.io
-# פתח את כתובת ה-URL שמופיעה בפלט ונסה לשאול שאלה
+# פתח את ה-URL שמופיע בפלט ונסה לשאול שאלה
 
 # שלב 5: הצג ניטור
 azd monitor --overview
 
-# שלב 6: נקה
+# שלב 6: נקה את המשאבים
 azd down --force --purge
 ```
-  
-**קריטריונים להצלחה:**  
-- [ ] הסוכן מגיב לשאלות  
-- [ ] ניתן לגשת לדשבורד הניטור דרך `azd monitor`  
-- [ ] המשאבים מתנקיים בהצלחה  
+
+**קריטריוני הצלחה:**
+- [ ] הסוכן מגיב לשאלות
+- [ ] ניתן לגשת ללוח הניטור דרך `azd monitor`
+- [ ] המשאבים נוקו בהצלחה
 
 ### תרגיל 2: הוסף כלי מותאם אישית (30 דקות)
 
-**מטרה:** להרחיב סוכן עם כלי מותאם
+**מטרה:** הרחב סוכן עם כלי מותאם אישית
 
-1. פרוס את תבנית הסוכן:  
+1. פרוס את תבנית הסוכן:
    ```bash
    azd init --template get-started-with-ai-agents
    azd up
    ```
-  
-2. צור פונקציית כלי חדשה בקוד הסוכן:  
+2. צור פונקציית כלי חדשה בקוד הסוכן שלך:
    ```python
    def get_weather(location: str) -> str:
        """Get current weather for a location."""
-       # קריאה ל-API לשירות מזג האוויר
+       # קריאה ל-API של שירות מזג האוויר
        return f"Weather in {location}: Sunny, 72°F"
    ```
-  
-3. רשם את הכלי בסוכן:  
+3. רשום את הכלי בסוכן:
    ```python
    from azure.ai.projects.models import FunctionTool
 
@@ -531,65 +529,64 @@ azd down --force --purge
        tools=[weather_tool]
    )
    ```
-  
-4. פרוס מחדש ובדוק:  
+4. פרוס מחדש ובדוק:
    ```bash
    azd deploy
    # שאל: "מה מזג האוויר בסיאטל?"
-   # צפוי: הסוכן קורא לפונקציה get_weather("Seattle") ומחזיר מידע על מזג האוויר
+   # צפוי: הסוכן קורא ל-get_weather("סיאטל") ומחזיר מידע על מזג האוויר
    ```
-  
-**קריטריונים להצלחה:**  
-- [ ] הסוכן מזהה שאילתות לגבי מזג אוויר  
-- [ ] הכלי נקרא כראוי  
-- [ ] התגובה כוללת מידע על מזג האוויר  
+
+**קריטריוני הצלחה:**
+- [ ] הסוכן מזהה שאילתות הקשורות למזג האוויר
+- [ ] הכלי נקרא כראוי
+- [ ] התגובה כוללת מידע מזג אוויר
 
 ### תרגיל 3: בנה סוכן RAG (45 דקות)
 
-**מטרה:** ליצור סוכן שמגיב לשאלות מתוך המסמכים שלך
+**מטרה:** צור סוכן שמענה על שאלות מהמסמכים שלך
 
 ```bash
-# שלב 1: פרוס את תבנית RAG
+# שלב 1: פרוס תבנית RAG
 azd init --template azure-search-openai-demo
 azd up
 
 # שלב 2: העלה את המסמכים שלך
-# הנח קבצי PDF/TXT בתיקיית data/ ואז הרץ:
+# מקם קבצי PDF/TXT בתיקיית data/, ואז הרץ:
 python scripts/prepdocs.py
 
-# שלב 3: בדוק עם שאלות ספציפיות לתחום
-# פתח את כתובת ה-URL של האפליקציית ווב מתוך פלט azd up
-# שאול שאלות על המסמכים שהעלית
-# התשובות צריכות לכלול הפניות ציטוט כמו [doc.pdf]
+# שלב 3: בדוק עם שאלות ממוקדות תחום
+# פתח את כתובת ה-URL של אפליקציית האינטרנט מתוך הפלט של azd up
+# שאל שאלות על המסמכים שהעלית
+# התשובות צריכות לכלול הפניות לציטוטים כמו [doc.pdf]
 ```
-  
-**קריטריונים להצלחה:**  
-- [ ] הסוכן עונה מתוך מסמכים שהועלו  
-- [ ] התגובות כוללות הפניות  
-- [ ] אין הלוצינציות בשאלות מחוץ להיקף  
+
+**קריטריוני הצלחה:**
+- [ ] הסוכן עונה מהמסמכים שהועלו
+- [ ] התגובות כוללות ציטוטים
+- [ ] אין הלוצינציות בשאלות מחוץ להקשר
 
 ---
 
 ## 📚 צעדים הבאים
 
-כעת כשאתה מבין סוכני AI, חקור נושאים מתקדמים אלה:
+כעת, כשתבין את סוכני AI, חקור את הנושאים המתקדמים הבאים:
 
 | נושא | תיאור | קישור |
-|-------|---------|-------|
-| **מערכות מולטי-סוכן** | בניית מערכות עם סוכנים משתפי פעולה מרובים | [דוגמת מולטי-סוכן קמעונאית](../../examples/retail-scenario.md) |
-| **תבניות תיאום** | למד דפוסי ארכוב ושיתוף פעולה | [תבניות תיאום](../chapter-06-pre-deployment/coordination-patterns.md) |
-| **פריסת ייצור** | פריסת סוכן מוכנה לארגון | [פרקטיקות AI בייצור](../chapter-08-production/production-ai-practices.md) |
-| **הערכת סוכן** | בדיקה והערכת ביצועי סוכנים | [פתרון תקלות AI](../chapter-07-troubleshooting/ai-troubleshooting.md) |
-| **סדנת AI מעשית** | ידיים על: הפוך את פתרון ה-AI שלך מוכן ל-AZD | [סדנת AI מעשית](ai-workshop-lab.md) |
+|-------|-------------|------|
+| **מערכות מרובי סוכנים** | בנה מערכות עם מספר סוכנים משתפים פעולה | [דוגמה לריטייל מרובי סוכנים](../../examples/retail-scenario.md) |
+| **דפוסי תיאום** | למד דפוסי תזמור ותקשורת | [דפוסי תיאום](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **פריסת ייצור** | פריסת סוכן מוכנה לארגון | [פרקטיקות AI בפרודקשן](../chapter-08-production/production-ai-practices.md) |
+| **הערכת סוכן** | בחן והערך ביצועי סוכן | [פתרון תקלות AI](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **סדנת AI מעשית** | יישום: הפוך את הפיתרון AI ל’AZD־מוכן’ | [סדנת AI מעשית](ai-workshop-lab.md) |
 
 ---
 
 ## 📖 משאבים נוספים
 
 ### תיעוד רשמי
-- [Microsoft Foundry Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
-- [Microsoft Foundry Agent Service Quickstart](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
-- [Semantic Kernel Agent Framework](https://learn.microsoft.com/semantic-kernel/)
+- [שירות סוכני Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/agents/)
+- [התחלת העבודה עם שירות סוכני Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
+- [מסגרת סוכני Semantic Kernel](https://learn.microsoft.com/semantic-kernel/)
 
 ### תבניות AZD לסוכנים
 - [התחל עם סוכני AI](https://github.com/Azure-Samples/get-started-with-ai-agents)
@@ -597,20 +594,20 @@ python scripts/prepdocs.py
 - [Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
 ### משאבי קהילה
-- [Awesome AZD - תבניות סוכן](https://azure.github.io/awesome-azd/?tags=ai-agents)
+- [Awesome AZD - תבניות סוכנים](https://azure.github.io/awesome-azd/?tags=ai-agents)
 - [Azure AI Discord](https://discord.gg/microsoft-azure)
 - [Microsoft Foundry Discord](https://discord.gg/nTYy5BXMWG)
 
-### כישורים לסוכן שלך בעורך הקוד
-- [**כישורי סוכני Microsoft Azure**](https://skills.sh/microsoft/github-copilot-for-azure) - התקן כישורי סוכני AI לשימוש חוזר בפיתוח Azure ב-GitHub Copilot, Cursor או בכל סוכן נתמך. כולל כישורים ל-[Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [פריסה](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), ו-[אבחון](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):  
+### כישורי סוכן למערכת העריכה שלך
+- [**כישורי סוכן Microsoft Azure**](https://skills.sh/microsoft/github-copilot-for-azure) - התקן כישורי סוכן AI לשימוש חוזר בפיתוח Azure ב-GitHub Copilot, Cursor, או כל סוכן נתמך. כולל כישורים ל-[Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [פריסה](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), ו-[דיאגנוסטיקה](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
-  
+
 ---
 
 **ניווט**
-- **שיעור קודם**: [שילוב Microsoft Foundry](microsoft-foundry-integration.md)
+- **שיעור קודם**: [אינטגרציה Microsoft Foundry](microsoft-foundry-integration.md)
 - **שיעור הבא**: [פריסת מודל AI](ai-model-deployment.md)
 
 ---

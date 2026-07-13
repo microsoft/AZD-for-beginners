@@ -1,22 +1,22 @@
-# Hoofdstuk 5: Multi-Agent AI-oplossingen
+# Hoofdstuk 5: Multi-Agent AI Oplossingen
 
-**📚 Course**: [AZD Voor Beginners](../../README.md) | **⏱️ Duration**: 2-3 uur | **⭐ Complexity**: Gevorderd
+**📚 Cursus**: [AZD Voor Beginners](../../README.md) | **⏱️ Duur**: 2-3 uur | **⭐ Complexiteit**: Gevorderd
 
 ---
 
 ## Overzicht
 
-Dit hoofdstuk behandelt geavanceerde multi-agent architectuurpatronen, agentorkestratie en productieklare AI-implementaties voor complexe scenario's.
+Dit hoofdstuk behandelt geavanceerde multi-agent architectuurpatronen, agent orchestratie en productieklare AI-implementaties voor complexe scenario's.
 
-> Gevalideerd tegen `azd 1.25.6` in juni 2026.
+> Gevalideerd tegen `azd 1.27.1` in juli 2026.
 
 ## Leerdoelen
 
-Door dit hoofdstuk te voltooien, zul je:
-- Multi-agent architectuurpatronen begrijpen
-- Gecoördineerde AI-agentensystemen implementeren
-- Agent-naar-agent communicatie implementeren
-- Productieklare multi-agent oplossingen bouwen
+Na het voltooien van dit hoofdstuk:
+- Begrijpt u multi-agent architectuurpatronen
+- Zet u gecoördineerde AI-agent systemen in
+- Implementeert u agent-naar-agent communicatie
+- Bouwt u productieklaar multi-agent oplossingen
 
 ---
 
@@ -24,28 +24,28 @@ Door dit hoofdstuk te voltooien, zul je:
 
 | # | Les | Beschrijving | Tijd |
 |---|--------|-------------|------|
-| 1 | [Multi-Agent Basisprincipes](multi-agent-basics.md) | Hands-on: implementeer een werkende multi-agent app met `azd up` | 45 min |
-| 2 | [Coördinatiepatronen](../chapter-06-pre-deployment/coordination-patterns.md) | Agent-orkestratiestrategieën (gaat verder in Hoofdstuk 6) | 30 min |
-| 3 | [ARM-sjabloonimplementatie](../../examples/retail-multiagent-arm-template/README.md) | Voorbeeld van een één-klik-implementatie | 30 min |
+| 1 | [Multi-Agent Basisprincipes](multi-agent-basics.md) | Praktijk: zet een werkende multi-agent app in met `azd up` | 45 min |
+| 2 | [Coördinatiepatronen](../chapter-06-pre-deployment/coordination-patterns.md) | Agent orchestratie strategieën (gaat verder in Hoofdstuk 6) | 30 min |
+| 3 | [ARM Template Implementatie](../../examples/retail-multiagent-arm-template/README.md) | One-click implementatie voorbeeld | 30 min |
 
-> **Begin met Les 1.** Het is de enige volledig hands-on, implementeerbare les in dit hoofdstuk. Les 2 staat in Hoofdstuk 6 (het wordt gedeeld met planning voor pre-deployment), en de [Retail Multi-Agent Oplossing](../../examples/retail-scenario.md) is een architectuursjabloon — een ontwerpgids, geen één-commando sjabloon.
+> **Begin met Les 1.** Dit is de enige volledig hands-on, implementeerbare les in dit hoofdstuk. Les 2 staat in Hoofdstuk 6 (gedeeld met pre-implementatie planning), en de [Retail Multi-Agent Oplossing](../../examples/retail-scenario.md) is een architectuursjabloon—een ontwerp referentie, geen one-command template.
 
 ---
 
-## 🚀 Snel Aan de Slag
+## 🚀 Snelstart
 
 ```bash
 # Optie 1: Implementeren vanuit een sjabloon
 azd init --template agent-openai-python-prompty
 azd up
 
-# Optie 2: Implementeren vanuit een agentmanifest (vereist de azure.ai.agents-extensie)
+# Optie 2: Implementeren vanuit een agentmanifest (vereist azure.ai.agents-extensie)
 azd extension install azure.ai.agents
 azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **Welke aanpak?** Gebruik `azd init --template` om te beginnen met een werkend voorbeeld. Gebruik `azd ai agent init` wanneer je je eigen agentmanifest hebt. Zie de [AZD AI CLI-referentie](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) voor volledige details.
+> **Welke aanpak?** Gebruik `azd init --template` om te starten vanuit een werkend voorbeeld. Gebruik `azd ai agent init` wanneer u uw eigen agentmanifest hebt. Zie de [AZD AI CLI referentie](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) voor volledige details.
 
 ---
 
@@ -53,7 +53,7 @@ azd up
 
 ```mermaid
 graph TD
-    Orchestrator[Orchestrator Agent<br/>Leidt verzoeken, beheert workflow] --> Customer[Customer Agent<br/>Gebruikersvragen, voorkeuren]
+    Orchestrator[Orchestrator Agent<br/>Verzoekt routes, beheert workflow] --> Customer[Customer Agent<br/>Gebruikersvragen, voorkeuren]
     Orchestrator --> Inventory[Inventory Agent<br/>Voorraadniveaus, bestellingen]
 ```
 
@@ -63,19 +63,19 @@ graph TD
 
 De [Retail Multi-Agent Oplossing](../../examples/retail-scenario.md) demonstreert:
 
-- **Klantagent**: Behandelt gebruikersinteracties en voorkeuren
-- **Voorraadagent**: Beheert voorraad en orderverwerking
-- **Orkestrator**: Coördineert tussen agenten
-- **Gedeeld Geheugen**: Contextbeheer tussen agenten
+- **Klant Agent**: Behandelt gebruikersinteracties en voorkeuren
+- **Voorraad Agent**: Beheert voorraad en orderverwerking
+- **Orchestrator**: Coördineert tussen agents
+- **Gedeeld Geheugen**: Cross-agent contextbeheer
 
-### Gebruikte services
+### Gebruikte Services
 
 | Service | Doel |
 |---------|---------|
-| Microsoft Foundry Models | Taalbegrip |
+| Microsoft Foundry Modellen | Taalbegrip |
 | Azure AI Search | Productcatalogus |
-| Cosmos DB | Agentstatus en geheugen |
-| Container Apps | Hosten van agenten |
+| Cosmos DB | Agent status en geheugen |
+| Container Apps | Hosting van agent |
 | Application Insights | Monitoring |
 
 ---
@@ -85,15 +85,15 @@ De [Retail Multi-Agent Oplossing](../../examples/retail-scenario.md) demonstreer
 | Richting | Hoofdstuk |
 |-----------|---------|
 | **Vorige** | [Hoofdstuk 4: Infrastructuur](../chapter-04-infrastructure/README.md) |
-| **Volgende** | [Hoofdstuk 6: Pre-Deployment](../chapter-06-pre-deployment/README.md) |
+| **Volgende** | [Hoofdstuk 6: Pre-Implementatie](../chapter-06-pre-deployment/README.md) |
 
 ---
 
-## 📖 Gerelateerde bronnen
+## 📖 Gerelateerde Bronnen
 
-- [Gids voor AI-agenten](../chapter-02-ai-development/agents.md)
-- [AI-praktijken voor productie](../chapter-08-production/production-ai-practices.md)
-- [AI-probleemoplossing](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [AI Agents Gids](../chapter-02-ai-development/agents.md)
+- [Productie AI Praktijken](../chapter-08-production/production-ai-practices.md)
+- [AI Probleemoplossing](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

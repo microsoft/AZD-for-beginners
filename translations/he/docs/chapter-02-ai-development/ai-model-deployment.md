@@ -1,30 +1,30 @@
-# פריסת מודלים מבוססי בינה מלאכותית עם Azure Developer CLI
+# פריסת מודל בינה מלאכותית עם Azure Developer CLI
 
-**ניווט בין פרקים:**
-- **📚 דף קורס ראשי**: [AZD למתחילים](../../README.md)
-- **📖 פרק נוכחי**: פרק 2 - פיתוח מבוסס בינה מלאכותית
-- **⬅️ קודם**: [שילוב Microsoft Foundry](microsoft-foundry-integration.md)
+**ניווט בפרק:**
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+- **📖 פרק נוכחי**: פרק 2 - פיתוח מונחה בינה מלאכותית
+- **⬅️ קודם**: [אינטגרציית Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ הבא**: [סדנת מעבדה לבינה מלאכותית](ai-workshop-lab.md)
 - **🚀 הפרק הבא**: [פרק 3: תצורה](../chapter-03-configuration/configuration.md)
 
-מדריך זה מספק הוראות מקיפות לפריסת מודלים של בינה מלאכותית באמצעות תבניות AZD, הכולל הכל מבחירת מודל ועד דפוסי פריסה בפרודקשן.
+מדריך זה מספק הוראות מקיפות לפריסת מודלים של בינה מלאכותית באמצעות תבניות AZD, הכולל את כל מה שבין בחירת המודל לתבניות פריסה בסביבת ייצור.
 
-> **הערת אימות (2026-03-25):** תהליך העבודה של AZD במדריך זה נבדק כנגד `azd` `1.23.12`. לפריסות בינה מלאכותית שלוקחות יותר זמן מחלון פריסת השירות המוגדר כברירת מחדל, גרסאות AZD הנוכחיות תומכות ב-`azd deploy --timeout <seconds>`.
+> **הערת אימות (2026-07-13):** תהליך העבודה של AZD במדריך זה נבדק עם `azd` `1.27.1`. לפריסות בינה מלאכותית שלוקחות יותר זמן מחלון הפריסה המוגדר כברירת מחדל, גרסאות AZD הנוכחיות תומכות ב- `azd deploy --timeout <seconds>`.
 
-## תכולת העניינים
+## תוכן העניינים
 
 - [אסטרטגיית בחירת מודל](#אסטרטגיית-בחירת-מודל)
 - [תצורת AZD למודלים של בינה מלאכותית](#תצורת-azd-למודלים-של-בינה-מלאכותית)
-- [דפוסי פריסה](#דפוסי-פריסה)
+- [תבניות פריסה](#תבניות-פריסה)
 - [ניהול מודלים](#ניהול-מודלים)
-- [התייחסויות לפרודקשן](#התייחסויות-לפרודקשן)
-- [ניטור ותצפיות](#ניטור-ותצפיות)
+- [שיקולים בייצור](#שיקולים-בייצור)
+- [ניטור ותצפית](#ניטור-ותצפית)
 
 ## אסטרטגיית בחירת מודל
 
-### מודלים של Microsoft Foundry
+### מודלים של Microsoft Foundry Models
 
-בחר את המודל המתאים למקרה השימוש שלך:
+בחר את המודל הנכון למקרה השימוש שלך:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -54,18 +54,18 @@ services:
 
 ### תכנון קיבולת מודל
 
-| סוג מודל | מקרה שימוש | קיבולת מומלצת | שיקולי עלות |
+| סוג המודל | מקרה שימוש | קיבולת מומלצת | שיקולי עלות |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | שיחה, שאלות ותשובות | 10-50 TPM | חסכוני לרוב עומסי העבודה |
+| gpt-4.1-mini | שיחה, שאלות ותשובות | 10-50 TPM | יעיל בעלות עבור רוב העומסים |
 | gpt-4.1 | חשיבה מורכבת | 20-100 TPM | עלות גבוהה יותר, לשימוש בתכונות פרימיום |
-| text-embedding-3-large | חיפוש, RAG | 30-120 TPM | ברירת מחדל חזקה לחיפוש סמנטי ושליפה |
-| Whisper | דיבור לטקסט | 10-50 TPM | עומסי עבודה של עיבוד אודיו |
+| text-embedding-3-large | חיפוש, RAG | 30-120 TPM | בחירה חזקה כברירת מחדל לחיפוש סמנטי ושחזור |
+| Whisper | דיבור לטקסט | 10-50 TPM | עומסי עיבוד קול |
 
 ## תצורת AZD למודלים של בינה מלאכותית
 
 ### תצורת תבנית Bicep
 
-צור פריסות מודל באמצעות תבניות Bicep:
+צור פריסות מודלים בעזרת תבניות Bicep:
 
 ```bicep
 // infra/main.bicep
@@ -126,19 +126,19 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### משתני סביבה
 
-הגדר את סביבת היישום שלך:
+קבע את סביבת היישום שלך:
 
 ```bash
-# קביעת תצורה של .env
+# תצורת .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## דפוסי פריסה
+## תבניות פריסה
 
-### דפוס 1: פריסה באזור אחד
+### תבנית 1: פריסה לאזור בודד
 
 ```yaml
 # azure.yaml - Single region
@@ -151,12 +151,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-מומלץ עבור:
+הטובה ביותר עבור:
 - פיתוח ובדיקות
-- יישומים בשוק יחיד
-- אופטימיזציית עלויות
+- יישומים לשוק בודד
+- אופטימיזציה של עלויות
 
-### דפוס 2: פריסה מרובת אזורים
+### תבנית 2: פריסה במספר אזורים
 
 ```bicep
 // Multi-region deployment
@@ -169,14 +169,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-מומלץ עבור:
+הטובה ביותר עבור:
 - יישומים גלובליים
 - דרישות זמינות גבוהה
-- פיזור עומס
+- פיזור עומסים
 
-### דפוס 3: פריסה משולבת
+### תבנית 3: פריסה היברידית
 
-שילוב מודלים של Microsoft Foundry עם שירותי בינה מלאכותית אחרים:
+שלב בין Microsoft Foundry Models לשירותי בינה מלאכותית נוספים:
 
 ```bicep
 // Hybrid AI services
@@ -209,7 +209,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### בקרת גרסאות
 
-עקוב אחר גרסאות מודל בתצורת AZD שלך:
+עקוב אחרי גרסאות מודל בתצורת AZD שלך:
 
 ```json
 {
@@ -227,9 +227,9 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-### עדכוני מודלים
+### עדכוני מודל
 
-השתמש ב-hooks של AZD לעדכוני מודלים:
+השתמש ב-hooks של AZD לעדכוני מודל:
 
 ```bash
 #!/bin/bash
@@ -241,13 +241,13 @@ az cognitiveservices account list-models \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
 
-# אם הפריסה אורכת זמן רב יותר מהדדליין המוגדר מראש
+# אם הפריסה לוקחת יותר זמן מה.Timeout ברירת המחדל
 azd deploy --timeout 1800
 ```
 
 ### בדיקות A/B
 
-פרוס מספר גרסאות מודל:
+פרוס מספר גרסאות של מודל:
 
 ```bicep
 param enableABTesting bool = false
@@ -269,7 +269,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## התייחסויות לפרודקשן
+## שיקולים בייצור
 
 ### תכנון קיבולת
 
@@ -288,7 +288,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# דוגמת שימוש
+# דוגמה לשימוש
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -300,7 +300,7 @@ print(f"Required capacity: {required_capacity} TPM")
 
 ### תצורת סקיילינג אוטומטי
 
-הגדר סקיילינג אוטומטי ל-Container Apps:
+קבע סקיילינג אוטומטי לאפליקציות מכולות:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -338,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### אופטימיזציית עלויות
 
-הטמעת בקרה על עלויות:
+הטמע בקרות עלויות:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -368,11 +368,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## ניטור ותצפיות
+## ניטור ותצפית
 
 ### אינטגרציה עם Application Insights
 
-הגדר ניטור לעומסי בינה מלאכותית:
+קבע ניטור לעומסי בינה מלאכותית:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -410,7 +410,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### מדדים מותאמים אישית
 
-עקוב אחר מדדים ספציפיים לבינה מלאכותית:
+עקוב אחרי מדדים ספציפיים לבינה מלאכותית:
 
 ```python
 # טלמטריה מותאמת אישית עבור מודלי בינה מלאכותית
@@ -445,12 +445,12 @@ class AITelemetry:
         )
 ```
 
-### בדיקות בריאות
+### בדיקת בריאות
 
 הטמע ניטור בריאות של שירותי בינה מלאכותית:
 
 ```python
-# נקודות קצה לבדיקה בריאותית
+# נקודות קצה לבדיקת מצב בריאות
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -460,7 +460,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # בדוק את חיבור OpenAI
+        # בדוק חיבור ל-OpenAI
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -478,30 +478,30 @@ async def check_ai_models():
 
 ## צעדים הבאים
 
-1. **סקור את [מדריך השילוב של Microsoft Foundry](microsoft-foundry-integration.md)** לדפוסי שילוב שירותים
-2. **השלים את [סדנת מעבדה לבינה מלאכותית](ai-workshop-lab.md)** להתנסות מעשית
-3. **הטמע את [פרקטיקות AI לפרודקשן](production-ai-practices.md)** לפריסות ארגוניות
-4. **חקור את [מדריך פתרון בעיות AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** לבעיות נפוצות
+1. **סקור את [מדריך האינטגרציה של Microsoft Foundry](microsoft-foundry-integration.md)** עבור תבניות אינטגרציה של שירותים
+2. **סיים את [סדנת המעבדה לבינה מלאכותית](ai-workshop-lab.md)** לניסיון מעשי
+3. **הטמע [פרקטיקות בינה מלאכותית לייצור](production-ai-practices.md)** לפריסות ארגוניות
+4. **חקור את [מדריך פתרון הבעיות לבינה מלאכותית](../chapter-07-troubleshooting/ai-troubleshooting.md)** לבעיות נפוצות
 
 ## משאבים
 
-- [זמינות מודלים של Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [זמינות מודלים של Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [תיעוד Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [סקיילינג של Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [אופטימיזציית עלות של מודלים בינה מלאכותית](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [אופטימיזציית עלות למודל בינה מלאכותית](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**ניווט בין פרקים:**
-- **📚 דף קורס ראשי**: [AZD למתחילים](../../README.md)
-- **📖 פרק נוכחי**: פרק 2 - פיתוח מבוסס בינה מלאכותית
-- **⬅️ קודם**: [שילוב Microsoft Foundry](microsoft-foundry-integration.md)
+**ניווט בפרק:**
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+- **📖 פרק נוכחי**: פרק 2 - פיתוח מונחה בינה מלאכותית
+- **⬅️ קודם**: [אינטגרציית Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ הבא**: [סדנת מעבדה לבינה מלאכותית](ai-workshop-lab.md)
 - **🚀 הפרק הבא**: [פרק 3: תצורה](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון כי תרגומים אוטומטיים עלולים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור המוסמך. למידע קריטי מומלץ להיעזר בתרגום מקצועי מבוצע על ידי אדם. אנו לא אחראים לכל אי הבנות או פרשנויות שגויות הנובעות משימוש בתרגום זה.
+**כתב ויתור**:
+מסמך זה תורגם באמצעות שירות תרגום אוטומטי [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עלולים להכיל שגיאות או אי-דיוקים. יש להחשיב את המסמך המקורי בשפתו הטבעית כמקור הסמכות. למידע קריטי מומלץ להשתמש בתרגום מקצועי על ידי מתרגם אדם. אנו לא אחראים לכל אי-הבנה או פירוש שגוי הנובע מהשימוש בתרגום זה.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

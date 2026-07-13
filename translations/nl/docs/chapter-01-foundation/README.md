@@ -1,20 +1,20 @@
-# Hoofdstuk 1: Basis & Snelstart
+# Hoofdstuk 1: Basis & Snelle Start
 
-**📚 Cursus**: [AZD For Beginners](../../README.md) | **⏱️ Duur**: 30-45 minuten | **⭐ Complexiteit**: Beginner
+**📚 Cursus**: [AZD Voor Beginners](../../README.md) | **⏱️ Duur**: 30-45 minuten | **⭐ Complexiteit**: Beginner
 
 ---
 
 ## Overzicht
 
-Dit hoofdstuk introduceert de basisprincipes van Azure Developer CLI (azd). Je leert de kernconcepten, installeert de tools en zet je eerste toepassing naar Azure in productie.
+Dit hoofdstuk introduceert de basisprincipes van Azure Developer CLI (azd). Je leert de kernconcepten, installeert de tools en zet je eerste applicatie in Azure uit.
 
-> Gevalideerd met `azd 1.25.6` in juni 2026.
+> Gevalideerd tegen `azd 1.27.1` in juli 2026.
 
 ## Leerdoelen
 
-Door dit hoofdstuk te voltooien, zal je:
+Door dit hoofdstuk te voltooien zul je:
 - Begrijpen wat Azure Developer CLI is en hoe het verschilt van Azure CLI
-- AZD installeren en configureren op je platform
+- AZD installeren en configureren op jouw platform
 - Je eerste applicatie naar Azure uitrollen met `azd up`
 - Resources opruimen met `azd down`
 
@@ -24,17 +24,17 @@ Door dit hoofdstuk te voltooien, zal je:
 
 | # | Les | Beschrijving | Tijd |
 |---|--------|-------------|------|
-| 1 | [AZD Basis](azd-basics.md) | Kernconcepten, terminologie en projectstructuur | 15 min |
-| 2 | [Installatie & Configuratie](installation.md) | Platform-specifieke installatiehandleidingen | 10 min |
-| 3 | [Je Eerste Project](first-project.md) | Praktijk: Een web-app naar Azure implementeren | 20 min |
+| 1 | [AZD Basisprincipes](azd-basics.md) | Kernconcepten, terminologie en projectstructuur | 15 min |
+| 2 | [Installatie & Setup](installation.md) | Platform-specifieke installatiehandleidingen | 10 min |
+| 3 | [Je Eerste Project](first-project.md) | Hands-on: Zet een webapp uit naar Azure | 20 min |
 | 4 | [Breng Je Eigen App](bring-your-own-app.md) | Voeg azd toe aan een bestaand project dat je al hebt | 15 min |
-| 5 | [Dev-containers & Codespaces](dev-containers.md) | Reproduceerbare azd-omgevingen met dev-containers | 15 min |
+| 5 | [Dev Containers & Codespaces](dev-containers.md) | Reproduceerbare azd-omgevingen met dev containers | 15 min |
 
 ---
 
-## ✅ Begin hier: Controleer je configuratie
+## ✅ Begin Hier: Controleer Je Setup
 
-Voordat je begint, controleer dat je lokale machine klaar is voor de sjabloon van Hoofdstuk 1:
+Controleer voordat je begint of je lokale machine klaar is voor de sjabloon van Hoofdstuk 1:
 
 **Windows:**
 ```powershell
@@ -46,25 +46,25 @@ Voordat je begint, controleer dat je lokale machine klaar is voor de sjabloon va
 bash ./validate-setup.sh
 ```
 
-Als het script ontbrekende tools meldt, los die eerst op en ga daarna verder met het hoofdstuk.
+Als het script ontbrekende tools meldt, los die dan eerst op en ga dan verder met het hoofdstuk.
 
 ---
 
-## 🚀 Snelstart
+## 🚀 Snelle Start
 
 ```bash
-# Controleer de installatie
+# Controleer installatie
 azd version
 
-# Meld je aan bij AZD
-# Optioneel: az login als je van plan bent Azure CLI-commando's rechtstreeks uit te voeren
+# Authenticeren voor AZD
+# Optioneel: az login als je van plan bent Azure CLI-commando's direct uit te voeren
 azd auth login
 
-# Implementeer je eerste app
+# Zet je eerste app uit
 azd init --template todo-nodejs-mongo
 azd up
 
-# Ruim op als je klaar bent
+# Opruimen wanneer klaar
 azd down --force --purge
 ```
 
@@ -77,8 +77,8 @@ Na het voltooien van dit hoofdstuk zou je in staat moeten zijn om:
 ```bash
 azd version              # Toont geïnstalleerde versie
 azd init --template todo-nodejs-mongo  # Initialiseert project
-azd up                   # Implementeert naar Azure
-azd show                 # Toont URL van de draaiende app
+azd up                   # Zet uit naar Azure
+azd show                 # Toont URL van de lopende app
 azd down --force --purge # Ruimt bronnen op
 ```
 
@@ -93,11 +93,11 @@ azd down --force --purge # Ruimt bronnen op
 
 ---
 
-## 📖 Gerelateerde bronnen
+## 📖 Gerelateerde Bronnen
 
-- [Commando-spiekbrief](../../resources/cheat-sheet.md)
-- [Veelgestelde vragen](../../resources/faq.md)
-- [Woordenlijst](../../resources/glossary.md)
+- [Command Cheat Sheet](../../resources/cheat-sheet.md)
+- [FAQ](../../resources/faq.md)
+- [Glossarium](../../resources/glossary.md)
 
 ---
 

@@ -1,22 +1,22 @@
-# Hoofdstuk 4: Infrastructuur als Code & Implementatie
+# Hoofdstuk 4: Infrastructure as Code & Deployment
 
-**📚 Cursus**: [AZD For Beginners](../../README.md) | **⏱️ Duur**: 1-1.5 uur | **⭐ Complexiteit**: Gemiddeld
+**📚 Cursus**: [AZD Voor Beginners](../../README.md) | **⏱️ Duur**: 1-1.5 uur | **⭐ Complexiteit**: Gemiddeld
 
 ---
 
 ## Overzicht
 
-Dit hoofdstuk behandelt Infrastructure as Code (IaC)-patronen met Bicep-templates, het provisioneren van resources en implementatiestrategieën met de Azure Developer CLI.
+Dit hoofdstuk behandelt Infrastructure as Code (IaC) patronen met Bicep-sjablonen, resource provisioning en deploymentstrategieën met behulp van Azure Developer CLI.
 
-> Gevalideerd tegen `azd 1.25.6` in juni 2026.
+> Gecontroleerd met `azd 1.27.1` in juli 2026.
 
 ## Leerdoelen
 
-By completing this chapter, you will:
-- Begrijp de structuur en syntaxis van Bicep-templates
-- Maak Azure-resources aan met `azd provision`
-- Implementeer applicaties met `azd deploy`
-- Implementeer blue-green- en rolling-implementatiestrategieën
+Door dit hoofdstuk te voltooien, zal je:
+- De structuur en syntaxis van Bicep-sjablonen begrijpen
+- Azure-resources provisionen met `azd provision`
+- Applicaties deployen met `azd deploy`
+- Blue-green en rolling deploymentstrategieën implementeren
 
 ---
 
@@ -24,25 +24,25 @@ By completing this chapter, you will:
 
 | # | Les | Beschrijving | Tijd |
 |---|--------|-------------|------|
-| 1 | [Resources provisioneren](provisioning.md) | Azure resourcebeheer met AZD | 45 min |
-| 2 | [Implementatiegids](deployment-guide.md) | Strategieën voor applicatie-implementatie | 45 min |
-| 3 | [Je eigen template maken](custom-templates.md) | Bouw en publiceer herbruikbare azd-templates | 30 min |
+| 1 | [Provisioning Resources](provisioning.md) | Azure resourcebeheer met AZD | 45 min |
+| 2 | [Deployment Guide](deployment-guide.md) | Deploymentstrategieën voor applicaties | 45 min |
+| 3 | [Authoring Your Own Template](custom-templates.md) | Maak en publiceer herbruikbare azd-sjablonen | 30 min |
 
 ---
 
-## 🚀 Snelle Start
+## 🚀 Snelstartgids
 
 ```bash
-# Initialiseren vanaf sjabloon
+# Initialiseren vanuit sjabloon
 azd init --template azure-functions-python-v2-http
 
-# Voorbeeld van wat er gemaakt zal worden
+# Voorbeeldweergave van wat gemaakt zal worden
 azd provision --preview
 
-# Alleen infrastructuur inrichten
+# Alleen infrastructuur voorzien
 azd provision
 
-# Alleen code uitrollen
+# Alleen code implementeren
 azd deploy
 
 # Of beide samen
@@ -51,7 +51,7 @@ azd up
 
 ---
 
-## 📁 AZD-projectstructuur
+## 📁 AZD Projectstructuur
 
 ```
 my-project/
@@ -68,13 +68,13 @@ my-project/
 
 ---
 
-## 🔧 Essentiële opdrachten
+## 🔧 Essentiële Commando's
 
 | Commando | Beschrijving |
 |---------|-------------|
-| `azd init` | Initialiseer project |
-| `azd provision` | Maak Azure-resources aan |
-| `azd deploy` | Implementeer applicatiecode |
+| `azd init` | Project initialiseren |
+| `azd provision` | Azure resources aanmaken |
+| `azd deploy` | Applicatiecode deployen |
 | `azd up` | provision + deploy |
 | `azd down` | Verwijder alle resources |
 
@@ -82,18 +82,18 @@ my-project/
 
 ## 🔗 Navigatie
 
-| Direction | Chapter |
+| Richting | Hoofdstuk |
 |-----------|---------|
 | **Vorige** | [Hoofdstuk 3: Configuratie](../chapter-03-configuration/README.md) |
-| **Volgende** | [Hoofdstuk 5: Multi-agentoplossingen](../chapter-05-multi-agent/README.md) |
+| **Volgende** | [Hoofdstuk 5: Multi-Agent Oplossingen](../chapter-05-multi-agent/README.md) |
 
 ---
 
-## 📖 Gerelateerde bronnen
+## 📖 Gerelateerde Bronnen
 
-- [Pre-implementatiecontroles](../chapter-06-pre-deployment/README.md)
-- [Container-appvoorbeelden](../../examples/container-app/README.md)
-- [Database-appvoorbeeld](../../examples/database-app/README.md)
+- [Pre-Deployment Checks](../chapter-06-pre-deployment/README.md)
+- [Container App Voorbeelden](../../examples/container-app/README.md)
+- [Database App Voorbeeld](../../examples/database-app/README.md)
 
 ---
 

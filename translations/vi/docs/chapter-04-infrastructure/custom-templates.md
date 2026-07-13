@@ -1,57 +1,57 @@
-# Tạo mẫu azd của riêng bạn
+# Tạo Mẫu azd Của Riêng Bạn
 
-**Điều hướng chương:**
-- **📚 Trang khóa học**: [AZD cho Người Mới](../../README.md)
-- **📖 Chương hiện tại**: Chương 4 - Hạ tầng dưới dạng mã & Triển khai
-- **⬅️ Trước**: [Hướng dẫn Triển khai](deployment-guide.md)
-- **🚀 Chương tiếp theo**: [Chương 5: Giải pháp đa tác nhân](../chapter-05-multi-agent/README.md)
+**Điều Hướng Chương:**
+- **📚 Trang Khóa Học**: [AZD Cho Người Mới Bắt Đầu](../../README.md)
+- **📖 Chương Hiện Tại**: Chương 4 - Cơ Sở Hạ Tầng Dưới Dạng Mã & Triển Khai
+- **⬅️ Trước**: [Hướng Dẫn Triển Khai](deployment-guide.md)
+- **🚀 Chương Tiếp Theo**: [Chương 5: Giải Pháp Đa Tác Nhân](../chapter-05-multi-agent/README.md)
 
-> Đã xác thực trên `azd 1.25.6` vào tháng 6 năm 2026.
+> Đã xác thực với `azd 1.27.1` vào tháng 7 năm 2026.
 
-## Giới thiệu
+## Giới Thiệu
 
-Cho đến nay bạn đã *tiêu thụ* các mẫu bằng `azd init --template <name>`. Nhưng khi bạn có một bố cục dự án mà nhóm thích—ví dụ, một Container App với một Cosmos DB và giám sát phù hợp—bạn sẽ muốn biến nó thành một mẫu có thể tái sử dụng của riêng mình. Một mẫu chỉ đơn giản là một Git repository với cấu trúc có thể đoán trước mà azd biết cách đọc. Bài học này sẽ hướng dẫn bạn cách xây dựng một mẫu từ đầu, kiểm thử nó, và (tùy chọn) xuất bản nó lên thư viện cộng đồng.
+Cho đến nay bạn đã *tiêu thụ* các mẫu với `azd init --template <name>`. Nhưng khi bạn có một bố cục dự án mà nhóm bạn thích—ví dụ như một Ứng Dụng Container với Cosmos DB và giám sát đúng—bạn sẽ muốn biến nó thành một mẫu tái sử dụng của riêng bạn. Mẫu chỉ là một kho Git với cấu trúc có thể đoán được mà azd biết cách đọc. Bài học này sẽ chỉ cho bạn cách tự tạo một mẫu từ đầu, kiểm thử nó, và (tùy chọn) công bố nó lên bộ sưu tập cộng đồng.
 
-## Mục tiêu học tập
+## Mục Tiêu Học Tập
 
-By the end of this lesson, you will:
-- Hiểu những gì làm cho một thư mục trở thành "mẫu azd"
+Cuối bài học này, bạn sẽ:
+- Hiểu rõ những gì tạo thành một "mẫu azd"
 - Biết các tệp và cấu trúc thư mục cần thiết
-- Thêm `azure.yaml` và `infra/` để người khác có thể tái sử dụng
+- Thêm `azure.yaml` và thư mục `infra/` mà người khác có thể tái sử dụng
 - Kiểm thử mẫu cục bộ trước khi chia sẻ
-- Xuất bản nó và (tùy chọn) gửi nó tới Awesome AZD
+- Công bố nó và (tùy chọn) gửi vào Awesome AZD
 
-## Kết quả học tập
+## Kết Quả Học Tập
 
 Sau khi hoàn thành bài học này, bạn sẽ có thể:
-- Khởi tạo một repository mẫu mới
-- Tham số hóa hạ tầng để nó hoạt động trong bất kỳ subscription nào
-- Xác thực một mẫu bằng `azd init` và `azd up`
-- Thêm metadata mà gallery cộng đồng yêu cầu
+- Tạo scaffold kho mẫu mới
+- Tham số hóa cơ sở hạ tầng để nó hoạt động trong bất kỳ đăng ký nào
+- Xác thực mẫu bằng `azd init` và `azd up`
+- Thêm metadata mà bộ sưu tập cộng đồng yêu cầu
 
 ---
 
-## Mẫu thực sự là gì?
+## Mẫu Là Gì, Thực Sự Là Gì?
 
-Một mẫu azd là **một repository Git** chứa, tối thiểu:
+Một mẫu azd là **một kho Git** chứa, tối thiểu:
 
-| File / folder | Purpose | Required? |
+| Tệp / thư mục | Mục đích | Bắt Buộc? |
 |---------------|---------|-----------|
-| `azure.yaml` | Mô tả các dịch vụ, host và nhà cung cấp hạ tầng | ✅ Yes |
-| `infra/` | Bicep, Terraform hoặc Pulumi để cấp phát tài nguyên | ✅ Yes |
-| `src/` (or your code) | Mã ứng dụng mà azd triển khai | ✅ Yes |
-| `README.md` | Cách sử dụng mẫu | ✅ Rất được khuyến nghị |
-| `.azdo/` or `.github/` | Định nghĩa pipeline CI/CD | Optional |
-| `.devcontainer/` | Môi trường phát triển có thể tái tạo | Optional |
-| `azure.yaml` `metadata` | Thông tin gallery + telemetry | Optional (required to publish) |
+| `azure.yaml` | Mô tả dịch vụ, host, và nhà cung cấp cơ sở hạ tầng | ✅ Có |
+| `infra/` | Bicep, Terraform, hoặc Pulumi dùng để cung cấp tài nguyên | ✅ Có |
+| `src/` (hoặc mã của bạn) | Mã ứng dụng mà azd triển khai | ✅ Có |
+| `README.md` | Hướng dẫn sử dụng mẫu | ✅ Rất khuyến nghị |
+| `.azdo/` hoặc `.github/` | Định nghĩa pipeline CI/CD | Tùy chọn |
+| `.devcontainer/` | Môi trường phát triển tái tạo được | Tùy chọn |
+| `azure.yaml` `metadata` | Thông tin gallery + thu thập dữ liệu | Tùy chọn (bắt buộc để công bố) |
 
-Không có gì huyền bí ở đây: khi bạn chạy `azd init --template you/your-repo`, azd sẽ clone repo và đọc `azure.yaml`.
+Không có gì là phép thuật ở đây: khi bạn chạy `azd init --template you/your-repo`, azd sao chép kho và đọc `azure.yaml`.
 
 ---
 
-## Bước 1: Khởi tạo Repository
+## Bước 1: Tạo Scaffold Kho
 
-Tạo cấu trúc thư mục bằng tay hoặc bắt đầu từ một mẫu tối thiểu và chỉnh sửa nó:
+Tạo cấu trúc thư mục bằng tay hoặc bắt đầu từ một mẫu tối giản và chỉnh sửa nó:
 
 ```bash
 mkdir my-azd-template && cd my-azd-template
@@ -61,7 +61,7 @@ git init
 mkdir -p src infra
 ```
 
-Một bố cục hoàn chỉnh điển hình trông như sau:
+Một bố cục điển hình hoàn chỉnh trông như thế này:
 
 ```
 my-azd-template/
@@ -83,7 +83,7 @@ my-azd-template/
 
 ## Bước 2: Viết `azure.yaml`
 
-Đây là trái tim của mẫu. Nó cho azd biết sẽ triển khai gì và như thế nào:
+Đây là phần cốt lõi của mẫu. Nó nói cho azd biết phải triển khai gì và như thế nào:
 
 ```yaml
 # azure.yaml
@@ -101,13 +101,13 @@ services:
     host: containerapp              # appservice | containerapp | function | aks | staticwebapp
 ```
 
-> Trường `metadata.template` là thứ telemetry của gallery dùng để đếm lượt sử dụng. Sử dụng quy ước `name@version`.
+> Trường `metadata.template` là thứ thu thập dữ liệu gallery dùng để đếm lượt sử dụng. Dùng quy ước `name@version`.
 
 ---
 
-## Bước 3: Tham số hóa Hạ tầng
+## Bước 3: Tham Số Hóa Cơ Sở Hạ Tầng
 
-Quy tắc quan trọng nhất cho một mẫu *có thể tái sử dụng*: **không bao giờ viết cứng tên, vùng, hoặc các giá trị đặc thù subscription.** Sử dụng tham số và mẫu token tài nguyên để cùng một mẫu hoạt động trong subscription của bất kỳ ai.
+Quy tắc quan trọng nhất cho một mẫu *tái sử dụng được*: **không bao giờ hardcode tên, vùng, hoặc giá trị đặc thù đăng ký.** Dùng tham số và mẫu token tài nguyên để cùng một mẫu có thể chạy trong bất kỳ đăng ký nào.
 
 ```bicep
 // infra/main.bicep
@@ -138,12 +138,12 @@ module web 'modules/web.bicep' = {
 output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 ```
 
-Hai điều làm cho mẫu dễ sử dụng:
+Hai điều làm cho mẫu này thân thiện:
 
-1. **`azd-env-name` tag** — azd dùng nó để theo dõi và dọn dẹp tài nguyên theo từng môi trường.
-2. **`uniqueString(...)` resource token** — tạo hậu tố ổn định, duy nhất trên toàn cầu để tên không bị trùng.
+1. **Thẻ `azd-env-name`** — azd dùng nó để theo dõi và dọn dẹp tài nguyên theo môi trường.
+2. **Token tài nguyên `uniqueString(...)`** — tạo hậu tố ổn định và duy nhất toàn cầu để tên không bị trùng.
 
-Cung cấp một tệp tham số tương ứng đọc các giá trị azd chèn từ môi trường:
+Cung cấp tệp tham số tương ứng đọc các giá trị azd chèn từ môi trường:
 
 ```json
 // infra/main.parameters.json
@@ -161,43 +161,43 @@ azd tự động thay thế `${AZURE_ENV_NAME}` và `${AZURE_LOCATION}` từ mô
 
 ---
 
-## Bước 4: Kiểm thử Mẫu Cục bộ
+## Bước 4: Kiểm Thử Mẫu Cục Bộ
 
 Trước khi chia sẻ, hãy chứng minh mẫu hoạt động từ trạng thái sạch.
 
-**Kiểm thử từ thư mục cục bộ** (không cần đẩy lên Git):
+**Kiểm thử từ thư mục cục bộ** (không cần đẩy Git):
 
 ```bash
 # Từ một thư mục trống, khởi tạo bằng cách sử dụng đường dẫn mẫu cục bộ của bạn
 mkdir /tmp/test-run && cd /tmp/test-run
 azd init --template /path/to/my-azd-template
 
-# Cấu hình và triển khai từ đầu đến cuối
+# Cấp phát + triển khai từ đầu đến cuối
 azd auth login
 azd up
 ```
 
-**Sau đó thử dọn dẹp (teardown)**—một mẫu tốt sẽ dọn sạch hoàn toàn:
+**Sau đó kiểm thử dọn dẹp**—một mẫu tốt phải dọn dẹp hoàn toàn:
 
 ```bash
 azd down --force --purge
 ```
 
-Nếu `azd down` để lại tài nguyên, có lẽ bạn đã bỏ quên thẻ `azd-env-name` trên một tài nguyên.
+Nếu `azd down` còn để lại tài nguyên, có thể bạn đã quên thẻ `azd-env-name` trên một tài nguyên.
 
-> **Mẹo:** chạy `azd provision --preview` trước. Nó thực hiện một what-if và hiển thị lỗi mẫu trước khi bất kỳ tài nguyên nào được tạo.
+> **Mẹo:** chạy `azd provision --preview` trước. Nó thực hiện tình huống giả định và hiển thị lỗi mẫu trước khi tạo tài nguyên.
 
 ---
 
-## Bước 5: Xuất bản Mẫu
+## Bước 5: Công Bố Mẫu
 
-Đẩy repository lên GitHub (public nếu bạn muốn người khác sử dụng):
+Đẩy kho lên GitHub (công khai nếu bạn muốn người khác dùng):
 
 ```bash
 gh repo create my-azd-template --public --source=. --push
 ```
 
-Bất kỳ ai giờ có thể sử dụng nó:
+Bây giờ ai cũng có thể sử dụng:
 
 ```bash
 azd init --template your-github-username/my-azd-template
@@ -205,55 +205,55 @@ azd init --template your-github-username/my-azd-template
 
 ---
 
-## Bước 6 (Tùy chọn): Gửi tới Awesome AZD
+## Bước 6 (Tùy Chọn): Gửi Vào Awesome AZD
 
-Thư viện [Awesome AZD gallery](https://azure.github.io/awesome-azd/) liệt kê các mẫu cộng đồng. Để được liệt kê, repo của bạn nên bao gồm:
+[Awesome AZD gallery](https://azure.github.io/awesome-azd/) liệt kê các mẫu cộng đồng. Để được liệt kê, kho bạn nên bao gồm:
 
-- ✅ Một `README.md` rõ ràng với các yêu cầu trước, sơ đồ kiến trúc và ghi chú chi phí
-- ✅ Một `azure.yaml` hoạt động kèm `metadata.template`
-- ✅ Hạ tầng triển khai một cách sạch sẽ trong một subscription mới
-- ✅ Một tệp `LICENSE`
-- ✅ (Được khuyến nghị) Một `.devcontainer/` để mở Codespaces với một cú nhấp chuột
+- ✅ `README.md` rõ ràng với điều kiện tiên quyết, sơ đồ kiến trúc, và ghi chú chi phí
+- ✅ `azure.yaml` hoạt động với `metadata.template`
+- ✅ Cơ sở hạ tầng triển khai sạch sẽ trên một đăng ký mới
+- ✅ Tệp `LICENSE`
+- ✅ (Khuyến nghị) Thư mục `.devcontainer/` cho Codespaces một cú click
 
-Gửi bằng cách mở một pull request thêm mẫu của bạn vào tệp dữ liệu của gallery, tuân theo hướng dẫn đóng góp tại [kho lưu trữ Awesome AZD](https://github.com/Azure/awesome-azd).
+Gửi bằng cách mở pull request thêm mẫu của bạn vào tệp dữ liệu gallery theo hướng dẫn đóng góp tại [kho Awesome AZD](https://github.com/Azure/awesome-azd).
 
 ---
 
-## Những lỗi thường gặp
+## Những Sai Lầm Thường Gặp
 
-| Pitfall | Fix |
+| Sai Lầm | Cách Sửa |
 |---------|-----|
-| Tên tài nguyên viết cứng | Sử dụng token tài nguyên `uniqueString()` |
-| `azd down` để lại tài nguyên | Gắn thẻ mọi tài nguyên (hoặc nhóm tài nguyên) bằng `azd-env-name` |
-| Mẫu hoạt động với bạn, thất bại với người khác | Loại bỏ subscription IDs, tenant IDs, và các giả định về vùng |
-| Outputs not wired into the app | Export `SERVICE_<NAME>_ENDPOINT_URL` and other `AZURE_*` outputs |
-| Gallery submission rejected | Thêm `README.md`, `LICENSE`, và `metadata.template` |
+| Tên tài nguyên hardcoded | Dùng token tài nguyên `uniqueString()` |
+| `azd down` còn để lại tài nguyên | Đánh thẻ mọi tài nguyên (hoặc nhóm tài nguyên) với `azd-env-name` |
+| Mẫu chạy được với bạn, thất bại với người khác | Loại bỏ ID đăng ký, ID thuê, và giả định vùng |
+| Outputs không liên kết vào app | Xuất `SERVICE_<NAME>_ENDPOINT_URL` và các output `AZURE_*` khác |
+| Gửi gallery bị từ chối | Thêm `README.md`, `LICENSE`, và `metadata.template` |
 
 ---
 
-## Tóm tắt
+## Tóm Tắt
 
-- Mẫu chỉ là một repo Git với `azure.yaml`, `infra/`, và mã của bạn.
-- Tham số hóa mọi thứ—tên, vùng, và ID—để chạy được ở bất cứ đâu.
-- Luôn gắn thẻ tài nguyên bằng `azd-env-name` để `azd down` hoạt động.
-- Kiểm thử cục bộ với `azd init --template <local-path>` trước khi xuất bản.
-- Thêm metadata và một README để gửi lên Awesome AZD.
+- Mẫu chỉ là một kho Git với `azure.yaml`, `infra/`, và mã của bạn.
+- Tham số hóa mọi thứ—tên, vùng, và ID—để chạy được ở bất kỳ đâu.
+- Luôn đánh thẻ tài nguyên với `azd-env-name` để `azd down` hoạt động tốt.
+- Kiểm thử cục bộ với `azd init --template <local-path>` trước khi công bố.
+- Thêm metadata và README để gửi vào Awesome AZD.
 
 ---
 
-## 🔗 Điều hướng
+## 🔗 Điều Hướng
 
-| Hướng | Tài nguyên |
+| Hướng | Tài Nguyên |
 |-----------|----------|
-| **Trước** | [Hướng dẫn Triển khai](deployment-guide.md) |
-| **Trang chương** | [Chương 4: Hạ tầng dưới dạng mã](README.md) |
-| **Chương tiếp theo** | [Chương 5: Giải pháp đa tác nhân](../chapter-05-multi-agent/README.md) |
+| **Trước** | [Hướng Dẫn Triển Khai](deployment-guide.md) |
+| **Trang Chủ Chương** | [Chương 4: Cơ Sở Hạ Tầng Dưới Dạng Mã](README.md) |
+| **Chương Tiếp Theo** | [Chương 5: Giải Pháp Đa Tác Nhân](../chapter-05-multi-agent/README.md) |
 
-## 📖 Tài nguyên liên quan
+## 📖 Tài Nguyên Liên Quan
 
-- [Cấp phát tài nguyên](provisioning.md)
-- [Thư viện Awesome AZD](https://azure.github.io/awesome-azd/)
-- [Tài liệu chính thức về mẫu azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
+- [Cung Cấp Tài Nguyên](provisioning.md)
+- [Awesome AZD Gallery](https://azure.github.io/awesome-azd/)
+- [Tài liệu mẫu azd chính thức](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
 
 ---
 

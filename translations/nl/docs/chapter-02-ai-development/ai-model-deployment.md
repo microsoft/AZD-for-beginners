@@ -1,30 +1,30 @@
-# AI-modelimplementatie met Azure Developer CLI
+# AI Model Uitrol met Azure Developer CLI
 
-**Hoofdstuknavigatie:**
-- **📚 Cursusstartpagina**: [AZD voor Beginners](../../README.md)
-- **📖 Huidig hoofdstuk**: Hoofdstuk 2 - AI-first ontwikkeling
-- **⬅️ Vorige**: [Microsoft Foundry-integratie](microsoft-foundry-integration.md)
-- **➡️ Volgende**: [AI Workshop-lab](ai-workshop-lab.md)
-- **🚀 Volgend hoofdstuk**: [Hoofdstuk 3: Configuratie](../chapter-03-configuration/configuration.md)
+**Hoofdstuk Navigatie:**
+- **📚 Cursus Startpagina**: [AZD Voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 2 - AI-First Ontwikkeling
+- **⬅️ Vorig**: [Microsoft Foundry Integratie](microsoft-foundry-integration.md)
+- **➡️ Volgend**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 3: Configuratie](../chapter-03-configuration/configuration.md)
 
-Deze gids biedt uitgebreide instructies voor het implementeren van AI-modellen met behulp van AZD-sjablonen, en behandelt alles van modelselectie tot productie-implementatiepatronen.
+Deze gids biedt uitgebreide instructies voor het uitrollen van AI-modellen met AZD-sjablonen, en behandelt alles van modelselectie tot productiemodellen voor uitrol.
 
-> **Validatienotitie (2026-03-25):** De AZD-workflow in deze gids is gecontroleerd tegen `azd` `1.23.12`. Voor AI-implementaties die langer duren dan het standaardservice-implementatieraamwerk ondersteunen huidige AZD-versies `azd deploy --timeout <seconds>`.
+> **Validatienotitie (2026-07-13):** De AZD workflow in deze gids is gecontroleerd met `azd` `1.27.1`. Voor AI-uitrol die langer duurt dan het standaard servicedeploy-venster, ondersteunen huidige AZD-versies `azd deploy --timeout <seconds>`.
 
 ## Inhoudsopgave
 
-- [Strategie voor modelselectie](#strategie-voor-modelselectie)
-- [AZD-configuratie voor AI-modellen](#azd-configuratie-voor-ai-modellen)
-- [Implementatiepatronen](#implementatiepatronen)
+- [Model Selectiestrategie](#model-selectiestrategie)
+- [AZD Configuratie voor AI-modellen](#azd-configuratie-voor-ai-modellen)
+- [Uitrolpatronen](#uitrolpatronen)
 - [Modelbeheer](#modelbeheer)
-- [Overwegingen voor productie](#overwegingen-voor-productie)
-- [Monitoring en observeerbaarheid](#monitoring-en-observeerbaarheid)
+- [Productie-overwegingen](#productie-overwegingen)
+- [Monitoring en Observeerbaarheid](#monitoring-en-observeerbaarheid)
 
-## Strategie voor modelselectie
+## Model Selectiestrategie
 
-### Microsoft Foundry Models Modellen
+### Microsoft Foundry Modellen
 
-Kies het juiste model voor uw gebruiksscenario:
+Kies het juiste model voor jouw use case:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -52,20 +52,20 @@ services:
         ]
 ```
 
-### Capaciteitsplanning voor modellen
+### Capaciteitsplanning voor Modellen
 
-| Modeltype | Gebruiksscenario | Aanbevolen capaciteit | Kostenoverwegingen |
+| Modeltype | Use Case | Aanbevolen Capaciteit | Kostenoverwegingen |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | Chat, V&A | 10-50 TPM | Kosten-efficiënt voor de meeste workloads |
-| gpt-4.1 | Complexe redenering | 20-100 TPM | Hogere kosten, gebruik voor premiumfuncties |
-| text-embedding-3-large | Zoekopdrachten, RAG | 30-120 TPM | Sterke standaardkeuze voor semantische zoekopdrachten en ophalen |
+| gpt-4.1-mini | Chat, Q&A | 10-50 TPM | Kosteneffectief voor de meeste workloads |
+| gpt-4.1 | Complex redeneren | 20-100 TPM | Hogere kosten, gebruik voor premium features |
+| text-embedding-3-large | Zoek, RAG | 30-120 TPM | Sterke standaardkeuze voor semantisch zoeken en ophalen |
 | Whisper | Spraak-naar-tekst | 10-50 TPM | Audioverwerkingsworkloads |
 
-## AZD-configuratie voor AI-modellen
+## AZD Configuratie voor AI-modellen
 
-### Bicep-sjabloonconfiguratie
+### Bicep Sjabloon Configuratie
 
-Maak modelimplementaties via Bicep-sjablonen:
+Maak modeluitrol aan via Bicep-sjablonen:
 
 ```bicep
 // infra/main.bicep
@@ -126,7 +126,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### Omgevingsvariabelen
 
-Configureer uw applicatieomgeving:
+Configureer je applicatieomgeving:
 
 ```bash
 # .env-configuratie
@@ -136,9 +136,9 @@ AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## Implementatiepatronen
+## Uitrolpatronen
 
-### Patroon 1: Implementatie in één regio
+### Patroon 1: Uitrol in Eén Regio
 
 ```yaml
 # azure.yaml - Single region
@@ -151,12 +151,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-Geschikt voor:
+Beste voor:
 - Ontwikkeling en testen
-- Toepassingen voor één markt
+- Applicaties voor één markt
 - Kostenoptimalisatie
 
-### Patroon 2: Implementatie in meerdere regio's
+### Patroon 2: Multi-Regio Uitrol
 
 ```bicep
 // Multi-region deployment
@@ -169,14 +169,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Geschikt voor:
-- Wereldwijde toepassingen
-- Vereisten voor hoge beschikbaarheid
-- Verdeling van de belasting
+Beste voor:
+- Globale applicaties
+- Hoge beschikbaarheidseisen
+- Verdeling van belasting
 
-### Patroon 3: Hybride implementatie
+### Patroon 3: Hybride Uitrol
 
-Combineer Microsoft Foundry Models met andere AI-diensten:
+Combineer Microsoft Foundry Modellen met andere AI-diensten:
 
 ```bicep
 // Hybrid AI services
@@ -209,7 +209,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Versiebeheer
 
-Volg modelversies in uw AZD-configuratie:
+Houd modelversies bij in je AZD-configuratie:
 
 ```json
 {
@@ -229,7 +229,7 @@ Volg modelversies in uw AZD-configuratie:
 
 ### Modelupdates
 
-Gebruik AZD-hooks voor modelupdates:
+Gebruik AZD hooks voor modelupdates:
 
 ```bash
 #!/bin/bash
@@ -245,9 +245,9 @@ az cognitiveservices account list-models \
 azd deploy --timeout 1800
 ```
 
-### A/B-testen
+### A/B Testen
 
-Implementeer meerdere modelversies:
+Rol meerdere modelversies uit:
 
 ```bicep
 param enableABTesting bool = false
@@ -269,11 +269,11 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Overwegingen voor productie
+## Productie-overwegingen
 
 ### Capaciteitsplanning
 
-Bereken de vereiste capaciteit op basis van gebruikspatronen:
+Bereken de benodigde capaciteit op basis van gebruikspatronen:
 
 ```python
 # Voorbeeld van capaciteitsberekening
@@ -288,7 +288,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Voorbeeld van gebruik
+# Voorbeeldgebruik
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -298,9 +298,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Autoschaalconfiguratie
+### Auto-scaling Configuratie
 
-Configureer autoschaal voor Container Apps:
+Configureer auto-scaling voor Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -338,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Kostenoptimalisatie
 
-Implementeer kostenbeheersing:
+Voer kostenbeheersing in:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -368,9 +368,9 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Monitoring en observeerbaarheid
+## Monitoring en Observeerbaarheid
 
-### Integratie met Application Insights
+### Application Insights Integratie
 
 Configureer monitoring voor AI-workloads:
 
@@ -408,7 +408,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### Aangepaste metrics
+### Aangepaste Metrics
 
 Volg AI-specifieke metrics:
 
@@ -445,12 +445,12 @@ class AITelemetry:
         )
 ```
 
-### Gezondheidscontroles
+### Gezondheidschecks
 
-Implementeer health monitoring voor AI-diensten:
+Implementeer monitoring van de AI-servicegezondheid:
 
 ```python
-# Healthcheck-eindpunten
+# Eindpunten voor gezondheidscontrole
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -476,32 +476,32 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## Volgende stappen
+## Volgende Stappen
 
-1. **Beoordeel de [Microsoft Foundry-integratiehandleiding](microsoft-foundry-integration.md)** voor service-integratiepatronen
-2. **Voltooi het [AI Workshop-lab](ai-workshop-lab.md)** voor praktische ervaring
-3. **Implementeer [Productie AI-praktijken](production-ai-practices.md)** voor enterprise-implementaties
-4. **Bekijk de [AI-probleemoplossingsgids](../chapter-07-troubleshooting/ai-troubleshooting.md)** voor veelvoorkomende problemen
+1. **Bekijk de [Microsoft Foundry Integratie Gids](microsoft-foundry-integration.md)** voor service-integratiepatronen
+2. **Voltooi de [AI Workshop Lab](ai-workshop-lab.md)** voor praktische ervaring
+3. **Implementeer [Productie AI Praktijken](production-ai-practices.md)** voor bedrijfsuitrol
+4. **Verken de [AI Troubleshooting Gids](../chapter-07-troubleshooting/ai-troubleshooting.md)** voor veelvoorkomende problemen
 
 ## Bronnen
 
-- [Beschikbaarheid van Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Documentatie Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Schaalopties voor Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [Kostenoptimalisatie voor AI-modellen](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Microsoft Foundry Modellen Model Beschikbaarheid](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Azure Developer CLI Documentatie](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Container Apps Schalen](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [AI Model Kostenoptimalisatie](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Hoofdstuknavigatie:**
-- **📚 Cursusstartpagina**: [AZD voor Beginners](../../README.md)
-- **📖 Huidig hoofdstuk**: Hoofdstuk 2 - AI-first ontwikkeling
-- **⬅️ Vorige**: [Microsoft Foundry-integratie](microsoft-foundry-integration.md)
-- **➡️ Volgende**: [AI Workshop-lab](ai-workshop-lab.md)
-- **🚀 Volgend hoofdstuk**: [Hoofdstuk 3: Configuratie](../chapter-03-configuration/configuration.md)
+**Hoofdstuk Navigatie:**
+- **📚 Cursus Startpagina**: [AZD Voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 2 - AI-First Ontwikkeling
+- **⬅️ Vorig**: [Microsoft Foundry Integratie](microsoft-foundry-integration.md)
+- **➡️ Volgend**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 3: Configuratie](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vrijwaring**:
-Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we naar nauwkeurigheid streven, houd er rekening mee dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de originele taal moet als de gezaghebbende bron worden beschouwd. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+**Disclaimer**:
+Dit document is vertaald met behulp van de AI vertaaldienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

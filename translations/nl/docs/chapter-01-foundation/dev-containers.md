@@ -1,54 +1,54 @@
 # Dev Containers & GitHub Codespaces voor azd
 
-**Chapter Navigation:**
-- **📚 Cursus Home**: [AZD voor Beginners](../../README.md)
-- **📖 Huidig Hoofdstuk**: Hoofdstuk 1 - Basis & Snelstart
-- **⬅️ Vorige**: [Breng Je Eigen App](bring-your-own-app.md)
+**Hoofdstuk Navigatie:**
+- **📚 Cursus Startpagina**: [AZD Voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 1 - Basis & Snel Starten
+- **⬅️ Vorige**: [Breng Je Eigen App Mee](bring-your-own-app.md)
 - **🚀 Volgend Hoofdstuk**: [Hoofdstuk 2: AI-First Ontwikkeling](../chapter-02-ai-development/README.md)
 
-> Gevalideerd met `azd 1.25.6` in juni 2026.
+> Gevalideerd met `azd 1.27.1` in juli 2026.
 
 ## Introductie
 
-Het installeren van azd, de juiste taal-runtime, Docker en de Azure CLI op elke machine is een karwei—en het is de belangrijkste reden waarom een handleiding die "werkt op mijn machine" bij iemand anders faalt. Een **dev container** lost dit op door je gehele toolchain in één bestand te beschrijven. Iedereen die het project in VS Code of GitHub Codespaces opent, krijgt exact dezelfde omgeving, met azd al geïnstalleerd. Deze les laat je zien hoe je er één toevoegt.
+Het installeren van azd, de juiste taal runtime, Docker en de Azure CLI op elke machine is een klus—en het is de belangrijkste reden waarom een tutorial die "werkt op mijn machine" faalt bij iemand anders. Een **dev container** lost dit op door jouw hele toolchain te beschrijven in een bestand. Iedereen die het project opent in VS Code of GitHub Codespaces krijgt precies dezelfde omgeving, met azd al geïnstalleerd. Deze les laat je zien hoe je er een toevoegt.
 
 ## Leerdoelen
 
 Aan het einde van deze les zul je:
-- Begrijpen wat een dev container is en waarom het helpt bij azd
-- Een minimaal `.devcontainer/devcontainer.json` toevoegen aan een project
-- azd, de Azure CLI en Docker opnemen via Dev Container *features*
+- Begrijpen wat een dev container is en waarom het helpt met azd
+- Een minimale `.devcontainer/devcontainer.json` aan een project toevoegen
+- azd, de Azure CLI en Docker via Dev Container *features* opnemen
 - Het project openen in GitHub Codespaces of VS Code
 
 ## Leerresultaten
 
-Na het voltooien van deze les kun je:
-- Een `devcontainer.json` schrijven voor een azd-project
-- azd en Azure-hulpmiddelen toevoegen zonder handmatige installatie
-- `azd up` uitvoeren vanuit een container of Codespace
+Na het voltooien van deze les ben je in staat om:
+- Een `devcontainer.json` te schrijven voor een azd-project
+- azd en Azure tools toe te voegen zonder handmatige installs
+- `azd up` uit te voeren vanuit een container of Codespace
 
 ---
 
-## Wat is een dev container?
+## Wat is een Dev Container?
 
-Een dev container is een op Docker gebaseerde ontwikkelomgeving die wordt gedefinieerd door een `.devcontainer/devcontainer.json`-bestand in je repository. Wanneer je het project opent:
+Een dev container is een Docker-gebaseerde ontwikkelomgeving die wordt gedefinieerd door een `.devcontainer/devcontainer.json` bestand in je repository. Wanneer je het project opent:
 
-- **VS Code** (met de Dev Containers-extensie) bouwt de container en koppelt eraan.
+- **VS Code** (met de Dev Containers extensie) bouwt de container en verbindt ermee.
 - **GitHub Codespaces** bouwt dezelfde container in de cloud en geeft je een browsergebaseerde editor.
 
-In beide gevallen krijgt elke bijdrager identieke tools—geen "heb je azd geïnstalleerd?"-problemen.
+Hoe dan ook, elke bijdrager krijgt identieke tools—geen "heb je azd geïnstalleerd?" troubleshooting.
 
 ```mermaid
 graph LR
-    Repo[Je repo<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Devcontainers]
+    Repo[Je Repo<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Dev Containers]
     Repo --> Codespaces[GitHub<br/>Codespaces]
-    VSCode --> Env[Identieke omgeving:<br/>azd + az + Docker]
+    VSCode --> Env[Identical environment:<br/>azd + az + Docker]
     Codespaces --> Env
 ```
 
 ---
 
-## Stap 1: Maak het devcontainer-bestand aan
+## Stap 1: Maak het devcontainer Bestand
 
 Maak `.devcontainer/devcontainer.json` aan in de root van je project:
 
@@ -75,23 +75,23 @@ Maak `.devcontainer/devcontainer.json` aan in de root van je project:
 }
 ```
 
-Wat elk deel doet:
+Wat elk onderdeel doet:
 
-| Key | Purpose |
+| Sleutel | Doel |
 |-----|---------|
-| `image` | Het basis-OS voor de container |
-| `features` | Vooraf gebouwde installateurs—hier: Azure CLI, **azd**, Docker en Node.js |
-| `customizations.vscode.extensions` | Installeert automatisch de azd- en Bicep-extensies voor VS Code |
+| `image` | Het basis besturingssysteem voor de container |
+| `features` | Vooraf gebouwde installateurs—hier: Azure CLI, **azd**, Docker, en Node.js |
+| `customizations.vscode.extensions` | Installeert automatisch de azd en Bicep VS Code extensies |
 | `forwardPorts` | Maakt de poort van je app beschikbaar in je browser |
-| `postCreateCommand` | Wordt één keer uitgevoerd nadat de container is gebouwd (hier een sanity-check) |
+| `postCreateCommand` | Voert één keer uit nadat de container is gebouwd (hier, een sanity check) |
 
-> De `ghcr.io/azure/azure-dev/azd:latest` feature is de officiële manier om azd in een container te krijgen. Pin een specifieke versie (bijvoorbeeld `azd:1.25.6`) als je reproduceerbaarheid nodig hebt.
+> De `ghcr.io/azure/azure-dev/azd:latest` feature is de officiële manier om azd in een container te krijgen. Specificeer een specifieke versie (bijvoorbeeld `azd:1.27.1`) als je reproduceerbaarheid nodig hebt.
 
 ---
 
-## Stap 2: Stem de feature af op de taal van je app
+## Stap 2: Pas de Feature aan op de Taal van je App
 
-Vervang de `node`-feature door wat jouw app gebruikt:
+Vervang de `node` feature door wat jouw app gebruikt:
 
 ```jsonc
 // Python project
@@ -107,54 +107,54 @@ Vervang de `node`-feature door wat jouw app gebruikt:
 "ghcr.io/devcontainers/features/go:1": {}
 ```
 
-Houd `docker-in-docker` aan als je `host` `containerapp`, `aks`, of iets anders is dat een containerimage bouwt—azd heeft Docker nodig om images te bouwen en te pushen.
+Houd `docker-in-docker` als je `host` `containerapp`, `aks` is, of iets dat een container image bouwt—azd heeft Docker nodig om images te bouwen en pushen.
 
 ---
 
-## Stap 3: Openen
+## Stap 3: Open Het
 
 **In VS Code:**
-1. Installeer de **Dev Containers**-extensie.
+1. Installeer de **Dev Containers** extensie.
 2. Open de projectmap.
-3. Klik **Reopen in Container** wanneer daarom wordt gevraagd (of voer *Dev Containers: Reopen in Container* uit).
+3. Klik op **Heropen in Container** wanneer gevraagd (of voer *Dev Containers: Reopen in Container* uit).
 
 **In GitHub Codespaces:**
 1. Push de repo naar GitHub.
-2. Klik **Code → Codespaces → Create codespace on main**.
-3. Wacht tot de container is gebouwd—azd is beschikbaar in de terminal.
+2. Klik op **Code → Codespaces → Maak codespace aan op main**.
+3. Wacht tot de container is gebouwd—azd staat klaar in de terminal.
 
 ---
 
-## Stap 4: Implementeren vanuit de container
+## Stap 4: Deploy vanuit de Container
 
 De container heeft azd vooraf geïnstalleerd, dus de normale workflow werkt gewoon:
 
 ```bash
-azd auth login --use-device-code   # devicecode is handig binnen Codespaces
+azd auth login --use-device-code   # apparaatcode is handig binnen Codespaces
 azd up
 ```
 
-> **Waarom `--use-device-code`?** In een remote container of Codespace is er geen lokale browser om naar te redirecten, dus device-code aanmelding is de betrouwbare methode. Je plakt een code in een browsertab om de aanmelding te voltooien.
+> **Waarom `--use-device-code`?** In een remote container of Codespace is er geen lokale browser om naar te redirecten, dus device-code login is de betrouwbare manier. Je plakt een code in een browsertab om in te loggen.
 
 ---
 
-## Veelvoorkomende valkuilen
+## Veelvoorkomende Valkuilen
 
 | Valkuil | Oplossing |
-|---------|-----------|
-| `azd up` can't build an image | Voeg de `docker-in-docker`-feature toe |
-| Browser login hangs in Codespaces | Gebruik `azd auth login --use-device-code` |
-| Tools differ between teammates | Pin featureversies (bijv. `azd:1.25.6`) |
-| App not reachable in browser | Voeg de poort toe aan `forwardPorts` |
+|---------|-----|
+| `azd up` kan geen image bouwen | Voeg de `docker-in-docker` feature toe |
+| Browser login hangt in Codespaces | Gebruik `azd auth login --use-device-code` |
+| Tools verschillen tussen teamgenoten | Pin feature versies (bijv. `azd:1.27.1`) |
+| App is niet bereikbaar in browser | Voeg de poort toe aan `forwardPorts` |
 
 ---
 
 ## Samenvatting
 
-- Een dev container maakt je azd-toolchain reproduceerbaar voor iedereen.
+- Een dev container maakt je azd toolchain reproduceerbaar voor iedereen.
 - Voeg azd, de Azure CLI en Docker toe via Dev Container *features*.
-- Stem de taal-feature af op je app en behoud `docker-in-docker` voor containerhosts.
-- Gebruik device-code login bij gebruik in Codespaces.
+- Pas de taal feature aan op je app en houd `docker-in-docker` voor container hosts.
+- Gebruik device-code login bij uitvoering binnen Codespaces.
 
 ---
 
@@ -162,16 +162,16 @@ azd up
 
 | Richting | Bron |
 |-----------|----------|
-| **Vorige** | [Breng Je Eigen App](bring-your-own-app.md) |
-| **Hoofdstuk Start** | [Hoofdstuk 1: Basis & Snelstart](README.md) |
+| **Vorige** | [Breng Je Eigen App Mee](bring-your-own-app.md) |
+| **Hoofdstuk Start** | [Hoofdstuk 1: Basis & Snel Starten](README.md) |
 | **Volgend Hoofdstuk** | [Hoofdstuk 2: AI-First Ontwikkeling](../chapter-02-ai-development/README.md) |
 
-## 📖 Gerelateerde bronnen
+## 📖 Gerelateerde Bronnen
 
 - [Installatie & Setup](installation.md)
-- [Cheatsheet met commando's](../../resources/cheat-sheet.md)
-- [Officiële Dev Containers-specificatie](https://containers.dev/)
-- [azd Dev Container-feature](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
+- [Command Cheat Sheet](../../resources/cheat-sheet.md)
+- [Officiële Dev Containers specificatie](https://containers.dev/)
+- [azd Dev Container feature](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
 
 ---
 

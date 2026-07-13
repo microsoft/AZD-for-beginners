@@ -1,22 +1,22 @@
-# Hoofdstuk 2: AI-First-ontwikkeling
+# Hoofdstuk 2: AI-First Ontwikkeling
 
-**📚 Cursus**: [AZD voor Beginners](../../README.md) | **⏱️ Duur**: 1-2 hours | **⭐ Complexiteit**: Intermediate
+**📚 Cursus**: [AZD Voor Beginners](../../README.md) | **⏱️ Duur**: 1-2 uur | **⭐ Complexiteit**: Gemiddeld
 
 ---
 
 ## Overzicht
 
-This chapter focuses on deploying AI-powered applications using Azure Developer CLI and Microsoft Foundry services. From simple AI chat apps to intelligent agents with tools.
+Dit hoofdstuk richt zich op het implementeren van AI-gedreven applicaties met behulp van Azure Developer CLI en Microsoft Foundry diensten. Van eenvoudige AI-chatapps tot intelligente agenten met tools.
 
-> **Validatienota (2026-06-15):** The command flow and extension guidance in this chapter were reviewed against `azd` `1.25.6` and the current preview AI agent extension release `azure.ai.agents` `0.1.40-preview`. If you are on an older AZD build, update first and then continue with the exercises.
+> **Validatienotitie (2026-07-13):** De commandoflow en extensierichtlijnen in dit hoofdstuk zijn gecontroleerd tegen `azd` `1.27.1` en de huidige preview AI-agent extensie release `azure.ai.agents` `1.0.0-beta.5`. Als je een oudere AZD-versie gebruikt, update dan eerst en ga daarna verder met de oefeningen.
 
 ## Leerdoelen
 
 Door dit hoofdstuk te voltooien, zul je:
-- Implementeer AI-toepassingen met vooraf gebouwde AZD-sjablonen
-- Begrijp de integratie van Microsoft Foundry met AZD
-- Configureer en pas AI-agenten aan met tools
-- Implementeer RAG (Retrieval-Augmented Generation)-toepassingen
+- AI-toepassingen implementeren met vooraf gebouwde AZD-sjablonen
+- Microsoft Foundry integratie met AZD begrijpen
+- AI-agenten met tools configureren en aanpassen
+- RAG (Retrieval-Augmented Generation) applicaties implementeren
 
 ---
 
@@ -24,32 +24,32 @@ Door dit hoofdstuk te voltooien, zul je:
 
 | # | Les | Beschrijving | Tijd |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | Verbind AZD met Foundry-diensten | 30 min |
-| 2 | [AI Agents Guide](agents.md) | Implementeer slimme agenten met tools | 45 min |
-| 3 | [AI Model Deployment](ai-model-deployment.md) | Implementeer en configureer AI-modellen | 30 min |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Hands-on: Maak je AI-oplossing AZD-klaar | 60 min |
+| 1 | [Microsoft Foundry Integratie](microsoft-foundry-integration.md) | Verbind AZD met Foundry-diensten | 30 min |
+| 2 | [AI Agenten Gids](agents.md) | Implementeer intelligente agenten met tools | 45 min |
+| 3 | [AI Model Implementatie](ai-model-deployment.md) | Implementeer en configureer AI-modellen | 30 min |
+| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Praktijk: Maak je AI-oplossing AZD-klaar | 60 min |
 
 ---
 
-## 🚀 Snelstart
+## 🚀 Snelle Start
 
 ```bash
-# Optie 1: RAG-chatapplicatie
+# Optie 1: RAG Chat Applicatie
 azd init --template azure-search-openai-demo
 azd up
 
-# Optie 2: AI-agenten
+# Optie 2: AI Agenten
 azd init --template get-started-with-ai-agents
 azd up
 
-# Optie 3: Snelle chat-app
+# Optie 3: Snelle Chat App
 azd init --template openai-chat-app-quickstart
 azd up
 ```
 
 ---
 
-## 🤖 Uitgelichte AI-sjablonen
+## 🤖 Uitgelichte AI Sjablonen
 
 | Sjabloon | Beschrijving | Diensten |
 |----------|-------------|----------|
@@ -63,11 +63,11 @@ azd up
 
 | Omgeving | Geschatte Maandelijkse Kosten |
 |-------------|----------------------|
-| Development | $80-150 |
-| Staging | $150-300 |
-| Production | $300-3,500+ |
+| Ontwikkeling | $80-150 |
+| Acceptatie | $150-300 |
+| Productie | $300-3.500+ |
 
-**Tip:** Voer `azd down` uit na het testen om kosten te voorkomen.
+**Tip:** Voer `azd down` uit na het testen om kosten te vermijden.
 
 ---
 
@@ -75,16 +75,16 @@ azd up
 
 | Richting | Hoofdstuk |
 |-----------|---------|
-| **Vorige** | [Hoofdstuk 1: Basis](../chapter-01-foundation/README.md) |
+| **Vorige** | [Hoofdstuk 1: Fundament](../chapter-01-foundation/README.md) |
 | **Volgende** | [Hoofdstuk 3: Configuratie](../chapter-03-configuration/README.md) |
-| **Sla over naar** | [Hoofdstuk 8: Productiepatronen](../chapter-08-production/README.md) |
+| **Overslaan naar** | [Hoofdstuk 8: Productiepatronen](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Gerelateerde bronnen
+## 📖 Gerelateerde Bronnen
 
-- [AI-probleemoplossing](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [AI-praktijken voor productie](../chapter-08-production/production-ai-practices.md)
+- [AI Probleemoplossing](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Productie AI Praktijken](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---
