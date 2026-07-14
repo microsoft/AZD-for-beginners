@@ -1,22 +1,22 @@
-# Chương 8: Mẫu Sản xuất & Doanh nghiệp
+# Chương 8: Các Mô hình Sản xuất & Doanh nghiệp
 
-**📚 Khóa học**: [AZD Dành cho Người Mới](../../README.md) | **⏱️ Thời lượng**: 2-3 giờ | **⭐ Độ phức tạp**: Nâng cao
+**📚 Khóa học**: [AZD For Beginners](../../README.md) | **⏱️ Thời lượng**: 2-3 giờ | **⭐ Độ phức tạp**: Nâng cao
 
 ---
 
 ## Tổng quan
 
-Chương này bao gồm các mẫu triển khai sẵn sàng cho doanh nghiệp, gia cố bảo mật, giám sát và tối ưu chi phí cho khối lượng công việc AI trong môi trường sản xuất.
+Chương này bao gồm các mô hình triển khai sẵn sàng cho doanh nghiệp, gia cố bảo mật, giám sát và tối ưu hóa chi phí cho khối lượng công việc AI sản xuất.
 
-> Đã xác thực với `azd 1.25.6` vào tháng 6 năm 2026.
+> Được xác nhận với `azd 1.27.1` vào tháng 7 năm 2026.
 
 ## Mục tiêu học tập
 
-Khi hoàn thành chương này, bạn sẽ:
-- Triển khai ứng dụng chịu lỗi đa vùng
-- Triển khai các mẫu bảo mật cho doanh nghiệp
+Sau khi hoàn thành chương này, bạn sẽ:
+- Triển khai ứng dụng nhiều vùng để tăng tính chịu lỗi
+- Áp dụng các mô hình bảo mật doanh nghiệp
 - Cấu hình giám sát toàn diện
-- Tối ưu chi phí ở quy mô lớn
+- Tối ưu hóa chi phí ở quy mô lớn
 - Thiết lập pipeline CI/CD với AZD
 
 ---
@@ -25,30 +25,30 @@ Khi hoàn thành chương này, bạn sẽ:
 
 | # | Bài học | Mô tả | Thời gian |
 |---|--------|-------------|------|
-| 1 | [Production AI Practices](production-ai-practices.md) | Các mẫu triển khai cho doanh nghiệp | 90 phút |
+| 1 | [Thực tiễn AI trong sản xuất](production-ai-practices.md) | Các mô hình triển khai doanh nghiệp | 90 phút |
 
 ---
 
-## 🚀 Danh sách kiểm tra Sản xuất
+## 🚀 Bảng kiểm tra Sản xuất
 
-- [ ] Triển khai đa vùng để tăng khả năng phục hồi
-- [ ] Định danh được quản lý cho xác thực (không dùng khóa)
-- [ ] Application Insights để giám sát
-- [ ] Cấu hình ngân sách chi phí và cảnh báo
-- [ ] Bật quét bảo mật
+- [ ] Triển khai đa vùng để tăng tính chịu lỗi
+- [ ] Sử dụng Managed Identity để xác thực (không dùng key)
+- [ ] Sử dụng Application Insights để giám sát
+- [ ] Cấu hình ngân sách và cảnh báo chi phí
+- [ ] Kích hoạt quét bảo mật
 - [ ] Tích hợp pipeline CI/CD
-- [ ] Kế hoạch phục hồi sau thảm họa
+- [ ] Kế hoạch khôi phục sau thảm họa
 
 ---
 
-## 🏗️ Mẫu kiến trúc
+## 🏗️ Các Mẫu Kiến trúc
 
 ### Mẫu 1: Microservices AI
 
 ```mermaid
 graph LR
-    Gateway[Cổng API] --> AI[Dịch vụ AI] --> Models[Các mô hình Microsoft Foundry]
-    Gateway --> Auth[Dịch vụ Xác thực]
+    Gateway[Cổng API] --> AI[Dịch vụ AI] --> Models[Mô hình Microsoft Foundry]
+    Gateway --> Auth[Dịch vụ xác thực]
     AI --> Data[Kho dữ liệu]
 ```
 
@@ -56,7 +56,7 @@ graph LR
 
 ```mermaid
 graph LR
-    EventGrid[Lưới Sự Kiện] --> Functions[Chức năng] --> Pipeline[Đường ống AI]
+    EventGrid[Lưới Sự kiện] --> Functions[Hàm] --> Pipeline[Dòng công việc AI]
 ```
 
 ---
@@ -80,14 +80,14 @@ properties: {
 
 ---
 
-## 💰 Tối ưu chi phí
+## 💰 Tối ưu hóa chi phí
 
 | Chiến lược | Tiết kiệm |
 |----------|---------|
-| Tự động scale về 0 (Container Apps) | 60-80% |
-| Sử dụng tầng tiêu thụ cho môi trường dev | 50-70% |
-| Tự động mở rộng theo lịch | 30-50% |
-| Dung lượng đặt trước | 20-40% |
+| Thu nhỏ về 0 (Container Apps) | 60-80% |
+| Sử dụng tầng theo nhu cầu cho phát triển | 50-70% |
+| Điều chỉnh quy mô theo lịch trình | 30-50% |
+| Dự trữ công suất | 20-40% |
 
 ```bash
 # Thiết lập cảnh báo ngân sách
@@ -100,7 +100,7 @@ az consumption budget create \
 
 ---
 
-## 📊 Cấu hình giám sát
+## 📊 Thiết lập giám sát
 
 ```bash
 # Phát trực tiếp nhật ký
@@ -109,7 +109,7 @@ azd monitor --logs
 # Kiểm tra Application Insights
 azd monitor --overview
 
-# Xem số liệu
+# Xem các chỉ số
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -117,19 +117,19 @@ az monitor metrics list --resource <resource-id>
 
 ## 🔗 Điều hướng
 
-| Hướng | Chương |
+| Hướng đi | Chương |
 |-----------|---------|
-| **Trước** | [Chương 7: Khắc phục sự cố](../chapter-07-troubleshooting/README.md) |
-| **Hoàn thành Khóa học** | [Trang khóa học](../../README.md) |
+| **Trước** | [Chương 7: Xử lý sự cố](../chapter-07-troubleshooting/README.md) |
+| **Hoàn thành khoá học** | [Trang chủ khoá học](../../README.md) |
 
 ---
 
 ## 📖 Tài nguyên liên quan
 
-- [AI Agents Guide](../chapter-02-ai-development/agents.md)
+- [Hướng dẫn AI Agents](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Multi-Agent Solutions](../chapter-05-multi-agent/README.md)
-- [Microservices Example](../../examples/microservices/README.md)
+- [Giải pháp đa agent](../chapter-05-multi-agent/README.md)
+- [Ví dụ Microservices](../../examples/microservices/README.md)
 
 ---
 
