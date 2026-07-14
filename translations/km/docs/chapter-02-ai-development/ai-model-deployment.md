@@ -1,28 +1,28 @@
-# ការដាក់បង្ហោះម៉ូដែល AI ជាមួយ Azure Developer CLI
+# ការដាក់បង្ហាញម៉ូដែល AI ជាមួយ Azure Developer CLI
 
-**ចំណាត់ថ្នាក់ជំពូក៖**
-- **📚 ទំព័រដើមវគ្គសិក្សា**: [AZD សម្រាប់អ្នកទើបចាប់ផ្តើម](../../README.md)
-- **📖 ជំពូកបច្ចុប្បន្ន**: ជំពូក 2 - ការអភិវឌ្ឍន៍អាគី-ហ្វឺស
-- **⬅️ មុនពេលនេះ**: [ការរួមបញ្ចូល Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ បន្ទាប់**: [មហោស្រពសិក្សា AI](ai-workshop-lab.md)
-- **🚀 ជំពូកបន្ទាប់**: [ជំពូក 3៖ ការកំណត់រចនា](../chapter-03-configuration/configuration.md)
+**ការរុករកជាមេរៀន៖**
+- **📚 ទំព័រដើមមេរៀន**: [AZD សម្រាប់អ្នកដំបូង](../../README.md)
+- **📖 មេរៀនបច្ចុប្បន្ន**: មេរៀន 2 - ការអភិវឌ្ឍន៍ផ្តាច់មុខ AI
+- **⬅️ មុន**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ បន្ទាប់**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 មេរៀនបន្ទាប់**: [មេរៀន 3: ការកំណត់រចនា](../chapter-03-configuration/configuration.md)
 
-មគ្គុទេសក៍នេះផ្តល់នូវសេចក្តីណែនាំពេញលេញសម្រាប់ការដាក់បង្ហោះម៉ូដែល AI ដោយប្រើតំណាង AZD បង្ហាញពីពីរបៀបគ្រប់យ៉ាងចាប់ពីការជ្រើសរើសម៉ូដែល ដល់គំរូការដាក់បង្ហោះទៅផលិតកម្ម។
+សៀវភៅណែនាំនេះផ្តល់នូវការណែនាំលម្អិតសម្រាប់ការដាក់បង្ហាញម៉ូដែល AI ដោយប្រើទំព័រ AZD គ្របដណ្តប់ពីការជ្រើសរើសម៉ូដែល ដល់គំរូការដាក់បង្ហាញក្នុងការផលិត។
 
-> **កំណត់សម្គាល់ផ្ទៀងផ្ទាត់ (2026-03-25):** ខ្សែដំណើរការរបស់ AZD ក្នុងមគ្គុទេសក៍នេះ ត្រូវបានពិនិត្យប្រឆាំងនឹង `azd` `1.23.12`។ សម្រាប់ការដាក់បង្ហោះ AI ដែលប្រើពេលវេលាយូរជាងពេលប្រើសេវាកម្មដាក់បង្ហោះលំនាំដើម កំណំណ AZD បច្ចុប្បន្នគាំទ្រ `azd deploy --timeout <seconds>`។
+> **សម្គាល់បញ្ជាក់ (2026-07-13):** បច្ចេកវិទ្យា AZD ក្នុងសៀវភៅណែនាំនេះត្រូវបានត្រួតពិនិត្យជាមួយ `azd` `1.27.1`។ សម្រាប់ការដាក់បង្ហាញ AI ដែលយូរជាងរយៈពេលតំឡើងសេវាកម្មលំនាំដើម កំណែ AZD បច្ចុប្បន្នគាំទ្រ `azd deploy --timeout <seconds>`។
 
-## តារាងមាតិকা
+## តារាងមាតិកា
 
 - [យុទ្ធសាស្ត្រជ្រើសរើសម៉ូដែល](#យុទ្ធសាស្ត្រជ្រើសរើសម៉ូដែល)
-- [ការកំណត់រចនាសម្ព័ន្ធ AZD សម្រាប់ម៉ូដែល AI](#ការកំណត់រចនាសម្ព័ន្ធ-azd-សម្រាប់ម៉ូដែល-ai)
-- [គំរូការដាក់បង្ហោះ](#គំរូការដាក់បង្ហោះ)
+- [ការកំណត់ AZD សម្រាប់ម៉ូដែល AI](#ការកំណត់-azd-សម្រាប់ម៉ូដែល-ai)
+- [គំរូការដាក់បង្ហាញ](#គំរូការដាក់បង្ហាញ)
 - [ការគ្រប់គ្រងម៉ូដែល](#ការគ្រប់គ្រងម៉ូដែល)
-- [ការគិតគូរផលិតកម្ម](#ការគិតគូរផលិតកម្ម)
-- [ការត្រួតពិនិត្យ និងការតាមដាន](#ការត្រួតពិនិត្យ-និងការតាមដាន)
+- [ការពិចារណាប្រកបដោយផលិតកម្ម](#ការពិចារណាផលិតកម្ម)
+- [ការត្រួតពិនិត្យ និងការអាចមើលឃើញ](#ការត្រួតពិនិត្យ-និងការអាចមើលឃើញ)
 
 ## យុទ្ធសាស្ត្រជ្រើសរើសម៉ូដែល
 
-### ម៉ូដែល Microsoft Foundry Models
+### ម៉ូដែល Microsoft Foundry
 
 ជ្រើសរើសម៉ូដែលត្រឹមត្រូវសម្រាប់ករណីប្រើប្រាស់របស់អ្នក៖
 
@@ -54,18 +54,18 @@ services:
 
 ### ការធ្វើផែនការសមត្ថភាពម៉ូដែល
 
-| ប្រភេទម៉ូដែល | ករណីប្រើ | សមត្ថភាពដែលបានណែនាំ | ការពិចារណាតម្លៃ |
+| ប្រភេទម៉ូដែល | ករណីប្រើប្រាស់ | សមត្ថភាពដែលបានណែនាំ | ការពិចារណាតម្លៃ |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | ហាក់ជារឿងសន្ទនា, សំណួរ-ចម្លើយ | 10-50 TPM | មានតំលៃសមរម្យសម្រាប់ភារកិច្ចភាគច្រើន |
-| gpt-4.1 | ការគិតលំអិតស្មុគស្មាញ | 20-100 TPM | តំលៃខ្ពស់ ប្រេសវេសសម្រាប់មុខងារប្រណិត |
-| text-embedding-3-large | ស្វែងរក, RAG | 30-120 TPM | ជាជម្រើសល្អលំដាប់ដើមសម្រាប់ការស្វែងរកនិងយកតាមអត្ថន័យ |
-| Whisper | ពីសម្លេងទៅអត្ថបទ | 10-50 TPM | ភារកិច្ចដំណើរការសំឡេង |
+| gpt-4.1-mini | ជជែក, សំណួរ-ចម្លើយ | 10-50 TPM | ថ្លៃប្រសើរសម្រាប់បំណងធ្វើការ​ទូទៅ |
+| gpt-4.1 | ការត្រួតការណ៍ស្មុគស្មាញ | 20-100 TPM | តម្លៃខ្ពស់ជាង, ប្រើសម្រាប់លក្ខណៈពិសេសអប្បបរមា |
+| text-embedding-3-large | ស្វែងរក, RAG | 30-120 TPM | ជាជម្រើសលំដាប់ដើមសម្រាប់ស្វែងរកនិងទាញយកខ្លឹមសារ |
+| Whisper | ថ្លែងចេញដំណើរការ | 10-50 TPM | ការចម្លងសំឡេងក្នុងកម្មវិធី |
 
-## ការកំណត់រចនាសម្ព័ន្ធ AZD សម្រាប់ម៉ូដែល AI
+## ការកំណត់ AZD សម្រាប់ម៉ូដែល AI
 
-### ការកំណត់រចនាសម្ព័ន្ធពុម្ព Bicep
+### ការកំណត់ទំព័រ Bicep
 
-បង្កើតការដាក់បង្ហោះម៉ូដែលតាមរយៈពុម្ព Bicep៖
+បង្កើតការដាក់បង្ហាញម៉ូដែលតាមរយៈទំព័រ Bicep:
 
 ```bicep
 // infra/main.bicep
@@ -124,7 +124,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
-### បរិស្ថានអថេរ
+### របៀបបង្ហាញបរិស្ថាន
 
 កំណត់បរិស្ថានកម្មវិធីរបស់អ្នក៖
 
@@ -136,9 +136,9 @@ AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## គំរូការដាក់បង្ហោះ
+## គំរូការដាក់បង្ហាញ
 
-### គំរូទី 1៖ ការដាក់បង្ហោះតែមួយតំបន់
+### គំរូ ១: ការដាក់បង្ហាញតែមួយតំបន់
 
 ```yaml
 # azure.yaml - Single region
@@ -151,12 +151,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-ល្អបំផុតសម្រាប់៖
-- ការអភិវឌ្ឍន៍ និងសាកល្បង
+ល្អបំផុតសម្រាប់:
+- ការអភិវឌ្ឍន៍និងការធ្វើតេស្ត
 - កម្មវិធីទីផ្សារតែមួយ
-- បម្លែងតម្លៃឲ្យប្រសើរ
+- ការបង្កើតថ្លៃដើមប្រសើរ
 
-### គំរូទី 2៖ ការដាក់បង្ហោះច្រើនតំបន់
+### គំរូ ២: ការដាក់បង្ហាញច្រើនតំបន់
 
 ```bicep
 // Multi-region deployment
@@ -169,14 +169,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-ល្អបំផុតសម្រាប់៖
-- កម្មវិធីលំដាប់ពិភពលោក
-- តម្រូវការភាពមានភាពតុល្យភាពខ្ពស់
-- ការចែកចាយបន្ទុក
+ល្អបំផុតសម្រាប់:
+- កម្មវិធីសកល
+- តម្រូវការស្រេចស្រួលខ្ពស់
+- ការចែកចាយផ្ទុក
 
-### គំរូទី 3៖ ការដាក់បង្ហោះបែបម៉ិចស៍
+### គំរូ ៣: ការដាក់បង្ហាញផ្សំ
 
-ផ្សំនូវម៉ូដែល Microsoft Foundry Models ជាមួយសេវាកម្ម AI ផ្សេងទៀត៖
+បញ្ចូលម៉ូដែល Microsoft Foundry ជាមួយសេវា AI ផ្សេងទៀត:
 
 ```bicep
 // Hybrid AI services
@@ -207,9 +207,9 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ## ការគ្រប់គ្រងម៉ូដែល
 
-### ការគ្រប់គ្រងកំណែ
+### ការត្រួតពិនិត្យកំណែ
 
-តាមដានកំណែម៉ូដែលក្នុងការកំណត់រចនាសម្ព័ន្ធ AZD របស់អ្នក៖
+តាមដានកំណែម៉ូដែលក្នុងការកំណត់ AZD របស់អ្នក៖
 
 ```json
 {
@@ -241,13 +241,13 @@ az cognitiveservices account list-models \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
 
-# ប្រសិនបើការចុះបញ្ជីយូរជាងពេលកំណត់លំនាំដើម
+# ប្រសិនបើការដាក់ឱ្យប្រើប្រាស់យូរជាងពេលកំណត់លំនាំដើម
 azd deploy --timeout 1800
 ```
 
-### ការធ្វើតេស A/B
+### ការធ្វើតេស្ត A/B
 
-ដាក់បង្ហោះកំណែម៉ូដែលជាច្រើន៖
+ដាក់បង្ហាញកំណែម៉ូដែលច្រើនកំណែ៖
 
 ```bicep
 param enableABTesting bool = false
@@ -269,11 +269,11 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## ការគិតគូរផលិតកម្ម
+## ការពិចារណាផលិតកម្ម
 
 ### ការធ្វើផែនការសមត្ថភាព
 
-គណនាសមត្ថភាពដែលត្រូវការ ដើមលើគំរូប្រើប្រាស់៖
+គណនាសមត្ថភាពត្រូវការដោយផ្អែកលើលំនាំប្រើប្រាស់៖
 
 ```python
 # ឧទាហរណ៍គណនាសមត្ថភាព
@@ -288,7 +288,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# ឧទាហរណ៍នៃការប្រើប្រាស់
+# ការប្រើប្រាស់ឧទាហរណ៍
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -298,9 +298,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### ការកំណត់រចនាសម្ព័ន្ធចុះស្ដើងដោយស្វ័យប្រវត្តិ
+### ការកំណត់កម្រិតអូតូ
 
-កំណត់រចនាសម្ព័ន្ធសម្រាប់ការចុះស្ដើងដោយស្វ័យប្រវត្តិក្នុង Container Apps៖
+កំណត់ការកំណត់កម្រិតស្វ័យប្រវត្តិសម្រាប់ Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -336,9 +336,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### ការបម្លែងតម្លៃឲ្យប្រសើរ
+### ការបង្កើតថ្លៃប្រសើរ
 
-អនុវត្តការត្រួតគ្រប់ការចំណាយ៖
+អនុវត្តន៍ការត្រួតពិនិត្យថ្លៃ៖
 
 ```bicep
 @description('Enable cost management alerts')
@@ -368,11 +368,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## ការត្រួតពិនិត្យ និងការតាមដាន
+## ការត្រួតពិនិត្យ និងការអាចមើលឃើញ
 
-### ការរួមបញ្ចូល Application Insights
+### ការចងក្រង Application Insights
 
-កំណត់រចនាសម្ព័ន្ធការត្រួតពិនិត្យសម្រាប់ភារកិច្ច AI៖
+កំណត់ត្រួតពិនិត្យសម្រាប់ការបំពេញ AI៖
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -408,12 +408,12 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### វិមាត្រពិសេស
+### តារាងវាស់វែងផ្ទាល់ខ្លួន
 
-តាមដានវិមាត្រយោងក្នុង AI៖
+តាមដានតារាងវាស់វែងដែលពាក់ព័ន្ធ AI៖
 
 ```python
-# តែឡូមេត្រីផ្ទាល់ខ្លួនសម្រាប់ម៉ូឌែល AI
+# ទិន្នន័យទេសចរណ៍ផ្ទាល់ខ្លួនសម្រាប់គំរូ AI
 import logging
 from applicationinsights import TelemetryClient
 
@@ -447,10 +447,10 @@ class AITelemetry:
 
 ### ការត្រួតពិនិត្យសុខភាព
 
-អនុវត្តការត្រួតពិនិត្យសុខភាពសេវាកម្ម AI៖
+អនុវត្តការត្រួតពិនិត្យសុខភាពសេវា AI៖
 
 ```python
-# ចំណុចត្រួតពិនិត្យសុខភាព
+# ចំណុចផ្នែកពិនិត្យសុខភាព
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -478,30 +478,30 @@ async def check_ai_models():
 
 ## ជំហានបន្ទាប់
 
-1. **ពិនិត្យមើល [មគ្គុទេសក៍រួមបញ្ចូល Microsoft Foundry](microsoft-foundry-integration.md)** សម្រាប់គំរូរួមបញ្ចូលសេវាកម្ម
-2. **បញ្ចប់ [មហោស្រពសិក្សា AI](ai-workshop-lab.md)** សម្រាប់បទពិសោធន៍ដៃគូ
-3. **អនុវត្ត [អនុវត្តតំបន់ AI ផលិតកម្ម](production-ai-practices.md)** សម្រាប់ការដាក់បង្ហោះសហគ្រាស
-4. **ស្វែងយល់ពី [មគ្គុទេសក៍ដោះស្រាយបញ្ហា AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** សម្រាប់បញ្ហា​ធម្មតា
+1. **ពិនិត្យមើល [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** សម្រាប់គំរូការរួមបញ្ចូលសេវា
+2. **បញ្ចប់ [AI Workshop Lab](ai-workshop-lab.md)** សម្រាប់បទពិសោធន៍អនុវត្ត
+3. **អនុវត្ត [ការអនុវត្ត AI ផលិតកម្ម](production-ai-practices.md)** សម្រាប់ការដាក់បង្ហាញសហគ្រាស
+4. **ស្វែងយល់ [AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** សម្រាប់បញ្ហាទូទៅ
 
-## ឯកសារ
+## រដ្ឋប្បវេណ
 
-- [ការចូលប្រើម៉ូដែល Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [ឯកសារប្រើប្រាស់ Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [ការបន្ថយទំហំ Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [ការបម្លែងតម្លៃម៉ូដែល AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Microsoft Foundry Models Model Availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Container Apps Scaling](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [AI Model Cost Optimization](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**ចំណាត់ថ្នាក់ជំពូក៖**
-- **📚 ទំព័រដើមវគ្គសិក្សា**: [AZD សម្រាប់អ្នកទើបចាប់ផ្តើម](../../README.md)
-- **📖 ជំពូកបច្ចុប្បន្ន**: ជំពូក 2 - ការអភិវឌ្ឍន៍អាគី-ហ្វឺស
-- **⬅️ មុនពេលនេះ**: [ការរួមបញ្ចូល Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ បន្ទាប់**: [មហោស្រពសិក្សា AI](ai-workshop-lab.md)
-- **🚀 ជំពូកបន្ទាប់**: [ជំពូក 3៖ ការកំណត់រចនា](../chapter-03-configuration/configuration.md)
+**ការរុករកជាមេរៀន៖**
+- **📚 ទំព័រដើមមេរៀន**: [AZD សម្រាប់អ្នកដំបូង](../../README.md)
+- **📖 មេរៀនបច្ចុប្បន្ន**: មេរៀន 2 - ការអភិវឌ្ឍន៍ផ្តាច់មុខ AI
+- **⬅️ មុន**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ បន្ទាប់**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 មេរៀនបន្ទាប់**: [មេរៀន 3: ការកំណត់រចនា](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ការបដិសេធ**៖  
-ឯកសារនេះត្រូវបានបកប្រែដោយប្រើសេវាកម្មបកប្រែ AI [Co-op Translator](https://github.com/Azure/co-op-translator)។ ខណៈពេលដែលយើងខិតខំប្រឹងប្រែងសម្រាប់ភាពត្រឹមត្រូវ សូមដឹងថាការបកប្រែដោយស្វ័យប្រវត្តិក្នុងខ្លះអាចមានកំហុស ឬភាពមិនត្រឺមត្រូវ។ ឯកសារដើមក្នុងភាសាមូលដ្ឋានគួរត្រូវបានគេយកជាអ្នកផ្តល់ព័ត៌មានដែលមានសម្បទាន។ សម្រាប់ព័ត៌មានសំខាន់ៗ សូមប្រើការបកប្រែដោយអ្នកជំនាញមនុស្ស។ យើងមិនទទួលខុសត្រូវចំពោះការយល់ច្រឡំ ឬការបកស្រាយខុសបន្ទាប់ពីការប្រើប្រាស់ការបកប្រែនេះឡើយ។
+**ការបដិសេធ**:
+ឯកសារនេះត្រូវបានបម្លែងភាសា ដោយប្រើសេវាបម្លែងភាសា AI [Co-op Translator](https://github.com/Azure/co-op-translator)។ ទោះយើងខ្ញុំមានក្តីប្រាថ្នាឱ្យបានច្បាស់លាស់ តែសូមយល់ដឹងថាការបម្លែងដោយស្វ័យប្រវត្តិក៏អាចមានកំហុសឬភាពមិនត្រឹមត្រូវ។ ឯកសារដើមជាភាសាទីតាំងគួរត្រូវបានគេប្រើជាប្រភពច្បាស់លាស់។ សម្រាប់ព័ត៌មានសំខាន់ៗ សូមណែនាំឱ្យប្រើប្រាស់ការប្រែដោយមនុស្សជំនាញ។ យើងខ្ញុំមិនទទួលខុសត្រូវចំពោះការយល់ច្រឡំ ឬការបកស្រាយខុសបន្ទាប់ពីការប្រើប្រាស់ការបម្លែងនេះនោះទេ។
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
