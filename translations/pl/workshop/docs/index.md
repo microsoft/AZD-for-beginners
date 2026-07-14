@@ -1,77 +1,77 @@
-# Warsztaty AZD dla deweloperów AI
+# Warsztat AZD dla deweloperów AI
 
-> Sprawdzone na `azd 1.25.6` w czerwcu 2026.
+> Zweryfikowano na `azd 1.27.1` w lipcu 2026.
 
 > [!IMPORTANT]  
-> **Te warsztaty są wyposażone w przewodnik warsztatowy, który możesz podejrzeć w lokalnej przeglądarce. Aby zacząć, otwórz repozytorium w GitHub Codespaces, kontenerze deweloperskim lub lokalnym klonie z zainstalowanym MkDocs — następnie poczekaj, aż zobaczysz aktywny terminal VS Code i wpisz:**  
+> **Ten warsztat jest wyposażony w przewodnik warsztatowy, który możesz przeglądać w lokalnej przeglądarce. Aby rozpocząć, otwórz repozytorium w GitHub Codespaces, kontenerze deweloperskim lub lokalnym klonie z zainstalowanym MkDocs — a następnie poczekaj, aż zobaczysz aktywny terminal VS Code i wpisz:**  
 > `mkdocs serve > /dev/null 2>&1 &`  
-> **Powinien pojawić się okienko dialogowe z możliwością otwarcia strony podglądu w przeglądarce.**
+> **Powinno pojawić się okno dialogowe z możliwością otwarcia podglądu strony w przeglądarce.**
 
-Witamy w praktycznych warsztatach uczących korzystania z Azure Developer CLI (AZD) ze szczególnym uwzględnieniem wdrażania aplikacji AI. Warsztaty pomogą Ci zdobyć praktyczną wiedzę o szablonach AZD w 3 krokach:
+Witamy na praktycznym warsztacie, na którym poznasz Azure Developer CLI (AZD) ze szczególnym uwzględnieniem wdrażania aplikacji AI. Ten warsztat pomoże Ci zdobyć praktyczną wiedzę na temat szablonów AZD w 3 krokach:
 
-1. **Odkrywanie** – znajdź szablon odpowiedni dla siebie.  
-1. **Wdrażanie** – wdroż i zweryfikuj, że działa.  
-1. **Dostosowanie** – modyfikuj i dopasuj do swoich potrzeb!
+1. **Odkrywanie** – znajdź szablon odpowiedni dla siebie.
+1. **Wdrażanie** – wdroż i zweryfikuj, czy działa
+1. **Dostosowywanie** – modyfikuj i iteruj, aby uczynić go swoim!
 
-W trakcie warsztatów poznasz także podstawowe narzędzia i przepływy pracy dla deweloperów, które pomogą Ci usprawnić Twój proces tworzenia oprogramowania end-to-end.
+W trakcie warsztatu poznasz również podstawowe narzędzia i przepływy pracy dla deweloperów, które pomogą usprawnić Twoją kompleksową ścieżkę rozwoju.
 
 | | | 
 |:---|:---|
 | **📚 Strona kursu**| [AZD dla początkujących](../README.md)|
-| **📖 Dokumentacja** | [Pierwsze kroki z szablonami AI](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️ Szablony AI** | [Szablony Microsoft Foundry](https://ai.azure.com/templates) |
-|**🚀 Kolejne kroki** | [Podejmij wyzwanie](#workshop-challenge) |
+| **📖 Dokumentacja** | [Rozpocznij pracę z szablonami AI](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️ Szablony AI** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
+|**🚀 Kolejne kroki** | [Wykonaj wyzwanie](#workshop-challenge) |
 | | |
 
-## Przegląd warsztatów
+## Przegląd warsztatu
 
-**Czas trwania:** 3-4 godziny  
-**Poziom:** Od początkującego do średniozaawansowanego  
+**Czas trwania:** 3–4 godziny  
+**Poziom:** od początkującego do średniozaawansowanego  
 **Wymagania wstępne:** Znajomość Azure, koncepcji AI, VS Code i narzędzi wiersza poleceń.
 
-To warsztaty praktyczne oparte na nauce przez działanie. Po zakończeniu ćwiczeń zalecamy przejrzeć program AZD dla początkujących, aby kontynuować naukę najlepszych praktyk w zakresie bezpieczeństwa i produktywności.
+Jest to warsztat praktyczny, podczas którego uczysz się poprzez działanie. Po ukończeniu ćwiczeń zalecamy zapoznanie się z programem AZD dla początkujących, aby kontynuować naukę najlepszych praktyk dotyczących bezpieczeństwa i produktywności.
 
-| Czas | Moduł  | Cel |
+| Czas| Moduł  | Cel |
 |:---|:---|:---|
-| 15 min | Wprowadzenie | Ustawienie celów i zrozumienie zamierzeń |
-| 30 min | Wybór szablonu AI | Zbadanie opcji i wybór startera | 
-| 30 min | Weryfikacja szablonu AI | Wdrożenie domyślnego rozwiązania do Azure |
-| 30 min | Analiza szablonu AI | Eksploracja struktury i konfiguracji |
-| 30 min | Konfiguracja szablonu AI | Aktywacja i testowanie dostępnych funkcji |
-| 30 min | Dostosowanie szablonu AI | Adaptacja szablonu do własnych potrzeb |
-| 30 min | Usunięcie infrastruktury | Sprzątanie i zwolnienie zasobów |
-| 15 min | Podsumowanie i kolejne kroki | Zasoby do nauki, wyzwanie warsztatowe |
+| 15 min | Wprowadzenie | Ustalenie ram, zrozumienie celów |
+| 30 min | Wybór szablonu AI | Poznaj opcje i wybierz startowy | 
+| 30 min | Walidacja szablonu AI | Wdróż domyślne rozwiązanie w Azure |
+| 30 min | Rozbiórka szablonu AI | Poznaj strukturę i konfigurację |
+| 30 min | Konfiguracja szablonu AI | Aktywuj i wypróbuj dostępne funkcje |
+| 30 min | Dostosowanie szablonu AI | Dopasuj szablon do swoich potrzeb |
+| 30 min | Demontaż infrastruktury | Sprzątanie i zwolnienie zasobów |
+| 15 min | Podsumowanie i kolejne kroki | Zasoby edukacyjne, wyzwanie warsztatowe |
 | | |
 
 ## Czego się nauczysz
 
-Myśl o szablonie AZD jako o sandboksie do nauki, gdzie możesz eksplorować różne możliwości i narzędzia do tworzenia oprogramowania end-to-end na platformie Microsoft Foundry. Po zakończeniu warsztatów powinieneś mieć intuicyjne rozeznanie w różnych narzędziach i koncepcjach w tym kontekście.
+Traktuj szablon AZD jako piaskownicę do nauki, w której możesz eksplorować różne możliwości i narzędzia do kompleksowego tworzenia na platformie Microsoft Foundry. Pod koniec warsztatu powinieneś mieć intuicyjne zrozumienie różnych narzędzi i koncepcji w tym kontekście.
 
-| Pojęcie  | Cel |
+| Koncepcja  | Cel |
 |:---|:---|
-| **Azure Developer CLI** | Zrozumienie poleceń i przepływów pracy narzędzia |
+| **Azure Developer CLI** | Zrozumienie poleceń narzędzia i przepływów pracy |
 | **Szablony AZD**| Zrozumienie struktury projektu i konfiguracji |
-| **Azure AI Agent**| Provisioning i wdrażanie projektów Microsoft Foundry |
-| **Azure AI Search**| Wsparcie inżynierii kontekstowej za pomocą agentów |
-| **Obserwowalność**| Eksploracja śledzenia, monitoringu i ewaluacji |
-| **Red Teaming**| Poznanie testów adwersarialnych i metod łagodzenia skutków |
+| **Azure AI Agent**| Provisionowanie i wdrażanie projektu Microsoft Foundry |
+| **Azure AI Search**| Umożliwienie inżynierii kontekstu za pomocą agentów |
+| **Obserwowalność**| Poznaj śledzenie, monitorowanie i ewaluacje |
+| **Red Teaming**| Poznaj testy adwersarzy i metody łagodzenia |
 | | |
 
-## Moduły warsztatowe
+## Moduły warsztatu
 
-Gotowy, aby zacząć? Przejdź przez moduły warsztatowe:
+Gotowy, aby zacząć? Przejdź przez moduły warsztatu:
 
 - [Moduł 1: Wybierz szablon AI](instructions/1-Select-AI-Template.md)
 - [Moduł 2: Zweryfikuj szablon AI](instructions/2-Validate-AI-Template.md) 
-- [Moduł 3: Przeanalizuj szablon AI](instructions/3-Deconstruct-AI-Template.md)
+- [Moduł 3: Rozbierz szablon AI](instructions/3-Deconstruct-AI-Template.md)
 - [Moduł 4: Skonfiguruj szablon AI](instructions/4-Configure-AI-Template.md)
 - [Moduł 5: Dostosuj szablon AI](instructions/5-Customize-AI-Template.md)
-- [Moduł 6: Usuń infrastrukturę](instructions/6-Teardown-Infrastructure.md)
+- [Moduł 6: Zdemontuj infrastrukturę](instructions/6-Teardown-Infrastructure.md)
 - [Moduł 7: Podsumowanie i kolejne kroki](instructions/7-Wrap-up.md)
 
 ## Masz uwagi?
 
-Zamieść zgłoszenie w tym repozytorium (oznacz je tagiem `Workshop`) lub dołącz do nas na [Discordzie](https://aka.ms/foundry/discord) i napisz na kanale `#get-help`
+Zgłoś problem w tym repozytorium (oznacz go `Workshop`) lub dołącz do nas na [Discordzie](https://aka.ms/foundry/discord) i napisz na kanale `#get-help`
 
 ---
 

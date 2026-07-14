@@ -1,56 +1,56 @@
-# azd için Dev Containers ve GitHub Codespaces
+# azd için Geliştirici Konteynerleri ve GitHub Codespaces
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD Yeni Başlayanlar](../../README.md)
-- **📖 Current Chapter**: Bölüm 1 - Temel ve Hızlı Başlangıç
-- **⬅️ Previous**: [Kendi Uygulamanı Getir](bring-your-own-app.md)
-- **🚀 Next Chapter**: [Bölüm 2: AI-Öncelikli Geliştirme](../chapter-02-ai-development/README.md)
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [Yeni Başlayanlar için AZD](../../README.md)
+- **📖 Geçerli Bölüm**: Bölüm 1 - Temel ve Hızlı Başlangıç
+- **⬅️ Önceki**: [Kendi Uygulamanı Getir](bring-your-own-app.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 2: Yapay Zeka Öncelikli Geliştirme](../chapter-02-ai-development/README.md)
 
-> Haziran 2026'da `azd 1.25.6` ile doğrulanmıştır.
+> Temmuz 2026'da `azd 1.27.1` ile doğrulanmıştır.
 
 ## Giriş
 
-Her makineye azd, uygun dil çalışma zamanı, Docker ve Azure CLI kurmak zahmetlidir—ve "benim makinemde çalışıyor" diyen bir öğreticinin başkasında çalışmamasının en önemli nedenidir. Bir **dev container**, tüm araç zincirinizi bir dosyada tanımlayarak bunu çözer. Projeyi VS Code veya GitHub Codespaces'ta açan herkes tam olarak aynı ortama, azd önceden kurulu şekilde erişir. Bu ders bir tane nasıl ekleyeceğinizi gösterir.
+Her makinede azd, doğru dil çalışma zamanı, Docker ve Azure CLI yüklemek zahmetlidir—ve "makinemde çalışıyor" diyen bir öğreticinin başkası için neden başarısız olduğunun bir numaralı sebebidir. Bir **geliştirici konteyneri**, tüm araç zincirinizi bir dosyada tanımlayarak bunu çözer. Projeyi VS Code veya GitHub Codespaces'te açan herkes, azd zaten kurulmuş tam olarak aynı ortamı elde eder. Bu derste nasıl ekleyeceğiniz gösterilmektedir.
 
 ## Öğrenme Hedefleri
 
-By the end of this lesson, you will:
-- Bir dev container'ın ne olduğunu ve azd için neden faydalı olduğunu anlayın
-- Bir projeye minimal bir `.devcontainer/devcontainer.json` ekleyin
-- azd, Azure CLI ve Docker'ı Dev Container *özellikleri* aracılığıyla dahil edin
-- Projeyi GitHub Codespaces veya VS Code'ta açın
+Bu dersin sonunda şunları yapabileceksiniz:
+- Geliştirici konteynerin ne olduğunu ve azd ile neden yardımcı olduğunu anlamak
+- Bir projeye minimum bir `.devcontainer/devcontainer.json` eklemek
+- Dev Container *özellikleri*yle azd, Azure CLI ve Docker'ı dahil etmek
+- Projeyi GitHub Codespaces veya VS Code'da açmak
 
 ## Öğrenme Çıktıları
 
-After completing this lesson, you will be able to:
-- azd projesi için bir `devcontainer.json` oluşturun
-- azd ve Azure araçlarını manuel kurulum yapmadan ekleyin
-- `azd up` komutunu bir konteynerin veya Codespace'in içinden çalıştırın
+Bu dersi tamamladıktan sonra şunları yapabilirsiniz:
+- Bir azd projesi için `devcontainer.json` yazmak
+- Manuel yükleme yapmadan azd ve Azure araçlarını eklemek
+- Bir konteyner veya Codespace içinden `azd up` çalıştırmak
 
 ---
 
-## Dev Container Nedir?
+## Geliştirici Konteyneri Nedir?
 
-Bir dev container, depo içindeki bir `.devcontainer/devcontainer.json` dosyasıyla tanımlanan Docker tabanlı bir geliştirme ortamıdır. Projeyi açtığınızda:
+Geliştirici konteyneri, .devcontainer/devcontainer.json dosyasıyla tanımlanan Docker tabanlı bir geliştirme ortamıdır. Projeyi açtığınızda:
 
-- **VS Code** (Dev Containers uzantısıyla) konteyneri oluşturur ve ona bağlanır.
-- **GitHub Codespaces** aynı konteyneri bulutta oluşturur ve size tarayıcı tabanlı bir düzenleyici sağlar.
+- **VS Code** (Dev Containers eklentisiyle) konteyneri oluşturur ve ona bağlanır.
+- **GitHub Codespaces** aynı konteyneri bulutta oluşturur ve size tarayıcı tabanlı bir editör sunar.
 
-Her iki durumda da, her katkıda bulunan aynı araçlara sahip olur—"azd'i kurdun mu?" türünde sorun giderme olmaz.
+Her iki durumda da, her katkıda bulunan kişi aynı araçları elde eder — "azd yükledin mi?" sorun giderme sorunu olmaz.
 
 ```mermaid
 graph LR
-    Repo[Depo'nuz<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Geliştirme Konteynerleri]
-    Repo --> Codespaces[GitHub<br/>Codespaces]
-    VSCode --> Env[Aynı ortam:<br/>azd + az + Docker]
+    Repo[Depo<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Geliştirici Konteynerleri]
+    Repo --> Codespaces[GitHub<br/>Kod Alanları]
+    VSCode --> Env[Identical environment:<br/>azd + az + Docker]
     Codespaces --> Env
 ```
 
 ---
 
-## Adım 1: devcontainer Dosyasını Oluşturun
+## 1. Adım: devcontainer Dosyasını Oluştur
 
-Projenizin köküne `.devcontainer/devcontainer.json` dosyasını oluşturun:
+Projenizin kökünde `.devcontainer/devcontainer.json` dosyasını oluşturun:
 
 ```json
 {
@@ -75,23 +75,23 @@ Projenizin köküne `.devcontainer/devcontainer.json` dosyasını oluşturun:
 }
 ```
 
-What each part does:
+Her parça ne işe yarar:
 
-| Key | Purpose |
+| Anahtar | Amaç |
 |-----|---------|
 | `image` | Konteyner için temel işletim sistemi |
-| `features` | Önceden hazırlanmış yükleyiciler—burada: Azure CLI, **azd**, Docker ve Node.js |
-| `customizations.vscode.extensions` | azd ve Bicep VS Code uzantılarını otomatik kurar |
+| `features` | Önceden hazırlanmış kurulumlar—burada: Azure CLI, **azd**, Docker ve Node.js |
+| `customizations.vscode.extensions` | azd ve Bicep VS Code uzantılarını otomatik yükler |
 | `forwardPorts` | Uygulamanızın portunu tarayıcınıza açar |
-| `postCreateCommand` | Konteyner oluşturulduktan sonra bir kez çalışır (burada, bir sağlık kontrolü) |
+| `postCreateCommand` | Konteyner oluşturulduktan sonra bir kez çalışır (burada, bir bütünlük kontrolü) |
 
-> `ghcr.io/azure/azure-dev/azd:latest` özelliği, azd'i bir konteynerde edinmenin resmi yoludur. Tekrarlanabilirlik gerekiyorsa belirli bir sürümü sabitleyin (örneğin `azd:1.25.6`).
+> `ghcr.io/azure/azure-dev/azd:latest` özelliği, konteynerde azd almak için resmi yoldur. Yeniden üretilebilirlik için belirli bir sürümü (örneğin `azd:1.27.1`) sabitleyin.
 
 ---
 
-## Adım 2: Özelliği Uygulamanızın Diline Uydurun
+## 2. Adım: Özelliği Uygulamanızın Diline Uydurun
 
-`node` özelliğini uygulamanızın kullandığı başka bir özellikle değiştirin:
+`node` özelliğini uygulamanızın kullandığı dil ile değiştirin:
 
 ```jsonc
 // Python project
@@ -107,71 +107,71 @@ What each part does:
 "ghcr.io/devcontainers/features/go:1": {}
 ```
 
-Konteyner barındırıcısı `containerapp`, `aks` veya herhangi bir konteyner görüntüsü oluşturan bir şeyse `docker-in-docker`'ı koruyun—azd görüntüleri oluşturup itmek için Docker'a ihtiyaç duyar.
+`host` `containerapp`, `aks` ya da herhangi bir konteyner imajı oluşturan bir şey ise `docker-in-docker` özelliğini koruyun—azd, imajları oluşturmak ve göndermek için Docker'a ihtiyaç duyar.
 
 ---
 
-## Adım 3: Açın
+## 3. Adım: Açın
 
-**VS Code'ta:**
-1. **Dev Containers** uzantısını yükleyin.
+**VS Code'da:**
+1. **Dev Containers** eklentisini kurun.
 2. Proje klasörünü açın.
-3. İstendiğinde **Reopen in Container**'a tıklayın (veya *Dev Containers: Reopen in Container* komutunu çalıştırın).
+3. İstendiğinde **Konteyner İçinde Yeniden Aç**a tıklayın (veya *Dev Containers: Reopen in Container* komutunu çalıştırın).
 
-**GitHub Codespaces'ta:**
+**GitHub Codespaces'te:**
 1. Depoyu GitHub'a gönderin.
-2. **Code → Codespaces → Create codespace on main** seçeneğine tıklayın.
-3. Konteynerin oluşturulmasını bekleyin—azd terminalde hazır olacaktır.
+2. **Code → Codespaces → main üzerinde codespace oluştur** tıklayın.
+3. Konteynerin oluşturulmasını bekleyin—azd terminalde hazır.
 
 ---
 
-## Adım 4: Konteynerin İçinden Dağıtın
+## 4. Adım: Konteyner İçinden Dağıtım Yapın
 
-Konteynerde azd önceden kurulu olduğundan, normal iş akışı olduğu gibi çalışır:
+Konteyner azd önceden kurulmuş olduğundan, normal iş akışı çalışır:
 
 ```bash
 azd auth login --use-device-code   # cihaz kodu Codespaces içinde kullanışlıdır
 azd up
 ```
 
-> **Neden `--use-device-code`?** Uzak bir konteynerde veya Codespace'te yönlendirme yapacak yerel bir tarayıcı yoktur, bu yüzden device-code ile giriş güvenilir yoldur. Oturum açmayı tamamlamak için bir tarayıcı sekmesine bir kod yapıştıracaksınız.
+> **Neden `--use-device-code`?** Uzaktan bir konteyner veya Codespace'te yerel tarayıcı yoktur, bu yüzden cihaz koduyla giriş güvenilir yoldur. Oturumu tamamlamak için kodu bir tarayıcı sekmesine yapıştıracaksınız.
 
 ---
 
 ## Yaygın Tuzaklar
 
-| Sorun | Çözüm |
+| Tuzak | Çözüm |
 |---------|-----|
-| `azd up` bir görüntü oluşturamıyor | `docker-in-docker` özelliğini ekleyin |
-| Codespaces'ta tarayıcı girişi takılıyor | `azd auth login --use-device-code` kullanın |
-| Ekip üyeleri arasında araçlar farklılık gösteriyor | Özellik sürümlerini sabitleyin (ör. `azd:1.25.6`) |
-| Uygulamaya tarayıcıdan ulaşılamıyor | Portu `forwardPorts`'a ekleyin |
+| `azd up` imaj oluşturamıyor | `docker-in-docker` özelliğini ekleyin |
+| Browser girişi Codespaces'te takılıyor | `azd auth login --use-device-code` kullanın |
+| Araçlar ekip üyeleri arasında farklılık gösteriyor | Özellik sürümlerini sabitleyin (örn. `azd:1.27.1`) |
+| Uygulama tarayıcıda erişilebilir değil | Portu `forwardPorts`a ekleyin |
 
 ---
 
 ## Özet
 
-- Bir dev container, azd araç zincirinizi herkes için tekrarlanabilir kılar.
-- azd, Azure CLI ve Docker'ı Dev Container *özellikleri* aracılığıyla ekleyin.
-- Dil özelliğini uygulamanıza göre eşleştirin ve konteyner barındırıcılarda `docker-in-docker`'ı koruyun.
-- Codespaces içinde çalışırken device-code ile giriş yapın.
+- Bir geliştirici konteyneri azd araç zincirinizi herkes için tekrarlanabilir hale getirir.
+- Dev Container *özellikleri* ile azd, Azure CLI ve Docker'ı ekleyin.
+- Dil özelliğini uygulamanıza uyarlayın ve konteyner barındırıcılar için `docker-in-docker`ı koruyun.
+- Codespaces içinde çalışırken cihaz kodu ile giriş yapın.
 
 ---
 
-## 🔗 Gezinme
+## 🔗 Navigasyon
 
-| Direction | Resource |
+| Yön | Kaynak |
 |-----------|----------|
-| **Previous** | [Kendi Uygulamanı Getir](bring-your-own-app.md) |
-| **Chapter Home** | [Bölüm 1: Temel ve Hızlı Başlangıç](README.md) |
-| **Next Chapter** | [Bölüm 2: AI-Öncelikli Geliştirme](../chapter-02-ai-development/README.md) |
+| **Önceki** | [Kendi Uygulamanı Getir](bring-your-own-app.md) |
+| **Bölüm Anasayfası** | [Bölüm 1: Temel ve Hızlı Başlangıç](README.md) |
+| **Sonraki Bölüm** | [Bölüm 2: Yapay Zeka Öncelikli Geliştirme](../chapter-02-ai-development/README.md) |
 
 ## 📖 İlgili Kaynaklar
 
-- [Kurulum ve Yapılandırma](installation.md)
+- [Kurulum & Ayarlar](installation.md)
 - [Komut Hızlı Başvuru](../../resources/cheat-sheet.md)
-- [Resmi Dev Containers spesifikasyonu](https://containers.dev/)
-- [azd Dev Container özelliği](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
+- [Resmi Geliştirici Konteynerleri spesifikasyonu](https://containers.dev/)
+- [azd Geliştirici Konteyneri özelliği](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
 
 ---
 

@@ -1,54 +1,54 @@
-# Dev Containers & GitHub Codespaces for azd
+# Contenitori di sviluppo e GitHub Codespaces per azd
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
-- **⬅️ Previous**: [Porta la tua app](bring-your-own-app.md)
-- **🚀 Next Chapter**: [Capitolo 2: Sviluppo AI-First](../chapter-02-ai-development/README.md)
+**Navigazione del capitolo:**
+- **📚 Home del corso**: [AZD Per Principianti](../../README.md)
+- **📖 Capitolo attuale**: Capitolo 1 - Fondamenti e Avvio Rapido
+- **⬅️ Precedente**: [Porta la tua app](bring-your-own-app.md)
+- **🚀 Capitolo successivo**: [Capitolo 2: Sviluppo AI-First](../chapter-02-ai-development/README.md)
 
-> Convalidato con `azd 1.25.6` in giugno 2026.
+> Validato con `azd 1.27.1` a luglio 2026.
 
-## Introduction
+## Introduzione
 
-Installare azd, il runtime linguistico corretto, Docker e l'Azure CLI su ogni macchina è un fastidio—ed è la ragione principale per cui un tutorial che "funziona sulla mia macchina" fallisce per qualcun altro. Un **dev container** risolve questo descrivendo l'intera toolchain in un file. Chiunque apra il progetto in VS Code o GitHub Codespaces ottiene esattamente lo stesso ambiente, con azd già installato. Questa lezione mostra come aggiungerne uno.
+Installare azd, il runtime del linguaggio corretto, Docker e l'Azure CLI su ogni macchina è un compito noioso — ed è la ragione principale per cui un tutorial che "funziona sulla mia macchina" fallisce per qualcun altro. Un **contenitore di sviluppo** risolve questo problema descrivendo l'intera tua toolchain in un file. Chiunque apra il progetto in VS Code o GitHub Codespaces ottiene esattamente lo stesso ambiente, con azd già installato. Questa lezione ti mostra come aggiungerne uno.
 
-## Learning Goals
+## Obiettivi di apprendimento
 
-Al termine di questa lezione, tu:
-- Capirai cos'è un dev container e perché aiuta con azd
-- Aggiungerai un minimo `.devcontainer/devcontainer.json` a un progetto
-- Includerai azd, l'Azure CLI e Docker tramite *feature* dei Dev Container
-- Aprirai il progetto in GitHub Codespaces o VS Code
+Alla fine di questa lezione, sarai in grado di:
+- Capire cos'è un contenitore di sviluppo e perché aiuta con azd
+- Aggiungere un minimo `.devcontainer/devcontainer.json` a un progetto
+- Includere azd, l'Azure CLI, e Docker tramite le *feature* del contenitore di sviluppo
+- Aprire il progetto in GitHub Codespaces o VS Code
 
-## Learning Outcomes
+## Risultati di apprendimento
 
 Dopo aver completato questa lezione, sarai in grado di:
 - Scrivere un `devcontainer.json` per un progetto azd
 - Aggiungere azd e gli strumenti Azure senza installazioni manuali
-- Eseguire `azd up` dall'interno di un container o di un Codespace
+- Eseguire `azd up` dall'interno di un contenitore o Codespace
 
 ---
 
-## What Is a Dev Container?
+## Cos'è un Contenitore di Sviluppo?
 
-Un dev container è un ambiente di sviluppo basato su Docker definito da un file `.devcontainer/devcontainer.json` nel tuo repository. Quando apri il progetto:
+Un contenitore di sviluppo è un ambiente di sviluppo basato su Docker definito da un file `.devcontainer/devcontainer.json` nel tuo repository. Quando apri il progetto:
 
-- **VS Code** (con l'estensione Dev Containers) costruisce il container e vi si collega.
-- **GitHub Codespaces** costruisce lo stesso container nel cloud e ti fornisce un editor basato sul browser.
+- **VS Code** (con l'estensione Dev Containers) costruisce il contenitore e si collega ad esso.
+- **GitHub Codespaces** costruisce lo stesso contenitore nel cloud e ti dà un editor basato su browser.
 
-In entrambi i casi, ogni collaboratore ottiene gli stessi strumenti—niente più problemi tipo "hai installato azd?".
+In entrambi i casi, ogni contributore ha gli stessi strumenti—niente più "hai installato azd?" per risolvere problemi.
 
 ```mermaid
 graph LR
-    Repo[Il tuo repository<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Contenitori di sviluppo]
+    Repo[Il tuo Repo<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Contenitori di sviluppo]
     Repo --> Codespaces[GitHub<br/>Codespaces]
-    VSCode --> Env[Ambiente identico:<br/>azd + az + Docker]
+    VSCode --> Env[Identical environment:<br/>azd + az + Docker]
     Codespaces --> Env
 ```
 
 ---
 
-## Step 1: Create the devcontainer File
+## Passo 1: Crea il file devcontainer
 
 Crea `.devcontainer/devcontainer.json` nella radice del tuo progetto:
 
@@ -75,23 +75,23 @@ Crea `.devcontainer/devcontainer.json` nella radice del tuo progetto:
 }
 ```
 
-What each part does:
+Cosa fa ciascuna parte:
 
-| Key | Purpose |
+| Chiave | Scopo |
 |-----|---------|
-| `image` | The base OS for the container |
-| `features` | Prebuilt installers—here: Azure CLI, **azd**, Docker, and Node.js |
-| `customizations.vscode.extensions` | Auto-installs the azd and Bicep VS Code extensions |
-| `forwardPorts` | Exposes your app's port to your browser |
-| `postCreateCommand` | Runs once after the container is built (here, a sanity check) |
+| `image` | Il sistema operativo base per il contenitore |
+| `features` | Installatori preconfigurati—qui: Azure CLI, **azd**, Docker e Node.js |
+| `customizations.vscode.extensions` | Installa automaticamente le estensioni azd e Bicep per VS Code |
+| `forwardPorts` | Espone la porta della tua app al browser |
+| `postCreateCommand` | Esegue un comando una volta terminata la creazione del contenitore (qui, un controllo di sanità) |
 
-> The `ghcr.io/azure/azure-dev/azd:latest` feature is the official way to get azd in a container. Pin a specific version (for example `azd:1.25.6`) if you need reproducibility.
+> La feature `ghcr.io/azure/azure-dev/azd:latest` è il modo ufficiale per ottenere azd in un contenitore. Blocca una versione specifica (ad esempio `azd:1.27.1`) se necessiti di riproducibilità.
 
 ---
 
-## Step 2: Match the Feature to Your App's Language
+## Passo 2: Abbina la feature al linguaggio della tua app
 
-Swap the `node` feature for whatever your app uses:
+Sostituisci la feature `node` con quella del linguaggio che usa la tua app:
 
 ```jsonc
 // Python project
@@ -107,71 +107,71 @@ Swap the `node` feature for whatever your app uses:
 "ghcr.io/devcontainers/features/go:1": {}
 ```
 
-Keep `docker-in-docker` if your `host` is `containerapp`, `aks`, or anything that builds a container image—azd needs Docker to build and push images.
+Mantieni `docker-in-docker` se il tuo `host` è `containerapp`, `aks` o qualsiasi cosa costruisca un'immagine contenitore—azd ha bisogno di Docker per costruire e inviare immagini.
 
 ---
 
-## Step 3: Open It
+## Passo 3: Aprilo
 
 **In VS Code:**
-1. Install the **Dev Containers** extension.
-2. Open the project folder.
-3. Click **Reopen in Container** when prompted (or run *Dev Containers: Reopen in Container*).
+1. Installa l'estensione **Dev Containers**.
+2. Apri la cartella del progetto.
+3. Clicca su **Riapri nel contenitore** quando richiesto (oppure esegui *Dev Containers: Reopen in Container*).
 
 **In GitHub Codespaces:**
-1. Push the repo to GitHub.
-2. Click **Code → Codespaces → Create codespace on main**.
-3. Wait for the container to build—azd is ready in the terminal.
+1. Pubblica il repo su GitHub.
+2. Clicca su **Code → Codespaces → Create codespace on main**.
+3. Attendi che il contenitore sia costruito—azd è pronto nel terminale.
 
 ---
 
-## Step 4: Deploy From Inside the Container
+## Passo 4: Distribuisci dall'interno del contenitore
 
-The container has azd preinstalled, so the normal workflow just works:
+Il contenitore ha azd preinstallato, quindi il flusso di lavoro normale funziona così com'è:
 
 ```bash
-azd auth login --use-device-code   # Il codice del dispositivo è utile all'interno di Codespaces
+azd auth login --use-device-code   # il codice dispositivo è utile all'interno di Codespaces
 azd up
 ```
 
-> **Why `--use-device-code`?** In a remote container or Codespace there's no local browser to redirect to, so device-code login is the reliable path. You'll paste a code into a browser tab to complete sign-in.
+> **Perché `--use-device-code`?** In un contenitore remoto o Codespace non c'è un browser locale a cui reindirizzare, quindi il login con codice dispositivo è la via affidabile. Incollerai un codice in una scheda del browser per completare l'accesso.
 
 ---
 
-## Common Pitfalls
+## Problemi Comuni
 
-| Pitfall | Fix |
+| Problema | Soluzione |
 |---------|-----|
-| `azd up` can't build an image | Add the `docker-in-docker` feature |
-| Browser login hangs in Codespaces | Use `azd auth login --use-device-code` |
-| Tools differ between teammates | Pin feature versions (e.g. `azd:1.25.6`) |
-| App not reachable in browser | Add the port to `forwardPorts` |
+| `azd up` non può costruire un'immagine | Aggiungi la feature `docker-in-docker` |
+| Il login via browser si blocca in Codespaces | Usa `azd auth login --use-device-code` |
+| Strumenti diversi tra i membri del team | Blocca la versione delle feature (es. `azd:1.27.1`) |
+| App non raggiungibile nel browser | Aggiungi la porta a `forwardPorts` |
 
 ---
 
-## Summary
+## Riepilogo
 
-- A dev container makes your azd toolchain reproducible for everyone.
-- Add azd, the Azure CLI, and Docker through Dev Container *features*.
-- Match the language feature to your app and keep `docker-in-docker` for container hosts.
-- Use device-code login when running inside Codespaces.
+- Un contenitore di sviluppo rende la tua toolchain azd riproducibile per tutti.
+- Aggiungi azd, l'Azure CLI e Docker tramite le *feature* del contenitore di sviluppo.
+- Abbina la feature del linguaggio alla tua app e mantieni `docker-in-docker` per gli host contenitore.
+- Usa il login con codice dispositivo quando esegui dentro Codespaces.
 
 ---
 
-## 🔗 Navigation
+## 🔗 Navigazione
 
-| Direction | Resource |
+| Direzione | Risorsa |
 |-----------|----------|
-| **Previous** | [Porta la tua app](bring-your-own-app.md) |
-| **Chapter Home** | [Chapter 1: Foundation & Quick Start](README.md) |
-| **Next Chapter** | [Capitolo 2: Sviluppo AI-First](../chapter-02-ai-development/README.md) |
+| **Precedente** | [Porta la tua app](bring-your-own-app.md) |
+| **Home del capitolo** | [Capitolo 1: Fondamenti e Avvio Rapido](README.md) |
+| **Capitolo successivo** | [Capitolo 2: Sviluppo AI-First](../chapter-02-ai-development/README.md) |
 
-## 📖 Related Resources
+## 📖 Risorse correlate
 
-- [Installazione e configurazione](installation.md)
-- [Scheda comandi](../../resources/cheat-sheet.md)
-- [Official Dev Containers specification](https://containers.dev/)
-- [Funzionalità Dev Container di azd](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
+- [Installazione e Configurazione](installation.md)
+- [Scheda di riferimento comandi](../../resources/cheat-sheet.md)
+- [Specifiche ufficiali dei contenitori di sviluppo](https://containers.dev/)
+- [Feature contenitore di sviluppo azd](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
 
 ---
 

@@ -1,36 +1,36 @@
-# Capitolo 4: Infrastruttura come Codice & Distribuzione
+# Capitolo 4: Infrastructure as Code & Deployment
 
-**📚 Corso**: [AZD per Principianti](../../README.md) | **⏱️ Durata**: 1-1.5 ore | **⭐ Complessità**: Intermedio
+**📚 Corso**: [AZD For Beginners](../../README.md) | **⏱️ Durata**: 1-1,5 ore | **⭐ Complessità**: Intermedio
 
 ---
 
 ## Panoramica
 
-Questo capitolo tratta i pattern di Infrastruttura come Codice (IaC) con template Bicep, il provisioning delle risorse e le strategie di distribuzione usando Azure Developer CLI.
+Questo capitolo copre i modelli Infrastructure as Code (IaC) con template Bicep, il provisioning delle risorse e le strategie di deployment usando Azure Developer CLI.
 
-> Validato con `azd 1.25.6` a giugno 2026.
+> Validato con `azd 1.27.1` a luglio 2026.
 
-## Obiettivi di apprendimento
+## Obiettivi di Apprendimento
 
-Al completamento di questo capitolo, sarai in grado di:
+Completando questo capitolo, imparerai a:
 - Comprendere la struttura e la sintassi dei template Bicep
-- Provisionare risorse Azure con `azd provision`
+- Effettuare il provisioning delle risorse Azure con `azd provision`
 - Distribuire applicazioni con `azd deploy`
-- Implementare strategie di distribuzione blue-green e rolling
+- Implementare strategie di deployment blue-green e rolling
 
 ---
 
 ## 📚 Lezioni
 
-| # | Lezione | Descrizione | Durata |
+| # | Lezione | Descrizione | Tempo |
 |---|--------|-------------|------|
-| 1 | [Provisioning delle risorse](provisioning.md) | Gestione delle risorse Azure con AZD | 45 min |
-| 2 | [Guida alla distribuzione](deployment-guide.md) | Strategie di distribuzione delle applicazioni | 45 min |
-| 3 | [Creazione del proprio template](custom-templates.md) | Costruire e pubblicare template azd riutilizzabili | 30 min |
+| 1 | [Provisioning delle Risorse](provisioning.md) | Gestione delle risorse Azure con AZD | 45 min |
+| 2 | [Guida al Deployment](deployment-guide.md) | Strategie di distribuzione dell'applicazione | 45 min |
+| 3 | [Creare il Tuo Template](custom-templates.md) | Costruire e pubblicare template azd riutilizzabili | 30 min |
 
 ---
 
-## 🚀 Avvio rapido
+## 🚀 Avvio Rapido
 
 ```bash
 # Inizializza dal modello
@@ -39,7 +39,7 @@ azd init --template azure-functions-python-v2-http
 # Anteprima di ciò che verrà creato
 azd provision --preview
 
-# Configura solo l'infrastruttura
+# Provisiona solo l'infrastruttura
 azd provision
 
 # Distribuisci solo il codice
@@ -51,7 +51,7 @@ azd up
 
 ---
 
-## 📁 Struttura del progetto AZD
+## 📁 Struttura del Progetto AZD
 
 ```
 my-project/
@@ -68,14 +68,14 @@ my-project/
 
 ---
 
-## 🔧 Comandi essenziali
+## 🔧 Comandi Essenziali
 
 | Comando | Descrizione |
 |---------|-------------|
-| `azd init` | Inizializza il progetto |
+| `azd init` | Inizializza progetto |
 | `azd provision` | Crea risorse Azure |
-| `azd deploy` | Distribuire il codice dell'applicazione |
-| `azd up` | provision + deploy |
+| `azd deploy` | Distribuisci il codice dell'applicazione |
+| `azd up` | provisioning + deployment |
 | `azd down` | Elimina tutte le risorse |
 
 ---
@@ -85,15 +85,15 @@ my-project/
 | Direzione | Capitolo |
 |-----------|---------|
 | **Precedente** | [Capitolo 3: Configurazione](../chapter-03-configuration/README.md) |
-| **Successivo** | [Capitolo 5: Soluzioni multi-agente](../chapter-05-multi-agent/README.md) |
+| **Successivo** | [Capitolo 5: Soluzioni Multi-Agente](../chapter-05-multi-agent/README.md) |
 
 ---
 
-## 📖 Risorse correlate
+## 📖 Risorse Correlate
 
-- [Controlli pre-distribuzione](../chapter-06-pre-deployment/README.md)
-- [Esempi di app container](../../examples/container-app/README.md)
-- [Esempio di app database](../../examples/database-app/README.md)
+- [Controlli Pre-Deployment](../chapter-06-pre-deployment/README.md)
+- [Esempi Container App](../../examples/container-app/README.md)
+- [Esempio Database App](../../examples/database-app/README.md)
 
 ---
 

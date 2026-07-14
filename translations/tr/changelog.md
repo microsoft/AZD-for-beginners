@@ -1,69 +1,107 @@
-# Değişiklik Günlüğü - AZD Yeni Başlayanlar İçin
+# Değişiklik Kaydı - AZD Yeni Başlayanlar İçin
 
 ## Giriş
 
-Bu değişiklik günlüğü AZD Yeni Başlayanlar deposundaki tüm kayda değer değişiklikleri, güncellemeleri ve iyileştirmeleri belgelendirir. Semantik sürümleme ilkelerini takip ediyoruz ve kullanıcıların sürümler arasındaki farkları anlamalarına yardımcı olmak için bu günlüğü tutuyoruz.
+Bu değişiklik kaydı, AZD Yeni Başlayanlar deposundaki tüm önemli değişiklikleri, güncellemeleri ve iyileştirmeleri belgelendirir. Semantik sürümleme prensiplerine uyar ve kullanıcıların sürümler arasındaki değişiklikleri anlamalarına yardımcı olmak için bu kaydı tutarız.
 
 ## Öğrenme Hedefleri
 
-Bu değişiklik günlüğünü inceleyerek:
-- Yeni özellikler ve içerik eklemeleri hakkında haberdar olursunuz
-- Mevcut belgelerde yapılan iyileştirmeleri anlarsınız
-- Doğruluğu sağlamak için hata düzeltmelerini ve düzeltmeleri izlersiniz
-- Öğrenme materyallerinin zaman içindeki evrimini takip edersiniz
+Bu değişiklik kaydını inceleyerek:
+- Yeni özellikler ve içerik eklemeleri hakkında güncel kalacaksınız
+- Mevcut belgelerde yapılan iyileştirmeleri anlayacaksınız
+- Doğruluğu sağlamak için hata düzeltmelerini ve düzeltmeleri takip edeceksiniz
+- Öğrenme materyallerinin zaman içindeki evrimini takip edeceksiniz
 
 ## Öğrenme Çıktıları
 
-Değişiklik kaydı girdilerini inceledikten sonra şunları yapabileceksiniz:
-- Öğrenme için kullanılabilir yeni içerikleri ve kaynakları tanımlamak
-- Hangi bölümlerin güncellendiğini veya iyileştirildiğini anlamak
-- En güncel materyallere göre öğrenme yolunuzu planlamak
-- Gelecekteki iyileştirmeler için geri bildirim ve önerilerde bulunmak
+Değişiklik kaydı girdilerini inceledikten sonra:
+- Öğrenme için mevcut yeni içerik ve kaynakları tanımlayabileceksiniz
+- Hangi bölümlerin güncellendiğini veya iyileştirildiğini anlayabileceksiniz
+- En güncel materyallere dayanarak öğrenme yolunuzu planlayabileceksiniz
+- Gelecekteki iyileştirmeler için geri bildirim ve önerilerde bulunabileceksiniz
 
 ## Sürüm Geçmişi
 
+### [v3.23.0] - 2026-07-13
+
+#### AZD 1.27.1 Güncellemesi: Sürüm Geçerliliği Güncellemesi
+**Bu sürüm, kursu `azd` `1.27.1` (Temmuz 2026, en son kararlı sürüm) ve mevcut önizleme AI ajan eklentisi `azure.ai.agents` `1.0.0-beta.5` ile yeniden doğrular; 1.26.0, 1.27.0 ve 1.27.1 sürümlerinden sonra her "doğrulandı" afişini güncel hale getirir.**
+
+#### Değiştirilenler
+- **✅ Doğrulama tabanı güncellendi** `azd 1.25.6` (Haziran 2026) sürümünden `azd 1.27.1` (Temmuz 2026) sürümüne tüm kök README, tüm bölüm README dosyaları, Bölüm 1 dev-container dersi (sabitlenmiş sürüm örnekleri dahil), Bölüm 4 özel şablonlar dersi, Bölüm 5 çoklu ajan dersi ve atölye dokümanlarında
+- **🤖 Bölüm 2 tabanı yenilendi** `azd 1.23.12` (Mart 2026) sürümünden `azd 1.27.1` sürümüne `agents.md`, `ai-model-deployment.md`, `ai-workshop-lab.md` ve `microsoft-foundry-integration.md` dosyalarında; doğrulama notu tarihleri 2026-07-13 olarak güncellendi
+- **🧩 AI ajan eklentisi yükseltildi** Bölüm 2 README ve `agents.md` dosyalarında `azure.ai.agents` `0.1.40-preview`/`0.1.18-preview` sürümlerinden mevcut `1.0.0-beta.5` sürümüne
+- **🧪 Atölye doğrulama örneği** (`azd version` çıktısı) `1.27.1` sürümüne güncellendi
+
+#### İlgili azd sürümleri hakkında notlar (1.26.0 → 1.27.1)
+- **1.26.0 (2026-06-24):** Azure Functions için Flex Consumption desteği, `azd config sub-filter` kiracı bazında abonelik filtreleri, kendi içinde bağımsız eklenti paketleri (`azd x pack --bundle`) ve `azd tool install azure-skills`
+- **1.27.0 (2026-06-30):** Azure AI Foundry projeleri/ajanlarının doğrudan `azure.yaml`'da modellenmesi (Bicep'siz/Terraform'suz başlatma), App Service için konteyner dağıtımı desteği (`host: appservice` + `language: docker`), `azd extension` komutları için doğrudan `-s/--source`, ve `azd tool uninstall`
+- **1.27.1 (2026-07-09):** `azd extension install` için `--no-dependencies` bayrağı, varsayılan olarak katalog/kota istemlerinden çıkarılan kullanım dışı modeller ve çeşitli hata düzeltmeleri
+
+#### Güncellenen Dosyalar
+- `README.md`
+- `changelog.md`
+- `docs/chapter-01-foundation/README.md`
+- `docs/chapter-01-foundation/bring-your-own-app.md`
+- `docs/chapter-01-foundation/dev-containers.md`
+- `docs/chapter-02-ai-development/README.md`
+- `docs/chapter-02-ai-development/agents.md`
+- `docs/chapter-02-ai-development/ai-model-deployment.md`
+- `docs/chapter-02-ai-development/ai-workshop-lab.md`
+- `docs/chapter-02-ai-development/microsoft-foundry-integration.md`
+- `docs/chapter-03-configuration/README.md`
+- `docs/chapter-04-infrastructure/custom-templates.md`
+- `docs/chapter-04-infrastructure/README.md`
+- `docs/chapter-05-multi-agent/multi-agent-basics.md`
+- `docs/chapter-05-multi-agent/README.md`
+- `docs/chapter-06-pre-deployment/README.md`
+- `docs/chapter-07-troubleshooting/README.md`
+- `docs/chapter-08-production/README.md`
+- `workshop/docs/index.md`
+- `workshop/docs/instructions/2-Validate-AI-Template.md`
+
 ### [v3.22.0] - 2026-06-16
 
-#### Beginner Gap-Fill #2: Template Authoring, Dev Containers, Pulumi, Azure DevOps, Service Principals, and More
-**Bu sürüm, azd-coverage analizinin ortaya çıkardığı kalan orta düzey boşlukları kapatır: kendi şablonunuzu nasıl yazıp yayımlayacağınız, tekrarlanabilir dev-container/Codespaces ortamları, Pulumi altyapı sağlayıcısı, bir Azure DevOps CI/CD kılavuzu, servis-prensip kimlik doğrulaması, host-seçimi rehberliği (AKS/Spring Apps), `azd restore`/`azd package` açıklamaları, hook hata işleme ve ekip/paylaşılan ortam uygulamaları.**
+#### Yeni Başlayan Boşluk Doldurma #2: Şablon Yazımı, Dev Konteynerler, Pulumi, Azure DevOps, Hizmet İlkeleri ve Daha Fazlası
+**Bu sürüm, azd-kapsam analiziyle ortaya çıkan kalan ara boşlukları kapatır: kendi şablonunuzu nasıl yazıp yayınlayacağınız, yeniden üretilebilir dev-container/Codespaces ortamları, Pulumi altyapı sağlayıcısı, Azure DevOps CI/CD anlatımı, hizmet-prensip doğrulaması, host seçimi rehberi (AKS/Spring Apps), `azd restore`/`azd package` açıklamaları, kanca hata işleme ve takım/paylaşılan ortam uygulamaları.**
 
 #### Eklendi
-- **🧱 Yeni Bölüm 4 dersi** `docs/chapter-04-infrastructure/custom-templates.md` — kendi azd şablonunuzu yazma ve yayımlama: gerekli yapı (`azure.yaml`, `infra/`, `src/`), `metadata.template` alanı, altyapıyı `uniqueString()` kaynak tokeni ve `azd-env-name` etiketi ile parametreleştirme, `azd init --template <local-path>` ile yerel test etme, GitHub'a yayınlama ve Awesome AZD galerisine gönderme
-- **📦 Yeni Bölüm 1 dersi** `docs/chapter-01-foundation/dev-containers.md` — Dev Containers ve GitHub Codespaces ile tekrarlanabilir azd ortamları: resmi `ghcr.io/azure/azure-dev/azd` özelliğini kullanan minimal `.devcontainer/devcontainer.json`, dil-spesifik özellikler, container hostlar için `docker-in-docker` ve uzak giriş için `azd auth login --use-device-code`
-- **🧩 azd ile Pulumi** bölümü `docs/chapter-04-infrastructure/provisioning.md` — `infra.provider: pulumi`, Pulumi klasör düzeni, azd ortamlarına eşlenen stack'ler, gerekli çıktılar/etiketleme ve aynı `azd up` / `azd down` iş akışı
-- **🎯 Host-seçimi rehberliği** `docs/chapter-04-infrastructure/provisioning.md` — `appservice`, `staticwebapp`, `function`, `containerapp`, `aks` ve `springapp` için yeni başlayanlara yönelik karşılaştırma ve AKS veya Azure Spring Apps seçmenin ne zaman uygun olduğuna dair rehberlik
-- **🛠️ Azure DevOps CI/CD kılavuzu** `docs/chapter-08-production/production-ai-practices.md` — `azd pipeline config --provider azdo`, workload identity federation (OIDC) ile servis bağlantısı, oluşturulan `azure-dev.yml` ve variable-group kurulumu
-- **🔑 Servis Prensipleri (Desen 4)** `docs/chapter-03-configuration/authsecurity.md` dosyasına eklendi — `az ad sp create-for-rbac`, istemci sırrı vs. federated/OIDC kimlik bilgileri ile etkileşimsiz `azd auth login`, ne zaman kullanılacağı ve güvenli kimlik bilgisi depolama
-- **🪝 Hook hata-işleme** alt bölümü `docs/chapter-04-infrastructure/deployment-guide.md` — çıkış kodları ve `set -e`, `continueOnError`, `azd hooks run` ile hook'ları izole şekilde test etme, OS-spesifik kabuklar ve `--debug`
-- **👥 Ekip / paylaşılan ortamlar** bölümü `docs/chapter-03-configuration/configuration.md` — `.azure/` içinde neyin yaşadığı, neyin gitignore yapılacağı, geliştirici başına ortamlar, `azd env list`/`select` ve CI/CD içinde ortam değerleri sağlama
-- **🧰 `azd restore` ve genişletilmiş `azd package`** açıklamaları `resources/cheat-sheet.md` — bağımlılıkların geri yüklenmesi ve dağıtılmadan deploy edilebilir bir artefakt oluşturma
+- **🧱 Yeni Bölüm 4 dersi** `docs/chapter-04-infrastructure/custom-templates.md` — kendi azd şablonunuzu yazmak: gereken yapı (`azure.yaml`, `infra/`, `src/`), `metadata.template` alanı, altyapıyı `uniqueString()` kaynak jetonu ve `azd-env-name` etiketi ile parametrelendirme, yerelde test etme `azd init --template <local-path>` ile, GitHub'a yayınlama ve Awesome AZD galerisine gönderme
+- **📦 Yeni Bölüm 1 dersi** `docs/chapter-01-foundation/dev-containers.md` — Dev Containers ve GitHub Codespaces ile yeniden üretilebilir azd ortamları: resmi `ghcr.io/azure/azure-dev/azd` özelliğini kullanan minimal `.devcontainer/devcontainer.json`, dil özgü özellikler, konteyner hostları için `docker-in-docker` ve uzak oturum açma için `azd auth login --use-device-code`
+- **🧩 Pulumi azd ile** bölümü `docs/chapter-04-infrastructure/provisioning.md` içinde — `infra.provider: pulumi`, Pulumi klasör düzeni, azd ortamlarıyla eşlenen stack’ler, gereken çıktılar/etiketlendirme ve aynı `azd up` / `azd down` iş akışı
+- **🎯 Host seçimi rehberi** `docs/chapter-04-infrastructure/provisioning.md` içinde — yeni başlayan dostu `appservice`, `staticwebapp`, `function`, `containerapp`, `aks` ve `springapp` karşılaştırması, AKS veya Azure Spring Apps seçimi için rehberlik
+- **🛠️ Azure DevOps CI/CD anlatımı** `docs/chapter-08-production/production-ai-practices.md` içinde — `azd pipeline config --provider azdo`, yük iş yükü kimlik federasyonu (OIDC) ile servis bağlantısı, oluşturulan `azure-dev.yml` dosyası ve değişken grubu ayarları
+- **🔑 Hizmet İlkeleri (Desen 4)** `docs/chapter-03-configuration/authsecurity.md` dosyasına eklendi — `az ad sp create-for-rbac`, istemci sırrı ile etkileşimsiz `azd auth login` ve federasyonlu/OIDC kimlik bilgileri, ne zaman kullanılacağı ve güvenli kimlik bilgisi saklama
+- **🪝 Kanca hata işleme** alt bölümü `docs/chapter-04-infrastructure/deployment-guide.md` içinde — çıkış kodları ve `set -e`, `continueOnError`, kancaları izole şekilde test etme `azd hooks run` ile, OS’ye özgü kabuklar ve `--debug`
+- **👥 Takım / paylaşılan ortamlar** bölümü `docs/chapter-03-configuration/configuration.md` içinde — `.azure/` içeriği, gitignore edilecekler, geliştirici bazlı ortamlar, `azd env list`/`select` ve CI/CD’de ortam değerlerini sağlama
+- **🧰 `azd restore` ve genişletilmiş `azd package`** açıklamaları `resources/cheat-sheet.md` içinde — bağımlılıkları geri yükleme ve dağıtılabilir bir artefakt oluşturma (dağıtmadan)
 
-#### Değiştirildi
-- **🧭 Bölüm 4 ders tablosu** yeni "Kendi Şablonunuzu Yazma" dersini (Ders 3) içerecek şekilde güncellendi
-- **🧭 Bölüm 1 ders tablosu** yeni "Dev Containers & Codespaces" dersini (Ders 5) içerecek şekilde güncellendi; `bring-your-own-app.md` ve `dev-containers.md` arasında gezinme altbilgileri bağlandı
+#### Değiştirilenler
+- **🧭 Bölüm 4 ders tablosu** yeni "Kendi Şablonunu Yazma" dersini (Ders 3) içerecek şekilde güncellendi
+- **🧭 Bölüm 1 ders tablosu** yeni "Dev Containers ve Codespaces" dersini (Ders 5) eklemek için güncellendi; gezinme altbilgileri `bring-your-own-app.md` ile `dev-containers.md` arasında bağlandı
 
 ### [v3.21.0] - 2026-06-16
 
-#### Beginner Gap-Fill: Hands-On Multi-Agent Lesson, "Bring Your Own App," Terraform, and CI/CD Walkthrough
-**Bu sürüm, eksiksiz bir başlangıç kılavuzu için en büyük boşlukları kapatır: iki yeni uygulamalı ders (dağıtılabilir çok ajanlı bir yürütme ve var olan bir uygulamaya azd ekleme), yeni başlayanlara uygun bir hooks tanıtımı, azd ile Terraform bölümü, adım adım bir GitHub Actions pipeline kılavuzu, yeni önizleme eklentileri için bir açıklama ve açık bir dağıtım doğrulama kontrol listesi eklenmesi.**
+#### Yeni Başlayan Boşluk Doldurma: Uygulamalı Çoklu Ajan Dersi, "Kendi Uygulamanı Getir," Terraform ve CI/CD Anlatımı
+**Bu sürüm, eksiksiz bir yeni başlayan rehberi için en büyük boşlukları kapatır; iki yeni uygulamalı ders (dağıtılabilir çoklu ajan anlatımı ve mevcut bir uygulamaya azd ekleme), yeni başlayan dostu kanca tanıtımı, Terraform ile azd bölümü, adım adım GitHub Actions pipeline anlatımı, yeni önizleme eklentilerine açıklama ve açık dağıtım doğrulama kontrol listesi.**
 
 #### Eklendi
-- **🤝 Yeni Bölüm 5 dersi** `docs/chapter-05-multi-agent/multi-agent-basics.md` — gerçek bir şablon (`contoso-creative-writer`) kullanarak tamamen uygulamalı, dağıtılabilir iki ajanlı bir yürütme (orchestrator + uzmanlar): çok ajan kullanım zamanları, `azd up` iş akışı, dağıtılan kaynakların anlaşılması, ajanlar arası izleme, özelleştirme ve temizlik
-- **📦 Yeni Bölüm 1 dersi** `docs/chapter-01-foundation/bring-your-own-app.md` — mevcut bir projeye `azd init` ile azd ekleme ("use code in the current directory"), `azure.yaml` ve `infra/` yapısını anlama, `azd infra generate`, host tespiti ve `azd up` ile dağıtım
-- **🌐 azd ile Terraform** bölümü `docs/chapter-04-infrastructure/provisioning.md` eklendi — `infra.provider: terraform` yapılandırması, `.tf` klasör düzeni, gerekli `AZURE_*` çıktılar ve `azd-env-name` etiketleme ve aynı `azd up` / `azd down` iş akışı (Terraform desteğinin iddia edildiği ancak yalnızca Bicep gösterildiği boşluğu kapatır)
-- **⚙️ Adım adım GitHub Actions yürütme rehberi** `docs/chapter-08-production/production-ai-practices.md` — GitHub repo'dan otomatik dağıtıma: `azd pipeline config`, saklanan sır olmadan OIDC federated kimlik bilgileri, oluşturulan `azure-dev.yml` ve secrets-vs-variables rehberliği
-- **🪝 Yeni başlayanlar için "Hooks'a yeni misiniz?" tanıtımı** `docs/chapter-04-infrastructure/deployment-guide.md` — hook nedir, bir hook-evre tablosu, minimal ilk hook ve `azd hooks run` ile hook'ları elle çalıştırma
-- **✅ "Dağıtımınızı Doğrulayın" kontrol listesi** `docs/chapter-01-foundation/first-project.md` içindeki Adım 5'e eklendi — duman testi, sağlık uç noktası kontrolü ve açık başarı kriterleri
-- **🧩 Yeni önizleme eklentileri için açıklama** `azure.ai.skills` ve `azure.ai.connections` (ne oldukları ve ne zaman kullanılacakları) `docs/chapter-08-production/production-ai-practices.md` içinde
+- **🤝 Yeni Bölüm 5 dersi** `docs/chapter-05-multi-agent/multi-agent-basics.md` — gerçek bir şablon (`contoso-creative-writer`) kullanarak tamamen uygulamalı, dağıtılabilir iki ajan anlatımı (orchestrator + uzmanlar); çoklu ajan ne zaman kullanılır, `azd up` iş akışı, dağıtılmış kaynakları anlama, ajanlar arası izleme, özelleştirme ve temizleme
+- **📦 Yeni Bölüm 1 dersi** `docs/chapter-01-foundation/bring-your-own-app.md` — mevcut bir projeye azd nasıl eklenir `azd init` ("mevcut dizindeki kodu kullan") ile, `azure.yaml` ve `infra/` kavrama, `azd infra generate`, barındırıcı tespiti ve `azd up` ile dağıtma
+- **🌐 Terraform ile azd** bölümü eklendi `docs/chapter-04-infrastructure/provisioning.md` — `infra.provider: terraform` yapılandırması, `.tf` klasör düzeni, gereken `AZURE_*` çıktılar ve `azd-env-name` etiketi, aynı `azd up` / `azd down` iş akışı (Terraform desteğinin iddia edildiği ancak sadece Bicep gösterildiği boşluğu kapatır)
+- **⚙️ Adım adım GitHub Actions anlatımı** `docs/chapter-08-production/production-ai-practices.md` — GitHub deposundan otomatik dağıtıma: `azd pipeline config`, OIDC federasyona dayalı kimlik bilgileri (kayıtlı gizli bilgiler yok), oluşturulan `azure-dev.yml` ve gizli değişken rehberi
+- **🪝 Yeni başlayanlar için "Kancalar yeni mi?" tanıtımı** `docs/chapter-04-infrastructure/deployment-guide.md` — kanca nedir, kanca aşamaları tablosu, minimal ilk kanca ve manuel kanca çalıştırma `azd hooks run` ile
+- **✅ "Dağıtımınızı Doğrulayın" kontrol listesi** `docs/chapter-01-foundation/first-project.md` 5. Adım'a eklendi — duman testi, sağlık uç noktası kontrolü ve açık başarı kriterleri
+- **🧩 Yeni önizleme eklentilerine açıklama** `azure.ai.skills` ve `azure.ai.connections` (ne oldukları ve ne zaman kullanılacakları) `docs/chapter-08-production/production-ai-practices.md` içinde
 
-#### Değiştirildi
-- **🧭 Bölüm 5 ders tablosu** düzeltildi: `multi-agent-basics.md` artık Ders 1 (tek tamamen uygulamalı ders) olarak etiketlendi; Ders 2'nin Bölüm 6'da bulunduğuna dair dürüst etiketleme yapıldı ve Perakende senaryosunun bir komutla çalışan şablon değil bir mimari taslak olduğu belirtildi
-- **🧭 Bölüm 1 ders tablosu** artık yeni "Bring Your Own App" dersini (Ders 4) içeriyor
-- **🔗 Gezinme altbilgileri** güncellendi: `first-project.md` artık ileriye `bring-your-own-app.md` bağlantısı içeriyor
+#### Değiştirilenler
+- **🧭 Bölüm 5 ders tablosu** düzeltildi: `multi-agent-basics.md` şimdi Ders 1 (tek tam uygulamalı ders) olarak işaretlendi, Ders 2’nin Bölüm 6’da olduğu dürüstçe belirtildi ve Retail senaryosu mimari plan olup tek komut şablonu değildir
+- **🧭 Bölüm 1 ders tablosu** yeni "Kendi Uygulamanı Getir" dersi (Ders 4) dahil edildi
+- **🔗 Gezinme altbilgileri** güncellendi: `first-project.md` artık ileriye `bring-your-own-app.md` bağlantısı içermektedir
 
 #### Düzeltildi
-- **🧱 "İddia edilmiş ancak eksik" Terraform boşluğu kapatıldı** — kurs daha önce Terraform desteğinden söz ediyor ancak bunu göstermiyordu
-- **🔀 Yanıltıcı Bölüm 5 çapraz bağlantıları** düzeltildi; bu bağlantılar yalnızca bir mimari taslak varken tam bir çok-ajans uygulamasının var olduğunu ima ediyordu
+- **🧱 "İddiada bulunan ama eksik" Terraform boşluğu kapatıldı** — kurs önceden Terraform desteğini belirtmiş ancak göstermemişti
+- **🔀 Yanıltıcı Bölüm 5 çapraz bağlantıları düzeltildi** — yalnızca bir mimari planken tam çoklu ajan uygulaması varmış gibi yapılan bağlantılar
 
 #### Güncellenen Dosyalar
 - `changelog.md`
@@ -80,28 +118,29 @@ Değişiklik kaydı girdilerini inceledikten sonra şunları yapabileceksiniz:
 
 ### [v3.20.0] - 2026-06-16
 
-#### AZD 1.25.6 Yenileme, Tam Ajan Yaşam Döngüsü Komutları ve Aspire Yeniden Markalaşması
-**Bu sürüm kursu `azd` `1.25.6` (Haziran 2026) ve `azure.ai.agents` `0.1.40-preview` eklentisine göre yeniden doğrular, AI rehberliğini "bir ajan iskeletlemekten" komple ajan yaşam döngüsüne (test → değerlendir → optimize et → incele → sil) genişletir, yeni `azure.ai.skills` ve `azure.ai.connections` önizleme eklentilerini ortaya çıkarır ve ".NET Aspire" → "Aspire" ürün yeniden markalaşmasını not eder.**
+#### AZD 1.25.6 Yenilemesi, Tam Ajan Yaşam Döngüsü Komutları & Aspire Yeniden Markalama
+
+**Bu sürüm, kursu `azd` `1.25.6` (Haziran 2026) ve `azure.ai.agents` `0.1.40-preview` uzantısına karşı yeniden doğrular, yapay zeka rehberliğini "bir ajan iskeletini oluşturmak"tan tam ajan yaşam döngüsüne (test → değerlendirme → optimize etme → inceleme → silme) genişletir, yeni `azure.ai.skills` ve `azure.ai.connections` önizleme uzantılarını görünür kılar ve ".NET Aspire" → "Aspire" ürün yeniden markalaşmasını not eder.**
 
 #### Eklendi
-- **🔁 Yeni başlayanlar ve AI mühendisleri için tam ajan yaşam döngüsü kapsamı** dokümanlara eklendi:
-  - `docs/chapter-01-foundation/azd-basics.md` — Uzunluk tablosu (scaffold → test → measure → improve → inspect → clean up) Extensions and AI Commands bölümüne eklendi
-  - `docs/chapter-08-production/production-ai-practices.md` — `azd ai agent invoke`, `endpoint show`, `eval generate`, `optimize`, `code download` ve `delete --force` komutlarını kapsayan "Ajan Yaşam Döngüsünü Yönetme" bölümü
-  - `resources/cheat-sheet.md` — `invoke`, `endpoint show`, `eval generate`, `optimize`, `code download` ve `delete --force` ile Genişletilmiş AI Ajan Komutları
-- **🧩 Yeni önizleme eklentileri** belgelendi: tekrar kullanılabilir ajan becerileri için `azure.ai.skills` ve Foundry bağlantıları için `azure.ai.connections` eklendi; bunlar eklentiler tablosu ve cheat sheet'e dahil edildi
-- **⏱️ Yanıt-zamanı rehberliği** — `azd ai agent invoke` örnekleri artık toplam gecikmeyi ve ilk bayta kadar geçen süreyi (time-to-first-byte) belirtir
-- **📌 Sürüm banner'ı** kök README'de öğrenenleri `azd version` ve `azd upgrade` komutlarına yönlendirir
+- **🔁 Yeni başlayanlar ve AI mühendisleri için tüm ajan yaşam döngüsü kapsamı** belgelerde:
+  - `docs/chapter-01-foundation/azd-basics.md` — Uzantılar ve AI Komutları bölümüne yaşam döngüsü tablosu (iskelet oluştur → test et → ölç → iyileştir → incele → temizle) eklendi
+  - `docs/chapter-08-production/production-ai-practices.md` — `azd ai agent invoke`, `endpoint show`, `eval generate`, `optimize`, `code download`, ve `delete --force` komutlarını kapsayan yeni "Ajan Yaşam Döngüsünü Yönetme" bölümü
+  - `resources/cheat-sheet.md` — `invoke`, `endpoint show`, `eval generate`, `optimize`, `code download`, ve `delete --force` ile genişletilmiş AI Ajan Komutları
+- **🧩 Yeni önizleme uzantıları** belgelenmiş: Uzantılar tablosuna ve cheat sheet’e `azure.ai.skills` (yeniden kullanılabilir ajan yetenekleri) ve `azure.ai.connections` (Foundry bağlantıları) eklendi
+- **⏱️ Yanıt zamanlama rehberi** — `azd ai agent invoke` örnekleri artık toplam gecikmeyi ve ilk byte zamanını yazdırdığını not eder
+- **📌 Sürüm afişi** ana README'de, öğrenenlerin `azd version` ve `azd upgrade` komutlarına yönlendirilmesi
 
 #### Değiştirildi
-- **✅ Doğrulama temel çizgisi** tüm bölüm README'leri ve atölye dokümanlarında `azd 1.23.12` (Mart 2026) yerine `azd 1.25.6` (Haziran 2026) olarak güncellendi
-- **🤖 Bölüm 2 eklenti notu** `azure.ai.agents` `0.1.18-preview`'den `0.1.40-preview`'a güncellendi
+- **✅ Doğrulama temel çizgisi güncellendi** tüm bölüm README'larında ve atölye belgelerinde `azd 1.23.12` (Mart 2026) den `azd 1.25.6` (Haziran 2026)'ya
+- **🤖 Bölüm 2 uzantı notu güncellendi** `azure.ai.agents` `0.1.18-preview`'den `0.1.40-preview`'a
 - **🧪 Atölye doğrulama örneği** (`azd version` çıktısı) `1.25.6` olarak güncellendi
-- **🧭 README "Az bugün azd'de ne yeni"** azam yaşam döngüsünü, yeni AI eklentilerini ve son kalite iyileştirmelerini ( `azd init` idempotency, `azd auth login` stale-token temizleme, `azd tool` ilk çalıştırma istemi) vurgulayacak şekilde yenilendi
-- **📖 Bölüm 2 agents.md (Seçenek 4)** artık öğrencilere dağıtım sonrası yaşam döngüsü komutlarına yönlendiriyor; `azd up` ile durmak yerine devam eden komutlara işaret ediyor
+- **🧭 README "Bugün azd'de Neler Yeni"** bitişten uca ajan yaşam döngüsünü, yeni AI uzantılarını ve son kalite iyileştirmelerini (azd init idempotentliği, azd auth login stale-token temizliği, azd tool ilk çalıştırma istemi) vurgulayacak şekilde yenilendi
+- **📖 Bölüm 2 agents.md (Seçenek 4)** şimdi öğrenenleri `azd up` ile durmak yerine dağıtımdan sonra yaşam döngüsü komutlarına yönlendiriyor
 
 #### Düzeltildi
-- **🏷️ Ürün isimlendirmesi** — Aspire yeniden markalaşma notu eklendi (".NET Aspire" artık yalnızca "Aspire"); azd'nin Aspire desteği değişmedi
-- **🔎 Canlı sürüm doğrulaması** Azure Developer CLI sürüm beslemesine karşı doğrulandı: kararlı CLI `1.25.6` (2026-06-12) ve `azure.ai.agents` `0.1.40-preview` (2026-06-15)
+- **🏷️ Ürün ismi** — Aspire yeniden markalaşma notu eklendi (".NET Aspire" artık sadece "Aspire"); azd'nin Aspire desteği değişmedi
+- **🔎 Canlı sürüm doğrulaması** Azure Developer CLI sürüm akışına karşı doğrulandı: stabil CLI `1.25.6` (2026-06-12) ve `azure.ai.agents` `0.1.40-preview` (2026-06-15)
 
 #### Güncellenen Dosyalar
 - `README.md`
@@ -124,23 +163,24 @@ Değişiklik kaydı girdilerini inceledikten sonra şunları yapabileceksiniz:
 ---
 
 ### [v3.19.1] - 2026-03-27
-#### Yeni Başlayan Oryantasyonu Açıklaması, Kurulum Doğrulama & Son AZD Komut Temizliği
-**Bu sürüm, AZD 1.23 doğrulama taramasını takiben yeni başlayan odaklı dokümantasyon güncellemesi uygular: AZD-öncelikli kimlik doğrulama yönergelerini netleştirir, yerel kurulum doğrulama betikleri ekler, ana komutları canlı AZD CLI ile doğrular ve değişiklik günlüğü dışındaki son geçersiz İngilizce kaynaklı komut başvurularını kaldırır.**
+
+#### Yeni Başlayan Katılımı Açıklaması, Kurulum Doğrulaması ve Son AZD Komut Temizliği
+**Bu sürüm, AZD 1.23 doğrulama turunun ardından yeni başlayanlara odaklı bir dokümantasyon geçişi yapar: AZD öncelikli kimlik doğrulama rehberliğini netleştirir, yerel kurulum doğrulama betikleri ekler, önemli komutları canlı AZD CLI ile doğrular ve değişiklik günlüğü dışında kalan son eski İngilizce kaynaklı komut referanslarını kaldırır.**
 
 #### Eklendi
-- **🧪 Yeni başlayan kurulum doğrulama betikleri** `validate-setup.ps1` ve `validate-setup.sh` ile öğrenenlerin Bölüm 1'e başlamadan önce gerekli araçları doğrulamasını sağlar
-- **✅ Önceden kurulum doğrulama adımları** kök README ve Bölüm 1 README dosyalarına eklendi, böylece eksik önkoşullar `azd up` öncesinde yakalanır
+- **🧪 Yeni başlayanlar için kurulum doğrulama betikleri** `validate-setup.ps1` ve `validate-setup.sh` ile öğrenenlerin Bölüm 1'e başlamadan önce gerekli araçları doğrulamaları sağlandı
+- **✅ Önceden kurulum doğrulama adımları** ana README ve Bölüm 1 README'de `azd up` öncesinde eksik önkoşulların yakalanması için eklendi
 
 #### Değiştirildi
-- **🔐 Yeni başlayan kimlik doğrulama yönergeleri** artık `azd auth login` komutunu AZD iş akışları için birincil yol olarak tutarlı şekilde ele alır; `az login` yalnızca Azure CLI komutları doğrudan kullanıldığında isteğe bağlı olarak belirtilir
-- **📚 Bölüm 1 oryantasyon akışı** artık öğrenenleri kurulum, kimlik doğrulama ve ilk dağıtım adımlarından önce yerel kurulumlarını doğrulamaya yönlendirir
-- **🛠️ Doğrulayıcı mesajlaşması** artık AZD-özel yeni başlayan yolu için engelleyici gereksinimleri isteğe bağlı Azure CLI uyarılarından açıkça ayırır
-- **📖 Yapılandırma, sorun giderme ve örnek belgeler** artık gerekli AZD kimlik doğrulaması ile isteğe bağlı Azure CLI oturumu arasında bağlam sağlamak için ayrım yapmaktadır
+- **🔐 Yeni başlayan kimlik doğrulama rehberi** artık `azd auth login` komutunu AZD iş akışları için birincil yol olarak tutarlı bir şekilde ele alıyor, `az login` ise sadece doğrudan Azure CLI komutları kullanılıyorsa isteğe bağlı olarak belirtiliyor
+- **📚 Bölüm 1 katılım akışı** artık öğrenenlere kurulum, kimlik doğrulama ve ilk dağıtım adımlarından önce yerel kurulumlarını doğrurmalarını işaret ediyor
+- **🛠️ Doğrulayıcı mesajları** artık AZD için yalnızca yeni başlayan yolu için engelleyici gereksinimleri Azure CLI uyarılarından net şekilde ayırıyor
+- **📖 Yapılandırma, hata ayıklama ve örnek belgeleri** artık hem gerekli AZD kimlik doğrulaması hem de isteğe bağlı Azure CLI oturum açması arasındaki farkı bağlam olmadan gösterilen yerlerden ayırıyor
 
 #### Düzeltildi
-- **📋 Kalan İngilizce kaynaklı komut başvuruları** mevcut AZD biçimlerine güncellendi; komutlar arasında cheat sheet içindeki `azd config show` ve Azure Portal genel bakış kılaveti amaçlandığında `azd monitor --overview` bulunmaktadır
-- **🧭 Bölüm 1'deki yeni başlayan iddiaları** tüm şablonlar ve Azure kaynakları için garanti edilen sıfır-hata veya geri alma davranışı vaat etmeyecek şekilde yumuşatıldı
-- **🔎 Canlı CLI doğrulaması** `azd env get-values`, `azd template list`, `azd extension list --installed`, `azd copilot consent list`, `azd mcp start`, `azd provision --preview`, `azd monitor --logs` ve `azd down --force --purge` için mevcut desteği doğruladı
+- **📋 Kalan İngilizce kaynaklı komut referansları** güncel AZD formlarına çevrildi, cheat sheet'te `azd config show` ve Azure Portal genel bakışı için amaçlanan yerlerde `azd monitor --overview` dahildir
+- **🧭 Bölüm 1 yeni başlayan iddiaları** tüm şablonlar ve Azure kaynakları genelinde sıfır hata veya geri alma gibi kesin garantileri aşamalı olarak zayıflattı
+- **🔎 Canlı CLI doğrulaması** şunlar için mevcut destek doğrulandı: `azd env get-values`, `azd template list`, `azd extension list --installed`, `azd copilot consent list`, `azd mcp start`, `azd provision --preview`, `azd monitor --logs`, ve `azd down --force --purge`
 
 #### Güncellenen Dosyalar
 - `README.md`
@@ -161,38 +201,38 @@ Değişiklik kaydı girdilerini inceledikten sonra şunları yapabileceksiniz:
 
 ### [v3.19.0] - 2026-03-26
 
-#### AZD 1.23.12 Doğrulaması, Atölye Ortamı Genişletmesi & Yapay Zeka Modeli Yenilemesi
-**Bu sürüm, dokümantasyonu `azd` `1.23.12` ile bir doğrulama taramasından geçirir, eski AZD komut örneklerini günceller, yapay zeka model yönergelerini güncel varsayılanlara yeniler ve atölye talimatlarını GitHub Codespaces dışına genişleterek geliştirici konteynerleri ve yerel klonları da destekler.**
+#### AZD 1.23.12 Doğrulaması, Atölye Ortamı Genişletmesi ve AI Model Yenilemesi
+**Bu sürüm, `azd` `1.23.12` sürümüne yönelik bir dokümantasyon doğrulama turu yapar, eski AZD komut örneklerini günceller, AI model rehberliğini güncel varsayılanlara yeniler ve atölye talimatlarını GitHub Codespaces dışına genişleterek dev konteynerleri ve yerel klonları da destekler.**
 
 #### Eklendi
-- **✅ Çekirdek bölümler ve atölye belgeleri genelinde doğrulama notları** böylece daha yeni veya eski CLI sürümleri kullanan öğrenenler için test edilen AZD tabanı açıkça belirtilir
-- **⏱️ Uzun süren AI uygulama dağıtımları için zaman aşımı yönergesi** `azd deploy --timeout 1800` kullanımıyla
-- **🔎 Uzantı inceleme adımları** AI iş akışı belgelerinde `azd extension show azure.ai.agents` ile
-- **🌐 Daha geniş atölye ortamı yönergeleri** GitHub Codespaces, geliştirici konteynerleri ve MkDocs ile yerel klonları kapsayacak şekilde
+- **✅ Kritik bölümler ve atölye belgelerinde doğrulama notları** yeni veya eski CLI sürümlerini kullanan öğrenenler için doğrulanmış AZD temel çizgisini açıklar
+- **⏱️ Uzun süren AI uygulama dağıtımları için zaman aşımı rehberi** `azd deploy --timeout 1800` komutunu kapsar
+- **🔎 AI iş akışı belgelerinde uzantı inceleme adımları** `azd extension show azure.ai.agents` komutuyla
+- **🌐 Atölye ortamı rehberi genişletildi** GitHub Codespaces, dev konteynerler ve yerel klonlarla MkDocs kapsamı artırıldı
 
 #### Değiştirildi
-- **📚 Bölüm giriş README dosyaları** artık temel bölümler, yapılandırma, altyapı, çoklu ajan, ön-dağıtım, sorun giderme ve üretim bölümleri genelinde `azd 1.23.12` ile doğrulandığını tutarlı şekilde belirtir
-- **🛠️ AZD komut referansları** belgeler genelinde güncel biçimlere uyarlandı:
+- **📚 Bölüm intro README'leri** şimdi Foundation, yapılandırma, altyapı, çoklu ajan, ön dağıtım, hata ayıklama ve üretim bölümlerinde `azd 1.23.12` doğrulamasını tutarlı şekilde belirtir
+- **🛠️ AZD komut referansları** belgeler genelinde güncellendi:
   - `azd config list` → `azd config show`
-  - `azd env show` → `azd env list` veya bağlama bağlı olarak `azd env get-value(s)`
+  - `azd env show` → bağlama bağlı olarak `azd env list` veya `azd env get-value(s)`
   - `azd auth whoami` → `azd auth status`
   - `azd monitor` → Application Insights genel bakışı amaçlandığında `azd monitor --overview`
-- **🧪 Önizleme sağlama örnekleri** `azd provision --preview` ve `azd provision --preview -e production` gibi mevcut desteklenen kullanımlara basitleştirildi
-- **🧭 Atölye akışı** artık öğrenenlerin laboratuvarları Codespaces'te, bir geliştirici konteynerinde veya yerel bir klonda tamamlayabileceğini belirtecek şekilde güncellendi
-- **🔐 Kimlik doğrulama yönergeleri** artık AZD iş akışları için `azd auth login`i tercih eder, `az login` yalnızca Azure CLI komutları doğrudan kullanıldığında isteğe bağlı olarak konumlandırılır
+- **🧪 Önizleme sağlayıcı örnekleri** `azd provision --preview` ve `azd provision --preview -e production` gibi mevcut desteklenen kullanıma basitleştirildi
+- **🧭 Atölye akışı** kod alanları dışında dev konteyner veya yerel klonlarda laboratuvarların tamamlanabileceği şekilde güncellendi
+- **🔐 Kimlik doğrulama rehberi** artık AZD işlemleri için `azd auth login` tercih eder, doğrudan Azure CLI komutları kullanılıyorsa `az login` isteğe bağlı gösterilir
 
 #### Düzeltildi
-- **🪟 Windows kurulum komutları** kurulum kılavuzunda mevcut `winget` paket yazımına normalleştirildi
-- **🐧 Linux kurulum yönergeleri** desteklenmeyen dağıtım-a özgü `azd` paket yöneticisi talimatlarından kaçınacak şekilde düzeltildi ve gerektiğinde sürüm varlıklarına yönlendirildi
-- **📦 Yapay zeka model örnekleri** `gpt-35-turbo` ve `text-embedding-ada-002` gibi eski varsayılanlardan `gpt-4.1-mini`, `gpt-4.1` ve `text-embedding-3-large` gibi güncel örneklere yenilendi
-- **📋 Dağıtım ve teşhis parçacıkları** günlükler, betikler ve sorun giderme adımlarında güncel ortam ve durum komutlarını kullanacak şekilde düzeltildi
-- **⚙️ GitHub Actions yönergeleri** `Azure/setup-azd@v1.0.0`'den `Azure/setup-azd@v2`'ye güncellendi
-- **🤖 MCP/Copilot onay yönergeleri** `azd mcp consent`'ten `azd copilot consent list`'e güncellendi
+- **🪟 Windows kurulum komutları** kurulum kılavuzunda mevcut `winget` paket büyük/küçük harfi biçimine uyarlanarak standartlaştırıldı
+- **🐧 Linux kurulum rehberi** desteklenmeyen dağıtım özelinde `azd` paket yöneticisi talimatları yerine uygun sürüm varlıklarına yönlendirme şeklinde düzeltildi
+- **📦 AI model örnekleri** `gpt-35-turbo` ve `text-embedding-ada-002` gibi eski varsayılanlardan `gpt-4.1-mini`, `gpt-4.1` ve `text-embedding-3-large` gibi güncel örneklere yenilendi
+- **📋 Dağıtım ve tanıma parçacıkları** günlükler, betikler ve sorun giderme adımlarında mevcut ortam ve durum komutlarıyla düzeltildi
+- **⚙️ GitHub Actions rehberi** `Azure/setup-azd@v1.0.0`'den `Azure/setup-azd@v2`'ye güncellendi
+- **🤖 MCP/Copilot onay rehberi** `azd mcp consent`'ten `azd copilot consent list`'e güncellendi
 
-#### İyileştirildi
-- **🧠 AI bölümü yönergeleri** artık önizleme-duyarlı `azd ai` davranışını, kiracıya özgü oturum açmayı, mevcut uzantı kullanımını ve güncel model dağıtım önerilerini daha iyi açıklar
-- **🧪 Atölye talimatları** gerçekçi sürüm örnekleri ve uygulamalı laboratuvarlar için daha net ortam kurulum dili kullanır
-- **📈 Üretim ve sorun giderme belgeleri** şimdi mevcut izleme, yedek model ve maliyet katmanı örnekleri ile daha iyi hizalanmıştır
+#### Geliştirildi
+- **🧠 AI bölüm rehberi** artık önizleme hassas `azd ai` davranışını, kiracı bazlı oturum açmayı, güncel uzantı kullanımını ve model dağıtım önerilerini daha iyi açıklar
+- **🧪 Atölye talimatları** artık daha gerçekçi sürüm örnekleri ve uygulamalı laboratuvarlar için daha net ortam kurulum dili kullanır
+- **📈 Üretim ve hata giderme belgeleri** mevcut izleme, geri dönüş modeli ve maliyet kademeleri örnekleriyle daha iyi hizalanır
 
 #### Güncellenen Dosyalar
 - `docs/chapter-01-foundation/README.md`
@@ -227,44 +267,45 @@ Değişiklik kaydı girdilerini inceledikten sonra şunları yapabileceksiniz:
 
 ### [v3.18.0] - 2026-03-16
 
-#### AZD AI CLI Komutları, İçerik Doğrulama & Şablon Genişletme
-**Bu sürüm `azd ai`, `azd extension` ve `azd mcp` komut kapsamını tüm AI ile ilgili bölümlere ekler, agents.md içindeki kırık bağlantıları ve kullanımdan kaldırılmış kodu düzeltir, cheat sheet'i günceller ve Doğrulanmış açıklamalar ve yeni Azure AI AZD şablonları ile Örnek Şablonlar bölümünü baştan düzenler.**
+#### AZD AI CLI Komutları, İçerik Doğrulaması ve Şablon Genişletme
+**Bu sürüm, `azd ai`, `azd extension` ve `azd mcp` komut kapsamını tüm AI ile ilgili bölümlerde ekler, agents.md'deki bozuk bağlantılar ve kullanım dışı kalan kodları düzeltir, cheat sheet'i günceller ve Örnek Şablonlar bölümünü doğrulanmış açıklamalar ve yeni Azure AI AZD şablonları ile baştan düzenler.**
 
 #### Eklendi
-- **🤖 AZD AI CLI kapsamı** 7 dosya genelinde (önceden yalnızca Bölüm 8'deydi):
-  - `docs/chapter-01-foundation/azd-basics.md` — `azd extension`, `azd ai agent init` ve `azd mcp`'yi tanıtan yeni "Uzantılar ve AI Komutları" bölümü
-  - `docs/chapter-02-ai-development/agents.md` — Seçenek 4: `azd ai agent init` ile şablon ve manifest yaklaşımı karşılaştırma tablosu
+- **🤖 AZD AI CLI kapsamı** 7 dosya genelinde (önceden sadece Bölüm 8'deydi):
+  - `docs/chapter-01-foundation/azd-basics.md` — Yeni "Uzantılar ve AI Komutları" bölümü, `azd extension`, `azd ai agent init` ve `azd mcp` tanıtımı
+  - `docs/chapter-02-ai-development/agents.md` — Seçenek 4: `azd ai agent init` karşılaştırma tablosu ile (şablon vs manifesto yaklaşımı)
   - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — "Foundry için AZD Uzantıları" ve "Ajan-Öncelikli Dağıtım" alt bölümleri
-  - `docs/chapter-05-multi-agent/README.md` — Hızlı Başlangıç artık hem şablon hem de manifest tabanlı dağıtım yollarını gösterir
-  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — Dağıtım bölümü artık `azd ai agent init` seçeneğini içerir
-  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — "Teşhis için AZD AI Uzantı Komutları" alt bölümü
-  - `resources/cheat-sheet.md` — `azd extension`, `azd ai agent init`, `azd mcp` ve `azd infra generate` içeren yeni "AI & Uzantılar Komutları" bölümü
+
+  - `docs/chapter-05-multi-agent/README.md` — Hızlı Başlangıç artık hem şablon hem de manifest tabanlı dağıtım yollarını gösteriyor
+  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — Dağıtım bölümü artık `azd ai agent init` seçeneğini içeriyor
+  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — "Tanı için AZD AI Uzantı Komutları" alt bölümü
+  - `resources/cheat-sheet.md` — Yeni "AI & Uzantılar Komutları" bölümü `azd extension`, `azd ai agent init`, `azd mcp` ve `azd infra generate` ile
 - **📦 Yeni AZD AI örnek şablonları** `microsoft-foundry-integration.md` içinde:
-  - **azure-search-openai-demo-csharp** — Blazor WebAssembly, Semantic Kernel ve sesli sohbet desteği ile .NET RAG sohbet
-  - **azure-search-openai-demo-java** — ACA/AKS dağıtım seçenekleriyle Langchain4J kullanan Java RAG sohbet
-  - **contoso-creative-writer** — Azure AI Agent Service, Bing Grounding ve Prompty kullanan çoklu ajan yaratıcı yazım uygulaması
-  - **serverless-chat-langchainjs** — Ollama yerel geliştirme desteği ile Azure Functions + LangChain.js + Cosmos DB kullanan serverless RAG
-  - **chat-with-your-data-solution-accelerator** — yönetici portalı, Teams entegrasyonu ve PostgreSQL/Cosmos DB seçenekleri ile kurumsal RAG hızlandırıcı
-  - **azure-ai-travel-agents** — .NET, Python, Java ve TypeScript ile sunucular içeren çoklu ajan MCP orkestrasyon referans uygulaması
+  - **azure-search-openai-demo-csharp** — Blazor WebAssembly, Semantic Kernel ve sesli sohbet desteğiyle .NET RAG sohbeti
+  - **azure-search-openai-demo-java** — ACA/AKS dağıtım seçenekleriyle Langchain4J kullanan Java RAG sohbeti
+  - **contoso-creative-writer** — Azure AI Agent Servisi, Bing Grounding ve Prompty kullanan Çoklu ajan yaratıcı yazarlık uygulaması
+  - **serverless-chat-langchainjs** — Ollama yerel geliştirme desteğiyle Azure Functions + LangChain.js + Cosmos DB kullanan sunucusuz RAG
+  - **chat-with-your-data-solution-accelerator** — Yönetici portalı, Teams entegrasyonu ve PostgreSQL/Cosmos DB seçenekleriyle Kurumsal RAG hızlandırıcı
+  - **azure-ai-travel-agents** — .NET, Python, Java ve TypeScript sunucularıyla Çoklu ajan MCP orkestrasyon referans uygulaması
   - **azd-ai-starter** — Minimal Azure AI altyapı Bicep başlangıç şablonu
-  - **🔗 Awesome AZD AI Gallery linki** — [awesome-azd AI gallery](https://azure.github.io/awesome-azd/?tags=ai) referansı (80+ şablon)
+  - **🔗 Harika AZD AI Galeri bağlantısı** — [harika-azd AI galerisi](https://azure.github.io/awesome-azd/?tags=ai) referansı (80+ şablon)
 
 #### Düzeltildi
-- **🔗 agents.md gezinmesi**: Önceki/Sonraki bağlantıları artık Bölüm 2 README ders sırasına uygun (Microsoft Foundry Integration → Agents → AI Model Deployment)
-- **🔗 agents.md kırık bağlantıları**: `production-ai-practices.md` 3 örnekte `../chapter-08-production/production-ai-practices.md` olarak düzeltildi
-- **📦 agents.md kullanımdan kaldırılmış kod**: `opencensus` `azure-monitor-opentelemetry` + OpenTelemetry SDK ile değiştirildi
+- **🔗 agents.md navigasyonu**: Önceki/Sonraki bağlantılar artık Bölüm 2 README ders sırasına uyuyor (Microsoft Foundry Entegrasyonu → Ajanlar → AI Model Dağıtımı)
+- **🔗 agents.md bozuk bağlantılar**: `production-ai-practices.md` `../chapter-08-production/production-ai-practices.md` olarak düzeltildi (3 kez)
+- **📦 agents.md kullanımdan kaldırılan kod**: `opencensus` `azure-monitor-opentelemetry` + OpenTelemetry SDK ile değiştirildi
 - **🐛 agents.md geçersiz API**: `max_tokens` `create_agent()`'den `create_run()` içine `max_completion_tokens` olarak taşındı
-- **🔢 agents.md token sayımı**: Yaklaşık `len//4` tahmini `tiktoken.encoding_for_model()` ile değiştirildi
-- **azure-search-openai-demo**: Hizmetler varsayılan olarak Ekim 2024'ten itibaren değişen hosta göre "Cognitive Search + App Service" yerine "Azure AI Search + Azure Container Apps" olarak düzeltildi
-- **contoso-chat**: Açıklama, depo başlığını ve teknoloji yığınına uyması için Azure AI Foundry + Prompty referansını içerecek şekilde güncellendi
+- **🔢 agents.md token sayımı**: Yaklaşık `len//4` tahmini yerine `tiktoken.encoding_for_model()` kullanıldı
+- **azure-search-openai-demo**: Servisler "Cognitive Search + App Service"den "Azure AI Search + Azure Container Apps" olarak düzeltildi (varsayılan sunucu Ekim 2024'te değişti)
+- **contoso-chat**: Açıklama Azure AI Foundry + Prompty ile güncellendi, depo başlığı ve teknoloji yığınına uydu
 
 #### Kaldırıldı
-- **ai-document-processing**: İşlevsel olmayan şablon referansı (depo herkese açık olarak AZD şablonu olarak erişilebilir değil) kaldırıldı
+- **ai-document-processing**: İşlevsel olmayan şablon referansı kaldırıldı (depo AZD şablonu olarak herkese açık değil)
 
 #### İyileştirildi
-- **📝 agents.md alıştırmaları**: Alıştırma 1 artık beklenen çıktıyı ve `azd monitor` adımını gösterir; Alıştırma 2 tam `FunctionTool` kayıt kodunu içerir; Alıştırma 3 belirsiz yönergeyi somut `prepdocs.py` komutlarıyla değiştirir
-- **📚 agents.md kaynakları**: Dokümantasyon bağlantıları güncel Azure AI Agent Service belgeleri ve hızlı başlangıç ile güncellendi
-- **📋 agents.md Sonraki Adımlar tablosu**: Tam bölüm kapsaması için AI Atölye Laboratuvarı bağlantısı eklendi
+- **📝 agents.md alıştırmalar**: Alıştırma 1 beklenen çıktıyı ve `azd monitor` adımını gösteriyor; Alıştırma 2 tam `FunctionTool` kayıt kodunu içeriyor; Alıştırma 3 belirsiz yönlendirmeyi somut `prepdocs.py` komutlarıyla değiştirdi
+- **📚 agents.md kaynaklar**: Belgeleme bağlantıları güncellendi, güncel Azure AI Agent Servisi dokümanları ve hızlı başlangıca yönlendiriliyor
+- **📋 agents.md Sonraki Adımlar tablosu**: Bölüm kapsamını tamamlayan AI Atölyesi Laboratuvar bağlantısı eklendi
 
 #### Güncellenen Dosyalar
 - `docs/chapter-01-foundation/azd-basics.md`
@@ -278,48 +319,49 @@ Değişiklik kaydı girdilerini inceledikten sonra şunları yapabileceksiniz:
 ---
 
 ### [v3.17.0] - 2026-02-05
-#### Kurs Gezinme İyileştirmesi
-**Bu sürüm, geliştirilmiş bir tablo formatı ile README.md bölüm gezinmesini iyileştirir.**
+
+#### Kurs Navigasyon İyileştirmesi
+**Bu sürüm, README.md bölüm navigasyonunu geliştirilmiş bir tablo formatıyla geliştirir.**
 
 #### Değiştirildi
-- **Kurs Haritası Tablosu**: Doğrudan ders bağlantıları, süre tahminleri ve karmaşıklık dereceleri ile geliştirildi
+- **Kurs Haritası Tablosu**: Doğrudan ders bağlantıları, süre tahminleri ve karmaşıklık değerlendirmeleri eklendi
 - **Klasör Temizliği**: Gereksiz eski klasörler kaldırıldı (deployment/, getting-started/, pre-deployment/, troubleshooting/)
-- **Bağlantı Doğrulama**: Kurs Haritası tablosundaki 21+ dahili bağlantının tamamı doğrulandı
+- **Bağlantı Doğrulaması**: Kurs Haritası tablosundaki 21+ dahili bağlantı doğrulandı
 
 ### [v3.16.0] - 2026-02-05
 
 #### Ürün Adı Güncellemeleri
-**Bu sürüm, ürün referanslarını mevcut Microsoft marka kimliğine günceller.**
+**Bu sürüm ürün referanslarını güncel Microsoft markasıyla yeniler.**
 
 #### Değiştirildi
-- **Microsoft Foundry → Microsoft Foundry**: Tüm referanslar çeviri dışı dosyalar genelinde güncellendi
-- **Azure AI Agent Service → Foundry Agents**: Hizmet adı mevcut marka kimliğini yansıtacak şekilde güncellendi
+- **Microsoft Foundry → Microsoft Foundry**: Tüm referanslar çeviri dışı dosyalarda güncellendi
+- **Azure AI Agent Service → Foundry Agents**: Hizmet adı mevcut markaya uyacak şekilde güncellendi
 
 #### Güncellenen Dosyalar
-- `README.md` - Ana kurs açılış sayfası
+- `README.md` - Ana kurs karşılama sayfası
 - `changelog.md` - Sürüm geçmişi
 - `course-outline.md` - Kurs yapısı
-- `docs/chapter-02-ai-development/agents.md` - AI ajanları rehberi
-- `examples/README.md` - Örnekler dokümantasyonu
-- `workshop/README.md` - Atölye açılış sayfası
-- `workshop/docs/index.md` - Atölye indeksi
+- `docs/chapter-02-ai-development/agents.md` - AI ajanlar rehberi
+- `examples/README.md` - Örnekler belgelemesi
+- `workshop/README.md` - Atölye karşılama sayfası
+- `workshop/docs/index.md` - Atölye dizin
 - `workshop/docs/instructions/*.md` - Tüm atölye talimat dosyaları
 
 ---
 
 ### [v3.15.0] - 2026-02-05
 
-#### Büyük Depo Yeniden Yapılandırması: Bölüm Tabanlı Klasör İsimleri
-**Bu sürüm, daha net gezinme için dokümantasyonu özel bölüm klasörlerine yeniden yapılandırır.**
+#### Büyük Depo Yapılandırması: Bölüm Bazlı Klasör İsimleri
+**Bu sürüm, dokümantasyonu daha net navigasyon için bölüm klasörlerine ayırır.**
 
 #### Klasör Yeniden Adlandırmaları
-Eski klasörler bölüm numaralı klasörlerle değiştirildi:
+Eski klasörler, bölüm numaralı klasörlerle değiştirildi:
 - `docs/getting-started/` → `docs/chapter-01-foundation/` + `docs/chapter-03-configuration/`
 - `docs/microsoft-foundry/` → `docs/chapter-02-ai-development/` + `docs/chapter-08-production/`
 - `docs/deployment/` → `docs/chapter-04-infrastructure/`
 - `docs/pre-deployment/` → `docs/chapter-06-pre-deployment/`
 - `docs/troubleshooting/` → `docs/chapter-07-troubleshooting/`
-- Added new: `docs/chapter-05-multi-agent/`
+- Yeni eklendi: `docs/chapter-05-multi-agent/`
 
 #### Dosya Taşımaları
 | Dosya | Nereden | Nereye |
@@ -336,19 +378,19 @@ Eski klasörler bölüm numaralı klasörlerle değiştirildi:
 | production-ai-practices.md | microsoft-foundry/ | chapter-08-production/ |
 | deployment-guide.md | deployment/ | chapter-04-infrastructure/ |
 | provisioning.md | deployment/ | chapter-04-infrastructure/ |
-| All pre-deployment files | pre-deployment/ | chapter-06-pre-deployment/ |
-| All troubleshooting files | troubleshooting/ | chapter-07-troubleshooting/ |
+| Tüm ön dağıtım dosyaları | pre-deployment/ | chapter-06-pre-deployment/ |
+| Tüm sorun giderme dosyaları | troubleshooting/ | chapter-07-troubleshooting/ |
 
 #### Eklendi
-- **📚 Chapter README files**: Her bölüm klasöründe README.md oluşturuldu, içinde:
+- **📚 Bölüm README dosyaları**: Her bölüm klasörüne README.md eklendi, içinde:
   - Öğrenme hedefleri ve süre
-  - Açıklamalı ders tablosu
+  - Ders tablosu açıklamalarla
   - Hızlı başlangıç komutları
-  - Diğer bölümlere gezinme
+  - Diğer bölümlere navigasyon
 
 #### Değiştirildi
-- **🔗 Tüm dahili bağlantılar güncellendi**: Tüm dokümantasyon dosyalarında 78+ yol güncellendi
-- **🗺️ Ana README.md**: Yeni bölüm yapısı ile Kurs Haritası güncellendi
+- **🔗 Tüm dahili bağlantılar güncellendi**: 78+ yol belge dosyalarında güncellendi
+- **🗺️ Ana README.md**: Kurs Haritası yeni bölüm yapısına göre güncellendi
 - **📝 examples/README.md**: Bölüm klasörlerine çapraz referanslar güncellendi
 
 #### Kaldırıldı
@@ -358,58 +400,58 @@ Eski klasörler bölüm numaralı klasörlerle değiştirildi:
 
 ### [v3.14.0] - 2026-02-05
 
-#### Depo Yeniden Yapılandırması: Bölüm Gezinmesi
-**Bu sürüm bölüm gezinme README dosyaları ekledi (v3.15.0 tarafından geçersiz kılındı).**
+#### Depo Yapılandırması: Bölüm Navigasyonu
+**Bu sürüm bölüm navigasyon README dosyaları ekledi (v3.15.0 ile güncellendi).**
 
 ---
 
 ### [v3.13.0] - 2026-02-05
 
 #### Yeni AI Ajanları Rehberi
-**Bu sürüm, Azure Developer CLI ile AI ajanlarını dağıtmaya yönelik kapsamlı bir rehber ekler.**
+**Bu sürüm Azure Developer CLI ile AI ajanlarını dağıtmak için kapsamlı bir rehber ekler.**
 
 #### Eklendi
-- **🤖 docs/microsoft-foundry/agents.md**: Kapsayan eksiksiz rehber:
-  - AI ajanlarının ne olduğu ve sohbet botlarından nasıl farklılaştıkları
+- **🤖 docs/microsoft-foundry/agents.md**: Kapsamlı rehber, içeriği:
+  - AI ajanları nedir ve sohbet botlarından farkları
   - Üç hızlı başlangıç ajan şablonu (Foundry Agents, Prompty, RAG)
-  - Ajan mimarisi desenleri (tek ajan, RAG, çoklu ajan)
+  - Ajan mimari desenleri (tek ajan, RAG, çoklu ajan)
   - Araç yapılandırması ve özelleştirme
   - İzleme ve metrik takibi
   - Maliyet değerlendirmeleri ve optimizasyon
   - Yaygın sorun giderme senaryoları
-  - Başarı kriterleri olan üç uygulamalı egzersiz
+  - Başarı kriterleri olan üç uygulamalı alıştırma
 
 #### İçerik Yapısı
-- **Giriş**: Başlangıç seviyesindekiler için ajan kavramları
-- **Hızlı Başlangıç**: Ajanları `azd init --template get-started-with-ai-agents` ile dağıtın
+- **Giriş**: Yeni başlayanlar için ajan kavramları
+- **Hızlı Başlangıç**: `azd init --template get-started-with-ai-agents` ile ajan dağıtımı
 - **Mimari Desenler**: Ajan desenlerinin görsel diyagramları
 - **Yapılandırma**: Araç kurulumu ve ortam değişkenleri
 - **İzleme**: Application Insights entegrasyonu
-- **Egzersizler**: Aşamalı uygulamalı öğrenme (her biri 20-45 dakika)
+- **Alıştırmalar**: Kademeli uygulamalı öğrenme (20-45 dakika her biri)
 
 ---
 
 ### [v3.12.0] - 2026-02-05
 
 #### DevContainer Ortam Güncellemesi
-**Bu sürüm, AZD öğrenme deneyimi için geliştirilmiş varsayılanlarla modern araçları içerecek şekilde geliştirme konteyneri yapılandırmasını günceller.**
+**Bu sürüm, AZD öğrenme deneyimi için modern araçlar ve daha iyi varsayılanlarla geliştirilmiş geliştirme konteyneri yapılandırması sağlar.**
 
 #### Değiştirildi
-- **🐳 Temel İmaj**: `python:3.12-bullseye`'den `python:3.12-bookworm`'a güncellendi (en son Debian kararlı sürümü)
-- **📛 Konteyner Adı**: Anlaşılırlık için "Python 3"ten "AZD for Beginners" olarak yeniden adlandırıldı
+- **🐳 Taban İmaj**: `python:3.12-bullseye`'den `python:3.12-bookworm`'a güncellendi (en son Debian kararlı)
+- **📛 Konteyner Adı**: Anlaşılır olması için "Python 3"den "AZD for Beginners"a değiştirildi
 
 #### Eklendi
 - **🔧 Yeni Dev Container Özellikleri**:
-  - `azure-cli` Bicep desteği etkin olarak eklendi
+  - Bicep desteği etkin `azure-cli`
   - `node:20` (AZD şablonları için LTS sürümü)
-  - `github-cli` şablon yönetimi için
-  - `docker-in-docker` konteyner uygulama dağıtımları için
+  - Şablon yönetimi için `github-cli`
+  - Konteyner uygulama dağıtımları için `docker-in-docker`
 
 - **🔌 Port Yönlendirme**: Yaygın geliştirme için ön yapılandırılmış portlar:
-  - 8000 (MkDocs önizlemesi)
+  - 8000 (MkDocs önizleme)
   - 3000 (Web uygulamaları)
   - 5000 (Python Flask)
-  - 8080 (API'ler)
+  - 8080 (API’ler)
 
 - **🧩 Yeni VS Code Uzantıları**:
   - `ms-python.vscode-pylance` - Gelişmiş Python IntelliSense
@@ -418,84 +460,88 @@ Eski klasörler bölüm numaralı klasörlerle değiştirildi:
   - `ms-azuretools.vscode-bicep` - Bicep dil desteği
   - `ms-azure-devtools.azure-resource-groups` - Azure kaynak yönetimi
   - `yzhang.markdown-all-in-one` - Markdown düzenleme
-  - `DavidAnson.vscode-markdownlint` - Markdown lintleme
+  - `DavidAnson.vscode-markdownlint` - Markdown doğrulama
   - `bierner.markdown-mermaid` - Mermaid diyagram desteği
   - `redhat.vscode-yaml` - YAML desteği (azure.yaml için)
-  - `eamodio.gitlens` - Git görselleştirmesi
+  - `eamodio.gitlens` - Git görselleştirme
   - `mhutchie.git-graph` - Git geçmişi
 
-- **⚙️ VS Code Ayarları**: Python yorumlayıcısı, kaydederken biçimlendirme ve boşluk kırpmaya yönelik varsayılan ayarlar eklendi
+- **⚙️ VS Code Ayarları**: Python yorumlayıcı, kaydetmede biçimlendirme ve boşluk kırpma için varsayılan ayarlar eklendi
 
-- **📦 requirements-dev.txt Güncellendi**:
+- **📦 Güncellenen requirements-dev.txt**:
   - MkDocs minify eklentisi eklendi
   - Kod kalitesi için pre-commit eklendi
   - Azure SDK paketleri eklendi (azure-identity, azure-mgmt-resource)
 
 #### Düzeltildi
-- **Post-Create Komutu**: Artık konteyner başlatıldığında AZD ve Azure CLI kurulumunu doğrular
+- **Oluştan Sonra Komutu**: Konteyner başlatıldığında AZD ve Azure CLI yüklemesini doğruluyor
 
 ---
 
 ### [v3.11.0] - 2026-02-05
 
-#### Yeni Başlayanlara Uygun README Yenilemesi
-**Bu sürüm README.md'yi yeni başlayanlar için daha erişilebilir hale getirir ve AI geliştiriciler için gerekli kaynakları ekler.**
+#### Yeni Başlayanlar Dostu README Yenilemesi
+**Bu sürüm, README.md dosyasını yeni başlayanlar için daha erişilebilir hale getirir ve AI geliştiricileri için temel kaynaklar ekler.**
 
 #### Eklendi
-- **🆚 Azure CLI vs AZD Karşılaştırması**: Hangi aracı ne zaman kullanacağınıza dair net açıklama ve pratik örnekler
+- **🆚 Azure CLI ve AZD Karşılaştırması**: Hangi aracın ne zaman kullanılacağına dair net açıklamalar ve pratik örnekler
 - **🌟 Harika AZD Bağlantıları**: Topluluk şablon galerisi ve katkı kaynaklarına doğrudan bağlantılar:
   - [Harika AZD Galerisi](https://azure.github.io/awesome-azd/) - Dağıtıma hazır 200+ şablon
-  - [Bir Şablon Gönder](https://github.com/Azure/awesome-azd/issues) - Topluluk katkısı
-- **🎯 Hızlı Başlangıç Rehberi**: Basitleştirilmiş 3 adımlı başlangıç bölümü (Yükle → Oturum Aç → Dağıt)
-- **📊 Deneyime Dayalı Gezinme Tablosu**: Geliştirici deneyimine göre nereden başlayacağınıza dair net rehber
+  - [Şablon Gönder](https://github.com/Azure/awesome-azd/issues) - Topluluk katkısı
+- **🎯 Hızlı Başlangıç Kılavuzu**: Basitleştirilmiş 3 adımlı başlangıç bölümü (Yükle → Giriş Yap → Dağıt)
+- **📊 Deneyime Dayalı Navigasyon Tablosu**: Geliştirici deneyimine göre nereden başlanacağına dair net rehberlik
 
 #### Değiştirildi
-- **README Yapısı**: Kademeli açıklama için yeniden düzenlendi - önemli bilgiler ilk
-- **Giriş Bölümü**: Tamamen yeni başlayanlar için "The Magic of `azd up`"ı açıklayacak şekilde yeniden yazıldı
-- **Yinelenen İçerik Kaldırıldı**: Yinelenen sorun giderme bölümü kaldırıldı
-- **Sorun Giderme Komutları**: `azd logs` referansı, geçerli `azd monitor --logs` ile düzeltildi
+- **README Yapısı**: Bilgilerin kademeli açığa çıkarılması için yeniden düzenlendi - önemli bilgiler ilk
+- **Giriş Bölümü**: Yeni başlayanlar için “`azd up` Büyüsü” anlatımı yeniden yazıldı
+- **Çift İçerik Kaldırıldı**: Yinelenen sorun giderme bölümü kaldırıldı
+- **Sorun Giderme Komutları**: `azd logs` geçerli `azd monitor --logs` olarak düzeltildi
 
 #### Düzeltildi
-- **🔐 Kimlik Doğrulama Komutları**: `azd auth login` ve `azd auth logout` cheat-sheet.md'ye eklendi
-- **Geçersiz Komut Referansları**: README sorun giderme bölümündeki kalan `azd logs` kaldırıldı
+
+- **🔐 Kimlik Doğrulama Komutları**: cheat-sheet.md dosyasına `azd auth login` ve `azd auth logout` eklendi
+- **Geçersiz Komut Referansları**: README sorun giderme bölümünden kalan `azd logs` kaldırıldı
 
 #### Notlar
-- **Kapsam**: Değişiklikler ana README.md ve resources/cheat-sheet.md'ye uygulandı
-- **Hedef Kitle**: İyileştirmeler özellikle AZD'ye yeni olan geliştiricilere yöneliktir
+- **Kapsam**: Değişiklikler ana README.md ve resources/cheat-sheet.md dosyalarına uygulandı
+- **Hedef Kitle**: Özellikle AZD'ye yeni başlayan geliştiricilere yönelik iyileştirmeler
 
 ---
 
 ### [v3.10.0] - 2026-02-05
 
 #### Azure Developer CLI Komut Doğruluğu Güncellemesi
-**Bu sürüm, dokümantasyondaki var olmayan AZD komutlarını düzeltir ve tüm kod örneklerinin geçerli Azure Developer CLI sözdizimini kullandığından emin olur.**
+**Bu sürüm, belgelerde bulunan var olmayan AZD komutlarını düzelterek tüm kod örneklerinin geçerli Azure Developer CLI sözdizimini kullanmasını sağlar.**
 
 #### Düzeltildi
 - **🔧 Var Olmayan AZD Komutları Kaldırıldı**: Geçersiz komutların kapsamlı denetimi ve düzeltilmesi:
-  - `azd logs` (mevcut değil) → `azd monitor --logs` veya Azure CLI alternatifleri ile değiştirildi
-  - `azd service` alt komutları (mevcut değil) → `azd show` ve Azure CLI ile değiştirildi
-  - `azd infra import/export/validate` (mevcut değil) → kaldırıldı veya geçerli alternatiflerle değiştirildi
-  - `azd deploy --rollback/--incremental/--parallel/--detect-changes` bayrakları (mevcut değil) → kaldırıldı
-  - `azd provision --what-if/--rollback` bayrakları (mevcut değil) → `--preview` kullanacak şekilde güncellendi
-  - `azd config validate` (mevcut değil) → `azd config list` ile değiştirildi
-  - `azd info`, `azd history`, `azd metrics` (mevcut değil) → kaldırıldı
+  - `azd logs` (var olmayan) → `azd monitor --logs` veya Azure CLI alternatifleri ile değiştirildi
+  - `azd service` alt komutları (var olmayan) → `azd show` ve Azure CLI ile değiştirildi
+  - `azd infra import/export/validate` (var olmayan) → kaldırıldı veya geçerli alternatiflerle değiştirildi
+  - `azd deploy --rollback/--incremental/--parallel/--detect-changes` bayrakları (var olmayan) → kaldırıldı
+  - `azd provision --what-if/--rollback` bayrakları (var olmayan) → `--preview` kullanacak şekilde güncellendi
+  - `azd config validate` (var olmayan) → `azd config list` ile değiştirildi
+  - `azd info`, `azd history`, `azd metrics` (var olmayan) → kaldırıldı
 
 - **📚 Komut Düzeltmeleriyle Güncellenen Dosyalar**:
-  - `resources/cheat-sheet.md`: Komut referansının kapsamlı yenilenmesi
-  - `docs/deployment/deployment-guide.md`: Geri alma ve dağıtım stratejileri düzeltildi
-  - `docs/troubleshooting/debugging.md`: Log analiz bölümleri düzeltildi
-  - `docs/troubleshooting/common-issues.md`: Sorun giderme komutları güncellendi
+  - `resources/cheat-sheet.md`: Komut referanslarında kapsamlı yenileme
+  - `docs/deployment/deployment-guide.md`: Rollback ve dağıtım stratejilerinde düzeltmeler
+  - `docs/troubleshooting/debugging.md`: Log analiz bölümlerinde düzeltmeler
+  - `docs/troubleshooting/common-issues.md`: Sorun giderme komutlarında güncellemeler
   - `docs/troubleshooting/ai-troubleshooting.md`: AZD hata ayıklama bölümü düzeltildi
   - `docs/getting-started/azd-basics.md`: İzleme komutları düzeltildi
   - `docs/getting-started/first-project.md`: İzleme ve hata ayıklama örnekleri güncellendi
   - `docs/getting-started/installation.md`: Yardım ve sürüm örnekleri düzeltildi
   - `docs/pre-deployment/application-insights.md`: Log görüntüleme komutları düzeltildi
-  - `docs/pre-deployment/coordination-patterns.md`: Ajan hata ayıklama komutları düzeltildi
+  - `docs/pre-deployment/coordination-patterns.md`: Agent hata ayıklama komutları düzeltildi
+
+- **📝 Sürüm Referansı Güncellendi**: 
+  - `docs/getting-started/installation.md`: Sabit kodlanmış `1.5.0` sürümü, sürümlere bağlantı ile genel `1.x.x` olarak değiştirildi
 
 #### Değiştirildi
-- **Geri Alma Stratejileri**: AZD'nin yerel geri alma yeteneği olmadığından, belge Git tabanlı geri alma kullanacak şekilde güncellendi
+- **Rollback Stratejileri**: AZD'nin yerel rollback özelliği olmaması nedeniyle dokümantasyon, Git tabanlı rollback kullanacak şekilde güncellendi
 - **Log Görüntüleme**: `azd logs` referansları `azd monitor --logs`, `azd monitor --live` ve Azure CLI komutları ile değiştirildi
-- **Performans Bölümü**: Mevcut olmayan paralel/artımlı dağıtım bayrakları kaldırıldı, geçerli alternatifler sağlandı
+- **Performans Bölümü**: Var olmayan paralel/artımlı dağıtım bayrakları kaldırıldı, geçerli alternatifler sunuldu
 
 #### Teknik Detaylar
 - **Geçerli AZD Komutları**: `init`, `up`, `auth`, `deploy`, `down`, `provision`, `publish`, `completion`, `config`, `env`, `show`, `version`, `monitor`
@@ -503,276 +549,277 @@ Eski klasörler bölüm numaralı klasörlerle değiştirildi:
 - **Kaldırılan Özellikler**: `azd logs`, `azd service`, `azd infra import/export/validate`, `azd history`, `azd metrics`, `azd info`, `azd config validate`
 
 #### Notlar
-- **Doğrulama**: Komutlar Azure Developer CLI v1.23.x ile doğrulandı
+- **Doğrulama**: Komutlar Azure Developer CLI v1.23.x sürümüne karşı doğrulandı
 
 ---
 
 ### [v3.9.0] - 2026-02-05
 
-#### Atölye Tamamlanması ve Dokümantasyon Kalitesi Güncellemesi
-**Bu sürüm etkileşimli atölye modüllerini tamamlar, tüm kırık dokümantasyon bağlantılarını düzeltir ve Microsoft AZD kullanan AI geliştiricileri için genel içerik kalitesini iyileştirir.**
+#### Atölye Tamamlama ve Dokümantasyon Kalitesi Güncellemesi
+**Bu sürüm, etkileşimli atölye modüllerini tamamlar, tüm kırık dokümantasyon bağlantılarını düzeltir ve Microsoft AZD kullanan yapay zeka geliştiricileri için içerik kalitesini artırır.**
 
 #### Eklendi
-- **📝 CONTRIBUTING.md**: Aşağıları içeren yeni katkı yönergeleri belgesi:
+- **📝 CONTRIBUTING.md**: Yeni katkı yönergeleri belgesi ile:
   - Sorun bildirme ve değişiklik önerme için net talimatlar
   - Yeni içerik için dokümantasyon standartları
   - Kod örneği yönergeleri ve commit mesajı kuralları
   - Topluluk katılım bilgileri
 
 #### Tamamlandı
-- **🎯 Workshop Module 7 (Wrap-up)**: Tamamlanan kapanış modülü ile:
-  - Çalıştay başarılarının kapsamlı özeti
-  - AZD, şablonlar ve Microsoft Foundry'yi kapsayan edinilen temel kavramlar bölümü
-  - Öğrenme yolculuğuna devam önerileri
-  - Zorluk dereceli çalıştay meydan okuma alıştırmaları
+- **🎯 Atölye Modülü 7 (Kapanış)**: Tamamlanmış kapanış modülü ile:
+  - Atölye başarılarının kapsamlı özeti
+  - AZD, şablonlar ve Microsoft Foundry konularını kapsayan ana kavramlar bölümü
+  - Öğrenme yolculuğu devam tavsiyeleri
+  - Zorluk dereceleriyle atölye meydan okuma egzersizleri
   - Topluluk geri bildirimi ve destek bağlantıları
 
-- **📚 Workshop Module 3 (Deconstruct)**: Güncellenmiş öğrenme hedefleri ile:
-  - MCP sunucuları ile GitHub Copilot etkinleştirme rehberi
-  - AZD şablon klasör yapısının anlaşılması
-  - Altyapı olarak kod (Bicep) organizasyon kalıpları
+- **📚 Atölye Modülü 3 (Parçala)**: Öğrenme hedefleri güncellendi:
+  - GitHub Copilot MCP sunucuları aktivasyon rehberi
+  - AZD şablon klasör yapısı anlayışı
+  - Altyapı olarak kod (Bicep) organizasyon desenleri
   - Uygulamalı laboratuvar talimatları
 
-- **🔧 Workshop Module 6 (Teardown)**: Tamamlandı:
+- **🔧 Atölye Modülü 6 (Sökme)**: Tamamlandı:
   - Kaynak temizleme ve maliyet yönetimi hedefleri
-  - `azd down` kullanımı ile güvenli altyapı iptali
-  - Soft-silinmiş Cognitive Services kurtarma rehberi
-  - GitHub Copilot ve Azure Portal için bonus keşif yönlendirmeleri
+  - Altyapıyı güvenli kaldırmak için `azd down` kullanımı
+  - Yumuşak silinmiş bilişsel hizmetlerin geri kazanımı rehberi
+  - GitHub Copilot ve Azure Portal bonus keşif yönlendirmeleri
 
 #### Düzeltildi
-- **🔗 Kırık Bağlantı Düzeltmeleri**: 15+ kırık dahili dokümantasyon bağlantısı çözüldü:
+- **🔗 Kırık Bağlantı Düzeltmeleri**: 15+ dahili dokümantasyon bağlantısı düzeltildi:
   - `docs/ai-foundry/ai-model-deployment.md`: microsoft-foundry-integration.md yolları düzeltildi
   - `docs/troubleshooting/ai-troubleshooting.md`: ai-model-deployment.md ve production-ai-practices.md yolları düzeltildi
-  - `docs/getting-started/first-project.md`: mevcut olmayan cicd-integration.md, deployment-guide.md ile değiştirildi
+  - `docs/getting-started/first-project.md`: var olmayan cicd-integration.md deployment-guide.md ile değiştirildi
   - `examples/retail-scenario.md`: SSS ve sorun giderme kılavuzu yolları düzeltildi
-  - `examples/container-app/microservices/README.md`: kurs ana sayfası ve dağıtım rehberi yolları düzeltildi
-  - `resources/faq.md` ve `resources/glossary.md`: AI bölüm referansları güncellendi
-  - `course-outline.md`: eğitmen kılavuzu ve AI çalıştay laboratuvarı referansları düzeltildi
+  - `examples/container-app/microservices/README.md`: Kurs ana sayfası ve dağıtım kılavuzu yolları düzeltildi
+  - `resources/faq.md` ve `resources/glossary.md`: Yapay zeka bölümü referansları güncellendi
+  - `course-outline.md`: Eğitmen rehberi ve yapay zeka atölyesi laboratuvar referansları düzeltildi
 
-- **📅 Workshop Durum Bannerı**: "Under Construction" durumundan aktif çalıştay durumu olarak Şubat 2026 tarihiyle güncellendi
+- **📅 Atölye Durum Afişi**: "Yapım Aşamasında" ibaresi kaldırılarak aktif atölye durumu ve Şubat 2026 tarihi eklendi
 
-- **🔗 Workshop Gezinme**: workshop README.md içindeki var olmayan lab-1-azd-basics klasörüne işaret eden kırık gezinme bağlantıları düzeltildi
+- **🔗 Atölye Navigasyonu**: workshop README.md içindeki var olmayan lab-1-azd-basics klasörüne işaret eden kırık navigasyon bağlantıları düzeltildi
 
 #### Değiştirildi
-- **Workshop Sunumu**: "under construction" uyarısı kaldırıldı, çalıştay artık tamamlandı ve kullanıma hazır
-- **Gezinme Tutarlılığı**: Tüm çalıştay modüllerinin uygun modüller arası gezinmeye sahip olması sağlandı
-- **Öğrenme Yolu Referansları**: Bölümler arası çapraz referanslar doğru microsoft-foundry yollarını kullanacak şekilde güncellendi
+- **Atölye Sunumu**: "Yapım aşamasında" uyarısı kaldırıldı, atölye tamamlandı ve kullanıma hazır hale getirildi
+- **Navigasyon Tutarlılığı**: Tüm atölye modülleri için modüller arası düzgün navigasyon sağlandı
+- **Öğrenme Yolu Referansları**: Bölüm çapraz referansları doğru microsoft-foundry yolları kullanacak şekilde güncellendi
 
 #### Doğrulandı
-- ✅ Tüm İngilizce markdown dosyalarının geçerli dahili bağlantıları var
-- ✅ Çalıştay modülleri 0-7 öğrenme hedefleriyle tamamlandı
-- ✅ Bölümler ve modüller arasındaki gezinme düzgün çalışıyor
-- ✅ İçerik Microsoft AZD kullanan AI geliştiricileri için uygun
-- ✅ Başlangıç düzeyi dostu dil ve yapı korundu
-- ✅ CONTRIBUTING.md topluluk katkıcıları için net rehberlik sağlar
+- ✅ Tüm İngilizce markdown dosyalarında geçerli dahili bağlantılar var
+- ✅ Atölye modülleri 0-7 öğrenme hedefleri ile tamamlandı
+- ✅ Bölümler ve modüller arası navigasyon doğru çalışıyor
+- ✅ İçerik, Microsoft AZD kullanan yapay zeka geliştiricileri için uygun
+- ✅ Başlangıç seviyesine uygun dil ve yapı tüm belgelerde korundu
+- ✅ CONTRIBUTING.md, topluluk katkıcıları için net rehberlik sağlıyor
 
 #### Teknik Uygulama
 - **Bağlantı Doğrulama**: Otomatik PowerShell betiği tüm .md dahili bağlantılarını doğruladı
-- **İçerik Denetimi**: Çalıştayın bütünlüğü ve başlangıç uygunluğu elle incelendi
-- **Gezinti Sistemi**: Tutarlı bölüm ve modül gezinme desenleri uygulandı
+- **İçerik Denetimi**: Atölye tamamlığı ve başlangıç seviyesi uygunluğu manuel olarak incelendi
+- **Navigasyon Sistemi**: Tutarlı bölüm ve modül navigasyon kalıpları uygulandı
 
 #### Notlar
-- **Kapsam**: Değişiklikler yalnızca İngilizce belgelerde uygulandı
-- **Çeviriler**: Bu sürümde çeviri klasörleri güncellenmedi (otomatik çeviri daha sonra senkronize edilecektir)
-- **Çalıştay Süresi**: Tamamlanmış çalıştay artık 3-4 saatlik uygulamalı öğrenim sunmaktadır
+- **Kapsam**: Değişiklikler yalnızca İngilizce dokümantasyona uygulandı
+- **Çeviriler**: Bu sürümde çeviri klasörleri güncellenmedi (otomatik çeviri daha sonra eşlenecek)
+- **Atölye Süresi**: Tamamlanmış atölye artık 3-4 saat uygulamalı öğrenim sağlıyor
 
 ---
 
 ### [v3.8.0] - 2025-11-19
 
-#### Gelişmiş Belgeler: İzleme, Güvenlik ve Çok Ajanlı Kalıplar
-**Bu sürüm, Application Insights entegrasyonu, kimlik doğrulama kalıpları ve üretim dağıtımları için çok-ajanslı koordinasyon üzerine kapsamlı A-seviyesi dersler ekler.**
+#### Gelişmiş Dokümantasyon: İzleme, Güvenlik ve Çoklu Ajan Desenleri
+**Bu sürüm, üretim dağıtımları için Application Insights entegrasyonu, kimlik doğrulama desenleri ve çoklu ajan koordinasyonunu içeren kapsamlı A seviyesi dersler ekler.**
 
 #### Eklendi
-- **📊 Application Insights Entegrasyonu Dersi**: `docs/pre-deployment/application-insights.md` içinde:
-  - AZD odaklı dağıtım ile otomatik kaynak sağlama
+- **📊 Application Insights Entegrasyon Dersi**: `docs/pre-deployment/application-insights.md` içinde:
+  - Otomatik sağlama ile AZD odaklı dağıtım
   - Application Insights + Log Analytics için tam Bicep şablonları
-  - Özel telemetri içeren çalışan Python uygulamaları (1.200+ satır)
-  - AI/LLM izleme kalıpları (Microsoft Foundry Models token/maliyet takibi)
-  - 6 Mermaid diyagramı (mimari, dağıtık izleme, telemetri akışı)
-  - 3 uygulamalı egzersiz (alarmlar, panolar, AI izleme)
+  - Özel telemetri ile çalışan Python uygulamaları (1.200+ satır)
+  - AI/LLM izleme desenleri (Microsoft Foundry Modelleri token/maliyet takibi)
+  - 6 Mermaid diyagramı (mimari, dağıtılmış izleme, telemetri akışı)
+  - 3 uygulamalı egzersiz (alarm, panolar, AI izlemesi)
   - Kusto sorgu örnekleri ve maliyet optimizasyon stratejileri
   - Canlı metrik akışı ve gerçek zamanlı hata ayıklama
-  - Üretime hazır kalıplarla 40-50 dakikalık öğrenme süresi
+  - 40-50 dakika öğrenme süresi ile üretim hazır desenler
 
-- **🔐 Kimlik Doğrulama ve Güvenlik Kalıpları Dersi**: `docs/getting-started/authsecurity.md` içinde:
-  - 3 kimlik doğrulama kalıbı (connection strings, Key Vault, managed identity)
+- **🔐 Kimlik Doğrulama & Güvenlik Desenleri Dersi**: `docs/getting-started/authsecurity.md` içinde:
+  - 3 kimlik doğrulama deseni (bağlantı dizeleri, Key Vault, yönetilen kimlik)
   - Güvenli dağıtımlar için tam Bicep altyapı şablonları
   - Azure SDK entegrasyonlu Node.js uygulama kodu
-  - 3 tam egzersiz (managed identity etkinleştirme, user-assigned identity, Key Vault rotasyonu)
+  - 3 tam egzersiz (yönetilen kimlik etkinleştirme, kullanıcı atanmış kimlik, Key Vault döndürme)
   - Güvenlik en iyi uygulamaları ve RBAC yapılandırmaları
-  - Sorun giderme rehberi ve maliyet analizi
-  - Üretime hazır parola gerektirmeyen kimlik doğrulama kalıpları
+  - Sorun giderme kılavuzu ve maliyet analizi
+  - Üretim hazır parola gerektirmeyen kimlik doğrulama desenleri
 
-- **🤖 Çok-Ajan Koordinasyon Kalıpları Dersi**: `docs/pre-deployment/coordination-patterns.md` içinde:
-  - 5 koordinasyon kalıbı (sequential, parallel, hierarchical, event-driven, consensus)
+- **🤖 Çoklu Ajan Koordinasyon Desenleri Dersi**: `docs/pre-deployment/coordination-patterns.md` içinde:
+  - 5 koordinasyon deseni (ardışık, paralel, hiyerarşik, olay tetiklemeli, konsensüs)
   - Tam orkestratör servis uygulaması (Python/Flask, 1.500+ satır)
-  - 3 uzmanlaşmış ajan uygulaması (Research, Writer, Editor)
+  - 3 uzmanlaşmış ajan uygulaması (Araştırma, Yazma, Düzenleme)
   - Mesaj kuyruğu için Service Bus entegrasyonu
-  - Dağıtık sistemler için Cosmos DB durum yönetimi
+  - Dağıtılmış sistemler için Cosmos DB durum yönetimi
   - Ajan etkileşimlerini gösteren 6 Mermaid diyagramı
-  - 3 ileri seviye egzersiz (zaman aşımı yönetimi, yeniden deneme mantığı, devre kesici)
-  - Maliyet dökümü ($240-565/month) ve optimizasyon stratejileri
+  - 3 gelişmiş egzersiz (zaman aşımı yönetimi, yeniden deneme mantığı, devre kesici)
+  - Maliyet dökümü (aylık 240-565$) ve optimizasyon stratejileri
   - İzleme için Application Insights entegrasyonu
 
 #### Geliştirildi
-- **Pre-deployment Bölümü**: Artık kapsamlı izleme ve koordinasyon kalıplarını içerir
-- **Getting Started Bölümü**: Profesyonel kimlik doğrulama kalıpları ile geliştirildi
-- **Üretime Hazırlık**: Güvenlikten gözlemlenebilirliğe kadar tam kapsam
-- **Ders Planı**: Bölüm 3 ve 6'da yeni derslere referans için güncellendi
+- **Dağıtım Öncesi Bölüm**: Kapsamlı izleme ve koordinasyon desenleri eklendi
+- **Başlangıç Bölümü**: Profesyonel kimlik doğrulama desenleri ile geliştirildi
+- **Üretime Hazırlık**: Güvenlikten gözlemlenebilirliğe tam kapsam
+- **Kurs Taslağı**: 3 ve 6. Bölümlerde yeni derslere referanslar güncellendi
 
 #### Değiştirildi
-- **Öğrenme İlerleyişi**: Güvenlik ve izleme kurs boyunca daha iyi entegre edildi
-- **Dokümantasyon Kalitesi**: Yeni dersler boyunca tutarlı A-seviyesi standartlar (yüzde 95-97)
-- **Üretim Kalıpları**: Kurumsal dağıtımlar için uçtan uca kapsam
+- **Öğrenme İlerlemesi**: Kurs boyunca güvenlik ve izleme daha iyi entegre edildi
+- **Dokümantasyon Kalitesi**: Yeni derslerde tutarlı A seviyesi standartlar (%95-97)
+- **Üretim Desenleri**: Kurumsal dağıtımlar için uçtan uca tam kapsam
 
 #### İyileştirildi
-- **Geliştirici Deneyimi**: Geliştirmeden üretim izlemeye net yol
-- **Güvenlik Standartları**: Kimlik doğrulama ve sır yönetimi için profesyonel kalıplar
+- **Geliştirici Deneyimi**: Geliştirmeden üretim izlemeye net yol haritası
+- **Güvenlik Standartları**: Kimlik doğrulama ve gizli yönetimi için profesyonel desenler
 - **Gözlemlenebilirlik**: AZD ile tam Application Insights entegrasyonu
-- **AI İş Yükleri**: Microsoft Foundry Models ve çok-ajanslı sistemler için özelleşmiş izleme
+- **Yapay Zeka İş Yükleri**: Microsoft Foundry Modelleri ve çoklu ajan sistemleri için özel izleme
 
 #### Doğrulandı
-- ✅ Tüm dersler tam çalışan kod içerir (kısa parçalar değil)
-- ✅ Görsel öğrenme için Mermaid diyagramları (toplam 19, 3 derste)
-- ✅ Doğrulama adımlarıyla uygulamalı egzersizler (toplam 9)
-- ✅ `azd up` ile dağıtılabilir üretime hazır Bicep şablonları
-- ✅ Maliyet analizi ve optimizasyon stratejileri
+- ✅ Tüm derslerde eksiksiz çalışan kod (snippet değil)
+- ✅ Görsel öğrenim için Mermaid diyagramları (toplam 19, 3 derste)
+- ✅ Doğrulama adımlı uygulamalı egzersizler (toplam 9)
+- ✅ `azd up` ile dağıtılabilir üretim hazır Bicep şablonları
+- ✅ Maliyet analizleri ve optimizasyon stratejileri
 - ✅ Sorun giderme rehberleri ve en iyi uygulamalar
-- ✅ Doğrulama komutları ile bilgi kontrol noktaları
+- ✅ Doğrulama komutlarıyla bilgi kontrol noktaları
 
-#### Dokümantasyon Notlandırma Sonuçları
+#### Dokümantasyon Puanlama Sonuçları
 - **docs/pre-deployment/application-insights.md**: - Kapsamlı izleme rehberi
-- **docs/getting-started/authsecurity.md**: - Profesyonel güvenlik kalıpları
-- **docs/pre-deployment/coordination-patterns.md**: - Gelişmiş çok-ajanslı mimariler
+- **docs/getting-started/authsecurity.md**: - Profesyonel güvenlik desenleri
+- **docs/pre-deployment/coordination-patterns.md**: - Gelişmiş çoklu ajan mimarileri
 - **Genel Yeni İçerik**: - Tutarlı yüksek kalite standartları
 
 #### Teknik Uygulama
-- **Application Insights**: Log Analytics + özel telemetri + dağıtık izleme
-- **Kimlik Doğrulama**: Managed Identity + Key Vault + RBAC kalıpları
-- **Çok-Ajan**: Service Bus + Cosmos DB + Container Apps + orkestrasyon
+- **Application Insights**: Log Analytics + özel telemetri + dağıtılmış izleme
+- **Kimlik Doğrulama**: Yönetilen Kimlik + Key Vault + RBAC desenleri
+- **Çoklu Ajan**: Service Bus + Cosmos DB + Container Apps + orkestrasyon
 - **İzleme**: Canlı metrikler + Kusto sorguları + alarmlar + panolar
 - **Maliyet Yönetimi**: Örnekleme stratejileri, saklama politikaları, bütçe kontrolleri
 
 ### [v3.7.0] - 2025-11-19
 
-#### Dokümantasyon Kalitesi İyileştirmeleri ve Yeni Microsoft Foundry Models Örneği
-**Bu sürüm, depo genelinde dokümantasyon kalitesini artırır ve gpt-4.1 sohbet arayüzü ile eksiksiz bir Microsoft Foundry Models dağıtım örneği ekler.**
+#### Dokümantasyon Kalitesi İyileştirmeleri ve Yeni Microsoft Foundry Modelleri Örneği
+**Bu sürüm, depo genelinde dokümantasyon kalitesini artırır ve gpt-4.1 sohbet arayüzüyle tam Microsoft Foundry Modelleri dağıtım örneği ekler.**
 
 #### Eklendi
-- **🤖 Microsoft Foundry Models Chat Örneği**: `examples/azure-openai-chat/` içinde eksiksiz gpt-4.1 dağıtımı:
-  - Tam Microsoft Foundry Models altyapısı (gpt-4.1 model dağıtımı)
-  - Konuşma geçmişi olan Python komut satırı sohbet arayüzü
+- **🤖 Microsoft Foundry Modelleri Sohbet Örneği**: `examples/azure-openai-chat/` içinde çalışan ve eksiksiz gpt-4.1 dağıtımı:
+  - Tam Microsoft Foundry Modelleri altyapısı (gpt-4.1 model dağıtımı)
+  - Konuşma geçmişi ile Python komut satırı sohbet arayüzü
   - Güvenli API anahtarı depolama için Key Vault entegrasyonu
-  - Token kullanım takibi ve maliyet tahmini
-  - Hız sınırlama ve hata işleme
+  - Token kullanımı takibi ve maliyet tahmini
+  - Hız sınırlandırma ve hata yönetimi
   - 35-45 dakikalık dağıtım rehberi içeren kapsamlı README
-  - 11 üretime hazır dosya (Bicep şablonları, Python uygulama, yapılandırma)
-- **📚 Dokümantasyon Egzersizleri**: Yapılandırma kılavuzuna uygulamalı alıştırmalar eklendi:
+  - 11 üretim hazır dosya (Bicep şablonları, Python uygulaması, yapılandırma)
+- **📚 Dokümantasyon Egzersizleri**: Yapılandırma kılavuzuna uygulamalı egzersizler eklendi:
   - Egzersiz 1: Çok ortamlı yapılandırma (15 dakika)
-  - Egzersiz 2: Sır yönetimi pratikleri (10 dakika)
-  - Net başarı kriterleri ve doğrulama adımları
-- **✅ Dağıtım Doğrulama**: Dağıtım kılavuzuna doğrulama bölümü eklendi:
-  - Sağlık kontrol prosedürleri
+  - Egzersiz 2: Gizli yönetimi uygulaması (10 dakika)
+  - Açık başarı kriterleri ve doğrulama adımları
+- **✅ Dağıtım Doğrulaması**: Dağıtım kılavuzuna doğrulama bölümü eklendi:
+  - Sağlık kontrolü prosedürleri
   - Başarı kriterleri kontrol listesi
-  - Tüm dağıtım komutları için beklenen çıktılar
-  - Hızlı sorun giderme başvurusu
+  - Tüm dağıtım komutlarının beklenen çıktıları
+  - Sorun giderme hızlı başvuru
 
 #### Geliştirildi
-- **examples/README.md**: A-seviyesi kaliteye güncellendi ( %93):
-  - azure-openai-chat tüm ilgili bölümlere eklendi
-  - yerel örnek sayısı 3'ten 4'e güncellendi
-  - AI Uygulama Örnekleri tablosuna eklendi
-  - Orta düzey kullanıcılar için Hızlı Başlangıç'a entegre edildi
+- **examples/README.md**: A seviyesi kaliteye güncellendi (%93):
+  - Tüm ilgili bölümlere azure-openai-chat eklendi
+  - Yerel örnek sayısı 3'ten 4'e çıkarıldı
+  - Yapay Zeka Uygulama Örnekleri tablosuna eklendi
+  - Orta seviye kullanıcılar için Hızlı Başlangıç'a entegre edildi
   - Microsoft Foundry Şablonları bölümüne eklendi
   - Karşılaştırma Matrisi ve teknoloji bulma bölümleri güncellendi
-- **Dokümantasyon Kalitesi**: docs klasörü genelinde B+ (87%) → A- (92%) iyileşti:
-  - Kritik komut örneklerine beklenen çıktılar eklendi
-  - Yapılandırma değişiklikleri için doğrulama adımları eklendi
-  - Uygulamalı öğrenme pratik egzersizlerle geliştirildi
+- **Dokümantasyon Kalitesi**: docs klasöründe B+ (%87) → A- (%92) şeklinde iyileştirildi
+
+  - Kritik komut örneklerine beklenen çıktıların eklenmesi
+  - Konfigürasyon değişiklikleri için doğrulama adımlarının dahil edilmesi
+  - Pratik egzersizlerle uygulamalı öğrenmenin geliştirilmesi
 
 #### Değiştirildi
-- **Öğrenme İlerleyişi**: Orta düzey öğrenenler için AI örneklerinin entegrasyonu iyileştirildi
-- **Dokümantasyon Yapısı**: Daha eyleme geçirilebilir egzersizler ve net sonuçlar
-- **Doğrulama Süreci**: Kritik iş akışlarına açık başarı kriterleri eklendi
+- **Öğrenme İlerlemesi**: Orta seviye öğrenciler için AI örneklerinin daha iyi entegrasyonu
+- **Dokümantasyon Yapısı**: Belirgin sonuçlar ile daha uygulanabilir egzersizler
+- **Doğrulama Süreci**: Ana iş akışlarına açık başarı kriterlerinin eklenmesi
 
-#### İyileştirildi
-- **Geliştirici Deneyimi**: Microsoft Foundry Models dağıtımı artık 35-45 dakika sürer (karmaşık alternatifler için 60-90'a karşı)
-- **Maliyet Şeffaflığı**: Microsoft Foundry Models örneği için net maliyet tahminleri ($50-200/month)
-- **Öğrenme Yolu**: AI geliştiriciler için azure-openai-chat ile net giriş noktası
+#### Geliştirildi
+- **Geliştirici Deneyimi**: Microsoft Foundry Modelleri dağıtımı artık 35-45 dakika sürüyor (karmaşık alternatifler için 60-90 dakika yerine)
+- **Maliyet Şeffaflığı**: Microsoft Foundry Modelleri örneği için net maliyet tahminleri (aylık 50-200 $)
+- **Öğrenme Yolu**: AI geliştiricileri için azure-openai-chat ile net giriş noktası sağlandı
 - **Dokümantasyon Standartları**: Tutarlı beklenen çıktılar ve doğrulama adımları
 
 #### Doğrulandı
-- ✅ Microsoft Foundry Models örneği `azd up` ile tam işlevsel
+- ✅ Microsoft Foundry Modelleri örneği `azd up` ile tamamen işlevsel
 - ✅ Tüm 11 uygulama dosyası sözdizimsel olarak doğru
-- ✅ README talimatları gerçek dağıtım deneyimiyle eşleşiyor
-- ✅ Dokümantasyon bağlantıları 8+ konumda güncellendi
-- ✅ Örnekler dizini 4 yerel örneği doğru yansıtıyor
-- ✅ Tablo içinde yinelenen dış bağlantı yok
+- ✅ README talimatları gerçek dağıtım deneyimiyle uyumlu
+- ✅ Dokümantasyon bağlantıları 8+ yerde güncellendi
+- ✅ Örnekler indeksi 4 yerel örneği doğru yansıtıyor
+- ✅ Tablolarda tekrar eden dış bağlantı yok
 - ✅ Tüm gezinme referansları doğru
 
 #### Teknik Uygulama
-- **Microsoft Foundry Models Mimarisi**: gpt-4.1 + Key Vault + Container Apps deseni
-- **Güvenlik**: Managed Identity hazır, sırlar Key Vault'ta
+- **Microsoft Foundry Modelleri Mimarisi**: gpt-4.1 + Key Vault + Container Apps deseni
+- **Güvenlik**: Yönetilen Kimlik hazır, sırlar Key Vault'ta
 - **İzleme**: Application Insights entegrasyonu
-- **Maliyet Yönetimi**: Token takibi ve kullanım optimizasyonu
-- **Dağıtım**: Tam kurulum için tek `azd up` komutu
+- **Maliyet Yönetimi**: Jeton takibi ve kullanım optimizasyonu
+- **Dağıtım**: Tam kurulum için tek bir `azd up` komutu
 
 ### [v3.6.0] - 2025-11-19
 
-#### Büyük Güncelleme: Container Uygulama Dağıtım Örnekleri
-**Bu sürüm, Azure Developer CLI (AZD) kullanılarak kapsamlı, üretime hazır container uygulama dağıtım örneklerini, tam dokümantasyon ve öğrenme yoluna entegrasyonla sunar.**
+#### Önemli Güncelleme: Container Uygulama Dağıtım Örnekleri
+**Bu sürüm, Azure Developer CLI (AZD) kullanarak kapsamlı, üretime hazır container uygulama dağıtım örneklerini sunar; tam dokümantasyon ve öğrenme yoluna entegrasyon içerir.**
 
 #### Eklendi
-- **🚀 Container Uygulama Örnekleri**: Yeni yerel örnekler `examples/container-app/` içinde:
-  - [Ana Rehber](examples/container-app/README.md): Kapsamlı konteyner dağıtımları genel bakışı, hızlı başlangıç, üretim ve gelişmiş kalıplar
-  - [Basit Flask API](../../examples/container-app/simple-flask-api): Başlangıç dostu REST API; scale-to-zero, sağlık kontrolleri, izleme ve sorun giderme
-  - [Mikroservis Mimarisi](../../examples/container-app/microservices): Üretime hazır çok servisli dağıtım (API Gateway, Product, Order, User, Notification), asenkron mesajlaşma, Service Bus, Cosmos DB, Azure SQL, dağıtık izleme, blue-green/canary dağıtım
-- **En İyi Uygulamalar**: Güvenlik, izleme, maliyet optimizasyonu ve CI/CD rehberliği container iş yükleri için
+- **🚀 Container Uygulama Örnekleri**: `examples/container-app/` içinde yeni yerel örnekler:
+  - [Ana Rehber](examples/container-app/README.md): Container dağıtımlarının tam genel bakışı, hızlı başlangıç, üretim ve gelişmiş desenler
+  - [Basit Flask API](../../examples/container-app/simple-flask-api): Ölçek sıfıra, sağlık kontrolleri, izleme ve hata ayıklama içeren yeni başlayan dostu REST API
+  - [Mikroservis Mimarisi](../../examples/container-app/microservices): Üretime hazır çok servisli dağıtım (API Gateway, Ürün, Sipariş, Kullanıcı, Bildirim), asenkron mesajlaşma, Service Bus, Cosmos DB, Azure SQL, dağıtılmış izleme, mavi-yeşil/canary dağıtım
+- **En İyi Uygulamalar**: Container iş yükleri için güvenlik, izleme, maliyet optimizasyonu ve CI/CD rehberi
 - **Kod Örnekleri**: Tam `azure.yaml`, Bicep şablonları ve çok dilli servis uygulamaları (Python, Node.js, C#, Go)
-- **Test & Sorun Giderme**: Uçtan uca test senaryoları, izleme komutları, sorun giderme rehberi
+- **Test ve Sorun Giderme**: Uçtan uca test senaryoları, izleme komutları, sorun giderme rehberi
 
 #### Değiştirildi
-- **README.md**: Yeni container uygulama örneklerini "Local Examples - Container Applications" altında gösterecek ve bağlayacak şekilde güncellendi
-- **examples/README.md**: Container uygulama örneklerini vurgulayacak, karşılaştırma matrisi girdileri ekleyecek ve teknoloji/mimari referanslarını güncelledi
-- **Kurs Taslağı & Çalışma Rehberi**: İlgili bölümlerde yeni container uygulama örnekleri ve dağıtım kalıplarına referans verecek şekilde güncellendi
+- **README.md**: Yeni container uygulama örneklerini "Yerel Örnekler - Container Uygulamaları" altında özellik olarak ekleyip linklendi
+- **examples/README.md**: Container uygulama örnekleri vurgulandı, karşılaştırma matrisi girdileri eklendi ve teknoloji/mimari referansları güncellendi
+- **Ders Ana Hatları ve Çalışma Kılavuzu**: İlgili bölümlerde yeni container uygulama örnekleri ve dağıtım desenleri referanslandı
 
 #### Doğrulandı
-- ✅ Tüm yeni örnekler `azd up` ile dağıtılabilir ve en iyi uygulamaları takip eder
-- ✅ Dokümantasyon çapraz bağlantıları ve gezinme güncellendi
-- ✅ Örnekler başlangıçtan ileri senaryolara kadar, üretim mikroservislerini kapsıyor
+- ✅ Tüm yeni örnekler `azd up` ile dağıtılabilir ve en iyi uygulamalara uyuyor
+- ✅ Dokümantasyon çapraz-bağlantıları ve gezinme güncellendi
+- ✅ Örnekler başlangıçtan ileri seviye senaryolara, üretim mikroservislerini de kapsıyor
 
 #### Notlar
 - **Kapsam**: Yalnızca İngilizce dokümantasyon ve örnekler
-- **Sonraki Adımlar**: Gelecek sürümlerde ek gelişmiş container kalıpları ve CI/CD otomasyonu ile genişletme
+- **Sonraki Adımlar**: Gelecek sürümlerde ileri container desenleri ve CI/CD otomasyonu ile genişletilecek
 
 ### [v3.5.0] - 2025-11-19
 
-#### Ürün Yeniden Markalaşması: Microsoft Foundry
-**Bu sürüm, tüm İngilizce dokümantasyonda "Microsoft Foundry" ürün adının kapsamlı bir şekilde güncellenmesini uygular.**
+#### Ürün Yeniden Markalama: Microsoft Foundry
+**Bu sürüm, tüm İngilizce dokümantasyonda "Microsoft Foundry" ürün adının kapsamlı şekilde değiştirilmesini içerir ve Microsoft'un resmi yeniden markalama yansıtır.**
 
 #### Değiştirildi
-- **🔄 Ürün Adı Güncellemesi**: "Microsoft Foundry"den "Microsoft Foundry"e tam yeniden markalaşma
-  - İngilizce dokümantasyondaki tüm referanslar `docs/` klasöründe güncellendi
-  - Klasör yeniden adlandırıldı: `docs/ai-foundry/` → `docs/microsoft-foundry/`
-  - Yeniden adlandırılan dosya: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - Toplam: 7 dokümantasyon dosyası genelinde 23 içerik referansı güncellendi
+- **🔄 Ürün Adı Güncellemesi**: "Microsoft Foundry" olarak tam yeniden markalama
+  - `docs/` klasöründeki tüm İngilizce doküman referansları güncellendi
+  - Klasör adı değiştirildi: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+  - Dosya adı değiştirildi: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+  - Toplam: 7 dokümantasyon dosyasında 23 içerik referansı güncellendi
 
 - **📁 Klasör Yapısı Değişiklikleri**:
-  - `docs/ai-foundry/` → `docs/microsoft-foundry/` olarak yeniden adlandırıldı
+  - `docs/ai-foundry/` klasörü `docs/microsoft-foundry/` olarak yeniden adlandırıldı
   - Tüm çapraz referanslar yeni klasör yapısını yansıtacak şekilde güncellendi
   - Tüm dokümantasyonda gezinme bağlantıları doğrulandı
 
 - **📄 Dosya Yeniden Adlandırmaları**:
   - `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - Tüm dahili bağlantılar yeni dosya adını gösterecek şekilde güncellendi
+  - Tüm dahili bağlantılar yeni dosya adını gösterir şekilde güncellendi
 
 #### Güncellenen Dosyalar
 - **Bölüm Dokümantasyonu** (7 dosya):
   - `docs/microsoft-foundry/ai-model-deployment.md` - 3 gezinme bağlantısı güncellemesi
   - `docs/microsoft-foundry/ai-workshop-lab.md` - 4 ürün adı referansı güncellendi
-  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - Önceki güncellemelerden dolayı zaten Microsoft Foundry kullanıyor
-  - `docs/microsoft-foundry/production-ai-practices.md` - 3 referans güncellendi (genel bakış, topluluk geri bildirimi, dokümantasyon)
+  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - Önceki güncellemelerle zaten Microsoft Foundry kullanıyor
+  - `docs/microsoft-foundry/production-ai-practices.md` - 3 güncelleme (genel bakış, topluluk geri bildirimi, dokümantasyon)
   - `docs/getting-started/azd-basics.md` - 4 çapraz referans bağlantısı güncellendi
   - `docs/getting-started/first-project.md` - 2 bölüm gezinme bağlantısı güncellendi
   - `docs/getting-started/installation.md` - 2 sonraki bölüm bağlantısı güncellendi
@@ -780,427 +827,429 @@ Eski klasörler bölüm numaralı klasörlerle değiştirildi:
   - `docs/troubleshooting/common-issues.md` - 1 gezinme bağlantısı güncellendi
   - `docs/troubleshooting/debugging.md` - 1 gezinme bağlantısı güncellendi
 
-- **Kurs Yapısı Dosyaları** (2 dosya):
-  - `README.md` - 17 referans güncellendi (kurs genel bakışı, bölüm başlıkları, şablonlar bölümü, topluluk içgörüleri)
+- **Ders Yapısı Dosyaları** (2 dosya):
+  - `README.md` - 17 referans güncellendi (ders genel bakışı, bölüm başlıkları, şablonlar bölümü, topluluk içgörüleri)
   - `course-outline.md` - 14 referans güncellendi (genel bakış, öğrenme hedefleri, bölüm kaynakları)
 
 #### Doğrulandı
-- ✅ İngilizce dokümanlarda kalan "ai-foundry" klasör yolu referansı yok
-- ✅ İngilizce dokümanlarda kalan "Microsoft Foundry" ürün adı referansı yok
-- ✅ Yeni klasör yapısıyla tüm gezinme bağlantıları çalışıyor
+- ✅ İngilizce dokümanlarda kalan "ai-foundry" klasör yolu referansı sıfırlandı
+- ✅ İngilizce dokümanlarda kalan "Microsoft Foundry" ürün adı referansı sıfırlandı
+- ✅ Yeni klasör yapısıyla tüm gezinme bağlantıları işlevsel
 - ✅ Dosya ve klasör yeniden adlandırmaları başarıyla tamamlandı
-- ✅ Bölümler arasındaki çapraz referanslar doğrulandı
+- ✅ Bölümler arası çapraz referanslar doğrulandı
 
 #### Notlar
-- **Kapsam**: Değişiklikler yalnızca `docs/` klasöründeki İngilizce dokümantasyona uygulandı
-- **Çeviriler**: Çeviri klasörleri (`translations/`) bu sürümde güncellenmedi
-- **Atölye**: Atölye materyalleri (`workshop/`) bu sürümde güncellenmedi
-- **Örnekler**: Örnek dosyalar hâlâ eski isimlendirmeyi referans gösterebilir (gelecek güncellemede ele alınacak)
-- **Harici Bağlantılar**: Harici URL'ler ve GitHub depo referansları değişmedi
+- **Kapsam**: Yalnızca `docs/` klasöründeki İngilizce dokümantasyona uygulandı
+- **Çeviriler**: Bu sürümde çeviri klasörleri (`translations/`) güncellenmedi
+- **Atölye**: Atölye malzemeleri (`workshop/`) bu sürümde güncellenmedi
+- **Örnekler**: Örnek dosyalar hala eski isimlendirmeye referans verebilir (gelecek güncellemede ele alınacak)
+- **Dış Bağlantılar**: Harici URL'ler ve GitHub depo referansları değişmemiştir
 
-#### Katkıda Bulunanlar İçin Taşıma Rehberi
-Eğer yerel dallarınız veya dokümantasyonunuz eski yapıya referans veriyorsa:
+#### Katkıda Bulunanlar İçin Geçiş Rehberi
+Lokal dallarınız veya eski yapıya referans veren dokümantasyon varsa:
 1. Klasör referanslarını güncelleyin: `docs/ai-foundry/` → `docs/microsoft-foundry/`
 2. Dosya referanslarını güncelleyin: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
 3. Ürün adını değiştirin: "Microsoft Foundry" → "Microsoft Foundry"
-4. Tüm dahili dokümantasyon bağlantılarının çalıştığını doğrulayın
+4. Tüm dahili dokümantasyon bağlantılarının hala çalıştığını doğrulayın
 
 ---
 
 ### [v3.4.0] - 2025-10-24
 
-#### Altyapı Önizleme ve Doğrulama İyileştirmeleri
+#### Altyapı Önizleme ve Doğrulama Geliştirmeleri
 **Bu sürüm, yeni Azure Developer CLI önizleme özelliği için kapsamlı destek sunar ve atölye kullanıcı deneyimini geliştirir.**
 
 #### Eklendi
-- **🧪 azd provision --preview Özellik Belgeleri**: Yeni altyapı önizleme yeteneğinin kapsamlı açıklaması
-  - Komut referansı ve kullanım örnekleri hile sayfasında
-  - Sağlayıcı rehberinde kullanım senaryoları ve faydalar ile detaylı entegrasyon
-  - Daha güvenli dağıtım doğrulaması için pre-flight kontrol entegrasyonu
-  - Güvenlik öncelikli dağıtım uygulamalarıyla başlayanlar için kılavuz güncellemeleri
-- **🚧 Atölye Durum Bayrağı**: Atölye geliştirme durumunu gösteren profesyonel HTML banner
-  - Net kullanıcı iletişimi için inşaat göstergeli gradyan tasarım
+- **🧪 azd provision --preview Özellik Dokümantasyonu**: Yeni altyapı önizleme yeteneğinin kapsamlı açıklaması
+  - Cheat sheet'te komut referansı ve kullanım örnekleri
+  - Sağlama rehberinde kullanım senaryoları ve faydalı detaylı entegrasyon
+  - Daha güvenli dağıtım için ön kontrol entegrasyonu
+  - Güvenlik odaklı dağıtım uygulamaları ile başlayan kullanım kılavuzu güncellemeleri
+- **🚧 Atölye Durum Çubuğu**: Atölye geliştirme durumunu gösteren profesyonel HTML çubuğu
+  - Kullanıcı iletişimi için gradyan tasarım ve yapım göstergeleri
   - Şeffaflık için son güncelleme zaman damgası
-  - Tüm cihaz türleri için mobil duyarlı tasarım
+  - Tüm cihaz türlerine uygun mobil uyumlu tasarım
 
 #### Geliştirildi
-- **Altyapı Güvenliği**: Önizleme işlevselliği dağıtım belgelerinin tamamına entegre edildi
-- **Dağıtım Öncesi Doğrulama**: Otomatik betikler artık altyapı önizleme testlerini içeriyor
-- **Geliştirici İş Akışı**: Komut dizileri en iyi uygulama olarak önizlemeyi içercek şekilde güncellendi
-- **Atölye Deneyimi**: Kullanıcılara içerik geliştirme durumu hakkında net beklentiler sunuldu
+- **Altyapı Güvenliği**: Dağıtım dokümantasyonunda önizleme fonksiyonu entegre edildi
+- **Ön Dağıtım Doğrulaması**: Otomatikleştirilmiş betiklere altyapı önizleme testleri eklendi
+- **Geliştirici İş Akışı**: Komut dizileri önizleme içererek en iyi uygulama haline getirildi
+- **Atölye Deneyimi**: Kullanıcılara içerik geliştirme durumu açıkça bildiriliyor
 
 #### Değiştirildi
-- **Dağıtım En İyi Uygulamaları**: Önizleme-öncelikli iş akışı artık önerilen yaklaşım
-- **Dokümantasyon Akışı**: Altyapı doğrulaması öğrenme sürecinde daha erken bir konuma taşındı
-- **Atölye Sunumu**: Gelişim zaman çizelgesi ile profesyonel durum iletişimi eklendi
+- **Dağıtım En İyi Uygulamaları**: Önizleme-öncelikli iş akışı tavsiye edilen yöntem haline geldi
+- **Dokümantasyon Akışı**: Altyapı doğrulaması öğrenme sürecinde daha öncelik kazandı
+- **Atölye Sunumu**: Profesyonel durum bildirimiyle net geliştirme zaman çizelgesi
 
 #### İyileştirildi
-- **Güvenlik-Öncelikli Yaklaşım**: Altyapı değişiklikleri dağıtımdan önce doğrulanabilir hale geldi
-- **Ekip İşbirliği**: Önizleme sonuçları inceleme ve onay için paylaşılabilir
-- **Maliyet Bilinci**: Sağlayıcı öncesi kaynak maliyetleri hakkında daha iyi farkındalık
-- **Risk Azaltma**: Önceden doğrulama ile dağıtım hataları azaltıldı
+- **Güvenlik Odağı**: Altyapı değişiklikleri dağıtımdan önce doğrulanabilir oldu
+- **Takım İşbirliği**: Önizleme sonuçları inceleme ve onay için paylaşılabilir
+- **Maliyet Bilinçliliği**: Sağlama öncesi kaynak maliyetlerinin daha iyi anlaşılması
+- **Risk Azaltma**: Önceden doğrulama ile dağıtım hataları azaldı
 
 #### Teknik Uygulama
-- **Çoklu Belge Entegrasyonu**: Önizleme özelliği 4 ana dosyada belgelenmiştir
-- **Komut Kalıpları**: Belgelerde tutarlı sözdizimi ve örnekler
-- **En İyi Uygulama Entegrasyonu**: Önizleme, doğrulama iş akışlarına ve betiklere dahil edildi
-- **Görsel Göstergeler**: Yeni özelliğin keşfedilebilirliği için NET işaretlemeleri
+- **Çoklu Doküman Entegrasyonu**: Önizleme özelliği 4 önemli dosyada dökümante edildi
+- **Komut Desenleri**: Tüm dokümantasyonda tutarlı sözdizimi ve örnekler
+- **En İyi Uygulama Entegrasyonu**: Doğrulama iş akışları ve betiklere önizleme dahil edildi
+- **Görsel Göstergeler**: Keşfedilebilirlik için yeni özellik işaretleri açıkça belirtildi
 
 #### Atölye Altyapısı
-- **Durum İletişimi**: Gradyan stilinde profesyonel HTML banner
-- **Kullanıcı Deneyimi**: Geliştirme durumu net olarak belirtilerek kafa karışıklığı önlenir
-- **Profesyonel Sunum**: Depo güvenilirliğini korurken beklentileri ayarlar
-- **Zaman Çizelgesi Şeffaflığı**: Sorumluluk için Ekim 2025 son güncelleme zaman damgası
+- **Durum İletişimi**: Gradyan stilinde profesyonel HTML çubuğu
+- **Kullanıcı Deneyimi**: Geliştirme durumu karışıklığını önler
+- **Profesyonel Sunum**: Depo güvenilirliği korunurken beklentiler belirlenir
+- **Zaman Çizelgesi Şeffaflığı**: Ekim 2025 son güncelleme zaman damgası ile hesap verebilirlik
 
 ### [v3.3.0] - 2025-09-24
 
 #### Geliştirilmiş Atölye Materyalleri ve Etkileşimli Öğrenme Deneyimi
-**Bu sürüm, tarayıcı tabanlı etkileşimli rehberler ve yapılandırılmış öğrenme yollarıyla kapsamlı atölye materyalleri sunar.**
+**Bu sürüm, tarayıcı tabanlı etkileşimli rehberler ve yapılandırılmış öğrenme yollarıyla kapsamlı atölye materyalleri sunmaktadır.**
 
 #### Eklendi
 - **🎥 Etkileşimli Atölye Rehberi**: MkDocs önizleme yeteneği ile tarayıcı tabanlı atölye deneyimi
-- **📝 Yapılandırılmış Atölye Talimatları**: Keşiften özelleştirmeye 7 adımlı rehber öğrenme yolu
-  - 0-Introduction: Atölye genel bakışı ve kurulum
-  - 1-Select-AI-Template: Şablon keşfi ve seçim süreci
-  - 2-Validate-AI-Template: Dağıtım ve doğrulama prosedürleri
-  - 3-Deconstruct-AI-Template: Şablon mimarisinin anlaşılması
-  - 4-Configure-AI-Template: Yapılandırma ve özelleştirme
-  - 5-Customize-AI-Template: İleri düzey değişiklikler ve yinelemeler
-  - 6-Teardown-Infrastructure: Temizlik ve kaynak yönetimi
-  - 7-Wrap-up: Özet ve sonraki adımlar
+- **📝 Yapılandırılmış Atölye Talimatları**: Keşiften özelleştirmeye 7 adımlı rehberli öğrenme yolu
+  - 0-Giriş: Atölye genel bakışı ve kurulum
+  - 1-AI-Şablonu-Seçimi: Şablon keşfi ve seçim süreci
+  - 2-AI-Şablonu-Doğrulama: Dağıtım ve doğrulama prosedürleri
+  - 3-AI-Şablonu-Parçalara-Ayrıştırma: Şablon mimarisini anlama
+  - 4-AI-Şablonu-Yapılandırma: Konfigürasyon ve özelleştirme
+  - 5-AI-Şablonu-Özelleştirme: İleri düzey değişiklikler ve yinelemeler
+  - 6-Altyapıyı-Kaldırma: Temizlik ve kaynak yönetimi
+  - 7-Sonuçlandırma: Özet ve sonraki adımlar
 - **🛠️ Atölye Araçları**: Geliştirilmiş öğrenme deneyimi için Material temalı MkDocs yapılandırması
 - **🎯 Uygulamalı Öğrenme Yolu**: 3 adımlı metodoloji (Keşif → Dağıtım → Özelleştirme)
 - **📱 GitHub Codespaces Entegrasyonu**: Sorunsuz geliştirme ortamı kurulumu
 
 #### Geliştirildi
-- **AI Atölye Laboratuvarı**: 2-3 saatlik kapsamlı yapılandırılmış öğrenme deneyimi ile genişletildi
-- **Atölye Dokümantasyonu**: Gezinti ve görsel yardımcılarla profesyonel sunum
-- **Öğrenme İlerlemesi**: Şablon seçiminden üretime dağıtıma kadar net adım adım rehberlik
-- **Geliştirici Deneyimi**: Düzenlenmiş iş akışları için entegre araçlar
+- **AI Atölye Laboratuvarı**: 2-3 saatlik yapılandırılmış kapsamlı öğrenme deneyimi eklendi
+- **Atölye Dokümantasyonu**: Gezinti ve görsel destek içeren profesyonel sunum
+- **Öğrenme İlerlemesi**: Şablon seçiminden üretim dağıtımına açık adım adım rehberlik
+- **Geliştirici Deneyimi**: Entegre araçlar ile geliştirme iş akışları kolaylaştırıldı
 
 #### İyileştirildi
-- **Erişilebilirlik**: Arama, kopyala işlevi ve tema anahtarı ile tarayıcı tabanlı arayüz
-- **Kendi Hızında Öğrenme**: Farklı öğrenme hızlarına uyum sağlayan esnek atölye yapısı
-- **Pratik Uygulama**: Gerçek dünya AI şablonu dağıtım senaryoları
+- **Erişilebilirlik**: Arama, kopyalama özelliği ve tema değiştirme için tarayıcı arabirimi
+- **Kendi Hızında Öğrenme**: Farklı öğrenme hızlarına uygun esnek atölye yapısı
+- **Pratik Uygulama**: Gerçek dünya AI şablon dağıtım senaryoları
 - **Topluluk Entegrasyonu**: Atölye desteği ve işbirliği için Discord entegrasyonu
 
 #### Atölye Özellikleri
 - **Yerleşik Arama**: Hızlı anahtar kelime ve ders keşfi
-- **Kod Bloklarını Kopyala**: Tüm kod örnekleri için hover-to-copy işlevselliği
-- **Tema Anahtarı**: Farklı tercihler için karanlık/açık mod desteği
-- **Görsel Varlıklar**: Gelişmiş anlayış için ekran görüntüleri ve diyagramlar
+- **Kod Bloklarını Kopyalama**: Tüm kod örneklerinde üstüne gelince kopyalama işlevi
+- **Tema Değiştirici**: Farklı tercihler için koyu/açık mod desteği
+- **Görsel Materyaller**: Anlayışı artıran ekran görüntüleri ve diyagramlar
 - **Yardım Entegrasyonu**: Topluluk desteği için doğrudan Discord erişimi
 
 ### [v3.2.0] - 2025-09-17
 
-#### Büyük Gezinme Yeniden Yapılandırması ve Bölüm Tabanlı Öğrenme Sistemi
-**Bu sürüm, tüm depo genelinde geliştirilmiş gezinme ile kapsamlı bölüm tabanlı öğrenme yapısı sunar.**
+#### Önemli Gezinme Yeniden Yapılandırması ve Bölüm Tabanlı Öğrenme Sistemi
+**Bu sürüm, tüm depoda geliştirilmiş gezinme ile kapsamlı bölüm tabanlı öğrenme yapısını tanıtmaktadır.**
 
 #### Eklendi
-- **📚 Bölüm Tabanlı Öğrenme Sistemi**: Tüm kursu 8 ilerleyici öğrenme bölümüne yeniden yapılandırıldı
-  - Chapter 1: Foundation & Quick Start (⭐ - 30-45 mins)
-  - Chapter 2: AI-First Development (⭐⭐ - 1-2 hours)
-  - Chapter 3: Configuration & Authentication (⭐⭐ - 45-60 mins)
-  - Chapter 4: Infrastructure as Code & Deployment (⭐⭐⭐ - 1-1.5 hours)
-  - Chapter 5: Multi-Agent AI Solutions (⭐⭐⭐⭐ - 2-3 hours)
-  - Chapter 6: Pre-Deployment Validation & Planning (⭐⭐ - 1 hour)
-  - Chapter 7: Troubleshooting & Debugging (⭐⭐ - 1-1.5 hours)
-  - Chapter 8: Production & Enterprise Patterns (⭐⭐⭐⭐ - 2-3 hours)
+- **📚 Bölüm Tabanlı Öğrenme Sistemi**: Tüm kurs 8 ilerlemeli öğrenme bölümüne yeniden yapılandırıldı
+  - Bölüm 1: Temel ve Hızlı Başlangıç (⭐ - 30-45 dakika)
+  - Bölüm 2: AI-Öncelikli Geliştirme (⭐⭐ - 1-2 saat)
+  - Bölüm 3: Konfigürasyon ve Kimlik Doğrulama (⭐⭐ - 45-60 dakika)
+  - Bölüm 4: Kod Olarak Altyapı ve Dağıtım (⭐⭐⭐ - 1-1.5 saat)
+  - Bölüm 5: Çok Ajanlı AI Çözümleri (⭐⭐⭐⭐ - 2-3 saat)
+  - Bölüm 6: Ön Dağıtım Doğrulama ve Planlama (⭐⭐ - 1 saat)
+  - Bölüm 7: Sorun Giderme ve Hata Ayıklama (⭐⭐ - 1-1.5 saat)
+  - Bölüm 8: Üretim ve Kurumsal Desenler (⭐⭐⭐⭐ - 2-3 saat)
 - **📚 Kapsamlı Gezinme Sistemi**: Tüm dokümantasyonda tutarlı gezinme başlıkları ve altbilgiler
 - **🎯 İlerleme Takibi**: Kurs tamamlama kontrol listesi ve öğrenme doğrulama sistemi
-- **🗺️ Öğrenme Yolu Rehberliği**: Farklı deneyim seviyeleri ve hedefler için net giriş noktaları
-- **🔗 Çapraz Referans Gezinmesi**: İlgili bölümler ve önkoşullar açıkça bağlı
+- **🗺️ Öğrenme Yolu Rehberi**: Farklı deneyim seviyeleri ve hedefler için net giriş noktaları
+- **🔗 Çapraz Referans Gezinme**: İlgili bölümler ve önkoşullar açıkça bağlandı
 
 #### Geliştirildi
-- **README Yapısı**: Bölüm bazlı organizasyon ile yapılandırılmış öğrenme platformuna dönüştürüldü
-- **Dokümantasyon Gezintisi**: Her sayfa artık bölüm bağlamı ve ilerleme rehberliği içeriyor
-- **Şablon Organizasyonu**: Örnekler ve şablonlar uygun öğrenme bölümlerine eşlendi
-- **Kaynak Entegrasyonu**: Hile sayfaları, SSS ve çalışma kılavuzları ilgili bölümlere bağlandı
-- **Atölye Entegrasyonu**: Uygulamalı laboratuvarlar birden çok bölüm öğrenme hedefiyle eşlendi
+- **README Yapısı**: Bölüm tabanlı organizasyon ile yapılandırılmış öğrenme platformuna dönüştürüldü
+- **Dokümantasyon Gezinme**: Her sayfada artık bölüm bağlamı ve ilerleme rehberi mevcut
+- **Şablon Organizasyonu**: Örnekler ve şablonlar ilgili öğrenme bölümlerine haritalandı
 
-#### Değiştirildi
-- **Öğrenme İlerleyişi**: Doğrusal dokümantasyondan esnek bölüm tabanlı öğrenmeye geçirildi
-- **Yapılandırma Yerleşimi**: Daha iyi öğrenme akışı için yapılandırma rehberi Bölüm 3 olarak yeniden konumlandırıldı
-- **AI İçerik Entegrasyonu**: AI'ya özel içerik öğrenme yolculuğu boyunca daha iyi entegre edildi
-- **Üretim İçeriği**: İleri düzey kalıplar Kurumsal öğreniciler için Bölüm 8'de konsolide edildi
+- **Kaynak Entegrasyonu**: İlgili bölümlerle bağlantılı hile sayfaları, SSS ve çalışma kılavuzları
+- **Atölye Entegrasyonu**: Birden fazla bölüm öğrenme hedefiyle eşlenen uygulamalı laboratuvarlar
 
-#### İyileştirildi
-- **Kullanıcı Deneyimi**: Net gezinme kırıntıları ve bölüm ilerleme göstergeleri
-- **Erişilebilirlik**: Kolay kurs dolaşımı için tutarlı gezinme örüntüleri
-- **Profesyonel Sunum**: Akademik ve kurumsal eğitim için uygun üniversite stili kurs yapısı
-- **Öğrenme Verimliliği**: Geliştirilmiş organizasyon sayesinde ilgili içeriği bulma süresi azaldı
+#### Değiştirilenler
+- **Öğrenme İlerlemesi**: Doğrusal dokümantasyondan esnek bölüm tabanlı öğrenmeye geçiş
+- **Yapılandırma Konumu**: Daha iyi öğrenme akışı için yapılandırma kılavuzu 3. Bölüm olarak yeniden konumlandırıldı
+- **Yapay Zeka İçerik Entegrasyonu**: Öğrenme yolculuğu boyunca AI'ya özel içeriğin daha iyi entegrasyonu
+- **Üretim İçeriği**: Kurumsal öğrenenler için gelişmiş kalıplar 8. Bölümde konsolide edildi
+
+#### İyileştirilenler
+- **Kullanıcı Deneyimi**: Net gezinme izleri ve bölüm ilerleme göstergeleri
+- **Erişilebilirlik**: Kolay kurs gezintisi için tutarlı gezinme kalıpları
+- **Profesyonel Sunum**: Akademik ve kurumsal eğitimler için üniversite tarzı kurs yapısı
+- **Öğrenme Verimliliği**: Geliştirilmiş organizasyon ile ilgili içeriğe ulaşma süresinin azaltılması
 
 #### Teknik Uygulama
-- **Gezinme Başlıkları**: 40+ doküman dosyasında standartlaştırılmış bölüm gezinmesi
-- **Altbilgi Gezinmesi**: Tutarlı ilerleme rehberliği ve bölüm tamamlama göstergeleri
-- **Çapraz Bağlantılama**: İlgili kavramları birbirine bağlayan kapsamlı dahili bağlantı sistemi
-- **Bölüm Eşlemesi**: Şablonlar ve örnekler öğrenme hedefleriyle net şekilde ilişkilendirildi
+- **Geçiş Başlıkları**: 40'tan fazla dokümantasyon dosyasında standartlaştırılmış bölüm gezintisi
+- **Altbilgi Gezinmesi**: Tutarlı ilerleme yönlendirmesi ve bölüm tamamlama göstergeleri
+- **Çapraz Bağlantılama**: İlgili kavramları bağlayan kapsamlı dahili bağlantı sistemi
+- **Bölüm Eşleştirmesi**: Şablonlar ve örnekler öğrenme hedefleriyle net şekilde ilişkilendirildi
 
 #### Çalışma Kılavuzu Geliştirmesi
-- **📚 Kapsamlı Öğrenme Hedefleri**: Çalışma kılavuzu 8-bölümlü sisteme uygun şekilde yeniden yapılandırıldı
-- **🎯 Bölüm Bazlı Değerlendirme**: Her bölüm belirli öğrenme hedefleri ve pratik egzersizler içerir
-- **📋 İlerleme Takibi**: Ölçülebilir çıktılar ve tamamlama kontrol listeleriyle haftalık öğrenme takvimi
-- **❓ Değerlendirme Soruları**: Her bölüm için profesyonel sonuçlar hedefleyen bilgi doğrulama soruları
-- **🛠️ Pratik Egzersizler**: Gerçek dağıtım senaryoları ve hata ayıklama ile uygulamalı aktiviteler
-- **📊 Beceri İlerlemesi**: Temel kavramlardan kurumsal kalıplara kadar net bir ilerleme yolu ve kariyer odaklı gelişim
-- **🎓 Sertifikasyon Çerçevesi**: Profesyonel gelişim çıktıları ve topluluk tanıma sistemi
-- **⏱️ Zaman Çizelgesi Yönetimi**: Kilit doğrulamalarla yapılandırılmış 10 haftalık öğrenme planı
+- **📚 Kapsamlı Öğrenme Hedefleri**: 8 bölümlü sisteme uyumlu şekilde yeniden yapılandırılmış çalışma kılavuzu
+- **🎯 Bölüm Bazlı Değerlendirme**: Her bölümde özel öğrenme hedefleri ve uygulamalı egzersizler
+- **📋 İlerleme Takibi**: Ölçülebilir sonuçlar ve tamamlanma kontrol listeleri içeren haftalık öğrenme programı
+- **❓ Değerlendirme Soruları**: Her bölüm için profesyonel sonuçlara dayalı bilgi doğrulama soruları
+- **🛠️ Uygulamalı Egzersizler**: Gerçek dağıtım senaryoları ve sorun giderme ile uygulamalı aktiviteler
+- **📊 Beceri İlerlemesi**: Temel kavramlardan kurumsal kalıplara net ilerleme ve kariyer gelişimine odaklanma
+- **🎓 Sertifikasyon Çerçevesi**: Profesyonel gelişim çıktıları ve topluluk tanınma sistemi
+- **⏱️ Zaman Çizelgesi Yönetimi**: Kilometre taşı doğrulamalı yapılandırılmış 10 haftalık öğrenme planı
 
 ### [v3.1.0] - 2025-09-17
 
-#### Geliştirilmiş Çok Ajanlı AI Çözümleri
-**Bu sürüm, çok ajanlı perakende çözümünü daha iyi ajan adlandırması ve geliştirilmiş dokümantasyon ile iyileştirir.**
+#### Geliştirilmiş Çoklu Ajan AI Çözümleri
+**Bu sürüm, çoklu ajan perakende çözümünü daha iyi ajan adlandırması ve geliştirilmiş dokümantasyon ile iyileştirir.**
 
-#### Değiştirildi
-- **Çok Ajanlı Terminoloji**: Perakende çok ajanlı çözümünde daha net anlayış için "Cora agent" yerine "Customer agent" kullanıldı
-- **Ajan Mimarisi**: Tüm dokümantasyon, ARM şablonları ve kod örnekleri tutarlı "Customer agent" adlandırmasını kullanacak şekilde güncellendi
-- **Yapılandırma Örnekleri**: Güncellenmiş adlandırma standartları ile modern ajan yapılandırma kalıpları
-- **Dokümantasyon Tutarlılığı**: Tüm referansların profesyonel, tanımlayıcı ajan adlarını kullanması sağlandı
+#### Değiştirilenler
+- **Çoklu Ajan Terminolojisi**: Daha net anlaşılması için perakende çoklu ajan çözümünde "Cora ajanı" yerine "Müşteri ajanı" kullanıldı
+- **Ajan Mimarisi**: Tüm dokümantasyon, ARM şablonları ve kod örnekleri tutarlı "Müşteri ajanı" adlandırması kullanacak şekilde güncellendi
+- **Yapılandırma Örnekleri**: Güncellenmiş adlandırma kurallarıyla ajanın yapılandırma kalıpları modernize edildi
+- **Dokümantasyon Tutarlılığı**: Tüm referansların profesyonel ve açıklayıcı ajan isimleri kullandığından emin olundu
 
-#### Geliştirildi
-- **ARM Şablon Paketi**: Customer agent referansları ile retail-multiagent-arm-template güncellendi
-- **Mimari Diyagramlar**: Güncellenmiş ajan adlandırmasıyla Mermaid diyagramları yenilendi
+#### Geliştirilenler
+- **ARM Şablon Paketi**: Customer agent referanslarıyla güncellenmiş retail-multiagent-arm-template
+- **Mimari Diyagramlar**: Güncellenmiş ajan adlandırması ile yenilenmiş Mermaid diyagramları
 - **Kod Örnekleri**: Python sınıfları ve uygulama örnekleri artık CustomerAgent adlandırmasını kullanıyor
-- **Ortam Değişkenleri**: Tüm dağıtım betikleri CUSTOMER_AGENT_NAME konvansiyonunu kullanacak şekilde güncellendi
+- **Ortam Değişkenleri**: Tüm dağıtım betikleri CUSTOMER_AGENT_NAME konvansiyonlarını kullanacak şekilde güncellendi
 
-#### İyileştirildi
-- **Geliştirici Deneyimi**: Dokümantasyonda daha net ajan rollerı ve sorumlulukları
-- **Üretime Hazırlık**: Kurumsal adlandırma konvansiyonlarıyla daha iyi uyum
+#### İyileştirilenler
+- **Geliştirici Deneyimi**: Dokümantasyonda daha net ajan rolleri ve sorumlulukları
+- **Üretime Hazırlık**: Kurumsal adlandırma standartlarıyla daha iyi uyum
 - **Öğrenme Materyalleri**: Eğitim amaçlı daha sezgisel ajan adlandırması
-- **Şablon Kullanılabilirliği**: Ajan fonksiyonlarının ve dağıtım kalıplarının anlaşılması basitleşti
+- **Şablon Kullanılabilirliği**: Ajan işlevleri ve dağıtım kalıplarının anlaşılmasının basitleştirilmesi
 
 #### Teknik Detaylar
-- Mermaid mimari diyagramları CustomerAgent referansları ile güncellendi
+- CustomerAgent referanslarıyla güncellenmiş Mermaid mimari diyagramları
 - Python örneklerinde CoraAgent sınıf adları CustomerAgent ile değiştirildi
-- ARM şablon JSON konfigürasyonları "customer" ajan türünü kullanacak şekilde değiştirildi
-- Ortam değişkenleri CORA_AGENT_*'den CUSTOMER_AGENT_* desenine güncellendi
-- Tüm dağıtım komutları ve konteyner konfigürasyonları yenilendi
+- ARM şablonu JSON yapılandırmaları "customer" ajan türünü kullanacak şekilde değiştirildi
+- Ortam değişkenleri CORA_AGENT_*'den CUSTOMER_AGENT_* kalıplarına güncellendi
+- Tüm dağıtım komutları ve konteyner yapılandırmaları yenilendi
 
 ### [v3.0.0] - 2025-09-12
 
 #### Büyük Değişiklikler - AI Geliştirici Odaklı ve Microsoft Foundry Entegrasyonu
-**Bu sürüm, depoyu Microsoft Foundry entegrasyonlu kapsamlı bir AI odaklı öğrenme kaynağına dönüştürür.**
+**Bu sürüm, depoyu kapsamlı AI odaklı öğrenme kaynağına dönüştürür ve Microsoft Foundry entegrasyonunu içerir.**
 
-#### Eklendi
-- **🤖 AI-İlk Öğrenme Yolu**: AI geliştiricileri ve mühendisleri önceliklendiren tam yeniden yapılandırma
-- **Microsoft Foundry Entegrasyon Kılavuzu**: AZD'yi Microsoft Foundry servislerine bağlama için kapsamlı dokümantasyon
-- **AI Modeli Dağıtım Kalıpları**: Model seçimi, yapılandırma ve üretime dağıtım stratejilerini kapsayan detaylı rehber
-- **AI Workshop Lab**: AZD dağıtılabilir çözümlere dönüştürme için 2-3 saatlik uygulamalı atölye
-- **Production AI Best Practices**: AI iş yüklerini ölçeklendirme, izleme ve güvence altına alma için kurumsal seviyeye hazır desenler
-- **AI-Specific Troubleshooting Guide**: Microsoft Foundry Modelleri, Cognitive Services ve AI dağıtım sorunları için kapsamlı sorun giderme
-- **AI Template Gallery**: Karmaşıklık derecelendirmeleriyle öne çıkan Microsoft Foundry şablon koleksiyonu
-- **Workshop Materials**: Uygulamalı laboratuvarlar ve referans materyalleri içeren eksiksiz atölye yapısı
+#### Eklenenler
+- **🤖 AI-Öncelikli Öğrenme Yolu**: AI geliştiricileri ve mühendislerine öncelik veren tam yeniden yapılandırma
+- **Microsoft Foundry Entegrasyon Kılavuzu**: AZD ile Microsoft Foundry hizmetlerini bağlama için kapsamlı dokümantasyon
+- **AI Model Dağıtım Kalıpları**: Model seçimi, yapılandırma ve üretim dağıtım stratejilerini içeren ayrıntılı rehber
+- **AI Atölye Labı**: AI uygulamalarını AZD'ye dağıtılabilir çözümlere dönüştürmek için 2-3 saatlik uygulamalı atölye
+- **Üretim AI En İyi Uygulamaları**: AI iş yüklerini ölçeklendirme, izleme ve güvence altına alma için kurumsal hazır kalıplar
+- **AI'ya Özel Sorun Giderme Kılavuzu**: Microsoft Foundry Modelleri, Bilişsel Hizmetler ve AI dağıtım sorunları için kapsamlı sorun giderme
+- **AI Şablon Galerisi**: Karmaşıklık dereceleriyle Microsoft Foundry şablonlarından seçkiler
+- **Atölye Materyalleri**: Uygulamalı laboratuvarlar ve referans materyalleri içeren tam atölye yapısı
 
-#### Geliştirilmiş
-- **README Structure**: Microsoft Foundry Discord'tan alınan %45 topluluk ilgi verisi ile AI geliştirici odaklı
-- **Learning Paths**: Öğrenciler ve DevOps mühendisleri için geleneksel yolların yanında özel AI geliştirici yolculuğu
-- **Template Recommendations**: Azure-search-openai-demo, contoso-chat ve openai-chat-app-quickstart dahil öne çıkan AI şablonları
-- **Community Integration**: AI'ye özel kanallar ve tartışmalarla geliştirilmiş Discord topluluk desteği
+#### Geliştirilenler
+- **README Yapısı**: Microsoft Foundry Discord'dan %45 topluluk ilgisi verisi ile AI geliştirici odaklı
+- **Öğrenme Yolları**: Öğrenciler ve DevOps mühendisleri için geleneksel yollarla paralel yürüyen özel AI geliştirici yolculuğu
+- **Şablon Önerileri**: azure-search-openai-demo, contoso-chat ve openai-chat-app-quickstart gibi öne çıkan AI şablonları
+- **Topluluk Entegrasyonu**: AI'ya özel kanallar ve tartışmalarla geliştirilmiş Discord topluluk desteği
 
-#### Güvenlik ve Üretim Odaklı
-- **Managed Identity Patterns**: AI'ye özgü kimlik doğrulama ve güvenlik yapılandırmaları
-- **Cost Optimization**: AI iş yükleri için token kullanımı takibi ve bütçe kontrolleri
-- **Multi-Region Deployment**: Küresel AI uygulama dağıtımı için stratejiler
-- **Performance Monitoring**: AI'ye özgü metrikler ve Application Insights entegrasyonu
+#### Güvenlik ve Üretim Odaklılık
+- **Yönetilen Kimlik Kalıpları**: AI'ya özgü kimlik doğrulama ve güvenlik yapılandırmaları
+- **Maliyet Optimizasyonu**: AI iş yükleri için token kullanımı takibi ve bütçe kontrolleri
+- **Çok Bölgeli Dağıtım**: Küresel AI uygulama dağıtım stratejileri
+- **Performans İzleme**: AI'ya özgü metrikler ve Application Insights entegrasyonu
 
 #### Dokümantasyon Kalitesi
-- **Linear Course Structure**: Başlangıçtan ileri düzey AI dağıtım desenlerine mantıklı ilerleme
-- **Validated URLs**: Tüm harici depo bağlantıları doğrulandı ve erişilebilir
-- **Complete Reference**: Tüm dahili dokümantasyon bağlantıları doğrulandı ve işlevsel
-- **Production Ready**: Gerçek dünya örnekleriyle kurumsal dağıtım desenleri
+- **Doğrusal Kurs Yapısı**: Başlangıçtan ileri düzey AI dağıtım kalıplarına mantıklı ilerleme
+- **Doğrulanmış URL'ler**: Tüm dış depo bağlantıları doğrulanmış ve erişilebilir
+- **Tam Referans**: Tüm dahili dokümantasyon bağlantıları doğrulanmış ve işlevsel
+- **Üretime Hazır**: Gerçek dünya örnekleriyle kurumsal dağıtım kalıpları
 
 ### [v2.0.0] - 2025-09-09
 
-#### Büyük Değişiklikler - Depo Yeniden Yapılandırması ve Profesyonel İyileştirmeler
-**Bu sürüm, depo yapısında ve içerik sunumunda önemli bir revizyonu temsil eder.**
+#### Büyük Değişiklikler - Depo Yeniden Yapılandırması ve Profesyonel Gelişim
+**Bu sürüm, depo yapısı ve içerik sunumunda önemli bir yenileme temsil eder.**
 
-#### Eklendi
-- **Structured Learning Framework**: Tüm dokümantasyon sayfaları artık Giriş, Öğrenme Hedefleri ve Öğrenme Çıktıları bölümlerini içerir
-- **Navigation System**: Rehberli öğrenme ilerlemesi için tüm dokümantasyonda Önceki/Sonraki ders bağlantıları eklendi
-- **Study Guide**: Öğrenme hedefleri, uygulama alıştırmaları ve değerlendirme materyalleri içeren kapsamlı study-guide.md
-- **Professional Presentation**: Erişilebilirliği ve profesyonel görünümü iyileştirmek için tüm emoji simgeleri kaldırıldı
-- **Enhanced Content Structure**: Öğrenme materyallerinin organizasyonu ve akışı geliştirildi
+#### Eklenenler
+- **Yapılandırılmış Öğrenme Çerçevesi**: Tüm dokümantasyon sayfalarında Giriş, Öğrenme Hedefleri ve Öğrenme Çıktıları bölümleri eklendi
+- **Gezinme Sistemi**: Tüm dokümantasyonda önceki/sonraki ders bağlantıları eklenerek rehberli öğrenme ilerlemesi sağlandı
+- **Çalışma Kılavuzu**: Öğrenme hedefleri, uygulamalı egzersizler ve değerlendirme materyalleri içeren kapsamlı study-guide.md
+- **Profesyonel Sunum**: Erişilebilirlik ve profesyonel görünüm için tüm emoji ikonları kaldırıldı
+- **İçerik Yapısı Geliştirmesi**: Öğrenme materyallerinde organizasyon ve akış iyileştirildi
 
-#### Değiştirildi
-- **Documentation Format**: Tüm dokümantasyon tutarlı, öğrenme odaklı yapıyla standartlaştırıldı
-- **Navigation Flow**: Tüm öğrenme materyalleri boyunca mantıksal ilerleme uygulandı
-- **Content Presentation**: Açık, profesyonel format lehine dekoratif öğeler kaldırıldı
-- **Link Structure**: Yeni gezinme sistemini destekleyecek şekilde tüm dahili bağlantılar güncellendi
+#### Değiştirilenler
+- **Dokümantasyon Formatı**: Tutarlı öğrenme odaklı yapı ile tüm dokümantasyon standartlaştırıldı
+- **Gezinme Akışı**: Tüm öğrenme materyallerinde mantıklı ilerleme uygulandı
+- **İçerik Sunumu**: Net ve profesyonel biçimlendirme lehine süsleyici öğeler kaldırıldı
+- **Bağlantı Yapısı**: Yeni gezinme sistemini desteklemek için tüm dahili bağlantılar güncellendi
 
-#### İyileştirildi
-- **Accessibility**: Ekran okuyucu uyumluluğunu artırmak için emoji bağımlılıkları kaldırıldı
-- **Professional Appearance**: Kurumsal öğrenme için uygun temiz, akademik tarzda sunum
-- **Learning Experience**: Her ders için net hedefler ve çıktılarla yapılandırılmış yaklaşım
-- **Content Organization**: İlişkili konular arasında daha iyi mantıksal akış ve bağlantı
+#### İyileştirilenler
+- **Erişilebilirlik**: Daha iyi ekran okuyucu uyumu için emoji bağımlılıkları kaldırıldı
+- **Profesyonel Görünüm**: Kurumsal öğrenmeye uygun temiz, akademik tarz sunum
+- **Öğrenme Deneyimi**: Her ders için net hedefler ve çıktılar içeren yapılandırılmış yaklaşım
+- **İçerik Organizasyonu**: İlgili konular arasındaki daha iyi mantıksal akış ve bağlantı
 
 ### [v1.0.0] - 2025-09-09
 
-#### İlk Sürüm - Kapsamlı AZD Öğrenme Deposu
+#### İlk Yayın - Kapsamlı AZD Öğrenme Deposu
 
-#### Eklendi
-- **Core Documentation Structure**
-  - Eksiksiz başlangıç kılavuzu serisi
-  - Kapsamlı dağıtım ve sağlayım dokümantasyonu
-  - Detaylı sorun giderme kaynakları ve hata ayıklama kılavuzları
-  - Ön dağıtım doğrulama araçları ve prosedürleri
+#### Eklenenler
+- **Temel Dokümantasyon Yapısı**
+  - Tam bir başlangıç kılavuz serisi
+  - Kapsamlı dağıtım ve hazırlık dokümantasyonu
+  - Ayrıntılı sorun giderme kaynakları ve hata ayıklama kılavuzları
+  - Dağıtımdan önce doğrulama araçları ve prosedürleri
 
-- **Getting Started Module**
+- **Başlangıç Modülü**
   - AZD Temelleri: Temel kavramlar ve terminoloji
   - Kurulum Kılavuzu: Platforma özel kurulum talimatları
   - Yapılandırma Kılavuzu: Ortam kurulumu ve kimlik doğrulama
   - İlk Proje Eğitimi: Adım adım uygulamalı öğrenme
 
-- **Deployment and Provisioning Module**
+- **Dağıtım ve Hazırlık Modülü**
   - Dağıtım Kılavuzu: Tam iş akışı dokümantasyonu
-  - Sağlayım Kılavuzu: Bicep ile Altyapı olarak Kod
+  - Hazırlık Kılavuzu: Bicep ile Altyapı Kod olarak
   - Üretim dağıtımları için en iyi uygulamalar
-  - Çok-servisli mimari desenleri
+  - Çok hizmetli mimari kalıplar
 
-- **Pre-deployment Validation Module**
-  - Kapasite Planlaması: Azure kaynak kullanılabilirliği doğrulama
-  - SKU Seçimi: Kapsamlı servis katmanı rehberliği
+- **Dağıtımdan Önce Doğrulama Modülü**
+  - Kapasite Planlaması: Azure kaynak kullanılabilirliği doğrulaması
+  - SKU Seçimi: Kapsamlı hizmet seviyesi rehberi
   - Uçuş Öncesi Kontroller: Otomatik doğrulama betikleri (PowerShell ve Bash)
   - Maliyet tahmini ve bütçe planlama araçları
 
-- **Troubleshooting Module**
+- **Sorun Giderme Modülü**
   - Yaygın Sorunlar: Sık karşılaşılan problemler ve çözümleri
   - Hata Ayıklama Kılavuzu: Sistematik sorun giderme metodolojileri
-  - Gelişmiş tanılama teknikleri ve araçlar
+  - İleri teşhis teknikleri ve araçları
   - Performans izleme ve optimizasyon
 
-- **Resources and References**
+- **Kaynaklar ve Referanslar**
   - Komut Hile Sayfası: Temel komutlar için hızlı başvuru
-  - Sözlük: Kapsamlı terim ve kısaltma tanımları
-  - SSS: Yaygın sorulara detaylı cevaplar
-  - Harici kaynak bağlantıları ve topluluk bağlantıları
+  - Terimler Sözlüğü: Kapsamlı terminoloji ve kısaltma açıklamaları
+  - SSS: Yaygın sorular için ayrıntılı cevaplar
+  - Dış kaynak bağlantıları ve topluluk bağlantıları
 
-- **Examples and Templates**
+- **Örnekler ve Şablonlar**
   - Basit Web Uygulaması örneği
   - Statik Web Sitesi dağıtım şablonu
   - Konteyner Uygulama yapılandırması
-  - Veritabanı entegrasyon desenleri
+  - Veritabanı entegrasyon kalıpları
   - Mikroservis mimarisi örnekleri
   - Sunucusuz fonksiyon uygulamaları
 
 #### Özellikler
-- **Multi-Platform Support**: Windows, macOS ve Linux için kurulum ve yapılandırma kılavuzları
-- **Multiple Skill Levels**: İçerik öğrencilerden profesyonel geliştiricilere kadar tasarlandı
-- **Practical Focus**: Uygulamalı örnekler ve gerçek dünya senaryoları
-- **Comprehensive Coverage**: Temel kavramlardan gelişmiş kurumsal desenlere kadar
-- **Security-First Approach**: Güvenlik en iyi uygulamaları her yerde entegre edildi
-- **Cost Optimization**: Maliyet-etkin dağıtımlar ve kaynak yönetimi için rehberlik
+- **Çok Platform Desteği**: Windows, macOS ve Linux için kurulum ve yapılandırma rehberleri
+- **Çeşitli Yetenek Seviyeleri**: Öğrencilerden profesyonel geliştiricilere kadar içerik tasarımı
+- **Pratik Odaklı**: Uygulamalı örnekler ve gerçek dünya senaryoları
+- **Kapsamlı Kapsama**: Temel kavramlardan ileri düzey kurumsal kalıplara kadar
+- **Güvenlik Öncelikli Yaklaşım**: Güvenlik en iyi uygulamaları entegrasyonu
+- **Maliyet Optimizasyonu**: Maliyet etkin dağıtım ve kaynak yönetimi rehberliği
 
 #### Dokümantasyon Kalitesi
-- **Detailed Code Examples**: Pratik, test edilmiş kod örnekleri
-- **Step-by-Step Instructions**: Net, uygulanabilir rehberlik
-- **Comprehensive Error Handling**: Yaygın sorunlar için sorun giderme
-- **Best Practices Integration**: Sektör standartları ve önerileri
-- **Version Compatibility**: En son Azure hizmetleri ve azd özellikleri ile güncel
+- **Detaylı Kod Örnekleri**: Uygulamalı, test edilmiş kod örnekleri
+- **Adım Adım Talimatlar**: Net, uygulanabilir rehberlik
+- **Kapsamlı Hata Yönetimi**: Yaygın sorunlar için sorun giderme
+- **En İyi Uygulamalar Entegrasyonu**: Endüstri standartları ve öneriler
+- **Sürüm Uyumluluğu**: En son Azure servisleri ve azd özellikleri ile uyumlu
 
-## Planlanmış Gelecek İyileştirmeler
+## Planlanan Gelecek Geliştirmeler
 
 ### Sürüm 3.1.0 (Planlandı)
 #### AI Platform Genişletmesi
-- **Multi-Model Support**: Hugging Face, Azure Machine Learning ve özel modeller için entegrasyon desenleri
-- **AI Agent Frameworks**: LangChain, Semantic Kernel ve AutoGen dağıtımları için şablonlar
-- **Advanced RAG Patterns**: Azure AI Search'in ötesinde vektör veritabanı seçenekleri (Pinecone, Weaviate vb.)
-- **AI Observability**: Model performansı, token kullanımı ve yanıt kalitesi için geliştirilmiş izleme
+- **Çoklu Model Desteği**: Hugging Face, Azure Machine Learning ve özel modeller için entegrasyon kalıpları
+- **AI Ajan Çerçeveleri**: LangChain, Semantic Kernel ve AutoGen dağıtımları için şablonlar
+- **Gelişmiş RAG Kalıpları**: Azure AI Search dışındaki vektör veritabanı seçenekleri (Pinecone, Weaviate, vb.)
+- **AI Gözlemlenebilirliği**: Model performansı, token kullanımı ve yanıt kalitesi için geliştirilmiş izleme
 
 #### Geliştirici Deneyimi
-- **VS Code Extension**: Entegre AZD + Microsoft Foundry geliştirme deneyimi
-- **GitHub Copilot Integration**: AI destekli AZD şablon oluşturma
-- **Interactive Tutorials**: AI senaryoları için otomatik doğrulamaya sahip uygulamalı kodlama alıştırmaları
-- **Video Content**: AI dağıtımlarına odaklanan görsel öğrenenler için ek video eğitimleri
+- **VS Code Uzantısı**: Entegre AZD + Microsoft Foundry geliştirme deneyimi
+- **GitHub Copilot Entegrasyonu**: AI destekli AZD şablon üretimi
+- **Etkileşimli Eğitimler**: AI senaryoları için otomatik doğrulamalı uygulamalı kodlama alıştırmaları
+- **Video İçerik**: AI dağıtımlarına odaklanan görsel öğrenenler için destekleyici video eğitimleri
 
 ### Sürüm 4.0.0 (Planlandı)
-#### Kurumsal AI Desenleri
-- **Governance Framework**: AI model yönetişimi, uyumluluk ve denetim izleri
-- **Multi-Tenant AI**: İzole AI hizmetleriyle birden fazla müşteriye hizmet verme desenleri
-- **Edge AI Deployment**: Azure IoT Edge ve konteyner örnekleriyle entegrasyon
-- **Hybrid Cloud AI**: AI iş yükleri için çoklu bulut ve hibrit dağıtım desenleri
+#### Kurumsal AI Kalıpları
+- **Yönetim Çerçevesi**: AI model yönetimi, uyumluluk ve denetim izleri
+- **Çok Kiracılı AI**: İzole AI hizmetleri ile birden çok müşteriye servis verme kalıpları
+- **Edge AI Dağıtımı**: Azure IoT Edge ve konteyner örnekleri ile entegrasyon
+- **Hibrit Bulut AI**: AI iş yükleri için çoklu bulut ve hibrit dağıtım kalıpları
 
 #### Gelişmiş Özellikler
-- **AI Pipeline Automation**: Azure Machine Learning boru hatları ile MLOps entegrasyonu
-- **Advanced Security**: Sıfır güven deseni, özel uç noktalar ve gelişmiş tehdit koruması
-- **Performance Optimization**: Yüksek verimli AI uygulamaları için gelişmiş ayarlama ve ölçeklendirme stratejileri
-- **Global Distribution**: AI uygulamaları için içerik teslimi ve kenar önbellekleme desenleri
+- **AI Boru Hattı Otomasyonu**: Azure Machine Learning boru hatları ile MLOps entegrasyonu
+- **Gelişmiş Güvenlik**: Sıfır güvensizlik kalıpları, özel uç noktalar ve ileri tehdit koruması
+- **Performans Optimizasyonu**: Yüksek verimlilikli AI uygulamaları için ileri ayar ve ölçeklendirme stratejileri
+- **Küresel Dağıtım**: AI uygulamaları için içerik teslimi ve uç önbellekleme kalıpları
 
-### Sürüm 3.0.0 (Planlandı) - Mevcut Sürüm Tarafından Geçersiz Kılındı
-#### Önerilen Eklemeler - Artık v3.0.0'te Uygulandı
-- ✅ **AI-Odaklı İçerik**: Kapsamlı Microsoft Foundry entegrasyonu (Tamamlandı)
+### Sürüm 3.0.0 (Planlandı) - Mevcut Sürümle Değiştirildi
+#### Önerilen Eklemeler - Şimdi v3.0.0'da Uygulandı
+- ✅ **AI Odaklı İçerik**: Kapsamlı Microsoft Foundry entegrasyonu (Tamamlandı)
 - ✅ **Etkileşimli Eğitimler**: Uygulamalı AI atölye laboratuvarı (Tamamlandı)
-- ✅ **Gelişmiş Güvenlik Modülü**: AI'ye özgü güvenlik desenleri (Tamamlandı)
-- ✅ **Performans Optimizasyonu**: AI iş yükü ayarlama stratejileri (Tamamlandı)
+- ✅ **Gelişmiş Güvenlik Modülü**: AI'ya özgü güvenlik kalıpları (Tamamlandı)
+- ✅ **Performans Optimizasyonu**: AI iş yükü ayar stratejileri (Tamamlandı)
 
-### Sürüm 2.1.0 (Planlandı) - kısmen v3.0.0'te Uygulandı
+### Sürüm 2.1.0 (Planlandı) - Bazı Kısımları v3.0.0'da Uygulandı
 #### Küçük İyileştirmeler - Bazıları Mevcut Sürümde Tamamlandı
 - ✅ **Ek Örnekler**: AI odaklı dağıtım senaryoları (Tamamlandı)
-- ✅ **Genişletilmiş SSS**: AI'ye özgü sorular ve sorun giderme (Tamamlandı)
-- **Tool Integration**: Geliştirilmiş IDE ve editör entegrasyon kılavuzları
-- ✅ **Monitoring Expansion**: AI'ye özgü izleme ve alarmlama desenleri (Tamamlandı)
+- ✅ **Genişletilmiş SSS**: AI'ya özel sorular ve sorun giderme (Tamamlandı)
+- **Araç Entegrasyonu**: Gelişmiş IDE ve editör entegrasyon rehberleri
+- ✅ **İzleme Genişletmesi**: AI'ya özgü izleme ve uyarı kalıpları (Tamamlandı)
 
-#### Gelecek Sürüm İçin Hâlâ Planlanmış
-- **Mobile-Friendly Documentation**: Mobil öğrenme için duyarlı tasarım
-- **Offline Access**: İndirilebilir dokümantasyon paketleri
-- **Enhanced IDE Integration**: AZD + AI iş akışları için VS Code uzantısı
-- **Community Dashboard**: Gerçek zamanlı topluluk metrikleri ve katkı izleme
+#### Gelecek Sürüm İçin Planlanmaya Devam Ediyor
+- **Mobil Dostu Dokümantasyon**: Mobil öğrenim için duyarlı tasarım
+- **Çevrimdışı Erişim**: İndirilebilir dokümantasyon paketleri
+- **Gelişmiş IDE Entegrasyonu**: AZD + AI iş akışları için VS Code uzantısı
+- **Topluluk Panosu**: Gerçek zamanlı topluluk ölçümleri ve katkı takibi
 
 ## Değişiklik Günlüğüne Katkıda Bulunma
 
-### Değişiklik Bildirme
-Bu depoya katkıda bulunurken, lütfen değişiklik günlüğü girdilerinin şunları içerdiğinden emin olun:
+### Değişiklik Bildirimi
+Bu depoya katkıda bulunurken, değişiklik günlüğü girdilerinin aşağıdaki bilgileri içermesini sağlayınız:
 
-1. **Sürüm Numarası**: Semantik versiyonlamayı takip ederek (major.minor.patch)
-2. **Tarih**: Yayın veya güncelleme tarihi YYYY-MM-DD formatında
-3. **Kategori**: Added, Changed, Deprecated, Removed, Fixed, Security
-4. **Açık Açıklama**: Yapılan değişikliğin özlü açıklaması
-5. **Etkisinin Değerlendirilmesi**: Değişikliklerin mevcut kullanıcıları nasıl etkilediği
+1. **Sürüm Numarası**: Semantik sürümleme (major.minor.patch) formatında
+2. **Tarih**: Yayın veya güncelleme tarihi (YYYY-AA-GG formatında)
+3. **Kategori**: Eklenen, Değiştirilen, Kullanımdan Kaldırılan, Kaldırılan, Düzeltildi, Güvenlik
+4. **Açık Tanım**: Nelerin değiştiğine dair kısa ve öz açıklama
+5. **Etkileşim Değerlendirmesi**: Değişikliklerin mevcut kullanıcıları nasıl etkilediği
 
 ### Değişiklik Kategorileri
 
-#### Eklendi
+#### Eklenenler
 - Yeni özellikler, dokümantasyon bölümleri veya yetenekler
 - Yeni örnekler, şablonlar veya öğrenme kaynakları
-- Ek araçlar, betikler veya yardımcı programlar
+- İlave araçlar, betikler veya yardımcı programlar
 
-#### Değiştirildi
-- Mevcut işlevsellik veya dokümantasyondaki değişiklikler
-- Netlik veya doğruluk artırmak için güncellemeler
+#### Değiştirilenler
+- Mevcut işlevsellik veya dokümantasyonda yapılan değişiklikler
+- Anlaşılırlığı veya doğruluğu artırmak için güncellemeler
 - İçerik veya organizasyonun yeniden yapılandırılması
 
-#### Kullanım Dışı Bırakıldı
-- Aşamalı olarak kaldırılan özellikler veya yaklaşımlar
-- Kaldırılma planlanan dokümantasyon bölümleri
+#### Kullanımdan Kaldırılanlar
+- Aşamalandırılarak kaldırılan özellikler veya yaklaşımlar
+- Kaldırılması planlanan dokümantasyon bölümleri
 - Daha iyi alternatifleri olan yöntemler
 
-#### Kaldırıldı
-- Artık ilgili olmayan özellikler, dokümantasyon veya örnekler
-- Eski bilgiler veya kullanım dışı bırakılan yaklaşımlar
-- Yinelenen veya birleştirilmiş içerik
+#### Kaldırılanlar
+- Artık geçerli olmayan özellikler, dokümantasyon veya örnekler
+- Güncel olmayan bilgiler veya kullanımdan kaldırılmış yaklaşımlar
+- Gereksiz veya konsolide edilmiş içerik
 
 #### Düzeltildi
-- Dokümantasyon veya koddaki hataların düzeltmeleri
-- Rapor edilen sorunların veya problemlerin çözümü
+- Dokümantasyon veya koddaki hataların düzeltilmesi
+- Bildirilen sorun veya problemlerin çözümü
 - Doğruluk veya işlevsellik iyileştirmeleri
+
 
 #### Güvenlik
 - Güvenlikle ilgili iyileştirmeler veya düzeltmeler
-- Güvenlik en iyi uygulamalarına güncellemeler
-- Güvenlik açıklarının giderilmesi
+- Güvenlik en iyi uygulamalarında güncellemeler
+- Güvenlik açıklarının çözümü
 
 ### Semantik Versiyonlama Rehberi
 
-#### Büyük Sürüm (X.0.0)
-- Kullanıcı müdahalesi gerektiren geriye dönük uyumsuz değişiklikler
-- İçerik veya organizasyonun önemli ölçüde yeniden yapılandırılması
+#### Ana Versiyon (X.0.0)
+- Kullanıcı müdahalesi gerektiren kırıcı değişiklikler
+- İçerik veya organizasyonun önemli derecede yeniden yapılandırılması
 - Temel yaklaşımı veya metodolojiyi değiştiren değişiklikler
 
-#### Küçük Sürüm (X.Y.0)
+#### Minor Versiyon (X.Y.0)
 - Yeni özellikler veya içerik eklemeleri
 - Geriye dönük uyumluluğu koruyan geliştirmeler
 - Ek örnekler, araçlar veya kaynaklar
 
-#### Yama Sürümü (X.Y.Z)
+#### Patch Versiyon (X.Y.Z)
 - Hata düzeltmeleri ve düzeltmeler
 - Mevcut içeriğe yapılan küçük iyileştirmeler
 - Açıklamalar ve küçük geliştirmeler
@@ -1210,61 +1259,61 @@ Bu depoya katkıda bulunurken, lütfen değişiklik günlüğü girdilerinin şu
 Bu öğrenme kaynağını geliştirmek için topluluk geri bildirimlerini aktif olarak teşvik ediyoruz:
 
 ### Geri Bildirim Nasıl Sağlanır
-- **GitHub Issues**: Sorunları bildirin veya iyileştirme önerin (AI'ye özgü sorunlar memnuniyetle karşılanır)
-- **Discord Discussions**: Fikirleri paylaşın ve Microsoft Foundry topluluğuyla etkileşime geçin
-- **Pull Requests**: İçeriğe doğrudan iyileştirmeler katkıda bulunun, özellikle AI şablonları ve kılavuzları
+- **GitHub Issues**: Sorunları bildirin veya iyileştirme önerin (AI özel sorunları da kabul edilir)
+- **Discord Tartışmaları**: Fikir paylaşın ve Microsoft Foundry topluluğu ile etkileşime geçin
+- **Pull Requestler**: İçeriğe doğrudan iyileştirmeler katkıda bulunun, özellikle AI şablonları ve rehberlerde
 - **Microsoft Foundry Discord**: AZD + AI tartışmaları için #Azure kanalına katılın
-- **Community Forums**: Daha geniş Azure geliştirici tartışmalarına katılın
+- **Topluluk Forumları**: Daha geniş Azure geliştirici tartışmalarına katılın
 
 ### Geri Bildirim Kategorileri
-- **AI Content Accuracy**: AI servis entegrasyonu ve dağıtım bilgilerine yönelik düzeltmeler
-- **Learning Experience**: İyileştirilmiş AI geliştirici öğrenme akışı için öneriler
-- **Missing AI Content**: Ek AI şablonları, desenler veya örnekler talepleri
-- **Accessibility**: Çeşitli öğrenme ihtiyaçları için iyileştirmeler
-- **AI Tool Integration**: Daha iyi AI geliştirme iş akışı entegrasyonu için öneriler
-- **Production AI Patterns**: Kurumsal AI dağıtım deseni talepleri
+- **AI İçerik Doğruluğu**: AI servis entegrasyonu ve dağıtımı bilgilerine düzeltmeler
+- **Öğrenme Deneyimi**: AI geliştirici öğrenme akışında gelişme önerileri
+- **Eksik AI İçeriği**: Ek AI şablonları, desenleri veya örnekleri talepleri
+- **Erişilebilirlik**: Çeşitli öğrenme ihtiyaçları için iyileştirmeler
+- **AI Araç Entegrasyonu**: Daha iyi AI geliştirme iş akışı entegrasyonu önerileri
+- **Prodüksiyon AI Desenleri**: Kurumsal AI dağıtım deseni talepleri
 
 ### Yanıt Taahhüdü
-- **Issue Response**: Bildirilen sorunlar için 48 saat içinde
-- **Feature Requests**: Bir hafta içinde değerlendirme
-- **Community Contributions**: Bir hafta içinde inceleme
-- **Security Issues**: Hızlandırılmış yanıt ile öncelikli işlem
+- **Sorun Yanıtı**: Rapor edilen problemler için 48 saat içerisinde yanıt
+- **Özellik Talepleri**: Bir hafta içinde değerlendirme
+- **Topluluk Katkıları**: Bir hafta içinde inceleme
+- **Güvenlik Sorunları**: Öncelikli ve hızlandırılmış yanıt
 
 ## Bakım Takvimi
 
 ### Düzenli Güncellemeler
-- **Monthly Reviews**: İçerik doğruluğu ve bağlantı doğrulaması
-- **Quarterly Updates**: Önemli içerik eklemeleri ve iyileştirmeler
-- **Semi-Annual Reviews**: Kapsamlı yeniden yapılandırma ve iyileştirmeler
-- **Annual Releases**: Önemli iyileştirmelerle büyük sürüm güncellemeleri
+- **Aylık İncelemeler**: İçerik doğruluğu ve link doğrulaması
+- **Üç Aylık Güncellemeler**: Büyük içerik eklemeleri ve iyileştirmeler
+- **Yarıyıl İncelemeleri**: Kapsamlı yeniden yapılandırma ve geliştirme
+- **Yıllık Yayınlar**: Önemli iyileştirmelerle ana versiyon güncellemeleri
 
 ### İzleme ve Kalite Güvencesi
-- **Automated Testing**: Kod örnekleri ve bağlantıların düzenli doğrulanması
-- **Community Feedback Integration**: Kullanıcı önerilerinin düzenli olarak dahil edilmesi
-- **Technology Updates**: En son Azure hizmetleri ve azd sürümleri ile uyum
-- **Accessibility Audits**: Kapsayıcı tasarım ilkeleri için düzenli inceleme
+- **Otomatik Testler**: Kod örnekleri ve bağlantıların düzenli doğrulanması
+- **Topluluk Geri Bildirim Entegrasyonu**: Kullanıcı önerilerinin düzenli dahil edilmesi
+- **Teknoloji Güncellemeleri**: En yeni Azure hizmetleri ve azd sürümleri ile uyum
+- **Erişilebilirlik Denetimleri**: Kapsayıcı tasarım prensipleri için düzenli inceleme
 
-## Sürüm Destek Politikası
+## Versiyon Destek Politikası
 
-### Mevcut Sürüm Desteği
-- **Latest Major Version**: Düzenli güncellemelerle tam destek
-- **Previous Major Version**: 12 ay boyunca güvenlik güncellemeleri ve kritik düzeltmeler
-- **Legacy Versions**: Yalnızca topluluk desteği, resmi güncelleme yok
+### Mevcut Versiyon Desteği
+- **En Son Ana Versiyon**: Düzenli güncellemelerle tam destek
+- **Önceki Ana Versiyon**: 12 ay boyunca güvenlik güncellemeleri ve kritik düzeltmeler
+- **Eski Versiyonlar**: Yalnızca topluluk desteği, resmi güncelleme yok
 
 ### Geçiş Rehberliği
-Büyük sürümler yayınlandığında, şunları sağlarız:
-- **Migration Guides**: Adım adım geçiş talimatları
-- **Compatibility Notes**: Geriye dönük uyumsuz değişikliklerle ilgili ayrıntılar
-- **Tool Support**: Geçişe yardımcı betikler veya yardımcı programlar
-- **Community Support**: Geçiş soruları için ayrılmış forumlar
+Ana versiyonlar yayımlandığında, aşağıdakiler sağlanır:
+- **Geçiş Kılavuzları**: Adım adım geçiş talimatları
+- **Uyumluluk Notları**: Kırıcı değişikliklerin detayları
+- **Araç Desteği**: Geçişe yardımcı olacak betikler veya yardımcı programlar
+- **Topluluk Desteği**: Geçiş soruları için özel forumlar
 
 ---
 
 **Gezinme**
-- **Önceki Ders**: [Çalışma Rehberi](resources/study-guide.md)
-- **Sonraki Ders**: [Ana README](README.md) sayfasına geri dön
+- **Önceki Ders**: [Çalışma Kılavuzu](resources/study-guide.md)
+- **Sonraki Ders**: [Ana README](README.md) dosyasına dön
 
-**Güncel Kalın**: Öğrenme materyallerine yönelik yeni sürümler ve önemli güncellemeler hakkında bildirimler için bu depoyu izleyin.
+**Güncel Kalın**: Bu depoyu, yeni sürümler ve öğrenme materyalleri için önemli güncellemeler hakkında bildirim alabilmek için izleyin.
 
 ---
 

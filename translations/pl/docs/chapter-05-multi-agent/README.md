@@ -1,22 +1,22 @@
-# Rozdział 5: Rozwiązania AI z wieloma agentami
+# Rozdział 5: Wieloagentowe rozwiązania AI
 
-**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 2-3 godziny | **⭐ Skomplikowanie**: Zaawansowany
+**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 2-3 godziny | **⭐ Poziom trudności**: Zaawansowany
 
 ---
 
 ## Przegląd
 
-Ten rozdział obejmuje zaawansowane wzorce architektury z wieloma agentami, orkiestrację agentów oraz wdrożenia AI gotowe do produkcji dla złożonych scenariuszy.
+Ten rozdział omawia zaawansowane wzorce architektury wieloagentowej, koordynację agentów oraz wdrożenia AI gotowe do produkcji w złożonych scenariuszach.
 
-> Walidowane w wersji `azd 1.25.6` w czerwcu 2026.
+> Zweryfikowano z `azd 1.27.1` w lipcu 2026.
 
 ## Cele nauki
 
-Po ukończeniu tego rozdziału będziesz:
-- Rozumieć wzorce architektury z wieloma agentami
+Po ukończeniu tego rozdziału będziesz potrafił:
+- Zrozumieć wzorce architektury wieloagentowej
 - Wdrażać skoordynowane systemy agentów AI
 - Implementować komunikację między agentami
-- Budować gotowe do produkcji rozwiązania z wieloma agentami
+- Budować rozwiązania wieloagentowe gotowe do produkcji
 
 ---
 
@@ -24,11 +24,11 @@ Po ukończeniu tego rozdziału będziesz:
 
 | # | Lekcja | Opis | Czas |
 |---|--------|-------------|------|
-| 1 | [Podstawy wieloagentowe](multi-agent-basics.md) | Praktycznie: wdrożenie działającej aplikacji z wieloma agentami przy użyciu `azd up` | 45 min |
+| 1 | [Podstawy wieloagentowości](multi-agent-basics.md) | Praktyczne: wdrożenie działającej aplikacji wieloagentowej za pomocą `azd up` | 45 min |
 | 2 | [Wzorce koordynacji](../chapter-06-pre-deployment/coordination-patterns.md) | Strategie orkiestracji agentów (kontynuacja w Rozdziale 6) | 30 min |
 | 3 | [Wdrożenie szablonu ARM](../../examples/retail-multiagent-arm-template/README.md) | Przykład wdrożenia jednym kliknięciem | 30 min |
 
-> **Zacznij od Lekcji 1.** To jedyna w pełni praktyczna i wdrażalna lekcja w tym rozdziale. Lekcja 2 znajduje się w Rozdziale 6 (jest dzielona z planowaniem przedwdrożeniowym), a [Rozwiązanie wieloagentowe dla handlu detalicznego](../../examples/retail-scenario.md) to szablon architektury — wzór projektowy, a nie wzór do uruchamiania jednym poleceniem.
+> **Zacznij od Lekcji 1.** To jedyna w pełni praktyczna lekcja, którą można wdrożyć w tym rozdziale. Lekcja 2 znajduje się w Rozdziale 6 (jest współdzielona z planowaniem przedwdrożeniowym), a [Rozwiązanie wieloagentowe dla handlu detalicznego](../../examples/retail-scenario.md) to szablon architektury — odniesienie projektowe, a nie szablon do wykonania jednym poleceniem.
 
 ---
 
@@ -45,7 +45,7 @@ azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **Które podejście?** Użyj `azd init --template`, aby zacząć od działającego przykładu. Użyj `azd ai agent init`, gdy masz własny manifest agenta. Zobacz [referencję AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) po pełne szczegóły.
+> **Które podejście?** Użyj `azd init --template`, aby zacząć od działającego przykładu. Użyj `azd ai agent init`, gdy posiadasz własny manifest agenta. Zobacz [referencję AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) dla pełnych szczegółów.
 
 ---
 
@@ -53,29 +53,29 @@ azd up
 
 ```mermaid
 graph TD
-    Orchestrator[Agent Orkiestratora<br/>Kieruje zapytaniami, zarządza przepływem pracy] --> Customer[Agent Klienta<br/>Zapytania użytkownika, preferencje]
-    Orchestrator --> Inventory[Agent Inwentaryzacji<br/>Poziomy zapasów, zamówienia]
+    Orchestrator[Agent Orkiestratora<br/>Kieruje żądaniami, zarządza przepływem pracy] --> Customer[Agent Klienta<br/>Zapytania użytkownika, preferencje]
+    Orchestrator --> Inventory[Agent Zapasu<br/>Poziomy zapasów, zamówienia]
 ```
 
 ---
 
-## 🎯 Prezentowane rozwiązanie: Retail Multi-Agent
+## 🎯 Wyróżnione rozwiązanie: wieloagentowy system dla handlu detalicznego
 
-[Retail Multi-Agent Solution](../../examples/retail-scenario.md) demonstruje:
+[Rozwiązanie wieloagentowe dla handlu detalicznego](../../examples/retail-scenario.md) demonstruje:
 
-- **Agent klienta**: Obsługuje interakcje z użytkownikiem i preferencje
-- **Agent zapasów**: Zarządza stanem magazynowym i przetwarzaniem zamówień
+- **Agent klienta**: Obsługuje interakcje z użytkownikiem i jego preferencje
+- **Agent zapasów**: Zarządza stanem magazynowym i obsługą zamówień
 - **Orkiestrator**: Koordynuje działania między agentami
-- **Wspólna pamięć**: Zarządzanie kontekstem między agentami
+- **Wspólna pamięć**: Zarządzanie kontekstem pomiędzy agentami
 
-### Wykorzystane usługi
+### Używane usługi
 
-| Usługa | Przeznaczenie |
+| Usługa | Cel |
 |---------|---------|
 | Microsoft Foundry Models | Rozumienie języka |
 | Azure AI Search | Katalog produktów |
-| Cosmos DB | Stan i pamięć agentów |
-| Container Apps | Hosting agentów |
+| Cosmos DB | Stan i pamięć agenta |
+| Container Apps | Hosting agenta |
 | Application Insights | Monitorowanie |
 
 ---

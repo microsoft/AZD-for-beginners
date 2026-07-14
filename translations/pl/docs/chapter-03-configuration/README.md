@@ -1,22 +1,22 @@
 # Rozdział 3: Konfiguracja i uwierzytelnianie
 
-**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 45-60 minut | **⭐ Poziom**: Średniozaawansowany
+**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 45-60 minut | **⭐ Poziom trudności**: Średniozaawansowany
 
 ---
 
 ## Przegląd
 
-Ten rozdział omawia konfigurację środowiska, wzorce uwierzytelniania oraz najlepsze praktyki bezpieczeństwa dla wdrożeń Azure Developer CLI.
+Ten rozdział obejmuje konfigurację środowiska, wzorce uwierzytelniania oraz najlepsze praktyki bezpieczeństwa dla wdrożeń Azure Developer CLI.
 
-> Weryfikowano z `azd 1.25.6` w czerwcu 2026.
+> Zweryfikowano z `azd 1.27.1` w lipcu 2026.
 
 ## Cele nauki
 
-Po ukończeniu tego rozdziału będziesz potrafił:
-- Opanować hierarchię konfiguracji AZD
-- Zarządzać wieloma środowiskami (dev, staging, prod)
-- Wdrażać bezpieczne uwierzytelnianie za pomocą zarządzanych tożsamości
-- Konfigurować ustawienia specyficzne dla środowiska
+Po ukończeniu tego rozdziału:
+- Opanujesz hierarchię konfiguracji AZD
+- Zarządzisz wieloma środowiskami (dev, staging, prod)
+- Wdrożysz bezpieczne uwierzytelnianie za pomocą zarządzanych tożsamości
+- Skonfigurujesz ustawienia specyficzne dla środowiska
 
 ---
 
@@ -44,7 +44,7 @@ azd env select prod
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Zobacz konfigurację
+# Wyświetl konfigurację
 azd env get-values
 ```
 
@@ -52,9 +52,9 @@ azd env get-values
 
 ## 🔧 Hierarchia konfiguracji
 
-AZD stosuje ustawienia w kolejności (późniejsze nadpisują wcześniejsze):
+AZD stosuje ustawienia w tej kolejności (późniejsze nadpisują wcześniejsze):
 
-1. **Wartości domyślne** (wbudowane w szablony)
+1. **Domyślne wartości** (wbudowane w szablony)
 2. **azure.yaml** (konfiguracja projektu)
 3. **Zmienne środowiskowe** (`azd env set`)
 4. **Flagi wiersza poleceń** (`--location eastus`)
@@ -64,7 +64,7 @@ AZD stosuje ustawienia w kolejności (późniejsze nadpisują wcześniejsze):
 ## 🔐 Najlepsze praktyki bezpieczeństwa
 
 ```bash
-# Użyj tożsamości zarządzanej (zalecane)
+# Użyj zarządzanej tożsamości (zalecane)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
 # Sprawdź status uwierzytelniania AZD
@@ -73,7 +73,7 @@ azd auth status
 # Opcjonalnie: zweryfikuj kontekst Azure CLI, jeśli planujesz uruchamiać polecenia az
 az account show
 
-# Ponownie się uwierzytelnij, jeśli to konieczne
+# Ponownie się uwierzytelnij w razie potrzeby
 azd auth login
 
 # Opcjonalnie: odśwież uwierzytelnianie Azure CLI dla poleceń az

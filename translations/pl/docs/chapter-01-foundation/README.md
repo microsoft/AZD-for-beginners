@@ -1,22 +1,22 @@
-# Chapter 1: Foundation & Quick Start
+# Rozdział 1: Podstawy i szybki start
 
-**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 30-45 minut | **⭐ Poziom trudności**: Początkujący
+**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 30-45 minut | **⭐ Poziom**: Początkujący
 
 ---
 
 ## Przegląd
 
-Ten rozdział wprowadza podstawy Azure Developer CLI (azd). Nauczysz się kluczowych koncepcji, zainstalujesz narzędzia oraz wdrożysz swoją pierwszą aplikację na Azure.
+Ten rozdział wprowadza podstawy Azure Developer CLI (azd). Nauczysz się podstawowych pojęć, zainstalujesz narzędzia i wdrożysz swoją pierwszą aplikację do Azure.
 
-> Sprawdzono z `azd 1.25.6` w czerwcu 2026.
+> Potwierdzono na `azd 1.27.1` w lipcu 2026.
 
 ## Cele nauki
 
 Po ukończeniu tego rozdziału będziesz:
 - Rozumieć, czym jest Azure Developer CLI i jak różni się od Azure CLI
 - Instalować i konfigurować AZD na swojej platformie
-- Wdrażać swoją pierwszą aplikację na Azure za pomocą `azd up`
-- Usuwać zasoby za pomocą `azd down`
+- Wdrażać swoją pierwszą aplikację do Azure za pomocą `azd up`
+- Sprzątać zasoby za pomocą `azd down`
 
 ---
 
@@ -24,17 +24,17 @@ Po ukończeniu tego rozdziału będziesz:
 
 | # | Lekcja | Opis | Czas |
 |---|--------|-------------|------|
-| 1 | [Podstawy AZD](azd-basics.md) | Kluczowe koncepcje, terminologia i struktura projektu | 15 min |
-| 2 | [Instalacja i konfiguracja](installation.md) | Poradniki instalacji specyficzne dla platformy | 10 min |
-| 3 | [Twój pierwszy projekt](first-project.md) | Praktyczne ćwiczenie: wdrażanie aplikacji internetowej na Azure | 20 min |
-| 4 | [Przynieś swoją aplikację](bring-your-own-app.md) | Dodaj azd do istniejącego projektu, który już masz | 15 min |
-| 5 | [Kontenery deweloperskie i Codespaces](dev-containers.md) | Powtarzalne środowiska azd z kontenerami deweloperskimi | 15 min |
+| 1 | [Podstawy AZD](azd-basics.md) | Podstawowe pojęcia, terminologia i struktura projektu | 15 min |
+| 2 | [Instalacja i konfiguracja](installation.md) | Przewodniki instalacji specyficzne dla platformy | 10 min |
+| 3 | [Twój pierwszy projekt](first-project.md) | Praktycznie: wdrożenie aplikacji webowej do Azure | 20 min |
+| 4 | [Dodaj swoją aplikację](bring-your-own-app.md) | Dodaj azd do istniejącego projektu, który już masz | 15 min |
+| 5 | [Dev Containers i Codespaces](dev-containers.md) | Powtarzalne środowiska azd z dev containers | 15 min |
 
 ---
 
-## ✅ Zacznij tutaj: sprawdź swoje środowisko
+## ✅ Zacznij tutaj: Sprawdź swoje środowisko
 
-Zanim zaczniesz, potwierdź, że twoja lokalna maszyna jest gotowa do pracy z szablonem Rozdziału 1:
+Zanim zaczniesz, potwierdź, że Twoja lokalna maszyna jest gotowa dla szablonu z Rozdziału 1:
 
 **Windows:**
 ```powershell
@@ -46,7 +46,7 @@ Zanim zaczniesz, potwierdź, że twoja lokalna maszyna jest gotowa do pracy z sz
 bash ./validate-setup.sh
 ```
 
-Jeśli skrypt zgłasza brakujące narzędzia, najpierw je zainstaluj, a potem kontynuuj rozdział.
+Jeśli skrypt zgłasza brakujące narzędzia, najpierw je zainstaluj, a następnie kontynuuj rozdział.
 
 ---
 
@@ -57,14 +57,14 @@ Jeśli skrypt zgłasza brakujące narzędzia, najpierw je zainstaluj, a potem ko
 azd version
 
 # Uwierzytelnij się dla AZD
-# Opcjonalnie: az login, jeśli planujesz uruchamiać polecenia Azure CLI bezpośrednio
+# Opcjonalnie: az login, jeśli planujesz bezpośrednio uruchamiać polecenia Azure CLI
 azd auth login
 
 # Wdróż swoją pierwszą aplikację
 azd init --template todo-nodejs-mongo
 azd up
 
-# Posprzątaj po zakończeniu
+# Posprzątaj po zakończeniu pracy
 azd down --force --purge
 ```
 
@@ -79,7 +79,7 @@ azd version              # Pokazuje zainstalowaną wersję
 azd init --template todo-nodejs-mongo  # Inicjalizuje projekt
 azd up                   # Wdraża do Azure
 azd show                 # Wyświetla URL działającej aplikacji
-azd down --force --purge # Sprząta zasoby
+azd down --force --purge # Czyści zasoby
 ```
 
 ---
@@ -88,16 +88,16 @@ azd down --force --purge # Sprząta zasoby
 
 | Kierunek | Rozdział |
 |-----------|---------|
-| **Następny** | [Rozdział 2: Rozwój zorientowany na AI](../chapter-02-ai-development/README.md) |
+| **Następny** | [Rozdział 2: AI-Pierwszy rozwój](../chapter-02-ai-development/README.md) |
 | **Przejdź do** | [Rozdział 3: Konfiguracja](../chapter-03-configuration/README.md) |
 
 ---
 
 ## 📖 Powiązane zasoby
 
-- [Skróty poleceń](../../resources/cheat-sheet.md)
+- [Polecenia – ściągawka](../../resources/cheat-sheet.md)
 - [FAQ](../../resources/faq.md)
-- [Słownik pojęć](../../resources/glossary.md)
+- [Słownik terminów](../../resources/glossary.md)
 
 ---
 

@@ -1,22 +1,22 @@
-# Bölüm 1: Temel ve Hızlı Başlangıç
+# Bölüm 1: Temeller & Hızlı Başlangıç
 
-**📚 Kurs**: [AZD Yeni Başlayanlar](../../README.md) | **⏱️ Süre**: 30-45 dakika | **⭐ Zorluk**: Başlangıç
+**📚 Kurs**: [Yeni Başlayanlar için AZD](../../README.md) | **⏱️ Süre**: 30-45 dakika | **⭐ Zorluk**: Başlangıç
 
 ---
 
 ## Genel Bakış
 
-Bu bölüm Azure Developer CLI (azd) temellerini tanıtır. Temel kavramları öğrenecek, araçları yükleyecek ve ilk uygulamanızı Azure'a dağıtacaksınız.
+Bu bölüm Azure Developer CLI (azd) temel bilgilerini tanıtır. Temel kavramları öğrenecek, araçları kuracak ve ilk uygulamanızı Azure'a dağıtacaksınız.
 
-> Haziran 2026'da `azd 1.25.6` ile doğrulanmıştır.
+> Temmuz 2026'da `azd 1.27.1` sürümü ile doğrulanmıştır.
 
 ## Öğrenme Hedefleri
 
-Bu bölümü tamamladıktan sonra şunları yapabileceksiniz:
-- Azure Developer CLI'nin ne olduğunu ve Azure CLI'den nasıl farklı olduğunu anlayın
-- Platformunuzda AZD'yi yükleyin ve yapılandırın
-- `azd up` ile ilk uygulamanızı Azure'a dağıtın
-- `azd down` ile kaynakları temizleyin
+Bu bölümü tamamladığınızda:
+- Azure Developer CLI'nın ne olduğunu ve Azure CLI'dan nasıl farklılaştığını anlayacaksınız
+- Platformunuza AZD'yi kurup yapılandıracaksınız
+- `azd up` ile ilk uygulamanızı Azure'a dağıtacaksınız
+- `azd down` komutuyla kaynakları temizleyeceksiniz
 
 ---
 
@@ -24,17 +24,17 @@ Bu bölümü tamamladıktan sonra şunları yapabileceksiniz:
 
 | # | Ders | Açıklama | Süre |
 |---|--------|-------------|------|
-| 1 | [AZD Temelleri](azd-basics.md) | Temel kavramlar, terminoloji ve proje yapısı | 15 dk |
-| 2 | [Yükleme ve Kurulum](installation.md) | Platforma özel kurulum rehberleri | 10 dk |
-| 3 | [İlk Projeniz](first-project.md) | Uygulamalı: Bir web uygulamasını Azure'a dağıtın | 20 dk |
-| 4 | [Kendi Uygulamanızı Getirme](bring-your-own-app.md) | Zaten sahip olduğunuz mevcut bir projeye azd ekleyin | 15 dk |
-| 5 | [Geliştirici Konteynerleri ve Codespaces](dev-containers.md) | Dev konteynerleri ile tekrarlanabilir azd ortamları | 15 dk |
+| 1 | [AZD Temelleri](azd-basics.md) | Temel kavramlar, terimler ve proje yapısı | 15 dk |
+| 2 | [Kurulum & Ayar](installation.md) | Platforma özel kurulum rehberleri | 10 dk |
+| 3 | [İlk Projeniz](first-project.md) | Pratik: Bir web uygulamasını Azure'a dağıtın | 20 dk |
+| 4 | [Kendi Uygulamanızı Getirin](bring-your-own-app.md) | Sahip olduğunuz mevcut projeye azd ekleyin | 15 dk |
+| 5 | [Geliştirici Konteynerleri & Codespaces](dev-containers.md) | Geliştirici konteynerleri ile tekrarlanabilir azd ortamları | 15 dk |
 
 ---
 
 ## ✅ Buradan Başlayın: Kurulumunuzu Doğrulayın
 
-Başlamadan önce, yerel makinenizin Bölüm 1 şablonu için hazır olduğunu doğrulayın:
+Başlamadan önce, yerel bilgisayarınızın Bölüm 1 şablonu için hazır olduğunu doğrulayın:
 
 **Windows:**
 ```powershell
@@ -46,7 +46,7 @@ Başlamadan önce, yerel makinenizin Bölüm 1 şablonu için hazır olduğunu d
 bash ./validate-setup.sh
 ```
 
-If the script reports missing tools, fix those first and then continue with the chapter.
+Eğer betik eksik araçlar bildiriyorsa, önce onları düzeltin, sonra bölüme devam edin.
 
 ---
 
@@ -57,14 +57,14 @@ If the script reports missing tools, fix those first and then continue with the 
 azd version
 
 # AZD için kimlik doğrulaması yap
-# İsteğe bağlı: Azure CLI komutlarını doğrudan çalıştırmayı planlıyorsanız 'az login'
+# İsteğe bağlı: Azure CLI komutlarını doğrudan çalıştırmayı planlıyorsanız az login yapın
 azd auth login
 
 # İlk uygulamanızı dağıtın
 azd init --template todo-nodejs-mongo
 azd up
 
-# İşiniz bittiğinde temizleyin
+# İşiniz bittiğinde temizlik yapın
 azd down --force --purge
 ```
 
@@ -72,13 +72,13 @@ azd down --force --purge
 
 ## ✅ Başarı Kriterleri
 
-Bu bölümü tamamladıktan sonra şunları yapabilmelisiniz:
+Bu bölümü tamamladıktan sonra yapabilmelisiniz:
 
 ```bash
-azd version              # Yüklü sürümü gösterir
+azd version              # Yüklenen sürümü gösterir
 azd init --template todo-nodejs-mongo  # Projeyi başlatır
 azd up                   # Azure'a dağıtır
-azd show                 # Çalışan uygulamanın URL'sini gösterir
+azd show                 # Çalışan uygulama URL'sini gösterir
 azd down --force --purge # Kaynakları temizler
 ```
 
@@ -88,16 +88,16 @@ azd down --force --purge # Kaynakları temizler
 
 | Yön | Bölüm |
 |-----------|---------|
-| **Sonraki** | [Bölüm 2: Yapay Zeka Odaklı Geliştirme](../chapter-02-ai-development/README.md) |
+| **Sonraki** | [Bölüm 2: Yapay Zeka Öncelikli Geliştirme](../chapter-02-ai-development/README.md) |
 | **Atla** | [Bölüm 3: Yapılandırma](../chapter-03-configuration/README.md) |
 
 ---
 
 ## 📖 İlgili Kaynaklar
 
-- [Komut Hızlı Başvuru](../../resources/cheat-sheet.md)
+- [Komut Hile Sayfası](../../resources/cheat-sheet.md)
 - [SSS](../../resources/faq.md)
-- [Terimler Sözlüğü](../../resources/glossary.md)
+- [Sözlük](../../resources/glossary.md)
 
 ---
 

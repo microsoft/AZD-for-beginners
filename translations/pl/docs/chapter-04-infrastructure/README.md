@@ -1,22 +1,22 @@
-# Rozdział 4: Infrastruktura jako Kod i Wdrożenie
+# Rozdział 4: Infrastruktura jako Kod & Wdrażanie
 
-**📚 Kurs**: [AZD dla Początkujących](../../README.md) | **⏱️ Czas trwania**: 1-1.5 godziny | **⭐ Poziom trudności**: Średniozaawansowany
+**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 1-1,5 godziny | **⭐ Poziom trudności**: Średniozaawansowany
 
 ---
 
 ## Przegląd
 
-Ten rozdział obejmuje wzorce Infrastruktury jako Kod (IaC) z wykorzystaniem szablonów Bicep, provisionowanie zasobów oraz strategie wdrożeń przy użyciu Azure Developer CLI.
+Ten rozdział obejmuje wzorce Infrastructure as Code (IaC) z użyciem szablonów Bicep, provisionowanie zasobów oraz strategie wdrażania z użyciem Azure Developer CLI.
 
-> Weryfikowano na `azd 1.25.6` w czerwcu 2026.
+> Potwierdzone z `azd 1.27.1` w lipcu 2026.
 
 ## Cele nauki
 
-Po ukończeniu tego rozdziału będziesz potrafił:
-- Zrozumieć strukturę i składnię szablonów Bicep
+Po ukończeniu tego rozdziału będziesz:
+- Rozumieć strukturę i składnię szablonów Bicep
 - Provisionować zasoby Azure za pomocą `azd provision`
-- Wdrażać aplikacje za pomocą `azd deploy`
-- Implementować strategie wdrożeń blue-green i rolling
+- Wdrażać aplikacje z `azd deploy`
+- Wdrażać strategie blue-green i rolling deployment
 
 ---
 
@@ -24,25 +24,25 @@ Po ukończeniu tego rozdziału będziesz potrafił:
 
 | # | Lekcja | Opis | Czas |
 |---|--------|-------------|------|
-| 1 | [Provisionowanie zasobów](provisioning.md) | Zarządzanie zasobami Azure z AZD | 45 min |
-| 2 | [Przewodnik wdrożeń](deployment-guide.md) | Strategie wdrożeń aplikacji | 45 min |
-| 3 | [Tworzenie własnego szablonu](custom-templates.md) | Budowanie i publikowanie wielokrotnego użytku szablonów azd | 30 min |
+| 1 | [Provisionowanie zasobów](provisioning.md) | Zarządzanie zasobami Azure za pomocą AZD | 45 min |
+| 2 | [Przewodnik po wdrażaniu](deployment-guide.md) | Strategie wdrażania aplikacji | 45 min |
+| 3 | [Tworzenie własnego szablonu](custom-templates.md) | Budowa i publikacja wielokrotnego użytku szablonów azd | 30 min |
 
 ---
 
 ## 🚀 Szybki start
 
 ```bash
-# Zainicjuj z szablonu
+# Inicjalizuj z szablonu
 azd init --template azure-functions-python-v2-http
 
-# Podejrzyj, co zostanie utworzone
+# Podgląd tego, co zostanie utworzone
 azd provision --preview
 
-# Wdroż tylko infrastrukturę
+# Udostępnij tylko infrastrukturę
 azd provision
 
-# Wdroż tylko kod
+# Wdróż tylko kod
 azd deploy
 
 # Lub oba razem
@@ -76,7 +76,7 @@ my-project/
 | `azd provision` | Tworzenie zasobów Azure |
 | `azd deploy` | Wdrażanie kodu aplikacji |
 | `azd up` | provision + deploy |
-| `azd down` | Usunięcie wszystkich zasobów |
+| `azd down` | Usuwanie wszystkich zasobów |
 
 ---
 

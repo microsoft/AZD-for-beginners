@@ -7,15 +7,15 @@
 - **➡️ Następny**: [Warsztaty AI](ai-workshop-lab.md)
 - **🚀 Następny rozdział**: [Rozdział 3: Konfiguracja](../chapter-03-configuration/configuration.md)
 
-Ten przewodnik zawiera kompleksowe instrukcje dotyczące wdrażania modeli AI za pomocą szablonów AZD, obejmujące wszystko od wyboru modelu po wzorce wdrożeń produkcyjnych.
+Ten poradnik zawiera szczegółowe instrukcje dotyczące wdrażania modeli AI przy użyciu szablonów AZD, obejmujące wszystko od wyboru modelu po wzorce wdrożenia produkcyjnego.
 
-> **Uwaga o walidacji (2026-03-25):** Przepływ pracy AZD w tym przewodniku został sprawdzony z `azd` w wersji `1.23.12`. Dla wdrożeń AI zajmujących więcej czasu niż domyślne okno wdrożenia usługi, aktualne wydania AZD obsługują `azd deploy --timeout <seconds>`.
+> **Uwaga weryfikacyjna (2026-07-13):** Przepływ pracy AZD w tym przewodniku został sprawdzony dla `azd` `1.27.1`. W przypadku wdrożeń AI trwających dłużej niż domyślne okno wdrożenia usługi, obecne wersje AZD obsługują `azd deploy --timeout <seconds>`.
 
 ## Spis treści
 
 - [Strategia wyboru modelu](#strategia-wyboru-modelu)
 - [Konfiguracja AZD dla modeli AI](#konfiguracja-azd-dla-modeli-ai)
-- [Wzorce wdrożeń](#wzorce-wdrożeń)
+- [Wzorce wdrożenia](#wzorce-wdrożenia)
 - [Zarządzanie modelem](#zarządzanie-modelem)
 - [Aspekty produkcyjne](#aspekty-produkcyjne)
 - [Monitorowanie i obserwowalność](#monitorowanie-i-obserwowalność)
@@ -24,7 +24,7 @@ Ten przewodnik zawiera kompleksowe instrukcje dotyczące wdrażania modeli AI za
 
 ### Modele Microsoft Foundry
 
-Wybierz odpowiedni model do swojego przypadku użycia:
+Wybierz odpowiedni model dla swojego zastosowania:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -54,12 +54,12 @@ services:
 
 ### Planowanie pojemności modelu
 
-| Typ modelu | Przypadek użycia | Zalecana pojemność | Uwagi dotyczące kosztów |
-|------------|------------------|--------------------|------------------------|
-| gpt-4.1-mini | Czat, pytania i odpowiedzi | 10-50 TPM | Ekonomiczne dla większości obciążeń |
-| gpt-4.1 | Złożone wnioskowanie | 20-100 TPM | Wyższy koszt, stosuj dla funkcji premium |
-| text-embedding-3-large | Wyszukiwanie, RAG | 30-120 TPM | Dobry domyślny wybór do semantycznego wyszukiwania i pobierania |
-| Whisper | Mowa na tekst | 10-50 TPM | Obciążenia przetwarzania audio |
+| Typ modelu | Zastosowanie | Zalecana pojemność | Uwagi dotyczące kosztów |
+|------------|-------------|--------------------|-------------------------|
+| gpt-4.1-mini | Czat, pytania i odpowiedzi | 10-50 TPM | Opłacalne dla większości obciążeń |
+| gpt-4.1 | Złożone wnioskowanie | 20-100 TPM | Wyższy koszt, używać do funkcji premium |
+| text-embedding-3-large | Wyszukiwanie, RAG | 30-120 TPM | Silny domyślny wybór dla wyszukiwania i pobierania semantycznego |
+| Whisper | Mowa na tekst | 10-50 TPM | Obciążenia związane z przetwarzaniem audio |
 
 ## Konfiguracja AZD dla modeli AI
 
@@ -126,7 +126,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### Zmienne środowiskowe
 
-Skonfiguruj środowisko aplikacji:
+Skonfiguruj środowisko swojej aplikacji:
 
 ```bash
 # konfiguracja .env
@@ -136,7 +136,7 @@ AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## Wzorce wdrożeń
+## Wzorce wdrożenia
 
 ### Wzorzec 1: Wdrożenie w jednym regionie
 
@@ -151,8 +151,8 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-Najlepsze dla:
-- Rozwoju i testowania
+Najlepszy dla:
+- Rozwoju i testów
 - Aplikacji na pojedynczym rynku
 - Optymalizacji kosztów
 
@@ -169,10 +169,10 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Najlepsze dla:
+Najlepszy dla:
 - Aplikacji globalnych
-- Wysokiej dostępności
-- Rozkładu obciążenia
+- Wymagań wysokiej dostępności
+- Równomiernego rozkładu obciążenia
 
 ### Wzorzec 3: Wdrożenie hybrydowe
 
@@ -227,9 +227,9 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-### Aktualizacje modelu
+### Aktualizacje modeli
 
-Używaj hooków AZD do aktualizacji modeli:
+Używaj haków AZD do aktualizacji modeli:
 
 ```bash
 #!/bin/bash
@@ -241,7 +241,7 @@ az cognitiveservices account list-models \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
 
-# Jeśli wdrożenie trwa dłużej niż domyślny limit czasu
+# Jeśli wdrożenie zajmuje więcej czasu niż domyślny limit czasu
 azd deploy --timeout 1800
 ```
 
@@ -273,7 +273,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 
 ### Planowanie pojemności
 
-Oblicz wymaganą pojemność na podstawie wzorców użycia:
+Oblicz wymaganą pojemność na podstawie wzorców użytkowania:
 
 ```python
 # Przykład obliczania pojemności
@@ -300,7 +300,7 @@ print(f"Required capacity: {required_capacity} TPM")
 
 ### Konfiguracja autoskalowania
 
-Skonfiguruj autoskalowanie dla aplikacji kontenerowych:
+Skonfiguruj autoskalowanie dla Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -338,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Optymalizacja kosztów
 
-Wprowadzaj kontrole kosztów:
+Wdróż kontrolę kosztów:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -370,9 +370,9 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ## Monitorowanie i obserwowalność
 
-### Integracja Application Insights
+### Integracja z Application Insights
 
-Skonfiguruj monitorowanie dla obciążeń AI:
+Skonfiguruj monitorowanie obciążeń AI:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -408,9 +408,9 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### Metryki niestandardowe
+### Własne metryki
 
-Śledź metryki specyficzne dla AI:
+Śledź specyficzne metryki AI:
 
 ```python
 # Niestandardowa telemetria dla modeli AI
@@ -447,10 +447,10 @@ class AITelemetry:
 
 ### Kontrole stanu zdrowia
 
-Wdróż monitorowanie kondycji usług AI:
+Wdróż monitorowanie stanu zdrowia usług AI:
 
 ```python
-# Punkty końcowe do sprawdzania stanu zdrowia
+# Punkty końcowe sprawdzania stanu zdrowia
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -478,16 +478,16 @@ async def check_ai_models():
 
 ## Kolejne kroki
 
-1. **Przejrzyj [Przewodnik integracji Microsoft Foundry](microsoft-foundry-integration.md)** dotyczący wzorców integracji usług  
-2. **Wykonaj [Warsztaty AI](ai-workshop-lab.md)**, aby zdobyć praktyczne doświadczenie  
-3. **Wdrażaj [praktyki produkcyjne AI](production-ai-practices.md)** dla rozwiązań przedsiębiorstw  
-4. **Poznaj [Przewodnik rozwiązywania problemów AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** dotyczący typowych problemów  
+1. **Przejrzyj [Przewodnik integracji Microsoft Foundry](microsoft-foundry-integration.md)** dotyczący wzorców integracji usług
+2. **Ukończ [Warsztaty AI](ai-workshop-lab.md)**, aby zdobyć praktyczne doświadczenie
+3. **Wdróż [Praktyki produkcyjne AI](production-ai-practices.md)** dla wdrożeń korporacyjnych
+4. **Zapoznaj się z [Przewodnikiem rozwiązywania problemów AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** dotyczącym typowych problemów
 
 ## Zasoby
 
 - [Dostępność modeli Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Dokumentacja Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Skalowanie aplikacji kontenerowych](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Skalowanie Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [Optymalizacja kosztów modeli AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
@@ -502,6 +502,6 @@ async def check_ai_models():
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Zastrzeżenie**:  
-Dokument ten został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mimo że dążymy do dokładności, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub niedokładności. Oryginalny dokument w jego języku źródłowym powinien być uznawany za autorytatywne źródło. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+**Zastrzeżenie**:
+Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Choć dążymy do dokładności, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub niedokładności. Oryginalny dokument w jego języku źródłowym należy uznawać za autorytatywne źródło. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
