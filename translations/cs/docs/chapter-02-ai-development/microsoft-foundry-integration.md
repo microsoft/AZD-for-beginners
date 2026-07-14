@@ -1,50 +1,50 @@
-# Microsoft Foundry Integration with AZD
+# Integrace Microsoft Foundry s AZD
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD pro začátečníky](../../README.md)
-- **📖 Current Chapter**: Kapitola 2 - Vývoj orientovaný na AI
-- **⬅️ Previous Chapter**: [Kapitola 1: Váš první projekt](../chapter-01-foundation/first-project.md)
-- **➡️ Next**: [AI Model Deployment](ai-model-deployment.md)
-- **🚀 Next Chapter**: [Kapitola 3: Konfigurace](../chapter-03-configuration/configuration.md)
+**Navigace kapitolou:**
+- **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 2 - AI-první vývoj
+- **⬅️ Předchozí kapitola**: [Kapitola 1: Váš první projekt](../chapter-01-foundation/first-project.md)
+- **➡️ Další**: [Nasazení AI modelu](ai-model-deployment.md)
+- **🚀 Další kapitola**: [Kapitola 3: Konfigurace](../chapter-03-configuration/configuration.md)
 
 ## Přehled
 
-Tento průvodce ukazuje, jak integrovat služby Microsoft Foundry s Azure Developer CLI (AZD) pro zjednodušená nasazení AI aplikací. Microsoft Foundry poskytuje komplexní platformu pro vytváření, nasazení a správu AI aplikací, zatímco AZD zjednodušuje infrastrukturu a proces nasazení.
+Tento průvodce ukazuje, jak integrovat služby Microsoft Foundry s Azure Developer CLI (AZD) pro zjednodušené nasazování AI aplikací. Microsoft Foundry poskytuje komplexní platformu pro vytváření, nasazení a správu AI aplikací, zatímco AZD zjednodušuje proces infrastruktury a nasazení.
 
 ## Co je Microsoft Foundry?
 
-Microsoft Foundry je sjednocená platforma Microsoftu pro vývoj AI, která zahrnuje:
+Microsoft Foundry je sjednocená platforma Microsoftu pro vývoj AI, která obsahuje:
 
-- **Model Catalog**: Přístup k nejmodernějším AI modelům
-- **Prompt Flow**: Vizuální návrhář pro AI workflowy
-- **Microsoft Foundry Portal**: Integrované vývojové prostředí pro AI aplikace
-- **Deployment Options**: Různé možnosti hostování a škálování
-- **Safety and Security**: Vestavěné prvky odpovědného AI
+- **Katalog modelů**: Přístup k moderním AI modelům
+- **Prompt Flow**: Vizualní návrhář AI pracovních toků
+- **Portal Microsoft Foundry**: Integrované vývojové prostředí pro AI aplikace
+- **Možnosti nasazení**: Různé možnosti hostingu a škálování
+- **Bezpečnost a ochrana**: Vestavěné funkce pro odpovědné AI
 
-## AZD + Microsoft Foundry: Lepěji spolu
+## AZD + Microsoft Foundry: Lepší společně
 
-| Feature | Microsoft Foundry | AZD Integration Benefit |
+| Vlastnost | Microsoft Foundry | Výhoda integrace s AZD |
 |---------|-----------------|------------------------|
-| **Model Deployment** | Manual portal deployment | Automatizovaná, opakovatelná nasazení |
-| **Infrastructure** | Click-through provisioning | Infrastruktura jako kód (Bicep) |
-| **Environment Management** | Single environment focus | Více prostředí (dev/staging/prod) |
-| **CI/CD Integration** | Limited | Nativní podpora GitHub Actions |
-| **Cost Management** | Basic monitoring | Optimalizace nákladů podle prostředí |
+| **Nasazení modelu** | Ruční nasazení přes portál | Automatizované, opakovatelné nasazení |
+| **Infrastruktura** | Provisioning na kliknutí | Infrastruktura jako kód (Bicep) |
+| **Správa prostředí** | Zaměření na jedno prostředí | Více prostředí (dev/staging/prod) |
+| **Integrace CI/CD** | Omezená | Nativní podpora GitHub Actions |
+| **Správa nákladů** | Základní monitorování | Optimalizace nákladů podle prostředí |
 
-## Požadavky
+## Předpoklady
 
 - Azure předplatné s příslušnými oprávněními
 - Nainstalovaný Azure Developer CLI
 - Přístup ke službám Microsoft Foundry Models
-- Základní povědomí o Microsoft Foundry
+- Základní znalost Microsoft Foundry
 
-> **Current AZD baseline:** These examples were reviewed against `azd` `1.23.12`. For the AI agent workflow, use the current preview extension release and check your installed version before you begin.
+> **Aktuální základní verze AZD:** Tyto příklady byly testovány s `azd` `1.27.1`. Pro pracovní tok AI agenta použijte aktuální preview rozšíření a před začátkem zkontrolujte nainstalovanou verzi.
 
-## Hlavní integrační vzory
+## Základní integrační vzory
 
-### Vzor 1: Integrace modelů Microsoft Foundry
+### Vzor 1: Integrace Microsoft Foundry Models
 
-**Případ použití**: Nasazení chatovacích aplikací s modely Microsoft Foundry Models
+**Použití**: Nasadit chatovací aplikace s modely Microsoft Foundry Models
 
 ```yaml
 # azure.yaml
@@ -92,9 +92,9 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 }
 ```
 
-### Vzor 2: AI Search + RAG Integrace
+### Vzor 2: AI vyhledávání + RAG integrace
 
-**Případ použití**: Nasazení aplikací s retrieval-augmented generation (RAG)
+**Použití**: Nasadit aplikace s retrieval-augmented generation (RAG)
 
 ```bicep
 // Azure AI Search
@@ -122,9 +122,9 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 }
 ```
 
-### Vzor 3: Integrace Document Intelligence
+### Vzor 3: Integrace inteligence dokumentů
 
-**Případ použití**: Workflowy pro zpracování a analýzu dokumentů
+**Použití**: Pracovní toky zpracování a analýzy dokumentů
 
 ```bicep
 // Document Intelligence service
@@ -159,14 +159,14 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ### Nastavení proměnných prostředí
 
-**Konfigurace pro produkci:**
+**Konfigurace produkce:**
 ```bash
-# Jádrové AI služby
+# Základní služby AI
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_SEARCH_ENDPOINT "https://your-search.search.windows.net"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT "https://your-formrec.cognitiveservices.azure.com/"
 
-# Konfigurace modelů
+# Konfigurace modelu
 azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
 azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-3-large"
 
@@ -175,15 +175,15 @@ azd env set AZURE_OPENAI_CAPACITY 30
 azd env set AZURE_SEARCH_SKU "standard"
 ```
 
-**Konfigurace pro vývoj:**
+**Konfigurace vývoje:**
 ```bash
 # Nákladově optimalizovaná nastavení pro vývoj
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set AZURE_SEARCH_SKU "basic"
-azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Bezplatná úroveň
+azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Bezplatná vrstva
 ```
 
-### Zabezpečená konfigurace s Key Vault
+### Bezpečná konfigurace s Key Vault
 
 ```bicep
 // Key Vault for secrets
@@ -218,34 +218,34 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-## Pracovní postupy nasazení
+## Pracovní postup nasazení
 
 ### Rozšíření AZD pro Foundry
 
 AZD poskytuje rozšíření, která přidávají AI-specifické schopnosti pro práci se službami Microsoft Foundry:
 
 ```bash
-# Nainstalovat rozšíření Foundry agents
+# Nainstalujte rozšíření agentů Foundry
 azd extension install azure.ai.agents
 
-# Nainstalovat rozšíření pro doladění
+# Nainstalujte rozšíření pro doladění
 azd extension install azure.ai.finetune
 
-# Nainstalovat rozšíření pro vlastní modely
+# Nainstalujte rozšíření vlastních modelů
 azd extension install azure.ai.models
 
 # Vypsat nainstalovaná rozšíření
 azd extension list --installed
 
-# Zobrazit verzi aktuálně nainstalovaného rozšíření agentů
+# Zkontrolujte aktuálně nainstalovanou verzi agentního rozšíření
 azd extension show azure.ai.agents
 ```
 
-AI rozšíření jsou stále v rychlém vývoji v preview. Pokud se příkaz chová odlišně než je zde uvedeno, před řešením problému s projektem aktualizujte příslušné rozšíření.
+AI rozšíření jsou stále rychle ve vývoji v preview. Pokud se příkaz chová jinak, než je zde uvedeno, aktualizujte příslušné rozšíření před řešením problémů s projektem.
 
-### Nasazení orientované na agenta s `azd ai`
+### Nasazení s prioritou agenta pomocí `azd ai`
 
-Pokud máte manifest agenta, použijte `azd ai agent init` k vygenerování projektu napojeného na Foundry Agent Service:
+Pokud máte manifest agenta, použijte `azd ai agent init` pro vytvoření projektu napojeného na Foundry Agent Service:
 
 ```bash
 # Inicializovat z manifestu agenta
@@ -255,9 +255,9 @@ azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 azd up
 ```
 
-Nedávné preview verze `azure.ai.agents` také přidaly podporu inicializace založené na šablonách pro `azd ai agent init`. Pokud sledujete novější ukázky agentů, zkontrolujte nápovědu rozšíření pro přesné příznaky dostupné ve vaší nainstalované verzi.
+Nedávné preview verze `azure.ai.agents` také přidaly podporu inicializace založené na šablonách pro `azd ai agent init`. Pokud sledujete novější vzory agentů, zkontrolujte nápovědu rozšíření pro přesné dostupné příznaky vaší nainstalované verze.
 
-Viz [Příkazy AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pro úplný referenční seznam příkazů a přepínačů.
+Pro úplný přehled příkazů a příznaků viz [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
 
 ### Nasazení jedním příkazem
 
@@ -265,15 +265,15 @@ Viz [Příkazy AZD AI CLI](../chapter-08-production/production-ai-practices.md#a
 # Nasadit vše jedním příkazem
 azd up
 
-# Nebo nasadit postupně
+# Nebo nasazovat postupně
 azd provision  # Pouze infrastruktura
 azd deploy     # Pouze aplikace
 
-# Pro dlouhodobá nasazení AI aplikací v azd 1.23.11+
+# Pro dlouhodobé nasazení AI aplikací v azd 1.23.11+
 azd deploy --timeout 1800
 ```
 
-### Nasazení specifická pro prostředí
+### Nasazení podle prostředí
 
 ```bash
 # Vývojové prostředí
@@ -292,7 +292,7 @@ azd up
 
 ## Monitorování a observabilita
 
-### Integrace s Application Insights
+### Integrace Application Insights
 
 ```bicep
 // Application Insights for AI application monitoring
@@ -353,7 +353,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-## 🔐 Doporučené bezpečnostní postupy
+## 🔐 Bezpečnostní nejlepší praktiky
 
 ### Konfigurace spravované identity
 
@@ -468,22 +468,22 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ## Řešení běžných problémů
 
-### Problém 1: Překročena kvóta OpenAI
+### Problém 1: Překročení kvóty OpenAI
 
 **Příznaky:**
 - Nasazení selže s chybami kvóty
-- 429 chyby v logech aplikace
+- 429 chyby v aplikačních protokolech
 
 **Řešení:**
 ```bash
 # Zkontrolujte aktuální využití kvóty
 az cognitiveservices usage list --location eastus
 
-# Zkuste jiný region
+# Vyzkoušejte jiný region
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Dočasně snižte kapacitu
+# Dočasně snížit kapacitu
 azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
@@ -496,13 +496,13 @@ azd deploy
 
 **Řešení:**
 ```bash
-# Ověřit přiřazení rolí
+# Ověřte přiřazení rolí
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Zkontrolovat konfiguraci spravované identity
+# Zkontrolujte konfiguraci spravované identity
 az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 
-# Ověřit přístup k Key Vaultu
+# Ověřte přístup k Key Vault
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
@@ -510,26 +510,26 @@ az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 
 **Příznaky:**
 - Modely nejsou dostupné v nasazení
-- Konkrétní verze modelů selhávají
+- Selhávají konkrétní verze modelů
 
 **Řešení:**
 ```bash
 # Vypsat dostupné modely podle regionu
 az cognitiveservices model list --location eastus
 
-# Aktualizovat verzi modelu v bicep šabloně
+# Aktualizovat verzi modelu v bicepsovém šabloně
 # Zkontrolovat požadavky na kapacitu modelu
 ```
 
 ## Ukázkové šablony
 
-### RAG Chat Application (Python)
+### RAG chatovací aplikace (Python)
 
 **Repozitář**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
 **Služby**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
 
-**Popis**: Nejoblíbenější ukázka Azure AI — produkčně připravená RAG chatovací aplikace, která umožňuje klást otázky nad vlastními dokumenty. Používá GPT-4.1-mini pro chat, text-embedding-3-large pro embeddings a Azure AI Search pro vyhledávání. Podporuje multimodální dokumenty, vstup/výstup řeči, ověřování Microsoft Entra a trasování v Application Insights.
+**Popis**: Nejoblíbenější příklad Azure AI — produkční RAG chatovací aplikace umožňující klást otázky nad vlastními dokumenty. Používá GPT-4.1-mini pro chat, text-embedding-3-large pro vektory a Azure AI Search pro vyhledávání. Podporuje multimodální dokumenty, hlasový vstup/výstup, ověření Microsoft Entra a sledování pomocí Application Insights.
 
 **Rychlý start**:
 ```bash
@@ -537,13 +537,13 @@ azd init --template azure-search-openai-demo
 azd up
 ```
 
-### RAG Chat Application (.NET)
+### RAG chatovací aplikace (.NET)
 
 **Repozitář**: [azure-search-openai-demo-csharp](https://github.com/Azure-Samples/azure-search-openai-demo-csharp)
 
 **Služby**: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
 
-**Popis**: .NET/C# ekvivalent Python RAG chat ukázky. Postaveno s ASP.NET Core Minimal API a Blazor WebAssembly frontendem. Obsahuje hlasový chat, podporu GPT-4o-mini vision a doprovodného .NET MAUI Blazor Hybrid desktop/mobilního klienta.
+**Popis**: .NET/C# ekvivalent Python vzoru RAG chatu. Postaveno na ASP.NET Core Minimal API a Blazor WebAssembly frontend. Obsahuje hlasový chat, podporu GPT-4o-mini vision a doprovodnou desktop/mobilní klientskou aplikaci .NET MAUI Blazor Hybrid.
 
 **Rychlý start**:
 ```bash
@@ -551,13 +551,13 @@ azd init --template azure-search-openai-demo-csharp
 azd up
 ```
 
-### RAG Chat Application (Java)
+### RAG chatovací aplikace (Java)
 
 **Repozitář**: [azure-search-openai-demo-java](https://github.com/Azure-Samples/azure-search-openai-demo-java)
 
 **Služby**: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
 
-**Popis**: Java verze RAG chat ukázky používající Langchain4J pro AI orchestraci. Podporuje mikroservisní event-driven architekturu, více strategií vyhledávání (text, vektor, hybrid), nahrávání dokumentů s Azure Document Intelligence a nasazení buď na Azure Container Apps nebo Azure Kubernetes Service.
+**Popis**: Java verze vzoru RAG chatu používající Langchain4J pro orchestrace AI. Podporuje mikroservisní event-driven architekturu, různé strategie vyhledávání (textové, vektorové, hybridní), nahrávání dokumentů s Azure Document Intelligence a nasazení na Azure Container Apps nebo Azure Kubernetes Service.
 
 **Rychlý start**:
 ```bash
@@ -565,13 +565,13 @@ azd init --template azure-search-openai-demo-java
 azd up
 ```
 
-### Enterprise Retail Copilot with Microsoft Foundry
+### Podnikový retailový kopilot s Microsoft Foundry
 
 **Repozitář**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
 **Služby**: Azure OpenAI + Microsoft Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
 
-**Popis**: End-to-end retail RAG copilot využívající Microsoft Foundry a Prompty. Chatbot pro prodejce Contoso Outdoor, který podkládá odpovědi v katalogu produktů a datech objednávek zákazníků. Demonstruje kompletní GenAIOps workflow — prototypování s Prompty, vyhodnocení pomocí AI-assistovaných evaluátorů a nasazení přes AZD do Container Apps.
+**Popis**: Kompletní retailový RAG kopilot využívající Microsoft Foundry a Prompty. Chatbot pro prodejce Contoso Outdoor, který odvozuje odpovědi z katalogu produktů a dat objednávek zákazníků. Demonstruje celý GenAIOps pracovní tok — prototypování s Prompty, hodnocení s AI asistovanými hodnotiteli a nasazení přes AZD do Container Apps.
 
 **Rychlý start**:
 ```bash
@@ -579,13 +579,13 @@ azd init --template contoso-chat
 azd up
 ```
 
-### Creative Writing Multi-Agent Application
+### Víceagentní aplikace pro kreativní psaní
 
 **Repozitář**: [contoso-creative-writer](https://github.com/Azure-Samples/contoso-creative-writer)
 
 **Služby**: Azure OpenAI + Azure AI Agent Service + Bing Grounding + Azure AI Search + Azure Container Apps
 
-**Popis**: Multi-agent ukázka demonstrující orchestraci AI agentů s Prompty. Používá výzkumného agenta (Bing Grounding v Azure AI Agent Service), produktového agenta (Azure AI Search), spisovatelského agenta a editorského agenta k společné tvorbě dobře prozkoumaných článků. Obsahuje CI/CD s vyhodnocováním v GitHub Actions.
+**Popis**: Vzor víceagentní aplikace ukazující orchestrace AI agentů s Prompty. Používá výzkumného agenta (Bing Grounding v Azure AI Agent Service), produktového agenta (Azure AI Search), spisovatele a editora k společné tvorbě pečlivě prozkoumaných článků. Obsahuje CI/CD s hodnocením v GitHub Actions.
 
 **Rychlý start**:
 ```bash
@@ -593,13 +593,13 @@ azd init --template contoso-creative-writer
 azd up
 ```
 
-### Serverless RAG Chat (JavaScript/TypeScript)
+### Serverless RAG chat (JavaScript/TypeScript)
 
 **Repozitář**: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
 
 **Služby**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB for NoSQL + LangChain.js
 
-**Popis**: Plně serverless RAG chatbot využívající LangChain.js s Azure Functions pro API a Azure Static Web Apps pro hosting. Používá Azure Cosmos DB jako vektorové úložiště a databázi historie chatu. Podporuje lokální vývoj s Ollama pro testování bez nákladů.
+**Popis**: Plně serverless RAG chatbot používající LangChain.js s Azure Functions pro API a Azure Static Web Apps pro hostování. Používá Azure Cosmos DB jako vektorové úložiště a databázi historie chatu. Podporuje lokální vývoj s Ollama pro testování bez nákladů.
 
 **Rychlý start**:
 ```bash
@@ -607,13 +607,13 @@ azd init --template serverless-chat-langchainjs
 azd up
 ```
 
-### Chat with Your Data Solution Accelerator
+### Chat řešení s vašimi daty – akcelerátor
 
 **Repozitář**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
 
 **Služby**: Azure OpenAI + Azure AI Search + Azure App Service + Azure Document Intelligence + Azure Functions + Azure Cosmos DB / PostgreSQL
 
-**Popis**: Podniková RAG řešení akcelerátor s admin portálem pro nahrávání/správu dokumentů, více možnostmi orchestrátoru (Semantic Kernel, LangChain, Prompt Flow), převodem řeči na text, integrací Microsoft Teams a volbou backendu PostgreSQL nebo Cosmos DB. Navrženo jako přizpůsobitelný výchozí bod pro produkční RAG scénáře.
+**Popis**: Podnikový RAG akcelerátor řešení s portálem pro správu/nahrávání dokumentů, více orchestrátory (Semantic Kernel, LangChain, Prompt Flow), převodem řeči na text, integrací Microsoft Teams a možností backendu PostgreSQL nebo Cosmos DB. Navrženo jako přizpůsobitelný výchozí bod pro produkční scénáře RAG.
 
 **Rychlý start**:
 ```bash
@@ -621,13 +621,13 @@ azd init --template chat-with-your-data-solution-accelerator
 azd up
 ```
 
-### AI Travel Agents — Multi-Agent MCP Orchestration
+### AI cestovní agenti — víceagentní MCP orchestrace
 
 **Repozitář**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
 
-**Služby**: Azure OpenAI + Microsoft Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
+**Služby**: Azure OpenAI + Microsoft Foundry + Azure Container Apps + MCP servery (.NET, Python, Java, TypeScript)
 
-**Popis**: Referenční aplikace pro multi-agent orchestraci AI využívající tři frameworky (LangChain.js, LlamaIndex.TS a Microsoft Agent Framework). Obsahuje MCP (Model Context Protocol) servery ve čtyřech jazycích nasazené jako serverless Azure Container Apps s OpenTelemetry monitorováním.
+**Popis**: Referenční aplikace pro víceagentní AI orchestrace s použitím tří frameworků (LangChain.js, LlamaIndex.TS a Microsoft Agent Framework). Obsahuje MCP (Model Context Protocol) servery ve čtyřech jazycích nasazené jako serverless Azure Container Apps s monitorováním OpenTelemetry.
 
 **Rychlý start**:
 ```bash
@@ -639,9 +639,9 @@ azd up
 
 **Repozitář**: [azd-ai-starter](https://github.com/Azure/azd-ai-starter)
 
-**Služby**: Azure AI Services + Azure OpenAI
+**Služby**: Azure AI služby + Azure OpenAI
 
-**Popis**: Minimální Bicep šablona, která nasazuje Azure AI služby s nakonfigurovanými modely strojového učení. Lehký výchozí bod, když potřebujete pouze provisionovat infrastrukturu Azure AI bez plného aplikačního stacku.
+**Popis**: Minimální Bicep šablona, která nasazuje Azure AI služby s předkonfigurovanými modely strojového učení. Lehký výchozí bod, pokud potřebujete pouze infrastrukturu Azure AI bez celého aplikačního stacku.
 
 **Rychlý start**:
 ```bash
@@ -649,21 +649,21 @@ azd init --template azd-ai-starter
 azd up
 ```
 
-> **Prohlédněte si více šablon**: Navštivte [Galerii skvělých AZD AI šablon](https://azure.github.io/awesome-azd/?tags=ai) pro více než 80 AI-specifických AZD šablon napříč jazyky a scénáři.
+> **Prohlédněte si více šablon**: Navštivte [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) pro více než 80 AI-specifických šablon AZD napříč jazyky a scénáři.
 
 ## Další kroky
 
-1. **Vyzkoušejte příklady**: Začněte s předpřipravenou šablonou, která odpovídá vašemu scénáři
-2. **Přizpůsobte podle potřeb**: Upravte infrastrukturu a aplikační kód
+1. **Vyzkoušejte příklady**: Začněte s hotovou šablonou odpovídající vašemu případu použití
+2. **Přizpůsobte podle potřeby**: Upravte infrastrukturu a aplikační kód
 3. **Přidejte monitorování**: Implementujte komplexní observabilitu
-4. **Optimalizujte náklady**: Doladěte konfigurace podle rozpočtu
+4. **Optimalizujte náklady**: Vyladěte konfigurace podle vašeho rozpočtu
 5. **Zabezpečte nasazení**: Implementujte podnikové bezpečnostní vzory
 6. **Škálujte do produkce**: Přidejte více regionů a funkce vysoké dostupnosti
 
 ## 🎯 Praktická cvičení
 
 ### Cvičení 1: Nasazení chatovací aplikace Microsoft Foundry Models (30 minut)
-**Cíl**: Nasadit a otestovat produkčně připravenou AI chatovací aplikaci
+**Cíl**: Nasadit a otestovat produkční AI chatovací aplikaci
 
 ```bash
 # Inicializovat šablonu
@@ -681,7 +681,7 @@ azd up
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Chat app: $WEB_URL"
 
-# Monitorovat provoz AI
+# Monitorovat AI operace
 azd monitor
 
 # Vyčistit
@@ -690,18 +690,18 @@ azd down --force --purge
 
 **Kritéria úspěchu:**
 - [ ] Nasazení proběhne bez chyb kvóty
-- [ ] Lze přistupovat k chatovacímu rozhraní v prohlížeči
-- [ ] Lze klást otázky a získávat odpovědi poháněné AI
-- [ ] Application Insights zobrazuje telemetrická data
-- [ ] Prostředky byly úspěšně odstraněny
+- [ ] Přístup k chatovému rozhraní v prohlížeči
+- [ ] Lze klást otázky a dostávat AI-poháněné odpovědi
+- [ ] Application Insights zobrazuje telemetry data
+- [ ] Úspěšné vyčištění zdrojů
 
-**Odhadované náklady**: 5–10 USD za 30 minut testování
+**Odhadované náklady**: 5-10 USD za 30 minut testování
 
-### Cvičení 2: Konfigurace nasazení vícero modelů (45 minut)
-**Cíl**: Nasadit více AI modelů s různými konfiguracemi
+### Cvičení 2: Konfigurace více modelového nasazení (45 minut)
+**Cíl**: Nasadit více AI modelů s různou konfigurací
 
 ```bash
-# Vytvořit vlastní konfiguraci Bicep
+# Vytvořte vlastní konfiguraci Bicep
 cat > infra/ai-models.bicep << 'EOF'
 param openAiAccountName string
 param location string
@@ -752,16 +752,16 @@ azd show
 ```
 
 **Kritéria úspěchu:**
-- [ ] Více modelů nasazeno úspěšně
-- [ ] Použity různé nastavení kapacity
-- [ ] Modely jsou dostupné přes API
-- [ ] Aplikace dokáže volat oba modely
+- [ ] Více modelů úspěšně nasazeno
+- [ ] Použitá různá nastavení kapacity
+- [ ] Modely dostupné přes API
+- [ ] Lze volat oba modely z aplikace
 
 ### Cvičení 3: Implementace monitorování nákladů (20 minut)
-**Cíl**: Nastavit upozornění rozpočtu a sledování nákladů
+**Cíl**: Nastavit rozpočtové upozornění a sledování nákladů
 
 ```bash
-# Přidat upozornění rozpočtu do Bicep
+# Přidat upozornění na rozpočet do Bicepu
 cat >> infra/main.bicep << 'EOF'
 
 resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
@@ -792,7 +792,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 EOF
 
-# Nasadit upozornění rozpočtu
+# Nasadit upozornění na rozpočet
 azd provision
 
 # Zkontrolovat aktuální náklady
@@ -800,21 +800,21 @@ az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-d
 ```
 
 **Kritéria úspěchu:**
-- [ ] V Azure vytvořeno upozornění rozpočtu
-- [ ] E-mailová oznámení nakonfigurována
-- [ ] Lze zobrazit údaje o nákladech v Azure Portalu
-- [ ] Práh rozpočtu nastaven vhodně
+- [ ] V Azure vytvořeno rozpočtové upozornění
+- [ ] Nastaveny emailové notifikace
+- [ ] Zobrazení nákladových dat v Azure Portálu
+- [ ] Správně nastavené rozpočtové limity
 
 ## 💡 Často kladené otázky
 
 <details>
-<summary><strong>Jak snížit náklady Microsoft Foundry Models během vývoje?</strong></summary>
+<summary><strong>Jak snížit náklady na Microsoft Foundry Models během vývoje?</strong></summary>
 
-1. **Využijte bezplatnou úroveň**: Microsoft Foundry Models nabízí 50 000 tokenů/měsíc zdarma
+1. **Využijte Free Tier**: Microsoft Foundry Models nabízí 50 000 tokenů/měsíc zdarma
 2. **Snižte kapacitu**: Nastavte kapacitu na 10 TPM místo 30+ pro vývoj
-3. **Použijte azd down**: Uvolněte prostředky, když momentálně nevyvíjíte
-4. **Cache odpovědi**: Implementujte Redis cache pro opakované dotazy
-5. **Optimalizujte prompty**: Snižte spotřebu tokenů efektivními promptami
+3. **Použijte azd down**: Uvolněte zdroje, když aktivně nevyvíjíte
+4. **Cache odpovědí**: Implementujte Redis cache pro opakované dotazy
+5. **Použijte Prompt Engineering**: Snižte použití tokenů efektivními promptami
 
 
 ```bash
@@ -828,29 +828,29 @@ azd env set ENABLE_RESPONSE_CACHE true
 <summary><strong>Jaký je rozdíl mezi Microsoft Foundry Models a OpenAI API?</strong></summary>
 
 **Microsoft Foundry Models**:
-- Podniková bezpečnost a soulad s předpisy
+- Podniková bezpečnost a dodržování předpisů
 - Integrace do privátní sítě
-- Záruky SLA
-- Ověřování pomocí spravované identity
+- SLA záruky
+- Ověřování pomocí řízené identity
 - Dostupné vyšší kvóty
 
 **OpenAI API**:
 - Rychlejší přístup k novým modelům
 - Jednodušší nastavení
-- Nižší bariéra vstupu
+- Nižší vstupní bariéra
 - Pouze veřejný internet
 
-Pro produkční aplikace se doporučuje **Microsoft Foundry Models**.
+Pro produkční aplikace je doporučeno **Microsoft Foundry Models**.
 </details>
 
 <details>
-<summary><strong>Jak řešit chyby překročení kvóty Microsoft Foundry Models?</strong></summary>
+<summary><strong>Jak řešit chyby překročení kvóty u Microsoft Foundry Models?</strong></summary>
 
 ```bash
 # Zkontrolujte aktuální kvótu
 az cognitiveservices usage list --location eastus2
 
-# Zkuste jiný region
+# Vyzkoušejte jiný region
 azd env set AZURE_LOCATION westus2
 azd up
 
@@ -858,13 +858,13 @@ azd up
 azd env set AZURE_OPENAI_CAPACITY 10
 azd provision
 
-# Požádejte o navýšení kvóty
-# Přejděte do Azure Portal > Kvóty > Požádat o navýšení
+# Požádejte o zvýšení kvóty
+# Přejděte do Azure Portálu > Kvóty > Požádat o zvýšení
 ```
 </details>
 
 <details>
-<summary><strong>Mohu použít vlastní data s Microsoft Foundry Models?</strong></summary>
+<summary><strong>Mohu použít svá vlastní data s Microsoft Foundry Models?</strong></summary>
 
 Ano! Použijte **Azure AI Search** pro RAG (Retrieval Augmented Generation):
 
@@ -885,11 +885,11 @@ Podívejte se na šablonu [azure-search-openai-demo](https://github.com/Azure-Sa
 <summary><strong>Jak zabezpečit koncové body AI modelů?</strong></summary>
 
 **Nejlepší postupy**:
-1. Používejte spravovanou identitu (žádné API klíče)
-2. Povolte privátní koncové body
-3. Nakonfigurujte síťové bezpečnostní skupiny
-4. Zaveďte omezení rychlosti
-5. Použijte Azure Key Vault pro ukládání tajemství
+1. Používejte řízenou identitu (bez API klíčů)
+2. Povolit privátní koncové body
+3. Nakonfigurovat síťové bezpečnostní skupiny
+4. Implementovat omezení rychlosti
+5. Použít Azure Key Vault pro tajemství
 
 ```bicep
 // Managed Identity authentication
@@ -912,20 +912,20 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 ## Komunita a podpora
 
 - **Microsoft Foundry Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
-- **AZD GitHub**: [Problémy a diskuze](https://github.com/Azure/azure-dev)
+- **AZD GitHub**: [Issues and discussions](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Oficiální dokumentace](https://learn.microsoft.com/azure/ai-studio/)
-- **Agent Skills**: [Dovednost Microsoft Foundry na skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Nainstalujte dovednosti agentů Azure + Foundry ve svém editoru pomocí `npx skills add microsoft/github-copilot-for-azure`
+- **Agent Skills**: [Microsoft Foundry skill na skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Nainstalujte Azure + Foundry agenta přímo ve svém editoru pomocí `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**Navigace kapitol:**
-- **📚 Domov kurzu**: [AZD For Beginners](../../README.md)
-- **📖 Aktuální kapitola**: Kapitola 2 - AI-First Development
+**Navigace kapitolou:**
+- **📚 Domovská stránka kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 2 - AI-First vývoj
 - **⬅️ Předchozí kapitola**: [Kapitola 1: Váš první projekt](../chapter-01-foundation/first-project.md)
 - **➡️ Další**: [Nasazení AI modelu](ai-model-deployment.md)
-- **🚀 Další kapitola**: [Kapitola 3: Konfigurace](../chapter-03-configuration/configuration.md)
+- **🚀 Následující kapitola**: [Kapitola 3: Konfigurace](../chapter-03-configuration/configuration.md)
 
-**Potřebujete pomoc?** Připojte se k diskuzím komunity nebo otevřete issue v repozitáři. Komunita Azure AI + AZD je tu, aby vám pomohla uspět!
+**Potřebujete pomoc?** Připojte se k diskuzím v komunitě nebo otevřete issue v repozitáři. Komunita Azure AI + AZD je tu, aby vám pomohla uspět!
 
 ---
 

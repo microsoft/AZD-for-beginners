@@ -1,30 +1,30 @@
 # Nasazení AI modelu s Azure Developer CLI
 
-**Navigace kapitolami:**
-- **📚 Domů kurzu**: [AZD pro začátečníky](../../README.md)
+**Navigace kapitolou:**
+- **📚 Domů ke kurzu**: [AZD Pro začátečníky](../../README.md)
 - **📖 Aktuální kapitola**: Kapitola 2 - Vývoj zaměřený na AI
 - **⬅️ Předchozí**: [Integrace Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Další**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Další kapitola**: [Kapitola 3: Konfigurace](../chapter-03-configuration/configuration.md)
 
-Tento průvodce poskytuje komplexní pokyny pro nasazení AI modelů pomocí šablon AZD, zahrnující vše od výběru modelu až po vzory nasazení do produkce.
+Tento průvodce poskytuje komplexní instrukce pro nasazení AI modelů pomocí šablon AZD, pokrývající vše od výběru modelu až po produkční vzory nasazení.
 
-> **Poznámka k validaci (2026-03-25):** Pracovní postup AZD v tomto průvodci byl ověřen na `azd` verzi `1.23.12`. Pro AI nasazení, která trvají déle než výchozí doba nasazení služby, aktuální verze AZD podporují `azd deploy --timeout <seconds>`.
+> **Poznámka k ověření (2026-07-13):** Workflow AZD v tomto průvodci bylo ověřeno s `azd` verzí `1.27.1`. Pro AI nasazení, která trvají déle než výchozí časové okno nasazení služby, aktuální verze AZD podporují příkaz `azd deploy --timeout <sekundy>`.
 
 ## Obsah
 
 - [Strategie výběru modelu](#strategie-výběru-modelu)
 - [Konfigurace AZD pro AI modely](#konfigurace-azd-pro-ai-modely)
-- [Vzor nasazení](#vzory-nasazení)
-- [Správa modelů](#správa-modelů)
-- [Požadavky v produkci](#požadavky-v-produkci)
-- [Monitoring a dohledatelnost](#monitoring-a-dohledatelnost)
+- [Vzorová nasazení](#vzorová-nasazení)
+- [Správa modelu](#správa-modelu)
+- [Provozní úvahy](#provozní-úvahy)
+- [Monitorování a pozorovatelnost](#monitorování-a-pozorovatelnost)
 
 ## Strategie výběru modelu
 
 ### Modely Microsoft Foundry
 
-Vyberte správný model pro vaše použití:
+Vyberte správný model pro svůj případ použití:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -54,18 +54,18 @@ services:
 
 ### Plánování kapacity modelu
 
-| Typ modelu | Použití | Doporučená kapacita | Nákladová hlediska |
+| Typ modelu | Případ použití | Doporučená kapacita | Cenová hlediska |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | Chat, otázky a odpovědi | 10-50 TPM | Nákladově efektivní pro většinu zátěží |
-| gpt-4.1 | Komplexní rozumování | 20-100 TPM | Vyšší náklady, vhodné pro prémiové funkce |
+| gpt-4.1-mini | Chat, Q&A | 10-50 TPM | Nákladově efektivní pro většinu pracovních zatížení |
+| gpt-4.1 | Komplexní uvažování | 20-100 TPM | Vyšší náklady, použijte pro prémiové funkce |
 | text-embedding-3-large | Vyhledávání, RAG | 30-120 TPM | Silná výchozí volba pro sémantické vyhledávání a získávání |
-| Whisper | Přepis řeči na text | 10-50 TPM | Zpracování audio zátěže |
+| Whisper | Přepis řeči na text | 10-50 TPM | Pracovní zatížení zpracování audia |
 
 ## Konfigurace AZD pro AI modely
 
-### Konfigurace Bicep šablony
+### Konfigurace šablony Bicep
 
-Vytvořte nasazení modelů pomocí Bicep šablon:
+Vytvořte nasazení modelu pomocí šablon Bicep:
 
 ```bicep
 // infra/main.bicep
@@ -126,7 +126,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### Proměnné prostředí
 
-Nakonfigurujte prostředí vaší aplikace:
+Nakonfigurujte prostředí své aplikace:
 
 ```bash
 # konfigurace .env
@@ -136,7 +136,7 @@ AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## Vzory nasazení
+## Vzorová nasazení
 
 ### Vzor 1: Nasazení v jedné oblasti
 
@@ -151,9 +151,9 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-Ideální pro:
+Nejvhodnější pro:
 - Vývoj a testování
-- Aplikace pro jeden trh
+- Aplikace pro jedno tržní prostředí
 - Optimalizaci nákladů
 
 ### Vzor 2: Nasazení ve více oblastech
@@ -169,14 +169,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Ideální pro:
+Nejvhodnější pro:
 - Globální aplikace
 - Požadavky na vysokou dostupnost
-- Distribuci zátěže
+- Rozložení zátěže
 
 ### Vzor 3: Hybridní nasazení
 
-Kombinujte Microsoft Foundry modely s dalšími AI službami:
+Kombinujte Microsoft Foundry Modely s dalšími AI službami:
 
 ```bicep
 // Hybrid AI services
@@ -205,11 +205,11 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Správa modelů
+## Správa modelu
 
-### Verzování
+### Kontrola verzí
 
-Sledujte verze modelů ve vaší AZD konfiguraci:
+Sledujte verze modelů ve své konfiguraci AZD:
 
 ```json
 {
@@ -229,7 +229,7 @@ Sledujte verze modelů ve vaší AZD konfiguraci:
 
 ### Aktualizace modelu
 
-Použijte AZD hooks pro aktualizace modelů:
+Používejte AZD háčky pro aktualizace modelů:
 
 ```bash
 #!/bin/bash
@@ -269,11 +269,11 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Požadavky v produkci
+## Provozní úvahy
 
 ### Plánování kapacity
 
-Spočítejte potřebnou kapacitu na základě vzorů použití:
+Vypočítejte požadovanou kapacitu na základě vzorů používání:
 
 ```python
 # Příklad výpočtu kapacity
@@ -338,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Optimalizace nákladů
 
-Implementujte řízení nákladů:
+Implementujte kontroly nákladů:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -368,11 +368,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Monitoring a dohledatelnost
+## Monitorování a pozorovatelnost
 
 ### Integrace Application Insights
 
-Nakonfigurujte monitoring pro AI zátěže:
+Nakonfigurujte monitorování pro AI pracovní zatížení:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -410,7 +410,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### Vlastní metriky
 
-Sledujte AI-specifické metriky:
+Sledujte metriky specifické pro AI:
 
 ```python
 # Vlastní telemetrie pro AI modely
@@ -447,7 +447,7 @@ class AITelemetry:
 
 ### Kontroly stavu
 
-Implementujte monitoring stavu AI služeb:
+Implementujte monitorování stavu AI služeb:
 
 ```python
 # Koncové body kontroly zdraví
@@ -478,10 +478,10 @@ async def check_ai_models():
 
 ## Další kroky
 
-1. **Prohlédněte si [průvodce integrací Microsoft Foundry](microsoft-foundry-integration.md)** pro vzory integrace služeb
+1. **Prostudujte [Průvodce integrací Microsoft Foundry](microsoft-foundry-integration.md)** pro vzory integrace služeb
 2. **Dokončete [AI Workshop Lab](ai-workshop-lab.md)** pro praktické zkušenosti
-3. **Implementujte [produkční praktiky AI](production-ai-practices.md)** pro nasazení v podniku
-4. **Prozkoumejte [průvodce řešením problémů s AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** pro běžné potíže
+3. **Implementujte [Produkční AI praktiky](production-ai-practices.md)** pro nasazení ve firmách
+4. **Prozkoumejte [Průvodce řešením problémů AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** pro běžné problémy
 
 ## Zdroje
 
@@ -492,8 +492,8 @@ async def check_ai_models():
 
 ---
 
-**Navigace kapitolami:**
-- **📚 Domů kurzu**: [AZD pro začátečníky](../../README.md)
+**Navigace kapitolou:**
+- **📚 Domů ke kurzu**: [AZD Pro začátečníky](../../README.md)
 - **📖 Aktuální kapitola**: Kapitola 2 - Vývoj zaměřený na AI
 - **⬅️ Předchozí**: [Integrace Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Další**: [AI Workshop Lab](ai-workshop-lab.md)
@@ -502,6 +502,6 @@ async def check_ai_models():
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Prohlášení o vyloučení odpovědnosti**:  
-Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). I když usilujeme o přesnost, vezměte prosím na vědomí, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho rodném jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoliv nedorozumění nebo chybné interpretace vzniklé použitím tohoto překladu.
+**Prohlášení o omezení odpovědnosti**:
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o co největší přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo nesprávné interpretace vzniklé použitím tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

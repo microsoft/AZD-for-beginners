@@ -1,35 +1,35 @@
-# 3. Fejezet: Konfiguráció és hitelesítés
+# 3. fejezet: Konfiguráció és hitelesítés
 
-**📚 Tanfolyam**: [AZD Kezdőknek](../../README.md) | **⏱️ Időtartam**: 45-60 perc | **⭐ Nehézségi szint**: Középhaladó
+**📚 Tanfolyam**: [AZD Kezdőknek](../../README.md) | **⏱️ Időtartam**: 45-60 perc | **⭐ Bonyolultság**: Középhaladó
 
 ---
 
 ## Áttekintés
 
-Ez a fejezet a környezet konfigurációját, a hitelesítési mintákat és az Azure Developer CLI telepítések biztonsági ajánlásait tárgyalja.
+Ez a fejezet a környezet konfigurációját, a hitelesítési mintákat, valamint az Azure Developer CLI telepítések biztonsági legjobb gyakorlatait tárgyalja.
 
-> Ellenőrizve `azd 1.25.6` verzióval 2026 júniusában.
+> Ellenőrizve az `azd 1.27.1` verzióval 2026 júliusában.
 
 ## Tanulási célok
 
-A fejezet elvégzése után Ön képes lesz:
-- Az AZD konfigurációs hierarchiájának elsajátítására
-- Több környezet (fejlesztő, teszt, éles) kezelésére
-- Biztonságos hitelesítés megvalósítására kezelt identitásokkal
-- Környezet-specifikus beállítások konfigurálására
+A fejezet elvégzése után képes leszel:
+- Az AZD konfigurációs hierarchiájának elsajátítása
+- Több környezet (fejlesztői, teszt, éles) kezelése
+- Biztonságos hitelesítés megvalósítása kezelt identitásokkal
+- Környezet specifikus beállítások konfigurálása
 
 ---
 
 ## 📚 Tananyagok
 
-| # | Tananyag | Leírás | Idő |
+| # | Lecke | Leírás | Időtartam |
 |---|--------|-------------|------|
 | 1 | [Konfigurációs útmutató](configuration.md) | Környezet beállítása és kezelése | 30 perc |
 | 2 | [Hitelesítés és biztonság](authsecurity.md) | Kezelt identitás és RBAC minták | 30 perc |
 
 ---
 
-## 🚀 Gyors indulás
+## 🚀 Gyors kezdés
 
 ```bash
 # Több környezet létrehozása
@@ -37,7 +37,7 @@ azd env new dev
 azd env new staging
 azd env new prod
 
-# Környezetek váltása
+# Környezetek közötti váltás
 azd env select prod
 
 # Környezeti változók beállítása
@@ -52,7 +52,7 @@ azd env get-values
 
 ## 🔧 Konfigurációs hierarchia
 
-Az AZD a beállításokat az alábbi sorrendben alkalmazza (a későbbi felülírja az előzőt):
+Az AZD a következő sorrendben alkalmazza a beállításokat (a későbbi felülírja a korábbit):
 
 1. **Alapértelmezett értékek** (beépítve a sablonokba)
 2. **azure.yaml** (projekt konfiguráció)
@@ -70,10 +70,10 @@ azd env set AZURE_USE_MANAGED_IDENTITY true
 # Ellenőrizze az AZD hitelesítési állapotát
 azd auth status
 
-# Opcionális: az Azure CLI kontextus ellenőrzése, ha az az parancsokat tervezi futtatni
+# Opcionális: ellenőrizze az Azure CLI környezetét, ha az az parancsokat szeretné futtatni
 az account show
 
-# Szükség esetén újra hitelesítse magát
+# Szükség esetén hitelesítse újra magát
 azd auth login
 
 # Opcionális: frissítse az Azure CLI hitelesítést az az parancsokhoz
@@ -86,12 +86,12 @@ az login
 
 | Irány | Fejezet |
 |-----------|---------|
-| **Előző** | [2. Fejezet: AI fejlesztés](../chapter-02-ai-development/README.md) |
-| **Következő** | [4. Fejezet: Infrastruktúra](../chapter-04-infrastructure/README.md) |
+| **Előző** | [2. fejezet: Mesterséges intelligencia fejlesztés](../chapter-02-ai-development/README.md) |
+| **Következő** | [4. fejezet: Infrastruktúra](../chapter-04-infrastructure/README.md) |
 
 ---
 
-## 📖 Kapcsolódó források
+## 📖 Kapcsolódó anyagok
 
 - [Telepítés előtti ellenőrzések](../chapter-06-pre-deployment/README.md)
 - [Hibaelhárítás](../chapter-07-troubleshooting/common-issues.md)

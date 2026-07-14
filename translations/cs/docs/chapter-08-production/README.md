@@ -1,41 +1,41 @@
 # Kapitola 8: Produkční a podnikové vzory
 
-**📚 Kurz**: [AZD pro začátečníky](../../README.md) | **⏱️ Doba trvání**: 2-3 hodin | **⭐ Složitost**: Pokročilá
+**📚 Kurz**: [AZD pro začátečníky](../../README.md) | **⏱️ Doba trvání**: 2-3 hodiny | **⭐ Složitost**: Pokročilá
 
 ---
 
 ## Přehled
 
-Tato kapitola pokrývá vzory nasazení připravené pro podniky, posílení bezpečnosti, monitorování a optimalizaci nákladů pro produkční AI pracovní zatížení.
+Tato kapitola pokrývá podnikové vzory pro nasazení, zabezpečení, monitorování a optimalizaci nákladů produkčních AI úloh.
 
-> Ověřeno proti `azd 1.25.6` v červnu 2026.
+> Ověřeno na `azd 1.27.1` v červenci 2026.
 
-## Cíle učení
+## Výukové cíle
 
 Po dokončení této kapitoly budete:
-- Nasadit aplikace odolné ve více regionech
-- Zavést podnikové bezpečnostní vzory
+- Nasazovat aplikace odolné v několika regionech
+- Implementovat podnikové vzory zabezpečení
 - Nakonfigurovat komplexní monitorování
 - Optimalizovat náklady ve velkém měřítku
-- Nastavit CI/CD pipeline pomocí AZD
+- Nastavit CI/CD pipeline s AZD
 
 ---
 
 ## 📚 Lekce
 
-| # | Lekce | Popis | Doba |
+| # | Lekce | Popis | Čas |
 |---|--------|-------------|------|
-| 1 | [Produkční AI postupy](production-ai-practices.md) | Podnikové vzory nasazení | 90 min |
+| 1 | [Produkční AI praktiky](production-ai-practices.md) | Podnikové vzory nasazení | 90 min |
 
 ---
 
-## 🚀 Kontrolní seznam pro produkci
+## 🚀 Produkční kontrolní seznam
 
-- [ ] Nasazení ve více regionech pro odolnost
-- [ ] Spravovaná identita pro autentizaci (žádné klíče)
+- [ ] Nasazení v několika regionech pro odolnost
+- [ ] Spravovaná identita pro autentizaci (bez klíčů)
 - [ ] Application Insights pro monitorování
-- [ ] Nastavené rozpočty nákladů a upozornění
-- [ ] Povolené bezpečnostní skenování
+- [ ] Nastavení rozpočtů a upozornění na náklady
+- [ ] Povolené skenování zabezpečení
 - [ ] Integrace CI/CD pipeline
 - [ ] Plán obnovy po havárii
 
@@ -43,25 +43,25 @@ Po dokončení této kapitoly budete:
 
 ## 🏗️ Architektonické vzory
 
-### Vzor 1: AI založené na mikroslužbách
+### Vzor 1: Microservices AI
 
 ```mermaid
 graph LR
-    Gateway[API brána] --> AI[Služba AI] --> Models[Modely Microsoft Foundry]
-    Gateway --> Auth[Autentizační služba]
+    Gateway[API brána] --> AI[AI služba] --> Models[Modely Microsoft Foundry]
+    Gateway --> Auth[Auth služba]
     AI --> Data[Úložiště dat]
 ```
 
-### Vzor 2: Událostně řízené AI
+### Vzor 2: Událostmi řízené AI
 
 ```mermaid
 graph LR
-    EventGrid[Síť událostí] --> Functions[Funkce] --> Pipeline[AI potrubí]
+    EventGrid[Event Grid] --> Functions[Funkce] --> Pipeline[AI Pipeline]
 ```
 
 ---
 
-## 🔐 Nejlepší bezpečnostní postupy
+## 🔐 Nejlepší bezpečnostní praktiky
 
 ```bicep
 // Use managed identity
@@ -84,13 +84,13 @@ properties: {
 
 | Strategie | Úspory |
 |----------|---------|
-| Škálování na nulu (Container Apps) | 60-80% |
-| Využít spotřební tarify pro vývoj | 50-70% |
-| Plánované škálování | 30-50% |
-| Rezervovaná kapacita | 20-40% |
+| Škálování na nulu (Container Apps) | 60-80 % |
+| Použití režimů spotřeby pro vývoj | 50-70 % |
+| Plánované škálování | 30-50 % |
+| Rezervovaná kapacita | 20-40 % |
 
 ```bash
-# Nastavit upozornění na rozpočet
+# Nastavit upozornění rozpočtu
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -103,10 +103,10 @@ az consumption budget create \
 ## 📊 Nastavení monitorování
 
 ```bash
-# Sledovat protokoly
+# Streamujte protokoly
 azd monitor --logs
 
-# Zkontrolovat Application Insights
+# Zkontrolujte Application Insights
 azd monitor --overview
 
 # Zobrazit metriky
@@ -119,17 +119,17 @@ az monitor metrics list --resource <resource-id>
 
 | Směr | Kapitola |
 |-----------|---------|
-| **Předchozí** | [Kapitola 7: Řešení problémů](../chapter-07-troubleshooting/README.md) |
-| **Kurz dokončen** | [Domov kurzu](../../README.md) |
+| **Předchozí** | [Kapitola 7: Odstraňování problémů](../chapter-07-troubleshooting/README.md) |
+| **Kurz dokončen** | [Domů kurzu](../../README.md) |
 
 ---
 
 ## 📖 Související zdroje
 
-- [Příručka AI agentů](../chapter-02-ai-development/agents.md)
+- [Průvodce AI agenty](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 - [Řešení s více agenty](../chapter-05-multi-agent/README.md)
-- [Příklad mikroslužeb](../../examples/microservices/README.md)
+- [Příklad microservices](../../examples/microservices/README.md)
 
 ---
 

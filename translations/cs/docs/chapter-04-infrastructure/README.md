@@ -1,20 +1,20 @@
-# Chapter 4: Infrastructure as Code & Deployment
+# Kapitola 4: Infrastruktura jako kód & Nasazení
 
-**📚 Course**: [AZD pro začátečníky](../../README.md) | **⏱️ Doba trvání**: 1-1,5 hodiny | **⭐ Složitost**: Středně pokročilá
+**📚 Kurz**: [AZD Pro Začátečníky](../../README.md) | **⏱️ Doba trvání**: 1-1.5 hodiny | **⭐ Složitost**: Středně pokročilý
 
 ---
 
 ## Přehled
 
-Tato kapitola pokrývá vzory Infrastructure as Code (IaC) se šablonami Bicep, provisioning zdrojů a strategie nasazení pomocí Azure Developer CLI.
+Tato kapitola pokrývá vzory Infrastruktury jako kódu (IaC) s šablonami Bicep, zřizování zdrojů a strategie nasazení pomocí Azure Developer CLI.
 
-> Ověřeno s `azd 1.25.6` v červnu 2026.
+> Validováno proti `azd 1.27.1` v červenci 2026.
 
-## Učební cíle
+## Výukové cíle
 
 Po dokončení této kapitoly budete:
 - Rozumět struktuře a syntaxi šablon Bicep
-- Provisionovat Azure zdroje pomocí `azd provision`
+- Zřizovat Azure zdroje pomocí `azd provision`
 - Nasazovat aplikace pomocí `azd deploy`
 - Implementovat blue-green a rolling strategie nasazení
 
@@ -22,11 +22,11 @@ Po dokončení této kapitoly budete:
 
 ## 📚 Lekce
 
-| # | Lekce | Popis | Čas |
+| # | Lekce | Popis | Doba |
 |---|--------|-------------|------|
-| 1 | [Provisioning Resources](provisioning.md) | Správa Azure zdrojů pomocí AZD | 45 min |
+| 1 | [Provisioning Resources](provisioning.md) | Správa Azure zdrojů s AZD | 45 min |
 | 2 | [Deployment Guide](deployment-guide.md) | Strategie nasazení aplikací | 45 min |
-| 3 | [Authoring Your Own Template](custom-templates.md) | Vytvoření a publikování znovupoužitelných šablon azd | 30 min |
+| 3 | [Authoring Your Own Template](custom-templates.md) | Vytváření a publikování znovu použitelných azd šablon | 30 min |
 
 ---
 
@@ -36,16 +36,16 @@ Po dokončení této kapitoly budete:
 # Inicializovat z šablony
 azd init --template azure-functions-python-v2-http
 
-# Zobrazit náhled toho, co bude vytvořeno
+# Náhled toho, co bude vytvořeno
 azd provision --preview
 
-# Zajistit pouze infrastrukturu
+# Poskytnout pouze infrastrukturu
 azd provision
 
 # Nasadit pouze kód
 azd deploy
 
-# Nebo obojí najednou
+# Nebo obojí dohromady
 azd up
 ```
 
@@ -72,11 +72,11 @@ my-project/
 
 | Příkaz | Popis |
 |---------|-------------|
-| `azd init` | Inicializovat projekt |
-| `azd provision` | Vytvořit Azure zdroje |
-| `azd deploy` | Nasadit kód aplikace |
-| `azd up` | vytvoření zdrojů + nasazení |
-| `azd down` | Smazat všechny zdroje |
+| `azd init` | Inicializace projektu |
+| `azd provision` | Vytvoření Azure zdrojů |
+| `azd deploy` | Nasazení kódu aplikace |
+| `azd up` | zřízení + nasazení |
+| `azd down` | Odstranění všech zdrojů |
 
 ---
 
@@ -85,7 +85,7 @@ my-project/
 | Směr | Kapitola |
 |-----------|---------|
 | **Předchozí** | [Kapitola 3: Konfigurace](../chapter-03-configuration/README.md) |
-| **Další** | [Kapitola 5: Víceagentní řešení](../chapter-05-multi-agent/README.md) |
+| **Další** | [Kapitola 5: Multi-Agentní řešení](../chapter-05-multi-agent/README.md) |
 
 ---
 

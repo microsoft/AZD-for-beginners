@@ -1,40 +1,40 @@
-# Kapitola 7: Odstraňování problémů a ladění
+# Kapitola 7: Řešení problémů a ladění
 
-**📚 Kurz**: [AZD For Beginners](../../README.md) | **⏱️ Doba trvání**: 1-1.5 hodiny | **⭐ Složitost**: Středně pokročilá
+**📚 Kurz**: [AZD Pro začátečníky](../../README.md) | **⏱️ Doba trvání**: 1-1,5 hodiny | **⭐ Složitost**: Středně pokročilý
 
 ---
 
 ## Přehled
 
-Tato kapitola vám pomůže diagnostikovat a vyřešit běžné problémy při práci s Azure Developer CLI. Od selhání nasazení až po problémy specifické pro AI.
+Tato kapitola vám pomůže diagnostikovat a vyřešit běžné problémy při práci s Azure Developer CLI. Od neúspěšných nasazení až po problémy specifické pro AI.
 
-> Ověřeno s `azd 1.25.6` v červnu 2026.
+> Ověřeno s `azd 1.27.1` v červenci 2026.
 
 ## Výukové cíle
 
 Po dokončení této kapitoly budete umět:
 - Diagnostikovat běžné chyby nasazení AZD
-- Ladit problémy s autentizací a oprávněními
-- Řešit problémy s konektivitou AI služeb
-- Používat Azure Portal a CLI pro odstraňování problémů
+- Ladit problémy s ověřováním a oprávněními
+- Řešit problémy s konektivitou služeb AI
+- Používat Azure Portal a CLI pro řešení problémů
 
 ---
 
 ## 📚 Lekce
 
-| # | Lekce | Popis | Doba |
+| # | Lekce | Popis | Čas |
 |---|--------|-------------|------|
 | 1 | [Běžné problémy](common-issues.md) | Často se vyskytující problémy | 30 min |
-| 2 | [Průvodce laděním](debugging.md) | Strategie ladění krok za krokem | 45 min |
-| 3 | [Řešení problémů s AI](ai-troubleshooting.md) | Problémy specifické pro AI | 30 min |
+| 2 | [Průvodce laděním](debugging.md) | Postupy ladění krok za krokem | 45 min |
+| 3 | [Řešení problémů AI](ai-troubleshooting.md) | Problémy specifické pro AI | 30 min |
 
 ---
 
-## 🚨 Rychlá řešení
+## 🚨 Rychlé opravy
 
-### Problémy s autentizací
+### Problémy s ověřováním
 ```bash
-# Vyžadováno pro pracovní postupy AZD
+# Požadováno pro pracovní postupy AZD
 azd auth login
 
 # Volitelné, pokud také přímo používáte příkazy Azure CLI
@@ -43,7 +43,7 @@ az login
 azd auth status
 ```
 
-### Selhání zřizování
+### Selhání nasazení
 ```bash
 azd show
 azd monitor --logs
@@ -57,7 +57,7 @@ azd env new different-name
 azd up
 ```
 
-### Překročení kvóty
+### Překročený limit kvóty
 ```bash
 az vm list-usage --location eastus --output table
 azd env set AZURE_LOCATION westus2
@@ -66,26 +66,26 @@ azd up
 
 ---
 
-## 📋 Přehled chybových kódů
+## 📋 Referenční seznam chybových kódů
 
 | Chyba | Příčina | Řešení |
 |-------|-------|----------|
-| `AuthenticationError` | Nejste přihlášeni | `azd auth login` |
+| `AuthenticationError` | Nejsou přihlášeni | `azd auth login` |
 | `ResourceNotFound` | Chybějící zdroj | Zkontrolujte názvy zdrojů |
-| `QuotaExceeded` | Limity předplatného | Požádejte o zvýšení kvóty |
+| `QuotaExceeded` | Omezení předplatného | Požádejte o navýšení kvóty |
 | `InvalidTemplate` | Chyba syntaxe Bicep | `az bicep build` |
-| `Conflict` | Zdroj existuje | Použijte jiný název nebo odstraňte zdroj |
+| `Conflict` | Zdroj již existuje | Použijte nový název nebo vymažte existující |
 | `Forbidden` | Nedostatečná oprávnění | Zkontrolujte role RBAC |
 
 ---
 
-## 🔄 Reset a obnova
+## 🔄 Resetování a zotavení
 
 ```bash
 # Měkký reset (ponechat zdroje, znovu nasadit kód)
 azd deploy --force
 
-# Tvrdý reset (smazat vše, začít znovu)
+# Tvrdý reset (smazat vše, začít od začátku)
 azd down --force --purge
 azd up
 ```
@@ -96,16 +96,16 @@ azd up
 
 | Směr | Kapitola |
 |-----------|---------|
-| **Předchozí** | [Kapitola 6: Před nasazením](../chapter-06-pre-deployment/README.md) |
-| **Další** | [Kapitola 8: Produkční](../chapter-08-production/README.md) |
+| **Předchozí** | [Kapitola 6: Předsazení](../chapter-06-pre-deployment/README.md) |
+| **Další** | [Kapitola 8: Produkce](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Související zdroje
 
-- [Kontroly před nasazením](../chapter-06-pre-deployment/preflight-checks.md)
-- [Příručka konfigurace](../chapter-03-configuration/configuration.md)
-- [Problémy AZD na GitHubu](https://github.com/Azure/azure-dev/issues)
+- [Předsazení - kontroly](../chapter-06-pre-deployment/preflight-checks.md)
+- [Průvodce konfigurací](../chapter-03-configuration/configuration.md)
+- [AZD GitHub problémy](https://github.com/Azure/azure-dev/issues)
 
 ---
 

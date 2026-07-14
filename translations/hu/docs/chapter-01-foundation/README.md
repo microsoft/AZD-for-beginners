@@ -1,4 +1,4 @@
-# 1. fejezet: Alapok és Gyors Kezdés
+# 1. fejezet: Alapok és Gyors kezdés
 
 **📚 Tanfolyam**: [AZD Kezdőknek](../../README.md) | **⏱️ Időtartam**: 30-45 perc | **⭐ Nehézségi szint**: Kezdő
 
@@ -6,35 +6,35 @@
 
 ## Áttekintés
 
-Ez a fejezet bevezeti az Azure Developer CLI (azd) alapjait. Megismered az alapfogalmakat, telepíted az eszközöket, és az első alkalmazásodat telepíted az Azure-ra.
+Ez a fejezet bemutatja az Azure Developer CLI (azd) alapjait. Megismerheted az alapfogalmakat, telepítheted az eszközöket, és telepítheted az első alkalmazásodat az Azure-ba.
 
-> Validált a `azd 1.25.6` verzióval 2026 júniusában.
+> Érvényesítve `azd 1.27.1` verzióval 2026 júliusában.
 
 ## Tanulási célok
 
-A fejezet elvégzésével képes leszel:
-- Megérteni, mi az Azure Developer CLI és hogyan különbözik az Azure CLI-től
-- Telepíteni és konfigurálni az AZD-t a platformodon
-- `azd up` parancsal telepíteni az első alkalmazásodat Azure-ra
-- `azd down` paranccsal törölni az erőforrásokat
+A fejezet elvégzése után képes leszel:
+- Megérteni, mi az Azure Developer CLI, és miben különbözik az Azure CLI-től
+- Telepíteni és konfigurálni az AZD-t a saját platformodon
+- Az első alkalmazásodat telepíteni az Azure-ra a `azd up` paranccsal
+- Erőforrásokat tisztítani a `azd down` paranccsal
 
 ---
 
-## 📚 Tananyagok
+## 📚 Leckék
 
 | # | Lecke | Leírás | Idő |
 |---|--------|-------------|------|
-| 1 | [AZD Alapok](azd-basics.md) | Alapfogalmak, terminológia és projekt struktúra | 15 perc |
+| 1 | [AZD Alapok](azd-basics.md) | Alapfogalmak, terminológia és projektstruktúra | 15 perc |
 | 2 | [Telepítés és Beállítás](installation.md) | Platform specifikus telepítési útmutatók | 10 perc |
-| 3 | [Az első projekted](first-project.md) | Gyakorlati: Webalkalmazás telepítése Azure-ra | 20 perc |
-| 4 | [Használd a saját alkalmazásod](bring-your-own-app.md) | Az azd hozzáadása egy meglévő projekthez | 15 perc |
-| 5 | [Fejlesztői konténerek és Codespaces](dev-containers.md) | Reprodukálható azd környezetek fejlesztői konténerek segítségével | 15 perc |
+| 3 | [Az első projekted](first-project.md) | Gyakorlati útmutató: Webalkalmazás telepítése az Azure-ra | 20 perc |
+| 4 | [Használd a saját alkalmazásodat](bring-your-own-app.md) | Az azd hozzáadása már meglévő projekthez | 15 perc |
+| 5 | [Dev konténerek és Codespaces](dev-containers.md) | Reprodukálható azd környezetek dev konténerekkel | 15 perc |
 
 ---
 
-## ✅ Innen kezd: Ellenőrizd a beállítást
+## ✅ Kezdj itt: Ellenőrizd a beállításokat
 
-Mielőtt elkezdenéd, ellenőrizd, hogy a helyi géped készen áll az 1. fejezet sablonjára:
+Mielőtt elkezdenéd, győződj meg róla, hogy a helyi géped készen áll az 1. fejezet sablonjára:
 
 **Windows:**
 ```powershell
@@ -46,11 +46,11 @@ Mielőtt elkezdenéd, ellenőrizd, hogy a helyi géped készen áll az 1. fejeze
 bash ./validate-setup.sh
 ```
 
-Ha a szkript hiányzó eszközöket jelez, először javítsd ki azokat, majd folytasd a fejezettel.
+Ha a script hiányzó eszközökről számol be, először azokat javítsd, majd folytasd a fejezettel.
 
 ---
 
-## 🚀 Gyors Kezdés
+## 🚀 Gyors kezdés
 
 ```bash
 # Telepítés ellenőrzése
@@ -64,7 +64,7 @@ azd auth login
 azd init --template todo-nodejs-mongo
 azd up
 
-# Takarítás a befejezés után
+# Takarítsa el a befejezés után
 azd down --force --purge
 ```
 
@@ -72,14 +72,14 @@ azd down --force --purge
 
 ## ✅ Siker kritériumok
 
-A fejezet befejezése után képes leszel:
+A fejezet elvégzése után képes leszel:
 
 ```bash
 azd version              # Megjeleníti a telepített verziót
 azd init --template todo-nodejs-mongo  # Inicializálja a projektet
-azd up                   # Telepítés Azure-ra
+azd up                   # Telepít Azure-ra
 azd show                 # Megjeleníti a futó alkalmazás URL-jét
-azd down --force --purge # Erőforrások törlése
+azd down --force --purge # Erőforrások takarítása
 ```
 
 ---
@@ -88,16 +88,16 @@ azd down --force --purge # Erőforrások törlése
 
 | Irány | Fejezet |
 |-----------|---------|
-| **Következő** | [2. fejezet: Mesterséges Intelligencia Alapú Fejlesztés](../chapter-02-ai-development/README.md) |
+| **Következő** | [2. fejezet: AI-vezérelt fejlesztés](../chapter-02-ai-development/README.md) |
 | **Ugrás ide** | [3. fejezet: Konfiguráció](../chapter-03-configuration/README.md) |
 
 ---
 
-## 📖 Kapcsolódó anyagok
+## 📖 Kapcsolódó források
 
-- [Parancs gyorssegéd](../../resources/cheat-sheet.md)
-- [GYIK](../../resources/faq.md)
-- [Glosszárium](../../resources/glossary.md)
+- [Parancs összefoglaló](../../resources/cheat-sheet.md)
+- [Gyakran Ismételt Kérdések](../../resources/faq.md)
+- [Szószedet](../../resources/glossary.md)
 
 ---
 

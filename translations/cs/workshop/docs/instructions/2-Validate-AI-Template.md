@@ -1,240 +1,240 @@
-# 2. Validate a Template
+# 2. Validace šablony
 
-> Validated against `azd 1.25.6` in June 2026.
+> Validováno podle `azd 1.27.1` v červenci 2026.
 
 !!! tip "NA KONCI TOHOTO MODULU BUDETE SCHOPNI"
 
     - [ ] Analyzovat architekturu AI řešení
-    - [ ] Pochopit pracovní postup nasazení s AZD
-    - [ ] Použít GitHub Copilot pro pomoc s používáním AZD
-    - [ ] **Lab 2:** Nasadit a ověřit šablonu AI Agents
+    - [ ] Pochopit workflow nasazení AZD
+    - [ ] Používat GitHub Copilot pro pomoc s používáním AZD
+    - [ ] **Lab 2:** Nasadit a ověřit šablonu AI agentů
 
 ---
 
 
-## 1. Introduction
+## 1. Úvod
 
-The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) or `azd` is an open-source commandline tool that streamlines the developer workflow when building and deploying applications to Azure. 
+[Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) nebo `azd` je open-source nástroj příkazové řádky, který zjednodušuje workflow vývojáře při vytváření a nasazování aplikací do Azure.
 
-[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) are standardized repositories that include sample application code, _infrastructure-as-code_ assets, and `azd` configuration files for a cohesive solution architecture. Provisioning the infrastructure becomes as simple as an `azd provision` command - while using `azd up` allows you to provision infrastructure **and** deploy your application at one shot!
+[AZD Šablony](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) jsou standardizované repozitáře, které obsahují ukázkový aplikační kód, zdroje _infrastruktury jako kódu_ a konfigurační soubory `azd` pro celistvou architekturu řešení. Provisioning infrastruktury je tak jednoduchý jako příkaz `azd provision` – zatímco příkaz `azd up` umožní najednou provisionovat infrastrukturu **a** nasadit vaši aplikaci!
 
-As a result, jumpstarting your application development process can be as simple as finding the right _AZD Starter template_ that comes closest to your application and infrastructure needs - then customizing the repository to suit your scenario requirements.
+Výsledkem je, že spuštění vašeho vývojového procesu aplikace může být tak snadné jako najít správnou _AZD Starter šablonu_, která nejvíce vyhovuje vašim požadavkům na aplikaci a infrastrukturu – a pak přizpůsobit repozitář podle vašich scénářů.
 
-Before we begin, let's make sure you have the Azure Developer CLI installed.
+Než začneme, ujistěme se, že máte nainstalovaný Azure Developer CLI.
 
-1. Open a VS Code terminal and type this command:
+1. Otevřete terminál ve VS Code a zadejte tento příkaz:
 
       ```bash title="" linenums="0"
       azd version
       ```
 
-1. You should see something like this!
+1. Měli byste vidět něco podobného!
 
       ```bash title="" linenums="0"
-      azd version 1.25.6 (commit <current-build>)
+      azd version 1.27.1 (commit <current-build>)
       ```
 
-**You are now ready to select and deploy a template with azd**
+**Nyní jste připraveni vybrat a nasadit šablonu pomocí azd**
 
 ---
 
-## 2. Template Selection
+## 2. Výběr šablony
 
-The Microsoft Foundry platform comes with a [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that cover popular solution scenarios like _multi-agent workflow atomation_ and _multi-modal content processing_. You can also discover these templates by visiting the Microsoft Foundry portal.
+Platforma Microsoft Foundry přichází s [sadu doporučených AZD šablon](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started), které pokrývají oblíbené scénáře řešení jako _automatizace workflow s více agenty_ a _zpracování multimodálního obsahu_. Tyto šablony můžete také objevit návštěvou portálu Microsoft Foundry.
 
-1. Visit [https://ai.azure.com/templates](https://ai.azure.com/templates)
-1. Log into the Microsoft Foundry portal when prompted - you will see something like this.
+1. Navštivte [https://ai.azure.com/templates](https://ai.azure.com/templates)
+1. Přihlaste se do portálu Microsoft Foundry, když budete vyzváni – uvidíte něco takového.
 
-![Výběr](../../../../../translated_images/cs/01-pick-template.60d2d5fff5ebc374.webp)
+![Pick](../../../../../translated_images/cs/01-pick-template.60d2d5fff5ebc374.webp)
 
 
-The **Basic** options are your starter templates:
+Volby **Základní** jsou vaše startovací šablony:
 
-1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) that deploys a basic chat application _with your data_ to Azure Container Apps. Use this to explore a basic AI chatbot scenario.
-1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) that also deploys a standard AI Agent (with the Foundry Agents). Use this to get familiar with agentic AI solutions involving tools and models.
+1. [ ] [Začít s AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat), která nasadí základní chatovací aplikaci _s vašimi daty_ do Azure Container Apps. Použijte to k prozkoumání základního scénáře AI chatbota.
+1. [X] [Začít s AI Agenty](https://github.com/Azure-Samples/get-started-with-ai-agents), která také nasadí standardního AI Agenta (s Foundry agenty). Použijte to, abyste si osvojili agentní AI řešení využívající nástroje a modely.
 
-Visit the second link in a new browser tab (or click `Open in GitHub` for the related card). You should see the repository for this AZD Template. Take a minute to explore the README. The application architecture looks like this:
+Navštivte druhý odkaz v nové záložce prohlížeče (nebo klikněte na `Open in GitHub` na příslušné kartě). Měli byste vidět repozitář této AZD šablony. Věnujte chvíli prozkoumání README. Architektura aplikace vypadá takto:
 
-![Architektura](../../../../../translated_images/cs/architecture.8cec470ec15c65c7.webp)
+![Arch](../../../../../translated_images/cs/architecture.8cec470ec15c65c7.webp)
 
 ---
 
-## 3. Template Activation
+## 3. Aktivace šablony
 
-Let's try to deploy this template and make sure it is valid. We'll follow the guidelines in the [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) section.
+Zkusme nasadit tuto šablonu a ověřit její platnost. Budeme postupovat podle pokynů v sekci [Začínáme](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started).
 
-1. Choose a working environment for the template repository:
+1. Vyberte pracovní prostředí pro repozitář šablony:
 
-      - **GitHub Codespaces**: Click [this link](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) and confirm `Create codespace`
-      - **Local clone or dev container**: Clone `Azure-Samples/get-started-with-ai-agents` and open it in VS Code
+      - **GitHub Codespaces**: Klikněte na [tento odkaz](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) a potvrďte `Create codespace`
+      - **Lokální klon nebo dev kontejner**: Klonujte `Azure-Samples/get-started-with-ai-agents` a otevřete ji ve VS Code
 
-1. Wait until the VS Code terminal is ready, then type the following command:
+1. Počkejte, až bude terminál VS Code připraven, pak zadejte následující příkaz:
 
    ```bash title="" linenums="0"
    azd up
    ```
 
-Complete the workflow steps that this will trigger:
+Dokončete kroky workflow, které tento příkaz spustí:
 
-1. You will be prompted to log into Azure - follow instructions to authenticate
-1. Enter a unique environment name for you - e.g., I used `nitya-mshack-azd`
-1. This  will create a `.azure/` folder - you will see a subfolder with the env name
-1. You will be prompted to select a subscription name - select the default
-1. You will be prompted for a location - use `East US 2`
+1. Budete vyzváni k přihlášení do Azure – postupujte podle pokynů pro autentizaci
+1. Zadejte unikátní název prostředí pro vás – např. já jsem použil `nitya-mshack-azd`
+1. Toto vytvoří složku `.azure/` – uvidíte podsložku s názvem prostředí
+1. Budete vyzváni k výběru názvu předplatného – vyberte výchozí
+1. Budete vyzváni k zadání umístění – použijte `East US 2`
 
-Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
+Nyní počkejte na dokončení provisioningu. **Trvá to 10-15 minut**
 
-1. When done, your console will show a SUCCESS message like this:
+1. Po dokončení váš konzolový výstup zobrazí ÚSPĚŠNOU zprávu jako tato:
       ```bash title="" linenums="0"
       SUCCESS: Your up workflow to provision and deploy to Azure completed in 10 minutes 17 seconds.
       ```
-1. Your Azure Portal will now have a provisioned resource group with that env name:
+1. V Azure Portálu nyní uvidíte zdrojovou skupinu s názvem prostředí:
 
-      ![Prostředí](../../../../../translated_images/cs/02-provisioned-infra.46c706b14f56e0bf.webp)
+      ![Infra](../../../../../translated_images/cs/02-provisioned-infra.46c706b14f56e0bf.webp)
 
-1. **You are now ready to validate the deployed infrastructure and application**.
-
----
-
-## 4. Template Validation
-
-1. Visit Azure Portal [Resource Groups](https://portal.azure.com/#browse/resourcegroups) page - log in when prompted
-1. Click on RG for your environment name - you see the page above
-
-      - click on the Azure Container Apps resource
-      - click on the Application Url in the _Essentials_ section (top right)
-
-1. You should see a hosted application front-end UI like this:
-
-   ![Aplikace](../../../../../translated_images/cs/03-test-application.471910da12c3038e.webp)
-
-1. Try asking a couple of [sample questions](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
-
-      1. Ask: ```What is the capital of France?``` 
-      1. Ask: ```What's the best tent under $200 for two people, and what features does it include?```
-
-1. You should get answers similar to what is shown below. _But how does this work?_ 
-
-      ![Zobrazení dotazu](../../../../../translated_images/cs/03-test-question.521c1e863cbaddb6.webp)
+1. **Nyní jste připraveni validovat nasazenou infrastrukturu a aplikaci**.
 
 ---
 
-## 5.  Agent Validation
+## 4. Validace šablony
 
-The Azure Container App deploys an endpoint that connects to the AI Agent provisioned in the Microsoft Foundry project for this template. Let's take a look at what that means.
+1. Navštivte stránku Azure Portal [Resource Groups](https://portal.azure.com/#browse/resourcegroups) – přihlaste se, pokud budete vyzváni
+1. Klikněte na RG odpovídající vašemu názvu prostředí – uvidíte stránku výše
 
-1. Return to the Azure Portal _Overview_ page for your resource group
+      - klikněte na zdroj Azure Container Apps
+      - klikněte na URL aplikace v sekci _Essentials_ (vpravo nahoře)
 
-1. Click on the `Microsoft Foundry` resource in that list
+1. Měli byste vidět hostované front-end UI aplikace jako toto:
 
-1. You should see this. Click the `Go to Microsoft Foundry Portal` button. 
+   ![App](../../../../../translated_images/cs/03-test-application.471910da12c3038e.webp)
+
+1. Vyzkoušejte několik [ukázkových otázek](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
+
+      1. Zeptejte se: ```Jaké je hlavní město Francie?```
+      1. Zeptejte se: ```Jaký je nejlepší stan pod 200 dolarů pro dvě osoby a jaké má vlastnosti?```
+
+1. Měli byste dostat odpovědi podobné těm níže. _Ale jak to funguje?_
+
+      ![App](../../../../../translated_images/cs/03-test-question.521c1e863cbaddb6.webp)
+
+---
+
+## 5. Validace agenta
+
+Azure Container App nasazuje endpoint, který se připojuje k AI Agentovi provisionovanému v projektu Microsoft Foundry pro tuto šablonu. Podívejme se, co to znamená.
+
+1. Vraťte se na stránku _Přehled_ ve vašem Azure Portálu pro vaši zdrojovou skupinu
+
+1. Klikněte na `Microsoft Foundry` zdroj v tomto seznamu
+
+1. Měli byste vidět toto. Klikněte na tlačítko `Go to Microsoft Foundry Portal`.
    ![Foundry](../../../../../translated_images/cs/04-view-foundry-project.fb94ca41803f28f3.webp)
 
-1. You should see the Foundry Project page for your AI application
-   ![Projekt](../../../../../translated_images/cs/05-visit-foundry-portal.d734e98135892d7e.webp)
+1. Měli byste vidět stránku s projektem Foundry pro vaši AI aplikaci
+   ![Project](../../../../../translated_images/cs/05-visit-foundry-portal.d734e98135892d7e.webp)
 
-1. Click on `Agents` - you see the default Agent provisioned in your project
-   ![Agenti](../../../../../translated_images/cs/06-visit-agents.bccb263f77b00a09.webp)
+1. Klikněte na `Agents` – uvidíte výchozího agenta provisionovaného ve vašem projektu
+   ![Agents](../../../../../translated_images/cs/06-visit-agents.bccb263f77b00a09.webp)
 
-1. Select it - and you see the Agent details. Note the following:
+1. Vyberte ho – a uvidíte podrobnosti agenta. Všimněte si následujícího:
 
-      - The agent uses File Search by default (always)
-      - The agent `Knowledge` indicates it has 32 files uploaded (for file search)
-      ![Detaily agenta](../../../../../translated_images/cs/07-view-agent-details.0e049f37f61eae62.webp)
+      - Agent používá výchozí vyhledávání v souborech (vždy)
+      - Agent `Knowledge` uvádí, že bylo nahráno 32 souborů (pro vyhledávání v souborech)
+      ![Agents](../../../../../translated_images/cs/07-view-agent-details.0e049f37f61eae62.webp)
 
-1. Look for the `Data+indexes` option in the left menu and click for details. 
+1. Vyhledejte možnost `Data+indexes` v levém menu a klikněte pro detaily.
 
-      - You should see the 32 data files uploaded for knowledge.
-      - These will correspond to the 12 customer files and 20 product files under `src/files` 
+      - Měli byste vidět 32 nahraných datových souborů pro znalosti.
+      - Ty odpovídají 12 zákaznickým souborům a 20 produktovým souborům ve složce `src/files`
       ![Data](../../../../../translated_images/cs/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
-**You validated Agent operation!** 
+**Potvrdili jste správnou funkci agenta!**
 
-1. The agent responses are grounded in the knowledge in those files. 
-1. You can now ask questions related to that data, and get grounded responses.
-1. Example: `customer_info_10.json` describes the 3 purchases made by "Amanda Perez"
+1. Odpovědi agenta jsou založeny na znalostech v těchto souborech.
+1. Nyní můžete klást otázky týkající se těchto dat a dostávat na ně podložené odpovědi.
+1. Příklad: `customer_info_10.json` popisuje 3 nákupy uskutečněné "Amanda Perez"
 
-Revisit the browser tab with the Container App endpoint and ask: `What products does Amanda Perez own?`. You should see something like this:
+Vraťte se do záložky prohlížeče s endpointem Container App a zeptejte se: `Jaké produkty vlastní Amanda Perez?`. Měli byste vidět něco takového:
 
 ![Data](../../../../../translated_images/cs/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
-## 6. Agent Playground
+## 6. Herní pole agenta
 
-Let's build a bit more intuition for the capabilities of Microsoft Foundry, by taking the Agent for a spin in the Agents Playground. 
+Získejme trochu více intuice o možnostech Microsoft Foundry tím, že si agenta vyzkoušíme v Agents Playground.
 
-1. Return to the `Agents` page in Microsoft Foundry - select the default agent
-1. Click the `Try in Playground` option - you should get a Playground UI like this
-1. Ask the same question: `What products does Amanda Perez own?`
+1. Vraťte se na stránku `Agents` v Microsoft Foundry - vyberte výchozího agenta
+1. Klikněte na možnost `Try in Playground` - měli byste vidět UI Playgroundu jako toto
+1. Zeptejte se stejnou otázku: `Jaké produkty vlastní Amanda Perez?`
 
     ![Data](../../../../../translated_images/cs/09-ask-in-playground.a1b93794f78fa676.webp)
 
-You get the same (or similar) response - but you also get additional information that you can use to understand the quality, cost, and performance of your agentic app. For example:
+Dostanete stejnou (nebo podobnou) odpověď - ale také další informace, které můžete využít k porozumění kvalitě, nákladům a výkonu vaší agentní aplikace. Například:
 
-1. Note that the response cites data files used to "ground" the response
-1. Hover over any of these file labels - does the data match your query and displayed response?
+1. Všímejte si, že odpověď uvádí datové soubory, které byly použity k "podložení" odpovědi
+1. Najděte kurzorem libovolnou ze štítků souborů – odpovídají data vaší otázce a zobrazené odpovědi?
 
-You also see a _stats_ row below the response. 
+Pod odpovědí také vidíte řádek se _statistikami_.
 
-1. Hover over any metric - e.g., Safety. You see something like this
-1. Does the assessed rating match your intuition for the response safety level?
+1. Najděte kurzorem libovolnou metriku – např. Bezpečnost (Safety). Uvidíte něco jako toto
+1. Odpovídá hodnocení vaší intuici ohledně úrovně bezpečnosti odpovědi?
 
       ![Data](../../../../../translated_images/cs/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
 ---
 
-## 7. Built-in Observability
+## 7. Vestavěná možnost sledování
 
-Observability is about instrumenting your application to generate data that can be used to understand, debug, and optimize, its operations. To get a sense for this:
+Sledovatelnost (observability) znamená instrumentaci vaší aplikace k generování dat, která lze využít k pochopení, ladění a optimalizaci jejího fungování. Pro získání přehledu:
 
-1. Click the `View Run Info` button - you should see this view. This is an example of [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) in action. _You can also get this view by clicking Thread Logs in the top-level menu_.
+1. Klikněte na tlačítko `View Run Info` - měli byste vidět tento pohled. Toto je příklad [sledování agenta](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) v praxi. _Tento pohled můžete získat také kliknutím na Thread Logs v horní nabídce_.
 
-   - Get a sense for the run steps and tools engaged by the agent
-   - Understand total Token count (vs. output tokens usage) for response
-   - Understand the latency and where time is being spent in execution
+   - Získejte přehled o krocích běhu a zapojených nástrojích agenta
+   - Pochopte celkový počet Tokenů (ve srovnání s použitými výstupními tokeny) pro odpověď
+   - Pochopte latenci a kde je tráven čas ve vykonávání
 
       ![Agent](../../../../../translated_images/cs/10-view-run-info.b20ebd75fef6a1cc.webp)
 
-1. Click the `Metadata` tab to see additional attributes for the run, that may provide useful context for debugging issues later.   
+1. Klikněte na záložku `Metadata` pro zobrazení dalších atributů běhu, které mohou poskytovat užitečný kontext pro pozdější ladění problémů.
 
       ![Agent](../../../../../translated_images/cs/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 
-1. Click the `Evaluations` tab to see auto-assessments made on the agent response. These include safety evaluations (e.g., Self-harm) and agent-specifc evaluations (e.g., Intent resolution, Task adherence).
+1. Klikněte na záložku `Evaluations` pro zobrazení automatických hodnocení odpovědi agenta. Ty zahrnují hodnocení bezpečnosti (např. Sebepoškozování) a hodnocení specifická pro agenta (např. vyhodnocení záměru, dodržení úkolu).
 
       ![Agent](../../../../../translated_images/cs/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
-1. Last but not least, click the `Monitoring` tab in the sidebar menu.
+1. Nakonec klikněte na záložku `Monitoring` v postranním menu.
 
-      - Select `Resource usage` tab in the displayed page - and view the metrics.
-      - Track application usage in terms of costs (tokens) and load (requests).
-      - Track applicaton latency to first byte (input processing) and last byte (output).
+      - Vyberte záložku `Resource usage` na zobrazené stránce a prohlédněte si metriky.
+      - Sledujte využití aplikace z hlediska nákladů (tokenů) a zatížení (požadavky).
+      - Sledujte latenci aplikace pro první bajt (zpracování vstupu) a poslední bajt (výstup).
 
       ![Agent](../../../../../translated_images/cs/13-monitoring-resources.5148015f7311807f.webp)
 
 ---
 
-## 8. Environment Variables
+## 8. Proměnné prostředí
 
-So far, we've walked through the deployment in the browser - and validated that our infrastructure is provisioned and the application is operational. But to work with the application _code-first_, we need to configure our local development environment with the relevant variables required to work with these resources. Using `azd` makes it easy.
+Doposud jsme prošli nasazením v prohlížeči – a ověřili jsme, že infrastruktura byla provisionována a aplikace funguje. Ale abychom mohli pracovat s aplikací _především kódem_, musíme nakonfigurovat naše lokální vývojové prostředí s příslušnými proměnnými prostředí potřebnými k práci s těmito zdroji. Použití `azd` to výrazně usnadňuje.
 
-1. The Azure Developer CLI [uses environment variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) to store and manage configuration settings for  the application deployments.
+1. Azure Developer CLI [používá proměnné prostředí](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) ke skladování a řízení konfiguračních nastavení pro nasazení aplikací.
 
-1. Environment variables are stored in `.azure/<env-name>/.env` - this scopes them to the `env-name` environment used during deployment and helps you isolate environments between different deployment targets in the same repo.
+1. Proměnné prostředí jsou uloženy v `.azure/<env-name>/.env` – což je vztahuje ke konkrétnímu prostředí `env-name` použitým při nasazení a pomáhá izolovat prostředí mezi různými cíli nasazení ve stejném repozitáři.
 
-1. Environment variables are automatically loaded by the `azd` command whenever it executes a specific command (e.g., `azd up`). Note that `azd` does not automatically read _OS-level_ environment variables (e.g., set in the shell) - instead use `azd set env` and `azd get env` to transfer information within scripts.
+1. Proměnné prostředí jsou automaticky načítány příkazem `azd` vždy, když spustí konkrétní příkaz (např. `azd up`). Vezměte na vědomí, že `azd` automaticky nečte _proměnné prostředí na úrovni OS_ (např. nastavené v shellu) – místo toho použijte příkazy `azd set env` a `azd get env` pro předávání informací ve skriptech.
 
 
-Let's try out a few commands:
+Vyzkoušejme si několik příkazů:
 
-1. Get all the environment variables set for `azd` in this environment:
+1. Zobrazit všechny proměnné prostředí nastavené pro `azd` v tomto prostředí:
 
       ```bash title="" linenums="0"
       azd env get-values
       ```
       
-      You see something like:
+      Uvidíte něco jako:
 
       ```bash title="" linenums="0"
       AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4.1-mini"
@@ -244,19 +244,19 @@ Let's try out a few commands:
       ...
       ```
 
-1. Get a specific value - e.g., I want to know if we set the `AZURE_AI_AGENT_MODEL_NAME` value
+1. Zobrazit konkrétní hodnotu – např. chci vědět, jestli máme nastavenou hodnotu `AZURE_AI_AGENT_MODEL_NAME`
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
       
-      You see something like this - it was not set by default!
+      Uvidíte něco takového – nebylo to nastaveno ve výchozím stavu!
 
       ```bash title="" linenums="0"
       ERROR: key 'AZURE_AI_AGENT_MODEL_NAME' not found in the environment values
       ```
 
-1. Set a new environment variable for `azd`. Here, we update the agent model name. _Note: any changes made will be immediately reflected in the `.azure/<env-name>/.env` file.
+1. Nastavit novou proměnnou prostředí pro `azd`. Zde aktualizujeme název modelu agenta. _Poznámka: jakékoli změny se okamžitě projeví v souboru `.azure/<env-name>/.env`.
 
       ```bash title="" linenums="0"
       azd env set AZURE_AI_AGENT_MODEL_NAME gpt-4.1
@@ -264,31 +264,32 @@ Let's try out a few commands:
       azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
       ```
 
-      Now, we should find the value is set:
+      Nyní by měla být hodnota nastavena:
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
 
-1. Note that some resources are persistent (e.g., model deployments) and will require more than just an `azd up` to force the redeployment. Let's try tearing down the original deployment and redeploying with changed env vars.
+1. Některé zdroje jsou přetrvávající (např. nasazení modelů) a vyžadují víc než jen `azd up` k nucenému opětovnému nasazení. Zkusme rozebrat původní nasazení a nasadit znovu s novými proměnnými prostředí.
 
-1. **Refresh** If you had previously deployed infrastructure using an azd template - you can _refresh_ the state of your local environment variables based on the current state of your Azure deployment using this command:
+1. **Obnovit** Pokud jste dříve nasadili infrastrukturu pomocí šablony azd – můžete _obnovit_ stav vašich lokálních proměnných prostředí na základě aktuálního stavu nasazení v Azure pomocí tohoto příkazu:
 
       ```bash title="" linenums="0"
       azd env refresh
       ```
 
-      Toto je silný způsob, jak _synchronizovat_ proměnné prostředí mezi dvěma nebo více lokálními vývojovými prostředími (např. tým s několika vývojáři) - což umožňuje, aby nasazená infrastruktura sloužila jako zdroj pravdy pro stav proměnných prostředí. Členové týmu jednoduše _obnoví_ proměnné, aby se opět synchronizovali.
+
+      Toto je silný způsob, jak _synchronizovat_ proměnné prostředí mezi dvěma nebo více lokálními vývojovými prostředími (např. tým s více vývojáři) - což umožňuje, aby nasazená infrastruktura sloužila jako pravdivý zdroj stavu proměnných prostředí. Členové týmu jednoduše _obnoví_ proměnné, aby se opět synchronizovali.
 
 ---
 
 ## 9. Gratulujeme 🏆
 
-Právě jste dokončili kompletní pracovní postup od začátku do konce, ve kterém jste:
+Právě jste dokončili kompletní pracovní postup, ve kterém jste:
 
-- [X] Vybrali jste AZD Template, kterou chcete použít
-- [X] Otevřeli jste šablonu v podporovaném vývojovém prostředí
-- [X] Nasadili jste šablonu a ověřili, že funguje
+- [X] Vybrali šablonu AZD, kterou chcete použít
+- [X] Otevřeli šablonu v podporovaném vývojovém prostředí
+- [X] Nasadili šablonu a ověřili, že funguje
 
 ---
 

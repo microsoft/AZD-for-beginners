@@ -1,14 +1,14 @@
-# Kapitola 1: Základy & Rychlý start
+# Kapitola 1: Základy a rychlý start
 
-**📚 Kurz**: [AZD pro začátečníky](../../README.md) | **⏱️ Délka**: 30-45 minut | **⭐ Složitost**: Začátečník
+**📚 Kurz**: [AZD Pro začátečníky](../../README.md) | **⏱️ Doba trvání**: 30-45 minut | **⭐ Složitost**: Začátečník
 
 ---
 
 ## Přehled
 
-Tato kapitola představuje základy Azure Developer CLI (azd). Naučíte se základní pojmy, nainstalujete nástroje a nasadíte svou první aplikaci do Azure.
+Tato kapitola představuje základy Azure Developer CLI (azd). Naučíte se hlavní koncepty, nainstalujete nástroje a nasadíte svou první aplikaci do Azure.
 
-> Ověřeno proti `azd 1.25.6` v červnu 2026.
+> Ověřeno s `azd 1.27.1` v červenci 2026.
 
 ## Cíle učení
 
@@ -16,7 +16,7 @@ Po dokončení této kapitoly budete:
 - Rozumět tomu, co je Azure Developer CLI a jak se liší od Azure CLI
 - Nainstalovat a nakonfigurovat AZD na vaší platformě
 - Nasadit svou první aplikaci do Azure pomocí `azd up`
-- Odstranit zdroje pomocí `azd down`
+- Vyčistit zdroje pomocí `azd down`
 
 ---
 
@@ -24,17 +24,17 @@ Po dokončení této kapitoly budete:
 
 | # | Lekce | Popis | Čas |
 |---|--------|-------------|------|
-| 1 | [Základy AZD](azd-basics.md) | Základní koncepty, terminologie a struktura projektu | 15 min |
-| 2 | [Instalace & Nastavení](installation.md) | Instalace specifická pro platformu | 10 min |
+| 1 | [Základy AZD](azd-basics.md) | Hlavní koncepty, terminologie a struktura projektu | 15 min |
+| 2 | [Instalace a nastavení](installation.md) | Platformově specifické instalační průvodce | 10 min |
 | 3 | [Váš první projekt](first-project.md) | Prakticky: Nasazení webové aplikace do Azure | 20 min |
-| 4 | [Přidejte vlastní aplikaci](bring-your-own-app.md) | Přidání azd do existujícího projektu, který již máte | 15 min |
-| 5 | [Vývojové kontejnery & Codespaces](dev-containers.md) | Reprodukovatelné prostředí azd pomocí vývojových kontejnerů | 15 min |
+| 4 | [Použijte vlastní aplikaci](bring-your-own-app.md) | Přidání azd do již existujícího projektu | 15 min |
+| 5 | [Vývojové kontejnery a Codespaces](dev-containers.md) | Reprodukovatelné azd prostředí s dev kontejnery | 15 min |
 
 ---
 
 ## ✅ Začněte zde: Ověřte své nastavení
 
-Než začnete, potvrďte, že je váš lokální počítač připraven pro šablonu Kapitoly 1:
+Než začnete, ujistěte se, že váš lokální počítač je připraven pro šablonu Kapitoly 1:
 
 **Windows:**
 ```powershell
@@ -46,7 +46,7 @@ Než začnete, potvrďte, že je váš lokální počítač připraven pro šabl
 bash ./validate-setup.sh
 ```
 
-Pokud skript hlásí chybějící nástroje, opravte je nejdříve a pak pokračujte v kapitole.
+Pokud skript hlásí chybějící nástroje, nejprve je opravte a pak pokračujte v kapitole.
 
 ---
 
@@ -56,11 +56,11 @@ Pokud skript hlásí chybějící nástroje, opravte je nejdříve a pak pokrač
 # Zkontrolujte instalaci
 azd version
 
-# Autentizujte se pro AZD
+# Ověřte se pro AZD
 # Volitelné: az login, pokud plánujete spouštět příkazy Azure CLI přímo
 azd auth login
 
-# Nasazení vaší první aplikace
+# Nasadit svou první aplikaci
 azd init --template todo-nodejs-mongo
 azd up
 
@@ -79,16 +79,16 @@ azd version              # Zobrazuje nainstalovanou verzi
 azd init --template todo-nodejs-mongo  # Inicializuje projekt
 azd up                   # Nasazuje do Azure
 azd show                 # Zobrazuje URL spuštěné aplikace
-azd down --force --purge # Uvolňuje prostředky
+azd down --force --purge # Čistí prostředky
 ```
 
 ---
 
 ## 🔗 Navigace
 
-| Direction | Chapter |
+| Směr | Kapitola |
 |-----------|---------|
-| **Další** | [Kapitola 2: Vývoj orientovaný na AI](../chapter-02-ai-development/README.md) |
+| **Další** | [Kapitola 2: Vývoj s AI na prvním místě](../chapter-02-ai-development/README.md) |
 | **Přeskočit na** | [Kapitola 3: Konfigurace](../chapter-03-configuration/README.md) |
 
 ---

@@ -1,41 +1,41 @@
-# Kapitola 5: Řešení AI s více agenty
+# Kapitola 5: Řešení s více agenty v AI
 
-**📚 Kurz**: [AZD For Beginners](../../README.md) | **⏱️ Doba trvání**: 2-3 hodiny | **⭐ Složitost**: Pokročilá
+**📚 Kurz**: [AZD pro začátečníky](../../README.md) | **⏱️ Doba trvání**: 2-3 hodiny | **⭐ Složitost**: Pokročilá
 
 ---
 
 ## Přehled
 
-Tato kapitola pokrývá pokročilé vzory architektury více agentů, orchestraci agentů a nasazení AI připravené pro produkci pro složité scénáře.
+Tato kapitola pokrývá pokročilé vzory architektury více agentů, orchestraci agentů a produkční nasazení AI pro složité scénáře.
 
-> Ověřeno proti `azd 1.25.6` v červnu 2026.
+> Ověřeno s verzí `azd 1.27.1` v červenci 2026.
 
-## Výukové cíle
+## Cíle učení
 
-Po dokončení této kapitoly budete:
-- Pochopit vzory víceagentní architektury
-- Nasadit koordinované systémy AI agentů
-- Implementovat komunikaci mezi agenty
-- Postavit produkčně připravená víceagentní řešení
+Dokončením této kapitoly budete:
+- Rozumět vzorům architektury více agentů
+- Nasazovat koordinované systémy AI agentů
+- Implementovat komunikaci agent-agent
+- Vytvářet produkčně připravená řešení více agentů
 
 ---
 
 ## 📚 Lekce
 
-| # | Lekce | Popis | Doba |
+| # | Lekce | Popis | Čas |
 |---|--------|-------------|------|
-| 1 | [Multi-Agent Basics](multi-agent-basics.md) | Prakticky: nasadit funkční víceagentní aplikaci pomocí `azd up` | 45 min |
-| 2 | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) | Strategie orchestrace agentů (pokračuje v kapitole 6) | 30 min |
-| 3 | [ARM Template Deployment](../../examples/retail-multiagent-arm-template/README.md) | Příklad nasazení jedním kliknutím | 30 min |
+| 1 | [Základy více agentů](multi-agent-basics.md) | Praktické: nasazení funkční aplikace s více agenty pomocí `azd up` | 45 min |
+| 2 | [Koordinační vzory](../chapter-06-pre-deployment/coordination-patterns.md) | Strategie orchestrací agentů (pokračování v kapitole 6) | 30 min |
+| 3 | [Nasazení šablony ARM](../../examples/retail-multiagent-arm-template/README.md) | Příklad nasazení jedním kliknutím | 30 min |
 
-> **Začněte Lekcí 1.** Je to jediná zcela praktická lekce, kterou lze nasadit. Lekce 2 je v kapitole 6 (sdílí se s plánováním před nasazením) a [Řešení pro maloobchod s více agenty](../../examples/retail-scenario.md) je architektonický nákres — návrhová reference, nikoli šablona pro jediné příkazové nasazení.
+> **Začněte lekcí 1.** Je to jediná plně praktická a nasaditelná lekce v této kapitole. Lekce 2 je v kapitole 6 (je sdílená s přednasazením) a [Retail Multi-Agent Solution](../../examples/retail-scenario.md) je architektonický vzor – designová reference, ne šablona na jedno příkazové nasazení.
 
 ---
 
 ## 🚀 Rychlý start
 
 ```bash
-# Možnost 1: Nasadit ze šablony
+# Možnost 1: Nasadit z šablony
 azd init --template agent-openai-python-prompty
 azd up
 
@@ -45,37 +45,37 @@ azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **Který přístup?** Použijte `azd init --template` pro zahájení z pracovního vzorku. Použijte `azd ai agent init`, když máte vlastní manifest agenta. Viz [Referenční příručka AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pro úplné informace.
+> **Který přístup?** Použijte `azd init --template` pro start z fungujícího vzoru. Použijte `azd ai agent init`, pokud máte vlastní manifest agenta. Kompletní detaily najdete v [referenci AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
 
 ---
 
-## 🤖 Architektura víceagentních systémů
+## 🤖 Architektura více agentů
 
 ```mermaid
 graph TD
-    Orchestrator[Orchestrátor agent<br/>Směruje požadavky, řídí pracovní tok] --> Customer[Zákaznický agent<br/>Dotazy uživatele, preference]
-    Orchestrator --> Inventory[Skladový agent<br/>Stavy zásob, objednávky]
+    Orchestrator[Orchestrace Agenta<br/>Řídí požadavky, spravuje pracovní postup] --> Customer[Agent Zákazníka<br/>Dotazy uživatele, preference]
+    Orchestrator --> Inventory[Agent Inventáře<br/>Stavy zásob, objednávky]
 ```
 
 ---
 
-## 🎯 Vybrané řešení: Maloobchodní víceagentní řešení
+## 🎯 Vybrané řešení: Retail Multi-Agent
 
-The [Retail Multi-Agent Solution](../../examples/retail-scenario.md) demonstrates:
+[Retail Multi-Agent Solution](../../examples/retail-scenario.md) předvádí:
 
-- **Customer Agent**: Zpracovává uživatelské interakce a preference
-- **Inventory Agent**: Spravuje zásoby a zpracování objednávek
-- **Orchestrator**: Koordinuje mezi agenty
-- **Shared Memory**: Správa kontextu napříč agenty
+- **Agent zákazníka**: Spravuje interakce s uživateli a preference
+- **Agent skladu**: Řídí zásoby a zpracování objednávek
+- **Orchestrátor**: Koordinuje mezi agenty
+- **Sdílená paměť**: Správa kontextu mezi agenty
 
 ### Použité služby
 
 | Služba | Účel |
 |---------|---------|
 | Microsoft Foundry Models | Porozumění jazyku |
-| Azure AI Search | Katalog produktů |
-| Cosmos DB | Stav a paměť agentů |
-| Container Apps | Hostování agentů |
+| Azure AI Search | Produktový katalog |
+| Cosmos DB | Stav a paměť agenta |
+| Container Apps | Hostování agenta |
 | Application Insights | Monitorování |
 
 ---
@@ -84,16 +84,16 @@ The [Retail Multi-Agent Solution](../../examples/retail-scenario.md) demonstrate
 
 | Směr | Kapitola |
 |-----------|---------|
-| **Předchozí** | [Kapitola 4: Infrastructure](../chapter-04-infrastructure/README.md) |
-| **Další** | [Kapitola 6: Před nasazením](../chapter-06-pre-deployment/README.md) |
+| **Předchozí** | [Kapitola 4: Infrastruktura](../chapter-04-infrastructure/README.md) |
+| **Další** | [Kapitola 6: Přednasazení](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 Související zdroje
 
 - [Průvodce AI agenty](../chapter-02-ai-development/agents.md)
-- [Postupy pro produkční AI](../chapter-08-production/production-ai-practices.md)
-- [Řešení problémů s AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Produkční AI praktiky](../chapter-08-production/production-ai-practices.md)
+- [Řešení problémů AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 
