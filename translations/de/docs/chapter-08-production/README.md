@@ -1,20 +1,20 @@
-# Kapitel 8: Produktions- und Unternehmensmuster
+# Kapitel 8: Produktions- und Enterprise-Muster
 
-**📚 Kurs**: [AZD für Einsteiger](../../README.md) | **⏱️ Dauer**: 2–3 Stunden | **⭐ Komplexität**: Fortgeschritten
+**📚 Kurs**: [AZD für Anfänger](../../README.md) | **⏱️ Dauer**: 2-3 Stunden | **⭐ Komplexität**: Fortgeschritten
 
 ---
 
-## Überblick
+## Übersicht
 
-Dieses Kapitel behandelt unternehmensreife Bereitstellungsmuster, Sicherheits­härtung, Überwachung und Kostenoptimierung für Produktions-KI-Workloads.
+Dieses Kapitel behandelt unternehmensgerechte Bereitstellungsmuster, Sicherheitshärtung, Überwachung und Kostenoptimierung für KI-Produktions-Workloads.
 
-> Validiert gegen `azd 1.25.6` im Juni 2026.
+> Validiert gegen `azd 1.27.1` im Juli 2026.
 
 ## Lernziele
 
-Durch das Abschließen dieses Kapitels werden Sie:
-- Multi-Region resiliente Anwendungen bereitstellen
-- Unternehmenssicherheitsmuster implementieren
+Nach Abschluss dieses Kapitels werden Sie:
+- Mehrregionale resiliente Anwendungen bereitstellen
+- Enterprise-Sicherheitsmuster implementieren
 - Umfassende Überwachung konfigurieren
 - Kosten in großem Maßstab optimieren
 - CI/CD-Pipelines mit AZD einrichten
@@ -23,27 +23,27 @@ Durch das Abschließen dieses Kapitels werden Sie:
 
 ## 📚 Lektionen
 
-| # | Lektion | Beschreibung | Dauer |
+| # | Lektion | Beschreibung | Zeit |
 |---|--------|-------------|------|
-| 1 | [Produktions-KI-Praktiken](production-ai-practices.md) | Enterprise-Bereitstellungsmuster | 90 Min. |
+| 1 | [Produktions-KI-Praktiken](production-ai-practices.md) | Bereitstellungsmuster für Unternehmen | 90 Min |
 
 ---
 
 ## 🚀 Produktions-Checkliste
 
-- [ ] Multi-Region-Bereitstellung für Resilienz
-- [ ] Managed Identity für Authentifizierung (keine Schlüssel)
-- [ ] Application Insights für Monitoring
-- [ ] Kostenbudgets und Alerts konfiguriert
+- [ ] Mehrregionale Bereitstellung für Resilienz
+- [ ] Verwaltene Identität für Authentifizierung (keine Schlüssel)
+- [ ] Application Insights für Überwachung
+- [ ] Kostenbudgets und Warnungen konfiguriert
 - [ ] Sicherheitsscans aktiviert
-- [ ] CI/CD-Pipeline-Integration
+- [ ] CI/CD-Pipeline integriert
 - [ ] Notfallwiederherstellungsplan
 
 ---
 
 ## 🏗️ Architektur-Muster
 
-### Muster 1: Microservices-KI
+### Muster 1: Microservices KI
 
 ```mermaid
 graph LR
@@ -56,12 +56,12 @@ graph LR
 
 ```mermaid
 graph LR
-    EventGrid[Ereignis-Grid] --> Functions[Funktionen] --> Pipeline[KI-Pipeline]
+    EventGrid[Ereignisraster] --> Functions[Funktionen] --> Pipeline[KI-Pipeline]
 ```
 
 ---
 
-## 🔐 Beste Sicherheitspraktiken
+## 🔐 Sicherheits-Best Practices
 
 ```bicep
 // Use managed identity
@@ -83,10 +83,10 @@ properties: {
 ## 💰 Kostenoptimierung
 
 | Strategie | Einsparungen |
-|----------|---------|
-| Auf null skalieren (Container Apps) | 60-80% |
-| Verbrauchsbasierte Pläne für Entwicklung verwenden | 50-70% |
-| Geplantes Skalieren | 30-50% |
+|----------|-------------|
+| Skalierung auf Null (Container Apps) | 60-80% |
+| Verbrauchsstufen für Entwicklung nutzen | 50-70% |
+| Geplante Skalierung | 30-50% |
 | Reservierte Kapazität | 20-40% |
 
 ```bash
@@ -120,13 +120,13 @@ az monitor metrics list --resource <resource-id>
 | Richtung | Kapitel |
 |-----------|---------|
 | **Vorheriges** | [Kapitel 7: Fehlerbehebung](../chapter-07-troubleshooting/README.md) |
-| **Kurs abgeschlossen** | [Kursstartseite](../../README.md) |
+| **Kurs abgeschlossen** | [Kursübersicht](../../README.md) |
 
 ---
 
 ## 📖 Verwandte Ressourcen
 
-- [Leitfaden zu KI-Agenten](../chapter-02-ai-development/agents.md)
+- [AI-Agenten-Leitfaden](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 - [Multi-Agenten-Lösungen](../chapter-05-multi-agent/README.md)
 - [Microservices-Beispiel](../../examples/microservices/README.md)

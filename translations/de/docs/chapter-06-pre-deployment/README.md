@@ -1,23 +1,23 @@
 # Kapitel 6: Planung & Validierung vor der Bereitstellung
 
-**📚 Kurs**: [AZD für Anfänger](../../README.md) | **⏱️ Dauer**: 1 Stunde | **⭐ Komplexität**: Mittel
+**📚 Kurs**: [AZD für Anfänger](../../README.md) | **⏱️ Dauer**: 1 Stunde | **⭐ Komplexität**: Mittelstufe
 
 ---
 
-## Überblick
+## Übersicht
 
-Dieses Kapitel behandelt wesentliche Planungs- und Validierungsschritte, bevor Sie Ihre Anwendung bereitstellen. Lernen Sie, teure Fehler mit angemessener Kapazitätsplanung, SKU-Auswahl und Preflight-Prüfungen zu vermeiden.
+Dieses Kapitel behandelt wesentliche Planungs- und Validierungsschritte vor der Bereitstellung Ihrer Anwendung. Lernen Sie, kostspielige Fehler mit ordnungsgemäßer Kapazitätsplanung, SKU-Auswahl und Preflight-Checks zu vermeiden.
 
-> Validiert gegen `azd 1.25.6` im Juni 2026.
+> Validiert mit `azd 1.27.1` im Juli 2026.
 
 ## Lernziele
 
-Wenn Sie dieses Kapitel abgeschlossen haben, werden Sie:
-- Preflight-Prüfungen vor der Bereitstellung durchführen
-- Kapazitäten planen und den Ressourcenbedarf schätzen
-- Geeignete SKUs zur Kostenoptimierung auswählen
-- Application Insights für das Monitoring konfigurieren
-- Team-Koordinationsmuster verstehen
+Nach Abschluss dieses Kapitels werden Sie:
+- Preflight-Checks vor der Bereitstellung durchführen
+- Kapazität planen und Ressourcenbedarf schätzen
+- Geeignete SKUs für Kostenoptimierung auswählen
+- Application Insights zur Überwachung konfigurieren
+- Muster der Teamkoordination verstehen
 
 ---
 
@@ -25,27 +25,27 @@ Wenn Sie dieses Kapitel abgeschlossen haben, werden Sie:
 
 | # | Lektion | Beschreibung | Zeit |
 |---|--------|-------------|------|
-| 1 | [Preflight-Checks](preflight-checks.md) | Konfiguration vor der Bereitstellung validieren | 15 Min. |
-| 2 | [Kapazitätsplanung](capacity-planning.md) | Ressourcenbedarf schätzen | 20 Min. |
-| 3 | [SKU-Auswahl](sku-selection.md) | Geeignete Preisklassen auswählen | 15 Min. |
-| 4 | [Application Insights](application-insights.md) | Überwachung konfigurieren | 20 Min. |
-| 5 | [Koordinationsmuster](coordination-patterns.md) | Team-Bereitstellungs-Workflows | 15 Min. |
+| 1 | [Preflight-Checks](preflight-checks.md) | Konfiguration vor der Bereitstellung validieren | 15 min |
+| 2 | [Kapazitätsplanung](capacity-planning.md) | Ressourcenbedarf schätzen | 20 min |
+| 3 | [SKU-Auswahl](sku-selection.md) | Geeignete Preisklassen wählen | 15 min |
+| 4 | [Application Insights](application-insights.md) | Überwachung konfigurieren | 20 min |
+| 5 | [Koordinationsmuster](coordination-patterns.md) | Team-Bereitstellungsworkflows | 15 min |
 
 ---
 
 ## 🚀 Schnellstart
 
 ```bash
-# Abonnementkontingente prüfen
+# Überprüfen Sie die Abonnementkontingente
 az vm list-usage --location eastus --output table
 
-# Bereitstellungsvorschau (keine Ressourcen werden erstellt)
+# Bereitstellungsvorschau (keine Ressourcen erstellt)
 azd provision --preview
 
 # Bicep-Syntax validieren
 az bicep build --file infra/main.bicep
 
-# Umgebungskonfiguration prüfen
+# Überprüfen der Umgebungs konfiguratio
 azd env get-values
 ```
 
@@ -55,44 +55,44 @@ azd env get-values
 
 ### Vor `azd provision`
 
-- [ ] Kontingent für die Region überprüft
+- [ ] Kontingent für Region geprüft
 - [ ] SKUs passend ausgewählt
-- [ ] Kostenabschätzung überprüft
-- [ ] Namenskonvention einheitlich
+- [ ] Kostenschätzung überprüft
+- [ ] Namenskonvention konsistent
 - [ ] Sicherheit/RBAC konfiguriert
 
 ### Vor `azd deploy`
 
 - [ ] Umgebungsvariablen gesetzt
-- [ ] Geheimnisse im Key Vault hinterlegt
-- [ ] Verbindungszeichenfolgen überprüft
-- [ ] Health-Checks konfiguriert
+- [ ] Geheimnisse im Key Vault
+- [ ] Verbindungszeichenfolgen geprüft
+- [ ] Health Checks konfiguriert
 
 ---
 
 ## 💰 SKU-Auswahl-Leitfaden
 
-| Workload | Development | Production |
+| Arbeitslast | Entwicklung | Produktion |
 |----------|-------------|------------|
-| Container Apps | Consumption | Dedicated D4 |
+| Container Apps | Verbrauch | Dedizierte D4 |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standard | Standard + PTU |
+| Microsoft Foundry Modelle | Standard | Standard + PTU |
 | AI Search | Basic | Standard S2+ |
 
 ---
 
 ## 🔗 Navigation
 
-| Direction | Chapter |
+| Richtung | Kapitel |
 |-----------|---------|
-| **Vorherige** | [Kapitel 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
-| **Nächste** | [Kapitel 7: Fehlerbehebung](../chapter-07-troubleshooting/README.md) |
+| **Vorheriges** | [Kapitel 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
+| **Nächstes** | [Kapitel 7: Fehlerbehebung](../chapter-07-troubleshooting/README.md) |
 
 ---
 
 ## 📖 Verwandte Ressourcen
 
-- [Konfigurationsanleitung](../chapter-03-configuration/configuration.md)
+- [Konfigurationsleitfaden](../chapter-03-configuration/configuration.md)
 - [Bereitstellungsleitfaden](../chapter-04-infrastructure/deployment-guide.md)
 - [Häufige Probleme](../chapter-07-troubleshooting/common-issues.md)
 
