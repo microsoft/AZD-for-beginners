@@ -1,4 +1,4 @@
-# Chapter 2: AI-esimene arendus
+# 2. peatükk: AI-esimene arendus
 
 **📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 1-2 tundi | **⭐ Keerukus**: Kesktase
 
@@ -6,78 +6,78 @@
 
 ## Ülevaade
 
-See peatükk keskendub AI-põhiste rakenduste juurutamisele, kasutades Azure Developer CLI-d ja Microsoft Foundry teenuseid. Alates lihtsatest AI-vestlusrakendustest kuni intelligentsete agentideni koos tööriistadega.
+See peatükk keskendub Azure Developer CLI ja Microsoft Foundry teenuste abil AI-põhiste rakenduste juurutamisele. Lihtsatest AI vestlusrakendustest kuni tööriistadega intelligentsete agentideni.
 
-> **Kinnituse märkus (2026-06-15):** Selle peatüki käsuviiba voogu ja laienduste juhiseid vaadati läbi `azd` `1.25.6` ja praeguse eelvaate AI-agendi laienduse `azure.ai.agents` `0.1.40-preview` vastavuses. Kui kasutate vanemat AZD versiooni, uuendage esmalt ja jätkake seejärel harjutustega.
+> **Kinnitusmärkuse kuupäev (2026-07-13):** Selles peatükis käsitletud käsupäring ja laienduste juhised vaadati üle versioonidega `azd` `1.27.1` ja praeguse eelvaate AI agentide laienduse versiooniga `azure.ai.agents` `1.0.0-beta.5`. Kui kasutate vanemat AZD versiooni, uuendage esmalt ja jätkake seejärel harjutustega.
 
 ## Õpieesmärgid
 
-Selle peatüki lõpetamisel:
-- Juurutate AI-rakendusi kasutades eelnevalt koostatud AZD malle
+Selle peatüki läbimisega:
+- Juurutate AI-rakendusi eelvalmistatud AZD mallide abil
 - Mõistate Microsoft Foundry integreerimist AZD-ga
-- Konfigureerite ja kohandate AI-agente koos tööriistadega
-- Juurutate RAG-i (Retrieval-Augmented Generation) rakendusi
+- Konfigureerite ja kohandate tööriistadega AI agente
+- Juurutate RAG (tagasitoomise rikastatud generatsiooni) rakendusi
 
 ---
 
-## 📚 Tunnid
+## 📚 Õppetunnid
 
-| # | Tund | Kirjeldus | Aeg |
+| # | Õppetund | Kirjeldus | Aeg |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry integreerimine](microsoft-foundry-integration.md) | Ühendage AZD Foundry teenustega | 30 min |
-| 2 | [AI agentide juhend](agents.md) | Juurutage intelligentseid agente koos tööriistadega | 45 min |
-| 3 | [AI mudeli juurutamine](ai-model-deployment.md) | Juurutage ja konfigureerige AI mudeleid | 30 min |
-| 4 | [AI töötoa labor](ai-workshop-lab.md) | Praktikum: tehke oma AI lahendus AZD-valmis | 60 min |
+| 1 | [Microsoft Foundry integreerimine](microsoft-foundry-integration.md) | Ühenda AZD Foundry teenustega | 30 min |
+| 2 | [AI agentide juhend](agents.md) | Juuruta tööriistadega intelligentseid agente | 45 min |
+| 3 | [AI mudelite juurutamine](ai-model-deployment.md) | Juuruta ja konfigureeri AI mudeleid | 30 min |
+| 4 | [AI töötuba - labor](ai-workshop-lab.md) | Praktika: tee oma AI lahendus AZD-valmis | 60 min |
 
 ---
 
-## 🚀 Kiire algus
+## 🚀 Kiirstart
 
 ```bash
-# Võimalus 1: RAG vestlusrakendus
+# Valik 1: RAG vestlusrakendus
 azd init --template azure-search-openai-demo
 azd up
 
-# Võimalus 2: tehisintellekti agendid
+# Valik 2: AI agendid
 azd init --template get-started-with-ai-agents
 azd up
 
-# Võimalus 3: Kiire vestlusrakendus
+# Valik 3: Kiirvestluse rakendus
 azd init --template openai-chat-app-quickstart
 azd up
 ```
 
 ---
 
-## 🤖 Soovitatud AI mallid
+## 🤖 Esile tõstetud AI mallid
 
 | Mall | Kirjeldus | Teenused |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG vestlus viidetega | OpenAI + AI otsing |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI agent koos tööriistadega | AI agentide teenus |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Põhiline AI vestlus | OpenAI + konteinerirakendused |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG vestlus allikaviidetega | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Tööriistadega AI agent | AI Agent Service |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Lihtne AI vestlus | OpenAI + Container Apps |
 
 ---
 
-## 💰 Kuluteadlikkus
+## 💰 Kulu teadlikkus
 
-| Keskkond | Hinnanguline kuukulu |
+| Keskkond | Hinnanguline kuuline kulu |
 |-------------|----------------------|
 | Arendus | $80-150 |
-| Staging | $150-300 |
+| Testkeskkond | $150-300 |
 | Tootmine | $300-3,500+ |
 
-**Nipp:** Käivitage `azd down` pärast testimist kulude vältimiseks.
+**Nipp:** Käivita testi järel `azd down`, et vältida kulusid.
 
 ---
 
-## 🔗 Navigatsioon
+## 🔗 Navigeerimine
 
 | Suund | Peatükk |
 |-----------|---------|
-| **Eelmine** | [Peatükk 1: Alused](../chapter-01-foundation/README.md) |
-| **Järgmine** | [Peatükk 3: Konfiguratsioon](../chapter-03-configuration/README.md) |
-| **Mine otse** | [Peatükk 8: Tootmisviisid](../chapter-08-production/README.md) |
+| **Eelmine** | [1. peatükk: Vundament](../chapter-01-foundation/README.md) |
+| **Järgmine** | [3. peatükk: Konfiguratsioon](../chapter-03-configuration/README.md) |
+| **Jäta vahele kuni** | [8. peatükk: Tootmismustrid](../chapter-08-production/README.md) |
 
 ---
 

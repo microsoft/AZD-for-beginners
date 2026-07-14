@@ -1,31 +1,31 @@
-# Chapter 2: AI-Fust Development
+# Chapter 2: AI-First Development
 
-**📚 Kọs**: [AZD For Beginners](../../README.md) | **⏱️ Taim**: 1-2 hours | **⭐ Level**: Intermediate
+**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 1-2 hours | **⭐ Complexity**: Intermediate
 
 ---
 
-## Wetin dis chapter dey about
+## Overview
 
-Dis chapter dey focus on how to deploy AI-powered applications wit Azure Developer CLI and Microsoft Foundry services. E cover everything from small AI chat apps go reach intelligent agents wey get tools.
+Dis chapter focus on how to deploy AI-powered applications using Azure Developer CLI and Microsoft Foundry services. From simple AI chat apps go all the way to intelligent agents wey get tools.
 
-> **Validation note (2026-06-15):** The command flow and extension guidance in this chapter were reviewed against `azd` `1.25.6` and the current preview AI agent extension release `azure.ai.agents` `0.1.40-preview`. If you are on an older AZD build, update first and then continue with the exercises.
+> **Validation note (2026-07-13):** The command flow and extension guidance in this chapter were reviewed against `azd` `1.27.1` and the current preview AI agent extension release `azure.ai.agents` `1.0.0-beta.5`. If you are on an older AZD build, update first and then continue with the exercises.
 
-## Wetin you go learn
+## Learning Objectives
 
-By completing this chapter, you will:
+If you finish dis chapter, you go fit:
 - Deploy AI applications using pre-built AZD templates
-- Understand how Microsoft Foundry take integrate with AZD
-- Configure and customize AI agents wit tools
-- Deploy RAG (Retrieval-Augmented Generation) apps
+- Understand Microsoft Foundry integration with AZD
+- Configure and customize AI agents with tools
+- Deploy RAG (Retrieval-Augmented Generation) applications
 
 ---
 
-## 📚 Lekshon
+## 📚 Lessons
 
 | # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | Make AZD connect wit Foundry services | 30 min |
-| 2 | [AI Agents Guide](agents.md) | Deploy smart agents wit tools | 45 min |
+| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | Connect AZD with Foundry services | 30 min |
+| 2 | [AI Agents Guide](agents.md) | Deploy intelligent agents with tools | 45 min |
 | 3 | [AI Model Deployment](ai-model-deployment.md) | Deploy and configure AI models | 30 min |
 | 4 | [AI Workshop Lab](ai-workshop-lab.md) | Hands-on: Make your AI solution AZD-ready | 60 min |
 
@@ -38,11 +38,11 @@ By completing this chapter, you will:
 azd init --template azure-search-openai-demo
 azd up
 
-# Option 2: AI Agents dem
+# Option 2: AI Agents
 azd init --template get-started-with-ai-agents
 azd up
 
-# Option 3: Sharp-sharp Chat App
+# Option 3: Quick Chat App
 azd init --template openai-chat-app-quickstart
 azd up
 ```
@@ -53,13 +53,13 @@ azd up
 
 | Template | Description | Services |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG chat wey dey give citations | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI agent wit tools | AI Agent Service |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG chat with citations | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI agent with tools | AI Agent Service |
 | [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Basic AI chat | OpenAI + Container Apps |
 
 ---
 
-## 💰 How e go cost
+## 💰 Cost Awareness
 
 | Environment | Estimated Monthly Cost |
 |-------------|----------------------|
@@ -67,7 +67,7 @@ azd up
 | Staging | $150-300 |
 | Production | $300-3,500+ |
 
-**Tip:** After you don test, run `azd down` make you no dey incur charges.
+**Tip:** Run `azd down` after testing to avoid charges.
 
 ---
 

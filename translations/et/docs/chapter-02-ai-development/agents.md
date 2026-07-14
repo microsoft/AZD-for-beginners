@@ -1,127 +1,127 @@
-# AI agendid Azure Developer CLI-ga
+# Tehisintellekti agendid Azure Developer CLI-ga
 
-**Peatüki navigeerimine:**
+**Peatüki navigatsioon:**
 - **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
-- **📖 Praegune peatükk**: Peatükk 2 - AI-eelnev arendus
+- **📖 Praegune peatükk**: Peatükk 2 - AI-esimene arendus
 - **⬅️ Eelmine**: [Microsoft Foundry integratsioon](microsoft-foundry-integration.md)
 - **➡️ Järgmine**: [AI mudeli juurutamine](ai-model-deployment.md)
-- **🚀 Täiustatud**: [Mitmeagendi lahendused](../../examples/retail-scenario.md)
+- **🚀 Edasijõudnutele**: [Mitme agendi lahendused](../../examples/retail-scenario.md)
 
 ---
 
 ## Sissejuhatus
 
-AI agendid on autonoomsed programmid, mis suudavad tajuda oma keskkonda, teha otsuseid ja astuda samme kindlate eesmärkide saavutamiseks. Erinevalt lihtsatest vestlusrobotitest, mis vastavad käsklustele, saavad agendid:
+Tehisintellekti agendid on autonoomsed programmid, mis suudavad tajuda oma keskkonda, teha otsuseid ja võtta meetmeid kindlate eesmärkide saavutamiseks. Erinevalt lihtsatest vestlusrobotitest, mis vastavad vaid päringutele, suudavad agendid:
 
-- **Kasutada tööriistu** – Kutsuda API-sid, otsida andmebaasidest, täita koodi
-- **Planeerida ja põhjendada** – Jagada keerulised ülesanded sammudeks
-- **Õppida kontekstist** – Säilitada mälu ja kohandada käitumist
-- **Tööd teha koostöös** – Töötada koos teiste agentidega (mitmeagendi süsteemid)
+- **Kasutada tööriistu** - Kutsuda API-sid, otsida andmebaasidest, käivitada koodi
+- **Plaanimine ja põhjendamine** - Jagada keerulisi ülesandeid sammudeks
+- **Õppida kontekstist** - Säilitada mälu ja kohandada käitumist
+- **Koostööd teha** - Töötada koos teiste agentidega (mitme agendi süsteemid)
 
-See juhend näitab, kuidas juurutada AI agente Azure’i abil Azure Developer CLI (azd) abil.
+See juhend näitab, kuidas juurutada AI agente Azures Azure Developer CLI (azd) abil.
 
-> **Kinnitustähis (2026-03-25):** Seda juhendit kontrolliti `azd` `1.23.12` ja `azure.ai.agents` `0.1.18-preview` vastu. `azd ai` funktsioon on endiselt eelvaates, seega kontrolli laienduse abi, kui sinu paigaldatud lipud erinevad.
+> **Kontrollimärkus (2026-07-13):** Seda juhendit vaadati üle `azd` `1.27.1` ja `azure.ai.agents` `1.0.0-beta.5` versioonide põhjal. `azd ai` kogemus on endiselt eelvaatefaasis, seega kontrolli laienduse abi, kui sinu paigaldatud lipud erinevad.
 
 ## Õpieesmärgid
 
-Selle juhendi lõpetamisega sa:
-- Mõistad, mis on AI agendid ja kuidas need erinevad vestlusrobotitest
-- Juhtid eelnevalt koostatud AI agendi malle AZD abil
-- Konfigureerid Foundry Agente kohandatud agentide jaoks
-- Rakendad põhilisi agendi mustreid (tööriistade kasutamine, RAG, mitmeagentne)
+Selle juhendi lõpuks sa:
+- Mõistad, mis on AI agendid ja kuidas nad erinevad vestlusrobotitest
+- Juurutad eelvalmistatud AI agentide malle AZD-ga
+- Konfigureerid Foundry agente kohandatud agentide jaoks
+- Rakendad põhilisi agendi mustreid (tööriistade kasutamine, RAG, mitme agenti süsteem)
 - Jälgid ja silud juurutatud agente
 
 ## Õpitulemused
 
-Juhendi lõpetamisel suudad:
-- Juurutada AI agendi rakendusi Azure’i ühekordse käsuga
+Pärast lõpetamist suudad:
+- Juurutada AI agendi rakendusi Azure'i ühe käsuga
 - Konfigureerida agendi tööriistu ja võimeid
-- Rakendada otsingupõhist generaatorit (RAG) agentidega
-- Kujundada mitmeagentseid arhitektuure keerukate töövoogude jaoks
-- Lahendada tavapäraseid agentide juurutamise probleeme
+- Rakendada andmeteotsingupõhist genereerimist (RAG) agentidega
+- Kujundada mitme agendi arhitektuure keerukate töövoogude jaoks
+- Lahendada levinumaid agendi juurutamise probleeme
 
 ---
 
-## 🤖 Mis teeb agendist erineva vestlusrobotist?
+## 🤖 Mis teeb agendi erinevaks vestlusrobotist?
 
 | Omadus | Vestlusrobot | AI Agent |
-|---------|--------------|----------|
-| **Käitumine** | Vastab päringutele | Võtab autonoomseid samme |
-| **Tööriistad** | Puuduvad | Saab kutsuda API-sid, otsida, täita koodi |
+|---------|---------|----------|
+| **Käitumine** | Vastab päringutele | Võtab autonoomseid meetmeid |
+| **Tööriistad** | Puuduvad | Saab kutsuda API-sid, otsida, käivitada koodi |
 | **Mälu** | Ainult sessioonipõhine | Püsiv mälu sessioonide vahel |
-| **Planeerimine** | Ühes vastuses | Mitmesammuline põhjendus |
-| **Koostöö** | Üksik üksus | Saab töötada koos teiste agentidega |
+| **Planeerimine** | Ühe vastusega | Mitmesammuline põhjendus |
+| **Koostöö** | Üksiküksus | Saab töötada koos teiste agentidega |
 
-### Lihtne analoogia
+### Lihtne võrdlus
 
 - **Vestlusrobot** = Abivalmis inimene infolauas küsimustele vastamas
-- **AI Agent** = Isiklik assistent, kes saab helistada, broneerida kohtumisi ja täita ülesandeid sinu eest
+- **AI agent** = Isiklik assistent, kes saab teha kõnesid, broneerida kohtumisi ja täita ülesandeid sinu eest
 
 ---
 
-## 🚀 Kiire algus: Juuruta oma esimene agent
+## 🚀 Kiire algus: juuruta oma esimene agent
 
-### Variant 1: Foundry Agendi mall (Soovitatav)
+### Valik 1: Foundry agentide mall (soovitatav)
 
 ```bash
-# Algata tehisintellekti agentide mall
+# Algatage AI-agentide mall
 azd init --template get-started-with-ai-agents
 
-# Rakenda Azure'i keskkonda
+# Paigaldage Azure'i
 azd up
 ```
 
 **Mida juurutatakse:**
-- ✅ Foundry Agendid
+- ✅ Foundry agendid
 - ✅ Microsoft Foundry mudelid (gpt-4.1)
 - ✅ Azure AI Search (RAG jaoks)
 - ✅ Azure Container Apps (veebiliides)
 - ✅ Application Insights (jälgimine)
 
 **Aeg:** ~15-20 minutit
-**Kulu:** ~$100-150 kuus (arendus)
+**Kulu:** ~$100-150/kuu (arendus)
 
-### Variant 2: OpenAI agent koos Promptyga
+### Valik 2: OpenAI agent koos Promptyga
 
 ```bash
-# Initsialiseeri Prompty-põhine agentide mall
+# Initsialiseeri Prompty-põhine agendi mall
 azd init --template agent-openai-python-prompty
 
-# Paigalda Azure'i
+# Rooli Azure'i
 azd up
 ```
 
 **Mida juurutatakse:**
-- ✅ Azure Functions (serverivaba agendi käitamine)
+- ✅ Azure Functions (serverivaba agendi täitmine)
 - ✅ Microsoft Foundry mudelid
 - ✅ Prompty konfiguratsioonifailid
-- ✅ Näidise agendi rakendus
+- ✅ Näidisagendi rakendus
 
 **Aeg:** ~10-15 minutit
-**Kulu:** ~$50-100 kuus (arendus)
+**Kulu:** ~$50-100/kuu (arendus)
 
-### Variant 3: RAG vestlusagent
+### Valik 3: RAG vestlusagent
 
 ```bash
-# Algatage RAG vestluse mall
+# Algatage RAG vestlusmall
 azd init --template azure-search-openai-demo
 
-# Pange kasutusele Azure'is
+# Paigaldage Azure'i
 azd up
 ```
 
 **Mida juurutatakse:**
 - ✅ Microsoft Foundry mudelid
-- ✅ Azure AI Search näidandmetega
-- ✅ Dokumendi töötlemise voog
+- ✅ Azure AI Search koos näidandmetega
+- ✅ Dokumentide töötlemise torujuhe
 - ✅ Vestlusliides viidetega
 
 **Aeg:** ~15-25 minutit
-**Kulu:** ~$80-150 kuus (arendus)
+**Kulu:** ~$80-150/kuu (arendus)
 
-### Variant 4: AZD AI Agent Init (Manifesti- või mallipõhine eelvaade)
+### Valik 4: AZD AI agendi initsialiseerimine (manifesti- või malli-põhine eelvaade)
 
-Kui sul on agendi manifestifail, saad kasutada käsku `azd ai` Foundry Agent Service projekti otse luua. Hiljutised eelvaateversioonid on lisanud ka mallipõhise initsialiseerimise toe, seega võib täpne käsupõhine voog veidi erineda sõltuvalt sinu paigaldatud laiendusversioonist.
+Kui sul on agendi manifestifail, saad kasutada `azd ai` käsku, et otse Foundry Agent Service projekti luua. Viimased eelvaateväljaanded lisasid ka malli-põhise initsialiseerimise toe, seega täpne juhiste järjekord võib sõltuvalt paigaldatud laienduse versioonist mõnevõrra erineda.
 
 ```bash
 # Paigalda AI agentide laiendus
@@ -130,102 +130,102 @@ azd extension install azure.ai.agents
 # Valikuline: kontrolli paigaldatud eelvaate versiooni
 azd extension show azure.ai.agents
 
-# Algata agentide manifestist
+# Algata agendimanifestist
 azd ai agent init -m agent-manifest.yaml
 
-# Deploy Azure'i
+# Paiguta Azure'i
 azd up
 
-# Testi deployitud agenti (näitab latentsust ja esimese baitini kuluvat aega)
+# Testi paigaldatud agenti (näitab latentsust + esimese baidi aega)
 azd ai agent invoke
 ```
 
-**Millal kasutada `azd ai agent init` vs `azd init --template`:**
+**Millal kasutada `azd ai agent init` ja millal `azd init --template`:**
 
-| Lähenemine | Sobib kõige paremini | Kuidas töötab |
-|------------|----------------------|---------------|
-| `azd init --template` | Töötava näidise rakenduse alustamiseks | Kloneerib täismalli hoidla koos koodi ja infrastruktuuriga |
-| `azd ai agent init -m` | Oma agendi manifesti alusel ehitamiseks | Koostab projekti struktuuri sinu agendi definitsioonist |
+| Lähenemine | Sobib kõige paremini | Kuidas see töötab |
+|----------|----------|------|
+| `azd init --template` | Töötavast näidisrakendusest alustamiseks | Kopeerib kogu malli repo koos koodi ja infrastruktuuriga |
+| `azd ai agent init -m` | Oma agendi manifestist alustades | Loob projekti struktuuri agendi definitsiooni põhjal |
 
-> **Vihje:** Kasuta `azd init --template`, kui õpid (Variants 1-3 ülal). Kasuta `azd ai agent init` tootmisagentide loomisel oma manifestidega.
+> **Nipp:** Kasuta `azd init --template`, kui õpid (üksused 1–3 eespool). Kasuta `azd ai agent init`, kui ehitad tootmises olevaid agente oma manifestidega.
 
-Pärast `azd up` juhib sama laiendus sind ülejäänud agendi elutsükli läbi: `azd ai agent invoke` testimiseks, `azd ai agent eval generate` ja `azd ai agent optimize` kvaliteedi mõõtmiseks ja parandamiseks ning `azd ai agent delete` puhastamiseks. Vaata [AZD AI CLI käsud](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) täielikku ülevaadet.
+Pärast `azd up` käsku juhib sama laiendus sind ülejäänud agendi elutsükli: testi `azd ai agent invoke` abil, mõõda ja paranda kvaliteeti `azd ai agent eval generate` ja `azd ai agent optimize` abil ning puhasta allesjäänud käsuga `azd ai agent delete`. Täispõhivõimaluste kirjeldus on saadaval [AZD AI CLI käskudes](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
 
 ---
 
-## 🏗️ Agendi arhitektuuri mustrid
+## 🏗️ Agendi arhitektuurimustrid
 
-### Muster 1: Üks agent tööriistadega
+### Muster 1: Üksik agent tööriistadega
 
-Kõige lihtsam agendi muster – üks agent, kes saab kasutada mitut tööriista.
+Kõige lihtsam agentide muster — üks agent, kes saab kasutada mitut tööriista.
 
 ```mermaid
 graph TD
-    UI[Kasutajaliides] --> Agent[AI Agent<br/>gpt-4.1]
+    UI[Kasutajaliides] --> Agent[AI-agent<br/>gpt-4.1]
     Agent --> Search[Otsingutööriist]
     Agent --> Database[Andmebaasi tööriist]
     Agent --> API[API tööriist]
 ```
 
-**Sobib:**
-- Klienditoe botid
+**Parim järgmiste jaoks:**
+- Klienditoe robotid
 - Uurimisassistendid
 - Andmeanalüüsi agendid
 
-**AZD Mall:** `azure-search-openai-demo`
+**AZD mall:** `azure-search-openai-demo`
 
-### Muster 2: RAG agent (otsingupõhine genereerimine)
+### Muster 2: RAG agent (otsinguga täiustatud genereerimine)
 
-Agent, kes otsib enne vastamist asjakohaseid dokumente.
+Agent, kes hangib asjakohased dokumendid enne vastuse genereerimist.
 
 ```mermaid
 graph TD
-    Query[Kasutaja päring] --> RAG[RAG agent]
-    RAG --> Vector[Vektoriotsing]
+    Query[Kasutaja päring] --> RAG[RAG Agent]
+    RAG --> Vector[Vektorotsing]
     RAG --> LLM[LLM<br/>gpt-4.1]
-    Vector -- Dokumendid --> LLM
+    Vector -- Documents --> LLM
     LLM --> Response[Vastus viidetega]
 ```
 
-**Sobib:**
-- Ettevõtte teadmistebaasid
-- Dokumentide K&V süsteemid
-- Vastavuse ja juriidilise uurimise lahendused
+**Parim järgmiste jaoks:**
+- Ettevõtte teadmiste baasid
+- Dokumentide küsimuste ja vastuste süsteemid
+- Vastavuse ja õiguslike uuringute jaoks
 
-**AZD Mall:** `azure-search-openai-demo`
+**AZD mall:** `azure-search-openai-demo`
 
-### Muster 3: Mitmeagentne süsteem
+### Muster 3: Mitme-agendi süsteem
 
-Mitmed spetsialiseerunud agendid töötavad koos keeruliste ülesannete kallal.
+Mitmed spetsialiseerunud agendid töötavad koos keerukate ülesannete kallal.
 
 ```mermaid
 graph TD
-    Orchestrator[Koordineerija Agent] --> Research[Uurimisagent<br/>gpt-4.1]
+    Orchestrator[Orkestreerija Agent] --> Research[Uurimisagent<br/>gpt-4.1]
     Orchestrator --> Writer[Kirjutaja Agent<br/>gpt-4.1-mini]
     Orchestrator --> Reviewer[Ülevaataja Agent<br/>gpt-4.1]
 ```
 
-**Sobib:**
-- Keeruline sisuloome
-- Mitmesammulised töövood
-- Ülesanded, mis nõuavad erinevat spetsialiseerumist
+**Parim järgmiste jaoks:**
+- Keerukas sisuloome
+- Mitme sammu töövood
+- Ülesanded, mis nõuavad erinevat erialast pädevust
 
-**Loe edasi:** [Mitmeagendi koordineerimismustrid](../chapter-06-pre-deployment/coordination-patterns.md)
+**Lisalugemist:** [Mitme agendi koordineerimise mustrid](../chapter-06-pre-deployment/coordination-patterns.md)
 
 ---
 
-## ⚙️ Agentide tööriistade konfigureerimine
+## ⚙️ Agendi tööriistade seadistamine
 
-Agentide võimsus tuleb kasutamisest tööriistadega. Siin on, kuidas konfigureerida levinud tööriistu:
+Agendid muutuvad võimsaks, kui nad saavad kasutada tööriistu. Siin on, kuidas seadistada levinumaid tööriistu:
 
-### Tööriistade seadistamine Foundry Agentides
+### Tööriista seadistamine Foundry agentides
 
 ```python
 # agent_config.py
 from azure.ai.projects import AIProjectClient
 from azure.ai.projects.models import FunctionTool, CodeInterpreterTool
 
-# Määratle kohandatud tööriistad
+# Kohandatud tööriistade defineerimine
 search_tool = FunctionTool(
     name="search_knowledge_base",
     description="Search the company knowledge base for relevant documents",
@@ -241,7 +241,7 @@ search_tool = FunctionTool(
     }
 )
 
-# Loo agent tööriistadega
+# Agendi loomine tööriistadega
 agent = project_client.agents.create_agent(
     model="gpt-4.1",
     name="Support Agent",
@@ -250,7 +250,7 @@ agent = project_client.agents.create_agent(
 )
 ```
 
-### Keskkonna seadistus
+### Keskkonna seadistamine
 
 ```bash
 # Määrake agendi-spetsiifilised keskkonnamuutujad
@@ -259,7 +259,7 @@ azd env set AGENT_INSTRUCTIONS "You are a helpful assistant..."
 azd env set ENABLE_CODE_INTERPRETER "true"
 azd env set ENABLE_FILE_SEARCH "true"
 
-# Paigaldage uuendatud konfiguratsiooniga
+# Käivitage värskendatud konfiguratsiooniga lõpptarvik
 azd deploy
 ```
 
@@ -267,12 +267,12 @@ azd deploy
 
 ## 📊 Agentide jälgimine
 
-### Application Insights integreerimine
+### Application Insights integratsioon
 
 Kõik AZD agendi mallid sisaldavad Application Insightsi jälgimiseks:
 
 ```bash
-# Ava jälgimise armatuurlaud
+# Ava monitooringu armatuurlaud
 azd monitor --overview
 
 # Vaata reaalajas logisid
@@ -284,22 +284,22 @@ azd monitor --live
 
 ### Põhimõõdikud jälgimiseks
 
-| Mõõdik | Kirjeldus | Eesmärk |
-|--------|-----------|---------|
-| Vastuse latentsus | Vastuse genereerimise aeg | < 5 sekundit |
+| Mõõdik | Kirjeldus | Sihtväärtus |
+|--------|-------------|--------|
+| Vastuse latentsus | Aeg vastuse genereerimiseks | < 5 sekundit |
 | Tokenite kasutus | Tokenite arv päringu kohta | Jälgi kulusid |
-| Tööriistakõne edukus | Edukalt täidetud tööriistakutsed % | > 95% |
-| Vea määr | Ebaõnnestunud agendi päringud | < 1% |
+| Tööriista väljakutsete õnnestumusprotsent | Õnnestunud tööriistakutsed % | > 95% |
+| Vea määr | Ebaõnnestunud agentide päringud | < 1% |
 | Kasutajate rahulolu | Tagasiside skoorid | > 4.0/5.0 |
 
-### Kohandatud logimine agentide jaoks
+### Kohandatud logimine agentidele
 
 ```python
 import os
 from azure.monitor.opentelemetry import configure_azure_monitor
 from opentelemetry import trace
 
-# Konfigureeri Azure Monitor OpenTelemetry'ga
+# Konfigureeri Azure Monitor kasutades OpenTelemetry't
 configure_azure_monitor(
     connection_string=os.environ["APPLICATIONINSIGHTS_CONNECTION_STRING"]
 )
@@ -325,20 +325,20 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
 ### Hinnangulised kuukulud mustrite kaupa
 
 | Muster | Arenduskeskkond | Tootmine |
-|---------|----------------|----------|
-| Üks agent | $50-100 | $200-500 |
+|---------|-----------------|------------|
+| Üksik agent | $50-100 | $200-500 |
 | RAG agent | $80-150 | $300-800 |
-| Mitmeagentne (2-3 agenti) | $150-300 | $500-1,500 |
-| Ettevõtte mitmeagentne | $300-500 | $1,500-5,000+ |
+| Mitme agenti (2–3 agenti) | $150-300 | $500-1,500 |
+| Ettevõtte mitme agenti | $300-500 | $1,500-5,000+ |
 
 ### Kulude optimeerimise näpunäited
 
-1. **Kasuta gpt-4.1-mini lihtsateks ülesanneteks**
+1. **Kasuta gpt-4.1-mini lihtsate ülesannete jaoks**
    ```bash
    azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
    ```
 
-2. **Rakenda vahemälu korduvate päringute jaoks**
+2. **Rakenda vahemällu salvestamine korduvate päringute jaoks**
    ```python
    from functools import lru_cache
    
@@ -347,7 +347,7 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
        return agent.run(query_hash)
    ```
 
-3. **Sea tokenite piirangud iga jooksu kohta**
+3. **Sea tokeni piirangud jooksu kohta**
    ```python
    # Määra max_completion_tokens agendi käivitamisel, mitte loomise ajal
    run = project_client.agents.create_run(
@@ -357,7 +357,7 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
    )
    ```
 
-4. **Skaaleeri nulli, kui pole kasutusel**
+4. **Skaala nullini, kui ei kasutata**
    ```bash
    # Container Apps skaleeruvad automaatselt nulli
    azd env set MIN_REPLICAS "0"
@@ -365,12 +365,12 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
 
 ---
 
-## 🔧 Agendi tõrkeotsing
+## 🔧 Agendi probleemide lahendamine
 
-### Sageli esinevad probleemid ja lahendused
+### Levinud probleemid ja lahendused
 
 <details>
-<summary><strong>❌ Agent ei vasta tööriistakutsetele</strong></summary>
+<summary><strong>❌ Agent ei vasta tööriistakutsedele</strong></summary>
 
 ```bash
 # Kontrolli, kas tööriistad on õigesti registreeritud
@@ -385,35 +385,35 @@ az cognitiveservices account deployment list \
 azd monitor --logs
 ```
 
-**Tüüpilised põhjused:**
-- Tööriistafunktsiooni signatuuri sobimatus
-- Puuduvad vajalikud õigused
+**Tavalised põhjused:**
+- Tööriista funktsiooni signatuuri vastuolu
+- Puuduvad vajalikud load
 - API lõpp-punkt pole ligipääsetav
 </details>
 
 <details>
-<summary><strong>❌ Agentide vastuste suur latentsus</strong></summary>
+<summary><strong>❌ Agendi vastuste kõrge latentsus</strong></summary>
 
 ```bash
-# Kontrolli rakenduse Insightsi kitsaskohti
+# Kontrolli pudelikaelu Application Insightsis
 azd monitor --live
 
-# Kaalu kiiremalt mudeli kasutamist
+# Kaalu kiirema mudeli kasutamist
 azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
 azd deploy
 ```
 
-**Optimeerimisnõuanded:**
-- Kasuta voogedastusega vastuseid
+**Optimeerimisnipid:**
+- Kasuta voogesitust vastustes
 - Rakenda vastuste vahemällu salvestamist
 - Vähenda konteksti akna suurust
 </details>
 
 <details>
-<summary><strong>❌ Agent tagastab vale või hallutsinatsioonne info</strong></summary>
+<summary><strong>❌ Agent tagastab ebatäpset või kahtlast infot</strong></summary>
 
 ```python
-# Paranda parematega süsteemi vihjete abil
+# Paranda paremate süsteemi viipadega
 instructions = """
 You are a helpful assistant. IMPORTANT:
 - Only answer based on provided context
@@ -422,17 +422,17 @@ You are a helpful assistant. IMPORTANT:
 - Never make up information
 """
 
-# Lisa taastekasu maandamiseks
+# Lisa taasteenistus kinnitamiseks
 agent = project_client.agents.create_agent(
     model="gpt-4.1",
     instructions=instructions,
-    tools=[FileSearchTool()]  # Põhista vastused dokumentidel
+    tools=[FileSearchTool()]  # Too vastused dokumentidesse
 )
 ```
 </details>
 
 <details>
-<summary><strong>❌ Tokenite limiidi ületamise vead</strong></summary>
+<summary><strong>❌ Tokenipiirangute ületamise vead</strong></summary>
 
 ```python
 # Rakenda konteksti akna haldamine
@@ -458,7 +458,7 @@ def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
 
 ## 🎓 Praktilised harjutused
 
-### Harjutus 1: Baasagendi juurutamine (20 minutit)
+### Harjutus 1: Lihtsa agendi juurutamine (20 minutit)
 
 **Eesmärk:** Juuruta oma esimene AI agent AZD abil
 
@@ -470,44 +470,44 @@ azd init --template get-started-with-ai-agents
 azd auth login
 # Kui töötad mitme üürnikuga, lisa --tenant-id <tenant-id>
 
-# Samm 3: Käivita juurutus
+# Samm 3: Deploy'i
 azd up
 
 # Samm 4: Testi agenti
-# Oodatav väljund pärast juurutust:
-#   Juurutus lõpetatud!
+# Oodatav väljund pärast deploy'd:
+#   Deploy lõpetatud!
 #   Lõpp-punkt: https://<app-name>.<region>.azurecontainerapps.io
 # Ava väljundis näidatud URL ja proovi esitada küsimus
 
-# Samm 5: Vaata jälgimist
+# Samm 5: Vaata monitooringut
 azd monitor --overview
 
-# Samm 6: Puhasta üles
+# Samm 6: Tee puhastus
 azd down --force --purge
 ```
 
 **Õnnestumise kriteeriumid:**
 - [ ] Agent vastab küsimustele
-- [ ] Saab kasutada jälgimisdashboardi käsuga `azd monitor`
-- [ ] Ressursid puhastatud edukalt
+- [ ] Saab ligi jälgimisarmatuurlauale `azd monitor` kaudu
+- [ ] Ressursid puhastati edukalt
 
-### Harjutus 2: Lisa kohandatud tööriist (30 minutit)
+### Harjutus 2: Kohandatud tööriista lisamine (30 minutit)
 
-**Eesmärk:** Laiendada agenti kohandatud tööriistaga
+**Eesmärk:** Laienda agenti kohandatud tööriistaga
 
 1. Juuruta agendi mall:
    ```bash
    azd init --template get-started-with-ai-agents
    azd up
    ```
-2. Loo uus tööriistafunktsioon oma agendi koodis:
+2. Loo agendi koodi uus tööriistafunktsioon:
    ```python
    def get_weather(location: str) -> str:
        """Get current weather for a location."""
        # API kõne ilmateenistusele
        return f"Weather in {location}: Sunny, 72°F"
    ```
-3. Registreeri tööriist agenti sees:
+3. Registreeri tööriist agendi juures:
    ```python
    from azure.ai.projects.models import FunctionTool
 
@@ -533,80 +533,80 @@ azd down --force --purge
    ```bash
    azd deploy
    # Küsi: "Milline on ilm Seattle'is?"
-   # Oodatud: Agent kutsub funktsiooni get_weather("Seattle") ja tagastab ilmainfo
+   # Oodatud: Agent kutsub get_weather("Seattle") ja tagastab ilmaandmed
    ```
 
 **Õnnestumise kriteeriumid:**
-- [ ] Agent tunneb ära ilmaga seotud päringud
-- [ ] Tööriist kutsutakse õigesti
-- [ ] Vastus sisaldab ilmainfot
+- [ ] Agent tunneb ära ilmateemalised päringud
+- [ ] Tööriist kutsutakse korrektselt
+- [ ] Vastuses on ilmainfo
 
 ### Harjutus 3: RAG agendi loomine (45 minutit)
 
-**Eesmärk:** Loo agent, mis vastab küsimustele sinu dokumentide põhjal
+**Eesmärk:** Loo agent, kes vastab küsimustele sinu dokumentidest
 
 ```bash
-# Samm 1: Paigalda RAG mall
+# Samm 1: Käivita RAG mall
 azd init --template azure-search-openai-demo
 azd up
 
 # Samm 2: Laadi üles oma dokumendid
-# Aseta PDF/TXT failid kataloogi data/, seejärel käivita:
+# Paiguta PDF/TXT failid kataloogi data/, seejärel käivita:
 python scripts/prepdocs.py
 
-# Samm 3: Testi domeenispetsiifiliste küsimustega
+# Samm 3: Testi valdkonnapõhiste küsimustega
 # Ava veebirakenduse URL azd up väljundist
-# Esita küsimusi oma üleslaaditud dokumentide kohta
-# Vastused peaksid sisaldama tsitaatide viiteid nagu [doc.pdf]
+# Esita küsimusi oma üles laaditud dokumentide kohta
+# Vastustes peaksid olema viited allikatele, näiteks [doc.pdf]
 ```
 
 **Õnnestumise kriteeriumid:**
 - [ ] Agent vastab üleslaaditud dokumentidest
 - [ ] Vastustes on viited
-- [ ] Ei esine hallutsinatsioone väljaspool ulatust
+- [ ] Ei esine hallutsinatsioonilisi vastuseid väljaspool ulatust
 
 ---
 
 ## 📚 Järgmised sammud
 
-Nüüd, kui sa tead, mis on AI agendid, uurige neid täiustatud teemasid:
+Nüüd, kui tead AI agentidest, uuri neid edasijõudnud teemasid:
 
 | Teema | Kirjeldus | Link |
-|-------|-----------|------|
-| **Mitmeagentne süsteem** | Ehita süsteeme, kus mitu agenti koostööd teevad | [Jaemüügi mitmeagentne näide](../../examples/retail-scenario.md) |
-| **Koordineerimismustrid** | Õpi orkestreerimise ja suhtluse mustreid | [Koordineerimismustrid](../chapter-06-pre-deployment/coordination-patterns.md) |
-| **Tootejuurutus** | Ettevõttevalmis agentide juurutus | [Tootmise AI praktikad](../chapter-08-production/production-ai-practices.md) |
-| **Agendi hindamine** | Testi ja hinda agendi toimivust | [AI tõrkeotsing](../chapter-07-troubleshooting/ai-troubleshooting.md) |
-| **AI töötuba** | Praktika: muuda AI lahendus AZD-valmis | [AI töötuba](ai-workshop-lab.md) |
+|-------|-------------|------|
+| **Mitme-agendi süsteemid** | Ehita süsteeme mitme koostööd tegevaga | [Jaemüügi mitme-agendi näide](../../examples/retail-scenario.md) |
+| **Koordineerimise mustrid** | Õpi orkestreerimise ja suhtlusmustreid | [Koordineerimise mustrid](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **Tootmisesse juurutamine** | Ettevõttevalmis agendi juurutamine | [Tootmise AI praktika](../chapter-08-production/production-ai-practices.md) |
+| **Agendi hindamine** | Testi ja hinda agendi jõudlust | [AI probleemide lahendamine](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **AI töötoa labor** | Praktiline: tee oma AI lahendus AZD-valmis | [AI töötoa labor](ai-workshop-lab.md) |
 
 ---
 
-## 📖 Täiendavad ressursid
+## 📖 Lisamaterjalid
 
 ### Ametlik dokumentatsioon
-- [Microsoft Foundry Agendi teenus](https://learn.microsoft.com/azure/ai-services/agents/)
-- [Microsoft Foundry Agendi teenuse kiire alustamine](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
-- [Semantic Kernel agendi raamistiku dokumentatsioon](https://learn.microsoft.com/semantic-kernel/)
+- [Microsoft Foundry Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
+- [Microsoft Foundry Agent Service kiire stardijuhend](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
+- [Semantic Kernel agendi raamistik](https://learn.microsoft.com/semantic-kernel/)
 
 ### AZD mallid agentide jaoks
 - [Alusta AI agentidega](https://github.com/Azure-Samples/get-started-with-ai-agents)
 - [Agent OpenAI Python Prompty](https://github.com/Azure-Samples/agent-openai-python-prompty)
 - [Azure Search OpenAI demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-### Ühiskonna ressursid
-- [Awesome AZD - Agendi mallid](https://azure.github.io/awesome-azd/?tags=ai-agents)
+### Kogukonna ressursid
+- [Vinge AZD - agendi mallid](https://azure.github.io/awesome-azd/?tags=ai-agents)
 - [Azure AI Discord](https://discord.gg/microsoft-azure)
 - [Microsoft Foundry Discord](https://discord.gg/nTYy5BXMWG)
 
-### Redaktori jaoks agendi oskused
-- [**Microsoft Azure agendi oskused**](https://skills.sh/microsoft/github-copilot-for-azure) – Paigalda korduvkasutatavad AI agendi oskused Azure arenduseks GitHub Copilotis, Cursoris või mõnes toetatud agendis. Sisaldab oskusi [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [juurutus](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy) ja [diagnoosimise](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) jaoks:
+### Agendi oskused sinu redaktori jaoks
+- [**Microsoft Azure agendi oskused**](https://skills.sh/microsoft/github-copilot-for-azure) - Paigalda taaskasutatavad tehisintellekti agendi oskused Azure arenduseks GitHub Copiloti, Cursori või mõne muu toetatud agendi jaoks. Sisaldab oskusi [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [juurutamine](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy) ja [diagnoosimine](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
 
 ---
 
-**Navigeerimine**
+**Navigatsioon**
 - **Eelmine õppetund**: [Microsoft Foundry integratsioon](microsoft-foundry-integration.md)
 - **Järgmine õppetund**: [AI mudeli juurutamine](ai-model-deployment.md)
 

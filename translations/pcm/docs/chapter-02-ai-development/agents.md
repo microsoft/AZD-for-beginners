@@ -11,21 +11,21 @@
 
 ## Introduction
 
-AI agents na autonomous programs wey fit sense dia environment, make decisions, and take actions to achieve specific goals. Different from simple chatbots wey just dey reply prompts, agents fit:
+AI agents na autonomous programs we fit sense their environment, make decisions, an take actions to achieve specific goals. Unlike simple chatbots wey dey only respond to prompts, agents fit:
 
-- **Use tools** - Call APIs, search databases, run code
+- **Use tools** - Call APIs, search databases, execute code
 - **Plan and reason** - Break complex tasks into steps
-- **Learn from context** - Keep memory and adapt how dem dey behave
-- **Collaborate** - Work with oda agents (multi-agent systems)
+- **Learn from context** - Maintain memory and adapt behavior
+- **Collaborate** - Work wit oda agents (multi-agent systems)
 
 Dis guide go show you how to deploy AI agents to Azure using Azure Developer CLI (azd).
 
-> **Validation note (2026-03-25):** Dis guide dem check am wit `azd` `1.23.12` and `azure.ai.agents` `0.1.18-preview`. The `azd ai` experience still dey preview, so check extension help if your installed flags different.
+> **Validation note (2026-07-13):** Dis guide don check for `azd` `1.27.1` an `azure.ai.agents` `1.0.0-beta.5`. The `azd ai` experience still be preview, so check extension help if your installed flags different.
 
 ## Learning Goals
 
-By the time you finish dis guide, you go:
-- Understand wetin AI agents be and how dem different from chatbots
+When you finish dis guide, you go:
+- Understand wetin AI agents be and how dem differ from chatbots
 - Deploy pre-built AI agent templates using AZD
 - Configure Foundry Agents for custom agents
 - Implement basic agent patterns (tool use, RAG, multi-agent)
@@ -33,29 +33,29 @@ By the time you finish dis guide, you go:
 
 ## Learning Outcomes
 
-When you don finish, you go fit:
+When you finish am, you go fit:
 - Deploy AI agent applications to Azure with one command
 - Configure agent tools and capabilities
-- Implement retrieval-augmented generation (RAG) with agents
+- Implement retrieval-augmented generation (RAG) wit agents
 - Design multi-agent architectures for complex workflows
-- Troubleshoot common agent deployment wahalas
+- Troubleshoot common agent deployment issues
 
 ---
 
-## 🤖 Wetin Make Agent Different from Chatbot?
+## 🤖 Wetin Make Agent Different From Chatbot?
 
 | Feature | Chatbot | AI Agent |
 |---------|---------|----------|
 | **Behavior** | Responds to prompts | Takes autonomous actions |
-| **Tools** | None | Can call APIs, search, execute code |
+| **Tools** | None | Fit call APIs, search, execute code |
 | **Memory** | Session-based only | Persistent memory across sessions |
 | **Planning** | Single response | Multi-step reasoning |
-| **Collaboration** | Single entity | Can work with other agents |
+| **Collaboration** | Single entity | Fit work wit oda agents |
 
 ### Simple Analogy
 
 - **Chatbot** = Person wey dey help answer questions for information desk
-- **AI Agent** = Personal assistant wey fit make calls, book appointments, and finish tasks for you
+- **AI Agent** = Personal assistant wey fit make calls, book appointments, and complete tasks for you
 
 ---
 
@@ -64,10 +64,10 @@ When you don finish, you go fit:
 ### Option 1: Foundry Agents Template (Recommended)
 
 ```bash
-# Set up di template for AI agents
+# Set up di AI agents template
 azd init --template get-started-with-ai-agents
 
-# Deploy am go Azure
+# Put am for Azure
 azd up
 ```
 
@@ -84,10 +84,10 @@ azd up
 ### Option 2: OpenAI Agent with Prompty
 
 ```bash
-# Set up di agent template wey base on Prompty
+# Start di Prompty-based agent template
 azd init --template agent-openai-python-prompty
 
-# Deploy am go Azure
+# Put am for Azure
 azd up
 ```
 
@@ -103,68 +103,68 @@ azd up
 ### Option 3: RAG Chat Agent
 
 ```bash
-# Make di RAG chat template ready
+# Start RAG chat template
 azd init --template azure-search-openai-demo
 
-# Deploy am go Azure
+# Put am for Azure
 azd up
 ```
 
 **Wetin go deploy:**
 - ✅ Microsoft Foundry Models
-- ✅ Azure AI Search with sample data
+- ✅ Azure AI Search wit sample data
 - ✅ Document processing pipeline
-- ✅ Chat interface with citations
+- ✅ Chat interface wit citations
 
 **Time:** ~15-25 minutes
 **Cost:** ~$80-150/month (development)
 
 ### Option 4: AZD AI Agent Init (Manifest- or Template-Based Preview)
 
-If you get agent manifest file, you fit use the `azd ai` command to scaffold a Foundry Agent Service project directly. Latest preview releases still add template-based initialization support, so the exact prompt flow fit small change depending on your installed extension version.
+If you get agent manifest file, you fit use `azd ai` command to scaffold Foundry Agent Service project directly. Recent preview releases add template-based initialization support, so exact prompt flow fit small different based on your installed extension version.
 
 ```bash
-# Install di AI agents extension
+# Make you install di AI agents extension
 azd extension install azure.ai.agents
 
-# Optional: check di preview version wey you don install
+# Optional: make you confirm di preview version wey you don install
 azd extension show azure.ai.agents
 
-# Start from one agent manifest
+# Start from an agent manifest
 azd ai agent init -m agent-manifest.yaml
 
-# Deploy go Azure
+# Deploy am for Azure
 azd up
 
-# Test di deployed agent (e go show latency + time wey first byte reach)
+# Test di agent wey you don deploy (e go show latency + time-to-first-byte)
 azd ai agent invoke
 ```
 
 **When to use `azd ai agent init` vs `azd init --template`:**
 
-| Approach | Best For | How It Works |
-|----------|----------|------|
-| `azd init --template` | Starting from a working sample app | Clones a full template repo with code + infra |
+| Approach | Best For | How E Dey Work |
+|----------|----------|--------------|
+| `azd init --template` | Starting from working sample app | Clones full template repo wit code + infra |
 | `azd ai agent init -m` | Building from your own agent manifest | Scaffolds project structure from your agent definition |
 
 > **Tip:** Use `azd init --template` when you dey learn (Options 1-3 above). Use `azd ai agent init` when you dey build production agents with your own manifests.
 
-After `azd up`, the same extension go carry you through the rest of the agent lifecycle: `azd ai agent invoke` to test, `azd ai agent eval generate` and `azd ai agent optimize` to measure and improve quality, and `azd ai agent delete` to clean up. See [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for the full reference.
+After `azd up`, the same extension go carry you through rest of the agent lifecycle: `azd ai agent invoke` to test, `azd ai agent eval generate` and `azd ai agent optimize` to measure and improve quality, and `azd ai agent delete` to clean up. See [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for full reference.
 
 ---
 
 ## 🏗️ Agent Architecture Patterns
 
-### Pattern 1: Single Agent with Tools
+### Pattern 1: Single Agent wit Tools
 
-The simplest agent pattern - one agent wey fit use many tools.
+Di simplest agent pattern - one agent wey fit use multiple tools.
 
 ```mermaid
 graph TD
-    UI[Wetin user dey see] --> Agent[AI Ajent<br/>gpt-4.1]
-    Agent --> Search[Tool wey dey search]
-    Agent --> Database[Tool wey dey store data]
-    Agent --> API[Tool wey dey use API]
+    UI[User Interface] --> Agent[AI Agent<br/>gpt-4.1]
+    Agent --> Search[Search Tool]
+    Agent --> Database[Database Tool]
+    Agent --> API[API Tool]
 ```
 
 **Best for:**
@@ -176,15 +176,15 @@ graph TD
 
 ### Pattern 2: RAG Agent (Retrieval-Augmented Generation)
 
-Agent wey dey fetch relevant documents before e generate response.
+Agent wey go find relevant documents before e go generate responses.
 
 ```mermaid
 graph TD
-    Query[Wetin user dey ask] --> RAG[RAG Ajent]
+    Query[User Query] --> RAG[RAG Agent]
     RAG --> Vector[Vector Search]
     RAG --> LLM[LLM<br/>gpt-4.1]
-    Vector -- Dokument dem --> LLM
-    LLM --> Response[Answer wey get citation dem]
+    Vector -- Documents --> LLM
+    LLM --> Response[Response wit Citations]
 ```
 
 **Best for:**
@@ -196,13 +196,13 @@ graph TD
 
 ### Pattern 3: Multi-Agent System
 
-Many specialized agents wey dey work together for complex tasks.
+Multiple specialized agents dey work together on complex tasks.
 
 ```mermaid
 graph TD
-    Orchestrator[Orchestrator Ajent] --> Research[Research Ajent<br/>gpt-4.1]
-    Orchestrator --> Writer[Writer Ajent<br/>gpt-4.1-mini]
-    Orchestrator --> Reviewer[Reviewer Ajent<br/>gpt-4.1]
+    Orchestrator[Orchestrator Agent] --> Research[Research Agent<br/>gpt-4.1]
+    Orchestrator --> Writer[Writer Agent<br/>gpt-4.1-mini]
+    Orchestrator --> Reviewer[Reviewer Agent<br/>gpt-4.1]
 ```
 
 **Best for:**
@@ -216,7 +216,7 @@ graph TD
 
 ## ⚙️ Configuring Agent Tools
 
-Agents go powerful when dem fit use tools. Na so to configure common tools:
+Agents dey powerful when dem fit use tools. Na so we go configure common tools:
 
 ### Tool Configuration in Foundry Agents
 
@@ -225,7 +225,7 @@ Agents go powerful when dem fit use tools. Na so to configure common tools:
 from azure.ai.projects import AIProjectClient
 from azure.ai.projects.models import FunctionTool, CodeInterpreterTool
 
-# Make tools wey you customize
+# Define custom tools
 search_tool = FunctionTool(
     name="search_knowledge_base",
     description="Search the company knowledge base for relevant documents",
@@ -241,7 +241,7 @@ search_tool = FunctionTool(
     }
 )
 
-# Make agent wey get dem tools
+# Create agent wit tools
 agent = project_client.agents.create_agent(
     model="gpt-4.1",
     name="Support Agent",
@@ -253,13 +253,13 @@ agent = project_client.agents.create_agent(
 ### Environment Configuration
 
 ```bash
-# Set up di environment variable dem wey special for each agent
+# Arrange environment variables wey dey for agent only
 azd env set AZURE_OPENAI_MODEL "gpt-4.1"
 azd env set AGENT_INSTRUCTIONS "You are a helpful assistant..."
 azd env set ENABLE_CODE_INTERPRETER "true"
 azd env set ENABLE_FILE_SEARCH "true"
 
-# Deploy wit di updated configuration
+# Carry deploy wit updated configuration
 azd deploy
 ```
 
@@ -269,16 +269,16 @@ azd deploy
 
 ### Application Insights Integration
 
-All AZD agent templates get Application Insights for monitoring:
+All AZD agent templates get Application Insights inside for monitoring:
 
 ```bash
-# Open di monitoring dashboard
+# Open moni-tor moni-dashboard
 azd monitor --overview
 
-# See di live logs
+# See live logs
 azd monitor --logs
 
-# See di live metrics
+# See live metrics
 azd monitor --live
 ```
 
@@ -286,7 +286,7 @@ azd monitor --live
 
 | Metric | Description | Target |
 |--------|-------------|--------|
-| Response Latency | Time to generate response | < 5 seconds |
+| Response Latency | Time wey e take to generate response | < 5 seconds |
 | Token Usage | Tokens per request | Monitor for cost |
 | Tool Call Success Rate | % of successful tool executions | > 95% |
 | Error Rate | Failed agent requests | < 1% |
@@ -316,7 +316,7 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
         })
 ```
 
-> **Note:** Install the required packages: `pip install azure-monitor-opentelemetry opentelemetry`
+> **Note:** Install na di packages wey dem require: `pip install azure-monitor-opentelemetry opentelemetry`
 
 ---
 
@@ -349,17 +349,17 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
 
 3. **Set token limits per run**
    ```python
-   # Set max_completion_tokens wen you dey run di agent, no for when you dey create am
+   # Set max_completion_tokens wen you dey run the agent, no be when you dey create am
    run = project_client.agents.create_run(
        thread_id=thread.id,
        agent_id=agent.id,
-       max_completion_tokens=1000  # Limit how long di response go be
+       max_completion_tokens=1000  # Make response length no too long
    )
    ```
 
 4. **Scale to zero when not in use**
    ```bash
-   # Container Apps dey scale go zero on dia own
+   # Container Apps go automatically scale reach zero
    azd env set MIN_REPLICAS "0"
    ```
 
@@ -373,20 +373,20 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
 <summary><strong>❌ Agent no dey respond to tool calls</strong></summary>
 
 ```bash
-# Make sure say tools don register well
+# Make sure say di tools don register well well
 azd show
 
-# Confirm say OpenAI deployment correct
+# Confirm OpenAI deployment
 az cognitiveservices account deployment list \
   --name $AZURE_OPENAI_NAME \
   --resource-group $RG_NAME
 
-# Check agent log dem
+# Check di agent logs
 azd monitor --logs
 ```
 
 **Common causes:**
-- Tool function signature mismatch
+- Tool function signature no match
 - Missing required permissions
 - API endpoint no dey accessible
 </details>
@@ -395,10 +395,10 @@ azd monitor --logs
 <summary><strong>❌ High latency in agent responses</strong></summary>
 
 ```bash
-# Make you check Application Insights make you see wetin dey slow things down
+# Check Application Insights for bottlenecks
 azd monitor --live
 
-# Try use a faster model
+# Consider using a faster model
 azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
 azd deploy
 ```
@@ -410,10 +410,10 @@ azd deploy
 </details>
 
 <details>
-<summary><strong>❌ Agent dey return incorrect or hallucinated information</strong></summary>
+<summary><strong>❌ Agent dey return wrong or hallucinated info</strong></summary>
 
 ```python
-# Make am beta wit betta system prompts
+# Make am beta wit beta system prompts
 instructions = """
 You are a helpful assistant. IMPORTANT:
 - Only answer based on provided context
@@ -422,11 +422,11 @@ You are a helpful assistant. IMPORTANT:
 - Never make up information
 """
 
-# Add retrieval to help ground di answers
+# Add retrieval for grounding
 agent = project_client.agents.create_agent(
     model="gpt-4.1",
     instructions=instructions,
-    tools=[FileSearchTool()]  # Make responses base on di documents
+    tools=[FileSearchTool()]  # Ground responses for documents
 )
 ```
 </details>
@@ -435,7 +435,7 @@ agent = project_client.agents.create_agent(
 <summary><strong>❌ Token limit exceeded errors</strong></summary>
 
 ```python
-# Arrange how we go manage di context window
+# Make sure say you dey manage context window well well
 def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
     """Keep only recent messages within token limit."""
     import tiktoken
@@ -458,56 +458,56 @@ def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
 
 ## 🎓 Hands-On Exercises
 
-### Exercise 1: Deploy a Basic Agent (20 minutes)
+### Exercise 1: Deploy Basic Agent (20 minutes)
 
 **Goal:** Deploy your first AI agent using AZD
 
 ```bash
-# Step 1: Set up di template
+# Step 1: Make template ready
 azd init --template get-started-with-ai-agents
 
-# Step 2: Login go Azure
+# Step 2: Login to Azure
 azd auth login
 # If you dey work across tenants, add --tenant-id <tenant-id>
 
 # Step 3: Deploy am
 azd up
 
-# Step 4: Test di agent
-# Wetin you suppose see after deployment:
-#   Deployment don complete!
+# Step 4: Try test the agent
+# Wetin you suppose see after deployment be say:
+#   Deployment don finish!
 #   Endpoint: https://<app-name>.<region>.azurecontainerapps.io
-# Open di URL wey show for di output, den try ask question
+# Open di URL wey show for output and try ask question
 
 # Step 5: Check di monitoring
 azd monitor --overview
 
-# Step 6: Clean up
+# Step 6: Clear everything up
 azd down --force --purge
 ```
 
 **Success Criteria:**
-- [ ] Agent dey respond to questions
+- [ ] Agent respond to questions
 - [ ] Fit access monitoring dashboard via `azd monitor`
-- [ ] Resources dem clean up successfully
+- [ ] Resources clean up well
 
-### Exercise 2: Add a Custom Tool (30 minutes)
+### Exercise 2: Add Custom Tool (30 minutes)
 
-**Goal:** Extend an agent with a custom tool
+**Goal:** Extend agent wit custom tool
 
-1. Deploy the agent template:
+1. Deploy agent template:
    ```bash
    azd init --template get-started-with-ai-agents
    azd up
    ```
-2. Create a new tool function in your agent code:
+2. Create new tool function for your agent code:
    ```python
    def get_weather(location: str) -> str:
        """Get current weather for a location."""
-       # API call wey dey go the weather service
+       # API call go di weather service
        return f"Weather in {location}: Sunny, 72°F"
    ```
-3. Register the tool with the agent:
+3. Register the tool wit the agent:
    ```python
    from azure.ai.projects.models import FunctionTool
 
@@ -529,54 +529,54 @@ azd down --force --purge
        tools=[weather_tool]
    )
    ```
-4. Redeploy and test:
+4. Redeploy an test:
    ```bash
    azd deploy
-   # Ask: "Wetin di weather dey for Seattle?"
-   # We expect say agent go call get_weather("Seattle") and e go return weather info
+   # Ask: "How di weather be for Seattle?"
+   # Expected: Agent go call get_weather("Seattle") and return weather info
    ```
 
 **Success Criteria:**
-- [ ] Agent sabi recognize weather-related questions
-- [ ] Tool dey call correct
-- [ ] Response get weather information
+- [ ] Agent sabi weather-related queries
+- [ ] Tool dey call well
+- [ ] Response get weather info
 
-### Exercise 3: Build a RAG Agent (45 minutes)
+### Exercise 3: Build RAG Agent (45 minutes)
 
-**Goal:** Create an agent wey go answer questions from your documents
+**Goal:** Build agent wey answer questions from your documents
 
 ```bash
-# Step 1: Make you deploy di RAG template
+# Step 1: Make RAG template ready
 azd init --template azure-search-openai-demo
 azd up
 
-# Step 2: Make you upload your documents
-# Put PDF/TXT files inside di data/ directory, den run:
+# Step 2: Upload your documents
+# Put PDF/TXT files for data/ folder, den run:
 python scripts/prepdocs.py
 
-# Step 3: Test wit questions wey relate to your domain
-# Open di web app URL wey dey for the azd up output
-# Ask questions about di documents wey you don upload
-# Responses suppose include citation references like [doc.pdf]
+# Step 3: Try am wit questions wey concern di domain
+# Open di web app URL wey come from azd up output
+# Ask any question wey concern your uploaded documents
+# Di answers suppose get citation like [doc.pdf] inside am
 ```
 
 **Success Criteria:**
 - [ ] Agent dey answer from uploaded documents
 - [ ] Responses get citations
-- [ ] No hallucination on questions wey outside scope
+- [ ] No hallucination for out-of-scope questions
 
 ---
 
 ## 📚 Next Steps
 
-Now wey you don sabi AI agents, try these advanced topics:
+Now wey you don understand AI agents, try these advanced topics:
 
 | Topic | Description | Link |
 |-------|-------------|------|
 | **Multi-Agent Systems** | Build systems wit multiple collaborating agents | [Retail Multi-Agent Example](../../examples/retail-scenario.md) |
 | **Coordination Patterns** | Learn orchestration and communication patterns | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) |
 | **Production Deployment** | Enterprise-ready agent deployment | [Production AI Practices](../chapter-08-production/production-ai-practices.md) |
-| **Agent Evaluation** | Test and evaluate agent performance | [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **Agent Evaluation** | Test an evaluate agent performance | [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) |
 | **AI Workshop Lab** | Hands-on: Make your AI solution AZD-ready | [AI Workshop Lab](ai-workshop-lab.md) |
 
 ---

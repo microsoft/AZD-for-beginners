@@ -1,46 +1,46 @@
-# Chapta 3: Konfigureshon & Autentikeshon
+# Chapter 3: Configuration & Authentication
 
 **📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 45-60 minutes | **⭐ Complexity**: Intermediate
 
 ---
 
-## Wetin Dis Chapter Dey Cover
+## Overview
 
-Dis chapta dey cover how to set up environment konfigureshon, autentikeshon patterns, an beta security practices for Azure Developer CLI deployments.
+Dis chapter dey cover how to set environment, authentication patten dem, plus security beta way dem for Azure Developer CLI deployment.
 
-> Dem don validate am with `azd 1.25.6` for June 2026.
+> Validate with `azd 1.27.1` for July 2026.
 
-## Wetin You Go Learn
+## Learning Objectives
 
-If you finish dis chapta, you go:
-- Master the AZD configuration hierarchy
-- Manage plenty environments (dev, staging, prod)
-- Implement secure autentikeshon with managed identities
-- Konfigure environment-specific settings
+If you finish dis chapter, you go fit:
+- Control the AZD configuration order
+- Manage plenti different environment dem (dev, staging, prod)
+- Use secure authentication wit managed identities
+- Setup settings wey base on environment
 
 ---
 
-## 📚 Lekshon
+## 📚 Lessons
 
-| # | Lekshon | Tok Wey E Mean | Taim |
+| # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [Configuration Guide](configuration.md) | How to set up an manage environment | 30 min |
-| 2 | [Authentication & Security](authsecurity.md) | Managed identity an RBAC patterns | 30 min |
+| 1 | [Configuration Guide](configuration.md) | How to set up and manage environment | 30 min |
+| 2 | [Authentication & Security](authsecurity.md) | Managed identity plus RBAC patten dem | 30 min |
 
 ---
 
 ## 🚀 Quick Start
 
 ```bash
-# Make plenty environment dem
+# Make plenty environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Change environment dem
+# Change environments
 azd env select prod
 
-# Set environment variable dem
+# Put environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
@@ -50,12 +50,12 @@ azd env get-values
 
 ---
 
-## 🔧 Konfigureshon Hierarchy
+## 🔧 Configuration Hierarchy
 
-AZD dey apply settings for dis order (later ones go override earlier ones):
+AZD dey follow dis kain order for settings (wey later one dey override di previous one):
 
-1. **Default values** (na dem wey dey inside templates)
-2. **azure.yaml** (project konfigureshon)
+1. **Default values** (dem put am inside templates)
+2. **azure.yaml** (project configuration)
 3. **Environment variables** (`azd env set`)
 4. **Command-line flags** (`--location eastus`)
 
@@ -64,19 +64,19 @@ AZD dey apply settings for dis order (later ones go override earlier ones):
 ## 🔐 Security Best Practices
 
 ```bash
-# Use managed identity (na di one we dem recommend)
+# Use managed identity (dem recommend am)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Check di AZD authentication status
+# Check AZD authentication status
 azd auth status
 
-# Optional: check di Azure CLI context if you wan run az commands
+# Optional: make sure say Azure CLI context correct if you wan run az commands
 az account show
 
-# Sign in again if e necessary
+# Re-authenticate if e need am
 azd auth login
 
-# Optional: refresh di Azure CLI auth if you wan run az commands
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 
@@ -86,8 +86,8 @@ az login
 
 | Direction | Chapter |
 |-----------|---------|
-| **Previous** | [Chapta 2: AI Development](../chapter-02-ai-development/README.md) |
-| **Next** | [Chapta 4: Infrastructure](../chapter-04-infrastructure/README.md) |
+| **Previous** | [Chapter 2: AI Development](../chapter-02-ai-development/README.md) |
+| **Next** | [Chapter 4: Infrastructure](../chapter-04-infrastructure/README.md) |
 
 ---
 

@@ -1,69 +1,107 @@
-# Muudatused - AZD Algajatele
+# Muudatuste logi - AZD algajatele
 
 ## Sissejuhatus
 
-See muudatuste logi dokumenteerib kõik olulised muudatused, uuendused ja täiustused AZD Algajatele hoidlas. Järgime semantilise versioonihalduse põhimõtteid ja hoiame seda logi, et aidata kasutajatel mõista, mis versioonide vahel on muutunud.
+See muudatuste logi dokumenteerib kõik olulised muudatused, uuendused ja täiustused AZD algajatele hoidlas. Me järgime semantilise versioonihalduse põhimõtteid ning hoiame seda logi, et aidata kasutajatel mõista, mis on versioonide vahel muutunud.
 
 ## Õpieesmärgid
 
-Selle muudatuste logi läbi vaatamisel:
-- Olete kursis uute funktsioonide ja sisu lisandustega
-- Mõistate olemasoleva dokumentatsiooni parendusi
-- Jälgite vigade parandusi ja täpsustusi, et tagada täpsus
-- Järgite õppematerjalide arengut aja jooksul
+Selle muudatuste logi ülevaatamisel:
+- Hoidke end kursis uute funktsioonide ja sisulisandustega
+- Mõistke olemasoleva dokumentatsiooni parendusi
+- Jälgige vigade parandusi ja täpsuse tagamist
+- Järgige õppematerjalide arengut ajas
 
 ## Õpitulemused
 
-Pärast muudatuste logi kirjete läbivaatamist saate:
-- Tuvastada uue sisu ja õppematerjalide kättesaadavuse
-- Mõista, milliseid jaotisi on uuendatud või parendatud
-- Planeerida oma õppeteekonda vastavalt kõige värskematele materjalidele
-- Anda tagasisidet ja ettepanekuid tulevaste täiustuste jaoks
+Pärast muudatuste logi kirjeid saate:
+- Tuvastada uue sisu ja õppematerjalid, mis on saadaval
+- Mõista, millised osad on uuendatud või parendatud
+- Planeerida oma õppeprotsessi vastavalt kõige uuematele materjalidele
+- Anda tagasisidet ja ettepanekuid tulevaste parenduste jaoks
 
-## Versioonide ajalugu
+## Versiooni ajalugu
+
+### [v3.23.0] - 2026-07-13
+
+#### AZD 1.27.1 värskendus: versiooni kehtivuse uuendus
+**See versioon uuendab kursust vastavalt `azd` `1.27.1` (juuli 2026, viimane stabiilne väljaanne) ja praegusele eelvaate AI agentide laiendusele `azure.ai.agents` `1.0.0-beta.5`, uuendades kõiki „valideeritud vastu“ ribasid pärast 1.26.0, 1.27.0 ja 1.27.1 versioone.**
+
+#### Muudetud
+- **✅ Valideerimise lähtejoon uuendatud** `azd 1.25.6` juunist 2026 `azd 1.27.1` juuliks 2026 üle kogu peamise README, kõigi peatükkide README-de, peatüki 1 dev-konteinerite õppetunni (sh fikseeritud versioonide näidistega), peatüki 4 kohandatud mallide õppetunni, peatüki 5 mitme agendi õppetunni ja töötoa dokumentatsiooni
+- **🤖 Peatükk 2 lähtejoon värskendatud** `azd 1.23.12` märtsist 2026 `azd 1.27.1` versioonini failides `agents.md`, `ai-model-deployment.md`, `ai-workshop-lab.md` ja `microsoft-foundry-integration.md`; valideerimise märgiste kuupäevad uuendatud 2026-07-13
+- **🧩 AI agendi laiendus tõstetud** `azure.ai.agents` versioonilt `0.1.40-preview`/`0.1.18-preview` praegusele `1.0.0-beta.5` väljaandele peatüki 2 README ja `agents.md` failis
+- **🧪 Töötoa valideerimise näide** (`azd version` väljund) uuendatud versioonile `1.27.1`
+
+#### Märkmed asjakohastele azd väljaannetele (1.26.0 → 1.27.1)
+- **1.26.0 (2026-06-24):** Go tugi Azure Functions Flex Consumptionil, `azd config sub-filter` rentnikepõhised tellimuse filtrid, iseseisvad laienduste paketid (`azd x pack --bundle`), ja `azd tool install azure-skills`
+- **1.27.0 (2026-06-30):** Azure AI Foundry projektide/agentide modelleerimine otse `azure.yaml`-is (Bicep- ja Terraformivaba algus), konteinerite juurutamise tugi App Service’is (`host: appservice` + `language: docker`), otse `-s/--source` lisamine `azd extension` käskudesse ja `azd tool uninstall`
+- **1.27.1 (2026-07-09):** `--no-dependencies` lipp `azd extension install` käsule, aegunud mudelid vaikimisi välja jäetud kataloogi/mahupiirangute teavitustest ning mitmed veaparandused
+
+#### Uuendatud failid
+- `README.md`
+- `changelog.md`
+- `docs/chapter-01-foundation/README.md`
+- `docs/chapter-01-foundation/bring-your-own-app.md`
+- `docs/chapter-01-foundation/dev-containers.md`
+- `docs/chapter-02-ai-development/README.md`
+- `docs/chapter-02-ai-development/agents.md`
+- `docs/chapter-02-ai-development/ai-model-deployment.md`
+- `docs/chapter-02-ai-development/ai-workshop-lab.md`
+- `docs/chapter-02-ai-development/microsoft-foundry-integration.md`
+- `docs/chapter-03-configuration/README.md`
+- `docs/chapter-04-infrastructure/custom-templates.md`
+- `docs/chapter-04-infrastructure/README.md`
+- `docs/chapter-05-multi-agent/multi-agent-basics.md`
+- `docs/chapter-05-multi-agent/README.md`
+- `docs/chapter-06-pre-deployment/README.md`
+- `docs/chapter-07-troubleshooting/README.md`
+- `docs/chapter-08-production/README.md`
+- `workshop/docs/index.md`
+- `workshop/docs/instructions/2-Validate-AI-Template.md`
 
 ### [v3.22.0] - 2026-06-16
 
-#### Algaja Tühiku Täitmine #2: Mallide koostamine, Arenduskonteinerid, Pulumi, Azure DevOps, Teenusepõhised volitused ja Rohkem
-**See versioon sulgeb azd-coverage analüüsi abil tuvastatud ülejäänud kesktaseme lüngad: kuidas koostada ja avaldada oma mall, reprodutseeritavad arenduskonteineri/Codespaces keskkonnad, Pulumi infrastruktuuripakkuja, Azure DevOps CI/CD läbivaatus, teenusepõhise volituse autentimine, hosti valiku juhised (AKS/Spring Apps), `azd restore`/`azd package` selgitused, hook vigade käsitlemine ja meeskonna/jagatud keskkondade praktikad.**
+#### Algajate lünkade täide #2: malliloome, dev-konteinerid, Pulumi, Azure DevOps, teenusepõhised kontod ja rohkem
+**See versioon sulgeb azd katvuse analüüsi järgi jäänud keskastme lüngad: kuidas luua ja avaldada oma mall, reprodutseeritavad dev-konteinerite/CodeSpaces keskkonnad, Pulumi infrastruktuuri pakkuja, Azure DevOps CI/CD ülevaade, teenusekonto autentimine, hosti valiku juhendid (AKS/Spring Apps), `azd restore`/`azd package` selgitused, hook'i veahaldus ja meeskonna/jagatud keskkonna praktikaid.**
 
 #### Lisatud
-- **🧱 Uus 4. peatüki õppetund** `docs/chapter-04-infrastructure/custom-templates.md` — oma azd malli koostamine: nõutud struktuur (`azure.yaml`, `infra/`, `src/`), `metadata.template` väli, infrastruktuuri parameetriseerimine `uniqueString()` ressursi tokeni ja `azd-env-name` sildiga, kohaliku testimise `azd init --template <local-path>` abil, avaldamine GitHubis ja esitamine Awesome AZD galeriisse
-- **📦 Uus 1. peatüki õppetund** `docs/chapter-01-foundation/dev-containers.md` — reprodutseeritavad azd keskkonnad Dev Containers ja GitHub Codespaces abil: minimaalne `.devcontainer/devcontainer.json` ametliku `ghcr.io/azure/azure-dev/azd` funktsiooni kasutamisega, keeletäpsemad funktsioonid, `docker-in-docker` konteinerihostide jaoks ja `azd auth login --use-device-code` kaugallkirjastumiseks
-- **🧩 Pulumi koos azd-ga** jaotis `docs/chapter-04-infrastructure/provisioning.md` — `infra.provider: pulumi`, Pulumi kaustastruktuur, pinud seostatud azd keskkondadega, nõutavad väljundid/sildistamine ja identne `azd up` / `azd down` töövoog
-- **🎯 Hostivaliku juhised** `docs/chapter-04-infrastructure/provisioning.md` — algajasõbralik võrdlus `appservice`, `staticwebapp`, `function`, `containerapp`, `aks` ja `springapp` vahel, koos juhistega, millal valida AKS või Azure Spring Apps
-- **🛠️ Azure DevOps CI/CD läbilõige** `docs/chapter-08-production/production-ai-practices.md` — `azd pipeline config --provider azdo`, teenuseühendus töökoormuse identiteedi föderatsiooniga (OIDC), genereeritud `azure-dev.yml` ja muutujagruppide seadistamine
-- **🔑 Teenusepõhised volitused (Muster 4)** lisatud `docs/chapter-03-configuration/authsecurity.md` — `az ad sp create-for-rbac`, mitteinteraktiivne `azd auth login` kliendisaladuse vs föderaalsete/OIDC volitustega, kasutamise juhised ja turvaline volituste säilitamine
-- **🪝 Hook vigade käsitlemine** alajaotis `docs/chapter-04-infrastructure/deployment-guide.md` — väljapääsukoode ja `set -e`, `continueOnError`, hookide isolatsioonis testimine `azd hooks run` abil, operatsioonisüsteemispetsiifilised kestad ja `--debug`
-- **👥 Meeskonna / jagatud keskkonnad** sektsioon `docs/chapter-03-configuration/configuration.md` — mis elab `.azure/` kaustas, mida ignoreerida gitis, iga arendaja jaoks keskkonnad, `azd env list`/`select` ja keskkonna väärtuste pakkumine CI/CD-s
-- **🧰 `azd restore` ja laiendatud `azd package`** selgitused `resources/cheat-sheet.md` — sõltuvuste taastamine ja edastatava artefakti koostamine ilma juurutamiseta
+- **🧱 Uus peatükk 4 õppetund** `docs/chapter-04-infrastructure/custom-templates.md` — oma azd malli loomine: vajalik struktuur (`azure.yaml`, `infra/`, `src/`), `metadata.template` väli, infrastruktuuri parametriteks unikaalse stringi kasutamine `uniqueString()` ressurssitokeni ja `azd-env-name` sildiga, kohalik testimine `azd init --template <local-path>`, avaldamine GitHubis ja esitus Awesome AZD galeriis
+- **📦 Uus peatükk 1 õppetund** `docs/chapter-01-foundation/dev-containers.md` — reprodutseeritavad azd keskkonnad Dev Containerite ja GitHub Codespacesiga: minimaalne `.devcontainer/devcontainer.json` ametliku `ghcr.io/azure/azure-dev/azd` funktsiooniga, keelepõhised funktsioonid, `docker-in-docker` konteineri hostimiseks ja `azd auth login --use-device-code` kaugallkirjastuseks
+- **🧩 Pulumi koos azd-ga** lõik `docs/chapter-04-infrastructure/provisioning.md` — `infra.provider: pulumi`, Pulumi kaustastruktuur, virnad kaardistatud azd keskkondadele, nõutavad väljundid/sildistamine ning sama `azd up` / `azd down` töövoog
+- **🎯 Hosti valiku juhendamine** `docs/chapter-04-infrastructure/provisioning.md` — algajasõbralik võrdlus `appservice`, `staticwebapp`, `function`, `containerapp`, `aks`, ja `springapp` vahel ning juhised, millal valida AKS või Azure Spring Apps
+- **🛠️ Azure DevOps CI/CD ülevaade** `docs/chapter-08-production/production-ai-practices.md` — `azd pipeline config --provider azdo`, teenuseühendus töökoormuse identiteedi föderatsiooniga (OIDC), genereeritud `azure-dev.yml` ja muutuja grupi seadistamine
+- **🔑 Teenusekontod (muster 4)** lisatud `docs/chapter-03-configuration/authsecurity.md` — `az ad sp create-for-rbac`, mitteinteraktiivne `azd auth login` kliendisalaga vs föderaal/OIDC volitustega, kasutusjuhised ning turvaline volituste säilitamine
+- **🪝 Hook'i veahaldus** alajaotus `docs/chapter-04-infrastructure/deployment-guide.md` — väljumiskoodid ja `set -e`, `continueOnError`, hook'ide testimine isoleeritult `azd hooks run` abil, opsüsteemispetsiifilised shellid ja `--debug`
+- **👥 Meeskonna / jagatud keskkonnad** lõik `docs/chapter-03-configuration/configuration.md` — mis elab `.azure/` kaustas, mida ignoreerida gitis, arendajapõhised keskkonnad, `azd env list`/`select` ja keskkonnaväärtuste edastamine CI/CD-s
+- **🧰 `azd restore` ja laiendatud `azd package`** selgitused `resources/cheat-sheet.md` — sõltuvuste taastamine ja juurutamiseks sobiva artefakti loomine ilma juurutamiseta
 
 #### Muudetud
-- **🧭 4. peatüki õppetundide tabel** uuendatud, et lisada uus "Oma Malli Koostamine" õppetund (õppetund 3)
-- **🧭 1. peatüki õppetundide tabel** uuendatud, et lisada uus "Arenduskonteinerid & Codespaces" õppetund (õppetund 5); navigeerimis jalused ühendatud `bring-your-own-app.md` ja `dev-containers.md` vahel
+- **🧭 Peatüki 4 õppetundide tabel** ajakohastatud, et lisada uus "Oma malli loomine" õppetund (õppetund 3)
+- **🧭 Peatüki 1 õppetundide tabel** ajakohastatud, et lisada uus "Dev Containers & Codespaces" õppetund (õppetund 5); navigeerimist jalused ühendatud `bring-your-own-app.md` ja `dev-containers.md` vahel
 
 ### [v3.21.0] - 2026-06-16
 
-#### Algaja Tühiku Täitmine: Käed-külge Mitme Agendi Õppetund, "Too Oma Rakendus", Terraform ja CI/CD Läbivaatus
-**See versioon sulgeb suurimad lüngad täieliku algaja juhendi jaoks, lisades kaks uut praktilist õppetundi (juurutatav mitme agendi läbivaatus ja azd lisamine olemasolevale rakendusele), algajasõbraliku hookide tutvustuse, Terraform koos azd-ga jaotise, samm-sammult GitHub Actions konveieri läbivaatuse, uute eelvaate laienduste seletuse ja selge juurutamise kinnitamise kontrollnimekirja.**
+#### Algajate lünkade täide: praktiline mitme agendi õppetund, "Too oma rakendus", Terraform ja CI/CD ülevaade
+**See versioon sulgeb täieliku algajate juhendi suurimad lüngad, lisades kaks uut praktilist õppetundi (deploy'datav mitme agendi läbikäik ja azd lisamine olemasolevale rakendusele), algajasõbraliku hookide tutvustuse, Terraformi-azd sektsiooni, samm-sammulise GitHub Actions pipeline'i ülevaate, uute eelvaate laienduste tutvustuse ja selge juurutuse kinnitamise kontrollnimekirja.**
 
 #### Lisatud
-- **🤝 Uus 5. peatüki õppetund** `docs/chapter-05-multi-agent/multi-agent-basics.md` — täielikult praktiline, juurutatav kahe agendi läbivaatus (koordinaator + spetsialistid) reaalse malliga (`contoso-creative-writer`), käsitledes, millal kasutada mitme agendi lähenemist, `azd up` töövoog, juurutatud ressursside mõistmine, agenditevaheline jälgimine, kohandamine ja puhastamine
-- **📦 Uus 1. peatüki õppetund** `docs/chapter-01-foundation/bring-your-own-app.md` — kuidas lisada azd olemasolevale projektile `azd init` abil („kasuta koodi praeguses kataloogis“), `azure.yaml` ja `infra/` mõistmine, `azd infra generate`, hosti tuvastamine ja juurutamine `azd up` abil
-- **🌐 Terraform koos azd-ga** lisatud jaotis `docs/chapter-04-infrastructure/provisioning.md` — `infra.provider: terraform` konfiguratsioon, `.tf` kaustastruktuur, nõutavad `AZURE_*` väljundid ja `azd-env-name` sildistamine ning identne `azd up` / `azd down` töövoog (sulgeb augu, kus väideti Terraformi tuge, kuid näidati ainult Bicepit)
-- **⚙️ Samm-sammult GitHub Actions läbivaatus** `docs/chapter-08-production/production-ai-practices.md` — GitHub hoidlast automatiseeritud juurutusteni: `azd pipeline config`, OIDC föderaalvolitused (salajased andmed mitte salvestatud), genereeritud `azure-dev.yml` ja saladuste vs muutujate juhised
-- **🪝 Algaja "Uus hookide kasutaja?" tutvustus** `docs/chapter-04-infrastructure/deployment-guide.md` — mis on hook, hookide etappide tabel, minimaalne esimene hook ja hookide käsitsi käivitamine `azd hooks run` abil
-- **✅ "Kontrolli oma juurutust" kontrollnimekiri** lisatud „Esimese projekti“ sammus 5 `docs/chapter-01-foundation/first-project.md` — suitsutest, tervise lõpp-punkti kontroll ja selged õnnestumise kriteeriumid
-- **🧩 Uute eelvaate laienduste seletus** `azure.ai.skills` ja `azure.ai.connections` (mis need on ja millal neid kasutada) `docs/chapter-08-production/production-ai-practices.md`
+- **🤝 Uus peatükk 5 õppetund** `docs/chapter-05-multi-agent/multi-agent-basics.md` — täielikult praktiline, deploy’datav kahe agendi läbikäik (koordinaator + spetsialistid) kasutades tõelist malli (`contoso-creative-writer`), hõlmates mitme agendi kasutamise ajastust, `azd up` töövoogu, juurutatud ressursside mõistmist, agendide vahelist jälitamist, kohandamist ja koristamist
+- **📦 Uus peatükk 1 õppetund** `docs/chapter-01-foundation/bring-your-own-app.md` — kuidas lisada azd olemasolevale projektile `azd init` abil („kasuta koodi käesolevas kataloogis“), `azure.yaml` ja `infra/` mõistmine, `azd infra generate`, hosti tuvastamine ja juurutamine `azd up`-ga
+- **🌐 Terraform koos azd-ga** lõik lisatud `docs/chapter-04-infrastructure/provisioning.md` — `infra.provider: terraform` konfiguratsioon, `.tf` kaustade struktuur, nõutavad `AZURE_*` väljundid ja `azd-env-name` sildistamine ning sama `azd up` / `azd down` töövoog (sulgudes lünga, kus Terraformi tugi lubati, aga näidati vaid Bicepit)
+- **⚙️ Samm-sammuline GitHub Actions juhend** `docs/chapter-08-production/production-ai-practices.md` — GitHubi hoidlast automatiseeritud juurutusteni: `azd pipeline config`, OIDC föderaalvolitused (ilma salvestatud saladusteta), genereeritud `azure-dev.yml` ja juhised saladuste ja muutujate kohta
+- **🪝 Algajate „Uus hook'ide kasutaja?“ tutvustus** `docs/chapter-04-infrastructure/deployment-guide.md` — mis on hook, hook-etappide tabel, minimaalne esimene hook ja hookide käsitsi käivitamine `azd hooks run` abil
+- **✅ „Kontrolli oma juurutust“ kontrollnimekiri** lisatud `docs/chapter-01-foundation/first-project.md` sammule 5 — suitsutest, tervisepunkti kontroll ja selged õnnestumiskriteeriumid
+- **🧩 Uute eelvaate laienduste selgitus** `azure.ai.skills` ja `azure.ai.connections` (mis need on ja millal kasutada) lisatud `docs/chapter-08-production/production-ai-practices.md`
 
 #### Muudetud
-- **🧭 5. peatüki õppetundide tabel** parandatud: `multi-agent-basics.md` on nüüd õppetund 1 (ainus täielikult praktiline õppetund), aus märgendus, et õppetund 2 on 6. peatükis ja jaekaubanduse stsenaarium on arhitektuuri plaan, mitte ühe käsu mall
-- **🧭 1. peatüki õppetundide tabel** sisaldab nüüd uut "Too Oma Rakendus" õppetundi (õppetund 4)
-- **🔗 Navigeerimis jalused** uuendatud: `first-project.md` lingib edasi `bring-your-own-app.md`-le
+- **🧭 Peatüki 5 õppetundide tabel** parandatud: `multi-agent-basics.md` on nüüd õppetund 1 (ainus täielikult praktiline õppetund), aus märgendus, et õppetund 2 asub peatükis 6 ja jaemüügistsenaarium on arhitektuuriplaan, mitte ühe käsklusega mall
+- **🧭 Peatüki 1 õppetundide tabel** nüüd sisaldab uut „Too oma rakendus“ õppetundi (õppetund 4)
+- **🔗 Navigeerimise jalused** ajakohastatud: `first-project.md` lingib edasi `bring-your-own-app.md`-le
 
 #### Parandatud
-- **🧱 Suletud „väidetud, kuid puuduv“ Terraformi lünk** — kursusel viidati varem Terraformi toe olemasolule, kuid see polnud näidatud
-- **🔀 Parandatud eksitavad 5. peatüki ristlingid**, mis viitasid täielikule mitme agendi rakendusele, kuid näitasid ainult arhitektuuri plaani
+- **🧱 Suletud „lubatud, kuid puuduv“ Terraformi lünk** — kursus viitas varem Terraformi toele ilma selle näitamiseta
+- **🔀 Parandatud eksitavad peatüki 5 ristlingid**, mis vihjasid, et täismahus mitme agendi implementatsioon eksisteerib, kuigi oli vaid arhitektuuriplaan
 
 #### Uuendatud failid
 - `changelog.md`
@@ -80,28 +118,29 @@ Pärast muudatuste logi kirjete läbivaatamist saate:
 
 ### [v3.20.0] - 2026-06-16
 
-#### AZD 1.25.6 Värskendus, Täielik Agendi Elutsükli Käsud & Aspire Ümberbrändimine
-**See versioon valideerib kursuse `azd` `1.25.6` (juuni 2026) ja `azure.ai.agents` `0.1.40-preview` laienduse vastu, laiendab tehisintellekti juhiseid "skafoldi agent" kaudu kogu agendi elutsükli (test → evalveerimine → optimeerimine → kontroll → kustutamine), toob esile uued eelvaate laiendused `azure.ai.skills` ja `azure.ai.connections` ning märgib ".NET Aspire" → "Aspire" toote ümberbrändi.**
+#### AZD 1.25.6 uuendus, täiemahulised agendi elutsükli käsud & Aspire brändimuutus
+
+**See versioon valideerib kursuse uuesti `azd` `1.25.6` (juuni 2026) ja `azure.ai.agents` `0.1.40-preview` laienduse vastu, laiendab tehisintellekti juhiseid "agentide raamimise" seadmest terviklikuks agentide elutsükli katmiseks (test → hindamine → optimeerimine → ülevaatus → kustutamine), toob esile uued `azure.ai.skills` ja `azure.ai.connections` eelvaate laiendused ning märgib ".NET Aspire" → "Aspire" tootenime muutuse.**
 
 #### Lisatud
-- **🔁 Täielik agendi elutsükli katvus** algajatele ja tehisintellekti inseneridele kogu dokumentatsioonis:
-  - `docs/chapter-01-foundation/azd-basics.md` — Elutsükli tabel (skafold → test → mõõtmine → parandamine → kontrollimine → puhastamine) lisatud Laienduste ja Tehisintellekti Käskude sektsiooni
-  - `docs/chapter-08-production/production-ai-practices.md` — Uus "Agendi elutsükli haldamine" sektsioon, mis hõlmab `azd ai agent invoke`, `endpoint show`, `eval generate`, `optimize`, `code download` ja `delete --force`
-  - `resources/cheat-sheet.md` — Laiendatud tehisintellekti agendi käsud `invoke`, `endpoint show`, `eval generate`, `optimize`, `code download` ja `delete --force`
-- **🧩 Uued eelvaate laiendused** dokumenteeritud: `azure.ai.skills` (taaskasutatavad agendi oskused) ja `azure.ai.connections` (Foundry ühendused) lisatud laienduste tabelisse ja petulehele
-- **⏱️ Vastuse ajastamise juhised** — `azd ai agent invoke` näited märgivad nüüd, et see kuvab kogulatenzi ja esimese tibu saabumise aja
-- **📌 Versioonibänner** juurkataloogis README-s juhib õppijaid `azd version` ja `azd upgrade` suunas
+- **🔁 Täielik agentide elutsükli katvus** algajatele ja tehisintellekti inseneridele kogu dokumentatsioonis:
+  - `docs/chapter-01-foundation/azd-basics.md` — Elutsükli tabel (raamistamine → testimine → mõõtmine → täiustamine → ülevaatus → puhastamine) lisatud Laienduste ja tehisintellekti käskude jaotisse
+  - `docs/chapter-08-production/production-ai-practices.md` — Uus jaotis "Agendi elutsükli haldamine", mis katab `azd ai agent invoke`, `endpoint show`, `eval generate`, `optimize`, `code download` ja `delete --force`
+  - `resources/cheat-sheet.md` — Laiendatud AI agentide käskude nimekirja `invoke`, `endpoint show`, `eval generate`, `optimize`, `code download` ja `delete --force` käsud
+- **🧩 Uued eelvaate laiendused** dokumenteeritud: `azure.ai.skills` (taaskasutatavad agendi oskused) ja `azure.ai.connections` (Foundry ühendused) lisatud laienduste tabelisse ja abilehele
+- **⏱️ Vastuse aja juhised** — `azd ai agent invoke` näidetes on nüüd märgitud kogukõrvalekalle ja esimese baidi saamise aeg
+- **📌 Versioonibänner** juur-README-s, mis suunab õppijaid kasutama `azd version` ja `azd upgrade`
 
 #### Muudetud
-- **✅ Valideerimise lähtejoon uuendatud** `azd 1.23.12` (märts 2026) pealt `azd 1.25.6` (juuni 2026) peale kõigi peatükkide README-des ja töötubade dokumentides
-- **🤖 2. peatüki laienduste märkus** uuendatud `azure.ai.agents` `0.1.18-preview` pealt `0.1.40-preview`
-- **🧪 Töötoa valideerimise näide** (`azd version` väljund) uuendatud versioonile `1.25.6`
-- **🧭 README "Mis uut täna azd-s?"** uuendatud rõhutamaks lõpp-lõpuni agendi elutsüklit, uusi tehisintellekti laiendusi ja hiljutisi kasutusmugavuse parandusi (`azd init` idempotentsus, `azd auth login` aegunud tokeni tühjendamine, `azd tool` esimene käivituse prompt)
-- **📖 2. peatükk agents.md (valik 4)** juhib nüüd õppijaid pärast juurutamist elutsükli käskude juurde, mitte ainult `azd up` juurde
+- **✅ Valideerimise baasjoon uuendatud** `azd 1.23.12` (märts 2026) pealt `azd 1.25.6`-le (juuni 2026) kõigis peatükkide README-des ja töötoa dokumentides
+- **🤖 Peatükk 2 laiendusmärkus** uuendatud `azure.ai.agents` `0.1.18-preview` pealt `0.1.40-preview` peale
+- **🧪 Töötoa valideerimisnäide** (`azd version` väljund) uuendatud versioonile `1.25.6`
+- **🧭 README jaotis "Mis on azd täna uut"** värskendatud, rõhutades lõppkokkuvõttes agentide elutsüklit, uusi tehisintellekti laiendusi ja hiljutisi kvaliteedi parandusi (`azd init` idempotentsus, `azd auth login` aegunud tokeni puhastus, `azd tool` esmase käivituse viip)
+- **📖 Peatükk 2 agents.md (Valik 4)** nüüd juhendab õppijaid post-deploy elutsükli käskude kasutamisele `azd up` asemel
 
 #### Parandatud
-- **🏷️ Toote nimetuse märkus** — lisatud Aspire ümberbrändi märkus (".NET Aspire" on nüüd lihtsalt "Aspire"); azd Aspire tugi on muutumatu
-- **🔎 Reaalajas väljalaske valideerimine** kinnitatud Azure Developer CLI vabastuste voo vastu: stabiilne CLI `1.25.6` (2026-06-12) ja `azure.ai.agents` `0.1.40-preview` (2026-06-15)
+- **🏷️ Tootenime muutus** — lisatud Aspire brändingumuudatuse märkus (".NET Aspire" on nüüd lihtsalt "Aspire"); azd tugi Aspirile on muutmata
+- **🔎 Reaalajas väljaandmise valideerimine** kontrollitud vastavus Azure Developer CLI väljaandmise voo: stabiilne CLI `1.25.6` (2026-06-12) ja `azure.ai.agents` `0.1.40-preview` (2026-06-15)
 
 #### Uuendatud failid
 - `README.md`
@@ -124,23 +163,24 @@ Pärast muudatuste logi kirjete läbivaatamist saate:
 ---
 
 ### [v3.19.1] - 2026-03-27
-#### Algaja sissejuhatuse täpsustus, seadistuse valideerimine ja lõplik AZD käsu puhastus
-**See versioon jätkab AZD 1.23 valideerimiskorra järel algajatele mõeldud dokumentatsiooni läbivaatust: see selgitab AZD esmase autentimise juhiseid, lisab kohalikud seadistuse valideerimise skriptid, kontrollib võtmekäske otse AZD CLI-ga ning eemaldab viimased aegunud ingliskeelsed käsurea viited changelogist väljaspool.**
+
+#### Algajate juhendamine, seadistuse valideerimine & viimased AZD käsud
+**See versioon järgneb AZD 1.23 valideerimisskoorile algajatele suunatud dokumentatsiooni läbi vaatamisega: selgitab AZD-esimese autentimise juhiseid, lisab kohaliku seadistuse valideerimise skriptid, kontrollib võtmekäsud elava AZD CLI-ga ning eemaldab viimased aegunud ingliskeelsed käsuviited väljaspool muudatuste logi.**
 
 #### Lisatud
-- **🧪 Algajate seadistuse valideerimise skriptid** `validate-setup.ps1` ja `validate-setup.sh`, et õppijad saaksid enne 1. peatükki alustamist kinnitada vajalike tööriistade olemasolu
-- **✅ Võtmesammud seadistuse valideerimiseks** juurkataloogi README-s ja 1. peatüki README-s, et puuduvad eeltingimused avastataks enne `azd up` käivitamist
+- **🧪 Algajate seadistuse valideerimisskriptid** `validate-setup.ps1` ja `validate-setup.sh` abil, et õppijad saaksid enne 1. peatüki alustamist vajalikud tööriistad üle kontrollida
+- **✅ Eesmisel seadistuse valideerimise sammud** juur-README-s ja 1. peatüki README-s, et puuduvad eeldused avastatakse enne `azd up` käivitamist
 
 #### Muudetud
-- **🔐 Algajate autentimise juhised** käsitlevad nüüd järjepidevalt `azd auth login` esmane meetodina AZD töövoogudes, kusjuures `az login` on märgitud valikulise variandina, kui kasutatakse otse Azure CLI käske
-- **📚 1. peatüki sissejuhatuse voog** juhendab õppijaid kinnitama oma kohalikku seadistust enne installatsiooni, autentimist ja esimest juurutamist
-- **🛠️ Valideerijate teated** eristavad nüüd selgelt tõkestavad nõuded valikulistest Azure CLI hoiatused AZD-põhisele algajate teele
-- **📖 Konfiguratsiooni, tõrkeotsingu ja näited** eristavad nüüd nõutud AZD autentimist valikulisest Azure CLI sisselogimisest, kus varem mõlemad olid esitatud kontekstita
+- **🔐 Algajate autentimise juhised** käsitlevad nüüdsest järjekindlalt `azd auth login` kui peamist teed AZD töövoogudes, kusjuures `az login` on mainitud kui valikuline, välja arvatud juhul, kui kasutatakse otseselt Azure CLI käske
+- **📚 1. peatüki juhendamisvoog** juhendab õppijaid kontrollima oma kohalikku seadistust enne paigaldust, autentimist ja esimest juurutamist
+- **🛠️ Valideerija sõnumid** eristavad selgelt blokeerivaid nõudeid taasvalikulisest Azure CLI hoiatustest ainult AZD algajate konfiguratsioonis
+- **📖 Konfiguratsiooni, tõrkeotsingu ja näitedokumentide puhul** on selgelt eristatavad kohustuslik AZD autentimine ja valikuline Azure CLI sisselogimine seal, kus varem esitati mõlemad ilma kontekstita
 
 #### Parandatud
-- **📋 Järelejäänud ingliskeelsed käskude viited** uuendatud vastava käesoleva AZD vormi järgi, sealhulgas `azd config show` petutabelis ja `azd monitor --overview` kohtades, kus oli mõeldud Azure Portal ülevaadet
-- **🧭 Algajate väited 1. peatükis** leebemad, et vältida garantii lubamist nullvea- või tagasikerimise käitumise kohta kõigis mallides ja Azure ressurssides
-- **🔎 Otse CLI valideerimine** kinnitas praeguse toe käskudele `azd env get-values`, `azd template list`, `azd extension list --installed`, `azd copilot consent list`, `azd mcp start`, `azd provision --preview`, `azd monitor --logs` ja `azd down --force --purge`
+- **📋 Jäänud ingliskeelsed käsuviited** uuendatud vastavusse uusimate AZD käskudega, sh `azd config show` abilehel ja `azd monitor --overview` seal, kus viidati Azure portaali ülevaatele
+- **🧭 Algajate väited 1. peatükis** pehmendatud, vältimaks lubadusi veavaba või tagasipöörduva käitumise suhtes kõigi mallide ja Azure ressursside puhul
+- **🔎 Elava CLI valideerimine** kinnitab tugiteenuseid käskudele `azd env get-values`, `azd template list`, `azd extension list --installed`, `azd copilot consent list`, `azd mcp start`, `azd provision --preview`, `azd monitor --logs` ja `azd down --force --purge`
 
 #### Uuendatud failid
 - `README.md`
@@ -161,38 +201,38 @@ Pärast muudatuste logi kirjete läbivaatamist saate:
 
 ### [v3.19.0] - 2026-03-26
 
-#### AZD 1.23.12 valideerimine, töötuba keskkonna laiendus ja AI mudeli värskendus
-**See versioon teostab dokumentatsiooni valideerimise läbivaatuse `azd` versioonile `1.23.12`, uuendab aegunud AZD käsu näiteid, värskendab AI mudelijuhiseid praegustele vaikeseadetele ning laiendab töötuba juhiseid GitHub Codespacest ka arenduskonteineritele ja kohalikele kloonidele.**
+#### AZD 1.23.12 valideerimine, töötoa keskkonna laiendus ja tehisintellekti mudeli värskendus
+**See versioon teeb dokumentatsiooni valideerimise läbivaatusena `azd` `1.23.12` vastu, uuendab aegunud AZD käsunäited, värskendab tehisintellekti mudeli juhiseid uute vaikimisi seadistustega ning laiendab töötoa juhiseid GitHub Codespaces-ist ka arenduskonteinerite ja kohalikule kloonimise toetamiseks.**
 
 #### Lisatud
-- **✅ Valideerimise märkused põhiosades ja töötuba dokumentatsioonis** selgitamaks testitud AZD baastaset õppijatele, kes kasutavad uuemaid või vanemaid CLI versioone
-- **⏱️ Juurutamise ajapiirangu juhised** pika jooksuga AI rakenduste juurutuse jaoks `azd deploy --timeout 1800`
-- **🔎 Laienduse kontrollimise sammud** koos `azd extension show azure.ai.agents` AI töövoo dokumentatsioonis
-- **🌐 Laiemad töötuba keskkonna juhised** hõlmates GitHub Codespaces, arenduskonteinereid ja kohalikke kloone MkDocsiga
+- **✅ Valideerimise märkmed põhiteemadel ja töötoa dokumentides** väljendavad selgelt testitud AZD baasjoont õppijatele, kes kasutavad uuemaid või vanemaid CLI versioone
+- **⏱️ Juurutamise ajapiirangu juhised** pikalt kestvate tehisintellekti rakenduste juurutamiseks `azd deploy --timeout 1800`
+- **🔎 Laienduste kontrollimise sammud** koos `azd extension show azure.ai.agents` füsiiliselt AI töövoo dokumentides
+- **🌐 Laiem töötoa keskkonna juhendamine** hõlmates GitHub Codespaces, arenduskonteinerite ja kohalike kloonide kasutust MkDocsiga
 
 #### Muudetud
-- **📚 Peatükkide sissejuhatuse README-d** märgivad nüüd järjepidevalt valideerimist `azd 1.23.12` vastu kogu alus-, konfiguratsiooni-, infrastruktuuri-, multi-agent-, eeljuurutuse-, tõrkeotsingu- ja tootmislõikudes
-- **🛠️ AZD käsuviited** uuendatud praegustele vormidele dokumentides:
+- **📚 Peatükkide sissejuhatavad README-d** märkivad järjekindlalt valideerimist `azd 1.23.12` vastu alates sihtasutusest, konfiguratsioonist, infrastruktuurist, mitme agendi, eelsõidu, tõrkeotsingu ja tootmise osadeni
+- **🛠️ AZD käskude viited** uuendatud kehtivatele vormidele kogu dokumentatsioonis:
   - `azd config list` → `azd config show`
-  - `azd env show` → `azd env list` või `azd env get-value(s)`, olenevalt kontekstist
+  - `azd env show` → `azd env list` või `azd env get-value(s)` olenevalt kontekstist
   - `azd auth whoami` → `azd auth status`
-  - `azd monitor` → `azd monitor --overview` kohtades, kus mõeldud Application Insights ülevaade
-- **🧪 Provision preview näited** lihtsustatud praegusele toetatud kasutusele nt `azd provision --preview` ja `azd provision --preview -e production`
-- **🧭 Töötuba voog** värskendatud nii, et õppijad saavad tööjaamu teha Codespacesis, arenduskonteineris või kohalikus kloonis, mitte eeldada ainult Codespacesist käitamist
-- **🔐 Autentimise juhised** eelistavad nüüd `azd auth login` AZD töövoogude puhul, `az login` on märkuses valikulise variandina, kui kasutatakse otse Azure CLI käske
+  - `azd monitor` → `azd monitor --overview` seal, kus on mõeldud Application Insights ülevaadet
+- **🧪 Juurutamise eelvaate näited** lihtsustatud tänapäevaste toetatud kasutusjuhtumite nagu `azd provision --preview` ja `azd provision --preview -e production` poole
+- **🧭 Töötoa voog** uuendatud nii, et õppijad saavad teha labisid Codespaces-is, arenduskonteineris või kohalikus kloonis, mitte eeldades vaid Codespaces-i kasutust
+- **🔐 Autentimise juhised** eelistavad nüüd `azd auth login` AZD töövoogude jaoks, kusjuures `az login` on valikuline, kui kasutatakse otseseid Azure CLI käske
 
 #### Parandatud
-- **🪟 Windowsi installikäsud** ühtlustatud praeguse `winget` pakettide nimede kirjadega installijuhendis
-- **🐧 Linuxi installimise juhis** parandatud, et vältida toetamata distrospetsiifilisi `azd` paketihalduri juhiseid ja juhendada pigem tegemist vabastuse artefaktidega, kus asjakohane
-- **📦 AI mudeli näited** värskendatud vanematest vaikimisi mudelitest nagu `gpt-35-turbo` ja `text-embedding-ada-002` uuematele näiteks `gpt-4.1-mini`, `gpt-4.1` ja `text-embedding-3-large`
-- **📋 Juurutuse ja diagnostika koodilõigud** parandatud kasutama praeguseid keskkonna- ja olekukäske logides, skriptides ja tõrkeotsingu sammudes
-- **⚙️ GitHub Actions juhised** uuendatud `Azure/setup-azd@v1.0.0` asemel `Azure/setup-azd@v2`
-- **🤖 MCP/Copilot nõusoleku juhised** uuendatud `azd mcp consent` asemel `azd copilot consent list`
+- **🪟 Windowsi paigalduskäsud** normaliseeritud tänapäevase `winget` paketi kirjaviisi järgi paigaldusjuhendis
+- **🐧 Linuxi paigaldusjuhised** parandatud, et vältida toetamata distro-spetsiifilisi `azd` pakihalduri juhiseid ning suunata asjakohaste väljaandmise varade juurde
+- **📦 Tehisintellekti mudelinäited** värskendatud varasematest vaikeseadetest nagu `gpt-35-turbo` ja `text-embedding-ada-002` uute näidete juurde nagu `gpt-4.1-mini`, `gpt-4.1` ja `text-embedding-3-large`
+- **📋 Juurutamise ja diagnostika kooditükid** parandatud kasutama tänapäevaseid keskkonna ja oleku käske logides, skriptides ja tõrkeotsingus
+- **⚙️ GitHub Actions juhendid** uuendatud versioonilt `Azure/setup-azd@v1.0.0` versioonile `Azure/setup-azd@v2`
+- **🤖 MCP/Copiloti nõusoleku juhend** uuendatud `azd mcp consent` pealt `azd copilot consent list` peale
 
-#### Täiustatud
-- **🧠 AI peatüki juhised** selgitavad nüüd paremini eelvaatele tundlikku `azd ai` käitumist, rentniku spetsiifilist sisselogimist, praegust laienduste kasutust ja mudelite juurutamise soovitusi
-- **🧪 Töötuba juhised** kasutavad nüüd realistlikumaid versiooninäiteid ja selgemat keskkonna seadistuse keelt praktiliste laborite jaoks
-- **📈 Tootmise ja tõrkeotsingu dokumendid** ühtlustatud paremini praeguse jälgimise, varumudeli ja kulutasandi näidetega
+#### Parandatud
+- **🧠 Tehisintellekti peatükkide juhised** selgitavad nüüd põhjalikumalt eelvaate tundlikku `azd ai` käitumist, tenantide spetsiifilist sisselogimist, praegust laienduste kasutust ja uuendatud mudelite juurutamise soovitusi
+- **🧪 Töötoa juhendid** kasutavad nüüd realistlikumaid versiooninäiteid ja selgemaid keskkonna seadistamise sõnastusi praktilistes laborites
+- **📈 Tootmise ja tõrkeotsingu dokumendid** vastavad nüüd paremini tänapäevastele monitooringu, tagasipakkumise mudeli ja kulutaseme näidetele
 
 #### Uuendatud failid
 - `docs/chapter-01-foundation/README.md`
@@ -227,45 +267,45 @@ Pärast muudatuste logi kirjete läbivaatamist saate:
 
 ### [v3.18.0] - 2026-03-16
 
-#### AZD AI CLI käsud, sisu valideerimine ja mallide laiendus
-**See versioon lisab käsukatte `azd ai`, `azd extension` ja `azd mcp` kõikidesse AI-ga seotud peatükkidesse, parandab katkised lingid ja aegunud koodi faili agents.md, uuendab petutabelit ning uuendab Näidismallide sektsiooni valideeritud kirjelduste ja uute Azure AI AZD mallidega.**
+#### AZD AI CLI käsud, sisu valideerimine ja mallide laiendamine
+**See versioon lisab `azd ai`, `azd extension` ja `azd mcp` käsukatte kõigis tehisintellektiga seotud peatükkides, parandab katkised lingid ja aegunud koodi agents.md failis, uuendab abilehte ning muudab Näidismallide jaotist valideeritud kirjelduste ja uute Azure AI AZD mallidega.**
 
 #### Lisatud
-- **🤖 AZD AI CLI tugi** 7 failis (varasemalt ainult 8. peatükis):
-  - `docs/chapter-01-foundation/azd-basics.md` — Uus "Laiendused ja AI käsud" sektsioon, mis tutvustab `azd extension`, `azd ai agent init` ja `azd mcp`
-  - `docs/chapter-02-ai-development/agents.md` — Valik 4: `azd ai agent init` ja võrdlustabel (malli vs manifesti lähenemine)
-  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — "AZD laiendused Foundry jaoks" ja "Agent Esmane Juurutus" alajaotised
-  - `docs/chapter-05-multi-agent/README.md` — Kiire algus näitab nii malli- kui manifestipõhiseid juurutusviise
-  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — Juurutuse sektsioon sisaldab nüüd `azd ai agent init` valikut
-  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — "AZD AI laienduse käsud diagnostika jaoks" alajaotis
-  - `resources/cheat-sheet.md` — Uus "AI ja laienduste käsud" sektsioon koos `azd extension`, `azd ai agent init`, `azd mcp` ja `azd infra generate`
+- **🤖 AZD AI CLI katvus** 7 failis (enne ainult 8. peatükis):
+  - `docs/chapter-01-foundation/azd-basics.md` — Uus jaotis "Laiendused ja AI käsud", mis tutvustab `azd extension`, `azd ai agent init` ja `azd mcp`
+  - `docs/chapter-02-ai-development/agents.md` — Valik 4: `azd ai agent init` võrdlustabeliga (mall vs manifest lähenemine)
+  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — "AZD laiendused Foundry jaoks" ja "Agendi-ees juurutamine" alajaotised
 
+  - `docs/chapter-05-multi-agent/README.md` — Kiire algus näitab nüüd nii malli kui ka manifestipõhiseid juurutamisteid
+  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — Juurutamise jaotis sisaldab nüüd `azd ai agent init` valikut
+  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — "AZD AI laienduse käsud diagnostikaks" alajaotis
+  - `resources/cheat-sheet.md` — Uus "AI & laienduste käsud" jaotis koos `azd extension`, `azd ai agent init`, `azd mcp` ja `azd infra generate`
 - **📦 Uued AZD AI näidismallid** failis `microsoft-foundry-integration.md`:
   - **azure-search-openai-demo-csharp** — .NET RAG vestlus Blazor WebAssembly, Semantic Kernel ja häälvestluse toe abil
-  - **azure-search-openai-demo-java** — Java RAG vestlus kasutades Langchain4J koos ACA/AKS juurutuse variantidega
-  - **contoso-creative-writer** — Multi-agent loominguline kirjutamisrakendus Azure AI Agent Service, Bing Grounding ja Prompty abil
-  - **serverless-chat-langchainjs** — Serverita RAG kasutades Azure Functions + LangChain.js + Cosmos DB + Ollama kohalik arendus tugi
-  - **chat-with-your-data-solution-accelerator** — Ettevõtte RAG kiirendaja admin portaaliga, Teamsi integratsioon ja PostgreSQL/Cosmos DB valikud
-  - **azure-ai-travel-agents** — Multi-agent MCP orkestreerimise näidetrakendus serveritega .NET, Python, Java ja TypeScript keeles
-  - **azd-ai-starter** — Minimalistlik Azure AI infrastruktuuri Bicep algusmall
-  - **🔗 Awesome AZD AI Gallery link** — Viide aadressil [awesome-azd AI galerii](https://azure.github.io/awesome-azd/?tags=ai) (üle 80 malli)
+  - **azure-search-openai-demo-java** — Java RAG vestlus Langchain4J-ga, ACA/AKS juurutamisvalikutega
+  - **contoso-creative-writer** — Mitmeagendiline loominguline kirjutamisrakendus Azure AI Agent Service, Bing Grounding ja Prompty kaasabil
+  - **serverless-chat-langchainjs** — Serverivaba RAG Azure Functions + LangChain.js + Cosmos DB ja Ollama kohaliku arendustoe abil
+  - **chat-with-your-data-solution-accelerator** — Ettevõtte RAG kiirendi haldusportaali, Teamsi integratsiooni ning PostgreSQL/Cosmos DB valikutega
+  - **azure-ai-travel-agents** — Mitmeagendiline MCP orkestreerimise näidistarkvara serveritega .NET, Python, Java ja TypeScriptis
+  - **azd-ai-starter** — Minimaalne Azure AI infrastruktuuri Bicep stardimall
+  - **🔗 Awesome AZD AI galerii link** — Viide [awesome-azd AI galeriile](https://azure.github.io/awesome-azd/?tags=ai) (80+ malli)
 
 #### Parandatud
-- **🔗 agents.md navigatsioon**: Eelnevad/järgmised lingid nüüd vastavuses 2. peatüki README õppeteekonnaga (Microsoft Foundry Integration → Agents → AI Model Deployment)
+- **🔗 agents.md navigeerimine**: Eelmine/Järgmine lingid vastavad nüüd peatüki 2 README õppetundide järjekorrale (Microsoft Foundry Integration → Agents → AI Model Deployment)
 - **🔗 agents.md katkised lingid**: `production-ai-practices.md` parandatud `../chapter-08-production/production-ai-practices.md` (3 esinemist)
-- **📦 agents.md aegunud kood**: Asendatud `opencensus` pakett `azure-monitor-opentelemetry` ja OpenTelemetry SDK-ga
-- **🐛 agents.md mittetoimiv API**: `max_tokens` nihutatud funktsioonist `create_agent()` sinna `create_run()` parameetrina `max_completion_tokens`
-- **🔢 agents.md tokenite lugemine**: Asendatud umbkaudsete `len//4` arvutusega, kasutades `tiktoken.encoding_for_model()`
-- **azure-search-openai-demo**: Parandas teenused "Cognitive Search + App Service" asemel "Azure AI Search + Azure Container Apps" (vaikehost muutus okt 2024)
-- **contoso-chat**: Uuendatud kirjeldus viitama Azure AI Foundry + Prompty-le, vastavalt repole tiitel ja tehnoloogiakogum
+- **📦 agents.md aegunud kood**: Asendati `opencensus` `azure-monitor-opentelemetry` + OpenTelemetry SDK-ga
+- **🐛 agents.md vigane API**: `max_tokens` viidud `create_agent()` pealt `create_run()`-i kui `max_completion_tokens`
+- **🔢 agents.md tokenite lugemine**: Asendati umbkaudne `len//4` hinnang `tiktoken.encoding_for_model()`-ga
+- **azure-search-openai-demo**: Teenused parandatud "Cognitive Search + App Service" → "Azure AI Search + Azure Container Apps" (vaikimisi host muudetud oktoober 2024)
+- **contoso-chat**: Kirjeldus uuendatud viitamaks Azure AI Foundry + Prompty-le, vastavuses repoloo pealkirja ja tehnoloogiastakiga
 
 #### Eemaldatud
-- **ai-document-processing**: Eemaldatud mittefunktsioneeriv malli viide (repo pole avalikult AZD mallina kättesaadav)
+- **ai-document-processing**: Eemaldatud mittetoimiv malli viide (repo ei ole avalikult saadaval AZD mallina)
 
-#### Parandatud
-- **📝 agents.md harjutused**: Harjutus 1 näitab nüüd eeldatavat väljundit ja `azd monitor` sammu; Harjutus 2 sisaldab täielikku `FunctionTool` registreerimise koodi; Harjutus 3 asendab ebaselge juhendamise konkreetsete `prepdocs.py` käskudega
-- **📚 agents.md ressursid**: Uuendatud dokumendiviited praegustele Azure AI Agent Service dokumentidele ja kiirele alustamise juhendile
-- **📋 agents.md järgmiste sammude tabel**: Lisatud AI töötoa labori link täielikuks peatüki katvuseks
+#### Parendatud
+- **📝 agents.md harjutused**: Harjutuses 1 nüüd kuvatakse oodatud väljund ja `azd monitor` samm; Harjutuses 2 sisaldab täielikku `FunctionTool` registreerimiskoodi; Harjutus 3 asendab ebaselged juhised konkreetsete `prepdocs.py` käskudega
+- **📚 agents.md ressursid**: Dokumentatsiooni lingid uuendatud vastavalt praegustele Azure AI Agent Service dokumentidele ja kiirele alustamisele
+- **📋 agents.md järgmised sammud tabel**: Lisatud AI töötoa laboris link kogu peatüki katvuseks
 
 #### Uuendatud failid
 - `docs/chapter-01-foundation/azd-basics.md`
@@ -279,42 +319,43 @@ Pärast muudatuste logi kirjete läbivaatamist saate:
 ---
 
 ### [v3.17.0] - 2026-02-05
-#### Kursuse navigeerimise täiustamine
-**See versioon parandab README.md peatükkide navigeerimist täiustatud tabeliformaadis.**
 
-#### Muudatused
-- **Kursuse kaardi tabel**: Täiustatud otseõppetundide linkide, kestuse hinnangute ja keerukuse hinnetega
-- **Kausta puhastus**: Eemaldatud vanad liigsed kaustad (deployment/, getting-started/, pre-deployment/, troubleshooting/)
-- **Linkide valideerimine**: Kõik 21+ sisemist linki Kursuse kaardi tabelis kontrollitud
+#### Kursuse navigeerimise täiendus
+**See versioon parandab README.md peatükkide navigeerimist täiustatud tabelvorminguga.**
+
+#### Muudetud
+- **Kursuse kaardi tabel**: Täiustatud otseste õppetundide linkide, kestuse hinnangute ja keerukuse tasemetega
+- **Kaustade korrastus**: Eemaldati mittevajalikud vanad kaustad (deployment/, getting-started/, pre-deployment/, troubleshooting/)
+- **Lingikontroll**: Kontrolliti kõiki 21+ sise-linki Kursuse kaardi tabelis
 
 ### [v3.16.0] - 2026-02-05
 
 #### Tootenime uuendused
 **See versioon uuendab toodete viiteid vastavalt Microsofti praegusele brändingule.**
 
-#### Muudatused
-- **Microsoft Foundry → Microsoft Foundry**: Kõik viited uuendatud mitte-tõlgitavates failides
+#### Muudetud
+- **Microsoft Foundry → Microsoft Foundry**: Kõik viited uuendatud mitte-tõlke failides
 - **Azure AI Agent Service → Foundry Agents**: Teenuse nimi uuendatud vastavalt praegusele brändingule
 
 #### Uuendatud failid
-- `README.md` - Peamine kursuse avalehte
-- `changelog.md` - Versiooniajalugu
+- `README.md` - Peamine kursuse ava
+- `changelog.md` - Versioonide ajalugu
 - `course-outline.md` - Kursuse struktuur
 - `docs/chapter-02-ai-development/agents.md` - AI agentide juhend
-- `examples/README.md` - Näidisdokumentatsioon
-- `workshop/README.md` - Töötuba avalehte
+- `examples/README.md` - Näidete dokumentatsioon
+- `workshop/README.md` - Töötuba ava
 - `workshop/docs/index.md` - Töötuba indeks
-- `workshop/docs/instructions/*.md` - Kõik töötubade juhendifailid
+- `workshop/docs/instructions/*.md` - Kõik töötoa juhendid
 
 ---
 
 ### [v3.15.0] - 2026-02-05
 
-#### Põhjalik hoidla ümberkorraldus: peatükkidepõhised kaustanimed
-**See versioon struktureerib dokumentatsiooni eraldi peatükkide kaustadesse parema navigeeritavuse jaoks.**
+#### Tõsine repository restruktureerimine: peatükkidepõhised kaustanimed
+**See versioon jaotab dokumentatsiooni selgemaks navigeerimiseks pühendatud peatükkide kaustadeks.**
 
 #### Kaustade ümbernimetamine
-Vanad kaustad asendati peatükkide numbritega kaustadega:
+Vanad kaustad asendatakse peatüki numbriga:
 - `docs/getting-started/` → `docs/chapter-01-foundation/` + `docs/chapter-03-configuration/`
 - `docs/microsoft-foundry/` → `docs/chapter-02-ai-development/` + `docs/chapter-08-production/`
 - `docs/deployment/` → `docs/chapter-04-infrastructure/`
@@ -322,9 +363,9 @@ Vanad kaustad asendati peatükkide numbritega kaustadega:
 - `docs/troubleshooting/` → `docs/chapter-07-troubleshooting/`
 - Lisatud uus: `docs/chapter-05-multi-agent/`
 
-#### Failide migratsioonid
-| Fail | Algus | Sihtkoht |
-|------|-------|----------|
+#### Failide üleviimine
+| Fail | Algne | Sihtkoht |
+|------|------|---|
 | azd-basics.md | getting-started/ | chapter-01-foundation/ |
 | installation.md | getting-started/ | chapter-01-foundation/ |
 | first-project.md | getting-started/ | chapter-01-foundation/ |
@@ -341,16 +382,16 @@ Vanad kaustad asendati peatükkide numbritega kaustadega:
 | Kõik troubleshooting failid | troubleshooting/ | chapter-07-troubleshooting/ |
 
 #### Lisatud
-- **📚 Peatüki README failid**: Igas peatüki kaustas loodud README.md koos:
-  - Õpieesmärkide ja kestusega
-  - Õppetundide tabel koos kirjeldustega
-  - Kiirstart käskude nimekiri
-  - Navigeerimine teiste peatükkide juurde
+- **📚 Peatükkide README failid**: Igas peatüki kaustas loodud README.md:
+  - Õpieesmärgid ja kestus
+  - Õppetundide tabel kirjeldustega
+  - Kiire alguse käsud
+  - Navigeerimine teistele peatükkidele
 
-#### Muudatused
-- **🔗 Kõik sisemised lingid uuendatud**: 78+ teekonda uuendatud kõigis dokumentatsiooni failides
+#### Muudetud
+- **🔗 Kõik sisemised lingid uuendatud**: 78+ teekonda muudetud kõigis dokumentatsioonifailides
 - **🗺️ Peamine README.md**: Kursuse kaart uuendatud uue peatükkide struktuuriga
-- **📝 examples/README.md**: Uuendatud ristviited peatükkide kaustadele
+- **📝 examples/README.md**: Viited peatükkide kaustadele värskendatud
 
 #### Eemaldatud
 - Vana kaustastruktuur (getting-started/, microsoft-foundry/, deployment/, pre-deployment/, troubleshooting/, ai-foundry/)
@@ -359,7 +400,7 @@ Vanad kaustad asendati peatükkide numbritega kaustadega:
 
 ### [v3.14.0] - 2026-02-05
 
-#### Hoidla ümberkorraldus: peatükkide navigeerimine
+#### Repository restruktureerimine: peatükkide navigeerimine
 **See versioon lisas peatükkide navigeerimise README failid (asendatud versiooniga v3.15.0).**
 
 ---
@@ -367,908 +408,912 @@ Vanad kaustad asendati peatükkide numbritega kaustadega:
 ### [v3.13.0] - 2026-02-05
 
 #### Uus AI agentide juhend
-**See versioon lisab põhjaliku juhendi AI agentide juurutamiseks Azure Developer CLI-ga.**
+**See versioon lisab põhjaliku juhendi AI agentide juurutamiseks Azure arendaja CLI-ga.**
 
 #### Lisatud
-- **🤖 docs/microsoft-foundry/agents.md**: Täielik juhend:
-  - Mis on AI agendid ja kuidas nad erinevad chatbotidest
-  - Kolm kiirstart agentide malli (Foundry Agents, Prompty, RAG)
-  - Agendi arhitektuuri mustrid (ühene agent, RAG, mult-agent)
-  - Tööriistade seadistus ja kohandamine
-  - Jälgimine ja mõõdikute kogumine
-  - Kuluaspektid ja optimeerimine
+- **🤖 docs/microsoft-foundry/agents.md**: Täielik juhend sisaldab:
+  - Mis on AI agendid ja kuidas nad erinevad vestlusrobotitest
+  - Kolm kiire algusega agentide malli (Foundry Agents, Prompty, RAG)
+  - Agendi arhitektuuri mustrid (ühe agendi, RAG, mitme agenid)
+  - Tööriistade seadistamine ja kohandamine
+  - Jälgimine ja mõõdikute jälgimine
+  - Kulude kaalutlused ja optimeerimine
   - Levinud tõrkeotsingu stsenaariumid
-  - Kolm praktilist harjutust koos õnnestumise kriteeriumitega
+  - Kolm praktilist harjutust koos edukriteeriumitega
 
-#### Sisu struktuur
-- **Sissejuhatus**: Agenti kontseptsioonid algajatele
-- **Kiirstart**: Agentide juurutamine käsuga `azd init --template get-started-with-ai-agents`
-- **Arhitektuurimustrid**: Visuaalsed diagrammid agentide mustritest
-- **Seadistus**: Tööriistade ülesseadmine ja keskkonnamuutujad
-- **Jälgimine**: Application Insights integratsioon
-- **Harjutused**: Astmeline praktiline õppimine (20–45 minutit igaüks)
+#### Sisu ülesehitus
+- **Sissejuhatus**: Agentide kontseptsioonid algajatele
+- **Kiire algus**: Agentide juurutamine käsuga `azd init --template get-started-with-ai-agents`
+- **Arhitektuuri mustrid**: Visuaalsed diagrammid agendi mustritest
+- **Seadistamine**: Tööriistade seadistamine ja keskkonnamuutujad
+- **Jälgimine**: Rakenduse Insightsi integratsioon
+- **Harjutused**: Järkjärguline praktiline õppimine (20-45 minutit igaüks)
 
 ---
 
 ### [v3.12.0] - 2026-02-05
 
-#### DevContainer keskkonna uuendus
-**See versioon uuendab arenduskonteineri konfiguratsiooni kaasaegsete tööriistade ja paremate vaikeväärtustega AZD õppimiskogemuse parandamiseks.**
+#### DevContaineri keskkonna uuendus
+**See versioon uuendab arendusmahuti konfiguratsiooni kaasaegsete tööriistade ja paremate vaikeväärtustega AZD õppimiskogemuse jaoks.**
 
-#### Muudatused
-- **🐳 Baaspilt**: Uuendatud `python:3.12-bullseye` → `python:3.12-bookworm` (uusim Debian stabiilne)
-- **📛 Konteineri nimi**: Muudetud "Python 3" → "AZD for Beginners" selguse huvides
+#### Muudetud
+- **🐳 Baaspilt**: Uuendatud `python:3.12-bullseye` pealt `python:3.12-bookworm` peale (viimane stabiilne Debian)
+- **📛 Mahuti nimi**: Nimemuutus "Python 3" pealt "AZD algajatele" selguse tagamiseks
 
 #### Lisatud
-- **🔧 Uued Dev Container funktsioonid**:
-  - `azure-cli` koos Bicep toe lubamisega
+- **🔧 Uued Dev Containeri funktsioonid**:
+  - `azure-cli` koos Bicep toe aktiveerimisega
   - `node:20` (AZD mallide LTS versioon)
   - `github-cli` mallide haldamiseks
   - `docker-in-docker` konteinerirakenduste juurutamiseks
 
-- **🔌 Pordiedastus**: Eelseadistatud pordid levinud arenduseks:
+- **🔌 Pordisuunamine**: Eelkonfigureeritud pordid tavaliseks arenduseks:
   - 8000 (MkDocs eelvaade)
-  - 3000 (Veebiäpid)
+  - 3000 (Veebirakendused)
   - 5000 (Python Flask)
   - 8080 (API-d)
 
 - **🧩 Uued VS Code laiendused**:
-  - `ms-python.vscode-pylance` - täiustatud Python IntelliSense
-  - `ms-azuretools.vscode-azurefunctions` - Azure funktsioonide tugi
+  - `ms-python.vscode-pylance` - Täiustatud Python IntelliSense
+  - `ms-azuretools.vscode-azurefunctions` - Azure Functions tugi
   - `ms-azuretools.vscode-docker` - Docker tugi
   - `ms-azuretools.vscode-bicep` - Bicep keele tugi
   - `ms-azure-devtools.azure-resource-groups` - Azure ressursihaldus
-  - `yzhang.markdown-all-in-one` - Markdown redigeerimine
-  - `DavidAnson.vscode-markdownlint` - Markdown stiilijärelevalve
-  - `bierner.markdown-mermaid` - Mermaid diagrammide tugi
+  - `yzhang.markdown-all-in-one` - Markdowni redigeerimine
+  - `DavidAnson.vscode-markdownlint` - Markdown lintimine
+  - `bierner.markdown-mermaid` - Mermaid diagrammi tugi
   - `redhat.vscode-yaml` - YAML tugi (azure.yaml jaoks)
   - `eamodio.gitlens` - Git visualiseerimine
-  - `mhutchie.git-graph` - Git ajaloo visualiseerimine
+  - `mhutchie.git-graph` - Git ajaloo kuvamine
 
-- **⚙️ VS Code seaded**: Lisa vaikeseaded Python tõlgile, salvestamisel vormindamisele ja tühikute eemaldamisele
+- **⚙️ VS Code seaded**: Lisatud vaikeseaded Python tõlgendi, salvestamisel vormindamise ja tühikute eemaldamiseks
 
 - **📦 Uuendatud requirements-dev.txt**:
   - Lisatud MkDocs minify plugin
   - Lisatud pre-commit koodi kvaliteedi tagamiseks
   - Lisatud Azure SDK paketid (azure-identity, azure-mgmt-resource)
 
-#### Parandus
-- **Post-Create käsk**: Kontrollib nüüd AZD ja Azure CLI paigaldust konteineri käivitamisel
+#### Parandatud
+- **Post-Create käsk**: Kontrollib nüüd AZD ja Azure CLI installatsiooni mahuti käivitamisel
 
 ---
 
 ### [v3.11.0] - 2026-02-05
 
-#### Algajatele sobiv README ümberkujundus
-**See versioon parandab README.md oluliselt algajatele arusaadavamaks ja lisab olulised ressursid AI arendajatele.**
+#### Algajatele sõbraliku README uuendus
+**See versioon parandab README.md oluliselt, muutes selle algajatele ligipääsetavamaks ja lisades olulised ressursid AI arendajatele.**
 
 #### Lisatud
-- **🆚 Azure CLI vs AZD võrdlus**: Selge selgitus, millal mõlemat tööriista kasutada, praktiliste näidetega
-- **🌟 Awesome AZD lingid**: Otselink kogukonna mallide galeriisse ja panustamise ressurssidesse:
-  - [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) - 200+ kasutusvalmis mallid
-  - [Submit a Template](https://github.com/Azure/awesome-azd/issues) - Kogukonna panustamine
-- **🎯 Kiire algus juhend**: Lihtsustatud 3-astmeline alustamine (Installeeri → Logi sisse → Juuruta)
-- **📊 Kogemustele põhinev navigeerimistabel**: Selged juhised, kust alustada vastavalt kogemustele
+- **🆚 Azure CLI ja AZD võrdlus**: Selge selgitus, millal kasutada kumbagi tööriista koos praktiliste näidetega
+- **🌟 Awesome AZD lingid**: Otselingid kogukonna malligalerii ja panustamisressursside juurde:
+  - [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) - 200+ kohe-juurutamiseks valmis malli
+  - [Submit a Template](https://github.com/Azure/awesome-azd/issues) - Kogukonnapanuste esitamine
+- **🎯 Kiire alustamise juhend**: Lihtsustatud 3-sammuline algusosa (Installimine → Sisselogimine → Juurutamine)
+- **📊 Kogemuspõhine navigeerimistabel**: Selged juhised, kust alustada arendaja kogemuse põhjal
 
-#### Muudatused
-- **README struktuur**: Ümberkorraldatud progressiivseks info avalikustamiseks – esmalt võtmeinfo
-- **Sissejuhatus**: Kirjutatud ümber, et selgitada "Azdi up võlu" täiesti algajatele
-- **Kahesuse eemaldamine**: Dubleeritud tõrkeotsingu sektsioon eemaldatud
-- **Tõrkeotsingu käsud**: Parandatud `azd logs` viited kehtivaks `azd monitor --logs` kasutamiseks
+#### Muudetud
+- **README struktuur**: Ümber korraldatud etapiviisiliseks avamiseks - esmalt põhiteave
+- **Sissejuhatuse jaotis**: Ümber kirjutatud, selgitamaks "The Magic of `azd up`" täielikele algajatele
+- **Topelt sisu eemaldamine**: Kaotatud dubleeritud tõrkeotsingu jaotis
+- **Tõrkeotsingu käsud**: Parandatud `azd logs` viide kehtivale `azd monitor --logs` käsule
 
-#### Parandused
-- **🔐 Autentimise käsud**: Lisatud `azd auth login` ja `azd auth logout` cheat-sheet.md-sse
-- **Vigased käsureaviited**: Eemaldatud ülejäänud `azd logs` README tõrkeotsingu sektsioonist
+#### Parandatud
+
+- **🔐 Autentimise käsud**: Lisatud `azd auth login` ja `azd auth logout` faili cheat-sheet.md
+- **Kehtetud käskude viited**: Eemaldatud allesjäänud `azd logs` README tõrkeotsingu sektsioonist
 
 #### Märkused
-- **Ulatus**: Muudatused peamiselt README.md ja resources/cheat-sheet.md
-- **Sihtgrupp**: Eelkõige AZD vähemtundvatele arendajatele
+- **Ulatus**: Muudatused rakendatud peamisele README.md-le ja resources/cheat-sheet.md-le
+- **Sihtgrupp**: Parandused suunatud spetsiaalselt AZD-ga alustavatele arendajatele
 
 ---
 
 ### [v3.10.0] - 2026-02-05
 
-#### Azure Developer CLI käskude täpsustuse uuendus
-**See versioon parandab dokumentatsioonis eksisteerimata AZD käsud, tagades kõigi näidete kasutamise kehtiva Azure Developer CLI süntaksiga.**
+#### Azure Developer CLI käskude täpsuse uuendus
+**See versioon parandab dokumentatsioonis esinevad eksisteerimata AZD käsud, tagades, et kõik koodi näited kasutavad kehtivat Azure Developer CLI süntaksit.**
 
-#### Parandused
-- **🔧 Eksisteerimata AZD käsud eemaldatud**: Põhjalik audit ja vigade parandused:
-  - `azd logs` (ei eksisteeri) → asendatud `azd monitor --logs` või Azure CLI vastetega
+#### Parandatud
+- **🔧 Eemaldatud eksisteerimata AZD käsud**: Põhjalik audit ja vigaste käskude parandamine:
+  - `azd logs` (ei eksisteeri) → asendatud `azd monitor --logs` või Azure CLI alternatiividega
   - `azd service` alamkäsud (ei eksisteeri) → asendatud `azd show` ja Azure CLI-ga
-  - `azd infra import/export/validate` (ei eksisteeri) → eemaldatud või asendatud kehtivatega
+  - `azd infra import/export/validate` (ei eksisteeri) → eemaldatud või asendatud kehtivate alternatiividega
   - `azd deploy --rollback/--incremental/--parallel/--detect-changes` lipud (ei eksisteeri) → eemaldatud
   - `azd provision --what-if/--rollback` lipud (ei eksisteeri) → uuendatud kasutama `--preview`
-  - `azd config validate` (ei eksisteeri) → asendatud `azd config list` käsuga
+  - `azd config validate` (ei eksisteeri) → asendatud `azd config list`-iga
   - `azd info`, `azd history`, `azd metrics` (ei eksisteeri) → eemaldatud
 
-- **📚 Parandatud failid käsuviidete osas**:
-  - `resources/cheat-sheet.md`: Käskude ref ühe suur uuendus
-  - `docs/deployment/deployment-guide.md`: Parandatud rollback ja juurutamise strateegiad
+- **📚 Failid uuendatud käskude parandustega**:
+  - `resources/cheat-sheet.md`: Käskude viite põhjalik uuendus
+  - `docs/deployment/deployment-guide.md`: Parandatud rollback ja juurutusstrateegiad
   - `docs/troubleshooting/debugging.md`: Parandatud logi analüüsi sektsioonid
-  - `docs/troubleshooting/common-issues.md`: Uuendatud tõrkeotsingu käske
-  - `docs/troubleshooting/ai-troubleshooting.md`: Parandatud AZD silumise osa
-  - `docs/getting-started/azd-basics.md`: Parandatud jälgimise käsud
-  - `docs/getting-started/first-project.md`: Uuendatud jälgimise ja silumise näited
+  - `docs/troubleshooting/common-issues.md`: Uuendatud tõrkeotsingu käsud
+  - `docs/troubleshooting/ai-troubleshooting.md`: Parandatud AZD debugimise sektsioon
+  - `docs/getting-started/azd-basics.md`: Parandatud monitooringu käsud
+  - `docs/getting-started/first-project.md`: Uuendatud monitooringu ja debugimise näited
   - `docs/getting-started/installation.md`: Parandatud abi ja versiooni näited
-  - `docs/pre-deployment/application-insights.md`: Parandatud logivaatamise käsud
-  - `docs/pre-deployment/coordination-patterns.md`: Parandatud agendi silumise käsud
+  - `docs/pre-deployment/application-insights.md`: Parandatud logide vaatamise käsud
+  - `docs/pre-deployment/coordination-patterns.md`: Parandatud agendi debugimise käsud
 
-- **📝 Versiooni viide uuendatud**:
-  - `docs/getting-started/installation.md`: Asendatud kõva kodeeritud `1.5.0` versioon üldiseks `1.x.x` koos linkidega väljaannetele
+- **📝 Versiooni viited uuendatud**: 
+  - `docs/getting-started/installation.md`: Muudetud kõvakodeeritud `1.5.0` versiooniks generiline `1.x.x` koos lingiga väljaannete juurde
 
-#### Muudatused
-- **Rollback strateegiad**: Dokumentatsioon uuendatud kasutama Git-põhist rollbacki (AZD-l pole natiivset rollbacki)
+#### Muudetud
+- **Rollback strateegiad**: Dokumentatsiooni uuendatud kasutamaks Git-põhist rollbacki (AZD-l puudub natiivne rollback)
 - **Logide vaatamine**: Asendatud `azd logs` viited `azd monitor --logs`, `azd monitor --live` ja Azure CLI käskudega
-- **Tulemuste osas**: Eemaldatud mitteolemasolevad paralleelsed/incremental deploy lipud, antud kehtivad alternatiivid
+- **Jõudlusosa**: Eemaldatud mittekohased paralleel- ja inkrementaalse deploy lipud, pakutud kehtivad alternatiivid
 
-#### Tehnilised detailid
+#### Tehnilised üksikasjad
 - **Kehtivad AZD käsud**: `init`, `up`, `auth`, `deploy`, `down`, `provision`, `publish`, `completion`, `config`, `env`, `show`, `version`, `monitor`
 - **Kehtivad azd monitor lipud**: `--live`, `--logs`, `--overview`
 - **Eemaldatud funktsioonid**: `azd logs`, `azd service`, `azd infra import/export/validate`, `azd history`, `azd metrics`, `azd info`, `azd config validate`
 
 #### Märkused
-- **Kontroll**: Käskude kehtivus kontrollitud Azure Developer CLI v1.23.x vastu
+- **Kinnitamine**: Käskude valideerimine Azure Developer CLI v1.23.x vastu
 
 ---
 
 ### [v3.9.0] - 2026-02-05
 
 #### Töötuba lõpetatud ja dokumentatsiooni kvaliteedi uuendus
-**See versioon lõpetab interaktiivsed töötubade moodulid, parandab kõik katkenud dokumendilingid ning tõstab sisu kvaliteeti AI arendajatele Microsoft AZD kasutajatele.**
+**See versioon lõpetab interaktiivsed töötubade moodulid, parandab kõik katkised dokumentatsiooni lingid ja tõstab üldist sisu kvaliteeti AI arendajatele, kes kasutavad Microsoft AZD-d.**
 
 #### Lisatud
-- **📝 CONTRIBUTING.md**: Uus panustamise juhend dokumendiga, mis sisaldab:
-  - Selged juhised vigade raportimiseks ja muutuste ettepanekuks
+- **📝 CONTRIBUTING.md**: Uus panustamise juhend dokument:
+  - Selged juhised probleemide raporteerimiseks ja muudatuste pakkumiseks
   - Dokumentatsiooni standardid uuele sisule
-  - Koodinäidete juhised ja commit-sõnumite konventsioonid
+  - Koodi näite juhised ja commit sõnumite konventsioonid
   - Ühiskonna kaasamise info
 
 #### Lõpetatud
-- **🎯 Töötuba Moodul 7 (Kokkuvõte)**: Täielikult lõpetatud kokkuvõtte moodul koos:
-  - Ülevaatlik kokkuvõte töötoa saavutustest
-  - Peamiste õpitulemuste sektsioon hõlmates AZD-d, malle ja Microsoft Foundryt
-  - Soovitused õppeprotsessi jätkamiseks
-  - Töötuba väljakutsete harjutused raskusastme hindamisega
-  - Kogukonna tagasiside ja tugilingid
+- **🎯 Töötuba moodul 7 (kokkuvõte)**: Täielikult lõpetatud kokkuvõtte moodul:
+  - Töötuba saavutuste põhjalik kokkuvõte
+  - Võtmekontseptsioonid hõlmavad AZD, mallid ja Microsoft Foundry
+  - Soovitused õppeteekonna jätkamiseks
+  - Töötuba väljakutsete harjutused raskustasemete näitamisega
+  - Ühiskonna tagasiside ja tugilingid
 
-- **📚 Töötuba Moodul 3 (Lammutamine)**: Ajendatud õpieesmärgid koos:
-  - GitHub Copilot MCP serverite aktiveerimise juhistega
+- **📚 Töötuba moodul 3 (Lammutamine)**: Uuendatud õpieesmärgid:
+  - GitHub Copilot MCP serverite aktiveerimise juhised
   - AZD malli kaustastruktuuri mõistmine
-  - Infrastruktuur-koodina (Bicep) organiseerimismustrid
-  - Praktiliste labori juhistega
+  - Infrastruktuur kui kood (Bicep) korraldusmustrite õppimine
+  - Praktilised laborijuhised
 
-- **🔧 Töötuba Moodul 6 (Lammutamine)**: Lõpetatud koos:
-  - Ressursside puhastamise ja kulude haldamise eesmärkidega
-  - `azd down` kasutamine ohutuks infrastruktuuri likvideerimiseks
-  - Pehme kustutatud kognitiivsete teenuste taastamise juhised
-  - Boonusülesanded GitHub Copilot'i ja Azure Portaali uurimiseks
+- **🔧 Töötuba moodul 6 (lammutamine)**: Lõpetatud:
+  - Ressursside puhastamine ja kulude halduse eesmärgid
+  - `azd down` kasutamine turvaliseks infrastruktuuri deprovisjonimiseks
+  - Pehmelt kustutatud kognitiivsete teenuste taastamise juhised
+  - Boonus uurimisküsimused GitHub Copiloti ja Azure portaaliga
 
 #### Parandatud
-- **🔗 Katkised lingid parandused**: Lahendatud 15+ katkist sisemist dokumentatsiooni linki:
-  - `docs/ai-foundry/ai-model-deployment.md`: Parandatud tee microsoft-foundry-integration.md-le
+- **🔗 Katkised lingid fikseeritud**: Lahendatud 15+ katkist sisemist dokumentatsiooni linki:
+  - `docs/ai-foundry/ai-model-deployment.md`: Parandatud marsruudid microsoft-foundry-integration.md-le
   - `docs/troubleshooting/ai-troubleshooting.md`: Parandatud ai-model-deployment.md ja production-ai-practices.md teed
-  - `docs/getting-started/first-project.md`: Asendatud mitteolemasolev cicd-integration.md deploy-guide.md-iga
-  - `examples/retail-scenario.md`: Parandatud KKK ja tõrkeotsingu juhendite teed
-  - `examples/container-app/microservices/README.md`: Parandatud kursuse kodu ja deploy-guide teed
-  - `resources/faq.md` ja `resources/glossary.md`: Uuendatud AI peatükkide viited
-  - `course-outline.md`: Parandatud juhendaja juhendi ja AI töötoa laboris viited
+  - `docs/getting-started/first-project.md`: Asendatud eksisteerimatu cicd-integration.md deployment-guide.md-ga
+  - `examples/retail-scenario.md`: Parandatud KKK ja veaotsingu juhendi teed
+  - `examples/container-app/microservices/README.md`: Parandatud kursuse avalehe ja juurutusjuhendi teed
+  - `resources/faq.md` ja `resources/glossary.md`: Uuendatud AI peatüki viited
+  - `course-outline.md`: Parandatud juhendaja juhend ja AI töötuba labori viited
 
-- **📅 Töötoa oleku bänner**: Uuendatud "Arendamisel" olekult aktiivseks töötoa olekuks kuupäevaga veebruar 2026
+- **📅 Töötuba staatuse bänner**: Uuendatud „Väljatöötamisel“ asemel aktiivseks töötuba staatuseks veebruar 2026 kuupäevaga
 
-- **🔗 Töötoa navigeerimine**: Parandatud katkised navigeerimislingid töötoa README.md-s, mis osutasid mitteolemasolevale lab-1-azd-basics kaustale
+- **🔗 Töötuba navigeerimine**: Parandatud katkised navigeerimislingid README.md-s, mis osutasid eksisteerimata lab-1-azd-basics kaustale
 
 #### Muudetud
-- **Töötoa esitlus**: Eemaldatud "arendamisel" hoiatus, töötuba on nüüd täielik ja kasutamiseks valmis
-- **Navigeerimise järjepidevus**: Tagatud, et kõigil töötoa moodulitel on korrektsed moodulitevahelised navigeerimisviited
-- **Õppeteekide viited**: Uuendatud peatükkide ristviited kasutama õigeid microsoft-foundry teid
+- **Töötuba esitlus**: Eemaldatud „väljatöötamisel“ hoiatus, töötuba on nüüd täielikult valmis ja kasutatav
+- **Navigeerimise järjepidevus**: Tagatud, et kõigil töötuba moodulitel on korralik moodulitevaheline navigeerimine
+- **Õppeteekonna viited**: Uuendatud peatükkide ristviited õigete microsoft-foundry radadega
 
 #### Kinnitatud
-- ✅ Kõik inglise keeles markdown-failid sisaldavad kehtivaid siselinke
-- ✅ Töötoa moodulid 0-7 on täielikult lõpetatud koos õpieesmärkidega
-- ✅ Peatükkide ja moodulite vaheline navigeerimine toimib korrektselt
-- ✅ Sisu sobib AI arendajatele, kes kasutavad Microsoft AZD-d
-- ✅ Alustajale sõbralik keel ja struktuur on säilinud kogu materjalis
+- ✅ Kõik ingliskeelsed markdowni failid sisaldavad kehtivaid sisemisi linke
+- ✅ Töötuba moodulid 0-7 on lõpetatud õpieesmärkidega
+- ✅ Peatükkide ja moodulitevaheline navigeerimine toimib korrektselt
+- ✅ Sisu sobib Microsoft AZD-d kasutavatele AI arendajatele
+- ✅ Algajasõbralik keel ja struktuur on säilinud kogu materjalis
 - ✅ CONTRIBUTING.md annab selged juhised kogukonna panustajatele
 
-#### Tehniline teostus
-- **Linkide valideerimine**: Automaatne PowerShell skript kontrollis kõiki .md siselinke
-- **Sisu auditeerimine**: Käsitsi ülevaade töötoa täielikkuse ja algajatele sobivuse kohta
-- **Navigeerimissüsteem**: Järjepidevad peatüki ja mooduli navigeerimise mustrid rakendatud
+#### Tehniline rakendus
+- **Linkide valideerimine**: Automaatne PowerShell skript kontrollis kõiki .md sisemisi linke
+- **Sisu audit**: Manuaalne ülevaatus töötuba täituvuse ja algajatele sobivuse osas
+- **Navigeerimissüsteem**: Rakendatud järjepidevad peatükkide ja moodulite navigeerimismustrid
 
 #### Märkused
-- **Ulatus**: Muudatused kehtivad ainult ingliskeelsele dokumentatsioonile
-- **Tõlked**: Tõlkekaustad ei ole selles versioonis uuendatud (automatiseeritud tõlge sünkroonitakse hiljem)
-- **Töötoa kestus**: Töötuba pakub nüüd 3-4 tundi praktilist õppetööd
+- **Ulatus**: Muudatused rakendatud ainult ingliskeelses dokumentatsioonis
+- **Tõlked**: Tõlkekaustad selles versioonis ei uuendatud (automatiseeritud tõlge sünkroniseerib hiljem)
+- **Töötuba kestus**: Täielik töötuba pakub 3-4 tundi praktilist õppimist
 
 ---
 
 ### [v3.8.0] - 2025-11-19
 
-#### Täiustatud dokumentatsioon: Jälgimine, turvalisus ja mitme agendi mustrid
-**See versioon lisab põhjalikud A-taseme tunnid Application Insightsi integratsiooni, autentimis mustrite ja mitme agendi koordineerimise kohta tootmiskeskkondadele.**
+#### Täiustatud dokumentatsioon: monitooring, turvalisus ja multi-agent mustrid
+**See versioon lisab põhjalikud A-klassi õppetunnid Application Insights integreerimisest, autentimise mustritest ning multi-agent koordineerimisest tootmisjuurutustes.**
 
 #### Lisatud
-- **📊 Application Insightsi integratsiooni õppetund**: failis `docs/pre-deployment/application-insights.md`:
-  - AZD-keskne juurutamine koos automaatse proovisoonimisega
-  - Täielikud Bicep mallid Application Insightsile + Log Analyticsile
-  - Töötavad Python rakendused kohandatud telemeetria ja laiendustega (1200+ rida)
-  - AI/LLM jälgimismustrid (Microsoft Foundry mudelite token/kulu jälgimine)
+- **📊 Application Insights integreerimise õppetund**: `docs/pre-deployment/application-insights.md` failis:
+  - AZD-keskne juurutus koos automaatse provisjonimisega
+  - Täielikud Bicep mallid Application Insightsi ja Log Analyticsi jaoks
+  - Töötavad Python rakendused kohandatud telemeetriaga (üle 1 200 rea)
+  - AI/LLM monitooringumustrid (Microsoft Foundry mudelite tokenite/kulude jälgimine)
   - 6 Mermaid diagrammi (arhitektuur, hajutatud jälgimine, telemeetria voog)
-  - 3 praktilist harjutust (hoiatused, armatuurlaud, AI jälgimine)
-  - Kusto päringute näited ja kulutõhususe strateegiad
-  - Otseülekande metrilised andmed ja reaalajas silumine
-  - Õppetöö kestvus 40-50 minutit, tootmiskõlblikud mustrid
+  - 3 praktilist harjutust (hoiatused, armatuurlaud, AI monitooring)
+  - Kusto päringu näited ja kulude optimeerimise strateegiad
+  - Reaalajas mõõdikute voog ja veaparandus reaalajas
+  - 40-50 minutit õppematerjali tootmisvalmis mustritega
 
-- **🔐 Autentimise ja turvalisuse mustrite õppetund**: failis `docs/getting-started/authsecurity.md`:
-  - 3 autentimismudelit (ühendusstringid, Key Vault, hallatav identiteet)
-  - Täielikud Bicep infrastruktuuri mallid turvalisteks juurutusteks
+- **🔐 Autentimise ja turbe mustrite õppetund**: `docs/getting-started/authsecurity.md` failis:
+  - 3 autentimise mustrit (ühenduste stringid, Key Vault, hallatud identiteet)
+  - Täielikud Bicep infrastruktuuri mallid turvaliste juurutuste jaoks
   - Node.js rakenduse kood Azure SDK integratsiooniga
-  - 3 täielikku harjutust (hallitava identiteedi lubamine, kasutajapõhine identiteet, Key Vaulti rotatsioon)
-  - Turvalisuse parimad meetodid ja RBAC konfiguratsioonid
-  - Tõrkeotsingu juhend ja kuluanalüüs
-  - Tootmiskõlblikud paroolita autentimismustrid
+  - 3 täielikku harjutust (hallatud identiteedi kasutuselevõtt, kasutaja määratud identiteet, Key Vault pöörlemine)
+  - Turvalisuse parimad tavad ja RBAC konfiguratsioonid
+  - Tõrkeotsingu juhend ja kulu analüüs
+  - Tootmisvalmis paroolivabad autentimise mustrid
 
-- **🤖 Mitme agendi koordineerimismustrite õppetund**: failis `docs/pre-deployment/coordination-patterns.md`:
+- **🤖 Multi-agent koordineerimise mustrite õppetund**: `docs/pre-deployment/coordination-patterns.md` failis:
   - 5 koordineerimismustrit (järjestikune, paralleelne, hierarhiline, sündmuspõhine, konsensus)
-  - Täielik korraldaja teenuse teostus (Python/Flask, 1500+ rida)
-  - 3 spetsialiseeritud agendi teostust (Uurija, Kirjutaja, Toimetaja)
-  - Teenuse buss integratsioon sõnumijärjekorra jaoks
-  - Cosmos DB olekute haldamine hajutatud süsteemidele
-  - 6 Mermaid diagrammi agendi interaktsioonide kohta
-  - 3 edasijõudnud harjutust (aegumishaldus, korduskatsed, vooluringi katkuja)
-  - Kulude jaotus (240-565 USD/kuus) optimeerimisstrateegiatega
-  - Application Insights integratsioon jälgimiseks
+  - Täielik orkestreerimise teenuse rakendus (Python/Flask, üle 1 500 rea)
+  - 3 spetsialiseeritud agendi rakendust (Uurija, Kirjutaja, Toimetaja)
+  - Service Bus integreerimine sõnumite järjekorda panekuks
+  - Cosmos DB seisundihaldus hajutatud süsteemide jaoks
+  - 6 Mermaid diagrammi, mis näitavad agentide omavahelisi suhtlusi
+  - 3 keerulist harjutust (aegumine, kordusloogika, vooluahela lüliti)
+  - Kulude jaotus (240-565 $/kuus) koos optimeerimisstrateegiatega
+  - Application Insights integreerimine monitooringuks
 
 #### Täiustatud
-- **Pre-juurutamise peatükk**: Nüüd sisaldab põhjalikku jälgimist ja koordineerimismustreid
-- **Alustamise peatükk**: Täiendatud professionaalsete autentimismustritega
-- **Tootmiskorras valmisolek**: Täielik ulatus turvalisusest jälgitavuseni
-- **Kursuse plaan**: Uuendatud viited uutele õppetundidele peatükkides 3 ja 6
+- **Pre-deployment peatükk**: Nüüd sisaldab põhjalikke monitooringu ja koordineerimise mustreid
+- **Getting Started peatükk**: Täiustatud professionaalsete autentimise mustritega
+- **Tootmisvalmidus**: Täielik katvus turvalisusest jälgitavuseni
+- **Kursuse kava**: Uuendatud viited uutele õppetundidele peatükkides 3 ja 6
 
 #### Muudetud
-- **Õppimise järjekord**: Turvalisuse ja jälgimise parem integreerimine kogu kursusel
-- **Dokumentatsiooni kvaliteet**: Järjepidevad A-taseme standardid (95-97%) uutes õppetundides
-- **Tootmis mustrid**: Täielik algusest lõpuni ulatus ettevõtete juurutuste jaoks
+- **Õppimise progression**: Paremini integreeritud turvalisus ja monitooring kogu kursusel
+- **Dokumentatsiooni kvaliteet**: Järjepidevad A-klassi standardid (95-97%) uute õppetundide ulatuses
+- **Tootmismustrid**: Täielik lõppastme katvus ettevõtte juurutustele
 
-#### Paranenud
-- **Arendajakogemus**: Selge tee arendamisest tootmisjälgimiseni
-- **Turvastandardid**: Professionaalsed autentimise ja saladuste halduse mustrid
+#### Parendatud
+- **Arendajakogemus**: Selge tee arendusest tootmisse monitooringuks
+- **Turvastandardid**: Professionaalsed mustrid autentimiseks ja saladuste halduseks
 - **Jälgitavus**: Täielik Application Insights integreerimine AZD-ga
-- **AI töökoormused**: Spetsialiseeritud jälgimine Microsoft Foundry mudelitele ja mitme agendi süsteemidele
+- **AI töökoormused**: Spetsialiseeritud monitooring Microsoft Foundry mudelitele ja multi-agent süsteemidele
 
 #### Kinnitatud
-- ✅ Kõik õppetunnid sisaldavad täielikku töötavat koodi (mitte ainult koodilõike)
-- ✅ Mermaid diagrammid visuaalseks õppimiseks (kokku 19 kolme õppetunni jooksul)
-- ✅ Praktilised harjutused koos kontrollsammudega (kokku 9)
-- ✅ Tootmiskõlblikud Bicep mallid juurutamiseks `azd up`-ga
-- ✅ Kuluanalüüs ja optimeerimise strateegiad
-- ✅ Tõrkeotsingu juhendid ja parimad tavad
-- ✅ Teadmiste kontrollpunktid koos kontrollkäskudega
+- ✅ Kõik õppetunnid sisaldavad töökorras koodi (mitte ainult fragmendid)
+- ✅ Mermaid diagrammid visuaalseks õppimiseks (kokku 19 kolmes õppetunnis)
+- ✅ Praktilised harjutused kinnitusetappidega (kokku 9)
+- ✅ Tootmisvalmid Bicep mallid, mida saab juurutada `azd up`-ga
+- ✅ Kulude analüüs ja optimeerimisstrateegiad
+- ✅ Tõrkeotsingu juhendid ja parimad praktikad
+- ✅ Teadmiste kontrollpunktid ja valideerimiskäsud
 
 #### Dokumentatsiooni hindamise tulemused
-- **docs/pre-deployment/application-insights.md**: - Põhjalik jälgimisjuhend
-- **docs/getting-started/authsecurity.md**: - Professionaalsed turvamustrid
-- **docs/pre-deployment/coordination-patterns.md**: - Täiustatud mitme agendi arhitektuurid
-- **Üldine uus sisu**: - Järjepidevad kõrgekvaliteedilised standardid
+- **docs/pre-deployment/application-insights.md**: - Põhjalik monitooringu juhend
+- **docs/getting-started/authsecurity.md**: - Professionaalsed turbemustrid
+- **docs/pre-deployment/coordination-patterns.md**: - Edasijõudnud multi-agent arhitektuurid
+- **Üldine uus sisu**: - Järjepidevad kõrged kvaliteedistandardid
 
-#### Tehniline teostus
+#### Tehniline rakendus
 - **Application Insights**: Log Analytics + kohandatud telemeetria + hajutatud jälgimine
-- **Autentimine**: Hallatav identiteet + Key Vault + RBAC mustrid
-- **Mitme agenti süsteem**: Teenuse buss + Cosmos DB + Container Apps + orkestreerimine
-- **Jälgimine**: Otseülekanded + Kusto päringud + hoiatused + armatuurlauad
-- **Kuluhaldus**: Valimismustrid, säilituspoliitikad, eelarvekontroll
+- **Autentimine**: Hallatud identiteet + Key Vault + RBAC mustrid
+- **Multi-agent**: Service Bus + Cosmos DB + Container Apps + orkestreerimine
+- **Monitooring**: Reaalajas mõõdikud + Kusto päringud + hoiatused + armatuurlaud
+- **Kulu haldus**: Proovivõtu strateegiad, säilituspoliitikad, eelarve kontrollid
 
 ### [v3.7.0] - 2025-11-19
 
-#### Dokumentatsiooni kvaliteedi parandused ja uus Microsoft Foundry mudelite näide
-**See versioon parandab dokumentatsiooni kvaliteeti hoidlates ja lisab täieliku Microsoft Foundry mudelite juurutuse näite koos gpt-4.1 vestluskeskkonnaga.**
+#### Dokumentatsiooni kvaliteedi parendused ja uus Microsoft Foundry mudelite näide
+**See versioon parandab dokumentatsiooni kvaliteeti kogu repos ja lisab täieliku Microsoft Foundry mudelite juurutamise näite koos gpt-4.1 vestlusliidesega.**
 
 #### Lisatud
-- **🤖 Microsoft Foundry mudelite vestluse näide**: Täielik gpt-4.1 juurutus koos töötava rakendusega kaustas `examples/azure-openai-chat/`:
+- **🤖 Microsoft Foundry mudelite vestlusnäidis**: Täielik gpt-4.1 juurutus koos töökorras rakendusega `examples/azure-openai-chat/`:
   - Täielik Microsoft Foundry mudelite infrastruktuur (gpt-4.1 mudeli juurutus)
-  - Python käsurea vestluse liides koos vestluse ajaloo haldusega
-  - Key Vault integreerimine turvaliseks API võtmete hoidmiseks
-  - Tokeni kasutuse jälgimine ja kulu hinnang
-  - Taotlemise piirangud ja veahaldus
-  - Ulatuslik README koos 35-45 minuti juurutusjuhisega
-  - 11 tootmiskõlblikku faili (Bicep mallid, Python rakendus, konfiguratsioon)
+  - Python käsklusliiniga vestlusliides koos vestluse ajaloo salvestusega
+  - Key Vault integreerimine API võtme turvaliseks hoidmiseks
+  - Tokenite kasutuse jälgimine ja kulude hinnang
+  - Kiiruspiirangud ja veahaldus
+  - Põhjalik README koos 35-45-minutilise juurutusjuhendiga
+  - 11 tootmisvalmis faili (Bicep mallid, Python rakendus, konfiguratsioon)
 - **📚 Dokumentatsiooniharjutused**: Lisatud praktilised harjutused konfiguratsioonijuhendisse:
-  - Harjutus 1: Mitmekeskkondade konfiguratsioon (15 minutit)
+  - Harjutus 1: Mitmekeskkonna konfiguratsioon (15 minutit)
   - Harjutus 2: Saladuste haldamise harjutus (10 minutit)
-  - Selged edukriteeriumid ja kontrollsammud
-- **✅ Juurutuse kontroll**: Lisatud kontrollosa juurutusjuhendisse:
-  - Oleku kontrollimise protseduurid
-  - Edukriteeriumite nimekiri
-  - Oodatavad väljundid kõigile juurutuskäskudele
-  - Kiire tõrkeotsingu viited
+  - Selged edut kriteeriumid ja valideerimisetapid
+- **✅ Juurutuse kinnitamine**: Lisatud kinnituse sektsioon juurutusjuhendisse:
+  - Tervisekontrolli protseduurid
+  - Edu kriteeriumite kontrollnimekiri
+  - Kõigi juurutuskäskude oodatavad väljundid
+  - Tõrkeotsingu kiire viide
 
 #### Täiustatud
-- **examples/README.md**: Uuendatud A-taseme kvaliteedile (93%):
-  - Lisatud azure-openai-chat kõikidesse asjakohastesse jaotistesse
-  - Uuendatud kohalik näidete arv 3-lt 4-le
-  - Lisatud AI rakenduste näidete tabelisse
-  - Integreeritud Kesktasemele suunatud Kiiralgusse
+- **examples/README.md**: Uuendatud A-klassi kvaliteedile (93%):
+  - Lisatud azure-openai-chat kõigisse asjakohastesse sektsioonidesse
+  - Kohaliku näidete arvu suurendatud 3-lt 4-le
+  - Lisatud tehisintellekti rakenduste näidete tabelisse
+  - Integreeritud Kiire alguse juhendi kesktasemel kasutajatele
   - Lisatud Microsoft Foundry mallide sektsiooni
-  - Uuendatud võrdlustabelid ja tehnoloogia leidmise sektsioonid
+  - Uuendatud Võrdlusmaatriksi ja tehnoloogiade leidmise sektsiooni
 - **Dokumentatsiooni kvaliteet**: Parandatud B+ (87%) → A- (92%) kogu docs kaustas:
-  - Lisatud oodatavad väljundid kriitilistele käsule
-  - Lisatud kontrollsammud konfiguratsiooni muutmisele
-  - Paranenud praktiline õpe reaalsemate ülesannetega
+
+  - Lisatud oodatud väljundid kriitiliste käsu näidete juurde
+  - Lisatud kontroll sammud konfiguratsiooni muudatuste jaoks
+  - Täiendatud praktiliste harjutustega käsitsi õppimist
 
 #### Muudetud
-- **Õppimise järjekord**: Parem AI näidete integreerimine kesktaseme õppijatele
-- **Dokumentatsiooni struktuur**: Rohkem tegutsemisele suunatud harjutusi selgete tulemustega
-- **Kvaliteedikontroll**: Selged edukriteeriumid oluline töövoo juures
+- **Õppejärjestus**: Parem AI näidete integreerimine kesktaseme õppijatele
+- **Dokumentatsiooni struktuur**: Rohkem tegutsemisvalmis harjutusi kindlate tulemustega
+- **Kontrolliprotsess**: Selged edutõendid lisatud olulistele töövoogudele
 
-#### Paranenud
-- **Arendajakogemus**: Microsoft Foundry mudelite juurutus võtab nüüd 35-45 minutit (varem 60-90 min keerulisemate alternatiividega)
-- **Kulukasutuse läbipaistvus**: Selged kuluhinnangud (50-200 USD/kuus) Microsoft Foundry mudelite näitele
-- **Õppeteeka selgus**: AI arendajatel on selge alguspunkt azure-openai-chat näitel
-- **Dokumentatsiooni standardid**: Järjepidevad oodatavad väljundid ja kontrollsammud
+#### Parendatud
+- **Arendajakogemus**: Microsoft Foundry mudelite juurutamine võtab nüüd 35-45 minutit (varem 60-90 min keeruliste alternatiivide puhul)
+- **Kulukus läbipaistvus**: Selged kulude hinnangud (50-200 USD/kuus) Microsoft Foundry mudelite näite jaoks
+- **Õpperada**: AI arendajatele on selge sisenemispunkt azure-openai-chat abil
+- **Dokumentatsiooni standardid**: Ühtsed oodatud väljundid ja kontroll sammud
 
 #### Kinnitatud
-- ✅ Microsoft Foundry mudelite näide täiesti toimiv koos `azd up`-ga
-- ✅ Kõik 11 juurutusfaili süntaktiliselt korrektsed
+- ✅ Microsoft Foundry mudelite näide töötab täielikult käsuga `azd up`
+- ✅ Kõik 11 rakendusfaili on süntaktiliselt korrektsed
 - ✅ README juhised vastavad tegelikule juurutuskogemusele
-- ✅ Dokumentatsiooni lingid uuendatud enam kui 8 kohas
-- ✅ Näidete indeks peegeldab õigesti 4 kohalikku näidet
-- ✅ Puuduvad duplikaatsed välislingid tabelites
-- ✅ Kõik navigeerimisviited korrektsed
+- ✅ Dokumentatsiooni lingid uuendatud üle 8 asukoha
+- ✅ Näidete indeksis on õigesti kajastatud 4 kohalikku näidet
+- ✅ Puuduvad duplikaatvälised lingid tabelites
+- ✅ Kõik navigeerimisviited on õiged
 
-#### Tehniline teostus
+#### Tehniline rakendus
 - **Microsoft Foundry mudelite arhitektuur**: gpt-4.1 + Key Vault + Container Apps muster
-- **Turvalisus**: Vahetatav haldatav identiteet, saladused Key Vaultis
+- **Turvalisus**: Hallatud identiteet valmis, salajased andmed Key Vault’is
 - **Jälgimine**: Application Insights integratsioon
-- **Kulu haldamine**: Tokenite jälgimine ja kasutuse optimeerimine
-- **Juurutus**: Üksik `azd up` käsk kogu seadistuse jaoks
+- **Kulujuhtimine**: Tokeni jälgimine ja kasutuse optimeerimine
+- **Juurutamine**: Üksainus `azd up` käsk kogu seadistuse jaoks
 
 ### [v3.6.0] - 2025-11-19
 
-#### Suur uuendus: Container App juurutuse näited
-**See versioon tutvustab põhjalikke, tootmiskõlblikke konteinerirakenduste juurutuse näiteid Azure Developer CLI (AZD) abil, koos täieliku dokumentatsiooni ja õppeteekidega integreerimisega.**
+#### Suur uuendus: Container App juurutamisnäited
+**See versioon tutvustab põhjalikke, tootmiseks valmis konteinerirakenduste juurutamise näiteid kasutades Azure Developer CLI (AZD), koos täieliku dokumentatsiooni ja integratsiooniga õpperajale.**
 
 #### Lisatud
-- **🚀 Container App näited**: Uued kohalikud näited kaustas `examples/container-app/`:
-  - [Täielik juhend](examples/container-app/README.md): Ülevaade konteineripõhistest juurutustest, kiiralgus, tootmis- ja edasijõudnud mustrid
-  - [Lihtne Flask API](../../examples/container-app/simple-flask-api): Algajasõbralik REST API koos scale-to-zero, tervisekontrolli, jälgimise ja tõrkeotsinguga
-  - [Mikroteenuste arhitektuur](../../examples/container-app/microservices): Tootmisvalmis mitme teenuse juurutus (API Gateway, Product, Order, User, Notification), asünkroonne sõnumivahetus, Teenuse Buss, Cosmos DB, Azure SQL, hajutatud jälgimine, sinine-roheline ja kanarilennujuurutus
-- **Parimad tavad**: Turvalisus, jälgimine, kulude optimeerimine ja CI/CD juhised konteinerikoormuste jaoks
-- **Koodinäited**: Täielik `azure.yaml`, Bicep mallid ja mitme keele teenuste teostused (Python, Node.js, C#, Go)
-- **Testimine ja tõrkeotsing**: Lõpp-lõpuni teststsenaariumid, jälgimiskäsud, tõrkeotsingu juhendid
+- **🚀 Container App näited**: Uued kohalikud näited kataloogis `examples/container-app/`:
+  - [Põhijuhend](examples/container-app/README.md): Täielik ülevaade konteineriseeritud juurutustest, kiire algus, tootmine ja arenenud mustrid
+  - [Lihtne Flask API](../../examples/container-app/simple-flask-api): Algajale sobiv REST API koos scale-to-zero, tervisekontrollide, jälgimise ja tõrkeotsinguga
+  - [Mikroteenuste arhitektuur](../../examples/container-app/microservices): Tootmiseks valmis mitme teenuse juurutus (API Gateway, Produkt, Tellimus, Kasutaja, Teavitused), asünkroonne sõnumivahetus, Service Bus, Cosmos DB, Azure SQL, hajutatud jälgimine, sinine-roheline/kanarii juurutamine
+- **Parimad tavad**: Turvalisus, jälgimine, kuluoptimeerimine ja CI/CD juhendid konteinerikoormustele
+- **Koodinäited**: Täielik `azure.yaml`, Bicep mallid ja mitmekeelsed teenuste rakendused (Python, Node.js, C#, Go)
+- **Testimine & Tõrkeotsing**: Lõpust-lõpuni teststsenaariumid, jälgimis käsud, tõrkeotsingu juhised
 
 #### Muudetud
-- **README.md**: Uuendatud, et tutvustada ja linkida uusi konteinerirakenduste näiteid all „Kohalikud näited - konteinerirakendused“ alt
-- **examples/README.md**: Uuendatud, et esile tõsta konteinerirakenduste näiteid, lisada võrdlustabeli kirjeid ja uuendada tehnoloogia/arhitektuuri viiteid
-- **Kursuse plaan ja õppematerjalid**: Uuendatud, et viidata uutele konteinerirakenduste näidetele ja juurutuse mustritele vastavates peatükkides
+- **README.md**: Uuendatud, et lisada ja linkida uued konteinerirakenduste näited jaotises "Kohalikud näited - konteinerirakendused"
+- **examples/README.md**: Uuendatud, et rõhutada konteinerirakenduste näiteid, lisada võrdlustabeli kirjeid ja uuendada tehnoloogia/arhitektuuri viiteid
+- **Kursuse ülevaade ja õppematerjal**: Uuendatud, et viidata uutele konteinerirakenduste näidetele ja juurutusmustritele vastavates peatükkides
 
 #### Kinnitatud
-- ✅ Kõik uued näited juurutatavad `azd up`-ga ja järgivad parimaid tavasid
+- ✅ Kõik uued näited on juurutatavad käsuga `azd up` ja järgivad parimaid tavasid
 - ✅ Dokumentatsiooni ristviited ja navigeerimine uuendatud
-- ✅ Näited katavad algajatest edasijõudnuteni, sealhulgas tootmisvõimelised mikroteenused
+- ✅ Näited hõlmavad algaja kuni arenenud stsenaariume, sh tootmise mikroteenused
 
 #### Märkused
 - **Ulatus**: Ainult ingliskeelne dokumentatsioon ja näited
-- **Järgmised sammud**: Tulevikus laiendatakse täiendavate edasijõudnud konteinerimustrite ja CI/CD automatiseerimisega
+- **Järgmised sammud**: Lisa arenenud konteinerimustri ja CI/CD automaatika lisamine tulevastes versioonides
 
 ### [v3.5.0] - 2025-11-19
 
-#### Tootemargi ümbernimetamine: Microsoft Foundry
-**See versioon rakendab üldise tootemargi nime muutmise "Microsoft Foundry"-st "Microsoft Foundry"-ks kogu ingliskeelses dokumentatsioonis, peegeldades Microsofti ametlikku ümberbrändimist.**
+#### Toote ümbernimetamine: Microsoft Foundry
+**See versioon viib läbi põhjaliku tootenime muutuse „Microsoft Foundry“ vastu kogu ingliskeelses dokumentatsioonis, kajastades Microsofti ametlikku ümberbrändimist.**
 
 #### Muudetud
-- **🔄 Tootemärgi nime uuendus**: Täielik ümberbrändimine "Microsoft Foundry"-st "Microsoft Foundry"-ks
-  - Kõik viited uuendatud ingliskeelses dokumentatsioonis `docs/` kaustas
-  - Kausta nime muutus: `docs/ai-foundry/` → `docs/microsoft-foundry/`
-  - Muudetud failinimi: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - Kokku: 23 sisuviidet uuendatud 7 dokumentatsioonifailis
+- **🔄 Toote nime uuendus**: Täielik ümbernimetamine „Microsoft Foundry“ vastu
+  - Uuendatud kõik viited ingliskeelses dokumentatsioonis kaustas `docs/`
+  - Kausta ümbernimetamine: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+  - Faili ümbernimetamine: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+  - Kokku: 23 sisuviite uuendatud 7 dokumentatsiooni failis
 
 - **📁 Kaustastruktuuri muudatused**:
-  - `docs/ai-foundry/` nimetatud ümber `docs/microsoft-foundry/`
-  - Kõik ristviited uuendatud uue kaustastruktuuri alusel
-  - Navigeerimislingid kontrollitud kogu dokumentatsioonis
+  - `docs/ai-foundry/` ümber nimetatud `docs/microsoft-foundry/`
+  - Kõik ristviited uuendatud uue kaustastruktuuri järgi
+  - Navigeerimislingid kontrollitud kõikides dokumentides
 
 - **📄 Failide ümbernimetamised**:
   - `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - Kõik sisemised lingid uuendatud osutamaks uuele failinimele
+  - Kõik sisemised lingid uuendatud uut faili nime kasutama
 
 #### Uuendatud failid
 - **Peatükkide dokumentatsioon** (7 faili):
   - `docs/microsoft-foundry/ai-model-deployment.md` - 3 navigeerimislingi uuendust
-  - `docs/microsoft-foundry/ai-workshop-lab.md` - 4 tootemäära kohta uuendust
-  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - Kasutab juba Microsoft Foundry’d (eelmiste uuenduste alusel)
-  - `docs/microsoft-foundry/production-ai-practices.md` - 3 uuendust (ülevaade, kogukonna tagasiside, dokumentatsioon)
-  - `docs/getting-started/azd-basics.md` - 4 ristviide uuendust
+  - `docs/microsoft-foundry/ai-workshop-lab.md` - 4 tootenime viite uuendust
+  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - Juba kasutab Microsoft Foundryt (eelnevatest uuendustest)
+  - `docs/microsoft-foundry/production-ai-practices.md` - 3 viite uuendust (ülevaade, kogukonna tagasiside, dokumentatsioon)
+  - `docs/getting-started/azd-basics.md` - 4 ristviite linki uuendatud
   - `docs/getting-started/first-project.md` - 2 peatüki navigeerimislingi uuendust
-  - `docs/getting-started/installation.md` - 2 järgmise peatüki linki uuendatud
-  - `docs/troubleshooting/ai-troubleshooting.md` - 3 uuendust (navigeerimine, Discordi kogukond)
-  - `docs/troubleshooting/common-issues.md` - 1 navigeerimislink uuendatud
-  - `docs/troubleshooting/debugging.md` - 1 navigeerimislink uuendatud
+  - `docs/getting-started/installation.md` - 2 järgmise peatüki lingi uuendust
+  - `docs/troubleshooting/ai-troubleshooting.md` - 3 viite uuendust (navigeerimine, Discord kogukond)
+  - `docs/troubleshooting/common-issues.md` - 1 navigeerimislingi uuendus
+  - `docs/troubleshooting/debugging.md` - 1 navigeerimislingi uuendus
 
-- **Kursuse struktuuri failid** (2 faili):
-  - `README.md` - 17 viidet uuendatud (kursuse ülevaade, peatükkide nimed, mallide sektsioon, kogukonna teadmised)
-  - `course-outline.md` - 14 viidet uuendatud (ülevaade, õppimise eesmärgid, peatükkide ressursid)
+- **Kursuse struktuurifailid** (2 faili):
+  - `README.md` - 17 viite uuendust (kursuse ülevaade, peatükkide pealkirjad, mallide jaotis, kogukonna teadmised)
+  - `course-outline.md` - 14 viite uuendust (ülevaade, õpieesmärgid, peatükkide ressursid)
 
-#### Kontrollitud
-- ✅ Null järelejäänud "ai-foundry" kaustatee viidet ingliskeelsetes dokumentides
-- ✅ Null järelejäänud "Microsoft Foundry" tootemäära viidet ingliskeelsetes dokumentides
-- ✅ Kõik navigeerimislingid toimivad uue kaustastruktuuriga
-- ✅ Failide ja kaustade ümbernimetamised edukalt tehtud
-- ✅ Peatükkidevahelised ristviited kontrollitud
+#### Kinnitatud
+- ✅ Null allesolevaid "ai-foundry" kausta viiteid ingliskeelsetes dokumentides
+- ✅ Null allesolevaid "Microsoft Foundry" tootenime viiteid ingliskeelsetes dokumentides
+- ✅ Kõik navigeerimislingid töötavad uue kaustastruktuuriga korrektselt
+- ✅ Faili- ja kaustanime muutmised edukalt lõpetatud
+- ✅ Peatükkide vahelised ristviited on kontrollitud
 
 #### Märkused
-- **Kohaldamisala**: Muudatused tehtud ainult inglise keelsele dokumentatsioonile kaustas `docs/`
-- **Tõlked**: Tõlkekaustad (`translations/`) selles versioonis ei ole uuendatud
-- **Töötoad**: Töötoa materjalid (`workshop/`) selles versioonis ei ole uuendatud
-- **Näited**: Näidisdokumendid võivad endiselt viidata vanale nimetusele (lahendatakse tulevastes uuendustes)
-- **Välised lingid**: Välised URL-id ja GitHubi hoidla viited jäävad muutumatuks
+- **Ulatus**: Muudatused rakendatud ainult ingliskeelses dokumentatsioonis kaustas `docs/`
+- **Tõlked**: Tõlkekaustad (`translations/`) ei ole selles versioonis uuendatud
+- **Töötoad**: Töötoa materjalid (`workshop/`) ei ole selles versioonis uuendatud
+- **Näited**: Näitfailid võivad endiselt sisaldada pärandnimesid (lahendatakse tulevastes uuendustes)
+- **Välised lingid**: Välised URL’id ja GitHub hoidla viited jäävad muutmata
 
-#### Migratsioonijuhis kaasautoritele
-Kui teil on kohalikud harud või dokumentatsioon, mis viitab vanale struktuurile:
-1. Uuendage kaustaviited: `docs/ai-foundry/` → `docs/microsoft-foundry/`
-2. Uuendage failiviited: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-3. Asendage tootemäär „Microsoft Foundry“ → „Microsoft Foundry“
-4. Kontrollige, et kõik sisemised dokumentatsioonilingid töötavad endiselt
+#### Ümberpaigutuse juhend panustajatele
+Kui teil on kohalikke harusid või dokumenteerimisviiteid vana struktuuri kohta:
+1. Uuendage kaustaviiteid: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+2. Uuendage faili viiteid: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+3. Asendage tootenimi: "Microsoft Foundry" → "Microsoft Foundry"
+4. Kontrollige, et kõik sisemised dokumentide lingid töötaksid õigesti
 
 ---
 
 ### [v3.4.0] - 2025-10-24
 
-#### Taristu eelvaade ja valideerimise täiustused
-**See versioon toob põhjaliku toe uuele Azure Developer CLI eelvaate funktsioonile ja täiustab töötoa kasutajakogemust.**
+#### Infrastruktuuri eelvaate ja valideerimise täiustused
+**See versioon tutvustab põhjalikku tuge uuele Azure Developer CLI eelvaate funktsioonile ning parandab töötoa kasutajakogemust.**
 
 #### Lisatud
-- **🧪 azd provision --preview funktsiooni dokumentatsioon**: Põhjalik katvus taristu eelvaate võimalusele
-  - Käsureferents ja kasutusnäited kiirjuhendis
-  - Detailne integreerimine provisjonimisjuhises koos kasutusjuhtude ja kasudega
-  - Eelpiloodi kontrollide integreerimine turvalisema juurutuse tagamiseks
-  - Algusjuhiste uuendused turvalise esmase juurutamispraktikaga
-- **🚧 Töötoa staatusesilt**: Professionaalne HTML-banner, mis näitab töötoa arendusstaatus
-  - Gradientne kujundus ehitusmärkidega selgeks kasutajate info edastamiseks
-  - Viimane uuendamise kuupäev läbipaistvuseks
-  - Mobiilseadmetele kohanduv disain kõikidele seadmetele
+- **🧪 azd provision --preview funktsiooni dokumentatsioon**: Põhjalik ülevaade uuest infrastruktuuri eelvaate võimalusest
+  - Käsurea viited ja kasutusnäited petulehel
+  - Detailne integreerimine provisioneerimisjuhises, kasutusjuhtumite ja eelistega
+  - Eltuure kontrolli integratsioon ohutumaks juurutuse valideerimiseks
+  - Käivitamisjuhendi uuendused ohutuse prioriteediga
+- **🚧 Töötoa staatuse bänner**: Professionaalne HTML bänner, mis näitab töötoa arenduse staatust
+  - Gradientkujundus ehitusnäitajatega selgeks kasutajaliikumiseks
+  - Viimane uuenduse kuupäev läbipaistvuse tagamiseks
+  - Mobiilisõbralik kujundus kõigile seadmetele
 
-#### Täiustatud
-- **Taristu turvalisus**: Eelvaate funktsioon integreeritud kogu juurutusdokumentatsiooni
-- **Eeljuurutuse valideerimine**: Automaatse skripti laiendused taristu eelvaate testimiseks
-- **Arendajate töövoog**: Käsu järjekord uuendatud, et hõlmata eelvaadet parima praktikana
-- **Töötoa kogemus**: Selged ootused kasutajatele töötoa sisu arendamise kohta
+#### Täiendatud
+- **Infrastruktuuri ohutus**: Eelvaate funktsionaalsus integreeritud kogu juurutuse dokumentatsiooni
+- **Enne-juurutamist kontrollimine**: Automaatiskriptid nüüd sisaldavad infrastruktuuri eelvaatamise testimist
+- **Arendajatöövoog**: Käsu seeriad uuendatud nii, et eelvaade on parim tava
+- **Töötoa kogemus**: Kasutajatele on selgelt esitatud sisu arendusstaatus
 
 #### Muudetud
-- **Juurutuse parimad praktikad**: Eelvaate esmalt töövoog soovitatavaks lähenemiseks
-- **Dokumentatsiooni voog**: Taristu valideerimine viidud varasemasse õppetsüklisse
-- **Töötoa esitlus**: Professionaalne staatuse info koos selgete arendusajagraafikutega
+- **Juurutamise parimad tavad**: Eelvaate-esimene töövoog soovitatud lähenemine
+- **Dokumentatsiooni voog**: Infrastruktuuri valideerimine viidud õppimise protsessis varasemaks
+- **Töötoa esitlus**: Professionaalne staatusteavitamine selge arendustähtajaga
 
-#### Paranenud
-- **Turvalisuse esmatähtsus**: Taristu muudatusi saab nüüd enne juurutust valideerida
+#### Parendatud
+- **Ohutus keskne lähenemine**: Infrastruktuuri muudatusi saab nüüd enne juurutust valideerida
 - **Meeskonnatöö**: Eelvaate tulemusi saab jagada ülevaatamiseks ja kinnitamiseks
-- **Kuluteadlikkus**: Ressursside kulude parema mõistmise võimalus enne provisjoneerimist
-- **Riskide vähendamine**: Juhtimisvigade vähenemine varajase valideerimise kaudu
+- **Kulutajastlikkus**: Parem arusaam ressursside kuludest enne provisioneerimist
+- **Riskide vähendamine**: Vähendatud juurutusvigade protsent täiendvalideerimise kaudu
 
 #### Tehniline rakendus
-- **Mitme dokumendi integratsioon**: Eelvaate funktsioon kajastatud neljas põhifailis
-- **Käsu mustrid**: Ühtlane süntaks ja näited kogu dokumentatsioonis
-- **Parimate tavade integreerimine**: Eelvaade lisatud valideerimisprotsessidesse ja skriptidesse
-- **Visuaalsed märgised**: Selgelt välja toodud UUS funktsioon leitavuse tõstmiseks
+- **Mitmed dokumendid integratsioon**: Eelvaate funktsioon dokumenteeritud 4 põhifailis
+- **Käsu mustrid**: Ühtne süntaks ja näited kogu dokumentatsioonis
+- **Parima tava integreerimine**: Eelvaade lisatud valideerimis töövoogudesse ja skriptidesse
+- **Visuaalsed märgendid**: Selged UUE funktsiooni märgistused hõlbustamiseks
 
-#### Töötoa taristu
-- **Staatuskommunikatsioon**: Professionaalne HTML-banner gradientkujundusega
-- **Kasutajakogemus**: Selge arendusstaatus vältimaks segadust
+#### Töötoa infrastruktuur
+- **Staatuse teavitus**: Professionaalne HTML bänner gradientstiiliga
+- **Kasutajakogemus**: Selge arenduse staatus, mis väldib segadust
 - **Professionaalne esitlus**: Säilitab hoidla usaldusväärsuse ja seab ootused
-- **Ajaskaala läbipaistvus**: 2025. aasta oktoobri viimase uuenduse ajatempli avalikustamine
+- **Ajakava läbipaistvus**: Viimane uuendus oktoobris 2025 vastutuse tagamiseks
 
 ### [v3.3.0] - 2025-09-24
 
-#### Täiendatud töötoa materjalid ja interaktiivne õppimiskogemus
-**See versioon lisab põhjalikud töötoa materjalid, brauseripõhise interaktiivse juhendi ja struktureeritud õppeteed.**
+#### Täiendatud töötoa materjalid ja interaktiivne õpikogemus
+**See versioon tutvustab põhjalikke töötoa materjale, brauseripõhiseid interaktiivseid juhendeid ja struktureeritud õpperadu.**
 
 #### Lisatud
-- **🎥 Interaktiivne töötoa juhend**: Brauseripõhine töötoakogemus koos MkDocs eelvaatevõimega
-- **📝 Struktureeritud töötoa juhised**: 7-etapiline juhendatud õppimise rada avastamisest kohandamiseni
-  - 0-Sissejuhatus: töötoa ülevaade ja seadistus
-  - 1-Select-AI-Template: mallide avastus ja valikuprotsess
-  - 2-Validate-AI-Template: juurutus ja valideerimisprotseduurid
-  - 3-Deconstruct-AI-Template: malli arhitektuuri mõistmine
-  - 4-Configure-AI-Template: konfiguratsioon ja kohandamine
-  - 5-Customize-AI-Template: edasijõudnud muudatused ja iteratsioonid
-  - 6-Teardown-Infrastructure: koristamine ja ressursside haldamine
-  - 7-Lõpetamine: kokkuvõte ja järgmised sammud
-- **🛠️ Töötoa tööriistad**: MkDocs konfiguratsioon Materjal-teemaga parema õppimiskogemuse tagamiseks
-- **🎯 Käed-külge õppekava**: 3-etapiline metoodika (Avastus → Juurutus → Kohandamine)
-- **📱 GitHub Codespaces integratsioon**: sujuv arenduskeskkonna seadistamine
+- **🎥 Interaktiivne töötoa juhend**: Brauseripõhine töötoa kogemus koos MkDocs eelvaate võimalusega
+- **📝 Struktureeritud töötoa juhised**: 7-astmeline juhitud õpperada avastamisest kohandamiseni
+  - 0-Intro: Töötoa ülevaade ja seadistus
+  - 1-Vali-AI-Mall: Malle avastamine ja valik
+  - 2-Kinnita-AI-Mall: Juurutus ja valideerimisprotseduurid
+  - 3-Lammutamine-AI-Mall: Malle arhitektuuri mõistmine
+  - 4-Konfigureeri-AI-Mall: Konfiguratsioon ja kohandamine
+  - 5-Kohanda-AI-Mall: Arendatud muudatused ja iteratsioonid
+  - 6-Purusta-Infrastruktuur: Puhastamine ja ressursside haldamine
+  - 7-Kokkuvõte: Kokkuvõte ja järgnevad sammud
+- **🛠️ Töötoa tööriistad**: MkDocs konfigureerimine Materjal teema kasutamiseks parema õpikogemuse jaoks
+- **🎯 Praktiseeriv õpperada**: 3-astmeline metoodika (Ava → Juuruta → Kohanda)
+- **📱 GitHub Codespaces integratsioon**: Sujuv arenduskeskkonna seadistus
 
-#### Täiustatud
-- **AI töötoa praktikum**: Laiendatud põhjaliku 2–3-tunnise struktureeritud õpikogemusega
+#### Täiendatud
+- **AI töötoa labor**: Laiendatud põhjaliku 2-3 tunni struktureeritud õpikogemusega
 - **Töötoa dokumentatsioon**: Professionaalne esitlus navigeerimise ja visuaalsete abivahenditega
-- **Õppimise edenemine**: Selge samm-sammuline juhend mallide valikust tootmisjuurutuseni
-- **Arendajakogemus**: Integreeritud tööriistad sujuvate arendusprotsesside jaoks
+- **Õppe järjekord**: Selge samm-sammult juhend mallivalikust kuni tootliku juurutamiseni
+- **Arendajakogemus**: Integreeritud tööriistad sujuvate arendustöövoogude jaoks
 
-#### Paranenud
-- **Juurdepääsetavus**: Brauseripõhine liides otsingu, kopeerimise ja teemavaluikude vahetusega
-- **Oma tempos õppimine**: Paindlik töötoa struktuur eri õppimise kiiruste toetamiseks
-- **Praktiline rakendamine**: Reaalmaailma AI mallide juurutamise stsenaariumid
-- **Kogukonna integreerimine**: Discordi integratsioon töötoa toe ja koostöö jaoks
+#### Parandatud
+- **Juurdepääsetavus**: Brauseripõhine liides koos otsingu, kopeerimise ja teema vahetusega
+- **Isekursuse õppimine**: Paindlik töötoa struktuur erinevate õppemäärade jaoks
+- **Praktiline rakendus**: Reaalsed AI malli juurutamise stsenaariumid
+- **Kogukonna integratsioon**: Discord tugi töötoa toe ja koostöö jaoks
 
 #### Töötoa funktsioonid
-- **Sisseehitatud otsing**: Kiire märksõna- ja õppetunni leidmine
-- **Kopeeri koodiplokke**: Hiirega üle sõites kopeerimise funktsioon kõikidele näidiskoodidele
-- **Teemade vahetus**: Tume/hele režiimi tugi mitmesuguste eelistuste jaoks
-- **Visuaalsed materjalid**: Ekraanipildid ja diagrammid parema mõistmise tagamiseks
-- **Abi integreerimine**: Otselingi Discordi kogukonna toega
+- **Sisseehitatud otsing**: Kiire märksõnade ja õppetükkide leidmine
+- **Koodi plokkide kopeerimine**: Hiirüleliikumisega kopeerimine kõigi koodinäidete puhul
+- **Teema vahetus**: Tume/heledam režiim erinevate eelistuste jaoks
+- **Visuaalsed abivahendid**: Ekraanipildid ja diagrammid parema arusaamise jaoks
+- **Abi integratsioon**: Otse juurdepääs Discordi kogukonna toetusele
 
 ### [v3.2.0] - 2025-09-17
 
-#### Suur navigeerimise ümberkorraldus ja peatükkidel põhinev õppesüsteem
-**See versioon loob põhjaliku peatükkidel põhineva õppestruktuuri koos täiustatud navigeerimisega kogu hoidlas.**
+#### Suur navigeerimise ümberkorraldus ja peatükipõhine õppesüsteem
+**See versioon tutvustab põhjalikku peatükipõhist õpistruktuuri koos täiustatud navigeerimisega kogu hoidlas.**
 
 #### Lisatud
-- **📚 Peatükkidel põhinev õppesüsteem**: Terve kursus ümber korraldatud 8 järkjärgulisse peatükki
-  - Peatükk 1: Alused ja kiire alustamine (⭐ - 30–45 minutit)
-  - Peatükk 2: AI keskne arendus (⭐⭐ - 1–2 tundi)
-  - Peatükk 3: Konfiguratsioon ja autentimine (⭐⭐ - 45–60 minutit)
-  - Peatükk 4: Taristu koodina ja juurutus (⭐⭐⭐ - 1–1.5 tundi)
-  - Peatükk 5: Mitmeagendiline AI lahendus (⭐⭐⭐⭐ - 2–3 tundi)
-  - Peatükk 6: Eeljuurutuse valideerimine ja planeerimine (⭐⭐ - 1 tund)
-  - Peatükk 7: Veaotsing ja silumine (⭐⭐ - 1–1.5 tundi)
-  - Peatükk 8: Tootmise ja ettevõtluse mustrid (⭐⭐⭐⭐ - 2–3 tundi)
-- **📚 Ühtne navigeerimissüsteem**: Ühtsed navigeerimisriba päised ja jalused kogu dokumentatsioonis
-- **🎯 Edusammude jälgimine**: Kursuse lõpetamise kontrollnimekiri ja õppimise valideerimissüsteem
-- **🗺️ Õppeteede juhendamine**: Selged sisenemispunktid erinevate kogemustasemete ja eesmärkide jaoks
-- **🔗 Ristviidete navigeerimine**: Seotud peatükid ja eeltingimused selgelt ühendatud
+- **📚 Peatükipõhine õppesüsteem**: Kogu kursus ümber struktureeritud 8 järjestatud õppepeatükiks
+  - Peatükk 1: Alused ja kiire algus (⭐ - 30-45 minutit)
+  - Peatükk 2: AI-eelne arendus (⭐⭐ - 1-2 tundi)
+  - Peatükk 3: Konfiguratsioon ja autentimine (⭐⭐ - 45-60 minutit)
+  - Peatükk 4: Infrastruktuur koodina ja juurutamine (⭐⭐⭐ - 1-1.5 tundi)
+  - Peatükk 5: Mitmeagendi AI lahendused (⭐⭐⭐⭐ - 2-3 tundi)
+  - Peatükk 6: Enne-juurutamist valideerimine ja planeerimine (⭐⭐ - 1 tund)
+  - Peatükk 7: Tõrkeotsing ja silumine (⭐⭐ - 1-1.5 tundi)
+  - Peatükk 8: Tootmistaseme ja ettevõtte mustrid (⭐⭐⭐⭐ - 2-3 tundi)
+- **📚 Põhjalik navigeerimissüsteem**: Järjepidevad navigeerimis päised ja jalused kõigis dokumentides
+- **🎯 Edusammude jälgimine**: Kursuse lõpetamise kontrollnimekiri ja õppe valideerimise süsteem
+- **🗺️ Õpperaja juhised**: Selged sisenemispunktid erineva kogemustaseme ja eesmärkide jaoks
+- **🔗 Ristviidete navigeerimine**: Selgelt ühendatud seotud peatükid ja eeltingimused
 
-#### Täiustatud
-- **README struktuur**: Muudetud struktureeritud õppimisplatvormiks peatükkidel põhineva korraldusega
-- **Dokumentatsiooni navigeerimine**: Iga lehekülg sisaldab nüüd peatüki konteksti ja edenemissoovitusi
-- **Malli organiseerimine**: Näited ja mallid kaardistatud sobivatele õppimispeatükkidele
-- **Ressursside integratsioon**: Kiirjuhendid, korduma kippuvad küsimused ja õppejuhendid seotud asjakohaste peatükkidega
-- **Töötoa integratsioon**: Käed-külge laborid kaardistatud mitme peatüki õppimiseesmärkidega
+#### Täiendatud
+- **README struktuur**: Muudetud struktureeritud õppeplatvormiks peatükipõhise korraldusega
+- **Dokumentatsiooni navigeerimine**: Iga leht sisaldab nüüd peatüki konteksti ja edenemisjuhiseid
+- **Mallide korraldus**: Näited ja mallid on seotud vastavate õppepeatükkidega
 
-#### Muudetud
-- **Õppimise struktuur**: Liiguti lineaarse dokumentatsiooni asemel paindlikku peatükkidel põhinevasse õppimisse
-- **Konfiguratsiooni positsioneerimine**: Konfiguratsiooni juhend liigutatud peatükki 3 parema õppevoo jaoks
-- **AI sisu integreerimine**: AI-spetsiifiline sisu parem integreerimine kogu õppeteekonna vältel
-- **Tootmisalane sisu**: Täiustatud mustrid koondatud peatükki 8 ärikasutajate jaoks
+- **Ressursside integreerimine**: Petulehed, korduma kippuvad küsimused ja õpiabid, mis on seotud asjakohaste peatükkidega
+- **Töötoa integreerimine**: Praktilised laborid, mis on seotud mitme peatüki õpieesmärkidega
 
-#### Paranenud
-- **Kasutajakogemus**: Selged navigeerimismurdjad ja peatükprogressiooni indikaatorid
-- **Juurdepääsetavus**: Ühtsed navigeerimismustrid hõlbustavad kursuse läbimist
-- **Professionaalne esitlus**: Ülikoolistiilis kursuse struktuur sobib akadeemiliseks ja ettevõtte koolituseks
-- **Õppimise efektiivsus**: Sisu läbipaistvam ja kiiremini leitav parema korralduse läbi
+#### Muudatused
+- **Õppimise edenemine**: Liikus lineaarse dokumentatsiooni juurest paindlikule peatükkidele põhinevale õppele
+- **Konfiguratsiooni paigutus**: Konfiguratsiooni juhis ümber positsioneeritud peatükiks 3 parema õpivoo jaoks
+- **Tehisintellekti sisu integreerimine**: Parema integreerimise tehisintellekti-spetsiifilise sisu kogu õpiteekonna vältel
+- **Tootmiskasutuse sisu**: Täiustatud mustrid koondatud peatükki 8 ettevõtte õppijatele
+
+#### Parandused
+- **Kasutajakogemus**: Selged navigeerimisjäljed ja peatükkide edenemise indikaatorid
+- **Juurdepääsetavus**: Järjepidevad navigeerimise mustrid kursuse lihtsamaks läbimiseks
+- **Professionaalne esitlus**: Ülikoolilaadne kursuse struktuur sobib akadeemiliseks ja ettevõtte koolituseks
+- **Õppimise efektiivsus**: Paranenud organiseerimise kaudu relevantse sisu leidmise aeg vähenenud
 
 #### Tehniline rakendus
-- **Navigeerimispead**: Standardiseeritud peatükkide navigeerimine üle 40 dokumentatsioonifaili
-- **Jalusnavigatsioon**: Ühtsed edenemissoovitused ja peatüki lõpetamise indikaatorid
-- **Ristlingid**: Põhjalik sisemine linkimissüsteem seotud mõjude ühendamiseks
-- **Peatükkide kaardistamine**: Mallid ja näited selgelt seotud õppimiseesmärkidega
+- **Navigeerimispealkirjad**: Standardiseeritud peatükkide navigeerimine üle 40 dokumentatsioonifaili
+- **Alapealkirja navigeerimine**: Järjepidev edasijõudmise juhendamine ja peatükkide lõpetamise indikaatorid
+- **Ristviited**: Kõikehõlmav sisemine linkide süsteem seotud mõistete ühendamiseks
+- **Peatükkide kaardistamine**: Mallid ja näited selgelt seotud õpieesmärkidega
 
-#### Õppejuhendi täiendus
-- **📚 Põhjalikud õppimiseesmärgid**: Õppejuhend ümber korraldatud sobituma 8-peatükkilise süsteemiga
-- **🎯 Peatükkidel põhinev hindamine**: Igas peatükis konkreetsed õppimiseesmärgid ja praktilised harjutused
-- **📋 Edenemiskontroll**: Nädalane õppemahukava mõõdetavate tulemuste ja lõpetamistabelitega
-- **❓ Hindamisküsimused**: Igale peatükile teadmiste valideerimise küsimused professionaalse tulemuslikkusega
-- **🛠️ Praktilised harjutused**: Käed-külge tegevused reaalsete juurutamisstsenaariumitega ja veaotsinguga
-- **📊 Oskustaseme areng**: Selge edenemine põhitõdedest ettevõtlusmustriteni karjääri edendamise fookusega
-- **🎓 Sertifitseerimiskava**: Professionaalse arengu tulemused ja kogukonna tunnustus
-- **⏱️ Ajaplaneerimine**: Struktureeritud 10-nädalane õppeplaan tähtajaliste verstapostidega
+#### Õpiabi täiustamine
+- **📚 Kõikehõlmavad õpieesmärgid**: Õpiabi ümberkorraldus 8-peatükkilisele süsteemile vastavaks
+- **🎯 Peatükkidel põhinev hindamine**: Igas peatükis on spetsiifilised õpieesmärgid ja praktilised harjutused
+- **📋 Edenemise jälgimine**: Nädalane õppekava mõõdetavate tulemite ja lõpetamise kontrollnimekirjadega
+- **❓ Hindamisküsimused**: Iga peatüki teadmiste valideerimise küsimused professionaalsete tulemite jaoks
+- **🛠️ Praktilised harjutused**: Käed-külge tegevused päriseluliste juurutamise stsenaariumite ja tõrkeotsinguga
+- **📊 Oskuste areng**: Selge edasiminek algtõdedest ettevõtte mustriteni karjääri arengule keskendudes
+- **🎓 Sertifitseerimise raamistik**: Professionaalse arengu tulemused ja kogukonna tunnustussüsteem
+- **⏱️ Ajakava juhtimine**: Struktureeritud 10-nädalane õppeplaan verstapostide valideerimisega
 
 ### [v3.1.0] - 2025-09-17
 
-#### Täiustatud mitmeagendilised AI lahendused
-**See versioon parandab mitmeagendilist jaemüügilahendust paremate agendi nimede ning dokumentatsiooni täiustustega.**
+#### Täiustatud mitmeagendi tehisintellekti lahendused
+**Selles versioonis on parendatud jaemüügi mitmeagendi lahendust paremate agendi nimede ja täiustatud dokumentatsiooniga.**
 
-#### Muudetud
-- **Mitmeagendiliste terminite kasutus**: Asendatud "Cora agent" terminiga "Customer agent" kogu jaemüügiga seotud mitmeagentse lahenduse puhul selgema mõistmise jaoks
-- **Agendi arhitektuur**: Uuendatud kogu dokumentatsioon, ARM mallid ja koodinäited kasutama ühtset nimetust "Customer agent"
-- **Konfiguratsiooni näited**: Kaasaegsemad agendi konfiguratsiooni mustrid uuendatud nimetuskonventsioonidega
-- **Dokumentatsiooni ühtlus**: Tagatud kõikides viidetes professionaalsed ja kirjeldavad agendi nimed
+#### Muudatused
+- **Mitmeagendi terminoloogia**: "Cora agent" asendatud kogu jaemüügi mitmeagendi lahenduses "Kliendi agendiga" selgema arusaama tagamiseks
+- **Agendi arhitektuur**: Uuendatud kogu dokumentatsioon, ARM mallid ja koodinäited järjepideva "Kliendi agendi" nimetuse kasutamiseks
+- **Konfiguratsiooni näited**: Kaasaegsed agendi konfiguratsiooni mustrid uuendatud nimetamiskonventsioonidega
+- **Dokumentatsiooni järjepidevus**: Tagatud, et kõigis viidetes kasutatakse professionaalseid, kirjeldavaid agendi nimesid
 
-#### Täiustatud
-- **ARM-malli pakett**: Uuendatud retail-multiagent-arm-template Customer agent viidetega
-- **Arhitektuuridiagrammid**: Värskendatud Mermaid diagrammid uue agendi nimetusega
-- **Koodinäited**: Python klassid ja rakenduse näited kasutavad nüüd CustomerAgent nimetust
-- **Keskkonnamuutujad**: Uuendatud kõik juurutusskriptid kasutama CUSTOMER_AGENT_NAME konventsiooni
+#### Täiustused
+- **ARM malli pakett**: Uuendatud retail-multiagent-arm-template koos Kliendi agendi viidetega
+- **Arhitektuuri skeemid**: Värskendatud Mermaid diagrammid uuendatud agendi nimetustega
+- **Koodinäited**: Python klassid ja rakendusnäited kasutavad nüüd CustomerAgent nimetust
+- **Keskkonnamuutujad**: Uuendatud kõik juurutusskriptid CUSTOMER_AGENT_NAME konventsioonide kasutamiseks
 
-#### Paranenud
-- **Arendajakogemus**: Selgemad agendi rollid ja vastutused dokumentatsioonis
-- **Tootmiskõlblikkus**: Parema sobivusega ettevõtte terminoloogiaga
-- **Õppematerjalid**: Intuitiivsem agendi nimetuse kasutamine õppimise eesmärgil
-- **Malli kasutatavus**: Lihtsam arusaamine agendi funktsioonidest ja juurutusmustritest
+#### Parandused
+- **Arendajakogemus**: Kõrgem selgus agendi rollides ja vastutustes dokumentatsioonis
+- **Tootmiskõlblikkus**: Parema kooskõla ettevõtte nimetamiskonventsioonidega
+- **Õppematerjalid**: Intuitiivsem agendi nimetamine hariduslikel eesmärkidel
+- **Mallide kasutusmugavus**: Lihtsustatud arusaam agendi funktsioonidest ja juurutamismustritest
 
 #### Tehnilised üksikasjad
-- Uuendatud Mermaid arhitektuuridiagrammid CustomerAgent viidetega
-- Asendatud CoraAgent klassi nimed CustomerAgent’iks Python näidetes
-- Muudetud ARM malle JSON konfiguratsioonides agendi tüübiks "customer"
-- Uuendatud keskkonnamuutujad CORA_AGENT_* → CUSTOMER_AGENT_*
-- Värskendatud kõik juurutuskäsud ja konteineri konfiguratsioonid
+- Värskendatud Mermaid arhitektuuri diagrammid koos CustomerAgent viidetega
+- Asendatud Python näidetes CoraAgent klassinimed CustomerAgent nimedega
+- Muudetud ARM malli JSON konfiguratsioonid kasutama "customer" agendi tüüpi
+- Uuendatud keskkonnamuutujad CORA_AGENT_* mustrilt CUSTOMER_AGENT_* mustrile
+- Värskendatud kõik juurutamiskäsud ja konteinerite konfiguratsioonid
 
 ### [v3.0.0] - 2025-09-12
 
-#### Suured muudatused – AI arendaja keskendus ja Microsoft Foundry integratsioon
-**See versioon muudab hoidla põhjalikuks AI-keskseks õppematerjaliks Microsoft Foundry integreerimisega.**
+#### Suured muudatused - AI arendajate fookus ja Microsoft Foundry integratsioon
+**See versioon muudab hoidla kõikehõlmavaks tehisintellektile keskenduvaks õpiressursiks Microsoft Foundry integratsiooniga.**
 
 #### Lisatud
-- **🤖 AI-esmase õppetee**: Täielik ümberkorraldus, mis seab prioriteediks AI-arendajad ja insenerid
-- **Microsoft Foundry integreerimise juhend**: Põhjalik dokumentatsioon AZD ühendamiseks Microsoft Foundry teenustega
-- **AI mudeli juurutusmustrid**: Detailne juhend mudelivalikust, konfiguratsioonist ja tootmisele juurutamise strateegiatest
-- **AI töötuba labor**: 2–3-tunnine praktiline töötoa sessioon AI rakenduste teisendamiseks AZD-ga kasutatavatesse lahendustesse  
-- **Tootmisvalmis AI parimad tavad**: Ettevõttevalmis mustrid AI töökoormuste skaleerimiseks, jälgimiseks ja turvamiseks  
-- **AI-spetsiifiline tõrkeotsingu juhend**: Kõikehõlmav tõrkeotsing Microsoft Foundry mudelite, Cognitive Services ja AI juurutamise probleemide jaoks  
-- **AI malligalerii**: Microsoft Foundry mallide esiletõstetud kogumik koos keerukuse hinnanguga  
-- **Töötoa materjalid**: Täielik töötoa struktuur praktiliste laborite ja viidematerjalidega  
+- **🤖 AI-esmane õppekäik**: Täielik ümberkorraldus AI arendajate ja inseneride prioriteediks seades
+- **Microsoft Foundry integratsiooni juhis**: Kõikehõlmav dokumentatsioon AZD ühendamiseks Microsoft Foundry teenustega
+- **AI mudelite juurutamise mustrid**: Detailne juhend mudeli valikuks, konfiguratsiooniks ja tootmisele suunamiseks
+- **AI töötoa labor**: 2-3-tunnine praktiline töötuba AI rakenduste muutmiseks AZD-le juurutatavaks lahenduseks
+- **Tootmise AI parimad tavad**: Ettevõttevalmiduse mustrid AI töökoormuste skaleerimiseks, jälgimiseks ja turvamiseks
+- **AI-spetsiifiline tõrkeotsingu juhend**: Microsoft Foundry mudelite, kognitiivsete teenuste ja AI juurutamisprobleemide põhjalik tõrkeotsing
+- **AI malligalerii**: Esiletõstetud Microsoft Foundry mallide kogu keerukuse hinnangutega
+- **Töötoa materjalid**: Täielik töötoa struktuur praktiliste laborite ja viitematerjalidega
 
-#### Täiustatud  
-- **README struktuur**: AI-arendajatele suunatud, lisaks 45% kogukonna huvipõhine andmestik Microsoft Foundry Discordist  
-- **Õppeteed**: Pühendatud AI arendaja teekond koos traditsiooniliste õppeteedega üliõpilastele ja DevOps-inseneridele  
-- **Mallisoovitused**: Esiletõstetud AI mallid, sealhulgas azure-search-openai-demo, contoso-chat ja openai-chat-app-quickstart  
-- **Kogukonna integratsioon**: Täiustatud Discord kogukonna toestus AI-spetsiifiliste kanalite ja aruteludega  
+#### Täiustused
+- **README struktuur**: AI arendajatele suunatud koos 45% kogukonna huvi andmetega Microsoft Foundry Discordist
+- **Õppejõud**: Pühendatud AI arendajate teekond koos traditsiooniliste teekondadega tudengitele ja DevOps inseneridele
+- **Mallisoovitused**: Esiletõstetud AI mallid, sealhulgas azure-search-openai-demo, contoso-chat ning openai-chat-app-quickstart
+- **Kogukonna integratsioon**: Täiustatud Discord kogukonna tugi AI-spetsiifiliste kanalite ja aruteludega
 
-#### Turvalisuse ja tootmiskesksus  
-- **Haldatud identiteedi mustrid**: AI-spetsiifilised autentimis- ja turvakonfiguratsioonid  
-- **Kuluoptimeerimine**: Tokenite kasutuse jälgimine ja eelarve kontroll AI töökoormustele  
-- **Mitme regi juurutamine**: Globaalsete AI rakenduste juurutamise strateegiad  
-- **Tulemuste jälgimine**: AI-spetsiifilised mõõdikud ja Application Insights integratsioon  
+#### Turvalisus ja tootmiskohasus
+- **Halduse identiteedi mustrid**: AI-spetsiifilised autentimis- ja turvakonfiguratsioonid
+- **Kulude optimeerimine**: Tokeni kasutuse jälgimine ja eelarvekontrollid AI töökoormustele
+- **Mitmeregiooniline juurutamine**: Globaalsete AI rakenduste juurutamiseks strateegiad
+- **Jõudluse jälgimine**: AI-spetsiifilised metrikad ja Application Insights integratsioon
 
-#### Dokumentatsiooni kvaliteet  
-- **Lineaarne kursuse struktuur**: Loogiline areng algajast edasijõudnutele AI juurutamismustrites  
-- **Kinnitatud URL-id**: Kõik välised hoidlalingid on kontrollitud ja kättesaadavad  
-- **Täpne viide**: Kõik sisemised dokumentatsioonilingid on valideeritud ja toimivad  
-- **Tootmiseks valmis**: Ettevõtte juurutamise mustrid reaalse maailma näidetega  
+#### Dokumentatsiooni kvaliteet
+- **Lineaarne kursuse struktuur**: Loogiline edenemine algajast täiustatud AI juurutamismustriteni
+- **Kinnitatud URL-id**: Kõik välised hoidlate lingid on kontrollitud ja kättesaadavad
+- **Täielik viitamine**: Kõik sisemise dokumentatsiooni lingid on valideeritud ja funktsionaalsed
+- **Tootmiskõlblik**: Ettevõtte juurutamismustrid koos päriseluliste näidetega
 
-### [v2.0.0] - 2025-09-09  
+### [v2.0.0] - 2025-09-09
 
-#### Suured muudatused – hoidla ümberstruktureerimine ja professionaalse täiustamine  
-**See versioon tähistab hoidla struktuuri ja sisu esitluse tõsist uuendust.**  
+#### Suured muudatused - Hoidla ümberkorraldus ja professionaalsem esitlus
+**See versioon tähistab hoidla struktuuri ja sisu esituse olulist ümbertegemist.**
 
-#### Lisatud  
-- **Struktureeritud õppimise raamistik**: Kõik dokumentatsioonilehed sisaldavad nüüd Sissejuhatuse, Õpieesmärkide ja Õpitulemuste sektsioone  
-- **Navigatsioonisüsteem**: Lisatud Eelmise/Järgmise õppetunni lingid kogu dokumentatsioonis juhendatud õppe edenemise jaoks  
-- **Õppematerjalide juhend**: Kõikehõlmav study-guide.md õpieesmärkide, harjutuste ja hinnangumaterjalidega  
-- **Professionaalne esitlus**: Kõik emotikonid eemaldatud parema ligipääsetavuse ja professionaalse välimuse nimel  
-- **Täiustatud sisu struktuur**: Paranenud õppematerjalide organiseerimine ja voog  
+#### Lisatud
+- **Struktureeritud õpiraamistik**: Kõik dokumentatsioonilehed sisaldavad nüüd Sissejuhatuse, Õpieesmärkide ja Õppimise tulemite sektsioone
+- **Navigeerimissüsteem**: Lisatud eelmine/järgmine õppetunni lingid kogu dokumentatsioonis juhitud õppe edendamiseks
+- **Õpiabi**: Kõikehõlmav study-guide.md õpieesmärkide, praktikaülesannete ja hindematerjalidega
+- **Professionaalne esitlus**: Eemaldatud kõik emotikonid parema juurdepääsetavuse ja professionaalse välimuse jaoks
+- **Täiustatud sisustruktuur**: Paranenud õppematerjalide organiseeritus ja voog
 
-#### Muudetud  
-- **Dokumentatsiooni formaat**: Kõik materjalid ühtlustatud järjepidevate õppimissuunaliste struktuuridega  
-- **Navigatsiooni voo parandamine**: Rakendatud loogiline edenemine kõigis õppematerjalides  
-- **Sisuesitlus**: Eemaldatud dekoratiivsed elemendid, asendatud selge ja professionaalse vormistusega  
-- **Linkide struktuur**: Uuendatud kõik sisemised lingid toetamaks uut navigatsioonisüsteemi  
+#### Muudatused
+- **Dokumentatsiooni formaat**: Standardiseeritud kogu dokumentatsioon õpikeskse struktuuriga
+- **Navigeerimise voog**: Rakendatud loogiline edenemine kogu õppematerjalides
+- **Sisu esitlus**: Eemaldatud dekoratiivsed elemendid selgema ja professionaalsema vormindamise kasuks
+- **Lingistruktuur**: Kõik siselinkid uuendatud uue navigeerimissüsteemi toetamiseks
 
-#### Parendatud  
-- **Ligipääsetavus**: Emotikonide eemaldamine paremaks ekraanilugejate ühilduvuseks  
-- **Professionaalne välimus**: Puhtad, akadeemilise stiiliga esitlused ettevõtteõppe jaoks sobivad  
-- **Õpikogemus**: Struktureeritud lähenemine selgete eesmärkide ja tulemustega igas õppetükis  
-- **Sisu organiseerimine**: Paranenud loogiline voog ja seosed seotud teemade vahel  
+#### Parandused
+- **Juurdepääsetavus**: Eemaldatud emotikonide sõltuvused paremaks ekraanilugeja ühilduvuseks
+- **Professionaalne välimus**: Puhas, akadeemiline stiil sobib ettevõtte õppeks
+- **Õppimise kogemus**: Struktureeritud lähenemine selgete eesmärkide ja tulemitega igas õppetunnis
+- **Sisu organiseeritus**: Parema loogilise voolu ja seotud teemade ühendamine
 
-### [v1.0.0] - 2025-09-09  
+### [v1.0.0] - 2025-09-09
 
-#### Esimene väljaanne – kõikehõlmav AZD õpiehoidla  
+#### Algne väljaanne - Kõikehõlmav AZD õppimise hoidla
 
-#### Lisatud  
-- **Põhidokumentatsiooni struktuur**  
-  - Täielik tutvustav juhendite sari  
-  - Kõikehõlmav juurutamise ja provisjonimise dokumentatsioon  
-  - Detailne tõrkeotsingu ja silumisressursside kogu  
-  - Eeljuurutamise valideerimise tööriistad ja protseduurid  
+#### Lisatud
+- **Põhidokumentatsiooni struktuur**
+  - Täielik alustamise juhiste seeria
+  - Kõikehõlmav juurutamise ja provisioningudokumentatsioon
+  - Detailne tõrkeotsinguressursside ja silumisjuhised
+  - Eeljuurutamise valideerimise tööriistad ja protseduurid
 
-- **Alustamismoodul**  
-  - AZD alused: põhimõisted ja terminoloogia  
-  - Paigaldusjuhend: platvormipõhised seadistusjuhised  
-  - Konfiguratsioonijuhend: keskkonna seadistamine ja autentimine  
-  - Esimene projekt: samm-sammult praktiline õppimine  
+- **Alustamise moodul**
+  - AZD põhitõed: põhikontseptsioonid ja terminoloogia
+  - Paigaldusjuhis: platvormipõhised seadistusjuhised
+  - Konfiguratsiooni juhis: keskkonna seadistamine ja autentimine
+  - Esimese projekti juhend: samm-sammult praktiline õppimine
 
-- **Juurutamise ja provisjonimise moodul**  
-  - Juurutamise juhend: täielik töösvoo dokumentatsioon  
-  - Provisjonimise juhend: infrastruktuur kui kood Bicep abil  
-  - Parimad tavad tootmisjuurutusteks  
-  - Mitmest teenusest koosnevad arhitektuuri mustrid  
+- **Juurutamise ja provisioning moodsul**
+  - Juurutamise juhis: täielik töövoo dokumentatsioon
+  - Provisioning juhis: infrastruktuur koodina Bicep abil
+  - Parimad tavad tootmise juurutamiseks
+  - Mitme teenuse arhitektuuri mustrid
 
-- **Eeljuurutamise valideerimise moodul**  
-  - Võimsuse planeerimine: Azure ressursi saadavuse kontroll  
-  - SKU valik: teenuse taseme juhised  
-  - Eelpardal kontrollid: automatiseeritud valideerimisskriptid (PowerShell ja Bash)  
-  - Kulu prognoosimise ja eelarvestamise tööriistad  
+- **Eeljuurutamise valideerimise moodul**
+  - Mahuplaanimine: Azure ressursside kättesaadavuse valideerimine
+  - SKU valik: kõikehõlmav teenuse tasemete juhend
+  - Eelkontrollid: automatiseeritud valideerimisskriptid (PowerShell ja Bash)
+  - Kulude hinnangu ja eelarve planeerimise tööriistad
 
-- **Tõrkeotsingu moodul**  
-  - Levinumad probleemid: sagedased probleemid ja lahendused  
-  - Silumisjuhend: süstemaatilised tõrkeotsingu meetodid  
-  - Täiustatud diagnostikatehnikad ja tööriistad  
-  - Tulemuslikkuse jälgimine ja optimeerimine  
+- **Tõrkeotsingu moodul**
+  - Levinud probleemid: sagedased probleemid ja lahendused
+  - Silumisjuhis: süsteemne tõrkeotsingu metodoloogia
+  - Täiustatud diagnostikatehnikad ja tööriistad
+  - Jõudluse jälgimine ja optimeerimine
 
-- **Ressursid ja viited**  
-  - Käskluste kiirjuhend: kiire ülevaade olulistest käsklustest  
-  - Sõnastik: terminite ja lühendite põhjalik seletus  
-  - KKK: vastused sagedastele küsimustele  
-  - Väliste ressursside lingid ja kogukonnaga ühenduse võimalused  
+- **Ressursid ja viited**
+  - Käsukäigu petuleht: kiire juhend oluliste käskude jaoks
+  - Sõnastik: põhjalik terminite ja lühendite seletus
+  - KKK: detailne vastuste kogu korduma kippuvatele küsimustele
+  - Välised ressursid ja kogukonna ühendused
 
-- **Näited ja mallid**  
-  - Lihtne veebirakenduse näide  
-  - Staatilise veebisaidi juurutamise mall  
-  - Konteinerite rakenduse konfiguratsioon  
-  - Andmebaasi integreerimise mustrid  
-  - Mikroteenuste arhitektuuri näited  
-  - Serverless funktsioonide rakendused  
+- **Näited ja mallid**
+  - Lihtsa veebirakenduse näide
+  - Staatilise veebisaidi juurutamise mall
+  - Konteinerirakenduse konfiguratsioon
+  - Andmebaasi integreerimise mustrid
+  - Mikroteenuste arhitektuuri näited
+  - Serverita funktsioonide teostused
 
-#### Funktsioonid  
-- **Mitmeplatvormiline tugi**: paigaldus- ja konfiguratsioonijuhised Windowsi, macOS-i ja Linuxi jaoks  
-- **Erinevad oskustasemed**: sisu nii üliõpilastele kui ka professionaalsetele arendajatele  
-- **Praktiline fookus**: praktilised näited ja reaalsed olukorrad  
-- **Kõikehõlmav käsitlus**: alustades põhikontseptsioonidest kuni edasijõudnud ettevõttemustriteni  
-- **Turvalisus esikohal**: turvaparimad tavad integreeritud kogu dokumentatsiooni ulatuses  
-- **Kuluoptimeerimine**: juhised kulutõhusate juurutuste ja ressursside haldamiseks  
+#### Omadused
+- **Mitme platvormi tugi**: paigaldus- ja konfiguratsioonijuhised Windowsile, macOS-ile ja Linuxile
+- **Erinevad oskustasemed**: sisu loodud tudengitele kuni professionaalsete arendajateni
+- **Praktiline fookus**: praktilised näited ja päriselulised stsenaariumid
+- **Kõikehõlmav kattuvus**: algtõdedest täiustatud ettevõtte mustriteni
+- **Turvalisus esikohal**: turvalisuse parimad tavad integreeritud igal sammul
+- **Kulude optimeerimine**: juhised kulutõhusa juurutamise ja ressursside haldamise jaoks
 
-#### Dokumentatsiooni kvaliteet  
-- **Detailsemad koodinäited**: praktilised ja testitud koodinäited  
-- **Samm-sammult juhised**: selged ja teostatavad suunised  
-- **Kõikehõlmav veahaldus**: tõrkeotsing sagedastele vigadele  
-- **Parimate tavade integreerimine**: tööstusharu standardite ja soovitustega  
-- **Versioonide ühilduvus**: ajakohane uusimate Azure teenuste ja azd funktsioonidega  
+#### Dokumentatsiooni kvaliteet
+- **Detailne koodinäited**: praktilised, testitud koodinäited
+- **Samm-sammult juhised**: selged, teostatavad juhised
+- **Kõikehõlmav vigade käsitlemine**: korduvate probleemide tõrkeotsing
+- **Parimate tavade integreerimine**: tööstusharu standardid ja soovitused
+- **Versioonide ühilduvus**: ajakohane koos viimaste Azure teenuste ja azd funktsioonidega
 
-## Plaanitud tuleviku täiendused  
+## Plaanitud tulevased täiustused
 
-### Versioon 3.1.0 (plaanis)  
-#### AI platvormi laiendamine  
-- **Mitmemudeline tugi**: integreerimismustrid Hugging Face, Azure Machine Learning ja kohandatud mudelite jaoks  
-- **AI agendi raamistiku mallid**: LangChain, Semantic Kernel ja AutoGen juurutuse mallid  
-- **Täiustatud RAG mustrid**: vektori baaside valikud Azure AI Searchi kõrval (Pinecone, Weaviate jt)  
-- **AI jälgitavus**: täiustatud mudeli jõudluse, tokenite kasutuse ja vastuse kvaliteedi jälgimine  
+### Versioon 3.1.0 (plaanitud)
+#### AI platvormi laienemine
+- **Mitmemudeline tugi**: integratsioonimustrid Hugging Face, Azure Machine Learning ja kohandatud mudelite jaoks
+- **AI agentide raamistikud**: mallid LangChain, Semantic Kernel ja AutoGen juurutusteks
+- **Täiustatud RAG mustrid**: vektorandmebaasivalikud Azure AI Searchi kõrval (Pinecone, Weaviate jne)
+- **AI jälgitavus**: täiustatud jälgimine mudeli jõudluse, tokeni kasutuse ja vastuste kvaliteedi kohta
 
-#### Arendajakogemus  
-- **VS Code laiendus**: integreeritud AZD + Microsoft Foundry arenduskogemus  
-- **GitHub Copiloti integratsioon**: AI abil AZD mallide genereerimine  
-- **Interaktiivsed juhendid**: praktilised kodeerimisülesanded automaatse valideerimisega AI stsenaariumite jaoks  
-- **Video sisu**: täiendavad videotutorialid visuaalsete õppijate jaoks, mis keskenduvad AI juurutustele  
+#### Arendajakogemus
+- **VS Code laiendus**: integreeritud AZD + Microsoft Foundry arenduskogemus
+- **GitHub Copilot integratsioon**: AI abil abistatud AZD mallide genereerimine
+- **Interaktiivsed õpetused**: praktilised kodeerimisharjutused ja AI stsenaariumide automatiseeritud valideerimine
+- **Video sisu**: täiendavad videoõpetused visuaalsetele õppijatele, keskendudes AI juurutustele
 
-### Versioon 4.0.0 (plaanis)  
-#### Ettevõtte AI mustrid  
-- **Haldusraamistik**: AI mudelite valitsemine, vastavus ja auditi jäljed  
-- **Mitme üürniku AI**: mustrid mitme kliendi teenindamiseks isoleeritud AI teenustega  
-- **Serva-AI juurutamine**: integratsioon Azure IoT Edge ja konteinerite instantsidega  
-- **Hübriidpilv AI**: mitmepilve- ja hübriidjuurutamise mustrid AI töökoormustele  
+### Versioon 4.0.0 (plaanitud)
+#### Ettevõtte AI mustrid
+- **Haldusraamistik**: AI mudelite haldus, vastavus ja auditeerimisteed
+- **Mitme üürniku AI**: mustrid mitme kliendi teenindamiseks isoleeritud AI teenustega
+- **Edge AI juurutamine**: integratsioon Azure IoT Edge ja konteinerite eksemplaridega
+- **Hübriidpilve AI**: mitmepilve ja hübriidjuurutuse mustrid AI töökoormustele
 
-#### Täiustatud funktsioonid  
-- **AI torujuhtme automatiseerimine**: MLOps integratsioon Azure Machine Learning torujuhtmete kaudu  
-- **Täiustatud turvalisus**: nullusaldusmustrid, privaatpunktid ja täiustatud ohukaitse  
-- **Jõudluse optimeerimine**: täiustatud häälestamise ja skaleerimise strateegiad kõrge läbilaskevõimega AI rakenduste jaoks  
-- **Globaalse levituse mustrid**: sisujagamine ja serva vahemälu mustrid AI rakendustele  
+#### Täiustatud funktsioonid
+- **AI torujuhtme automatiseerimine**: MLOps integratsioon Azure Machine Learning torujuhtmetega
+- **Täiustatud turvalisus**: nullusaldus mustrid, privaatvõrgu lõpp-punktid ja täiustatud ohutõrje
+- **Jõudluse optimeerimine**: täiustatud häälestus- ja skaleerimisstrateegiad suurte voogude AI rakendustele
+- **Globaalne levitamine**: sisu edastamine ja äärise mälu mustrid AI rakendustele
 
-### Versioon 3.0.0 (plaanis) – asendatud käesoleva väljaandega  
-#### Pakutud lisad – nüüd rakendatud versioonis 3.0.0  
-- ✅ **AI-keskne sisu**: Microsoft Foundry täielik integratsioon (tehtud)  
-- ✅ **Interaktiivsed juhendid**: praktiline AI töötuba labor (tehtud)  
-- ✅ **Täiustatud turvafunktsioonid**: AI-spetsiifilised turvapatte (tehtud)  
-- ✅ **Jõudluse optimeerimine**: AI töökoormuste häälestuse strateegiad (tehtud)  
+### Versioon 3.0.0 (plaanitud) - asendatud praeguse versiooniga
+#### Pakutavad lisandused - nüüd rakendatud versioonis 3.0.0
+- ✅ **AI-keskne sisu**: põhjalik Microsoft Foundry integratsioon (Valmis)
+- ✅ **Interaktiivsed õpetused**: praktiline AI töötoa labor (Valmis)
+- ✅ **Täiustatud turvamoodul**: AI-spetsiifilised turbemustrid (Valmis)
+- ✅ **Jõudluse optimeerimine**: AI töökoormuste häälestusstrateegiad (Valmis)
 
-### Versioon 2.1.0 (plaanis) – osaliselt rakendatud versioonis 3.0.0  
-#### Väikesed täiustused – mõningad tehtud käesolevas versioonis  
-- ✅ **Lisatud näited**: AI-kesksete juurutusstsenaariumite näited (tehtud)  
-- ✅ **Pikendatud KKK**: AI-spetsiifilised küsimused ja tõrkeotsingu juhendid (tehtud)  
-- **Tööriistade integratsioon**: täiustatud IDE ja redaktori integratsioonijuhendid  
-- ✅ **Jälgimise laiendus**: AI-spetsiifilised jälgimise ja häiresüsteemide mustrid (tehtud)  
+### Versioon 2.1.0 (plaanitud) - osaliselt rakendatud versioonis 3.0.0
+#### Vigade parandused - osa lõpetatud praeguses versioonis
+- ✅ **Täiendavad näited**: AI-kesksete juurutamistsenaariumite lisamine (Valmis)
+- ✅ **Laiendatud KKK**: AI-spetsiifilised küsimused ja tõrkeotsing (Valmis)
+- **Tööriistade integratsioon**: täiustatud IDE ja toimetaja integratsioonijuhised
+- ✅ **Jälgimise laienemine**: AI-spetsiifilised jälgimis- ja hoiatusmustrid (Valmis)
 
-#### Endiselt kavandatud tulevaks versiooniks  
-- **Mobiilisõbralik dokumentatsioon**: mobiilseadmete jaoks reageeriv disain  
-- **Võimalus kasutada võrguühenduseta**: allalaaditavad dokumentatsioonipaketid  
-- **Täiustatud IDE integratsioon**: VS Code laiendus AZD + AI töövoogude jaoks  
-- **Kogukonna armatuurlaud**: reaalajas kogukonna mõõdikud ja panuste jälgimine  
+#### Jätkuvalt planeeritud tulevikuväljaandeks
+- **Mobiilisõbralik dokumentatsioon**: vastupidav disain mobiilse õppe jaoks
+- **Võrguühenduseta juurdepääs**: allalaaditavad dokumentatsioonipaketid
+- **Täiustatud IDE integratsioon**: VS Code laiendus AZD + AI töövoogude jaoks
+- **Kogukonna juhtpaneel**: reaalajas kogukonna mõõdikud ja panuste jälgimine
 
-## Panustamine muudatusteloendisse  
+## Panustamine muudatuste logisse
 
-### Muudatuste teavitamine  
-Kui panustate sellesse hoidla, palun tagage, et muudatuste registris oleksid:  
+### Muudatuste raporteerimine
+Kui panustate sellesse hoidla, palun veenduge, et muudatuste logi kirjed sisaldaksid:
 
-1. **Versiooninumber**: järgides semantilist versioonihaldust (major.minor.patch)  
-2. **Kuupäev**: väljaandmise või uuendamise kuupäev formaadis YYYY-MM-DD  
-3. **Kategooria**: Lisatud, Muudetud, Maha võetud, Eemaldatud, Parandatud, Turvalisus  
-4. **Selge kirjeldus**: kokkuvõtlik kirjeldus muudatustest  
-5. **Mõju hinnang**: kuidas muudatused mõjutavad olemasolevaid kasutajaid  
+1. **Versiooninumber**: semantilise versioonihalduse järgi (major.minor.patch)
+2. **Kuupäev**: väljaande või uuendamise kuupäev formaadis YYYY-MM-DD
+3. **Kategooria**: Lisatud, Muudetud, Tööst välja jäetud, Eemaldatud, Parandatud, Turvalisus
+4. **Selge kirjeldus**: lühike muudatuste kokkuvõte
+5. **Mõju hindamine**: kuidas muudatused mõjutavad olemasolevaid kasutajaid
 
-### Muudatuste kategooriad  
+### Muudatuste kategooriad
 
-#### Lisatud  
-- Uued funktsioonid, dokumentatsiooni sektsioonid või võimalused  
-- Uued näited, mallid või õppematerjalid  
-- Lisatööriistad, käsud või utiliidid  
+#### Lisatud
+- Uued funktsioonid, dokumentatsiooniosad või võimekused
+- Uued näited, mallid või õpiressursid
+- Täiendavad tööriistad, skriptid või utiliidid
 
-#### Muudetud  
-- Muudatused olemasoleva funktsionaalsuse või dokumentatsiooni juures  
-- Parandused selguse või täpsuse tõstmiseks  
-- Sisu või organisatsiooni ümberkorraldamine  
+#### Muudetud
+- Olemasoleva funktsionaalsuse või dokumentatsiooni muudatused
+- Uuendused selguse või täpsuse parandamiseks
+- Sisu või organisatsiooni ümberkorraldamine
 
-#### Maha võetud  
-- Funktsioonid või lähenemised, mida enam ei toeta  
-- Dokumentatsiooni sektsioonid, mis on planeeritud eemaldamiseks  
-- Meetodid, millele on olemas paremad alternatiivid  
+#### Tööst välja jäetud
+- Omadused või lähenemised, mida hakatakse järk-järgult eemaldama
+- Dokumentatsiooni sektsioonid, mis on kavas eemaldada
+- Meetodid, millel on paremad alternatiivid
 
-#### Eemaldatud  
-- Välja jäetud funktsioonid, dokumentatsioon või näited, mis ei ole enam asjakohased  
-- Vananenud info või eemaldatud lähenemised  
-- Topeltsisaldunud või ühendatud sisu  
+#### Eemaldatud
+- Omadused, dokumentatsioon või näited, mis ei ole enam asjakohased
+- Aegunud info või tööst välja jäänud lähenemised
+- Üleküllased või koondatud sisud
 
-#### Parandatud  
-- Parandused dokumentatsiooni või koodi vigadele  
-- Lahendatud teatatud probleemid  
-- Täpsuse või funktsionaalsuse parandused  
+#### Parandatud
+- Vead dokumentatsioonis või koodis parandatud
+- Raporteeritud probleemide lahendused
+- Täpsuse või funktsionaalsuse paranemised
 
-#### Turvalisus  
-- Turvaparandused või täiustused  
-- Turvalisuse parimate tavade uuendused  
-- Turvahaavatavuste lahendused  
 
-### Semantilise versioonihalduse juhised  
+#### Turvalisus
+- Turvalisusega seotud parandused või täiendused
+- Turvalisuse parimate tavade uuendused
+- Turvaaukude lahendamine
 
-#### Suurversioon (X.0.0)  
-- Tagurpidiühilduvust rikkuvad muudatused, mis nõuavad kasutaja tegevust  
-- Tõsine sisu või organisatsiooni ümberkorraldus  
-- Põhimõttelist lähenemist või metoodikat muutevad muudatused  
+### Semeantilise versioonihaldamise juhised
 
-#### Väikeversioon (X.Y.0)  
-- Uued funktsioonid või sisulised täiendused  
-- Täiustused, mis säilitavad tagurpidiühilduvuse  
-- Lisatud näited, tööriistad või ressursid  
+#### Suur versioon (X.0.0)
+- Põhimõttelised muudatused, mis nõuavad kasutaja sekkumist
+- Sisukokkuvõtte või struktuuri olulised ümberkorraldused
+- Muudatused, mis muudavad põhilist lähenemist või metodoloogiat
 
-#### Plaasterversioon (X.Y.Z)  
-- Veaparandused ja korrektuurid  
-- Väikesed parendused olemasolevale sisule  
-- Täpsustused ja väikesed täiustused  
+#### Väike versioon (X.Y.0)
+- Uued funktsioonid või sisulised täiendused
+- Täiendused, mis säilitavad tagurpidi ühilduvuse
+- Täiendavad näited, tööriistad või ressursid
 
-## Kogukonna tagasiside ja ettepanekud  
+#### Parandusversioon (X.Y.Z)
+- Veaparandused ja korrigeerimised
+- Väikesed täiustused olemasolevale sisule
+- Selgitused ja väiksed täiustused
 
-Julgesti julgustame kogukonna tagasisidet selle õpiressursi parandamiseks:  
+## Kogukonna tagasiside ja ettepanekud
 
-### Kuidas tagasisidet anda  
-- **GitHubi issue’id**: teatage probleemidest või tehke ettepanekuid parandusteks (AI-spetsiifilised probleemid on teretulnud)  
-- **Discordi arutelud**: jagage ideid ja osalege Microsoft Foundry kogukonna vestlustes  
-- **Pull request’id**: panustage otse sisusse, eriti AI mallide ja juhendite täiustamiseks  
-- **Microsoft Foundry Discord**: osalege #Azure kanalil AZD + AI teemadel  
-- **Kogukonna foorumid**: osalege laiemates Azure arendajate aruteludes  
+Julgustame aktiivselt kogukonna tagasisidet, et seda õppevara täiustada:
 
-### Tagasiside kategooriad  
-- **AI sisu täpsus**: parandused AI teenuste integratsiooni ja juurutamise infole  
-- **Õppimiskogemus**: ettepanekud õppija voolu parandamiseks AI arendajatele  
-- **Puuduv AI sisu**: soovid täiendavate AI mallide, mustrite või näidete jaoks  
-- **Ligipääsetavus**: parandused mitmekesiste õppimisvajaduste jaoks  
-- **AI tööriistade integratsioon**: ettepanekud AI arendusvoogude paremaks ühendamiseks  
-- **Tootmis-AI mustrid**: ettevõtte AI juurutamise mustrite taotlused  
+### Kuidas tagasisidet esitada
+- **GitHub Issues**: Teata probleemidest või tee ettepanekuid (AI-spetsiifilised küsimused on teretulnud)
+- **Discordi arutelud**: Jaga ideid ja suhtle Microsoft Foundry kogukonnaga
+- **Pull Requestid**: Panusta otse sisuliste täiustustega, eriti AI mallid ja juhendid
+- **Microsoft Foundry Discord**: Osale #Azure kanalil AZD + AI aruteludes
+- **Kogukonna foorumid**: Osale laiemates Azure arendajate aruteludes
 
-### Vastamiskohustus  
-- **Probleemide kättesaamine**: 48 tunni jooksul pärast teavitust  
-- **Funktsioonisoovid**: hinnang ühe nädala jooksul  
-- **Kogukonna panused**: ülevaatus ühe nädala jooksul  
-- **Turbeprobleemid**: esmatähtsad, kiire reageerimine  
+### Tagasiside kategooriad
+- **AI sisu täpsus**: Parandused AI teenuste integratsiooni ja juurutamise infole
+- **Õppimiskogemus**: Soovitused AI arendajate õppimise voogude parandamiseks
+- **Puuduv AI sisu**: Taotlused täiendavate AI mallide, mustrite või näidete järele
+- **Ligipääsetavus**: Täiendused mitmekesiste õppimisvajaduste jaoks
+- **AI tööriistade integratsioon**: Soovitused parema AI arendustöövoo integreerimiseks
+- **Tootmises kasutatavad AI mustrid**: Ettevõtte AI juurutuse mustrite soovitused
 
-## Hooldusplaan  
+### Vastuse kohustus
+- **Küsimustele vastamine**: Raporteeritud probleemidele 48 tunni jooksul
+- **Funktsioonisoovid**: Hinnang ühe nädala jooksul
+- **Kogukonna panused**: Ülevaatus ühe nädala jooksul
+- **Turvaprobleemid**: Esmane prioriteet ja kiirendatud reageerimine
 
-### Regulaarne uuendamine  
-- **Kuuülevaated**: sisu täpsuse ja linkide valideerimine  
-- **Kvartaliuuendused**: suuremad sisulised lisandused ja parendused  
-- **Poolaasta ülevaated**: põhjalik ümberkorraldus ja täiustused  
-- **Aastased väljaanded**: suuremad versiooniuuendused oluliste täiustustega  
+## Hooldusplaan
 
-### Jälgimine ja kvaliteedi tagamine  
-- **Automatiseeritud testimine**: regulaarne koodinäidete ja linkide valideerimine  
-- **Kogukonna tagasiside integreerimine**: kasutajate ettepanekute regulaarne kaasamine  
-- **Tehnoloogia uuendused**: kooskõlas uusimate Azure teenuste ja azd väljaannetega  
-- **Ligipääsetavuse auditid**: regulaarne läbivaatus kaasava disaini põhimõtete osas  
+### Regulaarse uuendused
+- **Igakuised ülevaated**: Sisu täpsuse ja linkide kontroll
+- **Kvartaliuuendused**: Suured sisulised täiendused ja parandused
+- **Poolaastased ülevaated**: Põhjalik ümberkorraldus ja täiendamine
+- **Aastased versiooniväljaanded**: Suured versiooniuuendused oluliste täiustustega
 
-## Versioonitoe poliitika  
+### Jälgimine ja kvaliteedi tagamine
+- **Automaattestimine**: Regulaarne koodinäidete ja linkide valideerimine
+- **Kogukonna tagasiside integreerimine**: Kasutajate ettepanekute regulaarne kaasamine
+- **Tehnoloogiauudised**: Vastavus uusimatele Azure teenustele ja azd väljaannetele
+- **Ligipääsetavuse auditid**: Regulaarne ülevaade kaasava disaini printsiipide järgimiseks
 
-### Kehtiv versioonitugi  
-- **Viimane suurversioon**: täistugi koos regulaarsete uuendustega  
-- **Eelnev suurversioon**: turvaparandused ja kriitilised parandused 12 kuu jooksul  
-- **Varasemad versioonid**: ainult kogukonna tugi, ametlikke uuendusi ei ole  
+## Versioonitoe poliitika
 
-### Migratsioonijuhendid  
-Kui suuremad versioonid ilmuvad, pakume:  
-- **Migratsioonijuhendid**: samm-sammult juhised üleminekuks  
-- **Ühilduvuse märkused**: info tagurpidiühilduvust rikkuvate muudatuste kohta  
-- **Tööriistatugi**: skriptid ja utiliidid migratsiooni hõlbustamiseks  
-- **Kogukonna tugi**: pühendatud foorumid migratsiooni küsimuste jaoks  
+### Praeguse versiooni tugi
+- **Viimane suur versioon**: Täielik tugi koos regulaarsete uuendustega
+- **Eelnev suur versioon**: Turvauuendused ja kriitilised parandused 12 kuu jooksul
+- **Varasemad versioonid**: Ainult kogukonna tugi, ametlikke uuendusi ei ole
+
+### Migratsiooni juhised
+Kui väljastatakse suured versioonid, pakume:
+- **Migratsioonijuhendid**: Samm-sammulised ülemineku instruktsioonid
+- **Ühilduvuse märkused**: Üksikasjad katkestavate muudatuste kohta
+- **Tööriistade tugi**: Skriptid või utiliidid migratsiooni abistamiseks
+- **Kogukonna tugi**: Pühendatud foorumid migratsiooniküsimustele
 
 ---
 
-**Navigatsioon**  
-- **Eelmine õppetund**: [Study Guide](resources/study-guide.md)  
-- **Järgmine õppetund**: Tagasi [Main README](README.md)  
+**Navigeerimine**
+- **Eelmine õppetund**: [Study Guide](resources/study-guide.md)
+- **Järgmine õppetund**: Tagasi [Põhijuhendisse](README.md)
 
-**Hoia end kursis**: Jälgi seda hoidlat teavitamaks uutest väljaannetest ja olulistest õppematerjalide uuendustest.
+**Ole kursis**: Telli selle hoidla muudatusi, et saada teavitusi uute väljaannete ja oluliste õppematerjalide uuenduste kohta.
 
 ---
 

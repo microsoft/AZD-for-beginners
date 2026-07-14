@@ -1,30 +1,30 @@
 # Azure Developer CLI உடன் AI மாதிரி வெளியீடு
 
 **அத்தியாய வழிசெலுத்தல்:**
-- **📚 பாடநெறி முகப்பு**: [AZD For Beginners](../../README.md)
-- **📖 தற்போதைய அத்தியாயம்**: அத்தியாயம் 2 - AI-முதன்மை மேம்பாடு
+- **📚 பாடநூல் முதன்மை**: [AZD For Beginners](../../README.md)
+- **📖 தற்போதைய அத்தியாயம்**: அத்தியாயம் 2 - AI முதன்மை மேம்பாடு
 - **⬅️ முந்தையது**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ அடுத்தது**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 அடுத்த அத்தியாயம்**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+- **🚀 அடுத்த அத்தியாயம்**: [அத்தியாயம் 3: கட்டமைப்பு](../chapter-03-configuration/configuration.md)
 
-இந்த கையேடு AZD வார்ப்புருக்களைப் பயன்படுத்தி AI மாதிரிகளை வெளியிடுவதற்கான முழுமையான வழிமுறைகளை வழங்குகிறது, மாதிரி தேர்வு முதல் தயாரிப்பு டெப்ளாய்மென்ட் பாணிகளுக்கு வரை உள்ள அனைத்தையும் உள்ளடக்கியது.
+இந்த வழிகாட்டி AZD வடிவமைப்புகளைப் பயன்படுத்தி AI மாதிரிகளை வெளியீடு செய்வதற்கான முழுமையான வழிமுறைகளை வழங்குகிறது, மாதிரி தேர்வு முதல் செயலாக்க வெளியீடு படிமுறைகள் வரை அனைத்தையும் உள்ளடக்கியது.
 
-> **சோதனை குறிப்பு (2026-03-25):** இந்த வழிகாட்டியிலுள்ள AZD பணிச்சுற்று `azd` `1.23.12` உடன் சரிபார்க்கப்பட்டது. இயல்புநிலை சர்வீஸ் டெப்ளாய்மெண்ட் விண்டோ விட நீண்ட நேரம் எடுத்துக்கொள்ளும் AI டெப்ளாய்மெண்டுகளுக்கான, தற்போதைய AZD வெளியீடுகள் `azd deploy --timeout <seconds>` ஐ ஆதரிக்கின்றன.
+> **சரிபார்ப்புச் குறிப்பு (2026-07-13):** இந்த வழிகாட்டியில் உள்ள AZD பணி ஓட்டம் `azd` `1.27.1` ன் எதிரொட்டியில் பரிசோதிக்கப்பட்டது. இயல்புநிலை சேவை வெளியீட்டு நேரத்துக்கு மேலாக AI வெளியீடுகளுக்கு, தற்போதைய AZD வெளியீடுகள் `azd deploy --timeout <seconds>` ஐ ஆதரிக்கின்றன.
 
-## உள்ளடக்கப் பட்டியல்
+## உள்ளடக்க அட்டவணை
 
-- [மாதிரி தேர்வு கொள்](#மாதிரி-தேர்வு-கொள்)
+- [மாதிரி தேர்வு முறை](#மாதிரி-தேர்வு-முறை)
 - [AI மாதிரிகளுக்கான AZD கட்டமைப்பு](#ai-மாதிரிகளுக்கான-azd-கட்டமைப்பு)
-- [டெப்ளாய்மெண்ட் மாதிரிகள்](#டெப்ளாய்மெண்ட்-மாதிரிகள்)
+- [வெளியீடு படிமுறைகள்](#வெளியீடு-படிமுறைகள்)
 - [மாதிரி மேலாண்மை](#மாதிரி-மேலாண்மை)
-- [தயாரிப்பு கவனிக்கத் திரும்புதல்](#தயாரிப்பு-கவனிக்க-வேண்டியவை)
-- [கண்காணிப்பு மற்றும் பார்வைத்திறன்](#கண்காணிப்பு-மற்றும்-பார்வைத்திறன்)
+- [தயாரிப்பு பரிசீலனைகள்](#தயாரிப்பு-பரிசீலனைகள்)
+- [கண்காணிப்பு மற்றும் பார்வையிடல்](#கண்காணிப்பு-மற்றும்-பார்வையிடல்)
 
-## மாதிரி தேர்வு கொள்
+## மாதிரி தேர்வு முறை
 
 ### Microsoft Foundry மாதிரிகள்
 
-உங்கள் பயன்பாட்டுக்கு சரியான மாதிரியை தேர்ந்தெடுக்கவும்:
+உங்கள் பயன்பாட்டு தேவைக்கேற்ற மாதிரியை தேர்ந்தெடுங்கள்:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -54,18 +54,18 @@ services:
 
 ### மாதிரி திறன் திட்டமிடல்
 
-| Model Type | Use Case | Recommended Capacity | Cost Considerations |
+| மாதிரி வகை | பயன்பாடு | பரிந்துரைக்கப்பட்ட திறன் | செலவு பரிசீலனைகள் |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | உரையாடல், கேள்வி & பதில் | 10-50 TPM | பெரும்பாலான வேலைபாடுகளுக்கு செலவினத்தில் திறமையானது |
-| gpt-4.1 | சிக்கலான அறிவிறுக்கல் | 20-100 TPM | அதிக செலவு, முன்னணி அம்சங்களுக்கு பயன்படுத்தவும் |
-| text-embedding-3-large | தேடு, RAG | 30-120 TPM | செமாண்டிக் தேடல் மற்றும் பிடிப்புக்கு பலவீனமிக்க இயல்புநிலை தேர்வு |
-| Whisper | பேச்சு-க்கு-உரை | 10-50 TPM | ஒலி செயலாக்க வேலைப்பாடுகளுக்கு பொருத்தமானது |
+| gpt-4.1-mini | உரையாடல், கேள்வி & பதில் | 10-50 TPM | பெரும்பாலான பணிகளுக்கு செலவு-திறமையானது |
+| gpt-4.1 | சிக்கலான தீர்மானம் | 20-100 TPM | அதிக செலவு, பிரீமியம் அம்சங்களுக்கு பயன்படுத்தவும் |
+| text-embedding-3-large | தேடல், RAG | 30-120 TPM | கருத்துரைக்கும் தேடல் மற்றும் மீட்டெடுதலுக்கு வலுவான இயல்பு |
+| Whisper | பேச்சு-உரை மாற்றம் | 10-50 TPM | ஆடியோ செயலாக்க பணிகள் |
 
 ## AI மாதிரிகளுக்கான AZD கட்டமைப்பு
 
-### Bicep வார்ப்புரை கட்டமைப்பு
+### Bicep டெம்ப்ளேட் கட்டமைப்பு
 
-Bicep வார்ப்புறைகள் மூலம் மாதிரி டெப்ளாய்மென்ட்கள் உருவாக்கவும்:
+Bicep டெம்ப்ளேட்டுகளை பயன்படுத்தி மாதிரி வெளியீடுகளை உருவாக்குங்கள்:
 
 ```bicep
 // infra/main.bicep
@@ -124,9 +124,9 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
-### சூழல் மாறில்கள்
+### சுற்றுச்சூழல் மாறிகள்
 
-உங்கள் பயன்பாட்டு சூழலை கட்டமைக்கவும்:
+உங்கள் பயன்பாட்டின் சுற்றுச்சூழலை கட்டமைக்க:
 
 ```bash
 # .env கட்டமைப்பு
@@ -136,9 +136,9 @@ AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## டெப்ளாய்மெண்ட் மாதிரிகள்
+## வெளியீடு படிமுறைகள்
 
-### வடிவம் 1: ஒரே மண்டல டெப்ளாய்மெண்ட்
+### படிமுறை 1: தனி-பிராந்திய வெளியீடு
 
 ```yaml
 # azure.yaml - Single region
@@ -151,12 +151,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-சிறந்தது:
-- மேம்பாடு மற்றும் சோதனை
-- ஒரே சந்தை பயன்பாடுகள்
-- செலவு பொருத்தப்படுத்துதல்
+சிறந்தவை:
+- மேம்பாடு மற்றும் சோதனை
+- தனி சந்தை பயன்பாடுகள்
+- செலவு முன்னேற்றம்
 
-### வடிவம் 2: பன்மண்டல டெப்ளாய்மெண்ட்
+### படிமுறை 2: பன்முக பிராந்திய வெளியீடு
 
 ```bicep
 // Multi-region deployment
@@ -169,14 +169,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-சிறந்தது:
+சிறந்தவை:
 - உலகளாவிய பயன்பாடுகள்
-- உயர் கிடைக்கும் தன்மை தேவைகள்
+- உயர் கிடைக்கும் நிலை தேவைகள்
 - பாரம் பகிர்வு
 
-### வடிவம் 3: இணைமையாக்கப்பட்ட டெப்ளாய்மெண்ட்
+### படிமுறை 3: கலவையான வெளியீடு
 
-Microsoft Foundry மாதிரிகளை மற்ற AI சேவைகளுடன் ஒருங்கிணைக்கவும்:
+Microsoft Foundry மாதிரிகளை மற்ற AI சேவைகளுடன் இணைக்கவும்:
 
 ```bicep
 // Hybrid AI services
@@ -209,7 +209,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### பதிப்பு கட்டுப்பாடு
 
-உங்கள் AZD கட்டமைப்பில் மாதிரி பதிப்புகளை தடம்(trace) பதியுங்கள்:
+உங்கள் AZD கட்டமைப்பில் மாதிரி பதிப்புகளை கண்காணிக்கவும்:
 
 ```json
 {
@@ -229,7 +229,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### மாதிரி புதுப்பிப்புகள்
 
-மாதிரி புதுப்பிப்புகளுக்கு AZD ஹூக்களை பயன்படுத்தவும்:
+மாதிரி புதுப்பிப்புகளுக்காக AZD ஹுக்குகளை பயன்படுத்தவும்:
 
 ```bash
 #!/bin/bash
@@ -241,13 +241,13 @@ az cognitiveservices account list-models \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
 
-# நிறுவல் இயல்புநேர காலக்கெடுவை விட அதிக நேரம் எடுத்தால்
+# பொருத்தத்தின் ஆற்றல் இயல்புநிலை நேரத்துக்கும் அதிகமாக எடுத்துக்கொண்டால்
 azd deploy --timeout 1800
 ```
 
 ### A/B சோதனை
 
-பல்வேறு மாதிரி பதிப்புகளை டெப்ளாய் செய்க:
+பல மாதிரி பதிப்புகளை வெளியிடவும்:
 
 ```bicep
 param enableABTesting bool = false
@@ -269,11 +269,11 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## தயாரிப்பு கவனிக்க வேண்டியவை
+## தயாரிப்பு பரிசீலனைகள்
 
 ### திறன் திட்டமிடல்
 
-பயன்பாட்டு நடைமுறைகளின் அடிப்படையில் தேவையான திறனை கணக்கிடுக:
+பயன்பாட்டு மாதிரிகள் அடிப்படையில் தேவையான திறனைக் கணக்கிடுக:
 
 ```python
 # திறன் கணக்கீட்டு உதாரணம்
@@ -288,7 +288,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# பயன்பாட்டு உதாரணம்
+# உதாரணப் பயன்படுத்தல்
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -298,9 +298,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### ஆட்டோ-ஸ்கேலிங் கட்டமைப்பு
+### தானாக விரிவாக்கம் கட்டமைப்பு
 
-Container Apps க்கான ஆட்டோ-ஸ்க்கேலிங் கட்டமைப்பை அமைக்கவும்:
+கூண்டான செயலிகள் (Container Apps) க்கான தானாக விரிவாக்கத்தை அமைக்கவும்:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -336,9 +336,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### செலவு ஒழுங்குபடுத்தல்
+### செலவு முன்னேற்றம்
 
-செலவுக் கட்டுப்பாடுகளை நடைமுறைப்படுத்தவும்:
+செலவு கட்டுப்பாடுகளை அமல்படுத்தவும்:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -368,11 +368,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## கண்காணிப்பு மற்றும் பார்வைத்திறன்
+## கண்காணிப்பு மற்றும் பார்வையிடல்
 
-### Application Insights ஒருங்கிணைப்பு
+### பயன்பாட்டு அறிவு ஒருங்கிணைப்பு
 
-AI வேலைப்பாடுகளுக்கான கண்காணிப்பை அமைக்கவும்:
+AI பணிகளுக்கான கண்காணிப்பை அமைக்கவும்:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -410,10 +410,10 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### தனிப்பயன் அளவுருக்கள்
 
-AI-சார்ந்த குறிப்பிட்ட அளவுருக்களை கண்காணிக்கவும்:
+AI-கேளிக்கை அளவுருக்களை கண்காணிக்கவும்:
 
 ```python
-# செயற்கை நுண்ணறிவு (AI) மாதிரிகளுக்கான தனிப்பயன் டெலிமெட்ரி
+# செயற்கை நுண்ணறிவு மாதிரிகளுக்கான தனிப்பயன் தொலைநோக்கு
 import logging
 from applicationinsights import TelemetryClient
 
@@ -445,12 +445,12 @@ class AITelemetry:
         )
 ```
 
-### சேவை செயல்திறன் சோதனைகள்
+### ஆரோக்கிய சரிபார்ப்புகள்
 
-AI சேவையின் ஆரோக்கியக் கண்காணிப்புகளை செயல்படுத்தவும்:
+AI சேவை ஆரோக்கிய கண்காணிப்பை செயல்படுத்தவும்:
 
 ```python
-# நலச் சோதனை எண்ட்பாயிண்டுகள்
+# உடல் நலம் பரிசோதனை முடிக்கைகள்
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -460,7 +460,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # OpenAI இணைப்பை சோதிக்கவும்
+        # OpenAI இணைப்பை சோதனை செய்யுங்கள்
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -478,30 +478,30 @@ async def check_ai_models():
 
 ## அடுத்த படிகள்
 
-1. **சேவை ஒருங்கிணைப்பு மாதிரிகளுக்காக [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md) ஐ மதிப்பாய்வு செய்யவும்**
-2. **கையால் செய்யும் அனுபவத்துக்காக [AI Workshop Lab](ai-workshop-lab.md) ஐ முடிக்கவும்**
-3. **என்டர்ப்ரைஸ் டெப்ளாய்மென்ட்களுக்கு [Production AI Practices](production-ai-practices.md) ஐ செயல்படுத்தவும்**
-4. **பொதுவான பிரச்சனைகளுக்காக [AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md) ஐ ஆராயவும்**
+1. **சேவை ஒருங்கிணைப்பு படிமுறைகளுக்காக [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** ஐ ஆய்வு செய்யவும்
+2. **நடவடிக்கை அனுபவத்திற்கு [AI Workshop Lab](ai-workshop-lab.md)** ஐ முடிக்கவும்
+3. **தொழில் வெளியீடுகளுக்கான [Production AI Practices](production-ai-practices.md)** ஐ செயல்படுத்தவும்
+4. **வழமையான பிரச்சினைகளுக்கான [AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** ஐ ஆராயவும்
 
 ## வளங்கள்
 
-- [Microsoft Foundry மாதிரி கிடைப்புத்தன்மை](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Azure Developer CLI ஆவணங்கள்](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Container Apps அளவிடல்](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [AI மாதிரி செலவு சரிசெய்தல்](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Microsoft Foundry Models மாதிரி கிடைக்கும் நிலை](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Azure Developer CLI ஆவணம்](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Container Apps தானாக விரிவாக்கம்](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [AI மாதிரி செலவு முன்மை](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
 **அத்தியாய வழிசெலுத்தல்:**
-- **📚 பாடநெறி முகப்பு**: [AZD For Beginners](../../README.md)
-- **📖 தற்போதைய அத்தியாயம்**: அத்தியாயம் 2 - AI-முதன்மை மேம்பாடு
+- **📚 பாடநூல் முதன்மை**: [AZD For Beginners](../../README.md)
+- **📖 தற்போதைய அத்தியாயம்**: அத்தியாயம் 2 - AI முதன்மை மேம்பாடு
 - **⬅️ முந்தையது**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ அடுத்தது**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 அடுத்த அத்தியாயம்**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+- **🚀 அடுத்த அத்தியாயம்**: [அத்தியாயம் 3: கட்டமைப்பு](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-இந்த ஆவணம் செயற்கை நுண்ணறிவு மொழிபெயர்ப்பு சேவையாகும் [Co-op Translator](https://github.com/Azure/co-op-translator) மூலம் மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியத்திற்காக முயற்சித்தாலும், தன்னியக்க மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறான தகவல்கள் இருக்கலாம் என்பதை கவனத்தில் கொள்ளவும். மூல ஆவணம் அதன் அசல் (native) மொழியிலேயே அதிகாரபூர்வ ஆதாரமாக கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு, தொழில்முறை மனித மொழிபெயர்ப்பு பரிந்துரைக்கப்படுகிறது. இந்த மொழிபெயர்ப்பைப் பயன்படுத்தியதனால் ஏற்பட்ட எந்த தவறான புரிதல்களுக்கோ அல்லது தவறான விளக்கங்களுக்கோ நாங்கள் பொறுப்பல்ல.
+**மறுப்பு**:
+இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவை [Co-op Translator](https://github.com/Azure/co-op-translator) பயன்படுத்தி மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியத்திற்காக முயற்சி செய்துள்ளோம், ஆனால் தானாக செய்யப்படும் மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறுகள் இருக்கலாம் என்பதை கவனத்தில் கொள்ளவும். அசல் ஆவணம் அதன் தாய்மொழியில் அதிகாரப்பூர்வ ஆதாரமாக கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு, தொழில்நுட்பமான மனித மொழிபெயர்ப்பு பரிந்துரைக்கப்படுகிறது. இந்த மொழிபெயர்ப்பைப் பயன்படுத்துவதால் ஏற்படும் எந்த தவறான புரிதல்கள் அல்லது தவறான விளக்கத்திற்கும் நாங்கள் பொறுப்பில்வில்லை.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

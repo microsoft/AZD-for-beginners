@@ -1,15 +1,15 @@
-# How to Deploy AI Models wit Azure Developer CLI
+# AI Model Deployment wit Azure Developer CLI
 
-**How to waka between chapters:**
+**Chapter Navigation:**
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Dis Chapter**: Chapter 2 - AI-First Development
-- **⬅️ Back**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **📖 Current Chapter**: Chapter 2 - AI-First Development
+- **⬅️ Previous**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Next**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
-Dis guide dey give full instructions on how to deploy AI models using AZD templates, e cover everything from how to pick model reach production deployment patterns.
+Dis guide dey give complete instructions for how to deploy AI models using AZD templates, e cover everytin from how to select model reach production deployment patterns.
 
-> **Validation note (2026-03-25):** The AZD workflow for dis guide dem don check am against `azd` `1.23.12`. For AI deployments wey go take longer pass the default service deployment window, current AZD releases dey support `azd deploy --timeout <seconds>`.
+> **Validation note (2026-07-13):** Di AZD workflow for dis guide dem check am wit `azd` `1.27.1`. For AI deployment wey go take pass default service deployment time, current AZD releases dey support `azd deploy --timeout <seconds>`.
 
 ## Table of Contents
 
@@ -24,7 +24,7 @@ Dis guide dey give full instructions on how to deploy AI models using AZD templa
 
 ### Microsoft Foundry Models Models
 
-Choose the correct model wey fit your use case:
+Choose di correct model for your use case:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -56,16 +56,16 @@ services:
 
 | Model Type | Use Case | Recommended Capacity | Cost Considerations |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | Chat, Q&A | 10-50 TPM | E cheap well-well for most workloads |
-| gpt-4.1 | Complex reasoning | 20-100 TPM | Cost go high, use am for premium features |
-| text-embedding-3-large | Search, RAG | 30-120 TPM | Beta default choice for semantic search and retrieval |
-| Whisper | Speech-to-text | 10-50 TPM | For audio processing workloads |
+| gpt-4.1-mini | Chat, Q&A | 10-50 TPM | Cost-effective for most workloads |
+| gpt-4.1 | Complex reasoning | 20-100 TPM | Higher cost, use for premium features |
+| text-embedding-3-large | Search, RAG | 30-120 TPM | Strong default choice for semantic search and retrieval |
+| Whisper | Speech-to-text | 10-50 TPM | Audio processing workloads |
 
 ## AZD Configuration for AI Models
 
 ### Bicep Template Configuration
 
-Make model deployments with Bicep templates:
+Create model deployments through Bicep templates:
 
 ```bicep
 // infra/main.bicep
@@ -126,10 +126,10 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### Environment Variables
 
-Arrange your application environment:
+Configure your application environment:
 
 ```bash
-# Di .env setup
+# .env konfigyurɛshọn
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
@@ -151,9 +151,9 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-Beta for:
+Best for:
 - Development and testing
-- Applications wey dey for one market
+- Single-market applications
 - Cost optimization
 
 ### Pattern 2: Multi-Region Deployment
@@ -169,14 +169,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Beta for:
+Best for:
 - Global applications
 - High availability requirements
 - Load distribution
 
 ### Pattern 3: Hybrid Deployment
 
-Mix Microsoft Foundry Models wit other AI services:
+Combine Microsoft Foundry Models wit oda AI services:
 
 ```bicep
 // Hybrid AI services
@@ -209,7 +209,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Version Control
 
-Keep track model versions for your AZD configuration:
+Track model versions for your AZD configuration:
 
 ```json
 {
@@ -229,7 +229,7 @@ Keep track model versions for your AZD configuration:
 
 ### Model Updates
 
-Use AZD hooks when you dey update model:
+Use AZD hooks for model updates:
 
 ```bash
 #!/bin/bash
@@ -241,13 +241,13 @@ az cognitiveservices account list-models \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
 
-# If di deployment dey take pass di default timeout
+# If di deployment take pass di default timeout time
 azd deploy --timeout 1800
 ```
 
 ### A/B Testing
 
-Deploy different model versions make you test A/B:
+Deploy multiple model versions:
 
 ```bicep
 param enableABTesting bool = false
@@ -273,10 +273,10 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 
 ### Capacity Planning
 
-Calculate how much capacity you need based on how people dey use am:
+Calculate required capacity based on usage patterns:
 
 ```python
-# Example wey dey show how to calculate capacity
+# How to calculate capacity example
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -288,7 +288,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example wey show how to use am
+# How to use am example
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -300,7 +300,7 @@ print(f"Required capacity: {required_capacity} TPM")
 
 ### Auto-scaling Configuration
 
-Set auto-scaling for Container Apps:
+Configure auto-scaling for Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -338,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Cost Optimization
 
-Put cost controls so you fit manage spending:
+Implement cost controls:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -372,7 +372,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ### Application Insights Integration
 
-Set monitoring for AI workloads:
+Configure monitoring for AI workloads:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -410,10 +410,10 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### Custom Metrics
 
-Monitor metrics wey relate to AI:
+Track AI-specific metrics:
 
 ```python
-# Telemetry wey dem customize for AI models
+# Custom telemetry for AI models
 import logging
 from applicationinsights import TelemetryClient
 
@@ -447,10 +447,10 @@ class AITelemetry:
 
 ### Health Checks
 
-Set health monitoring for AI service:
+Implement AI service health monitoring:
 
 ```python
-# Endpoints wey dey check say system dey fine
+# Health check endpoin dem
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -460,7 +460,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Check if OpenAI connection dey work
+        # Test OpenAI konnekshon
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -478,10 +478,10 @@ async def check_ai_models():
 
 ## Next Steps
 
-1. **Check the [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** for service integration patterns
-2. **Finish the [AI Workshop Lab](ai-workshop-lab.md)** to get hands-on experience
-3. **Put [Production AI Practices](production-ai-practices.md)** for enterprise deployments
-4. **Check the [AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** for common issues
+1. **Review di [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** for service integration patterns
+2. **Complete di [AI Workshop Lab](ai-workshop-lab.md)** for hands-on experience
+3. **Implement [Production AI Practices](production-ai-practices.md)** for enterprise deployments
+4. **Explore di [AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** for common issues
 
 ## Resources
 
@@ -492,10 +492,10 @@ async def check_ai_models():
 
 ---
 
-**How to waka between chapters:**
+**Chapter Navigation:**
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Dis Chapter**: Chapter 2 - AI-First Development
-- **⬅️ Back**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **📖 Current Chapter**: Chapter 2 - AI-First Development
+- **⬅️ Previous**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Next**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
@@ -503,5 +503,5 @@ async def check_ai_models():
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Dis dokument don translate with AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am accurate, abeg note say automated translations fit get errors or inaccuracies. Di original dokument for e native language suppose be di authoritative source. For critical information, we recommend make professional human translator do am. We no go liable for any misunderstanding or misinterpretation wey come from the use of this translation.
+Dis document don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even tho we dey try make am correct, abeg make you know say automated translation fit get errors or mistakes. Di original document for dia own language na im be di correct source. For important info, make person wey sabi human translation do am. We no go responsible for any misunderstanding or wrong understanding wey fit happen because of dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

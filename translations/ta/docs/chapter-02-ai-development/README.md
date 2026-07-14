@@ -1,91 +1,91 @@
-# அத்தியாயம் 2: செயற்கை நுண்ணறிவு-முதல் அபிவிருத்தி
+# அத்தியாயம் 2: AI-முதலில் மேம்பாடு
 
-**📚 பாடத்திட்டம்**: [AZD தொடக்கத்திற்கான](../../README.md) | **⏱️ கால அளவு**: 1-2 மணிநேரம் | **⭐ சிரமம்**: இடைநிலை
+**📚 பாடம்**: [ஆசை beginners க்கான AZD](../../README.md) | **⏱️ காலம்**: 1-2 மணி நேரம் | **⭐ சிக்கல் நிலை**: மையநிலை
 
 ---
 
 ## கண்ணோட்டம்
 
-இப்பத்தி Azure Developer CLI மற்றும் Microsoft Foundry சேவைகளைப் பயன்படுத்தி செயற்கை நுண்ணறிவு இயக்கவியல் செயலிகளை (AI-powered applications) орналுத்துவதில் கவனம் செலுத்துகிறது. எளிய AI உரையாடல் பயன்பாடுகளிலிருந்து கருவிகள் உடைய புத்திசாலி முகவர்கள் வரை.
+இந்த அத்தியாயம் Azure Developer CLI மற்றும் Microsoft Foundry சேவைகளைப் பயன்படுத்தி AI இயக்கப்படு பயன்பாடுகளை நிருவாகம் செய்வதில் கவனம் செலுத்துகிறது. எளிய AI அரட்டைக்கான பயன்பாடுகளிலிருந்து கருவிகளுடன் கூடிய அறிவார்ந்த முகவர்களின் வரை.
 
-> **சரிபார்க்கும் குறிப்பு (2026-06-15):** இந்த அத்தியாயத்தில் உள்ள கட்டளை சாதாரணம் மற்றும் நீட்சிப் பரிந்துரைகள் `azd` `1.25.6` மற்றும் தற்போதைய முன்னோட்ட AI முகவர் நீட்சிப் வெளியீடு `azure.ai.agents` `0.1.40-preview` ஐ எதிர்பார்த்து மதிப்பீடு செய்யப்பட்டன. நீங்கள் பழைய AZD கட்டுமானத்தில் இருந்தால், முதலில் புதுப்பித்து பிறகு பயிற்சிகளை தொடரவும்.
+> **சரிபார்க்கும் குறிப்பு (2026-07-13):** இந்த அத்தியாயத்தில் கட்டளை ஓட்டமும் நீட்டிப்பு வழிகாட்டல் `azd` `1.27.1` மற்றும் தற்போதைய முன்னோட்ட AI முகவர் நீட்டிப்பு வெளியீடு `azure.ai.agents` `1.0.0-beta.5` ஆகியவற்றின் அடிப்படையில் மதிப்பாய்வு செய்யபட்டது. நீங்கள் பழைய AZD கட்டமைப்பில் இருந்தால், முதலில் புதுப்பித்து பின்னர் பயிற்சிகளை தொடரவும்.
 
-## கற்றல் நோக்கங்கள்
+## கற்றல் இலக்குகள்
 
-By completing this chapter, you will:
-- முன்னமைக்கப்பட்ட AZD டெம்ப்ளேட்டுகளைப் பயன்படுத்தி AI செயலிகளை орналுத்துதல்
-- Microsoft Foundry-இன் AZD உடன் ஒருங்கிணைப்பை புரிந்துகொள்ளுதல்
-- கருவிகள் உடன் AI முகவர்களை அமைத்து தனிப்பயனாக்குதல்
-- RAG (Retrieval-Augmented Generation) பயன்பாடுகளை орналுத்துதல்
+இந்த அத்தியாயத்தை முடித்தல் மூலம், நீங்கள்:
+- முன்-கட்டப்பட்ட AZD மாதிரிகளைப் பயன்படுத்தி AI பயன்பாடுகளை இடமாற்றம் செய்வது
+- Microsoft Foundry ஐ AZD உடன் ஒருங்கிணைப்பதைப் புரிந்து கொள்வது
+- கருவிகளுடன் AI முகவர்களை அமைத்து தனிப்பயனாக்குதல்
+- RAG (தொகுத்தல்-உதவியுடன் உருவாக்கல்) பயன்பாடுகளை இடமாற்றம் செய்தல்
 
 ---
 
 ## 📚 பாடங்கள்
 
-| # | Lesson | Description | Time |
+| # | பாடம் | விளக்கம் | நேரம் |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry ஒருங்கிணைப்பு](microsoft-foundry-integration.md) | AZD-ஐ Foundry சேவைகளுடன் இணைத்தல் | 30 நிமிடம் |
-| 2 | [AI முகவர்கள் கையேடு](agents.md) | கருவிகள் உடன் புத்திசாலி முகவர்களை орналுத்துதல் | 45 நிமிடம் |
-| 3 | [AI மாதிரி орналுத்துதல்](ai-model-deployment.md) | AI மாதிரிகளை орналுத்தி அமைத்தல் | 30 நிமிடம் |
-| 4 | [AI பட்டறை பயிற்சி](ai-workshop-lab.md) | கைமுறை: உங்கள் AI தீர்வை AZD-க்கு தயார்செய்யவும் | 60 நிமிடம் |
+| 1 | [Microsoft Foundry ஒருங்கிணைப்பு](microsoft-foundry-integration.md) | AZD ஐ Foundry சேவைகளுடன் இணைத்தல் | 30 நிமிடம் |
+| 2 | [AI முகவர் வழிகாட்டி](agents.md) | கருவிகளுடன் அறிவார்ந்த முகவர்களை இடமாற்றம் செய்வது | 45 நிமிடம் |
+| 3 | [AI மாதிரி இடமாற்றம்](ai-model-deployment.md) | AI மாதிரிகள் இடமாற்றம் மற்றும் அமைத்தல் | 30 நிமிடம் |
+| 4 | [AI வேலைப்பா பயிற்சி அறை](ai-workshop-lab.md) | கைபழக்குடன்: உங்கள் AI தீர்வை AZD-க்குத் தயாராக்குங்கள் | 60 நிமிடம் |
 
 ---
 
-## 🚀 துவக்கம் விரைவில்
+## 🚀 விரைவான துவக்கம்
 
 ```bash
-# விருப்பம் 1: RAG சாட் செயலி
+# தேர்வு 1: RAG அரட்டையாடும் பயன்பாடு
 azd init --template azure-search-openai-demo
 azd up
 
-# விருப்பம் 2: ஏஐ முகவர்கள்
+# தேர்வு 2: எไஐ முகவர்கள்
 azd init --template get-started-with-ai-agents
 azd up
 
-# விருப்பம் 3: விரைவான சாட் செயலி
+# தேர்வு 3: விரைவான அரட்டையாடும் பயன்பாடு
 azd init --template openai-chat-app-quickstart
 azd up
 ```
 
 ---
 
-## 🤖 சிறப்பு AI டெம்பிளேட்டுகள்
+## 🤖 தேர்ந்தெடுக்கப்பட்ட AI மாதிரிகள்
 
-| Template | Description | Services |
+| மாதிரி | விளக்கம் | சேவைகள் |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | சான்றுகளுடன் RAG உரையாடல் | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | கருவிகள் உடைய AI முகவர் | AI Agent Service |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | அடிப்படை AI உரையாடல் | OpenAI + Container Apps |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG அரட்டையுடன் மேற்குறிப்புகள் | OpenAI + AI தேடல் |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | கருவிகளுடன் AI முகவர் | AI முகவர் சேவை |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | அடிப்படை AI அரட்டை | OpenAI + கன்டெய்னர் செயலிகள் |
 
 ---
 
-## 💰 செலவுக் கண்ணோட்டம்
+## 💰 செலவு விழிப்புணர்வு
 
-| Environment | Estimated Monthly Cost |
+| சூழல் | கணிக்கப்பட்ட மாதத்திட்ட செலவு |
 |-------------|----------------------|
-| Development | $80-150 |
-| Staging | $150-300 |
-| Production | $300-3,500+ |
+| மேம்பாடு | $80-150 |
+| தளம் | $150-300 |
+| உற்பத்தி | $300-3,500+ |
 
-**குறிப்பு:** சோதனைக்கு பிறகு கட்டணங்களைத் தவிர்ப்பதற்காக `azd down` இயக்கவும்.
+**குறிப்பு:** சோதனை செய்த பிறகு கட்டணப்பெற இட `azd down` கட்டளையை இயக்கவும்.
 
 ---
 
-## 🔗 வழிசூচনা
+## 🔗 வழிசெலுத்தல்
 
-| Direction | Chapter |
+| திசை | அத்தியாயம் |
 |-----------|---------|
-| **Previous** | [Chapter 1: Foundation](../chapter-01-foundation/README.md) |
-| **Next** | [Chapter 3: Configuration](../chapter-03-configuration/README.md) |
-| **Skip to** | [Chapter 8: Production Patterns](../chapter-08-production/README.md) |
+| **முந்தையது** | [அத்தியாயம் 1: அடித்தளம்](../chapter-01-foundation/README.md) |
+| **அடுத்தது** | [அத்தியாயம் 3: அமைப்பு](../chapter-03-configuration/README.md) |
+| **தடக்காலை跳** | [அத்தியாயம் 8: உற்பத்தி மாதிரிகள்](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 சம்பந்தப்பட்ட வளங்கள்
+## 📖 தொடர்புடைய வளங்கள்
 
-- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Production AI Practices](../chapter-08-production/production-ai-practices.md)
-- [Application Insights](../chapter-06-pre-deployment/application-insights.md)
+- [AI பிழைத்திருத்தம்](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [உற்பத்தி AI நடைமுறைகள்](../chapter-08-production/production-ai-practices.md)
+- [ஆப்ளிகேஷன் அறிவுறுத்தல்கள்](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 

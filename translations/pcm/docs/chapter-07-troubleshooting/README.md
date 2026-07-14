@@ -1,32 +1,32 @@
-# Chapter 7: How to Fix Wahala & Debug
+# Chapter 7: Troubleshooting & Debugging
 
 **📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 1-1.5 hours | **⭐ Complexity**: Intermediate
 
 ---
 
-## Wetin dis chapter dey cover
+## Overview
 
-This chapter go help you diagnose and resolve common wahala wen you dey work wit Azure Developer CLI. E cover wetin to do from deployment failures to AI-specific problems.
+Dis chapter go help you sabi wetin cause wahala plus how to solve common kasala wen you dey work wit Azure Developer CLI. From deployment failure go reach AI kind problem dem.
 
-> Dem don validate am with `azd 1.25.6` for June 2026.
+> Validated against `azd 1.27.1` in July 2026.
 
 ## Learning Objectives
 
-By completing this chapter, you go:
-- Find wetin dey cause common AZD deployment failures
-- Debug authentication and permission wahala
-- Solve AI service connectivity problems
-- Use Azure Portal and CLI to do troubleshooting
+If you finish dis chapter, you go fit:
+- Diagnose common AZD deployment failures
+- Debug authentication and permission issues
+- Resolve AI service connectivity problems
+- Use Azure Portal and CLI for troubleshooting
 
 ---
 
-## 📚 Lekshon dem
+## 📚 Lessons
 
-| # | Lekshon | Tori | Time |
+| # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [Common Wahala](common-issues.md) | Problems wey dey happen often | 30 min |
-| 2 | [Debugging Guide](debugging.md) | Step-by-step strategy to debug | 45 min |
-| 3 | [AI Troubleshooting](ai-troubleshooting.md) | AI-specific wahala | 30 min |
+| 1 | [Common Issues](common-issues.md) | Frequently encountered problems | 30 min |
+| 2 | [Debugging Guide](debugging.md) | Step-by-step debugging strategies | 45 min |
+| 3 | [AI Troubleshooting](ai-troubleshooting.md) | AI-specific issues | 30 min |
 
 ---
 
@@ -34,10 +34,10 @@ By completing this chapter, you go:
 
 ### Authentication Issues
 ```bash
-# Dem need am for AZD workflows
+# Na wetin dey needed for AZD waka
 azd auth login
 
-# E optional if you dey also use Azure CLI commands direct
+# No too necessary if you dey also use Azure CLI commands directly
 az login
 
 azd auth status
@@ -70,22 +70,22 @@ azd up
 
 | Error | Cause | Solution |
 |-------|-------|----------|
-| `AuthenticationError` | You never log in | `azd auth login` |
-| `ResourceNotFound` | Resource no dey | Check say resource names correct |
-| `QuotaExceeded` | Subscription limits don full | Request make dem increase quota |
+| `AuthenticationError` | Not logged in | `azd auth login` |
+| `ResourceNotFound` | Missing resource | Check resource names |
+| `QuotaExceeded` | Subscription limits | Request quota increase |
 | `InvalidTemplate` | Bicep syntax error | `az bicep build` |
-| `Conflict` | Resource don already exist | Give am new name or delete the old one |
-| `Forbidden` | You no get enough permission | Check your RBAC roles |
+| `Conflict` | Resource exists | Use new name or delete |
+| `Forbidden` | Insufficient permissions | Check RBAC roles |
 
 ---
 
-## 🔄 How to Reset & Recover
+## 🔄 Reset and Recovery
 
 ```bash
-# Soft reset (leave di resources, deploy di code again)
+# Soft reset (keep resources, redeploy code)
 azd deploy --force
 
-# Hard reset (delete everytin, start again from zero)
+# Hard reset (delete everytin, start fresh)
 azd down --force --purge
 azd up
 ```
