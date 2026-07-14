@@ -1,28 +1,28 @@
-# Nameščanje AI modelov z Azure Developer CLI
+# Uvajanje AI modelov z Azure Developer CLI
 
 **Navigacija po poglavjih:**
-- **📚 Domov tečaja**: [AZD For Beginners](../../README.md)
-- **📖 Trenutno poglavje**: Poglavje 2 - Razvoj, usmerjen v AI
-- **⬅️ Prejšnje**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Naslednje**: [AI Workshop Lab](ai-workshop-lab.md)
+- **📚 Domov tečaja**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 2 - Razvoj usmerjen na AI
+- **⬅️ Prejšnje**: [Microsoft Foundry integracija](microsoft-foundry-integration.md)
+- **➡️ Naslednje**: [AI delavnica](ai-workshop-lab.md)
 - **🚀 Naslednje poglavje**: [Poglavje 3: Konfiguracija](../chapter-03-configuration/configuration.md)
 
-Ta vodič vsebuje celovita navodila za nameščanje AI modelov z uporabo AZD predlog, od izbire modela do vzorcev nameščanja v produkciji.
+Ta vodič zagotavlja obsežna navodila za uvajanje AI modelov z uporabo AZD predlog, od izbire modela do vzorcev uvajanja v produkcijo.
 
-> **Validacijska opomba (2026-03-25):** Delovni tok AZD v tem vodiču je bil preverjen proti `azd` `1.23.12`. Za AI nameščanja, ki zasedejo več časa kot privzeto okno nameščanja storitve, trenutne izdaje AZD podpirajo `azd deploy --timeout <seconds>`.
+> **Opomba o validaciji (2026-07-13):** AZD potek v tem vodiču je bil preverjen z `azd` `1.27.1`. Za uvajanja AI, ki trajajo dlje od privzetega okna za uvajanje storitve, trenutne različice AZD podpirajo `azd deploy --timeout <sekunde>`.
 
-## Kazalo
+## Kazalo vsebine
 
 - [Strategija izbire modela](#strategija-izbire-modela)
 - [AZD konfiguracija za AI modele](#azd-konfiguracija-za-ai-modele)
-- [Vzorcei nameščanja](#vzorcei-nameščanja)
-- [Upravljanje modelov](#upravljanje-modelov)
-- [Premisleki za produkcijsko okolje](#premisleki-za-produkcijsko-okolje)
-- [Nadzor in opazljivost](#nadzor-in-opazljivost)
+- [Vzorec uvajanja](#vzorec-uvajanja)
+- [Upravljanje modela](#upravljanje-modela)
+- [Premisleki za produkcijo](#premisleki-za-produkcijo)
+- [Nadzor in opazovanje](#nadzor-in-opazovanje)
 
 ## Strategija izbire modela
 
-### Microsoft Foundry Models Models
+### Microsoft Foundry modeli
 
 Izberite pravi model za vaš primer uporabe:
 
@@ -54,18 +54,18 @@ services:
 
 ### Načrtovanje zmogljivosti modela
 
-| Tip modela | Primer uporabe | Priporočena zmogljivost | Premisleki o stroških |
-|------------|----------------|------------------------|----------------------|
-| gpt-4.1-mini | Pogovor, Vprašanja in odgovori | 10-50 TPM | Stroškovno učinkovit za večino nalog |
-| gpt-4.1 | Kompleksno razmišljanje | 20-100 TPM | Višji stroški, uporaba za premium funkcionalnosti |
+| Tip modela | Primer uporabe | Priporočena zmogljivost | Stroškovni premisleki |
+|------------|---------------|------------------------|----------------------|
+| gpt-4.1-mini | Pogovor, Vprašanja in odgovori | 10-50 TPM | Stroškovno učinkovito za večino delovnih obremenitev |
+| gpt-4.1 | Kompleksno sklepanje | 20-100 TPM | Višji stroški, uporaba za premijske funkcije |
 | text-embedding-3-large | Iskanje, RAG | 30-120 TPM | Močna privzeta izbira za semantično iskanje in pridobivanje |
 | Whisper | Govor v besedilo | 10-50 TPM | Delovne obremenitve za obdelavo zvoka |
 
 ## AZD konfiguracija za AI modele
 
-### Bicep Template Configuration
+### Konfiguracija Bicep predloge
 
-Ustvarite nameščanja modelov z Bicep predlogami:
+Ustvarite uvajanja modelov s pomočjo Bicep predlog:
 
 ```bicep
 // infra/main.bicep
@@ -124,21 +124,21 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
-### Spremenljivke okolja
+### Okoljske spremenljivke
 
-Konfigurirajte okolje aplikacije:
+Konfigurirajte okolje vaše aplikacije:
 
 ```bash
-# Konfiguracija .env
+# konfiguracija .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## Vzorcei nameščanja
+## Vzorec uvajanja
 
-### Vzorec 1: Namestitev v eni regiji
+### Vzorec 1: Uvajanje v eni regiji
 
 ```yaml
 # azure.yaml - Single region
@@ -151,12 +151,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-Najbolj primerno za:
+Najboljše za:
 - Razvoj in testiranje
-- Aplikacije za en sam trg
+- Aplikacije za enotni trg
 - Optimizacija stroškov
 
-### Vzorec 2: Namestitev v več regijah
+### Vzorec 2: Uvajanje v več regijah
 
 ```bicep
 // Multi-region deployment
@@ -169,12 +169,12 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Najbolj primerno za:
+Najboljše za:
 - Globalne aplikacije
 - Zahteve po visoki razpoložljivosti
-- Porazdelitev obremenitve
+- Razporeditev obremenitve
 
-### Vzorec 3: Hibridna namestitev
+### Vzorec 3: Hibridno uvajanje
 
 Združite Microsoft Foundry modele z drugimi AI storitvami:
 
@@ -205,7 +205,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Upravljanje modelov
+## Upravljanje modela
 
 ### Nadzor različic
 
@@ -227,9 +227,9 @@ Spremljajte različice modelov v vaši AZD konfiguraciji:
 }
 ```
 
-### Posodobitve modelov
+### Posodobitve modela
 
-Uporabite AZD hooks za posodobitve modelov:
+Uporabite AZD kavljčke za posodobitve modelov:
 
 ```bash
 #!/bin/bash
@@ -241,13 +241,13 @@ az cognitiveservices account list-models \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
 
-# Če razmestitev traja dlje kot privzeta časovna omejitev
+# Če implementacija traja dlje kot privzeti časovni limit
 azd deploy --timeout 1800
 ```
 
 ### A/B testiranje
 
-Nameščajte več različic modelov:
+Uvedite več različic modela:
 
 ```bicep
 param enableABTesting bool = false
@@ -269,11 +269,11 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Premisleki za produkcijsko okolje
+## Premisleki za produkcijo
 
 ### Načrtovanje zmogljivosti
 
-Izračunajte potrebne zmogljivosti glede na vzorce uporabe:
+Izračunajte potrebno zmogljivost na podlagi vzorcev uporabe:
 
 ```python
 # Primer izračuna zmogljivosti
@@ -338,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Optimizacija stroškov
 
-Uvedite kontrole stroškov:
+Uvedite nadzor stroškov:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -368,9 +368,9 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Nadzor in opazljivost
+## Nadzor in opazovanje
 
-### Integracija z Application Insights
+### Integracija Application Insights
 
 Konfigurirajte nadzor za AI delovne obremenitve:
 
@@ -408,7 +408,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### Prilagojene metrike
+### Prilagojeni metrični kazalniki
 
 Spremljajte AI-specifične metrike:
 
@@ -445,12 +445,12 @@ class AITelemetry:
         )
 ```
 
-### Preverjanje zdravja
+### Zdravstveni pregledi
 
-Vpeljite nadzor zdravja AI storitev:
+Izvedite nadzor zdravja AI storitev:
 
 ```python
-# Končne točke za preverjanje stanja
+# Končne točke za preverjanje zdravja
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -478,30 +478,30 @@ async def check_ai_models():
 
 ## Naslednji koraki
 
-1. **Preglejte [Vodnik za integracijo Microsoft Foundry](microsoft-foundry-integration.md)** za vzorce integracije storitev
-2. **Dokončajte [AI Workshop Lab](ai-workshop-lab.md)** za praktične izkušnje
-3. **Uvedite [Prakse AI v produkciji](production-ai-practices.md)** za podjetniške namestitve
-4. **Raziščite [Vodnik za odpravljanje težav z AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** za pogoste težave
+1. **Preglejte [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** za vzorce integracije storitev
+2. **Dokončajte [AI delavnico](ai-workshop-lab.md)** za praktične izkušnje
+3. **Uvedite [Produkcijske AI prakse](production-ai-practices.md)** za podjetniška uvajanja
+4. **Raziščite [Vodič za odpravljanje težav AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** za pogoste težave
 
 ## Viri
 
-- [Razpoložljivost modelov Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Razpoložljivost Microsoft Foundry modelov](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Dokumentacija Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Prilagajanje skaliranja Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Skačenje Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [Optimizacija stroškov AI modelov](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
 **Navigacija po poglavjih:**
-- **📚 Domov tečaja**: [AZD For Beginners](../../README.md)
-- **📖 Trenutno poglavje**: Poglavje 2 - Razvoj, usmerjen v AI
-- **⬅️ Prejšnje**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Naslednje**: [AI Workshop Lab](ai-workshop-lab.md)
+- **📚 Domov tečaja**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 2 - Razvoj usmerjen na AI
+- **⬅️ Prejšnje**: [Microsoft Foundry integracija](microsoft-foundry-integration.md)
+- **➡️ Naslednje**: [AI delavnica](ai-workshop-lab.md)
 - **🚀 Naslednje poglavje**: [Poglavje 3: Konfiguracija](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Omejitev odgovornosti**:
-Ta dokument je bil preveden z uporabo AI prevajalske storitve [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, upoštevajte, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v izvirnem jeziku velja za avtoritativni vir. Za ključne informacije priporočamo strokoven človeški prevod. Ne odgovarjamo za kakršne koli nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo AI prevajalske storitve [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za kritične informacije je priporočljiv strokovni človeški prevod. Ne odgovarjamo za morebitna nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

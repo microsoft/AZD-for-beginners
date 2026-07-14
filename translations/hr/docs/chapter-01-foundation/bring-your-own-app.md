@@ -1,25 +1,25 @@
-# Donesite vlastitu aplikaciju - Dodajte azd u postojeći projekt
+# Donesi svoju aplikaciju - Dodavanje azd u postojeći projekt
 
 **Navigacija poglavljem:**
 - **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
-- **📖 Trenutno poglavlje**: Poglavlje 1 - Osnove i Brzi početak
+- **📖 Trenutno poglavlje**: Poglavlje 1 - Osnove i brz početak
 - **⬅️ Prethodno**: [Vaš prvi projekt](first-project.md)
 - **➡️ Sljedeće**: [Razvojni kontejneri i Codespaces](dev-containers.md)
 
-> Potvrđeno za `azd 1.25.6` u lipnju 2026.
+> Validirano s `azd 1.27.1` u srpnju 2026.
 
 ## Uvod
 
-U [Vašem prvom projektu](first-project.md) ste rasporedili aplikaciju započevši od predloška. Ali većinu vremena već imate aplikaciju—Node.js API, Python Flask servis, .NET web aplikaciju—u mapi na svom računalu. Ova lekcija pokazuje kako dodati azd u postojeći kod kako biste je mogli rasporediti s `azd up`, bez potrebe za predloškom.
+U [Vašem prvom projektu](first-project.md) ste implementirali aplikaciju počevši od predloška. Ali većinu vremena već *imate* aplikaciju — Node.js API, Python Flask servis, .NET web aplikaciju — koja se nalazi u mapi na vašem računalu. Ova lekcija pokazuje kako dodati azd u taj postojeći kod kako biste ga mogli implementirati s `azd up`, bez potrebe za predloškom.
 
 ## Ciljevi učenja
 
-Do kraja ove lekcije ćete:
-- Razumjeti tri načina za započeti azd projekt
+Do kraja ove lekcije, naučit ćete:
+- Razumjeti tri načina za pokretanje azd projekta
 - Pokrenuti `azd init` unutar postojećeg koda
 - Razumjeti što `azure.yaml` i mapa `infra/` rade za vašu aplikaciju
-- Znati kada dopustiti da azd generira infrastrukturu naspram pisanja vlastite
-- Rasporediti svoju postojeću aplikaciju u Azure koristeći `azd up`
+- Znati kada dopustiti azd-u da generira infrastrukturu nasuprot pisanju vlastite
+- Implementirati vašu postojeću aplikaciju na Azure pomoću `azd up`
 
 ## Ishodi učenja
 
@@ -27,33 +27,33 @@ Nakon završetka ove lekcije, moći ćete:
 - Inicijalizirati azd u projektu koji već imate
 - Čitati i uređivati osnovnu datoteku `azure.yaml`
 - Generirati početnu infrastrukturu pomoću `azd infra generate`
-- Odabrati odgovarajući Azure host za svoju aplikaciju
-- Rasporediti i očistiti vlastitu aplikaciju
+- Odabrati odgovarajući Azure host za vašu aplikaciju
+- Implementirati i ukloniti vlastitu aplikaciju
 
 ---
 
-## Tri načina za započeti azd projekt
+## Tri načina za pokretanje azd projekta
 
 | Početna točka | Naredba | Kada koristiti |
 |----------------|---------|-------------|
-| **Iz predloška** | `azd init --template <name>` | Učenje, ili početak nove aplikacije iz provjerenog primjera |
-| **Iz postojećeg koda** | `azd init` (u mapi vašeg projekta) | Već imate aplikaciju i želite je rasporediti |
-| **Iz Git repozitorija** | `azd init --from-code` (u kloniranom repo-u) | Uvođenje azd-a u postojeći repozitorij |
+| **Iz predloška** | `azd init --template <name>` | Za učenje ili pokretanje nove aplikacije iz dokazanog primjera |
+| **Iz vašeg postojećeg koda** | `azd init` (u mapi projekta) | Već imate aplikaciju i želite je implementirati |
+| **Iz Git repozitorija** | `azd init --from-code` (u kloniranom repozitoriju) | Primjena azd-a na postojeći repozitorij |
 
-Već ste vježbali prvu opciju. Ova lekcija pokriva drugu — najčešći stvarni scenarij.
+Već ste vježbali prvu opciju. Ova lekcija pokriva drugu—najčešći stvarni scenarij.
 
 ---
 
-## Korak 1: Pokrenite `azd init` u svom projektu
+## Korak 1: Pokrenite `azd init` u Vašem projektu
 
-Otvorite terminal **u mapi vašeg postojećeg projekta** i pokrenite:
+Otvorite terminal **unutar mape vašeg postojećeg projekta** i pokrenite:
 
 ```bash
 cd my-existing-app
 azd init
 ```
 
-azd će pitati kako želite inicijalizirati. Odaberite:
+azd će pitati kako želite inicijalizirati. Izaberite:
 
 ```
 ? How do you want to initialize your app?
@@ -61,26 +61,26 @@ azd će pitati kako želite inicijalizirati. Odaberite:
   Select a template
 ```
 
-Odaberite **"Koristi kod u trenutnom direktoriju."** azd zatim skenira vašu mapu, prepoznaje jezik i okvir (framework) te predlaže host.
+Odaberite **"Koristi kod u trenutnoj mapi."** azd tada skenira vašu mapu, detektira vaš programski jezik i okvir, i predlaže host.
 
 ### Što azd otkriva
 
-azd traži pokazatelje poput `package.json`, `requirements.txt`, `pom.xml`, `*.csproj`, ili `Dockerfile`, i predlaže odgovarajući Azure host:
+azd traži signale kao što su `package.json`, `requirements.txt`, `pom.xml`, `*.csproj`, ili `Dockerfile`, i predlaže odgovarajući Azure host:
 
 | Vaša aplikacija | Vjerojatno otkriveni host |
 |----------|----------------------|
 | Node.js / Python / .NET web aplikacija | Azure App Service ili Container Apps |
 | Aplikacija u kontejneru (`Dockerfile`) | Azure Container Apps |
-| Aplikacija Functions | Azure Functions |
-| Statijska stranica (izlaz builda React/Vue) | Azure Static Web Apps |
+| Funkcijska aplikacija | Azure Functions |
+| Statični sajt (izlaz iz React/Vue gradnje) | Azure Static Web Apps |
 
-Potvrdite otkrivenu uslugu/e, i azd kreira potrebne datoteke.
+Potvrdite otkrivenu uslugu/usluge, i azd postavlja potrebne datoteke.
 
 ---
 
-## Korak 2: Razumijte što je azd stvorio
+## Korak 2: Razumjeti što je azd kreirao
 
-Nakon init-a, imat ćete dvije nove stvari u svom projektu:
+Nakon inicijalizacije, imat ćete dvije nove stvari u vašem projektu:
 
 ```
 my-existing-app/
@@ -106,35 +106,35 @@ services:
     host: appservice         # appservice | containerapp | function | staticwebapp
 ```
 
-Blok `services` je ključni dio: svaka stavka mapira mapu vašeg koda na Azure host. Ako vaša aplikacija ima i frontend i API, imat ćete dvije usluge.
+Blok `services` je ključni dio: svaki unos preslikava mapu vašeg koda na Azure host. Ako vaša aplikacija ima frontend i API, imat ćete dvije usluge.
 
-### `infra/` — vaši Azure resursi kao kod
+### `infra/` — vaše Azure resurse kao kod
 
-Mapa `infra/` sadrži Bicep datoteke koje definiraju Azure resurse koje vaša aplikacija treba (App Service, baza podataka itd.). Ne morate ih pisati ručno — azd generira radnu početnu točku. Kasnije ih *možete* urediti kako biste dodali resurse ili pojačali sigurnost (obrađeno u [Poglavlje 4](../chapter-04-infrastructure/README.md)).
+Mapa `infra/` sadrži Bicep datoteke koje definiraju Azure resurse koje vaša aplikacija treba (App Service, baza podataka itd.). Ne morate ove datoteke pisati ručno — azd generira radnu početnu točku. Kasnije ih *možete* uređivati da dodate resurse ili povećate sigurnost (što je pokriveno u [Poglavlju 4](../chapter-04-infrastructure/README.md)).
 
-> **Savjet:** Želite li vidjeti ili prilagoditi generiranu infrastrukturu prije raspoređivanja? Pokrenite `azd infra generate` (također dostupno kao `azd infra synth`) da zapišete IaC na disk kako biste ga pregledali i verzionirali.
+> **Savjet:** Želite li vidjeti ili prilagoditi generiranu infrastrukturu prije implementacije? Pokrenite `azd infra generate` (dostupno također kao `azd infra synth`) da zapišete IaC na disk kako biste ga mogli pregledati i verzionirati.
 
 ---
 
-## Korak 3: Postavite potrebnu konfiguraciju
+## Korak 3: Postavite potrebne konfiguracije
 
-Ako vaša aplikacija treba postavke ili tajne (npr. connection string, API ključ), nemojte ih hardkodirati. Koristite vrijednosti iz okoline:
+Ako vaša aplikacija treba postavke ili tajne (npr. string povezivanja, API ključ), nemojte ih tvrdo kodirati. Koristite vrijednosti okoline:
 
 ```bash
-# Stvori okruženje
+# Kreirajte okruženje
 azd env new dev
 
-# Postavi vrijednost koja nije tajna
+# Postavite vrijednost koja nije tajna
 azd env set API_VERSION 1.0.0
 ```
 
-Za stvarne tajne, pohranite ih u Key Vault i referencirajte ih iz svoje infrastrukture — pogledajte [Poglavlje 3: Konfiguracija i autentifikacija](../chapter-03-configuration/authsecurity.md).
+Za prave tajne, spremite ih u Key Vault i referencirajte ih iz vaše infrastrukture—pogledajte [Poglavlje 3: Konfiguracija i autentikacija](../chapter-03-configuration/authsecurity.md).
 
 ---
 
-## Korak 4: Raspoređivanje
+## Korak 4: Implementirajte
 
-Sada upotrijebite isti tijek rada koji već znate:
+Sada koristite isti tijek rada koji već znate:
 
 ```bash
 # Autentificirajte se (obavezno za azd)
@@ -143,29 +143,29 @@ azd auth login
 # Pregledajte resurse koji će biti stvoreni
 azd provision --preview
 
-# Postavite infrastrukturu i implementirajte svoj kod
+# Osigurajte infrastrukturu i implementirajte svoj kod
 azd up
 ```
 
-Kad završi, azd ispiše URL vaše aplikacije. Provjerite ga na isti način kao i svaku azd aplikaciju:
+Kada završi, azd ispisuje URL vaše aplikacije. Provjerite ga kao i svaku azd aplikaciju:
 
 ```bash
 azd show           # prikaži krajnje točke
-azd monitor --logs # provjeri zapise ako je potrebno
+azd monitor --logs # provjeri dnevnike ako je potrebno
 ```
 
 ---
 
-## Uobičajeni problemi pri prvom pokretanju
+## Uobičajeni problemi kod prvog pokretanja
 
 | Simptom | Vjerojatni uzrok | Rješenje |
 |---------|--------------|-----|
-| azd nije otkrio moju aplikaciju | Nedostaje manifest (npr. `package.json`) | Dodajte manifest ili odaberite host ručno tijekom `azd init` |
-| Build ne uspijeva tijekom `azd up` | Aplikacija zahtijeva korak izgradnje | Dodajte `buildCommand`/`outputPath` pod servisom u `azure.yaml` |
-| Aplikacija se pokreće ali vraća pogreške | Nedostaje konfiguracija/tajna | Postavite vrijednosti pomoću `azd env set` ili povežite Key Vault |
-| Odabran pogrešan host | Automatsko otkrivanje je pogrešno odabralo | Uredite `host:` u `azure.yaml` i ponovo pokrenite `azd up` |
+| azd nije detektirao moju aplikaciju | Nedostaje manifest (npr. `package.json`) | Dodajte manifest ili ručno odaberite host tijekom `azd init` |
+| Gradnja ne uspijeva tijekom `azd up` | Aplikaciji treba korak gradnje | Dodajte `buildCommand`/`outputPath` ispod usluge u `azure.yaml` |
+| Aplikacija se pokreće, ali vraća pogreške | Nedostaju konfiguracije/tajne vrijednosti | Postavite vrijednosti pomoću `azd env set` ili konfigurirajte Key Vault |
+| Odabran je pogrešan host | Automatska detekcija je pogriješila | Uredite `host:` u `azure.yaml` i ponovno pokrenite `azd up` |
 
-Za više, pogledajte [Poglavlje 7: Rješavanje problema](../chapter-07-troubleshooting/README.md).
+Za više informacija pogledajte [Poglavlje 7: Rješavanje problema](../chapter-07-troubleshooting/README.md).
 
 ---
 
@@ -179,10 +179,10 @@ azd down --force --purge
 
 ## Sažetak
 
-- `azd init` → **"Koristi kod u trenutnom direktoriju"** dodaje azd aplikaciji koju već imate.
-- `azure.yaml` mapira mape vašeg koda na Azure hostove; `infra/` definira resurse kao Bicep.
-- `azd infra generate` vam omogućuje pregled ili prilagodbu generirane infrastrukture.
-- Nakon inicijalizacije, vaša postojeća aplikacija koristi potpuno isti tijek rada `azd up` / `azd down` kao aplikacija temeljena na predlošku.
+- `azd init` → **"Koristi kod u trenutnoj mapi"** dodaje azd u aplikaciju koju već imate.
+- `azure.yaml` preslikava mape vašeg koda na Azure hostove; `infra/` definira resurse pomoću Bicep-a.
+- `azd infra generate` omogućuje pregled ili prilagodbu generirane infrastrukture.
+- Kada je inicijalizirana, vaša postojeća aplikacija koristi isti tijek rada `azd up` / `azd down` kao i aplikacija temeljena na predlošku.
 
 ---
 
@@ -197,8 +197,8 @@ azd down --force --purge
 
 - [Osnove AZD-a](azd-basics.md)
 - [Poglavlje 4: Infrastruktura kao kod](../chapter-04-infrastructure/README.md)
-- [Konfiguracija i autentifikacija](../chapter-03-configuration/authsecurity.md)
-- [Kratka referenca naredbi](../../resources/cheat-sheet.md)
+- [Konfiguracija i autentikacija](../chapter-03-configuration/authsecurity.md)
+- [Prečac naredbi](../../resources/cheat-sheet.md)
 
 ---
 

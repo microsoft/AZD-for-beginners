@@ -1,9 +1,9 @@
 # AI agenti s Azure Developer CLI
 
-**Navigacija poglavljem:**
+**Navigacija po poglavljima:**
 - **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
-- **📖 Trenutno poglavlje**: Poglavlje 2 - AI-prvo razvoj
-- **⬅️ Prethodno**: [Integracija Microsoft Foundry](microsoft-foundry-integration.md)
+- **📖 Trenutno poglavlje**: Poglavlje 2 - AI-Prioritetni razvoj
+- **⬅️ Prethodno**: [Microsoft Foundry integracija](microsoft-foundry-integration.md)
 - **➡️ Sljedeće**: [Implementacija AI modela](ai-model-deployment.md)
 - **🚀 Napredno**: [Rješenja s više agenata](../../examples/retail-scenario.md)
 
@@ -11,63 +11,63 @@
 
 ## Uvod
 
-AI agenti su autonomni programi koji mogu percipirati svoje okruženje, donositi odluke i poduzimati radnje za postizanje određenih ciljeva. Za razliku od jednostavnih chatbota koji odgovaraju na upite, agenti mogu:
+AI agenti su autonomni programi koji mogu percipirati svoju okolinu, donositi odluke i poduzimati radnje radi postizanja određenih ciljeva. Za razliku od jednostavnih chatbotova koji odgovaraju na upite, agenti mogu:
 
 - **Koristiti alate** - Pozivati API-je, pretraživati baze podataka, izvršavati kod
-- **Planirati i rezonirati** - Razbijati složene zadatke na korake
-- **Učiti iz konteksta** - Održavati memoriju i prilagođavati ponašanje
-- **Suradivati** - Raditi s drugim agentima (sistemi s više agenata)
+- **Planirati i zaključivati** - Razdvajati složene zadatke na korake
+- **Učiti iz konteksta** - Održavati memoriju i prilagoditi ponašanje
+- **Surađivati** - Raditi s drugim agentima (sustavi s više agenata)
 
-Ovaj vodič pokazuje kako implementirati AI agente na Azure koristeći Azure Developer CLI (azd).
+Ovaj vodič pokazuje kako implementirati AI agente u Azure koristeći Azure Developer CLI (azd).
 
-> **Napomena o validaciji (2026-03-25):** Ovaj je vodič pregledan s `azd` verzijom `1.23.12` i `azure.ai.agents` verzijom `0.1.18-preview`. Iskustvo s `azd ai` još je u stanju previewa, pa provjerite pomoć ekstenzije ako se vaše instalirane zastavice razlikuju.
+> **Napomena o validaciji (2026-07-13):** Ovaj je vodič pregledan prema verzijama `azd` `1.27.1` i `azure.ai.agents` `1.0.0-beta.5`. `azd ai` iskustvo je još uvijek u fazi pregleda, stoga provjerite pomoć za dodatak ako se vaši instalirani parametri razlikuju.
 
 ## Ciljevi učenja
 
-Nakon završetka ovog vodiča, možete:
+Ispunjavanjem ovog vodiča ćete:
 - Razumjeti što su AI agenti i kako se razlikuju od chatbota
-- Implementirati unaprijed izrađene AI predloške agenata koristeći AZD
+- Implementirati unaprijed izrađene predloške AI agenata koristeći AZD
 - Konfigurirati Foundry agente za prilagođene agente
-- Implementirati osnovne obrasce agenata (korištenje alata, RAG, multi-agent)
-- Pratiti i otklanjati pogreške kod implementiranih agenata
+- Implementirati osnovne agentne obrasce (korištenje alata, RAG, multi-agentni)
+- Nadzirati i otklanjati pogreške implementiranih agenata
 
 ## Ishodi učenja
 
-Po završetku, moći ćete:
-- Implementirati AI agenta na Azure jednim naredbom
-- Konfigurirati alate i mogućnosti agenata
-- Implementirati generiranje utemeljeno na dohvaćanju (RAG) s agentima
-- Dizajnirati arhitekture s više agenata za složene tijekove rada
-- Rješavati uobičajene probleme pri implementaciji agenata
+Po završetku ćete moći:
+- Implementirati AI aplikacije agenata u Azure jednom naredbom
+- Konfigurirati alate i sposobnosti agenata
+- Implementirati generiranje s poboljšanjem pretraživanjem (RAG) s agentima
+- Dizajnirati višestruke agentne arhitekture za složene tokove rada
+- Rješavati uobičajene probleme u implementaciji agenata
 
 ---
 
-## 🤖 Što razlikuje agenta od chatbota?
+## 🤖 Što agent čini drugačijim od chatbota?
 
 | Značajka | Chatbot | AI agent |
 |---------|---------|----------|
 | **Ponašanje** | Odgovara na upite | Poduzima autonomne radnje |
 | **Alati** | Nema | Može pozivati API-je, pretraživati, izvršavati kod |
-| **Memorija** | Samo za trajanje sesije | Trajna memorija kroz sesije |
-| **Planiranje** | Jedan odgovor | Višekorak rezoniranja |
-| **Suradnja** | Jedinstveni entitet | Može raditi s drugim agentima |
+| **Memorija** | Samo unutar sesije | Trajna memorija preko sesija |
+| **Planiranje** | Jedan odgovor | Višekorakno zaključivanje |
+| **Suradnja** | Jedinica | Može raditi s drugim agentima |
 
 ### Jednostavna analogija
 
-- **Chatbot** = Pomoćna osoba koja odgovara na pitanja na informativnom pultu
-- **AI agent** = Osobni asistent koji može telefonirati, rezervirati termine i obavljati zadatke za vas
+- **Chatbot** = Pomoćna osoba koja odgovara na pitanja na info-pultu
+- **AI agent** = Osobni asistent koji može obavljati pozive, zakazivati sastanke i izvršavati zadatke za vas
 
 ---
 
-## 🚀 Brzi početak: Postavite svog prvog agenta
+## 🚀 Brzi početak: Implementirajte svog prvog agenta
 
-### Opcija 1: Foundry Agents predložak (Preporučeno)
+### Opcija 1: Foundry Agents predložak (preporučeno)
 
 ```bash
-# Inicijaliziraj predložak AI agenata
+# Inicijalizirajte predložak AI agenata
 azd init --template get-started-with-ai-agents
 
-# Implementiraj na Azure
+# Implementirajte na Azure
 azd up
 ```
 
@@ -76,31 +76,31 @@ azd up
 - ✅ Microsoft Foundry modeli (gpt-4.1)
 - ✅ Azure AI Search (za RAG)
 - ✅ Azure Container Apps (web sučelje)
-- ✅ Application Insights (praćenje)
+- ✅ Application Insights (nadgledanje)
 
-**Vrijeme:** ~15-20 minuta  
+**Vrijeme:** ~15-20 minuta
 **Trošak:** ~$100-150/mjesečno (razvoj)
 
-### Opcija 2: OpenAI Agent s Promptyjem
+### Opcija 2: OpenAI agent s Prompty-jem
 
 ```bash
-# Inicijalizirajte predložak agenta temeljenog na Promptyju
+# Inicijaliziraj predložak agenta temeljenog na Promptyju
 azd init --template agent-openai-python-prompty
 
-# Postavite na Azure
+# Implementiraj na Azure
 azd up
 ```
 
 **Što se implementira:**
-- ✅ Azure Functions (serverless izvršavanje agenta)
+- ✅ Azure Functions (izvršavanje agenata bez servera)
 - ✅ Microsoft Foundry modeli
 - ✅ Konfiguracijske datoteke Prompty
 - ✅ Primjer implementacije agenta
 
-**Vrijeme:** ~10-15 minuta  
+**Vrijeme:** ~10-15 minuta
 **Trošak:** ~$50-100/mjesečno (razvoj)
 
-### Opcija 3: RAG Chat Agent
+### Opcija 3: RAG chat agent
 
 ```bash
 # Inicijaliziraj RAG chat predložak
@@ -112,44 +112,44 @@ azd up
 
 **Što se implementira:**
 - ✅ Microsoft Foundry modeli
-- ✅ Azure AI Search sa primjerom podataka
-- ✅ Pipeline za obradu dokumenata
-- ✅ Sučelje za chat s citatima
+- ✅ Azure AI Search sa uzorkom podataka
+- ✅ Cjevovod za obradu dokumenata
+- ✅ Chat sučelje s referencama
 
-**Vrijeme:** ~15-25 minuta  
+**Vrijeme:** ~15-25 minuta
 **Trošak:** ~$80-150/mjesečno (razvoj)
 
-### Opcija 4: AZD AI Agent Init (Pregled inicijalizacije na temelju manifestacije ili predloška)
+### Opcija 4: AZD AI Agent Init (Pregled inicijalizacije kroz manifest ili predložak)
 
-Ako imate datoteku s manifestom agenta, možete koristiti naredbu `azd ai` za scaffoldanje Foundry Agent Service projekta izravno. Nedavne preview verzije također su dodale podršku za inicijalizaciju na temelju predložaka, pa se točan tijek prompta može malo razlikovati ovisno o verziji instalirane ekstenzije.
+Ako imate manifest agenta, možete koristiti naredbu `azd ai` za izravno kreiranje projekta Foundry Agent Service. Nedavne verzije u pregledu također podržavaju inicijalizaciju temeljenu na predlošcima, pa se točan tijek može malo razlikovati ovisno o verziji proširenja koju imate.
 
 ```bash
 # Instalirajte proširenje AI agenata
 azd extension install azure.ai.agents
 
-# Opcionalno: provjerite instaliranu pretpreglednu verziju
+# Opcionalno: provjerite instaliranu preglednu verziju
 azd extension show azure.ai.agents
 
-# Inicijalizirajte iz manifesta agenta
+# Inicijalizirajte iz manifesta agenata
 azd ai agent init -m agent-manifest.yaml
 
-# Deploy na Azure
+# Implementirajte na Azure
 azd up
 
-# Testirajte implementiranog agenta (prikazuje latenciju + vrijeme do prvog bajta)
+# Testirajte implementiranog agenta (prikazuje kašnjenje + vrijeme do prvog bajta)
 azd ai agent invoke
 ```
 
-**Kada koristiti `azd ai agent init` nasuprot `azd init --template`:**
+**Kada koristiti `azd ai agent init` naspram `azd init --template`:**
 
 | Pristup | Najbolje za | Kako radi |
-|----------|-------------|-----------|
-| `azd init --template` | Početak s funkcionalnom uzorkom aplikacije | Klonira cijeli predložak repozitorija s kodom + infrastrukturom |
-| `azd ai agent init -m` | Izgradnju iz vlastitog manifesta agenta | Scaffolda strukturu projekta iz definicije agenta |
+|----------|----------|------|
+| `azd init --template` | Početak s radnim primjerom aplikacije | Klonira kompletan repozitorij s kodom + infrastrukturom |
+| `azd ai agent init -m` | Izgradnju na vlastitom agent manifestu | Kreira strukturu projekta temeljem definicije agenta |
 
-> **Savjet:** Koristite `azd init --template` za učenje (opcije 1-3 gore). Koristite `azd ai agent init` za izgradnju produkcijskih agenata s vlastitim manifestima.
+> **Savjet:** Koristite `azd init --template` za učenje (gornje Opcije 1-3). Koristite `azd ai agent init` za proizvodne agente s vlastitim manifestima.
 
-Nakon `azd up`, ista ekstenzija vodi vas kroz ostatak životnog ciklusa agenta: `azd ai agent invoke` za testiranje, `azd ai agent eval generate` i `azd ai agent optimize` za mjerenje i poboljšanje kvalitete te `azd ai agent delete` za čišćenje. Pogledajte [AZD AI CLI naredbe](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) za potpuni pregled.
+Nakon `azd up`, isto proširenje vas vodi kroz ostali životni ciklus agenta: `azd ai agent invoke` za testiranje, `azd ai agent eval generate` i `azd ai agent optimize` za mjerenje i poboljšavanje kvalitete, te `azd ai agent delete` za čišćenje. Pogledajte [AZD AI CLI naredbe](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) za puni pregled.
 
 ---
 
@@ -157,60 +157,60 @@ Nakon `azd up`, ista ekstenzija vodi vas kroz ostatak životnog ciklusa agenta: 
 
 ### Obrazac 1: Jedan agent s alatima
 
-Najjednostavniji obrazac agenta – jedan agent koji može koristiti više alata.
+Najjednostavniji obrazac agenta - jedan agent koji može koristiti više alata.
 
 ```mermaid
 graph TD
-    UI[Korisničko sučelje] --> Agent[AI Agent<br/>gpt-4.1]
+    UI[Korisničko sučelje] --> Agent[AI agent<br/>gpt-4.1]
     Agent --> Search[Alat za pretraživanje]
     Agent --> Database[Alat za bazu podataka]
     Agent --> API[API alat]
 ```
 
 **Najbolje za:**
-- Botove za korisničku podršku
+- Bots za korisničku podršku
 - Istraživačke asistente
 - Agente za analizu podataka
 
 **AZD predložak:** `azure-search-openai-demo`
 
-### Obrazac 2: RAG agent (generiranje uz podršku dohvaćanja)
+### Obrazac 2: RAG agent (generiranje potpomognuto pretraživanjem)
 
-Agent koji dohvaća relevantne dokumente prije nego generira odgovore.
+Agent koji prethodno dohvaća relevantne dokumente prije generiranja odgovora.
 
 ```mermaid
 graph TD
-    Query[Korisnički Upit] --> RAG[RAG Agent]
-    RAG --> Vector[Vektorska Pretraga]
+    Query[Upit korisnika] --> RAG[RAG agent]
+    RAG --> Vector[Vektorska pretraga]
     RAG --> LLM[LLM<br/>gpt-4.1]
-    Vector -- Dokumenti --> LLM
-    LLM --> Response[Odgovor s Citiranjem]
+    Vector -- Documents --> LLM
+    LLM --> Response[Odgovor s citatima]
 ```
 
 **Najbolje za:**
-- Poslovne baze znanja
-- Sustave pitanja i odgovora na dokumente
-- Istraživanja o usklađenosti i pravna istraživanja
+- Korporativne baze znanja
+- Sustave za pitanja i odgovore o dokumentima
+- Istraživanje za usklađenost i pravne poslove
 
 **AZD predložak:** `azure-search-openai-demo`
 
 ### Obrazac 3: Sustav s više agenata
 
-Više specijaliziranih agenata koji zajedno rade na složenim zadacima.
+Više specijaliziranih agenata koji rade zajedno na složenim zadacima.
 
 ```mermaid
 graph TD
-    Orchestrator[Orkestrator Agent] --> Research[Istraživač Agent<br/>gpt-4.1]
-    Orchestrator --> Writer[Pisac Agent<br/>gpt-4.1-mini]
-    Orchestrator --> Reviewer[Recenzent Agent<br/>gpt-4.1]
+    Orchestrator[Agent orkestracije] --> Research[Agent istraživanja<br/>gpt-4.1]
+    Orchestrator --> Writer[Agent pisanja<br/>gpt-4.1-mini]
+    Orchestrator --> Reviewer[Agent recenzije<br/>gpt-4.1]
 ```
 
 **Najbolje za:**
-- Složenu generaciju sadržaja
-- Višekorake tijekove rada
-- Zadatke koji zahtijevaju različite stručnosti
+- Složenije generiranje sadržaja
+- Višekorakne tokove rada
+- Zadace koje zahtijevaju različitu stručnost
 
-**Saznajte više:** [Obrasci koordinacije s više agenata](../chapter-06-pre-deployment/coordination-patterns.md)
+**Saznajte više:** [Obrasci koordinacije više agenata](../chapter-06-pre-deployment/coordination-patterns.md)
 
 ---
 
@@ -250,16 +250,16 @@ agent = project_client.agents.create_agent(
 )
 ```
 
-### Konfiguracija okruženja
+### Konfiguracija okoline
 
 ```bash
-# Postavi varijable okoline specifične za agenta
+# Postavite varijable okoline specifične za agenta
 azd env set AZURE_OPENAI_MODEL "gpt-4.1"
 azd env set AGENT_INSTRUCTIONS "You are a helpful assistant..."
 azd env set ENABLE_CODE_INTERPRETER "true"
 azd env set ENABLE_FILE_SEARCH "true"
 
-# Postavi s ažuriranom konfiguracijom
+# Implementirajte s ažuriranom konfiguracijom
 azd deploy
 ```
 
@@ -275,24 +275,24 @@ Svi AZD predlošci agenata uključuju Application Insights za praćenje:
 # Otvori nadzornu ploču za praćenje
 azd monitor --overview
 
-# Pogledaj žive zapise
+# Pregledaj uživo zapisnike
 azd monitor --logs
 
-# Pogledaj žive metrike
+# Pregledaj uživo metrike
 azd monitor --live
 ```
 
-### Ključni metrički indikatori
+### Ključne metrike za praćenje
 
 | Metrička vrijednost | Opis | Cilj |
-|---------------------|-------|------|
-| Kašnjenje odgovora | Vrijeme potrebno za generiranje odgovora | < 5 sekundi |
-| Potrošnja tokena | Tokeni po zahtjevu | Pratiti radi troškova |
-| Uspješnost poziva alata | % uspješno izvršenih alata | > 95% |
+|--------|-------------|--------|
+| Kašnjenje odgovora | Vrijeme za generiranje odgovora | < 5 sekundi |
+| Potrošnja tokena | Tokeni po upitu | Praćenje radi troškova |
+| Postotak uspješnih poziva alatu | % uspješnih izvršenja alata | > 95% |
 | Stopa pogrešaka | Neuspjeli zahtjevi agenta | < 1% |
-| Zadovoljstvo korisnika | Ocjene povratnih informacija | > 4,0/5,0 |
+| Zadovoljstvo korisnika | Rezultati povratnih informacija | > 4.0/5.0 |
 
-### Prilagođeno evidentiranje za agente
+### Prilagođeno logiranje za agente
 
 ```python
 import os
@@ -320,25 +320,25 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
 
 ---
 
-## 💰 Troškovi
+## 💰 Troškovne razmatranja
 
-### Procijenjeni mjesečni troškovi po obrascima
+### Procijenjeni mjesečni troškovi po obrascu
 
 | Obrazac | Razvojno okruženje | Produkcija |
-|---------|--------------------|------------|
+|---------|-----------------|------------|
 | Jedan agent | $50-100 | $200-500 |
 | RAG agent | $80-150 | $300-800 |
-| Više agenata (2-3 agenta) | $150-300 | $500-1,500 |
-| Enterprise više agenata | $300-500 | $1,500-5,000+ |
+| Višestruki agenti (2-3 agenta) | $150-300 | $500-1,500 |
+| Enterprise višestruki agenti | $300-500 | $1,500-5,000+ |
 
 ### Savjeti za optimizaciju troškova
 
-1. **Koristite gpt-4.1-mini za jednostavne zadatke**  
+1. **Koristite gpt-4.1-mini za jednostavne zadatke**
    ```bash
    azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
    ```
-  
-2. **Implementirajte keširanje za ponovljene upite**  
+
+2. **Implementirajte cache za ponovljene upite**
    ```python
    from functools import lru_cache
    
@@ -346,34 +346,34 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
    def get_cached_response(query_hash):
        return agent.run(query_hash)
    ```
-  
-3. **Postavite ograničenja tokena po pokretanju**  
+
+3. **Postavite ograničenja tokena po izvođenju**
    ```python
-   # Postavite max_completion_tokens prilikom pokretanja agenta, ne tijekom kreiranja
+   # Postavite max_completion_tokens prilikom pokretanja agenta, a ne tijekom stvaranja
    run = project_client.agents.create_run(
        thread_id=thread.id,
        agent_id=agent.id,
        max_completion_tokens=1000  # Ograničite duljinu odgovora
    )
    ```
-  
-4. **Smanjite na nulu kada se ne koristi**  
+
+4. **Smanjite na nulu kad nije u upotrebi**
    ```bash
-   # Container Apps se automatski skaliraju na nulu
+   # Container Apps se automatski skaliraju do nule
    azd env set MIN_REPLICAS "0"
    ```
-  
+
 ---
 
-## 🔧 Otklanjanje problema kod agenata
+## 🔧 Otklanjanje problema agenata
 
 ### Uobičajeni problemi i rješenja
 
 <details>
-<summary><strong>❌ Agent ne reagira na pozive alata</strong></summary>
+<summary><strong>❌ Agent ne odgovara na pozive alatu</strong></summary>
 
 ```bash
-# Provjerite jesu li alati ispravno registrirani
+# Provjerite jesu li alati pravilno registrirani
 azd show
 
 # Provjerite OpenAI implementaciju
@@ -386,8 +386,8 @@ azd monitor --logs
 ```
 
 **Uobičajeni uzroci:**
-- Nepodudaranje potpisa funkcije alata
-- Nedostaju potrebna dopuštenja
+- Neslaganje potpisa funkcije alata
+- Nedostaju potrebne dozvole
 - API endpoint nije dostupan
 </details>
 
@@ -395,7 +395,7 @@ azd monitor --logs
 <summary><strong>❌ Veliko kašnjenje u odgovorima agenta</strong></summary>
 
 ```bash
-# Provjerite Application Insights zbog uskih grla
+# Provjerite Application Insights za uska grla
 azd monitor --live
 
 # Razmotrite korištenje bržeg modela
@@ -404,8 +404,8 @@ azd deploy
 ```
 
 **Savjeti za optimizaciju:**
-- Koristite strimanje odgovora
-- Implementirajte keširanje odgovora
+- Koristite streaming odgovore
+- Implementirajte cache odgovora
 - Smanjite veličinu kontekstnog prozora
 </details>
 
@@ -413,7 +413,7 @@ azd deploy
 <summary><strong>❌ Agent vraća netočne ili halucinirane informacije</strong></summary>
 
 ```python
-# Poboljšajte s boljim sistemskim upitima
+# Poboljšajte s boljim uputama za sustav
 instructions = """
 You are a helpful assistant. IMPORTANT:
 - Only answer based on provided context
@@ -435,7 +435,7 @@ agent = project_client.agents.create_agent(
 <summary><strong>❌ Pogreške zbog prekoračenja limita tokena</strong></summary>
 
 ```python
-# Implementiraj upravljanje kontekstnim prozorom
+# Implementirajte upravljanje kontekstnim prozorom
 def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
     """Keep only recent messages within token limit."""
     import tiktoken
@@ -456,30 +456,30 @@ def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
 
 ---
 
-## 🎓 Prakticiranje
+## 🎓 Praktične vježbe
 
 ### Vježba 1: Implementirajte osnovnog agenta (20 minuta)
 
-**Cilj:** Postavite svog prvog AI agenta koristeći AZD
+**Cilj:** Implementirati svog prvog AI agenta koristeći AZD
 
 ```bash
 # Korak 1: Inicijalizirajte predložak
 azd init --template get-started-with-ai-agents
 
-# Korak 2: Prijavite se u Azure
+# Korak 2: Prijava u Azure
 azd auth login
-# Ako radite preko najmoprimaca, dodajte --tenant-id <tenant-id>
+# Ako radite preko više zakupaca, dodajte --tenant-id <tenant-id>
 
 # Korak 3: Implementirajte
 azd up
 
 # Korak 4: Testirajte agenta
-# Očekivani ishod nakon implementacije:
+# Očekivani rezultat nakon implementacije:
 #   Implementacija završena!
 #   Krajnja točka: https://<app-name>.<region>.azurecontainerapps.io
-# Otvorite URL prikazan u ispisu i pokušajte postaviti pitanje
+# Otvorite URL prikazan u izlazu i pokušajte postaviti pitanje
 
-# Korak 5: Pogledajte nadzor
+# Korak 5: Pregledajte nadzor
 azd monitor --overview
 
 # Korak 6: Očistite resurse
@@ -488,28 +488,26 @@ azd down --force --purge
 
 **Kriteriji uspjeha:**
 - [ ] Agent odgovara na pitanja
-- [ ] Moguć pristup nadzornoj ploči preko `azd monitor`
+- [ ] Može pristupiti nadzornoj ploči preko `azd monitor`
 - [ ] Resursi uspješno očišćeni
 
 ### Vježba 2: Dodajte prilagođeni alat (30 minuta)
 
-**Cilj:** Proširite agenta prilagođenim alatom
+**Cilj:** Proširiti agenta prilagođenim alatom
 
-1. Implementirajte predložak agenta:  
+1. Implementirajte predložak agenta:
    ```bash
    azd init --template get-started-with-ai-agents
    azd up
    ```
-  
-2. Kreirajte novu funkciju alata u kodu agenta:  
+2. Kreirajte novu funkciju alata u vašem agentnom kodu:
    ```python
    def get_weather(location: str) -> str:
        """Get current weather for a location."""
-       # Poziv API-ja vremenskoj službi
+       # Poziv API-ja prema vremenskoj službi
        return f"Weather in {location}: Sunny, 72°F"
    ```
-  
-3. Registrirajte alat s agentom:  
+3. Registrirajte alat s agentom:
    ```python
    from azure.ai.projects.models import FunctionTool
 
@@ -531,86 +529,85 @@ azd down --force --purge
        tools=[weather_tool]
    )
    ```
-  
-4. Ponovno implementirajte i testirajte:  
+4. Ponovno implementirajte i testirajte:
    ```bash
    azd deploy
-   # Pitajte: "Kakvo je vrijeme u Seattleu?"
+   # Pitaj: "Kakvo je vrijeme u Seattlu?"
    # Očekivano: Agent poziva get_weather("Seattle") i vraća informacije o vremenu
    ```
-  
+
 **Kriteriji uspjeha:**
-- [ ] Agent prepoznaje upite vezane uz vremensku prognozu
+- [ ] Agent prepoznaje upite vezane uz vremenski uvjet
 - [ ] Alat se pravilno poziva
-- [ ] Odgovori sadrže informacije o vremenu
+- [ ] Odgovor sadrži vremenske informacije
 
-### Vježba 3: Izradite RAG agenta (45 minuta)
+### Vježba 3: Izgradite RAG agenta (45 minuta)
 
-**Cilj:** Kreirajte agenta koji odgovara na pitanja iz vaših dokumenata
+**Cilj:** Stvoriti agenta koji odgovara na pitanja iz vaših dokumenata
 
 ```bash
-# Korak 1: Implementirajte RAG predložak
+# Korak 1: Postavite RAG predložak
 azd init --template azure-search-openai-demo
 azd up
 
-# Korak 2: Učitajte svoje dokumente
+# Korak 2: Prenesite svoje dokumente
 # Postavite PDF/TXT datoteke u direktorij data/, zatim pokrenite:
 python scripts/prepdocs.py
 
-# Korak 3: Testirajte s pitanjima specifičnim za domenu
-# Otvorite URL web aplikacije iz izlaza azd up
-# Postavljajte pitanja o svojim učitanim dokumentima
-# Odgovori bi trebali sadržavati reference na izvore poput [doc.pdf]
+# Korak 3: Testirajte s pitanjima specifičnim za domen
+# Otvorite URL web aplikacije iz azd up izlaza
+# Postavljajte pitanja o svojim prenesenim dokumentima
+# Odgovori bi trebali uključivati reference na citate poput [doc.pdf]
 ```
 
 **Kriteriji uspjeha:**
-- [ ] Agent odgovara na temelju učitanih dokumenata
-- [ ] Odgovori uključuju citate
-- [ ] Nema halucinacija na pitanjima izvan domena
+- [ ] Agent odgovara na temelju prenesenih dokumenata
+- [ ] Odgovori uključuju reference
+- [ ] Nema halucinacije na pitanja izvan domene
 
 ---
 
 ## 📚 Sljedeći koraci
 
-Sada kada razumijete AI agente, istražite ove napredne teme:
+Sada kad razumijete AI agente, istražite ove napredne teme:
 
 | Tema | Opis | Link |
-|-------|-------|------|
-| **Sustavi s više agenata** | Izgradite sustave s više surađujućih agenata | [Primjer maloprodaje s više agenata](../../examples/retail-scenario.md) |
-| **Obrasci koordinacije** | Naučite obrasce orkestracije i komunikacije | [Koordinacijski obrasci](../chapter-06-pre-deployment/coordination-patterns.md) |
-| **Produkcijska implementacija** | Produkcijska implementacija za poduzeća | [Produkcijske AI prakse](../chapter-08-production/production-ai-practices.md) |
-| **Evaluacija agenata** | Testirajte i procijenite izvedbu agenata | [Otklanjanje problema u AI](../chapter-07-troubleshooting/ai-troubleshooting.md) |
-| **Radionica za AI** | Praktično: Pripremite svoje AI rješenje za AZD | [Radionica za AI](ai-workshop-lab.md) |
+|-------|-------------|------|
+| **Sustavi s više agenata** | Izgradnja sustava s više surađujućih agenata | [Primjer maloprodajnog multi-agenta](../../examples/retail-scenario.md) |
+| **Obrasci koordinacije** | Naučite obrasce orkestracije i komunikacije | [Obrasci koordinacije](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **Implementacija u produkciju** | Implementacija agenata spremnih za poduzeće | [Prakse AI u produkciji](../chapter-08-production/production-ai-practices.md) |
+| **Evaluacija agenata** | Testirajte i procijenite izvedbu agenata | [Otklanjanje AI pogrešaka](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **AI laboratorij za radionice** | Praktično: Pripremite svoje AI rješenje za AZD | [AI laboratorij](ai-workshop-lab.md) |
 
 ---
 
-## 📖 Dodatni izvori
+## 📖 Dodatni resursi
 
 ### Službena dokumentacija
 - [Microsoft Foundry Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
-- [Microsoft Foundry Agent Service Brzi početak](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
+- [Brzi početak Microsoft Foundry Agent Service](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
 - [Semantic Kernel Agent Framework](https://learn.microsoft.com/semantic-kernel/)
 
 ### AZD predlošci za agente
-- [Započnite s AI agentima](https://github.com/Azure-Samples/get-started-with-ai-agents)
+- [Početak rada s AI agentima](https://github.com/Azure-Samples/get-started-with-ai-agents)
 - [Agent OpenAI Python Prompty](https://github.com/Azure-Samples/agent-openai-python-prompty)
-- [Azure Search OpenAI demo](https://github.com/Azure-Samples/azure-search-openai-demo)
+- [Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-### Zajednički resursi
-- [Awesome AZD - predlošci agenata](https://azure.github.io/awesome-azd/?tags=ai-agents)
+### Resursi zajednice
+- [Awesome AZD - Agentni predlošci](https://azure.github.io/awesome-azd/?tags=ai-agents)
 - [Azure AI Discord](https://discord.gg/microsoft-azure)
 - [Microsoft Foundry Discord](https://discord.gg/nTYy5BXMWG)
 
-### Vještine agenta za vaš uređivač
-- [**Microsoft Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Instalirajte ponovno upotrebljive AI vještine agenta za razvoj na Azure u GitHub Copilotu, Cursoru ili bilo kojem podržanom agentu. Uključuje vještine za [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [implementaciju](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy) i [dijagnostiku](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):  
+### Vještine agenata za vaš uređivač
+- [**Microsoft Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Instalirajte višekratno upotrebljive vještine AI agenata za Azure razvoj u GitHub Copilot, Cursor ili bilo koji podržani agent. Uključuje vještine za [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [implementaciju](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy) i [dijagnostiku](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
 
 ---
 
-**Navigacija**  
-- **Prethodni lekcija**: [Integracija Microsoft Foundry](microsoft-foundry-integration.md)  
+**Navigacija**
+- **Prethodna lekcija**: [Microsoft Foundry integracija](microsoft-foundry-integration.md)
 - **Sljedeća lekcija**: [Implementacija AI modela](ai-model-deployment.md)
 
 ---

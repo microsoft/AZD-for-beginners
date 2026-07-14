@@ -1,50 +1,50 @@
-# Microsoft Foundry integracija s AZD-om
+# Microsoft Foundry integracija s AZD
 
 **Navigacija poglavljima:**
 - **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
-- **📖 Trenutno poglavlje**: Poglavlje 2 - AI-prvo razvijanje
+- **📖 Trenutno poglavlje**: Poglavlje 2 - AI-prvo razvoj
 - **⬅️ Prethodno poglavlje**: [Poglavlje 1: Vaš prvi projekt](../chapter-01-foundation/first-project.md)
-- **➡️ Sljedeće**: [Postavljanje AI modela](ai-model-deployment.md)
+- **➡️ Sljedeće**: [Implementacija AI modela](ai-model-deployment.md)
 - **🚀 Sljedeće poglavlje**: [Poglavlje 3: Konfiguracija](../chapter-03-configuration/configuration.md)
 
 ## Pregled
 
-Ovaj vodič pokazuje kako integrirati Microsoft Foundry usluge s Azure Developer CLI (AZD) za pojednostavljene implementacije AI aplikacija. Microsoft Foundry pruža sveobuhvatnu platformu za izgradnju, implementaciju i upravljanje AI aplikacijama, dok AZD pojednostavljuje infrastrukturu i proces implementacije.
+Ovaj vodič pokazuje kako integrirati Microsoft Foundry usluge s Azure Developer CLI (AZD) za pojednostavljene implementacije AI aplikacija. Microsoft Foundry pruža sveobuhvatnu platformu za izgradnju, implementaciju i upravljanje AI aplikacijama, dok AZD pojednostavljuje proces infrastrukture i implementacije.
 
 ## Što je Microsoft Foundry?
 
-Microsoft Foundry je Microsoftova jedinstvena platforma za razvoj AI-a koja uključuje:
+Microsoft Foundry je Microsoftova objedinjena platforma za razvoj AI koja uključuje:
 
-- **Katalog modela**: Pristup najnaprednijim AI modelima
-- **Prompt Flow**: Vizualni dizajner za AI tijekove rada
-- **Microsoft Foundry portal**: Integrirano razvojno okruženje za AI aplikacije
-- **Opcije implementacije**: Više opcija za hostanje i skaliranje
-- **Sigurnost i zaštita**: Ugrađene značajke odgovornog AI-a
+- **Katalog modela**: Pristup najsuvremenijim AI modelima
+- **Prompt Flow**: Vizualni dizajner AI tijekova rada
+- **Microsoft Foundry Portal**: Integrirano razvojno okruženje za AI aplikacije
+- **Opcije implementacije**: Više opcija hostinga i skaliranja
+- **Sigurnost i zaštićenost**: Ugrađene funkcije odgovornog AI-ja
 
 ## AZD + Microsoft Foundry: Bolje zajedno
 
-| Značajka | Microsoft Foundry | Prednost integracije AZD-a |
+| Značajka | Microsoft Foundry | Korist AZD integracije |
 |---------|-----------------|------------------------|
-| **Implementacija modela** | Ručna implementacija putem portala | Automatske, ponovljive implementacije |
-| **Infrastruktura** | Klikom kroz provisioning | Infrastruktura kao kod (Bicep) |
-| **Upravljanje okruženjima** | Fokus na jedno okruženje | Više okruženja (dev/staging/prod) |
-| **CI/CD integracija** | Ograničeno | Izvorna podrška za GitHub Actions |
-| **Upravljanje troškovima** | Osnovno praćenje | Optimizacija troškova prema okruženju |
+| **Implementacija modela** | Ručna implementacija putem portala | Automatizirane, ponovljive implementacije |
+| **Infrastruktura** | Provisioniranje putem klika | Infrastruktura kao kod (Bicep) |
+| **Upravljanje okruženjem** | Fokus na jednom okruženju | Višestruka okruženja (razvoj/test/produkcija) |
+| **CI/CD integracija** | Ograničena | Izvorna podrška za GitHub Actions |
+| **Upravljanje troškovima** | Osnovno praćenje | Optimizacija troškova specifična za okruženje |
 
 ## Preduvjeti
 
-- Pretplata na Azure s odgovarajućim dozvolama
+- Pretplata na Azure sa odgovarajućim dopuštenjima
 - Instaliran Azure Developer CLI
 - Pristup Microsoft Foundry Models uslugama
 - Osnovno poznavanje Microsoft Foundry
 
-> **Trenutna verzija AZD-a:** Ovi primjeri su testirani na `azd` `1.23.12`. Za AI agent tijek rada koristite trenutačno izdanje preview ekstenzije i provjerite instaliranu verziju prije početka.
+> **Trenutna verzija AZD-a:** Ovi su primjeri pregledani u odnosu na `azd` `1.27.1`. Za AI tijek rada agenta koristite trenutačno izdanje preview ekstenzije i provjerite verziju prije početka.
 
-## Temeljni obrasci integracije
+## Osnovni obrasci integracije
 
-### Obrazac 1: Integracija Microsoft Foundry Models
+### Obrasci 1: Integracija Microsoft Foundry Models
 
-**Primjer upotrebe**: Postavljanje chat aplikacija s Microsoft Foundry Models modelima
+**Upotreba slučaja**: Implementacija chat aplikacija s modelima Microsoft Foundry Models
 
 ```yaml
 # azure.yaml
@@ -92,9 +92,9 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 }
 ```
 
-### Obrazac 2: AI pretraživanje + RAG integracija
+### Obrasci 2: AI pretraživanje + RAG integracija
 
-**Primjer upotrebe**: Implementacija aplikacija za generaciju povećanu pretraživanjem (RAG)
+**Upotreba slučaja**: Implementacija aplikacija za generaciju augmentiranu dohvaćanjem (RAG)
 
 ```bicep
 // Azure AI Search
@@ -122,9 +122,9 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 }
 ```
 
-### Obrazac 3: Integracija inteligencije dokumenata
+### Obrasci 3: Integracija inteligencije dokumenata
 
-**Primjer upotrebe**: Tijekovi rada za obradu i analizu dokumenata
+**Upotreba slučaja**: Tijekovi rada za obradu i analizu dokumenata
 
 ```bicep
 // Document Intelligence service
@@ -180,10 +180,10 @@ azd env set AZURE_SEARCH_SKU "standard"
 # Postavke optimizirane za troškove za razvoj
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set AZURE_SEARCH_SKU "basic"
-azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Besplatni nivo
+azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Besplatna razina
 ```
 
-### Sigurna konfiguracija s Key Vaultom
+### Sigurna konfiguracija s Key Vault
 
 ```bicep
 // Key Vault for secrets
@@ -218,34 +218,34 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-## Tijekovi implementacije
+## Tijekovi rada implementacije
 
 ### AZD ekstenzije za Foundry
 
-AZD pruža ekstenzije koje dodaju AI-specifične sposobnosti za rad s Microsoft Foundry uslugama:
+AZD pruža ekstenzije koje dodaju AI-specifične mogućnosti za rad s Microsoft Foundry uslugama:
 
 ```bash
-# Instalirajte proširenje agenata Foundry
+# Instalirajte Foundry agenta dodatak
 azd extension install azure.ai.agents
 
-# Instalirajte proširenje za fino podešavanje
+# Instalirajte dodatak za fino podešavanje
 azd extension install azure.ai.finetune
 
-# Instalirajte proširenje za prilagođene modele
+# Instalirajte dodatak za prilagođene modele
 azd extension install azure.ai.models
 
-# Popis instaliranih proširenja
+# Popis instaliranih dodataka
 azd extension list --installed
 
-# Pregledajte trenutno instaliranu verziju proširenja agenata
+# Pregledajte trenutno instaliranu verziju agenta dodatka
 azd extension show azure.ai.agents
 ```
 
-AI ekstenzije su u brzoj fazi pregleda. Ako se naredba ponaša drugačije nego što je prikazano ovdje, nadogradite relevantnu ekstenziju prije nego što rješavate probleme s projektom.
+AI ekstenzije su još uvijek u brzom razvoju u pregledu. Ako se neka naredba ponaša drugačije nego što je ovdje prikazano, nadogradite odgovarajuću ekstenziju prije nego što započnete rješavanje problema projekta.
 
-### Implementacija s agentom pomoću `azd ai`
+### Implementacija agent-prvo s `azd ai`
 
-Ako imate manifest agenta, koristite `azd ai agent init` za kreiranje projekta povezanog s Foundry Agent Service:
+Ako imate manifest agenta, koristite `azd ai agent init` za generiranje projekta povezanog s Foundry Agent Service:
 
 ```bash
 # Inicijaliziraj iz manifesta agenta
@@ -255,21 +255,21 @@ azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 azd up
 ```
 
-Nedavna preview izdanja `azure.ai.agents` također su dodala podršku za inicijalizaciju temeljenu na predlošcima za `azd ai agent init`. Ako pratite novije uzorke agenata, pogledajte pomoć proširenja za točne dostupne zastavice u vašoj verziji.
+Nedavna pregledna izdanja `azure.ai.agents` također su dodala podršku za generiranje šablona kroz `azd ai agent init`. Ako pratite novije primjere agenata, provjerite pomoć ekstenzije za točne zastavice dostupne u vašoj instaliranoj verziji.
 
-Pogledajte [AZD AI CLI naredbe](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) za puni referentni popis naredbi i zastavica.
+Pogledajte [AZD AI CLI naredbe](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) za cjeloviti popis naredbi i zastavica.
 
-### Implementacija jednom naredbom
+### Implementacija jednim naredbom
 
 ```bash
-# Razmjestite sve jednom naredbom
+# Sve implementirajte jednom naredbom
 azd up
 
-# Ili razmjestite postupno
+# Ili implementirajte postepeno
 azd provision  # Samo infrastruktura
 azd deploy     # Samo aplikacija
 
-# Za dugotrajne razmjeste AI aplikacija u azd 1.23.11+
+# Za dugotrajne implementacije AI aplikacija u azd 1.23.11+
 azd deploy --timeout 1800
 ```
 
@@ -290,7 +290,7 @@ azd env set AZURE_OPENAI_CAPACITY 100
 azd up
 ```
 
-## Praćenje i nadzor
+## Praćenje i očitljivost
 
 ### Integracija Application Insights
 
@@ -466,20 +466,20 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-## Rješavanje čestih problema
+## Rješavanje uobičajenih problema
 
-### Problem 1: Prekoračenje ograničenja OpenAI
+### Problem 1: Prelazak OpenAI kvote
 
 **Simptomi:**
-- Neuspjeh implementacije zbog pogrešaka kvote
-- 429 pogreške u zapisima aplikacije
+- Implementacija ne uspijeva s greškama kvote
+- 429 grešaka u zapisima aplikacije
 
 **Rješenja:**
 ```bash
-# Provjerite trenutačnu potrošnju kvote
+# Provjerite trenutnu upotrebu kvote
 az cognitiveservices usage list --location eastus
 
-# Pokušajte s drugom regijom
+# Isprobajte drugu regiju
 azd env set AZURE_LOCATION westus2
 azd up
 
@@ -488,10 +488,10 @@ azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
 
-### Problem 2: Neuspjeli autentikacijski pokušaji
+### Problem 2: Neuspjeh autentikacije
 
 **Simptomi:**
-- 401/403 pogreške prilikom poziva AI usluga
+- 401/403 greške prilikom poziva AI usluga
 - Poruke "Pristup odbijen"
 
 **Rješenja:**
@@ -510,26 +510,26 @@ az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 
 **Simptomi:**
 - Modeli nisu dostupni u implementaciji
-- Pojedine verzije modela ne rade
+- Specifične verzije modela ne uspijevaju
 
 **Rješenja:**
 ```bash
-# Nabrojite dostupne modele po regiji
+# Popis dostupnih modela po regiji
 az cognitiveservices model list --location eastus
 
-# Ažurirajte verziju modela u bicep predlošku
-# Provjerite zahtjeve kapaciteta modela
+# Ažuriraj verziju modela u bicep predlošku
+# Provjeri zahtjeve za kapacitet modela
 ```
 
-## Primjeri predložaka
+## Primjer predložaka
 
 ### RAG chat aplikacija (Python)
 
-**Repozitorij**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
+**Spremište**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
 **Usluge**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
 
-**Opis**: Najpopularniji Azure AI uzorak — produkcijski spremna RAG chat aplikacija koja omogućuje postavljanje pitanja nad vlastitim dokumentima. Koristi GPT-4.1-mini za chat, text-embedding-3-large za ugrađivanja i Azure AI Search za dohvat. Podržava multimodalne dokumente, glasovni unos/izlaz, Microsoft Entra autentikaciju i praćenje putem Application Insights.
+**Opis**: Najpopularniji Azure AI primjer — proizvodno spremna RAG chat aplikacija koja omogućava postavljanje pitanja nad vlastitim dokumentima. Koristi GPT-4.1-mini za chat, text-embedding-3-large za ugradnje i Azure AI Search za dohvaćanje. Podržava multimodalne dokumente, unos/izlaz govora, Microsoft Entra autentikaciju i praćenje s Application Insights.
 
 **Brzi početak**:
 ```bash
@@ -539,11 +539,11 @@ azd up
 
 ### RAG chat aplikacija (.NET)
 
-**Repozitorij**: [azure-search-openai-demo-csharp](https://github.com/Azure-Samples/azure-search-openai-demo-csharp)
+**Spremište**: [azure-search-openai-demo-csharp](https://github.com/Azure-Samples/azure-search-openai-demo-csharp)
 
 **Usluge**: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
 
-**Opis**: .NET/C# ekvivalent Python RAG chat uzorka. Izgrađena s ASP.NET Core Minimal API i Blazor WebAssembly frontendom. Uključuje voice chat, GPT-4o-mini podršku za viziju, i pratećeg .NET MAUI Blazor hibridnog desktop/mobilnog klijenta.
+**Opis**: .NET/C# ekvivalent Python RAG chat primjera. Izgrađeno s ASP.NET Core Minimal API i Blazor WebAssembly frontendom. Uključuje glasovni chat, podršku za GPT-4o-mini vision i companion .NET MAUI Blazor Hybrid mobilni i desktop klijent.
 
 **Brzi početak**:
 ```bash
@@ -553,11 +553,11 @@ azd up
 
 ### RAG chat aplikacija (Java)
 
-**Repozitorij**: [azure-search-openai-demo-java](https://github.com/Azure-Samples/azure-search-openai-demo-java)
+**Spremište**: [azure-search-openai-demo-java](https://github.com/Azure-Samples/azure-search-openai-demo-java)
 
 **Usluge**: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
 
-**Opis**: Java verzija RAG chat uzorka koja koristi Langchain4J za AI orkestraciju. Podržava mikroservisnu arhitekturu vođenu događajima, višestruke strategije pretraživanja (tekst, vektor, hibrid), upload dokumenata s Azure Document Intelligence i implementaciju na Azure Container Apps ili Azure Kubernetes Service.
+**Opis**: Java verzija RAG chat primjera koristeći Langchain4J za AI orkestraciju. Podržava mikroservisnu event-driven arhitekturu, više strategija pretraživanja (tekst, vektor, hibrid), prijenos dokumenata s Azure Document Intelligence te implementaciju na Azure Container Apps ili Azure Kubernetes Service.
 
 **Brzi početak**:
 ```bash
@@ -565,13 +565,13 @@ azd init --template azure-search-openai-demo-java
 azd up
 ```
 
-### Enterprise maloprodajni kopilot s Microsoft Foundry
+### Enterprise Retail Copilot s Microsoft Foundry
 
-**Repozitorij**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
+**Spremište**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
 **Usluge**: Azure OpenAI + Microsoft Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
 
-**Opis**: Sveobuhvatan maloprodajni RAG kopilot koristeći Microsoft Foundry i Prompty. Contoso Outdoor chatbot koji temelji odgovore na katalogu proizvoda i podacima narudžbi kupaca. Demonstrira cijeli GenAIOps tijek rada — prototip s Promptyjem, evaluacija uz AI asistirane evaluatore i implementacija putem AZD-a u Container Apps.
+**Opis**: End-to-end maloprodajni RAG copilot koristeći Microsoft Foundry i Prompty. Contoso Outdoor chatbot s odgovorima utemeljenim na katalogu proizvoda i podacima o narudžbama kupaca. Demonstrira kompletan GenAIOps tijek rada — prototip s Promptyjem, evaluacija s AI-podržanim evaluatorima i implementacija putem AZD u Container Apps.
 
 **Brzi početak**:
 ```bash
@@ -579,13 +579,13 @@ azd init --template contoso-chat
 azd up
 ```
 
-### Kreativna višestruka agentska aplikacija za pisanje
+### Višekomponentna aplikacija za kreativno pisanje
 
-**Repozitorij**: [contoso-creative-writer](https://github.com/Azure-Samples/contoso-creative-writer)
+**Spremište**: [contoso-creative-writer](https://github.com/Azure-Samples/contoso-creative-writer)
 
 **Usluge**: Azure OpenAI + Azure AI Agent Service + Bing Grounding + Azure AI Search + Azure Container Apps
 
-**Opis**: Primjer s više agenata koji demonstrira orkestraciju AI agenata s Promptyjem. Koristi istraživačkog agenta (Bing Grounding u Azure AI Agent Service), produkt agenta (Azure AI Search), pisca i urednika agenta za zajedničko stvaranje dobro istraženih članaka. Uključuje CI/CD s evaluacijom u GitHub Actions.
+**Opis**: Primjer višekomponentnog upravljanja AI agentima s Promptyjem. Koristi istraživačkog agenta (Bing Grounding u Azure AI Agent Service), produktnog agenta (Azure AI Search), pisca i urednika za zajedničku proizvodnju dobro istraženih članaka. Uključuje CI/CD s evaluacijom u GitHub Actions.
 
 **Brzi početak**:
 ```bash
@@ -593,13 +593,13 @@ azd init --template contoso-creative-writer
 azd up
 ```
 
-### Serverless RAG chat (JavaScript/TypeScript)
+### Serverless RAG Chat (JavaScript/TypeScript)
 
-**Repozitorij**: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
+**Spremište**: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
 
 **Usluge**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB za NoSQL + LangChain.js
 
-**Opis**: Potpuno serverless RAG chatbot koristeći LangChain.js s Azure Functions za API i Azure Static Web Apps za hosting. Koristi Azure Cosmos DB kao pohranu vektora i bazu za povijest chata. Podržava lokalni razvoj s Ollama za testiranje bez troškova.
+**Opis**: Potpuno serverless RAG chatbot koristeći LangChain.js s Azure Functions za API i Azure Static Web Apps za hosting. Koristi Azure Cosmos DB kao skladište vektora i bazu podataka povijesti chatova. Podržava lokalni razvoj s Ollama za testiranje bez troškova.
 
 **Brzi početak**:
 ```bash
@@ -607,13 +607,13 @@ azd init --template serverless-chat-langchainjs
 azd up
 ```
 
-### Chat rješenje s vašim podacima Solution Accelerator
+### Chat s vašim podacima Solution Accelerator
 
-**Repozitorij**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
+**Spremište**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
 
 **Usluge**: Azure OpenAI + Azure AI Search + Azure App Service + Azure Document Intelligence + Azure Functions + Azure Cosmos DB / PostgreSQL
 
-**Opis**: Rješenje za RAG enterprise razine s administracijskim portalom za upload/upravljanje dokumentima, višestrukim opcijama orchestratora (Semantic Kernel, LangChain, Prompt Flow), govor u tekst, integraciju Microsoft Teams i izbor PostgreSQL ili Cosmos DB backend-a. Dizajnirano kao prilagodljiva početna točka za produkcijske RAG scenarije.
+**Opis**: Enterprise razina RAG rješenja s administratorskim portalom za prijenos/upravljanje dokumentima, više opcija orkestratora (Semantic Kernel, LangChain, Prompt Flow), govor u tekst, integracija Microsoft Teamsa i izbor PostgreSQL ili Cosmos DB pozadine. Dizajnirano kao prilagodljiva polazna točka za produkcijske RAG scenarije.
 
 **Brzi početak**:
 ```bash
@@ -621,13 +621,13 @@ azd init --template chat-with-your-data-solution-accelerator
 azd up
 ```
 
-### AI putnički agenti — višestruka agentska MCP orkestracija
+### AI Travel Agents — Višekomponentna MCP orkestracija
 
-**Repozitorij**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
+**Spremište**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
 
-**Usluge**: Azure OpenAI + Microsoft Foundry + Azure Container Apps + MCP serveri (.NET, Python, Java, TypeScript)
+**Usluge**: Azure OpenAI + Microsoft Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
 
-**Opis**: Referentna aplikacija za višestruku agentsku AI orkestraciju koristeći tri okvira (LangChain.js, LlamaIndex.TS i Microsoft Agent Framework). Sadrži MCP (Model Context Protocol) servere na četiri jezika implementirane kao serverless Azure Container Apps s OpenTelemetry nadzorom.
+**Opis**: Referentna aplikacija za višekomponentnu AI orkestraciju koristeći tri okvira (LangChain.js, LlamaIndex.TS i Microsoft Agent Framework). Sadrži MCP (Model Context Protocol) servere na četiri jezika implementirane kao serverless Azure Container Apps s OpenTelemetry praćenjem.
 
 **Brzi početak**:
 ```bash
@@ -635,13 +635,13 @@ azd init --template azure-ai-travel-agents
 azd up
 ```
 
-### Azure AI početni predložak
+### Azure AI Starter
 
-**Repozitorij**: [azd-ai-starter](https://github.com/Azure/azd-ai-starter)
+**Spremište**: [azd-ai-starter](https://github.com/Azure/azd-ai-starter)
 
 **Usluge**: Azure AI usluge + Azure OpenAI
 
-**Opis**: Minimalni Bicep predložak koji implementira Azure AI usluge s konfiguriranim modelima za strojno učenje. Lagana početna točka kad trebate samo Azure AI infrastrukturu bez punog stoga aplikacije.
+**Opis**: Minimalni Bicep predložak koji implementira Azure AI usluge s konfiguriranim modelima strojnog učenja. Lagana polazna točka kada vam je potrebna samo Azure AI infrastruktura bez pune aplikacijske slojeve.
 
 **Brzi početak**:
 ```bash
@@ -649,21 +649,21 @@ azd init --template azd-ai-starter
 azd up
 ```
 
-> **Pregledajte više predložaka**: Posjetite [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) za više od 80 AI-specifičnih AZD predložaka na različitim jezicima i scenarijima.
+> **Pogledajte više predložaka**: Posjetite [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) za više od 80 AI-specifičnih AZD predložaka na različitim jezicima i scenarijima.
 
 ## Sljedeći koraci
 
-1. **Isprobajte primjere**: Počnite s unaprijed izrađenim predloškom koji odgovara vašem slučaju upotrebe
-2. **Prilagodite potrebama**: Izmijenite infrastrukturu i kod aplikacije
-3. **Dodajte praćenje**: Implementirajte sveobuhvatnu vidljivost
-4. **Optimizirajte troškove**: Finetunirajte konfiguracije za svoj budžet
-5. **Osigurajte implementaciju**: Implementirajte sigurnosne obrasce za poduzeća
-6. **Skalirajte za produkciju**: Dodajte višeregionalne i visoko dostupne značajke
+1. **Isprobajte primjere**: Započnite s unaprijed izrađenim predloškom koji odgovara vašem slučaju upotrebe
+2. **Prilagodite za svoje potrebe**: Izmijenite infrastrukturu i aplikacijski kod
+3. **Dodajte praćenje**: Implementirajte sveobuhvatnu očitljivost
+4. **Optimizirajte troškove**: Precizno namjestite konfiguracije prema vašem proračunu
+5. **Osigurajte implementaciju**: Implementirajte sigurnosne obrasce za tvrtku
+6. **Skalirajte za produkciju**: Dodajte više regija i značajke visoke dostupnosti
 
 ## 🎯 Praktične vježbe
 
 ### Vježba 1: Implementirajte Microsoft Foundry Models chat aplikaciju (30 minuta)
-**Cilj**: Implementirati i testirati produkcijski AI chat aplikaciju
+**Cilj**: Implementirati i testirati proizvodno spremnu AI chat aplikaciju
 
 ```bash
 # Inicijaliziraj predložak
@@ -681,18 +681,18 @@ azd up
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Chat app: $WEB_URL"
 
-# Prati AI operacije
+# Nadziranje AI operacija
 azd monitor
 
-# Očisti zaslon
+# Očisti
 azd down --force --purge
 ```
 
 **Kriteriji uspjeha:**
-- [ ] Implementacija završena bez pogrešaka kvote
-- [ ] Pristup chat sučelju preko preglednika
+- [ ] Implementacija završava bez grešaka kvote
+- [ ] Pristup chat sučelju putem preglednika
 - [ ] Mogućnost postavljanja pitanja i dobivanja AI-pokretanih odgovora
-- [ ] Application Insights pokazuje telemetrijske podatke
+- [ ] Application Insights prikazuje telemetrijske podatke
 - [ ] Uspješno čišćenje resursa
 
 **Procijenjeni trošak**: 5-10 USD za 30 minuta testiranja
@@ -701,7 +701,7 @@ azd down --force --purge
 **Cilj**: Implementirati više AI modela s različitim konfiguracijama
 
 ```bash
-# Kreirajte prilagođenu Bicep konfiguraciju
+# Izradite prilagođenu Bicep konfiguraciju
 cat > infra/ai-models.bicep << 'EOF'
 param openAiAccountName string
 param location string
@@ -746,7 +746,7 @@ resource embedding 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01'
 }
 EOF
 
-# Postavite i provjerite
+# Implementirajte i provjerite
 azd provision
 azd show
 ```
@@ -754,11 +754,11 @@ azd show
 **Kriteriji uspjeha:**
 - [ ] Više modela uspješno implementirano
 - [ ] Primijenjene različite postavke kapaciteta
-- [ ] Modeli dostupni preko API-ja
-- [ ] Moguć poziv oba modela iz aplikacije
+- [ ] Modeli dostupni putem API-ja
+- [ ] Mogućnost pozivanja oba modela iz aplikacije
 
 ### Vježba 3: Implementirajte praćenje troškova (20 minuta)
-**Cilj**: Postaviti upozorenja o proračunu i praćenje troškova
+**Cilj**: Postaviti upozorenja za proračun i praćenje troškova
 
 ```bash
 # Dodaj upozorenje o proračunu u Bicep
@@ -795,28 +795,30 @@ EOF
 # Implementiraj upozorenje o proračunu
 azd provision
 
-# Provjeri trenutačne troškove
+# Provjeri trenutne troškove
 az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-date $(date +%Y-%m-%d)
 ```
 
 **Kriteriji uspjeha:**
-- [ ] Kreirano upozorenje o proračunu u Azureu
-- [ ] Konfigurirane email notifikacije
-- [ ] Moguć prikaz podataka o troškovima u Azure portalu
-- [ ] Postavljeni odgovarajući pragovi proračuna
+- [ ] U Azureu kreirano upozorenje proračuna
+- [ ] Konfigurirane e-mail obavijesti
+- [ ] Prikaz troškova u Azure Portalu
+- [ ] Proračunski pragovi postavljeni odgovarajuće
 
 ## 💡 Često postavljana pitanja
 
 <details>
 <summary><strong>Kako smanjiti troškove Microsoft Foundry Models tijekom razvoja?</strong></summary>
 
-1. **Koristite besplatni sloj**: Microsoft Foundry Models nudi 50.000 tokena mjesečno besplatno
+1. **Koristite besplatni sloj**: Microsoft Foundry Models daje 50.000 tokena/mjesečno besplatno
 2. **Smanjite kapacitet**: Postavite kapacitet na 10 TPM umjesto 30+ za razvoj
-3. **Koristite azd down**: Dealokacija resursa kada aktivno ne razvijate
-4. **Keširajte odgovore**: Implementirajte Redis keš za ponovljene upite
-5. **Koristite Prompt Engineering**: Smanjite upotrebu tokena učinkovitim promptovima
+3. **Koristite azd down**: Dealokirajte resurse dok ne razvijate aktivno
+4. **Keširajte odgovore**: Implementirajte Redis cache za ponavljane upite
+5. **Koristite prompt inženjering**: Smanjite upotrebu tokena učinkovitim promptima
+
+
 ```bash
-# Konfiguracija razvoja
+# Konfiguracija za razvoj
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set ENABLE_RESPONSE_CACHE true
 ```
@@ -826,29 +828,29 @@ azd env set ENABLE_RESPONSE_CACHE true
 <summary><strong>Koja je razlika između Microsoft Foundry modela i OpenAI API-ja?</strong></summary>
 
 **Microsoft Foundry modeli**:
-- Sigurnost i usklađenost za poduzeća
+- Sigurnost poduzeća i usklađenost
 - Integracija privatne mreže
-- SLA jamstva
+- Jamstvo SLA
 - Autentifikacija upravljanim identitetom
-- Dostupni viši kvote
+- Dostupni veći kvote
 
 **OpenAI API**:
 - Brži pristup novim modelima
-- Jednostavnije postavljanje
-- Niža prepreka za ulazak
+- Jednostavnija konfiguracija
+- Niža ulazna barijera
 - Samo javni internet
 
-Za produkcijske aplikacije, **preporučuju se Microsoft Foundry modeli**.
+Za produkcijske aplikacije, **Microsoft Foundry modeli se preporučuju**.
 </details>
 
 <details>
-<summary><strong>Kako riješiti greške prekoračenja kvote kod Microsoft Foundry modela?</strong></summary>
+<summary><strong>Kako riješiti pogreške prekoračenja kvote za Microsoft Foundry modele?</strong></summary>
 
 ```bash
-# Provjerite trenutni kvotu
+# Provjerite trenutni limit
 az cognitiveservices usage list --location eastus2
 
-# Pokušajte drugu regiju
+# Pokušajte s drugačijim područjem
 azd env set AZURE_LOCATION westus2
 azd up
 
@@ -856,8 +858,8 @@ azd up
 azd env set AZURE_OPENAI_CAPACITY 10
 azd provision
 
-# Zatražite povećanje kvote
-# Idite na Azure Portal > Kvote > Zatražite povećanje
+# Zatražite povećanje limita
+# Idite na Azure Portal > Kvote > Zatraži povećanje
 ```
 </details>
 
@@ -880,14 +882,14 @@ Pogledajte predložak [azure-search-openai-demo](https://github.com/Azure-Sample
 </details>
 
 <details>
-<summary><strong>Kako osigurati AI model endpoints?</strong></summary>
+<summary><strong>Kako osigurati krajnje točke AI modela?</strong></summary>
 
 **Najbolje prakse**:
 1. Koristite Managed Identity (bez API ključeva)
-2. Omogućite privatne endpointove
-3. Konfigurirajte grupe mrežne sigurnosti
-4. Implementirajte ograničenje brzine
-5. Koristite Azure Key Vault za tajne
+2. Omogućite Private Endpoints
+3. Konfigurirajte mrežne sigurnosne grupe
+4. Implementirajte ograničenje brzine (rate limiting)
+5. Koristite Azure Key Vault za tajne podatke
 
 ```bicep
 // Managed Identity authentication
@@ -909,21 +911,21 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 ## Zajednica i podrška
 
-- **Microsoft Foundry Discord**: [#Azure kanal](https://discord.gg/microsoft-azure)
-- **AZD GitHub**: [Problemi i rasprave](https://github.com/Azure/azure-dev)
+- **Microsoft Foundry Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
+- **AZD GitHub**: [Issues and discussions](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Službena dokumentacija](https://learn.microsoft.com/azure/ai-studio/)
-- **Agent Skills**: [Microsoft Foundry skill na skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Instalirajte Azure + Foundry agent skills u vašem uređivaču s `npx skills add microsoft/github-copilot-for-azure`
+- **Agent Skills**: [Microsoft Foundry vještina na skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Instalirajte Azure + Foundry agent skills u svoj uređivač s `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**Navigacija poglavlja:**
-- **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
-- **📖 Trenutno poglavlje**: Poglavlje 2 - AI-First Development
+**Navigacija poglavljima:**
+- **📚 Početna tečaja**: [AZD za početnike](../../README.md)
+- **📖 Trenutno poglavlje**: Poglavlje 2 - AI-prvi razvoj
 - **⬅️ Prethodno poglavlje**: [Poglavlje 1: Vaš prvi projekt](../chapter-01-foundation/first-project.md)
 - **➡️ Sljedeće**: [Implementacija AI modela](ai-model-deployment.md)
 - **🚀 Sljedeće poglavlje**: [Poglavlje 3: Konfiguracija](../chapter-03-configuration/configuration.md)
 
-**Trebate pomoć?** Pridružite se našim zajedničkim raspravama ili otvorite issue u repozitoriju. Azure AI + AZD zajednica je ovdje da vam pomogne uspjeti!
+**Treba vam pomoć?** Pridružite se našim raspravama u zajednici ili otvorite problem u repozitoriju. Azure AI + AZD zajednica je ovdje da vam pomogne uspjeti!
 
 ---
 
