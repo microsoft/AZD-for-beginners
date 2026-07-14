@@ -1,34 +1,34 @@
-# 第 5 章：多代理 AI 解決方案
+# 第五章：多代理人工智慧解決方案
 
-**📚 課程**: [AZD 初學者](../../README.md) | **⏱️ 時間**: 2-3 小時 | **⭐ 複雜度**: 進階
+**📚 課程**：[AZD 初學者入門](../../README.md) | **⏱️ 時長**：2-3 小時 | **⭐ 難度**：進階
 
 ---
 
 ## 概覽
 
-本章涵蓋進階的多代理架構模式、代理編排，以及針對複雜情境的可投入生產的 AI 部署。
+本章涵蓋進階多代理架構模式、代理協調，以及針對複雜場景的生產級人工智慧部署。
 
-> 已於 2026 年 6 月使用 `azd 1.25.6` 驗證。
+> 已於 2026 年 7 月使用 `azd 1.27.1` 驗證。
 
 ## 學習目標
 
-完成本章後，您將：
+完成本章後，您將能：
 - 了解多代理架構模式
-- 部署協同的 AI 代理系統
+- 部署協同運作的人工智慧代理系統
 - 實作代理間通訊
-- 建立可投入生產的多代理解決方案
+- 建立生產級多代理解決方案
 
 ---
 
-## 📚 課程單元
+## 📚 課程列表
 
-| # | 單元 | 描述 | 時間 |
+| # | 課程 | 說明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [多代理基礎](multi-agent-basics.md) | 實作：使用 `azd up` 部署可運作的多代理應用程式 | 45 分鐘 |
-| 2 | [協調模式](../chapter-06-pre-deployment/coordination-patterns.md) | 代理編排策略（於第 6 章繼續） | 30 分鐘 |
-| 3 | [ARM 範本部署](../../examples/retail-multiagent-arm-template/README.md) | 一鍵部署範例 | 30 分鐘 |
+| 1 | [多代理基礎](multi-agent-basics.md) | 實作操作：用 `azd up` 部署可運作多代理應用 | 45 分鐘 |
+| 2 | [協調模式](../chapter-06-pre-deployment/coordination-patterns.md) | 代理協調策略（第六章繼續） | 30 分鐘 |
+| 3 | [ARM 模板部署](../../examples/retail-multiagent-arm-template/README.md) | 一鍵部署範例 | 30 分鐘 |
 
-> **從第 1 課開始。** 這是本章唯一完全實作並可部署的課程單元。第 2 課位於第 6 章（與部署前規劃共用），而 [零售多代理解決方案](../../examples/retail-scenario.md) 是一個架構藍圖——設計參考，而非一鍵範本。
+> **從第一課程開始。** 這是本章唯一全程實作且可部署的課程。第二課程位於第六章（與預部署規劃共用），而[零售多代理解決方案](../../examples/retail-scenario.md)是架構藍圖──設計參考，而非一鍵模板。
 
 ---
 
@@ -39,13 +39,13 @@
 azd init --template agent-openai-python-prompty
 azd up
 
-# 選項 2：從代理程式清單部署（需要 azure.ai.agents 擴充套件）
+# 選項 2：從代理程式清單部署（需要 azure.ai.agents 擴充功能）
 azd extension install azure.ai.agents
 azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **採用哪種方式？** 使用 `azd init --template` 從可運作的範例開始。當您已有自己的代理 manifest 時，使用 `azd ai agent init`。完整細節請參閱 [AZD AI CLI 參考](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions)。
+> **使用哪種方式？** 使用 `azd init --template` 從運作範例開始。擁有代理清單時，使用 `azd ai agent init`。參見 [AZD AI CLI 參考](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) 以了解完整細節。
 
 ---
 
@@ -53,8 +53,8 @@ azd up
 
 ```mermaid
 graph TD
-    Orchestrator[Orchestrator 代理<br/>路由請求，管理工作流程] --> Customer[Customer 代理<br/>使用者查詢、偏好]
-    Orchestrator --> Inventory[Inventory 代理<br/>庫存數量、訂單]
+    Orchestrator[協調者代理人<br/>路由請求，管理工作流程] --> Customer[客戶代理人<br/>用戶查詢，偏好設定]
+    Orchestrator --> Inventory[庫存代理人<br/>庫存水平，訂單訊息]
 ```
 
 ---
@@ -63,36 +63,36 @@ graph TD
 
 [零售多代理解決方案](../../examples/retail-scenario.md) 示範：
 
-- <strong>客戶代理</strong>：處理使用者互動與偏好
+- <strong>客戶代理</strong>：處理使用者互動與喜好
 - <strong>庫存代理</strong>：管理庫存與訂單處理
-- <strong>編排器</strong>：協調代理之間的運作
-- <strong>共享記憶體</strong>：跨代理的上下文管理
+- <strong>協調者</strong>：代理間協調
+- <strong>共享記憶體</strong>：跨代理上下文管理
 
 ### 使用服務
 
-| 服務 | 用途 |
+| 服務 | 目的 |
 |---------|---------|
 | Microsoft Foundry Models | 語言理解 |
 | Azure AI Search | 產品目錄 |
 | Cosmos DB | 代理狀態與記憶 |
-| Container Apps | 代理託管 |
+| Container Apps | 代理主機 |
 | Application Insights | 監控 |
 
 ---
 
-## 🔗 導航
+## 🔗 導覽
 
 | 方向 | 章節 |
 |-----------|---------|
-| <strong>上一章</strong> | [第 4 章：基礎架構](../chapter-04-infrastructure/README.md) |
-| <strong>下一章</strong> | [第 6 章：部署前](../chapter-06-pre-deployment/README.md) |
+| <strong>上一章</strong> | [第四章：基礎設施](../chapter-04-infrastructure/README.md) |
+| <strong>下一章</strong> | [第六章：預部署](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 相關資源
 
 - [AI 代理指南](../chapter-02-ai-development/agents.md)
-- [生產環境 AI 實務](../chapter-08-production/production-ai-practices.md)
+- [生產級 AI 實務](../chapter-08-production/production-ai-practices.md)
 - [AI 疑難排解](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---

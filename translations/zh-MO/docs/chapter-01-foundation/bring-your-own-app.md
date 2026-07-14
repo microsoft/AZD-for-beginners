@@ -1,59 +1,59 @@
-# Bring Your Own App - 將 azd 加入現有專案
+# 自攜應用程式 - 為現有專案新增 azd
 
 **章節導覽：**
-- **📚 課程首頁**: [AZD 入門](../../README.md)
-- **📖 目前章節**：第 1 章 - 基礎與快速開始
-- **⬅️ 上一章**： [你的第一個專案](first-project.md)
-- **➡️ 下一章**： [開發容器與 Codespaces](dev-containers.md)
+- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
+- **📖 目前章節**: 章節 1 - 基礎與快速入門
+- **⬅️ 前一頁**: [你的第一個專案](first-project.md)
+- **➡️ 下一頁**: [開發容器與 Codespaces](dev-containers.md)
 
-> 已在 2026 年 6 月以 `azd 1.25.6` 驗證。
+> 已於 2026 年 7 月針對 `azd 1.27.1` 驗證。
 
 ## 介紹
 
-在 [你的第一個專案](first-project.md) 中你是從範本開始部署應用程式。但大多數情況下你已經有一個應用程式——例如 Node.js API、Python Flask 服務、或 .NET 網頁應用——放在機器上的某個資料夾。本課程示範如何將 azd 新增到既有程式碼，以便使用 `azd up` 來部署，無需範本。
+在[你的第一個專案](first-project.md)中，你是從範本開始部署應用程式。但大多數時候你已經有一個應用程式——一個 Node.js API、Python Flask 服務、一個 .NET 網頁應用程式——放在你電腦的資料夾裡。本課程示範如何將 azd 新增到這些現有程式碼，以便你能用 `azd up` 部署，無須範本。
 
 ## 學習目標
 
-完成本課程後，你將會：
-- 了解開始 azd 專案的三種方式
-- 在既有程式碼庫內執行 `azd init`
-- 了解 `azure.yaml` 與 `infra/` 資料夾對你的應用程式有什麼作用
-- 知道何時讓 azd 產生基礎設施、何時自行撰寫
-- 使用 `azd up` 將既有應用程式部署到 Azure
+完成本課後，你將：
+- 了解三種啟動 azd 專案的方法
+- 在現有程式碼庫中執行 `azd init`
+- 了解 `azure.yaml` 與 `infra/` 資料夾對你的應用程式的作用
+- 知道何時讓 azd 生成基礎設施，何時自己撰寫
+- 透過 `azd up` 部署你現有的應用程式到 Azure
 
 ## 學習成果
 
-完成本課程後，你將能：
-- 在已有專案中初始化 azd
+完成本課後，你將能夠：
+- 在已有的專案中初始化 azd
 - 閱讀與編輯基本的 `azure.yaml` 檔案
-- 使用 `azd infra generate` 產生啟動用的基礎設施
-- 為你的應用程式選擇適當的 Azure 主機
+- 使用 `azd infra generate` 產生入門基礎設施
+- 選擇適合你的應用程式的 Azure 主機
 - 部署並清理你自己的應用程式
 
 ---
 
-## 開始 azd 專案的三種方式
+## 啟動 azd 專案的三種方式
 
-| 起始方式 | 指令 | 何時使用 |
+| 起點 | 指令 | 何時使用 |
 |----------------|---------|-------------|
-| <strong>從範本開始</strong> | `azd init --template <name>` | 用於學習或從已驗證的範例開始新應用程式 |
-| <strong>從現有程式碼</strong> | `azd init` (在你的專案資料夾中) | 你已經有應用程式並想部署它 |
-| **從 Git 倉庫** | `azd init --from-code` (在已複製的倉庫中) | 在現有倉庫中採用 azd |
+| <strong>從範本</strong> | `azd init --template <name>` | 學習或從已證明有效的範例開始新應用程式 |
+| <strong>從現有程式碼</strong> | 在專案資料夾中執行 `azd init` | 已有應用程式並想部署它 |
+| **從 Git 倉庫** | 在複製的倉庫中執行 `azd init --from-code` | 將 azd 用於現有的程式碼庫 |
 
-你已經練習過第一個選項。本課程涵蓋第二種——最常見的實務情境。
+你已經練習過第一種方式。本課程涵蓋第二種——最常見的真實世界情況。
 
 ---
 
-## 第 1 步：在你的專案中執行 `azd init`
+## 第一步：在你的專案中執行 `azd init`
 
-在你的現有專案資料夾內開啟終端機，並執行：
+在<strong>你現有專案資料夾</strong>內打開終端機並執行：
 
 ```bash
 cd my-existing-app
 azd init
 ```
 
-azd 會詢問你要如何初始化。選擇：
+azd 會詢問你如何初始化。選擇：
 
 ```
 ? How do you want to initialize your app?
@@ -61,26 +61,26 @@ azd 會詢問你要如何初始化。選擇：
   Select a template
 ```
 
-選擇 **"使用目前目錄中的程式碼。"**，azd 隨後會掃描你的資料夾，偵測你的語言與框架，並建議一個主機。
+選擇 **「使用目前目錄的程式碼。」** azd 會掃描你的資料夾，偵測你的語言與框架，並建議合適的主機。
 
-### azd 偵測的項目
+### azd 偵測了什麼
 
-azd 會尋找像 `package.json`、`requirements.txt`、`pom.xml`、`*.csproj` 或 `Dockerfile` 等訊號，並建議相對應的 Azure 主機：
+azd 會尋找像 `package.json`、`requirements.txt`、`pom.xml`、`*.csproj` 或 `Dockerfile` 等信號，並建議相符的 Azure 主機：
 
-| 你的應用 | 可能偵測到的主機 |
+| 你的應用程式 | 可能偵測到的主機 |
 |----------|----------------------|
-| Node.js / Python / .NET web 應用 | Azure App Service 或 Container Apps |
-| 容器化應用（`Dockerfile`） | Azure Container Apps |
-| Function 應用 | Azure Functions |
-| 靜態網站（React/Vue 的建置輸出） | Azure Static Web Apps |
+| Node.js / Python / .NET 網頁應用程式 | Azure App Service 或 Container Apps |
+| 容器化應用程式（`Dockerfile`） | Azure Container Apps |
+| 函數應用程式 | Azure Functions |
+| 靜態網站（React/Vue 編譯輸出） | Azure Static Web Apps |
 
-確認被偵測到的服務，azd 就會為你產生所需的檔案骨架。
+確認偵測到的服務，azd 隨即搭建你所需的檔案。
 
 ---
 
-## 第 2 步：了解 azd 所建立的內容
+## 第二步：了解 azd 建立了什麼
 
-初始化後，你的專案會多出兩個新項目：
+初始化後，你的專案會多兩樣東西：
 
 ```
 my-existing-app/
@@ -92,9 +92,9 @@ my-existing-app/
 └── ...                 # your existing files, untouched
 ```
 
-### `azure.yaml` — 專案定義
+### `azure.yaml` — 專案定義檔
 
-這是 azd 專案的核心。一個最小的範例如下：
+這是 azd 專案的核心。最簡單版本如下：
 
 ```yaml
 # azure.yaml
@@ -106,48 +106,48 @@ services:
     host: appservice         # appservice | containerapp | function | staticwebapp
 ```
 
-`services` 區塊是關鍵部分：每個條目都會將你的程式碼某個資料夾映射到一個 Azure 主機。如果你的應用同時有前端與 API，就會有兩個服務。
+`services` 區塊是關鍵：每個條目對應你的程式碼資料夾到 Azure 主機。如果你的應用有前端與 API，會有兩個服務。
 
-### `infra/` — 你的 Azure 資源以程式化基礎設施 (IaC)
+### `infra/` — 你的 Azure 資源即程式碼
 
-`infra/` 資料夾包含定義應用所需 Azure 資源（例如 App Service、資料庫等）的 Bicep 檔案。你不需要手動撰寫這些檔案——azd 會產生一個可運作的起點。你之後可以編輯它們以新增資源或強化安全性（在 [第 4 章](../chapter-04-infrastructure/README.md) 中有介紹）。
+`infra/` 資料夾內裝有定義 Azure 資源（App Service、資料庫等）的 Bicep 檔案。你不必手寫它們——azd 會產生一個可用的起點。你<em>可以</em>之後編輯它們，增加資源或加強安全性（詳見[章節4](../chapter-04-infrastructure/README.md)）。
 
-> **提示：** 想在部署前查看或自訂產生的基礎設施嗎？執行 `azd infra generate`（也可使用 `azd infra synth`）將 IaC 寫到磁碟，方便你檢閱並放入版本控制。
+> **提示：** 如果想在部署前查看或自訂產生的基礎設施，執行 `azd infra generate`（也可以用 `azd infra synth`）將基礎設施即程式碼寫入磁碟，方便審查與版本控管。
 
 ---
 
-## 第 3 步：設定必要的組態
+## 第三步：設定必要的組態
 
-如果你的應用需要設定或祕密（連線字串、API 金鑰），請不要把它們寫死在程式碼裡。使用環境變數或環境值：
+如果你的應用需要設定或機密（連接字串、API 金鑰），不要寫死在程式碼裡。使用環境變數：
 
 ```bash
-# 建立環境
+# 建立一個環境
 azd env new dev
 
-# 設定非機密值
+# 設定一個非保密值
 azd env set API_VERSION 1.0.0
 ```
 
-若是實際的祕密，請將它們儲存在 Key Vault 中，並在你的基礎設施中參照——參見 [第 3 章：組態與驗證](../chapter-03-configuration/authsecurity.md)。
+真正的機密建議存放於 Key Vault，並從基礎設施引用——詳見[章節3：組態與認證](../chapter-03-configuration/authsecurity.md)。
 
 ---
 
-## 第 4 步：部署
+## 第四步：部署
 
-現在使用你已熟悉的相同工作流程：
+現在使用你已熟悉的工作流程：
 
 ```bash
 # 驗證（azd 必需）
 azd auth login
 
-# 預覽將建立的資源
+# 預覽將要建立的資源
 azd provision --preview
 
-# 佈建基礎架構並部署您的程式碼
+# 配置基礎設施並部署您的程式碼
 azd up
 ```
 
-完成後，azd 會列印出你的應用程式 URL。以與其他 azd 應用相同的方式驗證它：
+完成後，azd 會印出你應用程式的 URL。跟任何 azd 應用一樣進行驗證：
 
 ```bash
 azd show           # 顯示端點
@@ -156,16 +156,16 @@ azd monitor --logs # 如有需要，檢查日誌
 
 ---
 
-## 常見初次問題
+## 常見初次使用問題
 
-| 症狀 | 可能原因 | 解決方法 |
+| 症狀 | 可能原因 | 解決方式 |
 |---------|--------------|-----|
-| azd 未偵測到我的應用程式 | 缺少清單檔案（例如 `package.json`） | 新增清單檔案，或在執行 `azd init` 時手動選擇主機 |
-| 在執行 `azd up` 期間建置失敗 | 應用程式需要建置步驟 | 在 `azure.yaml` 的服務區塊下新增 `buildCommand`/`outputPath` |
-| 應用程式啟動但回傳錯誤 | 缺少組態/祕密 | 使用 `azd env set` 設定值或將 Key Vault 接上 |
-| 選到錯誤的主機 | 自動偵測猜錯 | 編輯 `azure.yaml` 中的 `host:` 並重新執行 `azd up` |
+| azd 沒偵測到我的應用 | 缺少描述檔（例如 `package.json`） | 新增描述檔，或在 `azd init` 時手動選擇主機 |
+| `azd up` 時建置失敗 | 應用需要建置步驟 | 在 `azure.yaml` 的服務項目下加入 `buildCommand`/`outputPath` |
+| 應用啟動後返回錯誤 | 缺少組態/機密 | 用 `azd env set` 設定值或設定 Key Vault |
+| 選錯主機 | 自動偵測錯誤 | 編輯 `azure.yaml` 裡的 `host:`，然後重新執行 `azd up` |
 
-更多資訊請參閱 [第 7 章：故障排除](../chapter-07-troubleshooting/README.md)。
+更多資訊請見[章節7：故障排除](../chapter-07-troubleshooting/README.md)。
 
 ---
 
@@ -177,27 +177,27 @@ azd down --force --purge
 
 ---
 
-## 摘要
+## 總結
 
-- `azd init` → **"使用目前目錄中的程式碼。"** 可將 azd 新增到你已有的應用程式。
-- `azure.yaml` 將你的程式碼資料夾映射到 Azure 主機；`infra/` 以 Bicep 定義資源。
-- `azd infra generate` 讓你檢閱或自訂產生的基礎設施。
-- 一旦初始化，你的既有應用程式可使用與範本式應用相同的 `azd up` / `azd down` 工作流程。
+- `azd init` → 選擇 **「使用目前目錄的程式碼」**，可為你已擁有的應用加入 azd。
+- `azure.yaml` 對應程式碼資料夾至 Azure 主機；`infra/` 用 Bicep 定義資源。
+- 使用 `azd infra generate` 可檢視或自訂產生的基礎設施。
+- 一旦初始化，你現有的應用程式就可用跟範本一路相同的 `azd up` / `azd down` 工作流程。
 
 ---
 
 ## 🔗 導覽
 
-| 方向 | 教學 |
+| 方向 | 課程 |
 |-----------|--------|
-| <strong>上一步</strong> | [你的第一個專案](first-project.md) |
-| <strong>下一步</strong> | [開發容器與 Codespaces](dev-containers.md) |
+| <strong>前一篇</strong> | [你的第一個專案](first-project.md) |
+| <strong>下一篇</strong> | [開發容器與 Codespaces](dev-containers.md) |
 
 ## 📖 相關資源
 
 - [AZD 基本概念](azd-basics.md)
-- [第 4 章：基礎設施即代碼](../chapter-04-infrastructure/README.md)
-- [組態與驗證](../chapter-03-configuration/authsecurity.md)
+- [章節4：基礎設施即程式碼](../chapter-04-infrastructure/README.md)
+- [組態與認證](../chapter-03-configuration/authsecurity.md)
 - [指令速查表](../../resources/cheat-sheet.md)
 
 ---

@@ -1,56 +1,56 @@
-# Dev Containers & GitHub Codespaces 適用於 azd
+# azd 的開發容器與 GitHub Codespaces
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD 入門](../../README.md)
-- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
-- **⬅️ Previous**: [Bring Your Own App](bring-your-own-app.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/README.md)
+**章節導航：**
+- **📚 課程首頁**：[AZD 入門](../../README.md)
+- **📖 當前章節**：第 1 章 - 基礎與快速開始
+- **⬅️ 上一章節**：[自帶應用程式](bring-your-own-app.md)
+- **🚀 下一章節**：[第 2 章：AI 優先開發](../chapter-02-ai-development/README.md)
 
-> 已於 2026 年 6 月以 `azd 1.25.6` 驗證。
+> 已於 2026 年 7 月針對 `azd 1.27.1` 驗證。
 
-## Introduction
+## 介紹
 
-在每部機器上安裝 azd、正確的語言執行環境、Docker 和 Azure CLI 是一件麻煩事 —— 這也是為什麼一個「在我機器上能跑」的教學會對別人失效的頭號原因。透過描述整個工具鏈的檔案，開發容器（dev container）解決了這個問題。任何在 VS Code 或 GitHub Codespaces 開啟專案的人都會取得完全相同的環境，並且 azd 已經安裝好。本課示範如何加入一個開發容器。
+在每台機器上安裝 azd、正確的語言執行環境、Docker 和 Azure CLI 是一項苦差事——這是「在我的機器上工作」的教程對其他人失效的頭號原因。<strong>開發容器</strong>透過在檔案中描述整個工具鏈解決了這個問題。任何在 VS Code 或 GitHub Codespaces 中開啟該專案的人都會擁有完全相同的環境，且已預先安裝好 azd。本課程將指導您如何新增一個開發容器。
 
-## Learning Goals
+## 學習目標
 
-完成本課後，你將能：
-- 了解什麼是 dev container，以及它為何能幫助 azd
-- 在專案中新增一個最小的 `.devcontainer/devcontainer.json`
-- 透過 Dev Container *features* 包含 azd、Azure CLI 和 Docker
+完成本課後，您將能：
+- 了解什麼是開發容器以及它如何幫助 azd
+- 向專案新增一個最簡化的 `.devcontainer/devcontainer.json`
+- 透過開發容器的 *features* 包含 azd、Azure CLI 與 Docker
 - 在 GitHub Codespaces 或 VS Code 中開啟專案
 
-## Learning Outcomes
+## 學習成果
 
-完成本課後，你將能夠：
-- 為 azd 專案撰寫 `devcontainer.json`
-- 在不需手動安裝的情況下加入 azd 和 Azure 工具
-- 從容器或 Codespace 內執行 `azd up`
+完成本課後，您將能：
+- 編寫 azd 專案的 `devcontainer.json`
+- 無需手動安裝，即可加入 azd 與 Azure 工具
+- 從容器或 Codespace 中運行 `azd up`
 
 ---
 
-## What Is a Dev Container?
+## 什麼是開發容器？
 
-dev container 是一個以 Docker 為基礎的開發環境，由存放在你的 repository 中的 `.devcontainer/devcontainer.json` 檔案定義。當你開啟專案時：
+開發容器是一個基於 Docker 的開發環境，由您的資料庫中的 `.devcontainer/devcontainer.json` 檔案定義。當您開啟專案時：
 
-- **VS Code**（搭配 Dev Containers 外掛）會建立該容器並附加到容器中。
-- **GitHub Codespaces** 會在雲端建立相同的容器，並提供你瀏覽器內的編輯器。
+- **VS Code**（搭配 Dev Containers 擴充功能）會構建容器並連接到它。
+- **GitHub Codespaces** 會在雲端構建相同的容器，並提供基於瀏覽器的編輯器。
 
-無論哪一種方式，每位貢獻者都會擁有相同的工具——不用再問「你有沒有安裝 azd？」。
+無論哪種方式，每位貢獻者都能獲得相同的工具—不再有「你有沒有安裝 azd？」的疑難排解問題。
 
 ```mermaid
 graph LR
-    Repo[你的儲存庫<br/>+ devcontainer.json] --> VSCode[VS Code<br/>開發容器]
+    Repo[你的 Repo<br/>+ devcontainer.json] --> VSCode[VS Code<br/>開發容器]
     Repo --> Codespaces[GitHub<br/>Codespaces]
-    VSCode --> Env[相同的環境：<br/>azd + az + Docker]
+    VSCode --> Env[Identical environment:<br/>azd + az + Docker]
     Codespaces --> Env
 ```
 
 ---
 
-## Step 1: Create the devcontainer File
+## 第 1 步：建立 devcontainer 檔案
 
-Create `.devcontainer/devcontainer.json` in the root of your project:
+在專案根目錄下建立 `.devcontainer/devcontainer.json`：
 
 ```json
 {
@@ -75,23 +75,23 @@ Create `.devcontainer/devcontainer.json` in the root of your project:
 }
 ```
 
-What each part does:
+各部分用途：
 
-| Key | Purpose |
+| 欄位 | 目的 |
 |-----|---------|
-| `image` | 容器的基礎作業系統 |
-| `features` | 預建安裝器—此處：Azure CLI、**azd**、Docker 及 Node.js |
-| `customizations.vscode.extensions` | 自動安裝 azd 和 Bicep 的 VS Code 擴充套件 |
-| `forwardPorts` | 將你的應用連接埠暴露給瀏覽器 |
-| `postCreateCommand` | 容器建立後執行一次（此處為檢查） |
+| `image` | 容器的基底作業系統 |
+| `features` | 預先建構的安裝器—此處有 Azure CLI、**azd**、Docker 及 Node.js |
+| `customizations.vscode.extensions` | 自動安裝 azd 和 Bicep 的 VS Code 擴充功能 |
+| `forwardPorts` | 將應用程式端口暴露到瀏覽器 |
+| `postCreateCommand` | 容器建立完畢後執行一次的命令（此處為健全性檢查） |
 
-> `ghcr.io/azure/azure-dev/azd:latest` 功能是官方在容器中取得 azd 的方式。若需可重現性，請釘選特定版本（例如 `azd:1.25.6`）。
+> `ghcr.io/azure/azure-dev/azd:latest` feature 是在容器中取得 azd 的官方方式。若需重現性，可固定特定版本（例如 `azd:1.27.1`）。
 
 ---
 
-## Step 2: Match the Feature to Your App's Language
+## 第 2 步：配合您的應用語言選擇 Feature
 
-Swap the `node` feature for whatever your app uses:
+將 `node` feature 換成您的應用所使用的：
 
 ```jsonc
 // Python project
@@ -107,71 +107,71 @@ Swap the `node` feature for whatever your app uses:
 "ghcr.io/devcontainers/features/go:1": {}
 ```
 
-Keep `docker-in-docker` if your `host` is `containerapp`, `aks`, or anything that builds a container image—azd needs Docker to build and push images.
+如果您的 `host` 是 `containerapp`、`aks` 或任何會構建容器映像的環境，請保留 `docker-in-docker`，因為 azd 需要 Docker 來構建並推送映像。
 
 ---
 
-## Step 3: Open It
+## 第 3 步：開啟它
 
-**In VS Code:**
-1. Install the **Dev Containers** extension.
-2. Open the project folder.
-3. Click **Reopen in Container** when prompted (or run *Dev Containers: Reopen in Container*).
+**在 VS Code 裡：**
+1. 安裝 **Dev Containers** 擴充功能。
+2. 開啟專案資料夾。
+3. 出現提示時點擊 **Reopen in Container**（或執行 *Dev Containers: Reopen in Container*）。
 
-**In GitHub Codespaces:**
-1. Push the repo to GitHub.
-2. Click **Code → Codespaces → Create codespace on main**.
-3. Wait for the container to build—azd is ready in the terminal.
+**在 GitHub Codespaces 裡：**
+1. 將倉庫推送到 GitHub。
+2. 點擊 **Code → Codespaces → Create codespace on main**。
+3. 等待容器構建完成—azd 已在終端機中準備好。
 
 ---
 
-## Step 4: Deploy From Inside the Container
+## 第 4 步：從容器內部署
 
-The container has azd preinstalled, so the normal workflow just works:
+容器已預裝 azd，因此照常工作流程即可：
 
 ```bash
-azd auth login --use-device-code   # 在 Codespaces 裡使用裝置代碼很方便
+azd auth login --use-device-code   # 裝置代碼喺 Codespaces 裡面好方便
 azd up
 ```
 
-> **為什麼使用 `--use-device-code`？** 在遠端容器或 Codespace 裡沒有本機瀏覽器可以導向，所以 device-code 登入是較可靠的方式。你會把一個代碼貼到瀏覽器分頁以完成登入。
+> **為什麼使用 `--use-device-code`？** 在遠端容器或 Codespace 中沒有本地瀏覽器可轉向，因此裝置代碼登入是可靠的方式。您會將代碼貼到瀏覽器分頁完成登入。
 
 ---
 
-## Common Pitfalls
+## 常見陷阱
 
-| Pitfall | Fix |
+| 陷阱 | 修正方法 |
 |---------|-----|
-| `azd up` can't build an image | 加入 `docker-in-docker` feature |
-| Browser login hangs in Codespaces | Use `azd auth login --use-device-code` |
-| Tools differ between teammates | Pin feature versions (e.g. `azd:1.25.6`) |
-| App not reachable in browser | 將對應的連接埠加入 `forwardPorts` |
+| `azd up` 無法建立映像 | 新增 `docker-in-docker` feature |
+| Codespaces 中瀏覽器登入卡住 | 使用 `azd auth login --use-device-code` |
+| 隊友間工具不一致 | 固定 feature 版本（如 `azd:1.27.1`） |
+| 瀏覽器無法連接應用 | 將端口加入 `forwardPorts` |
 
 ---
 
-## Summary
+## 總結
 
-- 開發容器能讓你的 azd 工具鏈對每個人都可複製。
-- 透過 Dev Container *features* 新增 azd、Azure CLI，以及 Docker。
-- 將語言的 feature 對應到你的應用；若是容器主機則保留 `docker-in-docker`。
-- 在 Codespaces 內執行時使用 device-code 登入。
+- 開發容器讓您的 azd 工具鏈對所有人都能重現。
+- 透過開發容器 *features* 加入 azd、Azure CLI 和 Docker。
+- 配合應用語言選擇 feature，並在容器主機環境中保留 `docker-in-docker`。
+- 在 Codespaces 裡使用裝置代碼登入。
 
 ---
 
-## 🔗 Navigation
+## 🔗 導覽
 
-| Direction | Resource |
+| 方向 | 資源 |
 |-----------|----------|
-| **Previous** | [Bring Your Own App](bring-your-own-app.md) |
-| **Chapter Home** | [Chapter 1: Foundation & Quick Start](README.md) |
-| **Next Chapter** | [Chapter 2: AI-First Development](../chapter-02-ai-development/README.md) |
+| <strong>上一章</strong> | [自帶應用程式](bring-your-own-app.md) |
+| <strong>章節首頁</strong> | [第 1 章：基礎與快速開始](README.md) |
+| <strong>下一章</strong> | [第 2 章：AI 優先開發](../chapter-02-ai-development/README.md) |
 
-## 📖 Related Resources
+## 📖 相關資源
 
-- [Installation & Setup](installation.md)
-- [Command Cheat Sheet](../../resources/cheat-sheet.md)
-- [Official Dev Containers specification](https://containers.dev/)
-- [azd Dev Container feature](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
+- [安裝與設定](installation.md)
+- [指令速查表](../../resources/cheat-sheet.md)
+- [官方開發容器規範](https://containers.dev/)
+- [azd 開發容器 feature](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
 
 ---
 

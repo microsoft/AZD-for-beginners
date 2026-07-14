@@ -1,35 +1,35 @@
-# 第 6 章：預部署規劃與驗證
+# 第6章：部署前規劃與驗證
 
-**📚 課程**: [AZD 初學者](../../README.md) | **⏱️ 時長**: 1 小時 | **⭐ 複雜度**: 中階
+**📚 課程**：[初學者 AZD](../../README.md) | **⏱️ 時長**：1小時 | **⭐ 複雜度**：中階
 
 ---
 
-## 概覽
+## 概述
 
-本章涵蓋在部署應用程式之前的關鍵規劃與驗證步驟。學習如何透過適當的容量規劃、SKU 選擇與預檢查來避免昂貴的錯誤。
+本章涵蓋在部署應用程式之前的關鍵規劃與驗證步驟。學習如何透過適當的容量規劃、SKU選擇與先行檢查，避免代價高昂的錯誤。
 
-> 已於 2026 年 6 月針對 `azd 1.25.6` 驗證。
+> 已於2026年7月使用 `azd 1.27.1` 驗證。
 
 ## 學習目標
 
-完成本章後，您將：
-- 在部署前執行預檢查
+完成本章後，您將能：
+- 在部署前執行先行檢查
 - 規劃容量並估算資源需求
-- 為成本最佳化選擇適當的 SKU
-- 設定 Application Insights 以便監控
-- 了解團隊協調模式
+- 選擇適當的SKU以優化成本
+- 配置 Application Insights 以進行監控
+- 了解團隊協作模式
 
 ---
 
 ## 📚 課程列表
 
-| # | 課程 | 描述 | 時間 |
+| # | 課程 | 說明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [部署前檢查](preflight-checks.md) | 在部署之前驗證組態 | 15 分鐘 |
+| 1 | [先行檢查](preflight-checks.md) | 部署前驗證設定 | 15 分鐘 |
 | 2 | [容量規劃](capacity-planning.md) | 估算資源需求 | 20 分鐘 |
-| 3 | [SKU 選擇](sku-selection.md) | 選擇適當的定價等級 | 15 分鐘 |
-| 4 | [Application Insights](application-insights.md) | 設定監控 | 20 分鐘 |
-| 5 | [協調模式](coordination-patterns.md) | 團隊部署工作流程 | 15 分鐘 |
+| 3 | [SKU 選擇](sku-selection.md) | 選擇適合的定價層級 | 15 分鐘 |
+| 4 | [Application Insights](application-insights.md) | 配置監控 | 20 分鐘 |
+| 5 | [協作模式](coordination-patterns.md) | 團隊部署流程 | 15 分鐘 |
 
 ---
 
@@ -39,54 +39,54 @@
 # 檢查訂閱配額
 az vm list-usage --location eastus --output table
 
-# 預覽部署（不會建立任何資源）
+# 預覽部署（不會建立資源）
 azd provision --preview
 
 # 驗證 Bicep 語法
 az bicep build --file infra/main.bicep
 
-# 檢查環境設定
+# 檢查環境配置
 azd env get-values
 ```
 
 ---
 
-## ☑️ 預部署檢查清單
+## ☑️ 部署前檢查清單
 
-### 在 `azd provision` 之前
+### 在執行 `azd provision` 前
 
-- [ ] 已驗證該區域的配額
-- [ ] 已適當選擇 SKUs
-- [ ] 已檢閱成本估算
+- [ ] 已核對該區域配額
+- [ ] SKU已妥善選擇
+- [ ] 已審核成本估算
 - [ ] 命名規則一致
 - [ ] 已設定安全性/RBAC
 
-### 在 `azd deploy` 之前
+### 在執行 `azd deploy` 前
 
-- [ ] 已設定環境變數
-- [ ] 機密已放在 Key Vault 中
-- [ ] 已驗證連線字串
-- [ ] 已設定健康檢查
+- [ ] 已設置環境變數
+- [ ] 機密資料已存於 Key Vault
+- [ ] 已核對連接字串
+- [ ] 已配置健康檢查
 
 ---
 
 ## 💰 SKU 選擇指南
 
-| 工作負載 | 開發 | 生產 |
+| 工作負載 | 開發環境 | 生產環境 |
 |----------|-------------|------------|
-| Container Apps | Consumption | Dedicated D4 |
-| App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standard | Standard + PTU |
-| AI Search | Basic | Standard S2+ |
+| Container Apps | 按使用量付費 | 專用 D4 |
+| App Service | B1/B2 | P1v3 以上 |
+| Microsoft Foundry Models | 標準 | 標準 + PTU |
+| AI 搜尋 | 基本 | 標準 S2 以上 |
 
 ---
 
-## 🔗 導覽
+## 🔗 導航
 
 | 方向 | 章節 |
 |-----------|---------|
-| **Previous** | [Chapter 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
-| **Next** | [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/README.md) |
+| <strong>上一章</strong> | [第5章：多代理](../chapter-05-multi-agent/README.md) |
+| <strong>下一章</strong> | [第7章：疑難排解](../chapter-07-troubleshooting/README.md) |
 
 ---
 

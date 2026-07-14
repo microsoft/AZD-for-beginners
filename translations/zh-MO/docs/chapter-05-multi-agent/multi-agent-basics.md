@@ -1,95 +1,95 @@
-# Multi-Agent Basics - Deploy Your First Coordinated AI System
+# 多代理基礎 - 部署你的第一個協調 AI 系統
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD 初學者指南](../../README.md)
-- **📖 Current Chapter**: 第 5 章 - 多代理 AI 解決方案
-- **⬅️ Previous**: [第 4 章：基礎設施](../chapter-04-infrastructure/README.md)
-- **➡️ Next**: [協調模式](../chapter-06-pre-deployment/coordination-patterns.md)
+**章節導航：**
+- **📚 課程主頁**: [AZD 入門](../../README.md)
+- **📖 本章**: 第 5 章 - 多代理 AI 解決方案
+- **⬅️ 上一章**: [第 4 章：基礎架構](../chapter-04-infrastructure/README.md)
+- **➡️ 下一章**: [協調模式](../chapter-06-pre-deployment/coordination-patterns.md)
 
-> 已於 2026 年 6 月以 `azd 1.25.6` 進行驗證。
+> 已於 2026 年 7 月以 `azd 1.27.1` 版本驗證通過。
 
 ## 介紹
 
-在之前的章節你部署了一個單一應用程式——在第 2 章你也部署了一個單一的 AI 代理。本課堂帶你邁出下一步：部署一個 <strong>多代理系統</strong>，由數個專門化代理協同合作，解決單一代理難以良好處理的問題。
+在前面的章節中，你部署了單一應用程式——而在第 2 章你部署了一個單一 AI 代理。本課程帶你邁出下一步：部署一個<strong>多代理系統</strong>，多個專門的代理協同工作，解決單一代理無法獨立有效處理的問題。
 
-對初學者的好消息是：**你不需要新的命令。** 多代理解決方案仍然是一個 azd 專案。你仍會 `azd init`、`azd up`、測試，然後 `azd down`——工作流程跟你已知的一模一樣。改變的只是應用程式內部的「形狀」。
+初學者的好消息是：**你不需要新的指令。** 多代理解決方案仍然是 azd 專案。你將使用 `azd init`、`azd up`、測試和 `azd down`——完全是你已經熟悉的工作流程。改變的是應用內部的<em>結構</em>。
 
 ## 學習目標
 
-完成本課後，你將能：
-- 了解「多代理」是什麼，以及何時值得承擔額外的複雜性
-- 辨識多代理系統中常見的角色（協調者 + 專家）
+完成本課程後，你將能：
+- 了解「多代理」的意義及其何時值得承擔額外的複雜度
+- 辨識多代理系統中的常見角色（指揮官 + 專家）
 - 使用 `azd up` 部署一個真實可運作的多代理範本
-- 了解支持多代理應用的 Azure 資源
-- 知道如何驗證、自訂並安全地拆除該解決方案
+- 理解支援多代理應用的 Azure 資源
+- 知道如何安全地驗證、自定義與拆除解決方案
 
-## 學習成效
+## 學習成果
 
-完成本課後，你將能夠：
+完成本課程後，你將能夠：
 - 解釋單一代理與多代理系統之間的差異
-- 在「單一代理加工具」與真正的多代理設計之間做出選擇
-- 使用 azd 端到端部署並測試多代理範本
-- 辨識每個代理在哪裡執行以及它們如何通訊
-- 清除所有資源以避免持續費用
+- 在單一附工具代理與真正多代理設計間做出選擇
+- 使用 azd 完整部署並測試一個多代理範本
+- 辨別每個代理運行的位置及其通訊方式
+- 清理所有資源，避免持續收費
 
 ---
 
-## 甚麼是多代理系統？
+## 什麼是多代理系統？
 
-單一 AI 代理就是一個模型搭配一組指令及（可選）一些工具。這對聚焦任務非常管用。但當任務變大——先研究、然後撰寫、再編輯、最後事實查核——把所有東西塞進一個提示會讓代理變得更慢、不那麼可靠，且不易除錯。
+單一 AI 代理是指一個模型配合一組指令及（可選的）一些工具。這對專注任務十分有效。但當任務變大——研究、寫作、編輯、查證——所有工作塞入一個提示，會使代理變慢、不可靠且不易除錯。
 
-一個 <strong>多代理系統</strong> 將工作拆成各個專家，每個專家把一件事做得好，由一個協調者負責協同：
+<strong>多代理系統</strong>將工作拆分成由指揮官協調的多個專家，每個專家專注做好一項工作：
 
 ```mermaid
 graph TD
-    User([使用者請求]) --> Orchestrator[協調者代理<br/>規劃並分派工作]
-    Orchestrator --> Researcher[研究員代理<br/>蒐集事實]
-    Orchestrator --> Writer[撰稿者代理<br/>草擬內容]
-    Orchestrator --> Editor[編輯者代理<br/>審閱並潤飾]
+    User([用戶請求]) --> Orchestrator[調度代理<br/>計劃及路由工作]
+    Orchestrator --> Researcher[研究代理<br/>收集資料]
+    Orchestrator --> Writer[撰稿代理<br/>草擬內容]
+    Orchestrator --> Editor[編輯代理<br/>審核及潤飾]
     Researcher --> Orchestrator
     Writer --> Orchestrator
     Editor --> Orchestrator
     Orchestrator --> Result([最終答案])
 ```
 
-### 你會常見的兩種角色
+### 你必會見到的兩種角色
 
-| Role | Job | Example |
+| 角色 | 工作 | 範例 |
 |------|-----|---------|
-| **Orchestrator** | 決定「接下來要做什麼」，並在代理間分派工作 | 「先研究、然後撰寫、最後編輯」 |
-| **Specialist** | 專注做一件事並回傳結果 | 只負責蒐集事實的「研究員」 |
+| <strong>指揮官</strong> | 決定<em>下一步動作</em>並在代理間調度工作 | 「先研究，再寫作，最後編輯」 |
+| <strong>專家</strong> | 專注執行一項工作並回傳結果 | 專門蒐集資料的「研究員」 |
 
 ### 你真的需要多個代理嗎？
 
-從簡單開始。只有在下列情況之一為真時，才考慮多代理：
+從簡單開始。只有當符合以下條件之一才採用多代理：
 
-- ✅ 任務有 <strong>明確階段</strong>，各階段受益於不同指示（研究 vs. 撰寫 vs. 審核）
-- ✅ 你想讓專家 <strong>平行運作</strong> 以節省時間
-- ✅ 不同步驟需要 <strong>不同的工具或資料來源</strong>
-- ✅ 你需要每個步驟能 <strong>獨立測試和除錯</strong>
+- ✅ 任務具有<strong>明確階段</strong>，適合不同指令（研究、寫作、審閱）
+- ✅ 希望專家能<strong>平行執行</strong>以節省時間
+- ✅ 不同階段需要<strong>不同工具或資料來源</strong>
+- ✅ 希望每個階段能<strong>獨立測試與除錯</strong>
 
-如果你的任務只是單一問答或簡單的工具呼叫，使用 <strong>具工具的單一代理</strong>（第 2 章）會更簡單、更便宜、也更容易操作。
+若你的任務是簡單的問答或工具呼叫，使用<strong>單一工具代理</strong>（第2章）更簡單、省錢且操作容易。
 
-> **初學者提示：**「更多代理」不等於「更好」。每個代理都會增加延遲、成本，以及需要監控的項目。只有當問題明顯可拆分為多個部分時才增加代理。
+> **入門提示：**「代理越多」不代表「越好」。每增加一個代理都會增加延遲、成本和監控項目。只有當問題明確分拆成多部分時才增加代理。
 
 ---
 
-## 在 Azure 上構建多代理的兩種方式
+## 兩種 Azure 多代理建置方式
 
-| Approach | What it is | Best for |
+| 方法 | 內容 | 適用場景 |
 |----------|-----------|----------|
-| **Single agent + tools** | 一個 Foundry 代理呼叫函式/工具 | 簡單工作流程、入門 |
-| **Multiple coordinated agents** | 幾個代理由協調者協同工作 | 明確階段、平行工作、專業分工 |
+| **單代理 + 工具** | 一個 Foundry 代理調用函式/工具 | 簡單流程、入門使用 |
+| <strong>多個協調代理</strong> | 幾個代理由指揮官協調 | 明確階段、平行工作、分工專精 |
 
-本課著重第二種方式，使用一個 <strong>現成範本</strong>，讓你先看到真實的多代理系統運作，再去建立自己的系統。
+本課程著重於第二種方法，利用<strong>現成範本</strong>，讓你先看見一個真實多代理系統運作再開始打造自己的。
 
 ---
 
-## 實作：部署一個可運作的多代理應用
+## 實作：部署工作中的多代理應用
 
-我們將部署 **Contoso Creative Writer**，這是官方的 Azure 範例，使用多個代理（研究員、撰寫者、編輯者）協同產出文章。這是個很適合的第一個多代理應用，因為各角色容易理解。
+我們將部署 **Contoso Creative Writer**，一個官方 Azure 範例，使用多位代理（研究員、作家、編輯）協調合作產出文章。這是理想的第一個多代理應用，因角色易於理解。
 
-### 第 1 步：初始化範本
+### 步驟 1：初始化範本
 
 ```bash
 # 建立工作資料夾
@@ -99,68 +99,68 @@ mkdir creative-writer && cd creative-writer
 azd init --template contoso-creative-writer
 ```
 
-> 隨時可在 [Awesome AZD AI gallery](https://azure.github.io/awesome-azd/?tags=ai) 瀏覽更多多代理範本。其他友善的入門選項包括 `get-started-with-ai-agents` 和 `azure-ai-travel-agents`。
+> 隨時可於 [Awesome AZD AI gallery](https://azure.github.io/awesome-azd/?tags=ai) 瀏覽更多多代理範本。其他適合初學者的選項包括 `get-started-with-ai-agents` 和 `azure-ai-travel-agents`。
 
-### 第 2 步：驗證身分
+### 步驟 2：驗證身分
 
 ```bash
 # azd 工作流程所需
 azd auth login
 ```
 
-### 第 3 步：建立環境
+### 步驟 3：建立環境
 
 ```bash
 azd env new dev
 ```
 
-### 第 4 步：預覽，然後部署
+### 步驟 4：預覽，再部署
 
 ```bash
-# 在花費任何費用之前，先檢視將會建立的項目（建議）
+# 在花費任何資源之前先看看會創建什麼（建議）
 azd provision --preview
 
-# 一步完成基礎設施佈建並部署所有代理
+# 在一步中提供基礎設施並部署所有代理人
 azd up
 ```
 
-`azd up` 會提示選取訂閱與地區，接著佈建 Azure 資源並部署應用。AI 部署可能比單純的 Web 應用花更久時間——如果你正在部署較大型的模型，可以延長部署的逾時時間：
+`azd up` 會提示選擇訂閱與區域，然後配置 Azure 資源並部署應用。AI 部署通常比簡單的網頁應用耗時更長——如果部署大型模型，可延長部署逾時時間：
 
 ```bash
 azd deploy --timeout 1800
 ```
 
-> **關於成本與容量的提醒：** 多代理應用會部署消耗配額且產生成本的 AI 模型。如果 `azd up` 因模型配額失敗，請參閱 [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) 以取得地區與配額的修正資訊，及第 6 章的 [容量規劃](../chapter-06-pre-deployment/capacity-planning.md)。
+> **成本與容量提醒：** 多代理應用會部署消耗配額和產生費用的 AI 模型。若 `azd up` 因模型配額失敗，請參考 [AI 疑難排解](../chapter-07-troubleshooting/ai-troubleshooting.md) 了解區域與配額修復，及第 6 章[容量規劃](../chapter-06-pre-deployment/capacity-planning.md)。
 
 ---
 
-## 了解你所部署的內容
+## 理解你部署了什麼
 
-像本範例的典型多代理應用會佈建一組 Azure 資源，這些資源直接對應到上面圖示中的責任：
+類似這樣的多代理應用會建立一組 Azure 資源，與上圖責任直接對應：
 
-| Resource | Why it's there |
+| 資源 | 存在原因 |
 |----------|----------------|
-| **Microsoft Foundry / Models** | 主機每個代理使用的語言模型 |
-| **Azure AI Search** | 提供研究代理可檢索的具體資料 |
-| **Container Apps** (or App Service) | 承載協調者與代理程式碼 |
-| **Cosmos DB** (in some samples) | 儲存代理之間傳遞的共享狀態/記憶 |
-| **Application Insights** | 跟蹤跨代理的請求，以便除錯流程 |
+| **Microsoft Foundry / Models** | 托管每個代理使用的語言模型 |
+| **Azure AI Search** | 提供研究員代理可搜尋的基礎資料 |
+| **Container Apps**（或應用服務） | 托管指揮官及代理程式碼 |
+| **Cosmos DB**（部分範例） | 儲存代理間共享的狀態/記憶 |
+| **Application Insights** | 跟蹤跨代理的請求，便於除錯流程 |
 
-### 代理之間如何互相通訊
+### 代理如何互相通訊
 
-在大多數 azd 的多代理範例中，<strong>協調者在你的應用程式碼中執行</strong>（例如使用像 Semantic Kernel 或 Microsoft Agent Framework 這類框架）。協調者依序呼叫各個專家代理，傳遞結果，並組裝最終答案。代理共享上下文的方式包括：
+大多數 azd 多代理範本中，<strong>指揮官運行在你的應用程式碼中</strong>（例如，使用 Semantic Kernel 或 Microsoft Agent Framework 等框架）。指揮官依次呼叫每個專家代理，傳遞結果，並組裝最終答案。代理間共享上下文透過：
 
-- **函式/工具呼叫** — 協調者呼叫專家代理並取得回傳結果
-- <strong>共享記憶</strong> — 一個資料庫（通常是 Cosmos DB）保存狀態，供代理共享讀取
-- **訊息/事件** — 為了鬆耦合，代理透過佇列或 Service Bus 傳遞訊息
+- **函式/工具呼叫** — 指揮官調用專家代理並獲取結果
+- <strong>共享記憶</strong> — 通常以 Cosmos DB 資料庫儲存雙方皆可讀狀態
+- **消息/事件** — 為鬆耦合設計，代理透過佇列或服務匯流排通訊
 
-> **為何這對除錯重要：** 因為每個步驟是分開的，Application Insights 可讓你看到是哪個代理速度慢或失敗。這就是當初把工作拆成多個代理的一大原因。
+> **除錯的關鍵：** 因為每個階段獨立，Application Insights 能告訴你<em>哪個</em>代理較慢或失敗。這是分拆代理工作的一大實用理由。
 
 ---
 
-## 驗證部署
+## 驗證部署結果
 
-在繼續之前，先確認系統實際運作：
+在繼續前，確認系統確實運作：
 
 ```bash
 # 顯示已部署的端點
@@ -169,32 +169,32 @@ azd show
 # 開啟應用程式的監控儀表板
 azd monitor
 
-# 若發現異常，即時追蹤日誌
+# 如果有異常情況，追蹤日誌
 azd monitor --logs
 ```
 
-然後從 `azd show` 打開應用程式的 URL，嘗試發出一個會觸發所有代理的請求（對 Creative Writer，請求它就某個主題寫一篇短文）。在 Application Insights 的 **transaction search** 中，你應該會看到該請求在研究員、撰寫者與編輯步驟間展開。
+然後開啟從 `azd show` 換取的應用 URL，試著發送一個涵蓋所有代理的請求（例如 Creative Writer，請它撰寫一篇主題短文）。在 Application Insights <strong>交易搜尋</strong>中，你會看到研究員、作家、編輯等階段的請求被展開。
 
 **成功標準：**
-- ✅ `azd show` 列出一個可存取的端點
-- ✅ 一個請求產生明顯經過多個階段的結果
-- ✅ Application Insights 顯示多個代理步驟的追蹤記錄
+- ✅ `azd show` 顯示可連結的端點
+- ✅ 請求產出結果清楚通過多階段流程
+- ✅ Application Insights 顯示多個代理階段的追蹤
 
 ---
 
-## 自訂：新增或調整代理
+## 自定義：新增或調整代理
 
-因為每個代理只是指令加工具，自訂相對容易：
+因為每個代理只是一組指令加工具，自定義相當容易：
 
-1. <strong>在範本中找到代理定義</strong>（通常是 `prompts/`、`agents/`，或 `*.prompty` 的一組檔案）。
-2. <strong>調整代理的指示</strong>——例如，告訴編輯代理強制特定語氣或字數限制。
-3. <strong>僅重新部署程式碼</strong>（基礎設施不變）：
+1. <strong>找到範本中的代理定義</strong>（通常在 `prompts/`、`agents/` 或 `*.prompty` 檔案集中）。
+2. <strong>調整代理指令</strong> — 例如，告訴編輯代理強制使用特定風格或字數。
+3. <strong>僅重新部署程式碼</strong>（基礎架構不變）：
 
    ```bash
    azd deploy
    ```
 
-若要更進一步並從你自己的宣告檔建立代理，請使用代理擴充套件及其完整生命週期：
+若想更進一步從<em>自己的</em> manifest 建立即代理，可使用代理擴展及其完整生命週期：
 
 ```bash
 azd extension install azure.ai.agents
@@ -203,51 +203,51 @@ azd up
 azd ai agent invoke      # 測試，包含回應時間
 ```
 
-請參閱 [第 2 章：代理](../chapter-02-ai-development/agents.md) 與 [AZD AI CLI 參考](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) 以取得完整的代理生命週期（`invoke`, `eval generate`, `optimize`, `delete`）。
+請參閱 [第 2 章：代理](../chapter-02-ai-development/agents.md) 及 [AZD AI CLI 參考](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) 了解完整代理生命週期指令（`invoke`、`eval generate`、`optimize`、`delete`）。
 
 ---
 
 ## 清理
 
-多代理應用會執行多個可計費服務。完成後請拆除所有資源：
+多代理應用會運行多個需計費的服務。使用後務必拆除所有資源：
 
 ```bash
 azd down --force --purge
 ```
 
-`--purge` 旗標也會移除軟刪除的 AI 資源（例如 Foundry/Azure AI Services 帳戶），以免它們阻礙未來的重新部署或繼續產生成本。
+`--purge` 參數還會清除軟刪除的 AI 資源（如 Foundry/Azure AI 服務帳戶），避免阻礙未來重新部署或持續產生費用。
 
 ---
 
-## 關於生產環境的多代理系統
+## 關於生產環境多代理系統的一點說明
 
-本倉儲中的 [Retail Multi-Agent Solution](../../examples/retail-scenario.md) 是一個 <strong>架構藍圖</strong>，而不是一個一鍵部署的範本——它說明了生產零售系統 <em>會如何</em> 建置（並明確指出完整建置是一項龐大的工作）。在你在此處部署並運行一個範例後，可將其用作設計參考。至於生產環境的考量（韌性、成本、監控、治理），請繼續閱讀 [第 8 章：生產 AI 實務](../chapter-08-production/production-ai-practices.md)。
-
----
-
-## 小結
-
-- 多代理系統將工作分給由協調者協同的各個專家。
-- 只有在任務具有明確階段、需要平行處理或每步驟需不同工具時才使用——否則優先單一代理。
-- azd 的工作流程不變：`azd init` → `azd up` → 測試 → `azd down`。
-- 使用像 `contoso-creative-writer` 這類真實範本，讓你今天就能看到並自訂一個可運作的多代理應用。
-- 跨代理的 Application Insights 追蹤是多代理設計最實際的好處之一。
+本存放庫中的 [零售多代理解決方案](../../examples/retail-scenario.md) 是一份<strong>架構藍圖</strong>，非一鍵部署範本——它記錄了生產零售系統<em>應如何</em>建置（且明確指出完整構建工作量龐大）。請在這裡部署並操作範例後，再用它作為設計參考。關於生產環境的韌性、成本、監控、治理，請繼續參閱[第 8 章：生產 AI 實踐](../chapter-08-production/production-ai-practices.md)。
 
 ---
 
-## 🔗 Navigation
+## 總結
 
-| Direction | Lesson |
+- 多代理系統將工作分配給多名專家，由指揮官協調。
+- 只有當任務有明確階段、並行性或每階段使用不同工具時，才使用多代理，否則建議使用單代理。
+- azd 工作流程不變：`azd init` → `azd up` → 測試 → `azd down`。
+- 使用像 `contoso-creative-writer` 這樣的真實範本，讓你今天就能看到並自訂工作多代理應用。
+- 跨代理的 Application Insights 追蹤是多代理設計最大的實用收益之一。
+
+---
+
+## 🔗 導覽
+
+| 方向 | 課程 |
 |-----------|--------|
-| **Previous** | [第 4 章：基礎設施](../chapter-04-infrastructure/README.md) |
-| **Next** | [協調模式](../chapter-06-pre-deployment/coordination-patterns.md) |
+| <strong>上一章</strong> | [第 4 章：基礎架構](../chapter-04-infrastructure/README.md) |
+| <strong>下一章</strong> | [協調模式](../chapter-06-pre-deployment/coordination-patterns.md) |
 
 ## 📖 相關資源
 
-- [AI Agents Guide](../chapter-02-ai-development/agents.md)
+- [AI 代理指南](../chapter-02-ai-development/agents.md)
 - [協調模式](../chapter-06-pre-deployment/coordination-patterns.md)
-- [生產 AI 實務](../chapter-08-production/production-ai-practices.md)
-- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [生產 AI 實踐](../chapter-08-production/production-ai-practices.md)
+- [AI 疑難排解](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

@@ -1,34 +1,34 @@
-# 第 5 章：多代理 AI 解決方案
+# 第五章：多代理 AI 解決方案
 
-**📚 課程**: [AZD 入門](../../README.md) | **⏱️ 時長**: 2-3 小時 | **⭐ 複雜度**: 進階
+**📚 課程**: [AZD 初學者入門](../../README.md) | **⏱️ 時間**: 2-3 小時 | **⭐ 難度**: 高階
 
 ---
 
 ## 概覽
 
-本章涵蓋進階的多代理架構模式、代理編排，與適用於複雜情境的可投入生產的 AI 部署。
+本章涵蓋進階多代理架構模式、代理協調及適用於複雜場景的生產等級 AI 部署。
 
-> 已於 2026 年 6 月使用 `azd 1.25.6` 驗證。
+> 於 2026 年 7 月使用 `azd 1.27.1` 驗證通過。
 
 ## 學習目標
 
-完成本章後，您將：
-- 了解多代理架構模式
-- 部署協同運作的 AI 代理系統
-- 實作代理間通訊
-- 打造可投入生產的多代理解決方案
+完成本章後，您將能：
+- 理解多代理架構模式
+- 部署協調運作的 AI 代理系統
+- 實現代理對代理的通信
+- 建立生產等級的多代理解決方案
 
 ---
 
-## 📚 課程
+## 📚 課程內容
 
-| # | 單元 | 說明 | 時間 |
+| # | 課程 | 說明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [多代理基礎](multi-agent-basics.md) | 實作：使用 `azd up` 部署可運作的多代理應用程式 | 45 分鐘 |
-| 2 | [協調模式](../chapter-06-pre-deployment/coordination-patterns.md) | 代理編排策略（續於第 6 章） | 30 分鐘 |
-| 3 | [ARM 模板部署](../../examples/retail-multiagent-arm-template/README.md) | 一鍵部署範例 | 30 分鐘 |
+| 1 | [多代理基礎](multi-agent-basics.md) | 實作：使用 `azd up` 部署運作中的多代理應用程式 | 45 分鐘 |
+| 2 | [協調模式](../chapter-06-pre-deployment/coordination-patterns.md) | 代理協調策略（續於第六章） | 30 分鐘 |
+| 3 | [ARM 範本部署](../../examples/retail-multiagent-arm-template/README.md) | 一鍵部署範例 | 30 分鐘 |
 
-> **從第 1 單元開始。** 本章中唯一完全實作且可部署的單元是它。第 2 單元位於第 6 章（與預部署規劃共享），而 [零售多代理解決方案](../../examples/retail-scenario.md) 是一個架構藍圖—一個設計參考，不是一個單指令模板。
+> **請從課程 1 開始。** 這是本章唯一完整的實作可部署課程。課程 2 位於第六章（與部署前規劃共享），而 [零售多代理解決方案](../../examples/retail-scenario.md) 是架構範本——設計參考，非一鍵範本。
 
 ---
 
@@ -45,7 +45,7 @@ azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **採用哪種方式？** 使用 `azd init --template` 從可運作的範例開始。當您已有自己的代理宣告時，使用 `azd ai agent init`。完整細節請參閱 [AZD AI CLI 參考](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions)。
+> **哪種方法？** 使用 `azd init --template` 從現成範例開始。有自己的代理清單時，請使用 `azd ai agent init`。詳細資訊請見 [AZD AI CLI 參考](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions)。
 
 ---
 
@@ -53,7 +53,7 @@ azd up
 
 ```mermaid
 graph TD
-    Orchestrator[編排代理<br/>路由請求，管理工作流程] --> Customer[客戶代理<br/>使用者查詢，偏好]
+    Orchestrator[調度器代理<br/>路由請求，管理工作流程] --> Customer[客戶代理<br/>用戶查詢，偏好]
     Orchestrator --> Inventory[庫存代理<br/>庫存水平，訂單]
 ```
 
@@ -61,16 +61,16 @@ graph TD
 
 ## 🎯 精選解決方案：零售多代理
 
-此 [零售多代理解決方案](../../examples/retail-scenario.md) 示範：
+[零售多代理解決方案](../../examples/retail-scenario.md) 展示：
 
-- <strong>客戶代理</strong>：處理使用者互動與偏好
-- <strong>庫存代理</strong>：管理庫存與訂單處理
-- <strong>編排器</strong>：在代理之間進行協調
-- <strong>共享記憶體</strong>：跨代理的上下文管理
+- <strong>客戶代理</strong>：處理用戶互動與偏好
+- <strong>庫存代理</strong>：管理庫存及訂單處理
+- <strong>協調者</strong>：代理間協調
+- <strong>共享記憶體</strong>：跨代理上下文管理
 
-### 使用的服務
+### 使用服務
 
-| 服務 | 用途 |
+| 服務 | 功能 |
 |---------|---------|
 | Microsoft Foundry Models | 語言理解 |
 | Azure AI Search | 產品目錄 |
@@ -80,12 +80,12 @@ graph TD
 
 ---
 
-## 🔗 導航
+## 🔗 導覽
 
-| 方向 | 章節 |
+| 前往 | 章節 |
 |-----------|---------|
-| <strong>上一章</strong> | [第 4 章：基礎架構](../chapter-04-infrastructure/README.md) |
-| <strong>下一章</strong> | [第 6 章：預部署](../chapter-06-pre-deployment/README.md) |
+| <strong>上一章</strong> | [第四章：基礎建設](../chapter-04-infrastructure/README.md) |
+| <strong>下一章</strong> | [第六章：部署前準備](../chapter-06-pre-deployment/README.md) |
 
 ---
 
