@@ -1,20 +1,20 @@
 # Kapittel 8: Produksjon & Enterprise-mønstre
 
-**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Varighet**: 2-3 timer | **⭐ Vanskelighetsgrad**: Avansert
+**📚 Kurs**: [AZD For Nybegynnere](../../README.md) | **⏱️ Varighet**: 2-3 timer | **⭐ Vanskelighetsgrad**: Avansert
 
 ---
 
 ## Oversikt
 
-Dette kapitlet dekker enterprise-klare distribusjonsmønstre, sikkerhetsforbedring, overvåking og kostnadsoptimalisering for produksjons-AI arbeidsbelastninger.
+Dette kapitlet dekker enterprise-klare distribusjonsmønstre, sikkerhetsforsterking, overvåking og kostnadsoptimalisering for produksjons-AI arbeidsbelastninger.
 
-> Validert mot `azd 1.25.6` i juni 2026.
+> Validert mot `azd 1.27.1` i juli 2026.
 
 ## Læringsmål
 
 Ved å fullføre dette kapitlet vil du:
-- Distribuere flerregionale robuste applikasjoner
-- Implementere enterprise-sikkerhetsmønstre
+- Distribuere fleregions robuste applikasjoner
+- Implementere enterprise sikkerhetsmønstre
 - Konfigurere omfattende overvåking
 - Optimalisere kostnader i stor skala
 - Sette opp CI/CD-pipelines med AZD
@@ -24,19 +24,19 @@ Ved å fullføre dette kapitlet vil du:
 ## 📚 Leksjoner
 
 | # | Leksjon | Beskrivelse | Tid |
-|---|---------|-------------|-----|
-| 1 | [Produksjonspraksis for AI](production-ai-practices.md) | Enterprise distribusjonsmønstre | 90 min |
+|---|--------|-------------|------|
+| 1 | [Produksjons-AI praksis](production-ai-practices.md) | Enterprise distribusjonsmønstre | 90 min |
 
 ---
 
-## 🚀 Produksjonsjekkliste
+## 🚀 Produksjons-sjekkliste
 
-- [ ] Flerregional distribusjon for robusthet
+- [ ] Fleregions distribusjon for robusthet
 - [ ] Administrert identitet for autentisering (ingen nøkler)
 - [ ] Application Insights for overvåking
-- [ ] Kostnadsbudsjetter og varsler konfigurert
+- [ ] Kostnadsbudsjett og varsler konfigurert
 - [ ] Sikkerhetsskanning aktivert
-- [ ] CI/CD-pipeline-integrasjon
+- [ ] CI/CD-pipeline integrasjon
 - [ ] Katastrofegjenopprettingsplan
 
 ---
@@ -61,7 +61,7 @@ graph LR
 
 ---
 
-## 🔐 Sikkerhetsanbefalinger
+## 🔐 Beste praksis for sikkerhet
 
 ```bicep
 // Use managed identity
@@ -82,12 +82,12 @@ properties: {
 
 ## 💰 Kostnadsoptimalisering
 
-| Strategi | Besparelse |
-|----------|------------|
-| Skaler til null (Container Apps) | 60-80 % |
-| Bruk forbruksnivåer for utvikling | 50-70 % |
-| Planlagt skalering | 30-50 % |
-| Reservert kapasitet | 20-40 % |
+| Strategi | Besparelser |
+|----------|-------------|
+| Skaler til null (Container Apps) | 60-80% |
+| Bruk konsum-nivåer for utvikling | 50-70% |
+| Planlagt skalering | 30-50% |
+| Reservert kapasitet | 20-40% |
 
 ```bash
 # Sett budsjettvarsler
@@ -100,16 +100,16 @@ az consumption budget create \
 
 ---
 
-## 📊 Overvåkingsoppsett
+## 📊 Oppsett av overvåking
 
 ```bash
-# Stream logger
+# Strøm logger
 azd monitor --logs
 
 # Sjekk Application Insights
 azd monitor --overview
 
-# Vis måledata
+# Se på målinger
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -118,18 +118,18 @@ az monitor metrics list --resource <resource-id>
 ## 🔗 Navigasjon
 
 | Retning | Kapittel |
-|----------|----------|
+|-----------|---------|
 | **Forrige** | [Kapittel 7: Feilsøking](../chapter-07-troubleshooting/README.md) |
-| **Fullfør kurs** | [Kurs Hjem](../../README.md) |
+| **Kurs fullført** | [Kurs Hjem](../../README.md) |
 
 ---
 
 ## 📖 Relaterte ressurser
 
-- [AI-agentguide](../chapter-02-ai-development/agents.md)
+- [AI-Agent Guide](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Multi-agentløsninger](../chapter-05-multi-agent/README.md)
-- [Mikrotjenestereksempel](../../examples/microservices/README.md)
+- [Multi-Agent Løsninger](../chapter-05-multi-agent/README.md)
+- [Mikrotjenester Eksempel](../../examples/microservices/README.md)
 
 ---
 
