@@ -1,21 +1,21 @@
-# Capítulo 1: Fundamentos e Início Rápido
+# Capítulo 1: Fundamentos & Início Rápido
 
-**📚 Curso**: [AZD For Beginners](../../README.md) | **⏱️ Duração**: 30-45 minutes | **⭐ Complexidade**: Beginner
+**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 30-45 minutos | **⭐ Complexidade**: Iniciante
 
 ---
 
 ## Visão Geral
 
-Este capítulo apresenta os fundamentos do Azure Developer CLI (azd). Você aprenderá os conceitos principais, instalará as ferramentas e fará o deploy do seu primeiro aplicativo no Azure.
+Este capítulo apresenta os fundamentos do Azure Developer CLI (azd). Você aprenderá conceitos básicos, instalará as ferramentas e implantará sua primeira aplicação no Azure.
 
-> Validado com `azd 1.25.6` em junho de 2026.
+> Validado com `azd 1.27.1` em julho de 2026.
 
 ## Objetivos de Aprendizagem
 
 Ao concluir este capítulo, você irá:
 - Entender o que é o Azure Developer CLI e como ele difere do Azure CLI
 - Instalar e configurar o AZD na sua plataforma
-- Fazer o deploy do seu primeiro aplicativo no Azure com `azd up`
+- Implantar sua primeira aplicação no Azure com `azd up`
 - Limpar recursos com `azd down`
 
 ---
@@ -26,8 +26,8 @@ Ao concluir este capítulo, você irá:
 |---|--------|-------------|------|
 | 1 | [Noções Básicas do AZD](azd-basics.md) | Conceitos principais, terminologia e estrutura do projeto | 15 min |
 | 2 | [Instalação & Configuração](installation.md) | Guias de instalação específicos por plataforma | 10 min |
-| 3 | [Seu Primeiro Projeto](first-project.md) | Mão na massa: Faça o deploy de um app web no Azure | 20 min |
-| 4 | [Use Seu Próprio Aplicativo](bring-your-own-app.md) | Adicione azd a um projeto existente que você já tem | 15 min |
+| 3 | [Seu Primeiro Projeto](first-project.md) | Prática: Implante um app web no Azure | 20 min |
+| 4 | [Traga Seu Próprio App](bring-your-own-app.md) | Adicione o azd a um projeto existente que você já tem | 15 min |
 | 5 | [Contêineres de Desenvolvimento & Codespaces](dev-containers.md) | Ambientes azd reprodutíveis com contêineres de desenvolvimento | 15 min |
 
 ---
@@ -46,25 +46,25 @@ Antes de começar, confirme que sua máquina local está pronta para o template 
 bash ./validate-setup.sh
 ```
 
-Se o script relatar ferramentas ausentes, corrija isso primeiro e então continue com o capítulo.
+Se o script informar ferramentas ausentes, corrija isso primeiro e depois continue com o capítulo.
 
 ---
 
 ## 🚀 Início Rápido
 
 ```bash
-# Verifique a instalação
+# Verificar instalação
 azd version
 
-# Autentique-se para o AZD
-# Opcional: az login se você pretende executar comandos da Azure CLI diretamente
+# Autenticar para AZD
+# Opcional: az login se você planeja executar comandos do Azure CLI diretamente
 azd auth login
 
 # Implante seu primeiro aplicativo
 azd init --template todo-nodejs-mongo
 azd up
 
-# Limpe quando terminar
+# Limpar após terminar
 azd down --force --purge
 ```
 
@@ -72,13 +72,13 @@ azd down --force --purge
 
 ## ✅ Critérios de Sucesso
 
-Após concluir este capítulo, você deverá ser capaz de:
+Depois de completar este capítulo, você deve ser capaz de:
 
 ```bash
-azd version              # Exibe a versão instalada
+azd version              # Mostra a versão instalada
 azd init --template todo-nodejs-mongo  # Inicializa o projeto
-azd up                   # Faz o deploy para o Azure
-azd show                 # Exibe a URL do aplicativo em execução
+azd up                   # Implanta no Azure
+azd show                 # Exibe URL do aplicativo em execução
 azd down --force --purge # Limpa os recursos
 ```
 
@@ -86,17 +86,17 @@ azd down --force --purge # Limpa os recursos
 
 ## 🔗 Navegação
 
-| Direction | Chapter |
+| Direção | Capítulo |
 |-----------|---------|
-| **Próximo** | [Capítulo 2: Desenvolvimento com foco em IA](../chapter-02-ai-development/README.md) |
+| **Próximo** | [Capítulo 2: Desenvolvimento AI-First](../chapter-02-ai-development/README.md) |
 | **Pular para** | [Capítulo 3: Configuração](../chapter-03-configuration/README.md) |
 
 ---
 
 ## 📖 Recursos Relacionados
 
-- [Folha de Referência de Comandos](../../resources/cheat-sheet.md)
-- [FAQ](../../resources/faq.md)
+- [Resumo de Comandos](../../resources/cheat-sheet.md)
+- [Perguntas Frequentes](../../resources/faq.md)
 - [Glossário](../../resources/glossary.md)
 
 ---

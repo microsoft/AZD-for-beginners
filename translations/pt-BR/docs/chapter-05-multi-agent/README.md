@@ -1,22 +1,22 @@
-# Capítulo 5: Soluções de IA Multiagente
+# Capítulo 5: Soluções de IA Multiagentes
 
-**📚 Curso**: [AZD For Beginners](../../README.md) | **⏱️ Duração**: 2-3 horas | **⭐ Complexidade**: Avançado
+**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 2-3 horas | **⭐ Complexidade**: Avançado
 
 ---
 
-## Visão geral
+## Visão Geral
 
-Este capítulo aborda padrões avançados de arquitetura multiagente, orquestração de agentes e implantações de IA prontas para produção para cenários complexos.
+Este capítulo aborda padrões avançados de arquitetura multiagentes, orquestração de agentes e implantações de IA prontas para produção em cenários complexos.
 
-> Validado contra `azd 1.25.6` em junho de 2026.
+> Validado contra `azd 1.27.1` em julho de 2026.
 
-## Objetivos de aprendizagem
+## Objetivos de Aprendizagem
 
-Ao concluir este capítulo, você:
-- Entender padrões de arquitetura multiagente
+Ao concluir este capítulo, você irá:
+- Entender padrões de arquitetura multiagentes
 - Implantar sistemas coordenados de agentes de IA
 - Implementar comunicação entre agentes
-- Construir soluções multiagente prontas para produção
+- Construir soluções multiagentes prontas para produção
 
 ---
 
@@ -24,11 +24,11 @@ Ao concluir este capítulo, você:
 
 | # | Lição | Descrição | Tempo |
 |---|--------|-------------|------|
-| 1 | [Multi-Agent Basics](multi-agent-basics.md) | Prático: implantar um app multiagente funcional com `azd up` | 45 min |
-| 2 | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) | Estratégias de orquestração de agentes (continua no Capítulo 6) | 30 min |
-| 3 | [ARM Template Deployment](../../examples/retail-multiagent-arm-template/README.md) | Exemplo de implantação com um clique | 30 min |
+| 1 | [Noções Básicas Sobre Multiagentes](multi-agent-basics.md) | Prático: implante um app multiagente funcional com `azd up` | 45 min |
+| 2 | [Padrões de Coordenação](../chapter-06-pre-deployment/coordination-patterns.md) | Estratégias de orquestração de agentes (continua no Capítulo 6) | 30 min |
+| 3 | [Implantação com Template ARM](../../examples/retail-multiagent-arm-template/README.md) | Exemplo de implantação com um clique | 30 min |
 
-> **Comece pela Lição 1.** É a única lição totalmente prática e implantável neste capítulo. A Lição 2 está no Capítulo 6 (é compartilhada com o planejamento pré-implantação), e a [Retail Multi-Agent Solution](../../examples/retail-scenario.md) é um blueprint de arquitetura — uma referência de design, não um modelo de um único comando.
+> **Comece pela Lição 1.** É a única lição totalmente prática e implantável deste capítulo. A Lição 2 está no Capítulo 6 (é compartilhada com o planejamento pré-implantação), e a [Solução Multiagente para Varejo](../../examples/retail-scenario.md) é um modelo de arquitetura — uma referência de design, não um template de um só comando.
 
 ---
 
@@ -39,61 +39,61 @@ Ao concluir este capítulo, você:
 azd init --template agent-openai-python-prompty
 azd up
 
-# Opção 2: Implantar a partir de um manifesto de agente (requer a extensão azure.ai.agents)
+# Opção 2: Implantar a partir de um manifesto do agente (requer a extensão azure.ai.agents)
 azd extension install azure.ai.agents
 azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **Qual abordagem?** Use `azd init --template` para começar a partir de um exemplo funcional. Use `azd ai agent init` quando você tiver seu próprio manifesto de agente. Veja o [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) para detalhes completos.
+> **Qual abordagem?** Use `azd init --template` para iniciar a partir de um exemplo funcional. Use `azd ai agent init` quando você tiver o manifesto do seu próprio agente. Veja a [referência da CLI AZD AI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) para detalhes completos.
 
 ---
 
-## 🤖 Arquitetura Multiagente
+## 🤖 Arquitetura Multiagentes
 
 ```mermaid
 graph TD
-    Orchestrator[Agente Orquestrador<br/>Encaminha solicitações, gerencia o fluxo de trabalho] --> Customer[Agente do Cliente<br/>Consultas do usuário, preferências]
+    Orchestrator[Agente Orquestrador<br/>Roteia requisições, gerencia fluxo de trabalho] --> Customer[Agente do Cliente<br/>Consultas do usuário, preferências]
     Orchestrator --> Inventory[Agente de Inventário<br/>Níveis de estoque, pedidos]
 ```
 
 ---
 
-## 🎯 Solução em destaque: Multiagente para Varejo
+## 🎯 Solução em Destaque: Multiagente para Varejo
 
-A [Retail Multi-Agent Solution](../../examples/retail-scenario.md) demonstra:
+A [Solução Multiagente para Varejo](../../examples/retail-scenario.md) demonstra:
 
-- **Agente do Cliente**: Lida com interações e preferências do usuário
+- **Agente do Cliente**: Gerencia interações e preferências do usuário
 - **Agente de Estoque**: Gerencia estoque e processamento de pedidos
 - **Orquestrador**: Coordena entre os agentes
 - **Memória Compartilhada**: Gerenciamento de contexto entre agentes
 
 ### Serviços Utilizados
 
-| Serviço | Finalidade |
+| Serviço | Propósito |
 |---------|---------|
 | Microsoft Foundry Models | Compreensão de linguagem |
 | Azure AI Search | Catálogo de produtos |
-| Cosmos DB | Estado e memória do agente |
-| Container Apps | Hospedagem de agentes |
+| Cosmos DB | Estado e memória dos agentes |
+| Container Apps | Hospedagem dos agentes |
 | Application Insights | Monitoramento |
 
 ---
 
 ## 🔗 Navegação
 
-| Direction | Chapter |
+| Direção | Capítulo |
 |-----------|---------|
-| **Previous** | [Chapter 4: Infrastructure](../chapter-04-infrastructure/README.md) |
-| **Next** | [Chapter 6: Pre-Deployment](../chapter-06-pre-deployment/README.md) |
+| **Anterior** | [Capítulo 4: Infraestrutura](../chapter-04-infrastructure/README.md) |
+| **Próximo** | [Capítulo 6: Pré-Implantação](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 Recursos Relacionados
 
-- [AI Agents Guide](../chapter-02-ai-development/agents.md)
-- [Production AI Practices](../chapter-08-production/production-ai-practices.md)
-- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Guia de Agentes de IA](../chapter-02-ai-development/agents.md)
+- [Práticas de IA para Produção](../chapter-08-production/production-ai-practices.md)
+- [Solução de Problemas em IA](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

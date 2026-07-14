@@ -1,14 +1,14 @@
-# Capítulo 3: Configuração e Autenticação
+# Capítulo 3: Configuração & Autenticação
 
-**📚 Curso**: [AZD For Beginners](../../README.md) | **⏱️ Duração**: 45-60 minutes | **⭐ Complexidade**: Intermediário
+**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 45-60 minutos | **⭐ Complexidade**: Intermediário
 
 ---
 
 ## Visão Geral
 
-Este capítulo aborda a configuração de ambientes, padrões de autenticação e melhores práticas de segurança para implantações com o Azure Developer CLI.
+Este capítulo aborda configuração de ambiente, padrões de autenticação e melhores práticas de segurança para implantações com Azure Developer CLI.
 
-> Validado com `azd 1.25.6` em junho de 2026.
+> Validado com `azd 1.27.1` em julho de 2026.
 
 ## Objetivos de Aprendizagem
 
@@ -16,7 +16,7 @@ Ao concluir este capítulo, você irá:
 - Dominar a hierarquia de configuração do AZD
 - Gerenciar múltiplos ambientes (dev, staging, prod)
 - Implementar autenticação segura com identidades gerenciadas
-- Configurar configurações específicas por ambiente
+- Configurar definições específicas por ambiente
 
 ---
 
@@ -25,14 +25,14 @@ Ao concluir este capítulo, você irá:
 | # | Lição | Descrição | Tempo |
 |---|--------|-------------|------|
 | 1 | [Guia de Configuração](configuration.md) | Configuração e gerenciamento do ambiente | 30 min |
-| 2 | [Autenticação e Segurança](authsecurity.md) | Padrões de identidade gerenciada e RBAC | 30 min |
+| 2 | [Autenticação & Segurança](authsecurity.md) | Padrões de identidade gerenciada e RBAC | 30 min |
 
 ---
 
 ## 🚀 Início Rápido
 
 ```bash
-# Criar vários ambientes
+# Criar múltiplos ambientes
 azd env new dev
 azd env new staging
 azd env new prod
@@ -44,7 +44,7 @@ azd env select prod
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Visualizar configuração
+# Ver configuração
 azd env get-values
 ```
 
@@ -52,9 +52,9 @@ azd env get-values
 
 ## 🔧 Hierarquia de Configuração
 
-O AZD aplica as configurações nesta ordem (as posteriores substituem as anteriores):
+O AZD aplica as definições nesta ordem (as posteriores sobrescrevem as anteriores):
 
-1. **Valores padrão** (integrados aos templates)
+1. **Valores padrão** (incorporados nos templates)
 2. **azure.yaml** (configuração do projeto)
 3. **Variáveis de ambiente** (`azd env set`)
 4. **Flags de linha de comando** (`--location eastus`)
@@ -67,7 +67,7 @@ O AZD aplica as configurações nesta ordem (as posteriores substituem as anteri
 # Use identidade gerenciada (recomendado)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Verifique o status de autenticação do AZD
+# Verifique o status da autenticação AZD
 azd auth status
 
 # Opcional: verifique o contexto do Azure CLI se você planeja executar comandos az

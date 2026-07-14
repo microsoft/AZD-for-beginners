@@ -1,33 +1,33 @@
-# ਅਧਿਆਇ 2: ਏਆਈ-ਪਹਿਲਾ ਵਿਕਾਸ
+# ਚੈਪਟਰ 2: ਏਆਈ-ਪਹਿਲਾ ਵਿਕਾਸ
 
-**📚 Course**: [AZD ਸ਼ੁਰੂਆਤੀਆਂ ਲਈ](../../README.md) | **⏱️ Duration**: 1-2 hours | **⭐ Complexity**: Intermediate
+**📚 ਕੋਰਸ**: [AZD ਫਾਰ ਬਿਗਿਨਰਜ਼](../../README.md) | **⏱️ ਸਮਾਂ**: 1-2 ਘੰਟੇ | **⭐ ਜਟਿਲਤਾ**: ਦਰਮਿਆਨਾ
 
 ---
 
-## ਸਾਰ
+## ਝਲਕ
 
-ਇਹ ਅਧਿਆਇ Azure Developer CLI ਅਤੇ Microsoft Foundry ਸੇਵਾਵਾਂ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਏਆਈ-ਸੰਚਾਲਿਤ ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਡਿਪਲੋਇ ਕਰਨ 'ਤੇ ਧਿਆਨ ਕੇਂਦ੍ਰਿਤ ਕਰਦਾ ਹੈ। ਸਾਦੇ ਏਆਈ ਚੈਟ ਐਪਸ ਤੋਂ ਲੈ ਕੇ ਟੂਲਾਂ ਵਾਲੇ ਸਿਆਣੇ ਏਜੰਟਾਂ ਤੱਕ।
+ਇਹ ਚੈਪਟਰ ਏਜ਼ੂਰ ਡਿਵੈਲਪਰ CLI ਅਤੇ ਮਾਇਕ੍ਰੋਸਾਫਟ ਫਾਉਂਡਰੀ ਸਰਵਿਸਿਜ਼ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਏਆਈ-ਚਾਲਤ ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਤਾਇਨਾਤ ਕਰਨ 'ਤੇ ਧਿਆਨ ਕੇਂਦ੍ਰਿਤ ਕਰਦਾ ਹੈ। ਸਧਾਰਣ ਏਆਈ ਚੈਟ ਐਪਸ ਤੋਂ ਲੈ ਕੇ ਸੰਦਾਂ ਵਾਲੇ ਬੁੱਧੀਮਾਨ ਏਜੰਟਾਂ ਤੱਕ।
 
-> **ਮਨਜ਼ੂਰੀ ਨੋਟ (2026-06-15):** The command flow and extension guidance in this chapter were reviewed against `azd` `1.25.6` and the current preview AI agent extension release `azure.ai.agents` `0.1.40-preview`. If you are on an older AZD build, update first and then continue with the exercises.
+> **ਪ੍ਰਮਾਣੀਕਰਨ ਨੋਟ (2026-07-13):** ਇਸ ਚੈਪਟਰ ਵਿੱਚ ਕਮਾਂਡ ਫ਼ਲੋ ਅਤੇ ਵਿਸਥਾਰ ਨਿਰਦੇਸ਼ਾਂ ਦਾ ਸਮੀਖਿਆ `azd` ਦੇ `1.27.1` ਅਤੇ ਮੌਜੂਦਾ ਪ੍ਰੀਵਿਊ ਏਆਈ ਏਜੰਟ ਇਕਸਟੇਂਸ਼ਨ ਰਿਲੀਜ਼ `azure.ai.agents` `1.0.0-beta.5` ਦੇ ਖਿਲਾਫ ਕੀਤਾ ਗਿਆ। ਜੇ ਤੁਸੀਂ ਪੁਰਾਣੀ AZD ਬਿਲਡ 'ਤੇ ਹੋ, ਪਹਿਲਾਂ ਅੱਪਡੇਟ ਕਰੋ ਅਤੇ ਫਿਰ ਅਭਿਆਸ ਜਾਰੀ ਰੱਖੋ।
 
 ## ਸਿੱਖਣ ਦੇ ਉਦੇਸ਼
 
-By completing this chapter, you will:
-- ਪ੍ਰੀ-ਬਿਲਟ AZD ਟੈਮਪਲੇਟਸ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਏਆਈ ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਡਿਪਲੋਇ ਕਰੋ
-- AZD ਨਾਲ Microsoft Foundry ਇੰਟਿਗ੍ਰੇਸ਼ਨ ਨੂੰ ਸਮਝੋ
-- ਟੂਲਾਂ ਨਾਲ ਏਆਈ ਏਜੰਟਾਂ ਨੂੰ ਕੰਫਿਗਰ ਅਤੇ ਕਸਟਮਾਈਜ਼ ਕਰੋ
-- RAG (ਰੀਟਰੀਵਲ-ਅਗਮੈਂਟਡ ਜਨਰੇਸ਼ਨ) ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਡਿਪਲੋਇ ਕਰੋ
+ਇਸ ਚੈਪਟਰ ਨੂੰ ਪੂਰਾ ਕਰਨ 'ਤੇ, ਤੁਸੀਂ:
+- ਪੂਰਵ-ਬਣਾਏ AZD ਟੈਂਪਲੇਟ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਏਆਈ ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਤਾਇਨਾਤ ਕਰੋ
+- AZD ਨਾਲ ਮਾਇਕ੍ਰੋਸਾਫਟ ਫਾਉਂਡਰੀ ਦੇ ਇੰਟਿਗ੍ਰੇਸ਼ਨ ਨੂੰ ਸਮਝੋ
+- ਸੰਦਾਂ ਨਾਲ ਏਆਈ ਏਜੰਟਾਂ ਨੂੰ ਸੰਰਚਿਤ ਅਤੇ ਕਸਟਮਾਈਜ਼ ਕਰੋ
+- RAG (ਰੀਟਰੀਵਲ-ਅਗਮੇਂਟਡ ਜਨਰੇਸ਼ਨ) ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਤਾਇਨਾਤ ਕਰੋ
 
 ---
 
 ## 📚 ਪਾਠ
 
-| # | ਪਾਠ | ਵਰਣਨ | ਸਮਾਂ |
+| # | ਪਾਠ | ਵੇਰਵਾ | ਸਮਾਂ |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry ਇੰਟਿਗ੍ਰੇਸ਼ਨ](microsoft-foundry-integration.md) | AZD ਨੂੰ Foundry ਸੇਵਾਵਾਂ ਨਾਲ ਜੋੜੋ | 30 ਮਿੰਟ |
-| 2 | [ਏਆਈ ਏਜੰਟਾਂ ਗਾਈਡ](agents.md) | ਟੂਲਾਂ ਨਾਲ ਸਿਆਣੇ ਏਜੰਟ ਡਿਪਲੋਇ ਕਰੋ | 45 ਮਿੰਟ |
-| 3 | [AI ਮਾਡਲ ਡਿਪਲੋਇਮੈਂਟ](ai-model-deployment.md) | ਏਆਈ ਮਾਡਲਾਂ ਨੂੰ ਡਿਪਲੋਇ ਅਤੇ ਕੰਫਿਗਰ ਕਰੋ | 30 ਮਿੰਟ |
-| 4 | [AI ਵਰਕਸ਼ਾਪ ਲੈਬ](ai-workshop-lab.md) | ਹੱਥ-ਵਰਕ: ਆਪਣੇ ਏਆਈ ਹੱਲ ਨੂੰ AZD-ਤਿਆਰ ਬਣਾਓ | 60 ਮਿੰਟ |
+| 1 | [ਮਾਇਕ੍ਰੋਸਾਫਟ ਫਾਉਂਡਰੀ ਇੰਟਿਗ੍ਰੇਸ਼ਨ](microsoft-foundry-integration.md) | AZD ਨੂੰ ਫਾਉਂਡਰੀ ਸਰਵਿਸਿਜ਼ ਨਾਲ ਜੋੜੋ | 30 ਮਿੰਟ |
+| 2 | [ਏਆਈ ਏਜੰਟ ਸਿੱਖਿਆ](agents.md) | ਸੰਦਾਂ ਨਾਲ ਬੁੱਧੀਮਾਨ ਏਜੰਟ ਤਾਇਨਾਤ ਕਰੋ | 45 ਮਿੰਟ |
+| 3 | [ਏਆਈ ਮਾਡਲ ਤਾਇਨਾਤੀ](ai-model-deployment.md) | ਏਆਈ ਮਾਡਲ ਤਾਇਨਾਤ ਅਤੇ ਸੰਰਚਿਤ ਕਰੋ | 30 ਮਿੰਟ |
+| 4 | [ਏਆਈ ਵਰਕਸ਼ਾਪ ਲੈਬ](ai-workshop-lab.md) | ਹੱਥਾਂ-ਨਾਲ: ਆਪਣੀ ਏਆਈ ਹੱਲ ਨੂੰ AZD-ਤਿਆਰ ਬਣਾਓ | 60 ਮਿੰਟ |
 
 ---
 
@@ -38,7 +38,7 @@ By completing this chapter, you will:
 azd init --template azure-search-openai-demo
 azd up
 
-# ਵਿਕਲਪ 2: AI ਏਜੰਟਸ
+# ਵਿਕਲਪ 2: AI ਏਜੰਟ
 azd init --template get-started-with-ai-agents
 azd up
 
@@ -49,43 +49,43 @@ azd up
 
 ---
 
-## 🤖 ਫੀਚਰਡ AI ਟੈਮਪਲੇਟ
+## 🤖 ਚੁਣੇ ਹੋਏ ਏਆਈ ਟੈਂਪਲੇਟ
 
-| ਟੈਮਪਲੇਟ | ਵਰਣਨ | ਸੇਵਾਵਾਂ |
+| ਟੈਂਪਲੇਟ | ਵੇਰਵਾ | ਸਰਵਿਸਿਜ਼ |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ਹਵਾਲਿਆਂ ਨਾਲ RAG ਚੈਟ | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ਟੂਲਾਂ ਨਾਲ ਏਆਈ ਏਜੰਟ | AI Agent Service |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | ਬੁਨਿਆਦੀ ਏਆਈ ਚੈਟ | OpenAI + Container Apps |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ਹਵਾਲਿਆਂ ਨਾਲ RAG ਚੈਟ | OpenAI + ਏਆਈ ਸર્ચ |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ਸੰਦਾਂ ਨਾਲ ਏਆਈ ਏਜੰਟ | ਏਆਈ ਏਜੰਟ ਸਰਵਿਸ |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | ਬੁਨਿਆਦੀ ਏਆਈ ਚੈਟ | OpenAI + ਕੰਟੇਨਰ ਐਪਸ |
 
 ---
 
-## 💰 ਲਾਗਤ ਸੂਝਬੂਝ
+## 💰 ਲਾਗਤ ਬਾਰੇ ਜਾਣੂ
 
-| ਮਾਹੌਲ | ਅਨੁਮਾਨਤ ਮਹੀਨਾਵਾਰ ਲਾਗਤ |
+| ਵਾਤਾਵਰਣ | ਅੰਦਾਜ਼ਾ ਮਹੀਨਾਵਾਰ ਲਾਗਤ |
 |-------------|----------------------|
-| Development | $80-150 |
-| Staging | $150-300 |
-| Production | $300-3,500+ |
+| ਵਿਕਾਸ | $80-150 |
+| ਸਟੇਜਿੰਗ | $150-300 |
+| ਉਤਪਾਦਨ | $300-3,500+ |
 
-**ਸੁਝਾਅ:** ਟੈਸਟ ਕਰਨ ਮਗਰੋਂ ਖਰਚ ਤੋਂ ਬਚਣ ਲਈ `azd down` ਚਲਾਓ।
+**ਸਿੱਧਾ ਸੁਝਾਅ:** ਜਾਂਚ ਕਰਨ ਤੋਂ ਬਾਦ ਚਾਰਜਜ਼ ਤੋਂ ਬਚਣ ਲਈ `azd down` ਚਲਾਓ।
 
 ---
 
 ## 🔗 ਨੈਵੀਗੇਸ਼ਨ
 
-| ਦਿਸ਼ਾ | ਅਧਿਆਇ |
+| ਦਿਸ਼ਾ | ਚੈਪਟਰ |
 |-----------|---------|
-| **ਪਿਛਲਾ** | [ਅਧਿਆਇ 1: ਬੁਨਿਆਦ](../chapter-01-foundation/README.md) |
-| **ਅਗਲਾ** | [ਅਧਿਆਇ 3: ਸੰਰਚਨਾ](../chapter-03-configuration/README.md) |
-| **ਸਿੱਧਾ ਜਾਓ** | [ਅਧਿਆਇ 8: ਉਤਪਾਦਨ ਪੈਟਰਨ](../chapter-08-production/README.md) |
+| **ਪਿਛਲਾ** | [ਚੈਪਟਰ 1: ਬੁਨਿਆਦ](../chapter-01-foundation/README.md) |
+| **ਅਗਲਾ** | [ਚੈਪਟਰ 3: ਸੰਰਚਨਾ](../chapter-03-configuration/README.md) |
+| **ਛੱਡ ਕੇ ਜਾਓ** | [ਚੈਪਟਰ 8: ਉਤਪਾਦਨ ਪੈਟਰਨ](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 ਸੰਬੰਧਿਤ ਸਰੋਤ
+## 📖 ਸੰਬੰਧਤ ਸਰੋਤ
 
-- [AI ਸਮੱਸਿਆ-ਨਿਵਾਰਣ](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [ਪ੍ਰੋਡਕਸ਼ਨ ਏਆਈ ਅਭਿਆਸ](../chapter-08-production/production-ai-practices.md)
-- [Application Insights](../chapter-06-pre-deployment/application-insights.md)
+- [ਏਆਈ ਸਮੱਸਿਆ ਹੱਲ](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [ਉਤਪਾਦਨ ਏਆਈ ਅਮਲ](../chapter-08-production/production-ai-practices.md)
+- [ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 

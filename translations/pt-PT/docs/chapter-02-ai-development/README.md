@@ -1,29 +1,29 @@
-# Chapter 2: Desenvolvimento AI-First
+# Capítulo 2: Desenvolvimento AI-First
 
-**📚 Curso**: [AZD Para Principiantes](../../README.md) | **⏱️ Duração**: 1-2 horas | **⭐ Complexidade**: Intermédio
+**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 1-2 horas | **⭐ Complexidade**: Intermédio
 
 ---
 
 ## Visão Geral
 
-Este capítulo foca-se na implementação de aplicações alimentadas por IA usando o Azure Developer CLI e os serviços Microsoft Foundry. Desde aplicações de chat simples de IA a agentes inteligentes com ferramentas.
+Este capítulo foca-se na implementação de aplicações alimentadas por IA utilizando o Azure Developer CLI e os serviços Microsoft Foundry. Desde aplicações de chat simples com IA a agentes inteligentes com ferramentas.
 
-> **Nota de validação (2026-06-15):** O fluxo de comandos e orientação das extensões neste capítulo foram revistos com base na versão `azd` `1.25.6` e na actual versão de pré-visualização da extensão de agentes IA `azure.ai.agents` `0.1.40-preview`. Se estiver numa versão mais antiga do AZD, atualize primeiro e depois continue com os exercícios.
+> **Nota de validação (2026-07-13):** O fluxo de comandos e as orientações das extensões neste capítulo foram revistos com base na versão `azd` `1.27.1` e a atual versão de pré-visualização da extensão de agentes IA `azure.ai.agents` `1.0.0-beta.5`. Se estiver numa versão mais antiga do AZD, atualize primeiro e depois continue com os exercícios.
 
-## Objectivos de Aprendizagem
+## Objetivos de Aprendizagem
 
 Ao concluir este capítulo, irá:
-- Implementar aplicações de IA utilizando modelos pré-construídos AZD
-- Compreender a integração do Microsoft Foundry com AZD
+- Implementar aplicações de IA utilizando templates pré-construídos AZD
+- Compreender a integração Microsoft Foundry com AZD
 - Configurar e personalizar agentes IA com ferramentas
-- Implementar aplicações RAG (Retrieval-Augmented Generation)
+- Implementar aplicações RAG (Geração Aumentada por Recuperação)
 
 ---
 
-## 📚 Lições
+## 📚 Aulas
 
-| # | Lição | Descrição | Duração |
-|---|--------|-------------|------|
+| # | Aula | Descrição | Duração |
+|---|--------|-----------|---------|
 | 1 | [Integração Microsoft Foundry](microsoft-foundry-integration.md) | Ligar AZD aos serviços Foundry | 30 min |
 | 2 | [Guia de Agentes IA](agents.md) | Implementar agentes inteligentes com ferramentas | 45 min |
 | 3 | [Implementação de Modelo IA](ai-model-deployment.md) | Implementar e configurar modelos IA | 30 min |
@@ -49,42 +49,42 @@ azd up
 
 ---
 
-## 🤖 Modelos de IA em Destaque
+## 🤖 Templates IA em Destaque
 
-| Modelo | Descrição | Serviços |
-|----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Chat RAG com citações | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Agente IA com ferramentas | Serviço Agente IA |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chat IA básica | OpenAI + Container Apps |
+| Template | Descrição | Serviços |
+|----------|-----------|----------|
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Chat RAG com citações | OpenAI + Pesquisa IA |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Agente IA com ferramentas | Serviço de Agentes IA |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chat básico IA | OpenAI + Container Apps |
 
 ---
 
 ## 💰 Consciência de Custos
 
 | Ambiente | Custo Mensal Estimado |
-|-------------|----------------------|
-| Desenvolvimento | $80-150 |
-| Staging | $150-300 |
-| Produção | $300-3,500+ |
+|-----------|----------------------|
+| Desenvolvimento | 80-150 $ |
+| Staging | 150-300 $ |
+| Produção | 300-3.500+ $ |
 
-**Dica:** Execute `azd down` após os testes para evitar cobranças.
+**Dica:** Execute `azd down` após os testes para evitar custos.
 
 ---
 
 ## 🔗 Navegação
 
 | Direção | Capítulo |
-|-----------|---------|
-| **Anterior** | [Capítulo 1: Fundação](../chapter-01-foundation/README.md) |
+|---------|---------|
+| **Anterior** | [Capítulo 1: Fundamentos](../chapter-01-foundation/README.md) |
 | **Seguinte** | [Capítulo 3: Configuração](../chapter-03-configuration/README.md) |
-| **Ir para** | [Capítulo 8: Padrões de Produção](../chapter-08-production/README.md) |
+| **Saltar para** | [Capítulo 8: Padrões de Produção](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Recursos Relacionados
 
 - [Resolução de Problemas IA](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Práticas de IA para Produção](../chapter-08-production/production-ai-practices.md)
+- [Práticas IA em Produção](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---
