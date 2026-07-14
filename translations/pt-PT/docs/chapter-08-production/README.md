@@ -1,4 +1,4 @@
-# Capítulo 8: Padrões de Produção & Empresariais
+# Capítulo 8: Padrões de Produção & Empresa
 
 **📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 2-3 horas | **⭐ Complexidade**: Avançado
 
@@ -6,48 +6,48 @@
 
 ## Visão Geral
 
-Este capítulo aborda padrões de implementação prontos para empresas, reforço de segurança, monitorização e otimização de custos para cargas de trabalho de IA em produção.
+Este capítulo abrange padrões de implementação prontos para empresa, reforço de segurança, monitorização e otimização de custos para cargas de trabalho de IA em produção.
 
-> Validado com `azd 1.25.6` em junho de 2026.
+> Validado com `azd 1.27.1` em julho de 2026.
 
 ## Objetivos de Aprendizagem
 
-Ao concluir este capítulo, irá:
-- Implementar aplicações resistentes multinregionais
-- Aplicar padrões de segurança empresariais
+Ao completar este capítulo, irá:
+- Implementar aplicações resilientes multi-região
+- Implementar padrões de segurança empresariais
 - Configurar monitorização abrangente
 - Otimizar custos em grande escala
 - Configurar pipelines CI/CD com AZD
 
 ---
 
-## 📚 Aulas
+## 📚 Lições
 
-| # | Aula | Descrição | Tempo |
+| # | Aula | Descrição | Duração |
 |---|--------|-------------|------|
-| 1 | [Práticas de IA em Produção](production-ai-practices.md) | Padrões de implementação empresarial | 90 min |
+| 1 | [Práticas de IA em Produção](production-ai-practices.md) | Padrões de implementação empresariais | 90 min |
 
 ---
 
 ## 🚀 Lista de Verificação para Produção
 
-- [ ] Implementação multinregional para resiliência
+- [ ] Implementação multi-região para resiliência
 - [ ] Identidade gerida para autenticação (sem chaves)
 - [ ] Application Insights para monitorização
-- [ ] Orçamentos e alertas de custos configurados
-- [ ] Verificação de segurança ativada
+- [ ] Orçamentos e alertas de custo configurados
+- [ ] Análise de segurança ativada
 - [ ] Integração de pipeline CI/CD
 - [ ] Plano de recuperação de desastres
 
 ---
 
-## 🏗️ Padrões de Arquitetura
+## 🏗️ Padrões de Arquitectura
 
-### Padrão 1: Microserviços AI
+### Padrão 1: IA de Microserviços
 
 ```mermaid
 graph LR
-    Gateway[API Gateway] --> AI[Serviço de IA] --> Models[Modelos Microsoft Foundry]
+    Gateway[Gateway API] --> AI[Serviço de IA] --> Models[Modelos Microsoft Foundry]
     Gateway --> Auth[Serviço de Autenticação]
     AI --> Data[Armazenamento de Dados]
 ```
@@ -56,7 +56,7 @@ graph LR
 
 ```mermaid
 graph LR
-    EventGrid[Event Grid] --> Functions[Funções] --> Pipeline[Pipeline de IA]
+    EventGrid[Grelha de Eventos] --> Functions[Funções] --> Pipeline[Pipelines de IA]
 ```
 
 ---
@@ -84,7 +84,7 @@ properties: {
 
 | Estratégia | Poupança |
 |----------|---------|
-| Escalar até zero (Container Apps) | 60-80% |
+| Escalar para zero (Container Apps) | 60-80% |
 | Usar níveis de consumo para desenvolvimento | 50-70% |
 | Escalonamento programado | 30-50% |
 | Capacidade reservada | 20-40% |
@@ -103,7 +103,7 @@ az consumption budget create \
 ## 📊 Configuração de Monitorização
 
 ```bash
-# Transmitir logs
+# Transmitir registos
 azd monitor --logs
 
 # Verificar o Application Insights
@@ -120,7 +120,7 @@ az monitor metrics list --resource <resource-id>
 | Direção | Capítulo |
 |-----------|---------|
 | **Anterior** | [Capítulo 7: Resolução de Problemas](../chapter-07-troubleshooting/README.md) |
-| **Curso Completo** | [Início do Curso](../../README.md) |
+| **Curso Completo** | [Página Inicial do Curso](../../README.md) |
 
 ---
 
