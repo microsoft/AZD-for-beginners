@@ -1,45 +1,45 @@
-# Chapter 4: Infrastructure as Code & Deployment
+# प्रकरण 4: इन्फ्रास्ट्रक्चर अॅज कोड आणि डिप्लॉयमेंट
 
-**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 1-1.5 hours | **⭐ Complexity**: Intermediate
-
----
-
-## Overview
-
-हा अध्याय Bicep टेम्पलेट्स, रिसोर्स प्रोव्हिजनिंग, आणि Azure Developer CLI वापरून डिप्लॉयमेंट धोरणांसह Infrastructure as Code (IaC) पॅटर्न्स कव्हर करतो.
-
-> `azd 1.25.6` विरुद्ध जून 2026 मध्ये प्रमाणित.
-
-## Learning Objectives
-
-हा अध्याय पूर्ण केल्यावर, तुम्ही:
-- Bicep टेम्पलेट संरचना आणि सिन्‍टॅक्स समजून घेणार
-- `azd provision` वापरून Azure रिसोर्सेस प्रोव्हिजन करण्यास सक्षम असाल
-- `azd deploy` वापरून ऍप्लिकेशन्स डिप्लॉय करता येतील
-- ब्लू-ग्रीन आणि रोलिंग डिप्लॉयमेंट धोरणे अंमलात आणू शकाल
+**📚 अभ्यासक्रम**: [आरंभिकांसाठी AZD](../../README.md) | **⏱️ कालावधी**: 1-1.5 तास | **⭐ कठीणपणा**: मध्यम
 
 ---
 
-## 📚 Lessons
+## आढावा
 
-| # | Lesson | Description | Time |
+हे प्रकरण बायसप टेम्पलेट्ससह इन्फ्रास्ट्रक्चर अॅज कोड (IaC) पॅटर्न, रिसोर्स प्रोव्हिजनिंग, आणि Azure Developer CLI वापरून डिप्लॉयमेंट धोरणे यांचा आच्छादन करते.
+
+> जुलै 2026 मध्ये `azd 1.27.1` वर पडताळलेले.
+
+## शिक्षण उद्दिष्टे
+
+हे प्रकरण पूर्ण केल्यावर तुम्ही:
+- बायसप टेम्पलेट संरचना आणि सिनटॅक्स समजून घेऊ शकाल
+- `azd provision` वापरून Azure रिसोर्सेस तयार करू शकाल
+- `azd deploy` वापरून अॅप्लिकेशन्स डिप्लॉय करू शकाल
+- ब्लू-ग्रीन आणि रोलिंग डिप्लॉयमेंट धोरणे अमलात आणू शकाल
+
+---
+
+## 📚 धडे
+
+| # | पाठ | वर्णन | वेळ |
 |---|--------|-------------|------|
-| 1 | [Provisioning Resources](provisioning.md) | AZD सह Azure रिसोर्स व्यवस्थापन | 45 मिनिटे |
-| 2 | [Deployment Guide](deployment-guide.md) | अनुप्रयोग डिप्लॉयमेंट धोरणे | 45 मिनिटे |
-| 3 | [Authoring Your Own Template](custom-templates.md) | पुनर्वापर करण्याजोगे azd टेम्पलेट तयार व प्रकाशित करा | 30 मिनिटे |
+| 1 | [रिसोर्सेसचे प्रोव्हिजनिंग](provisioning.md) | AZD सह Azure रिसोर्स व्यवस्थापन | 45 मिनिटे |
+| 2 | [डिप्लॉयमेंट मार्गदर्शक](deployment-guide.md) | अॅप्लिकेशन डिप्लॉयमेंट धोरणे | 45 मिनिटे |
+| 3 | [तुमचा स्वतःचा टेम्पलेट तयार करणे](custom-templates.md) | पुनर्वापरासाठी azd टेम्पलेट्स तयार आणि प्रकाशित करा | 30 मिनिटे |
 
 ---
 
-## 🚀 Quick Start
+## 🚀 जलद प्रारंभ
 
 ```bash
-# साच्यावरून सुरुवात करा
+# टेम्पलेटमधून प्रारंभ करा
 azd init --template azure-functions-python-v2-http
 
-# काय तयार होणार आहे हे पूर्वावलोकन करा
+# काय तयार होणार आहे याचा पूर्वावलोकन करा
 azd provision --preview
 
-# फक्त पूर्वसंरचना तयार करा
+# फक्त पायाभूत सुविधा पुरवा
 azd provision
 
 # फक्त कोड तैनात करा
@@ -51,7 +51,7 @@ azd up
 
 ---
 
-## 📁 AZD Project Structure
+## 📁 AZD प्रकल्प संरचना
 
 ```
 my-project/
@@ -68,32 +68,32 @@ my-project/
 
 ---
 
-## 🔧 Essential Commands
+## 🔧 आवश्यक आदेश
 
-| Command | Description |
+| आदेश | वर्णन |
 |---------|-------------|
-| `azd init` | प्रोजेक्ट सुरू करा |
+| `azd init` | प्रकल्प प्रारंभ करा |
 | `azd provision` | Azure रिसोर्सेस तयार करा |
-| `azd deploy` | ऍप्लिकेशन कोड डिप्लॉय करा |
+| `azd deploy` | अॅप्लिकेशन कोड डिप्लॉय करा |
 | `azd up` | प्रोव्हिजन + डिप्लॉय |
 | `azd down` | सर्व रिसोर्सेस हटवा |
 
 ---
 
-## 🔗 Navigation
+## 🔗 नेव्हिगेशन
 
-| Direction | Chapter |
+| दिशानिर्देश | प्रकरण |
 |-----------|---------|
-| **Previous** | [Chapter 3: Configuration](../chapter-03-configuration/README.md) |
-| **Next** | [Chapter 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md) |
+| **मागील** | [प्रकरण 3: कॉन्फिगरेशन](../chapter-03-configuration/README.md) |
+| **पुढील** | [प्रकरण 5: मल्टि-एजंट सोल्यूशन्स](../chapter-05-multi-agent/README.md) |
 
 ---
 
-## 📖 Related Resources
+## 📖 संबंधित स्रोत
 
-- [Pre-Deployment Checks](../chapter-06-pre-deployment/README.md)
-- [Container App Examples](../../examples/container-app/README.md)
-- [Database App Example](../../examples/database-app/README.md)
+- [पूर्व-डिप्लॉयमेंट तपासण्या](../chapter-06-pre-deployment/README.md)
+- [कंटेनर अॅप उदाहरणे](../../examples/container-app/README.md)
+- [डेटाबेस अॅप उदाहरण](../../examples/database-app/README.md)
 
 ---
 
