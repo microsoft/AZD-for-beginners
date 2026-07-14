@@ -1,240 +1,240 @@
-# 2. Validate a Template
+# 2. ఒక టెంప్లేట్ను ధృవీకరించండి
 
-> Validated against `azd 1.25.6` in June 2026.
+> జూలై 2026లో `azd 1.27.1` పై ధృవీకరించబడింది.
 
-!!! tip "ఈ మాడ్యూల్ సమాప్తికి మీరు చేయగలిగే పనులు"
+!!! tip "ఈ మాడ్యూల్ చివరికి మీరు చేయగలుగుతారు"
 
     - [ ] AI సొల్యూషన్ ఆర్కిటెక్చర్‌ను విశ్లేషించండి
     - [ ] AZD డిప్లాయ్‌మెంట్ వర్క్‌ఫ్లోను అర్థం చేసుకోండి
-    - [ ] AZD వినియోగంపై సహాయం కోసం GitHub Copilotను ఉపయోగించండి
-    - [ ] **ల్యాబ్ 2:** AI ఏజెంట్స్ టెంప్లేట్‌ను డిప్లాయ్ చేయి & ధృవీకరించు
+    - [ ] AZD వాడుకపై సహాయం కోసం GitHub Copilotని ఉపయోగించండి
+    - [ ] **ప్రయోగశాల 2:** AI ఏజెంట్లు టెంప్లేట్‌ను డిప్లాయ్ చేసి ధృవీకరించండి
 
 ---
 
 
-## 1. Introduction
+## 1. పరిచయం
 
-The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) or `azd` is an open-source commandline tool that streamlines the developer workflow when building and deploying applications to Azure. 
+[Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) లేదా `azd` అనేది ఓపెన్-సోర్స్ కమాండ్‌లైన్ సాధనం, ఇది Azureకు అనువర్తనాలను నిర్మించేటప్పుడు మరియు డిప్లాయ్ చేసేటప్పుడు డెవలపర్ వర్క్‌ఫ్లోని సరళీకృతం చేస్తుంది.
 
-[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) are standardized repositories that include sample application code, _infrastructure-as-code_ assets, and `azd` configuration files for a cohesive solution architecture. Provisioning the infrastructure becomes as simple as an `azd provision` command - while using `azd up` allows you to provision infrastructure **and** deploy your application at one shot!
+[AZD టెంప్లేట్లు](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) అనేది నమూనా అనువర్తన కోడ్, _ఇన్‌ఫ్రాస్ట్రక్చర్-అజ్-కోడ్_ ఆస్తులు, మరియు `azd` కాన్ఫిగరేషన్ ఫైళ్లను కలిగిన ప్రమాణపూర్వక నిల్వలు, ఇవి ఐక్యమైన సొల్యూషన్ ఆర్కిటెక్చర్‌ను కలిగి ఉంటాయి. ఇన్‌ఫ్రాస్ట్రక్చర్‌ను ప్రావిజనింగ్ చేయడం అనేది `azd provision` కమాండ్ లాంటి సులభమైనది - మరియు `azd up` ఉపయోగించడం ద్వారా మీరు ఒకేసారి ఇన్‌ఫ్రాస్ట్రక్చర్‌ను ప్రావిజనింగ్ చేయడం **మరియు** మీ అనువర్తనాన్ని డిప్లాయ్ చేయవచ్చు!
 
-As a result, jumpstarting your application development process can be as simple as finding the right _AZD Starter template_ that comes closest to your application and infrastructure needs - then customizing the repository to suit your scenario requirements.
+దాని ఫలితంగా, మీ అనువర్తన అభివృద్ధి ప్రక్రియను మొదలు పెడటం అంటే సరైన _AZD స్టార్టర్ టెంప్లేట్_ కనుగొని అది మీ అనువర్తనం మరియు ఇన్‌ఫ్రాస్ట్రక్చర్ అవసరాలకు దగ్గరగా ఉంటుందో చూసి ఆ నిల్వను మీ పరిస్థితికి తగినట్టు అనుకూలీకరించడమే అయి ఉంటుంది.
 
-Before we begin, let's make sure you have the Azure Developer CLI installed.
+ప్రారంభించేముందు, మీరు Azure Developer CLI అనువర్తనం ఇన్‌స్టాల్ చేసుకున్నారా అనే విషయాన్ని నిర్ధారించుకుందాం.
 
-1. Open a VS Code terminal and type this command:
+1. ఒక VS కోడ్ టెర్మినల్ ఓపెన్ చేసి ఈ కమాండ్ టైప్ చేయండి:
 
       ```bash title="" linenums="0"
       azd version
       ```
 
-1. You should see something like this!
+1. మీరు ఈ విధంగా ఒక విషయం చూడాలి!
 
       ```bash title="" linenums="0"
-      azd version 1.25.6 (commit <current-build>)
+      azd version 1.27.1 (commit <current-build>)
       ```
 
-**You are now ready to select and deploy a template with azd**
+**మీరు ఇప్పుడు azd తో ఒక టెంప్లేట్‌ను ఎంచుకుని డిప్లాయ్ చేయడానికి సిద్ధంగా ఉన్నారు**
 
 ---
 
-## 2. Template Selection
+## 2. టెంప్లేట్ ఎంపిక
 
-The Microsoft Foundry platform comes with a [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that cover popular solution scenarios like _multi-agent workflow atomation_ and _multi-modal content processing_. You can also discover these templates by visiting the Microsoft Foundry portal.
+Microsoft Foundry ప్లాట్‌ఫారమ్ వద్ద [ఖచ్చితమైన AZD టెంప్లేట్ల సెట్](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) ఉంది, ఇవి ప్రాచుర్యమైన సొల్యూషన్ సన్నివేశాలను కవర్ చేస్తాయి, ఉదాహరణకు _బహుళ ఏజెంట్ వర్క్‌ఫ్లో ఆటోమేషన్_ మరియు _బహుముఖ ప్రామాణిక కంటెంట్ ప్రాసెసింగ్_. మీరు Microsoft Foundry పోర్టల్ ను సందర్శించడం ద్వారా కూడా ఈ టెంప్లేట్లను కనుగొనవచ్చు.
 
-1. Visit [https://ai.azure.com/templates](https://ai.azure.com/templates)
-1. Log into the Microsoft Foundry portal when prompted - you will see something like this.
+1. [https://ai.azure.com/templates](https://ai.azure.com/templates) సందర్శించండి
+1. ప్రాంప్ట్ వచ్చినప్పుడు Microsoft Foundry పోర్టల్ లో లాగిన్ అవ్వండి - మీరు ఈ విధంగా కనిపించేలా ఉంటుంది.
 
-![ఎంచుకోండి](../../../../../translated_images/te/01-pick-template.60d2d5fff5ebc374.webp)
+![Pick](../../../../../translated_images/te/01-pick-template.60d2d5fff5ebc374.webp)
 
 
-The **Basic** options are your starter templates:
+**Basic** ఎంపికలు మీ స్టార్టర్ టెంప్లేట్లు:
 
-1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) that deploys a basic chat application _with your data_ to Azure Container Apps. Use this to explore a basic AI chatbot scenario.
-1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) that also deploys a standard AI Agent (with the Foundry Agents). Use this to get familiar with agentic AI solutions involving tools and models.
+1. [ ] [AI చాట్‌తో ప్రారంభించండి](https://github.com/Azure-Samples/get-started-with-ai-chat) ఇది ఒక ప్రాథమిక చాట్ అనువర్తనాన్ని Azure కంటైనర్ యాప్స్‌కు మీ డేటాతో పాటు డిప్లాయ్ చేస్తుంది. దీన్ని ప్రాథమిక AI చాట్‌బాట్ సన్నివేశాన్ని అన్వేషించడానికి ఉపయోగించండి.
+1. [X] [AI ఏజెంట్లతో ప్రారంభించండి](https://github.com/Azure-Samples/get-started-with-ai-agents) ఇది కూడా ఒక ప్రామాణిక AI ఏజెంట్‌ను (Foundry ఏజెంట్లతో) డిప్లాయ్ చేస్తుంది. ఇది ఏజెంటిక్ AI సొల్యూషన్లతో, టూల్స్ మరియు మోడల్స్‌తో పరిచయం పొందడానికి ఉపయోగించండి.
 
-Visit the second link in a new browser tab (or click `Open in GitHub` for the related card). You should see the repository for this AZD Template. Take a minute to explore the README. The application architecture looks like this:
+రెండవ లింక్‌ను కొత్త బ్రౌజర్ ట్యాబ్‌లో తెరిచి (లేదా సంబంధిత కార్డు కోసం `Open in GitHub` పై క్లిక్ చేసి) ఈ AZD టెంప్లేట్ యొక్క రిపాజిటరీని చూడండి. README ను పరిశీలించడానికి ఒక నిమిషం కేటాయించండి. అనువర్తన ఆర్కిటెక్చర్ ఇలా ఉంటుంది:
 
-![ఆర్కిటెక్చర్](../../../../../translated_images/te/architecture.8cec470ec15c65c7.webp)
+![Arch](../../../../../translated_images/te/architecture.8cec470ec15c65c7.webp)
 
 ---
 
-## 3. Template Activation
+## 3. టెంప్లేట్ సక్రియత
 
-Let's try to deploy this template and make sure it is valid. We'll follow the guidelines in the [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) section.
+ఈ టెంప్లేట్‌ను డిప్లాయ్ చేసి ఇది సరైనదా లేకపోయినా చూడండి. మనం [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) విభాగంలోని మార్గదర్శకాలను అనుసరిద్దాం.
 
-1. Choose a working environment for the template repository:
+1. టెంప్లేట్ రిపాజిటరీకి పని చేసే వాతావరణాన్ని ఎంచుకోండి:
 
-      - **GitHub Codespaces**: Click [this link](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) and confirm `Create codespace`
-      - **Local clone or dev container**: Clone `Azure-Samples/get-started-with-ai-agents` and open it in VS Code
+      - **GitHub Codespaces**: ఈ లింక్ పై క్లిక్ చేయండి [this link](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) మరియు `Create codespace` ను నిర్ధారించండి
+      - **లోకల్ క్లోన్ లేదా డెవ్ కంటైనర్**: `Azure-Samples/get-started-with-ai-agents` ని క్లోన్ చేసి VS కోడ్ లో తెరవండి
 
-1. Wait until the VS Code terminal is ready, then type the following command:
+1. VS కోడ్ టెర్మినల్ సిద్ధంగా ఉన్నప్పటి వరకు వేచి, తరువాత ఈ క్రింది కమాండ్ టाइప్ చేయండి:
 
    ```bash title="" linenums="0"
    azd up
    ```
 
-Complete the workflow steps that this will trigger:
+దీని ద్వారా ప్రారంభించబడే వర్క్‌ఫ్లో స్టెప్స్ పూర్తి చేయండి:
 
-1. You will be prompted to log into Azure - follow instructions to authenticate
-1. Enter a unique environment name for you - e.g., I used `nitya-mshack-azd`
-1. This  will create a `.azure/` folder - you will see a subfolder with the env name
-1. You will be prompted to select a subscription name - select the default
-1. You will be prompted for a location - use `East US 2`
+1. Azureలో లాగిన్ కావడానికి మీరు కోరబడతారు - దశల వారీగా ఆదేశాలను అనుసరించండి
+1. మీ కోసం ఒక ప్రత్యేక వాతావరణం పేరు ఇవ్వండి - ఉదా: నేను `nitya-mshack-azd` అని ఉపయోగించాను
+1. ఇది `.azure/` ఫోల్డర్ సృష్టిస్తుంది - మీరు ఆ వాతావరణ పేరు తో ఒక సబ్‌ఫోల్డర్ చూడగలరు
+1. మీరు సబ్‌స్క్రిప్షన్ పేరును ఎంచుకోవడానికి కోరబడతారు - డిఫాల్ట్ ఎంచుకోండి
+1. ప్రదేశాన్ని ఎంచుకోమని అడుగుతారు - `East US 2` ఉపయోగించండి
 
-Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
+ఇప్పుడు మీరు ప్రావిజనింగ్ పూర్తి అయ్యేవరకు వేచి ఉండాలి. **ఇది సుమారు 10-15 నిమిషాలు పడుతుంది**
 
-1. When done, your console will show a SUCCESS message like this:
+1. పూర్తయిన తర్వాత, మీ కన్సోల్ లో SUCCESS సందేశం ఇలా కనిపిస్తుంది:
       ```bash title="" linenums="0"
       SUCCESS: Your up workflow to provision and deploy to Azure completed in 10 minutes 17 seconds.
       ```
-1. Your Azure Portal will now have a provisioned resource group with that env name:
+1. మీ Azure పోర్టల్ లో ఇప్పుడు ఆ వాతావరణ పేరుతో పాటు ఒక ప్రావిజన్డ్ రీసోర్స్ గ్రూప్ ఉంటుంది:
 
-      ![ప్రొవిజన్డ్ ఇన్‌ఫ్రాస్ట్రక్చర్](../../../../../translated_images/te/02-provisioned-infra.46c706b14f56e0bf.webp)
+      ![Infra](../../../../../translated_images/te/02-provisioned-infra.46c706b14f56e0bf.webp)
 
-1. **You are now ready to validate the deployed infrastructure and application**.
-
----
-
-## 4. Template Validation
-
-1. Visit Azure Portal [Resource Groups](https://portal.azure.com/#browse/resourcegroups) page - log in when prompted
-1. Click on RG for your environment name - you see the page above
-
-      - click on the Azure Container Apps resource
-      - click on the Application Url in the _Essentials_ section (top right)
-
-1. You should see a hosted application front-end UI like this:
-
-   ![అప్లికేషన్](../../../../../translated_images/te/03-test-application.471910da12c3038e.webp)
-
-1. Try asking a couple of [sample questions](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
-
-      1. Ask: ```What is the capital of France?``` 
-      1. Ask: ```What's the best tent under $200 for two people, and what features does it include?```
-
-1. You should get answers similar to what is shown below. _But how does this work?_ 
-
-      ![అప్లికేషన్](../../../../../translated_images/te/03-test-question.521c1e863cbaddb6.webp)
+1. **మీరు ఇప్పుడు డిప్లాయ్ చేసిన ఇన్‌ఫ్రాస్ట్రక్చర్ మరియు అనువర్తనాన్ని ధృవీకరించడానికి సిద్ధంగా ఉన్నారు**.
 
 ---
 
-## 5.  Agent Validation
+## 4. టెంప్లేట్ ధృవీకరణ
 
-The Azure Container App deploys an endpoint that connects to the AI Agent provisioned in the Microsoft Foundry project for this template. Let's take a look at what that means.
+1. Azure పోర్టల్ [Resource Groups](https://portal.azure.com/#browse/resourcegroups) పేజీకి వెళ్లండి - ప్రాంప్ట్ వచ్చినప్పుడు లాగిన్ అవ్వండి
+1. మీ వాతావరణం పేరుకు సంబంధించిన RG పై క్లిక్ చేయండి - మీరు పై పేజీని చూస్తారు
 
-1. Return to the Azure Portal _Overview_ page for your resource group
+      - Azure Container Apps రీసోర్స్ పై క్లిక్ చేయండి
+      - _Essentials_ విభాగంలో (పైన కుడివైపున) Application Urlపై క్లిక్ చేయండి
 
-1. Click on the `Microsoft Foundry` resource in that list
+1. మీరు ఇలా ఒక హోస్ట్ చేసిన అనువర్తన ముందరి UI చూడగలుగుతారు:
 
-1. You should see this. Click the `Go to Microsoft Foundry Portal` button. 
+   ![App](../../../../../translated_images/te/03-test-application.471910da12c3038e.webp)
+
+1. కొన్ని [నమూనా ప్రశ్నలు](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md) అడగండి
+
+      1. అడగండి: ```ఫ్రాన్స్ రాజధాని ఏంటి?``` 
+      1. అడగండి: ```రెండు మందికి $200 లోపు ఉత్తమ తమ్ముడెంతీ, దాని లక్షణాలు ఏమిటి?```
+
+1. మీరు కింది విధంగా సమాధానాలు పొందగలుగుతారు. _కానీ ఇది ఎలా పని చేస్తుంది?_
+
+      ![App](../../../../../translated_images/te/03-test-question.521c1e863cbaddb6.webp)
+
+---
+
+## 5. ఏజెంట్ ధృవీకరణ
+
+Azure Container App టెంప్లేట్ ప్రాజెక్టులో Microsoft Foundry లో ప్రావిజనడ్ AI ఏజెంట్ కు కనెక్ట్ అయ్యే ఒక ఎండ్పాయింట్ను డిప్లాయ్ చేస్తుంది. దీని అర్థం ఏమిటో చూద్దాం.
+
+1. Azure పోర్టల్ లో మీ రిసోర్స్ గ్రూప్ కి సంబంధించిన ఓవర్వ్యూకు తిరిగి వెళ్ళండి
+
+1. ఆ జాబితాలోని `Microsoft Foundry` రీసోర్స్ పై క్లిక్ చేయండి
+
+1. మీరు దీనిని చూడగలుగుతారు. `Go to Microsoft Foundry Portal` బటన్ పై క్లిక్ చేయండి.
    ![Foundry](../../../../../translated_images/te/04-view-foundry-project.fb94ca41803f28f3.webp)
 
-1. You should see the Foundry Project page for your AI application
-   ![ప్రాజెక్ట్](../../../../../translated_images/te/05-visit-foundry-portal.d734e98135892d7e.webp)
+1. మీ AI అనువర్తనపైన Foundry ప్రాజెక్ట్ పేజీకి మీరు వస్తారు
+   ![Project](../../../../../translated_images/te/05-visit-foundry-portal.d734e98135892d7e.webp)
 
-1. Click on `Agents` - you see the default Agent provisioned in your project
-   ![ఏజెంట్స్](../../../../../translated_images/te/06-visit-agents.bccb263f77b00a09.webp)
+1. `Agents` పై క్లిక్ చేయండి - మీరు ప్రాజెక్టులో డిప్లాయ్ అయిన డిఫాల్ట్ ఏజెంట్‌ను చూస్తారు
+   ![Agents](../../../../../translated_images/te/06-visit-agents.bccb263f77b00a09.webp)
 
-1. Select it - and you see the Agent details. Note the following:
+1. దాన్ని ఎంచుకోండి - మీరు ఏజెంట్ వివరాలను చూస్తారు. ఈ విషయాలు గమనించండి:
 
-      - The agent uses File Search by default (always)
-      - The agent `Knowledge` indicates it has 32 files uploaded (for file search)
-      ![ఏజెంట్స్](../../../../../translated_images/te/07-view-agent-details.0e049f37f61eae62.webp)
+      - ఏజెంట్ డిఫాల్ట్ గా ఫైల్ సర్చ్ ఉపయోగిస్తుంది (ఎప్పుడూ)
+      - ఏజెంట్ `Knowledge` 32 ఫైళ్లు అప్‌లోడ్ చేయబడ్డాయని సూచిస్తుంది (ఫైల్ సర్చ్ కోసం)
+      ![Agents](../../../../../translated_images/te/07-view-agent-details.0e049f37f61eae62.webp)
 
-1. Look for the `Data+indexes` option in the left menu and click for details. 
+1. ఎడమ మెనూలొ `Data+indexes` ఎంపికను చూడండి మరియు వివరాల కోసం క్లిక్ చేయండి.
 
-      - You should see the 32 data files uploaded for knowledge.
-      - These will correspond to the 12 customer files and 20 product files under `src/files` 
-      ![డేటా](../../../../../translated_images/te/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
+      - మీరు 32 డేటా ఫైల్స్ అప్‌లోడ్ చేయబడ్డాయని చూస్తారు.
+      - ఇవి `src/files` కింద 12 కస్టమర్ ఫైళ్లు మరియు 20 ఉత్పత్తి ఫైల్స్ కు సంబంధించి ఉంటాయి
+      ![Data](../../../../../translated_images/te/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
-**You validated Agent operation!** 
+**మీరు ఏజెంట్ ఆపరేషన్‌ను ధృవీకరించారు!** 
 
-1. The agent responses are grounded in the knowledge in those files. 
-1. You can now ask questions related to that data, and get grounded responses.
-1. Example: `customer_info_10.json` describes the 3 purchases made by "Amanda Perez"
+1. ఏజెంట్ స్పందనలు ఆ ఫైళ్లలోని జ్ఞానంపై ఆధారపడి ఉంటాయి.
+1. మీరు ఇప్పుడు ఆ డేటాకు సంబంధించిన ప్రశ్నలు అడిగి, ఆధారపడి ఉన్న స్పందనలు పొందవచ్చు.
+1. ఉదాహరణ: `customer_info_10.json` లో "Amanda Perez" చేసిన 3 కొనుగోలుల వివరాలు ఉన్నాయి
 
-Revisit the browser tab with the Container App endpoint and ask: `What products does Amanda Perez own?`. You should see something like this:
+కంటైనర్ యాప్ ఎండ్పాయింట్ ఉన్న బ్రౌజర్ ట్యాబ్ కి తిరిగి వెళ్ళి అడగండి: `Amanda Perez కి ఏ ఉత్పత్తులు ఉన్నాయి?`. మీరు ఈ విధంగా చూస్తారు:
 
-![డేటా](../../../../../translated_images/te/09-ask-in-aca.4102297fc465a4d5.webp)
-
----
-
-## 6. Agent Playground
-
-Let's build a bit more intuition for the capabilities of Microsoft Foundry, by taking the Agent for a spin in the Agents Playground. 
-
-1. Return to the `Agents` page in Microsoft Foundry - select the default agent
-1. Click the `Try in Playground` option - you should get a Playground UI like this
-1. Ask the same question: `What products does Amanda Perez own?`
-
-    ![డేటా](../../../../../translated_images/te/09-ask-in-playground.a1b93794f78fa676.webp)
-
-You get the same (or similar) response - but you also get additional information that you can use to understand the quality, cost, and performance of your agentic app. For example:
-
-1. Note that the response cites data files used to "ground" the response
-1. Hover over any of these file labels - does the data match your query and displayed response?
-
-You also see a _stats_ row below the response. 
-
-1. Hover over any metric - e.g., Safety. You see something like this
-1. Does the assessed rating match your intuition for the response safety level?
-
-      ![డేటా](../../../../../translated_images/te/10-view-run-info-meter.6cdb89a0eea5531f.webp)
+![Data](../../../../../translated_images/te/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
-## 7. Built-in Observability
+## 6. ఏజెంట్ ప్లేగ్రౌండ్
 
-Observability is about instrumenting your application to generate data that can be used to understand, debug, and optimize, its operations. To get a sense for this:
+Microsoft Foundry యొక్క సామర్థ్యాలకు మరింత అవగాహన పొందడానికి, ఏజెంట్‌ను Agents Playground లో స్పిన్ (టెస్ట్) చేద్దాం.
 
-1. Click the `View Run Info` button - you should see this view. This is an example of [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) in action. _You can also get this view by clicking Thread Logs in the top-level menu_.
+1. Microsoft Foundryలో `Agents` పేజీకి తిరిగి వెళ్లండి - డిఫాల్ట్ ఏజెంట్‌ను ఎంచుకోండి
+1. `Try in Playground` ఎంపికపై క్లిక్ చేయండి - మీరు ఈ విధంగా ఒక ప్లేగ్రౌండ్ UI ను పొందుతారు
+1. అదే ప్రశ్న అడగండి: `Amanda Perez కి ఏ ఉత్పత్తులు ఉన్నాయి?`
 
-   - Get a sense for the run steps and tools engaged by the agent
-   - Understand total Token count (vs. output tokens usage) for response
-   - Understand the latency and where time is being spent in execution
+    ![Data](../../../../../translated_images/te/09-ask-in-playground.a1b93794f78fa676.webp)
 
-      ![ఏజెంట్](../../../../../translated_images/te/10-view-run-info.b20ebd75fef6a1cc.webp)
+మీరు అదే (లేదా సమాన) స్పందనను పেতে�గలుగుతారు - కానీ మీ ఏజెంటిక్ అనువర్తనం యొక్క నాణ్యత, ఖర్చు మరియు పనితీరు అర్థం చేసుకోవడానికి మీరు ఉపయోగించగల అదనపు సమాచారమును కూడా పొందుతారు. ఉదాహరణకు:
 
-1. Click the `Metadata` tab to see additional attributes for the run, that may provide useful context for debugging issues later.   
+1. స్పందన "గ్రౌండ్" చేయడానికి ఉపయోగించిన డేటా ఫైళ్లు సూచించబడతాయన్నది గమనించండి
+1. ఈ ఫైల్ లేబుల్స్కన్నీపై హోవర్ చేయండి - డేటా మీ ప్రశ్న మరియు చూపించిన స్పందనకు సరిపోతుందా?
 
-      ![ఏజెంట్](../../../../../translated_images/te/11-view-run-info-metadata.7966986122c7c2df.webp)
+స్పందన క్రింద మీరు ఒక _పరిమాణాల_ వరుసను కూడా చూడగలుగుతారు.
 
+1. ఏ మేట్రిక్ పైనైనా హోవర్ చేయండి - ఉదా: సేఫ్టీ. ఇలా కనబడుతుంది
+1. ఈ మూల్యాంకన రేటింగ్ మీ స్పందన సేఫ్టీ స్థాయికి అనుగుణమా?
 
-1. Click the `Evaluations` tab to see auto-assessments made on the agent response. These include safety evaluations (e.g., Self-harm) and agent-specifc evaluations (e.g., Intent resolution, Task adherence).
-
-      ![ఏజెంట్](../../../../../translated_images/te/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
-
-1. Last but not least, click the `Monitoring` tab in the sidebar menu.
-
-      - Select `Resource usage` tab in the displayed page - and view the metrics.
-      - Track application usage in terms of costs (tokens) and load (requests).
-      - Track applicaton latency to first byte (input processing) and last byte (output).
-
-      ![ఏజెంట్](../../../../../translated_images/te/13-monitoring-resources.5148015f7311807f.webp)
+      ![Data](../../../../../translated_images/te/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
 ---
 
-## 8. Environment Variables
+## 7. అంతర్గత ఆబ్జర్వబిలిటీ
 
-So far, we've walked through the deployment in the browser - and validated that our infrastructure is provisioned and the application is operational. But to work with the application _code-first_, we need to configure our local development environment with the relevant variables required to work with these resources. Using `azd` makes it easy.
+ఆబ్జర్వబిలిటీ అనేది మీ అనువర్తనాన్ని ఇన్స్ట్రుమెంట్ చేసి, దాని ఆపరేషన్లను అర్థం చేసుకోవడం, డీబగ్ చేయడం, మరియు ఆప్టిమైజ్ చెయ్యడానికి ఉపయోగించే డేటాను సృష్టించడం. దీన్ని అర్థం చేసుకోడానికి:
 
-1. The Azure Developer CLI [uses environment variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) to store and manage configuration settings for  the application deployments.
+1. `View Run Info` బటన్ పై క్లిక్ చేయండి - మీరు ఈ దృశ్యాన్ని చూడగలుగుతారు. ఇది [ఏజెంట్ ట్రేసింగ్](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) యొక్క ఒక ఉదాహరణం. _మీరు ఈ దృశ్యాన్ని టాప్-లెవల్ మెనులో Thread Logs పై క్లిక్ చేసి కూడా పొందవచ్చు._
 
-1. Environment variables are stored in `.azure/<env-name>/.env` - this scopes them to the `env-name` environment used during deployment and helps you isolate environments between different deployment targets in the same repo.
+   - ఏజెంట్ ఉపయోగించిన వినియోగ దశలను తెలుసుకోండి
+   - స్పందనం కోసం టోటల్ టోకెన్ సంఖ్యను (ప్రత్యుత్పత్తి టోకెన్స్ వాడకంతో పోల్చి) అర్థం చేసుకోండి
+   - లేటెన్సీ మరియు ఎక్కడ సమయం ఖర్చవుతుంది తెలుసుకోండి
 
-1. Environment variables are automatically loaded by the `azd` command whenever it executes a specific command (e.g., `azd up`). Note that `azd` does not automatically read _OS-level_ environment variables (e.g., set in the shell) - instead use `azd set env` and `azd get env` to transfer information within scripts.
+      ![Agent](../../../../../translated_images/te/10-view-run-info.b20ebd75fef6a1cc.webp)
+
+1. `Metadata` ట్యాబ్ పై క్లిక్ చేసి, రన్ కి సంబంధించిన అదనపు లక్షణాల (attributes) ను చూడండి, ఇవి తర్వాత డీబగ్గింగ్ లో సహాయపడవచ్చు.
+
+      ![Agent](../../../../../translated_images/te/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 
-Let's try out a few commands:
+1. `Evaluations` ట్యాబ్ పై క్లిక్ చేసి, ఏజెంట్ స్పందన పై ఆటో-మూల్యాంకనలను చూడండి. ఇందులో సేఫ్టీ మೌಲ్యాంకనాలు (ఉదా: స్వీయ హానికరం), మరియు ఏజెంట్ ప్రత్యేకమైన మೌಲ్యాంకనాలు (ఉదా: ఉద్దేశ ప్రవహం, పనితీరు నిబద్ధత) ఉంటాయి.
 
-1. Get all the environment variables set for `azd` in this environment:
+      ![Agent](../../../../../translated_images/te/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
+
+1. చివరగా, సైడ్‌బార్ మెనులో `Monitoring` ట్యాబ్ పై క్లిక్ చేయండి.
+
+      - ప్రదర్శించిన పేజీలో `Resource usage` ట్యాబ్ ఎంచుకుని, మేట్రిక్‌లను వీక్షించండి.
+      - ఖర్చులు (టోకెన్లు) మరియు లోడ్ (అభ్యర్థనలు) పరంగా అనువర్తన వాడుకను ట్రాక్ చేయండి.
+      - ఫస్ట్ బైట్ (ఇన్‌పుట్ ప్రాసెసింగ్) మరియు లాస్ట్ బైట్ (వౌట్పుట్)కి సంబంధించిన అప్లికేషన్ లేటెన్సీని ట్రాక్ చేయండి.
+
+      ![Agent](../../../../../translated_images/te/13-monitoring-resources.5148015f7311807f.webp)
+
+---
+
+## 8. వాతావరణ వేరియబుల్స్
+
+ఇప్పటివరకూ, మనం బ్రౌజర్‌లో డిప్లాయ్‌మెంట్‌ను అనుసరించాము - మరియు మన ఇన్‌ఫ్రాస్ట్రక్చర్ ప్రసిద్ధి పొందిందని మరియు అనువర్తనం సక్రియమని ధృవీకరించాము. కానీ కోడ్-ఫస్ట్ గా పని చేయాలంటే, మనం సంభందిత వాతావరణ వేరియబుల్స్ తో మన లోకల్ అభివృద్ధి వాతావరణాన్ని కాన్ఫిగర్ చేయాలి. `azd` ఉపయోగించడం ఇది సులభం చేస్తుంది.
+
+1. Azure Developer CLI [వాతావరణ వేరియబుల్స్‌ను ఉపయోగిస్తుంది](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) అనువర్తన నిర్మాణాలకు సంబంధించి కాన్ఫిగరేషన్ సెట్టింగ్స్ నిల్వ మరియు నిర్వహణ కోసం.
+
+1. వాతావరణ వేరియబుల్స్ `.azure/<env-name>/.env`లో నిల్వ ఉంటాయి - ఇది వాటిని `env-name` వాతావరణంతో పరిమితం చేస్తుంది, ఇది ఒకే రిపోలో వేరువేరు డిప్లాయ్‌మెంట్ లక్ష్యాల మధ్య వాతావరణాలను వేరుచేయడంలో సహాయపడుతుంది.
+
+1. వాతావరణ వేరియబుల్స్ `azd` కమాండ్ ద్వారా స్వయంచాలకంగా లోడ్ చేయబడతాయి, ప్రదేశంలో ఒక ప్రత్యేక కమాండ్ (ఉదా: `azd up`) నడుస్తున్నప్పుడు. గమనించండి, `azd` స్వయంచాలకంగా _OS-స్థాయి_ వాతావరణ వేరియబుల్స్ (షెల్‌లో సెట్ చేసినవి) చదవదు - బదులుగా స్క్రిప్ట్‌లలో సమాచారం ప్రసారం చేయడానికి `azd set env` మరియు `azd get env` ఉపయోగించండి.
+
+
+కొన్ని కమాండ్లు తలచుకుందాం:
+
+1. ఈ వాతావరణంలో `azd` కోసం అన్ని వాతావరణ వేరియబుల్స్ పొందండి:
 
       ```bash title="" linenums="0"
       azd env get-values
       ```
       
-      You see something like:
+      మీరు ఇలానే ఒక విషయం చూస్తారు:
 
       ```bash title="" linenums="0"
       AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4.1-mini"
@@ -244,19 +244,19 @@ Let's try out a few commands:
       ...
       ```
 
-1. Get a specific value - e.g., I want to know if we set the `AZURE_AI_AGENT_MODEL_NAME` value
+1. ఒక నిర్దిష్ట విలువ పొందండి - ఉదా: నేను `AZURE_AI_AGENT_MODEL_NAME` విలువ సెట్ చేయబడిందో తెలుసుకోవాలనుకుంటున్నాను
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
       
-      You see something like this - it was not set by default!
+      మీరు దీన్ని ఈ విధంగా చూడగలుగుతారు - ఇది డిఫాల్ట్ గా సెట్ చేయబడలేదు!
 
       ```bash title="" linenums="0"
       ERROR: key 'AZURE_AI_AGENT_MODEL_NAME' not found in the environment values
       ```
 
-1. Set a new environment variable for `azd`. Here, we update the agent model name. _Note: any changes made will be immediately reflected in the `.azure/<env-name>/.env` file.
+1. `azd` కోసం కొత్త వాతావరణ వేరియబుల్ సెట్ చేయండి. ఇక్కడ, మనం ఏజెంట్ మోడల్ పేరును నవీకరిస్తున్నాం. _గమనిక: ఏ విధమైన మార్పులైనా వెంటనే `.azure/<env-name>/.env` ఫైలులో ప్రతిబింబిస్తాయి.
 
       ```bash title="" linenums="0"
       azd env set AZURE_AI_AGENT_MODEL_NAME gpt-4.1
@@ -264,31 +264,32 @@ Let's try out a few commands:
       azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
       ```
 
-      Now, we should find the value is set:
+      ఇప్పుడు, మనం విలువ సెట్ అయిందని చూడాలి:
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
 
-1. Note that some resources are persistent (e.g., model deployments) and will require more than just an `azd up` to force the redeployment. Let's try tearing down the original deployment and redeploying with changed env vars.
+1. కొన్ని వనరులు శాశ్వతమైనవి (ఉదా: మోడల్ డిప్లాయ్‌మెంట్‌లు) మరియు ఇవి `azd up` మాత్రమే సూచించకుండా మరింత చర్య తీసుకోవలసి ఉంటుంది. మార్పు చేసిన వాతావరణ వేరియబుల్స్‌తో తిరిగి డిప్లాయ్ చేయడానికి, మనం ఒరిజినల్ డిప్లాయ్‌మెంట్‌ను తొలగించి మళ్ళీ డిప్లాయ్ చేయండి.
 
-1. **Refresh** If you had previously deployed infrastructure using an azd template - you can _refresh_ the state of your local environment variables based on the current state of your Azure deployment using this command:
+1. **Refresh** మీరు ముందుగా azd టెంప్లేట్ ఉపయోగించి ఇన్‌ఫ్రాస్ట్రక్చర్‌ను డిప్లాయ్ చేసివుంటే - ప్రస్తుతం Azure డిప్లాయ్‌మెంట్ స్థితిని బట్టి మీ లోకల్ వాతావరణ వేరియబుల్స్ స్థితిని _refresh_ చేయడానికి ఈ కమాండ్ ఉపయోగించండి:
 
       ```bash title="" linenums="0"
       azd env refresh
       ```
 
-      ఇది రెండు లేదా అంతకంటే ఎక్కువ స్థానిక అభివృద్ధి వాతావరణాల (ఉదా., బహుళ డెవలపర్లతో టీమ్) మధ్య పర్యావరణ వేరియబుల్స్‌ను _సమకాలీకరించడానికి_ శక్తివంతమైన మార్గం - ఇది డిప్లాయ్ చేయబడిన ఇన్ఫ్రాస్ట్రక్చర్‌ను env వేరియబుల్ స్థితికి మూల సత్యంగా పనిచేయించేలా చేస్తుంది. టీమ్ సభ్యులు కేవలం వేరియబుల్స్‌ను _రీఫ్రెష్_ చేసి మళ్లీ సమకాలీకరణలోకి వస్తారు.
+
+      ఇది రెండు లేదా అంతకంటే ఎక్కువ లోకల్ డెవలప్‌మెంట్ ఎన్‌విరాన్‌మెంట్‌ల మధ్య (ఉదాహరణకు, చాలా మంది డెవలపర్లు ఉన్న టీమ్) ఎన్‌విరాన్‌మెంట్ వేరియబుల్స్‌ను _సింక్_ చేయడానికి శక్తివంతమైన విధానం - డిప్లాయ్ అయిన ఇన్ఫ్రాస్ట్రక్చర్ ను ఎన్‌విరాన్‌మెంట్ వేరియబుల్ స్థితికి గ్రౌండ్ ట్రూత్‌గా ఉపయోగించేలా చేస్తుంది. టీమ్ సభ్యులు వేరియబుల్స్‌ను _రిఫ్రెష్_ చేయడం ద్వారా సింక్‌లోకి తిరిగి వెళ్ళవచ్చు.
 
 ---
 
 ## 9. అభినందనలు 🏆
 
-మీరు ఒక end-to-end వర్క్‌ఫ్లోను పూర్తి చేశారు, ఇందులో మీరు:
+మీరు తక్కువ సమయంలో ఒక ముగింపు-తుద విద్యుత్ ప్రవాహాన్ని పూర్తి చేసుకున్నారు, ఇందులో మీరు:
 
-- [X] మీరు ఉపయోగించదలచుకున్న AZD టెంప్లేట్‌ను ఎంచుకున్నారు
-- [X] మద్దతు ఉన్న అభివృద్ధి వాతావరణంలో టెంప్లేట్‌ను తెరవారు
-- [X] టెంప్లేట్‌ను డిప్లాయ్ చేసి అది పనిచేస్తుందో నిర్ధారించారు
+- [X] నచ్చిన AZD టెంప్లేట్ను ఎంచుకున్నారు
+- [X] ఆ టెంప్లేట్ను మద్దతు పొందిన డెవలప్‌మెంట్ ఎన్‌విరాన్‌మెంట్‌లో తెరుచుకున్నారు
+- [X] టెంప్లేట్ను డిప్లాయ్ చేసి అది పనిచేస్తున్నదని నిర్ధారించారు
 
 ---
 
