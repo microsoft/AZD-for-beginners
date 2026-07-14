@@ -1,21 +1,21 @@
 # Kapitel 7: Felsökning & Debugging
 
-**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Varaktighet**: 1-1.5 hours | **⭐ Komplexitet**: Medel
+**📚 Kurs**: [AZD För Nybörjare](../../README.md) | **⏱️ Varaktighet**: 1-1.5 timmar | **⭐ Svårighetsgrad**: Medel
 
 ---
 
 ## Översikt
 
-Detta kapitel hjälper dig att diagnostisera och åtgärda vanliga problem när du arbetar med Azure Developer CLI. Från distributionsfel till AI-specifika problem.
+Det här kapitlet hjälper dig att diagnostisera och lösa vanliga problem när du arbetar med Azure Developer CLI. Från driftsättningsfel till AI-specifika problem.
 
-> Validerad mot `azd 1.25.6` i juni 2026.
+> Validerat mot `azd 1.27.1` i juli 2026.
 
 ## Lärandemål
 
-Genom att slutföra detta kapitel kommer du att:
-- Diagnostisera vanliga AZD-distributionsfel
-- Felsöka autentiserings- och behörighetsproblem
-- Åtgärda AI-tjänstanslutningsproblem
+Genom att slutföra det här kapitlet kommer du att:
+- Diagnostisera vanliga AZD driftsättningsfel
+- Felsöka autentisering och behörighetsproblem
+- Lösa AI-tjänsters anslutningsproblem
 - Använda Azure Portal och CLI för felsökning
 
 ---
@@ -24,13 +24,13 @@ Genom att slutföra detta kapitel kommer du att:
 
 | # | Lektion | Beskrivning | Tid |
 |---|--------|-------------|------|
-| 1 | [Vanliga problem](common-issues.md) | Vanligt förekommande problem | 30 min |
+| 1 | [Vanliga Problem](common-issues.md) | Vanligt förekommande problem | 30 min |
 | 2 | [Felsökningsguide](debugging.md) | Steg-för-steg felsökningsstrategier | 45 min |
-| 3 | [AI-felsökning](ai-troubleshooting.md) | AI-specifika problem | 30 min |
+| 3 | [AI Felsökning](ai-troubleshooting.md) | AI-specifika problem | 30 min |
 
 ---
 
-## 🚨 Snabba lösningar
+## 🚨 Snabba Lösningar
 
 ### Autentiseringsproblem
 ```bash
@@ -43,7 +43,7 @@ az login
 azd auth status
 ```
 
-### Provisioneringsfel
+### Driftsättningsfel
 ```bash
 azd show
 azd monitor --logs
@@ -57,7 +57,7 @@ azd env new different-name
 azd up
 ```
 
-### Kvot överskriden
+### Kvot Överskriden
 ```bash
 az vm list-usage --location eastus --output table
 azd env set AZURE_LOCATION westus2
@@ -66,26 +66,26 @@ azd up
 
 ---
 
-## 📋 Referens för felkoder
+## 📋 Felkod Referens
 
 | Fel | Orsak | Lösning |
 |-------|-------|----------|
-| `AuthenticationError` | Inte inloggad | `azd auth login` |
+| `AuthenticationError` | Ej inloggad | `azd auth login` |
 | `ResourceNotFound` | Saknad resurs | Kontrollera resursnamn |
 | `QuotaExceeded` | Prenumerationsgränser | Begär kvotökning |
-| `InvalidTemplate` | Bicep-syntaxfel | `az bicep build` |
-| `Conflict` | Resursen finns | Använd nytt namn eller ta bort |
+| `InvalidTemplate` | Bicep syntaxfel | `az bicep build` |
+| `Conflict` | Resurs finns redan | Använd nytt namn eller ta bort |
 | `Forbidden` | Otillräckliga behörigheter | Kontrollera RBAC-roller |
 
 ---
 
-## 🔄 Återställning och återhämtning
+## 🔄 Återställning och Återhämtning
 
 ```bash
-# Mjuk återställning (behåll resurser, distribuera om koden)
+# Mjuk återställning (behåll resurser, distribuera om kod)
 azd deploy --force
 
-# Hård återställning (radera allt, börja om från början)
+# Hård återställning (ta bort allt, starta om)
 azd down --force --purge
 azd up
 ```
@@ -94,16 +94,16 @@ azd up
 
 ## 🔗 Navigering
 
-| Direction | Kapitel |
+| Riktning | Kapitel |
 |-----------|---------|
-| **Föregående** | [Kapitel 6: Förberedelser före distribution](../chapter-06-pre-deployment/README.md) |
+| **Föregående** | [Kapitel 6: Förberedelse före Driftsättning](../chapter-06-pre-deployment/README.md) |
 | **Nästa** | [Kapitel 8: Produktion](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Relaterade resurser
+## 📖 Relaterade Resurser
 
-- [Kontroller före distribution](../chapter-06-pre-deployment/preflight-checks.md)
+- [Förberedande Kontroller](../chapter-06-pre-deployment/preflight-checks.md)
 - [Konfigurationsguide](../chapter-03-configuration/configuration.md)
 - [AZD GitHub-ärenden](https://github.com/Azure/azure-dev/issues)
 

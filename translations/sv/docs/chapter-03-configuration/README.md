@@ -1,20 +1,20 @@
 # Kapitel 3: Konfiguration & Autentisering
 
-**📚 Kurs**: [AZD för nybörjare](../../README.md) | **⏱️ Varaktighet**: 45-60 minuter | **⭐ Svårighetsgrad**: Medel
+**📚 Kurs**: [AZD För Nybörjare](../../README.md) | **⏱️ Varaktighet**: 45-60 minuter | **⭐ Svårighetsgrad**: Medel
 
 ---
 
 ## Översikt
 
-Detta kapitel behandlar miljökonfiguration, autentiseringsmönster och säkerhetsbästa praxis för distributioner med Azure Developer CLI.
+Detta kapitel täcker miljökonfiguration, autentiseringsmönster och säkerhetsbästa praxis för distributioner med Azure Developer CLI.
 
-> Validerad mot `azd 1.25.6` i juni 2026.
+> Validerad mot `azd 1.27.1` i juli 2026.
 
 ## Lärandemål
 
 Genom att slutföra detta kapitel kommer du att:
-- Behärska AZD:s konfigurationshierarki
-- Hantera flera miljöer (dev, staging, prod)
+- Mästra AZD-konfigurationshierarkin
+- Hantera flera miljöer (utveckling, staging, produktion)
 - Implementera säker autentisering med hanterade identiteter
 - Konfigurera miljöspecifika inställningar
 
@@ -25,11 +25,11 @@ Genom att slutföra detta kapitel kommer du att:
 | # | Lektion | Beskrivning | Tid |
 |---|--------|-------------|------|
 | 1 | [Konfigurationsguide](configuration.md) | Miljöinställning och hantering | 30 min |
-| 2 | [Autentisering och säkerhet](authsecurity.md) | Mönster för hanterad identitet och RBAC | 30 min |
+| 2 | [Autentisering & Säkerhet](authsecurity.md) | Hanterad identitet och RBAC-mönster | 30 min |
 
 ---
 
-## 🚀 Snabbstart
+## 🚀 Kom igång snabbt
 
 ```bash
 # Skapa flera miljöer
@@ -37,7 +37,7 @@ azd env new dev
 azd env new staging
 azd env new prod
 
-# Växla mellan miljöer
+# Byt miljöer
 azd env select prod
 
 # Ställ in miljövariabler
@@ -67,16 +67,16 @@ AZD tillämpar inställningar i denna ordning (senare åsidosätter tidigare):
 # Använd hanterad identitet (rekommenderas)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Kontrollera AZD-autentiseringsstatus
+# Kontrollera AZD autentiseringsstatus
 azd auth status
 
-# Valfritt: verifiera Azure CLI-kontexten om du planerar att köra az-kommandon
+# Valfritt: verifiera Azure CLI-kontekst om du planerar att köra az-kommandon
 az account show
 
-# Autentisera igen vid behov
+# Autentisera om vid behov
 azd auth login
 
-# Valfritt: uppdatera Azure CLI-autentiseringen för az-kommandon
+# Valfritt: uppdatera Azure CLI-autentisering för az-kommandon
 az login
 ```
 

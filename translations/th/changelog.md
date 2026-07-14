@@ -1,69 +1,107 @@
-# Changelog - AZD สำหรับผู้เริ่มต้น
+# ประวัติการเปลี่ยนแปลง - AZD สำหรับผู้เริ่มต้น
 
 ## บทนำ
 
-ไฟล์ changelog นี้บันทึกการเปลี่ยนแปลงที่สำคัญทั้งหมด การอัปเดต และการปรับปรุงในที่เก็บ AZD สำหรับผู้เริ่มต้น เราปฏิบัติตามหลักเวอร์ชันเชิงความหมายและดูแลบันทึกนี้เพื่อช่วยให้ผู้ใช้เข้าใจถึงสิ่งที่เปลี่ยนแปลงระหว่างเวอร์ชันต่าง ๆ
+ประวัติการเปลี่ยนแปลงนี้บันทึกการเปลี่ยนแปลงที่สำคัญทั้งหมด การอัปเดต และการปรับปรุงในที่เก็บ AZD สำหรับผู้เริ่มต้น เราปฏิบัติตามหลักการเวอร์ชันแบบมีความหมายและรักษาบันทึกนี้ไว้เพื่อช่วยให้ผู้ใช้เข้าใจว่ามีอะไรเปลี่ยนแปลงระหว่างเวอร์ชันบ้าง
 
 ## เป้าหมายการเรียนรู้
 
-โดยการทบทวน changelog นี้ คุณจะได้:
-- รับทราบข้อมูลเกี่ยวกับฟีเจอร์ใหม่และการเพิ่มเนื้อหา
+โดยการตรวจสอบประวัติการเปลี่ยนแปลงนี้ คุณจะ:
+- รับข้อมูลอัปเดตเกี่ยวกับฟีเจอร์ใหม่และเนื้อหาที่เพิ่มขึ้น
 - เข้าใจการปรับปรุงที่ทำกับเอกสารที่มีอยู่
-- ติดตามการแก้ไขข้อบกพร่องและการแก้ไขเพื่อความถูกต้อง
-- ติดตามพัฒนาการของวัสดุการเรียนรู้ตามเวลา
+- ติดตามการแก้ไขบั๊กและการแก้ไขเพื่อให้มั่นใจถึงความแม่นยำ
+- ติดตามพัฒนาการของสื่อการเรียนรู้ตามช่วงเวลา
 
 ## ผลลัพธ์การเรียนรู้
 
-หลังจากทบทวนรายการ changelog คุณจะสามารถ:
-- ระบุเนื้อหาและทรัพยากรใหม่ที่มีให้สำหรับการเรียนรู้
-- เข้าใจว่าส่วนใดที่ได้รับการอัปเดตหรือปรับปรุง
-- วางแผนเส้นทางการเรียนรู้ของคุณโดยอิงจากวัสดุล่าสุด
-- ให้ข้อเสนอแนะและคำแนะนำสำหรับการปรับปรุงในอนาคต
+หลังจากตรวจสอบรายการในประวัติการเปลี่ยนแปลงแล้ว คุณจะสามารถ:
+- ระบุเนื้อหาและทรัพยากรใหม่ที่พร้อมสำหรับการเรียนรู้
+- เข้าใจว่ามีส่วนใดบ้างที่ได้รับการอัปเดตหรือปรับปรุง
+- วางแผนเส้นทางการเรียนรู้ของคุณตามวัสดุที่ทันสมัยที่สุด
+- มีส่วนร่วมในการให้ข้อเสนอแนะและข้อแนะนำเพื่อการปรับปรุงในอนาคต
 
-## ประวัติเวอร์ชัน
+## ประวัติการเวอร์ชัน
+
+### [v3.23.0] - 2026-07-13
+
+#### AZD 1.27.1 Refresh: การอัปเดตเวอร์ชันให้ทันสมัย
+**เวอร์ชันนี้ทำการตรวจสอบความถูกต้องของหลักสูตรกับ `azd` `1.27.1` (กรกฎาคม 2026, รุ่นเสถียรล่าสุด) และส่วนขยาย AI agent รุ่นพรีวิวปัจจุบัน `azure.ai.agents` `1.0.0-beta.5` ทำให้แบนเนอร์ "validated against" ทุกอันเป็นปัจจุบันหลังจากการปล่อย 1.26.0, 1.27.0, และ 1.27.1**
+
+#### เปลี่ยนแปลง
+- **✅ อัปเดตฐานการตรวจสอบความถูกต้อง** จาก `azd 1.25.6` (มิถุนายน 2026) เป็น `azd 1.27.1` (กรกฎาคม 2026) ใน README หลัก, README ของทุกบท, บทเรียน dev-container บทที่ 1 (รวมตัวอย่างที่ระบุเวอร์ชัน), บทเรียน custom-templates ในบทที่ 4, บทเรียน multi-agent ในบทที่ 5, และเอกสารเวิร์กช็อป
+- **🤖 รีเฟรชฐานของบทที่ 2** จาก `azd 1.23.12` (มีนาคม 2026) เป็น `azd 1.27.1` ใน `agents.md`, `ai-model-deployment.md`, `ai-workshop-lab.md` และ `microsoft-foundry-integration.md`; อัปเดตวันที่ในบันทึกตรวจสอบเป็น 2026-07-13
+- **🧩 ยกเครื่องเวอร์ชัน AI agent extension** จาก `azure.ai.agents` `0.1.40-preview`/`0.1.18-preview` เป็นรุ่นปัจจุบัน `1.0.0-beta.5` ใน README และ `agents.md` ของบทที่ 2
+- **🧪 ตัวอย่างการตรวจสอบในเวิร์กช็อป** (ผลลัพธ์คำสั่ง `azd version`) อัปเดตเป็น `1.27.1`
+
+#### หมายเหตุเกี่ยวกับการปล่อย azd ที่เกี่ยวข้อง (1.26.0 → 1.27.1)
+- **1.26.0 (2026-06-24):** สนับสนุน Go สำหรับ Azure Functions บน Flex Consumption, ตัวกรองการสมัครสมาชิกต่อผู้เช่าด้วยคำสั่ง `azd config sub-filter`, แพ็กส่วนขยายแบบรวมตัว (`azd x pack --bundle`), และคำสั่ง `azd tool install azure-skills`
+- **1.27.0 (2026-06-30):** โมเดลโครงการ/เอเจนต์ Azure AI Foundry โดยตรงใน `azure.yaml` (เริ่มต้นแบบไม่ใช้ Bicep/Terraform), สนับสนุนการติดตั้งคอนเทนเนอร์สำหรับ App Service (`host: appservice` + `language: docker`), ตัวเลือก `-s/--source` โดยตรงสำหรับคำสั่ง `azd extension`, และคำสั่ง `azd tool uninstall`
+- **1.27.1 (2026-07-09):** ตัวเลือก `--no-dependencies` สำหรับการติดตั้งส่วนขยาย `azd extension install`, การแยกโมเดลที่ถูกเลิกใช้จากคำขอแคตตาล็อก/โควต้าโดยค่าเริ่มต้น และการแก้ไขบั๊กหลายรายการ
+
+#### ไฟล์ที่อัปเดต
+- `README.md`
+- `changelog.md`
+- `docs/chapter-01-foundation/README.md`
+- `docs/chapter-01-foundation/bring-your-own-app.md`
+- `docs/chapter-01-foundation/dev-containers.md`
+- `docs/chapter-02-ai-development/README.md`
+- `docs/chapter-02-ai-development/agents.md`
+- `docs/chapter-02-ai-development/ai-model-deployment.md`
+- `docs/chapter-02-ai-development/ai-workshop-lab.md`
+- `docs/chapter-02-ai-development/microsoft-foundry-integration.md`
+- `docs/chapter-03-configuration/README.md`
+- `docs/chapter-04-infrastructure/custom-templates.md`
+- `docs/chapter-04-infrastructure/README.md`
+- `docs/chapter-05-multi-agent/multi-agent-basics.md`
+- `docs/chapter-05-multi-agent/README.md`
+- `docs/chapter-06-pre-deployment/README.md`
+- `docs/chapter-07-troubleshooting/README.md`
+- `docs/chapter-08-production/README.md`
+- `workshop/docs/index.md`
+- `workshop/docs/instructions/2-Validate-AI-Template.md`
 
 ### [v3.22.0] - 2026-06-16
 
-#### เติมช่องว่างผู้เริ่มต้น #2: การสร้างแม่แบบ, Dev Containers, Pulumi, Azure DevOps, Service Principals และอื่น ๆ
-**เวอร์ชันนี้ปิดช่องว่างระดับกลางที่เหลือที่พบโดยการวิเคราะห์ azd-coverage: วิธีสร้างและเผยแพร่แม่แบบของคุณเอง, สภาพแวดล้อม dev-container/Codespaces ที่ทำซ้ำได้, ผู้ให้บริการโครงสร้างพื้นฐาน Pulumi, การสาธิต CI/CD ของ Azure DevOps, การพิสูจน์ตัวตนของ service-principal, คำแนะนำการเลือกโฮสต์ (AKS/Spring Apps), คำอธิบาย `azd restore`/`azd package`, การจัดการข้อผิดพลาดของ hook และแนวปฏิบัติทีม/สภาพแวดล้อมที่ใช้ร่วมกัน**
+#### เติมช่องว่างสำหรับผู้เริ่มต้น #2: การเขียนเทมเพลต, Dev Containers, Pulumi, Azure DevOps, Service Principals และอื่น ๆ
+**เวอร์ชันนี้ปิดช่องว่างระดับกลางที่เหลือทั้งหมดที่ถูกเปิดเผยโดยการวิเคราะห์ azd-coverage: วิธีเขียนและเผยแพร่เทมเพลตของคุณเอง, สภาพแวดล้อม dev-container/Codespaces ที่สามารถทำซ้ำได้, ผู้ให้บริการโครงสร้างพื้นฐาน Pulumi, การเดินหน้าผ่าน Azure DevOps CI/CD, การตรวจสอบสิทธิ์ service-principal, คำแนะนำการเลือกโฮสต์ (AKS/Spring Apps), คำอธิบาย `azd restore`/`azd package`, การจัดการข้อผิดพลาดของ hook และแนวทางปฏิบัติสำหรับทีม/สภาพแวดล้อมที่ใช้ร่วมกัน**
 
 #### เพิ่มเติม
-- **🧱 บทเรียนบทที่ 4 ใหม่** `docs/chapter-04-infrastructure/custom-templates.md` — การสร้างแม่แบบ azd ของคุณเอง: โครงสร้างที่ต้องการ (`azure.yaml`, `infra/`, `src/`), ฟิลด์ `metadata.template`, การพารามิเตอร์โครงสร้างพื้นฐานด้วย token ทรัพยากร `uniqueString()` และแท็ก `azd-env-name`, การทดสอบภายในเครื่องด้วย `azd init --template <local-path>`, การเผยแพร่ไปยัง GitHub และการส่งเข้าแกลลอรี Awesome AZD
-- **📦 บทเรียนบทที่ 1 ใหม่** `docs/chapter-01-foundation/dev-containers.md` — สภาพแวดล้อม azd ที่ทำซ้ำได้ด้วย Dev Containers และ GitHub Codespaces: ไฟล์ `.devcontainer/devcontainer.json` ขั้นต่ำที่ใช้ฟีเจอร์อย่างเป็นทางการ `ghcr.io/azure/azure-dev/azd`, ฟีเจอร์เฉพาะภาษาการเขียนโปรแกรม, `docker-in-docker` สำหรับโฮสต์คอนเทนเนอร์ และ `azd auth login --use-device-code` สำหรับเข้าสู่ระบบระยะไกล
-- **🧩 Pulumi กับ azd** ในหัวข้อ `docs/chapter-04-infrastructure/provisioning.md` — `infra.provider: pulumi`, กำหนดโครงสร้างโฟลเดอร์ Pulumi, สแต็กที่แมปกับสภาพแวดล้อม azd, ผลลัพธ์/แท็กที่จำเป็น และเวิร์กโฟลว์ `azd up` / `azd down` ที่เหมือนกัน
-- **🎯 คำแนะนำการเลือกโฮสต์** ใน `docs/chapter-04-infrastructure/provisioning.md` — การเปรียบเทียบเบื้องต้นที่เป็นมิตรกับผู้เริ่มต้นของ `appservice`, `staticwebapp`, `function`, `containerapp`, `aks` และ `springapp` พร้อมคำแนะนำว่าเมื่อใดควรเลือก AKS หรือ Azure Spring Apps
-- **🛠️ สาธิต Azure DevOps CI/CD** ใน `docs/chapter-08-production/production-ai-practices.md` — `azd pipeline config --provider azdo`, การเชื่อมต่อบริการด้วย federation workload identity (OIDC), ไฟล์ `azure-dev.yml` ที่สร้างขึ้น และการตั้งค่า variable-group
-- **🔑 Service Principals (รูปแบบที่ 4)** เพิ่มใน `docs/chapter-03-configuration/authsecurity.md` — `az ad sp create-for-rbac`, การเข้าสู่ระบบ `azd auth login` แบบไม่โต้ตอบโดยใช้ client secret เทียบกับข้อมูลประจำตัว federated/OIDC, เมื่อใดควรใช้ และการเก็บข้อมูลรับรองอย่างปลอดภัย
-- **🪝 การจัดการข้อผิดพลาด hook** ในบทย่อย `docs/chapter-04-infrastructure/deployment-guide.md` — รหัสออกและ `set -e`, `continueOnError`, การทดสอบ hook แยกด้วย `azd hooks run`, shell เฉพาะ OS, และ `--debug`
-- **👥 ทีม / สภาพแวดล้อมที่ใช้ร่วมกัน** ใน `docs/chapter-03-configuration/configuration.md` — สิ่งที่อยู่ใน `.azure/`, สิ่งที่ต้องจัด gitignore, สภาพแวดล้อมต่อผู้พัฒนา, คำสั่ง `azd env list`/`select` และการมอบค่าสภาพแวดล้อมใน CI/CD
-- **🧰 คำอธิบาย `azd restore` และการขยาย `azd package`** ใน `resources/cheat-sheet.md` — การกู้คืน dependencies และการสร้างอาร์ติเฟกต์สำหรับการปรับใช้โดยไม่ต้องปรับใช้จริง
+- **🧱 บทเรียนใหม่บทที่ 4** `docs/chapter-04-infrastructure/custom-templates.md` — การเขียนเทมเพลต azd ของคุณเอง: โครงสร้างที่จำเป็น (`azure.yaml`, `infra/`, `src/`), ฟิลด์ `metadata.template`, การปรับโครงสร้างพื้นฐานด้วย token `uniqueString()` และแท็ก `azd-env-name`, การทดสอบในเครื่องด้วย `azd init --template <local-path>`, การเผยแพร่ไปยัง GitHub และการส่งไปยังแกลเลอรี Awesome AZD
+- **📦 บทเรียนใหม่บทที่ 1** `docs/chapter-01-foundation/dev-containers.md` — สภาพแวดล้อม azd ที่ทำซ้ำได้ด้วย Dev Containers และ GitHub Codespaces: ไฟล์ `.devcontainer/devcontainer.json` แบบขั้นต่ำโดยใช้ฟีเจอร์อย่างเป็นทางการ `ghcr.io/azure/azure-dev/azd`, ฟีเจอร์เฉพาะภาษา, `docker-in-docker` สำหรับโฮสต์คอนเทนเนอร์ และ `azd auth login --use-device-code` สำหรับลงชื่อเข้าใช้ระยะไกล
+- **🧩 Pulumi กับ azd** ส่วนใน `docs/chapter-04-infrastructure/provisioning.md` — `infra.provider: pulumi`, การจัดวางโฟลเดอร์ Pulumi, stacks ที่แม็ปกับ azd environments, ผลลัพธ์ที่จำเป็น/การติดแท็ก และเวิร์กโฟลว์ `azd up` / `azd down` ที่เหมือนกัน
+- **🎯 คำแนะนำการเลือกโฮสต์** ใน `docs/chapter-04-infrastructure/provisioning.md` — การเปรียบเทียบที่เป็นมิตรสำหรับผู้เริ่มต้นของ `appservice`, `staticwebapp`, `function`, `containerapp`, `aks` และ `springapp` พร้อมคำแนะนำเกี่ยวกับเมื่อใดควรเลือก AKS หรือ Azure Spring Apps
+- **🛠️ การเดินหน้าผ่าน Azure DevOps CI/CD** ใน `docs/chapter-08-production/production-ai-practices.md` — `azd pipeline config --provider azdo`, การเชื่อมต่อบริการด้วย work load identity federation (OIDC), ไฟล์ `azure-dev.yml` ที่ถูกสร้าง และการตั้งค่ากลุ่มตัวแปร
+- **🔑 Service Principals (รูปแบบที่ 4)** เพิ่มใน `docs/chapter-03-configuration/authsecurity.md` — `az ad sp create-for-rbac`, `azd auth login` แบบไม่โต้ตอบด้วย client secret กับข้อมูลรับรอง federated/OIDC, เมื่อใดควรใช้ และการเก็บข้อมูลรับรองอย่างปลอดภัย
+- **🪝 การจัดการข้อผิดพลาดของ hook** ย่อยใน `docs/chapter-04-infrastructure/deployment-guide.md` — รหัสออกและ `set -e`, `continueOnError`, การทดสอบ hooks อย่างแยกส่วนด้วย `azd hooks run`, shell เฉพาะระบบปฏิบัติการ และ `--debug`
+- **👥 ทีม / สภาพแวดล้อมที่ใช้ร่วมกัน** ส่วนใน `docs/chapter-03-configuration/configuration.md` — ไฟล์ที่อยู่ใน `.azure/`, สิ่งที่ต้อง gitignore, สภาพแวดล้อมต่อโปรแกรมเมอร์, `azd env list`/`select` และการมอบค่าตัวแปรสภาพแวดล้อมใน CI/CD
+- **🧰 คำอธิบาย `azd restore` และ `azd package` ที่ขยายความ** ใน `resources/cheat-sheet.md` — การคืนค่าการพึ่งพาและการสร้างอาร์ติแฟกต์ที่พร้อมติดตั้งโดยไม่ต้องติดตั้งจริง
 
 #### เปลี่ยนแปลง
-- **🧭 ตารางบทเรียนบทที่ 4** อัปเดตเพื่อรวมบทเรียนใหม่ "การสร้างแม่แบบของคุณเอง" (บทเรียนที่ 3)
-- **🧭 ตารางบทเรียนบทที่ 1** อัปเดตเพื่อรวมบทเรียนใหม่ "Dev Containers & Codespaces" (บทเรียนที่ 5); เชื่อมโยงส่วนท้ายการนำทางระหว่าง `bring-your-own-app.md` และ `dev-containers.md`
+- **🧭 ตารางบทเรียนบทที่ 4** อัปเดตเพื่อรวมบทเรียนใหม่ "การเขียนเทมเพลตของคุณเอง" (บทเรียนที่ 3)
+- **🧭 ตารางบทเรียนบทที่ 1** อัปเดตเพื่อรวมบทเรียนใหม่ "Dev Containers & Codespaces" (บทเรียนที่ 5); ส่วนท้ายของการนำทางเชื่อมโยงระหว่าง `bring-your-own-app.md` กับ `dev-containers.md`
 
 ### [v3.21.0] - 2026-06-16
 
-#### เติมช่องว่างผู้เริ่มต้น: บทเรียน Multi-Agent ปฏิบัติจริง, "นำแอปของคุณมาเอง," Terraform และสาธิต CI/CD
-**เวอร์ชันนี้ปิดช่องว่างที่ใหญ่ที่สุดสำหรับคู่มือผู้เริ่มต้นอย่างครบถ้วนโดยเพิ่มบทเรียนปฏิบัติสองบท (การสาธิต multi-agent deployable และการเพิ่ม azd ลงในแอปที่มีอยู่), บทนำเกี่ยวกับ hooks ที่เป็นมิตรกับผู้เริ่มต้น, ส่วน Terraform กับ azd, การสาธิต pipeline GitHub Actions ทีละขั้นตอน, คำอธิบายสำหรับส่วนขยายพรีวิวใหม่ และรายการตรวจสอบการยืนยันการปรับใช้ที่ชัดเจน**
+#### เติมช่องว่างสำหรับผู้เริ่มต้น: บทเรียน Multi-Agent แบบลงมือทำ, "Bring Your Own App", Terraform และการเดินหน้าผ่าน CI/CD
+**เวอร์ชันนี้ปิดช่องว่างที่ใหญ่ที่สุดสำหรับคู่มือผู้เริ่มต้นโดยเพิ่มบทเรียนใหม่สองบทแบบลงมือทำ (การเดินหน้าติดตั้ง multi-agent และการเพิ่ม azd ลงในแอปที่มีอยู่), การแนะนำ hooks สำหรับผู้เริ่มต้น, ส่วนการใช้ Terraform กับ azd, การเดินหน้าผ่าน GitHub Actions แบบทีละขั้นตอน, คำอธิบายสำหรับส่วนขยายพรีวิวใหม่ และรายการตรวจสอบเพื่อยืนยันการติดตั้งอย่างชัดเจน**
 
 #### เพิ่มเติม
-- **🤝 บทเรียนบทที่ 5 ใหม่** `docs/chapter-05-multi-agent/multi-agent-basics.md` — การสาธิตสอง-agent แบบเต็มที่ปฏิบัติได้จริง (orchestrator + specialists) โดยใช้แม่แบบจริง (`contoso-creative-writer`), ครอบคลุมเมื่อใดควรใช้ multi-agent, เวิร์กโฟลว์ `azd up`, การเข้าใจทรัพยากรที่ถูก deploy, การติดตามข้าม agent, การปรับแต่ง และการล้างข้อมูล
-- **📦 บทเรียนบทที่ 1 ใหม่** `docs/chapter-01-foundation/bring-your-own-app.md` — วิธีเพิ่ม azd ลงในโปรเจ็กต์ที่มีอยู่ด้วย `azd init` ("ใช้โค้ดในไดเรกทอรีปัจจุบัน"), การเข้าใจ `azure.yaml` และ `infra/`, `azd infra generate`, การตรวจจับโฮสต์ และการ deploy ด้วย `azd up`
-- **🌐 Terraform กับ azd** เพิ่มในส่วน `docs/chapter-04-infrastructure/provisioning.md` — การกำหนดค่า `infra.provider: terraform`, โครงสร้างโฟลเดอร์ `.tf`, การส่งออก `AZURE_*` ที่จำเป็นและแท็ก `azd-env-name`, และเวิร์กโฟลว์ `azd up` / `azd down` ที่เหมือนกัน (ปิดช่องว่างที่เคยอ้างว่ารองรับ Terraform แต่แสดงแค่ Bicep เท่านั้น)
-- **⚙️ สาธิต GitHub Actions ทีละขั้นตอน** ใน `docs/chapter-08-production/production-ai-practices.md` — จาก repo GitHub ถึงการ deploy อัตโนมัติ: `azd pipeline config`, ข้อมูลประจำตัว federated OIDC (ไม่เก็บความลับ), ไฟล์ `azure-dev.yml` ที่สร้างขึ้น และคำแนะนำเกี่ยวกับความลับเทียบกับตัวแปร
-- **🪝 บทนำสำหรับผู้เริ่มต้น "ใหม่กับ hooks?"** ใน `docs/chapter-04-infrastructure/deployment-guide.md` — hook คืออะไร, ตารางขั้น hook, hook แรกที่เรียบง่าย, และการรัน hook ด้วยตนเองโดยใช้ `azd hooks run`
-- **✅ รายการตรวจสอบ "ยืนยันการปรับใช้"** เพิ่มในขั้นตอนที่ 5 ของ `docs/chapter-01-foundation/first-project.md` — การทดสอบ Smoke, ตรวจสอบ endpoint สุขภาพ และเกณฑ์ความสำเร็จที่ชัดเจน
+- **🤝 บทเรียนใหม่บทที่ 5** `docs/chapter-05-multi-agent/multi-agent-basics.md` — การเดินหน้าสองเอเจนต์ที่ลงมือทำจริงและพร้อมติดตั้ง (orchestrator + specialists) โดยใช้เทมเพลตจริง (`contoso-creative-writer`), ครอบคลุมเมื่อใดควรใช้ multi-agent, เวิร์กโฟลว์ `azd up`, การเข้าใจทรัพยากรที่ติดตั้ง, การติดตามข้ามเอเจนต์, การปรับแต่ง และการทำความสะอาด
+- **📦 บทเรียนใหม่บทที่ 1** `docs/chapter-01-foundation/bring-your-own-app.md` — วิธีเพิ่ม azd ลงในโปรเจกต์ที่มีอยู่ด้วยคำสั่ง `azd init` ("ใช้โค้ดในไดเรกทอรีปัจจุบัน"), การเข้าใจ `azure.yaml` และ `infra/`, คำสั่ง `azd infra generate`, การตรวจจับโฮสต์ และการติดตั้งด้วย `azd up`
+- **🌐 ส่วน Terraform กับ azd** ใน `docs/chapter-04-infrastructure/provisioning.md` — การกำหนดค่า `infra.provider: terraform`, การจัดวางโฟลเดอร์ `.tf`, ผลลัพธ์ `AZURE_*` ที่จำเป็นและการติดแท็ก `azd-env-name`, และเวิร์กโฟลว์ `azd up` / `azd down` ที่เหมือนกัน (ปิดช่องว่างที่อ้างว่ามีการสนับสนุน Terraform แต่แสดงแค่ Bicep เท่านั้น)
+- **⚙️ การเดินหน้าผ่าน GitHub Actions แบบทีละขั้นตอน** ใน `docs/chapter-08-production/production-ai-practices.md` — จากรีโป GitHub สู่การติดตั้งอัตโนมัติ: `azd pipeline config`, ข้อมูลรับรอง federated OIDC (ไม่มีการเก็บความลับ), ไฟล์ `azure-dev.yml` ที่สร้างขึ้น และคำแนะนำการใช้ความลับเทียบกับตัวแปร
+- **🪝 บทนำ "ใหม่กับ hooks?" สำหรับผู้เริ่มต้น** ใน `docs/chapter-04-infrastructure/deployment-guide.md` — hook คืออะไร, ตาราง hook-stage, hook แรกแบบขั้นต่ำ และการรัน hook ด้วยตนเองผ่าน `azd hooks run`
+- **✅ รายการตรวจสอบ "ยืนยันการติดตั้ง"** เพิ่มในขั้นตอนที่ 5 ของ `docs/chapter-01-foundation/first-project.md` — ทดสอบเบื้องต้น, ตรวจสอบจุดสิ้นสุดสุขภาพ และเกณฑ์ความสำเร็จอย่างชัดเจน
 - **🧩 คำอธิบายสำหรับส่วนขยายพรีวิวใหม่** `azure.ai.skills` และ `azure.ai.connections` (คืออะไรและเมื่อใดควรใช้) ใน `docs/chapter-08-production/production-ai-practices.md`
 
 #### เปลี่ยนแปลง
-- **🧭 ตารางบทเรียนบทที่ 5** แก้ไข: `multi-agent-basics.md` เป็นบทเรียนที่ 1 (บทเรียนปฏิบัติเดียวที่ครบถ้วน), มีการติดป้ายบอกอย่างตรงไปตรงมาว่าบทเรียนที่ 2 อยู่ในบทที่ 6 และสถานการณ์ Retail คือแบบแผนสถาปัตยกรรม ไม่ใช่แม่แบบคำสั่งเดียว
-- **🧭 ตารางบทเรียนบทที่ 1** รวมบทเรียนใหม่ "นำแอปของคุณมาเอง" (บทเรียนที่ 4)
-- **🔗 ส่วนท้ายการนำทาง** อัปเดต: `first-project.md` ตอนนี้ลิงก์ไปยัง `bring-your-own-app.md`
+- **🧭 ตารางบทเรียนบทที่ 5** แก้ไข: ไฟล์ `multi-agent-basics.md` เป็นบทเรียนที่ 1 (บทเรียนเดียวแบบลงมือทำเต็มรูปแบบ) พร้อมคำอธิบายอย่างจริงใจว่าบทที่ 2 อยู่ในบทที่ 6 และสถานการณ์ Retail เป็นเพียงแผนผังสถาปัตยกรรม ไม่ใช่เทมเพลตคำสั่งเดียว
+- **🧭 ตารางบทเรียนบทที่ 1** รวมบทเรียนใหม่ "Bring Your Own App" (บทเรียนที่ 4)
+- **🔗 ส่วนท้ายของการนำทาง** อัปเดต: `first-project.md` ลิงก์ไปยัง `bring-your-own-app.md`
 
 #### แก้ไขแล้ว
-- **🧱 ปิดช่องว่าง Terraform ที่เคยอ้างแต่ขาด** — คอร์สเคยอ้างถึงการรองรับ Terraform แต่ไม่แสดง
-- **🔀 แก้ไขลิงก์ข้ามบทที่ 5 ที่ทำให้เข้าใจผิด** ว่ามีการใช้งาน multi-agent ครบถ้วนเมื่อจริง ๆ เป็นแค่แบบแผนสถาปัตยกรรมเท่านั้น
+- **🧱 ปิดช่องว่าง Terraform ที่เคยอ้างแต่ไม่แสดง** — หลักสูตรนี้เคยอ้างถึงการสนับสนุน Terraform แต่ไม่ได้แสดงตัวอย่าง
+- **🔀 แก้ไขลิงก์ข้ามบทที่ 5 ที่ทำให้เข้าใจผิด** ที่บ่งบอกว่ามีการใช้งาน multi-agent เต็มรูปแบบ ในขณะที่มีแค่แผนผังสถาปัตยกรรม
 
 #### ไฟล์ที่อัปเดต
 - `changelog.md`
@@ -80,28 +118,29 @@
 
 ### [v3.20.0] - 2026-06-16
 
-#### AZD 1.25.6 รีเฟรช, คำสั่งวงจรชีวิตเอเจนต์เต็มรูปแบบ & การตั้งชื่อ Aspire ใหม่
-**เวอร์ชันนี้ตรวจสอบความถูกต้องของคอร์สกับ `azd` `1.25.6` (มิถุนายน 2026) และส่วนขยาย `azure.ai.agents` `0.1.40-preview` ขยายคำแนะนำ AI จาก "สร้างเอเจนต์ร่าง" ไปจนถึงวงจรชีวิตเอเจนต์ครบถ้วน (ทดสอบ → ประเมิน → ปรับปรุง → ตรวจสอบ → ลบ), นำเสนอส่วนขยายพรีวิวใหม่ `azure.ai.skills` และ `azure.ai.connections` และบันทึกการตั้งชื่อผลิตภัณฑ์ ".NET Aspire" → "Aspire" ใหม่**
+#### รีเฟรช AZD 1.25.6, คำสั่งเต็มวงจรเอเจนต์ & การเปลี่ยนแบรนด์ Aspire
+
+**เวอร์ชันนี้ทำการตรวจสอบความถูกต้องของคอร์สกับ `azd` `1.25.6` (มิถุนายน 2026) และส่วนขยาย `azure.ai.agents` `0.1.40-preview` ขยายคำแนะนำ AI จาก "สร้างโครงร่างเอเจนท์" ไปยังวงจรชีวิตของเอเจนท์ทั้งหมด (ทดสอบ → ประเมินผล → ปรับแต่ง → ตรวจสอบ → ลบ) นำเสนอสส่วนขยายรุ่นพรีวิวใหม่ `azure.ai.skills` และ `azure.ai.connections` และบันทึกการเปลี่ยนชื่อผลิตภัณฑ์จาก ".NET Aspire" → "Aspire"**
 
 #### เพิ่มเติม
-- **🔁 ครอบคลุมวงจรชีวิตเอเจนต์เต็มรูปแบบ** สำหรับผู้เริ่มต้นและวิศวกร AI ทั่วเอกสาร:
-  - `docs/chapter-01-foundation/azd-basics.md` — ตารางวงจรชีวิต (สร้างร่าง → ทดสอบ → วัดผล → ปรับปรุง → ตรวจสอบ → ทำความสะอาด) เพิ่มในส่วน Extensions และคำสั่ง AI
-  - `docs/chapter-08-production/production-ai-practices.md` — หัวข้อใหม่ "การจัดการวงจรชีวิตเอเจนต์" ครอบคลุมคำสั่ง `azd ai agent invoke`, `endpoint show`, `eval generate`, `optimize`, `code download` และ `delete --force`
+- **🔁 ครอบคลุมวงจรชีวิตเอเจนท์เต็มรูปแบบ** สำหรับผู้เริ่มต้นและวิศวกร AI ทั่วเอกสาร:
+  - `docs/chapter-01-foundation/azd-basics.md` — ตารางวงจรชีวิต (สร้างโครงร่าง → ทดสอบ → วัดผล → ปรับปรุง → ตรวจสอบ → ทำความสะอาด) เพิ่มในส่วน Extensions and AI Commands
+  - `docs/chapter-08-production/production-ai-practices.md` — ส่วนใหม่ "การจัดการวงจรชีวิตเอเจนท์" ครอบคลุมคำสั่ง `azd ai agent invoke`, `endpoint show`, `eval generate`, `optimize`, `code download`, และ `delete --force`
   - `resources/cheat-sheet.md` — ขยายคำสั่ง AI Agent ด้วย `invoke`, `endpoint show`, `eval generate`, `optimize`, `code download`, และ `delete --force`
-- **🧩 ส่วนขยายพรีวิวใหม่** ที่บันทึกไว้: `azure.ai.skills` (ทักษะเอเจนต์ที่ใช้ซ้ำได้) และ `azure.ai.connections` (การเชื่อมต่อ Foundry) เพิ่มในตารางส่วนขยายและ cheat sheet
-- **⏱️ คำแนะนำเวลาตอบสนอง** — ตัวอย่าง `azd ai agent invoke` แสดงค่า latency รวมและเวลาไปยังไบต์แรก
-- **📌 แบนเนอร์เวอร์ชัน** ใน README หลักชี้ผู้เรียนไปที่ `azd version` และ `azd upgrade`
+- **🧩 เอกสารส่วนขยายรุ่นพรีวิวใหม่**: `azure.ai.skills` (ทักษะเอเจนท์ที่ใช้ซ้ำได้) และ `azure.ai.connections` (การเชื่อมต่อ Foundry) ถูกเพิ่มในตารางส่วนขยายและ cheat sheet
+- **⏱️ คำแนะนำการวัดเวลาในการตอบสนอง** — ตัวอย่าง `azd ai agent invoke` ตอนนี้ระบุว่าจะแสดงเวลาหน่วงรวมและเวลาถึงไบต์แรก
+- **📌 แบนเนอร์เวอร์ชัน** ใน README หลัก ชี้ให้ผู้เรียนไปที่คำสั่ง `azd version` และ `azd upgrade`
 
 #### เปลี่ยนแปลง
-- **✅ อัปเดตพื้นฐานการตรวจสอบ** จาก `azd 1.23.12` (มีนาคม 2026) เป็น `azd 1.25.6` (มิถุนายน 2026) ใน README ของทุกบทและเอกสารเวิร์กช็อป
-- **🤖 หมายเหตุส่วนขยายบทที่ 2** อัปเดตจาก `azure.ai.agents` `0.1.18-preview` เป็น `0.1.40-preview`
-- **🧪 ตัวอย่างการตรวจสอบเวิร์กช็อป** (`azd version` output) อัปเดตเป็น `1.25.6`
-- **🧭 README "อะไรใหม่ใน azd วันนี้"** รีเฟรชเพื่อเน้นวงจรชีวิตเอเจนต์ครบถ้วน, ส่วนขยาย AI ใหม่ และการแก้ไขคุณภาพชีวิตล่าสุด (`azd init` idempotency, การเคลียร์โทเค็นหมดอายุใน `azd auth login`, พร้อมคำแนะนำที่รันครั้งแรกของ `azd tool`)
-- **📖 Chapter 2 agents.md (ตัวเลือก 4)** ชี้ผู้เรียนไปที่คำสั่งวงจรชีวิตหลังการปรับใช้แทนการหยุดที่ `azd up`
+- **✅ ปรับปรุงฐานการตรวจสอบความถูกต้อง** จาก `azd 1.23.12` (มีนาคม 2026) เป็น `azd 1.25.6` (มิถุนายน 2026) ใน README ทุกบทและเอกสาร workshop
+- **🤖 อัปเดตหมายเหตุส่วนขยายบทที่ 2** จาก `azure.ai.agents` `0.1.18-preview` เป็น `0.1.40-preview`
+- **🧪 อัปเดตตัวอย่างการตรวจสอบเวิร์กช็อป** (ผลลัพธ์ `azd version`) เป็น `1.25.6`
+- **🧭 ปรับปรุง README "อะไรใหม่ใน azd วันนี้"** เน้นวงจรชีวิตเอเจนท์ตั้งแต่ต้นจนจบ ส่วนขยาย AI ใหม่ และการแก้ไขคุณภาพชีวิตล่าสุด (`azd init` idempotency, การเคลียร์โทเค็นหมดอายุของ `azd auth login`, คำแนะนำรันครั้งแรกของ `azd tool`)
+- **📖 บทที่ 2 agents.md (ตัวเลือก 4)** ตอนนี้ชี้ให้ผู้เรียนไปที่คำสั่งวงจรชีวิตหลังการปรับใช้ แทนที่จะหยุดที่ `azd up`
 
 #### แก้ไขแล้ว
-- **🏷️ การตั้งชื่อผลิตภัณฑ์** — เพิ่มบันทึกการตั้งชื่อ Aspire ใหม่ (".NET Aspire" เปลี่ยนเป็น "Aspire" เท่านั้น); การรองรับ Aspire ของ azd ไม่เปลี่ยนแปลง
-- **🔎 ตรวจสอบการ released สด** ยืนยันกับฟีด release Azure Developer CLI: CLI เสถียร `1.25.6` (2026-06-12) และ `azure.ai.agents` `0.1.40-preview` (2026-06-15)
+- **🏷️ การตั้งชื่อผลิตภัณฑ์** — เพิ่มบันทึกการเปลี่ยนชื่อ Aspire (".NET Aspire" เปลี่ยนเป็น "Aspire" อย่างเดียว); การรองรับ Aspire ของ azd ไม่เปลี่ยนแปลง
+- **🔎 ยืนยันการตรวจสอบการปล่อยสด** กับฟีดการปล่อย Azure Developer CLI: CLI สเถียร `1.25.6` (2026-06-12) และ `azure.ai.agents` `0.1.40-preview` (2026-06-15)
 
 #### ไฟล์ที่อัปเดต
 - `README.md`
@@ -124,23 +163,24 @@
 ---
 
 ### [v3.19.1] - 2026-03-27
-#### การชี้แจงการเริ่มต้นใช้งานสำหรับผู้เริ่มต้น, การตรวจสอบการตั้งค่า & การทำความสะอาดคำสั่ง AZD สุดท้าย
-**เวอร์ชันนี้ติดตามการตรวจสอบ AZD 1.23 ด้วยการปรับปรุงเอกสารสำหรับผู้เริ่มต้น: ชี้แจงคำแนะนำการรับรองความถูกต้องแบบ AZD-first, เพิ่มสคริปต์ตรวจสอบการตั้งค่าในเครื่อง, ยืนยันคำสั่งสำคัญกับ CLI AZD เวอร์ชันสด และลบการอ้างอิงคำสั่งภาษาอังกฤษที่ล้าสมัยออกนอกบันทึกการเปลี่ยนแปลงสุดท้าย**
+
+#### ชี้แจงการเริ่มต้นสำหรับผู้เริ่มต้น, ตรวจสอบการตั้งค่า & ล้างคำสั่ง AZD สุดท้าย
+**เวอร์ชันนี้ทำการตรวจสอบการตรวจสอบความถูกต้อง AZD 1.23 อีกครั้งด้วยเอกสารที่เน้นผู้เริ่มต้น: ชี้แจงคำแนะนำการตรวจสอบสิทธิ์ก่อน, เพิ่มสคริปต์ตรวจสอบการตั้งค่าท้องถิ่น, ยืนยันคำสั่งสำคัญกับ AZD CLI จริง และลบการอ้างอิงคำสั่งที่ล้าสุดท้ายที่มาจากแหล่งภาษาอังกฤษนอก changelog**
 
 #### เพิ่มเติม
-- **🧪 สคริปต์ตรวจสอบการตั้งค่าสำหรับผู้เริ่มต้น** ด้วย `validate-setup.ps1` และ `validate-setup.sh` เพื่อให้ผู้เรียนยืนยันเครื่องมือที่จำเป็นก่อนเริ่มบทที่ 1
-- **✅ ขั้นตอนตรวจสอบการตั้งค่าล่วงหน้า** ใน README หลักและ README บทที่ 1 เพื่อจับข้อกำหนดที่ขาดหายไปก่อนใช้คำสั่ง `azd up`
+- **🧪 สคริปต์ตรวจสอบการตั้งค่าสำหรับผู้เริ่มต้น** ด้วย `validate-setup.ps1` และ `validate-setup.sh` เพื่อให้ผู้เรียนสามารถยืนยันเครื่องมือจำเป็นก่อนเริ่มบทที่ 1
+- **✅ ขั้นตอนตรวจสอบการตั้งค่าล่วงหน้า** ใน README หลักและ README บทที่ 1 เพื่อจับข้อกำหนดที่ขาดก่อน `azd up`
 
 #### เปลี่ยนแปลง
-- **🔐 คำแนะนำการรับรองความถูกต้องสำหรับผู้เริ่มต้น** ปรับให้สอดคล้องกับการใช้ `azd auth login` เป็นเส้นทางหลักสำหรับเวิร์กโฟลว์ AZD โดยเรียกใช้ `az login` เป็นแบบเลือกได้เว้นแต่จะใช้คำสั่ง Azure CLI โดยตรง
-- **📚 กระบวนการเริ่มต้นบทที่ 1** แนะนำให้ผู้เรียนตรวจสอบการตั้งค่าในเครื่องก่อนการติดตั้ง การรับรองความถูกต้อง และขั้นตอนการสั่งใช้งานครั้งแรก
-- **🛠️ ข้อความของผู้ตรวจสอบ** แยกความชัดเจนระหว่างความต้องการที่บล็อกกับคำเตือน Azure CLI แบบเลือกได้สำหรับเส้นทางผู้เริ่มต้นที่ใช้ AZD เท่านั้น
-- **📖 เอกสารการกำหนดค่า, การแก้ไขปัญหา, และตัวอย่าง** แยกความแตกต่างระหว่างการรับรองความถูกต้อง AZD ที่จำเป็นกับการลงชื่อเข้าใช้ Azure CLI แบบเลือกได้ในกรณีที่ทั้งสองเคยนำเสนอโดยไม่มีบริบท
+- **🔐 คำแนะนำการตรวจสอบสิทธิ์สำหรับผู้เริ่มต้น** ตอนนี้จัดการ `azd auth login` เป็นเส้นทางหลักสำหรับเวิร์กโฟลว์ AZD โดยชี้ให้ `az login` เป็นทางเลือกถ้าไม่ได้ใช้คำสั่ง Azure CLI โดยตรง
+- **📚 โฟลว์การเริ่มต้นบทที่ 1** ตอนนี้ชี้ให้ผู้เรียนตรวจสอบการตั้งค่าท้องถิ่นก่อนติดตั้ง, ตรวจสอบสิทธิ์, และขั้นตอนการปรับใช้ครั้งแรก
+- **🛠️ ข้อความจากตัวตรวจสอบ** ตอนนี้แยกความชัดเจนระหว่างข้อกำหนดที่บล็อกกับคำเตือน Azure CLI ที่เป็นทางเลือกสำหรับเส้นทางผู้เริ่มต้นเฉพาะ AZD
+- **📖 เอกสารการกำหนดค่า, แก้ปัญหา, และตัวอย่าง** ตอนนี้แยกความแตกต่างระหว่างการตรวจสอบสิทธิ์ AZD ที่จำเป็นกับการเซ็นชื่อเข้าใช้ Azure CLI ที่เป็นทางเลือกซึ่งก่อนหน้านี้นำเสนอโดยไม่มีบริบท
 
-#### แก้ไข
-- **📋 การอ้างอิงคำสั่งภาษาอังกฤษที่เหลือ** อัปเดตเป็นรูปแบบ AZD ปัจจุบัน รวมถึง `azd config show` ในชีทช่วยจำ และ `azd monitor --overview` เมื่อมีความตั้งใจแนะนำภาพรวมบน Azure Portal
-- **🧭 คำกล่าวอ้างของผู้เริ่มต้นในบทที่ 1** ปรับให้นุ่มนวลขึ้นเพื่อหลีกเลี่ยงการสัญญาว่าจะไม่มีข้อผิดพลาดหรือมีการย้อนกลับที่รับประกันสำหรับเทมเพลตและทรัพยากร Azure ทุกชนิด
-- **🔎 การตรวจสอบ CLI เวอร์ชันสด** ยืนยันว่ายังคงรองรับ `azd env get-values`, `azd template list`, `azd extension list --installed`, `azd copilot consent list`, `azd mcp start`, `azd provision --preview`, `azd monitor --logs` และ `azd down --force --purge`
+#### แก้ไขแล้ว
+- **📋 การอ้างอิงคำสั่งจากแหล่งภาษาอังกฤษที่เหลืออยู่** อัปเดตเป็นฟอร์ม AZD ปัจจุบัน รวมถึง `azd config show` ใน cheat sheet และ `azd monitor --overview` ที่ตั้งใจจะให้คำแนะนำ Application Insights overview
+- **🧭 คำกล่าวอ้างสำหรับผู้เริ่มต้นในบทที่ 1** ถูกผ่อนคลายเพื่อหลีกเลี่ยงการสัญญาที่เกินจริงว่าปราศจากข้อผิดพลาดหรือการย้อนกลับในทุกเทมเพลตและทรัพยากร Azure
+- **🔎 ยืนยันการตรวจสอบ CLI สด** ยืนยันการรองรับคำสั่ง `azd env get-values`, `azd template list`, `azd extension list --installed`, `azd copilot consent list`, `azd mcp start`, `azd provision --preview`, `azd monitor --logs`, และ `azd down --force --purge`
 
 #### ไฟล์ที่อัปเดต
 - `README.md`
@@ -161,38 +201,38 @@
 
 ### [v3.19.0] - 2026-03-26
 
-#### การตรวจสอบ AZD 1.23.12, การขยายสภาพแวดล้อมเวิร์กชอป & การรีเฟรชโมเดล AI
-**เวอร์ชันนี้ดำเนินการตรวจสอบเอกสารกับ `azd` `1.23.12` อัปเดตตัวอย่างคำสั่ง AZD ที่ล้าสมัย รีเฟรชคำแนะนำโมเดล AI เป็นค่าเริ่มต้นปัจจุบัน และขยายคำแนะนำเวิร์กชอปเกิน GitHub Codespaces เพื่อรองรับ dev containers และโลคอลโคลนด้วย**
+#### การตรวจสอบ AZD 1.23.12, ขยายสภาพแวดล้อมเวิร์กช็อป & รีเฟรชโมเดล AI
+**เวอร์ชันนี้ทำการตรวจสอบเอกสารกับ `azd` `1.23.12` อัปเดตตัวอย่างคำสั่ง AZD ที่ล้าสมัย รีเฟรชคำแนะนำโมเดล AI เป็นค่าเริ่มต้นปัจจุบัน และขยายคำแนะนำเวิร์กช็อปเกินกว่า GitHub Codespaces เพื่อรองรับ dev containers และโคลนในเครื่อง**
 
 #### เพิ่มเติม
-- **✅ หมายเหตุการตรวจสอบในบทหลักและเอกสารเวิร์กชอป** เพื่อชี้แจงฐาน AZD ที่ทดสอบสำหรับผู้เรียนที่ใช้ CLI เวอร์ชันใหม่กว่าหรือเก่ากว่า
-- **⏱️ คำแนะนำการหมดเวลาการปรับใช้** สำหรับการปรับใช้แอป AI ที่ใช้เวลานานด้วยคำสั่ง `azd deploy --timeout 1800`
+- **✅ หมายเหตุการตรวจสอบในบทหลักและเอกสารเวิร์กช็อป** เพื่อแสดงฐาน AZD ที่ทดสอบอย่างชัดเจนแก่ผู้เรียนที่ใช้ CLI รุ่นใหม่หรือเก่า
+- **⏱️ คำแนะนำเวลา timeout สำหรับการปรับใช้แอป AI ที่ใช้เวลานาน** ด้วย `azd deploy --timeout 1800`
 - **🔎 ขั้นตอนการตรวจสอบส่วนขยาย** ด้วย `azd extension show azure.ai.agents` ในเอกสารเวิร์กโฟลว์ AI
-- **🌐 คำแนะนำสภาพแวดล้อมเวิร์กชอปที่กว้างขึ้น** ครอบคลุม GitHub Codespaces, dev containers และโลคอลโคลนโดยใช้ MkDocs
+- **🌐 คำแนะนำสภาพแวดล้อมเวิร์กช็อปที่กว้างขึ้น** ครอบคลุม GitHub Codespaces, dev containers, และโคลนในเครื่องด้วย MkDocs
 
 #### เปลี่ยนแปลง
-- **📚 README บทนำของบทต่างๆ** แสดงอย่างสม่ำเสมอว่ามีการตรวจสอบกับ `azd 1.23.12` ในส่วน foundation, configuration, infrastructure, multi-agent, pre-deployment, troubleshooting และ production
-- **🛠️ การอ้างอิงคำสั่ง AZD** ปรับเป็นรูปแบบปัจจุบันทั่วทั้งเอกสาร:
+- **📚 README แนะนำบทเรียน** ตอนนี้ระบุการตรวจสอบความถูกต้องกับ `azd 1.23.12` อย่างสม่ำเสมอในส่วนฐานราก, การกำหนดค่า, โครงสร้างพื้นฐาน, หลายเอเจนท์, ก่อนการปรับใช้, แก้ไขปัญหา, และการผลิต
+- **🛠️ อ้างอิงคำสั่ง AZD** อัปเดตเป็นฟอร์มปัจจุบันทั่วเอกสาร:
   - `azd config list` → `azd config show`
-  - `azd env show` → `azd env list` หรือ `azd env get-value(s)` ขึ้นอยู่กับบริบท
+  - `azd env show` → `azd env list` หรือ `azd env get-value(s)` ขึ้นกับบริบท
   - `azd auth whoami` → `azd auth status`
   - `azd monitor` → `azd monitor --overview` เมื่อมีเจตนาแสดงภาพรวม Application Insights
-- **🧪 ตัวอย่าง Provision preview** ง่ายขึ้นเป็นการใช้งานที่รองรับปัจจุบันเช่น `azd provision --preview` และ `azd provision --preview -e production`
-- **🧭 กระบวนการเวิร์กชอป** อัปเดตเพื่อให้ผู้เรียนทำแลบได้ใน Codespaces, dev container หรือโลคอลโคลน แทนที่จะสมมติว่าทำได้แค่ใน Codespaces เท่านั้น
-- **🔐 คำแนะนำการรับรองความถูกต้อง** ชอบใช้ `azd auth login` สำหรับเวิร์กโฟลว์ AZD โดยมี `az login` เป็นแบบเลือกได้เมื่อใช้คำสั่ง Azure CLI โดยตรง
+- **🧪 ตัวอย่าง provision รุ่นพรีวิว** ทำให้ง่ายขึ้นเป็นการใช้งานปัจจุบัน เช่น `azd provision --preview` และ `azd provision --preview -e production`
+- **🧭 โฟลว์เวิร์กช็อป** อัปเดตเพื่อให้ผู้เรียนทำแลปใน Codespaces, dev container หรือโคลนในเครื่องได้แทนการสมมุติฐานว่าใช้งานได้เฉพาะ Codespaces เท่านั้น
+- **🔐 คำแนะนำการตรวจสอบสิทธิ์** ตอนนี้แนะนำให้ใช้ `azd auth login` สำหรับเวิร์กโฟลว์ AZD โดยให้ `az login` เป็นทางเลือกเมื่อใช้คำสั่ง Azure CLI โดยตรง
 
-#### แก้ไข
-- **🪟 คำสั่งติดตั้ง Windows** ปรับเป็นการใช้ casing แพ็กเกจ `winget` ปัจจุบันในคู่มือการติดตั้ง
-- **🐧 คำแนะนำการติดตั้ง Linux** แก้ไขเพื่อหลีกเลี่ยงคำแนะนำตัวจัดการแพ็กเกจ `azd` เฉพาะดิสโทรที่ไม่รองรับ และเปลี่ยนไปใช้อ้างอิง release assets เมื่อเหมาะสม
-- **📦 ตัวอย่างโมเดล AI** รีเฟรชจากค่าเริ่มต้นเก่าเช่น `gpt-35-turbo` และ `text-embedding-ada-002` เป็นตัวอย่างปัจจุบันเช่น `gpt-4.1-mini`, `gpt-4.1`, และ `text-embedding-3-large`
-- **📋 ตัวอย่างการปรับใช้และการวินิจฉัย** แก้ไขให้ใช้คำสั่งสภาพแวดล้อมและสถานะปัจจุบันในบันทึก, สคริปต์, และขั้นตอนแก้ไขปัญหา
+#### แก้ไขแล้ว
+- **🪟 คำสั่งติดตั้งบน Windows** ปรับให้เป็น casing แพ็กเกจ `winget` ปัจจุบันในคู่มือการติดตั้ง
+- **🐧 คำแนะนำการติดตั้งบน Linux** แก้ไขไม่ให้ใช้คำสั่งจัดการแพ็กเกจ `azd` ที่ไม่รองรับเฉพาะ distro และชี้ไปยัง release assets ตามความเหมาะสม
+- **📦 ตัวอย่างโมเดล AI** รีเฟรชจากค่าปริยายเก่าเช่น `gpt-35-turbo` และ `text-embedding-ada-002` เป็นตัวอย่างปัจจุบัน เช่น `gpt-4.1-mini`, `gpt-4.1`, และ `text-embedding-3-large`
+- **📋 โค้ดตัวอย่างการปรับใช้และวิเคราะห์** แก้ไขใช้คำสั่งสภาพแวดล้อมและสถานะปัจจุบันในบันทึก, สคริปต์, และขั้นตอนแก้ปัญหา
 - **⚙️ คำแนะนำ GitHub Actions** อัปเดตจาก `Azure/setup-azd@v1.0.0` เป็น `Azure/setup-azd@v2`
-- **🤖 คำแนะนำ MCP/Copilot consent** ปรับจาก `azd mcp consent` เป็น `azd copilot consent list`
+- **🤖 คำแนะนำการยินยอม MCP/Copilot** อัปเดตจาก `azd mcp consent` เป็น `azd copilot consent list`
 
 #### ปรับปรุง
-- **🧠 คำแนะนำในบท AI** อธิบายพฤติกรรม `azd ai` ที่มีผลกับเวอร์ชันพรีวิว การเข้าสู่ระบบแบบ tenant-specific การใช้ส่วนขยายปัจจุบัน และคำแนะนำการปรับใช้โมเดลที่อัปเดต
-- **🧪 คำแนะนำเวิร์กชอป** ใช้ตัวอย่างเวอร์ชันที่สมจริงขึ้นและภาษาการตั้งค่าสภาพแวดล้อมที่ชัดเจนขึ้นสำหรับแลบบนมือ
-- **📈 เอกสารผลิตภัณฑ์และการแก้ไขปัญหา** ปรับให้สอดคล้องดียิ่งขึ้นกับการตรวจสอบปัจจุบัน โมเดลสำรอง และตัวอย่างระดับค่าใช้จ่าย
+- **🧠 คำแนะนำบท AI** อธิบายพฤติกรรม `azd ai` ที่ละเอียดอ่อนช่วงพรีวิว การเข้าสู่ระบบเฉพาะ tenant, การใช้งานส่วนขยายปัจจุบัน, และคำแนะนำการปรับใช้โมเดลที่อัปเดต
+- **🧪 คำแนะนำเวิร์กช็อป** ใช้ตัวอย่างเวอร์ชันที่สมจริงขึ้นและภาษาการตั้งค่าสภาพแวดล้อมที่ชัดเจนสำหรับแลปปฏิบัติ
+- **📈 เอกสารการผลิตและแก้ปัญหา** สอดคล้องกับตัวอย่างการตรวจสอบ, โมเดล fallback, และระดับค่าใช้จ่ายปัจจุบันดียิ่งขึ้น
 
 #### ไฟล์ที่อัปเดต
 - `docs/chapter-01-foundation/README.md`
@@ -227,102 +267,104 @@
 
 ### [v3.18.0] - 2026-03-16
 
-#### คำสั่ง AZD AI CLI, การตรวจสอบเนื้อหา & การขยายเทมเพลต
-**เวอร์ชันนี้เพิ่มการรองรับคำสั่ง `azd ai`, `azd extension`, และ `azd mcp` ในทุกบทเกี่ยวกับ AI, แก้ไขลิงก์เสียและโค้ดเลิกใช้ใน agents.md, อัปเดตชีทช่วยจำ และปรับปรุงส่วนเทมเพลตตัวอย่างด้วยคำอธิบายที่ผ่านการตรวจสอบและเทมเพลต Azure AI AZD ใหม่**
+#### คำสั่ง AZD AI CLI, การตรวจสอบเนื้อหา & ขยายเทมเพลต
+**เวอร์ชันนี้เพิ่มการครอบคลุมคำสั่ง `azd ai`, `azd extension` และ `azd mcp` ในบท AI ทั้งหมด แก้ไขลิงก์เสียและโค้ดล้าสมัยใน agents.md อัปเดต cheat sheet และปรับปรุงส่วน Example Templates ด้วยคำอธิบายที่ได้รับการตรวจสอบและเทมเพลต Azure AI AZD ใหม่**
 
 #### เพิ่มเติม
-- **🤖 การรองรับคำสั่ง AZD AI CLI** ครอบคลุม 7 ไฟล์ (ก่อนหน้านี้เฉพาะในบท 8 เท่านั้น):
-  - `docs/chapter-01-foundation/azd-basics.md` — ส่วนใหม่ "คำสั่ง Extensions และ AI" แนะนำ `azd extension`, `azd ai agent init`, และ `azd mcp`
-  - `docs/chapter-02-ai-development/agents.md` — ตัวเลือก 4: `azd ai agent init` พร้อมตารางเปรียบเทียบ (เทมเพลตกับวิธี manifest)
-  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — ส่วน "AZD Extensions สำหรับ Foundry" และ "การปรับใช้ Agent-First"
-  - `docs/chapter-05-multi-agent/README.md` — การเริ่มต้นใช้งานอย่างรวดเร็วแสดงทั้งเส้นทางปรับใช้แบบเทมเพลตและแบบ manifest
-  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — ส่วน Deploy เพิ่มตัวเลือก `azd ai agent init`
-  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — ส่วน "คำสั่ง AZD AI Extension สำหรับการวินิจฉัย"
-  - `resources/cheat-sheet.md` — ส่วนใหม่ "คำสั่ง AI & Extensions" พร้อม `azd extension`, `azd ai agent init`, `azd mcp`, และ `azd infra generate`
-- **📦 เทมเพลตตัวอย่าง AZD AI ใหม่** ใน `microsoft-foundry-integration.md`:
-  - **azure-search-openai-demo-csharp** — แชท RAG .NET ด้วย Blazor WebAssembly, Semantic Kernel, และรองรับแชทเสียง
-  - **azure-search-openai-demo-java** — แชท RAG Java ใช้ Langchain4J พร้อมตัวเลือกปรับใช้งาน ACA/AKS
-  - **contoso-creative-writer** — แอปเขียนสร้างสรรค์หลายตัวแทนโดยใช้ Azure AI Agent Service, Bing Grounding, และ Prompty
-  - **serverless-chat-langchainjs** — RAG แบบไม่มีเซิร์ฟเวอร์ด้วย Azure Functions + LangChain.js + Cosmos DB พร้อมรองรับการพัฒนาในเครื่อง Ollama
-  - **chat-with-your-data-solution-accelerator** — ตัวเร่งความเร็ว RAG สำหรับองค์กรพร้อมพอร์ทัลแอดมิน, การรวมทีม Teams, และตัวเลือก PostgreSQL/Cosmos DB
-  - **azure-ai-travel-agents** — แอปรองรับ MCP หลายตัวแทนพร้อมเซิร์ฟเวอร์ใน .NET, Python, Java และ TypeScript
-  - **azd-ai-starter** — เทมเพลตเริ่มต้นโครงสร้างพื้นฐาน Azure AI Bicep ขั้นพื้นฐาน
-  - **🔗 ลิงก์แกลเลอรี AZD AI ที่ยอดเยี่ยม** — อ้างอิงถึง [แกลเลอรี awesome-azd AI](https://azure.github.io/awesome-azd/?tags=ai) (80+ เทมเพลต)
+- **🤖 การครอบคลุม AZD AI CLI** ใน 7 ไฟล์ (ก่อนหน้านี้มีเพียงในบทที่ 8):
+  - `docs/chapter-01-foundation/azd-basics.md` — ส่วนใหม่ "Extensions and AI Commands" แนะนำ `azd extension`, `azd ai agent init`, และ `azd mcp`
+  - `docs/chapter-02-ai-development/agents.md` — ตัวเลือก 4: `azd ai agent init` พร้อมตารางเปรียบเทียบ (เทมเพลต vs แนวทาง manifest)
+  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — ส่วนย่อย "AZD Extensions for Foundry" และ "Agent-First Deployment"
 
-#### แก้ไข
-- **🔗 การนำทาง agents.md**: ลิงก์ก่อนหน้า/ถัดไปสอดคล้องกับลำดับบทเรียนใน README บทที่ 2 (Microsoft Foundry Integration → Agents → AI Model Deployment)
-- **🔗 ลิงก์เสียใน agents.md**: แก้ไข `production-ai-practices.md` เป็น `../chapter-08-production/production-ai-practices.md` (3 ครั้ง)
-- **📦 โค้ดที่เลิกใช้ใน agents.md**: แทนที่ `opencensus` ด้วย `azure-monitor-opentelemetry` + OpenTelemetry SDK
-- **🐛 API ไม่ถูกต้องใน agents.md**: ย้าย `max_tokens` จาก `create_agent()` ไปยัง `create_run()` เป็น `max_completion_tokens`
-- **🔢 การนับโทเค็นใน agents.md**: แทนที่การประมาณค่าแบบหยาบด้วย `len//4` ด้วย `tiktoken.encoding_for_model()`
-- **azure-search-openai-demo**: แก้ไขบริการจาก "Cognitive Search + App Service" เป็น "Azure AI Search + Azure Container Apps" (โฮสต์เริ่มต้นเปลี่ยน ต.ค. 2024)
-- **contoso-chat**: ปรับคำอธิบายเพื่ออ้างอิง Azure AI Foundry + Prompty ให้ตรงกับชื่อและเทคโนโลยีของ repo จริง
+  - `docs/chapter-05-multi-agent/README.md` — การเริ่มต้นอย่างรวดเร็วแสดงเส้นทางการปรับใช้ทั้งแบบเทมเพลตและแบบแมนนิเฟสต์แล้ว  
+  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — ส่วนการปรับใช้เพิ่มตัวเลือก `azd ai agent init` แล้ว  
+  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — หมวด "คำสั่งขยาย AZD AI สำหรับการวินิจฉัยปัญหา"  
+  - `resources/cheat-sheet.md` — หมวดใหม่ "คำสั่ง AI & Extensions" พร้อมคำสั่ง `azd extension`, `azd ai agent init`, `azd mcp` และ `azd infra generate`  
+- **📦 เทมเพลตตัวอย่าง AZD AI ใหม่** ใน `microsoft-foundry-integration.md`:  
+  - **azure-search-openai-demo-csharp** — แชท RAG .NET กับ Blazor WebAssembly, Semantic Kernel และรองรับแชทเสียง  
+  - **azure-search-openai-demo-java** — แชท RAG ด้วย Java ใช้ Langchain4J พร้อมตัวเลือกการปรับใช้ ACA/AKS  
+  - **contoso-creative-writer** — แอปเขียนสร้างสรรค์หลายเอเจนต์โดยใช้ Azure AI Agent Service, Bing Grounding และ Prompty  
+  - **serverless-chat-langchainjs** — RAG เซิร์ฟเวอร์เลสใช้ Azure Functions + LangChain.js + Cosmos DB พร้อมรองรับการพัฒนา Ollama ในเครื่อง  
+  - **chat-with-your-data-solution-accelerator** — ตัวเร่ง RAG สำหรับองค์กร พร้อมพอร์ทัลผู้ดูแลระบบ, การผสาน Teams และตัวเลือก PostgreSQL/Cosmos DB  
+  - **azure-ai-travel-agents** — แอปอ้างอิงการประสานงาน MCP หลายเอเจนต์ พร้อมเซิร์ฟเวอร์ใน .NET, Python, Java และ TypeScript  
+  - **azd-ai-starter** — เทมเพลตเริ่มต้นโครงสร้างพื้นฐาน Azure AI แบบ Bicep ขั้นต่ำ  
+  - **🔗 ลิงก์แกลเลอรี Awesome AZD AI** — อ้างอิงไปยัง [awesome-azd AI gallery](https://azure.github.io/awesome-azd/?tags=ai) (80+ เทมเพลต)  
 
-#### ลบ
-- **ai-document-processing**: ลบการอ้างอิงเทมเพลตที่ไม่ทำงาน (repo ไม่เปิดสาธารณะเป็นเทมเพลต AZD)
+#### แก้ไขแล้ว  
+- **🔗 agents.md การนำทาง**: ลิงก์ก่อนหน้า/ถัดไปตรงกับลำดับบทเรียนใน README บทที่ 2 (Microsoft Foundry Integration → Agents → AI Model Deployment)  
+- **🔗 agents.md ลิงก์เสีย**: แก้ไข `production-ai-practices.md` เป็น `../chapter-08-production/production-ai-practices.md` (3 จุด)  
+- **📦 agents.md โค้ดที่เลิกใช้**: แทนที่ `opencensus` ด้วย `azure-monitor-opentelemetry` + OpenTelemetry SDK  
+- **🐛 agents.md API ไม่ถูกต้อง**: ย้าย `max_tokens` จาก `create_agent()` ไป `create_run()` ในชื่อ `max_completion_tokens`  
+- **🔢 agents.md การนับโทเค็น**: แทนที่ประมาณการแบบหยาบ `len//4` ด้วย `tiktoken.encoding_for_model()`  
+- **azure-search-openai-demo**: แก้ไขบริการจาก "Cognitive Search + App Service" เป็น "Azure AI Search + Azure Container Apps" (ค่าโฮสต์เริ่มใช้ใหม่ ต.ค. 2024)  
+- **contoso-chat**: อัปเดตคำอธิบายให้ตรงกับ Azure AI Foundry + Prompty ตรงกับชื่อและเทคโนโลยีจริงในรีโพ  
 
-#### ปรับปรุง
-- **📝 แบบฝึกหัดใน agents.md**: แบบฝึกหัด 1 แสดงผลลัพธ์ที่คาดหวังและขั้นตอน `azd monitor`; แบบฝึกหัด 2 มีโค้ดลงทะเบียน `FunctionTool` ครบถ้วน; แบบฝึกหัด 3 แทนคำแนะนำคลุมเครือด้วยคำสั่ง `prepdocs.py` ที่ชัดเจน
-- **📚 ทรัพยากรใน agents.md**: อัปเดตลิงก์เอกสารเป็น Azure AI Agent Service docs และ quickstart เวอร์ชันปัจจุบัน
-- **📋 ตารางขั้นตอนถัดไปใน agents.md**: เพิ่มลิงก์แลบเวิร์กชอป AI เพื่อความครอบคลุมบทเรียนทั้งหมด
+#### ลบออก  
+- **ai-document-processing**: ลบการอ้างอิงเทมเพลตที่ไม่ทำงาน (รีโพไม่เปิดเผยสู่สาธารณะในฐานะเทมเพลต AZD)  
 
-#### ไฟล์ที่อัปเดต
-- `docs/chapter-01-foundation/azd-basics.md`
-- `docs/chapter-02-ai-development/agents.md`
-- `docs/chapter-02-ai-development/microsoft-foundry-integration.md`
-- `docs/chapter-05-multi-agent/README.md`
-- `docs/chapter-06-pre-deployment/coordination-patterns.md`
-- `docs/chapter-07-troubleshooting/ai-troubleshooting.md`
-- `resources/cheat-sheet.md`
+#### ปรับปรุง  
+- **📝 บทเรียน agents.md**: แบบฝึกหัด 1 แสดงผลลัพธ์ที่คาดหวังและขั้นตอน `azd monitor`; แบบฝึกหัด 2 เพิ่มโค้ดลงทะเบียน `FunctionTool` เต็มรูปแบบ; แบบฝึกหัด 3 แทนคำแนะนำคลุมเครือด้วยคำสั่ง `prepdocs.py` ที่เป็นรูปธรรม  
+- **📚 แหล่งข้อมูล agents.md**: อัปเดตลิงก์เอกสารไปยังเอกสาร Azure AI Agent Service และ quickstart เวอร์ชันล่าสุด  
+- **📋 ตารางขั้นตอนถัดไป agents.md**: เพิ่มลิงก์ AI Workshop Lab ครอบคลุมบทเรียนทั้งหมด  
+
+#### ไฟล์ที่อัปเดต  
+- `docs/chapter-01-foundation/azd-basics.md`  
+- `docs/chapter-02-ai-development/agents.md`  
+- `docs/chapter-02-ai-development/microsoft-foundry-integration.md`  
+- `docs/chapter-05-multi-agent/README.md`  
+- `docs/chapter-06-pre-deployment/coordination-patterns.md`  
+- `docs/chapter-07-troubleshooting/ai-troubleshooting.md`  
+- `resources/cheat-sheet.md`  
 
 ---
 
-### [v3.17.0] - 2026-02-05
-#### การปรับปรุงนำทางหลักสูตร  
-**เวอร์ชันนี้ปรับปรุงการนำทางบทใน README.md ด้วยรูปแบบตารางที่พัฒนาขึ้น**
+### [v3.17.0] - 2026-02-05  
 
-#### การเปลี่ยนแปลง  
-- **ตารางแผนที่หลักสูตร**: ปรับปรุงด้วยลิงก์บทเรียนโดยตรง, ประมาณเวลาจัดการเรียน และการประเมินความซับซ้อน  
-- **การลบโฟลเดอร์**: เอาโฟลเดอร์เก่าที่ซ้ำซ้อนออก (deployment/, getting-started/, pre-deployment/, troubleshooting/)  
-- **การตรวจสอบลิงก์**: ตรวจสอบความถูกต้องลิงก์ภายในในตารางแผนที่หลักสูตรทั้งหมด 21+ รายการแล้ว  
+#### ปรับปรุงการนำทางหลักสูตร  
+**เวอร์ชันนี้ปรับปรุงการนำทาง README.md บทเรียนด้วยรูปแบบตารางที่ดียิ่งขึ้น**  
 
-### [v3.16.0] - 2026-02-05
+#### เปลี่ยนแปลง  
+- **ตารางแผนที่หลักสูตร**: ปรับปรุงด้วยลิงก์บทเรียนโดยตรง, ประมาณเวลาการเรียน และการจัดอันดับความซับซ้อน  
+- **ลบโฟลเดอร์เก่า**: ลบโฟลเดอร์ซ้ำซ้อนเก่า ๆ (deployment/, getting-started/, pre-deployment/, troubleshooting/)  
+- **ตรวจสอบลิงก์**: ยืนยันลิงก์ภายในทั้งหมด 21+ รายการในตารางแผนที่หลักสูตร  
 
-#### การอัปเดตชื่อผลิตภัณฑ์  
-**เวอร์ชันนี้อัปเดตรายการชื่อผลิตภัณฑ์ให้ตรงกับแบรนด์ Microsoft ปัจจุบัน**
+### [v3.16.0] - 2026-02-05  
 
-#### การเปลี่ยนแปลง  
-- **Microsoft Foundry → Microsoft Foundry**: อัปเดตการอ้างอิงทั้งหมดในไฟล์ที่ไม่ใช่ไฟล์แปลภาษา  
-- **Azure AI Agent Service → Foundry Agents**: เปลี่ยนชื่อบริการเพื่อสะท้อนแบรนด์ใหม่  
+#### อัปเดตชื่อผลิตภัณฑ์  
+**เวอร์ชันนี้อัปเดตการอ้างอิงผลิตภัณฑ์ให้เป็นแบรนด์ Microsoft ปัจจุบัน**  
+
+#### เปลี่ยนแปลง  
+- **Microsoft Foundry → Microsoft Foundry**: อัปเดตการอ้างอิงทั้งหมดในไฟล์ที่ไม่ใช่การแปล  
+- **Azure AI Agent Service → Foundry Agents**: เปลี่ยนชื่อบริการให้สอดคล้องกับแบรนด์ปัจจุบัน  
 
 #### ไฟล์ที่อัปเดต  
-- `README.md` - หน้าแลนด์ดิ้งหลักสูตรหลัก  
+- `README.md` - หน้าแรกหลักสูตร  
 - `changelog.md` - ประวัติรุ่น  
 - `course-outline.md` - โครงสร้างหลักสูตร  
 - `docs/chapter-02-ai-development/agents.md` - คู่มือ AI agents  
 - `examples/README.md` - เอกสารตัวอย่าง  
-- `workshop/README.md` - หน้าแลนด์ดิ้งเวิร์กช็อป  
-- `workshop/docs/index.md` - ดรรชนีเวิร์กช็อป  
-- `workshop/docs/instructions/*.md` - ทุกไฟล์คำแนะนำเวิร์กช็อป  
+- `workshop/README.md` - หน้าแรก workshop  
+- `workshop/docs/index.md` - ดัชนี workshop  
+- `workshop/docs/instructions/*.md` - ไฟล์คำสั่ง workshop ทั้งหมด  
 
 ---
 
-### [v3.15.0] - 2026-02-05
+### [v3.15.0] - 2026-02-05  
 
-#### การปรับโครงสร้างที่เก็บหลัก : ใช้ชื่อโฟลเดอร์ตามบท  
-**เวอร์ชันนี้ปรับโครงสร้างเอกสารเป็นโฟลเดอร์บทเฉพาะเพื่อการนำทางที่ชัดเจนขึ้น**
+#### การปรับโครงสร้างรีโพครั้งใหญ่: โฟลเดอร์ตามบทเรียน  
+**เวอร์ชันนี้ปรับโครงสร้างเอกสารเป็นโฟลเดอร์แยกบทเรียนเพื่อการนำทางที่ชัดเจนขึ้น**  
 
-#### การเปลี่ยนชื่อโฟลเดอร์  
-โฟลเดอร์เก่าถูกแทนที่ด้วยโฟลเดอร์เรียงลำดับบท:  
+#### เปลี่ยนชื่อโฟลเดอร์  
+โฟลเดอร์เก่าถูกแทนที่ด้วยโฟลเดอร์หมายเลขบทเรียน:  
 - `docs/getting-started/` → `docs/chapter-01-foundation/` + `docs/chapter-03-configuration/`  
 - `docs/microsoft-foundry/` → `docs/chapter-02-ai-development/` + `docs/chapter-08-production/`  
 - `docs/deployment/` → `docs/chapter-04-infrastructure/`  
 - `docs/pre-deployment/` → `docs/chapter-06-pre-deployment/`  
 - `docs/troubleshooting/` → `docs/chapter-07-troubleshooting/`  
-- เพิ่ม: `docs/chapter-05-multi-agent/`  
+- เพิ่มใหม่: `docs/chapter-05-multi-agent/`  
 
-#### การย้ายไฟล์  
-| ไฟล์ | จาก | เป็น |  
+#### ย้ายไฟล์  
+| ไฟล์ | จาก | ไปที่ |  
 |------|------|---|  
 | azd-basics.md | getting-started/ | chapter-01-foundation/ |  
 | installation.md | getting-started/ | chapter-01-foundation/ |  
@@ -336,74 +378,74 @@
 | production-ai-practices.md | microsoft-foundry/ | chapter-08-production/ |  
 | deployment-guide.md | deployment/ | chapter-04-infrastructure/ |  
 | provisioning.md | deployment/ | chapter-04-infrastructure/ |  
-| ไฟล์ทั้งหมดใน pre-deployment | pre-deployment/ | chapter-06-pre-deployment/ |  
-| ไฟล์ทั้งหมดใน troubleshooting | troubleshooting/ | chapter-07-troubleshooting/ |  
+| ไฟล์ pre-deployment ทั้งหมด | pre-deployment/ | chapter-06-pre-deployment/ |  
+| ไฟล์ troubleshooting ทั้งหมด | troubleshooting/ | chapter-07-troubleshooting/ |  
 
 #### เพิ่มเติม  
-- **📚 ไฟล์ README ของแต่ละบท**: สร้าง README.md ในแต่ละโฟลเดอร์บทพร้อม:  
+- **📚 ไฟล์ README ของแต่ละบท**: สร้าง README.md ในแต่ละโฟลเดอร์บทเรียน พร้อม:  
   - วัตถุประสงค์การเรียนรู้และระยะเวลา  
   - ตารางบทเรียนพร้อมคำอธิบาย  
-  - คำสั่งเริ่มต้นอย่างรวดเร็ว  
-  - การนำทางไปบทอื่นๆ  
+  - คำสั่งเริ่มต้นด่วน  
+  - การนำทางไปยังบทเรียนอื่น  
 
-#### การเปลี่ยนแปลง  
-- **🔗 ปรับปรุงลิงก์ภายในทั้งหมด**: อัปเดตเส้นทางกว่า 78+ รายการในไฟล์เอกสารทั้งหมด  
-- **🗺️ README.md หลัก**: ปรับปรุงแผนที่หลักสูตรด้วยโครงสร้างบทใหม่  
-- **📝 examples/README.md**: อัปเดตอ้างอิงข้ามไปยังโฟลเดอร์บท  
+#### เปลี่ยนแปลง  
+- **🔗 อัปเดตลิงก์ภายในทั้งหมด**: อัปเดตเส้นทางกว่า 78+ รายการทั่วเอกสารทั้งหมด  
+- **🗺️ README.md หลัก**: อัปเดตแผนที่หลักสูตรด้วยโครงสร้างบทเรียนใหม่  
+- **📝 examples/README.md**: อัปเดตการอ้างอิงข้ามไปยังโฟลเดอร์บทเรียน  
 
 #### ลบออก  
 - โครงสร้างโฟลเดอร์เก่า (getting-started/, microsoft-foundry/, deployment/, pre-deployment/, troubleshooting/, ai-foundry/)  
 
 ---
 
-### [v3.14.0] - 2026-02-05
+### [v3.14.0] - 2026-02-05  
 
-#### ปรับโครงสร้างที่เก็บ: การนำทางบท  
-**เวอร์ชันนี้เพิ่มไฟล์ README การนำทางบท (ถูกแทนที่โดย v3.15.0)**  
+#### ปรับโครงสร้างรีโพ: การนำทางบทเรียน  
+**เวอร์ชันนี้เพิ่มไฟล์ README สำหรับนำทางบทเรียน (ถูกแทนด้วย v3.15.0)**  
 
 ---
 
-### [v3.13.0] - 2026-02-05
+### [v3.13.0] - 2026-02-05  
 
 #### คู่มือ AI Agents ใหม่  
-**เวอร์ชันนี้เพิ่มคู่มือที่ครอบคลุมสำหรับการปรับใช้ AI agents ด้วย Azure Developer CLI**
+**เวอร์ชันนี้เพิ่มคู่มือครบถ้วนสำหรับการปรับใช้ AI agents ด้วย Azure Developer CLI**  
 
-#### เพิ่มเติม  
-- **🤖 docs/microsoft-foundry/agents.md**: คู่มือครบถ้วนประกอบด้วย:  
-  - AI agents คืออะไร และแตกต่างจากแชทบอทอย่างไร  
-  - แม่แบบ agent เริ่มต้น 3 แบบ (Foundry Agents, Prompty, RAG)  
-  - รูปแบบสถาปัตยกรรม agent (ตัวเดียว, RAG, หลาย agent)  
-  - การตั้งค่าและปรับแต่งเครื่องมือ  
-  - การติดตามและมอนิเตอร์  
-  - การพิจารณาค่าใช้จ่ายและการปรับปรุงประสิทธิภาพ  
-  - การแก้ไขปัญหาทั่วไป  
-  - แบบฝึกหัด 3 ชุดพร้อมเกณฑ์ความสำเร็จ  
+#### เพิ่ม  
+- **🤖 docs/microsoft-foundry/agents.md**: คู่มือครบถ้วนครอบคลุม:  
+  - AI agents คืออะไรและแตกต่างจากแชทบอทอย่างไร  
+  - 3 เทมเพลตเริ่มต้นสำหรับเอเจนต์ (Foundry Agents, Prompty, RAG)  
+  - แพตเทิร์นสถาปัตยกรรมเอเจนต์ (เอเจนต์เดียว, RAG, หลายเอเจนต์)  
+  - การกำหนดค่าเครื่องมือและปรับแต่ง  
+  - การตรวจสอบและติดตามเมตริก  
+  - การพิจารณาค่าใช้จ่ายและการเพิ่มประสิทธิภาพ  
+  - กรณีแก้ปัญหาทั่วไป  
+  - แบบฝึกหัด 3 แบบพร้อมเกณฑ์ความสำเร็จ  
 
 #### โครงสร้างเนื้อหา  
-- **บทนำ**: แนวคิด agent สำหรับผู้เริ่มต้น  
-- **เริ่มต้นอย่างรวดเร็ว**: ปรับใช้ agent ด้วย `azd init --template get-started-with-ai-agents`  
-- **รูปแบบสถาปัตยกรรม**: แผนภาพรูปแบบ agent  
-- **การตั้งค่า**: การตั้งค่าเครื่องมือและตัวแปรสภาพแวดล้อม  
-- **การมอนิเตอร์**: การผสาน Application Insights  
-- **แบบฝึกหัด**: การเรียนรู้แบบลงมือทำขั้นตอน (20-45 นาทีต่อชุด)  
+- **บทนำ**: แนวคิดเอเจนต์สำหรับผู้เริ่มต้น  
+- **เริ่มต้นอย่างรวดเร็ว**: การปรับใช้เอเจนต์ด้วย `azd init --template get-started-with-ai-agents`  
+- **แพตเทิร์นสถาปัตยกรรม**: แผนภาพแสดงรูปแบบเอเจนต์  
+- **การกำหนดค่า**: การตั้งค่าเครื่องมือและตัวแปรสภาพแวดล้อม  
+- **การติดตาม**: บูรณาการ Application Insights  
+- **แบบฝึกหัด**: การเรียนรู้ปฏิบัติทีละขั้น (20-45 นาทีแต่ละแบบ)  
 
 ---
 
-### [v3.12.0] - 2026-02-05
+### [v3.12.0] - 2026-02-05  
 
-#### การอัปเดตสภาพแวดล้อม DevContainer  
-**เวอร์ชันนี้อัปเดตการตั้งค่าสภาพแวดล้อม container สำหรับการพัฒนา ด้วยเครื่องมือสมัยใหม่และค่าเริ่มต้นที่ดีขึ้นสำหรับประสบการณ์การเรียนรู้ AZD**
+#### อัปเดตสภาพแวดล้อม DevContainer  
+**เวอร์ชันนี้อัปเดตคอนฟิกคอนเทนเนอร์พัฒนาให้ใช้เครื่องมือใหม่ ๆ และค่าดีฟอลต์ที่ดีขึ้นสำหรับประสบการณ์การเรียนรู้ AZD**  
 
-#### การเปลี่ยนแปลง  
-- **🐳 ภาพฐาน**: เปลี่ยนจาก `python:3.12-bullseye` เป็น `python:3.12-bookworm` (Debian stable เวอร์ชันล่าสุด)  
-- **📛 ชื่อคอนเทนเนอร์**: เปลี่ยนจาก "Python 3" เป็น "AZD for Beginners" ให้เข้าใจง่ายกว่า  
+#### เปลี่ยนแปลง  
+- **🐳 เบสอิมเมจ**: อัปเดตจาก `python:3.12-bullseye` เป็น `python:3.12-bookworm` (Debian stable ล่าสุด)  
+- **📛 ชื่อคอนเทนเนอร์**: เปลี่ยนจาก "Python 3" เป็น "AZD for Beginners" เพื่อความชัดเจน  
 
-#### เพิ่มเติม  
-- **🔧 ฟีเจอร์ใหม่ของ Dev Container**:  
-  - `azure-cli` พร้อมเปิดใช้งาน Bicep  
-  - `node:20` (เวอร์ชัน LTS สำหรับแม่แบบ AZD)  
-  - `github-cli` สำหรับจัดการแม่แบบ  
-  - `docker-in-docker` สำหรับการปรับใช้ container app  
+#### เพิ่ม  
+- **🔧 ฟีเจอร์ใหม่ Dev Container**:  
+  - เปิดใช้ `azure-cli` พร้อมรองรับ Bicep  
+  - `node:20` (เวอร์ชัน LTS สำหรับเทมเพลต AZD)  
+  - `github-cli` สำหรับจัดการเทมเพลต  
+  - `docker-in-docker` สำหรับปรับใช้ container app  
 
 - **🔌 การส่งต่อพอร์ต**: ตั้งค่าพอร์ตล่วงหน้าสำหรับการพัฒนาทั่วไป:  
   - 8000 (ดูตัวอย่าง MkDocs)  
@@ -412,862 +454,866 @@
   - 8080 (API)  
 
 - **🧩 ส่วนขยาย VS Code ใหม่**:  
-  - `ms-python.vscode-pylance` - IntelliSense Python ขั้นสูง  
+  - `ms-python.vscode-pylance` - IntelliSense Python ที่ดีขึ้น  
   - `ms-azuretools.vscode-azurefunctions` - รองรับ Azure Functions  
   - `ms-azuretools.vscode-docker` - รองรับ Docker  
   - `ms-azuretools.vscode-bicep` - รองรับภาษา Bicep  
   - `ms-azure-devtools.azure-resource-groups` - การจัดการทรัพยากร Azure  
   - `yzhang.markdown-all-in-one` - แก้ไข Markdown  
   - `DavidAnson.vscode-markdownlint` - ตรวจสอบ Markdown  
-  - `bierner.markdown-mermaid` - รองรับไดอะแกรม Mermaid  
+  - `bierner.markdown-mermaid` - รองรับแผนภาพ Mermaid  
   - `redhat.vscode-yaml` - รองรับ YAML (สำหรับ azure.yaml)  
-  - `eamodio.gitlens` - การแสดงผล Git  
+  - `eamodio.gitlens` - แสดงภาพ Git  
   - `mhutchie.git-graph` - ประวัติ Git  
 
-- **⚙️ การตั้งค่า VS Code**: เพิ่มค่าตั้งต้นสำหรับตัวแปลภาษา Python, ฟอร์แมตไฟล์อัตโนมัติ, และตัดช่องว่างขาวเกิน  
+- **⚙️ การตั้งค่า VS Code**: เพิ่มการตั้งค่าเริ่มต้นสำหรับ Python interpreter, จัดรูปแบบตอนบันทึก, และตัดช่องว่าง  
 
 - **📦 อัปเดต requirements-dev.txt**:  
   - เพิ่มปลั๊กอิน minify สำหรับ MkDocs  
   - เพิ่ม pre-commit สำหรับคุณภาพโค้ด  
   - เพิ่มแพ็กเกจ Azure SDK (azure-identity, azure-mgmt-resource)  
 
-#### แก้ไข  
-- **คำสั่งหลังสร้างคอนเทนเนอร์**: ตรวจสอบการติดตั้ง AZD และ Azure CLI ตอนสตาร์ทคอนเทนเนอร์  
+#### แก้ไขแล้ว  
+- **คำสั่งหลังสร้าง**: ตอนนี้ตรวจสอบการติดตั้ง AZD และ Azure CLI เมื่อเริ่มคอนเทนเนอร์  
 
 ---
 
-### [v3.11.0] - 2026-02-05
+### [v3.11.0] - 2026-02-05  
 
-#### ปรับปรุง README สำหรับผู้เริ่มต้น  
-**เวอร์ชันนี้ปรับปรุง README.md ให้เข้าถึงง่ายขึ้นสำหรับผู้เริ่มต้นและเพิ่มทรัพยากรสำคัญสำหรับนักพัฒนา AI**
+#### ปรับปรุง README ให้เหมาะกับมือใหม่  
+**เวอร์ชันนี้ปรับปรุง README.md อย่างมากเพื่อให้ง่ายขึ้นสำหรับมือใหม่และเพิ่มแหล่งข้อมูลสำคัญสำหรับนักพัฒนา AI**  
 
-#### เพิ่มเติม  
-- **🆚 เปรียบเทียบ Azure CLI กับ AZD**: อธิบายชัดเจนว่าเมื่อไหร่ควรใช้เครื่องมือแต่ละตัว พร้อมตัวอย่างใช้งานจริง  
-- **🌟 ลิงก์ AZD ที่ยอดเยี่ยม**: ลิงก์ตรงไปยังแกลเลอรีแม่แบบและแหล่งอ้างอิงชุมชน:  
-  - [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) - แม่แบบพร้อมใช้งานกว่า 200 แบบ  
-  - [ส่งแม่แบบ](https://github.com/Azure/awesome-azd/issues) - การมีส่วนร่วมของชุมชน  
-- **🎯 คู่มือเริ่มต้นอย่างรวดเร็ว**: ส่วนเริ่มต้น 3 ขั้นตอนง่าย (ติดตั้ง → ลงชื่อเข้าใช้ → ปรับใช้)  
-- **📊 ตารางนำทางตามประสบการณ์**: คำแนะนำชัดเจนว่าจะเริ่มต้นจากส่วนใดตามประสบการณ์ของนักพัฒนา  
+#### เพิ่ม  
+- **🆚 เปรียบเทียบ Azure CLI กับ AZD**: อธิบายอย่างชัดเจนว่าเมื่อไรควรใช้เครื่องมือแต่ละอย่าง พร้อมตัวอย่างใช้งานจริง  
+- **🌟 ลิงก์ Awesome AZD**: ลิงก์ตรงไปยังแกลเลอรีเทมเพลตของชุมชน และทรัพยากรการร่วมสร้าง:  
+  - [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) - เทมเพลตพร้อมใช้งานกว่า 200 รายการ  
+  - [ส่งเทมเพลต](https://github.com/Azure/awesome-azd/issues) - การร่วมสร้างจากชุมชน  
+- **🎯 คู่มือเริ่มต้นด่วน**: ส่วนเริ่มต้น 3 ขั้นตอนง่ายๆ (ติดตั้ง → เข้าสู่ระบบ → ปรับใช้)  
+- **📊 ตารางนำทางตามประสบการณ์**: แนะนำชัดเจนว่าควรเริ่มจากตรงไหนตามระดับประสบการณ์นักพัฒนา  
 
-#### การเปลี่ยนแปลง  
+#### เปลี่ยนแปลง  
 - **โครงสร้าง README**: จัดเรียงใหม่เพื่อเปิดเผยข้อมูลสำคัญก่อน  
-- **ส่วนแนะนำ**: เขียนใหม่เพื่ออธิบาย “ความมหัศจรรย์ของ `azd up`” สำหรับผู้เริ่มต้นโดยสมบูรณ์  
-- **ลบเนื้อหาซ้ำซ้อน**: เอาส่วนแก้ไขปัญหาซ้ำออก  
-- **คำสั่งแก้ไขปัญหา**: แก้ไขการอ้างอิง `azd logs` เป็น `azd monitor --logs`  
+- **ส่วนบทนำ**: เขียนใหม่อธิบาย "เวทมนตร์ของ `azd up`" สำหรับมือใหม่  
+- **ลบเนื้อหาซ้ำ**: ลบส่วนแก้ไขปัญหาที่ซ้ำกัน  
+- **คำสั่งแก้ปัญหา**: แก้ไขการอ้างอิง `azd logs` เป็น `azd monitor --logs` ที่ถูกต้อง  
 
-#### แก้ไข  
-- **🔐 คำสั่งตรวจสอบสิทธิ์**: เพิ่ม `azd auth login` และ `azd auth logout` ใน cheat-sheet.md  
-- **คำสั่งไม่ถูกต้อง**: ลบ `azd logs` ที่เหลือในส่วนแก้ไขปัญหา README  
+#### แก้ไขแล้ว  
 
-#### หมายเหตุ  
-- **ขอบเขต**: การเปลี่ยนแปลงใช้กับ README.md หลัก และ resources/cheat-sheet.md  
-- **กลุ่มเป้าหมาย**: ปรับปรุงสำหรับนักพัฒนาที่เพิ่งเริ่มใช้ AZD  
+- **🔐 คำสั่งการพิสูจน์ตัวตน**: เพิ่ม `azd auth login` และ `azd auth logout` ใน cheat-sheet.md
+- **การอ้างอิงคำสั่งที่ไม่ถูกต้อง**: ลบคำสั่ง `azd logs` ที่เหลืออยู่จากส่วนแก้ไขปัญหาใน README
+
+#### หมายเหตุ
+- **ขอบเขต**: การเปลี่ยนแปลงถูกนำไปใช้กับ README.md หลักและ resources/cheat-sheet.md
+- **กลุ่มเป้าหมาย**: การปรับปรุงที่มุ่งเน้นนักพัฒนาที่ใหม่กับ AZD โดยเฉพาะ
 
 ---
 
 ### [v3.10.0] - 2026-02-05
 
-#### อัปเดตความถูกต้องคำสั่ง Azure Developer CLI  
-**เวอร์ชันนี้แก้ไขคำสั่ง AZD ที่ไม่ถูกต้องในเอกสารทั้งหมด เพื่อให้ตัวอย่างโค้ดทุกอันใช้ไวยากรณ์ Azure Developer CLI ที่ถูกต้อง**
+#### การอัพเดตความถูกต้องของคำสั่ง Azure Developer CLI
+**เวอร์ชันนี้แก้ไขคำสั่ง AZD ที่ไม่มีอยู่ในเอกสารทั้งหมด เพื่อให้ตัวอย่างโค้ดทั้งหมดใช้ไวยากรณ์ Azure Developer CLI ที่ถูกต้อง**
 
-#### แก้ไข  
-- **🔧 ลบคำสั่ง AZD ที่ไม่มีอยู่จริง**: ตรวจสอบและแก้ไขคำสั่งผิดพลาดอย่างครอบคลุม:  
-  - `azd logs` (ไม่มีจริง) → แทนที่ด้วย `azd monitor --logs` หรือ Azure CLI ทางเลือก  
-  - คำสั่งย่อย `azd service` (ไม่มีจริง) → แทนที่ด้วย `azd show` และ Azure CLI  
-  - `azd infra import/export/validate` (ไม่มีจริง) → ลบหรือแทนที่ด้วยตัวเลือกที่ถูกต้อง  
-  - ธง `azd deploy --rollback/--incremental/--parallel/--detect-changes` (ไม่มีจริง) → ลบออก  
-  - ธง `azd provision --what-if/--rollback` (ไม่มีจริง) → เปลี่ยนใช้ `--preview`  
-  - `azd config validate` (ไม่มีจริง) → แทนที่ด้วย `azd config list`  
-  - `azd info`, `azd history`, `azd metrics` (ไม่มีจริง) → ลบออก  
+#### แก้ไขแล้ว
+- **🔧 ลบคำสั่ง AZD ที่ไม่มีอยู่**: ตรวจสอบและแก้ไขคำสั่งที่ไม่ถูกต้องอย่างครอบคลุม:
+  - `azd logs` (ไม่มีอยู่จริง) → แทนที่ด้วย `azd monitor --logs` หรือทางเลือก Azure CLI
+  - คำสั่งย่อย `azd service` (ไม่มีอยู่จริง) → แทนที่ด้วย `azd show` และ Azure CLI
+  - คำสั่ง `azd infra import/export/validate` (ไม่มีอยู่จริง) → ลบหรือแทนที่ด้วยทางเลือกที่ถูกต้อง
+  - แฟล็ก `azd deploy --rollback/--incremental/--parallel/--detect-changes` (ไม่มีอยู่จริง) → ลบออก
+  - แฟล็ก `azd provision --what-if/--rollback` (ไม่มีอยู่จริง) → อัพเดตใช้ `--preview`
+  - `azd config validate` (ไม่มีอยู่จริง) → แทนที่ด้วย `azd config list`
+  - `azd info`, `azd history`, `azd metrics` (ไม่มีอยู่จริง) → ลบออก
 
-- **📚 ไฟล์ที่อัปเดตด้วยการแก้ไขคำสั่ง**:  
-  - `resources/cheat-sheet.md`: ปรับปรุงคำสั่งทั้งหมดใหม่  
-  - `docs/deployment/deployment-guide.md`: แก้ไขกลยุทธ์การ rollback และการปรับใช้  
-  - `docs/troubleshooting/debugging.md`: แก้ไขส่วนวิเคราะห์บันทึก  
-  - `docs/troubleshooting/common-issues.md`: อัปเดตคำสั่งแก้ไขปัญหา  
-  - `docs/troubleshooting/ai-troubleshooting.md`: แก้ไขส่วนการแก้จุดบกพร่อง AZD  
-  - `docs/getting-started/azd-basics.md`: แก้ไขคำสั่งมอนิเตอร์  
-  - `docs/getting-started/first-project.md`: อัปเดตตัวอย่างมอนิเตอร์และแก้ไขปัญหา  
-  - `docs/getting-started/installation.md`: แก้ไขตัวอย่างคำสั่ง help และ version  
-  - `docs/pre-deployment/application-insights.md`: แก้ไขคำสั่งดูบันทึก  
-  - `docs/pre-deployment/coordination-patterns.md`: แก้ไขคำสั่งดีบัก agent  
+- **📚 ไฟล์ที่อัพเดตด้วยการแก้ไขคำสั่ง**:
+  - `resources/cheat-sheet.md`: ปรับปรุงการอ้างอิงคำสั่งครั้งใหญ่
+  - `docs/deployment/deployment-guide.md`: แก้ไขกลยุทธ์ rollback และ deployment
+  - `docs/troubleshooting/debugging.md`: แก้ไขส่วนวิเคราะห์ล็อก
+  - `docs/troubleshooting/common-issues.md`: อัพเดตคำสั่งแก้ไขปัญหา
+  - `docs/troubleshooting/ai-troubleshooting.md`: แก้ไขส่วนดีบัก AZD
+  - `docs/getting-started/azd-basics.md`: แก้ไขคำสั่งมอนิเตอร์
+  - `docs/getting-started/first-project.md`: อัพเดตตัวอย่างมอนิเตอร์และดีบัก
+  - `docs/getting-started/installation.md`: แก้ไขตัวอย่างช่วยเหลือและเวอร์ชัน
+  - `docs/pre-deployment/application-insights.md`: แก้ไขคำสั่งดูล็อก
+  - `docs/pre-deployment/coordination-patterns.md`: แก้ไขคำสั่งดีบักของเอเย่นต์
 
-- **📝 อัปเดตการอ้างอิงเวอร์ชัน**:  
-  - `docs/getting-started/installation.md`: เปลี่ยนเวอร์ชันที่กำหนดตายตัวจาก `1.5.0` เป็น `1.x.x` พร้อมลิงก์ไปยัง release  
+- **📝 อัพเดตการอ้างอิงเวอร์ชัน**: 
+  - `docs/getting-started/installation.md`: เปลี่ยนเลขเวอร์ชันตายตัว `1.5.0` เป็น `1.x.x` พร้อมลิงก์ไปยังเวอร์ชันต่างๆ
 
-#### การเปลี่ยนแปลง  
-- **กลยุทธ์ Rollback**: อัปเดตเอกสารให้ใช้ rollback ผ่าน Git (AZD ไม่มี rollback ในตัว)  
-- **การดูบันทึก**: เปลี่ยนจาก `azd logs` เป็น `azd monitor --logs`, `azd monitor --live` และคำสั่ง Azure CLI  
-- **ส่วนประสิทธิภาพ**: ลบธงปรับใช้แบบขนาน/เพิ่มทีละน้อยที่ไม่มีจริง และให้แนวทางที่ถูกต้อง  
+#### เปลี่ยนแปลง
+- **กลยุทธ์ Rollback**: อัพเดตเอกสารให้ใช้ rollback ผ่าน Git (AZD ไม่มี rollback ในตัว)
+- **การดูล็อก**: แทนที่การอ้างอิง `azd logs` ด้วย `azd monitor --logs`, `azd monitor --live` และคำสั่ง Azure CLI
+- **ส่วนประสิทธิภาพ**: ลบแฟล็ก deployment แบบขนาน/เพิ่มทีละน้อยที่ไม่มีอยู่ และเพิ่มทางเลือกที่ถูกต้อง
 
-#### รายละเอียดทางเทคนิค  
-- **คำสั่ง AZD ที่ถูกต้อง**: `init`, `up`, `auth`, `deploy`, `down`, `provision`, `publish`, `completion`, `config`, `env`, `show`, `version`, `monitor`  
-- **ธง `azd monitor` ที่ถูกต้อง**: `--live`, `--logs`, `--overview`  
-- **ฟีเจอร์ถูกลบ**: `azd logs`, `azd service`, `azd infra import/export/validate`, `azd history`, `azd metrics`, `azd info`, `azd config validate`  
+#### รายละเอียดทางเทคนิค
+- **คำสั่ง AZD ที่ถูกต้อง**: `init`, `up`, `auth`, `deploy`, `down`, `provision`, `publish`, `completion`, `config`, `env`, `show`, `version`, `monitor`
+- **แฟล็ก `azd monitor` ที่ถูกต้อง**: `--live`, `--logs`, `--overview`
+- **ฟีเจอร์ที่ถูกลบ**: `azd logs`, `azd service`, `azd infra import/export/validate`, `azd history`, `azd metrics`, `azd info`, `azd config validate`
 
-#### หมายเหตุ  
-- **การตรวจสอบ**: คำสั่งได้รับการตรวจสอบกับ Azure Developer CLI v1.23.x  
+#### หมายเหตุ
+- **การตรวจสอบความถูกต้อง**: คำสั่งได้รับการตรวจสอบกับ Azure Developer CLI v1.23.x
 
 ---
 
 ### [v3.9.0] - 2026-02-05
 
-#### การเสร็จสมบูรณ์เวิร์กช็อปและปรับปรุงคุณภาพเอกสาร  
-**เวอร์ชันนี้เสร็จสมบูรณ์โมดูลเวิร์กช็อปแบบโต้ตอบ, แก้ไขลิงก์เอกสารเสียทั้งหมด และปรับปรุงคุณภาพเนื้อหารวมถึงสำหรับนักพัฒนา AI ที่ใช้ Microsoft AZD**
+#### อัพเดตความสมบูรณ์ของเวิร์กชอปและคุณภาพเอกสาร
+**เวอร์ชันนี้เสร็จสมบูรณ์โมดูลเวิร์กชอปเชิงโต้ตอบ แก้ไขลิงก์เอกสารที่เสียทั้งหมด และปรับปรุงคุณภาพเนื้อหาโดยรวมสำหรับนักพัฒนาปัญญาประดิษฐ์ที่ใช้ Microsoft AZD**
 
-#### เพิ่มเติม  
-- **📝 CONTRIBUTING.md**: เอกสารแนวทางการร่วมพัฒนาใหม่ พร้อม:  
-  - คำแนะนำชัดเจนสำหรับการรายงานปัญหาและเสนอเปลี่ยนแปลง  
-  - มาตรฐานการเขียนเอกสารสำหรับเนื้อหาใหม่  
-  - แนวทางตัวอย่างโค้ดและข้อกำหนดการเขียนข้อความคอมมิต
+#### เพิ่มเติม
+- **📝 CONTRIBUTING.md**: เอกสารแนวทางการมีส่วนร่วมใหม่ พร้อม:
+  - คำแนะนำชัดเจนสำหรับการรายงานปัญหาและเสนอการเปลี่ยนแปลง
+  - มาตรฐานเอกสารสำหรับเนื้อหาใหม่
+  - แนวทางตัวอย่างโค้ดและรูปแบบข้อความ commit
   - ข้อมูลการมีส่วนร่วมของชุมชน
 
 #### เสร็จสมบูรณ์
-- **🎯 โมดูลเวิร์กช็อป 7 (สรุป)**: เสร็จสิ้นโมดูลสรุปอย่างครบถ้วนด้วย:
-  - สรุปผลงานเวิร์กช็อปอย่างครอบคลุม
-  - ส่วนแนวคิดสำคัญที่ครอบคลุม AZD, เทมเพลต และ Microsoft Foundry
-  - คำแนะนำสำหรับการต่อเนื่องการเรียนรู้
-  - แบบฝึกหัดความท้าทายเวิร์กช็อปพร้อมระดับความยาก
-  - ลิงก์ข้อเสนอแนะและการสนับสนุนชุมชน
+- **🎯 เวิร์กชอปโมดูล 7 (สรุป)**: เสร็จสมบูรณ์โมดูลสรุป พร้อม:
+  - สรุปผลงานเวิร์กชอปอย่างครอบคลุม
+  - ส่วนแนวคิดหลักที่เชี่ยวชาญเกี่ยวกับ AZD, เทมเพลต และ Microsoft Foundry
+  - คำแนะนำการเรียนรู้ต่อเนื่อง
+  - แบบฝึกหัดความท้าทายในเวิร์กชอปพร้อมระดับความยาก
+  - ลิงก์คำติชมและสนับสนุนจากชุมชน
 
-- **📚 โมดูลเวิร์กช็อป 3 (การแยกส่วน)**: ปรับปรุงวัตถุประสงค์การเรียนรู้ด้วย:
-  - คำแนะนำการเปิดใช้งาน GitHub Copilot กับ MCP servers
+- **📚 เวิร์กชอปโมดูล 3 (การแยกส่วน)**: อัพเดตวัตถุประสงค์การเรียนรู้ พร้อม:
+  - คำแนะนำการเปิดใช้งาน GitHub Copilot กับเซิร์ฟเวอร์ MCP
   - ความเข้าใจโครงสร้างโฟลเดอร์เทมเพลต AZD
-  - รูปแบบการจัดระเบียบ Infrastructure-as-code (Bicep)
-  - คำแนะนำการทำแล็บลงมือทำ
+  - รูปแบบการจัดการ Infrastructure-as-code (Bicep)
+  - คำแนะนำการฝึกปฏิบัติในห้องแล็บ
 
-- **🔧 โมดูลเวิร์กช็อป 6 (การรื้อถอน)**: เสร็จสมบูรณ์ด้วย:
-  - วัตถุประสงค์การล้างทรัพยากรและการจัดการค่าใช้จ่าย
-  - การใช้ `azd down` สำหรับการยกเลิกโครงสร้างพื้นฐานอย่างปลอดภัย
-  - คำแนะนำการกู้คืนบริการ cognitive แบบลบแบบนุ่มนวล
-  - คำแนะนำเพิ่มพิเศษสำหรับ GitHub Copilot และ Azure Portal
+- **🔧 เวิร์กชอปโมดูล 6 (การรื้อถอน)**: เสร็จสมบูรณ์ พร้อม:
+  - วัตถุประสงค์การทำความสะอาดทรัพยากรและการจัดการค่าใช้จ่าย
+  - การใช้ `azd down` เพื่อถอนการจัดเตรียมโครงสร้างพื้นฐานอย่างปลอดภัย
+  - คำแนะนำการกู้คืนบริการปัญญาประดิษฐ์ที่ถูกลบแบบอ่อน
+  - คำแนะนำเสริมสำหรับ GitHub Copilot และ Azure Portal
 
 #### แก้ไขแล้ว
-- **🔗 แก้ไขลิงก์เสีย**: แก้ไขลิงก์เอกสารภายในเสียกว่า 15 ลิงก์:
+- **🔗 แก้ไขลิงก์เสีย**: แก้ไขลิงก์ภายในเอกสารที่เสียกว่า 15 แห่ง:
   - `docs/ai-foundry/ai-model-deployment.md`: แก้ไขเส้นทางไปยัง microsoft-foundry-integration.md
   - `docs/troubleshooting/ai-troubleshooting.md`: แก้ไขเส้นทาง ai-model-deployment.md และ production-ai-practices.md
   - `docs/getting-started/first-project.md`: แทนที่ cicd-integration.md ที่ไม่มีด้วย deployment-guide.md
-  - `examples/retail-scenario.md`: แก้ไขเส้นทาง FAQ และคู่มือแก้ปัญหา
-  - `examples/container-app/microservices/README.md`: แก้ไขเส้นทางหน้าหลักคอร์สและคู่มือการปรับใช้
-  - `resources/faq.md` และ `resources/glossary.md`: ปรับปรุงการอ้างอิงบท AI
-  - `course-outline.md`: แก้ไขคู่มือผู้สอนและแล็บเวิร์กช็อป AI
+  - `examples/retail-scenario.md`: แก้ไขเส้นทาง FAQ และคำแนะนำแก้ปัญหา
+  - `examples/container-app/microservices/README.md`: แก้ไขเส้นทางหลักสูตรและ deployment guide
+  - `resources/faq.md` และ `resources/glossary.md`: อัพเดตการอ้างอิงบท AI
+  - `course-outline.md`: แก้ไขการอ้างอิงคู่มือผู้สอนและห้องแล็บเวิร์กชอป AI
 
-- **📅 แบนเนอร์สถานะเวิร์กช็อป**: อัปเดตจาก "อยู่ระหว่างการก่อสร้าง" เป็นสถานะเวิร์กช็อปที่ดำเนินการแล้ว วันที่กุมภาพันธ์ 2026
+- **📅 ป้ายสถานะเวิร์กชอป**: อัพเดตจาก "กำลังก่อสร้าง" เป็นสถานะเวิร์กชอปที่ใช้งานได้พร้อมวันที่กุมภาพันธ์ 2026
 
-- **🔗 การนำทางเวิร์กช็อป**: แก้ไขลิงก์นำทางเสียใน README.md ของเวิร์กช็อปที่ชี้ไปยังโฟลเดอร์ lab-1-azd-basics ที่ไม่มี
+- **🔗 การนำทางเวิร์กชอป**: แก้ไขลิงก์การนำทางเสียใน README.md ของเวิร์กชอปที่ชี้ไปยังโฟลเดอร์ lab-1-azd-basics ที่ไม่มีอยู่จริง
 
 #### เปลี่ยนแปลง
-- **การนำเสนอเวิร์กช็อป**: ลบคำเตือน "อยู่ระหว่างการก่อสร้าง" เวิร์กช็อปเสร็จสมบูรณ์และพร้อมใช้งานแล้ว
-- **ความสอดคล้องของการนำทาง**: รับรองว่าโมดูลเวิร์กช็อปทั้งหมดมีการนำทางระหว่างโมดูลอย่างเหมาะสม
-- **การอ้างอิงเส้นทางการเรียนรู้**: ปรับปรุงการอ้างอิงข้ามบทให้ใช้เส้นทาง microsoft-foundry ที่ถูกต้อง
+- **การแสดงผลเวิร์กชอป**: ลบคำเตือน "กำลังก่อสร้าง" เวิร์กชอปเสร็จสมบูรณ์และพร้อมใช้งานแล้ว
+- **ความสอดคล้องของการนำทาง**: ตรวจสอบให้แน่ใจว่าโมดูลเวิร์กชอปทั้งหมดมีการนำทางข้ามโมดูลอย่างถูกต้อง
+- **อ้างอิงเส้นทางการเรียนรู้**: อัพเดตการอ้างอิงบทให้ใช้เส้นทาง microsoft-foundry ที่ถูกต้อง
 
-#### ตรวจสอบแล้ว
-- ✅ ไฟล์ markdown ภาษาอังกฤษทั้งหมดมีลิงก์ภายในถูกต้อง
-- ✅ โมดูลเวิร์กช็อป 0-7 เสร็จสมบูรณ์พร้อมวัตถุประสงค์การเรียนรู้
-- ✅ การนำทางระหว่างบทและโมดูลทำงานอย่างถูกต้อง
-- ✅ เนื้อหานี้เหมาะสำหรับนักพัฒนา AI ที่ใช้ Microsoft AZD
-- ✅ ใช้ภาษาที่เหมาะสำหรับผู้เริ่มต้นและโครงสร้างที่ชัดเจน
-- ✅ CONTRIBUTING.md ให้คำแนะนำชัดเจนสำหรับผู้ร่วมชุมชน
+#### ผ่านการตรวจสอบ
+- ✅ ไฟล์ markdown ภาษาอังกฤษทั้งหมดมีลิงก์ภายในที่ถูกต้อง
+- ✅ โมดูลเวิร์กชอป 0-7 เสร็จสมบูรณ์พร้อมวัตถุประสงค์การเรียนรู้
+- ✅ การนำทางระหว่างบทและโมดูลทำงานได้อย่างถูกต้อง
+- ✅ เนื้อหาเหมาะสำหรับนักพัฒนาปัญญาประดิษฐ์ที่ใช้ Microsoft AZD
+- ✅ ใช้ภาษาที่เป็นมิตรกับผู้เริ่มต้นและโครงสร้างที่เหมาะสมตลอด
+- ✅ CONTRIBUTING.md มีคำแนะนำที่ชัดเจนสำหรับผู้ที่มีส่วนร่วมในชุมชน
 
-#### การดำเนินการด้านเทคนิค
-- **การตรวจสอบลิงก์**: ใช้สคริปต์ PowerShell อัตโนมัติเพื่อตรวจสอบลิงก์ภายใน .md ทั้งหมด
-- **การตรวจสอบเนื้อหา**: ตรวจสอบด้วยมือถึงความสมบูรณ์ของเวิร์กช็อปและความเหมาะสมสำหรับผู้เริ่มต้น
-- **ระบบนำทาง**: ใช้รูปแบบการนำทางระหว่างบทและโมดูลที่สอดคล้องกัน
+#### การนำไปใช้งานทางเทคนิค
+- **การตรวจสอบลิงก์**: สคริปต์ PowerShell อัตโนมัติยืนยันลิงก์ .md ภายในทั้งหมด
+- **การตรวจสอบเนื้อหา**: ตรวจทานด้วยมือเพื่อประเมินความสมบูรณ์ของเวิร์กชอปและความเหมาะสมกับผู้เริ่มต้น
+- **ระบบการนำทาง**: ใช้รูปแบบการนำทางระหว่างบทและโมดูลอย่างสม่ำเสมอ
 
 #### หมายเหตุ
-- **ขอบเขต**: การเปลี่ยนแปลงนี้ใช้กับเอกสารภาษาอังกฤษเท่านั้น
-- **การแปล**: โฟลเดอร์แปลภาษาไม่ได้อัปเดตในเวอร์ชันนี้ (การแปลอัตโนมัติจะซิงค์ภายหลัง)
-- **ระยะเวลาเวิร์กช็อป**: เวิร์กช็อปสมบูรณ์ตอนนี้ให้เวลาเรียน 3-4 ชั่วโมงแบบลงมือทำ
+- **ขอบเขต**: การเปลี่ยนแปลงถูกใช้กับเอกสารภาษาอังกฤษเท่านั้น
+- **การแปล**: โฟลเดอร์แปลยังไม่อัพเดตในเวอร์ชันนี้ (การแปลอัตโนมัติจะซิงค์ภายหลัง)
+- **ระยะเวลาเวิร์กชอป**: เวิร์กชอปสมบูรณ์ตอนนี้ใช้เวลาฝึกปฏิบัติ 3-4 ชั่วโมง
 
 ---
 
 ### [v3.8.0] - 2025-11-19
 
-#### เอกสารขั้นสูง: การตรวจสอบ ความปลอดภัย และรูปแบบผู้แทนหลายคน
-**เวอร์ชันนี้เพิ่มบทเรียนระดับ A ครบถ้วนเกี่ยวกับการรวม Application Insights, รูปแบบการรับรองตัวตน และการประสานงานผู้แทนหลายคนสำหรับการปรับใช้ในสภาพแวดล้อมจริง**
+#### เอกสารขั้นสูง: การมอนิเตอร์ ความปลอดภัย และรูปแบบหลายเอเย่นต์
+**เวอร์ชันนี้เพิ่มบทเรียนระดับ A ครบถ้วนเกี่ยวกับการรวม Application Insights รูปแบบการพิสูจน์ตัวตน และการประสานงานหลายเอเย่นต์สำหรับการดีพลอยในสภาพแวดล้อมการผลิต**
 
 #### เพิ่มเติม
 - **📊 บทเรียนการรวม Application Insights**: ใน `docs/pre-deployment/application-insights.md`:
-  - การปรับใช้โฟกัส AZD พร้อมการจัดสรรอัตโนมัติ
-  - เทมเพลต Bicep ครบถ้วนสำหรับ Application Insights + Log Analytics
-  - แอป Python ทำงานพร้อมเทเลเมตรีที่กำหนดเอง (มากกว่า 1,200 บรรทัด)
-  - รูปแบบการตรวจสอบ AI/LLM (ติดตามโทเค็น/ค่าใช้จ่ายของ Microsoft Foundry Models)
-  - ไดอะแกรม Mermaid 6 ภาพ (สถาปัตยกรรม, การติดตามแบบกระจาย, การไหลของเทเลเมตรี)
-  - แบบฝึกหัดลงมือทำ 3 แบบ (แจ้งเตือน, แดชบอร์ด, การตรวจสอบ AI)
-  - ตัวอย่างคำสืบค้น Kusto และกลยุทธ์ปรับค่าใช้จ่าย
-  - สตรีมเมตริกแบบเรียลไทม์และดีบักแบบเรียลไทม์
-  - เวลาเรียน 40-50 นาทีพร้อมรูปแบบพร้อมผลิต
+  - การดีพลอยโฟกัส AZD พร้อมการจัดเตรียมอัตโนมัติ
+  - เทมเพลต Bicep ครบชุดสำหรับ Application Insights + Log Analytics
+  - แอป Python ที่ทำงานได้พร้อมเทเลเมทรีกำหนดเอง (กว่า 1,200 บรรทัด)
+  - รูปแบบมอนิเตอร์ AI/LLM (ติดตามโทเค็น/ค่าใช้จ่ายของโมเดล Microsoft Foundry)
+  - แผนภาพ Mermaid 6 แผนภาพ (สถาปัตยกรรม, การติดตามแบบกระจาย, กระแสเทเลเมทรี)
+  - แบบฝึกหัด 3 ชุด (แจ้งเตือน, แดชบอร์ด, มอนิเตอร์ AI)
+  - ตัวอย่างการสืบค้น Kusto และกลยุทธ์การเพิ่มประสิทธิภาพค่าใช้จ่าย
+  - การสตรีมมิงเมตริกซ์สดและดีบักแบบเรียลไทม์
+  - เวลาเรียนรู้ 40-50 นาทีพร้อมรูปแบบที่พร้อมใช้ในสภาพแวดล้อมผลิต
 
-- **🔐 บทเรียนรูปแบบการรับรองและความปลอดภัย**: ใน `docs/getting-started/authsecurity.md`:
-  - รูปแบบการรับรองตัวตน 3 แบบ (connection strings, Key Vault, managed identity)
-  - เทมเพลตโครงสร้างพื้นฐาน Bicep ครบถ้วนสำหรับการปรับใช้ที่ปลอดภัย
-  - โค้ดแอป Node.js พร้อมการรวม Azure SDK
-  - แบบฝึกหัดครบ 3 แบบ (เปิดใช้งาน managed identity, user-assigned identity, การหมุน Key Vault)
-  - แนวปฏิบัติด้านความปลอดภัยที่ดีที่สุดและการตั้งค่า RBAC
-  - คู่มือการแก้ปัญหาและการวิเคราะห์ค่าใช้จ่าย
-  - รูปแบบการรับรองตัวตนแบบไม่ใช้รหัสผ่านพร้อมใช้งานในสภาพผลิต
+- **🔐 บทเรียนรูปแบบการพิสูจน์ตัวตน & ความปลอดภัย**: ใน `docs/getting-started/authsecurity.md`:
+  - รูปแบบการพิสูจน์ตัวตน 3 แบบ (สายการเชื่อมต่อ, Key Vault, managed identity)
+  - เทมเพลตโครงสร้างพื้นฐาน Bicep ครบชุดสำหรับการดีพลอยที่ปลอดภัย
+  - โค้ดแอป Node.js รวมกับ Azure SDK
+  - แบบฝึกหัดครบ 3 ชุด (เปิดใช้งาน managed identity, user-assigned identity, การหมุน Key Vault)
+  - แนวทางปฏิบัติด้านความปลอดภัยและการตั้งค่า RBAC
+  - คู่มือแก้ไขปัญหาและการวิเคราะห์ค่าใช้จ่าย
+  - รูปแบบการพิสูจน์ตัวตนแบบไม่ใช้รหัสผ่านพร้อมใช้งานสำหรับสภาพแวดล้อมผลิต
 
-- **🤖 บทเรียนรูปแบบการประสานงานผู้แทนหลายคน**: ใน `docs/pre-deployment/coordination-patterns.md`:
-  - รูปแบบการประสานงาน 5 แบบ (ตามลำดับ, พร้อมกัน, เป็นลำดับชั้น, ขับเคลื่อนด้วยเหตุการณ์, การเห็นด้วยกัน)
-  - การทำงานของบริการออร์เคสเตรเตอร์ครบถ้วน (Python/Flask, มากกว่า 1,500 บรรทัด)
-  - การใช้งานผู้แทนเฉพาะ 3 แบบ (วิจัย, นักเขียน, บรรณาธิการ)
-  - การรวม Service Bus สำหรับคิวข้อความ
+- **🤖 บทเรียนรูปแบบการประสานงานหลายเอเย่นต์**: ใน `docs/pre-deployment/coordination-patterns.md`:
+  - รูปแบบการประสานงาน 5 แบบ (ลำดับ, ขนาน, ลำดับชั้น, เหตุการณ์ขับเคลื่อน, ฉันทามติ)
+  - การใช้งานเซอร์วิส orchestration ครบชุด (Python/Flask, กว่า 1,500 บรรทัด)
+  - การใช้งานเอเย่นต์เฉพาะทาง 3 ตัว (Research, Writer, Editor)
+  - การผสานรวม Service Bus สำหรับคิวข้อความ
   - การจัดการสถานะ Cosmos DB สำหรับระบบกระจาย
-  - ไดอะแกรม Mermaid 6 ภาพ แสดงปฏิสัมพันธ์ผู้แทน
-  - แบบฝึกหัดขั้นสูง 3 แบบ (การจัดการหมดเวลารอ, ตรรกะการลองใหม่, เบรกเกอร์วงจร)
-  - การแจกแจงค่าใช้จ่าย ($240-565/เดือน) พร้อมกลยุทธ์ปรับค่าใช้จ่าย
-  - การรวม Application Insights สำหรับการตรวจสอบ
+  - แผนภาพ Mermaid 6 แผนภาพแสดงการปฏิสัมพันธ์ของเอเย่นต์
+  - แบบฝึกหัดขั้นสูง 3 ชุด (การจัดการเวลาหมด, การลองใหม่, ตัวตัดวงจร)
+  - การแบ่งแยกค่าใช้จ่าย ($240-565/เดือน) พร้อมกลยุทธ์การเพิ่มประสิทธิภาพ
+  - การรวม Application Insights สำหรับการมอนิเตอร์
 
 #### ปรับปรุง
-- **บทก่อนการปรับใช้**: ปัจจุบันรวมรูปแบบการตรวจสอบและการประสานงานอย่างครบถ้วน
-- **บทเริ่มต้น**: ปรับปรุงด้วยรูปแบบการรับรองตัวตนระดับมืออาชีพ
-- **ความพร้อมสำหรับการผลิต**: ครอบคลุมตั้งแต่ความปลอดภัยจนถึงการสังเกตการณ์
-- **เค้าโครงคอร์ส**: ปรับปรุงให้อ้างอิงบทเรียนใหม่ในบทที่ 3 และ 6
+- **บทก่อนการดีพลอย**: ตอนนี้รวมรูปแบบการมอนิเตอร์และประสานงานแบบครบถ้วน
+- **บทเริ่มต้น**: ปรับปรุงด้วยรูปแบบการพิสูจน์ตัวตนแบบมืออาชีพ
+- **ความพร้อมใช้งานในสภาพแวดล้อมผลิต**: ครอบคลุมตั้งแต่ความปลอดภัยถึงการสังเกตการณ์
+- **โครงร่างหลักสูตร**: อัพเดตการอ้างอิงบทเรียนใหม่ในบทที่ 3 และ 6
 
 #### เปลี่ยนแปลง
-- **ลำดับการเรียนรู้**: การบูรณาการความปลอดภัยและการตรวจสอบได้ดีขึ้นตลอดหลักสูตร
-- **คุณภาพเอกสาร**: มาตรฐานระดับ A ที่สม่ำเสมอ (95-97%) ในบทเรียนใหม่
-- **รูปแบบสำหรับการผลิต**: ครอบคลุมตั้งแต่ต้นจนจบสำหรับการปรับใช้ในองค์กร
+- **ลำดับการเรียนรู้**: การผสานรูปแบบความปลอดภัยและการมอนิเตอร์ที่ดีขึ้นตลอดหลักสูตร
+- **คุณภาพเอกสาร**: มาตรฐานระดับ A ที่สม่ำเสมอ (95-97%) ในบทเรียนใหม่ทั้งหมด
+- **รูปแบบการผลิต**: ครอบคลุมครบทุกขั้นตอนการดีพลอยระดับองค์กร
 
-#### ปรับปรุง
-- **ประสบการณ์นักพัฒนา**: เส้นทางชัดเจนจากการพัฒนาไปสู่การตรวจสอบการผลิต
-- **มาตรฐานความปลอดภัย**: รูปแบบมืออาชีพสำหรับการรับรองและการจัดการความลับ
-- **การสังเกตการณ์**: การรวม Application Insights ครบถ้วนกับ AZD
-- **งาน AI**: การตรวจสอบเฉพาะสำหรับ Microsoft Foundry Models และระบบผู้แทนหลายคน
+#### ปรับปรุงเพิ่มเติม
+- **ประสบการณ์นักพัฒนา**: เส้นทางชัดเจนจากการพัฒนาถึงการมอนิเตอร์ในสภาพแวดล้อมผลิต
+- **มาตรฐานความปลอดภัย**: รูปแบบมืออาชีพสำหรับการพิสูจน์ตัวตนและการจัดการความลับ
+- **การสังเกตการณ์**: การรวม Application Insights แบบครบถ้วนกับ AZD
+- **งาน AI**: การมอนิเตอร์เฉพาะทางสำหรับ Microsoft Foundry Models และระบบหลายเอเย่นต์
 
-#### ตรวจสอบแล้ว
-- ✅ บทเรียนทั้งหมดรวมโค้ดใช้งานจริงครบถ้วน (ไม่ใช่เพียงตัวอย่างโค้ดย่อ)
-- ✅ ไดอะแกรม Mermaid สำหรับการเรียนรู้ด้วยภาพ (19 ภาพใน 3 บทเรียน)
-- ✅ แบบฝึกหัดลงมือทำพร้อมขั้นตอนการตรวจสอบ (9 แบบ)
-- ✅ เทมเพลต Bicep พร้อมสำหรับการปรับใช้ผ่าน `azd up`
-- ✅ การวิเคราะห์ค่าใช้จ่ายและกลยุทธ์ปรับปรุง
-- ✅ คู่มือการแก้ปัญหาและแนวปฏิบัติที่ดีที่สุด
-- ✅ จุดตรวจสอบความรู้พร้อมคำสั่งตรวจสอบ
+#### ผ่านการตรวจสอบ
+- ✅ บทเรียนทั้งหมดมีโค้ดทำงานครบถ้วน (ไม่ใช่แค่ตัวอย่างโค้ด)
+- ✅ แผนภาพ Mermaid สำหรับการเรียนรู้เชิงภาพ (ทั้งหมด 19 แผนภาพใน 3 บทเรียน)
+- ✅ แบบฝึกหัดเชิงปฏิบัติมีขั้นตอนตรวจสอบ (ทั้งหมด 9 แบบฝึกหัด)
+- ✅ เทมเพลต Bicep พร้อมใช้ในสภาพแวดล้อมผลิตสามารถดีพลอยผ่าน `azd up`
+- ✅ การวิเคราะห์ค่าใช้จ่ายและกลยุทธ์การเพิ่มประสิทธิภาพ
+- ✅ คู่มือแก้ไขปัญหาและแนวทางปฏิบัติที่ดีที่สุด
+- ✅ จุดตรวจสอบความรู้พร้อมคำสั่งยืนยัน
 
 #### ผลการให้คะแนนเอกสาร
-- **docs/pre-deployment/application-insights.md**: - คู่มือการตรวจสอบครบถ้วน
-- **docs/getting-started/authsecurity.md**: - รูปแบบความปลอดภัยระดับมืออาชีพ
-- **docs/pre-deployment/coordination-patterns.md**: - สถาปัตยกรรมผู้แทนหลายคนขั้นสูง
-- **เนื้อหาใหม่โดยรวม**: - มาตรฐานคุณภาพสูงที่สม่ำเสมอ
+- **docs/pre-deployment/application-insights.md**: - คู่มือมอนิเตอร์ครบถ้วน
+- **docs/getting-started/authsecurity.md**: - รูปแบบความปลอดภัยมืออาชีพ
+- **docs/pre-deployment/coordination-patterns.md**: - สถาปัตยกรรมหลายเอเย่นต์ขั้นสูง
+- **เนื้อหาใหม่ทั้งหมด**: - มาตรฐานคุณภาพสูงอย่างสม่ำเสมอ
 
-#### การดำเนินการด้านเทคนิค
-- **Application Insights**: Log Analytics + เทเลเมตรีที่กำหนดเอง + การติดตามแบบกระจาย
-- **การรับรองตัวตน**: Managed Identity + Key Vault + รูปแบบ RBAC
-- **ผู้แทนหลายคน**: Service Bus + Cosmos DB + Container Apps + ออร์เคสเตรชัน
-- **การตรวจสอบ**: เมตริกสด + คำสืบค้น Kusto + แจ้งเตือน + แดชบอร์ด
-- **การจัดการค่าใช้จ่าย**: กลยุทธ์การสุ่มตัวอย่าง, นโยบายการเก็บรักษา, การควบคุมงบประมาณ
+#### การนำไปใช้งานทางเทคนิค
+- **Application Insights**: Log Analytics + เทเลเมทรีกำหนดเอง + การติดตามแบบกระจาย
+- **การพิสูจน์ตัวตน**: Managed Identity + Key Vault + รูปแบบ RBAC
+- **หลายเอเย่นต์**: Service Bus + Cosmos DB + Container Apps + การออร์เคสตรา
+- **การมอนิเตอร์**: เมตริกซ์สด + การสืบค้น Kusto + แจ้งเตือน + แดชบอร์ด
+- **การจัดการค่าใช้จ่าย**: กลยุทธ์สุ่มตัวอย่าง, นโยบายการเก็บรักษา, การควบคุมงบประมาณ
 
 ### [v3.7.0] - 2025-11-19
 
 #### การปรับปรุงคุณภาพเอกสารและตัวอย่าง Microsoft Foundry Models ใหม่
-**เวอร์ชันนี้ปรับปรุงคุณภาพเอกสารทั่วทั้ง repository และเพิ่มตัวอย่างการปรับใช้ Microsoft Foundry Models ที่สมบูรณ์พร้อมกับส่วนต่อประสานแชท gpt-4.1**
+**เวอร์ชันนี้ปรับปรุงคุณภาพเอกสารทั่วทั้งที่เก็บและเพิ่มตัวอย่างการดีพลอย Microsoft Foundry Models ที่สมบูรณ์พร้อมอินเทอร์เฟซแชท gpt-4.1**
 
 #### เพิ่มเติม
-- **🤖 ตัวอย่างแชท Microsoft Foundry Models**: การปรับใช้ gpt-4.1 สมบูรณ์พร้อมใช้งานใน `examples/azure-openai-chat/`:
-  - โครงสร้างพื้นฐาน Microsoft Foundry Models ครบถ้วน (การปรับใช้โมเดล gpt-4.1)
-  - อินเทอร์เฟซแชทบนคำสั่ง Python พร้อมประวัติการสนทนา
-  - การรวม Key Vault สำหรับจัดเก็บคีย์ API อย่างปลอดภัย
-  - การติดตามการใช้โทเค็นและประมาณค่าใช้จ่าย
+- **🤖 ตัวอย่าง Microsoft Foundry Models แชท**: การดีพลอย gpt-4.1 ครบถ้วนพร้อมการใช้งานใน `examples/azure-openai-chat/`:
+  - โครงสร้างพื้นฐาน Microsoft Foundry Models ครบถ้วน (ดีพลอยโมเดล gpt-4.1)
+  - อินเทอร์เฟซแชทบรรทัดคำสั่ง Python พร้อมประวัติการสนทนา
+  - ผสานรวม Key Vault สำหรับเก็บคีย์ API อย่างปลอดภัย
+  - การติดตามการใช้โทเค็นและการประเมินค่าใช้จ่าย
   - การจำกัดอัตราและการจัดการข้อผิดพลาด
-  - README ครบถ้วนพร้อมคำแนะนำปรับใช้ 35-45 นาที
-  - ไฟล์พร้อมใช้งาน 11 ไฟล์ (เทมเพลต Bicep, แอป Python, การกำหนดค่า)
-- **📚 แบบฝึกหัดเอกสาร**: เพิ่มแบบฝึกหัดลงมือทำในคู่มือการกำหนดค่า:
-  - แบบฝึกหัด 1: การกำหนดค่าหลายสภาพแวดล้อม (15 นาที)
-  - แบบฝึกหัด 2: การฝึกจัดการความลับ (10 นาที)
-  - เกณฑ์ความสำเร็จชัดเจนและขั้นตอนตรวจสอบ
-- **✅ การตรวจสอบการปรับใช้**: เพิ่มส่วนตรวจสอบในคู่มือการปรับใช้:
-  - ขั้นตอนตรวจสอบสุขภาพระบบ
+  - README ครบถ้วนพร้อมคู่มือการดีพลอย 35-45 นาที
+  - ไฟล์พร้อมใช้งานในสภาพแวดล้อมผลิต 11 ไฟล์ (เทมเพลต Bicep, แอป Python, การตั้งค่า)
+- **📚 แบบฝึกหัดเอกสาร**: เพิ่มแบบฝึกหัดปฏิบัติในคู่มือการตั้งค่า:
+  - แบบฝึกหัด 1: การตั้งค่าหลายสภาพแวดล้อม (15 นาที)
+  - แบบฝึกหัด 2: การจัดการความลับ (10 นาที)
+  - เกณฑ์ความสำเร็จและขั้นตอนตรวจสอบที่ชัดเจน
+- **✅ การยืนยันการดีพลอย**: เพิ่มส่วนตรวจสอบในคู่มือการดีพลอย:
+  - ขั้นตอนตรวจสุขภาพ
   - รายการตรวจสอบเกณฑ์ความสำเร็จ
-  - ผลลัพธ์ที่คาดหวังสำหรับคำสั่งปรับใช้ทั้งหมด
-  - การอ้างอิงแก้ไขปัญหาอย่างรวดเร็ว
+  - ผลลัพธ์ที่คาดหวังสำหรับคำสั่งดีพลอยทั้งหมด
+  - อ้างอิงด่วนแก้ไขปัญหา
 
 #### ปรับปรุง
-- **examples/README.md**: ปรับปรุงเป็นคุณภาพระดับ A (93%):
+- **examples/README.md**: อัพเดตคุณภาพเป็นระดับ A (93%):
   - เพิ่ม azure-openai-chat ในทุกส่วนที่เกี่ยวข้อง
-  - ปรับจำนวนตัวอย่างท้องถิ่นจาก 3 เป็น 4
+  - อัพเดตจำนวนตัวอย่างในเครื่องจาก 3 เป็น 4
   - เพิ่มในตารางตัวอย่างแอป AI
-  - ผนวกเข้ากับ Quick Start สำหรับผู้ใช้ระดับกลาง
-  - เพิ่มในส่วนเทมเพลต Microsoft Foundry
-  - ปรับปรุงตารางเปรียบเทียบและส่วนการหาข้อมูลเทคโนโลยี
-- **คุณภาพเอกสาร**: ปรับปรุงจาก B+ (87%) เป็น A- (92%) ทั่วโฟลเดอร์ docs:
-  - เพิ่มผลลัพธ์ที่คาดหวังในตัวอย่างคำสั่งสำคัญ
+  - รวมเข้ากับ Quick Start สำหรับผู้ใช้ระดับกลาง
+  - เพิ่มในส่วน Microsoft Foundry Templates
+  - อัพเดต Comparison Matrix และส่วนการค้นหาเทคโนโลยี
+- **คุณภาพเอกสาร**: ปรับปรุงจาก B+ (87%) → A- (92%) ทั่วโฟลเดอร์ docs:
+
+  - เพิ่มผลลัพธ์ที่คาดหวังไปยังตัวอย่างคำสั่งที่สำคัญ
   - รวมขั้นตอนการตรวจสอบสำหรับการเปลี่ยนแปลงการกำหนดค่า
-  - เสริมการเรียนรู้ด้วยมือด้วยแบบฝึกหัดที่ใช้งานจริง
+  - ปรับปรุงการเรียนรู้แบบลงมือทำด้วยแบบฝึกหัดเชิงปฏิบัติ
 
 #### เปลี่ยนแปลง
-- **ลำดับการเรียนรู้**: การผสมผสานตัวอย่าง AI สำหรับผู้เรียนระดับกลางดีขึ้น
-- **โครงสร้างเอกสาร**: แบบฝึกหัดที่ใช้ได้จริงมากขึ้นพร้อมผลลัพธ์ชัดเจน
-- **กระบวนการตรวจสอบ**: เพิ่มเกณฑ์ความสำเร็จชัดเจนในขั้นตอนงานสำคัญ
+- **ความก้าวหน้าในการเรียนรู้**: การผสมผสานตัวอย่าง AI สำหรับผู้เรียนระดับกลางดีขึ้น
+- **โครงสร้างเอกสาร**: แบบฝึกหัดที่สามารถปฏิบัติได้มากขึ้นพร้อมผลลัพธ์ที่ชัดเจน
+- **กระบวนการตรวจสอบ**: เพิ่มเกณฑ์ความสำเร็จที่ชัดเจนในเวิร์กโฟลว์สำคัญ
 
 #### ปรับปรุง
-- **ประสบการณ์นักพัฒนา**: การปรับใช้ Microsoft Foundry Models ตอนนี้ใช้เวลา 35-45 นาที (เทียบกับ 60-90 นาทีสำหรับทางเลือกที่ซับซ้อน)
-- **ความโปร่งใสด้านค่าใช้จ่าย**: ประมาณค่าใช้จ่ายชัดเจน ($50-200/เดือน) สำหรับตัวอย่าง Microsoft Foundry Models
-- **เส้นทางการเรียนรู้**: นักพัฒนา AI มีจุดเริ่มต้นชัดเจนด้วย azure-openai-chat
-- **มาตรฐานเอกสาร**: ผลลัพธ์ที่คาดหวังและขั้นตอนตรวจสอบที่สอดคล้องกัน
+- **ประสบการณ์นักพัฒนา**: การปรับใช้ Microsoft Foundry Models ใช้เวลา 35-45 นาที (เทียบกับ 60-90 สำหรับทางเลือกที่ซับซ้อน)
+- **ความโปร่งใสของค่าใช้จ่าย**: การประมาณค่าใช้จ่ายชัดเจน ($50-200/เดือน) สำหรับตัวอย่าง Microsoft Foundry Models
+- **เส้นทางการเรียนรู้**: นักพัฒนา AI มีจุดเริ่มต้นที่ชัดเจนด้วย azure-openai-chat
+- **มาตรฐานเอกสาร**: ผลลัพธ์ที่คาดหวังและขั้นตอนการตรวจสอบที่สอดคล้องกัน
 
 #### ตรวจสอบแล้ว
 - ✅ ตัวอย่าง Microsoft Foundry Models ทำงานได้สมบูรณ์ด้วย `azd up`
-- ✅ ไฟล์การใช้งานทั้ง 11 ไฟล์ถูกต้องตามไวยากรณ์
+- ✅ ไฟล์การทำงาน 11 ไฟล์ทั้งหมดถูกต้องตามหลักไวยากรณ์
 - ✅ คำแนะนำใน README ตรงกับประสบการณ์การปรับใช้จริง
-- ✅ อัปเดตลิงก์เอกสารในมากกว่า 8 แห่ง
-- ✅ ดัชนีตัวอย่างสะท้อนตัวอย่างท้องถิ่น 4 ตัวอย่างอย่างถูกต้อง
-- ✅ ไม่มีลิงก์ภายนอกซ้ำในตาราง
-- ✅ การอ้างอิงการนำทางทั้งหมดถูกต้อง
+- ✅ ลิงก์เอกสารอัปเดตในมากกว่า 8 แห่ง
+- ✅ ดรรชนีตัวอย่างสะท้อนตัวอย่าง 4 ตัวอย่างในเครื่องอย่างถูกต้อง
+- ✅ ไม่มีลิงก์ภายนอกซ้ำซ้อนในตาราง
+- ✅ อ้างอิงการนำทางทั้งหมดถูกต้อง
 
-#### การดำเนินการด้านเทคนิค
+#### การดำเนินการทางเทคนิค
 - **สถาปัตยกรรม Microsoft Foundry Models**: gpt-4.1 + Key Vault + รูปแบบ Container Apps
-- **ความปลอดภัย**: พร้อม Managed Identity, ความลับใน Key Vault
-- **การตรวจสอบ**: การรวม Application Insights
-- **การจัดการค่าใช้จ่าย**: การติดตามโทเค็นและการปรับค่าใช้จ่าย
-- **การปรับใช้**: คำสั่ง `azd up` เดียวสำหรับการติดตั้งครบถ้วน
+- **ความปลอดภัย**: พร้อมใช้ Managed Identity, เก็บความลับใน Key Vault
+- **การตรวจสอบ**: การผสาน Application Insights
+- **การจัดการค่าใช้จ่าย**: การติดตามโทเค็นและการปรับแต่งการใช้
+- **การปรับใช้**: คำสั่ง `azd up` เดียวสำหรับการตั้งค่าครบถ้วน
 
 ### [v3.6.0] - 2025-11-19
 
-#### อัปเดตใหญ่: ตัวอย่างการปรับใช้ Container App
-**เวอร์ชันนี้นำเสนอ ตัวอย่างการปรับใช้แอปคอนเทนเนอร์ที่สมบูรณ์พร้อมใช้งานในสภาพผลิตโดยใช้ Azure Developer CLI (AZD) พร้อมเอกสารครบและการรวมเข้าเส้นทางการเรียนรู้**
+#### การอัปเดตหลัก: ตัวอย่างการปรับใช้ Container App
+**เวอร์ชันนี้นำเสนอตัวอย่างการปรับใช้แอปคอนเทนเนอร์แบบครบวงจรพร้อมใช้งานจริงโดยใช้ Azure Developer CLI (AZD) พร้อมเอกสารครบถ้วนและผสานเข้ากับเส้นทางการเรียนรู้**
 
 #### เพิ่มเติม
-- **🚀 ตัวอย่าง Container App**: ตัวอย่างใหม่ในท้องถิ่นที่ `examples/container-app/`:
-  - [คู่มือหลัก](examples/container-app/README.md): ภาพรวมครบถ้วนของการปรับใช้แบบคอนเทนเนอร์, เริ่มต้นเร็ว, สภาพผลิต, และรูปแบบขั้นสูง
-  - [Flask API ง่ายๆ](../../examples/container-app/simple-flask-api): REST API เหมาะสำหรับผู้เริ่มต้นพร้อม scale-to-zero, probes สุขภาพ, การตรวจสอบ, และการแก้ปัญหา
-  - [สถาปัตยกรรมไมโครเซอร์วิส](../../examples/container-app/microservices): ปรับใช้หลายบริการพร้อมสภาพผลิต (API Gateway, Product, Order, User, Notification), การส่งข้อความแบบอะซิงโครนัส, Service Bus, Cosmos DB, Azure SQL, การติดตามแบบกระจาย, blue-green/canary deployment
-- **แนวปฏิบัติที่ดีที่สุด**: ความปลอดภัย, การตรวจสอบ, การปรับค่าใช้จ่าย, และคำแนะนำ CI/CD สำหรับงานคอนเทนเนอร์
-- **ตัวอย่างโค้ด**: `azure.yaml` ครบถ้วน, เทมเพลต Bicep, และบริการหลายภาษา (Python, Node.js, C#, Go)
-- **การทดสอบและแก้ปัญหา**: สถานการณ์ทดสอบครบชุด, คำสั่งตรวจสอบ, คู่มือแก้ปัญหา
+- **🚀 ตัวอย่าง Container App**: ตัวอย่างในเครื่องใหม่ที่ `examples/container-app/`:
+  - [แนวทางหลัก](examples/container-app/README.md): ภาพรวมสมบูรณ์ของการปรับใช้แบบคอนเทนเนอร์, การเริ่มต้นรวดเร็ว, การผลิต, และรูปแบบขั้นสูง
+  - [Simple Flask API](../../examples/container-app/simple-flask-api): REST API ที่เหมาะสำหรับผู้เริ่มต้น พร้อมฟีเจอร์ scale-to-zero, ตรวจสุขภาพ, การตรวจสอบ และการแก้ไขปัญหา
+  - [สถาปัตยกรรมไมโครเซอร์วิส](../../examples/container-app/microservices): การปรับใช้ระบบบริการหลายตัวพร้อมใช้งานจริง (API Gateway, Product, Order, User, Notification), การส่งข้อความแบบอะซิงค์, Service Bus, Cosmos DB, Azure SQL, การติดตามแบบกระจาย, การปรับใช้แบบ blue-green/canary
+- **แนวปฏิบัติที่ดีที่สุด**: ความปลอดภัย, การตรวจสอบ, การปรับแต่งค่าใช้จ่าย, และคำแนะนำ CI/CD สำหรับเวิร์กโหลดแบบคอนเทนเนอร์
+- **ตัวอย่างโค้ด**: `azure.yaml` สมบูรณ์, เทมเพลต Bicep, และการใช้งานบริการหลายภาษา (Python, Node.js, C#, Go)
+- **การทดสอบ & การแก้ไขปัญหา**: สถานการณ์ทดสอบจากต้นทางถึงปลายทาง, คำสั่งตรวจสอบ, คำแนะนำแก้ไขปัญหา
 
 #### เปลี่ยนแปลง
-- **README.md**: อัปเดตให้แสดงและลิงก์ตัวอย่างแอปคอนเทนเนอร์ใหม่ ภายใต้ "Local Examples - Container Applications"
-- **examples/README.md**: อัปเดตเพื่อเน้นตัวอย่างแอปคอนเทนเนอร์, เพิ่มรายการในตารางเปรียบเทียบ, และปรับปรุงการอ้างอิงเทคโนโลยี/สถาปัตยกรรม
-- **เค้าโครงคอร์ส & คู่มือศึกษา**: อัปเดตให้อ้างอิงตัวอย่างแอปคอนเทนเนอร์และรูปแบบการปรับใช้ในบทที่เกี่ยวข้อง
+- **README.md**: อัปเดตให้แสดงและลิงก์ตัวอย่างแอปคอนเทนเนอร์ใหม่ภายใต้ "ตัวอย่างในเครื่อง - แอปคอนเทนเนอร์"
+- **examples/README.md**: อัปเดตเน้นตัวอย่างแอปคอนเทนเนอร์, เพิ่มรายการเมทริกซ์เปรียบเทียบ, และอัปเดตการอ้างอิงเทคโนโลยี/สถาปัตยกรรม
+- **โครงร่างหลักสูตร & คู่มือการศึกษา**: อัปเดตเพื่ออ้างอิงตัวอย่างแอปคอนเทนเนอร์และรูปแบบการปรับใช้ในบทที่เกี่ยวข้อง
 
 #### ตรวจสอบแล้ว
-- ✅ ตัวอย่างใหม่ทั้งหมดปรับใช้ได้ด้วย `azd up` และเป็นไปตามแนวปฏิบัติที่ดีที่สุด
-- ✅ อัปเดตลิงก์ภายในเอกสารและระบบนำทางแล้ว
-- ✅ ตัวอย่างครอบคลุมตั้งแต่ระดับเริ่มต้นจนถึงขั้นสูง รวมไมโครเซอร์วิสในสภาพผลิต
+- ✅ ตัวอย่างใหม่ทั้งหมดสามารถปรับใช้ได้ด้วย `azd up` และปฏิบัติตามแนวปฏิบัติที่ดีที่สุด
+- ✅ อัปเดตลิงก์ข้ามเอกสารและการนำทาง
+- ✅ ตัวอย่างครอบคลุมสถานการณ์ตั้งแต่ผู้เริ่มต้นถึงขั้นสูง รวมถึงไมโครเซอร์วิสในสภาพแวดล้อมผลิต
 
 #### หมายเหตุ
-- **ขอบเขต**: เอกสารและตัวอย่างภาษาอังกฤษเท่านั้น
-- **ขั้นตอนถัดไป**: ขยายรูปแบบคอนเทนเนอร์ขั้นสูงและอัตโนมัติ CI/CD ในรุ่นถัดไป
+- **ขอบเขต**: เอกสารและตัวอย่างเป็นภาษาอังกฤษเท่านั้น
+- **ขั้นตอนถัดไป**: ขยายด้วยรูปแบบคอนเทนเนอร์ขั้นสูงเพิ่มเติมและระบบอัตโนมัติ CI/CD ในการอัปเดตในอนาคต
 
 ### [v3.5.0] - 2025-11-19
 
 #### การรีแบรนด์ผลิตภัณฑ์: Microsoft Foundry
-**เวอร์ชันนี้ดำเนินการเปลี่ยนชื่อผลิตภัณฑ์อย่างครบถ้วนจาก "Microsoft Foundry" เป็น "Microsoft Foundry" ในเอกสารภาษาอังกฤษทั้งหมด สะท้อนการรีแบรนด์อย่างเป็นทางการของ Microsoft**
+**เวอร์ชันนี้ดำเนินการเปลี่ยนชื่อผลิตภัณฑ์จาก "Microsoft Foundry" เป็น "Microsoft Foundry" ในเอกสารภาษาอังกฤษทั้งหมด สะท้อนถึงการรีแบรนด์อย่างเป็นทางการของไมโครซอฟท์**
 
 #### เปลี่ยนแปลง
-- **🔄 อัปเดตชื่อผลิตภัณฑ์**: รีแบรนด์ครบถ้วนจาก "Microsoft Foundry" เป็น "Microsoft Foundry"
+- **🔄 การอัปเดตชื่อผลิตภัณฑ์**: รีแบรนด์ครบถ้วนจาก "Microsoft Foundry" เป็น "Microsoft Foundry"
   - อัปเดตการอ้างอิงทั้งหมดในเอกสารภาษาอังกฤษในโฟลเดอร์ `docs/`
   - เปลี่ยนชื่อโฟลเดอร์: `docs/ai-foundry/` → `docs/microsoft-foundry/`
   - เปลี่ยนชื่อไฟล์: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
   - รวมทั้งหมด: อัปเดตการอ้างอิงเนื้อหา 23 รายการใน 7 ไฟล์เอกสาร
 
 - **📁 การเปลี่ยนแปลงโครงสร้างโฟลเดอร์**:
-  - `docs/ai-foundry/` เปลี่ยนชื่อเป็น `docs/microsoft-foundry/`
-  - อัปเดตการอ้างอิงข้ามทั้งหมดให้สะท้อนโครงสร้างโฟลเดอร์ใหม่
-  - ตรวจสอบลิงก์การนำทางในเอกสารทั้งหมด
+  - เปลี่ยนชื่อ `docs/ai-foundry/` เป็น `docs/microsoft-foundry/`
+  - อัปเดตการอ้างอิงข้ามทั้งหมดให้สอดคล้องกับโครงสร้างโฟลเดอร์ใหม่
+  - ตรวจสอบลิงก์การนำทางทั่วทั้งเอกสาร
 
 - **📄 การเปลี่ยนชื่อไฟล์**:
-  - `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+  - เปลี่ยนชื่อ `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
   - อัปเดตลิงก์ภายในทั้งหมดให้ชี้ไปยังชื่อไฟล์ใหม่
 
 #### ไฟล์ที่อัปเดต
 - **เอกสารบทเรียน** (7 ไฟล์):
-  - `docs/microsoft-foundry/ai-model-deployment.md` - อัปเดต 3 ลิงก์การนำทาง
-  - `docs/microsoft-foundry/ai-workshop-lab.md` - อัปเดตชื่อผลิตภัณฑ์ 4 รายการ
-  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - ใช้ Microsoft Foundry อยู่แล้ว (จากการอัปเดตก่อนหน้า)
-  - `docs/microsoft-foundry/production-ai-practices.md` - อัปเดต 3 รายการ (ภาพรวม, ความคิดเห็นชุมชน, เอกสาร)
-  - `docs/getting-started/azd-basics.md` - อัปเดตลิงก์อ้างอิงข้าม 4 รายการ
-  - `docs/getting-started/first-project.md` - อัปเดตลิงก์การนำทางบทเรียน 2 รายการ
-  - `docs/getting-started/installation.md` - อัปเดตลิงก์บทเรียนถัดไป 2 รายการ
-  - `docs/troubleshooting/ai-troubleshooting.md` - อัปเดต 3 รายการ (การนำทาง, ชุมชน Discord)
+  - `docs/microsoft-foundry/ai-model-deployment.md` - อัปเดตลิงก์การนำทาง 3 รายการ
+  - `docs/microsoft-foundry/ai-workshop-lab.md` - อัปเดตการอ้างอิงชื่อผลิตภัณฑ์ 4 รายการ
+  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - ใช้ Microsoft Foundry แล้ว (จากการอัปเดตก่อนหน้า)
+  - `docs/microsoft-foundry/production-ai-practices.md` - อัปเดตอ้างอิง 3 รายการ (ภาพรวม, ฟีดแบ็คชุมชน, เอกสาร)
+  - `docs/getting-started/azd-basics.md` - อัปเดตลิงก์ข้ามแหล่งข้อมูล 4 รายการ
+  - `docs/getting-started/first-project.md` - อัปเดตลิงก์การนำทางบทที่ 2 รายการ
+  - `docs/getting-started/installation.md` - อัปเดตลิงก์ไปยังบทถัดไป 2 รายการ
+  - `docs/troubleshooting/ai-troubleshooting.md` - อัปเดตอ้างอิง 3 รายการ (การนำทาง, ชุมชน Discord)
   - `docs/troubleshooting/common-issues.md` - อัปเดตลิงก์การนำทาง 1 รายการ
   - `docs/troubleshooting/debugging.md` - อัปเดตลิงก์การนำทาง 1 รายการ
 
 - **ไฟล์โครงสร้างหลักสูตร** (2 ไฟล์):
-  - `README.md` - อัปเดตการอ้างอิง 17 รายการ (ภาพรวมหลักสูตร, ชื่อบท, ส่วนแม่แบบ, ความเห็นชุมชน)
-  - `course-outline.md` - อัปเดตการอ้างอิง 14 รายการ (ภาพรวม, วัตถุประสงค์การเรียนรู้, แหล่งข้อมูลบทเรียน)
+  - `README.md` - อัปเดตอ้างอิง 17 รายการ (ภาพรวมหลักสูตร, ชื่อบท, ส่วนเทมเพลต, ความคิดเห็นชุมชน)
+  - `course-outline.md` - อัปเดตอ้างอิง 14 รายการ (ภาพรวม, วัตถุประสงค์การเรียนรู้, แหล่งข้อมูลบท)
 
-#### ได้รับการตรวจสอบ
-- ✅ ไม่มีการอ้างอิงเส้นทางโฟลเดอร์ "ai-foundry" ที่เหลือในเอกสารภาษาอังกฤษ
-- ✅ ไม่มีการอ้างอิงชื่อผลิตภัณฑ์ "Microsoft Foundry" ที่เหลือในเอกสารภาษาอังกฤษ
+#### ตรวจสอบแล้ว
+- ✅ ไม่มีการอ้างอิงเส้นทางโฟลเดอร์ "ai-foundry" เหลือในเอกสารภาษาอังกฤษ
+- ✅ ไม่มีรายการอ้างอิงชื่อผลิตภัณฑ์ "Microsoft Foundry" ที่เหลือในเอกสารภาษาอังกฤษ
 - ✅ ลิงก์การนำทางทั้งหมดทำงานได้ตามโครงสร้างโฟลเดอร์ใหม่
-- ✅ การเปลี่ยนชื่อไฟล์และโฟลเดอร์เสร็จสมบูรณ์เรียบร้อย
-- ✅ ตรวจสอบการอ้างอิงข้ามบทเรียนสำเร็จ
+- ✅ การเปลี่ยนชื่อไฟล์และโฟลเดอร์สำเร็จเรียบร้อย
+- ✅ ตรวจสอบการอ้างอิงข้ามระหว่างบทเรียบร้อยแล้ว
 
 #### หมายเหตุ
-- **ขอบเขต**: การเปลี่ยนแปลงนี้ใช้กับเอกสารภาษาอังกฤษในโฟลเดอร์ `docs/` เท่านั้น
+- **ขอบเขต**: การเปลี่ยนแปลงใช้กับเอกสารภาษาอังกฤษในโฟลเดอร์ `docs/` เท่านั้น
 - **การแปล**: โฟลเดอร์การแปล (`translations/`) ยังไม่ได้รับการอัปเดตในเวอร์ชันนี้
 - **เวิร์กช็อป**: วัสดุเวิร์กช็อป (`workshop/`) ยังไม่ได้รับการอัปเดตในเวอร์ชันนี้
-- **ตัวอย่าง**: ไฟล์ตัวอย่างอาจยังอ้างอิงชื่อเดิมอยู่ (จะดำเนินการในอัปเดตถัดไป)
-- **ลิงก์ภายนอก**: URL ภายนอกและการอ้างอิง GitHub ยังคงเหมือนเดิม
+- **ตัวอย่าง**: ไฟล์ตัวอย่างอาจยังคงมีการอ้างอิงชื่อแบบเก่า (จะอัปเดตในอนาคต)
+- **ลิงก์ภายนอก**: URL ภายนอกและการอ้างอิงรีโพสิทอรี GitHub ยังคงเดิม
 
 #### คู่มือการย้ายข้อมูลสำหรับผู้ร่วมพัฒนา
-หากคุณมีสาขาท้องถิ่นหรือเอกสารที่อ้างอิงโครงสร้างเดิม:
+หากคุณมีสาขาในเครื่องหรือเอกสารที่อ้างอิงโครงสร้างเก่า:
 1. อัปเดตการอ้างอิงโฟลเดอร์: `docs/ai-foundry/` → `docs/microsoft-foundry/`
 2. อัปเดตการอ้างอิงไฟล์: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
 3. แทนที่ชื่อผลิตภัณฑ์: "Microsoft Foundry" → "Microsoft Foundry"
-4. ตรวจสอบว่าลิงก์ภายในเอกสารทั้งหมดยังใช้งานได้ตามปกติ
+4. ตรวจสอบลิงก์เอกสารภายในทั้งหมดว่ายังคงใช้งานได้
 
 ---
 
 ### [v3.4.0] - 2025-10-24
 
-#### การปรับปรุงการพรีวิวโครงสร้างพื้นฐานและการตรวจสอบ
-**เวอร์ชันนี้แนะนำการสนับสนุนครบถ้วนสำหรับฟีเจอร์พรีวิวตัวใหม่ของ Azure Developer CLI และพัฒนาประสบการณ์ผู้ใช้ในเวิร์กช็อป**
+#### การพรีวิวโครงสร้างพื้นฐานและการปรับปรุงการตรวจสอบ
+**เวอร์ชันนี้นำเสนอการสนับสนุนครอบคลุมสำหรับฟีเจอร์พรีวิว Azure Developer CLI ใหม่ และเพิ่มประสบการณ์ผู้ใช้ในเวิร์กช็อป**
 
 #### เพิ่มเติม
-- **🧪 เอกสารฟีเจอร์ azd provision --preview**: ครอบคลุมการใช้งานความสามารถพรีวิวโครงสร้างพื้นฐานใหม่
-  - อ้างอิงคำสั่งและตัวอย่างใช้ใน cheat sheet
-  - การบูรณาการอย่างละเอียดในคู่มือ provisioning พร้อมกรณีใช้งานและข้อดี
-  - การผสานการตรวจสอบก่อนใช้งานเพื่อความปลอดภัยในการดีพลอย
-  - อัปเดตคู่มือเริ่มต้นด้วยแนวทางการดีพลอยแบบปลอดภัย
+- **🧪 เอกสารฟีเจอร์ azd provision --preview**: ครอบคลุมความสามารถพรีวิวโครงสร้างพื้นฐานใหม่อย่างละเอียด
+  - การอ้างอิงคำสั่งและตัวอย่างการใช้งานในแผ่นชีท
+  - การผสานในคู่มือ provisioning พร้อมกรณีใช้งานและข้อดี
+  - การผสานการตรวจสอบก่อนบินสำหรับการตรวจสอบการปรับใช้ที่ปลอดภัยขึ้น
+  - อัปเดตคู่มือเริ่มต้นด้วยแนวทางการปรับใช้ที่เน้นความปลอดภัยเป็นหลัก
 - **🚧 แบนเนอร์สถานะเวิร์กช็อป**: แบนเนอร์ HTML มืออาชีพแสดงสถานะการพัฒนาเวิร์กช็อป
-  - ออกแบบด้วยกราเดียนต์และไอคอนแสดงสถานะก่อสร้างชัดเจน
-  - แสดงเวลาการอัปเดตล่าสุดเพื่อความโปร่งใส
-  - รองรับการใช้งานบนอุปกรณ์เคลื่อนที่ทุกรูปแบบ
+  - การออกแบบแบบไล่เฉดสีพร้อมสัญลักษณ์การก่อสร้างเพื่อการสื่อสารที่ชัดเจนกับผู้ใช้
+  - ป้ายเวลาปรับปรุงล่าสุดเพื่อความโปร่งใส
+  - การออกแบบตอบสนองสำหรับอุปกรณ์ทุกประเภท
 
 #### ปรับปรุง
-- **ความปลอดภัยโครงสร้างพื้นฐาน**: ฟังก์ชันพรีวิวถูกรวมในเอกสารการดีพลอยทั้งหมด
-- **การตรวจสอบก่อนดีพลอย**: สคริปต์อัตโนมัติรวมการทดสอบพรีวิวโครงสร้างพื้นฐาน
-- **เวิร์กโฟลว์สำหรับนักพัฒนา**: อัปเดตลำดับคำสั่งให้รวมพรีวิวเป็นแนวปฏิบัติที่ดีที่สุด
-- **ประสบการณ์เวิร์กช็อป**: แจ้งความชัดเจนเกี่ยวกับสถานะพัฒนาเนื้อหาให้ผู้ใช้ทราบ
+- **ความปลอดภัยโครงสร้างพื้นฐาน**: ฟังก์ชันการทำงานพรีวิวถูกรวมในเอกสารการปรับใช้ทั้งหมด
+- **การตรวจสอบก่อนปรับใช้**: สคริปต์อัตโนมัติรวมการทดสอบพรีวิวโครงสร้างพื้นฐาน
+- **เวิร์กโฟลว์นักพัฒนา**: อัปเดตลำดับคำสั่งให้รวมพรีวิวเป็นแนวปฏิบัติที่ดีที่สุด
+- **ประสบการณ์เวิร์กช็อป**: กำหนดความคาดหวังที่ชัดเจนสำหรับผู้ใช้เกี่ยวกับสถานะการพัฒนาเนื้อหา
 
 #### เปลี่ยนแปลง
-- **แนวทางปฏิบัติที่ดีที่สุดในการดีพลอย**: ใช้วิถีทางพรีวิวก่อนดีพลอยเป็นหลัก
-- **โฟลว์เอกสาร**: ย้ายขั้นตอนตรวจสอบโครงสร้างพื้นฐานให้มาก่อนในกระบวนการเรียนรู้
-- **การนำเสนอเวิร์กช็อป**: สื่อสารสถานะอย่างมืออาชีพพร้อมไทม์ไลน์การพัฒนา
+- **แนวทางปฏิบัติที่ดีที่สุดในการปรับใช้**: แนะนำให้ใช้เวิร์กโฟลว์แบบพรีวิวเป็นอันดับแรก
+- **การไหลของเอกสาร**: การตรวจสอบโครงสร้างพื้นฐานเลื่อนไปก่อนหน้านี้ในกระบวนการเรียนรู้
+- **การนำเสนอเวิร์กช็อป**: การสื่อสารสถานะระดับมืออาชีพพร้อมไทม์ไลน์การพัฒนาที่ชัดเจน
 
-#### ปรับปรุงเพิ่มเติม
-- **แนวทางปลอดภัยเป็นหลัก**: สามารถตรวจสอบการเปลี่ยนแปลงโครงสร้างพื้นฐานก่อนดีพลอยจริงได้
-- **การทำงานร่วมกันในทีม**: แชร์ผลลัพธ์พรีวิวเพื่อตรวจสอบและอนุมัติได้
-- **ความตระหนักถึงต้นทุน**: เข้าใจค่าใช้จ่ายทรัพยากรก่อน provisioning
-- **ลดความเสี่ยง**: ลดปัญหาการดีพลอยล้มเหลวด้วยการตรวจสอบล่วงหน้า
+#### ปรับปรุง
+- **แนวทางเน้นความปลอดภัย**: สามารถตรวจสอบการเปลี่ยนแปลงโครงสร้างพื้นฐานก่อนการปรับใช้ได้
+- **การทำงานร่วมกันของทีม**: สามารถแชร์ผลลัพธ์พรีวิวเพื่อการตรวจสอบและอนุมัติ
+- **การรับรู้ค่าใช้จ่าย**: เข้าใจต้นทุนทรัพยากรก่อน provisioning ดีขึ้น
+- **การลดความเสี่ยง**: ลดความล้มเหลวในการปรับใช้ด้วยการตรวจสอบล่วงหน้า
 
 #### การดำเนินการทางเทคนิค
-- **การบูรณาการหลายเอกสาร**: เอกสารฟีเจอร์พรีวิวใน 4 ไฟล์หลัก
-- **รูปแบบคำสั่ง**: ความสอดคล้องในไวยากรณ์และตัวอย่างในเอกสารทั้งหมด
-- **แนวทางปฏิบัติที่ดีที่สุด**: รวมพรีวิวในเวิร์กโฟลว์ตรวจสอบและสคริปต์
-- **สัญลักษณ์แสดงภาพ**: ทำเครื่องหมายฟีเจอร์ใหม่อย่างชัดเจนเพื่อค้นพบง่าย
+- **การผสานหลายเอกสาร**: ฟีเจอร์พรีวิวถูกบันทึกใน 4 ไฟล์สำคัญ
+- **รูปแบบคำสั่ง**: ไวยากรณ์และตัวอย่างสอดคล้องทั่วเอกสาร
+- **การผสมผสานแนวทางปฏิบัติที่ดีที่สุด**: พรีววิวถูกรวมในเวิร์กโฟลว์และสคริปต์ตรวจสอบ
+- **ตัวบ่งชี้เชิงภาพ**: เครื่องหมายฟีเจอร์ใหม่ชัดเจนสำหรับการค้นพบ
 
-#### โครงสร้างเวิร์กช็อป
-- **การสื่อสถานะ**: แบนเนอร์ HTML มืออาชีพพร้อมสไตล์กราเดียนต์
-- **ประสบการณ์ผู้ใช้**: แจ้งสถานะพัฒนาเนื้อหาอย่างชัดเจนเพื่อป้องกันความสับสน
-- **การนำเสนออย่างมืออาชีพ**: รักษาความน่าเชื่อถือของที่เก็บข้อมูลพร้อมตั้งความคาดหวัง
-- **ความโปร่งใสของไทม์ไลน์**: แสดงเวลาปรับปรุงล่าสุดเป็นตุลาคม 2025 เพื่อความรับผิดชอบ
+#### โครงสร้างพื้นฐานเวิร์กช็อป
+- **การสื่อสารสถานะ**: แบนเนอร์ HTML มืออาชีพพร้อมสไตล์ไล่เฉดสี
+- **ประสบการณ์ผู้ใช้**: สถานะการพัฒนาชัดเจนป้องกันความสับสน
+- **การนำเสนอระดับมืออาชีพ**: รักษาความน่าเชื่อถือของรีโพสิทอรีพร้อมกำหนดความคาดหวัง
+- **ความโปร่งใสของไทม์ไลน์**: ป้ายเวลาปรับปรุงล่าสุด ต.ค. 2025 เพื่อความรับผิดชอบ
 
 ### [v3.3.0] - 2025-09-24
 
-#### วัสดุเวิร์กช็อปและประสบการณ์การเรียนรู้เชิงโต้ตอบที่พัฒนาแล้ว
-**เวอร์ชันนี้แนะนำวัสดุเวิร์กช็อปครบถ้วนด้วยการแนะนำแบบโต้ตอบบนเบราว์เซอร์และเส้นทางการเรียนรู้ที่มีโครงสร้าง**
+#### วัสดุเวิร์กช็อปที่ขยายและประสบการณ์การเรียนรู้เชิงปฏิสัมพันธ์
+**เวอร์ชันนี้นำเสนอวัสดุเวิร์กช็อปครอบคลุมพร้อมคู่มือเชิงโต้ตอบบนเบราว์เซอร์และเส้นทางเรียนรู้ที่มีโครงสร้าง**
 
 #### เพิ่มเติม
-- **🎥 คู่มือเวิร์กช็อปเชิงโต้ตอบ**: ประสบการณ์เวิร์กช็อปบนเบราว์เซอร์ด้วยความสามารถพรีวิว MkDocs
-- **📝 คำแนะนำเวิร์กช็อปแบบมีโครงสร้าง**: เส้นทางเรียนรู้ 7 ขั้นตอนตั้งแต่การค้นพบถึงการปรับแต่ง
-  - 0-แนะนำ: ภาพรวมเวิร์กช็อปและการติดตั้ง
-  - 1-เลือกแม่แบบ AI: ขั้นตอนการค้นหาและเลือกแม่แบบ
-  - 2-ตรวจสอบแม่แบบ AI: การดีพลอยและการตรวจสอบ
-  - 3-แยกส่วนแม่แบบ AI: ทำความเข้าใจโครงสร้างแม่แบบ
-  - 4-กำหนดค่าแม่แบบ AI: การกำหนดค่าและปรับแต่ง
-  - 5-ปรับแต่งแม่แบบ AI: การแก้ไขขั้นสูงและทำซ้ำ
-  - 6-รื้อถอนโครงสร้างพื้นฐาน: การเคลียร์และจัดการทรัพยากร
+- **🎥 คู่มือเวิร์กช็อปเชิงโต้ตอบ**: ประสบการณ์เวิร์กช็อปบนเบราว์เซอร์พร้อมความสามารถพรีวิว MkDocs
+- **📝 คำแนะนำเวิร์กช็อปที่มีโครงสร้าง**: เส้นทางเรียนรู้ 7 ขั้นตอนจากการค้นพบถึงการปรับแต่ง
+  - 0-แนะนำ: ภาพรวมเวิร์กช็อปและการตั้งค่า
+  - 1-เลือกเทมเพลต AI: กระบวนการค้นหาและเลือกเทมเพลต
+  - 2-ตรวจสอบเทมเพลต AI: ขั้นตอนการปรับใช้และตรวจสอบ
+  - 3-แยกส่วนเทมเพลต AI: ทำความเข้าใจสถาปัตยกรรมเทมเพลต
+  - 4-กำหนดค่าเทมเพลต AI: การกำหนดค่าและปรับแต่ง
+  - 5-ปรับแต่งเทมเพลต AI: การแก้ไขและปรับแต่งขั้นสูง
+  - 6-รื้อถอนโครงสร้างพื้นฐาน: การทำความสะอาดและการจัดการทรัพยากร
   - 7-สรุป: บทสรุปและขั้นตอนถัดไป
-- **🛠️ เครื่องมือเวิร์กช็อป**: การตั้งค่า MkDocs พร้อมธีม Material เพื่อประสบการณ์เรียนรู้ที่ดีขึ้น
-- **🎯 เส้นทางเรียนรู้แบบลงมือทำ**: วิธีการ 3 ขั้นตอน (ค้นพบ → ดีพลอย → ปรับแต่ง)
-- **📱 การบูรณาการ GitHub Codespaces**: การตั้งค่าสภาพแวดล้อมพัฒนาอย่างลื่นไหล
+- **🛠️ เครื่องมือเวิร์กช็อป**: การตั้งค่า MkDocs พร้อมธีม Material เพื่อประสบการณ์การเรียนรู้ที่ดีขึ้น
+- **🎯 เส้นทางการเรียนรู้แบบลงมือทำ**: วิธี 3 ขั้นตอน (ค้นพบ → ปรับใช้ → ปรับแต่ง)
+- **📱 การผสาน GitHub Codespaces**: การตั้งค่าสภาพแวดล้อมการพัฒนาอย่างราบรื่น
 
 #### ปรับปรุง
-- **ห้องปฏิบัติการเวิร์กช็อป AI**: ขยายเวลาการเรียนรู้ที่มีโครงสร้าง 2-3 ชั่วโมงครบถ้วน
-- **เอกสารเวิร์กช็อป**: การนำเสนอแบบมืออาชีพพร้อมการนำทางและสื่อภาพ
-- **ลำดับการเรียนรู้**: แนะแนวทีละขั้นตอนจากการเลือกแม่แบบถึงการดีพลอยจริง
-- **ประสบการณ์นักพัฒนา**: การรวมเครื่องมือสำหรับเวิร์กโฟลว์พัฒนาอย่างราบรื่น
+- **ห้องทดลอง AI เวิร์กช็อป**: ขยายด้วยประสบการณ์การเรียนรู้ที่มีโครงสร้าง 2-3 ชั่วโมง
+- **เอกสารเวิร์กช็อป**: การนำเสนออย่างมืออาชีพพร้อมการนำทางและสื่อภาพ
+- **ความก้าวหน้าในการเรียนรู้**: คำแนะนำทีละขั้นตอนชัดเจนจากการเลือกเทมเพลตถึงการปรับใช้ในสภาพแวดล้อมผลิต
+- **ประสบการณ์นักพัฒนา**: การผสมผสานเครื่องมือสำหรับเวิร์กโฟลว์การพัฒนาที่มีประสิทธิภาพ
 
-#### ปรับปรุงเพิ่มเติม
-- **การเข้าถึง**: อินเทอร์เฟซบนเบราว์เซอร์พร้อมฟังก์ชันค้นหา, คัดลอก, และสลับธีม
-- **การเรียนรู้ตามจังหวะตนเอง**: โครงสร้างเวิร์กช็อปยืดหยุ่นรองรับความเร็วการเรียนรู้ต่างกัน
-- **การใช้งานจริง**: กรณีดีพลอยแม่แบบ AI ในโลกจริง
-- **การรวมชุมชน**: การเชื่อมต่อ Discord สำหรับสนับสนุนเวิร์กช็อปและความร่วมมือ
+#### ปรับปรุง
+- **การเข้าถึง**: อินเทอร์เฟซบนเบราว์เซอร์พร้อมการค้นหา, คัดลอก, และสลับธีม
+- **การเรียนรู้ตามจังหวะตัวเอง**: โครงสร้างเวิร์กช็อปรองรับความเร็วการเรียนรู้ที่แตกต่าง
+- **การประยุกต์ใช้จริง**: สถานการณ์การปรับใช้เทมเพลต AI ในโลกจริง
+- **การผสานชุมชน**: การผสาน Discord สำหรับการสนับสนุนและความร่วมมือในเวิร์กช็อป
 
-#### คุณสมบัติเวิร์กช็อป
-- **ระบบค้นหาในตัว**: ค้นหาคีย์เวิร์ดและบทเรียนอย่างรวดเร็ว
-- **คัดลอกโค้ดบล็อก**: ฟังก์ชันชี้เพื่อคัดลอกทุกตัวอย่างโค้ด
-- **สลับธีม**: รองรับโหมดมืด/สว่างตามความชอบ
-- **สื่อภาพ**: ภาพหน้าจอและไดอะแกรมช่วยให้เข้าใจดีขึ้น
-- **การช่วยเหลือแบบบูรณาการ**: เข้าถึง Discord ชุมชนได้โดยตรง
+#### ฟีเจอร์เวิร์กช็อป
+- **การค้นหาในตัว**: ค้นหาคีย์เวิร์ดและบทเรียนอย่างรวดเร็ว
+- **คัดลอกบล็อกโค้ด**: ฟังก์ชันเลื่อนเมาส์เพื่อคัดลอกสำหรับตัวอย่างโค้ดทั้งหมด
+- **สลับธีม**: รองรับโหมดกลางคืน/กลางวันสำหรับความชอบต่างๆ
+- **สื่อภาพ**: ภาพหน้าจอและไดอะแกรมเพื่อความเข้าใจที่ดีขึ้น
+- **การผสานความช่วยเหลือ**: เข้าถึง Discord โดยตรงสำหรับการสนับสนุนชุมชน
 
 ### [v3.2.0] - 2025-09-17
 
 #### การปรับโครงสร้างการนำทางครั้งใหญ่และระบบการเรียนรู้แบบแบ่งบท
-**เวอร์ชันนี้แนะนำโครงสร้างการเรียนรู้แบบแบ่งบทที่ครบวงจรพร้อมระบบนำทางที่พัฒนาไปทั่วคลังข้อมูล**
+**เวอร์ชันนี้แนะนำโครงสร้างการเรียนรู้แบบแบ่งบทที่ครอบคลุมพร้อมการนำทางที่ดีขึ้นตลอดทั้งรีโพสิทอรี**
 
 #### เพิ่มเติม
-- **📚 ระบบการเรียนรู้แบบแบ่งบท**: จัดโครงสร้างหลักสูตรทั้งหมดเป็น 8 บทเรียนเรียนเรียงลำดับความก้าวหน้า
-  - บทที่ 1: พื้นฐาน & เริ่มต้นอย่างรวดเร็ว (⭐ - 30-45 นาที)
-  - บทที่ 2: การพัฒนาแบบ AI-First (⭐⭐ - 1-2 ชั่วโมง)
-  - บทที่ 3: การกำหนดค่า & การยืนยันตัวตน (⭐⭐ - 45-60 นาที)
-  - บทที่ 4: โครงสร้างพื้นฐานเป็นโค้ด & การดีพลอย (⭐⭐⭐ - 1-1.5 ชั่วโมง)
-  - บทที่ 5: โซลูชัน AI หลายเอเจนต์ (⭐⭐⭐⭐ - 2-3 ชั่วโมง)
-  - บทที่ 6: การตรวจสอบก่อนดีพลอย & การวางแผน (⭐⭐ - 1 ชั่วโมง)
-  - บทที่ 7: การแก้ปัญหา & การดีบัก (⭐⭐ - 1-1.5 ชั่วโมง)
-  - บทที่ 8: รูปแบบการผลิต & องค์กร (⭐⭐⭐⭐ - 2-3 ชั่วโมง)
-- **📚 ระบบนำทางครบถ้วน**: หัวข้อและท้ายหน้าการนำทางสม่ำเสมอในเอกสารทั้งหมด
-- **🎯 การติดตามความก้าวหน้า**: รายการตรวจสอบการเรียนจบและระบบยืนยันการเรียนรู้
-- **🗺️ แนวทางเส้นทางการเรียนรู้**: ทางเข้าชัดเจนสำหรับผู้เรียนตามระดับประสบการณ์และเป้าหมาย
-- **🔗 นำทางอ้างอิงข้าม**: เชื่อมโยงบทเรียนที่เกี่ยวข้องและบทเรียนพื้นฐานอย่างชัดเจน
+- **📚 ระบบการเรียนรู้แบบแบ่งบท**: ปรับโครงสร้างหลักสูตรทั้งหมดเป็น 8 บทเรียนก้าวหน้า
+  - บทที่ 1: พื้นฐานและเริ่มต้นอย่างรวดเร็ว (⭐ - 30-45 นาที)
+  - บทที่ 2: การพัฒนา AI-First (⭐⭐ - 1-2 ชั่วโมง)
+  - บทที่ 3: การกำหนดค่าและการพิสูจน์ตัวตน (⭐⭐ - 45-60 นาที)
+  - บทที่ 4: โครงสร้างพื้นฐานเป็นรหัสและการปรับใช้ (⭐⭐⭐ - 1-1.5 ชั่วโมง)
+  - บทที่ 5: โซลูชัน AI หลายตัวแทน (⭐⭐⭐⭐ - 2-3 ชั่วโมง)
+  - บทที่ 6: การตรวจสอบและวางแผนก่อนปรับใช้ (⭐⭐ - 1 ชั่วโมง)
+  - บทที่ 7: การแก้ไขปัญหาและดีบัก (⭐⭐ - 1-1.5 ชั่วโมง)
+  - บทที่ 8: รูปแบบการผลิตและองค์กร (⭐⭐⭐⭐ - 2-3 ชั่วโมง)
+- **📚 ระบบการนำทางครบวงจร**: หัวข้อและท้ายหน้าการนำทางสอดคล้องกันทั่วเอกสารทั้งหมด
+- **🎯 การติดตามความก้าวหน้า**: รายการตรวจสอบการทำหลักสูตรให้เสร็จและระบบการตรวจสอบการเรียนรู้
+- **🗺️ แนวทางเส้นทางการเรียนรู้**: จุดเข้าที่ชัดเจนสำหรับระดับประสบการณ์และเป้าหมายต่างๆ
+- **🔗 การนำทางอ้างอิงข้าม**: การเชื่อมโยงบทเรียนที่เกี่ยวข้องและเงื่อนไขเบื้องต้นอย่างชัดเจน
 
 #### ปรับปรุง
-- **โครงสร้าง README**: เปลี่ยนเป็นแพลตฟอร์มการเรียนรู้ที่มีโครงสร้างแบ่งบท
-- **การนำทางเอกสาร**: ทุกหน้ามีบริบทบทเรียนและแนะแนวความก้าวหน้า
-- **การจัดระเบียบแม่แบบ**: แม่แบบและตัวอย่างแมปเข้าบทเรียนที่เหมาะสม
-- **การบูรณาการแหล่งข้อมูล**: cheat sheets, FAQs, และคู่มือศึกษาผูกกับบทเรียนที่เกี่ยวข้อง
-- **การรวมเวิร์กช็อป**: ห้องปฏิบัติการแบบลงมือทำแมปเข้ากับเป้าหมายการเรียนรู้หลายบท
+- **โครงสร้าง README**: ปรับเป็นแพลตฟอร์มการเรียนรู้ที่มีการจัดระเบียบตามบทเรียน
+- **การนำทางเอกสาร**: ทุกหน้าประกอบด้วยบริบทบทเรียนและคำแนะนำความก้าวหน้า
+- **การจัดระเบียบเทมเพลต**: ตัวอย่างและเทมเพลตแมปไปยังบทเรียนที่เหมาะสม
 
-#### เปลี่ยนแปลง
-- **ลำดับการเรียนรู้**: จากเอกสารเชิงเส้นเป็นระบบเรียนแบบแบ่งบทที่ยืดหยุ่น
-- **ตำแหน่งคู่มือกำหนดค่า**: ย้ายเป็น บทที่ 3 เพื่อการเรียนรู้ที่ลื่นไหลขึ้น
-- **รวมเนื้อหา AI**: เนื้อหาเฉพาะ AI รวมอย่างเหมาะสมทั่วเส้นทางเรียนรู้
-- **เนื้อหาเกี่ยวกับการผลิต**: รวมรูปแบบขั้นสูงในบทที่ 8 สำหรับผู้เรียนระดับองค์กร
+- **การบูรณาการทรัพยากร**: เอกสารช่วยจำ คำถามที่พบบ่อย และคู่มือการศึกษาเชื่อมโยงกับบทที่เกี่ยวข้อง
+- **การบูรณาการเวิร์กช็อป**: ห้องปฏิบัติการเชิงปฏิบัติที่เชื่อมโยงกับเป้าหมายการเรียนรู้หลายบท
 
-#### ปรับปรุงเพิ่มเติม
-- **ประสบการณ์ผู้ใช้**: มี breadcrumb การนำทางและตัวบ่งชี้ความก้าวหน้าชัดเจน
-- **การเข้าถึง**: รูปแบบการนำทางสม่ำเสมอช่วยให้เรียนรู้ได้ง่ายขึ้น
-- **การนำเสนออย่างมืออาชีพ**: โครงสร้างหลักสูตรแบบมหาวิทยาลัย เหมาะสำหรับการฝึกอบรมทั้งทางวิชาการและธุรกิจ
-- **ประสิทธิภาพการเรียนรู้**: ลดเวลาค้นหาเนื้อหาที่เกี่ยวข้องด้วยการจัดระเบียบดีขึ้น
+#### ได้เปลี่ยนแปลง
+- **ลำดับการเรียนรู้**: ย้ายจากเอกสารเชิงเส้นไปสู่การเรียนรู้ที่ยืดหยุ่นโดยใช้บทเป็นฐาน
+- **การวางตำแหน่งการกำหนดค่า**: ย้ายคู่มือการกำหนดค่าเป็นบทที่ 3 เพื่อให้การเรียนรู้เป็นไปอย่างราบรื่นยิ่งขึ้น
+- **การบูรณาการเนื้อหา AI**: การรวมเนื้อหาเฉพาะ AI ที่ดีขึ้นตลอดการเดินทางการเรียนรู้
+- **เนื้อหาการผลิต**: รูปแบบขั้นสูงถูกรวมในบทที่ 8 สำหรับผู้เรียนระดับองค์กร
 
-#### การดำเนินการทางเทคนิค
-- **หัวเรื่องนำทาง**: นำทางบทเรียนเป็นมาตรฐานในเอกสารกว่า 40 ไฟล์
-- **ส่วนท้ายการนำทาง**: แนะแนวความก้าวหน้าและตัวบ่งชี้การจบบทสม่ำเสมอ
-- **การเชื่อมโยงข้าม**: ระบบเชื่อมโยงภายในครอบคลุมเชื่อมโยงความคิดที่เกี่ยวข้อง
-- **การแมปบทเรียน**: แม่แบบและตัวอย่างเชื่อมโยงอย่างชัดเจนกับเป้าหมายการเรียนรู้
+#### ได้รับการปรับปรุง
+- **ประสบการณ์ผู้ใช้**: เส้นทางนำทางที่ชัดเจนและตัวบ่งชี้ความก้าวหน้าของบท
+- **การเข้าถึง**: รูปแบบการนำทางที่สม่ำเสมอเพื่อให้ง่ายต่อการเรียนหลักสูตร
+- **การนำเสนอระดับมืออาชีพ**: โครงสร้างหลักสูตรสไตล์มหาวิทยาลัย เหมาะสำหรับการฝึกอบรมทั้งในเชิงวิชาการและองค์กร
+- **ประสิทธิภาพการเรียนรู้**: ลดเวลาการค้นหาเนื้อหาที่เกี่ยวข้องผ่านการจัดระเบียบที่ดีขึ้น
 
-#### ปรับปรุงคู่มือการศึกษา
-- **📚 วัตถุประสงค์การเรียนรู้ครบถ้วน**: รีโครงสร้างคู่มือศึกษาตามระบบ 8 บท
-- **🎯 การประเมินแบบแบ่งบท**: แต่ละบทมีวัตถุประสงค์เฉพาะและแบบฝึกหัดปฏิบัติ
-- **📋 การติดตามความก้าวหน้า**: ตารางเรียนรายสัปดาห์พร้อมผลลัพธ์ที่วัดได้และรายการตรวจสอบการจบ
-- **❓ คำถามประเมิน**: ตรวจสอบความรู้ในแต่ละบทพร้อมผลลัพธ์เชิงมืออาชีพ
-- **🛠️ แบบฝึกหัดปฏิบัติ**: กิจกรรมลงมือทำพร้อมสถานการณ์ดีพลอยจริงและแก้ไขปัญหา
-- **📊 การก้าวหน้าทักษะ**: ก้าวจากแนวคิดพื้นฐานสู่รูปแบบองค์กรอย่างชัดเจน พร้อมเน้นพัฒนาการทางอาชีพ
-- **🎓 กรอบใบรับรอง**: ผลลัพธ์พัฒนาวิชาชีพและระบบยอมรับในชุมชน
-- **⏱️ การจัดการไทม์ไลน์**: แผนเรียน 10 สัปดาห์ที่มีการตรวจสอบตามเป้าหมาย
+#### การดำเนินการเชิงเทคนิค
+- **หัวเรื่องการนำทาง**: มาตรฐานการนำทางบทในเอกสารกว่า 40 ไฟล์
+- **ส่วนท้ายการนำทาง**: คำแนะนำการก้าวหน้าและตัวบ่งชี้การเสร็จสิ้นบทที่สม่ำเสมอ
+- **การเชื่อมโยงข้าม**: ระบบลิงก์ภายในอย่างครบถ้วนที่เชื่อมโยงแนวคิดที่เกี่ยวข้อง
+- **การทำแผนที่บท**: แม่แบบและตัวอย่างที่เชื่อมโยงอย่างชัดเจนกับเป้าหมายการเรียนรู้
+
+#### การปรับปรุงคู่มือการศึกษา
+- **📚 เป้าหมายการเรียนรู้อย่างครบถ้วน**: ปรับโครงสร้างคู่มือการศึกษาให้สอดคล้องกับระบบ 8 บท
+- **🎯 การประเมินผลแบบบทเป็นฐาน**: แต่ละบทประกอบด้วยเป้าหมายการเรียนรู้เฉพาะและแบบฝึกหัดเชิงปฏิบัติ
+- **📋 การติดตามความก้าวหน้า**: กำหนดการเรียนรู้รายสัปดาห์พร้อมผลลัพธ์ที่วัดได้และรายการตรวจสอบการเสร็จสิ้น
+- **❓ คำถามการประเมินผล**: คำถามยืนยันความรู้สำหรับแต่ละบทพร้อมผลลัพธ์ระดับมืออาชีพ
+- **🛠️ แบบฝึกหัดเชิงปฏิบัติ**: กิจกรรมปฏิบัติพร้อมสถานการณ์การปรับใช้จริงและการแก้ไขปัญหา
+- **📊 ความก้าวหน้าทักษะ**: ความก้าวหน้าชัดเจนจากแนวคิดพื้นฐานสู่รูปแบบองค์กรพร้อมโฟกัสการพัฒนาอาชีพ
+- **🎓 กรอบการรับรอง**: ผลลัพธ์การพัฒนาวิชาชีพและระบบการยอมรับในชุมชน
+- **⏱️ การจัดการไทม์ไลน์**: แผนการเรียนรู้ระยะเวลา 10 สัปดาห์ พร้อมการตรวจสอบจุดสำคัญ
 
 ### [v3.1.0] - 2025-09-17
 
-#### ปรับปรุงโซลูชัน AI หลายเอเจนต์
-**เวอร์ชันนี้พัฒนาโซลูชันร้านค้าปลีกหลายเอเจนต์ด้วยการตั้งชื่อเอเจนต์ที่ชัดเจนและเอกสารที่ดียิ่งขึ้น**
+#### การปรับปรุงโซลูชัน AI หลายตัวแทน
+**เวอร์ชันนี้ปรับปรุงโซลูชันค้าปลีกหลายตัวแทนด้วยการตั้งชื่อตัวแทนที่ดีขึ้นและเอกสารที่ได้รับการปรับปรุง**
 
-#### เปลี่ยนแปลง
-- **คำศัพท์หลายเอเจนต์**: แทนที่ "เอเจนต์ Cora" ด้วย "เอเจนต์ลูกค้า" ในโซลูชันร้านค้าปลีกหลายเอเจนต์ทั้งหมดเพื่อความเข้าใจที่ชัดเจนขึ้น
-- **สถาปัตยกรรมเอเจนต์**: อัปเดตเอกสารทั้งหมด, แม่แบบ ARM และตัวอย่างโค้ดให้ใช้ชื่อ "เอเจนต์ลูกค้า" อย่างสม่ำเสมอ
-- **ตัวอย่างกำหนดค่า**: ปรับปรุงรูปแบบกำหนดค่าเอเจนต์ด้วยการตั้งชื่อที่ทันสมัย
-- **ความสอดคล้องเอกสาร**: ตรวจสอบว่าอ้างอิงทั้งหมดใช้ชื่อเอเจนต์ที่มืออาชีพและอธิบายความหมายได้
+#### ได้เปลี่ยนแปลง
+- **คำศัพท์หลายตัวแทน**: แทนที่ "ตัวแทนโคระ" ด้วย "ตัวแทนลูกค้า" ในโซลูชันค้าปลีกหลายตัวแทนเพื่อความเข้าใจที่ชัดเจนขึ้น
+- **สถาปัตยกรรมตัวแทน**: อัปเดตเอกสาร แม่แบบ ARM และตัวอย่างโค้ดให้ใช้ชื่อตัวแทน "Customer agent" อย่างสม่ำเสมอ
+- **ตัวอย่างการกำหนดค่า**: ปรับปรุงรูปแบบการกำหนดค่าตัวแทนด้วยการตั้งชื่อที่ทันสมัย
+- **ความสอดคล้องของเอกสาร**: รับรองว่าอ้างอิงทั้งหมดใช้ชื่อตัวแทนที่เป็นมืออาชีพและมีคำอธิบาย
 
-#### ปรับปรุง
-- **แพ็คเกจแม่แบบ ARM**: อัปเดต retail-multiagent-arm-template ด้วยอ้างอิงเอเจนต์ลูกค้า
-- **ไดอะแกรมสถาปัตยกรรม**: รีเฟรชไดอะแกรม Mermaid ด้วยการตั้งชื่อเอเจนต์ใหม่
-- **ตัวอย่างโค้ด**: คลาส Python และตัวอย่างการใช้งานใช้ชื่อ CustomerAgent แล้ว
-- **ตัวแปรสภาพแวดล้อม**: อัปเดตสคริปต์การดีพลอยทั้งหมดให้ใช้แบบแผน CUSTOMER_AGENT_NAME
+#### ได้รับการปรับปรุง
+- **แพ็คเกจแม่แบบ ARM**: อัปเดต retail-multiagent-arm-template พร้อมการอ้างอิง Customer agent
+- **แผนภาพสถาปัตยกรรม**: ปรับปรุงแผนภาพ Mermaid พร้อมชื่อทตัวแทนอัปเดต
+- **ตัวอย่างโค้ด**: คลาส Python และตัวอย่างการนำไปใช้ใช้ชื่อ CustomerAgent
+- **ตัวแปรสภาพแวดล้อม**: ปรับสคริปต์การปรับใช้ทั้งหมดใช้รูปแบบ CUSTOMER_AGENT_NAME
 
-#### ปรับปรุงเพิ่มเติม
-- **ประสบการณ์นักพัฒนา**: บทบาทและความรับผิดชอบของเอเจนต์ชัดเจนขึ้นในเอกสาร
-- **ความพร้อมในการผลิต**: สอดคล้องดีกับคอนเวนชันชื่อขององค์กร
-- **วัสดุการเรียนรู้**: การตั้งชื่อเอเจนต์เป็นมิตรกว่าเพื่อการศึกษา
-- **การใช้งานแม่แบบ**: เข้าใจง่ายขึ้นเกี่ยวกับฟังก์ชันและรูปแบบการดีพลอยเอเจนต์
+#### ได้รับการปรับปรุง
+- **ประสบการณ์นักพัฒนา**: บทบาทและความรับผิดชอบของตัวแทนชัดเจนในเอกสาร
+- **ความพร้อมใช้งานในผลิต**: การตั้งชื่อที่สอดคล้องกับองค์กรดีขึ้น
+- **วัสดุการเรียนรู้**: การตั้งชื่อตัวแทนที่เข้าใจง่ายขึ้นเพื่อการศึกษา
+- **การใช้งานแม่แบบ**: ความเข้าใจง่ายขึ้นเกี่ยวกับหน้าที่ตัวแทนและรูปแบบการปรับใช้
 
-#### รายละเอียดทางเทคนิค
-- อัปเดตไดอะแกรม Mermaid ด้วยการอ้างอิง CustomerAgent
+#### รายละเอียดเชิงเทคนิค
+- อัปเดตแผนภาพสถาปัตยกรรม Mermaid พร้อมการอ้างอิง CustomerAgent
 - แทนที่ชื่อคลาส CoraAgent ด้วย CustomerAgent ในตัวอย่าง Python
-- แก้ไขการตั้งค่า JSON ของแม่แบบ ARM ให้ใช้ประเภทเอเจนต์ "customer"
+- ปรับแต่งการกำหนดค่า ARM template JSON ให้ใช้ประเภทตัวแทน "customer"
 - อัปเดตตัวแปรสภาพแวดล้อมจาก CORA_AGENT_* เป็น CUSTOMER_AGENT_*
-- รีเฟรชคำสั่งดีพลอยและการตั้งค่าคอนเทนเนอร์ทั้งหมด
+- ปรับปรุงคำสั่งการปรับใช้และการกำหนดค่าคอนเทนเนอร์ทั้งหมด
 
 ### [v3.0.0] - 2025-09-12
 
-#### การเปลี่ยนแปลงครั้งใหญ่ - เน้นนักพัฒนา AI และการรวม Microsoft Foundry
-**เวอร์ชันนี้เปลี่ยนคลังข้อมูลเป็นแหล่งเรียนรู้ที่มุ่งเน้น AI อย่างครบวงจรพร้อมการรวม Microsoft Foundry**
+#### การเปลี่ยนแปลงครั้งใหญ่ - โฟกัสนักพัฒนา AI และการบูรณาการ Microsoft Foundry
+**เวอร์ชันนี้เปลี่ยนที่เก็บข้อมูลให้เป็นแหล่งเรียนรู้ AI ครบวงจรพร้อมการบูรณาการ Microsoft Foundry**
 
 #### เพิ่มเติม
-- **🤖 เส้นทางการเรียนรู้ AI-First**: รีโครงสร้างทั้งหมดเน้นนักพัฒนาและวิศวกร AI
-- **คู่มือการรวม Microsoft Foundry**: เอกสารครบถ้วนสำหรับการเชื่อมต่อ AZD กับบริการ Microsoft Foundry
-- **รูปแบบการดีพลอยโมเดล AI**: คู่มืออย่างละเอียดครอบคลุมการเลือกโมเดล, กำหนดค่า และกลยุทธ์การดีพลอยในสภาพแวดล้อมผลิตจริง
-- **ห้องปฏิบัติการเวิร์กช็อป AI**: เวิร์กช็อปเชิงปฏิบัติการ 2-3 ชั่วโมงสำหรับการแปลงแอปพลิเคชัน AI เป็นโซลูชันที่สามารถนำไปใช้งานได้ด้วย AZD  
-- **แนวทางปฏิบัติที่ดีที่สุดสำหรับ AI ในการผลิต**: แบบแผนสำหรับองค์กรที่พร้อมสำหรับการขยายขนาด การตรวจสอบ และการรักษาความปลอดภัยเวิร์กโหลด AI  
-- **คู่มือแก้ไขปัญหาเฉพาะ AI**: การแก้ไขปัญหาอย่างครอบคลุมสำหรับ Microsoft Foundry Models, Cognitive Services, และปัญหาการปรับใช้ AI  
-- **แกลเลอรีเทมเพลต AI**: คอลเล็คชันเทมเพลต Microsoft Foundry ที่คัดสรรพร้อมคำจำกัดความความซับซ้อน  
-- **วัสดุสำหรับเวิร์กช็อป**: โครงสร้างเวิร์กช็อปครบถ้วนพร้อมห้องปฏิบัติการเชิงปฏิบัติการและวัสดุอ้างอิง  
+- **🤖 เส้นทางการเรียนรู้ AI-First**: ปรับโครงสร้างใหม่ทั้งหมดโดยเน้นนักพัฒนาและวิศวกร AI
+- **คู่มือการบูรณาการ Microsoft Foundry**: เอกสารครบถ้วนสำหรับการเชื่อมต่อ AZD กับบริการ Microsoft Foundry
+- **รูปแบบการปรับใช้โมเดล AI**: คู่มือโดยละเอียดครอบคลุมการเลือกโมเดล การกำหนดค่า และกลยุทธ์การปรับใช้ในสภาพแวดล้อมจริง
+- **ห้องปฏิบัติการเวิร์กช็อป AI**: เวิร์กช็อปเชิงปฏิบัติ 2-3 ชั่วโมงสำหรับการแปลงแอป AI เป็นโซลูชันที่ปรับใช้ด้วย AZD
+- **แนวทางปฏิบัติที่ดีที่สุดสำหรับผลิต AI**: รูปแบบที่พร้อมใช้งานระดับองค์กรสำหรับการปรับขนาด การเฝ้าติดตาม และการรักษาความปลอดภัยงาน AI
+- **คู่มือการแก้ไขปัญหา AI เฉพาะ**: การแก้ไขปัญหาอย่างครบถ้วนสำหรับ Microsoft Foundry Models, Cognitive Services, และปัญหาการปรับใช้ AI
+- **แกลเลอรีแม่แบบ AI**: คอลเลกชันแม่แบบ Microsoft Foundry พร้อมการจัดอันดับความซับซ้อน
+- **วัสดุเวิร์กช็อป**: โครงสร้างเวิร์กช็อปครบถ้วนพร้อมห้องปฏิบัติการเชิงปฏิบัติและเอกสารอ้างอิง
 
-#### ปรับปรุงเพิ่มเติม  
-- **โครงสร้าง README**: มุ่งเน้นนักพัฒนา AI พร้อมข้อมูลความสนใจจากชุมชน 45% จาก Microsoft Foundry Discord  
-- **เส้นทางการเรียนรู้**: เส้นทางสำหรับนักพัฒนา AI เฉพาะทางควบคู่กับเส้นทางปกติสำหรับนักเรียนและวิศวกร DevOps  
-- **คำแนะนำเทมเพลต**: เทมเพลต AI ที่โดดเด่น รวมถึง azure-search-openai-demo, contoso-chat, และ openai-chat-app-quickstart  
-- **การรวมชุมชน**: การสนับสนุนชุมชน Discord ที่ดีขึ้นพร้อมช่องทางและการสนทนาเฉพาะ AI  
+#### ได้รับการปรับปรุง
+- **โครงสร้าง README**: โฟกัสนักพัฒนา AI โดยมีข้อมูลความสนใจในชุมชน 45% จาก Discord Microsoft Foundry
+- **เส้นทางการเรียนรู้**: เส้นทางนักพัฒนา AI แยกเฉพาะควบคู่ไปกับเส้นทางแบบดั้งเดิมสำหรับนักศึกษาและวิศวกร DevOps
+- **คำแนะนำแม่แบบ**: แม่แบบ AI ที่โดดเด่นได้แก่ azure-search-openai-demo, contoso-chat, และ openai-chat-app-quickstart
+- **การบูรณาการชุมชน**: การสนับสนุนชุมชน Discord ที่ดีขึ้น พร้อมช่องและการอภิปรายเฉพาะ AI
 
-#### การมุ่งเน้นด้านความปลอดภัยและการผลิต  
-- **รูปแบบการจัดการตัวตน**: การรับรองความถูกต้องและการตั้งค่าความปลอดภัยเฉพาะ AI  
-- **การปรับค่าใช้จ่ายให้เหมาะสม**: การติดตามการใช้โทเค็นและการควบคุมงบประมาณสำหรับเวิร์กโหลด AI  
-- **การปรับใช้หลายภูมิภาค**: กลยุทธ์สำหรับการปรับใช้แอปพลิเคชัน AI ทั่วโลก  
-- **การตรวจสอบประสิทธิภาพ**: ตัวชี้วัดเฉพาะ AI และการรวม Application Insights  
+#### มุ่งเน้นความปลอดภัยและผลิต
+- **รูปแบบการจัดการตัวตน**: การยืนยันตัวตนและการตั้งค่าความปลอดภัยเฉพาะ AI
+- **การปรับใช้ต้นทุนให้เหมาะสม**: การติดตามการใช้โทเคนและควบคุมงบประมาณสำหรับงาน AI
+- **การปรับใช้หลายภูมิภาค**: กลยุทธ์สำหรับการปรับใช้แอป AI ทั่วโลก
+- **การเฝ้าติดตามประสิทธิภาพ**: เมตริกเฉพาะ AI และการบูรณาการ Application Insights
 
-#### คุณภาพเอกสาร  
-- **โครงสร้างหลักสูตรเชิงเส้น**: ความก้าวหน้าตามตรรกะจากแบบแผนการปรับใช้ AI ระดับเริ่มต้นถึงขั้นสูง  
-- **URL ที่ผ่านการตรวจสอบ**: ลิงก์ไปยังแหล่งที่มาภายนอกทั้งหมดได้รับการตรวจสอบและเข้าใช้งานได้  
-- **ข้อมูลอ้างอิงครบถ้วน**: ลิงก์เอกสารภายในทั้งหมดได้รับการตรวจสอบและใช้งานได้  
-- **พร้อมสำหรับการผลิต**: แบบแผนการปรับใช้ระดับองค์กรพร้อมตัวอย่างโลกจริง  
+#### คุณภาพเอกสาร
+- **โครงสร้างหลักสูตรเชิงเส้น**: ลำดับตรรกะจากมือใหม่สู่รูปแบบการปรับใช้ AI ขั้นสูง
+- **URL ที่ตรวจสอบแล้ว**: ลิงก์ภายนอกทั้งหมดได้รับการยืนยันและเข้าถึงได้
+- **เอกสารอ้างอิงครบถ้วน**: ลิงก์ภายในทั้งหมดได้รับการตรวจสอบและใช้งานได้
+- **พร้อมใช้งานในผลิต**: รูปแบบการปรับใช้ระดับองค์กรพร้อมตัวอย่างจากโลกจริง
 
 ### [v2.0.0] - 2025-09-09
 
-#### การเปลี่ยนแปลงหลัก - โครงสร้างใหม่ของที่เก็บและการปรับปรุงระดับมืออาชีพ  
-**เวอร์ชันนี้แสดงถึงการปรับโครงสร้างและการนำเสนอเนื้อหาของที่เก็บอย่างมีนัยสำคัญ**  
+#### การเปลี่ยนแปลงครั้งใหญ่ - การปรับโครงสร้างที่เก็บและการยกระดับมืออาชีพ
+**เวอร์ชันนี้เป็นการปรับโครงสร้างที่เก็บและการนำเสนอเนื้อหาอย่างมีนัยสำคัญ**
 
-#### เพิ่มเติม  
-- **กรอบการเรียนรู้ที่มีโครงสร้าง**: หน้าทุกหน้าของเอกสารประกอบด้วยบทนำ, เป้าหมายการเรียนรู้, และผลลัพธ์การเรียนรู้  
-- **ระบบการนำทาง**: เพิ่มลิงก์บทเรียนก่อนหน้า/ถัดไปทั่วเอกสารเพื่อความก้าวหน้าที่มีการแนะนำ  
-- **คู่มือการศึกษา**: study-guide.md ครอบคลุมวัตถุประสงค์การเรียนรู้, แบบฝึกหัดปฏิบัติ, และวัสดุการประเมิน  
-- **การนำเสนอแบบมืออาชีพ**: ลบไอคอนอีโมจิทั้งหมดเพื่อปรับปรุงการเข้าถึงและความเป็นมืออาชีพ  
-- **โครงสร้างเนื้อหาที่ดีขึ้น**: การจัดระเบียบและลำดับการไหลของวัสดุการเรียนรู้ที่ดีขึ้น  
+#### เพิ่มเติม
+- **กรอบการเรียนรู้ที่มีโครงสร้าง**: หน้าเอกสารทั้งหมดมีบทนำ เป้าหมายการเรียนรู้ และผลลัพธ์การเรียนรู้
+- **ระบบนำทาง**: เพิ่มลิงก์บทเรียนก่อนหน้า/ถัดไปในเอกสารทั้งหมดเพื่อการเรียนรู้อย่างมีขั้นตอน
+- **คู่มือการศึกษา**: study-guide.md ครบถ้วนพร้อมเป้าหมายการเรียนรู้ แบบฝึกหัด และวัสดุประเมินผล
+- **การนำเสนอแบบมืออาชีพ**: ลบไอคอนอีโมจิทั้งหมดเพื่อการเข้าถึงและรูปลักษณ์มืออาชีพที่ดีขึ้น
+- **โครงสร้างเนื้อหาปรับปรุง**: การจัดระเบียบและการไหลของวัสดุการเรียนรู้ที่ดีขึ้น
 
-#### การเปลี่ยนแปลง  
-- **รูปแบบเอกสาร**: มาตรฐานเอกสารทั้งหมดด้วยโครงสร้างเน้นการเรียนรู้อย่างสอดคล้อง  
-- **ลำดับการนำทาง**: นำทางตามความก้าวหน้าแบบตรรกะผ่านเนื้อหาการเรียนรู้ทั้งหมด  
-- **การนำเสนอเนื้อหา**: ลบองค์ประกอบตกแต่งเพื่อความชัดเจนและการจัดรูปแบบแบบมืออาชีพ  
-- **โครงสร้างลิงก์**: อัปเดตลิงก์ภายในทั้งหมดเพื่อรองรับระบบนำทางใหม่  
+#### ได้เปลี่ยนแปลง
+- **รูปแบบเอกสาร**: มาตรฐานเอกสารทั้งหมดด้วยโครงสร้างเน้นการเรียนรู้ที่สม่ำเสมอ
+- **การไหลของการนำทาง**: ดำเนินการลำดับตรรกะผ่านวัสดุการเรียนรู้ทั้งหมด
+- **การนำเสนอเนื้อหา**: ลบองค์ประกอบตกแต่งเพื่อความชัดเจนและการจัดรูปแบบมืออาชีพ
+- **โครงสร้างลิงก์**: ปรับลิงก์ภายในทั้งหมดเพื่อรองรับระบบนำทางใหม่
 
-#### ปรับปรุง  
-- **การเข้าถึง**: ลบการพึ่งพาอีโมจิเพื่อรองรับการอ่านด้วยหน้าจอได้ดีขึ้น  
-- **ภาพลักษณ์มืออาชีพ**: การนำเสนอที่สะอาดและในสไตล์เชิงวิชาการเหมาะกับการเรียนรู้ระดับองค์กร  
-- **ประสบการณ์การเรียนรู้**: วิธีการมีโครงสร้างพร้อมวัตถุประสงค์และผลลัพธ์ชัดเจนสำหรับแต่ละบทเรียน  
-- **การจัดการเนื้อหา**: ลำดับการไหลและความเชื่อมโยงของหัวข้อที่เกี่ยวข้องดีขึ้น  
+#### ได้รับการปรับปรุง
+- **การเข้าถึง**: ลบการพึ่งพาอีโมจิเพื่อรองรับเครื่องอ่านหน้าจอดีขึ้น
+- **รูปลักษณ์มืออาชีพ**: การนำเสนอสไตล์วิชาการที่เหมาะสมสำหรับการเรียนรู้ในองค์กร
+- **ประสบการณ์การเรียนรู้**: แนวทางมีโครงสร้างพร้อมเป้าหมายและผลลัพธ์ที่ชัดเจนในแต่ละบทเรียน
+- **การจัดระเบียบเนื้อหา**: การไหลที่ดีขึ้นและการเชื่อมโยงระหว่างหัวข้อที่เกี่ยวข้อง
 
 ### [v1.0.0] - 2025-09-09
 
-#### การเปิดตัวครั้งแรก - ที่เก็บการเรียนรู้ AZD ครบวงจร  
+#### การเปิดตัวครั้งแรก - ที่เก็บการเรียนรู้ AZD ครบวงจร
 
-#### เพิ่มเติม  
-- **โครงสร้างเอกสารหลัก**  
-  - ชุดคำแนะนำการเริ่มต้นใช้งานครบถ้วน  
-  - เอกสารการปรับใช้และจัดเตรียมอย่างละเอียด  
-  - แหล่งข้อมูลแก้ไขปัญหาและคู่มือดีบัก  
-  - เครื่องมือและขั้นตอนการตรวจสอบก่อนปรับใช้  
+#### เพิ่มเติม
+- **โครงสร้างเอกสารหลัก**
+  - ชุดคู่มือเริ่มต้นใช้งานครบถ้วน
+  - เอกสารการปรับใช้และจัดเตรียมครบถ้วน
+  - แหล่งข้อมูลแก้ไขปัญหาและคู่มือดีบักละเอียด
+  - เครื่องมือและขั้นตอนการตรวจสอบล่วงหน้าก่อนปรับใช้
 
-- **โมดูลเริ่มต้นใช้งาน**  
-  - พื้นฐาน AZD: แนวคิดและคำศัพท์หลัก  
-  - คู่มือการติดตั้ง: คำแนะนำการตั้งค่าเฉพาะแพลตฟอร์ม  
-  - คู่มือการตั้งค่า: การตั้งค่าสภาพแวดล้อมและการรับรองความถูกต้อง  
-  - แบบฝึกหัดโครงการแรก: เรียนรู้แบบก้าวต่อก้าวด้วยมือ  
+- **โมดูลเริ่มต้นใช้งาน**
+  - พื้นฐาน AZD: แนวคิดหลักและคำศัพท์
+  - คู่มือการติดตั้ง: คำแนะนำการตั้งค่าตามแพลตฟอร์ม
+  - คู่มือการกำหนดค่า: การตั้งค่าสภาพแวดล้อมและการยืนยันตัวตน
+  - บทเรียนโครงการแรก: เรียนรู้แบบทำตามขั้นตอน
 
-- **โมดูลการปรับใช้และการจัดเตรียม**  
-  - คู่มือการปรับใช้: เอกสารกระบวนการทำงานครบถ้วน  
-  - คู่มือการจัดเตรียม: Infrastructure as Code ด้วย Bicep  
-  - แนวทางปฏิบัติที่ดีที่สุดสำหรับการปรับใช้ในระดับการผลิต  
-  - แบบแผนสถาปัตยกรรมหลายบริการ  
+- **โมดูลการปรับใช้และจัดเตรียม**
+  - คู่มือการปรับใช้: เอกสารขั้นตอนงานครบถ้วน
+  - คู่มือการจัดเตรียม: โครงสร้างพื้นฐานเป็นโค้ดด้วย Bicep
+  - แนวทางปฏิบัติที่ดีที่สุดสำหรับการปรับใช้ในผลิต
+  - รูปแบบสถาปัตยกรรมหลายบริการ
 
-- **โมดูลการตรวจสอบก่อนปรับใช้**  
-  - การวางแผนความจุ: การตรวจสอบความพร้อมของทรัพยากร Azure  
-  - การเลือก SKU: คำแนะนำระดับบริการที่ครบถ้วน  
-  - การตรวจสอบก่อนบิน: สคริปต์ตรวจสอบอัตโนมัติ (PowerShell และ Bash)  
-  - เครื่องมือประมาณการค่าใช้จ่ายและวางแผนงบประมาณ  
+- **โมดูลตรวจสอบล่วงหน้าก่อนปรับใช้**
+  - การวางแผนความจุ: ตรวจสอบความพร้อมใช้งานทรัพยากร Azure
+  - การเลือก SKU: คำแนะนำระดับบริการครบถ้วน
+  - การตรวจสอบก่อนบิน: สคริปต์ตรวจสอบอัตโนมัติ (PowerShell และ Bash)
+  - เครื่องมือประมาณต้นทุนและวางแผนงบประมาณ
 
-- **โมดูลการแก้ไขปัญหา**  
-  - ปัญหาทั่วไป: ปัญหาที่พบบ่อยและวิธีแก้ไข  
-  - คู่มือดีบัก: วิธีการแก้ไขปัญหาอย่างมีระบบ  
-  - เทคนิคและเครื่องมือวินิจฉัยขั้นสูง  
-  - การตรวจสอบและปรับปรุงประสิทธิภาพ  
+- **โมดูลแก้ไขปัญหา**
+  - ปัญหาทั่วไป: ปัญหาที่พบบ่อยและวิธีแก้ไข
+  - คู่มือดีบัก: วิธีการแก้ไขปัญหาอย่างมีระบบ
+  - เทคนิคและเครื่องมือวินิจฉัยขั้นสูง
+  - การเฝ้าติดตามและปรับปรุงประสิทธิภาพ
 
-- **ทรัพยากรและข้อมูลอ้างอิง**  
-  - ชีทคำสั่งลัด: อ้างอิงคำสั่งสำคัญอย่างรวดเร็ว  
-  - พจนานุกรม: คำจำกัดความคำศัพท์และตัวย่อครบถ้วน  
-  - คำถามที่พบบ่อย: คำตอบโดยละเอียดสำหรับคำถามทั่วไป  
-  - ลิงก์ทรัพยากรภายนอกและการเชื่อมต่อชุมชน  
+- **ทรัพยากรและเอกสารอ้างอิง**
+  - เอกสารช่วยจำคำสั่ง: เอกสารย่อสำหรับคำสั่งสำคัญ
+  - พจนานุกรม: คำศัพท์และคำย่อครบถ้วน
+  - คำถามที่พบบ่อย: คำตอบโดยละเอียดสำหรับคำถามทั่วไป
+  - ลิงก์แหล่งข้อมูลภายนอกและการเชื่อมโยงชุมชน
 
-- **ตัวอย่างและเทมเพลต**  
-  - ตัวอย่างแอปพลิเคชันเว็บเรียบง่าย  
-  - เทมเพลตการปรับใช้เว็บไซต์แบบสแตติก  
-  - การตั้งค่าแอปคอนเทนเนอร์  
-  - แบบแผนการผสานฐานข้อมูล  
-  - ตัวอย่างสถาปัตยกรรมไมโครเซอร์วิส  
-  - การใช้งานฟังก์ชันเซิร์ฟเวอร์เลส  
+- **ตัวอย่างและแม่แบบ**
+  - ตัวอย่างเว็บแอปพลิเคชันง่ายๆ
+  - แม่แบบการปรับใช้เว็บไซต์แบบคงที่
+  - การกำหนดค่าแอปพลิเคชันคอนเทนเนอร์
+  - รูปแบบการรวมฐานข้อมูล
+  - ตัวอย่างสถาปัตยกรรมไมโครเซอร์วิส
+  - การนำไปใช้ฟังก์ชันแบบไม่ใช้เซิร์ฟเวอร์
 
-#### ฟีเจอร์  
-- **รองรับหลายแพลตฟอร์ม**: คู่มือการติดตั้งและตั้งค่าสำหรับ Windows, macOS, และ Linux  
-- **หลายระดับทักษะ**: เนื้อหาที่ออกแบบสำหรับนักเรียนถึงนักพัฒนามืออาชีพ  
-- **เน้นปฏิบัติจริง**: ตัวอย่างเชิงปฏิบัติและสถานการณ์จริง  
-- **ครอบคลุมครบถ้วน**: ตั้งแต่แนวคิดพื้นฐานจนถึงแบบแผนองค์กรขั้นสูง  
-- **เน้นความปลอดภัยเป็นหลัก**: แนวทางปฏิบัติความปลอดภัยทั่วทั้งเนื้อหา  
-- **การปรับค่าใช้จ่ายให้เหมาะสม**: คำแนะนำสำหรับการปรับใช้ต้นทุนต่ำและการจัดการทรัพยากร  
+#### คุณสมบัติ
+- **รองรับหลายแพลตฟอร์ม**: คู่มือการติดตั้งและกำหนดค่าสำหรับ Windows, macOS, และ Linux
+- **หลายระดับทักษะ**: เนื้อหาออกแบบสำหรับนักเรียนถึงนักพัฒนามืออาชีพ
+- **โฟกัสเชิงปฏิบัติ**: ตัวอย่างเชิงปฏิบัติและสถานการณ์โลกจริง
+- **ครอบคลุมครบถ้วน**: ตั้งแต่แนวคิดพื้นฐานถึงรูปแบบองค์กรขั้นสูง
+- **แนวทางรักษาความปลอดภัยเป็นอันดับแรก**: แนวทางปฏิบัติที่ดีที่สุดด้านความปลอดภัยครอบคลุมทั่วทั้งเนื้อหา
+- **การปรับใช้ต้นทุนคุ้มค่า**: คำแนะนำสำหรับการปรับใช้และการจัดการทรัพยากรอย่างมีประสิทธิภาพ
 
-#### คุณภาพเอกสาร  
-- **ตัวอย่างโค้ดละเอียด**: ตัวอย่างโค้ดที่ใช้งานจริงและทดสอบแล้ว  
-- **คำแนะนำทีละขั้นตอน**: คำแนะนำที่ชัดเจนและสามารถปฏิบัติตามได้  
-- **การจัดการข้อผิดพลาดครบถ้วน**: การแก้ไขปัญหาสำหรับปัญหาทั่วไป  
-- **การรวมแนวทางปฏิบัติที่ดีที่สุด**: มาตรฐานอุตสาหกรรมและคำแนะนำ  
-- **ความเข้ากันได้ของเวอร์ชัน**: เป็นปัจจุบันกับบริการ Azure ล่าสุดและฟีเจอร์ azd  
+#### คุณภาพเอกสาร
+- **ตัวอย่างโค้ดละเอียด**: ตัวอย่างโค้ดที่ผ่านการทดสอบเชิงปฏิบัติ
+- **คำแนะนำทีละขั้นตอน**: คำแนะนำที่ชัดเจนและปฏิบัติได้
+- **การจัดการข้อผิดพลาดครบถ้วน**: การแก้ไขปัญหาสำหรับปัญหาทั่วไป
+- **การรวมแนวทางปฏิบัติที่ดีที่สุด**: มาตรฐานอุตสาหกรรมและคำแนะนำ
+- **ความเข้ากันได้ของเวอร์ชัน**: อัปเดตทันสมัยกับบริการ Azure และฟีเจอร์ azd ล่าสุด
 
-## การปรับปรุงในอนาคตที่วางแผนไว้  
+## การปรับปรุงในอนาคตที่วางแผนไว้
 
-### เวอร์ชัน 3.1.0 (วางแผนไว้)  
-#### ขยายแพลตฟอร์ม AI  
-- **รองรับหลายโมเดล**: แบบแผนการผสานสำหรับ Hugging Face, Azure Machine Learning, และโมเดลแบบกำหนดเอง  
-- **กรอบงานตัวแทน AI**: เทมเพลตสำหรับ LangChain, Semantic Kernel, และ AutoGen การปรับใช้  
-- **แบบแผน RAG ขั้นสูง**: ตัวเลือกฐานข้อมูลเวกเตอร์นอกเหนือจาก Azure AI Search (Pinecone, Weaviate ฯลฯ)  
-- **การสามารถสังเกต AI**: การตรวจสอบที่ดีขึ้นสำหรับประสิทธิภาพโมเดล, การใช้โทเค็น, และคุณภาพการตอบสนอง  
+### เวอร์ชัน 3.1.0 (กำหนดไว้)
+#### การขยายแพลตฟอร์ม AI
+- **รองรับหลายโมเดล**: รูปแบบการรวมสำหรับ Hugging Face, Azure Machine Learning, และโมเดลกำหนดเอง
+- **กรอบงานเอเจนต์ AI**: แม่แบบสำหรับการปรับใช้ LangChain, Semantic Kernel, และ AutoGen
+- **รูปแบบ RAG ขั้นสูง**: ตัวเลือกฐานข้อมูลเวกเตอร์นอกเหนือจาก Azure AI Search (Pinecone, Weaviate ฯลฯ)
+- **การสังเกตการณ์ AI**: การเฝ้าติดตามประสิทธิภาพโมเดล การใช้โทเคน และคุณภาพการตอบสนองที่ได้รับการปรับปรุง
 
-#### ประสบการณ์นักพัฒนา  
-- **ส่วนขยาย VS Code**: ประสบการณ์การพัฒนาเชื่อมโยง AZD + Microsoft Foundry  
-- **การผสาน GitHub Copilot**: การสร้างเทมเพลต AZD ด้วย AI  
-- **บทเรียนเชิงโต้ตอบ**: แบบฝึกหัดเขียนโค้ดพร้อมการตรวจสอบอัตโนมัติสำหรับสถานการณ์ AI  
-- **เนื้อหาวิดีโอ**: วิดีโอเสริมสำหรับผู้เรียนแบบเห็นภาพเน้นการปรับใช้ AI  
+#### ประสบการณ์นักพัฒนา
+- **ส่วนขยาย VS Code**: ประสบการณ์การพัฒนา AZD + Microsoft Foundry แบบบูรณาการ
+- **การบูรณาการ GitHub Copilot**: การสร้างแม่แบบ AZD ด้วย AI
+- **บทช่วยสอนแบบโต้ตอบ**: แบบฝึกหัดเขียนโค้ดเชิงปฏิบัติพร้อมการตรวจสอบอัตโนมัติสำหรับสถานการณ์ AI
+- **เนื้อหาวิดีโอ**: บทช่วยสอนวิดีโอเสริมสำหรับผู้เรียนที่ชอบการเรียนรู้ด้วยภาพ มุ่งเน้นที่การปรับใช้ AI
 
-### เวอร์ชัน 4.0.0 (วางแผนไว้)  
-#### แบบแผน AI สำหรับองค์กร  
-- **กรอบการกำกับดูแล**: การกำกับดูแลโมเดล AI, การปฏิบัติตามข้อกำหนด, และบันทึกการตรวจสอบ  
-- **AI หลายผู้เช่า**: แบบแผนการให้บริการแก่ลูกค้าหลายรายด้วยบริการ AI แยกส่วน  
-- **การปรับใช้ AI ที่ Edge**: การผสานกับ Azure IoT Edge และอินสแตนซ์คอนเทนเนอร์  
-- **AI คลาวด์ไฮบริด**: แบบแผนการปรับใช้หลายคลาวด์และไฮบริดสำหรับเวิร์กโหลด AI  
+### เวอร์ชัน 4.0.0 (กำหนดไว้)
+#### รูปแบบ AI สำหรับองค์กร
+- **กรอบกำกับดูแล**: การกำกับดูแลโมเดล AI การปฏิบัติตาม และร่องรอยการตรวจสอบ
+- **AI สำหรับหลายผู้เช่า**: รูปแบบสำหรับให้บริการลูกค้าหลายรายพร้อมบริการ AI ที่แยกจากกัน
+- **การปรับใช้ Edge AI**: การรวมกับ Azure IoT Edge และอินสแตนซ์คอนเทนเนอร์
+- **AI คลาวด์แบบไฮบริด**: รูปแบบการปรับใช้หลายคลาวด์และแบบไฮบริดสำหรับงาน AI
 
-#### ฟีเจอร์ขั้นสูง  
-- **ระบบอัตโนมัติในสายงาน AI**: การผสาน MLOps กับ Azure Machine Learning pipelines  
-- **ความปลอดภัยขั้นสูง**: แบบแผน Zero-trust, จุดสิ้นสุดส่วนตัว, และการป้องกันภัยคุกคามขั้นสูง  
-- **การปรับปรุงประสิทธิภาพ**: การปรับจูนและขยายขนาดขั้นสูงสำหรับแอป AI ที่มี Throughput สูง  
-- **การกระจายทั่วโลก**: แบบแผนการส่งเนื้อหาและแคชชิ่ง edge สำหรับแอป AI  
+#### ฟีเจอร์ขั้นสูง
+- **ระบบอัตโนมัติ AI Pipeline**: การผสานงาน MLOps กับ Azure Machine Learning pipelines
+- **ความปลอดภัยขั้นสูง**: รูปแบบ zero-trust, private endpoints, และการป้องกันภัยคุกคามขั้นสูง
+- **การปรับแต่งประสิทธิภาพ**: การปรับจูนและปรับขนาดขั้นสูงสำหรับแอป AI ที่มีปริมาณข้อมูลสูง
+- **การแจกจ่ายทั่วโลก**: รูปแบบการจัดส่งเนื้อหาและการแคชที่ edge สำหรับแอป AI
 
-### เวอร์ชัน 3.0.0 (วางแผนไว้) - ถูกแทนที่ด้วยเวอร์ชันปัจจุบัน  
-#### การเพิ่มที่เสนอ - ได้ดำเนินการใน v3.0.0 แล้ว  
-- ✅ **เนื้อหาเน้น AI**: การผสาน Microsoft Foundry ครบถ้วน (เสร็จสมบูรณ์)  
-- ✅ **บทเรียนเชิงโต้ตอบ**: ห้องปฏิบัติการเวิร์กช็อป AI (เสร็จสมบูรณ์)  
-- ✅ **โมดูลความปลอดภัยขั้นสูง**: แบบแผนความปลอดภัยเฉพาะ AI (เสร็จสมบูรณ์)  
-- ✅ **การปรับปรุงประสิทธิภาพ**: กลยุทธ์ปรับแต่งเวิร์กโหลด AI (เสร็จสมบูรณ์)  
+### เวอร์ชัน 3.0.0 (กำหนดไว้) - ถูกแทนที่ด้วยการปล่อยปัจจุบัน
+#### การเพิ่มที่เสนอ - ดำเนินการแล้วใน v3.0.0
+- ✅ **เนื้อหาเน้น AI**: การบูรณาการ Microsoft Foundry อย่างครบถ้วน (เสร็จสิ้น)
+- ✅ **บทช่วยสอนแบบโต้ตอบ**: ห้องปฏิบัติการเวิร์กช็อป AI เชิงปฏิบัติ (เสร็จสิ้น)
+- ✅ **โมดูลความปลอดภัยขั้นสูง**: รูปแบบความปลอดภัยเฉพาะ AI (เสร็จสิ้น)
+- ✅ **การปรับแต่งประสิทธิภาพ**: กลยุทธ์การปรับแต่งงาน AI (เสร็จสิ้น)
 
-### เวอร์ชัน 2.1.0 (วางแผนไว้) - ดำเนินการบางส่วนใน v3.0.0  
-#### การปรับปรุงเล็กน้อย - บางส่วนเสร็จในเวอร์ชันปัจจุบัน  
-- ✅ **ตัวอย่างเพิ่มเติม**: สถานการณ์การปรับใช้ AI (เสร็จสมบูรณ์)  
-- ✅ **คำถามที่พบบ่อยขยาย**: คำถามและแก้ไขปัญหาเฉพาะ AI (เสร็จสมบูรณ์)  
-- **การผสานเครื่องมือ**: คู่มือการบูรณาการ IDE และตัวแก้ไขที่ดีขึ้น  
-- ✅ **การขยายการตรวจสอบ**: แบบแผนการตรวจสอบและแจ้งเตือนเฉพาะ AI (เสร็จสมบูรณ์)  
+### เวอร์ชัน 2.1.0 (กำหนดไว้) - ดำเนินการบางส่วนใน v3.0.0
+#### การปรับปรุงเล็กน้อย - บางส่วนเสร็จสิ้นในเวอร์ชันปัจจุบัน
+- ✅ **ตัวอย่างเพิ่มเติม**: สถานการณ์การปรับใช้เน้น AI (เสร็จสิ้น)
+- ✅ **คำถามที่พบบ่อยขยาย**: คำถามและการแก้ไขปัญหาเฉพาะ AI (เสร็จสิ้น)
+- **การบูรณาการเครื่องมือ**: คู่มือการบูรณาการ IDE และเครื่องมือ
+- ✅ **การขยายการเฝ้าติดตาม**: รูปแบบการเฝ้าติดตามและแจ้งเตือนเฉพาะ AI (เสร็จสิ้น)
 
-#### ยังวางแผนสำหรับเวอร์ชันอนาคต  
-- **เอกสารเหมาะกับมือถือ**: การออกแบบตอบสนองสำหรับการเรียนรู้บนมือถือ  
-- **เข้าถึงแบบออฟไลน์**: การดาวน์โหลดแพ็กเกจเอกสาร  
-- **การผสาน IDE ที่ดีขึ้น**: ส่วนขยาย VS Code สำหรับ AZD + เวิร์กโฟลว์ AI  
-- **แดชบอร์ดชุมชน**: เมตริกชุมชนเรียลไทม์และการติดตามการมีส่วนร่วม  
+#### ยังคงวางแผนสำหรับการปล่อยในอนาคต
+- **เอกสารที่เหมาะสำหรับอุปกรณ์เคลื่อนที่**: การออกแบบตอบสนองสำหรับการเรียนรู้บนมือถือ
+- **การเข้าถึงแบบออฟไลน์**: แพ็คเกจเอกสารที่ดาวน์โหลดได้
+- **การรวม IDE ที่เพิ่มประสิทธิภาพ**: ส่วนขยาย VS Code สำหรับ AZD + เวิร์กโฟลว์ AI
+- **แดชบอร์ดชุมชน**: ตัวชี้วัดชุมชนแบบเรียลไทม์และการติดตามการมีส่วนร่วม
 
 ## การมีส่วนร่วมในบันทึกการเปลี่ยนแปลง
 
-### การรายงานการเปลี่ยนแปลง  
-เมื่อมีการมีส่วนร่วมในที่เก็บนี้ กรุณาให้รายการบันทึกการเปลี่ยนแปลงรวมถึง:
+### การรายงานการเปลี่ยนแปลง
+เมื่อมีส่วนร่วมกับที่เก็บนี้ กรุณาให้แน่ใจว่ารายการบันทึกการเปลี่ยนแปลงประกอบด้วย:
 
-1. **หมายเลขเวอร์ชัน**: ตามการตั้งเลขเวอร์ชันแบบ Semantic (major.minor.patch)  
-2. **วันที่**: วันที่ออกหรืออัปเดตในรูปแบบ YYYY-MM-DD  
-3. **หมวดหมู่**: เพิ่ม, เปลี่ยนแปลง, เลิกใช้, ลบ, แก้ไข, ความปลอดภัย  
-4. **คำอธิบายชัดเจน**: คำอธิบายสั้น ๆ ของสิ่งที่เปลี่ยนแปลง  
-5. **การประเมินผลกระทบ**: ผลกระทบต่อผู้ใช้เดิมอย่างไร  
+1. **หมายเลขเวอร์ชัน**: ตามการเวอร์ชันแบบ semantic (major.minor.patch)
+2. **วันที่**: วันที่ปล่อยหรืออัปเดตในรูปแบบ YYYY-MM-DD
+3. **หมวดหมู่**: เพิ่ม, เปลี่ยนแปลง, เลิกใช้, ลบ, แก้ไข, ความปลอดภัย
+4. **คำอธิบายชัดเจน**: คำอธิบายสั้นๆ ว่ามีการเปลี่ยนแปลงอะไรบ้าง
+5. **การประเมินผลกระทบ**: การเปลี่ยนแปลงมีผลกระทบต่อผู้ใช้ที่มีอยู่หรือไม่อย่างไร
 
-### หมวดหมู่การเปลี่ยนแปลง  
+### หมวดหมู่การเปลี่ยนแปลง
 
-#### เพิ่ม  
-- ฟีเจอร์ใหม่, ส่วนของเอกสาร, หรือความสามารถ  
-- ตัวอย่าง, เทมเพลต, หรือทรัพยากรการเรียนรู้ใหม่  
-- เครื่องมือ, สคริปต์, หรือยูทิลิตี้เพิ่มเติม  
+#### เพิ่มเติม
+- ฟีเจอร์ใหม่ ส่วนเอกสาร หรือความสามารถใหม่
+- ตัวอย่างใหม่ แม่แบบ หรือแหล่งเรียนรู้
+- เครื่องมือ สคริปต์ หรือยูทิลิตี้เพิ่มเติม
 
-#### เปลี่ยนแปลง  
-- การแก้ไขฟังก์ชันหรือเอกสารที่มีอยู่  
-- การปรับปรุงเพื่อความชัดเจนหรือความถูกต้อง  
-- การจัดโครงสร้างเนื้อหาหรือการจัดระเบียบใหม่  
+#### เปลี่ยนแปลง
+- การแก้ไขฟังก์ชันหรือเอกสารที่มีอยู่
+- อัปเดตเพื่อปรับปรุงความชัดเจนหรือความถูกต้อง
+- การปรับโครงสร้างเนื้อหาหรือการจัดองค์กรใหม่
 
-#### เลิกใช้  
-- ฟีเจอร์หรือวิธีการที่จะเลิกใช้งาน  
-- ส่วนเอกสารที่กำหนดให้ถูกลบออกในอนาคต  
-- วิธีการที่มีทางเลือกที่ดีกว่า  
+#### เลิกใช้
+- ฟีเจอร์หรือวิธีการที่กำลังถูกยกเลิก
+- ส่วนเอกสารที่กำหนดเวลาจะถูกลบ
+- วิธีการที่มีทางเลือกที่ดีกว่า
 
-#### ลบ  
-- ฟีเจอร์, เอกสาร, หรือ ตัวอย่างที่ไม่เกี่ยวข้องแล้ว  
-- ข้อมูลล้าสมัยหรือวิธีการเลิกใช้  
-- เนื้อหาซ้ำซ้อนหรือต่อเนื่อง  
+#### ลบ
+- ฟีเจอร์ เอกสาร หรือ ตัวอย่างที่ไม่เกี่ยวข้องอีกต่อไป
+- ข้อมูลล้าสมัยหรือวิธีการเลิกใช้
+- เนื้อหาที่ซ้ำซ้อนหรือต้องรวมกัน
 
-#### แก้ไข  
-- การแก้ไขข้อผิดพลาดในเอกสารหรือโค้ด  
-- การแก้ไขปัญหาที่ได้รายงาน  
-- การปรับปรุงความถูกต้องหรือฟังก์ชันการทำงาน  
+#### แก้ไข
+- การแก้ไขข้อผิดพลาดในเอกสารหรือโค้ด
+- การแก้ปัญหาที่รายงาน
+- การปรับปรุงความถูกต้องหรือฟังก์ชัน
 
-#### ความปลอดภัย  
-- การปรับปรุงหรือแก้ไขด้านความปลอดภัย  
-- การอัปเดตแนวทางปฏิบัติที่ดีที่สุดด้านความปลอดภัย  
-- การแก้ไขช่องโหว่ด้านความปลอดภัย  
 
-### แนวทางการตั้งเลขเวอร์ชันแบบ Semantic  
+#### ความปลอดภัย
+- การปรับปรุงหรือแก้ไขที่เกี่ยวข้องกับความปลอดภัย
+- การอัปเดตแนวปฏิบัติที่ดีที่สุดด้านความปลอดภัย
+- การแก้ไขช่องโหว่ด้านความปลอดภัย
 
-#### เวอร์ชันหลัก (X.0.0)  
-- การเปลี่ยนแปลงใหญ่ที่ต้องการการดำเนินการจากผู้ใช้  
-- การปรับโครงสร้างเนื้อหาหรือองค์กรอย่างมีนัยสำคัญ  
-- การเปลี่ยนแปลงวิธีการหรือแนวทางพื้นฐาน  
+### แนวทางการเวอร์ชันทางความหมาย
 
-#### เวอร์ชันย่อย (X.Y.0)  
-- ฟีเจอร์หรือเนื้อหาใหม่เพิ่มเติม  
-- การปรับปรุงที่รักษาความเข้ากันได้ย้อนหลัง  
-- ตัวอย่าง, เครื่องมือ, หรือทรัพยากรเพิ่มเติม  
+#### เวอร์ชันใหญ่ (X.0.0)
+- การเปลี่ยนแปลงที่ส่งผลกระทบและต้องการการดำเนินการจากผู้ใช้
+- การปรับโครงสร้างเนื้อหาหรือองค์กรครั้งใหญ่
+- การเปลี่ยนแปลงที่เปลี่ยนแนวทางหรือวิธีการพื้นฐาน
 
-#### เวอร์ชันแก้ไข (X.Y.Z)  
-- การแก้ไขข้อผิดพลาดและแก้ไข  
-- การปรับปรุงเล็กน้อยของเนื้อหาที่มีอยู่  
-- การชี้แจงและการปรับปรุงเล็กน้อย  
+#### เวอร์ชันรอง (X.Y.0)
+- ฟีเจอร์ใหม่หรือการเพิ่มเนื้อหา
+- การปรับปรุงที่คงความเข้ากันได้ย้อนหลัง
+- ตัวอย่าง เครื่องมือ หรือทรัพยากรเพิ่มเติม
 
-## ข้อเสนอแนะและคำติชมจากชุมชน  
+#### เวอร์ชันแก้ไข (X.Y.Z)
+- การแก้ไขข้อบกพร่องและการแก้ไข
+- การปรับปรุงเล็กน้อยกับเนื้อหาที่มีอยู่
+- การชี้แจงและการปรับปรุงเล็กน้อย
 
-เราส่งเสริมให้ชุมชนแสดงความคิดเห็นเพื่อปรับปรุงแหล่งการเรียนรู้นี้อย่างจริงจัง:  
+## ข้อเสนอแนะและคำแนะนำจากชุมชน
 
-### วิธีให้ข้อเสนอแนะ  
-- **GitHub Issues**: รายงานปัญหาหรือแนะนำการปรับปรุง (ปัญหาเฉพาะ AI ยินดีต้อนรับ)  
-- **Discord Discussions**: แบ่งปันไอเดียและร่วมสนทนากับชุมชน Microsoft Foundry  
-- **Pull Requests**: มีส่วนร่วมในการปรับปรุงเนื้อหาโดยตรง โดยเฉพาะเทมเพลตและคู่มือ AI  
-- **Microsoft Foundry Discord**: เข้าร่วมช่อง #Azure สำหรับการสนทนา AZD + AI  
-- **ฟอรัมชุมชน**: เข้าร่วมการสนทนานักพัฒนา Azure ในวงกว้าง  
+เราสนับสนุนอย่างแข็งขันให้ชุมชนส่งข้อเสนอแนะเพื่อปรับปรุงแหล่งเรียนรู้นี้:
 
-### หมวดหมู่ข้อเสนอแนะ  
-- **ความถูกต้องของเนื้อหา AI**: การแก้ไขข้อมูลการผสานบริการ AI และการปรับใช้  
-- **ประสบการณ์การเรียนรู้**: ข้อเสนอแนะสำหรับการพัฒนาการเรียนรู้สำหรับนักพัฒนา AI  
-- **เนื้อหา AI ที่ขาดหาย**: คำขอสำหรับเทมเพลต, แบบแผน, หรือตัวอย่าง AI เพิ่มเติม  
-- **การเข้าถึง**: การปรับปรุงให้เหมาะกับความต้องการการเรียนรู้ที่หลากหลาย  
-- **การผสานเครื่องมือ AI**: ข้อเสนอสำหรับการปรับปรุงเวิร์กโฟลว์การพัฒนา AI  
-- **แบบแผน AI สำหรับการผลิต**: คำขอแบบแผนการปรับใช้ AI ระดับองค์กร  
+### วิธีการเสนอข้อเสนอแนะ
+- **GitHub Issues**: รายงานปัญหาหรือแนะนำการปรับปรุง (รับเรื่องปัญหาเฉพาะ AI ด้วย)
+- **Discord Discussions**: แชร์ไอเดียและมีส่วนร่วมกับชุมชน Microsoft Foundry
+- **Pull Requests**: มีส่วนร่วมในการปรับปรุงเนื้อหาอย่างตรงไปตรงมา โดยเฉพาะเทมเพลตและคำแนะนำ AI
+- **Microsoft Foundry Discord**: เข้าร่วมช่อง #Azure สำหรับการสนทนาเกี่ยวกับ AZD + AI
+- **Community Forums**: มีส่วนร่วมในการสนทนานักพัฒนา Azure ในวงกว้าง
 
-### ความมุ่งมั่นในการตอบรับ  
-- **การตอบปัญหา**: ภายใน 48 ชั่วโมงสำหรับปัญหาที่รายงาน  
-- **คำขอฟีเจอร์**: การประเมินภายในหนึ่งสัปดาห์  
-- **การมีส่วนร่วมของชุมชน**: การตรวจสอบภายในหนึ่งสัปดาห์  
-- **ปัญหาด้านความปลอดภัย**: ให้ความสำคัญทันทีโดยตอบกลับอย่างรวดเร็ว  
+### หมวดหมู่ข้อเสนอแนะ
+- **ความถูกต้องของเนื้อหา AI**: การแก้ไขข้อมูลการรวมและการปรับใช้บริการ AI
+- **ประสบการณ์การเรียนรู้**: ข้อเสนอแนะสำหรับการปรับปรุงกระบวนการเรียนรู้สำหรับนักพัฒนา AI
+- **เนื้อหา AI ที่ขาดหาย**: คำร้องขอเทมเพลต แพตเทิร์น หรือ ตัวอย่าง AI เพิ่มเติม
+- **การเข้าถึง**: การปรับปรุงเพื่อตอบสนองความต้องการการเรียนรู้ที่หลากหลาย
+- **การรวมเครื่องมือ AI**: ข้อเสนอแนะสำหรับการผสานรวมกระบวนการพัฒนา AI ที่ดีขึ้น
+- **แพตเทิร์น AI สำหรับการผลิต**: คำร้องขอแพตเทิร์นการปรับใช้ AI ในองค์กร
 
-## ตารางเวลาการบำรุงรักษา  
+### การตอบสนองที่รับประกัน
+- **การตอบปัญหา**: ภายใน 48 ชั่วโมงสำหรับปัญหาที่รายงาน
+- **คำร้องขอฟีเจอร์**: ประเมินภายในหนึ่งสัปดาห์
+- **การมีส่วนร่วมของชุมชน**: ตรวจสอบภายในหนึ่งสัปดาห์
+- **ปัญหาด้านความปลอดภัย**: ดำเนินการอย่างเร่งด่วนและให้ความสำคัญโดยทันที
 
-### การอัปเดตปกติ  
-- **การทบทวนรายเดือน**: ความถูกต้องเนื้อหาและการตรวจสอบลิงก์  
-- **การอัปเดตรายไตรมาส**: การเพิ่มเนื้อหาหลักและปรับปรุง  
-- **การทบทวนครึ่งปี**: การปรับโครงสร้างและปรับปรุงครบถ้วน  
-- **การปล่อยเวอร์ชันรายปี**: การอัปเดตเวอร์ชันหลักพร้อมการปรับปรุงสำคัญ  
+## ตารางเวลาการบำรุงรักษา
 
-### การตรวจสอบและประกันคุณภาพ  
-- **การทดสอบอัตโนมัติ**: การตรวจสอบตัวอย่างโค้ดและลิงก์เป็นประจำ  
-- **การรวมคำติชมจากชุมชน**: นำข้อเสนอแนะผู้ใช้เข้าสู่การทบทวนประจำ  
-- **การอัปเดตเทคโนโลยี**: สอดคล้องกับบริการ Azure ล่าสุดและอัปเดต azd  
-- **การตรวจสอบการเข้าถึง**: ทบทวนเป็นระยะเพื่อหลักการออกแบบที่รวมทุกคน  
+### การอัปเดตตามปกติ
+- **การตรวจสอบรายเดือน**: ความถูกต้องของเนื้อหาและการตรวจสอบลิงก์
+- **การอัปเดตทุกไตรมาส**: การเพิ่มและปรับปรุงเนื้อหาครั้งใหญ่
+- **การตรวจสอบทุกหกเดือน**: การปรับโครงสร้างและปรับปรุงอย่างครอบคลุม
+- **การปล่อยรายปี**: การอัปเดตเวอร์ชันใหญ่พร้อมการปรับปรุงที่สำคัญ
 
-## นโยบายการสนับสนุนเวอร์ชัน  
+### การตรวจสอบและประกันคุณภาพ
+- **การทดสอบอัตโนมัติ**: การตรวจสอบตัวอย่างโค้ดและลิงก์อย่างสม่ำเสมอ
+- **การผสมผสานข้อเสนอแนะจากชุมชน**: การนำข้อเสนอแนะของผู้ใช้เข้ามาใช้อย่างสม่ำเสมอ
+- **การอัปเดตเทคโนโลยี**: การสอดคล้องกับบริการ Azure ล่าสุดและการปล่อย azd
+- **การตรวจสอบการเข้าถึง**: การตรวจสอบตามปกติสำหรับหลักการออกแบบที่ครอบคลุม
 
-### การสนับสนุนเวอร์ชันปัจจุบัน  
-- **เวอร์ชันหลักล่าสุด**: สนับสนุนเต็มรูปแบบพร้อมอัปเดตปกติ  
-- **เวอร์ชันหลักก่อนหน้า**: อัปเดตความปลอดภัยและแก้ไขสำคัญเป็นเวลา 12 เดือน  
-- **เวอร์ชันเก่า**: สนับสนุนโดยชุมชนเท่านั้น ไม่มีอัปเดตอย่างเป็นทางการ  
+## นโยบายการสนับสนุนเวอร์ชัน
 
-### คำแนะนำการย้ายข้อมูล  
-เมื่อมีการปล่อยเวอร์ชันหลักใหม่ เราจะจัดเตรียม:  
-- **คู่มือการย้ายข้อมูล**: คำแนะนำการเปลี่ยนถ่ายทีละขั้นตอน  
-- **บันทึกความเข้ากันได้**: รายละเอียดเกี่ยวกับการเปลี่ยนแปลงที่ทำลายความเข้ากันได้  
-- **เครื่องมือสนับสนุน**: สคริปต์หรือยูทิลิตี้ช่วยการย้ายข้อมูล  
-- **การสนับสนุนชุมชน**: ฟอรัมเฉพาะสำหรับคำถามเกี่ยวกับการย้าย  
+### การสนับสนุนเวอร์ชันปัจจุบัน
+- **เวอร์ชันใหญ่ล่าสุด**: สนับสนุนเต็มรูปแบบพร้อมการอัปเดตตามปกติ
+- **เวอร์ชันใหญ่ก่อนหน้า**: อัปเดตความปลอดภัยและแก้ไขสำคัญเป็นเวลา 12 เดือน
+- **เวอร์ชันเก่า**: มีเพียงการสนับสนุนจากชุมชนเท่านั้น ไม่มีการอัปเดตอย่างเป็นทางการ
+
+### แนวทางการย้ายข้อมูล
+เมื่อมีการปล่อยเวอร์ชันใหญ่ เราจะให้:
+- **คำแนะนำการย้ายข้อมูล**: คำแนะนำขั้นตอนการเปลี่ยนผ่าน
+- **บันทึกความเข้ากันได้**: รายละเอียดเกี่ยวกับการเปลี่ยนแปลงที่ส่งผลกระทบ
+- **เครื่องมือสนับสนุน**: สคริปต์หรือยูทิลิตี้ช่วยในการย้ายข้อมูล
+- **การสนับสนุนจากชุมชน**: ฟอรัมเฉพาะสำหรับคำถามเกี่ยวกับการย้ายข้อมูล
 
 ---
 
-**การนำทาง**  
-- **บทเรียนก่อนหน้า**: [Study Guide](resources/study-guide.md)  
-- **บทเรียนถัดไป**: กลับไปที่ [Main README](README.md)  
+**การนำทาง**
+- **บทเรียนก่อนหน้า**: [Study Guide](resources/study-guide.md)
+- **บทเรียนถัดไป**: กลับไปที่ [Main README](README.md)
 
-**ติดตามข่าวสาร**: ติดตามที่เก็บนี้สำหรับการแจ้งเตือนเกี่ยวกับการออกเวอร์ชันใหม่และการอัปเดตสำคัญของวัสดุการเรียนรู้.
+**ติดตามข้อมูลล่าสุด**: ติดตามคลังนี้เพื่อรับการแจ้งเตือนเกี่ยวกับการปล่อยเวอร์ชันใหม่และการอัปเดตสำคัญของสื่อการเรียนรู้
 
 ---
 

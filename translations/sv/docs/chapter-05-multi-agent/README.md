@@ -1,22 +1,22 @@
-# Kapitel 5: Multi-agent AI-lösningar
+# Kapitel 5: Multi-Agent AI-lösningar
 
-**📚 Kurs**: [AZD för nybörjare](../../README.md) | **⏱️ Varaktighet**: 2-3 hours | **⭐ Komplexitet**: Avancerad
+**📚 Kurs**: [AZD För Nybörjare](../../README.md) | **⏱️ Varaktighet**: 2-3 timmar | **⭐ Komplext**: Avancerat
 
 ---
 
 ## Översikt
 
-Detta kapitel täcker avancerade mönster för fleragentsarkitektur, agentorkestrering och produktionsklara AI-distributioner för komplexa scenarier.
+Detta kapitel behandlar avancerade multi-agent arkitekturmodeller, agentorkestrering och produktionsklara AI-distributioner för komplexa scenarier.
 
-> Validerad mot `azd 1.25.6` i juni 2026.
+> Validerat mot `azd 1.27.1` i juli 2026.
 
 ## Lärandemål
 
 Genom att slutföra detta kapitel kommer du att:
-- Förstå fleragentsarkitekturens mönster
+- Förstå multi-agent arkitekturmodeller
 - Distribuera koordinerade AI-agentssystem
-- Implementera agent-till-agent-kommunikation
-- Bygga produktionsklara fleragentslösningar
+- Implementera agent-till-agent kommunikation
+- Bygga produktionsklara multi-agentlösningar
 
 ---
 
@@ -24,11 +24,11 @@ Genom att slutföra detta kapitel kommer du att:
 
 | # | Lektion | Beskrivning | Tid |
 |---|--------|-------------|------|
-| 1 | [Multi-Agent Basics](multi-agent-basics.md) | Praktisk övning: distribuera en fungerande multi-agent-app med `azd up` | 45 min |
-| 2 | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) | Strategier för agentorkestrering (fortsätter i Kapitel 6) | 30 min |
-| 3 | [ARM Template Deployment](../../examples/retail-multiagent-arm-template/README.md) | Exempel på distribution med ett klick | 30 min |
+| 1 | [Multi-Agent Grundläggande](multi-agent-basics.md) | Praktiskt: driftsätt en fungerande multi-agent-app med `azd up` | 45 min |
+| 2 | [Koordineringsmönster](../chapter-06-pre-deployment/coordination-patterns.md) | Agentorkestreringsstrategier (fortsätter i Kapitel 6) | 30 min |
+| 3 | [ARM-mall Distribution](../../examples/retail-multiagent-arm-template/README.md) | Exempel på distribution med ett klick | 30 min |
 
-> **Börja med lektion 1.** Det är den enda helt praktiska, distribuerbara lektionen i detta kapitel. Lektion 2 finns i Kapitel 6 (den delas med förplanering inför distribution), och [Retail Multi-Agent-lösning](../../examples/retail-scenario.md) är en arkitekturblåkopi — en designreferens, inte en mall som körs med ett enda kommando.
+> **Börja med Lektion 1.** Det är den enda helt praktiska och driftsättbara lektionen i detta kapitel. Lektion 2 finns i Kapitel 6 (den delas med fördistributionplanering), och [Retail Multi-Agent-lösningen](../../examples/retail-scenario.md) är en arkitektur blueprint—en designreferens, inte en mall med ett enda kommando.
 
 ---
 
@@ -39,43 +39,43 @@ Genom att slutföra detta kapitel kommer du att:
 azd init --template agent-openai-python-prompty
 azd up
 
-# Alternativ 2: Distribuera från ett agentmanifest (kräver tillägget azure.ai.agents)
+# Alternativ 2: Distribuera från ett agentmanifest (kräver azure.ai.agents-tillägg)
 azd extension install azure.ai.agents
 azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **Vilket tillvägagångssätt?** Använd `azd init --template` för att börja från ett fungerande exempel. Använd `azd ai agent init` när du har ditt eget agentmanifest. Se [AZD AI CLI-referens](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) för fullständiga detaljer.
+> **Vilket tillvägagångssätt?** Använd `azd init --template` för att börja från ett fungerande exempel. Använd `azd ai agent init` när du har din egen agentmanifest. Se [AZD AI CLI-referensen](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) för fullständiga detaljer.
 
 ---
 
-## 🤖 Multi-agentarkitektur
+## 🤖 Multi-Agent Arkitektur
 
 ```mermaid
 graph TD
-    Orchestrator[Orkestreringsagent<br/>Dirigerar förfrågningar, hanterar arbetsflödet] --> Customer[Kundagent<br/>Användarfrågor, preferenser]
-    Orchestrator --> Inventory[Lageragent<br/>Lagernivåer, beställningar]
+    Orchestrator[Orchestrator Agent<br/>Dirigerar förfrågningar, hanterar arbetsflöde] --> Customer[Customer Agent<br/>Användarförfrågningar, preferenser]
+    Orchestrator --> Inventory[Inventory Agent<br/>Lagerstatus, beställningar]
 ```
 
 ---
 
-## 🎯 Utvald lösning: Retail Multi-Agent
+## 🎯 Utvald Lösning: Retail Multi-Agent
 
-[Retail Multi-Agent-lösning](../../examples/retail-scenario.md) demonstrerar:
+[Retail Multi-Agent-lösningen](../../examples/retail-scenario.md) demonstrerar:
 
 - **Kundagent**: Hanterar användarinteraktioner och preferenser
-- **Lageragent**: Hanterar lager och orderhantering
+- **Lageragent**: Hanterar lagersaldo och orderhantering
 - **Orkestrator**: Koordinerar mellan agenter
-- **Delat minne**: Hantering av kontext över agenter
+- **Delat minne**: Kontexthantering över agenter
 
-### Tjänster som används
+### Använda Tjänster
 
 | Tjänst | Syfte |
 |---------|---------|
 | Microsoft Foundry Models | Språkförståelse |
 | Azure AI Search | Produktkatalog |
-| Cosmos DB | Agenttillstånd och minne |
-| Container Apps | Värd för agenter |
+| Cosmos DB | Agentstatus och minne |
+| Container Apps | Agentvärd |
 | Application Insights | Övervakning |
 
 ---
@@ -84,16 +84,16 @@ graph TD
 
 | Riktning | Kapitel |
 |-----------|---------|
-| **Previous** | [Kapitel 4: Infrastructure](../chapter-04-infrastructure/README.md) |
-| **Next** | [Kapitel 6: Pre-Deployment](../chapter-06-pre-deployment/README.md) |
+| **Föregående** | [Kapitel 4: Infrastruktur](../chapter-04-infrastructure/README.md) |
+| **Nästa** | [Kapitel 6: Fördistribution](../chapter-06-pre-deployment/README.md) |
 
 ---
 
-## 📖 Relaterade resurser
+## 📖 Relaterade Resurser
 
-- [Guide för AI-agenter](../chapter-02-ai-development/agents.md)
-- [AI i produktion: bästa praxis](../chapter-08-production/production-ai-practices.md)
-- [AI-felsökning](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [AI-Agentguide](../chapter-02-ai-development/agents.md)
+- [Produktionspraxis för AI](../chapter-08-production/production-ai-practices.md)
+- [AI Felsökning](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 
