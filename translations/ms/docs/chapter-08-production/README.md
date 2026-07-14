@@ -1,22 +1,22 @@
 # Bab 8: Corak Pengeluaran & Perusahaan
 
-**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 2-3 jam | **⭐ Kerumitan**: Lanjutan
+**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Durasi**: 2-3 jam | **⭐ Kerumitan**: Lanjutan
 
 ---
 
 ## Gambaran Keseluruhan
 
-Bab ini merangkumi corak penyebaran bersedia perusahaan, pengukuhan keselamatan, pemantauan, dan pengoptimuman kos untuk beban kerja AI pengeluaran.
+Bab ini merangkumi corak penerapan sedia perusahaan, pengukuhan keselamatan, pemantauan, dan pengoptimuman kos untuk beban kerja AI produksi.
 
-> Disahkan terhadap `azd 1.25.6` pada Jun 2026.
+> Disahkan dengan `azd 1.27.1` pada Julai 2026.
 
 ## Objektif Pembelajaran
 
-Dengan menamatkan bab ini, anda akan mampu:
-- Menyebarkan aplikasi tahan lasak merentas wilayah
+Dengan menyelesaikan bab ini, anda akan:
+- Menerapkan aplikasi tahan serantau berbilang wilayah
 - Melaksanakan corak keselamatan perusahaan
 - Mengkonfigurasi pemantauan menyeluruh
-- Mengoptimumkan kos pada skala besar
+- Mengoptimumkan kos dalam skala besar
 - Menyediakan saluran CI/CD dengan AZD
 
 ---
@@ -24,18 +24,18 @@ Dengan menamatkan bab ini, anda akan mampu:
 ## 📚 Pelajaran
 
 | # | Pelajaran | Penerangan | Masa |
-|---|-----------|------------|------|
-| 1 | [Amalan AI Pengeluaran](production-ai-practices.md) | Corak penyebaran perusahaan | 90 min |
+|---|--------|-------------|------|
+| 1 | [Amalan AI Produksi](production-ai-practices.md) | Corak penerapan perusahaan | 90 min |
 
 ---
 
-## 🚀 Senarai Semak Pengeluaran
+## 🚀 Senarai Semak Produksi
 
-- [ ] Penyebaran merentas wilayah untuk ketahanan
+- [ ] Penerapan berbilang wilayah untuk ketahanan
 - [ ] Identiti terurus untuk pengesahan (tanpa kekunci)
 - [ ] Application Insights untuk pemantauan
-- [ ] Bajet kos dan amaran dikonfigurasi
-- [ ] Imbasan keselamatan diaktifkan
+- [ ] Bajet dan amaran kos dikonfigurasi
+- [ ] Pengimbasan keselamatan diaktifkan
 - [ ] Integrasi saluran CI/CD
 - [ ] Pelan pemulihan bencana
 
@@ -47,16 +47,16 @@ Dengan menamatkan bab ini, anda akan mampu:
 
 ```mermaid
 graph LR
-    Gateway[API Gateway] --> AI[Perkhidmatan AI] --> Models[Model Microsoft Foundry]
+    Gateway[Gerbang API] --> AI[Perkhidmatan AI] --> Models[Model Microsoft Foundry]
     Gateway --> Auth[Perkhidmatan Pengesahan]
-    AI --> Data[Penyimpanan Data]
+    AI --> Data[Stor Data]
 ```
 
-### Corak 2: Event-Driven AI
+### Corak 2: AI Berpandu Acara
 
 ```mermaid
 graph LR
-    EventGrid[Event Grid] --> Functions[Fungsi] --> Pipeline[Saluran AI]
+    EventGrid[Rangkaian Acara] --> Functions[Fungsi] --> Pipeline[Saluran AI]
 ```
 
 ---
@@ -83,11 +83,11 @@ properties: {
 ## 💰 Pengoptimuman Kos
 
 | Strategi | Penjimatan |
-|----------|------------|
-| Skala ke sifar (Aplikasi Kontena) | 60-80% |
-| Gunakan tier penggunaan untuk dev | 50-70% |
-| Skala berjadual | 30-50% |
-| Kapasiti tempahan | 20-40% |
+|----------|---------|
+| Skala ke sifar (Container Apps) | 60-80% |
+| Gunakan tahap penggunaan untuk pembangunan | 50-70% |
+| Penyesuaian berjadual | 30-50% |
+| Kapasiti berreserva | 20-40% |
 
 ```bash
 # Tetapkan amaran bajet
@@ -100,7 +100,7 @@ az consumption budget create \
 
 ---
 
-## 📊 Penyediaan Pemantauan
+## 📊 Persediaan Pemantauan
 
 ```bash
 # Alirkan log
@@ -118,9 +118,9 @@ az monitor metrics list --resource <resource-id>
 ## 🔗 Navigasi
 
 | Arah | Bab |
-|------|-----|
-| **Sebelum** | [Bab 7: Penyelesaian Masalah](../chapter-07-troubleshooting/README.md) |
-| **Kursus Selesai** | [Laman Utama Kursus](../../README.md) |
+|-----------|---------|
+| **Sebelumnya** | [Bab 7: Penyelesaian Masalah](../chapter-07-troubleshooting/README.md) |
+| **Kursus Lengkap** | [Laman Utama Kursus](../../README.md) |
 
 ---
 

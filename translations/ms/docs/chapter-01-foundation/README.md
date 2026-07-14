@@ -1,4 +1,4 @@
-# Chapter 1: Asas & Permulaan Pantas
+# Bab 1: Asas & Mula Pantas
 
 **📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 30-45 minit | **⭐ Kerumitan**: Pemula
 
@@ -6,16 +6,16 @@
 
 ## Gambaran Keseluruhan
 
-Bab ini memperkenalkan asas Azure Developer CLI (azd). Anda akan mempelajari konsep teras, memasang alat, dan melancarkan aplikasi pertama anda ke Azure.
+Bab ini memperkenalkan asas Azure Developer CLI (azd). Anda akan belajar konsep utama, memasang alat, dan menghantar aplikasi pertama anda ke Azure.
 
-> Disahkan menggunakan `azd 1.25.6` pada Jun 2026.
+> Disahkan dengan `azd 1.27.1` pada Julai 2026.
 
 ## Objektif Pembelajaran
 
-Dengan menyelesaikan bab ini, anda akan:
-- Memahami apa itu Azure Developer CLI dan bagaimana ia berbeza daripada Azure CLI
+Dengan menamatkan bab ini, anda akan:
+- Memahami apa itu Azure Developer CLI dan bagaimana ia berbeza dari Azure CLI
 - Memasang dan mengkonfigurasi AZD pada platform anda
-- Melancarkan aplikasi pertama anda ke Azure dengan `azd up`
+- Menghantar aplikasi pertama anda ke Azure dengan `azd up`
 - Membersihkan sumber dengan `azd down`
 
 ---
@@ -23,18 +23,18 @@ Dengan menyelesaikan bab ini, anda akan:
 ## 📚 Pelajaran
 
 | # | Pelajaran | Penerangan | Masa |
-|---|-----------|------------|------|
-| 1 | [Asas AZD](azd-basics.md) | Konsep teras, istilah, dan struktur projek | 15 min |
-| 2 | [Pemasangan & Persediaan](installation.md) | Panduan pemasangan khusus platform | 10 min |
-| 3 | [Projek Pertama Anda](first-project.md) | Praktikal: Melancarkan aplikasi web ke Azure | 20 min |
-| 4 | [Bawa Aplikasi Anda Sendiri](bring-your-own-app.md) | Tambah azd ke projek sedia ada yang anda miliki | 15 min |
-| 5 | [Dev Containers & Codespaces](dev-containers.md) | Persekitaran azd boleh ulangan dengan kontena dev | 15 min |
+|---|--------|-------------|------|
+| 1 | [Asas AZD](azd-basics.md) | Konsep teras, terminologi, dan struktur projek | 15 minit |
+| 2 | [Pemasangan & Persediaan](installation.md) | Panduan pemasangan spesifik platform | 10 minit |
+| 3 | [Projek Pertama Anda](first-project.md) | Latihan praktikal: Hantar aplikasi web ke Azure | 20 minit |
+| 4 | [Bawa Aplikasi Anda Sendiri](bring-your-own-app.md) | Tambah azd ke projek sedia ada anda | 15 minit |
+| 5 | [Kontena Pembangun & Codespaces](dev-containers.md) | Persekitaran azd yang boleh diulang dengan kontena pembangun | 15 minit |
 
 ---
 
-## ✅ Mula Di Sini: Sahkan Persediaan Anda
+## ✅ Mulakan Di Sini: Sahkan Persediaan Anda
 
-Sebelum anda mula, sahkan mesin tempatan anda sedia untuk templat Bab 1:
+Sebelum memulakan, pastikan mesin tempatan anda sudah siap untuk templat Bab 1:
 
 **Windows:**
 ```powershell
@@ -46,18 +46,18 @@ Sebelum anda mula, sahkan mesin tempatan anda sedia untuk templat Bab 1:
 bash ./validate-setup.sh
 ```
 
-Jika skrip melaporkan alat yang hilang, perbaiki dahulu dan kemudian sambung dengan bab ini.
+Jika skrip melaporkan alat yang hilang, betulkan dahulu sebelum meneruskan bab ini.
 
 ---
 
-## 🚀 Permulaan Pantas
+## 🚀 Mula Pantas
 
 ```bash
 # Semak pemasangan
 azd version
 
 # Sahkan untuk AZD
-# Pilihan: az login jika anda merancang untuk menjalankan arahan Azure CLI secara langsung
+# Pilihan: az login jika anda merancang untuk menjalankan perintah Azure CLI secara langsung
 azd auth login
 
 # Lancarkan aplikasi pertama anda
@@ -72,13 +72,13 @@ azd down --force --purge
 
 ## ✅ Kriteria Kejayaan
 
-Selepas menyelesaikan bab ini, anda harus boleh:
+Selepas menamatkan bab ini, anda harus boleh:
 
 ```bash
 azd version              # Menunjukkan versi yang dipasang
 azd init --template todo-nodejs-mongo  # Memulakan projek
-azd up                   # Menyebarkan ke Azure
-azd show                 # Memaparkan URL aplikasi yang sedang berjalan
+azd up                   # Melaksanakan ke Azure
+azd show                 # Memaparkan URL aplikasi yang berjalan
 azd down --force --purge # Membersihkan sumber
 ```
 
@@ -87,7 +87,7 @@ azd down --force --purge # Membersihkan sumber
 ## 🔗 Navigasi
 
 | Arah | Bab |
-|-------|------|
+|-----------|---------|
 | **Seterusnya** | [Bab 2: Pembangunan AI-Pertama](../chapter-02-ai-development/README.md) |
 | **Langkau ke** | [Bab 3: Konfigurasi](../chapter-03-configuration/README.md) |
 
@@ -95,7 +95,7 @@ azd down --force --purge # Membersihkan sumber
 
 ## 📖 Sumber Berkaitan
 
-- [Lembaran Panjang Perintah](../../resources/cheat-sheet.md)
+- [Lembaran Singkatan Perintah](../../resources/cheat-sheet.md)
 - [Soalan Lazim](../../resources/faq.md)
 - [Glosari](../../resources/glossary.md)
 

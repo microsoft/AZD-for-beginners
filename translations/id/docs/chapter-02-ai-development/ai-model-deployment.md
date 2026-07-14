@@ -1,15 +1,15 @@
 # Penyebaran Model AI dengan Azure Developer CLI
 
 **Navigasi Bab:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 2 - AI-First Development
-- **⬅️ Previous**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Next**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 2 - Pengembangan AI-Pertama
+- **⬅️ Sebelumnya**: [Integrasi Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Berikutnya**: [Lab Workshop AI](ai-workshop-lab.md)
+- **🚀 Bab Berikutnya**: [Bab 3: Konfigurasi](../chapter-03-configuration/configuration.md)
 
-Panduan ini memberikan instruksi komprehensif untuk menyebarkan model AI menggunakan template AZD, mencakup semuanya dari pemilihan model hingga pola penyebaran produksi.
+Panduan ini memberikan instruksi komprehensif untuk menyebarkan model AI menggunakan template AZD, mencakup segala hal dari pemilihan model hingga pola penyebaran ke produksi.
 
-> **Catatan validasi (2026-03-25):** Alur kerja AZD dalam panduan ini diperiksa terhadap `azd` `1.23.12`. Untuk penyebaran AI yang memerlukan waktu lebih lama daripada jendela penyebaran layanan default, rilis AZD saat ini mendukung `azd deploy --timeout <seconds>`.
+> **Catatan Validasi (2026-07-13):** Alur kerja AZD dalam panduan ini telah diperiksa terhadap `azd` `1.27.1`. Untuk penyebaran AI yang memakan waktu lebih lama dari jendela penyebaran layanan default, rilis AZD saat ini mendukung `azd deploy --timeout <seconds>`.
 
 ## Daftar Isi
 
@@ -22,9 +22,9 @@ Panduan ini memberikan instruksi komprehensif untuk menyebarkan model AI menggun
 
 ## Strategi Pemilihan Model
 
-### Microsoft Foundry Models Models
+### Model Microsoft Foundry
 
-Choose the right model for your use case:
+Pilih model yang tepat untuk kasus penggunaan Anda:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -54,18 +54,18 @@ services:
 
 ### Perencanaan Kapasitas Model
 
-| Model Type | Use Case | Recommended Capacity | Cost Considerations |
-|------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | Obrolan, Tanya jawab | 10-50 TPM | Efisien biaya untuk sebagian besar beban kerja |
+| Jenis Model | Kasus Penggunaan | Kapasitas yang Direkomendasikan | Pertimbangan Biaya |
+|------------|-----------------|-------------------------------|-------------------|
+| gpt-4.1-mini | Chat, Tanya Jawab | 10-50 TPM | Efisien biaya untuk sebagian besar beban kerja |
 | gpt-4.1 | Penalaran kompleks | 20-100 TPM | Biaya lebih tinggi, gunakan untuk fitur premium |
-| text-embedding-3-large | Pencarian, RAG | 30-120 TPM | Pilihan default yang kuat untuk pencarian semantik dan pengambilan |
+| text-embedding-3-large | Pencarian, RAG | 30-120 TPM | Pilihan default yang kuat untuk pencarian dan pengambilan semantik |
 | Whisper | Ucapan ke teks | 10-50 TPM | Beban kerja pemrosesan audio |
 
 ## Konfigurasi AZD untuk Model AI
 
-### Bicep Template Configuration
+### Konfigurasi Template Bicep
 
-Create model deployments through Bicep templates:
+Buat penyebaran model melalui template Bicep:
 
 ```bicep
 // infra/main.bicep
@@ -126,7 +126,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### Variabel Lingkungan
 
-Configure your application environment:
+Konfigurasikan lingkungan aplikasi Anda:
 
 ```bash
 # konfigurasi .env
@@ -138,7 +138,7 @@ AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 
 ## Pola Penyebaran
 
-### Pola 1: Single-Region Deployment
+### Pola 1: Penyebaran Wilayah Tunggal
 
 ```yaml
 # azure.yaml - Single region
@@ -153,10 +153,10 @@ services:
 
 Paling cocok untuk:
 - Pengembangan dan pengujian
-- Aplikasi untuk satu pasar
-- Optimasi biaya
+- Aplikasi pasar tunggal
+- Optimalisasi biaya
 
-### Pola 2: Multi-Region Deployment
+### Pola 2: Penyebaran Multi-Wilayah
 
 ```bicep
 // Multi-region deployment
@@ -174,9 +174,9 @@ Paling cocok untuk:
 - Kebutuhan ketersediaan tinggi
 - Distribusi beban
 
-### Pola 3: Hybrid Deployment
+### Pola 3: Penyebaran Hybrid
 
-Combine Microsoft Foundry Models with other AI services:
+Gabungkan Model Microsoft Foundry dengan layanan AI lainnya:
 
 ```bicep
 // Hybrid AI services
@@ -209,7 +209,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Kontrol Versi
 
-Track model versions in your AZD configuration:
+Lacak versi model dalam konfigurasi AZD Anda:
 
 ```json
 {
@@ -229,7 +229,7 @@ Track model versions in your AZD configuration:
 
 ### Pembaruan Model
 
-Use AZD hooks for model updates:
+Gunakan hook AZD untuk pembaruan model:
 
 ```bash
 #!/bin/bash
@@ -241,13 +241,13 @@ az cognitiveservices account list-models \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
 
-# Jika penerapan memakan waktu lebih lama dari batas waktu default
+# Jika deployment memakan waktu lebih lama dari waktu tunggu default
 azd deploy --timeout 1800
 ```
 
 ### Pengujian A/B
 
-Deploy multiple model versions:
+Sebarkan beberapa versi model:
 
 ```bicep
 param enableABTesting bool = false
@@ -273,7 +273,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 
 ### Perencanaan Kapasitas
 
-Calculate required capacity based on usage patterns:
+Hitung kapasitas yang dibutuhkan berdasarkan pola penggunaan:
 
 ```python
 # Contoh perhitungan kapasitas
@@ -300,7 +300,7 @@ print(f"Required capacity: {required_capacity} TPM")
 
 ### Konfigurasi Auto-scaling
 
-Configure auto-scaling for Container Apps:
+Konfigurasikan auto-scaling untuk Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -336,9 +336,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Optimasi Biaya
+### Optimalisasi Biaya
 
-Implement cost controls:
+Terapkan kontrol biaya:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -372,7 +372,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ### Integrasi Application Insights
 
-Configure monitoring for AI workloads:
+Konfigurasikan pemantauan untuk beban kerja AI:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -410,10 +410,10 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### Metrik Kustom
 
-Track AI-specific metrics:
+Lacak metrik spesifik AI:
 
 ```python
-# Telemetri kustom untuk model AI
+# Telemetri khusus untuk model AI
 import logging
 from applicationinsights import TelemetryClient
 
@@ -447,10 +447,10 @@ class AITelemetry:
 
 ### Pemeriksaan Kesehatan
 
-Implement AI service health monitoring:
+Terapkan pemantauan kesehatan layanan AI:
 
 ```python
-# Endpoint pemeriksaan kesehatan
+# Titik akhir pemeriksaan kesehatan
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -476,32 +476,32 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## Langkah Selanjutnya
+## Langkah Berikutnya
 
 1. **Tinjau [Panduan Integrasi Microsoft Foundry](microsoft-foundry-integration.md)** untuk pola integrasi layanan
 2. **Selesaikan [Lab Workshop AI](ai-workshop-lab.md)** untuk pengalaman langsung
-3. **Terapkan [Praktik AI Produksi](production-ai-practices.md)** untuk penyebaran perusahaan
+3. **Terapkan [Praktik Produksi AI](production-ai-practices.md)** untuk penyebaran perusahaan
 4. **Jelajahi [Panduan Pemecahan Masalah AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** untuk masalah umum
 
 ## Sumber Daya
 
-- [Ketersediaan Model Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Ketersediaan Model Model Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Dokumentasi Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Skalasi Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [Optimasi Biaya Model AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Skalabilitas Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Optimalisasi Biaya Model AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
 **Navigasi Bab:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 2 - AI-First Development
-- **⬅️ Previous**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Next**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 2 - Pengembangan AI-Pertama
+- **⬅️ Sebelumnya**: [Integrasi Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Berikutnya**: [Lab Workshop AI](ai-workshop-lab.md)
+- **🚀 Bab Berikutnya**: [Bab 3: Konfigurasi](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk akurat, harap diperhatikan bahwa terjemahan otomatis dapat mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi yang penting, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau salah tafsir yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk mencapai akurasi, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang sah. Untuk informasi penting, disarankan menggunakan terjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

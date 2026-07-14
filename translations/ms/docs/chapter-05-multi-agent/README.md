@@ -1,81 +1,81 @@
-# Bab 5: Penyelesaian AI Pelbagai Ejen
+# Bab 5: Penyelesaian AI Berbilang Ejen
 
-**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 2-3 jam | **⭐ Kompleksiti**: Lanjutan
+**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 2-3 jam | **⭐ Kerumitan**: Lanjutan
 
 ---
 
 ## Gambaran Keseluruhan
 
-Bab ini merangkumi corak seni bina pelbagai ejen lanjutan, orkestrasi ejen, dan penyebaran AI bersedia produksi untuk senario yang kompleks.
+Bab ini meliputi pola seni bina berbilang ejen lanjutan, orkestrasi ejen, dan penyebaran AI yang sedia untuk produksi bagi senario kompleks.
 
-> Disahkan terhadap `azd 1.25.6` pada Jun 2026.
+> Disahkan dengan `azd 1.27.1` pada Julai 2026.
 
 ## Objektif Pembelajaran
 
 Dengan menamatkan bab ini, anda akan:
-- Memahami corak seni bina pelbagai ejen
-- Menyebarkan sistem ejen AI berpadu
+- Memahami pola seni bina berbilang ejen
+- Menyebarkan sistem ejen AI yang dipadukan
 - Melaksanakan komunikasi ejen-ke-ejen
-- Membina penyelesaian pelbagai ejen bersedia produksi
+- Membina penyelesaian berbilang ejen yang sedia untuk pengeluaran
 
 ---
 
 ## 📚 Pelajaran
 
-| # | Pelajaran | Deskripsi | Masa |
-|---|-----------|-----------|------|
-| 1 | [Asas Pelbagai Ejen](multi-agent-basics.md) | Praktikal: menyebarkan aplikasi pelbagai ejen berfungsi dengan `azd up` | 45 min |
-| 2 | [Corak Koordinasi](../chapter-06-pre-deployment/coordination-patterns.md) | Strategi orkestrasi ejen (berterusan di Bab 6) | 30 min |
+| # | Pelajaran | Penerangan | Masa |
+|---|--------|-------------|------|
+| 1 | [Asas Berbilang Ejen](multi-agent-basics.md) | Amali: menyebarkan aplikasi berbilang ejen yang berfungsi dengan `azd up` | 45 min |
+| 2 | [Pola Koordinasi](../chapter-06-pre-deployment/coordination-patterns.md) | Strategi orkestrasi ejen (bersambung di Bab 6) | 30 min |
 | 3 | [Penyebaran Templat ARM](../../examples/retail-multiagent-arm-template/README.md) | Contoh penyebaran satu klik | 30 min |
 
-> **Mulakan dengan Pelajaran 1.** Ia adalah satu-satunya pelajaran yang sepenuhnya praktikal dan boleh disebarkan dalam bab ini. Pelajaran 2 berada di Bab 6 (ia dikongsi dengan perancangan pra-pengeluaran), dan [Penyelesaian Pelbagai Ejen Runcit](../../examples/retail-scenario.md) adalah cetusan reka bentuk seni bina—rujukan reka bentuk, bukan templat satu arahan.
+> **Mulakan dengan Pelajaran 1.** Ia adalah satu-satunya pelajaran amali yang lengkap dan boleh disebarkan dalam bab ini. Pelajaran 2 berada di Bab 6 (ia dikongsi dengan perancangan pra-penyebaran), dan [Penyelesaian Berbilang Ejen Runcit](../../examples/retail-scenario.md) adalah cetak biru seni bina—rujukan reka bentuk, bukan templat satu arahan.
 
 ---
 
-## 🚀 Mula Dengan Cepat
+## 🚀 Mula Pantas
 
 ```bash
-# Pilihan 1: Melaksanakan dari templat
+# Pilihan 1: Lancarkan dari templat
 azd init --template agent-openai-python-prompty
 azd up
 
-# Pilihan 2: Melaksanakan dari manifest ejen (memerlukan sambungan azure.ai.agents)
+# Pilihan 2: Lancarkan dari manifest ejen (memerlukan sambungan azure.ai.agents)
 azd extension install azure.ai.agents
 azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **Pendekatan mana?** Gunakan `azd init --template` untuk memulakan dari contoh yang berfungsi. Gunakan `azd ai agent init` apabila anda mempunyai manifest ejen sendiri. Lihat [rujukan AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) untuk maklumat penuh.
+> **Pendekatan mana?** Gunakan `azd init --template` untuk bermula dengan sampel yang berfungsi. Gunakan `azd ai agent init` apabila anda mempunyai manifest ejen sendiri. Lihat [rujukan AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) untuk butiran penuh.
 
 ---
 
-## 🤖 Seni Bina Pelbagai Ejen
+## 🤖 Seni Bina Berbilang Ejen
 
 ```mermaid
 graph TD
-    Orchestrator[Ejen Orkestrator<br/>Menghala permintaan, mengurus aliran kerja] --> Customer[Ejen Pelanggan<br/>Pertanyaan pengguna, keutamaan]
+    Orchestrator[Ejen Orkestrator<br/>Mengatur permintaan, mengurus aliran kerja] --> Customer[Ejen Pelanggan<br/>Pertanyaan pengguna, keutamaan]
     Orchestrator --> Inventory[Ejen Inventori<br/>Tahap stok, pesanan]
 ```
 
 ---
 
-## 🎯 Penyelesaian Unggulan: Pelbagai Ejen Runcit
+## 🎯 Penyelesaian Pilihan: Berbilang Ejen Runcit
 
-[Penyelesaian Pelbagai Ejen Runcit](../../examples/retail-scenario.md) menunjukkan:
+[Penyelesaian Berbilang Ejen Runcit](../../examples/retail-scenario.md) mempamerkan:
 
-- **Ejen Pelanggan**: Mengendalikan interaksi dan keutamaan pengguna
-- **Ejen Inventori**: Mengurus stok dan pemprosesan pesanan
-- **Orkestrator**: Memadankan antara ejen
-- **Memori Kongsi**: Pengurusan konteks rentas ejen
+- **Ejen Pelanggan**: Mengendalikan interaksi pengguna dan keutamaan
+- **Ejen Inventori**: Menguruskan stok dan pemprosesan pesanan
+- **Pengaturcara**: Memadukan antara ejen
+- **Memori Berkongsi**: Pengurusan konteks silang ejen
 
-### Perkhidmatan Yang Digunakan
+### Perkhidmatan Digunakan
 
 | Perkhidmatan | Tujuan |
-|--------------|---------|
-| Microsoft Foundry Models | Pemahaman bahasa |
+|---------|---------|
+| Microsoft Foundry Models | Kefahaman bahasa |
 | Azure AI Search | Katalog produk |
 | Cosmos DB | Keadaan dan memori ejen |
-| Container Apps | Hosting ejen |
+| Container Apps | Penghosan ejen |
 | Application Insights | Pemantauan |
 
 ---
@@ -83,7 +83,7 @@ graph TD
 ## 🔗 Navigasi
 
 | Arah | Bab |
-|-------|------|
+|-----------|---------|
 | **Sebelumnya** | [Bab 4: Infrastruktur](../chapter-04-infrastructure/README.md) |
 | **Seterusnya** | [Bab 6: Pra-Penyebaran](../chapter-06-pre-deployment/README.md) |
 

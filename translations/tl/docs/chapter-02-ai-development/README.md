@@ -1,48 +1,48 @@
-# Kabanata 2: Pag-unlad na Nakatuon sa AI
+# Kabanata 2: AI-First Development
 
-**📚 Kurso**: [AZD For Beginners](../../README.md) | **⏱️ Tagal**: 1-2 oras | **⭐ Kahirapan**: Katamtaman
+**📚 Kurso**: [AZD Para sa mga Nagsisimula](../../README.md) | **⏱️ Tagal**: 1-2 oras | **⭐ Antas ng Kahirapan**: Intermediate
 
 ---
 
-## Overview
+## Pangkalahatang Pagsusuri
 
-Nakatuon ang kabanatang ito sa pag-deploy ng mga application na pinapagana ng AI gamit ang Azure Developer CLI at Microsoft Foundry services. Mula sa simpleng AI chat apps hanggang sa intelihenteng mga agent na may mga tool.
+Nakatuon ang kabanatang ito sa pag-deploy ng mga AI-powered na aplikasyon gamit ang Azure Developer CLI at mga Microsoft Foundry na serbisyo. Mula sa simpleng AI chat apps hanggang sa matatalinong ahente na may mga tools.
 
-> **Validation note (2026-06-15):** Ang command flow at extension guidance sa kabanatang ito ay nirepaso laban sa `azd` `1.25.6` at ang kasalukuyang preview AI agent extension release `azure.ai.agents` `0.1.40-preview`. Kung nasa mas lumang AZD build ka, i-update muna at saka magpatuloy sa mga ehersisyo.
+> **Paalala sa Pagpapatunay (2026-07-13):** Ang daloy ng utos at gabay sa extension sa kabanatang ito ay nirebyu laban sa `azd` `1.27.1` at ang kasalukuyang preview AI agent extension release `azure.ai.agents` `1.0.0-beta.5`. Kung gumagamit ka ng lumang AZD build, mag-update muna bago ipagpatuloy ang mga pagsasanay.
 
 ## Mga Layunin sa Pagkatuto
 
-Sa pamamagitan ng pagkumpleto ng kabanatang ito, magagawa mo:
-- Mag-deploy ng mga AI application gamit ang mga pre-built AZD template
-- Maunawaan ang integrasyon ng Microsoft Foundry sa AZD
-- I-configure at i-customize ang mga AI agent na may mga tool
-- Mag-deploy ng mga RAG (Retrieval-Augmented Generation) na aplikasyon
+Sa pagtatapos ng kabanatang ito, ikaw ay:
+- Magde-deploy ng mga AI na aplikasyon gamit ang mga pre-built na template ng AZD
+- Maiintindihan ang integrasyon ng Microsoft Foundry sa AZD
+- Makakakumpigur at mapapasadya ang mga AI agent gamit ang mga tools
+- Makakadeploy ng mga RAG (Retrieval-Augmented Generation) na aplikasyon
 
 ---
 
 ## 📚 Mga Aralin
 
-| # | Lesson | Description | Time |
+| # | Aralin | Paglalarawan | Oras |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | Ikonekta ang AZD sa mga serbisyo ng Foundry | 30 min |
-| 2 | [AI Agents Guide](agents.md) | I-deploy ang mga intelihenteng agent na may mga tool | 45 min |
-| 3 | [AI Model Deployment](ai-model-deployment.md) | I-deploy at i-configure ang mga modelo ng AI | 30 min |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Praktikal: Gawing handa sa AZD ang iyong solusyon sa AI | 60 min |
+| 1 | [Integrasyon ng Microsoft Foundry](microsoft-foundry-integration.md) | Ikonekta ang AZD sa mga Foundry na serbisyo | 30 min |
+| 2 | [Gabayan sa AI Agents](agents.md) | Mag-deploy ng matatalinong ahente gamit ang mga tools | 45 min |
+| 3 | [Deployment ng AI Model](ai-model-deployment.md) | Mag-deploy at mag-configure ng AI models | 30 min |
+| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Hands-on: Gawing AZD-ready ang iyong AI solusyon | 60 min |
 
 ---
 
-## 🚀 Mabilis na Pagsisimula
+## 🚀 Mabilis na Simula
 
 ```bash
-# Opsyon 1: Aplikasyong Chat na RAG
+# Opsyon 1: RAG Chat Application
 azd init --template azure-search-openai-demo
 azd up
 
-# Opsyon 2: Mga Ahente ng AI
+# Opsyon 2: AI Agents
 azd init --template get-started-with-ai-agents
 azd up
 
-# Opsyon 3: Mabilis na Aplikasyong Chat
+# Opsyon 3: Mabilis na Chat App
 azd init --template openai-chat-app-quickstart
 azd up
 ```
@@ -51,10 +51,10 @@ azd up
 
 ## 🤖 Tampok na AI Templates
 
-| Template | Deskripsyon | Serbisyo |
+| Template | Paglalarawan | Mga Serbisyo |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG chat na may mga sanggunian | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI agent na may mga tool | AI Agent Service |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG chat na may mga citation | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI agent na may tools | AI Agent Service |
 | [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Pangunahing AI chat | OpenAI + Container Apps |
 
 ---
@@ -62,29 +62,29 @@ azd up
 ## 💰 Kamalayan sa Gastos
 
 | Kapaligiran | Tinatayang Buwanang Gastos |
-|-------------|----------------------------|
-| Pag-unlad | $80-150 |
-| Paghahanda | $150-300 |
-| Produksyon | $300-3,500+ |
+|-------------|----------------------|
+| Development | $80-150 |
+| Staging | $150-300 |
+| Production | $300-3,500+ |
 
-**Tip:** Patakbuhin ang `azd down` pagkatapos mag-test upang maiwasan ang singil.
+**Tip:** Patakbuhin ang `azd down` pagkatapos ng pagsubok upang maiwasan ang singil.
 
 ---
 
-## 🔗 Navigasyon
+## 🔗 Pag-navigate
 
 | Direksyon | Kabanata |
 |-----------|---------|
 | **Nakaraan** | [Kabanata 1: Pundasyon](../chapter-01-foundation/README.md) |
 | **Susunod** | [Kabanata 3: Konfigurasyon](../chapter-03-configuration/README.md) |
-| **Laktawan sa** | [Kabanata 8: Mga Pattern sa Produksyon](../chapter-08-production/README.md) |
+| **Tumalon sa** | [Kabanata 8: Mga Pattern sa Produksyon](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Mga Kaugnay na Mapagkukunan
+## 📖 Kaugnay na mga Recursos
 
 - [Pag-troubleshoot ng AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Mga Kasanayan sa AI para sa Produksyon](../chapter-08-production/production-ai-practices.md)
+- [Mga Praktis sa Produksyon ng AI](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---

@@ -1,57 +1,57 @@
-# Kabanata 4: Infrastruktura bilang Code & Pag-deploy
+# Kabanata 4: Infrastructure as Code at Deployment
 
-**📚 Kurso**: [AZD Para sa Mga Nagsisimula](../../README.md) | **⏱️ Tagal**: 1-1.5 oras | **⭐ Kumpleksidad**: Katamtaman
+**📚 Kurso**: [AZD Para sa Mga Nagsisimula](../../README.md) | **⏱️ Tagal**: 1-1.5 oras | **⭐ Antas ng Kahirapan**: Gitnang Antas
 
 ---
 
 ## Pangkalahatang-ideya
 
-Ang kabanatang ito ay sumasaklaw sa Infrastructure as Code (IaC) na mga pattern gamit ang Bicep templates, provisioning ng mga resource, at mga estratehiya sa pag-deploy gamit ang Azure Developer CLI.
+Saklaw ng kabanatang ito ang Infrastructure as Code (IaC) na mga pattern gamit ang Bicep templates, pagproprovision ng mga resource, at mga estratehiya sa deployment gamit ang Azure Developer CLI.
 
-> Na-validate laban sa `azd 1.25.6` noong Hunyo 2026.
+> Nasubok gamit ang `azd 1.27.1` noong Hulyo 2026.
 
 ## Mga Layunin sa Pagkatuto
 
-Sa pagtatapos ng kabanatang ito, makakamit mo ang mga sumusunod:
-- Maunawaan ang istruktura at sintaks ng Bicep template
+Sa pagtatapos ng kabanatang ito, matututuhan mo:
+- Maunawaan ang istruktura at syntax ng Bicep template
 - Mag-provision ng mga Azure resource gamit ang `azd provision`
-- Mag-deploy ng mga application gamit ang `azd deploy`
-- Ipatupad ang blue-green at rolling na mga estratehiya sa pag-deploy
+- Mag-deploy ng mga aplikasyon gamit ang `azd deploy`
+- Magpatupad ng blue-green at rolling deployment na mga estratehiya
 
 ---
 
 ## 📚 Mga Aralin
 
-| # | Aralin | Paglalarawan | Oras |
+| # | Aralin | Deskripsyon | Oras |
 |---|--------|-------------|------|
-| 1 | [Pag-provision ng Mga Resource](provisioning.md) | Pamamahala ng Azure resource gamit ang AZD | 45 min |
-| 2 | [Gabay sa Pag-deploy](deployment-guide.md) | Mga estratehiya sa pag-deploy ng application | 45 min |
-| 3 | [Paggawa ng Iyong Sariling Template](custom-templates.md) | Bumuo at mag-publish ng mga reusable na azd template | 30 min |
+| 1 | [Pagprovision ng mga Resource](provisioning.md) | Pamamahala ng Azure resource gamit ang AZD | 45 min |
+| 2 | [Gabay sa Deployment](deployment-guide.md) | Mga estratehiya sa pag-deploy ng aplikasyon | 45 min |
+| 3 | [Pagsusulat ng Sariling Template](custom-templates.md) | Gumawa at mag-publish ng reusable na azd templates | 30 min |
 
 ---
 
-## 🚀 Mabilis na Panimula
+## 🚀 Mabilisang Pagsisimula
 
 ```bash
-# I-initialize mula sa template
+# Simulan mula sa template
 azd init --template azure-functions-python-v2-http
 
-# I-preview kung ano ang malilikha
+# Tingnan kung ano ang malilikha
 azd provision --preview
 
-# Mag-provision lamang ng imprastruktura
+# Maglaan lamang ng imprastraktura
 azd provision
 
-# I-deploy lamang ang kodigo
+# I-deploy lamang ang code
 azd deploy
 
-# O pareho nang magkasama
+# O pareho nang sabay
 azd up
 ```
 
 ---
 
-## 📁 Estruktura ng Proyekto ng AZD
+## 📁 Istruktura ng Proyektong AZD
 
 ```
 my-project/
@@ -68,30 +68,30 @@ my-project/
 
 ---
 
-## 🔧 Mahahalagang Utos
+## 🔧 Mahahalagang Mga Utos
 
-| Command | Description |
+| Utos | Deskripsyon |
 |---------|-------------|
-| `azd init` | Initialize project |
-| `azd provision` | Create Azure resources |
-| `azd deploy` | Deploy application code |
-| `azd up` | provision + deploy |
-| `azd down` | Delete all resources |
+| `azd init` | Simulan ang proyekto |
+| `azd provision` | Lumikha ng Azure resources |
+| `azd deploy` | I-deploy ang code ng aplikasyon |
+| `azd up` | mag-provision + mag-deploy |
+| `azd down` | Burahin ang lahat ng resources |
 
 ---
 
 ## 🔗 Navigasyon
 
-| Direction | Chapter |
+| Direksyon | Kabanata |
 |-----------|---------|
-| **Nakaraan** | [Kabanata 3: Konfigurasyon](../chapter-03-configuration/README.md) |
-| **Susunod** | [Kabanata 5: Mga Solusyong Multi-Agent](../chapter-05-multi-agent/README.md) |
+| **Nakaraan** | [Kabanata 3: Configuration](../chapter-03-configuration/README.md) |
+| **Susunod** | [Kabanata 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md) |
 
 ---
 
-## 📖 Kaugnay na Mapagkukunan
+## 📖 Kaugnay na Mga Mapagkukunan
 
-- [Mga Pag-check Bago ang Pag-deploy](../chapter-06-pre-deployment/README.md)
+- [Mga Pagsusuri Bago ang Deployment](../chapter-06-pre-deployment/README.md)
 - [Mga Halimbawa ng Container App](../../examples/container-app/README.md)
 - [Halimbawa ng Database App](../../examples/database-app/README.md)
 

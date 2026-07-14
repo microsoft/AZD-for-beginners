@@ -1,99 +1,99 @@
-# Kabanata 5: Mga Solusyong Multi-Agent AI
+# Kabanata 5: Mga Solusyon ng Multi-Agent AI
 
-**📚 Kurso**: [AZD For Beginners](../../README.md) | **⏱️ Tagal**: 2-3 oras | **⭐ Antas ng Kahirapan**: Mataas
+**📚 Kurso**: [AZD Para sa mga Nagsisimula](../../README.md) | **⏱️ Haba**: 2-3 oras | **⭐ Kahirapan**: Advanced
 
 ---
 
 ## Pangkalahatang-ideya
 
-Saklaw ng kabanatang ito ang mga advanced na pattern ng arkitekturang multi-agent, orchestrasyon ng mga ahente, at production-ready na mga deployment ng AI para sa mga kumplikadong sitwasyon.
+Saklaw ng kabanatang ito ang mga advanced na pattern ng multi-agent architecture, agent orchestration, at production-ready na mga deployment ng AI para sa mga komplikadong senaryo.
 
-> Napatunayan laban sa `azd 1.25.6` noong Hunyo 2026.
+> Napatunayan gamit ang `azd 1.27.1` noong Hulyo 2026.
 
 ## Mga Layunin sa Pagkatuto
 
-Sa pagkompleto ng kabanatang ito, ikaw ay:
-- Mauunawaan ang mga pattern ng arkitekturang multi-agent
-- Makakapag-deploy ng magkaka-ugnay na mga sistema ng AI agent
-- Makakapagpatupad ng komunikasyon mula ahente-sa-ahente
-- Makakabuo ng production-ready na mga multi-agent na solusyon
+Sa pagtatapos ng kabanatang ito, ikaw ay:
+- Maiintindihan ang mga pattern ng multi-agent architecture
+- Maide-deploy ang magkakasamang sistema ng AI agents
+- Maisasakatuparan ang komunikasyon ng agent-sa-agent
+- Makakabuo ng production-ready na multi-agent solutions
 
 ---
 
-## 📚 Mga Aralin
+## 📚 Mga Leksyon
 
-| # | Aralin | Paglalarawan | Oras |
+| # | Leksyon | Paglalarawan | Oras |
 |---|--------|-------------|------|
-| 1 | [Mga Pangunahing Kaalaman sa Multi-Agent](multi-agent-basics.md) | Praktikal: i-deploy ang gumaganang multi-agent app gamit ang `azd up` | 45 min |
-| 2 | [Mga Pattern ng Koordinasyon](../chapter-06-pre-deployment/coordination-patterns.md) | Mga estratehiya ng orchestrasyon ng ahente (nagpapatuloy sa Kabanata 6) | 30 min |
-| 3 | [Pag-deploy ng ARM Template](../../examples/retail-multiagent-arm-template/README.md) | Halimbawa ng pag-deploy na may isang pag-click | 30 min |
+| 1 | [Mga Pundasyon ng Multi-Agent](multi-agent-basics.md) | Hands-on: i-deploy ang gumaganang multi-agent app gamit ang `azd up` | 45 min |
+| 2 | [Mga Pattern ng Koordinasyon](../chapter-06-pre-deployment/coordination-patterns.md) | Mga estratehiya ng agent orchestration (ipagpapatuloy sa Kabanata 6) | 30 min |
+| 3 | [Deployment ng ARM Template](../../examples/retail-multiagent-arm-template/README.md) | Halimbawa ng one-click deployment | 30 min |
 
-> **Magsimula sa Aralin 1.** Ito lamang ang ganap na praktikal at maaaring i-deploy na aralin sa kabanatang ito. Ang Aralin 2 ay nasa Kabanata 6 (ibinabahagi ito sa paunang pagpaplano ng pag-deploy), at ang [Solusyong Retail Multi-Agent](../../examples/retail-scenario.md) ay isang blueprint ng arkitektura—isang sanggunian sa disenyo, hindi isang template na isang utos lang.
+> **Simulan sa Leksyon 1.** Ito lamang ang ganap na hands-on at maaring i-deploy na leksyon sa kabanatang ito. Matatagpuan naman ang Leksyon 2 sa Kabanata 6 (kahit na ito ay kasabay ng pre-deployment planning), at ang [Retail Multi-Agent Solution](../../examples/retail-scenario.md) ay isang blueprint ng arkitektura—isang disenyo na sanggunian, hindi isang one-command na template.
 
 ---
 
-## 🚀 Mabilis na Simula
+## 🚀 Mabilis na Pagsisimula
 
 ```bash
 # Opsyon 1: Mag-deploy mula sa isang template
 azd init --template agent-openai-python-prompty
 azd up
 
-# Opsyon 2: Mag-deploy mula sa isang agent manifest (kinakailangan ang azure.ai.agents extension)
+# Opsyon 2: Mag-deploy mula sa isang agent manifest (kailangan ang azure.ai.agents extension)
 azd extension install azure.ai.agents
 azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **Aling paraan?** Gamitin ang `azd init --template` upang magsimula mula sa isang gumaganang sample. Gamitin ang `azd ai agent init` kapag mayroon ka nang sariling agent manifest. Tingnan ang [Sanggunian ng AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) para sa kumpletong detalye.
+> **Alin ang gamitin?** Gamitin ang `azd init --template` upang magsimula mula sa isang gumaganang halimbawa. Gamitin ang `azd ai agent init` kapag mayroon ka nang sariling agent manifest. Tingnan ang [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) para sa kumpletong detalye.
 
 ---
 
-## 🤖 Arkitekturang Multi-Agent
+## 🤖 Multi-Agent Architecture
 
 ```mermaid
 graph TD
-    Orchestrator[Ahente ng Orkestrador<br/>Niruruta ang mga kahilingan, pinamamahalaan ang daloy ng trabaho] --> Customer[Ahente ng Kustomer<br/>Mga katanungan ng gumagamit, mga kagustuhan]
-    Orchestrator --> Inventory[Ahente ng Imbentaryo<br/>Antas ng imbentaryo, mga order]
+    Orchestrator[Ahente ng Orkestrador<br/>Inaayos ang mga kahilingan, pinamamahalaan ang daloy ng trabaho] --> Customer[Ahente ng Customer<br/>Mga tanong ng gumagamit, mga kagustuhan]
+    Orchestrator --> Inventory[Ahente ng Imbentaryo<br/>Mga antas ng stock, mga order]
 ```
 
 ---
 
 ## 🎯 Tampok na Solusyon: Retail Multi-Agent
 
-Ipinapakita ng [Solusyong Retail Multi-Agent](../../examples/retail-scenario.md):
+Ipinapakita ng [Retail Multi-Agent Solution](../../examples/retail-scenario.md) ang:
 
-- **Ahente ng Kostumer**: Humahawak sa pakikipag-ugnayan sa gumagamit at mga kagustuhan
-- **Ahente ng Imbentaryo**: Namamahala ng stock at pagproseso ng mga order
-- **Orkestrador**: Nagkokordina sa pagitan ng mga ahente
-- **Pinagsamang Memorya**: Pamamahala ng konteksto sa pagitan ng mga ahente
+- **Customer Agent**: Humahawak sa pakikipag-ugnayan at mga kagustuhan ng gumagamit
+- **Inventory Agent**: Namamahala sa stock at pagproseso ng order
+- **Orchestrator**: Naka-coordinate sa pagitan ng mga agent
+- **Shared Memory**: Pamamahala ng konteksto sa pagitan ng mga agent
 
-### Mga Serbisyong Ginamit
+### Mga Serbing Ginamit
 
 | Serbisyo | Layunin |
 |---------|---------|
-| Microsoft Foundry Models | Pag-unawa sa wika |
+| Microsoft Foundry Models | Pag-unawa ng wika |
 | Azure AI Search | Katalogo ng produkto |
-| Cosmos DB | Estado at memorya ng ahente |
-| Container Apps | Pagho-host ng ahente |
+| Cosmos DB | Estado at memorya ng agent |
+| Container Apps | Pag-host ng agent |
 | Application Insights | Pagsubaybay |
 
 ---
 
-## 🔗 Nabigasyon
+## 🔗 Navigasyon
 
 | Direksyon | Kabanata |
 |-----------|---------|
-| **Nakaraan** | [Kabanata 4: Infrastructure](../chapter-04-infrastructure/README.md) |
-| **Susunod** | [Kabanata 6: Paunang Pag-deploy](../chapter-06-pre-deployment/README.md) |
+| **Nakaraan** | [Kabanata 4: Imprastruktura](../chapter-04-infrastructure/README.md) |
+| **Susunod** | [Kabanata 6: Pre-Deployment](../chapter-06-pre-deployment/README.md) |
 
 ---
 
-## 📖 Mga Kaugnay na Mapagkukunan
+## 📖 Mga Kaugnay na Sanggunian
 
-- [Gabay sa Mga Ahente ng AI](../chapter-02-ai-development/agents.md)
-- [Mga Praktika sa Produksyon ng AI](../chapter-08-production/production-ai-practices.md)
-- [Pag-troubleshoot ng AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Gabayan sa AI Agents](../chapter-02-ai-development/agents.md)
+- [Mga Praktis sa Production AI](../chapter-08-production/production-ai-practices.md)
+- [Troubleshooting ng AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

@@ -1,4 +1,4 @@
-# Bab 2: Pengembangan Berbasis AI
+# Bab 2: Pengembangan AI-Pertama
 
 **📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Durasi**: 1-2 jam | **⭐ Kompleksitas**: Menengah
 
@@ -6,14 +6,14 @@
 
 ## Ikhtisar
 
-Bab ini berfokus pada penerapan aplikasi bertenaga AI menggunakan Azure Developer CLI dan layanan Microsoft Foundry. Dari aplikasi obrolan AI sederhana hingga agen cerdas dengan alat.
+Bab ini berfokus pada penerapan aplikasi bertenaga AI menggunakan Azure Developer CLI dan layanan Microsoft Foundry. Dari aplikasi chat AI sederhana hingga agen cerdas dengan alat.
 
-> **Catatan validasi (2026-06-15):** Alur perintah dan panduan ekstensi dalam bab ini telah ditinjau terhadap `azd` `1.25.6` dan rilisan ekstensi agen AI pratinjau saat ini `azure.ai.agents` `0.1.40-preview`. Jika Anda menggunakan build AZD yang lebih lama, perbarui terlebih dahulu lalu lanjutkan dengan latihan.
+> **Catatan validasi (2026-07-13):** Alur perintah dan panduan ekstensi dalam bab ini telah ditinjau dengan `azd` `1.27.1` dan rilis ekstensi agen AI pratinjau saat ini `azure.ai.agents` `1.0.0-beta.5`. Jika Anda menggunakan versi AZD yang lebih lama, perbarui terlebih dahulu lalu lanjutkan dengan latihan.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan bab ini, Anda akan:
-- Menerapkan aplikasi AI menggunakan template AZD pra-buat
+- Menerapkan aplikasi AI menggunakan template AZD yang sudah dibuat sebelumnya
 - Memahami integrasi Microsoft Foundry dengan AZD
 - Mengonfigurasi dan menyesuaikan agen AI dengan alat
 - Menerapkan aplikasi RAG (Retrieval-Augmented Generation)
@@ -24,17 +24,17 @@ Dengan menyelesaikan bab ini, Anda akan:
 
 | # | Pelajaran | Deskripsi | Waktu |
 |---|--------|-------------|------|
-| 1 | [Integrasi Microsoft Foundry](microsoft-foundry-integration.md) | Hubungkan AZD dengan layanan Foundry | 30 min |
-| 2 | [Panduan Agen AI](agents.md) | Terapkan agen cerdas dengan alat | 45 min |
-| 3 | [Penerapan Model AI](ai-model-deployment.md) | Terapkan dan konfigurasikan model AI | 30 min |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Praktik langsung: Siapkan solusi AI Anda agar siap AZD | 60 min |
+| 1 | [Integrasi Microsoft Foundry](microsoft-foundry-integration.md) | Menghubungkan AZD dengan layanan Foundry | 30 menit |
+| 2 | [Panduan Agen AI](agents.md) | Menerapkan agen cerdas dengan alat | 45 menit |
+| 3 | [Penerapan Model AI](ai-model-deployment.md) | Menerapkan dan mengonfigurasi model AI | 30 menit |
+| 4 | [Lab Workshop AI](ai-workshop-lab.md) | Praktik: Membuat solusi AI Anda siap AZD | 60 menit |
 
 ---
 
-## 🚀 Memulai Cepat
+## 🚀 Mulai Cepat
 
 ```bash
-# Opsi 1: Aplikasi Obrolan RAG
+# Opsi 1: Aplikasi Chat RAG
 azd init --template azure-search-openai-demo
 azd up
 
@@ -42,7 +42,7 @@ azd up
 azd init --template get-started-with-ai-agents
 azd up
 
-# Opsi 3: Aplikasi Obrolan Cepat
+# Opsi 3: Aplikasi Chat Cepat
 azd init --template openai-chat-app-quickstart
 azd up
 ```
@@ -53,9 +53,9 @@ azd up
 
 | Template | Deskripsi | Layanan |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Obrolan RAG dengan sitasi | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Agen AI dengan alat | AI Agent Service |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Obrolan AI dasar | OpenAI + Container Apps |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Chat RAG dengan kutipan | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Agen AI dengan alat | Layanan Agen AI |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chat AI dasar | OpenAI + Container Apps |
 
 ---
 
@@ -75,13 +75,13 @@ azd up
 
 | Arah | Bab |
 |-----------|---------|
-| **Sebelumnya** | [Bab 1: Dasar](../chapter-01-foundation/README.md) |
+| **Sebelumnya** | [Bab 1: Fondasi](../chapter-01-foundation/README.md) |
 | **Berikutnya** | [Bab 3: Konfigurasi](../chapter-03-configuration/README.md) |
-| **Lompat ke** | [Bab 8: Pola Produksi](../chapter-08-production/README.md) |
+| **Lewati ke** | [Bab 8: Pola Produksi](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Sumber Daya Terkait
+## 📖 Sumber Terkait
 
 - [Pemecahan Masalah AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 - [Praktik AI Produksi](../chapter-08-production/production-ai-practices.md)

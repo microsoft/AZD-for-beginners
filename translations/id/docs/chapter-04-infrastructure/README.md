@@ -1,32 +1,32 @@
-# Bab 4: Infrastruktur sebagai Kode & Penyebaran
+# Bab 4: Infrastruktur sebagai Kode & Deployment
 
-**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Durasi**: 1-1.5 jam | **⭐ Kompleksitas**: Menengah
+**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Durasi**: 1-1,5 jam | **⭐ Kompleksitas**: Menengah
 
 ---
 
 ## Ikhtisar
 
-Bab ini membahas pola Infrastruktur sebagai Kode (IaC) dengan template Bicep, penyediaan sumber daya, dan strategi penyebaran menggunakan Azure Developer CLI.
+Bab ini membahas pola Infrastruktur sebagai Kode (IaC) dengan template Bicep, penyediaan sumber daya, dan strategi deployment menggunakan Azure Developer CLI.
 
-> Divalidasi terhadap `azd 1.25.6` pada Juni 2026.
+> Divalidasi dengan `azd 1.27.1` pada Juli 2026.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan bab ini, Anda akan:
 - Memahami struktur dan sintaks template Bicep
 - Menyediakan sumber daya Azure dengan `azd provision`
-- Menyebarkan aplikasi dengan `azd deploy`
-- Menerapkan strategi penyebaran blue-green dan rolling
+- Mendeploy aplikasi dengan `azd deploy`
+- Menerapkan strategi deployment blue-green dan rolling
 
 ---
 
 ## 📚 Pelajaran
 
 | # | Pelajaran | Deskripsi | Waktu |
-|---|--------|-------------|------|
-| 1 | [Penyediaan Sumber Daya](provisioning.md) | Manajemen sumber daya Azure dengan AZD | 45 menit |
-| 2 | [Panduan Penyebaran](deployment-guide.md) | Strategi penyebaran aplikasi | 45 menit |
-| 3 | [Membuat Template Anda Sendiri](custom-templates.md) | Membangun dan menerbitkan template azd yang dapat digunakan ulang | 30 menit |
+|---|----------|-----------|-------|
+| 1 | [Provisioning Resources](provisioning.md) | Manajemen sumber daya Azure dengan AZD | 45 menit |
+| 2 | [Deployment Guide](deployment-guide.md) | Strategi deployment aplikasi | 45 menit |
+| 3 | [Authoring Your Own Template](custom-templates.md) | Membangun dan menerbitkan template azd yang dapat digunakan ulang | 30 menit |
 
 ---
 
@@ -39,13 +39,13 @@ azd init --template azure-functions-python-v2-http
 # Pratinjau apa yang akan dibuat
 azd provision --preview
 
-# Hanya menyediakan infrastruktur
+# Menyediakan infrastruktur saja
 azd provision
 
-# Hanya menerapkan kode
+# Menyebarkan kode saja
 azd deploy
 
-# Atau keduanya sekaligus
+# Atau keduanya bersama-sama
 azd up
 ```
 
@@ -68,14 +68,14 @@ my-project/
 
 ---
 
-## 🔧 Perintah Penting
+## 🔧 Perintah Dasar
 
 | Perintah | Deskripsi |
-|---------|-------------|
+|---------|-----------|
 | `azd init` | Inisialisasi proyek |
 | `azd provision` | Membuat sumber daya Azure |
-| `azd deploy` | Menyebarkan kode aplikasi |
-| `azd up` | penyediaan + penyebaran |
+| `azd deploy` | Mendeploy kode aplikasi |
+| `azd up` | provision + deploy |
 | `azd down` | Menghapus semua sumber daya |
 
 ---
@@ -83,7 +83,7 @@ my-project/
 ## 🔗 Navigasi
 
 | Arah | Bab |
-|-----------|---------|
+|-------|-----|
 | **Sebelumnya** | [Bab 3: Konfigurasi](../chapter-03-configuration/README.md) |
 | **Berikutnya** | [Bab 5: Solusi Multi-Agen](../chapter-05-multi-agent/README.md) |
 
@@ -91,7 +91,7 @@ my-project/
 
 ## 📖 Sumber Terkait
 
-- [Pemeriksaan Pra-Penyebaran](../chapter-06-pre-deployment/README.md)
+- [Pemeriksaan Pra-Deployment](../chapter-06-pre-deployment/README.md)
 - [Contoh Aplikasi Container](../../examples/container-app/README.md)
 - [Contoh Aplikasi Database](../../examples/database-app/README.md)
 

@@ -1,43 +1,43 @@
-# Kabanata 3: Konfigurasyon at Pagpapatotoo
+# Kabanata 3: Konfigurasyon at Pagpapatunay
 
-**📚 Kurso**: [AZD For Beginners](../../README.md) | **⏱️ Tagal**: 45-60 minutes | **⭐ Kahirapan**: Intermediate
+**📚 Kurso**: [AZD Para sa Mga Baguhan](../../README.md) | **⏱️ Tagal**: 45-60 minuto | **⭐ Antas ng Kahirapan**: Intermediate
 
 ---
 
 ## Pangkalahatang-ideya
 
-Sinasaklaw ng kabanatang ito ang konfigurasyon ng environment, mga pattern ng pagpapatotoo, at mga pinakamahusay na praktika sa seguridad para sa Azure Developer CLI deployments.
+Tinatalakay ng kabanatang ito ang konfigurasyon ng kapaligiran, mga pattern ng pagpapatunay, at mga pinakamahusay na kasanayan sa seguridad para sa mga deployment ng Azure Developer CLI.
 
-> Na-validate laban sa `azd 1.25.6` noong Hunyo 2026.
+> Napatunayan gamit ang `azd 1.27.1` noong Hulyo 2026.
 
 ## Mga Layunin sa Pagkatuto
 
-Sa pagtatapos ng kabanatang ito, magagawa mo:
-- Maging dalubhasa sa hierarchy ng konfigurasyon ng AZD
-- Pamahalaan ang maramihang mga environment (dev, staging, prod)
-- Magpatupad ng ligtas na pagpapatotoo gamit ang managed identities
-- I-configure ang mga setting na partikular sa environment
+Sa pagtatapos ng kabanatang ito, matututuhan mo:
+- Mabisang makontrol ang AZD configuration hierarchy
+- Pamahalaan ang maramihang mga kapaligiran (dev, staging, prod)
+- Magpatupad ng ligtas na pagpapatunay gamit ang mga managed identities
+- I-configure ang mga setting na partikular sa kapaligiran
 
 ---
 
-## 📚 Mga Leksyon
+## 📚 Mga Aralin
 
-| # | Leksyon | Paglalarawan | Time |
+| # | Aralin | Paglalarawan | Oras |
 |---|--------|-------------|------|
-| 1 | [Gabay sa Konfigurasyon](configuration.md) | Pagsasaayos at pamamahala ng environment | 30 min |
-| 2 | [Pagpapatotoo at Seguridad](authsecurity.md) | Mga pattern ng managed identity at RBAC | 30 min |
+| 1 | [Gabay sa Konfigurasyon](configuration.md) | Pagsasaayos at pamamahala ng kapaligiran | 30 min |
+| 2 | [Pagpapatunay at Seguridad](authsecurity.md) | Managed identity at mga pattern ng RBAC | 30 min |
 
 ---
 
-## 🚀 Mabilis na Pagsisimula
+## 🚀 Mabilisang Pagsisimula
 
 ```bash
-# Lumikha ng maramihang mga kapaligiran
+# Gumawa ng maramihang mga kapaligiran
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Magpalit ng kapaligiran
+# Lumipat ng mga kapaligiran
 azd env select prod
 
 # Itakda ang mga variable ng kapaligiran
@@ -52,49 +52,49 @@ azd env get-values
 
 ## 🔧 Hierarchy ng Konfigurasyon
 
-AZD ina-apply ang mga setting sa pagkakasunod na ito (ang huli ay nag-override sa nauna):
+Ipinapatupad ng AZD ang mga setting sa ganitong pagkakasunod (ang huli ay pumapalit sa nauna):
 
 1. **Mga default na halaga** (nakapaloob sa mga template)
 2. **azure.yaml** (konfigurasyon ng proyekto)
 3. **Mga environment variable** (`azd env set`)
-4. **Mga command-line flag** (`--location eastus`)
+4. **Mga command-line flags** (`--location eastus`)
 
 ---
 
-## 🔐 Mga Pinakamahuhusay na Praktika sa Seguridad
+## 🔐 Pinakamahuhusay na Kasanayan sa Seguridad
 
 ```bash
-# Gumamit ng managed identity (inirerekomenda)
+# Gamitin ang pinamamahalaang pagkakakilanlan (inirerekomenda)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
 # Suriin ang katayuan ng pagpapatunay ng AZD
 azd auth status
 
-# Opsyonal: beripikahin ang konteksto ng Azure CLI kung balak mong magpatakbo ng mga utos na az
+# Opsyonal: tiyakin ang konteksto ng Azure CLI kung balak mong magpatakbo ng az commands
 az account show
 
 # Muling magpatunay kung kinakailangan
 azd auth login
 
-# Opsyonal: i-refresh ang pagpapatunay ng Azure CLI para sa mga utos na az
+# Opsyonal: i-refresh ang pagpapatunay ng Azure CLI para sa az commands
 az login
 ```
 
 ---
 
-## 🔗 Pag-navigate
+## 🔗 Navigation
 
 | Direksyon | Kabanata |
 |-----------|---------|
-| **Nakaraan** | [Kabanata 2: Pag-unlad ng AI](../chapter-02-ai-development/README.md) |
-| **Susunod** | [Kabanata 4: Imprastruktura](../chapter-04-infrastructure/README.md) |
+| **Nakahuli** | [Kabanata 2: AI Development](../chapter-02-ai-development/README.md) |
+| **Susunod** | [Kabanata 4: Infrastrukturang](../chapter-04-infrastructure/README.md) |
 
 ---
 
-## 📖 Mga Kaugnay na Mapagkukunan
+## 📖 Kaugnay na Mga Sanggunian
 
-- [Mga Paunang Pagsusuri Bago ang Pag-deploy](../chapter-06-pre-deployment/README.md)
-- [Pag-troubleshoot](../chapter-07-troubleshooting/common-issues.md)
+- [Mga Paunang Pagsusuri bago ang Deployment](../chapter-06-pre-deployment/README.md)
+- [Pag-aayos ng Problema](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

@@ -6,15 +6,15 @@
 
 ## Ikhtisar
 
-Bab ini membantu Anda mendiagnosis dan menyelesaikan masalah umum saat bekerja dengan Azure Developer CLI. Mulai dari kegagalan penerapan hingga masalah khusus AI.
+Bab ini membantu Anda mendiagnosis dan menyelesaikan masalah umum saat bekerja dengan Azure Developer CLI. Mulai dari kegagalan deployment hingga masalah khusus AI.
 
-> Divalidasi terhadap `azd 1.25.6` pada Juni 2026.
+> Divalidasi dengan `azd 1.27.1` pada Juli 2026.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan bab ini, Anda akan:
-- Mendiagnosis kegagalan penerapan AZD yang umum
-- Mendebug masalah autentikasi dan izin
+- Mendiagnosis kegagalan deployment AZD yang umum
+- Debug masalah otentikasi dan izin
 - Menyelesaikan masalah konektivitas layanan AI
 - Menggunakan Azure Portal dan CLI untuk pemecahan masalah
 
@@ -26,13 +26,13 @@ Dengan menyelesaikan bab ini, Anda akan:
 |---|--------|-------------|------|
 | 1 | [Masalah Umum](common-issues.md) | Masalah yang sering ditemui | 30 menit |
 | 2 | [Panduan Debugging](debugging.md) | Strategi debugging langkah demi langkah | 45 menit |
-| 3 | [Pemecahan Masalah AI](ai-troubleshooting.md) | Masalah spesifik AI | 30 menit |
+| 3 | [Pemecahan Masalah AI](ai-troubleshooting.md) | Masalah khusus AI | 30 menit |
 
 ---
 
 ## 🚨 Perbaikan Cepat
 
-### Masalah Autentikasi
+### Masalah Otentikasi
 ```bash
 # Diperlukan untuk alur kerja AZD
 azd auth login
@@ -43,7 +43,7 @@ az login
 azd auth status
 ```
 
-### Kegagalan Penyediaan
+### Kegagalan Provisioning
 ```bash
 azd show
 azd monitor --logs
@@ -70,12 +70,12 @@ azd up
 
 | Kesalahan | Penyebab | Solusi |
 |-------|-------|----------|
-| `AuthenticationError` | Belum masuk | `azd auth login` |
+| `AuthenticationError` | Belum login | `azd auth login` |
 | `ResourceNotFound` | Sumber daya hilang | Periksa nama sumber daya |
-| `QuotaExceeded` | Batasan langganan | Minta peningkatan kuota |
+| `QuotaExceeded` | Batas langganan | Minta kenaikan kuota |
 | `InvalidTemplate` | Kesalahan sintaks Bicep | `az bicep build` |
 | `Conflict` | Sumber daya sudah ada | Gunakan nama baru atau hapus |
-| `Forbidden` | Izin tidak memadai | Periksa peran RBAC |
+| `Forbidden` | Izin tidak cukup | Periksa peran RBAC |
 
 ---
 
@@ -96,16 +96,16 @@ azd up
 
 | Arah | Bab |
 |-----------|---------|
-| **Sebelumnya** | [Bab 6: Pra-Penerapan](../chapter-06-pre-deployment/README.md) |
+| **Sebelumnya** | [Bab 6: Pra-Deployment](../chapter-06-pre-deployment/README.md) |
 | **Berikutnya** | [Bab 8: Produksi](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Sumber Daya Terkait
 
-- [Pemeriksaan Pra-Penerapan](../chapter-06-pre-deployment/preflight-checks.md)
+- [Pemeriksaan Pra-Deployment](../chapter-06-pre-deployment/preflight-checks.md)
 - [Panduan Konfigurasi](../chapter-03-configuration/configuration.md)
-- [Masalah GitHub AZD](https://github.com/Azure/azure-dev/issues)
+- [Masalah AZD GitHub](https://github.com/Azure/azure-dev/issues)
 
 ---
 

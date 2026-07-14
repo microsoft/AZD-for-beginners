@@ -1,67 +1,67 @@
-# Mencipta Templat azd Anda Sendiri
+# Membuat Templat azd Anda Sendiri
 
 **Navigasi Bab:**
-- **📚 Utama Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📚 Halaman Utama Kursus**: [AZD Untuk Pemula](../../README.md)
 - **📖 Bab Semasa**: Bab 4 - Infrastruktur sebagai Kod & Penyebaran
 - **⬅️ Sebelumnya**: [Panduan Penyebaran](deployment-guide.md)
-- **🚀 Bab Seterusnya**: [Bab 5: Penyelesaian Berbilang Ejen](../chapter-05-multi-agent/README.md)
+- **🚀 Bab Seterusnya**: [Bab 5: Penyelesaian Multi-Ejen](../chapter-05-multi-agent/README.md)
 
-> Disahkan menggunakan `azd 1.25.6` pada Jun 2026.
+> Disahkan dengan `azd 1.27.1` pada Julai 2026.
 
 ## Pengenalan
 
-Sehingga kini anda telah *menggunakan* templat dengan `azd init --template <name>`. Tetapi setelah anda mempunyai susun atur projek yang pasukan anda sukai—contohnya, Container App dengan Cosmos DB dan pemantauan yang betul—anda akan mahu menukarnya menjadi templat boleh guna semula sendiri. Satu templat hanyalah sebuah repositori Git dengan struktur yang boleh diramal yang azd tahu bagaimana untuk dibaca. Pelajaran ini menunjukkan cara membinanya dari awal, menguji, dan (secara pilihan) menerbitkannya ke galeri komuniti.
+Sejauh ini anda telah *menggunakan* templat dengan `azd init --template <name>`. Tetapi setelah anda mempunyai susun atur projek yang disukai oleh pasukan anda—contohnya, Aplikasi Kontena dengan Cosmos DB dan pemantauan yang sesuai—anda akan ingin mengubahnya menjadi templat boleh guna semula milik anda sendiri. Templat hanyalah sebuah repositori Git dengan struktur yang boleh diramal yang azd tahu bagaimana untuk membacanya. Pelajaran ini menunjukkan cara membina satu dari awal, mengujinya, dan (secara pilihan) menerbitkannya ke galeri komuniti.
 
 ## Matlamat Pembelajaran
 
-Menjelang akhir pelajaran ini, anda akan:
-- Faham apa yang menjadikan folder sebuah "templat azd"
-- Tahu fail dan susun atur folder yang diperlukan
+Pada akhir pelajaran ini, anda akan:
+- Memahami apa yang menjadikan folder sebagai "templat azd"
+- Mengetahui fail dan susun atur folder yang diperlukan
 - Menambah `azure.yaml` dan `infra/` yang boleh digunakan semula oleh orang lain
 - Menguji templat anda secara tempatan sebelum berkongsi
-- Menerbitkannya dan (secara pilihan) menghantarnya ke Awesome AZD
+- Menerbitkan dan (secara pilihan) menyerahkannya ke Awesome AZD
 
 ## Hasil Pembelajaran
 
-Selepas menyiapkan pelajaran ini, anda akan dapat:
-- Menyusun repositori templat baru
-- Memparameterkan infrastruktur supaya ia berfungsi dalam mana-mana langganan
+Setelah melengkapkan pelajaran ini, anda akan boleh:
+- Membina repositori templat baru
+- Memparametrkan infrastruktur supaya berfungsi dalam mana-mana langganan
 - Mengesahkan templat dengan `azd init` dan `azd up`
 - Menambah metadata yang diperlukan oleh galeri komuniti
 
 ---
 
-## Apakah Templat Sebenarnya?
+## Apa Itu Templat, Sebenarnya?
 
-Satu templat azd adalah **sebuah repositori Git** yang mengandungi, pada minimum:
+Templat azd adalah **repositori Git** yang mengandungi, sekurang-kurangnya:
 
-| Fail / folder | Tujuan | Diperlukan? |
+| Fail / folder | Tujuan | Wajib? |
 |---------------|---------|-----------|
-| `azure.yaml` | Menerangkan perkhidmatan, hos, dan pembekal infra | ✅ Ya |
+| `azure.yaml` | Menerangkan perkhidmatan, hos, dan penyedia infra | ✅ Ya |
 | `infra/` | Bicep, Terraform, atau Pulumi yang menyediakan sumber | ✅ Ya |
-| `src/` (atau kod anda) | Kod aplikasi yang disebarkan oleh azd | ✅ Ya |
+| `src/` (atau kod anda) | Kod aplikasi yang azd sebarkan | ✅ Ya |
 | `README.md` | Cara menggunakan templat | ✅ Sangat disyorkan |
-| `.azdo/` atau `.github/` | Definisi pipeline CI/CD | Pilihan |
-| `.devcontainer/` | Persekitaran dev yang boleh dihasilkan semula | Pilihan |
-| `azure.yaml` `metadata` | Maklumat Galeri + telemetri | Pilihan (diperlukan untuk menerbitkan) |
+| `.azdo/` atau `.github/` | Definisi aliran kerja CI/CD | Pilihan |
+| `.devcontainer/` | Persekitaran pembangunan boleh ulang | Pilihan |
+| `azure.yaml` `metadata` | Maklumat galeri + telemetri | Pilihan (diperlukan untuk terbit) |
 
-Tiada apa-apa yang magikal di sini: apabila anda menjalankan `azd init --template you/your-repo`, azd mengklon repo dan membaca `azure.yaml`.
+Tiada yang ajaib di sini: apabila anda menjalankan `azd init --template you/your-repo`, azd menyalin repo dan membaca `azure.yaml`.
 
 ---
 
-## Langkah 1: Buat Struktur Repositori
+## Langkah 1: Membina Kerangka Repositori
 
-Cipta struktur folder secara manual atau mulakan dari templat minimum dan suntingnya:
+Buat struktur folder secara manual atau mula dari templat minimum dan sunting:
 
 ```bash
 mkdir my-azd-template && cd my-azd-template
 git init
 
-# Buat susun atur piawai
+# Cipta susun atur standard
 mkdir -p src infra
 ```
 
-Susunan siap yang tipikal kelihatan seperti ini:
+Susun atur siap biasa adalah seperti ini:
 
 ```
 my-azd-template/
@@ -101,13 +101,13 @@ services:
     host: containerapp              # appservice | containerapp | function | aks | staticwebapp
 ```
 
-> Medan `metadata.template` adalah apa yang telemetri galeri gunakan untuk mengira penggunaan. Gunakan konvensyen `name@version`.
+> Medan `metadata.template` adalah yang digunakan telemetri galeri untuk mengira penggunaan. Gunakan konvensyen `nama@versi`.
 
 ---
 
 ## Langkah 3: Parameterkan Infrastruktur
 
-Peraturan paling penting untuk templat *boleh digunakan semula*: **jangan sesekali mengehardkod nama, rantau, atau nilai khusus langganan.** Gunakan parameter dan corak token sumber supaya templat yang sama berfungsi dalam langganan sesiapa pun.
+Peraturan paling penting untuk templat *boleh guna semula*: **jangan sesekali menyeragamkan nama, rantau, atau nilai khusus langganan.** Gunakan parameter dan corak token sumber supaya templat yang sama berfungsi dalam langganan sesiapa sahaja.
 
 ```bicep
 // infra/main.bicep
@@ -140,10 +140,10 @@ output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 
 Dua perkara menjadikan ini mesra templat:
 
-1. **`azd-env-name` tag** — azd menggunakannya untuk menjejaki dan membersihkan sumber mengikut persekitaran.
-2. **Token sumber `uniqueString(...)`** — menghasilkan sufiks unik global yang stabil supaya nama tidak bertembung.
+1. **Tag `azd-env-name`** — azd menggunakannya untuk menjejak dan membersihkan sumber per persekitaran.
+2. **Token sumber `uniqueString(...)`** — menghasilkan sufiks yang stabil dan unik global supaya nama tidak bertembung.
 
-Sediakan fail parameter sepadan yang membaca nilai yang disuntik azd dari persekitaran:
+Sediakan fail parameter yang sepadan yang membaca nilai yang disuntik azd dari persekitaran:
 
 ```json
 // infra/main.parameters.json
@@ -163,29 +163,29 @@ azd menggantikan `${AZURE_ENV_NAME}` dan `${AZURE_LOCATION}` dari persekitaran s
 
 ## Langkah 4: Uji Templat Anda Secara Tempatan
 
-Sebelum berkongsi, buktikan templat berfungsi dari keadaan yang bersih.
+Sebelum berkongsi, buktikan templat berfungsi dari keadaan bersih.
 
-**Uji dari folder tempatan** (tiada Git push diperlukan):
+**Uji dari folder tempatan** (tidak perlu push ke Git):
 
 ```bash
-# Daripada direktori kosong, inisialisasikan menggunakan laluan templat tempatan anda
+# Dari direktori kosong, inisialisasi menggunakan laluan templat tempatan anda
 mkdir /tmp/test-run && cd /tmp/test-run
 azd init --template /path/to/my-azd-template
 
-# Sediakan + terapkan dari hujung ke hujung
+# Sediakan + lancarkan dari awal hingga akhir
 azd auth login
 azd up
 ```
 
-**Kemudian uji proses pembersihan**—templat yang baik membersihkan sepenuhnya:
+**Kemudian uji penutupan**—templat yang baik membersihkan sepenuhnya:
 
 ```bash
 azd down --force --purge
 ```
 
-Jika `azd down` meninggalkan sumber, kemungkinan anda terlepas tag `azd-env-name` pada sumber.
+Jika `azd down` meninggalkan sumber, mungkin anda terlepas tag `azd-env-name` pada sumber tersebut.
 
-> **Petua:** jalankan `azd provision --preview` terlebih dahulu. Ia melakukan what-if dan memaparkan ralat templat sebelum sebarang sumber dicipta.
+> **Petua:** jalankan `azd provision --preview` terlebih dahulu. Ia melakukan simulasi dan mengenalpasti ralat templat sebelum mana-mana sumber dibuat.
 
 ---
 
@@ -197,7 +197,7 @@ Tolak repositori ke GitHub (awam jika anda mahu orang lain menggunakannya):
 gh repo create my-azd-template --public --source=. --push
 ```
 
-Sesiapa kini boleh menggunakannya:
+Kini sesiapa sahaja boleh menggunakannya:
 
 ```bash
 azd init --template your-github-username/my-azd-template
@@ -205,39 +205,39 @@ azd init --template your-github-username/my-azd-template
 
 ---
 
-## Langkah 6 (Pilihan): Hantar ke Awesome AZD
+## Langkah 6 (Pilihan): Serahkan ke Awesome AZD
 
-Galeri [Awesome AZD](https://azure.github.io/awesome-azd/) menyenaraikan templat komuniti. Untuk disenaraikan repo anda harus menyertakan:
+Galeri [Awesome AZD](https://azure.github.io/awesome-azd/) menyenaraikan templat komuniti. Untuk disenaraikan, repo anda harus mengandungi:
 
-- ✅ `README.md` yang jelas dengan pra-syarat, rajah seni bina, dan nota kos
+- ✅ `README.md` yang jelas dengan prasyarat, rajah seni bina, dan nota kos
 - ✅ `azure.yaml` yang berfungsi dengan `metadata.template`
-- ✅ Infrastruktur yang menyediakan dengan bersih dalam langganan yang baru
+- ✅ Infrastruktur yang boleh dibina bersih dalam langganan baru
 - ✅ Fail `LICENSE`
-- ✅ (Disyorkan) `.devcontainer/` untuk Codespaces satu-klik
+- ✅ (Disyorkan) `.devcontainer/` untuk Codespaces satu klik
 
-Hantar dengan membuka pull request yang menambah templat anda ke fail data galeri, mengikut panduan sumbangan di repositori [Awesome AZD](https://github.com/Azure/awesome-azd).
+Serahkan dengan membuka pull request yang menambah templat anda ke fail data galeri, mengikut panduan sumbangan di [Awesome AZD repository](https://github.com/Azure/awesome-azd).
 
 ---
 
-## Perangkap Biasa
+## Perangkap Lazim
 
-| Perangkap | Pembaikan |
+| Perangkap | Pembetulan |
 |---------|-----|
-| Nama sumber yang di-hardcode | Gunakan token sumber `uniqueString()` |
-| `azd down` meninggalkan sumber | Tandakan setiap sumber (atau kumpulan sumber) dengan `azd-env-name` |
-| Templat berfungsi untuk anda, gagal bagi orang lain | Alih keluar ID langganan, ID tenant, dan andaian rantau |
-| Output tidak disambung ke aplikasi | Eksport `SERVICE_<NAME>_ENDPOINT_URL` dan output `AZURE_*` lain |
-| Penyerahan galeri ditolak | Tambahkan `README.md`, `LICENSE`, dan `metadata.template` |
+| Nama sumber keras kod | Gunakan token sumber `uniqueString()` |
+| `azd down` meninggalkan sumber | Tag setiap sumber (atau kumpulan sumber) dengan `azd-env-name` |
+| Templat berfungsi untuk anda, gagal untuk orang lain | Buang ID langganan, ID penyewa, dan andaian rantau |
+| Output tidak disambungkan ke aplikasi | Eksport `SERVICE_<NAME>_ENDPOINT_URL` dan output lain `AZURE_*` |
+| Penyerahan galeri ditolak | Tambah `README.md`, `LICENSE`, dan `metadata.template` |
 
 ---
 
 ## Ringkasan
 
-- Satu templat hanyalah repo Git dengan `azure.yaml`, `infra/`, dan kod anda.
-- Parameterkan segala-galanya—nama, rantau, dan ID—supaya ia berjalan di mana-mana.
-- Sentiasa tandakan sumber dengan `azd-env-name` supaya `azd down` berfungsi.
-- Uji secara tempatan dengan `azd init --template <local-path>` sebelum menerbitkan.
-- Tambah metadata dan README untuk menghantar ke Awesome AZD.
+- Templat hanyalah repo Git dengan `azure.yaml`, `infra/`, dan kod anda.
+- Parameterkan segala-galanya—nama, rantau, dan ID—supaya berfungsi di mana-mana.
+- Sentiasa tag sumber dengan `azd-env-name` supaya `azd down` berfungsi.
+- Uji secara tempatan dengan `azd init --template <local-path>` sebelum menerbit.
+- Tambah metadata dan README untuk menyerah ke Awesome AZD.
 
 ---
 
@@ -246,8 +246,8 @@ Hantar dengan membuka pull request yang menambah templat anda ke fail data galer
 | Arah | Sumber |
 |-----------|----------|
 | **Sebelumnya** | [Panduan Penyebaran](deployment-guide.md) |
-| **Utama Bab** | [Bab 4: Infrastruktur sebagai Kod](README.md) |
-| **Bab Seterusnya** | [Bab 5: Penyelesaian Berbilang Ejen](../chapter-05-multi-agent/README.md) |
+| **Halaman Bab** | [Bab 4: Infrastruktur sebagai Kod](README.md) |
+| **Bab Seterusnya** | [Bab 5: Penyelesaian Multi-Ejen](../chapter-05-multi-agent/README.md) |
 
 ## 📖 Sumber Berkaitan
 

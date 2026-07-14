@@ -1,22 +1,22 @@
 # Kabanata 7: Pag-troubleshoot at Pag-debug
 
-**📚 Kurso**: [AZD Para sa Mga Nagsisimula](../../README.md) | **⏱️ Tagal**: 1-1.5 hours | **⭐ Kompleksidad**: Katamtaman
+**📚 Kurso**: [AZD Para sa mga Nagsisimula](../../README.md) | **⏱️ Tagal**: 1-1.5 oras | **⭐ Lalim ng Kaalaman**: Intermediate
 
 ---
 
 ## Pangkalahatang-ideya
 
-Tinutulungan ka ng kabanatang ito na i-diagnose at lutasin ang mga karaniwang isyu kapag nagtatrabaho gamit ang Azure Developer CLI. Mula sa mga pagkabigo sa deployment hanggang sa mga problemang partikular sa AI.
+Tinutulungan ka ng kabanatang ito na masuri at malutas ang mga karaniwang isyu kapag nagtatrabaho gamit ang Azure Developer CLI. Mula sa mga pagkabigo sa deployment hanggang sa mga problema na specific sa AI.
 
-> Napatunayan gamit ang `azd 1.25.6` noong Hunyo 2026.
+> Napatunayan gamit ang `azd 1.27.1` noong Hulyo 2026.
 
 ## Mga Layunin sa Pagkatuto
 
-Sa pagkumpleto ng kabanatang ito, magagawa mong:
-- I-diagnose ang mga karaniwang pagkabigo sa AZD deployment
-- I-debug ang mga isyu sa authentication at pahintulot
-- Lutasin ang mga problema sa konektividad ng AI service
-- Gumamit ng Azure Portal at CLI para sa pag-troubleshoot
+Sa pagtatapos ng kabanatang ito, magagawa mo:
+- Masuri ang mga karaniwang pagkabigo sa AZD deployment
+- I-debug ang mga isyu sa authentication at permiso
+- Malutas ang mga problema sa koneksyon sa serbisyo ng AI
+- Gamitin ang Azure Portal at CLI para sa pag-troubleshoot
 
 ---
 
@@ -24,20 +24,20 @@ Sa pagkumpleto ng kabanatang ito, magagawa mong:
 
 | # | Aralin | Paglalarawan | Oras |
 |---|--------|-------------|------|
-| 1 | [Mga Karaniwang Isyu](common-issues.md) | Karaniwang nararanasang mga problema | 30 min |
-| 2 | [Gabay sa Pag-debug](debugging.md) | Hakbang-hakbang na mga estratehiya sa pag-debug | 45 min |
-| 3 | [Pag-troubleshoot ng AI](ai-troubleshooting.md) | Mga isyu na partikular sa AI | 30 min |
+| 1 | [Mga Karaniwang Isyu](common-issues.md) | Mga madalas na problemang nararanasan | 30 min |
+| 2 | [Gabay sa Pag-debug](debugging.md) | Pahinga-hakbang na mga estratehiya sa pag-debug | 45 min |
+| 3 | [Pag-troubleshoot ng AI](ai-troubleshooting.md) | Mga isyung specific sa AI | 30 min |
 
 ---
 
-## 🚨 Mabilis na Pag-aayos
+## 🚨 Mabilisang Pag-aayos
 
-### Mga Isyu sa Pagpapatunay
+### Mga Isyu sa Authentication
 ```bash
 # Kinakailangan para sa mga workflow ng AZD
 azd auth login
 
-# Opsyonal kung direktang gumagamit ka rin ng mga utos ng Azure CLI
+# Opsyonal kung direkta ka ring gumagamit ng mga utos ng Azure CLI
 az login
 
 azd auth status
@@ -50,14 +50,14 @@ azd monitor --logs
 az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
-### Mga Konflikto ng Resource
+### Mga Salungatan sa Resource
 ```bash
 azd down --force --purge
 azd env new different-name
 azd up
 ```
 
-### Lumampas sa Quota
+### Lumagpas sa Quota
 ```bash
 az vm list-usage --location eastus --output table
 azd env set AZURE_LOCATION westus2
@@ -66,44 +66,44 @@ azd up
 
 ---
 
-## 📋 Sanggunian ng Mga Error Code
+## 📋 Sanggunian sa Error Code
 
 | Error | Sanhi | Solusyon |
 |-------|-------|----------|
-| `AuthenticationError` | Hindi naka-log in | `azd auth login` |
+| `AuthenticationError` | Hindi naka-login | `azd auth login` |
 | `ResourceNotFound` | Nawawalang resource | Suriin ang mga pangalan ng resource |
-| `QuotaExceeded` | Mga limitasyon ng subscription | Humiling ng pagtaas ng quota |
-| `InvalidTemplate` | Error sa sintaks ng Bicep | `az bicep build` |
-| `Conflict` | Umiiral na resource | Gumamit ng bagong pangalan o tanggalin |
-| `Forbidden` | Kulang sa mga permiso | Suriin ang mga RBAC role |
+| `QuotaExceeded` | Limitasyon sa subscription | Humiling ng pagtaas ng quota |
+| `InvalidTemplate` | Mali sa syntax ng Bicep | `az bicep build` |
+| `Conflict` | Naka-exist na resource | Gumamit ng bagong pangalan o burahin |
+| `Forbidden` | Kulang sa permiso | Suriin ang mga RBAC roles |
 
 ---
 
-## 🔄 Pag-reset at Pag-recover
+## 🔄 I-reset at Pagbawi
 
 ```bash
-# Banayad na pag-reset (panatilihin ang mga resources, muling i-deploy ang kodigo)
+# Malambot na reset (panatilihin ang mga resources, muling i-deploy ang code)
 azd deploy --force
 
-# Kompletong pag-reset (tanggalin ang lahat, magsimula muli)
+# Matigas na reset (burahin lahat, magsimula ng bago)
 azd down --force --purge
 azd up
 ```
 
 ---
 
-## 🔗 Navigasyon
+## 🔗 Pag-navigate
 
-| Direction | Chapter |
+| Direksyon | Kabanata |
 |-----------|---------|
-| **Nakaraan** | [Kabanata 6: Bago ang Pag-deploy](../chapter-06-pre-deployment/README.md) |
+| **Nakaraan** | [Kabanata 6: Bago ang Deployment](../chapter-06-pre-deployment/README.md) |
 | **Susunod** | [Kabanata 8: Produksyon](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Kaugnay na Mga Mapagkukunan
+## 📖 Mga Kaugnay na Mapagkukunan
 
-- [Mga Pagsusuri Bago ang Pag-deploy](../chapter-06-pre-deployment/preflight-checks.md)
+- [Mga Check bago ang Deployment](../chapter-06-pre-deployment/preflight-checks.md)
 - [Gabay sa Konfigurasyon](../chapter-03-configuration/configuration.md)
 - [Mga Isyu sa AZD GitHub](https://github.com/Azure/azure-dev/issues)
 

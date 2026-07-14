@@ -1,57 +1,57 @@
-# Paggawa ng Iyong Sariling azd Template
+# Pagsusulat ng Sariling azd Template
 
-**Navigasyon ng Kabanata:**
+**Pag-navigate ng Kabanata:**
 - **📚 Tahanan ng Kurso**: [AZD Para sa mga Nagsisimula](../../README.md)
-- **📖 Kasalukuyang Kabanata**: Kabanata 4 - Imprastruktura bilang Code at Pag-deploy
-- **⬅️ Nakaraan**: [Gabay sa Pag-deploy](deployment-guide.md)
-- **🚀 Susunod na Kabanata**: [Kabanata 5: Mga Solusyon na Maramihang Ahente](../chapter-05-multi-agent/README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 4 - Infrastructure as Code at Deployment
+- **⬅️ Nakaraang**: [Deployment Guide](deployment-guide.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md)
 
-> Napatunayan laban sa `azd 1.25.6` noong Hunyo 2026.
+> Napatunayan gamit ang `azd 1.27.1` noong Hulyo 2026.
 
 ## Panimula
 
-Sa ngayon ikaw ay *ginamit* ng mga template gamit ang `azd init --template <name>`. Ngunit kapag mayroon kang layout ng proyekto na gusto ng iyong koponan—halimbawa, isang Container App na may Cosmos DB at tamang monitoring—gusto mong gawing isang reusable na template iyon para sa sarili mong paggamit. Ang isang template ay simpleng isang Git repository na may inaasahang istruktura na alam kung paano basahin ng azd. Itong aralin ay nagpapakita kung paano bumuo mula sa simula, subukan ito, at (opsyonal) i-publish sa gallery ng komunidad.
+Sa ngayon, *ginamit* mo na ang mga template gamit ang `azd init --template <name>`. Ngunit kapag mayroon ka nang layout ng proyekto na gusto ng iyong koponan—halimbawa, isang Container App na may Cosmos DB at tamang monitoring—gusto mong gawing reusable template ang iyong sarili. Ang template ay isang Git repository na may predictable na istruktura na alam ng azd kung paano basahin. Itong aralin ay nagpapakita kung paano gumawa nito mula sa simula, subukan ito, at (opsyonal) ipublish sa community gallery.
 
 ## Mga Layunin sa Pagkatuto
 
-By the end of this lesson, you will:
-- Maunawaan kung ano ang nagpapagawa sa isang folder na isang "azd template"
-- Alamin ang mga kinakailangang file at layout ng folder
-- Magdagdag ng `azure.yaml` at `infra/` na maaaring gamitin muli ng ibang tao
-- Subukan ang iyong template nang lokal bago ibahagi ito
+Sa pagtatapos ng araling ito, malalaman mo:
+- Ano ang nagpapagawa sa isang folder na isang "azd template"
+- Alam ang mga kailangang file at layout ng folder
+- Magdagdag ng `azure.yaml` at `infra/` na maaaring gamitin ng iba
+- Subukan ang iyong template sa lokal bago ibahagi
 - I-publish ito at (opsyonal) isumite sa Awesome AZD
 
-## Mga Kinalabasan ng Pagkatuto
+## Mga Inaasahang Kinalabasan sa Pagkatuto
 
-After completing this lesson, you will be able to:
+Pagkatapos matapos ang araling ito, magagawa mo nang:
 - Mag-scaffold ng bagong template repository
-- Gawing parameterized ang imprastruktura para gumana sa anumang subscription
-- Balidahin ang isang template gamit ang `azd init` at `azd up`
-- Idagdag ang metadata na kailangan ng gallery ng komunidad
+- I-parameterize ang infrastructure upang gumana sa anumang subscription
+- I-validate ang isang template gamit ang `azd init` at `azd up`
+- Magdagdag ng metadata na kailangan ng community gallery
 
 ---
 
-## Ano nga ba ang Template?
+## Ano ba Talaga ang Template?
 
-Ang azd template ay **isang Git repository** na naglalaman, sa pinakamaliit, ng:
+Ang azd template ay **isang Git repository** na naglalaman, sa minimum:
 
-| File / folder | Layunin | Kinakailangan? |
+| File / folder | Layunin | Kailangan ba? |
 |---------------|---------|-----------|
-| `azure.yaml` | Naglalarawan ng mga serbisyo, host, at provider ng imprastruktura | ✅ Oo |
+| `azure.yaml` | Naglalarawan ng mga serbisyo, hosts, at infra provider | ✅ Oo |
 | `infra/` | Bicep, Terraform, o Pulumi na nagpo-provision ng mga resources | ✅ Oo |
-| `src/` (or your code) | Ang application code na dine-deploy ng azd | ✅ Oo |
+| `src/` (o ang iyong code) | Ang application code na dine-deploy ng azd | ✅ Oo |
 | `README.md` | Paano gamitin ang template | ✅ Lubos na inirerekomenda |
-| `.azdo/` or `.github/` | Mga definisyon ng CI/CD pipeline | Opsyonal |
-| `.devcontainer/` | Nare-reproduce na dev environment | Opsyonal |
-| `azure.yaml` `metadata` | Impormasyon para sa gallery at telemetry | Opsyonal (kailangan para mag-publish) |
+| `.azdo/` o `.github/` | Mga definisyon ng CI/CD pipeline | Opsyonal |
+| `.devcontainer/` | Reproducible dev environment | Opsyonal |
+| `azure.yaml` `metadata` | Gallery + telemetry info | Opsyonal (kailangan para mag-publish) |
 
-There is nothing magic here: when you run `azd init --template you/your-repo`, azd clones the repo and reads `azure.yaml`.
+Walang kakaiba dito: kapag pinatakbo mo ang `azd init --template you/your-repo`, kinokopya ng azd ang repo at binabasa ang `azure.yaml`.
 
 ---
 
-## Hakbang 1: I-scaffold ang Repository
+## Hakbang 1: Scaffold ng Repository
 
-Create the folder structure by hand or start from a minimal template and edit it:
+Gumawa ng istruktura ng folder nang mano-mano o magsimula mula sa isang minimal na template at i-edit ito:
 
 ```bash
 mkdir my-azd-template && cd my-azd-template
@@ -61,7 +61,7 @@ git init
 mkdir -p src infra
 ```
 
-A typical finished layout looks like this:
+Ang isang tipikal na tapos na layout ay ganito ang hitsura:
 
 ```
 my-azd-template/
@@ -101,13 +101,13 @@ services:
     host: containerapp              # appservice | containerapp | function | aks | staticwebapp
 ```
 
-> Ang field na `metadata.template` ang ginagamit ng telemetry ng gallery para bilangin ang paggamit. Gamitin ang konbensiyon na `name@version`.
+> Ang `metadata.template` na field ang ginagamit ng gallery telemetry para bilangin ang paggamit. Gamitin ang `name@version` na konbensyon.
 
 ---
 
-## Hakbang 3: Gawing Parameterized ang Imprastruktura
+## Hakbang 3: Gawing Parameterized ang Infrastructure
 
-Ang isang pinakamahalagang alituntunin para sa isang *reusable* na template: **huwag kailanman i-hardcode ang mga pangalan, rehiyon, o mga value na partikular sa subscription.** Gumamit ng mga parameter at ang resource token pattern para gumana ang parehong template sa subscription ng sinuman.
+Ang pinakamahalagang patakaran para sa *reusable* na template: **huwag kailanman i-hardcode ang mga pangalan, rehiyon, o subscription-specific na mga halaga.** Gamitin ang mga parameter at resource token pattern upang ang parehong template ay gumana sa kahit kaninong subscription.
 
 ```bicep
 // infra/main.bicep
@@ -141,9 +141,9 @@ output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 Dalawang bagay ang nagpapadali sa template na ito:
 
 1. **`azd-env-name` tag** — ginagamit ito ng azd para subaybayan at linisin ang mga resources kada environment.
-2. **`uniqueString(...)` resource token** — gumagawa ng matatag, natatanging suffix sa buong mundo para hindi magbanggaan ang mga pangalan.
+2. **`uniqueString(...)` resource token** — gumagawa ng matatag, globally-unique na suffix para hindi magdikit-dikit ang mga pangalan.
 
-Magbigay ng katugmang parameters file na bumabasa ng mga value na ini-inject ng azd mula sa environment:
+Magbigay ng kaparehong parameters file na bumabasa ng mga halagang ini-inject ng azd mula sa environment:
 
 ```json
 // infra/main.parameters.json
@@ -157,47 +157,47 @@ Magbigay ng katugmang parameters file na bumabasa ng mga value na ini-inject ng 
 }
 ```
 
-Awtomatikong pinalitan ng azd ang `${AZURE_ENV_NAME}` at `${AZURE_LOCATION}` mula sa kasalukuyang environment.
+Sa awtomatikong pagpapalit, pinapalitan ng azd ang `${AZURE_ENV_NAME}` at `${AZURE_LOCATION}` mula sa kasalukuyang environment.
 
 ---
 
-## Hakbang 4: Subukan ang Iyong Template nang Lokal
+## Hakbang 4: Subukan ang Iyong Template sa Lokal
 
-Bago magbahagi, patunayan na gumagana ang template mula sa isang malinis na estado.
+Bago magbahagi, patunayan na gumagana ang template mula sa malinis na estado.
 
 **Subukan mula sa lokal na folder** (hindi kailangan mag-push sa Git):
 
 ```bash
-# Mula sa walang laman na direktoryo, i-initialize gamit ang lokal na path ng template
+# Mula sa walang laman na direktoryo, i-initialize gamit ang iyong lokal na template path
 mkdir /tmp/test-run && cd /tmp/test-run
 azd init --template /path/to/my-azd-template
 
-# Magsagawa ng provisioning at deployment mula simula hanggang matapos
+# Mag-provision + mag-deploy mula simula hanggang matapos
 azd auth login
 azd up
 ```
 
-**Pagkatapos, subukan ang teardown**—ang isang magandang template ay naglilinis nang kumpleto:
+**Pagkatapos subukan ang teardown**—ang isang magandang template ay naglilinis nang lubusan:
 
 ```bash
 azd down --force --purge
 ```
 
-Kung ang `azd down` ay nag-iiwan ng mga resource, malamang na nakaligtaan mong lagyan ng `azd-env-name` tag ang isang resource.
+Kung may natitirang resources ang `azd down`, malamang nakaligtaan mong lagyan ng `azd-env-name` tag ang isang resource.
 
-> **Tip:** patakbuhin muna ang `azd provision --preview`. Gumagawa ito ng what-if at ipinapakita ang mga error sa template bago malikha ang anumang resource.
+> **Tip:** patakbuhin muna ang `azd provision --preview`. Ginagawa nito ang isang what-if at ipinapakita ang mga error sa template bago malikha ang anumang resource.
 
 ---
 
 ## Hakbang 5: I-publish ang Template
 
-I-push ang repository sa GitHub (public kung gusto mong magamit ito ng iba):
+I-push ang repository sa GitHub (pampubliko kung gusto mo na magamit ito ng iba):
 
 ```bash
 gh repo create my-azd-template --public --source=. --push
 ```
 
-Maari na ngayong gamitin ng sinuman:
+Maaari na ngayong gamitin ito ng kahit sino:
 
 ```bash
 azd init --template your-github-username/my-azd-template
@@ -207,51 +207,51 @@ azd init --template your-github-username/my-azd-template
 
 ## Hakbang 6 (Opsyonal): Isumite sa Awesome AZD
 
-Ang [Awesome AZD gallery](https://azure.github.io/awesome-azd/) ay naglilista ng mga template mula sa komunidad. Para mailista, ang iyong repo ay dapat maglaman ng:
+Ang [Awesome AZD gallery](https://azure.github.io/awesome-azd/) ay naglilista ng mga community template. Para mapabilang, dapat kasama sa iyong repo ang:
 
-- ✅ Isang malinaw na `README.md` na may mga prerequisites, diagram ng arkitektura, at mga tala tungkol sa gastos
-- ✅ Isang gumaganang `azure.yaml` na may `metadata.template`
-- ✅ Imprastruktura na nagpo-provision nang maayos sa isang bagong subscription
-- ✅ Isang `LICENSE` file
-- ✅ (Inirerekomenda) Isang `.devcontainer/` para sa one-click Codespaces
+- ✅ Malinaw na `README.md` na may prerequisites, diagram ng arkitektura, at mga tala sa gastos
+- ✅ Gumaganang `azure.yaml` na may `metadata.template`
+- ✅ Infrastructure na nagpo-provision nang malinis sa isang bagong subscription
+- ✅ May `LICENSE` na file
+- ✅ (Inirerekomenda) Isang `.devcontainer/` para sa one-click na Codespaces
 
-Isumite sa pamamagitan ng pagbukas ng pull request na nagdaragdag ng iyong template sa data file ng gallery, pagsunod sa contribution guide sa [Awesome AZD repository](https://github.com/Azure/awesome-azd).
+Mag-submit sa pamamagitan ng pag-open ng pull request na nagdadagdag ng iyong template sa data file ng gallery, alinsunod sa contribution guide sa [Awesome AZD repository](https://github.com/Azure/awesome-azd).
 
 ---
 
-## Mga Karaniwang Sagabal
+## Mga Karaniwang Pagkakamali
 
-| Sagabal | Ayos |
+| Pagkakamali | Ayusin |
 |---------|-----|
-| Nakahardcode na mga pangalan ng resource | Gamitin ang `uniqueString()` resource token |
-| `azd down` leaves resources | Lagyan ng tag ang bawat resource (o ang resource group) ng `azd-env-name` |
-| Gumagana ang template para sa iyo, pumapalya para sa iba | Alisin ang subscription IDs, tenant IDs, at mga palagay tungkol sa rehiyon |
-| Hindi nakakabit ang mga outputs sa app | I-export ang `SERVICE_<NAME>_ENDPOINT_URL` at iba pang `AZURE_*` outputs |
-| Tinanggihan ang pagsusumite sa gallery | Magdagdag ng `README.md`, `LICENSE`, at `metadata.template` |
+| Hardcoded na mga pangalan ng resource | Gamitin ang `uniqueString()` resource token |
+| May natitirang resources pagkatapos ng `azd down` | Lagyan ng tag na `azd-env-name` ang bawat resource (o resource group) |
+| Gumagana ang template para sa iyo, pumapalya para sa iba | Alisin ang subscription IDs, tenant IDs, at rehiyon na assumption |
+| Outputs hindi naka-wire sa app | I-export ang `SERVICE_<NAME>_ENDPOINT_URL` at iba pang `AZURE_*` outputs |
+| Tinanggihan ang submission sa gallery | Magdagdag ng `README.md`, `LICENSE`, at `metadata.template` |
 
 ---
 
 ## Buod
 
-- Ang template ay simpleng isang Git repo na may `azure.yaml`, `infra/`, at iyong code.
-- Gawing parameterized ang lahat—mga pangalan, rehiyon, at mga ID—upang tumakbo ito kahit saan.
-- Laging lagyan ng tag ang mga resource gamit ang `azd-env-name` para gumana ang `azd down`.
-- Subukan lokal gamit ang `azd init --template <local-path>` bago mag-publish.
+- Ang template ay isang Git repo lamang na may `azure.yaml`, `infra/`, at iyong code.
+- I-parameterize ang lahat—mga pangalan, rehiyon, at IDs—para tumakbo kahit saan.
+- Laging lagyan ng tag na `azd-env-name` ang mga resources para gumana ang `azd down`.
+- Subukan sa lokal gamit ang `azd init --template <local-path>` bago mag-publish.
 - Magdagdag ng metadata at README para isumite sa Awesome AZD.
 
 ---
 
-## 🔗 Navigasyon
+## 🔗 Pag-navigate
 
-| Direksyon | Mapagkukunan |
+| Direksyon | Resource |
 |-----------|----------|
-| **Nakaraan** | [Gabay sa Pag-deploy](deployment-guide.md) |
-| **Tahanan ng Kabanata** | [Kabanata 4: Imprastruktura bilang Code](README.md) |
-| **Susunod na Kabanata** | [Kabanata 5: Mga Solusyon na Maramihang Ahente](../chapter-05-multi-agent/README.md) |
+| **Nakaraan** | [Deployment Guide](deployment-guide.md) |
+| **Tahanan ng Kabanata** | [Kabanata 4: Infrastructure as Code](README.md) |
+| **Susunod na Kabanata** | [Kabanata 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md) |
 
-## 📖 Mga Kaugnay na Mapagkukunan
+## 📖 Kaugnay na Mga Mapagkukunan
 
-- [Pagpo-provision ng mga Resource](provisioning.md)
+- [Provisioning Resources](provisioning.md)
 - [Awesome AZD Gallery](https://azure.github.io/awesome-azd/)
 - [Opisyal na dokumentasyon ng azd template](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
 

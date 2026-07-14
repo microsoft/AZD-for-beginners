@@ -1,57 +1,57 @@
-# Menulis Template azd Anda Sendiri
+# Membuat Template azd Anda Sendiri
 
-**Chapter Navigation:**
+**Navigasi Bab:**
 - **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
 - **📖 Bab Saat Ini**: Bab 4 - Infrastruktur sebagai Kode & Penyebaran
 - **⬅️ Sebelumnya**: [Panduan Penyebaran](deployment-guide.md)
-- **🚀 Bab Berikutnya**: [Bab 5: Solusi Multi-Agen](../chapter-05-multi-agent/README.md)
+- **🚀 Bab Selanjutnya**: [Bab 5: Solusi Multi-Agen](../chapter-05-multi-agent/README.md)
 
-> Divalidasi terhadap `azd 1.25.6` pada Juni 2026.
+> Divalidasi dengan `azd 1.27.1` pada Juli 2026.
 
-## Introduction
+## Pendahuluan
 
-Sejauh ini Anda telah *menggunakan* template dengan `azd init --template <name>`. Tetapi setelah Anda memiliki tata letak proyek yang disukai tim Anda—misalnya, sebuah Container App dengan Cosmos DB dan pemantauan yang tepat—Anda akan ingin mengubahnya menjadi template yang dapat digunakan kembali. Sebuah template hanyalah repositori Git dengan struktur yang dapat diprediksi yang dapat dibaca azd. Pelajaran ini menunjukkan cara membuatnya dari awal, mengujinya, dan (opsional) menerbitkannya ke galeri komunitas.
+Sejauh ini Anda telah *menggunakan* template dengan `azd init --template <nama>`. Tetapi setelah Anda memiliki tata letak proyek yang disukai tim—misalnya, Container App dengan Cosmos DB dan pemantauan yang tepat—Anda akan ingin mengubahnya menjadi template yang dapat digunakan kembali. Template hanyalah repositori Git dengan struktur yang dapat diprediksi yang azd bisa baca. Pelajaran ini menunjukkan cara membuatnya dari awal, menguji, dan (opsional) mempublikasikannya ke galeri komunitas.
 
-## Learning Goals
+## Tujuan Pembelajaran
 
-Di akhir pelajaran ini, Anda akan:
-- Memahami apa yang membuat sebuah folder menjadi "template azd"
+Pada akhir pelajaran ini, Anda akan:
+- Memahami apa yang membuat folder menjadi "template azd"
 - Mengetahui file dan tata letak folder yang dibutuhkan
 - Menambahkan `azure.yaml` dan `infra/` yang dapat digunakan kembali oleh orang lain
 - Menguji template Anda secara lokal sebelum membagikannya
 - Mempublikasikannya dan (opsional) mengirimkannya ke Awesome AZD
 
-## Learning Outcomes
+## Hasil Pembelajaran
 
-Setelah menyelesaikan pelajaran ini, Anda akan mampu:
-- Membuat kerangka repository template baru
-- Mem-parameter-kan infrastruktur sehingga bekerja di subscription manapun
+Setelah menyelesaikan pelajaran ini, Anda akan bisa:
+- Membuat kerangka kerja repositori template baru
+- Memparameterisasi infrastruktur agar bekerja di langganan mana pun
 - Memvalidasi template dengan `azd init` dan `azd up`
 - Menambahkan metadata yang dibutuhkan galeri komunitas
 
 ---
 
-## Sebenarnya, Apa Itu Template?
+## Apa Sebenarnya Template Itu?
 
-Sebuah template azd adalah **repositori Git** yang berisi, paling tidak:
+Template azd adalah **repositori Git** yang berisi, paling tidak:
 
-| File / folder | Purpose | Required? |
+| File / folder | Tujuan | Wajib? |
 |---------------|---------|-----------|
 | `azure.yaml` | Menjelaskan layanan, host, dan penyedia infra | ✅ Ya |
 | `infra/` | Bicep, Terraform, atau Pulumi yang menyediakan sumber daya | ✅ Ya |
-| `src/` (or your code) | Kode aplikasi yang dideploy azd | ✅ Ya |
+| `src/` (atau kode Anda) | Kode aplikasi yang dideploy oleh azd | ✅ Ya |
 | `README.md` | Cara menggunakan template | ✅ Sangat disarankan |
 | `.azdo/` atau `.github/` | Definisi pipeline CI/CD | Opsional |
 | `.devcontainer/` | Lingkungan dev yang dapat direproduksi | Opsional |
-| `azure.yaml` `metadata` | Informasi galeri + telemetri | Opsional (diperlukan untuk menerbitkan) |
+| `azure.yaml` `metadata` | Info galeri + telemetri | Opsional (dibutuhkan untuk publikasi) |
 
-Tidak ada yang ajaib di sini: ketika Anda menjalankan `azd init --template you/your-repo`, azd meng-clone repo dan membaca `azure.yaml`.
+Tidak ada hal ajaib di sini: saat Anda menjalankan `azd init --template you/your-repo`, azd akan mengkloning repo dan membaca `azure.yaml`.
 
 ---
 
-## Step 1: Scaffold the Repository
+## Langkah 1: Membuat Kerangka Repositori
 
-Buat struktur folder secara manual atau mulai dari template minimal dan sunting:
+Buat struktur folder secara manual atau mulai dari template minimal dan edit:
 
 ```bash
 mkdir my-azd-template && cd my-azd-template
@@ -61,7 +61,7 @@ git init
 mkdir -p src infra
 ```
 
-A typical finished layout looks like this:
+Tata letak akhir yang khas terlihat seperti ini:
 
 ```
 my-azd-template/
@@ -81,9 +81,9 @@ my-azd-template/
 
 ---
 
-## Step 2: Write `azure.yaml`
+## Langkah 2: Tulis `azure.yaml`
 
-Ini adalah inti dari template. File ini memberi tahu azd apa yang harus dideploy dan bagaimana:
+Ini adalah inti dari template. Ini memberi tahu azd apa yang harus dideploy dan bagaimana:
 
 ```yaml
 # azure.yaml
@@ -101,13 +101,13 @@ services:
     host: containerapp              # appservice | containerapp | function | aks | staticwebapp
 ```
 
-> Field `metadata.template` adalah apa yang digunakan telemetri galeri untuk menghitung penggunaan. Gunakan konvensi `name@version`.
+> Field `metadata.template` adalah yang digunakan telemetri galeri untuk menghitung penggunaan. Gunakan konvensi `nama@versi`.
 
 ---
 
-## Step 3: Parameterize the Infrastructure
+## Langkah 3: Parameterisasi Infrastruktur
 
-Aturan paling penting untuk template yang *dapat digunakan kembali*: **jangan pernah meng-hardcode nama, region, atau nilai khusus subscription.** Gunakan parameter dan pola token resource sehingga template yang sama bekerja di subscription siapa pun.
+Aturan paling penting untuk template *yang dapat digunakan ulang*: **jangan pernah menggunakan nama, wilayah, atau nilai spesifik langganan secara keras.** Gunakan parameter dan pola token sumber daya agar template yang sama bisa bekerja di langganan siapa pun.
 
 ```bicep
 // infra/main.bicep
@@ -138,12 +138,12 @@ module web 'modules/web.bicep' = {
 output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 ```
 
-Dua hal membuat ini ramah-template:
+Dua hal membuat ini ramah template:
 
-1. **Tag `azd-env-name`** — azd menggunakannya untuk melacak dan membersihkan sumber daya per environment.
-2. **Token resource `uniqueString(...)`** — menghasilkan akhiran yang stabil dan unik secara global sehingga nama tidak saling bertabrakan.
+1. **Tag `azd-env-name`** — azd menggunakannya untuk melacak dan membersihkan sumber daya per lingkungan.
+2. **Token sumber daya `uniqueString(...)`** — menghasilkan suffiks unik dan stabil secara global agar nama tidak bertabrakan.
 
-Sediakan file parameter yang sesuai yang membaca nilai yang di-inject azd dari environment:
+Sediakan file parameter yang sesuai yang membaca nilai yang diinjeksi azd dari lingkungan:
 
 ```json
 // infra/main.parameters.json
@@ -157,47 +157,47 @@ Sediakan file parameter yang sesuai yang membaca nilai yang di-inject azd dari e
 }
 ```
 
-azd menggantikan `${AZURE_ENV_NAME}` dan `${AZURE_LOCATION}` dari environment saat ini secara otomatis.
+azd menggantikan `${AZURE_ENV_NAME}` dan `${AZURE_LOCATION}` dari lingkungan saat ini secara otomatis.
 
 ---
 
-## Step 4: Test Your Template Locally
+## Langkah 4: Uji Template Anda Secara Lokal
 
-Sebelum membagikan, buktikan bahwa template bekerja dari keadaan bersih.
+Sebelum membagikan, buktikan template bekerja dari keadaan bersih.
 
-**Uji dari folder lokal** (tidak perlu push ke Git):
+**Uji dari folder lokal** (tidak perlu push Git):
 
 ```bash
 # Dari direktori kosong, inisialisasi menggunakan jalur template lokal Anda
 mkdir /tmp/test-run && cd /tmp/test-run
 azd init --template /path/to/my-azd-template
 
-# Penyediaan + penerapan dari ujung ke ujung
+# Provisi + deploy dari awal sampai akhir
 azd auth login
 azd up
 ```
 
-**Lalu uji teardown**—template yang baik membersihkan sepenuhnya:
+**Kemudian uji pembersihan**—template yang baik membersihkan seluruhnya:
 
 ```bash
 azd down --force --purge
 ```
 
-Jika `azd down` meninggalkan sumber daya, kemungkinan Anda melewatkan tag `azd-env-name` pada sebuah sumber daya.
+Jika `azd down` meninggalkan sumber daya, kemungkinan Anda lupa memberi tag `azd-env-name` pada suatu sumber daya.
 
-> **Tip:** jalankan `azd provision --preview` terlebih dahulu. Ini melakukan what-if dan menampilkan kesalahan template sebelum sumber daya apa pun dibuat.
+> **Tip:** jalankan `azd provision --preview` dulu. Ini melakukan simulasi apa yang akan terjadi dan menampilkan kesalahan template sebelum sumber daya dibuat.
 
 ---
 
-## Step 5: Publish the Template
+## Langkah 5: Publikasikan Template
 
-Push repository ke GitHub (publik jika Anda ingin orang lain menggunakannya):
+Push repositori ke GitHub (publik jika Anda ingin orang lain menggunakannya):
 
 ```bash
 gh repo create my-azd-template --public --source=. --push
 ```
 
-Siapapun sekarang dapat menggunakannya:
+Siapapun sekarang bisa menggunakannya:
 
 ```bash
 azd init --template your-github-username/my-azd-template
@@ -205,55 +205,55 @@ azd init --template your-github-username/my-azd-template
 
 ---
 
-## Step 6 (Optional): Submit to Awesome AZD
+## Langkah 6 (Opsional): Kirim ke Awesome AZD
 
-Galeri [Awesome AZD](https://azure.github.io/awesome-azd/) menampilkan template komunitas. Agar tercantum, repo Anda sebaiknya mencakup:
+[Galeri Awesome AZD](https://azure.github.io/awesome-azd/) mencantumkan template komunitas. Agar tercantum, repo Anda harus menyertakan:
 
-- ✅ README.md yang jelas dengan prasyarat, diagram arsitektur, dan catatan biaya
+- ✅ Sebuah `README.md` yang jelas dengan prasyarat, diagram arsitektur, dan catatan biaya
 - ✅ `azure.yaml` yang berfungsi dengan `metadata.template`
-- ✅ Infrastruktur yang dapat disediakan dengan bersih di subscription baru
-- ✅ File `LICENSE`
-- ✅ (Direkomendasikan) `.devcontainer/` untuk one-click Codespaces
+- ✅ Infrastruktur yang dapat disediakan bersih di langganan baru
+- ✅ Sebuah file `LICENSE`
+- ✅ (Disarankan) `.devcontainer/` untuk Codespaces satu-klik
 
-Kirimkan dengan membuka pull request yang menambahkan template Anda ke file data galeri, mengikuti panduan kontribusi di repository [Awesome AZD](https://github.com/Azure/awesome-azd).
+Kirimkan dengan membuka pull request yang menambahkan template Anda ke file data galeri, mengikuti panduan kontribusi di [Awesome AZD repository](https://github.com/Azure/awesome-azd).
 
 ---
 
-## Common Pitfalls
+## Kesalahan Umum
 
-| Pitfall | Fix |
+| Kesalahan | Perbaikan |
 |---------|-----|
-| Hardcoded resource names | Gunakan token resource `uniqueString()` |
-| `azd down` leaves resources | Tag setiap sumber daya (atau resource group) dengan `azd-env-name` |
-| Template works for you, fails for others | Hapus ID subscription, ID tenant, dan asumsi region |
-| Outputs not wired into the app | Ekspor `SERVICE_<NAME>_ENDPOINT_URL` dan output `AZURE_*` lainnya |
-| Gallery submission rejected | Tambahkan `README.md`, `LICENSE`, dan `metadata.template` |
+| Nama sumber daya yang dikodekan keras | Gunakan token sumber daya `uniqueString()` |
+| `azd down` meninggalkan sumber daya | Beri tag setiap sumber daya (atau grup sumber daya) dengan `azd-env-name` |
+| Template bekerja untuk Anda, gagal untuk orang lain | Hapus ID langganan, ID tenant, dan asumsi wilayah |
+| Output tidak terhubung ke aplikasi | Ekspor `SERVICE_<NAME>_ENDPOINT_URL` dan output `AZURE_*` lainnya |
+| Penyerahan galeri ditolak | Tambahkan `README.md`, `LICENSE`, dan `metadata.template` |
 
 ---
 
-## Summary
+## Ringkasan
 
 - Template hanyalah repositori Git dengan `azure.yaml`, `infra/`, dan kode Anda.
-- Parameter-kan semuanya—nama, region, dan ID—agar dapat dijalankan di mana saja.
-- Selalu tag sumber daya dengan `azd-env-name` agar `azd down` berfungsi.
-- Uji secara lokal dengan `azd init --template <local-path>` sebelum menerbitkan.
+- Parameterisasi semuanya—nama, wilayah, dan ID—agar berjalan di mana saja.
+- Selalu beri tag sumber daya dengan `azd-env-name` agar `azd down` berfungsi.
+- Uji secara lokal dengan `azd init --template <jalur-lokal>` sebelum dipublikasikan.
 - Tambahkan metadata dan README untuk mengirim ke Awesome AZD.
 
 ---
 
-## 🔗 Navigation
+## 🔗 Navigasi
 
-| Direction | Resource |
+| Arah | Sumber Daya |
 |-----------|----------|
-| **Previous** | [Panduan Penyebaran](deployment-guide.md) |
-| **Chapter Home** | [Bab 4: Infrastructure as Code](README.md) |
-| **Next Chapter** | [Bab 5: Solusi Multi-Agen](../chapter-05-multi-agent/README.md) |
+| **Sebelumnya** | [Panduan Penyebaran](deployment-guide.md) |
+| **Beranda Bab** | [Bab 4: Infrastruktur sebagai Kode](README.md) |
+| **Bab Selanjutnya** | [Bab 5: Solusi Multi-Agen](../chapter-05-multi-agent/README.md) |
 
-## 📖 Related Resources
+## 📖 Sumber Daya Terkait
 
-- [Provisioning Resources](provisioning.md)
-- [Awesome AZD Gallery](https://azure.github.io/awesome-azd/)
-- [Official azd template documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
+- [Penyediaan Sumber Daya](provisioning.md)
+- [Galeri Awesome AZD](https://azure.github.io/awesome-azd/)
+- [Dokumentasi template azd resmi](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
 
 ---
 
