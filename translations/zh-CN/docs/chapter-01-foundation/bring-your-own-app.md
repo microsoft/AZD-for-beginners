@@ -1,59 +1,59 @@
-# 将您自己的应用接入 - 在现有项目中添加 azd
+# 自带应用 - 向现有项目添加 azd
 
 **章节导航：**
-- **📚 课程首页**: [AZD 入门](../../README.md)
-- **📖 当前章节**: 第1章 - 基础与快速入门
-- **⬅️ 上一个**: [您的第一个项目](first-project.md)
-- **➡️ 下一个**: [开发容器与 Codespaces](dev-containers.md)
+- **📚 课程首页**：[AZD 初学者指南](../../README.md)
+- **📖 当前章节**：第1章 - 基础与快速开始
+- **⬅️ 上一章**：[你的第一个项目](first-project.md)
+- **➡️ 下一章**：[开发容器与 Codespaces](dev-containers.md)
 
-> 已在 2026 年 6 月使用 `azd 1.25.6` 验证。
+> 已在 2026年7月 使用 `azd 1.27.1` 验证。
 
 ## 介绍
 
-在 [您的第一个项目](first-project.md) 中，您通过从模板开始来部署应用。但在大多数情况下，您已经有了一个应用——一个 Node.js API、Python Flask 服务、.NET Web 应用——位于机器上的某个文件夹中。本课将演示如何将 azd 添加到现有代码，以便使用 `azd up` 部署，无需模板。
+在[你的第一个项目](first-project.md)中，你是从模板开始部署了一个应用。但大多数时候你已经<em>有</em>一个应用——一个 Node.js API、一个 Python Flask 服务、一个 .NET Web 应用——放在你电脑的某个文件夹里。本课展示如何将 azd 添加到已有代码中，方便你使用 `azd up` 部署，无需模板。
 
 ## 学习目标
 
-完成本课后，您将能够：
-- 了解开始 azd 项目的三种方式
+完成本课后，你将能够：
+- 了解启动 azd 项目的三种方式
 - 在现有代码库中运行 `azd init`
-- 了解 `azure.yaml` 和 `infra/` 文件夹对应用的作用
-- 知道何时让 azd 生成基础设施，何时自己编写
-- 使用 `azd up` 将现有应用部署到 Azure
+- 了解 `azure.yaml` 和 `infra/` 文件夹对你的应用的作用
+- 知道什么时候让 azd 自动生成基础设施，什么时候自己编写
+- 使用 `azd up` 部署你现有的应用到 Azure
 
 ## 学习成果
 
-完成本课后，您将能够：
+完成本课后，你将能够：
 - 在已有项目中初始化 azd
-- 阅读并编辑基本的 `azure.yaml` 文件
-- 使用 `azd infra generate` 生成入门级基础设施
-- 为您的应用选择合适的 Azure 托管服务
-- 部署并清理您自己的应用
+- 读取并编辑基础的 `azure.yaml` 文件
+- 使用 `azd infra generate` 生成初始基础设施
+- 为你的应用选择合适的 Azure 托管服务
+- 部署并清理你自己的应用
 
 ---
 
-## 开始 azd 项目的三种方式
+## 启动 azd 项目的三种方式
 
 | 起点 | 命令 | 何时使用 |
 |----------------|---------|-------------|
-| <strong>从模板</strong> | `azd init --template <name>` | 用于学习或从经过验证的示例开始新应用 |
-| <strong>从现有代码</strong> | `azd init` (在您的项目文件夹中) | 您已经有应用并希望部署它 |
-| **从 Git 仓库** | `azd init --from-code` (在克隆的仓库中) | 在现有仓库中采用 azd |
+| <strong>从模板开始</strong> | `azd init --template <name>` | 学习或从已验证示例开始新应用 |
+| <strong>从已有代码开始</strong> | `azd init`（在你的项目文件夹中） | 你已有应用，想要部署它 |
+| **从 Git 仓库开始** | `azd init --from-code`（在克隆的仓库中） | 为已有仓库采用 azd |
 
-您已经练习了第一种选项。本课覆盖第二种——最常见的真实场景。
+你已经练习过第一种方式。本课涵盖第二种——最常见的真实场景。
 
 ---
 
-## 第1步：在您的项目中运行 `azd init`
+## 第一步：在项目中运行 `azd init`
 
-在<strong>现有项目文件夹内</strong>打开终端并运行：
+打开<strong>你现有项目的文件夹内的终端</strong>，运行：
 
 ```bash
 cd my-existing-app
 azd init
 ```
 
-azd 会询问您如何初始化。请选择：
+azd 会询问你想如何初始化。选择：
 
 ```
 ? How do you want to initialize your app?
@@ -61,26 +61,26 @@ azd 会询问您如何初始化。请选择：
   Select a template
 ```
 
-选择 **"Use code in the current directory."**，azd 然后会扫描您的文件夹，检测语言和框架，并建议一个主机。
+选择 **“使用当前目录中的代码”**，azd 会扫描你的文件夹，检测语言和框架，并推荐一个托管服务。
 
-### azd 会检测到什么
+### azd 检测内容
 
-azd 会寻找像 package.json、requirements.txt、pom.xml、*.csproj 或 Dockerfile 这样的线索，并建议匹配的 Azure 主机：
+azd 会查找诸如 `package.json`、`requirements.txt`、`pom.xml`、`*.csproj` 或 `Dockerfile` 等信号文件，并推荐相应的 Azure 托管服务：
 
-| 您的应用 | 可能检测到的主机 |
+| 你的应用 | 可能检测到的托管服务 |
 |----------|----------------------|
-| Node.js / Python / .NET web 应用 | Azure App Service 或 Container Apps |
-| 容器化应用 (`Dockerfile`) | Azure Container Apps |
+| Node.js / Python / .NET web 应用 | Azure App Service 或 Azure 容器应用 |
+| 容器化应用（`Dockerfile`） | Azure 容器应用 |
 | 函数应用 | Azure Functions |
-| 静态站点（React/Vue 构建输出） | Azure Static Web Apps |
+| 静态网站（React/Vue 构建结果） | Azure 静态 Web 应用 |
 
-确认检测到的服务，azd 会为您生成所需的文件。
+确认检测到的服务，azd 会搭建所需文件。
 
 ---
 
-## 第2步：了解 azd 创建了什么
+## 第二步：了解 azd 创建了什么
 
-初始化后，您的项目中会新增两样东西：
+初始化后，你的项目中会多两个新内容：
 
 ```
 my-existing-app/
@@ -92,9 +92,9 @@ my-existing-app/
 └── ...                 # your existing files, untouched
 ```
 
-### `azure.yaml` — 项目定义
+### `azure.yaml` — 项目定义文件
 
-这是 azd 项目的核心。一个最简的示例如下：
+这是 azd 项目的核心。一个最简示例如下：
 
 ```yaml
 # azure.yaml
@@ -106,66 +106,66 @@ services:
     host: appservice         # appservice | containerapp | function | staticwebapp
 ```
 
-`services` 段是关键部分：每一项将您代码的某个文件夹映射到一个 Azure 主机。如果您的应用同时有前端和 API，就会有两个服务。
+`services` 部分是关键：每条目映射代码文件夹到 Azure 托管服务。如果你的应用既有前端又有 API，那么就会有两个服务条目。
 
-### `infra/` — 以代码形式的 Azure 资源
+### `infra/` — 你的 Azure 资源即代码
 
-`infra/` 文件夹包含定义应用所需 Azure 资源的 Bicep 文件（例如 App Service、数据库等）。您不必手工编写这些文件——azd 会生成一个可用的起点。您可以在之后编辑它们以添加资源或加强安全性（详见 [第4章](../chapter-04-infrastructure/README.md)）。
+`infra/` 文件夹包含 Bicep 文件，定义应用使用的 Azure 资源（例如 App Service、数据库等）。你无需手写这些文件——azd 会生成可用起点。你<em>可以</em>后续编辑它们以添加资源或加强安全（详见[第4章](../chapter-04-infrastructure/README.md)）。
 
-> **提示：** 想在部署前查看或自定义生成的基础设施吗？运行 `azd infra generate`（也可用 `azd infra synth`）将 IaC 写入磁盘，这样您就可以审查并进行版本控制。
+> **提示：** 想在部署前查看或自定义生成的基础设施？运行 `azd infra generate`（也可用 `azd infra synth`）可将 IaC 写入磁盘，方便你审查和版本控制。
 
 ---
 
-## 第3步：设置所需配置
+## 第三步：设置必要的配置
 
-如果您的应用需要设置或密钥（如连接字符串、API 密钥），不要将它们硬编码。使用环境值：
+如果应用需要配置或密钥（连接字符串、API 密钥），不要硬编码它们，要使用环境变量：
 
 ```bash
-# 创建环境
+# 创建一个环境
 azd env new dev
 
-# 设置非机密的值
+# 设置一个非机密值
 azd env set API_VERSION 1.0.0
 ```
 
-对于真正的机密，请将它们存储在 Key Vault 中并从基础设施中引用——参见 [第3章：配置与身份验证](../chapter-03-configuration/authsecurity.md)。
+对于真实的密钥，请存储在 Key Vault 并在基础设施中引用——详见[第3章：配置与认证](../chapter-03-configuration/authsecurity.md)。
 
 ---
 
-## 第4步：部署
+## 第四步：部署
 
-现在使用您已经熟悉的相同工作流程：
+现在，使用你已熟悉的流程：
 
 ```bash
-# 进行身份验证（azd 必需）
+# 认证（azd必需）
 azd auth login
 
 # 预览将创建的资源
 azd provision --preview
 
-# 预配基础设施并部署你的代码
+# 配置基础设施并部署您的代码
 azd up
 ```
 
-完成后，azd 会打印您的应用 URL。按照任何 azd 应用相同的方式进行验证：
+运行结束后，azd 会打印应用的 URL。像验证任何 azd 应用一样，确认它：
 
 ```bash
 azd show           # 显示端点
-azd monitor --logs # 如有需要，检查日志
+azd monitor --logs # 如果需要，检查日志
 ```
 
 ---
 
 ## 常见首次问题
 
-| 症状 | 可能原因 | 解决方法 |
+| 现象 | 可能原因 | 解决方法 |
 |---------|--------------|-----|
-| azd 未检测到我的应用 | 缺少清单（例如 `package.json`） | 添加清单，或在运行 `azd init` 时手动选择主机 |
-| 在 `azd up` 期间构建失败 | 应用需要构建步骤 | 在 `azure.yaml` 中的服务下添加 `buildCommand`/`outputPath` |
-| 应用启动但返回错误 | 缺少配置/密钥 | 使用 `azd env set` 设置值或将 Key Vault 连接起来 |
-| 选择了错误的主机 | 自动检测猜测错误 | 编辑 `azure.yaml` 中的 `host:` 并重新运行 `azd up` |
+| azd 未检测到我的应用 | 缺少清单文件（如 `package.json`） | 添加清单文件，或运行 `azd init` 时手动选择主机 |
+| `azd up` 构建失败 | 应用需要构建步骤 | 在 `azure.yaml` 的服务配置中添加 `buildCommand` / `outputPath` |
+| 应用启动但返回错误 | 缺少配置/密钥 | 使用 `azd env set` 设值或配置 Key Vault |
+| 选错主机 | 自动检测错误 | 编辑 `azure.yaml` 中的 `host:` 并重新运行 `azd up` |
 
-有关更多信息，请参见 [第7章：故障排除](../chapter-07-troubleshooting/README.md)。
+更多信息见 [第7章：故障排除](../chapter-07-troubleshooting/README.md)。
 
 ---
 
@@ -179,10 +179,10 @@ azd down --force --purge
 
 ## 总结
 
-- `azd init` → **"Use code in the current directory"** 将 azd 添加到您已有的应用中。
-- `azure.yaml` 将您的代码文件夹映射到 Azure 主机；`infra/` 将资源定义为 Bicep。
-- `azd infra generate` 让您可以查看或自定义生成的基础设施。
-- 一旦初始化，您现有的应用将使用与基于模板的应用完全相同的 `azd up` / `azd down` 工作流程。
+- `azd init` → **“使用当前目录中的代码”**，为已有应用添加 azd。
+- `azure.yaml` 映射代码文件夹到 Azure 主机；`infra/` 定义资源的 Bicep 代码。
+- 通过 `azd infra generate` 可查看或自定义生成的基础设施。
+- 初始化后，你的现有应用使用与模板应用完全相同的 `azd up` / `azd down` 工作流。
 
 ---
 
@@ -190,14 +190,14 @@ azd down --force --purge
 
 | 方向 | 课程 |
 |-----------|--------|
-| <strong>上一个</strong> | [您的第一个项目](first-project.md) |
-| <strong>下一个</strong> | [开发容器与 Codespaces](dev-containers.md) |
+| <strong>上一章</strong> | [你的第一个项目](first-project.md) |
+| <strong>下一章</strong> | [开发容器与 Codespaces](dev-containers.md) |
 
 ## 📖 相关资源
 
 - [AZD 基础](azd-basics.md)
 - [第4章：基础设施即代码](../chapter-04-infrastructure/README.md)
-- [配置与身份验证](../chapter-03-configuration/authsecurity.md)
+- [配置与认证](../chapter-03-configuration/authsecurity.md)
 - [命令备忘单](../../resources/cheat-sheet.md)
 
 ---

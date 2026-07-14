@@ -1,52 +1,52 @@
-# 第1章：基础与快速入门
+# 第1章：基础与快速开始
 
-**📚 课程**: [AZD 入门](../../README.md) | **⏱️ 时长**: 30-45 分钟 | **⭐ 难度**: 入门
+**📚 课程**：[初学者的 AZD](../../README.md) | **⏱️ 时长**：30-45 分钟 | **⭐ 难度**：初学者
 
 ---
 
 ## 概述
 
-本章介绍 Azure Developer CLI (azd) 的基础知识。你将学习核心概念、安装工具，并将你的第一个应用部署到 Azure。
+本章介绍了 Azure Developer CLI (azd) 的基础知识。您将学习核心概念、安装工具，并将您的第一个应用部署到 Azure。
 
-> 已针对 `azd 1.25.6` 于 2026 年 6 月进行验证。
+> 在 2026 年 7 月使用 `azd 1.27.1` 验证通过。
 
 ## 学习目标
 
-完成本章后，你将能够：
-- 了解什么是 Azure Developer CLI，以及它与 Azure CLI 的不同点
-- 在你的平台上安装并配置 AZD
-- 使用 `azd up` 将你的第一个应用部署到 Azure
+完成本章后，您将能够：
+- 了解 Azure Developer CLI 是什么及其与 Azure CLI 的区别
+- 在您的平台上安装并配置 AZD
+- 使用 `azd up` 将第一个应用部署到 Azure
 - 使用 `azd down` 清理资源
 
 ---
 
-## 📚 课程
+## 📚 课程列表
 
-| # | 课程 | 描述 | 时长 |
+| # | 课程 | 描述 | 用时 |
 |---|--------|-------------|------|
 | 1 | [AZD 基础](azd-basics.md) | 核心概念、术语和项目结构 | 15 分钟 |
-| 2 | [安装与设置](installation.md) | 针对不同平台的安装指南 | 10 分钟 |
-| 3 | [你的第一个项目](first-project.md) | 动手实践：将 Web 应用部署到 Azure | 20 分钟 |
-| 4 | [带入你已有的应用](bring-your-own-app.md) | 向你已有的项目添加 azd | 15 分钟 |
-| 5 | [开发容器与 Codespaces](dev-containers.md) | 使用开发容器创建可重复的 azd 环境 | 15 分钟 |
+| 2 | [安装与设置](installation.md) | 针对各平台的安装指南 | 10 分钟 |
+| 3 | [你的第一个项目](first-project.md) | 实战：将 Web 应用部署到 Azure | 20 分钟 |
+| 4 | [使用已有的应用](bring-your-own-app.md) | 将 azd 添加到已有项目中 | 15 分钟 |
+| 5 | [开发容器与代码空间](dev-containers.md) | 使用开发容器实现可复现的 azd 环境 | 15 分钟 |
 
 ---
 
-## ✅ 从这里开始：验证你的设置
+## ✅ 从这里开始：验证您的环境
 
-在开始之前，确认你的本地机器已为第1章模板准备就绪：
+开始前，请确认您的本机已为第1章模板做好准备：
 
-**Windows:**
+**Windows：**
 ```powershell
 .\validate-setup.ps1
 ```
 
-**macOS / Linux:**
+**macOS / Linux：**
 ```bash
 bash ./validate-setup.sh
 ```
 
-If the script reports missing tools, fix those first and then continue with the chapter.
+如果脚本报告缺少工具，请先解决这些问题，然后再继续下一步。
 
 ---
 
@@ -56,8 +56,8 @@ If the script reports missing tools, fix those first and then continue with the 
 # 检查安装
 azd version
 
-# 为 AZD 进行身份验证
-# 可选：如果您打算直接运行 Azure CLI 命令，请运行 az login
+# 验证AZD身份
+# 可选：如果您计划直接运行Azure CLI命令，请执行az登录
 azd auth login
 
 # 部署您的第一个应用
@@ -72,13 +72,13 @@ azd down --force --purge
 
 ## ✅ 成功标准
 
-完成本章后，你应该能够：
+完成本章后，您应能够：
 
 ```bash
 azd version              # 显示已安装的版本
 azd init --template todo-nodejs-mongo  # 初始化项目
 azd up                   # 部署到 Azure
-azd show                 # 显示正在运行的应用 URL
+azd show                 # 显示运行中应用的 URL
 azd down --force --purge # 清理资源
 ```
 
@@ -88,15 +88,15 @@ azd down --force --purge # 清理资源
 
 | 方向 | 章节 |
 |-----------|---------|
-| <strong>下一章</strong> | [第2章：AI 优先开发](../chapter-02-ai-development/README.md) |
-| <strong>跳转到</strong> | [第3章：配置](../chapter-03-configuration/README.md) |
+| <strong>下一章</strong> | [第2章：AI优先开发](../chapter-02-ai-development/README.md) |
+| <strong>跳到</strong> | [第3章：配置](../chapter-03-configuration/README.md) |
 
 ---
 
 ## 📖 相关资源
 
 - [命令速查表](../../resources/cheat-sheet.md)
-- [常见问题](../../resources/faq.md)
+- [常见问题解答](../../resources/faq.md)
 - [术语表](../../resources/glossary.md)
 
 ---

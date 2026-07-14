@@ -1,34 +1,34 @@
-# 第5章：多智能体 AI 解决方案
+# 第5章：多智能体AI解决方案
 
-**📚 课程**: [AZD 入门](../../README.md) | **⏱️ 时长**: 2-3 小时 | **⭐ 难度**: 高级
+**📚 课程**：[AZD入门](../../README.md) | **⏱️ 时长**：2-3小时 | **⭐ 复杂度**：高级
 
 ---
 
 ## 概述
 
-本章涵盖高级多智能体架构模式、代理编排以及面向复杂场景的生产级 AI 部署。
+本章涵盖高级多智能体架构模式、智能体编排以及复杂场景下的生产就绪AI部署。
 
-> 经验证于 `azd 1.25.6`，时间：2026年6月。
+> 于2026年7月使用 `azd 1.27.1` 验证。
 
 ## 学习目标
 
-完成本章后，您将：
+通过完成本章，您将能够：
 - 理解多智能体架构模式
-- 部署协同的 AI 代理系统
-- 实现代理间通信
-- 构建面向生产的多智能体解决方案
+- 部署协调的AI智能体系统
+- 实现智能体间通信
+- 构建生产就绪的多智能体解决方案
 
 ---
 
-## 📚 课程
+## 📚 课程列表
 
-| # | 课程 | 描述 | 时长 |
+| # | 课程 | 描述 | 时间 |
 |---|--------|-------------|------|
-| 1 | [多智能体基础](multi-agent-basics.md) | 动手实践：使用 `azd up` 部署可运行的多智能体应用 | 45 分钟 |
-| 2 | [协调模式](../chapter-06-pre-deployment/coordination-patterns.md) | 代理编排策略（在第6章继续） | 30 分钟 |
+| 1 | [多智能体基础](multi-agent-basics.md) | 实操：使用 `azd up` 部署可用多智能体应用 | 45 分钟 |
+| 2 | [协调模式](../chapter-06-pre-deployment/coordination-patterns.md) | 智能体编排策略（续于第6章） | 30 分钟 |
 | 3 | [ARM 模板部署](../../examples/retail-multiagent-arm-template/README.md) | 一键部署示例 | 30 分钟 |
 
-> **从第1课开始。** 它是本章中唯一完全动手且可部署的课程。第2课在第6章（与预部署规划共享），而 [零售多智能体解决方案](../../examples/retail-scenario.md) 是一个架构蓝图——设计参考，而非一键式模板。
+> **从课程1开始。** 它是本章唯一完全实操、可部署的课程。课程2位于第6章（与预部署规划共享），[零售多智能体解决方案](../../examples/retail-scenario.md) 是架构蓝图——设计参考，而非一键模板。
 
 ---
 
@@ -39,13 +39,13 @@
 azd init --template agent-openai-python-prompty
 azd up
 
-# 选项 2：从代理清单部署 （需要 azure.ai.agents 扩展）
+# 选项 2：从代理清单部署（需要 azure.ai.agents 扩展）
 azd extension install azure.ai.agents
 azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **选择哪种方法？** 使用 `azd init --template` 从可用样例开始。当您已有自己的代理清单时，请使用 `azd ai agent init`。有关完整细节，请参阅 [AZD AI CLI 参考](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions)。
+> **使用哪种方式？** 使用 `azd init --template` 从工作示例开始。拥有自己的智能体清单时使用 `azd ai agent init`。完整细节参见 [AZD AI CLI 参考](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions)。
 
 ---
 
@@ -53,29 +53,29 @@ azd up
 
 ```mermaid
 graph TD
-    Orchestrator[编排代理<br/>路由请求，管理工作流] --> Customer[客户代理<br/>用户查询，偏好]
+    Orchestrator[协调代理<br/>路由请求，管理工作流程] --> Customer[客户代理<br/>用户查询，偏好设置]
     Orchestrator --> Inventory[库存代理<br/>库存水平，订单]
 ```
 
 ---
 
-## 🎯 精选解决方案：零售多智能体
+## 🎯 重点解决方案：零售多智能体
 
-该 [零售多智能体解决方案](../../examples/retail-scenario.md) 演示：
+[零售多智能体解决方案](../../examples/retail-scenario.md) 展示了：
 
-- <strong>客户代理</strong>：处理用户交互和偏好
-- <strong>库存代理</strong>：管理库存和订单处理
-- <strong>编排器</strong>：协调代理间的工作
-- <strong>共享内存</strong>：跨代理上下文管理
+- <strong>客户智能体</strong>：处理用户交互和偏好
+- <strong>库存智能体</strong>：管理库存和订单处理
+- <strong>编排者</strong>：协调各智能体间工作
+- <strong>共享内存</strong>：跨智能体上下文管理
 
 ### 使用的服务
 
-| 服务 | 用途 |
+| 服务 | 目的 |
 |---------|---------|
 | Microsoft Foundry Models | 语言理解 |
 | Azure AI Search | 产品目录 |
-| Cosmos DB | 代理状态和记忆 |
-| Container Apps | 代理托管 |
+| Cosmos DB | 智能体状态和内存 |
+| Container Apps | 智能体托管 |
 | Application Insights | 监控 |
 
 ---
@@ -84,16 +84,16 @@ graph TD
 
 | 方向 | 章节 |
 |-----------|---------|
-| <strong>上一章</strong> | [第4章：基础设施](../chapter-04-infrastructure/README.md) |
-| <strong>下一章</strong> | [第6章：预部署](../chapter-06-pre-deployment/README.md) |
+| <strong>上章</strong> | [第4章：基础设施](../chapter-04-infrastructure/README.md) |
+| <strong>下章</strong> | [第6章：预部署](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 相关资源
 
-- [AI 代理指南](../chapter-02-ai-development/agents.md)
-- [生产环境 AI 实践](../chapter-08-production/production-ai-practices.md)
-- [AI 故障排除](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [AI智能体指南](../chapter-02-ai-development/agents.md)
+- [生产AI实践](../chapter-08-production/production-ai-practices.md)
+- [AI故障排除](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

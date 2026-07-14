@@ -1,35 +1,35 @@
-# 第6章：部署前规划与验证
+# 第6章：预部署规划与验证
 
-**📚 课程**: [AZD For Beginners](../../README.md) | **⏱️ 时长**: 1 小时 | **⭐ 复杂度**: 中级
+**📚 课程**: [AZD 入门](../../README.md) | **⏱️ 时长**: 1小时 | **⭐ 难度**: 中级
 
 ---
 
 ## 概述
 
-本章涵盖在部署应用程序之前的关键规划和验证步骤。通过适当的容量规划、SKU 选择和预检，学习如何避免代价高昂的错误。
+本章涵盖在部署应用前的关键规划与验证步骤。学习通过合理的容量规划、SKU选择及预检，避免昂贵的错误。
 
-> 已在 2026 年 6 月使用 `azd 1.25.6` 进行验证。
+> 已通过 `azd 1.27.1` 验证，时间截至2026年7月。
 
 ## 学习目标
 
 完成本章后，您将能够：
-- 在部署前运行预检
-- 进行容量规划并估算资源需求
-- 选择适当的 SKU 以优化成本
-- 配置 Application Insights 以进行监控
+- 在部署前执行预检
+- 规划容量并估算资源需求
+- 选择合适的SKU以优化成本
+- 配置 Application Insights 进行监控
 - 了解团队协调模式
 
 ---
 
-## 📚 课程
+## 📚 课程列表
 
 | # | 课程 | 描述 | 时间 |
 |---|--------|-------------|------|
-| 1 | [预部署检查](preflight-checks.md) | 在部署前验证配置 | 15 分钟 |
+| 1 | [预检](preflight-checks.md) | 部署前验证配置 | 15 分钟 |
 | 2 | [容量规划](capacity-planning.md) | 估算资源需求 | 20 分钟 |
-| 3 | [SKU 选择](sku-selection.md) | 选择合适的定价层 | 15 分钟 |
+| 3 | [SKU选择](sku-selection.md) | 选择合适的定价层 | 15 分钟 |
 | 4 | [Application Insights](application-insights.md) | 配置监控 | 20 分钟 |
-| 5 | [协调模式](coordination-patterns.md) | 团队部署工作流 | 15 分钟 |
+| 5 | [协调模式](coordination-patterns.md) | 团队部署工作流程 | 15 分钟 |
 
 ---
 
@@ -42,7 +42,7 @@ az vm list-usage --location eastus --output table
 # 预览部署（不创建资源）
 azd provision --preview
 
-# 验证 Bicep 语法
+# 验证Bicep语法
 az bicep build --file infra/main.bicep
 
 # 检查环境配置
@@ -51,33 +51,33 @@ azd env get-values
 
 ---
 
-## ☑️ 部署前清单
+## ☑️ 预部署检查清单
 
 ### 在 `azd provision` 之前
 
-- [ ] 已验证区域配额
-- [ ] 已适当选择 SKU
-- [ ] 已审查成本估算
-- [ ] 命名约定一致
-- [ ] 已配置安全/角色访问控制（RBAC）
+- [ ] 验证区域配额
+- [ ] 适当选择 SKU
+- [ ] 评审成本估算
+- [ ] 命名规范一致
+- [ ] 配置安全性/RBAC
 
 ### 在 `azd deploy` 之前
 
-- [ ] 已设置环境变量
-- [ ] 密钥已存放在 Key Vault 中
-- [ ] 已验证连接字符串
-- [ ] 已配置健康检查
+- [ ] 设置环境变量
+- [ ] 密钥库中存储密钥
+- [ ] 验证连接字符串
+- [ ] 配置健康检查
 
 ---
 
-## 💰 SKU 选择指南
+## 💰 SKU选择指南
 
-| 工作负载 | 开发 | 生产 |
+| 工作负载 | 开发环境 | 生产环境 |
 |----------|-------------|------------|
-| Container Apps | Consumption | 专用 D4 |
-| App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standard | Standard + PTU |
-| AI Search | Basic | Standard S2+ |
+| 容器应用 | 按消费计费 | 专用 D4 |
+| 应用服务 | B1/B2 | P1v3及以上 |
+| Microsoft Foundry 模型 | 标准 | 标准 + PTU |
+| AI 搜索 | 基础 | 标准 S2及以上 |
 
 ---
 

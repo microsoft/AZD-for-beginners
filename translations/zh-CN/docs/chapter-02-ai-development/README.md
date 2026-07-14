@@ -1,33 +1,33 @@
-# 第 2 章：AI 优先开发
+# 第二章：AI 优先开发
 
-**📚 课程**: [AZD 入门](../../README.md) | **⏱️ 时长**: 1-2 小时 | **⭐ 复杂度**: 中级
+**📚 课程**: [初学者的 AZD](../../README.md) | **⏱️ 时长**: 1-2 小时 | **⭐ 复杂度**: 中级
 
 ---
 
 ## 概述
 
-本章侧重于使用 Azure Developer CLI 和 Microsoft Foundry 服务部署 AI 驱动的应用程序。从简单的 AI 聊天应用到具备工具的智能代理。
+本章重点介绍如何使用 Azure Developer CLI 和 Microsoft Foundry 服务部署 AI 驱动的应用程序。从简单的 AI 聊天应用到带工具的智能代理。
 
-> **验证说明 (2026-06-15):** 本章中的命令流程和扩展指导已针对 `azd` `1.25.6` 以及当前预览版 AI 代理扩展发行版 `azure.ai.agents` `0.1.40-preview` 进行了审查。如果您使用的是较旧的 AZD 构建，请先更新然后继续进行练习。
+> **验证说明 (2026-07-13)：** 本章中的命令流程和扩展指南已针对 `azd` `1.27.1` 和当前预览版 AI 代理扩展发布 `azure.ai.agents` `1.0.0-beta.5` 进行了审核。如果您使用的是较旧版本的 AZD，请先更新，然后继续练习。
 
 ## 学习目标
 
 完成本章后，您将能够：
 - 使用预构建的 AZD 模板部署 AI 应用
 - 理解 Microsoft Foundry 与 AZD 的集成
-- 配置并自定义带工具的 AI 代理
+- 配置和自定义带工具的 AI 代理
 - 部署 RAG（检索增强生成）应用
 
 ---
 
-## 📚 课程
+## 📚 课程内容
 
 | # | 课程 | 描述 | 时间 |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | 将 AZD 连接到 Foundry 服务 | 30 分钟 |
-| 2 | [AI Agents Guide](agents.md) | 部署带工具的智能代理 | 45 分钟 |
-| 3 | [AI Model Deployment](ai-model-deployment.md) | 部署和配置 AI 模型 | 30 分钟 |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | 实操：使您的 AI 解决方案符合 AZD 要求 | 60 分钟 |
+| 1 | [Microsoft Foundry 集成](microsoft-foundry-integration.md) | 连接 AZD 与 Foundry 服务 | 30 分钟 |
+| 2 | [AI 代理指南](agents.md) | 部署带工具的智能代理 | 45 分钟 |
+| 3 | [AI 模型部署](ai-model-deployment.md) | 部署和配置 AI 模型 | 30 分钟 |
+| 4 | [AI 工作坊实验](ai-workshop-lab.md) | 实操：让您的 AI 解决方案适配 AZD | 60 分钟 |
 
 ---
 
@@ -51,23 +51,23 @@ azd up
 
 ## 🤖 精选 AI 模板
 
-| Template | Description | Services |
+| 模板 | 描述 | 服务 |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | 带引用的 RAG 聊天 | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | 带工具的 AI 代理 | AI Agent Service |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | 基础 AI 聊天 | OpenAI + Container Apps |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | 带引用的 RAG 聊天 | OpenAI + AI 搜索 |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | 具备工具的 AI 代理 | AI 代理服务 |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | 基础 AI 聊天 | OpenAI + 容器应用 |
 
 ---
 
 ## 💰 成本意识
 
-| Environment | Estimated Monthly Cost |
+| 环境 | 预计月成本 |
 |-------------|----------------------|
-| 开发环境 | $80-150 |
-| 预发布 | $150-300 |
-| 生产环境 | $300-3,500+ |
+| 开发 | $80-150 |
+| 预发 | $150-300 |
+| 生产 | $300-3,500+ |
 
-**提示：** 测试后运行 `azd down` 以避免费用。
+**提示：** 测试后运行 `azd down` 以避免产生费用。
 
 ---
 
@@ -75,9 +75,9 @@ azd up
 
 | 方向 | 章节 |
 |-----------|---------|
-| <strong>上一章</strong> | [第 1 章：基础](../chapter-01-foundation/README.md) |
-| <strong>下一章</strong> | [第 3 章：配置](../chapter-03-configuration/README.md) |
-| <strong>跳转到</strong> | [第 8 章：生产模式](../chapter-08-production/README.md) |
+| <strong>上一章</strong> | [第一章：基础](../chapter-01-foundation/README.md) |
+| <strong>下一章</strong> | [第三章：配置](../chapter-03-configuration/README.md) |
+| <strong>跳至</strong> | [第八章：生产模式](../chapter-08-production/README.md) |
 
 ---
 
@@ -85,7 +85,7 @@ azd up
 
 - [AI 故障排除](../chapter-07-troubleshooting/ai-troubleshooting.md)
 - [生产 AI 实践](../chapter-08-production/production-ai-practices.md)
-- [Application Insights](../chapter-06-pre-deployment/application-insights.md)
+- [应用程序洞察](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 

@@ -1,62 +1,62 @@
-# Chapter 8: 生产与企业模式
+# 第8章：生产与企业模式
 
-**📚 Course**: [AZD 入门](../../README.md) | **⏱️ 时长**: 2-3 小时 | **⭐ 复杂度**: 高级
+**📚 课程**：[AZD 初学者](../../README.md) | **⏱️ 时长**：2-3小时 | **⭐ 复杂度**：高级
 
 ---
 
-## 概述
+## 概览
 
-本章涵盖面向企业的部署模式、安全加固、监控以及针对生产 AI 工作负载的成本优化。
+本章涵盖企业级部署模式、安全强化、监控及生产AI工作负载的成本优化。
 
-> 已于 2026 年 6 月在 `azd 1.25.6` 上验证。
+> 已于2026年7月使用 `azd 1.27.1` 版本验证。
 
 ## 学习目标
 
-完成本章后，您将：
-- 部署多区域高可用应用
-- 实现企业级安全模式
-- 配置全面的监控
-- 在规模化场景下优化成本
-- 使用 AZD 设置 CI/CD 管道
+完成本章后，您将能够：
+- 部署多区域弹性应用
+- 实施企业安全模式
+- 配置全面监控
+- 大规模优化成本
+- 使用 AZD 搭建 CI/CD 流水线
 
 ---
 
-## 📚 课程
+## 📚 课程内容
 
 | # | 课程 | 描述 | 时间 |
 |---|--------|-------------|------|
-| 1 | [生产 AI 实践](production-ai-practices.md) | 企业部署模式 | 90 分钟 |
+| 1 | [生产 AI 实践](production-ai-practices.md) | 企业部署模式 | 90 分 |
 
 ---
 
-## 🚀 生产清单
+## 🚀 生产检查清单
 
-- [ ] 多区域部署以提高弹性
-- [ ] 用于身份验证的托管标识（无需密钥）
-- [ ] 使用 Application Insights 进行监控
-- [ ] 配置成本预算和警报
+- [ ] 多区域部署提升弹性
+- [ ] 使用托管身份进行认证（无密钥）
+- [ ] 使用 Application Insights 监控
+- [ ] 配置成本预算和报警
 - [ ] 启用安全扫描
-- [ ] 集成 CI/CD 管道
-- [ ] 灾难恢复计划
+- [ ] 集成 CI/CD 流水线
+- [ ] 制定灾难恢复方案
 
 ---
 
 ## 🏗️ 架构模式
 
-### 模式 1：微服务 AI
+### 模式1：微服务 AI
 
 ```mermaid
 graph LR
-    Gateway[API 网关] --> AI[AI 服务] --> Models[微软 Foundry 模型]
+    Gateway[API 网关] --> AI[AI 服务] --> Models[Microsoft Foundry 模型]
     Gateway --> Auth[认证服务]
     AI --> Data[数据存储]
 ```
 
-### 模式 2：事件驱动 AI
+### 模式2：事件驱动 AI
 
 ```mermaid
 graph LR
-    EventGrid[事件网格] --> Functions[函数] --> Pipeline[AI 管道]
+    EventGrid[事件网格] --> Functions[函数] --> Pipeline[人工智能管道]
 ```
 
 ---
@@ -84,9 +84,9 @@ properties: {
 
 | 策略 | 节省 |
 |----------|---------|
-| 缩容到零（Container Apps） | 60-80% |
-| 为开发使用按量计费层 | 50-70% |
-| 定时伸缩 | 30-50% |
+| 零规模扩展（容器应用） | 60-80% |
+| 开发使用消费层 | 50-70% |
+| 定时扩展 | 30-50% |
 | 预留容量 | 20-40% |
 
 ```bash
@@ -103,10 +103,10 @@ az consumption budget create \
 ## 📊 监控配置
 
 ```bash
-# 流式日志
+# 流式传输日志
 azd monitor --logs
 
-# 检查 Application Insights
+# 检查应用洞察
 azd monitor --overview
 
 # 查看指标
@@ -120,7 +120,7 @@ az monitor metrics list --resource <resource-id>
 | 方向 | 章节 |
 |-----------|---------|
 | <strong>上一章</strong> | [第7章：故障排除](../chapter-07-troubleshooting/README.md) |
-| <strong>课程完成</strong> | [课程主页](../../README.md) |
+| <strong>课程完成</strong> | [课程首页](../../README.md) |
 
 ---
 
