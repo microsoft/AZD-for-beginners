@@ -1,23 +1,23 @@
-# Bölüm 8: Üretim ve Kurumsal Desenler
+# Bölüm 8: Üretim ve Kurumsal Kalıplar
 
-**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Süre**: 2-3 saat | **⭐ Zorluk**: İleri
+**📚 Kurs**: [Yeni Başlayanlar için AZD](../../README.md) | **⏱️ Süre**: 2-3 saat | **⭐ Zorluk**: İleri Düzey
 
 ---
 
 ## Genel Bakış
 
-Bu bölüm, kurumsal kullanıma hazır dağıtım desenleri, güvenlik sertleştirmesi, izleme ve üretim AI iş yükleri için maliyet optimizasyonunu kapsar.
+Bu bölüm, kurumsal düzeye hazır dağıtım kalıpları, güvenlik sertleştirme, izleme ve üretim AI iş yükleri için maliyet optimizasyonunu kapsar.
 
-> `azd 1.25.6` ile Haziran 2026'da doğrulanmıştır.
+> Temmuz 2026'da `azd 1.27.1` ile doğrulanmıştır.
 
 ## Öğrenme Hedefleri
 
 Bu bölümü tamamlayarak:
 - Çok bölgeli dayanıklı uygulamalar dağıtacaksınız
-- Kurumsal güvenlik desenlerini uygulayacaksınız
-- Kapsamlı izlemeyi yapılandıracaksınız
-- Ölçekte maliyetleri optimize edeceksiniz
-- AZD ile CI/CD hattı kuracaksınız
+- Kurumsal güvenlik kalıplarını uygulayacaksınız
+- Kapsamlı izleme yapılandıracaksınız
+- Ölçekli maliyet optimizasyonu yapacaksınız
+- AZD ile CI/CD boru hatları kuracaksınız
 
 ---
 
@@ -25,38 +25,38 @@ Bu bölümü tamamlayarak:
 
 | # | Ders | Açıklama | Süre |
 |---|--------|-------------|------|
-| 1 | [Üretim AI Uygulamaları](production-ai-practices.md) | Kurumsal dağıtım desenleri | 90 dk |
+| 1 | [Üretim AI Uygulamaları](production-ai-practices.md) | Kurumsal dağıtım kalıpları | 90 dk |
 
 ---
 
 ## 🚀 Üretim Kontrol Listesi
 
 - [ ] Dayanıklılık için çok bölgeli dağıtım
-- [ ] Kimlik doğrulama için yönetilen kimlik (anahtar yok)
+- [ ] Kimlik doğrulama için yönetilen kimlik (anahtarsız)
 - [ ] İzleme için Application Insights
 - [ ] Maliyet bütçeleri ve uyarılar yapılandırıldı
 - [ ] Güvenlik taraması etkin
-- [ ] CI/CD hattı entegrasyonu
+- [ ] CI/CD boru hattı entegrasyonu
 - [ ] Felaket kurtarma planı
 
 ---
 
-## 🏗️ Mimari Desenler
+## 🏗️ Mimari Kalıplar
 
-### Desen 1: Mikroservis AI
+### Kalıp 1: Mikroservis AI
 
 ```mermaid
 graph LR
-    Gateway[API Ağ Geçidi] --> AI[Yapay Zeka Hizmeti] --> Models[Microsoft Foundry Modelleri]
+    Gateway[API Geçidi] --> AI[AI Servisi] --> Models[Microsoft Foundry Modelleri]
     Gateway --> Auth[Kimlik Doğrulama Servisi]
     AI --> Data[Veri Deposu]
 ```
 
-### Desen 2: Olay Tabanlı AI
+### Kalıp 2: Olay Tabanlı AI
 
 ```mermaid
 graph LR
-    EventGrid[Olay Izgarası] --> Functions[Fonksiyonlar] --> Pipeline[Yapay Zeka Boru Hattı]
+    EventGrid[Olay Ağı] --> Functions[Fonksiyonlar] --> Pipeline[AI Boru Hattı]
 ```
 
 ---
@@ -84,13 +84,13 @@ properties: {
 
 | Strateji | Tasarruf |
 |----------|---------|
-| Sıfıra ölçekleme (Container Apps) | 60-80% |
-| Geliştirme için tüketim katmanlarını kullanın | 50-70% |
-| Zamanlanmış ölçeklendirme | 30-50% |
-| Rezerve kapasite | 20-40% |
+| Sıfıra ölçekleme (Container Apps) | %60-80 |
+| Geliştirme için tüketim katmanlarını kullanma | %50-70 |
+| Planlı ölçeklendirme | %30-50 |
+| Ayrılmış kapasite | %20-40 |
 
 ```bash
-# Bütçe uyarıları ayarla
+# Bütçe uyarılarını ayarla
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -103,13 +103,13 @@ az consumption budget create \
 ## 📊 İzleme Kurulumu
 
 ```bash
-# Günlükleri izle
+# Akış günlükleri
 azd monitor --logs
 
-# Application Insights'ı kontrol et
+# Uygulama İçgörülerini kontrol et
 azd monitor --overview
 
-# Metrikleri görüntüle
+# Ölçümleri görüntüle
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -120,15 +120,15 @@ az monitor metrics list --resource <resource-id>
 | Yön | Bölüm |
 |-----------|---------|
 | **Önceki** | [Bölüm 7: Sorun Giderme](../chapter-07-troubleshooting/README.md) |
-| **Kurs Tamamlandı** | [Kurs Ana Sayfası](../../README.md) |
+| **Kurs Tamamlandı** | [Kurs Anasayfa](../../README.md) |
 
 ---
 
 ## 📖 İlgili Kaynaklar
 
-- [Yapay Zeka Ajanları Rehberi](../chapter-02-ai-development/agents.md)
+- [AI Ajanları Kılavuzu](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Çok Ajanlı Çözümler](../chapter-05-multi-agent/README.md)
+- [Çoklu Ajan Çözümleri](../chapter-05-multi-agent/README.md)
 - [Mikroservis Örneği](../../examples/microservices/README.md)
 
 ---

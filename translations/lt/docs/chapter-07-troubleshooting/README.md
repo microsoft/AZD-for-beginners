@@ -1,56 +1,56 @@
-# Skyrius 7: Gedimų šalinimas ir derinimas
+# 7 skyrius: Trikčių šalinimas ir derinimas
 
-**📚 Kursas**: [AZD For Beginners](../../README.md) | **⏱️ Trukmė**: 1-1.5 val. | **⭐ Sudėtingumas**: Vidutinis
+**📚 Kursas**: [AZD Pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 1-1,5 valandos | **⭐ Sudėtingumas**: Vidutinis
 
 ---
 
 ## Apžvalga
 
-Šis skyrius padės diagnozuoti ir išspręsti įprastas problemas dirbant su Azure Developer CLI. Nuo diegimo klaidų iki AI specifinių problemų.
+Šiame skyriuje padėsime diagnozuoti ir išspręsti dažnas problemas dirbant su Azure Developer CLI. Nuo diegimo klaidų iki AI specifinių problemų.
 
-> Patikrinta su `azd 1.25.6` 2026 m. birželį.
+> Patvirtinta su `azd 1.27.1` 2026 m. liepos mėn.
 
 ## Mokymosi tikslai
 
-Baigę šį skyrių, sugebėsite:
+Baigę šį skyrių, galėsite:
 - Diagnozuoti dažnas AZD diegimo klaidas
-- Taisyti autentifikavimo ir leidimų problemas
-- Išspręsti AI paslaugų ryšio problemas
-- Naudoti Azure Portal ir CLI gedimų šalinimui
+- Derinti autentifikacijos ir leidimų problemas
+- Spręsti AI paslaugų ryšio problemas
+- Naudoti Azure Portal ir CLI trikčių šalinimui
 
 ---
 
 ## 📚 Pamokos
 
 | # | Pamoka | Aprašymas | Laikas |
-|---|--------|-----------|--------|
-| 1 | [Dažnos problemos](common-issues.md) | Dažnai pasitaikančios problemos | 30 min |
+|---|--------|-------------|------|
+| 1 | [Dažnos problemos](common-issues.md) | Dažnai sutinkamos problemos | 30 min |
 | 2 | [Derinimo vadovas](debugging.md) | Žingsnis po žingsnio derinimo strategijos | 45 min |
-| 3 | [AI gedimų šalinimas](ai-troubleshooting.md) | AI specifinės problemos | 30 min |
+| 3 | [AI trikčių šalinimas](ai-troubleshooting.md) | AI specifinės problemos | 30 min |
 
 ---
 
-## 🚨 Greiti sprendimai
+## 🚨 Greitieji pataisymai
 
-### Autentifikavimo problemos
+### Autentifikacijos problemos
 ```bash
 # Reikalinga AZD darbo eigos vykdymui
 azd auth login
 
-# Nebūtina, jei taip pat tiesiogiai naudojate Azure CLI komandas
+# Nebūtina, jei taip pat naudojate Azure CLI komandas tiesiogiai
 az login
 
 azd auth status
 ```
 
-### Teikimo (provisioning) klaidos
+### Diegimo klaidos
 ```bash
 azd show
 azd monitor --logs
 az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
-### Išteklių konfliktai
+### Išteklų konfliktai
 ```bash
 azd down --force --purge
 azd env new different-name
@@ -66,26 +66,26 @@ azd up
 
 ---
 
-## 📋 Klaidų kodų nuoroda
+## 📋 Klaidos kodų atmintinė
 
-| Klaida | Priežastis | Sprendimas |
-|--------|-----------|-----------|
-| `AuthenticationError` | Nesate prisijungę | `azd auth login` |
-| `ResourceNotFound` | Resursas nerastas | Patikrinkite resursų pavadinimus |
-| `QuotaExceeded` | Prenumeratos limitai | Prašyti kvotos padidinimo |
+| Klaidа | Priežastis | Sprendimas |
+|-------|-------|----------|
+| `AuthenticationError` | Nepasirinkta prisijungti | `azd auth login` |
+| `ResourceNotFound` | Trūksta ištekliaus | Patikrinkite išteklių pavadinimus |
+| `QuotaExceeded` | Prenumeratos limitai | Prašykite kvotos padidinimo |
 | `InvalidTemplate` | Bicep sintaksės klaida | `az bicep build` |
-| `Conflict` | Resursas egzistuoja | Naudokite kitą pavadinimą arba ištrinkite |
+| `Conflict` | Išteklis jau egzistuoja | Naudokite naują pavadinimą arba ištrinkite |
 | `Forbidden` | Nepakankamos teisės | Patikrinkite RBAC vaidmenis |
 
 ---
 
-## 🔄 Atstatymas ir atkūrimas
+## 🔄 Atstatymas ir atsigavimas
 
 ```bash
-# Minkštas atstatymas (išsaugomi ištekliai, pakartotinai diegiamas kodas)
+# Minkštas perkrovimas (išlaikyti išteklius, perdiegi kodą)
 azd deploy --force
 
-# Pilnas atstatymas (ištrinti viską, pradėti iš naujo)
+# Sunkus perkrovimas (ištrinti viską, pradėti iš naujo)
 azd down --force --purge
 azd up
 ```
@@ -95,15 +95,15 @@ azd up
 ## 🔗 Navigacija
 
 | Kryptis | Skyrius |
-|---------|---------|
-| **Ankstesnis** | [Skyrius 6: Prieš diegimą](../chapter-06-pre-deployment/README.md) |
-| **Kitas** | [Skyrius 8: Produkcija](../chapter-08-production/README.md) |
+|-----------|---------|
+| **Ankstesnis** | [6 skyrius: Prieš diegimą](../chapter-06-pre-deployment/README.md) |
+| **Kitas** | [8 skyrius: Gamyba](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Susiję ištekliai
 
-- [Patikrinimai prieš diegimą](../chapter-06-pre-deployment/preflight-checks.md)
+- [Prieš diegimą tikrinimai](../chapter-06-pre-deployment/preflight-checks.md)
 - [Konfigūracijos vadovas](../chapter-03-configuration/configuration.md)
 - [AZD GitHub problemos](https://github.com/Azure/azure-dev/issues)
 

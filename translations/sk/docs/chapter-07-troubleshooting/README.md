@@ -1,21 +1,21 @@
 # Kapitola 7: Riešenie problémov a ladenie
 
-**📚 Kurz**: [AZD For Beginners](../../README.md) | **⏱️ Trvanie**: 1-1.5 hours | **⭐ Zložitosť**: Stredne pokročilá
+**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Trvanie**: 1-1,5 hodiny | **⭐ Zložitosť**: Stredne pokročilý
 
 ---
 
 ## Prehľad
 
-Táto kapitola vám pomôže diagnostikovať a vyriešiť bežné problémy pri práci s Azure Developer CLI. Od zlyhaní nasadenia po problémy špecifické pre AI.
+Táto kapitola vám pomôže diagnostikovať a vyriešiť bežné problémy pri práci s Azure Developer CLI. Od zlyhaní nasadenia až po problémy špecifické pre AI.
 
-> Overené s `azd 1.25.6` v júni 2026.
+> Overené na `azd 1.27.1` v júli 2026.
 
 ## Ciele učenia
 
-Po dokončení tejto kapitoly budete:
+Po dokončení tejto kapitoly budete vedieť:
 - Diagnostikovať bežné zlyhania nasadenia AZD
-- Ladiť problémy s overovaním a povoleniami
-- Riešiť problémy s konektivitou služieb AI
+- Ladiť problémy s autentifikáciou a oprávneniami
+- Riešiť problémy s konektivitou AI služieb
 - Používať Azure Portal a CLI na riešenie problémov
 
 ---
@@ -26,24 +26,24 @@ Po dokončení tejto kapitoly budete:
 |---|--------|-------------|------|
 | 1 | [Bežné problémy](common-issues.md) | Často sa vyskytujúce problémy | 30 min |
 | 2 | [Sprievodca ladením](debugging.md) | Krok za krokom stratégie ladenia | 45 min |
-| 3 | [Riešenie problémov s AI](ai-troubleshooting.md) | Problémy špecifické pre AI | 30 min |
+| 3 | [Riešenie problémov AI](ai-troubleshooting.md) | Problémy špecifické pre AI | 30 min |
 
 ---
 
 ## 🚨 Rýchle opravy
 
-### Problémy s overovaním
+### Problémy s autentifikáciou
 ```bash
-# Povinné pre pracovné postupy AZD
+# Vyžaduje sa pre pracovné toky AZD
 azd auth login
 
-# Voliteľné, ak tiež priamo používate príkazy Azure CLI
+# Nepovinné, ak priamo používate aj príkazy Azure CLI
 az login
 
 azd auth status
 ```
 
-### Zlyhania pri zriaďovaní
+### Zlyhania pri poskytovaní
 ```bash
 azd show
 azd monitor --logs
@@ -57,7 +57,7 @@ azd env new different-name
 azd up
 ```
 
-### Prekročená kvóta
+### Prekročenie kvóty
 ```bash
 az vm list-usage --location eastus --output table
 azd env set AZURE_LOCATION westus2
@@ -66,23 +66,23 @@ azd up
 
 ---
 
-## 📋 Referenčný zoznam chýb
+## 📋 Referencia chybových kódov
 
 | Chyba | Príčina | Riešenie |
 |-------|-------|----------|
-| `AuthenticationError` | Not logged in | `azd auth login` |
-| `ResourceNotFound` | Chýbajúci zdroj | Skontrolovať názvy zdrojov |
-| `QuotaExceeded` | Limity predplatného | Požiadať o zvýšenie kvóty |
+| `AuthenticationError` | Nie ste prihlásený | `azd auth login` |
+| `ResourceNotFound` | Chýbajúci zdroj | Skontrolujte názvy zdrojov |
+| `QuotaExceeded` | Limity predplatného | Požiadajte o zvýšenie kvóty |
 | `InvalidTemplate` | Chyba syntaxe Bicep | `az bicep build` |
-| `Conflict` | Zdroj už existuje | Použiť nový názov alebo odstrániť |
-| `Forbidden` | Nedostatočné povolenia | Skontrolovať RBAC role |
+| `Conflict` | Zdroj už existuje | Použite nový názov alebo vymažte |
+| `Forbidden` | Nedostatočné oprávnenia | Skontrolujte RBAC roly |
 
 ---
 
-## 🔄 Resetovanie a obnovenie
+## 🔄 Resetovanie a obnova
 
 ```bash
-# Mäkký reset (ponechať zdroje, znovu nasadiť kód)
+# Mäký reset (ponechať zdroje, znovu nasadiť kód)
 azd deploy --force
 
 # Tvrdý reset (vymazať všetko, začať odznova)
@@ -97,15 +97,15 @@ azd up
 | Smer | Kapitola |
 |-----------|---------|
 | **Predchádzajúca** | [Kapitola 6: Pred nasadením](../chapter-06-pre-deployment/README.md) |
-| **Ďalšia** | [Kapitola 8: Produkcia](../chapter-08-production/README.md) |
+| **Nasledujúca** | [Kapitola 8: Produkcia](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Súvisiace zdroje
 
 - [Kontroly pred nasadením](../chapter-06-pre-deployment/preflight-checks.md)
-- [Príručka konfigurácie](../chapter-03-configuration/configuration.md)
-- [Problémy AZD na GitHube](https://github.com/Azure/azure-dev/issues)
+- [Sprievodca konfiguráciou](../chapter-03-configuration/configuration.md)
+- [AZD GitHub Issues](https://github.com/Azure/azure-dev/issues)
 
 ---
 

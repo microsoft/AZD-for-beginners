@@ -1,56 +1,56 @@
-# Dev Containers & GitHub Codespaces for azd
+# ធុង dev និង GitHub Codespaces សម្រាប់ azd
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD សម្រាប់អ្នកចាប់ផ្ដើម](../../README.md)
-- **📖 Current Chapter**: ជំពូក 1 - មូលដ្ឋាន និង ចាប់ផ្ដើមឆាប់ៗ
-- **⬅️ Previous**: [នាំកម្មវិធីរបស់អ្នកមក](bring-your-own-app.md)
-- **🚀 Next Chapter**: [ជំពូក ២: ការអភិវឌ្ឍន៍ដែលផ្តោតលើ AI](../chapter-02-ai-development/README.md)
+**ចរណ់ផ្លូវជាផ្លូវការ៖**
+- **📚 ទំព័រផ្ទះវគ្គសិក្សា**: [AZD សម្រាប់អ្នកចាប់ផ្ដើម](../../README.md)
+- **📖 វគ្គសិក្សាបច្ចុប្បន្ន**: វគ្គ 1 - មូលដ្ឋាន និង ចាប់ផ្ដើមយ៉ាងឆាប់រហ័ស
+- **⬅️ មុននេះ**: [យកកម្មវិធីរបស់អ្នកមក](bring-your-own-app.md)
+- **🚀 វគ្គបន្ទាប់**: [វគ្គ 2: ការអភិវឌ្ឍ AI ជាដំបូង](../chapter-02-ai-development/README.md)
 
-> បានផ្ទៀងផ្ទាត់ជាមួយ `azd 1.25.6` នៅខែមិថុនា 2026.
+> ត្រូវបានផ្ទៀងផ្ទាត់ជាមួយ `azd 1.27.1` នៅខែកក្កដា 2026។
 
-## ការណែនាំ
+## ណែនាំ
 
-ការតំឡើង azd, runtime ភាសាដែលត្រឹមត្រូវ, Docker, និង Azure CLI លើមាស៊ីនរាល់មួយគឺជាការងារខ្វល់—ហើយនេះជាហេតុផលលេខមួយដែលមេរៀនដែល "ដំណើរការនៅលើម៉ាស៊ីនរបស់ខ្ញុំ" មិនដំណើរការសម្រាប់អ្នកផ្សេងទៀត។ ជម្រើស **dev container** ដោះស្រាយបញ្ហានេះដោយពិពណ៌នាលើ toolchain ទាំងមូលរបស់អ្នកក្នុងឯកសារ មួយ។ អ្នកណាមួយដែលបើកគម្រោងនៅក្នុង VS Code ឬ GitHub Codespaces នឹងទទួលបានបរិយាកាសដូចគ្នាទាំងស្រុង មាន azd ត្រូវបានតំឡើងរួចហើយ។ មេរៀននេះបង្ហាញពីរបៀបបន្ថែមវា។
+ការដំឡើង azd, មជ្ឈមណ្ឌលភាសាដំណើរការ, Docker និង Azure CLI ក្នុងមួយម៉ាស៊ីនគឺជាការងារលំបាក មួយហេតុផលចម្បងដែលមេរៀនមួយ "ដំណើរការនៅលើម៉ាស៊ីនខ្ញុំ" បរាជ័យសម្រាប់អ្នកផ្សេងទៀតជាការនេះ។ ធុង dev ជួយដោះស្រាយបញ្ហានេះដោយពិពណ៌នាអំពីសង្វាក់ឧបករណ៍ទាំងមូលរបស់អ្នកក្នុងឯកសារ ម្ចាស់គម្រោងណាមួយដែលបើកគម្រោងនៅក្នុង VS Code ឬ GitHub Codespaces នឹងទទួលបានបរិយាកាសដូចគ្នាពេញលេញ ជាមួយនឹងការដំឡើង azd រួចរាល់។ មេរៀននេះបង្ហាញអ្នកពីរបៀបបន្ថែមវា។
 
-## គោលដៅការសិក្សា
+## គោលបំណងសិក្សា
 
-នៅចុងបញ្ចប់មេរៀននេះ អ្នកនឹង:
-- យល់ពី dev container និងហេតុផលដែលវាជួយសម្រាប់ azd
-- បន្ថែម `.devcontainer/devcontainer.json` សាមញ្ញមួយទៅក្នុងគម្រោង
-- រួមមាន azd, Azure CLI, និង Docker តាមរយៈ Dev Container *features*
-- បើកគម្រោងក្នុង GitHub Codespaces ឬ VS Code
+នៅចុងមេរៀននេះ អ្នកនឹង:
+- យល់អំពីអ្វីទៅជា dev container និងហេតុអ្វីវាជួយជាមួយ azd
+- បន្ថែម `.devcontainer/devcontainer.json` ញឹកញាប់ទៅគម្រោងមួយ
+- រួមបញ្ចូល azd, Azure CLI និង Docker តាមរយៈ លក្ខណៈពិសេស Dev Container *
+- បើកគម្រោងនៅ GitHub Codespaces ឬ VS Code
 
-## លទ្ធផលការសិក្សា
+## លទ្ធផលសិក្សា
 
-បន្ទាប់ពីបញ្ចប់មេរៀននេះ អ្នកនឹងអាច:
-- សរសេរ `devcontainer.json` សម្រាប់គម្រោង azd
-- បន្ថែម azd និងឧបករណ៍ Azure ដោយគ្មានការតំឡើងដ៏ដៃ
-- រត់ `azd up` ពីក្នុង container ឬ Codespace
+បន្ទាប់ពីបញ្ចប់មេរៀននេះ អ្នកអាច:
+- បង្កើត `devcontainer.json` សម្រាប់គម្រោង azd
+- បន្ថែម azd និងឧបករណ៍ Azure ដោយមិនចាំបាច់ដំឡើងដោយដៃ
+- រត់ `azd up` ពីក្រៅក្នុងធុងឬ Codespace
 
 ---
 
-## Dev Container គឺជា​អ្វី?
+## Dev Container គឺជាអ្វី?
 
-Dev container គឺជាបរិយាកាសអភិវឌ្ឍដែលប្រើប្រាស់ Docker ដែលបានកំណត់ដោយឯកសារ `.devcontainer/devcontainer.json` ក្នុង仓庫របស់អ្នក។ ពេលដែលអ្នកបើកគម្រោង:
+Dev container គឺជាបរិយាកាសអភិវឌ្ឍដែលផ្អែកលើ Docker ដែលកំណត់ដោយឯកសារ `.devcontainer/devcontainer.json` នៅក្នុងកន្លែងផ្ទុករបស់អ្នក។ ខណៈដែលអ្នកបើកគម្រោង:
 
-- **VS Code** (ជាមួយផ្នែកបន្ថែម Dev Containers) នឹងបង្កើត container ហើយភ្ជាប់ទៅដល់វា។
-- **GitHub Codespaces** នឹងបង្កើត container ដូចគ្នានៅលើ cloud ហើយផ្តល់ឱ្យអ្នកនូវកម្មវិធីកែសម្រួលនៅក្នុង browser។
+- **VS Code** (ជាមួយនឹងបន្ថែម Dev Containers) សង់ធុងហើយភ្ជាប់ទៅវា។
+- **GitHub Codespaces** សង់ធុងដូចគ្នានៅលើពពក ហើយផ្ដល់អ្នកនូវកម្មវិធីកែសម្រួលតាមកម្មវិធីគេហទំព័រ។
 
-ទាំងពីរប្រភេទនេះ អ្នកចូលរួមគ្រប់រូបនឹងទទួលបានឧបករណ៍ដូចគ្នា—គ្មានការត្រួតពិនិត្យ "តើអ្នកបានតំឡើង azd ទេ?" ទៀត។
+ទាំងពីរប្រភេទ អ្នករួមចំណែកទាំងអស់ទទួលបានឧបករណ៍ដូចគ្នា—គ្មានការឆ្លងកាត់បញ្ហា "តើអ្នកបានដំឡើង azd ទេ?"
 
 ```mermaid
 graph LR
-    Repo[ឃ្លាំងកូដ​របស់អ្នក<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Dev Containers]
+    Repo[ឃ្លាំងរបស់អ្នក<br/>+ devcontainer.json] --> VSCode[VS Code<br/>ឧបករណ៍ធ្វើការអភិវឌ្ឍន៍]
     Repo --> Codespaces[GitHub<br/>Codespaces]
-    VSCode --> Env[បរិយាកាសដូចគ្នា:<br/>azd + az + Docker]
+    VSCode --> Env[Identical environment:<br/>azd + az + Docker]
     Codespaces --> Env
 ```
 
 ---
 
-## ជំហាន 1: បង្កើតឯកសារ devcontainer
+## ជំហ៊ាន 1៖ បង្កើតឯកសារ devcontainer
 
-បង្កើត `.devcontainer/devcontainer.json` នៅគ្រឹះរបស់គម្រោងរបស់អ្នក:
+បង្កើត `.devcontainer/devcontainer.json` នៅក្នុងឫសគម្រោងរបស់អ្នក៖
 
 ```json
 {
@@ -75,23 +75,23 @@ graph LR
 }
 ```
 
-អ្វីដែលនីតិវិធីនីមួយៗធ្វើ៖
+អ្វីដែលផ្នែកនីមួយៗធ្វើ:
 
-| Key | Purpose |
+| គន្លង | គោលបំណង |
 |-----|---------|
-| `image` | ប្រព័ន្ធប្រតិបត្តិការ​មូលដ្ឋានសម្រាប់ container |
-| `features` | កម្មវិធីដំឡើងដែលបានកសាងរួច—នៅទីនេះ៖ Azure CLI, **azd**, Docker, និង Node.js |
-| `customizations.vscode.extensions` | ដំឡើងដោយស្វ័យប្រវត្តិផ្នែកបន្ថែម azd និង Bicep សម្រាប់ VS Code |
-| `forwardPorts` | បើកច្រក (port) នៃកម្មវិធីរបស់អ្នកទៅក្នុងកម្មវិធីរុករក |
-| `postCreateCommand` | រត់មួយដងបន្ទាប់ពី container ត្រូវបានកសាង (នៅទីនេះ ជាការត្រួតពិនិត្យ) |
+| `image` | ប្រព័ន្ធប្រតិបត្តិការ មូលដ្ឋានសម្រាប់ធុង |
+| `features` | កម្មវិធីដំឡើងជាស្រេច—ទីនេះ: Azure CLI, **azd**, Docker និង Node.js |
+| `customizations.vscode.extensions` | ដំឡើងស្វ័យប្រវត្តិពង្រឹង VS Code របស់ azd និង Bicep |
+| `forwardPorts` | បង្ហាញច្រកបើកកម្មវិធីរបស់អ្នកទៅកាន់កម្មវិធីរុករក |
+| `postCreateCommand` | រំដោះមួយលើកបន្ទាប់ពីធុងត្រូវបានសង់ (ទីនេះ, ការត្រួតពិនិត្យភាពត្រឹមត្រូវ) |
 
-> លក្ខណៈពិសេស `ghcr.io/azure/azure-dev/azd:latest` គឺជាវិធីផ្លូវការដើម្បីទទួលបាន azd ក្នុង container។ បន្ថែមកំណែជាក់លាក់ (ឧ. `azd:1.25.6`) ប្រសិនបើអ្នកត្រូវការការកើតឡើងម្ដងទៀតយ៉ាងត្រឹមត្រូវ។
+> លក្ខណៈពិសេស `ghcr.io/azure/azure-dev/azd:latest` គឺជាវិធីផ្លូវការដើម្បីទទួលបាន azd ក្នុងធុង។ បញ្ជាក់កំណែជាក់លាក់ (ឧ. `azd:1.27.1`) ប្រសិនបើអ្នកត្រូវការការប្រមាណបែបមានតម្លាភាព។
 
 ---
 
-## ជំហាន 2: សមកាល Feature ទៅភាសាកម្មវិធីរបស់អ្នក
+## ជំហ៊ាន 2៖ ផ្គូផ្គងលក្ខណៈពិសេសជាចំពោះភាសាកម្មវិធីរបស់អ្នក
 
-ប្ដូរ feature `node` ជាមួយអ្វីផងដែលកម្មវិធីរបស់អ្នកប្រើ:
+ប្ដូរលក្ខណៈពិសេស `node` ជាមួយអ្វីខ្លះដែលកម្មវិធីរបស់អ្នកប្រើ៖
 
 ```jsonc
 // Python project
@@ -107,71 +107,71 @@ graph LR
 "ghcr.io/devcontainers/features/go:1": {}
 ```
 
-រក្សា `docker-in-docker` ប្រសិនបើ `host` របស់អ្នកគឺ `containerapp`, `aks`, ឬអ្វីមួយដែលកសាងរូបភាព container—azd ត្រូវការពី Docker ដើម្បីកសាង និង push រូបភាព។
+រក្សា `docker-in-docker` ប្រសិនបើ `host` របស់អ្នកគឺ `containerapp`, `aks`, ឬអ្វីក៏ដោយដែលសង់រូបភាពធុង—azd ត្រូវការរបៀប Docker ដើម្បីសង់ និងទម្លាក់រូបភាព។
 
 ---
 
-## ជំហាន 3: បើកវា
+## ជំហ៊ាន 3៖ បើកវា
 
 **នៅក្នុង VS Code:**
-1. តំឡើងផ្នែកបន្ថែម **Dev Containers**។
-2. បើកថតគម្រោង។ 
-3. ចុច **Reopen in Container** ពេលមានការស្នើសុំ (ឬរត់ *Dev Containers: Reopen in Container*)។
+1. ដំឡើងបន្ថែម **Dev Containers** ។
+2. បើកថតគម្រោង។
+3. ចុច **Reopen in Container** នៅពេលបានស្នើ (ឬរត់ *Dev Containers: Reopen in Container*)។
 
 **នៅក្នុង GitHub Codespaces:**
-1. Push repo ទៅ GitHub។
-2. ចុច **Code → Codespaces → Create codespace on main**।
-3. រងចាំដើម្បីឱ្យ container ត្រូវបានកសាង—azd ត្រូវបានត្រៀមនៅក្នុង terminal។
+1. បញ្ចូល repo ទៅ GitHub។
+2. ចុច **Code → Codespaces → Create codespace on main**។
+3. រង់ចាំឲ្យធុងត្រូវបានសាងសង់—azd គ្រាន់តែលែងក្នុង terminal។
 
 ---
 
-## ជំហាន 4: ដាក់បញ្ចូលពីក្នុង Container
+## ជំហ៊ាន 4៖ បង្ហោះពីក្នុងធុង
 
-Container មាន azd ត្រូវបានតំឡើងរួចហើយ ដូច្នេះកំណត់ទម្លាប់ធម្មតានឹងដំណើរការ:
+ធុងមាន azd ដំឡើងរួចហើយ ដូច្នេះចរន្តការងារធម្មតារត់បានត្រឹមត្រូវ៖
 
 ```bash
-azd auth login --use-device-code   # កូដឧបករណ៍មានប្រយោជន៍នៅក្នុង Codespaces
+azd auth login --use-device-code   # កូដឧបករណ៍មានប្រយោជន៍ខ្លាំងនៅក្នុង Codespaces
 azd up
 ```
 
-> **ហេតុអ្វី `--use-device-code`?** ក្នុង container ឬ Codespace ឆ្ងាយ មិនមានកម្មវិធីរុករកក្នុងម៉ាស៊ីនដើម្បីបញ្ជូនវិញទេ ដូច្នេះការចូលដោយ device-code គឺជាវិធីដែលទុកចិត្តបាន។ អ្នកនឹងដាក់កូដមួយទៅក្នុងផ្ទាំងទំព័ររុករកដើម្បីបញ្ចប់ការចូល។
+> **ហេតុអ្វីបានជា `--use-device-code`?** នៅក្នុងធុងឆ្ងាយឬ Codespace គ្មានកម្មវិធីរុករកក្នុងដៃហើយដើម្បីបង្វិលទិសទៅ ដូច្នេះការ​ចូល​ផ្នែក​ដោយ​កូដឧបករណ៍គឺជាវិធីជឿជាក់។ អ្នកនឹងចម្លងកូដទៅក្នុងផ្ទាំងកម្មវិធីរុករកដើម្បីបញ្ចប់ការចូល។
 
 ---
 
 ## បញ្ហាទូទៅ
 
-| បញ្ហា | ដំណោះស្រាយ |
+| បញ្ហា | ដោះស្រាយ |
 |---------|-----|
-| `azd up` can't build an image | បន្ថែម feature `docker-in-docker` |
-| Browser login hangs in Codespaces | ប្រើ `azd auth login --use-device-code` |
-| Tools differ between teammates | កំណត់កំណែរបស់ feature (ឧ. `azd:1.25.6`) |
-| App not reachable in browser | បន្ថែម port ទៅ `forwardPorts` |
+| `azd up` មិនអាចសង់រូបភាព | បន្ថែមលក្ខណៈ `docker-in-docker` |
+| ការចូលក្នុងកម្មវិធីរុករកអវត្តមាននៅ Codespaces | ប្រើ `azd auth login --use-device-code` |
+| ឧបករណ៍ខុសគ្នារវាងមិត្តរួមការងារ | បញ្ជាក់កំណែលក្ខណៈ (ឧ. `azd:1.27.1`) |
+| កម្មវិធីមិនអាចចូលប្រើបាននៅក្នុងកម្មវិធីរុករក | បន្ថែមច្រកទៅ `forwardPorts` |
 
 ---
 
 ## សេចក្តីសង្ខេប
 
-- Dev container ធ្វើឱ្យ toolchain របស់ azd របស់អ្នកអាចកើតឡើងម្ដងទៀតសម្រាប់គ្រប់គ្នា។
-- បន្ថែម azd, Azure CLI, និង Docker តាមរយៈ Dev Container *features*។
-- សមកាល feature ភាសាឲ្យសមនឹងកម្មវិធីរបស់អ្នក ហើយរក្សា `docker-in-docker` សម្រាប់ host ដែលជាកុងតែន័រ។
-- ប្រើ device-code login ពេលបញ្ជាប្រតិបត្តិការនៅក្នុង Codespaces។
+- Dev container ធ្វើឲ្យសង្វាក់ឧបករណ៍ azd របស់អ្នកអាចអនុវត្តបានសម្រាប់មនុស្សទាំងអស់។
+- បន្ថែម azd, Azure CLI, និង Docker តាមរយៈ លក្ខណៈពិសេស Dev Container *features*។
+- ផ្គូផ្គងលក្ខណៈភាសាជាមួយកម្មវិធីរបស់អ្នក និងរក្សា `docker-in-docker` សម្រាប់ម៉ាស៊ីនមេធុង។
+- ប្រើការចូលដោយកូដឧបករណ៍នៅពេលរត់ក្នុង Codespaces។
 
 ---
 
-## 🔗 រុករក
+## 🔗 ចរណ់ផ្លូវ
 
 | ទិស | ធនធាន |
 |-----------|----------|
-| **មុន** | [នាំកម្មវិធីរបស់អ្នកមក](bring-your-own-app.md) |
-| **ទំព័រដើមជំពូក** | [ជំពូក 1: មូលដ្ឋាន និង ចាប់ផ្ដើមឆាប់ៗ](README.md) |
-| **ជំពូកបន្ទាប់** | [ជំពូក ២: ការអភិវឌ្ឍន៍ដែលផ្តោតលើ AI](../chapter-02-ai-development/README.md) |
+| **មុននេះ** | [យកកម្មវិធីរបស់អ្នកមក](bring-your-own-app.md) |
+| **ទំព័រផ្ទះវគ្គ** | [វគ្គ 1: មូលដ្ឋាន និងចាប់ផ្ដើមយ៉ាងឆាប់រហ័ស](README.md) |
+| **វគ្គបន្ទាប់** | [វគ្គ 2: ការអភិវឌ្ឍ AI ជាដំបូង](../chapter-02-ai-development/README.md) |
 
-## 📖 ធនធាន​ដែលពាក់ព័ន្ធ
+## 📖 ធនធានពាក់ព័ន្ធ
 
-- [ការដំឡើង និង ការកំណត់](installation.md)
-- [តារាងបញ្ជា](../../resources/cheat-sheet.md)
-- [ការបញ្ជាក់ផ្លូវការនៃ Dev Containers](https://containers.dev/)
-- [លក្ខណៈពិសេស Dev Container របស់ azd](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
+- [ការដំឡើង និង ការតំឡើង](installation.md)
+- [តារាងបញ្ជាដៃក្រៅ](../../resources/cheat-sheet.md)
+- [លក្ខណៈពិសេស Dev Containers ផ្លូវការ](https://containers.dev/)
+- [លក្ខណៈពិសេស Azd Dev Container](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
 
 ---
 

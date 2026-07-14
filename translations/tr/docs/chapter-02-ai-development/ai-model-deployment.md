@@ -1,26 +1,26 @@
-# AI Model Deployment with Azure Developer CLI
+# Azure Developer CLI ile Yapay Zeka Modeli Dağıtımı
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD Yeni Başlayanlar İçin](../../README.md)
-- **📖 Current Chapter**: Bölüm 2 - Yapay Zeka Öncelikli Geliştirme
-- **⬅️ Previous**: [Microsoft Foundry Entegrasyonu](microsoft-foundry-integration.md)
-- **➡️ Next**: [Yapay Zeka Atölyesi](ai-workshop-lab.md)
-- **🚀 Next Chapter**: [Bölüm 3: Yapılandırma](../chapter-03-configuration/configuration.md)
+**Bölüm Navigasyonu:**
+- **📚 Kurs Anasayfası**: [Başlangıç için AZD](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 2 - Yapay Zeka Öncelikli Geliştirme
+- **⬅️ Önceki**: [Microsoft Foundry Entegrasyonu](microsoft-foundry-integration.md)
+- **➡️ Sonraki**: [Yapay Zeka Çalıştayı Laboratuvarı](ai-workshop-lab.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 3: Konfigürasyon](../chapter-03-configuration/configuration.md)
 
-Bu kılavuz, model seçiminden üretim dağıtım desenlerine kadar AZD şablonlarını kullanarak AI modellerini dağıtmak için kapsamlı talimatlar sağlar.
+Bu rehber, AI modellerinin dağıtımı için AZD şablonlarını kullanarak, model seçiminden üretim dağıtım kalıplarına kadar kapsamlı talimatlar sağlar.
 
-> **Doğrulama notu (2026-03-25):** Bu kılavuzdaki AZD iş akışı `azd` `1.23.12` ile kontrol edilmiştir. Varsayılan hizmet dağıtım penceresinden daha uzun süren AI dağıtımları için, mevcut AZD sürümleri `azd deploy --timeout <seconds>` komutunu destekler.
+> **Doğrulama notu (2026-07-13):** Bu rehberdeki AZD iş akışı `azd` `1.27.1` sürümü ile test edilmiştir. Varsayılan hizmet dağıtım süresinden daha uzun süren AI dağıtımları için, mevcut AZD sürümleri `azd deploy --timeout <saniye>` komutunu desteklemektedir.
 
-## Table of Contents
+## İçindekiler
 
-- [Model Selection Strategy](#model-selection-strategy)
-- [AZD Configuration for AI Models](#azd-configuration-for-ai-models)
-- [Deployment Patterns](#deployment-patterns)
-- [Model Management](#model-management)
-- [Production Considerations](#production-considerations)
-- [Monitoring and Observability](#monitoring-and-observability)
+- [Model Seçim Stratejisi](#model-seçim-stratejisi)
+- [AI Modelleri için AZD Konfigürasyonu](#ai-modelleri-için-azd-konfigürasyonu)
+- [Dağıtım Kalıpları](#dağıtım-kalıpları)
+- [Model Yönetimi](#model-yönetimi)
+- [Üretim Dikkat Edilmesi Gerekenler](#üretim-dikkat-edilmesi-gerekenler)
+- [İzleme ve Gözlemlenebilirlik](#i̇zleme-ve-gözlemlenebilirlik)
 
-## Model Selection Strategy
+## Model Seçim Stratejisi
 
 ### Microsoft Foundry Modelleri
 
@@ -54,16 +54,16 @@ services:
 
 ### Model Kapasite Planlaması
 
-| Model Type | Use Case | Recommended Capacity | Cost Considerations |
+| Model Türü | Kullanım Durumu | Önerilen Kapasite | Maliyet Dikkatleri |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | Sohbet, Soru-Cevap | 10-50 TPM | Çoğu iş yükü için maliyet-etkin |
-| gpt-4.1 | Karmaşık muhakeme | 20-100 TPM | Daha yüksek maliyet, premium özellikler için kullanın |
-| text-embedding-3-large | Arama, RAG | 30-120 TPM | Semantik arama ve retrieval için güçlü varsayılan seçim |
-| Whisper | Konuşma metne çeviri | 10-50 TPM | Ses işleme iş yükleri |
+| gpt-4.1-mini | Sohbet, Soru-Cevap | 10-50 TPM | Çoğu iş yükü için maliyet etkin |
+| gpt-4.1 | Karmaşık akıl yürütme | 20-100 TPM | Daha yüksek maliyet, premium özellikler için kullanın |
+| text-embedding-3-large | Arama, RAG | 30-120 TPM | Anlamsal arama ve erişim için güçlü varsayılan seçim |
+| Whisper | Konuşmadan metne | 10-50 TPM | Ses işleme iş yükleri için |
 
-## AZD Configuration for AI Models
+## AI Modelleri için AZD Konfigürasyonu
 
-### Bicep Şablonu Yapılandırması
+### Bicep Şablon Konfigürasyonu
 
 Bicep şablonları aracılığıyla model dağıtımları oluşturun:
 
@@ -136,9 +136,9 @@ AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## Deployment Patterns
+## Dağıtım Kalıpları
 
-### Desen 1: Tek Bölge Dağıtımı
+### Kalıp 1: Tek Bölge Dağıtımı
 
 ```yaml
 # azure.yaml - Single region
@@ -151,12 +151,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-En uygun:
-- Geliştirme ve test
-- Tek pazara yönelik uygulamalar
-- Maliyet optimizasyonu
+En iyi:
+- Geliştirme ve test için
+- Tek pazar uygulamaları için
+- Maliyet optimizasyonu için
 
-### Desen 2: Çok Bölgeli Dağıtım
+### Kalıp 2: Çok Bölge Dağıtımı
 
 ```bicep
 // Multi-region deployment
@@ -169,14 +169,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-En uygun:
-- Küresel uygulamalar
-- Yüksek erişilebilirlik gereksinimleri
-- Yük dağılımı
+En iyi:
+- Küresel uygulamalar için
+- Yüksek kullanılabilirlik gereksinimleri için
+- Yük dağıtımı için
 
-### Desen 3: Hibrit Dağıtım
+### Kalıp 3: Hibrit Dağıtım
 
-Microsoft Foundry Modellerini diğer AI hizmetleriyle birleştirin:
+Microsoft Foundry Modellerini diğer AI servisleriyle birleştirin:
 
 ```bicep
 // Hybrid AI services
@@ -205,11 +205,11 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Model Management
+## Model Yönetimi
 
-### Versiyon Kontrolü
+### Sürüm Kontrolü
 
-AZD yapılandırmanızda model sürümlerini izleyin:
+AZD konfigürasyonunuzda model sürümlerini takip edin:
 
 ```json
 {
@@ -247,7 +247,7 @@ azd deploy --timeout 1800
 
 ### A/B Testi
 
-Birden fazla model sürümünü dağıtın:
+Birden fazla model sürümü dağıtın:
 
 ```bicep
 param enableABTesting bool = false
@@ -269,11 +269,11 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Production Considerations
+## Üretim Dikkat Edilmesi Gerekenler
 
 ### Kapasite Planlaması
 
-Kullanım desenlerine göre gereken kapasiteyi hesaplayın:
+Kullanım kalıplarına göre gerekli kapasiteyi hesaplayın:
 
 ```python
 # Kapasite hesaplama örneği
@@ -288,7 +288,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Kullanım örneği
+# Örnek kullanım
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -298,7 +298,7 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Otomatik Ölçeklendirme Yapılandırması
+### Otomatik Ölçeklendirme Konfigürasyonu
 
 Container Apps için otomatik ölçeklendirmeyi yapılandırın:
 
@@ -338,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Maliyet Optimizasyonu
 
-Maliyet kontrollerini uygulayın:
+Maliyet kontrolü uygulayın:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -368,7 +368,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Monitoring and Observability
+## İzleme ve Gözlemlenebilirlik
 
 ### Application Insights Entegrasyonu
 
@@ -410,10 +410,10 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### Özel Metrikler
 
-AI'ya özgü metrikleri izleyin:
+AI’ye özel metrikleri takip edin:
 
 ```python
-# Yapay zeka modelleri için özel telemetri
+# AI modelleri için özel telemetri
 import logging
 from applicationinsights import TelemetryClient
 
@@ -447,10 +447,10 @@ class AITelemetry:
 
 ### Sağlık Kontrolleri
 
-AI hizmeti sağlık izlemesini uygulayın:
+AI hizmeti sağlık izlemeyi uygulayın:
 
 ```python
-# Sağlık kontrolü uç noktaları
+# Sağlık kontrolu uç noktaları
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -476,32 +476,32 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## Bir Sonraki Adımlar
+## Sonraki Adımlar
 
-1. **Hizmet entegrasyon desenleri için [Microsoft Foundry Entegrasyon Kılavuzunu](microsoft-foundry-integration.md) inceleyin**
-2. **Pratik deneyim için [Yapay Zeka Atölyesini](ai-workshop-lab.md) tamamlayın**
-3. **Kurumsal dağıtımlar için [Üretim AI Uygulamalarını](production-ai-practices.md) uygulayın**
-4. **Yaygın sorunlar için [AI Sorun Giderme Kılavuzunu](../chapter-07-troubleshooting/ai-troubleshooting.md) inceleyin**
+1. **Servis entegrasyon kalıpları için [Microsoft Foundry Entegrasyon Rehberi](microsoft-foundry-integration.md)** inceleyin
+2. **Pratik deneyim için [Yapay Zeka Çalıştayı Laboratuvarı](ai-workshop-lab.md)** tamamlayın
+3. **Kurumsal dağıtımlar için [Üretim AI Uygulamaları](production-ai-practices.md)** uygulayın
+4. **Yaygın sorunlar için [AI Sorun Giderme Rehberi](../chapter-07-troubleshooting/ai-troubleshooting.md)** keşfedin
 
 ## Kaynaklar
 
-- [Microsoft Foundry Modelleri Kullanılabilirliği](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Azure Developer CLI Dokümantasyonu](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Microsoft Foundry Modelleri Model Mevcudiyeti](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Azure Developer CLI Belgeleri](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Container Apps Ölçeklendirme](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [AI Modeli Maliyet Optimizasyonu](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD Yeni Başlayanlar İçin](../../README.md)
-- **📖 Current Chapter**: Bölüm 2 - Yapay Zeka Öncelikli Geliştirme
-- **⬅️ Previous**: [Microsoft Foundry Entegrasyonu](microsoft-foundry-integration.md)
-- **➡️ Next**: [Yapay Zeka Atölyesi](ai-workshop-lab.md)
-- **🚀 Next Chapter**: [Bölüm 3: Yapılandırma](../chapter-03-configuration/configuration.md)
+**Bölüm Navigasyonu:**
+- **📚 Kurs Anasayfası**: [Başlangıç için AZD](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 2 - Yapay Zeka Öncelikli Geliştirme
+- **⬅️ Önceki**: [Microsoft Foundry Entegrasyonu](microsoft-foundry-integration.md)
+- **➡️ Sonraki**: [Yapay Zeka Çalıştayı Laboratuvarı](ai-workshop-lab.md)
+- **🚀 Sonraki Bölüm**: [Bölüm 3: Konfigürasyon](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Feragatname**:
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi dilindeki sürümü yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanılması nedeniyle ortaya çıkan herhangi bir yanlış anlama veya yanlış yorumdan sorumlu değiliz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

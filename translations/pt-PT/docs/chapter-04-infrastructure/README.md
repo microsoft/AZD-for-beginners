@@ -1,18 +1,18 @@
 # Capítulo 4: Infraestrutura como Código & Implantação
 
-**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 1-1.5 horas | **⭐ Complexidade**: Intermédio
+**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 1-1,5 horas | **⭐ Complexidade**: Intermédio
 
 ---
 
 ## Visão Geral
 
-Este capítulo cobre padrões de Infraestrutura como Código (IaC) com templates Bicep, provisionamento de recursos e estratégias de implantação usando o Azure Developer CLI.
+Este capítulo aborda padrões de Infraestrutura como Código (IaC) com templates Bicep, provisão de recursos e estratégias de implantação usando Azure Developer CLI.
 
-> Validado com `azd 1.25.6` em junho de 2026.
+> Validado com `azd 1.27.1` em julho de 2026.
 
 ## Objetivos de Aprendizagem
 
-Ao concluir este capítulo, você irá:
+Ao completar este capítulo, irá:
 - Compreender a estrutura e sintaxe dos templates Bicep
 - Provisionar recursos Azure com `azd provision`
 - Implantar aplicações com `azd deploy`
@@ -24,7 +24,7 @@ Ao concluir este capítulo, você irá:
 
 | # | Lição | Descrição | Tempo |
 |---|--------|-------------|------|
-| 1 | [Provisionar Recursos](provisioning.md) | Gestão de recursos Azure com AZD | 45 min |
+| 1 | [Provisão de Recursos](provisioning.md) | Gestão de recursos Azure com AZD | 45 min |
 | 2 | [Guia de Implantação](deployment-guide.md) | Estratégias de implantação de aplicações | 45 min |
 | 3 | [Criar o Seu Próprio Template](custom-templates.md) | Construir e publicar templates azd reutilizáveis | 30 min |
 
@@ -39,10 +39,10 @@ azd init --template azure-functions-python-v2-http
 # Pré-visualizar o que será criado
 azd provision --preview
 
-# Provisionar apenas a infraestrutura
+# Apenas aprovisionar a infraestrutura
 azd provision
 
-# Implementar apenas o código
+# Apenas implementar o código
 azd deploy
 
 # Ou ambos em conjunto
@@ -76,7 +76,7 @@ my-project/
 | `azd provision` | Criar recursos Azure |
 | `azd deploy` | Implantar código da aplicação |
 | `azd up` | provisionar + implantar |
-| `azd down` | Apagar todos os recursos |
+| `azd down` | Eliminar todos os recursos |
 
 ---
 
@@ -92,7 +92,7 @@ my-project/
 ## 📖 Recursos Relacionados
 
 - [Verificações Pré-Implantação](../chapter-06-pre-deployment/README.md)
-- [Exemplos de Aplicações em Container](../../examples/container-app/README.md)
+- [Exemplos de Container App](../../examples/container-app/README.md)
 - [Exemplo de Aplicação de Base de Dados](../../examples/database-app/README.md)
 
 ---

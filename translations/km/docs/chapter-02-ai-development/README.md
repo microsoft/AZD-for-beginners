@@ -1,91 +1,91 @@
-# ជំពូក 2: ការអភិវឌ្ឍផ្តោតលើ AI
+# ជំពូកទី 2៖ ការអភិវឌ្ឍផ្អែកលើ AI ជាមុន
 
-**📚 វគ្គសិក្សា**: [AZD For Beginners](../../README.md) | **⏱️ រយៈពេល**: 1-2 hours | **⭐ កម្រិត**: Intermediate
+**📚 코스**: [AZD សម្រាប់អ្នកចាប់ផ្តើម](../../README.md) | **⏱️ រយៈពេល**: 1-2 ម៉ោង | **⭐ កម្រិតភាពស្មុគស្មាញ**: ប្រហាក់ប្រហែលមធ្យម
 
 ---
 
-## រួបរួម
+## ទិដ្ឋភាពទូទៅ
 
-ជំពូកនេះផ្តោតលើការដាក់ចេញកម្មវិធីដែលមានភាពឆ្លាតដោយ AI ដោយប្រើ Azure Developer CLI និងសេវាកម្ម Microsoft Foundry។ ចាប់ពីកម្មវិធីសន្ទនាធម្មតា រហូតដល់ភ្នាក់ងារឆ្លាតជាមួយឧបករណ៍។
+ជំពូកនេះផ្តោតលើការតំឡើងកម្មវិធីដែលបើកដំណើរការដោយ AI ដោយប្រើ Azure Developer CLI និងសេវាកម្ម Microsoft Foundry។ ចាប់ពីកម្មវិធី ជជែក AI មូលដ្ធានទៅ កាន់ភ្នាក់ងារប្រាជ្ញា ជាមួយឧបករណ៍។
 
-> **សម្គាល់បញ្ជាក់ (2026-06-15):** ច្រកកម្មវិធីបញ្ជា និងការណែនាំអំពីផែគសន៍ក្នុងជំពូកនេះត្រូវបានពិនិត្យទល់នឹង `azd` `1.25.6` និងការចេញផ្សាយផែគសន៍ពិวิว AI agent បច្ចុប្បន្ន `azure.ai.agents` `0.1.40-preview`។ ប្រសិនបើអ្នកកំពុងប្រើ AZD ចាស់ សូមបន្ទាន់សម័យជាមុនហើយបន្តធ្វើលំហាត់បង្ហាត់។
+> **កំណត់សម្គាល់ច្បាស់លាស់ (2026-07-13):** ចរន្តបញ្ជា និងការណែនាំផ្នែកបន្ថែមនៅក្នុងជំពូកនេះ ត្រូវបានពិនិត្យឡើងវិញជាមួយ `azd` `1.27.1` និងការចេញផ្សាយពិនិត្យមើលនូវបន្ថែមភ្នាក់ងារ AI បច្ចុប្បន្ន `azure.ai.agents` `1.0.0-beta.5`។ ប្រសិនបើអ្នកកំពុងប្រើ AZD ចាស់ ជំហានដំបូងគឺធ្វើបច្ចុប្បន្នភាព ហើយបន្ទាប់មកបន្តហ្វឹកហាត់។
 
-## គោលបំណងរៀន
+## គោលបំណងសិក្សា
 
 ដោយបញ្ចប់ជំពូកនេះ អ្នកនឹង:
-- ដាក់ចេញកម្មវិធី AI ដោយប្រើពុម្ព AZD ដែលបានបង្កើតជាមុន
-- យល់ពីការរួមបញ្ចូល Microsoft Foundry ជាមួយ AZD
-- កំណត់ค่า និងប្តូរតាមតម្រូវការ AI agents ជាមួយឧបករណ៍
-- ដាក់ចេញកម្មវិធី RAG (Retrieval-Augmented Generation)
+- ដាក់បញ្ចូលកម្មវិធី AI ដោយប្រើគំរូ AZD ដែលបានបង្កើតរួច
+- យល់ដឹងពីការបង្កប់ Microsoft Foundry ជាមួយ AZD
+- កំណត់រចនាសម្ព័ន្ធ និងប្ដូរតំរូវភ្នាក់ងារប្រាជ្ញាមួយជាមួយឧបករណ៍
+- ដាក់បញ្ចូលកម្មវិធី RAG (Retrieval-Augmented Generation)
 
 ---
 
 ## 📚 មេរៀន
 
-| # | មេរៀន | ពណ៌នា | ពេលវេលា |
+| ល.រ | មេរៀន | ការពិពណ៌នា | ម៉ោង |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | ភ្ជាប់ AZD ជាមួយសេវាកម្ម Foundry | 30 នាទី |
-| 2 | [AI Agents Guide](agents.md) | ដាក់ចេញភ្នាក់ងារឆ្លាតជាមួយឧបករណ៍ | 45 នាទី |
-| 3 | [AI Model Deployment](ai-model-deployment.md) | ដាក់ចេញ និងកំណត់ម៉ូដែល AI | 30 នាទី |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | អនុវត្តដោយដៃ៖ ធ្វើឱ្យដំណោះស្រាយ AI របស់អ្នក ត្រៀមសម្រាប់ AZD | 60 នាទី |
+| 1 | [ការបង្កប់ Microsoft Foundry](microsoft-foundry-integration.md) | ភ្ជាប់ AZD ជាមួយសេវាកម្ម Foundry | 30 នាទី |
+| 2 | [មគ្គុទេសក៍ភ្នាក់ងារប្រាជ្ញា](agents.md) | ដាក់បញ្ចូលភ្នាក់ងារប្រាជ្ញាជាមួយឧបករណ៍ | 45 នាទី |
+| 3 | [ការដាក់បញ្ចូលម៉ូដែល AI](ai-model-deployment.md) | ដាក់បញ្ចូល និងកំណត់ម៉ូដែល AI | 30 នាទី |
+| 4 | [មន្ទីរពិសោធ AI](ai-workshop-lab.md) | ធ្វើដោយដៃ: បង្កើតដំណោះស្រាយ AI របស់អ្នកឲ្យអាចប្រើបានជាមួយ AZD | 60 នាទី |
 
 ---
 
-## 🚀 ចាប់ផ្តើមរហ័ស
+## 🚀 ចាប់ផ្តើមយ៉ាងរហ័ស
 
 ```bash
-# ជម្រើស 1: កម្មវិធីជជែក RAG
+# ជម្រើសទី ១៖ កម្មវិធី​ជជែក RAG
 azd init --template azure-search-openai-demo
 azd up
 
-# ជម្រើស 2: ភ្នាក់ងារបញ្ញាសិប្បនិម្មិត
+# ជម្រើសទី ២៖ភ្នាក់ងារបញ្ញាសិប្បនិម្មិត
 azd init --template get-started-with-ai-agents
 azd up
 
-# ជម្រើស 3: កម្មវិធីជជែករហ័ស
+# ជម្រើសទី ៣៖ កម្មវិធីជជែកលឿន
 azd init --template openai-chat-app-quickstart
 azd up
 ```
 
 ---
 
-## 🤖 ពុម្ព AI ដែលបានណែនាំ
+## 🤖 គំរូ AI เด่น
 
-| Template | Description | Services |
+| គំរូ | ការពិពណ៌នា | សេវាកម្ម |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | សន្ទនា RAG ជាមួយយោង | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ភ្នាក់ងារ AI មានឧបករណ៍ | AI Agent Service |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | សន្ទនាបឋម AI | OpenAI + Container Apps |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ជជែក RAG ជាមួយយោង | OpenAI + AI ស្វែងរក |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ភ្នាក់ងារប្រាជ្ញាជាមួយឧបករណ៍ | សេវាកម្មភ្នាក់ងារប្រាជ្ញា |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | ជជែក AI ពិសេសងាយស្រួល | OpenAI + កម្មវិធីកុងតឺន័រ |
 
 ---
 
-## 💰 ការយល់ដឹងអំពីថ្លៃ
+## 💰 ការយល់ដឹងពីថ្លៃដើម
 
-| បរិយាកាស | តម្លៃប្រចាំខែប្រមាណ |
+| បរិយាកាស | ថ្លៃប្រចាំខែគ្រប់គ្រាន់ |
 |-------------|----------------------|
-| បរិយាកាសអភិវឌ្ឍ | $80-150 |
-| បរិយាកាសសាកល្បង | $150-300 |
-| បរិយាកាសផលិត | $300-3,500+ |
+| ការអភិវឌ្ឍ | $80-150 |
+| ការសាកល្បង | $150-300 |
+| ការផលិត | $300-3,500+ |
 
-**គន្លឹះ:** រត់ `azd down` បន្ទាប់ពីសាកល្បង ដើម្បីជៀសវាងការចំណាយ។
+**គំនិត:** ប្រតិបត្តិ `azd down` បន្ទាប់ពីសាកល្បងដើម្បីជៀសវាងការចំណាយ។
 
 ---
 
-## 🔗 ការរុករក
+## 🔗 នាវាទស្សន៍
 
 | ទិសដៅ | ជំពូក |
 |-----------|---------|
-| **មុន** | [ជំពូក 1: មូលដ្ឋាន](../chapter-01-foundation/README.md) |
-| **បន្ទាប់** | [ជំពូក 3: ការកំណត់](../chapter-03-configuration/README.md) |
-| **លោតទៅ** | [ជំពូក 8: គំរូក្នុងការផលិត](../chapter-08-production/README.md) |
+| **មុននេះ** | [ជំពូក 1៖ មូលដ្ឋាន](../chapter-01-foundation/README.md) |
+| **បន្ទាប់** | [ជំពូក 3៖ ការកំណត់រចនាសម្ព័ន្ធ](../chapter-03-configuration/README.md) |
+| **រំលងទៅ** | [ជំពូក 8៖ គំរូផលិតកម្ម](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 ធនធានទាក់ទង
+## 📖 ឯកសារពាក់ព័ន្ធ
 
-- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Production AI Practices](../chapter-08-production/production-ai-practices.md)
-- [Application Insights](../chapter-06-pre-deployment/application-insights.md)
+- [ការជួសជុល AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [ការអនុវត្ត AI ផលិតកម្ម](../chapter-08-production/production-ai-practices.md)
+- [ការយល់ដឹងព័ត៌មានកម្មវិធី](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 

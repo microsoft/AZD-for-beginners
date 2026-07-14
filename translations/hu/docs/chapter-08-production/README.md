@@ -6,18 +6,18 @@
 
 ## Áttekintés
 
-Ez a fejezet vállalati szintű telepítési mintákat, biztonsági megerősítést, megfigyelést és költségoptimalizálást tárgyal termelési AI munkaterhelésekhez.
+Ez a fejezet vállalati szintű telepítési mintákat, biztonsági megerősítést, megfigyelést és költségoptimalizálást tárgyal az AI termelési munkaterhelésekhez.
 
-> Ellenőrizve az `azd 1.25.6` verzióval 2026 júniusában.
+> Ellenőrizve az `azd 1.27.1` verzióval 2026 júliusában.
 
 ## Tanulási célok
 
-A fejezet elvégzése után képes leszel:
-- Több régiós, ellenálló alkalmazásokat telepíteni
-- Vállalati biztonsági mintákat alkalmazni
-- Átfogó megfigyelést konfigurálni
-- Költségeket nagyléptékben optimalizálni
-- CI/CD folyamatokat beállítani AZD-vel
+Ennek a fejezetnek a befejezésével Ön:
+- Többszörös régiókban reziliens alkalmazásokat telepít
+- Vállalati biztonsági mintákat valósít meg
+- Átfogó megfigyelést konfigurál
+- Költségeket optimalizál nagy léptékben
+- AZD-vel állítja be a CI/CD csővezetékeket
 
 ---
 
@@ -25,19 +25,19 @@ A fejezet elvégzése után képes leszel:
 
 | # | Lecke | Leírás | Idő |
 |---|--------|-------------|------|
-| 1 | [Termelési AI munkafolyamatok](production-ai-practices.md) | Vállalati telepítési minták | 90 perc |
+| 1 | [Termelési AI gyakorlatok](production-ai-practices.md) | Vállalati telepítési minták | 90 perc |
 
 ---
 
 ## 🚀 Termelési ellenőrzőlista
 
-- [ ] Több régiós telepítés az ellenállás érdekében
-- [ ] Kezelt identitás az autentikációhoz (kulcsok nélkül)
-- [ ] Alkalmazásfigyelés Application Insights használatával
-- [ ] Költségkeretek és értesítések beállítva
-- [ ] Biztonsági vizsgálatok engedélyezve
-- [ ] CI/CD folyamat integrálva
-- [ ] Katasztrófa utáni helyreállítási terv
+- [ ] Több régióban történő telepítés a reziliencia érdekében
+- [ ] Kezelt identitás az hitelesítéshez (nincsenek kulcsok)
+- [ ] Application Insights a megfigyeléshez
+- [ ] Költségkeretek és riasztások beállítva
+- [ ] Biztonsági vizsgálat engedélyezve
+- [ ] CI/CD csővezeték integráció
+- [ ] Katasztrófa-helyreállítási terv
 
 ---
 
@@ -47,16 +47,16 @@ A fejezet elvégzése után képes leszel:
 
 ```mermaid
 graph LR
-    Gateway[API átjáró] --> AI[MI Szolgáltatás] --> Models[Microsoft Foundry Modellek]
-    Gateway --> Auth[Hitelesítési Szolgáltatás]
-    AI --> Data[Adattároló]
+    Gateway[API átjáró] --> AI[MI Szolgáltatás] --> Models[Microsoft Foundry modellek]
+    Gateway --> Auth[Hitelesítő szolgáltatás]
+    AI --> Data[Adattárhely]
 ```
 
 ### Minta 2: Eseményvezérelt AI
 
 ```mermaid
 graph LR
-    EventGrid[Eseményrács] --> Functions[Funkciók] --> Pipeline[MI Adatfeldolgozó]
+    EventGrid[Eseményrács] --> Functions[Funkciók] --> Pipeline[MI folyamatlánc]
 ```
 
 ---
@@ -83,14 +83,14 @@ properties: {
 ## 💰 Költségoptimalizálás
 
 | Stratégia | Megtakarítás |
-|----------|--------------|
+|----------|---------|
 | Nulla skálázás (Container Apps) | 60-80% |
 | Fogyasztási szintek használata fejlesztéshez | 50-70% |
 | Ütemezett skálázás | 30-50% |
-| Foglalt kapacitás | 20-40% |
+| Fenntartott kapacitás | 20-40% |
 
 ```bash
-# Költségvetési figyelmeztetések beállítása
+# Költségvetési riasztások beállítása
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -100,16 +100,16 @@ az consumption budget create \
 
 ---
 
-## 📊 Megfigyelési beállítások
+## 📊 Megfigyelés beállítása
 
 ```bash
-# Naplók folyamatos áramlása
+# Logok folyamatos közvetítése
 azd monitor --logs
 
-# Ellenőrizze az Application Insights szolgáltatást
+# Application Insights ellenőrzése
 azd monitor --overview
 
-# Metrikák megtekintése
+# Metriák megtekintése
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -120,7 +120,7 @@ az monitor metrics list --resource <resource-id>
 | Irány | Fejezet |
 |-----------|---------|
 | **Előző** | [7. fejezet: Hibakeresés](../chapter-07-troubleshooting/README.md) |
-| **Tanfolyam befejezve** | [Tanfolyam kezdőlap](../../README.md) |
+| **Tanfolyam vége** | [Tanfolyam kezdőlap](../../README.md) |
 
 ---
 

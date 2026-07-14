@@ -1,30 +1,30 @@
-# Azure Developer CLI ਨਾਲ AI ਮਾਡਲ ਡਿਪਲੌਇਮੈਂਟ
+# ਐਜ਼ਯੂਅਰ ਡਿਵੈਲਪਰ CLI ਨਾਲ ਏਆਈ ਮਾਡਲ ਡਿਪਲੋਇਮੈਂਟ
 
-**ਚੈਪਟਰ ਨੈਵੀਗੇਸ਼ਨ:**
-- **📚 ਕੋਰਸ ਹੋਮ**: [AZD ਲਈ ਸ਼ੁਰੂਆਤੀ](../../README.md)
-- **📖 ਮੌਜੂਦਾ ਚੈਪਟਰ**: ਅਧਿਆਇ 2 - AI-ਪਹਿਲਾ ਵਿਕਾਸ
-- **⬅️ ਪਿਛਲਾ**: [Microsoft Foundry ਇੰਟਿਗ੍ਰੇਸ਼ਨ](microsoft-foundry-integration.md)
-- **➡️ ਅਗਲਾ**: [AI ਵਰਕਸ਼ਾਪ ਲੈਬ](ai-workshop-lab.md)
-- **🚀 ਅਗਲਾ ਅਧਿਆਇ**: [ਅਧਿਆਇ 3: ਕਨਫਿਗਰੇਸ਼ਨ](../chapter-03-configuration/configuration.md)
+**ਅਧਿਆਇ ਨੈਵੀਗੇਸ਼ਨ:**
+- **📚 ਕੋਰਸ ਹੋਮ**: [AZD ਫੋਰ ਬਿਗਿਨਰਜ਼](../../README.md)
+- **📖 ਮੌਜੂਦਾ ਅਧਿਆਇ**: ਅਧਿਆਇ 2 - ਏਆਈ-ਪਹਿਲਾ ਵਿਕਾਸ
+- **⬅️ ਪਹਿਲਾਂ**: [ਮਾਈਕ੍ਰੋਸਾਫਟ ਫਾਊਂਡਰੀ ਇੰਟਿਗ੍ਰੇਸ਼ਨ](microsoft-foundry-integration.md)
+- **➡️ ਅਗਲਾ**: [ਏਆਈ ਵਰਕਸ਼ਾਪ ਲੈਬ](ai-workshop-lab.md)
+- **🚀 ਅਗਲਾ ਅਧਿਆਇ**: [ਅਧਿਆਇ 3: ਸੰਰਚਨਾ](../chapter-03-configuration/configuration.md)
 
-ਇਹ ਗਾਈਡ AZD ਟੈਂਪਲੇਟਾਂ ਦੀ ਵਰਤੋਂ ਕਰਕੇ AI ਮਾਡਲਾਂ ਨੂੰ ਡਿਪਲੌਇ ਕਰਨ ਲਈ ਵਿਸਤ੍ਰਿਤ ਨਿਰਦੇਸ਼ ਦਿੰਦੀ ਹੈ, ਮਾਡਲ ਚੋਣ ਤੋਂ ਲੈ ਕੇ ਪ੍ਰੋਡਕਸ਼ਨ ਡਿਪਲੌਇਮੈਂਟ ਪੈਟਰਨ ਤੱਕ ਸਭ ਕੁਝ ਕਵਰ ਕਰਦੀ ਹੈ।
+ਇਹ ਗਾਈਡ AZD ਟੈਮਪਲੇਟਾਂ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਏਆਈ ਮਾਡਲਾਂ ਨੂੰ ਡਿਪਲੋਇ ਕਰਨ ਲਈ ਵਿਸਤ੍ਰਤ ਹੁਕਮਾਂ ਪ੍ਰਦਾਨ ਕਰਦੀ ਹੈ, ਜਿਸ ਵਿੱਚ ਮਾਡਲ ਚੋਣ ਤੋਂ ਲੈ ਕੇ ਪ੍ਰੋਡਕਸ਼ਨ ਡਿਪਲੋਇਮੈਂਟ ਪੈਟਰਨਾਂ ਤੱਕ ਸਭ ਕੁਝ ਸ਼ਾਮਲ ਹੈ।
 
-> **ਪ੍ਰਮਾਣਕਰਨ ਨੋਟ (2026-03-25):** ਇਸ ਗਾਈਡ ਵਿੱਚ AZD ਵਰਕਫਲੋ ਨੂੰ `azd` `1.23.12` ਦੇ ਨਾਲ ਚੈੱਕ ਕੀਤਾ ਗਿਆ ਸੀ। ਜੇਕਰ AI ਡਿਪਲੌਇਮੈਂਟ ਡਿਫਾਲਟ ਸਰਵਿਸ ਡਿਪਲੌਇਮੈਂਟ ਵਿੰਡੋ ਤੋਂ ਵੱਧ ਸਮਾਂ ਲੈਂਦੇ ਹਨ, ਤਾਂ ਮੌਜੂਦਾ AZD ਰਿਲੀਜ਼ `azd deploy --timeout <seconds>` ਦਾ ਸਮਰਥਨ ਕਰਦੇ ਹਨ।
+> **ਮਾਨਤਾ ਨੋਟ (2026-07-13):** ਇਸ ਗਾਈਡ ਵਿੱਚ AZD ਵਰਕਫਲੋ ਨੂੰ `azd` `1.27.1` ਦੇ ਖਿਲਾਫ਼ ਜਾਂਚਿਆ ਗਿਆ ਸੀ। ਓਹਦਾ ਵਰਤੋਂ ਲਈ ਜਿਹੜੀਆਂ ਡਿਪਲੋਇਮੈਂਟ ਪ੍ਰਕਿਰਿਆਵਾਂ ਡਿਫਾਲਟ ਸਰਵਿਸ ਡਿਪਲੋਇਮੈਂਟ ਖਿੜਕੀ ਤੋਂ ਵੱਧ ਸਮਾਂ ਲੈਂਦੀਆਂ ਹਨ, ਮੌਜੂਦਾ AZD ਰਿਲੀਜ਼ਾਂ `azd deploy --timeout <seconds>` ਨੂੰ ਸਹਿਯੋਗ ਦਿੰਦੀਆਂ ਹਨ।
 
-## ਸਮੱਗਰੀ
+## ਵਿਸ਼ਯ ਸੂਚੀ
 
 - [ਮਾਡਲ ਚੋਣ ਰਣਨੀਤੀ](#ਮਾਡਲ-ਚੋਣ-ਰਣਨੀਤੀ)
-- [AI ਮਾਡਲਾਂ ਲਈ AZD ਸੰਰਚਨਾ](#ai-ਮਾਡਲਾਂ-ਲਈ-azd-ਸੰਰਚਨਾ)
-- [ਡਿਪਲੌਇਮੈਂਟ ਪੈਟਰਨ](#ਡਿਪਲੌਇਮੈਂਟ-ਪੈਟਰਨ)
-- [ਮਾਡਲ ਪ੍ਰਬੰਧਨ](#ਮਾਡਲ-ਪ੍ਰਬੰਧਨ)
-- [ਪ੍ਰੋਡਕਸ਼ਨ ਵਿਚਾਰ](#ਪ੍ਰੋਡਕਸ਼ਨ-ਵਿਚਾਰ)
-- [ਮਾਨੀਟਰਿੰਗ ਅਤੇ ਨਿਗਰਾਨੀ](#ਮਾਨੀਟਰਿੰਗ-ਅਤੇ-ਨਿਗਰਾਨੀ)
+- [ਏਆਈ ਮਾਡਲਾਂ ਲਈ AZD ਸੰਰਚਨਾ](#ਏਆਈ-ਮਾਡਲਾਂ-ਲਈ-azd-ਸੰਰਚਨਾ)
+- [ਡਿਪਲੋਇਮੈਂਟ ਪੈਟਰਨ](#ਡਿਪਲੋਇਮੈਂਟ-ਪੈਟਰਨ)
+- [ਮਾਡਲ ਪਰਬੰਧਨ](#ਮਾਡਲ-ਪਰਬੰਧਨ)
+- [ਉਤਪਾਦਨ ਵਿਚਾਰ](#ਪ੍ਰੋਡਕਸ਼ਨ-ਵਿਚਾਰ)
+- [ਮਾਨਿਤਰਨਿੰਗ ਅਤੇ ਨਿਰੀਖਣ](#ਮਾਨਿਤਰਨਿੰਗ-ਅਤੇ-ਨਿਰੀਖਣ)
 
 ## ਮਾਡਲ ਚੋਣ ਰਣਨੀਤੀ
 
-### Microsoft Foundry ਮਾਡਲ ਮਾਡਲ
+### ਮਾਈਕ੍ਰੋਸਾਫਟ ਫਾਊਂਡਰੀ ਮਾਡਲਾਂ
 
-ਆਪਣੇ ਯੂਜ਼ ਕੇਸ ਲਈ ਸਹੀ ਮਾਡਲ ਚੁਣੋ:
+ਆਪਣੇ ਵਰਤੋਂ ਕੇਸ ਲਈ ਸਹੀ ਮਾਡਲ ਚੁਣੋ:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -54,18 +54,18 @@ services:
 
 ### ਮਾਡਲ ਸਮਰੱਥਾ ਯੋਜਨਾ
 
-| ਮਾਡਲ ਕਿਸਮ | ਵਰਤੋਂ ਦਾ ਕੇਸ | ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀ ਸਮਰੱਥਾ | ਲਾਗਤ ਬਾਰੇ ਵਿਚਾਰ |
-|------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | ਚੈਟ, ਪ੍ਰਸ਼ਨ-ਉੱਤਰ | 10-50 TPM | ਬਹੁਤ ਸਾਰੇ ਵਰਕਲੋਡਾਂ ਲਈ ਲਾਗਤ-ਕੁਸ਼ਲ |
-| gpt-4.1 | ਜਟਿਲ ਤਰਕ | 20-100 TPM | ਉੱਚੀ ਲਾਗਤ, ਪ੍ਰੀਮੀਅਮ ਫੀਚਰਾਂ ਲਈ ਵਰਤੋਂ ਕਰੋ |
-| text-embedding-3-large | ਖੋਜ, RAG | 30-120 TPM | ਸੈਮਾਂਟਿਕ ਖੋਜ ਅਤੇ ਰੀਟ੍ਰੀਵਲ ਲਈ ਮਜ਼ਬੂਤ ਡਿਫਾਲਟ ਚੋਣ |
-| Whisper | ਬੋਲੀ-ਤੋਂ-ਟੈਕਸਟ | 10-50 TPM | ਆਡੀਓ ਪ੍ਰੋਸੈਸਿੰਗ ਵਰਕਲੋਡ |
+| ਮਾਡਲ ਕਿਸਮ | ਵਰਤੋਂ ਕੇਸ | ਸੁਝਾਈ ਗਈ ਸਮਰੱਥਾ | ਲਾਗਤ ਵਿਚਾਰ |
+|------------|----------|---------------------|---------------|
+| gpt-4.1-mini | ਗੱਲਬਾਤ, ਪ੍ਰਸ਼ਨ-ਉੱਤਰ | 10-50 TPM | ਜ਼ਿਆਦਾਤਰ ਵਰਕਲੋਡਸ ਲਈ ਲਾਗਤ-ਪ੍ਰਭਾਵਸ਼ਾਲੀ |
+| gpt-4.1 | ਜਟਿਲ ਤਰਕ | 20-100 TPM | ਉੱਚ ਲਾਗਤ, ਪ੍ਰੀਮੀਅਮ ਫੀਚਰਾਂ ਲਈ ਵਰਤੋਂ |
+| text-embedding-3-large | ਖੋਜ, RAG | 30-120 TPM | ਸੰਮਤਿਕ ਖੋਜ ਅਤੇ ਪ੍ਰਾਪਤੀ ਲਈ ਮਜ਼ਬੂਤ ਮੂਲ ਚੋਣ |
+| Whisper | ਬੋਲੀ ਤੋਂ ਟੈਕਸਟ | 10-50 TPM | ਆਡੀਓ ਪ੍ਰੋਸੈਸਿੰਗ ਵਰਕਲੋਡਸ |
 
-## AI ਮਾਡਲਾਂ ਲਈ AZD ਸੰਰਚਨਾ
+## ਏਆਈ ਮਾਡਲਾਂ ਲਈ AZD ਸੰਰਚਨਾ
 
-### Bicep ਟੈਂਪਲੇਟ ਸੰਰਚਨਾ
+### ਬਿਸਪ ਟੈਮਪਲੇਟ ਸੰਰਚਨਾ
 
-Bicep ਟੈਂਪਲੇਟਾਂ ਰਾਹੀਂ ਮਾਡਲ ਡਿਪਲੌਇਮੈਂਟ ਬਣਾਓ:
+ਬਿਸਪ ਟੈਮਪਲੇਟਾਂ ਰਾਹੀਂ ਮਾਡਲ ਡਿਪਲੋਇਮੈਂਟ ਬਣਾਓ:
 
 ```bicep
 // infra/main.bicep
@@ -124,9 +124,9 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
-### ਐਨਵਾਇਰਨਮੈਂਟ ਵੇਰੀਏਬਲ
+### ਵਾਤਾਵਰਣ ਭੇਰ
 
-ਆਪਣੇ ਐਪਲੀਕੇਸ਼ਨ ਦਾ ਐਨਵਾਇਰਨਮੈਂਟ ਸੰਰਚਿਤ ਕਰੋ:
+ਆਪਣੀ ਐਪਲੀਕੇਸ਼ਨ ਵਾਤਾਵਰਣ ਸੰਰਚਿਤ ਕਰੋ:
 
 ```bash
 # .env ਸੰਰਚਨਾ
@@ -136,9 +136,9 @@ AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## ਡਿਪਲੌਇਮੈਂਟ ਪੈਟਰਨ
+## ਡਿਪਲੋਇਮੈਂਟ ਪੈਟਰਨ
 
-### ਪੈਟਰਨ 1: ਇਕ-ਰੀਜਨ ਡਿਪਲੌਇਮੈਂਟ
+### ਪੈਟਰਨ 1: ਇਕ-ਝੋਨੇ ਡਿਪਲੋਇਮੈਂਟ
 
 ```yaml
 # azure.yaml - Single region
@@ -152,11 +152,11 @@ services:
 ```
 
 ਸਭ ਤੋਂ ਵਧੀਆ:
-- ਡਿਵੈਲਪਮੈਂਟ ਅਤੇ ਟੈਸਟਿੰਗ
-- ਇੱਕ-ਬਜ਼ਾਰ ਐਪਲੀਕੇਸ਼ਨਾਂ
-- ਲਾਗਤ ਅਪਟੀਮਾਈਜ਼ੇਸ਼ਨ
+- ਵਿਕਾਸ ਅਤੇ ਟੈਸਟਿੰਗ ਲਈ
+- ਇੱਕ-ਬਾਜ਼ਾਰ ਐਪਲੀਕੇਸ਼ਨਾਂ ਲਈ
+- ਲਾਗਤ ਅਨੁਕੂਲਤਾ ਲਈ
 
-### ਪੈਟਰਨ 2: ਬਹੁ-ਰੀਜਨ ਡਿਪਲੌਇਮੈਂਟ
+### ਪੈਟਰਨ 2: ਬਹੁ-ਝੋਨੇ ਡਿਪਲੋਇਮੈਂਟ
 
 ```bicep
 // Multi-region deployment
@@ -170,13 +170,13 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 ```
 
 ਸਭ ਤੋਂ ਵਧੀਆ:
-- ਗਲੋਬਲ ਐਪਲੀਕੇਸ਼ਨਾਂ
-- ਉੱਚ ਉਪਲਬਧਤਾ ਦੀਆਂ ਜ਼ਰੂਰਤਾਂ
-- ਲੋਡ ਫੈਲਾਵ
+- ਗਲੋਬਲ ਐਪਲੀਕੇਸ਼ਨਾਂ ਲਈ
+- ਉੱਚ ਉਪਲਬਧਤਾ ਲੋੜਾਂ ਲਈ
+- ਲੋਡ ਵੰਡਣ ਲਈ
 
-### ਪੈਟਰਨ 3: ਹਾਇਬ੍ਰਿਡ ਡਿਪਲੌਇਮੈਂਟ
+### ਪੈਟਰਨ 3: ਹਾਈਬ੍ਰਿਡ ਡਿਪਲੋਇਮੈਂਟ
 
-Microsoft Foundry ਮਾਡਲਾਂ ਨੂੰ ਹੋਰ AI ਸੇਵਾਵਾਂ ਨਾਲ ਜੋੜੋ:
+ਮਾਈਕ੍ਰੋਸਾਫਟ ਫਾਊਂਡਰੀ ਮਾਡਲਾਂ ਨੂੰ ਹੋਰ ਏਆਈ ਸਰਵਿਸਾਂ ਨਾਲ ਜੋੜੋ:
 
 ```bicep
 // Hybrid AI services
@@ -205,11 +205,11 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## ਮਾਡਲ ਪ੍ਰਬੰਧਨ
+## ਮਾਡਲ ਪਰਬੰਧਨ
 
 ### ਵਰਜਨ ਕੰਟਰੋਲ
 
-ਆਪਣੀ AZD ਸੰਰਚਨਾ ਵਿੱਚ ਮਾਡਲ ਵਰਜਨਾਂ ਨੂੰ ਟ੍ਰੈਕ ਕਰੋ:
+ਆਪਣੇ AZD ਸੰਰਚਨਾ ਵਿੱਚ ਮਾਡਲ ਵਰਜ਼ਨਾਂ ਨੂੰ ਟਰੈਕ ਕਰੋ:
 
 ```json
 {
@@ -229,7 +229,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### ਮਾਡਲ ਅੱਪਡੇਟਸ
 
-ਮਾਡਲ ਅੱਪਡੇਟਸ ਲਈ AZD hooks ਦੀ ਵਰਤੋਂ ਕਰੋ:
+ਮਾਡਲ ਅਪਡੇਟ ਲਈ AZD ਹੁਕਸ ਦੀ ਵਰਤੋਂ ਕਰੋ:
 
 ```bash
 #!/bin/bash
@@ -241,13 +241,13 @@ az cognitiveservices account list-models \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
 
-# ਜੇ ਡਿਪਲੌਇਮੈਂਟ ਡਿਫੌਲਟ ਟਾਈਮਆਉਟ ਤੋਂ ਲੰਬਾ ਸਮਾਂ ਲੈਂਦੀ ਹੈ
+# ਜੇ ਤਾਇਨਾਤੀकरण ਸਾਮਾਇਕ ਸਮੇਂ ਤੋਂ ਵੱਧ ਲੰਮਾ ਸਮਾਂ ਲੈਂਦੀ ਹੈ
 azd deploy --timeout 1800
 ```
 
-### A/B ਟੈਸਟਿੰਗ
+### ਏ/ਬੀ ਟੈਸਟਿੰਗ
 
-ਕਈ ਮਾਡਲ ਵਰਜਨਾਂ ਨੂੰ ਡਿਪਲੌਇ ਕਰੋ:
+ਕਈ ਮਾਡਲ ਵਰਜ਼ਨ ਡਿਪਲੋਇ ਕਰੋ:
 
 ```bicep
 param enableABTesting bool = false
@@ -273,10 +273,10 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 
 ### ਸਮਰੱਥਾ ਯੋਜਨਾ
 
-ਉਪਯੋਗ ਪੈਟਰਨਾਂ ਆਧਾਰਿਤ ਲੋੜੀਂਦੀ ਸਮਰੱਥਾ ਦੀ ਗਣਨਾ ਕਰੋ:
+ਵਰਤੋਂ ਦੇ ਪੈਟਰਨਾਂ ਅਨੁਸਾਰ ਲੋੜੀਂਦੀ ਸਮਰੱਥਾ ਦੀ ਗਣਨਾ ਕਰੋ:
 
 ```python
-# ਛਮਤਾ ਦੀ ਗਣਨਾ ਦੀ ਮਿਸਾਲ
+# ਸਮਰੱਥਾ ਗਣਨਾ ਉਦਾਹਰਨ
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -288,7 +288,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# ਇਸਤਮਾਲ ਦੀ ਉਦਾਹਰਨ
+# ਉਦਾਹਰਨ ਵਰਤੋਂ
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -300,7 +300,7 @@ print(f"Required capacity: {required_capacity} TPM")
 
 ### ਆਟੋ-ਸਕੇਲਿੰਗ ਸੰਰਚਨਾ
 
-Container Apps ਲਈ ਆਟੋ-ਸਕੇਲਿੰਗ ਸੰਰਚਿਤ ਕਰੋ:
+ਕੰਟੇਨਰ ਐਪਸ ਲਈ ਆਟੋ-ਸਕੇਲਿੰਗ ਸੰਰਚਿਤ ਕਰੋ:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -336,9 +336,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### ਲਾਗਤ ਅਪਟੀਮਾਈਜ਼ੇਸ਼ਨ
+### ਲਾਗਤ ਅਨੁਕੂਲਤਾ
 
-ਲਾਗਤ ਨਿਯੰਤਰਣ ਲਾਗੂ ਕਰੋ:
+ਲਾਗਤ ਨੂੰ ਨਿਯੰਤਰਿਤ ਕਰਨ ਲਈ ਕੰਮ ਕਰੋ:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -368,11 +368,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## ਮਾਨੀਟਰਿੰਗ ਅਤੇ ਨਿਗਰਾਨੀ
+## ਮਾਨਿਤਰਨਿੰਗ ਅਤੇ ਨਿਰੀਖਣ
 
-### Application Insights ਇੰਟਿਗ੍ਰੇਸ਼ਨ
+### ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਇਟਸ ਇੰਟਿਗ੍ਰੇਸ਼ਨ
 
-AI ਵਰਕਲੋਡਾਂ ਲਈ ਮਾਨੀਟਰਿੰਗ ਸੰਰਚਿਤ ਕਰੋ:
+ਏਆਈ ਵਰਕਲੋਡਸ ਲਈ ਨਿਰੀਖਣ ਸੰਰਚਿਤ ਕਰੋ:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -408,12 +408,12 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### ਕਸਟਮ ਮੈਟ੍ਰਿਕਸ
+### ਕਸਟਮ ਮੈਟਰਿਕਸ
 
-AI-ਨਿਰਧਾਰਿਤ ਮੈਟ੍ਰਿਕਸ ਨੂੰ ਟ੍ਰੈਕ ਕਰੋ:
+ਏਆਈ ਵਿਸ਼ੇਸ਼ ਮੈਟਰਿਕਸ ਨੂੰ ਟਰੈਕ ਕਰੋ:
 
 ```python
-# ਏਆਈ ਮਾਡਲਾਂ ਲਈ ਕਸਟਮ ਟੈਲੀਮੇਟਰੀ
+# ਏਆਈ ਮਾਡਲਾਂ ਲਈ ਕਸਟਮ ਟੈਲੀਮੀਟਰੀ
 import logging
 from applicationinsights import TelemetryClient
 
@@ -445,12 +445,12 @@ class AITelemetry:
         )
 ```
 
-### ਹੈਲਥ ਚੈਕਸ
+### ਸਿਹਤ ਜਾਂਚ
 
-AI ਸੇਵਾ ਦੀ ਸਿਹਤ ਨਿਗਰਾਨੀ ਲਾਗੂ ਕਰੋ:
+ਏਆਈ ਸਰਵਿਸ ਸਿਹਤ ਮਾਨਿਤਰਨਿੰਗ ਲਾਗੂ ਕਰੋ:
 
 ```python
-# ਸਿਹਤ ਜਾਂਚ ਦੇ ਐਂਡਪੋਇੰਟ
+# ਸਿਹਤ ਚੈੱਕ ਐਂਡਪੋਇੰਟਸ
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -478,30 +478,30 @@ async def check_ai_models():
 
 ## ਅਗਲੇ ਕਦਮ
 
-1. **[Microsoft Foundry ਇੰਟਿਗ੍ਰੇਸ਼ਨ ਗਾਈਡ](microsoft-foundry-integration.md)** ਨੂੰ ਸੇਵਾ ਇੰਟਿਗ੍ਰੇਸ਼ਨ ਪੈਟਰਨਾਂ ਲਈ ਸਮੀਖਿਆ ਕਰੋ
-2. **[AI ਵਰਕਸ਼ਾਪ ਲੈਬ](ai-workshop-lab.md)** ਨੂੰ ਹੱਥੋਂ-ਹੱਥ ਅਨੁਭਵ ਲਈ ਪੂਰਾ ਕਰੋ
-3. **[ਪ੍ਰੋਡਕਸ਼ਨ AI ਅਭਿਆਸ](production-ai-practices.md)** ਨੂੰ ਐਂਟਰਪ੍ਰਾਈਜ਼ ਡਿਪਲੌਇਮੈਂਟਸ ਲਈ ਲਾਗੂ ਕਰੋ
-4. **[AI ਟ੍ਰਬਲਸ਼ੂਟਿੰਗ ਗਾਈਡ](../chapter-07-troubleshooting/ai-troubleshooting.md)** ਨੂੰ ਆਮ ਸਮੱਸਿਆਵਾਂ ਲਈ ਵੇਖੋ
+1. **ਸੇਵਾ ਇੰਟਿਗ੍ਰੇਸ਼ਨ ਪੈਟਰਨਾਂ ਲਈ [ਮਾਈਕ੍ਰੋਸਾਫਟ ਫਾਊਂਡਰੀ ਇੰਟਿਗ੍ਰੇਸ਼ਨ ਗਾਈਡ](microsoft-foundry-integration.md) ਦੀ ਸਮੀਖਿਆ ਕਰੋ**
+2. **ਹੱਥ-ਅਨੁਭਵ ਲਈ [ਏਆਈ ਵਰਕਸ਼ਾਪ ਲੈਬ](ai-workshop-lab.md) ਨੂੰ ਪੂਰਾ ਕਰੋ**
+3. **ਇੰਟਰਪ੍ਰਾਈਜ਼ ਡਿਪਲੋਇਮੈਂਟ ਲਈ [ਪ੍ਰੋਡਕਸ਼ਨ ਏਆਈ ਪ੍ਰਕਟਿਸ](production-ai-practices.md) ਨੂੰ ਲਾਗੂ ਕਰੋ**
+4. **ਸਧਾਰਣ ਸਮੱਸਿਆਵਾਂ ਲਈ [ਏਆਈ ਟ੍ਰਬਲਸ਼ੂਟਿੰਗ ਗਾਈਡ](../chapter-07-troubleshooting/ai-troubleshooting.md) ਦਾ ਅਧਿਐਨ ਕਰੋ**
 
 ## ਸਰੋਤ
 
-- [Microsoft Foundry ਮਾਡਲਾਂ ਦੀ ਉਪਲਬਧਤਾ](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Azure Developer CLI ਡੌਕਯੂਮੈਂਟੇਸ਼ਨ](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Container Apps ਸਕੇਲਿੰਗ](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [AI ਮਾਡਲ ਲਾਗਤ ਅਪਟੀਮਾਈਜ਼ੇਸ਼ਨ](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [ਮਾਈਕ੍ਰੋਸਾਫਟ ਫਾਊਂਡਰੀ ਮਾਡਲਾਂ ਮਾਡਲ ਉਪਲਬਧਤਾ](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [ਐਜ਼ਯੂਅਰ ਡਿਵੈਲਪਰ CLI ਦਸਤਾਵੇਜ਼](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [ਕੰਟੇਨਰ ਐਪਸ ਸਕੇਲਿੰਗ](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [ਏਆਈ ਮਾਡਲ ਲਾਗਤ ਅਨੁਕੂਲਤਾ](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**ਚੈਪਟਰ ਨੈਵੀਗੇਸ਼ਨ:**
-- **📚 ਕੋਰਸ ਹੋਮ**: [AZD ਲਈ ਸ਼ੁਰੂਆਤੀ](../../README.md)
-- **📖 ਮੌਜੂਦਾ ਚੈਪਟਰ**: ਅਧਿਆਇ 2 - AI-ਪਹਿਲਾ ਵਿਕਾਸ
-- **⬅️ ਪਿਛਲਾ**: [Microsoft Foundry ਇੰਟਿਗ੍ਰੇਸ਼ਨ](microsoft-foundry-integration.md)
-- **➡️ ਅਗਲਾ**: [AI ਵਰਕਸ਼ਾਪ ਲੈਬ](ai-workshop-lab.md)
-- **🚀 ਅਗਲਾ ਅਧਿਆਇ**: [ਅਧਿਆਇ 3: ਕਨਫਿਗਰੇਸ਼ਨ](../chapter-03-configuration/configuration.md)
+**ਅਧਿਆਇ ਨੈਵੀਗੇਸ਼ਨ:**
+- **📚 ਕੋਰਸ ਹੋਮ**: [AZD ਫੋਰ ਬਿਗਿਨਰਜ਼](../../README.md)
+- **📖 ਮੌਜੂਦਾ ਅਧਿਆਇ**: ਅਧਿਆਇ 2 - ਏਆਈ-ਪਹਿਲਾ ਵਿਕਾਸ
+- **⬅️ ਪਹਿਲਾਂ**: [ਮਾਈਕ੍ਰੋਸਾਫਟ ਫਾਊਂਡਰੀ ਇੰਟਿਗ੍ਰੇਸ਼ਨ](microsoft-foundry-integration.md)
+- **➡️ ਅਗਲਾ**: [ਏਆਈ ਵਰਕਸ਼ਾਪ ਲੈਬ](ai-workshop-lab.md)
+- **🚀 ਅਗਲਾ ਅਧਿਆਇ**: [ਅਧਿਆਇ 3: ਸੰਰਚਨਾ](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ਅਸਵੀਕਾਰ**:
-ਇਸ ਦਸਤਾਵੇਜ਼ ਦਾ ਅਨੁਵਾਦ AI ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਕੀਤਾ ਗਿਆ ਹੈ। ਹਾਲਾਂਕਿ ਅਸੀਂ ਸ਼ੁੱਧਤਾ ਲਈ ਕੋਸ਼ਿਸ਼ ਕਰਦੇ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਰੱਖੋ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸੁਚਿੱਤਤਾ ਹੋ ਸਕਦੀ ਹੈ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਆਪਣੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਧਿਕਾਰਿਤ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣا ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫਾਰਿਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੀ ਵਰਤੋਂ ਕਾਰਨ ਦੇ ਹੋਣ ਵਾਲੇ ਕਿਸੇ ਵੀ ਗਲਤਫਹਮੀ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆ ਲਈ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
+**ਅਸਵੀਕਾਰੋਪਣ**:
+ਇਸ ਦਸਤਾਵੇਜ਼ ਦਾ ਅਨੁਵਾਦ ਏਆਈ ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸਹੀਤਾਵਾਂ ਲਈ ਯਤਨਸ਼ੀਲ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਰੱਖੋ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸਮੱਤਿਆਵਾਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਆਪਣੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਧਿਕਾਰਕ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਜਰੂਰੀ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੇ ਉਪਯੋਗ ਤੋਂ ਪੈਦਾ ਹੋਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀਆਂ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆਵਾਂ ਲਈ ਜਵਾਬਦੇਹ ਨਹੀਂ ਹਾਂ।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,31 +1,31 @@
 # Capítulo 7: Solução de Problemas e Depuração
 
-**📚 Curso**: [AZD para Iniciantes](../../README.md) | **⏱️ Duração**: 1-1.5 horas | **⭐ Complexidade**: Intermediário
+**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 1-1,5 horas | **⭐ Complexidade**: Intermediário
 
 ---
 
-## Visão geral
+## Visão Geral
 
-Este capítulo ajuda você a diagnosticar e resolver problemas comuns ao trabalhar com o Azure Developer CLI. Desde falhas de implantação até problemas específicos de IA.
+Este capítulo ajuda você a diagnosticar e resolver problemas comuns ao trabalhar com Azure Developer CLI. Desde falhas de implantação até problemas específicos de IA.
 
-> Validado com `azd 1.25.6` em junho de 2026.
+> Validado contra `azd 1.27.1` em julho de 2026.
 
-## Objetivos de aprendizagem
+## Objetivos de Aprendizagem
 
 Ao concluir este capítulo, você irá:
 - Diagnosticar falhas comuns de implantação do AZD
 - Depurar problemas de autenticação e permissões
 - Resolver problemas de conectividade de serviços de IA
-- Usar o Portal do Azure e a CLI para solução de problemas
+- Usar o Azure Portal e CLI para solução de problemas
 
 ---
 
 ## 📚 Lições
 
-| # | Lição | Descrição | Tempo |
+| # | Aula | Descrição | Tempo |
 |---|--------|-------------|------|
 | 1 | [Problemas Comuns](common-issues.md) | Problemas frequentemente encontrados | 30 min |
-| 2 | [Guia de Depuração](debugging.md) | Estratégias de depuração passo a passo | 45 min |
+| 2 | [Guia de Depuração](debugging.md) | Estratégias passo a passo para depuração | 45 min |
 | 3 | [Solução de Problemas de IA](ai-troubleshooting.md) | Problemas específicos de IA | 30 min |
 
 ---
@@ -34,7 +34,7 @@ Ao concluir este capítulo, você irá:
 
 ### Problemas de Autenticação
 ```bash
-# Obrigatório para fluxos de trabalho do AZD
+# Necessário para fluxos de trabalho AZD
 azd auth login
 
 # Opcional se você também estiver usando comandos do Azure CLI diretamente
@@ -43,7 +43,7 @@ az login
 azd auth status
 ```
 
-### Falhas de Provisionamento
+### Falhas na Provisão
 ```bash
 azd show
 azd monitor --logs
@@ -66,26 +66,26 @@ azd up
 
 ---
 
-## 📋 Referência de Códigos de Erro
+## 📋 Referência de Código de Erro
 
 | Erro | Causa | Solução |
 |-------|-------|----------|
 | `AuthenticationError` | Não autenticado | `azd auth login` |
-| `ResourceNotFound` | Recurso ausente | Verificar nomes dos recursos |
-| `QuotaExceeded` | Limites da assinatura | Solicitar aumento de cota |
-| `InvalidTemplate` | Erro de sintaxe do Bicep | `az bicep build` |
-| `Conflict` | Recurso existe | Usar novo nome ou excluir |
-| `Forbidden` | Permissões insuficientes | Verificar funções RBAC |
+| `ResourceNotFound` | Recurso ausente | Verifique os nomes dos recursos |
+| `QuotaExceeded` | Limites de assinatura | Solicite aumento de cota |
+| `InvalidTemplate` | Erro de sintaxe no Bicep | `az bicep build` |
+| `Conflict` | Recurso já existe | Use novo nome ou exclua |
+| `Forbidden` | Permissões insuficientes | Verifique os papéis RBAC |
 
 ---
 
-## 🔄 Redefinição e Recuperação
+## 🔄 Reset e Recuperação
 
 ```bash
-# Reinicialização suave (manter recursos, reimplantar o código)
+# Reinicialização suave (manter recursos, reimplantar código)
 azd deploy --force
 
-# Reinicialização completa (excluir tudo, começar do zero)
+# Reinicialização forçada (excluir tudo, começar do zero)
 azd down --force --purge
 azd up
 ```
@@ -94,18 +94,18 @@ azd up
 
 ## 🔗 Navegação
 
-| Direction | Chapter |
+| Direção | Capítulo |
 |-----------|---------|
-| **Anterior** | [Capítulo 6: Pré-Implantação](../chapter-06-pre-deployment/README.md) |
+| **Anterior** | [Capítulo 6: Pré-implantação](../chapter-06-pre-deployment/README.md) |
 | **Próximo** | [Capítulo 8: Produção](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Recursos Relacionados
 
-- [Verificações Pré-Implantação](../chapter-06-pre-deployment/preflight-checks.md)
+- [Verificações Pré-implantação](../chapter-06-pre-deployment/preflight-checks.md)
 - [Guia de Configuração](../chapter-03-configuration/configuration.md)
-- [Problemas do AZD no GitHub](https://github.com/Azure/azure-dev/issues)
+- [Problemas no GitHub do AZD](https://github.com/Azure/azure-dev/issues)
 
 ---
 

@@ -1,67 +1,67 @@
-# AI Agents with Azure Developer CLI
+# 使用 Azure Developer CLI 的 AI 代理
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: 第 2 章 - 以 AI 為先的開發
-- **⬅️ Previous**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Next**: [AI Model Deployment](ai-model-deployment.md)
-- **🚀 Advanced**: [Multi-Agent Solutions](../../examples/retail-scenario.md)
+**章節導覽：**
+- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
+- **📖 本章節**: 第 2 章 - AI 優先開發
+- **⬅️ 上一章**: [Microsoft Foundry 整合](microsoft-foundry-integration.md)
+- **➡️ 下一章**: [AI 模型部署](ai-model-deployment.md)
+- **🚀 高階**: [多代理解決方案](../../examples/retail-scenario.md)
 
 ---
 
-## Introduction
+## 介紹
 
-AI agents 是能夠感知其環境、做出決策並採取行動以達成特定目標的自主程式。與只回應提示的簡單聊天機器人不同，代理可以：
+AI 代理是可以感知環境、做決策並採取行動以達成特定目標的自主程式。與僅回應提示的簡單聊天機器人不同，代理可以：
 
-- <strong>使用工具</strong> - 呼叫 API、搜尋資料庫、執行程式碼
-- <strong>規劃與推理</strong> - 將複雜任務拆解成步驟
-- <strong>從上下文學習</strong> - 維持記憶並調整行為
-- <strong>協作</strong> - 與其他代理合作（多代理系統）
+- <strong>使用工具</strong>—調用 API、搜尋資料庫、執行程式碼
+- <strong>規劃與推理</strong>—將複雜任務拆解成步驟
+- <strong>從上下文學習</strong>—維持記憶並調整行為
+- <strong>協作</strong>—與其他代理協同工作（多代理系統）
 
-本指南示範如何使用 Azure Developer CLI (azd) 將 AI 代理部署到 Azure。
+本指南將指導您如何使用 Azure Developer CLI (azd) 將 AI 代理部署到 Azure。
 
-> **Validation note (2026-03-25):** 本指南已針對 `azd` `1.23.12` 與 `azure.ai.agents` `0.1.18-preview` 進行審查。`azd ai` 體驗仍以預覽為主，若您安裝的擴充功能版本有差異，請檢查擴充功能說明。
+> **驗證說明 (2026-07-13)：** 本指南針對 `azd` `1.27.1` 與 `azure.ai.agents` `1.0.0-beta.5` 進行審查。`azd ai` 體驗仍處於預覽階段，若您安裝的旗標不同，請查看擴充說明。
 
-## Learning Goals
+## 學習目標
 
 完成本指南後，您將能：
-- 了解 AI 代理為何與聊天機器人不同
-- 使用 AZD 部署預先建置的 AI 代理範本
-- 為自訂代理設定 Foundry Agents
-- 實作基本代理模式（工具使用、RAG、多代理）
-- 監控與除錯已部署的代理
+- 了解 AI 代理是什麼及其與聊天機器人的區別
+- 使用 AZD 部署預建 AI 代理範本
+- 為自定義代理設定 Foundry 代理
+- 實作基礎代理模式（工具使用、RAG、多代理）
+- 監控及除錯已部署的代理
 
-## Learning Outcomes
+## 學習成果
 
 完成後，您將能夠：
-- 以單一指令將 AI 代理應用部署到 Azure
-- 設定代理工具與功能
-- 與代理一起實作檢索增強生成（RAG）
-- 為複雜工作流程設計多代理架構
+- 以單一指令將 AI 代理應用部署至 Azure
+- 設定代理工具與能力
+- 與代理實現檢索增強生成（RAG）
+- 設計多代理架構以處理複雜工作流程
 - 疑難排解常見的代理部署問題
 
 ---
 
-## 🤖 What Makes an Agent Different from a Chatbot?
+## 🤖 代理與聊天機器人的差異
 
-| Feature | Chatbot | AI Agent |
+| 特性 | 聊天機器人 | AI 代理 |
 |---------|---------|----------|
-| **Behavior** | 回應提示 | 採取自主行動 |
-| **Tools** | 無 | 可呼叫 API、搜尋、執行程式碼 |
-| **Memory** | 僅基於工作階段 | 跨工作階段的持久記憶 |
-| **Planning** | 單次回應 | 多步驟推理 |
-| **Collaboration** | 單一個體 | 可與其他代理協同工作 |
+| <strong>行為</strong> | 回應提示 | 採取自主行動 |
+| <strong>工具</strong> | 無 | 可調用 API、搜尋、執行程式碼 |
+| <strong>記憶</strong> | 僅限會話 | 跨會話保存記憶 |
+| <strong>規劃</strong> | 單次回應 | 多步驟推理 |
+| <strong>協作</strong> | 單一實體 | 可與其他代理協作 |
 
-### Simple Analogy
+### 簡單比喻
 
-- **Chatbot** = 在資訊櫃檯回答問題的友善人員
-- **AI Agent** = 可為您撥打電話、預約並完成任務的私人助理
+- <strong>聊天機器人</strong> = 資訊櫃台回答問題的助理
+- **AI 代理** = 能為您打電話、預約和完成任務的個人助理
 
 ---
 
-## 🚀 Quick Start: Deploy Your First Agent
+## 🚀 快速開始：部署您的第一個代理
 
-### Option 1: Foundry Agents Template (Recommended)
+### 選項 1：Foundry 代理範本（推薦）
 
 ```bash
 # 初始化 AI 代理範本
@@ -71,63 +71,63 @@ azd init --template get-started-with-ai-agents
 azd up
 ```
 
-**What gets deployed:**
-- ✅ Foundry Agents
-- ✅ Microsoft Foundry Models (gpt-4.1)
-- ✅ Azure AI Search (用於 RAG)
+**部署內容：**
+- ✅ Foundry 代理
+- ✅ Microsoft Foundry 模型（gpt-4.1）
+- ✅ Azure AI Search（用於 RAG）
 - ✅ Azure Container Apps（網頁介面）
 - ✅ Application Insights（監控）
 
-**Time:** 約 15-20 分鐘
-**Cost:** 約 $100-150/月（開發環境）
+**時間：** 約 15-20 分鐘
+**費用：** 約 100-150 美元/月（開發階段）
 
-### Option 2: OpenAI Agent with Prompty
+### 選項 2：結合 Prompty 的 OpenAI 代理
 
 ```bash
-# 初始化基於 Prompty 的代理範本
+# 初始化基於Prompty的代理範本
 azd init --template agent-openai-python-prompty
 
-# 部署到 Azure
+# 部署到Azure
 azd up
 ```
 
-**What gets deployed:**
+**部署內容：**
 - ✅ Azure Functions（無伺服器代理執行）
-- ✅ Microsoft Foundry Models
-- ✅ Prompty 設定檔
+- ✅ Microsoft Foundry 模型
+- ✅ Prompty 配置檔
 - ✅ 範例代理實作
 
-**Time:** 約 10-15 分鐘
-**Cost:** 約 $50-100/月（開發環境）
+**時間：** 約 10-15 分鐘
+**費用：** 約 50-100 美元/月（開發階段）
 
-### Option 3: RAG Chat Agent
+### 選項 3：RAG 聊天代理
 
 ```bash
-# 初始化 RAG 聊天範本
+# 初始化 RAG 聊天模板
 azd init --template azure-search-openai-demo
 
-# 部署到 Azure
+# 部署至 Azure
 azd up
 ```
 
-**What gets deployed:**
-- ✅ Microsoft Foundry Models
-- ✅ 含範例資料的 Azure AI Search
-- ✅ 文件處理管線
-- ✅ 含引證的聊天介面
+**部署內容：**
+- ✅ Microsoft Foundry 模型
+- ✅ 使用範例資料的 Azure AI Search
+- ✅ 文件處理流程
+- ✅ 附有引註的聊天介面
 
-**Time:** 約 15-25 分鐘
-**Cost:** 約 $80-150/月（開發環境）
+**時間：** 約 15-25 分鐘
+**費用：** 約 80-150 美元/月（開發階段）
 
-### Option 4: AZD AI Agent Init (Manifest- or Template-Based Preview)
+### 選項 4：AZD AI Agent Init（基於清單或範本的預覽）
 
-如果您有代理清單檔（agent manifest），可以使用 `azd ai` 指令直接支援建立 Foundry Agent Service 專案。近期的預覽版也新增了基於範本的初始化支援，因此依您安裝的擴充功能版本，實際提示流程可能略有不同。
+如果您有代理清單檔案，可以使用 `azd ai` 命令直接建構 Foundry 代理服務專案。近期的預覽版本亦新增基於範本的初始化支援，故依您安裝的擴充版本，提示流程可能略有不同。
 
 ```bash
-# 安裝 AI 代理擴充功能
+# 安裝 AI 代理擴展
 azd extension install azure.ai.agents
 
-# 可選：驗證已安裝的預覽版本
+# 選擇性：驗證已安裝的預覽版本
 azd extension show azure.ai.agents
 
 # 從代理清單初始化
@@ -136,89 +136,89 @@ azd ai agent init -m agent-manifest.yaml
 # 部署到 Azure
 azd up
 
-# 測試已部署的代理（顯示延遲與首位元組時間）
+# 測試已部署的代理（顯示延遲 + 首字節時間）
 azd ai agent invoke
 ```
 
-**When to use `azd ai agent init` vs `azd init --template`:**
+**何時使用 `azd ai agent init` 與 `azd init --template`：**
 
-| Approach | Best For | How It Works |
+| 方法 | 適用情境 | 運作方式 |
 |----------|----------|------|
-| `azd init --template` | 從可運作的示例應用開始 | 會複製包含程式碼 + 基礎設施的完整範本 repo |
-| `azd ai agent init -m` | 從您自己的代理清單建立 | 根據您的代理定義建構專案結構 |
+| `azd init --template` | 從可用的範例應用開始 | 複製完整範本倉庫含程式碼與基礎架構 |
+| `azd ai agent init -m` | 從您自己的代理清單建置 | 從代理定義腳手架專案結構 |
 
-> **Tip:** 學習時建議使用 `azd init --template`（上面選項 1-3）。在以您自己的 manifest 建置生產代理時使用 `azd ai agent init`。
+> **提示：** 學習時（以上選項 1-3）使用 `azd init --template`。建立生產代理且有自定義清單時使用 `azd ai agent init`。
 
-在執行 `azd up` 之後，相同的擴充功能會引導您完成代理生命週期的其餘步驟：使用 `azd ai agent invoke` 進行測試，使用 `azd ai agent eval generate` 與 `azd ai agent optimize` 測量並提升品質，使用 `azd ai agent delete` 進行清除。完整參考請見 [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions)。
+執行 `azd up` 後，擴充將帶您完成代理生命週期的其餘步驟：使用 `azd ai agent invoke` 測試，`azd ai agent eval generate` 與 `azd ai agent optimize` 來評估和改進品質，`azd ai agent delete` 進行清理。完整參考請見 [AZD AI CLI 指令](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions)。
 
 ---
 
-## 🏗️ Agent Architecture Patterns
+## 🏗️ 代理架構模式
 
-### Pattern 1: Single Agent with Tools
+### 模式 1：單代理搭配工具
 
-最簡單的代理模式 — 一個可以使用多種工具的代理。
+最簡單的代理模式 - 一個代理可使用多個工具。
 
 ```mermaid
 graph TD
-    UI[使用者介面] --> Agent[AI 代理<br/>gpt-4.1]
+    UI[使用者介面] --> Agent[人工智能代理<br/>gpt-4.1]
     Agent --> Search[搜尋工具]
     Agent --> Database[資料庫工具]
     Agent --> API[API 工具]
 ```
 
-**Best for:**
-- 客戶支援聊天機器人
+**適合：**
+- 客服機器人
 - 研究助理
 - 資料分析代理
 
-**AZD Template:** `azure-search-openai-demo`
+**AZD 範本：** `azure-search-openai-demo`
 
-### Pattern 2: RAG Agent (Retrieval-Augmented Generation)
+### 模式 2：RAG 代理（檢索增強生成）
 
-在生成回應前先檢索相關文件的代理。
+一個在生成回答前先檢索相關文件的代理。
 
 ```mermaid
 graph TD
-    Query[使用者查詢] --> RAG[RAG 代理]
+    Query[用戶查詢] --> RAG[RAG 代理]
     RAG --> Vector[向量搜尋]
-    RAG --> LLM[大型語言模型<br/>gpt-4.1]
-    Vector -- 文件 --> LLM
-    LLM --> Response[附上引用的回應]
+    RAG --> LLM[LLM<br/>gpt-4.1]
+    Vector -- Documents --> LLM
+    LLM --> Response[帶引用的回應]
 ```
 
-**Best for:**
+**適合：**
 - 企業知識庫
 - 文件問答系統
 - 合規與法律研究
 
-**AZD Template:** `azure-search-openai-demo`
+**AZD 範本：** `azure-search-openai-demo`
 
-### Pattern 3: Multi-Agent System
+### 模式 3：多代理系統
 
-多個專門化代理共同合作處理複雜任務。
+多個專業代理協同處理複雜任務。
 
 ```mermaid
 graph TD
-    Orchestrator[編排代理] --> Research[研究代理<br/>gpt-4.1]
-    Orchestrator --> Writer[撰寫代理<br/>gpt-4.1-mini]
-    Orchestrator --> Reviewer[審閱代理<br/>gpt-4.1]
+    Orchestrator[協調者代理] --> Research[研究代理<br/>gpt-4.1]
+    Orchestrator --> Writer[撰寫者代理<br/>gpt-4.1-mini]
+    Orchestrator --> Reviewer[審閱者代理<br/>gpt-4.1]
 ```
 
-**Best for:**
+**適合：**
 - 複雜內容生成
-- 多步驟工作流程
-- 需要不同專業知識的任務
+- 多步工作流程
+- 需不同專長的任務
 
-**Learn More:** [Multi-Agent Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md)
+**深入了解：** [多代理協調模式](../chapter-06-pre-deployment/coordination-patterns.md)
 
 ---
 
-## ⚙️ Configuring Agent Tools
+## ⚙️ 代理工具配置
 
-當代理能使用工具時會變得很強大。以下說明如何設定常見工具：
+代理具備工具使用能力時更強大。以下為常見工具的配置方法：
 
-### Tool Configuration in Foundry Agents
+### Foundry 代理中的工具配置
 
 ```python
 # agent_config.py
@@ -241,7 +241,7 @@ search_tool = FunctionTool(
     }
 )
 
-# 使用工具建立代理
+# 使用工具建立智能代理
 agent = project_client.agents.create_agent(
     model="gpt-4.1",
     name="Support Agent",
@@ -250,56 +250,56 @@ agent = project_client.agents.create_agent(
 )
 ```
 
-### Environment Configuration
+### 環境配置
 
 ```bash
-# 設定代理專屬的環境變數
+# 設定代理特定的環境變數
 azd env set AZURE_OPENAI_MODEL "gpt-4.1"
 azd env set AGENT_INSTRUCTIONS "You are a helpful assistant..."
 azd env set ENABLE_CODE_INTERPRETER "true"
 azd env set ENABLE_FILE_SEARCH "true"
 
-# 以更新後的設定進行部署
+# 使用更新的配置進行部署
 azd deploy
 ```
 
 ---
 
-## 📊 Monitoring Agents
+## 📊 代理監控
 
-### Application Insights Integration
+### 應用程式洞察整合
 
-所有 AZD 代理範本都包含 Application Insights 用於監控：
+所有 AZD 代理範本都包含應用程式洞察用於監控：
 
 ```bash
 # 開啟監控儀表板
 azd monitor --overview
 
-# 檢視即時日誌
+# 查看即時日誌
 azd monitor --logs
 
-# 檢視即時指標
+# 查看即時指標
 azd monitor --live
 ```
 
-### Key Metrics to Track
+### 主要指標追蹤
 
-| Metric | Description | Target |
+| 指標 | 描述 | 目標 |
 |--------|-------------|--------|
-| Response Latency | 產生回應所需時間 | < 5 秒 |
-| Token Usage | 每次請求的 tokens | 監控以控制成本 |
-| Tool Call Success Rate | 工具呼叫成功率百分比 | > 95% |
-| Error Rate | 代理請求失敗率 | < 1% |
-| User Satisfaction | 反饋評分 | > 4.0/5.0 |
+| 回應延遲 | 生成回答時間 | < 5 秒 |
+| 代幣使用量 | 每次請求代幣數 | 監控費用 |
+| 工具調用成功率 | 成功執行工具的比率 | > 95% |
+| 錯誤率 | 代理請求失敗比例 | < 1% |
+| 用戶滿意度 | 反饋評分 | > 4.0 /5.0 |
 
-### Custom Logging for Agents
+### 代理的自訂記錄
 
 ```python
 import os
 from azure.monitor.opentelemetry import configure_azure_monitor
 from opentelemetry import trace
 
-# 使用 OpenTelemetry 設定 Azure Monitor
+# 使用 OpenTelemetry 配置 Azure 監察器
 configure_azure_monitor(
     connection_string=os.environ["APPLICATIONINSIGHTS_CONNECTION_STRING"]
 )
@@ -316,29 +316,29 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
         })
 ```
 
-> **Note:** 安裝所需套件：`pip install azure-monitor-opentelemetry opentelemetry`
+> **注意:** 請安裝必要套件：`pip install azure-monitor-opentelemetry opentelemetry`
 
 ---
 
-## 💰 Cost Considerations
+## 💰 成本考量
 
-### Estimated Monthly Costs by Pattern
+### 按模式估計月費
 
-| Pattern | Dev Environment | Production |
+| 模式 | 開發環境 | 生產環境 |
 |---------|-----------------|------------|
-| Single Agent | $50-100 | $200-500 |
-| RAG Agent | $80-150 | $300-800 |
-| Multi-Agent (2-3 agents) | $150-300 | $500-1,500 |
-| Enterprise Multi-Agent | $300-500 | $1,500-5,000+ |
+| 單一代理 | $50-100 | $200-500 |
+| RAG 代理 | $80-150 | $300-800 |
+| 多代理（2-3 代理） | $150-300 | $500-1,500 |
+| 企業多代理 | $300-500 | $1,500-5,000+ |
 
-### Cost Optimization Tips
+### 成本優化建議
 
-1. **Use gpt-4.1-mini for simple tasks**
+1. **對簡單任務使用 gpt-4.1-mini**
    ```bash
    azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
    ```
 
-2. **Implement caching for repeated queries**
+2. <strong>實作重複查詢快取</strong>
    ```python
    from functools import lru_cache
    
@@ -347,9 +347,9 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
        return agent.run(query_hash)
    ```
 
-3. **Set token limits per run**
+3. <strong>設定每次執行的代幣限制</strong>
    ```python
-   # 在執行代理時設定 max_completion_tokens，而不是在建立時
+   # 在運行代理時設置 max_completion_tokens，而非在創建時設置
    run = project_client.agents.create_run(
        thread_id=thread.id,
        agent_id=agent.id,
@@ -357,36 +357,36 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
    )
    ```
 
-4. **Scale to zero when not in use**
+4. <strong>閒置時縮減至零規模</strong>
    ```bash
-   # 容器應用程式會自動縮減至零
+   # 容器應用程式會自動調整至零
    azd env set MIN_REPLICAS "0"
    ```
 
 ---
 
-## 🔧 Troubleshooting Agents
+## 🔧 代理故障排除
 
-### Common Issues and Solutions
+### 常見問題與解決方案
 
 <details>
-<summary><strong>❌ 代理未回應工具呼叫</strong></summary>
+<summary><strong>❌ 代理未回應工具調用</strong></summary>
 
 ```bash
 # 檢查工具是否已正確註冊
 azd show
 
-# 驗證 OpenAI 的部署是否正確
+# 驗證 OpenAI 部署
 az cognitiveservices account deployment list \
   --name $AZURE_OPENAI_NAME \
   --resource-group $RG_NAME
 
-# 檢查代理程式日誌
+# 檢查代理日誌
 azd monitor --logs
 ```
 
-**Common causes:**
-- 工具函式簽章不匹配
+**常見原因：**
+- 工具函式簽名不匹配
 - 缺少必要權限
 - API 端點無法存取
 </details>
@@ -398,22 +398,22 @@ azd monitor --logs
 # 檢查 Application Insights 以找出瓶頸
 azd monitor --live
 
-# 考慮使用較快的模型
+# 考慮使用更快的模型
 azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
 azd deploy
 ```
 
-**Optimization tips:**
+**優化建議：**
 - 使用串流回應
 - 實作回應快取
 - 減少上下文視窗大小
 </details>
 
 <details>
-<summary><strong>❌ 代理回傳不正確或杜撰的資訊</strong></summary>
+<summary><strong>❌ 代理回傳錯誤或產生幻覺訊息</strong></summary>
 
 ```python
-# 透過更佳的系統提示改進
+# 使用更好的系統提示來改進
 instructions = """
 You are a helpful assistant. IMPORTANT:
 - Only answer based on provided context
@@ -422,17 +422,17 @@ You are a helpful assistant. IMPORTANT:
 - Never make up information
 """
 
-# 新增檢索功能以建立依據
+# 新增用於基礎支援的檢索
 agent = project_client.agents.create_agent(
     model="gpt-4.1",
     instructions=instructions,
-    tools=[FileSearchTool()]  # 以文件為回應建立依據
+    tools=[FileSearchTool()]  # 將回應基於文件內容
 )
 ```
 </details>
 
 <details>
-<summary><strong>❌ 超出 Token 限制錯誤</strong></summary>
+<summary><strong>❌ 超出代幣限制錯誤</strong></summary>
 
 ```python
 # 實作上下文視窗管理
@@ -456,58 +456,58 @@ def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
 
 ---
 
-## 🎓 Hands-On Exercises
+## 🎓 實作練習
 
-### Exercise 1: Deploy a Basic Agent (20 minutes)
+### 練習 1：部署基礎代理（20 分鐘）
 
-**Goal:** 使用 AZD 部署您的第一個 AI 代理
+**目標：** 使用 AZD 部署您的第一個 AI 代理
 
 ```bash
-# 步驟 1: 初始化範本
+# 第一步：初始化範本
 azd init --template get-started-with-ai-agents
 
-# 步驟 2: 登入 Azure
+# 第二步：登入 Azure
 azd auth login
-# 若您跨租戶作業，請加入 --tenant-id <tenant-id>
+# 如果您跨租戶工作，請加上 --tenant-id <tenant-id>
 
-# 步驟 3: 部署
+# 第三步：部署
 azd up
 
-# 步驟 4: 測試代理程式
-# 部署後預期輸出:
-#   部署完成!
-#   端點: https://<app-name>.<region>.azurecontainerapps.io
-# 打開輸出中顯示的 URL，然後嘗試詢問一個問題
+# 第四步：測試代理
+# 部署後預期輸出：
+#   部署完成！
+#   端點：https://<app-name>.<region>.azurecontainerapps.io
+# 開啟輸出中顯示的網址，嘗試問問題
 
-# 步驟 5: 檢視監控
+# 第五步：檢視監控
 azd monitor --overview
 
-# 步驟 6: 清理
+# 第六步：清理
 azd down --force --purge
 ```
 
-**Success Criteria:**
+**完成標準：**
 - [ ] 代理能回應問題
 - [ ] 可透過 `azd monitor` 存取監控儀表板
-- [ ] 資源已成功清除
+- [ ] 成功清理資源
 
-### Exercise 2: Add a Custom Tool (30 minutes)
+### 練習 2：新增自訂工具（30 分鐘）
 
-**Goal:** 為代理擴充自訂工具
+**目標：** 為代理擴充自訂工具
 
-1. Deploy the agent template:
+1. 部署代理範本：
    ```bash
    azd init --template get-started-with-ai-agents
    azd up
    ```
-2. Create a new tool function in your agent code:
+2. 在代理程式中建立新工具函式：
    ```python
    def get_weather(location: str) -> str:
        """Get current weather for a location."""
-       # 對天氣服務的 API 呼叫
+       # 調用天氣服務的 API
        return f"Weather in {location}: Sunny, 72°F"
    ```
-3. Register the tool with the agent:
+3. 註冊該工具至代理：
    ```python
    from azure.ai.projects.models import FunctionTool
 
@@ -529,86 +529,86 @@ azd down --force --purge
        tools=[weather_tool]
    )
    ```
-4. Redeploy and test:
+4. 重新部署並測試：
    ```bash
    azd deploy
-   # 詢問：「西雅圖的天氣如何？」
-   # 預期：代理會呼叫 get_weather("Seattle") 並回傳天氣資訊
+   # 問：「西雅圖嘅天氣點呀？」
+   # 預期：代理人會調用 get_weather("西雅圖") 並返回天氣資訊
    ```
 
-**Success Criteria:**
-- [ ] 代理能識別與天氣相關的查詢
-- [ ] 工具被正確呼叫
-- [ ] 回應包含天氣資訊
+**完成標準：**
+- [ ] 代理識別天氣相關查詢
+- [ ] 正確調用工具
+- [ ] 回應中包含天氣資訊
 
-### Exercise 3: Build a RAG Agent (45 minutes)
+### 練習 3：建立 RAG 代理（45 分鐘）
 
-**Goal:** 建立一個能從您的文件回答問題的代理
+**目標：** 建立可從文件中回答問題的代理
 
 ```bash
-# 步驟 1：部署 RAG 範本
+# 第一步：部署 RAG 範本
 azd init --template azure-search-openai-demo
 azd up
 
-# 步驟 2：上載您的文件
+# 第二步：上傳你的文件
 # 將 PDF/TXT 檔案放入 data/ 目錄，然後執行：
 python scripts/prepdocs.py
 
-# 步驟 3：使用特定領域的問題進行測試
-# 從 azd up 的輸出中開啟網頁應用程式的 URL
-# 就您上載的文件提出問題
-# 回應應包括像 [doc.pdf] 這樣的引用參考
+# 第三步：用特定領域問題測試
+# 從 azd up 輸出中打開網頁應用程式網址
+# 提出關於你已上傳文件的問題
+# 回應應包含如 [doc.pdf] 的引用參考
 ```
 
-**Success Criteria:**
-- [ ] 代理可從上傳的文件中回答
-- [ ] 回應包含引證
-- [ ] 對於範圍外的問題不會產生杜撰內容
+**完成標準：**
+- [ ] 代理可從上傳文件回答
+- [ ] 回應包含引註
+- [ ] 對範圍外問題不產生幻覺
 
 ---
 
-## 📚 Next Steps
+## 📚 後續步驟
 
-既然您已了解 AI 代理，請探索以下進階主題：
+既然您已了解 AI 代理，接下來探索以下進階主題：
 
-| Topic | Description | Link |
+| 主題 | 說明 | 連結 |
 |-------|-------------|------|
-| **Multi-Agent Systems** | 建立由多個協作代理組成的系統 | [Retail Multi-Agent Example](../../examples/retail-scenario.md) |
-| **Coordination Patterns** | 學習編排與通訊模式 | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) |
-| **Production Deployment** | 企業級代理部署 | [Production AI Practices](../chapter-08-production/production-ai-practices.md) |
-| **Agent Evaluation** | 測試與評估代理效能 | [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) |
-| **AI Workshop Lab** | 實作操作：讓您的 AI 解決方案適用於 AZD | [AI Workshop Lab](ai-workshop-lab.md) |
+| <strong>多代理系統</strong> | 建立多個代理協同工作的系統 | [零售多代理範例](../../examples/retail-scenario.md) |
+| <strong>協調模式</strong> | 學習編排與通訊模式 | [協調模式](../chapter-06-pre-deployment/coordination-patterns.md) |
+| <strong>生產部署</strong> | 企業級代理部署策略 | [生產 AI 實務](../chapter-08-production/production-ai-practices.md) |
+| <strong>代理評估</strong> | 測試並評估代理效能 | [AI 疑難排除](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **AI 工作坊實驗室** | 實作練習：讓 AI 解決方案符合 AZD | [AI 工作坊實驗室](ai-workshop-lab.md) |
 
 ---
 
-## 📖 Additional Resources
+## 📖 額外資源
 
-### Official Documentation
-- [Microsoft Foundry Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
-- [Microsoft Foundry Agent Service Quickstart](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
-- [Semantic Kernel Agent Framework](https://learn.microsoft.com/semantic-kernel/)
+### 官方文件
+- [Microsoft Foundry 代理服務](https://learn.microsoft.com/azure/ai-services/agents/)
+- [Microsoft Foundry 代理服務快速入門](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
+- [Semantic Kernel 代理框架](https://learn.microsoft.com/semantic-kernel/)
 
-### AZD Templates for Agents
-- [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents)
+### AI 代理的 AZD 範本
+- [開始使用 AI 代理](https://github.com/Azure-Samples/get-started-with-ai-agents)
 - [Agent OpenAI Python Prompty](https://github.com/Azure-Samples/agent-openai-python-prompty)
-- [Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)
+- [Azure Search OpenAI 範例](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-### Community Resources
-- [Awesome AZD - Agent Templates](https://azure.github.io/awesome-azd/?tags=ai-agents)
+### 社群資源
+- [Awesome AZD - 代理範本合集](https://azure.github.io/awesome-azd/?tags=ai-agents)
 - [Azure AI Discord](https://discord.gg/microsoft-azure)
 - [Microsoft Foundry Discord](https://discord.gg/nTYy5BXMWG)
 
-### Agent Skills for Your Editor
-- [**Microsoft Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - 在 GitHub Copilot、Cursor 或任何支援的代理中安裝可重用的 Azure 開發 AI 代理技能。包含針對 [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai)、[Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry)、[deployment](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy) 與 [diagnostics](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) 的技能：
+### 編輯器專用代理技能
+- [**Microsoft Azure 代理技能**](https://skills.sh/microsoft/github-copilot-for-azure) - 在 GitHub Copilot、Cursor 或任何支援代理安裝可重用 AI 代理技能，適用於 Azure 開發。包含 [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai)、[Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry)、[部署](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy)，以及 [診斷](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) 等技能：
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **Next Lesson**: [AI Model Deployment](ai-model-deployment.md)
+<strong>導覽</strong>
+- <strong>上一課</strong>: [Microsoft Foundry 整合](microsoft-foundry-integration.md)
+- <strong>下一課</strong>: [AI 模型部署](ai-model-deployment.md)
 
 ---
 

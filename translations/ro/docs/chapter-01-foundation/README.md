@@ -1,4 +1,4 @@
-# Capitolul 1: Fundamente & Pornire Rapidă
+# Capitolul 1: Bază & Pornire Rapidă
 
 **📚 Curs**: [AZD Pentru Începători](../../README.md) | **⏱️ Durată**: 30-45 minute | **⭐ Complexitate**: Începător
 
@@ -6,13 +6,13 @@
 
 ## Prezentare generală
 
-Acest capitol introduce elementele de bază ale Azure Developer CLI (azd). Vei învăța conceptele principale, vei instala uneltele și vei implementa prima ta aplicație în Azure.
+Acest capitol introduce elementele fundamentale ale Azure Developer CLI (azd). Vei învăța conceptele de bază, vei instala uneltele și vei implementa prima ta aplicație în Azure.
 
-> Validat cu `azd 1.25.6` în iunie 2026.
+> Validat cu `azd 1.27.1` în iulie 2026.
 
 ## Obiective de învățare
 
-Parcurgând acest capitol, vei putea:
+Finalizând acest capitol, vei:
 - Înțelege ce este Azure Developer CLI și cum diferă de Azure CLI
 - Instala și configura AZD pe platforma ta
 - Implementa prima ta aplicație în Azure cu `azd up`
@@ -23,18 +23,18 @@ Parcurgând acest capitol, vei putea:
 ## 📚 Lecții
 
 | # | Lecție | Descriere | Timp |
-|---|--------|-----------|------|
-| 1 | [Bazele AZD](azd-basics.md) | Concepte de bază, terminologie și structură a proiectului | 15 min |
+|---|--------|-------------|------|
+| 1 | [Bazele AZD](azd-basics.md) | Concepte principale, terminologie și structură de proiect | 15 min |
 | 2 | [Instalare & Configurare](installation.md) | Ghiduri de instalare specifice platformei | 10 min |
-| 3 | [Primul Tău Proiect](first-project.md) | Practic: Implementare aplicație web în Azure | 20 min |
-| 4 | [Adaugă-ți Propria Aplicație](bring-your-own-app.md) | Adaugă azd unui proiect existent pe care îl ai deja | 15 min |
-| 5 | [Containere pentru Dezvoltare & Codespaces](dev-containers.md) | Medii azd reproducibile cu containere pentru dezvoltare | 15 min |
+| 3 | [Primul Tău Proiect](first-project.md) | Practic: Implementarea unei aplicații web în Azure | 20 min |
+| 4 | [Adaugă-ți Propria Aplicație](bring-your-own-app.md) | Adaugă azd într-un proiect existent pe care îl ai deja | 15 min |
+| 5 | [Containere Dev & Codespaces](dev-containers.md) | Medii azd reproductibile cu containere dezvoltare | 15 min |
 
 ---
 
-## ✅ Începe Aici: Verifică-ți Configurația
+## ✅ Începe aici: Validează-ți configurarea
 
-Înainte de a începe, confirmă că mașina locală este pregătită pentru șablonul Capitolului 1:
+Înainte de a începe, confirmă că mașina ta locală este pregătită pentru șablonul Capitolului 1:
 
 **Windows:**
 ```powershell
@@ -46,39 +46,39 @@ Parcurgând acest capitol, vei putea:
 bash ./validate-setup.sh
 ```
 
-Dacă scriptul indică lipsa unor unelte, remediază acele probleme mai întâi, apoi continuă cu acest capitol.
+Dacă scriptul raportează unelte lipsă, rezolvă acele probleme mai întâi, apoi continuă cu capitolul.
 
 ---
 
 ## 🚀 Pornire Rapidă
 
 ```bash
-# Verifică instalarea
+# Verificați instalarea
 azd version
 
-# Autentifică-te pentru AZD
-# Opțional: az login dacă intenționezi să rulezi comenzi Azure CLI direct
+# Autentificați-vă pentru AZD
+# Opțional: az login dacă intenționați să rulați comenzi Azure CLI direct
 azd auth login
 
-# Publică prima ta aplicație
+# Implementați prima aplicație
 azd init --template todo-nodejs-mongo
 azd up
 
-# Curăță după ce ai terminat
+# Curățați după ce terminați
 azd down --force --purge
 ```
 
 ---
 
-## ✅ Criterii de Succes
+## ✅ Criterii de succes
 
 După finalizarea acestui capitol, ar trebui să poți:
 
 ```bash
 azd version              # Afișează versiunea instalată
-azd init --template todo-nodejs-mongo  # Inițializează proiectul
+azd init --template todo-nodejs-mongo  # Initializează proiectul
 azd up                   # Realizează implementarea în Azure
-azd show                 # Afișează URL-ul aplicației în funcțiune
+azd show                 # Afișează URL-ul aplicației în execuție
 azd down --force --purge # Curăță resursele
 ```
 
@@ -87,15 +87,15 @@ azd down --force --purge # Curăță resursele
 ## 🔗 Navigare
 
 | Direcție | Capitol |
-|----------|---------|
-| **Următor** | [Capitolul 2: Dezvoltare cu AI în Prim-Plan](../chapter-02-ai-development/README.md) |
-| **Salt la** | [Capitolul 3: Configurare](../chapter-03-configuration/README.md) |
+|-----------|---------|
+| **Următorul** | [Capitolul 2: Dezvoltare AI-First](../chapter-02-ai-development/README.md) |
+| **Sari la** | [Capitolul 3: Configurare](../chapter-03-configuration/README.md) |
 
 ---
 
-## 📖 Resurse Aflate în Legătură
+## 📖 Resurse conexe
 
-- [Fișă de Comenzi](../../resources/cheat-sheet.md)
+- [Fișa de comenzi rapide](../../resources/cheat-sheet.md)
 - [Întrebări frecvente](../../resources/faq.md)
 - [Glosar](../../resources/glossary.md)
 

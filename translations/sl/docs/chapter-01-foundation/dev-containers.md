@@ -1,54 +1,54 @@
-# Dev Containers & GitHub Codespaces za azd
+# Razvojni zabojniki in GitHub Codespaces za azd
 
-**Navigacija poglavij:**
+**Naveščanje poglavij:**
 - **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
 - **📖 Trenutno poglavje**: Poglavje 1 - Osnove in hiter začetek
 - **⬅️ Prejšnje**: [Prinesi svojo aplikacijo](bring-your-own-app.md)
-- **🚀 Naslednje poglavje**: [Poglavje 2: Razvoj, osredotočen na AI](../chapter-02-ai-development/README.md)
+- **🚀 Naslednje poglavje**: [Poglavje 2: AI-prvi razvoj](../chapter-02-ai-development/README.md)
 
-> Preverjeno z `azd 1.25.6` junija 2026.
+> Preverjeno z `azd 1.27.1` julija 2026.
 
 ## Uvod
 
-Namestitev azd, ustreznega runtime-a za jezik, Dockera in Azure CLI na vsakem računalniku je mukotrpno—in je glavni razlog, zakaj vodič, ki "deluje na mojem računalniku", ne deluje pri drugih. A **dev container** to reši tako, da v datoteki opiše celoten nabor orodij. Kdor koli odpre projekt v VS Code ali GitHub Codespaces, dobi enako okolje, z že nameščenim azd. Ta lekcija vam pokaže, kako ga dodati.
+Namestitev azd, ustreznega jezikovnega izvajalnika, Dockerja in Azure CLI-je na vsako napravo je nadležno opravilo — in to je glavni razlog, da vodič, ki "deluje na mojem računalniku", ne uspe za drugega. **Razvojni zabojnik** to reši tako, da opiše celoten vaš niz orodij v datoteki. Kdor koli odpre projekt v VS Code ali GitHub Codespaces dobi natanko enako okolje z že nameščenim azd. Ta lekcija vam pokaže, kako dodati enega.
 
 ## Cilji učenja
 
 Do konca te lekcije boste:
-- Razumeli, kaj je dev container in zakaj pomaga pri azd
+- Razumeli, kaj je razvojni zabojnik in zakaj pomaga pri azd
 - Dodali minimalno `.devcontainer/devcontainer.json` v projekt
-- Vključili azd, Azure CLI in Docker prek Dev Container *funkcij*
+- Vključili azd, Azure CLI in Docker preko lastnosti razvojnega zabojnika
 - Odprli projekt v GitHub Codespaces ali VS Code
 
-## Rezultati učenja
+## Izidi učenja
 
-Po zaključku te lekcije boste znali:
-- Napisati `devcontainer.json` za projekt azd
-- Dodati azd in Azure orodja brez ročnih namestitev
-- Zagnati `azd up` znotraj kontejnerja ali Codespace-a
+Po zaključku lekcije boste sposobni:
+- Ustvariti `devcontainer.json` za azd projekt
+- Dodati azd in Azure orodja brez ročnih nameščanj
+- Zagnati `azd up` znotraj zabojnika ali Codespace-a
 
 ---
 
-## Kaj je dev container?
+## Kaj je razvojni zabojnik?
 
-Dev container je razvojno okolje, osnovano na Dockerju, definirano z datoteko `.devcontainer/devcontainer.json` v vašem repozitoriju. Ko odprete projekt:
+Razvojni zabojnik je Docker-ju osnovano razvojno okolje, določeno z datoteko `.devcontainer/devcontainer.json` v vašem repozitoriju. Ko odprete projekt:
 
-- **VS Code** (z razširitvijo Dev Containers) zgradi kontejner in se nanj poveže.
-- **GitHub Codespaces** zgradi isti kontejner v oblaku in vam zagotovi urejevalnik v brskalniku.
+- **VS Code** (z razširitvijo Dev Containers) ustvari zabojnik in se nanj poveže.
+- **GitHub Codespaces** ustvari isti zabojnik v oblaku in vam ponudi urejevalnik v brskalniku.
 
-V vsakem primeru vsak prispevalec dobi enaka orodja—nič več iskanja napak v slogu "si namestil azd?".
+Tako ali tako vsak sodelujoči dobi enaka orodja — ni več poizvedb "ali si namestil azd?".
 
 ```mermaid
 graph LR
-    Repo[Vaš repozitorij<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Razvojni kontejnerji]
+    Repo[Vaš Repozitorij<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Razvojni Kontejnerji]
     Repo --> Codespaces[GitHub<br/>Codespaces]
-    VSCode --> Env[Enako okolje:<br/>azd + az + Docker]
+    VSCode --> Env[Identical environment:<br/>azd + az + Docker]
     Codespaces --> Env
 ```
 
 ---
 
-## Korak 1: Ustvarite datoteko devcontainer
+## 1. korak: Ustvarite datoteko devcontainer
 
 Ustvarite `.devcontainer/devcontainer.json` v korenu vašega projekta:
 
@@ -75,23 +75,23 @@ Ustvarite `.devcontainer/devcontainer.json` v korenu vašega projekta:
 }
 ```
 
-Kaj naredi vsak del:
+Kaj posamezen del počne:
 
 | Ključ | Namen |
-|-----|---------|
-| `image` | Osnovni OS za kontejner |
-| `features` | Vnaprej pripravljeni namestitveni paketi—tukaj: Azure CLI, **azd**, Docker in Node.js |
-| `customizations.vscode.extensions` | Samodejno namesti razširitve za VS Code: azd in Bicep |
-| `forwardPorts` | Odpre vrata vaše aplikacije v brskalnik |
-| `postCreateCommand` | Zažene se enkrat po izgradnji kontejnerja (tukaj, kontrola delovanja) |
+|-------|-------|
+| `image` | Osnovni operacijski sistem za zabojnik |
+| `features` | Vnaprej pripravljeni namestitveni moduli — tukaj: Azure CLI, **azd**, Docker in Node.js |
+| `customizations.vscode.extensions` | Samodejno namesti razširitve azd in Bicep za VS Code |
+| `forwardPorts` | Izpostavi vrata vaše aplikacije v brskalniku |
+| `postCreateCommand` | Izvede se enkrat po izdelavi zabojnika (tukaj, osnovni preizkus) |
 
-> Funkcija `ghcr.io/azure/azure-dev/azd:latest` je uradni način za pridobitev azd v kontejner. Za ponovljivost pripnite določeno različico (na primer `azd:1.25.6`).
+> Funkcija `ghcr.io/azure/azure-dev/azd:latest` je uradni način za pridobitev azd v zabojniku. Za ponovljivost lahko določite točno različico (npr. `azd:1.27.1`).
 
 ---
 
-## Korak 2: Uskladite funkcijo z jezikom vaše aplikacije
+## 2. korak: Ujemanje funkcije z jezikom vaše aplikacije
 
-Zamenjajte funkcijo `node` z vsem, kar vaša aplikacija uporablja:
+Zamenjajte funkcijo `node` s tisto, ki jo vaša aplikacija uporablja:
 
 ```jsonc
 // Python project
@@ -107,71 +107,71 @@ Zamenjajte funkcijo `node` z vsem, kar vaša aplikacija uporablja:
 "ghcr.io/devcontainers/features/go:1": {}
 ```
 
-Ohranite `docker-in-docker`, če je vaš `host` `containerapp`, `aks` ali karkoli, kar gradi sliko kontejnerja—azd potrebuje Docker za gradnjo in potiskanje slik.
+Funkcijo `docker-in-docker` obdržite, če je vaš `host` `containerapp`, `aks` ali karkoli, kar gradi zabojniško sliko — azd potrebuje Docker za gradnjo in potiskanje slik.
 
 ---
 
-## Korak 3: Odprite ga
+## 3. korak: Odprite zabojnik
 
 **V VS Code:**
 1. Namestite razširitev **Dev Containers**.
 2. Odprite mapo projekta.
-3. Kliknite **Reopen in Container** ko se pojavi poziv (ali zaženite *Dev Containers: Reopen in Container*).
+3. Ko se pojavi poziv, kliknite **Ponovno odpri v zabojniku** (ali zaženite *Dev Containers: Reopen in Container*).
 
 **V GitHub Codespaces:**
 1. Potisnite repozitorij na GitHub.
-2. Kliknite **Code → Codespaces → Create codespace on main**.
-3. Počakajte, da se kontejner zgradi—azd je pripravljen v terminalu.
+2. Kliknite **Code → Codespaces → Ustvari codespace na main**.
+3. Počakajte, da se zabojnik sestavi — azd je pripravljen v terminalu.
 
 ---
 
-## Korak 4: Razmestitev iz znotraj kontejnerja
+## 4. korak: Namestitev iz znotraj zabojnika
 
-Kontejner ima azd že predhodno nameščen, zato običajen potek dela deluje brez težav:
+Zabojnik vsebuje predhodno nameščen azd, zato običajni postopek deluje takoj:
 
 ```bash
-azd auth login --use-device-code   # Koda naprave je uporabna v Codespacesu
+azd auth login --use-device-code   # koda naprave je priročna v Codespaces
 azd up
 ```
 
-> **Zakaj `--use-device-code`?** V oddaljenem kontejnerju ali Codespace-u ni lokalnega brskalnika za preusmeritev, zato je prijava z device-code zanesljiva pot. Kodo boste prilepili v zavihek brskalnika, da dokončate prijavo.
+> **Zakaj `--use-device-code`?** V oddaljenem zabojniku ali Codespace-u ni lokalnega brskalnika za preusmeritev, zato je prijava z napravno kodo zanesljiva pot. Kodo boste prilepili v brskalnik, da dokončate prijavo.
 
 ---
 
-## Pogoste težave
+## Pogoste pasti
 
-| Težava | Rešitev |
-|---------|-----|
-| `azd up` ne more zgraditi slike | Dodajte funkcijo `docker-in-docker` |
-| Prijava v brskalniku se zatakne v Codespaces | Uporabite `azd auth login --use-device-code` |
-| Orodja se razlikujejo med člani ekipe | Pripnite različice funkcij (npr. `azd:1.25.6`) |
-| Aplikacija ni dosegljiva v brskalniku | Dodajte vrata v `forwardPorts` |
+| Past | Popravek |
+|------|----------|
+| `azd up` ne more sestaviti slike | Dodajte funkcijo `docker-in-docker` |
+| Prijava v brskalniku se ustavi v Codespaces | Uporabite `azd auth login --use-device-code` |
+| Orodja se razlikujejo med člani ekipe | Pritrdite različice funkcij (npr. `azd:1.27.1`) |
+| Aplikacija ni dostopna v brskalniku | Dodajte vrata v `forwardPorts` |
 
 ---
 
 ## Povzetek
 
-- Dev container naredi vaš azd nabor orodij ponovljiv za vse.
-- Dodajte azd, Azure CLI in Docker preko Dev Container *funkcij*.
-- Ujemite funkcijo za jezik z vašo aplikacijo in ohranite `docker-in-docker` za gostitelje kontejnerjev.
-- Uporabite prijavo z device-code, ko tečete znotraj Codespaces.
+- Razvojni zabojnik naredi vaš azd nabor orodij reproducibilen za vse.
+- Dodajte azd, Azure CLI in Docker preko lastnosti razvojnega zabojnika.
+- Ujemite funkcijo jezika z vašo aplikacijo in obdržite `docker-in-docker` za gostitelje zabojnikov.
+- Uporabljajte prijavo z napravo, ko delate znotraj Codespaces.
 
 ---
 
 ## 🔗 Navigacija
 
-| Smer | Viri |
-|-----------|----------|
+| Smer | Vir |
+|------|-----|
 | **Prejšnje** | [Prinesi svojo aplikacijo](bring-your-own-app.md) |
 | **Domača stran poglavja** | [Poglavje 1: Osnove in hiter začetek](README.md) |
-| **Naslednje poglavje** | [Poglavje 2: Razvoj, osredotočen na AI](../chapter-02-ai-development/README.md) |
+| **Naslednje poglavje** | [Poglavje 2: AI-prvi razvoj](../chapter-02-ai-development/README.md) |
 
 ## 📖 Povezani viri
 
 - [Namestitev in nastavitev](installation.md)
-- [Povzetek ukazov](../../resources/cheat-sheet.md)
-- [Uradna specifikacija Dev Containers](https://containers.dev/)
-- [azd Dev Container funkcija](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
+- [Kramp lista ukazov](../../resources/cheat-sheet.md)
+- [Uradna specifikacija razvojnih zabojnikov](https://containers.dev/)
+- [Funkcija azd razvojnega zabojnika](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
 
 ---
 

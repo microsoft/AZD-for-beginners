@@ -1,4 +1,4 @@
-# Chapitre 1 : Fondations & Démarrage Rapide
+# Chapitre 1 : Fondation & Démarrage Rapide
 
 **📚 Cours** : [AZD Pour Débutants](../../README.md) | **⏱️ Durée** : 30-45 minutes | **⭐ Complexité** : Débutant
 
@@ -6,13 +6,13 @@
 
 ## Vue d'ensemble
 
-Ce chapitre introduit les fondamentaux d'Azure Developer CLI (azd). Vous apprendrez les concepts principaux, installerez les outils et déploierez votre première application sur Azure.
+Ce chapitre présente les fondamentaux d'Azure Developer CLI (azd). Vous apprendrez les concepts clés, installerez les outils et déploierez votre première application sur Azure.
 
-> Validé avec `azd 1.25.6` en juin 2026.
+> Validé avec `azd 1.27.1` en juillet 2026.
 
 ## Objectifs d'apprentissage
 
-En complétant ce chapitre, vous allez :
+En terminant ce chapitre, vous allez :
 - Comprendre ce qu'est Azure Developer CLI et en quoi il diffère d'Azure CLI
 - Installer et configurer AZD sur votre plateforme
 - Déployer votre première application sur Azure avec `azd up`
@@ -22,13 +22,13 @@ En complétant ce chapitre, vous allez :
 
 ## 📚 Leçons
 
-| # | Leçon | Description | Temps |
+| # | Leçon | Description | Durée |
 |---|--------|-------------|------|
-| 1 | [Notions de base d'AZD](azd-basics.md) | Concepts clés, terminologie, et structure de projet | 15 min |
+| 1 | [Notions de Base AZD](azd-basics.md) | Concepts clés, terminologie et structure du projet | 15 min |
 | 2 | [Installation & Configuration](installation.md) | Guides d'installation spécifiques à la plateforme | 10 min |
-| 3 | [Votre premier projet](first-project.md) | Pratique : déployer une application web sur Azure | 20 min |
-| 4 | [Apportez votre propre app](bring-your-own-app.md) | Ajouter azd à un projet existant que vous avez déjà | 15 min |
-| 5 | [Conteneurs de développement & Codespaces](dev-containers.md) | Environnements azd reproductibles avec des conteneurs dev | 15 min |
+| 3 | [Votre Premier Projet](first-project.md) | Pratique : déployer une application web sur Azure | 20 min |
+| 4 | [Apportez Votre Propre Application](bring-your-own-app.md) | Ajouter azd à un projet existant que vous avez déjà | 15 min |
+| 5 | [Containers Dev & Codespaces](dev-containers.md) | Environnements azd reproductibles avec des containers dev | 15 min |
 
 ---
 
@@ -46,31 +46,31 @@ Avant de commencer, confirmez que votre machine locale est prête pour le modèl
 bash ./validate-setup.sh
 ```
 
-Si le script signale des outils manquants, corrigez-les d'abord puis continuez avec le chapitre.
+Si le script signale des outils manquants, corrigez ces problèmes en premier, puis poursuivez avec le chapitre.
 
 ---
 
-## 🚀 Démarrage rapide
+## 🚀 Démarrage Rapide
 
 ```bash
 # Vérifier l'installation
 azd version
 
 # Authentifier pour AZD
-# Facultatif : az login si vous prévoyez d'exécuter directement des commandes Azure CLI
+# Optionnel : az login si vous prévoyez d'exécuter des commandes Azure CLI directement
 azd auth login
 
-# Déployez votre première application
+# Déployer votre première application
 azd init --template todo-nodejs-mongo
 azd up
 
-# Nettoyez une fois terminé
+# Nettoyer une fois terminé
 azd down --force --purge
 ```
 
 ---
 
-## ✅ Critères de réussite
+## ✅ Critères de Réussite
 
 Après avoir complété ce chapitre, vous devriez être capable de :
 
@@ -88,14 +88,14 @@ azd down --force --purge # Nettoie les ressources
 
 | Direction | Chapitre |
 |-----------|---------|
-| **Suivant** | [Chapitre 2 : Développement axé sur l'IA](../chapter-02-ai-development/README.md) |
+| **Suivant** | [Chapitre 2 : Développement Axé IA](../chapter-02-ai-development/README.md) |
 | **Passer à** | [Chapitre 3 : Configuration](../chapter-03-configuration/README.md) |
 
 ---
 
-## 📖 Ressources associées
+## 📖 Ressources Associées
 
-- [Fiche de commandes](../../resources/cheat-sheet.md)
+- [Fiche Résumé des Commandes](../../resources/cheat-sheet.md)
 - [FAQ](../../resources/faq.md)
 - [Glossaire](../../resources/glossary.md)
 

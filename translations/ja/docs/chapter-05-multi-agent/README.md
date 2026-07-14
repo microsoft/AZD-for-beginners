@@ -1,51 +1,51 @@
-# 第5章: マルチエージェントAIソリューション
+# 第5章：マルチエージェントAIソリューション
 
-**📚 コース**: [AZD 入門](../../README.md) | **⏱️ 所要時間**: 2-3時間 | **⭐ 複雑度**: 上級
+**📚 コース**: [AZD For Beginners](../../README.md) | **⏱️ 所要時間**: 2～3時間 | **⭐ 難易度**: 上級
 
 ---
 
 ## 概要
 
-この章では、高度なマルチエージェントのアーキテクチャパターン、エージェントのオーケストレーション、および複雑なシナリオ向けの本番対応AIデプロイについて扱います。
+この章では、高度なマルチエージェントアーキテクチャパターン、エージェントのオーケストレーション、複雑なシナリオにおけるプロダクション準備済みのAI展開について扱います。
 
-> 2026年6月に `azd 1.25.6` で検証済み。
+> 2026年7月に `azd 1.27.1` で検証済み。
 
 ## 学習目標
 
-この章を修了すると、次のことができるようになります:
-- マルチエージェントのアーキテクチャパターンを理解する
-- 連携したAIエージェントシステムをデプロイする
-- エージェント間通信を実装する
-- 本番運用可能なマルチエージェントソリューションを構築する
+この章を修了することで、以下を習得できます：
+- マルチエージェントアーキテクチャパターンの理解
+- 連携したAIエージェントシステムのデプロイ
+- エージェント間通信の実装
+- プロダクション準備済みマルチエージェントソリューションの構築
 
 ---
 
-## 📚 Lessons
+## 📚 レッスン
 
-| # | Lesson | Description | Time |
+| # | レッスン | 説明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [マルチエージェント基礎](multi-agent-basics.md) | ハンズオン: `azd up` で動作するマルチエージェントアプリをデプロイする | 45分 |
-| 2 | [調整パターン](../chapter-06-pre-deployment/coordination-patterns.md) | エージェントオーケストレーション戦略（第6章で続く） | 30分 |
-| 3 | [ARM テンプレートデプロイ](../../examples/retail-multiagent-arm-template/README.md) | ワンクリックデプロイの例 | 30分 |
+| 1 | [マルチエージェント基礎](multi-agent-basics.md) | 実践： `azd up` で動作するマルチエージェントアプリを展開 | 45分 |
+| 2 | [コーディネーションパターン](../chapter-06-pre-deployment/coordination-patterns.md) | エージェントのオーケストレーション戦略（第6章で継続） | 30分 |
+| 3 | [ARMテンプレートデプロイメント](../../examples/retail-multiagent-arm-template/README.md) | ワンクリック展開例 | 30分 |
 
-> **まずはレッスン1から始めてください。** この章で唯一フルにハンズオンでデプロイ可能なレッスンです。レッスン2は第6章にあり（事前デプロイ計画と共有されています）、[リテール マルチエージェント ソリューション](../../examples/retail-scenario.md)はアーキテクチャの設計図であり、ワンコマンドテンプレートではありません。
+> **まずレッスン1から始めましょう。** この章で唯一完全にハンズオンの展開可能なレッスンです。レッスン2は第6章にあり（プレデプロイメント計画と共有）、[Retail Multi-Agent Solution](../../examples/retail-scenario.md) はアーキテクチャの設計図であり、コマンド1つのテンプレートではありません。
 
 ---
 
 ## 🚀 クイックスタート
 
 ```bash
-# オプション 1: テンプレートからデプロイ
+# オプション1: テンプレートからデプロイ
 azd init --template agent-openai-python-prompty
 azd up
 
-# オプション 2: エージェントマニフェストからデプロイ（azure.ai.agents 拡張機能が必要）
+# オプション2: エージェントマニフェストからデプロイ（azure.ai.agents拡張機能が必要）
 azd extension install azure.ai.agents
 azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **どのアプローチ？** `azd init --template` を使って動作するサンプルから開始してください。エージェントマニフェストを自分で持っている場合は `azd ai agent init` を使用してください。詳細は [AZD AI CLI リファレンス](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) を参照してください。
+> **どのアプローチを使う？** 動作するサンプルから始める場合は `azd init --template` を使います。自分のエージェントマニフェストがある場合は `azd ai agent init` を使用してください。詳細は [AZD AI CLIリファレンス](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) を参照してください。
 
 ---
 
@@ -59,40 +59,40 @@ graph TD
 
 ---
 
-## 🎯 注目のソリューション: リテール マルチエージェント
+## 🎯 注目ソリューション：Retail Multi-Agent
 
-The [リテール マルチエージェント ソリューション](../../examples/retail-scenario.md) が示す:
+[Retail Multi-Agent Solution](../../examples/retail-scenario.md) は以下を示しています：
 
-- **Customer Agent**: ユーザーとのやり取りと嗜好を扱う
-- **Inventory Agent**: 在庫と注文処理を管理する
-- **Orchestrator**: エージェント間の調整を行う
-- **Shared Memory**: エージェント間のコンテキスト管理
+- <strong>カスタマーエージェント</strong>：ユーザーとの対話と好みを管理
+- <strong>インベントリエージェント</strong>：在庫と注文処理を管理
+- <strong>オーケストレーター</strong>：エージェント間の調整
+- <strong>共有メモリ</strong>：エージェント間のコンテキスト管理
 
-### 利用されているサービス
+### 使用サービス
 
-| Service | Purpose |
+| サービス | 目的 |
 |---------|---------|
 | Microsoft Foundry Models | 言語理解 |
 | Azure AI Search | 製品カタログ |
 | Cosmos DB | エージェントの状態とメモリ |
-| Container Apps | エージェントのホスティング |
-| Application Insights | 監視 |
+| Container Apps | エージェントホスティング |
+| Application Insights | モニタリング |
 
 ---
 
 ## 🔗 ナビゲーション
 
-| Direction | Chapter |
+| 方向 | 章 |
 |-----------|---------|
-| <strong>前へ</strong> | [第4章: インフラストラクチャ](../chapter-04-infrastructure/README.md) |
-| <strong>次へ</strong> | [第6章: 事前展開](../chapter-06-pre-deployment/README.md) |
+| <strong>前へ</strong> | [第4章：インフラストラクチャ](../chapter-04-infrastructure/README.md) |
+| <strong>次へ</strong> | [第6章：プレデプロイメント](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 関連リソース
 
 - [AIエージェントガイド](../chapter-02-ai-development/agents.md)
-- [本番向けAIプラクティス](../chapter-08-production/production-ai-practices.md)
+- [プロダクションAIプラクティス](../chapter-08-production/production-ai-practices.md)
 - [AIトラブルシューティング](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---

@@ -1,31 +1,31 @@
-# Sura 3: Usanidi na Uthibitisho
+# Sura ya 3: Uundaji & Uthibitishaji
 
-**📚 Kozi**: [AZD Kwa Waanziaji](../../README.md) | **⏱️ Muda**: 45-60 dakika | **⭐ Ugumu**: Wastani
+**📚 Kozi**: [AZD Kwa Waanzilishi](../../README.md) | **⏱️ Muda**: Dakika 45-60 | **⭐ Ugumu**: Kiwango cha Kati
 
 ---
 
 ## Muhtasari
 
-Sura hii inafunika usanidi wa mazingira, mifano ya uthibitisho, na mbinu bora za usalama kwa utoaji wa Azure Developer CLI.
+Sura hii inahusu usanidi wa mazingira, mifumo ya uthibitishaji, na mbinu bora za usalama kwa utoaji wa Azure Developer CLI.
 
-> Imethibitishwa dhidi ya `azd 1.25.6` Juni 2026.
+> Imehakikiwa dhidi ya `azd 1.27.1` mwezi Julai 2026.
 
 ## Malengo ya Kujifunza
 
-Baada ya kumaliza sura hii, utakuwa umejifunza:
-- Kuwa mtaalamu wa hierarki ya usanidi ya AZD
-- Kusimamia mazingira mengi (dev, staging, prod)
-- Kutekeleza uthibitisho salama kwa kutumia vitambulisho vinavyosimamiwa
-- Sanidi mipangilio maalum kwa mazingira
+Kwa kumaliza sura hii, utakuwa umeweza:
+- Kumjua mtawanyiko wa usanidi wa AZD
+- Kusimamia mazingira mbalimbali (dev, staging, prod)
+- Kutekeleza uthibitishaji salama kwa vitambulisho vilivyosimamiwa
+- Kusanidi mipangilio ya mazingira maalum
 
 ---
 
-## 📚 Masomo
+## 📚 Somo
 
 | # | Somo | Maelezo | Muda |
 |---|--------|-------------|------|
-| 1 | [Configuration Guide](configuration.md) | Usanidi na usimamizi wa mazingira | 30 dakika |
-| 2 | [Authentication & Security](authsecurity.md) | Mifano ya vitambulisho vinavyosimamiwa na RBAC | 30 dakika |
+| 1 | [Mwongozo wa Usanidi](configuration.md) | Kuandaa na kusimamia mazingira | Dakika 30 |
+| 2 | [Uthibitishaji & Usalama](authsecurity.md) | Mfumo wa utambulisho uliofikiwa na RBAC | Dakika 30 |
 
 ---
 
@@ -40,7 +40,7 @@ azd env new prod
 # Badilisha mazingira
 azd env select prod
 
-# Weka vigezo vya mazingira
+# Weka mabadiliko ya mazingira
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
@@ -50,13 +50,13 @@ azd env get-values
 
 ---
 
-## 🔧 Hierarki ya Usanidi
+## 🔧 Mtawanyiko wa Usanidi
 
-AZD inatekeleza mipangilio kwa mpangilio huu (mipangilio ya baadaye inaondosha ile ya awali):
+AZD hutumia mipangilio kwa mpangilio huu (baadaye huvuka ya awali):
 
-1. **Thamani za chaguo-msingi** (imejengwa ndani ya violezo)
+1. **Thamani za msingi** (zilizo katika templeti)
 2. **azure.yaml** (usanidi wa mradi)
-3. **Vigezo vya mazingira** (`azd env set`)
+3. **Mazingira ya vigezo** (`azd env set`)
 4. **Bendera za mstari wa amri** (`--location eastus`)
 
 ---
@@ -64,37 +64,37 @@ AZD inatekeleza mipangilio kwa mpangilio huu (mipangilio ya baadaye inaondosha i
 ## 🔐 Mbinu Bora za Usalama
 
 ```bash
-# Tumia utambulisho uliosimamiwa (inapendekezwa)
+# Tumia utambulisho ulioendeshwa (linapendekezwa)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Angalia hali ya uthibitisho ya AZD
+# Angalia hali ya uthibitishaji ya AZD
 azd auth status
 
-# Hiari: hakikisha muktadha wa Azure CLI ikiwa unapanga kuendesha amri za az
+# Hiari: hakiki muktadha wa Azure CLI ikiwa unapanga kuendesha amri za az
 az account show
 
-# Thibitisha upya ikiwa inahitajika
+# Thibitisha tena ikiwa inahitajika
 azd auth login
 
-# Hiari: sasisha uthibitisho wa Azure CLI kwa amri za az
+# Hiari: sasisha uthibitishaji wa Azure CLI kwa amri za az
 az login
 ```
 
 ---
 
-## 🔗 Uvinjari
+## 🔗 Urambazaji
 
-| Direction | Chapter |
+| Mwelekeo | Sura |
 |-----------|---------|
-| **Iliyopita** | [Sura 2: Maendeleo ya AI](../chapter-02-ai-development/README.md) |
-| **Ifuatayo** | [Sura 4: Miundombinu](../chapter-04-infrastructure/README.md) |
+| **Iliyopita** | [Sura ya 2: Maendeleo ya AI](../chapter-02-ai-development/README.md) |
+| **Inayofuata** | [Sura ya 4: Miundombinu](../chapter-04-infrastructure/README.md) |
 
 ---
 
 ## 📖 Rasilimali Zinazohusiana
 
-- [Ukaguzi kabla ya utoaji](../chapter-06-pre-deployment/README.md)
-- [Utatuzi wa Matatizo](../chapter-07-troubleshooting/common-issues.md)
+- [Ukaguzi Kabla ya Utoaji](../chapter-06-pre-deployment/README.md)
+- [Kutatua Matatizo](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

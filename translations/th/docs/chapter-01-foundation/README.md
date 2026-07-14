@@ -1,103 +1,103 @@
-# Chapter 1: Foundation & Quick Start
+# บทที่ 1: พื้นฐาน & เริ่มต้นอย่างรวดเร็ว
 
-**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 30-45 minutes | **⭐ Complexity**: Beginner
+**📚 คอร์ส**: [AZD สำหรับผู้เริ่มต้น](../../README.md) | **⏱️ ระยะเวลา**: 30-45 นาที | **⭐ ความซับซ้อน**: ผู้เริ่มต้น
 
 ---
 
-## Overview
+## ภาพรวม
 
-บทนี้แนะนำพื้นฐานของ Azure Developer CLI (azd) คุณจะได้เรียนรู้แนวคิดหลัก, การติดตั้งเครื่องมือ และการปรับใช้แอปพลิเคชันแรกของคุณไปยัง Azure
+บทนี้จะแนะนำพื้นฐานของ Azure Developer CLI (azd) คุณจะได้เรียนรู้แนวคิดหลัก การติดตั้งเครื่องมือ และการปรับใช้แอปพลิเคชันแรกของคุณไปยัง Azure
 
-> ตรวจสอบกับ `azd 1.25.6` ในเดือนมิถุนายน 2026
+> ผ่านการตรวจสอบกับ `azd 1.27.1` ในเดือนกรกฎาคม 2026
 
-## Learning Objectives
+## วัตถุประสงค์การเรียนรู้
 
-เมื่อคุณทำบทนี้สำเร็จ คุณจะ:
-- เข้าใจว่า Azure Developer CLI คืออะไรและแตกต่างจาก Azure CLI อย่างไร
+หลังจากจบบทนี้ คุณจะสามารถ:
+- เข้าใจว่า Azure Developer CLI คืออะไร และแตกต่างจาก Azure CLI อย่างไร
 - ติดตั้งและกำหนดค่า AZD บนแพลตฟอร์มของคุณ
 - ปรับใช้แอปพลิเคชันแรกของคุณไปยัง Azure ด้วย `azd up`
-- ทำความสะอาดทรัพยากรด้วย `azd down`
+- ล้างทรัพยากรด้วย `azd down`
 
 ---
 
-## 📚 Lessons
+## 📚 บทเรียน
 
-| # | Lesson | Description | Time |
+| # | บทเรียน | คำอธิบาย | เวลา |
 |---|--------|-------------|------|
-| 1 | [AZD Basics](azd-basics.md) | แนวคิดหลัก, คำศัพท์, และโครงสร้างโปรเจกต์ | 15 min |
-| 2 | [Installation & Setup](installation.md) | คู่มือการติดตั้งเฉพาะแพลตฟอร์ม | 10 min |
-| 3 | [Your First Project](first-project.md) | ลงมือทำ: ปรับใช้เว็บแอปไปยัง Azure | 20 min |
-| 4 | [Bring Your Own App](bring-your-own-app.md) | เพิ่ม azd เข้าไปยังโปรเจกต์ที่คุณมีอยู่แล้ว | 15 min |
-| 5 | [Dev Containers & Codespaces](dev-containers.md) | สภาพแวดล้อม azd ที่ทำซ้ำได้ด้วย dev containers | 15 min |
+| 1 | [พื้นฐาน AZD](azd-basics.md) | แนวคิดหลัก คำศัพท์ และโครงสร้างโปรเจกต์ | 15 นาที |
+| 2 | [การติดตั้ง & การตั้งค่า](installation.md) | คู่มือการติดตั้งเฉพาะแพลตฟอร์ม | 10 นาที |
+| 3 | [โปรเจกต์แรกของคุณ](first-project.md) | ฝึกปฏิบัติ: ปรับใช้เว็บแอปไปยัง Azure | 20 นาที |
+| 4 | [นำแอปของคุณเองมาใช้](bring-your-own-app.md) | เพิ่ม azd ในโปรเจกต์ที่คุณมีอยู่แล้ว | 15 นาที |
+| 5 | [Dev Containers & Codespaces](dev-containers.md) | สร้างสภาพแวดล้อม azd ที่สามารถทำซ้ำได้ด้วย dev containers | 15 นาที |
 
 ---
 
-## ✅ Start Here: Validate Your Setup
+## ✅ เริ่มที่นี่: ตรวจสอบการตั้งค่าของคุณ
 
-ก่อนเริ่ม ให้ตรวจสอบว่าคอมพิวเตอร์ของคุณพร้อมสำหรับแม่แบบบทที่ 1 หรือไม่:
+ก่อนที่คุณจะเริ่ม โปรดยืนยันว่าเครื่องของคุณพร้อมสำหรับเทมเพลตบทที่ 1:
 
-**Windows:**  
+**Windows:**
 ```powershell
 .\validate-setup.ps1
 ```
-  
-**macOS / Linux:**  
+
+**macOS / Linux:**
 ```bash
 bash ./validate-setup.sh
 ```
-  
-หากสคริปต์แจ้งว่าเครื่องมือขาดหาย ให้แก้ไขก่อนแล้วจึงดำเนินการในบทนี้ต่อ
+
+หากสคริปต์รายงานว่าเครื่องมือบางอย่างขาดหาย ให้แก้ไขก่อนแล้วค่อยดำเนินการต่อในบทนี้
 
 ---
 
-## 🚀 Quick Start
+## 🚀 เริ่มต้นอย่างรวดเร็ว
 
 ```bash
 # ตรวจสอบการติดตั้ง
 azd version
 
 # ยืนยันตัวตนสำหรับ AZD
-# ตัวเลือก: az login หากคุณวางแผนที่จะรันคำสั่ง Azure CLI โดยตรง
+# ตัวเลือก: az login หากคุณวางแผนจะเรียกใช้คำสั่ง Azure CLI โดยตรง
 azd auth login
 
-# เปิดตัวแอปแรกของคุณ
+# ติดตั้งแอปแรกของคุณ
 azd init --template todo-nodejs-mongo
 azd up
 
-# ล้างข้อมูลเมื่อเสร็จสิ้น
+# ทำความสะอาดเมื่อทำเสร็จแล้ว
 azd down --force --purge
 ```
-  
+
 ---
 
-## ✅ Success Criteria
+## ✅ เกณฑ์ความสำเร็จ
 
-หลังจากทำบทนี้เสร็จ คุณควรจะสามารถ:
+หลังจากจบบทนี้ คุณควรจะสามารถ:
 
 ```bash
 azd version              # แสดงเวอร์ชันที่ติดตั้ง
 azd init --template todo-nodejs-mongo  # เริ่มต้นโครงการ
-azd up                   # จัดการปรับใช้ไปยัง Azure
+azd up                   # นำไปใช้กับ Azure
 azd show                 # แสดง URL ของแอปที่กำลังทำงาน
 azd down --force --purge # ทำความสะอาดทรัพยากร
 ```
-  
+
 ---
 
-## 🔗 Navigation
+## 🔗 นำทาง
 
-| Direction | Chapter |
+| ทิศทาง | บทที่ |
 |-----------|---------|
-| **Next** | [Chapter 2: AI-First Development](../chapter-02-ai-development/README.md) |
-| **Skip to** | [Chapter 3: Configuration](../chapter-03-configuration/README.md) |
+| **ถัดไป** | [บทที่ 2: การพัฒนาโดยใช้ AI เป็นหลัก](../chapter-02-ai-development/README.md) |
+| **ข้ามไปที่** | [บทที่ 3: การกำหนดค่า](../chapter-03-configuration/README.md) |
 
 ---
 
-## 📖 Related Resources
+## 📖 แหล่งข้อมูลที่เกี่ยวข้อง
 
-- [Command Cheat Sheet](../../resources/cheat-sheet.md)
-- [FAQ](../../resources/faq.md)
-- [Glossary](../../resources/glossary.md)
+- [ชีทคำสั่ง](../../resources/cheat-sheet.md)
+- [คำถามที่พบบ่อย](../../resources/faq.md)
+- [พจนานุกรมศัพท์](../../resources/glossary.md)
 
 ---
 

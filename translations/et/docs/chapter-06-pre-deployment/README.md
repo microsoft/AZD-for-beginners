@@ -1,45 +1,45 @@
-# Kapitel 6: Eeltööde Plaanimine ja Kinnitus
+# 6. peatükk: Eelkäivitamise planeerimine ja valideerimine
 
-**📚 Kursus**: [AZD Algajatele](../../README.md) | **⏱️ Kestus**: 1 tund | **⭐ Tase**: Kesktase
+**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 1 tund | **⭐ Tase**: Kesktase
 
 ---
 
 ## Ülevaade
 
-See peatükk käsitleb olulisi planeerimise ja kinnitamise samme enne rakenduse juurutamist. Õpi vältima kulukaid vigu õige mahutavuse planeerimise, SKU valiku ja eelkontrollide abil.
+Selles peatükis käsitletakse olulisi planeerimise ja valideerimise samme enne teie rakenduse juurutamist. Õppige vältima kulukaid vigu nõuetekohase suutlikkuse planeerimise, SKU valiku ja eelkontrollidega.
 
-> Kinnitatud `azd 1.25.6` versiooniga juunis 2026.
+> Valideeritud `azd 1.27.1` vastu juulis 2026.
 
 ## Õpieesmärgid
 
-Selle peatüki lõpetades:
-- Käivitad eelkontrollid enne juurutamist
-- Planeerid mahutavust ja hindad ressursivajadusi
-- Valid kulude optimeerimiseks sobivad SKU-d
-- Konfigureerid Application Insightsi jälgimiseks
-- Mõistad meeskonna koordineerimise mustreid
+Selle peatüki lõpetamise järel:
+- Teete eelkontrolle enne juurutamist
+- Planeerite suutlikkust ja hindate ressursinõudeid
+- Valite sobivad SKU-d kulude optimeerimiseks
+- Konfigureerite Application Insights'i jälgimiseks
+- Mõistate meeskonna koordineerimise mustreid
 
 ---
 
 ## 📚 Õppetunnid
 
 | # | Õppetund | Kirjeldus | Aeg |
-|---|----------|-----------|-----|
-| 1 | [Eelkontrollid](preflight-checks.md) | Konfiguratsiooni kinnitamine enne juurutamist | 15 min |
-| 2 | [Mahutavuse planeerimine](capacity-planning.md) | Ressursivajaduste hindamine | 20 min |
-| 3 | [SKU valik](sku-selection.md) | Sobivate hinnaklasside valimine | 15 min |
-| 4 | [Application Insights](application-insights.md) | Jälgimise seadistamine | 20 min |
-| 5 | [Koordineerimise mustrid](coordination-patterns.md) | Meeskonna juurutustöövood | 15 min |
+|---|--------|-------------|------|
+| 1 | [Eelkontrollid](preflight-checks.md) | Kinnitage konfiguratsioon enne juurutamist | 15 min |
+| 2 | [Suutlikkuse planeerimine](capacity-planning.md) | Hinnake ressursinõudeid | 20 min |
+| 3 | [SKU valik](sku-selection.md) | Valige sobivad hinnakategooriad | 15 min |
+| 4 | [Application Insights](application-insights.md) | Jälgimise konfigureerimine | 20 min |
+| 5 | [Koordineerimismustrid](coordination-patterns.md) | Meeskonna juurutuse töövood | 15 min |
 
 ---
 
-## 🚀 Kiire Start
+## 🚀 Kiire algus
 
 ```bash
-# Kontrolli tellimuse piire
+# Kontrolli tellimuse kvotasid
 az vm list-usage --location eastus --output table
 
-# Juhtseadistuse eelvaade (ressursse ei loodata)
+# Eelvaade juurutamisele (ressursse ei loodata)
 azd provision --preview
 
 # Kontrolli Bicep süntaksit
@@ -51,50 +51,50 @@ azd env get-values
 
 ---
 
-## ☑️ Eeltööde Kontrollnimekiri
+## ☑️ Eelkontrollide kontrollnimekiri
 
 ### Enne `azd provision`
 
-- [ ] Piirkonna kvotid kinnitatud
-- [ ] SKU-d sobivalt valitud
-- [ ] Kuluarvestus üle vaadatud
-- [ ] Nimekonventsioon järjepidev
-- [ ] Turve/RBAC seadistatud
+- [ ] Piirmäära kontrollitud regioonis
+- [ ] SKU-d asjakohaselt valitud
+- [ ] Kulude hinnang üle vaadatud
+- [ ] Nimekonventsioon ühtne
+- [ ] Turvalisus/RBAC konfigureeritud
 
 ### Enne `azd deploy`
 
 - [ ] Keskkonnamuutujad määratud
-- [ ] Saladused Key Vaults
+- [ ] Saladused Key Vault'is
 - [ ] Ühendusstringid kontrollitud
 - [ ] Tervisekontrollid konfigureeritud
 
 ---
 
-## 💰 SKU Valikujuhend
+## 💰 SKU valiku juhend
 
 | Koormus | Arendus | Tootmine |
-|---------|---------|----------|
-| Konteinerirakendused | Tarbimine | Pühendatud D4 |
-| Rakenduse teenus | B1/B2 | P1v3+ |
+|----------|-------------|------------|
+| Container Apps | Tarbimine | Pühendatud D4 |
+| App Service | B1/B2 | P1v3+ |
 | Microsoft Foundry mudelid | Standard | Standard + PTU |
-| AI Otsing | Algeline | Standard S2+ |
+| AI Search | Põhiline | Standard S2+ |
 
 ---
 
-## 🔗 Navigeerimine
+## 🔗 Navigatsioon
 
 | Suund | Peatükk |
-|-------|---------|
-| **Eelmine** | [5. peatükk: Mitmeagendi](../chapter-05-multi-agent/README.md) |
-| **Järgmine** | [7. peatükk: Tõrkeotsing](../chapter-07-troubleshooting/README.md) |
+|-----------|---------|
+| **Eelmine** | [5. peatükk: Mitme agendi kasutus](../chapter-05-multi-agent/README.md) |
+| **Järgmine** | [7. peatükk: Veaotsing](../chapter-07-troubleshooting/README.md) |
 
 ---
 
-## 📖 Seotud Ressursid
+## 📖 Seotud ressursid
 
-- [Konfiguratsiooni juhend](../chapter-03-configuration/configuration.md)
+- [Konfiguratsioonijuhend](../chapter-03-configuration/configuration.md)
 - [Juurutamisjuhend](../chapter-04-infrastructure/deployment-guide.md)
-- [Levinumad probleemid](../chapter-07-troubleshooting/common-issues.md)
+- [Tavalised probleemid](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

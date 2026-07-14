@@ -1,15 +1,15 @@
 # 使用 Azure Developer CLI 部署 AI 模型
 
 **章節導航：**
-- **📚 課程首頁**: [AZD 初學者](../../README.md)
-- **📖 目前章節**: 第 2 章 - AI 優先開發
+- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
+- **📖 目前章節**: 第二章 - AI優先開發
 - **⬅️ 上一章**: [Microsoft Foundry 整合](microsoft-foundry-integration.md)
 - **➡️ 下一章**: [AI 工作坊實驗室](ai-workshop-lab.md)
-- **🚀 下一章節**: [第 3 章：配置](../chapter-03-configuration/configuration.md)
+- **🚀 下一章節**: [第三章：配置](../chapter-03-configuration/configuration.md)
 
-本指南提供使用 AZD 範本部署 AI 模型的完整說明，涵蓋從模型選擇到生產部署模式的所有內容。
+本指南提供使用 AZD 範本部署 AI 模型的全面說明，涵蓋從模型選擇到生產部署模式的所有內容。
 
-> **驗證備註（2026-03-25）：** 本指南中的 AZD 工作流程已使用 `azd` `1.23.12` 版本驗證。對於超過預設服務部署時間的 AI 部署，目前 AZD 版本支持 `azd deploy --timeout <秒數>`。
+> **驗證說明 (2026-07-13)：** 本指南中的 AZD 工作流程已使用 `azd` 版本 `1.27.1` 進行檢查。對於部署時間超過預設服務部署時間窗口的 AI 部署，目前 AZD 版本支持 `azd deploy --timeout <秒數>`。
 
 ## 目錄
 
@@ -17,14 +17,14 @@
 - [AI 模型的 AZD 配置](#ai-模型的-azd-配置)
 - [部署模式](#部署模式)
 - [模型管理](#模型管理)
-- [生產考量](#生產考量)
-- [監控與可觀察性](#監控與可觀察性)
+- [生產環境考量](#生產環境考量)
+- [監控與可觀測性](#監控與可觀測性)
 
 ## 模型選擇策略
 
 ### Microsoft Foundry 模型
 
-選擇適合您使用案例的模型：
+根據您的使用案例選擇合適的模型：
 
 ```yaml
 # azure.yaml - Model configuration
@@ -56,9 +56,9 @@ services:
 
 | 模型類型 | 使用案例 | 推薦容量 | 成本考量 |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | 聊天、問答 | 10-50 TPM | 大多數工作負載的成本效益高 |
-| gpt-4.1 | 複雜推理 | 20-100 TPM | 成本較高，用於高級功能 |
-| text-embedding-3-large | 搜尋、RAG | 30-120 TPM | 用於語義搜尋和檢索的強大預設選擇 |
+| gpt-4.1-mini | 聊天、問答 | 10-50 TPM | 大多工作負載的成本效益選擇 |
+| gpt-4.1 | 複雜推理 | 20-100 TPM | 成本較高，用於高端功能 |
+| text-embedding-3-large | 搜索、RAG | 30-120 TPM | 用於語意搜尋與檢索的強力預設 |
 | Whisper | 語音轉文字 | 10-50 TPM | 音訊處理工作負載 |
 
 ## AI 模型的 AZD 配置
@@ -126,7 +126,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### 環境變數
 
-配置您的應用環境：
+配置您的應用程式環境：
 
 ```bash
 # .env 配置
@@ -151,7 +151,7 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-適合：
+適用於：
 - 開發與測試
 - 單一市場應用
 - 成本優化
@@ -169,14 +169,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-適合：
+適用於：
 - 全球應用
 - 高可用性需求
-- 負載分配
+- 負載分散
 
 ### 模式 3：混合部署
 
-結合 Microsoft Foundry 模型和其他 AI 服務：
+結合 Microsoft Foundry 模型與其他 AI 服務：
 
 ```bicep
 // Hybrid AI services
@@ -209,7 +209,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### 版本控制
 
-在 AZD 配置中追蹤模型版本：
+在您的 AZD 配置中追蹤模型版本：
 
 ```json
 {
@@ -229,7 +229,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### 模型更新
 
-利用 AZD 鉤子進行模型更新：
+使用 AZD 鉤子進行模型更新：
 
 ```bash
 #!/bin/bash
@@ -241,7 +241,7 @@ az cognitiveservices account list-models \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
 
-# 如果部署時間超過預設超時限制
+# 如果部署時間超過預設超時時間
 azd deploy --timeout 1800
 ```
 
@@ -269,7 +269,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## 生產考量
+## 生產環境考量
 
 ### 容量規劃
 
@@ -338,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### 成本優化
 
-實施成本控制：
+實施成本控管：
 
 ```bicep
 @description('Enable cost management alerts')
@@ -368,11 +368,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## 監控與可觀察性
+## 監控與可觀測性
 
 ### Application Insights 整合
 
-配置 AI 工作負載監控：
+為 AI 工作負載配置監控：
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -413,7 +413,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 追蹤 AI 專用指標：
 
 ```python
-# AI 模型的自訂遙測
+# 人工智能模型的自訂遙測
 import logging
 from applicationinsights import TelemetryClient
 
@@ -460,7 +460,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # 測試 OpenAI 連線
+        # 測試 OpenAI 連接
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -478,30 +478,30 @@ async def check_ai_models():
 
 ## 下一步
 
-1. **瀏覽 [Microsoft Foundry 整合指南](microsoft-foundry-integration.md)** 了解服務整合模式
-2. **完成 [AI 工作坊實驗室](ai-workshop-lab.md)** 以獲得實作經驗
-3. **實施 [生產 AI 實務](production-ai-practices.md)** 用於企業部署
-4. **探索 [AI 疑難排解指南](../chapter-07-troubleshooting/ai-troubleshooting.md)** 掌握常見問題
+1. **檢視 [Microsoft Foundry 整合指南](microsoft-foundry-integration.md)** 了解服務整合模式
+2. **完成 [AI 工作坊實驗室](ai-workshop-lab.md)** 獲取實作經驗
+3. **實施 [生產環境 AI 實踐](production-ai-practices.md)** 用於企業部署
+4. **探索 [AI 故障排除指南](../chapter-07-troubleshooting/ai-troubleshooting.md)** 處理常見問題
 
 ## 資源
 
 - [Microsoft Foundry 模型可用性](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Azure Developer CLI 文件](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Container Apps 擴展](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Container Apps 擴縮](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [AI 模型成本優化](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
 **章節導航：**
-- **📚 課程首頁**: [AZD 初學者](../../README.md)
-- **📖 目前章節**: 第 2 章 - AI 優先開發
+- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
+- **📖 目前章節**: 第二章 - AI優先開發
 - **⬅️ 上一章**: [Microsoft Foundry 整合](microsoft-foundry-integration.md)
 - **➡️ 下一章**: [AI 工作坊實驗室](ai-workshop-lab.md)
-- **🚀 下一章節**: [第 3 章：配置](../chapter-03-configuration/configuration.md)
+- **🚀 下一章節**: [第三章：配置](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責聲明**：  
-本文件係使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們力求準確，但請注意自動翻譯可能包含錯誤或不準確之處。原始語言文件應視為權威來源。對於關鍵資訊，建議採用專業人工翻譯。我們不對使用本翻譯所引致之任何誤解或誤譯負責。
+**免責聲明**：
+本文件使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們力求準確，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要資訊，建議尋求專業人工翻譯。我們不對因使用本翻譯而引起的任何誤解或曲解承擔責任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

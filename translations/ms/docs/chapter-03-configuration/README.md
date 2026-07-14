@@ -1,18 +1,18 @@
 # Bab 3: Konfigurasi & Pengesahan
 
-**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 45-60 minit | **⭐ Kerumitan**: Sederhana
+**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 45-60 minit | **⭐ Kerumitan**: Pertengahan
 
 ---
 
 ## Gambaran Keseluruhan
 
-Bab ini merangkumi konfigurasi persekitaran, corak pengesahan, dan amalan terbaik keselamatan untuk pelaksanaan Azure Developer CLI.
+Bab ini merangkumi konfigurasi persekitaran, corak pengesahan, dan amalan terbaik keselamatan untuk pengeluaran Azure Developer CLI.
 
-> Disahkan dengan `azd 1.25.6` pada Jun 2026.
+> Disahkan dengan `azd 1.27.1` pada Julai 2026.
 
 ## Objektif Pembelajaran
 
-Dengan menamatkan bab ini, anda akan:
+Dengan melengkapkan bab ini, anda akan:
 - Menguasai hierarki konfigurasi AZD
 - Menguruskan pelbagai persekitaran (dev, staging, prod)
 - Melaksanakan pengesahan selamat dengan identiti terurus
@@ -22,14 +22,14 @@ Dengan menamatkan bab ini, anda akan:
 
 ## 📚 Pelajaran
 
-| # | Pelajaran | Penerangan | Masa |
-|---|-----------|------------|------|
-| 1 | [Panduan Konfigurasi](configuration.md) | Penetapan dan pengurusan persekitaran | 30 min |
+| # | Pelajaran | Perihalan | Masa |
+|---|----------|-----------|------|
+| 1 | [Panduan Konfigurasi](configuration.md) | Persediaan dan pengurusan persekitaran | 30 min |
 | 2 | [Pengesahan & Keselamatan](authsecurity.md) | Corak identiti terurus dan RBAC | 30 min |
 
 ---
 
-## 🚀 Mula Cepat
+## 🚀 Mula Pantas
 
 ```bash
 # Cipta pelbagai persekitaran
@@ -52,19 +52,19 @@ azd env get-values
 
 ## 🔧 Hierarki Konfigurasi
 
-AZD melaksanakan tetapan mengikut susunan ini (yang kemudian menggantikan yang sebelumnya):
+AZD menggunakan tetapan mengikut turutan ini (yang kemudian menimpa yang terdahulu):
 
 1. **Nilai lalai** (terbina dalam templat)
 2. **azure.yaml** (konfigurasi projek)
-3. **Pembolehubah persekitaran** (`azd env set`)
-4. **Bendera baris perintah** (`--location eastus`)
+3. **Pemboleh ubah persekitaran** (`azd env set`)
+4. **Bendera baris arahan** (`--location eastus`)
 
 ---
 
 ## 🔐 Amalan Terbaik Keselamatan
 
 ```bash
-# Gunakan identiti yang diurus (disyorkan)
+# Gunakan identiti terurus (disyorkan)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
 # Semak status pengesahan AZD
@@ -73,7 +73,7 @@ azd auth status
 # Pilihan: sahkan konteks Azure CLI jika anda merancang untuk menjalankan arahan az
 az account show
 
-# Autentikasi semula jika perlu
+# Sahkan semula jika perlu
 azd auth login
 
 # Pilihan: segarkan pengesahan Azure CLI untuk arahan az
@@ -85,15 +85,15 @@ az login
 ## 🔗 Navigasi
 
 | Arah | Bab |
-|-------|-----|
-| **Sebelum** | [Bab 2: Pembangunan AI](../chapter-02-ai-development/README.md) |
+|-------|-------|
+| **Sebelumnya** | [Bab 2: Pembangunan AI](../chapter-02-ai-development/README.md) |
 | **Seterusnya** | [Bab 4: Infrastruktur](../chapter-04-infrastructure/README.md) |
 
 ---
 
 ## 📖 Sumber Berkaitan
 
-- [Pemeriksaan Pra-Pelaksanaan](../chapter-06-pre-deployment/README.md)
+- [Pemeriksaan Pra-Pengeluaran](../chapter-06-pre-deployment/README.md)
 - [Penyelesaian Masalah](../chapter-07-troubleshooting/common-issues.md)
 
 ---

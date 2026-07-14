@@ -1,22 +1,22 @@
 # Kapitel 5: Multi-Agent KI-Lösungen
 
-**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Dauer**: 2-3 Stunden | **⭐ Komplexität**: Fortgeschritten
+**📚 Kurs**: [AZD für Anfänger](../../README.md) | **⏱️ Dauer**: 2-3 Stunden | **⭐ Komplexität**: Fortgeschritten
 
 ---
 
 ## Übersicht
 
-Dieses Kapitel behandelt fortgeschrittene Multi-Agent-Architektur‑Muster, Agentenorchestrierung und produktionsreife KI‑Bereitstellungen für komplexe Szenarien.
+Dieses Kapitel behandelt fortgeschrittene Multi-Agent-Architekturmuster, Agenten-Orchestrierung und produktionsreife KI-Bereitstellungen für komplexe Szenarien.
 
-> Geprüft mit `azd 1.25.6` im Juni 2026.
+> Validiert mit `azd 1.27.1` im Juli 2026.
 
 ## Lernziele
 
-Nach Abschluss dieses Kapitels werden Sie:
-- Multi-Agent-Architektur‑Muster verstehen
-- koordinierte KI‑Agentensysteme bereitstellen
-- Kommunikation zwischen Agenten implementieren
-- produktionsreife Multi-Agenten‑Lösungen erstellen
+Nach Abschluss dieses Kapitels wirst du:
+- Multi-Agent-Architekturmuster verstehen
+- koordinierte KI-Agenten-Systeme bereitstellen
+- Agent-zu-Agent-Kommunikation implementieren
+- produktionsreife Multi-Agent-Lösungen bauen
 
 ---
 
@@ -24,58 +24,58 @@ Nach Abschluss dieses Kapitels werden Sie:
 
 | # | Lektion | Beschreibung | Zeit |
 |---|--------|-------------|------|
-| 1 | [Multi-Agent Basics](multi-agent-basics.md) | Praxis: eine funktionierende Multi-Agenten-Anwendung mit `azd up` bereitstellen | 45 min |
-| 2 | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) | Agenten-Orchestrierungsstrategien (setzt sich in Kapitel 6 fort) | 30 min |
-| 3 | [ARM Template Deployment](../../examples/retail-multiagent-arm-template/README.md) | Ein-Klick-Bereitstellungsbeispiel | 30 min |
+| 1 | [Multi-Agent Grundlagen](multi-agent-basics.md) | Praktisch: Eine funktionierende Multi-Agent-App mit `azd up` bereitstellen | 45 Min |
+| 2 | [Koordinationsmuster](../chapter-06-pre-deployment/coordination-patterns.md) | Agenten-Orchestrierungsstrategien (geht weiter in Kapitel 6) | 30 Min |
+| 3 | [ARM Template Deployment](../../examples/retail-multiagent-arm-template/README.md) | Beispiel für One-Click-Bereitstellung | 30 Min |
 
-> **Beginnen Sie mit Lektion 1.** Sie ist die einzige vollständig praktische, bereitstellbare Lektion in diesem Kapitel. Lektion 2 befindet sich in Kapitel 6 (sie wird mit der Pre-Deployment-Planung geteilt), und die [Retail Multi-Agent-Lösung](../../examples/retail-scenario.md) ist ein Architektur-Blueprint — eine Designreferenz, keine Ein-Kommando-Vorlage.
+> **Beginne mit Lektion 1.** Sie ist die einzige vollständig praktische, bereitstellbare Lektion in diesem Kapitel. Lektion 2 befindet sich in Kapitel 6 (shared mit der Vorbereitungsplanung), und die [Retail Multi-Agent Solution](../../examples/retail-scenario.md) ist eine Architekturvorlage – ein Designreferenz, kein One-Command Template.
 
 ---
 
 ## 🚀 Schnellstart
 
 ```bash
-# Option 1: Aus einer Vorlage bereitstellen
+# Option 1: Bereitstellung aus einer Vorlage
 azd init --template agent-openai-python-prompty
 azd up
 
-# Option 2: Aus einem Agentenmanifest bereitstellen (erfordert die azure.ai.agents-Erweiterung)
+# Option 2: Bereitstellung aus einem Agentenmanifest (erfordert azure.ai.agents Erweiterung)
 azd extension install azure.ai.agents
 azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **Welche Vorgehensweise?** Verwenden Sie `azd init --template`, um von einem funktionierenden Beispiel zu starten. Verwenden Sie `azd ai agent init`, wenn Sie ein eigenes Agenten‑Manifest haben. Siehe die [AZD AI CLI-Referenz](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) für vollständige Details.
+> **Welcher Ansatz?** Benutze `azd init --template`, um mit einem funktionierenden Beispiel zu starten. Nutze `azd ai agent init`, wenn du ein eigenes Agenten-Manifest hast. Siehe die [AZD AI CLI Referenz](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) für volle Details.
 
 ---
 
-## 🤖 Multi-Agent-Architektur
+## 🤖 Multi-Agent Architektur
 
 ```mermaid
 graph TD
-    Orchestrator[Orchestrator-Agent<br/>Leitet Anfragen, verwaltet den Arbeitsablauf] --> Customer[Kunden-Agent<br/>Nutzeranfragen, Präferenzen]
-    Orchestrator --> Inventory[Inventar-Agent<br/>Lagerbestände, Bestellungen]
+    Orchestrator[Orchestrator-Agent<br/>Leitet Anfragen, verwaltet Arbeitsablauf] --> Customer[Kunden-Agent<br/>Benutzeranfragen, Präferenzen]
+    Orchestrator --> Inventory[Bestands-Agent<br/>Lagermengen, Bestellungen]
 ```
 
 ---
 
-## 🎯 Vorgestellte Lösung: Retail Multi-Agent-Lösung
+## 🎯 Vorgestellte Lösung: Retail Multi-Agent
 
-Die [Retail Multi-Agent-Lösung](../../examples/retail-scenario.md) zeigt:
+Die [Retail Multi-Agent Solution](../../examples/retail-scenario.md) demonstriert:
 
-- **Kunden-Agent**: Verarbeitet Benutzerinteraktionen und -präferenzen
-- **Inventar-Agent**: Verwaltet Lagerbestände und Auftragsabwicklung
-- **Orchestrator**: Koordiniert die Agenten untereinander
+- **Kundenagent**: Verarbeitet Benutzerinteraktionen und Präferenzen
+- **Bestandsagent**: Verwaltet Lagerbestand und Bestellabwicklung
+- **Orchestrator**: Koordiniert zwischen Agenten
 - **Gemeinsamer Speicher**: Kontextverwaltung über Agenten hinweg
 
-### Verwendete Dienste
+### Eingesetzte Dienste
 
 | Dienst | Zweck |
 |---------|---------|
 | Microsoft Foundry Models | Sprachverständnis |
 | Azure AI Search | Produktkatalog |
-| Cosmos DB | Agentenstatus und -speicher |
-| Container Apps | Agenten-Hosting |
+| Cosmos DB | Agentenstatus und Speicher |
+| Container-Apps | Agenten-Hosting |
 | Application Insights | Überwachung |
 
 ---
@@ -85,13 +85,13 @@ Die [Retail Multi-Agent-Lösung](../../examples/retail-scenario.md) zeigt:
 | Richtung | Kapitel |
 |-----------|---------|
 | **Vorheriges** | [Kapitel 4: Infrastruktur](../chapter-04-infrastructure/README.md) |
-| **Nächstes** | [Kapitel 6: Pre-Deployment](../chapter-06-pre-deployment/README.md) |
+| **Nächstes** | [Kapitel 6: Vorbereitungen](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 Verwandte Ressourcen
 
-- [KI-Agenten-Leitfaden](../chapter-02-ai-development/agents.md)
+- [KI-Agenten Leitfaden](../chapter-02-ai-development/agents.md)
 - [Produktions-KI-Praktiken](../chapter-08-production/production-ai-practices.md)
 - [KI-Fehlerbehebung](../chapter-07-troubleshooting/ai-troubleshooting.md)
 

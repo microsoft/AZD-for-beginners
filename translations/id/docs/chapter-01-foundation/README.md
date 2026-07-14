@@ -1,21 +1,21 @@
-# Bab 1: Dasar & Mulai Cepat
+# Bab 1: Dasar & Memulai Cepat
 
 **📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Durasi**: 30-45 menit | **⭐ Kompleksitas**: Pemula
 
 ---
 
-## Gambaran Umum
+## Ikhtisar
 
-Bab ini memperkenalkan dasar-dasar Azure Developer CLI (azd). Anda akan mempelajari konsep inti, menginstal alat, dan menyebarkan aplikasi pertama Anda ke Azure.
+Bab ini memperkenalkan dasar-dasar Azure Developer CLI (azd). Anda akan mempelajari konsep inti, menginstal alat, dan menerapkan aplikasi pertama Anda ke Azure.
 
-> Divalidasi terhadap `azd 1.25.6` pada Juni 2026.
+> Diverifikasi dengan `azd 1.27.1` pada Juli 2026.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan bab ini, Anda akan:
-- Memahami apa itu Azure Developer CLI dan bagaimana bedanya dengan Azure CLI
+- Memahami apa itu Azure Developer CLI dan bagaimana perbedaannya dengan Azure CLI
 - Menginstal dan mengonfigurasi AZD di platform Anda
-- Menyebarkan aplikasi pertama Anda ke Azure dengan `azd up`
+- Menerapkan aplikasi pertama Anda ke Azure dengan `azd up`
 - Membersihkan sumber daya dengan `azd down`
 
 ---
@@ -23,12 +23,12 @@ Dengan menyelesaikan bab ini, Anda akan:
 ## 📚 Pelajaran
 
 | # | Pelajaran | Deskripsi | Waktu |
-|---|--------|-------------|------|
-| 1 | [Dasar-dasar AZD](azd-basics.md) | Konsep inti, terminologi, dan struktur proyek | 15 min |
-| 2 | [Instalasi & Pengaturan](installation.md) | Panduan instalasi khusus platform | 10 min |
-| 3 | [Proyek Pertama Anda](first-project.md) | Praktik: Menyebarkan aplikasi web ke Azure | 20 min |
-| 4 | [Bawa Aplikasi Anda](bring-your-own-app.md) | Tambahkan azd ke proyek yang sudah ada | 15 min |
-| 5 | [Dev Containers & Codespaces](dev-containers.md) | Lingkungan azd yang dapat direproduksi dengan dev containers | 15 min |
+|---|----------|-----------|-------|
+| 1 | [Dasar AZD](azd-basics.md) | Konsep inti, terminologi, dan struktur proyek | 15 mnt |
+| 2 | [Instalasi & Pengaturan](installation.md) | Panduan instalasi spesifik platform | 10 mnt |
+| 3 | [Proyek Pertama Anda](first-project.md) | Praktik langsung: Terapkan aplikasi web ke Azure | 20 mnt |
+| 4 | [Bawa Aplikasi Anda Sendiri](bring-your-own-app.md) | Tambahkan azd ke proyek yang sudah ada | 15 mnt |
+| 5 | [Dev Containers & Codespaces](dev-containers.md) | Lingkungan azd yang dapat direproduksi dengan dev containers | 15 mnt |
 
 ---
 
@@ -46,17 +46,17 @@ Sebelum memulai, pastikan mesin lokal Anda siap untuk template Bab 1:
 bash ./validate-setup.sh
 ```
 
-Jika skrip melaporkan alat yang hilang, perbaiki terlebih dahulu lalu lanjutkan ke bab ini.
+Jika skrip melaporkan alat yang hilang, perbaiki terlebih dahulu lalu lanjutkan dengan bab ini.
 
 ---
 
-## 🚀 Mulai Cepat
+## 🚀 Memulai Cepat
 
 ```bash
 # Periksa instalasi
 azd version
 
-# Autentikasi untuk AZD
+# Otentikasi untuk AZD
 # Opsional: az login jika Anda berencana menjalankan perintah Azure CLI secara langsung
 azd auth login
 
@@ -72,13 +72,13 @@ azd down --force --purge
 
 ## ✅ Kriteria Keberhasilan
 
-Setelah menyelesaikan bab ini, Anda seharusnya dapat:
+Setelah menyelesaikan bab ini, Anda harus dapat:
 
 ```bash
 azd version              # Menampilkan versi yang terpasang
 azd init --template todo-nodejs-mongo  # Menginisialisasi proyek
-azd up                   # Menerapkan ke Azure
-azd show                 # Menampilkan URL aplikasi yang sedang berjalan
+azd up                   # Mendeploy ke Azure
+azd show                 # Menampilkan URL aplikasi yang berjalan
 azd down --force --purge # Membersihkan sumber daya
 ```
 
@@ -87,15 +87,15 @@ azd down --force --purge # Membersihkan sumber daya
 ## 🔗 Navigasi
 
 | Arah | Bab |
-|-----------|---------|
-| **Berikutnya** | [Bab 2: Pengembangan Berorientasi AI](../chapter-02-ai-development/README.md) |
+|-------|-----|
+| **Berikutnya** | [Bab 2: Pengembangan AI-Pertama](../chapter-02-ai-development/README.md) |
 | **Lewati ke** | [Bab 3: Konfigurasi](../chapter-03-configuration/README.md) |
 
 ---
 
 ## 📖 Sumber Terkait
 
-- [Ringkasan Perintah](../../resources/cheat-sheet.md)
+- [Lembar Cheat Perintah](../../resources/cheat-sheet.md)
 - [FAQ](../../resources/faq.md)
 - [Glosarium](../../resources/glossary.md)
 

@@ -6,46 +6,46 @@
 
 ## Áttekintés
 
-Ez a fejezet összetett többügynökös architektúra mintákat, ügynökök koordinálását és termelésre kész MI telepítéseket ismertet bonyolult forgatókönyvek esetén.
+Ez a fejezet haladó többügynökös architektúra mintákat, ügynökök összehangolását és termelésre kész MI telepítéseket fed le összetett forgatókönyvekhez.
 
-> Tesztelve az `azd 1.25.6` verzióval 2026 júniusában.
+> Ellenőrizve `azd 1.27.1` verzióval 2026 júliusában.
 
 ## Tanulási célok
 
-A fejezet elvégzése után képes leszel:
-- Megérteni a többügynökös architektúra mintákat
-- Koordinált MI ügynök rendszerek telepítésére
-- Ügynökök közötti kommunikáció megvalósítására
-- Termelésre kész többügynökös megoldások építésére
+Ennek a fejezetnek a teljesítésével:
+- Megérted a többügynökös architektúra mintákat
+- Telepítesz koordinált MI ügynök rendszereket
+- Megvalósítod az ügynök-ügynök közti kommunikációt
+- Felépítesz termelésre kész többügynökös megoldásokat
 
 ---
 
-## 📚 Leckék
+## 📚 Tananyagok
 
 | # | Lecke | Leírás | Idő |
-|---|--------|-------------|------|
-| 1 | [Többügynökös alapok](multi-agent-basics.md) | Gyakorlati: működő többügynökös alkalmazás telepítése `azd up` segítségével | 45 perc |
-| 2 | [Koordinációs minták](../chapter-06-pre-deployment/coordination-patterns.md) | Ügynök koordinációs stratégiák (folytatódik a 6. fejezetben) | 30 perc |
+|---|--------|---------|-----|
+| 1 | [Többügynökös alapok](multi-agent-basics.md) | Gyakorlati: működő többügynökös alkalmazás telepítése `azd up` paranccsal | 45 perc |
+| 2 | [Összehangolási minták](../chapter-06-pre-deployment/coordination-patterns.md) | Ügynökök összehangolási stratégiái (folytatódik a 6. fejezetben) | 30 perc |
 | 3 | [ARM sablon telepítés](../../examples/retail-multiagent-arm-template/README.md) | Egykattintásos telepítési példa | 30 perc |
 
-> **Kezdd az 1. leckével!** Ez az egyetlen teljesen gyakorlati, telepíthető lecke ebben a fejezetben. A 2. lecke a 6. fejezetben van (előtelepítési tervezéssel együtt), a [Kiskereskedelmi Többügynökös Megoldás](../../examples/retail-scenario.md) pedig egy architektúra tervrajz – tervezési referencia, nem egy parancssoros sablon.
+> **Kezdd az 1. leckével.** Ez az egyetlen teljesen gyakorlati, telepíthető lecke ebben a fejezetben. A 2. lecke a 6. fejezetben található (közös a telepítés előtti tervezéssel), és a [Kiskereskedelmi Többügynökös Megoldás](../../examples/retail-scenario.md) egy architektúra tervrajz — egy tervezési referencia, nem egy parancsra kész sablon.
 
 ---
 
-## 🚀 Gyors indítás
+## 🚀 Gyorskezdés
 
 ```bash
-# 1. lehetőség: Kiadás sablonból
+# 1. lehetőség: Telepítés sablonból
 azd init --template agent-openai-python-prompty
 azd up
 
-# 2. lehetőség: Kiadás ügynök manifesztből (az azure.ai.agents bővítményt igényli)
+# 2. lehetőség: Telepítés agent manifestből (az azure.ai.agents kiterjesztés szükséges)
 azd extension install azure.ai.agents
 azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **Melyik megközelítést válasszuk?** Használd az `azd init --template` parancsot egy működő mintából való induláshoz. Az `azd ai agent init` parancsot akkor használd, ha saját ügynök-nyilatkozatod van. Lásd az [AZD MI CLI referenciát](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) a teljes részletekért.
+> **Melyik megközelítést?** Használd az `azd init --template` parancsot egy működő mintából való induláshoz. Használd az `azd ai agent init` parancsot, ha saját ügynök manifeszted van. Lásd a [AZD MI CLI hivatkozást](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) a teljes részletekért.
 
 ---
 
@@ -53,29 +53,29 @@ azd up
 
 ```mermaid
 graph TD
-    Orchestrator[Orchestrátor Ügynök<br/>Kérelmek irányítása, munkafolyamat kezelése] --> Customer[Vevő Ügynök<br/>Felhasználói lekérdezések, preferenciák]
-    Orchestrator --> Inventory[Készlet Ügynök<br/>Készletszintek, megrendelések]
+    Orchestrator[Orchestrátor Ügynök<br/>Kérések irányítása, munkafolyamat kezelése] --> Customer[Ügyfél Ügynök<br/>Felhasználói lekérdezések, preferenciák]
+    Orchestrator --> Inventory[Készlet Ügynök<br/>Készletszintek, rendelések]
 ```
 
 ---
 
-## 🎯 Kiemelt megoldás: Kiskereskedelmi többügynökös rendszer
+## 🎯 Kiemelt megoldás: Kiskereskedelmi Többügynökös
 
 A [Kiskereskedelmi Többügynökös Megoldás](../../examples/retail-scenario.md) bemutatja:
 
 - **Ügyfélügynök**: Kezeli a felhasználói interakciókat és preferenciákat
-- **Készletügynök**: Kezeli a készletet és a megrendeléseket
-- **Koordinátor**: Ügynökök közötti összehangolás
-- **Megosztott memória**: Ügynökök közötti kontextuskezelés
+- **Leltár Ügynök**: Kezeli a készletet és megrendelés feldolgozást
+- **Összehangoló**: Koordinál az ügynökök között
+- **Megosztott memória**: Ügynökök közti kontextus kezelés
 
 ### Használt szolgáltatások
 
 | Szolgáltatás | Cél |
 |---------|---------|
-| Microsoft Foundry Models | Nyelvi megértés |
+| Microsoft Foundry Modellek | Nyelvi megértés |
 | Azure MI Keresés | Termékkatalógus |
 | Cosmos DB | Ügynök állapot és memória |
-| Konténer alkalmazások | Ügynök hosztolás |
+| Container Apps | Ügynök hosztolás |
 | Application Insights | Monitorozás |
 
 ---
@@ -85,14 +85,14 @@ A [Kiskereskedelmi Többügynökös Megoldás](../../examples/retail-scenario.md
 | Irány | Fejezet |
 |-----------|---------|
 | **Előző** | [4. fejezet: Infrastruktúra](../chapter-04-infrastructure/README.md) |
-| **Következő** | [6. fejezet: Előtelepítés](../chapter-06-pre-deployment/README.md) |
+| **Következő** | [6. fejezet: Telepítés előtti](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 Kapcsolódó források
 
-- [MI Ügynökök Útmutató](../chapter-02-ai-development/agents.md)
-- [Termelésre szánt MI gyakorlatok](../chapter-08-production/production-ai-practices.md)
+- [MI Ügynökök útmutató](../chapter-02-ai-development/agents.md)
+- [Termelési MI gyakorlatok](../chapter-08-production/production-ai-practices.md)
 - [MI hibakeresés](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---

@@ -1,56 +1,56 @@
 # Dev Containers & GitHub Codespaces for azd
 
-**Chapter Navigation:**
-- **📚 Kursoversikt**: [AZD For Beginners](../../README.md)
-- **📖 Gjeldende kapittel**: Kapittel 1 - Grunnlag og Rask start
-- **⬅️ Forrige**: [Bruk din egen app](bring-your-own-app.md)
-- **🚀 Neste kapittel**: [Kapittel 2: AI-fokusert utvikling](../chapter-02-ai-development/README.md)
+**Kapittelnavigasjon:**
+- **📚 Kurs Hjem**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende Kapittel**: Kapittel 1 - Grunnlag & Rask Start
+- **⬅️ Forrige**: [Bring Your Own App](bring-your-own-app.md)
+- **🚀 Neste Kapittel**: [Kapittel 2: AI-Først Utvikling](../chapter-02-ai-development/README.md)
 
-> Validert mot `azd 1.25.6` i juni 2026.
+> Validert mot `azd 1.27.1` i juli 2026.
 
-## Innledning
+## Introduksjon
 
-Å installere azd, riktig kjøretidsmiljø for språk, Docker og Azure CLI på hver maskin er en pliktoppgave—og det er den viktigste grunnen til at en veiledning som "fungerer på min maskin" feiler for noen andre. En **dev container** løser dette ved å beskrive hele verktøykjeden i en fil. Hvem som helst som åpner prosjektet i VS Code eller GitHub Codespaces får nøyaktig samme miljø, med azd allerede installert. Denne leksjonen viser deg hvordan du legger til en.
+Å installere azd, riktig språk-runtime, Docker og Azure CLI på hver maskin er en krevende oppgave – og det er hovedårsaken til at en veiledning som «fungerer på min maskin» feiler for noen andre. En **dev container** løser dette ved å beskrive hele verktøykjeden din i en fil. Alle som åpner prosjektet i VS Code eller GitHub Codespaces får nøyaktig samme miljø, med azd allerede installert. Denne leksjonen viser deg hvordan du legger til en.
 
 ## Læringsmål
 
-By the end of this lesson, you will:
+Innen slutten av denne leksjonen vil du:
 - Forstå hva en dev container er og hvorfor det hjelper med azd
-- Legg til en minimal `.devcontainer/devcontainer.json` i et prosjekt
-- Inkluder azd, Azure CLI og Docker via Dev Container *features*
+- Legge til en minimal `.devcontainer/devcontainer.json` til et prosjekt
+- Inkludere azd, Azure CLI og Docker via Dev Container *features*
 - Åpne prosjektet i GitHub Codespaces eller VS Code
 
 ## Læringsutbytte
 
-After completing this lesson, you will be able to:
-- Skrive en `devcontainer.json` for et azd-prosjekt
-- Legg til azd og Azure-verktøy uten manuelle installasjoner
-- Kjør `azd up` fra innsiden av en container eller Codespace
+Etter å ha fullført denne leksjonen vil du kunne:
+- Lage en `devcontainer.json` for et azd-prosjekt
+- Legge til azd og Azure-verktøy uten manuelle installasjoner
+- Kjøre `azd up` fra innsiden av en container eller Codespace
 
 ---
 
-## Hva er en dev container?
+## Hva er en Dev Container?
 
-En dev container er et Docker-basert utviklingsmiljø definert av en `.devcontainer/devcontainer.json`-fil i repositoryet ditt. Når du åpner prosjektet:
+En dev container er et Docker-basert utviklingsmiljø definert av en `.devcontainer/devcontainer.json` fil i depotet ditt. Når du åpner prosjektet:
 
-- **VS Code** (med Dev Containers-utvidelsen) bygger containeren og kobler seg til den.
-- **GitHub Codespaces** bygger den samme containeren i skyen og gir deg en nettleserbasert editor.
+- **VS Code** (med Dev Containers-utvidelsen) bygger containeren og kobler til den.
+- **GitHub Codespaces** bygger samme container i skyen og gir deg en nettleserbasert editor.
 
-Uansett får alle bidragsytere identiske verktøy—ingen "har du installert azd?"-feilsøking.
+Uansett får hver bidragsyter identiske verktøy – ingen «har du installert azd?» feilsøking.
 
 ```mermaid
 graph LR
-    Repo[Ditt repo<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Utviklercontainere]
+    Repo[Ditt Repo<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Utviklingscontainere]
     Repo --> Codespaces[GitHub<br/>Codespaces]
-    VSCode --> Env[Identisk miljø:<br/>azd + az + Docker]
+    VSCode --> Env[Identical environment:<br/>azd + az + Docker]
     Codespaces --> Env
 ```
 
 ---
 
-## Trinn 1: Opprett devcontainer-filen
+## Steg 1: Lag devcontainer-filen
 
-Opprett `.devcontainer/devcontainer.json` i roten av prosjektet ditt:
+Lag `.devcontainer/devcontainer.json` i roten av prosjektet ditt:
 
 ```json
 {
@@ -77,21 +77,21 @@ Opprett `.devcontainer/devcontainer.json` i roten av prosjektet ditt:
 
 Hva hver del gjør:
 
-| Key | Purpose |
+| Nøkkel | Formål |
 |-----|---------|
-| `image` | Grunnleggende OS for containeren |
-| `features` | Forhåndsbygde installatører—her: Azure CLI, **azd**, Docker og Node.js |
-| `customizations.vscode.extensions` | Installerer automatisk azd- og Bicep-utvidelsene for VS Code |
+| `image` | Basissystemet for containeren |
+| `features` | Ferdigbygde installatører – her: Azure CLI, **azd**, Docker og Node.js |
+| `customizations.vscode.extensions` | Installerer automatisk azd og Bicep-utvidelsene for VS Code |
 | `forwardPorts` | Eksponerer appens port til nettleseren din |
-| `postCreateCommand` | Kjører en gang etter at containeren er bygget (her: en kontrollsjekk) |
+| `postCreateCommand` | Kjøres én gang etter at containeren er bygd (her, en enkel sjekk) |
 
-> The `ghcr.io/azure/azure-dev/azd:latest` feature is the official way to get azd in a container. Pin a specific version (for example `azd:1.25.6`) if you need reproducibility.
+> `ghcr.io/azure/azure-dev/azd:latest` feature er den offisielle måten å få azd i en container. Fest en spesifikk versjon (for eksempel `azd:1.27.1`) om du trenger reproduserbarhet.
 
 ---
 
-## Trinn 2: Tilpass funksjonen til appens språk
+## Steg 2: Tilpass feature til språk for appen din
 
-Bytt ut `node`-featureen med det appen din bruker:
+Bytt ut `node`-feature med det som passer til appen din:
 
 ```jsonc
 // Python project
@@ -107,34 +107,34 @@ Bytt ut `node`-featureen med det appen din bruker:
 "ghcr.io/devcontainers/features/go:1": {}
 ```
 
-La `docker-in-docker` være med hvis din `host` er `containerapp`, `aks` eller noe som bygger et containerbilde—azd trenger Docker for å bygge og pushe bilder.
+Behold `docker-in-docker` hvis `host` er `containerapp`, `aks` eller noe som bygger et containerbilde — azd trenger Docker for å bygge og pushe bilder.
 
 ---
 
-## Trinn 3: Åpne den
+## Steg 3: Åpne det
 
 **I VS Code:**
-1. Installer **Dev Containers**-utvidelsen.
+1. Installer **Dev Containers** utvidelsen.
 2. Åpne prosjektmappen.
 3. Klikk **Reopen in Container** når du blir bedt om det (eller kjør *Dev Containers: Reopen in Container*).
 
 **I GitHub Codespaces:**
 1. Push repoet til GitHub.
 2. Klikk **Code → Codespaces → Create codespace on main**.
-3. Vent på at containeren bygges—azd er klar i terminalen.
+3. Vent på at containeren bygges – azd er klart i terminalen.
 
 ---
 
-## Trinn 4: Distribuer fra innsiden av containeren
+## Steg 4: Deploy fra innsiden av containeren
 
-Containeren har azd forhåndsinstallert, så normal arbeidsflyt fungerer rett ut av boksen:
+Containeren har azd ferdig installert, så normal arbeidsflyt fungerer:
 
 ```bash
 azd auth login --use-device-code   # enhetskode er praktisk inne i Codespaces
 azd up
 ```
 
-> **Hvorfor `--use-device-code`?** I en fjern container eller Codespace finnes det ingen lokal nettleser å omdirigere til, så device-code-pålogging er den pålitelige metoden. Du limer inn en kode i en nettleserfane for å fullføre påloggingen.
+> **Hvorfor `--use-device-code`?** I en fjerncontainer eller Codespace finnes det ikke en lokal nettleser å omdirigere til, så device-code login er den pålitelige metoden. Du limer inn en kode i en nettleserfane for å fullføre pålogging.
 
 ---
 
@@ -142,36 +142,36 @@ azd up
 
 | Fallgruve | Løsning |
 |---------|-----|
-| `azd up` kan ikke bygge et image | Legg til `docker-in-docker`-featureen |
-| Nettleserinnlogging henger i Codespaces | Bruk `azd auth login --use-device-code` |
-| Verktøy varierer mellom teammedlemmer | Lås feature-versjoner (f.eks. `azd:1.25.6`) |
-| Appen er ikke tilgjengelig i nettleseren | Legg til porten i `forwardPorts` |
+| `azd up` kan ikke bygge et bilde | Legg til `docker-in-docker`-feature |
+| Nettleserpålogging henger i Codespaces | Bruk `azd auth login --use-device-code` |
+| Verktøy varierer mellom teammedlemmer | Fest feature-versjoner (f.eks. `azd:1.27.1`) |
+| Appen er ikke tilgjengelig i nettleser | Legg porten til `forwardPorts` |
 
 ---
 
 ## Oppsummering
 
 - En dev container gjør azd-verktøykjeden din reproduserbar for alle.
-- Legg til azd, Azure CLI og Docker via Dev Container *features*.
-- Match språkfunksjonen til appen din og behold `docker-in-docker` for container-verter.
-- Bruk device-code-pålogging når du kjører inne i Codespaces.
+- Legg til azd, Azure CLI og Docker gjennom Dev Container *features*.
+- Tilpass språkfeature til appen din og behold `docker-in-docker` for container-hosts.
+- Bruk device-code login når du kjører inne i Codespaces.
 
 ---
 
 ## 🔗 Navigasjon
 
-| Direction | Resource |
+| Retning | Ressurs |
 |-----------|----------|
-| **Forrige** | [Bruk din egen app](bring-your-own-app.md) |
-| **Kapitteloversikt** | [Kapittel 1: Grunnlag og Rask start](README.md) |
-| **Neste kapittel** | [Kapittel 2: AI-fokusert utvikling](../chapter-02-ai-development/README.md) |
+| **Forrige** | [Bring Your Own App](bring-your-own-app.md) |
+| **Kapittel Hjem** | [Kapittel 1: Grunnlag & Rask Start](README.md) |
+| **Neste Kapittel** | [Kapittel 2: AI-Først Utvikling](../chapter-02-ai-development/README.md) |
 
 ## 📖 Relaterte ressurser
 
-- [Installasjon og oppsett](installation.md)
-- [Kommando-hurtigreferanse](../../resources/cheat-sheet.md)
+- [Installasjon & Setup](installation.md)
+- [Kommando Hurtigreferanse](../../resources/cheat-sheet.md)
 - [Offisiell Dev Containers-spesifikasjon](https://containers.dev/)
-- [azd Dev Container-funksjon](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
+- [azd Dev Container feature](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
 
 ---
 

@@ -1,30 +1,30 @@
-# نشر نموذج الذكاء الاصطناعي باستخدام Azure Developer CLI
+# نشر نماذج الذكاء الاصطناعي باستخدام Azure Developer CLI  
 
-**تنقل الفصل:**
-- **📚 الصفحة الرئيسية للدورة**: [AZD For Beginners](../../README.md)
-- **📖 الفصل الحالي**: الفصل 2 - تطوير يركز على الذكاء الاصطناعي
-- **⬅️ السابق**: [تكامل Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ التالي**: [مختبر ورشة عمل الذكاء الاصطناعي](ai-workshop-lab.md)
-- **🚀 الفصل التالي**: [الفصل 3: التكوين](../chapter-03-configuration/configuration.md)
+**تنقل الفصل:**  
+- **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)  
+- **📖 الفصل الحالي**: الفصل 2 - تطوير يركز على الذكاء الاصطناعي  
+- **⬅️ السابق**: [تكامل Microsoft Foundry](microsoft-foundry-integration.md)  
+- **➡️ التالي**: [مختبر ورشة عمل الذكاء الاصطناعي](ai-workshop-lab.md)  
+- **🚀 الفصل التالي**: [الفصل 3: التكوين](../chapter-03-configuration/configuration.md)  
 
-يوفر هذا الدليل تعليمات شاملة لنشر نماذج الذكاء الاصطناعي باستخدام قوالب AZD، ويغطي كل شيء من اختيار النموذج حتى أنماط النشر في بيئات الإنتاج.
+يقدم هذا الدليل تعليمات شاملة لنشر نماذج الذكاء الاصطناعي باستخدام قوالب AZD، يغطي كل شيء من اختيار النموذج إلى أنماط النشر في الإنتاج.  
 
-> **ملاحظة التحقق (2026-03-25):** تم التحقق من سير عمل AZD في هذا الدليل مقابل `azd` `1.23.12`. بالنسبة لنشرات الذكاء الاصطناعي التي تستغرق وقتًا أطول من نافذة نشر الخدمة الافتراضية، تدعم إصدارات AZD الحالية الأمر `azd deploy --timeout <seconds>`.
+> **ملاحظة التحقق (2026-07-13):** تم التحقق من سير عمل AZD في هذا الدليل باستخدام `azd` `1.27.1`. لنشرات الذكاء الاصطناعي التي تستغرق وقتًا أطول من نافذة نشر الخدمة الافتراضية، تدعم إصدارات AZD الحالية الأمر `azd deploy --timeout <seconds>`.  
 
-## جدول المحتويات
+## جدول المحتويات  
 
-- [استراتيجية اختيار النموذج](#استراتيجية-اختيار-النموذج)
-- [تكوين AZD لنماذج الذكاء الاصطناعي](#تكوين-azd-لنماذج-الذكاء-الاصطناعي)
-- [أنماط النشر](#أنماط-النشر)
-- [إدارة النماذج](#إدارة-النماذج)
-- [اعتبارات الإنتاج](#اعتبارات-الإنتاج)
-- [المراقبة وقابلية الملاحظة](#المراقبة-وقابلية-الملاحظة)
+- [استراتيجية اختيار النموذج](#استراتيجية-اختيار-النموذج)  
+- [تكوين AZD لنماذج الذكاء الاصطناعي](#تكوين-azd-لنماذج-الذكاء-الاصطناعي)  
+- [أنماط النشر](#أنماط-النشر)  
+- [إدارة النموذج](#إدارة-النموذج)  
+- [الاعتبارات المتعلقة بالإنتاج](#اعتبارات-الإنتاج)  
+- [المراقبة والملاحظة](#المراقبة-والرصد)  
 
-## استراتيجية اختيار النموذج
+## استراتيجية اختيار النموذج  
 
-### نماذج Microsoft Foundry
+### نماذج Microsoft Foundry  
 
-اختر النموذج المناسب لحالة الاستخدام الخاصة بك:
+اختر النموذج المناسب لحالتك الاستخدامية:  
 
 ```yaml
 # azure.yaml - Model configuration
@@ -51,21 +51,21 @@ services:
           }
         ]
 ```
+  
+### تخطيط سعة النموذج  
 
-### تخطيط سعة النموذج
+| نوع النموذج | حالة الاستخدام | السعة الموصى بها | اعتبارات التكلفة |  
+|------------|----------|---------------------|-------------------|  
+| gpt-4.1-mini | دردشة، أسئلة وأجوبة | 10-50 TPM | فعالة من حيث التكلفة لمعظم الأحمال |  
+| gpt-4.1 | استدلال معقد | 20-100 TPM | تكلفة أعلى، استخدم للميزات المتميزة |  
+| text-embedding-3-large | البحث، RAG | 30-120 TPM | خيار قوي افتراضي للبحث الدلالي والاسترجاع |  
+| Whisper | تحويل الكلام إلى نص | 10-50 TPM | أحمال معالجة الصوت |  
 
-| نوع النموذج | حالة الاستخدام | السعة الموصى بها | اعتبارات التكلفة |
-|------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | الدردشة، الأسئلة والأجوبة | 10-50 TPM | فعّال من حيث التكلفة لمعظم أحمال العمل |
-| gpt-4.1 | الاستدلال المعقد | 20-100 TPM | تكلفة أعلى، استخدمه للميزات المميزة |
-| text-embedding-3-large | البحث، RAG | 30-120 TPM | خيار افتراضي قوي للبحث الدلالي والاسترداد |
-| Whisper | تحويل الكلام إلى نص | 10-50 TPM | أحمال عمل معالجة الصوت |
+## تكوين AZD لنماذج الذكاء الاصطناعي  
 
-## تكوين AZD لنماذج الذكاء الاصطناعي
+### تكوين قالب Bicep  
 
-### تكوين قالب Bicep
-
-أنشئ عمليات نشر النماذج عبر قوالب Bicep:
+أنشئ توزيعات النموذج عبر قوالب Bicep:  
 
 ```bicep
 // infra/main.bicep
@@ -123,22 +123,22 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
   sku: deployment.sku
 }]
 ```
+  
+### متغيرات البيئة  
 
-### متغيرات البيئة
-
-قم بتكوين بيئة تطبيقك:
+قم بتكوين بيئة تطبيقك:  
 
 ```bash
-# تكوين ملف .env
+# تكوين .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
+  
+## أنماط النشر  
 
-## أنماط النشر
-
-### النمط 1: النشر في منطقة واحدة
+### النمط 1: النشر في منطقة واحدة  
 
 ```yaml
 # azure.yaml - Single region
@@ -150,13 +150,13 @@ services:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
+  
+الأفضل لـ:  
+- التطوير والاختبار  
+- التطبيقات ذات السوق الواحدة  
+- تحسين التكلفة  
 
-مناسب لـ:
-- التطوير والاختبار
-- التطبيقات الموجهة لسوق واحد
-- تحسين التكلفة
-
-### النمط 2: النشر متعدد المناطق
+### النمط 2: النشر متعدد المناطق  
 
 ```bicep
 // Multi-region deployment
@@ -168,15 +168,15 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
   // ... configuration
 }]
 ```
+  
+الأفضل لـ:  
+- التطبيقات العالمية  
+- متطلبات توفر عالي  
+- توزيع الحمل  
 
-مناسب لـ:
-- التطبيقات العالمية
-- متطلبات التوفر العالي
-- توزيع الحمل
+### النمط 3: النشر الهجين  
 
-### النمط 3: النشر الهجين
-
-ادمج نماذج Microsoft Foundry مع خدمات ذكاء اصطناعي أخرى:
+دمج نماذج Microsoft Foundry مع خدمات الذكاء الاصطناعي الأخرى:  
 
 ```bicep
 // Hybrid AI services
@@ -204,12 +204,12 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
   }
 }
 ```
+  
+## إدارة النموذج  
 
-## إدارة النماذج
+### التحكم في الإصدار  
 
-### التحكم في الإصدارات
-
-تتبع إصدارات النماذج في تكوين AZD الخاص بك:
+تتبع إصدارات النموذج في تكوين AZD الخاص بك:  
 
 ```json
 {
@@ -226,10 +226,10 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
   }
 }
 ```
+  
+### تحديثات النموذج  
 
-### تحديثات النموذج
-
-استخدم مفاصل AZD لتحديثات النماذج:
+استخدم روابط AZD لتحديثات النموذج:  
 
 ```bash
 #!/bin/bash
@@ -244,10 +244,10 @@ az cognitiveservices account list-models \
 # إذا استغرق النشر وقتًا أطول من المهلة الافتراضية
 azd deploy --timeout 1800
 ```
+  
+### اختبار A/B  
 
-### اختبار A/B
-
-انشر إصدارات متعددة من النماذج:
+انشر نسخاً متعددة من النموذج:  
 
 ```bicep
 param enableABTesting bool = false
@@ -268,12 +268,12 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
   }
 }
 ```
+  
+## اعتبارات الإنتاج  
 
-## اعتبارات الإنتاج
+### تخطيط السعة  
 
-### تخطيط السعة
-
-احسب السعة المطلوبة بناءً على أنماط الاستخدام:
+احسب السعة المطلوبة بناءً على أنماط الاستخدام:  
 
 ```python
 # مثال على حساب السعة
@@ -297,10 +297,10 @@ required_capacity = calculate_required_capacity(
 )
 print(f"Required capacity: {required_capacity} TPM")
 ```
+  
+### تكوين التحجيم التلقائي  
 
-### تكوين التوسع التلقائي
-
-قم بتكوين التوسع التلقائي لتطبيقات الحاويات:
+قم بتكوين التحجيم التلقائي لتطبيقات الحاويات:  
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -335,10 +335,10 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   }
 }
 ```
+  
+### تحسين التكلفة  
 
-### تحسين التكلفة
-
-نفّذ ضوابط التكلفة:
+نفذ ضوابط التكلفة:  
 
 ```bicep
 @description('Enable cost management alerts')
@@ -367,12 +367,12 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
   }
 }
 ```
+  
+## المراقبة والرصد  
 
-## المراقبة وقابلية الملاحظة
+### تكامل Application Insights  
 
-### التكامل مع Application Insights
-
-قم بتكوين المراقبة لأحمال عمل الذكاء الاصطناعي:
+قم بتكوين المراقبة لأحمال عمل الذكاء الاصطناعي:  
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -407,13 +407,13 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
   }
 }
 ```
+  
+### مقاييس مخصصة  
 
-### المقاييس المخصصة
-
-تتبع المقاييس الخاصة بالذكاء الاصطناعي:
+تتبع مقاييس خاصة بالذكاء الاصطناعي:  
 
 ```python
-# قياسات عن بُعد مخصصة لنماذج الذكاء الاصطناعي
+# قياسات مخصصة لنماذج الذكاء الاصطناعي
 import logging
 from applicationinsights import TelemetryClient
 
@@ -444,13 +444,13 @@ class AITelemetry:
             }
         )
 ```
+  
+### فحوصات الصحة  
 
-### فحوصات الحالة
-
-نفّذ مراقبة حالة خدمات الذكاء الاصطناعي:
+نفذ مراقبة صحة خدمة الذكاء الاصطناعي:  
 
 ```python
-# نقاط النهاية لفحص الحالة الصحية
+# نقاط نهاية فحص الصحة
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -475,33 +475,33 @@ async def check_ai_models():
     except Exception as e:
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
+  
+## الخطوات التالية  
 
-## الخطوات التالية
+1. **راجع [دليل تكامل Microsoft Foundry](microsoft-foundry-integration.md)** لأنماط تكامل الخدمة  
+2. **أكمل [مختبر ورشة عمل الذكاء الاصطناعي](ai-workshop-lab.md)** للحصول على تجربة عملية  
+3. **نفذ [ممارسات الذكاء الاصطناعي في الإنتاج](production-ai-practices.md)** للنشرات المؤسسية  
+4. **استكشف [دليل استكشاف مشكلات الذكاء الاصطناعي](../chapter-07-troubleshooting/ai-troubleshooting.md)** للمشاكل الشائعة  
 
-1. **راجع [دليل تكامل Microsoft Foundry](microsoft-foundry-integration.md)** لأنماط تكامل الخدمات
-2. **أكمل [مختبر ورشة عمل الذكاء الاصطناعي](ai-workshop-lab.md)** للحصول على تجربة عملية
-3. **نفّذ [ممارسات الذكاء الاصطناعي للإنتاج](production-ai-practices.md)** لنشر المؤسسات
-4. **استكشف [دليل استكشاف أخطاء الذكاء الاصطناعي](../chapter-07-troubleshooting/ai-troubleshooting.md)** للمشاكل الشائعة
+## الموارد  
 
-## الموارد
+- [توفر نماذج Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)  
+- [توثيق Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)  
+- [تحجيم تطبيقات الحاويات](https://learn.microsoft.com/azure/container-apps/scale-app)  
+- [تحسين تكلفة نماذج الذكاء الاصطناعي](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)  
 
-- [توفر نماذج Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [توثيق Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [تحجيم Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [تحسين تكاليف نماذج الذكاء الاصطناعي](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+---  
 
----
-
-**تنقل الفصل:**
-- **📚 الصفحة الرئيسية للدورة**: [AZD For Beginners](../../README.md)
-- **📖 الفصل الحالي**: الفصل 2 - تطوير يركز على الذكاء الاصطناعي
-- **⬅️ السابق**: [تكامل Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ التالي**: [مختبر ورشة عمل الذكاء الاصطناعي](ai-workshop-lab.md)
-- **🚀 الفصل التالي**: [الفصل 3: التكوين](../chapter-03-configuration/configuration.md)
+**تنقل الفصل:**  
+- **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)  
+- **📖 الفصل الحالي**: الفصل 2 - تطوير يركز على الذكاء الاصطناعي  
+- **⬅️ السابق**: [تكامل Microsoft Foundry](microsoft-foundry-integration.md)  
+- **➡️ التالي**: [مختبر ورشة عمل الذكاء الاصطناعي](ai-workshop-lab.md)  
+- **🚀 الفصل التالي**: [الفصل 3: التكوين](../chapter-03-configuration/configuration.md)  
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**إخلاء المسؤولية**:
-تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى للدقة، يُرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو أخطاء في الدقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر المُلزم. للمعلومات الحرجة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة ناتجة عن استخدام هذه الترجمة.
+**تنويه**:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى للدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي والمعتمد. للمعلومات الهامة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

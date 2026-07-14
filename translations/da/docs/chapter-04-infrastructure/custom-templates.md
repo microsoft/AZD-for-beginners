@@ -1,55 +1,55 @@
-# Oprettelse af din egen azd-skabelon
+# Forfatning af din egen azd-skabelon
 
 **Kapitelnavigation:**
-- **📚 Kursusforside**: [AZD for begyndere](../../README.md)
-- **📖 Aktuelt kapitel**: Kapitel 4 - Infrastruktur som kode & Udrulning
-- **⬅️ Forrige**: [Udrulningsvejledning](deployment-guide.md)
-- **🚀 Næste kapitel**: [Kapitel 5: Multi-Agent-løsninger](../chapter-05-multi-agent/README.md)
+- **📚 Kursusstart**: [AZD for begyndere](../../README.md)
+- **📖 Nuværende kapitel**: Kapitel 4 - Infrastruktur som kode & implementering
+- **⬅️ Forrige**: [Implementeringsguide](deployment-guide.md)
+- **🚀 Næste kapitel**: [Kapitel 5: Multi-agent-løsninger](../chapter-05-multi-agent/README.md)
 
-> Valideret mod `azd 1.25.6` i juni 2026.
+> Valideret mod `azd 1.27.1` i juli 2026.
 
 ## Introduktion
 
-Indtil nu har du *brugt* skabeloner med `azd init --template <name>`. Men når du har en projektsstruktur, dit team kan lide—for eksempel en Container App med en Cosmos DB og den rette overvågning—vil du gerne gøre den til en genanvendelig skabelon. En skabelon er bare et Git-repositorium med en forudsigelig struktur, som azd ved, hvordan den læses. Denne lektion viser dig, hvordan du bygger en fra bunden, tester den, og (valgfrit) offentliggør den i community-galleriet.
+Indtil videre har du *brugt* skabeloner med `azd init --template <name>`. Men når du først har et projektlayout, som dit team kan lide - for eksempel en Container App med en Cosmos DB og den rette overvågning - vil du gerne gøre det til en genanvendelig skabelon for dig selv. En skabelon er blot et Git-repositorium med en forudsigelig struktur, som azd ved, hvordan man læser. Denne lektion viser dig, hvordan du bygger en fra bunden, tester den og (valgfrit) publicerer den i fællesskabsgalleriet.
 
 ## Læringsmål
 
-Når du er færdig med denne lektion, vil du:
-- Forstå, hvad der gør en mappe til en "azd-skabelon"
-- Kende de nødvendige filer og mappestrukturen
+Ved slutningen af denne lektion vil du:
+- Forstå hvad der gør en mappe til en "azd-skabelon"
+- Kende de krævede filer og mappestruktur
 - Tilføje en `azure.yaml` og `infra/`, som andre kan genbruge
-- Teste din skabelon lokalt før du deler den
-- Offentliggøre den og (valgfrit) indsende den til Awesome AZD
+- Teste din skabelon lokalt før deling
+- Publicere den og (valgfrit) indsende den til Awesome AZD
 
-## Læringsudbytte
+## Læringsresultater
 
-Efter at have gennemført denne lektion vil du kunne:
+Efter at have gennemført denne lektion, vil du kunne:
 - Oprette et nyt skabelon-repositorium
-- Parameterisere infrastrukturen, så den virker i et hvilket som helst abonnement
+- Parametrisere infrastrukturen, så den fungerer i enhver abonnement
 - Validere en skabelon med `azd init` og `azd up`
-- Tilføje metadata, som community-galleriet kræver
+- Tilføje metadata, som fællesskabsgalleriet kræver
 
 ---
 
 ## Hvad er en skabelon egentlig?
 
-En azd-skabelon er **et Git-repositorium**, der indeholder, mindst følgende:
+En azd-skabelon er **et Git-repositorium**, som indeholder som minimum:
 
-| Fil / mappe | Formål | Påkrævet? |
+| Fil / mappe | Formål | Krævet? |
 |---------------|---------|-----------|
-| `azure.yaml` | Beskriver services, hosts og infra-udbyder | ✅ Ja |
-| `infra/` | Bicep, Terraform eller Pulumi, der provisionerer ressourcer | ✅ Ja |
-| `src/` (or your code) | Applikationskoden, som azd udruller | ✅ Ja |
-| `README.md` | Sådan bruger du skabelonen | ✅ Stærkt anbefalet |
-| `.azdo/` or `.github/` | CI/CD-pipeline-definitioner | Valgfri |
-| `.devcontainer/` | Reproducerbart udviklingsmiljø | Valgfri |
-| `azure.yaml` `metadata` | Galleri + telemetrioplysninger | Valgfri (krævet for at offentliggøre) |
+| `azure.yaml` | Beskriver services, hosts og infrastrukturudbyder | ✅ Ja |
+| `infra/` | Bicep, Terraform eller Pulumi som provisionerer ressourcer | ✅ Ja |
+| `src/` (eller din kode) | Applikationskoden, som azd deployer | ✅ Ja |
+| `README.md` | Hvordan man bruger skabelonen | ✅ Stærkt anbefalet |
+| `.azdo/` eller `.github/` | CI/CD-pipeline-definitioner | Valgfrit |
+| `.devcontainer/` | Reproducerbart udviklingsmiljø | Valgfrit |
+| `azure.yaml` `metadata` | Galleri + telemetri-info | Valgfrit (krævet for at publicere) |
 
-Der er intet magisk her: når du kører `azd init --template you/your-repo`, kloner azd repositoriet og læser `azure.yaml`.
+Der er intet magisk her: når du kører `azd init --template you/your-repo`, kloner azd repoet og læser `azure.yaml`.
 
 ---
 
-## Trin 1: Opsæt repositoriet
+## Trin 1: Opret repositoriets struktur
 
 Opret mappestrukturen manuelt eller start fra en minimal skabelon og rediger den:
 
@@ -61,7 +61,7 @@ git init
 mkdir -p src infra
 ```
 
-En typisk færdig struktur ser sådan ud:
+Et typisk færdigt layout ser sådan ud:
 
 ```
 my-azd-template/
@@ -83,7 +83,7 @@ my-azd-template/
 
 ## Trin 2: Skriv `azure.yaml`
 
-Dette er skabelonens kerne. Den fortæller azd, hvad der skal udrulles og hvordan:
+Dette er skabelonens kerne. Det fortæller azd, hvad der skal deployeres og hvordan:
 
 ```yaml
 # azure.yaml
@@ -101,13 +101,13 @@ services:
     host: containerapp              # appservice | containerapp | function | aks | staticwebapp
 ```
 
-> Feltet `metadata.template` er det, galleri-telemetrien bruger til at tælle anvendelse. Brug konventionen `name@version`.
+> Feltet `metadata.template` er det, som galleri-telemetri bruger til at tælle brug. Brug konventionen `name@version`.
 
 ---
 
-## Trin 3: Parameterisér infrastrukturen
+## Trin 3: Parametrisér infrastrukturen
 
-Den enkelt vigtigste regel for en *genanvendelig* skabelon: **hardkod aldrig navne, regioner eller værdier, der er specifikke for et abonnement.** Brug parametre og resource token-mønstret, så den samme skabelon virker i enhver brugers abonnement.
+Den enkelt vigtigste regel for en *genanvendelig* skabelon: **aldig hardcode navne, regioner eller abonnements-specifikke værdier.** Brug parametre og resource token-mønstret, så den samme skabelon fungerer i nogens abonnement.
 
 ```bicep
 // infra/main.bicep
@@ -138,12 +138,12 @@ module web 'modules/web.bicep' = {
 output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 ```
 
-To ting gør denne skabelon genanvendelig:
+To ting gør denne skabelon skabelon-venlig:
 
-1. **`azd-env-name` tag** — azd bruger den til at spore og rydde op i ressourcer pr. miljø.
-2. **`uniqueString(...)` resource token** — producerer en stabil, globalt-unik suffiks, så navne ikke kolliderer.
+1. **`azd-env-name` tag** — azd bruger det til at spore og rydde op i ressourcer per miljø.
+2. **`uniqueString(...)` resource token** — producerer en stabil, globalt unik suffix, så navne ikke kolliderer.
 
-Tilføj en tilsvarende parameterfil, der læser værdier, som azd injicerer fra miljøet:
+Lever en matchende parameterfil, som læser værdier, som azd injicerer fra miljøet:
 
 ```json
 // infra/main.parameters.json
@@ -163,35 +163,35 @@ azd erstatter `${AZURE_ENV_NAME}` og `${AZURE_LOCATION}` fra det aktuelle miljø
 
 ## Trin 4: Test din skabelon lokalt
 
-Før du deler, bevis at skabelonen virker fra en ren tilstand.
+Før deling, bevis at skabelonen virker fra en ren tilstand.
 
-**Test fra den lokale mappe** (ingen Git-push påkrævet):
+**Test fra den lokale mappe** (ingen Git push nødvendig):
 
 ```bash
-# Fra en tom mappe initialiser ved hjælp af din lokale skabelonsti
+# Fra en tom mappe, initialiser ved brug af din lokale skabelonsti
 mkdir /tmp/test-run && cd /tmp/test-run
 azd init --template /path/to/my-azd-template
 
-# Provisionering og udrulning fra ende til ende
+# Provisoner og deploy fra start til slut
 azd auth login
 azd up
 ```
 
-**Test derefter nedtagningen**—en god skabelon rydder helt op:
+**Test derefter nedrivningen**—en god skabelon rydder helt op:
 
 ```bash
 azd down --force --purge
 ```
 
-Hvis `azd down` efterlader ressourcer, har du sandsynligvis glemt `azd-env-name`-tagget på en ressource.
+Hvis `azd down` efterlader ressourcer, har du sandsynligvis glemt `azd-env-name` tagget på en ressource.
 
-> **Tip:** kør `azd provision --preview` først. Den udfører en what-if og viser skabelonfejl, inden nogen ressourcer oprettes.
+> **Tip:** kør først `azd provision --preview`. Det udfører en what-if og viser skabelonfejl, før nogen ressourcer oprettes.
 
 ---
 
-## Trin 5: Offentliggør skabelonen
+## Trin 5: Publicer skabelonen
 
-Push repositoriet til GitHub (offentligt, hvis du vil have andre til at bruge det):
+Push repositoriet til GitHub (offentligt, hvis du ønsker, at andre skal bruge det):
 
 ```bash
 gh repo create my-azd-template --public --source=. --push
@@ -207,15 +207,15 @@ azd init --template your-github-username/my-azd-template
 
 ## Trin 6 (valgfrit): Indsend til Awesome AZD
 
-Galleriet [Awesome AZD](https://azure.github.io/awesome-azd/) viser community-skabeloner. For at blive opført bør dit repositorium inkludere:
+[Awesome AZD-galleriet](https://azure.github.io/awesome-azd/) viser fællesskabsskabeloner. For at blive listet bør dit repo indeholde:
 
-- ✅ En tydelig `README.md` med forudsætninger, et arkitekturdiagram og bemærkninger om omkostninger
+- ✅ En klar `README.md` med forudsætninger, et arkitekturdiagram og omkostningsnoter
 - ✅ En fungerende `azure.yaml` med `metadata.template`
-- ✅ Infrastruktur, der provisioneres korrekt i et nyt abonnement
+- ✅ Infrastruktur, der provisioneres rent i et nyt abonnement
 - ✅ En `LICENSE`-fil
-- ✅ (Anbefalet) En `.devcontainer/` for one-click Codespaces
+- ✅ (Anbefalet) En `.devcontainer/` til one-click Codespaces
 
-Indsend ved at oprette en pull request, der tilføjer din skabelon til galleriets datafil, og følg bidragsvejledningen i [Awesome AZD-repositoriet](https://github.com/Azure/awesome-azd).
+Indsend ved at åbne en pull request, som tilføjer din skabelon til galleriets datafil, efter bidragsvejledningen i [Awesome AZD-repositoriet](https://github.com/Azure/awesome-azd).
 
 ---
 
@@ -223,19 +223,19 @@ Indsend ved at oprette en pull request, der tilføjer din skabelon til galleriet
 
 | Faldgrube | Løsning |
 |---------|-----|
-| Hardkodede ressourcenavne | Brug `uniqueString()` resource token |
+| Hardcodede ressource-navne | Brug `uniqueString()` resource token |
 | `azd down` efterlader ressourcer | Tag hver ressource (eller ressourcegruppen) med `azd-env-name` |
-| Skabelonen virker for dig, fejler for andre | Fjern abonnements-id'er, tenant-id'er og regionsantagelser |
-| Output er ikke koblet til appen | Eksporter `SERVICE_<NAME>_ENDPOINT_URL` og andre `AZURE_*` outputs |
-| Galleriindsendelse afvist | Tilføj `README.md`, `LICENSE`, og `metadata.template` |
+| Skabelonen virker for dig, fejler for andre | Fjern abonnements-ID'er, tenant-ID'er og regionsantagelser |
+| Outputs ikke koblet til appen | Eksporter `SERVICE_<NAME>_ENDPOINT_URL` og andre `AZURE_*` outputs |
+| Galleri-indsendelse afvist | Tilføj `README.md`, `LICENSE` og `metadata.template` |
 
 ---
 
-## Opsummering
+## Resumé
 
-- En skabelon er bare et Git-repo med `azure.yaml`, `infra/`, og din kode.
-- Parameterisér alt—navne, regioner, og id'er—så det kører overalt.
-- Tag altid ressourcer med `azd-env-name`, så `azd down` virker.
+- En skabelon er blot et Git-repo med `azure.yaml`, `infra/` og din kode.
+- Parametrisér alt – navne, regioner og ID'er – så det kører overalt.
+- Tag altid ressourcer med `azd-env-name`, så `azd down` fungerer.
 - Test lokalt med `azd init --template <local-path>` før publicering.
 - Tilføj metadata og en README for at indsende til Awesome AZD.
 
@@ -245,15 +245,15 @@ Indsend ved at oprette en pull request, der tilføjer din skabelon til galleriet
 
 | Retning | Ressource |
 |-----------|----------|
-| **Forrige** | [Udrulningsvejledning](deployment-guide.md) |
-| **Kapitel Hjem** | [Kapitel 4: Infrastruktur som kode](README.md) |
-| **Næste kapitel** | [Kapitel 5: Multi-Agent-løsninger](../chapter-05-multi-agent/README.md) |
+| **Forrige** | [Implementeringsguide](deployment-guide.md) |
+| **Kapitelstart** | [Kapitel 4: Infrastruktur som kode](README.md) |
+| **Næste kapitel** | [Kapitel 5: Multi-agent-løsninger](../chapter-05-multi-agent/README.md) |
 
 ## 📖 Relaterede ressourcer
 
 - [Provisionering af ressourcer](provisioning.md)
 - [Awesome AZD-galleri](https://azure.github.io/awesome-azd/)
-- [Officiel azd-skabelondokumentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
+- [Officiel azd skabelondokumentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
 
 ---
 

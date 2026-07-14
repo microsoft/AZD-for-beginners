@@ -1,22 +1,22 @@
-# Kapitel 7: Fehlerbehebung & Debugging
+# Kapitel 7: Fehlersuche & Debugging
 
-**📚 Kurs**: [AZD für Einsteiger](../../README.md) | **⏱️ Dauer**: 1–1,5 Stunden | **⭐ Komplexität**: Mittel
+**📚 Kurs**: [AZD Für Einsteiger](../../README.md) | **⏱️ Dauer**: 1-1,5 Stunden | **⭐ Komplexität**: Mittelstufe
 
 ---
 
-## Übersicht
+## Überblick
 
-Dieses Kapitel hilft Ihnen, häufige Probleme bei der Arbeit mit Azure Developer CLI zu diagnostizieren und zu beheben. Von Bereitstellungsfehlern bis hin zu AI-spezifischen Problemen.
+Dieses Kapitel hilft Ihnen, häufige Probleme bei der Arbeit mit Azure Developer CLI zu diagnostizieren und zu beheben. Von Bereitstellungsfehlern bis hin zu KI-spezifischen Problemen.
 
-> Validiert gegen `azd 1.25.6` im Juni 2026.
+> Validiert mit `azd 1.27.1` im Juli 2026.
 
 ## Lernziele
 
-Nach Abschluss dieses Kapitels können Sie:
+Nach Abschluss dieses Kapitels werden Sie:
 - Häufige AZD-Bereitstellungsfehler diagnostizieren
 - Authentifizierungs- und Berechtigungsprobleme debuggen
-- Verbindungsprobleme mit AI-Diensten beheben
-- Azure-Portal und CLI für die Fehlerbehebung verwenden
+- Verbindungsprobleme von KI-Diensten lösen
+- Azure Portal und CLI für die Fehlersuche nutzen
 
 ---
 
@@ -24,9 +24,9 @@ Nach Abschluss dieses Kapitels können Sie:
 
 | # | Lektion | Beschreibung | Zeit |
 |---|--------|-------------|------|
-| 1 | [Common Issues](common-issues.md) | Häufig auftretende Probleme | 30 Min |
-| 2 | [Debugging Guide](debugging.md) | Schritt-für-Schritt-Debugging-Strategien | 45 Min |
-| 3 | [AI Troubleshooting](ai-troubleshooting.md) | AI-spezifische Probleme | 30 Min |
+| 1 | [Häufige Probleme](common-issues.md) | Häufig auftretende Probleme | 30 Min |
+| 2 | [Debugging-Anleitung](debugging.md) | Schritt-für-Schritt-Debugging-Strategien | 45 Min |
+| 3 | [KI-Fehlersuche](ai-troubleshooting.md) | KI-spezifische Probleme | 30 Min |
 
 ---
 
@@ -37,7 +37,7 @@ Nach Abschluss dieses Kapitels können Sie:
 # Erforderlich für AZD-Workflows
 azd auth login
 
-# Optional, wenn Sie auch Azure-CLI-Befehle direkt verwenden
+# Optional, wenn Sie auch direkt Azure CLI-Befehle verwenden
 az login
 
 azd auth status
@@ -50,7 +50,7 @@ azd monitor --logs
 az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
-### Ressourcenkonflikte
+### Ressourcen-Konflikte
 ```bash
 azd down --force --purge
 azd env new different-name
@@ -70,22 +70,22 @@ azd up
 
 | Fehler | Ursache | Lösung |
 |-------|-------|----------|
-| `AuthenticationError` | Nicht angemeldet | `azd auth login` |
-| `ResourceNotFound` | Ressource fehlt | Ressourcennamen überprüfen |
-| `QuotaExceeded` | Beschränkungen des Abonnements | Erhöhung des Kontingents anfordern |
+| `AuthenticationError` | Nicht eingeloggt | `azd auth login` |
+| `ResourceNotFound` | Ressource fehlt | Ressourcennamen prüfen |
+| `QuotaExceeded` | Abonnement-Limits | Kontingenterhöhung anfragen |
 | `InvalidTemplate` | Bicep-Syntaxfehler | `az bicep build` |
-| `Conflict` | Ressource existiert | Neuen Namen verwenden oder löschen |
-| `Forbidden` | Unzureichende Berechtigungen | RBAC-Rollen überprüfen |
+| `Conflict` | Ressource existiert bereits | Neuen Namen verwenden oder löschen |
+| `Forbidden` | Unzureichende Berechtigungen | RBAC-Rollen prüfen |
 
 ---
 
 ## 🔄 Zurücksetzen und Wiederherstellung
 
 ```bash
-# Soft-Reset (Ressourcen beibehalten, Code neu bereitstellen)
+# Weicher Neustart (Ressourcen behalten, Code neu bereitstellen)
 azd deploy --force
 
-# Hard-Reset (alles löschen, von vorne beginnen)
+# Harter Neustart (alles löschen, neu starten)
 azd down --force --purge
 azd up
 ```
@@ -96,16 +96,16 @@ azd up
 
 | Richtung | Kapitel |
 |-----------|---------|
-| **Previous** | [Kapitel 6: Vorbereitungen vor der Bereitstellung](../chapter-06-pre-deployment/README.md) |
-| **Next** | [Kapitel 8: Produktion](../chapter-08-production/README.md) |
+| **Vorheriges** | [Kapitel 6: Vorbereitende Maßnahmen](../chapter-06-pre-deployment/README.md) |
+| **Nächstes** | [Kapitel 8: Produktion](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Verwandte Ressourcen
 
-- [Vorbereitungsprüfungen](../chapter-06-pre-deployment/preflight-checks.md)
-- [Konfigurationsanleitung](../chapter-03-configuration/configuration.md)
-- [AZD GitHub-Issues](https://github.com/Azure/azure-dev/issues)
+- [Pre-Deployment Checks](../chapter-06-pre-deployment/preflight-checks.md)
+- [Configuration Guide](../chapter-03-configuration/configuration.md)
+- [AZD GitHub Issues](https://github.com/Azure/azure-dev/issues)
 
 ---
 

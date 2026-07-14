@@ -1,22 +1,22 @@
-# Luku 1: Perusta ja pika-aloitus
+# Luku 1: Perusteet & Pikakirjaus
 
-**📚 Kurssi**: [AZD aloittelijoille](../../README.md) | **⏱️ Kesto**: 30-45 minuuttia | **⭐ Vaikeustaso**: Aloittelijatason
+**📚 Kurssi**: [AZD Aloittelijoille](../../README.md) | **⏱️ Kesto**: 30-45 minuuttia | **⭐ Vaativuus**: Aloittelija
 
 ---
 
 ## Yleiskatsaus
 
-Tässä luvussa esitellään Azure Developer CLI (azd) -perusteet. Opit keskeiset käsitteet, asennat työkalut ja otat ensimmäisen sovelluksesi käyttöön Azuren kautta.
+Tässä luvussa esitellään Azure Developer CLI (azd) perusteet. Opit ydinkäsitteet, asennat työkalut ja otat ensimmäisen sovelluksesi käyttöön Azureen.
 
-> Tarkistettu `azd 1.25.6`:lla kesäkuussa 2026.
+> Vahvistettu `azd 1.27.1` -version kanssa heinäkuussa 2026.
 
 ## Oppimistavoitteet
 
-Kun olet suorittanut tämän luvun, osaat:
+Tämän luvun suorittamisen jälkeen osaat:
 - Ymmärtää, mitä Azure Developer CLI on ja miten se eroaa Azure CLI:stä
-- Asentaa ja konfiguroida AZD:n omalle alustallesi
-- Ota ensimmäinen sovelluksesi käyttöön Azureen komennolla `azd up`
-- Poistaa resurssit komennolla `azd down`
+- Asentaa ja konfiguroida AZD omalle alustallesi
+- Ota ensimmäinen sovelluksesi käyttöön Azureen käyttäen `azd up`
+- Siivota resurssit käyttäen `azd down`
 
 ---
 
@@ -24,17 +24,17 @@ Kun olet suorittanut tämän luvun, osaat:
 
 | # | Oppitunti | Kuvaus | Aika |
 |---|--------|-------------|------|
-| 1 | [AZD perusteet](azd-basics.md) | Peruskäsitteet, terminologia ja projektin rakenne | 15 min |
-| 2 | [Asennus ja määritys](installation.md) | Alustakohtaiset asennusohjeet | 10 min |
-| 3 | [Ensimmäinen projektisi](first-project.md) | Käytännön harjoitus: Ota verkkosovellus käyttöön Azureen | 20 min |
-| 4 | [Tuo oma sovellus](bring-your-own-app.md) | Lisää azd olemassa olevaan projektiin, joka sinulla jo on | 15 min |
-| 5 | [Dev-kontit & Codespaces](dev-containers.md) | Toistettavat azd-ympäristöt dev-konteilla | 15 min |
+| 1 | [AZD Perusteet](azd-basics.md) | Ydinkäsitteet, termistö ja projektin rakenne | 15 min |
+| 2 | [Asennus & Asetukset](installation.md) | Alustakohtaiset asennusohjeet | 10 min |
+| 3 | [Ensimmäinen Projekti](first-project.md) | Käytännön harjoitus: Web-sovelluksen käyttöönotto Azureen | 20 min |
+| 4 | [Oman Sovelluksen Tuonti](bring-your-own-app.md) | Lisää azd olemassa olevaan projektiin | 15 min |
+| 5 | [Kehityssäiliöt & Kooditilat](dev-containers.md) | Toistettavat azd-ympäristöt kehityssäiliöillä | 15 min |
 
 ---
 
-## ✅ Aloita tästä: Varmista asennuksesi
+## ✅ Aloita tästä: Vahvista asennuksesi
 
-Ennen kuin aloitat, varmista, että paikallinen koneesi on valmis Luku 1 -mallia varten:
+Ennen aloittamista varmista, että paikallinen koneesi on valmis Luku 1:n mallipohjaa varten:
 
 **Windows:**
 ```powershell
@@ -50,21 +50,21 @@ Jos skripti ilmoittaa puuttuvista työkaluista, korjaa ne ensin ja jatka sitten 
 
 ---
 
-## 🚀 Pika-aloitus
+## 🚀 Pikakirjaus
 
 ```bash
 # Tarkista asennus
 azd version
 
-# Tunnistaudu AZD:lle
-# Valinnainen: az login, jos aiot suorittaa Azure CLI -komentoja suoraan
+# Todennus AZD:lle
+# Vapaaehtoinen: käytä az login -komentoa, jos aiot suorittaa Azure CLI -komentoja suoraan
 azd auth login
 
 # Ota ensimmäinen sovelluksesi käyttöön
 azd init --template todo-nodejs-mongo
 azd up
 
-# Siivoa kun olet valmis
+# Puhdista, kun olet valmis
 azd down --force --purge
 ```
 
@@ -72,7 +72,7 @@ azd down --force --purge
 
 ## ✅ Onnistumisen kriteerit
 
-Tämän luvun suorittamisen jälkeen sinun pitäisi osata:
+Tämän luvun suorittamisen jälkeen sinun pitäisi pystyä:
 
 ```bash
 azd version              # Näyttää asennetun version
@@ -88,15 +88,15 @@ azd down --force --purge # Siivoaa resurssit
 
 | Suunta | Luku |
 |-----------|---------|
-| **Seuraava** | [Luku 2: AI-keskeinen kehitys](../chapter-02-ai-development/README.md) |
-| **Siirry** | [Luku 3: Konfigurointi](../chapter-03-configuration/README.md) |
+| **Seuraava** | [Luku 2: AI-Ensisijainen Kehitys](../chapter-02-ai-development/README.md) |
+| **Siirry kohtaan** | [Luku 3: Konfigurointi](../chapter-03-configuration/README.md) |
 
 ---
 
-## 📖 Liittyvät resurssit
+## 📖 Aiheeseen liittyviä resursseja
 
-- [Komentojen pikavihje](../../resources/cheat-sheet.md)
-- [UKK](../../resources/faq.md)
+- [Komentojen pikalinkki](../../resources/cheat-sheet.md)
+- [Usein kysytyt kysymykset (UKK)](../../resources/faq.md)
 - [Sanasto](../../resources/glossary.md)
 
 ---

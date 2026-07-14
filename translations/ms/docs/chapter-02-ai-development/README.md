@@ -1,40 +1,40 @@
 # Bab 2: Pembangunan AI-Pertama
 
-**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 1-2 jam | **⭐ Kerumitan**: Pertengahan
+**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 1-2 jam | **⭐ Kerumitan**: Sederhana
 
 ---
 
 ## Gambaran Keseluruhan
 
-Bab ini memfokuskan pada pelaksanaan aplikasi berkuasa AI menggunakan Azure Developer CLI dan perkhidmatan Microsoft Foundry. Dari aplikasi chat AI mudah ke agen pintar dengan alat.
+Bab ini memfokuskan pada penggunaan aplikasi dipacu AI menggunakan Azure Developer CLI dan perkhidmatan Microsoft Foundry. Dari aplikasi chat AI mudah hingga ejen pintar dengan alat.
 
-> **Nota pengesahan (2026-06-15):** Aliran arahan dan panduan sambungan dalam bab ini telah disemak berbanding `azd` `1.25.6` dan keluaran pratonton sambungan agen AI semasa `azure.ai.agents` `0.1.40-preview`. Jika anda menggunakan binaan AZD yang lebih lama, kemas kini dahulu dan kemudian teruskan dengan latihan.
+> **Nota pengesahan (2026-07-13):** Aliran arahan dan panduan sambungan dalam bab ini telah disemak menggunakan `azd` `1.27.1` dan keluaran pratonton sambungan ejen AI terkini `azure.ai.agents` `1.0.0-beta.5`. Jika anda menggunakan binaan AZD yang lebih lama, kemas kini dahulu kemudian teruskan dengan latihan.
 
 ## Objektif Pembelajaran
 
-Dengan melengkapkan bab ini, anda akan:
-- Melaksanakan aplikasi AI menggunakan templat AZD yang telah dibina
+Dengan menyelesaikan bab ini, anda akan:
+- Menggunakan aplikasi AI menggunakan templat AZD sedia ada
 - Memahami integrasi Microsoft Foundry dengan AZD
-- Mengkonfigurasi dan menyesuaikan agen AI dengan alat
-- Melaksanakan aplikasi RAG (Retrieval-Augmented Generation)
+- Mengkonfigurasi dan menyesuaikan ejen AI dengan alat
+- Menggunakan aplikasi RAG (Retrieval-Augmented Generation)
 
 ---
 
 ## 📚 Pelajaran
 
-| # | Pelajaran | Perihalan | Masa |
-|---|-----------|-----------|------|
-| 1 | [Integrasi Microsoft Foundry](microsoft-foundry-integration.md) | Sambungkan AZD dengan perkhidmatan Foundry | 30 minit |
-| 2 | [Panduan Agen AI](agents.md) | Melaksanakan agen pintar dengan alat | 45 minit |
-| 3 | [Pelaksanaan Model AI](ai-model-deployment.md) | Melaksanakan dan mengkonfigurasi model AI | 30 minit |
-| 4 | [Makmal Bengkel AI](ai-workshop-lab.md) | Praktikal: Menghasilkan penyelesaian AI yang sedia AZD | 60 minit |
+| # | Pelajaran | Penerangan | Masa |
+|---|----------|-----------|------|
+| 1 | [Integrasi Microsoft Foundry](microsoft-foundry-integration.md) | Sambungkan AZD dengan perkhidmatan Foundry | 30 min |
+| 2 | [Panduan Ejen AI](agents.md) | Gunakan ejen pintar dengan alat | 45 min |
+| 3 | [Penggunaan Model AI](ai-model-deployment.md) | Gunakan dan konfigurasikan model AI | 30 min |
+| 4 | [Makmal Bengkel AI](ai-workshop-lab.md) | Praktikal: Jadikan penyelesaian AI anda sedia AZD | 60 min |
 
 ---
 
 ## 🚀 Mula Pantas
 
 ```bash
-# Pilihan 1: Aplikasi RAG Chat
+# Pilihan 1: Aplikasi Chat RAG
 azd init --template azure-search-openai-demo
 azd up
 
@@ -51,20 +51,20 @@ azd up
 
 ## 🤖 Templat AI Pilihan
 
-| Templat | Perihalan | Perkhidmatan |
-|---------|-----------|--------------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG chat dengan rujukan | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Agen AI dengan alat | Perkhidmatan Agen AI |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chat AI asas | OpenAI + Aplikasi Kontena |
+| Templat | Penerangan | Perkhidmatan |
+|--------|-----------|------------|
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Sembang RAG dengan sitasi | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Ejen AI dengan alat | Perkhidmatan Ejen AI |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Sembang AI asas | OpenAI + Container Apps |
 
 ---
 
 ## 💰 Kesedaran Kos
 
 | Persekitaran | Anggaran Kos Bulanan |
-|--------------|----------------------|
+|-------------|----------------------|
 | Pembangunan | $80-150 |
-| Penstagingan | $150-300 |
+| Persediaan | $150-300 |
 | Pengeluaran | $300-3,500+ |
 
 **Tip:** Jalankan `azd down` selepas ujian untuk mengelakkan caj.
@@ -74,8 +74,8 @@ azd up
 ## 🔗 Navigasi
 
 | Arah | Bab |
-|-------|-----|
-| **Sebelumnya** | [Bab 1: Asas](../chapter-01-foundation/README.md) |
+|-----|-----|
+| **Sebelum** | [Bab 1: Asas](../chapter-01-foundation/README.md) |
 | **Seterusnya** | [Bab 3: Konfigurasi](../chapter-03-configuration/README.md) |
 | **Langkau ke** | [Bab 8: Corak Pengeluaran](../chapter-08-production/README.md) |
 
@@ -85,7 +85,7 @@ azd up
 
 - [Penyelesaian Masalah AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 - [Amalan AI Pengeluaran](../chapter-08-production/production-ai-practices.md)
-- [Insights Aplikasi](../chapter-06-pre-deployment/application-insights.md)
+- [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 

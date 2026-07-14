@@ -39,7 +39,7 @@
 
 ## 🆕 What's New in azd Today
 
-> 📌 This course is validated against **`azd 1.25.6`** (June 2026). Run `azd version` to check your build, and `azd upgrade` to get the latest.
+> 📌 This course is validated against **`azd 1.27.1`** (July 2026). Run `azd version` to check your build, and `azd upgrade` to get the latest.
 
 Azure Developer CLI has grown beyond traditional web apps and APIs. Today, azd is the single tool for deploying **any** application to Azure—including AI-powered applications and intelligent agents.
 
@@ -241,6 +241,8 @@ This course is designed for **progressive learning** - start where you're comfor
 ## Course Overview
 
 Master Azure Developer CLI (azd) through structured chapters designed for progressive learning. **Special focus on AI application deployment with Microsoft Foundry integration.**
+
+
 ### Why This Course is Essential for Modern Developers
 
 Based on Microsoft Foundry Discord community insights, **45% of developers want to use AZD for AI workloads** but encounter challenges with:
@@ -472,6 +474,10 @@ az consumption budget list --resource-group <your-rg>
 - Implement blue-green deployment strategies
 
 **💡 Chapter Outcome**: Deploy complex multi-service applications using custom infrastructure templates
+
+---
+
+
 ### 🎯 Chapter 5: Multi-Agent AI Solutions (Advanced)
 **Prerequisites**: Chapters 1-2 completed  
 **Duration**: 2-3 hours  
@@ -715,6 +721,7 @@ Beyond the basics, AZD provides powerful features for production deployments:
 
 #### Local Examples - Container Applications (Chapters 2-5)
 **Comprehensive container deployment examples in this repository:**
+
 - [**Container App Examples**](examples/container-app/README.md) - Complete guide to containerized deployments
   - [Simple Flask API](../../examples/container-app/simple-flask-api) - Basic REST API with scale-to-zero
   - [Microservices Architecture](../../examples/container-app/microservices) - Production-ready multi-service deployment
@@ -831,17 +838,17 @@ azd up
 <summary><strong>❌ "azd up" fails halfway through</strong></summary>
 
 ```bash
-# Option 1: Clean and retry
+# Option 1: 清理并重试
 azd down --force --purge
 azd up
 
-# Option 2: Just fix infrastructure
+# Option 2: 仅修复基础设施
 azd provision
 
-# Option 3: Check detailed status
+# Option 3: 检查详细状态
 azd show
 
-# Option 4: Check logs in Azure Monitor
+# Option 4: 在Azure Monitor中查看日志
 azd monitor --logs
 ```
 </details>
@@ -1022,6 +1029,7 @@ Our team produces other comprehensive learning courses:
 [![Generative AI for Beginners](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
 [![Generative AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
 [![Generative AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+
 [![Generative AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
 
 ---

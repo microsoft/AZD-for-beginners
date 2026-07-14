@@ -1,83 +1,83 @@
 # 6. fejezet: Telepítés előtti tervezés és érvényesítés
 
-**📚 Tanfolyam**: [AZD Kezdőknek](../../README.md) | **⏱️ Időtartam**: 1 óra | **⭐ Bonyolultság**: Középhaladó
+**📚 Tanfolyam**: [AZD kezdőknek](../../README.md) | **⏱️ Időtartam**: 1 óra | **⭐ Összetettség**: Középhaladó
 
 ---
 
 ## Áttekintés
 
-Ez a fejezet lefedi az alkalmazás telepítése előtti lényeges tervezési és érvényesítési lépéseket. Tanulja meg, hogyan kerülheti el a költséges hibákat megfelelő kapacitástervezéssel, SKU kiválasztással és előzetes ellenőrzésekkel.
+Ez a fejezet a telepítés előtti alapvető tervezési és érvényesítési lépéseket tárgyalja. Tanulja meg, hogyan kerülheti el a költséges hibákat megfelelő kapacitástervezéssel, SKU kiválasztással és előzetes ellenőrzésekkel.
 
-> Érvényesítve az `azd 1.25.6` verzióval, 2026 júniusában.
+> Ellenőrizve `azd 1.27.1` verzióval 2026 júliusában.
 
 ## Tanulási célok
 
-A fejezet elvégzésével Ön:
-- Lefuttatja az előzetes ellenőrzéseket a telepítés előtt
-- Tervezni tudja a kapacitást és becsülni az erőforrásigényeket
-- Megfelelő SKUkat választ az optimális költségért
-- Konfigurálja az Application Insights-ot a megfigyeléshez
-- Megérti a csapat-összehangolási mintákat
+Ennek a fejezetnek a befejezésével Ön:
+- Elvégzi az előzetes ellenőrzéseket telepítés előtt
+- Megtervezi a kapacitást és becslést készít az erőforrásigényekről
+- Megfelelő SKU-kat választ a költségoptimalizálás érdekében
+- Beállítja az Application Insights-ot a monitorozáshoz
+- Megérti a csapatkoordinációs mintákat
 
 ---
 
-## 📚 Tananyagok
+## 📚 Leckék
 
 | # | Lecke | Leírás | Idő |
 |---|--------|-------------|------|
-| 1 | [Előzetes ellenőrzések](preflight-checks.md) | A konfiguráció érvényesítése a telepítés előtt | 15 perc |
-| 2 | [Kapacitástervezés](capacity-planning.md) | Erőforrásigények becslése | 20 perc |
-| 3 | [SKU kiválasztás](sku-selection.md) | Megfelelő árképzési szintek választása | 15 perc |
-| 4 | [Application Insights](application-insights.md) | Megfigyelés konfigurálása | 20 perc |
-| 5 | [Összehangolási minták](coordination-patterns.md) | Csapat telepítési munkafolyamatai | 15 perc |
+| 1 | [Előzetes ellenőrzések](preflight-checks.md) | Konfiguráció ellenőrzése telepítés előtt | 15 perc |
+| 2 | [Kapacitástervezés](capacity-planning.md) | Erőforrásigény becslése | 20 perc |
+| 3 | [SKU választás](sku-selection.md) | Megfelelő árazási szintek kiválasztása | 15 perc |
+| 4 | [Application Insights](application-insights.md) | Monitorozás konfigurálása | 20 perc |
+| 5 | [Koordinációs minták](coordination-patterns.md) | Csapat telepítési munkafolyamatok | 15 perc |
 
 ---
 
-## 🚀 Gyors indulás
+## 🚀 Gyors indítás
 
 ```bash
-# Ellenőrizze az előfizetés kvótáit
+# Ellenőrizze az előfizetési kvótákat
 az vm list-usage --location eastus --output table
 
-# Telepítés előnézete (erőforrások nem jönnek létre)
+# Telepítés előnézete (nincs erőforrás létrehozva)
 azd provision --preview
 
-# Bicep szintaxis érvényesítése
+# Bicep szintaxis ellenőrzése
 az bicep build --file infra/main.bicep
 
-# Környezeti konfiguráció ellenőrzése
+# Ellenőrizze a környezeti konfigurációt
 azd env get-values
 ```
 
 ---
 
-## ☑️ Telepítés előtti ellenőrző lista
+## ☑️ Telepítés előtti ellenőrzőlista
 
-### Mielőtt `azd provision` parancsot futtatná
+### Mielőtt `azd provision`-t futtatna
 
 - [ ] Kvóta ellenőrizve a régióban
-- [ ] SKUk megfelelően kiválasztva
+- [ ] SKU-k megfelelően kiválasztva
 - [ ] Költségbecslés átnézve
-- [ ] Megnevezési konvenció egységes
+- [ ] Névmegjelölés következetes
 - [ ] Biztonság/RBAC beállítva
 
-### Mielőtt `azd deploy` parancsot futtatná
+### Mielőtt `azd deploy`-t futtatna
 
 - [ ] Környezeti változók beállítva
 - [ ] Titkok a Key Vault-ban
 - [ ] Kapcsolati karakterláncok ellenőrizve
-- [ ] Egészségügyi ellenőrzések konfigurálva
+- [ ] Állapotellenőrzések konfigurálva
 
 ---
 
-## 💰 SKU kiválasztási útmutató
+## 💰 SKU választási útmutató
 
-| Munkaterhelés | Fejlesztés | Éles környezet |
+| Munkaterhelés | Fejlesztés | Termelés |
 |----------|-------------|------------|
-| Konténeralkalmazások | Consumption | Dedikált D4 |
-| App Service | B1/B2 | P1v3+ |
+| Konténeralkalmazások | Fogyasztás | Dedikált D4 |
+| Alkalmazásszolgáltatás | B1/B2 | P1v3+ |
 | Microsoft Foundry modellek | Standard | Standard + PTU |
-| AI keresés | Alap | Standard S2+ |
+| AI Keresés | Alap | Standard S2+ |
 
 ---
 
@@ -94,7 +94,7 @@ azd env get-values
 
 - [Konfigurációs útmutató](../chapter-03-configuration/configuration.md)
 - [Telepítési útmutató](../chapter-04-infrastructure/deployment-guide.md)
-- [Gyakori problémák](../chapter-07-troubleshooting/common-issues.md)
+- [Gyakori hibák](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

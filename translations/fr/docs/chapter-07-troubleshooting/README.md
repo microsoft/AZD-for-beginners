@@ -1,20 +1,20 @@
 # Chapitre 7 : Dépannage & Debugging
 
-**📚 Cours** : [AZD Pour Débutants](../../README.md) | **⏱️ Durée** : 1-1.5 heures | **⭐ Complexité** : Intermédiaire
+**📚 Cours** : [AZD Pour Débutants](../../README.md) | **⏱️ Durée** : 1-1,5 heures | **⭐ Complexité** : Intermédiaire
 
 ---
 
-## Aperçu
+## Vue d'ensemble
 
-Ce chapitre vous aide à diagnostiquer et résoudre les problèmes courants lors de l'utilisation de Azure Developer CLI. Des échecs de déploiement aux problèmes spécifiques à l'IA.
+Ce chapitre vous aide à diagnostiquer et résoudre les problèmes courants lors de l’utilisation de Azure Developer CLI. Des échecs de déploiement aux problèmes spécifiques à l’IA.
 
-> Validé avec `azd 1.25.6` en juin 2026.
+> Validé avec `azd 1.27.1` en juillet 2026.
 
-## Objectifs d'apprentissage
+## Objectifs d’apprentissage
 
-En complétant ce chapitre, vous allez :
+En terminant ce chapitre, vous allez :
 - Diagnostiquer les échecs courants de déploiement AZD
-- Déboguer les problèmes d'authentification et de permissions
+- Debugger les problèmes d’authentification et de permissions
 - Résoudre les problèmes de connectivité des services IA
 - Utiliser le portail Azure et la CLI pour le dépannage
 
@@ -23,21 +23,21 @@ En complétant ce chapitre, vous allez :
 ## 📚 Leçons
 
 | # | Leçon | Description | Durée |
-|---|--------|-------------|-------|
-| 1 | [Problèmes courants](common-issues.md) | Problèmes fréquemment rencontrés | 30 min |
-| 2 | [Guide de débogage](debugging.md) | Stratégies de débogage étape par étape | 45 min |
-| 3 | [Dépannage IA](ai-troubleshooting.md) | Problèmes spécifiques à l'IA | 30 min |
+|---|--------|-------------|------|
+| 1 | [Problèmes Courants](common-issues.md) | Problèmes fréquemment rencontrés | 30 min |
+| 2 | [Guide de Debugging](debugging.md) | Stratégies de debugging étape par étape | 45 min |
+| 3 | [Dépannage IA](ai-troubleshooting.md) | Problèmes spécifiques à l’IA | 30 min |
 
 ---
 
-## 🚨 Correctifs rapides
+## 🚨 Corrections Rapides
 
-### Problèmes d'authentification
+### Problèmes d’authentification
 ```bash
-# Nécessaire pour les workflows AZD
+# Requis pour les flux de travail AZD
 azd auth login
 
-# Optionnel si vous utilisez également directement les commandes Azure CLI
+# Facultatif si vous utilisez également les commandes Azure CLI directement
 az login
 
 azd auth status
@@ -66,26 +66,26 @@ azd up
 
 ---
 
-## 📋 Référence des codes d'erreur
+## 📋 Référence des Codes d’Erreur
 
 | Erreur | Cause | Solution |
-|--------|-------|----------|
+|-------|-------|----------|
 | `AuthenticationError` | Non connecté | `azd auth login` |
-| `ResourceNotFound` | Ressource manquante | Vérifiez les noms des ressources |
-| `QuotaExceeded` | Limites d'abonnement | Demandez une augmentation du quota |
+| `ResourceNotFound` | Ressource manquante | Vérifier les noms des ressources |
+| `QuotaExceeded` | Limites d’abonnement | Demander une augmentation de quota |
 | `InvalidTemplate` | Erreur de syntaxe Bicep | `az bicep build` |
-| `Conflict` | Ressource existante | Utilisez un nouveau nom ou supprimez |
-| `Forbidden` | Permissions insuffisantes | Vérifiez les rôles RBAC |
+| `Conflict` | Ressource existante | Utiliser un nouveau nom ou supprimer |
+| `Forbidden` | Permissions insuffisantes | Vérifier les rôles RBAC |
 
 ---
 
-## 🔄 Réinitialisation et récupération
+## 🔄 Réinitialisation et Récupération
 
 ```bash
 # Réinitialisation douce (conserver les ressources, redéployer le code)
 azd deploy --force
 
-# Réinitialisation complète (tout supprimer, recommencer à zéro)
+# Réinitialisation complète (tout supprimer, repartir à zéro)
 azd down --force --purge
 azd up
 ```
@@ -95,16 +95,16 @@ azd up
 ## 🔗 Navigation
 
 | Direction | Chapitre |
-|-----------|----------|
+|-----------|---------|
 | **Précédent** | [Chapitre 6 : Pré-déploiement](../chapter-06-pre-deployment/README.md) |
 | **Suivant** | [Chapitre 8 : Production](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Ressources associées
+## 📖 Ressources Associées
 
-- [Vérifications pré-déploiement](../chapter-06-pre-deployment/preflight-checks.md)
-- [Guide de configuration](../chapter-03-configuration/configuration.md)
+- [Vérifications Pré-déploiement](../chapter-06-pre-deployment/preflight-checks.md)
+- [Guide de Configuration](../chapter-03-configuration/configuration.md)
 - [Problèmes GitHub AZD](https://github.com/Azure/azure-dev/issues)
 
 ---

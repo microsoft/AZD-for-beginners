@@ -1,23 +1,23 @@
-# Kapitola 6: Plánování a validace před nasazením
+# Kapitola 6: Plánování a ověřování před nasazením
 
-**📚 Kurz**: [AZD pro začátečníky](../../README.md) | **⏱️ Doba trvání**: 1 hodina | **⭐ Složitost**: Střední
+**📚 Kurz**: [AZD pro začátečníky](../../README.md) | **⏱️ Délka**: 1 hodina | **⭐ Složitost**: Středně pokročilý
 
 ---
 
 ## Přehled
 
-Tato kapitola pokrývá nezbytné kroky plánování a ověřování před nasazením vaší aplikace. Naučíte se vyhnout se nákladným chybám pomocí správného plánování kapacit, výběru SKU a předběžných kontrol.
+Tato kapitola pokrývá zásadní kroky plánování a ověřování před nasazením vaší aplikace. Naučte se vyhnout nákladným chybám správným plánováním kapacity, výběrem SKU a kontrolami před nasazením.
 
-> Ověřeno na `azd 1.25.6` v červnu 2026.
+> Ověřeno proti `azd 1.27.1` v červenci 2026.
 
-## Výukové cíle
+## Cíle učení
 
 Po dokončení této kapitoly budete:
-- Provádět předběžné kontroly před nasazením
-- Plánovat kapacity a odhadovat požadavky na zdroje
+- Provádět kontroly před nasazením
+- Plánovat kapacitu a odhadovat požadavky na prostředky
 - Vybrat vhodné SKU pro optimalizaci nákladů
 - Konfigurovat Application Insights pro monitorování
-- Pochopit vzory koordinace týmu
+- Rozumět vzorům koordinace v týmu
 
 ---
 
@@ -25,21 +25,21 @@ Po dokončení této kapitoly budete:
 
 | # | Lekce | Popis | Čas |
 |---|--------|-------------|------|
-| 1 | [Předběžné kontroly](preflight-checks.md) | Ověřit konfiguraci před nasazením | 15 min |
-| 2 | [Plánování kapacity](capacity-planning.md) | Odhadnout požadavky na zdroje | 20 min |
-| 3 | [Výběr SKU](sku-selection.md) | Vybrat vhodné cenové úrovně | 15 min |
-| 4 | [Application Insights](application-insights.md) | Konfigurovat monitorování | 20 min |
-| 5 | [Koordinační vzory](coordination-patterns.md) | Pracovní postupy týmu při nasazení | 15 min |
+| 1 | [Kontroly před nasazením](preflight-checks.md) | Ověření konfigurace před nasazením | 15 min |
+| 2 | [Plánování kapacity](capacity-planning.md) | Odhad požadavků na prostředky | 20 min |
+| 3 | [Výběr SKU](sku-selection.md) | Výběr vhodných cenových úrovní | 15 min |
+| 4 | [Application Insights](application-insights.md) | Konfigurace monitorování | 20 min |
+| 5 | [Vzor koordinace](coordination-patterns.md) | Pracovní postupy nasazení týmu | 15 min |
 
 ---
 
 ## 🚀 Rychlý start
 
 ```bash
-# Zkontrolovat kvóty předplatného
+# Zkontrolovat limity předplatného
 az vm list-usage --location eastus --output table
 
-# Náhled nasazení (nebudou vytvořeny žádné prostředky)
+# Náhled nasazení (žádné zdroje nejsou vytvořeny)
 azd provision --preview
 
 # Ověřit syntaxi Bicep
@@ -55,18 +55,18 @@ azd env get-values
 
 ### Před `azd provision`
 
-- [ ] Kvóty ověřeny pro region
-- [ ] Vybrány vhodné SKU
-- [ ] Odhad nákladů zkontrolován
-- [ ] Konvence pojmenování konzistentní
-- [ ] Zabezpečení/RBAC nakonfigurováno
+- [ ] Kvóta ověřena pro daný region
+- [ ] Vhodný výběr SKU
+- [ ] Přehled odhadu nákladů
+- [ ] Konzistentní pojmenování
+- [ ] Nastavení zabezpečení/RBAC
 
 ### Před `azd deploy`
 
-- [ ] Proměnné prostředí nastaveny
-- [ ] Tajné údaje v Key Vault
-- [ ] Řetězce připojení ověřeny
-- [ ] Kontroly stavu nakonfigurovány
+- [ ] Nastavené proměnné prostředí
+- [ ] Tajemství v Key Vault
+- [ ] Ověřené připojovací řetězce
+- [ ] Konfigurované kontrolní sondy stavu
 
 ---
 
@@ -85,7 +85,7 @@ azd env get-values
 
 | Směr | Kapitola |
 |-----------|---------|
-| **Předchozí** | [Kapitola 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
+| **Předchozí** | [Kapitola 5: Více agentů](../chapter-05-multi-agent/README.md) |
 | **Další** | [Kapitola 7: Řešení problémů](../chapter-07-troubleshooting/README.md) |
 
 ---

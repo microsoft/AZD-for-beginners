@@ -1,21 +1,21 @@
 # Kapittel 7: Feilsøking og Debugging
 
-**📚 Kurs**: [AZD For Nybegynnere](../../README.md) | **⏱️ Varighet**: 1-1.5 timer | **⭐ Vanskelighetsgrad**: Middels
+**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Varighet**: 1-1.5 timer | **⭐ Vanskelighetsgrad**: Middels
 
 ---
 
 ## Oversikt
 
-Dette kapittelet hjelper deg med å diagnostisere og løse vanlige problemer når du arbeider med Azure Developer CLI. Fra distribusjonsfeil til AI-spesifikke problemer.
+Dette kapittelet hjelper deg å diagnostisere og løse vanlige problemer når du jobber med Azure Developer CLI. Fra distribusjonsfeil til AI-spesifikke problemer.
 
-> Validert mot `azd 1.25.6` i juni 2026.
+> Validert mot `azd 1.27.1` i juli 2026.
 
-## Lære mål
+## Læringsmål
 
 Ved å fullføre dette kapittelet vil du:
 - Diagnostisere vanlige AZD distribusjonsfeil
-- Debugge autentiserings- og tillatelsesproblemer
-- Løse AI-tjenestetilkoblingsproblemer
+- Feilsøke autentiserings- og tillatelsesproblemer
+- Løse AI-tjeneste tilkoblingsproblemer
 - Bruke Azure Portal og CLI for feilsøking
 
 ---
@@ -24,17 +24,17 @@ Ved å fullføre dette kapittelet vil du:
 
 | # | Leksjon | Beskrivelse | Tid |
 |---|--------|-------------|------|
-| 1 | [Vanlige Problemer](common-issues.md) | Ofte møtte problemer | 30 min |
-| 2 | [Debugging Guide](debugging.md) | Steg-for-steg debugging strategier | 45 min |
-| 3 | [AI Feilsøking](ai-troubleshooting.md) | AI-spesifikke problemer | 30 min |
+| 1 | [Vanlige problemer](common-issues.md) | Ofte forekommende problemer | 30 min |
+| 2 | [Debugging guide](debugging.md) | Trinnvise feilsøkingsstrategier | 45 min |
+| 3 | [AI feilsøking](ai-troubleshooting.md) | AI-spesifikke problemer | 30 min |
 
 ---
 
-## 🚨 Raske Løsninger
+## 🚨 Rask løsning
 
 ### Autentiseringsproblemer
 ```bash
-# Kreves for AZD-arbeidsflyter
+# Påkrevd for AZD-arbeidsflyter
 azd auth login
 
 # Valgfritt hvis du også bruker Azure CLI-kommandoer direkte
@@ -43,7 +43,7 @@ az login
 azd auth status
 ```
 
-### Tildelingsfeil
+### Distribusjonsfeil
 ```bash
 azd show
 azd monitor --logs
@@ -57,7 +57,7 @@ azd env new different-name
 azd up
 ```
 
-### Kvotekontroll overskredet
+### Kvote overskredet
 ```bash
 az vm list-usage --location eastus --output table
 azd env set AZURE_LOCATION westus2
@@ -66,20 +66,20 @@ azd up
 
 ---
 
-## 📋 Feilkodeskatalog
+## 📋 Feilkodeoversikt
 
 | Feil | Årsak | Løsning |
 |-------|-------|----------|
-| `AuthenticationError` | Ikke logget inn | `azd auth login` |
+| `AuthenticationError` | Ikke innlogget | `azd auth login` |
 | `ResourceNotFound` | Manglende ressurs | Sjekk ressursnavn |
-| `QuotaExceeded` | Abonnementsgrenser | Be om kvoteforhøyelse |
+| `QuotaExceeded` | Abonnementsgrenser | Be om økning av kvote |
 | `InvalidTemplate` | Bicep syntaksfeil | `az bicep build` |
 | `Conflict` | Ressurs eksisterer | Bruk nytt navn eller slett |
-| `Forbidden` | Utilstrekkelige tillatelser | Sjekk RBAC roller |
+| `Forbidden` | Utilstrekkelige rettigheter | Sjekk RBAC roller |
 
 ---
 
-## 🔄 Tilbakestilling og Gjenoppretting
+## 🔄 Tilbakestilling og gjenoppretting
 
 ```bash
 # Myk tilbakestilling (behold ressurser, distribuer kode på nytt)
@@ -96,14 +96,14 @@ azd up
 
 | Retning | Kapittel |
 |-----------|---------|
-| **Forrige** | [Kapittel 6: Før Distribusjon](../chapter-06-pre-deployment/README.md) |
+| **Forrige** | [Kapittel 6: Forberedelse før distribusjon](../chapter-06-pre-deployment/README.md) |
 | **Neste** | [Kapittel 8: Produksjon](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Relaterte Ressurser
+## 📖 Relaterte ressurser
 
-- [Før-distribusjonskontroller](../chapter-06-pre-deployment/preflight-checks.md)
+- [Forhåndssjekker før distribusjon](../chapter-06-pre-deployment/preflight-checks.md)
 - [Konfigurasjonsguide](../chapter-03-configuration/configuration.md)
 - [AZD GitHub Issues](https://github.com/Azure/azure-dev/issues)
 

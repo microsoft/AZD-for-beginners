@@ -1,59 +1,59 @@
-# Dalhin ang Iyong Sariling App - Idagdag ang azd sa Umiiral na Proyekto
+# Dalhin ang Iyong Sariling App - Magdagdag ng azd sa Umiiral na Proyekto
 
-**Chapter Navigation:**
-- **📚 Tahanan ng Kurso**: [AZD Para sa Mga Nagsisimula](../../README.md)
-- **📖 Kasalukuyang Kabanata**: Kabanata 1 - Pundasyon at Mabilisang Simula
+**Navigasyon ng Kabanata:**
+- **📚 Bahay ng Kurso**: [AZD Para sa mga Nagsisimula](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 1 - Pundasyon at Mabilis na Pagsisimula
 - **⬅️ Nakaraan**: [Ang Iyong Unang Proyekto](first-project.md)
-- **➡️ Susunod**: [Dev Containers at Codespaces](dev-containers.md)
+- **➡️ Susunod**: [Dev Containers & Codespaces](dev-containers.md)
 
-> Napatunayan gamit ang `azd 1.25.6` noong Hunyo 2026.
+> Napatunayan gamit ang `azd 1.27.1` noong Hulyo 2026.
 
 ## Panimula
 
-Sa [Ang Iyong Unang Proyekto](first-project.md) nag-deploy ka ng app sa pamamagitan ng pagsisimula mula sa template. Ngunit kadalasan mayroon ka nang app—isang Node.js API, isang Python Flask service, isang .NET web app—na nasa isang folder sa iyong makina. Ipinapakita ng araling ito kung paano idagdag ang azd sa umiiral na code upang ma-deploy mo ito gamit ang `azd up`, walang template na kinakailangan.
+Sa [Ang Iyong Unang Proyekto](first-project.md) nag-deploy ka ng app sa pamamagitan ng pagsisimula mula sa isang template. Ngunit kadalasan ay mayroon ka nang *app*—isang Node.js API, Python Flask service, .NET web app—na nakalagay sa folder sa iyong makina. Ipinapakita ng araling ito kung paano idagdag ang azd sa umiiral na code upang ma-deploy mo ito gamit ang `azd up`, hindi kailangan ng template.
 
-## Mga Layunin sa Pagkatuto
+## Mga Layunin ng Pagkatuto
 
-Sa pagtatapos ng araling ito, ikaw ay:
-- Maiintindihan ang tatlong paraan upang simulan ang isang proyektong azd
-- Mapapatakbo ang `azd init` sa loob ng umiiral na codebase
-- Maiintindihan kung ano ang ginagawa ng `azure.yaml` at ng folder na `infra/` para sa iyong app
-- Malalaman kung kailan hayaan ang azd na mag-generate ng imprastruktura kumpara sa pagsulat ng sarili mong IaC
-- Maide-deploy ang iyong umiiral na app sa Azure gamit ang `azd up`
+Sa pagtatapos ng araling ito, malalaman mo:
+- Ang tatlong paraan upang magsimula ng azd na proyekto
+- Patakbuhin ang `azd init` sa loob ng umiiral na codebase
+- Ano ang ginagawa ng `azure.yaml` at ng folder na `infra/` para sa iyong app
+- Kailan papayagan ang azd na gumawa ng imprastruktura kumpara sa pagsulat nito mismo
+- I-deploy ang iyong umiiral na app sa Azure gamit ang `azd up`
 
-## Mga Kinalabasan ng Pagkatuto
+## Mga Resulta ng Pagkatuto
 
 Pagkatapos makumpleto ang araling ito, magagawa mong:
-- I-initialize ang azd sa isang proyektong mayroon ka na
-- Basahin at i-edit ang isang pangunahing `azure.yaml` na file
-- Mag-generate ng panimulang imprastruktura gamit ang `azd infra generate`
+- Ini-initialize ang azd sa proyekto na mayroon ka na
+- Basahin at i-edit ang isang pangunahing `azure.yaml` file
+- Gumawa ng panimulang imprastruktura gamit ang `azd infra generate`
 - Pumili ng angkop na Azure host para sa iyong app
-- Mag-deploy at maglinis ng iyong sariling aplikasyon
+- I-deploy at linisin ang iyong sariling aplikasyon
 
 ---
 
-## Tatlong Paraan para Simulan ang isang proyektong azd
+## Tatlong Paraan upang Magsimula ng azd na Proyekto
 
-| Starting point | Command | When to use |
+| Panimulang punto | Utos | Kailan gagamitin |
 |----------------|---------|-------------|
-| **Mula sa template** | `azd init --template <name>` | Para sa pag-aaral, o sa pagsisimula ng bagong app mula sa subok na halimbawa |
-| **Mula sa umiiral na code** | `azd init` (sa iyong project folder) | Mayroon ka nang app at gusto mo itong i-deploy |
-| **Mula sa Git repo** | `azd init --from-code` (sa isang cloned repo) | Pag-aampon ng azd para sa umiiral na repositoryo |
+| **Mula sa template** | `azd init --template <name>` | Para sa pagkatuto, o pagsisimula ng bagong app mula sa subok na halimbawa |
+| **Mula sa umiiral mong code** | `azd init` (sa loob ng folder ng proyekto) | Mayroon ka nang app at gusto mo itong i-deploy |
+| **Mula sa Git repo** | `azd init --from-code` (sa isang cloned na repo) | Pagtanggap ng azd para sa umiiral na repositoryo |
 
-Nasubukan mo na ang unang opsyon. Tinatalakay ng araling ito ang pangalawa—ang pinakakaraniwang senaryo sa totoong buhay.
+Nasubukan mo na ang unang opsyon. Tinatalakay sa araling ito ang pangalawang paraan—ang pinaka-karaniwang senaryo sa totoong buhay.
 
 ---
 
 ## Hakbang 1: Patakbuhin ang `azd init` sa Iyong Proyekto
 
-Buksan ang terminal **sa loob ng umiiral mong folder ng proyekto** at patakbuhin:
+Buksan ang terminal **sa loob ng umiiral mong project folder** at patakbuhin:
 
 ```bash
 cd my-existing-app
 azd init
 ```
 
-Tatanungin ka ng azd kung paano mo gustong i-initialize. Piliin:
+Tatanungin ka ng azd kung paano mo nais i-initialize. Piliin:
 
 ```
 ? How do you want to initialize your app?
@@ -61,24 +61,24 @@ Tatanungin ka ng azd kung paano mo gustong i-initialize. Piliin:
   Select a template
 ```
 
-Piliin **"Gamitin ang code sa kasalukuyang direktoryo."** Tini-scan ng azd ang iyong folder, natutukoy ang iyong wika at framework, at magmumungkahi ng host.
+Piliin ang **"Use code in the current directory."** Susuriin ng azd ang folder mo, tutuklasin ang wika at framework, at magmumungkahi ng host.
 
-### Ano ang natutukoy ng azd
+### Ano ang natutuklasan ng azd
 
-Tinitingnan ng azd ang mga senyales tulad ng `package.json`, `requirements.txt`, `pom.xml`, `*.csproj`, o isang `Dockerfile`, at nagmumungkahi ng katugmang Azure host:
+Hinahanap ng azd ang mga palatandaan tulad ng `package.json`, `requirements.txt`, `pom.xml`, `*.csproj`, o isang `Dockerfile`, at nagmumungkahi ng akmang Azure host:
 
-| Ang iyong app | Posibleng matukoy na host |
-|---------------|---------------------------|
+| Iyong app | Malamang na host na natuklasan |
+|----------|----------------------|
 | Node.js / Python / .NET web app | Azure App Service o Container Apps |
 | Containerized app (`Dockerfile`) | Azure Container Apps |
 | Function app | Azure Functions |
 | Static site (React/Vue build output) | Azure Static Web Apps |
 
-Kumpirmahin ang natukoy na serbisyo, at gagawa ang azd ng mga file na kailangan mo.
+Kumpirmahin ang natuklasang serbisyo, at maghahanda ang azd ng mga file na kailangan mo.
 
 ---
 
-## Hakbang 2: Unawain Kung Ano ang Nilikha ng azd
+## Hakbang 2: Intindihin Kung Ano ang Ginawa ng azd
 
 Pagkatapos ng init, magkakaroon ka ng dalawang bagong bagay sa iyong proyekto:
 
@@ -92,9 +92,9 @@ my-existing-app/
 └── ...                 # your existing files, untouched
 ```
 
-### `azure.yaml` — ang definisyon ng proyekto
+### `azure.yaml` — ang depende ng proyekto
 
-Ito ang puso ng isang azd project. Ang isang minimal na halimbawa ay ganito ang hitsura:
+Ito ang puso ng azd na proyekto. Ang isang minimal ay ganito ang hitsura:
 
 ```yaml
 # azure.yaml
@@ -106,66 +106,66 @@ services:
     host: appservice         # appservice | containerapp | function | staticwebapp
 ```
 
-Ang `services` block ang pangunahing bahagi: bawat entry ay nagmamapa ng isang folder ng iyong code sa isang Azure host. Kung ang iyong app ay may frontend at API, magkakaroon ka ng dalawang serbisyo.
+Ang `services` block ang pangunahing bahagi: bawat entry ay tumutugma sa isang folder ng iyong code papunta sa Azure host. Kung ang iyong app ay may frontend at API, magkakaroon ka ng dalawang serbisyo.
 
-### `infra/` — ang iyong mga resource sa Azure bilang code
+### `infra/` — ang iyong Azure resources bilang code
 
-Ang folder na `infra/` ay naglalaman ng mga Bicep file na naglalarawan ng mga Azure resource na kailangan ng iyong app (ang App Service, ang database, atbp.). Hindi mo kailangang isulat ito nang mano-mano—nagge-generate ang azd ng isang gumaganang panimulang punto. Maaari mo silang i-edit mamaya upang magdagdag ng mga resource o pahigpitin ang seguridad (tinalakay sa [Kabanata 4](../chapter-04-infrastructure/README.md)).
+Hawak ng `infra/` folder ang mga Bicep file na naglalarawan ng mga Azure resources na kailangan ng iyong app (App Service, database, atbp.). Hindi mo kailangang isulat ito nang manu-mano—ang azd ang bumubuo ng panimulang punto na gumagana. Maaari mo itong i-edit mamaya upang magdagdag ng mga resources o higpitan ang seguridad (tinalakay sa [Kabanata 4](../chapter-04-infrastructure/README.md)).
 
-> **Tip:** Gusto mong makita o i-customize ang ginawang imprastruktura bago mag-deploy? Patakbuhin ang `azd infra generate` (magagamit din bilang `azd infra synth`) upang isulat ang IaC sa disk para ma-review at ma-version-control mo ito.
+> **Tip:** Gusto mo bang makita o i-customize ang nabuo na imprastruktura bago mag-deploy? Patakbuhin ang `azd infra generate` (pati na rin bilang `azd infra synth`) upang isulat ang IaC sa disk para marebyu at mapamahalaan mo sa version control.
 
 ---
 
-## Hakbang 3: Itakda ang Kinakailangang Konfigurasyon
+## Hakbang 3: I-set ang Kinakailangang Konfigurasyon
 
-Kung nangangailangan ng settings o secrets ang iyong app (isang connection string, isang API key), huwag itong i-hardcode. Gumamit ng mga environment value:
+Kung kailangan ng iyong app ng settings o mga sikreto (tulad ng connection string, API key), huwag mo itong i-hardcode. Gamitin ang mga environment values:
 
 ```bash
 # Lumikha ng isang kapaligiran
 azd env new dev
 
-# Itakda ang isang hindi lihim na halaga
+# Itakda ang isang halaga na hindi lihim
 azd env set API_VERSION 1.0.0
 ```
 
-Para sa totoong mga secret, itago ang mga ito sa Key Vault at i-reference mula sa iyong imprastruktura—tingnan ang [Kabanata 3: Configuration & Authentication](../chapter-03-configuration/authsecurity.md).
+Para sa tunay na mga sikreto, itago ito sa Key Vault at i-refer ito mula sa iyong imprastruktura—tingnan ang [Kabanata 3: Configuration & Authentication](../chapter-03-configuration/authsecurity.md).
 
 ---
 
-## Hakbang 4: I-deploy
+## Hakbang 4: Mag-deploy
 
-Ngayon gamitin ang parehong workflow na alam mo na:
+Gamitin ang parehong workflow na kilala mo na:
 
 ```bash
-# Magpatunay ng pagkakakilanlan (kailangan para sa azd)
+# Magpatunay (kailangan para sa azd)
 azd auth login
 
-# I-preview ang mga resource na malilikha
+# Tingnan ang mga mapagkukunan na malilikha
 azd provision --preview
 
-# Ihanda ang imprastraktura at i-deploy ang iyong code
+# Maglaan ng imprastraktura at i-deploy ang iyong code
 azd up
 ```
 
-Kapag natapos na, ipi-print ng azd ang URL ng iyong app. I-verify ito sa parehong paraan tulad ng anumang azd app:
+Kapag tapos na, ipapakita ng azd ang URL ng iyong app. Patunayan ito sa parehong paraan ng kahit anong azd app:
 
 ```bash
 azd show           # ipakita ang mga endpoint
-azd monitor --logs # suriin ang mga log kung kinakailangan
+azd monitor --logs # tingnan ang mga tala kung kinakailangan
 ```
 
 ---
 
-## Mga Karaniwang Unang Problema
+## Karaniwang Mga Suliranin sa Unang Pagsubok
 
-| Sintomas | Malamang na sanhi | Ayusin |
-|---------|------------------|--------|
-| azd didn't detect my app | Missing manifest (e.g., `package.json`) | Idagdag ang manifest, o piliin ang host nang manu-mano sa `azd init` |
-| Build fails during `azd up` | App needs a build step | Idagdag ang `buildCommand`/`outputPath` sa ilalim ng service sa `azure.yaml` |
-| App starts but returns errors | Missing config/secret | Itakda ang mga value gamit ang `azd env set` o i-wire ang Key Vault |
-| Wrong host chosen | Auto-detection guessed | I-edit ang `host:` sa `azure.yaml` at i-run muli ang `azd up` |
+| Sintomas | Malamang na sanhi | Solusyon |
+|---------|--------------|-----|
+| Hindi nadetect ng azd ang app ko | Wala ang manifest (hal. `package.json`) | Idagdag ang manifest, o piliin ang host nang manu-mano sa `azd init` |
+| Bumagsak ang build sa `azd up` | Kailangan ng build step ang app | Idagdag ang `buildCommand`/`outputPath` sa ilalim ng serbisyo sa `azure.yaml` |
+| Nagsimula ang app pero nagbalik ng mga error | Wala ang config/sikreto | I-set ang mga halaga gamit ang `azd env set` o i-configure ang Key Vault |
+| Mali ang napiling host | Mali ang hula ng auto-detection | I-edit ang `host:` sa `azure.yaml` at patakbuhin muli ang `azd up` |
 
-Para sa karagdagan, tingnan ang [Kabanata 7: Pag-troubleshoot](../chapter-07-troubleshooting/README.md).
+Para sa iba pa, tingnan ang [Kabanata 7: Pag-ayos ng Problema](../chapter-07-troubleshooting/README.md).
 
 ---
 
@@ -179,26 +179,27 @@ azd down --force --purge
 
 ## Buod
 
-- `azd init` → **"Gamitin ang code sa kasalukuyang direktoryo"** nagdaragdag ng azd sa isang app na mayroon ka na.
-- `azure.yaml` ang nagmamapa ng iyong mga folder ng code sa mga Azure host; `infra/` ang naglalarawan ng mga resource bilang Bicep.
-- `azd infra generate` nagbibigay-daan sa iyo na i-review o i-customize ang ginawang imprastruktura.
-- Kapag na-initialize na, ginagamit ng iyong umiiral na app ang eksaktong parehong `azd up` / `azd down` na workflow tulad ng isang app na nagsimula mula sa template.
+- Ang `azd init` → **"Use code in the current directory"** ay nagdadagdag ng azd sa app na mayroon ka na.
+- Tinutukoy ng `azure.yaml` ang mga folder ng code mo sa mga Azure host; ang `infra/` ay naglalarawan ng mga resources bilang Bicep.
+- Pinapayagan ka ng `azd infra generate` na suriin o i-customize ang nabuo na imprastruktura.
+- Kapag na-initialize, ginagamit ng umiiral mong app ang eksaktong parehong workflow ng `azd up` / `azd down` gaya ng app na naka-base sa template.
 
 ---
 
-## 🔗 Nabigasyon
+## 🔗 Navigasyon
 
 | Direksyon | Aralin |
 |-----------|--------|
-| **Previous** | [Ang Iyong Unang Proyekto](first-project.md) |
-| **Next** | [Dev Containers at Codespaces](dev-containers.md) |
 
-## 📖 Kaugnay na Mga Mapagkukunan
+| **Nakaraan** | [Ang Iyong Unang Proyekto](first-project.md) |
+| **Susunod** | [Dev Containers & Codespaces](dev-containers.md) |
 
-- [Mga Batayan ng AZD](azd-basics.md)
-- [Kabanata 4: Imprastruktura bilang Code](../chapter-04-infrastructure/README.md)
-- [Konfigurasyon at Pagpapatunay](../chapter-03-configuration/authsecurity.md)
-- [Cheat Sheet ng mga Utos](../../resources/cheat-sheet.md)
+## 📖 Mga Kaugnay na Pinagkukunan
+
+- [Mga Pangunahing Kaalaman sa AZD](azd-basics.md)
+- [Kabanata 4: Infrastructure as Code](../chapter-04-infrastructure/README.md)
+- [Kumpigurasyon at Pagpapatunay](../chapter-03-configuration/authsecurity.md)
+- [Command Cheat Sheet](../../resources/cheat-sheet.md)
 
 ---
 

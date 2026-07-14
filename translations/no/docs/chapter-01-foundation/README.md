@@ -1,18 +1,18 @@
 # Kapittel 1: Grunnlag & Rask Start
 
-**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Varighet**: 30-45 minutter | **⭐ Vanskelighetsgrad**: Nybegynner
+**📚 Kurs**: [AZD For Nybegynnere](../../README.md) | **⏱️ Varighet**: 30-45 minutter | **⭐ Vanskelighetsgrad**: Nybegynner
 
 ---
 
 ## Oversikt
 
-Dette kapitlet introduserer Azure Developer CLI (azd) grunnleggende. Du vil lære kjernebegreper, installere verktøyene og distribuere din første applikasjon til Azure.
+Dette kapittelet introduserer Azure Developer CLI (azd) grunnleggende. Du vil lære kjernekonsepter, installere verktøyene og distribuere din første applikasjon til Azure.
 
-> Validert mot `azd 1.25.6` i juni 2026.
+> Validert med `azd 1.27.1` i juli 2026.
 
 ## Læringsmål
 
-Ved å fullføre dette kapitlet vil du:
+Ved å fullføre dette kapittelet vil du:
 - Forstå hva Azure Developer CLI er og hvordan det skiller seg fra Azure CLI
 - Installere og konfigurere AZD på din plattform
 - Distribuere din første applikasjon til Azure med `azd up`
@@ -23,18 +23,18 @@ Ved å fullføre dette kapitlet vil du:
 ## 📚 Leksjoner
 
 | # | Leksjon | Beskrivelse | Tid |
-|---|---------|-------------|-----|
-| 1 | [AZD Basics](azd-basics.md) | Kjernebegreper, terminologi og prosjektstruktur | 15 min |
-| 2 | [Installation & Setup](installation.md) | Plattformspesifikke installasjonsguider | 10 min |
-| 3 | [Your First Project](first-project.md) | Praktisk: Distribuer en webapp til Azure | 20 min |
-| 4 | [Bring Your Own App](bring-your-own-app.md) | Legg til azd i et eksisterende prosjekt du allerede har | 15 min |
-| 5 | [Dev Containers & Codespaces](dev-containers.md) | Reproduserbare azd-miljøer med dev containers | 15 min |
+|---|--------|-------------|------|
+| 1 | [AZD Grunnleggende](azd-basics.md) | Kjernetemaer, terminologi og prosjektstruktur | 15 min |
+| 2 | [Installasjon & Oppsett](installation.md) | Plattformspesifikke installasjonsveiledninger | 10 min |
+| 3 | [Ditt Første Prosjekt](first-project.md) | Praktisk: Distribuer en webapp til Azure | 20 min |
+| 4 | [Ta med egen app](bring-your-own-app.md) | Legg til azd i et eksisterende prosjekt du allerede har | 15 min |
+| 5 | [Utviklingscontainere & Codespaces](dev-containers.md) | Reproduserbare azd-miljøer med utviklingscontainere | 15 min |
 
 ---
 
-## ✅ Start her: Verifiser oppsettet ditt
+## ✅ Start her: Valider oppsettet ditt
 
-Før du begynner, bekreft at din lokale maskin er klar for kapittel 1-malen:
+Før du begynner, bekreft at din lokale maskin er klar for kapittel 1-mal:
 
 **Windows:**
 ```powershell
@@ -46,14 +46,14 @@ Før du begynner, bekreft at din lokale maskin er klar for kapittel 1-malen:
 bash ./validate-setup.sh
 ```
 
-Hvis skriptet rapporterer manglende verktøy, fikser du disse først og fortsetter deretter med kapitlet.
+Hvis skriptet rapporterer manglende verktøy, fiks disse først og fortsett deretter med kapitlet.
 
 ---
 
-## 🚀 Rask start
+## 🚀 Rask Start
 
 ```bash
-# Sjekk installasjonen
+# Sjekk installasjon
 azd version
 
 # Autentiser for AZD
@@ -72,13 +72,13 @@ azd down --force --purge
 
 ## ✅ Suksesskriterier
 
-Etter å ha fullført dette kapitlet skal du kunne:
+Etter å ha fullført dette kapittelet, bør du kunne:
 
 ```bash
 azd version              # Viser installert versjon
 azd init --template todo-nodejs-mongo  # Initialiserer prosjekt
 azd up                   # Distribuerer til Azure
-azd show                 # Viser URL til kjørende app
+azd show                 # Viser URL for kjørende app
 azd down --force --purge # Rydder opp ressurser
 ```
 
@@ -87,16 +87,16 @@ azd down --force --purge # Rydder opp ressurser
 ## 🔗 Navigasjon
 
 | Retning | Kapittel |
-|---------|----------|
-| **Neste** | [Kapittel 2: AI-First Development](../chapter-02-ai-development/README.md) |
+|-----------|---------|
+| **Neste** | [Kapittel 2: AI-Første Utvikling](../chapter-02-ai-development/README.md) |
 | **Hopp til** | [Kapittel 3: Konfigurasjon](../chapter-03-configuration/README.md) |
 
 ---
 
-## 📖 Relaterte ressurser
+## 📖 Relaterte Ressurser
 
-- [Kommandooversikt](../../resources/cheat-sheet.md)
-- [FAQ](../../resources/faq.md)
+- [Kommando-hurtigreferanse](../../resources/cheat-sheet.md)
+- [Ofte Stilte Spørsmål](../../resources/faq.md)
 - [Ordlisten](../../resources/glossary.md)
 
 ---

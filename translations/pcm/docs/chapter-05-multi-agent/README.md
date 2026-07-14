@@ -6,13 +6,13 @@
 
 ## Overview
 
-Dis chapter go cover advanced multi-agent architecture patterns, agent orchestration, and production-ready AI deployments for complex scenarios.
+Dis chapter dey cover advanced multi-agent architecture patterns, agent orchestration, and production-ready AI deployments for complex scenarios.
 
-> Dem don validate am wit `azd 1.25.6` for June 2026.
+> Validated against `azd 1.27.1` in July 2026.
 
 ## Learning Objectives
 
-By completing this chapter, you go:
+By completing dis chapter, you go:
 - Understand multi-agent architecture patterns
 - Deploy coordinated AI agent systems
 - Implement agent-to-agent communication
@@ -28,18 +28,18 @@ By completing this chapter, you go:
 | 2 | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) | Agent orchestration strategies (continues in Chapter 6) | 30 min |
 | 3 | [ARM Template Deployment](../../examples/retail-multiagent-arm-template/README.md) | One-click deployment example | 30 min |
 
-> **Start with Lesson 1.** Na im be the only fully hands-on, deployable lesson for this chapter. Lesson 2 dey for Chapter 6 (e dey share space wit pre-deployment planning), and the [Retail Multi-Agent Solution](../../examples/retail-scenario.md) na architecture blueprint—na design reference, no be one-command template.
+> **Start with Lesson 1.** Na only fully hands-on, deployable lesson for dis chapter. Lesson 2 dey Chapter 6 (e share with pre-deployment planning), and the [Retail Multi-Agent Solution](../../examples/retail-scenario.md) na architecture blueprint—design reference, no be one-command template.
 
 ---
 
 ## 🚀 Quick Start
 
 ```bash
-# Option 1: Use template make deployment
+# Option 1: Deploy from a template
 azd init --template agent-openai-python-prompty
 azd up
 
-# Option 2: Use agent manifest make deployment (you go need azure.ai.agents extension)
+# Option 2: Deploy from an agent manifest (requires azure.ai.agents extension)
 azd extension install azure.ai.agents
 azd ai agent init -m agent-manifest.yaml
 azd up
@@ -53,8 +53,8 @@ azd up
 
 ```mermaid
 graph TD
-    Orchestrator[Agent wey dey arrange tings<br/>Dey route requests, dey manage how work dey run] --> Customer[Agent wey dey handle customer<br/>User questions, wetin dem prefer]
-    Orchestrator --> Inventory[Agent wey dey handle inventory<br/>How stock dey, orders]
+    Orchestrator[Orchestrator Agent<br/>Dey direct requests, manage how work go] --> Customer[Customer Agent<br/>User questions, wetin dem like]
+    Orchestrator --> Inventory[Inventory Agent<br/>Stock level, orders]
 ```
 
 ---
@@ -63,9 +63,9 @@ graph TD
 
 The [Retail Multi-Agent Solution](../../examples/retail-scenario.md) dey show:
 
-- **Customer Agent**: Dey handle user interactions and preferences
-- **Inventory Agent**: Dey manage stock and order processing
-- **Orchestrator**: Dey coordinate between agents
+- **Customer Agent**: Handles user interactions and preferences
+- **Inventory Agent**: Manages stock and order processing
+- **Orchestrator**: Coordinates between agents
 - **Shared Memory**: Cross-agent context management
 
 ### Services Used

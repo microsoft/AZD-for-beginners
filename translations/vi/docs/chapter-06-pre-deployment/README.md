@@ -1,35 +1,35 @@
-# Chapter 6: Lập Kế Hoạch & Xác Thực Trước Triển Khai
+# Chương 6: Lập Kế Hoạch & Xác Thực Trước Triển Khai
 
-**📚 Course**: [AZD cho người mới bắt đầu](../../README.md) | **⏱️ Duration**: 1 giờ | **⭐ Complexity**: Trung cấp
+**📚 Khóa học**: [AZD Cho Người Mới](../../README.md) | **⏱️ Thời lượng**: 1 giờ | **⭐ Độ phức tạp**: Trung cấp
 
 ---
 
 ## Tổng quan
 
-Chương này bao gồm các bước lập kế hoạch và xác thực thiết yếu trước khi triển khai ứng dụng của bạn. Học cách tránh những sai lầm tốn kém với việc lập kế hoạch dung lượng hợp lý, lựa chọn SKU và kiểm tra tiền bay.
+Chương này bao gồm các bước lập kế hoạch và xác thực cần thiết trước khi triển khai ứng dụng của bạn. Học cách tránh các sai sót tốn kém với lập kế hoạch dung lượng đúng đắn, lựa chọn SKU và kiểm tra trước khi bay.
 
-> Đã xác thực với `azd 1.25.6` vào tháng 6 năm 2026.
+> Đã xác thực với `azd 1.27.1` vào tháng 7 năm 2026.
 
 ## Mục tiêu học tập
 
 Sau khi hoàn thành chương này, bạn sẽ:
-- Chạy kiểm tra tiền bay trước khi triển khai
+- Thực hiện kiểm tra trước khi triển khai
 - Lập kế hoạch dung lượng và ước tính yêu cầu tài nguyên
-- Chọn SKU phù hợp để tối ưu chi phí
+- Lựa chọn SKU phù hợp để tối ưu chi phí
 - Cấu hình Application Insights để giám sát
-- Hiểu các mẫu phối hợp nhóm
+- Hiểu các mẫu phối hợp trong nhóm
 
 ---
 
-## 📚 Bài học
+## 📚 Các bài học
 
 | # | Bài học | Mô tả | Thời gian |
 |---|--------|-------------|------|
-| 1 | [Preflight Checks](preflight-checks.md) | Xác thực cấu hình trước khi triển khai | 15 min |
-| 2 | [Capacity Planning](capacity-planning.md) | Ước tính yêu cầu tài nguyên | 20 min |
-| 3 | [SKU Selection](sku-selection.md) | Chọn hạng giá phù hợp | 15 min |
-| 4 | [Application Insights](application-insights.md) | Cấu hình giám sát | 20 min |
-| 5 | [Coordination Patterns](coordination-patterns.md) | Quy trình làm việc triển khai của nhóm | 15 min |
+| 1 | [Kiểm tra trước khi bay](preflight-checks.md) | Xác thực cấu hình trước triển khai | 15 phút |
+| 2 | [Lập kế hoạch dung lượng](capacity-planning.md) | Ước tính yêu cầu tài nguyên | 20 phút |
+| 3 | [Lựa chọn SKU](sku-selection.md) | Chọn mức giá phù hợp | 15 phút |
+| 4 | [Application Insights](application-insights.md) | Cấu hình giám sát | 20 phút |
+| 5 | [Các mẫu phối hợp](coordination-patterns.md) | Quy trình làm việc nhóm khi triển khai | 15 phút |
 
 ---
 
@@ -53,40 +53,40 @@ azd env get-values
 
 ## ☑️ Danh sách kiểm tra trước triển khai
 
-### Trước `azd provision`
+### Trước khi chạy `azd provision`
 
-- [ ] Hạn mức (quota) đã được xác minh cho khu vực
-- [ ] Đã chọn SKU phù hợp
-- [ ] Ước tính chi phí đã được xem xét
-- [ ] Quy ước đặt tên thống nhất
-- [ ] Bảo mật/RBAC đã được cấu hình
+- [ ] Đã xác minh hạn mức cho khu vực
+- [ ] SKU đã lựa chọn phù hợp
+- [ ] Đã xem xét ước tính chi phí
+- [ ] Quy ước đặt tên nhất quán
+- [ ] Cấu hình bảo mật/RBAC
 
-### Trước `azd deploy`
+### Trước khi chạy `azd deploy`
 
-- [ ] Biến môi trường đã được thiết lập
-- [ ] Bí mật đã lưu trong Key Vault
-- [ ] Chuỗi kết nối đã được xác minh
-- [ ] Kiểm tra tình trạng đã được cấu hình
+- [ ] Các biến môi trường đã thiết lập
+- [ ] Bí mật trong Key Vault
+- [ ] Đã xác minh chuỗi kết nối
+- [ ] Cấu hình kiểm tra sức khỏe
 
 ---
 
 ## 💰 Hướng dẫn lựa chọn SKU
 
-| Workload | Development | Production |
+| Khối lượng công việc | Phát triển | Sản xuất |
 |----------|-------------|------------|
-| Container Apps | Consumption | Dedicated D4 |
+| Container Apps | Tiêu thụ | D4 dành riêng |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standard | Standard + PTU |
-| AI Search | Basic | Standard S2+ |
+| Mô hình Microsoft Foundry | Tiêu chuẩn | Tiêu chuẩn + PTU |
+| AI Search | Cơ bản | Tiêu chuẩn S2+ |
 
 ---
 
 ## 🔗 Điều hướng
 
-| Direction | Chapter |
+| Hướng | Chương |
 |-----------|---------|
-| **Previous** | [Chương 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
-| **Next** | [Chương 7: Khắc phục sự cố](../chapter-07-troubleshooting/README.md) |
+| **Trước** | [Chương 5: Đa tác nhân](../chapter-05-multi-agent/README.md) |
+| **Tiếp theo** | [Chương 7: Khắc phục sự cố](../chapter-07-troubleshooting/README.md) |
 
 ---
 
@@ -94,7 +94,7 @@ azd env get-values
 
 - [Hướng dẫn cấu hình](../chapter-03-configuration/configuration.md)
 - [Hướng dẫn triển khai](../chapter-04-infrastructure/deployment-guide.md)
-- [Các sự cố thường gặp](../chapter-07-troubleshooting/common-issues.md)
+- [Các sự cố phổ biến](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

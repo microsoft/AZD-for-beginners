@@ -1,50 +1,50 @@
-# Microsoft Foundry Integration with AZD
+# மைக்ரோசாஃப்ட் ஃபவுன்ட்ரி ஒருங்கிணைப்பு AZD உடன்
 
-**அத்தியாயம் பயண செய்தி:**
-- **📚 பாடநூல் முகப்பு**: [AZD For Beginners](../../README.md)
-- **📖 நடப்பு அத்தியாயம்**: அத்தியாயம் 2 - AI-முதல் வளர்ப்பு
-- **⬅️ முந்தய அத்தியாயம்**: [Chapter 1: Your First Project](../chapter-01-foundation/first-project.md)
-- **➡️ அடுத்தது**: [AI Model Deployment](ai-model-deployment.md)
-- **🚀 அடுத்த அத்தியாயம்**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+**அத்தியாய வழிசெலுத்தல்:**
+- **📚 பாடநெறி முகப்பு**: [AZD புதிய பயனாளிகளுக்கு](../../README.md)
+- **📖 தற்போதைய அத்தியாயம்**: அத்தியாயம் 2 - AI-முதன்மை வளர்ச்சி
+- **⬅️ முந்தைய அத்தியாயம்**: [அத்தியாயம் 1: உங்கள் முதல் திட்டம்](../chapter-01-foundation/first-project.md)
+- **➡️ அடுத்தது**: [AI மாதிரிகள் நிறைவேற்றல்](ai-model-deployment.md)
+- **🚀 அடுத்த அத்தியாயம்**: [அத்தியாயம் 3: அமைப்புகள்](../chapter-03-configuration/configuration.md)
 
-## அறிமுகம்
+## கண்ணோட்டம்
 
-இந்த வழிகாட்டி Microsoft Foundry சேவைகள் மற்றும் Azure Developer CLI (AZD) ஐ ஒருங்கிணைத்து AI கட்டுப்படுத்தப்பட்ட பயன்பாடுகளை சீரமைக்க மற்றும் தானாக நீடித்தவையாக அமைக்க எப்படி செய்வதென்று காண்பிக்கிறது. Microsoft Foundry AI பயன்பாடுகளை உருவாக்க, 배포 செய்ய மற்றும் நிர்வகிக்க ஒரு விரிவான மேடையை வழங்குகிறது, AZD உடன் சேர்ந்து கட்டமைப்பு மற்றும் நியாகரியை எளிமையாக்குகிறது.
+இந்த வழிகாட்டி Microsoft Foundry சேவைகளை Azure Developer CLI (AZD) உடன் ஒருங்கிணைத்து AI பயன்பாட்டுகளை எளிதாக்கி நிறுவுவதற்கான முறைகளை காட்டுகிறது. Microsoft Foundry, AI பயன்பாடுகள் உருவாக்க, உடனடி பராமரிப்புக்கான முழுமையான தளம் வழங்குகிறது, மற்றும் AZD கட்டமைப்பு மற்றும் நிறுவலை எளிமைப்படுத்துகிறது.
 
-## Microsoft Foundry என்பது என்ன?
+## Microsoft Foundry என்றால் என்ன?
 
-Microsoft Foundry என்பது Microsoft இன் ஒருங்கிணைந்த AI மேடையாகும், இதில் அடங்கு:
+Microsoft Foundry என்பது Microsoft-ன் ஐக்கியமான AI வளர்ச்சி தளம் ஆகும், இது உள்ளடக்கியது:
 
-- **Model Catalog**: நவீன AI மாதிரிகளுக்கு அணுகல்
-- **Prompt Flow**: AI வேலைப்பாடுகளுக்கான காட்சி வடிவமைப்பாளர்
-- **Microsoft Foundry Portal**: AI செயலிகளுக்கான ஒருங்கிணைக்கப்பட்ட வளர்ச்சி சூழல்
-- **Deployment Options**: பல்வேறு ஹோஸ்டிங் மற்றும் ஸ்கேலிங் விருப்பங்கள்
-- **Safety and Security**: உட்பட்ட பொறுப்புள்ள AI அம்சங்கள்
+- **மாதிரி அகராதி**: अत्यাধुनिक AI மாதிரிகளுக்கு அணுகல்
+- **ப்ராம்ட் ஃப்ளோ**: AI பணியிலக்க அட்டைப்பட வடிவமைப்பாளர்
+- **Microsoft Foundry போர்டல்**: AI பயன்பாடுகளுக்கான ஒருங்கிணைந்த வளர்ச்சி சூழல்
+- **நிறுவல் தேர்வுகள்**: பல்வேறு ஹோஸ்டிங் மற்றும் அளவுரு விருப்பங்கள்
+- **பாதுகாப்பு மற்றும் பாதுகாப்பு**: பொறுப்பான AI அம்சங்கள் உள்ளடக்கம்
 
-## AZD + Microsoft Foundry: இணைந்து சிறந்தது
+## AZD + Microsoft Foundry: ஒன்றிணைந்து சிறந்தவை
 
-| Feature | Microsoft Foundry | AZD Integration Benefit |
+| அம்சம் | Microsoft Foundry | AZD ஒருங்கிணைப்பு நன்மை |
 |---------|-----------------|------------------------|
-| **Model Deployment** | கைமறை போர்டல் மூலம் 배포 | தானியங்கி, மீண்டும் பயன்படுத்தக்கூடிய 배포கள் |
-| **Infrastructure** | Click-through provisioning | Infrastructure as Code (Bicep) |
-| **Environment Management** | ஒரே சுற்றுச்சூழல் கவனம் | பல சுற்றுச்சூழல்கள் (dev/staging/prod) |
-| **CI/CD Integration** | வரையறுக்கப்பட்டது | இயல்புநிலை GitHub Actions ஆதரவு |
-| **Cost Management** | அடிப்படை கண்காணிப்பு | சுற்றுச்சூழல்-சார்ந்த செலவுக் கண்காப்பு 최적화 |
+| **மாதிரி நிறுவல்** | கைமுறை போர்டல் நிறுவல் | தானாகவும் மீண்டும் செய்யக்கூடிய நிறுவல்கள் |
+| **இணையவழிச் கட்டமைப்பு** | கிளிக் மூலமாக ஒதுக்கீடு | Infrastructure as Code (Bicep) |
+| **சூழல் மேலாண்மை** | ஒரே சூழல் கவனம் | பல சூழல்கள் (வளர்ச்சி/முதற்தபால்/உற்பத்தி) |
+| **CI/CD ஒருங்கிணைப்பு** | வரம்பானது | நெடுவரிசையான GitHub Actions ஆதரவு |
+| **செலவு மேலாண்மை** | அடிப்படை கண்காணிப்பு | சூழல்-சிறப்பான செலவு மேம்படுத்தல் |
 
-## முன்-தேவைகள்
+## முன்னோடிகள்
 
-- பொருத்தமான அனுமதிகளுடன் Azure சந்தா
-- Azure Developer CLI நிறுவப்பட்டுள்ளது
-- Microsoft Foundry Models சேவைகள் அணுகல்
-- Microsoft Foundry அடிப்படையான பரிச்சயம்
+- சொந்த உரிமைகள் உடைய Azure சந்தா
+- Azure Developer CLI நிறுவியிருத்தல்
+- Microsoft Foundry மாதிரிகள் சேவைகள் அணுகல்
+- Microsoft Foundry பற்றிய அடிப்படை அறிமுகம்
 
-> **நடப்பு AZD அடிப்படை:** இந்த உதாரணங்கள் `azd` `1.23.12` மீது மதிப்பாய்வு செய்யப்பட்டன. AI ஏஜென்ட் வேலைப்பாட்டிற்கு, தற்போதைய முன்னிலைவீச்சு நீட்டிப்பு வெளியீட்டை பயன்படுத்து மற்றும் உங்கள் நிறுவப்பட்ட பதிப்பை தொடங்குவதற்கு முன் சரிபார்க்கவும்.
+> **தற்போதைய AZD அடிப்படை:** இந்த எடுத்துக்காட்டுகள் `azd` `1.27.1` வெளியீட்டுடன் சோதிக்கப்பட்டது. AI முகவர் பணிக் குறைக்கும் போது தற்போதைய முன்னோட்ட விரிவாக்க வெளியீட்டை பயன்படுத்தி உங்கள் நிறுவிய பதிப்பை ஆரம்பிப்பதற்கு முன் சரிபார்க்கவும்.
 
-## முதன்மை ஒருங்கிணைப்பு மாதிரிகள்
+## கோர் ஒருங்கிணைப்பு மாதிரிகள்
 
-### Pattern 1: Microsoft Foundry Models ஒருங்கிணைவு
+### மாதிரி 1: Microsoft Foundry Models ஒருங்கிணைப்பு
 
-**பயன்பாடு**: Microsoft Foundry Models மாதிரிகளுடன் chat பயன்பாடுகளை 배포 செய்ய
+**பயன்பாடு**: Microsoft Foundry Models மாதிரிகளுடன் உரையாடல் பயன்பாடுகளை பின்வற்றல்
 
 ```yaml
 # azure.yaml
@@ -58,7 +58,7 @@ services:
       - AZURE_OPENAI_API_KEY
 ```
 
-**Infrastructure (main.bicep):**
+**இணையவழிச் கட்டமைப்பு (main.bicep):**
 ```bicep
 // Microsoft Foundry Models Account
 resource openAIAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
@@ -92,9 +92,9 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 }
 ```
 
-### Pattern 2: AI Search + RAG ஒருங்கிணைவு
+### மாதிரி 2: AI தேடல் + RAG ஒருங்கிணைப்பு
 
-**பயன்பாடு**: retrieval-augmented generation (RAG) பயன்பாடுகளை 배포 செய்ய
+**பயன்பாடு**: பெறுபேறு-கருத்துப்படுத்தும் தலைமுறை (RAG) பயன்பாடுகளை பின்வற்றல்
 
 ```bicep
 // Azure AI Search
@@ -122,9 +122,9 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 }
 ```
 
-### Pattern 3: Document Intelligence ஒருங்கிணைவு
+### மாதிரி 3: ஆவண বுத்தி ஒருங்கிணைப்பு
 
-**பயன்பாடு**: ஆவணம் செயலாக்கம் மற்றும் பகுப்பாய்வு வேலைப்பாட்டுகள்
+**பயன்பாடு**: ஆவண செயல்முறை மற்றும் பகுப்பாய்வு பணிகள்
 
 ```bicep
 // Document Intelligence service
@@ -155,18 +155,18 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 }
 ```
 
-## 🔧 கட்டமைப்பு மாதிரிகள்
+## 🔧 அமைப்பு மாதிரிகள்
 
-### சுற்றுச்சூழல் மாறிலிகள் அமைப்புகள்
+### சூழல் மாறிகள் அமைப்பு
 
-**உற்பத்தி கட்டமைப்பு:**
+**உற்பத்தி அமைப்பு:**
 ```bash
-# முக்கிய AI சேவைகள்
+# மைய கூற்றுக் கலை சேவைகள்
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_SEARCH_ENDPOINT "https://your-search.search.windows.net"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT "https://your-formrec.cognitiveservices.azure.com/"
 
-# மாதிரி அமைப்புகள்
+# மாதிரி கட்டமைப்புகள்
 azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
 azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-3-large"
 
@@ -175,15 +175,15 @@ azd env set AZURE_OPENAI_CAPACITY 30
 azd env set AZURE_SEARCH_SKU "standard"
 ```
 
-**வளர்ச்சி கட்டமைப்பு:**
+**வளர்ச்சி அமைப்பு:**
 ```bash
-# வளர்ச்சிக்காக செலவு குறைப்பாக அமைக்கப்பட்ட அமைப்புகள்
+# மேம்பாட்டுக்கான செலவு-உத்தரவாத அமைப்புகள்
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set AZURE_SEARCH_SKU "basic"
-azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # இலவச நிலை
+azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # இலவச பருவம்
 ```
 
-### Key Vault மூலம் பாதுகாக்கப்பட்ட கட்டமைப்பு
+### முக்கியக் குவால்ட் கொண்டு பாதுகாப்பான அமைப்பு
 
 ```bicep
 // Key Vault for secrets
@@ -218,17 +218,17 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-## 배포 வேலைப்பாடுகள்
+## நிறுவல் பணிகள்
 
-### Foundry க்கான AZD நீட்டிப்புகள்
+### Foundry க்கான AZD விரிவாக்கங்கள்
 
-AZD Microsoft Foundry சேவைகளுடன் வேலை செய்ய AI-சந்தித்த அம்சங்களை சேர்க்கும் நீட்டிப்புகளை வழங்குகிறது:
+AZD Microsoft Foundry சேவைகளுடன் வேலை செய்ய AI விருப்பங்களைச் சேர்க்கும் விரிவாக்கங்கள் வழங்குகிறது:
 
 ```bash
-# Foundry agents விரிவாக்கத்தை நிறுவவும்
+# Foundry ஏஜென்ட்கள் விரிவாக்கத்தை நிறுவவும்
 azd extension install azure.ai.agents
 
-# நுண்ணசீரமைப்பு விரிவாக்கத்தை நிறுவவும்
+# நுணுக்கமாக்கல் விரிவாக்கத்தை நிறுவவும்
 azd extension install azure.ai.finetune
 
 # தனிப்பயன் மாதிரிகள் விரிவாக்கத்தை நிறுவவும்
@@ -237,52 +237,52 @@ azd extension install azure.ai.models
 # நிறுவப்பட்ட விரிவாக்கங்களை பட்டியலிடவும்
 azd extension list --installed
 
-# தற்போது நிறுவப்பட்ட ஏஜெண்ட் விரிவாக்கத்தின் பதிப்பைப் பரிசோதிக்கவும்
+# தற்போது நிறுவப்பட்ட ஏஜென்ட் விரிவாக்க பதிப்பை பரிசீலிக்கவும்
 azd extension show azure.ai.agents
 ```
 
-AI நீட்டிப்புகள் இன்னும் முன்னிலைவீச்சில் வேகமாக நகர்கின்றன. ஒரு கட்டளை இங்குக் காட்டியிருந்ததைவிட வேறாக நடக்கும் என்றால், திட்டத்தைத் தானாக பிரச்சனையிடுவதற்கு முன் சம்பந்தப்பட்ட நீட்டிப்பை மேம்படுத்து.
+AI விரிவாக்கங்கள் இன்னும் முன்னோட்ட நிலையில் விரைவாகப் பயணிக்கின்றன. ஒரு கட்டளை இதில் காட்டியதற்கு மாறாக நடந்தால் தொடர்புடைய விரிவாக்கத்தை மேம்படுத்தி பிறகு திட்டத்தை சரி பார்க்கவும்.
 
-### `azd ai` உடன் ஏஜென்ட்-முதலில் 배포
+### `azd ai` உடன் முகவர் முதலிலை நிறுவல்
 
-உங்களுக்கு ஏஜென்ட் மெனிபெஸ்ட் இருந்தால், Foundry Agent Service க்கு இணைக்கப்பட்ட திட்டத்தை scaffold செய்ய `azd ai agent init` ஐப் பயன்படுத்தவும்:
+உங்கள் கைப்பிரதி அறிக்கை இருந்தால் `azd ai agent init` பயன்படுத்தி Foundry Agent சேவைக்கான திட்டத்தை உருவாக்கவும்:
 
 ```bash
-# ஏஜென்ட் மானிஃபெஸ்டில் இருந்து ஆரம்பிக்கவும்
+# ஒரு முகவர் அறிக்கையிடல் தகவலிலிருந்து ஆரம்பிக்கவும்
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# Azure-க்கு வெளியிடவும்
+# Azure-க்கு பிரசாரம் செய்யவும்
 azd up
 ```
 
-`azure.ai.agents` இன் சமீபத்திய முன்னிலைவீச்சு வெளியீடுகள் `azd ai agent init` க்கு கட்டமைப்பு-பொறுப்பான தொடக்க ஆதரவை கூடச் சேர்த்துள்ளன. புதிய ஏஜென்ட் மாதிரிகளை பின்பற்றினால், உங்கள் நிறுவப்பட்ட பதிப்பில் கிடைக்கும் சரியான கொடிகள் (flags) குறித்து நீட்டிப்பு உதவியை சரிபார்க்கவும்.
+சமீபத்திய `azure.ai.agents` முன்னோட்ட வெளியீடுகள் `azd ai agent init` இற்கான வார்ப்புரு அடிப்படையிலான துவக்க ஆதரவைச் சேர்த்துள்ளன. புதிய முகவர் மாதிரிகளை பின்தொடரின், உங்கள் நிறுவிய பதிப்பில் உள்ள பக்கவிளைவுகளை சரிபார்க்க விரிவாக்க உதவியை பாருங்கள்.
 
-முழு கட்டளை குறிப்புக்கும் கொடிகளுக்கும் [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) ஐப் பார்க்கவும்.
+முழுமையான கட்டளை குறிப்பு மற்றும் கொடியை [AZD AI CLI கட்டளைகள்](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) இல் காணவும்.
 
-### ஒரு கட்டளையிலேயே 배포
+### ஒரே கட்டளை நிறுவல்
 
 ```bash
-# ஒரே கட்டளையால் அனைத்தையும் வெளியிடு
+# ஒரேயொரு கட்டளையுடன் அனைத்தையும் தளம் அமைக்கவும்
 azd up
 
-# அல்லது படிப்படியாக வெளியிடு
-azd provision  # அடித்தள கட்டமைப்பு மட்டும்
-azd deploy     # செயலி மட்டும்
+# அல்லது படிப்படியாக தளம் அமைக்கவும்
+azd provision  # கட்டமைப்பு மட்டும்
+azd deploy     # பயன்பாடு மட்டும்
 
-# azd 1.23.11+ இல் நீண்ட காலம் இயக்கப்படும் AI செயலி வெளியீடுகளுக்காக
+# azd 1.23.11+ இல் நீண்டகாலம் இயக்கும் AI பயன்பாடு தளம் அமைப்புகளுக்கு
 azd deploy --timeout 1800
 ```
 
-### சுற்றுச்சூழல்-சார்ந்த 배포கள்
+### சூழல்-சார்ந்த நிறுவல்கள்
 
 ```bash
-# வளர்ச்சி சூழல்
+# வளர்ப்பு சுற்றுச்சூழல்
 azd env new development
 azd env set AZURE_LOCATION eastus
 azd env set ENVIRONMENT_TYPE dev
 azd up
 
-# உற்பத்தி சூழல்
+# தயாரிப்பு சுற்றுச்சூழல்
 azd env new production
 azd env set AZURE_LOCATION westus2
 azd env set ENVIRONMENT_TYPE prod
@@ -290,9 +290,9 @@ azd env set AZURE_OPENAI_CAPACITY 100
 azd up
 ```
 
-## கண்காணிப்பு மற்றும் பார்வையிடல்
+## கண்காணிப்பு மற்றும் கவனிப்புக் குணாதிசயங்கள்
 
-### Application Insights ஒருங்கிணைப்பு
+### ஆப்ரிகேஷன் இன்ஸைட்ஸ் ஒருங்கிணைப்பு
 
 ```bicep
 // Application Insights for AI application monitoring
@@ -325,7 +325,7 @@ resource customMetrics 'Microsoft.Insights/components/analyticsItems@2015-05-01'
 }
 ```
 
-### செலவுக் கண்காணிப்பு
+### செலவு கண்காணிப்பு
 
 ```bicep
 // Budget alert for AI services
@@ -355,7 +355,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 ## 🔐 பாதுகாப்பு சிறந்த நடைமுறைகள்
 
-### Managed Identity அமைப்பு
+### நிர்வகிக்கப்பட்ட அடையாள அமைப்பு
 
 ```bicep
 // Managed identity for the web application
@@ -376,7 +376,7 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-### பிணைய பாதுகாப்பு
+### நெட்வொர்க் பாதுகாப்பு
 
 ```bicep
 // Private endpoints for AI services
@@ -400,9 +400,9 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## செயல்திறன் 최적화
+## செயல்திறன் மேம்படுத்தல்
 
-### கேச்சிங் மேலாண்மை
+### தற்காலிக சேமிப்பு (Cache) கொள்கைகள்
 
 ```yaml
 # azure.yaml - Redis cache integration
@@ -432,7 +432,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 }
 ```
 
-### Auto-scaling கட்டமைப்பு
+### தானாக அளவை மாற்றும் அமைப்பு
 
 ```bicep
 // Container App with auto-scaling
@@ -466,222 +466,222 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-## வழக்கமான பிரச்சனைகள் தீர்க்குதல்
+## பொதுவான சிக்கல்கள் தீர்வு
 
-### பிரச்சனை 1: OpenAI Quota மீறல்
+### சிக்கல் 1: OpenAI ஒதுக்கீடு (Quota) கடந்தது
 
 **அறிகுறிகள்:**
-- 배포 quota பிழைகளுடன் தோல்வி அடைகிறது
-- பயன்பாடு 日誌ல் 429 பிழைகள்
+- நிறுவல் ஒதுக்கீடு பிழைகளால் தோல்வியடையும்
+- பயன்பாட்டு பதிவுகளில் 429 பிழைகள்
 
 **தீர்வுகள்:**
 ```bash
-# தற்போதைய ஒதுக்கீட்டு பயன்பாட்டை சரிபார்க்கவும்
+# தற்போதைய குவோட்டா பயன்பாட்டை சரிபார்க்கவும்
 az cognitiveservices usage list --location eastus
 
 # வேறொரு பிராந்தியத்தை முயற்சிக்கவும்
 azd env set AZURE_LOCATION westus2
 azd up
 
-# தற்காலிகமாக திறனைக் குறைக்கவும்
+# தற்காலிகமாக திறனை குறைக்கவும்
 azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
 
-### பிரச்சனை 2: அங்கீகாரம் தோல்விகள்
+### சிக்கல் 2: அங்கீகார தோல்விகள்
 
 **அறிகுறிகள்:**
-- AI சேவைகளைக் அழைக்கும் போது 401/403 பிழைகள்
-- "Access denied" செய்திகள்
+- AI சேவைகளை அழைக்கும் போது 401/403 பிழைகள்
+- "அணுகல் மறுக்கப்பட்டது" செய்திகள்
 
 **தீர்வுகள்:**
 ```bash
-# பாத்திர ஒதுக்கீடுகளை சரிபார்க்கவும்
+# பங்கு ஒதுக்கீடுகளை சரிபார்க்கவும்
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# கையாளப்பட்ட அடையாளக் கட்டமைப்பை சரிபார்க்கவும்
+# நிர்வகிக்கப்படும் அடையாளக் கட்டமைப்பை சரிபார்க்கவும்
 az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 
-# Key Vault அணுகலை சரிபார்க்கவும்
+# முக்கிய வேல்ட் அணுகலைச் சரிபார்க்கவும்
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
-### பிரச்சனை 3: மாதிரி 배포 பிரச்சனைகள்
+### சிக்கல் 3: மாதிரி நிறுவல் சிக்கல்கள்
 
 **அறிகுறிகள்:**
-- மாதிரிகள் 배포யில் கிடைக்கவில்லை
-- குறிப்பிட்ட மாதிரி பதிப்புகள் தோல்வி
+- மாதிரிகள் நிறுவலில் கிடைக்கவில்லை
+- குறிப்பிட்ட மாதிரி பதிப்புகள் தோல்வியடைகின்றன
 
 **தீர்வுகள்:**
 ```bash
-# பிரதேசம் வாரியாக கிடைக்கும் மாதிரிகளை பட்டியலிடவும்
+# பிராந்தியத்தின் அடிப்படையில் கிடைக்கும் மாதிரிகளை பட்டியலிடுக
 az cognitiveservices model list --location eastus
 
-# bicep வார்ப்புருவில் மாதிரி பதிப்பை புதுப்பிக்கவும்
+# பைசெப் மாதிரியில் மாதிரி பதிப்பை புதுப்பிக்கவும்
 # மாதிரியின் திறன் தேவைகளை சரிபார்க்கவும்
 ```
 
-## உதாரண வார்ப்புருக்கள்
+## எடுத்துக்காட்டு வார்ப்புருக்கள்
 
-### RAG Chat பயன்பாடு (Python)
+### RAG உரையாடல் பயன்பாடு (Python)
 
-**களஞ்சியம்**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
+**காப்பகம்**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-**சேவைகள்**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
+**சேவைகள்**: Azure OpenAI + Azure AI தேடல் + Azure கன்டெய்னர் பயன்பாடுகள் + Azure Blob சேமிப்பு
 
-**விவரம்**: அதிகம் பிரபலமான Azure AI மாதிரி — உங்களது சொந்த ஆவணங்களை அடிப்படையாகக் கொண்டு கேட்கும் production-உகந்த RAG chat பயன்பாடு. சந்திப்பிற்கு GPT-4.1-mini for chat, text-embedding-3-large for embeddings, மற்றும் Azure AI Search for retrieval பயன்படுத்துகிறது. பன்மொழி ஆவணங்கள், பேச்சு உள்ளீடு/வெளியீடு, Microsoft Entra அங்கீகாரம் மற்றும் Application Insights செருகல்களை ஆதரிக்கிறது.
+**விளக்கம்**: மிகவும் பிரபலமான Azure AI மாதிரி — உங்களுடைய ஆவணங்களில் கேள்விகள் கேட்கக் கூடிய தயார்படுத்தப்பட்ட RAG உரையாடல் பயன்பாடு. உரையாடலுக்கு GPT-4.1-mini, உறவுகளுக்கு text-embedding-3-large, மற்றும் Azure AI தேடலுக்கு retrieval பயன்படுத்துகிறது. பல்வகை ஆவணங்கள், பேச்சு உள்ளீடு/வெளியீடு, Microsoft Entra அங்கீகாரம் மற்றும் Application Insights கண்காணிப்பு ஆதரிக்கப்படுகிறது.
 
-**விரைவு தொடக்கம்**:
+**தற்போது தொடக்கம்**:
 ```bash
 azd init --template azure-search-openai-demo
 azd up
 ```
 
-### RAG Chat பயன்பாடு (.NET)
+### RAG உரையாடல் (.NET)
 
-**களஞ்சியம்**: [azure-search-openai-demo-csharp](https://github.com/Azure-Samples/azure-search-openai-demo-csharp)
+**காப்பகம்**: [azure-search-openai-demo-csharp](https://github.com/Azure-Samples/azure-search-openai-demo-csharp)
 
-**சேவைகள்**: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
+**சேவைகள்**: Azure OpenAI + Azure AI தேடல் + Azure கன்டெய்னர் பயன்பாடுகள் + Semantic Kernel
 
-**விவரம்**: Python RAG chat மாதிரியின் .NET/C# சமமையான பதிப்பு. ASP.NET Core Minimal API மற்றும் Blazor WebAssembly முன்னமைத்துடன் கட்டமைக்கப்பட்டுள்ளது. குரல் உரையாடல், GPT-4o-mini vision ஆதரவு மற்றும் துணை .NET MAUI Blazor ஹைப்ரிட் டெஸ்க்டாப்/மொபைல் கிளையன்டை உள்ளடக்கியது.
+**விளக்கம்**: Python RAG உரையாடல் மாதிரியின் .NET/C# சமமானது. ASP.NET Core Minimal API மற்றும் Blazor WebAssembly முன் கடைசி வலைப்பக்கத்துடன் கட்டப்பட்டது. குரல் உரையாடல், GPT-4o-mini காணொலி ஆதரவு மற்றும் .NET MAUI Blazor ஹைபிரிட் டெஸ்க்டாப்/மொபைல் கிளையண்டும் உள்ளது.
 
-**விரைவு தொடக்கம்**:
+**தற்போது தொடக்கம்**:
 ```bash
 azd init --template azure-search-openai-demo-csharp
 azd up
 ```
 
-### RAG Chat பயன்பாடு (Java)
+### RAG உரையாடல் (Java)
 
-**களஞ்சியம்**: [azure-search-openai-demo-java](https://github.com/Azure-Samples/azure-search-openai-demo-java)
+**காப்பகம்**: [azure-search-openai-demo-java](https://github.com/Azure-Samples/azure-search-openai-demo-java)
 
-**சேவைகள்**: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
+**சேவைகள்**: Azure OpenAI + Azure AI தேடல் + Azure கன்டெய்னர் பயன்பாடுகள் / AKS + Langchain4J + Azure Cosmos DB
 
-**விவரம்**: Langchain4J ஐ AI ஒர்க்கஸ்ட்ரேஷனுக்காக பயன்படுத்தி RAG chat மாதிரியின் Java பதிப்பு. மைக்ரோசேவைஸ் நிகழ்வு-மேம்படுத்தப்பட்ட கட்டமைப்பு, பல தேடல் 전략ங்கள் (உரை, வெക്ടர், ஹைபிரிட்), Azure Document Intelligence மூலம் ஆவணப் பதிவேற்றம் மற்றும் Azure Container Apps அல்லது Azure Kubernetes Service இல் 배포 ஆதரவு கொண்டது.
+**விளக்கம்**: Langchain4J பயன்படுத்தி AI ஒழுங்கமைப்புடன் ஜாவா பதிப்பு. மைக்ரோசர்வீஸ் நிகழ்வு சம்பந்தப்பட்ட அமைப்பு, பல தேடல் முறைகள் (உரை, வெக்டர், ஹைப்பிரிட்), Azure ஆவண ஞானத்தைப் பயன்படுத்தி ஆவணப் பதிவேற்றம் மற்றும் Azure கன்டெய்னர் பயன்பாடுகள் அல்லது Azure குபேர்நெட்டிஸ் சேவையில் நிறுவல் ஆதரவு.
 
-**விரைவு தொடக்கம்**:
+**தற்போது தொடக்கம்**:
 ```bash
 azd init --template azure-search-openai-demo-java
 azd up
 ```
 
-### Microsoft Foundry உடன் ஐம்பெர்ச் ரீடைல் கோபைலட் (Enterprise Retail Copilot)
+### எண்டர்பிரைஸ் ரீட்டெயில் கூட்டாளி Microsoft Foundry உடன்
 
-**களஞ்சியம்**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
+**காப்பகம்**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
-**சேவைகள்**: Azure OpenAI + Microsoft Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
+**சேவைகள்**: Azure OpenAI + Microsoft Foundry + Prompty + Azure AI தேடல் + Azure கன்டெய்னர் பயன்பாடுகள் + Azure Cosmos DB
 
-**விவரம்**: Microsoft Foundry மற்றும் Prompty பயன்படுத்தி உள்ள-முற்றிலும் retail RAG copilot. Contoso Outdoor சில்லறை கடை உரையாடல் அதிகாரம், பதில்களை பொருட்கள் கத்தலாகவும் வாடிக்கையாளர் ऑர்ட்டர் தரவுகளிலுமாக அடிப்படையாக்குகிறது. முழு GenAIOps வேலைப்பாட்டை காட்டுகிறது — Prompty உடன் prototype, AI-உதவியுடன் மதிப்பீடு, மற்றும் AZD மூலமாக Container Apps இல் 배포.
+**விளக்கம்**: Microsoft Foundry மற்றும் Prompty பயன்படுத்திய முடிவடையுள்ள வணிக RAG கூட்டாளி. Contoso Outdoor வணிக உரையாடல் பொறி, தயாரிப்பு அகராதி மற்றும் வாடிக்கையாளர் ஆர்டர் தரவுகளில் பதில்களை அடிப்படையாக கொண்டது. முழு GenAIOps பணிக் குறைக்கும் முறையை காட்டுகிறது — Prompty கொண்டு உருவாக்கல், AI-ஆல உதவி மதிப்பீட்டாளர்களுடன் மதிப்பீடு மற்றும் AZD வழியாக கன்டெய்னர் பயன்பாடுகளில் நிறுவல்.
 
-**விரைவு தொடக்கம்**:
+**தற்போது தொடக்கம்**:
 ```bash
 azd init --template contoso-chat
 azd up
 ```
 
-### Creative Writing பல-ஏஜென்ட் பயன்பாடு
+### படைப்பூக்க எழுத்து பல முகவர் பயன்பாடு
 
-**களஞ்சியம்**: [contoso-creative-writer](https://github.com/Azure-Samples/contoso-creative-writer)
+**காப்பகம்**: [contoso-creative-writer](https://github.com/Azure-Samples/contoso-creative-writer)
 
-**சேவைகள்**: Azure OpenAI + Azure AI Agent Service + Bing Grounding + Azure AI Search + Azure Container Apps
+**சேவைகள்**: Azure OpenAI + Azure AI முகவர் சேவை + Bing பிணைப்பு + Azure AI தேடல் + Azure கன்டெய்னர் பயன்பாடுகள்
 
-**விவரம்**: Prompty உடன் AI ஏஜென்ட் ஒர்க்கஸ்ட்ரேஷனை காட்டும் பல-ஏஜென்ட் மாதிரி. ஒரு ஆய்வு ஏஜென்ட் (Bing Grounding in Azure AI Agent Service), ஒரு பொருள் ஏஜென்ட் (Azure AI Search), ஒரு எழுத்தாளர் ஏஜென்ட் மற்றும் ஒரு தொகுப்பாளர் ஏஜென்ட் இணைந்து நன்கு ஆராய்ச்சி செய்யப்பட்ட கட்டுரைகளை உருவாக்குகிறார்கள். GitHub Actions இல் மதிப்பீடு உடன் CI/CD ஐ உட்படுத்தியுள்ளன.
+**விளக்கம்**: Prompty உடன் AI முகவர் ஒழுங்கமைப்பை காட்டும் பல முகவர் மாதிரி. ஆராய்ச்சி முகவர் (Bing பிணைப்பு Azure AI முகவர் சேவையில்), தயாரிப்பு முகவர் (Azure AI தேடல்), எழுத்தாளர் முகவர் மற்றும் தொகுத்திருத்துகாரர் முகவர் சேர்ந்து நன்கு ஆராய்ச்சி செய்யப்பட்ட கட்டுரைகளை உருவாக்கி வழங்குதல். GitHub Actions இல் மதிப்பீடு செய்யும் CI/CD உடன்.
 
-**விரைவு தொடக்கம்**:
+**தற்போது தொடக்கம்**:
 ```bash
 azd init --template contoso-creative-writer
 azd up
 ```
 
-### Serverless RAG Chat (JavaScript/TypeScript)
+### சர்வர்லெஸ் RAG உரையாடல் (JavaScript/TypeScript)
 
-**களஞ்சியம்**: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
+**காப்பகம்**: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
 
 **சேவைகள்**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB for NoSQL + LangChain.js
 
-**விவரம்**: LangChain.js உடன் முழுமையாக serverless RAG chatbot; API க்கு Azure Functions மற்றும் ஹோஸ்டிங்கிற்கு Azure Static Web Apps பயன்படுத்துகிறது. Azure Cosmos DB ஐ வெக்டர் ஸ்டோர் மற்றும் சந்திப்பு வரலாறு தரவுத்தளமாக இரு பயன்களுக்கும் பயன்படுத்துகிறது. இலவசப் பரிசோதனைக்காக Ollama உடன் உள்ளூர் வளர்ச்சிக்கு ஆதரவு செய்கிறது.
+**விளக்கம்**: முழுமையாக சர்வர்லெஸ் RAG உரையாடல் பொறி LangChain.js மற்றும் Azure Functions API மற்றும் Azure Static Web Apps ஹோஸ்டிங்குடன். Azure Cosmos DB வெக்டர் ஷாப்பிங் மற்றும் உரையாடல் வரலாறு தரவுத்தளமாக பயன்படுத்தப்படுகிறது. Ollama மூலம் உள்ளூர் வளர்ச்சிக்கு பூஜ்ஜிய செலவில்லா சோதனை ஆதரவு வழங்குகிறது.
 
-**விரைவு தொடக்கம்**:
+**தற்போது தொடக்கம்**:
 ```bash
 azd init --template serverless-chat-langchainjs
 azd up
 ```
 
-### Chat with Your Data Solution Accelerator
+### உங்கள் தரவுடன் உரையாடல் வினை வேகம்
 
-**களஞ்சியம்**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
+**காப்பகம்**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
 
-**சேவைகள்**: Azure OpenAI + Azure AI Search + Azure App Service + Azure Document Intelligence + Azure Functions + Azure Cosmos DB / PostgreSQL
+**சேவைகள்**: Azure OpenAI + Azure AI தேடல் + Azure பயன்பாட்டு சேவை + Azure ஆவண ஞான் + Azure Functions + Azure Cosmos DB / PostgreSQL
 
-**விவரம்**: ஆவணப் பதிவேற்ற/நிர்வகிப்பிற்கு நிர்வாகக் காட்சி உடைய எண்டர்பிரைஸ்-தர RAG தீர்வு விரிவாக்கி. பல ஓர்க்கஸ்ட்ரேஷன் விருப்பங்கள் (Semantic Kernel, LangChain, Prompt Flow), பேச்சு-இலிருந்து-உரை, Microsoft Teams ஒருங்கிணைவு, மற்றும் PostgreSQL அல்லது Cosmos DB பின்புலம் தேர்வு போன்ற அம்சங்கள் கொண்டது. உற்பத்தி RAG நிலைகளுக்கான தனிப்பயன்பாட்டு தொடக்க புள்ளியாக வடிவமைக்கப்பட்டுள்ளது.
+**விளக்கம்**: ஆவணப் பதிவேற்றம்/மேலாண்மைக்கான நிர்வாக போர்டல்கள், பல ஒழுங்கமைப்பாளர் விருப்பங்கள் (Semantic Kernel, LangChain, Prompt Flow), பேச்சு உரை மாற்றல், Microsoft Teams ஒருங்கிணைப்பு மற்றும் PostgreSQL அல்லது Cosmos DB பின்புலத்துடன் கூடிய நிறுவன தர RAG தீர்வு வேகமாக்கி. உற்பத்தி RAG சூழல்களுக்கு தனிப்பயன்படுத்தக்கூடிய துவக்கக் கொள்கைப்பட வடிவமைக்கப்பட்டுள்ளது.
 
-**விரைவு தொடக்கம்**:
+**தற்போது தொடக்கம்**:
 ```bash
 azd init --template chat-with-your-data-solution-accelerator
 azd up
 ```
 
-### AI பயண ஏஜென்டுகள் — பல-ஏஜென்ட் MCP ஒர்க்கஸ்ட்ரேஷன்
+### AI பயண முகவர்கள் — பல முகவர் MCP ஒழுங்கமைப்பு
 
-**களஞ்சியம்**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
+**காப்பகம்**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
 
-**சேவைகள்**: Azure OpenAI + Microsoft Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
+**சேவைகள்**: Azure OpenAI + Microsoft Foundry + Azure கன்டெய்னர் பயன்பாடுகள் + MCP சர்வர்கள் (.NET, Python, Java, TypeScript)
 
-**விவரம்**: மூன்று ஃப்ரேம்வொர்க்குகளை (LangChain.js, LlamaIndex.TS, மற்றும் Microsoft Agent Framework) பயன்படுத்தி பல-ஏஜென்ட் AI ஒர்க்கஸ்ட்ரேஷனுக்கான குறிப்பு பயன்பாடு. நான்கு மொழிகளில் உள்ள MCP (Model Context Protocol) சேவைகள் serverless Azure Container Apps ஆக 배포 செய்யப்பட்டு OpenTelemetry கண்காணிப்புடன் வழங்கப்படுகின்றன.
+**விளக்கம்**: மூன்று கட்டமைப்புகள் (LangChain.js, LlamaIndex.TS மற்றும் Microsoft Agent Framework) கொண்டு பல முகவர் AI ஒழுங்கமைப்புக்கான குறிப்பு பயன்பாடு. நான்கு மொழிகளில் MCP (மாதிரி சூழல் நியமன) சர்வர்கள் சர்வேஷ் Azure கன்டெய்னர் பயன்பாடுகளாக நடப்பு கீழ் OpenTelemetry கண்காணிப்புடன்.
 
-**விரைவு தொடக்கம்**:
+**தற்போது தொடக்கம்**:
 ```bash
 azd init --template azure-ai-travel-agents
 azd up
 ```
 
-### Azure AI Starter
+### Azure AI தொடக்கக்கலைஞர்
 
-**களஞ்சியம்**: [azd-ai-starter](https://github.com/Azure/azd-ai-starter)
+**காப்பகம்**: [azd-ai-starter](https://github.com/Azure/azd-ai-starter)
 
-**சேவைகள்**: Azure AI Services + Azure OpenAI
+**சேவைகள்**: Azure AI சேவைகள் + Azure OpenAI
 
-**விவரம்**: Azure AI சேவைகளை கன்ஃபிகர் செய்யப்பட்ட இயந்திரம் மாதிரிகளுடன் 배포 செய்யும் குறைந்தநிலை Bicep வார்ப்புரு. முழு பயன்பாட்டு ஸ்டாக் தேவையில்லாமல் רק Azure AI கட்டமைப்பை மட்டுமே provision செய்ய வேண்டுமானால் இது ஒரு லைட்வெயிட் தொடக்க புள்ளி.
+**விளக்கம்**: இயந்திரக் கற்றல் மாதிரிகளுடன் Azure AI சேவைகளை நிறுவும் மிக எளிய Bicep வார்ப்புரு. முழு பயன்பாட்டு தொகுப்பின்றி Azure AI வலைப்பின்னல் மட்டுமே தேவைப்படும் போது உதவும்.
 
-**விரைவு தொடக்கம்**:
+**தற்போது தொடக்கம்**:
 ```bash
 azd init --template azd-ai-starter
 azd up
 ```
 
-> **மேலும் வார்ப்புருக்கள் ব্রௌஸ் செய்ய**: 80+ AI-சார்ந்த AZD வார்ப்புருக்கள் மற்றும் காட்சிகளுக்கு [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) ஐப் பார்வையிடவும்.
+> **மேலும் வார்ப்புருக்களை உலாவவும்**: மொழிகள் மற்றும் சூழல்களுக்கான 80+ AI சார்ந்த AZD வார்ப்புருக்கள் `[Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai)` இல் காணவும்.
 
 ## அடுத்த படிகள்
 
-1. **உதாரணங்களை முயற்சித்து பாருங்கள்**: உங்கள் பயன்பாட்டுக்கு பொருந்திய முன்னமைக்கப்பட்ட வார்ப்புருவுடன் தொடங்குங்கள்
-2. **உங்கள் தேவைக்கு ஒழுங்குபடுத்துங்கள்**: கட்டமைப்பு மற்றும் பயன்பாட்டு கோடுகளை மாற்றியமைக்கவும்
-3. **கண்காணிப்பை சேர்க்கவும்**: விரிவான பார்வையிடலை அமல்படுத்தவும்
-4. **செலவுகளை 최적화 செய்யவும்**: உங்கள் பட்ஜெட்டிற்கான கட்டமைப்புகளை நுட்பமாக திருத்துக
-5. **உங்கள் 배포 பாதுகாப்பு செய்யவும்**: நிறுவன பாதுகாப்பு மாதிரிகளை நடைமுறைப்படுத்தவும்
-6. **உற்பத்திக்கு வலியுறுத்தவும்**: பல-ஏரியா மற்றும் உயர்-கிடைக்கும் அம்சங்களைச் சேர்க்கவும்
+1. **எடுத்துக்காட்டுகளை முயற்சி செய்யவும்**: உங்கள் பயன்பாட்டிற்கேற்ற முன்னொட்டி மாதிரியைத் தேர்வு செய்யவும்
+2. **உங்கள் தேவைகள் படி மாற்றவும்**: கட்டமைப்பு மற்றும் செயலியை மாற்றவும்
+3. **கண்காணிப்பை சேர்க்கவும்**: விரிவான கவனிப்பு அமலகாண புதிய பணிகளைச் செயல்படுத்தவும்
+4. **செலவுகளை மேம்படுத்தவும்**: உங்கள் பட்ஜெட்டுக்கேற்ற அமைப்புகளை தெளிவுபடுத்தவும்
+5. **உங்கள் நிறுவலை பாதுகாப்பாக வைத்திருக்கும்**: நிறுவன பாதுகாப்பு முறைமைகள் நிலைத்திடவும்
+6. **உற்பத்திக்கு அளவு மேம்படுத்தவும்**: பல பிரதேச மற்றும் உயர் கிடைக்கும் பண்புகளைச் சேர்க்கவும்
 
-## 🎯 கைமுறைப் பயிற்சிகள்
+## 🎯 கையாள் பயிற்சிகள்
 
-### பயிற்சி 1: Microsoft Foundry Models Chat App 배포 (30 நிமிடங்கள்)
-**முகவரி**: ஒரு production-தகுதி AI உரையாடல் பயன்பாட்டை 배포 செய்து சோதனை செய்ய
+### பயிற்சி 1: Microsoft Foundry மாதிரிகள் உரையாடல் பயன்பாடு நிறுவல் (30 நிமிடங்கள்)
+**நோக்கம்**: தயார்படுத்துத்தக்க AI உரையாடல் பயன்பாட்டை நிறுவி சோதனை செய்தல்
 
 ```bash
-# வார்ப்புருவை ஆரம்பிக்கவும்
+# மாதிரியை துவங்கவும்
 mkdir ai-chat-demo && cd ai-chat-demo
 azd init --template azure-search-openai-demo
 
-# சுற்றுச்சூழல் மாறிகளை அமைக்கவும்
+# சூழல் மாறிலிகளை செட் செய்யவும்
 azd env set AZURE_LOCATION eastus2
 azd env set AZURE_OPENAI_CAPACITY 30
 
-# வெளியிடவும்
+# நடைமுறைப்படுத்தவும்
 azd up
 
-# பயன்பாட்டை பரிசோதிக்கவும்
+# பயன்பாட்டை சோதிக்கவும்
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Chat app: $WEB_URL"
 
-# ஏஐ செயல்பாடுகளைக் கண்காணிக்கவும்
+# செயற்கை நுண்ணறிவு செயல்பாடுகளை கண்காணிக்கவும்
 azd monitor
 
 # சுத்தம் செய்யவும்
@@ -689,19 +689,19 @@ azd down --force --purge
 ```
 
 **வெற்றி அளவுகோல்கள்:**
-- [ ] 배포 quota பிழைகள் இல்லாமல் முடிகிறது
-- [ ] உலாவியில் உரையாடல் இடைமுகத்தை அணுக முடியும்
-- [ ] கேள்விகள் கேட்டு AI-ஆதரிக்கப்பட்ட பதில்களை பெற முடியும்
-- [ ] Application Insights தொலைவியல் தகவல்களை காட்டுகிறது
-- [ ] வளங்களை வெற்றிகரமாக கழுத்து மீளமைத்தல் செய்யப்பட்டுள்ளன
+- [ ] ஒதுக்கீடு பிழைகள் இல்லாமல் நிறுவல் முடியும்
+- [ ] உலாவியில் உரையாடல் இடைமுகம் அணுகக்கூடியது
+- [ ] கேள்விகள் கேட்டு AI சக்தியுடன் பதில்கள் பெற முடியும்
+- [ ] செயலியின் புரிந்துறைமை தரவு காட்டுகிறது
+- [ ] வளங்கள் வெற்றிகரமாக சுத்தம் செய்யப்பட்டது
 
 **கணக்கிடப்பட்ட செலவு**: 30 நிமிட சோதனைக்கு $5-10
 
-### பயிற்சி 2: பல-மாதிரி 배포 கட்டமைக்கு (45 நிமிடங்கள்)
-**முகவரி**: வெவ்வேறு கட்டமைப்புகளுடன் பல AI மாதிரிகள் 배포 செய்ய
+### பயிற்சி 2: பல மாதிரியான நிறுவல் அமைத்தல் (45 நிமிடங்கள்)
+**நோக்கம்**: பல வெவ்வேறு அமைப்புகளுடன் பல AI மாதிரிகள் நிறுவல்
 
 ```bash
-# தனிப்பயன் Bicep அமைப்பை உருவாக்கவும்
+# தனிப்பயன் பைசெப் கட்டமைப்பை உருவாக்கவும்
 cat > infra/ai-models.bicep << 'EOF'
 param openAiAccountName string
 param location string
@@ -746,22 +746,22 @@ resource embedding 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01'
 }
 EOF
 
-# விநியோகித்து மற்றும் சரிபார்க்கவும்
+# டிப்ளாய் செய்து சரிபார்க்கவும்
 azd provision
 azd show
 ```
 
 **வெற்றி அளவுகோல்கள்:**
-- [ ] பல மாதிரிகள் வெற்றிகரமாக 배포 செய்யப்பட்டன
-- [ ] வெவ்வேறு திறன் அமைப்புகள் பொருந்தியுள்ளன
-- [ ] மாதிரிகள் API மூலம் அணுகக்கூடியவை
-- [ ] பயன்பாடிலிருந்து இரு மாதிரிகளையும் அழைக்க முடிகிறது
+- [ ] பல மாதிரிகள் வெற்றிகரமாக நிறுவப்பட்டன
+- [ ] வெவ்வேறு திறன்கள் அமைக்கப்பட்டுள்ளன
+- [ ] API மூலமாக மாதிரிகள் அணுகக்கூடியவை
+- [ ] செயலியில் இரண்டையும் அழைக்க முடியும்
 
-### பயிற்சி 3: செலவுக் கண்காணிப்பு అమல்படுத்து (20 நிமிடங்கள்)
-**முகவரி**: பட்ஜெட் அறிவிப்புகள் மற்றும் செலவுக் கண்காணிப்பை அமைக்கவும்
+### பயிற்சி 3: செலவு கண்காணிப்பு செயல்படுத்தல் (20 நிமிடங்கள்)
+**நோக்கம்**: பட்ஜெட் அலர்ட்கள் மற்றும் செலவு கண்காணிப்பை அமைத்தல்
 
 ```bash
-# Bicep-இல் பட்ஜெட் எச்சரிப்பை சேர்க்கவும்
+# Bicepக்கு பட்ஜெட் எச்சரிக்கையைச் சேர்க்கவும்
 cat >> infra/main.bicep << 'EOF'
 
 resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
@@ -792,7 +792,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 EOF
 
-# பட்ஜெட் எச்சரிப்பை நிறுவவும்
+# பட்ஜெட் எச்சரிக்கையை அமல்படுத்தவும்
 azd provision
 
 # தற்போதைய செலவுகளை சரிபார்க்கவும்
@@ -800,73 +800,73 @@ az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-d
 ```
 
 **வெற்றி அளவுகோல்கள்:**
-- [ ] Azure இல் பட்ஜெட் அறிவிப்பு உருவாக்கப்பட்டது
-- [ ] மின்னஞ்சல் அறிவிப்புகள் கட்டமைக்கப்பட்டன
-- [ ] Azure போர்டலிலே செலவு தரவுகளைப் பார்க்க முடியும்
-- [ ] பட்ஜெட் எல்லைகள் சரியாக அமைக்கப்பட்டுள்ளன
+- [ ] Azure இல் பட்ஜெட் அலர்ட் உருவாக்கப்பட்டது
+- [ ] மின்னஞ்சல் அறிவிப்புகள் அமைக்கப்பட்டன
+- [ ] Azure போர்டலில் செலவு தரவு பார்க்க முடியும்
+- [ ] பட்ஜெட் எல்லைகள் சரியான முறையில் அமைக்கப்பட்டன
 
-## 💡 அடிக்கடி கேட்கப்படும் கேள்விகள்
+## 💡 அடிக்கடி கேட்கப்பட்ட கேள்விகள்
 
 <details>
-<summary><strong>எப்படி வளர்ச்சி காரியத்தில் Microsoft Foundry Models செலவுகளை குறைக்கலாம்?</strong></summary>
+<summary><strong>Microsoft Foundry Models வளம்முறை வளர்ச்சிக்கালে செலவுகளை எப்படி குறைப்பது?</strong></summary>
 
-1. **இலவச பட்டத்தை பயன்படுத்தவும்**: Microsoft Foundry Models மாதத்திற்கு 50,000 டோக்கன்கள்/மாதம் இலவசமாக வழங்குகிறது
-2. **திறன் குறைக்கவும்**: dev க்காக திறனை 30+ க்கு பதிலாக 10 TPM ஆக அமைக்கவும்
-3. **azd down பயன்படுத்தவும்**: செயலில் இல்லாத போது வளங்களை deallocate செய்ய
-4. **பதில்களை கேச் செய்யவும்**: மீண்டும் கேட்கப்படும் வினாக்களுக்கு Redis கேச் ஐ அமல்படுத்தவும்
-5. **Prompt Engineering ஐ பயன்படுத்தவும்**: திறமையாக prompts அமைத்து டோக்கன் பயன்பாட்டை குறைக்கவும்
+1. **இலவச தகுதிகூட்டையை பயன்படுத்தவும்**: Microsoft Foundry மாதிரிகள் மாதம் 50,000 டோக்கன்கள் இலவசமாக வழங்குகிறது
+2. **திறன்களை குறைக்கவும்**: வளர்ச்சிக்கான TPM (Token Per Minute) எண்ணிக்கை 30+ இல் சேர்க்காமல் 10 ஆக அமைக்கவும்
+3. **azd down கமாண்டு பயன்படுத்தவும்**: செயல்பாட்டில் இல்லாதப்போது வளங்களை விடுவிக்கவும்
+4. **பதில்களை தற்காலிக சேமிப்பில் வைக்கவும்**: மீண்டும் கேட்கப்படும் கேள்விகளுக்கு Redis கேச் செயல்படுத்தவும்
+5. **ப்ராம்ட் உத்தி பயன்படுத்தவும்**: திறமையான ப்ராம்ட் முறைகளால் டோக்கன் பயன்பாட்டை குறைக்கவும்
 
 
 ```bash
-# வளர்ச்சி கட்டமைப்பு
+# வளர்ச்சி அமைப்பு
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set ENABLE_RESPONSE_CACHE true
 ```
 </details>
 
 <details>
-<summary><strong>Microsoft Foundry Models மற்றும் OpenAI API இடையிலான வேறுமை என்ன?</strong></summary>
+<summary><strong>Microsoft Foundry மாதிரிகளும் OpenAI API உம் என்ன வேறுபாடு?</strong></summary>
 
-**Microsoft Foundry Models**:
-- தொழில் பாதுகாப்பு மற்றும் ஒழுங்கு இணக்கம்
-- தனியார் நெட்வொர்க் ஒருங்கிணைவு
+**Microsoft Foundry மாதிரிகள்**:
+- நிறுவன பாதுகாப்பு மற்றும் உத்தரவாதங்கள்
+- தனிப்பட்ட நெட்வொர்க் ஒருங்கிணைப்பு
 - SLA உத்தரவாதங்கள்
-- Managed Identity மூலம் அங்கீகாரம்
-- மேலான குவோட்டா கிடைக்கும்
+- நிர்வகிக்கப்படும் அடையாள அங்கீகாரம்
+- அதிகமான குறியீடுகள் கிடைக்கின்றன
 
 **OpenAI API**:
-- புதிய மாடல்களுக்கு வேகமான அணுகல்
-- எளிதான அமைப்பு
-- நுழைவுக்கு குறைந்த தடைகள்
-- பொது இணையத்திலேயே மட்டுமே
+- புதிய மாதிரிகளுக்கான வேகமான அணுகல்
+- எளிமையான அமைப்பு
+- குறைந்த நுழைவு தடைகள்
+- பொதுவான இன்டர்நெட் மட்டும்
 
-தொழில்துறை பயன்பாடுகளுக்கு, **Microsoft Foundry Models பரிந்துரைக்கப்படுகிறது**.
+தயாரிப்பு பயன்பாடுகளுக்காக, **Microsoft Foundry மாதிரிகள் பரிந்துரைக்கப்படுகின்றன**.
 </details>
 
 <details>
-<summary><strong>Microsoft Foundry Models குவோட்டா மீறல் பிழைகளை எப்படி கையாள்வது?</strong></summary>
+<summary><strong>Microsoft Foundry மாதிரிகள் குறியீடு தாண்டிய பிழைகளை நான் எப்படி கையாள்வது?</strong></summary>
 
 ```bash
-# தற்போதைய கொட்டாவைக் சரிபார்க்கவும்
+# தற்போதைய பயன்மீதியை சோதிக்கவும்
 az cognitiveservices usage list --location eastus2
 
-# வேறு மண்டலத்தை முயற்சி செய்யவும்
+# வேறு பகுதியை முயற்சிக்கவும்
 azd env set AZURE_LOCATION westus2
 azd up
 
-# தற்காலிகமாக திறனைக் குறைக்கவும்
+# திறனைக் குறைக்கும் தற்காலிகமாக
 azd env set AZURE_OPENAI_CAPACITY 10
 azd provision
 
-# கொட்டா அதிகரிப்பை கோரவும்
-# Azure போர்டலுக்கு செல்லவும் > கொட்டாக்கள் > அதிகரிப்பு கோரிக்கையை சமர்ப்பிக்கவும்
+# பயன்மீதி அதிகரிப்பை கோரி
+# Azure போர்ட்டல் > பயன்மீதிகள் > அதிகரிப்பை கோர செல்லவும்
 ```
 </details>
 
 <details>
-<summary><strong>Microsoft Foundry Models உடன் என் சொந்த தரவுகளைப் பயன்படுத்தலாமா?</strong></summary>
+<summary><strong>Microsoft Foundry மாதிரிகளுடன் என் சொந்த தரவை பயன்படுத்தலாமா?</strong></summary>
 
-ஆம்! RAG (Retrieval Augmented Generation) க்காக **Azure AI Search** ஐப் பயன்படுத்தவும்:
+ஆம்! RAG (Retrieval Augmented Generation) க்கு **Azure AI Search** பயன்படுத்தவும்:
 
 ```yaml
 # azure.yaml
@@ -878,18 +878,18 @@ services:
       - AZURE_OPENAI_ENDPOINT
 ```
 
-இந்த [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) டெம்ப்ளேட்டை பாருங்கள்.
+[azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) வடிவமைப்பைப் பார்க்கவும்.
 </details>
 
 <details>
-<summary><strong>AI மாடல் என்ட்பாயிண்ட்களை எப்படி பாதுகாக்கிறேன்?</strong></summary>
+<summary><strong>AI மாதிரி முடிவுகளை நான் எப்படி பாதுகாப்பதாக வைக்க வேண்டும்?</strong></summary>
 
-**சிறந்த வழிமுறைகள்**:
-1. Managed Identity ஐப் பயன்படுத்தவும் (API விசைகள் இல்லை)
-2. Private Endpoints ஐ செயல்படுத்தவும்
-3. நெட்வொர்க் பாதுகாப்பு குழுக்களை அமைக்கவும்
-4. வேக வரம்பை அமல்படுத்தவும்
-5. ரகசியங்களுக்காக Azure Key Vault ஐ பயன்படுத்தவும்
+**சிறந்த நடைமுறைகள்**:
+1. நிர்வகிக்கப்படும் அடையாளத்தை பயன்படுத்தவும் (API விசைகள் இல்லை)
+2. தனிப்பட்ட முடிவுநிலையங்களை இயக்கவும்
+3. நெட்வொர்க் பாதுகாப்பு குழுக்களை கட்டமைக்கவும்
+4. வீதக் கட்டுப்பாட்டை அமல்படுத்தவும்
+5. மறைமுக விசைகளுக்காக Azure Key Vault ஐ பயன்படுத்தவும்
 
 ```bicep
 // Managed Identity authentication
@@ -912,20 +912,20 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 ## சமூகமும் ஆதரவும்
 
 - **Microsoft Foundry Discord**: [#Azure சேனல்](https://discord.gg/microsoft-azure)
-- **AZD GitHub**: [Issues and discussions](https://github.com/Azure/azure-dev)
-- **Microsoft Learn**: [அதிகாரப்பூர்வ ஆவணங்கள்](https://learn.microsoft.com/azure/ai-studio/)
-- **Agent Skills**: [Microsoft Foundry skill on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - உங்கள் எடிட்டரில் Azure + Foundry agent skills ஐ `npx skills add microsoft/github-copilot-for-azure` கொண்டு நிறுவவும்
+- **AZD GitHub**: [பிரச்சனைகள் மற்றும் விவாதங்கள்](https://github.com/Azure/azure-dev)
+- **Microsoft Learn**: [அதிகாரப் பத்திரிகை](https://learn.microsoft.com/azure/ai-studio/)
+- **Agent Skills**: [skills.sh தளத்தில் Microsoft Foundry திறன்](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - உங்கள் ஆசிரியர் தொகுப்பில் Azure + Foundry முகவர் திறன்களை `npx skills add microsoft/github-copilot-for-azure` மூலம் நிறுவவும்
 
 ---
 
-**அத்தியாய வழிசெலுத்தல்:**
-- **📚 பாடநெறி முகப்பு**: [AZD For Beginners](../../README.md)
-- **📖 தற்போதைய அத்தியாயம்**: அத்தியாயம் 2 - AI-முதன்மை மேம்பாடு
+**அத்தியாயம் வழிசெலுத்தல்:**
+- **📚 பாடத்திட்ட முகப்பு**: [AZD தொடக்கக்காரர்கள்](../../README.md)
+- **📖 தற்போதைய அத்தியாயம்**: அத்தியாயம் 2 - AI முதன்மை மேம்பாடு
 - **⬅️ முந்தைய அத்தியாயம்**: [அத்தியாயம் 1: உங்கள் முதல் திட்டம்](../chapter-01-foundation/first-project.md)
-- **➡️ அடுத்தது**: [AI Model Deployment](ai-model-deployment.md)
-- **🚀 அடுத்த அத்தியாயம்**: [அத்தியாயம் 3: அமைப்பு](../chapter-03-configuration/configuration.md)
+- **➡️ அடுத்தது**: [AI மாதிரி வெளியீடு](ai-model-deployment.md)
+- **🚀 அடுத்த அத்தியாயம்**: [அத்தியாயம் 3: கட்டமைப்பு](../chapter-03-configuration/configuration.md)
 
-**உதவி தேவைவுமா?** எங்கள் சமூக கலந்துரையாடல்களில் சேரவும் அல்லது ரெப்போசிடரியில் ஒரு issue திறக்கவும். Azure AI + AZD சமுதாயம் உங்கள் வெற்றிக்கு உதவ இங்கே உள்ளது!
+**உதவி வேண்டுமா?** எங்கள் சமூகக் கலந்துரையாடல்களில் கலந்து கொள்ள거나 அல்லது வளக்கோப்பில் ஒரு பிரச்சனையை திறக்கவும். Azure AI + AZD சமூகமும் உங்கள் வெற்றிக்காக இருக்கிறது!
 
 ---
 

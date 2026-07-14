@@ -1,48 +1,48 @@
-# 4. peatükk: Taristu koodina & Juhtimine
+# 4. peatükk: infrastruktuur kui kood & juurutamine
 
-**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 1-1.5 tundi | **⭐ Kompleksus**: Kesktase
+**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 1-1,5 tundi | **⭐ Raskeusaste**: Kesktase
 
 ---
 
 ## Ülevaade
 
-See peatükk käsitleb taristu koodina (IaC) mustreid Bicep mallidega, ressursside loomist ja juurutamisstrateegiaid Azure Developer CLI abil.
+Selles peatükis käsitletakse infrastruktuuri kui koodi (IaC) mustreid Bicep mallide abil, ressursside loomist ja juurutamisstrateegiaid Azure Developer CLI kasutades.
 
-> Testitud versiooniga `azd 1.25.6` 2026. aasta juunis.
+> Kontrollitud versiooniga `azd 1.27.1` juulis 2026.
 
 ## Õpieesmärgid
 
 Selle peatüki läbimisel:
-- Saate aru Bicep malli struktuurist ja süntaksist
-- Loote Azure ressursse käsuga `azd provision`
-- Juurutate rakendusi käsuga `azd deploy`
-- Rakendate sinine-roheline ja järkjärgulise juurutamise strateegiaid
+- Mõistad Bicep malli struktuuri ja süntaksit
+- Loome Azure ressursse käsuga `azd provision`
+- Juurutame rakendusi käsuga `azd deploy`
+- Rakendad sinine-roheline ja jooksva värskenduse juurutamisstrateegiaid
 
 ---
 
-## 📚 Tunnid
+## 📚 Õppetunnid
 
-| # | Tund | Kirjeldus | Aeg |
+| # | Õppetund | Kirjeldus | Aeg |
 |---|--------|-------------|------|
-| 1 | [Ressursside loomine](provisioning.md) | Azure ressursside haldus AZD abil | 45 min |
+| 1 | [Ressursside loomine](provisioning.md) | Azure ressursside haldus AZD-ga | 45 min |
 | 2 | [Juurutamisjuhend](deployment-guide.md) | Rakenduse juurutamisstrateegiad | 45 min |
-| 3 | [Oma malli koostamine](custom-templates.md) | Taaskasutatavate azd mallide loomine ja avaldamine | 30 min |
+| 3 | [Oma malli loomine](custom-templates.md) | Taaskasutatavate azd mallide koostamine ja avaldamine | 30 min |
 
 ---
 
-## 🚀 Kiire käivitamine
+## 🚀 Kiire algus
 
 ```bash
-# Algata mallist
+# Initsialiseeri mallist
 azd init --template azure-functions-python-v2-http
 
-# Vaata eelvaadet sellest, mis luuakse
+# Vaata eelvaadet, mida luuakse
 azd provision --preview
 
-# Hangi infrastruktuur vaid
+# Rajada ainult infrastruktuur
 azd provision
 
-# Käivita kood vaid
+# Paigalda ainult kood
 azd deploy
 
 # Või mõlemad koos
@@ -70,12 +70,12 @@ my-project/
 
 ## 🔧 Olulised käsud
 
-| Käsu nimi | Kirjeldus |
+| Käsk | Kirjeldus |
 |---------|-------------|
 | `azd init` | Projekti initsialiseerimine |
 | `azd provision` | Azure ressursside loomine |
-| `azd deploy` | Rakenduskoodi juurutamine |
-| `azd up` | loomine + juurutamine |
+| `azd deploy` | Rakenduse koodi juurutamine |
+| `azd up` | juuruta + loo ressursid |
 | `azd down` | Kõigi ressursside kustutamine |
 
 ---
@@ -91,9 +91,9 @@ my-project/
 
 ## 📖 Seotud ressursid
 
-- [Eeljuhutus Kontrollid](../chapter-06-pre-deployment/README.md)
-- [Konteinerirakenduste näited](../../examples/container-app/README.md)
-- [Andmebaasirakenduse näide](../../examples/database-app/README.md)
+- [Eeljuurutamise kontrollid](../chapter-06-pre-deployment/README.md)
+- [Container App näited](../../examples/container-app/README.md)
+- [Andmebaasi rakenduse näide](../../examples/database-app/README.md)
 
 ---
 

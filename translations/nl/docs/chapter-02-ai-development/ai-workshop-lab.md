@@ -1,54 +1,54 @@
-# AI Workshop Lab: Je AI-oplossingen AZD-deploybaar maken
+# AI Workshop Lab: Maak je AI-oplossingen AZD-Deployable
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Hoofdstuk 2 - AI-First-ontwikkeling
-- **⬅️ Previous**: [AI-modelimplementatie](ai-model-deployment.md)
-- **➡️ Next**: [Best practices voor productie-AI](production-ai-practices.md)
-- **🚀 Next Chapter**: [Hoofdstuk 3: Configuratie](../chapter-03-configuration/configuration.md)
+**Hoofdstuknavigatie:**
+- **📚 Cursus Startpagina**: [AZD Voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 2 - AI-First Ontwikkeling
+- **⬅️ Vorige**: [AI Model Deployment](ai-model-deployment.md)
+- **➡️ Volgende**: [Productie AI Beste Praktijken](production-ai-practices.md)
+- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 3: Configuratie](../chapter-03-configuration/configuration.md)
 
-## Overzicht van de workshop
+## Overzicht van de Workshop
 
-Deze hands-on lab begeleidt ontwikkelaars bij het proces om een bestaand AI-template te nemen en het te deployen met Azure Developer CLI (AZD). Je leert essentiële patronen voor productieklare AI-implementaties met Microsoft Foundry-services.
+Deze praktische lab begeleidt ontwikkelaars in het proces van het nemen van een bestaande AI-sjabloon en deze te implementeren met behulp van Azure Developer CLI (AZD). Je leert essentiële patronen voor productie AI-implementaties met Microsoft Foundry-services.
 
-> **Validation note (2026-03-25):** This workshop was reviewed against `azd` `1.23.12`. If your local installation is older, update AZD before starting so the auth, template, and deployment workflow matches the steps below.
+> **Validatienotitie (2026-07-13):** Deze workshop is beoordeeld met `azd` `1.27.1`. Als jouw lokale installatie ouder is, update AZD dan voordat je begint zodat de authenticatie-, sjabloon- en implementatieworkflow overeenkomt met de onderstaande stappen.
 
 **Duur:** 2-3 uur  
 **Niveau:** Gevorderd  
-**Vereisten:** Basiskennis van Azure, vertrouwdheid met AI/ML-concepten
+**Vereisten:** Basiskennis Azure, bekendheid met AI/ML-concepten
 
 ## 🎓 Leerdoelen
 
 Aan het einde van deze workshop kun je:
-- ✅ Een bestaande AI-applicatie omzetten naar AZD-templates
+- ✅ Een bestaande AI-applicatie omzetten naar gebruik van AZD-sjablonen
 - ✅ Microsoft Foundry-services configureren met AZD
-- ✅ Veilig credentialbeheer voor AI-services implementeren
-- ✅ Productieklare AI-toepassingen deployen met monitoring
+- ✅ Veilige beheersystemen voor referenties implementeren voor AI-services
+- ✅ Productiegereed AI-toepassingen implementeren met monitoring
 - ✅ Veelvoorkomende AI-implementatieproblemen oplossen
 
 ## Vereisten
 
-### Vereiste tools
+### Benodigde Tools
 - [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) geïnstalleerd
 - [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) geïnstalleerd
 - [Git](https://git-scm.com/) geïnstalleerd
-- Code-editor (aanbevolen: VS Code)
+- Code-editor (VS Code aanbevolen)
 
-### Azure-resources
-- Azure-abonnement met Contributor-toegang
-- Toegang tot Microsoft Foundry Models-services (of de mogelijkheid om toegang aan te vragen)
-- Machtigingen om resourcegroepen te maken
+### Azure Resources
+- Azure-abonnement met contributor-toegang
+- Toegang tot Microsoft Foundry Models-services (of mogelijkheid om toegang aan te vragen)
+- Rechten om resourcegroepen aan te maken
 
 ### Kennisvereisten
-- Basisbegrip van Azure-services
-- Vertrouwdheid met command-line interfaces
-- Basisconcepten van AI/ML (API's, modellen, prompts)
+- Basiskennis van Azure-services
+- Bekendheid met command-line interfaces
+- Basis AI/ML-concepten (API’s, modellen, prompts)
 
-## Labconfiguratie
+## Lab Setup
 
-### Stap 1: Voorbereiding van de omgeving
+### Stap 1: Voorbereiding van de Omgeving
 
-1. **Controleer de installatie van de tools:**
+1. **Verifieer tool-installaties:**
 ```bash
 # Controleer AZD-installatie
 azd version
@@ -56,26 +56,26 @@ azd version
 # Controleer Azure CLI
 az --version
 
-# Log in bij Azure voor AZD-workflows
+# Log in op Azure voor AZD-workflows
 azd auth login
 
-# Log alleen in bij de Azure CLI als je van plan bent az-commando's uit te voeren tijdens de diagnose
+# Log alleen in op Azure CLI als je van plan bent az-commando's uit te voeren tijdens diagnostiek
 az login
 ```
 
-If you work across multiple tenants or your subscription is not detected automatically, retry with `azd auth login --tenant-id <tenant-id>`.
+Als je werkt over meerdere tenants of je abonnement wordt niet automatisch gedetecteerd, probeer dan opnieuw met `azd auth login --tenant-id <tenant-id>`.
 
-2. **Clone de workshop-repository:**
+2. **Clone de workshop repository:**
 ```bash
 git clone https://github.com/Azure-Samples/azure-search-openai-demo
 cd azure-search-openai-demo
 ```
 
-## Module 1: Inzicht in de AZD-structuur voor AI-toepassingen
+## Module 1: AZD-structuur begrijpen voor AI-toepassingen
 
-### Anatomie van een AI AZD-template
+### Anatomie van een AI AZD-sjabloon
 
-Ontdek de belangrijkste bestanden in een AI-klaar AZD-template:
+Verken de belangrijkste bestanden in een AI-klaar AZD-sjabloon:
 
 ```
 azure-search-openai-demo/
@@ -92,16 +92,16 @@ azure-search-openai-demo/
 └── .azure/               # AZD environment files
 ```
 
-### **Lab oefening 1.1: Verken de configuratie**
+### **Lab Oefening 1.1: Verken de Configuratie**
 
 1. **Bekijk het azure.yaml-bestand:**
 ```bash
 cat azure.yaml
 ```
 
-**Waar op te letten:**
-- Servicedefinities voor AI-componenten
-- Koppelingen van omgevingsvariabelen
+**Waar je op moet letten:**
+- Service-definities voor AI-componenten
+- Toewijzingen van omgevingsvariabelen
 - Hostconfiguraties
 
 2. **Bekijk de main.bicep-infrastructuur:**
@@ -110,30 +110,30 @@ cat infra/main.bicep
 ```
 
 **Belangrijke AI-patronen om te identificeren:**
-- Provisioning van Microsoft Foundry Models-service
-- Integratie met Azure AI Search
-- Veilig sleutelbeheer
+- Microsoft Foundry Models-service provisioning
+- Azure AI Search-integratie
+- Beveiligd sleutelbeheer
 - Netwerkbeveiligingsconfiguraties
 
 ### **Discussiepunt:** Waarom deze patronen belangrijk zijn voor AI
 
-- **Service-afhankelijkheden**: AI-apps vereisen vaak meerdere gecoördineerde services
-- **Beveiliging**: API-sleutels en eindpunten moeten veilig worden beheerd
-- **Schaalbaarheid**: AI-workloads hebben unieke schaalvereisten
-- **Kostenbeheer**: AI-services kunnen duur zijn als ze niet goed geconfigureerd zijn
+- **Service-afhankelijkheden**: AI-apps vereisen vaak meerdere gecoördineerde diensten
+- **Beveiliging**: API-sleutels en eindpunten moeten veilig beheerd worden
+- **Schaalbaarheid**: AI-werkbelastingen hebben unieke schaalvereisten
+- **Kostenbeheer**: AI-services kunnen duur zijn als ze niet correct geconfigureerd zijn
 
 ## Module 2: Implementeer je eerste AI-toepassing
 
-### Stap 2.1: Initialiseer de omgeving
+### Stap 2.1: Initialiseer de Omgeving
 
 1. **Maak een nieuwe AZD-omgeving aan:**
 ```bash
 azd env new myai-workshop
 ```
 
-2. **Stel de vereiste parameters in:**
+2. **Stel vereiste parameters in:**
 ```bash
-# Stel uw voorkeurs-Azure-regio in
+# Stel uw voorkeursregio in Azure in
 azd env set AZURE_LOCATION eastus
 
 # Optioneel: Stel een specifiek OpenAI-model in
@@ -147,17 +147,17 @@ azd env set AZURE_OPENAI_MODEL gpt-4.1-mini
 azd up
 ```
 
-**Wat gebeurt er tijdens `azd up`:**
-- ✅ Voorziet de Microsoft Foundry Models-service
-- ✅ Maakt de Azure AI Search-service aan
-- ✅ Zet App Service op voor de webapplicatie
-- ✅ Configureert netwerk en beveiliging
-- ✅ Implementeert de applicatiecode
-- ✅ Stelt monitoring en logging in
+**Wat er gebeurt tijdens `azd up`:**
+- ✅ Provisioning van Microsoft Foundry Models-service
+- ✅ Creëren van Azure AI Search-service
+- ✅ Opzetten van App Service voor de webapplicatie
+- ✅ Configureren van netwerken en beveiliging
+- ✅ Implementeren van applicatiecode
+- ✅ Opzetten van monitoring en logging
 
-2. **Monitor de voortgang van de implementatie** en noteer de resources die worden gemaakt.
+2. **Monitor de implementatievoortgang** en noteer de aangemaakte resources.
 
-### Stap 2.3: Verifieer je implementatie
+### Stap 2.3: Verifieer je Implementatie
 
 1. **Controleer de geïmplementeerde resources:**
 ```bash
@@ -169,45 +169,45 @@ azd show
 azd show
 ```
 
-Open het web-eindpunt dat wordt weergegeven in de `azd show` output.
+Open de webendpoint die wordt getoond in de `azd show` output.
 
 3. **Test de AI-functionaliteit:**
    - Navigeer naar de webapplicatie
-   - Probeer voorbeeldqueries
-   - Verifieer dat AI-reacties werken
+   - Probeer voorbeeldquery’s
+   - Controleer of AI-reacties werken
 
-### **Lab oefening 2.1: Oefening in probleemoplossing**
+### **Lab Oefening 2.1: Oefening in foutopsporing**
 
-**Scenario**: Je implementatie is geslaagd, maar de AI reageert niet.
+**Scenario**: Je implementatie is gelukt maar de AI reageert niet.
 
 **Veelvoorkomende problemen om te controleren:**
-1. **OpenAI API-sleutels**: Controleer of deze correct zijn ingesteld
-2. **Beschikbaarheid van het model**: Controleer of je regio het model ondersteunt
+1. **OpenAI API-sleutels**: Controleer of ze correct zijn ingesteld
+2. **Modelbeschikbaarheid**: Controleer of jouw regio het model ondersteunt
 3. **Netwerkconnectiviteit**: Zorg dat services met elkaar kunnen communiceren
 4. **RBAC-machtigingen**: Controleer of de app toegang heeft tot OpenAI
 
-**Opdrachten voor foutopsporing:**
+**Debugcommando’s:**
 ```bash
 # Controleer omgevingsvariabelen
 azd env get-values
 
-# Bekijk implementatielogboeken
+# Bekijk deployment logs
 az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 
-# Controleer de status van de OpenAI-implementatie
+# Controleer OpenAI deployment status
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
 
-## Module 3: Pas AI-toepassingen aan naar jouw behoeften
+## Module 3: Pas AI-toepassingen aan jouw behoeften aan
 
-### Stap 3.1: Pas de AI-configuratie aan
+### Stap 3.1: Wijzig de AI-configuratie
 
-1. **Werk het OpenAI-model bij:**
+1. **Update het OpenAI-model:**
 ```bash
-# Overschakelen naar een ander model (indien beschikbaar in uw regio)
+# Overschakelen naar een ander model (indien beschikbaar in jouw regio)
 azd env set AZURE_OPENAI_MODEL gpt-4.1
 
-# Heruitrollen met de nieuwe configuratie
+# Opnieuw uitrollen met de nieuwe configuratie
 azd deploy
 ```
 
@@ -230,9 +230,9 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-### Stap 3.2: Omgeving-specifieke configuraties
+### Stap 3.2: Omgevingsspecifieke Configuraties
 
-**Best practice**: Verschillende configuraties voor ontwikkeling en productie.
+**Beste praktijk**: Verschillende configuraties voor ontwikkeling versus productie.
 
 1. **Maak een productieomgeving aan:**
 ```bash
@@ -245,39 +245,39 @@ azd env new myai-production
 azd env set AZURE_OPENAI_SKU S0
 azd env set AZURE_SEARCH_SKU standard
 
-# Schakel aanvullende beveiligingsfuncties in
+# Extra beveiligingsfuncties inschakelen
 azd env set ENABLE_PRIVATE_ENDPOINTS true
 ```
 
-### **Lab oefening 3.1: Kostenoptimalisatie**
+### **Lab Oefening 3.1: Kostenoptimalisatie**
 
-**Uitdaging**: Configureer het template voor kosteneffectieve ontwikkeling.
+**Uitdaging**: Configureer de sjabloon voor kostenefficiënte ontwikkeling.
 
 **Taken:**
-1. Identificeer welke SKUs kunnen worden ingesteld op gratis/basisniveaus
-2. Configureer omgevingsvariabelen voor minimale kosten
+1. Identificeer welke SKU’s op gratis/basis niveaus kunnen worden ingesteld
+2. Stel omgevingsvariabelen in voor minimale kosten
 3. Implementeer en vergelijk kosten met de productieconfiguratie
 
-**Hints voor de oplossing:**
-- Gebruik de F0 (gratis) tier voor Azure AI Services waar mogelijk
-- Gebruik de Basic-tier voor de Search Service tijdens ontwikkeling
-- Overweeg het gebruik van een Consumption-plan voor Functions
+**Oplossingshints:**
+- Gebruik F0 (gratis) niveau voor Azure AI-services waar mogelijk
+- Gebruik Basisniveau voor Search Service in ontwikkeling
+- Overweeg het gebruik van Consumption-plan voor Functions
 
-## Module 4: Beveiliging en best practices voor productie
+## Module 4: Beveiliging en Beste Productiepraktijken
 
-### Stap 4.1: Beveiligd beheer van referenties
+### Stap 4.1: Veilig beheer van referenties
 
 **Huidige uitdaging**: Veel AI-apps coderen API-sleutels hard of gebruiken onveilige opslag.
 
-**AZD-oplossing**: Managed Identity + Key Vault-integratie.
+**AZD Oplossing**: Managed Identity + Key Vault-integratie.
 
-1. **Bekijk de beveiligingsconfiguratie in je template:**
+1. **Bekijk de beveiligingsconfiguratie in je sjabloon:**
 ```bash
-# Zoek naar Key Vault- en Managed Identity-configuratie
+# Zoek naar Key Vault en Managed Identity configuratie
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
-2. **Controleer of Managed Identity werkt:**
+2. **Verifieer dat Managed Identity werkt:**
 ```bash
 # Controleer of de webapp de juiste identiteitsconfiguratie heeft
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
@@ -285,9 +285,9 @@ az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 
 ### Stap 4.2: Netwerkbeveiliging
 
-1. **Schakel private endpoints in** (als dit nog niet is geconfigureerd):
+1. **Schakel private endpoints in** (indien nog niet geconfigureerd):
 
-Voeg toe aan je bicep-template:
+Voeg toe aan je bicep-sjabloon:
 ```bicep
 // Private endpoint for OpenAI
 resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
@@ -310,7 +310,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-### Stap 4.3: Monitoring en observeerbaarheid
+### Stap 4.3: Monitoring en Observeerbaarheid
 
 1. **Configureer Application Insights:**
 ```bash
@@ -342,24 +342,24 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-### **Lab oefening 4.1: Beveiligingsaudit**
+### **Lab Oefening 4.1: Beveiligingsaudit**
 
-**Taak**: Beoordeel je implementatie op beveiligingsbest practices.
+**Taak**: Beoordeel je implementatie voor beveiligingsbest practices.
 
 **Checklist:**
 - [ ] Geen hardgecodeerde geheimen in code of configuratie
-- [ ] Managed Identity gebruikt voor service-tot-service-authenticatie
+- [ ] Managed Identity gebruikt voor service-tot-service authenticatie
 - [ ] Key Vault slaat gevoelige configuratie op
 - [ ] Netwerktoegang is correct beperkt
 - [ ] Monitoring en logging zijn ingeschakeld
 
-## Module 5: Je eigen AI-toepassing converteren
+## Module 5: Je eigen AI-applicatie omzetten
 
-### Stap 5.1: Beoordelingsformulier
+### Stap 5.1: Beoordelingswerkblad
 
-**Voordat je je app converteert**, beantwoord deze vragen:
+**Voordat je je app omzet**, beantwoord deze vragen:
 
-1. **Applicatie-architectuur:**
+1. **Applicatiearchitectuur:**
    - Welke AI-services gebruikt je app?
    - Welke compute-resources heeft het nodig?
    - Heeft het een database nodig?
@@ -367,19 +367,19 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 
 2. **Beveiligingseisen:**
    - Met welke gevoelige gegevens werkt je app?
-   - Welke compliance-eisen gelden er?
-   - Heb je private netwerken nodig?
+   - Welke compliance-eisen heb je?
+   - Heb je privé-netwerken nodig?
 
 3. **Schaalvereisten:**
    - Wat is je verwachte belasting?
    - Heb je auto-scaling nodig?
-   - Zijn er regionale vereisten?
+   - Zijn er regionale eisen?
 
-### Stap 5.2: Maak je AZD-template
+### Stap 5.2: Maak je AZD-sjabloon
 
-**Volg dit patroon om je app te converteren:**
+**Volg dit patroon om je app om te zetten:**
 
-1. **Maak de basisstructuur:**
+1. **Maak de basisstructuur aan:**
 ```bash
 mkdir my-ai-app-azd
 cd my-ai-app-azd
@@ -413,7 +413,7 @@ hooks:
 
 3. **Maak infrastructuursjablonen aan:**
 
-**infra/main.bicep** - Hoofdtemplate:
+**infra/main.bicep** - Hoofdsjabloon:
 ```bicep
 @description('Primary location for all resources')
 param location string = resourceGroup().location
@@ -455,52 +455,52 @@ output endpoint string = openAIAccount.properties.endpoint
 output name string = openAIAccount.name
 ```
 
-### **Lab oefening 5.1: Template-creatie-uitdaging**
+### **Lab Oefening 5.1: Sjabloon Aanmaak Uitdaging**
 
-**Uitdaging**: Maak een AZD-template voor een documentverwerkings-AI-app.
+**Uitdaging**: Maak een AZD-sjabloon voor een documentverwerking AI-app.
 
 **Vereisten:**
 - Microsoft Foundry Models voor inhoudsanalyse
 - Document Intelligence voor OCR
 - Storage Account voor documentuploads
 - Function App voor verwerkingslogica
-- Webapp voor de gebruikersinterface
+- Webapp voor gebruikersinterface
 
 **Bonuspunten:**
-- Voeg juiste foutafhandeling toe
+- Voeg correcte foutafhandeling toe
 - Neem kostenraming op
-- Stel monitoring-dashboards in
+- Zet monitoringdashboards op
 
-## Module 6: Problemen oplossen van veelvoorkomende issues
+## Module 6: Veelvoorkomende problemen oplossen
 
-### Veelvoorkomende implementatieproblemen
+### Veelvoorkomende Implementatieproblemen
 
-#### Probleem 1: OpenAI-servicequotum overschreden
-**Symptomen:** De implementatie mislukt met een quota-fout
+#### Probleem 1: OpenAI-service quota overschreden
+**Symptomen:** Implementatie mislukt met quotafout
 **Oplossingen:**
 ```bash
 # Controleer huidige quota
 az cognitiveservices usage list --location eastus
 
-# Vraag een verhoging van de quota aan of probeer een andere regio
+# Vraag om een verhoging van de quota of probeer een andere regio
 azd env set AZURE_LOCATION westus2
 azd up
 ```
 
-#### Probleem 2: Model niet beschikbaar in de regio
-**Symptomen:** AI-reacties falen of modelimplementatiefouten
+#### Probleem 2: Model niet beschikbaar in regio
+**Symptomen:** AI-responses falen of fouten bij modelimplementatie
 **Oplossingen:**
 ```bash
 # Controleer de beschikbaarheid van het model per regio
 az cognitiveservices model list --location eastus
 
-# Bijwerken naar een beschikbaar model
+# Bijwerken naar beschikbaar model
 azd env set AZURE_OPENAI_MODEL gpt-4.1-mini
 azd deploy
 ```
 
 #### Probleem 3: Machtigingsproblemen
-**Symptomen:** 403 Forbidden-fouten bij het aanroepen van AI-services
+**Symptomen:** 403 Forbidden-fouten bij aanroepen AI-services
 **Oplossingen:**
 ```bash
 # Controleer roltoewijzingen
@@ -515,47 +515,47 @@ az role assignment create \
 
 ### Prestatieproblemen
 
-#### Probleem 4: Trage AI-reacties
-**Onderzoeksstappen:**
-1. Controleer Application Insights op prestatiemetrics
-2. Bekijk OpenAI-servicemetrics in de Azure-portal
-3. Controleer netwerkconnectiviteit en latency
+#### Probleem 4: Traag reagerende AI
+**Onderzoekstappen:**
+1. Controleer Application Insights voor prestatiedata
+2. Bekijk OpenAI service-metrics in Azure portal
+3. Verifieer netwerkconnectiviteit en latency
 
 **Oplossingen:**
 - Implementeer caching voor veelvoorkomende queries
-- Gebruik het juiste OpenAI-model voor jouw use case
-- Overweeg leesreplica's voor scenario's met hoge belasting
+- Gebruik een passend OpenAI-model voor je use case
+- Overweeg leesreplica’s voor hoge belastingen
 
-### **Lab oefening 6.1: Debugging-uitdaging**
+### **Lab Oefening 6.1: Debugging Uitdaging**
 
-**Scenario**: Je implementatie is geslaagd, maar de applicatie geeft 500-fouten terug.
+**Scenario**: Je implementatie is succesvol, maar de applicatie geeft 500-fouten terug.
 
-**Taken voor foutopsporing:**
+**Debugging taken:**
 1. Controleer applicatielogs
 2. Controleer serviceconnectiviteit
 3. Test authenticatie
-4. Bekijk de configuratie
+4. Bekijk configuratie
 
 **Te gebruiken tools:**
-- `azd show` voor implementatieoverzicht
-- Azure-portal voor gedetailleerde servicelogboeken
+- `azd show` voor overzicht implementatie
+- Azure portal voor gedetailleerde servicelogs
 - Application Insights voor applicatietelemetrie
 
-## Module 7: Monitoring en optimalisatie
+## Module 7: Monitoring en Optimalisatie
 
-### Stap 7.1: Stel uitgebreide monitoring in
+### Stap 7.1: Stel Uitgebreide Monitoring in
 
-1. **Maak aangepaste dashboards:**
+1. **Creëer aangepaste dashboards:**
 
-Navigeer naar de Azure-portal en maak een dashboard met:
-- Aantal OpenAI-aanvragen en latency
+Navigeer naar Azure portal en creëer een dashboard met:
+- OpenAI-aanvraagtellingen en latency
 - Applicatiefoutpercentages
 - Resourcegebruik
-- Kostenbewaking
+- Kostentracking
 
-2. **Stel waarschuwingen in:**
+2. **Stel alerts in:**
 ```bash
-# Waarschuwing voor hoog foutpercentage
+# Waarschuwing voor hoge foutmarge
 az monitor metrics alert create \
   --name "AI-App-High-Error-Rate" \
   --resource-group YOUR_RG \
@@ -566,117 +566,118 @@ az monitor metrics alert create \
 
 ### Stap 7.2: Kostenoptimalisatie
 
-1. **Analyseer de huidige kosten:**
+1. **Analyseer huidige kosten:**
 ```bash
 # Gebruik Azure CLI om kostengegevens op te halen
 az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 ```
 
 2. **Implementeer kostenbeheersing:**
-- Stel budgetwaarschuwingen in
+- Stel budgetalerts in
 - Gebruik autoscaling-beleid
-- Implementeer requestcaching
-- Bewaak tokengebruik voor OpenAI
+- Implementeer querycaching
+- Monitor tokengebruik voor OpenAI
 
-### **Lab oefening 7.1: Prestatieoptimalisatie**
+### **Lab Oefening 7.1: Prestatie-optimalisatie**
 
-**Taak**: Optimaliseer je AI-toepassing voor zowel prestaties als kosten.
+**Taak**: Optimaliseer je AI-applicatie voor zowel prestaties als kosten.
 
-**Metrics om te verbeteren:**
-- Verminder de gemiddelde reactietijd met 20%
-- Verminder de maandelijkse kosten met 15%
+**Te verbeteren metrics:**
+- Verminder gemiddelde reactietijd met 20%
+- Verminder maandelijkse kosten met 15%
 - Behoud 99,9% uptime
 
 **Strategieën om te proberen:**
-- Implementeer responsecaching
+- Implementeer response caching
 - Optimaliseer prompts voor token-efficiëntie
-- Gebruik geschikte compute-SKUs
-- Stel juiste autoscaling in
+- Gebruik passende compute-SKU’s
+- Stel correcte autoscaling in
 
-## Einduitdaging: End-to-End-implementatie
+## Einduitdaging: End-to-End Implementatie
 
 ### Uitdagingsscenario
 
-Je krijgt de opdracht om een productieklare AI-aangedreven klantenservice-chatbot te maken met de volgende vereisten:
+Je hebt de opdracht om een productieklare, AI-aangedreven klantenservice chatbot te maken met de volgende eisen:
 
-**Functionele eisen:**
+**Functionele Vereisten:**
 - Webinterface voor klantinteracties
 - Integratie met Microsoft Foundry Models voor reacties
 - Documentzoekfunctie met Azure AI Search
 - Integratie met bestaande klantendatabase
-- Ondersteuning voor meerdere talen
+- Meertalige ondersteuning
 
-**Niet-functionele eisen:**
-- Ondersteunen van 1000 gelijktijdige gebruikers
-- 99,9% uptime SLA
+**Niet-functionele Vereisten:**
+- Ondersteunt 1000 gelijktijdige gebruikers
+- SLA van 99,9% uptime
 - SOC 2-compliance
 - Kosten onder $500/maand
-- Implementeren naar meerdere omgevingen (dev, staging, prod)
+- Implementeer in meerdere omgevingen (ontwikkeling, staging, productie)
 
 ### Implementatiestappen
 
 1. **Ontwerp de architectuur**
-2. **Maak het AZD-template**
-3. **Implementeer beveiligingsmaatregelen**
+2. **Maak de AZD-sjabloon**
+3. **Voer beveiligingsmaatregelen uit**
 4. **Stel monitoring en waarschuwingen in**
-5. **Maak deployment-pijplijnen**
+5. **Maak implementatiepijplijnen**
 6. **Documenteer de oplossing**
 
-### Beoordelingscriteria
+### Evaluatiecriteria
 
 - ✅ **Functionaliteit**: Voldoet het aan alle eisen?
-- ✅ **Beveiliging**: Zijn best practices geïmplementeerd?
+- ✅ **Beveiliging**: Zijn best practices toegepast?
 - ✅ **Schaalbaarheid**: Kan het de belasting aan?
-- ✅ **Onderhoudbaarheid**: Is de code en infrastructuur goed georganiseerd?
-- ✅ **Kosten**: Blijft het binnen het budget?
+- ✅ **Onderhoudbaarheid**: Is code en infrastructuur goed georganiseerd?
+- ✅ **Kosten**: Blijft het binnen budget?
 
-## Aanvullende bronnen
+## Aanvullende Bronnen
 
-### Microsoft-documentatie
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Microsoft Foundry Models Service Documentation](https://learn.microsoft.com/azure/cognitive-services/openai/)
-- [Microsoft Foundry Documentation](https://learn.microsoft.com/azure/ai-studio/)
+### Microsoft Documentatie
+- [Azure Developer CLI Documentatie](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Microsoft Foundry Models Service Documentatie](https://learn.microsoft.com/azure/cognitive-services/openai/)
+- [Microsoft Foundry Documentatie](https://learn.microsoft.com/azure/ai-studio/)
 
-### Voorbeeldtemplates
+### Voorbeeldsjablonen
 - [Microsoft Foundry Models Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
 - [OpenAI Chat App Quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart)
+
 - [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
 
-### Communitybronnen
+### Gemeenschapsbronnen
 - [Microsoft Foundry Discord](https://discord.gg/microsoft-azure)
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
 - [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
 
-## 🎓 Certificaat van voltooiing
+## 🎓 Voltooingscertificaat
 
-Gefeliciteerd! Je hebt de AI Workshop Lab voltooid. Je zou nu het volgende moeten kunnen:
+Gefeliciteerd! Je hebt de AI Workshop Lab voltooid. Je zou nu in staat moeten zijn om:
 
-- ✅ Bestaande AI-toepassingen omzetten naar AZD-sjablonen
-- ✅ Productieklare AI-toepassingen implementeren
+- ✅ Bestaande AI-toepassingen om te zetten naar AZD-sjablonen
+- ✅ Productieklaar AI-toepassingen inzetten
 - ✅ Beveiligingsbest practices voor AI-workloads implementeren
-- ✅ De prestaties van AI-toepassingen monitoren en optimaliseren
-- ✅ Veelvoorkomende implementatieproblemen oplossen
+- ✅ AI-toepassingsprestaties monitoren en optimaliseren
+- ✅ Veelvoorkomende problemen bij implementatie oplossen
 
 ### Volgende stappen
 1. Pas deze patronen toe op je eigen AI-projecten
-2. Draag sjablonen bij aan de community
+2. Draag sjablonen bij aan de gemeenschap
 3. Word lid van de Microsoft Foundry Discord voor voortdurende ondersteuning
-4. Verken geavanceerde onderwerpen zoals multi-regio-implementaties
+4. Verken geavanceerde onderwerpen zoals multi-region implementaties
 
 ---
 
-**Workshopfeedback**: Help ons deze workshop verbeteren door je ervaring te delen in het [Microsoft Foundry Discord #Azure-kanaal](https://discord.gg/microsoft-azure).
+**Workshop Feedback**: Help ons deze workshop te verbeteren door je ervaring te delen in het [Microsoft Foundry Discord #Azure kanaal](https://discord.gg/microsoft-azure).
 
 ---
 
-**Hoofdstuknavigatie:**
-- **📚 Cursusstartpagina**: [AZD For Beginners](../../README.md)
-- **📖 Huidig hoofdstuk**: Hoofdstuk 2 - AI-First-ontwikkeling
-- **⬅️ Vorige**: [AI Model Deployment](ai-model-deployment.md)
-- **➡️ Volgende**: [Production AI Best Practices](production-ai-practices.md)
-- **🚀 Volgend hoofdstuk**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+**Hoofdstuk Navigatie:**
+- **📚 Cursus Startpagina**: [AZD Voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 2 - AI-First Ontwikkeling
+- **⬅️ Vorige**: [AI Model Implementatie](ai-model-deployment.md)
+- **➡️ Volgende**: [Productie AI Best Practices](production-ai-practices.md)
+- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 3: Configuratie](../chapter-03-configuration/configuration.md)
 
-**Hulp nodig?** Word lid van onze community voor ondersteuning en discussies over AZD en AI-implementaties.
+**Hulp nodig?** Word lid van onze gemeenschap voor ondersteuning en discussies over AZD en AI-implementaties.
 
 ---
 

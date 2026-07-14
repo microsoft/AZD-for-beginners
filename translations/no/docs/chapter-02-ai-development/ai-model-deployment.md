@@ -1,28 +1,28 @@
-# Distribusjon av AI-modeller med Azure Developer CLI
+# Distribusjon av AI-modell med Azure Developer CLI
 
 **Kapittelnavigasjon:**
-- **📚 Kurs Hjem**: [AZD For Beginners](../../README.md)
-- **📖 Nåværende Kapittel**: Kapittel 2 - AI-Først Utvikling
+- **📚 Kursoversikt**: [AZD For Beginners](../../README.md)
+- **📖 Nåværende kapittel**: Kapittel 2 - AI-første utvikling
 - **⬅️ Forrige**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Neste**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Neste Kapittel**: [Kapittel 3: Konfigurasjon](../chapter-03-configuration/configuration.md)
+- **🚀 Neste kapittel**: [Kapittel 3: Konfigurasjon](../chapter-03-configuration/configuration.md)
 
-Denne veiledningen gir omfattende instrukser for distribusjon av AI-modeller ved bruk av AZD-maler, og dekker alt fra modellvalg til produksjonsdistribusjonsmønstre.
+Denne veiledningen gir omfattende instruksjoner for distribusjon av AI-modeller ved bruk av AZD-maler, som dekker alt fra modellvalg til produksjonsdistribusjonsmønstre.
 
-> **Valideringsmerknad (2026-03-25):** AZD-arbeidsflyten i denne veiledningen ble sjekket mot `azd` `1.23.12`. For AI-distribusjoner som tar lengre tid enn standard tjenestedistribusjonsvindu, støtter nåværende AZD-versjoner `azd deploy --timeout <seconds>`.
+> **Valideringsnotat (2026-07-13):** AZD-arbeidsflyten i denne veiledningen ble sjekket mot `azd` `1.27.1`. For AI-distribusjoner som tar lengre tid enn den standard tjenestedistribusjonsvinduet, støtter nåværende AZD-versjoner `azd deploy --timeout <seconds>`.
 
 ## Innholdsfortegnelse
 
 - [Modellvalgstrategi](#modellvalgstrategi)
 - [AZD-konfigurasjon for AI-modeller](#azd-konfigurasjon-for-ai-modeller)
 - [Distribusjonsmønstre](#distribusjonsmønstre)
-- [Modellhåndtering](#modellhåndtering)
+- [Modelladministrasjon](#modelladministrasjon)
 - [Produksjonshensyn](#produksjonshensyn)
-- [Overvåkning og Observabilitet](#overvåkning-og-observabilitet)
+- [Overvåking og observabilitet](#overvåking-og-observabilitet)
 
 ## Modellvalgstrategi
 
-### Microsoft Foundry Models Modeller
+### Microsoft Foundry-modeller
 
 Velg riktig modell for ditt bruksområde:
 
@@ -54,18 +54,18 @@ services:
 
 ### Modellkapasitetsplanlegging
 
-| Modelltype | Bruksområde | Anbefalt kapasitet | Kostnadsbetraktninger |
-|------------|-------------|-------------------|-----------------------|
-| gpt-4.1-mini | Chat, spørsmål og svar | 10-50 TPM | Kostnadseffektiv for de fleste arbeidsmengder |
+| Modelltype | Bruksområde | Anbefalt kapasitet | Kostnadshensyn |
+|------------|----------|---------------------|-------------------|
+| gpt-4.1-mini | Chat, Q&A | 10-50 TPM | Kostnadseffektivt for de fleste arbeidsbelastninger |
 | gpt-4.1 | Kompleks resonnering | 20-100 TPM | Høyere kostnad, bruk for premiumfunksjoner |
-| text-embedding-3-large | Søk, RAG | 30-120 TPM | Sterkt standardvalg for semantisk søk og henting |
-| Whisper | Tale til tekst | 10-50 TPM | Lydbehandlingsarbeidsmengder |
+| text-embedding-3-large | Søk, RAG | 30-120 TPM | Sterkt standardvalg for semantisk søk og gjenfinning |
+| Whisper | Tale-til-tekst | 10-50 TPM | Arbeidsbelastninger for lydbehandling |
 
 ## AZD-konfigurasjon for AI-modeller
 
-### Bicep-mal konfigurasjon
+### Bicep-mal-konfigurasjon
 
-Opprett modellutplasseringer gjennom Bicep-maler:
+Opprett modell-distribusjoner via Bicep-maler:
 
 ```bicep
 // infra/main.bicep
@@ -138,7 +138,7 @@ AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 
 ## Distribusjonsmønstre
 
-### Mønster 1: Enkelt-region distribusjon
+### Mønster 1: Enkeltregion-distribusjon
 
 ```yaml
 # azure.yaml - Single region
@@ -151,12 +151,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-Best for:
+Best egnet for:
 - Utvikling og testing
 - Applikasjoner for enkeltmarked
 - Kostnadsoptimalisering
 
-### Mønster 2: Multi-region distribusjon
+### Mønster 2: Multi-region-distribusjon
 
 ```bicep
 // Multi-region deployment
@@ -169,14 +169,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Best for:
+Best egnet for:
 - Globale applikasjoner
-- Høye tilgjengelighetskrav
-- Lastfordeling
+- Krav til høy tilgjengelighet
+- Belastningsfordeling
 
-### Mønster 3: Hybrid distribusjon
+### Mønster 3: Hybrid-distribusjon
 
-Kombiner Microsoft Foundry Models med andre AI-tjenester:
+Kombiner Microsoft Foundry-modeller med andre AI-tjenester:
 
 ```bicep
 // Hybrid AI services
@@ -205,11 +205,11 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Modellhåndtering
+## Modelladministrasjon
 
 ### Versjonskontroll
 
-Spor modellversjoner i AZD-konfigurasjonen din:
+Spore modellversjoner i din AZD-konfigurasjon:
 
 ```json
 {
@@ -229,7 +229,7 @@ Spor modellversjoner i AZD-konfigurasjonen din:
 
 ### Modelloppdateringer
 
-Bruk AZD hooks for modelloppdateringer:
+Bruk AZD-hooks for modelloppdateringer:
 
 ```bash
 #!/bin/bash
@@ -241,7 +241,7 @@ az cognitiveservices account list-models \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
 
-# Hvis distribusjonen tar lengre tid enn standard tidsavbrudd
+# Hvis utrullingen tar lengre tid enn standard tidsavbrudd
 azd deploy --timeout 1800
 ```
 
@@ -298,9 +298,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Auto-skalering konfigurasjon
+### Autoskalering-konfigurasjon
 
-Konfigurer auto-skalering for Container Apps:
+Konfigurer autoskalering for Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -368,11 +368,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Overvåkning og Observabilitet
+## Overvåking og observabilitet
 
 ### Integrasjon med Application Insights
 
-Konfigurer overvåking for AI-arbeidsmengder:
+Konfigurer overvåking for AI-arbeidsbelastninger:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -408,9 +408,9 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### Egne måledata
+### Egne metrikker
 
-Spor AI-spesifikke måledata:
+Spor AI-spesifikke metrikker:
 
 ```python
 # Tilpasset telemetri for AI-modeller
@@ -445,12 +445,12 @@ class AITelemetry:
         )
 ```
 
-### Helsekontroller
+### Helsesjekker
 
-Implementer helsesjekker for AI-tjenester:
+Implementer overvåking av AI-tjenestens helse:
 
 ```python
-# Endepunkter for helsesjekk
+# Helsesjekkendepunkter
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -478,30 +478,30 @@ async def check_ai_models():
 
 ## Neste steg
 
-1. **Se gjennom [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** for tjenesteintegrasjonsmønstre  
-2. **Fullfør [AI Workshop Lab](ai-workshop-lab.md)** for praktisk erfaring  
-3. **Implementer [Production AI Practices](production-ai-practices.md)** for bedriftsdistribusjoner  
-4. **Utforsk [AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** for vanlige problemer  
+1. **Gå gjennom [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** for tjenesteintegrasjonsmønstre
+2. **Fullfør [AI Workshop Lab](ai-workshop-lab.md)** for praktisk erfaring
+3. **Implementer [Produksjonspraksis for AI](production-ai-practices.md)** for bedriftsdistribusjoner
+4. **Utforsk [AI-feilsøkingsveiledningen](../chapter-07-troubleshooting/ai-troubleshooting.md)** for vanlige problemer
 
 ## Ressurser
 
-- [Microsoft Foundry Models Modelltilgjengelighet](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)  
-- [Azure Developer CLI Dokumentasjon](https://learn.microsoft.com/azure/developer/azure-developer-cli/)  
-- [Container Apps Skalering](https://learn.microsoft.com/azure/container-apps/scale-app)  
-- [AI Modell Kostnadsoptimalisering](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)  
+- [Microsoft Foundry Models Modelltilgjengelighet](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Azure Developer CLI Dokumentasjon](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Container Apps Skalering](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Kostnadsoptimalisering for AI-modeller](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
 **Kapittelnavigasjon:**
-- **📚 Kurs Hjem**: [AZD For Beginners](../../README.md)
-- **📖 Nåværende Kapittel**: Kapittel 2 - AI-Først Utvikling
+- **📚 Kursoversikt**: [AZD For Beginners](../../README.md)
+- **📖 Nåværende kapittel**: Kapittel 2 - AI-første utvikling
 - **⬅️ Forrige**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Neste**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Neste Kapittel**: [Kapittel 3: Konfigurasjon](../chapter-03-configuration/configuration.md)
+- **🚀 Neste kapittel**: [Kapittel 3: Konfigurasjon](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på dets opprinnelige språk skal anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på originalspråket skal betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

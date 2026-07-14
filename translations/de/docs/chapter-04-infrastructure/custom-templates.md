@@ -1,63 +1,63 @@
-# Ein eigenes azd-Template erstellen
+# Erstellen Sie Ihre eigene azd-Vorlage
 
 **Kapitel-Navigation:**
-- **📚 Kursübersicht**: [AZD für Einsteiger](../../README.md)
-- **📖 Aktuelles Kapitel**: Kapitel 4 - Infrastruktur als Code & Bereitstellung
+- **📚 Kurs-Startseite**: [AZD für Anfänger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 4 – Infrastruktur als Code & Bereitstellung
 - **⬅️ Vorheriges**: [Bereitstellungsleitfaden](deployment-guide.md)
 - **🚀 Nächstes Kapitel**: [Kapitel 5: Multi-Agenten-Lösungen](../chapter-05-multi-agent/README.md)
 
-> Validiert gegen `azd 1.25.6` im Juni 2026.
+> Validiert mit `azd 1.27.1` im Juli 2026.
 
 ## Einführung
 
-Bisher haben Sie Vorlagen mit `azd init --template <name>` *verwendet*. Sobald Sie jedoch ein Projektlayout haben, das Ihrem Team gefällt — zum Beispiel eine Container App mit einer Cosmos DB und der passenden Überwachung — möchten Sie es zu einer wiederverwendbaren Vorlage machen. Eine Vorlage ist einfach ein Git-Repository mit einer vorhersehbaren Struktur, die azd lesen kann. Diese Lektion zeigt Ihnen, wie Sie eine solche von Grund auf erstellen, testen und (optional) in der Community-Galerie veröffentlichen.
+Bisher haben Sie Vorlagen mit `azd init --template <name>` *verwendet*. Aber wenn Sie einmal eine Projektstruktur haben, die Ihrem Team gefällt – zum Beispiel eine Container-App mit Cosmos DB und dem richtigen Monitoring – möchten Sie diese in eine eigene wiederverwendbare Vorlage umwandeln. Eine Vorlage ist einfach ein Git-Repository mit einer vorhersehbaren Struktur, die azd lesen kann. Diese Lektion zeigt Ihnen, wie Sie eine von Grund auf neu erstellen, testen und (optional) in der Community-Galerie veröffentlichen.
 
 ## Lernziele
 
-Bis zum Ende dieser Lektion werden Sie:
-- Verstehen, was einen Ordner zu einer „azd“-Vorlage macht
-- Die erforderlichen Dateien und die Verzeichnisstruktur kennen
-- Ein `azure.yaml` und ein `infra/` hinzufügen, die andere wiederverwenden können
-- Ihre Vorlage lokal testen, bevor Sie sie freigeben
+Am Ende dieser Lektion werden Sie:
+- Verstehen, was einen Ordner zu einer „azd-Vorlage“ macht
+- Die erforderlichen Dateien und Ordnerstruktur kennen
+- Eine `azure.yaml` und `infra/` hinzufügen, die andere wiederverwenden können
+- Ihre Vorlage lokal testen, bevor Sie sie teilen
 - Sie veröffentlichen und (optional) bei Awesome AZD einreichen
 
 ## Lernergebnisse
 
-Nach Abschluss dieser Lektion sind Sie in der Lage:
-- Ein neues Vorlagen-Repository anzulegen
-- Infrastruktur zu parametrisieren, sodass sie in jedem Abonnement funktioniert
-- Eine Vorlage mit `azd init` und `azd up` zu validieren
-- Die von der Community-Galerie erforderlichen Metadaten hinzuzufügen
+Nach Abschluss dieser Lektion können Sie:
+- Ein neues Vorlagen-Repository erstellen
+- Infrastruktur parameterisieren, damit sie in jedem Abonnement funktioniert
+- Eine Vorlage mit `azd init` und `azd up` validieren
+- Die Metadaten hinzufügen, die die Community-Galerie benötigt
 
 ---
 
-## Was ist eine Vorlage eigentlich?
+## Was ist eigentlich eine Vorlage?
 
-Eine azd-Vorlage ist **ein Git-Repository**, das mindestens enthält:
+Eine azd-Vorlage ist **ein Git-Repository**, das mindestens Folgendes enthält:
 
 | Datei / Ordner | Zweck | Erforderlich? |
 |---------------|---------|-----------|
-| `azure.yaml` | Beschreibt Dienste, Hosts und Infra-Provider | ✅ Ja |
-| `infra/` | Bicep, Terraform oder Pulumi, das Ressourcen bereitstellt | ✅ Ja |
-| `src/` (or your code) | Der Anwendungs-Code, den azd bereitstellt | ✅ Ja |
-| `README.md` | Anleitung zur Verwendung der Vorlage | ✅ Dringend empfohlen |
+| `azure.yaml` | Beschreibt Dienste, Hosts und Infrastruktur-Anbieter | ✅ Ja |
+| `infra/` | Bicep, Terraform oder Pulumi zur Bereitstellung von Ressourcen | ✅ Ja |
+| `src/` (oder Ihr Code) | Der Anwendungscode, den azd bereitstellt | ✅ Ja |
+| `README.md` | So verwendet man die Vorlage | ✅ Sehr empfohlen |
 | `.azdo/` oder `.github/` | CI/CD-Pipeline-Definitionen | Optional |
 | `.devcontainer/` | Reproduzierbare Entwicklungsumgebung | Optional |
-| `azure.yaml` `metadata` | Galerie- und Telemetrieinformationen | Optional (für Veröffentlichung erforderlich) |
+| `azure.yaml` `metadata` | Galerie- und Telemetriedaten | Optional (zum Veröffentlichen erforderlich) |
 
-Da ist nichts Magisches: Wenn Sie `azd init --template you/your-repo` ausführen, klont azd das Repository und liest `azure.yaml`.
+Es ist nichts Magisches: Wenn Sie `azd init --template you/your-repo` ausführen, klont azd das Repo und liest die `azure.yaml`.
 
 ---
 
-## Schritt 1: Das Repository aufsetzen
+## Schritt 1: Das Repository erstellen
 
-Erstellen Sie die Ordnerstruktur von Hand oder starten Sie mit einer minimalen Vorlage und bearbeiten Sie diese:
+Erstellen Sie die Ordnerstruktur manuell oder starten Sie mit einer Minimalvorlage und bearbeiten diese:
 
 ```bash
 mkdir my-azd-template && cd my-azd-template
 git init
 
-# Standardlayout erstellen
+# Erstellen Sie das Standardlayout
 mkdir -p src infra
 ```
 
@@ -81,9 +81,9 @@ my-azd-template/
 
 ---
 
-## Schritt 2: `azure.yaml` schreiben
+## Schritt 2: Schreiben Sie `azure.yaml`
 
-Das ist das Herzstück der Vorlage. Es sagt azd, was bereitgestellt werden soll und wie:
+Das ist das Herzstück der Vorlage. Es sagt azd, was bereitgestellt wird und wie:
 
 ```yaml
 # azure.yaml
@@ -101,13 +101,13 @@ services:
     host: containerapp              # appservice | containerapp | function | aks | staticwebapp
 ```
 
-> Das Feld `metadata.template` ist das, was die Galerie-Telemetrie zur Erfassung der Nutzung verwendet. Verwenden Sie die Konvention `name@version`.
+> Das Feld `metadata.template` wird von der Galerietelements-Telemetrie zur Nutzungszählung verwendet. Verwenden Sie die Konvention `name@version`.
 
 ---
 
-## Schritt 3: Infrastruktur parametrisieren
+## Schritt 3: Infrastruktur parametrieren
 
-Die wichtigste Regel für eine *wiederverwendbare* Vorlage: **Niemals Namen, Regionen oder abonnementspezifische Werte fest codieren.** Verwenden Sie Parameter und das Resource-Token-Muster, damit dieselbe Vorlage in jedem Abonnement funktioniert.
+Die wichtigste Regel für eine *wiederverwendbare* Vorlage: **Namen, Regionen oder abonnementsspezifische Werte niemals fest codieren.** Verwenden Sie Parameter und das Ressourcentoken-Muster, damit dieselbe Vorlage in jedem Abonnement funktioniert.
 
 ```bicep
 // infra/main.bicep
@@ -138,10 +138,10 @@ module web 'modules/web.bicep' = {
 output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 ```
 
-Zwei Eigenschaften machen diese Vorlage wiederverwendbar:
+Zwei Dinge machen diese Vorlage vorlagenfreundlich:
 
 1. **`azd-env-name`-Tag** — azd verwendet ihn, um Ressourcen pro Umgebung zu verfolgen und aufzuräumen.
-2. **`uniqueString(...)` Resource-Token** — erzeugt einen stabilen, global eindeutigen Suffix, damit Namen nicht kollidieren.
+2. **`uniqueString(...)`-Ressourcentoken** — erzeugt einen stabilen, global eindeutigen Suffix, damit keine Namenskollisionen entstehen.
 
 Stellen Sie eine passende Parameterdatei bereit, die Werte liest, die azd aus der Umgebung einfügt:
 
@@ -163,33 +163,33 @@ azd ersetzt automatisch `${AZURE_ENV_NAME}` und `${AZURE_LOCATION}` aus der aktu
 
 ## Schritt 4: Testen Sie Ihre Vorlage lokal
 
-Bevor Sie sie freigeben, stellen Sie sicher, dass die Vorlage aus einem sauberen Zustand funktioniert.
+Bevor Sie teilen, beweisen Sie, dass die Vorlage von einem sauberen Zustand aus funktioniert.
 
 **Testen Sie aus dem lokalen Ordner** (kein Git-Push erforderlich):
 
 ```bash
-# Von einem leeren Verzeichnis aus mit deinem lokalen Vorlagenpfad initialisieren
+# Von einem leeren Verzeichnis aus mit Ihrem lokalen Vorlagenpfad initialisieren
 mkdir /tmp/test-run && cd /tmp/test-run
 azd init --template /path/to/my-azd-template
 
-# Provisionieren und von Anfang bis Ende bereitstellen
+# Bereitstellen + Ende-zu-Ende-Deployment
 azd auth login
 azd up
 ```
 
-**Testen Sie dann das Aufräumen**—eine gute Vorlage räumt vollständig auf:
+**Testen Sie anschließend den Abbau** – eine gute Vorlage räumt vollständig auf:
 
 ```bash
 azd down --force --purge
 ```
 
-Wenn `azd down` Ressourcen zurücklässt, haben Sie wahrscheinlich das `azd-env-name`-Tag an einer Ressource vergessen.
+Wenn `azd down` Ressourcen zurücklässt, haben Sie wahrscheinlich den `azd-env-name`-Tag auf einer Ressource vergessen.
 
-> **Tipp:** Führen Sie zuerst `azd provision --preview` aus. Es führt ein what-if aus und zeigt Template-Fehler an, bevor Ressourcen erstellt werden.
+> **Tipp:** Führen Sie zuerst `azd provision --preview` aus. Es führt eine Simulation durch und zeigt Fehler in der Vorlage, bevor Ressourcen erstellt werden.
 
 ---
 
-## Schritt 5: Die Vorlage veröffentlichen
+## Schritt 5: Veröffentlichen Sie die Vorlage
 
 Pushen Sie das Repository zu GitHub (öffentlich, wenn andere es verwenden sollen):
 
@@ -205,46 +205,46 @@ azd init --template your-github-username/my-azd-template
 
 ---
 
-## Schritt 6 (Optional): Bei Awesome AZD einreichen
+## Schritt 6 (Optional): Einreichen bei Awesome AZD
 
-Die [Awesome AZD gallery](https://azure.github.io/awesome-azd/) listet Community-Vorlagen auf. Damit Ihr Repo aufgenommen wird, sollte es Folgendes enthalten:
+Die [Awesome AZD-Galerie](https://azure.github.io/awesome-azd/) listet Community-Vorlagen. Um aufgeführt zu werden, sollte Ihr Repo enthalten:
 
-- ✅ Eine klare `README.md` mit Voraussetzungen, einem Architekturdiagramm und Angaben zu Kosten
-- ✅ Ein funktionierendes `azure.yaml` mit `metadata.template`
-- ✅ Infrastruktur, die in einem frischen Abonnement sauber bereitgestellt werden kann
+- ✅ Ein klares `README.md` mit Voraussetzungen, einem Architekturdiagramm und Kostennoten
+- ✅ Eine funktionierende `azure.yaml` mit `metadata.template`
+- ✅ Infrastruktur, die sauber in einem frischen Abonnement bereitgestellt wird
 - ✅ Eine `LICENSE`-Datei
 - ✅ (Empfohlen) Ein `.devcontainer/` für One-Click-Codespaces
 
-Reichen Sie einen Pull Request ein, der Ihre Vorlage zur Datendatei der Galerie hinzufügt, und folgen Sie dabei der Beitragsanleitung im [Awesome AZD repository](https://github.com/Azure/awesome-azd).
+Reichen Sie ein, indem Sie einen Pull Request öffnen, der Ihre Vorlage zur Datendatei der Galerie hinzufügt, gemäß der Beitragsanleitung im [Awesome AZD-Repository](https://github.com/Azure/awesome-azd).
 
 ---
 
-## Häufige Fehlerquellen
+## Häufige Stolperfallen
 
-| Fehlerquelle | Lösung |
-|---------|-----|
-| Fest codierte Ressourcennamen | Verwenden Sie das `uniqueString()` Resource-Token |
-| `azd down` lässt Ressourcen zurück | Taggen Sie jede Ressource (oder die Ressourcengruppe) mit `azd-env-name` |
-| Vorlage funktioniert für Sie, aber nicht für andere | Entfernen Sie Abonnement-IDs, Mandanten-IDs und regionsspezifische Annahmen |
-| Ausgaben nicht in die App integriert | Exportieren Sie `SERVICE_<NAME>_ENDPOINT_URL` und andere `AZURE_*`-Ausgaben |
-| Galerieeinreichung abgelehnt | Fügen Sie `README.md`, `LICENSE` und `metadata.template` hinzu |
+| Stolperfallen | Lösung |
+|--------------|---------|
+| Fest codierte Ressourcennamen | Verwenden Sie das `uniqueString()`-Ressourcentoken |
+| `azd down` lässt Ressourcen zurück | Markieren Sie jede Ressource (oder die Ressourcengruppe) mit `azd-env-name` |
+| Vorlage funktioniert für Sie, nicht für andere | Entfernen Sie Abonnement-IDs, Mandanten-IDs und Regionsannahmen |
+| Ausgaben sind nicht in die App eingebunden | Exportieren Sie `SERVICE_<NAME>_ENDPOINT_URL` und andere `AZURE_*`-Ausgaben |
+| Einreichung in der Galerie abgelehnt | Fügen Sie `README.md`, `LICENSE` und `metadata.template` hinzu |
 
 ---
 
 ## Zusammenfassung
 
-- Eine Vorlage ist einfach ein Git-Repository mit `azure.yaml`, `infra/` und Ihrem Code.
-- Parametrisieren Sie alles — Namen, Regionen und IDs — damit es überall läuft.
-- Versehen Sie Ressourcen stets mit `azd-env-name`, damit `azd down` funktioniert.
+- Eine Vorlage ist einfach ein Git-Repo mit `azure.yaml`, `infra/` und Ihrem Code.
+- Parametrieren Sie alles – Namen, Regionen und IDs – damit es überall läuft.
+- Markieren Sie Ressourcen immer mit `azd-env-name`, damit `azd down` funktioniert.
 - Testen Sie lokal mit `azd init --template <local-path>`, bevor Sie veröffentlichen.
-- Fügen Sie Metadaten und ein README hinzu, um sich bei Awesome AZD einzureichen.
+- Fügen Sie Metadaten und ein README hinzu, um bei Awesome AZD einzureichen.
 
 ---
 
 ## 🔗 Navigation
 
 | Richtung | Ressource |
-|-----------|----------|
+|----------|----------|
 | **Vorheriges** | [Bereitstellungsleitfaden](deployment-guide.md) |
 | **Kapitel-Startseite** | [Kapitel 4: Infrastruktur als Code](README.md) |
 | **Nächstes Kapitel** | [Kapitel 5: Multi-Agenten-Lösungen](../chapter-05-multi-agent/README.md) |
@@ -252,8 +252,8 @@ Reichen Sie einen Pull Request ein, der Ihre Vorlage zur Datendatei der Galerie 
 ## 📖 Verwandte Ressourcen
 
 - [Ressourcen bereitstellen](provisioning.md)
-- [Awesome AZD Gallery](https://azure.github.io/awesome-azd/)
-- [Offizielle azd-Template-Dokumentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
+- [Awesome AZD Galerie](https://azure.github.io/awesome-azd/)
+- [Offizielle azd-Vorlagendokumentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
 
 ---
 

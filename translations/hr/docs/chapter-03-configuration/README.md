@@ -1,4 +1,4 @@
-# Poglavlje 3: Konfiguracija i autentikacija
+# Poglavlje 3: Konfiguracija i autentifikacija
 
 **📚 Tečaj**: [AZD za početnike](../../README.md) | **⏱️ Trajanje**: 45-60 minuta | **⭐ Kompleksnost**: Srednja
 
@@ -6,16 +6,16 @@
 
 ## Pregled
 
-Ovo poglavlje pokriva konfiguraciju okruženja, obrasce autentikacije i najbolje prakse sigurnosti za Azure Developer CLI implementacije.
+Ovo poglavlje pokriva konfiguraciju okruženja, obrasce autentifikacije i najbolje sigurnosne prakse za Azure Developer CLI implementacije.
 
-> Provjereno s `azd 1.25.6` u lipnju 2026.
+> Provjereno na `azd 1.27.1` u srpnju 2026.
 
 ## Ciljevi učenja
 
-Nakon završetka ovog poglavlja, moći ćete:
+Završetkom ovog poglavlja ćete:
 - Ovladati hijerarhijom konfiguracije AZD-a
-- Upravljati više okruženja (dev, staging, prod)
-- Implementirati sigurnu autentikaciju s upravljanim identitetima
+- Upravljati višestrukim okruženjima (razvoj, testiranje, produkcija)
+- Implementirati sigurnu autentifikaciju s upravljanim identitetima
 - Konfigurirati postavke specifične za okruženje
 
 ---
@@ -23,28 +23,28 @@ Nakon završetka ovog poglavlja, moći ćete:
 ## 📚 Lekcije
 
 | # | Lekcija | Opis | Vrijeme |
-|---|---------|-------|---------|
+|---|--------|-------------|------|
 | 1 | [Vodič za konfiguraciju](configuration.md) | Postavljanje i upravljanje okruženjem | 30 min |
-| 2 | [Autentikacija i sigurnost](authsecurity.md) | Obrasci upravljanog identiteta i RBAC-a | 30 min |
+| 2 | [Autentifikacija i sigurnost](authsecurity.md) | Obrasci upravljanog identiteta i RBAC-a | 30 min |
 
 ---
 
 ## 🚀 Brzi početak
 
 ```bash
-# Izradi višestruka okruženja
+# Kreirajte više okruženja
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Prebaci okruženja
+# Prebacite okruženja
 azd env select prod
 
-# Postavi varijable okruženja
+# Postavite varijable okruženja
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Pregled konfiguracije
+# Pogledajte konfiguraciju
 azd env get-values
 ```
 
@@ -56,7 +56,7 @@ AZD primjenjuje postavke redoslijedom (kasnije nadjačava ranije):
 
 1. **Zadane vrijednosti** (ugrađene u predloške)
 2. **azure.yaml** (konfiguracija projekta)
-3. **Promjenjive okruženja** (`azd env set`)
+3. **Varijable okruženja** (`azd env set`)
 4. **Zastavice naredbenog retka** (`--location eastus`)
 
 ---
@@ -67,16 +67,16 @@ AZD primjenjuje postavke redoslijedom (kasnije nadjačava ranije):
 # Koristite upravljani identitet (preporučeno)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Provjerite status autentifikacije AZD-a
+# Provjerite status AZD autentifikacije
 azd auth status
 
 # Opcionalno: provjerite Azure CLI kontekst ako planirate pokretati az naredbe
 az account show
 
-# Ponovno se autentificirajte ako je potrebno
+# Ponovo se autentificirajte ako je potrebno
 azd auth login
 
-# Opcionalno: osvježite autentifikaciju Azure CLI-ja za az naredbe
+# Opcionalno: osvježite Azure CLI autentifikaciju za az naredbe
 az login
 ```
 
@@ -85,8 +85,8 @@ az login
 ## 🔗 Navigacija
 
 | Smjer | Poglavlje |
-|-------|-----------|
-| **Prethodno** | [Poglavlje 2: AI razvoj](../chapter-02-ai-development/README.md) |
+|-----------|---------|
+| **Prethodno** | [Poglavlje 2: Razvoj AI](../chapter-02-ai-development/README.md) |
 | **Sljedeće** | [Poglavlje 4: Infrastruktura](../chapter-04-infrastructure/README.md) |
 
 ---

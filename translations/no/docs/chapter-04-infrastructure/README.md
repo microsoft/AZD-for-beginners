@@ -1,32 +1,32 @@
-# Kapittel 4: Infrastruktur som kode og distribusjon
+# Kapittel 4: Infrastruktur som kode og utrulling
 
-**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Varighet**: 1-1,5 timer | **⭐ Vanskelighetsgrad**: Middels
+**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Varighet**: 1-1.5 timer | **⭐ Vanskelighetsgrad**: Middels
 
 ---
 
 ## Oversikt
 
-Dette kapitlet dekker Infrastructure as Code (IaC)-mønstre med Bicep-maler, ressursprovisjonering og distribusjonsstrategier ved bruk av Azure Developer CLI.
+Dette kapittelet dekker Infrastruktur som kode (IaC)-mønstre med Bicep-maler, ressursprovisjonering og utrullingsstrategier ved bruk av Azure Developer CLI.
 
-> Validert mot `azd 1.25.6` i juni 2026.
+> Validert mot `azd 1.27.1` i juli 2026.
 
 ## Læringsmål
 
-Ved å fullføre dette kapitlet vil du:
-- Forstå Bicep-malstruktur og syntaks
-- Provisionere Azure-ressurser med `azd provision`
-- Distribuere applikasjoner med `azd deploy`
-- Implementere blå-grønn og rullerende distribusjonsstrategier
+Ved å fullføre dette kapittelet vil du:
+- Forstå Bicep-malens struktur og syntaks
+- Provisjonere Azure-ressurser med `azd provision`
+- Rulle ut applikasjoner med `azd deploy`
+- Implementere blue-green og rullerende utrullingsstrategier
 
 ---
 
-## 📚 Lekser
+## 📚 Leksjoner
 
 | # | Leksjon | Beskrivelse | Tid |
-|---|---------|-------------|-----|
-| 1 | [Provisionering av ressurser](provisioning.md) | Azure ressursstyring med AZD | 45 min |
-| 2 | [Distribusjonsguide](deployment-guide.md) | Strategier for applikasjonsdistribusjon | 45 min |
-| 3 | [Skrive din egen mal](custom-templates.md) | Bygg og publiser gjenbrukbare azd-maler | 30 min |
+|---|--------|-------------|------|
+| 1 | [Provisioning Resources](provisioning.md) | Azure ressursstyring med AZD | 45 min |
+| 2 | [Deployment Guide](deployment-guide.md) | Applikasjonsutrullingsstrategier | 45 min |
+| 3 | [Authoring Your Own Template](custom-templates.md) | Bygg og publiser gjenbrukbare azd-maler | 30 min |
 
 ---
 
@@ -71,11 +71,11 @@ my-project/
 ## 🔧 Viktige kommandoer
 
 | Kommando | Beskrivelse |
-|----------|-------------|
+|---------|-------------|
 | `azd init` | Initialiser prosjekt |
 | `azd provision` | Opprett Azure-ressurser |
-| `azd deploy` | Distribuer applikasjonskode |
-| `azd up` | provision + deploy |
+| `azd deploy` | Rull ut applikasjonskode |
+| `azd up` | provisjoner + rull ut |
 | `azd down` | Slett alle ressurser |
 
 ---
@@ -83,9 +83,9 @@ my-project/
 ## 🔗 Navigasjon
 
 | Retning | Kapittel |
-|---------|----------|
+|-----------|---------|
 | **Forrige** | [Kapittel 3: Konfigurasjon](../chapter-03-configuration/README.md) |
-| **Neste** | [Kapittel 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md) |
+| **Neste** | [Kapittel 5: Multi-agent løsninger](../chapter-05-multi-agent/README.md) |
 
 ---
 

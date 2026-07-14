@@ -1,241 +1,240 @@
-# 2. Template ကို အတည်ပြုခြင်း
+# 2. တမ်းပလိတ်ကို စစ်ဆေးခြင်း  
 
-> 2026 ဇွန်လတွင် `azd 1.25.6` ဖြင့် စစ်ဆေးပြီးပါပြီ။
+> ဇူလိုင် 2026 တွင် `azd 1.27.1` နှင့် အတည်ပြုထားသည်။  
 
-  
-!!! tip "ဤမော်ဂျူးလ်၏ အဆုံးတွင် သင်၏အနေဖြင့် အောက်ပါအရာများကို ပြုလုပ်နိုင်မည်"
+!!! tip "ဤမော်ဂျူး၏ အဆုံးတွင် သင်လေ့လာနိုင်မည့်အရာများ"  
 
-    - [ ] AI ဖြေရှင်းချက် ဖွဲ့စည်းပုံကို ခွဲခြမ်းစိစစ်ရန်
-    - [ ] AZD ဖြန့်ချိမှု အလုပ်စဉ်ကို နားလည်ရန်
-    - [ ] AZD အသုံးပြုနည်းအတွက် GitHub Copilot ကို ကူညီမှုအဖြစ် အသုံးပြုနိုင်ရန်
-    - [ ] **Lab 2:** AI Agents template ကို ဖြန့်ချိ၍ အတည်ပြုခြင်း
+    - [ ] AI ဖြေရှင်းချက် သေချာစွာ ခွဲခြမ်းစိတ်ဖြာနိုင်ခြင်း  
+    - [ ] AZD စနစ် စနစ်တကျ ဖော်ဆောင်မှု လျှောက်လွှာကို နားလည်နိုင်ခြင်း  
+    - [ ] AZD အသုံးပြုရန် GitHub Copilot မှ အကူအညီ ရယူနိုင်ခြင်း  
+    - [ ] **Lab 2:** AI Agent templates ကို တပ်ဆင်ပြီး စစ်ဆေးခြင်း  
 
----
+---  
 
 
-## 1. မိတ်ဆက်
+## 1. မိတ်ဆက်  
 
-[Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) သို့မဟုတ် `azd` သည် Azure ပေါ်တွင် အပ်ပလီကေးရှင်းများကို တည်ဆောက်ပြီး ဖြန့်ချိရာ၌ developer workflow ကို လက်လှမ်းမီအောင် လွယ်ကူစေသည့် ဖွင့်ထားသော source command-line ကိရိယာတစ်ခုဖြစ်သည်။ 
+[Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) သို့မဟုတ် `azd` သည် Azure တွင် အပလီကေးရှင်းများကို တည်ဆောက်ခြင်းနှင့် တပ်ဆင်ခြင်းလုပ်ငန်းစဉ်ကို လျှော့ချပေးသည့် open-source ကမန်းလိုင်းကိရိယာတစ်ခု ဖြစ်သည်။  
 
-[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) များမှာ နမူနာ application ကုဒ်များ၊ _infrastructure-as-code_ အဆောက်အအုံများနှင့် `azd` ဖိုင်များကို ထည့်သွင်းထားသော စံပြ repository များဖြစ်ပြီး တစ်စုတည်းသော ဖြေရှင်းချက် ဖွဲ့စည်းပုံကို ပံ့ပိုးပေးသည်။ အထောက်အပံ့အဆောက်အအုံကို provision ပြုလုပ်ရန် သာမန်အားဖြင့် `azd provision` command လေးတစ်ခုဖြင့် ပြီးမြောက်နိုင်ပြီး၊ `azd up` ကို သုံးကာ အသုံးပြုလျှင် အဆောက်အအုံကို provision ဖို့လည်း ရှိကာ application ကို တစ်ပြိုင်နက်ထဲမှာ ပြန်လည်deploy လုပ်နိုင်သည်။
+[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) သည် စံနမူနာ အပလီကေးရှင်းကုဒ်များ၊ _infrastructure-as-code_ ဆော့ဖ်ဝဲများနှင့် `azd` ဖိုင်များကို တစ်ရပ်တည်း စုစည်းထားသည့် စံပြ သိုလှောင်ရုံတစ်ခု ဖြစ်သည်။ အဆောက်အအုံ စက်ရုံတည်ဆောက်ခြင်းကို `azd provision` command တစ်ခု ဖြင့် လွယ်ကူစွာ ပြုလုပ်နိုင်ပြီး `azd up` ကို အသုံးပြု၍ အဆောက်အအုံနှင့် အပလီကေးရှင်းတပ်ဆင်ခြင်းကို တစ်ခါတည်း ပြုလုပ်နိုင်ပါသည်။  
 
-အကြောင်းကြောင့် သင့် application ဖွံ့ဖြိုးရေး လုပ်ငန်းစဉ်ကို စတင်ရန်အတွက် သင့် application နှင့် အဆောက်အအုံ လိုအပ်ချက်များနှင့် အနီးဆုံးကိုက်ညီသော _AZD Starter template_ ကို ရှာဖွေပြီး repository ကို သင့်အခြေအနေအတွက် အပြင်ဆင်သုံးနိုင်သည်။
+ထို့ကြောင့် သင့်အတွက် သင့် လိုအပ်ချက်နှင့်ကိုက်ညီသော _AZD Starter template_ ကို ရှာဖွေပြီး ကိုယ်ပိုင်လိုအပ်ချက်များအရ သိုလှောင်ရုံကို မိတ်ဆက်ထားသော နည်းလမ်းဖြင့် စတင်လုပ်ကိုင်နိုင်ပါသည်။  
 
-စတင်ရန်မပြုခင် Azure Developer CLI ကို 설치ထားသည်ကို အရင်စစ်ဆေးပါ။
+စတင်မတိုင်မီ Azure Developer CLI သင်ထည့်သွင်းထားကြောင်း သေချာစေကြပါစို့။  
 
-1. VS Code terminal ကိုဖွင့်ပြီး ဒီ command ကို ရိုက်ထည့်ပါ။
+1. VS Code terminal ကို ဖွင့်ပြီး ဤ command ကို ရိုက်ထည့်ပါ။  
 
       ```bash title="" linenums="0"
       azd version
       ```
-
-1. အဖြစ်ဒီလို တူညီသော output ကို တွေ့ရပါမည်။
+  
+1. အောက်ပါအတိုင်း ပြသပါမည်။  
 
       ```bash title="" linenums="0"
-      azd version 1.25.6 (commit <current-build>)
+      azd version 1.27.1 (commit <current-build>)
       ```
+  
+**azd ဖြင့် template ရွေးချယ်ပြီး တပ်ဆင်ရန် ပြင်ဆင်ပြီးဖြစ်ပါပြီ**  
 
-**ယခု သင်သည် azd ဖြင့် template ကို ရွေးချယ်၍ ဖြန့်ချိရန် အသင့်ဖြစ်ပါပြီ**
+---  
 
----
+## 2. Template ရွေးချယ်ခြင်း  
 
-## 2. Template ရွေးချယ်မှု
+Microsoft Foundry ပလက်ဖောင်းတွင် ကျော်ကြားသော ဖြေရှင်းချက်အခြေအနေများအတွက် [_multi-agent workflow automation_ နှင့် _multi-modal content processing_] နည်းပညာတို့ကဲ့သို့သော အထောက်အပံ့ပေးမှုများ ပါဝင်သော [AZD templates အစုတစ်ခု](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) ပါရှိသည်။ ဤ templates များကို Microsoft Foundry portal မှလည်း ရှာဖွေနိုင်ပါသည်။  
 
-Microsoft Foundry ပလက်ဖောင်းတွင် [_set of recommended AZD templates_](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) များပါရှိပြီး မျိုးစုံသော ဖြေရှင်းချက် စင်ဂျာရီများကို ကာကွယ်ပေးပါသည်၊ ဥပမာ _multi-agent workflow automation_ နှင့် _multi-modal content processing_ စသည့် ခေတ်ပြိုင် စိစစ်မှုများအတွက်။ ထို့အပြင် Microsoft Foundry portal မှလည်း ဤ template များကို ရှာဖွေနိုင်သည်။
+1. [https://ai.azure.com/templates](https://ai.azure.com/templates) သို့ ဝင်ရောက်ကြည့်ရှုပါ  
+1. Microsoft Foundry portal တွင် ဝင်ရောက်ခြင်း (login) ပြုလုပ်ပါ - အောက်ပါပုံစံနှင့် တူညီသည်ကို တွေ့မြင်မည်။  
 
-1. Visit [https://ai.azure.com/templates](https://ai.azure.com/templates)
-1. Prompt တက်လာသောအခါ Microsoft Foundry portal တွင် log in ဝင်ပါ - သင်အောက်ပါအတိုင်း ကြောင်းတွေ့ပါလိမ့်မည်။
-
-![ရွေးချယ်ရန်](../../../../../translated_images/my/01-pick-template.60d2d5fff5ebc374.webp)
+![Pick](../../../../../translated_images/my/01-pick-template.60d2d5fff5ebc374.webp)  
 
 
-**Basic** ရွေးချယ်စရာများသည် စတาร์တာ template များဖြစ်သည်။
+**Basic** ရွေးချယ်စရာတွေဟာ သင့်စတင်အသုံးပြုနိုင်သော template များဖြစ်သည်။  
 
-1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) — အခြေခံ chat application တစ်ခုကို _with your data_ ဖြင့် Azure Container Apps သို့ ဖြန့်ချိပေးသည်။ အခြေခံ AI chatbot အခြေအနေပေါ်ကို စူးစမ်းရန် အတွက် အသုံးပြုပါ။
-1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) — Foundry Agents ပါဝင်သည့် စံပလက်အေဂျင့်ကိုလည်း ဖြန့်ချိပေးသည်။ tools နှင့် models ပါဝင်သည့် agentic AI ဖြေရှင်းချက်များနှင့် ရင်းနှီးစေသည်။
+1. [ ] [AI Chat အတွက် စတင်ပါ](https://github.com/Azure-Samples/get-started-with-ai-chat) - ဒေတာပါရှိပြီး Azure Container Apps သို့ မူလ chatbot အပလီကေးရှင်းကိုတပ်ဆင်သည်။ အခြေခံ AI chatbot အခြေအနေကို လေ့လာရန် အသုံးပြုပါ။  
+1. [X] [AI Agents အတွက် စတင်ပါ](https://github.com/Azure-Samples/get-started-with-ai-agents) - Foundry Agents သုံးပြီး စံပြ AI Agent ကိုတပ်ဆင်သည်။ စက်မှု AI ဖြေရှင်းချက်နဲ့ အထောက်အပံ့ပေးမှုများအား သေချာစွာ လေ့လာရန် အသုံးပြုပါ။  
 
-ဒုတိယ link ကို browser tab အသစ်တွင် ဖွင့်ကြည့်ပါ (သို့မဟုတ် card တွင် `Open in GitHub` ကို နှိပ်ပါ)။ သင်ဤ AZD Template အတွက် repository ကို တွေ့ရမည်ဖြစ်ပြီး README ကို တစ်မိနစ်ခန့် ကြည့်ရှုပါ။ application architecture သည် အောက်ပါအတိုင်း ဖြစ်ပါသည်။
+ဒုတိယလင့်ခ်ကို ဘရောက်ဇာ tab အသစ်တွင် ဖွင့်ပါ (သို့) ဆက်စပ်ကဒ်တွင် `Open in GitHub` ကိုနှိပ်ပါ။ ဤ AZD Template ရဲ့ သိုလှောင်ရုံ ကို ကြည့်ရှုနိုင်မည်ဖြစ်၍ README ကို စောင့်ကြည့်ပါ။ အပလီကေးရှင်းအစိတ်အပိုင်းရေးဆွဲထားသည့် ပုံရိပ်သည် အောက်ပါအတိုင်းဖြစ်သည်။  
 
-![ဖွဲ့စည်းပုံ](../../../../../translated_images/my/architecture.8cec470ec15c65c7.webp)
+![Arch](../../../../../translated_images/my/architecture.8cec470ec15c65c7.webp)  
 
----
+---  
 
-## 3. Template အစပြုခြင်း
+## 3. Template လုပ်ဆောင်ခြင်း  
 
-ဒီ template ကို ဖြန့်ချိ၍ တရားဝင် အသက်သေခံ ထားနိုင်ကြောင်း စစ်ဆေးကြည့်ပါမည်။ [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) အပိုင်းရှိ လမ်းညွှန်ချက်များအတိုင်း လုပ်ဆောင်ပါမည်။
+ဤ template ကို တပ်ဆင်ပြီး မှန်ကန်မှုကို စစ်ဆေးကြပါစို့။ [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) အပိုင်းအတိုင်း လုပ်ဆောင်မည်။  
 
-1. Template repository အတွက် အလုပ်လုပ်ရန် ပတ်ဝန်းကျင် တစ်ခုကို ရွေးချယ်ပါ။
+1. Template သိုလှောင်ရုံအတွက် အလုပ်လုပ်ရန် ပတ်ဝန်းကျင် ရွေးချယ်ပါ -  
 
-      - **GitHub Codespaces**: ဤလင့်ခ်ကိုနှိပ်ပြီး [this link](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) နှင့် `Create codespace` ကို အတည်ပြုပါ
-      - **Local clone or dev container**: Clone `Azure-Samples/get-started-with-ai-agents` ထားပြီး VS Code တွင် ဖွင့်ပါ
+      - **GitHub Codespaces**: [ဤလင့်ခ်](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) ကိုနှိပ်ပြီး `Create codespace` ကို အတည်ပြုပါ  
+      - **Local clone သို့မဟုတ် dev container**: `Azure-Samples/get-started-with-ai-agents` ကို clone လုပ်ပြီး VS Code တွင်ဖွင့်ပါ  
 
-1. VS Code terminal ပြင်ဆင်ပြီး အသင့်ဖြစ်သည့်အခါ အောက်ပါ command ကို ရိုက်ထည့်ပါ။
+1. VS Code terminal ပြင်ဆင်ပြီးနောက် အောက်ပါ command ကို ရိုက်ထည့်ပါ။  
 
    ```bash title="" linenums="0"
    azd up
    ```
+  
+ဖော်ပြမည့် workflow အဆင့်များကို ပြီးမြောက်အောင်လုပ်ပါ -  
 
-ဒီအတိုင်း ဖောက်ပြန်မည့် workflow အဆင့်များကို ပြီးမြောက်ပါစေ။
+1. Azure ကို login ပြုလုပ်ရန် ဖိတ်ခေါ်မည် - ညွှန်ကြားချက်များကို လိုက်နာ၍ အတည်ပြုပါ  
+1. သင်နှင့် သက်ဆိုင်သော unique ပတ်ဝန်းကျင်အမည် တစ်ခု ထည့်ပါ - ဥပမာ- `nitya-mshack-azd`  
+1. `.azure/` ဖိုလ်ဒါ တစ်ခုကို ဖန်တီးမည် - ပတ်ဝန်းကျင်အမည်ပါသော subfolder တစ်ခု ရရှိမည်။  
+1. subscription အမည် ရွေးချယ်ရန် ဖိတ်ခေါ်မည် - default ကို ရွေးပါ  
+1. location ရွေးချယ်ရန် ဖိတ်ခေါ်မည် - `East US 2` ကို အသုံးပြုပါ  
 
-1. Azure တွင် log in ဝင်ရန် prompt တက်လာပါလိမ့်မည် - authentication နှင့်ပတ်သက်သော ညွှန်ကြားချက်များကို လိုက်နာပါ
-1. သင့်အတွက် unique ဖြစ်သော environment name ကို ထည့်သွင်းပါ - ဥပမာ၊ 我は `nitya-mshack-azd` ကို အသုံးပြုခဲ့ပါသည်
-1. ၎င်းသည် `.azure/` ဖိုမတ်ကို ဖန်တီးမည် - သင် env နာမည်ပါ subfolder တစ်ခုကို တွေ့ရမည်
-1. Subscription name ရွေးရန် prompt တက်လာပါလိမ့်မည် - default ကို စိတ်ကြိုက် ရွေးပါ
-1. တည်နေရာ (location) မေးလိမ့်မည် - `East US 2` ကို အသုံးပြုပါ
+ယခု provisioning ပြီးဆုံးရန် ခေတ္တ စောင့်ဆိုင်းပါ။ **ဤကိစ္စသည် ၁၀ မှ ၁၅ မိနစ် ကြာမြင့်သည်**  
 
-အခု, provisioning ပြီးမြောက်ရန် စောင့်ဆိုင်းရပါမည်။ **ဤအရာသည် 10-15 မိနစ် ကြာနိုင်သည်**
-
-1. ပြီးပြီဆို console တွင် SUCCESS စာသားကို အောက်ပါကဲ့သို့ မြင်ရမည်။
+1. ပြီးဆုံးပါက console တွင် SUCCESS သတင်းစကား ပြသမည်။ ဥပမာအောက်ပါအတိုင်းဖြစ်သည်။  
       ```bash title="" linenums="0"
       SUCCESS: Your up workflow to provision and deploy to Azure completed in 10 minutes 17 seconds.
       ```
-1. သင်၏ Azure Portal တွင် အဆိုပါ env နာမည်ဖြင့် provision ပြုလုပ်ထားသော resource group တစ်ခုပေါ်လာမည်။
+1. Azure Portal တွင် ပတ်ဝန်းကျင်အမည်ဖြင့် resource group တစ်ခု provisioning ပြီးစီးပါပြီ။  
 
-      ![Provision လုပ်ထားသော အင်ဖရာ](../../../../../translated_images/my/02-provisioned-infra.46c706b14f56e0bf.webp)
+      ![Infra](../../../../../translated_images/my/02-provisioned-infra.46c706b14f56e0bf.webp)  
 
-1. **ယခု သင်သည် ဖြန့်ချိထားသော အဆောက်အအုံနှင့် application ကို အတည်ပြုရန် အသင့်ဖြစ်ပါပြီ**။
+1. **တပ်ဆင်ပြီးသော အဆောက်အအုံနှင့် အပလီကေးရှင်းကို ယခု စစ်ဆေးနိုင်ပါပြီ**။  
 
----
+---  
 
-## 4. Template အတည်ပြုမှု
+## 4. Template စစ်ဆေးခြင်း  
 
-1. Azure Portal ၏ [Resource Groups](https://portal.azure.com/#browse/resourcegroups) စာမျက်နှာသို့ သွားပါ - prompt တက်လာပါက log in ဝင်ပါ
-1. သင့် environment နာမည်ပါ RG ကို နှိပ်ပါ - အထက်ပါ စာမျက်နှာကို မြင်ရမည်
+1. Azure Portal [Resource Groups](https://portal.azure.com/#browse/resourcegroups) စာမျက်နှာသို့ ဝင်ပါ - login ပြုလုပ်ပါ  
+1. သင့် ပတ်ဝန်းကျင် အမည်ရှိ RG တွင် ခြွင့်သွားပါ - အပေါ်ပုံအတိုင်းမျက်နှာပြင် တွေ့ရမည်  
 
-      - Azure Container Apps resource ကို နှိပ်ပါ
-      - _Essentials_ အပိုင်း (အထက်ညာ) မှ Application Url ကို နှိပ်ပါ
+      - Azure Container Apps resource ကို နှိပ်ပါ  
+      - _Essentials_ အပိုင်း (အပေါ်လှည့်ညာ) တွင် Application Url ကို နှိပ်ပါ  
 
-1. အောက်ပါကဲ့သို့ ဟော့စ်တက်ထားသော application front-end UI ကို မြင်ရမည်။
+1. အောက်ပါကဲ့သို့သော hosted application ရဲ့ frontend UI ကို တွေ့မြင်ရမည်။  
 
-   ![အက်ပ်](../../../../../translated_images/my/03-test-application.471910da12c3038e.webp)
+   ![App](../../../../../translated_images/my/03-test-application.471910da12c3038e.webp)  
 
-1. [sample questions](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md) အချို့ကို မေးကြည့်ပါ။
+1. [sample questions](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md) အနည်းငယ် မေးကြည့်ပါ  
 
-      1. မေးပါ: ```What is the capital of France?``` 
-      1. မေးပါ: ```What's the best tent under $200 for two people, and what features does it include?```
+      1. မေးပါ: ```What is the capital of France?```  
+      1. မေးပါ: ```What's the best tent under $200 for two people, and what features does it include?```  
 
-1. အောက်ပါကဲ့သို့ ဖြေကြားချက်များကို ရရှိမည်။ _ဒါပေမယ့် ယင်းသည် မည်သို့ အလုပ်လုပ်သနည်း?_ 
+1. အောက်ပါအတိုင်း အဖြေများ ရရှိမည်။ _ဒါဘယ်လို အလုပ်လုပ်တာလဲ?_  
 
-      ![အက်ပ် မေးခွန်း ဖြေကြားချက်](../../../../../translated_images/my/03-test-question.521c1e863cbaddb6.webp)
+      ![App](../../../../../translated_images/my/03-test-question.521c1e863cbaddb6.webp)  
 
----
+---  
 
-## 5. Agent အတည်ပြုမှု
+## 5. Agent စစ်ဆေးခြင်း  
 
-Azure Container App သည် ဒီ template အတွက် Microsoft Foundry project တွင် provision လုပ်ထားသော AI Agent ထံ ချိတ်ဆက်ထားသည့် endpoint တစ်ခုကို deploy လုပ်ပေးထားသည်။ ၎င်းအရာသည် ဘာကို ဆိုလိုသနည်းဆိုတာ ကြည့်ကြပါစို့။
+Azure Container App သည် Microsoft Foundry project တွင် provision ပြုလုပ်ထားသော AI Agent သို့ ဆက်သွယ်မှု endpoint တစ်ခု တပ်ဆင်ပေးသည်။ ၎င်းသည် ဘာကို ဆိုလိုသနည်းကို ကြည့်ကြပါစို့။  
 
-1. Azure Portal တွင် သင့် resource group ၏ _Overview_ စာမျက်နှာသို့ ပြန်သွားပါ
+1. သင့် resource group အတွက် Azure Portal _Overview_ စာမျက်နှာသို့ ပြန်သွားပါ  
 
-1. ထိုစာရင်းထဲမှ `Microsoft Foundry` resource ကို နှိပ်ပါ
+1. စာရင်းအတွင်းရှိ `Microsoft Foundry` resource ကို နှိပ်ပါ  
 
-1. အောက်ပါအတိုင်း မြင်ရမည်။ `Go to Microsoft Foundry Portal` ခလုတ်ကို နှိပ်ပါ။ 
-   ![Foundry ကြည့်ရှုရန်](../../../../../translated_images/my/04-view-foundry-project.fb94ca41803f28f3.webp)
+1. အောက်ပါအတိုင်း တွေ့မြင်ရမည်။ `Go to Microsoft Foundry Portal` ခလုတ်ကို နှိပ်ပါ။  
+   ![Foundry](../../../../../translated_images/my/04-view-foundry-project.fb94ca41803f28f3.webp)  
 
-1. သင့် AI application အတွက် Foundry Project စာမျက်နှာကို မြင်ရမည်
-   ![ပရောဂျက်](../../../../../translated_images/my/05-visit-foundry-portal.d734e98135892d7e.webp)
+1. သင့် AI application အတွက် Foundry Project စာမျက်နှာကို တွေ့မြင်ရမည်  
+   ![Project](../../../../../translated_images/my/05-visit-foundry-portal.d734e98135892d7e.webp)  
 
-1. `Agents` ကို နှိပ်ပါ - သင့် project တွင် default Agent တစ်ယောက် provision လုပ်ထားသော 것을 မြင်ရမည်
-   ![အေးဂျင့်များ](../../../../../translated_images/my/06-visit-agents.bccb263f77b00a09.webp)
+1. `Agents` ကို နှိပ်ပါ - ပရောဂျက်တွင် သတ်မှတ်ထားသော Agent ကို တွေ့မြင်ပါမည်  
+   ![Agents](../../../../../translated_images/my/06-visit-agents.bccb263f77b00a09.webp)  
 
-1. ယင်းအား ရွေးချယ်ပါ - Agent အသေးစိတ်ကို မြင်ရလိမ့်မည်။ အောက်ပါအချက်များကို မှတ်သားပါ။
+1. ရွေးချယ်ပြီး Agent အသေးစိတ်ကို ကြည့်ရှုပါ။ အောက်ပါအချက်များကို သတိပြုပါ -  
 
-      - Agent သည် default အနေဖြင့် File Search ကို အသုံးပြုထားသည် (အမြဲ)
-      - Agent ၏ `Knowledge` သည် 32 ဖိုင် upload ထားသည်ဟု ပြသသည် (file search အတွက်)
-      ![အေးဂျင့် အသေးစိတ်](../../../../../translated_images/my/07-view-agent-details.0e049f37f61eae62.webp)
+      - အမြဲတမ်း File Search ကို အသုံးပြုသည်  
+      - agent `Knowledge` တွင် ဖိုင် ၃၂ ဖိုင် တင်ထားပြီး (file search အတွက်)  
+      ![Agents](../../../../../translated_images/my/07-view-agent-details.0e049f37f61eae62.webp)  
 
-1. ဘယ်ဘက် မီနူးတွင် `Data+indexes` ရွေးချယ်စရာကို ရှာ၍ အသေးစိတ်ကြည့်ပါ။
+1. ဘယ်ဘက် မီယူတွင်ရှိသည့် `Data+indexes` ရွေးချယ်ပြီး အသေးစိတ်ကြည့်ပါ။  
 
-      - Knowledge အတွက် upload လုပ်ထားသော 32 ဖိုင်များကို မြင်ရမည်။
-      - ၎င်းတို့သည် `src/files` အောက်ရှိ 12 customer ဖိုင်များနှင့် 20 product ဖိုင်များနှင့် ကိုက်ညီပါလိမ့်မည်။
-      ![ဒေတာ](../../../../../translated_images/my/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
+      - နားလည်မှုအတွက် ဖိုင် ၃၂ ဖိုင် တင်ထားသည်ကို တွေ့ရှိမည်။  
+      - ၎င်းတို့သည် `src/files` အောက်ရှိ customer ဖိုင် ၁၂ ဖိုင်နှင့် product ဖိုင် ၂၀ ဖိုင်နှင့် ကိုက်ညီသည်။  
+      ![Data](../../../../../translated_images/my/08-visit-data-indexes.5a4cc1686fa0d19a.webp)  
 
-**သင်သည် Agent အလုပ်လုပ်မှုကို အတည်ပြုလိုက်ပါပြီ!**
+**Agent လည်ပတ်မှုကို သင် စစ်ဆေးပြီးဖြစ်သည်!**  
 
-1. Agent ၏ ဖြေကြားချက်များသည် အဆိုပါဖိုင်များထဲရှိ ဗဟုသုတပေါ် အခြေခံထားပြီး ဖြစ်သည်။
-1. ယခု သင်သည် ဤ ဒေတာနှင့်ဆိုင်သော မေးခွန်းများ မေးနိုင်ပြီး, ချမ်းသာသော အဖြေများ ရရှိနိုင်သည်။
-1. ဥပမာ: `customer_info_10.json` သည် "Amanda Perez" မှ ဖျော်ဖြေခဲ့သော 3 ငွေပေးချေမှုများကို ဖော်ပြသည်။
+1. Agent ၏ အဖြေများသည် ၎င်း ဖိုင်များအတွင်းရှိ နားလည်မှုအပေါ် အခြေခံသည်။  
+1. သင်အဆိုပါ ဒေတာနှင့် ဆက်စပ်သော မေးခွန်းများ မေးလို့ရပြီး အားလုံး အခြေခံထားသော အဖြေများ ရရှိမည်။  
+1. ဥပမာ - `customer_info_10.json` သည် "Amanda Perez" မှ ဝယ်ယူမှု သုံးခုကို ဖော်ပြထားသည်။  
 
-Browser tab အား ပြန်လည်ဖွင့်ပြီး Container App endpoint တွင် `What products does Amanda Perez own?` ဟု မေးပါ။ အောက်ပါကဲ့သို့ ပြသနိုင်ပါသည်။
+Container App endpoint ပါသော browser tab ပြန် ရှာပြီး `Amanda Perez ပိုင်ဆိုင်ထားသော မည်သည့် ထုတ်ကုန်များ ရှိပါသလဲ?` ဟု မေးပါ။ အောက်ပါအတိုင်း တွေ့ရမည်။  
 
-![ဒေတာအခြေခံ ဖြေကြားချက်](../../../../../translated_images/my/09-ask-in-aca.4102297fc465a4d5.webp)
+![Data](../../../../../translated_images/my/09-ask-in-aca.4102297fc465a4d5.webp)  
 
----
+---  
 
-## 6. Agent Playground
+## 6. Agent Playground  
 
-Microsoft Foundry ၏ အင်အားများကို နားလည်မှုပို ရရှိစေရန် Agent ကို Agents Playground တွင် စမ်းသပ်ကြည့်ပါ။
+Microsoft Foundry ၏ လုပ်ဆောင်ချက်များကို ပိုမို နားလည်စေရန် Agent ကို Agents Playground တွင် စမ်းသပ်ကြည့်ကြပါစို့။  
 
-1. Microsoft Foundry ၏ `Agents` စာမျက်နှာသို့ ပြန်သွားပြီး default agent ကို ရွေးချယ်ပါ
-1. `Try in Playground` ရွေးချယ်စရာကို နှိပ်ပါ - Playground UI အမျိုးအစားတစ်ခုကို ကြည့်ရမည်
-1. အတူတူမေးခွန်းကို မေးပါ: `What products does Amanda Perez own?`
+1. Microsoft Foundry တွင် `Agents` စာမျက်နှာသို့ ပြန်သွားပြီး default agent ကို ရွေးချယ်ပါ  
+1. `Try in Playground` ကို နှိပ်ပါ - ဤအတိုင်း Playground UI ကို ရရှိမည်။  
+1. မေးခွန်း တူညီသော `Amanda Perez ပိုင်ဆိုင်ထားသော ထုတ်ကုန်များ မည်သို့ ရှိပါသလဲ?` ကို မေးပါ။  
 
-    ![ဒေတာ Playgound တွင် မေးမြန်းခြင်း](../../../../../translated_images/my/09-ask-in-playground.a1b93794f78fa676.webp)
+    ![Data](../../../../../translated_images/my/09-ask-in-playground.a1b93794f78fa676.webp)  
 
-တူညီ (သို့မဟုတ် ဆန့်ကျင်) ဖြေကြားချက်ကို ရရှိပါလိမ့်မည် - သို့သော် သင်၏ agentic app ၏ အရည်အသွေး၊ ကုန်ကျစရိတ်နှင့် လုပ်ဆောင်နိုင်မှုကို နားလည်ရန် အသုံးချနိုင်သော အပိုဆောင်းအချက်များလည်း ရရှိမည်။ ဥပမာ -
+တူညီ (သို့) အနီးကပ် အဖြေ လည်းရမည် - ထို့အပြင် သင်၏ agentic app ၏ အရည်အသွေး၊ ကုန်ကျစရိတ်နှင့် စွမ်းဆောင်ရည်တို့အား နားလည်ရန် အကူအညီပေးသည့် သတင်းအချက်အလက်များကိုလည်း ရရှိမည်။ ဥပမာ -  
 
-1. ဖြေကြားချက်သည် ဖြေချင်းကို "ground" ပြုရန် အသုံးပြုသော data ဖိုင်များကို ရှာဖွေဖော်ပြထားသည်ကို သတိပြုပါ
-1. ဖိုင် label များတွင် မာ့နှိပ်ပါ - သင်၏ မေးခွန်းနှင့် ပြသထားသော ဖြေဆိုချက်တို့ သဘောတူပါသလား?
+1. အဖြေသည် အခြေခံထားသည့် data files များကို ကိုးကားသည်။  
+1. ဖိုင်များ၏ label များပေါ်တွင် မှုတ်လေ့လာပါ - ဒေတာသည် မေးခွန်းနှင့် ပြသထားသော အဖြေကို ကိုက်ညီသည်လား?  
 
-သင်သည် ဖြေကြားချက်အောက်တွင် _stats_ တန်းတစ်ခုကိုလည်း မြင်ရမည်။
+အဖြေ၏ အောက်မှာ _stats_ စာကြောင်းတစ်ခုကိုလည်း တွေ့ရမည်။  
 
-1. မည်သည့် မက်ထရစ်ကိုမဆို မတ်ထား၍ ကြည့်ပါ - ဥပမာ၊ Safety ကို မြင်ပါ။ ဤကဲ့သို့ ပြသပါမည်
-1. သတ်မှတ်ထားသော အကဲဖြတ်ချက်သည် သင့်စိတ်ထင်မှတ်ချက်နှင့် ကိုက်ညီပါသလား?
+1. အချက်အလက်တစ်ခုစီ၌ မှုတ်လေ့လာပါ - ဥပမာ Safety metric ကို - အောက်ပါအတိုင်း မြင်ရမည်။  
+1. သင့် စိတ်ခံစားချက်ဖြင့် အဖြေ၏ လုံခြုံမှု အဆင့် အလားအလာနှင့် ကိုက်ညီပါသလား?  
 
-      ![Run info meter ကို ကြည့်ရှုခြင်း](../../../../../translated_images/my/10-view-run-info-meter.6cdb89a0eea5531f.webp)
+      ![Data](../../../../../translated_images/my/10-view-run-info-meter.6cdb89a0eea5531f.webp)  
 
----
+---  
 
-## 7. Built-in Observability
+## 7. ဆောက်လုပ်ပြီး Observability  
 
-Observability ဆိုသည်မှာ သင့် application ကို အချက်အလက်ထုတ်လုပ်ရန် ဆောက်လုပ်ပေးခြင်းဖြစ်ပြီး ၎င်းအချက်အလက်များအား အသုံးပြုကာ လုပ်ဆောင်ချက်များကို နားလည်၊ ပြဿနာရှာဖွေ၊ တိုးတက်ကောင်းမွန်အောင် ပြုလုပ်နိုင်သည်။ ၎င်းကို ခံစားရန် -
+Observability သည် သင့်အပလီကေးရှင်း၌ သတင်းအချက်အလက် များကို ထုတ်လုပ်ရန် ကိရိယာများ ထည့်သွင်းခြင်းဖြစ်သည် - ၎င်းကို နားလည်ရန်၊ ပြဿနာရှာဖွေရန် နှင့် တိုးတက်စေရန် အသုံးပြုသည်။ ဤကို နားလည်ရန် -  
 
-1. `View Run Info` ခလုတ်ကို နှိပ်ပါ - ဤမြင်ကွင်းကို မြင်ရမည်။ ၎င်းသည် [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) ၏ တစ်ဦးဦး ပုံရိပ်ဖြစ်သည်။ _Thread Logs ကို top-level menu မှလည်း နှိပ်၍ ဤမြင်ကွင်းကို ရယူနိုင်သည်_။
+1. `View Run Info` ခလုတ်ကို နှိပ်ပါ - ဤအမြင်ကို တွေ့မြင်ရမည်။ ၎င်းသည် [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) ၏ လုပ်ဆောင်မှု ဥပမာဖြစ်သည်။ _ဤအမြင်ကို Thread Logs အထက်ဆုံး menu လုပ်ဆောင်ချက်မှလည်းရရှိနိုင်သည်_။  
 
-   - run အဆင့်များနှင့် agent က tools များကို အသုံးပြုပြီး လုပ်ဆောင်ထားသော အရာများကို သဘောပေါက်စေပါ
-   - ဖြေကြားချက်အတွက် အသုံးပြုသည့် Token အရေအတွက်ကို (ထွက်ရ။
-) နားလည်ပါ
-   - latency နှင့် အချိန်သည် အားလုံးကို ဆိုင်းပင် မည်မျှ စုစည်းနေသည်ကို နားလည်ပါ
+   - Agent က အလုပ်လုပ်သည့် အဆင့်များနှင့် အသုံးပြုသော ကိရိယာများကို နားလည်နိုင်သည်။  
+   - အဖြေတွင် အသုံးပြုသော Token အရေအတွက် (မူလ Token အရေအတွက်နှင့် နှိုင်းယှဉ်၍) ကို နားလည်နိုင်သည်။  
+   - အချိန်ယူမှုနှင့် လုပ်ဆောင်ချက်ကြောင့် သုညတည်ရာကို နားလည်နိုင်သည်။  
 
-      ![Run Info မှာ ပြသထားသော Agent trace](../../../../../translated_images/my/10-view-run-info.b20ebd75fef6a1cc.webp)
+      ![Agent](../../../../../translated_images/my/10-view-run-info.b20ebd75fef6a1cc.webp)  
 
-1. `Metadata` တက်ကို နှိပ်၍ run အတွက် ပိုမိုအသုံးဝင်နိုင်သော attribute များကို ကြည့်ရှုပါ။  
+1. `Metadata` တပ်ကို နှိပ်၍ အလုပ်လုပ်မှုအတွက် ထပ်ဆောင်း attribute များကို ကြည့်ရှုရန် - ပြဿနာရှာဖွေရန်အသုံးဝင်နိုင်သည်။  
 
-      ![Agent မီတာဒေတာကြည့်ရှုမှု](../../../../../translated_images/my/11-view-run-info-metadata.7966986122c7c2df.webp)
+      ![Agent](../../../../../translated_images/my/11-view-run-info-metadata.7966986122c7c2df.webp)  
 
 
-1. `Evaluations` တက်ကို နှိပ်၍ agent ၏ ဖြေကြားချက်ပေါ် မူတည်၍ အလိုအလျောက် ပြုလုပ်ထားသော အကဲဖြတ်ချက်များကို ကြည့်ပါ။ ၎င်းများတွင် safety အကဲဖြတ်ချက်များ (ဥပမာ၊ Self-harm) နှင့် agent အထူးသတ်မှတ် အကဲဖြတ်ချက်များ (ဥပမာ၊ ရည်ရွယ်ချက် ဖြေရှင်းမှု၊ Task ကန့်သတ်မှုလိုက်နာမှု) ပါဝင်သည်။
+1. `Evaluations` တပ်ကို နှိပ်၍ Agent ၏ အဖြေauto-assessment များကို ကြည့်ရှုနိုင်သည်။ ၎င်းတွင် လုံခြုံမှုသုံးသပ်ချက်များ (ဥပမာ- Self-harm) နှင့် agent အထူး သုံးသပ်ချက်များ (ဥပမာ- Intent resolution, Task adherence) ပါဝင်သည်။  
 
-      ![Agent အကဲဖြတ်ချက်များ](../../../../../translated_images/my/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
+      ![Agent](../../../../../translated_images/my/12-view-run-info-evaluations.ef25e4577d70efeb.webp)  
 
-1. နောက်ဆုံးတွင် sidebar မီနူးမှ `Monitoring` တက်ကို နှိပ်ပါ။
+1. နောက်ဆုံးပေါ်၊ sidebar menu တွင် `Monitoring` တပ်ကိုနှိပ်ပါ။  
 
-      - ပြသထားသော စာမျက်နှာတွင် `Resource usage` တက်ကို ရွေး၍ မက်ထရစ်များကို ကြည့်ပါ။
-      - token များဖြင့် တိုးတက်လာသော ကုန်ကျစရိတ်နှင့် request များအရ အသုံးပြုမှုကို တစ်ကြောင်းချင်းစီ မှတ်တမ်းတင်၍ စောင့်ကြည့်ပါ။
-      - first byte (input processing) နှင့် last byte (output) အထိ app latency ကို ထောက်လှမ်းပါ။
+      - ပြသသည့် စာမျက်နှာတွင် `Resource usage` တပ်ကို ရွေးချယ်ပြီး၊ metrics များကို ကြည့်ရှုပါ။  
+      - ကုန်ကျစရိတ်များ (token) နှင့် လုပ်အားတောင်းဆိုမှုများ (requests) ကို လမ်းညွှန်ကြည့်ရှုနိုင်သည်။  
+      - ပထမဘိုက် (အချက်အလက် ဝင်ရောက် စီမံခန့်ခွဲမှု) နှင့် နောက်ဆုံး ဘိုက် (အဖြေထွက်) အကြား ဠိာင်ဆန့် ခြားနားမှုကို အကဲဖြတ်နိုင်သည်။  
 
-      ![Monitoring - Resource usage](../../../../../translated_images/my/13-monitoring-resources.5148015f7311807f.webp)
+      ![Agent](../../../../../translated_images/my/13-monitoring-resources.5148015f7311807f.webp)  
 
----
+---  
 
-## 8. Environment Variables
+## 8. ပတ်ဝန်းကျင် မဟာဗျူဟာများ  
 
-ယခုတိုင်အောင် ကျွန်ုပ်တို့ browser မှီဖြင့် ဖြန့်ချိမှုပြီး၊ အဆောက်အအုံများ provision ပြီး application လည်း အလုပ်လုပ်နိုင်ကြောင်း အတည်ပြုလိုက်ပါပြီ။ သို့ပေမယ့် application ကို _code-first_ နည်းဖြင့် လက်ရှိ ဖိုင်များနှင့် အလုပ်လုပ်ရန် အတွက် သင့် local development environment အတွက် လိုအပ်သော environment variable များကို ပြင်ဆင်ထားရမည် ဖြစ်သည်။ `azd` သည် ဤအလုပ်ကို လွယ်ကူစေသည်။
+ယခုအခါအထိ၊ ငါတို့ browser တွင် တပ်ဆင်မှု ပြီးစီးခဲ့ပြီး၊ သက်ဆိုင်သော အဆောက်အအုံ provision ပြုလုပ်ပြီး၊ အပလီကေးရှင်း လည်ပတ်မှုရှိကြောင်း စစ်ဆေးခဲ့သည်။ ဒါပေမယ့် ကုဒ်အခြေခံ အလုပ်တိုင်းသို့ တက်ရောက်ရန်အတွက်၊ သက်ဆိုင်ရာ variable များကို သင့် ဒေသဆိုင်ရာ ဖွံ့ဖြိုးမှု ပတ်ဝန်းကျင်တွင် ပြင်ဆင်ထားရမည်ဖြစ်သည်။ `azd` သုံးခြင်းသည် ဤကိစ္စကို လွယ်ကူစေသည်။  
 
-1. Azure Developer CLI သည် application deployments များအတွက် configuration settings များကို သိမ်းဆည်း၊ စီမံရန် [environment variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) ကို အသုံးပြုသည်။
+1. Azure Developer CLI သည် အပလီကေးရှင်း တပ်ဆင်ခြင်းများအတွက် ဖွဲ့စည်းမှု ဆက်တင်များကို သိမ်းဆည်း စီမံရန် [ပတ်ဝန်းကျင် မဟာဗျူဟာများ](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) ကို အသုံးပြုသည်။  
 
-1. Environment variables များကို `.azure/<env-name>/.env` တွင် သိမ်းဆည်းထားသည် - ၎င်းသည် deployment အချိန်တွင် အသုံးပြုသည့် `env-name` ကို scope ပေးပြီး တူညီ repository တွင် မတူညီသော deployment target များအတွက် environment များကို ခွဲခြားထားနိုင်စေသည်။
+1. ပတ်ဝန်းကျင် မဟာဗျူဟာများကို `.azure/<env-name>/.env` တွင် သိမ်းဆည်းထားပြီး၊ ဒီဟာက သီးသန့် deployment ရည်ရွယ်ချက်အတွက် `env-name` နာမည်နှင့် သက်ဆိုင်ပြီး တူညီသော သိုလှောင်ရုံတွင် ပတ်ဝန်းကျင်များကို ခွဲခြားပေးသည်။  
 
-1. Environment variables များကို `azd` command သည် ပြီးပြည့်စုံသော command တစ်ခု လုပ်ဆောင်ချိန်တိုင်း အလိုအလျောက် load လုပ်ပေးသည် (ဥပမာ၊ `azd up`)။ သတိပြုရန် ကိစ္စမှာ `azd` သည် _OS-level_ environment variables များကို အလိုအလျောက် ဖတ်မရဘဲ (ဥပမာ၊ shell တွင် set ထားသော) - ပို၍ သတ်မှတ်ရန် `azd set env` နှင့် `azd get env` ကို scripts များတွင် အသုံးပြုရန် ဖြစ်သည်။
+1. ပတ်ဝန်းကျင် မဟာဗျူဟာများကို `azd` command မည်သည့် command မဆို (ဥပမာ- `azd up`) ကို ဆောင်ရွက်သည့်အခါ အလိုအလျောက် ဖတ်ယူသည်။ သို့သော် `azd` သည် _OS-level_ ပတ်ဝန်းကျင် မဟာဗျူဟာများ (ဥပမာ shell တွင် set ထားသော) ကို မဖတ်ပါ - ဒီလို အချက်အလက်များကို `azd set env` နှင့် `azd get env` ဖြင့် script များတွင် လွှဲပြောင်းအသုံးပြုပါ။  
 
-အချို့ command များကို စမ်းကြည့်ရအောင် -
 
-1. ဤ environment တွင် `azd` အတွက် သတ်မှတ်ထားသော environment variables များအားလုံးကို ရယူပါ။
+ကိစ္စအချို့ကို စမ်းကြည့်ကြမယ် -  
+
+1. ဤ ပတ်ဝန်းကျင်အတွက် `azd` သတ်မှတ်ထားသော ပတ်ဝန်းကျင် မဟာဗျူဟာများအားလုံး ရယူပါ -  
 
       ```bash title="" linenums="0"
       azd env get-values
       ```
       
-      သင်သည် အောက်ပါကဲ့သို့ ကြည့်မြင်ရမည်။
+      အောက်ပါအတိုင်း ဖော်ပြမည်။  
 
       ```bash title="" linenums="0"
       AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4.1-mini"
@@ -244,52 +243,53 @@ Observability ဆိုသည်မှာ သင့် application ကို အ
       AZURE_AI_EMBED_DIMENSIONS=100
       ...
       ```
-
-1. တိကျသော value တစ်ခုကို ရယူပါ - ဥပမာ၊ `AZURE_AI_AGENT_MODEL_NAME` value ကို သတ်မှတ်ထားမထားကို ကြည့်လို့ရမည်
+  
+1. သတ်မှတ်ထားရန်လိုသော တစ်ခုခုသော တန်ဖိုး ရယူပါ - ဥပမာ `AZURE_AI_AGENT_MODEL_NAME` တန်ဖိုး ရှိသည်ဟုတ် မရှိသည်ဟုတ်ကို သိလိုပါသည်။  
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
       
-      သင်သည် အောက်ပါကဲ့သို့ တွေ့မြင်ရမည် - အစပိုင်းတွင် သတ်မှတ်ထားခြင်း မရှိပါ။
+      ဤအတိုင်း တွေ့မြင်ရမည်။ ၎င်းသည် မူရင်းအနေဖြင့် သတ်မှတ်ထားခြင်း မရှိပါ။  
 
       ```bash title="" linenums="0"
       ERROR: key 'AZURE_AI_AGENT_MODEL_NAME' not found in the environment values
       ```
-
-1. `azd` အတွက် environment variable အသစ်တစ်ခုကို သတ်မှတ်ပါ။ ဤနေရာတွင် agent model name ကို အပ်ဒိတ်ပြုလုပ်မည်။ _မှတ်ချက်: ပြုလုပ်သည့် မည်သည့်ပြောင်းလဲမှုများမျှ မဆို `.azure/<env-name>/.env` ဖိုင်တွင် ချက်ချင်း ထင်ဟပ်သည်။_
+  
+1. `azd` အတွက် ပတ်ဝန်းကျင် မဟာဗျူဟာ အသစ်ကို သတ်မှတ်ပါ။ ဒီမှာတော့ agent model name ကို ပြောင်းလဲသတ်မှတ်ပြုလုပ်သည်။ _အောက်ပါအတိုင်း အပြောင်းအလဲများသည် `.azure/<env-name>/.env` ဖိုင်တွင် အချိန်နှင့်တပြေးညီ ပြန်လည် ထင်ဟပ်သွားမည်။_  
 
       ```bash title="" linenums="0"
       azd env set AZURE_AI_AGENT_MODEL_NAME gpt-4.1
       azd env set AZURE_AI_AGENT_MODEL_VERSION 2025-04-14
       azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
       ```
-
-      ယခု၊ ဤ value သည် သတ်မှတ်ထားကြောင်း တွေ့ရမည်။
+  
+      ယခုတော့ တန်ဖိုး သတ်မှတ်ပြီးဖြစ်သည်ဟု တွေ့ရမည်။  
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
+  
+1. အချို့ resource များသည် အမြဲတမ်းဖြစ်ပြီး (ဥပမာ- model deployment များ) `azd up` တစ်ခုသာဖြင့် ပြန်လည်တပ်ဆင်ခြင်း မပြုလုပ်နိုင်သဖြင့် မူလ တပ်ဆင်မှုကို ဖျက်၍ ပတ်ဝန်းကျင် မဟာဗျူဟာ အသစ်ဖြင့် ပြန်လည်တပ်ဆင်ရမည်။  
 
-1. အချို့ resource များသည် persistent ဖြစ်ပြီး (ဥပမာ၊ model deployments) ပြန်လည်deploy လုပ်ရန် အတွက် `azd up` အတော်လောက်သာမက အပေါ်ပိုင်းလှိုင်းများများ လိုအပ်နိုင်သည်။ မူလ deployment ကို ဖျက်ပြီး env vars ကို ပြောင်းလဲပြီး ထပ်မံ deploy လုပ်ကြည့်ပါ။
-
-1. **Refresh** သင် မတိုင်ခင် azd template ဖြင့် infrastructure ကို deploy ပြုလုပ်ခဲ့ပါက - သင်၏ local environment variables အခြေအနေကို သင့် Azure deployment ၏ လက်ရှိအခြေအနေ အပေါ် မူတည်၍ refresh ပြုလုပ်နိုင်ပါသည်။ ဤ command ကို အသုံးပြုပါ။
+1. **Refresh** ယခင်က azd template တစ်ခု အသုံးပြု၍ infrastructure တပ်ဆင်ခဲ့သည်ဆိုပါက - လက်ရှိ Azure deployment အခြေအနေ အပေါ်မူတည်၍ သင်၏ ဒေသဆိုင်ရာ ပတ်ဝန်းကျင် မဟာဗျူဟာများ အခြေအနေကို _refresh_ ပြုလုပ်နိုင်သည်။ ဤ command ကို အသုံးပြုပါ -  
 
       ```bash title="" linenums="0"
       azd env refresh
       ```
+  
 
-      ဤသည် သည် ဒုတိယ သို့မဟုတ် ထိုထက်ပို၍ ရှိသော ဒေသခံ ဖွံ့ဖြိုးရေး ပတ်ဝန်းကျင်များ (ဥပမာ၊ ဖွံ့ဖြိုးရေးသူများ များသော အဖွဲ့) အကြား ပတ်ဝန်းကျင် ပြောင်းလဲနိုင်သည့် တန်ဖိုးများကို _ကိုက်ညီ_ ပြုလုပ်ရန် အင်အားကြီးသော နည်းလမ်းတစ်ခု ဖြစ်သည် - တင်ထားသော infrastructure ကို ပတ်ဝန်းကျင် တန်ဖိုးအခြေအနေ၏ အမှန်တရား အခြေခံအဖြစ် သတ်မှတ်ခွင့် ပေးသည်။ အဖွဲ့ဝင်များသည် variables များကို _ပြန်လည်မွမ်းမံ_ လုပ်ခြင်းဖြင့် ပြန်လည်ကိုက်ညီနိုင်သည်။
+      ဒါဟာ ဒေသခံဖွံ့ဖြိုးရေးပတ်ဝန်းကျင်တစ်ခု သို့မဟုတ် အဓိကအားဖြင့် ၂ခု သို့မဟုတ် အများမဟုတ်သော ပတ်ဝန်းကျင်များတွင် သင့်စိတ်ကြိုက် _sin သတ်ရန်_ အရေးပါသော နည်းလမ်းတစ်ခုဖြစ်သည် (ဥပမာ- အဖွဲ့တွင် အဖွဲ့ဝင်များစွာရှိသောအခါ) - စက်ရုံတပ်ဆင်ထားသော အပြန်လည်ဆောက်လုပ်မှုက အသုံးပြုသော ပတ်ဝန်းကျင်အခြေအနေအတွက် အခြေခံအချက်အလက်အဖြစ် ဝန်ဆောင်မှုပေးနိုင်သည်။ အဖွဲ့ဝင်များသည် အရင်ကဲ့သို့ _refresh_ ပြန်လုပ်ခြင်းဖြင့် ပြန်လည်အညီတက်နိုင်သည်။
 
 ---
 
-## 9. ဂုဏ်ယူပါတယ် 🏆
+## 9. ဂုဏ်ပြုပါသည် 🏆
 
-သင်သည် အစမှ အဆုံး အလုပ်စဉ်တစ်ခုကို ယခုပြီးမြောက်ခဲ့ပြီး အောက်ပါ အချက်များကို ပြုလုပ်ခဲ့သည်:
+သင်ဟာ ရှေ့ဆုံးမှ နောက်ဆုံးအထိ လုပ်ငန်းစဉ်တစ်ခု ပြီးမြောက်သွားပါပြီ၊ ထိုလုပ်ငန်းစဉ်မှာ သင်သည်-
 
-- [X] သင်အသုံးပြုလိုသော AZD Template ကို ရွေးချယ်ခဲ့သည်
-- [X] ထောက်ခံထားသော ဖွံ့ဖြိုးရေး ပတ်ဝန်းကျင်တွင် template ကို ဖွင့်ခဲ့သည်
-- [X] Template ကို တင်သွင်းပြီး အလုပ်လုပ်ကြောင်း သက်သေပြခဲ့သည်
+- [X] သင့်လိုချင်သော AZD Template ကို ရွေးချယ်ပြီး
+- [X] ထို template ကို အထောက်အပံ့ပေးသော ဖွံ့ဖြိုးရေးပတ်ဝန်းကျင်တစ်ခုတွင် ဖွင့်ပြီး
+- [X] Template ကို တပ်ဆင်ပြီး အလုပ်လုပ်ဆိုတာ အတည်ပြုပြီးဖြစ်သည်
 
 ---
 

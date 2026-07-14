@@ -1,24 +1,24 @@
-# AZD Kwa Waanzilishi: Safari ya Kujifunza Yenye Muundo
+# AZD Kwa Waanzilishi: Safari Iliyojaa Mafunzo Iliyo Pangwa
 
-![AZD kwa Waanzilishi](../../translated_images/sw/azdbeginners.5527441dd9f74068.webp) 
+![AZD-for-beginners](../../translated_images/sw/azdbeginners.5527441dd9f74068.webp) 
 
-[![Wafuasi wa GitHub](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
-[![Forks za GitHub](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
-[![Nyota za GitHub](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
+[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
+[![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
+[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
 
-[![Discord ya Azure](https://dcbadge.limes.pink/api/server/nkVh3dp)](https://discord.com/invite/nkVh3dp)
-[![Discord ya Microsoft Foundry](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+[![Azure Discord](https://dcbadge.limes.pink/api/server/nkVh3dp)](https://discord.com/invite/nkVh3dp)
+[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
 ---
 
-### Tafsiri Otomatiki (Zilizosasishwa Daima)
+### Tafsiri Zinazojirudia (Zilizosasishwa Kila Wakati)
 
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
 [Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](../my/README.md) | [Chinese (Simplified)](../zh-CN/README.md) | [Chinese (Traditional, Hong Kong)](../zh-HK/README.md) | [Chinese (Traditional, Macau)](../zh-MO/README.md) | [Chinese (Traditional, Taiwan)](../zh-TW/README.md) | [Croatian](../hr/README.md) | [Czech](../cs/README.md) | [Danish](../da/README.md) | [Dutch](../nl/README.md) | [Estonian](../et/README.md) | [Finnish](../fi/README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](../he/README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](../it/README.md) | [Japanese](../ja/README.md) | [Kannada](../kn/README.md) | [Khmer](../km/README.md) | [Korean](../ko/README.md) | [Lithuanian](../lt/README.md) | [Malay](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Nigerian Pidgin](../pcm/README.md) | [Norwegian](../no/README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../pt-BR/README.md) | [Portuguese (Portugal)](../pt-PT/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](../ro/README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](../sl/README.md) | [Spanish](../es/README.md) | [Swahili](./README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
 
-> **Unapendelea Kukopa Kwenye Kompyuta?**
+> **Unapendelea Kufuata Kwenye Kompyuta Yako?**
 >
-> Hifadhidata hii ina tafsiri zaidi ya 50 ambazo zinaongeza ukubwa wa kupakua. Ili kukopa bila tafsiri, tumia sparse checkout:
+> Hifadhidata hii ina tafsiri za lugha zaidi ya 50 ambazo huongeza kwa kiasi kikubwa ukubwa wa kupakua. Ili kufuata bila tafsiri, tumia sparse checkout:
 >
 > **Bash / macOS / Linux:**
 > ```bash
@@ -34,107 +34,107 @@
 > git sparse-checkout set --no-cone "/*" "!translations" "!translated_images"
 > ```
 >
-> Hii inakupa kila kitu unachohitaji kukamilisha kozi kwa upakua haraka zaidi.
+> Hii inakupatia kila kitu unachohitaji ili kumaliza kozi kwa upakuaji wa kasi zaidi.
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
 
 ## 🆕 Nini Kipya katika azd Leo
 
-> 📌 Kozi hii imethibitishwa dhidi ya **`azd 1.25.6`** (Juni 2026). Endesha `azd version` kuona jengo lako, na `azd upgrade` kupata toleo jipya.
+> 📌 Kozi hii imethibitishwa dhidi ya **`azd 1.27.1`** (Julai 2026). Endesha `azd version` ili kuangalia toleo lako, na `azd upgrade` ili kupata toleo la hivi karibuni.
 
-Azure Developer CLI imekua zaidi ya tovuti za wavuti na API za jadi. Leo, azd ni chombo kimoja cha kuweka programu yoyote kwenye Azure—pamoja na programu zinazoendeshwa na AI na maajenti wanajuzi.
+Azure Developer CLI imekua zaidi ya programu za wavuti za jadi na API. Leo, azd ni zana moja kwa ajili ya kupeleka **programu yoyote** kwa Azure—pamoja na programu zenye AI na wawakilishi wenye akili.
 
-Hii inamaanisha nini kwako:
+Hapa ni maana yake kwako:
 
-- **Maajenti za AI sasa ni mzigo wa daraja la kwanza kwa azd.** Unaweza kuanzisha, kuweka, na kusimamia miradi ya maajenti wa AI ukitumia mtiririko uleule `azd init` → `azd up` unaoufahamu.
-- **Mzunguko kamili wa maisha ya maajenti kupitia CLI.** Kiendelezi `azure.ai.agents` sasa kinashughulikia safari nzima—`azd ai agent init` kuunda muundo, `azd ai agent invoke` kujaribu (kwa matokeo ya muda wa majibu), `azd ai agent eval generate` na `azd ai agent optimize` kupima na kuboresha ubora, na `azd ai agent delete` kusafisha.
-- **Vijenga vilivyo zaidi vya AI.** Viendelezi vipya vya onyesho—`azure.ai.skills` na `azure.ai.connections`—vinakuruhusu kusimamia ujuzi unaoweza kutumika tena wa maajenti na muunganisho wa Foundry moja kwa moja kupitia azd.
-- **Uunganisho wa Microsoft Foundry** unaleta uwekezaji wa mifano, ukaazi wa maajenti, na usanidi wa huduma za AI moja kwa moja katika mfumo wa templati za azd.
-- **Msingi wa kazi wa kila siku umep smoother.** Matoleo ya hivi karibuni yalifanya `azd init` kuwa idempotent (salama kurudi kumfanya), `azd auth login` kusafisha tokeni zilizozeeka moja kwa moja, na kuongeza mwaliko wa usanidi wa kwanza wa `azd tool`.
-- **Mtiririko wa msingi haujakabadilika.** Iwe unapeleka app ya todo, microservice, au suluhisho la AI lenye maajenti wengi, amri ni zile zile.
+- **Maajenti wa AI sasa ni mizigo ya daraja la kwanza katika azd.** Unaweza kuanzisha, kupeleka, na kusimamia miradi ya maajenti wa AI kwa kutumia mchakato ule ule wa `azd init` → `azd up` ambao tayari unajua.
+- **Mzunguko kamili wa maajenti kutoka CLI.** Kiendelezi `azure.ai.agents` sasa kinashughulikia safari yote—`azd ai agent init` kuanzisha mradi, `azd ai agent invoke` kujaribu (pamoja na matokeo ya muda wa majibu), `azd ai agent eval generate` na `azd ai agent optimize` kupima na kuboresha ubora, na `azd ai agent delete` kusafisha.
+- **Vipande zaidi vya kujenga AI.** Ongeza vipengele mpya vya mapitio—`azure.ai.skills` na `azure.ai.connections`—vinakuwezesha kusimamia ujuzi wa maajenti unaoweza kutumika tena na muunganisho wa Foundry moja kwa moja na azd.
+- **Uunganisho wa Microsoft Foundry** unaleta uenezi wa mfano, usimamizi wa maajenti, na usanidi wa huduma za AI moja kwa moja katika mfumo wa templeti wa azd.
+- **Mambo rahisi ya kila siku.** Matoleo ya hivi karibuni yamefanya `azd init` kuwa salama kuendazoa tena (idempotent), kufanya `azd auth login` kusaidia kuondoa tokeni zilizochakaa kiotomatiki, na kuongeza onyesho la usanidi wa kwanza la kirafiki `azd tool`.
+- **Mchakato wa msingi haujabadilika.** Iwe unaeneza programu ya kutaka-tenda, huduma ndogo, au suluhisho la AI la maajenti wengi, amri bado ni ile ile.
 
-> **Kumbuka kwa watumiaji wa Aspire:** Microsoft sasa inarejea bidhaa kwa jina **Aspire** (zamani ".NET Aspire"). Msaada wa azd kwa Aspire haujabadilika—jina tu ndilo lililobadilika.
+> **Kumbuka kwa watumiaji wa Aspire:** Microsoft sasa inarejelea bidhaa hii kwa jina rahisi **Aspire** (awali ".NET Aspire"). Usaidizi wa Aspire katika azd haujawahi kubadilika—jina tu ndilo lililobadilika.
 
-Ikiwa umewahi kutumia azd kabla, msaada wa AI ni nyongeza ya asili—si chombo tofauti au mwendo wa juu. Ikiwa unaanza mpya, utajifunza mtiririko mmoja unaofanya kazi kwa kila kitu.
+Ikiwa umewahi kutumia azd hapo awali, msaada wa AI ni nyongeza ya kawaida—si zana tofauti au njia ya hali ya juu. Ikiwa unaanza sasa, utajifunza mchakato mmoja unaofanya kazi kwa kila kitu.
 
 ---
 
-## 🚀 Nini ni Azure Developer CLI (azd)?
+## 🚀 Azure Developer CLI (azd) ni Nini?
 
-**Azure Developer CLI (azd)** ni chombo cha mstari wa amri rafiki kwa msanidi programu kinachofanya iwe rahisi kuweka programu kwenye Azure. Badala ya kuunda na kuunganisha rasilimali nyingi za Azure kwa mikono, unaweza kupeleka programu nzima kwa amri moja.
+**Azure Developer CLI (azd)** ni chombo cha amri rafiki kwa waendelezaji kinachorahisisha kupeleka programu kwa Azure. Badala ya kuunda na kuunganisha rasilimali nyingi za Azure moja kwa moja, unaweza kupeleka programu kamili kwa amri moja.
 
 ### Uchawi wa `azd up`
 
 ```bash
 # Amri hii moja hufanya kila kitu:
 # ✅ Inaunda rasilimali zote za Azure
-# ✅ Inasanidi mtandao na usalama
+# ✅ Inaweka mtandao na usalama
 # ✅ Inajenga msimbo wa programu yako
-# ✅ Inaingiza kwenye Azure
+# ✅ Inaweka kwenye Azure
 # ✅ Inakupa URL inayofanya kazi
 azd up
 ```
 
-**Ndivyo tu!** Hakuna kubonyeza Portal ya Azure, hakuna templati tata za ARM za kujifunza kwanza, hakuna usanidi wa mikono - tu programu zinazoendelea kwenye Azure.
+**Hiyo tu!** Hakuna kubofya kwenye Azure Portal, hakuna kuelewa templeti ngumu za ARM kwanza, wala usanidi wa mkono - ni programu zinazofanya kazi kwenye Azure.
 
 ---
 
-## ❓ Azure Developer CLI vs Azure CLI: Tofauti ni Nini?
+## ❓ Azure Developer CLI dhidi ya Azure CLI: Tofauti ni Nini?
 
-Hili ndilo swali la kawaida zaidi kwa waanzilishi. Hapa kuna jibu rahisi:
+Hii ndio swali la kawaida zinazoulizwa na waanzilishi. Hapa ni jibu rahisi:
 
-| Sifa | **Azure CLI (`az`)** | **Azure Developer CLI (`azd`)** |
+| Kipengele | **Azure CLI (`az`)** | **Azure Developer CLI (`azd`)** |
 |---------|---------------------|--------------------------------|
-| **Madhumuni** | Dhibiti rasilimali za Azure moja moja | Zindua programu kamili |
-| **Mtazamo** | Inajikita kwenye miundombinu | Inalenga programu |
+| **Madhumuni** | Kusimamia rasilimali binafsi za Azure | Kupeleka programu kamili |
+| **Mtazamo** | Kujikita kwenye miundombinu | Kujikita kwenye programu |
 | **Mfano** | `az webapp create --name myapp...` | `azd up` |
-| **Ugumu wa Kujifunza** | Inahitaji kujua huduma za Azure | Jua tu programu yako |
-| **Inafaa Kwa** | DevOps, Miundombinu | Watengenezaji, Uundaji wa mfano |
+| **Mafunzo** | Lazima ujue huduma za Azure | Jua tu programu yako |
+| **Bora Kwa** | DevOps, Miundombinu | Waendelezaji, Uundaji wa mfano |
 
 ### Mfano Rahisi
 
-- **Azure CLI** ni kama kuwa na zana zote za kujenga nyumba - mafundo, msumari, matepe. Unaweza kujenga chochote, lakini unahitaji kujua ujenzi.
-- **Azure Developer CLI** ni kama kuajiri mkandarasi - unasema unachotaka, na wao wanashughulikia ujenzi.
+- **Azure CLI** ni kama kuwa na zana zote za kujenga nyumba - nyundo, msumeno, na visu. Unaweza kujenga kitu chochote, lakini unahitaji kujua ujenzi.
+- **Azure Developer CLI** ni kama kuajiri mkandarasi - unaelezea kile unachotaka, naye anajenga.
 
 ### Wakati wa Kutumia Kila Moja
 
-| Hali | Tumia Hili |
+| Hali | Tumia Hii |
 |----------|----------|
-| "Nataka kuweka app yangu ya wavuti haraka" | `azd up` |
-| "Nahitaji kuunda tu akaunti ya storage" | `az storage account create` |
+| "Nataka kupeleka programu yangu ya wavuti kwa haraka" | `azd up` |
+| "Nahitaji kuunda akaunti ya uhifadhi tu" | `az storage account create` |
 | "Ninajenga programu kamili ya AI" | `azd init --template azure-search-openai-demo` |
-| "Nahitaji kutatua tatizo la rasilimali maalum ya Azure" | `az resource show` |
-| "Nataka kuweka utoaji wa uzalishaji kwa dakika" | `azd up --environment production` |
+| "Nahitaji kuondoa hitilafu kwenye rasilimali maalum ya Azure" | `az resource show` |
+| "Nataka uenezi tayari kwa uzalishaji kwa dakika chache" | `azd up --environment production` |
 
-### Hufanya Kazi Pamoja!
+### Wanatumia Pamoja!
 
-azd inatumia Azure CLI chini ya kapeti. Unaweza kutumia zote mbili:
+AZD hutumia Azure CLI kwa siri. Unaweza kutumia zote mbili:
 ```bash
-# Tumia AZD kuzindua programu yako
+# Tumia app yako kwa AZD
 azd up
 
-# Kisha rekebisha rasilimali maalum kwa Azure CLI
+# Kisha boresha rasilimali maalum kwa Azure CLI
 az webapp config set --name myapp --always-on true
 ```
 
 ---
 
-## 🌟 Pata Templates katika Awesome AZD
+## 🌟 Tafuta Templeti Katika Awesome AZD
 
-Usianze kutoka mwanzo! **Awesome AZD** ni mkusanyiko wa jamii wa templati tayari-kuwekwa:
+Usianze kutoka mwanzo! **Awesome AZD** ni mkusanyiko wa jumuiya wa templeti tayari kupelekwa:
 
 | Rasilimali | Maelezo |
 |----------|-------------|
-| 🔗 [**Awesome AZD Gallery**](https://azure.github.io/awesome-azd/) | Pitia templati 200+ na kuweka kwa bonyeza moja |
-| 🔗 [**Submit a Template**](https://github.com/Azure/awesome-azd/issues) | Changia templeti yako kwa jamii |
-| 🔗 [**GitHub Repository**](https://github.com/Azure/awesome-azd) | Piga nyota na chunguza chanzo |
+| 🔗 [**Gallery ya Awesome AZD**](https://azure.github.io/awesome-azd/) | Kagua templeti 200+ na ueneze kwa bonyeza moja |
+| 🔗 [**Wasilisha Templeti**](https://github.com/Azure/awesome-azd/issues) | Changia templeti yako binafsi kwa jamii |
+| 🔗 [**Hifadhidata ya GitHub**](https://github.com/Azure/awesome-azd) | Chukua na chunguza chanzo |
 
-### Templati Maarufu za AI kutoka Awesome AZD
+### Templeti Maarufu za AI kutoka Awesome AZD
 
 ```bash
-# Mazungumzo ya RAG na Modeli za Microsoft Foundry + Utafutaji wa AI
+# Maongezi ya RAG na Mifano ya Microsoft Foundry + Utafutaji wa AI
 azd init --template azure-search-openai-demo
 
-# Programu ya Mazungumzo ya Haraka ya AI
+# Programu ya Mazungumzo ya AI ya Haraka
 azd init --template openai-chat-app-quickstart
 
 # Wakala wa AI na Wakala wa Foundry
@@ -143,9 +143,9 @@ azd init --template get-started-with-ai-agents
 
 ---
 
-## 🎯 Kuanzia katika Hatua 3
+## 🎯 Anza kwa Hatua 3
 
-Kabla haujaanza, hakikisha mashine yako iko tayari kwa templati unayotaka kupeleka:
+Kabla ya kuanza, hakikisha mashine yako iko tayari kwa templeti unayotaka kupeleka:
 
 **Windows:**
 ```powershell
@@ -157,9 +157,9 @@ Kabla haujaanza, hakikisha mashine yako iko tayari kwa templati unayotaka kupele
 bash ./validate-setup.sh
 ```
 
-Kama ukaguzi wowote unaohitajika utakosa, rekebisha kwanza kisha enda mbele na kuanza haraka.
+Ikiwa ukaguzi wowote muhimu unashindikana, rekebisha hilo kwanza kisha endelea na maelekezo ya kuanza haraka.
 
-### Hatua 1: Sakinisha AZD (dakika 2)
+### Hatua 1: Sakinisha AZD (Dakika 2)
 
 **Windows:**
 ```powershell
@@ -176,34 +176,34 @@ brew tap azure/azd && brew install azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-### Hatua 2: Thibitisha kwa AZD
+### Hatua 2: Thibitisha kwa ajili ya AZD
 
 ```bash
-# Hiari ikiwa unapanga kutumia amri za Azure CLI moja kwa moja katika kozi hii
+# Si lazima ikiwa unapanga kutumia amri za Azure CLI moja kwa moja katika kozi hii
 az login
 
-# Inahitajika kwa mikondo ya kazi ya AZD
+# Inahitajika kwa michakato ya AZD
 azd auth login
 ```
 
-Kama huna uhakika ni ipi unayohitaji, fuata mtiririko kamili wa usanidi katika [Installation & Setup](docs/chapter-01-foundation/installation.md#authentication-setup).
+Ikiwa haujui ni ipi unayohitaji, fuata mchakato kamili wa usanidi katika [Usakinishaji & Usanidi](docs/chapter-01-foundation/installation.md#authentication-setup).
 
-### Hatua 3: Weka Programu Yako ya Kwanza
+### Hatua 3: Peleka Programu Yako ya Kwanza
 
 ```bash
-# Anzisha kutoka kwenye kiolezo
+# Anzisha kutoka kwa kiolezo
 azd init --template todo-nodejs-mongo
 
-# Tengeneza kwenye Azure (inaunda kila kitu!)
+# Weka kwenye Azure (inaunda kila kitu!)
 azd up
 ```
 
-**🎉 Hiyo ndiyo!** Programu yako sasa iko hai kwenye Azure.
+**🎉 Hiyo tu!** Programu yako sasa iko mtandaoni kwenye Azure.
 
 ### Safisha (Usisahau!)
 
 ```bash
-# Remove all resources when done experimenting
+# Ondoa rasilimali zote baada ya kumaliza majaribio
 azd down --force --purge
 ```
 
@@ -211,163 +211,165 @@ azd down --force --purge
 
 ## 📚 Jinsi ya Kutumia Kozi Hii
 
-Kozi hii imeundwa kwa ajili ya **kujifunza taratibu** - anza mahali unapojisikia vizuri na jifunze hatua kwa hatua:
+Kozi hii imeundwa kwa ajili ya **kujifunza kidogo kidogo** - anza mahali unapojisikia vizuri na pandisha taratibu:
 
 | Uzoefu Wako | Anza Hapa |
 |-----------------|------------|
-| **Mpya kabisa kwa Azure** | [Sura 1: Msingi](#-chapter-1-foundation--quick-start) |
-| **Unajua Azure, mpya kwa AZD** | [Sura 1: Msingi](#-chapter-1-foundation--quick-start) |
-| **Unataka kuweka programu za AI** | [Sura 2: Maendeleo Kwanza kwa AI](#-chapter-2-ai-first-development-recommended-for-ai-developers) |
-| **Unataka mazoezi ya vitendo** | [🎓 Warsha ya Vitendo](workshop/README.md) - maabara ya kuongozwa ya saa 3-4 |
-| **Unahitaji mifumo ya uzalishaji** | [Sura 8: Uzalishaji & Mifumo ya Kampuni](#-chapter-8-production--enterprise-patterns) |
+| **Mpya kabisa kwa Azure** | [Sura ya 1: Msingi](#-chapter-1-foundation--quick-start) |
+| **Unajua Azure, mpya kwa AZD** | [Sura ya 1: Msingi](#-chapter-1-foundation--quick-start) |
+| **Unataka kupeleka programu za AI** | [Sura ya 2: Maendeleo ya AI-Kwanza](#-chapter-2-ai-first-development-recommended-for-ai-developers) |
+| **Unataka mazoezi ya vitendo** | [🎓 Warsha ya Kujifunza](workshop/README.md) - maabara ya masaa 3-4 yenye mwongozo |
+| **Unahitaji mifumo ya uzalishaji** | [Sura ya 8: Mifumo ya Uzalishaji & Biashara](#-chapter-8-production--enterprise-patterns) |
 
 ### Usanidi wa Haraka
 
-1. **Fork This Repository**: [![Forks za GitHub](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
-2. **Kloni Hii**: `git clone https://github.com/YOUR-USERNAME/azd-for-beginners.git`
+1. **Fungua Hifadhidata Hii kwa Kufuata**: [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/fork)
+2. **Fuatilia**: `git clone https://github.com/YOUR-USERNAME/azd-for-beginners.git`
 3. **Pata Msaada**: [Azure Discord Community](https://discord.com/invite/ByRwuEEgH4)
 
-> **Unapendelea Kukopa Kwenye Kompyuta?**
+> **Unapendelea Kufuata Kwenye Kompyuta Yako?**
 
-> Hifadhidata hii ina tafsiri zaidi ya 50 ambazo zinaongeza ukubwa wa kupakua. Ili kukopa bila tafsiri, tumia sparse checkout:
+> Hifadhidata hii ina tafsiri za lugha zaidi ya 50 ambazo huongeza kwa kiasi kikubwa ukubwa wa kupakua. Ili kufuata bila tafsiri, tumia sparse checkout:
 > ```bash
 > git clone --filter=blob:none --sparse https://github.com/microsoft/AZD-for-beginners.git
 > cd AZD-for-beginners
 > git sparse-checkout set --no-cone '/*' '!translations' '!translated_images'
 > ```
-> Hii inakupa kila kitu unachohitaji kukamilisha kozi kwa upakua haraka zaidi.
+> Hii inakupatia kila kitu unachohitaji ili kumaliza kozi kwa upakuaji wa kasi zaidi.
 
 
 ## Muhtasari wa Kozi
 
-Tumia Azure Developer CLI (azd) kwa ustadi kupitia sura zilizopangwa kwa ajili ya kujifunza taratibu. **Kipaumbele maalum kwenye utoaji wa programu za AI kwa kuunganishwa na Microsoft Foundry.**
-### Kwanini Kozi Hii ni Muhimu kwa Waendelezaji wa Kisasa
+Jifunze Azure Developer CLI (azd) kupitia sura zilizopangwa kwa ajili ya mafunzo ya hatua kwa hatua. **Msisitizo maalum juu ya kueneza programu za AI kwa ushirikiano wa Microsoft Foundry.**
 
-Kulingana na mawazo ya jamii ya Microsoft Foundry Discord, **waendelezaji 45% wanataka kutumia AZD kwa kazi za AI** lakini wanakutana na changamoto zifuatazo:
-- Miundombinu tata ya huduma nyingi za AI
-- Mbinu bora za utoaji wa AI uzalisheni  
-- Uinganishaji na usanidi wa huduma za Azure AI
+
+### Kwa Nini Kozi Hii ni Muhimu kwa Waendelezaji wa Kisasa
+
+Kulingana na maarifa ya jumuiya ya Microsoft Foundry Discord, **45% ya waendelezaji wanataka kutumia AZD kwa kazi za AI** lakini wanakutana na changamoto za:
+- Miundo tata ya huduma nyingi za AI
+- Mbinu bora za usambazaji wa AI kwa uzalishaji  
+- Muunganisho na usanidi wa huduma za Azure AI
 - Uboreshaji wa gharama kwa kazi za AI
-- Utatuzi wa matatizo maalum ya utoaji wa AI
+- Kutatua matatizo maalum ya usambazaji wa AI
 
 ### Malengo ya Kujifunza
 
-Kwa kukamilisha kozi hii iliyopangwa, utakuwa na uwezo wa:
-- **Kuwa Mtaalamu wa Misingi ya AZD**: Dhana za msingi, usakinishaji, na usanidi
-- **Weka Programu za AI**: Tumia AZD na huduma za Microsoft Foundry
-- **Tekeleza Miundombinu kama Msimbo**: Dhibiti rasilimali za Azure kwa templet za Bicep
-- **Tatua Matatizo ya Utoaji**: Rekebisha masuala ya kawaida na tatua kasoro
-- **Boreshaji kwa Uzalishaji**: Usalama, upanuaji, ufuatiliaji, na usimamizi wa gharama
-- **Jenga Suluhisho za Wakala Wengi**: Weka miundombinu tata ya AI
+Kwa kumaliza kozi hii iliyoandaliwa, utakuwa:
+- **Mtaalamu wa Misingi ya AZD**: Dhana za msingi, usanidi, na usakinishaji
+- **Sambaza Programu za AI**: Tumia AZD na huduma za Microsoft Foundry
+- **Tekeleza Miundombinu kama Msimbo**: Simamia rasilimali za Azure kwa kutumia templates za Bicep
+- **Tatua Matatizo ya Usambazaji**: Rekebisha masuala ya kawaida na fungua matatizo
+- **Boresha kwa Ajili ya Uzalishaji**: Usalama, upanuzi, ufuatiliaji, na usimamizi wa gharama
+- **Jenga Suluhisho za Wakala Wingi**: Sambaza miundo tata ya AI
 
-## Kabla ya Kuanzia: Akaunti, Ufikiaji, na Dhana
+## Kabla Ya Kuanza: Akaunti, Ufikiaji, na Dhahania
 
-Kabla ya kuanza Sura ya 1, hakikisha una yafuatayo tayari. Hatua za usakinishaji zilizo baadaye katika mwongozo huu zinatumia kuwa misingi hii tayari imeshashughulikiwa.
+Kabla ya kuanza Sura ya 1, hakikisha umeweka yafuatayo. Hatua za usakinishaji baadaye katika mwongozo huu zinadhani kuwa mambo haya ya msingi yameshalipwa.
 
-- **Chombo cha usajili cha Azure**: Unaweza kutumia usajili uliopo wa kazi au akaunti yako mwenyewe, au kuunda [jaribio la bure](https://aka.ms/azurefreetrial) kuanza.
-- **Ruhusa ya kuunda rasilimali za Azure**: Kwa mazoezi mengi, unapaswa kuwa na angalau ufikiaji wa **Contributor** kwenye usajili unaolenga au kikundi cha rasilimali. Baadhi ya sura zinaweza pia kudhani unaweza kuunda vikundi vya rasilimali, utambulisho ulioendeshwa (managed identities), na uteuzi za RBAC.
-- [**Akaunti ya GitHub**](https://github.com): Hii inafaa kwa kutenganisha (fork) ghala, kufuatilia mabadiliko yako mwenyewe, na kutumia GitHub Codespaces kwa warsha.
-- **Vigezo vya wakati wa utekelezaji wa templeti**: Templeti zingine zinahitaji zana za eneo la mtumiaji kama Node.js, Python, Java, au Docker. Endesha programu inayothibitisha usanidi kabla ya kuanza ili ugundue zana zilizokosekana mapema.
-- **Ufahamu wa msingi wa terminali**: Huna haja ya kuwa mtaalamu, lakini unapaswa kujisikia vizuri kuendesha amri kama `git clone`, `azd auth login`, na `azd up`.
+- **Usajili wa Azure**: Unaweza kutumia usajili uliopo kutoka kazini au akaunti yako mwenyewe, au tengeneza [jaribio la bure](https://aka.ms/azurefreetrial) kuanza.
+- **Idhini ya kuunda rasilimali za Azure**: Kwa mazoezi mengi, unapaswa kuwa na angalau ufikiaji wa **Mchangiaji** kwenye usajili au kikundi cha rasilimali unachotaka. Baadhi ya sura pia zinaweza kudhani unaweza kuunda makundi ya rasilimali, vitambulisho vinavyosimamiwa, na utekelezaji wa RBAC.
+- [**Akaunti ya GitHub**](https://github.com): Hii ni muhimu kwa kuchonga hifadhi, kufuatilia mabadiliko yako binafsi, na kutumia GitHub Codespaces kwa warsha.
+- **Mahitaji ya wakati wa utekelezaji wa templeti**: Baadhi ya templeti zinahitaji zana za ndani kama Node.js, Python, Java, au Docker. Endesha kinasaidia wa usanidi kabla ya kuanza ili kugundua zana zilizokosekana mapema.
+- **Uzoefu wa msingi wa terminal**: Huna haja ya kuwa mtaalamu, lakini unapaswa wasiwe na usumbufu kutumia amri kama `git clone`, `azd auth login`, na `azd up`.
 
-> **Unafanya kazi kwa usajili wa shirika?**
-> Ikiwa mazingira yako ya Azure yanadhibitiwa na msimamizi, thibitisha kabla kwamba unaweza kupeleka rasilimali katika usajili au kikundi cha rasilimali unachopanga kutumia. Ikiwa si hivyo, omba usajili wa sandbox au ufikiaji wa Contributor kabla ya kuanza.
+> **Unafanya kazi kwa usajili wa kampuni?**
+> Ikiwa mazingira yako ya Azure yanadhibitiwa na msimamizi, hakikisha mapema kuwa unaweza kusambaza rasilimali katika usajili au kikundi cha rasilimali unachopanga kutumia. Ikiwa sivyo, omba usajili wa sandbox au ufikiaji wa Mchangiaji kabla ya kuanza.
 
 > **Mpya kwa Azure?**
-> Anza na jaribio lako la Azure au usajili wa lipa-kama-unavyotumia kwa https://aka.ms/azurefreetrial ili uweze kukamilisha mazoezi kutoka mwanzo hadi mwisho bila kusubiri idhini ya ngazi ya tenanti.
+> Anza na jaribio lako la Azure au usajili wa kulipia-unapotumia https://aka.ms/azurefreetrial ili uweze kumaliza mazoezi kutoka mwanzo hadi mwisho bila kusubiri idhini za ngazi ya kanda.
 
-## 🗺️ Ramani ya Kozi: Uvinjari wa Haraka kwa Sura
+## 🗺️ Ramani ya Kozi: Uelekevu wa Haraka kwa Sura
 
-Kila sura ina README maalum yenye malengo ya kujifunza, uanzishwaji wa haraka, na mazoezi:
+Kila sura ina README maalum yenye malengo ya kujifunza, kuanza haraka, na mazoezi:
 
-| Chapter | Topic | Lessons | Duration | Complexity |
+| Sura | Mada | Masomo | Muda | Ugumu |
 |---------|-------|---------|----------|------------|
-| **[Sura 1: Msingi](docs/chapter-01-foundation/README.md)** | Kuanzisha | [Misingi ya AZD](docs/chapter-01-foundation/azd-basics.md) &#124; [Usakinishaji](docs/chapter-01-foundation/installation.md) &#124; [Mradi Wako wa Kwanza](docs/chapter-01-foundation/first-project.md) | 30-45 min | ⭐ |
-| **[Sura 2: Maendeleo ya AI](docs/chapter-02-ai-development/README.md)** | Programu za Kwanza za AI | [Uinganishaji na Foundry](docs/chapter-02-ai-development/microsoft-foundry-integration.md) &#124; [Wakala za AI](docs/chapter-02-ai-development/agents.md) &#124; [Utoaji wa Mfano](docs/chapter-02-ai-development/ai-model-deployment.md) &#124; [Warsha](docs/chapter-02-ai-development/ai-workshop-lab.md) | 1-2 hrs | ⭐⭐ |
-| **[Sura 3: Usanidi](docs/chapter-03-configuration/README.md)** | Uthibitishaji & Usalama | [Usanidi](docs/chapter-03-configuration/configuration.md) &#124; [Auth & Security](docs/chapter-03-configuration/authsecurity.md) | 45-60 min | ⭐⭐ |
-| **[Sura 4: Miundombinu](docs/chapter-04-infrastructure/README.md)** | IaC & Utoaji | [Mwongozo wa Utoaji](docs/chapter-04-infrastructure/deployment-guide.md) &#124; [Upatikanaji](docs/chapter-04-infrastructure/provisioning.md) | 1-1.5 hrs | ⭐⭐⭐ |
-| **[Sura 5: Wakala Wengi](docs/chapter-05-multi-agent/README.md)** | Suluhisho za Wakala wa AI | [Mazingira ya Rejareja](examples/retail-scenario.md) &#124; [Mifumo ya Uratibu](docs/chapter-06-pre-deployment/coordination-patterns.md) | 2-3 hrs | ⭐⭐⭐⭐ |
-| **[Sura 6: Kabla ya Utoaji](docs/chapter-06-pre-deployment/README.md)** | Mipango & Uthibitisho | [Ukaguzi wa Kabla ya Kuruka](docs/chapter-06-pre-deployment/preflight-checks.md) &#124; [Mipango ya Uwezo](docs/chapter-06-pre-deployment/capacity-planning.md) &#124; [Uchaguzi wa SKU](docs/chapter-06-pre-deployment/sku-selection.md) &#124; [App Insights](docs/chapter-06-pre-deployment/application-insights.md) | 1 hr | ⭐⭐ |
-| **[Sura 7: Utatuzi matatizo](docs/chapter-07-troubleshooting/README.md)** | Kukanusha & Rekebisha | [Masuala ya Kawaida](docs/chapter-07-troubleshooting/common-issues.md) &#124; [Kukanusha](docs/chapter-07-troubleshooting/debugging.md) &#124; [Masuala ya AI](docs/chapter-07-troubleshooting/ai-troubleshooting.md) | 1-1.5 hrs | ⭐⭐ |
-| **[Sura 8: Uzalishaji](docs/chapter-08-production/README.md)** | Mifumo ya Shirika | [Mazingira ya Uzalishaji](docs/chapter-08-production/production-ai-practices.md) | 2-3 hrs | ⭐⭐⭐⭐ |
-| **[🎓 Warsha ya Kazi](workshop/README.md)** | Maabara ya Vitendo | [Utangulizi](workshop/docs/instructions/0-Introduction.md) &#124; [Uchaguzi](workshop/docs/instructions/1-Select-AI-Template.md) &#124; [Uthibitisho](workshop/docs/instructions/2-Validate-AI-Template.md) &#124; [Uchambuzi](workshop/docs/instructions/3-Deconstruct-AI-Template.md) &#124; [Usanidi](workshop/docs/instructions/4-Configure-AI-Template.md) &#124; [Ubinafsishaji](workshop/docs/instructions/5-Customize-AI-Template.md) &#124; [Uondishaji Miundombinu](workshop/docs/instructions/6-Teardown-Infrastructure.md) &#124; [KuHitimisha](workshop/docs/instructions/7-Wrap-up.md) | 3-4 hrs | ⭐⭐ |
+| **[Sura 1: Msingi](docs/chapter-01-foundation/README.md)** | Kuanzisha | [Misingi ya AZD](docs/chapter-01-foundation/azd-basics.md) &#124; [Usakinishaji](docs/chapter-01-foundation/installation.md) &#124; [Mradi wa Kwanza](docs/chapter-01-foundation/first-project.md) | 30-45 min | ⭐ |
+| **[Sura 2: Maendeleo ya AI](docs/chapter-02-ai-development/README.md)** | Programu za AI Kwanza | [Muunganisho wa Foundry](docs/chapter-02-ai-development/microsoft-foundry-integration.md) &#124; [Wakala wa AI](docs/chapter-02-ai-development/agents.md) &#124; [Usambazaji wa Mfano](docs/chapter-02-ai-development/ai-model-deployment.md) &#124; [Warsha](docs/chapter-02-ai-development/ai-workshop-lab.md) | 1-2 saa | ⭐⭐ |
+| **[Sura 3: Usanidi](docs/chapter-03-configuration/README.md)** | Utiifu & Usalama | [Usanidi](docs/chapter-03-configuration/configuration.md) &#124; [Utiifu & Usalama](docs/chapter-03-configuration/authsecurity.md) | 45-60 min | ⭐⭐ |
+| **[Sura 4: Miundombinu](docs/chapter-04-infrastructure/README.md)** | IaC & Usambazaji | [Mwongozo wa Usambazaji](docs/chapter-04-infrastructure/deployment-guide.md) &#124; [Upangaji](docs/chapter-04-infrastructure/provisioning.md) | 1-1.5 saa | ⭐⭐⭐ |
+| **[Sura 5: Wakala Wingi](docs/chapter-05-multi-agent/README.md)** | Suluhisho za Wakala wa AI | [Mfano wa Rejareja](examples/retail-scenario.md) &#124; [Mifumo ya Uratibu](docs/chapter-06-pre-deployment/coordination-patterns.md) | 2-3 saa | ⭐⭐⭐⭐ |
+| **[Sura 6: Kabla ya Usambazaji](docs/chapter-06-pre-deployment/README.md)** | Upangaji & Uthibitisho | [Ukaguzi wa Kabla ya Usambazaji](docs/chapter-06-pre-deployment/preflight-checks.md) &#124; [Mpango wa Uwezo](docs/chapter-06-pre-deployment/capacity-planning.md) &#124; [Uchaguaji wa SKU](docs/chapter-06-pre-deployment/sku-selection.md) &#124; [Uchambuzi wa Programu](docs/chapter-06-pre-deployment/application-insights.md) | 1 saa | ⭐⭐ |
+| **[Sura 7: Kutatua Matatizo](docs/chapter-07-troubleshooting/README.md)** | Kuchunguza & Rekebisha | [Masuala ya Kawaida](docs/chapter-07-troubleshooting/common-issues.md) &#124; [Uchunguzi](docs/chapter-07-troubleshooting/debugging.md) &#124; [Masuala ya AI](docs/chapter-07-troubleshooting/ai-troubleshooting.md) | 1-1.5 saa | ⭐⭐ |
+| **[Sura 8: Uzalishaji](docs/chapter-08-production/README.md)** | Mifumo ya Kampuni | [Mbinu za Uzalishaji](docs/chapter-08-production/production-ai-practices.md) | 2-3 saa | ⭐⭐⭐⭐ |
+| **[🎓 Warsha](workshop/README.md)** | Maabara ya Vitendo | [Utangulizi](workshop/docs/instructions/0-Introduction.md) &#124; [Uchaguzi](workshop/docs/instructions/1-Select-AI-Template.md) &#124; [Uthibitisho](workshop/docs/instructions/2-Validate-AI-Template.md) &#124; [Uchanganuzi](workshop/docs/instructions/3-Deconstruct-AI-Template.md) &#124; [Usanidi](workshop/docs/instructions/4-Configure-AI-Template.md) &#124; [Urekebishaji](workshop/docs/instructions/5-Customize-AI-Template.md) &#124; [Kuvunjika](workshop/docs/instructions/6-Teardown-Infrastructure.md) &#124; [Hitimisho](workshop/docs/instructions/7-Wrap-up.md) | 3-4 saa | ⭐⭐ |
 
-**Jumla ya Mudhuli wa Kozi:** ~10-14 hours | **Mchakato wa Ustadi:** Msingi → Tayari kwa Uzalishaji
+**Muda wa Jumla wa Kozi:** ~10-14 saa | **Maendeleo ya Ujuzi:** Mwanzo → Tayari kwa Uzalishaji
 
 ---
 
-## 📚 Suras za Kujifunza
+## 📚 Sura za Kujifunza
 
 *Chagua njia yako ya kujifunza kulingana na kiwango cha uzoefu na malengo*
 
-### 🚀 Sura 1: Msingi & Anza Haraka
-**Sharti za awali**: usajili wa Azure, ujuzi wa msingi wa laini ya amri  
-**Muda**: 30-45 dakika  
-**Nguvu ngumu**: ⭐
+### 🚀 Sura 1: Msingi & Kuanzisha Haraka
+**Mahitaji ya awali**: Usajili wa Azure, maarifa ya mstari wa amri wa msingi  
+**Muda**: Dakika 30-45  
+**Ugumu**: ⭐
 
-#### Uta Jifunza Nini
+#### Kile Utakachojifunza
 - Kuelewa misingi ya Azure Developer CLI
 - Kusakinisha AZD kwenye jukwaa lako
-- Utoaji wako wa kwanza uliofanikiwa
+- Usambazaji wako wa kwanza uliofanikiwa
 
-#### Vyanzo vya Kujifunza
+#### Rasilimali za Kujifunza
 - **🎯 Anza Hapa**: [Azure Developer CLI ni Nini?](#what-is-azure-developer-cli)
-- **📖 Nadharia**: [Misingi ya AZD](docs/chapter-01-foundation/azd-basics.md) - Dhana za msingi na istilahi
-- **⚙️ Usanidi**: [Usakinishaji & Usanidi](docs/chapter-01-foundation/installation.md) - Mwongozo maalum kwa jukwaa
-- **🛠️ Vitendo**: [Mradi Wako wa Kwanza](docs/chapter-01-foundation/first-project.md) - Mafunzo hatua kwa hatua
-- **📋 Marejeleo ya Haraka**: [Karatasi ya Amri](resources/cheat-sheet.md)
+- **📖 Nadharia**: [Misingi ya AZD](docs/chapter-01-foundation/azd-basics.md) - Dhana na istilahi za kimsingi
+- **⚙️ Usanidi**: [Usakinishaji & Usanidi](docs/chapter-01-foundation/installation.md) - Mwongozo wa jukwaa maalum
+- **🛠️ Vitendo**: [Mradi Wako wa Kwanza](docs/chapter-01-foundation/first-project.md) - Mafunzo kwa hatua kwa hatua
+- **📋 Marejeo ya Haraka**: [Karatasi ya Amri](resources/cheat-sheet.md)
 
 #### Mazoezi ya Kivitendo
 ```bash
-# Ukaguzi wa haraka wa usakinishaji
+# Kagua usakinishaji haraka
 azd version
 
-# Sambaza programu yako ya kwanza
+# Tengeneza programu yako ya kwanza
 azd init --template todo-nodejs-mongo
 azd up
 ```
 
-**💡 Matokeo ya Sura**: Weka kwa mafanikio programu rahisi ya wavuti kwenye Azure ukitumia AZD
+**💡 Matokeo ya Sura**: Sambaza programu rahisi ya wavuti kwa Azure ukitumia AZD kwa mafanikio
 
 **✅ Uthibitisho wa Mafanikio:**
 ```bash
-# Baada ya kumalizia Sura ya 1, unapaswa kuwa na uwezo wa:
-azd version              # Inaonyesha toleo lililosakinishwa
+# Baada ya kumaliza Sura ya 1, unapaswa kuwa na uwezo wa:
+azd version              # Inaonyesha toleo lililowekwa
 azd init --template todo-nodejs-mongo  # Inaanzisha mradi
-azd up                  # Inaweka kwenye Azure
-azd show                # Inaonyesha URL ya programu inayokimbia
-# Programu inafunguliwa katika kivinjari na inafanya kazi
+azd up                  # Inaeneza kwenye Azure
+azd show                # Inaonyesha URL ya programu inayotumia
+# Programu inafunguka kwenye kivinjari na inafanya kazi
 azd down --force --purge  # Inasafisha rasilimali
 ```
 
-**📊 Muda uliowekwa:** 30-45 dakika  
-**📈 Kiwango cha Ujuzi Baada:** Anaweza kuweka programu za msingi kwa kujitegemea
-**📈 Kiwango cha Ujuzi Baada:** Anaweza kuweka programu za msingi kwa kujitegemea
+**📊 Muda Uliotumika:** Dakika 30-45  
+**📈 Kiwango cha Ujuzi Baadaye:** Anaweza kusambaza programu za msingi mwenyewe
+**📈 Kiwango cha Ujuzi Baadaye:** Anaweza kusambaza programu za msingi mwenyewe
 
 ---
 
-### 🤖 Sura 2: Maendeleo ya AI-Kwanza (Inapendekezwa kwa Waendelezaji wa AI)
-**Sharti za awali**: Sura 1 imekamilika  
-**Muda**: 1-2 saa  
-**Nguvu ngumu**: ⭐⭐
+### 🤖 Sura 2: Maendeleo ya AI Kwanza (Inapendekezwa kwa Waendelezaji wa AI)
+**Mahitaji ya awali**: Sura 1 imekamilika  
+**Muda**: Saa 1-2  
+**Ugumu**: ⭐⭐
 
-#### Uta Jifunza Nini
-- Uinganishaji wa Microsoft Foundry na AZD
-- Kuweka programu zenye uwezo wa AI
+#### Kile Utakachojifunza
+- Muunganisho wa Microsoft Foundry na AZD
+- Kusambaza programu zenye nguvu ya AI
 - Kuelewa usanidi wa huduma za AI
 
-#### Vyanzo vya Kujifunza
-- **🎯 Anza Hapa**: [Uinganishaji wa Microsoft Foundry](docs/chapter-02-ai-development/microsoft-foundry-integration.md)
-- **🤖 Wakala za AI**: [Mwongozo wa Wakala za AI](docs/chapter-02-ai-development/agents.md) - Weka mawakala wenye akili kwa AZD
-- **📖 Mifumo**: [Utoaji wa Mfano wa AI](docs/chapter-02-ai-development/ai-model-deployment.md) - Weka na dhibiti mifano ya AI
-- **🛠️ Warsha**: [Maabara ya AI](docs/chapter-02-ai-development/ai-workshop-lab.md) - Fanya suluhisho zako za AI ziwe tayari kwa AZD
-- **🎥 Mwongozo wa Kiingilio**: [Vifaa vya Warsha](workshop/README.md) - Kujifunza kwa kivinjari kwa MkDocs * Mazingira ya DevContainer
-- **📋 Templeti**: [Microsoft Foundry Templates](#rasilimali-za-warsha)
-- **📝 Mifano**: [Mifano ya Utoaji wa AZD](examples/README.md)
+#### Rasilimali za Kujifunza
+- **🎯 Anza Hapa**: [Muunganisho wa Microsoft Foundry](docs/chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🤖 Wakala wa AI**: [Mwongozo wa Wakala wa AI](docs/chapter-02-ai-development/agents.md) - Sambaza wakala wenye akili kwa kutumia AZD
+- **📖 Mifumo**: [Usambazaji wa Mfano wa AI](docs/chapter-02-ai-development/ai-model-deployment.md) - Sambaza na simamia mifano ya AI
+- **🛠️ Warsha**: [Maabara ya Warsha ya AI](docs/chapter-02-ai-development/ai-workshop-lab.md) - Fanya suluhisho zako za AI ziwe tayari kwa AZD
+- **🎥 Mwongozo wa Mwingiliano**: [Vifaa vya Warsha](workshop/README.md) - Kujifunza kupitia kivinjari kwa MkDocs * Mazingira ya DevContainer
+- **📋 Templeti**: [Templeti za Microsoft Foundry](#vyanzo-vya-warsha)
+- **📝 Mifano**: [Mifano ya Usambazaji ya AZD](examples/README.md)
 
 #### Mazoezi ya Kivitendo
 ```bash
-# Weka programu yako ya kwanza ya AI
+# Tumia programu yako ya AI ya kwanza
 azd init --template azure-search-openai-demo
 azd up
 
@@ -376,7 +378,7 @@ azd init --template openai-chat-app-quickstart
 azd init --template agent-openai-python-prompty
 ```
 
-**💡 Matokeo ya Sura**: Weka na kusanidi programu ya gumzo yenye uwezo wa AI na uwezo wa RAG
+**💡 Matokeo ya Sura**: Sambaza na usanidi wa programu ya mazungumzo yenye nguvu ya AI yenye uwezo wa RAG
 
 **✅ Uthibitisho wa Mafanikio:**
 ```bash
@@ -384,229 +386,231 @@ azd init --template agent-openai-python-prompty
 azd init --template azure-search-openai-demo
 azd up
 # Jaribu kiolesura cha mazungumzo cha AI
-# Uliza maswali na upate majibu yanayoungwa mkono na AI pamoja na vyanzo
-# Thibitisha kwamba muunganisho wa utafutaji unafanya kazi
-azd monitor  # Angalia Application Insights inaonyesha data za telemetri
+# Uliza maswali na upate majibu yanayotolewa na AI ikiwa na vyanzo
+# Thibitisha kuunganishwa kwa utaftaji kunafanya kazi
+azd monitor  # Angalia Application Insights inaonyesha data za ufuatiliaji
 azd down --force --purge
 ```
 
-**📊 Muda uliowekwa:** 1-2 saa  
-**📈 Kiwango cha Ujuzi Baada:** Anaweza kuweka na kusanidi programu za AI zilizotengenezwa kwa uzalishaji  
-**💰 Uelewa wa Gharama:** Elewa gharama za $80-150/mwezi kwa maendeleo, $300-3500/mwezi kwa uzalishaji
+**📊 Muda Uliotumika:** Saa 1-2  
+**📈 Kiwango cha Ujuzi Baadaye:** Anaweza kusambaza na kusanidi programu za AI tayari kwa uzalishaji  
+**💰 Uelewa wa Gharama:** Elewa gharama za maendeleo $80-150/kwa mwezi, gharama za uzalishaji $300-3500/kwa mwezi
 
-#### 💰 Mambo ya Kuzingatia Gharama kwa Utoaji wa AI
+#### 💰 Mawazo Kuhusu Gharama za Usambazaji wa AI
 
-**Mazingira ya Maendeleo (Kadirio $80-150/mwezi):**
-- Microsoft Foundry Models (Pay-as-you-go): $0-50/month (kulingana na matumizi ya tokeni)
-- AI Search (tier ya Msingi): $75/month
-- Container Apps (Consumption): $0-20/month
-- Storage (Standard): $1-5/month
+**Mazingaombwe ya Maendeleo (Makadirio $80-150/kwa mwezi):**
+- Mifano ya Microsoft Foundry (Lipa unavyotumia): $0-50/kwa mwezi (kutegemea matumizi ya tokeni)
+- Utafutaji wa AI (Ngazi ya Msingi): $75/kwa mwezi
+- Programu za Kontena (Matumizi): $0-20/kwa mwezi
+- Hifadhi (Kawaida): $1-5/kwa mwezi
 
-**Mazingira ya Uzalishaji (Kadirio $300-3,500+/mwezi):**
-- Microsoft Foundry Models (PTU kwa utendaji thabiti): $3,000+/month AU Pay-as-go kwa kiasi kikubwa cha matumizi
-- AI Search (tier ya Standard): $250/month
-- Container Apps (Dedicated): $50-100/month
-- Application Insights: $5-50/month
-- Storage (Premium): $10-50/month
+**Mazingaombwe ya Uzalishaji (Makadirio $300-3,500+/kwa mwezi):**
+- Mifano ya Microsoft Foundry (PTU kwa utendaji thabiti): $3,000+/kwa mwezi AU Lipa unavyotumia kwa kiwango kikubwa
+- Utafutaji wa AI (Ngazi ya Kawaida): $250/kwa mwezi
+- Programu za Kontena (Zimejitoa): $50-100/kwa mwezi
+- Uchambuzi wa Programu: $5-50/kwa mwezi
+- Hifadhi (Premium): $10-50/kwa mwezi
 
-**💡 Vidokezo vya Kupunguza Gharama:**
-- Tumia **Free Tier** ya Microsoft Foundry Models kwa kujifunza (Azure OpenAI 50,000 tokens/month imejumuishwa)
-- Endesha `azd down` ili kuondoa rasilimali wakati hauko kwenye maendeleo kwa bidii
-- Anza na bili inayotegemea matumizi (consumption), boresha kwa PTU tu kwa uzalishaji
-- Tumia `azd provision --preview` kukadiria gharama kabla ya utoaji
-- Washa auto-scaling: lipa tu kwa matumizi halisi
+**💡 Vidokezo vya Ukaguzi wa Gharama:**
+- Tumia **Ngazi ya Bure** ya Mifano ya Microsoft Foundry kwa kujifunza (Azure OpenAI tokens 50,000 kwa mwezi ziko pamoja)
+- Endesha `azd down` ili kuondoa rasilimali wakati huendiendelei kikamilifu
+- Anza kwa malipo kulingana na matumizi, boresha hadi PTU tu kwa uzalishaji
+- Tumia `azd provision --preview` kukadiria gharama kabla ya usambazaji
+- Washa upanuzi wa moja kwa moja: l **ipa kwa matumizi halisi tu
 
 **Ufuatiliaji wa Gharama:**
 ```bash
 # Angalia makadirio ya gharama za kila mwezi
 azd provision --preview
 
-# Fuatilia gharama halisi katika Azure Portal
+# Angalia gharama halisi katika Azure Portal
 az consumption budget list --resource-group <your-rg>
 ```
 
 ---
 
-### ⚙️ Sura 3: Usanidi & Uthibitishaji
-**Sharti za awali**: Sura 1 imekamilika  
-**Muda**: 45-60 dakika  
-**Nguvu ngumu**: ⭐⭐
+### ⚙️ Sura 3: Usanidi & Utiifu
+**Mahitaji ya awali**: Sura 1 imekamilika  
+**Muda**: Dakika 45-60  
+**Ugumu**: ⭐⭐
 
-#### Uta Jifunza Nini
-- Usanidi wa mazingira na usimamizi
+#### Kile Utakachojifunza
+- Usanidi na usimamizi wa mazingira
 - Mbinu bora za uthibitishaji na usalama
-- Kununua majina ya rasilimali na upangaji
+- Kutoa majina ya rasilimali na upangaji
 
-#### Vyanzo vya Kujifunza
+#### Rasilimali za Kujifunza
 - **📖 Usanidi**: [Mwongozo wa Usanidi](docs/chapter-03-configuration/configuration.md) - Usanidi wa mazingira
-- **🔐 Usalama**: [Mifumo ya uthibitishaji na utambulisho ulioendeshwa](docs/chapter-03-configuration/authsecurity.md) - Mifumo ya uthibitishaji
-- **📝 Mifano**: [Mfano wa Programu ya Database](examples/database-app/README.md) - Mifano ya Database ya AZD
+- **🔐 Usalama**: [Mifumo ya uthibitishaji na utambulisho unaosimamiwa](docs/chapter-03-configuration/authsecurity.md) - Mifumo ya uthibitishaji
+- **📝 Mifano**: [Mfano wa Programu ya Database](examples/database-app/README.md) - Mifano ya AZD ya Database
 
 #### Mazoezi ya Kivitendo
 - Sanidi mazingira mengi (dev, staging, prod)
-- Weka uthibitishaji wa utambulisho ulioendeshwa
-- Tekeleza usanidi maalum kwa mazingira
+- Weka uthibitishaji wa utambulisho unaosimamiwa
+- Tekeleza usanidi maalum wa mazingira
 
-**💡 Matokeo ya Sura**: Dhibiti mazingira mengi kwa uthibitishaji na usalama sahihi
+**💡 Matokeo ya Sura**: Simamia mazingira mengi kwa uthibitishaji na usalama sahihi
 
 ---
 
-### 🏗️ Sura 4: Miundombinu kama Msimbo & Utoaji
-**Sharti za awali**: Suras 1-3 zimekamilika  
-**Muda**: 1-1.5 saa  
-**Nguvu ngumu**: ⭐⭐⭐
+### 🏗️ Sura 4: Miundombinu kama Msimbo & Usambazaji
+**Mahitaji ya awali**: Sura 1-3 zimekamilika  
+**Muda**: Saa 1-1.5  
+**Ugumu**: ⭐⭐⭐
 
-#### Uta Jifunza Nini
-- Mifumo ya juu ya utoaji
-- Miundombinu kama Msimbo na Bicep
-- Mikakati ya upatikanaji wa rasilimali
+#### Kile Utakachojifunza
+- Mifumo ya kuendeleza usambazaji wa hali ya juu
+- Miundombinu kama Msimbo kwa kutumia Bicep
+- Mikakati ya upangaji wa rasilimali
 
-#### Vyanzo vya Kujifunza
-- **📖 Utoaji**: [Mwongozo wa Utoaji](docs/chapter-04-infrastructure/deployment-guide.md) - Mifumo kamili ya kazi
-- **🏗️ Utoaji wa Rasilimali**: [Upatikanaji wa Rasilimali](docs/chapter-04-infrastructure/provisioning.md) - Usimamizi wa rasilimali za Azure
-- **📝 Mifano**: [Mfano wa Container App](../../examples/container-app) - Utoaji wa containerized
+#### Rasilimali za Kujifunza
+- **📖 Usambazaji**: [Mwongozo wa Usambazaji](docs/chapter-04-infrastructure/deployment-guide.md) - Mchakato kamili
+- **🏗️ Upangaji**: [Upangaji wa Rasilimali](docs/chapter-04-infrastructure/provisioning.md) - Usimamizi wa rasilimali za Azure
+- **📝 Mifano**: [Mfano wa Programu ya Kontena](../../examples/container-app) - Usambazaji wa programu zilizo kwenye kontena
 
 #### Mazoezi ya Kivitendo
-- Unda templeti za Bicep za desturi
-- Weka programu za huduma nyingi
-- Tekeleza mikakati ya utoaji ya blue-green
+- Unda templeti za Bicep zilizobinafsishwa
+- Sambaza programu zenye huduma nyingi
+- Tekeleza mikakati ya usambazaji wa blue-green
 
-**💡 Matokeo ya Sura**: Weka programu tata za huduma nyingi ukitumia templeti za miundombinu za desturi
+**💡 Matokeo ya Sura**: Sambaza programu tata zenye huduma nyingi ukitumia templeti za miundombinu zilizobinafsishwa
 
 ---
-### 🎯 Sura 5: Suluhisho za AI za Wakala Wengi (Hali ya Juu)
-**Mahitaji ya awali**: Sura 1-2 zimekamilika  
-**Muda**: 2-3 saa  
+
+
+### 🎯 Sura ya 5: Suluhisho za AI za Wakala Wengi (Juu)
+**Mahitaji**: Imekamilika Sura 1-2  
+**Muda**: Saa 2-3  
 **Ugumu**: ⭐⭐⭐⭐
 
 #### Utajifunza Nini
 - Mifumo ya usanifu wa wakala wengi
-- Kuandamana na kuratibu wakala
-- Uwekaji katika uzalishaji tayari kwa matumizi
+- Uratibu na usimamizi wa mawakala
+- Ugawaji wa AI tayari kwa uzalishaji
 
-#### Rasilimali za Kujifunzia
-- **🤖 Mradi Ulioangaziwa**: [Retail Multi-Agent Solution](examples/retail-scenario.md) - Utekelezaji kamili
-- **🛠️ Violezo vya ARM**: [ARM Template Package](../../examples/retail-multiagent-arm-template) - Uwekaji kwa bonyeza moja
-- **📖 Usanifu**: [Multi-agent coordination patterns](docs/chapter-06-pre-deployment/coordination-patterns.md) - Mifumo
+#### Vyanzo vya Kujifunza
+- **🤖 Mradi Maarufu**: [Suluhisho la Wakala Wengi la Rejareja](examples/retail-scenario.md) - Utekelezaji kamili
+- **🛠️ Kiolezo cha ARM**: [Kifuniko cha Kiolezo cha ARM](../../examples/retail-multiagent-arm-template) - Ugawaji kwa bonyeza moja
+- **📖 Usanifu**: [Mifumo ya uratibu wa wakala wengi](docs/chapter-06-pre-deployment/coordination-patterns.md) - Mifumo
 
 #### Mazoezi ya Kivitendo
 ```bash
-# Weka suluhisho kamili la rejareja la mawakala wengi
+# Sambaza suluhisho kamili la mawakala wengi wa rejareja
 cd examples/retail-multiagent-arm-template
 ./deploy.sh
 
-# Chunguza usanidi wa mawakala
+# Chunguza mipangilio ya wakala
 az deployment group show --resource-group <rg-name> --name <deployment-name>
 ```
 
-**💡 Matokeo ya Sura**: Weka na usimamishe suluhisho la AI la wakala wengi tayari kwa uzalishaji na wakala wa Mteja na Mkandarasi wa Hesabu
+**💡 Matokeo ya Sura**: Sambaza na simamia suluhisho la AI la wakala wengi lililoko tayari kwa uzalishaji likiwa na mawakala wa Mteja na Hesabu
 
 ---
 
-### 🔍 Sura 6: Uthibitishaji & Mipango Kabla ya Uwekaji
-**Mahitaji ya awali**: Sura 4 imekamilika  
-**Muda**: 1 saa  
+### 🔍 Sura ya 6: Uthibitishaji na Mipango Kabla ya Ugawaji
+**Mahitaji**: Sura 4 imekamilika  
+**Muda**: Saa 1  
 **Ugumu**: ⭐⭐
 
 #### Utajifunza Nini
 - Mipango ya uwezo na uthibitishaji wa rasilimali
-- Mikakati ya uteuzi wa SKU
-- Ukaguzi wa kabla ya safari na uundaji wa otomatiki
+- Mikakati ya kuchagua SKU
+- Ukaguzi kabla ya kuanza na uendeshaji wa otomatiki
 
-#### Rasilimali za Kujifunzia
-- **📊 Mipango**: [Capacity Planning](docs/chapter-06-pre-deployment/capacity-planning.md) - Uthibitishaji wa rasilimali
-- **💰 Uteuzi**: [SKU Selection](docs/chapter-06-pre-deployment/sku-selection.md) - Chaguo za gharama nafuu
-- **✅ Uthibitishaji**: [Pre-flight Checks](docs/chapter-06-pre-deployment/preflight-checks.md) - Skripti za otomatiki
+#### Vyanzo vya Kujifunza
+- **📊 Mipango**: [Mipango ya Uwezo](docs/chapter-06-pre-deployment/capacity-planning.md) - Uthibitishaji wa rasilimali
+- **💰 Uchaguzi**: [Uchaguzi wa SKU](docs/chapter-06-pre-deployment/sku-selection.md) - Chaguo la gharama nafuu
+- **✅ Uthibitishaji**: [Ukaguzi wa Kabla ya Kuanzisha](docs/chapter-06-pre-deployment/preflight-checks.md) - Skripti zinazojitegemea
 
 #### Mazoezi ya Kivitendo
 - Endesha skripti za uthibitishaji wa uwezo
-- Boresha uteuzi wa SKU kwa gharama
-- Tekeleza ukaguzi wa otomatiki kabla ya uwekaji
+- Boresha uchaguzi wa SKU kulingana na gharama
+- Tekeleza ukaguzi wa otomatiki kabla ya ugawaji
 
-**💡 Matokeo ya Sura**: Thibitisha na boresha uwekezaji kabla ya utekelezaji
+**💡 Matokeo ya Sura**: Thibitisha na boresha ugawaji kabla ya utekelezaji
 
 ---
 
-### 🚨 Sura 7: Utatuzi Tatizo & Ufungaji Hitilafu
-**Mahitaji ya awali**: Sura yoyote ya uwekaji imekamilika  
-**Muda**: 1-1.5 saa  
+### 🚨 Sura ya 7: Utatuzi wa Matatizo na Urekebishaji
+**Mahitaji**: Sura yoyote ya ugawaji imekamilika  
+**Muda**: Saa 1-1.5  
 **Ugumu**: ⭐⭐
 
 #### Utajifunza Nini
-- Mbinu za kimfumo za utafutaji hitilafu
-- Masuala ya kawaida na suluhisho
-- Utatuzi wa matatizo maalum ya AI
+- Mbinu za urekebishaji wa kimfumo
+- Matatizo ya kawaida na suluhisho
+- Utatuzi maalum wa AI
 
-#### Rasilimali za Kujifunzia
-- **🔧 Masuala ya Kawaida**: [Common Issues](docs/chapter-07-troubleshooting/common-issues.md) - Maswali ya mara kwa mara na suluhisho
-- **🕵️ Ufungaji Hitilafu**: [Debugging Guide](docs/chapter-07-troubleshooting/debugging.md) - Mikakati hatua kwa hatua
-- **🤖 Masuala ya AI**: [AI-Specific Troubleshooting](docs/chapter-07-troubleshooting/ai-troubleshooting.md) - Matatizo ya huduma za AI
+#### Vyanzo vya Kujifunza
+- **🔧 Matatizo ya Kawaida**: [Matatizo ya Kawaida](docs/chapter-07-troubleshooting/common-issues.md) - Maswali yanayoulizwa mara kwa mara na suluhisho
+- **🕵️ Urekebishaji**: [Mwongozo wa Urekebishaji](docs/chapter-07-troubleshooting/debugging.md) - Mikakati hatua kwa hatua
+- **🤖 Matatizo ya AI**: [Utatuzi Maalum wa AI](docs/chapter-07-troubleshooting/ai-troubleshooting.md) - Matatizo ya huduma za AI
 
 #### Mazoezi ya Kivitendo
-- Tambua kushindwa kwa uwekaji
-- Rekebisha matatizo ya uthibitisho
-- Fufua muunganisho wa huduma za AI
+- Tambua makosa ya ugawaji
+- Rekebisha matatizo ya uthibitishaji
+- Rekebisha muunganisho wa huduma za AI
 
-**💡 Matokeo ya Sura**: Tafiti na utatatue kwa uhuru matatizo ya kawaida ya uwekaji
+**💡 Matokeo ya Sura**: Tambua na utatuzi matatizo ya kawaida ya ugawaji kwa uhuru
 
 ---
 
-### 🏢 Sura 8: Uzalishaji & Mifumo ya Shirika
-**Mahitaji ya awali**: Sura 1-4 zimekamilika  
-**Muda**: 2-3 saa  
+### 🏢 Sura ya 8: Mfumo wa Uzalishaji & Biashara
+**Mahitaji**: Sura 1-4 zimekamilika  
+**Muda**: Saa 2-3  
 **Ugumu**: ⭐⭐⭐⭐
 
 #### Utajifunza Nini
-- Mikakati ya uwekaji wa uzalishaji
-- Mifumo ya usalama ya shirika
-- Ufuatiliaji na uboreshaji wa gharama
+- Mikakati ya ugawaji wa uzalishaji
+- Mifumo ya usalama wa biashara
+- Ufuatiliaji na ubora wa gharama
 
-#### Rasilimali za Kujifunzia
-- **🏭 Uzalishaji**: [Production AI Best Practices](docs/chapter-08-production/production-ai-practices.md) - Mifumo ya shirika
-- **📝 Mifano**: [Microservices Example](../../examples/microservices) - Mifumo tata
-- **📊 Ufuatiliaji**: [Application Insights integration](docs/chapter-06-pre-deployment/application-insights.md) - Ufuatiliaji
+#### Vyanzo vya Kujifunza
+- **🏭 Uzalishaji**: [Mazingira Bora ya AI kwa Uzalishaji](docs/chapter-08-production/production-ai-practices.md) - Mifumo ya biashara
+- **📝 Mifano**: [Mfano wa Microservices](../../examples/microservices) - Mifumo tata
+- **📊 Ufuatiliaji**: [Ujumuishaji wa Insights za Programu](docs/chapter-06-pre-deployment/application-insights.md) - Ufuatiliaji
 
 #### Mazoezi ya Kivitendo
-- Tekeleza mifumo ya usalama ya shirika
-- Weka ufuatiliaji kamili
-- Wezesha uwekaji wa uzalishaji kwa udhibiti unaofaa
+- Tekeleza mifumo ya usalama wa biashara
+- Weka ufuatiliaji wa kina
+- Sambaza uzalishaji kwa utawala sahihi
 
-**💡 Matokeo ya Sura**: Weka programu zinazofaa kwa shirika zenye uwezo kamili wa uzalishaji
+**💡 Matokeo ya Sura**: Sambaza programu za biashara tayari kwa uzalishaji kwa uwezo kamili
 
 ---
 
 ## 🎓 Muhtasari wa Warsha: Uzoefu wa Kujifunza kwa Vitendo
 
-> **⚠️ HALI YA WARSHA: Inaendelezwa**  
-> Vifaa vya warsha vinaendelezwa na kuboreshwa kwa sasa. Moduli za msingi zinafanya kazi, lakini baadhi ya sehemu za juu hazijaokolewa. Tunaendelea kazi ili kukamilisha yote. [Fuata maendeleo →](workshop/README.md)
+> **⚠️ HALI YA WARSHA: Maendeleo Hai**  
+> Vifaa vya warsha vinaendelea kutengenezwa na kuboreshwa. Sehemu kuu za moduli zinafanya kazi, lakini baadhi ya sehemu za juu hazijakamilika. Tunaendelea kwa bidii kukamilisha maudhui yote. [Fuatilia maendeleo →](workshop/README.md)
 
-### Vifaa Vinavyoshirikiana vya Warsha
-**Uzoefu kamili wa kujifunza kwa vitendo kwa kutumia zana za kivinjari na mazoezi yaliyoongozwa**
+### Vifaa vya Warsha Vinavyoshirikiana
+**Kujifunza kwa vitendo kwa kina na vifaa vya kivinjari na mazoezi yaliyopangwa**
 
-Vifaa vya warsha vinatoa uzoefu wa kujifunza uliopangwa, wa kushirikiana unaoendana na mtaala wa sura zilizotajwa hapo juu. Warsha imeundwa kwa kujifunza kwa mwendo wako mwenyewe na pia kwa vikao vinavyoongozwa na mwalimu.
+Vifaa vyetu vya warsha vina uzoefu wa kujifunza uliobinafsishwa, unaoendana na mtaala wa sura zilizo juu. Warsha hii imejaribiwa kwa kujifunza kwa kasi binafsi na pia vikao vinavyoongozwa na mwalimu.
 
 #### 🛠️ Sifa za Warsha
-- **Kiolesura cha Kivinjari**: Warsha kamili yenye MkDocs yenye mfumo wa utafutaji, kunakili, na mandhari
-- **Uunganisho wa GitHub Codespaces**: Utekelezaji wa mazingira ya maendeleo kwa bonyeza moja
-- **Njia ya Kujifunza Iliyopangwa**: Mazoezi yaliyoongozwa katika moduli 8 (3-4 saa jumla)
-- **Mbinu Inayoendelea**: Utambulisho → Uteuzi → Uthibitishaji → Uvunjaji → Uundaji → Ubinafsishaji → Kuondoa → Muhtasari
-- **Mazingira ya DevContainer Yanayoshirikiana**: Zana na utegemezi vimepangwa kabla
+- **Kiolesura cha Kivinjari**: Warsha kamili iendwayo na MkDocs yenye utafutaji, kunakili, na mandhari
+- **Uunganishaji wa GitHub Codespaces**: Mazingira ya maendeleo ya bonyeza moja
+- **Njia ya Kujifunza Yaliyopangwa**: Mazoezi yaliyoongozwa ya moduli 8 (jumla ya saa 3-4)
+- **Mbinu Inayoendelea**: Utangulizi → Uchaguzi → Uthibitishaji → Uvunjaji → Usanidi → Kubinafsisha → Kufuata → Hitimisho
+- **Mazingira ya DevContainer yanayoshirikiana**: Zana na utegemezi uliowekwa awali
 
-#### 📚 Muundo wa Moduli za Warsha
-Warsha inafuata mbinu ya **moduli 8 inayozidi** inayokuchukua kutoka kugundua hadi utaalamu wa uwekaji:
+#### 📚 Muundo wa Moduli wa Warsha
+Warsha inafuata **mbinu ya maendeleo ya moduli 8** inayokupeleka kutoka kugundua hadi ustadi wa ugawaji:
 
-| Module | Topic | What You'll Do | Duration |
+| Moduli | Mada | Utafanya Nini | Muda |
 |--------|-------|----------------|----------|
-| **0. Introduction** | Workshop Overview | Understand learning objectives, prerequisites, and workshop structure | 15 dak |
-| **1. Selection** | Template Discovery | Explore AZD templates and select the right AI template for your scenario | 20 dak |
-| **2. Validation** | Deploy & Verify | Deploy the template with `azd up` and validate infrastructure works | 30 dak |
-| **3. Deconstruction** | Understand Structure | Use GitHub Copilot to explore template architecture, Bicep files, and code organization | 30 dak |
-| **4. Configuration** | azure.yaml Deep Dive | Master `azure.yaml` configuration, lifecycle hooks, and environment variables | 30 dak |
-| **5. Customization** | Make It Yours | Enable AI Search, tracing, evaluation, and customize for your scenario | 45 dak |
-| **6. Teardown** | Clean Up | Safely deprovision resources with `azd down --purge` | 15 dak |
-| **7. Wrap-up** | Next Steps | Review accomplishments, key concepts, and continue your learning journey | 15 dak |
+| **0. Utangulizi** | Muhtasari wa Warsha | Elewa malengo ya kujifunza, mahitaji, na muundo wa warsha | Dakika 15 |
+| **1. Uchaguzi** | Kugundua Kiolezo | Chunguza kiolezo cha AZD na chagua kiolezo sahihi cha AI kwa tukio lako | Dakika 20 |
+| **2. Uthibitishaji** | Sambaza & Thibitisha | Sambaza kiolezo kwa `azd up` na thibitisha mazingira yafanya kazi | Dakika 30 |
+| **3. Uvunjaji** | Elewa Muundo | Tumia GitHub Copilot kuchunguza usanifu wa kiolezo, faili za Bicep, na mpangilio wa msimbo | Dakika 30 |
+| **4. Usanidi** | Azure.yaml Kwa Undani | Jifunze usanidi wa `azure.yaml`, mizunguko ya maisha, na vigezo vya mazingira | Dakika 30 |
+| **5. Kubinafsisha** | Fanya Kuwa Yako | Wezesha AI Search, ufuatiliaji, tathmini, na ubinafsishe kwa tukio lako | Dakika 45 |
+| **6. Kufuata** | Safisha | Ondoa rasilimali kwa usalama kwa `azd down --purge` | Dakika 15 |
+| **7. Hitimisho** | Hatua Zifuatazo | Pitia mafanikio, dhana kuu, na endelea safari yako ya kujifunza | Dakika 15 |
 
-**Mtiririko wa Warsha:**
+**Mwendo wa Warsha:**
 ```
 Introduction → Selection → Validation → Deconstruction → Configuration → Customization → Teardown → Wrap-up
      ↓            ↓           ↓              ↓               ↓              ↓            ↓           ↓
@@ -615,12 +619,12 @@ Introduction → Selection → Validation → Deconstruction → Configuration �
              template                   structure                     scenario
 ```
 
-#### 🚀 Jinsi ya Kuanza na Warsha
+#### 🚀 Kuanzisha Warsha
 ```bash
 # Chaguo 1: GitHub Codespaces (Inapendekezwa)
-# Bonyeza "Code" → "Create codespace on main" katika hazina ya mradi
+# Bonyeza "Code" → "Create codespace on main" kwenye hazina
 
-# Chaguo 2: Maendeleo ya ndani
+# Chaguo 2: Maendeleo ya Ndani
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/workshop
 # Fuata maagizo ya usanidi katika workshop/README.md
@@ -628,159 +632,160 @@ cd azd-for-beginners/workshop
 
 #### 🎯 Matokeo ya Kujifunza ya Warsha
 Kwa kukamilisha warsha, washiriki wataweza:
-- **Weka Programu za AI za Uzalishaji**: Tumia AZD na huduma za Microsoft Foundry
-- **Tengeneza Mifumo ya Wakala Wengi**: Tekeleza suluhisho za wakala za AI zilizo na ushirikiano
-- **Tekeleza Mazoezi Bora ya Usalama**: Sanidi uthibitisho na udhibiti wa upatikanaji
-- **Boreshaji kwa Kiwango**: Buni uwekezaji wa gharama nafuu na wenye utendaji
-- **Tatua Matatizo ya Uwekaji**: Rekebisha matatizo ya kawaida kwa uhuru
+- **Sambaza Programu za AI za Uzalishaji**: Tumia AZD na huduma za Microsoft Foundry
+- **Tumia Mifumo ya Wakala Wengi**: Tekeleza suluhisho za mawakala wa AI zilizo ratibiwa
+- **Tekeleza Mazoezi Bora ya Usalama**: Sanidi uthibitishaji na udhibiti wa upatikanaji
+- **Boresha kwa Upanuzi**: Buni ugawaji wenye gharama nafuu na utendaji mzuri
+- **Tatua Matatizo ya Ugawaji**: Rekebisha matatizo ya kawaida kwa uhuru
 
-#### 📖 Rasilimali za Warsha
-- **🎥 Mwongozo wa Kuelimisha**: [Workshop Materials](workshop/README.md) - Mazingira ya kujifunzia kwa kivinjari
-- **📋 Maelekezo Moduli kwa Moduli**:
-  - [0. Introduction](workshop/docs/instructions/0-Introduction.md) - Muhtasari wa warsha na malengo
-  - [1. Selection](workshop/docs/instructions/1-Select-AI-Template.md) - Tafuta na chagua templeti za AI
-  - [2. Validation](workshop/docs/instructions/2-Validate-AI-Template.md) - Weka na thibitisha templeti
-  - [3. Deconstruction](workshop/docs/instructions/3-Deconstruct-AI-Template.md) - Chunguza usanifu wa templeti
-  - [4. Configuration](workshop/docs/instructions/4-Configure-AI-Template.md) - Mwelekeo wa azure.yaml
-  - [5. Customization](workshop/docs/instructions/5-Customize-AI-Template.md) - Binafsisha kwa tukio lako
-  - [6. Teardown](workshop/docs/instructions/6-Teardown-Infrastructure.md) - Safisha rasilimali
-  - [7. Wrap-up](workshop/docs/instructions/7-Wrap-up.md) - Pitia na hatua zinazofuata
-- **🛠️ Maabara ya Warsha ya AI**: [AI Workshop Lab](docs/chapter-02-ai-development/ai-workshop-lab.md) - Mazoezi yanayolenga AI
-- **💡 Mwanzilishi Haraka**: [Workshop Setup Guide](workshop/README.md#quick-start) - Usanidi wa mazingira
+#### 📖 Vyanzo vya Warsha
+- **🎥 Mwongozo wa Kushirikiana**: [Vifaa vya Warsha](workshop/README.md) - Mazingira ya kujifunza kwa kivinjari
+- **📋 Maelekezo kwa Moduli**
+  - [0. Utangulizi](workshop/docs/instructions/0-Introduction.md) - Muhtasari wa warsha na malengo
+  - [1. Uchaguzi](workshop/docs/instructions/1-Select-AI-Template.md) - Tafuta na chagua vilezo vya AI
+  - [2. Uthibitishaji](workshop/docs/instructions/2-Validate-AI-Template.md) - Sambaza na thibitisha vilezo
+  - [3. Uvunjaji](workshop/docs/instructions/3-Deconstruct-AI-Template.md) - Chunguza usanifu wa kiolezo
+  - [4. Usanidi](workshop/docs/instructions/4-Configure-AI-Template.md) - Jifunze azure.yaml
+  - [5. Kubinafsisha](workshop/docs/instructions/5-Customize-AI-Template.md) - Binafsisha kwa tukio lako
+  - [6. Kufuata](workshop/docs/instructions/6-Teardown-Infrastructure.md) - Safisha rasilimali
+  - [7. Hitimisho](workshop/docs/instructions/7-Wrap-up.md) - Pitia na hatua zifuatazo
+- **🛠️ Maabara ya Warsha ya AI**: [Maabara ya Warsha ya AI](docs/chapter-02-ai-development/ai-workshop-lab.md) - Mazoezi ya AI
+- **💡 Anza Haraka**: [Mwongozo wa Usanidi wa Warsha](workshop/README.md#quick-start) - Usanidi wa mazingira
 
-**Inafaa kwa**: Mafunzo ya kampuni, kozi za vyuo vikuu, kujifunza kwa mwendo wako mwenyewe, na bootcamps za watengenezaji.
-
----
-
-## 📖 Uchunguzi wa Kina: Uwezo wa AZD
-
-Zaidi ya msingi, AZD inatoa sifa zenye nguvu kwa uwekaji wa uzalishaji:
-
-- **Uwekaji kulingana na violezo** - Tumia violezo vilivyotengenezwa tayari kwa mifumo ya kawaida ya programu
-- **Miundombinu kama Msimbo** - Dhibiti rasilimali za Azure kwa kutumia Bicep au Terraform  
-- **Mtiririko ulioingiliana** - Weka, wekeza, na fuatilia programu bila mshikamano
-- **Rafiki kwa watengenezaji** - Imerekebishwa kwa uzalishaji wa tija na uzoefu wa mtengenezaji
-
-### **AZD + Microsoft Foundry: Inafaa kwa Uwekaji wa AI**
-
-**Kwa nini AZD kwa Suluhisho za AI?** AZD inashughulikia changamoto kuu zinazokabiliwa na watengenezaji wa AI:
-
-- **Violezo Tayari kwa AI** - Violezo vilivyopangwa awali kwa Microsoft Foundry Models, Azure AI Services, na mzigo wa kazi wa ML
-- **Uwekaji wa AI Ulio Salama** - Mifumo ya usalama iliyojengwa kwa huduma za AI, funguo za API, na viambatisho vya mifano  
-- **Mifumo ya AI kwa Uzalishaji** - Mazoezi bora kwa uwekeaji unaoweza kupanuka na gharama nafuu
-- **Mtiririko wa Kazi wa AI Kuanzia Mwisho hadi Mwisho** - Kutoka kwenye maendeleo ya modeli hadi uwekaji uzalishaji na ufuatiliaji unaofaa
-- **Ukaguzi wa Gharama** - Ugawaji wa rasilimali kwa busara na mikakati ya kupanua kwa mzigo wa AI
-- **Uunganisho wa Microsoft Foundry** - Muunganisho bila mshiko kwa katalogi ya modeli za Microsoft Foundry na viambatisho
+**Wanufaika Wanaofaa**: Mafunzo ya kampuni, kozi za vyuo vikuu, kujifunza kwa mwendo binafsi, na bootcamps za waendelezaji.
 
 ---
 
-## 🎯 Maktaba ya Violezo & Mifano
+## 📖 Binadamu kwa Kina: Uwezo wa AZD
 
-### Iliyotajwa: Violezo za Microsoft Foundry
-**Anza hapa ukiacha ikiwa unaweka programu za AI!**
+Zaidi ya mambo ya msingi, AZD hutoa sifa zenye nguvu kwa ugawaji wa uzalishaji:
 
-> **Kumbuka:** Violezo hivi vinaonyesha mifumo mbalimbali ya AI. Baadhi ni Azure Samples za nje, wengine ni utekelezaji wa ndani.
+- **Ugawaji unaotegemea kiolezo** - Tumia vialezo vilivyotengenezwa kwa mifumo ya kawaida ya programu
+- **Miundombinu kama Msimbo** - Simamia rasilimali za Azure kwa kutumia Bicep au Terraform  
+- **Mtiririko wa kazi uliounganishwa** - Sambaza, andaa, na fuatilia programu bila kizuizi
+- **Rahisi kwa waendelezaji** - Imekusudiwa kuongeza ufanisi na uzoefu wa waendelezaji
 
-| Template | Chapter | Complexity | Services | Type |
+### **AZD + Microsoft Foundry: Bora kwa Ugawaji wa AI**
+
+**Kwa Nini AZD kwa Suluhisho za AI?** AZD inashughulikia changamoto kuu zinazowakabili waendelezaji wa AI:
+
+- **Vialezo Tayari kwa AI** - Vialezo vilivyosanidiwa kwa Microsoft Foundry Models, Azure AI Services, na mzigo wa ML
+- **Ugawaji Salama wa AI** - Mifumo ya usalama kwa huduma za AI, funguo za API, na sehemu za mfano  
+- **Mifumo ya AI kwa Uzalishaji** - Mazoezi bora kwa ugawaji wa programu za AI zinazoweza kupanuka na gharama nafuu
+- **Mtiririko wa kazi wa AI kuanzia Mwanzo hadi Mwisho** - Kuanzia maendeleo ya mfano hadi ugawaji wa uzalishaji kwa ufuatiliaji sahihi
+- **Boresha Gharama** - Mikakati ya kugawanya rasilimali kwa ufanisi na upanuzi wa mzigo wa AI
+- **Uunganisho na Microsoft Foundry** - Muunganisho mzuri na katalo ya mfano na sehemu za Microsoft Foundry
+
+---
+
+## 🎯 Maktaba ya Vialezo na Mifano
+
+### Maarufu: Vialezo vya Microsoft Foundry
+**Anza hapa ikiwa unasambaza programu za AI!**
+
+> **Kumbuka:** Vialezi hivi vinaonyesha mifumo mbalimbali ya AI. Baadhi ni Mifano ya Azure ya nje, mengine ni utekelezaji wa ndani.
+
+| Kiolezo | Sura | Ugumu | Huduma | Aina |
 |----------|---------|------------|----------|------|
-| [**Get started with AI chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Chapter 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights | Nje |
-| [**Get started with AI agents**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Chapter 2 | ⭐⭐ | Foundry Agents + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights| Nje |
-| [**Azure Search + OpenAI Demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Chapter 2 | ⭐⭐ | AzureOpenAI + Azure AI Search + App Service + Storage | Nje |
-| [**OpenAI Chat App Quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chapter 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | Nje |
-| [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Chapter 5 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | Nje |
-| [**Contoso Chat RAG**](https://github.com/Azure-Samples/contoso-chat) | Chapter 8 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Cosmos DB + Container Apps | Nje |
-| [**Retail Multi-Agent Solution**](examples/retail-scenario.md) | Chapter 5 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Storage + Container Apps + Cosmos DB | **Ndani** |
+| [**Anza na mazungumzo ya AI**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Sura 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights | Nje |
+| [**Anza na mawakala wa AI**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Sura 2 | ⭐⭐ | Foundry Agents + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights| Nje |
+| [**Onyesho la Azure Search + OpenAI**](https://github.com/Azure-Samples/azure-search-openai-demo) | Sura 2 | ⭐⭐ | AzureOpenAI + Azure AI Search + App Service + Storage | Nje |
+| [**Anza Haraka na App ya Mazungumzo ya OpenAI**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Sura 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | Nje |
+| [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Sura 5 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | Nje |
+| [**Contoso Chat RAG**](https://github.com/Azure-Samples/contoso-chat) | Sura 8 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Cosmos DB + Container Apps | Nje |
+| [**Suluhisho la Wakala Wengi Rejareja**](examples/retail-scenario.md) | Sura 5 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Storage + Container Apps + Cosmos DB | **Ndani** |
 
-### Iliyotajwa: Mifano Kamili ya Kujifunzia
-**Violezo vya programu vinavyostahili uzalishaji vinavyopangwa kulingana na sura za kujifunzia**
+### Maarufu: Mifano Kamili ya Kujifunza
+**Vialezo vya programu tayari kwa uzalishaji vilivyoambatanishwa na sura za kujifunza**
 
-| Template | Learning Chapter | Complexity | Key Learning |
+| Kiolezo | Sura ya Kujifunza | Ugumu | Jifunze Muhimu |
 |----------|------------------|------------|--------------|
-| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chapter 2 | ⭐ | Basic AI deployment patterns |
-| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Chapter 2 | ⭐⭐ | RAG implementation with Azure AI Search |
-| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Chapter 4 | ⭐⭐ | Document Intelligence integration |
-| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Chapter 5 | ⭐⭐⭐ | Agent framework and function calling |
-| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Chapter 8 | ⭐⭐⭐ | Enterprise AI orchestration |
-| [**retail-multi-agent-solution**](examples/retail-scenario.md) | Chapter 5 | ⭐⭐⭐⭐ | Multi-agent architecture with Customer and Inventory agents |
+| [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Sura 2 | ⭐ | Mifumo ya msingi ya ugawaji wa AI |
+| [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Sura 2 | ⭐⭐ | Utekelezaji wa RAG kwa kutumia Azure AI Search |
+| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Sura 4 | ⭐⭐ | Ujumuishaji wa Akili ya Hati |
+| [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Sura 5 | ⭐⭐⭐ | Mfumo wa wakala na mwito wa kazi |
+| [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Sura 8 | ⭐⭐⭐ | Uratibu wa AI wa biashara |
+| [**retail-multi-agent-solution**](examples/retail-scenario.md) | Sura 5 | ⭐⭐⭐⭐ | Usanifu wa wakala wengi na mawakala wa Mteja na Hesabu |
 
-### Kujifunza kwa Aina ya Mfano
+### Kujifunza Kwa Aina ya Mfano
 
 > **📌 Mifano ya Ndani dhidi ya Nje:**  
-> **Mifano ya Ndani** (katika repo hii) = Tayari kutumika mara moja  
-> **Mifano ya Nje** (Azure Samples) = Nakili kutoka kwa repo zilizo na viungo
+> **Mifano ya Ndani** (katika hifadhidata hii) = Tayari kutumika mara moja  
+> **Mifano ya Nje** (Mifano ya Azure) = Nakili kutoka kwa hifadhidata zilizounganishwa
 
 #### Mifano ya Ndani (Tayari Kutumika)
-- [**Retail Multi-Agent Solution**](examples/retail-scenario.md) - Utekelezaji kamili tayari kwa uzalishaji na violezo vya ARM
-  - Usanifu wa wakala wengi (Mteja + Wakala wa Hisa)
-  - Ufuatiliaji na tathmini kamili
-  - Uwekaji kwa bonyeza moja kupitia templeti ya ARM
+- [**Suluhisho la Wakala Wengi Rejareja**](examples/retail-scenario.md) - Utekelezaji kamili tayari kwa uzalishaji na vialezo vya ARM
+  - Usanifu wa wakala wengi (Mteja + mawakala Hesabu)
+  - Ufuatiliaji na tathmini ya kina
+  - Ugawaji kwa bonyeza moja kupitia kiolezo cha ARM
 
-#### Mifano ya Ndani - Maombi ya Kontena (Sura 2-5)
-**Mifano kamili ya uwekaji wa kontena katika repo hii:**
-- [**Mifano ya Container App**](examples/container-app/README.md) - Mwongozo kamili kwa utoaji wa programu kwa kutumia container
-  - [Simple Flask API](../../examples/container-app/simple-flask-api) - API ya msingi ya REST yenye uwezo wa kupungua hadi sifuri (scale-to-zero)
-  - [Miundombinu ya Microservices](../../examples/container-app/microservices) - Utoaji wa huduma nyingi tayari kwa uzalishaji
-  - Mwanzoni kwa Haraka, Uzalishaji, na mifumo ya utoaji ya juu
-  - Ufuatiliaji, usalama, na mwongozo wa uboreshaji wa gharama
+#### Mifano ya Ndani - Programu za Kontena (Sura 2-5)
+**Mifano kamili ya ugawaji wa kontena katika hifadhidata hii:**
+
+- [**Mifano ya Programu za Kontena**](examples/container-app/README.md) - Mwongozo kamili wa usambazaji wa kontena
+  - [API Rahisi ya Flask](../../examples/container-app/simple-flask-api) - REST API ya msingi yenye upanuzi hadi sifuri
+  - [Miundo ya Huduma Ndogo](../../examples/container-app/microservices) - Usambazaji wa huduma nyingi tayari kwa uzalishaji
+  - Mifumo ya Anza Haraka, Uzalishaji, na Usambazaji wa Juu
+  - Mwongozo wa usimamizi, usalama, na uboreshaji wa gharama
 
 #### Mifano ya Nje - Programu Rahisi (Sura 1-2)
-**Fanya clone ya hazina hizi za Azure Samples ili kuanza:**
-- [Programu ya Wavuti Rahisi - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - Mifumo ya msingi ya utoaji
-- [Tovuti ya Statiki - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - Utoaji wa maudhui ya statiki
-- [Programu ya Container - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - Utoaji wa API ya REST
+**Nakili hizi hazina za sampuli za Azure kuanza:**
+- [Programu Rahisi ya Wavuti - Node.js + MongoDB](https://github.com/Azure-Samples/todo-nodejs-mongo) - Mifumo ya usambazaji ya msingi
+- [Tovuti Isiyobadilika - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - Usambazaji wa maudhui isiyobadilika
+- [Programu ya Kontena - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - Usambazaji wa REST API
 
 #### Mifano ya Nje - Uunganishaji wa Hifadhidata (Sura 3-4)  
-- [Programu ya Hifadhidata - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - Mifumo ya muunganisho wa hifadhidata
-- [Functions + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - Mtiririko wa data usio na seva
+- [Programu ya Hifadhidata - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - Mifumo ya uunganishaji wa hifadhidata
+- [Fakazi + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - Mtiririko wa data usio na seva
 
 #### Mifano ya Nje - Mifumo ya Juu (Sura 4-8)
 - [Microservices za Java](https://github.com/Azure-Samples/java-microservices-aca-lab) - Miundo ya huduma nyingi
-- [Kazi za Container Apps](https://github.com/Azure-Samples/container-apps-jobs) - Usindikaji wa nyuma  
-- [Mlolongo wa ML wa Kampuni](https://github.com/Azure-Samples/mlops-v2) - Mifumo ya ML tayari kwa uzalishaji
+- [Kazi za Programu za Kontena](https://github.com/Azure-Samples/container-apps-jobs) - Usindikaji wa nyuma  
+- [Mlolongo wa ML wa Biashara](https://github.com/Azure-Samples/mlops-v2) - Mifumo ya ML tayari kwa uzalishaji
 
-### Mkusanyiko wa Mifano za Nje
-- [**Jukwaa Rasmi la Mifano za AZD**](https://azure.github.io/awesome-azd/) - Mkusanyiko ulioratibiwa wa mifano rasmi na ya jamii
-- [**Mifano za Azure Developer CLI**](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates) - Nyaraka za Microsoft Learn kuhusu mifano
-- [**Katalogi ya Mifano**](examples/README.md) - Mifano ya kujifunzia ya ndani yenye maelezo ya kina
+### Mikutano ya Mifano ya Nje
+- [**Nyumba ya Mifumo Rasmi ya AZD**](https://azure.github.io/awesome-azd/) - Mkusanyiko uliosafirishwa wa mifumo rasmi na ya jamii
+- [**Mifumo ya Azure Developer CLI**](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates) - Nyaraka za mifumo za Microsoft Learn
+- [**Sarifu za Mifano**](examples/README.md) - Mifano ya ndani ya kujifunza na maelezo ya kina
 
 ---
 
-## 📚 Rasilimali za Kujifunza na Marejeo
+## 📚 Rasilimali za Kujifunza & Marejeleo
 
-### Marejeo ya Haraka
-- [**Muhtasari wa Amri**](resources/cheat-sheet.md) - Amri muhimu za azd zilizoandaliwa kwa sura
-- [**Kamusi**](resources/glossary.md) - Istilahi za Azure na azd  
+### Marejeleo ya Haraka
+- [**Kadi ya Amri**](resources/cheat-sheet.md) - Amri muhimu za azd zilizoandaliwa kwa sura
+- [**Kamusi**](resources/glossary.md) - Midadi na maneno ya Azure na azd  
 - [**Maswali Yanayoulizwa Mara kwa Mara**](resources/faq.md) - Maswali ya kawaida yaliyopangwa kwa sura za kujifunza
-- [**Mwongozo wa Masomo**](resources/study-guide.md) - Mazoezi kamili ya vitendo
+- [**Mwongozo wa Somo**](resources/study-guide.md) - Mazoezi kamili ya mazoezi
 
-### Warsha za Vitendo
-- [**Maabara ya Warsha ya AI**](docs/chapter-02-ai-development/ai-workshop-lab.md) - Fanya suluhisho zako za AI ziweze kupelekwa na AZD (2-3 saa)
-- [**Warsha ya Kihusishi**](workshop/README.md) - Mazoezi ya moduli 8 yaliyoongozwa na MkDocs na GitHub Codespaces
-  - Inafuata: Utangulizi → Uchaguzi → Uthibitisho → Uchambuzi → Usanidi → Ubinafsishaji → Uondoshaji → Hitimisho
+### Warsha za Mikono
+- [**Warsha ya AI**](docs/chapter-02-ai-development/ai-workshop-lab.md) - Fanya suluhisho zako za AI ziweze kusambazwa kwa AZD (saa 2-3)
+- [**Warsha ya Kueleweka**](workshop/README.md) - Mazoezi ya moduli 8 yaliyopangwa na MkDocs na GitHub Codespaces
+  - Inafuata: Utangulizi → Uteuzi → Uthibitishaji → Uvunjaji → Mipangilio → Ubadilishaji → Kufunga → Hitimisho
 
-### Rasilimali za Kujifunza za Nje
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
-- [Azure Status](https://status.azure.com/)
+### Rasilimali za Kujifunza Nje
+- [Nyaraka za Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Kituo cha Miundo ya Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Kipimo cha Bei Azure](https://azure.microsoft.com/pricing/calculator/)
+- [Hali ya Azure](https://status.azure.com/)
 
-### Ujuzi wa Wakala wa AI kwa Mhariri Wako
-- [**Ujuzi za Microsoft Azure kwenye skills.sh**](https://skills.sh/microsoft/github-copilot-for-azure) - Ujuzi 37 za wakala zilizoungwa wazi kwa Azure AI, Foundry, utoaji, uchunguzi, uboreshaji wa gharama, na zaidi. Zisakinishe kwenye GitHub Copilot, Cursor, Claude Code, au wakala yeyote unaoungwa mkono:
+### Ujuzi wa Maajenti wa AI kwa Mhariri Wako
+- [**Ujuzi wa Microsoft Azure kwenye skills.sh**](https://skills.sh/microsoft/github-copilot-for-azure) - Ujuzi 37 wa maajenti wazi kwa AI ya Azure, Foundry, usambazaji, utambuzi, uboreshaji wa gharama, na zaidi. Weka kwenye GitHub Copilot, Cursor, Claude Code, au maajenti yanayoungwa mkono:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
 
 ---
 
-## 🔧 Mwongozo Mfupi wa Utatuzi wa Matatizo
+## 🔧 Mwongozo wa Haraka wa Ufumbuzi wa Matatizo
 
-**Matatizo ya kawaida ambayo wanaoanza hukutana nayo na suluhisho za haraka:**
+**Masuala ya kawaida yanayokumbwa na wanaoanza na suluhisho za papo hapo:**
 
 <details>
-<summary><strong>❌ "azd: command not found"</strong></summary>
+<summary><strong>❌ "azd: amri haijapatikana"</strong></summary>
 
 ```bash
-# Sakinisha AZD kwanza
+# Weka AZD kwanza
 # Windows (PowerShell):
 winget install microsoft.azd
 
@@ -796,10 +801,10 @@ azd version
 </details>
 
 <details>
-<summary><strong>❌ "No subscription found" or "Subscription not set"</strong></summary>
+<summary><strong>❌ "Hakuna usajili ulioonekana" au "Usajili haujawekwa"</strong></summary>
 
 ```bash
-# Orodhesha usajili yanayopatikana
+# Orodha ya usajili uliopo
 az account list --output table
 
 # Weka usajili wa chaguo-msingi
@@ -814,10 +819,10 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ "InsufficientQuota" or "Quota exceeded"</strong></summary>
+<summary><strong>❌ "InsufficientQuota" au "Kiasi kimezidi"</strong></summary>
 
 ```bash
-# Jaribu mkoa tofauti wa Azure
+# Jaribu eneo tofauti la Azure
 azd env set AZURE_LOCATION "westus2"
 azd up
 
@@ -830,10 +835,10 @@ azd up
 </details>
 
 <details>
-<summary><strong>❌ "azd up" fails halfway through</strong></summary>
+<summary><strong>❌ "azd up" imeshindwa katikati</strong></summary>
 
 ```bash
-# Chaguo 1: Safisha na ujaribu tena
+# Chaguo 1: Safisha na jaribu tena
 azd down --force --purge
 azd up
 
@@ -843,20 +848,20 @@ azd provision
 # Chaguo 3: Angalia hali ya kina
 azd show
 
-# Chaguo 4: Angalia rejista katika Azure Monitor
+# Chaguo 4: Angalia kumbukumbu katika Azure Monitor
 azd monitor --logs
 ```
 </details>
 
 <details>
-<summary><strong>❌ "Authentication failed" or "Token expired"</strong></summary>
+<summary><strong>❌ "Uthibitishaji umeshindikana" au "Msimbo umezama"</strong></summary>
 
 ```bash
-# Thibitisha upya kwa AZD
+# Thibitisha upya kwa ajili ya AZD
 azd auth logout
 azd auth login
 
-# Hiari: fanya upya Azure CLI pia ikiwa unaendesha amri za az
+# Hiari: fanyia upya Azure CLI pia ikiwa unatumia amri za az
 az logout
 az login
 
@@ -866,10 +871,10 @@ az account show
 </details>
 
 <details>
-<summary><strong>❌ "Resource already exists" or naming conflicts</strong></summary>
+<summary><strong>❌ "Rasilimali tayari ipo" au migongano ya majina</strong></summary>
 
 ```bash
-# AZD inazalisha majina ya kipekee, lakini ikiwa kuna mgongano:
+# AZD hutengeneza majina ya kipekee, lakini ikiwa kuna mgongano:
 azd down --force --purge
 
 # Kisha jaribu tena kwa mazingira mapya
@@ -879,181 +884,182 @@ azd up
 </details>
 
 <details>
-<summary><strong>❌ Template deployment taking too long</strong></summary>
+<summary><strong>❌ Usambazaji wa mfumo unachukua muda mwingi</strong></summary>
 
-**Muda wa kawaida wa kusubiri:**
-- Programu ya wavuti rahisi: 5-10 dakika
-- Programu yenye hifadhidata: 10-15 dakika
-- Programu za AI: 15-25 dakika (Utoaji wa OpenAI ni polepole)
+**Muda wa kawaida wa kungojea:**
+- Programu rahisi ya wavuti: dakika 5-10
+- Programu na hifadhidata: dakika 10-15
+- Programu za AI: dakika 15-25 (Utoaji wa OpenAI ni polepole)
 
 ```bash
 # Angalia maendeleo
 azd show
 
-# Ikiwa umekwama kwa zaidi ya dakika 30, angalia Azure Portal:
+# Ikiwa umekwama >30 dakika, angalia Azure Portal:
 azd monitor --overview
-# Tafuta utekelezaji ulioshindwa
+# Tafuta usambazaji ulioishindwa
 ```
 </details>
 
 <details>
-<summary><strong>❌ "Permission denied" or "Forbidden"</strong></summary>
+<summary><strong>❌ "Ruhusa imekataliwa" au "Imezuiwa"</strong></summary>
 
 ```bash
-# Angalia jukumu lako la Azure
+# Angalia nafasi yako ya Azure
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# Unahitaji angalau jukumu la "Contributor"
-# Omba msimamizi wako wa Azure atoe:
-# - Contributor (kwa rasilimali)
-# - User Access Administrator (kwa ugawaji wa majukumu)
+# Unahitaji angalau nafasi ya "Mchangiaji"
+# Muombe msimamizi wako wa Azure kutoa:
+# - Mchangiaji (kwa rasilimali)
+# - Msimamizi wa Upatikanaji wa Mtumiaji (kwa upangaji wa nafasi)
 ```
 </details>
 
 <details>
-<summary><strong>❌ Can't find deployed application URL</strong></summary>
+<summary><strong>❌ Haiwezi kupata URL ya programu iliyosambazwa</strong></summary>
 
 ```bash
-# Onyesha miisho yote ya huduma
+# Onyesha sehemu zote za huduma
 azd show
 
-# Au fungua Portal ya Azure
+# Au fungua Azure Portal
 azd monitor
 
 # Angalia huduma maalum
 azd env get-values
-# Tafuta vigezo vya *_URL
+# Tafuta vigezo *_URL
 ```
 </details>
 
-### 📚 Rasilimali Kamili za Utatuzi wa Matatizo
+### 📚 Rasilimali Kamili za Ufumbuzi wa Matatizo
 
-- **Mwongozo wa Masuala ya Kawaida:** [Suluhisho Zaidi](docs/chapter-07-troubleshooting/common-issues.md)
-- **Masuala Maalum ya AI:** [Utatuzi wa AI](docs/chapter-07-troubleshooting/ai-troubleshooting.md)
-- **Mwongozo wa Kupima Hitilafu:** [Kupima Hitilafu Hatua kwa Hatua](docs/chapter-07-troubleshooting/debugging.md)
+- **Mwongozo wa Masuala ya Kawaida:** [Suluhisho za Kina](docs/chapter-07-troubleshooting/common-issues.md)
+- **Masuala Maalum ya AI:** [Ufumbuzi wa Matatizo ya AI](docs/chapter-07-troubleshooting/ai-troubleshooting.md)
+- **Mwongozo wa Kuchunguza:** [Kuchunguza Hatua kwa Hatua](docs/chapter-07-troubleshooting/debugging.md)
 - **Pata Msaada:** [Discord ya Azure](https://discord.gg/microsoft-azure) #azure-developer-cli
 
 ---
 
-## 🎓 Kukamilisha Kozi & Cheti
+## 🎓 Kumaliza Kozi & Cheti
 
 ### Ufuatiliaji wa Maendeleo
 Fuata maendeleo yako ya kujifunza kupitia kila sura:
 
-- [ ] **Sura 1**: Msingi & Mwanzo wa Haraka ✅
+- [ ] **Sura 1**: Msingi & Anza Haraka ✅
 - [ ] **Sura 2**: Maendeleo ya AI-Kwanza ✅  
-- [ ] **Sura 3**: Usanidi & Uthibitishaji ✅
-- [ ] **Sura 4**: Miundombinu kama Msimbo & Utoaji ✅
-- [ ] **Sura 5**: Suluhisho za AI za Mawakala Wengi ✅
-- [ ] **Sura 6**: Uthibitishaji na Mipango Kabla ya Utoaji ✅
-- [ ] **Sura 7**: Utatuzi wa Matatizo & Kupima Hitilafu ✅
-- [ ] **Sura 8**: Mifumo ya Uzalishaji & Kampuni ✅
+- [ ] **Sura 3**: Mipangilio & Uthibitishaji ✅
+- [ ] **Sura 4**: Miundombinu kama Kanuni & Usambazaji ✅
+- [ ] **Sura 5**: Suluhisho za Maajenti Wengi wa AI ✅
+- [ ] **Sura 6**: Uthibitishaji wa Kabla ya Usambazaji & Mipango ✅
+- [ ] **Sura 7**: Ufumbuzi wa Matatizo & Kuchunguza ✅
+- [ ] **Sura 8**: Miundo ya Uzalishaji & Biashara ✅
 
-### Uhakiki wa Kujifunza
-Baada ya kukamilisha kila sura, thibitisha maarifa yako kwa:
-1. **Mazoezi ya Vitendo**: Kamilisha utekelezaji wa vitendo wa sura
-2. **Ukaguzi wa Maarifa**: Pitia sehemu ya Maswali Yanayoulizwa Mara kwa Mara kwa sura yako
-3. **Majadiliano ya Jamii**: Sambaza uzoefu wako kwenye Discord ya Azure
+### Uthibitisho wa Kujifunza
+Baada ya kumaliza kila sura, hakiki maarifa yako kwa:
+1. **Mazoezi ya Kivitendo**: Kamilisha usambazaji wa mikono wa sura
+2. **Mtihani wa Maarifa**: Pitia sehemu ya Maswali Yanayoulizwa Mara kwa Mara ya sura yako
+3. **Majadiliano ya Jamii**: Shiriki uzoefu wako katika Discord ya Azure
 4. **Sura Ifuatayo**: Hamia kwenye ngazi inayofuata ya ugumu
 
-### Manufaa ya Kukamilisha Kozi
-Baada ya kukamilisha sura zote, utakuwa na:
-- **Uzoefu wa Uzalishaji**: Umeweka programu halisi za AI kwenye Azure
-- **Ujuzi wa Kitaalamu**: Uwezo wa utoaji kwa kiwango cha kampuni  
-- **Utambuzi wa Jamii**: Mwanachama hai wa jamii ya watengenezaji wa Azure
-- **Maendeleo ya Kazi**: Ustadi unaotakikana wa AZD na utoaji wa AI
+### Manufaa ya Kumaliza Kozi
+Ukimaliza sura zote, utakuwa na:
+- **Uzoefu wa Uzalishaji**: Programu halisi za AI zilizowekwa kwenye Azure
+- **Ujuzi wa Kitaalamu**: Uwezo wa usambazaji tayari kwa biashara  
+- **Kutambuliwa na Jamii**: Mwanachama hai wa jamii ya waendelezaji wa Azure
+- **Kuendeleza Kazi**: Ujuzi unaohitajika wa usambazaji wa AZD na AI
 
 ---
 
 ## 🤝 Jamii & Msaada
 
-### Pata Msaada & Usaidizi
-- **Masuala ya Kiufundi**: [Ripoti mende na omba vipengele vipya](https://github.com/microsoft/azd-for-beginners/issues)
-- **Maswali ya Kujifunza**: [Jumuiya ya Discord ya Microsoft Azure](https://discord.gg/microsoft-azure) na [![Discord ya Microsoft Foundry](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
-- **Msaada Maalum wa AI**: Jiunge na [![Discord ya Microsoft Foundry](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+### Pata Msaada & Msaada
+- **Matatizo ya Kiufundi**: [Ripoti mende na omba vipengele](https://github.com/microsoft/azd-for-beginners/issues)
+- **Maswali ya Kujifunza**: [Jamii ya Discord ya Microsoft Azure](https://discord.gg/microsoft-azure) na [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+- **Msaada Maalum wa AI**: Jiunge na [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 - **Nyaraka**: [Nyaraka Rasmi za Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 
-### Maarifa ya Jamii kutoka Discord ya Microsoft Foundry
+### Maarifa ya Jamii kutoka Microsoft Foundry Discord
 
-**Matokeo ya Kura za Karibuni kutoka Kituo #Azure:**
-- **45%** ya watengenezaji wanataka kutumia AZD kwa kazi za AI
-- **Changamoto kuu**: Utoaji wa huduma nyingi, usimamizi wa vyeti, utayari kwa uzalishaji  
-- **Zilizohitajiwa zaidi**: Mifano maalum ya AI, mwongozo wa utatuzi wa matatizo, mbinu bora
+**Matokeo ya Kura ya hivi karibuni kutoka #Azure Channel:**
+- **45%** ya waendelezaji wanataka kutumia AZD kwa mzigo wa AI
+- **Changamoto kuu**: Usambazaji wa huduma nyingi, usimamizi wa cheti, maandalizi ya uzalishaji  
+- **Yaliyotakiwa zaidi**: Mifumo maalum ya AI, miongozo ya ufumbuzi wa matatizo, mbinu bora
 
 **Jiunge na jamii yetu ili:**
-- Shirikisha uzoefu wako wa AZD + AI na upate msaada
-- Pata muhtasari wa awali wa mifano mpya ya AI
-- Changia katika mbinu bora za utoaji wa AI
-- Kuathiri maendeleo ya vipengele vya AI + AZD vijavyo
+- Shiriki uzoefu wako wa AZD + AI na pata msaada
+- Pata mapokezi ya mapema ya mifumo mipya ya AI
+- Changia mbinu bora za usambazaji wa AI
+- Kuathiri maendeleo ya sifa za AI + AZD zijazo
 
-### Kuchangia kwenye Kozi
-Tunakaribisha michango! Tafadhali soma [Mwongozo wa Kuchangia](CONTRIBUTING.md) kwa maelezo juu ya:
-- **Marekebisho ya Yaliyomo**: Boreshaji sura na mifano iliyopo
-- **Mifano Mpya**: Ongeza matukio ya ulimwengu halisi na mifano  
+### Kuchangia Kozi
+Tunakaribisha michango! Tafadhali soma [Mwongozo wa Michango](CONTRIBUTING.md) kwa maelezo kuhusu:
+- **Uboreshaji wa Maudhui**: Boreshaji wa sura na mifano iliyopo
+- **Mifano Mpya**: Ongeza matukio halisi na mifumo  
 - **Tafsiri**: Saidia kudumisha msaada wa lugha nyingi
 - **Ripoti za Mende**: Boresha usahihi na uwazi
-- **Vigezo vya Jamii**: Fuata miongozo yetu ya jamii jumuishi
+- **Viwango vya Jamii**: Fuata miongozo yetu jumuishi ya jamii
 
 ---
 
 ## 📄 Taarifa za Kozi
 
 ### Leseni
-Mradi huu umepewa leseni chini ya Leseni ya MIT - angalia faili ya [LICENSE](../../LICENSE) kwa maelezo.
+Mradi huu umeidhinishwa chini ya Leseni ya MIT - tazama faili la [LICENSE](../../LICENSE) kwa maelezo.
 
-### Rasilimali Zinazohusiana za Kujifunza za Microsoft
+### Rasilimali za Kujifunza Zinazohusiana na Microsoft
 
-Timu yetu inatengeneza kozi nyingine za kina za kujifunza:
+Timu yetu hutoa kozi zingine kamili za kujifunza:
 
 <!-- CO-OP TRANSLATOR OTHER COURSES START -->
 ### LangChain
-[![LangChain4j kwa Waanzilishi](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)
-[![LangChain.js kwa Waanzilishi](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)
-[![LangChain kwa Waanzilishi](https://img.shields.io/badge/LangChain%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://github.com/microsoft/langchain-for-beginners?WT.mc_id=m365-94501-dwahlin)
+[![LangChain4j kwa Waanziaji](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)
+[![LangChain.js kwa Waanziaji](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)
+[![LangChain kwa Waanziaji](https://img.shields.io/badge/LangChain%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://github.com/microsoft/langchain-for-beginners?WT.mc_id=m365-94501-dwahlin)
 ---
 
-### Azure / Edge / MCP / Mawakala
-[![AZD kwa Waanzilishi](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![Edge AI kwa Waanzilishi](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![MCP kwa Waanzilishi](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![Mawakala wa AI kwa Waanzilishi](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
-
----
- 
-### Generative AI Series
-[![Generative AI kwa Waanzilishi](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![Generative AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
-[![Generative AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
-[![AI Inayozalisha (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
+### Azure / Edge / MCP / Maajenti
+[![AZD kwa Waanziaji](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Edge AI kwa Waanziaji](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![MCP kwa Waanziaji](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Maajenti wa AI kwa Waanziaji](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
 
 ---
  
-### Mafunzo ya Msingi
-[![ML kwa Waanzilishi](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
-[![Sayansi ya Takwimu kwa Waanzilishi](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
-[![AI kwa Waanzilishi](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
-[![Usalama wa Mtandao kwa Waanzilishi](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
-[![Utengenezaji wa Wavuti kwa Waanzilishi](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
-[![IoT kwa Waanzilishi](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
-[![Maendeleo ya XR kwa Waanzilishi](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
+### Mfululizo wa AI Zaizozalisha
+[![AI Zaizozalisha kwa Waanziaji](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI Zaizozalisha (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
+[![AI Zaizozalisha (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+
+[![Generative AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
+
+---
+ 
+### Kujifunza Msingi
+[![ML for Beginners](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
+[![Data Science for Beginners](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI for Beginners](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
+[![Cybersecurity for Beginners](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
+[![Web Dev for Beginners](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+[![IoT for Beginners](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
+[![XR Development for Beginners](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
 
 ---
  
 ### Mfululizo wa Copilot
-[![Copilot kwa Kuprogramu Pamoja na AI](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
-[![Copilot kwa C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
-[![Adventure ya Copilot](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+[![Copilot for AI Paired Programming](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+[![Copilot for C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
+[![Copilot Adventure](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
 <!-- CO-OP TRANSLATOR OTHER COURSES END -->
 
 ---
 
-## 🗺️ Mwongozo wa Kozi
+## 🗺️ Uelekezaji wa Kozi
 
-**🚀 Tayari kuanza kujifunza?**
+**🚀 Tayari Kuanzia Kujifunza?**
 
-**Waanzilishi**: Anza na [Sura 1: Msingi & Mwanzoni kwa Haraka](#-chapter-1-foundation--quick-start)  
-**Waendelezaji wa AI**: Nenda kwenye [Sura 2: Maendeleo ya AI-Kwanza](#-chapter-2-ai-first-development-recommended-for-ai-developers)  
-**Waendelezaji Wenye Uzoefu**: Anza na [Sura 3: Usanidi & Uthibitishaji](#️-chapter-3-configuration--authentication)
+**Waanzilishi**: Anza na [Sura ya 1: Msingi na Anza Haraka](#-chapter-1-foundation--quick-start)  
+**Waendelezaji AI**: Ruka hadi [Sura ya 2: Maendeleo ya AI Kwanza](#-chapter-2-ai-first-development-recommended-for-ai-developers)  
+**Waendelezaji Wenye Uzoefu**: Anza na [Sura ya 3: Usanidi na Uthibitishaji](#️-chapter-3-configuration--authentication)
 
 **Hatua Zifuatazo**: [Anza Sura 1 - Misingi ya AZD](docs/chapter-01-foundation/azd-basics.md) →
 

@@ -1,21 +1,21 @@
 # Kabanata 6: Pagpaplano at Pagpapatunay Bago ang Pag-deploy
 
-**📚 Kurso**: [AZD Para sa Mga Nagsisimula](../../README.md) | **⏱️ Tagal**: 1 oras | **⭐ Antas ng Kahirapan**: Katamtaman
+**📚 Kurso**: [AZD Para sa mga Nagsisimula](../../README.md) | **⏱️ Tagal**: 1 oras | **⭐ Antas ng Kahirapan**: Gitna
 
 ---
 
-## Pangkalahatang-ideya
+## Pangkalahatang Ideya
 
-Saklaw ng kabanatang ito ang mahahalagang hakbang sa pagpaplano at pagpapatunay bago i-deploy ang iyong aplikasyon. Matutunan kung paano iwasan ang magastos na pagkakamali sa pamamagitan ng tamang pagpaplano ng kapasidad, pagpili ng SKU, at mga preflight check.
+Tinutukoy sa kabanatang ito ang mahahalagang hakbang sa pagpaplano at pagpapatunay bago i-deploy ang iyong aplikasyon. Matutong iwasan ang magastos na mga pagkakamali sa tamang pagpaplano ng kapasidad, pagpili ng SKU, at mga preflight check.
 
-> Napatunayan laban sa `azd 1.25.6` noong Hunyo 2026.
+> Na-validate gamit ang `azd 1.27.1` noong Hulyo 2026.
 
 ## Mga Layunin sa Pagkatuto
 
 Sa pagtatapos ng kabanatang ito, magagawa mo:
-- Patakbuhin ang mga preflight check bago ang pag-deploy
-- Magplano ng kapasidad at magtantya ng pangangailangan ng mga resources
-- Pumili ng angkop na SKUs para sa pag-optimize ng gastos
+- Magsagawa ng preflight checks bago ang deployment
+- Magplano ng kapasidad at tantiyahin ang pangangailangan sa mga resources
+- Piliin ang angkop na mga SKU para sa optimal na gastos
 - I-configure ang Application Insights para sa monitoring
 - Maunawaan ang mga pattern ng koordinasyon ng koponan
 
@@ -25,48 +25,48 @@ Sa pagtatapos ng kabanatang ito, magagawa mo:
 
 | # | Aralin | Paglalarawan | Oras |
 |---|--------|-------------|------|
-| 1 | [Mga Preflight Check](preflight-checks.md) | Suriin ang konfigurasyon bago i-deploy | 15 min |
-| 2 | [Pagpaplano ng Kapasidad](capacity-planning.md) | Tantyahin ang pangangailangan ng mga resources | 20 min |
-| 3 | [Pagpili ng SKU](sku-selection.md) | Pumili ng angkop na pricing tiers | 15 min |
+| 1 | [Preflight Checks](preflight-checks.md) | Patunayan ang configuration bago mag-deploy | 15 min |
+| 2 | [Capacity Planning](capacity-planning.md) | Tantiyahin ang pangangailangan sa mga resources | 20 min |
+| 3 | [SKU Selection](sku-selection.md) | Piliin ang angkop na pricing tiers | 15 min |
 | 4 | [Application Insights](application-insights.md) | I-configure ang monitoring | 20 min |
-| 5 | [Mga Pattern ng Koordinasyon](coordination-patterns.md) | Mga workflow ng pag-deploy ng koponan | 15 min |
+| 5 | [Coordination Patterns](coordination-patterns.md) | Mga workflow ng koponan sa deployment | 15 min |
 
 ---
 
-## 🚀 Mabilis na Panimula
+## 🚀 Mabilisang Panimula
 
 ```bash
 # Suriin ang mga quota ng subscription
 az vm list-usage --location eastus --output table
 
-# I-preview ang deployment (walang nilikhang resources)
+# Tingnan ang deployment (walang likhaang resources)
 azd provision --preview
 
-# Suriin ang syntax ng Bicep
+# Patunayan ang syntax ng Bicep
 az bicep build --file infra/main.bicep
 
-# Suriin ang konfigurasyon ng kapaligiran
+# Suriin ang configuration ng kapaligiran
 azd env get-values
 ```
 
 ---
 
-## ☑️ Pre-Deployment Checklist
+## ☑️ Checklist Bago ang Deployment
 
 ### Bago ang `azd provision`
 
-- [ ] Na-verify ang quota para sa rehiyon
-- [ ] Angkop na napiling SKUs
-- [ ] Nasuri ang pagtataya ng gastos
-- [ ] Pare-pareho ang konbensiyon ng pagbibigay ng pangalan
-- [ ] Nakakonpigura ang Seguridad/RBAC
+- [ ] Kwarto ng quota para sa rehiyon beripikado
+- [ ] Mga SKU napili ng wasto
+- [ ] Tinatayang gastos nirepaso
+- [ ] Konsistent ang naming convention
+- [ ] Na-configure ang Seguridad/RBAC
 
 ### Bago ang `azd deploy`
 
-- [ ] Nakatakda ang mga environment variable
-- [ ] Mga secret na nasa Key Vault
-- [ ] Napatunayan ang mga connection string
-- [ ] Nakakonpigura ang health checks
+- [ ] Naitakda ang mga environment variables
+- [ ] Lihim sa Key Vault
+- [ ] Mga connection string na-verify
+- [ ] Na-configure ang health checks
 
 ---
 
@@ -76,25 +76,25 @@ azd env get-values
 |----------|-------------|------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standard | Standard + PTU |
+| Mga Modelo ng Microsoft Foundry | Standard | Standard + PTU |
 | AI Search | Basic | Standard S2+ |
 
 ---
 
-## 🔗 Navigasyon
+## 🔗 Pag-navigate
 
 | Direksyon | Kabanata |
 |-----------|---------|
-| **Nakaraan** | [Kabanata 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
-| **Susunod** | [Kabanata 7: Paglutas ng Mga Suliranin](../chapter-07-troubleshooting/README.md) |
+| **Nauna** | [Kabanata 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
+| **Susunod** | [Kabanata 7: Pag-troubleshoot](../chapter-07-troubleshooting/README.md) |
 
 ---
 
-## 📖 Kaugnay na Mga Mapagkukunan
+## 📖 Kaugnay na mga Sanggunian
 
-- [Gabay sa Konfigurasyon](../chapter-03-configuration/configuration.md)
-- [Gabay sa Pag-deploy](../chapter-04-infrastructure/deployment-guide.md)
-- [Mga Karaniwang Isyu](../chapter-07-troubleshooting/common-issues.md)
+- [Gabay sa Configuration](../chapter-03-configuration/configuration.md)
+- [Gabay sa Deployment](../chapter-04-infrastructure/deployment-guide.md)
+- [Karaniwang Isyu](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

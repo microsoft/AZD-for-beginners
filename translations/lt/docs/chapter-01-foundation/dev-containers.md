@@ -1,48 +1,48 @@
-# Dev konteineriai ir GitHub Codespaces skirti azd
+# Dev konteineriai ir GitHub Codespaces azd
 
-**Skyriaus naršymas:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
-- **⬅️ Previous**: [Bring Your Own App](bring-your-own-app.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/README.md)
+**Skyriaus navigacija:**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 1 skyrius - Pagrindai ir greitas pradėjimas
+- **⬅️ Ankstesnis**: [Atsinešk savo programą](bring-your-own-app.md)
+- **🚀 Kitas skyrius**: [2 skyrius: AI-pirmoji plėtra](../chapter-02-ai-development/README.md)
 
-> Patikrinta su `azd 1.25.6` 2026 m. birželį.
+> Patikrinta su `azd 1.27.1` 2026 m. liepą.
 
 ## Įvadas
 
-Įdiegti azd, tinkamą programavimo kalbos vykdymo aplinką, Docker ir Azure CLI kiekviename kompiuteryje yra varginantis darbas — ir tai yra pagrindinė priežastis, dėl kurios pamoka, kuri „veikia mano mašinoje“, gali neveikti pas kažką kito. Dev konteineris tai išsprendžia aprašydamas visą jūsų įrankių grandinę faile. Kiekvienas, kuris atidaro projektą VS Code arba GitHub Codespaces, gauna lygiai tokį patį aplinką, su jau įdiegtu azd. Ši pamoka parodo, kaip tokį pridėti.
+Įdiegti azd, tinkamą kalbos vykdymo aplinką, Docker ir Azure CLI kiekviename kompiuteryje yra varginantis darbas – ir tai pagrindinė priežastis, kodėl pamoka, „veikianti mano kompiuteryje“, neveikia kažkam kitam. **Dev konteineris** tai išsprendžia aprašydamas visą įrankių grandinę faile. Kiekvienas, atidaręs projektą VS Code arba GitHub Codespaces, gauna exact tą patį aplinką su jau įdiegtu azd. Ši pamoka parodo, kaip pridėti tokį konteinerį.
 
 ## Mokymosi tikslai
 
-Baigę šią pamoką jūs:
-- Suprasite, kas yra dev konteineris ir kodėl jis padeda su azd
+Šios pamokos pabaigoje jūs:
+- Suprasite, kas yra dev konteineris ir kodėl jis padeda naudojant azd
 - Pridėsite minimalų `.devcontainer/devcontainer.json` prie projekto
-- Įtrauksite azd, Azure CLI ir Docker per Dev Container *funkcijas*
-- Atidarysite projektą GitHub Codespaces arba VS Code
+- Įtrauksite azd, Azure CLI ir Docker per Dev Container *features*
+- Atidarysite projektą GitHub Codespaces arba VS Code aplinkoje
 
-## Mokymosi rezultatai
+## Išmokimo rezultatai
 
-Atlikę šią pamoką galėsite:
+Baigę šią pamoką galėsite:
 - Parašyti `devcontainer.json` azd projektui
-- Pridėti azd ir Azure įrankius be rankinių diegimų
-- Vykdyti `azd up` iš konteinerio arba Codespace
+- Pridėti azd ir Azure įrankius be rankinio diegimo
+- Vykdyti `azd up` konteinerio arba Codespace viduje
 
 ---
 
 ## Kas yra dev konteineris?
 
-Dev konteineris yra Docker pagrindu sukurta vystymo aplinka, apibrėžta `.devcontainer/devcontainer.json` faile jūsų saugykloje. Kai atidarote projektą:
+Dev konteineris yra Docker pagrindu sukurta vystymo aplinka, aprašyta `.devcontainer/devcontainer.json` faile jūsų repozitorijoje. Atidarius projektą:
 
 - **VS Code** (su Dev Containers plėtiniu) sukuria konteinerį ir prisijungia prie jo.
-- **GitHub Codespaces** sukuria tą patį konteinerį debesyje ir suteikia naršyklėje veikiantį redaktorių.
+- **GitHub Codespaces** sukuria tą patį konteinerį debesyje ir suteikia naršyklėje veikiančią redagavimo aplinką.
 
-Bet kuriuo atveju kiekvienas prisidėjusysis gauna identiškus įrankius — be „ar įdiegėte azd?“ aiškinimosi.
+Bet kuriuo atveju kiekvienas bendradarbis gauna identiškus įrankius — nebereikia klausinėti „ar įdiegėte azd?“.
 
 ```mermaid
 graph LR
-    Repo[Jūsų saugykla<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Dev konteineriai]
+    Repo[Jūsų saugykla<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Kūrimo konteineriai]
     Repo --> Codespaces[GitHub<br/>Codespaces]
-    VSCode --> Env[Identiška aplinka:<br/>azd + az + Docker]
+    VSCode --> Env[Identical environment:<br/>azd + az + Docker]
     Codespaces --> Env
 ```
 
@@ -50,7 +50,7 @@ graph LR
 
 ## 1 žingsnis: Sukurkite devcontainer failą
 
-Sukurkite `.devcontainer/devcontainer.json` jūsų projekto šaknyje:
+Sukurkite `.devcontainer/devcontainer.json` savo projekto šaknyje:
 
 ```json
 {
@@ -77,21 +77,21 @@ Sukurkite `.devcontainer/devcontainer.json` jūsų projekto šaknyje:
 
 Ką daro kiekviena dalis:
 
-| Key | Purpose |
+| Raktas | Paskirtis |
 |-----|---------|
-| `image` | Bazinė operacinė sistema konteineriui |
-| `features` | Iš anksto paruošti diegimo moduliai — čia: Azure CLI, **azd**, Docker ir Node.js |
+| `image` | Pagrindinė OS konteineriui |
+| `features` | Iš anksto paruošti diegėjai — čia: Azure CLI, **azd**, Docker ir Node.js |
 | `customizations.vscode.extensions` | Automatiškai įdiegia azd ir Bicep VS Code plėtinius |
-| `forwardPorts` | Atskleidžia jūsų programos prievadą naršyklei |
-| `postCreateCommand` | Vykdomas vieną kartą po konteinerio sukūrimo (čia, patikrinimas) |
+| `forwardPorts` | Atskleidžia jūsų programos prievadą naršyklėje |
+| `postCreateCommand` | Vykdoma kartą sukūrus konteinerį (čia – patikrinimas) |
 
-> `ghcr.io/azure/azure-dev/azd:latest` funkcija yra oficialus būdas gauti azd konteineryje. Jei reikia atkuriamumo, nurodykite konkretų versijos žymeklį (pavyzdžiui `azd:1.25.6`).
+> `ghcr.io/azure/azure-dev/azd:latest` funkcija yra oficialus būdas gauti azd konteineryje. Jei reikia atkuriamumo, nurodykite konkrečią versiją (pvz., `azd:1.27.1`).
 
 ---
 
-## 2 žingsnis: Suderinkite funkciją su jūsų programos kalba
+## 2 žingsnis: Parinkite funkciją pagal jūsų programos kalbą
 
-Pakeiskite `node` funkciją į tą, kuria naudojasi jūsų programa:
+Pakeiskite `node` funkciją į tą, kurią naudoja jūsų programa:
 
 ```jsonc
 // Python project
@@ -107,71 +107,71 @@ Pakeiskite `node` funkciją į tą, kuria naudojasi jūsų programa:
 "ghcr.io/devcontainers/features/go:1": {}
 ```
 
-Palikite `docker-in-docker`, jei jūsų `host` yra `containerapp`, `aks` arba bet kas, kas kuria konteinerio vaizdą — azd reikia Docker, kad statytų ir įkeltų vaizdus.
+Palikite `docker-in-docker`, jei jūsų `host` yra `containerapp`, `aks`, ar bet kas, kas stato konteinerio vaizdą — azd reikia Docker vaizdų kūrimui ir leidimui.
 
 ---
 
 ## 3 žingsnis: Atidarykite jį
 
 **VS Code:**
-1. Įdiekite plėtinį **Dev Containers**.
+1. Įdiekite **Dev Containers** plėtinį.
 2. Atidarykite projekto aplanką.
-3. Spustelėkite **Reopen in Container** kai bus prašoma (arba paleiskite *Dev Containers: Reopen in Container*).
+3. Paspauskite **Reopen in Container** kai paklaus, arba paleiskite *Dev Containers: Reopen in Container* komandą.
 
 **GitHub Codespaces:**
-1. Išstumkite repo į GitHub.
-2. Spustelėkite **Code → Codespaces → Create codespace on main**.
-3. Palaukite, kol konteineris bus sukurtas — azd bus paruoštas terminale.
+1. Įkelkite repozitoriją į GitHub.
+2. Paspauskite **Code → Codespaces → Create codespace on main**.
+3. Palaukite, kol bus sukurtas konteineris – azd bus paruoštas terminale.
 
 ---
 
-## 4 žingsnis: Diegti iš konteinerio
+## 4 žingsnis: Diegimas iš konteinerio viduje
 
-Konteineryje azd jau būna įdiegtas, todėl įprasta eiga tiesiog veikia:
+Konteineryje jau įdiegtas azd, tad įprastas darbas vyksta paprastai:
 
 ```bash
-azd auth login --use-device-code   # Įrenginio kodas yra naudingas Codespaces aplinkoje
+azd auth login --use-device-code   # įrenginio kodas yra patogus Codespaces viduje
 azd up
 ```
 
-> **Kodėl `--use-device-code`?** Nuotoliniame konteineryje arba Codespace nėra vietinio naršyklės, į kurią būtų galima peradresuoti, todėl device-code prisijungimas yra patikimiausias kelias. Jūs įklijuosite kodą į naršyklės skirtuką, kad užbaigtumėte prisijungimą.
+> **Kodėl `--use-device-code`?** Nuotoliniame konteineryje ar Codespace nėra vietinio naršyklės, į kurią būtų galima nukreipti, todėl device-code autentifikacija yra patikimiausia. Jūs įklijuosite kodą į naršyklės kortelę, kad užbaigtumėte prisijungimą.
 
 ---
 
 ## Dažnos problemos
 
-| Pitfall | Fix |
-|---------|-----|
-| `azd up` can't build an image | Pridėkite `docker-in-docker` funkciją |
-| Browser login hangs in Codespaces | Naudokite `azd auth login --use-device-code` |
-| Tools differ between teammates | Užfiksuokite funkcijų versijas (pvz. `azd:1.25.6`) |
-| App not reachable in browser | Pridėkite prievadą į `forwardPorts` |
+| Problema | Sprendimas |
+|---------|-----------|
+| `azd up` negali sukurti vaizdo | Pridėkite `docker-in-docker` funkciją |
+| Naršyklės prisijungimas stringa Codespaces | Naudokite `azd auth login --use-device-code` |
+| Įrankiai skiriasi tarp komandų narių | Užrakinkite funkcijų versijas (pvz., `azd:1.27.1`) |
+| Programa nepasiekiama naršyklėje | Pridėkite prievadą prie `forwardPorts` |
 
 ---
 
 ## Santrauka
 
-- Dev konteineris daro jūsų azd įrankių grandinę atkuriamą visiems.
-- Pridėkite azd, Azure CLI ir Docker per Dev Container *funkcijas*.
-- Suderinkite kalbos funkciją su savo programa ir palikite `docker-in-docker` konteinerių talpinimui.
+- Dev konteineris leidžia visiems turėti atkuriamą azd įrankių grandinę.
+- Pridėkite azd, Azure CLI ir Docker per Dev Container *features*.
+- Suderinkite kalbos funkciją su programa ir išlaikykite `docker-in-docker` konteinerių šeimininkams.
 - Naudokite device-code prisijungimą, kai veikiate Codespaces.
 
 ---
 
 ## 🔗 Navigacija
 
-| Direction | Resource |
-|-----------|----------|
-| **Previous** | [Bring Your Own App](bring-your-own-app.md) |
-| **Chapter Home** | [Chapter 1: Foundation & Quick Start](README.md) |
-| **Next Chapter** | [Chapter 2: AI-First Development](../chapter-02-ai-development/README.md) |
+| Kryptis | Šaltinis |
+|--------|----------|
+| **Ankstesnis** | [Atsinešk savo programą](bring-your-own-app.md) |
+| **Skyriaus pradžia** | [1 skyrius: Pagrindai ir greitas pradėjimas](README.md) |
+| **Kitas skyrius** | [2 skyrius: AI-pirmoji plėtra](../chapter-02-ai-development/README.md) |
 
 ## 📖 Susiję ištekliai
 
-- [Installation & Setup](installation.md)
-- [Command Cheat Sheet](../../resources/cheat-sheet.md)
-- [Oficiali Dev Containers specifikacija](https://containers.dev/)
-- [azd Dev Container feature](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
+- [Įdiegimas ir nustatymas](installation.md)
+- [Komandų atmintinė](../../resources/cheat-sheet.md)
+- [Oficialūs Dev Containers specifikacija](https://containers.dev/)
+- [azd Dev Container funkcija](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
 
 ---
 

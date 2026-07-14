@@ -1,14 +1,14 @@
-# Kapitel 4: Infrastructure as Code & Bereitstellung
+# Kapitel 4: Infrastruktur als Code & Bereitstellung
 
-**📚 Kurs**: [AZD für Einsteiger](../../README.md) | **⏱️ Dauer**: 1–1,5 Stunden | **⭐ Komplexität**: Mittel
+**📚 Kurs**: [AZD Für Anfänger](../../README.md) | **⏱️ Dauer**: 1-1,5 Stunden | **⭐ Komplexität**: Mittelstufe
 
 ---
 
 ## Überblick
 
-Dieses Kapitel behandelt Infrastructure as Code (IaC)-Muster mit Bicep-Vorlagen, die Bereitstellung von Ressourcen und Bereitstellungsstrategien mit der Azure Developer CLI.
+Dieses Kapitel behandelt Muster für Infrastruktur als Code (IaC) mit Bicep-Vorlagen, Ressourcenbereitstellung und Bereitstellungsstrategien mithilfe der Azure Developer CLI.
 
-> Validiert gegen `azd 1.25.6` im Juni 2026.
+> Validiert mit `azd 1.27.1` im Juli 2026.
 
 ## Lernziele
 
@@ -16,27 +16,27 @@ Nach Abschluss dieses Kapitels werden Sie:
 - Die Struktur und Syntax von Bicep-Vorlagen verstehen
 - Azure-Ressourcen mit `azd provision` bereitstellen
 - Anwendungen mit `azd deploy` bereitstellen
-- Blue-Green- und Rolling-Bereitstellungsstrategien implementieren
+- Blue-Green- und Rolling-Deployment-Strategien umsetzen
 
 ---
 
 ## 📚 Lektionen
 
-| # | Lektion | Beschreibung | Dauer |
+| # | Lektion | Beschreibung | Zeit |
 |---|--------|-------------|------|
 | 1 | [Ressourcen bereitstellen](provisioning.md) | Azure-Ressourcenverwaltung mit AZD | 45 Min |
 | 2 | [Bereitstellungsanleitung](deployment-guide.md) | Strategien zur Anwendungsbereitstellung | 45 Min |
-| 3 | [Eigene Vorlage erstellen](custom-templates.md) | Erstellen und Veröffentlichen wiederverwendbarer azd-Vorlagen | 30 Min |
+| 3 | [Eigenes Template erstellen](custom-templates.md) | Wiederverwendbare azd-Vorlagen erstellen und veröffentlichen | 30 Min |
 
 ---
 
-## 🚀 Schnellstart
+## 🚀 Schneller Einstieg
 
 ```bash
-# Aus Vorlage initialisieren
+# Vom Template initialisieren
 azd init --template azure-functions-python-v2-http
 
-# Vorschau, was erstellt wird
+# Vorschau dessen, was erstellt wird
 azd provision --preview
 
 # Nur Infrastruktur bereitstellen
@@ -91,9 +91,9 @@ my-project/
 
 ## 📖 Verwandte Ressourcen
 
-- [Checks vor der Bereitstellung](../chapter-06-pre-deployment/README.md)
-- [Container-App-Beispiele](../../examples/container-app/README.md)
-- [Datenbank-App-Beispiel](../../examples/database-app/README.md)
+- [Pre-Deployment Checks](../chapter-06-pre-deployment/README.md)
+- [Container App Beispiele](../../examples/container-app/README.md)
+- [Datenbank-App Beispiel](../../examples/database-app/README.md)
 
 ---
 

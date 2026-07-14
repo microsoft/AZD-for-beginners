@@ -1,77 +1,77 @@
 # ورشة عمل AZD لمطوري الذكاء الاصطناعي
 
-> تم التحقق باستخدام `azd 1.25.6` في يونيو 2026.
+> تم التحقق من صحتها مقابل `azd 1.27.1` في يوليو 2026.
 
 > [!IMPORTANT]  
-> **تم تجهيز هذه الورشة بدليل يمكنك معاينته في متصفحك المحلي. للبدء، افتح المستودع في GitHub Codespaces، أو في حاوية تطوير، أو استنساخ محلي مع تثبيت MkDocs—ثم انتظر حتى ترى طرفية VS Code نشطة واكتب:**  
+> **تم تجهيز هذه الورشة بدليل ورشة عمل يمكنك معاينته في متصفحك المحلي. للبدء، افتح المستودع في GitHub Codespaces أو حاوية تطوير أو نسخة محلية مع تثبيت MkDocs — ثم انتظر حتى ترى محطة VS Code نشطة واكتب:**  
 > `mkdocs serve > /dev/null 2>&1 &`  
-> **يجب أن ترى مربع حوار منبثق لفتح صفحة المعاينة في متصفح.**
+> **يجب أن ترى مربع حوار منبثق لفتح صفحة المعاينة في المتصفح.**
 
-مرحبًا بك في ورشة العمل العملية لتعلّم Azure Developer CLI (AZD) مع التركيز على نشر تطبيقات الذكاء الاصطناعي. تساعدك هذه الورشة على اكتساب فهم عملي لنماذج AZD في 3 خطوات:
+مرحبًا بك في ورشة العمل العملية لتعلم Azure Developer CLI (AZD) مع التركيز على نشر تطبيقات الذكاء الاصطناعي. تساعدك هذه الورشة على اكتساب فهم تطبيقي لقوالب AZD في 3 خطوات:
 
-1. **الاكتشاف** - العثور على القالب المناسب لك.
-1. **النشر** - نشر والتحقق من أنه يعمل
-1. **التخصيص** - التعديل والتكرار لجعله ملكًا لك!
+1. **الاكتشاف** - ابحث عن القالب المناسب لك.
+1. **النشر** - انشر وتحقق من أنه يعمل
+1. **التخصيص** - عدّل وكرر لجعله خاصًا بك!
 
-خلال هذه الورشة، سيتم تعريفك أيضًا على أدوات وممارسات العمل الأساسية للمطورين، لمساعدتك في تبسيط رحلتك التطويرية من البداية إلى النهاية.
+على مدار هذه الورشة، ستتم أيضًا مقدمًا على أدوات وعمليات تطوير أساسية، لمساعدتك على تبسيط رحلة التطوير من البداية للنهاية.
 
 | | | 
 |:---|:---|
 | **📚 الصفحة الرئيسية للدورة**| [AZD للمبتدئين](../README.md)|
-| **📖 الوثائق** | [البدء مع قوالب الذكاء الاصطناعي](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️قوالب AI** | [قوالب Microsoft Foundry](https://ai.azure.com/templates) |
-|**🚀 الخطوات التالية** | [شارك في التحدي](#workshop-challenge) |
+| **📖 الوثائق** | [بدء الاستخدام مع قوالب الذكاء الاصطناعي](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️ قوالب الذكاء الاصطناعي** | [قوالب Microsoft Foundry](https://ai.azure.com/templates) |
+|**🚀 الخطوات التالية** | [خوض التحدي](#workshop-challenge) |
 | | |
 
-## نظرة عامة على الورشة
+## نظرة عامة على ورشة العمل
 
 **المدة:** 3-4 ساعات  
-**المستوى:** من المبتدئ إلى المتوسط  
-**المتطلبات المسبقة:** الإلمام بـ Azure ومفاهيم الذكاء الاصطناعي و VS Code وأدوات سطر الأوامر.
+**المستوى:** مبتدئ إلى متوسط  
+**المتطلبات المسبقة:** الإلمام بـ Azure، مفاهيم الذكاء الاصطناعي، VS Code وأدوات سطر الأوامر.
 
-هذه ورشة عملية تتعلم فيها بالممارسة. بمجرد إكمال التمارين، نوصي بمراجعة منهج AZD للمبتدئين لمواصلة رحلتك التعليمية نحو ممارسات الأمن والإنتاجية الأمثل.
+هذه ورشة عمل عملية حيث تتعلم بالممارسة. بمجرد إكمال التمارين، نوصي بمراجعة منهجية AZD للمبتدئين لمتابعة رحلتك التعليمية نحو أفضل ممارسات الأمان والإنتاجية.
 
-| Time| Module  | Objective |
+| الوقت| الوحدة  | الهدف |
 |:---|:---|:---|
-| 15 mins | Introduction | Set the stage, understand the goals |
-| 30 mins | Select AI Template | Explore options and pick starter | 
-| 30 mins | Validate AI Template | Deploy default solution to Azure |
-| 30 mins | Deconstruct AI Template | Explore structure and configuration |
-| 30 mins | Configure AI Template | Activate and try available features |
-| 30 mins | Customize AI Template | Adapt the template to your needs |
-| 30 mins | Teardown Infrastructure | Cleanup and release resources |
-| 15 mins | Wrap-Up & Next Steps | Learning resources, Workshop challenge |
+| 15 دقيقة | مقدمة | تمهيد السياق، فهم الأهداف |
+| 30 دقيقة | اختيار قالب الذكاء الاصطناعي | استكشاف الخيارات واختيار النموذج الابتدائي | 
+| 30 دقيقة | التحقق من قالب الذكاء الاصطناعي | نشر الحل الافتراضي على Azure |
+| 30 دقيقة | تفكيك قالب الذكاء الاصطناعي | استكشاف الهيكل والتكوين |
+| 30 دقيقة | تكوين قالب الذكاء الاصطناعي | تفعيل وتجربة الميزات المتوفرة |
+| 30 دقيقة | تخصيص قالب الذكاء الاصطناعي | تكييف القالب مع احتياجاتك |
+| 30 دقيقة | تفكيك البنية التحتية | تنظيف وإطلاق الموارد |
+| 15 دقيقة | الخاتمة والخطوات التالية | موارد التعلم، تحدي الورشة |
 | | |
 
 ## ما ستتعلمه
 
-فكر في قالب AZD كصندوق رمل تعليمي لاستكشاف القدرات والأدوات المختلفة للتطوير من البداية إلى النهاية على Microsoft Foundry. بنهاية هذه الورشة، يجب أن تكون لديك إحساس حدسي بمختلف الأدوات والمفاهيم في هذا السياق.
+فكر في قالب AZD كحقل تجارب تعلم لاستكشاف إمكانيات وأدوات متنوعة للتطوير الشامل على Microsoft Foundry. بنهاية هذه الورشة، يجب أن تمتلك إحساسًا حدسيًا لمختلف الأدوات والمفاهيم في هذا السياق.
 
-| Concept  | Objective |
+| المفهوم  | الهدف |
 |:---|:---|
-| **Azure Developer CLI** | Understand tool commands and workflows|
-| **AZD Templates**| Understand project structure and config|
-| **Azure AI Agent**| Provision & deploy Microsoft Foundry project  |
-| **Azure AI Search**| Enable context engineering with agents |
-| **Observability**| Explore tracing, monitoring and evaluations |
-| **Red Teaming**| Explore adversarial testing and mitigations |
+| **Azure Developer CLI** | فهم أوامر الأدوات وعمليات العمل|
+| **قوالب AZD**| فهم هيكل المشروع والتكوين|
+| **وكيل Azure AI**| تجهيز ونشر مشروع Microsoft Foundry  |
+| **بحث Azure AI**| تمكين هندسة السياق مع الوكلاء |
+| **المراقبة**| استكشاف التتبع، المراقبة والتقييمات |
+| **الفريق الأحمر**| استكشاف الاختبارات العدائية والتدابير الوقائية |
 | | |
 
-## وحدات الورشة
+## وحدات ورشة العمل
 
-هل أنت مستعد للبدء؟ تنقل عبر وحدات الورشة:
+جاهز للبدء؟ تنقل عبر وحدات ورشة العمل:
 
-- [الوحدة 1: اختيار قالب AI](instructions/1-Select-AI-Template.md)
-- [الوحدة 2: التحقق من قالب AI](instructions/2-Validate-AI-Template.md) 
-- [الوحدة 3: تفكيك قالب AI](instructions/3-Deconstruct-AI-Template.md)
-- [الوحدة 4: تهيئة قالب AI](instructions/4-Configure-AI-Template.md)
-- [الوحدة 5: تخصيص قالب AI](instructions/5-Customize-AI-Template.md)
-- [الوحدة 6: تفكيك البنية التحتية وإزالتها](instructions/6-Teardown-Infrastructure.md)
+- [الوحدة 1: اختيار قالب الذكاء الاصطناعي](instructions/1-Select-AI-Template.md)
+- [الوحدة 2: التحقق من قالب الذكاء الاصطناعي](instructions/2-Validate-AI-Template.md) 
+- [الوحدة 3: تفكيك قالب الذكاء الاصطناعي](instructions/3-Deconstruct-AI-Template.md)
+- [الوحدة 4: تكوين قالب الذكاء الاصطناعي](instructions/4-Configure-AI-Template.md)
+- [الوحدة 5: تخصيص قالب الذكاء الاصطناعي](instructions/5-Customize-AI-Template.md)
+- [الوحدة 6: تفكيك البنية التحتية](instructions/6-Teardown-Infrastructure.md)
 - [الوحدة 7: الخاتمة والخطوات التالية](instructions/7-Wrap-up.md)
 
 ## هل لديك ملاحظات؟
 
-انشر مشكلة في هذا المستودع (وسمها بـ `Workshop`) أو انضم إلينا على [Discord](https://aka.ms/foundry/discord) وانشر في قناة `#get-help`
+قم بنشر مشكلة في هذا المستودع (ضع لها الوسم `Workshop`) أو انضم إلينا على [Discord](https://aka.ms/foundry/discord) وانشر في قناة `#get-help`
 
 ---
 

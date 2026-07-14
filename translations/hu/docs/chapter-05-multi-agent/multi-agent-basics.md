@@ -1,200 +1,200 @@
-# Multi-Agent Basics - Telepítsd az első koordinált AI rendszeredet
+# Többügynökös Alapok - Helyezze üzembe első koordinált MI rendszerét
 
-**Chapter Navigation:**
-- **📚 Tanfolyam főoldal**: [AZD For Beginners](../../README.md)
-- **📖 Aktuális fejezet**: Chapter 5 - Multi-Agent AI Solutions
-- **⬅️ Előző**: [Chapter 4: Infrastructure](../chapter-04-infrastructure/README.md)
-- **➡️ Következő**: [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md)
+**Fejezet navigáció:**
+- **📚 Tanfolyam kezdőlap**: [AZD kezdőknek](../../README.md)
+- **📖 Jelenlegi fejezet**: 5. fejezet - Többügynökös MI megoldások
+- **⬅️ Előző**: [4. fejezet: Infrastruktúra](../chapter-04-infrastructure/README.md)
+- **➡️ Következő**: [Koordinációs minták](../chapter-06-pre-deployment/coordination-patterns.md)
 
-> Ellenőrizve az `azd 1.25.6` verzióval, 2026 júniusában.
+> Érvényesítve az `azd 1.27.1` verzióval, 2026 júliusában.
 
 ## Bevezetés
 
-A korábbi fejezetekben egyetlen alkalmazást telepítettél — és a 2. fejezetben egyetlen AI ügynököt telepítettél. Ez a lecke a következő lépést mutatja be: egy **többügynökös rendszert** telepítünk, ahol több, specializált ügynök együtt dolgozik egy olyan problémán, amit egyetlen ügynök önmagában nem tudna jól megoldani.
+A korábbi fejezetekben egyetlen alkalmazást helyezett üzembe — és a 2. fejezetben egyetlen MI ügynököt. Ez a lecke a következő lépést veszi: egy **többügynökös rendszert** helyezünk üzembe, ahol több specializált ügynök dolgozik együtt egy olyan probléma megoldásán, amelyet egyetlen ügynök nem tudna jól kezelni egyedül.
 
-Jó hír a kezdőknek: **nem kell új parancsokra szükséged.** A többügynökös megoldás továbbra is egy azd projekt. Ugyanúgy végrehajtod az `azd init`, `azd up`, tesztelés és `azd down` lépéseket — pontosan az ismert munkafolyamatot. Ami változik, az az alkalmazáson belüli felépítés.
+Jó hír kezdőknek: **nem kell új parancsokat tanulnia.** Egy többügynökös megoldás továbbra is egy azd projekt. Fogja használni az `azd init`, `azd up`, tesztel, majd `azd down` parancsokat — pontosan ugyanazt a munkafolyamatot, amit már ismer. Ami változik, az az alkalmazás *belső alakja*.
 
 ## Tanulási célok
 
-A lecke végére:
-- Megérted, mit jelent a „multi-agent”, és mikor éri meg a plusz komplexitást
-- Felismered a többügynökös rendszer gyakori szerepeit (orchestrator + specialisták)
-- Telepítesz egy működő, valós többügynökös sablont az `azd up` segítségével
-- Megérted az Azure erőforrásokat, amelyek egy többügynökös alkalmazást támogatnak
-- Tudod, hogyan ellenőrizd, testreszabd és bontsd le a megoldást biztonságosan
+Az óra végére Ön képes lesz:
+- Megérteni, mit jelent a "többügynökös" és mikor éri meg a plusz összetettség
+- Felismerni a többügynökös rendszer gyakori szerepeit (koordinátor + specialisták)
+- Egy valós, működő többügynökös sablon telepítése `azd up` segítségével
+- Megérteni az Azure erőforrásokat, amelyek egy többügynökös alkalmazást támogatnak
+- Tudni, hogyan ellenőrizze, testre szabja és bontsa le biztonságosan a megoldást
 
-## Tanulási eredmények
+## Tudásgyarapodás után
 
-A lecke elvégzése után képes leszel:
-- Elmagyarázni a különbséget egyetlen ügynök és egy többügynökös rendszer között
-- Dönteni egyetlen ügynök eszközökkel történő használata és egy valódi többügynökös architektúra között
-- Teljes körűen telepíteni és tesztelni egy többügynökös sablont az azd segítségével
-- Azonosítani, hol futnak az egyes ügynökök és hogyan kommunikálnak
-- Minden erőforrást eltakarítani a folyamatos költségek elkerülése érdekében
+A lecke elvégzése után képes lesz:
+- Kifejteni a különbséget egyetlen ügynök és egy többügynökös rendszer között
+- Kiválasztani egyetlen ügynök eszközökkel vagy egy valódi többügynökös kialakítás között
+- End-to-end telepíteni és tesztelni egy többügynökös sablont az azd-vel
+- Meghatározni, hogy az egyes ügynökök hol futnak és hogyan kommunikálnak
+- Tisztítani az összes erőforrást, hogy elkerülje a folyamatos költségeket
 
 ---
 
 ## Mi az a többügynökös rendszer?
 
-Egyetlen AI ügynök egy modell, egy készlet utasítással és (opcionálisan) néhány eszközzel. Ez jól működik fókuszált feladatoknál. De ahogy a feladat növekszik — kutatás, majd írás, majd szerkesztés, majd tényellenőrzés — mindent egyetlen promptba tuszkolni lassabbá, kevésbé megbízhatóvá és nehezebben hibakereshetővé teszi az ügynököt.
+Egyetlen MI ügynök egy modell, amely egy sor utasításból áll és (opcionálisan) néhány eszközből. Ez jól működik fókuszált feladatokra. De amint a feladat nő — kutatás, aztán írás, szerkesztés, majd valóság-ellenőrzés — az összeset egyetlen promptba zsúfolni lassabbá, megbízhatatlanabbá és nehezebben hibakereshetővé teszi az ügynököt.
 
-Egy **többügynökös rendszer** a munkát specialista szerepekre bontja, amelyek mindegyike egy feladatot jól elvégez, azokat egy orchestrator koordinálja:
+Egy **többügynökös rendszer** a munkát specialistákra bontja, akik mindegyike jól végzi el a saját feladatát, és ezt egy koordinátor irányítja:
 
 ```mermaid
 graph TD
-    User([Felhasználói kérés]) --> Orchestrator[Koordináló ügynök<br/>Megtervezi és irányítja a munkát]
-    Orchestrator --> Researcher[Kutató ügynök<br/>Tényeket gyűjt]
-    Orchestrator --> Writer[Író ügynök<br/>Tartalmat megfogalmaz]
-    Orchestrator --> Editor[Szerkesztő ügynök<br/>Áttekinti és finomítja]
+    User([Felhasználói kérés]) --> Orchestrator[Orchestrator Ügynök<br/>Megtervezi és irányítja a munkát]
+    Orchestrator --> Researcher[Kutató Ügynök<br/>Adatokat gyűjt]
+    Orchestrator --> Writer[Író Ügynök<br/>Tartalmat készít]
+    Orchestrator --> Editor[Szerkesztő Ügynök<br/>Áttekinti és finomítja]
     Researcher --> Orchestrator
     Writer --> Orchestrator
     Editor --> Orchestrator
-    Orchestrator --> Result([Végső válasz])
+    Orchestrator --> Result([Végleges válasz])
 ```
 
-### The two roles you'll always see
+### A két szerep, amit mindig látni fog
 
-| Role | Job | Example |
+| Szerep | Feladat | Példa |
 |------|-----|---------|
-| **Orchestrator** | Decides *what happens next* and routes work between agents | "First research, then write, then edit" |
-| **Specialist** | Does one focused job and returns a result | A "researcher" that only gathers facts |
+| **Koordinátor** | Dönt arról, *mi történik ezután* és irányítja a munkát az ügynökök között | "Először kutatás, aztán írás, végül szerkesztés" |
+| **Specialista** | Egy adott feladatot végez el és visszaad egy eredményt | Egy "kutató", aki csak adatokat gyűjt |
 
-### Szükséged van tényleg több ügynökre?
+### Valóban szükség van több ügynökre?
 
-Kezdj egyszerűen. Többügynököst csak akkor alkalmazz, ha az alábbiak egyike igaz:
+Kezdje egyszerűen. Többügynököst **csak akkor** alkalmazzon, ha az alábbiak közül bármelyik igaz:
 
-- ✅ A feladatnak **különböző szakaszai** vannak, amelyek külön utasításokkal jobban működnek (kutatás vs. írás vs. felülvizsgálat)
-- ✅ A specialistákat **párhuzamosan** akarod futtatni az idő megtakarítása érdekében
-- ✅ Különböző lépésekhez **más eszközök vagy adatok** kellenek
-- ✅ Azt szeretnéd, hogy minden lépés **függetlenül tesztelhető és hibakereshető** legyen
+- ✅ A feladatnak **megkülönböztetett szakaszai** vannak, amelyek különböző utasításokat igényelnek (kutatás vs. írás vs. áttekintés)
+- ✅ Specialistáknak párhuzamosan kell futniuk az idő megtakarítása érdekében
+- ✅ Különböző lépéseknek **különböző eszközökre vagy adatforrásokra** van szükségük
+- ✅ Minden lépést külön-külön tesztelhetőnek és hibakereshetőnek kell lennie
 
-Ha a feladat egy egyszerű kérdés-válasz vagy egy egyszerű eszközhívás, egy **egyetlen ügynök eszközökkel** (2. fejezet) egyszerűbb, olcsóbb és könnyebb üzemeltetni.
+Ha a feladat egy egyszerű kérdés-válasz vagy eszközhívás, egy **eszközökkel ellátott egyetlen ügynök** (2. fejezet) egyszerűbb, olcsóbb és könnyebben kezelhető.
 
-> **Kezdő tipp:** „Több ügynök” nem feltétlenül „jobb”. Minden ügynök késleltetést, költséget és egy újabb felügyeleti elemet jelent. Adj ügynököt csak akkor, ha a probléma egyértelműen részekre bontható.
+> **Kezdő tipp:** „Több ügynök” nem jelenti, hogy „jobb.” Minden ügynök késleltetést, költséget és újabb felügyeleti feladatot ad hozzá. Csak akkor adjunk hozzá ügynököket, ha a probléma egyértelműen részekre bontható.
 
 ---
 
-## Két mód Azure-on többügynökös rendszer építésére
+## Két módja a többügynökös rendszer építésének Azure-on
 
-| Approach | What it is | Best for |
+| Megközelítés | Mi az | Legjobb alkalom |
 |----------|-----------|----------|
-| **Single agent + tools** | One Foundry agent that calls functions/tools | Simple workflows, getting started |
-| **Multiple coordinated agents** | Several agents with an orchestrator | Distinct stages, parallel work, specialization |
+| **Egyetlen ügynök + eszközök** | Egy Foundry ügynök hívja a függvényeket/eszközöket | Egyszerű munkafolyamatok, kezdők számára |
+| **Több koordinált ügynök** | Több ügynök egy koordinátorral | Különálló szakaszok, párhuzamos munka, specializáció |
 
-Ez a lecke a második megközelítésre fókuszál egy **kész sablonnal**, így láthatsz egy valós többügynökös rendszert működés közben, mielőtt a sajátodat építenéd.
+Ez a lecke a második megközelítésre fókuszál egy **kész sablon** használatával, hogy Ön láthassa egy valódi többügynökös rendszer működését, mielőtt megépítené a sajátját.
 
 ---
 
-## Gyakorlat: Telepíts egy működő többügynökös alkalmazást
+## Gyakorlati rész: működő többügynökös alkalmazás telepítése
 
-Telepítjük a **Contoso Creative Writer** alkalmazást, egy hivatalos Azure mintát, amely több ügynököt használ (kutató, író, szerkesztő), és ezeket koordinálva állít elő egy cikket. Jó első többügynökös alkalmazásnak számít, mert a szerepek könnyen érthetőek.
+Üzembe helyezzük a **Contoso Creative Writer** hivatalos Azure mintát, amely több ügynököt (kutató, író, szerkesztő) használ koordináltan cikk készítésére. Ez egy nagyszerű első többügynökös alkalmazás, mert a szerepek könnyen érthetők.
 
-### Step 1: Initialize the template
+### 1. lépés: Inicializálja a sablont
 
 ```bash
-# Hozz létre egy munkamappát
+# Munkamappa létrehozása
 mkdir creative-writer && cd creative-writer
 
-# Inicializáld a projektet a hivatalos többügynökös sablon alapján
+# Inicializálás a hivatalos multi-agent sablonból
 azd init --template contoso-creative-writer
 ```
 
-> Nézz meg további többügynökös sablonokat bármikor az [Awesome AZD AI gallery](https://azure.github.io/awesome-azd/?tags=ai) oldalon. Más kezdőbarát lehetőségek: `get-started-with-ai-agents` és `azure-ai-travel-agents`.
+> Bármikor böngészhet több többügynökös sablont a [Awesome AZD MI galériában](https://azure.github.io/awesome-azd/?tags=ai). Egyéb kezdőbarát lehetőségek: `get-started-with-ai-agents` és az `azure-ai-travel-agents`.
 
-### Step 2: Authenticate
+### 2. lépés: Hitelesítés
 
 ```bash
 # Szükséges az azd munkafolyamatokhoz
 azd auth login
 ```
 
-### Step 3: Create an environment
+### 3. lépés: Környezet létrehozása
 
 ```bash
 azd env new dev
 ```
 
-### Step 4: Preview, then deploy
+### 4. lépés: Előnézet, majd telepítés
 
 ```bash
-# Tekintse meg, mi fog létrejönni, mielőtt bármit is költ (ajánlott)
+# Nézze meg, mi fog létrejönni, mielőtt bármit is költene (ajánlott)
 azd provision --preview
 
-# Infrastruktúra kiépítése és az összes ügynök telepítése egy lépésben
+# Infrastruktúra előkészítése és az összes ügynök egy lépésben történő telepítése
 azd up
 ```
 
-`azd up` rákérdez egy előfizetésre és régióra, majd előkészíti az Azure erőforrásokat és telepíti az alkalmazást. Az AI telepítések tovább tarthatnak, mint egy egyszerű webalkalmazás — ha nagyobb modelleket telepítesz, meghosszabbíthatod a telepítési időkorlátot:
+Az `azd up` felkéri, hogy válasszon előfizetést és régiót, majd létrehozza az Azure erőforrásokat és telepíti az alkalmazást. A MI alapú telepítések hosszabb ideig tarthatnak, mint egy egyszerű webalkalmazás — ha nagyobb modelleket telepít, meghosszabbíthatja a telepítési időkorlátot:
 
 ```bash
 azd deploy --timeout 1800
 ```
 
-> **Figyelem a költségre és kapacitásra:** A többügynökös alkalmazások AI modelleket telepítenek, amelyek kvótát fogyasztanak és költséget generálnak. Ha az `azd up` model kvóta miatt meghiúsul, lásd az [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) részt a régió- és kvótamegoldásokhoz, illetve a 6. fejezet [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md) anyagát.
+> **Figyelem a költség és kapacitás miatt:** A többügynökös alkalmazások AI modelleket telepítenek, amelyek kvótát fogyasztanak és költséget okoznak. Ha az `azd up` modell kvóta miatt meghiúsul, tekintse meg az [MI hibaelhárítást](../chapter-07-troubleshooting/ai-troubleshooting.md) régió- és kvóta javításokra, valamint a 6. fejezetet [Kapacitástervezés](../chapter-06-pre-deployment/capacity-planning.md).
 
 ---
 
-## Amit telepítettél — megértés
+## Értse meg, mit telepített
 
-Egy tipikus többügynökös alkalmazás ilyen erőforrásokat állít elő, amelyek közvetlenül megfelelnek a fenti felelősségeknek:
+Egy tipikus ilyen többügynökös alkalmazás egy halom Azure erőforrást hoz létre, amelyek közvetlenül megfelelnek a fent ábrázolt felelősségeknek:
 
-| Resource | Why it's there |
+| Erőforrás | Miért van ott |
 |----------|----------------|
-| **Microsoft Foundry / Models** | Hosts the language models each agent uses |
-| **Azure AI Search** | Gives the researcher agent grounded data to search |
-| **Container Apps** (or App Service) | Hosts the orchestrator and agent code |
-| **Cosmos DB** (in some samples) | Stores shared state/memory passed between agents |
-| **Application Insights** | Traces requests *across* agents so you can debug the flow |
+| **Microsoft Foundry / Modellek** | Tárhelye a nyelvi modelleknek, amelyeket az egyes ügynökök használnak |
+| **Azure AI Keresés** | Biztosítja a kutató ügynök számára a megalapozott adatokat kereséshez |
+| **Konténeralkalmazások** (vagy App Service) | Tárhelye a koordinátor és ügynök kódjának |
+| **Cosmos DB** (néhány mintában) | Tárolja az ügynökök között megosztott állapotot/ memóriát |
+| **Application Insights** | Leköveti a kéréseket *az ügynökök között*, hogy hibakeresést lehessen végezni |
 
-### Hogyan beszélgetnek az ügynökök egymással
+### Hogyan kommunikálnak az ügynökök egymással
 
-A legtöbb azd többügynökös mintában az **orchestrator az alkalmazáskódon belül fut** (például egy olyan keretrendszerrel, mint a Semantic Kernel vagy a Microsoft Agent Framework). Az orchestrator egymás után hívja a specialistákat, továbbadja az eredményeket, és összeállítja a végső választ. Az ügynökök a következő módokon osztanak meg kontextust:
+A legtöbb azd többügynökös mintában a **koordinátor az alkalmazáskódban fut** (például egy olyan keretrendszerrel, mint a Semantic Kernel vagy a Microsoft Agent Framework). A koordinátor egymás után hívja meg a specialistákat, átadja az eredményeket, majd összeállítja a végső választ. Az ügynökök a következő módokon osztják meg a kontextust:
 
-- **Function/tool calls** — az orchestrator meghív egy specialistát és visszakap egy eredményt
-- **Shared memory** — egy adatbázis (gyakran Cosmos DB) tárolja az állapotot, amelyet mindkét ügynök olvashat
-- **Messages/events** — lazább kapcsolódás esetén az ügynökök soron vagy Service Bus-on keresztül kommunikálnak
+- **Függvény/eszköz hívások** — a koordinátor megkeresi a specialistát és visszakapja az eredményt
+- **Megosztott memória** — egy adatbázis (gyakran Cosmos DB) tartja az állapotot, amelyet mindkét ügynök olvashat
+- **Üzenetek/események** — lazább kapcsolódáshoz az ügynökök queue vagy Service Bus rendszeren keresztül kommunikálnak
 
-> **Miért fontos ez a hibakeresésnél:** mivel minden lépés külön van, az Application Insights megmutatja, *melyik* ügynök volt lassú vagy hibás. Ez az egyik fő oka annak, hogy érdemes a munkát ügynökök között felosztani.
+> **Miért fontos ez a hibakeresésnél:** mivel a lépések különállóak, az Application Insights megmutatja, hogy *melyik* ügynök volt lassú vagy hibás. Ez az egyik fő oka annak, hogy érdemes a munkát ügynökök között megosztani.
 
 ---
 
-## A telepítés ellenőrzése
+## Ellenőrizze a telepítést
 
-Győződj meg róla, hogy a rendszer tényleg működik, mielőtt továbbmész:
+Győződjön meg arról, hogy a rendszer valóban működik, mielőtt továbblép:
 
 ```bash
-# Telepített végpontok megjelenítése
+# A telepített végpontok megjelenítése
 azd show
 
 # Az alkalmazás felügyeleti irányítópultjának megnyitása
 azd monitor
 
-# Naplók valós idejű követése, ha valami nem stimmel
+# Naplók követése, ha valami furcsa tűnik
 azd monitor --logs
 ```
 
-Ezután nyisd meg az `azd show` által adott alkalmazás URL-jét, és próbálj meg egy olyan kérést, ami az összes ügynököt igénybe veszi (a Creative Writer esetében kérd meg, hogy írjon egy rövid cikket egy témáról). Az Application Insights **transaction search** nézetében látnod kell, hogy a kérés szétterjed a kutató, író és szerkesztő lépések között.
+Ezután nyissa meg az `azd show` által adott alkalmazás URL-jét, és próbáljon ki olyan kérést, amely minden ügynököt érint (a Creative Writer esetén kérje meg, hogy írjon egy rövid cikket egy témáról). Az Application Insights **tranzakció keresésében** látnia kell, hogy a kérés a kutató, író és szerkesztő lépések között terjed szét.
 
-Sikerkritériumok:
-- ✅ Az `azd show` egy elérhető végpontot listáz
+**Siker kritériumok:**
+- ✅ Az `azd show` elérhető végpontot listáz
 - ✅ Egy kérés eredménye egyértelműen több szakaszon ment keresztül
-- ✅ Az Application Insights több ügynök lépésére vonatkozó trace-eket mutat
+- ✅ Az Application Insights több ügynök lépésének nyomait mutatja
 
 ---
 
-## Testreszabás: Adj hozzá vagy módosíts egy ügynököt
+## Testreszabás: Ügynök hozzáadása vagy módosítása
 
-Mivel minden ügynök csupán utasítások és eszközök kombinációja, a testreszabás megközelíthető:
+Mivel az egyes ügynökök csak utasítások és eszközök, a testreszabás könnyen megközelíthető:
 
-1. **Keresd meg az ügynök-definíciókat** a sablonban (gyakran `prompts/`, `agents/` vagy `*.prompty` fájlok).
-2. **Finomhangold egy ügynök utasításait** — például mondd meg a szerkesztő ügynöknek, hogy tartson egy meghatározott hangnemet vagy szókorlátot.
-3. **Csak a kódot telepítsd újra** (az infrastruktúra változatlan):
+1. **Keresse meg az ügynök definíciókat** a sablonban (gyakran `prompts/`, `agents/` vagy `*.prompty` fájlok).
+2. **Hangolja be egy ügynök utasításait** — például mondja meg a szerkesztőnek, hogy egy adott hangnemet vagy szószámot tartson be.
+3. **Csak a kódot telepítse újra** (az infrastruktúra nem változik):
 
    ```bash
    azd deploy
    ```
 
-Ha tovább szeretnél menni és a *saját* manifestedből építenél ügynököket, használd az ügynök kiterjesztést és annak teljes életciklusát:
+Ha tovább akar haladni és saját *manifesztből* akar ügynököket építeni, használja az ügynök bővítményt és annak teljes életciklusát:
 
 ```bash
 azd extension install azure.ai.agents
@@ -203,51 +203,51 @@ azd up
 azd ai agent invoke      # teszt, válaszidővel
 ```
 
-Lásd a [Chapter 2: Agents](../chapter-02-ai-development/agents.md) részt és az [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) dokumentációt a teljes ügynök életciklushoz (`invoke`, `eval generate`, `optimize`, `delete`).
+Tekintse meg a [2. fejezet: Ügynökök](../chapter-02-ai-development/agents.md) és az [AZD MI CLI referencia](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) anyagokat az ügynökök teljes életciklusához (`invoke`, `eval generate`, `optimize`, `delete`).
 
 ---
 
-## Eltakarítás
+## Takarítás
 
-A többügynökös alkalmazások több számlázható szolgáltatást futtatnak. Bontsd le az összeset, amikor végeztél:
+A többügynökös alkalmazások több számlázott szolgáltatást futtatnak. Amikor végez, bontsa le mindet:
 
 ```bash
 azd down --force --purge
 ```
 
-A `--purge` kapcsoló eltávolítja a soft-deleted AI erőforrásokat is (például Foundry/Azure AI Services fiókok), így azok nem akadályozzák a jövőbeli újratelepítést és nem generálnak további költséget.
+A `--purge` kapcsoló eltávolítja a lágyan törölt MI erőforrásokat (például Foundry/Azure AI szolgáltatás fiókok), így nem akadályozzák a jövőbeni újbóli telepítést és nem generálnak további költséget.
 
 ---
 
-## Jegyzet a produkciós többügynökös rendszerekről
+## Egy megjegyzés a produkciós többügynökös rendszerekről
 
-A repositoryban található [Retail Multi-Agent Solution](../../examples/retail-scenario.md) egy **architektúra terv**, nem egy egylépéses sablon — dokumentálja, hogyan lehet egy produkciós kiskereskedelmi rendszert felépíteni (és világosan közli, hogy egy teljes építés jelentős erőfeszítést igényel). Használd tervezési referenciaanyagként *miután* telepítettél egy működő példát itt. A produkciós szempontokért (ellenálló képesség, költség, monitorozás, kormányzás) folytasd a [Chapter 8: Production AI Practices](../chapter-08-production/production-ai-practices.md) anyagát.
+A [Retail Multi-Agent Solution](../../examples/retail-scenario.md) ebben a tárházban egy **architekturális terv**, nem egy egylépéses sablon — dokumentálja, hogyan épül fel egy produkciós kereskedelmi rendszer (és egyértelmű, hogy a teljes építés jelentős erőfeszítés). Ezt használja mintatervezési referenciát *miután* telepített egy működő mintát itt. A produkciós kérdésekkel (ellenállóképesség, költség, felügyelet, irányítás) folytassa a [8. fejezet: Produkciós MI gyakorlatok](../chapter-08-production/production-ai-practices.md) anyagot.
 
 ---
 
 ## Összefoglalás
 
-- A többügynökös rendszer a munkát specialisták között osztja meg, amelyeket egy orchestrator koordinál.
-- Csak akkor használd, ha a feladatnak külön szakaszai vannak, párhuzamos végrehajtásra van szükség, vagy lépésenként eltérő eszközök kellenek — egyébként részesítsd előnyben az egyetlen ügynököt.
-- Az azd munkafolyamat változatlan: `azd init` → `azd up` → teszt → `azd down`.
-- Egy valós sablon, mint a `contoso-creative-writer`, lehetővé teszi, hogy ma megtekinthesd és testreszabhasd egy működő többügynökös alkalmazást.
-- Az Application Insights átfogó trace-e az ügynökök között az egyik legnagyobb gyakorlati előnye a többügynökös felépítésnek.
+- Egy többügynökös rendszer a munkát specialisták között osztja meg, akiket egy koordinátor irányít.
+- Csak akkor használja, ha a feladatnak megkülönböztetett szakaszai, párhuzamossága vagy különböző eszközei vannak lépésenként — különben egyetlen ügynök ajánlott.
+- Az azd munkafolyamat változatlan: `azd init` → `azd up` → tesztelés → `azd down`.
+- Egy valós sablon, mint a `contoso-creative-writer` lehetővé teszi, hogy ma azonnal láthassa és testreszabhassa egy működő többügynökös alkalmazást.
+- Az Application Insights nyomkövetés az ügynökök között az egyik legnagyobb gyakorlati előnye a többügynökös tervezésnek.
 
 ---
 
 ## 🔗 Navigáció
 
-| Direction | Lesson |
+| Irány | Lecke |
 |-----------|--------|
-| **Previous** | [Chapter 4: Infrastructure](../chapter-04-infrastructure/README.md) |
-| **Next** | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **Előző** | [4. fejezet: Infrastruktúra](../chapter-04-infrastructure/README.md) |
+| **Következő** | [Koordinációs minták](../chapter-06-pre-deployment/coordination-patterns.md) |
 
 ## 📖 Kapcsolódó források
 
-- [AI Agents Guide](../chapter-02-ai-development/agents.md)
-- [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md)
-- [Production AI Practices](../chapter-08-production/production-ai-practices.md)
-- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [MI ügynökök útmutatója](../chapter-02-ai-development/agents.md)
+- [Koordinációs minták](../chapter-06-pre-deployment/coordination-patterns.md)
+- [Produkciós MI gyakorlatok](../chapter-08-production/production-ai-practices.md)
+- [MI hibaelhárítás](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

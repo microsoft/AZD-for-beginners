@@ -4,60 +4,60 @@
 - **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
 - **📖 Trenutno poglavlje**: Poglavlje 4 - Infrastruktura kao kod i implementacija
 - **⬅️ Prethodno**: [Vodič za implementaciju](deployment-guide.md)
-- **🚀 Sljedeće poglavlje**: [Poglavlje 5: Više-agentna rješenja](../chapter-05-multi-agent/README.md)
+- **🚀 Sljedeće poglavlje**: [Poglavlje 5: Višestruka rješenja agenata](../chapter-05-multi-agent/README.md)
 
-> Potvrđeno s `azd 1.25.6` u lipnju 2026.
+> Validirano na `azd 1.27.1` u srpnju 2026.
 
 ## Uvod
 
-Do sada ste *koristili* predloške s `azd init --template <name>`. Ali kad imate raspored projekta koji se vašem timu sviđa — primjerice Container App s Cosmos DB i odgovarajućim nadzorom — htjet ćete ga pretvoriti u vlastiti predložak za ponovnu upotrebu. Predložak je samo Git repozitorij s predvidljivom strukturom koju azd zna pročitati. Ova lekcija pokazuje kako izgraditi jedan od nule, testirati ga i (po želji) objaviti u galeriji zajednice.
+Do sada ste *koristili* predloške s `azd init --template <ime>`. No kad imate raspored projekta koji vaš tim voli—recimo, Container App s Cosmos DB-om i pravim nadzorom—željet ćete ga pretvoriti u vlastiti predložak za višekratnu upotrebu. Predložak je samo Git repozitorij s predvidivom strukturom koju azd zna pročitati. Ova lekcija prikazuje kako izgraditi jedan od nule, testirati ga i (po želji) objaviti u galeriji zajednice.
 
 ## Ciljevi učenja
 
-Na kraju ove lekcije, moći ćete:
+Do kraja ove lekcije, moći ćete:
 - Razumjeti što mapu čini "azd predloškom"
-- Poznavati potrebne datoteke i strukturu mapa
+- Znati potrebne datoteke i raspored mapa
 - Dodati `azure.yaml` i `infra/` koje drugi mogu ponovno koristiti
-- Testirati svoj predložak lokalno prije dijeljenja
-- Objaviti ga i (opcionalno) poslati u Awesome AZD
+- Testirati vlastiti predložak lokalno prije dijeljenja
+- Objaviti ga i (po želji) poslati u Awesome AZD
 
 ## Ishodi učenja
 
-Nakon dovršetka ove lekcije, moći ćete:
-- Kreirati novi repozitorij predloška
+Nakon završetka ove lekcije, moći ćete:
+- Postaviti novi repozitorij predloška
 - Parametrizirati infrastrukturu tako da radi u bilo kojoj pretplati
 - Validirati predložak s `azd init` i `azd up`
-- Dodati metapodatke koje zahtijeva galerija zajednice
+- Dodati metapodatke koje galerija zahtijeva
 
 ---
 
-## Što je predložak, zapravo?
+## Što je zapravo predložak?
 
-azd predložak je **Git repozitorij** koji sadrži, minimalno:
+Azd predložak je **Git repozitorij** koji sadrži, minimalno:
 
 | Datoteka / mapa | Svrha | Obavezno? |
 |---------------|---------|-----------|
-| `azure.yaml` | Opisuje servise, hostove i pružatelja infrastrukture | ✅ Da |
-| `infra/` | Bicep, Terraform ili Pulumi koji stvara resurse | ✅ Da |
-| `src/` (or your code) | Aplikacijski kod koji azd raspoređuje | ✅ Da |
-| `README.md` | Kako koristiti predložak | ✅ Snažno preporučeno |
-| `.azdo/` or `.github/` | Definicije CI/CD pipelinea | Opcionalno |
+| `azure.yaml` | Opisuje servise, hostove i davatelja infrastrukture | ✅ Da |
+| `infra/` | Bicep, Terraform ili Pulumi koji osigurava resurse | ✅ Da |
+| `src/` (ili vaš kod) | Kod aplikacije koju azd postavlja | ✅ Da |
+| `README.md` | Kako koristiti predložak | ✅ Preporučuje se |
+| `.azdo/` ili `.github/` | Definicije CI/CD pipelinea | Opcionalno |
 | `.devcontainer/` | Reproducibilno razvojno okruženje | Opcionalno |
-| `azure.yaml` `metadata` | Informacije za galeriju i telemetriju | Opcionalno (potrebno za objavu) |
+| `azure.yaml` `metadata` | Galerija + informacije za telemetriju | Opcionalno (potrebno za objavu) |
 
-Nema tu magije: kada pokrenete `azd init --template you/your-repo`, azd klonira repozitorij i čita `azure.yaml`.
+Nema tu ništa čarobno: kad pokrenete `azd init --template you/your-repo`, azd klonira repozitorij i čita `azure.yaml`.
 
 ---
 
-## Korak 1: Postavite repozitorij
+## Korak 1: Postavljanje repozitorija
 
-Stvorite strukturu mapa ručno ili krenite od minimalnog predloška i uredite ga:
+Izradite strukturu mapa ručno ili započnite s minimalnim predloškom i uredite ga:
 
 ```bash
 mkdir my-azd-template && cd my-azd-template
 git init
 
-# Stvori standardni izgled
+# Izradi standardni izgled
 mkdir -p src infra
 ```
 
@@ -83,7 +83,7 @@ my-azd-template/
 
 ## Korak 2: Napišite `azure.yaml`
 
-Ovo je srž predloška. Govori azd-u što rasporediti i kako:
+Ovo je srce predloška. Kaže azdu što i kako treba postaviti:
 
 ```yaml
 # azure.yaml
@@ -101,13 +101,13 @@ services:
     host: containerapp              # appservice | containerapp | function | aks | staticwebapp
 ```
 
-> Polje `metadata.template` je ono što galerijska telemetrija koristi za brojanje uporabe. Koristite konvenciju `name@version`.
+> Polje `metadata.template` je ono što galerija koristi za telemetriju i brojanje korištenja. Koristite konvenciju `ime@verzija`.
 
 ---
 
 ## Korak 3: Parametrizirajte infrastrukturu
 
-Jedno najvažnije pravilo za *predložak koji se može ponovno koristiti*: **nikad nemojte hardkodirati nazive, regije ili vrijednosti specifične za pretplatu.** Koristite parametre i obrazac resource tokena kako bi isti predložak radio u bilo kojoj pretplati.
+Najvažnije pravilo za *višekratno upotrebljiv* predložak: **nikad nemojte hardkodirati imena, regije ili vrijednosti specifične za pretplatu.** Koristite parametre i obrazac resursnog tokena kako bi isti predložak radio u bilo čijoj pretplati.
 
 ```bicep
 // infra/main.bicep
@@ -138,12 +138,12 @@ module web 'modules/web.bicep' = {
 output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 ```
 
-Dvije stvari čine ovaj predložak pogodnim za ponovno korištenje:
+Dvije stvari čine ovaj predložak pogodan za ponovnu upotrebu:
 
-1. **`azd-env-name` tag** — azd ga koristi za praćenje i čišćenje resursa po okruženju.
-2. **`uniqueString(...)` resource token** — proizvodi stabilni, globalno jedinstven sufiks tako da se nazivi ne sudaraju.
+1. **oznaka `azd-env-name`** — azd je koristi za praćenje i čišćenje resursa po okruženju.
+2. **`uniqueString(...)` resursni token** — stvara stabilan, globalno jedinstven sufiks kako se imena ne bi sukobljavala.
 
-Osigurajte odgovarajuću datoteku parametara koja čita vrijednosti koje azd injektira iz okruženja:
+Osigurajte odgovarajuću datoteku parametara koja čita vrijednosti koje azd ubacuje iz okruženja:
 
 ```json
 // infra/main.parameters.json
@@ -157,47 +157,47 @@ Osigurajte odgovarajuću datoteku parametara koja čita vrijednosti koje azd inj
 }
 ```
 
-azd automatski zamjenjuje `${AZURE_ENV_NAME}` i `${AZURE_LOCATION}` iz trenutnog okruženja.
+Azd automatski zamjenjuje `${AZURE_ENV_NAME}` i `${AZURE_LOCATION}` iz trenutnog okruženja.
 
 ---
 
-## Korak 4: Testirajte svoj predložak lokalno
+## Korak 4: Testirajte predložak lokalno
 
-Prije dijeljenja, dokažite da predložak radi iz čistog stanja.
+Prije dijeljenja, dokažite da predložak funkcionira iz čistog stanja.
 
-**Testirajte iz lokalne mape** (push na Git nije potreban):
+**Testirajte iz lokalne mape** (nije potreban Git push):
 
 ```bash
-# Iz praznog direktorija inicijalizirajte koristeći lokalnu putanju predloška
+# Iz praznog direktorija, inicijalizirajte koristeći lokalnu putanju predloška
 mkdir /tmp/test-run && cd /tmp/test-run
 azd init --template /path/to/my-azd-template
 
-# Priprema resursa i raspoređivanje od početka do kraja
+# Osigurajte + implementirajte od početka do kraja
 azd auth login
 azd up
 ```
 
-**Zatim testirajte uklanjanje**—dobar predložak se potpuno očisti:
+**Zatim testirajte uklanjanje**—dobar predložak potpuno čisti:
 
 ```bash
 azd down --force --purge
 ```
 
-Ako `azd down` ostavlja resurse, vjerojatno ste zaboravili oznaku `azd-env-name` na resursu.
+Ako `azd down` ostavlja resurse, vjerojatno ste propustili oznaku `azd-env-name` na nekom resursu.
 
-> **Savjet:** prvo pokrenite `azd provision --preview`. Izvrši what-if i prikaže pogreške u predlošku prije stvaranja bilo kojeg resursa.
+> **Savjet:** prvo pokrenite `azd provision --preview`. Izvodi simulaciju i prikazuje pogreške predloška prije nego što se bilo koji resurs stvori.
 
 ---
 
 ## Korak 5: Objavite predložak
 
-Objavite repozitorij na GitHub (javni ako želite da ga drugi koriste):
+Pošaljite repozitorij na GitHub (javni ako želite da ga drugi koriste):
 
 ```bash
 gh repo create my-azd-template --public --source=. --push
 ```
 
-Sada ga svatko može koristiti:
+Svatko ga sada može koristiti:
 
 ```bash
 azd init --template your-github-username/my-azd-template
@@ -205,17 +205,17 @@ azd init --template your-github-username/my-azd-template
 
 ---
 
-## Korak 6 (Opcionalno): Pošaljite u Awesome AZD
+## Korak 6 (po izboru): Pošaljite u Awesome AZD
 
-Galerija [Awesome AZD](https://azure.github.io/awesome-azd/) navodi predloške zajednice. Da biste bili navedeni, vaš repozitorij treba uključivati:
+[Awesome AZD galerija](https://azure.github.io/awesome-azd/) popisuje predloške zajednice. Da biste bili uključeni, vaš repozitorij treba sadržavati:
 
-- ✅ Jasan `README.md` s preduvjetima, dijagramom arhitekture i napomenama o troškovima
-- ✅ Ispravan `azure.yaml` s `metadata.template`
-- ✅ Infrastrukturu koja se uredno postavlja u novoj pretplati
+- ✅ Jasno `README.md` s preduvjetima, dijagramom arhitekture i bilješkama o troškovima
+- ✅ Radni `azure.yaml` s `metadata.template`
+- ✅ Infrastrukturu koja se čisto postavlja u novu pretplatu
 - ✅ Datoteku `LICENSE`
-- ✅ (Preporučeno) `.devcontainer/` za Codespaces jednim klikom
+- ✅ (Preporučeno) `.devcontainer/` za jednim klikom Codespaces
 
-Pošaljite tako da otvorite pull request koji dodaje vaš predložak u datoteku s podacima galerije, slijedeći vodič za doprinos u repozitoriju [Awesome AZD](https://github.com/Azure/awesome-azd).
+Pošaljite to otvaranjem pull zahtjeva koji dodaje vaš predložak u datoteku podataka galerije, prateći vodič za doprinos na [Awesome AZD repozitoriju](https://github.com/Azure/awesome-azd).
 
 ---
 
@@ -223,21 +223,21 @@ Pošaljite tako da otvorite pull request koji dodaje vaš predložak u datoteku 
 
 | Zamka | Rješenje |
 |---------|-----|
-| Nazivi resursa zadani u kodu | Koristite `uniqueString()` resource token |
+| Hardkodirana imena resursa | Koristite `uniqueString()` resursni token |
 | `azd down` ostavlja resurse | Označite svaki resurs (ili grupu resursa) s `azd-env-name` |
-| Predložak radi kod vas, ne radi kod drugih | Uklonite ID-e pretplate, ID-e tenanta i pretpostavke o regiji |
-| Izlazi nisu povezani s aplikacijom | Exportajte `SERVICE_<NAME>_ENDPOINT_URL` i druge `AZURE_*` izlaze |
-| Slanje u galeriju odbijeno | Dodajte `README.md`, `LICENSE`, i `metadata.template` |
+| Predložak radi za vas, ne radi za druge | Uklonite ID-eve pretplate, ID-eve zakupca i pretpostavke o regiji |
+| Izlazi nisu povezani s aplikacijom | Izvezite `SERVICE_<NAME>_ENDPOINT_URL` i druge `AZURE_*` izlaze |
+| Odbijena prijava u galeriju | Dodajte `README.md`, `LICENSE` i `metadata.template` |
 
 ---
 
 ## Sažetak
 
-- Predložak je samo Git repozitorij s `azure.yaml`, `infra/`, i vašim kodom.
-- Parametrizirajte sve—nazive, regije, i ID-e—tako da radi bilo gdje.
-- Uvijek označite resurse s `azd-env-name` kako bi `azd down` radio.
-- Testirajte lokalno s `azd init --template <local-path>` prije objave.
-- Dodajte metapodatke i README za slanje u Awesome AZD.
+- Predložak je samo Git repozitorij s `azure.yaml`, `infra/` i vašim kodom.
+- Parametrizirajte sve—imena, regije i ID-eve—da radi bilo gdje.
+- Uvijek označite resurse s `azd-env-name` da `azd down` radi ispravno.
+- Testirajte lokalno s `azd init --template <lokalna-putanja>` prije objave.
+- Dodajte metapodatke i README za prijavu u Awesome AZD.
 
 ---
 
@@ -247,13 +247,13 @@ Pošaljite tako da otvorite pull request koji dodaje vaš predložak u datoteku 
 |-----------|----------|
 | **Prethodno** | [Vodič za implementaciju](deployment-guide.md) |
 | **Početak poglavlja** | [Poglavlje 4: Infrastruktura kao kod](README.md) |
-| **Sljedeće poglavlje** | [Poglavlje 5: Više-agentna rješenja](../chapter-05-multi-agent/README.md) |
+| **Sljedeće poglavlje** | [Poglavlje 5: Višestruka rješenja agenata](../chapter-05-multi-agent/README.md) |
 
 ## 📖 Povezani resursi
 
-- [Provisioning resursa](provisioning.md)
-- [Galerija Awesome AZD](https://azure.github.io/awesome-azd/)
-- [Službena dokumentacija azd predložaka](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
+- [Postavljanje resursa](provisioning.md)
+- [Awesome AZD galerija](https://azure.github.io/awesome-azd/)
+- [Službena azd dokumentacija za predloške](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
 
 ---
 

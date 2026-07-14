@@ -1,23 +1,23 @@
 # Rozdział 6: Planowanie i walidacja przed wdrożeniem
 
-**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 1 godzina | **⭐ Poziom trudności**: Średnio zaawansowany
+**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 1 godzina | **⭐ Poziom trudności**: Średniozaawansowany
 
 ---
 
 ## Przegląd
 
-Ten rozdział obejmuje kluczowe kroki planowania i walidacji przed wdrożeniem aplikacji. Naucz się unikać kosztownych błędów dzięki odpowiedniemu planowaniu pojemności, wyborowi SKU oraz kontroli przed wdrożeniem.
+Ten rozdział obejmuje niezbędne kroki planowania i walidacji przed wdrożeniem aplikacji. Naucz się unikać kosztownych błędów dzięki właściwemu planowaniu pojemności, doborowi SKU oraz kontrolom przed wdrożeniem.
 
-> Zweryfikowano z `azd 1.25.6` w czerwcu 2026.
+> Zweryfikowano z `azd 1.27.1` w lipcu 2026.
 
 ## Cele nauki
 
 Po ukończeniu tego rozdziału będziesz potrafił:
-- Uruchamiać kontrole przed wdrożeniem
-- Planować pojemność i szacować wymagania zasobów
+- Przeprowadzać kontrole przed wdrożeniem
+- Planować pojemność i szacować wymagania dotyczące zasobów
 - Wybierać odpowiednie SKU dla optymalizacji kosztów
-- Konfigurować Application Insights do monitorowania
-- Rozumieć wzorce koordynacji zespołu
+- Konfigurować Application Insights dla monitoringu
+- Rozumieć wzorce koordynacji zespołowej
 
 ---
 
@@ -27,9 +27,9 @@ Po ukończeniu tego rozdziału będziesz potrafił:
 |---|--------|-------------|------|
 | 1 | [Kontrole przed wdrożeniem](preflight-checks.md) | Walidacja konfiguracji przed wdrożeniem | 15 min |
 | 2 | [Planowanie pojemności](capacity-planning.md) | Szacowanie wymagań zasobów | 20 min |
-| 3 | [Wybór SKU](sku-selection.md) | Wybór odpowiednich poziomów cenowych | 15 min |
+| 3 | [Dobór SKU](sku-selection.md) | Wybór odpowiednich poziomów cenowych | 15 min |
 | 4 | [Application Insights](application-insights.md) | Konfiguracja monitoringu | 20 min |
-| 5 | [Wzorce koordynacji](coordination-patterns.md) | Workflow wdrożeniowe zespołu | 15 min |
+| 5 | [Wzorce koordynacji](coordination-patterns.md) | Procesy wdrożeniowe zespołu | 15 min |
 
 ---
 
@@ -39,10 +39,10 @@ Po ukończeniu tego rozdziału będziesz potrafił:
 # Sprawdź limity subskrypcji
 az vm list-usage --location eastus --output table
 
-# Podgląd wdrożenia (bez tworzenia zasobów)
+# Podgląd wdrożenia (nie tworzono zasobów)
 azd provision --preview
 
-# Sprawdź składnię Bicep
+# Zweryfikuj składnię Bicep
 az bicep build --file infra/main.bicep
 
 # Sprawdź konfigurację środowiska
@@ -55,24 +55,24 @@ azd env get-values
 
 ### Przed `azd provision`
 
-- [ ] Zweryfikowano kwotę dla regionu
+- [ ] Zweryfikowano limit dla regionu
 - [ ] Odpowiednio wybrane SKU
-- [ ] Przejrzana estymacja kosztów
+- [ ] Przejrzano szacunkowe koszty
 - [ ] Spójna konwencja nazewnictwa
-- [ ] Skonfigurowane zabezpieczenia/RBAC
+- [ ] Skonfigurowano zabezpieczenia/RBAC
 
 ### Przed `azd deploy`
 
 - [ ] Ustawione zmienne środowiskowe
 - [ ] Sekrety w Key Vault
 - [ ] Zweryfikowane łańcuchy połączeń
-- [ ] Skonfigurowane kontrole stanu
+- [ ] Skonfigurowane testy zdrowotności
 
 ---
 
-## 💰 Przewodnik wyboru SKU
+## 💰 Przewodnik po doborze SKU
 
-| Obciążenie | Środowisko deweloperskie | Produkcja |
+| Obciążenie | Rozwój | Produkcja |
 |----------|-------------|------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
@@ -93,7 +93,7 @@ azd env get-values
 ## 📖 Powiązane zasoby
 
 - [Przewodnik konfiguracji](../chapter-03-configuration/configuration.md)
-- [Przewodnik wdrożenia](../chapter-04-infrastructure/deployment-guide.md)
+- [Przewodnik wdrażania](../chapter-04-infrastructure/deployment-guide.md)
 - [Typowe problemy](../chapter-07-troubleshooting/common-issues.md)
 
 ---

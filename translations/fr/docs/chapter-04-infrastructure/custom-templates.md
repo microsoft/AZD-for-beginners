@@ -1,67 +1,67 @@
-# Créer votre propre modèle azd
+# Créer Votre Propre Modèle azd
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapitre 4 - Infrastructure as Code et Déploiement
-- **⬅️ Previous**: [Guide de déploiement](deployment-guide.md)
-- **🚀 Next Chapter**: [Chapitre 5 : Solutions multi-agents](../chapter-05-multi-agent/README.md)
+**Navigation du Chapitre :**
+- **📚 Accueil du cours** : [AZD Pour Débutants](../../README.md)
+- **📖 Chapitre actuel** : Chapitre 4 - Infrastructure as Code & Déploiement
+- **⬅️ Précédent** : [Guide de Déploiement](deployment-guide.md)
+- **🚀 Chapitre suivant** : [Chapitre 5 : Solutions Multi-Agent](../chapter-05-multi-agent/README.md)
 
-> Validé avec `azd 1.25.6` en juin 2026.
+> Validé avec `azd 1.27.1` en juillet 2026.
 
 ## Introduction
 
-Jusqu'à présent, vous avez *utilisé* des modèles avec `azd init --template <name>`. Mais une fois que vous avez une structure de projet que votre équipe aime—par exemple une Container App avec une base Cosmos DB et la surveillance appropriée—vous voudrez en faire un modèle réutilisable. Un modèle est simplement un dépôt Git avec une structure prévisible que azd sait lire. Cette leçon vous montre comment en créer un à partir de zéro, le tester et (optionnellement) le publier dans la galerie communautaire.
+Jusqu'à présent, vous avez *consommé* des modèles avec `azd init --template <nom>`. Mais une fois que vous avez une structure de projet que votre équipe apprécie — par exemple, une Container App avec Cosmos DB et la surveillance adéquate — vous voudrez en faire un modèle réutilisable à vous. Un modèle est simplement un dépôt Git avec une structure prévisible que azd sait lire. Cette leçon vous montre comment en construire un de zéro, le tester et (optionnellement) le publier dans la galerie communautaire.
 
-## Learning Goals
+## Objectifs d'Apprentissage
 
-By the end of this lesson, you will:
-- Comprendre ce qui fait d'un dossier un « modèle azd »
-- Connaître les fichiers requis et la structure des dossiers
+À la fin de cette leçon, vous serez capable de :
+- Comprendre ce qui fait d'un dossier un "modèle azd"
+- Connaître les fichiers et la structure du dossier nécessaires
 - Ajouter un `azure.yaml` et un `infra/` que d'autres peuvent réutiliser
 - Tester votre modèle localement avant de le partager
 - Le publier et (optionnellement) le soumettre à Awesome AZD
 
-## Learning Outcomes
+## Résultats d'apprentissage
 
-After completing this lesson, you will be able to:
-- Créer le squelette d'un nouveau dépôt de modèle
+Après avoir complété cette leçon, vous serez capable de :
+- Générer un nouveau dépôt de modèle
 - Paramétrer l'infrastructure pour qu'elle fonctionne dans n'importe quel abonnement
 - Valider un modèle avec `azd init` et `azd up`
 - Ajouter les métadonnées requises par la galerie communautaire
 
 ---
 
-## What Is a Template, Really?
+## Qu'est-ce qu'un Modèle ?
 
 Un modèle azd est **un dépôt Git** qui contient, au minimum :
 
-| Fichier / dossier | Objectif | Requis? |
-|-------------------|----------|---------|
-| `azure.yaml` | Décrit les services, les hôtes et le fournisseur d'infrastructure | ✅ Oui |
-| `infra/` | Bicep, Terraform ou Pulumi qui provisionnent les ressources | ✅ Oui |
-| `src/` (or your code) | Le code de l'application que azd déploie | ✅ Oui |
+| Fichier / dossier | Objectif | Obligatoire ? |
+|---------------|---------|-----------|
+| `azure.yaml` | Décrit les services, hôtes et fournisseur d'infra | ✅ Oui |
+| `infra/` | Bicep, Terraform, ou Pulumi qui provisionne les ressources | ✅ Oui |
+| `src/` (ou votre code) | Le code de l'application que azd déploie | ✅ Oui |
 | `README.md` | Comment utiliser le modèle | ✅ Fortement recommandé |
-| `.azdo/` or `.github/` | Définitions de pipeline CI/CD | Optionnel |
-| `.devcontainer/` | Environnement de développement reproductible | Optionnel |
-| `azure.yaml` `metadata` | Informations de galerie + télémétrie | Optionnel (requis pour publier) |
+| `.azdo/` ou `.github/` | Définitions des pipelines CI/CD | Optionnel |
+| `.devcontainer/` | Environnement de dev reproductible | Optionnel |
+| `azure.yaml` `metadata` | Infos galerie + télémétrie | Optionnel (requis pour publier) |
 
-There is nothing magic here: when you run `azd init --template you/your-repo`, azd clones the repo and reads `azure.yaml`.
+Il n’y a rien de magique : quand vous lancez `azd init --template you/your-repo`, azd clone le dépôt et lit `azure.yaml`.
 
 ---
 
-## Step 1: Scaffold the Repository
+## Étape 1 : Générer le Dépôt
 
-Create the folder structure by hand or start from a minimal template and edit it:
+Créez la structure de dossiers à la main ou partez d’un modèle minimal et modifiez-le :
 
 ```bash
 mkdir my-azd-template && cd my-azd-template
 git init
 
-# Créer la mise en page standard
+# Créer la disposition standard
 mkdir -p src infra
 ```
 
-A typical finished layout looks like this:
+Une structure typique finale ressemble à ceci :
 
 ```
 my-azd-template/
@@ -81,9 +81,9 @@ my-azd-template/
 
 ---
 
-## Step 2: Write `azure.yaml`
+## Étape 2 : Écrire `azure.yaml`
 
-This is the heart of the template. It tells azd what to deploy and how:
+C’est le cœur du modèle. Il indique à azd quoi déployer et comment :
 
 ```yaml
 # azure.yaml
@@ -101,13 +101,13 @@ services:
     host: containerapp              # appservice | containerapp | function | aks | staticwebapp
 ```
 
-> Le champ `metadata.template` est ce que la télémétrie de la galerie utilise pour compter les usages. Utilisez la convention `name@version`.
+> Le champ `metadata.template` est ce que la télémétrie de la galerie utilise pour comptabiliser l'utilisation. Utilisez la convention `nom@version`.
 
 ---
 
-## Step 3: Parameterize the Infrastructure
+## Étape 3 : Paramétrer l’Infrastructure
 
-The single most important rule for a *reusable* template: **never hardcode names, regions, or subscription-specific values.** Use parameters and the resource token pattern so the same template works in anyone's subscription.
+La règle la plus importante pour un modèle *réutilisable* : **ne jamais coder en dur des noms, régions ou valeurs spécifiques d’abonnement.** Utilisez des paramètres et le modèle resource token afin que le même modèle fonctionne dans l’abonnement de n’importe qui.
 
 ```bicep
 // infra/main.bicep
@@ -138,12 +138,12 @@ module web 'modules/web.bicep' = {
 output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 ```
 
-Two things make this template-friendly:
+Deux choses rendent ce modèle adapté à la réutilisation :
 
-1. **`azd-env-name` tag** — azd uses it to track and clean up resources per environment.
-2. **`uniqueString(...)` resource token** — produces a stable, globally-unique suffix so names don't collide.
+1. **Tag `azd-env-name`** — azd l’utilise pour tracer et nettoyer les ressources par environnement.
+2. **Resource token `uniqueString(...)`** — produit un suffixe stable et globalement unique pour éviter les collisions de noms.
 
-Provide a matching parameters file that reads values azd injects from the environment:
+Fournissez un fichier de paramètres correspondant qui lit les valeurs que azd injecte depuis l’environnement :
 
 ```json
 // infra/main.parameters.json
@@ -157,47 +157,47 @@ Provide a matching parameters file that reads values azd injects from the enviro
 }
 ```
 
-azd substitutes `${AZURE_ENV_NAME}` and `${AZURE_LOCATION}` from the current environment automatically.
+azd substitue automatiquement `${AZURE_ENV_NAME}` et `${AZURE_LOCATION}` depuis l’environnement courant.
 
 ---
 
-## Step 4: Test Your Template Locally
+## Étape 4 : Tester Votre Modèle Localement
 
-Before sharing, prove the template works from a clean state.
+Avant de partager, prouvez que le modèle fonctionne à partir d’un état propre.
 
-**Test from the local folder** (no Git push required):
+**Testez depuis le dossier local** (pas besoin de pousser sur Git) :
 
 ```bash
-# À partir d'un répertoire vide, initialisez en utilisant le chemin de votre modèle local
+# Depuis un répertoire vide, initialisez en utilisant votre chemin de modèle local
 mkdir /tmp/test-run && cd /tmp/test-run
 azd init --template /path/to/my-azd-template
 
-# Provisionner et déployer de bout en bout
+# Provisionner + déployer de bout en bout
 azd auth login
 azd up
 ```
 
-**Then test the teardown**—a good template cleans up completely:
+**Puis testez la destruction** — un bon modèle nettoie complètement :
 
 ```bash
 azd down --force --purge
 ```
 
-If `azd down` leaves resources behind, you probably missed the `azd-env-name` tag on a resource.
+Si `azd down` laisse des ressources, vous avez probablement oublié le tag `azd-env-name` sur une ressource.
 
-> **Astuce:** run `azd provision --preview` first. Il effectue un what-if et met en évidence les erreurs du modèle avant la création de toute ressource.
+> **Astuce :** lancez d’abord `azd provision --preview`. Cela fait un what-if et affiche les erreurs du modèle avant la création de toute ressource.
 
 ---
 
-## Step 5: Publish the Template
+## Étape 5 : Publier le Modèle
 
-Push the repository to GitHub (public if you want others to use it):
+Poussez le dépôt sur GitHub (public si vous voulez que d’autres l’utilisent) :
 
 ```bash
 gh repo create my-azd-template --public --source=. --push
 ```
 
-Anyone can now use it:
+N’importe qui peut maintenant l’utiliser :
 
 ```bash
 azd init --template your-github-username/my-azd-template
@@ -205,53 +205,53 @@ azd init --template your-github-username/my-azd-template
 
 ---
 
-## Step 6 (Optional): Submit to Awesome AZD
+## Étape 6 (Optionnel) : Soumettre à Awesome AZD
 
-The [Awesome AZD gallery](https://azure.github.io/awesome-azd/) lists community templates. To be listed your repo should include:
+La [galerie Awesome AZD](https://azure.github.io/awesome-azd/) liste les modèles communautaires. Pour être listé, votre dépôt doit inclure :
 
-- ✅ Un `README.md` clair avec les prérequis, un diagramme d'architecture et des notes sur les coûts
+- ✅ Un `README.md` clair avec prérequis, un diagramme d'architecture et des notes sur les coûts
 - ✅ Un `azure.yaml` fonctionnel avec `metadata.template`
-- ✅ Une infrastructure qui se provisionne proprement dans un abonnement vierge
+- ✅ Une infrastructure qui se provisionne proprement dans un nouvel abonnement
 - ✅ Un fichier `LICENSE`
 - ✅ (Recommandé) Un `.devcontainer/` pour Codespaces en un clic
 
-Submit by opening a pull request that adds your template to the gallery's data file, following the contribution guide at the [Awesome AZD repository](https://github.com/Azure/awesome-azd).
+Soumettez en ouvrant une pull request qui ajoute votre modèle au fichier de données de la galerie, suivant le guide de contribution dans le [dépôt Awesome AZD](https://github.com/Azure/awesome-azd).
 
 ---
 
-## Common Pitfalls
+## Pièges Courants
 
-| Pitfall | Fix |
+| Piège | Solution |
 |---------|-----|
-| Noms de ressources codés en dur | Utilisez le jeton de ressource `uniqueString()` |
-| `azd down` leaves resources | Étiquetez chaque ressource (ou le groupe de ressources) avec `azd-env-name` |
-| Template works for you, fails for others | Supprimez les ID d'abonnement, les ID de locataire et les hypothèses de région |
-| Outputs not wired into the app | Exportez `SERVICE_<NAME>_ENDPOINT_URL` et autres sorties `AZURE_*` |
-| Gallery submission rejected | Ajoutez `README.md`, `LICENSE` et `metadata.template` |
+| Noms de ressources codés en dur | Utiliser le resource token `uniqueString()` |
+| `azd down` laisse des ressources | Taguer chaque ressource (ou le groupe ressource) avec `azd-env-name` |
+| Le modèle marche pour vous mais pas pour d’autres | Enlever les IDs d’abonnement, IDs de locataire et hypothèses sur les régions |
+| Sorties non reliées à l’application | Exporter `SERVICE_<NAME>_ENDPOINT_URL` et autres sorties `AZURE_*` |
+| Soumission galerie rejetée | Ajouter `README.md`, `LICENSE` et `metadata.template` |
 
 ---
 
-## Summary
+## Résumé
 
-- Un modèle est simplement un dépôt Git avec `azure.yaml`, `infra/`, et votre code.
-- Paramétrez tout—noms, régions, et IDs—pour qu'il s'exécute partout.
-- Étiquetez toujours les ressources avec `azd-env-name` afin que `azd down` fonctionne.
-- Testez localement avec `azd init --template <local-path>` avant de publier.
-- Ajoutez les métadonnées et un README pour soumettre à Awesome AZD.
+- Un modèle est juste un dépôt Git avec `azure.yaml`, `infra/` et votre code.
+- Paramétrez tout — noms, régions et IDs — pour que ça fonctionne partout.
+- Toujours taguer les ressources avec `azd-env-name` pour que `azd down` fonctionne.
+- Testez localement avec `azd init --template <chemin-local>` avant de publier.
+- Ajoutez métadonnées et README pour soumettre à Awesome AZD.
 
 ---
 
 ## 🔗 Navigation
 
 | Direction | Ressource |
-|-----------|-----------|
-| **Previous** | [Guide de déploiement](deployment-guide.md) |
-| **Chapter Home** | [Chapitre 4 : Infrastructure as Code](README.md) |
-| **Next Chapter** | [Chapitre 5 : Solutions multi-agents](../chapter-05-multi-agent/README.md) |
+|-----------|----------|
+| **Précédent** | [Guide de Déploiement](deployment-guide.md) |
+| **Accueil du Chapitre** | [Chapitre 4 : Infrastructure en tant que Code](README.md) |
+| **Chapitre Suivant** | [Chapitre 5 : Solutions Multi-Agent](../chapter-05-multi-agent/README.md) |
 
-## 📖 Related Resources
+## 📖 Ressources Associées
 
-- [Provisioning Resources](provisioning.md)
+- [Provisioning des Ressources](provisioning.md)
 - [Galerie Awesome AZD](https://azure.github.io/awesome-azd/)
 - [Documentation officielle des modèles azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
 

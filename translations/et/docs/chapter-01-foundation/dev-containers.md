@@ -1,54 +1,54 @@
-# Dev Containerid & GitHub Codespaces azd jaoks
+# Arenduskonteinerid & GitHub Codespaces azd jaoks
 
-**Chapter Navigation:**
+**Peatüki navigeerimine:**
 - **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
-- **📖 Praegune peatükk**: Peatükk 1 - Alused & Kiirkäivitus
+- **📖 Praegune peatükk**: Peatükk 1 - Alused ja kiire algus
 - **⬅️ Eelmine**: [Too oma rakendus](bring-your-own-app.md)
-- **🚀 Järgmine peatükk**: [Peatükk 2: AI-esmane arendus](../chapter-02-ai-development/README.md)
+- **🚀 Järgmine peatükk**: [Peatükk 2: AI-esmase arendus](../chapter-02-ai-development/README.md)
 
-> Kinnitatud `azd 1.25.6` seisuga juunis 2026.
+> Kontrollitud `azd 1.27.1` vastu juulis 2026.
 
 ## Sissejuhatus
 
-Azdi, õige keele täitmisaja, Dockeri ja Azure CLI iga masina peale installimine on vaev—and see on peamine põhjus, miks juhend, mis "töötab minu masinas", ei pruugi kellegi teise juures töötada. Arenduskonteiner (dev container) lahendab selle, kirjeldades kogu tööriistaketi ühes failis. Igaüks, kes avab projekti VS Code'is või GitHub Codespaces'is, saab täpselt sama keskkonna koos eelinstalleeritud azd-ga. See õppetund näitab, kuidas ühe lisada.
+azd, õige keeleruntime, Dockeri ja Azure CLI installimine igale masinale on vaev—ja see on peamine põhjus, miksõpetus, mis "töötab minu masinas", ei tööta kellegi teise puhul. **Arenduskonteiner** lahendab selle, kirjeldades teie kogu tööriistakomplekti ühes failis. Igaüks, kes avab projekti VS Code'is või GitHub Codespaces'is, saab täpselt sama keskkonna, kus azd on juba installitud. See õppetükk näitab, kuidas üks lisada.
 
 ## Õpieesmärgid
 
-Lõpusõnumina sellest õppetunnist sa:
-- Mõistad, mis on arenduskonteiner ja miks see azd puhul kasulik on
-- Lisad minimaalse `.devcontainer/devcontainer.json` faili projekti
-- Kaasad azd, Azure CLI ja Docker Dev Container *funktsioonide* kaudu
+Selle õppetüki lõpuks sa:
+- Mõistad, mis on arenduskonteiner ja miks see azd puhul abiks on
+- Lisad projekti minimaalne `.devcontainer/devcontainer.json`
+- Sisaldad azd, Azure CLI ja Dockeri arenduskonteineri *funktsioonide* kaudu
 - Avad projekti GitHub Codespaces'is või VS Code'is
 
-## Õppimise tulemused
+## Õpitulemused
 
-Pärast selle õppetunni läbimist suudad sa:
-- Koostada `devcontainer.json` faili azd projektile
-- Lisada azd ja Azure tööriistad ilma manuaalsete installideta
-- Käivitada `azd up` konteineri või Codespace'i seest
+Selle õppetüki läbimisel saad:
+- Kirjutada `devcontainer.json` azd projektile
+- Lisada azd ja Azure tööriistad ilma käsitsi installimata
+- Käivitada `azd up` konteinerist või Codespace'ist
 
 ---
 
 ## Mis on arenduskonteiner?
 
-Arenduskonteiner on Docker-põhine arenduskeskkond, mis on määratletud sinu repositooriumi `.devcontainer/devcontainer.json` failis. Kui avad projekti:
+Arenduskonteiner on Dockeri-põhine arenduskeskkond, mis on määratletud sinu hoidla `.devcontainer/devcontainer.json` failis. Kui sa avad projekti:
 
-- **VS Code** (koos Dev Containers laiendusega) ehitab konteineri ja liitub sellega.
+- **VS Code** (Dev Containers laiendusega) ehitab konteineri ja ühendub sellega.
 - **GitHub Codespaces** ehitab sama konteineri pilves ja annab sulle brauseripõhise redaktori.
 
-Mõlemal juhul saavad kõik panustajad identsed tööriistad—pole "kas sa installisid azd?" vigu.
+Mõlemal juhul saavad kõik kaastöötajad identsed tööriistad—ei mingit "kas sa installisid azd?" tõrkeotsingut.
 
 ```mermaid
 graph LR
-    Repo[Teie repo<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Arenduskonteinerid]
-    Repo --> Codespaces[GitHub<br/>Codespaces]
-    VSCode --> Env[Identsne keskkond:<br/>azd + az + Docker]
+    Repo[Teie hoidla<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Arenduskonteinerid]
+    Repo --> Codespaces[GitHub<br/>Koodruumid]
+    VSCode --> Env[Identical environment:<br/>azd + az + Docker]
     Codespaces --> Env
 ```
 
 ---
 
-## Samm 1: Loo devcontainer-fail
+## 1. samm: Loo devcontainer fail
 
 Loo `.devcontainer/devcontainer.json` oma projekti juurkausta:
 
@@ -79,19 +79,19 @@ Mida iga osa teeb:
 
 | Võti | Eesmärk |
 |-----|---------|
-| `image` | Konteineri aluseks olev OS |
-| `features` | Eelnevalt koostatud installijad — siin: Azure CLI, **azd**, Docker ja Node.js |
-| `customizations.vscode.extensions` | Installib automaatselt azd ja Bicep VS Code laiendused |
-| `forwardPorts` | Teeb teie rakenduse pordi brauseri jaoks kättesaadavaks |
-| `postCreateCommand` | Käivitatakse üks kord pärast konteineri ehitamist (siin, lihtne kontroll) |
+| `image` | Konteineri alus-OS |
+| `features` | Eelinstallitud tööriistad—siin: Azure CLI, **azd**, Docker ja Node.js |
+| `customizations.vscode.extensions` | Paigaldab automaatselt azd ja Bicep VS Code laiendused |
+| `forwardPorts` | Avab sinu rakenduse pordi brauserile |
+| `postCreateCommand` | Käivitub üks kord pärast konteineri ehitamist (siin, kontrolliks) |
 
-> Funktsioon `ghcr.io/azure/azure-dev/azd:latest` on ametlik viis azd hankimiseks konteinerisse. Kui vajate reprodutseeritavust, lukustage konkreetne versioon (näiteks `azd:1.25.6`).
+> `ghcr.io/azure/azure-dev/azd:latest` funktsioon on ametlik viis saada azd konteinerisse. Spetsiifilise versiooni fikseerimiseks (näiteks `azd:1.27.1`) kasuta kindlat versiooni.
 
 ---
 
-## Samm 2: Kohanda funktsioon vastavalt rakenduse keelele
+## 2. samm: Vasta funktsioon oma rakenduse keelele
 
-Vaheta `node` funktsioon selle vastu, mida sinu rakendus kasutab:
+Asenda `node` funktsioon millegagi, mida sinu rakendus kasutab:
 
 ```jsonc
 // Python project
@@ -107,71 +107,71 @@ Vaheta `node` funktsioon selle vastu, mida sinu rakendus kasutab:
 "ghcr.io/devcontainers/features/go:1": {}
 ```
 
-Hoia `docker-in-docker`, kui sinu `host` on `containerapp`, `aks` või mõni muu, mis ehitab konteineripilti — azd vajab Dockerit piltide ehitamiseks ja pushimiseks.
+Hoia `docker-in-docker`, kui sinu `host` on `containerapp`, `aks` või mis iganes, mis ehitab konteineripilti—azd vajab Dockeri piltide ehitamiseks ja lükkamiseks.
 
 ---
 
-## Samm 3: Ava see
+## 3. samm: Ava see
 
 **VS Code'is:**
 1. Paigalda **Dev Containers** laiendus.
-2. Ava projektikaust.
-3. Klõpsa küsides **Reopen in Container** (või käivita *Dev Containers: Reopen in Container*).
+2. Ava projekti kaust.
+3. Klõpsa **Reopen in Container**, kui küsitakse (või käivita *Dev Containers: Reopen in Container*).
 
 **GitHub Codespaces'is:**
 1. Lükka repo GitHubi.
 2. Klõpsa **Code → Codespaces → Create codespace on main**.
-3. Oota konteineri ehitust—azd on terminalis valmis.
+3. Oota konteineri ehitamist—azd on terminalis valmis.
 
 ---
 
-## Samm 4: Hõlma juurutamine konteineri seest
+## 4. samm: Käivita konteinerist välja juurutamine
 
-Konteineris on azd eelinstalleeritud, nii et tavaline töövoog töötab lihtsalt:
+Konteineril on azd eelinstallitud, nii et tavapärane töövoog töötab lihtsalt:
 
 ```bash
-azd auth login --use-device-code   # seadmekood on Codespacesis mugav
+azd auth login --use-device-code   # seadme kood on Codespaces'is käepärane
 azd up
 ```
 
-> **Miks `--use-device-code`?** Kauges konteineris või Codespace'is puudub lokaalne brauser, kuhu suunata, nii et device-code sisselogimine on usaldusväärne tee. Kleepida tuleb kood brauseri vahekaardile, et lõpetada sisselogimine.
+> **Miks `--use-device-code`?** Kaugkonteineris või Codespace'is pole kohalikku brauserit, kuhu ümber suunata, nii et seadme-koodi sisselogimine on usaldusväärne tee. Sa kleebid koodi brauseri vahekaardile, et sisselogimise lõpetada.
 
 ---
 
-## Levinud lõksud
+## Levinumad lõksud
 
-| Probleem | Lahendus |
+| Lõks | Lahendus |
 |---------|-----|
-| `azd up` ei saa pildi ehitada | Lisa `docker-in-docker` funktsioon |
-| Brauseri sisselogimine jääb Codespaces'is hanguma | Kasuta `azd auth login --use-device-code` |
-| Tööriistad erinevad meeskonnaliikmete vahel | Lukusta funktsioonide versioonid (nt `azd:1.25.6`) |
-| Rakendus pole brauserist ligipääsetav | Lisa port `forwardPorts`-i |
+| `azd up` ei saa pilti ehitada | Lisa `docker-in-docker` funktsioon |
+| Brauseri sisselogimine hangub Codespaces'is | Kasuta `azd auth login --use-device-code` |
+| Tööriistad erinevad meeskondade vahel | Fixeri funktsiooni versioonid (nt `azd:1.27.1`) |
+| Rakendus pole brauserist ligipääsetav | Lisa port `forwardPorts` loendisse |
 
 ---
 
 ## Kokkuvõte
 
-- Arenduskonteiner muudab sinu azd tööriistaketi kõigile reprodutseeritavaks.
+- Arenduskonteiner teeb sinu azd tööriistakomplekti kõigile korratavaks.
 - Lisa azd, Azure CLI ja Docker Dev Container *funktsioonide* kaudu.
-- Sobita keelefunktsioon oma rakendusega ja säilita `docker-in-docker` konteineripõhiste hostide puhul.
-- Kasuta device-code sisselogimist, kui töötad Codespaces'is.
+- Vasta keele funktsioon oma rakendusele ja hoia `docker-in-docker`, kui hostiks on konteiner.
+- Kasuta seadme-koodi sisselogimist Codespaces'is töötades.
 
 ---
 
-## 🔗 Navigatsioon
+## 🔗 Navigeerimine
 
 | Suund | Ressurss |
 |-----------|----------|
 | **Eelmine** | [Too oma rakendus](bring-your-own-app.md) |
-| **Peatüki avaleht** | [Peatükk 1: Alused & Kiirkäivitus](README.md) |
-| **Järgmine peatükk** | [Peatükk 2: AI-esmane arendus](../chapter-02-ai-development/README.md) |
+| **Peatüki avaleht** | [Peatükk 1: Alused ja kiire algus](README.md) |
+| **Järgmine peatükk** | [Peatükk 2: AI-esmase arendus](../chapter-02-ai-development/README.md) |
 
 ## 📖 Seotud ressursid
 
-- [Paigaldus ja seadistamine](installation.md)
-- [Käskude kiirviide](../../resources/cheat-sheet.md)
-- [Ametlik Dev Containers spetsifikatsioon](https://containers.dev/)
-- [azd Dev Container funktsioon](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
+- [Paigaldus & seadistus](installation.md)
+- [Käsukomplekti leht](../../resources/cheat-sheet.md)
+- [Ametlik arenduskonteinerite spetsifikatsioon](https://containers.dev/)
+- [azd Arenduskonteineri funktsioon](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
 
 ---
 

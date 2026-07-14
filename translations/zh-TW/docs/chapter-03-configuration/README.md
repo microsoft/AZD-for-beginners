@@ -1,35 +1,35 @@
 # 第 3 章：設定與驗證
 
-**📚 課程**: [AZD 初學者](../../README.md) | **⏱️ 時長**: 45-60 分鐘 | **⭐ 難度**: 中等
+**📚 課程**: [AZD 初學者入門](../../README.md) | **⏱️ 時長**: 45-60 分鐘 | **⭐ 複雜度**: 中階
 
 ---
 
-## 概覽
+## 概述
 
-本章涵蓋環境設定、驗證模式，以及針對 Azure Developer CLI 部署的安全最佳實務。
+本章涵蓋 Azure Developer CLI 部署的環境配置、驗證模式與安全最佳實踐。
 
-> 已針對 `azd 1.25.6` 在 2026 年 6 月進行驗證。
+> 於 2026 年 7 月，針對 `azd 1.27.1` 驗證。
 
 ## 學習目標
 
-完成本章後，您將能：
-- 精通 AZD 配置階層
-- 管理多個環境（dev, staging, prod）
-- 使用託管識別實作安全的驗證
-- 設定環境專屬設定
+完成本章後，您將能夠：
+- 精通 AZD 配置層級
+- 管理多個環境 (開發、測試、正式)
+- 實作受管理的身份驗證
+- 配置環境特定設置
 
 ---
 
-## 📚 課程
+## 📚 課程列表
 
-| # | 課程 | 描述 | 時間 |
+| # | 課程 | 說明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [設定指南](configuration.md) | 環境設定與管理 | 30 分鐘 |
-| 2 | [驗證與安全](authsecurity.md) | 託管識別與 RBAC 模式 | 30 分鐘 |
+| 1 | [配置指南](configuration.md) | 環境設置與管理 | 30 分鐘 |
+| 2 | [驗證與安全](authsecurity.md) | 受管理身份與 RBAC 模式 | 30 分鐘 |
 
 ---
 
-## 🚀 快速上手
+## 🚀 快速開始
 
 ```bash
 # 建立多個環境
@@ -44,39 +44,39 @@ azd env select prod
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# 檢視設定
+# 檢視配置
 azd env get-values
 ```
 
 ---
 
-## 🔧 配置階層
+## 🔧 配置層級
 
-AZD 以以下順序套用設定（後者會覆蓋前者）：
+AZD 按以下順序套用設定（後者覆蓋前者）：
 
-1. <strong>預設值</strong> (built into templates)
-2. **azure.yaml** (project configuration)
-3. <strong>環境變數</strong> (`azd env set`)
-4. <strong>命令列旗標</strong> (`--location eastus`)
+1. <strong>預設值</strong>（內建於範本中）
+2. **azure.yaml**（專案配置）
+3. <strong>環境變數</strong>（`azd env set`）
+4. <strong>命令列參數</strong>（`--location eastus`）
 
 ---
 
-## 🔐 安全最佳實務
+## 🔐 安全最佳實踐
 
 ```bash
-# 使用託管身分識別（建議）
+# 使用管理身份（建議）
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# 檢查 AZD 驗證狀態
+# 檢查 AZD 認證狀態
 azd auth status
 
-# 選擇性：如果您打算執行 az 命令，請驗證 Azure CLI 的上下文
+# 可選：如果您計劃執行 az 命令，請驗證 Azure CLI 內容
 az account show
 
-# 如有需要，請重新驗證
+# 如有需要，重新認證
 azd auth login
 
-# 選擇性：為 az 命令重新整理 Azure CLI 的驗證
+# 可選：為 az 命令刷新 Azure CLI 認證
 az login
 ```
 
@@ -84,10 +84,10 @@ az login
 
 ## 🔗 導覽
 
-| Direction | Chapter |
+| 方向 | 章節 |
 |-----------|---------|
-| **Previous** | [第 2 章：AI 開發](../chapter-02-ai-development/README.md) |
-| **Next** | [第 4 章：基礎架構](../chapter-04-infrastructure/README.md) |
+| <strong>上一章</strong> | [第 2 章：AI 開發](../chapter-02-ai-development/README.md) |
+| <strong>下一章</strong> | [第 4 章：基礎架構](../chapter-04-infrastructure/README.md) |
 
 ---
 

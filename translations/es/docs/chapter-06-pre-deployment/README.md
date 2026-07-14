@@ -1,42 +1,42 @@
-# Capítulo 6: Planificación y Validación Pre-Despliegue
+# Capítulo 6: Planificación y Validación Previa al Despliegue
 
-**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 1 hora | **⭐ Complexity**: Intermedio
+**📚 Curso**: [AZD Para Principiantes](../../README.md) | **⏱️ Duración**: 1 hora | **⭐ Complejidad**: Intermedio
 
 ---
 
-## Descripción general
+## Visión general
 
-Este capítulo cubre pasos esenciales de planificación y validación antes de desplegar tu aplicación. Aprende a evitar errores costosos con una planificación adecuada de capacidad, selección de SKU y comprobaciones previas al despliegue.
+Este capítulo cubre los pasos esenciales de planificación y validación antes de desplegar su aplicación. Aprenda a evitar errores costosos con una adecuada planificación de capacidad, selección de SKU y verificaciones previas al vuelo.
 
-> Validado con `azd 1.25.6` en junio de 2026.
+> Validado con `azd 1.27.1` en julio de 2026.
 
 ## Objetivos de aprendizaje
 
-Al completar este capítulo, podrás:
-- Ejecutar comprobaciones previas al despliegue
+Al completar este capítulo, usted podrá:
+- Ejecutar verificaciones previas al vuelo antes del despliegue
 - Planificar la capacidad y estimar los requisitos de recursos
-- Seleccionar SKUs apropiados para optimizar costos
-- Configurar Application Insights para la supervisión
-- Entender patrones de coordinación del equipo
+- Seleccionar SKUs apropiados para optimización de costos
+- Configurar Application Insights para monitoreo
+- Entender los patrones de coordinación de equipo
 
 ---
 
-## 📚 Lessons
+## 📚 Lecciones
 
 | # | Lección | Descripción | Tiempo |
 |---|--------|-------------|------|
-| 1 | [Preflight Checks](preflight-checks.md) | Validar la configuración antes del despliegue | 15 min |
-| 2 | [Capacity Planning](capacity-planning.md) | Estimar los requisitos de recursos | 20 min |
-| 3 | [SKU Selection](sku-selection.md) | Elegir niveles de precios apropiados | 15 min |
-| 4 | [Application Insights](application-insights.md) | Configurar la supervisión | 20 min |
-| 5 | [Coordination Patterns](coordination-patterns.md) | Flujos de trabajo de despliegue del equipo | 15 min |
+| 1 | [Verificaciones Previas al Vuelo](preflight-checks.md) | Validar configuración antes del despliegue | 15 min |
+| 2 | [Planificación de Capacidad](capacity-planning.md) | Estimar requisitos de recursos | 20 min |
+| 3 | [Selección de SKU](sku-selection.md) | Elegir niveles de precios apropiados | 15 min |
+| 4 | [Application Insights](application-insights.md) | Configurar monitoreo | 20 min |
+| 5 | [Patrones de Coordinación](coordination-patterns.md) | Flujos de trabajo de despliegue en equipo | 15 min |
 
 ---
 
 ## 🚀 Inicio rápido
 
 ```bash
-# Comprobar cuotas de suscripción
+# Comprobar las cuotas de suscripción
 az vm list-usage --location eastus --output table
 
 # Vista previa del despliegue (no se crean recursos)
@@ -55,18 +55,18 @@ azd env get-values
 
 ### Antes de `azd provision`
 
-- [ ] Cuotas verificadas para la región
+- [ ] Cuota verificada para la región
 - [ ] SKUs seleccionados apropiadamente
-- [ ] Estimación de costos revisada
+- [ ] Presupuesto revisado
 - [ ] Convención de nombres consistente
 - [ ] Seguridad/RBAC configurados
 
 ### Antes de `azd deploy`
 
-- [ ] Variables de entorno configuradas
+- [ ] Variables de entorno establecidas
 - [ ] Secretos en Key Vault
 - [ ] Cadenas de conexión verificadas
-- [ ] Comprobaciones de salud configuradas
+- [ ] Verificaciones de salud configuradas
 
 ---
 
@@ -74,10 +74,10 @@ azd env get-values
 
 | Carga de trabajo | Desarrollo | Producción |
 |----------|-------------|------------|
-| Container Apps | Consumption | Dedicated D4 |
+| Container Apps | Consumo | Dedicado D4 |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standard | Standard + PTU |
-| AI Search | Basic | Standard S2+ |
+| Modelos Microsoft Foundry | Estándar | Estándar + PTU |
+| AI Search | Básico | Estándar S2+ |
 
 ---
 
@@ -85,16 +85,16 @@ azd env get-values
 
 | Dirección | Capítulo |
 |-----------|---------|
-| **Anterior** | [Chapter 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
-| **Siguiente** | [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/README.md) |
+| **Anterior** | [Capítulo 5: Multi-Agente](../chapter-05-multi-agent/README.md) |
+| **Siguiente** | [Capítulo 7: Solución de problemas](../chapter-07-troubleshooting/README.md) |
 
 ---
 
 ## 📖 Recursos relacionados
 
-- [Configuration Guide](../chapter-03-configuration/configuration.md)
-- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
-- [Common Issues](../chapter-07-troubleshooting/common-issues.md)
+- [Guía de Configuración](../chapter-03-configuration/configuration.md)
+- [Guía de Despliegue](../chapter-04-infrastructure/deployment-guide.md)
+- [Problemas comunes](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

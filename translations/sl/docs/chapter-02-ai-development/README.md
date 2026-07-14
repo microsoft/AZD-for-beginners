@@ -1,22 +1,22 @@
-# Poglavje 2: Razvoj, osredotočen na AI
+# Poglavje 2: Razvoj, ki je najprej osredotočen na AI
 
-**📚 Tečaj**: [AZD For Beginners](../../README.md) | **⏱️ Trajanje**: 1–2 ure | **⭐ Kompleksnost**: Srednje
+**📚 Tečaj**: [AZD za začetnike](../../README.md) | **⏱️ Trajanje**: 1-2 uri | **⭐ Kompleksnost**: Srednja
 
 ---
 
 ## Pregled
 
-To poglavje se osredotoča na razmestitev aplikacij, podprtih z AI, z uporabo Azure Developer CLI in storitev Microsoft Foundry. Od preprostih AI klepetalnih aplikacij do inteligentnih agentov z orodji.
+To poglavje se osredotoča na uvajanje aplikacij, ki jih poganja AI, s pomočjo Azure Developer CLI in Microsoft Foundry storitev. Od preprostih klepetalnih AI aplikacij do inteligentnih agentov z orodji.
 
-> **Opomba za preverjanje (2026-06-15):** Potek ukazov in navodila za razširitve v tem poglavju so bili pregledani glede na `azd` `1.25.6` in trenutno predogledno izdajo razširitve AI agentov `azure.ai.agents` `0.1.40-preview`. Če uporabljate starejšo različico AZD, najprej posodobite in nato nadaljujte z vajami.
+> **Opomba o validaciji (2026-07-13):** Potek ukazov in smernice za razširitve v tem poglavju so bile pregledane glede na `azd` `1.27.1` in trenutno predogledno izdajo AI agent razširitve `azure.ai.agents` `1.0.0-beta.5`. Če imate starejšo različico AZD, jo najprej posodobite in nato nadaljujte z vajami.
 
 ## Cilji učenja
 
-Z dokončanjem tega poglavja boste:
-- Razmestili AI aplikacije z vnaprej pripravljenimi AZD predlogami
+S tem poglavjem boste:
+- Uvajali AI aplikacije z uporabo že pripravljenih AZD predlog
 - Razumeli integracijo Microsoft Foundry z AZD
-- Konfigurirali in prilagodili AI agente z orodji
-- Razmestili RAG (Retrieval-Augmented Generation) aplikacije
+- Konfigurirali in prilagajali AI agente z orodji
+- Uvajali RAG (generiranje s povečanim iskanjem) aplikacije
 
 ---
 
@@ -24,10 +24,10 @@ Z dokončanjem tega poglavja boste:
 
 | # | Lekcija | Opis | Čas |
 |---|--------|-------------|------|
-| 1 | [Integracija Microsoft Foundry](microsoft-foundry-integration.md) | Povežite AZD s Foundry storitvami | 30 min |
-| 2 | [Vodnik za AI agente](agents.md) | Razmestite inteligentne agente z orodji | 45 min |
-| 3 | [Razmestitev AI modela](ai-model-deployment.md) | Razmestitev in konfiguracija AI modelov | 30 min |
-| 4 | [AI delavnica - laboratorij](ai-workshop-lab.md) | Praktično: Pripravite svojo AI rešitev za AZD | 60 min |
+| 1 | [Integracija Microsoft Foundry](microsoft-foundry-integration.md) | Povezava AZD s storitvami Foundry | 30 min |
+| 2 | [Vodnik za AI agente](agents.md) | Uvajanje inteligentnih agentov z orodji | 45 min |
+| 3 | [Uvajanje AI modelov](ai-model-deployment.md) | Uvajanje in konfiguracija AI modelov | 30 min |
+| 4 | [AI delavnica laboratorij](ai-workshop-lab.md) | Praktično: Pripravite svojo AI rešitev za AZD | 60 min |
 
 ---
 
@@ -42,18 +42,18 @@ azd up
 azd init --template get-started-with-ai-agents
 azd up
 
-# Možnost 3: Hitra aplikacija za klepet
+# Možnost 3: Hitro klepetalna aplikacija
 azd init --template openai-chat-app-quickstart
 azd up
 ```
 
 ---
 
-## 🤖 Izpostavljene AI predloge
+## 🤖 Priporočene AI predloge
 
 | Predloga | Opis | Storitve |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG klepet z navedbami | OpenAI + AI Search |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG klepet s citati | OpenAI + AI Search |
 | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI agent z orodji | AI Agent Service |
 | [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Osnovni AI klepet | OpenAI + Container Apps |
 
@@ -61,13 +61,13 @@ azd up
 
 ## 💰 Zavedanje o stroških
 
-| Okolje | Ocenjeni mesečni stroški |
+| Okolje | Ocenjeni mesečni strošek |
 |-------------|----------------------|
-| Razvoj | $80-150 |
-| Predprodukcija | $150-300 |
-| Produkcija | $300-3,500+ |
+| Razvojno | 80-150 $ |
+| Predprodukcijsko | 150-300 $ |
+| Produkcijsko | 300-3.500+ $ |
 
-**Namig:** Zaženite `azd down` po testiranju, da se izognete stroškom.
+**Namig:** Po testiranju zaženite `azd down`, da se izognete stroškom.
 
 ---
 
@@ -75,7 +75,7 @@ azd up
 
 | Smer | Poglavje |
 |-----------|---------|
-| **Prejšnje** | [Poglavje 1: Temelji](../chapter-01-foundation/README.md) |
+| **Prejšnje** | [Poglavje 1: Osnove](../chapter-01-foundation/README.md) |
 | **Naslednje** | [Poglavje 3: Konfiguracija](../chapter-03-configuration/README.md) |
 | **Preskoči na** | [Poglavje 8: Produkcijski vzorci](../chapter-08-production/README.md) |
 
@@ -83,8 +83,8 @@ azd up
 
 ## 📖 Sorodni viri
 
-- [Odpravljanje težav z AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Prakse AI v produkciji](../chapter-08-production/production-ai-practices.md)
+- [Razreševanje težav z AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Prakse produkcijskega AI](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---

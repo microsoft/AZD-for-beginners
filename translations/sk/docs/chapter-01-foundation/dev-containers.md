@@ -1,48 +1,48 @@
-# Dev kontajnery & GitHub Codespaces pre azd
+# Vývojové kontajnery & GitHub Codespaces pre azd
 
-**Navigácia kapitoly:**
-- **📚 Domov kurzu**: [AZD pre začiatočníkov](../../README.md)
-- **📖 Aktuálna kapitola**: Kapitola 1 - Základy a Rýchly štart
-- **⬅️ Predchádzajúca**: [Prineste svoju aplikáciu](bring-your-own-app.md)
-- **🚀 Ďalšia kapitola**: [Kapitola 2: Vývoj orientovaný na AI](../chapter-02-ai-development/README.md)
+**Navigácia kapitol:**
+- **📚 Domov kurzu**: [AZD pre Začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 1 - Základy a rýchly štart
+- **⬅️ Predchádzajúca**: [Použiť vlastnú aplikáciu](bring-your-own-app.md)
+- **🚀 Ďalšia kapitola**: [Kapitola 2: Vývoj založený na AI](../chapter-02-ai-development/README.md)
 
-> Overené s `azd 1.25.6` v júni 2026.
+> Overené na `azd 1.27.1` v júli 2026.
 
 ## Úvod
 
-Inštalácia azd, správneho runtime jazyka, Dockeru a Azure CLI na každý počítač je zdĺhavá úloha — a je to hlavný dôvod, prečo tutoriál, ktorý "funguje u mňa", zlyhá u niekoho iného. **dev container** to rieši tým, že celý váš toolchain popíše v jednom súbore. Každý, kto otvorí projekt vo VS Code alebo v GitHub Codespaces, dostane presne rovnaké prostredie s predinštalovaným azd. Táto lekcia vám ukáže, ako ho pridať.
+Inštalácia azd, správneho runtime jazyka, Dockeru a Azure CLI na každom počítači je otrava – a je to hlavným dôvodom, prečo návod, ktorý "funguje na mojom počítači," zlyhá pre niekoho iného. **Vývojový kontajner** to rieši tak, že celý váš nástrojový reťazec popisuje v jednom súbore. Ktokoľvek otvorí projekt vo VS Code alebo GitHub Codespaces má presne rovnaké prostredie s už nainštalovaným azd. Táto lekcia vám ukáže, ako jeden pridať.
 
-## Ciele lekcie
+## Ciele učenia
 
 Na konci tejto lekcie budete:
-- Pochopíte, čo je dev container a prečo pomáha pri práci s azd
+- Rozumieť, čo je vývojový kontajner a prečo pomáha s azd
 - Pridať minimálny `.devcontainer/devcontainer.json` do projektu
-- Zahrnúť azd, Azure CLI a Docker pomocou *funkcií* Dev Container
+- Zahŕňať azd, Azure CLI a Docker cez *funkcie* vývojového kontajnera
 - Otvoriť projekt v GitHub Codespaces alebo VS Code
 
-## Výstupy lekcie
+## Výstupy učenia
 
-Po dokončení tejto lekcie budete vedieť:
-- Vytvoriť súbor `devcontainer.json` pre projekt azd
-- Pridať azd a nástroje Azure bez manuálnych inštalácií
-- Spustiť `azd up` z vnútra kontajnera alebo Codespace
+Po dokončení tejto lekcie budete schopní:
+- Vytvoriť `devcontainer.json` pre projekt azd
+- Pridať azd a Azure nástroje bez manuálnych inštalácií
+- Spustiť `azd up` z kontajnera alebo Codespace
 
 ---
 
-## Čo je dev container?
+## Čo je vývojový kontajner?
 
-Dev container je Dockerom založené vývojové prostredie definované súborom `.devcontainer/devcontainer.json` vo vašom repozitári. Keď otvoríte projekt:
+Vývojový kontajner je Docker-založené vývojové prostredie definované súborom `.devcontainer/devcontainer.json` vo vašom repozitári. Keď otvoríte projekt:
 
-- **VS Code** (s rozšírením Dev Containers) vytvorí kontajner a pripojí sa k nemu.
-- **GitHub Codespaces** vytvorí rovnaký kontajner v cloude a poskytne editor v prehliadači.
+- **VS Code** (s rozšírením Dev Containers) kontajner zostaví a pripojí sa k nemu.
+- **GitHub Codespaces** zostaví rovnaký kontajner v cloude a poskytne vám editor v prehliadači.
 
-Tak či onak, každý prispievateľ dostane identické nástroje — žiadne "nainštaloval si azd?" ladenie.
+Každopádne, každý prispievateľ má identické nástroje – bez riešenia problémov typu "nainštaloval si azd?"
 
 ```mermaid
 graph LR
-    Repo[Váš repozitár<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Vývojové kontajnery]
+    Repo[Váš Repo<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Vývojové kontajnery]
     Repo --> Codespaces[GitHub<br/>Codespaces]
-    VSCode --> Env[Identické prostredie:<br/>azd + az + Docker]
+    VSCode --> Env[Identical environment:<br/>azd + az + Docker]
     Codespaces --> Env
 ```
 
@@ -75,23 +75,23 @@ Vytvorte `.devcontainer/devcontainer.json` v koreňovom adresári vášho projek
 }
 ```
 
-Čo ktorá časť robí:
+Čo každá časť robí:
 
-| Key | Purpose |
-|-----|---------|
-| `image` | Základný OS pre kontajner |
-| `features` | Predpripravené inštalátory — tu: Azure CLI, **azd**, Docker a Node.js |
-| `customizations.vscode.extensions` | Automaticky inštaluje rozšírenia azd a Bicep pre VS Code |
-| `forwardPorts` | Sprístupní port vašej aplikácie v prehliadači |
-| `postCreateCommand` | Spustí sa raz po vytvorení kontajnera (tu kontrola správnosti) |
+| Kľúč | Účel |
+|-----|--------|
+| `image` | Základný operačný systém pre kontajner |
+| `features` | Predinštalované balíčky – tu: Azure CLI, **azd**, Docker a Node.js |
+| `customizations.vscode.extensions` | Automatická inštalácia rozšírení azd a Bicep pre VS Code |
+| `forwardPorts` | Sprístupňuje port vašej aplikácie prehliadaču |
+| `postCreateCommand` | Spustí sa raz po zostavení kontajnera (tu, kontrola správnosti) |
 
-> Funkcia `ghcr.io/azure/azure-dev/azd:latest` je oficiálny spôsob, ako získať azd v kontajneri. Pre reprodukovateľnosť pripnite konkrétnu verziu (napríklad `azd:1.25.6`).
+> Funkcia `ghcr.io/azure/azure-dev/azd:latest` je oficiálny spôsob, ako získať azd v kontajneri. Ak potrebujete reprodukovateľnosť, pripnite konkrétnu verziu (napríklad `azd:1.27.1`).
 
 ---
 
-## Krok 2: Prispôsobte feature jazyku vašej aplikácie
+## Krok 2: Zmente funkciu podľa jazyka vašej aplikácie
 
-Nahraďte feature `node` tým, čo vaša aplikácia používa:
+Vymieňte funkciu `node` za tú, ktorú vaša aplikácia používa:
 
 ```jsonc
 // Python project
@@ -107,70 +107,70 @@ Nahraďte feature `node` tým, čo vaša aplikácia používa:
 "ghcr.io/devcontainers/features/go:1": {}
 ```
 
-Ponechajte `docker-in-docker`, ak váš `host` je `containerapp`, `aks` alebo čokoľvek, čo vytvára obraz kontajnera — azd potrebuje Docker na zostavenie a push obrazov.
+Zachovajte `docker-in-docker`, ak je váš `host` `containerapp`, `aks` alebo čokoľvek, čo vytvára image kontajnera – azd potrebuje Docker na zostavenie a odoslanie image.
 
 ---
 
-## Krok 3: Otvorte to
+## Krok 3: Otvorte projekt
 
 **Vo VS Code:**
 1. Nainštalujte rozšírenie **Dev Containers**.
-2. Otvorte priečinok projektu.
-3. Kliknite na **Reopen in Container**, keď sa zobrazí výzva (alebo spustite *Dev Containers: Reopen in Container*).
+2. Otvorte projektový priečinok.
+3. Kliknite na **Reopen in Container**, keď budete vyzvaní (alebo spustite *Dev Containers: Reopen in Container*).
 
 **V GitHub Codespaces:**
-1. Pushnite repozitár na GitHub.
-2. Kliknite **Code → Codespaces → Create codespace on main**.
-3. Počkajte, kým sa kontajner zostaví — azd je pripravené v termináli.
+1. Nahrajte repo do GitHubu.
+2. Kliknite na **Code → Codespaces → Create codespace on main**.
+3. Počkajte, kým sa kontajner zostaví – azd je pripravený v termináli.
 
 ---
 
-## Krok 4: Nasadiť z vnútra kontajnera
+## Krok 4: Deploy z kontajnera
 
-Kontajner má azd predinštalované, takže bežný pracovný postup funguje bez ďalších úprav:
+Kontajner má azd predinštalovaný, takže bežný pracovný postup funguje bez problémov:
 
 ```bash
-azd auth login --use-device-code   # kód zariadenia je praktický v Codespaces
+azd auth login --use-device-code   # kód zariadenia je užitočný v rámci Codespaces
 azd up
 ```
 
-> **Prečo `--use-device-code`?** Vo vzdialenom kontajneri alebo Codespace nie je lokálny prehliadač na presmerovanie, takže prihlasovanie cez device-code je spoľahlivé riešenie. Vložíte kód do záložky prehliadača, aby ste dokončili prihlásenie.
+> **Prečo `--use-device-code`?** V diaľkovom kontajneri alebo Codespace nie je lokálny prehliadač na presmerovanie, takže login pomocou device-kódu je spoľahlivá cesta. Skopírujete kód do prehliadača a dokončíte prihlásenie.
 
 ---
 
 ## Bežné problémy
 
 | Problém | Riešenie |
-|---------|-----|
-| `azd up` nemôže zostaviť obraz | Pridajte feature `docker-in-docker` |
-| Prihlasovanie cez prehliadač zamŕza v Codespaces | Použite `azd auth login --use-device-code` |
-| Nástroje sa líšia medzi členmi tímu | Zafixujte verzie funkcií (napr. `azd:1.25.6`) |
-| Aplikácia nie je prístupná v prehliadači | Pridajte port do `forwardPorts` |
+|---------|----------|
+| `azd up` nedokáže zostaviť image | Pridajte funkciu `docker-in-docker` |
+| Prihlásenie v prehliadači v Codespaces sa zasekáva | Použite `azd auth login --use-device-code` |
+| Nástroje sa líšia medzi členmi tímu | Pripnite verzie funkcií (napr. `azd:1.27.1`) |
+| Aplikácia nie je dostupná v prehliadači | Pridajte port do `forwardPorts` |
 
 ---
 
 ## Zhrnutie
 
-- Dev container zabezpečí, že nástroje azd budú pre každého reprodukovateľné.
-- Pridajte azd, Azure CLI a Docker pomocou *funkcií* Dev Container.
-- Prispôsobte jazykovú funkciu podľa vašej aplikácie a ponechajte `docker-in-docker` pre hostiteľov kontajnerov.
-- Pri spúšťaní v Codespaces používajte prihlasovanie cez device-code.
+- Vývojový kontajner robí váš nástrojový reťazec azd reprodukovateľným pre každého.
+- Pridajte azd, Azure CLI a Docker cez *funkcie* vývojového kontajnera.
+- Pripravte jazykovú funkciu pre vašu aplikáciu a nechajte `docker-in-docker` pre domény kontajnera.
+- Používajte device-kód pre prihlasovanie pri behu v Codespaces.
 
 ---
 
 ## 🔗 Navigácia
 
 | Smer | Zdroj |
-|-----------|----------|
-| **Predchádzajúca** | [Prineste svoju aplikáciu](bring-your-own-app.md) |
-| **Domov kapitoly** | [Kapitola 1: Základy a Rýchly štart](README.md) |
-| **Ďalšia kapitola** | [Kapitola 2: Vývoj orientovaný na AI](../chapter-02-ai-development/README.md) |
+|-------|------|
+| **Predchádzajúca** | [Použiť vlastnú aplikáciu](bring-your-own-app.md) |
+| **Domov kapitoly** | [Kapitola 1: Základy a rýchly štart](README.md) |
+| **Ďalšia kapitola** | [Kapitola 2: Vývoj založený na AI](../chapter-02-ai-development/README.md) |
 
 ## 📖 Súvisiace zdroje
 
 - [Inštalácia a nastavenie](installation.md)
-- [Rýchly prehľad príkazov](../../resources/cheat-sheet.md)
-- [Oficiálna špecifikácia Dev Containers](https://containers.dev/)
+- [Prehľad príkazov](../../resources/cheat-sheet.md)
+- [Oficiálna špecifikácia vývojových kontajnerov](https://containers.dev/)
 - [Funkcia azd Dev Container](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
 
 ---

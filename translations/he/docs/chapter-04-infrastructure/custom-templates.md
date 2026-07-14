@@ -1,67 +1,67 @@
-# כתיבת תבנית azd משלך
+# יצירת תבנית azd משלך
 
-**ניווט בין פרקים:**
-- **📚 בית הקורס**: [AZD למתחילים](../../README.md)
-- **📖 הפרק הנוכחי**: פרק 4 - תשתיות כקוד ופריסה
-- **⬅️ הקודם**: [מדריך פריסה](deployment-guide.md)
-- **🚀 הפרק הבא**: [פרק 5: פתרונות רב-סוכניים](../chapter-05-multi-agent/README.md)
+**ניווט בפרק:**
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+- **📖 הפרק הנוכחי**: פרק 4 - תשתית כקוד והפצה
+- **⬅️ הקודם**: [מדריך הפצה](deployment-guide.md)
+- **🚀 הפרק הבא**: [פרק 5: פתרונות Multi-Agent](../chapter-05-multi-agent/README.md)
 
-> מאומת מול `azd 1.25.6` ביוני 2026.
+> אומת עם `azd 1.27.1` ביולי 2026.
 
 ## מבוא
 
-עד כה *צרכת* תבניות באמצעות `azd init --template <name>`. אבל ברגע שיש לך פריסת פרויקט שהצוות אוהב—נגיד, Container App עם Cosmos DB והניטור המתאים—תרצה להפוך אותה לתבנית שניתן להשתמש בה שוב ושוב. תבנית היא פשוט מאגר Git עם מבנה צפוי ש-azd יודע לקרוא. השיעור הזה מראה איך לבנות אחת מאפס, לבדוק אותה, ו(באופן אופציונלי) לפרסם אותה לגלריית הקהילה.
+עד כה *צרכתם* תבניות עם `azd init --template <name>`. אבל ברגע שיש לכם סידור פרויקט שהצוות שלכם אוהב — למשל, אפליקציית Container עם Cosmos DB ומוניטורינג נכון — תרצו להפוך אותו לתבנית לשימוש חוזר משלכם. תבנית היא פשוט מאגר Git במבנה צפוי ש-azd יודע לקרוא. השיעור הזה מראה כיצד לבנות אחת מאפס, לבדוק אותה, ו(אופציונלי) לפרסם אותה לגלריית הקהילה.
 
-## מטרות הלימוד
+## מטרות הלמידה
 
-By the end of this lesson, you will:
-- להבין מה הופך תיקיה ל"תבנית azd"
-- להכיר את הקבצים והמבנה הנדרשים
-- להוסיף `azure.yaml` ו-`infra/` שאחרים יוכלו להשתמש בהם מחדש
-- לבדוק את התבנית באופן מקומי לפני השיתוף
-- לפרסם אותה ובאופן אופציונלי להגיש אותה ל-Awesome AZD
+בסיום שיעור זה, תוכלו:
+- להבין מה עושה תיקייה לתבנית "azd"
+- להכיר את הקבצים ומבנה התיקיות הנדרשים
+- להוסיף `azure.yaml` ו-`infra/` שאחרים יוכלו לשתף
+- לבדוק את התבנית מקומית לפני שיתוף
+- לפרסם אותה ו(אופציונלי) להגיש ל-Awesome AZD
 
 ## תוצאות למידה
 
-After completing this lesson, you will be able to:
-- להקים מאגר תבנית חדש
-- לפרמטר את התשתית כך שהיא תעבוד בכל מנוי
+לאחר שתסיימו שיעור זה, תוכלו:
+- לספק מאגר תבניות חדש
+- לפרמטר את התשתית כך שתעבוד בכל מינוי
 - לאמת תבנית עם `azd init` ו-`azd up`
-- להוסיף את המטא־דאטה שגלריית הקהילה דורשת
+- להוסיף את המטא-דאטה שגלריית הקהילה דורשת
 
 ---
 
-## What Is a Template, Really?
+## מהי תבנית, בעצם?
 
-An azd template is **a Git repository** that contains, at minimum:
+תבנית azd היא **מאגר Git** המכיל, לפחות:
 
-| File / folder | Purpose | Required? |
+| קובץ / תיקייה | מטרה | נדרש? |
 |---------------|---------|-----------|
-| `azure.yaml` | מתאר שירותים, מארחים וספק התשתית | ✅ כן |
-| `infra/` | Bicep, Terraform או Pulumi שמפריסים משאבים | ✅ כן |
-| `src/` (or your code) | קוד היישום ש-azd מפריס | ✅ כן |
-| `README.md` | כיצד להשתמש בתבנית | ✅ מומלץ בחום |
-| `.azdo/` or `.github/` | הגדרות צינור CI/CD | אופציונלי |
-| `.devcontainer/` | סביבת פיתוח שניתן לשחזר | אופציונלי |
-| `azure.yaml` `metadata` | מידע לגלריה וטלמטריה | אופציונלי (נדרש לפרסום) |
+| `azure.yaml` | מתאר שירותים, מארחים וספק תשתיות | ✅ כן |
+| `infra/` | Bicep, Terraform או Pulumi שמספקים משאבים | ✅ כן |
+| `src/` (או הקוד שלך) | קוד האפליקציה ש-azd מפעיל | ✅ כן |
+| `README.md` | איך להשתמש בתבנית | ✅ מומלץ מאוד |
+| `.azdo/` או `.github/` | הגדרות צנרת CI/CD | אופציונלי |
+| `.devcontainer/` | סביבת פיתוח מתועדת | אופציונלי |
+| `azure.yaml` `metadata` | מידע לגלריה + טלמטריה | אופציונלי (נדרש לפרסום) |
 
-There is nothing magic here: when you run `azd init --template you/your-repo`, azd clones the repo and reads `azure.yaml`.
+אין כאן קסם: כשאתה מפעיל `azd init --template you/your-repo`, azd משכפל את המאגר וקורא את `azure.yaml`.
 
 ---
 
-## Step 1: Scaffold the Repository
+## שלב 1: יצירת המבנה במאגר
 
-Create the folder structure by hand or start from a minimal template and edit it:
+צרו את מבנה התיקייה ידנית או התחילו מתבנית מינימלית וערכו אותה:
 
 ```bash
 mkdir my-azd-template && cd my-azd-template
 git init
 
-# צור את הפריסה הסטנדרטית
+# צור את התפריט הסטנדרטי
 mkdir -p src infra
 ```
 
-A typical finished layout looks like this:
+סידור טיפוסי נראה כך:
 
 ```
 my-azd-template/
@@ -81,9 +81,9 @@ my-azd-template/
 
 ---
 
-## Step 2: Write `azure.yaml`
+## שלב 2: כתיבת `azure.yaml`
 
-This is the heart of the template. It tells azd what to deploy and how:
+זהו הלב של התבנית. הוא אומר ל-azd מה לפרוס ואיך:
 
 ```yaml
 # azure.yaml
@@ -101,13 +101,13 @@ services:
     host: containerapp              # appservice | containerapp | function | aks | staticwebapp
 ```
 
-> The `metadata.template` field is what gallery telemetry uses to count usage. Use the `name@version` convention.
+> השדה `metadata.template` הוא מה שגלריית הטלמטריה משתמשת בו לספירת שימושים. השתמשו בקונבנציה `name@version`.
 
 ---
 
-## Step 3: Parameterize the Infrastructure
+## שלב 3: פרמטריזציה של התשתית
 
-The single most important rule for a *reusable* template: **never hardcode names, regions, or subscription-specific values.** Use parameters and the resource token pattern so the same template works in anyone's subscription.
+הכלל החשוב ביותר לתבנית *שניתנת לשימוש חוזר*: **לעולם אל תקבע שמות, אזורים, או ערכים ספציפיים למינוי קבועים בקוד.** השתמש בפרמטרים ובתבנית אסימון המשאב כך שהתבנית תעבוד במינוי של כל משתמש.
 
 ```bicep
 // infra/main.bicep
@@ -138,12 +138,12 @@ module web 'modules/web.bicep' = {
 output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 ```
 
-Two things make this template-friendly:
+שני דברים הופכים את התבנית לידידותית:
 
-1. **`azd-env-name` tag** — azd uses it to track and clean up resources per environment.
-2. **`uniqueString(...)` resource token** — produces a stable, globally-unique suffix so names don't collide.
+1. **תג `azd-env-name`** — azd משתמש בו לעקוב ולנקות משאבים לפי סביבה.
+2. **אסימון משאב `uniqueString(...)`** — מייצר סיומת יציבה וייחודית עולמית כך ששמות לא יתנגשו.
 
-Provide a matching parameters file that reads values azd injects from the environment:
+ספקו קובץ פרמטרים תואם שקורא ערכים ש-azd מזריק מהסביבה:
 
 ```json
 // infra/main.parameters.json
@@ -157,47 +157,47 @@ Provide a matching parameters file that reads values azd injects from the enviro
 }
 ```
 
-azd substitutes `${AZURE_ENV_NAME}` and `${AZURE_LOCATION}` from the current environment automatically.
+azd מחליף אוטומטית את `${AZURE_ENV_NAME}` ו-`${AZURE_LOCATION}` מהסביבה הנוכחית.
 
 ---
 
-## Step 4: Test Your Template Locally
+## שלב 4: בדקו את התבנית מקומית
 
-Before sharing, prove the template works from a clean state.
+לפני השיתוף, הוכיחו שהתבנית פועלת ממצב נקי.
 
-**Test from the local folder** (no Git push required):
+**בדקו מתיקייה מקומית** (לא נדרש דחיפה ל-Git):
 
 ```bash
-# מתוך תיקייה ריקה, אתחל באמצעות נתיב התבנית המקומי שלך
+# מאינדקס ריק, אתחל באמצעות נתיב התבנית המקומי שלך
 mkdir /tmp/test-run && cd /tmp/test-run
 azd init --template /path/to/my-azd-template
 
-# הקמה + פריסה מקצה לקצה
+# פרוויזיה + פריסה מקצה לקצה
 azd auth login
 azd up
 ```
 
-**Then test the teardown**—a good template cleans up completely:
+**ואז בדקו את הפירוק** — תבנית טובה מנקה הכל לחלוטין:
 
 ```bash
 azd down --force --purge
 ```
 
-If `azd down` leaves resources behind, you probably missed the `azd-env-name` tag on a resource.
+אם `azd down` משאיר משאבים, כנראה פספסתם את תג ה-`azd-env-name` על משאב מסוים.
 
-> **טיפ:** הרץ `azd provision --preview` קודם. הוא מבצע what-if ומחשף שגיאות בתבנית לפני שנוצר משאב כלשהו.
+> **טיפ:** הריצו קודם `azd provision --preview`. זה מבצע מה-אם ומוציא שגיאות תבנית לפני יצירת משאב.
 
 ---
 
-## Step 5: Publish the Template
+## שלב 5: פרסום התבנית
 
-Push the repository to GitHub (public if you want others to use it):
+דחפו את המאגר ל-GitHub (פומבי אם רוצים שאחרים ישתמשו בו):
 
 ```bash
 gh repo create my-azd-template --public --source=. --push
 ```
 
-Anyone can now use it:
+כל אחד יכול עכשיו להשתמש בו:
 
 ```bash
 azd init --template your-github-username/my-azd-template
@@ -205,39 +205,39 @@ azd init --template your-github-username/my-azd-template
 
 ---
 
-## Step 6 (Optional): Submit to Awesome AZD
+## שלב 6 (אופציונלי): הגשה ל-Awesome AZD
 
-The [Awesome AZD gallery](https://azure.github.io/awesome-azd/) lists community templates. To be listed your repo should include:
+[גלריית Awesome AZD](https://azure.github.io/awesome-azd/) מפרסמת תבניות קהילה. כדי להיכלל, על המאגר שלכם לכלול:
 
-- ✅ README.md ברור עם דרישות מקדמיות, דיאגרמת ארכיטקטורה והערות על עלויות
-- ✅ `azure.yaml` עובד עם `metadata.template`
-- ✅ תשתית שמפריסה באופן נקי במנוי חדש
+- ✅ קובץ `README.md` ברור עם דרישות, דיאגרמת ארכיטקטורה, והערות על עלויות
+- ✅ `azure.yaml` תקין עם `metadata.template`
+- ✅ תשתית שמספקת נקי במינוי חדש
 - ✅ קובץ `LICENSE`
-- ✅ (מומלץ) `.devcontainer/` ל-Codespaces בלחיצה אחת
+- ✅ (מומלץ) תיקיית `.devcontainer/` לסביבת Codespaces בלחיצה אחת
 
-Submit by opening a pull request that adds your template to the gallery's data file, following the contribution guide at the [מאגר Awesome AZD](https://github.com/Azure/awesome-azd).
+הגישו ע"י פתיחת Pull Request שמוסיף את התבנית שלכם לקובץ הנתונים של הגלריה, בהתאם למדריך התרומה ב-[מאגר Awesome AZD](https://github.com/Azure/awesome-azd).
 
 ---
 
-## מכשולים נפוצים
+## טעויות נפוצות
 
-| Pitfall | Fix |
+| טעות | תיקון |
 |---------|-----|
-| Hardcoded resource names | Use the `uniqueString()` resource token |
-| `azd down` leaves resources | Tag every resource (or the resource group) with `azd-env-name` |
-| Template works for you, fails for others | Remove subscription IDs, tenant IDs, and region assumptions |
-| Outputs not wired into the app | Export `SERVICE_<NAME>_ENDPOINT_URL` and other `AZURE_*` outputs |
-| Gallery submission rejected | Add `README.md`, `LICENSE`, and `metadata.template` |
+| שמות משאבים נכתבו קבועות בקוד | השתמשו באסימון משאב `uniqueString()` |
+| `azd down` משאיר משאבים | תייגו כל משאב (או את קבוצת המשאבים) עם `azd-env-name` |
+| התבנית עובדת אצלכם, נכשלת אצל אחרים | הסירו מזהי מינוי, מזהי טננט, והנחות אזור |
+| פלטים לא מחוברים לאפליקציה | ייצאו `SERVICE_<NAME>_ENDPOINT_URL` ופלטים אחרים של `AZURE_*` |
+| הגשת גלריה נדחתה | הוסיפו `README.md`, `LICENSE`, ו-`metadata.template` |
 
 ---
 
 ## סיכום
 
-- תבנית היא פשוט מאגר Git עם `azure.yaml`, `infra/`, והקוד שלך.
-- פרמטר את הכל—שמות, אזורים ומזהים—כדי שתרוץ בכל מקום.
-- תייג תמיד משאבים עם `azd-env-name` כך ש-`azd down` יעבוד.
-- בדוק מקומית עם `azd init --template <local-path>` לפני פרסום.
-- הוסף מטא־דאטה ו-README כדי להגיש ל-Awesome AZD.
+- תבנית היא רק מאגר Git עם `azure.yaml`, `infra/`, והקוד שלך.
+- פרמטרו הכל — שמות, אזורים, ומזהים — כדי שירוץ בכל מקום.
+- תמיד תייגו משאבים עם `azd-env-name` כדי ש-`azd down` יעבוד.
+- בדקו מקומית עם `azd init --template <local-path>` לפני הפרסום.
+- הוסיפו מטא-דאטה וקובץ README לצורך הגשה ל-Awesome AZD.
 
 ---
 
@@ -245,15 +245,15 @@ Submit by opening a pull request that adds your template to the gallery's data f
 
 | כיוון | משאב |
 |-----------|----------|
-| **הקודם** | [מדריך פריסה](deployment-guide.md) |
-| **בית הפרק** | [פרק 4: תשתיות כקוד](README.md) |
-| **הפרק הבא** | [פרק 5: פתרונות רב-סוכניים](../chapter-05-multi-agent/README.md) |
+| **קודם** | [מדריך הפצה](deployment-guide.md) |
+| **דף הבית של הפרק** | [פרק 4: תשתית כקוד](README.md) |
+| **הפרק הבא** | [פרק 5: פתרונות Multi-Agent](../chapter-05-multi-agent/README.md) |
 
 ## 📖 משאבים קשורים
 
 - [פריסת משאבים](provisioning.md)
 - [גלריית Awesome AZD](https://azure.github.io/awesome-azd/)
-- [התיעוד הרשמי של תבניות azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
+- [תיעוד רשמי לתבניות azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
 
 ---
 

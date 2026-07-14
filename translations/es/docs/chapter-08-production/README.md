@@ -1,23 +1,23 @@
 # Capítulo 8: Patrones de Producción y Empresariales
 
-**📚 Curso**: [AZD For Beginners](../../README.md) | **⏱️ Duración**: 2-3 hours | **⭐ Complejidad**: Avanzado
+**📚 Curso**: [AZD Para Principiantes](../../README.md) | **⏱️ Duración**: 2-3 horas | **⭐ Complejidad**: Avanzado
 
 ---
 
-## Resumen
+## Visión General
 
-Este capítulo cubre patrones de despliegue listos para empresa, endurecimiento de seguridad, monitoreo y optimización de costos para cargas de trabajo de IA en producción.
+Este capítulo cubre patrones de despliegue listos para empresas, endurecimiento de seguridad, monitoreo y optimización de costos para cargas de trabajo de IA en producción.
 
-> Validado contra `azd 1.25.6` en junio de 2026.
+> Validado contra `azd 1.27.1` en julio de 2026.
 
-## Objetivos de aprendizaje
+## Objetivos de Aprendizaje
 
-Al completar este capítulo, podrás:
-- Implementar aplicaciones resistentes en múltiples regiones
+Al completar este capítulo, usted podrá:
+- Desplegar aplicaciones resilientes multi-región
 - Implementar patrones de seguridad empresariales
 - Configurar monitoreo integral
-- Optimizar costos a escala
-- Configurar pipelines de CI/CD con AZD
+- Optimizar costos a gran escala
+- Configurar pipelines CI/CD con AZD
 
 ---
 
@@ -29,39 +29,39 @@ Al completar este capítulo, podrás:
 
 ---
 
-## 🚀 Lista de verificación de producción
+## 🚀 Lista de Verificación para Producción
 
-- [ ] Despliegue multirregional para resiliencia
+- [ ] Despliegue multi-región para resiliencia
 - [ ] Identidad administrada para autenticación (sin claves)
 - [ ] Application Insights para monitoreo
 - [ ] Presupuestos y alertas de costos configurados
 - [ ] Escaneo de seguridad habilitado
-- [ ] Integración de pipelines CI/CD
+- [ ] Integración de pipeline CI/CD
 - [ ] Plan de recuperación ante desastres
 
 ---
 
-## 🏗️ Patrones de arquitectura
+## 🏗️ Patrones de Arquitectura
 
-### Patrón 1: IA de microservicios
+### Patrón 1: Microservicios en IA
 
 ```mermaid
 graph LR
-    Gateway[Pasarela de API] --> AI[Servicio de IA] --> Models[Modelos de Microsoft Foundry]
+    Gateway[Puerta de enlace API] --> AI[Servicio de IA] --> Models[Modelos Microsoft Foundry]
     Gateway --> Auth[Servicio de Autenticación]
-    AI --> Data[Almacén de Datos]
+    AI --> Data[Almacén de datos]
 ```
 
-### Patrón 2: IA orientada a eventos
+### Patrón 2: IA impulsada por eventos
 
 ```mermaid
 graph LR
-    EventGrid[Grid de eventos] --> Functions[Funciones] --> Pipeline[Canalización de IA]
+    EventGrid[Cuadrícula de Eventos] --> Functions[Funciones] --> Pipeline[Canalización de IA]
 ```
 
 ---
 
-## 🔐 Mejores prácticas de seguridad
+## 🔐 Mejores Prácticas de Seguridad
 
 ```bicep
 // Use managed identity
@@ -80,17 +80,17 @@ properties: {
 
 ---
 
-## 💰 Optimización de costos
+## 💰 Optimización de Costos
 
 | Estrategia | Ahorros |
 |----------|---------|
 | Escalar a cero (Container Apps) | 60-80% |
-| Usar niveles de consumo para desarrollo | 50-70% |
+| Usar niveles por consumo para desarrollo | 50-70% |
 | Escalado programado | 30-50% |
 | Capacidad reservada | 20-40% |
 
 ```bash
-# Configurar alertas de presupuesto
+# Establecer alertas de presupuesto
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -100,13 +100,13 @@ az consumption budget create \
 
 ---
 
-## 📊 Configuración de monitoreo
+## 📊 Configuración de Monitoreo
 
 ```bash
 # Transmitir registros
 azd monitor --logs
 
-# Comprobar Application Insights
+# Verificar Application Insights
 azd monitor --overview
 
 # Ver métricas
@@ -119,17 +119,17 @@ az monitor metrics list --resource <resource-id>
 
 | Dirección | Capítulo |
 |-----------|---------|
-| **Anterior** | [Capítulo 7: Solución de problemas](../chapter-07-troubleshooting/README.md) |
-| **Curso completo** | [Inicio del curso](../../README.md) |
+| **Anterior** | [Capítulo 7: Solución de Problemas](../chapter-07-troubleshooting/README.md) |
+| **Curso Completo** | [Inicio del Curso](../../README.md) |
 
 ---
 
-## 📖 Recursos relacionados
+## 📖 Recursos Relacionados
 
-- [Guía de agentes de IA](../chapter-02-ai-development/agents.md)
+- [Guía de Agentes de IA](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Soluciones multiagente](../chapter-05-multi-agent/README.md)
-- [Ejemplo de microservicios](../../examples/microservices/README.md)
+- [Soluciones Multi-Agente](../chapter-05-multi-agent/README.md)
+- [Ejemplo de Microservicios](../../examples/microservices/README.md)
 
 ---
 

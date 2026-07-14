@@ -1,59 +1,59 @@
-# Bring Your Own App - Add azd to an Existing Project
+# Prineste si svoju aplikáciu - Pridajte azd do existujúceho projektu
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
-- **⬅️ Previous**: [Your First Project](first-project.md)
-- **➡️ Next**: [Dev Containers & Codespaces](dev-containers.md)
+**Navigácia kapitolou:**
+- **📚 Domov kurzu**: [AZD pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 1 - Základy a Rýchly štart
+- **⬅️ Predchádzajúca**: [Váš prvý projekt](first-project.md)
+- **➡️ Nasledujúca**: [Vývojové kontajnery a Codespaces](dev-containers.md)
 
-> Overené s `azd 1.25.6` v júni 2026.
+> Overené s `azd 1.27.1` v júli 2026.
 
-## Introduction
+## Úvod
 
-V [Your First Project](first-project.md) ste nasadili aplikáciu tak, že ste začali zo šablóny. Väčšinou však už aplikáciu máte — Node.js API, Python Flask službu, .NET webovú aplikáciu — vo foldri na vašom počítači. Táto lekcia ukazuje, ako pridať azd k existujúcemu kódu, aby ste ho mohli nasadiť pomocou `azd up`, bez potreby šablóny.
+V [Vašom prvom projekte](first-project.md) ste nasadili aplikáciu začatím z šablóny. Ale väčšinou už aplikáciu *máte* — Node.js API, Python Flask službu, .NET webovú aplikáciu — ktorá je uložená v priečinku na vašom počítači. Táto lekcia ukazuje, ako pridať azd do tohto existujúceho kódu, aby ste ho mohli nasadiť pomocou `azd up`, bez potreby šablóny.
 
-## Learning Goals
+## Ciele učenia
 
 Na konci tejto lekcie budete:
 - Rozumieť trom spôsobom, ako začať projekt azd
-- Spustiť `azd init` v existujúcom kóde
-- Rozumieť, čo robí `azure.yaml` a priečinok `infra/` pre vašu aplikáciu
-- Vedieť, kedy nechať azd vygenerovať infraštruktúru vs. kedy ju napísať sami
-- Nasadiť svoju existujúcu aplikáciu do Azure pomocou `azd up`
+- Spustiť `azd init` vo vnútri existujúcej kódbázy
+- Rozumieť, čo robí súbor `azure.yaml` a priečinok `infra/` pre vašu aplikáciu
+- Vedieť, kedy nechať azd generovať infraštruktúru a kedy písať vlastnú
+- Nasadiť vašu existujúcu aplikáciu do Azure pomocou `azd up`
 
-## Learning Outcomes
+## Výsledky učenia
 
-Po dokončení tejto lekcie budete vedieť:
+Po dokončení tejto lekcie budete schopní:
 - Inicializovať azd v projekte, ktorý už máte
 - Čítať a upravovať základný súbor `azure.yaml`
 - Generovať počiatočnú infraštruktúru pomocou `azd infra generate`
-- Vybrať vhodný Azure host pre vašu aplikáciu
+- Vybrať vhodný hostiteľ Azure pre vašu aplikáciu
 - Nasadiť a vyčistiť vlastnú aplikáciu
 
 ---
 
-## Three Ways to Start an azd Project
+## Tri spôsoby, ako začať projekt azd
 
-| Starting point | Command | When to use |
+| Východiskový bod | Príkaz | Kedy použiť |
 |----------------|---------|-------------|
-| **From a template** | `azd init --template <name>` | Na učenie sa alebo pri štarte novej aplikácie zo overeného príkladu |
-| **From your existing code** | `azd init` (in your project folder) | Už máte aplikáciu a chcete ju nasadiť |
-| **From a Git repo** | `azd init --from-code` (in a cloned repo) | Zavádzanie azd do existujúceho repozitára |
+| **Zo šablóny** | `azd init --template <name>` | Učenie sa alebo začatie novej aplikácie zo overeného príkladu |
+| **Z existujúceho kódu** | `azd init` (vo vašom projektovom priečinku) | Už máte aplikáciu a chcete ju nasadiť |
+| **Z Git repozitára** | `azd init --from-code` (v sklonovanom repozitári) | Prijať azd pre existujúce úložisko |
 
-Už ste si vyskúšali prvú možnosť. Táto lekcia pokrýva druhú — najbežnejší reálny scenár.
+Už ste si vyskúšali prvú možnosť. Táto lekcia sa venuje druhej — najbežnejšiemu reálnemu scenáru.
 
 ---
 
-## Step 1: Run `azd init` in Your Project
+## Krok 1: Spustite `azd init` vo vašom projekte
 
-Open a terminal **inside your existing project folder** and run:
+Otvorte terminál **vo vnútri vášho existujúceho projektového priečinka** a spustite:
 
 ```bash
 cd my-existing-app
 azd init
 ```
 
-azd will ask how you want to initialize. Choose:
+azd sa spýta, ako chcete inicializovať. Vyberte:
 
 ```
 ? How do you want to initialize your app?
@@ -61,26 +61,26 @@ azd will ask how you want to initialize. Choose:
   Select a template
 ```
 
-Vyberte **"Use code in the current directory."** azd potom prehľadá váš priečinok, zistí váš jazyk a framework a navrhne hostiteľa.
+Vyberte **"Použiť kód v aktuálnom priečinku."** azd potom prehľadá váš priečinok, zistí váš jazyk a framework a navrhne hostiteľa.
 
-### What azd detects
+### Čo azd zistí
 
-azd hľadá signály ako `package.json`, `requirements.txt`, `pom.xml`, `*.csproj`, alebo `Dockerfile` a navrhne zodpovedajúci Azure host:
+azd hľadá signály ako `package.json`, `requirements.txt`, `pom.xml`, `*.csproj` alebo `Dockerfile` a navrhuje zodpovedajúceho hostiteľa Azure:
 
-| Your app | Likely detected host |
+| Vaša aplikácia | Pravdepodobný zistený hostiteľ |
 |----------|----------------------|
-| Node.js / Python / .NET web app | Azure App Service or Container Apps |
-| Containerized app (`Dockerfile`) | Azure Container Apps |
-| Function app | Azure Functions |
-| Static site (React/Vue build output) | Azure Static Web Apps |
+| Node.js / Python / .NET webová aplikácia | Azure App Service alebo Container Apps |
+| Kontajnerizovaná aplikácia (`Dockerfile`) | Azure Container Apps |
+| Funkčná aplikácia | Azure Functions |
+| Statická stránka (výstup zo stavby React/Vue) | Azure Static Web Apps |
 
-Potvrďte zistené služby a azd vygeneruje súbory, ktoré potrebujete.
+Potvrďte zistené služby a azd vytvorí potrebné súbory.
 
 ---
 
-## Step 2: Understand What azd Created
+## Krok 2: Pochopte, čo azd vytvoril
 
-After init, you'll have two new things in your project:
+Po inicializácii budete mať v projekte dve nové veci:
 
 ```
 my-existing-app/
@@ -92,9 +92,9 @@ my-existing-app/
 └── ...                 # your existing files, untouched
 ```
 
-### `azure.yaml` — the project definition
+### `azure.yaml` — definícia projektu
 
-Toto je jadro projektu azd. Minimálny súbor vyzerá takto:
+Toto je srdce projektu azd. Minimálna verzia vyzerá takto:
 
 ```yaml
 # azure.yaml
@@ -106,70 +106,70 @@ services:
     host: appservice         # appservice | containerapp | function | staticwebapp
 ```
 
-Blok `services` je kľúčová časť: každá položka mapuje priečinok vášho kódu na Azure hostiteľa. Ak má vaša aplikácia frontend aj API, budete mať dve služby.
+Blok `services` je kľúčovou časťou: každá položka mapuje priečinok vášho kódu na hostiteľa Azure. Ak má vaša aplikácia front-end aj API, budete mať dve služby.
 
-### `infra/` — your Azure resources as code
+### `infra/` — vaše Azure zdroje ako kód
 
-Priečinok `infra/` obsahuje Bicep súbory, ktoré definujú Azure zdroje, ktoré vaša aplikácia potrebuje (App Service, databázu atď.). Nemusíte ich písať ručne — azd vygeneruje funkčný východiskový bod. Neskôr ich môžete upraviť, aby ste pridali zdroje alebo sprísnili zabezpečenie (pokryté v [Chapter 4](../chapter-04-infrastructure/README.md)).
+Priečinok `infra/` obsahuje súbory Bicep, ktoré definujú Azure zdroje, ktoré vaša aplikácia potrebuje (App Service, databázu, atď.). Nemusíte ich písať ručne — azd generuje funkčný počiatočný bod. Neskôr ich *môžete* upravovať na pridanie zdrojov alebo zvýšenie bezpečnosti (popísané v [kapitole 4](../chapter-04-infrastructure/README.md)).
 
-> **Tip:** Chcete vidieť alebo prispôsobiť vygenerovanú infraštruktúru pred nasadením? Spustite `azd infra generate` (tiež dostupné ako `azd infra synth`), aby sa IaC zapísalo na disk, môžete ho skontrolovať a verzovať.
+> **Tip:** Chcete vidieť alebo prispôsobiť generovanú infraštruktúru pred nasadením? Spustite `azd infra generate` (takisto dostupné ako `azd infra synth`), aby ste zapísali IaC na disk, kde ju môžete skontrolovať a verzovať.
 
 ---
 
-## Step 3: Set Required Configuration
+## Krok 3: Nastavte požadovanú konfiguráciu
 
-If your app needs settings or secrets (a connection string, an API key), don't hardcode them. Use environment values:
+Ak vaša aplikácia potrebuje nastavenia alebo tajomstvá (pripojovací reťazec, API kľúč), neukladajte ich natvrdo do kódu. Používajte hodnoty prostredia:
 
 ```bash
 # Vytvorte prostredie
 azd env new dev
 
-# Nastavte netajnú hodnotu
+# Nastavte hodnotu, ktorá nie je tajná
 azd env set API_VERSION 1.0.0
 ```
 
-Pre skutočné tajomstvá uložte hodnoty do Key Vault a odkazujte na ne z vašej infraštruktúry — pozrite [Chapter 3: Configuration & Authentication](../chapter-03-configuration/authsecurity.md).
+Pre skutočné tajomstvá ich ukladáte do Key Vault a odkazujete ich vo vašej infraštruktúre — pozrite [kapitolu 3: Konfigurácia a autenfikácia](../chapter-03-configuration/authsecurity.md).
 
 ---
 
-## Step 4: Deploy
+## Krok 4: Nasadenie
 
-Now use the same workflow you already know:
+Teraz použite ten istý pracovný tok, ktorý už poznáte:
 
 ```bash
-# Autentifikácia (vyžaduje sa pre azd)
+# Overiť (vyžaduje sa pre azd)
 azd auth login
 
-# Náhľad zdrojov, ktoré budú vytvorené
+# Náhľad prostriedkov, ktoré budú vytvorené
 azd provision --preview
 
-# Poskytnutie infraštruktúry a nasadenie vášho kódu
+# Zabezpečiť infraštruktúru a nasadiť váš kód
 azd up
 ```
 
-When it finishes, azd prints your app's URL. Verify it the same way as any azd app:
+Po dokončení azd zobrazí URL vašej aplikácie. Overte ju rovnakým spôsobom ako ktorúkoľvek aplikáciu azd:
 
 ```bash
 azd show           # zobraziť koncové body
-azd monitor --logs # skontrolovať záznamy podľa potreby
+azd monitor --logs # skontrolovať protokoly, ak je to potrebné
 ```
 
 ---
 
-## Common First-Time Issues
+## Bežné prvé problémy
 
-| Symptom | Likely cause | Fix |
+| Symptóm | Pravdepodobná príčina | Riešenie |
 |---------|--------------|-----|
-| azd didn't detect my app | Missing manifest (e.g., `package.json`) | Pridajte manifest alebo počas `azd init` vyberte hostiteľa manuálne |
-| Build fails during `azd up` | App needs a build step | Pridajte `buildCommand`/`outputPath` pod službu v `azure.yaml` |
-| App starts but returns errors | Missing config/secret | Nastavte hodnoty pomocou `azd env set` alebo prepojte Key Vault |
-| Wrong host chosen | Auto-detection guessed | Upravte `host:` v `azure.yaml` a znova spustite `azd up` |
+| azd nezistil moju aplikáciu | Chýbajúci manifest (napr. `package.json`) | Pridajte manifest alebo ručne vyberte hostiteľa počas `azd init` |
+| Zlyhanie kompilačného kroku počas `azd up` | Aplikácia potrebuje krok zostavenia | Pridajte `buildCommand`/`outputPath` pod službou v `azure.yaml` |
+| Aplikácia sa spustí, ale vracia chyby | Chýbajúca konfigurácia/tajomstvo | Nastavte hodnoty pomocou `azd env set` alebo prepojte Key Vault |
+| Vybraný nesprávny hostiteľ | Autodetekcia uhádla | Upraviť `host:` v `azure.yaml` a znova spustiť `azd up` |
 
-Pre viac informácií pozrite [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/README.md).
+Pre viac informácií pozrite [kapitolu 7: Riešenie problémov](../chapter-07-troubleshooting/README.md).
 
 ---
 
-## Clean Up
+## Vyčistenie
 
 ```bash
 azd down --force --purge
@@ -177,28 +177,28 @@ azd down --force --purge
 
 ---
 
-## Summary
+## Zhrnutie
 
-- `azd init` → **"Use code in the current directory"** pridá azd k aplikácii, ktorú už máte.
-- `azure.yaml` mapuje priečinky kódu na Azure hostiteľov; `infra/` definuje zdroje ako Bicep.
-- `azd infra generate` vám umožní skontrolovať alebo prispôsobiť vygenerovanú infraštruktúru.
-- Po inicializácii vaša existujúca aplikácia používa presne rovnaký pracovný tok `azd up` / `azd down` ako aplikácia založená na šablóne.
+- `azd init` → **"Použiť kód v aktuálnom priečinku"** pridá azd k aplikácii, ktorú už máte.
+- `azure.yaml` mapuje priečinky vášho kódu na Azure hostiteľov; `infra/` definuje zdroje pomocou Bicep.
+- `azd infra generate` vám umožňuje prezrieť alebo prispôsobiť generovanú infraštruktúru.
+- Po inicializácii vaša existujúca aplikácia používa rovnaký pracovný tok `azd up` / `azd down` ako aplikácia založená na šablóne.
 
 ---
 
-## 🔗 Navigation
+## 🔗 Navigácia
 
-| Direction | Lesson |
+| Smer | Lekcia |
 |-----------|--------|
-| **Previous** | [Your First Project](first-project.md) |
-| **Next** | [Dev Containers & Codespaces](dev-containers.md) |
+| **Predchádzajúca** | [Váš prvý projekt](first-project.md) |
+| **Nasledujúca** | [Vývojové kontajnery a Codespaces](dev-containers.md) |
 
-## 📖 Related Resources
+## 📖 Súvisiace zdroje
 
-- [AZD Basics](azd-basics.md)
-- [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/README.md)
-- [Configuration & Authentication](../chapter-03-configuration/authsecurity.md)
-- [Command Cheat Sheet](../../resources/cheat-sheet.md)
+- [Základy AZD](azd-basics.md)
+- [Kapitola 4: Infraštruktúra ako kód](../chapter-04-infrastructure/README.md)
+- [Konfigurácia a autentifikácia](../chapter-03-configuration/authsecurity.md)
+- [Podrobný príručkový zoznam príkazov](../../resources/cheat-sheet.md)
 
 ---
 

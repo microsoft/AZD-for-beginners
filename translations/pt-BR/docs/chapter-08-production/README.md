@@ -1,4 +1,4 @@
-# Capítulo 8: Padrões de Produção e Empresariais
+# Capítulo 8: Padrões de Produção e Empresas
 
 **📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 2-3 horas | **⭐ Complexidade**: Avançado
 
@@ -8,15 +8,15 @@
 
 Este capítulo aborda padrões de implantação prontos para empresas, fortalecimento de segurança, monitoramento e otimização de custos para cargas de trabalho de IA em produção.
 
-> Validado contra `azd 1.25.6` em junho de 2026.
+> Validado contra `azd 1.27.1` em julho de 2026.
 
 ## Objetivos de Aprendizagem
 
 Ao concluir este capítulo, você irá:
-- Implantar aplicações resilientes em múltiplas regiões
-- Implementar padrões de segurança empresariais
+- Implantar aplicações resilientes multi-região
+- Implementar padrões de segurança empresarial
 - Configurar monitoramento abrangente
-- Otimizar custos em escala
+- Otimizar custos em grande escala
 - Configurar pipelines CI/CD com AZD
 
 ---
@@ -25,17 +25,17 @@ Ao concluir este capítulo, você irá:
 
 | # | Lição | Descrição | Tempo |
 |---|--------|-------------|------|
-| 1 | [Práticas de IA para Produção](production-ai-practices.md) | Padrões de implantação empresariais | 90 min |
+| 1 | [Práticas de IA em Produção](production-ai-practices.md) | Padrões de implantação empresarial | 90 min |
 
 ---
 
-## 🚀 Checklist de Produção
+## 🚀 Lista de Verificação de Produção
 
-- [ ] Implantação em múltiplas regiões para resiliência
+- [ ] Implantação multi-região para resiliência
 - [ ] Identidade gerenciada para autenticação (sem chaves)
 - [ ] Application Insights para monitoramento
-- [ ] Orçamentos e alertas de custo configurados
-- [ ] Verificação de segurança habilitada
+- [ ] Orçamentos de custos e alertas configurados
+- [ ] Varredura de segurança habilitada
 - [ ] Integração com pipeline CI/CD
 - [ ] Plano de recuperação de desastres
 
@@ -43,11 +43,11 @@ Ao concluir este capítulo, você irá:
 
 ## 🏗️ Padrões de Arquitetura
 
-### Padrão 1: IA de Microsserviços
+### Padrão 1: IA com Microsserviços
 
 ```mermaid
 graph LR
-    Gateway[Gateway de API] --> AI[Serviço de IA] --> Models[Modelos do Foundry da Microsoft]
+    Gateway[Gateway de API] --> AI[Serviço de IA] --> Models[Modelos Microsoft Foundry]
     Gateway --> Auth[Serviço de Autenticação]
     AI --> Data[Armazenamento de Dados]
 ```
@@ -82,11 +82,11 @@ properties: {
 
 ## 💰 Otimização de Custos
 
-| Estratégia | Economias |
+| Estratégia | Economia |
 |----------|---------|
 | Escalar para zero (Container Apps) | 60-80% |
 | Usar camadas de consumo para desenvolvimento | 50-70% |
-| Escalonamento programado | 30-50% |
+| Escalonamento agendado | 30-50% |
 | Capacidade reservada | 20-40% |
 
 ```bash
@@ -109,7 +109,7 @@ azd monitor --logs
 # Verificar o Application Insights
 azd monitor --overview
 
-# Exibir métricas
+# Visualizar métricas
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -119,8 +119,8 @@ az monitor metrics list --resource <resource-id>
 
 | Direção | Capítulo |
 |-----------|---------|
-| **Anterior** | [Capítulo 7: Solução de Problemas](../chapter-07-troubleshooting/README.md) |
-| **Curso Concluído** | [Início do Curso](../../README.md) |
+| **Anterior** | [Capítulo 7: Resolução de Problemas](../chapter-07-troubleshooting/README.md) |
+| **Curso Completo** | [Página Inicial do Curso](../../README.md) |
 
 ---
 

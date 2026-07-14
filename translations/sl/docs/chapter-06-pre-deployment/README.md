@@ -1,23 +1,23 @@
-# Poglavje 6: Načrtovanje in preverjanje pred uvajanjem
+# Poglavje 6: Načrtovanje pred uvajanjem in preverjanje
 
-**📚 Tečaj**: [AZD za začetnike](../../README.md) | **⏱️ Trajanje**: 1 ura | **⭐ Zahtevnost**: Srednja
+**📚 Tečaj**: [AZD za začetnike](../../README.md) | **⏱️ Trajanje**: 1 ura | **⭐ Kompleksnost**: Srednje zahtevno
 
 ---
 
 ## Pregled
 
-To poglavje zajema bistvene korake načrtovanja in preverjanja pred uvajanjem vaše aplikacije. Naučite se, kako se izogniti dragim napakam z ustreznim načrtovanjem zmogljivosti, izbiro SKU-jev in predhodnimi pregledi.
+To poglavje zajema bistvene korake načrtovanja in preverjanja pred uvajanjem vaše aplikacije. Naučite se izogniti dragim napakam z ustreznim načrtovanjem zmogljivosti, izbiro SKU-jev in predhodnimi preverjanji.
 
-> Preverjeno z `azd 1.25.6` v juniju 2026.
+> Preverjeno z `azd 1.27.1` julija 2026.
 
 ## Cilji učenja
 
-Z zaključkom tega poglavja boste:
+Z dokončanjem tega poglavja boste:
 - Izvedli predhodna preverjanja pred uvajanjem
 - Načrtovali zmogljivost in ocenili zahteve po virih
 - Izbrali ustrezne SKU-je za optimizacijo stroškov
-- Konfigurirali Application Insights za spremljanje
-- Razumeli vzorce koordinacije ekipe
+- Konfigurirali Application Insights za nadzor
+- Razumeli vzorce usklajevanja ekipe
 
 ---
 
@@ -26,23 +26,23 @@ Z zaključkom tega poglavja boste:
 | # | Lekcija | Opis | Čas |
 |---|--------|-------------|------|
 | 1 | [Predhodna preverjanja](preflight-checks.md) | Preverite konfiguracijo pred uvajanjem | 15 min |
-| 2 | [Načrtovanje zmogljivosti](capacity-planning.md) | Ocenite zahteve po virih | 20 min |
-| 3 | [Izbira SKU-jev](sku-selection.md) | Izberite ustrezne cenovne stopnje | 15 min |
-| 4 | [Application Insights](application-insights.md) | Konfigurirajte spremljanje | 20 min |
-| 5 | [Vzorce koordinacije](coordination-patterns.md) | Delovni poteki ekipe pri uvajanju | 15 min |
+| 2 | [Načrtovanje zmogljivosti](capacity-planning.md) | Ocenite zahteve virov | 20 min |
+| 3 | [Izbira SKU](sku-selection.md) | Izberite ustrezne cenovne razrede | 15 min |
+| 4 | [Application Insights](application-insights.md) | Konfiguracija nadzora | 20 min |
+| 5 | [Vzorce usklajevanja](coordination-patterns.md) | Delovni tokovi uvajanja ekipe | 15 min |
 
 ---
 
-## 🚀 Hitri začetek
+## 🚀 Hiter začetek
 
 ```bash
 # Preveri kvote naročnine
 az vm list-usage --location eastus --output table
 
-# Predogled uvajanja (ne bodo ustvarjeni viri)
+# Predogled namestitve (ne ustvarja virov)
 azd provision --preview
 
-# Preveri sintakso Bicepa
+# Preveri skladnost sintakse Bicep
 az bicep build --file infra/main.bicep
 
 # Preveri konfiguracijo okolja
@@ -51,49 +51,49 @@ azd env get-values
 
 ---
 
-## ☑️ Seznam za preverjanje pred uvajanjem
+## ☑️ Kontrolni seznam pred uvajanjem
 
 ### Pred `azd provision`
 
-- [ ] Kvote preverjene za regijo
-- [ ] SKU-ji ustrezno izbrani
-- [ ] Ocena stroškov pregledana
-- [ ] Poimenovalna konvencija dosledna
-- [ ] Varnost/RBAC konfigurirana
+- [ ] Preverjena kvota za regijo
+- [ ] Ustrezno izbrani SKU-ji
+- [ ] Pregledana ocena stroškov
+- [ ] Konsistentna konvencija poimenovanja
+- [ ] Konfigurirana varnost/RBAC
 
 ### Pred `azd deploy`
 
-- [ ] Spremenljivke okolja nastavljene
-- [ ] Skrivnosti v Key Vault
-- [ ] Nizi za povezavo preverjeni
-- [ ] Preverjanja stanja konfigurirana
+- [ ] Nastavljene okoljske spremenljivke
+- [ ] Gesla v Key Vault
+- [ ] Preverjene povezovalne nizi
+- [ ] Konfigurirani zdravstveni pregledi
 
 ---
 
-## 💰 Vodnik za izbiro SKU-jev
+## 💰 Vodič za izbiro SKU
 
-| Delovna obremenitev | Razvoj | Produkcija |
+| Delovno breme | Razvoj | Produkcija |
 |----------|-------------|------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
-| Modeli Microsoft Foundry | Standard | Standard + PTU |
+| Microsoft Foundry Models | Standard | Standard + PTU |
 | AI Search | Basic | Standard S2+ |
 
 ---
 
 ## 🔗 Navigacija
 
-| Smer | Poglavje |
+| Usmeritev | Poglavje |
 |-----------|---------|
-| **Prejšnje** | [Poglavje 5: Večagentni](../chapter-05-multi-agent/README.md) |
-| **Naslednje** | [Poglavje 7: Odpravljanje težav](../chapter-07-troubleshooting/README.md) |
+| **Prejšnje** | [Poglavje 5: Večagentno](../chapter-05-multi-agent/README.md) |
+| **Naslednje** | [Poglavje 7: Odpravljanje napak](../chapter-07-troubleshooting/README.md) |
 
 ---
 
-## 📖 Povezani viri
+## 📖 Sorodni viri
 
-- [Vodnik za konfiguracijo](../chapter-03-configuration/configuration.md)
-- [Vodnik za uvajanje](../chapter-04-infrastructure/deployment-guide.md)
+- [Vodič za konfiguracijo](../chapter-03-configuration/configuration.md)
+- [Vodič za uvajanje](../chapter-04-infrastructure/deployment-guide.md)
 - [Pogoste težave](../chapter-07-troubleshooting/common-issues.md)
 
 ---

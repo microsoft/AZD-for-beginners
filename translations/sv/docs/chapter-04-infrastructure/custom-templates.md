@@ -1,20 +1,20 @@
-# Skapa din egen azd-mall
+# Skapa Din Egen azd-mall
 
-**Kapitelnavigering:**
-- **📚 Kursens startsida**: [AZD For Beginners](../../README.md)
-- **📖 Aktuellt kapitel**: Kapitel 4 - Infrastruktur som kod & distribution
-- **⬅️ Föregående**: [Deployment Guide](deployment-guide.md)
-- **🚀 Nästa kapitel**: [Chapter 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md)
+**Kapitelnavigation:**
+- **📚 Kursens Startsida**: [AZD För Nybörjare](../../README.md)
+- **📖 Nuvarande Kapitel**: Kapitel 4 - Infrastruktur som Kod & Distribution
+- **⬅️ Föregående**: [Distribueringsguide](deployment-guide.md)
+- **🚀 Nästa Kapitel**: [Kapitel 5: Multi-Agent Lösningar](../chapter-05-multi-agent/README.md)
 
-> Validerad mot `azd 1.25.6` i juni 2026.
+> Validerad mot `azd 1.27.1` i juli 2026.
 
 ## Introduktion
 
-Hittills har du *använt* mallar med `azd init --template <name>`. Men när du har en projektstruktur som ditt team gillar—till exempel en Container App med en Cosmos DB och rätt övervakning—kommer du vilja göra den till en återanvändbar mall. En mall är helt enkelt ett Git-repository med en förutsägbar struktur som azd vet hur man läser. Den här lektionen visar hur du bygger en från grunden, testar den och (valfritt) publicerar den i community-galleriet.
+Hittills har du *använt* mallar med `azd init --template <name>`. Men när du väl har en projektstruktur som ditt team gillar—till exempel en Container App med Cosmos DB och rätt övervakning—vill du göra om den till en återanvändbar mall. En mall är helt enkelt ett Git-repo med en förutsägbar struktur som azd vet hur man läser. Denna lektion visar hur du skapar en från grunden, testar den och (valfritt) publicerar den till community-galleriet.
 
 ## Lärandemål
 
-Efter den här lektionen kommer du att:
+I slutet av denna lektion ska du:
 - Förstå vad som gör en mapp till en "azd-mall"
 - Känna till nödvändiga filer och mappstruktur
 - Lägga till en `azure.yaml` och `infra/` som andra kan återanvända
@@ -23,35 +23,35 @@ Efter den här lektionen kommer du att:
 
 ## Läranderesultat
 
-Efter att ha slutfört denna lektion kommer du att kunna:
+Efter lektionen kan du:
 - Skapa ett nytt mall-repo
-- Parametrisera infrastrukturen så att den fungerar i vilken prenumeration som helst
-- Validera en mall med `azd init` och `azd up`
+- Parametrisera infrastruktur så att den fungerar i vilken prenumeration som helst
+- Verifiera en mall med `azd init` och `azd up`
 - Lägga till metadata som community-galleriet kräver
 
 ---
 
-## Vad är en mall, egentligen?
+## Vad är egentligen en mall?
 
-En azd-mall är **ett Git-repository** som innehåller, som minimum:
+En azd-mall är **ett Git-repo** som innehåller, minst:
 
-| File / folder | Purpose | Required? |
-|---------------|---------|-----------|
+| Fil / mapp | Syfte | Obligatorisk? |
+|-----------|--------|---------------|
 | `azure.yaml` | Beskriver tjänster, värdar och infra-leverantör | ✅ Ja |
-| `infra/` | Bicep, Terraform eller Pulumi som provisionerar resurser | ✅ Ja |
-| `src/` (or your code) | Applikationskoden som azd distribuerar | ✅ Ja |
+| `infra/` | Bicep, Terraform eller Pulumi som tillhandahåller resurser | ✅ Ja |
+| `src/` (eller din kod) | Applikationskoden som azd deployar | ✅ Ja |
 | `README.md` | Hur man använder mallen | ✅ Stark rekommendation |
-| `.azdo/` eller `.github/` | Definitioner för CI/CD-pipelines | Valfritt |
+| `.azdo/` eller `.github/` | CI/CD pipelines | Valfritt |
 | `.devcontainer/` | Reproducerbar utvecklingsmiljö | Valfritt |
-| `azure.yaml` `metadata` | Galleri- och telemetriinformation | Valfritt (krävs för publicering) |
+| `azure.yaml` `metadata` | Galleri + telemetri information | Valfritt (obligatoriskt för publicering) |
 
-Det är inget magiskt här: när du kör `azd init --template you/your-repo`, klonar azd repot och läser `azure.yaml`.
+Det finns inget magiskt här: när du kör `azd init --template you/your-repo`, klonar azd repo och läser `azure.yaml`.
 
 ---
 
-## Steg 1: Skapa repository-strukturen
+## Steg 1: Skapa Repositoriet
 
-Skapa mappstrukturen för hand eller börja från en minimal mall och redigera den:
+Skapa mappstrukturen manuellt eller börja från en minimal mall och redigera den:
 
 ```bash
 mkdir my-azd-template && cd my-azd-template
@@ -61,7 +61,7 @@ git init
 mkdir -p src infra
 ```
 
-En typisk färdig struktur ser ut så här:
+En typisk färdig layout ser ut så här:
 
 ```
 my-azd-template/
@@ -101,13 +101,13 @@ services:
     host: containerapp              # appservice | containerapp | function | aks | staticwebapp
 ```
 
-> Fältet `metadata.template` är vad galleriets telemetri använder för att räkna användning. Använd konventionen `name@version`.
+> Fältet `metadata.template` är vad galleri-telemetrin använder för att räkna användning. Använd konventionen `name@version`.
 
 ---
 
-## Steg 3: Parametrisera infrastrukturen
+## Steg 3: Parametrisera Infrastrukturen
 
-Den viktigaste regeln för en *återanvändbar* mall: **använd aldrig hårdkodade namn, regioner eller prenumerationsspecifika värden.** Använd parametrar och resurstoken-mönstret så att samma mall fungerar i någon annans prenumeration.
+Den enskilt viktigaste regeln för en *återanvändbar* mall: **aldig hårdkoda namn, regioner eller prenumerationsspecifika värden.** Använd parametrar och resurs-token-mönstret så att samma mall fungerar i vem som helst prenumeration.
 
 ```bicep
 // infra/main.bicep
@@ -138,10 +138,10 @@ module web 'modules/web.bicep' = {
 output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 ```
 
-Två saker gör den här mallen återanvändbar:
+Två saker gör denna mall mallvänlig:
 
-1. **`azd-env-name`-taggen** — azd använder den för att spåra och städa upp resurser per miljö.
-2. **`uniqueString(...)` resurstoken** — genererar ett stabilt, globalt unikt suffix så att namn inte kolliderar.
+1. **`azd-env-name` tagg** — azd använder den för att spåra och rensa resurser per miljö.
+2. **`uniqueString(...)` resurs-token** — producerar ett stabilt, globalt unikt suffix så att namn inte kolliderar.
 
 Tillhandahåll en matchande parameterfil som läser värden som azd injicerar från miljön:
 
@@ -157,13 +157,13 @@ Tillhandahåll en matchande parameterfil som läser värden som azd injicerar fr
 }
 ```
 
-azd ersätter `${AZURE_ENV_NAME}` och `${AZURE_LOCATION}` från den aktuella miljön automatiskt.
+azd ersätter `${AZURE_ENV_NAME}` och `${AZURE_LOCATION}` automatiskt från den aktuella miljön.
 
 ---
 
-## Steg 4: Testa din mall lokalt
+## Steg 4: Testa Din Mall Lokalt
 
-Innan du delar, bekräfta att mallen fungerar från en ren miljö.
+Innan du delar, bevisa att mallen fungerar från ett rent tillstånd.
 
 **Testa från den lokala mappen** (ingen Git-push krävs):
 
@@ -172,32 +172,32 @@ Innan du delar, bekräfta att mallen fungerar från en ren miljö.
 mkdir /tmp/test-run && cd /tmp/test-run
 azd init --template /path/to/my-azd-template
 
-# Provisionera och driftsätt från början till slut
+# Tillhandahåll + distribuera från början till slut
 azd auth login
 azd up
 ```
 
-**Testa sedan nedmontering**—en bra mall städar upp helt:
+**Testa sedan nedmonteringen**—en bra mall städar upp helt:
 
 ```bash
 azd down --force --purge
 ```
 
-Om `azd down` lämnar resurser kvar har du förmodligen missat `azd-env-name`-taggen på en resurs.
+Om `azd down` lämnar resurser kvar har du antagligen glömt `azd-env-name` taggen på en resurs.
 
-> **Tips:** kör `azd provision --preview` först. Den utför en what-if och visar mallfel innan någon resurs skapas.
+> **Tips:** kör `azd provision --preview` först. Det gör en what-if-analys och visar mallfel innan några resurser skapas.
 
 ---
 
-## Steg 5: Publicera mallen
+## Steg 5: Publicera Mallen
 
-Pusha repot till GitHub (offentligt om du vill att andra ska kunna använda det):
+Push repo till GitHub (offentligt om du vill att andra ska använda det):
 
 ```bash
 gh repo create my-azd-template --public --source=. --push
 ```
 
-Nu kan vem som helst använda den:
+Nu kan vem som helst använda det:
 
 ```bash
 azd init --template your-github-username/my-azd-template
@@ -205,55 +205,55 @@ azd init --template your-github-username/my-azd-template
 
 ---
 
-## Steg 6 (valfritt): Skicka in till Awesome AZD
+## Steg 6 (Valfritt): Skicka in till Awesome AZD
 
 [Awesome AZD-galleriet](https://azure.github.io/awesome-azd/) listar community-mallar. För att bli listad bör ditt repo innehålla:
 
-- ✅ En tydlig `README.md` med förutsättningar, ett arkitekturdiagram och kostnadsanteckningar
+- ✅ En tydlig `README.md` med förutsättningar, ett arkitekturdiagram och kostnadsnoteringar
 - ✅ En fungerande `azure.yaml` med `metadata.template`
-- ✅ Infrastruktur som provisioneras utan problem i en ny prenumeration
+- ✅ Infrastruktur som provisioneras rent i en ny prenumeration
 - ✅ En `LICENSE`-fil
-- ✅ (Rekommenderat) En `.devcontainer/` för en-knapps Codespaces
+- ✅ (Rekommenderat) En `.devcontainer/` för en-klick Codespaces
 
-Skicka in genom att öppna en pull request som lägger till din mall i galleriets datafil, enligt bidragsguiden i [Awesome AZD-repositoriet](https://github.com/Azure/awesome-azd).
+Skicka in genom att öppna en pull request som lägger till din mall i galleriers datafil, följande bidragsguiden på [Awesome AZD-repot](https://github.com/Azure/awesome-azd).
 
 ---
 
-## Vanliga fallgropar
+## Vanliga Fallgropar
 
 | Fallgrop | Lösning |
-|---------|-----|
-| Hårdkodade resursnamn | Använd `uniqueString()` resurstoken |
+|---------|---------|
+| Hårdkodade resursnamn | Använd `uniqueString()` resurs-token |
 | `azd down` lämnar resurser | Tagga varje resurs (eller resursgruppen) med `azd-env-name` |
-| Mallen fungerar för dig men misslyckas för andra | Ta bort prenumerations-ID:n, tenant-ID:n och antaganden om regioner |
-| Utdata inte kopplade till appen | Exportera `SERVICE_<NAME>_ENDPOINT_URL` och andra `AZURE_*`-utdata |
+| Mallen funkar för dig, inte för andra | Ta bort prenumerations-ID:n, tenant-ID:n och regionantaganden |
+| Utdatan kopplas inte till appen | Exportera `SERVICE_<NAME>_ENDPOINT_URL` och andra `AZURE_*`-utdata |
 | Galleriinlämning avvisad | Lägg till `README.md`, `LICENSE` och `metadata.template` |
 
 ---
 
 ## Sammanfattning
 
-- En mall är bara ett Git-repo med `azure.yaml`, `infra/` och din kod.
-- Parametrisera allt—namn, regioner och ID:n—så att det körs var som helst.
+- En mall är ett Git-repo med `azure.yaml`, `infra/` och din kod.
+- Parametrisera allt—namn, regioner och ID:n—så att det fungerar var som helst.
 - Tagga alltid resurser med `azd-env-name` så att `azd down` fungerar.
-- Testa lokalt med `azd init --template <local-path>` innan publicering.
+- Testa lokalt med `azd init --template <local-path>` innan du publicerar.
 - Lägg till metadata och en README för att skicka in till Awesome AZD.
 
 ---
 
-## 🔗 Navigering
+## 🔗 Navigation
 
-| Direction | Resource |
-|-----------|----------|
-| **Föregående** | [Deployment Guide](deployment-guide.md) |
-| **Kapitelstartsida** | [Chapter 4: Infrastructure as Code](README.md) |
-| **Nästa kapitel** | [Chapter 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md) |
+| Riktning | Resurs |
+|----------|---------|
+| **Föregående** | [Distribueringsguide](deployment-guide.md) |
+| **Kapitel Startsida** | [Kapitel 4: Infrastruktur som Kod](README.md) |
+| **Nästa Kapitel** | [Kapitel 5: Multi-Agent Lösningar](../chapter-05-multi-agent/README.md) |
 
-## 📖 Relaterade resurser
+## 📖 Relaterade Resurser
 
-- [Provisionering av resurser](provisioning.md)
-- [Awesome AZD-galleriet](https://azure.github.io/awesome-azd/)
-- [Officiell azd-mall-dokumentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
+- [Provisioning Resources](provisioning.md)
+- [Awesome AZD Gallery](https://azure.github.io/awesome-azd/)
+- [Officiell azd-malldokumentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
 
 ---
 

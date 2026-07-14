@@ -3,46 +3,46 @@
 **Navigasi Bab:**
 - **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
 - **📖 Bab Saat Ini**: Bab 1 - Dasar & Mulai Cepat
-- **⬅️ Sebelumnya**: [Bawa Aplikasi Anda Sendiri](bring-your-own-app.md)
-- **🚀 Bab Berikutnya**: [Chapter 2: AI-First Development](../chapter-02-ai-development/README.md)
+- **⬅️ Sebelumnya**: [Bawa Aplikasimu Sendiri](bring-your-own-app.md)
+- **🚀 Bab Selanjutnya**: [Bab 2: Pengembangan AI-Pertama](../chapter-02-ai-development/README.md)
 
-> Divalidasi terhadap `azd 1.25.6` pada Juni 2026.
+> Divalidasi dengan `azd 1.27.1` pada Juli 2026.
 
 ## Pendahuluan
 
-Menginstal azd, runtime bahasa yang tepat, Docker, dan Azure CLI di setiap mesin itu merepotkan—dan ini adalah alasan nomor satu ketika sebuah tutorial yang "berfungsi di mesin saya" gagal untuk orang lain. Sebuah **dev container** menyelesaikan ini dengan mendeskripsikan seluruh toolchain Anda dalam sebuah file. Siapa pun yang membuka proyek di VS Code atau GitHub Codespaces akan mendapat lingkungan yang persis sama, dengan azd sudah terpasang. Pelajaran ini menunjukkan cara menambahkannya.
+Menginstal azd, runtime bahasa yang tepat, Docker, dan Azure CLI di setiap mesin adalah pekerjaan yang melelahkan—dan ini adalah alasan utama tutorial yang "berjalan di mesin saya" gagal bagi orang lain. Sebuah **dev container** menyelesaikan masalah ini dengan mendeskripsikan seluruh rantai alat Anda dalam sebuah file. Siapa pun yang membuka proyek di VS Code atau GitHub Codespaces mendapatkan lingkungan yang sama persis, dengan azd sudah terpasang. Pelajaran ini menunjukkan cara menambahkannya.
 
 ## Tujuan Pembelajaran
 
 Pada akhir pelajaran ini, Anda akan:
-- Memahami apa itu dev container dan mengapa itu membantu dengan azd
-- Menambahkan `.devcontainer/devcontainer.json` minimal ke suatu proyek
-- Menyertakan azd, Azure CLI, dan Docker melalui *features* Dev Container
+- Memahami apa itu dev container dan mengapa membantu dengan azd
+- Menambahkan `.devcontainer/devcontainer.json` minimal ke sebuah proyek
+- Menyertakan azd, Azure CLI, dan Docker melalui *fitur* Dev Container
 - Membuka proyek di GitHub Codespaces atau VS Code
 
 ## Hasil Pembelajaran
 
-Setelah menyelesaikan pelajaran ini, Anda akan mampu:
-- Menulis `devcontainer.json` untuk proyek azd
-- Menambahkan azd dan tooling Azure tanpa instalasi manual
-- Menjalankan `azd up` dari dalam kontainer atau Codespace
+Setelah menyelesaikan pelajaran ini, Anda akan dapat:
+- Membuat `devcontainer.json` untuk proyek azd
+- Menambah azd dan alat Azure tanpa instalasi manual
+- Menjalankan `azd up` dari dalam container atau Codespace
 
 ---
 
-## Apa itu Dev Container?
+## Apa Itu Dev Container?
 
-Sebuah dev container adalah lingkungan pengembangan berbasis Docker yang didefinisikan oleh file `.devcontainer/devcontainer.json` di repositori Anda. Ketika Anda membuka proyek:
+Dev container adalah lingkungan pengembangan berbasis Docker yang didefinisikan oleh file `.devcontainer/devcontainer.json` di repositori Anda. Saat Anda membuka proyek:
 
-- **VS Code** (dengan ekstensi Dev Containers) membangun kontainer dan menempelkan diri ke dalamnya.
-- **GitHub Codespaces** membangun kontainer yang sama di cloud dan memberi Anda editor berbasis browser.
+- **VS Code** (dengan ekstensi Dev Containers) membangun container dan menghubungkannya.
+- **GitHub Codespaces** membangun container yang sama di cloud dan memberi Anda editor berbasis browser.
 
-Bagaimanapun, setiap kontributor mendapat alat yang identik—tidak ada lagi troubleshooting "apakah kamu sudah menginstal azd?".
+Dengan cara apa pun, setiap kontributor mendapatkan alat yang identik—tidak ada lagi "apakah kamu sudah menginstal azd?" yang perlu diselesaikan.
 
 ```mermaid
 graph LR
-    Repo[Repo Anda<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Kontainer Pengembangan]
+    Repo[Repo Anda<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Kontainer Dev]
     Repo --> Codespaces[GitHub<br/>Codespaces]
-    VSCode --> Env[Lingkungan identik:<br/>azd + az + Docker]
+    VSCode --> Env[Identical environment:<br/>azd + az + Docker]
     Codespaces --> Env
 ```
 
@@ -75,21 +75,21 @@ Buat `.devcontainer/devcontainer.json` di root proyek Anda:
 }
 ```
 
-Apa yang dilakukan setiap bagian:
+Apa fungsi setiap bagian:
 
-| Key | Tujuan |
-|-----|--------|
-| `image` | OS dasar untuk kontainer |
-| `features` | Penginstal pra-bangun—di sini: Azure CLI, **azd**, Docker, dan Node.js |
-| `customizations.vscode.extensions` | Menginstal otomatis ekstensi azd dan Bicep untuk VS Code |
-| `forwardPorts` | Mengekspos port aplikasi Anda ke browser |
-| `postCreateCommand` | Dijalankan sekali setelah kontainer dibangun (di sini, pemeriksaan sanity) |
+| Kunci | Tujuan |
+|-----|---------|
+| `image` | OS dasar untuk container |
+| `features` | Installer pra-bangun—di sini: Azure CLI, **azd**, Docker, dan Node.js |
+| `customizations.vscode.extensions` | Menginstal otomatis ekstensi VS Code azd dan Bicep |
+| `forwardPorts` | Membuka port aplikasi Anda ke browser |
+| `postCreateCommand` | Dijalan sekali setelah container dibangun (di sini, pemeriksaan sanitas) |
 
-> Fitur `ghcr.io/azure/azure-dev/azd:latest` adalah cara resmi untuk mendapatkan azd di dalam kontainer. Pin versi tertentu (misalnya `azd:1.25.6`) jika Anda membutuhkan reproduksibilitas.
+> Fitur `ghcr.io/azure/azure-dev/azd:latest` adalah cara resmi mendapatkan azd di container. Tetapkan versi spesifik (misalnya `azd:1.27.1`) jika Anda membutuhkan keterulangan.
 
 ---
 
-## Langkah 2: Sesuaikan Feature dengan Bahasa Aplikasi Anda
+## Langkah 2: Sesuaikan Fitur dengan Bahasa Aplikasi Anda
 
 Ganti fitur `node` dengan apa pun yang digunakan aplikasi Anda:
 
@@ -107,71 +107,71 @@ Ganti fitur `node` dengan apa pun yang digunakan aplikasi Anda:
 "ghcr.io/devcontainers/features/go:1": {}
 ```
 
-Biarkan `docker-in-docker` jika `host` Anda adalah `containerapp`, `aks`, atau apa pun yang membangun image kontainer—azd membutuhkan Docker untuk membangun dan mendorong image.
+Pertahankan `docker-in-docker` jika `host` Anda adalah `containerapp`, `aks`, atau apa pun yang membangun image container—azd membutuhkan Docker untuk membangun dan mendorong image.
 
 ---
 
 ## Langkah 3: Buka
 
 **Di VS Code:**
-1. Instal ekstensi **Dev Containers**.
+1. Pasang ekstensi **Dev Containers**.
 2. Buka folder proyek.
-3. Klik **Reopen in Container** ketika diminta (atau jalankan *Dev Containers: Reopen in Container*).
+3. Klik **Buka Lagi dalam Container** saat diminta (atau jalankan *Dev Containers: Reopen in Container*).
 
 **Di GitHub Codespaces:**
-1. Push repo ke GitHub.
-2. Klik **Code → Codespaces → Create codespace on main**.
-3. Tunggu sampai kontainer dibangun—azd siap di terminal.
+1. Dorong repo ke GitHub.
+2. Klik **Code → Codespaces → Buat codespace di main**.
+3. Tunggu container dibangun—azd siap di terminal.
 
 ---
 
-## Langkah 4: Terapkan dari Dalam Kontainer
+## Langkah 4: Deploy Dari Dalam Container
 
-Kontainer sudah memiliki azd terpasang, jadi alur kerja biasa langsung berfungsi:
+Container sudah terpasang azd, jadi alur kerja normal langsung berjalan:
 
 ```bash
-azd auth login --use-device-code   # kode perangkat berguna di dalam Codespaces
+azd auth login --use-device-code   # kode perangkat sangat berguna di dalam Codespaces
 azd up
 ```
 
-> **Mengapa `--use-device-code`?** Di dalam kontainer jarak jauh atau Codespace tidak ada browser lokal untuk diarahkan, jadi login dengan device-code adalah jalur yang andal. Anda akan menempelkan kode ke tab browser untuk menyelesaikan masuk.
+> **Kenapa `--use-device-code`?** Di container atau Codespace jarak jauh tidak ada browser lokal untuk pengalihan, jadi login kode-perangkat adalah jalur terpercaya. Anda akan menempelkan kode ke tab browser untuk menyelesaikan masuk.
 
 ---
 
-## Masalah Umum
+## Kesalahan Umum
 
-| Masalah | Perbaikan |
-|---------|----------|
-| `azd up` tidak bisa membangun image | Tambahkan fitur `docker-in-docker` |
+| Kesalahan | Solusi |
+|---------|-----|
+| `azd up` gagal membangun image | Tambahkan fitur `docker-in-docker` |
 | Login browser macet di Codespaces | Gunakan `azd auth login --use-device-code` |
-| Alat berbeda antar rekan tim | Pin versi fitur (mis. `azd:1.25.6`) |
+| Alat berbeda antar anggota tim | Tetapkan versi fitur (mis. `azd:1.27.1`) |
 | Aplikasi tidak dapat diakses di browser | Tambahkan port ke `forwardPorts` |
 
 ---
 
 ## Ringkasan
 
-- Sebuah dev container membuat toolchain azd Anda dapat direproduksi untuk semua orang.
-- Tambahkan azd, Azure CLI, dan Docker melalui *features* Dev Container.
-- Sesuaikan fitur bahasa dengan aplikasi Anda dan pertahankan `docker-in-docker` untuk host berbasis kontainer.
-- Gunakan login device-code saat berjalan di dalam Codespaces.
+- Dev container membuat rantai alat azd Anda dapat direproduksi untuk semua orang.
+- Tambahkan azd, Azure CLI, dan Docker melalui *fitur* Dev Container.
+- Sesuaikan fitur bahasa dengan aplikasi Anda dan pertahankan `docker-in-docker` untuk host container.
+- Gunakan login kode-perangkat saat menjalankan di dalam Codespaces.
 
 ---
 
 ## 🔗 Navigasi
 
-| Arah | Resource |
-|-------|----------|
-| **Sebelumnya** | [Bawa Aplikasi Anda Sendiri](bring-your-own-app.md) |
+| Arah | Sumber Daya |
+|-----------|----------|
+| **Sebelumnya** | [Bawa Aplikasimu Sendiri](bring-your-own-app.md) |
 | **Beranda Bab** | [Bab 1: Dasar & Mulai Cepat](README.md) |
-| **Bab Berikutnya** | [Chapter 2: AI-First Development](../chapter-02-ai-development/README.md) |
+| **Bab Selanjutnya** | [Bab 2: Pengembangan AI-Pertama](../chapter-02-ai-development/README.md) |
 
-## 📖 Sumber Terkait
+## 📖 Sumber Daya Terkait
 
-- [Installation & Setup](installation.md)
-- [Command Cheat Sheet](../../resources/cheat-sheet.md)
-- [Official Dev Containers specification](https://containers.dev/)
-- [azd Dev Container feature](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
+- [Instalasi & Pengaturan](installation.md)
+- [Cheat Sheet Perintah](../../resources/cheat-sheet.md)
+- [Spesifikasi Dev Containers resmi](https://containers.dev/)
+- [Fitur Dev Container azd](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
 
 ---
 

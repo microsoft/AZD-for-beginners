@@ -1,6 +1,6 @@
-# Chapter 7: Resolução de Problemas e Depuração
+# Capítulo 7: Resolução de Problemas & Debugging
 
-**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 1-1.5 horas | **⭐ Complexidade**: Intermédio
+**📚 Curso**: [AZD Para Principiantes](../../README.md) | **⏱️ Duração**: 1-1.5 horas | **⭐ Complexidade**: Intermédio
 
 ---
 
@@ -8,15 +8,15 @@
 
 Este capítulo ajuda-o a diagnosticar e resolver problemas comuns ao trabalhar com o Azure Developer CLI. Desde falhas de implantação a problemas específicos de IA.
 
-> Validado contra `azd 1.25.6` em junho de 2026.
+> Validado contra `azd 1.27.1` em julho de 2026.
 
 ## Objetivos de Aprendizagem
 
-Ao completar este capítulo, irá:
+Ao completar este capítulo, você irá:
 - Diagnosticar falhas comuns de implantação AZD
 - Depurar problemas de autenticação e permissões
-- Resolver problemas de conectividade de serviços de IA
-- Utilizar o Portal Azure e CLI para resolução de problemas
+- Resolver problemas de conectividade do serviço de IA
+- Usar o Azure Portal e CLI para resolução de problemas
 
 ---
 
@@ -25,7 +25,7 @@ Ao completar este capítulo, irá:
 | # | Lição | Descrição | Tempo |
 |---|--------|-------------|------|
 | 1 | [Problemas Comuns](common-issues.md) | Problemas frequentemente encontrados | 30 min |
-| 2 | [Guia de Depuração](debugging.md) | Estratégias de depuração passo a passo | 45 min |
+| 2 | [Guia de Debugging](debugging.md) | Estratégias de depuração passo a passo | 45 min |
 | 3 | [Resolução de Problemas de IA](ai-troubleshooting.md) | Problemas específicos de IA | 30 min |
 
 ---
@@ -57,7 +57,7 @@ azd env new different-name
 azd up
 ```
 
-### Quota Excedida
+### Cota Excedida
 ```bash
 az vm list-usage --location eastus --output table
 azd env set AZURE_LOCATION westus2
@@ -71,21 +71,21 @@ azd up
 | Erro | Causa | Solução |
 |-------|-------|----------|
 | `AuthenticationError` | Não autenticado | `azd auth login` |
-| `ResourceNotFound` | Recurso em falta | Verifique os nomes dos recursos |
-| `QuotaExceeded` | Limites da subscrição | Solicite aumento da quota |
+| `ResourceNotFound` | Recurso em falta | Verificar nomes dos recursos |
+| `QuotaExceeded` | Limites da subscrição | Solicitar aumento da cota |
 | `InvalidTemplate` | Erro de sintaxe Bicep | `az bicep build` |
-| `Conflict` | Recurso já existe | Utilize um nome novo ou elimine |
-| `Forbidden` | Permissões insuficientes | Verifique os papéis RBAC |
+| `Conflict` | Recurso já existe | Usar nome novo ou apagar |
+| `Forbidden` | Permissões insuficientes | Verificar funções RBAC |
 
 ---
 
-## 🔄 Repor e Recuperar
+## 🔄 Reposição e Recuperação
 
 ```bash
-# Reinício suave (manter recursos, reimplantar código)
+# Reinicialização suave (manter recursos, redesplegar código)
 azd deploy --force
 
-# Reinício completo (apagar tudo, começar de novo)
+# Reinicialização completa (apagar tudo, começar do zero)
 azd down --force --purge
 azd up
 ```

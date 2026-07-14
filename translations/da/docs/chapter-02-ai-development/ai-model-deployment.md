@@ -1,30 +1,30 @@
-# AI Model Deployment with Azure Developer CLI
+# AI Modeludrulning med Azure Developer CLI
 
 **Kapitelnavigation:**
-- **📚 Kursusforside**: [AZD For Beginners](../../README.md)
-- **📖 Aktuelt kapitel**: Kapitel 2 - AI-First Development
-- **⬅️ Forrige**: [Microsoft Foundry-integration](microsoft-foundry-integration.md)
+- **📚 Kursus Hjem**: [AZD For Begyndere](../../README.md)
+- **📖 Nuværende Kapitel**: Kapitel 2 - AI-Først Udvikling
+- **⬅️ Forrige**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Næste**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Næste kapitel**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+- **🚀 Næste Kapitel**: [Kapitel 3: Konfiguration](../chapter-03-configuration/configuration.md)
 
 Denne vejledning giver omfattende instruktioner til udrulning af AI-modeller ved hjælp af AZD-skabeloner og dækker alt fra modelvalg til produktionsudrulningsmønstre.
 
-> **Valideringsnote (2026-03-25):** AZD-arbejdsgangen i denne vejledning blev kontrolleret mod `azd` `1.23.12`. For AI-udrulninger, der tager længere tid end det normale service-udrulningsvindue, understøtter nuværende AZD-udgivelser `azd deploy --timeout <seconds>`.
+> **Valideringsnote (2026-07-13):** AZD-arbejdsgangen i denne vejledning blev testet mod `azd` `1.27.1`. For AI-udrulninger, der tager længere tid end den standard serviceudrulningsperiode, understøtter nuværende AZD-udgivelser `azd deploy --timeout <sekunder>`.
 
 ## Indholdsfortegnelse
 
 - [Modelvalgstrategi](#modelvalgstrategi)
-- [AZD-konfiguration for AI-modeller](#azd-konfiguration-for-ai-modeller)
+- [AZD Konfiguration for AI-Models](#azd-konfiguration-for-ai-modeller)
 - [Udrulningsmønstre](#udrulningsmønstre)
 - [Modelstyring](#modelstyring)
 - [Produktionshensyn](#produktionshensyn)
-- [Overvågning og observabilitet](#overvågning-og-observabilitet)
+- [Overvågning og Observabilitet](#overvågning-og-observabilitet)
 
 ## Modelvalgstrategi
 
-### Microsoft Foundry-modeller
+### Microsoft Foundry Modeller
 
-Vælg den rigtige model til dit brugstilfælde:
+Vælg den rette model til dit brugsscenarie:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -52,18 +52,18 @@ services:
         ]
 ```
 
-### Kapacitetsplanlægning for modeller
+### Kapacitetsplanlægning for Modeller
 
-| Model Type | Brugstilfælde | Anbefalet kapacitet | Omkostningshensyn |
-|------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | Chat og Q&A | 10-50 TPM | Omkostningseffektiv for de fleste arbejdsbelastninger |
-| gpt-4.1 | Kompleks ræsonnering | 20-100 TPM | Højere omkostninger, brug til premium-funktioner |
-| text-embedding-3-large | Søgning, RAG | 30-120 TPM | Stærkt standardvalg til semantisk søgning og hentning |
-| Whisper | Tale-til-tekst | 10-50 TPM | Arbejdsbelastninger til lydbehandling |
+| Modeltype | Brugsscenarie | Anbefalet Kapacitet | Omkostningshensyn |
+|------------|--------------|---------------------|-------------------|
+| gpt-4.1-mini | Chat, Q&A | 10-50 TPM | Omkostningseffektiv til de fleste arbejdsbelastninger |
+| gpt-4.1 | Kompleks ræsonnering | 20-100 TPM | Højere omkostning, brug til premiumfunktioner |
+| text-embedding-3-large | Søgefunktion, RAG | 30-120 TPM | Stærkt standardvalg til semantisk søgning og hentning |
+| Whisper | Tale-til-tekst | 10-50 TPM | Lydbehandlingsarbejdsbelastninger |
 
-## AZD-konfiguration for AI-modeller
+## AZD Konfiguration for AI-Modeller
 
-### Bicep-skabelonkonfiguration
+### Bicep Skabelon Konfiguration
 
 Opret modeludrulninger via Bicep-skabeloner:
 
@@ -129,7 +129,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 Konfigurer dit applikationsmiljø:
 
 ```bash
-# Konfiguration af .env
+# .env konfiguration
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
@@ -138,7 +138,7 @@ AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 
 ## Udrulningsmønstre
 
-### Mønster 1: Enkeltregions-udrulning
+### Mønster 1: Udrulning i Enkel Region
 
 ```yaml
 # azure.yaml - Single region
@@ -156,7 +156,7 @@ Bedst til:
 - Applikationer til enkeltmarked
 - Omkostningsoptimering
 
-### Mønster 2: Flerregions-udrulning
+### Mønster 2: Udrulning i Flere Regioner
 
 ```bicep
 // Multi-region deployment
@@ -171,12 +171,12 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 
 Bedst til:
 - Globale applikationer
-- Krav om høj tilgængelighed
+- Krav til høj tilgængelighed
 - Belastningsfordeling
 
-### Mønster 3: Hybridudrulning
+### Mønster 3: Hybrid Udrulning
 
-Kombiner Microsoft Foundry-modeller med andre AI-tjenester:
+Kombiner Microsoft Foundry Modeller med andre AI-tjenester:
 
 ```bicep
 // Hybrid AI services
@@ -207,7 +207,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ## Modelstyring
 
-### Versionsstyring
+### Versionskontrol
 
 Spor modelversioner i din AZD-konfiguration:
 
@@ -245,7 +245,7 @@ az cognitiveservices account list-models \
 azd deploy --timeout 1800
 ```
 
-### A/B-test
+### A/B-Testning
 
 Udrul flere modelversioner:
 
@@ -273,7 +273,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 
 ### Kapacitetsplanlægning
 
-Beregn nødvendig kapacitet baseret på brugsmønstre:
+Beregn påkrævet kapacitet baseret på brugsmønstre:
 
 ```python
 # Eksempel på kapacitetsberegning
@@ -298,9 +298,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Autoskalering-konfiguration
+### Auto-skalering Konfiguration
 
-Konfigurer autoskalering for Container Apps:
+Konfigurer auto-skalering for Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -368,11 +368,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Overvågning og observabilitet
+## Overvågning og Observabilitet
 
-### Application Insights-integration
+### Integration med Application Insights
 
-Konfigurer overvågning for AI-arbejdsbelastninger:
+Konfigurer overvågning til AI-arbejdsbelastninger:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -408,9 +408,9 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### Brugerdefinerede metrics
+### Tilpassede Målinger
 
-Spor AI-specifikke metrics:
+Spor AI-specifikke målinger:
 
 ```python
 # Brugerdefineret telemetri til AI-modeller
@@ -445,12 +445,12 @@ class AITelemetry:
         )
 ```
 
-### Sundhedstjek
+### Helbredstjek
 
-Implementer overvågning af AI-tjenesters sundhed:
+Implementer helbredsmonitorering for AI-tjenester:
 
 ```python
-# Sundhedstjek-endepunkter
+# Sundhedstjek-endpoints
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -460,7 +460,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test forbindelse til OpenAI
+        # Test OpenAI-forbindelse
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -476,32 +476,32 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## Næste skridt
+## Næste Skridt
 
-1. **Gennemgå [Microsoft Foundry-integrationsvejledning](microsoft-foundry-integration.md)** for mønstre til serviceintegrationer  
-2. **Fuldfør [AI Workshop-lab](ai-workshop-lab.md)** for praktisk erfaring  
-3. **Implementer [Produktions-AI-praksis](production-ai-practices.md)** for enterprise-udrulninger  
-4. **Undersøg [AI-fejlfindingvejledning](../chapter-07-troubleshooting/ai-troubleshooting.md)** for almindelige problemer
+1. **Gennemgå [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** for tjenesteintegrationsmønstre
+2. **Gennemfør [AI Workshop Lab](ai-workshop-lab.md)** for praktisk erfaring
+3. **Implementer [Production AI Practices](production-ai-practices.md)** for virksomhedsudrulninger
+4. **Udforsk [AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** for almindelige problemer
 
 ## Ressourcer
 
-- [Microsoft Foundry Models - Modeltilgængelighed](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Azure Developer CLI-dokumentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Container Apps-skalering](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [Omkostningsoptimering for AI-modeller](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Microsoft Foundry Models Model Tilgængelighed](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Azure Developer CLI Dokumentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Container Apps Skalering](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [AI Model Omkostningsoptimering](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
 **Kapitelnavigation:**
-- **📚 Kursusforside**: [AZD For Beginners](../../README.md)
-- **📖 Aktuelt kapitel**: Kapitel 2 - AI-First Development
-- **⬅️ Forrige**: [Microsoft Foundry-integration](microsoft-foundry-integration.md)
+- **📚 Kursus Hjem**: [AZD For Begyndere](../../README.md)
+- **📖 Nuværende Kapitel**: Kapitel 2 - AI-Først Udvikling
+- **⬅️ Forrige**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Næste**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Næste kapitel**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+- **🚀 Næste Kapitel**: [Kapitel 3: Konfiguration](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, bedes du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på originalsproget bør betragtes som den autoritative kilde. For kritiske oplysninger anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

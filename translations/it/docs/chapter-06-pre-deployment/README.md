@@ -1,21 +1,21 @@
-# Capitolo 6: Pianificazione e convalida pre-distribuzione
+# Capitolo 6: Pianificazione e Validazione Pre-Distribuzione
 
-**📚 Corso**: [AZD per principianti](../../README.md) | **⏱️ Durata**: 1 ora | **⭐ Complessità**: Intermedio
+**📚 Corso**: [AZD Per Principianti](../../README.md) | **⏱️ Durata**: 1 ora | **⭐ Complessità**: Intermedio
 
 ---
 
 ## Panoramica
 
-Questo capitolo tratta i passaggi essenziali di pianificazione e convalida prima di distribuire la tua applicazione. Impara a evitare errori costosi con una corretta pianificazione della capacità, la selezione degli SKU e i controlli preliminari.
+Questo capitolo copre i passaggi essenziali di pianificazione e validazione prima di distribuire la tua applicazione. Impara a evitare errori costosi con una corretta pianificazione della capacità, selezione dello SKU e controlli preliminari.
 
-> Validato con `azd 1.25.6` a giugno 2026.
+> Validato con `azd 1.27.1` a luglio 2026.
 
-## Obiettivi di apprendimento
+## Obiettivi di Apprendimento
 
 Completando questo capitolo, sarai in grado di:
 - Eseguire controlli preliminari prima della distribuzione
 - Pianificare la capacità e stimare i requisiti delle risorse
-- Selezionare SKU appropriati per l'ottimizzazione dei costi
+- Selezionare gli SKU appropriati per l’ottimizzazione dei costi
 - Configurare Application Insights per il monitoraggio
 - Comprendere i modelli di coordinamento del team
 
@@ -25,59 +25,59 @@ Completando questo capitolo, sarai in grado di:
 
 | # | Lezione | Descrizione | Tempo |
 |---|--------|-------------|------|
-| 1 | [Controlli Preliminari](preflight-checks.md) | Convalidare la configurazione prima della distribuzione | 15 min |
-| 2 | [Pianificazione della capacità](capacity-planning.md) | Stimare i requisiti delle risorse | 20 min |
-| 3 | [Selezione SKU](sku-selection.md) | Scegliere i livelli tariffari appropriati | 15 min |
+| 1 | [Controlli Preliminari](preflight-checks.md) | Validare la configurazione prima della distribuzione | 15 min |
+| 2 | [Pianificazione della Capacità](capacity-planning.md) | Stimare i requisiti delle risorse | 20 min |
+| 3 | [Selezione SKU](sku-selection.md) | Scegliere i livelli di prezzo appropriati | 15 min |
 | 4 | [Application Insights](application-insights.md) | Configurare il monitoraggio | 20 min |
-| 5 | [Modelli di coordinamento](coordination-patterns.md) | Flussi di lavoro per la distribuzione del team | 15 min |
+| 5 | [Modelli di Coordinamento](coordination-patterns.md) | Workflow di distribuzione del team | 15 min |
 
 ---
 
-## 🚀 Avvio rapido
+## 🚀 Avvio Rapido
 
 ```bash
-# Controlla le quote della sottoscrizione
+# Controlla le quote di sottoscrizione
 az vm list-usage --location eastus --output table
 
-# Anteprima della distribuzione (nessuna risorsa creata)
+# Anteprima distribuzione (nessuna risorsa creata)
 azd provision --preview
 
-# Verifica la sintassi di Bicep
+# Valida la sintassi Bicep
 az bicep build --file infra/main.bicep
 
-# Verifica la configurazione dell'ambiente
+# Controlla la configurazione dell'ambiente
 azd env get-values
 ```
 
 ---
 
-## ☑️ Lista di controllo pre-distribuzione
+## ☑️ Lista di Controllo Pre-Distribuzione
 
 ### Prima di `azd provision`
 
-- [ ] Quote verificate per la regione
-- [ ] SKU selezionati correttamente
+- [ ] Quota verificata per la regione
+- [ ] SKU selezionati appropriatamente
 - [ ] Stima dei costi rivista
 - [ ] Convenzione di denominazione coerente
-- [ ] Sicurezza/RBAC configurati
+- [ ] Sicurezza/RBAC configurata
 
 ### Prima di `azd deploy`
 
-- [ ] Variabili d'ambiente impostate
-- [ ] Segreti in Key Vault
+- [ ] Variabili d’ambiente impostate
+- [ ] Segreti nel Key Vault
 - [ ] Stringhe di connessione verificate
 - [ ] Controlli di integrità configurati
 
 ---
 
-## 💰 Guida alla selezione degli SKU
+## 💰 Guida alla Selezione SKU
 
 | Carico di lavoro | Sviluppo | Produzione |
 |----------|-------------|------------|
-| Container Apps | Consumption | Dedicated D4 |
+| Container Apps | Consumo | Dedicato D4 |
 | App Service | B1/B2 | P1v3+ |
 | Microsoft Foundry Models | Standard | Standard + PTU |
-| AI Search | Basic | Standard S2+ |
+| AI Search | Base | Standard S2+ |
 
 ---
 
@@ -86,15 +86,15 @@ azd env get-values
 | Direzione | Capitolo |
 |-----------|---------|
 | **Precedente** | [Capitolo 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
-| **Successivo** | [Capitolo 7: Risoluzione dei problemi](../chapter-07-troubleshooting/README.md) |
+| **Successivo** | [Capitolo 7: Risoluzione Problemi](../chapter-07-troubleshooting/README.md) |
 
 ---
 
-## 📖 Risorse correlate
+## 📖 Risorse Correlate
 
-- [Guida alla configurazione](../chapter-03-configuration/configuration.md)
-- [Guida alla distribuzione](../chapter-04-infrastructure/deployment-guide.md)
-- [Problemi comuni](../chapter-07-troubleshooting/common-issues.md)
+- [Guida alla Configurazione](../chapter-03-configuration/configuration.md)
+- [Guida alla Distribuzione](../chapter-04-infrastructure/deployment-guide.md)
+- [Problemi Comuni](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

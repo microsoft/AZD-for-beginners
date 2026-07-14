@@ -1,63 +1,63 @@
-# Capitolo 7: Risoluzione dei problemi e debugging
+# Capitolo 7: Risoluzione dei Problemi e Debugging
 
-**📚 Corso**: [AZD per principianti](../../README.md) | **⏱️ Durata**: 1-1.5 ore | **⭐ Complessità**: Intermedio
+**📚 Corso**: [AZD Per Principianti](../../README.md) | **⏱️ Durata**: 1-1.5 ore | **⭐ Complessità**: Intermedio
 
 ---
 
 ## Panoramica
 
-Questo capitolo ti aiuta a diagnosticare e risolvere problemi comuni quando si lavora con Azure Developer CLI. Dagli errori di distribuzione ai problemi specifici per l'IA.
+Questo capitolo ti aiuta a diagnosticare e risolvere problemi comuni quando si lavora con Azure Developer CLI. Dai fallimenti di distribuzione a problemi specifici dell'AI.
 
-> Validato con `azd 1.25.6` nel giugno 2026.
+> Validato con `azd 1.27.1` a luglio 2026.
 
-## Obiettivi di apprendimento
+## Obiettivi di Apprendimento
 
 Completando questo capitolo, sarai in grado di:
-- Diagnosticare i comuni errori di distribuzione di AZD
-- Eseguire il debug di problemi di autenticazione e autorizzazioni
-- Risolvere problemi di connettività dei servizi IA
-- Usare il Portale di Azure e la CLI per la risoluzione dei problemi
+- Diagnosticare i fallimenti comuni di distribuzione AZD
+- Debuggare problemi di autenticazione e permessi
+- Risolvere problemi di connettività del servizio AI
+- Usare Azure Portal e CLI per la risoluzione dei problemi
 
 ---
 
 ## 📚 Lezioni
 
-| # | Lezione | Descrizione | Durata |
+| # | Lezione | Descrizione | Tempo |
 |---|--------|-------------|------|
-| 1 | [Problemi comuni](common-issues.md) | Problemi frequentemente riscontrati | 30 min |
-| 2 | [Guida al Debug](debugging.md) | Strategie di debug passo dopo passo | 45 min |
-| 3 | [Risoluzione problemi IA](ai-troubleshooting.md) | Problemi specifici per l'IA | 30 min |
+| 1 | [Problemi Comuni](common-issues.md) | Problemi frequentemente riscontrati | 30 min |
+| 2 | [Guida al Debugging](debugging.md) | Strategie di debugging passo-passo | 45 min |
+| 3 | [Risoluzione Problemi AI](ai-troubleshooting.md) | Problemi specifici dell'AI | 30 min |
 
 ---
 
-## 🚨 Soluzioni rapide
+## 🚨 Soluzioni Veloci
 
-### Problemi di autenticazione
+### Problemi di Autenticazione
 ```bash
-# Necessario per i workflow AZD
+# Necessario per i flussi di lavoro AZD
 azd auth login
 
-# Opzionale se usi anche direttamente i comandi Azure CLI
+# Opzionale se stai anche usando direttamente i comandi Azure CLI
 az login
 
 azd auth status
 ```
 
-### Errori di provisioning
+### Fallimenti di Provisioning
 ```bash
 azd show
 azd monitor --logs
 az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
-### Conflitti di risorse
+### Conflitti di Risorse
 ```bash
 azd down --force --purge
 azd env new different-name
 azd up
 ```
 
-### Quota superata
+### Quota Superata
 ```bash
 az vm list-usage --location eastus --output table
 azd env set AZURE_LOCATION westus2
@@ -66,26 +66,26 @@ azd up
 
 ---
 
-## 📋 Riferimento codici di errore
+## 📋 Riferimento Codici di Errore
 
 | Errore | Causa | Soluzione |
 |-------|-------|----------|
-| `AuthenticationError` | Non effettuato l'accesso | `azd auth login` |
-| `ResourceNotFound` | Risorsa mancante | Verificare i nomi delle risorse |
-| `QuotaExceeded` | Limiti della sottoscrizione | Richiedere un aumento della quota |
+| `AuthenticationError` | Non autenticato | `azd auth login` |
+| `ResourceNotFound` | Risorsa mancante | Controlla i nomi risorsa |
+| `QuotaExceeded` | Limiti di sottoscrizione | Richiedi aumento quota |
 | `InvalidTemplate` | Errore di sintassi Bicep | `az bicep build` |
-| `Conflict` | La risorsa esiste | Usare un nuovo nome o eliminare |
-| `Forbidden` | Permessi insufficienti | Verificare i ruoli RBAC |
+| `Conflict` | Risorsa esistente | Usa un nome nuovo o cancella |
+| `Forbidden` | Permessi insufficienti | Controlla ruoli RBAC |
 
 ---
 
-## 🔄 Ripristino e recupero
+## 🔄 Reset e Ripristino
 
 ```bash
-# Ripristino soft (mantieni le risorse, ridistribuisci il codice)
+# Reset soft (mantieni risorse, ridistribuisci codice)
 azd deploy --force
 
-# Ripristino hard (elimina tutto, ricomincia da capo)
+# Reset hard (elimina tutto, ricomincia da capo)
 azd down --force --purge
 azd up
 ```
@@ -96,16 +96,16 @@ azd up
 
 | Direzione | Capitolo |
 |-----------|---------|
-| **Precedente** | [Capitolo 6: Pre-distribuzione](../chapter-06-pre-deployment/README.md) |
+| **Precedente** | [Capitolo 6: Pre-Distribuzione](../chapter-06-pre-deployment/README.md) |
 | **Successivo** | [Capitolo 8: Produzione](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Risorse correlate
+## 📖 Risorse Correlate
 
-- [Controlli pre-distribuzione](../chapter-06-pre-deployment/preflight-checks.md)
-- [Guida alla configurazione](../chapter-03-configuration/configuration.md)
-- [Segnalazioni GitHub di AZD](https://github.com/Azure/azure-dev/issues)
+- [Controlli Pre-Distribuzione](../chapter-06-pre-deployment/preflight-checks.md)
+- [Guida alla Configurazione](../chapter-03-configuration/configuration.md)
+- [Issue GitHub AZD](https://github.com/Azure/azure-dev/issues)
 
 ---
 

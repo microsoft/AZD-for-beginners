@@ -1,4 +1,4 @@
-# Chapitre 6 : Planification et validation avant le déploiement
+# Chapitre 6 : Planification et Validation Avant Déploiement
 
 **📚 Cours** : [AZD pour débutants](../../README.md) | **⏱️ Durée** : 1 heure | **⭐ Complexité** : Intermédiaire
 
@@ -6,14 +6,14 @@
 
 ## Aperçu
 
-Ce chapitre couvre les étapes essentielles de planification et de validation avant de déployer votre application. Apprenez à éviter des erreurs coûteuses grâce à une planification correcte de la capacité, la sélection des SKU et les vérifications préalables.
+Ce chapitre couvre les étapes essentielles de planification et de validation avant de déployer votre application. Apprenez à éviter des erreurs coûteuses grâce à une planification adéquate des capacités, la sélection des SKU, et des contrôles préalables.
 
-> Validé avec `azd 1.25.6` en juin 2026.
+> Validé avec `azd 1.27.1` en juillet 2026.
 
 ## Objectifs d’apprentissage
 
-En terminant ce chapitre, vous serez capable de :
-- Effectuer des vérifications préalables avant le déploiement
+En complétant ce chapitre, vous allez :
+- Exécuter des contrôles préalables avant le déploiement
 - Planifier la capacité et estimer les besoins en ressources
 - Sélectionner les SKU appropriés pour optimiser les coûts
 - Configurer Application Insights pour la surveillance
@@ -24,16 +24,16 @@ En terminant ce chapitre, vous serez capable de :
 ## 📚 Leçons
 
 | # | Leçon | Description | Durée |
-|---|--------|-------------|-------|
-| 1 | [Vérifications préalables](preflight-checks.md) | Valider la configuration avant le déploiement | 15 min |
-| 2 | [Planification de la capacité](capacity-planning.md) | Estimer les besoins en ressources | 20 min |
-| 3 | [Sélection des SKU](sku-selection.md) | Choisir les niveaux tarifaires appropriés | 15 min |
+|---|--------|-------------|------|
+| 1 | [Contrôles Préliminaires](preflight-checks.md) | Valider la configuration avant déploiement | 15 min |
+| 2 | [Planification de la Capacité](capacity-planning.md) | Estimer les besoins en ressources | 20 min |
+| 3 | [Sélection des SKU](sku-selection.md) | Choisir les niveaux de prix appropriés | 15 min |
 | 4 | [Application Insights](application-insights.md) | Configurer la surveillance | 20 min |
-| 5 | [Schémas de coordination](coordination-patterns.md) | Flux de travail d’équipe pour le déploiement | 15 min |
+| 5 | [Schémas de Coordination](coordination-patterns.md) | Flux de travail en équipe pour le déploiement | 15 min |
 
 ---
 
-## 🚀 Démarrage rapide
+## 🚀 Démarrage Rapide
 
 ```bash
 # Vérifier les quotas d'abonnement
@@ -51,15 +51,15 @@ azd env get-values
 
 ---
 
-## ☑️ Liste de contrôle avant déploiement
+## ☑️ Liste de Contrôle Avant Déploiement
 
 ### Avant `azd provision`
 
 - [ ] Quota vérifié pour la région
-- [ ] SKU sélectionnés correctement
+- [ ] SKU sélectionnés de manière appropriée
 - [ ] Estimation des coûts revue
 - [ ] Convention de nommage cohérente
-- [ ] Sécurité/RBAC configurés
+- [ ] Sécurité/RBAC configuré
 
 ### Avant `azd deploy`
 
@@ -73,28 +73,28 @@ azd env get-values
 ## 💰 Guide de sélection des SKU
 
 | Charge de travail | Développement | Production |
-|-------------------|---------------|------------|
-| Container Apps | Consumption | Dedicated D4 |
+|----------|-------------|------------|
+| Container Apps | Consommation | Dédié D4 |
 | App Service | B1/B2 | P1v3+ |
 | Microsoft Foundry Models | Standard | Standard + PTU |
-| AI Search | Basic | Standard S2+ |
+| AI Search | Basique | Standard S2+ |
 
 ---
 
 ## 🔗 Navigation
 
 | Direction | Chapitre |
-|-----------|----------|
-| **Précédent** | [Chapitre 5 : Multi-agent](../chapter-05-multi-agent/README.md) |
+|-----------|---------|
+| **Précédent** | [Chapitre 5 : Multi-Agent](../chapter-05-multi-agent/README.md) |
 | **Suivant** | [Chapitre 7 : Dépannage](../chapter-07-troubleshooting/README.md) |
 
 ---
 
-## 📖 Ressources associées
+## 📖 Ressources Associées
 
-- [Guide de configuration](../chapter-03-configuration/configuration.md)
-- [Guide de déploiement](../chapter-04-infrastructure/deployment-guide.md)
-- [Problèmes courants](../chapter-07-troubleshooting/common-issues.md)
+- [Guide de Configuration](../chapter-03-configuration/configuration.md)
+- [Guide de Déploiement](../chapter-04-infrastructure/deployment-guide.md)
+- [Problèmes Courants](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

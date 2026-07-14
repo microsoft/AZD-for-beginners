@@ -1,166 +1,166 @@
-# Multi-Agent Základy - Nasadíte svoj prvý koordinovaný AI systém
+# Základy viacagentových systémov - Nasadte svoj prvý koordinovaný AI systém
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD pre začiatočníkov](../../README.md)
-- **📖 Current Chapter**: Kapitola 5 - Viacagentné AI riešenia
-- **⬅️ Previous**: [Kapitola 4: Infrastruktúra](../chapter-04-infrastructure/README.md)
-- **➡️ Next**: [Vzory koordinácie](../chapter-06-pre-deployment/coordination-patterns.md)
+**Navigácia kapitolou:**
+- **📚 Domov kurzu**: [AZD pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 5 - Viacagentové AI riešenia
+- **⬅️ Predchádzajúca**: [Kapitola 4: Infrastruktúra](../chapter-04-infrastructure/README.md)
+- **➡️ Nasledujúca**: [Koordinačné vzory](../chapter-06-pre-deployment/coordination-patterns.md)
 
-> Overené s `azd 1.25.6` v júni 2026.
+> Overené na `azd 1.27.1` v júli 2026.
 
 ## Úvod
 
-V predchádzajúcich kapitolách ste nasadili jednu aplikáciu—a v kapitole 2 ste nasadili jedného AI agenta. Táto lekcia robí ďalší krok: nasadenie **viacagentného systému**, kde niekoľko špecializovaných agentov spolupracuje na vyriešení problému, ktorý by jeden agent nedokázal dobre zvládnuť sám.
+V predchádzajúcich kapitolách ste nasadili jednu aplikáciu—a v kapitole 2 ste nasadili jedného AI agenta. Táto lekcia robí ďalší krok: nasadenie **viacagentového systému**, kde niekoľko špecializovaných agentov spolupracuje na riešení problému, ktorý by jeden agent nedokázal dobre zvládnuť sám.
 
-Dobrá správa pre začiatočníkov: **nie sú potrebné nové príkazy.** Viacagentné riešenie je stále projekt azd. Budete `azd init`, `azd up`, testovať a `azd down`—presne ten pracovný postup, ktorý už poznáte. Mení sa *tvar* aplikácie vo vnútri.
+Dobrú správu pre začiatočníkov: **nemusíte sa učiť nové príkazy.** Viacagentové riešenie je stále azd projekt. Budete robiť `azd init`, `azd up`, testovať a `azd down`—presne tak, ako už poznáte. Čo sa mení, je *podoba* aplikácie vnútri.
 
 ## Ciele učenia
 
 Na konci tejto lekcie budete:
-- Rozumieť, čo znamená "viacagentný" a kedy stojí za to pridať zložitosť
-- Rozpoznať bežné role vo viacagentnom systéme (orchestrátor + špecialisti)
-- Nasadiť skutočnú, fungujúcu viacagentnú šablónu pomocou `azd up`
-- Pochopiť Azure zdroje, ktoré stoja za viacagentnou aplikáciou
-- Vedieť, ako overiť, prispôsobiť a bezpečne odstrániť riešenie
+- Rozumieť, čo znamená "viacagentový" a kedy stojí za to pridať zložitosť
+- Spoznať bežné úlohy vo viacagentovom systéme (orchestrátor + špecialisti)
+- Nasadiť skutočnú, funkčnú viacagentovú šablónu pomocou `azd up`
+- Rozumieť Azure zdrojom, ktoré podporujú viacagentovú aplikáciu
+- Vedieť, ako bezpečne overiť, prispôsobiť a odstrániť riešenie
 
 ## Výsledky učenia
 
 Po dokončení tejto lekcie budete schopní:
-- Vysvetliť rozdiel medzi jedným agentom a viacagentným systémom
-- Vybrať medzi jedným agentom s nástrojmi a skutočným viacagentným dizajnom
-- Nasadiť a otestovať viacagentnú šablónu end-to-end pomocou azd
+- Vysvetliť rozdiel medzi jedným agentom a viacagentovým systémom
+- Vybrať medzi jedným agentom s nástrojmi a skutočným viacagentovým dizajnom
+- Nasadiť a otestovať viacagentovú šablónu od začiatku do konca pomocou azd
 - Identifikovať, kde každý agent beží a ako spolu komunikujú
-- Vyčistiť všetky zdroje, aby sa predišlo priebežným poplatkom
+- Vyčistiť všetky zdroje, aby ste sa vyhli ďalším poplatkom
 
 ---
 
-## Čo je viacagentný systém?
+## Čo je viacagentový systém?
 
-Jeden AI agent je jeden model s množstvom inštrukcií a (voliteľne) niekoľkými nástrojmi. To funguje dobre pre úzke úlohy. Ale keď úloha rastie—výskum, potom písanie, potom editovanie, potom overovanie faktov—natrieskanie všetkého do jedného promptu robí agenta pomalším, menej spoľahlivým a ťažším na ladenie.
+Jediný AI agent je jeden model so sadou inštrukcií a (voliteľne) nejakými nástrojmi. To dobre funguje pre zamerané úlohy. Ale keď úloha rastie—výskum, potom písanie, potom editovanie, potom overovanie faktov—všetko narvať do jedného promptu robí agenta pomalším, menej spoľahlivým a ťažšie laditeľným.
 
-Viacagentný systém rozdeľuje prácu na špecialistov, ktorí každý robia jednu vec dobre, a orchestrátor to koordinuje:
+**Viacagentový systém** rozdeľuje prácu na špecialistov, ktorí robia každý jednu úlohu dobre, koordinovaných orchestrátorom:
 
 ```mermaid
 graph TD
-    User([Požiadavka používateľa]) --> Orchestrator[Orchestrátor (agent)<br/>Plánuje a smeruje prácu]
-    Orchestrator --> Researcher[Výskumník (agent)<br/>Zhromažďuje fakty]
-    Orchestrator --> Writer[Autor (agent)<br/>Tvorí obsah]
-    Orchestrator --> Editor[Redaktor (agent)<br/>Kontroluje a zdokonaľuje]
+    User([Požiadavka používateľa]) --> Orchestrator[Orchestrátor agent<br/>Plánuje a smeruje prácu]
+    Orchestrator --> Researcher[Výskumník agent<br/>Zhromažďuje fakty]
+    Orchestrator --> Writer[Spisovateľ agent<br/>Návrh obsahu]
+    Orchestrator --> Editor[Editor agent<br/>Kontroluje a zdokonaľuje]
     Researcher --> Orchestrator
     Writer --> Orchestrator
     Editor --> Orchestrator
     Orchestrator --> Result([Konečná odpoveď])
 ```
 
-### Dve role, ktoré vždy uvidíte
+### Dve úlohy, ktoré vždy uvidíte
 
-| Role | Job | Example |
-|------|-----|---------|
-| **Orchestrátor** | Rozhoduje *čo sa stane ďalej* a smeruje prácu medzi agentmi | "Najprv výskum, potom napíš, potom uprav" |
-| **Špecialista** | Robí jednu zameranú úlohu a vráti výsledok | A "výskumník", ktorý iba zhromažďuje fakty |
+| Úloha | Práca | Príklad |
+|------|-------|---------|
+| **Orchestrátor** | Rozhoduje *čo sa deje ďalej* a rozdeľuje prácu medzi agentov | "Najprv výskum, potom písanie, potom editovanie" |
+| **Špecialista** | Robí jednu zameranú úlohu a vracia výsledok | „výskumník“, ktorý len zhromažďuje fakty |
 
 ### Naozaj potrebujete viac agentov?
 
-Začnite jednoducho. Siahajte po viacagentnom riešení **iba** keď platí jedna z nasledujúcich vecí:
+Začnite jednoducho. Viacagentový systém používajte **len** keď platí niektoré z týchto:
 
-- ✅ Úloha má **odlišné fázy**, ktoré profitujú z rôznych inštrukcií (výskum vs. písanie vs. revízia)
-- ✅ Chcete, aby špecialisti bežali **súbežne** a ušetrili čas
+- ✅ Úloha má **odlišné fázy**, ktoré potrebujú rôzne inštrukcie (výskum vs. písanie vs. kontrola)
+- ✅ Chcete, aby špecialisti bežali **súbežne**, aby ste ušetrili čas
 - ✅ Rôzne kroky potrebujú **rôzne nástroje alebo zdroje dát**
-- ✅ Potrebujete, aby každý krok bol **nezávisle testovateľný a laditeľný**
+- ✅ Potrebujete, aby každý krok bol **nezávisle možné testovať a ladit**
 
-Ak je vaša úloha jednoduchá otázka-odpoveď alebo jednoduché volanie nástroja, **jeden agent s nástrojmi** (kapitola 2) je jednoduchší, lacnejší a ľahší na prevádzku.
+Ak je úloha jednoduchá otázka-odpoveď alebo jednoduché volanie nástroja, **jeden agent s nástrojmi** (Kapitola 2) je jednoduchší, lacnejší a ľahšie spravovateľný.
 
-> **Tip pre začiatočníkov:** "Viac agentov" nie je "lepšie." Každý agent pridáva latenciu, náklady a novú vec na monitorovanie. Pridávajte agentov len keď sa problém jasne rozdeľuje na časti.
-
----
-
-## Dva spôsoby, ako vytvoriť viacagentné riešenie na Azure
-
-| Approach | What it is | Best for |
-|----------|-----------|----------|
-| **Single agent + tools** | One Foundry agent that calls functions/tools | Simple workflows, getting started |
-| **Multiple coordinated agents** | Several agents with an orchestrator | Distinct stages, parallel work, specialization |
-
-Táto lekcia sa zameriava na druhý prístup pomocou **predpripravenej šablóny**, aby ste mohli vidieť skutočný viacagentný systém v prevádzke skôr, než si vytvoríte vlastný.
+> **Tip pre začiatočníkov:** "Viac agentov" neznamená "lepšie." Každý agent pridáva oneskorenie, náklady a novú vec na sledovanie. Agentov pridávajte len keď sa problém jasne rozdelí na časti.
 
 ---
 
-## Prakticky: Nasadiť fungujúcu viacagentnú aplikáciu
+## Dva spôsoby, ako zostrojiť viacagentový systém na Azure
 
-Nasadíme **Contoso Creative Writer**, oficiálny príklad od Azure, ktorý používa viac agentov (výskumník, pisateľ, editor) koordinovaných na vytvorenie článku. Je to skvelá prvá viacagentná aplikácia, pretože roly sú ľahko pochopiteľné.
+| Prístup | Čo to je | Najvhodnejšie pre |
+|---------|----------|--------------------|
+| **Jeden agent + nástroje** | Jeden Foundry agent, ktorý volá funkcie/nástroje | Jednoduché toky práce, začiatky |
+| **Viac koordinovaných agentov** | Niekoľko agentov s orchestrátorom | Odlišné fázy, paralelná práca, špecializácia |
 
-### Krok 1: Inicializujte šablónu
+Táto lekcia sa zameriava na druhý prístup pomocou **hotovej šablóny**, aby ste videli reálny viacagentový systém v prevádzke ešte predtým, než si postavíte vlastný.
+
+---
+
+## Prakticky: Nasadenie funkčnej viacagentovej aplikácie
+
+Nasadíme **Contoso Creative Writer**, oficiálny Azure príklad, ktorý používa viac agentov (výskumník, pisateľ, editor) koordinovaných na vytvorenie článku. Je to výborná prvá viacagentová aplikácia, pretože úlohy sú ľahko pochopiteľné.
+
+### Krok 1: Inicializácia šablóny
 
 ```bash
 # Vytvorte pracovný priečinok
 mkdir creative-writer && cd creative-writer
 
-# Inicializujte z oficiálnej šablóny pre viac agentov
+# Inicializujte z oficiálnej šablóny pre viacagentové systémy
 azd init --template contoso-creative-writer
 ```
 
-> Prezrite si ďalšie viacagentné šablóny kedykoľvek v [Awesome AZD AI gallery](https://azure.github.io/awesome-azd/?tags=ai). Iné priateľské možnosti pre začiatočníkov zahŕňajú `get-started-with-ai-agents` a `azure-ai-travel-agents`.
+> Kedykoľvek si môžete prezrieť viacagentové šablóny v [Awesome AZD AI galérii](https://azure.github.io/awesome-azd/?tags=ai). Ďalšie vhodné pre začiatočníkov sú `get-started-with-ai-agents` a `azure-ai-travel-agents`.
 
-### Krok 2: Autentifikujte sa
+### Krok 2: Overenie identity
 
 ```bash
-# Požadované pre azd pracovné postupy
+# Vyžaduje sa pre pracovné postupy azd
 azd auth login
 ```
 
-### Krok 3: Vytvorte prostredie
+### Krok 3: Vytvorenie prostredia
 
 ```bash
 azd env new dev
 ```
 
-### Krok 4: Náhľad, potom nasadiť
+### Krok 4: Náhľad, potom nasadenie
 
 ```bash
-# Pozrite si, čo bude vytvorené, skôr než niečo miniete (odporúčané)
+# Pozrite si, čo bude vytvorené, predtým než niečo miniete (odporúčané)
 azd provision --preview
 
-# Zabezpečiť infraštruktúru a nasadiť všetky agenty v jednom kroku
+# Poskytnite infraštruktúru a nasadzujte všetkých agentov v jednom kroku
 azd up
 ```
 
-`azd up` vás požiada o výber predplatného a regiónu, potom zriadi Azure zdroje a nasadí aplikáciu. Nasadenia AI môžu trvať dlhšie než jednoduchá webová aplikácia—ak nasadzujete väčšie modely, môžete predĺžiť časový limit nasadenia:
+`azd up` vás vyzve na predplatné a región, potom provisionuje Azure zdroje a nasadí aplikáciu. Nasadzovanie AI môže trvať dlhšie než jednoduchá webová appka—ak nasadzujete väčšie modely, môžete predĺžiť časový limit nasadenia:
 
 ```bash
 azd deploy --timeout 1800
 ```
 
-> **Upozornenie na náklady a kapacitu:** Viacagentné aplikácie nasadzujú AI modely, ktoré spotrebúvajú kvótu a vytvárajú náklady. Ak `azd up` zlyhá kvôli kvóte modelu, pozrite si [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) pre opravy regiónu a kvóty, a kapitolu 6 [Plánovanie kapacity](../chapter-06-pre-deployment/capacity-planning.md).
+> **Upozornenie ohľadom nákladov a kapacity:** Viacagentové aplikácie nasadzujú AI modely, ktoré spotrebúvajú kvótu a prinášajú náklady. Ak `azd up` zlyhá kvôli kvóte modelu, pozrite [Riešenie problémov s AI](../chapter-07-troubleshooting/ai-troubleshooting.md) pre opravy regiónu a kvóty, a kapitolu 6 [Plánovanie kapacity](../chapter-06-pre-deployment/capacity-planning.md).
 
 ---
 
-## Pochopenie toho, čo ste nasadili
+## Pochopenie čo ste nasadili
 
-Typická viacagentná aplikácia ako táto zriadi sadu Azure zdrojov, ktoré mapujú priamo na zodpovednosti v diagrame vyššie:
+Typická viacagentová aplikácia ako táto provisionuje sadu Azure zdrojov, ktoré priamo zodpovedajú zodpovednostiam v diagrame vyššie:
 
-| Resource | Why it's there |
-|----------|----------------|
-| **Microsoft Foundry / Modely** | Hostuje jazykové modely, ktoré používa každý agent |
-| **Azure AI Search** | Poskytuje výskumnému agentovi podložené dáta na vyhľadávanie |
-| **Container Apps** (or App Service) | Hostuje orchestrátor a kód agentov |
-| **Cosmos DB** (in some samples) | Ukladá zdieľaný stav/pamäť, ktorá sa medzi agentmi odovzdáva |
+| Zdroj | Prečo tu je |
+|-------|-------------|
+| **Microsoft Foundry / Modely** | Hostuje jazykové modely, ktoré každý agent používa |
+| **Azure AI Search** | Dáva výskumníkovi agenta pevné dáta na vyhľadávanie |
+| **Container Apps** (alebo App Service) | Hostuje orchestrátora a kód agentov |
+| **Cosmos DB** (v niektorých príkladoch) | Ukladá zdieľaný stav/pamäť prenášanú medzi agentmi |
 | **Application Insights** | Sleduje požiadavky *naprieč* agentmi, aby ste mohli ladiť tok |
 
-### Ako agenti komunikujú medzi sebou
+### Ako agenti komunikujú
 
-Vo väčšine azd viacagentných príkladov **beží orchestrátor vo vašom aplikačnom kóde** (napríklad s použitím rámca ako Semantic Kernel alebo Microsoft Agent Framework). Orchestrátor volá každého špecialistu postupne, posiela výsledky ďalej a zoskupuje konečnú odpoveď. Agenti zdieľajú kontext prostredníctvom:
+Vo väčšine azd viacagentových príkladov **orchestrátor beží vo vašom aplikačnom kóde** (napríklad pomocou frameworku ako Semantic Kernel alebo Microsoft Agent Framework). Orchestrátor vyvoláva jednotlivých špecialistov postupne, odovzdáva výsledky a zostavuje konečnú odpoveď. Agentom zdieľajú kontext cez:
 
-- **Volaní funkcií/nástrojov** — orchestrátor vyzve špecialistu a získa výsledok späť
-- **Zdieľanej pamäte** — databáza (často Cosmos DB) uchováva stav, ktorý môžu obaja agenti čítať
-- **Správ/udalostí** — pre voľnejšie prepojenie agenti komunikujú cez frontu alebo Service Bus
+- **Volania funkcií/nástrojov** — orchestrátor vyvolá špecialistu a dostane späť výsledok
+- **Zdieľaná pamäť** — databáza (často Cosmos DB) uchováva stav, ktorý obaja agenti čítajú
+- **Správy/udalosti** — pre voľnejšie prepojenie, agenti komunikujú cez frontu alebo Service Bus
 
-> **Prečo je to dôležité pre ladenie:** pretože každý krok je samostatný, Application Insights vám ukáže *ktorý* agent bol pomalý alebo zlyhal. To je hlavný dôvod rozdeliť prácu medzi agentov.
+> **Prečo je to dôležité pre ladenie:** Keďže každý krok je samostatný, Application Insights vám ukáže, *ktorý* agent bol pomalý alebo zlyhal. To je hlavný dôvod, prečo práce rozdeliť medzi agentov.
 
 ---
 
 ## Overenie nasadenia
 
-Potvrďte, že systém skutočne funguje, predtým než budete pokračovať:
+Potvrďte, že systém skutočne funguje pred ďalším krokom:
 
 ```bash
 # Zobraziť nasadené koncové body
@@ -169,83 +169,83 @@ azd show
 # Otvoriť monitorovací panel aplikácie
 azd monitor
 
-# Sledovať logy, ak niečo vyzerá byť v neporiadku
+# Sledovať logy, ak niečo vyzerá nesprávne
 azd monitor --logs
 ```
 
-Potom otvorte URL aplikácie z `azd show` a vyskúšajte požiadavku, ktorá aktivuje všetky agenty (pre Creative Writer, požiadajte ho, aby napísal krátky článok na tému). V **transaction search** v Application Insights by ste mali vidieť, ako sa požiadavka rozvetvuje cez kroky výskumníka, pisateľa a editora.
+Potom otvorte URL aplikácie z `azd show` a skúste požiadavku, ktorá vyvolá všetkých agentov (pre Creative Writer, požiadajte ho, aby napísal krátky článok na tému). V Application Insights **transaction search** by ste mali vidieť, ako sa požiadavka rozdelí medzi výskumník, pisateľa a editora.
 
 **Kritériá úspechu:**
-- ✅ `azd show` vypíše dostupný endpoint
-- ✅ Požiadavka vytvorí výsledok, ktorý zjavne prešiel viacerými fázami
-- ✅ Application Insights zobrazuje trasovanie pre viac než jeden krok agenta
+- ✅ `azd show` vypisuje dostupný endpoint
+- ✅ Požiadavka prináša výsledok, ktorý prešiel viac fázami
+- ✅ Application Insights ukazuje trasovanie pre viac než jeden krok agenta
 
 ---
 
-## Prispôsobenie: Pridať alebo upraviť agenta
+## Prispôsobenie: Pridajte alebo upravte agenta
 
-Pretože každý agent je iba inštrukcie plus nástroje, prispôsobenie je zvládnuteľné:
+Keďže každý agent sú len inštrukcie plus nástroje, prispôsobovanie je dostupné:
 
-1. **Nájdite definície agentov** v šablóne (často sada súborov `prompts/`, `agents/` alebo `*.prompty`).
-2. **Ladíte inštrukcie agenta** — napríklad povedzte editorovi, aby vynútil konkrétny tón alebo počet slov.
-3. **Znovu nasadiť iba kód** (infrastruktúra sa nemení):
+1. **Nájdite definície agentov** v šablóne (často v priečinkoch `prompts/`, `agents/` alebo súboroch `*.prompty`).
+2. **Doladte inštrukcie agenta** — napríklad povedzte editorovi, aby dodržiaval konkrétny tón alebo počet slov.
+3. **Nasadte len kód znova** (infrastruktúra sa nemení):
 
    ```bash
    azd deploy
    ```
 
-Ak chcete viac a vytvoriť agentov z *vlastného* manifestu, použite rozšírenie agent a jeho celý životný cyklus:
+Ak chcete ísť ďalej a vytvárať agentov z *vlastného* manifestu, použite rozšírenie pre agentov a jeho plný životný cyklus:
 
 ```bash
 azd extension install azure.ai.agents
 azd ai agent init -m agent-manifest.yaml
 azd up
-azd ai agent invoke      # test, s meraním času odozvy
+azd ai agent invoke      # test, s časovaním odpovede
 ```
 
-Pozrite si [Kapitolu 2: Agenti](../chapter-02-ai-development/agents.md) a [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pre kompletný životný cyklus agenta (`invoke`, `eval generate`, `optimize`, `delete`).
+Pozrite [Kapitolu 2: Agenti](../chapter-02-ai-development/agents.md) a [AZD AI CLI referenciu](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pre kompletný životný cyklus agenta (`invoke`, `eval generate`, `optimize`, `delete`).
 
 ---
 
 ## Vyčistenie
 
-Viacagentné aplikácie prevádzkujú viac fakturovateľných služieb. Odstráňte všetko, keď skončíte:
+Viacagentové aplikácie prevádzkujú viac platených služieb. Po skončení všetko odstráňte:
 
 ```bash
 azd down --force --purge
 ```
 
-Flag `--purge` tiež odstráni soft-deleteované AI zdroje (ako účty Foundry/Azure AI Services), aby neblokovali budúce opätovné nasadenie alebo nezaberal spôsobovali ďalšie náklady.
+`--purge` parameter tiež odstraňuje soft-deleteované AI zdroje (ako Foundry/Azure AI Services účty), aby neblokovali budúce nasadenie ani nezvyšovali náklady.
 
 ---
 
-## Poznámka o produkčných viacagentných systémoch
+## Poznámka o produkčných viacagentových systémoch
 
-[Retail Multi-Agent Solution](../../examples/retail-scenario.md) v tomto repozitári je **architektonický plán**, nie jedným príkazom spustiteľná šablóna—dokumentuje, ako by sa produkčný retail systém *sprostredkovane* postavil (a jasne uvádza, že úplné postavenie je značný záväzok). Použite ho ako návrhový referenčný materiál *potom*, čo nasadíte fungujúci príklad tu. Pre produkčné záležitosti (odolnosť, náklady, monitorovanie, governance) pokračujte na [Kapitolu 8: Produkčné AI praktiky](../chapter-08-production/production-ai-practices.md).
+[Retail Multi-Agent Solution](../../examples/retail-scenario.md) v tomto repozitári je **architektonická šablóna**, nie šablóna na jedno príkazové nasadenie—dokumentuje, ako by sa produkčný maloobchodný systém *postavil* (a dovoľuje povedať, že úplná stavba je značné úsilie). Použite ju ako dizajnový zdroj *po* tom, čo nasadíte tu fungujúci príklad. Pre produkčné potreby (odolnosť, náklady, monitorovanie, správa) pokračujte do [Kapitoly 8: Produkčné AI praktiky](../chapter-08-production/production-ai-practices.md).
 
 ---
 
 ## Zhrnutie
 
-- Viacagentný systém rozdeľuje prácu medzi špecialistov koordinovaných orchestrátorom.
-- Používajte ho len keď má úloha odlišné fázy, potrebuje paralelizmus alebo rôzne nástroje pre jednotlivé kroky—inak uprednostnite jedného agenta.
-- Pracovný tok azd sa nemení: `azd init` → `azd up` → test → `azd down`.
-- Skutočná šablóna ako `contoso-creative-writer` vám umožní dnes vidieť a prispôsobiť fungujúcu viacagentnú aplikáciu.
-- Tracing v Application Insights naprieč agentmi je jednou z najväčších praktických výhod viacagentného dizajnu.
+- Viacagentový systém rozdeľuje prácu medzi špecialistov koordinovaných orchestrátorom.
+- Používajte ho len keď úloha má odlišné fázy, paralelizmus alebo rôzne nástroje pre jednotlivé kroky—inak radšej jeden agent.
+- Azd workflow sa nemení: `azd init` → `azd up` → test → `azd down`.
+- Skutočná šablóna ako `contoso-creative-writer` vám dnes umožní vidieť a prispôsobiť fungujúcu viacagentovú aplikáciu.
+- Trasovanie Application Insights naprieč agentmi je jeden z najväčších praktických prínosov viacagentového dizajnu.
 
 ---
 
 ## 🔗 Navigácia
 
-| Direction | Lesson |
-|-----------|--------|
-| **Previous** | [Kapitola 4: Infrastruktúra](../chapter-04-infrastructure/README.md) |
-| **Next** | [Vzory koordinácie](../chapter-06-pre-deployment/coordination-patterns.md) |
+| Smer | Lekcia |
+|-------|--------|
+| **Predchádzajúca** | [Kapitola 4: Infrastruktúra](../chapter-04-infrastructure/README.md) |
+| **Nasledujúca** | [Koordinačné vzory](../chapter-06-pre-deployment/coordination-patterns.md) |
 
 ## 📖 Súvisiace zdroje
 
-- [Sprievodca AI agentmi](../chapter-02-ai-development/agents.md)
-- [Vzory koordinácie](../chapter-06-pre-deployment/coordination-patterns.md)
+- [Sprievodca agentmi AI](../chapter-02-ai-development/agents.md)
+- [Koordinačné vzory](../chapter-06-pre-deployment/coordination-patterns.md)
 - [Produkčné AI praktiky](../chapter-08-production/production-ai-practices.md)
 - [Riešenie problémov s AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 

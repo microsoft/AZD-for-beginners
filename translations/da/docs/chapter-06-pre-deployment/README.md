@@ -1,80 +1,80 @@
-# Kapitel 6: Forudgående planlægning og validering
+# Kapitel 6: Planlægning & Validering Før Udrulning
 
-**📚 Kursus**: [AZD for begyndere](../../README.md) | **⏱️ Varighed**: 1 time | **⭐ Kompleksitet**: Mellemniveau
+**📚 Kursus**: [AZD For Beginners](../../README.md) | **⏱️ Varighed**: 1 time | **⭐ Sværhedsgrad**: Mellem
 
 ---
 
 ## Oversigt
 
-Dette kapitel dækker væsentlige planlægnings- og valideringstrin, før du implementerer din applikation. Lær at undgå dyre fejl med korrekt kapacitetsplanlægning, valg af SKU'er og preflight-tjek.
+Dette kapitel dækker væsentlige planlægnings- og valideringstrin før udrulning af din applikation. Lær at undgå dyre fejl med korrekt kapacitetsplanlægning, valg af SKU'er og preflight-tjek.
 
-> Valideret imod `azd 1.25.6` i juni 2026.
+> Valideret med `azd 1.27.1` i juli 2026.
 
 ## Læringsmål
 
 Ved at gennemføre dette kapitel vil du:
-- Køre preflight-kontroller før implementering
-- Planlægge kapacitet og estimere ressourcebehov
-- Vælge passende SKUs for omkostningsoptimering
+- Køre preflight-tjek før udrulning
+- Planlægge kapacitet og estimere ressourcernes behov
+- Vælge passende SKU'er til omkostningsoptimering
 - Konfigurere Application Insights til overvågning
-- Forstå mønstre for teamkoordinering
+- Forstå teamkoordinationsmønstre
 
 ---
 
 ## 📚 Lektioner
 
-| # | Lesson | Description | Time |
+| # | Lektion | Beskrivelse | Tid |
 |---|--------|-------------|------|
-| 1 | [Preflight-kontroller](preflight-checks.md) | Valider konfiguration før implementering | 15 min |
-| 2 | [Kapacitetsplanlægning](capacity-planning.md) | Estimer ressourcebehov | 20 min |
-| 3 | [SKU-valg](sku-selection.md) | Vælg passende prisklasser | 15 min |
+| 1 | [Preflight Checks](preflight-checks.md) | Valider konfiguration før udrulning | 15 min |
+| 2 | [Capacity Planning](capacity-planning.md) | Estimer ressourcernes behov | 20 min |
+| 3 | [SKU Selection](sku-selection.md) | Vælg passende prismodeller | 15 min |
 | 4 | [Application Insights](application-insights.md) | Konfigurer overvågning | 20 min |
-| 5 | [Koordineringsmønstre](coordination-patterns.md) | Teamets udrulningsarbejdsgange | 15 min |
+| 5 | [Coordination Patterns](coordination-patterns.md) | Teamets udrulningsarbejdsgange | 15 min |
 
 ---
 
-## 🚀 Hurtig start
+## 🚀 Kom Godt I Gang
 
 ```bash
-# Kontroller abonnementskvoter
+# Tjek abonnementskvoter
 az vm list-usage --location eastus --output table
 
-# Forhåndsvisning af udrulning (ingen ressourcer oprettes)
+# Forhåndsvis implementering (ingen ressourcer oprettes)
 azd provision --preview
 
-# Valider Bicep-syntaks
+# Validér Bicep-syntaks
 az bicep build --file infra/main.bicep
 
-# Kontroller miljøkonfiguration
+# Tjek miljøkonfiguration
 azd env get-values
 ```
 
 ---
 
-## ☑️ Tjekliste før implementering
+## ☑️ Tjekliste Før Udrulning
 
 ### Før `azd provision`
 
-- [ ] Kvoter bekræftet for regionen
-- [ ] SKUs valgt passende
-- [ ] Omkostningsestimat gennemgået
-- [ ] Navnekonvention ensartet
+- [ ] Kvota bekræftet for region
+- [ ] SKU'er valgt passende
+- [ ] Omkostningsoverslag gennemgået
+- [ ] Konsistent navngivningskonvention
 - [ ] Sikkerhed/RBAC konfigureret
 
 ### Før `azd deploy`
 
-- [ ] Miljøvariabler indstillet
-- [ ] Secrets i Key Vault
-- [ ] Forbindelsesstrenge verificeret
+- [ ] Miljøvariabler sat
+- [ ] Hemmeligheder i Key Vault
+- [ ] Forbindelsesstrenge bekræftet
 - [ ] Sundhedstjek konfigureret
 
 ---
 
-## 💰 Vejledning til SKU-valg
+## 💰 Guide til SKU-Valg
 
-| Workload | Development | Production |
+| Arbejdsbelastning | Udvikling | Produktion |
 |----------|-------------|------------|
-| Container Apps | Forbrugsbaseret | Dedicated D4 |
+| Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
 | Microsoft Foundry Models | Standard | Standard + PTU |
 | AI Search | Basic | Standard S2+ |
@@ -83,18 +83,18 @@ azd env get-values
 
 ## 🔗 Navigation
 
-| Direction | Chapter |
+| Retning | Kapitel |
 |-----------|---------|
 | **Forrige** | [Kapitel 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
 | **Næste** | [Kapitel 7: Fejlfinding](../chapter-07-troubleshooting/README.md) |
 
 ---
 
-## 📖 Relaterede ressourcer
+## 📖 Relaterede Ressourcer
 
 - [Konfigurationsguide](../chapter-03-configuration/configuration.md)
-- [Udrulningsvejledning](../chapter-04-infrastructure/deployment-guide.md)
-- [Almindelige problemer](../chapter-07-troubleshooting/common-issues.md)
+- [Udrulningsguide](../chapter-04-infrastructure/deployment-guide.md)
+- [Almindelige Problemer](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

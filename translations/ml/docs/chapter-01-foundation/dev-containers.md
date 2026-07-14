@@ -1,56 +1,56 @@
-# azd-നുള്ള Dev Containers & GitHub Codespaces
+# azd-നുള്ള Dev Containers & GitHub Codespaces  
 
-**Chapter Navigation:**
-- **📚 കോഴ്സ് ഹോം**: [AZD തുടക്കക്കാർക്കായി](../../README.md)
-- **📖 നിലവിലെ അധ്യായം**: അധ്യായം 1 - അടിസ്ഥാനവും വേഗത്തിലുള്ള ആരംഭവും
-- **⬅️ Previous**: [സ്വന്തം ആപ്പ് കൊണ്ട് വരിക](bring-your-own-app.md)
-- **🚀 അടുത്ത അധ്യായം**: [അധ്യായം 2: AI-ഫസ്റ്റ് ഡെവലപ്പ്മെന്റ്](../chapter-02-ai-development/README.md)
+**അധ്യായ നാവിഗേഷൻ:**  
+- **📚 കോഴ്‌സ് ഹോം**: [AZD For Beginners](../../README.md)  
+- **📖 നിലവിലുള്ള അധ്യായം**: അധ്യായം 1 - ഫൗണ്ടേഷൻ & ക്വിക്ക് സ്റ്റാർട്ട്  
+- **⬅️ മുമ്പത്തെ**: [Bring Your Own App](bring-your-own-app.md)  
+- **🚀 അടുത്ത അധ്യായം**: [Chapter 2: AI-First Development](../chapter-02-ai-development/README.md)  
 
-> 2026 ജൂണിൽ `azd 1.25.6` ഉപയോഗിച്ച് സാധൂകരിച്ചു.
+> `azd 1.27.1`-ൽ 2026 ജൂലൈയിൽ സാധൂകരിച്ചിരിക്കുന്നു.  
 
-## Introduction
+## പരിചയം  
 
-പ്രതിയൊരു യന്ത്രത്തിലും azd, അനുയോജ്യമായ ഭാഷാ റൺടൈം, Docker, കൂടാതെ Azure CLI എല്ലാം ഇൻസ്റ്റാൾ ചെയ്യുക എന്നത് ഒരു ദൗത്യം ആണ് — ഇത് "എന്റെ മെഷീനിൽ അത് പ്രവർത്തിക്കുന്നു" എന്ന് പറയുന്ന ഒരു ട്യൂട്ടോറിയൽ മറ്റൊരിടത്ത് പരാജയപ്പെടുന്ന മുഖ്യ കാരണം ആണ്. ഒരു **ഡെവ് കണ്ടെയ്‌നർ** നിങ്ങളുടെ മുഴുവൻ ടൂൾചെയ്നും ഒരു ഫയലിൽ വിവരിച്ചുകൊണ്ട് ഇത് പരിഹരിക്കുന്നു. കലോത്സവം VS Code-ൽ അല്ലെങ്കിൽ GitHub Codespaces-ൽ പ്രോജക്ട് തുറക്കുന്ന ഏവരും അതേ ശരിയായ പരിസ്ഥിതിയെക്കുറിച്ച് ലഭിക്കും, azd ഇതിനകം ഇൻസ്റ്റാൾ ചെയ്തുകിട്ടിയാവും. ഈ പാഠം അതിനെ എങ്ങനെ ചേർത്തു എന്നത് കാണിക്കുന്നു.
+azd, ആവശ്യമായ ഭാഷാ റൺടൈം, Docker, Azure CLI എല്ലാം ഓരോ മെഷീനിലും ഇൻസ്റ്റാൾ ചെയ്യുന്നത് ഒരു ബുദ്ധിമുട്ടാണ്—"എന്റെ മെഷീനിൽ ചുറ്റും പ്രവർത്തിക്കുന്ന ഒരു ട്യൂട്ടോറിയൽ" മറ്റൊരാൾക്കു വാഴ്‌ക്കത്തകത്ത് പരാജയപ്പെടുന്ന പ്രധാന കാരണം ഇത് തന്നെയാണ്. ഒരു **dev container** ഇതിന് പരിഹാരമാണ്, അത് നിങ്ങളുടെ മുഴുവൻ ടൂൾചെയ്ൻ ഒരു ഫയലിൽ വിവരണം നൽകുന്നു. പ്രോജക്ട് VS Code-ഇലോ GitHub Codespaces-ഇലോ തുറന്നാൽ അതേ പരിസ്ഥിതി, azd മുൻകൂട്ടി ഇൻസ്റ്റാൾ ചെയ്തതോടൊപ്പം ലഭിക്കും. ഈ പാഠത്തിൽ നിങ്ങൾക്ക് ഒരു dev container എങ്ങനെ ചേർക്കാമെന്ന് കാണിക്കും.  
 
-## Learning Goals
+## പഠന ലക്ഷ്യങ്ങൾ  
 
-By the end of this lesson, you will:
-- ഒരു ഡെവ് കണ്ടെയ്‌നർ എന്താണ് എന്നതും അത് azd-ന് എങ്ങനെ സഹായിയ്ക്കുന്നുവെന്നതും മനസ്സിലാക്കുക
-- ഒരു പ്രോജക്ടിലേക്ക് കുറഞ്ഞതോരോന്നൊക്കെ `.devcontainer/devcontainer.json` ചേർക്കുക
-- Dev Container *features* വഴി azd, Azure CLI, Docker എന്നിവ ഉൾപ്പെടുത്തുക
-- പ്രോജക്ട് GitHub Codespaces-ൽ അല്ലെങ്കിൽ VS Code-ൽ തുറക്കുക
+ഈ പാഠം കഴിഞ്ഞാൽ, നിങ്ങൾക്ക് കഴിയും:  
+- dev container എന്താണെന്നും azd-നൊപ്പം അത് എങ്ങനെ സഹായിക്കുന്നുവെന്നു മനസ്സിലാക്കുക  
+- ഒരു ഏറ്റവും ലഘുവായ` .devcontainer/devcontainer.json` പ്രോജക്ടിൽ ചേർക്കുക  
+- Dev Container *features* വഴി azd, Azure CLI, Docker എന്നിവ ഉൾപ്പെടുത്തുക  
+- GitHub Codespaces-ലോ VS Code-ലോ പ്രോജക്ട് തുറക്കുക  
 
-## Learning Outcomes
+## പഠന ഫലങ്ങൾ  
 
-After completing this lesson, you will be able to:
-- azd പ്രോജക്ടിനായുള്ള `devcontainer.json` രചിക്കുക
-- മാനുവൽ ഇൻസ്റ്റാൾ ഇല്ലാതെ azdയും Azure ടൂളിംഗ്-ഉം ചേർക്കുക
-- കണ്ടെയ്നറിനുള്ളിലോ Codespace-ൽനിന്നോ `azd up` 실행 ചെയ്യുക
+ഈ പാഠം പൂര്‍ത്തിയാക്കിയതിനു ശേഷം നിങ്ങൾക്ക് കഴിയും:  
+- azd പ്രോജക്ടിനുള്ള `devcontainer.json` എഴുതി തീര്‍ക്കുക  
+- دستی ഇന്‍സ്റ്റാളുകള്‍ വേണ്ടാതെ azd, Azure ടൂളുകൾ ചേർക്കുക  
+- ഒരു കൺറ്റെയ്‌നറിലോ Codespace-ലോ നിന്ന് `azd up` ഓടിക്കുക  
 
----
+---  
 
-## What Is a Dev Container?
+## Dev Container എന്താണ്?  
 
-ഒരു ഡെവ് കണ്ടെയ്നർ നിങ്ങളുടെ റീപ്പോയിലുണ്ടാകുന്ന `.devcontainer/devcontainer.json` ഫയലിലൂടെ നിർവചിക്കപ്പെട്ട Docker-ആധാരിത ഡെവലപ്മെന്റ് പരിസ്ഥിതി ആണ്. നിങ്ങൾ പ്രോജക്ട് തുറക്കുമ്പോൾ:
+Dev container ഒരു Docker-ആധാരിത വികസന പരിസ്ഥിതിയാണ്, ഇത് നിങ്ങളുടെ റെപ്പോസിറ്ററിയിലുള്ള `.devcontainer/devcontainer.json` ഫയൽ വഴി നിർവ്വചിക്കപ്പെടുന്നു. നിങ്ങൾ പ്രോജക്ട് തുറക്കുമ്പോൾ:  
 
-- **VS Code** (Dev Containers എക്സ്റ്റൻഷൻ നൽകി) കണ്ടെയ്നർ ബിൽഡ് ചെയ്ത് അതിലേക്ക് അറ്റാച്ച് ചെയ്യുന്നു.
-- **GitHub Codespaces** ക്ലൗഡിൽ അതേ കണ്ടെയ്നർ ബിൽഡ് ചെയ്ത് നിങ്ങളെ ബ്രൗസർ-ആധാരിത എഡിറ്ററിലേക്ക് നൽകുന്നു.
+- **VS Code** (Dev Containers എക്സ്റ്റൻഷൻ ഉപയോഗിച്ച്) കൺറ്റെയ്‌നർ നിർമ്മിക്കുകയും അതിൽ അടക്കം പ്രവേശിക്കുകയും ചെയ്യുന്നു.  
+- **GitHub Codespaces** ആകാശത്തിലുള്ള ഒരേ കൺറ്റെയ്‌നർ നിർമ്മിച്ച്, ബ്രൗസർ അടിസ്ഥാനപരമായ എഡിറ്റർ നൽകുന്നു.  
 
-ഏതായാലും, ഓരോ സംഭാവനക്കാരനും സമാന ഉപകരണങ്ങൾ ലഭിക്കുന്നു—'നിയമിതമായി azd ഇൻസ്റ്റാൾ ചെയ്തോ?' എന്നതിനെക്കുറിച്ചുള്ള പ്രശ്നപരിശോധന ഒഴിവാക്കാം.
+ഏതൊരു വിധമായാലും, ഓരോ സംഭാവനക്കാരനും ഒരേ ടൂളുകൾ ലഭിക്കുന്നു—"azd ഇൻസ്റ്റാൾ ചെയ്‌തോ?" എന്ന പ്രശ്നം ഇല്ലാതാക്കുന്നു.  
 
 ```mermaid
 graph LR
-    Repo[നിങ്ങളുടെ റെപ്പോ<br/>+ devcontainer.json] --> VSCode[VS Code<br/>ഡെവ് കണ്ടെയ്‌നറുകൾ]
-    Repo --> Codespaces[GitHub<br/>Codespaces]
-    VSCode --> Env[ഒരേ പരിസ്ഥിതി:<br/>azd + az + Docker]
+    Repo[നിങ്ങളുടെ റിപ്പോസിറ്ററി<br/>+ devcontainer.json] --> VSCode[VS കോഡ്<br/>ഡെവ് കണ്ടെയ്‌നറുകൾ]
+    Repo --> Codespaces[GitHub<br/>കോഡ്സ്പെയ്സുകൾ]
+    VSCode --> Env[Identical environment:<br/>azd + az + Docker]
     Codespaces --> Env
 ```
+  
+---  
 
----
+## സ്റ്റെപ്പ് 1: devcontainer ഫയൽ സം‌രചിക്കുക  
 
-## Step 1: Create the devcontainer File
-
-Create `.devcontainer/devcontainer.json` in the root of your project:
+പ്രോജക്ടിന്റെ റൂട്ടിലായി `.devcontainer/devcontainer.json` സൃഷ്ടിക്കുക:  
 
 ```json
 {
@@ -74,24 +74,24 @@ Create `.devcontainer/devcontainer.json` in the root of your project:
   "postCreateCommand": "azd version"
 }
 ```
+  
+ഓരോ ഭാഗവും ചെയ്യുന്നത്:  
 
-What each part does:
+| കീ | പരി‌മാണ് |  
+|-----|---------|  
+| `image` | കൺറ്റെയ്‌നറിനുള്ള അടിസ്ഥാന OS |  
+| `features` | മുൻകൂട്ടിയുള്ള ഇൻസ്റ്റാളറുകൾ — ഇവിടെ: Azure CLI, **azd**, Docker, Node.js |  
+| `customizations.vscode.extensions` | azd, Bicep VS Code എക്സ്റ്റൻഷനുകൾ സ്വയം ഇൻസ്റ്റാൾ ചെയ്യുന്നു |  
+| `forwardPorts` | നിങ്ങളുടെ അപ്ലിക്കേഷന്റെ പോർട്ട് ബ്രൗസറിൽ പ്രദർശിപ്പിക്കുന്നു |  
+| `postCreateCommand` | കൺറ്റെയ്‌നർ ഘടിപ്പിച്ചശേഷം ഒരിക്കൽ പ്രവർത്തിക്കുന്നു (ഇവിടെ, ഒരു സാനിറ്റി പരിശോധന) |  
 
-| Key | Purpose |
-|-----|---------|
-| `image` | കണ്ടെയ്നറിന് ഉള്ള അടിസ്ഥാന ഓപ്പറേറ്റിംഗ് സിസ്റ്റം |
-| `features` | മുൻകൂട്ടി തയ്യാറാക്കിയ ഇൻസ്റ്റാളറുകൾ — ഇവിടെ: Azure CLI, **azd**, Docker, and Node.js |
-| `customizations.vscode.extensions` | azdയും Bicep ഉം VS Code എക്സ്റ്റൻഷനുകൾ സ്വയം ഇൻസ്റ്റാൾ ചെയ്യുന്നു |
-| `forwardPorts` | നിങ്ങളുടെ ആപ്പിന്റെ പോർട്ട് ബ്രൗസറിലേക്ക് വെളിപ്പെടുത്തുന്നു |
-| `postCreateCommand` | കണ്ടെയ്നർ ബിൽഡ് ചെയ്തശേഷം ഒരിക്കൽ പ്രവർത്തിക്കുന്ന കമാൻഡ് (ഇവിടെ, ഒരു sanity പരിശോധന) |
+> `ghcr.io/azure/azure-dev/azd:latest` ഫീച്ചർ കൺറ്റെയ്‌നറിലുള്ള azd ലഭിക്കുന്ന ഔദ്യോഗിക മാർഗമാണ്. തർമികത ആവശ്യമായാൽ ഒരു പ്രത്യേക വേർഷൻ (ഉദാ: `azd:1.27.1`) പിന്‍ അനുസരിച്ച് ഉപയോഗിക്കുക.  
 
-> The `ghcr.io/azure/azure-dev/azd:latest` feature is the official way to get azd in a container. Pin a specific version (for example `azd:1.25.6`) if you need reproducibility.
+---  
 
----
+## സ്റ്റെപ്പ് 2: നിങ്ങളുടെ അപ്ലിക്കേഷന്റെ ഭാഷയ്‌ക്ക് അനുസരിച്ചുള്ള ഫീച്ചർ പൊരുത്തപ്പെടുത്തുക  
 
-## Step 2: Match the Feature to Your App's Language
-
-Swap the `node` feature for whatever your app uses:
+നിങ്ങളുടെ അപ്ലിക്കേഷനിൽ ഉപയോഗിക്കുന്ന ഭാഷയുടെ പകരം `node` ഫീച്ചർ മാറ്റുക:  
 
 ```jsonc
 // Python project
@@ -106,72 +106,72 @@ Swap the `node` feature for whatever your app uses:
 // Go project
 "ghcr.io/devcontainers/features/go:1": {}
 ```
+  
+`host` എന്നത് `containerapp`, `aks`, അല്ലെങ്കിൽ ഏതെങ്കിലും കൺറ്റെയ്‌നർ ഇമേജ് നിർമ്മിക്കുന്നതായിരുന്നുെങ്കിൽ `docker-in-docker` നിലനിര്‍ത്തുക—azd Docker ഉപയോഗിച്ച് ഇമേജ് നിർമ്മിച്ച് തള്ളാൻ ആവശ്യമാണ്.  
 
-Keep `docker-in-docker` if your `host` is `containerapp`, `aks`, or anything that builds a container image—azd needs Docker to build and push images.
+---  
 
----
+## സ്റ്റെപ്പ് 3: തുറക്കുക  
 
-## Step 3: Open It
+**VS Code-ൽ:**  
+1. **Dev Containers** എക്സ്റ്റൻഷൻ ഇൻസ്റ്റാൾ ചെയ്യുക.  
+2. പ്രോജക്ട് ഫോൾഡർ തുറക്കുക.  
+3. പ്രൊംപ്റ്റ് വന്നാൽ **Reopen in Container** ക്ലിക്ക് ചെയ്യുക (അല്ലെങ്കിൽ *Dev Containers: Reopen in Container* ഓടിക്കുക).  
 
-**In VS Code:**
-1. **Dev Containers** എക്സ്റ്റൻഷൻ ഇൻസ്റ്റാൾ ചെയ്യുക.
-2. പ്രോജക്ട് ഫോൾഡർ തുറക്കുക.
-3. പ്രോംപ്റ്റ് വന്നാൽ **Reopen in Container** ക്ലിക്ക് ചെയ്യുക (അല്ലെങ്കിൽ *Dev Containers: Reopen in Container* 실행 ചെയ്യുക).
+**GitHub Codespaces-ൽ:**  
+1. റെപ്പോ GitHub-ൽ പുഷ് ചെയ്യുക.  
+2. **Code → Codespaces → Create codespace on main**- ക്ലിക്ക് ചെയ്യുക.  
+3. കൺറ്റെയ്‌നർ നിർമ്മിക്കുന്നത് കാത്തിരിക്കുക—azd ടെർമിനലിൽ ഉപയോഗത്തിന് സജ്ജമാകും.  
 
-**In GitHub Codespaces:**
-1. റപ്പോ GitHub-ലേക്ക് പുഷ് ചെയ്യുക.
-2. **Code → Codespaces → Create codespace on main** ക്ലിക്ക് ചെയ്യുക.
-3. കണ്ടെയ്നർ ബിൽഡ് വരുന്നതുവരെ കാത്തിരിക്കുക — ടർമിനലിൽ azd ഉപയോഗിക്കാൻ തയ്യാറാണ്.
+---  
 
----
+## സ്റ്റെപ്പ് 4: കൺറ്റെയ്‌നറിനുള്ളിൽ നിന്ന് വിന്യസിക്കുക  
 
-## Step 4: Deploy From Inside the Container
-
-The container has azd preinstalled, so the normal workflow just works:
+കൺറ്റെയ്‌നറിൽ azd മുൻകൂട്ടി ഇൻസ്റ്റോൾ ചെയ്തിരിക്കുന്നു, അതുകൊണ്ട് സാധാരണ പ്രവൃത്തി സരളമായി പ്രവർത്തിക്കുന്നു:  
 
 ```bash
-azd auth login --use-device-code   # Codespaces-ൽ ഡിവൈസ് കോഡ് ഉപയോഗിക്കാൻ സൗകര്യപ്രദമാണ്
+azd auth login --use-device-code   # ഡിവൈസ് കോഡ് Codespaces ൽ സഹായകരമാണ്
 azd up
 ```
+  
+> **എന്തുകൊണ്ട് `--use-device-code`?** റിമോട്ട് കൺറ്റെയ്‌നറിലോ Codespace-ലോ ലോക്കൽ ബ്രൗസർ ഇല്ല, അതുകൊണ്ടു device-code ലോഗിൻ വിശ്വസനീയമായ മാർഗമാണ്. സൈൻ ഇൻ പൂർത്തിയാക്കാൻ നിങ്ങൾ ഒരു കോഡ് ബ്രൗസർ ടാബിലേക്ക് പകർത്തും.  
 
-> **Why `--use-device-code`?** ഒരു റിമോട്ട് കണ്ടെയ്നറിലോ Codespace-ലോ ഒരു ലോക്കൽ ബ്രൗസർ റീഡൈരക്ട് ചെയ്യുന്നതിനുള്ള സൗകര്യം ഉണ്ടാകാത്തതിനാൽ device-code ലോഗിൻ വിശ്വസനീയമായ മാർഗ്ഗമാണ്. സൈൻ ഇൻ പൂർത്തിയാക്കാൻ ഒരു കോഡ് ബ്രൗസർ ടാബിൽ പേസ്റ്റുചെയ്യണം.
+---  
 
----
+## സാധാരണ വീഴ്ചകൾ  
 
-## Common Pitfalls
+| വീഴ്ച | പരിഹാരം |  
+|---------|-----|  
+| `azd up` ഒരു ഇമേജ് നിർമ്മിക്കാൻ കഴിയുന്നില്ല | `docker-in-docker` ഫീച്ചർ ചേർക്കുക |  
+| Codespaces-ലുള്ള ബ്രൗസർ ലോഗിൻ തടസപ്പെടുന്നു | `azd auth login --use-device-code` ഉപയോഗിക്കുക |  
+| ടീമംഗങ്ങളിലെ ടൂളുകൾ വ്യത്യസ്തമാണ് | ഫീച്ചർ വേർഷനുകൾ പിന്‍ അനുസരിച്ച് നിശ്ചയിക്കുക (ഉദ: `azd:1.27.1`) |  
+| ബ്രൗസറിൽ അപ്ലിക്കേഷൻ എത്തിച്ചേരാനാകുന്നില്ല | പോർട്ട് `forwardPorts`-ൽ ചേർക്കുക |  
 
-| Pitfall | Fix |
-|---------|-----|
-| `azd up` can't build an image | Add the `docker-in-docker` feature |
-| Browser login hangs in Codespaces | Use `azd auth login --use-device-code` |
-| Tools differ between teammates | Pin feature versions (e.g. `azd:1.25.6`) |
-| App not reachable in browser | Add the port to `forwardPorts` |
+---  
 
----
+## സാരാംശം  
 
-## Summary
+- dev container നിങ്ങളുടെ azd ടൂൾചെയ്ൻ എല്ലാവർക്കും പുനരാവർത്തനയോഗ്യമാക്കുന്നു.  
+- Dev Container *features* വഴി azd, Azure CLI, Docker ചേർക്കുക.  
+- ഭാഷാ ഫീച്ചർ നിങ്ങളുടെ അപ്ലിക്കേഷനോടെ പൊരുത്തപ്പെടുത്തുക, container host-കൾക്കായി `docker-in-docker` നിലനിർത്തുക.  
+- Codespaces-ൽ പ്രവർത്തിക്കുമ്പോൾ device-code ലോഗിൻ ഉപയോഗിക്കുക.  
 
-- ഒരു ഡെവ് കണ്ടെയ്നർ നിങ്ങളുടെ azd ടൂൾചെയിൻ എല്ലാവർക്കും ആവർത്തനക്ഷമമാക്കുന്നു.
-- Dev Container *features* വഴി azd, Azure CLI, Docker എന്നിവ ചേർക്കുക.
-- നിങ്ങളുടെ ആപ്പിനുള്ള ഭാഷാ ഫീച്ചറിനെ പൊരുത്തപ്പെടുത്തി, container host-കൂടിയുള്ള വിഷയം ചെയ്യുമ്പോൾ `docker-in-docker` നിലനിർത്തുക.
-- Codespaces-ൽ പ്രവർത്തിക്കുമ്പോൾ device-code ലോഗിൻ ഉപയോഗിക്കുക.
+---  
 
----
+## 🔗 നാവിഗേഷൻ  
 
-## 🔗 Navigation
+| ദിശ | സ്രോതസ്സ് |  
+|-----------|----------|  
+| **മുമ്പത്തെ** | [Bring Your Own App](bring-your-own-app.md) |  
+| **അധ്യായം ഹോം** | [Chapter 1: Foundation & Quick Start](README.md) |  
+| **അടുത്ത അധ്യായം** | [Chapter 2: AI-First Development](../chapter-02-ai-development/README.md) |  
 
-| Direction | Resource |
-|-----------|----------|
-| **Previous** | [Bring Your Own App](bring-your-own-app.md) |
-| **Chapter Home** | [Chapter 1: Foundation & Quick Start](README.md) |
-| **Next Chapter** | [Chapter 2: AI-First Development](../chapter-02-ai-development/README.md) |
+## 📖 ബന്ധപ്പെട്ട സ്രോതസുകൾ  
 
-## 📖 Related Resources
-
-- [Installation & Setup](installation.md)
-- [Command Cheat Sheet](../../resources/cheat-sheet.md)
-- [അധികാരം Dev Containers സ്പെസിഫിക്കേഷൻ](https://containers.dev/)
-- [azd Dev Container feature](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
+- [ഇൻസ്റ്റാളേഷൻ & സെറ്റ്‌അപ്പ്](installation.md)  
+- [കമാൻഡ് ചീറ്റ് ഷീറ്റ്](../../resources/cheat-sheet.md)  
+- [ഔദ്യോഗിക Dev Containers നിയന്ത്രണങ്ങളിൽ](https://containers.dev/)  
+- [azd Dev Container ഫീച്ചർ](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)  
 
 ---
 

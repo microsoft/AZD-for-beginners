@@ -1,67 +1,67 @@
-# Chapter 8: Production & Enterprise Patterns
+# Rozdział 8: Wzorce produkcyjne i korporacyjne
 
-**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 2-3 godziny | **⭐ Complexity**: Zaawansowany
+**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 2-3 godziny | **⭐ Poziom trudności**: Zaawansowany
 
 ---
 
-## Overview
+## Przegląd
 
-Ten rozdział obejmuje wzorce wdrożeń gotowych do zastosowań korporacyjnych, zabezpieczenia, monitorowanie oraz optymalizację kosztów dla produkcyjnych obciążeń AI.
+Ten rozdział obejmuje wzorce wdrożeń gotowych do użycia korporacyjnego, zabezpieczanie, monitorowanie oraz optymalizację kosztów dla produkcyjnych obciążeń AI.
 
-> Zatwierdzono dla `azd 1.25.6` w czerwcu 2026.
+> Zatwierdzone na `azd 1.27.1` w lipcu 2026.
 
-## Learning Objectives
+## Cele nauki
 
-Po ukończeniu tego rozdziału będziesz potrafić:
-- Wdrażać aplikacje odporne na awarie w wielu regionach
-- Wdrażać wzorce bezpieczeństwa korporacyjnego
-- Konfigurować kompleksowe monitorowanie
+Po ukończeniu tego rozdziału będziesz potrafił:
+- Wdrożyć odporne aplikacje wieloregionowe
+- Zaimplementować korporacyjne wzorce bezpieczeństwa
+- Skonfigurować kompleksowe monitorowanie
 - Optymalizować koszty na dużą skalę
-- Konfigurować pipeline’y CI/CD z AZD
+- Ustawić pipeline CI/CD za pomocą AZD
 
 ---
 
-## 📚 Lessons
+## 📚 Lekcje
 
 | # | Lekcja | Opis | Czas |
 |---|--------|-------------|------|
-| 1 | [Production AI Practices](production-ai-practices.md) | Wzorce wdrożeń korporacyjnych | 90 min |
+| 1 | [Praktyki produkcyjnego AI](production-ai-practices.md) | Wzorce wdrożeń korporacyjnych | 90 min |
 
 ---
 
-## 🚀 Production Checklist
+## 🚀 Lista kontrolna produkcji
 
-- [ ] Wdrażanie wieloregionalne dla odporności
-- [ ] Managed identity do uwierzytelniania (bez kluczy)
+- [ ] Wdrożenie wieloregionowe dla odporności
+- [ ] Zarządzana tożsamość do uwierzytelniania (bez kluczy)
 - [ ] Application Insights do monitorowania
-- [ ] Budżety kosztów i alerty skonfigurowane
-- [ ] Włączone skanowanie bezpieczeństwa
-- [ ] Integracja pipeline’u CI/CD
+- [ ] Ustawione budżety i alerty kosztowe
+- [ ] Włączone skanowanie zabezpieczeń
+- [ ] Integracja pipeline CI/CD
 - [ ] Plan odzyskiwania po awarii
 
 ---
 
-## 🏗️ Architecture Patterns
+## 🏗️ Wzorce architektoniczne
 
 ### Wzorzec 1: Mikroserwisy AI
 
 ```mermaid
 graph LR
-    Gateway[Brama API] --> AI[Usługa AI] --> Models[Modele Microsoft Foundry]
-    Gateway --> Auth[Usługa Uwierzytelniania]
-    AI --> Data[Magazyn Danych]
+    Gateway[Bramą API] --> AI[Usługa AI] --> Models[Modele Microsoft Foundry]
+    Gateway --> Auth[Usługa uwierzytelniania]
+    AI --> Data[Magazyn danych]
 ```
 
 ### Wzorzec 2: AI sterowane zdarzeniami
 
 ```mermaid
 graph LR
-    EventGrid[Siatka Zdarzeń] --> Functions[Funkcje] --> Pipeline[Potok AI]
+    EventGrid[Siatka zdarzeń] --> Functions[Funkcje] --> Pipeline[Potok AI]
 ```
 
 ---
 
-## 🔐 Security Best Practices
+## 🔐 Najlepsze praktyki zabezpieczeń
 
 ```bicep
 // Use managed identity
@@ -80,13 +80,13 @@ properties: {
 
 ---
 
-## 💰 Cost Optimization
+## 💰 Optymalizacja kosztów
 
 | Strategia | Oszczędności |
-|----------|--------------|
+|----------|-------------|
 | Skalowanie do zera (Container Apps) | 60-80% |
-| Użycie poziomów konsumpcyjnych dla środowisk deweloperskich | 50-70% |
-| Skalowanie według harmonogramu | 30-50% |
+| Użycie warstw konsumpcyjnych na potrzeby dewelopmentu | 50-70% |
+| Skalowanie zaplanowane | 30-50% |
 | Zarezerwowana pojemność | 20-40% |
 
 ```bash
@@ -100,10 +100,10 @@ az consumption budget create \
 
 ---
 
-## 📊 Monitoring Setup
+## 📊 Konfiguracja monitoringu
 
 ```bash
-# Transmituj logi
+# Strumieniuj logi
 azd monitor --logs
 
 # Sprawdź Application Insights
@@ -115,21 +115,21 @@ az monitor metrics list --resource <resource-id>
 
 ---
 
-## 🔗 Navigation
+## 🔗 Nawigacja
 
 | Kierunek | Rozdział |
 |-----------|---------|
-| **Poprzedni** | [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/README.md) |
-| **Koniec kursu** | [Course Home](../../README.md) |
+| **Poprzedni** | [Rozdział 7: Rozwiązywanie problemów](../chapter-07-troubleshooting/README.md) |
+| **Kurs ukończony** | [Strona główna kursu](../../README.md) |
 
 ---
 
-## 📖 Related Resources
+## 📖 Powiązane zasoby
 
-- [AI Agents Guide](../chapter-02-ai-development/agents.md)
+- [Przewodnik po agentach AI](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Multi-Agent Solutions](../chapter-05-multi-agent/README.md)
-- [Microservices Example](../../examples/microservices/README.md)
+- [Rozwiązania multi-agentowe](../chapter-05-multi-agent/README.md)
+- [Przykład mikroserwisów](../../examples/microservices/README.md)
 
 ---
 

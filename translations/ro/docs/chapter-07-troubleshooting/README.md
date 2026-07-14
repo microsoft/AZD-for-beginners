@@ -1,4 +1,4 @@
-# Capitolul 7: Rezolvarea problemelor și depanare
+# Capitolul 7: Depanare și Debugging
 
 **📚 Curs**: [AZD Pentru Începători](../../README.md) | **⏱️ Durată**: 1-1.5 ore | **⭐ Complexitate**: Intermediar
 
@@ -6,16 +6,16 @@
 
 ## Prezentare generală
 
-Acest capitol te ajută să diagnostichezi și să rezolvi problemele comune când lucrezi cu Azure Developer CLI. De la eșecuri de implementare până la probleme specifice AI.
+Acest capitol te ajută să diagnostichezi și să rezolvi probleme comune când lucrezi cu Azure Developer CLI. De la eșecuri de implementare la probleme specifice AI.
 
-> Validat cu `azd 1.25.6` în iunie 2026.
+> Validat cu `azd 1.27.1` în iulie 2026.
 
 ## Obiective de învățare
 
-Prin finalizarea acestui capitol, vei:
+Parcurgând acest capitol, vei:
 - Diagnostica eșecurile comune de implementare AZD
 - Depana problemele de autentificare și permisiuni
-- Rezolva problemele de conectivitate ale serviciilor AI
+- Rezolva probleme de conectivitate la serviciile AI
 - Folosi Azure Portal și CLI pentru depanare
 
 ---
@@ -23,9 +23,9 @@ Prin finalizarea acestui capitol, vei:
 ## 📚 Lecții
 
 | # | Lecție | Descriere | Timp |
-|---|--------|-----------|------|
+|---|--------|-------------|------|
 | 1 | [Probleme Comune](common-issues.md) | Probleme întâlnite frecvent | 30 min |
-| 2 | [Ghid de Depanare](debugging.md) | Strategii de depanare pas cu pas | 45 min |
+| 2 | [Ghid de Debugging](debugging.md) | Strategii pas cu pas pentru depanare | 45 min |
 | 3 | [Depanare AI](ai-troubleshooting.md) | Probleme specifice AI | 30 min |
 
 ---
@@ -69,12 +69,12 @@ azd up
 ## 📋 Referință Coduri de Eroare
 
 | Eroare | Cauză | Soluție |
-|--------|-------|---------|
-| `AuthenticationError` | Neautentificat | `azd auth login` |
+|-------|-------|----------|
+| `AuthenticationError` | Nu s-a autentificat | `azd auth login` |
 | `ResourceNotFound` | Resursă lipsă | Verifică numele resurselor |
-| `QuotaExceeded` | Limite abonament | Solicită creșterea cotei |
+| `QuotaExceeded` | Limite ale abonamentului | Solicită majorarea cotei |
 | `InvalidTemplate` | Eroare de sintaxă Bicep | `az bicep build` |
-| `Conflict` | Resursa există | Folosește un nume nou sau șterge |
+| `Conflict` | Resursă existenta | Folosește un nume nou sau șterge |
 | `Forbidden` | Permisiuni insuficiente | Verifică rolurile RBAC |
 
 ---
@@ -95,15 +95,15 @@ azd up
 ## 🔗 Navigare
 
 | Direcție | Capitol |
-|----------|---------|
+|-----------|---------|
 | **Anterior** | [Capitolul 6: Pre-Implementare](../chapter-06-pre-deployment/README.md) |
 | **Următor** | [Capitolul 8: Producție](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Resurse Asociate
+## 📖 Resurse Aflate în Legătură
 
-- [Verificări pre-implementare](../chapter-06-pre-deployment/preflight-checks.md)
+- [Verificări Pre-Implementare](../chapter-06-pre-deployment/preflight-checks.md)
 - [Ghid de Configurare](../chapter-03-configuration/configuration.md)
 - [Probleme AZD pe GitHub](https://github.com/Azure/azure-dev/issues)
 

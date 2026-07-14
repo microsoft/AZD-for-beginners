@@ -1,111 +1,150 @@
-# Changelog - AZD For Beginners
+# 變更記錄 - AZD 初學者指南
 
 ## 介紹
 
-此變更日誌記錄 AZD For Beginners 儲存庫中所有值得注意的變更、更新與改進。我們遵循語義版本控制原則並維護此紀錄，以幫助使用者了解各版本之間的變動。
+本變更記錄記錄 AZD For Beginners 儲存庫的所有重大變更、更新和改進。我們遵循語義版本控制原則並維護此日誌，以幫助用戶了解版本間的變化。
 
 ## 學習目標
 
-透過檢視此變更日誌，你將能：
-- 了解新增功能與內容
-- 明白現有文件的改進項目
-- 追蹤錯誤修正與更正以確保準確性
-- 跟隨教材隨時間的演進
+通過查看此變更記錄，您將能夠：
+- 保持對新功能和內容新增的了解
+- 理解現有文件的改進
+- 跟踪 bug 修正和更正，確保準確性
+- 隨著時間推移，追蹤學習材料的演變
 
 ## 學習成果
 
-閱讀變更記錄後，你將能夠：
-- 辨識可用於學習的新內容與資源
-- 了解哪些章節已更新或改良
-- 根據最新教材規劃你的學習路徑
-- 提供回饋與建議以促進未來改進
+查看變更記錄條目後，您將能夠：
+- 識別可用的新內容和學習資源
+- 瞭解哪些章節已被更新或改進
+- 根據最新材料規劃您的學習路徑
+- 提出反饋和改進建議
 
 ## 版本歷史
 
-### [v3.22.0] - 2026-06-16
+### [v3.23.0] - 2026-07-13
 
-#### Beginner Gap-Fill #2：範本撰寫、開發容器、Pulumi、Azure DevOps、Service Principals 等等
-**此版本解決 azd-coverage 分析指出的其餘中階缺口：如何撰寫並發布你自己的範本、可重現的 dev-container/Codespaces 環境、Pulumi 基礎架構提供者、Azure DevOps CI/CD 操作示範、service-principal 驗證、主機選擇建議（AKS/Spring Apps）、`azd restore`/`azd package` 說明、hook 錯誤處理，以及團隊/共用環境實務。**
-
-#### 新增
-- **🧱 新增第 4 章課程** `docs/chapter-04-infrastructure/custom-templates.md` — 撰寫你自己的 azd 範本：必要結構（`azure.yaml`、`infra/`、`src/`）、`metadata.template` 欄位、使用 `uniqueString()` 資源 token 與 `azd-env-name` 標籤來參數化基礎架構、以 `azd init --template <local-path>` 在本機測試、發布到 GitHub，並提交到 Awesome AZD 集合
-- **📦 新增第 1 章課程** `docs/chapter-01-foundation/dev-containers.md` — 使用 Dev Containers 與 GitHub Codespaces 建立可重現的 azd 環境：一個最小的 `.devcontainer/devcontainer.json`，採用官方 `ghcr.io/azure/azure-dev/azd` feature、語言專屬的 feature、在容器主機上使用 `docker-in-docker`、以及遠端登入的 `azd auth login --use-device-code`
-- **🧩 Pulumi 與 azd** 段落加入於 `docs/chapter-04-infrastructure/provisioning.md` — `infra.provider: pulumi`、Pulumi 資料夾佈局、將 stacks 映射到 azd 環境、所需的輸出/標記，及與 `azd up` / `azd down` 相同的工作流程
-- **🎯 主機選擇指引** 加入 `docs/chapter-04-infrastructure/provisioning.md` — 以初學者友善方式比較 `appservice`、`staticwebapp`、`function`、`containerapp`、`aks` 與 `springapp`，並提供何時選擇 AKS 或 Azure Spring Apps 的建議
-- **🛠️ Azure DevOps CI/CD 操作示範** 加入 `docs/chapter-08-production/production-ai-practices.md` — `azd pipeline config --provider azdo`、使用 workload identity federation (OIDC) 的 service connection、產生的 `azure-dev.yml`，以及變數群組設定
-- **🔑 Service Principals（範例 4）** 新增於 `docs/chapter-03-configuration/authsecurity.md` — `az ad sp create-for-rbac`、使用 client secret 與以聯合/OIDC 憑證的非互動式 `azd auth login`，何時使用，以及安全的憑證儲存方式
-- **🪝 Hook 錯誤處理** 小節加入於 `docs/chapter-04-infrastructure/deployment-guide.md` — 終止代碼與 `set -e`、`continueOnError`、使用 `azd hooks run` 在隔離環境測試 hooks、作業系統特定的 shell，與 `--debug`
-- **👥 團隊 / 共用環境** 章節加入於 `docs/chapter-03-configuration/configuration.md` — 說明什麼會放在 `.azure/`、哪些檔案應該 gitignore、每位開發者的環境、`azd env list`/`select`，以及在 CI/CD 中提供環境值
-- **🧰 `azd restore` 與擴展的 `azd package`** 說明加入於 `resources/cheat-sheet.md` — 還原相依性並在不部署的情況下建置可部署的產物
+#### AZD 1.27.1 更新：版本貨幣性更新
+**本版本根據 `azd` `1.27.1`（2026 年 7 月，最新穩定版本）及目前的預覽版 AI 代理擴充套件 `azure.ai.agents` `1.0.0-beta.5` 重新驗證課程，將所有「驗證通過」標籤更新至 1.26.0、1.27.0 和 1.27.1 版本之後的最新狀態。**
 
 #### 變更
-- **🧭 第 4 章課程表** 已更新以包含新的「撰寫你自己的範本」課程（第 3 課）
-- **🧭 第 1 章課程表** 已更新以包含新的「Dev Containers & Codespaces」課程（第 5 課）；在 `bring-your-own-app.md` 與 `dev-containers.md` 之間接上導覽頁腳連結
+- **✅ 驗證基準更新**，由 `azd 1.25.6`（2026 年 6 月）升級至 `azd 1.27.1`（2026 年 7 月），範圍涵蓋根目錄 README、所有章節 README、第 1 章開發容器課程（含固定版號範例）、第 4 章自訂範本課程、第 5 章多代理課程及工作坊文件
+- **🤖 第 2 章基準更新**，由 `azd 1.23.12`（2026 年 3 月）升級至 `azd 1.27.1`，覆蓋 `agents.md`、`ai-model-deployment.md`、`ai-workshop-lab.md` 與 `microsoft-foundry-integration.md`，並將驗證注釋日期更新為 2026-07-13
+- **🧩 AI 代理擴充套件升級**，由 `azure.ai.agents` `0.1.40-preview`/`0.1.18-preview` 更新為目前的 `1.0.0-beta.5` 版本，適用於第 2 章 README 和 `agents.md`
+- **🧪 工作坊驗證範例**（`azd version` 輸出）更新至 `1.27.1`
+
+#### 相關 azd 版本說明（1.26.0 → 1.27.1）
+- **1.26.0（2026-06-24）：** 支援 Azure Functions Flex Consumption 的 Go 語言、每租戶訂閱篩選的 `azd config sub-filter`、自包含擴充套件包 (`azd x pack --bundle`) 以及 `azd tool install azure-skills`
+- **1.27.0（2026-06-30）：** 可直接在 `azure.yaml` 中建模 Azure AI Foundry 專案/代理（無需 Bicep 或 Terraform 初始化）、App Service 容器部署支援（`host: appservice` + `language: docker`）、`azd extension` 命令支援直接 `-s/--source`參數，及 `azd tool uninstall`
+- **1.27.1（2026-07-09）：** `azd extension install` 新增 `--no-dependencies` 標誌、預設排除已棄用的模型於目錄/配額提示中，以及多項錯誤修正
+
+#### 更新檔案
+- `README.md`
+- `changelog.md`
+- `docs/chapter-01-foundation/README.md`
+- `docs/chapter-01-foundation/bring-your-own-app.md`
+- `docs/chapter-01-foundation/dev-containers.md`
+- `docs/chapter-02-ai-development/README.md`
+- `docs/chapter-02-ai-development/agents.md`
+- `docs/chapter-02-ai-development/ai-model-deployment.md`
+- `docs/chapter-02-ai-development/ai-workshop-lab.md`
+- `docs/chapter-02-ai-development/microsoft-foundry-integration.md`
+- `docs/chapter-03-configuration/README.md`
+- `docs/chapter-04-infrastructure/custom-templates.md`
+- `docs/chapter-04-infrastructure/README.md`
+- `docs/chapter-05-multi-agent/multi-agent-basics.md`
+- `docs/chapter-05-multi-agent/README.md`
+- `docs/chapter-06-pre-deployment/README.md`
+- `docs/chapter-07-troubleshooting/README.md`
+- `docs/chapter-08-production/README.md`
+- `workshop/docs/index.md`
+- `workshop/docs/instructions/2-Validate-AI-Template.md`
+
+### [v3.22.0] - 2026-06-16
+
+#### 初學者填補空白＃2：範本撰寫、開發容器、Pulumi、Azure DevOps、服務主體等功能
+**本版本填補了 azd 覆蓋分析顯示的剩餘中階知識空白：如何撰寫和發佈自己的範本、可重現的開發容器/Codespaces 環境、Pulumi 基礎設施提供者、Azure DevOps CI/CD 演練、服務主體驗證、主機選擇指引（AKS/Spring Apps）、`azd restore` / `azd package` 解釋、hook 錯誤處理，以及團隊/共享環境實踐。**
+
+#### 新增
+- **🧱 新增第 4 章課程** `docs/chapter-04-infrastructure/custom-templates.md` — 撰寫自有 azd 範本的必要結構 (`azure.yaml`、`infra/`、`src/`)、`metadata.template` 欄位、利用 `uniqueString()` 資源標記與 `azd-env-name` 標籤參數化基礎設施、本地使用 `azd init --template <local-path>` 測試、發佈至 GitHub 與提交至 Awesome AZD 畫廊
+- **📦 新增第 1 章課程** `docs/chapter-01-foundation/dev-containers.md` — 利用 Dev Containers 和 GitHub Codespaces 重現 azd 環境：使用官方 `ghcr.io/azure/azure-dev/azd` 功能的最簡化 `.devcontainer/devcontainer.json`、語言專用功能、容器主機的 `docker-in-docker`，以及遠端登入的 `azd auth login --use-device-code`
+- **🧩 Pulumi 與 azd** 小節加入 `docs/chapter-04-infrastructure/provisioning.md` — `infra.provider: pulumi`、Pulumi 資料夾結構、堆疊映射至 azd 環境、必需的輸出/標籤，以及相同的 `azd up` / `azd down` 工作流程
+- **🎯 主機選擇指引** 加入 `docs/chapter-04-infrastructure/provisioning.md` — 針對初學者友好的 `appservice`、`staticwebapp`、`function`、`containerapp`、`aks`、`springapp` 比較，以及何時選擇 AKS 或 Azure Spring Apps 的指導
+- **🛠️ Azure DevOps CI/CD 演練** 加入 `docs/chapter-08-production/production-ai-practices.md` — `azd pipeline config --provider azdo`、工作負載識別聯邦(OIDC)服務連線、產生的 `azure-dev.yml` 及變數組設定
+- **🔑 服務主體（模式 4）** 新增至 `docs/chapter-03-configuration/authsecurity.md` — `az ad sp create-for-rbac`、使用客戶端密鑰與聯邦/OIDC 資格的非交互式 `azd auth login`、何時使用及安全存儲資格
+- **🪝 Hook 錯誤處理** 新增於 `docs/chapter-04-infrastructure/deployment-guide.md` 子節 — 退出碼及 `set -e`、`continueOnError`、使用 `azd hooks run` 隔離測試 hook、作業系統專屬 shell 及 `--debug`
+- **👥 團隊 / 共享環境** 新增於 `docs/chapter-03-configuration/configuration.md` — `.azure/` 目錄內容、gitignore 規則、每開發者環境管理、`azd env list` / `select`、在 CI/CD 中提供環境值
+- **🧰 `azd restore` 與擴展 `azd package`** 於 `resources/cheat-sheet.md` 解釋 — 還原依賴、建置可部署工件而無需部署
+
+#### 變更
+- **🧭 第 4 章課程表更新**，加入新「撰寫自有範本」課程（課程 3）
+- **🧭 第 1 章課程表更新**，加入新「開發容器與 Codespaces」課程（課程 5）；並在 `bring-your-own-app.md` 與 `dev-containers.md` 之間設定導航頁腳連結
 
 ### [v3.21.0] - 2026-06-16
 
-#### Beginner Gap-Fill：實作的多智能體課程、「將 azd 加入現有應用」、Terraform 與 CI/CD 示範
-**此版本透過新增兩個實作課程（可部署的多智能體示範與將 azd 加入現有應用），一個初學者導向的 hooks 介紹、一段 Terraform 與 azd 的內容、一步步的 GitHub Actions pipeline 示範、對新 preview extensions 的說明，以及明確的部署驗證檢查表，來填補針對完全新手指南的最大缺口。**
+#### 初學者填補空白：實作多代理課程、「加入現有應用程式」、Terraform 及 CI/CD 演練
+**本版本透過新增兩個實作課程（可部署多代理演練及為現有應用加上 azd）、初學者友善的 hook 介紹、Terraform 與 azd 範例章節、逐步 GitHub Actions 流程演練、預覽擴充套件解說，以及明確的部署驗證檢查表，填補完整初學者指南的最大空白。**
 
 #### 新增
-- **🤝 新增第 5 章課程** `docs/chapter-05-multi-agent/multi-agent-basics.md` — 一個完整的實作、可部署的雙 agent 示例（orchestrator + specialists），使用真實範本（`contoso-creative-writer`），涵蓋何時使用 multi-agent、`azd up` 工作流程、理解已部署的資源、跨 agent 跟蹤、客製化與清理
-- **📦 新增第 1 章課程** `docs/chapter-01-foundation/bring-your-own-app.md` — 如何用 `azd init` 將 azd 加入現有專案（「使用目前目錄中的程式碼」）、理解 `azure.yaml` 與 `infra/`、`azd infra generate`、主機偵測，並以 `azd up` 部署
-- **🌐 Terraform 與 azd** 段落加入於 `docs/chapter-04-infrastructure/provisioning.md` — `infra.provider: terraform` 設定、`.tf` 資料夾佈局、所需的 `AZURE_*` 輸出與 `azd-env-name` 標記，及與 `azd up` / `azd down` 相同的工作流程（解決之前文件宣稱支援 Terraform 但僅展示 Bicep 的缺口）
-- **⚙️ 一步步的 GitHub Actions 操作示範** 加入於 `docs/chapter-08-production/production-ai-practices.md` — 從 GitHub 倉庫到自動化部署：`azd pipeline config`、OIDC 聯合憑證（無需儲存機密）、產生的 `azure-dev.yml`，以及機密與變數的說明
-- **🪝 初學者「不熟悉 hooks？」介紹** 加入於 `docs/chapter-04-infrastructure/deployment-guide.md` — 什麼是 hook、hook 階段對照表、一個最小的第一個 hook，與使用 `azd hooks run` 手動執行 hooks
-- **✅「驗證你的部署」檢查清單** 加入於 `docs/chapter-01-foundation/first-project.md` 的第 5 步 — 煙霧測試、健康端點檢查，以及明確的成功準則
-- **🧩 新預覽擴充功能說明** `azure.ai.skills` 與 `azure.ai.connections`（它們是什麼以及何時使用）加入於 `docs/chapter-08-production/production-ai-practices.md`
+- **🤝 新增第 5 章課程** `docs/chapter-05-multi-agent/multi-agent-basics.md` — 完全實作的兩代理演練（協調者 + 專家代理），使用真實範本 (`contoso-creative-writer`)，涵蓋何時使用多代理、`azd up` 流程、理解部署資源、跨代理追蹤、客製化及清理
+- **📦 新增第 1 章課程** `docs/chapter-01-foundation/bring-your-own-app.md` — 如何使用 `azd init` 將 azd 新增至現有專案（「在目前目錄使用程式碼」）、理解 `azure.yaml` 及 `infra/`、`azd infra generate`、主機偵測及 `azd up` 部署
+- **🌐 Terraform 與 azd** 小節新增於 `docs/chapter-04-infrastructure/provisioning.md` — `infra.provider: terraform` 配置、`.tf` 資料夾結構、必要的 `AZURE_*` 輸出及 `azd-env-name` 標籤，以及相同的 `azd up` / `azd down` 工作流程（填補只說支持 Terraform 卻只示範 Bicep 的空白）
+- **⚙️ 逐步 GitHub Actions 流程演練** 加入 `docs/chapter-08-production/production-ai-practices.md` — 從 GitHub 儲存庫到自動部署：`azd pipeline config`、OIDC 聯邦憑證（無存儲密碼）、產生的 `azure-dev.yml` 以及密鑰與變數指南
+- **🪝 初學者「初識 hooks？」介紹** 加入 `docs/chapter-04-infrastructure/deployment-guide.md` — hook 是什麼、hook 階段表、極簡第一個 hook 及使用 `azd hooks run` 手動執行 hook
+- **✅ 新增「驗證您的部署」檢查表** 至 `docs/chapter-01-foundation/first-project.md` 第 5 步驟 — 冒煙測試、健康端點檢查及明確的成功標準
+- **🧩 新預覽擴充套件說明** `azure.ai.skills` 與 `azure.ai.connections`（功能及何時使用）加入 `docs/chapter-08-production/production-ai-practices.md`
 
 #### 變更
-- **🧭 第 5 章課程表** 修正：`multi-agent-basics.md` 現為第 1 課（唯一完全實作的課程），並誠實標示第 2 課位於第 6 章且 Retail 情境為一個架構藍圖，而非一個一鍵建立的範本
-- **🧭 第 1 章課程表** 現包含新的「Bring Your Own App」課程（第 4 課）
-- **🔗 導覽頁腳** 已更新：`first-project.md` 現在向前連結到 `bring-your-own-app.md`
+- **🧭 第 5 章課程表修正**：`multi-agent-basics.md` 現為課程 1（唯一全實作課程），誠實標示課程 2 位於第 6 章，零售場景為架構藍圖，而非一鍵範本
+- **🧭 第 1 章課程表更新**，加入新「加入現有應用程式」課程（課程 4）
+- **🔗 導航頁腳更新**：`first-project.md` 現向前連結至 `bring-your-own-app.md`
 
-#### 修正
-- **🧱 補上先前宣稱但缺少的 Terraform 支援** — 課程先前提及 Terraform 支援但未展示，已補上
-- **🔀 修正誤導性的第 5 章跨連結**，避免暗示存在完整的 multi-agent 實作，而實際上只有架構藍圖
+#### 修復
+- **🧱 補齊「宣稱但缺失的」Terraform 空白** — 先前課程提及 Terraform 支援卻未展示
+- **🔀 修正誤導性的第 5 章交叉連結**，消除暗示存在完整多代理實作的誤解，實際僅為架構藍圖
 
-#### 已更新檔案
-- changelog.md
+#### 更新檔案
+- `changelog.md`
 - `docs/chapter-01-foundation/README.md`
-- `docs/chapter-01-foundation/bring-your-own-app.md` *(new)*
+- `docs/chapter-01-foundation/bring-your-own-app.md` *(新增)*
 - `docs/chapter-01-foundation/first-project.md`
 - `docs/chapter-04-infrastructure/deployment-guide.md`
 - `docs/chapter-04-infrastructure/provisioning.md`
 - `docs/chapter-05-multi-agent/README.md`
-- `docs/chapter-05-multi-agent/multi-agent-basics.md` *(new)*
+- `docs/chapter-05-multi-agent/multi-agent-basics.md` *(新增)*
 - `docs/chapter-08-production/production-ai-practices.md`
 
 ---
 
 ### [v3.20.0] - 2026-06-16
 
-#### AZD 1.25.6 更新、完整的 Agent 生命週期命令與 Aspire 改名
-**此版本依 `azd` `1.25.6`（2026 年 6 月）以及 `azure.ai.agents` `0.1.40-preview` 擴充套件重新驗證課程，將 AI 指導從「搭建 agent」擴展到完整的 agent 生命週期（測試 → 評估 → 優化 → 檢視 → 刪除），揭露新的 `azure.ai.skills` 與 `azure.ai.connections` preview 擴充套件，並註記 ".NET Aspire" 改名為 "Aspire" 的產品重塑。**
+#### AZD 1.25.6 更新，完整代理生命週期指令與 Aspire 品牌更新
+
+**此版本針對 `azd` `1.25.6`（2026 年 6 月）和 `azure.ai.agents` `0.1.40-preview` 擴充套件重新驗證課程內容，將 AI 指引從「架構代理」擴展至完整代理生命週期（測試 → 評估 → 優化 → 檢查 → 刪除），呈現新的 `azure.ai.skills` 與 `azure.ai.connections` 預覽擴充套件，並註明「.NET Aspire」改名為「Aspire」的產品品牌更新。**
 
 #### 新增
-- **🔁 完整的 agent 生命週期支援**，供初學者與 AI 工程師在文件中參考：
-  - `docs/chapter-01-foundation/azd-basics.md` — 在 Extensions 與 AI Commands 小節中新增生命週期表（scaffold → test → measure → improve → inspect → clean up）
-  - `docs/chapter-08-production/production-ai-practices.md` — 新增「管理 Agent 生命週期」章節，涵蓋 `azd ai agent invoke`、`endpoint show`、`eval generate`、`optimize`、`code download` 與 `delete --force`
-  - `resources/cheat-sheet.md` — 擴充 AI Agent Commands，包含 `invoke`、`endpoint show`、`eval generate`、`optimize`、`code download` 與 `delete --force`
-- **🧩 新預覽擴充功能紀錄**：`azure.ai.skills`（可重用的 agent skills）與 `azure.ai.connections`（Foundry connections）已加入擴充表格與備忘清單
-- **⏱️ 回應時間指引** — `azd ai agent invoke` 範例現在註記其會印出總延遲與首位元組到達時間（time-to-first-byte）
-- **📌 版本橫幅** 加入根 README，提示學習者查閱 `azd version` 與 `azd upgrade`
+- **🔁 新手與 AI 工程師的完整代理生命週期涵蓋**，貫穿所有文件：
+  - `docs/chapter-01-foundation/azd-basics.md` — 在擴充套件與 AI 命令部分新增生命週期表（架構 → 測試 → 測量 → 改善 → 檢查 → 清理）
+  - `docs/chapter-08-production/production-ai-practices.md` — 新增「管理代理生命週期」章節，涵蓋 `azd ai agent invoke`、`endpoint show`、`eval generate`、`optimize`、`code download` 與 `delete --force`
+  - `resources/cheat-sheet.md` — 擴充 AI 代理命令，涵蓋 `invoke`、`endpoint show`、`eval generate`、`optimize`、`code download` 與 `delete --force`
+- **🧩 新增預覽擴充套件** 文件化：`azure.ai.skills`（可重用代理技能）與 `azure.ai.connections`（Foundry 連線）新增至擴充套件表及備忘單
+- **⏱️ 回應時效指引** — `azd ai agent invoke` 範例現在會顯示總延遲與首字節時間
+- **📌 版本橫幅** 出現在根目錄 README，提醒學習者使用 `azd version` 與 `azd upgrade`
 
 #### 變更
-- **✅ 驗證基準更新**：將所有章節 README 與工作坊文件中的驗證基準從 `azd 1.23.12`（2026 年 3 月）更新為 `azd 1.25.6`（2026 年 6 月）
-- **🤖 第 2 章擴充說明** 更新：`azure.ai.agents` 從 `0.1.18-preview` 更新為 `0.1.40-preview`
-- **🧪 工作坊驗證範例**（`azd version` 輸出）更新為 `1.25.6`
-- **🧭 README 中的「今天 azd 的新功能」** 已刷新，以突顯端到端的 agent 生命週期、新的 AI 擴充，以及近期的使用體驗改進（`azd init` 的冪等性、`azd auth login` 的過期 token 清理、`azd tool` 首次執行提示）
-- **📖 第 2 章 agents.md（選項 4）** 現在引導學習者到部署後的生命週期命令，而不再只停在 `azd up`
+- **✅ 驗證基準更新**，從所有章節 README 與工作坊文件中的 `azd 1.23.12`（2026 年 3 月）更新到 `azd 1.25.6`（2026 年 6 月）
+- **🤖 第二章擴充說明** 從 `azure.ai.agents` `0.1.18-preview` 更新至 `0.1.40-preview`
+- **🧪 工作坊驗證範例** （`azd version` 輸出）更新至 `1.25.6`
+- **🧭 README「今日 azd 新功能」** 更新以彰顯端對端代理生命週期，新 AI 擴充套件與近期的生活便利性修正（`azd init` 可重入操作、`azd auth login` 清除過期令牌、`azd tool` 第一次執行提示）
+- **📖 第二章 agents.md（方案 4）** 現在引導學習者使用部署後生命週期命令，取代僅止於 `azd up`
 
 #### 修正
-- **🏷️ 產品命名** — 新增 Aspire 改名註記（".NET Aspire" 現稱為 "Aspire"）；azd 對 Aspire 的支援未改變
-- **🔎 實際發布驗證** 已確認來自 Azure Developer CLI 發布來源：穩定 CLI `1.25.6`（2026-06-12）與 `azure.ai.agents` `0.1.40-preview`（2026-06-15）
+- **🏷️ 產品命名** — 新增 Aspire 品牌重塑說明（「.NET Aspire」現改為單純「Aspire」）；azd 對 Aspire 的支援不變
+- **🔎 針對 Azure Developer CLI 發行管道的即時發行驗證**：穩定版 CLI `1.25.6`（2026-06-12）與 `azure.ai.agents` `0.1.40-preview`（2026-06-15）
 
-#### 已更新檔案
-- README.md
-- changelog.md
+#### 更新檔案
+- `README.md`
+- `changelog.md`
 - `docs/chapter-01-foundation/README.md`
 - `docs/chapter-01-foundation/azd-basics.md`
 - `docs/chapter-02-ai-development/README.md`
@@ -124,23 +163,24 @@
 ---
 
 ### [v3.19.1] - 2026-03-27
-#### 初學者上手說明、設定驗證與最終 AZD 指令清理
-**此版本接續 AZD 1.23 的驗證掃描，針對初學者導向的文件進行整理：釐清以 AZD 為主的驗證指引、加入本地設定驗證腳本、依實際 AZD CLI 驗證關鍵命令，並移除變更日誌以外最後遺留的英文原始指令參考。**
+
+#### 新手入門說明、環境驗證與最終 AZD 命令整理
+**此版本延續 AZD 1.23 驗證檢查，進行針對新手的文件回顧：清楚說明 AZD 為首的驗證指引、加入本地設定驗證腳本、針對關鍵命令進行現行 AZD CLI 現場驗證，並移除變更紀錄外最後剩餘的過時英文命令引用。**
 
 #### 新增
-- **🧪 初學者設定驗證腳本**，包含 `validate-setup.ps1` 與 `validate-setup.sh`，讓學習者在開始第 1 章前能確認所需工具
-- **✅ 前置設定驗證步驟**，已加入根目錄 README 與第 1 章 README，讓缺少的前置需求在執行 `azd up` 前就被偵測到
+- **🧪 新手設定驗證腳本**：提供 `validate-setup.ps1` 與 `validate-setup.sh`，方便學習者在第一章開始前確認必要工具
+- **✅ 設定驗證前置步驟**：於根目錄及第一章 README 中加入，使得缺少先決條件能在使用 `azd up` 之前被偵測出來
 
 #### 變更
-- **🔐 初學者驗證指引**，現在一致地將 `azd auth login` 視為 AZD 工作流程的主要路徑，並將 `az login` 標示為可選，除非會直接使用 Azure CLI 命令
-- **📚 第 1 章上手流程**，現在指引學習者在安裝、驗證與首次部署步驟前先驗證本機設定
-- **🛠️ 驗證器訊息**，現在清楚區分阻斷性需求與針對只用 AZD 的初學者路徑的可選 Azure CLI 警告
-- **📖 設定、故障排除與範例文件**，現在在需要的 AZD 驗證與可選 Azure CLI 登入之間做出區隔，避免早先無說明地同時呈現
+- **🔐 新手認證指引** 統一將 `azd auth login` 視為 AZD 工作流程的主要途徑，並將 `az login` 標示為選用，除非直接使用 Azure CLI 命令
+- **📚 第一章入門流程** 現在引導學習者先驗證本地環境，再進行安裝、認證與首次部署步驟
+- **🛠️ 驗證訊息** 清楚區分封鎖性需求與可選的 Azure CLI 警告，適用於僅 AZD 的新手路徑
+- **📖 設定、故障排除與範例文件** 區分必須的 AZD 認證與可選的 Azure CLI 登入，過去兩者多無上下文區別
 
 #### 修正
-- **📋 剩餘英文來源的指令參考**，已更新為目前的 AZD 形式，包括備忘單中的 `azd config show` 以及在說明 Azure 入口網站總覽時使用的 `azd monitor --overview`
-- **🧭 第 1 章的初學者主張**，措辭放軟，避免過度承諾能對所有範本與 Azure 資源保證零錯誤或回滾行為
-- **🔎 即時 CLI 驗證**，確認目前支援 `azd env get-values`、`azd template list`、`azd extension list --installed`、`azd copilot consent list`、`azd mcp start`、`azd provision --preview`、`azd monitor --logs` 與 `azd down --force --purge`
+- **📋 剩餘英文命令引用** 全數更新至最新 AZD 形式，包括備忘單中的 `azd config show` 與面向 Azure 入口網站概覽指引的 `azd monitor --overview`
+- **🧭 第一章的新手承諾** 弱化，以避免對所有範本與 Azure 資源保證零錯誤或回滾行為的過度承諾
+- **🔎 現場 CLI 驗證**：確認目前支援指令包括 `azd env get-values`、`azd template list`、`azd extension list --installed`、`azd copilot consent list`、`azd mcp start`、`azd provision --preview`、`azd monitor --logs` 以及 `azd down --force --purge`
 
 #### 更新檔案
 - `README.md`
@@ -161,38 +201,38 @@
 
 ### [v3.19.0] - 2026-03-26
 
-#### AZD 1.23.12 驗證、工作坊環境擴展與 AI 模型更新
-**此版本對 `azd` `1.23.12` 進行文件驗證掃描，更新過時的 AZD 指令範例，將 AI 模型指引刷新為目前預設，並將工作坊說明從僅支援 GitHub Codespaces 擴展為也支援 dev container 與本地複本。**
+#### AZD 1.23.12 驗證、工作坊環境擴充與 AI 模型刷新
+**本版本針對 `azd` `1.23.12` 進行文件驗證掃描，更新過時的 AZD 命令範例，刷新 AI 模型指引符合目前預設，並將工作坊指導擴展至除 GitHub Codespaces 外的 dev container 和本地克隆。**
 
 #### 新增
-- **✅ 在核心章節與工作坊文件中加入驗證說明**，讓使用新版或舊版 CLI 的學習者能明確知道已測試的 AZD 基線
-- **⏱️ 部署逾時指引**，針對長時間運行的 AI 應用部署建議使用 `azd deploy --timeout 1800`
-- **🔎 延伸套件檢查步驟**，在 AI 工作流程文件加入 `azd extension show azure.ai.agents`
-- **🌐 更廣的工作坊環境指引**，涵蓋 GitHub Codespaces、dev container 與搭配 MkDocs 的本地複本
+- **✅ 驗證註記** 散佈於核心章節與工作坊文件，明確說明測試驗證的 AZD 基準，供使用更新或舊版 CLI 的學習者參考
+- **⏱️ 部署逾時指引**：針對長時間執行的 AI 應用部署提供 `azd deploy --timeout 1800` 用法說明
+- **🔎 擴充檢視步驟**：於 AI 工作流程文件中提供 `azd extension show azure.ai.agents` 示範
+- **🌐 更廣泛的工作坊環境指引**：涵蓋 GitHub Codespaces、dev container 與使用 MkDocs 的本地克隆
 
 #### 變更
-- **📚 章節導讀 README**，現在在基礎、設定、基礎建設、多代理、預部署、故障排除與生產章節一致註明已針對 `azd 1.23.12` 進行驗證
-- **🛠️ AZD 指令參考**，在文件中更新為目前形式：
-  - `azd config list` → `azd config show`
-  - `azd env show` → `azd env list` 或 `azd env get-value(s)` （視情境而定）
-  - `azd auth whoami` → `azd auth status`
-  - `azd monitor` → `azd monitor --overview`（當目的是 Application Insights 總覽時）
-- **🧪 預覽佈建範例**，簡化為目前支援的用法，例如 `azd provision --preview` 與 `azd provision --preview -e production`
-- **🧭 工作坊流程**，更新為學習者可在 Codespaces、dev container 或本地複本完成實驗，而非假設僅能在 Codespaces 執行
-- **🔐 驗證指引**，現在偏好以 `azd auth login` 作為 AZD 流程的首選，並將 `az login` 視為在直接使用 Azure CLI 命令時的可選項
+- **📚 各章節介紹 README** 現統一標註針對 `azd 1.23.12` 的驗證，涵蓋基礎、設定、基礎設施、多代理、預部署、故障排除與生產各部分
+- **🛠️ AZD 命令引用** 於所有文件更新至最新形式：
+  - `azd config list` 改為 `azd config show`
+  - `azd env show` 根據上下文改為 `azd env list` 或 `azd env get-value(s)`
+  - `azd auth whoami` 改為 `azd auth status`
+  - 指向 Application Insights 概覽時，`azd monitor` 改為 `azd monitor --overview`
+- **🧪 預覽版 Provision 範例** 簡化為目前支援用法，例如 `azd provision --preview` 及 `azd provision --preview -e production`
+- **🧭 工作坊流程** 更新，使學習者能在 Codespaces、dev container 或本地克隆中完成實驗，不再限定 Codespaces
+- **🔐 認證指引** 現建議 AZD 工作流程優先使用 `azd auth login`，並將 `az login` 放為選用，除非直接使用 Azure CLI 命令
 
 #### 修正
-- **🪟 Windows 安裝指令**，在安裝指南中標準化為目前 `winget` 套件大小寫
-- **🐧 Linux 安裝指引**，修正以避免不支援的發行版特定 `azd` 套件管理指示，改為在適當時引導至 release 釋出項目
-- **📦 AI 模型範例**，從較舊的預設如 `gpt-35-turbo` 與 `text-embedding-ada-002` 更新為目前的示例，例如 `gpt-4.1-mini`、`gpt-4.1` 與 `text-embedding-3-large`
-- **📋 部署與診斷片段**，在日誌、腳本與故障排除步驟中修正為使用目前的環境與狀態命令
-- **⚙️ GitHub Actions 指引**，從 `Azure/setup-azd@v1.0.0` 更新為 `Azure/setup-azd@v2`
-- **🤖 MCP/Copilot 同意指引**，從 `azd mcp consent` 更新為 `azd copilot consent list`
+- **🪟 Windows 安裝命令** 依照安裝指南統一調整為目前 `winget` 套件大小寫格式
+- **🐧 Linux 安裝指引** 修正避免不支援的發行版專有 `azd` 套件管理器指令，改以釋出資產指引為主
+- **📦 AI 模型範例** 從舊的預設如 `gpt-35-turbo` 與 `text-embedding-ada-002` 更新為現行範例，如 `gpt-4.1-mini`、`gpt-4.1` 與 `text-embedding-3-large`
+- **📋 部署與診斷程式碼片段** 修正為使用當前環境與狀態命令於記錄、腳本及故障排除步驟中
+- **⚙️ GitHub Actions 指引** 從 `Azure/setup-azd@v1.0.0` 更新為 `Azure/setup-azd@v2`
+- **🤖 MCP/Copilot 同意指引** 從 `azd mcp consent` 更新為 `azd copilot consent list`
 
-#### 改進
-- **🧠 AI 章節指引**，更清楚說明預覽敏感的 `azd ai` 行為、租戶特定登入、目前延伸套件的使用，以及更新後的模型部署建議
-- **🧪 工作坊說明**，使用更切合實際的版本範例與更清晰的環境設定語言以利實作實驗
-- **📈 生產與故障排除文件**，現在與當前的監控、備援模型與費用層級範例更為一致
+#### 改善
+- **🧠 AI 章指引** 更詳細說明預覽階段敏感的 `azd ai` 行為、租戶特定登入、現有擴充使用情況與更新的模型部署建議
+- **🧪 工作坊說明** 使用更真實的版本範例與更清晰的環境設定語句促進實作體驗
+- **📈 生產與故障排除文件** 更加符合目前監控、備援模型與成本層級範例
 
 #### 更新檔案
 - `docs/chapter-01-foundation/README.md`
@@ -227,44 +267,45 @@
 
 ### [v3.18.0] - 2026-03-16
 
-#### AZD AI CLI 指令覆蓋、內容驗證與範本擴充
-**此版本在所有 AI 相關章節新增 `azd ai`、`azd extension` 與 `azd mcp` 指令覆蓋，修正 agents.md 的斷鏈與已淘汰程式碼，更新備忘單，並以驗證過的描述與新的 Azure AI AZD 範本改寫範例範本章節。**
+#### AZD AI CLI 命令、內容驗證與範本擴充
+**本版本在所有 AI 相關章節新增 `azd ai`、`azd extension` 與 `azd mcp` 命令涵蓋範圍，修正 agents.md 中斷鏈接和過時程式碼，更新備忘單，並全面改造範本示例章節，提供驗證過的說明與新的 Azure AI AZD 範本。**
 
 #### 新增
-- **🤖 AZD AI CLI 覆蓋**，分布在 7 個檔案（先前僅在第 8 章）：
-  - `docs/chapter-01-foundation/azd-basics.md` — 新增「Extensions and AI Commands」段落，介紹 `azd extension`、`azd ai agent init` 與 `azd mcp`
-  - `docs/chapter-02-ai-development/agents.md` — 選項 4：`azd ai agent init`，並附範本與清單式（manifest）方法的比較表
-  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — 新增「AZD Extensions for Foundry」與「Agent-First Deployment」小節
-  - `docs/chapter-05-multi-agent/README.md` — 快速開始現在顯示範本與 manifest 基礎的部署路徑
-  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — 部署段落現在包含 `azd ai agent init` 選項
-  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — 新增「AZD AI Extension Commands for Diagnostics」小節
-  - `resources/cheat-sheet.md` — 新增「AI & Extensions Commands」章節，包含 `azd extension`、`azd ai agent init`、`azd mcp` 與 `azd infra generate`
-- **📦 新的 AZD AI 範本範例**，列於 `microsoft-foundry-integration.md`：
+- **🤖 AZD AI CLI 涵蓋** 延伸至 7 個檔案（此前僅在第 8 章）：
+  - `docs/chapter-01-foundation/azd-basics.md` — 新增「擴充套件與 AI 命令」章節，介紹 `azd extension`、`azd ai agent init` 與 `azd mcp`
+  - `docs/chapter-02-ai-development/agents.md` — 方案 4：`azd ai agent init` 及範本與清單方式的比較表
+  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — 「Foundry 的 AZD 擴充套件」及「代理先行部署」子章節
+
+  - `docs/chapter-05-multi-agent/README.md` — 快速入門現在顯示模板和清單兩種部署路徑
+  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — 部署部分現在包含 `azd ai agent init` 選項
+  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — 「診斷用 AZD AI 擴充指令」子段落
+  - `resources/cheat-sheet.md` — 新增「AI 與擴充指令」部分，包含 `azd extension`、`azd ai agent init`、`azd mcp` 和 `azd infra generate`
+- **📦 新增 AZD AI 範例模板** 在 `microsoft-foundry-integration.md`：
   - **azure-search-openai-demo-csharp** — 使用 Blazor WebAssembly、Semantic Kernel 與語音聊天支援的 .NET RAG 聊天
-  - **azure-search-openai-demo-java** — 使用 Langchain4J 的 Java RAG 聊天，並提供 ACA/AKS 部署選項
-  - **contoso-creative-writer** — 使用 Azure AI Agent Service、Bing Grounding 與 Prompty 的多代理創意寫作應用
-  - **serverless-chat-langchainjs** — 使用 Azure Functions + LangChain.js + Cosmos DB 的無伺服器 RAG，並支援 Ollama 本地開發
-  - **chat-with-your-data-solution-accelerator** — 企業級 RAG 加速器，含管理門戶、Teams 整合，以及 PostgreSQL/Cosmos DB 選項
-  - **azure-ai-travel-agents** — 多代理 MCP 編排參考應用，伺服器採用 .NET、Python、Java 與 TypeScript
-  - **azd-ai-starter** — 最小化的 Azure AI 基礎建設 Bicep 起始範本
-  - **🔗 精選 AZD AI 圖庫連結** — 參考 [awesome-azd AI gallery](https://azure.github.io/awesome-azd/?tags=ai)（80+ 範本）
+  - **azure-search-openai-demo-java** — Java RAG 聊天，採用 Langchain4J，提供 ACA/AKS 部署選項
+  - **contoso-creative-writer** — 多代理創意寫作應用，使用 Azure AI Agent 服務、Bing Grounding 與 Prompty
+  - **serverless-chat-langchainjs** — 無伺服器 RAG，結合 Azure Functions + LangChain.js + Cosmos DB，支援 Ollama 本地開發
+  - **chat-with-your-data-solution-accelerator** — 企業級 RAG 加速器，含管理門戶、Teams 整合及 PostgreSQL/Cosmos DB 選項
+  - **azure-ai-travel-agents** — 多代理 MCP 編排參考應用，服務端涵蓋 .NET、Python、Java 與 TypeScript
+  - **azd-ai-starter** — 極簡 Azure AI 基礎設施 Bicep 啟動模板
+  - **🔗 精彩 AZD AI 展示館連結** — 參考 [awesome-azd AI gallery](https://azure.github.io/awesome-azd/?tags=ai)（超過 80 個模板）
 
 #### 修正
-- **🔗 agents.md 導航**：上/下一篇連結現在與第 2 章 README 的課程順序相符（Microsoft Foundry Integration → Agents → AI Model Deployment）
-- **🔗 agents.md 斷鏈**：將 `production-ai-practices.md` 修正為 `../chapter-08-production/production-ai-practices.md`（3 處）
-- **📦 agents.md 已淘汰程式碼**：以 `azure-monitor-opentelemetry` + OpenTelemetry SDK 取代 `opencensus`
-- **🐛 agents.md 無效 API**：將 `max_tokens` 從 `create_agent()` 移至 `create_run()`，並改為 `max_completion_tokens`
-- **🔢 agents.md 代幣計數**：以 `tiktoken.encoding_for_model()` 取代粗略的 `len//4` 估算
-- **azure-search-openai-demo**：將服務描述從「Cognitive Search + App Service」修正為「Azure AI Search + Azure Container Apps」（預設主機自 2024 年 10 月變更）
-- **contoso-chat**：更新描述以參照 Azure AI Foundry + Prompty，符合該 repo 的實際標題與技術堆疊
+- **🔗 agents.md 導覽**：上一頁/下一頁連結現在與第 2 章 README 課程順序相符（Microsoft Foundry Integration → Agents → AI Model Deployment）
+- **🔗 agents.md 壞掉連結**：將 `production-ai-practices.md` 修正為 `../chapter-08-production/production-ai-practices.md`（共 3 處）
+- **📦 agents.md 棄用代碼**：以 `azure-monitor-opentelemetry` + OpenTelemetry SDK 取代 `opencensus`
+- **🐛 agents.md 無效 API**：將 `max_tokens` 從 `create_agent()` 移至 `create_run()`，並改名為 `max_completion_tokens`
+- **🔢 agents.md 代幣計數**：以 `tiktoken.encoding_for_model()` 取代粗略 `len//4` 估算
+- **azure-search-openai-demo**：服務更正為「Azure AI Search + Azure Container Apps」，取代「Cognitive Search + App Service」（預設主機於 2024 年 10 月變更）
+- **contoso-chat**：更新描述以參考 Azure AI Foundry + Prompty，符合實際倉庫標題與技術架構
 
 #### 移除
-- **ai-document-processing**：移除不可用的範本參考（repo 未公開作為 AZD 範本）
+- **ai-document-processing**：移除無法運作的模板參考（該倉庫未公開為 AZD 模板）
 
-#### 改進
-- **📝 agents.md 練習**：練習 1 現在顯示預期輸出與 `azd monitor` 步驟；練習 2 包含完整的 `FunctionTool` 註冊程式碼；練習 3 以具體的 `prepdocs.py` 指令取代模糊指示
-- **📚 agents.md 資源**：更新文件連結至目前的 Azure AI Agent Service 文件與快速上手指南
-- **📋 agents.md 下一步表格**：新增 AI 工作坊實驗室連結以覆蓋完整章節內容
+#### 改善
+- **📝 agents.md 練習**：練習 1 現示預期輸出和 `azd monitor` 步驟；練習 2 包含完整 `FunctionTool` 註冊程式碼；練習 3 用具體 `prepdocs.py` 指令替換模糊指示
+- **📚 agents.md 資源**：更新文件連結至最新 Azure AI Agent Service 文件與快速入門
+- **📋 agents.md 下一步表格**：加入 AI 工作坊實驗室連結，涵蓋完整章節內容
 
 #### 更新檔案
 - `docs/chapter-01-foundation/azd-basics.md`
@@ -278,51 +319,52 @@
 ---
 
 ### [v3.17.0] - 2026-02-05
-#### 課程導覽增強
-**此版本改進了 README.md 的章節導覽，使用更強化的表格格式。**
 
-#### 已變更
-- <strong>課程地圖表格</strong>：新增直接課程連結、時間估計與複雜度評等
-- <strong>資料夾清理</strong>：移除多餘的舊資料夾 (deployment/, getting-started/, pre-deployment/, troubleshooting/)
-- <strong>連結驗證</strong>：已驗證課程地圖表格中的 21+ 個內部連結
+#### 課程導覽強化
+**此版本使用更完善的表格格式，改善 README.md 章節導覽。**
+
+#### 變更
+- <strong>課程地圖表格</strong>：加強包含直接課程連結、預估時長與難度評級
+- <strong>資料夾清理</strong>：移除多餘舊資料夾（deployment/、getting-started/、pre-deployment/、troubleshooting/）
+- <strong>連結驗證</strong>：課程地圖表中 21+ 個內部連結均檢查無誤
 
 ### [v3.16.0] - 2026-02-05
 
 #### 產品名稱更新
-**此版本將產品參考更新為最新 Microsoft 品牌名稱。**
+**此版本更新產品參考為目前的 Microsoft 品牌名稱。**
 
-#### 已變更
-- **Microsoft Foundry → Microsoft Foundry**：已於非翻譯檔案中更新所有參考
-- **Azure AI Agent Service → Foundry Agents**：已將服務名稱更新為反映最新品牌
+#### 變更
+- **Microsoft Foundry → Microsoft Foundry**：所有非翻譯檔案中更新使用
+- **Azure AI Agent Service → Foundry Agents**：服務名稱更新反映現行品牌
 
-#### 已更新檔案
-- `README.md` - 主課程首頁
+#### 更新檔案
+- `README.md` - 主要課程首頁
 - `changelog.md` - 版本歷史
 - `course-outline.md` - 課程結構
 - `docs/chapter-02-ai-development/agents.md` - AI 代理指南
 - `examples/README.md` - 範例文件
 - `workshop/README.md` - 工作坊首頁
 - `workshop/docs/index.md` - 工作坊索引
-- `workshop/docs/instructions/*.md` - 所有工作坊說明檔案
+- `workshop/docs/instructions/*.md` - 所有工作坊指示文件
 
 ---
 
 ### [v3.15.0] - 2026-02-05
 
-#### 主要倉儲重構：以章節為基礎的資料夾命名
-**此版本將文件重構為專門的章節資料夾，以利更清晰的導覽。**
+#### 主要倉庫重構：以章節為基礎的資料夾名稱
+**此版本將文件重組至專門的章節資料夾，以利更清晰的導覽。**
 
-#### 資料夾重新命名
-舊資料夾已被章節編號資料夾取代：
+#### 資料夾更名
+舊資料夾被章節編號資料夾取代：
 - `docs/getting-started/` → `docs/chapter-01-foundation/` + `docs/chapter-03-configuration/`
 - `docs/microsoft-foundry/` → `docs/chapter-02-ai-development/` + `docs/chapter-08-production/`
 - `docs/deployment/` → `docs/chapter-04-infrastructure/`
 - `docs/pre-deployment/` → `docs/chapter-06-pre-deployment/`
 - `docs/troubleshooting/` → `docs/chapter-07-troubleshooting/`
-- Added new: `docs/chapter-05-multi-agent/`
+- 新增資料夾：`docs/chapter-05-multi-agent/`
 
-#### 檔案遷移
-| 檔案 | 從 | 到 |
+#### 文件遷移
+| 檔案 | 從 | 至 |
 |------|------|---|
 | azd-basics.md | getting-started/ | chapter-01-foundation/ |
 | installation.md | getting-started/ | chapter-01-foundation/ |
@@ -336,935 +378,942 @@
 | production-ai-practices.md | microsoft-foundry/ | chapter-08-production/ |
 | deployment-guide.md | deployment/ | chapter-04-infrastructure/ |
 | provisioning.md | deployment/ | chapter-04-infrastructure/ |
-| All pre-deployment files | pre-deployment/ | chapter-06-pre-deployment/ |
-| All troubleshooting files | troubleshooting/ | chapter-07-troubleshooting/ |
+| 所有預部署檔案 | pre-deployment/ | chapter-06-pre-deployment/ |
+| 所有疑難排解檔案 | troubleshooting/ | chapter-07-troubleshooting/ |
 
 #### 新增
-- **📚 章節 README 檔案**：在每個章節資料夾中建立 README.md，內容包括：
-  - 學習目標與時長
-  - 課程表格與說明
+- **📚 章節 README 文件**：在每個章節資料夾建立 README.md，內容包括：
+  - 學習目標和時長
+  - 課程表與說明
   - 快速啟動指令
-  - 與其他章節的導覽
+  - 導航至其他章節
 
 #### 變更
-- **🔗 已更新所有內部連結**：已在所有文件中更新 78+ 個路徑
-- **🗺️ 主 README.md**：已用新章節結構更新課程地圖
-- **📝 examples/README.md**：已更新跨章節參考
+- **🔗 更新所有內部連結**：跨所有文件更新超過 78 個路徑
+- **🗺️ 主要 README.md**：更新課程地圖反映新章節結構
+- **📝 examples/README.md**：更新章節資料夾交叉引用
 
-#### 已移除
-- 舊的資料夾結構 (getting-started/, microsoft-foundry/, deployment/, pre-deployment/, troubleshooting/, ai-foundry/)
+#### 移除
+- 舊資料夾結構（getting-started/、microsoft-foundry/、deployment/、pre-deployment/、troubleshooting/、ai-foundry/）
 
 ---
 
 ### [v3.14.0] - 2026-02-05
 
-#### 倉儲重構：章節導覽
-**此版本新增章節導覽 README 檔案（已被 v3.15.0 取代）。**
+#### 倉庫重構：章節導覽
+**此版本新增章節導覽 README 文件（後續被 v3.15.0 取代）。**
 
 ---
 
 ### [v3.13.0] - 2026-02-05
 
 #### 新增 AI 代理指南
-**此版本新增針對使用 Azure Developer CLI 部署 AI 代理的完整指南。**
+**此版本增加完整指南，介紹如何使用 Azure Developer CLI 部署 AI 代理。**
 
 #### 新增
 - **🤖 docs/microsoft-foundry/agents.md**：完整指南涵蓋：
-  - AI 代理是什麼，以及與聊天機器人的差異
-  - 三個快速啟動代理範本（Foundry Agents、Prompty、RAG）
+  - 什麼是 AI 代理以及它們與聊天機器人的差異
+  - 三個快速啟動代理模板（Foundry Agents、Prompty、RAG）
   - 代理架構模式（單一代理、RAG、多代理）
-  - 工具設定與客製化
+  - 工具設定與自訂
   - 監控與度量追蹤
   - 成本考量與最佳化
   - 常見疑難排解情境
-  - 三個實作練習與成功準則
+  - 三個實作練習與成功標準
 
-#### 內容結構
-- <strong>介紹</strong>：針對初學者的代理概念
+#### 內容架構
+- <strong>介紹</strong>：初學者的代理概念
 - <strong>快速入門</strong>：使用 `azd init --template get-started-with-ai-agents` 部署代理
-- <strong>架構模式</strong>：代理模式的視覺化圖示
-- <strong>設定</strong>：工具設定與環境變數
-- <strong>監控</strong>：整合 Application Insights
-- <strong>練習</strong>：漸進式實作學習（每個 20-45 分鐘）
+- <strong>架構模式</strong>：代理模式視覺圖解
+- <strong>設定</strong>：工具組態與環境變數
+- <strong>監控</strong>：Application Insights 整合
+- <strong>練習</strong>：進階實作練習（每項 20-45 分鐘）
 
 ---
 
 ### [v3.12.0] - 2026-02-05
 
 #### DevContainer 環境更新
-**此版本更新開發容器設定，加入現代化工具與更佳的預設，以提升 AZD 學習體驗。**
+**此版本使用現代工具和更佳預設，更新開發容器設定，提升 AZD 學習體驗。**
 
 #### 變更
-- **🐳 基礎映像**：已從 `python:3.12-bullseye` 更新為 `python:3.12-bookworm`（最新的 Debian 穩定版）
-- **📛 容器名稱**：為了清楚起見，已將名稱從 "Python 3" 重新命名為 "AZD for Beginners"
+- **🐳 基底映像**：由 `python:3.12-bullseye` 更新為 `python:3.12-bookworm`（最新 Debian 穩定版）
+- **📛 容器名稱**：由「Python 3」改名為「AZD for Beginners」以提高清楚度
 
 #### 新增
-- **🔧 新的 Dev Container 功能**：
-  - `azure-cli` 已啟用 Bicep 支援
-  - `node:20`（AZD 範本的 LTS 版本）
-  - `github-cli` 用於範本管理
-  - `docker-in-docker` 用於容器應用部署
+- **🔧 新增開發容器功能**：
+  - 啟用 Bicep 支援的 `azure-cli`
+  - `node:20`（AZD 模板長期支援版本）
+  - 用於模板管理的 `github-cli`
+  - 支援容器應用部署的 `docker-in-docker`
 
-- **🔌 連接埠轉發**：為常見開發預先設定的連接埠：
+- **🔌 端口轉發**：預設開放常用開發端口：
   - 8000（MkDocs 預覽）
-  - 3000（Web 應用）
+  - 3000（網頁應用）
   - 5000（Python Flask）
   - 8080（API）
 
-- **🧩 新增 VS Code 延伸套件**：
-  - `ms-python.vscode-pylance` - 強化的 Python 智慧提示 (IntelliSense)
-  - `ms-azuretools.vscode-azurefunctions` - 支援 Azure Functions
+- **🧩 新增 VS Code 擴充功能**：
+  - `ms-python.vscode-pylance` - 強化 Python 智慧感知
+  - `ms-azuretools.vscode-azurefunctions` - Azure Functions 支援
   - `ms-azuretools.vscode-docker` - Docker 支援
   - `ms-azuretools.vscode-bicep` - Bicep 語言支援
   - `ms-azure-devtools.azure-resource-groups` - Azure 資源管理
   - `yzhang.markdown-all-in-one` - Markdown 編輯
-  - `DavidAnson.vscode-markdownlint` - Markdown 風格檢查
+  - `DavidAnson.vscode-markdownlint` - Markdown 語法檢查
   - `bierner.markdown-mermaid` - Mermaid 圖表支援
   - `redhat.vscode-yaml` - YAML 支援（用於 azure.yaml）
   - `eamodio.gitlens` - Git 視覺化
-  - `mhutchie.git-graph` - Git 歷史
+  - `mhutchie.git-graph` - Git 歷史紀錄
 
-- **⚙️ VS Code 設定**：新增 Python 直譯器預設設定、儲存時格式化及去除多餘空白
+- **⚙️ VS Code 設定**：新增 Python 直譯器、保存自動格式化與修剪空白字元的預設設定
 
 - **📦 更新 requirements-dev.txt**：
-  - 新增 MkDocs 壓縮 (minify) 外掛
+  - 新增 MkDocs minify 外掛
   - 新增 pre-commit 以維護程式碼品質
   - 新增 Azure SDK 套件（azure-identity、azure-mgmt-resource）
 
 #### 修正
-- <strong>建立後命令</strong>：現在在容器啟動時會驗證 AZD 與 Azure CLI 是否已安裝
+- <strong>建置後命令</strong>：現在於容器啟動時驗證 AZD 和 Azure CLI 是否安裝
 
 ---
 
 ### [v3.11.0] - 2026-02-05
 
-#### 初學者友善的 README 大改版
-**此版本大幅改進 README.md，使其對初學者更友善，並新增 AI 開發者的重要資源。**
+#### 適合初學者的 README 改版
+**此版本大幅改進 README.md，讓初學者更易理解，並新增 AI 開發者必備資源。**
 
 #### 新增
-- **🆚 Azure CLI 與 AZD 比較**：清楚說明何時使用各工具，並附實務範例
-- **🌟 精選 AZD 連結**：提供直接連結至社群範本集與貢獻資源：
-  - [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) - 200+ 個可立即部署的範本
-  - [Submit a Template](https://github.com/Azure/awesome-azd/issues) - 社群貢獻
-- **🎯 快速入門指南**：簡化為三步驟的入門章節（安裝 → 登入 → 部署）
-- **📊 依經驗的導覽表**：根據開發者經驗提供清楚的起始建議
+- **🆚 Azure CLI 與 AZD 比較**：清楚說明兩工具使用時機，附實際範例
+- **🌟 精彩 AZD 連結**：直接連結社群模板館和貢獻資源：
+  - [精彩 AZD 展示館](https://azure.github.io/awesome-azd/) - 200+ 可直接部署模板
+  - [提交模板](https://github.com/Azure/awesome-azd/issues) - 社群貢獻
+- **🎯 快速入門指南**：簡化三步驟起始流程（安裝 → 登入 → 部署）
+- **📊 依經驗導覽表**：根據開發者經驗給予清晰起點建議
 
 #### 變更
-- **README 結構**：重新組織以漸進揭露（重要資訊優先）
-- <strong>介紹區段</strong>：重寫以向完全初學者說明「`azd up` 的魔力」
-- <strong>移除重複內容</strong>：刪除重複的疑難排解章節
-- <strong>疑難排解指令</strong>：修正 `azd logs` 的參考，改為有效的 `azd monitor --logs`
+- **README 結構**：重新組織，採漸進揭露方式優先呈現關鍵資訊
+- <strong>介紹段落</strong>：改寫說明「`azd up` 的魔法」給完全新手
+- <strong>刪除重複內容</strong>：移除重複的疑難排解段落
+- <strong>疑難排解指令</strong>：修正 `azd logs` 改用有效指令 `azd monitor --logs`
 
 #### 修正
-- **🔐 認證指令**：在 cheat-sheet.md 中新增 `azd auth login` 與 `azd auth logout`
-- <strong>無效指令參考</strong>：從 README 的疑難排解章節移除剩餘的 `azd logs`
 
-#### 注意事項
-- <strong>範圍</strong>：變更已套用於主 README.md 與 resources/cheat-sheet.md
-- <strong>目標讀者</strong>：改善特別針對剛接觸 AZD 的開發者
+- **🔐 認證指令**：在 cheat-sheet.md 中新增 `azd auth login` 和 `azd auth logout`
+- <strong>無效指令參考</strong>：移除 README 疑難排解部分剩餘的 `azd logs`
+
+#### 備註
+- <strong>範圍</strong>：變更套用於主 README.md 與 resources/cheat-sheet.md
+- <strong>目標讀者</strong>：專為剛接觸 AZD 的開發者改進
 
 ---
 
 ### [v3.10.0] - 2026-02-05
 
 #### Azure Developer CLI 指令準確性更新
-**此版本修正了文件中不存在的 AZD 指令，確保所有範例程式碼使用有效的 Azure Developer CLI 語法。**
+**此版本修正文件中不存在的 AZD 指令，確保所有程式碼範例均使用有效的 Azure Developer CLI 語法。**
 
 #### 修正
-- **🔧 移除不存在的 AZD 指令**：全面稽核並修正無效指令：
-  - `azd logs`（不存在）→ 改為 `azd monitor --logs` 或使用 Azure CLI 替代方案
-  - `azd service` 子指令（不存在）→ 改為 `azd show` 與 Azure CLI
-  - `azd infra import/export/validate`（不存在）→ 已移除或以有效替代方案取代
-  - `azd deploy --rollback/--incremental/--parallel/--detect-changes` 旗標（不存在）→ 已移除
-  - `azd provision --what-if/--rollback` 旗標（不存在）→ 已更新為使用 `--preview`
-  - `azd config validate`（不存在）→ 改為 `azd config list`
-  - `azd info`, `azd history`, `azd metrics`（不存在）→ 已移除
+- **🔧 移除不存在的 AZD 指令**：全面稽核並更正無效指令：
+  - `azd logs`（不存在）→ 替換為 `azd monitor --logs` 或 Azure CLI 替代方案
+  - `azd service` 子指令（不存在）→ 替換為 `azd show` 和 Azure CLI
+  - `azd infra import/export/validate`（不存在）→ 移除或替換為有效替代
+  - `azd deploy --rollback/--incremental/--parallel/--detect-changes` 標誌（不存在）→ 移除
+  - `azd provision --what-if/--rollback` 標誌（不存在）→ 更新為使用 `--preview`
+  - `azd config validate`（不存在）→ 替換為 `azd config list`
+  - `azd info`、`azd history`、`azd metrics`（不存在）→ 移除
 
-- **📚 已更新的檔案（指令修正）**：
-  - `resources/cheat-sheet.md`: 大幅檢修指令參考
-  - `docs/deployment/deployment-guide.md`: 修正回滾與部署策略
-  - `docs/troubleshooting/debugging.md`: 修正日誌分析章節
-  - `docs/troubleshooting/common-issues.md`: 更新疑難排解指令
-  - `docs/troubleshooting/ai-troubleshooting.md`: 修正 AZD 偵錯章節
-  - `docs/getting-started/azd-basics.md`: 修正監控指令
-  - `docs/getting-started/first-project.md`: 更新監控與除錯範例
-  - `docs/getting-started/installation.md`: 修正說明與版本範例
-  - `docs/pre-deployment/application-insights.md`: 修正檢視日誌指令
-  - `docs/pre-deployment/coordination-patterns.md`: 修正代理偵錯指令
+- **📚 已更新檔案修正指令**：
+  - `resources/cheat-sheet.md`：指令參考大幅更新
+  - `docs/deployment/deployment-guide.md`：修正還原及部署策略
+  - `docs/troubleshooting/debugging.md`：糾正日誌分析部分
+  - `docs/troubleshooting/common-issues.md`：更新疑難排解指令
+  - `docs/troubleshooting/ai-troubleshooting.md`：修正 AZD 偵錯段落
+  - `docs/getting-started/azd-basics.md`：修正監控指令
+  - `docs/getting-started/first-project.md`：更新監控和偵錯範例
+  - `docs/getting-started/installation.md`：修正幫助與版本示範
+  - `docs/pre-deployment/application-insights.md`：修正日誌檢視指令
+  - `docs/pre-deployment/coordination-patterns.md`：修正代理偵錯指令
+
+- **📝 版本參考更新**：
+  - `docs/getting-started/installation.md`：將硬編碼的 `1.5.0` 版本改為通用的 `1.x.x` 並連結發布頁
 
 #### 變更
-- <strong>回滾策略</strong>：更新文件以使用基於 Git 的回滾（AZD 本身沒有原生回滾功能）
-- <strong>日誌檢視</strong>：將 `azd logs` 的參考改為 `azd monitor --logs`、`azd monitor --live` 與 Azure CLI 指令
-- <strong>效能章節</strong>：移除不存在的平行/增量部署旗標，提供有效的替代方案
+- <strong>還原策略</strong>：將文件更新為使用基於 Git 的還原（AZD 原生無還原功能）
+- <strong>日誌檢視</strong>：用 `azd monitor --logs`、`azd monitor --live` 和 Azure CLI 指令取代 `azd logs`
+- <strong>效能部分</strong>：移除不存在的平行/增量部署標誌，提供有效替代方案
 
 #### 技術細節
-- **有效的 AZD 指令**：`init`, `up`, `auth`, `deploy`, `down`, `provision`, `publish`, `completion`, `config`, `env`, `show`, `version`, `monitor`
-- **有效的 azd monitor 旗標**：`--live`, `--logs`, `--overview`
-- <strong>移除功能</strong>：`azd logs`, `azd service`, `azd infra import/export/validate`, `azd history`, `azd metrics`, `azd info`, `azd config validate`
+- **有效的 AZD 指令**：`init`、`up`、`auth`、`deploy`、`down`、`provision`、`publish`、`completion`、`config`、`env`、`show`、`version`、`monitor`
+- **有效的 azd monitor 標誌**：`--live`、`--logs`、`--overview`
+- <strong>移除功能</strong>：`azd logs`、`azd service`、`azd infra import/export/validate`、`azd history`、`azd metrics`、`azd info`、`azd config validate`
 
-#### 注意事項
-- <strong>驗證</strong>：指令已依 Azure Developer CLI v1.23.x 進行驗證
+#### 備註
+- <strong>驗證</strong>：指令已依 Azure Developer CLI v1.23.x 版本驗證
 
 ---
 
 ### [v3.9.0] - 2026-02-05
 
-#### 完成工作坊與文件品質更新
-**此版本完成互動式工作坊模組、修復所有損壞的文件連結，並提升使用 Microsoft AZD 的 AI 開發者之整體內容品質。**
+#### 互動工作坊完成與文件品質更新
+**此版本完成所有互動工作坊模組，修復所有斷裂的文件連結，並提升 Microsoft AZD AI 開發者整體內容品質。**
 
 #### 新增
-- **📝 CONTRIBUTING.md**：新的貢獻指南文件，內容包含：
-  - 清楚說明如何回報問題與提出修改建議
+- **📝 CONTRIBUTING.md**：新增貢獻指南文件，內容包含：
+  - 明確的問題回報與變更提案指示
   - 新內容的文件標準
-  - 程式碼範例指引與提交訊息慣例
+  - 程式碼範例指導與提交訊息慣例
   - 社群參與資訊
 
-#### 已完成
-- **🎯 工作坊 模組 7（總結）**：已完整完成總結模組，包含：
-  - 工作坊成果的全面摘要
-  - 掌握的關鍵概念（涵蓋 AZD、範本 和 Microsoft Foundry）
-  - 後續學習建議
-  - 工作坊挑戰練習與難度等級
+#### 完成
+- **🎯 工作坊模組 7（總結）**：完整完成總結模組，包含：
+  - 工作坊成就全面概述
+  - AZD、範本與 Microsoft Foundry 關鍵概念掌握
+  - 學習旅程後續建議
+  - 工作坊挑戰練習與難度評比
   - 社群回饋與支援連結
 
-- **📚 工作坊 模組 3（拆解）**：更新學習目標，包含：
-  - GitHub Copilot 與 MCP 伺服器啟用指引
-  - AZD 範本資料夾結構說明
-  - 基礎設施即程式碼 (Bicep) 的組織模式
-  - 實作實驗指示
+- **📚 工作坊模組 3（拆解）**：更新學習目標，含：
+  - GitHub Copilot 與 MCP 伺服器啟用指南
+  - AZD 範本資料夾結構理解
+  - 基於程式碼基礎設施 (Bicep) 組織模式
+  - 實作實驗室指示
 
-- **🔧 工作坊 模組 6（拆除）**：已完成，包含：
-  - 資源清理與成本管理目標
-  - 使用 `azd down` 安全解除配置基礎設施的用法
-  - 軟刪除的認知服務復原指引
-  - 額外探索題：GitHub Copilot 與 Azure 入口網站
+- **🔧 工作坊模組 6（拆除）**：完成，包含：
+  - 資源清理及成本管理目標
+  - 使用 `azd down` 安全解除基礎架構佈署
+  - 軟刪除的認知服務復原指導
+  - 額外探索題目如 GitHub Copilot 與 Azure 入口網站
 
 #### 修正
-- **🔗 破損連結修復**：已解決 15+ 個內部文件的破損連結：
-  - `docs/ai-foundry/ai-model-deployment.md`: 修正指向 microsoft-foundry-integration.md 的路徑
-  - `docs/troubleshooting/ai-troubleshooting.md`: 修正 ai-model-deployment.md 與 production-ai-practices.md 的路徑
-  - `docs/getting-started/first-project.md`: 將不存在的 cicd-integration.md 替換為 deployment-guide.md
-  - `examples/retail-scenario.md`: 修正 FAQ 與排除故障指南的路徑
-  - `examples/container-app/microservices/README.md`: 修正課程首頁與部署指南的路徑
-  - `resources/faq.md` 和 `resources/glossary.md`: 更新 AI 章節參考
-  - `course-outline.md`: 修正講師指南與 AI 工作坊實驗室參考
+- **🔗 斷裂連結修復**：解決 15+ 內部文件斷裂連結：
+  - `docs/ai-foundry/ai-model-deployment.md`：修正至 microsoft-foundry-integration.md 的路徑
+  - `docs/troubleshooting/ai-troubleshooting.md`：修正 ai-model-deployment.md 和 production-ai-practices.md 路徑
+  - `docs/getting-started/first-project.md`：將不存在的 cicd-integration.md 替換為 deployment-guide.md
+  - `examples/retail-scenario.md`：修正常見問答與疑難排解指南路徑
+  - `examples/container-app/microservices/README.md`：修正課程首頁與部署指南路徑
+  - `resources/faq.md` 及 `resources/glossary.md`：更新 AI 章節參考
+  - `course-outline.md`：修正講師指南及 AI 工作坊實驗室參考
 
-- **📅 工作坊狀態橫幅**：已從「Under Construction」更新為活動中，日期為 2026 年 2 月
+- **📅 工作坊狀態橫幅**：從「施工中」更新為 2026 年 2 月的活動狀態
 
-- **🔗 工作坊 導覽**：修正 README.md 中指向不存在 lab-1-azd-basics 資料夾的破損導覽連結
+- **🔗 工作坊導覽**：修正 README.md 中指向不存在 lab-1-azd-basics 資料夾的斷鏈導覽
 
 #### 變更
-- **工作坊 簡報**：移除「under construction」警告，工作坊現已完成並可使用
-- <strong>導覽一致性</strong>：確保所有工作坊模組具有適當的模組間導覽
-- <strong>學習路徑參考</strong>：更新章節交叉參照以使用正確的 microsoft-foundry 路徑
+- <strong>工作坊簡報</strong>：移除「施工中」警告，工作坊已完成並可使用
+- <strong>導覽一致性</strong>：確保所有工作坊模組均有適當的模組間導覽
+- <strong>學習路徑參考</strong>：更新章節交叉參照，使用正確的 microsoft-foundry 路徑
 
 #### 已驗證
-- ✅ 所有英文 Markdown 檔案的內部連結均有效
-- ✅ 工作坊模組 0-7 已完成並具學習目標
-- ✅ 章節與模組間的導覽功能正常
-- ✅ 內容適合使用 Microsoft AZD 的 AI 開發者
-- ✅ 整體保持適合初學者的語言與結構
-- ✅ CONTRIBUTING.md 為社群貢獻者提供清晰指引
+- ✅ 所有英文 Markdown 檔案具有效的內部連結
+- ✅ 工作坊模組 0-7 完整，含學習目標
+- ✅ 章節與模組間導覽正常運作
+- ✅ 內容適用於使用 Microsoft AZD 的 AI 開發者
+- ✅ 全程維持初學者友好語言與結構
+- ✅ CONTRIBUTING.md 清楚提供社群貢獻指引
 
 #### 技術實作
-- <strong>連結驗證</strong>：自動化 PowerShell 腳本驗證所有 .md 內部連結
-- <strong>內容稽核</strong>：人工檢閱工作坊完整性與是否適合初學者
-- <strong>導覽系統</strong>：套用一致的章節與模組導覽模式
+- <strong>連結驗證</strong>：採用自動化 PowerShell 腳本驗證所有 .md 內部連結
+- <strong>內容稽核</strong>：手動審查工作坊完整性與初學者適用性
+- <strong>導覽系統</strong>：應用一致的章節與模組導覽模式
 
 #### 備註
 - <strong>範圍</strong>：變更僅套用於英文文件
-- <strong>翻譯</strong>：本版未更新翻譯資料夾（自動翻譯稍後會同步）
-- <strong>工作坊時長</strong>：完整工作坊現在提供 3-4 小時的實作學習
+- <strong>翻譯</strong>：翻譯資料夾此版本未更新（稍後將由自動翻譯同步）
+- <strong>工作坊時長</strong>：完整工作坊現提供 3-4 小時的實作學習
 
 ---
 
 ### [v3.8.0] - 2025-11-19
 
 #### 進階文件：監控、安全與多代理模式
-**本版本新增了關於 Application Insights 整合、認證模式與多代理協調的完整 A 級課程，適用於生產部署。**
+**此版本新增全面的 A 級課程，涵蓋 Application Insights 整合、認證模式、以及生產佈署的多代理協調。**
 
 #### 新增
-- **📊 Application Insights 整合課程**：在 `docs/pre-deployment/application-insights.md`：
-  - 以 AZD 為重點的部署與自動佈建
-  - 包含 Application Insights + Log Analytics 的完整 Bicep 範本
-  - 具有自訂遙測的可執行 Python 應用程式（1,200+ 行）
-  - AI/LLM 監控模式（Microsoft Foundry Models token/成本追蹤）
-  - 6 張 Mermaid 圖（架構、分散式追蹤、遙測流程）
-  - 3 個實作練習（警示、儀表板、AI 監控）
-  - Kusto 查詢範例與成本優化策略
-  - 即時指標串流與即時除錯
-  - 學習時間 40-50 分鐘，含生產就緒模式
+- **📊 Application Insights 整合課程**：位於 `docs/pre-deployment/application-insights.md`：
+  - 專注於 AZD 的佈署與自動配置
+  - 完整的 Application Insights + Log Analytics Bicep 範本
+  - Python 應用程式含客製遙測（1,200+ 行程式碼）
+  - AI/LLM 監控模式（Microsoft Foundry 模型令牌/成本追蹤）
+  - 6 張 Mermaid 圖（架構、分布式追蹤、遙測流程）
+  - 3 項實作練習（警示、儀表板、AI 監控）
+  - Kusto 查詢範例及成本優化策略
+  - 實時指標串流與即時偵錯
+  - 40-50 分鐘學習時間，提供生產就緒模式
 
-- **🔐 認證與安全模式課程**：在 `docs/getting-started/authsecurity.md`：
-  - 3 種認證模式（連線字串、Key Vault、託管身分）
-  - 用於安全部署的完整 Bicep 基礎設施範本
-  - 整合 Azure SDK 的 Node.js 應用程式程式碼
-  - 3 個完整練習（啟用託管身分、使用者指派身分、Key Vault 輪替）
-  - 安全最佳實務與 RBAC 設定
-  - 故障排除指南與成本分析
-  - 生產就緒的無密碼認證模式
+- **🔐 認證與安全模式課程**：位於 `docs/getting-started/authsecurity.md`：
+  - 3 種認證模式（連接字串、Key Vault、託管身份）
+  - 安全佈署完整 Bicep 基礎架構範本
+  - Node.js 應用程式碼包含 Azure SDK 整合
+  - 3 項完整練習（啟用託管身份、用戶指派身份、Key Vault 轉換）
+  - 安全最佳實踐與 RBAC 配置
+  - 疑難排解指南與成本分析
+  - 支援生產的無密碼認證模式
 
-- **🤖 多代理協調模式課程**：在 `docs/pre-deployment/coordination-patterns.md`：
-  - 5 種協調模式（順序、平行、階層、事件驅動、共識）
-  - 完整的協調器服務實作（Python/Flask，1,500+ 行）
-  - 3 個專門代理實作（研究、撰寫、編輯）
-  - 使用 Service Bus 整合訊息佇列
-  - 使用 Cosmos DB 進行分散式系統的狀態管理
-  - 6 張 Mermaid 圖顯示代理互動
-  - 3 個進階練習（逾時處理、重試邏輯、斷路器）
-  - 成本細項（$240-565/月）與優化策略
-  - 整合 Application Insights 以進行監控
+- **🤖 多代理協調模式課程**：位於 `docs/pre-deployment/coordination-patterns.md`：
+  - 5 種協調模式（序列、平行、階層、事件驅動、共識）
+  - 完整調度者服務實作（Python/Flask，1,500+ 行程式碼）
+  - 3 種專門代理實作（研究、撰寫、編輯）
+  - 服務匯流排整合訊息佇列
+  - Cosmos DB 狀態管理用於分布式系統
+  - 6 張 Mermaid 圖展示代理互動
+  - 3 項進階練習（逾時處理、重試邏輯、斷路器）
+  - 成本細目（每月 $240-565）及優化策略
+  - Application Insights 監控整合
 
 #### 強化
-- <strong>預部署章節</strong>：現在包含完整的監控與協調模式
-- <strong>入門章節</strong>：強化為專業認證模式
-- <strong>生產準備度</strong>：從安全到可觀測性皆有完整涵蓋
-- <strong>課程大綱</strong>：已更新，參考第 3 章與第 6 章的新課程
+- <strong>預佈署章節</strong>：現在包含全面監控與協調模式
+- <strong>入門章節</strong>：增加專業認證模式
+- <strong>生產準備</strong>：涵蓋從安全到可觀測性的完整內容
+- <strong>課程大綱</strong>：更新以參考第 3 與第 6 章的新課程
 
 #### 變更
-- <strong>學習進程</strong>：在整個課程中更好地整合安全與監控
-- <strong>文件品質</strong>：新課程一致達到 A 等級標準（95-97%）
-- <strong>生產模式</strong>：為企業部署提供完整端到端涵蓋
+- <strong>學習進度</strong>：更好整合安全與監控內容於整個課程
+- <strong>文件品質</strong>：新課程達到穩定的 A 級標準（95-97%）
+- <strong>生產模式</strong>：提供企業部署的端到端完整覆蓋
 
 #### 改善
-- <strong>開發者體驗</strong>：從開發到生產監控的清晰路徑
-- <strong>安全標準</strong>：關於認證與機密管理的專業模式
-- <strong>可觀測性</strong>：與 AZD 完整整合 Application Insights
-- **AI 工作負載**：針對 Microsoft Foundry Models 與多代理系統的專門監控
+- <strong>開發者體驗</strong>：從開發到生產監控清晰路徑
+- <strong>安全標準</strong>：專業認證與機密管理模式
+- <strong>可觀測性</strong>：AZD 與 Application Insights 完整整合
+- **AI 工作負載**：專為 Microsoft Foundry 模型與多代理系統量身監控
 
 #### 已驗證
-- ✅ 所有課程包含完整可執行程式碼（非片段）
-- ✅ Mermaid 圖以視覺化學習（3 課程共 19 張）
-- ✅ 實作練習含驗證步驟（共 9 個）
-- ✅ 生產就緒的 Bicep 範本，可透過 `azd up` 部署
+- ✅ 所有課程含完整可執行程式碼（非片段）
+- ✅ 以 Mermaid 圖表輔助視覺學習（3 課程共 19 張）
+- ✅ 含驗證步驟的實作練習（共 9 項）
+- ✅ 生產就緒 Bicep 範本可由 `azd up` 部署
 - ✅ 成本分析與優化策略
-- ✅ 故障排除指南與最佳實務
-- ✅ 知識檢核點含驗證指令
+- ✅ 疑難排解指南與最佳實踐
+- ✅ 知識檢核點與驗證指令
 
-#### 文件分級結果
-- **docs/pre-deployment/application-insights.md**：- 全面的監控指南
-- **docs/getting-started/authsecurity.md**：- 專業的安全模式
-- **docs/pre-deployment/coordination-patterns.md**：- 進階的多代理架構
-- **Overall New Content**：- 一致的高品質標準
+#### 文件評分結果
+- **docs/pre-deployment/application-insights.md**：- 全面監控指南
+- **docs/getting-started/authsecurity.md**：- 專業安全模式
+- **docs/pre-deployment/coordination-patterns.md**：- 高階多代理架構
+- <strong>整體新內容</strong>：- 穩定一致的高品質標準
 
 #### 技術實作
-- **Application Insights**：Log Analytics + 自訂遙測 + 分散式追蹤
-- <strong>認證</strong>：託管身分 + Key Vault + RBAC 模式
-- <strong>多代理</strong>：Service Bus + Cosmos DB + Container Apps + 協調
+- **Application Insights**：Log Analytics + 自訂遙測 + 分布式追蹤
+- <strong>認證</strong>：託管身份 + Key Vault + RBAC 模式
+- <strong>多代理</strong>：服務匯流排 + Cosmos DB + Container Apps + 編排
 - <strong>監控</strong>：即時指標 + Kusto 查詢 + 警示 + 儀表板
-- <strong>成本管理</strong>：取樣策略、保留政策、預算控管
+- <strong>成本管理</strong>：採樣策略、保留政策、預算控管
 
 ### [v3.7.0] - 2025-11-19
 
-#### 文件品質改進與新的 Microsoft Foundry Models 範例
-**本版本提升了整個儲存庫的文件品質，並新增一個完整的 Microsoft Foundry Models 部署範例，含 gpt-4.1 聊天介面。**
+#### 文件品質提升與新增 Microsoft Foundry Models 範例
+**此版本提升整個倉庫的文件品質，並新增完整 Microsoft Foundry Models 部署範例，包含 gpt-4.1 聊天介面。**
 
 #### 新增
-- **🤖 Microsoft Foundry Models 聊天範例**：在 `examples/azure-openai-chat/` 中完整部署 gpt-4.1：
-  - 完整的 Microsoft Foundry Models 基礎設施（gpt-4.1 模型部署）
-  - 具有對話歷史的 Python 命令列聊天介面
-  - 整合 Key Vault 以安全儲存 API 金鑰
-  - Token 使用追蹤與成本估算
+- **🤖 Microsoft Foundry Models 聊天範例**：完整 gpt-4.1 部署與 `examples/azure-openai-chat/` 的運作實作：
+  - 完整的 Microsoft Foundry Models 基礎架構（gpt-4.1 模型部署）
+  - Python 命令列聊天介面，含對話歷史
+  - Key Vault 整合以安全儲存 API 金鑰
+  - 令牌使用追蹤與成本估算
   - 速率限制與錯誤處理
-  - 完整 README，部署指南 35-45 分鐘
-  - 11 個生產就緒檔案（Bicep 範本、Python 應用程式、設定）
+  - 詳盡 README，含 35-45 分鐘部署指南
+  - 11 個生產就緒檔案（Bicep 範本、Python 應用、設定）
 - **📚 文件練習**：在設定指南中新增實作練習：
   - 練習 1：多環境設定（15 分鐘）
-  - 練習 2：機密管理實作（10 分鐘）
-  - 清晰的成功標準與驗證步驟
-- **✅ 部署驗證**：在部署指南新增驗證章節：
+  - 練習 2：祕密管理實作（10 分鐘）
+  - 明確成功準則與驗證步驟
+- **✅ 部署驗證**：新增部署指南驗證段落：
   - 健康檢查程序
-  - 成功標準檢查表
+  - 成功準則清單
   - 所有部署指令的預期輸出
-  - 快速故障排除參考
+  - 快速疑難排解參考
 
 #### 強化
 - **examples/README.md**：更新至 A 級品質（93%）：
-  - 在所有相關章節中新增 azure-openai-chat
-  - 將本地範例數量從 3 更新為 4
+  - 在所有相關段落新增 azure-openai-chat
+  - 本地範例數量從 3 增至 4
   - 加入 AI 應用範例表
-  - 整合到中階使用者的快速上手
-  - 新增至 Microsoft Foundry 範本區段
-  - 更新比較矩陣與技術發現章節
-- <strong>文件品質</strong>：在 docs 資料夾中從 B+ (87%) 提升至 A- (92%)：
-  - 在關鍵指令範例中新增預期輸出
-  - 為設定變更加入驗證步驟
-  - 以實作練習強化實務學習
+  - 整合至中階使用者快速開始指南
+  - 新增 Microsoft Foundry 範本章節
+  - 更新比較矩陣與技術探索部分
+- <strong>文件品質</strong>：docs 資料夾整體由 B+ (87%) 提升至 A- (92%)：
+
+  - 新增關鍵指令範例的預期輸出
+  - 包含配置變更的驗證步驟
+  - 強化實務操作的實作練習
 
 #### 變更
-- <strong>學習進程</strong>：為中階學習者更好地整合 AI 範例
-- <strong>文件結構</strong>：提供更可執行的練習與明確結果
-- <strong>驗證流程</strong>：在關鍵工作流程中新增明確的成功標準
+- <strong>學習進程</strong>：為中階學習者更好整合 AI 範例
+- <strong>文件結構</strong>：更多具體行動的練習並明確結果
+- <strong>驗證流程</strong>：為關鍵工作流程新增明確成功標準
 
 #### 改善
-- <strong>開發者體驗</strong>：Microsoft Foundry Models 部署現在需時 35-45 分鐘（相較於複雜替代方案的 60-90 分鐘）
-- <strong>成本透明度</strong>：Microsoft Foundry Models 範例的明確成本估算（$50-200/月）
-- <strong>學習路徑</strong>：AI 開發者可透過 azure-openai-chat 有明確入門點
-- <strong>文件標準</strong>：一致的預期輸出與驗證步驟
+- <strong>開發者體驗</strong>：Microsoft Foundry Models 部署時間縮短為 35-45 分鐘（相較於複雜方案的 60-90 分鐘）
+- <strong>成本透明</strong>：Microsoft Foundry Models 範例清楚成本估算（每月 50-200 美元）
+- <strong>學習路徑</strong>：AI 開發者有明確入口，使用 azure-openai-chat
+- <strong>文件標準</strong>：預期輸出和驗證步驟一致性
 
-#### 已驗證
-- ✅ Microsoft Foundry Models 範例可完整以 `azd up` 部署
-- ✅ 所有 11 個實作檔案語法正確
-- ✅ README 指示與實際部署體驗相符
-- ✅ 文件連結已在 8+ 個位置更新
-- ✅ 範例索引正確反映 4 個本地範例
-- ✅ 表格中無重複的外部連結
-- ✅ 所有導覽參考正確
+#### 驗證
+- ✅ Microsoft Foundry Models 範例可用 `azd up` 完全運作
+- ✅ 11 個實作檔案語法皆正確
+- ✅ README 指示與實際部署經驗相符
+- ✅ 文件連結更新超過 8 個位置
+- ✅ 範例索引準確反映 4 個本地範例
+- ✅ 表格中無重複外部連結
+- ✅ 所有導航參考正確
 
 #### 技術實作
 - **Microsoft Foundry Models 架構**：gpt-4.1 + Key Vault + Container Apps 模式
-- <strong>安全</strong>：準備好託管身分，機密儲存在 Key Vault
+- <strong>安全性</strong>：已支援 Managed Identity，秘密存於 Key Vault
 - <strong>監控</strong>：整合 Application Insights
-- <strong>成本管理</strong>：Token 追蹤與使用優化
+- <strong>成本管理</strong>：代幣追蹤與使用優化
 - <strong>部署</strong>：單一 `azd up` 指令完成整套部署
 
 ### [v3.6.0] - 2025-11-19
 
 #### 重大更新：Container App 部署範例
-**本版本新增使用 Azure Developer CLI (AZD) 的完整、可生產部署之容器應用程式部署範例，並將其完整整合至學習路徑。**
+**本版本引入完整的生產級容器應用部署範例，透過 Azure Developer CLI (AZD) 並附完整文件，整合於學習路徑中。**
 
 #### 新增
-- **🚀 Container App 範例**：在 `examples/container-app/` 新增本地範例：
-  - [總覽指南](examples/container-app/README.md): 容器化部署的完整概覽、快速上手、生產與進階模式
-  - [簡易 Flask API](../../examples/container-app/simple-flask-api): 適合初學者的 REST API，含 scale-to-zero、健康檢查、監控與故障排除
-  - [微服務架構](../../examples/container-app/microservices): 生產就緒的多服務部署（API Gateway、Product、Order、User、Notification），非同步訊息、Service Bus、Cosmos DB、Azure SQL、分散式追蹤、藍綠/金絲雀部署
-- <strong>最佳實務</strong>：針對容器化工作負載的安全、監控、成本優化與 CI/CD 指引
-- <strong>程式範例</strong>：完整 `azure.yaml`、Bicep 範本，以及多語言服務實作（Python、Node.js、C#、Go）
-- <strong>測試與故障排除</strong>：端到端測試情境、監控指令、故障排除指引
+- **🚀 Container App 範例**：新增本地範例於 `examples/container-app/`：
+  - [主導覽](examples/container-app/README.md)：容器部署全覽、快速入門、生產及進階模式
+  - [簡易 Flask API](../../examples/container-app/simple-flask-api)：適合初學者的 REST API，包含零規模擴展、健康檢查、監控與除錯
+  - [微服務架構](../../examples/container-app/microservices)：生產級多服務部署（API Gateway、產品、訂單、使用者、通知），非同步訊息、Service Bus、Cosmos DB、Azure SQL、分散式追蹤、藍綠／金絲雀部署
+- <strong>最佳實踐</strong>：針對容器工作負載的安全、監控、成本優化與 CI/CD 指導
+- <strong>程式碼範例</strong>：完整 `azure.yaml`、Bicep 範本及多語言服務實作（Python、Node.js、C#、Go）
+- <strong>測試與除錯</strong>：端對端測試流程、監控命令、故障排除指引
 
 #### 變更
-- **README.md**：更新以展示並連結新的 container app 範例，置於「本地範例 - 容器應用」之下
-- **examples/README.md**：更新以強調 container app 範例、加入比較矩陣項目，並更新技術/架構參考
-- <strong>課程大綱與學習指南</strong>：更新以在相關章節參考新的 container app 範例與部署模式
+- **README.md**：新增功能並連結 Container App 範例，置於「本地範例 - 容器應用」下
+- **examples/README.md**：強調 Container App 範例，新增比較矩陣條目，並更新技術與架構參考
+- <strong>課程大綱與學習指南</strong>：引用新 Container App 範例及部署模式於相關章節
 
-#### 已驗證
-- ✅ 所有新範例皆可使用 `azd up` 部署並符合最佳實務
-- ✅ 文件交叉連結與導覽已更新
-- ✅ 範例涵蓋從初學者到進階情境，包括生產微服務
+#### 驗證
+- ✅ 全新範例可使用 `azd up` 部署且遵循最佳實踐
+- ✅ 文件跨鏈接與導航已更新
+- ✅ 範例涵蓋初階至進階場景，包括生產微服務
 
 #### 備註
-- <strong>範圍</strong>：僅限英文文件與範例
-- <strong>後續步驟</strong>：在未來版本擴展其他進階容器模式與 CI/CD 自動化
+- <strong>範圍</strong>：僅限英文文件及範例
+- <strong>後續步驟</strong>：未來版本將擴增更多先進容器模式與 CI/CD 自動化
 
 ### [v3.5.0] - 2025-11-19
 
-#### 產品重新命名：Microsoft Foundry
-**本版本在所有英文文件中實施了從「Microsoft Foundry」到「Microsoft Foundry」的全面產品名稱變更，以反映微軟的官方重新命名。**
+#### 產品品牌更新：Microsoft Foundry
+**本版本於所有英文文件中，全面將產品名稱從「Microsoft Foundry」變更為「Microsoft Foundry」，反映微軟官方品牌更新。**
 
 #### 變更
-- **🔄 產品名稱更新**：從「Microsoft Foundry」全面重新命名為「Microsoft Foundry」
-  - 更新 `docs/` 資料夾中所有英文文件的參考
-  - 重新命名資料夾：`docs/ai-foundry/` → `docs/microsoft-foundry/`
-  - Renamed file: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - Total: 23 content references updated across 7 documentation files
+- **🔄 產品名稱更新**：從「Microsoft Foundry」全面重命名為「Microsoft Foundry」
+  - 更新位於 `docs/` 資料夾中所有英文文件參考
+  - 資料夾更名：`docs/ai-foundry/` → `docs/microsoft-foundry/`
+  - 檔案更名：`azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+  - 總計更新 7 個文件中 23 處內容參考
 
-- **📁 Folder Structure Changes**:
-  - `docs/ai-foundry/` renamed to `docs/microsoft-foundry/`
-  - All cross-references updated to reflect new folder structure
-  - Navigation links validated across all documentation
+- **📁 資料夾結構變更**：
+  - `docs/ai-foundry/` 更名為 `docs/microsoft-foundry/`
+  - 所有交叉參照更新以反映新資料夾結構
+  - 全文件導航連結驗證無誤
 
-- **📄 File Renames**:
-  - `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - All internal links updated to reference new filename
+- **📄 檔案重新命名**：
+  - `azure-ai-foundry-integration.md` 改名為 `microsoft-foundry-integration.md`
+  - 所有內部連結皆更新對應新檔名
 
-#### Updated Files
-- **Chapter Documentation** (7 files):
-  - `docs/microsoft-foundry/ai-model-deployment.md` - 更新了 3 個導覽連結
-  - `docs/microsoft-foundry/ai-workshop-lab.md` - 更新了 4 個產品名稱參考
-  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - 已經使用 Microsoft Foundry (from previous updates)
-  - `docs/microsoft-foundry/production-ai-practices.md` - 更新了 3 個參考 (overview, community feedback, documentation)
-  - `docs/getting-started/azd-basics.md` - 更新了 4 個交叉參考連結
-  - `docs/getting-started/first-project.md` - 更新了 2 個章節導覽連結
-  - `docs/getting-started/installation.md` - 更新了 2 個下一章節連結
-  - `docs/troubleshooting/ai-troubleshooting.md` - 更新了 3 個參考 (navigation, Discord community)
-  - `docs/troubleshooting/common-issues.md` - 更新了 1 個導覽連結
-  - `docs/troubleshooting/debugging.md` - 更新了 1 個導覽連結
+#### 更新檔案
+- <strong>章節文件</strong>（7 個檔案）：
+  - `docs/microsoft-foundry/ai-model-deployment.md` - 3 處導航連結更新
+  - `docs/microsoft-foundry/ai-workshop-lab.md` - 4 處產品名稱參考更新
+  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - 先前已使用 Microsoft Foundry
+  - `docs/microsoft-foundry/production-ai-practices.md` - 3 處參考更新（概覽、社群回饋、文件）
+  - `docs/getting-started/azd-basics.md` - 4 處交叉參照更新
+  - `docs/getting-started/first-project.md` - 2 處章節導航連結更新
+  - `docs/getting-started/installation.md` - 2 處下一章節連結更新
+  - `docs/troubleshooting/ai-troubleshooting.md` - 3 處參考更新（導航、Discord 社群）
+  - `docs/troubleshooting/common-issues.md` - 1 處導航連結更新
+  - `docs/troubleshooting/debugging.md` - 1 處導航連結更新
 
-- **Course Structure Files** (2 files):
-  - `README.md` - 更新了 17 個參考 (course overview, chapter titles, templates section, community insights)
-  - `course-outline.md` - 更新了 14 個參考 (overview, learning objectives, chapter resources)
+- <strong>課程結構檔案</strong>（2 個檔案）：
+  - `README.md` - 17 處參考更新（課程概覽、章節標題、範本區塊、社群洞見）
+  - `course-outline.md` - 14 處參考更新（概覽、學習目標、章節資源）
 
-#### Validated
-- ✅ Zero remaining "ai-foundry" folder path references in English docs
-- ✅ Zero remaining "Microsoft Foundry" product name references in English docs
-- ✅ All navigation links functional with new folder structure
-- ✅ File and folder renames completed successfully
-- ✅ Cross-references between chapters validated
+#### 驗證
+- ✅ 英文文件中不再包含「ai-foundry」資料夾路徑參考
+- ✅ 英文文件中不再有「Microsoft Foundry」產品名稱參考殘留
+- ✅ 所有依新資料夾結構的導航連結皆正常運作
+- ✅ 完成檔案與資料夾更名
+- ✅ 章節間交叉參考已驗證無誤
 
-#### Notes
-- **Scope**: Changes applied to English documentation in `docs/` folder only
-- **Translations**: Translation folders (`translations/`) not updated in this version
-- **Workshop**: Workshop materials (`workshop/`) not updated in this version
-- **Examples**: Example files may still reference legacy naming (to be addressed in future update)
-- **External Links**: External URLs and GitHub repository references remain unchanged
+#### 備註
+- <strong>範圍</strong>：本次變更僅限於 `docs/` 資料夾中的英文文件
+- <strong>翻譯版</strong>：翻譯資料夾 (`translations/`) 尚未更新
+- <strong>研討會</strong>：工作坊材料 (`workshop/`) 尚未更新
+- <strong>範例</strong>：範例檔案可能仍然引用舊名（將於未來版本處理）
+- <strong>外部連結</strong>：外部 URL 及 GitHub 倉庫連結維持原狀
 
-#### Migration Guide for Contributors
-If you have local branches or documentation referencing the old structure:
-1. Update folder references: `docs/ai-foundry/` → `docs/microsoft-foundry/`
-2. Update file references: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-3. Replace product name: "Microsoft Foundry" → "Microsoft Foundry"
-4. Validate all internal documentation links still work
+#### 參與者遷移指南
+若您有本地分支或文檔仍指向舊結構：
+1. 更新資料夾參考：`docs/ai-foundry/` → `docs/microsoft-foundry/`
+2. 更新檔案參考：`azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+3. 替換產品名稱：「Microsoft Foundry」→「Microsoft Foundry」
+4. 確認所有內部文件連結仍可正常使用
 
 ---
 
 ### [v3.4.0] - 2025-10-24
 
-#### Infrastructure Preview and Validation Enhancements
-**This version introduces comprehensive support for the new Azure Developer CLI preview feature and enhances workshop user experience.**
+#### 基礎建設預覽與驗證強化
+**本版本全面支援 Azure Developer CLI 新增的基礎建設預覽功能並提升工作坊使用者體驗。**
 
-#### Added
-- **🧪 azd provision --preview Feature Documentation**: Comprehensive coverage of the new infrastructure preview capability
-  - Command reference and usage examples in cheat sheet
-  - Detailed integration in provisioning guide with use cases and benefits
-  - Pre-flight check integration for safer deployment validation
-  - Getting started guide updates with safety-first deployment practices
-- **🚧 Workshop Status Banner**: Professional HTML banner indicating workshop development status
-  - Gradient design with construction indicators for clear user communication
-  - Last updated timestamp for transparency
-  - Mobile-responsive design for all device types
+#### 新增
+- **🧪 azd provision --preview 功能文件**：涵蓋全新基礎建設預覽功能
+  - 指令參考與用法示例收錄於速查表
+  - 預置指南中詳述整合、應用案例與優勢
+  - 預檢查機制整合以強化安全部署驗證
+  - 入門指南更新，導入安全優先的部署實務
+- **🚧 工作坊狀態橫幅**：專業 HTML 橫幅顯示工作坊開發狀態
+  - 漸層設計搭配施工指示，清晰溝通用戶
+  - 最新更新時間戳示透明度
+  - 支援各類裝置的行動響應式設計
 
-#### Enhanced
-- **Infrastructure Safety**: Preview functionality integrated throughout deployment documentation
-- **Pre-deployment Validation**: Automated scripts now include infrastructure preview testing
-- **Developer Workflow**: Updated command sequences to include preview as best practice
-- **Workshop Experience**: Clear expectations set for users about content development status
+#### 強化
+- <strong>基礎建設安全性</strong>：整個部署文件中整合預覽功能
+- <strong>部署前驗證</strong>：自動化腳本新增基礎建設預覽測試
+- <strong>開發流程</strong>：更新指令序列，將預覽納入最佳實務
+- <strong>工作坊體驗</strong>：明確告知用戶內容開發狀態
 
-#### Changed
-- **Deployment Best Practices**: Preview-first workflow now recommended approach
-- **Documentation Flow**: Infrastructure validation moved earlier in learning process
-- **Workshop Presentation**: Professional status communication with clear development timeline
+#### 變更
+- <strong>部署最佳實務</strong>：建議採用預覽優先工作流程
+- <strong>文件流程</strong>：基礎建設驗證提前納入學習流程
+- <strong>工作坊呈現</strong>：專業狀態通知並附明確開發時程
 
-#### Improved
-- **Safety-First Approach**: Infrastructure changes can now be validated before deployment
-- **Team Collaboration**: Preview results can be shared for review and approval
-- **Cost Awareness**: Better understanding of resource costs before provisioning
-- **Risk Mitigation**: Reduced deployment failures through advance validation
+#### 改進
+- <strong>安全優先</strong>：基礎建設變更可於部署前驗證
+- <strong>團隊協作</strong>：可分享預覽結果以供審核與批准
+- <strong>成本意識</strong>：部署前更清楚預算與資源花費
+- <strong>風險降低</strong>：透過先行驗證減少部署失敗
 
-#### Technical Implementation
-- **Multi-document Integration**: Preview feature documented across 4 key files
-- **Command Patterns**: Consistent syntax and examples throughout documentation
-- **Best Practice Integration**: Preview included in validation workflows and scripts
-- **Visual Indicators**: Clear NEW feature markings for discoverability
+#### 技術實作
+- <strong>多文件整合</strong>：4 個關鍵檔案中均有預覽功能文件
+- <strong>指令範例</strong>：文件中保持一致語法與範例
+- <strong>最佳實務整合</strong>：驗證流程與指令腳本內均含預覽
+- <strong>視覺標示</strong>：明確「NEW」標記讓新功能易於發現
 
-#### Workshop Infrastructure
-- **Status Communication**: Professional HTML banner with gradient styling
-- **User Experience**: Clear development status prevents confusion
-- **Professional Presentation**: Maintains repository credibility while setting expectations
-- **Timeline Transparency**: October 2025 last updated timestamp for accountability
+#### 工作坊基礎建設
+- <strong>狀態通知</strong>：專業 HTML 橫幅搭配漸層樣式
+- <strong>用戶體驗</strong>：清楚說明開發狀態，避免誤解
+- <strong>專業呈現</strong>：維持倉庫可信度並設立期望
+- <strong>時程透明</strong>：2025 年 10 月最後更新時間標示
 
 ### [v3.3.0] - 2025-09-24
 
-#### Enhanced Workshop Materials and Interactive Learning Experience
-**This version introduces comprehensive workshop materials with browser-based interactive guides and structured learning paths.**
+#### 強化工作坊材料與互動學習體驗
+**本版本引入全面的瀏覽器互動式工作坊指南及結構化學習路徑。**
 
-#### Added
-- **🎥 Interactive Workshop Guide**: Browser-based workshop experience with MkDocs preview capability
-- **📝 Structured Workshop Instructions**: 7-step guided learning path from discovery to customization
-  - 0-Introduction: Workshop overview and setup
-  - 1-Select-AI-Template: Template discovery and selection process
-  - 2-Validate-AI-Template: Deployment and validation procedures
-  - 3-Deconstruct-AI-Template: Understanding template architecture
-  - 4-Configure-AI-Template: Configuration and customization
-  - 5-Customize-AI-Template: Advanced modifications and iterations
-  - 6-Teardown-Infrastructure: Cleanup and resource management
-  - 7-Wrap-up: Summary and next steps
-- **🛠️ Workshop Tooling**: MkDocs configuration with Material theme for enhanced learning experience
-- **🎯 Hands-On Learning Path**: 3-step methodology (Discovery → Deployment → Customization)
-- **📱 GitHub Codespaces Integration**: Seamless development environment setup
+#### 新增
+- **🎥 互動式工作坊指南**：基於瀏覽器的工作坊體驗，搭配 MkDocs 預覽功能
+- **📝 結構性工作坊指導**：7 步驟引導式學習流程，從探索至自訂化
+  - 0-介紹：工作坊概覽與設定
+  - 1-選擇 AI 模板：範本探索與選擇過程
+  - 2-驗證 AI 模板：部署與驗證程序
+  - 3-拆解 AI 模板：理解模板架構
+  - 4-配置 AI 模板：設定與自訂
+  - 5-自訂 AI 模板：進階修改與迭代
+  - 6-拆除基礎設施：清理與資源管理
+  - 7-結束：總結與後續步驟
+- **🛠️ 工作坊工具**：使用 MkDocs 配置 Material 主題提升學習體驗
+- **🎯 實務學習路徑**：3 步驟法 （探索 → 部署 → 自訂）
+- **📱 GitHub Codespaces 整合**：無縫開發環境設定
 
-#### Enhanced
-- **AI Workshop Lab**: Extended with comprehensive 2-3 hour structured learning experience
-- **Workshop Documentation**: Professional presentation with navigation and visual aids
-- **Learning Progression**: Clear step-by-step guidance from template selection to production deployment
-- **Developer Experience**: Integrated tooling for streamlined development workflows
+#### 強化
+- **AI 工作坊實驗室**：擴展為 2-3 小時完整結構化學習體驗
+- <strong>工作坊文件</strong>：專業呈現，具導航與視覺輔助
+- <strong>學習進程</strong>：從範本選擇到生產部署明確指導
+- <strong>開發者體驗</strong>：整合工具以簡化開發流程
 
-#### Improved
-- **Accessibility**: Browser-based interface with search, copy functionality, and theme toggle
-- **Self-Paced Learning**: Flexible workshop structure accommodating different learning speeds
-- **Practical Application**: Real-world AI template deployment scenarios
-- **Community Integration**: Discord integration for workshop support and collaboration
+#### 改善
+- <strong>可及性</strong>：瀏覽器介面具備搜尋、複製代碼與主題切換
+- <strong>自定節奏學習</strong>：工作坊架構彈性適應不同學習速度
+- <strong>實務應用</strong>：真實 AI 模板部署範例
+- <strong>社群整合</strong>：Discord 支援與合作
 
-#### Workshop Features
-- **Built-in Search**: Quick keyword and lesson discovery
-- **Copy Code Blocks**: Hover-to-copy functionality for all code examples
-- **Theme Toggle**: Dark/light mode support for different preferences
-- **Visual Assets**: Screenshots and diagrams for enhanced understanding
-- **Help Integration**: Direct Discord access for community support
+#### 工作坊功能
+- <strong>內建搜尋</strong>：快速關鍵字與課程查找
+- <strong>代碼區塊複製</strong>：滑鼠懸停即複製所有範例代碼
+- <strong>主題切換</strong>：支援深色／淺色模式
+- <strong>視覺資產</strong>：截圖與圖解加強理解
+- <strong>協助整合</strong>：直接連結 Discord 社群支援
 
 ### [v3.2.0] - 2025-09-17
 
-#### Major Navigation Restructuring and Chapter-Based Learning System
-**This version introduces a comprehensive chapter-based learning structure with enhanced navigation throughout the entire repository.**
+#### 大幅調整導航與章節化學習系統
+**本版本導入完整章節式學習架構，全面增強倉庫內的導航體驗。**
 
-#### Added
-- **📚 Chapter-Based Learning System**: Restructured entire course into 8 progressive learning chapters
-  - Chapter 1: Foundation & Quick Start (⭐ - 30-45 mins)
-  - Chapter 2: AI-First Development (⭐⭐ - 1-2 hours)
-  - Chapter 3: Configuration & Authentication (⭐⭐ - 45-60 mins)
-  - Chapter 4: Infrastructure as Code & Deployment (⭐⭐⭐ - 1-1.5 hours)
-  - Chapter 5: Multi-Agent AI Solutions (⭐⭐⭐⭐ - 2-3 hours)
-  - Chapter 6: Pre-Deployment Validation & Planning (⭐⭐ - 1 hour)
-  - Chapter 7: Troubleshooting & Debugging (⭐⭐ - 1-1.5 hours)
-  - Chapter 8: Production & Enterprise Patterns (⭐⭐⭐⭐ - 2-3 hours)
-- **📚 Comprehensive Navigation System**: Consistent navigation headers and footers across all documentation
-- **🎯 Progress Tracking**: Course completion checklist and learning verification system
-- **🗺️ Learning Path Guidance**: Clear entry points for different experience levels and goals
-- **🔗 Cross-Reference Navigation**: Related chapters and prerequisites clearly linked
+#### 新增
+- **📚 章節式學習系統**：將整個課程重構為 8 個循序漸進的學習章節
+  - 第一章：基礎與快速入門 (⭐ - 30-45 分鐘)
+  - 第二章：AI 優先開發 (⭐⭐ - 1-2 小時)
+  - 第三章：配置與身份驗證 (⭐⭐ - 45-60 分鐘)
+  - 第四章：基礎建設即程式碼與部署 (⭐⭐⭐ - 1-1.5 小時)
+  - 第五章：多代理 AI 解決方案 (⭐⭐⭐⭐ - 2-3 小時)
+  - 第六章：部署前驗證與規劃 (⭐⭐ - 1 小時)
+  - 第七章：故障排除與除錯 (⭐⭐ - 1-1.5 小時)
+  - 第八章：生產與企業實踐 (⭐⭐⭐⭐ - 2-3 小時)
+- **📚 完整導航系統**：所有文件均設置一致的導航標題與頁尾
+- **🎯 進度追蹤**：課程完成核對清單與學習驗證系統
+- **🗺️ 學習路徑指引**：為不同經驗層及目標提供明確入口
+- **🔗 交叉參考導航**：清楚連結相關章節與先決條件
 
-#### Enhanced
-- **README Structure**: Transformed into a structured learning platform with chapter-based organization
-- **Documentation Navigation**: Every page now includes chapter context and progression guidance
-- **Template Organization**: Examples and templates mapped to appropriate learning chapters
-- **Resource Integration**: Cheat sheets, FAQs, and study guides connected to relevant chapters
-- **Workshop Integration**: Hands-on labs mapped to multiple chapter learning objectives
+#### 強化
+- **README 結構**：改造為章節制組織的結構化學習平台
+- <strong>文件導航</strong>：每頁納入章節上下文與進程指引
+- <strong>範本組織</strong>：範例與模板映射至適合的學習章節
 
-#### Changed
-- **Learning Progression**: Moved from linear documentation to flexible chapter-based learning
-- **Configuration Placement**: Repositioned configuration guide as Chapter 3 for better learning flow
-- **AI Content Integration**: Better integration of AI-specific content throughout the learning journey
-- **Production Content**: Advanced patterns consolidated in Chapter 8 for enterprise learners
+- <strong>資源整合</strong>：與相關章節連結的速查表、常見問答與學習指南
+- <strong>工作坊整合</strong>：對應多個章節學習目標的實作實驗室
 
-#### Improved
-- **User Experience**: Clear navigation breadcrumbs and chapter progression indicators
-- **Accessibility**: Consistent navigation patterns for easier course traversal
-- **Professional Presentation**: University-style course structure suitable for academic and corporate training
-- **Learning Efficiency**: Reduced time to find relevant content through improved organization
+#### 變更
+- <strong>學習進程</strong>：從線性文件轉換為靈活的章節式學習
+- <strong>設定放置位置</strong>：將設定指南重新定位為第3章以優化學習流程
+- **AI內容整合**：在整個學習過程中更好地整合AI專屬內容
+- <strong>生產內容</strong>：第8章匯整進階模式，專為企業學習者設計
 
-#### Technical Implementation
-- **Navigation Headers**: Standardized chapter navigation across 40+ documentation files
-- **Footer Navigation**: Consistent progression guidance and chapter completion indicators
-- **Cross-Linking**: Comprehensive internal linking system connecting related concepts
-- **Chapter Mapping**: Templates and examples clearly associated with learning objectives
+#### 改善
+- <strong>使用者體驗</strong>：清晰的導航麵包屑與章節進度指示
+- <strong>無障礙設計</strong>：一致的導航模式便於課程瀏覽
+- <strong>專業呈現</strong>：大學風格課程結構，適合學術與企業培訓
+- <strong>學習效率</strong>：透過改進的組織結構減少查找相關內容的時間
 
-#### Study Guide Enhancement
-- **📚 Comprehensive Learning Objectives**: Restructured study guide to align with 8-chapter system
-- **🎯 Chapter-Based Assessment**: Each chapter includes specific learning objectives and practical exercises
-- **📋 Progress Tracking**: Weekly learning schedule with measurable outcomes and completion checklists
-- **❓ Assessment Questions**: Knowledge validation questions for each chapter with professional outcomes
-- **🛠️ Practical Exercises**: Hands-on activities with real deployment scenarios and troubleshooting
-- **📊 Skill Progression**: Clear advancement from basic concepts to enterprise patterns with career development focus
-- **🎓 Certification Framework**: Professional development outcomes and community recognition system
-- **⏱️ Timeline Management**: Structured 10-week learning plan with milestone validation
+#### 技術實作
+- <strong>導航標頭</strong>：40多個文件中標準化章節導航
+- <strong>頁腳導航</strong>：一致的進度引導與章節完成指示
+- <strong>交叉連結</strong>：全面的內部連結系統連接相關概念
+- <strong>章節對應</strong>：模板與範例明確對應學習目標
+
+#### 學習指南強化
+- **📚 全面學習目標**：重組學習指南對應8章系統
+- **🎯 章節評量**：每章包含具體學習目標與實務練習
+- **📋 進度追蹤**：具可量化結果與完成清單的每週學習計畫
+- **❓ 評量問題**：針對各章節的知識驗證題與專業成果
+- **🛠️ 實務練習**：實機部署情境與故障排除活動
+- **📊 技能進階**：明確從基礎概念到企業模式的職涯發展焦點
+- **🎓 證照框架**：專業發展成果與社群認可系統
+- **⏱️ 時間管理**：有里程碑驗證的結構化10週學習計畫
 
 ### [v3.1.0] - 2025-09-17
 
-#### Enhanced Multi-Agent AI Solutions
-**This version improves the multi-agent retail solution with better agent naming and enhanced documentation.**
+#### 強化多代理AI解決方案
+**此版本改進零售多代理解決方案，優化代理命名與文件內容。**
 
-#### Changed
-- **Multi-Agent Terminology**: Replaced "Cora agent" with "Customer agent" throughout retail multi-agent solution for clearer understanding
-- **Agent Architecture**: Updated all documentation, ARM templates, and code examples to use consistent "Customer agent" naming
-- **Configuration Examples**: Modernized agent configuration patterns with updated naming conventions
-- **Documentation Consistency**: Ensured all references use professional, descriptive agent names
+#### 變更
+- <strong>多代理術語</strong>：將零售多代理解決方案中的 "Cora agent" 全面替換為 "Customer agent" 以增進清晰度
+- <strong>代理架構</strong>：更新所有文件、ARM模板與程式碼範例，統一使用 "Customer agent" 命名
+- <strong>配置範例</strong>：現代化代理配置模式並更新命名規則
+- <strong>文件一致性</strong>：確保所有引用均使用專業且具描述性的代理名稱
 
-#### Enhanced
-- **ARM Template Package**: Updated retail-multiagent-arm-template with Customer agent references
-- **Architecture Diagrams**: Refreshed Mermaid diagrams with updated agent naming
-- **Code Examples**: Python classes and implementation examples now use CustomerAgent naming
-- **Environment Variables**: Updated all deployment scripts to use CUSTOMER_AGENT_NAME conventions
+#### 強化
+- **ARM模板套件**：更新 retail-multiagent-arm-template，包含 Customer agent 參考
+- <strong>架構圖</strong>：刷新 Mermaid 架構圖，更新代理命名
+- <strong>程式碼範例</strong>：Python 類別與實作範例改用 CustomerAgent 命名
+- <strong>環境變數</strong>：所有部署腳本使用 CUSTOMER_AGENT_NAME 命名規則
 
-#### Improved
-- **Developer Experience**: Clearer agent roles and responsibilities in documentation
-- **Production Readiness**: Better alignment with enterprise naming conventions
-- **Learning Materials**: More intuitive agent naming for educational purposes
-- **Template Usability**: Simplified understanding of agent functions and deployment patterns
+#### 改善
+- <strong>開發者體驗</strong>：文件中代理角色與職責更加清晰
+- <strong>生產準備</strong>：更符合企業命名慣例
+- <strong>學習資源</strong>：為教育用途提供更直觀的代理命名
+- <strong>模板可用性</strong>：簡化代理功能與部署模式的理解
 
-#### Technical Details
-- Updated Mermaid architecture diagrams with CustomerAgent references
-- Replaced CoraAgent class names with CustomerAgent in Python examples
-- Modified ARM template JSON configurations to use "customer" agent type
-- Updated environment variables from CORA_AGENT_* to CUSTOMER_AGENT_* patterns
-- Refreshed all deployment commands and container configurations
+#### 技術細節
+- 更新 Mermaid 架構圖引用 CustomerAgent
+- Python 範例中將 CoraAgent 類名替換為 CustomerAgent
+- 修改 ARM JSON 配置，使用 "customer" 代理類型
+- 環境變數從 CORA_AGENT_* 更新為 CUSTOMER_AGENT_*
+- 更新所有部署命令與容器配置
 
 ### [v3.0.0] - 2025-09-12
 
-#### Major Changes - AI Developer Focus and Microsoft Foundry Integration
-**This version transforms the repository into a comprehensive AI-focused learning resource with Microsoft Foundry integration.**
+#### 重大變更 - AI開發者專注與 Microsoft Foundry 整合
+**此版本將倉庫轉型為專注AI的完整學習資源，並整合 Microsoft Foundry。**
 
-#### Added
-- **🤖 AI-First Learning Path**: Complete restructure prioritizing AI developers and engineers
-- **Microsoft Foundry Integration Guide**: Comprehensive documentation for connecting AZD with Microsoft Foundry services
-- **AI Model Deployment Patterns**: Detailed guide covering model selection, configuration, and production deployment strategies
-- **AI Workshop Lab**: 2-3 小時的實作工作坊，將 AI 應用轉換為可由 AZD 部署的解決方案
-- **Production AI Best Practices**: 適合企業的模式，用於擴展、監控和保護 AI 工作負載
-- **AI-Specific Troubleshooting Guide**: 提供對 Microsoft Foundry 模型、Cognitive Services 以及 AI 部署問題的全面疑難排解
-- **AI Template Gallery**: 精選的 Microsoft Foundry 範本集合，並附帶複雜度評分
-- **Workshop Materials**: 完整的工作坊結構，包含實作實驗與參考資料
+#### 新增
+- **🤖 AI優先學習路徑**：全面重組，優先支援AI開發者及工程師
+- **Microsoft Foundry 整合指南**：完備的 AZD 與 Microsoft Foundry 服務連接文件
+- **AI模型部署模式**：涵蓋模型選擇、配置及生產部署策略的詳細指南
+- **AI工作坊實驗室**：2-3小時實作課程，教導將AI應用轉為可由AZD部署的解決方案
+- **生產AI最佳實踐**：企業等級擴充、監控與安全模範
+- **AI專屬除錯指南**：涵蓋 Microsoft Foundry 模型、認知服務及AI部署問題的全面除錯
+- **AI模板集**：精選 Microsoft Foundry 模板及難易度評級
+- <strong>工作坊教材</strong>：完善的工作坊結構含實作實驗室與參考資料
 
-#### Enhanced
-- **README Structure**: 以 AI 開發者為主，並包含來自 Microsoft Foundry Discord 的 45% 社群興趣數據
-- **Learning Paths**: 為 AI 開發者設計的專屬學習歷程，與學生和 DevOps 工程師的傳統路徑並列
-- **Template Recommendations**: 精選 AI 範本，包括 azure-search-openai-demo、contoso-chat 和 openai-chat-app-quickstart
-- **Community Integration**: 加強的 Discord 社群支援，包含 AI 專屬頻道與討論
+#### 強化
+- **README結構**：聚焦AI開發者，並有Microsoft Foundry Discord社群45%的興趣數據支撐
+- <strong>學習路徑</strong>：除傳統學生及DevOps工程師路徑外，新增專屬AI開發者旅程
+- <strong>模板推薦</strong>：特色AI模板包括 azure-search-openai-demo、contoso-chat 與 openai-chat-app-quickstart
+- <strong>社群整合</strong>：增強Discord社群支援，設立AI專區頻道與討論
 
-#### Security & Production Focus
-- **Managed Identity Patterns**: AI 專用的驗證與安全設定模式
-- **Cost Optimization**: 針對 AI 工作負載的 token 使用追蹤與預算控管
-- **Multi-Region Deployment**: 全球 AI 應用部署策略
-- **Performance Monitoring**: AI 專屬指標與 Application Insights 整合
+#### 安全與生產焦點
+- <strong>管理身分模式</strong>：AI專用認證與安全設定
+- <strong>成本優化</strong>：AI工作負載的token使用量追蹤與預算控管
+- <strong>多區域部署</strong>：全球AI應用部署策略
+- <strong>效能監控</strong>：AI專屬指標與Application Insights整合
 
-#### Documentation Quality
-- **Linear Course Structure**: 從入門到進階 AI 部署模式的合乎邏輯學習進程
-- **Validated URLs**: 所有外部程式庫連結已驗證且可存取
-- **Complete Reference**: 所有內部文件連結已驗證且可運作
-- **Production Ready**: 含實務範例的企業部署模式
+#### 文件品質
+- <strong>線性課程結構</strong>：從入門到進階AI部署模式的邏輯進階
+- **已驗證URL**：所有外部倉庫連結均測試可用
+- <strong>完整參考</strong>：所有內部文件連結皆有效
+- <strong>生產就緒</strong>：配合真實案例的企業部署模式
 
 ### [v2.0.0] - 2025-09-09
 
-#### Major Changes - Repository Restructure and Professional Enhancement
-**This version represents a significant overhaul of the repository structure and content presentation.**
+#### 重大變更 - 倉庫重新結構與專業提升
+**此版本象徵倉庫結構與內容呈現的重大重整。**
 
-#### Added
-- **Structured Learning Framework**: 所有文件頁面現在都包含簡介、學習目標與學習成果章節
-- **Navigation System**: 在所有文件中新增「上一課/下一課」連結，以引導學習進程
-- **Study Guide**: 提供學習目標、練習題與評量資料的完整 study-guide.md
-- **Professional Presentation**: 移除所有表情符號圖示以提升無障礙與專業外觀
-- **Enhanced Content Structure**: 改善學習材料的組織與流程
+#### 新增
+- <strong>結構化學習框架</strong>：所有文件頁面新增介紹、學習目標與學習成果區塊
+- <strong>導航系統</strong>：整合前後課程連結，指引學習流程
+- <strong>學習指南</strong>：完善 study-guide.md，含學習目標、練習與評量材料
+- <strong>專業呈現</strong>：移除所有emoji圖示，提升可及性與專業外觀
+- <strong>內容結構強化</strong>：改進學習資源的組織與流程
 
-#### Changed
-- **Documentation Format**: 將所有文件標準化為一致的以學習為中心的結構
-- **Navigation Flow**: 在所有學習材料中實施合乎邏輯的進程
-- **Content Presentation**: 移除裝飾性元素，以換取清晰且專業的格式
-- **Link Structure**: 更新所有內部連結以支援新的導覽系統
+#### 變更
+- <strong>文件格式</strong>：標準化所有文件，採用一致且聚焦學習的結構
+- <strong>導航流程</strong>：實現學習資料的邏輯進展
+- <strong>內容呈現</strong>：移除裝飾元素，採用清晰且專業的格式
+- <strong>連結結構</strong>：更新所有內部連結以支持新導航系統
 
-#### Improved
-- **Accessibility**: 移除對表情符號的依賴，以提升螢幕閱讀器相容性
-- **Professional Appearance**: 清爽、學術風格的呈現，適合企業學習
-- **Learning Experience**: 結構化方法，為每一課提供清晰的目標與成果
-- **Content Organization**: 改善相關主題間的邏輯流程與連結
+#### 改善
+- <strong>無障礙設計</strong>：移除對emoji的依賴，提高螢幕閱讀器相容性
+- <strong>專業外觀</strong>：乾淨、學術風格呈現，適合企業學習
+- <strong>學習體驗</strong>：結構化方式，為每課節設明確目標與成果
+- <strong>內容組織</strong>：強化相關主題間的邏輯連結與流程
 
 ### [v1.0.0] - 2025-09-09
 
-#### Initial Release - Comprehensive AZD Learning Repository
+#### 初始發布 - 全面AZD學習資源庫
 
-#### Added
-- <strong>核心文件結構</strong>
-  - 完整的入門指南系列
-  - 完整的部署與資源佈建文件
-  - 詳細的疑難排解資源與除錯指南
-  - 預部署驗證工具與程序
+#### 新增
+- <strong>核心文件架構</strong>
+  - 完整入門指南系列
+  - 全面部署與資源提供文件
+  - 詳細除錯與故障排解指引
+  - 部署前驗證工具與程序
 
 - <strong>入門模組</strong>
-  - AZD 基礎：核心概念與術語
-  - 安裝指南：平台特定的設定說明
-  - 設定指南：環境設定與驗證
-  - 第一個專案教學：逐步實作學習
+  - AZD 基礎知識：核心概念與術語
+  - 安裝指南：平台特定安裝指示
+  - 設定指南：環境設置與認證
+  - 首個專案教學：逐步實作學習
 
-- <strong>部署與資源佈建模組</strong>
+- <strong>部署與資源提供模組</strong>
   - 部署指南：完整工作流程文件
-  - 佈建指南：使用 Bicep 的基礎架構即程式碼
-  - 生產部署的最佳實務
+  - 資源提供指南：以Bicep實現基礎架構即程式碼
+  - 生產部署最佳實踐
   - 多服務架構模式
 
-- <strong>預部署驗證模組</strong>
-  - 容量規劃：Azure 資源可用性驗證
-  - SKU 選擇：完整的服務方案指引
-  - 起飛前檢查：自動化驗證腳本（PowerShell 與 Bash）
+- <strong>部署前驗證模組</strong>
+  - 容量規劃：Azure資源可用性驗證
+  - SKU選擇：完整服務層級指引
+  - 預檢檢查：自動化驗證腳本（PowerShell與Bash）
   - 成本估算與預算規劃工具
 
-- <strong>疑難排解模組</strong>
-  - 常見問題：常遇到的問題與解決方案
-  - 除錯指南：系統化的疑難排解方法
+- <strong>故障排解模組</strong>
+  - 常見問題：頻繁遇見的問題與解決
+  - 除錯指南：系統化排錯方法
   - 進階診斷技術與工具
   - 效能監控與優化
 
-- <strong>資源與參考</strong>
-  - 指令速查表：重要指令的快速參考
-  - 詞彙表：完整的術語與縮寫定義
-  - 常見問題：對常見提問的詳細回答
-  - 外部資源連結與社群連繫
+- <strong>資源與參考資料</strong>
+  - 命令速查表：重要命令快速參考
+  - 詞彙表：完整術語與縮寫定義
+  - FAQ：詳細常見問題解答
+  - 外部資源連結與社群連結
 
-- <strong>範例與範本</strong>
-  - 簡單 Web 應用範例
-  - 靜態網站部署範本
+- <strong>範例與模板</strong>
+  - 簡單Web應用範例
+  - 靜態網站部署模板
   - 容器應用設定
-  - 資料庫整合模式
+  - 數據庫整合模式
   - 微服務架構範例
   - 無伺服器函式實作
 
-#### Features
-- <strong>跨平台支援</strong>: 提供 Windows、macOS 與 Linux 的安裝與設定指南
-- <strong>多種技能層級</strong>: 內容針對從學生到專業開發者的多種技能層級設計
-- <strong>實作導向</strong>: 實作範例與真實世界情境
-- <strong>完整涵蓋</strong>: 從基本概念到進階企業模式的完整涵蓋
-- **Security-First Approach**: 將安全最佳實務整合於各處
-- **Cost Optimization**: 關於成本效益部署與資源管理的指引
+#### 特點
+- <strong>多平台支援</strong>：Windows、macOS及Linux安裝與配置指南
+- <strong>多種技能層級</strong>：內容涵蓋學生至專業開發者
+- <strong>實務導向</strong>：實作範例與真實情境
+- <strong>全面內容涵蓋</strong>：從基礎概念至進階企業模式
+- <strong>安全優先設計</strong>：貫穿安全最佳實踐
+- <strong>成本優化</strong>：成本效益的部署與資源管理指導
 
-#### Documentation Quality
-- <strong>詳細程式碼範例</strong>: 實用且已測試的程式碼範例
-- <strong>逐步指示</strong>: 清晰且可操作的指導
-- <strong>完整的錯誤處理</strong>: 針對常見問題的疑難排解
-- <strong>最佳實務整合</strong>: 行業標準與建議
-- <strong>版本相容性</strong>: 與最新 Azure 服務及 azd 功能保持同步
+#### 文件品質
+- <strong>詳細程式碼範例</strong>：實用且經測試的程式碼範本
+- <strong>逐步指導</strong>：清晰、可執行的操作引導
+- <strong>全面錯誤處理</strong>：常見問題排錯
+- <strong>最佳實踐整合</strong>：業界標準與建議
+- <strong>版本相容性</strong>：與最新Azure服務及azd功能同步
 
-## 計畫中的未來增強
+## 計畫中的未來增強功能
 
-### Version 3.1.0 (Planned)
-#### AI Platform Expansion
-- **Multi-Model Support**: 支援 Hugging Face、Azure Machine Learning 與自訂模型的整合模式
-- **AI Agent Frameworks**: 針對 LangChain、Semantic Kernel 與 AutoGen 部署的範本
-- **Advanced RAG Patterns**: 除 Azure AI Search 外的向量資料庫選項（Pinecone、Weaviate 等）
-- **AI Observability**: 強化模型效能、token 使用與回應品質的監控
+### 版本 3.1.0（計劃中）
+#### AI平台擴展
+- <strong>多模型支援</strong>：整合 Hugging Face、Azure Machine Learning 與自訂模型的模式
+- **AI代理框架**：LangChain、Semantic Kernel 與 AutoGen 部署模板
+- **進階RAG模式**：Azure AI Search 以外的向量資料庫選項（Pinecone、Weaviate等）
+- **AI可觀察性**：增強模型效能、token使用與回應品質監控
 
-#### Developer Experience
-- **VS Code Extension**: 整合 AZD 與 Microsoft Foundry 的開發體驗
-- **GitHub Copilot Integration**: AI 輔助的 AZD 範本產生
-- **Interactive Tutorials**: 具自動驗證的互動式實作練習，針對 AI 情境
-- **Video Content**: 針對視覺學習者的補充視訊教學，重點為 AI 部署
+#### 開發者體驗
+- **VS Code 擴充套件**：整合 AZD 與 Microsoft Foundry 的開發體驗
+- **GitHub Copilot 整合**：AI輔助的 AZD 模板生成
+- <strong>互動教學</strong>：具自動驗證的AI場景實作練習
+- <strong>影片內容</strong>：專注於AI部署的視覺化補充教學
 
-### Version 4.0.0 (Planned)
-#### Enterprise AI Patterns
-- **Governance Framework**: AI 模型治理、合規與稽核記錄
-- **Multi-Tenant AI**: 為多個客戶提供隔離 AI 服務的模式
-- **Edge AI Deployment**: 與 Azure IoT Edge 及容器實例的整合
-- **Hybrid Cloud AI**: AI 工作負載的多雲與混合部署模式
+### 版本 4.0.0（計劃中）
+#### 企業AI模式
+- <strong>治理框架</strong>：AI模型治理、合規與稽核追蹤
+- **多租戶AI**：提供隔離AI服務以服務多個客戶
+- **邊緣AI部署**：整合 Azure IoT Edge 與容器實例
+- **混合雲AI**：AI工作負載的多雲與混合部署模式
 
-#### Advanced Features
-- **AI Pipeline Automation**: 與 Azure Machine Learning 流程整合的 MLOps 自動化
-- **Advanced Security**: 零信任模式、私人端點與進階威脅防護
-- **Performance Optimization**: 針對高吞吐量 AI 應用的進階調校與擴展策略
-- **Global Distribution**: AI 應用的內容傳遞與邊緣快取模式
+#### 進階功能
+- **AI管線自動化**：與 Azure Machine Learning 管線的MLOps整合
+- <strong>進階安全性</strong>：零信任模式、私人端點與進階威脅防護
+- <strong>效能優化</strong>：針對高吞吐AI應用的優化與擴充策略
+- <strong>全球分發</strong>：AI應用的內容傳遞與邊緣快取策略
 
-### Version 3.0.0 (Planned) - Superseded by Current Release
-#### Proposed Additions - Now Implemented in v3.0.0
-- ✅ **AI-Focused Content**: 全面的 Microsoft Foundry 整合（已完成）
-- ✅ **Interactive Tutorials**: 實作式 AI 工作坊實驗室（已完成）
-- ✅ **Advanced Security Module**: AI 專用的安全模式（已完成）
-- ✅ **Performance Optimization**: AI 工作負載調優策略（已完成）
+### 版本 3.0.0（計劃中）- 已由現行發布取代
+#### 建議新增 - 已於 v3.0.0 實施
+- ✅ **AI專注內容**：全面 Microsoft Foundry 整合（已完成）
+- ✅ <strong>互動教學</strong>：AI工作坊實作實驗室（已完成）
+- ✅ <strong>進階安全模組</strong>：AI專屬安全模式（已完成）
+- ✅ <strong>效能優化</strong>：AI工作負載調校策略（已完成）
 
-### Version 2.1.0 (Planned) - Partially Implemented in v3.0.0
-#### Minor Enhancements - Some Completed in Current Release
-- ✅ **Additional Examples**: 以 AI 為重點的部署情境（已完成）
-- ✅ **Extended FAQ**: AI 專用的問題與疑難排解（已完成）
-- **Tool Integration**: 強化的 IDE 與編輯器整合指南
-- ✅ **Monitoring Expansion**: AI 專屬的監控與告警模式（已完成）
+### 版本 2.1.0（計劃中）- 部分於 v3.0.0 實施
+#### 小幅增強 - 部分已完成於現行版本
+- ✅ <strong>額外範例</strong>：AI專注的部署場景（已完成）
+- ✅ **擴充FAQ**：AI專屬問題與除錯（已完成）
+- <strong>工具整合</strong>：增強IDE與編輯器整合指導
+- ✅ <strong>監控擴展</strong>：AI專用監控與警示模式（已完成）
 
-#### Still Planned for Future Release
-- **Mobile-Friendly Documentation**: 針對行動學習的響應式設計
-- **Offline Access**: 可下載的文件套件
-- **Enhanced IDE Integration**: 用於 AZD + AI 工作流程的 VS Code 擴充功能
-- **Community Dashboard**: 即時社群指標與貢獻追蹤
+#### 尚在計劃中未來版本
+- <strong>行動友好文件</strong>：響應式設計以強化行動學習
+- <strong>離線存取</strong>：可下載的文件套件
+- **進階IDE整合**：AZD與AI工作流的VS Code擴充
+- <strong>社群儀表板</strong>：即時社群指標與貢獻追蹤
 
-## Contributing to the Changelog
+## 對變更日誌的貢獻
 
-### Reporting Changes
-在對此儲存庫做出貢獻時，請確保變更記錄條目包含：
+### 報告變更
+對本倉庫貢獻時，請確保變更日誌條目包含：
 
-1. **Version Number**: 遵循語義化版本號（major.minor.patch）
-2. **Date**: 發行或更新日期，格式為 YYYY-MM-DD
-3. **Category**: 分類：Added, Changed, Deprecated, Removed, Fixed, Security
-4. **Clear Description**: 簡潔描述變更內容
-5. **Impact Assessment**: 變更對現有使用者的影響
+1. <strong>版本號碼</strong>：遵循語義化版本規範（主版本.次版本.補丁）
+2. <strong>日期</strong>：發布或更新日期，格式為 YYYY-MM-DD
+3. <strong>類別</strong>：新增、變更、棄用、移除、修正、安全
+4. <strong>明確描述</strong>：簡潔說明變更內容
+5. <strong>影響評估</strong>：對現有使用者的影響說明
 
-### Change Categories
+### 變更類別
 
 #### 新增
-- 新增功能、文件章節或能力
-- 新增範例、範本或學習資源
+- 新功能、文件區塊或能力
+- 新增範例、模板或學習資源
 - 額外工具、腳本或實用程式
 
 #### 變更
-- 對既有功能或文件的修改
-- 提升清晰度或準確度的更新
-- 內容或組織結構的重整
+- 對現有功能或文件的修改
+- 改善清晰度或準確性的更新
+- 內容或組織重整
 
-#### 已棄用
-- 正在逐步淘汰的功能或方法
-- 預定移除的文件章節
-- 已有更佳替代方法的做法
+#### 棄用
+- 將逐步淘汰的功能或方法
+- 預定移除的文件區塊
+- 有更佳替代方案的方法
 
 #### 移除
 - 不再相關的功能、文件或範例
-- 過時資訊或已棄用的方法
-- 冗餘或已整合的內容
+- 過時資訊或棄用方法
+- 重複或合併的內容
 
 #### 修正
-- 對文件或程式碼錯誤的修正
-- 已回報問題或故障的解決
-- 提升準確性或功能性的改善
+- 文件或程式碼中的錯誤修正
+- 已回報問題的解決
+- 準確度或功能性的提升
 
-#### 安全
-- 與安全相關的改進或修補
-- 更新安全最佳實務
-- 資安漏洞的修補
 
-### Semantic Versioning Guidelines
+#### 安全性
+- 與安全性相關的改進或修復
+- 安全最佳實踐的更新
+- 安全漏洞的解決
+
+### 語意版本控制指南
 
 #### 主要版本 (X.0.0)
-- 需要使用者採取行動的重大變更
+- 需使用者介入的破壞性變更
 - 內容或組織的重大重構
-- 改變基本方法或方法論的變更
+- 改變基本方法或策略的變更
 
 #### 次要版本 (X.Y.0)
-- 新增功能或內容
-- 維持向後相容的增強功能
+- 新功能或內容新增
+- 維持向後相容性的強化
 - 額外的範例、工具或資源
 
 #### 修補版本 (X.Y.Z)
-- 錯誤修正與更正
-- 對既有內容的小幅改進
-- 說明與小幅強化
+- 錯誤修正與校正
+- 對現有內容的小幅改進
+- 澄清說明與微小增強
 
-## Community Feedback and Suggestions
+## 社群回饋與建議
 
-我們積極鼓勵社群回饋來改進此學習資源：
+我們積極鼓勵社群提供回饋以改進此學習資源：
 
-### How to Provide Feedback
-- **GitHub Issues**: 回報問題或建議改善（歡迎 AI 相關問題）
-- **Discord Discussions**: 分享想法並與 Microsoft Foundry 社群互動
-- **Pull Requests**: 直接為內容提出改進，特別是 AI 範本與指南
-- **Microsoft Foundry Discord**: 參與 #Azure 頻道，討論 AZD + AI 主題
-- **Community Forums**: 參與更廣泛的 Azure 開發者討論
+### 如何提供回饋
+- **GitHub Issues**：回報問題或建議改進（歡迎針對 AI 相關議題）
+- **Discord 討論**：分享想法並與 Microsoft Foundry 社群互動
+- **Pull Requests**：直接貢獻內容改進，尤其是 AI 範本與指南
+- **Microsoft Foundry Discord**：參與 #Azure 頻道進行 AZD + AI 議題討論
+- <strong>社群論壇</strong>：參與更廣泛的 Azure 開發者討論
 
-### Feedback Categories
-- **AI Content Accuracy**: 修正 AI 服務整合與部署資訊的錯誤
-- **Learning Experience**: 對改善 AI 開發者學習流程的建議
-- **Missing AI Content**: 針對額外 AI 範本、模式或範例的需求
-- **Accessibility**: 對多元學習需求的改善
-- **AI Tool Integration**: 關於更佳 AI 開發工作流程整合的建議
-- **Production AI Patterns**: 針對企業 AI 部署模式的需求
+### 回饋分類
+- **AI 內容準確度**：修正 AI 服務整合與部署資訊
+- <strong>學習體驗</strong>：針對 AI 開發者學習流程的改進建議
+- **缺失 AI 內容**：請求新增更多 AI 範本、模式或範例
+- <strong>無障礙性</strong>：改善多元學習需求的功能
+- **AI 工具整合**：提出更佳 AI 開發流程整合的建議
+- **生產環境 AI 模式**：企業 AI 部署模式的需求
 
-### Response Commitment
-- **Issue Response**: 在 48 小時內回應已回報的問題
-- **Feature Requests**: 在一週內評估
-- **Community Contributions**: 在一週內審核
-- **Security Issues**: 優先處理並迅速回應
+### 回應承諾
+- <strong>問題回應</strong>：針對回報的問題，48 小時內回應
+- <strong>功能請求</strong>：一週內評估
+- <strong>社群貢獻</strong>：一週內審核
+- <strong>安全議題</strong>：立即優先處理與快速回應
 
-## Maintenance Schedule
+## 維護計畫
 
-### Regular Updates
-- **Monthly Reviews**: 內容準確性與連結驗證
-- **Quarterly Updates**: 重大內容新增與改進
-- **Semi-Annual Reviews**: 全面重構與增強
-- **Annual Releases**: 重大版本更新與顯著改進
+### 定期更新
+- <strong>每月檢視</strong>：內容準確度與連結驗證
+- <strong>每季更新</strong>：主要內容新增與改進
+- <strong>半年檢視</strong>：全面重構與強化
+- <strong>年度發行</strong>：重大版本更新與重大改進
 
-### Monitoring and Quality Assurance
-- **Automated Testing**: 定期驗證程式碼範例與連結
-- **Community Feedback Integration**: 定期納入使用者建議
-- **Technology Updates**: 與最新 Azure 服務和 azd 發行版保持一致
-- **Accessibility Audits**: 定期檢視以符合共融設計原則
+### 監控與品質保證
+- <strong>自動化測試</strong>：定期驗證程式碼範例與連結
+- <strong>社群回饋整合</strong>：定期納入使用者建議
+- <strong>技術更新</strong>：與最新 Azure 服務及 azd 發行保持一致
+- <strong>無障礙性審核</strong>：定期檢視符合包容性設計原則
 
-## Version Support Policy
+## 版本支援政策
 
-### Current Version Support
-- **Latest Major Version**: 提供完整支援並定期更新
-- **Previous Major Version**: 提供 12 個月的安全更新與重大修補
-- **Legacy Versions**: 僅由社群支援，無官方更新
+### 當前版本支援
+- <strong>最新主要版本</strong>：完整支援與定期更新
+- <strong>前一主要版本</strong>：12 個月的安全更新與重要修補
+- <strong>舊版</strong>：僅社群支援，無官方更新
 
-### Migration Guidance
-當主要版本釋出時，我們提供：
-- **Migration Guides**: 逐步遷移指引
-- **Compatibility Notes**: 有關破壞性變更的細節
-- **Tool Support**: 協助遷移的腳本或工具
-- **Community Support**: 專門的論壇以討論遷移問題
+### 遷移指引
+主要版本發行時，我們提供：
+- <strong>遷移指南</strong>：逐步轉換說明
+- <strong>相容性說明</strong>：關於破壞性變更的細節
+- <strong>工具支援</strong>：協助遷移的腳本或工具
+- <strong>社群支援</strong>：專門的遷移問題論壇
 
 ---
 
 <strong>導覽</strong>
-- **Previous Lesson**: [學習指南](resources/study-guide.md)
-- **Next Lesson**: 返回 [主要 README](README.md)
+- <strong>上一課</strong>：[學習指南](resources/study-guide.md)
+- <strong>下一課</strong>：返回 [主要自述檔](README.md)
 
-<strong>保持更新</strong>: 持續關注此儲存庫，以取得有關新版本與學習材料重要更新的通知。
+<strong>保持更新</strong>：追蹤本存放庫以獲得有關新發行版本及重要學習材料更新的通知。
 
 ---
 

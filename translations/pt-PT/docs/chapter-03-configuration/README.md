@@ -6,23 +6,23 @@
 
 ## Visão Geral
 
-Este capítulo aborda a configuração do ambiente, padrões de autenticação e melhores práticas de segurança para implementações com Azure Developer CLI.
+Este capítulo cobre a configuração do ambiente, padrões de autenticação e melhores práticas de segurança para implementações com o Azure Developer CLI.
 
-> Validado com `azd 1.25.6` em junho de 2026.
+> Validado com `azd 1.27.1` em julho de 2026.
 
 ## Objetivos de Aprendizagem
 
-Ao concluir este capítulo, irá:
-- Dominar a hierarquia de configuração AZD
+Ao completar este capítulo, irá:
+- Dominar a hierarquia de configuração do AZD
 - Gerir múltiplos ambientes (dev, staging, prod)
 - Implementar autenticação segura com identidades geridas
-- Configurar definições específicas do ambiente
+- Configurar definições específicas de ambiente
 
 ---
 
-## 📚 Lições
+## 📚 Aulas
 
-| # | Lição | Descrição | Tempo |
+| # | Aula | Descrição | Tempo |
 |---|--------|-------------|------|
 | 1 | [Guia de Configuração](configuration.md) | Configuração e gestão do ambiente | 30 min |
 | 2 | [Autenticação & Segurança](authsecurity.md) | Padrões de identidade gerida e RBAC | 30 min |
@@ -52,9 +52,9 @@ azd env get-values
 
 ## 🔧 Hierarquia de Configuração
 
-O AZD aplica definições nesta ordem (posteriores sobrepõem anteriores):
+O AZD aplica as definições nesta ordem (mais recentes sobrepõem as anteriores):
 
-1. **Valores por defeito** (incorporados nos templates)
+1. **Valores predefinidos** (integrados nos modelos)
 2. **azure.yaml** (configuração do projeto)
 3. **Variáveis de ambiente** (`azd env set`)
 4. **Flags da linha de comando** (`--location eastus`)
@@ -67,16 +67,16 @@ O AZD aplica definições nesta ordem (posteriores sobrepõem anteriores):
 # Use identidade gerida (recomendado)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Verificar estado da autenticação AZD
+# Verifique o estado da autenticação AZD
 azd auth status
 
-# Opcional: verificar contexto do Azure CLI se planeia executar comandos az
+# Opcional: verifique o contexto do Azure CLI se planeia executar comandos az
 az account show
 
-# Reautenticar se necessário
+# Reautentique se necessário
 azd auth login
 
-# Opcional: atualizar autenticação do Azure CLI para comandos az
+# Opcional: atualize a autenticação do Azure CLI para comandos az
 az login
 ```
 
@@ -87,7 +87,7 @@ az login
 | Direção | Capítulo |
 |-----------|---------|
 | **Anterior** | [Capítulo 2: Desenvolvimento de IA](../chapter-02-ai-development/README.md) |
-| **Seguinte** | [Capítulo 4: Infraestrutura](../chapter-04-infrastructure/README.md) |
+| **Próximo** | [Capítulo 4: Infraestrutura](../chapter-04-infrastructure/README.md) |
 
 ---
 

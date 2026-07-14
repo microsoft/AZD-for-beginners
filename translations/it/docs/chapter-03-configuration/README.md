@@ -1,6 +1,6 @@
 # Capitolo 3: Configurazione e Autenticazione
 
-**📚 Corso**: [AZD For Beginners](../../README.md) | **⏱️ Durata**: 45-60 minutes | **⭐ Complessità**: Intermedio
+**📚 Corso**: [AZD Per Principianti](../../README.md) | **⏱️ Durata**: 45-60 minuti | **⭐ Complessità**: Intermedio
 
 ---
 
@@ -8,28 +8,28 @@
 
 Questo capitolo tratta la configurazione dell'ambiente, i modelli di autenticazione e le migliori pratiche di sicurezza per le distribuzioni con Azure Developer CLI.
 
-> Validato con `azd 1.25.6` a giugno 2026.
+> Validato con `azd 1.27.1` a luglio 2026.
 
 ## Obiettivi di apprendimento
 
 Completando questo capitolo, sarai in grado di:
 - Padroneggiare la gerarchia di configurazione di AZD
 - Gestire più ambienti (dev, staging, prod)
-- Implementare un'autenticazione sicura con managed identities
+- Implementare un’autenticazione sicura con identità gestite
 - Configurare impostazioni specifiche per ambiente
 
 ---
 
 ## 📚 Lezioni
 
-| # | Lezione | Descrizione | Tempo |
-|---|--------|-------------|------|
-| 1 | [Guida alla configurazione](configuration.md) | Configurazione e gestione dell'ambiente | 30 min |
-| 2 | [Autenticazione e Sicurezza](authsecurity.md) | Managed identity e modelli RBAC | 30 min |
+| # | Lezione | Descrizione | Durata |
+|---|--------|-------------|--------|
+| 1 | [Guida alla Configurazione](configuration.md) | Configurazione e gestione dell'ambiente | 30 min |
+| 2 | [Autenticazione e Sicurezza](authsecurity.md) | Modelli di identità gestita e RBAC | 30 min |
 
 ---
 
-## 🚀 Avvio rapido
+## 🚀 Avvio Rapido
 
 ```bash
 # Crea più ambienti
@@ -37,46 +37,46 @@ azd env new dev
 azd env new staging
 azd env new prod
 
-# Passa tra gli ambienti
+# Cambia ambiente
 azd env select prod
 
-# Imposta le variabili d'ambiente
+# Imposta variabili di ambiente
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Visualizza la configurazione
+# Visualizza configurazione
 azd env get-values
 ```
 
 ---
 
-## 🔧 Gerarchia di configurazione
+## 🔧 Gerarchia di Configurazione
 
 AZD applica le impostazioni in questo ordine (le successive sovrascrivono le precedenti):
 
-1. **Valori predefiniti** (integrati nei template)
+1. **Valori predefiniti** (inclusi nei modelli)
 2. **azure.yaml** (configurazione del progetto)
 3. **Variabili d'ambiente** (`azd env set`)
-4. **Flag della riga di comando** (`--location eastus`)
+4. **Flag da riga di comando** (`--location eastus`)
 
 ---
 
-## 🔐 Best practice per la sicurezza
+## 🔐 Migliori Pratiche di Sicurezza
 
 ```bash
 # Usa l'identità gestita (consigliato)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Verifica lo stato di autenticazione di AZD
+# Controlla lo stato di autenticazione AZD
 azd auth status
 
-# Opzionale: verifica il contesto dell'Azure CLI se prevedi di eseguire comandi az
+# Facoltativo: verifica il contesto Azure CLI se prevedi di eseguire comandi az
 az account show
 
-# Riautenticati se necessario
+# Effettua nuovamente l'autenticazione se necessario
 azd auth login
 
-# Opzionale: aggiorna l'autenticazione dell'Azure CLI per i comandi az
+# Facoltativo: aggiorna l'autenticazione Azure CLI per i comandi az
 az login
 ```
 
@@ -85,16 +85,16 @@ az login
 ## 🔗 Navigazione
 
 | Direzione | Capitolo |
-|-----------|---------|
+|-----------|----------|
 | **Precedente** | [Capitolo 2: Sviluppo AI](../chapter-02-ai-development/README.md) |
 | **Successivo** | [Capitolo 4: Infrastruttura](../chapter-04-infrastructure/README.md) |
 
 ---
 
-## 📖 Risorse correlate
+## 📖 Risorse Correlate
 
-- [Controlli pre-distribuzione](../chapter-06-pre-deployment/README.md)
-- [Risoluzione dei problemi](../chapter-07-troubleshooting/common-issues.md)
+- [Controlli Pre-Distribuzione](../chapter-06-pre-deployment/README.md)
+- [Risoluzione Problemi](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

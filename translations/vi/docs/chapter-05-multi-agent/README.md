@@ -1,51 +1,51 @@
 # Chương 5: Giải pháp AI đa tác nhân
 
-**📚 Khóa học**: [AZD Dành Cho Người Mới](../../README.md) | **⏱️ Thời lượng**: 2-3 giờ | **⭐ Độ phức tạp**: Nâng cao
+**📚 Khóa học**: [AZD cho Người mới bắt đầu](../../README.md) | **⏱️ Thời lượng**: 2-3 giờ | **⭐ Độ phức tạp**: Nâng cao
 
 ---
 
 ## Tổng quan
 
-Chương này đề cập đến các mẫu kiến trúc đa tác nhân nâng cao, điều phối tác nhân và các triển khai AI sẵn sàng cho môi trường sản xuất cho các kịch bản phức tạp.
+Chương này đề cập đến các mô hình kiến trúc đa tác nhân nâng cao, sự phối hợp giữa các tác nhân, và triển khai AI sẵn sàng cho sản xuất trong các kịch bản phức tạp.
 
-> Đã xác thực với `azd 1.25.6` vào tháng 6 năm 2026.
+> Đã xác thực trên `azd 1.27.1` vào tháng 7 năm 2026.
 
 ## Mục tiêu học tập
 
-Khi hoàn thành chương này, bạn sẽ:
-- Hiểu các mẫu kiến trúc đa tác nhân
-- Triển khai hệ thống tác nhân AI được điều phối
-- Triển khai giao tiếp giữa các tác nhân
-- Xây dựng giải pháp đa tác nhân sẵn sàng cho môi trường sản xuất
+Sau khi hoàn thành chương này, bạn sẽ:
+- Hiểu các mô hình kiến trúc đa tác nhân
+- Triển khai hệ thống các tác nhân AI phối hợp
+- Thực hiện giao tiếp giữa các tác nhân
+- Xây dựng các giải pháp đa tác nhân sẵn sàng cho sản xuất
 
 ---
 
-## 📚 Bài học
+## 📚 Các bài học
 
-| # | Lesson | Description | Time |
+| # | Bài học | Mô tả | Thời gian |
 |---|--------|-------------|------|
-| 1 | [Cơ bản về đa tác nhân](multi-agent-basics.md) | Thực hành: triển khai ứng dụng đa tác nhân hoạt động bằng `azd up` | 45 phút |
-| 2 | [Mẫu điều phối](../chapter-06-pre-deployment/coordination-patterns.md) | Chiến lược điều phối tác nhân (tiếp tục ở Chương 6) | 30 phút |
-| 3 | [Triển khai Mẫu ARM](../../examples/retail-multiagent-arm-template/README.md) | Ví dụ triển khai một lần nhấp | 30 phút |
+| 1 | [Kiến thức cơ bản về đa tác nhân](multi-agent-basics.md) | Thực hành: triển khai ứng dụng đa tác nhân hoạt động với `azd up` | 45 phút |
+| 2 | [Mô hình phối hợp](../chapter-06-pre-deployment/coordination-patterns.md) | Chiến lược phối hợp giữa các tác nhân (tiếp tục trong Chương 6) | 30 phút |
+| 3 | [Triển khai mẫu ARM](../../examples/retail-multiagent-arm-template/README.md) | Ví dụ triển khai chỉ với một cú nhấp | 30 phút |
 
-> **Bắt đầu với Bài 1.** Đây là bài duy nhất hoàn toàn thực hành và có thể triển khai trong chương này. Bài 2 nằm ở Chương 6 (chung với lập kế hoạch trước triển khai), và [Giải pháp Bán lẻ đa tác nhân](../../examples/retail-scenario.md) là một bản thiết kế kiến trúc — một tham chiếu thiết kế, không phải là một mẫu triển khai bằng một lệnh.
+> **Bắt đầu với Bài học 1.** Đây là bài duy nhất có thực hành đầy đủ, có thể triển khai trong chương này. Bài học 2 nằm trong Chương 6 (chung cho kế hoạch triển khai trước), và [Giải pháp đa tác nhân bán lẻ](../../examples/retail-scenario.md) là bản thiết kế kiến trúc — một tham chiếu thiết kế, không phải là mẫu lệnh một cú.
 
 ---
 
 ## 🚀 Bắt đầu nhanh
 
 ```bash
-# Tùy chọn 1: Triển khai từ mẫu
+# Lựa chọn 1: Triển khai từ một mẫu
 azd init --template agent-openai-python-prompty
 azd up
 
-# Tùy chọn 2: Triển khai từ tệp manifest của agent (yêu cầu phần mở rộng azure.ai.agents)
+# Lựa chọn 2: Triển khai từ một bản khai báo đại lý (yêu cầu phần mở rộng azure.ai.agents)
 azd extension install azure.ai.agents
 azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **Cách tiếp cận nào?** Sử dụng `azd init --template` để bắt đầu từ một mẫu hoạt động. Sử dụng `azd ai agent init` khi bạn có manifest tác nhân riêng. Xem [Tài liệu tham khảo AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) để biết chi tiết đầy đủ.
+> **Phương pháp nào?** Dùng `azd init --template` để bắt đầu từ mẫu đang hoạt động. Dùng `azd ai agent init` khi bạn có manifest tác nhân của riêng mình. Xem [tham chiếu AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) để biết chi tiết đầy đủ.
 
 ---
 
@@ -53,28 +53,28 @@ azd up
 
 ```mermaid
 graph TD
-    Orchestrator[Tác nhân điều phối<br/>Điều phối yêu cầu, quản lý luồng công việc] --> Customer[Tác nhân Khách hàng<br/>Truy vấn người dùng, sở thích]
-    Orchestrator --> Inventory[Tác nhân Kho<br/>Mức tồn kho, đơn đặt hàng]
+    Orchestrator[Đại lý Điều phối<br/>Phân luồng yêu cầu, quản lý quy trình làm việc] --> Customer[Đại lý Khách hàng<br/>Truy vấn người dùng, sở thích]
+    Orchestrator --> Inventory[Đại lý Kho hàng<br/>Mức tồn kho, đơn đặt hàng]
 ```
 
 ---
 
-## 🎯 Giải pháp nổi bật: Bán lẻ đa tác nhân
+## 🎯 Giải pháp nổi bật: Đa tác nhân bán lẻ
 
-Giải pháp [Bán lẻ đa tác nhân](../../examples/retail-scenario.md) minh họa:
+[Giải pháp đa tác nhân bán lẻ](../../examples/retail-scenario.md) trình bày:
 
-- **Tác nhân Khách hàng**: Xử lý tương tác và sở thích của người dùng
-- **Tác nhân Hàng tồn kho**: Quản lý tồn kho và xử lý đơn hàng
-- **Bộ điều phối**: Điều phối giữa các tác nhân
+- **Tác nhân khách hàng**: Xử lý tương tác và sở thích người dùng
+- **Tác nhân kho**: Quản lý tồn kho và xử lý đơn hàng
+- **Điều phối viên**: Phối hợp giữa các tác nhân
 - **Bộ nhớ chia sẻ**: Quản lý ngữ cảnh giữa các tác nhân
 
-### Dịch vụ được sử dụng
+### Dịch vụ sử dụng
 
 | Dịch vụ | Mục đích |
 |---------|---------|
-| Microsoft Foundry Models | Hiểu ngôn ngữ |
+| Mẫu Microsoft Foundry | Hiểu ngôn ngữ |
 | Azure AI Search | Danh mục sản phẩm |
-| Cosmos DB | Trạng thái tác nhân và bộ nhớ |
+| Cosmos DB | Trạng thái và bộ nhớ tác nhân |
 | Container Apps | Lưu trữ tác nhân |
 | Application Insights | Giám sát |
 
@@ -85,14 +85,14 @@ Giải pháp [Bán lẻ đa tác nhân](../../examples/retail-scenario.md) minh 
 | Hướng | Chương |
 |-----------|---------|
 | **Trước** | [Chương 4: Hạ tầng](../chapter-04-infrastructure/README.md) |
-| **Tiếp** | [Chương 6: Tiền triển khai](../chapter-06-pre-deployment/README.md) |
+| **Sau** | [Chương 6: Trước khi triển khai](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 Tài nguyên liên quan
 
 - [Hướng dẫn Tác nhân AI](../chapter-02-ai-development/agents.md)
-- [Thực hành AI cho môi trường sản xuất](../chapter-08-production/production-ai-practices.md)
+- [Thực hành AI sản xuất](../chapter-08-production/production-ai-practices.md)
 - [Khắc phục sự cố AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---

@@ -1,27 +1,27 @@
-# 第 8 章：生產與企業模式
+# 第八章：生產與企業模式
 
-**📚 課程**: [AZD For Beginners](../../README.md) | **⏱️ 時長**: 2-3 小時 | **⭐ 難度**: 進階
+**📚 課程**: [AZD 入門](../../README.md) | **⏱️ 時長**: 2-3 小時 | **⭐ 複雜度**: 進階
 
 ---
 
-## 概述
+## 概覽
 
-本章涵蓋企業可用的部署模式、安全強化、監控與生產 AI 工作負載的成本優化。
+本章涵蓋企業級部署模式、安全強化、監控及生產 AI 工作負載的成本優化。
 
-> 已於 2026 年 6 月使用 `azd 1.25.6` 驗證。
+> 已於 2026 年 7 月使用 `azd 1.27.1` 驗證。
 
 ## 學習目標
 
-完成本章後，您將：
-- 部署多區域具韌性的應用程式
+完成本章後，您將能：
+- 部署多區域彈性應用程式
 - 實作企業安全模式
-- 設定完整的監控
-- 在大規模下優化成本
-- 使用 AZD 設定 CI/CD 管線
+- 設定全面監控
+- 大規模優化成本
+- 使用 AZD 建立 CI/CD 管線
 
 ---
 
-## 📚 課程
+## 📚 課程內容
 
 | # | 課程 | 說明 | 時間 |
 |---|--------|-------------|------|
@@ -31,13 +31,13 @@
 
 ## 🚀 生產檢查清單
 
-- [ ] 多區域部署以提升韌性
-- [ ] 使用受管理身分進行認證（不使用金鑰）
-- [ ] 使用 Application Insights 進行監控
-- [ ] 設定成本預算與警示
+- [ ] 多區域部署以提高彈性
+- [ ] 使用託管身份認證（無需金鑰）
+- [ ] 使用 Application Insights 監控
+- [ ] 設定成本預算及警示
 - [ ] 啟用安全掃描
 - [ ] 整合 CI/CD 管線
-- [ ] 災難復原計劃
+- [ ] 制定災難復原計劃
 
 ---
 
@@ -47,16 +47,16 @@
 
 ```mermaid
 graph LR
-    Gateway[API 閘道] --> AI[AI 服務] --> Models[微軟 Foundry 模型]
+    Gateway[API 網關] --> AI[人工智能服務] --> Models[微軟 Foundry 模型]
     Gateway --> Auth[認證服務]
-    AI --> Data[資料儲存]
+    AI --> Data[數據存儲]
 ```
 
 ### 模式 2：事件驅動 AI
 
 ```mermaid
 graph LR
-    EventGrid[事件網格] --> Functions[函數] --> Pipeline[人工智能管線]
+    EventGrid[事件網格] --> Functions[函數] --> Pipeline[人工智能流程]
 ```
 
 ---
@@ -82,15 +82,15 @@ properties: {
 
 ## 💰 成本優化
 
-| 策略 | 節省 |
+| 策略 | 節省比例 |
 |----------|---------|
-| 縮到零（Container Apps） | 60-80% |
-| 開發環境使用消耗付費等級 | 50-70% |
-| 排程縮放 | 30-50% |
+| 以零擴展（Container Apps） | 60-80% |
+| 開發使用消耗層 | 50-70% |
+| 定時擴展 | 30-50% |
 | 預留容量 | 20-40% |
 
 ```bash
-# 設定預算提醒
+# 設定預算警報
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -106,7 +106,7 @@ az consumption budget create \
 # 串流日誌
 azd monitor --logs
 
-# 檢視 Application Insights
+# 檢查應用程式洞察
 azd monitor --overview
 
 # 檢視指標
@@ -115,12 +115,12 @@ az monitor metrics list --resource <resource-id>
 
 ---
 
-## 🔗 導覽
+## 🔗 導航
 
 | 方向 | 章節 |
 |-----------|---------|
-| <strong>上一章</strong> | [第 7 章：疑難排解](../chapter-07-troubleshooting/README.md) |
-| <strong>完成課程</strong> | [Course Home](../../README.md) |
+| <strong>上一章</strong> | [第七章：疑難排解](../chapter-07-troubleshooting/README.md) |
+| <strong>完成課程</strong> | [課程首頁](../../README.md) |
 
 ---
 

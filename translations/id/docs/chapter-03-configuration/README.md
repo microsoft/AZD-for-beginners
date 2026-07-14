@@ -1,18 +1,18 @@
 # Bab 3: Konfigurasi & Otentikasi
 
-**📚 Kursus**: [AZD untuk Pemula](../../README.md) | **⏱️ Durasi**: 45-60 menit | **⭐ Kompleksitas**: Menengah
+**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Durasi**: 45-60 menit | **⭐ Kompleksitas**: Menengah
 
 ---
 
 ## Ikhtisar
 
-This chapter covers environment configuration, authentication patterns, and security best practices for Azure Developer CLI deployments.
+Bab ini membahas konfigurasi lingkungan, pola otentikasi, dan praktik keamanan terbaik untuk penyebaran Azure Developer CLI.
 
-> Divalidasi terhadap `azd 1.25.6` pada Juni 2026.
+> Divalidasi dengan `azd 1.27.1` pada Juli 2026.
 
 ## Tujuan Pembelajaran
 
-By completing this chapter, you will:
+Dengan menyelesaikan bab ini, Anda akan:
 - Menguasai hierarki konfigurasi AZD
 - Mengelola beberapa lingkungan (dev, staging, prod)
 - Menerapkan otentikasi aman dengan identitas terkelola
@@ -24,7 +24,7 @@ By completing this chapter, you will:
 
 | # | Pelajaran | Deskripsi | Waktu |
 |---|--------|-------------|------|
-| 1 | [Panduan Konfigurasi](configuration.md) | Penyiapan dan manajemen lingkungan | 30 menit |
+| 1 | [Panduan Konfigurasi](configuration.md) | Pengaturan dan pengelolaan lingkungan | 30 menit |
 | 2 | [Otentikasi & Keamanan](authsecurity.md) | Pola identitas terkelola dan RBAC | 30 menit |
 
 ---
@@ -37,7 +37,7 @@ azd env new dev
 azd env new staging
 azd env new prod
 
-# Beralih antar lingkungan
+# Beralih lingkungan
 azd env select prod
 
 # Atur variabel lingkungan
@@ -52,22 +52,22 @@ azd env get-values
 
 ## 🔧 Hierarki Konfigurasi
 
-AZD menerapkan pengaturan dalam urutan ini (yang lebih akhir menimpa yang sebelumnya):
+AZD menerapkan pengaturan dalam urutan ini (yang terakhir menimpa sebelumnya):
 
 1. **Nilai default** (tertanam dalam template)
 2. **azure.yaml** (konfigurasi proyek)
 3. **Variabel lingkungan** (`azd env set`)
-4. **Opsi baris perintah** (`--location eastus`)
+4. **Flag baris perintah** (`--location eastus`)
 
 ---
 
 ## 🔐 Praktik Keamanan Terbaik
 
 ```bash
-# Gunakan identitas terkelola (direkomendasikan)
+# Gunakan identitas yang dikelola (disarankan)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Periksa status autentikasi AZD
+# Periksa status otentikasi AZD
 azd auth status
 
 # Opsional: verifikasi konteks Azure CLI jika Anda berencana menjalankan perintah az
@@ -76,7 +76,7 @@ az account show
 # Autentikasi ulang jika diperlukan
 azd auth login
 
-# Opsional: segarkan autentikasi Azure CLI untuk perintah az
+# Opsional: segarkan otentikasi Azure CLI untuk perintah az
 az login
 ```
 
@@ -91,7 +91,7 @@ az login
 
 ---
 
-## 📖 Sumber Terkait
+## 📖 Sumber Daya Terkait
 
 - [Pemeriksaan Pra-Penyebaran](../chapter-06-pre-deployment/README.md)
 - [Pemecahan Masalah](../chapter-07-troubleshooting/common-issues.md)

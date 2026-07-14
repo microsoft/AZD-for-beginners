@@ -1,21 +1,21 @@
-# Hoofdstuk 6: Pre-deploymentplanning & validatie
+# Hoofdstuk 6: Pre-Deployment Planning & Validatie
 
-**📚 Cursus**: [AZD For Beginners](../../README.md) | **⏱️ Duur**: 1 uur | **⭐ Complexiteit**: Gemiddeld
+**📚 Cursus**: [AZD Voor Beginners](../../README.md) | **⏱️ Duur**: 1 uur | **⭐ Complexiteit**: Gemiddeld
 
 ---
 
 ## Overzicht
 
-Dit hoofdstuk behandelt essentiële plannings- en validatiestappen voordat u uw applicatie implementeert. Leer kostbare fouten te vermijden met juiste capaciteitsplanning, SKU-selectie en preflightcontroles.
+Dit hoofdstuk behandelt essentiële plannings- en validatiestappen vóór het implementeren van je applicatie. Leer kostbare fouten te vermijden met goede capaciteitsplanning, SKU-selectie en preflight checks.
 
-> Gevalideerd tegen `azd 1.25.6` in juni 2026.
+> Gevalideerd tegen `azd 1.27.1` in juli 2026.
 
 ## Leerdoelen
 
-Door dit hoofdstuk te voltooien zult u:
-- Preflightcontroles uitvoeren vóór implementatie
-- Capaciteit plannen en benodigde resources inschatten
-- Geschikte SKUs selecteren voor kostenoptimalisatie
+Door dit hoofdstuk te voltooien, zul je:
+- Preflight checks uitvoeren vóór implementatie
+- Capaciteitsplanning maken en resourcevereisten inschatten
+- Passende SKU's selecteren voor kostenoptimalisatie
 - Application Insights configureren voor monitoring
 - Patronen voor teamcoördinatie begrijpen
 
@@ -25,21 +25,21 @@ Door dit hoofdstuk te voltooien zult u:
 
 | # | Les | Beschrijving | Tijd |
 |---|--------|-------------|------|
-| 1 | [Preflightcontroles](preflight-checks.md) | Valideer configuratie vóór implementatie | 15 min |
-| 2 | [Capaciteitsplanning](capacity-planning.md) | Schat resourcevereisten | 20 min |
-| 3 | [SKU-selectie](sku-selection.md) | Kies geschikte prijsniveaus | 15 min |
-| 4 | [Application Insights](application-insights.md) | Configureer monitoring | 20 min |
-| 5 | [Coördinatiepatronen](coordination-patterns.md) | Workflows voor teamimplementatie | 15 min |
+| 1 | [Preflight Checks](preflight-checks.md) | Configuratie valideren vóór implementatie | 15 min |
+| 2 | [Capaciteitsplanning](capacity-planning.md) | Resourcevereisten inschatten | 20 min |
+| 3 | [SKU Selectie](sku-selection.md) | Passende prijsniveaus kiezen | 15 min |
+| 4 | [Application Insights](application-insights.md) | Monitoring configureren | 20 min |
+| 5 | [Coördinatiepatronen](coordination-patterns.md) | Team deployment workflows | 15 min |
 
 ---
 
 ## 🚀 Snelstart
 
 ```bash
-# Controleer abonnementsquota
+# Controleer abonnementquota
 az vm list-usage --location eastus --output table
 
-# Voorvertoning van de implementatie (er worden geen resources aangemaakt)
+# Voorbeeld van implementatie (geen bronnen aangemaakt)
 azd provision --preview
 
 # Valideer Bicep-syntaxis
@@ -51,12 +51,12 @@ azd env get-values
 
 ---
 
-## ☑️ Controlelijst vóór implementatie
+## ☑️ Pre-implementatie Checklist
 
 ### Voor `azd provision`
 
-- [ ] Quota geverifieerd voor regio
-- [ ] SKUs correct geselecteerd
+- [ ] Quotum geverifieerd voor regio
+- [ ] SKU's passend geselecteerd
 - [ ] Kostenschatting beoordeeld
 - [ ] Naamgevingsconventie consistent
 - [ ] Beveiliging/RBAC geconfigureerd
@@ -65,14 +65,14 @@ azd env get-values
 
 - [ ] Omgevingsvariabelen ingesteld
 - [ ] Geheimen in Key Vault
-- [ ] Verbindingsstrings geverifieerd
-- [ ] Gezondheidscontroles geconfigureerd
+- [ ] Connectiestrings geverifieerd
+- [ ] Health checks geconfigureerd
 
 ---
 
-## 💰 SKU-selectiegids
+## 💰 SKU Selectiegids
 
-| Workload | Ontwikkeling | Productie |
+| Werkbelasting | Ontwikkeling | Productie |
 |----------|-------------|------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
@@ -90,11 +90,11 @@ azd env get-values
 
 ---
 
-## 📖 Gerelateerde bronnen
+## 📖 Gerelateerde Bronnen
 
 - [Configuratiehandleiding](../chapter-03-configuration/configuration.md)
 - [Implementatiehandleiding](../chapter-04-infrastructure/deployment-guide.md)
-- [Veelvoorkomende problemen](../chapter-07-troubleshooting/common-issues.md)
+- [Veelvoorkomende Problemen](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

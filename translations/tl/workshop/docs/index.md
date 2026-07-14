@@ -1,77 +1,77 @@
 # AZD para sa Mga Developer ng AI Workshop
 
-> Napatunayan gamit ang `azd 1.25.6` noong Hunyo 2026.
+> Nasubok gamit ang `azd 1.27.1` noong Hulyo 2026.
 
 > [!IMPORTANT]  
-> **Ang workshop na ito ay may kasamang workshop guide na maaari mong i-preview sa iyong lokal na browser. Upang magsimula, buksan ang repo sa GitHub Codespaces, isang dev container, o isang lokal na clone na may naka-install na MkDocs—pagkatapos maghintay hanggang makita mo ang isang aktibong VS Code terminal at i-type:**  
+> **Ang workshop na ito ay may kasamang workshop guide na maaari mong makita sa iyong lokal na browser. Upang magsimula, buksan ang repo sa GitHub Codespaces, isang dev container, o lokal na kopya na may naka-install na MkDocs—pagkatapos ay hintayin hanggang makita mo ang aktibong VS Code terminal at i-type:**  
 > `mkdocs serve > /dev/null 2>&1 &`  
-> **Dapat mong makita ang isang pop-up dialog upang buksan ang preview page sa isang browser.**
+> **Dapat kang makakita ng pop-up dialog upang buksan ang preview page sa browser.**
 
-Maligayang pagdating sa hands-on na workshop para sa pag-aaral ng Azure Developer CLI (AZD) na nakatuon sa deployment ng mga AI application. Ang workshop na ito ay tutulong sa iyo na magkaroon ng praktikal na pag-unawa sa mga AZD template sa 3 hakbang:
+Maligayang pagdating sa hands-on workshop para matutunan ang Azure Developer CLI (AZD) na nakatuon sa deployment ng AI application. Tinutulungan ka ng workshop na ito na magkaroon ng praktikal na pag-unawa sa AZD templates sa 3 hakbang:
 
-1. **Discovery** - hanapin ang template na angkop sa iyo.
-1. **Deployment** - i-deploy at patunayan na gumagana ito
-1. **Customization** - i-modify at i-iterate upang ito ay maging iyo!
+1. **Paghahanap** - hanapin ang tamang template para sa iyo.
+1. **Deployment** - i-deploy at i-validate na gumagana ito
+1. **Pag-customize** - baguhin at paunlarin upang maging sa iyo ito!
 
-Sa kabuuan ng workshop na ito, ipakikilala rin sa iyo ang mga pangunahing developer tool at workflows, upang matulungan kang pabilisin ang iyong end-to-end na development journey.
+Sa kabuuan ng workshop na ito, ipakikilala ka rin sa mga pangunahing developer tools at workflows, upang makatulong sa pag-streamline ng iyong kabuuang proseso ng pag-develop.
 
 | | | 
 |:---|:---|
-| **📚 Tahanan ng Kurso**| [AZD Para sa Mga Nagsisimula](../README.md)|
-| **📖 Dokumentasyon** | [Magsimula gamit ang mga template ng AI](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️ Mga Template ng AI** | [Mga Template ng Microsoft Foundry](https://ai.azure.com/templates) |
-|**🚀 Susunod na Mga Hakbang** | [Tanggapin ang Hamon](#workshop-challenge) |
+| **📚 Course Home**| [AZD Para sa Mga Nagsisimula](../README.md)|
+| **📖 Dokumentasyon** | [Magsimula gamit ang AI templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️AI Templates** | [Mga Template ng Microsoft Foundry](https://ai.azure.com/templates) |
+|**🚀 Mga Susunod na Hakbang** | [Tanggapin ang Hamon](#workshop-challenge) |
 | | |
 
-## Pangkalahatang-ideya ng Workshop
+## Pangkalahatang Ideya ng Workshop
 
 **Tagal:** 3-4 na oras  
-**Antas:** Baguhan hanggang Intermediate  
-**Mga Kinakailangan:** Pamilyaridad sa Azure, mga konsepto ng AI, VS Code at mga tool sa command-line.
+**Antas:** Nagsisimula hanggang Gitnang Antas  
+**Kailangang Kaalaman:** Pamilyar sa Azure, mga konsepto ng AI, VS Code at mga command-line tools.
 
-Ito ay isang hands-on na workshop kung saan natututo ka sa pamamagitan ng paggawa. Kapag natapos mo na ang mga ehersisyo, inirerekomenda naming repasuhin ang AZD Para sa Mga Nagsisimula na kurikulum upang ipagpatuloy ang iyong paglalakbay sa pag-aaral patungo sa mga pinakamahusay na kasanayan sa Seguridad at Produktibidad.
+Ito ay isang hands-on workshop kung saan natututo ka sa pamamagitan ng paggawa. Pagkatapos mong matapos ang mga ehersisyo, inirerekomenda naming suriin ang AZD Para sa Mga Nagsisimula na kurikulum upang ipagpatuloy ang iyong pag-aaral sa Seguridad at mga pinakamahuhusay na gawain sa Produktibidad.
 
-| Time| Module  | Objective |
+| Oras| Module  | Layunin |
 |:---|:---|:---|
-| 15 mins | Panimula | Itakda ang konteksto, unawain ang mga layunin |
-| 30 mins | Pumili ng Template ng AI | Siyasatin ang mga opsyon at pumili ng panimula | 
-| 30 mins | Patunayan ang Template ng AI | I-deploy ang default na solusyon sa Azure |
-| 30 mins | Buwagin ang Template ng AI | Siyasatin ang estruktura at konfigurasyon |
-| 30 mins | I-configure ang Template ng AI | I-activate at subukan ang mga magagamit na tampok |
-| 30 mins | I-customize ang Template ng AI | Iangkop ang template sa iyong mga pangangailangan |
-| 30 mins | Tanggalin ang Infrastrukturang | Linisin at palayain ang mga resources |
-| 15 mins | Pagsasara at Susunod na Mga Hakbang | Mga mapagkukunan para sa pag-aaral, Hamon ng Workshop |
+| 15 minuto | Panimula | Itakda ang layunin, unawain ang mga hangarin |
+| 30 minuto | Piliin ang AI Template | Tuklasin ang mga opsyon at pumili ng panimula | 
+| 30 minuto | I-validate ang AI Template | I-deploy ang default solusyon sa Azure |
+| 30 minuto | I-deconstruct ang AI Template | Tuklasin ang istruktura at konfigurasyon |
+| 30 minuto | I-configure ang AI Template | I-activate at subukan ang mga magagamit na tampok |
+| 30 minuto | I-customize ang AI Template | Iangkop ang template ayon sa iyong pangangailangan |
+| 30 minuto | I-teardown ang Infrastructure | Linisin at pakawalan ang mga resources |
+| 15 minuto | Wrap-Up at Mga Susunod na Hakbang | Mga mapagkukunan sa pag-aaral, hamon ng Workshop |
 | | |
 
-## Ano ang Iyong Matututuhan
+## Ano ang Matututunan Mo
 
-Isipin ang AZD Template bilang isang learning sandbox upang tuklasin ang iba't ibang kakayahan at tool para sa end-to-end development sa Microsoft Foundry. Sa pagtatapos ng workshop na ito, dapat mayroon kang isang intuitive na pakiramdam para sa iba't ibang tools at konsepto sa kontekstong ito.
+Isipin ang AZD Template bilang isang learning sandbox upang tuklasin ang iba't ibang kakayahan at mga tools para sa end-to-end development sa Microsoft Foundry. Sa pagtatapos ng workshop na ito, dapat ay mayroon kang intuitive na pag-unawa sa iba't ibang tools at konsepto sa kontekstong ito.
 
 | Konsepto  | Layunin |
 |:---|:---|
-| **Azure Developer CLI** | Unawain ang mga utos ng tool at mga workflows|
-| **AZD Templates**| Unawain ang estruktura ng proyekto at konfigurasyon|
-| **Azure AI Agent**| Mag-provision at mag-deploy ng Microsoft Foundry na proyekto  |
-| **Azure AI Search**| Paganahin ang context engineering gamit ang mga agent |
-| **Observability**| Siyasatin ang tracing, monitoring at mga pagsusuri |
-| **Red Teaming**| Siyasatin ang adversarial testing at mga mitigasyon |
+| **Azure Developer CLI** | Unawain ang mga utos ng tool at mga workflow|
+| **AZD Templates**| Unawain ang istruktura ng proyekto at config|
+| **Azure AI Agent**| Mag-provision at mag-deploy ng Microsoft Foundry project  |
+| **Azure AI Search**| Paganahin ang context engineering gamit ang mga agents |
+| **Observability**| Tuklasin ang tracing, monitoring at evaluations |
+| **Red Teaming**| Tuklasin ang adversarial testing at mga mitigasyon |
 | | |
 
 ## Mga Module ng Workshop
 
-Handa nang magsimula? Mag-navigate sa mga module ng workshop:
+Handa ka na bang magsimula? Mag-navigate sa mga module ng workshop:
 
-- [Module 1: Piliin ang Template ng AI](instructions/1-Select-AI-Template.md)
-- [Module 2: Patunayan ang Template ng AI](instructions/2-Validate-AI-Template.md) 
-- [Module 3: Buwagin ang Template ng AI](instructions/3-Deconstruct-AI-Template.md)
-- [Module 4: I-configure ang Template ng AI](instructions/4-Configure-AI-Template.md)
-- [Module 5: I-customize ang Template ng AI](instructions/5-Customize-AI-Template.md)
-- [Module 6: Pag-alis ng Infrastrukturang](instructions/6-Teardown-Infrastructure.md)
-- [Module 7: Pagsasara at Susunod na Mga Hakbang](instructions/7-Wrap-up.md)
+- [Module 1: Piliin ang AI Template](instructions/1-Select-AI-Template.md)
+- [Module 2: I-validate ang AI Template](instructions/2-Validate-AI-Template.md) 
+- [Module 3: I-deconstruct ang AI Template](instructions/3-Deconstruct-AI-Template.md)
+- [Module 4: I-configure ang AI Template](instructions/4-Configure-AI-Template.md)
+- [Module 5: I-customize ang AI Template](instructions/5-Customize-AI-Template.md)
+- [Module 6: I-teardown ang Infrastructure](instructions/6-Teardown-Infrastructure.md)
+- [Module 7: Wrap-up at Mga Susunod na Hakbang](instructions/7-Wrap-up.md)
 
 ## May feedback?
 
-Mag-post ng isyu sa repo na ito (lagyan ng tag na `Workshop`) o sumali sa amin sa [Discord](https://aka.ms/foundry/discord) at mag-post sa aming `#get-help` channel
+Mag-post ng isyu sa repo na ito (i-tag ito bilang `Workshop`) o sumali sa amin sa [Discord](https://aka.ms/foundry/discord) at mag-post sa aming `#get-help` channel
 
 ---
 

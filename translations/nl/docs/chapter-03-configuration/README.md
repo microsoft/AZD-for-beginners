@@ -1,22 +1,22 @@
-# Chapter 3: Configuratie & Authenticatie
+# Hoofdstuk 3: Configuratie & Authenticatie
 
-**📚 Cursus**: [AZD voor beginners](../../README.md) | **⏱️ Duur**: 45-60 minuten | **⭐ Moeilijkheidsgraad**: Gemiddeld
+**📚 Cursus**: [AZD Voor Beginners](../../README.md) | **⏱️ Duur**: 45-60 minuten | **⭐ Complexiteit**: Gemiddeld
 
 ---
 
 ## Overzicht
 
-Dit hoofdstuk behandelt omgevingsconfiguratie, authenticatiepatronen en beste beveiligingspraktijken voor Azure Developer CLI-implementaties.
+Dit hoofdstuk behandelt omgevingconfiguratie, authenticatiepatronen en beste beveiligingspraktijken voor Azure Developer CLI-implementaties.
 
-> Gevalideerd tegen `azd 1.25.6` in juni 2026.
+> Gevalideerd met `azd 1.27.1` in juli 2026.
 
 ## Leerdoelen
 
-Door dit hoofdstuk te voltooien, zult u:
-- Beheers de AZD-configuratiehiërarchie
-- Beheer meerdere omgevingen (dev, staging, prod)
-- Implementeer veilige authenticatie met beheerde identiteiten
-- Configureer omgevingsspecifieke instellingen
+Door dit hoofdstuk te voltooien, zul je:
+- Meesterschap krijgen over de AZD-configuratiehiërarchie
+- Meerdere omgevingen beheren (dev, staging, prod)
+- Veilige authenticatie implementeren met beheerde identiteiten
+- Omgevingsspecifieke instellingen configureren
 
 ---
 
@@ -24,59 +24,59 @@ Door dit hoofdstuk te voltooien, zult u:
 
 | # | Les | Beschrijving | Tijd |
 |---|--------|-------------|------|
-| 1 | [Configuratiehandleiding](configuration.md) | Omgeving instellen en beheren | 30 min |
+| 1 | [Configuratie Gids](configuration.md) | Omgevingsinstelling en beheer | 30 min |
 | 2 | [Authenticatie & Beveiliging](authsecurity.md) | Beheerde identiteit en RBAC-patronen | 30 min |
 
 ---
 
-## 🚀 Snel aan de slag
+## 🚀 Snel Starten
 
 ```bash
-# Maak meerdere omgevingen
+# Meerdere omgevingen maken
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Schakel tussen omgevingen
+# Omgevingen wisselen
 azd env select prod
 
-# Stel omgevingsvariabelen in
+# Omgevingsvariabelen instellen
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Bekijk configuratie
+# Configuratie bekijken
 azd env get-values
 ```
 
 ---
 
-## 🔧 Configuratie-hiërarchie
+## 🔧 Configuratiehiërarchie
 
-AZD past instellingen in deze volgorde toe (later overschrijft eerder):
+AZD past instellingen toe in deze volgorde (latere overschrijft eerdere):
 
 1. **Standaardwaarden** (ingebouwd in sjablonen)
 2. **azure.yaml** (projectconfiguratie)
 3. **Omgevingsvariabelen** (`azd env set`)
-4. **Opdrachtregelvlaggen** (`--location eastus`)
+4. **Opdrachtregel-vlaggen** (`--location eastus`)
 
 ---
 
-## 🔐 Beste beveiligingspraktijken
+## 🔐 Beste Beveiligingspraktijken
 
 ```bash
 # Gebruik beheerde identiteit (aanbevolen)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Controleer de AZD-authenticatiestatus
+# Controleer AZD-authenticatiestatus
 azd auth status
 
-# Optioneel: controleer de Azure CLI-context als je van plan bent az-commando's uit te voeren
+# Optioneel: verifieer Azure CLI-context als je van plan bent az-opdrachten uit te voeren
 az account show
 
-# Her-authenticeer indien nodig
+# Herauthenticeer indien nodig
 azd auth login
 
-# Optioneel: ververs de Azure CLI-authenticatie voor az-commando's
+# Optioneel: vernieuw Azure CLI-authenticatie voor az-opdrachten
 az login
 ```
 
@@ -86,14 +86,14 @@ az login
 
 | Richting | Hoofdstuk |
 |-----------|---------|
-| **Vorige** | [Hoofdstuk 2: AI-ontwikkeling](../chapter-02-ai-development/README.md) |
+| **Vorige** | [Hoofdstuk 2: AI Ontwikkeling](../chapter-02-ai-development/README.md) |
 | **Volgende** | [Hoofdstuk 4: Infrastructuur](../chapter-04-infrastructure/README.md) |
 
 ---
 
-## 📖 Gerelateerde bronnen
+## 📖 Gerelateerde Bronnen
 
-- [Pre-deploymentcontroles](../chapter-06-pre-deployment/README.md)
+- [Pre-Deployment Checks](../chapter-06-pre-deployment/README.md)
 - [Probleemoplossing](../chapter-07-troubleshooting/common-issues.md)
 
 ---

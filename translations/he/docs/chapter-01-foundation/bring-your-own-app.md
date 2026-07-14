@@ -1,59 +1,59 @@
-# Bring Your Own App - Add azd to an Existing Project
+# הביאו את האפליקציה שלכם - הוספת azd לפרויקט קיים
 
 **ניווט בפרקים:**
-- **📚 דף הקורס**: [AZD For Beginners](../../README.md)
-- **📖 הפרק הנוכחי**: Chapter 1 - Foundation & Quick Start
-- **⬅️ הקודם**: [Your First Project](first-project.md)
-- **➡️ הבא**: [Dev Containers & Codespaces](dev-containers.md)
+- **📚 דף בית הקורס**: [AZD למתחילים](../../README.md)
+- **📖 פרק נוכחי**: פרק 1 - יסודות והתחלה מהירה
+- **⬅️ קודם**: [הפרויקט הראשון שלך](first-project.md)
+- **➡️ הבא**: [מכולות פיתוח ו-Codespaces](dev-containers.md)
 
-> אומת נגד `azd 1.25.6` ביוני 2026.
+> אושר נגד `azd 1.27.1` ביולי 2026.
 
-## Introduction
+## הקדמה
 
-ב-[Your First Project](first-project.md) פרסת אפליקציה באמצעות התחלה מתבנית. אבל ברוב המקרים כבר יש לך אפליקציה—API ב-Node.js, שירות Flask ב-Python, אפליקציית .NET—שנמצאת בתיקייה במחשב שלך. שיעור זה מראה כיצד להוסיף azd לקוד קיים כך שתוכל לפרוס אותו עם `azd up`, ללא צורך בתבנית.
+ב-[הפרויקט הראשון שלך](first-project.md) פרסת אפליקציה על ידי התחלה מתבנית. אבל ברוב הפעמים כבר *יש* לך אפליקציה — ממשק API של Node.js, שירות Flask בפייתון, אפליקציית .NET — שיושבת בתיקייה במחשב שלך. השיעור הזה מראה כיצד להוסיף את azd לקוד הקיים כך שתוכל לפרוס אותה עם `azd up`, ללא צורך בתבנית.
 
-## Learning Goals
+## מטרות למידה
 
-בסוף שיעור זה תדע:
-- להבין את שלוש הדרכים להפעיל פרויקט azd
+עד סיום שיעור זה, תלמד:
+- להבין את שלוש הדרכים להתחיל פרויקט azd
 - להריץ `azd init` בתוך בסיס קוד קיים
-- להבין מה עושים `azure.yaml` ותיקיית `infra/` עבור האפליקציה שלך
-- לדעת מתי לתת ל-azd לייצר תשתית ומתי לכתוב אחת בעצמך
-- לפרוס את האפליקציה הקיימת שלך ל-Azure עם `azd up`
+- להבין מה עושה `azure.yaml` והתיקייה `infra/` לאפליקציה שלך
+- לדעת מתי לתת ל-azd ליצור תשתית ומתי לכתוב את שלך
+- לפרוס את האפליקציה הקיימת שלך באז'ור עם `azd up`
 
-## Learning Outcomes
+## תוצאות הלמידה
 
-בסיום שיעור זה תוכל:
+לאחר סיום השיעור תוכל:
 - לאתחל azd בפרויקט שכבר יש לך
 - לקרוא ולערוך קובץ `azure.yaml` בסיסי
 - לייצר תשתית התחלתית עם `azd infra generate`
 - לבחור מארח Azure מתאים לאפליקציה שלך
-- לפרוס ולנקות את האפליקציה שלך
+- לפרוס ולנפות את האפליקציה שלך
 
 ---
 
-## Three Ways to Start an azd Project
+## שלוש דרכים להתחיל פרויקט azd
 
-| Starting point | Command | When to use |
+| נקודת התחלה | פקודה | מתי להשתמש |
 |----------------|---------|-------------|
-| **From a template** | `azd init --template <name>` | למידה, או התחלת אפליקציה חדשה מתוך דוגמה מוכחת |
-| **From your existing code** | `azd init` (in your project folder) | כבר יש לך אפליקציה ואתה רוצה לפרוס אותה |
-| **From a Git repo** | `azd init --from-code` (in a cloned repo) | אימוץ azd למחסן קוד קיים |
+| **מתבנית** | `azd init --template <name>` | למידה, או התחלה של אפליקציה חדשה מדוגמה מוכחת |
+| **מהקוד הקיים שלך** | `azd init` (בתיקיית הפרויקט שלך) | כבר יש לך אפליקציה ואתה רוצה לפרוס אותה |
+| **מאחסון Git** | `azd init --from-code` (באחסון שהורדת) | אימוץ azd למאגר קיים |
 
-כבר התאמנת על האפשרות הראשונה. שיעור זה מקיף את השנייה—התסריט הנפוץ ביותר במציאות.
+כבר התאמנת באפשרות הראשונה. שיעור זה מכסה את השנייה — התרחיש השכיח ביותר במציאות.
 
 ---
 
-## Step 1: Run `azd init` in Your Project
+## שלב 1: הרץ `azd init` בפרויקט שלך
 
-Open a terminal **inside your existing project folder** and run:
+פתח מסוף **בתוך תיקיית הפרויקט הקיים שלך** והריץ:
 
 ```bash
 cd my-existing-app
 azd init
 ```
 
-azd will ask how you want to initialize. Choose:
+azd ישאל איך תרצה לאתחל. בחר:
 
 ```
 ? How do you want to initialize your app?
@@ -61,26 +61,26 @@ azd will ask how you want to initialize. Choose:
   Select a template
 ```
 
-Pick **"Use code in the current directory."** azd then scans your folder, detects your language and framework, and proposes a host.
+בחר **"השתמש בקוד בתיקייה הנוכחית."** azd יסרוק את התיקייה שלך, יזהה את השפה והמסגרת ויציע מארח.
 
-### What azd detects
+### מה azd מזהה
 
-azd מחפש רמזים כמו `package.json`, `requirements.txt`, `pom.xml`, `*.csproj`, או `Dockerfile`, ומציע מארח Azure תואם:
+azd מחפש איתותים כמו `package.json`, `requirements.txt`, `pom.xml`, `*.csproj` או `Dockerfile`, ומציע מארח Azure מתאים:
 
-| Your app | Likely detected host |
-|----------|----------------------|
-| Node.js / Python / .NET web app | Azure App Service or Container Apps |
-| Containerized app (`Dockerfile`) | Azure Container Apps |
-| Function app | Azure Functions |
-| Static site (React/Vue build output) | Azure Static Web Apps |
+| האפליקציה שלך | מארח סביר שנמצא |
+|-----------|----------------------|
+| אפליקציית Node.js / Python / .NET | Azure App Service או Container Apps |
+| אפליקציה במכולה (`Dockerfile`) | Azure Container Apps |
+| אפליקציית פונקציה | Azure Functions |
+| אתר סטטי (פלט בנייה React/Vue) | Azure Static Web Apps |
 
-אשר את השירות(ים) שזוהו, ו-azd ייצור את הקבצים שאתה צריך.
+אשר את השירות(ים) שזוהו, ו-azd ייצור עבורך את הקבצים הדרושים.
 
 ---
 
-## Step 2: Understand What azd Created
+## שלב 2: הבן מה ייצר azd
 
-After init, you'll have two new things in your project:
+לאחר init, יהיו לך שני דברים חדשים בפרויקט שלך:
 
 ```
 my-existing-app/
@@ -92,9 +92,9 @@ my-existing-app/
 └── ...                 # your existing files, untouched
 ```
 
-### `azure.yaml` — the project definition
+### `azure.yaml` — הגדרת הפרויקט
 
-This is the heart of an azd project. A minimal one looks like this:
+זהו הלב של פרויקט azd. אחד מינימלי נראה כך:
 
 ```yaml
 # azure.yaml
@@ -106,19 +106,19 @@ services:
     host: appservice         # appservice | containerapp | function | staticwebapp
 ```
 
-בלוק ה-`services` הוא החלק המרכזי: כל רשומה ממפה תיקייה של הקוד שלך למארח ב-Azure. אם לאפליקציה שלך יש גם frontend וגם API, יהיו לך שני שירותים.
+בלוק ה-`services` הוא החלק המרכזי: כל ערך ממפה תיקיית קוד למארח Azure. אם לאפליקציה שלך יש גם frontend וגם API, יהיו לך שני שירותים.
 
-### `infra/` — your Azure resources as code
+### `infra/` — משאבי Azure שלך כקוד
 
-תיקיית `infra/` מכילה קבצי Bicep שמגדירים את משאבי ה-Azure שהאפליקציה שלך זקוקה להם (App Service, מסד נתונים וכו'). לא חייבים לכתוב אותם ידנית—azd יוצר נקודת התחלה עובדת. תוכל לערוך אותם מאוחר יותר כדי להוסיף משאבים או לחזק אבטחה (מוסבר ב-[Chapter 4](../chapter-04-infrastructure/README.md)).
+תיקיית `infra/` מכילה קבצי Bicep שמגדירים את המשאבים שהאפליקציה שלך צריכה (שירות האפליקציה, בסיס הנתונים וכו'). אתה לא צריך לכתוב אותם בעצמך — azd מייצר נקודת התחלה עובדת. אתה *יכול* לערוך אותם מאוחר יותר להוספת משאבים או להגברת האבטחה (מתואר ב-[פרק 4](../chapter-04-infrastructure/README.md)).
 
-> **טיפ:** רוצים לראות או להתאים אישית את התשתית שנוצרה לפני הפריסה? הריצו `azd infra generate` (זמין גם כ-`azd infra synth`) כדי לכתוב את ה-IaC לדיסק כך שתוכלו לעיין בו ולנהל אותו בגרסאות.
+> **עצה:** רוצה לראות או להתאים אישית את התשתית שנוצרה לפני פריסה? הרץ `azd infra generate` (זמין גם כ-`azd infra synth`) כדי לכתוב את התשתית כ-IaC לדיסק לסקירה ובקרת גרסאות.
 
 ---
 
-## Step 3: Set Required Configuration
+## שלב 3: הגדר תצורה דרושה
 
-If your app needs settings or secrets (a connection string, an API key), don't hardcode them. Use environment values:
+אם האפליקציה שלך זקוקה להגדרות או סודות (מחרוזת חיבור, מפתח API), אל תקודד אותם ישירות. השתמש בערכי סביבה:
 
 ```bash
 # צור סביבה
@@ -128,48 +128,48 @@ azd env new dev
 azd env set API_VERSION 1.0.0
 ```
 
-עבור סודות אמיתיים, אחסן אותם ב-Key Vault והתייחס אליהם מתוך התשתית שלך—ראו [Chapter 3: Configuration & Authentication](../chapter-03-configuration/authsecurity.md).
+עבור סודות אמיתיים, אחסן אותם ב-Key Vault והפנה אליהם מהתשתית שלך — ראה [פרק 3: תצורה ואימות](../chapter-03-configuration/authsecurity.md).
 
 ---
 
-## Step 4: Deploy
+## שלב 4: פרוס
 
-Now use the same workflow you already know:
+כעת השתמש באותו תהליך שאתה כבר מכיר:
 
 ```bash
-# בצע אימות (נדרש ל-azd)
+# אמת את זהותך (נדרש ל-azd)
 azd auth login
 
-# הצג תצוגה מקדימה של המשאבים שייווצרו
+# תצוגה מקדימה של המשאבים שיווצרו
 azd provision --preview
 
-# הקם תשתית ופרוס את הקוד שלך
+# ספק תשתית ופרוס את הקוד שלך
 azd up
 ```
 
-When it finishes, azd prints your app's URL. Verify it the same way as any azd app:
+כאשר זה מסתיים, azd ידפיס את כתובת ה-URL של האפליקציה שלך. אמת אותה באותה דרך כפי בכל אפליקציית azd:
 
 ```bash
 azd show           # הצג נקודות קצה
-azd monitor --logs # בדוק יומנים אם צריך
+azd monitor --logs # בדוק יומנים אם יש צורך
 ```
 
 ---
 
-## Common First-Time Issues
+## בעיות נפוצות בפעם הראשונה
 
-| Symptom | Likely cause | Fix |
+| תסמין | גורם סביר | תיקון |
 |---------|--------------|-----|
-| azd didn't detect my app | Missing manifest (e.g., `package.json`) | Add the manifest, or pick the host manually during `azd init` |
-| Build fails during `azd up` | App needs a build step | Add `buildCommand`/`outputPath` under the service in `azure.yaml` |
-| App starts but returns errors | Missing config/secret | Set values with `azd env set` or wire up Key Vault |
-| Wrong host chosen | Auto-detection guessed | Edit `host:` in `azure.yaml` and re-run `azd up` |
+| azd לא זיהה את האפליקציה שלי | חסר מפתח (כגון `package.json`) | הוסף את הקובץ, או בחר את המארח ידנית במהלך `azd init` |
+| בנייה נכשלת במהלך `azd up` | לאפליקציה דרוש שלב בנייה | הוסף `buildCommand`/`outputPath` תחת השירות ב-`azure.yaml` |
+| האפליקציה מתחילה אך מחזירה שגיאות | חסר הגדרה/סוד | הגדר ערכים עם `azd env set` או חבר את Key Vault |
+| נבחר מארח שגוי | זיהוי אוטומטי שגוי | ערוך את `host:` ב-`azure.yaml` והריץ שוב `azd up` |
 
-לעוד מידע, ראה [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/README.md).
+לפרטים נוספים ראה [פרק 7: פתרון בעיות](../chapter-07-troubleshooting/README.md).
 
 ---
 
-## Clean Up
+## ניקוי
 
 ```bash
 azd down --force --purge
@@ -177,28 +177,28 @@ azd down --force --purge
 
 ---
 
-## Summary
+## סיכום
 
-- `azd init` → **"Use code in the current directory"** מוסיף azd לאפליקציה שכבר יש לך.
-- `azure.yaml` ממפה את תיקיות הקוד שלך למארחי Azure; `infra/` מגדיר את המשאבים כ-Bicep.
-- `azd infra generate` מאפשר לעיין או להתאים אישית את התשתית שנוצרה.
-- לאחר האתחול, האפליקציה הקיימת שלך משתמשת באותו תהליך `azd up` / `azd down` בדיוק כמו אפליקציה שמבוססת תבנית.
+- `azd init` → **"השתמש בקוד בתיקייה הנוכחית"** מוסיף azd לאפליקציה שכבר יש לך.
+- `azure.yaml` ממפה תיקיות הקוד שלך למארחי Azure; `infra/` מגדירה את המשאבים כ-Bicep.
+- `azd infra generate` מאפשר לך לסקור או להתאים את התשתית שנוצרה.
+- לאחר האתחול, האפליקציה הקיימת שלך משתמשת בדיוק באותו תהליך `azd up` / `azd down` כמו אפליקציה מבוססת תבנית.
 
 ---
 
 ## 🔗 ניווט
 
-| Direction | Lesson |
+| כיוון | שיעור |
 |-----------|--------|
-| **Previous** | [Your First Project](first-project.md) |
-| **Next** | [Dev Containers & Codespaces](dev-containers.md) |
+| **קודם** | [הפרויקט הראשון שלך](first-project.md) |
+| **הבא** | [מכולות פיתוח ו-Codespaces](dev-containers.md) |
 
 ## 📖 משאבים קשורים
 
-- [AZD Basics](azd-basics.md)
-- [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/README.md)
-- [Configuration & Authentication](../chapter-03-configuration/authsecurity.md)
-- [Command Cheat Sheet](../../resources/cheat-sheet.md)
+- [יסודות AZD](azd-basics.md)
+- [פרק 4: תשתית כקוד](../chapter-04-infrastructure/README.md)
+- [תצורה ואימות](../chapter-03-configuration/authsecurity.md)
+- [גליון פקודות](../../resources/cheat-sheet.md)
 
 ---
 

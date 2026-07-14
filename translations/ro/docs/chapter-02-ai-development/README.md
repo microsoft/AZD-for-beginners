@@ -1,4 +1,4 @@
-# Capitolul 2: Dezvoltare axată pe AI
+# Capitolul 2: Dezvoltare AI-First
 
 **📚 Curs**: [AZD Pentru Începători](../../README.md) | **⏱️ Durată**: 1-2 ore | **⭐ Complexitate**: Intermediar
 
@@ -6,13 +6,13 @@
 
 ## Prezentare generală
 
-Acest capitol se concentrează pe implementarea aplicațiilor cu inteligență artificială utilizând Azure Developer CLI și serviciile Microsoft Foundry. De la aplicații simple de chat AI la agenți inteligenți cu unelte.
+Acest capitol se concentrează pe implementarea aplicațiilor bazate pe AI folosind Azure Developer CLI și serviciile Microsoft Foundry. De la aplicații simple de chat AI până la agenți inteligenți cu unelte.
 
-> **Notă de validare (2026-06-15):** Fluxul de comenzi și ghidul de extensii din acest capitol au fost revizuite pentru `azd` `1.25.6` și versiunea actuală de previzualizare a extensiei agent AI `azure.ai.agents` `0.1.40-preview`. Dacă utilizați o versiune mai veche AZD, actualizați mai întâi și apoi continuați cu exercițiile.
+> **Notă de validare (2026-07-13):** Fluxul de comenzi și ghidul pentru extensii din acest capitol au fost revizuite față de `azd` `1.27.1` și actuala versiune preview a extensiei agentului AI `azure.ai.agents` `1.0.0-beta.5`. Dacă utilizați o versiune mai veche AZD, actualizați mai întâi și apoi continuați cu exercițiile.
 
 ## Obiective de învățare
 
-Prin parcurgerea acestui capitol, veți:
+Finalizând acest capitol, vei putea:
 - Implementa aplicații AI folosind șabloane AZD predefinite
 - Înțelege integrarea Microsoft Foundry cu AZD
 - Configura și personaliza agenți AI cu unelte
@@ -24,17 +24,17 @@ Prin parcurgerea acestui capitol, veți:
 
 | # | Lecție | Descriere | Timp |
 |---|--------|-------------|------|
-| 1 | [Integrarea Microsoft Foundry](microsoft-foundry-integration.md) | Conectarea AZD cu serviciile Foundry | 30 min |
-| 2 | [Ghid Agenți AI](agents.md) | Implementarea agenților inteligenți cu unelte | 45 min |
-| 3 | [Implementarea Modelului AI](ai-model-deployment.md) | Implementarea și configurarea modelelor AI | 30 min |
-| 4 | [Laborator Workshop AI](ai-workshop-lab.md) | Practic: Pregătește soluția AI pentru AZD | 60 min |
+| 1 | [Integrarea Microsoft Foundry](microsoft-foundry-integration.md) | Conectează AZD cu serviciile Foundry | 30 min |
+| 2 | [Ghid agenți AI](agents.md) | Implementare agenți inteligenți cu unelte | 45 min |
+| 3 | [Implementare modele AI](ai-model-deployment.md) | Implementare și configurare modele AI | 30 min |
+| 4 | [Laborator AI Workshop](ai-workshop-lab.md) | Practic: Pregătește soluția AI pentru AZD | 60 min |
 
 ---
 
-## 🚀 Pornire rapidă
+## 🚀 Început rapid
 
 ```bash
-# Opțiunea 1: Aplicație Chat RAG
+# Opțiunea 1: Aplicație de chat RAG
 azd init --template azure-search-openai-demo
 azd up
 
@@ -42,7 +42,7 @@ azd up
 azd init --template get-started-with-ai-agents
 azd up
 
-# Opțiunea 3: Aplicație Chat Rapidă
+# Opțiunea 3: Aplicație de chat rapidă
 azd init --template openai-chat-app-quickstart
 azd up
 ```
@@ -54,7 +54,7 @@ azd up
 | Șablon | Descriere | Servicii |
 |----------|-------------|----------|
 | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Chat RAG cu citări | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Agent AI cu unelte | AI Agent Service |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Agent AI cu unelte | Serviciul Agent AI |
 | [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chat AI de bază | OpenAI + Container Apps |
 
 ---
@@ -65,9 +65,9 @@ azd up
 |-------------|----------------------|
 | Dezvoltare | 80-150 $ |
 | Pre-producție | 150-300 $ |
-| Producție | 300-3.500+ $ |
+| Producție | 300-3,500+ $ |
 
-**Sfat:** Rulează `azd down` după testare pentru a evita costurile.
+**Sfat:** Rulează `azd down` după testare pentru a evita costuri suplimentare.
 
 ---
 
@@ -75,7 +75,7 @@ azd up
 
 | Direcție | Capitol |
 |-----------|---------|
-| **Anterior** | [Capitolul 1: Fundamente](../chapter-01-foundation/README.md) |
+| **Anterior** | [Capitolul 1: Bază](../chapter-01-foundation/README.md) |
 | **Următor** | [Capitolul 3: Configurare](../chapter-03-configuration/README.md) |
 | **Sari la** | [Capitolul 8: Modele de producție](../chapter-08-production/README.md) |
 
@@ -83,7 +83,7 @@ azd up
 
 ## 📖 Resurse conexe
 
-- [Dezvoltare situații AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Depanarea AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 - [Practici AI în producție](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 

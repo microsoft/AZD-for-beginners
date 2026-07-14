@@ -1,59 +1,59 @@
-# নিজের অ্যাপ নিয়ে আসুন - বিদ্যমান প্রজেক্টে azd যোগ করুন
+# নিজের অ্যাপ নিয়ে আসুন - একটি বিদ্যমান প্রকল্পে azd যোগ করুন
 
-**চ্যাপ্টার ন্যাভিগেশন:**
-- **📚 Course Home**: [নবীনদের জন্য AZD](../../README.md)
-- **📖 বর্তমান অধ্যায়**: অধ্যায় 1 - ভিত্তি ও দ্রুত শুরু
-- **⬅️ পূর্ববর্তী**: [আপনার প্রথম প্রকল্প](first-project.md)
+**অধ্যায় নেভিগেশন:**
+- **📚 কোর্স হোম**: [শুরুর জন্য AZD](../../README.md)
+- **📖 বর্তমান অধ্যায়**: অধ্যায় ১ - ভিত্তি ও দ্রুত শুরু
+- **⬅️ পূর্বের**: [আপনার প্রথম প্রকল্প](first-project.md)
 - **➡️ পরবর্তী**: [ডেভ কন্টেইনার এবং কোডস্পেস](dev-containers.md)
 
-> যাচাই করা হয়েছে `azd 1.25.6` অনুযায়ী জুন ২০২৬ তে.
+> `azd 1.27.1` এর বিরুদ্ধে জুলাই ২০২৬ এ যাচাই করা হয়েছে।
 
 ## পরিচিতি
 
-In [আপনার প্রথম প্রকল্প](first-project.md) you deployed an app by starting from a template. But most of the time you already *have* an app—a Node.js API, a Python Flask service, a .NET web app—sitting in a folder on your machine. This lesson shows how to add azd to that existing code so you can deploy it with `azd up`, no template required.
+[আপনার প্রথম প্রকল্প](first-project.md) এ আপনি একটি টেমপ্লেট থেকে শুরু করে একটি অ্যাপ স্থাপন করেছিলেন। কিন্তু বেশিরভাগ সময়ে আপনার কাছে ইতোমধ্যেই একটি অ্যাপ থাকে — একটি Node.js API, একটি Python Flask সার্ভিস, একটি .NET ওয়েব অ্যাপ — যা আপনার মেশিনের একটি ফোল্ডারে সংরক্ষিত থাকে। এই পাঠে দেখানো হয়েছে কিভাবে সেই বিদ্যমান কোডে azd যোগ করবেন যাতে আপনি `azd up` দিয়ে এটি স্থাপন করতে পারেন, কোনো টেমপ্লেট প্রয়োজন নেই।
 
 ## শেখার লক্ষ্য
 
-By the end of this lesson, you will:
-- Understand the three ways to start an azd project
-- Run `azd init` inside an existing codebase
-- Understand what `azure.yaml` and the `infra/` folder do for your app
-- Know when to let azd generate infrastructure vs. write your own
-- Deploy your existing app to Azure with `azd up`
+এই পাঠের শেষে আপনি পারবেন:
+- azd প্রকল্প শুরু করার তিনটি উপায় বুঝতে
+- একটি বিদ্যমান কোডবেসে `azd init` চালাতে
+- বুঝতে কি করে `azure.yaml` এবং `infra/` ফোল্ডার আপনার অ্যাপের জন্য কাজ করে
+- কখন azd কনফিগারেশন তৈরি করবে আর কখন নিজে লিখবেন তা জানা
+- বিদ্যমান অ্যাপটি Azure এ `azd up` ব্যবহার করে স্থাপন করা
 
 ## শেখার ফলাফল
 
-After completing this lesson, you will be able to:
-- Initialize azd in a project you already have
-- Read and edit a basic `azure.yaml` file
-- Generate starter infrastructure with `azd infra generate`
-- Choose an appropriate Azure host for your app
-- Deploy and clean up your own application
+এই পাঠ শেষ করার পর আপনি পারবেন:
+- আপনার কাছে থাকা একটি প্রকল্পে azd ইনিশিয়ালাইজ করা
+- একটি বেসিক `azure.yaml` ফাইল পড়া ও সম্পাদনা করা
+- `azd infra generate` দিয়ে প্রাথমিক অবকাঠামো তৈরি করা
+- আপনার অ্যাপের জন্য উপযুক্ত Azure হোস্ট নির্বাচন করা
+- নিজের অ্যাপ স্থাপন করা এবং পরিষ্কার করা
 
 ---
 
-## azd প্রজেক্ট শুরু করার তিনটি উপায়
+## azd প্রকল্প শুরু করার তিনটি উপায়
 
-| শুরু করার পয়েন্ট | কমান্ড | কখন ব্যবহার করবেন |
+| শুরু পয়েন্ট | কমান্ড | কখন ব্যবহার করবেন |
 |----------------|---------|-------------|
-| **টেমপ্লেট থেকে** | `azd init --template <name>` | Learning, or starting a new app from a proven sample |
-| **আপনার বিদ্যমান কোড থেকে** | `azd init` (in your project folder) | You already have an app and want to deploy it |
-| **একটি Git রিপো থেকে** | `azd init --from-code` (in a cloned repo) | বিদ্যমান রিপোজিটরিতে azd গ্রহণ করা |
+| **টেমপ্লেট থেকে** | `azd init --template <name>` | শেখার জন্য বা প্রমাণিত স্যাম্পল থেকে নতুন অ্যাপ শুরু করার জন্য |
+| **আপনার বিদ্যমান কোড থেকে** | `azd init` (আপনার প্রকল্প ফোল্ডারে) | আপনার কাছে ইতিমধ্যেই একটি অ্যাপ আছে এবং আপনি সেটি স্থাপন করতে চান |
+| **গিট রিপোজিটরি থেকে** | `azd init --from-code` (একটি ক্লোন করা রিপোতে) | বিদ্যমান রিপোজিটরির জন্য azd গ্রহণ করা |
 
-You already practiced the first option. This lesson covers the second—the most common real-world scenario.
+আপনি ইতিমধ্যেই প্রথম বিকল্পটি অনুশীলন করেছেন। এই পাঠটি দ্বিতীয়টি নিয়ে আলোচনা করে—সবচেয়ে সাধারণ বাস্তবিক পরিস্থিতি।
 
 ---
 
-## ধাপ ১: আপনার প্রজেক্টে `azd init` চালান
+## ধাপ ১: আপনার প্রকল্পে `azd init` চালান
 
-Open a terminal **আপনার বিদ্যমান প্রজেক্ট ফোল্ডারের ভিতরে** and run:
+একটি টার্মিনাল খুলুন **আপনার বিদ্যমান প্রকল্পের ফোল্ডারের ভিতরে** এবং চালান:
 
 ```bash
 cd my-existing-app
 azd init
 ```
 
-azd will ask how you want to initialize. Choose:
+azd আপনাকে জিজ্ঞাসা করবে কিভাবে ইনিশিয়ালাইজ করবেন। নির্বাচন করুন:
 
 ```
 ? How do you want to initialize your app?
@@ -61,26 +61,26 @@ azd will ask how you want to initialize. Choose:
   Select a template
 ```
 
-Pick **"Use code in the current directory."** azd then scans your folder, detects your language and framework, and proposes a host.
+**"বর্তমান ডিরেক্টরির কোড ব্যবহার করুন।"** নির্বাচন করুন। azd আপনার ফোল্ডার স্ক্যান করবে, আপনার ভাষা ও ফ্রেমওয়ার্ক সনাক্ত করবে, এবং একটি হোস্ট প্রস্তাব করবে।
 
 ### azd কী সনাক্ত করে
 
-azd looks for signals like `package.json`, `requirements.txt`, `pom.xml`, `*.csproj`, or a `Dockerfile`, and suggests a matching Azure host:
+azd `package.json`, `requirements.txt`, `pom.xml`, `*.csproj`, অথবা একটি `Dockerfile` এর মতো সংকেত অনুসন্ধান করে এবং একটি মিল সম্বলিত Azure হোস্ট প্রস্তাব করে:
 
 | আপনার অ্যাপ | সম্ভাব্য সনাক্তকৃত হোস্ট |
 |----------|----------------------|
-| Node.js / Python / .NET web অ্যাপ | Azure App Service বা Container Apps |
-| কনটেইনারাইজ করা অ্যাপ (`Dockerfile`) | Azure Container Apps |
-| Function অ্যাপ | Azure Functions |
-| স্ট্যাটিক সাইট (React/Vue build output) | Azure Static Web Apps |
+| Node.js / Python / .NET ওয়েব অ্যাপ | Azure App Service বা Container Apps |
+| কন্টেইনারাইজড অ্যাপ (`Dockerfile`) | Azure Container Apps |
+| ফাংশন অ্যাপ | Azure Functions |
+| স্ট্যাটিক সাইট (React/Vue বিল্ড আউটপুট) | Azure Static Web Apps |
 
-Confirm the detected service(s), and azd scaffolds the files you need.
+সনাক্তকৃত সার্ভিস নিশ্চিত করুন, তারপর azd আপনার জন্য প্রয়োজনীয় ফাইল তৈরি করবে।
 
 ---
 
-## ধাপ ২: azd কী তৈরি করেছে তা বুঝুন
+## ধাপ ২: azd যা তৈরি করেছে তা বুঝুন
 
-After init, you'll have two new things in your project:
+ইনিশিয়ালাইজেশন শেষে, আপনার প্রকল্পে দুটি নতুন জিনিস থাকবে:
 
 ```
 my-existing-app/
@@ -92,9 +92,9 @@ my-existing-app/
 └── ...                 # your existing files, untouched
 ```
 
-### `azure.yaml` — প্রজেক্ট সংজ্ঞা
+### `azure.yaml` — প্রকল্প সংজ্ঞা
 
-This is the heart of an azd project. A minimal one looks like this:
+এটি একটি azd প্রকল্পের হৃদয়। একটি ন্যূনতমটি এইরকম দেখায়:
 
 ```yaml
 # azure.yaml
@@ -106,19 +106,19 @@ services:
     host: appservice         # appservice | containerapp | function | staticwebapp
 ```
 
-The `services` block is the key part: each entry maps a folder of your code to an Azure host. If your app has both a frontend and an API, you'll have two services.
+`services` ব্লক মূল অংশ: প্রতিটি এন্ট্রি আপনার কোডের একটি ফোল্ডারকে Azure হোস্টের সাথে ম্যাপ করে। যদি আপনার অ্যাপে ফ্রন্টএন্ড এবং API দুটোই থাকে, তাহলে আপনার দুটি সার্ভিস থাকবে।
 
-### `infra/` — কোড হিসেবে আপনার Azure রিসোর্সসমূহ
+### `infra/` — আপনার Azure রিসোর্স কোড আকারে
 
-The `infra/` folder holds Bicep files that define the Azure resources your app needs (the App Service, the database, etc.). You don't have to write these by hand—azd generates a working starting point. You *can* edit them later to add resources or tighten security (covered in [অধ্যায় ৪](../chapter-04-infrastructure/README.md)).
+`infra/` ফোল্ডারে Bicep ফাইল থাকে যা আপনার অ্যাপের জন্য প্রয়োজনীয় Azure রিসোর্স সংজ্ঞায়িত করে (App Service, ডাটাবেস ইত্যাদি)। আপনাকে এগুলো হাতে লিখতে হবে না—azd একটি কাজযোগ্য প্রাথমিক বিন্দু তৈরি করে। আপনি পরে এগুলো সম্পাদনা করতে পারেন রিসোর্স যোগ করতে বা নিরাপত্তা কঠোর করতে (আলোচনা হয়েছে [অধ্যায় ৪](../chapter-04-infrastructure/README.md) এ)।
 
-> **টিপ:** Want to see or customize the generated infrastructure before deploying? Run `azd infra generate` (also available as `azd infra synth`) to write the IaC to disk so you can review and version-control it.
+> **টিপ:** নিশ্চিত হতে বা কাস্টমাইজ করতে চান তৈরি হওয়া অবকাঠামো ডিপ্লয়মেন্টের আগে? `azd infra generate` (বা `azd infra synth`) চালান, এতে IaC ডিস্কে লেখা হবে যা আপনি পর্যালোচনা ও ভার্শন-কন্ট্রোল করতে পারবেন।
 
 ---
 
 ## ধাপ ৩: প্রয়োজনীয় কনফিগারেশন সেট করুন
 
-If your app needs settings or secrets (a connection string, an API key), don't hardcode them. Use environment values:
+আপনার অ্যাপ যদি সেটিংস বা সিক্রেটস (কনেকশন স্ট্রিং, API কী) প্রয়োজন করে, সেগুলো হার্ডকোড করবেন না। পরিবেশ ভ্যালু ব্যবহার করুন:
 
 ```bash
 # একটি পরিবেশ তৈরি করুন
@@ -128,30 +128,30 @@ azd env new dev
 azd env set API_VERSION 1.0.0
 ```
 
-For real secrets, store them in Key Vault and reference them from your infrastructure—see [অধ্যায় ৩: কনফিগারেশন ও প্রমাণীকরণ](../chapter-03-configuration/authsecurity.md).
+প্রকৃত সিক্রেটসের জন্য, সেগুলো Key Vault-এ সংরক্ষণ করুন এবং আপনার অবকাঠামো থেকে রেফারেন্স করুন—দেখুন [অধ্যায় ৩: কনফিগারেশন ও প্রমাণীকরণ](../chapter-03-configuration/authsecurity.md)।
 
 ---
 
-## ধাপ ৪: ডিপ্লয়
+## ধাপ ৪: ডিপ্লয় করুন
 
-Now use the same workflow you already know:
+এখন একই ওয়ার্কফ্লো ব্যবহার করুন যা আপনি ইতিমধ্যে জানেন:
 
 ```bash
-# প্রমাণীকরণ (azd-এর জন্য প্রয়োজনীয়)
+# প্রমাণীকরণ (azd এর জন্য প্রয়োজন)
 azd auth login
 
-# তৈরি করা হবে এমন রিসোর্সগুলোর পূর্বরূপ দেখুন
+# যে সমস্ত রিসোর্স তৈরি করা হবে তা পূর্বরূপ দেখুন
 azd provision --preview
 
-# ইনফ্রাস্ট্রাকচার প্রস্তুত করুন এবং আপনার কোড ডিপ্লয় করুন
+# অবকাঠামো প্রস্তুত করুন এবং আপনার কোড স্থাপন করুন
 azd up
 ```
 
-When it finishes, azd prints your app's URL. Verify it the same way as any azd app:
+শেষ হলে, azd আপনার অ্যাপের URL প্রিন্ট করবে। এটি যাচাই করুন যে কোনও azd অ্যাপের মতো:
 
 ```bash
-azd show           # এন্ডপয়েন্টগুলো দেখান
-azd monitor --logs # প্রয়োজনে লগগুলো পরীক্ষা করুন
+azd show           # এন্ডপয়েন্টগুলি দেখান
+azd monitor --logs # প্রয়োজন হলে লগ পরীক্ষা করুন
 ```
 
 ---
@@ -160,16 +160,16 @@ azd monitor --logs # প্রয়োজনে লগগুলো পরীক
 
 | লক্ষণ | সম্ভাব্য কারণ | সমাধান |
 |---------|--------------|-----|
-| azd didn't detect my app | Missing manifest (e.g., `package.json`) | Add the manifest, or pick the host manually during `azd init` |
-| `azd up` চলাকালে বিল্ড ব্যর্থ হয় | App needs a build step | Add `buildCommand`/`outputPath` under the service in `azure.yaml` |
-| অ্যাপ শুরু হয় কিন্তু ত্রুটি দেয় | Missing config/secret | Set values with `azd env set` or wire up Key Vault |
-| ভুল হোস্ট নির্বাচিত হয়েছে | Auto-detection guessed | Edit `host:` in `azure.yaml` and re-run `azd up` |
+| azd আমার অ্যাপ সনাক্ত করেনি | ম্যানিফেস্ট অনুপস্থিত (যেমন, `package.json`) | ম্যানিফেস্ট যোগ করুন, অথবা `azd init` এ ম্যানুয়ালি হোস্ট নির্বাচন করুন |
+| `azd up` চলাকালে বিল্ড ব্যর্থ | অ্যাপের বিল্ড ধাপ প্রয়োজন | `azure.yaml` এ সার্ভিসের অধীনে `buildCommand`/`outputPath` যোগ করুন |
+| অ্যাপ শুরু হয় কিন্তু ত্রুটি দেয় | কনফিগারেশন/সিক্রেট অনুপস্থিত | `azd env set` ব্যবহার করে মান সেট করুন বা Key Vault সংযোগ করুন |
+| ভুল হোস্ট নির্বাচন হয়েছে | অটো-ডিটেকশন অনুমান করেছে | `azure.yaml` এ `host:` সম্পাদনা করুন এবং পুনরায় `azd up` চালান |
 
-For more, see [অধ্যায় ৭: সমস্যা সমাধান](../chapter-07-troubleshooting/README.md).
+আরও তথ্যের জন্য দেখুন [অধ্যায় ৭: সমস্যা সমাধান](../chapter-07-troubleshooting/README.md)।
 
 ---
 
-## ক্লিন আপ
+## পরিষ্কার করুন
 
 ```bash
 azd down --force --purge
@@ -179,26 +179,26 @@ azd down --force --purge
 
 ## সারসংক্ষেপ
 
-- `azd init` → **"Use code in the current directory"** আপনার ইতিমধ্যেই থাকা একটি অ্যাপে azd যোগ করে।
-- `azure.yaml` আপনার কোড ফোল্ডারগুলোকে Azure হোস্টগুলোর সাথে ম্যাপ করে; `infra/` রিসোর্সগুলোকে Bicep হিসেবে নির্ধারণ করে।
-- `azd infra generate` আপনাকে জেনারেট করা ইনফ্রাস্ট্রাকচার রিভিউ বা কাস্টমাইজ করতে দেয়।
-- একবার ইনিশিয়ালাইজ করা হলে, আপনার বিদ্যমান অ্যাপ টেমপ্লেট-ভিত্তিক অ্যাপের মত একই `azd up` / `azd down` ওয়ার্কফ্লো ব্যবহার করে।
+- `azd init` → **"বর্তমান ডিরেক্টরির কোড ব্যবহার করুন"** আপনার ইতোমধ্যের অ্যাপে azd যোগ করে।
+- `azure.yaml` আপনার কোড ফোল্ডারগুলোকে Azure হোস্টের সাথে ম্যাপ করে; `infra/` রিসোর্সগুলো Bicep আকারে সংজ্ঞায়িত করে।
+- `azd infra generate` দিয়ে তৈরি অবকাঠামো পর্যালোচনা বা কাস্টমাইজ করতে পারবেন।
+- ইনিশিয়ালাইজেশন পর, আপনার বিদ্যমান অ্যাপ একই `azd up` / `azd down` ওয়ার্কফ্লো ব্যবহার করে টেমপ্লেট-ভিত্তিক অ্যাপের মতো।
 
 ---
 
-## 🔗 ন্যাভিগেশন
+## 🔗 নেভিগেশন
 
-| দিক | পাঠ |
+| দিকনির্দেশ | পাঠ |
 |-----------|--------|
-| **পূর্ববর্তী** | [আপনার প্রথম প্রকল্প](first-project.md) |
-| **পরবর্তী** | [ডেভ কন্টেইনার এবং কোডস্পেস](dev-containers.md) |
+| **পূর্বে** | [আপনার প্রথম প্রকল্প](first-project.md) |
+| **পরবর্তী** | [ডেভ কন্টেইনার ও কোডস্পেস](dev-containers.md) |
 
 ## 📖 সম্পর্কিত রিসোর্স
 
 - [AZD বেসিকস](azd-basics.md)
-- [অধ্যায় ৪: কোড হিসেবে ইনফ্রাস্ট্রাকচার](../chapter-04-infrastructure/README.md)
+- [অধ্যায় ৪: অবকাঠামো কোড আকারে](../chapter-04-infrastructure/README.md)
 - [কনফিগারেশন ও প্রমাণীকরণ](../chapter-03-configuration/authsecurity.md)
-- [কমান্ড চিট-শিট](../../resources/cheat-sheet.md)
+- [কমান্ড চিট শীট](../../resources/cheat-sheet.md)
 
 ---
 

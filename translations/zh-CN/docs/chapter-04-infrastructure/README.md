@@ -1,32 +1,32 @@
 # 第4章：基础设施即代码与部署
 
-**📚 Course**: [AZD 初学者](../../README.md) | **⏱️ 时长**: 1-1.5 小时 | **⭐ 难度**: 中级
+**📚 课程**：[初学者的AZD](../../README.md) | **⏱️ 时长**：1-1.5小时 | **⭐ 复杂度**：中级
 
 ---
 
 ## 概述
 
-本章介绍使用 Bicep 模板的基础设施即代码 (IaC) 模式、资源配置和使用 Azure Developer CLI 的部署策略。
+本章涵盖使用Bicep模板的基础设施即代码（IaC）模式，资源配置和使用Azure Developer CLI的部署策略。
 
-> 已在 2026 年 6 月使用 `azd 1.25.6` 验证。
+> 已使用 `azd 1.27.1` 于2026年7月验证。
 
 ## 学习目标
 
-完成本章后，你将：
-- 了解 Bicep 模板的结构和语法
-- 使用 `azd provision` 配置 Azure 资源
+完成本章后，您将能够：
+- 理解Bicep模板结构和语法
+- 使用 `azd provision` 配置Azure资源
 - 使用 `azd deploy` 部署应用
-- 实现蓝绿和滚动部署策略
+- 实现蓝绿部署和滚动部署策略
 
 ---
 
-## 📚 课程
+## 📚 课程列表
 
-| # | 课程 | 描述 | 时间 |
+| # | 课程 | 描述 | 时长 |
 |---|--------|-------------|------|
-| 1 | [资源配置](provisioning.md) | 使用 AZD 管理 Azure 资源 | 45 分钟 |
-| 2 | [部署指南](deployment-guide.md) | 应用部署策略 | 45 分钟 |
-| 3 | [编写自定义模板](custom-templates.md) | 构建并发布可复用的 azd 模板 | 30 分钟 |
+| 1 | [资源配置](provisioning.md) | 使用AZD管理Azure资源 | 45分钟 |
+| 2 | [部署指南](deployment-guide.md) | 应用部署策略 | 45分钟 |
+| 3 | [编写自定义模板](custom-templates.md) | 构建并发布可重用的azd模板 | 30分钟 |
 
 ---
 
@@ -45,13 +45,13 @@ azd provision
 # 仅部署代码
 azd deploy
 
-# 或两者一起
+# 或两者一起进行
 azd up
 ```
 
 ---
 
-## 📁 AZD 项目结构
+## 📁 AZD项目结构
 
 ```
 my-project/
@@ -68,12 +68,12 @@ my-project/
 
 ---
 
-## 🔧 常用命令
+## 🔧 基本命令
 
 | 命令 | 描述 |
 |---------|-------------|
 | `azd init` | 初始化项目 |
-| `azd provision` | 创建 Azure 资源 |
+| `azd provision` | 创建Azure资源 |
 | `azd deploy` | 部署应用代码 |
 | `azd up` | 配置 + 部署 |
 | `azd down` | 删除所有资源 |

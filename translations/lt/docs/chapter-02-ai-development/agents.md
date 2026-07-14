@@ -1,127 +1,127 @@
-# AI Agents with Azure Developer CLI
+# AI agentai su Azure Developer CLI
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 2 - AI-First Development
-- **⬅️ Previous**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Next**: [AI Model Deployment](ai-model-deployment.md)
-- **🚀 Advanced**: [Multi-Agent Solutions](../../examples/retail-scenario.md)
+**Skyriaus naršymas:**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 2 skyrius - Dirbtinio intelekto pirmenybės kūrimas
+- **⬅️ Ankstesnis**: [Microsoft Foundry integracija](microsoft-foundry-integration.md)
+- **➡️ Sekantis**: [DI modelio diegimas](ai-model-deployment.md)
+- **🚀 Pažengusieji**: [Daugelio agentų sprendimai](../../examples/retail-scenario.md)
 
 ---
 
-## Introduction
+## Įvadas
 
-AI agentai yra autonominės programos, galinčios suvokti savo aplinką, priimti sprendimus ir atlikti veiksmus siekiant konkrečių tikslų. Skirtingai nei paprasti pokalbių robotai, kurie atsako į užklausas, agentai gali:
+DI agentai yra autonominės programos, kurios gali suvokti savo aplinką, priimti sprendimus ir imtis veiksmų siekdamos konkrečių tikslų. Skirtingai nuo paprastų pokalbių robotų, reaguojančių į užklausas, agentai gali:
 
-- **Naudoti įrankius** - kviesti API, ieškoti duomenų bazių, vykdyti kodą
-- **Planuoti ir mąstyti** - suskaidyti sudėtingas užduotis į žingsnius
-- **Mokytis iš konteksto** - išlaikyti atmintį ir adaptuoti elgesį
-- **Bendradarbiauti** - dirbti su kitais agentais (daugiagentės sistemos)
+- **Naudoti įrankius** - Skambinti API, ieškoti duomenų bazėse, vykdyti kodą
+- **Planuoti ir mąstyti** - Suskaidyti sudėtingas užduotis į žingsnius
+- **Mokytis iš konteksto** - Išlaikyti atmintį ir adaptuoti elgesį
+- **Bendradarbiauti** - Dirbti su kitais agentais (daugelio agentų sistemos)
 
-Šis vadovas parodo, kaip diegti AI agentus į Azure naudojant Azure Developer CLI (azd).
+Šiame vadove rodoma, kaip diegti AI agentus Azure naudojant Azure Developer CLI (azd).
 
-> **Validation note (2026-03-25):** Šis vadovas buvo peržiūrėtas su `azd` `1.23.12` ir `azure.ai.agents` `0.1.18-preview`. `azd ai` patirtis vis dar yra peržiūros stadijoje, todėl patikrinkite plėtinio pagalbą, jei jūsų įdiegtos parinktys skiriasi.
+> **Patvirtinimo pastaba (2026-07-13):** Šis vadovas buvo peržiūrėtas su `azd` `1.27.1` ir `azure.ai.agents` `1.0.0-beta.5`. `azd ai` patirtis dar yra eksperimentinė, todėl, jei įdiegtos versijos skiriasi, patikrinkite plėtinio pagalbą.
 
-## Learning Goals
+## Mokymosi tikslai
 
 Baigę šį vadovą, jūs:
-- Suprasite, kas yra AI agentai ir kuo jie skiriasi nuo pokalbių robotų
-- Išdiegsite iš anksto paruoštus AI agentų šablonus su AZD
-- Sukonfigūruosite Foundry agentus pritaikytoms agentų versijoms
-- Įgyvendinsite pagrindinius agentų modelius (įrankų naudojimas, RAG, daugiagentė sistema)
-- Stebėsite ir derinsite diegiamus agentus
+- Suprasite, kas yra DI agentai ir kuo jie skiriasi nuo pokalbių robotų
+- Išmoksite diegti paruoštus AI agentų šablonus naudojant AZD
+- Sužinosite, kaip konfigūruoti Foundry agentus pritaikytiems agentams
+- Įgyvendinsite pagrindinius agentų modelius (įrankių naudojimas, RAG, daugelio agentų sistemos)
+- Stebėsite ir derinsite įdiegtus agentus
 
-## Learning Outcomes
+## Mokymosi pasiekimai
 
-Baigę kursą galėsite:
-- Vienu komandu diegti AI agentų programas į Azure
-- Sukonfigūruoti agentų įrankius ir galimybes
-- Įgyvendinti retrieval-augmented generation (RAG) su agentais
-- Kurti daugiagentės architektūras sudėtingiems darbo srautams
-- Spręsti dažniausias agentų diegimo problemas
-
----
-
-## 🤖 What Makes an Agent Different from a Chatbot?
-
-| Feature | Chatbot | AI Agent |
-|---------|---------|----------|
-| **Behavior** | Responds to prompts | Takes autonomous actions |
-| **Tools** | None | Can call APIs, search, execute code |
-| **Memory** | Session-based only | Persistent memory across sessions |
-| **Planning** | Single response | Multi-step reasoning |
-| **Collaboration** | Single entity | Can work with other agents |
-
-### Simple Analogy
-
-- **Chatbot** = A helpful person answering questions at an information desk
-- **AI Agent** = A personal assistant who can make calls, book appointments, and complete tasks for you
+Baigę gebėsite:
+- Vienu komandos įsakymu diegti AI agentų programas į Azure
+- Konfigūruoti agentų įrankius ir funkcijas
+- Įgyvendinti informacijos gavimu paremtą generavimą (RAG) su agentais
+- Kurti daugelio agentų architektūras sudėtingiems darbo procesams
+- Spręsti dažniausiai pasitaikančias agentų diegimo problemas
 
 ---
 
-## 🚀 Quick Start: Deploy Your First Agent
+## 🤖 Kas skiria agentą nuo pokalbių roboto?
 
-### Option 1: Foundry Agents Template (Recommended)
+| Ypatybė | Pokalbių robotas | DI agentas |
+|---------|------------------|-----------|
+| **Elgesys** | Reaguoja į užklausas | Imasi autonominių veiksmų |
+| **Įrankiai** | Nėra | Gali kviesti API, ieškoti, vykdyti kodą |
+| **Atmintis** | Tik seanso | Nuolatinė atmintis per seansus |
+| **Planavimas** | Vienkartinis atsakymas | Daugiažingsnis mąstymas |
+| **Bendradarbiavimas** | Vienas subjektas | Gali dirbti su kitais agentais |
+
+### Paprastas palyginimas
+
+- **Pokalbių robotas** = Padedantis asmuo, atsakantis į klausimus informacijos punkte
+- **DI agentas** = Asmeninis asistentas, galintis skambinti, užsakyti susitikimus ir atlikti užduotis už jus
+
+---
+
+## 🚀 Greitas pradžios vadovas: Įdiekite savo pirmąjį agentą
+
+### Pasirinkimas 1: Foundry agentų šablonas (rekomenduojama)
 
 ```bash
-# Inicializuoti dirbtinio intelekto agentų šabloną
+# Inicializuoti DI agentų šabloną
 azd init --template get-started-with-ai-agents
 
-# Diegti į Azure
+# Įdiegti į Azure
 azd up
 ```
 
-**What gets deployed:**
-- ✅ Foundry Agents
-- ✅ Microsoft Foundry Models (gpt-4.1)
-- ✅ Azure AI Search (for RAG)
-- ✅ Azure Container Apps (web interface)
-- ✅ Application Insights (monitoring)
+**Kas diegiama:**
+- ✅ Foundry agentai
+- ✅ Microsoft Foundry modeliai (gpt-4.1)
+- ✅ Azure AI Search (RAG)
+- ✅ Azure Container Apps (web sąsaja)
+- ✅ Application Insights (stebėjimas)
 
-**Time:** ~15-20 minutes
-**Cost:** ~$100-150/month (development)
+**Laikas:** ~15-20 minučių
+**Kaina:** ~$100-150/mėn (vystymui)
 
-### Option 2: OpenAI Agent with Prompty
+### Pasirinkimas 2: OpenAI agentas su Prompty
 
 ```bash
-# Inicializuoti Prompty pagrįstą agento šabloną
+# Inicializuokite agento šabloną, pagrįstą Prompty
 azd init --template agent-openai-python-prompty
 
 # Diegti į Azure
 azd up
 ```
 
-**What gets deployed:**
-- ✅ Azure Functions (serverless agent execution)
-- ✅ Microsoft Foundry Models
-- ✅ Prompty configuration files
-- ✅ Sample agent implementation
+**Kas diegiama:**
+- ✅ Azure Functions (serverless agento vykdymas)
+- ✅ Microsoft Foundry modeliai
+- ✅ Prompty konfigūracijos failai
+- ✅ Pavyzdinis agento įgyvendinimas
 
-**Time:** ~10-15 minutes
-**Cost:** ~$50-100/month (development)
+**Laikas:** ~10-15 minučių
+**Kaina:** ~$50-100/mėn (vystymui)
 
-### Option 3: RAG Chat Agent
+### Pasirinkimas 3: RAG pokalbių agentas
 
 ```bash
-# Inicializuoti RAG pokalbio šabloną
+# Inicializuoti RAG pokalbių šabloną
 azd init --template azure-search-openai-demo
 
 # Diegti į Azure
 azd up
 ```
 
-**What gets deployed:**
-- ✅ Microsoft Foundry Models
-- ✅ Azure AI Search with sample data
-- ✅ Document processing pipeline
-- ✅ Chat interface with citations
+**Kas diegiama:**
+- ✅ Microsoft Foundry modeliai
+- ✅ Azure AI Search su pavyzdiniais duomenimis
+- ✅ Dokumentų apdorojimo kanalas
+- ✅ Pokalbių sąsaja su citatomis
 
-**Time:** ~15-25 minutes
-**Cost:** ~$80-150/month (development)
+**Laikas:** ~15-25 minučių
+**Kaina:** ~$80-150/mėn (vystymui)
 
-### Option 4: AZD AI Agent Init (Manifest- or Template-Based Preview)
+### Pasirinkimas 4: AZD AI agento inicializavimas (Manifeste arba šablone pagrįsta peržiūra)
 
-If you have an agent manifest file, you can use the `azd ai` command to scaffold a Foundry Agent Service project directly. Recent preview releases also added template-based initialization support, so the exact prompt flow may differ slightly depending on your installed extension version.
+Jei turite agento manifestą, galite naudoti `azd ai` komandą, kad tiesiogiai paruoštumėte Foundry agento paslaugos projektą. Naujausiuose peržiūros leidimuose taip pat pridėta šablonų pagrindu veikianti pradžios parama, todėl tikslus veikimo scenarijus gali šiek tiek skirtis priklausomai nuo įdiegtos plėtinio versijos.
 
 ```bash
 # Įdiekite AI agentų plėtinį
@@ -130,102 +130,102 @@ azd extension install azure.ai.agents
 # Pasirinktinai: patikrinkite įdiegtą peržiūros versiją
 azd extension show azure.ai.agents
 
-# Inicializuokite iš agento manifesto
+# Inicijuoti iš agento manifestų
 azd ai agent init -m agent-manifest.yaml
 
-# Įdiekite į Azure
+# Diegti į Azure
 azd up
 
-# Išbandykite įdiegtą agentą (rodo latenciją ir laiką iki pirmojo baito)
+# Išbandykite įdiegtą agentą (rodo delsą + laiką iki pirmojo baito)
 azd ai agent invoke
 ```
 
-**When to use `azd ai agent init` vs `azd init --template`:**
+**Kada naudoti `azd ai agent init` vs `azd init --template`:**
 
-| Approach | Best For | How It Works |
-|----------|----------|------|
-| `azd init --template` | Starting from a working sample app | Clones a full template repo with code + infra |
-| `azd ai agent init -m` | Building from your own agent manifest | Scaffolds project structure from your agent definition |
+| Požiūris | Geriausias naudojimas | Kaip veikia |
+|----------|---------------------|-----------|
+| `azd init --template` | Pradedant nuo veikiamos pavyzdinės programos | Klonuojamas visas šablono repozitorijus su kodu ir infrastruktūra |
+| `azd ai agent init -m` | Kuriant iš savo agento manifesto | Sukuriama projekto struktūra pagal jūsų agento aprašymą |
 
-> **Tip:** Use `azd init --template` when learning (Options 1-3 above). Use `azd ai agent init` when building production agents with your own manifests.
+> **Patarimas:** Mokantis naudokite `azd init --template` (1-3 pasirinkimai aukščiau). Kuriant gamybos agentus su savo manifestais naudokite `azd ai agent init`.
 
-After `azd up`, the same extension carries you through the rest of the agent lifecycle: `azd ai agent invoke` to test, `azd ai agent eval generate` and `azd ai agent optimize` to measure and improve quality, and `azd ai agent delete` to clean up. See [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for the full reference.
+Po `azd up` tas pats plėtinys padės visame agento gyvenimo cikle: `azd ai agent invoke` testavimui, `azd ai agent eval generate` ir `azd ai agent optimize` kokybės matavimui ir gerinimui, bei `azd ai agent delete` valymui. Daugiau informacijos žr. [AZD AI CLI komandos](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
 
 ---
 
-## 🏗️ Agent Architecture Patterns
+## 🏗️ Agentų architektūros modeliai
 
-### Pattern 1: Single Agent with Tools
+### Modelis 1: Vienas agentas su įrankiais
 
-The simplest agent pattern - one agent that can use multiple tools.
+Paprasčiausias agento modelis – vienas agentas, galintis naudoti kelis įrankius.
 
 ```mermaid
 graph TD
-    UI[Vartotojo sąsaja] --> Agent[Dirbtinio intelekto agentas<br/>gpt-4.1]
+    UI[Vartotojo sąsaja] --> Agent[DI agentas<br/>gpt-4.1]
     Agent --> Search[Paieškos įrankis]
     Agent --> Database[Duomenų bazės įrankis]
     Agent --> API[API įrankis]
 ```
 
-**Best for:**
-- Customer support bots
-- Research assistants
-- Data analysis agents
+**Geriausiai tinka:**
+- Klientų aptarnavimo robotams
+- Tyrimų asistentams
+- Duomenų analizės agentams
 
-**AZD Template:** `azure-search-openai-demo`
+**AZD šablonas:** `azure-search-openai-demo`
 
-### Pattern 2: RAG Agent (Retrieval-Augmented Generation)
+### Modelis 2: RAG agentas (informacijos gavimu paremtas generavimas)
 
-An agent that retrieves relevant documents before generating responses.
-
-```mermaid
-graph TD
-    Query[Vartotojo užklausa] --> RAG[RAG agentas]
-    RAG --> Vector[Vektorinė paieška]
-    RAG --> LLM[Didelis kalbos modelis<br/>gpt-4.1]
-    Vector -- Dokumentai --> LLM
-    LLM --> Response[Atsakymas su citatomis]
-```
-
-**Best for:**
-- Enterprise knowledge bases
-- Document Q&A systems
-- Compliance and legal research
-
-**AZD Template:** `azure-search-openai-demo`
-
-### Pattern 3: Multi-Agent System
-
-Multiple specialized agents working together on complex tasks.
+Agentas, kuris prieš generuodamas atsakymus surenka aktualius dokumentus.
 
 ```mermaid
 graph TD
-    Orchestrator[Orkestratoriaus agentas] --> Research[Tyrimų agentas<br/>gpt-4.1]
-    Orchestrator --> Writer[Rašymo agentas<br/>gpt-4.1-mini]
-    Orchestrator --> Reviewer[Peržiūros agentas<br/>gpt-4.1]
+    Query[Vartotojo Užklausa] --> RAG[RAG Agentas]
+    RAG --> Vector[Vektorinė Paieška]
+    RAG --> LLM[LLM<br/>gpt-4.1]
+    Vector -- Documents --> LLM
+    LLM --> Response[Atsakymas su Citavimais]
 ```
 
-**Best for:**
-- Complex content generation
-- Multi-step workflows
-- Tasks requiring different expertise
+**Geriausiai tinka:**
+- Įmonių žinių bazėms
+- Dokumentų klausimų ir atsakymų sistemoms
+- Atitikties ir teisiniams tyrimams
 
-**Learn More:** [Multi-Agent Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md)
+**AZD šablonas:** `azure-search-openai-demo`
+
+### Modelis 3: Daugelio agentų sistema
+
+Keli specializuoti agentai, dirbantys kartu su sudėtingomis užduotimis.
+
+```mermaid
+graph TD
+    Orchestrator[Organizatoriaus Agentas] --> Research[Tyrimų Agentas<br/>gpt-4.1]
+    Orchestrator --> Writer[Rašytojo Agentas<br/>gpt-4.1-mini]
+    Orchestrator --> Reviewer[Recenzento Agentas<br/>gpt-4.1]
+```
+
+**Geriausiai tinka:**
+- Sudėtingam turinio generavimui
+- Daugiažingsniams darbo procesams
+- Užduotims, reikalaujančioms skirtingų kompetencijų
+
+**Sužinokite daugiau:** [Daugelio agentų koordinavimo modeliai](../chapter-06-pre-deployment/coordination-patterns.md)
 
 ---
 
-## ⚙️ Configuring Agent Tools
+## ⚙️ Agentų įrankių konfigūravimas
 
-Agents become powerful when they can use tools. Here's how to configure common tools:
+Agentai tampa galingi, kai gali naudoti įrankius. Kaip konfigūruoti dažniausiai naudojamus įrankius:
 
-### Tool Configuration in Foundry Agents
+### Įrankių konfigūravimas Foundry agentuose
 
 ```python
 # agent_config.py
 from azure.ai.projects import AIProjectClient
 from azure.ai.projects.models import FunctionTool, CodeInterpreterTool
 
-# Apibrėžti pasirinktinius įrankius
+# Apibrėžti pasirinktinės priemonės
 search_tool = FunctionTool(
     name="search_knowledge_base",
     description="Search the company knowledge base for relevant documents",
@@ -241,7 +241,7 @@ search_tool = FunctionTool(
     }
 )
 
-# Sukurti agentą su įrankiais
+# Sukurti agentą su priemonėmis
 agent = project_client.agents.create_agent(
     model="gpt-4.1",
     name="Support Agent",
@@ -250,7 +250,7 @@ agent = project_client.agents.create_agent(
 )
 ```
 
-### Environment Configuration
+### Aplinkos konfigūravimas
 
 ```bash
 # Nustatyti agentui specifinius aplinkos kintamuosius
@@ -265,41 +265,41 @@ azd deploy
 
 ---
 
-## 📊 Monitoring Agents
+## 📊 Agentų stebėjimas
 
-### Application Insights Integration
+### Application Insights integracija
 
-All AZD agent templates include Application Insights for monitoring:
+Visi AZD agentų šablonai apima Application Insights stebėjimui:
 
 ```bash
-# Atidaryti stebėjimo skydelį
+# Atidaryti stebėjimo informacijos suvestinę
 azd monitor --overview
 
-# Peržiūrėti realaus laiko žurnalus
+# Peržiūrėti tiesioginius žurnalus
 azd monitor --logs
 
-# Peržiūrėti realaus laiko metrikas
+# Peržiūrėti tiesioginius rodiklius
 azd monitor --live
 ```
 
-### Key Metrics to Track
+### Svarbūs stebėjimo rodikliai
 
-| Metric | Description | Target |
-|--------|-------------|--------|
-| Response Latency | Time to generate response | < 5 sekundžių |
-| Token Usage | Tokens per request | Monitor for cost |
-| Tool Call Success Rate | % of successful tool executions | > 95% |
-| Error Rate | Failed agent requests | < 1% |
-| User Satisfaction | Feedback scores | > 4.0/5.0 |
+| Rodiklis | Aprašymas | Tikslas |
+|----------|-----------|---------|
+| Atsakymo delsos laikas | Laikas generuoti atsakymui | < 5 sekundžių |
+| Naudojamų žetonų kiekis | Žetonai už užklausą | Stebėti kainai |
+| Įrankio skambučio sėkmės rodiklis | Sėkmingų įrankių vykdymų % | > 95% |
+| Klaidos dažnis | Nepavykusių agento užklausų skaičius | < 1% |
+| Vartotojų pasitenkinimas | Atsiliepimų įvertinimai | > 4.0/5.0 |
 
-### Custom Logging for Agents
+### Individualus žurnalavimas agentams
 
 ```python
 import os
 from azure.monitor.opentelemetry import configure_azure_monitor
 from opentelemetry import trace
 
-# Konfigūruoti Azure Monitor su OpenTelemetry
+# Sukonfigūruokite Azure Monitor su OpenTelemetry
 configure_azure_monitor(
     connection_string=os.environ["APPLICATIONINSIGHTS_CONNECTION_STRING"]
 )
@@ -316,29 +316,29 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
         })
 ```
 
-> **Note:** Įdiekite reikiamus paketus: `pip install azure-monitor-opentelemetry opentelemetry`
+> **Pastaba:** Įdiekite reikalingas paketas: `pip install azure-monitor-opentelemetry opentelemetry`
 
 ---
 
-## 💰 Cost Considerations
+## 💰 Kainų apsvarstymai
 
-### Estimated Monthly Costs by Pattern
+### Apskaičiuotos mėnesinės sąnaudos pagal modelį
 
-| Pattern | Dev Environment | Production |
-|---------|-----------------|------------|
-| Single Agent | $50-100 | $200-500 |
-| RAG Agent | $80-150 | $300-800 |
-| Multi-Agent (2-3 agents) | $150-300 | $500-1,500 |
-| Enterprise Multi-Agent | $300-500 | $1,500-5,000+ |
+| Modelis | Vystymo aplinka | Gamyba |
+|---------|-----------------|--------|
+| Vienas agentas | $50-100 | $200-500 |
+| RAG agentas | $80-150 | $300-800 |
+| Daugelio agentų (2-3 agentai) | $150-300 | $500-1,500 |
+| Enterprise daugelio agentų | $300-500 | $1,500-5,000+ |
 
-### Cost Optimization Tips
+### Patarimai kainų optimizavimui
 
-1. **Use gpt-4.1-mini for simple tasks**
+1. **Naudokite gpt-4.1-mini paprastoms užduotims**
    ```bash
    azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
    ```
 
-2. **Implement caching for repeated queries**
+2. **Įgyvendinkite kešavimą pasikartojančioms užklausoms**
    ```python
    from functools import lru_cache
    
@@ -347,30 +347,30 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
        return agent.run(query_hash)
    ```
 
-3. **Set token limits per run**
+3. **Nustatykite žetonų limitus kiekvienam vykdymui**
    ```python
-   # Nustatykite max_completion_tokens paleidžiant agentą, o ne kūrimo metu
+   # Nustatyti max_completion_tokens paleidžiant agentą, o ne kūrimo metu
    run = project_client.agents.create_run(
        thread_id=thread.id,
        agent_id=agent.id,
-       max_completion_tokens=1000  # Apribokite atsakymo ilgį
+       max_completion_tokens=1000  # Riboti atsakymo ilgį
    )
    ```
 
-4. **Scale to zero when not in use**
+4. **Nestabdytą mastelį sumažinkite iki nulio, kai nenaudojamas**
    ```bash
-   # Container Apps automatiškai sumažina instancijų skaičių iki nulio
+   # Container Apps automatiškai mažėja iki nulio
    azd env set MIN_REPLICAS "0"
    ```
 
 ---
 
-## 🔧 Troubleshooting Agents
+## 🔧 Agentų trikčių šalinimas
 
-### Common Issues and Solutions
+### Dažnos problemos ir sprendimai
 
 <details>
-<summary><strong>❌ Agent not responding to tool calls</strong></summary>
+<summary><strong>❌ Agentas nereaguoja į įrankio skambučius</strong></summary>
 
 ```bash
 # Patikrinkite, ar įrankiai tinkamai užregistruoti
@@ -381,21 +381,21 @@ az cognitiveservices account deployment list \
   --name $AZURE_OPENAI_NAME \
   --resource-group $RG_NAME
 
-# Patikrinkite agento žurnalus
+# Patikrinkite agentų žurnalus
 azd monitor --logs
 ```
 
-**Common causes:**
-- Tool function signature mismatch
-- Missing required permissions
-- API endpoint not accessible
+**Dažnos priežastys:**
+- Įrankio funkcijos parašo neatitikimas
+- Trūksta reikiamų leidimų
+- API galinis taškas nepasiekiamas
 </details>
 
 <details>
-<summary><strong>❌ High latency in agent responses</strong></summary>
+<summary><strong>❌ Aukštas delsos laikas agento atsakymuose</strong></summary>
 
 ```bash
-# Patikrinkite Application Insights dėl našumo kliūčių
+# Patikrinkite Application Insights dėl užsikimšimų
 azd monitor --live
 
 # Apsvarstykite galimybę naudoti greitesnį modelį
@@ -403,17 +403,17 @@ azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
 azd deploy
 ```
 
-**Optimization tips:**
-- Use streaming responses
-- Implement response caching
-- Reduce context window size
+**Optimizavimo patarimai:**
+- Naudokite srautinį atsakymą
+- Įgyvendinkite atsakymų kešavimą
+- Sumažinkite konteksto lango dydį
 </details>
 
 <details>
-<summary><strong>❌ Agent returning incorrect or hallucinated information</strong></summary>
+<summary><strong>❌ Agentas grąžina neteisingą arba išgalvotą informaciją</strong></summary>
 
 ```python
-# Patobulinti naudojant geresnes sistemos užklausas
+# Patobulinti su geresnėmis sistemos užklausomis
 instructions = """
 You are a helpful assistant. IMPORTANT:
 - Only answer based on provided context
@@ -422,7 +422,7 @@ You are a helpful assistant. IMPORTANT:
 - Never make up information
 """
 
-# Pridėti paieškos funkciją įtvirtinimui
+# Pridėti duomenų gavimą pagrindui
 agent = project_client.agents.create_agent(
     model="gpt-4.1",
     instructions=instructions,
@@ -432,7 +432,7 @@ agent = project_client.agents.create_agent(
 </details>
 
 <details>
-<summary><strong>❌ Token limit exceeded errors</strong></summary>
+<summary><strong>❌ Viršytas žetonų limitas</strong></summary>
 
 ```python
 # Įgyvendinti konteksto lango valdymą
@@ -456,58 +456,58 @@ def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
 
 ---
 
-## 🎓 Hands-On Exercises
+## 🎓 Praktinės užduotys
 
-### Exercise 1: Deploy a Basic Agent (20 minutes)
+### Užduotis 1: Įdiekite paprastą agentą (20 minučių)
 
-**Goal:** Deploy your first AI agent using AZD
+**Tikslas:** Išplatinkite savo pirmąjį DI agentą naudojant AZD
 
 ```bash
-# Žingsnis 1: Inicializuokite šabloną
+# 1 žingsnis: Inicializuoti šabloną
 azd init --template get-started-with-ai-agents
 
-# Žingsnis 2: Prisijunkite prie Azure
+# 2 žingsnis: Prisijungti prie Azure
 azd auth login
-# Jei dirbate per kelis nuomininkus, pridėkite --tenant-id <tenant-id>
+# Jei dirbate su skirtingais nuomininkais, pridėkite --tenant-id <tenant-id>
 
-# Žingsnis 3: Paleiskite diegimą
+# 3 žingsnis: Diegti
 azd up
 
-# Žingsnis 4: Išbandykite agentą
-# Tikėtinas rezultatas po diegimo:
+# 4 žingsnis: Išbandyti agentą
+# Tikėtinas išvestis po diegimo:
 #   Diegimas baigtas!
-#   Galinis adresas: https://<app-name>.<region>.azurecontainerapps.io
-# Atidarykite išvestyje parodytą URL ir pabandykite užduoti klausimą
+#   Galutinis taškas: https://<app-name>.<region>.azurecontainerapps.io
+# Atidarykite URL, parodytą išvestyje, ir bandykite užduoti klausimą
 
-# Žingsnis 5: Peržiūrėkite stebėjimą
+# 5 žingsnis: Peržiūrėti monitoringo duomenis
 azd monitor --overview
 
-# Žingsnis 6: Atlikite valymą
+# 6 žingsnis: Išvalyti aplinką
 azd down --force --purge
 ```
 
-**Success Criteria:**
-- [ ] Agent responds to questions
+**Sėkmės kriterijai:**
+- [ ] Agentas atsako į klausimus
 - [ ] Gali pasiekti stebėjimo skydelį per `azd monitor`
-- [ ] Resources cleaned up successfully
+- [ ] Ištekliai sėkmingai išvalyti
 
-### Exercise 2: Add a Custom Tool (30 minutes)
+### Užduotis 2: Pridėkite pasirinktą įrankį (30 minučių)
 
-**Goal:** Extend an agent with a custom tool
+**Tikslas:** Praplėskite agentą su pasirinktu įrankiu
 
-1. Deploy the agent template:
+1. Įdiekite agento šabloną:
    ```bash
    azd init --template get-started-with-ai-agents
    azd up
    ```
-2. Create a new tool function in your agent code:
+2. Sukurkite naują įrankio funkciją agento kode:
    ```python
    def get_weather(location: str) -> str:
        """Get current weather for a location."""
-       # API užklausa orų tarnybai
+       # API kvietimas orų tarnybai
        return f"Weather in {location}: Sunny, 72°F"
    ```
-3. Register the tool with the agent:
+3. Užregistruokite įrankį su agentu:
    ```python
    from azure.ai.projects.models import FunctionTool
 
@@ -529,21 +529,21 @@ azd down --force --purge
        tools=[weather_tool]
    )
    ```
-4. Redeploy and test:
+4. Perdiegtite ir išbandykite:
    ```bash
    azd deploy
-   # Paklausk: "Koks oras Sietle?"
-   # Tikimasi: Agentas kviečia get_weather("Seattle") ir grąžina informaciją apie orą
+   # Paklauskite: "Koks oras Sietle?"
+   # Lūkėtina: Agentas iškviečia get_weather("Seattle") ir pateikia orų informaciją
    ```
 
-**Success Criteria:**
-- [ ] Agent recognizes weather-related queries
-- [ ] Tool is called correctly
-- [ ] Response includes weather information
+**Sėkmės kriterijai:**
+- [ ] Agentas atpažįsta su oru susijusius klausimus
+- [ ] Įrankis kviečiamas teisingai
+- [ ] Atsakymas apima orų informaciją
 
-### Exercise 3: Build a RAG Agent (45 minutes)
+### Užduotis 3: Sukurkite RAG agentą (45 minutės)
 
-**Goal:** Create an agent that answers questions from your documents
+**Tikslas:** Sukurkite agentą, kuris atsako į klausimus iš jūsų dokumentų
 
 ```bash
 # 1 žingsnis: Diegti RAG šabloną
@@ -551,64 +551,64 @@ azd init --template azure-search-openai-demo
 azd up
 
 # 2 žingsnis: Įkelkite savo dokumentus
-# Įdėkite PDF/TXT failus į data/ katalogą, tada paleiskite:
+# Įdėkite PDF/TXT failus į data/ katalogą, tada vykdykite:
 python scripts/prepdocs.py
 
-# 3 žingsnis: Išbandykite su konkrečios srities klausimais
+# 3 žingsnis: Išbandykite su domenui specifiniais klausimais
 # Atidarykite žiniatinklio programos URL iš azd up išvesties
-# Užduokite klausimus apie įkeltus dokumentus
-# Atsakymai turėtų įtraukti citavimo nuorodas, pvz. [doc.pdf]
+# Užduokite klausimus apie savo įkeltus dokumentus
+# Atsakymai turėtų apimti citatų nuorodas, pvz., [doc.pdf]
 ```
 
-**Success Criteria:**
-- [ ] Agent answers from uploaded documents
-- [ ] Responses include citations
-- [ ] No hallucination on out-of-scope questions
+**Sėkmės kriterijai:**
+- [ ] Agentas atsako remdamasis įkeltomis dokumentų medžiagomis
+- [ ] Atsakymuose yra nuorodų į šaltinius
+- [ ] Nėra išgalvotos informacijos neapimantiems klausimams
 
 ---
 
-## 📚 Next Steps
+## 📚 Tolimesni žingsniai
 
-Now that you understand AI agents, explore these advanced topics:
+Kai suprantate DI agentus, tyrinėkite šias pažangias temas:
 
-| Topic | Description | Link |
-|-------|-------------|------|
-| **Multi-Agent Systems** | Build systems with multiple collaborating agents | [Retail Multi-Agent Example](../../examples/retail-scenario.md) |
-| **Coordination Patterns** | Learn orchestration and communication patterns | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) |
-| **Production Deployment** | Enterprise-ready agent deployment | [Production AI Practices](../chapter-08-production/production-ai-practices.md) |
-| **Agent Evaluation** | Test and evaluate agent performance | [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) |
-| **AI Workshop Lab** | Hands-on: Make your AI solution AZD-ready | [AI Workshop Lab](ai-workshop-lab.md) |
+| Tema | Aprašymas | Nuoroda |
+|-------|------------|---------|
+| **Daugelio agentų sistemos** | Kurkite sistemas su keliais bendradarbiaujančiais agentais | [Daugelio agentų mažmeninės prekybos pavyzdys](../../examples/retail-scenario.md) |
+| **Koordinavimo modeliai** | Sužinokite apie orkestracijos ir komunikacijos modelius | [Koordinavimo modeliai](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **Gamybos diegimas** | Įmonėms skirtas agentų diegimas | [Gamybos DI praktikos](../chapter-08-production/production-ai-practices.md) |
+| **Agentų vertinimas** | Testuokite ir vertinkite agentų veikimą | [DI trikčių šalinimas](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **DI dirbtuvės laboratorija** | Praktika: paruoškite savo DI sprendimą AZD | [DI dirbtuvės laboratorija](ai-workshop-lab.md) |
 
 ---
 
-## 📖 Additional Resources
+## 📖 Papildomi ištekliai
 
-### Official Documentation
+### Oficiali dokumentacija
 - [Microsoft Foundry Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
 - [Microsoft Foundry Agent Service Quickstart](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
 - [Semantic Kernel Agent Framework](https://learn.microsoft.com/semantic-kernel/)
 
-### AZD Templates for Agents
-- [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents)
-- [Agent OpenAI Python Prompty](https://github.com/Azure-Samples/agent-openai-python-prompty)
-- [Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)
+### AZD šablonai agentams
+- [Pradėkite dirbti su DI agentais](https://github.com/Azure-Samples/get-started-with-ai-agents)
+- [Agentas OpenAI Python Prompty](https://github.com/Azure-Samples/agent-openai-python-prompty)
+- [Azure Search OpenAI demonstracija](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-### Community Resources
-- [Awesome AZD - Agent Templates](https://azure.github.io/awesome-azd/?tags=ai-agents)
+### Bendruomenės ištekliai
+- [Awesome AZD - Agentų šablonai](https://azure.github.io/awesome-azd/?tags=ai-agents)
 - [Azure AI Discord](https://discord.gg/microsoft-azure)
 - [Microsoft Foundry Discord](https://discord.gg/nTYy5BXMWG)
 
-### Agent Skills for Your Editor
-- [**Microsoft Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Install reusable AI agent skills for Azure development in GitHub Copilot, Cursor, or any supported agent. Includes skills for [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [deployment](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), and [diagnostics](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
+### Agentų įgūdžiai jūsų redaktoriui
+- [**Microsoft Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Įdiekite pakartotinai naudojamus AI agentų įgūdžius Azure kūrimui GitHub Copilot, Cursor ar kitame palaikomame agentų įrankyje. Įtraukta įgūdžių apie [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [diegimą](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy) ir [diagnostiką](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **Next Lesson**: [AI Model Deployment](ai-model-deployment.md)
+**Naršymas**
+- **Ankstesnė pamoka**: [Microsoft Foundry integracija](microsoft-foundry-integration.md)
+- **Kita pamoka**: [DI modelio diegimas](ai-model-deployment.md)
 
 ---
 

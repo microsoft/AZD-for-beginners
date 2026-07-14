@@ -1,4 +1,4 @@
-# Capítulo 1: Fundação & Início Rápido
+# Capítulo 1: Fundamentos & Arranque Rápido
 
 **📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 30-45 minutos | **⭐ Complexidade**: Iniciante
 
@@ -6,16 +6,16 @@
 
 ## Visão Geral
 
-Este capítulo introduz os fundamentos do Azure Developer CLI (azd). Vai aprender conceitos principais, instalar as ferramentas e implantar a sua primeira aplicação no Azure.
+Este capítulo apresenta os fundamentos do Azure Developer CLI (azd). Vai aprender conceitos essenciais, instalar as ferramentas e implementar a sua primeira aplicação no Azure.
 
-> Validado com `azd 1.25.6` em junho de 2026.
+> Validado com `azd 1.27.1` em julho de 2026.
 
 ## Objetivos de Aprendizagem
 
 Ao completar este capítulo, irá:
 - Compreender o que é o Azure Developer CLI e como difere do Azure CLI
 - Instalar e configurar o AZD na sua plataforma
-- Implantar a sua primeira aplicação no Azure com `azd up`
+- Implementar a sua primeira aplicação no Azure com `azd up`
 - Limpar os recursos com `azd down`
 
 ---
@@ -23,16 +23,16 @@ Ao completar este capítulo, irá:
 ## 📚 Lições
 
 | # | Lição | Descrição | Tempo |
-|---|--------|-------------|-------|
-| 1 | [Noções Básicas do AZD](azd-basics.md) | Conceitos principais, terminologia e estrutura do projeto | 15 min |
+|---|--------|-------------|------|
+| 1 | [Noções Básicas do AZD](azd-basics.md) | Conceitos principais, terminologia, e estrutura do projeto | 15 min |
 | 2 | [Instalação & Configuração](installation.md) | Guias de instalação específicos para cada plataforma | 10 min |
-| 3 | [O Seu Primeiro Projeto](first-project.md) | Prático: Implantar uma aplicação web no Azure | 20 min |
-| 4 | [Traga a Sua Própria App](bring-your-own-app.md) | Adicione azd a um projeto existente que já tenha | 15 min |
-| 5 | [Contentores de Desenvolvimento & Codespaces](dev-containers.md) | Ambientes azd reprodutíveis com contentores de desenvolvimento | 15 min |
+| 3 | [O Seu Primeiro Projeto](first-project.md) | Prático: Implementar uma aplicação web no Azure | 20 min |
+| 4 | [Traga a Sua Própria App](bring-your-own-app.md) | Adicionar azd a um projeto existente que já tem | 15 min |
+| 5 | [Contentores de Desenvolvimento & Codespaces](dev-containers.md) | Ambientes azd reproduzíveis com contentores de desenvolvimento | 15 min |
 
 ---
 
-## ✅ Comece Aqui: Valide a Sua Configuração
+## ✅ Comece Aqui: Verifique a Sua Configuração
 
 Antes de começar, confirme que a sua máquina local está pronta para o modelo do Capítulo 1:
 
@@ -46,14 +46,14 @@ Antes de começar, confirme que a sua máquina local está pronta para o modelo 
 bash ./validate-setup.sh
 ```
 
-Se o script indicar ferramentas em falta, corrija-as primeiro e depois continue com o capítulo.
+Se o script indicar ferramentas em falta, corrija essas primeiras e depois continue com o capítulo.
 
 ---
 
-## 🚀 Início Rápido
+## 🚀 Arranque Rápido
 
 ```bash
-# Verificar instalação
+# Verificar a instalação
 azd version
 
 # Autenticar para AZD
@@ -64,7 +64,7 @@ azd auth login
 azd init --template todo-nodejs-mongo
 azd up
 
-# Limpar quando terminar
+# Limpar após terminar
 azd down --force --purge
 ```
 
@@ -72,13 +72,13 @@ azd down --force --purge
 
 ## ✅ Critérios de Sucesso
 
-Após completar este capítulo, deverá ser capaz de:
+Depois de completar este capítulo, deverá ser capaz de:
 
 ```bash
 azd version              # Mostra a versão instalada
 azd init --template todo-nodejs-mongo  # Inicializa o projeto
-azd up                   # Implementa no Azure
-azd show                 # Exibe a URL da aplicação em execução
+azd up                   # Desdobra para Azure
+azd show                 # Mostra a URL da aplicação em execução
 azd down --force --purge # Limpa os recursos
 ```
 
@@ -87,16 +87,16 @@ azd down --force --purge # Limpa os recursos
 ## 🔗 Navegação
 
 | Direção | Capítulo |
-|---------|----------|
-| **Seguinte** | [Capítulo 2: Desenvolvimento com IA em Primeiro Lugar](../chapter-02-ai-development/README.md) |
-| **Saltar para** | [Capítulo 3: Configuração](../chapter-03-configuration/README.md) |
+|-----------|---------|
+| **Próximo** | [Capítulo 2: Desenvolvimento AI-First](../chapter-02-ai-development/README.md) |
+| **Ir Para** | [Capítulo 3: Configuração](../chapter-03-configuration/README.md) |
 
 ---
 
 ## 📖 Recursos Relacionados
 
-- [Folha de Comandos](../../resources/cheat-sheet.md)
-- [Perguntas Frequentes](../../resources/faq.md)
+- [Folha de Consulta de Comandos](../../resources/cheat-sheet.md)
+- [FAQ](../../resources/faq.md)
 - [Glossário](../../resources/glossary.md)
 
 ---

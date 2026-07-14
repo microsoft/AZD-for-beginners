@@ -1,91 +1,91 @@
-# ಅಧ್ಯಾಯ 2: ಎಐ-ಪ್ರಥಮ ಅಭಿವೃದ್ಧಿ
+# ಅಧ್ಯಾಯ 2: AI-ಮೊದಲನೇ ಅಭಿವೃದ್ಧಿ
 
-**📚 Course**: [AZD ಪ್ರಾರಂಭಿಕರಿಗೆ](../../README.md) | **⏱️ Duration**: 1-2 ಗಂಟೆಗಳು | **⭐ Complexity**: ಮಧ್ಯಮ
+**📚 ಪಾಠಕ್ರಮ**: [ಕೋರ್ಸ್ ಪ್ರಾರಂಭಿಕರಿಗಾಗಿ AZD](../../README.md) | **⏱️ ಅವಧಿ**: 1-2 ಮಣೆಗಳು | **⭐ ಸಂಕೀರ್ಣತೆ**: ಮಧ್ಯಮ
 
 ---
 
 ## ಅವಲೋಕನ
 
-ಈ ಅಧ್ಯಾಯವು Azure Developer CLI ಮತ್ತು Microsoft Foundry ಸೇವೆಗಳನ್ನು ಬಳಸಿಕೊಂಡು ಎಐ-ಸಾಮರ್ಥ್ಯಯಿರುವ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ನಿಯೋಜಿಸುವುದನ್ನು ಒಳಗೊಂಡಿದೆ. ಸರಳ ಎಐ ಚಾಟ್ ಅಪ್ಲಿಕೇಶನ್‌ಗಳಿಂದ ಉಪಕರಣಗಳೊಂದಿಗೆ ಬುದ್ಧಿವಂತ ಏಜೆಂಟ್‌ಗಳವರೆಗೂ.
+ಈ ಅಧ್ಯಾಯವು Azure ಡೆವಲಪರ್ CLI ಮತ್ತು Microsoft Foundry ಸೇವೆಗಳನ್ನು ಬಳಸಿಕೊಂಡು AI-ಚಾಲಿತ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ನಿಯೋಜಿಸುವುದರ ಮೇಲೆ ಕೇಂದ್ರಿತವಾಗಿದೆ. ಸರಳ AI ಚಾಟ್ ಅಪ್ಲಿಕೇಶನ್‌ಗಳಿಂದ ಸಾಧನಗಳೊಂದಿಗೆ ಬುದ್ಧಿವಂತ ಏಜೆಂಟ್‌ಗಳವರೆಗೆ.
 
-> **ಮಾನ್ಯತೆ ಟಿಪ್ಪಣಿ (2026-06-15):** ಈ ಅಧ್ಯಾಯದಲ್ಲಿನ ಕಮಾಂಡ್ ಫ್ಲೋ ಮತ್ತು ವಿಸ್ತರಣೆ ಮಾರ್ಗದರ್ಶನವನ್ನು `azd` `1.25.6` ಮತ್ತು ಪ್ರಸ್ತುತ ಪೂರ್ವದರ್ಶನ AI ಏಜೆಂಟ್ ವಿಸ್ತರಣೆ ಬಿಡುಗಡೆ `azure.ai.agents` `0.1.40-preview` ವಿರುದ್ಧ ಪರಿಶೀಲಿಸಲಾಗಿದೆ. ನೀವು ಹಳೆಯ AZD ಬಿಲ್ಡ್‌ನಲ್ಲಿ ಇದ್ದರೆ, ಮೊದಲು ಅಪ್‌ಡೇಟ್ ಮಾಡಿ ನಂತರ ಅಭ್ಯಾಸಗಳನ್ನು ಮುಂದುವರೆಸಿರಿ.
+> **ಮಾನ್ಯತೆಯ ಟಿಪ್ಪಣಿ (2026-07-13):** ಈ ಅಧ್ಯಾಯದಲ್ಲಿನ ಕಮಾಂಡ್ ಫ್ಲೋ ಮತ್ತು ವಿಸ್ತರಣೆ ಮಾರ್ಗದರ್ಶನವನ್ನು `azd` `1.27.1` ಮತ್ತು ಪ್ರಸ್ತುತ ಪೂರ್ವಾವಲೋಕನ AI ಏಜೆಂಟ್ ವಿಸ್ತರಣೆ ಬಿಡುಗಡೆ `azure.ai.agents` `1.0.0-beta.5` ವಿರುದ್ಧ ಪರಿಶೀಲಿಸಲಾಗಿದ್ದು, ನೀವು ಹಳೆಯ AZD ನಿರ್ಮಾಣದಲ್ಲಿ ಇದ್ದರೆ, ಮೊದಲು ನವೀಕರಿಸಿ ನಂತರ ಅಭ್ಯಾಸಗಳೊಂದಿಗೆ ಮುಂದುವರಿಯಿರಿ.
 
-## ಕಲಿಕೆಯ ಉದ್ದೇಶಗಳು
+## ಕಲಿಕೆ ಗುರಿಗಳು
 
-ಈ ಅಧ್ಯಾಯವನ್ನು ಪೂರ್ಣಗೊಳಿಸಿದಾಗ, ನೀವು:
-- ಪೂರ್ವ-ನಿರ್ಮಿತ AZD ಟೆಂಪ್ಲೇಟ್ಗಳನ್ನು ಬಳಸಿ ಎಐ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ನಿಯೋಜಿಸುವದು
-- AZD ಜೊತೆಗೆ Microsoft Foundry ಏಕೀಕರಣವನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವುದು
-- ಉಪಕರಣಗಳೊಂದಿಗೆ ಎಐ ಏಜೆಂಟ್‌ಗಳನ್ನು ಸಂರಚಿಸಿ ಮತ್ತು ಕಸ್ಟಮೈಸ್ ಮಾಡುವುದು
-- RAG (Retrieval-Augmented Generation) ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ನಿಯೋಜಿಸುವದು
+ಈ ಅಧ್ಯಾಯವನ್ನು ಪೂರ್ಣಗೊಳಿಸುವ ಮೂಲಕ ನೀವು:
+- ಪೂರ್ವ ನಿರ್ಮಿತ AZD ಟೆಂಪ್ಲೇಟುಗಳನ್ನು ಬಳಸಿಕೊಂಡು AI ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ನಿಯೋಜಿಸುವುದು
+- AZD ಜೊತೆ Microsoft Foundry ಏಕೀಕರಣವನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವುದು
+- ಸಾಧನಗಳೊಂದಿಗೆ AI ಏಜೆಂಟ್‌ಗಳನ್ನು ಸಂರಚಿಸುವುದು ಮತ್ತು ಕಸ್ಟಮೈಸ್‌ಮಾಡುವುದು
+- RAG (Retrieval-Augmented Generation) ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ನಿಯೋಜಿಸುವುದು
 
 ---
 
 ## 📚 ಪಾಠಗಳು
 
-| # | Lesson | Description | Time |
+| # | ಪಾಠ | ವಿವರಣೆ | ಸಮಯ |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | AZD ಅನ್ನು Foundry ಸೇವೆಗಳಿಗೆ ಸಂಪರ್ಕಿಸಿ | 30 ನಿಮಿಷ |
-| 2 | [AI Agents Guide](agents.md) | ಉಪಕರಣಗಳೊಂದಿಗೆ ಬುದ್ಧಿವಂತ ಏಜೆಂಟ್‌ಗಳನ್ನು ನಿಯೋಜಿಸಿ | 45 ನಿಮಿಷ |
-| 3 | [AI Model Deployment](ai-model-deployment.md) | ಎಐ ಮಾದರಿಗಳನ್ನು ನಿಯೋಜಿಸಿ ಮತ್ತು ಸಂರಚಿಸಿ | 30 ನಿಮಿಷ |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | ಪ್ರಾಯೋಗಿಕ: ನಿಮ್ಮ ಎಐ ಪರಿಹಾರವನ್ನು AZD-ಗಾಗಿ ಸಿದ್ಧಗೊಳಿಸಿ | 60 ನಿಮಿಷ |
+| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | AZD ಆಗಿ Foundry ಸೇವೆಗಳನ್ನು ಸಂಪರ್ಕಿಸುವುದು | 30 ನಿಮಿಷ |
+| 2 | [AI Agents Guide](agents.md) | ಸಾಧನಗಳೊಂದಿಗೆ ಬುದ್ಧಿವಂತ ಏಜೆಂಟ್‌ಗಳನ್ನು ನಿಯೋಜಿಸುವುದು | 45 ನಿಮಿಷ |
+| 3 | [AI Model Deployment](ai-model-deployment.md) | AI ಮಾದರಿಗಳನ್ನು ನಿಯೋಜಿಸುವುದು ಮತ್ತು ಸಂರಚಿಸುವುದು | 30 ನಿಮಿಷ |
+| 4 | [AI Workshop Lab](ai-workshop-lab.md) | ಕೈಗೊಂಡು ಅಭ್ಯಾಸ: ನಿಮ್ಮ AI ಪರಿಹಾರವನ್ನು AZD-ಗೆ ತಯಾರಿಸುವುದು | 60 ನಿಮಿಷ |
 
 ---
 
-## 🚀 ವೇಗದ ಪ್ರಾರಂಭ
+## 🚀 ತ್ವರಿತ ಪ್ರಾರಂಭ
 
 ```bash
-# ಆಯ್ಕೆ 1: RAG ಚಾಟ್ ಅಪ್ಲಿಕೇಶನ್
+# ಆಯ್ಕೆ 1: ರ್ಯಾಗ್ ಚಾಟ್ ಅಪ್ಲಿಕೇಶನ್
 azd init --template azure-search-openai-demo
 azd up
 
-# ಆಯ್ಕೆ 2: ಕೃತಕ ಬುದ್ಧಿಮತ್ತೆ ಏಜೆಂಟ್ಗಳು
+# ಆಯ್ಕೆ 2: ಏಐ ಏಜೆಂಟ್ಸ್
 azd init --template get-started-with-ai-agents
 azd up
 
-# ಆಯ್ಕೆ 3: ವೇಗದ ಚಾಟ್ ಅಪ್ಲಿಕೇಶನ್
+# ಆಯ್ಕೆ 3: ತ್ವರಿತ ಚಾಟ್ ಅಪ್
 azd init --template openai-chat-app-quickstart
 azd up
 ```
 
 ---
 
-## 🤖 ಮುಖ್ಯ ಎಐ ಟೆಂಪ್ಲೇಟ್ಗಳು
+## 🤖 ಪ್ರಖ್ಯಾತ AI ಟೆಂಪ್ಲೇಟುಗಳು
 
-| Template | Description | Services |
+| ಟೆಂಪ್ಲೇಟು | ವಿವರಣೆ | ಸೇವೆಗಳು |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ಉಲ್ಲೇಖಗಳೊಂದಿಗೆ RAG ಚಾಟ್ | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ಉಪಕರಣಗಳೊಂದಿಗೆ ಎಐ ಏಜೆಂಟ್ | AI Agent Service |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | ಮೂಲಭೂತ ಎಐ ಚಾಟ್ | OpenAI + Container Apps |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG ಚಾಟ್ ಉಲ್ಲೇಖಗಳೊಂದಿಗೆ | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ಸಾಧನಗಳೊಂದಿಗೆ AI ಏಜೆಂಟ್ | AI ಏಜೆಂಟ್ ಸೇವೆ |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | ಮೂಲ AI ಚಾಟ್ | OpenAI + ಕಂಟೇನರ್ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು |
 
 ---
 
 ## 💰 ವೆಚ್ಚ ಅರಿವು
 
-| Environment | Estimated Monthly Cost |
+| ಪರಿಸರ | ಅಂದಾಜು ಮಾಸಿಕ ವೆಚ್ಚ |
 |-------------|----------------------|
-| Development | $80-150 |
-| Staging | $150-300 |
-| Production | $300-3,500+ |
+| ಅಭಿವೃದ್ಧಿ | $80-150 |
+| ಸ್ಟೇಜಿಂಗ್ | $150-300 |
+| ಉತ್ಪಾದನೆ | $300-3,500+ |
 
-**ಟಿಪ್:** ಪರೀಕ್ಷೆ ನಂತರ ಶುಲ್ಕಗಳನ್ನು ತಪ್ಪಿಸಲು `azd down` ಅನ್ನು ಚಾಲನೆ ಮಾಡಿ.
+**ಸೂಚನೆ:** ಪರಿಕ್ಷೆ ನಂತರ ಶುಲ್ಕಗಳನ್ನು ತಪ್ಪಿಸಲು `azd down` ಅನ್ನು ಚಲಾಯಿಸಿ.
 
 ---
 
 ## 🔗 ನ್ಯಾವಿಗೇಶನ್
 
-| Direction | Chapter |
+| ದಿಕ್ಕು | ಅಧ್ಯಾಯ |
 |-----------|---------|
-| **Previous** | [ಅಧ್ಯಾಯ 1: ಅಡಿಪಾಯ](../chapter-01-foundation/README.md) |
-| **Next** | [ಅಧ್ಯಾಯ 3: ಸಂರಚನೆ](../chapter-03-configuration/README.md) |
-| **Skip to** | [ಅಧ್ಯಾಯ 8: Production Patterns](../chapter-08-production/README.md) |
+| **ಹಿಂದಿನ** | [ಅಧ್ಯಾಯ 1: ಆಧಾರಶಿಲೆ](../chapter-01-foundation/README.md) |
+| **ಮುಂದಿನ** | [ಅಧ್ಯಾಯ 3: ಸಂರಚನೆ](../chapter-03-configuration/README.md) |
+| **ಏರಿ ಹೋವು** | [ಅಧ್ಯಾಯ 8: ಉತ್ಪಾದನಾ ಮಾದರಿಗಳು](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 ಸಂಬಂಧಿತ ಸಂಪನ್ಮೂಲಗಳು
 
-- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Production AI Practices](../chapter-08-production/production-ai-practices.md)
-- [Application Insights](../chapter-06-pre-deployment/application-insights.md)
+- [AI ತೊಂದರೆ ಪರಿಹಾರ](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [ಉತ್ಪಾದನಾ AI ಅಭ್ಯಾಸಗಳು](../chapter-08-production/production-ai-practices.md)
+- [ಅಪ್ಲಿಕೇಶನ್ ಇನ್ಸೈಟ್ಸ್](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 

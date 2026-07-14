@@ -1,23 +1,23 @@
-# Kapitel 6: Planering och validering före driftsättning
+# Kapitel 6: Planering och validering före distribution
 
-**📚 Kurs**: [AZD för nybörjare](../../README.md) | **⏱️ Längd**: 1 timme | **⭐ Komplexitet**: Medel
+**📚 Kurs**: [AZD För nybörjare](../../README.md) | **⏱️ Varaktighet**: 1 timme | **⭐ Svårighetsgrad**: Medelnivå
 
 ---
 
 ## Översikt
 
-Detta kapitel täcker viktiga planerings- och valideringssteg innan du driftsätter din applikation. Lär dig undvika kostsamma misstag med korrekt kapacitetsplanering, SKU-val och förkontroller.
+Detta kapitel täcker viktiga planerings- och valideringssteg innan du distribuerar din applikation. Lär dig undvika kostsamma misstag med korrekt kapacitetsplanering, SKU-val och förhandskontroller.
 
-> Validerad mot `azd 1.25.6` i juni 2026.
+> Validerad mot `azd 1.27.1` i juli 2026.
 
 ## Lärandemål
 
 Genom att slutföra detta kapitel kommer du att:
-- Köra förkontroller före driftsättning
+- Köra förhandskontroller före distribution
 - Planera kapacitet och uppskatta resursbehov
 - Välja lämpliga SKU:er för kostnadsoptimering
 - Konfigurera Application Insights för övervakning
-- Förstå mönster för teamkoordination
+- Förstå samordningsmönster för teamet
 
 ---
 
@@ -25,11 +25,11 @@ Genom att slutföra detta kapitel kommer du att:
 
 | # | Lektion | Beskrivning | Tid |
 |---|--------|-------------|------|
-| 1 | [Preflight Checks](preflight-checks.md) | Validera konfiguration före driftsättning | 15 min |
-| 2 | [Capacity Planning](capacity-planning.md) | Uppskatta resursbehov | 20 min |
-| 3 | [SKU Selection](sku-selection.md) | Välj lämpliga prissättningsnivåer | 15 min |
+| 1 | [Förhandskontroller](preflight-checks.md) | Validera konfiguration före distribution | 15 min |
+| 2 | [Kapacitetsplanering](capacity-planning.md) | Uppskatta resursbehov | 20 min |
+| 3 | [SKU-val](sku-selection.md) | Välj lämpliga prisnivåer | 15 min |
 | 4 | [Application Insights](application-insights.md) | Konfigurera övervakning | 20 min |
-| 5 | [Coordination Patterns](coordination-patterns.md) | Teamets driftsättningsarbetsflöden | 15 min |
+| 5 | [Samordningsmönster](coordination-patterns.md) | Teamets distributionsarbetsflöden | 15 min |
 
 ---
 
@@ -51,30 +51,30 @@ azd env get-values
 
 ---
 
-## ☑️ Checklista före driftsättning
+## ☑️ Kontrollista före distribution
 
-### Innan `azd provision`
+### Före `azd provision`
 
-- [ ] Kvot verifierad för regionen
-- [ ] SKUs valda på lämpligt sätt
+- [ ] Kvot verifierad för region
+- [ ] SKU:er valda lämpligt
 - [ ] Kostnadsuppskattning granskad
 - [ ] Namngivningskonvention konsekvent
 - [ ] Säkerhet/RBAC konfigurerat
 
-### Innan `azd deploy`
+### Före `azd deploy`
 
-- [ ] Miljövariabler inställda
+- [ ] Miljövariabler satta
 - [ ] Hemligheter i Key Vault
 - [ ] Anslutningssträngar verifierade
 - [ ] Hälsokontroller konfigurerade
 
 ---
 
-## 💰 Guide för val av SKU
+## 💰 Guide för SKU-val
 
-| Workload | Development | Production |
+| Arbetsbelastning | Utveckling | Produktion |
 |----------|-------------|------------|
-| Container Apps | Consumption | Dedicated D4 |
+| Containerappar | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
 | Microsoft Foundry Models | Standard | Standard + PTU |
 | AI Search | Basic | Standard S2+ |
@@ -85,7 +85,7 @@ azd env get-values
 
 | Riktning | Kapitel |
 |-----------|---------|
-| **Föregående** | [Kapitel 5: Fleragent](../chapter-05-multi-agent/README.md) |
+| **Föregående** | [Kapitel 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
 | **Nästa** | [Kapitel 7: Felsökning](../chapter-07-troubleshooting/README.md) |
 
 ---
@@ -93,7 +93,7 @@ azd env get-values
 ## 📖 Relaterade resurser
 
 - [Konfigurationsguide](../chapter-03-configuration/configuration.md)
-- [Driftsättningsguide](../chapter-04-infrastructure/deployment-guide.md)
+- [Distributionsguide](../chapter-04-infrastructure/deployment-guide.md)
 - [Vanliga problem](../chapter-07-troubleshooting/common-issues.md)
 
 ---

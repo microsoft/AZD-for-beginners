@@ -1,67 +1,67 @@
-# 撰寫你自己的 azd 範本
+# 撰寫您自己的 azd 範本
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 4 - Infrastructure as Code & Deployment
-- **⬅️ Previous**: [Deployment Guide](deployment-guide.md)
-- **🚀 Next Chapter**: [Chapter 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md)
+**章節導覽：**
+- **📚 課程首頁**：[AZD 初學者指南](../../README.md)
+- **📖 目前章節**：第4章 - 基礎架構即程式碼與部署
+- **⬅️ 上一章**：[部署指南](deployment-guide.md)
+- **🚀 下一章**：[第5章：多代理解決方案](../chapter-05-multi-agent/README.md)
 
-> 已於 2026 年 6 月用 `azd 1.25.6` 驗證。
+> 以 `azd 1.27.1` 於2026年7月驗證。
 
-## 簡介
+## 介紹
 
-到目前為止你已經 <em>使用</em> `azd init --template <name>` 來取得範本。但一旦你的團隊喜歡某個專案佈局——例如，一個 Container App 搭配 Cosmos DB 和適當的監控——你會想把它變成自己可重複使用的範本。範本只是 azd 能夠讀取的一個具有可預測結構的 Git 倉庫。本課程示範如何從頭建立一個，測試它，並（可選）發佈到社群畫廊。
+到目前為止，您已經透過 `azd init --template <name>` <em>使用</em> 範本。但一旦您有了一個團隊喜歡的專案佈局—比方說，有一個容器應用程式搭配 Cosmos DB 和適當的監控—您會想把它轉成您自己的可重複使用範本。範本只是一個具有可預測結構且 azd 知道如何讀取的 Git 儲存庫。本課程將教您如何從零開始建立範本、測試，並（選擇性地）發佈到社群畫廊。
 
 ## 學習目標
 
-完成本課程後，你將能：
-- 了解哪些條件使一個資料夾成為「azd 範本」
-- 知道必要的檔案與資料夾佈局
-- 新增可被他人重用的 `azure.yaml` 與 `infra/`
-- 在分享前於本機測試範本
-- 發佈範本並（可選）提交至 Awesome AZD
+完成本課程後，您將能：
+- 了解什麼條件使資料夾成為「azd 範本」
+- 知道所需的檔案與資料夾佈局
+- 新增可重複使用的 `azure.yaml` 和 `infra/`
+- 在分享前本機測試您的範本
+- 發佈它，並（選擇性）提交至 Awesome AZD
 
 ## 學習成果
 
-完成本課程後，你將能：
-- 快速建立新的範本儲存庫骨架
-- 將基礎設施參數化，使其可在任何訂閱中運行
-- 使用 `azd init` 與 `azd up` 驗證範本
-- 新增社群畫廊要求的 metadata
+完成本課程後，您將能：
+- 建立新的範本儲存庫腳手架
+- 參數化基礎設施，使其適用於任何訂閱
+- 使用 `azd init` 和 `azd up` 驗證範本
+- 新增社群畫廊所需的元資料
 
 ---
 
 ## 範本到底是什麼？
 
-azd 範本是 **一個 Git 倉庫**，至少包含：
+azd 範本是 **一個 Git 儲存庫**，至少包含：
 
-| File / folder | Purpose | Required? |
+| 檔案 / 資料夾 | 目的 | 是否必需 |
 |---------------|---------|-----------|
-| `azure.yaml` | Describes services, hosts, and infra provider | ✅ 是 |
-| `infra/` | Bicep, Terraform, or Pulumi that provisions resources | ✅ 是 |
-| `src/` (or your code) | The application code azd deploys | ✅ 是 |
-| `README.md` | How to use the template | ✅ 強烈建議 |
-| `.azdo/` or `.github/` | CI/CD pipeline definitions | Optional |
-| `.devcontainer/` | Reproducible dev environment | Optional |
-| `azure.yaml` `metadata` | Gallery + telemetry info | 可選（若要發佈則為必要） |
+| `azure.yaml` | 描述服務、主機和基礎設施供應者 | ✅ 是 |
+| `infra/` | 使用 Bicep、Terraform 或 Pulumi 佈建資源 | ✅ 是 |
+| `src/`（或您的程式碼） | azd 部署的應用程式程式碼 | ✅ 是 |
+| `README.md` | 範本使用說明 | ✅ 強烈建議 |
+| `.azdo/` 或 `.github/` | CI/CD 流水線定義 | 選擇性 |
+| `.devcontainer/` | 可重現的開發環境 | 選擇性 |
+| `azure.yaml` 中的 `metadata` | 畫廊與遙測資訊 | 選擇性（發佈需具備） |
 
-這裡沒有什麼魔法：當你執行 `azd init --template you/your-repo` 時，azd 會 clone 該倉庫並讀取 `azure.yaml`。
+這裡沒有魔法：當您執行 `azd init --template you/your-repo` 時，azd 會複製儲存庫並讀取 `azure.yaml`。
 
 ---
 
-## Step 1: Scaffold the Repository
+## 步驟1：建立儲存庫腳手架
 
-Create the folder structure by hand or start from a minimal template and edit it:
+手動建立資料夾結構，或從簡約範本開始並編輯：
 
 ```bash
 mkdir my-azd-template && cd my-azd-template
 git init
 
-# 建立標準版面配置
+# 建立標準佈局
 mkdir -p src infra
 ```
 
-A typical finished layout looks like this:
+完成的典型佈局看起來像這樣：
 
 ```
 my-azd-template/
@@ -81,9 +81,9 @@ my-azd-template/
 
 ---
 
-## Step 2: Write `azure.yaml`
+## 步驟2：撰寫 `azure.yaml`
 
-This is the heart of the template. It tells azd what to deploy and how:
+這是範本的核心。它告訴 azd 要部署什麼以及如何部署：
 
 ```yaml
 # azure.yaml
@@ -101,13 +101,13 @@ services:
     host: containerapp              # appservice | containerapp | function | aks | staticwebapp
 ```
 
-> `metadata.template` 欄位是畫廊遙測用來計算使用量的欄位。請使用 `name@version` 慣例。
+> `metadata.template` 欄位是畫廊遙測用來計算使用量。請使用 `name@version` 慣例。
 
 ---
 
-## Step 3: Parameterize the Infrastructure
+## 步驟3：參數化基礎架構
 
-The single most important rule for a *reusable* template: **never hardcode names, regions, or subscription-specific values.** Use parameters and the resource token pattern so the same template works in anyone's subscription.
+<em>可重複使用</em> 範本最重要的規則：**絕不硬編碼名稱、地區或訂閱特定值。** 使用參數和資源代幣模式，使相同範本能在任何人的訂閱中運作。
 
 ```bicep
 // infra/main.bicep
@@ -138,12 +138,12 @@ module web 'modules/web.bicep' = {
 output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 ```
 
-Two things make this template-friendly:
+這兩點讓範本更友善：
 
-1. **`azd-env-name` tag** — azd uses it to track and clean up resources per environment.
-2. **`uniqueString(...)` resource token** — produces a stable, globally-unique suffix so names don't collide.
+1. **`azd-env-name` 標籤** — azd 用它來追蹤並清理每個環境的資源。
+2. **`uniqueString(...)` 資源代幣** — 產生穩定且全球唯一的後綴，避免名稱衝突。
 
-Provide a matching parameters file that reads values azd injects from the environment:
+提供一個對應的參數檔，從環境讀取 azd 注入的值：
 
 ```json
 // infra/main.parameters.json
@@ -157,47 +157,47 @@ Provide a matching parameters file that reads values azd injects from the enviro
 }
 ```
 
-azd substitutes `${AZURE_ENV_NAME}` and `${AZURE_LOCATION}` from the current environment automatically.
+azd 會自動以當前環境替換 `${AZURE_ENV_NAME}` 及 `${AZURE_LOCATION}`。
 
 ---
 
-## Step 4: Test Your Template Locally
+## 步驟4：本機測試您的範本
 
-Before sharing, prove the template works from a clean state.
+分享前，請證明範本從清潔狀態開始能正常運作。
 
-**Test from the local folder** (no Git push required):
+<strong>從本機資料夾測試</strong>（不需推送 Git）：
 
 ```bash
-# 從一個空目錄，使用您本機的範本路徑進行初始化
+# 從一個空目錄，使用您的本地模板路徑初始化
 mkdir /tmp/test-run && cd /tmp/test-run
 azd init --template /path/to/my-azd-template
 
-# 端到端佈建與部署
+# 端到端配置與部署
 azd auth login
 azd up
 ```
 
-**Then test the teardown**—a good template cleans up completely:
+<strong>接著測試拆除</strong>—好的範本會完全清理資源：
 
 ```bash
 azd down --force --purge
 ```
 
-If `azd down` leaves resources behind, you probably missed the `azd-env-name` tag on a resource.
+如果 `azd down` 留下資源，您可能忘了給資源標記 `azd-env-name`。
 
-> **Tip:** run `azd provision --preview` first. It performs a what-if and surfaces template errors before any resource is created.
+> **提示：** 先執行 `azd provision --preview`。它會執行假設檢查，在建立任何資源前揭示範本錯誤。
 
 ---
 
-## Step 5: Publish the Template
+## 步驟5：發佈範本
 
-Push the repository to GitHub (public if you want others to use it):
+將儲存庫推上 GitHub（想讓其他人使用則公開）：
 
 ```bash
 gh repo create my-azd-template --public --source=. --push
 ```
 
-Anyone can now use it:
+現在任何人都能使用它：
 
 ```bash
 azd init --template your-github-username/my-azd-template
@@ -205,55 +205,55 @@ azd init --template your-github-username/my-azd-template
 
 ---
 
-## Step 6 (Optional): Submit to Awesome AZD
+## 步驟6（選擇性）：提交至 Awesome AZD
 
-The [Awesome AZD gallery](https://azure.github.io/awesome-azd/) lists community templates. To be listed your repo should include:
+[Awesome AZD 畫廊](https://azure.github.io/awesome-azd/)列出社群範本。要被列出，您的儲存庫應該包含：
 
-- ✅ 清晰的 `README.md`，包含先決條件、架構圖和成本說明
-- ✅ 一個可運作的 `azure.yaml`，包含 `metadata.template`
-- ✅ 能在全新訂閱中順利佈署的基礎設施
+- ✅ 具清晰的 `README.md`，包含前置需求、架構圖與成本說明
+- ✅ 可用的 `azure.yaml` 與 `metadata.template`
+- ✅ 能在全新訂閱環境乾淨佈建的基礎架構
 - ✅ `LICENSE` 檔案
-- ✅（建議）包含 `.devcontainer/` 以支援一鍵 Codespaces
+- ✅ （建議）具一鍵啟用 Codespaces 的 `.devcontainer/`
 
-Submit by opening a pull request that adds your template to the gallery's data file, following the contribution guide at the [Awesome AZD repository](https://github.com/Azure/awesome-azd).
+透過於 [Awesome AZD 儲存庫](https://github.com/Azure/awesome-azd) 開 Pull Request，新增您的範本至畫廊資料檔並遵循貢獻指南來提交。
 
 ---
 
 ## 常見陷阱
 
-| Pitfall | Fix |
+| 陷阱 | 解決方法 |
 |---------|-----|
-| Hardcoded resource names | Use the `uniqueString()` resource token |
-| `azd down` leaves resources | Tag every resource (or the resource group) with `azd-env-name` |
-| Template works for you, fails for others | Remove subscription IDs, tenant IDs, and region assumptions |
-| Outputs not wired into the app | Export `SERVICE_<NAME>_ENDPOINT_URL` and other `AZURE_*` outputs |
-| Gallery submission rejected | Add `README.md`, `LICENSE`, and `metadata.template` |
+| 硬編碼資源名稱 | 使用 `uniqueString()` 資源代幣 |
+| `azd down` 留下資源 | 給每個資源（或資源群組）加上 `azd-env-name` 標籤 |
+| 範本您這裡可用，別人那裡失敗 | 移除訂閱ID、租戶ID、地區假設 |
+| 輸出未連接到應用程式 | 匯出 `SERVICE_<NAME>_ENDPOINT_URL` 和其他 `AZURE_*` 輸出 |
+| 交由畫廊投稿被拒 | 補充 `README.md`、`LICENSE` 以及 `metadata.template` |
 
 ---
 
-## 總結
+## 摘要
 
-- A template is just a Git repo with `azure.yaml`, `infra/`, and your code.
-- Parameterize everything—names, regions, and IDs—so it runs anywhere.
-- Always tag resources with `azd-env-name` so `azd down` works.
-- Test locally with `azd init --template <local-path>` before publishing.
-- Add metadata and a README to submit to Awesome AZD.
+- 範本就是包含 `azure.yaml`、`infra/` 和您的程式碼的 Git 儲存庫。
+- 全部參數化——名稱、地區及 ID，讓它能在任何地方運行。
+- 始終給資源加上 `azd-env-name` 標籤，使 `azd down` 能正常清理。
+- 發佈前用 `azd init --template <local-path>` 在本機測試。
+- 新增元資料和 README 再提交到 Awesome AZD。
 
 ---
 
-## 🔗 導覽
+## 🔗 導航
 
-| Direction | Resource |
+| 方向 | 資源 |
 |-----------|----------|
-| **Previous** | [Deployment Guide](deployment-guide.md) |
-| **Chapter Home** | [Chapter 4: Infrastructure as Code](README.md) |
-| **Next Chapter** | [Chapter 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md) |
+| <strong>上一章</strong> | [部署指南](deployment-guide.md) |
+| <strong>章節首頁</strong> | [第4章：基礎架構即程式碼](README.md) |
+| <strong>下一章</strong> | [第5章：多代理解決方案](../chapter-05-multi-agent/README.md) |
 
 ## 📖 相關資源
 
-- [Provisioning Resources](provisioning.md)
-- [Awesome AZD Gallery](https://azure.github.io/awesome-azd/)
-- [Official azd template documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
+- [佈建資源](provisioning.md)
+- [Awesome AZD 畫廊](https://azure.github.io/awesome-azd/)
+- [官方 azd 範本文件](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
 
 ---
 

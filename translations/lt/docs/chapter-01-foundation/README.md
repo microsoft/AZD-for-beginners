@@ -1,38 +1,38 @@
-# 1 skyrius: Pagrindai & Greita pradžia
+# 1 skyrius: Pagrindai ir Greitas pradėjimas
 
-**📚 Kursas**: [AZD pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 30-45 minučių | **⭐ Sunkumo lygis**: Pradedantiesiems
+**📚 Kursas**: [AZD pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 30-45 minutės | **⭐ Sudėtingumas**: Pradedantysis
 
 ---
 
 ## Apžvalga
 
-Šiame skyriuje pristatomi Azure Developer CLI (azd) pagrindai. Išmoksite pagrindinių sąvokų, kaip įdiegti įrankius ir paskelbti savo pirmąją programą į Azure.
+Šiame skyriuje pristatomi Azure Developer CLI (azd) pagrindai. Išmoksite pagrindines sąvokas, įdiegsite įrankius ir paskelbsite savo pirmąją programą Azure.
 
-> Patikrinta su `azd 1.25.6` 2026 m. birželį.
+> Patikrinta su `azd 1.27.1` 2026 metų liepos mėn.
 
 ## Mokymosi tikslai
 
 Baigę šį skyrių, jūs:
 - Suprasite, kas yra Azure Developer CLI ir kuo jis skiriasi nuo Azure CLI
-- Įdiegsite ir sukonfigūruosite AZD savo platformoje
-- Diegsite savo pirmąją programą į Azure su `azd up`
-- Išvalysite išteklius su `azd down`
+- Įdiegs ir sukonfigūruos AZD savo platformoje
+- Paskelbs savo pirmąją programą Azure naudodami `azd up`
+- Išvalys resursus naudodami `azd down`
 
 ---
 
 ## 📚 Pamokos
 
-| # | Pamoka | Aprašymas | Trukmė |
+| # | Pamoka | Aprašymas | Laikas |
 |---|--------|-------------|------|
 | 1 | [AZD pagrindai](azd-basics.md) | Pagrindinės sąvokos, terminologija ir projekto struktūra | 15 min |
-| 2 | [Įdiegimas ir sąranka](installation.md) | Platformai specifinės diegimo instrukcijos | 10 min |
-| 3 | [Jūsų pirmasis projektas](first-project.md) | Praktika: Diegti žiniatinklio programą į Azure | 20 min |
+| 2 | [Diegimas ir sąranka](installation.md) | Platformos specifinės diegimo instrukcijos | 10 min |
+| 3 | [Jūsų pirmasis projektas](first-project.md) | Praktinė dalis: internetinės programos paskelbimas Azure | 20 min |
 | 4 | [Pridėkite savo programą](bring-your-own-app.md) | Pridėti azd prie jau turimo projekto | 15 min |
-| 5 | [Plėtros konteineriai & Codespaces](dev-containers.md) | Atkartojamos azd aplinkos su plėtros konteineriais | 15 min |
+| 5 | [Kūrimo konteineriai ir Codespaces](dev-containers.md) | Reprodukcinės azd aplinkos su kūrimo konteineriais | 15 min |
 
 ---
 
-## ✅ Pradėkite čia: Patikrinkite savo aplinką
+## ✅ Pradėkite čia: patikrinkite savo sąranką
 
 Prieš pradėdami, įsitikinkite, kad jūsų vietinis kompiuteris paruoštas 1 skyriaus šablonui:
 
@@ -46,25 +46,25 @@ Prieš pradėdami, įsitikinkite, kad jūsų vietinis kompiuteris paruoštas 1 s
 bash ./validate-setup.sh
 ```
 
-Jei skriptas praneša apie trūkstamas priemones, pirmiausia jas įdiekite, o tada tęskite skyrių.
+Jei scenarijus praneša apie trūkstamus įrankius, pirmiausia juos įdiekite, tada tęskite skyrių.
 
 ---
 
-## 🚀 Greita pradžia
+## 🚀 Greitas pradėjimas
 
 ```bash
-# Patikrinkite diegimą
+# Patikrinti diegimą
 azd version
 
-# Prisijunkite prie AZD
-# Pasirinktinai: az login, jei planuojate tiesiogiai vykdyti Azure CLI komandas
+# Autentifikuotis AZD
+# Pasirinktinai: az login, jei ketinate tiesiogiai vykdyti Azure CLI komandas
 azd auth login
 
-# Įdiekite savo pirmąją programą
+# Diegti pirmą programėlę
 azd init --template todo-nodejs-mongo
 azd up
 
-# Išvalykite, kai baigsite
+# Sutvarkyti po darbo
 azd down --force --purge
 ```
 
@@ -79,7 +79,7 @@ azd version              # Rodo įdiegtą versiją
 azd init --template todo-nodejs-mongo  # Inicializuoja projektą
 azd up                   # Diegia į Azure
 azd show                 # Rodo veikiančios programos URL
-azd down --force --purge # Išvalo išteklius
+azd down --force --purge # Išvalo resursus
 ```
 
 ---
@@ -88,8 +88,8 @@ azd down --force --purge # Išvalo išteklius
 
 | Kryptis | Skyrius |
 |-----------|---------|
-| **Toliau** | [2 skyrius: DI orientuotas kūrimas](../chapter-02-ai-development/README.md) |
-| **Pereiti į** | [3 skyrius: Konfigūracija](../chapter-03-configuration/README.md) |
+| **Toliau** | [2 skyrius: DI pirmasis vystymas](../chapter-02-ai-development/README.md) |
+| **Praleisti į** | [3 skyrius: Konfigūracija](../chapter-03-configuration/README.md) |
 
 ---
 
@@ -97,7 +97,7 @@ azd down --force --purge # Išvalo išteklius
 
 - [Komandų atmintinė](../../resources/cheat-sheet.md)
 - [DUK](../../resources/faq.md)
-- [Terminų žodynas](../../resources/glossary.md)
+- [Žodynėlis](../../resources/glossary.md)
 
 ---
 

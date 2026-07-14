@@ -1,22 +1,22 @@
-# Tehisintellekti mudelite juurutamine Azure Developer CLI-ga
+# AI mudeli juurutamine Azure Developer CLI abil
 
-**Lõigu navigeerimine:**
+**Peatüki navigeerimine:**
 - **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
-- **📖 Praegune peatükk**: Peatükk 2 - Esmane tehisintellekti arendus
+- **📖 Praegune peatükk**: Peatükk 2 - AI esmane arendus
 - **⬅️ Eelmine**: [Microsoft Foundry integratsioon](microsoft-foundry-integration.md)
-- **➡️ Järgmine**: [Tehisintellekti töötuba](ai-workshop-lab.md)
+- **➡️ Järgmine**: [AI töötoa labor](ai-workshop-lab.md)
 - **🚀 Järgmine peatükk**: [Peatükk 3: Konfiguratsioon](../chapter-03-configuration/configuration.md)
 
-See juhend annab põhjalikud juhised tehisintellekti mudelite juurutamiseks AZD mallide abil, hõlmates kõike mudeli valikust tootmisesse juurutamise mustriteni.
+See juhend annab põhjalikud juhised AI mudelite juurutamiseks AZD mallide abil, hõlmates kõike mudeli valikust tootmisse rakendamise mustriteni.
 
-> **Kinnitamise märkus (2026-03-25):** Selles juhendis kontrolliti AZD töövoogu versiooniga `azd` `1.23.12`. Tehisintellekti juurutuste puhul, mis võtavad rohkem aega kui vaikimisi teenuse juurutamise aken, toetavad praegused AZD versioonid `azd deploy --timeout <sekundid>`.
+> **Kinnitusmärkus (2026-07-13):** Selles juhendis olevat AZD töövoogu testiti `azd` `1.27.1` versiooniga. AI juurutuste korral, mis võtavad kauem aega kui vaikimisi teenuse juurutusaken, toetavad praegused AZD versioonid käsku `azd deploy --timeout <sekundid>`.
 
 ## Sisukord
 
 - [Mudeli valiku strateegia](#mudeli-valiku-strateegia)
-- [AZD konfiguratsioon tehisintellekti mudelite jaoks](#azd-konfiguratsioon-tehisintellekti-mudelite-jaoks)
-- [Juurutamise mustrid](#juurutamise-mustrid)
-- [Mudeli haldamine](#mudeli-haldamine)
+- [AZD konfiguratsioon AI mudelite jaoks](#azd-konfiguratsioon-ai-mudelite-jaoks)
+- [Juurutusmustrid](#juurutusmustrid)
+- [Mudeli haldus](#mudeli-haldus)
 - [Tootmise kaalutlused](#tootmise-kaalutlused)
 - [Jälgimine ja jälgitavus](#jälgimine-ja-jälgitavus)
 
@@ -24,7 +24,7 @@ See juhend annab põhjalikud juhised tehisintellekti mudelite juurutamiseks AZD 
 
 ### Microsoft Foundry mudelid
 
-Vali oma kasutusjuhtumi jaoks sobiv mudel:
+Vali oma kasutusjuhtumi jaoks õige mudel:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -52,16 +52,16 @@ services:
         ]
 ```
 
-### Mudeli mahuplaan
+### Mudeli võimsuse planeerimine
 
-| Mudeli tüüp | Kasutusjuhtum | Soovitatud maht | Kulude kaalutlused |
-|------------|---------------|-----------------|--------------------|
-| gpt-4.1-mini | Vestlus, KKK | 10-50 TPM | Kuluefektiivne enamiku töökoormuste jaoks |
-| gpt-4.1 | Kompleksne arutlemine | 20-100 TPM | Kõrgem hind, kasutamiseks premium funktsioonide puhul |
-| text-embedding-3-large | Otsing, RAG | 30-120 TPM | Tugev vaikimisi valik semantilisele otsingule ja päringule |
+| Mudeli tüüp | Kasutusjuhtum | Soovitatav võimsus | Kulude kaalutlused |
+|------------|----------|---------------------|-------------------|
+| gpt-4.1-mini | Vestlus, K&V | 10-50 TPM | Kuluefektiivne enamikeks töökoormusteks |
+| gpt-4.1 | Keeruline põhjendus | 20-100 TPM | Kõrgem kulu, kasuta premium-funktsioonide jaoks |
+| text-embedding-3-large | Otsing, RAG | 30-120 TPM | Tugev vaikimisi valik semantilise otsingu ja tagasitoomise jaoks |
 | Whisper | Kõnest tekstiks | 10-50 TPM | Helitöötluse töökoormused |
 
-## AZD konfiguratsioon tehisintellekti mudelite jaoks
+## AZD konfiguratsioon AI mudelite jaoks
 
 ### Bicep malli konfiguratsioon
 
@@ -126,7 +126,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### Keskkonnamuutujad
 
-Konfigureeri oma rakenduse keskkond:
+Sea oma rakenduse keskkond:
 
 ```bash
 # .env konfiguratsioon
@@ -136,9 +136,9 @@ AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## Juurutamise mustrid
+## Juurutusmustrid
 
-### Muster 1: Ühe piirkonna juurutus
+### Muster 1: Ühe regiooni juurutus
 
 ```yaml
 # azure.yaml - Single region
@@ -151,12 +151,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-Sobib ideaalselt:
+Parim:
 - Arenduseks ja testimiseks
-- Ühe turu rakendustele
+- Ühe turu rakendused
 - Kulude optimeerimiseks
 
-### Muster 2: Mitme piirkonna juurutus
+### Muster 2: Mitme regiooni juurutus
 
 ```bicep
 // Multi-region deployment
@@ -169,14 +169,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Sobib ideaalselt:
-- Globaalselt kasutatavatele rakendustele
-- Kõrge kättesaadavuse nõuetega
+Parim:
+- Globaalsete rakenduste jaoks
+- Suure kättesaadavuse nõuete jaoks
 - Koormuse jaotamiseks
 
 ### Muster 3: Hübriidjuurutus
 
-Kombineeri Microsoft Foundry mudelid teiste tehisintellekti teenustega:
+Ühenda Microsoft Foundry mudelid teiste AI teenustega:
 
 ```bicep
 // Hybrid AI services
@@ -205,7 +205,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Mudeli haldamine
+## Mudeli haldus
 
 ### Versioonihaldus
 
@@ -247,7 +247,7 @@ azd deploy --timeout 1800
 
 ### A/B testimine
 
-Juuruta mitu mudeliversiooni:
+Juuruta mitu mudeli versiooni:
 
 ```bicep
 param enableABTesting bool = false
@@ -271,12 +271,12 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 
 ## Tootmise kaalutlused
 
-### Mahu planeerimine
+### Võimsuse planeerimine
 
-Arvuta vajalik maht kasutusmustrite põhjal:
+Arvuta vajalik võimsus vastavalt kasutusmustritele:
 
 ```python
-# Mahutavuse arvutamise näide
+# Näite mahtuvuse arvutus
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -288,7 +288,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Näidis kasutamine
+# Näide kasutamisest
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -298,9 +298,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Automaatne skaleerimine
+### Automaatskaala seadistus
 
-Konfigureeri Container Apps automaatseks skaleerimiseks:
+Sea automaatskaala konfiguratsioon Container Apps jaoks:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -338,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Kulude optimeerimine
 
-Rakenda kulude juhtimist:
+Rakenda kulude kontrolli:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -370,9 +370,9 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ## Jälgimine ja jälgitavus
 
-### Application Insights integratsioon
+### Application Insightsi integratsioon
 
-Konfigureeri AI töökoormuste jälgimine:
+Sea AI töökoormuste jälgimine:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -410,7 +410,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### Kohandatud mõõdikud
 
-Jälgi AI-spetsiifilisi mõõdikuid:
+Jälgi AI spetsiifilisi mõõdikuid:
 
 ```python
 # Kohandatud telemeetria tehisintellekti mudelite jaoks
@@ -447,7 +447,7 @@ class AITelemetry:
 
 ### Tervisekontrollid
 
-Rakenda AI teenuste tervise jälgimine:
+Rakenda AI teenuse tervise jälgimist:
 
 ```python
 # Tervisekontrolli lõpp-punktid
@@ -478,30 +478,30 @@ async def check_ai_models():
 
 ## Järgmised sammud
 
-1. **Vaata üle [Microsoft Foundry integratsiooni juhend](microsoft-foundry-integration.md)** teenuse integratsioonimustrite jaoks
-2. **Lõpeta [Tehisintellekti töötuba](ai-workshop-lab.md)** praktilise kogemuse saamiseks
-3. **Rakenda [Tootmises tehisintellekti praktikad](production-ai-practices.md)** ettevõtte juurutuste jaoks
-4. **Uuri [Tehisintellekti tõrkeotsingu juhend](../chapter-07-troubleshooting/ai-troubleshooting.md)** levinud probleemide lahendamiseks
+1. **Vaata üle [Microsoft Foundry integratsioonijuhend](microsoft-foundry-integration.md)** teenuse integreerimise mustrite jaoks
+2. **Lõpeta [AI töötoa labor](ai-workshop-lab.md)** praktilise kogemuse saamiseks
+3. **Rakenda [Tootmise AI tavad](production-ai-practices.md)** äri juurutuste jaoks
+4. **Uuri [AI tõrkeotsingu juhendit](../chapter-07-troubleshooting/ai-troubleshooting.md)** levinud probleemide lahendamiseks
 
 ## Ressursid
 
-- [Microsoft Foundry mudelite mudelite saadavus](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Microsoft Foundry mudelite saadavus](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Azure Developer CLI dokumentatsioon](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Container Apps skaleerimine](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [Tehisintellekti mudeli kulude optimeerimine](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Container Apps skaala](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [AI mudeli kulude optimeerimine](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Lõigu navigeerimine:**
+**Peatüki navigeerimine:**
 - **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
-- **📖 Praegune peatükk**: Peatükk 2 - Esmane tehisintellekti arendus
+- **📖 Praegune peatükk**: Peatükk 2 - AI esmane arendus
 - **⬅️ Eelmine**: [Microsoft Foundry integratsioon](microsoft-foundry-integration.md)
-- **➡️ Järgmine**: [Tehisintellekti töötuba](ai-workshop-lab.md)
+- **➡️ Järgmine**: [AI töötoa labor](ai-workshop-lab.md)
 - **🚀 Järgmine peatükk**: [Peatükk 3: Konfiguratsioon](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vastutusest loobumine**:  
-See dokument on tõlgitud tehisintellekti tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame täpsust, palun arvestage, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument oma emakeeles tuleks pidada usaldusväärseks allikaks. Kriitilise info puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tekkida võivate arusaamatuste või valesti mõistmiste eest.
+**Lahtiütlus**:
+See dokument on tõlgitud kasutades AI tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi me püüdleme täpsuse poole, palun pange tähele, et automatiseeritud tõlgetes võib esineda vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlkega seotud eksimustest või valesti mõistmistest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

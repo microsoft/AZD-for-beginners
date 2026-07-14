@@ -1,77 +1,77 @@
-# AZD for AI Developers Workshop
+# AI डेवलपर्स के लिए AZD कार्यशाला
 
-> मान्य किया गया `azd 1.25.6` के साथ जून 2026 में।
-> 
+> जुलाई 2026 में `azd 1.27.1` के खिलाफ सत्यापित।
+
 > [!IMPORTANT]  
-> **यह कार्यशाला एक वर्कशॉप गाइड के साथ instrumented है जिसे आप अपने स्थानीय ब्राउज़र में पूर्वावलोकन कर सकते हैं। शुरू करने के लिए, रेपो को GitHub Codespaces, एक dev container, या MkDocs स्थापित किए हुए एक स्थानीय क्लोन में खोलें—फिर तब तक प्रतीक्षा करें जब तक आप एक सक्रिय VS Code टर्मिनल नहीं देखते और टाइप करें:**  
+> **यह कार्यशाला एक कार्यशाला गाइड के साथ सुसज्जित है जिसे आप अपने स्थानीय ब्राउज़र में पूर्वावलोकन कर सकते हैं। शुरू करने के लिए, GitHub Codespaces, एक डेवलप कंटेनर, या MkDocs इंस्टॉल किया हुआ लोकल क्लोन में रिपो खोलें — फिर एक सक्रिय VS कोड टर्मिनल दिखाई देने तक प्रतीक्षा करें और टाइप करें:**  
 > `mkdocs serve > /dev/null 2>&1 &`  
-> **आपको ब्राउज़र में पूर्वावलोकन पेज खोलने के लिए एक पॉप-अप डायलॉग दिखाई देना चाहिए।**
+> **आपको ब्राउज़र में पूर्वावलोकन पृष्ठ खोलने के लिए एक पॉप-अप संवाद दिखाई देना चाहिए।**
 
-स्वागत है Azure Developer CLI (AZD) सीखने के लिए आधारित हैंड्स-ऑन वर्कशॉप में, जो AI एप्लिकेशन डिप्लॉयमेंट पर केंद्रित है। यह कार्यशाला आपको AZD टेम्पलेट्स का व्यावहारिक समझ 3 चरणों में प्राप्त करने में मदद करती है:
+Azure Developer CLI (AZD) सीखने के लिए इस हैंड्स-ऑन कार्यशाला में आपका स्वागत है, जो AI एप्लिकेशन परिनियोजन पर केंद्रित है। यह कार्यशाला आपको 3 चरणों में AZD टेम्प्लेट का व्यावहारिक ज्ञान प्राप्त करने में मदद करती है:
 
-1. **Discovery** - उस टेम्पलेट को खोजें जो आपके लिए सही है।
-1. **Deployment** - डिप्लॉय करें और सत्यापित करें कि यह काम करता है
-1. **Customization** - संशोधित करें और इसे अपना बनाएं!
+1. **खोज** - वह टेम्प्लेट खोजें जो आपके लिए सही है।
+1. **परिनियोजन** - परिनियोजित करें और पुष्टि करें कि यह काम करता है
+1. **अनुकूलन** - इसे अपना बनाने के लिए संशोधित करें और पुनरावृत्ति करें!
 
-इस कार्यशाला के दौरान, आपको कोर डेवलपर टूल्स और वर्कफ़्लोज़ से भी परिचित कराया जाएगा, ताकि आप अपने एंड-टू-एंड विकास यात्रा को सुव्यवस्थित कर सकें।
+इस कार्यशाला के दौरान, आपको मूल डेवलपर टूल और वर्कफ़्लोज़ से भी परिचित कराया जाएगा, ताकि आपकी संपूर्ण विकास यात्रा को सुसंगत बनाया जा सके।
 
 | | | 
 |:---|:---|
-| **📚 पाठ्यक्रम मुख्य पृष्ठ**| [AZD For Beginners](../README.md)|
-| **📖 दस्तावेज़ीकरण** | [AI टेम्पलेट्स के साथ आरंभ करें](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️AI टेम्पलेट्स** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
-|**🚀 अगले कदम** | [चुनौती लें](#workshop-challenge) |
+| **📚 कोर्स होम**| [AZD For Beginners](../README.md)|
+| **📖 प्रलेखन** | [AI टेम्प्लेट्स के साथ शुरूआत करें](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️AI टेम्प्लेट्स** | [Microsoft Foundry टेम्प्लेट्स](https://ai.azure.com/templates) |
+|**🚀 अगला कदम** | [चुनौती लें](#workshop-challenge) |
 | | |
 
 ## कार्यशाला अवलोकन
 
-**अवधि:** 3-4 घंटे  
+**समयावधि:** 3-4 घंटे  
 **स्तर:** शुरुआती से मध्यवर्ती  
-**पूर्वापेक्षाएँ:** Azure, AI अवधारणाओं, VS Code और कमांड-लाइन टूल्स की परिचितता।
+**पूर्व आवश्यकताएँ:** Azure, AI अवधारणाओं, VS Code और कमांड-लाइन टूल्स से परिचित होना।
 
-यह एक हैंड्स-ऑन कार्यशाला है जहाँ आप करके सीखते हैं। एक बार जब आप अभ्यास पूरे कर लेंगे, तो हम अनुशंसा करते हैं कि आप Security और Productivity सर्वोत्तम प्रथाओं में अपनी सीख जारी रखने के लिए AZD For Beginners पाठ्यक्रम की समीक्षा करें।
+यह एक हैंड्स-ऑन कार्यशाला है जहाँ आप कार्य करके सीखते हैं। एक बार जब आप अभ्यास पूर्ण कर लेते हैं, तो हम आपको AZD For Beginners पाठ्यक्रम की समीक्षा करने की सलाह देते हैं ताकि आप सुरक्षा और उत्पादकता सर्वोत्तम प्रथाओं में अपनी सीख जारी रख सकें।
 
-| Time| Module  | Objective |
+| समय| मॉड्यूल  | उद्देश्य |
 |:---|:---|:---|
-| 15 mins | Introduction | Set the stage, understand the goals |
-| 30 mins | Select AI Template | Explore options and pick starter | 
-| 30 mins | Validate AI Template | Deploy default solution to Azure |
-| 30 mins | Deconstruct AI Template | Explore structure and configuration |
-| 30 mins | Configure AI Template | Activate and try available features |
-| 30 mins | Customize AI Template | Adapt the template to your needs |
-| 30 mins | Teardown Infrastructure | Cleanup and release resources |
-| 15 mins | Wrap-Up & Next Steps | Learning resources, Workshop challenge |
+| 15 मिनट | परिचय | मंच स्थापित करें, उद्देश्यों को समझें |
+| 30 मिनट | AI टेम्प्लेट चुनें | विकल्पों का अन्वेषण करें और शुरुआत करें | 
+| 30 मिनट | AI टेम्प्लेट सत्यापित करें | Azure पर डिफ़ॉल्ट समाधान परिनियोजित करें |
+| 30 मिनट | AI टेम्प्लेट का विश्लेषण करें | संरचना और कॉन्फ़िगरेशन का अन्वेषण करें |
+| 30 मिनट | AI टेम्प्लेट कॉन्फ़िगर करें | उपलब्ध फीचर्स को सक्रिय करें और आज़माएं |
+| 30 मिनट | AI टेम्प्लेट अनुकूलित करें | टेम्प्लेट को अपनी आवश्यकताओं के अनुसार अनुकूलित करें |
+| 30 मिनट | इंफ्रास्ट्रक्चर हटाएं | साफ-सफाई और संसाधनों को मुक्त करें |
+| 15 मिनट | समापन एवं अगले कदम | सीखने के संसाधन, कार्यशाला चुनौती |
 | | |
 
 ## आप क्या सीखेंगे
 
-AZD टेम्पलेट को एक लर्निंग सैंडबॉक्स के रूप में सोचें ताकि आप Microsoft Foundry पर एंड-टू-एंड विकास के विभिन्न क्षमता और टूल्स का अन्वेषण कर सकें। इस कार्यशाला के अंत तक, आपको इस संदर्भ में विभिन्न टूल्स और अवधारणाओं की सहज समझ होनी चाहिए।
+AZD टेम्प्लेट को एक सीखने वाले सैंडबॉक्स के रूप में सोचें जहाँ आप Microsoft Foundry पर एंड-टू-एंड विकास के लिए विभिन्न क्षमताओं और टूल्स का अन्वेषण कर सकते हैं। इस कार्यशाला के अंत तक, आपको इस संदर्भ में विभिन्न टूल्स और अवधारणाओं की सहज समझ हो जानी चाहिए।
 
-| Concept  | Objective |
+| अवधारणा  | उद्देश्य |
 |:---|:---|
-| **Azure Developer CLI** | Understand tool commands and workflows|
-| **AZD Templates**| Understand project structure and config|
-| **Azure AI Agent**| Provision & deploy Microsoft Foundry project  |
-| **Azure AI Search**| Enable context engineering with agents |
-| **Observability**| Explore tracing, monitoring and evaluations |
-| **Red Teaming**| Explore adversarial testing and mitigations |
+| **Azure Developer CLI** | टूल कमांड्स और वर्कफ़्लोज़ को समझें|
+| **AZD टेम्प्लेट्स**| परियोजना की संरचना और कॉन्फ़िगरेशन को समझें|
+| **Azure AI Agent**| Microsoft Foundry परियोजना की प्रोविजनिंग और परिनियोजन  |
+| **Azure AI Search**| एजेंट्स के साथ संदर्भ इंजीनियरिंग सक्षम करें |
+| **निरीक्षणीयता**| ट्रेसिंग, मॉनिटरिंग और मूल्यांकनों का अन्वेषण करें |
+| **रेड टीमिंग**| विरोधी परीक्षण और निवारणों का अन्वेषण करें |
 | | |
 
 ## कार्यशाला मॉड्यूल
 
-शुरू करने के लिए तैयार हैं? कार्यशाला मॉड्यूल में नेविगेट करें:
+शुरू करने के लिए तैयार? कार्यशाला मॉड्यूल्स के माध्यम से नेविगेट करें:
 
-- [Module 1: Select AI Template](instructions/1-Select-AI-Template.md)
-- [Module 2: Validate AI Template](instructions/2-Validate-AI-Template.md) 
-- [Module 3: Deconstruct AI Template](instructions/3-Deconstruct-AI-Template.md)
-- [Module 4: Configure AI Template](instructions/4-Configure-AI-Template.md)
-- [Module 5: Customize AI Template](instructions/5-Customize-AI-Template.md)
-- [Module 6: Teardown Infrastructure](instructions/6-Teardown-Infrastructure.md)
-- [Module 7: Wrap-up & Next Steps](instructions/7-Wrap-up.md)
+- [मॉड्यूल 1: AI टेम्प्लेट चुनें](instructions/1-Select-AI-Template.md)
+- [मॉड्यूल 2: AI टेम्प्लेट सत्यापित करें](instructions/2-Validate-AI-Template.md) 
+- [मॉड्यूल 3: AI टेम्प्लेट का विश्लेषण करें](instructions/3-Deconstruct-AI-Template.md)
+- [मॉड्यूल 4: AI टेम्प्लेट कॉन्फ़िगर करें](instructions/4-Configure-AI-Template.md)
+- [मॉड्यूल 5: AI टेम्प्लेट अनुकूलित करें](instructions/5-Customize-AI-Template.md)
+- [मॉड्यूल 6: इंफ्रास्ट्रक्चर हटाएं](instructions/6-Teardown-Infrastructure.md)
+- [मॉड्यूल 7: समापन एवं अगले कदम](instructions/7-Wrap-up.md)
 
-## प्रतिक्रिया है?
+## कोई प्रतिक्रिया है?
 
-इस रेपो पर एक इश्यू पोस्ट करें (इसे टैग करें `Workshop`) या हमारे साथ जुड़ें [Discord](https://aka.ms/foundry/discord) पर और हमारे `#get-help` चैनल में पोस्ट करें
+इस रिपो पर एक इश्यु पोस्ट करें (इसे `Workshop` टैग करें) या हमारे साथ [Discord](https://aka.ms/foundry/discord) पर जुड़ें और हमारे `#get-help` चैनल में पोस्ट करें
 
 ---
 

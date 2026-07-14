@@ -1,31 +1,31 @@
-# Kapitel 2: KI-zentrierte Entwicklung
+# Kapitel 2: AI-First-Entwicklung
 
-**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Dauer**: 1-2 Stunden | **⭐ Komplexität**: Mittel
+**📚 Kurs**: [AZD für Einsteiger](../../README.md) | **⏱️ Dauer**: 1-2 Stunden | **⭐ Komplexität**: Mittelstufe
 
 ---
 
 ## Überblick
 
-Dieses Kapitel konzentriert sich auf das Bereitstellen KI-gestützter Anwendungen mit dem Azure Developer CLI und Microsoft Foundry-Diensten. Von einfachen KI-Chat-Apps bis hin zu intelligenten Agenten mit Werkzeugen.
+Dieses Kapitel konzentriert sich auf die Bereitstellung von KI-gestützten Anwendungen mit Azure Developer CLI und Microsoft Foundry-Diensten. Von einfachen KI-Chat-Apps bis hin zu intelligenten Agenten mit Tools.
 
-> **Validierungshinweis (2026-06-15):** Der Befehlsablauf und die Erweiterungsanleitung in diesem Kapitel wurden gegen `azd` `1.25.6` und die aktuelle Preview AI Agent-Erweiterungsversion `azure.ai.agents` `0.1.40-preview` überprüft. Wenn Sie eine ältere AZD-Build verwenden, aktualisieren Sie zuerst und setzen Sie dann die Übungen fort.
+> **Validierungshinweis (2026-07-13):** Der Befehlsablauf und die Erweiterungsanleitung in diesem Kapitel wurden mit `azd` `1.27.1` und der aktuellen Vorschauversion der KI-Agent-Erweiterung `azure.ai.agents` `1.0.0-beta.5` überprüft. Wenn Sie eine ältere AZD-Version verwenden, aktualisieren Sie zuerst und fahren Sie dann mit den Übungen fort.
 
 ## Lernziele
 
-Nach Abschluss dieses Kapitels werden Sie:
+Durch den Abschluss dieses Kapitels werden Sie:
 - KI-Anwendungen mit vorgefertigten AZD-Vorlagen bereitstellen
 - Die Integration von Microsoft Foundry mit AZD verstehen
-- KI-Agenten mit Werkzeugen konfigurieren und anpassen
-- RAG-Anwendungen (Retrieval-Augmented Generation) bereitstellen
+- KI-Agenten mit Tools konfigurieren und anpassen
+- RAG (Retrieval-Augmented Generation)-Anwendungen bereitstellen
 
 ---
 
 ## 📚 Lektionen
 
 | # | Lektion | Beschreibung | Zeit |
-|---|--------|-------------|------|
+|---|---------|--------------|------|
 | 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | AZD mit Foundry-Diensten verbinden | 30 min |
-| 2 | [AI Agents Guide](agents.md) | Intelligente Agenten mit Werkzeugen bereitstellen | 45 min |
+| 2 | [AI Agents Guide](agents.md) | Intelligente Agenten mit Tools bereitstellen | 45 min |
 | 3 | [AI Model Deployment](ai-model-deployment.md) | KI-Modelle bereitstellen und konfigurieren | 30 min |
 | 4 | [AI Workshop Lab](ai-workshop-lab.md) | Praxis: Machen Sie Ihre KI-Lösung AZD-bereit | 60 min |
 
@@ -49,23 +49,23 @@ azd up
 
 ---
 
-## 🤖 Ausgewählte KI-Vorlagen
+## 🤖 Empfohlene KI-Vorlagen
 
 | Vorlage | Beschreibung | Dienste |
-|----------|-------------|----------|
+|---------|--------------|---------|
 | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG-Chat mit Quellenangaben | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | KI-Agent mit Werkzeugen | AI Agent Service |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Einfache KI-Chat-Anwendung | OpenAI + Container Apps |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | KI-Agent mit Tools | AI Agent Service |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Grundlegender KI-Chat | OpenAI + Container Apps |
 
 ---
 
 ## 💰 Kostenbewusstsein
 
 | Umgebung | Geschätzte monatliche Kosten |
-|-------------|----------------------|
-| Entwicklung | $80-150 |
-| Staging | $150-300 |
-| Produktion | $300-3,500+ |
+|----------|--------------------------|
+| Entwicklung | 80-150 $ |
+| Staging | 150-300 $ |
+| Produktion | 300-3.500 $+ |
 
 **Tipp:** Führen Sie `azd down` nach dem Testen aus, um Gebühren zu vermeiden.
 
@@ -74,17 +74,17 @@ azd up
 ## 🔗 Navigation
 
 | Richtung | Kapitel |
-|-----------|---------|
+|----------|---------|
 | **Vorheriges** | [Kapitel 1: Grundlagen](../chapter-01-foundation/README.md) |
 | **Nächstes** | [Kapitel 3: Konfiguration](../chapter-03-configuration/README.md) |
-| **Springe zu** | [Kapitel 8: Produktionsmuster](../chapter-08-production/README.md) |
+| **Überspringen zu** | [Kapitel 8: Produktionsmuster](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Verwandte Ressourcen
 
 - [KI-Fehlerbehebung](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [KI-Praktiken in der Produktion](../chapter-08-production/production-ai-practices.md)
+- [KI-Praktiken für die Produktion](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---

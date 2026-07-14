@@ -1,90 +1,91 @@
-# အခန်း ၂: AI-First ဖွံ့ဖြိုးရေး
+# အခန်း ၂: AI-ပထမဖွံ့ဖြိုးတိုးတက်မှု
 
-**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 1-2 hours | **⭐ Complexity**: အလယ်အလတ်
+**📚 သင်တန်း**: [AZD အစပြုသူများအတွက်](../../README.md) | **⏱️ အချိန်ကြာမြင့်ချိန်**: ၁-၂ နာရီ | **⭐ ရှုပ်ထွေးမှု**: အလယ်အလတ်
 
 ---
 
-## အကျဉ်းချုပ်
+## ရှုမြင်ချက်
 
-ဤအခန်းသည် Azure Developer CLI နှင့် Microsoft Foundry ဝန်ဆောင်မှုများကို အသုံးပြု၍ AI အင်အားပြင်းသော အပလီကေးရှင်းများကို တပ်ဆင်ခြင်းအပေါ် ဦးတည်ထားသည်။ ရိုးရှင်းသော AI စကားပြောအက်ပ်များမှ ကိရိယာများပါရှိသည့် ဉာဏ်ရည်ရှိ အေးဂျင့်များထိ အရာအားလုံးကို ဖော်ပြထားသည်။
+ဒီအခန်းမှာ Azure Developer CLI နဲ့ Microsoft Foundry ဝန်ဆောင်မှုပေါင်းစပ်ပြီး AI ပါဝင်တဲ့ အက်ပလီကေးရှင်းတွေကို ထုတ်လုပ်နည်းအပေါ် ဦးတည်ထားပါတယ်။ ရိုးရှင်းတဲ့ AI စကားပြော app တွေကနေ စွမ်းရည်မြှင့် အေးဂျင့်တွေနဲ့ Tools တွေနဲ့အတူ။
 
-> **စစ်ဆေးမှတ်ချက် (2026-06-15):** ဤအခန်းတွင်ပါတဲ့ command စီးကြောင်းနှင့် extension လမ်းညွှန်ချက်များကို `azd` `1.25.6` နှင့် လက်ရှိ preview AI agent extension release `azure.ai.agents` `0.1.40-preview` တို့နှင့် နှိုင်းယှဉ်၍ စစ်ဆေးထားပါသည်။ သင့်တွင် အဟောင်း AZD build ရှိပါက အရင်ဆုံး update ပြုလုပ်ပြီးနောက် လေ့ကျင့်ခန်းများကို ဆက်လုပ်ဆောင်ပါ။
+> **အတည်ပြုမှတ်ချက် (2026-07-13):** ဒီအခန်းမှာက ဖော်ပြထားတဲ့ command လမ်းကြောင်းနဲ့ extension များကို `azd` `1.27.1` နဲ့ လက်ရှိကြေညာထားတဲ့ AI agent extension `azure.ai.agents` `1.0.0-beta.5` ဖြင့် စိစစ်ပြီးဖြစ်ပါတယ်။ ယခင် AZD build ကိုသုံးနေရင် အရင်ဆုံး update ပြုလုပ်ပြီးနောက် ဆက်လက်လေ့ကျင့်ခန်းပြုလုပ်ပါ။
 
 ## သင်ယူရမည့် ရည်မှန်းချက်များ
 
-- Pre-built AZD templates များကို အသုံးပြု၍ AI အပလီကေးရှင်းများကို တပ်ဆင်ပါ။
-- AZD နှင့် Microsoft Foundry ပေါင်းစည်းမှုကို နားလည်ပါ။
-- ကိရိယာများဖြင့် AI agents များကို ဖော်ဆောင်၊ တပ်ဆင်နှင့် စိတ်ကြိုက်ပြုပြင်နိုင်ရန် စီစဉ်ပါ။
-- RAG (Retrieval-Augmented Generation) အပလီကေးရှင်းများကို တပ်ဆင်ပါ။
+ဒီအခန်းကို ပြီးစီးတဲ့အခါမှာ သင်မှာ-
+- မူကြမ်း AZD စံပြများကို အသုံးပြုပြီး AI အက်ပလီကေးရှင်းများ ထုတ်လုပ်နိုင်မှာဖြစ်ပြီး
+- Microsoft Foundry နဲ့ AZD ပေါင်းစပ်မှုကိုနားလည် ရရှိမှာဖြစ်ပြီး
+- Tools များဖြင့် AI အေးဂျင့်များကို ဖန်တီးခတ်ပြင်နိုင်မှာဖြစ်ပြီး
+- RAG (Retrieval-Augmented Generation) အက်ပလီကေးရှင်းများ ထုတ်လုပ်နိုင်မှာဖြစ်ပါတယ်
 
 ---
 
 ## 📚 သင်ခန်းစာများ
 
-| # | သင်ခန်းစာ | ဖော်ပြချက် | အချိန် |
+| # | သင်ခန်းစာ | ဖေါ်ပြချက် | အချိန် |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | AZD ကို Foundry ဝန်ဆောင်မှုများနှင့် ချိတ်ဆက်ပါ | 30 min |
-| 2 | [AI Agents Guide](agents.md) | ကိရိယာများဖြင့် ဉာဏ်ရည်မြင့် agent များ တပ်ဆင်ပါ | 45 min |
-| 3 | [AI Model Deployment](ai-model-deployment.md) | AI မော်ဒယ်များကို တပ်ဆင်ပြီး ဆက်တင်ပြုလုပ်ပါ | 30 min |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | လက်တွေ့အလုပ်: သင့် AI ဖြေရှင်းချက်ကို AZD အတွက် ပြင်ဆင်ပါ | 60 min |
+| 1 | [Microsoft Foundry ပေါင်းစပ်မှု](microsoft-foundry-integration.md) | AZD နဲ့ Foundry ဝန်ဆောင်မှုများ ချိတ်ဆက်ခြင်း | ၃၀ မိနစ် |
+| 2 | [AI အေးဂျင့် လမ်းညွှန်](agents.md) | Tools များဖြင့် အားရတတ်သော အေးဂျင့်များ ထုတ်လုပ်ခြင်း | ၄၅ မိနစ် |
+| 3 | [AI မော်ဒယ် ထုတ်လုပ်ခြင်း](ai-model-deployment.md) | AI မော်ဒယ်များထုတ်လုပ်ခြင်းနဲ့ စနစ်တကျ ထိန်းသိမ်းခြင်း | ၃၀ မိနစ် |
+| 4 | [AI အလုပ်ရုံဓာတ်ရုံ](ai-workshop-lab.md) | လက်တွေ့ ဆောင်ရွက်ခြင်း: သင့် AI ဖြေရှင်းချက်ကို AZD ပြင်ဆင်မှုယုံကြည်စေရန် | ၆၀ မိနစ် |
 
 ---
 
-## 🚀 လျင်မြန်စတင်ခြင်း
+## 🚀 အမြန် စတင်ခြင်း
 
 ```bash
-# ရွေးချယ်စရာ ၁: RAG စကားပြော အက်ပလီကေးရှင်း
+# ရွေးချယ်မှု ၁: RAG စကားပြော အက်ပ်လီကေးရှင်း
 azd init --template azure-search-openai-demo
 azd up
 
-# ရွေးချယ်စရာ ၂: AI ကိုယ်စားလှယ်များ
+# ရွေးချယ်မှု ၂: AI ကိုယ်စားလှယ်များ
 azd init --template get-started-with-ai-agents
 azd up
 
-# ရွေးချယ်စရာ ၃: အမြန် စကားပြော အက်ပ်
+# ရွေးချယ်မှု ၃: အမြန် စကားပြော အက်ပ်
 azd init --template openai-chat-app-quickstart
 azd up
 ```
 
 ---
 
-## 🤖 ထင်ရှားသော AI နမူနာများ
+## 🤖 ထူးခြားသော AI မူကြမ်းများ
 
-| နမူနာ | ဖော်ပြချက် | ဝန်ဆောင်မှုများ |
+| မူကြမ်း | ဖော်ပြချက် | ဝန်ဆောင်မှုများ |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ကိုးကားချက်များပါသည့် RAG စကားဝိုင်း | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ကိရိယာများပါရှိသော AI agent | AI Agent Service |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | အခြေခံ AI စကားပြော | OpenAI + Container Apps |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | အသိပညာတိုးမြှင့် ပြန်လည်ရှာဖွေရာ chat | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Tools ပါရှိသည့် AI agent | AI Agent Service |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | မူလ AI စကားပြော app | OpenAI + Container Apps |
 
 ---
 
-## 💰 ကုန်ကျစရိတ် သတိပြုချက်
+## 💰 ကုန်ကျစရိတ် အသိပညာ
 
-| ပတ်ဝန်းကျင် | ခန့်မှန်း လစဉ်ကုန်ကျစရိတ် |
+| ပတ်ဝန်းကျင် | လစဉ် ခန့်မှန်း ကုန်ကျစရိတ် |
 |-------------|----------------------|
-| ဖွံ့ဖြိုးရေး | $80-150 |
-| စမ်းသပ်ပတ်ဝန်းကျင် | $150-300 |
+| ဖွံ့ဖြိုးတိုးတက်မှု | $၈၀-150 |
+| စစ်ဆေးရေး | $150-300 |
 | ထုတ်လုပ်မှု | $300-3,500+ |
 
-**အကြံပြုချက်:** စမ်းသပ်ပြီးပါက ကျသင့်ငွေများကို ရှောင်ရှားရန် `azd down` ကို လုပ်ဆောင်ပါ။
+**အကြံပြုချက်:** စမ်းသပ်ပြီးနောက် `azd down` ကို အသုံးပြု၍ ချိတ်ဆက်မှုကုန်ကျစရိတ်များ မဖြစ်အောင် ကာကွယ်ပါ။
 
 ---
 
 ## 🔗 လမ်းညွှန်
 
-| သွားရာလမ်း | အခန်း |
+| ဦးတည်ရာ | အခန်း |
 |-----------|---------|
-| **Previous** | [အခန်း ၁: အခြေခံ](../chapter-01-foundation/README.md) |
-| **Next** | [အခန်း ၃: ဖွဲ့စည်းတပ်ဆင်ခြင်း](../chapter-03-configuration/README.md) |
-| **Skip to** | [အခန်း ၈: ထုတ်လုပ်မှု ပုံစံများ](../chapter-08-production/README.md) |
+| **ယခင်** | [အခန်း ၁: အေမြမြဲဖွဲ့စည်းမှု](../chapter-01-foundation/README.md) |
+| **နောက်တစ်ခု** | [အခန်း ၃: ပြင်ဆင်မှု](../chapter-03-configuration/README.md) |
+| **ဖြတ်သွားရန်** | [အခန်း ၈: ထုတ်လုပ်မှု ပုံစံများ](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 ဆက်စပ် အရင်းအမြစ်များ
+## 📖 ပတ်သက်သော အရင်းအမြစ်များ
 
-- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Production AI Practices](../chapter-08-production/production-ai-practices.md)
-- [Application Insights](../chapter-06-pre-deployment/application-insights.md)
+- [AI ပြဿနာဖြေရှင်းခြင်း](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [ထုတ်လုပ်မှု AI လုပ်ထုံးလုပ်နည်းများ](../chapter-08-production/production-ai-practices.md)
+- [အက်ပလီကေးရှင်း အသိပညာစုစည်းခြင်း](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 

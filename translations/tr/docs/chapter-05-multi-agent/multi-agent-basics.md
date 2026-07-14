@@ -1,50 +1,50 @@
-# Çoklu Ajan Temelleri - İlk Koordine Yapay Zeka Sistemini Dağıtın
+# Çoklu Ajan Temelleri - İlk Koordine Edilmiş Yapay Zeka Sistemini Dağıt
 
 **Bölüm Navigasyonu:**
-- **📚 Kurs Ana Sayfa**: [AZD For Beginners](../../README.md)
-- **📖 Mevcut Bölüm**: Bölüm 5 - Çok Ajanlı Yapay Zeka Çözümleri
+- **📚 Ders Anasayfası**: [Yeni Başlayanlar için AZD](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 5 - Çoklu Ajan Yapay Zeka Çözümleri
 - **⬅️ Önceki**: [Bölüm 4: Altyapı](../chapter-04-infrastructure/README.md)
 - **➡️ Sonraki**: [Koordinasyon Desenleri](../chapter-06-pre-deployment/coordination-patterns.md)
 
-> Haziran 2026'da `azd 1.25.6` ile doğrulanmıştır.
+> Temmuz 2026'da `azd 1.27.1` ile doğrulanmıştır.
 
 ## Giriş
 
-Önceki bölümlerde tek bir uygulama dağıttınız—ve Bölüm 2'de tek bir yapay zeka ajanı dağıtmıştınız. Bu ders bir sonraki adımı atıyor: birkaç uzmanlaşmış ajanın birlikte çalışarak tek bir ajanın iyi yapamayacağı bir problemi çözdüğü **çoklu ajan sistemi** dağıtmak.
+Önceki bölümlerde tek bir uygulama dağıttınız—ve Bölüm 2'de tek bir yapay zeka ajanı dağıttınız. Bu ders bir sonraki adımı atıyor: birkaç uzmanlaşmış ajanın tek başına iyi idare edemeyeceği bir problemi birlikte çözdüğü **çoklu ajan sistemi** dağıtmak.
 
-Yeni başlayanlar için iyi haber: **yeni komutlara ihtiyacınız yok.** Çoklu ajan çözümü hâlâ bir azd projesidir. `azd init`, `azd up`, test ve `azd down` yapacaksınız—zaten bildiğiniz iş akışıyla aynı. Değişen şey uygulamanın içindeki yapının biçimidir.
+Yeni başlayanlar için iyi haber: **yeni komutlara ihtiyacınız yok.** Bir çoklu ajan çözümü halen bir azd projesidir. `azd init`, `azd up`, test ve `azd down` yapacaksınız—tam olarak bildiğiniz iş akışı. Değişen şey uygulamanın içindeki *şekildir*.
 
 ## Öğrenme Hedefleri
 
 Bu dersin sonunda:
-- "çoklu ajan"ın ne anlama geldiğini ve ne zaman ekstra karmaşıklığa değdiğini anlayacaksınız
-- Çoklu ajan sistemindeki yaygın rolleri tanıyacaksınız (orkestratör + uzmanlar)
+- "Çoklu ajan" ne demektir ve ne zaman ekstra karmaşıklığı hak ettiğini anlayacaksınız
+- Çoklu ajan sistemlerdeki yaygın rolleri tanıyacaksınız (yönlendirici + uzmanlar)
 - `azd up` ile gerçek, çalışan bir çoklu ajan şablonu dağıtacaksınız
-- Bir çoklu ajan uygulamasını destekleyen Azure kaynaklarını anlayacaksınız
-- Çözümü nasıl doğrulayacağınızı, özelleştireceğinizi ve güvenle kapatacağınızı bileceksiniz
+- Çoklu ajan uygulamasını destekleyen Azure kaynaklarını anlayacaksınız
+- Çözümü güvenli şekilde doğrulamayı, özelleştirmeyi ve kaldırmayı bileceksiniz
 
-## Öğrenme Çıktıları
+## Öğrenme Sonuçları
 
-Bu dersi tamamladıktan sonra şunları yapabileceksiniz:
-- Tek bir ajan ile çoklu ajan sistemi arasındaki farkı açıklamak
-- Araçlara sahip tek bir ajan ile gerçekten çoklu ajan tasarımı arasında seçim yapmak
-- azd ile uçtan uca bir çoklu ajan şablonunu dağıtıp test etmek
+Bu dersi tamamladıktan sonra şunları yapabilirsiniz:
+- Tek bir ajan ile çoklu ajan sistem arasındaki farkı açıklamak
+- Araçları olan tek bir ajanla gerçek çoklu ajan tasarım arasında seçim yapmak
+- azd ile çoklu ajan şablonunu baştan sona dağıtmak ve test etmek
 - Her ajanın nerede çalıştığını ve nasıl iletişim kurduklarını belirlemek
-- Süregelen ücretlerden kaçınmak için tüm kaynakları temizlemek
+- Sürekli ücretlendirmeyi önlemek için tüm kaynakları temizlemek
 
 ---
 
 ## Çoklu Ajan Sistemi Nedir?
 
-Tek bir yapay zeka ajanı, bir dizi talimat ve (isteğe bağlı olarak) bazı araçlarla çalışan bir modeldir. Bu, odaklanmış görevler için iyi çalışır. Ancak görev büyüdükçe—araştırma, sonra yazma, sonra düzenleme, sonra gerçekleri kontrol etme—her şeyi tek bir prompt'a sıkıştırmak ajanı daha yavaş, daha az güvenilir ve hata ayıklaması zor hale getirir.
+Tek bir yapay zeka ajanı bir model ve bir dizi komut ile (isteğe bağlı olarak) bazı araçlardan oluşur. Bu odaklanmış görevler için iyidir. Ama görev büyüdükçe—araştırma, ardından yazma, sonra düzenleme, sonra gerçek kontrolü—her şeyi tek bir komuta doldurmak ajanı yavaşlatır, daha az güvenilir yapar ve hata ayıklamayı zorlaştırır.
 
-Bir **çoklu ajan sistemi**, işi her biri bir işi iyi yapan uzmanlara böler ve bunları bir orkestratör koordine eder:
+Bir **çoklu ajan sistemi**, işi her biri bir işi iyi yapan uzmanlara böler, bir yönlendirici ile koordine edilir:
 
 ```mermaid
 graph TD
-    User([Kullanıcı isteği]) --> Orchestrator[Orkestratör Ajan<br/>İşi planlar ve yönlendirir]
-    Orchestrator --> Researcher[Araştırmacı Ajan<br/>Bilgileri toplar]
-    Orchestrator --> Writer[Yazar Ajan<br/>İçerik taslağı hazırlar]
+    User([Kullanıcı talebi]) --> Orchestrator[Orkestratör Ajan<br/>İşi planlar ve yönlendirir]
+    Orchestrator --> Researcher[Araştırmacı Ajan<br/>Bilgi toplar]
+    Orchestrator --> Writer[Yazıcı Ajan<br/>İçerik taslağı oluşturur]
     Orchestrator --> Editor[Editör Ajan<br/>Gözden geçirir ve iyileştirir]
     Researcher --> Orchestrator
     Writer --> Orchestrator
@@ -52,186 +52,186 @@ graph TD
     Orchestrator --> Result([Nihai cevap])
 ```
 
-### Her zaman göreceğiniz iki rol
+### Hep göreceğiniz iki rol
 
-| Rol | Görev | Örnek |
+| Rol | İş | Örnek |
 |------|-----|---------|
-| **Orkestratör** | *Sırada ne olacağını* belirler ve işin ajanlar arasında yönlendirilmesini sağlar | "Önce araştırma, sonra yazma, sonra düzenleme" |
-| **Uzman** | Tek odaklı bir işi yapar ve bir sonuç döner | Sadece veri toplayan bir "araştırmacı" |
+| **Yönlendirici** | *Sonra ne olacak* karar verir ve ajanlar arasında işi yönlendirir | "Önce araştır, sonra yaz, sonra düzenle" |
+| **Uzman** | Tek bir odaklanmış işi yapar ve sonuç döner | Sadece gerçekleri toplayan bir "araştırmacı" |
 
 ### Gerçekten birden fazla ajana ihtiyacınız var mı?
 
-Basit başlayın. Çoklu ajana **sadece** aşağıdakilerden biri doğruysa başvurun:
+Basit başlayın. Çoklu ajan **ancak** aşağıdakilerden biri doğruysa tercih edilir:
 
-- ✅ Görev, farklı talimatlardan fayda sağlayan **ayrı aşamalara** sahip (araştırma vs. yazma vs. gözden geçirme)
-- ✅ Zaman kazanmak için uzmanların **paralel** çalışmasını istiyorsunuz
-- ✅ Farklı adımların **farklı araçlara veya veri kaynaklarına** ihtiyacı var
-- ✅ Her adımın **bağımsız olarak test edilebilir ve hata ayıklanabilir** olması gerekiyor
+- ✅ Görev, farklı talimatlardan fayda sağlayan **belirli aşamalara** sahiptir (araştırma vs. yazma vs. inceleme)
+- ✅ Zaman kazandırmak için uzmanların **aynı anda** çalışmasını istersiniz
+- ✅ Farklı adımların **farklı araçlar veya veri kaynakları** kullanması gerekir
+- ✅ Her adımın **bağımsızca test edilebilir ve hata ayıklanabilir** olması gerekir
 
-Eğer göreviniz tek bir soru-cevap veya basit bir araç çağrısıysa, **araçlara sahip tek bir ajan** (Bölüm 2) daha basit, daha ucuz ve işletmesi daha kolaydır.
+Göreviniz tek bir soru-cevap ya da basit bir araç çağrısı ise, **araçları olan tek ajan** (Bölüm 2) daha basit, daha ucuz ve işletmesi kolaydır.
 
-> **Yeni başlayanlar için ipucu:** "Daha fazla ajan" otomatik olarak "daha iyi" demek değildir. Her ajan gecikme, maliyet ve izlenecek yeni bir şey ekler. Ajanları yalnızca problem açıkça parçalara ayrıldığında ekleyin.
+> **Yeni başlayanlar için ipucu:** "Daha fazla ajan" daha iyi demek değildir. Her ajan gecikme, maliyet ve izlenecek yeni bir şey ekler. Sadece sorun açıkça parçalara bölündüğünde ajan ekleyin.
 
 ---
 
-## Azure'da Çoklu Ajan Oluşturmanın İki Yolu
+## Azure’da Çoklu Ajan Oluşturmanın İki Yolu
 
-| Yaklaşım | Nedir | En uygunu |
+| Yaklaşım | Nedir | En iyi kullanım |
 |----------|-----------|----------|
-| **Tek ajan + araçlar** | Fonksiyonlar/araçlar çağıran bir Foundry ajanı | Basit iş akışları, başlarken |
-| **Birkaç koordine ajan** | Bir orkestratör ile birkaç ajan | Ayrık aşamalar, paralel iş, uzmanlaşma |
+| **Tek ajan + araçlar** | Fonksiyon/araç çağıran tek Foundry ajanı | Basit iş akışları, başlangıç |
+| **Birden fazla koordine edilmiş ajan** | Birden fazla ajan ve bir yönlendirici | Belirgin aşamalar, paralel çalışma, uzmanlaşma |
 
-Bu ders, kendi şablonunuzu oluşturmadan önce gerçek bir çoklu ajan sistemini görebilmeniz için **hazır bir şablon** kullanarak ikinci yaklaşıma odaklanır.
+Bu ders ikinci yaklaşıma odaklanıyor ve **hazır şablon** kullanarak kendi çoklu ajan sisteminizi inşa etmeden gerçek bir örneği görmenizi sağlıyor.
 
 ---
 
 ## Uygulamalı: Çalışan Bir Çoklu Ajan Uygulaması Dağıtın
 
-Biz **Contoso Creative Writer**'ı dağıtacağız; araştırmacı, yazar ve editör gibi birden çok ajan kullanan resmi bir Azure örneğidir ve bir makale üretmek için koordine edilir. Roller kolay anlaşılır olduğu için ilk çoklu ajan uygulamanız için harika bir seçenektir.
+Bir makale üretmek için koordine edilmiş birden fazla ajan kullanan resmi bir Azure örneği olan **Contoso Yaratıcı Yazar**'ı dağıtacağız (araştırmacı, yazar, editör). Roller kolay anlaşıldığından harika bir ilk çoklu ajan uygulaması.
 
-### Adım 1: Şablonu başlatın
+### 1. Adım: Şablonu Başlat
 
 ```bash
 # Çalışma klasörü oluştur
 mkdir creative-writer && cd creative-writer
 
-# Resmi çok ajanlı şablondan başlat
+# Resmi çoklu ajan şablonundan başlat
 azd init --template contoso-creative-writer
 ```
 
-> Başka çoklu ajan şablonlarına her zaman [Awesome AZD AI gallery](https://azure.github.io/awesome-azd/?tags=ai) üzerinden göz atabilirsiniz. Yeni başlayanlar için uygun diğer seçenekler arasında `get-started-with-ai-agents` ve `azure-ai-travel-agents` bulunur.
+> Her zaman [Harika AZD AI galerisi](https://azure.github.io/awesome-azd/?tags=ai) içinde daha fazla çoklu ajan şablonuna göz atabilirsiniz. Başlangıç dostu diğer seçenekler `get-started-with-ai-agents` ve `azure-ai-travel-agents` içerir.
 
-### Adım 2: Kimlik doğrulama
+### 2. Adım: Kimlik Doğrulaması Yapın
 
 ```bash
-# azd iş akışları için gerekli
+# azd iş akışları için gereklidir
 azd auth login
 ```
 
-### Adım 3: Bir ortam oluşturun
+### 3. Adım: Bir ortam oluşturun
 
 ```bash
 azd env new dev
 ```
 
-### Adım 4: Önizleyin, sonra dağıtın
+### 4. Adım: Önizleme yapın, sonra dağıtın
 
 ```bash
-# Harcamaya başlamadan önce nelerin oluşturulacağını görün (önerilir)
+# Bir şey harcamadan önce ne oluşturulacağını görün (önerilir)
 azd provision --preview
 
 # Altyapıyı sağlayın ve tüm ajanları tek adımda dağıtın
 azd up
 ```
 
-`azd up` bir abonelik ve bölge için sizi yönlendirecek, ardından Azure kaynaklarını sağlayıp uygulamayı dağıtacaktır. Yapay zeka dağıtımları basit bir web uygulamasından daha uzun sürebilir—daha büyük modeller dağıtıyorsanız dağıtma zaman aşımını uzatabilirsiniz:
+`azd up` sizden abonelik ve bölge isteyecek, sonra Azure kaynaklarını sağlamak ve uygulamayı dağıtmak için devam edecek. Yapay zeka dağıtımları basit web uygulamalarından daha uzun sürebilir—daha büyük modelleri dağıtıyorsanız dağıtım zaman aşımını uzatabilirsiniz:
 
 ```bash
 azd deploy --timeout 1800
 ```
 
-> **Maliyet ve kapasite hakkında uyarı:** Çoklu ajan uygulamaları kota tüketen ve maliyet getiren AI modelleri dağıtır. Eğer `azd up` model kotası nedeniyle başarısız olursa, bölge ve kota düzeltmeleri için [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)'e ve Bölüm 6'daki [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md)'e bakın.
+> **Maliyet ve kapasite hakkında uyarı:** Çoklu ajan uygulamaları kota tüketen ve maliyete neden olan yapay zeka modelleri dağıtır. `azd up` model kotası nedeniyle başarısız olursa, bölge ve kota düzeltmeleri için [Yapay Zeka Sorun Giderme](../chapter-07-troubleshooting/ai-troubleshooting.md) ve Bölüm 6 [Kapasite Planlama](../chapter-06-pre-deployment/capacity-planning.md) bakınız.
 
 ---
 
-## Dağıttıklarınızı Anlamak
+## Dağıttığınızı Anlamak
 
-Böyle tipik bir çoklu ajan uygulaması, yukarıdaki diyagramdaki sorumluluklara doğrudan eşlenen bir dizi Azure kaynağı sağlar:
+Bu tür tipik çoklu ajan uygulaması, yukarıdaki diyagramdaki sorumluluklara doğrudan karşılık gelen bir dizi Azure kaynağı sağlar:
 
-| Kaynak | Neden var |
+| Kaynak | Neden orada |
 |----------|----------------|
-| **Microsoft Foundry / Models** | Her ajanın kullandığı dil modellerini barındırır |
-| **Azure AI Search** | Araştırmacı ajana aranabilir dayanaklı veriler sağlar |
-| **Container Apps** (veya App Service) | Orkestratör ve ajan kodunu barındırır |
-| **Cosmos DB** (bazı örneklerde) | Ajanlar arasında paylaşılan durum/hafızayı saklar |
-| **Application Insights** | İstekleri ajanlar *arasında* izlemenizi sağlar, böylece akışı hata ayıklayabilirsiniz |
+| **Microsoft Foundry / Modeller** | Her ajanın kullandığı dil modellerine ev sahipliği yapar |
+| **Azure AI Search** | Araştırmacı ajanın arama yapacağı sağlam veriler sağlar |
+| **Container Apps** (veya App Service) | Yönlendirici ve ajan kodunu barındırır |
+| **Cosmos DB** (bazı örneklerde) | Ajanlar arasında paylaşılan durum/hafızayı depolar |
+| **Application Insights** | Ajanlar arasında istekleri izler, böylece akışı hata ayıklayabilirsiniz |
 
-### Ajanlar birbirleriyle nasıl konuşur
+### Ajanlar nasıl iletişim kurar
 
-Çoğu azd çoklu ajan örneğinde, **orkestratör uygulama kodunuzda çalışır** (örneğin Semantic Kernel veya Microsoft Agent Framework gibi bir çerçeve kullanarak). Orkestratör her uzman ajana sırayla çağrı yapar, sonuçları aktarır ve nihai cevabı birleştirir. Ajanlar bağlamı şu yollarla paylaşır:
+Çoğu azd çoklu ajan örneğinde, **yönlendirici uygulama kodunuzda çalışır** (örneğin Semantic Kernel veya Microsoft Agent Framework gibi bir çerçeve kullanılarak). Yönlendirici uzman ajana sırayla çağrı yapar, sonuçları iletir ve nihai cevabı birleştirir. Ajanlar şu yollarla bağlam paylaşır:
 
-- **Fonksiyon/araç çağrıları** — orkestratör bir uzmana çağrı yapar ve bir sonuç alır
-- **Paylaşılan bellek** — genellikle Cosmos DB olan bir veritabanı, her iki ajanın da okuyabileceği durumu tutar
-- **Mesajlar/olaylar** — daha gevşek bağlılık için ajanlar bir kuyruğa veya Service Bus'a mesaj gönderir
+- **Fonksiyon/araç çağrıları** — yönlendirici bir uzmana çağrı yapar ve sonuç alır
+- **Paylaşılan hafıza** — genellikle Cosmos DB, her iki ajanın okuyabileceği durumu tutar
+- **Mesajlar/olaylar** — gevşek bağlama için ajanlar kuyruk veya Service Bus ile iletişim kurar
 
-> **Hata ayıklama için neden önemli:** her adım ayrı olduğu için, Application Insights size *hangi* ajanın yavaşladığını veya başarısız olduğunu gösterir. Bu, işi ajanlara bölmenin başlıca nedenlerinden biridir.
+> **Bu neden hata ayıklama için önemli:** Her adım ayrı olduğundan, Application Insights size *hangi* ajanın yavaş veya başarısız olduğunu gösterir. Bu, işi ajana bölmenin en büyük nedenlerinden biridir.
 
 ---
 
-## Dağıtımı Doğrulayın
+## Dağıtımı Doğrula
 
-İlerlemeden önce sistemin gerçekten çalıştığını doğrulayın:
+İlerlemeden önce sistemin gerçekten çalıştığını onaylayın:
 
 ```bash
 # Dağıtılan uç noktaları göster
 azd show
 
-# Uygulamanın izleme panosunu aç
+# Uygulamanın izleme kontrol panelini aç
 azd monitor
 
-# Bir şeyler ters görünüyorsa logları takip et
+# Bir şeyler yanlış görünüyorsa günlükleri takip et
 azd monitor --logs
 ```
 
-Ardından `azd show` ile uygulama URL'sini açın ve tüm ajanları çalıştıran bir isteği deneyin (Creative Writer için bir konuyla ilgili kısa bir makale yazmasını isteyin). Application Insights **transaction search** içinde, isteğin araştırmacı, yazar ve editör adımlarına yayıldığını görmelisiniz.
+Sonra `azd show` ile uygulama URL'sini açın ve tüm ajanları kullanan bir istek deneyin (Creative Writer için konuyla ilgili kısa bir makale yazmasını isteyin). Application Insights **işlem araması** içinde isteğin araştırmacı, yazar ve editör adımlarına yayıldığını görmelisiniz.
 
-**Başarı kriterleri:**
-- ✅ `azd show` erişilebilir bir uç nokta listeliyor
-- ✅ Bir istek açıkça birden fazla aşamadan geçmiş bir sonuç üretiyor
-- ✅ Application Insights birden fazla ajan adımı için izler gösteriyor
+**Başarı ölçütleri:**
+- ✅ `azd show` erişilebilir bir uç nokta listeler
+- ✅ Bir istek net olarak birden fazla aşamadan geçen sonuç üretir
+- ✅ Application Insights birden fazla ajan adımı için izler gösterir
 
 ---
 
-## Özelleştirme: Bir Ajans Ekleyin veya Ayarlayın
+## Özelleştirme: Bir Ajan Ekleyin veya Ayarlayın
 
-Her ajan sadece talimatlar artı araçlardan oluştuğu için özelleştirme erişilebilir:
+Her ajan sadece talimatlar ve araçlardan oluştuğundan, özelleştirmek kolaydır:
 
-1. Şablondaki **ajan tanımlarını bulun** (çoğunlukla `prompts/`, `agents/` veya `*.prompty` dosya seti).
-2. **Bir ajanın talimatlarını ayarlayın** — örneğin editör ajana belirli bir ton veya kelime sayısı uygulamasını söyleyin.
-3. **Sadece kodu yeniden dağıtın** (altyapı değişmeden kalır):
+1. Şablondaki ajan tanımlarını bulun (çoğunlukla `prompts/`, `agents/` veya `*.prompty` dosyalar).
+2. Bir ajanın talimatlarını ayarlayın — örneğin, editör ajana belirli bir ton veya kelime sayısını zorunlu kılmasını söyleyin.
+3. Yalnızca kodu yeniden dağıtın (altyapı değişmez):
 
    ```bash
    azd deploy
    ```
 
-Kendi manifestonuzdan ajanlar oluşturmak ve tam yaşam döngüsünü yönetmek için ajan uzantısını ve onun tam yaşam döngüsünü kullanın:
+Daha ileri gidip *kendi* manifestonuzdan ajanlar oluşturmak için ajan uzantısını ve tüm yaşam döngüsünü kullanın:
 
 ```bash
 azd extension install azure.ai.agents
 azd ai agent init -m agent-manifest.yaml
 azd up
-azd ai agent invoke      # test, yanıt zamanlaması ile
+azd ai agent invoke      # yanıt zamanlaması ile test
 ```
 
-Tam ajan yaşam döngüsü (`invoke`, `eval generate`, `optimize`, `delete`) için [Bölüm 2: Agents](../chapter-02-ai-development/agents.md) ve [AZD AI CLI referansı](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions)'na bakın.
+Tam ajan yaşam döngüsü (`invoke`, `eval generate`, `optimize`, `delete`) için [Bölüm 2: Ajanlar](../chapter-02-ai-development/agents.md) ve [AZD AI CLI referansı](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) bakınız.
 
 ---
 
-## Temizlik
+## Temizleme
 
-Çoklu ajan uygulamaları birden fazla ücretli hizmet çalıştırır. İşiniz bittiğinde her şeyi kapatın:
+Çoklu ajan uygulamalar birden fazla ücretlendirme servisi çalıştırır. İşiniz bittiğinde her şeyi kaldırın:
 
 ```bash
 azd down --force --purge
 ```
 
-`--purge` bayrağı ayrıca yumuşak-silinen AI kaynaklarını (Foundry/Azure AI Services hesapları gibi) kaldırır, böylece gelecekteki bir yeniden dağıtımı engellemez veya maliyet oluşturmaya devam etmez.
+`--purge` bayrağı ayrıca yumuşak silinmiş Yapay Zeka kaynaklarını (Foundry/Azure AI Services hesapları gibi) kaldırır, böylece yeniden dağıtımı engellemez veya maliyet oluşturmaya devam etmez.
 
 ---
 
-## Üretim Çoklu Ajan Sistemleri Hakkında Bir Not
+## Üretim Çoklu Ajan Sistemleri Hakkında Not
 
-Bu depodaki [Retail Multi-Agent Solution](../../examples/retail-scenario.md), bir **mimari kroki**dir; tek komutluk bir şablon değildir—üretim düzeyinde bir perakende sisteminin nasıl inşa edileceğini belgeleyen (ve tam bir kurulumun önemli bir çaba gerektirdiğini açıkça belirten) bir referanstır. Burada çalışan bir örneği dağıttıktan sonra tasarım referansı olarak kullanın. Üretimle ilgili endişeler (dayanıklılık, maliyet, izleme, yönetişim) için [Bölüm 8: Production AI Practices](../chapter-08-production/production-ai-practices.md)'a devam edin.
+Bu depo içindeki [Perakende Çoklu Ajan Çözümü](../../examples/retail-scenario.md) **bir mimari şablondur**, tek komutluk bir şablon değil—bir üretim perakende sisteminin *nasıl* inşa edileceğini belgelemektedir (ve tam yapının ciddi bir çaba olduğunu açıklar). Burada çalışan bir örnek dağıttıktan sonra tasarım referansı olarak kullanın. Üretim için endişeler (dayanıklılık, maliyet, izleme, yönetişim) için [Bölüm 8: Üretim AI Uygulamaları](../chapter-08-production/production-ai-practices.md) devam edin.
 
 ---
 
 ## Özet
 
-- Bir çoklu ajan sistemi işi, bir orkestratör tarafından koordine edilen uzmanlara böler.
-- Görev ayrı aşamalara, paralelliğe veya adım başına farklı araçlara sahip olduğunda kullanın—aksi takdirde tek ajanı tercih edin.
-- azd iş akışı değişmez: `azd init` → `azd up` → test → `azd down`.
-- `contoso-creative-writer` gibi gerçek bir şablon, bugün çalışan bir çoklu ajan uygulamasını görmenizi ve özelleştirmenizi sağlar.
-- Ajanlar arası Application Insights izleme, çoklu ajan tasarımının en büyük pratik faydalarından biridir.
+- Çoklu ajan sistemi, işi yönlendirici tarafından koordine edilen uzmanlara böler.
+- Görev belirgin aşamalara, paralellik ya da her adım için farklı araçlara sahipse kullanın—aksi takdirde tek ajana tercih edin.
+- azd iş akışı aynı kalır: `azd init` → `azd up` → test → `azd down`.
+- `contoso-creative-writer` gibi gerçek bir şablon, çalışan bir çoklu ajan uygulamasını bugün görmenizi ve özelleştirmenizi sağlar.
+- Ajanlar arasında Application Insights izlemesi çoklu ajan tasarımının en büyük pratik faydalarından biridir.
 
 ---
 
@@ -244,10 +244,10 @@ Bu depodaki [Retail Multi-Agent Solution](../../examples/retail-scenario.md), bi
 
 ## 📖 İlgili Kaynaklar
 
-- [AI Agents Guide](../chapter-02-ai-development/agents.md)
-- [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md)
-- [Production AI Practices](../chapter-08-production/production-ai-practices.md)
-- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Yapay Zeka Ajanları Rehberi](../chapter-02-ai-development/agents.md)
+- [Koordinasyon Desenleri](../chapter-06-pre-deployment/coordination-patterns.md)
+- [Üretim AI Uygulamaları](../chapter-08-production/production-ai-practices.md)
+- [AI Sorun Giderme](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

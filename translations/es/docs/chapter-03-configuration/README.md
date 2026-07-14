@@ -1,22 +1,22 @@
 # Capítulo 3: Configuración y Autenticación
 
-**📚 Curso**: [AZD For Beginners](../../README.md) | **⏱️ Duración**: 45-60 minutos | **⭐ Complejidad**: Intermedio
+**📚 Curso**: [AZD Para Principiantes](../../README.md) | **⏱️ Duración**: 45-60 minutos | **⭐ Complejidad**: Intermedio
 
 ---
 
-## Overview
+## Descripción general
 
-Este capítulo cubre la configuración del entorno, patrones de autenticación y las mejores prácticas de seguridad para despliegues con Azure Developer CLI.
+Este capítulo cubre la configuración del entorno, patrones de autenticación y mejores prácticas de seguridad para despliegues con Azure Developer CLI.
 
-> Validado con `azd 1.25.6` en junio de 2026.
+> Validado con `azd 1.27.1` en julio de 2026.
 
-## Learning Objectives
+## Objetivos de aprendizaje
 
-Al completar este capítulo, podrás:
-- Dominar la jerarquía de configuración de AZD
-- Gestionar múltiples entornos (dev, staging, prod)
-- Implementar autenticación segura con identidades administradas
-- Configurar ajustes específicos por entorno
+Al completar este capítulo, usted:
+- Dominará la jerarquía de configuración de AZD
+- Gestionará múltiples entornos (desarrollo, staging, producción)
+- Implementará autenticación segura con identidades administradas
+- Configurará ajustes específicos para cada entorno
 
 ---
 
@@ -24,12 +24,12 @@ Al completar este capítulo, podrás:
 
 | # | Lección | Descripción | Tiempo |
 |---|--------|-------------|------|
-| 1 | [Guía de configuración](configuration.md) | Configuración y gestión del entorno | 30 min |
-| 2 | [Autenticación y seguridad](authsecurity.md) | Identidad administrada y patrones RBAC | 30 min |
+| 1 | [Guía de Configuración](configuration.md) | Configuración y gestión del entorno | 30 min |
+| 2 | [Autenticación y Seguridad](authsecurity.md) | Patrones de identidad administrada y RBAC | 30 min |
 
 ---
 
-## 🚀 Inicio rápido
+## 🚀 Inicio Rápido
 
 ```bash
 # Crear múltiples entornos
@@ -37,7 +37,7 @@ azd env new dev
 azd env new staging
 azd env new prod
 
-# Cambiar entre entornos
+# Cambiar entornos
 azd env select prod
 
 # Establecer variables de entorno
@@ -50,24 +50,24 @@ azd env get-values
 
 ---
 
-## 🔧 Jerarquía de configuración
+## 🔧 Jerarquía de Configuración
 
-AZD aplica la configuración en este orden (lo posterior sobrescribe a lo anterior):
+AZD aplica configuraciones en este orden (los ajustes posteriores sobreescriben a los anteriores):
 
 1. **Valores predeterminados** (integrados en las plantillas)
 2. **azure.yaml** (configuración del proyecto)
 3. **Variables de entorno** (`azd env set`)
-4. **Opciones de línea de comandos** (`--location eastus`)
+4. **Flags de línea de comandos** (`--location eastus`)
 
 ---
 
-## 🔐 Mejores prácticas de seguridad
+## 🔐 Mejores Prácticas de Seguridad
 
 ```bash
 # Usar identidad administrada (recomendado)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Comprobar el estado de autenticación de AZD
+# Verificar el estado de autenticación de AZD
 azd auth status
 
 # Opcional: verificar el contexto de Azure CLI si planeas ejecutar comandos az
@@ -76,7 +76,7 @@ az account show
 # Reautenticar si es necesario
 azd auth login
 
-# Opcional: actualizar la autenticación de Azure CLI para los comandos az
+# Opcional: actualizar la autenticación de Azure CLI para comandos az
 az login
 ```
 
@@ -84,17 +84,17 @@ az login
 
 ## 🔗 Navegación
 
-| Direction | Chapter |
+| Dirección | Capítulo |
 |-----------|---------|
-| **Anterior** | [Chapter 2: AI Development](../chapter-02-ai-development/README.md) |
-| **Siguiente** | [Chapter 4: Infrastructure](../chapter-04-infrastructure/README.md) |
+| **Anterior** | [Capítulo 2: Desarrollo de IA](../chapter-02-ai-development/README.md) |
+| **Siguiente** | [Capítulo 4: Infraestructura](../chapter-04-infrastructure/README.md) |
 
 ---
 
-## 📖 Recursos relacionados
+## 📖 Recursos Relacionados
 
-- [Comprobaciones previas al despliegue](../chapter-06-pre-deployment/README.md)
-- [Solución de problemas](../chapter-07-troubleshooting/common-issues.md)
+- [Verificaciones Previas al Despliegue](../chapter-06-pre-deployment/README.md)
+- [Resolución de Problemas](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

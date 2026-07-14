@@ -1,48 +1,48 @@
-# Dev Containers & GitHub Codespaces for azd
+# Kontenery deweloperskie i GitHub Codespaces dla azd
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD dla początkujących](../../README.md)
-- **📖 Current Chapter**: Rozdział 1 - Podstawy i szybki start
-- **⬅️ Previous**: [Użyj własnej aplikacji](bring-your-own-app.md)
-- **🚀 Next Chapter**: [Rozdział 2: Rozwój z naciskiem na AI](../chapter-02-ai-development/README.md)
+**Nawigacja po rozdziale:**
+- **📚 Strona kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Aktualny rozdział**: Rozdział 1 - Podstawy i szybki start
+- **⬅️ Poprzedni**: [Przynieś własną aplikację](bring-your-own-app.md)
+- **🚀 Następny rozdział**: [Rozdział 2: Rozwój AI-First](../chapter-02-ai-development/README.md)
 
-> Weryfikowano z `azd 1.25.6` w czerwcu 2026.
+> Zweryfikowano pod kątem `azd 1.27.1` w lipcu 2026.
 
 ## Wprowadzenie
 
-Instalowanie azd, odpowiedniego środowiska uruchomieniowego języka, Dockera i Azure CLI na każdym komputerze jest uciążliwe — i jest głównym powodem, dla którego samouczek, który "działa na moim komputerze", zawodzi u kogoś innego. Kontener deweloperski rozwiązuje to, opisując cały zestaw narzędzi w pliku. Każdy, kto otworzy projekt w VS Code lub GitHub Codespaces, otrzyma dokładnie takie samo środowisko, z już zainstalowanym azd. Ta lekcja pokaże, jak dodać taki plik.
+Instalacja azd, odpowiedniego środowiska uruchomieniowego języka, Dockera i Azure CLI na każdej maszynie to uciążliwe zadanie — i to główny powód, dla którego tutorial działający "na mojej maszynie" nie działa dla kogoś innego. **Kontener deweloperski** rozwiązuje to przez opisanie całego ciągu narzędzi w pliku. Każdy, kto otworzy projekt w VS Code lub GitHub Codespaces, otrzymuje dokładnie takie samo środowisko, z już zainstalowanym azd. Ta lekcja pokaże, jak dodać taki kontener.
 
-## Cele lekcji
+## Cele nauki
 
-Po zakończeniu tej lekcji będziesz:
-- Zrozumieć, czym jest kontener deweloperski i dlaczego pomaga w pracy z azd
+Pod koniec tej lekcji będziesz:
+- Rozumieć, czym jest kontener deweloperski i dlaczego pomaga z azd
 - Dodać minimalny plik `.devcontainer/devcontainer.json` do projektu
-- Uwzględnić azd, Azure CLI i Docker przez Dev Container *features*
+- Uwzględnić azd, Azure CLI i Dockera poprzez *features* Kontenera Deweloperskiego
 - Otworzyć projekt w GitHub Codespaces lub VS Code
 
-## Rezultaty nauki
+## Wyniki nauki
 
-Po ukończeniu tej lekcji będziesz potrafić:
+Po ukończeniu tej lekcji będziesz umiał:
 - Napisać `devcontainer.json` dla projektu azd
-- Dodać azd i narzędzia Azure bez ręcznej instalacji
-- Uruchomić `azd up` z wnętrza kontenera lub Codespace
+- Dodać azd i narzędzia Azure bez instalacji ręcznej
+- Uruchomić `azd up` wewnątrz kontenera lub Codespace
 
 ---
 
-## Czym jest kontener deweloperski?
+## Co to jest kontener deweloperski?
 
-Kontener deweloperski to środowisko programistyczne oparte na Dockerze, zdefiniowane przez plik `.devcontainer/devcontainer.json` w twoim repozytorium. Gdy otworzysz projekt:
+Kontener deweloperski to środowisko deweloperskie oparte na Dockerze, zdefiniowane przez plik `.devcontainer/devcontainer.json` w twoim repozytorium. Gdy otwierasz projekt:
 
-- **VS Code** (z rozszerzeniem Dev Containers) buduje kontener i dołącza do niego.
-- **GitHub Codespaces** buduje ten sam kontener w chmurze i udostępnia edytor w przeglądarce.
+- **VS Code** (z rozszerzeniem Dev Containers) buduje kontener i do niego się podłącza.
+- **GitHub Codespaces** buduje ten sam kontener w chmurze i daje ci edytor w przeglądarce.
 
-Tak czy inaczej, każdy współpracownik otrzymuje identyczne narzędzia—koniec z pytaniami „zainstalowałeś azd?”.
+W obu przypadkach każdy współtwórca ma identyczne narzędzia — koniec z pytaniami "czy zainstalowałeś azd?" przy rozwiązywaniu problemów.
 
 ```mermaid
 graph LR
-    Repo[Twoje repozytorium<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Kontenery deweloperskie]
+    Repo[Twój Repozytorium<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Kontenery Deweloperskie]
     Repo --> Codespaces[GitHub<br/>Codespaces]
-    VSCode --> Env[Identyczne środowisko:<br/>azd + az + Docker]
+    VSCode --> Env[Identical environment:<br/>azd + az + Docker]
     Codespaces --> Env
 ```
 
@@ -50,7 +50,7 @@ graph LR
 
 ## Krok 1: Utwórz plik devcontainer
 
-Utwórz `.devcontainer/devcontainer.json` w katalogu głównym swojego projektu:
+Utwórz `.devcontainer/devcontainer.json` w katalogu głównym twojego projektu:
 
 ```json
 {
@@ -77,21 +77,21 @@ Utwórz `.devcontainer/devcontainer.json` w katalogu głównym swojego projektu:
 
 Co robi każda część:
 
-| Key | Purpose |
+| Klucz | Cel |
 |-----|---------|
-| `image` | The base OS for the container |
+| `image` | Bazowy system operacyjny kontenera |
 | `features` | Wstępnie przygotowane instalatory — tutaj: Azure CLI, **azd**, Docker i Node.js |
-| `customizations.vscode.extensions` | Automatycznie instaluje rozszerzenia VS Code: azd i Bicep |
-| `forwardPorts` | Udostępnia port aplikacji w przeglądarce |
-| `postCreateCommand` | Uruchamia się raz po zbudowaniu kontenera (tutaj: kontrola poprawności) |
+| `customizations.vscode.extensions` | Automatycznie instaluje rozszerzenia VS Code azd i Bicep |
+| `forwardPorts` | Udostępnia port twojej aplikacji w przeglądarce |
+| `postCreateCommand` | Wykonuje się raz po zbudowaniu kontenera (tutaj, kontrola sanity) |
 
-> Funkcja `ghcr.io/azure/azure-dev/azd:latest` jest oficjalnym sposobem na uzyskanie azd w kontenerze. Jeśli potrzebujesz powtarzalności, przypnij konkretną wersję (np. `azd:1.25.6`).
+> Feature `ghcr.io/azure/azure-dev/azd:latest` to oficjalny sposób na uzyskanie azd w kontenerze. Przypnij konkretną wersję (np. `azd:1.27.1`) jeśli potrzebujesz powtarzalności.
 
 ---
 
-## Krok 2: Dopasuj funkcję do języka swojej aplikacji
+## Krok 2: Dopasuj funkcję do języka twojej aplikacji
 
-Zastąp funkcję `node` tą, której używa twoja aplikacja:
+Zamień funkcję `node` na tę właściwą dla używanego przez ciebie języka:
 
 ```jsonc
 // Python project
@@ -107,7 +107,7 @@ Zastąp funkcję `node` tą, której używa twoja aplikacja:
 "ghcr.io/devcontainers/features/go:1": {}
 ```
 
-Zachowaj `docker-in-docker`, jeśli twój `host` to `containerapp`, `aks` lub cokolwiek, co buduje obraz kontenera — azd potrzebuje Dockera do budowania i wypychania obrazów.
+Zachowaj `docker-in-docker`, jeśli twoim `host` jest `containerapp`, `aks` lub cokolwiek, co buduje obraz kontenera — azd potrzebuje Dockera do budowy i wypychania obrazów.
 
 ---
 
@@ -121,40 +121,40 @@ Zachowaj `docker-in-docker`, jeśli twój `host` to `containerapp`, `aks` lub co
 **W GitHub Codespaces:**
 1. Wypchnij repozytorium na GitHub.
 2. Kliknij **Code → Codespaces → Create codespace on main**.
-3. Poczekaj, aż kontener się zbuduje—azd będzie gotowy w terminalu.
+3. Poczekaj na zbudowanie kontenera — azd jest gotowy w terminalu.
 
 ---
 
 ## Krok 4: Wdróż z wnętrza kontenera
 
-Kontener ma preinstalowany azd, więc normalny przepływ pracy po prostu działa:
+Kontener ma azd wcześniej zainstalowany, więc standardowy proces po prostu działa:
 
 ```bash
-azd auth login --use-device-code   # kod urządzenia jest przydatny w Codespaces
+azd auth login --use-device-code   # kod urządzenia jest przydatny wewnątrz Codespaces
 azd up
 ```
 
-> **Dlaczego `--use-device-code`?** W zdalnym kontenerze lub Codespace nie ma lokalnej przeglądarki, do której dałoby się przekierować, więc logowanie przez device-code jest niezawodne. Wkleisz kod do zakładki w przeglądarce, aby zakończyć logowanie.
+> **Dlaczego `--use-device-code`?** W zdalnym kontenerze lub Codespace nie ma lokalnej przeglądarki do przekierowania, więc logowanie za pomocą kodu urządzenia jest niezawodną metodą. Wkleisz kod w kartę przeglądarki, aby zakończyć logowanie.
 
 ---
 
 ## Typowe pułapki
 
-| Problem | Rozwiązanie |
-|---------|-------------|
+| Pułapka | Rozwiązanie |
+|---------|-----|
 | `azd up` nie może zbudować obrazu | Dodaj funkcję `docker-in-docker` |
 | Logowanie przez przeglądarkę zawiesza się w Codespaces | Użyj `azd auth login --use-device-code` |
-| Narzędzia różnią się między członkami zespołu | Przypnij wersje funkcji (np. `azd:1.25.6`) |
-| Aplikacja niedostępna w przeglądarce | Dodaj port do `forwardPorts` |
+| Narzędzia różnią się między współpracownikami | Przypnij wersje funkcji (np. `azd:1.27.1`) |
+| Aplikacja jest niedostępna w przeglądarce | Dodaj port do `forwardPorts` |
 
 ---
 
 ## Podsumowanie
 
-- Kontener deweloperski sprawia, że zestaw narzędzi azd jest powtarzalny dla wszystkich.
-- Dodaj azd, Azure CLI i Docker za pomocą Dev Container *features*.
-- Dopasuj funkcję języka do swojej aplikacji i zachowaj `docker-in-docker` dla hostów kontenerów.
-- Używaj logowania przez device-code podczas pracy w Codespaces.
+- Kontener deweloperski sprawia, że twój ciąg narzędzi azd jest odtwarzalny dla każdego.
+- Dodaj azd, Azure CLI i Dockera za pomocą *features* Kontenera Deweloperskiego.
+- Dopasuj funkcję językową do swojej aplikacji i zachowaj `docker-in-docker` dla hostów kontenerów.
+- Używaj logowania przez kod urządzenia podczas pracy w Codespaces.
 
 ---
 
@@ -162,16 +162,16 @@ azd up
 
 | Kierunek | Zasób |
 |-----------|----------|
-| **Poprzedni** | [Użyj własnej aplikacji](bring-your-own-app.md) |
+| **Poprzedni** | [Przynieś własną aplikację](bring-your-own-app.md) |
 | **Strona rozdziału** | [Rozdział 1: Podstawy i szybki start](README.md) |
-| **Następny rozdział** | [Rozdział 2: Rozwój z naciskiem na AI](../chapter-02-ai-development/README.md) |
+| **Następny rozdział** | [Rozdział 2: Rozwój AI-First](../chapter-02-ai-development/README.md) |
 
 ## 📖 Powiązane zasoby
 
 - [Instalacja i konfiguracja](installation.md)
-- [Skrót poleceń](../../resources/cheat-sheet.md)
+- [ściąga poleceń](../../resources/cheat-sheet.md)
 - [Oficjalna specyfikacja Dev Containers](https://containers.dev/)
-- [Funkcja Dev Container azd](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
+- [Feature azd Dev Container](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
 
 ---
 

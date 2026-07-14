@@ -1,4 +1,4 @@
-# Kapitel 8: Produktion & Virksomhedsmønstre
+# Kapitel 8: Produktions- & Erhvervsmønstre
 
 **📚 Kursus**: [AZD For Beginners](../../README.md) | **⏱️ Varighed**: 2-3 timer | **⭐ Kompleksitet**: Avanceret
 
@@ -6,18 +6,18 @@
 
 ## Oversigt
 
-Dette kapitel dækker virksomhedsklare udrulningsmønstre, sikkerhedshærdning, overvågning og omkostningsoptimering for produktions-AI-arbejdsmængder.
+Dette kapitel omfatter produktionsklare udrulningsmønstre, sikkerhedsstyrkelse, overvågning og omkostningsoptimering for AI-opgaver i produktion.
 
-> Valideret mod `azd 1.25.6` i juni 2026.
+> Valideret med `azd 1.27.1` i juli 2026.
 
 ## Læringsmål
 
 Ved at gennemføre dette kapitel vil du:
-- Udrulle modstandsdygtige applikationer på tværs af flere regioner
-- Implementere sikkerhedsmønstre for virksomheder
+- Udrulle multi-region robuste applikationer
+- Implementere erhvervssikkerhedsmønstre
 - Konfigurere omfattende overvågning
 - Optimere omkostninger i stor skala
-- Opsætte CI/CD-pipelines med AZD
+- Opsætte CI/CD pipelines med AZD
 
 ---
 
@@ -25,38 +25,38 @@ Ved at gennemføre dette kapitel vil du:
 
 | # | Lektion | Beskrivelse | Tid |
 |---|--------|-------------|------|
-| 1 | [Produktions-AI-praksis](production-ai-practices.md) | Virksomhedsudrulningsmønstre | 90 min |
+| 1 | [Produktions-AI praksis](production-ai-practices.md) | Erhvervsudrulningsmønstre | 90 min |
 
 ---
 
 ## 🚀 Produktionscheckliste
 
-- [ ] Udrulning på tværs af flere regioner for robusthed
+- [ ] Multi-region udrulning for robusthed
 - [ ] Administreret identitet til autentificering (ingen nøgler)
 - [ ] Application Insights til overvågning
-- [ ] Omkostningsbudgetter og advarsler konfigureret
+- [ ] Omkostningsbudgetter og alarmer konfigureret
 - [ ] Sikkerhedsscanning aktiveret
-- [ ] Integration af CI/CD-pipeline
-- [ ] Plan for genopretning efter katastrofe
+- [ ] CI/CD pipeline integration
+- [ ] Katastrofeberedskabsplan
 
 ---
 
 ## 🏗️ Arkitekturmønstre
 
-### Mønster 1: Mikrotjenester AI
+### Mønster 1: Microservices AI
 
 ```mermaid
 graph LR
-    Gateway[API-gateway] --> AI[AI-tjeneste] --> Models[Microsoft Foundry-modeller]
-    Gateway --> Auth[Autentificeringstjeneste]
-    AI --> Data[Datalager]
+    Gateway[API Gateway] --> AI[AI-tjeneste] --> Models[Microsoft Foundry-modeller]
+    Gateway --> Auth[Auth-tjeneste]
+    AI --> Data[Databutik]
 ```
 
-### Mønster 2: Event-drevet AI
+### Mønster 2: Event-Drevet AI
 
 ```mermaid
 graph LR
-    EventGrid[Begivenhedsnet] --> Functions[Funktioner] --> Pipeline[AI-pipeline]
+    EventGrid[Begivenhedsnetværk] --> Functions[Funktioner] --> Pipeline[AI-Pipeline]
 ```
 
 ---
@@ -83,14 +83,14 @@ properties: {
 ## 💰 Omkostningsoptimering
 
 | Strategi | Besparelser |
-|----------|---------|
-| Skalér til nul (Container Apps) | 60-80% |
+|----------|-------------|
+| Skaler til nul (Container Apps) | 60-80% |
 | Brug forbrugsniveauer til udvikling | 50-70% |
 | Planlagt skalering | 30-50% |
 | Reserveret kapacitet | 20-40% |
 
 ```bash
-# Indstil budgetadvarsler
+# Indstil budgetalarmer
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -103,13 +103,13 @@ az consumption budget create \
 ## 📊 Overvågningsopsætning
 
 ```bash
-# Stream logfiler
+# Stream logs
 azd monitor --logs
 
-# Kontroller Application Insights
+# Tjek Application Insights
 azd monitor --overview
 
-# Vis målinger
+# Se målinger
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -120,16 +120,16 @@ az monitor metrics list --resource <resource-id>
 | Retning | Kapitel |
 |-----------|---------|
 | **Forrige** | [Kapitel 7: Fejlfinding](../chapter-07-troubleshooting/README.md) |
-| **Kursus fuldført** | [Kursusforside](../../README.md) |
+| **Kursus færdig** | [Kursus Forside](../../README.md) |
 
 ---
 
 ## 📖 Relaterede ressourcer
 
-- [Guide til AI-agenter](../chapter-02-ai-development/agents.md)
+- [AI Agent Guide](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Multi-agentløsninger](../chapter-05-multi-agent/README.md)
-- [Mikrotjenester-eksempel](../../examples/microservices/README.md)
+- [Multi-Agent løsninger](../chapter-05-multi-agent/README.md)
+- [Microservices eksempel](../../examples/microservices/README.md)
 
 ---
 

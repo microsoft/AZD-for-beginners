@@ -1,59 +1,59 @@
 # AZD för AI-utvecklare Workshop
 
-> Validerad mot `azd 1.25.6` i juni 2026.
+> Validerad mot `azd 1.27.1` i juli 2026.
 
 > [!IMPORTANT]  
-> **Denna workshop är utrustad med en guide som du kan förhandsgranska i din lokala webbläsare. För att komma igång, öppna repot i GitHub Codespaces, en dev container, eller en lokal klon med MkDocs installerat—then vänta tills du ser en aktiv VS Code-terminal och skriv:**  
+> **Denna workshop är utrustad med en workshopguide som du kan förhandsgranska i din lokala webbläsare. För att komma igång, öppna repot i GitHub Codespaces, en dev-container eller en lokal klon med MkDocs installerat—vänta sedan tills du ser en aktiv VS Code-terminal och skriv:**  
 > `mkdocs serve > /dev/null 2>&1 &`  
-> **Du ska se en popup-dialog för att öppna förhandsgranskningssidan i en webbläsare.**
+> **Du bör se en popup-dialog för att öppna förhandsgranskningssidan i en webbläsare.**
 
-Välkommen till den praktiska workshopen för att lära dig Azure Developer CLI (AZD) med fokus på distribution av AI-applikationer. Denna workshop hjälper dig att få en praktisk förståelse för AZD-mallar i 3 steg:
+Välkommen till den praktiska workshopen för att lära dig Azure Developer CLI (AZD) med fokus på AI-applikationsdistribution. Denna workshop hjälper dig att få en tillämpad förståelse för AZD-mallar i 3 steg:
 
 1. **Upptäckt** - hitta mallen som passar dig.
-1. **Driftsättning** - distribuera och verifiera att den fungerar
-1. **Anpassning** - ändra och iterera för att göra den din!
+1. **Distribution** - distribuera och validera att det fungerar.
+1. **Anpassning** - modifiera och iterera för att göra det ditt!
 
-Under kursens gång introduceras du också för kärnverktyg och arbetsflöden för utvecklare, för att hjälpa dig att effektivisera din end-to-end utvecklingsresa.
+Under denna workshop kommer du också att introduceras för kärnverktyg och arbetsflöden för utvecklare, för att hjälpa dig effektivisera din end-to-end-utvecklingsresa.
 
 | | | 
 |:---|:---|
-| **📚 Kursstartsida**| [AZD för nybörjare](../README.md)|
+| **📚 Kursstart**| [AZD För Nybörjare](../README.md)|
 | **📖 Dokumentation** | [Kom igång med AI-mallar](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️AI-mallar** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
+| **🛠️AI Mallar** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
 |**🚀 Nästa steg** | [Ta utmaningen](#workshop-challenge) |
 | | |
 
-## Workshopöversikt
+## Workshop-översikt
 
-**Varaktighet:** 3–4 timmar  
-**Nivå:** Nybörjare till medel  
+**Varaktighet:** 3-4 timmar  
+**Nivå:** Nybörjare till Mellannivå  
 **Förkunskaper:** Bekantskap med Azure, AI-koncept, VS Code & kommandoradsverktyg.
 
-Detta är en praktisk workshop där du lär dig genom att göra. När du har genomfört övningarna rekommenderar vi att du går igenom kursen AZD For Beginners för att fortsätta din inlärningsresa inom säkerhet och produktivitetsbästa praxis.
+Detta är en praktisk workshop där du lär dig genom att göra. När du har slutfört övningarna rekommenderar vi att du går igenom AZD För Nybörjare-kursplanen för att fortsätta din läranderesa inom säkerhet och produktivitetsbästa praxis.
 
-| Time| Module  | Objective |
+| Tid| Modul  | Mål |
 |:---|:---|:---|
-| 15 mins | Introduktion | Lägg grunden, förstå målen |
-| 30 mins | Välj AI-mall | Utforska alternativ och välj en startmall | 
-| 30 mins | Validera AI-mall | Distribuera standardlösning till Azure |
-| 30 mins | Bryt ner AI-mallen | Utforska struktur och konfiguration |
-| 30 mins | Konfigurera AI-mall | Aktivera och prova tillgängliga funktioner |
-| 30 mins | Anpassa AI-mall | Anpassa mallen efter dina behov |
-| 30 mins | Riv ned infrastrukturen | Rensa upp och frigör resurser |
-| 15 mins | Sammanfattning & nästa steg | Lärresurser, workshoputmaning |
+| 15 min | Introduktion | Sätta scenen, förstå målen |
+| 30 min | Välj AI Mall | Utforska alternativ och välj startmall | 
+| 30 min | Validera AI Mall | Distribuera standardslösning till Azure |
+| 30 min | Dekonstruera AI Mall | Utforska struktur och konfiguration |
+| 30 min | Konfigurera AI Mall | Aktivera och prova tillgängliga funktioner |
+| 30 min | Anpassa AI Mall | Anpassa mallen efter dina behov |
+| 30 min | Riv ner infrastruktur | Rensa upp och frigör resurser |
+| 15 min | Avslut & Nästa steg | Läranderesurser, Workshoputmaning |
 | | |
 
 ## Vad du kommer att lära dig
 
-Tänk på AZD-mallen som en inlärningssandlåda för att utforska olika kapabiliteter och verktyg för end-to-end utveckling på Microsoft Foundry. I slutet av denna workshop bör du ha en intuitiv känsla för olika verktyg och koncept i detta sammanhang.
+Tänk på AZD-mallen som en lärandesandlåda för att utforska olika funktioner och verktyg för end-to-end utveckling på Microsoft Foundry. I slutet av denna workshop bör du ha en intuitiv känsla för olika verktyg och koncept i detta sammanhang.
 
-| Concept  | Objective |
+| Koncept  | Mål |
 |:---|:---|
-| **Azure Developer CLI** | Förstå verktygets kommandon och arbetsflöden|
-| **AZD Templates**| Förstå projektstruktur och konfiguration|
-| **Azure AI Agent**| Provisionera och distribuera Microsoft Foundry-projekt  |
-| **Azure AI Search**| Möjliggöra kontext-engineering med agenter |
-| **Observability**| Utforska spårning, övervakning och utvärderingar |
+| **Azure Developer CLI** | Förstå verktygs-kommandon och arbetsflöden |
+| **AZD Mallar**| Förstå projektstruktur och konfiguration |
+| **Azure AI Agent**| Provisionera & distribuera Microsoft Foundry-projekt  |
+| **Azure AI Search**| Möjliggör kontextuell engineering med agenter |
+| **Observabilitet**| Utforska spårning, övervakning och utvärderingar |
 | **Red Teaming**| Utforska adversarial testning och motåtgärder |
 | | |
 
@@ -61,17 +61,17 @@ Tänk på AZD-mallen som en inlärningssandlåda för att utforska olika kapabil
 
 Redo att börja? Navigera genom workshopmodulerna:
 
-- [Modul 1: Välj AI-mall](instructions/1-Select-AI-Template.md)
-- [Modul 2: Validera AI-mall](instructions/2-Validate-AI-Template.md) 
-- [Modul 3: Bryt ner AI-mallen](instructions/3-Deconstruct-AI-Template.md)
-- [Modul 4: Konfigurera AI-mall](instructions/4-Configure-AI-Template.md)
-- [Modul 5: Anpassa AI-mall](instructions/5-Customize-AI-Template.md)
-- [Modul 6: Riv ned infrastrukturen](instructions/6-Teardown-Infrastructure.md)
-- [Modul 7: Sammanfattning & nästa steg](instructions/7-Wrap-up.md)
+- [Modul 1: Välj AI Mall](instructions/1-Select-AI-Template.md)
+- [Modul 2: Validera AI Mall](instructions/2-Validate-AI-Template.md) 
+- [Modul 3: Dekonstruera AI Mall](instructions/3-Deconstruct-AI-Template.md)
+- [Modul 4: Konfigurera AI Mall](instructions/4-Configure-AI-Template.md)
+- [Modul 5: Anpassa AI Mall](instructions/5-Customize-AI-Template.md)
+- [Modul 6: Riv ner infrastruktur](instructions/6-Teardown-Infrastructure.md)
+- [Modul 7: Avslut & Nästa steg](instructions/7-Wrap-up.md)
 
 ## Har du feedback?
 
-Skapa en issue i detta repo (tagga den `Workshop`) eller gå med oss på [Discord](https://aka.ms/foundry/discord) och posta i vår `#get-help`-kanal
+Skapa ett issue på detta repo (tagga det med `Workshop`) eller gå med i oss på [Discord](https://aka.ms/foundry/discord) och posta i vår `#get-help` kanal
 
 ---
 

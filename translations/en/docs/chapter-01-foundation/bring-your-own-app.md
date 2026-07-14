@@ -6,7 +6,7 @@
 - **⬅️ Previous**: [Your First Project](first-project.md)
 - **➡️ Next**: [Dev Containers & Codespaces](dev-containers.md)
 
-> Validated against `azd 1.25.6` in June 2026.
+> Validated against `azd 1.27.1` in July 2026.
 
 ## Introduction
 

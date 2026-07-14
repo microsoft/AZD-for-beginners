@@ -1,54 +1,54 @@
-# Dev Containers & GitHub Codespaces for azd
+# Maboksi ya Maendeleo & GitHub Codespaces kwa azd
 
 **Uelekezaji wa Sura:**
-- **📚 Nyumbani kwa Kozi**: [AZD Kwa Waanzilishi](../../README.md)
-- **📖 Sura ya Sasa**: Sura 1 - Msingi & Anza Haraka
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Waanza](../../README.md)
+- **📖 Sura ya Sasa**: Sura ya 1 - Msingi & Anza Haraka
 - **⬅️ Iliyopita**: [Leta Programu Yako](bring-your-own-app.md)
-- **🚀 Sura Ifuatayo**: [Chapter 2: AI-First Development](../chapter-02-ai-development/README.md)
+- **🚀 Sura Inayofuata**: [Sura ya 2: Maendeleo ya AI-Kwanza](../chapter-02-ai-development/README.md)
 
-> Imethibitishwa dhidi ya `azd 1.25.6` mnamo Juni 2026.
+> Imethibitishwa dhidi ya `azd 1.27.1` katika Julai 2026.
 
 ## Utangulizi
 
-Kusakinisha azd, runtime sahihi ya lugha, Docker, na Azure CLI kwenye kila mashine ni kazi ya kuchosha—na ndiyo sababu namba moja kwa tutorial inayofanya "inayofanya kazi kwenye mashine yangu" kushindwa kwa mtu mwingine. Dev container inatatua hili kwa kuelezea zana zako zote kwenye faili moja. Kila mtu anayeifungua mradi kwenye VS Code au GitHub Codespaces anapata mazingira yale yale, na azd tayari imewekwa. Somo hili linaonyesha jinsi ya kuongeza moja.
+Kusakinisha azd, runtime ya lugha sahihi, Docker, na Azure CLI kwenye kila mashine ni kazi kubwa—na ndio sababu kubwa ya kozi inayosema "inafanya kazi kwenye mashine yangu" kushindwa kwa mtu mwingine. **Kiboksi cha maendeleo** kinatatua hili kwa kuelezea zana zako zote kwenye faili moja. Mtu yeyote anayefungua mradi katika VS Code au GitHub Codespaces anapata mazingira sawa kabisa, huku azd tayari imesakinishwa. Somo hili linakuonyesha jinsi ya kuongeza moja.
 
 ## Malengo ya Kujifunza
 
-Kwa mwisho wa somo hili, utakuwa umeweza:
-- Kuelewa ni dev container ni nini na kwa nini inasaidia na azd
-- Kuongeza `.devcontainer/devcontainer.json` ya chini kwa mradi
-- Kujumuisha azd, Azure CLI, na Docker kupitia *features* za Dev Container
-- Kufungua mradi kwenye GitHub Codespaces au VS Code
+Mwishoni mwa somo hili, utakuwa umeweza:
+- Elewa nini ni kiboksi cha maendeleo na kwa nini kinasaidia na azd
+- Ongeza `.devcontainer/devcontainer.json` ya kiwango cha chini kwa mradi
+- Jumuisha azd, Azure CLI, na Docker kupitia *vipengele* vya Kiboksi cha Maendeleo
+- Fungua mradi katika GitHub Codespaces au VS Code
 
 ## Matokeo ya Kujifunza
 
 Baada ya kumaliza somo hili, utaweza:
 - Kuandika `devcontainer.json` kwa mradi wa azd
-- Kuongeza azd na zana za Azure bila usakinishaji wa mikono
-- Kuendesha `azd up` kutoka ndani ya container au Codespace
+- Ongeza azd na zana za Azure bila usakinishaji wa mikono
+- Endesha `azd up` kutoka ndani ya kiboksi au Codespace
 
 ---
 
-## Je, Dev Container ni Nini?
+## Kiboksi cha Maendeleo ni Nini?
 
-Dev container ni mazingira ya maendeleo yanayotegemea Docker yaliyoelezewa na faili `.devcontainer/devcontainer.json` katika repo yako. Unapoifungua mradi:
+Kiboksi cha maendeleo ni mazingira ya maendeleo yanayotegemea Docker yanayofafanuliwa na faili ya `.devcontainer/devcontainer.json` kwenye hifadhidata yako. Unapofungua mradi:
 
-- **VS Code** (na ugani wa Dev Containers) hujenga container na kujiunga nayo.
-- **GitHub Codespaces** hujenga container hiyo hiyo kwenye wingu na kukupa mhariri kwa kivinjari.
+- **VS Code** (ikiwa na ugani wa Dev Containers) hujenga kiboksi na kuunganishwa nacho.
+- **GitHub Codespaces** hujenga kiboksi hicho hicho kwenye huduma ya mtandao na kukupa mhariri wa kivinjari.
 
-Kwa njia yoyote, kila mchangiaji anapata zana sawia—hakuna troubleshooting ya "je, umesakinisha azd?".
+Kwa njia yoyote, kila mshiriki anapata zana sawa—hakuna "je, umeweka azd?" matatizo.
 
 ```mermaid
 graph LR
-    Repo[Repo Yako<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Kontena za Maendeleo]
-    Repo --> Codespaces[GitHub<br/>Codespaces]
-    VSCode --> Env[Mazingira sawa:<br/>azd + az + Docker]
+    Repo[Hifadhidata Yako<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Makontena ya Maendeleo]
+    Repo --> Codespaces[GitHub<br/>Miundombinu ya Msimbo]
+    VSCode --> Env[Identical environment:<br/>azd + az + Docker]
     Codespaces --> Env
 ```
 
 ---
 
-## Hatua 1: Tengeneza faili ya devcontainer
+## Hatua ya 1: Tengeneza Faili ya devcontainer
 
 Tengeneza `.devcontainer/devcontainer.json` kwenye mzizi wa mradi wako:
 
@@ -75,23 +75,23 @@ Tengeneza `.devcontainer/devcontainer.json` kwenye mzizi wa mradi wako:
 }
 ```
 
-Kila sehemu inafanya nini:
+Kila sehemu hufanya kazi gani:
 
-| Kipengele | Madhumuni |
+| Funguo | Kusudi |
 |-----|---------|
-| `image` | OS ya msingi kwa kontena |
+| `image` | Mfumo wa uendeshaji wa msingi wa kiboksi |
 | `features` | Wasakinishaji waliotengenezwa awali—hapa: Azure CLI, **azd**, Docker, na Node.js |
-| `customizations.vscode.extensions` | Inasakinisha moja kwa moja nyongeza za azd na Bicep za VS Code |
-| `forwardPorts` | Inaonyesha bandari ya programu yako kwa kivinjari chako |
-| `postCreateCommand` | Inaendeshwa mara moja baada ya kontena kujengwa (hapa, ukaguzi wa busara) |
+| `customizations.vscode.extensions` | Hujiweka moja kwa moja ugani wa azd na Bicep wa VS Code |
+| `forwardPorts` | Hufungua bandari ya programu yako kwenye kivinjari chako |
+| `postCreateCommand` | Huendeshwa mara moja baada ya kiboksi kujengwa (hapa, ukaguzi wa usahihi) |
 
-> The `ghcr.io/azure/azure-dev/azd:latest` feature is the official way to get azd in a container. Pin a specific version (for example `azd:1.25.6`) if you need reproducibility.
+> Kipengele `ghcr.io/azure/azure-dev/azd:latest` ni njia rasmi ya kupata azd ndani ya kiboksi. Weka toleo mahususi (mfano `azd:1.27.1`) ikiwa unahitaji uthabiti.
 
 ---
 
-## Hatua 2: Linganisha Feature na Lugha ya Programu Yako
+## Hatua ya 2: Linganisha Kipengele na Lugha ya Programu Yako
 
-Badilisha kipengele cha `node` kwa kile programu yako inachotumia:
+Badilisha kipengele cha `node` kwa kile chochote kinachotumiwa na programu yako:
 
 ```jsonc
 // Python project
@@ -107,71 +107,71 @@ Badilisha kipengele cha `node` kwa kile programu yako inachotumia:
 "ghcr.io/devcontainers/features/go:1": {}
 ```
 
-Weke `docker-in-docker` endelea ikiwa `host` yako ni `containerapp`, `aks`, au chochote kinachojenga picha ya container—azd inahitaji Docker kujenga na kusukuma picha.
+Endelea kutumia `docker-in-docker` ikiwa mwenyeji wako ni `containerapp`, `aks`, au chochote kinachojenga picha ya kiboksi—azd inahitaji Docker kujenga na kusukuma picha.
 
 ---
 
-## Hatua 3: Ifungue
+## Hatua ya 3: Fungua
 
 **Katika VS Code:**
 1. Sakinisha ugani wa **Dev Containers**.
 2. Fungua folda ya mradi.
-3. Bonyeza **Reopen in Container** ukiulizwa (au endesha *Dev Containers: Reopen in Container*).
+3. Bonyeza **Reopen in Container** unapoombwa (au endesha *Dev Containers: Reopen in Container*).
 
 **Katika GitHub Codespaces:**
-1. Toda repo kwenye GitHub.
+1. Sogeza hifadhidata hadi GitHub.
 2. Bonyeza **Code → Codespaces → Create codespace on main**.
-3. Subiri container iunde—azd iko tayari kwenye terminal.
+3. Subiri kiboksi kujengwa—azd iko tayari kwenye terminali.
 
 ---
 
-## Hatua 4: Tekeleza Kutoka Ndani ya Kontena
+## Hatua ya 4: Tuma Kutoka Ndani ya Kiboksi
 
-Kontena ina azd imewekwa tayari, hivyo mtiririko wa kawaida unafanya kazi:
+Kiboksi kina azd tayari imewekwa, hivyo mtiririko wa kawaida haufanyi kazi tu:
 
 ```bash
-azd auth login --use-device-code   # msimbo wa kifaa ni rahisi kutumia ndani ya Codespaces
+azd auth login --use-device-code   # msimbo wa kifaa ni rahisi ndani ya Codespaces
 azd up
 ```
 
-> **Why `--use-device-code`?** In a remote container or Codespace there's no local browser to redirect to, so device-code login is the reliable path. You'll paste a code into a browser tab to complete sign-in.
+> **Kwanini `--use-device-code`?** Katika kiboksi cha mbali au Codespace hakuna kivinjari cha eneo la karibu cha kuelekeza, hivyo kuingia kwa nambari ya kifaa ni njia ya kuaminika. Utaweka nambari kwenye kichupo cha kivinjari ili kumaliza kuingia.
 
 ---
 
-## Makosa Yanayotokea Mara kwa Mara
+## Makosa ya Kawaida
 
-| Tatizo | Suluhisho |
+| Hitilafu | Suluhisho |
 |---------|-----|
-| `azd up` can't build an image | Add the `docker-in-docker` feature |
-| Browser login hangs in Codespaces | Use `azd auth login --use-device-code` |
-| Tools differ between teammates | Pin feature versions (e.g. `azd:1.25.6`) |
-| App not reachable in browser | Add the port to `forwardPorts` |
+| `azd up` haiwezi kujenga picha | Ongeza kipengele cha `docker-in-docker` |
+| Kuingia kwa kivinjari kunaziba katika Codespaces | Tumia `azd auth login --use-device-code` |
+| Zana zinatofautiana kati ya wenzako | Weka matoleo ya kipengele (mfano `azd:1.27.1`) |
+| Programu haipatikani kwenye kivinjari | Ongeza bandari kwenye `forwardPorts` |
 
 ---
 
 ## Muhtasari
 
-- Dev container inafanya zana zako za azd zirudiwe kwa kila mtu.
-- Ongeza azd, Azure CLI, na Docker kupitia *features* za Dev Container.
-- Linganisha kipengele cha lugha na programu yako na ukae na `docker-in-docker` kwa wenye mwenyeji wa container.
-- Tumia device-code login unapotumia Codespaces.
+- Kiboksi cha maendeleo hufanya zana yako ya azd iweze kurudiwa kwa kila mtu.
+- Ongeza azd, Azure CLI, na Docker kupitia *vipengele* vya Kiboksi cha Maendeleo.
+- Linganisha kipengele cha lugha na programu yako na endelea kutumia `docker-in-docker` kwa wenyeji wa kiboksi.
+- Tumia kuingia kwa nambari ya kifaa unapotumia Codespaces.
 
 ---
 
-## 🔗 Uabiri
+## 🔗 Uelekezaji
 
 | Mwelekeo | Rasilimali |
 |-----------|----------|
-| **Previous** | [Leta Programu Yako](bring-your-own-app.md) |
-| **Chapter Home** | [Chapter 1: Foundation & Quick Start](README.md) |
-| **Next Chapter** | [Chapter 2: AI-First Development](../chapter-02-ai-development/README.md) |
+| **Iliyopita** | [Leta Programu Yako](bring-your-own-app.md) |
+| **Nyumbani kwa Sura** | [Sura ya 1: Msingi & Anza Haraka](README.md) |
+| **Sura Inayofuata** | [Sura ya 2: Maendeleo ya AI-Kwanza](../chapter-02-ai-development/README.md) |
 
 ## 📖 Rasilimali Zinazohusiana
 
-- [Installation & Setup](installation.md)
-- [Command Cheat Sheet](../../resources/cheat-sheet.md)
-- [Official Dev Containers specification](https://containers.dev/)
-- [azd Dev Container feature](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
+- [Usakinishaji & Usanidi](installation.md)
+- [Karatasi ya Amri](../../resources/cheat-sheet.md)
+- [Maelezo Rasmi ya Maboksi ya Maendeleo](https://containers.dev/)
+- [Kipengele cha azd Dev Container](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
 
 ---
 

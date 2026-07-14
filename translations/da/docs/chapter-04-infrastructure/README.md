@@ -1,36 +1,36 @@
-# Kapitel 4: Infrastruktur som kode & Udrulning
+# Kapitel 4: Infrastruktur som kode & Udrulning  
 
-**📚 Kursus**: [AZD For Begyndere](../../README.md) | **⏱️ Varighed**: 1-1.5 timer | **⭐ Kompleksitet**: Mellem
+**📚 Kursus**: [AZD For Begyndere](../../README.md) | **⏱️ Varighed**: 1-1.5 timer | **⭐ Sværhedsgrad**: Mellem  
 
----
+---  
 
-## Oversigt
+## Oversigt  
 
-Dette kapitel dækker Infrastructure as Code (IaC)-mønstre med Bicep-skabeloner, ressourceprovisionering og udrulningsstrategier ved hjælp af Azure Developer CLI.
+Dette kapitel dækker Infrastruktur som kode (IaC) mønstre med Bicep-skabeloner, ressourceforvaltning og udrulningsstrategier ved brug af Azure Developer CLI.  
 
-> Valideret mod `azd 1.25.6` i juni 2026.
+> Valideret mod `azd 1.27.1` i juli 2026.  
 
-## Læringsmål
+## Læringsmål  
 
-Efter at have gennemført dette kapitel vil du:
-- Forstå strukturen og syntaksen i Bicep-skabeloner
-- Oprette Azure-ressourcer med `azd provision`
-- Udrulle applikationer med `azd deploy`
-- Implementere blue-green og rullende udrulningsstrategier
+Når du har gennemført dette kapitel, vil du:  
+- Forstå Bicep-skabelonens struktur og syntaks  
+- Producere Azure-ressourcer med `azd provision`  
+- Udrulle applikationer med `azd deploy`  
+- Implementere blue-green og rolling udrulningsstrategier  
 
----
+---  
 
-## 📚 Lektioner
+## 📚 Lektioner  
 
-| # | Lektion | Beskrivelse | Tid |
-|---|--------|-------------|------|
-| 1 | [Provisioning Resources](provisioning.md) | Azure-ressourcestyring med AZD | 45 min |
-| 2 | [Deployment Guide](deployment-guide.md) | Applikationsudrulningsstrategier | 45 min |
-| 3 | [Authoring Your Own Template](custom-templates.md) | Byg og udgiv genanvendelige azd-skabeloner | 30 min |
+| # | Lektion | Beskrivelse | Tid |  
+|---|--------|-------------|------|  
+| 1 | [Provisionering af ressourcer](provisioning.md) | Azure ressourceforvaltning med AZD | 45 min |  
+| 2 | [Udrulningsguide](deployment-guide.md) | Applikationsudrulningsstrategier | 45 min |  
+| 3 | [Forfatning af din egen skabelon](custom-templates.md) | Byg og publicer genanvendelige azd-skabeloner | 30 min |  
 
----
+---  
 
-## 🚀 Kom godt i gang
+## 🚀 Hurtig Start  
 
 ```bash
 # Initialiser fra skabelon
@@ -39,7 +39,7 @@ azd init --template azure-functions-python-v2-http
 # Forhåndsvis hvad der vil blive oprettet
 azd provision --preview
 
-# Provisionér kun infrastruktur
+# Udrul kun infrastruktur
 azd provision
 
 # Udrul kun kode
@@ -48,10 +48,10 @@ azd deploy
 # Eller begge dele sammen
 azd up
 ```
+  
+---  
 
----
-
-## 📁 AZD-projektstruktur
+## 📁 AZD Projektstruktur  
 
 ```
 my-project/
@@ -65,35 +65,35 @@ my-project/
 └── src/                  # Application code
     └── api/
 ```
+  
+---  
 
----
+## 🔧 Væsentlige Kommandoer  
 
-## 🔧 Vigtige kommandoer
+| Kommando | Beskrivelse |  
+|---------|-------------|  
+| `azd init` | Initialiser projekt |  
+| `azd provision` | Opret Azure-ressourcer |  
+| `azd deploy` | Udrul applikationskode |  
+| `azd up` | provision + udrul |  
+| `azd down` | Slet alle ressourcer |  
 
-| Kommando | Beskrivelse |
-|---------|-------------|
-| `azd init` | Initialiser projektet |
-| `azd provision` | Opret Azure-ressourcer |
-| `azd deploy` | Udrul applikationskode |
-| `azd up` | opret + udrul |
-| `azd down` | Slet alle ressourcer |
+---  
 
----
+## 🔗 Navigation  
 
-## 🔗 Navigation
+| Retning | Kapitel |  
+|-----------|---------|  
+| **Forrige** | [Kapitel 3: Konfiguration](../chapter-03-configuration/README.md) |  
+| **Næste** | [Kapitel 5: Multi-Agent Løsninger](../chapter-05-multi-agent/README.md) |  
 
-| Retning | Kapitel |
-|-----------|---------|
-| **Forrige** | [Kapitel 3: Configuration](../chapter-03-configuration/README.md) |
-| **Næste** | [Kapitel 5: Multi-Agent-løsninger](../chapter-05-multi-agent/README.md) |
+---  
 
----
+## 📖 Relaterede Ressourcer  
 
-## 📖 Relaterede ressourcer
-
-- [Tjek før udrulning](../chapter-06-pre-deployment/README.md)
-- [Eksempler på container-apps](../../examples/container-app/README.md)
-- [Eksempel på database-app](../../examples/database-app/README.md)
+- [Forudgående Udrulningskontroller](../chapter-06-pre-deployment/README.md)  
+- [Container App Eksempler](../../examples/container-app/README.md)  
+- [Database App Eksempel](../../examples/database-app/README.md)  
 
 ---
 

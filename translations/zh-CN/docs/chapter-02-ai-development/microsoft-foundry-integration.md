@@ -1,50 +1,50 @@
-# Microsoft Foundry 与 AZD 集成
+# 微软 Foundry 与 AZD 集成
 
-**章节导航:**
-- **📚 课程主页**: [AZD For Beginners](../../README.md)
-- **📖 当前章节**: 第 2 章 - AI 优先开发
-- **⬅️ 上一章**: [第 1 章：你的第一个项目](../chapter-01-foundation/first-project.md)
-- **➡️ 下一步**: [AI 模型部署](ai-model-deployment.md)
-- **🚀 下一章**: [第 3 章：配置](../chapter-03-configuration/configuration.md)
+**章节导航：**
+- **📚 课程首页**: [AZD 入门](../../README.md)
+- **📖 当前章节**: 第2章 - AI优先开发
+- **⬅️ 前一章**: [第1章：你的第一个项目](../chapter-01-foundation/first-project.md)
+- **➡️ 下一章**: [AI模型部署](ai-model-deployment.md)
+- **🚀 后续章节**: [第3章：配置](../chapter-03-configuration/configuration.md)
 
-## 概览
+## 概述
 
-本指南演示如何将 Microsoft Foundry 服务与 Azure Developer CLI (AZD) 集成，以实现流线化的 AI 应用部署。Microsoft Foundry 提供了一个构建、部署和管理 AI 应用的全面平台，而 AZD 简化了基础设施和部署流程。
+本指南演示如何将微软 Foundry 服务与 Azure Developer CLI (AZD) 集成，实现简化的 AI 应用部署。微软 Foundry 提供了构建、部署和管理 AI 应用的综合平台，而 AZD 简化了基础设施和部署流程。
 
-## 什么是 Microsoft Foundry?
+## 什么是微软 Foundry？
 
-Microsoft Foundry 是微软用于 AI 开发的统一平台，包括：
+微软 Foundry 是微软统一的 AI 开发平台，包括：
 
 - <strong>模型目录</strong>：访问最先进的 AI 模型
-- **Prompt Flow**：用于 AI 工作流的可视化设计器
-- **Microsoft Foundry 门户**：用于 AI 应用的集成开发环境
-- <strong>部署选项</strong>：多种托管和扩展选项
-- <strong>安全与合规</strong>：内置的负责任 AI 功能
+- <strong>提示流程</strong>：AI 工作流的可视化设计器
+- **微软 Foundry 门户**：集成的 AI 应用开发环境
+- <strong>部署选项</strong>：多种托管和扩展方案
+- <strong>安全与保障</strong>：内置负责任的 AI 功能
 
-## AZD + Microsoft Foundry：更好的组合
+## AZD + 微软 Foundry：更好的结合
 
-| 功能 | Microsoft Foundry | AZD 集成优势 |
+| 功能 | 微软 Foundry | AZD 集成优势 |
 |---------|-----------------|------------------------|
 | <strong>模型部署</strong> | 手动门户部署 | 自动化、可重复的部署 |
-| <strong>基础设施</strong> | 点选式预配 | 基础设施即代码 (Bicep) |
-| <strong>环境管理</strong> | 单环境聚焦 | 多环境（dev/staging/prod） |
-| **CI/CD 集成** | 有限 | 原生支持 GitHub Actions |
-| <strong>成本管理</strong> | 基本监控 | 针对环境的成本优化 |
+| <strong>基础设施</strong> | 点击式配置 | 基础设施即代码（Bicep） |
+| <strong>环境管理</strong> | 单环境聚焦 | 多环境（开发/测试/生产） |
+| **CI/CD 集成** | 功能有限 | 原生支持 GitHub Actions |
+| <strong>成本管理</strong> | 基础监控 | 环境特定成本优化 |
 
-## 先决条件
+## 前提条件
 
-- 具有相应权限的 Azure 订阅
+- 拥有合适权限的 Azure 订阅
 - 已安装 Azure Developer CLI
-- 可访问 Microsoft Foundry Models 服务
-- 对 Microsoft Foundry 有基本了解
+- 可访问微软 Foundry 模型服务
+- 具备微软 Foundry 基础知识
 
-> **当前 AZD 基线:** 这些示例已针对 `azd` `1.23.12` 进行审核。对于 AI agent 工作流，请使用当前的预览扩展发行版，并在开始前检查已安装的版本。
+> **当前 AZD 基线：** 这些示例基于 `azd` `1.27.1` 版本审核。对于 AI 代理工作流，请使用当前预览扩展版本，并在开始前检查已安装版本。
 
 ## 核心集成模式
 
-### 模式 1：Microsoft Foundry 模型集成
+### 模式1：微软 Foundry 模型集成
 
-<strong>用例</strong>: 使用 Microsoft Foundry Models 模型部署聊天应用
+<strong>用例</strong>：部署使用微软 Foundry 模型的聊天应用
 
 ```yaml
 # azure.yaml
@@ -58,7 +58,7 @@ services:
       - AZURE_OPENAI_API_KEY
 ```
 
-**基础设施 (main.bicep):**
+**基础设施 (main.bicep)：**
 ```bicep
 // Microsoft Foundry Models Account
 resource openAIAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
@@ -92,9 +92,9 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 }
 ```
 
-### 模式 2：AI 搜索 + RAG 集成
+### 模式2：AI 搜索 + RAG 集成
 
-<strong>用例</strong>: 部署检索增强生成 (RAG) 应用
+<strong>用例</strong>：部署检索增强生成（RAG）应用
 
 ```bicep
 // Azure AI Search
@@ -122,9 +122,9 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 }
 ```
 
-### 模式 3：文档智能集成
+### 模式3：文档智能集成
 
-<strong>用例</strong>: 文档处理和分析工作流
+<strong>用例</strong>：文档处理与分析工作流
 
 ```bicep
 // Document Intelligence service
@@ -157,11 +157,11 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ## 🔧 配置模式
 
-### 环境变量 配置
+### 环境变量设置
 
-**生产配置:**
+**生产环境配置：**
 ```bash
-# 核心 AI 服务
+# 核心人工智能服务
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_SEARCH_ENDPOINT "https://your-search.search.windows.net"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT "https://your-formrec.cognitiveservices.azure.com/"
@@ -175,15 +175,15 @@ azd env set AZURE_OPENAI_CAPACITY 30
 azd env set AZURE_SEARCH_SKU "standard"
 ```
 
-**开发配置:**
+**开发环境配置：**
 ```bash
-# 面向开发的成本优化设置
+# 针对开发的成本优化设置
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set AZURE_SEARCH_SKU "basic"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # 免费层
 ```
 
-### 使用 Key Vault 的安全配置
+### 使用 Key Vault 进行安全配置
 
 ```bicep
 // Key Vault for secrets
@@ -222,7 +222,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ### Foundry 的 AZD 扩展
 
-AZD 提供扩展，为与 Microsoft Foundry 服务协同工作添加 AI 特定功能：
+AZD 提供了针对微软 Foundry 服务的 AI 特定功能扩展：
 
 ```bash
 # 安装 Foundry 代理扩展
@@ -237,15 +237,15 @@ azd extension install azure.ai.models
 # 列出已安装的扩展
 azd extension list --installed
 
-# 检查当前已安装的代理扩展版本
+# 检查当前安装的代理扩展版本
 azd extension show azure.ai.agents
 ```
 
-AI 扩展仍在预览期快速演进。如果某个命令的行为与此处所示不同，请在对项目本身进行故障排除之前升级相关扩展。
+AI 扩展功能仍在快速预览中。如果命令表现与此处不同，请升级相关扩展后再排查项目问题。
 
-### 以 Agent 为先的部署（使用 `azd ai`）
+### 使用 `azd ai` 的代理优先部署
 
-如果您有 agent 清单，请使用 `azd ai agent init` 来搭建一个与 Foundry Agent Service 相连的项目骨架：
+如果拥有代理清单，使用 `azd ai agent init` 搭建连接到 Foundry 代理服务的项目骨架：
 
 ```bash
 # 从代理清单初始化
@@ -255,21 +255,21 @@ azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 azd up
 ```
 
-`azure.ai.agents` 的最近预览版本也为 `azd ai agent init` 添加了基于模板的初始化支持。如果您在遵循较新的 agent 示例，请检查扩展帮助以了解已安装版本中可用的确切标志。
+`azure.ai.agents` 的最新预览版本还增加了基于模板的 `azd ai agent init` 初始化支持。如果在使用较新的代理示例，请查看已安装版本扩展帮助以确认可用标志。
 
-参见 [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) 以获取完整的命令参考和标志说明。
+请参阅 [AZD AI CLI 命令](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) 了解完整命令和标志参考。
 
 ### 单命令部署
 
 ```bash
-# 使用一条命令部署所有内容
+# 使用一个命令部署所有内容
 azd up
 
-# 或逐步部署
+# 或者增量部署
 azd provision  # 仅基础设施
-azd deploy     # 仅应用
+azd deploy     # 仅应用程序
 
-# 适用于 azd 1.23.11+ 中的长期运行 AI 应用部署
+# 适用于 azd 1.23.11 及以上版本中的长时间运行的 AI 应用部署
 azd deploy --timeout 1800
 ```
 
@@ -292,7 +292,7 @@ azd up
 
 ## 监控与可观测性
 
-### Application Insights 集成
+### 集成 Application Insights
 
 ```bicep
 // Application Insights for AI application monitoring
@@ -355,7 +355,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 ## 🔐 安全最佳实践
 
-### 托管标识 配置
+### 受管身份配置
 
 ```bicep
 // Managed identity for the web application
@@ -432,7 +432,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 }
 ```
 
-### 自动伸缩配置
+### 自动扩展配置
 
 ```bicep
 // Container App with auto-scaling
@@ -468,13 +468,13 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ## 常见问题排查
 
-### 问题 1：OpenAI 配额超出
+### 问题1：OpenAI 配额超限
 
-**症状:**
-- 部署因配额错误而失败
-- 应用日志中出现 429 错误
+**症状：**
+- 部署失败并显示配额错误
+- 应用日志出现429错误
 
-**解决方案:**
+**解决方案：**
 ```bash
 # 检查当前配额使用情况
 az cognitiveservices usage list --location eastus
@@ -483,41 +483,41 @@ az cognitiveservices usage list --location eastus
 azd env set AZURE_LOCATION westus2
 azd up
 
-# 暂时减少容量
+# 临时减少容量
 azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
 
-### 问题 2：认证失败
+### 问题2：身份验证失败
 
-**症状:**
-- 调用 AI 服务时出现 401/403 错误
-- 显示 “Access denied” 消息
+**症状：**
+- 调用 AI 服务时出现401/403错误
+- 显示“访问被拒绝”消息
 
-**解决方案:**
+**解决方案：**
 ```bash
 # 验证角色分配
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# 检查托管标识配置
+# 检查托管身份配置
 az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 
-# 验证密钥保管库访问权限
+# 验证密钥保管库访问
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
-### 问题 3：模型部署问题
+### 问题3：模型部署问题
 
-**症状:**
-- 模型在部署中不可用
-- 特定模型版本失败
+**症状：**
+- 部署时模型不可用
+- 特定模型版本部署失败
 
-**解决方案:**
+**解决方案：**
 ```bash
-# 按区域列出可用模型
+# 按地区列出可用模型
 az cognitiveservices model list --location eastus
 
-# 在 bicep 模板中更新模型版本
+# 在bicep模板中更新模型版本
 # 检查模型容量要求
 ```
 
@@ -527,143 +527,143 @@ az cognitiveservices model list --location eastus
 
 <strong>仓库</strong>: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-<strong>服务</strong>: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
+<strong>服务</strong>：Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
 
-<strong>描述</strong>: 最受欢迎的 Azure AI 示例 — 一个面向生产的 RAG 聊天应用，允许您针对自己的文档提问。聊天使用 GPT-4.1-mini，嵌入使用 text-embedding-3-large，检索使用 Azure AI Search。支持多模态文档、语音输入/输出、Microsoft Entra 认证和 Application Insights 跟踪。
+<strong>描述</strong>：最受欢迎的 Azure AI 示例——生产级 RAG 聊天应用，支持基于您的文档提问。使用 GPT-4.1-mini 进行聊天，text-embedding-3-large 用于文本嵌入，Azure AI Search 实现检索。支持多模态文档、语音输入/输出、Microsoft Entra 身份验证和 Application Insights 跟踪。
 
-<strong>快速开始</strong>:
+<strong>快速开始</strong>：
 ```bash
 azd init --template azure-search-openai-demo
 azd up
 ```
 
-### RAG 聊天应用（.NET）
+### RAG 聊天应用 (.NET)
 
 <strong>仓库</strong>: [azure-search-openai-demo-csharp](https://github.com/Azure-Samples/azure-search-openai-demo-csharp)
 
-<strong>服务</strong>: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
+<strong>服务</strong>：Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
 
-<strong>描述</strong>: Python RAG 聊天示例的 .NET/C# 等价实现。使用 ASP.NET Core Minimal API 与 Blazor WebAssembly 前端构建。包含语音聊天、GPT-4o-mini 视觉支持，以及配套的 .NET MAUI Blazor Hybrid 桌面/移动客户端。
+<strong>描述</strong>：Python RAG 聊天示例的 .NET/C# 等价版本。基于 ASP.NET Core Minimal API 和 Blazor WebAssembly 前端构建。包含语音聊天、GPT-4o-mini 视觉支持，以及配套的 .NET MAUI Blazor Hybrid 桌面/移动客户端。
 
-<strong>快速开始</strong>:
+<strong>快速开始</strong>：
 ```bash
 azd init --template azure-search-openai-demo-csharp
 azd up
 ```
 
-### RAG 聊天应用（Java）
+### RAG 聊天应用 (Java)
 
 <strong>仓库</strong>: [azure-search-openai-demo-java](https://github.com/Azure-Samples/azure-search-openai-demo-java)
 
-<strong>服务</strong>: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
+<strong>服务</strong>：Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
 
-<strong>描述</strong>: 使用 Langchain4J 进行 AI 协调的 RAG 聊天示例的 Java 版本。支持微服务事件驱动架构、多个检索策略（文本、向量、混合）、使用 Azure Document Intelligence 上传文档，并可部署到 Azure Container Apps 或 Azure Kubernetes Service。
+<strong>描述</strong>：Java 版 RAG 聊天示例，采用 Langchain4J 进行 AI 协调。支持微服务事件驱动架构、多种检索策略（文本、向量、混合）、Azure 文档智能上传和部署在 Azure Container Apps 或 Azure Kubernetes 服务。
 
-<strong>快速开始</strong>:
+<strong>快速开始</strong>：
 ```bash
 azd init --template azure-search-openai-demo-java
 azd up
 ```
 
-### 企业零售助理（使用 Microsoft Foundry）
+### 企业零售助理与微软 Foundry
 
 <strong>仓库</strong>: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
-<strong>服务</strong>: Azure OpenAI + Microsoft Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
+<strong>服务</strong>：Azure OpenAI + 微软 Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
 
-<strong>描述</strong>: 使用 Microsoft Foundry 和 Prompty 的端到端零售 RAG 助手示例。Contoso Outdoor 零售商聊天机器人，将回答基于产品目录和客户订单数据。演示完整的 GenAIOps 工作流 — 使用 Prompty 原型、使用 AI 辅助评估器评估，并通过 AZD 部署到 Container Apps。
+<strong>描述</strong>：端到端零售 RAG 助理，结合微软 Foundry 和 Prompty。Contoso 户外零售聊天机器人，基于产品目录和客户订单数据提供智能响应。展示完整的 GenAIOps 工作流——使用 Prompty 快速原型，使用 AI 辅助评估器评估，通过 AZD 部署到 Container Apps。
 
-<strong>快速开始</strong>:
+<strong>快速开始</strong>：
 ```bash
 azd init --template contoso-chat
 azd up
 ```
 
-### 创意写作多智能体应用
+### 创意写作多代理应用
 
 <strong>仓库</strong>: [contoso-creative-writer](https://github.com/Azure-Samples/contoso-creative-writer)
 
-<strong>服务</strong>: Azure OpenAI + Azure AI Agent Service + Bing Grounding + Azure AI Search + Azure Container Apps
+<strong>服务</strong>：Azure OpenAI + Azure AI 代理服务 + Bing Grounding + Azure AI Search + Azure Container Apps
 
-<strong>描述</strong>: 多智能体示例，演示使用 Prompty 的 AI 智能体编排。使用研究智能体（在 Azure AI Agent Service 中的 Bing Grounding）、产品智能体（Azure AI Search）、写作智能体和编辑智能体协作生成调研充分的文章。包括在 GitHub Actions 中进行评估的 CI/CD。
+<strong>描述</strong>：多代理示例，展示使用 Prompty 进行 AI 代理编排。包含研究代理（Bing Grounding，Azure AI 代理服务）、产品代理（Azure AI Search）、写作代理和编辑代理，共同协作生成内容丰富的文章。包含使用 GitHub Actions 的 CI/CD 评估。
 
-<strong>快速开始</strong>:
+<strong>快速开始</strong>：
 ```bash
 azd init --template contoso-creative-writer
 azd up
 ```
 
-### 无服务器 RAG 聊天（JavaScript/TypeScript）
+### 无服务器 RAG 聊天 (JavaScript/TypeScript)
 
 <strong>仓库</strong>: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
 
-<strong>服务</strong>: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB for NoSQL + LangChain.js
+<strong>服务</strong>：Azure OpenAI + Azure Functions + Azure 静态 Web 应用 + Azure Cosmos DB (NoSQL) + LangChain.js
 
-<strong>描述</strong>: 完全无服务器的 RAG 聊天机器人，使用 LangChain.js，API 使用 Azure Functions，托管使用 Azure Static Web Apps。将 Azure Cosmos DB 用作向量存储和聊天历史数据库。支持使用 Ollama 进行本地开发的零成本测试。
+<strong>描述</strong>：完全文本无服务器 RAG 聊天机器人，使用 LangChain.js，Azure Functions 作为 API，Azure 静态 Web 应用托管。使用 Azure Cosmos DB 作为向量存储和聊天历史数据库。支持使用 Ollama 本地开发，零成本测试。
 
-<strong>快速开始</strong>:
+<strong>快速开始</strong>：
 ```bash
 azd init --template serverless-chat-langchainjs
 azd up
 ```
 
-### 与您的数据聊天 解决方案加速器
+### 带数据聊天解决方案加速器
 
 <strong>仓库</strong>: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
 
-<strong>服务</strong>: Azure OpenAI + Azure AI Search + Azure App Service + Azure Document Intelligence + Azure Functions + Azure Cosmos DB / PostgreSQL
+<strong>服务</strong>：Azure OpenAI + Azure AI Search + Azure 应用服务 + Azure 文档智能 + Azure Functions + Azure Cosmos DB / PostgreSQL
 
-<strong>描述</strong>: 企业级 RAG 解决方案加速器，带有用于文档上传/管理的管理门户、多种编排器选项（Semantic Kernel、LangChain、Prompt Flow）、语音转文本、Microsoft Teams 集成，以及 PostgreSQL 或 Cosmos DB 后端的可选项。设计为可定制的生产 RAG 场景起点。
+<strong>描述</strong>：企业级 RAG 解决方案加速器，带有文档上传/管理的管理门户，多种编排器选项（Semantic Kernel、LangChain、Prompt Flow），语音转文本，Microsoft Teams 集成，支持 PostgreSQL 或 Cosmos DB 作为后端。设计为生产级 RAG 场景的自定义起点。
 
-<strong>快速开始</strong>:
+<strong>快速开始</strong>：
 ```bash
 azd init --template chat-with-your-data-solution-accelerator
 azd up
 ```
 
-### AI 旅行智能体 — 多智能体 MCP 编排
+### AI 旅游代理 — 多代理 MCP 编排
 
 <strong>仓库</strong>: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
 
-<strong>服务</strong>: Azure OpenAI + Microsoft Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
+<strong>服务</strong>：Azure OpenAI + 微软 Foundry + Azure Container Apps + MCP 服务器 (.NET、Python、Java、TypeScript)
 
-<strong>描述</strong>: 多智能体 AI 编排的参考应用，使用三种框架（LangChain.js、LlamaIndex.TS 和 Microsoft Agent Framework）。功能包括以四种语言实现的 MCP（Model Context Protocol）服务器，作为无服务器 Azure Container Apps 部署，并具备 OpenTelemetry 监控。
+<strong>描述</strong>：多代理 AI 编排参考应用，使用三大框架（LangChain.js、LlamaIndex.TS 和微软代理框架）。特点是四种语言的 MCP（模型上下文协议）服务器，作为无服务器 Azure Container Apps 部署，支持 OpenTelemetry 监控。
 
-<strong>快速开始</strong>:
+<strong>快速开始</strong>：
 ```bash
 azd init --template azure-ai-travel-agents
 azd up
 ```
 
-### Azure AI 入门
+### Azure AI 启动模板
 
 <strong>仓库</strong>: [azd-ai-starter](https://github.com/Azure/azd-ai-starter)
 
-<strong>服务</strong>: Azure AI Services + Azure OpenAI
+<strong>服务</strong>：Azure AI 服务 + Azure OpenAI
 
-<strong>描述</strong>: 一个最小的 Bicep 模板，用于部署配置好的 Azure AI 服务与机器学习模型。当您只需要预配 Azure AI 基础设施而不需要完整应用堆栈时，这是一个轻量级的起点。
+<strong>描述</strong>：简约 Bicep 模板，部署带有配置的机器学习模型的 Azure AI 服务。当你只需要部署 Azure AI 基础设施而不需要完整应用架构时，是轻量级起点。
 
-<strong>快速开始</strong>:
+<strong>快速开始</strong>：
 ```bash
 azd init --template azd-ai-starter
 azd up
 ```
 
-> <strong>浏览更多模板</strong>: 访问 [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) 浏览 80+ 个跨语言和场景的 AI 专用 AZD 模板。
+> <strong>浏览更多模板</strong>：访问 [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai)，查看80+跨语言和场景的 AI 专用 AZD 模板。
 
-## 下一步
+## 后续步骤
 
-1. <strong>尝试示例</strong>: 从与您的用例匹配的预构建模板开始
-2. <strong>根据需求自定义</strong>: 修改基础设施和应用代码
-3. <strong>添加监控</strong>: 实施全面的可观测性
-4. <strong>优化成本</strong>: 为预算微调配置
-5. <strong>保护部署</strong>: 实施企业级安全模式
-6. <strong>扩展到生产</strong>: 添加多区域和高可用功能
+1. <strong>尝试示例</strong>：从匹配你用例的预构建模板开始
+2. <strong>根据需求定制</strong>：修改基础设施和应用代码
+3. <strong>添加监控</strong>：实现全面可观测性
+4. <strong>优化成本</strong>：微调配置以匹配预算
+5. <strong>保护部署安全</strong>：实施企业安全方案
+6. <strong>扩展至生产</strong>：增加多区域和高可用特性
 
 ## 🎯 实操练习
 
-### 练习 1：部署 Microsoft Foundry 模型聊天应用（30 分钟）
-<strong>目标</strong>: 部署并测试一个可用于生产的 AI 聊天应用
+### 练习1：部署微软 Foundry 模型聊天应用（30分钟）
+<strong>目标</strong>：部署并测试生产级 AI 聊天应用
 
 ```bash
 # 初始化模板
@@ -681,24 +681,24 @@ azd up
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Chat app: $WEB_URL"
 
-# 监控 AI 操作
+# 监控AI操作
 azd monitor
 
 # 清理
 azd down --force --purge
 ```
 
-**成功标准:**
-- [ ] 部署完成且没有配额错误
-- [ ] 可以在浏览器中访问聊天界面
-- [ ] 可以提问并获得 AI 驱动的响应
+**成功标准：**
+- [ ] 部署无配额错误完成
+- [ ] 可通过浏览器访问聊天界面
+- [ ] 能提问并获得 AI 驱动的回答
 - [ ] Application Insights 显示遥测数据
 - [ ] 成功清理资源
 
-<strong>预计费用</strong>: $5-10（30 分钟测试）
+<strong>预估成本</strong>：30分钟测试约5-10美元
 
-### 练习 2：配置多模型部署（45 分钟）
-<strong>目标</strong>: 以不同配置部署多个 AI 模型
+### 练习2：配置多模型部署（45分钟）
+<strong>目标</strong>：部署多个 AI 模型并应用不同配置
 
 ```bash
 # 创建自定义 Bicep 配置
@@ -751,17 +751,17 @@ azd provision
 azd show
 ```
 
-**成功标准:**
+**成功标准：**
 - [ ] 多个模型成功部署
-- [ ] 应用了不同的容量设置
-- [ ] 模型可通过 API 访问
-- [ ] 应用可以调用这两个模型
+- [ ] 应用不同容量设置
+- [ ] 可通过 API 访问模型
+- [ ] 应用可调用所有模型
 
-### 练习 3：实施成本监控（20 分钟）
-<strong>目标</strong>: 设置预算告警和成本跟踪
+### 练习3：实现成本监控（20分钟）
+<strong>目标</strong>：设置预算警报与成本跟踪
 
 ```bash
-# 将预算警报添加到 Bicep
+# 向Bicep添加预算警报
 cat >> infra/main.bicep << 'EOF'
 
 resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
@@ -799,22 +799,22 @@ azd provision
 az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-date $(date +%Y-%m-%d)
 ```
 
-**成功标准:**
-- [ ] 在 Azure 中创建了预算告警
-- [ ] 配置了电子邮件通知
-- [ ] 可以在 Azure 门户查看成本数据
-- [ ] 适当设置预算阈值
+**成功标准：**
+- [ ] 在 Azure 中创建预算警报
+- [ ] 配置邮件通知
+- [ ] 可在 Azure 门户查看成本数据
+- [ ] 预算阈值设置合理
 
 ## 💡 常见问题解答
 
 <details>
-<summary><strong>如何在开发期间降低 Microsoft Foundry Models 的费用？</strong></summary>
+<summary><strong>我如何在开发期间降低微软 Foundry 模型的成本？</strong></summary>
 
-1. <strong>使用免费额度</strong>: Microsoft Foundry Models 提供每月 50,000 个 token 的免费额度
-2. <strong>降低容量</strong>: 开发环境将容量设置为 10 TPM 而不是 30+ 
-3. **使用 azd down**: 在不主动开发时释放资源
-4. <strong>缓存响应</strong>: 为重复查询实现 Redis 缓存
-5. <strong>使用提示工程</strong>: 通过高效的提示减少 token 使用量
+1. <strong>使用免费额度</strong>：微软 Foundry 模型每月提供 50,000 代币免费额度
+2. <strong>降低容量</strong>：开发时将容量设置为 10 TPM 而非 30+ 
+3. **使用 azd down**：非开发时释放资源
+4. <strong>缓存响应</strong>：为重复查询实现 Redis 缓存
+5. <strong>使用提示工程</strong>：用高效提示减少代币使用
 
 
 ```bash
@@ -825,48 +825,48 @@ azd env set ENABLE_RESPONSE_CACHE true
 </details>
 
 <details>
-<summary><strong>Microsoft Foundry Models 与 OpenAI API 有何不同？</strong></summary>
+<summary><strong>Microsoft Foundry 模型和 OpenAI API 有什么区别？</strong></summary>
 
-**Microsoft Foundry Models**:
-- 企业级安全与合规性
+**Microsoft Foundry 模型**：
+- 企业级安全与合规
 - 私有网络集成
 - SLA 保证
-- 托管身份验证
-- 可用更高配额
+- 托管身份认证
+- 提供更高配额
 
-**OpenAI API**:
-- 更快获取新模型
-- 更简单的设置
-- 更低的入门门槛
-- 仅限公共互联网
+**OpenAI API**：
+- 更快访问新模型
+- 设置更简单
+- 准入门槛更低
+- 仅限公网访问
 
-对于生产应用，**建议使用 Microsoft Foundry Models**。
+对于生产应用，**推荐使用 Microsoft Foundry 模型**。
 </details>
 
 <details>
-<summary><strong>我该如何处理 Microsoft Foundry Models 配额超出错误？</strong></summary>
+<summary><strong>如何处理 Microsoft Foundry 模型配额超限错误？</strong></summary>
 
 ```bash
 # 检查当前配额
 az cognitiveservices usage list --location eastus2
 
-# 尝试不同的区域
+# 尝试不同地区
 azd env set AZURE_LOCATION westus2
 azd up
 
-# 暂时减少容量
+# 临时减少容量
 azd env set AZURE_OPENAI_CAPACITY 10
 azd provision
 
-# 请求增加配额
-# 转到 Azure 门户 > 配额 > 请求增加
+# 请求配额增加
+# 进入 Azure 门户 > 配额 > 请求增加
 ```
 </details>
 
 <details>
-<summary><strong>我可以将自己的数据与 Microsoft Foundry Models 一起使用吗？</strong></summary>
+<summary><strong>我可以使用自己的数据与 Microsoft Foundry 模型吗？</strong></summary>
 
-可以！对于 RAG（检索增强生成），请使用 **Azure AI Search**：
+可以！使用 **Azure AI Search** 实现 RAG（检索增强生成）：
 
 ```yaml
 # azure.yaml
@@ -878,18 +878,18 @@ services:
       - AZURE_OPENAI_ENDPOINT
 ```
 
-参见 [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) 模板。
+参考 [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) 模板。
 </details>
 
 <details>
-<summary><strong>我如何保护 AI 模型端点？</strong></summary>
+<summary><strong>如何保护 AI 模型端点的安全？</strong></summary>
 
-<strong>最佳实践</strong>:
-1. 使用托管身份（无需 API 密钥）
+<strong>最佳实践</strong>：
+1. 使用托管身份（避免 API 密钥）
 2. 启用私有端点
 3. 配置网络安全组
 4. 实施速率限制
-5. 使用 Azure Key Vault 存储机密
+5. 使用 Azure Key Vault 管理密钥
 
 ```bicep
 // Managed Identity authentication
@@ -911,21 +911,21 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 ## 社区与支持
 
-- **Microsoft Foundry Discord**: [#Azure 频道](https://discord.gg/microsoft-azure)
-- **AZD GitHub**: [问题和讨论](https://github.com/Azure/azure-dev)
-- **Microsoft Learn**: [官方文档](https://learn.microsoft.com/azure/ai-studio/)
-- **Agent Skills**: [skills.sh 上的 Microsoft Foundry 技能](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - 在编辑器中使用 `npx skills add microsoft/github-copilot-for-azure` 安装 Azure + Foundry 代理技能
+- **Microsoft Foundry Discord**：[Azure 频道](https://discord.gg/microsoft-azure)
+- **AZD GitHub**：[问题与讨论](https://github.com/Azure/azure-dev)
+- **Microsoft Learn**：[官方文档](https://learn.microsoft.com/azure/ai-studio/)
+- **Agent Skills**：[skills.sh 上的 Microsoft Foundry 技能](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - 使用 `npx skills add microsoft/github-copilot-for-azure` 在编辑器中安装 Azure + Foundry 代理技能  
 
 ---
 
 **章节导航：**
-- **📚 课程首页**: [AZD 入门](../../README.md)
-- **📖 当前章节**: 第 2 章 - AI 优先开发
-- **⬅️ 上一章**: [第 1 章：你的第一个项目](../chapter-01-foundation/first-project.md)
-- **➡️ 下一页**: [AI 模型部署](ai-model-deployment.md)
-- **🚀 下一章**: [第 3 章：配置](../chapter-03-configuration/configuration.md)
+- **📚 课程首页**：[AZD 入门](../../README.md)
+- **📖 当前章节**：第 2 章 - AI 优先开发
+- **⬅️ 上一章**：[第 1 章：你的第一个项目](../chapter-01-foundation/first-project.md)
+- **➡️ 下一节**：[AI 模型部署](ai-model-deployment.md)
+- **🚀 下一章**：[第 3 章：配置](../chapter-03-configuration/configuration.md)
 
-**需要帮助？** 加入我们的社区讨论或在仓库中打开问题。Azure AI + AZD 社区随时帮助您取得成功！
+**需要帮助？** 加入我们的社区讨论或提交仓库问题。Azure AI 与 AZD 社区助你成功！
 
 ---
 

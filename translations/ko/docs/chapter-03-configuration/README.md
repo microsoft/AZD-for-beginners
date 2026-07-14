@@ -1,6 +1,6 @@
-# Chapter 3: 구성 및 인증
+# 3장: 구성 및 인증
 
-**📚 강좌**: [초보자를 위한 AZD](../../README.md) | **⏱️ 소요 시간**: 45-60분 | **⭐ 난이도**: 중급
+**📚 과정**: [AZD 초보자](../../README.md) | **⏱️ 소요 시간**: 45-60분 | **⭐ 난이도**: 중급
 
 ---
 
@@ -8,24 +8,24 @@
 
 이 장에서는 Azure Developer CLI 배포를 위한 환경 구성, 인증 패턴 및 보안 모범 사례를 다룹니다.
 
-> 2026년 6월 `azd 1.25.6`에서 검증되었습니다.
+> `azd 1.27.1` 버전에서 2026년 7월에 검증됨.
 
 ## 학습 목표
 
 이 장을 완료하면 다음을 할 수 있습니다:
 - AZD 구성 계층 마스터하기
-- 여러 환경(개발, 스테이징, 운영) 관리하기
-- 관리형 ID를 사용한 안전한 인증 구현하기
+- 여러 환경(dev, staging, prod) 관리하기
+- 관리형 ID를 사용한 보안 인증 구현하기
 - 환경별 설정 구성하기
 
 ---
 
-## 📚 강의
+## 📚 강의 목록
 
 | # | 강의 | 설명 | 시간 |
 |---|--------|-------------|------|
 | 1 | [구성 가이드](configuration.md) | 환경 설정 및 관리 | 30분 |
-| 2 | [인증 및 보안](authsecurity.md) | 관리형 ID 및 RBAC 패턴 | 30분 |
+| 2 | [인증 및 보안](authsecurity.md) | 관리형 ID와 RBAC 패턴 | 30분 |
 
 ---
 
@@ -52,9 +52,9 @@ azd env get-values
 
 ## 🔧 구성 계층
 
-AZD는 이 순서로 설정을 적용합니다(나중이 먼저 것을 덮어씀):
+AZD는 다음 순서로 설정을 적용합니다(나중에 적용된 설정이 이전 것을 덮어씀):
 
-1. <strong>기본값</strong> (템플릿에 내장됨)
+1. <strong>기본값</strong> (템플릿 내장)
 2. **azure.yaml** (프로젝트 구성)
 3. **환경 변수** (`azd env set`)
 4. **명령줄 플래그** (`--location eastus`)
@@ -64,7 +64,7 @@ AZD는 이 순서로 설정을 적용합니다(나중이 먼저 것을 덮어씀
 ## 🔐 보안 모범 사례
 
 ```bash
-# 관리 ID 사용 (권장)
+# 관리 ID 사용(권장)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
 # AZD 인증 상태 확인
@@ -73,7 +73,7 @@ azd auth status
 # 선택 사항: az 명령어를 실행할 계획이라면 Azure CLI 컨텍스트 확인
 az account show
 
-# 필요 시 재인증
+# 필요 시 다시 인증
 azd auth login
 
 # 선택 사항: az 명령어를 위한 Azure CLI 인증 갱신
@@ -82,12 +82,12 @@ az login
 
 ---
 
-## 🔗 이동
+## 🔗 탐색
 
 | 방향 | 장 |
 |-----------|---------|
-| <strong>이전</strong> | [Chapter 2: AI 개발](../chapter-02-ai-development/README.md) |
-| <strong>다음</strong> | [Chapter 4: 인프라](../chapter-04-infrastructure/README.md) |
+| <strong>이전</strong> | [2장: AI 개발](../chapter-02-ai-development/README.md) |
+| <strong>다음</strong> | [4장: 인프라](../chapter-04-infrastructure/README.md) |
 
 ---
 

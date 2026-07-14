@@ -1,48 +1,48 @@
-# Dev Containers & GitHub Codespaces azd:lle
+# Kehityssäiliöt & GitHub Codespaces azd:lle
 
 **Luvun navigointi:**
-- **📚 Kurssin etusivu**: [AZD Aloittelijoille](../../README.md)
-- **📖 Nykyinen luku**: Luku 1 - Perusta & Pika-aloitus
+- **📚 Kurssin aloitus**: [AZD Aloittelijoille](../../README.md)
+- **📖 Tämän hetken luku**: Luku 1 - Perusta & nopea aloitus
 - **⬅️ Edellinen**: [Tuo oma sovellus](bring-your-own-app.md)
-- **🚀 Seuraava luku**: [Luku 2: AI-ensimmäinen kehitys](../chapter-02-ai-development/README.md)
+- **🚀 Seuraava luku**: [Luku 2: AI-Ensimmäinen kehitys](../chapter-02-ai-development/README.md)
 
-> Vahvistettu `azd 1.25.6`:lla kesäkuussa 2026.
+> Vahvistettu `azd 1.27.1` versiolla heinäkuussa 2026.
 
 ## Johdanto
 
-Azd:n, oikean ohjelmointiajanajon, Dockerin ja Azure CLI:n asentaminen jokaiselle koneelle on työlästä — ja se on ykkössyy siihen, miksi opas, joka "toimii koneellani", ei toimi toisella henkilöllä. **dev container** ratkaisee tämän kuvaamalla koko työkaluketjusi tiedostossa. Kuka tahansa, joka avaa projektin VS Code:ssa tai GitHub Codespacesissa, saa täsmälleen saman ympäristön, jossa azd on jo asennettuna. Tässä oppitunnissa näytetään, miten sellainen lisätään.
+Azd:n, oikean kieliajurin, Dockerin ja Azure CLI:n asentaminen jokaiselle koneelle on työlästä — ja se on ykkössyy sille, miksi opas, joka "toimii koneellani", ei toimi toisella. **Kehityssäiliö** ratkaisee tämän kuvaamalla koko työkaluketjusi tiedostossa. Kuka tahansa, joka avaa projektin VS Codessa tai GitHub Codespacesissa, saa täsmälleen saman ympäristön, jossa azd on jo asennettuna. Tässä oppitunnissa näytetään, miten sellainen lisätään.
 
 ## Oppimistavoitteet
 
-Oppitunnin jälkeen osaat:
-- Ymmärtää, mikä dev container on ja miksi se auttaa azd:n kanssa
-- Lisätä projektiin minimaalisen `.devcontainer/devcontainer.json`
-- Sisällyttää azd:n, Azure CLI:n ja Dockerin Dev Containerin *features*-ominaisuuksien kautta
+Tämän oppitunnin jälkeen osaat:
+- Ymmärtää, mikä kehityssäiliö on ja miksi se auttaa azdin kanssa
+- Lisätä minimikerroksen `.devcontainer/devcontainer.json` projektiin
+- Sisällyttää azdin, Azure CLI:n ja Dockerin Kehityssäiliön *ominaisuuksien* kautta
 - Avata projektin GitHub Codespacesissa tai VS Codessa
 
 ## Oppimistulokset
 
-Oppitunnin suorittamisen jälkeen pystyt:
-- Luoda `devcontainer.json` azd-projektia varten
-- Lisätä azd:n ja Azuren työkalut ilman manuaalisia asennuksia
-- Suorittaa `azd up` kontin tai Codespacen sisältä
+Oppitunnin suoritettuasi pystyt:
+- Tekemään `devcontainer.json`:n azd-projektille
+- Lisäämään azdin ja Azure-työkalut ilman manuaalisia asennuksia
+- Ajamaan `azd up` säiliön tai Codespacen sisällä
 
 ---
 
-## Mikä on dev container?
+## Mikä on kehityssäiliö?
 
-Dev container on Docker-pohjainen kehitysympäristö, joka määritellään repositoriossasi olevalla `.devcontainer/devcontainer.json` -tiedostolla. Kun avaat projektin:
+Kehityssäiliö on Docker-pohjainen kehitysympäristö, joka määritellään `.devcontainer/devcontainer.json` -tiedostossa repositoriossasi. Kun avaat projektin:
 
-- **VS Code** (Dev Containers -laajennuksen kanssa) rakentaa kontin ja liittää siihen.
-- **GitHub Codespaces** rakentaa saman kontin pilvessä ja tarjoaa selaimessa toimivan editorin.
+- **VS Code** (Dev Containers -laajennuksen kanssa) rakentaa säiliön ja liittää siihen.
+- **GitHub Codespaces** rakentaa saman säiliön pilvessä ja tarjoaa sinulle selaimessa toimivan editorin.
 
-Joka tapauksessa jokainen kontribuoija saa identtiset työkalut — ei enää "asensitko azd:n?" -vianmääritystä.
+Molemmissa tapauksissa jokainen kehittäjä saa identtiset työkalut—eikä tarvitse kysellä "onko azd asennettu?".
 
 ```mermaid
 graph LR
-    Repo[Repositoriosi<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Kehityssäiliöt]
-    Repo --> Codespaces[GitHub<br/>Codespaces]
-    VSCode --> Env[Sama ympäristö:<br/>azd + az + Docker]
+    Repo[Sinun Repo<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Kehityssäiliöt]
+    Repo --> Codespaces[GitHub<br/>Kooditilat]
+    VSCode --> Env[Identical environment:<br/>azd + az + Docker]
     Codespaces --> Env
 ```
 
@@ -77,21 +77,21 @@ Luo `.devcontainer/devcontainer.json` projektisi juureen:
 
 Mitä kukin osa tekee:
 
-| Key | Purpose |
-|-----|---------|
-| `image` | Kontin peruskäyttöjärjestelmä |
-| `features` | Valmiit asennusohjelmat — tässä: Azure CLI, **azd**, Docker ja Node.js |
-| `customizations.vscode.extensions` | Asentaa automaattisesti azd- ja Bicep VS Code -laajennukset |
-| `forwardPorts` | Altistaa sovelluksesi portin selaimelle |
-| `postCreateCommand` | Suoritetaan kerran kontin rakentumisen jälkeen (tässä, tarkistus) |
+| Avain | Tarkoitus |
+|-------|----------|
+| `image` | Säiliön käyttöjärjestelmän pohja |
+| `features` | Esiasennetut asennukset—tässä: Azure CLI, **azd**, Docker ja Node.js |
+| `customizations.vscode.extensions` | Asentaa automaattisesti azd:n ja Bicep-laajennukset VS Codeen |
+| `forwardPorts` | Avaimet sovelluksesi portin selaimelle |
+| `postCreateCommand` | Ajetaan kerran säiliön rakentamisen jälkeen (tässä järkevyyden tarkistus) |
 
-> `ghcr.io/azure/azure-dev/azd:latest` -ominaisuus on virallinen tapa saada azd konttiin. Kiinnitä tietty versio (esim. `azd:1.25.6`), jos tarvitset toistettavuutta.
+> `ghcr.io/azure/azure-dev/azd:latest` -ominaisuus on virallinen tapa saada azd säiliöön. Voit kiinnittää tietyn version (esim. `azd:1.27.1`), jos tarvitset toistettavuutta.
 
 ---
 
-## Vaihe 2: Valitse feature sovelluksesi kielen mukaan
+## Vaihe 2: Sovita ominaisuus sovelluksesi kieleen
 
-Vaihda `node`-feature siihen, mitä sovelluksesi käyttää:
+Vaihda `node`-ominaisuus siihen, mitä sovelluksesi käyttää:
 
 ```jsonc
 // Python project
@@ -107,7 +107,7 @@ Vaihda `node`-feature siihen, mitä sovelluksesi käyttää:
 "ghcr.io/devcontainers/features/go:1": {}
 ```
 
-Pidä `docker-in-docker`, jos `host` on `containerapp`, `aks` tai mikä tahansa, joka rakentaa konttikuvan — azd tarvitsee Dockeria kuvien rakentamiseen ja pushaamiseen.
+Säilytä `docker-in-docker`, jos `host` on `containerapp`, `aks` tai mikä tahansa joka rakentaa säiliökuvan—azd tarvitsee Dockeria kuvan rakentamiseen ja puskuamiseen.
 
 ---
 
@@ -116,45 +116,45 @@ Pidä `docker-in-docker`, jos `host` on `containerapp`, `aks` tai mikä tahansa,
 **VS Codessa:**
 1. Asenna **Dev Containers** -laajennus.
 2. Avaa projektikansio.
-3. Klikkaa **Reopen in Container** kun sinua kehotetaan (tai suorita *Dev Containers: Reopen in Container*).
+3. Klikkaa **Avaa säiliössä uudelleen**, kun saat kehotteen (tai aja *Dev Containers: Reopen in Container*).
 
 **GitHub Codespacesissa:**
-1. Puskaa repo GitHubiin.
+1. Pushaa repo GitHubiin.
 2. Klikkaa **Code → Codespaces → Create codespace on main**.
-3. Odota, että kontti rakentuu — azd on valmiina terminaalissa.
+3. Odota, että säiliö rakentuu—azd on valmis terminaalissa.
 
 ---
 
-## Vaihe 4: Ota käyttöön kontin sisältä
+## Vaihe 4: Ota käyttöön säiliön sisältä
 
-Kontissa on azd ennakkoon asennettuna, joten normaali työnkulku toimii suoraan:
+Säiliössä on azd valmiiksi asennettuna, joten normaali työvuoro vain toimii:
 
 ```bash
-azd auth login --use-device-code   # laitekoodi on kätevä Codespacesissa
+azd auth login --use-device-code   # laiteohjelmointi on kätevää Codespacesissä
 azd up
 ```
 
-> **Miksi `--use-device-code`?** Etäkontissa tai Codespacessa ei ole paikallista selainta, johon ohjata, joten device-code -kirjautuminen on luotettava tapa. Liität koodin selainvälilehteen kirjautumisen viimeistelemiseksi.
+> **Miksi `--use-device-code`?** Etäsäiliössä tai Codespacessa ei ole paikallista selainta uudelleenohjaukseen, joten laitekoodin kirjautuminen on luotettava tapa. Liität koodin selaimen välilehdelle kirjautumisen loppuun saattamiseksi.
 
 ---
 
 ## Yleiset sudenkuopat
 
-| Ongelma | Korjaus |
-|---------|---------|
-| `azd up` ei pysty rakentamaan kuvaa | Lisää `docker-in-docker` -feature |
-| Selainkirjautuminen jumittuu Codespacesissa | Käytä `azd auth login --use-device-code` |
-| Työkalut eroavat tiimiläisten välillä | Kiinnitä feature-versiot (esim. `azd:1.25.6`) |
-| Sovellus ei ole saavutettavissa selaimessa | Lisää portti `forwardPorts`-kohtaan |
+| Sudenkuoppa | Korjaus |
+|------------|--------|
+| `azd up` ei voi rakentaa kuvatta | Lisää `docker-in-docker` -ominaisuus |
+| Selaimen kirjautuminen tökkii Codespacesissa | Käytä `azd auth login --use-device-code` |
+| Työkalut eroavat tiimin jäsenten välillä | Kiinnitä ominaisuuksien versiot (esim. `azd:1.27.1`) |
+| Sovellus ei ole saavutettavissa selaimessa | Lisää portti `forwardPorts` listaan |
 
 ---
 
 ## Yhteenveto
 
-- Dev container tekee azd-työkaluketjustasi toistettavan kaikille.
-- Lisää azd, Azure CLI ja Docker Dev Containerin *features*-ominaisuuksien kautta.
-- Sovita kieliominaisuus sovellukseesi ja pidä `docker-in-docker` käytössä kontti-isännissä.
-- Käytä device-code -kirjautumista, kun ajat Codespacessa.
+- Kehityssäiliö tekee azd-työkaluketjustasi toistettavan kaikille.
+- Lisää azd, Azure CLI ja Docker Dev Container *ominaisuuksien* kautta.
+- Sovita kieliominaisuus sovellukseesi ja pidä `docker-in-docker` säiliön isännille.
+- Käytä laitekoodikirjautumista ajettaessa Codespacessa.
 
 ---
 
@@ -163,15 +163,15 @@ azd up
 | Suunta | Resurssi |
 |--------|----------|
 | **Edellinen** | [Tuo oma sovellus](bring-your-own-app.md) |
-| **Luvun etusivu** | [Luku 1 - Perusta & Pika-aloitus](README.md) |
-| **Seuraava luku** | [Luku 2: AI-ensimmäinen kehitys](../chapter-02-ai-development/README.md) |
+| **Luvun alku** | [Luku 1: Perusta & nopea aloitus](README.md) |
+| **Seuraava luku** | [Luku 2: AI-Ensimmäinen kehitys](../chapter-02-ai-development/README.md) |
 
 ## 📖 Liittyvät resurssit
 
-- [Asennus ja käyttöönotto](installation.md)
+- [Asennus & käyttöönotto](installation.md)
 - [Komentojen pikaopas](../../resources/cheat-sheet.md)
-- [Virallinen Dev Containers -määrittely](https://containers.dev/)
-- [azd Dev Container -feature](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
+- [Virallinen Dev Containers -määritys](https://containers.dev/)
+- [azd Dev Container -ominaisuus](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
 
 ---
 

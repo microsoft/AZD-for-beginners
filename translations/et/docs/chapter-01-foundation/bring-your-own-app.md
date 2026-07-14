@@ -1,46 +1,46 @@
-# Too oma rakendus - lisa azd olemasolevasse projekti
+# Too oma rakendus – lisa azd olemasolevasse projekti
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD algajatele](../../README.md)
-- **📖 Current Chapter**: Peatükk 1 - Alus & Kiire algus
-- **⬅️ Previous**: [Sinu esimene projekt](first-project.md)
-- **➡️ Next**: [Dev Containerid & Codespaces](dev-containers.md)
+**Peatüki navigeerimine:**
+- **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
+- **📖 Käesolev peatükk**: Peatükk 1 - Alus & Kiire algus
+- **⬅️ Eelmine**: [Sinu esimene projekt](first-project.md)
+- **➡️ Järgmine**: [Arenduskontainerid ja koodiruumi keskkonnad](dev-containers.md)
 
-> Kinnitatud vastu `azd 1.25.6` 2026. aasta juunis.
+> Kontrollitud versiooniga `azd 1.27.1` juulis 2026.
 
 ## Sissejuhatus
 
-Selles [Sinu esimene projekt](first-project.md) sa juurutasid rakenduse, alustades mallist. Kuid enamasti sul juba *on* rakendus — Node.js API, Python Flask teenus, .NET veebi-rakendus — mis asub kaustas sinu masinas. See õppetund näitab, kuidas lisada azd olemasolevale koodile, et saaksid selle juurutada `azd up` abil ilma mallita.
+[Sinu esimeses projektis](first-project.md) paigaldasid rakenduse, alustades mallist. Kuid enamikul juhtudel on sul juba *eksisteeriv* rakendus – Node.js API, Python Flask teenus, .NET veebirakendus – mis asub arvutis kaustas. See õppetund näitab, kuidas lisada azd sellele olemasolevale koodile, et saaksid seda paigaldada `azd up` käsuga, ilma mallita.
 
 ## Õpieesmärgid
 
-Õppetunni lõpuks sa:
-- Mõistad kolme viisi azd projekti alustamiseks
-- Käivitad `azd init` olemasolevas koodibaasis
-- Mõistad, mida `azure.yaml` ja kaust `infra/` sinu rakenduse jaoks teevad
-- Tead, millal lasta azd'il infrastruktuuri genereerida ja millal kirjutada ise
-- Juurutad oma olemasoleva rakenduse Azure'i `azd up` abil
+Selle õppetunni lõpuks:
+- Sa mõistad kolme viisi alustada azd projekti
+- Käivitad `azd init` olemasoleva koodibaasi sees
+- Sa tead, mida teeb `azure.yaml` ja `infra/` kaust sinu rakenduse jaoks
+- Sa tead, millal lasta azd-il infrastruktuur genereerida ja millal kirjutada ise
+- Paigaldad oma olemasoleva rakenduse Azure’i `azd up` käsuga
 
-## Õpitulemused
+## Õpiväljundid
 
-Pärast selle õppetunni sooritamist oskad:
-- Initsialiseerida azd projektis, mis sul juba olemas on
-- Lugeda ja redigeerida põhilist `azure.yaml` faili
-- Genereerida alginfrastruktuuri `azd infra generate` abil
-- Valida sobiva Azure hosti oma rakenduse jaoks
-- Juurutada ja puhastada oma rakendust
+Pärast seda õppetundi:
+- Õpid algatama azd olemasolevas projektis
+- Loe ja muuda lihtsat `azure.yaml` faili
+- Genereeri algne infrastruktuur käsuga `azd infra generate`
+- Vali sobiv Azure host sinu rakendusele
+- Paigalda ja puhasta oma rakendus
 
 ---
 
-## Kolm viisi azd projekti alustamiseks
+## Kolm viisi alustada azd projekti
 
-| Starting point | Command | When to use |
+| Alustamispunkt | Käsk | Millal kasutada |
 |----------------|---------|-------------|
 | **Mallist** | `azd init --template <name>` | Õppimiseks või uue rakenduse alustamiseks tõestatud näidise põhjal |
-| **Oma olemasolevast koodist** | `azd init` (sinu projekti kaustas) | Sul juba on rakendus ja soovid seda juurutada |
-| **Git repositooriumist** | `azd init --from-code` (kloneeritud repo sees) | azd kasutuselevõtt olemasolevas repositooriumis |
+| **Olemolevast koodist** | `azd init` (projekti kaustas) | Kui sul juba on rakendus ja soovid seda paigaldada |
+| **Git repo põhjal** | `azd init --from-code` (kopeeritud repos) | azd kasutuselevõtt olemasolevas repos |
 
-Sa juba harjutasid esimest varianti. See õppetund käsitleb teist — kõige tavalisemat reaalse maailma stsenaariumi.
+Sa oled juba proovinud esimest varianti. See õppetund käsitleb teist – kõige tavalisemat reaalse maailma stsenaariumi.
 
 ---
 
@@ -53,7 +53,7 @@ cd my-existing-app
 azd init
 ```
 
-azd küsib, kuidas soovid initsialiseerida. Vali:
+azd küsib, kuidas soovid algatada. Vali:
 
 ```
 ? How do you want to initialize your app?
@@ -61,26 +61,26 @@ azd küsib, kuidas soovid initsialiseerida. Vali:
   Select a template
 ```
 
-Vali **"Use code in the current directory."** azd skaneerib seejärel su kausta, tuvastab keele ja raamistikud ning pakub välja hosti.
+Vali **"Kasuta koodi praeguses kataloogis."**. Seejärel skaneerib azd kausta, tuvastab sinu keele ja raamistikud ning pakub hosti.
 
 ### Mida azd tuvastab
 
-azd otsib signaale nagu `package.json`, `requirements.txt`, `pom.xml`, `*.csproj` või `Dockerfile` ja soovitab vastavat Azure hosti:
+azd otsib signaale nagu `package.json`, `requirements.txt`, `pom.xml`, `*.csproj` või `Dockerfile` ja soovitab sobiva Azure hosti:
 
 | Sinu rakendus | Tõenäoliselt tuvastatud host |
-|----------|----------------------|
+|--------------|-----------------------------|
 | Node.js / Python / .NET veebirakendus | Azure App Service või Container Apps |
 | Konteineriseeritud rakendus (`Dockerfile`) | Azure Container Apps |
 | Funktsioonirakendus | Azure Functions |
-| Staatiline sait (React/Vue build väljund) | Azure Static Web Apps |
+| Staatiline sait (React/Vue ehitatud tulemus) | Azure Static Web Apps |
 
-Kinnita tuvastatud teenus(ed) ja azd genereerib vajalikud failid.
+Kinnita tuvastatud teenus(ed) ja azd loob vajalikud failid.
 
 ---
 
 ## Samm 2: Mõista, mida azd lõi
 
-Pärast `azd init` käivitamist on sinu projektis kaks uut asja:
+Algatamise järel on projektis kaks uut asja:
 
 ```
 my-existing-app/
@@ -92,9 +92,9 @@ my-existing-app/
 └── ...                 # your existing files, untouched
 ```
 
-### `azure.yaml` — projekti määratlus
+### `azure.yaml` — projekti definitsioon
 
-See on azd projekti süda. Minimaalne näidis näeb välja nii:
+See on azd projekti süda. Minimaalne näeb välja selline:
 
 ```yaml
 # azure.yaml
@@ -106,70 +106,70 @@ services:
     host: appservice         # appservice | containerapp | function | staticwebapp
 ```
 
-`services` plokk on võtmeosa: iga kirje seob sinu koodi kausta Azure hostiga. Kui su rakendusel on nii frontend kui API, on sul kaks teenust.
+`services` plokk on kõige olulisem: iga üksus seob sinu koodikausta Azure hostiga. Kui su rakendusel on nii frontend kui API, on sul kaks teenust.
 
 ### `infra/` — sinu Azure ressursid koodina
 
-Kaust `infra/` sisaldab Bicep faile, mis määratlevad Azure ressursid, mida su rakendus vajab (App Service, andmebaas jne). Sa ei pea neid käsitsi kirjutama — azd genereerib töötava lähtepunkti. Sa *saad* neid hiljem redigeerida, et lisada ressursse või tugevdada turvalisust (käsitletud [Peatükis 4](../chapter-04-infrastructure/README.md)).
+`infra/` kaust sisaldab Bicep faile, mis defineerivad sinu rakenduse nõutavad Azure ressursid (App Service, andmebaas jne). Sul ei ole vaja neid käsitsi kirjutada – azd genereerib toimiva lähtepunkti. Hiljem *saad* neid muuta, et lisada ressursse või tugevdada turvalisust (kaetud [Peatükis 4](../chapter-04-infrastructure/README.md)).
 
-> **Vihje:** Kas tahad enne juurutamist genereeritud infrastruktuuri näha või kohandada? Käivita `azd infra generate` (saadaval ka kui `azd infra synth`), et kirjutada IaC kettale ja seda üle vaadata ning versioonihallata.
+> **Nõuanne:** Tahad näha või kohandada genereeritud infrastruktuuri enne paigaldamist? Käivita `azd infra generate` (saadaval ka kui `azd infra synth`), mis kirjutab IaC-d kettale, et seda üle vaadata ja versioonihallata.
 
 ---
 
-## Samm 3: Määra vajalik konfiguratsioon
+## Samm 3: Sea vajalik konfigureerimine
 
-Kui su rakendus vajab sätteid või saladusi (ühendusstring, API võti), ära külasta neid koodi sisse. Kasuta keskkonnamuutujate väärtusi:
+Kui su rakendus vajab seadistusi või salasõnu (ühenduse string, API võti), ära kodeeri neid otse. Kasuta keskkonnamuutujaid:
 
 ```bash
 # Loo keskkond
 azd env new dev
 
-# Sea mittesalajane väärtus
+# Määra mitte-salajane väärtus
 azd env set API_VERSION 1.0.0
 ```
 
-Tõeliste saladuste puhul hoia neid Key Vaultis ja viita neile oma infrastruktuurist — vt [Peatükk 3: Konfiguratsioon ja autentimine](../chapter-03-configuration/authsecurity.md).
+Tõeliste saladuste jaoks säilita need Key Vaultis ja viita neile oma infrastruktuurist – vaata lähemalt [Peatüki 3: Konfigureerimine ja autentimine](../chapter-03-configuration/authsecurity.md).
 
 ---
 
-## Samm 4: Juuruta
+## Samm 4: Paigalda
 
-Nüüd kasuta sama töövoogu, mida sa juba tunned:
+Nüüd kasuta sama töövoogu, mida sa juba tead:
 
 ```bash
-# Logi sisse (vajalik azd-ile)
+# Autendi (vajalik azd jaoks)
 azd auth login
 
-# Eelvaata ressursse, mis luuakse
+# Vaata eelvaadet ressurssidest, mis luuakse
 azd provision --preview
 
-# Loo infrastruktuur ja juuruta oma kood
+# Hangi infrastruktuur ja juputa oma kood ära
 azd up
 ```
 
-Kui see lõpeb, prindib azd sinu rakenduse URL-i. Kinnita see samamoodi nagu iga azd rakenduse puhul:
+Kui see lõppeb, kuvab azd sinu rakenduse URL-i. Kontrolli nagu iga azd rakendust:
 
 ```bash
 azd show           # kuva lõpp-punktid
-azd monitor --logs # kontrolli logisid vajadusel
+azd monitor --logs # vajadusel kontrolli logisid
 ```
 
 ---
 
-## Tavalised esmakordsed probleemid
+## Sageli esinevad esimesed probleemid
 
-| Symptom | Likely cause | Fix |
+| Sümptom | Tõenäoline põhjus | Lahendus |
 |---------|--------------|-----|
-| azd ei tuvastanud rakendust | Puudub manifest (nt `package.json`) | Lisa manifest või vali host käsitsi `azd init` ajal |
-| Ehitamine ebaõnnestub `azd up` ajal | Rakendus vajab build-sammu | Lisa `buildCommand`/`outputPath` teenuse alla `azure.yaml`-sse |
-| Rakendus käivitub, kuid tagastab vigu | Puuduv konfiguratsioon/saladus | Sea väärtused `azd env set` abil või ühenda Key Vault |
-| Vale host valitud | Autotuvastus eksis | Muuda `host:` `azure.yaml`-s ja käivita uuesti `azd up` |
+| azd ei tuvastanud minu rakendust | Puudub manifest (nt `package.json`) | Lisa manifest või vali host käsitsi `azd init` käigus |
+| Kokkupanek ebaõnnestub `azd up` ajal | Rakendus vajab kokkupanekut | Lisa `buildCommand`/`outputPath` `azure.yaml` teenuse alla |
+| Rakendus käivitub, aga tagastab vead | Puuduv seadistus/saladus | Sea väärtused `azd env set` või ühenda Key Vaultiga |
+| Vale host valitud | Automaatne tuvastus eksis | Muuda `host:` `azure.yaml` failis ning käivita `azd up` uuesti |
 
-Lisateabe saamiseks vaata [Peatükk 7: Tõrkeotsing](../chapter-07-troubleshooting/README.md).
+Lisainfot leiad [Peatükist 7: Veaotsing](../chapter-07-troubleshooting/README.md).
 
 ---
 
-## Puhastamine
+## Puhasta
 
 ```bash
 azd down --force --purge
@@ -179,26 +179,26 @@ azd down --force --purge
 
 ## Kokkuvõte
 
-- `azd init` → **"Use code in the current directory"** lisab azd rakendusele, mis sul juba olemas on.
-- `azure.yaml` seob sinu koodi kaustad Azure hostidega; `infra/` määratleb ressursid Bicep-iga.
-- `azd infra generate` võimaldab genereeritud infrastruktuuri üle vaadata või kohandada.
-- Kui initsialiseeritud, kasutab sinu olemasolev rakendus täpselt sama `azd up` / `azd down` töövoogu nagu mallipõhine rakendus.
+- `azd init` → **"Kasuta koodi praeguses kataloogis"** lisab azd olemasolevasse rakendusse.
+- `azure.yaml` seob sinu koodikaustad Azure hostidega; `infra/` määratleb ressursid Bicep vormingus.
+- `azd infra generate` võimaldab sul genereeritud infrastruktuuri üle vaadata või kohandada.
+- Kui algatatud, kasutab sinu olemasolev rakendus täpselt sama `azd up` / `azd down` töövoogu nagu mallipõhine rakendus.
 
 ---
 
-## 🔗 Navigatsioon
+## 🔗 Navigeerimine
 
-| Direction | Lesson |
+| Suund | Õppetund |
 |-----------|--------|
-| **Previous** | [Sinu esimene projekt](first-project.md) |
-| **Next** | [Dev Containerid & Codespaces](dev-containers.md) |
+| **Eelmine** | [Sinu esimene projekt](first-project.md) |
+| **Järgmine** | [Arenduskontainerid ja koodiruumi keskkonnad](dev-containers.md) |
 
 ## 📖 Seotud ressursid
 
-- [AZD alused](azd-basics.md)
+- [AZD põhialused](azd-basics.md)
 - [Peatükk 4: Infrastruktuur koodina](../chapter-04-infrastructure/README.md)
-- [Konfiguratsioon ja autentimine](../chapter-03-configuration/authsecurity.md)
-- [Käskude kiirjuhend](../../resources/cheat-sheet.md)
+- [Konfigureerimine ja autentimine](../chapter-03-configuration/authsecurity.md)
+- [Käskude mäluraamat](../../resources/cheat-sheet.md)
 
 ---
 

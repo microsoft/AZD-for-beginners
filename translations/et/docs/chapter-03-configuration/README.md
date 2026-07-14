@@ -1,31 +1,31 @@
-# Chapter 3: Konfiguratsioon ja autentimine
+# 3. peatükk: Konfiguratsioon ja autentimine
 
-**📚 Kursus**: [AZD alustajatele](../../README.md) | **⏱️ Kestus**: 45-60 minutit | **⭐ Raskusaste**: Kesktasemel
+**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 45-60 minutit | **⭐ Tase**: Kesktase
 
 ---
 
 ## Ülevaade
 
-See peatükk käsitleb keskkonna seadistamist, autentimise mustreid ja turvalisuse parimaid tavasid Azure Developer CLI kasutuselevõtuks.
+Selles peatükis käsitletakse keskkonna konfiguratsiooni, autentimismustreid ja turbe parimaid tavasid Azure Developer CLI juurutuste jaoks.
 
-> Kontrollitud versiooniga `azd 1.25.6` juunis 2026.
+> Kontrollitud versiooniga `azd 1.27.1` juulis 2026.
 
 ## Õpieesmärgid
 
-Selle peatüki lõpetamisel:
-- Omandad AZD konfiguratsiooni hierarhia
-- Haldate mitut keskkonda (dev, staging, prod)
-- Rakendate turvalist autentimist hallatud identiteetidega
-- Konfigureerite keskkonnaspetsiifilisi seadeid
+Selle peatüki lõpetades suudad:
+- Valdada AZD konfiguratsiooni hierarhiat
+- Hallata mitut keskkonda (dev, staging, prod)
+- Rakendada turvalist autentimist hallatud identiteetidega
+- Konfigureerida keskkonnapõhiseid seadeid
 
 ---
 
 ## 📚 Õppetunnid
 
-| # | Tund | Kirjeldus | Aeg |
-|---|--------|-------------|------|
-| 1 | [Konfiguratsioonijuhend](configuration.md) | Keskkonna seadistamine ja haldus | 30 min |
-| 2 | [Autentimine ja turvalisus](authsecurity.md) | Hallatud identiteedid ja RBAC mustrid | 30 min |
+| # | Õppetund | Kirjeldus | Aeg |
+|---|----------|-----------|------|
+| 1 | [Konfiguratsiooni juhend](configuration.md) | Keskkonna seadistamine ja haldus | 30 min |
+| 2 | [Autentimine ja turvalisus](authsecurity.md) | Hallatud identiteedi ja RBAC mustrid | 30 min |
 
 ---
 
@@ -52,9 +52,9 @@ azd env get-values
 
 ## 🔧 Konfiguratsiooni hierarhia
 
-AZD rakendab seadeid selles järjekorras (hilisemad kirjutavad eelnevaid üle):
+AZD rakendab seadeid selles järjekorras (hilisemad muudavad varasemaid):
 
-1. **Vaikeväärtused** (mallidesse sisse ehitatud)
+1. **Vaikesätted** (mallidesse sisse ehitatud)
 2. **azure.yaml** (projekti konfiguratsioon)
 3. **Keskkonnamuutujad** (`azd env set`)
 4. **Käsurea lipud** (`--location eastus`)
@@ -64,19 +64,19 @@ AZD rakendab seadeid selles järjekorras (hilisemad kirjutavad eelnevaid üle):
 ## 🔐 Turvalisuse parimad tavad
 
 ```bash
-# Kasutage hallatud identiteeti (soovitatav)
+# Kasuta hallatud identiteeti (soovitatav)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Kontrollige AZD autentimise olekut
+# Kontrolli AZD autentimise olekut
 azd auth status
 
-# Valikuline: kontrollige Azure CLI konteksti, kui kavatsete käivitada az käske
+# Valikuline: kontrolli Azure CLI konteksti, kui kavatsete käivitada az käske
 az account show
 
-# Vajadusel autenduge uuesti
+# Vajadusel uuesti autentida
 azd auth login
 
-# Valikuline: värskendage Azure CLI autentimist az käskude jaoks
+# Valikuline: värskenda Azure CLI autentimist az käskude jaoks
 az login
 ```
 
@@ -85,15 +85,15 @@ az login
 ## 🔗 Navigeerimine
 
 | Suund | Peatükk |
-|-----------|---------|
-| **Eelmine** | [Peatükk 2: AI arendus](../chapter-02-ai-development/README.md) |
-| **Järgmine** | [Peatükk 4: Infrastruktuur](../chapter-04-infrastructure/README.md) |
+|-------|---------|
+| **Eelmine** | [2. peatükk: AI arendus](../chapter-02-ai-development/README.md) |
+| **Järgmine** | [4. peatükk: Taristu](../chapter-04-infrastructure/README.md) |
 
 ---
 
 ## 📖 Seotud ressursid
 
-- [Juurutuseelne kontroll](../chapter-06-pre-deployment/README.md)
+- [Enne juurutamist tehtavad kontrollid](../chapter-06-pre-deployment/README.md)
 - [Tõrkeotsing](../chapter-07-troubleshooting/common-issues.md)
 
 ---

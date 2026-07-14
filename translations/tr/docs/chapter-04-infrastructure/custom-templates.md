@@ -1,67 +1,67 @@
 # Kendi azd Şablonunuzu Oluşturma
 
-**Bölüm Navigasyonu:**
-- **📚 Kurs Anasayfası**: [AZD For Beginners](../../README.md)
-- **📖 Geçerli Bölüm**: Bölüm 4 - Altyapı Kod Olarak ve Dağıtım
-- **⬅️ Önceki**: [Deployment Guide](deployment-guide.md)
+**Bölüm Gezinme:**
+- **📚 Kurs Ana Sayfası**: [Başlangıç Seviyesi AZD](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 4 - Altyapı Kod Olarak ve Dağıtım
+- **⬅️ Önceki**: [Dağıtım Kılavuzu](deployment-guide.md)
 - **🚀 Sonraki Bölüm**: [Bölüm 5: Çoklu Ajan Çözümleri](../chapter-05-multi-agent/README.md)
 
-> Haziran 2026'da `azd 1.25.6` ile doğrulandı.
+> Temmuz 2026'da `azd 1.27.1` sürümü ile doğrulanmıştır.
 
 ## Giriş
 
-Şimdiye kadar `azd init --template <name>` ile şablonları *tüketmiştiniz*. Ancak bir proje düzenini ekibiniz beğendiğinde—örneğin, bir Container App, bir Cosmos DB ve uygun izleme—bunu kendi tekrar kullanılabilir şablonunuza dönüştürmek istersiniz. Bir şablon, azd’nin okuyabileceği öngörülebilir bir yapıya sahip bir Git deposundan ibarettir. Bu ders size sıfırdan bir şablon oluşturmayı, test etmeyi ve (isteğe bağlı) topluluk galerisine yayınlamayı gösterir.
+Şimdiye kadar `azd init --template <isim>` ile şablonları *tüketiyordunuz*. Ancak ekibinizin beğendiği bir proje düzeniniz olduğunda — örneğin, Cosmos DB ve doğru izleme ile bir Container Uygulaması — bunu kendi tekrar kullanılabilir şablonunuza dönüştürmek isteyeceksiniz. Bir şablon, azd'nin nasıl okuyacağını bildiği öngörülebilir yapıya sahip bir Git deposundan başka bir şey değildir. Bu ders size sıfırdan bir şablon oluşturmayı, test etmeyi ve (isteğe bağlı olarak) topluluk galerisine yayınlamayı gösterecek.
 
 ## Öğrenme Hedefleri
 
-Bu dersi bitirdiğinizde:
-- Bir klasörü "azd şablonu" yapan unsurları anlayacaksınız
-- Gerekli dosyaları ve klasör düzenini bileceksiniz
+Bu dersin sonunda:
+- Bir klasörün "azd şablonu" yapan unsurları anlayacaksınız
+- Gerekli dosya ve klasör düzenini bileceksiniz
 - Başkalarının yeniden kullanabileceği bir `azure.yaml` ve `infra/` ekleyeceksiniz
-- Paylaşmadan önce şablonunuzu yerelde test edeceksiniz
-- Şablonu yayımlayacak ve (isteğe bağlı) Awesome AZD'ye göndereceksiniz
+- Şablonunuzu paylaşmadan önce yerel olarak test edeceksiniz
+- Yayınlayacak ve (isteğe bağlı olarak) Awesome AZD'ye göndereceksiniz
 
-## Öğrenme Çıktıları
+## Öğrenme Sonuçları
 
-Bu dersi tamamladıktan sonra şunları yapabileceksiniz:
-- Yeni bir şablon deposu iskeleti oluşturmak
-- Altyapıyı herhangi bir abonelikte çalışacak şekilde parametreleştirmek
-- Bir şablonu `azd init` ve `azd up` ile doğrulamak
-- Topluluk galerisi için gerekli meta verileri eklemek
+Bu dersi tamamladıktan sonra:
+- Yeni bir şablon deposu oluşturabileceksiniz
+- Altyapıyı herhangi bir abonelikte çalışacak şekilde parametreleyebileceksiniz
+- `azd init` ve `azd up` ile bir şablonu doğrulayabileceksiniz
+- Topluluk galerisi için gereken meta verileri ekleyebileceksiniz
 
 ---
 
-## Şablon Gerçekte Nedir?
+## Şablon Aslında Nedir?
 
-Bir azd şablonu en azından şunu içeren **bir Git deposudur**:
+Bir azd şablonu, en azından içerdiği **bir Git deposudur**:
 
-| Dosya / klasör | Amaç | Gerekli? |
+| Dosya / klasör | Amaç | Gerekli mi? |
 |---------------|---------|-----------|
-| `azure.yaml` | Hizmetleri, hostları ve altyapı sağlayıcısını tanımlar | ✅ Evet |
+| `azure.yaml` | Hizmetleri, ana bilgisayarları ve altyapı sağlayıcısını tanımlar | ✅ Evet |
 | `infra/` | Kaynakları sağlayan Bicep, Terraform veya Pulumi | ✅ Evet |
 | `src/` (veya kodunuz) | azd'nin dağıttığı uygulama kodu | ✅ Evet |
-| `README.md` | Şablonun nasıl kullanılacağı | ✅ Kuvvetle önerilir |
-| `.azdo/` veya `.github/` | CI/CD iş akışı tanımları | İsteğe bağlı |
-| `.devcontainer/` | Tekrarlanabilir geliştirme ortamı | İsteğe bağlı |
-| `azure.yaml` `metadata` | Galeri + telemetri bilgisi | İsteğe bağlı (yayımlamak için gerekli) |
+| `README.md` | Şablonun nasıl kullanılacağını açıklar | ✅ Kuvvetle önerilir |
+| `.azdo/` veya `.github/` | CI/CD boru hattı tanımları | Opsiyonel |
+| `.devcontainer/` | Tekrarlanabilir geliştirme ortamı | Opsiyonel |
+| `azure.yaml` `metadata` | Galeri + telemetri bilgisi | Opsiyonel (yayınlamak için gerekli) |
 
-Burada sihirli bir şey yok: `azd init --template you/your-repo` komutunu çalıştırdığınızda, azd repoyu klonlar ve `azure.yaml` dosyasını okur.
+Burada sihir yok: `azd init --template siz/sizin-depo` komutunu çalıştırdığınızda, azd repo'yu klonlar ve `azure.yaml` dosyasını okur.
 
 ---
 
-## Adım 1: Depo İskeleti Oluşturun
+## Adım 1: Depo Yapısını Oluşturun
 
-Klasör yapısını elle oluşturun veya minimal bir şablondan başlayıp düzenleyin:
+Klasör yapısını elle oluşturabilir veya minimal bir şablondan başlayıp düzenleyebilirsiniz:
 
 ```bash
 mkdir my-azd-template && cd my-azd-template
 git init
 
-# Standart düzeni oluşturun.
+# Standart düzeni oluştur
 mkdir -p src infra
 ```
 
-Tipik tamamlanmış düzen şöyle görünür:
+Tipik tamamlama düzeni şu şekildedir:
 
 ```
 my-azd-template/
@@ -81,9 +81,9 @@ my-azd-template/
 
 ---
 
-## Adım 2: `azure.yaml` Yazın
+## Adım 2: `azure.yaml` Dosyasını Yazın
 
-Bu, şablonun kalbidir. azd'ye neyi nasıl dağıtacağını söyler:
+Bu, şablonun kalbidir. azd'ye ne dağıtacağını ve nasıl yapacağını söyler:
 
 ```yaml
 # azure.yaml
@@ -101,13 +101,13 @@ services:
     host: containerapp              # appservice | containerapp | function | aks | staticwebapp
 ```
 
-> `metadata.template` alanı galerinin telemetri için kullanım sayısını sayarken kullandığı alandır. `name@version` kuralını kullanın.
+> `metadata.template` alanı, galeri telemetrisi tarafından kullanım sayısını saymak için kullanılır. `adı@versiyon` biçimini kullanın.
 
 ---
 
-## Adım 3: Altyapıyı Parametreleştirin
+## Adım 3: Altyapıyı Parametreleyin
 
-Tek bir en önemli kural: *yeniden kullanılabilir* bir şablon için **isimleri, bölgeleri veya aboneliğe özgü değerleri ASLA sabit kodlamayın.** Aynı şablonun herkesin aboneliğinde çalışması için parametreler ve kaynak token desenini kullanın.
+Tek bir önemli kural vardır: **asla isimleri, bölgeleri veya aboneliğe özgü değerleri sert kodlamayın.** Parametreleri ve kaynak token desenini kullanın ki aynı şablon herkesin aboneliğinde çalışsın.
 
 ```bicep
 // infra/main.bicep
@@ -138,12 +138,12 @@ module web 'modules/web.bicep' = {
 output SERVICE_WEB_ENDPOINT_URL string = web.outputs.uri
 ```
 
-Bu şablonu şablon-dostu yapan iki şey:
+Bu şablon dostu yapan iki şey vardır:
 
 1. **`azd-env-name` etiketi** — azd bunu ortam başına kaynakları izlemek ve temizlemek için kullanır.
-2. **`uniqueString(...)` kaynak tokenı** — adların çakışmaması için kararlı, küresel olarak benzersiz bir sonek üretir.
+2. **`uniqueString(...)` kaynak tokenı** — isim çakışması olmaması için stabil, küresel benzersiz bir sonek üretir.
 
-azd'nin ortamdan enjekte ettiği değerleri okuyan eşleşen bir parametre dosyası sağlayın:
+Azd'nin ortamdan yerleştirdiği değerleri okuyacak eşleşen bir parametre dosyası sağlayın:
 
 ```json
 // infra/main.parameters.json
@@ -157,13 +157,13 @@ azd'nin ortamdan enjekte ettiği değerleri okuyan eşleşen bir parametre dosya
 }
 ```
 
-azd, `${AZURE_ENV_NAME}` ve `${AZURE_LOCATION}` değerlerini mevcut ortamdan otomatik olarak ikame eder.
+azd, mevcut ortamdan `${AZURE_ENV_NAME}` ve `${AZURE_LOCATION}` ifadelerini otomatik olarak değiştirir.
 
 ---
 
 ## Adım 4: Şablonunuzu Yerelde Test Edin
 
-Paylaşmadan önce şablonun temiz bir durumdan çalıştığını kanıtlayın.
+Paylaşmadan önce, şablonun temiz bir durumdan çalıştığını kanıtlayın.
 
 **Yerel klasörden test edin** (Git push gerekmez):
 
@@ -172,26 +172,26 @@ Paylaşmadan önce şablonun temiz bir durumdan çalıştığını kanıtlayın.
 mkdir /tmp/test-run && cd /tmp/test-run
 azd init --template /path/to/my-azd-template
 
-# Uçtan uca kaynak sağlama ve dağıtım
+# Sağlama + uçtan uca dağıtım
 azd auth login
 azd up
 ```
 
-**Sonra geri almayı test edin**—iyi bir şablon tamamen temizler:
+**Sonra kapatma testini yapın**—iyi bir şablon tamamen temizlemelidir:
 
 ```bash
 azd down --force --purge
 ```
 
-Eğer `azd down` kaynaklar bırakıyorsa, muhtemelen bir kaynağa `azd-env-name` etiketini eklemeyi kaçırdınız.
+Eğer `azd down` kaynakları bırakıyorsa, muhtemelen bir kaynağa `azd-env-name` etiketini koymayı unutmuşsunuzdur.
 
-> **İpucu:** önce `azd provision --preview` çalıştırın. Bu bir what-if işlemi yapar ve herhangi bir kaynak oluşturulmadan önce şablon hatalarını gösterir.
+> **İpucu:** önce `azd provision --preview` komutunu çalıştırın. Bu, kaynak oluşturulmadan önce ne olacağını simüle eder ve şablon hatalarını gösterir.
 
 ---
 
-## Adım 5: Şablonu Yayımlayın
+## Adım 5: Şablonu Yayınlayın
 
-Depoyu GitHub'a gönderin (başkalarının kullanmasını istiyorsanız public olarak):
+Depoyu GitHub'a gönderin (başkalarının kullanmasını istiyorsanız genel yapın):
 
 ```bash
 gh repo create my-azd-template --public --source=. --push
@@ -209,13 +209,13 @@ azd init --template your-github-username/my-azd-template
 
 [Awesome AZD galerisi](https://azure.github.io/awesome-azd/) topluluk şablonlarını listeler. Listelenmek için deponuzun şunları içermesi gerekir:
 
-- ✅ Önkoşullar, bir mimari diyagramı ve maliyet notları içeren net bir `README.md`
+- ✅ Ön koşullar, mimari diyagram ve maliyet notları bulunan net bir `README.md`
 - ✅ `metadata.template` içeren çalışan bir `azure.yaml`
-- ✅ Yeni bir abonelikte temizce kaynak sağlayan altyapı
+- ✅ Yeni bir abonelikte temiz çalışan altyapı
 - ✅ Bir `LICENSE` dosyası
-- ✅ (Önerilir) Tek tıklamayla Codespaces için bir `.devcontainer/`
+- ✅ (Önerilen) Tek tıkla Codespaces için `.devcontainer/`
 
-Galerinin veri dosyasına şablonunuzu ekleyen bir pull request açarak gönderin; katkı kılavuzuna [Awesome AZD deposunda](https://github.com/Azure/awesome-azd) bulunan rehberi izleyerek uyun.
+Şablonunuzu galerinin veri dosyasına ekleyen bir çekme isteği açarak gönderin, katkı rehberini [Awesome AZD deposunda](https://github.com/Azure/awesome-azd) bulabilirsiniz.
 
 ---
 
@@ -223,21 +223,21 @@ Galerinin veri dosyasına şablonunuzu ekleyen bir pull request açarak gönderi
 
 | Tuzak | Çözüm |
 |---------|-----|
-| Kaynak isimlerinin sabit kodlanması | `uniqueString()` kaynak tokenını kullanın |
+| Sert kodlanmış kaynak isimleri | `uniqueString()` kaynak token'ını kullanın |
 | `azd down` kaynak bırakıyor | Her kaynağı (veya kaynak grubunu) `azd-env-name` ile etiketleyin |
-| Şablon sizde çalışıyor, başkalarında çalışmıyor | Abonelik ID'lerini, tenant ID'lerini ve bölge varsayımlarını kaldırın |
+| Şablon size çalışıyor, başkalarına işlemiyor | Abonelik ID'leri, tenant ID'leri ve bölge varsayımlarını kaldırın |
 | Çıktılar uygulamaya bağlanmamış | `SERVICE_<NAME>_ENDPOINT_URL` ve diğer `AZURE_*` çıktıları dışa aktarın |
-| Galeri gönderimi reddedildi | `README.md`, `LICENSE` ve `metadata.template` ekleyin |
+| Galeri gönderisi reddedildi | `README.md`, `LICENSE` ve `metadata.template` ekleyin |
 
 ---
 
 ## Özet
 
-- Bir şablon sadece `azure.yaml`, `infra/` ve kodunuz olan bir Git reposudur.
-- Her şeyi parametreleştirin—isimleri, bölgeleri ve kimlikleri—böylece her yerde çalışır.
-- `azd down` düzgün çalışsın diye kaynakları her zaman `azd-env-name` ile etiketleyin.
-- Yayınlamadan önce `azd init --template <local-path>` ile yerelde test edin.
-- Awesome AZD'ye göndermek için meta veriler ve bir README ekleyin.
+- Bir şablon sadece bir Git deposudur, `azure.yaml`, `infra/` ve sizin kodunuz ile birlikte.
+- Her şeyi parametreleyin — isimler, bölgeler ve ID'ler — böylece her yerde çalışır.
+- Kaynakları her zaman `azd-env-name` ile etiketleyin, böylece `azd down` çalışır.
+- Yayınlamadan önce `azd init --template <local-path>` ile yerelde test yapın.
+- Awesome AZD'ye gönderim için meta veriler ve bir README ekleyin.
 
 ---
 
@@ -245,15 +245,15 @@ Galerinin veri dosyasına şablonunuzu ekleyen bir pull request açarak gönderi
 
 | Yön | Kaynak |
 |-----------|----------|
-| **Önceki** | [Deployment Guide](deployment-guide.md) |
-| **Bölüm Anasayfası** | [Bölüm 4: Altyapı Kod Olarak](README.md) |
+| **Önceki** | [Dağıtım Kılavuzu](deployment-guide.md) |
+| **Bölüm Ana Sayfası** | [Bölüm 4: Altyapı Kod Olarak](README.md) |
 | **Sonraki Bölüm** | [Bölüm 5: Çoklu Ajan Çözümleri](../chapter-05-multi-agent/README.md) |
 
 ## 📖 İlgili Kaynaklar
 
-- [Provisioning Resources](provisioning.md)
+- [Kaynak Sağlama](provisioning.md)
 - [Awesome AZD Galerisi](https://azure.github.io/awesome-azd/)
-- [Resmi azd şablon belgeleri](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
+- [Resmi azd şablon dokümanları](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible)
 
 ---
 

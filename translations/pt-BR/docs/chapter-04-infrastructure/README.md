@@ -1,48 +1,48 @@
 # Capítulo 4: Infraestrutura como Código & Implantação
 
-**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 1-1,5 horas | **⭐ Complexidade**: Intermediário
+**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 1-1.5 horas | **⭐ Complexidade**: Intermediário
 
 ---
 
 ## Visão Geral
 
-Este capítulo aborda padrões de Infrastructure as Code (IaC) com templates Bicep, provisionamento de recursos e estratégias de implantação usando o Azure Developer CLI.
+Este capítulo aborda padrões de Infraestrutura como Código (IaC) com templates Bicep, provisão de recursos e estratégias de implantação usando o Azure Developer CLI.
 
-> Validado com `azd 1.25.6` em junho de 2026.
+> Validado com `azd 1.27.1` em julho de 2026.
 
 ## Objetivos de Aprendizagem
 
 Ao concluir este capítulo, você irá:
-- Compreender a estrutura e a sintaxe de templates Bicep
-- Provisionar recursos do Azure com `azd provision`
+- Compreender a estrutura e sintaxe de templates Bicep
+- Provisionar recursos Azure com `azd provision`
 - Implantar aplicações com `azd deploy`
 - Implementar estratégias de implantação blue-green e rolling
 
 ---
 
-## 📚 Aulas
+## 📚 Lições
 
 | # | Lição | Descrição | Tempo |
 |---|--------|-------------|------|
-| 1 | [Provisioning Resources](provisioning.md) | Gerenciamento de recursos do Azure com AZD | 45 min |
-| 2 | [Deployment Guide](deployment-guide.md) | Estratégias de implantação de aplicações | 45 min |
-| 3 | [Authoring Your Own Template](custom-templates.md) | Criar e publicar modelos azd reutilizáveis | 30 min |
+| 1 | [Provisionamento de Recursos](provisioning.md) | Gerenciamento de recursos Azure com AZD | 45 min |
+| 2 | [Guia de Implantação](deployment-guide.md) | Estratégias de implantação de aplicações | 45 min |
+| 3 | [Criando Seu Próprio Template](custom-templates.md) | Construir e publicar templates azd reutilizáveis | 30 min |
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Início Rápido
 
 ```bash
-# Inicializar a partir do modelo
+# Inicializar a partir do template
 azd init --template azure-functions-python-v2-http
 
 # Visualizar o que será criado
 azd provision --preview
 
-# Provisionar apenas a infraestrutura
+# Provisionar infraestrutura apenas
 azd provision
 
-# Implantar apenas o código
+# Implantar código apenas
 azd deploy
 
 # Ou ambos juntos
@@ -51,7 +51,7 @@ azd up
 
 ---
 
-## 📁 AZD Project Structure
+## 📁 Estrutura do Projeto AZD
 
 ```
 my-project/
@@ -68,15 +68,15 @@ my-project/
 
 ---
 
-## 🔧 Essential Commands
+## 🔧 Comandos Essenciais
 
-| Command | Description |
+| Comando | Descrição |
 |---------|-------------|
-| `azd init` | Inicializar o projeto |
-| `azd provision` | Criar recursos do Azure |
-| `azd deploy` | Implantar o código da aplicação |
+| `azd init` | Inicializar projeto |
+| `azd provision` | Criar recursos no Azure |
+| `azd deploy` | Implantar código da aplicação |
 | `azd up` | provisionar + implantar |
-| `azd down` | Excluir todos os recursos |
+| `azd down` | Apagar todos os recursos |
 
 ---
 
@@ -91,8 +91,8 @@ my-project/
 
 ## 📖 Recursos Relacionados
 
-- [Verificações pré-implantação](../chapter-06-pre-deployment/README.md)
-- [Exemplos de Container App](../../examples/container-app/README.md)
+- [Verificações Pré-Implantação](../chapter-06-pre-deployment/README.md)
+- [Exemplos de Aplicações em Contêiner](../../examples/container-app/README.md)
 - [Exemplo de Aplicação de Banco de Dados](../../examples/database-app/README.md)
 
 ---

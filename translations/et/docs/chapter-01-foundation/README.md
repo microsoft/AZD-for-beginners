@@ -1,40 +1,40 @@
-# Chapter 1: Alus ja Kiire Algus
+# 1. peatükk: Alused ja kiire algus
 
-**📚 Kursus**: [AZD Algajatele](../../README.md) | **⏱️ Kestus**: 30-45 minutit | **⭐ Keerukus**: Algaja
+**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 30–45 minutit | **⭐ Tase**: Algaja
 
 ---
 
 ## Ülevaade
 
-See peatükk tutvustab Azure Developer CLI (azd) põhialuseid. Õpid põhimõisted, tööriistade installi ja esimese rakenduse juurutamist Azure’i.
+Selles peatükis tutvustatakse Azure Developer CLI (azd) põhialuseid. Õpid põhimõisted, installeerid tööriistad ja juurutad oma esimese rakenduse Azure'i.
 
-> Kontrollitud versiooniga `azd 1.25.6` juunis 2026.
+> Kinnitatud `azd 1.27.1` vastu juulis 2026.
 
 ## Õpieesmärgid
 
-Selle peatüki läbimisel:
-- Sa mõistad, mis on Azure Developer CLI ja kuidas see erineb Azure CLI-st
+Selle peatüki lõpuks:
+- Mõistad, mis on Azure Developer CLI ja kuidas see erineb Azure CLI-st
 - Installeerid ja seadistad AZD oma platvormil
-- Juurutad oma esimese rakenduse Azure’i käsuga `azd up`
-- Kustutad ressursid käsuga `azd down`
+- Juurutad oma esimese rakenduse Azure'i käsuga `azd up`
+- Puhastad ressursid käsuga `azd down`
 
 ---
 
 ## 📚 Õppetunnid
 
 | # | Õppetund | Kirjeldus | Aeg |
-|---|----------|-----------|-----|
-| 1 | [AZD Põhitõed](azd-basics.md) | Põhimõisted, terminoloogia ja projekti struktuur | 15 min |
-| 2 | [Paigaldus ja Seadistamine](installation.md) | Platvormipõhised paigaldusjuhised | 10 min |
-| 3 | [Sinu Esimene Projekt](first-project.md) | Praktiline: veebiäpi juurutamine Azure’i | 20 min |
-| 4 | [Kasuta Oma Rakendust](bring-your-own-app.md) | Lisa azd olemasolevale projektile | 15 min |
-| 5 | [Arenduskonteinerid ja Codespaces](dev-containers.md) | Korduvkasutatavad azd keskkonnad arenduskonteineritega | 15 min |
+|---|--------|-------------|------|
+| 1 | [AZD põhitõed](azd-basics.md) | Põhimõisted, terminoloogia ja projekti struktuur | 15 min |
+| 2 | [Installeerimine ja seadistamine](installation.md) | Platvormispetsiifilised juhised | 10 min |
+| 3 | [Sinu esimene projekt](first-project.md) | Praktiline juhend: juuruta veebirakendus Azure'i | 20 min |
+| 4 | [Lisa oma rakendus](bring-your-own-app.md) | Lisa azd juba olemasolevale projektile | 15 min |
+| 5 | [Arenduskonteinerid ja Codespaces](dev-containers.md) | Taastoodavad azd keskkonnad arenduskonteineritega | 15 min |
 
 ---
 
-## ✅ Alusta siit: Kontrolli Oma Seadistust
+## ✅ Alusta siit: Kontrolli oma seadistust
 
-Enne alustamist veendu, et sinu kohalik masin on valmis 1. peatüki malliks:
+Enne alustamist veendu, et sinu kohalik masin oleks valmis 1. peatüki malliga töötamiseks:
 
 **Windows:**
 ```powershell
@@ -46,21 +46,21 @@ Enne alustamist veendu, et sinu kohalik masin on valmis 1. peatüki malliks:
 bash ./validate-setup.sh
 ```
 
-Kui skript teatab puuduvatest tööriistadest, paigalda need esmalt ja jätka siis peatükiga.
+Kui skript teatab puuduvatest tööriistadest, lahenda need esmalt ja seejärel jätka peatükiga.
 
 ---
 
-## 🚀 Kiire Algus
+## 🚀 Kiire algus
 
 ```bash
 # Kontrolli paigaldust
 azd version
 
 # Autendi AZD jaoks
-# Valikuline: az login, kui plaanid käivitada Azure CLI käske otse
+# Valikuline: kasuta az login, kui plaanid otse Azure CLI käske käivitada
 azd auth login
 
-# Paigalda oma esimene rakendus
+# Kasuta oma esimest rakendust
 azd init --template todo-nodejs-mongo
 azd up
 
@@ -70,15 +70,15 @@ azd down --force --purge
 
 ---
 
-## ✅ Edu Kriteeriumid
+## ✅ Edu kriteeriumid
 
-Pärast selle peatüki lõpetamist peaksid saama:
+Pärast selle peatüki lõpetamist peaksid olema suuteline:
 
 ```bash
 azd version              # Kuvab paigaldatud versiooni
-azd init --template todo-nodejs-mongo  # Initsialiseerib projekti
+azd init --template todo-nodejs-mongo  # Algatab projekti
 azd up                   # Paigaldab Azure'i
-azd show                 # Kuvab töötava rakenduse URL-i
+azd show                 # Kuvab jooksva rakenduse URL-i
 azd down --force --purge # Puhastab ressursid
 ```
 
@@ -87,17 +87,17 @@ azd down --force --purge # Puhastab ressursid
 ## 🔗 Navigeerimine
 
 | Suund | Peatükk |
-|--------|---------|
-| **Järgmine** | [Peatükk 2: AI-esmane arendus](../chapter-02-ai-development/README.md) |
-| **Jäta vahele** | [Peatükk 3: Seadistamine](../chapter-03-configuration/README.md) |
+|-------|---------|
+| **Järgmine** | [2. peatükk: AI-esimene arendus](../chapter-02-ai-development/README.md) |
+| **Mine edasi** | [3. peatükk: Konfiguratsioon](../chapter-03-configuration/README.md) |
 
 ---
 
-## 📖 Seotud Ressursid
+## 📖 Seotud ressursid
 
-- [Käsu Kiirjuhend](../../resources/cheat-sheet.md)
+- [Käskude abileht](../../resources/cheat-sheet.md)
 - [KKK](../../resources/faq.md)
-- [Terminid](../../resources/glossary.md)
+- [Terminite sõnastik](../../resources/glossary.md)
 
 ---
 

@@ -1,30 +1,30 @@
-# Azure Developer CLI を使用した AI モデルのデプロイ
+# Azure Developer CLI を使った AI モデルのデプロイ
 
-**章ナビゲーション:**
-- **📚 コース ホーム**: [AZD 入門](../../README.md)
-- **📖 現在の章**: 第2章 - AI ファースト開発
-- **⬅️ 前へ**: [Microsoft Foundry 統合](microsoft-foundry-integration.md)
-- **➡️ 次へ**: [AI ワークショップ ラボ](ai-workshop-lab.md)
+**章のナビゲーション:**
+- **📚 コースホーム**: [AZD For Beginners](../../README.md)
+- **📖 現在の章**: 第2章 - AIファースト開発
+- **⬅️ 前へ**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ 次へ**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 次の章**: [第3章: 設定](../chapter-03-configuration/configuration.md)
 
-このガイドは、モデル選定から本番デプロイメントパターンまで、AZD テンプレートを使用した AI モデルのデプロイに関する包括的な手順を提供します。
+このガイドは、モデル選択から本番展開パターンに至るまで、AZD テンプレートを用いた AI モデルのデプロイに関する包括的な手順を提供します。
 
-> **検証メモ (2026-03-25):** このガイドの AZD ワークフローは `azd` `1.23.12` に対して確認されました。デフォルトのサービスデプロイメント時間よりも長くかかる AI デプロイについては、現在の AZD リリースは `azd deploy --timeout <seconds>` をサポートしています。
+> **検証ノート（2026-07-13）：** 本ガイドの AZD ワークフローは `azd` `1.27.1` で確認されています。デフォルトのサービス展開ウィンドウを超える AI 展開では、現行の AZD リリースが `azd deploy --timeout <seconds>` をサポートしています。
 
 ## 目次
 
-- [モデル選定戦略](#モデル選定戦略)
-- [AI モデル用の AZD 設定](#ai-モデル用の-azd-設定)
+- [モデル選択戦略](#モデル選択戦略)
+- [AIモデルのAZD設定](#aiモデルのazd設定)
 - [デプロイパターン](#デプロイパターン)
 - [モデル管理](#モデル管理)
-- [本番環境での考慮事項](#本番環境での考慮事項)
+- [本番運用上の考慮点](#本番運用上の考慮点)
 - [監視と可観測性](#監視と可観測性)
 
-## モデル選定戦略
+## モデル選択戦略
 
-### Microsoft Foundry Models モデル
+### Microsoft Foundry モデル群
 
-ユースケースに適したモデルを選択してください:
+ユースケースに応じて適切なモデルを選択してください：
 
 ```yaml
 # azure.yaml - Model configuration
@@ -54,18 +54,18 @@ services:
 
 ### モデル容量計画
 
-| Model Type | Use Case | Recommended Capacity | Cost Considerations |
+| モデルタイプ | ユースケース | 推奨容量 | コスト考慮点 |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | チャット、Q&A | 10-50 TPM | ほとんどのワークロードに対して費用対効果が高い |
-| gpt-4.1 | 複雑な推論 | 20-100 TPM | コストは高め、プレミアム機能向けに使用 |
-| text-embedding-3-large | 検索、RAG | 30-120 TPM | 意味検索と検索に対する堅牢な既定の選択 |
-| Whisper | 音声→テキスト | 10-50 TPM | 音声処理ワークロード |
+| gpt-4.1-mini | チャット、Q&A | 10-50 TPM | ほとんどのワークロードでコスト効率的 |
+| gpt-4.1 | 複雑な推論 | 20-100 TPM | 高コスト、プレミアム機能に使用 |
+| text-embedding-3-large | 検索、RAG | 30-120 TPM | セマンティック検索と検索で強力なデフォルト選択肢 |
+| Whisper | 音声認識 | 10-50 TPM | オーディオ処理ワークロード向け |
 
-## AI モデル用の AZD 設定
+## AIモデルのAZD設定
 
-### Bicep テンプレートの設定
+### Bicep テンプレート設定
 
-Bicep テンプレートを通じてモデルデプロイメントを作成します:
+Bicep テンプレートを通じてモデルデプロイを作成します：
 
 ```bicep
 // infra/main.bicep
@@ -126,7 +126,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### 環境変数
 
-アプリケーションの環境を設定します:
+アプリケーション環境を設定します：
 
 ```bash
 # .env の設定
@@ -138,7 +138,7 @@ AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 
 ## デプロイパターン
 
-### パターン 1: 単一リージョンデプロイメント
+### パターン1：単一リージョン展開
 
 ```yaml
 # azure.yaml - Single region
@@ -151,12 +151,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-適している用途:
+最適用途：
 - 開発およびテスト
 - 単一市場向けアプリケーション
 - コスト最適化
 
-### パターン 2: マルチリージョンデプロイメント
+### パターン2：マルチリージョン展開
 
 ```bicep
 // Multi-region deployment
@@ -169,14 +169,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-適している用途:
+最適用途：
 - グローバルアプリケーション
 - 高可用性要件
 - 負荷分散
 
-### パターン 3: ハイブリッドデプロイメント
+### パターン3：ハイブリッド展開
 
-Microsoft Foundry Models を他の AI サービスと組み合わせます:
+Microsoft Foundry モデルと他の AI サービスを組み合わせます：
 
 ```bicep
 // Hybrid AI services
@@ -209,7 +209,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### バージョン管理
 
-AZD 設定でモデルのバージョンを追跡します:
+AZD 設定内でモデルバージョンを追跡します：
 
 ```json
 {
@@ -229,7 +229,7 @@ AZD 設定でモデルのバージョンを追跡します:
 
 ### モデル更新
 
-モデル更新には AZD フックを使用します:
+モデル更新に AZD フックを使います：
 
 ```bash
 #!/bin/bash
@@ -241,13 +241,13 @@ az cognitiveservices account list-models \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
 
-# デプロイがデフォルトのタイムアウトを超える場合
+# デプロイがデフォルトのタイムアウト時間を超える場合
 azd deploy --timeout 1800
 ```
 
 ### A/B テスト
 
-複数のモデルバージョンをデプロイします:
+複数モデルバージョンをデプロイします：
 
 ```bicep
 param enableABTesting bool = false
@@ -269,11 +269,11 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## 本番環境での考慮事項
+## 本番運用上の考慮点
 
-### キャパシティプランニング
+### 容量計画
 
-使用パターンに基づいて必要な容量を計算します:
+使用パターンに基づく必要容量を計算します：
 
 ```python
 # 容量計算の例
@@ -298,9 +298,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### オートスケーリングの構成
+### オートスケール設定
 
-Container Apps のオートスケーリングを構成します:
+コンテナーアプリ向けのオートスケールを設定します：
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -338,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### コスト最適化
 
-コスト管理策を実装します:
+コスト制御を実装します：
 
 ```bicep
 @description('Enable cost management alerts')
@@ -370,9 +370,9 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ## 監視と可観測性
 
-### Application Insights の統合
+### Application Insights 統合
 
-AI ワークロード向けの監視を構成します:
+AI ワークロードの監視を設定します：
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -408,9 +408,9 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### カスタムメトリクス
+### カスタムメトリック
 
-AI 固有のメトリクスを追跡します:
+AI固有のメトリックを追跡します：
 
 ```python
 # AIモデルのカスタムテレメトリ
@@ -447,10 +447,10 @@ class AITelemetry:
 
 ### ヘルスチェック
 
-AI サービスのヘルス監視を実装します:
+AI サービスのヘルス監視を実装します：
 
 ```python
-# ヘルスチェック用エンドポイント
+# ヘルスチェックエンドポイント
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -478,30 +478,30 @@ async def check_ai_models():
 
 ## 次のステップ
 
-1. **[Microsoft Foundry 統合ガイド](microsoft-foundry-integration.md) を確認してください** サービス統合パターンのために
-2. **[AI ワークショップ ラボ](ai-workshop-lab.md) を完了してください** 実践的な経験のために
-3. **[本番 AI プラクティス](production-ai-practices.md) を実装してください** エンタープライズのデプロイのために
-4. **[AI トラブルシューティングガイド](../chapter-07-troubleshooting/ai-troubleshooting.md) を参照してください** よくある問題について
+1. **サービス統合パターンのために [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md) を確認する**
+2. **実践経験のために [AI Workshop Lab](ai-workshop-lab.md) を完了する**
+3. **企業向け展開のために [Production AI Practices](production-ai-practices.md) を実装する**
+4. **一般的な問題のために [AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md) を参照する**
 
-## リソース
+## 参考資料
 
-- [Microsoft Foundry Models Model Availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Container Apps Scaling](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [AI Model Cost Optimization](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Microsoft Foundry Models モデルの可用性](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Azure Developer CLI ドキュメント](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Container Apps のスケーリング](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [AI モデルのコスト最適化](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**章ナビゲーション:**
-- **📚 コース ホーム**: [AZD 入門](../../README.md)
-- **📖 現在の章**: 第2章 - AI ファースト開発
-- **⬅️ 前へ**: [Microsoft Foundry 統合](microsoft-foundry-integration.md)
-- **➡️ 次へ**: [AI ワークショップ ラボ](ai-workshop-lab.md)
+**章のナビゲーション:**
+- **📚 コースホーム**: [AZD For Beginners](../../README.md)
+- **📖 現在の章**: 第2章 - AIファースト開発
+- **⬅️ 前へ**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ 次へ**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 次の章**: [第3章: 設定](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責事項**:
-本書類は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されました。正確性には努めておりますが、自動翻訳には誤りや不正確な箇所が含まれる可能性があることにご留意ください。原文（原言語）の文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の利用に起因して生じたいかなる誤解や誤訳についても、私たちは責任を負いません。
+**免責事項**：
+本書類は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を期していますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知おきください。原文の原語版が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じたいかなる誤解や解釈違いについても、当方は責任を負いかねます。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

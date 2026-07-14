@@ -22,6 +22,44 @@ After reviewing changelog entries, you will be able to:
 
 ## Version History
 
+### [v3.23.0] - 2026-07-13
+
+#### AZD 1.27.1 Refresh: Version Currency Update
+**This version revalidates the course against `azd` `1.27.1` (July 2026, latest stable release) and the current preview AI agent extension `azure.ai.agents` `1.0.0-beta.5`, bringing every "validated against" banner up to date after the 1.26.0, 1.27.0, and 1.27.1 releases.**
+
+#### Changed
+- **✅ Validation baseline updated** from `azd 1.25.6` (June 2026) to `azd 1.27.1` (July 2026) across the root README, all chapter READMEs, the Chapter 1 dev-container lesson (including pinned-version examples), the Chapter 4 custom-templates lesson, the Chapter 5 multi-agent lesson, and the workshop docs
+- **🤖 Chapter 2 baseline refreshed** from `azd 1.23.12` (March 2026) to `azd 1.27.1` across `agents.md`, `ai-model-deployment.md`, `ai-workshop-lab.md`, and `microsoft-foundry-integration.md`; validation-note dates updated to 2026-07-13
+- **🧩 AI agent extension bumped** from `azure.ai.agents` `0.1.40-preview`/`0.1.18-preview` to the current `1.0.0-beta.5` release in the Chapter 2 README and `agents.md`
+- **🧪 Workshop validation example** (`azd version` output) updated to `1.27.1`
+
+#### Notes on relevant azd releases (1.26.0 → 1.27.1)
+- **1.26.0 (2026-06-24):** Go support for Azure Functions on Flex Consumption, `azd config sub-filter` per-tenant subscription filters, self-contained extension bundles (`azd x pack --bundle`), and `azd tool install azure-skills`
+- **1.27.0 (2026-06-30):** Model Azure AI Foundry projects/agents directly in `azure.yaml` (Bicep-less/Terraform-less init), container deployment support for App Service (`host: appservice` + `language: docker`), direct `-s/--source` for `azd extension` commands, and `azd tool uninstall`
+- **1.27.1 (2026-07-09):** `--no-dependencies` flag for `azd extension install`, deprecated models excluded from catalog/quota prompts by default, and several bug fixes
+
+#### Files Updated
+- `README.md`
+- `changelog.md`
+- `docs/chapter-01-foundation/README.md`
+- `docs/chapter-01-foundation/bring-your-own-app.md`
+- `docs/chapter-01-foundation/dev-containers.md`
+- `docs/chapter-02-ai-development/README.md`
+- `docs/chapter-02-ai-development/agents.md`
+- `docs/chapter-02-ai-development/ai-model-deployment.md`
+- `docs/chapter-02-ai-development/ai-workshop-lab.md`
+- `docs/chapter-02-ai-development/microsoft-foundry-integration.md`
+- `docs/chapter-03-configuration/README.md`
+- `docs/chapter-04-infrastructure/custom-templates.md`
+- `docs/chapter-04-infrastructure/README.md`
+- `docs/chapter-05-multi-agent/multi-agent-basics.md`
+- `docs/chapter-05-multi-agent/README.md`
+- `docs/chapter-06-pre-deployment/README.md`
+- `docs/chapter-07-troubleshooting/README.md`
+- `docs/chapter-08-production/README.md`
+- `workshop/docs/index.md`
+- `workshop/docs/instructions/2-Validate-AI-Template.md`
+
 ### [v3.22.0] - 2026-06-16
 
 #### Beginner Gap-Fill #2: Template Authoring, Dev Containers, Pulumi, Azure DevOps, Service Principals, and More
@@ -81,6 +119,7 @@ After reviewing changelog entries, you will be able to:
 ### [v3.20.0] - 2026-06-16
 
 #### AZD 1.25.6 Refresh, Full Agent Lifecycle Commands & Aspire Rebrand
+
 **This version revalidates the course against `azd` `1.25.6` (June 2026) and the `azure.ai.agents` `0.1.40-preview` extension, expands AI guidance from "scaffold an agent" to the complete agent lifecycle (test → evaluate → optimize → inspect → delete), surfaces the new `azure.ai.skills` and `azure.ai.connections` preview extensions, and notes the ".NET Aspire" → "Aspire" product rebrand.**
 
 #### Added
@@ -124,6 +163,7 @@ After reviewing changelog entries, you will be able to:
 ---
 
 ### [v3.19.1] - 2026-03-27
+
 #### Beginner Onboarding Clarification, Setup Validation & Final AZD Command Cleanup
 **This version follows up the AZD 1.23 validation sweep with a beginner-focused documentation pass: it clarifies AZD-first authentication guidance, adds local setup validation scripts, verifies key commands against the live AZD CLI, and removes the last obsolete English-source command references outside the changelog.**
 
@@ -235,6 +275,7 @@ After reviewing changelog entries, you will be able to:
   - `docs/chapter-01-foundation/azd-basics.md` — New "Extensions and AI Commands" section introducing `azd extension`, `azd ai agent init`, and `azd mcp`
   - `docs/chapter-02-ai-development/agents.md` — Option 4: `azd ai agent init` with comparison table (template vs manifest approach)
   - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — "AZD Extensions for Foundry" and "Agent-First Deployment" subsections
+
   - `docs/chapter-05-multi-agent/README.md` — Quick Start now shows both template and manifest-based deployment paths
   - `docs/chapter-06-pre-deployment/coordination-patterns.md` — Deploy section now includes `azd ai agent init` option
   - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — "AZD AI Extension Commands for Diagnostics" subsection
@@ -278,6 +319,7 @@ After reviewing changelog entries, you will be able to:
 ---
 
 ### [v3.17.0] - 2026-02-05
+
 #### Course Navigation Enhancement
 **This version improves README.md chapter navigation with an enhanced table format.**
 
@@ -456,6 +498,7 @@ Old folders have been replaced with chapter-numbered folders:
 - **Troubleshooting Commands**: Fixed `azd logs` reference to use valid `azd monitor --logs`
 
 #### Fixed
+
 - **🔐 Authentication Commands**: Added `azd auth login` and `azd auth logout` to cheat-sheet.md
 - **Invalid Command References**: Removed remaining `azd logs` from README troubleshooting section
 
@@ -690,6 +733,7 @@ Old folders have been replaced with chapter-numbered folders:
   - Added to Microsoft Foundry Templates section
   - Updated Comparison Matrix and technology finding sections
 - **Documentation Quality**: Improved B+ (87%) → A- (92%) across docs folder:
+
   - Added expected outputs to critical command examples
   - Included verification steps for configuration changes
   - Enhanced hands-on learning with practical exercises
@@ -918,6 +962,7 @@ If you have local branches or documentation referencing the old structure:
 - **README Structure**: Transformed into a structured learning platform with chapter-based organization
 - **Documentation Navigation**: Every page now includes chapter context and progression guidance
 - **Template Organization**: Examples and templates mapped to appropriate learning chapters
+
 - **Resource Integration**: Cheat sheets, FAQs, and study guides connected to relevant chapters
 - **Workshop Integration**: Hands-on labs mapped to multiple chapter learning objectives
 
@@ -1185,6 +1230,7 @@ When contributing to this repository, please ensure changelog entries include:
 - Corrections to errors in documentation or code
 - Resolution of reported issues or problems
 - Improvements to accuracy or functionality
+
 
 #### Security
 - Security-related improvements or fixes

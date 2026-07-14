@@ -1,43 +1,43 @@
-# 第7章: トラブルシューティング & デバッグ
+# 第7章: トラブルシューティングとデバッグ
 
-**📚 Course**: [AZD 初心者向け](../../README.md) | **⏱️ Duration**: 1〜1.5時間 | **⭐ Complexity**: 中級
+**📚 コース**: [AZD For Beginners](../../README.md) | **⏱️ 所要時間**: 1～1.5時間 | **⭐ 難易度**: 中級
 
 ---
 
 ## 概要
 
-この章では Azure Developer CLI を使用する際に発生する一般的な問題の診断と解決方法を説明します。デプロイ失敗から AI 固有の問題まで扱います。
+本章では、Azure Developer CLIを使用する際に発生しやすい一般的な問題の診断と解決方法を説明します。デプロイ失敗からAI特有の問題まで網羅しています。
 
-> 2026年6月に `azd 1.25.6` で検証済み。
+> 2026年7月に `azd 1.27.1` で検証済み。
 
 ## 学習目標
 
-この章を修了すると、次のことができるようになります:
-- AZD の一般的なデプロイ失敗を診断する
-- 認証および権限の問題をデバッグする
-- AI サービスの接続問題を解決する
-- トラブルシューティングに Azure Portal と CLI を使用する
+本章を修了することで、以下ができるようになります:
+- 一般的なAZDデプロイ失敗の診断
+- 認証と権限の問題のデバッグ
+- AIサービスの接続問題の解決
+- トラブルシューティングのためのAzure PortalとCLIの利用
 
 ---
 
-## 📚 レッスン
+## 📚 レッスン一覧
 
 | # | レッスン | 説明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [一般的な問題](common-issues.md) | よく遭遇する問題 | 30 min |
-| 2 | [デバッグガイド](debugging.md) | ステップバイステップのデバッグ戦略 | 45 min |
-| 3 | [AI トラブルシューティング](ai-troubleshooting.md) | AI 固有の問題 | 30 min |
+| 1 | [共通の問題](common-issues.md) | よくある問題の対処 | 30分 |
+| 2 | [デバッグガイド](debugging.md) | ステップごとのデバッグ手法 | 45分 |
+| 3 | [AIトラブルシューティング](ai-troubleshooting.md) | AI特有の問題 | 30分 |
 
 ---
 
 ## 🚨 クイック修正
 
-### 認証の問題
+### 認証問題
 ```bash
-# AZD ワークフローに必須
+# AZDワークフローに必須です
 azd auth login
 
-# Azure CLI コマンドを直接使用する場合は任意
+# Azure CLIコマンドを直接使用している場合はオプションです
 az login
 
 azd auth status
@@ -50,7 +50,7 @@ azd monitor --logs
 az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
-### リソースの競合
+### リソース競合
 ```bash
 azd down --force --purge
 azd env new different-name
@@ -66,26 +66,26 @@ azd up
 
 ---
 
-## 📋 エラーコード参照
+## 📋 エラーコード一覧
 
 | エラー | 原因 | 解決策 |
 |-------|-------|----------|
-| `AuthenticationError` | ログインしていません | `azd auth login` |
-| `ResourceNotFound` | リソースが見つかりません | リソース名を確認してください |
-| `QuotaExceeded` | サブスクリプションの制限 | クォータ増加を依頼する |
-| `InvalidTemplate` | Bicep の構文エラー | `az bicep build` |
-| `Conflict` | リソースが既に存在します | 新しい名前を使用するか削除してください |
-| `Forbidden` | 権限が不足しています | RBAC ロールを確認してください |
+| `AuthenticationError` | ログインしていない | `azd auth login` |
+| `ResourceNotFound` | リソースが見つからない | リソース名を確認 |
+| `QuotaExceeded` | サブスクリプションの制限超過 | クォータ増加を申請 |
+| `InvalidTemplate` | Bicep構文エラー | `az bicep build` |
+| `Conflict` | リソースが既に存在 | 新しい名前を使うか削除 |
+| `Forbidden` | 権限不足 | RBACロールを確認 |
 
 ---
 
-## 🔄 リセットと回復
+## 🔄 リセットと復旧
 
 ```bash
-# ソフトリセット（リソースは維持し、コードを再デプロイ）
+# ソフトリセット（リソースを保持し、コードを再展開）
 azd deploy --force
 
-# ハードリセット（すべてを削除して最初からやり直す）
+# ハードリセット（すべて削除し、初めからやり直す）
 azd down --force --purge
 azd up
 ```
@@ -94,18 +94,18 @@ azd up
 
 ## 🔗 ナビゲーション
 
-| 方向 | 章 |
+| 方向 | チャプター |
 |-----------|---------|
-| <strong>前へ</strong> | [第6章: 展開前](../chapter-06-pre-deployment/README.md) |
-| <strong>次へ</strong> | [第8章: 本番](../chapter-08-production/README.md) |
+| <strong>前へ</strong> | [第6章: プリデプロイメント](../chapter-06-pre-deployment/README.md) |
+| <strong>次へ</strong> | [第8章: 本番環境](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 関連リソース
 
-- [展開前チェック](../chapter-06-pre-deployment/preflight-checks.md)
-- [構成ガイド](../chapter-03-configuration/configuration.md)
-- [AZD の GitHub Issues](https://github.com/Azure/azure-dev/issues)
+- [プリデプロイメントチェック](../chapter-06-pre-deployment/preflight-checks.md)
+- [設定ガイド](../chapter-03-configuration/configuration.md)
+- [AZD GitHub Issues](https://github.com/Azure/azure-dev/issues)
 
 ---
 

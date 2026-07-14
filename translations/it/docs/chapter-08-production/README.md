@@ -1,20 +1,20 @@
-# Capitolo 8: Modelli di Produzione e Aziendali
+# Capitolo 8: Pattern di Produzione e Aziendali
 
-**📚 Corso**: [AZD per Principianti](../../README.md) | **⏱️ Durata**: 2-3 ore | **⭐ Complessità**: Avanzato
+**📚 Corso**: [AZD Per Principianti](../../README.md) | **⏱️ Durata**: 2-3 ore | **⭐ Complessità**: Avanzato
 
 ---
 
 ## Panoramica
 
-Questo capitolo copre modelli di deployment pronti per l'uso aziendale, hardening della sicurezza, monitoraggio e ottimizzazione dei costi per carichi di lavoro AI in produzione.
+Questo capitolo tratta pattern di deployment pronti per l'azienda, rafforzamento della sicurezza, monitoraggio e ottimizzazione dei costi per carichi di lavoro AI in produzione.
 
-> Validato con `azd 1.25.6` a giugno 2026.
+> Validato con `azd 1.27.1` a luglio 2026.
 
-## Obiettivi di apprendimento
+## Obiettivi di Apprendimento
 
 Completando questo capitolo, sarai in grado di:
-- Distribuire applicazioni resilienti su più regioni
-- Implementare modelli di sicurezza aziendale
+- Distribuire applicazioni resilienti multi-regione
+- Implementare pattern di sicurezza aziendali
 - Configurare un monitoraggio completo
 - Ottimizzare i costi su larga scala
 - Impostare pipeline CI/CD con AZD
@@ -23,27 +23,27 @@ Completando questo capitolo, sarai in grado di:
 
 ## 📚 Lezioni
 
-| # | Lezione | Descrizione | Durata |
+| # | Lezione | Descrizione | Tempo |
 |---|--------|-------------|------|
-| 1 | [Pratiche AI per la Produzione](production-ai-practices.md) | Modelli di deployment aziendali | 90 min |
+| 1 | [Pratiche AI in Produzione](production-ai-practices.md) | Pattern di deployment aziendale | 90 min |
 
 ---
 
-## 🚀 Checklist di produzione
+## 🚀 Lista di Controllo per la Produzione
 
-- [ ] Distribuzione multi-regione per la resilienza
-- [ ] Identità gestita per l'autenticazione (senza chiavi)
-- [ ] Application Insights per il monitoraggio
-- [ ] Budget e avvisi sui costi configurati
+- [ ] Deployment multi-regione per resilienza
+- [ ] Identità gestita per autenticazione (nessuna chiave)
+- [ ] Application Insights per monitoraggio
+- [ ] Budget e alert sui costi configurati
 - [ ] Scansione di sicurezza abilitata
 - [ ] Integrazione pipeline CI/CD
 - [ ] Piano di disaster recovery
 
 ---
 
-## 🏗️ Modelli di Architettura
+## 🏗️ Pattern Architetturali
 
-### Modello 1: Microservizi AI
+### Pattern 1: Microservizi AI
 
 ```mermaid
 graph LR
@@ -52,16 +52,16 @@ graph LR
     AI --> Data[Archivio Dati]
 ```
 
-### Modello 2: AI guidata da eventi
+### Pattern 2: AI Event-Driven
 
 ```mermaid
 graph LR
-    EventGrid[Griglia eventi] --> Functions[Funzioni] --> Pipeline[Pipeline IA]
+    EventGrid[Griglia Eventi] --> Functions[Funzioni] --> Pipeline[Pipeline AI]
 ```
 
 ---
 
-## 🔐 Migliori pratiche di sicurezza
+## 🔐 Migliori Pratiche di Sicurezza
 
 ```bicep
 // Use managed identity
@@ -80,17 +80,17 @@ properties: {
 
 ---
 
-## 💰 Ottimizzazione dei costi
+## 💰 Ottimizzazione dei Costi
 
 | Strategia | Risparmio |
 |----------|---------|
 | Scalare a zero (Container Apps) | 60-80% |
-| Usare tier a consumo per lo sviluppo | 50-70% |
-| Scaling programmato | 30-50% |
+| Usare livelli a consumo per sviluppo | 50-70% |
+| Scalabilità programmata | 30-50% |
 | Capacità riservata | 20-40% |
 
 ```bash
-# Imposta avvisi sul budget
+# Imposta avvisi di budget
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -100,10 +100,10 @@ az consumption budget create \
 
 ---
 
-## 📊 Configurazione del monitoraggio
+## 📊 Configurazione del Monitoraggio
 
 ```bash
-# Visualizza i log in streaming
+# Flusso di log
 azd monitor --logs
 
 # Controlla Application Insights
@@ -119,17 +119,17 @@ az monitor metrics list --resource <resource-id>
 
 | Direzione | Capitolo |
 |-----------|---------|
-| **Precedente** | [Capitolo 7: Risoluzione dei problemi](../chapter-07-troubleshooting/README.md) |
-| **Corso completato** | [Home del corso](../../README.md) |
+| **Precedente** | [Capitolo 7: Risoluzione Problemi](../chapter-07-troubleshooting/README.md) |
+| **Corso Completo** | [Home del Corso](../../README.md) |
 
 ---
 
-## 📖 Risorse correlate
+## 📖 Risorse Correlate
 
-- [Guida agli agenti AI](../chapter-02-ai-development/agents.md)
+- [Guida agli Agenti AI](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Soluzioni multi-agente](../chapter-05-multi-agent/README.md)
-- [Esempio di microservizi](../../examples/microservices/README.md)
+- [Soluzioni Multi-Agente](../chapter-05-multi-agent/README.md)
+- [Esempio Microservizi](../../examples/microservices/README.md)
 
 ---
 

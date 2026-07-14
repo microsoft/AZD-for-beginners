@@ -1,39 +1,39 @@
-# 第 4 章：基礎設施即程式碼與部署
+# 第四章：基礎架構即代碼與部署
 
-**📚 課程**: [AZD For Beginners](../../README.md) | **⏱️ 時長**: 1-1.5 小時 | **⭐ 複雜度**: 中等
+**📚 課程**: [AZD 初學者指南](../../README.md) | **⏱️ 時長**: 1-1.5 小時 | **⭐ 難度**: 中階
 
 ---
 
 ## 概覽
 
-本章涵蓋使用 Bicep 範本的基礎設施即程式碼 (IaC) 模式、資源佈建，以及使用 Azure Developer CLI 的部署策略。
+本章涵蓋 Bicep 範本的基礎架構即代碼 (IaC) 模式、資源配置，以及使用 Azure Developer CLI 的部署策略。
 
-> 已在 2026 年 6 月使用 `azd 1.25.6` 驗證。
+> 已於 2026 年 7 月以 `azd 1.27.1` 版本驗證。
 
 ## 學習目標
 
-完成本章後，您將：
-- 了解 Bicep 範本的結構與語法
+完成本章後，您將能：
+- 理解 Bicep 範本的結構與語法
 - 使用 `azd provision` 佈建 Azure 資源
 - 使用 `azd deploy` 部署應用程式
-- 實作藍綠部署與滾動部署策略
+- 實作藍綠部署和滾動部署策略
 
 ---
 
-## 📚 課程
+## 📚 課程內容
 
 | # | 課程 | 說明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [Provisioning Resources](provisioning.md) | 使用 AZD 管理 Azure 資源 | 45 分鐘 |
-| 2 | [Deployment Guide](deployment-guide.md) | 應用程式部署策略 | 45 分鐘 |
-| 3 | [Authoring Your Own Template](custom-templates.md) | 建立並發佈可重用的 azd 範本 | 30 分鐘 |
+| 1 | [資源佈建](provisioning.md) | 使用 AZD 管理 Azure 資源 | 45 分鐘 |
+| 2 | [部署指南](deployment-guide.md) | 應用程式部署策略 | 45 分鐘 |
+| 3 | [撰寫自訂範本](custom-templates.md) | 建立與發佈可重用的 azd 範本 | 30 分鐘 |
 
 ---
 
 ## 🚀 快速開始
 
 ```bash
-# 從範本初始化
+# 從模板初始化
 azd init --template azure-functions-python-v2-http
 
 # 預覽將會建立的內容
@@ -42,10 +42,10 @@ azd provision --preview
 # 僅配置基礎設施
 azd provision
 
-# 僅部署程式碼
+# 僅部署代碼
 azd deploy
 
-# 或同時執行兩者
+# 或兩者一併進行
 azd up
 ```
 
@@ -68,7 +68,7 @@ my-project/
 
 ---
 
-## 🔧 常用指令
+## 🔧 重要指令
 
 | 指令 | 說明 |
 |---------|-------------|
@@ -80,12 +80,12 @@ my-project/
 
 ---
 
-## 🔗 導覽
+## 🔗 導航
 
 | 方向 | 章節 |
 |-----------|---------|
-| <strong>上一章</strong> | [第 3 章：設定](../chapter-03-configuration/README.md) |
-| <strong>下一章</strong> | [第 5 章：多代理解決方案](../chapter-05-multi-agent/README.md) |
+| <strong>上一章</strong> | [第三章：設定](../chapter-03-configuration/README.md) |
+| <strong>下一章</strong> | [第五章：多代理解決方案](../chapter-05-multi-agent/README.md) |
 
 ---
 

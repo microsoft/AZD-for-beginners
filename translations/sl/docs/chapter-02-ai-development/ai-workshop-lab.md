@@ -1,65 +1,65 @@
-# AI delavnica Lab: Priprava vaših AI rešitev za razmestitev z AZD
+# AI delavnica: Kako vaše rešitve AI narediti AZD-razpoložljive
 
 **Navigacija po poglavjih:**
-- **📚 Course Home**: [AZD za začetnike](../../README.md)
-- **📖 Current Chapter**: Poglavje 2 - AI-prvi razvoj
-- **⬅️ Previous**: [Razmestitev AI modela](ai-model-deployment.md)
-- **➡️ Next**: [Prakse za proizvodni AI](production-ai-practices.md)
-- **🚀 Next Chapter**: [Poglavje 3: Konfiguracija](../chapter-03-configuration/configuration.md)
+- **📚 Domov tečaja**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 2 - AI-prvi razvoj
+- **⬅️ Prejšnje**: [Namestitev AI modela](ai-model-deployment.md)
+- **➡️ Naslednje**: [Najboljše prakse proizvodnega AI](production-ai-practices.md)
+- **🚀 Naslednje poglavje**: [Poglavje 3: Konfiguracija](../chapter-03-configuration/configuration.md)
 
 ## Pregled delavnice
 
-Ta praktična delavnica vodi razvijalce skozi postopek prevzema obstoječe AI predloge in njene razmestitve z uporabo Azure Developer CLI (AZD). Naučili se boste ključnih vzorcev za proizvodne razmestitve AI z uporabo storitev Microsoft Foundry.
+Ta praktični laboratorij vodi razvijalce skozi proces uporabe obstoječega AI vzorca in njegovo nameščanje z uporabo Azure Developer CLI (AZD). Naučili se boste bistvenih vzorcev za proizvodne namestitve AI z uporabo Microsoft Foundry storitev.
 
-> **Opomba o preverjanju (2026-03-25):** Ta delavnica je bila preverjena z `azd` `1.23.12`. Če je vaša lokalna namestitev starejša, posodobite AZD pred začetkom, da se postopek overjanja, predloge in razmestitve ujema s spodnjimi koraki.
+> **Opomba o preverjanju (2026-07-13):** Ta delavnica je bila preverjena z `azd` `1.27.1`. Če je vaša lokalna namestitev starejša, posodobite AZD pred začetkom, da bodo avtentikacija, vzorec in potek namestitve skladni z naslednjimi koraki.
 
 **Trajanje:** 2-3 ure  
-**Raven:** Srednja  
-**Predpogoji:** Osnovno znanje o Azure, seznanjenost z AI/ML koncepti
+**Raven:** Srednje zahtevno  
+**Predznanje:** Osnove Azure, seznanjenost s koncepti AI/ML
 
 ## 🎓 Cilji učenja
 
-Na koncu delavnice boste sposobni:
-- ✅ Pretvoriti obstoječo AI aplikacijo za uporabo AZD predlog
+Ob koncu te delavnice boste znali:
+- ✅ Pretvoriti obstoječo AI aplikacijo za uporabo AZD vzorcev
 - ✅ Konfigurirati Microsoft Foundry storitve z AZD
 - ✅ Uvesti varno upravljanje poverilnic za AI storitve
-- ✅ Razmestiti proizvodno pripravljene AI aplikacije s spremljanjem
-- ✅ Odpravljati pogoste težave pri razmestitvi AI
+- ✅ Namestiti proizvodne AI aplikacije z nadzorom
+- ✅ Odpraviti pogoste težave pri namestitvi AI
 
 ## Predpogoji
 
-### Zahtevana orodja
-- [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) nameščena
-- [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) nameščen
-- [Git](https://git-scm.com/) nameščen
+### Potrebna orodja
+- Namestitev [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+- Namestitev [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli)
+- Namestitev [Git](https://git-scm.com/)
 - Urejevalnik kode (priporočamo VS Code)
 
 ### Azure viri
-- Azure naročnina s pravicami Contributor
+- Azure naročnina z dostopom »contributor«
 - Dostop do Microsoft Foundry Models storitev (ali možnost zahtevka za dostop)
-- Dovoljenja za ustvarjanje skupin virov
+- Pravice za ustvarjanje skupine virov
 
-### Potrebno znanje
+### Predznanje
 - Osnovno razumevanje Azure storitev
-- Seznanjenost s ukazno vrstico
-- Osnovni AI/ML koncepti (API-ji, modeli, pozivi)
+- Seznanjenost z ukazno vrstico
+- Osnovni koncepti AI/ML (API-ji, modeli, spodbujevalniki)
 
-## Priprava delavnice
+## Nastavitev laboratorija
 
 ### Korak 1: Priprava okolja
 
-1. **Preverite nameščena orodja:**
+1. **Preverite namestitev orodij:**
 ```bash
-# Preverite namestitev AZD
+# Preveri namestitev AZD
 azd version
 
-# Preverite Azure CLI
+# Preveri Azure CLI
 az --version
 
-# Prijavite se v Azure za AZD poteke dela
+# Prijava v Azure za AZD delovne tokove
 azd auth login
 
-# Prijavite se v Azure CLI le, če nameravate med diagnostiko zagnati ukaze az
+# Prijava v Azure CLI samo, če nameravate med diagnostiko izvajati az ukaze
 az login
 ```
 
@@ -73,9 +73,9 @@ cd azure-search-openai-demo
 
 ## Modul 1: Razumevanje strukture AZD za AI aplikacije
 
-### Anatomija AI AZD predloge
+### Anatomija AI AZD vzorca
 
-Raziščite ključne datoteke v AZD predlogi pripravljeni za AI:
+Raziščite ključne datoteke v AI-pripravljenem AZD vzorcu:
 
 ```
 azure-search-openai-demo/
@@ -92,15 +92,15 @@ azure-search-openai-demo/
 └── .azure/               # AZD environment files
 ```
 
-### **Lab vaja 1.1: Raziščite konfiguracijo**
+### **Laboratorijska vaja 1.1: Raziščite konfiguracijo**
 
 1. **Preglejte datoteko azure.yaml:**
 ```bash
 cat azure.yaml
 ```
 
-**Na kaj paziti:**
-- Opisi storitev za AI komponente
+**Na kaj bodite pozorni:**
+- Definicije storitev za AI komponente
 - Preslikave okoljskih spremenljivk
 - Konfiguracije gostiteljev
 
@@ -109,22 +109,22 @@ cat azure.yaml
 cat infra/main.bicep
 ```
 
-**Ključni AI vzorci za prepoznavo:**
-- Vzpostavitev storitve Microsoft Foundry Models
+**Ključni AI vzorci za prepoznavanje:**
+- Zagotavljanje Microsoft Foundry Models storitve
 - Integracija Azure AI Search
-- Varen način upravljanja ključev
-- Konfiguracije omrežne varnosti
+- Varno upravljanje ključev
+- Omrežne varnostne nastavitve
 
-### **Točka razprave:** Zakaj so ti vzorci pomembni za AI
+### **Diskusijska točka:** Zakaj so ti vzorci pomembni za AI
 
-- **Odvisnost storitev**: AI aplikacije pogosto zahtevajo več usklajenih storitev
-- **Varnost**: API ključi in končne točke potrebujejo varno upravljanje
-- **Elastičnost**: AI delovne obremenitve imajo posebne zahteve glede skaliranja
+- **Odvisnosti med storitvami**: AI aplikacije pogosto potrebujejo več usklajenih storitev
+- **Varnost**: API ključi in končne točke morajo biti varno upravljani
+- **Razširljivost**: Delovne obremenitve AI imajo posebne zahteve za skaliranje
 - **Upravljanje stroškov**: AI storitve so lahko drage, če niso pravilno konfigurirane
 
-## Modul 2: Razmestite svojo prvo AI aplikacijo
+## Modul 2: Namestitev vaše prve AI aplikacije
 
-### Korak 2.1: Inicializirajte okolje
+### Korak 2.1: Inicializacija okolja
 
 1. **Ustvarite novo AZD okolje:**
 ```bash
@@ -133,81 +133,81 @@ azd env new myai-workshop
 
 2. **Nastavite potrebne parametre:**
 ```bash
-# Nastavite želeno Azure regijo
+# Nastavite svojo željeno regijo Azure
 azd env set AZURE_LOCATION eastus
 
-# Neobvezno: Nastavite določen model OpenAI
+# Neobvezno: Nastavite specifičen model OpenAI
 azd env set AZURE_OPENAI_MODEL gpt-4.1-mini
 ```
 
-### Korak 2.2: Razmestitev infrastrukture in aplikacije
+### Korak 2.2: Namestitev infrastrukture in aplikacije
 
-1. **Razmestite z AZD:**
+1. **Namestite z AZD:**
 ```bash
 azd up
 ```
 
 **Kaj se zgodi med `azd up`:**
-- ✅ Vzpostavi storitev Microsoft Foundry Models
-- ✅ Ustvari storitev Azure AI Search
+- ✅ Zagotovi Microsoft Foundry Models storitev
+- ✅ Ustvari Azure AI Search storitev
 - ✅ Nastavi App Service za spletno aplikacijo
 - ✅ Konfigurira omrežje in varnost
-- ✅ Razmesti kodo aplikacije
-- ✅ Nastavi spremljanje in beleženje
+- ✅ Namesti kodo aplikacije
+- ✅ Nastavi nadzor in beleženje
 
-2. Spremljajte potek razmestitve in opazujte ustvarjene vire.
+2. **Spremljajte napredek namestitve** in zabeležite ustvarjene vire.
 
-### Korak 2.3: Preverite vašo razmestitev
+### Korak 2.3: Preverite vašo namestitev
 
-1. **Preverite razmestjene vire:**
+1. **Preverite nameščene vire:**
 ```bash
 azd show
 ```
 
-2. **Odprite razmestjeno aplikacijo:**
+2. **Odprite nameščeno aplikacijo:**
 ```bash
 azd show
 ```
 
-Odprite spletni končni naslov, prikazan v izhodu `azd show`.
+Odprite spletni konektor, prikazan v izpitu `azd show`.
 
-3. **Preizkusite AI funkcionalnost:**
-   - Pojdite na spletno aplikacijo
-   - Preizkusite primerne poizvedbe
-   - Preverite, ali AI odgovori delujejo
+3. **Testirajte AI funkcionalnost:**
+   - Pomaknite se do spletne aplikacije
+   - Preizkusite vzorčne poizvedbe
+   - Preverite, da AI odgovori delujejo
 
-### **Lab vaja 2.1: Praksa odpravljanja napak**
+### **Laboratorijska vaja 2.1: Vaja odpravljanja težav**
 
-**Scenarij**: Razmestitev je uspela, vendar AI ne odgovarja.
+**Scenarij**: Namestitev je uspela, vendar AI ne odgovarja.
 
-**Pogoste težave za preveriti:**
-1. **OpenAI API ključi**: Preverite, ali so pravilno nastavljeni
+**Pogoste težave za pregled:**
+1. **OpenAI API ključi**: Preverite, da so pravilno nastavljeni
 2. **Razpoložljivost modela**: Preverite, ali vaša regija podpira model
-3. **Omrežna povezljivost**: Prepričajte se, da se storitve lahko povežejo
-4. **Dovoljenja RBAC**: Preverite, ali aplikacija lahko dostopa do OpenAI
+3. **Omrežna povezljivost**: Zagotovite, da storitve lahko komunicirajo
+4. **RBAC dovoljenja**: Preverite, da aplikacija lahko dostopa do OpenAI
 
-**Ukazi za razhroščevanje:**
+**Ukazi za odpravljanje napak:**
 ```bash
-# Preveri spremenljivke okolja
+# Preveri okoljske spremenljivke
 azd env get-values
 
-# Prikaži dnevnike uvajanja
+# Poglej dnevnike nameščanja
 az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 
-# Preveri stanje uvajanja OpenAI
+# Preveri stanje nameščanja OpenAI
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
 
-## Modul 3: Prilagajanje AI aplikacij vašim potrebam
+## Modul 3: Prilagajanje AI aplikacij za vaše potrebe
 
 ### Korak 3.1: Spremenite AI konfiguracijo
 
 1. **Posodobite OpenAI model:**
 ```bash
-# Preklopite na drug model (če je v vaši regiji na voljo)
+# Spremenite na drug model (če je na voljo v vaši regiji)
 azd env set AZURE_OPENAI_MODEL gpt-4.1
 
-# Ponovno razmestite z novo konfiguracijo
+# Ponovno zaženite z novo konfiguracijo
 azd deploy
 ```
 
@@ -230,18 +230,18 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-### Korak 3.2: Konfiguracije, specifične za okolje
+### Korak 3.2: Okolju specifične konfiguracije
 
-**Najboljša praksa**: Različne konfiguracije za razvoj in produkcijo.
+**Najboljša praksa**: Različne konfiguracije za razvoj in proizvodnjo.
 
-1. **Ustvarite produkcijsko okolje:**
+1. **Ustvarite proizvodno okolje:**
 ```bash
 azd env new myai-production
 ```
 
-2. **Nastavite parametre specifične za produkcijo:**
+2. **Nastavite proizvodno specifične parametre:**
 ```bash
-# V proizvodnji se običajno uporabljajo višji SKU-ji
+# Proizvodnja običajno uporablja višje SKU-je
 azd env set AZURE_OPENAI_SKU S0
 azd env set AZURE_SEARCH_SKU standard
 
@@ -249,37 +249,37 @@ azd env set AZURE_SEARCH_SKU standard
 azd env set ENABLE_PRIVATE_ENDPOINTS true
 ```
 
-### **Lab vaja 3.1: Optimizacija stroškov**
+### **Laboratorijska vaja 3.1: Optimizacija stroškov**
 
-**Izziv**: Konfigurirajte predlogo za stroškovno učinkoviti razvoj.
+**Izziv**: Konfigurirajte vzorec za stroškovno učinkovito razvojno okolje.
 
 **Naloge:**
-1. Določite, katere SKU-je je mogoče nastaviti na brezplačne/osnovne nivoje
+1. Določite, kateri SKU-ji se lahko nastavijo na brezplačne/osnovne stopnje
 2. Konfigurirajte okoljske spremenljivke za minimalne stroške
-3. Razmestite in primerjajte stroške s produkcijsko konfiguracijo
+3. Namestite in primerjajte stroške s proizvodno konfiguracijo
 
 **Namigi za rešitev:**
-- Po možnosti uporabite nivo F0 (brezplačno) za Azure AI storitve
-- V razvoju uporabite osnovni nivo za Search Service
+- Uporabite F0 (brezplačno) stopnjo za Azure AI storitve, če je mogoče
+- Uporabite osnovno stopnjo za Search Service v razvoju
 - Razmislite o uporabi Consumption načrta za Functions
 
-## Modul 4: Varnost in najboljše prakse za produkcijo
+## Modul 4: Varnost in najboljše proizvodne prakse
 
-### Korak 4.1: Varen način upravljanja poverilnic
+### Korak 4.1: Varen upravljanje poverilnic
 
-**Trenutni izziv**: Veliko AI aplikacij vgrajuje API ključe ali uporablja nezavarovano shrambo.
+**Trenutni izziv**: Mnoge AI aplikacije imajo zakodirane API ključe ali uporabljajo nezavarovano shrambo.
 
-**AZD rešitev**: Integracija Managed Identity in Key Vault.
+**AZD rešitev**: Uporaba Managed Identity + integracija s Key Vault.
 
-1. **Preglejte varnostno konfiguracijo v vaši predlogi:**
+1. **Preglejte varnostno konfiguracijo v vašem vzorcu:**
 ```bash
-# Poiščite konfiguracijo Key Vaulta in upravljane identitete
+# Poiščite konfiguracijo Key Vault in Upravljane identitete
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
-2. **Preverite, ali Managed Identity deluje:**
+2. **Preverite, da Managed Identity deluje:**
 ```bash
-# Preveri, ali ima spletna aplikacija pravilno konfiguracijo identitete
+# Preverite, ali spletna aplikacija ima pravilno konfiguracijo identitete
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
@@ -287,7 +287,7 @@ az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 
 1. **Omogočite zasebne končne točke** (če še niso konfigurirane):
 
-Dodajte v vašo bicep predlogo:
+Dodajte v vaš bicep vzorec:
 ```bicep
 // Private endpoint for OpenAI
 resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
@@ -310,18 +310,18 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-### Korak 4.3: Spremljanje in opazovanje
+### Korak 4.3: Nadzor in opazovanje
 
 1. **Konfigurirajte Application Insights:**
 ```bash
-# Application Insights naj bi bil samodejno konfiguriran
+# Application Insights bi morali biti samodejno konfigurirani
 # Preverite konfiguracijo:
 az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
-2. **Nastavite spremljanje specifično za AI:**
+2. **Nastavite AI-specifični nadzor:**
 
-Dodajte po meri prilagojene meritve za AI operacije:
+Dodajte prilagojene metrike za AI operacije:
 ```bicep
 // In your web app configuration
 resource webApp 'Microsoft.Web/sites@2023-01-01' = {
@@ -342,49 +342,49 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-### **Lab vaja 4.1: Varnostni pregled**
+### **Laboratorijska vaja 4.1: Varnostni pregled**
 
-**Naloga**: Preglejte vašo razmestitev glede varnostnih najboljših praks.
+**Naloga**: Preglejte vašo namestitev glede najboljših varnostnih praks.
 
 **Kontrolni seznam:**
-- [ ] Brez vgrajenih skrivnosti v kodi ali konfiguraciji
-- [ ] Uporablja se Managed Identity za overjanje med storitvami
-- [ ] Key Vault hrani občutljive konfiguracije
-- [ ] Dostop do omrežja je pravilno omejen
-- [ ] Spremljanje in beleženje sta omogočena
+- [ ] Brez zakodiranih skrivnosti v kodi ali konfiguraciji
+- [ ] Uporabljena Managed Identity za avtentikacijo med storitvami
+- [ ] Key Vault hrani občutljivo konfiguracijo
+- [ ] Omrežni dostop je pravilno omejen
+- [ ] Nadzor in beleženje sta omogočena
 
-## Modul 5: Pretvorba vaše AI aplikacije
+## Modul 5: Pretvorba vaše lastne AI aplikacije
 
-### Korak 5.1: Ocena - delovni list
+### Korak 5.1: Ocena
 
-**Pred pretvorbo aplikacije**, odgovorite na ta vprašanja:
+**Pred pretvorbo aplikacije** odgovorite na naslednja vprašanja:
 
 1. **Arhitektura aplikacije:**
-   - Katerih AI storitev vaša aplikacija uporablja?
-   - Kakšne računske vire potrebuje?
-   - Ali potrebuje bazo podatkov?
+   - Katere AI storitve uporablja vaša aplikacija?
+   - Kateri računalniški viri so potrebni?
+   - Ali potrebuje podatkovno bazo?
    - Kakšne so odvisnosti med storitvami?
 
 2. **Varnostne zahteve:**
-   - S katerimi občutljivimi podatki aplikacija upravlja?
-   - Kakšne zahteve za skladnost imate?
+   - Katere občutljive podatke vaša aplikacija obravnava?
+   - Katere zahteve glede skladnosti imate?
    - Ali potrebujete zasebno omrežje?
 
 3. **Zahteve za skaliranje:**
    - Kakšna je pričakovana obremenitev?
-   - Ali potrebujete avtomatsko skaliranje?
-   - Ali obstajajo regionalne zahteve?
+   - Ali potrebujete samodejno skaliranje?
+   - Ali so regionalne zahteve?
 
-### Korak 5.2: Ustvarite svojo AZD predlogo
+### Korak 5.2: Ustvarite svoj AZD vzorec
 
-**Sledite temu vzorcu za pretvorbo aplikacije:**
+**Sledite temu vzorcu za pretvorbo vaše aplikacije:**
 
 1. **Ustvarite osnovno strukturo:**
 ```bash
 mkdir my-ai-app-azd
 cd my-ai-app-azd
 
-# Inicializiraj AZD predlogo
+# Inicializirajte AZD predlogo
 azd init --template minimal
 ```
 
@@ -411,9 +411,9 @@ hooks:
     run: echo "Preparing AI models..."
 ```
 
-3. **Ustvarite infrastrukturne predloge:**
+3. **Ustvarite infrastrukturne vzorce:**
 
-**infra/main.bicep** - Glavna predloga:
+**infra/main.bicep** - glavni vzorec:
 ```bicep
 @description('Primary location for all resources')
 param location string = resourceGroup().location
@@ -431,7 +431,7 @@ module openAI 'modules/openai.bicep' = {
 }
 ```
 
-**infra/modules/openai.bicep** - Modul OpenAI:
+**infra/modules/openai.bicep** - OpenAI modul:
 ```bicep
 @description('Name of the OpenAI service')
 param name string
@@ -455,40 +455,40 @@ output endpoint string = openAIAccount.properties.endpoint
 output name string = openAIAccount.name
 ```
 
-### **Lab vaja 5.1: Izziv ustvarjanja predloge**
+### **Laboratorijska vaja 5.1: Izziv ustvarjanja vzorca**
 
-**Izziv**: Ustvarite AZD predlogo za AI aplikacijo za obdelavo dokumentov.
+**Izziv**: Ustvarite AZD vzorec za AI aplikacijo za obdelavo dokumentov.
 
 **Zahteve:**
 - Microsoft Foundry Models za analizo vsebine
 - Document Intelligence za OCR
-- Storage Account za nalaganje dokumentov
-- Function App za obdelovalno logiko
+- Shramba za nalaganje dokumentov
+- Funkcijska aplikacija za obdelavo logike
 - Spletna aplikacija za uporabniški vmesnik
 
-**Dodatne točke:**
-- Dodajte pravilno obravnavo napak
+**Bonus točke:**
+- Dodajte ustrezno obravnavo napak
 - Vključite oceno stroškov
-- Nastavite nadzorne plošče za spremljanje
+- Nastavite nadzorne nadzorne plošče
 
 ## Modul 6: Odpravljanje pogostih težav
 
-### Pogoste težave pri razmestitvi
+### Pogoste težave pri namestitvi
 
-#### Težava 1: Presežena kvota storitve OpenAI
-**Simptomi:** Razmestitev ne uspe zaradi napake kvote
+#### Težava 1: Presežen kvota za OpenAI storitev
+**Simptomi:** Namestitev ne uspe zaradi napake kvote
 **Rešitve:**
 ```bash
-# Preverite trenutne kvote
+# Preveri trenutne kvote
 az cognitiveservices usage list --location eastus
 
-# Zahtevajte povečanje kvote ali poskusite z drugo regijo
+# Zahtevaj povečanje kvote ali poizkusi z drugo regijo
 azd env set AZURE_LOCATION westus2
 azd up
 ```
 
 #### Težava 2: Model ni na voljo v regiji
-**Simptomi:** AI odgovori ne delujejo ali napake pri razmestitvi modela
+**Simptomi:** AI odgovori ne delujejo ali napake pri namestitvi modela
 **Rešitve:**
 ```bash
 # Preveri razpoložljivost modela po regijah
@@ -499,8 +499,8 @@ azd env set AZURE_OPENAI_MODEL gpt-4.1-mini
 azd deploy
 ```
 
-#### Težava 3: Težave s dovoljenji
-**Simptomi:** Napake 403 Forbidden pri klicih AI storitev
+#### Težava 3: Težave z dovoljenji
+**Simptomi:** 403 Zavrnjeno napake pri klicanju AI storitev
 **Rešitve:**
 ```bash
 # Preveri dodelitve vlog
@@ -513,49 +513,49 @@ az role assignment create \
   --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 ```
 
-### Težave s zmogljivostjo
+### Težave z zmogljivostjo
 
 #### Težava 4: Počasni AI odgovori
-**Koraki za preiskavo:**
-1. Preverite Application Insights za metrike zmogljivosti
+**Koraki za raziskovanje:**
+1. Preverite metrike uspešnosti v Application Insights
 2. Preglejte metrike OpenAI storitve v Azure portalu
 3. Preverite omrežno povezljivost in zakasnitev
 
 **Rešitve:**
 - Uvedite predpomnjenje za pogoste poizvedbe
 - Uporabite ustrezen OpenAI model za vaš primer uporabe
-- Razmislite o bralnih replikah za scenarije z veliko obremenitvijo
+- Razmislite o berljivih kopijah za scenarije z veliko obremenitvijo
 
-### **Lab vaja 6.1: Izziv razhroščevanja**
+### **Laboratorijska vaja 6.1: Izziv odpravljanja napak**
 
-**Scenarij**: Razmestitev je uspela, vendar aplikacija vrača napake 500.
+**Scenarij**: Namestitev je uspela, vendar aplikacija vrača napake 500.
 
-**Naloge za razhroščevanje:**
-1. Preverite dnevnike aplikacije
+**Naloge odpravljanja napak:**
+1. Preglejte dnevnike aplikacije
 2. Preverite povezljivost storitev
-3. Preizkusite overjanje
+3. Preizkusite avtentikacijo
 4. Preglejte konfiguracijo
 
 **Orodja za uporabo:**
-- `azd show` za pregled razmestitve
+- `azd show` za pregled namestitve
 - Azure portal za podrobne dnevnike storitev
 - Application Insights za telemetrijo aplikacije
 
-## Modul 7: Spremljanje in optimizacija
+## Modul 7: Nadzor in optimizacija
 
-### Korak 7.1: Nastavite celovito spremljanje
+### Korak 7.1: Nastavitev celovitega nadzora
 
 1. **Ustvarite prilagojene nadzorne plošče:**
 
-Pojdite v Azure portal in ustvarite nadzorno ploščo z:
-- Število zahtev in zakasnitev OpenAI
-- Stopnje napak aplikacije
-- Izraba virov
-- Sledenje stroškov
+Pomaknite se v Azure portal in ustvarite nadzorno ploščo z:
+- Število in zakasnitev zahtev OpenAI
+- Stopnja napak aplikacije
+- Uporaba virov
+- Spremljanje stroškov
 
 2. **Nastavite opozorila:**
 ```bash
-# Opozorilo o visoki stopnji napak
+# Opozorilo za visoko stopnjo napak
 az monitor metrics alert create \
   --name "AI-App-High-Error-Rate" \
   --resource-group YOUR_RG \
@@ -572,111 +572,112 @@ az monitor metrics alert create \
 az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 ```
 
-2. **Uvedite ukrepe za nadzor stroškov:**
-- Nastavite proračunska opozorila
-- Uporabite politike avtomatskega skaliranja
+2. **Uvedite stroškovne kontrole:**
+- Nastavite opozorila proračuna
+- Uporabite politike samodejnega skaliranja
 - Uvedite predpomnjenje zahtev
-- Spremljajte porabo tokenov za OpenAI
+- Spremljajte uporabo žetonov za OpenAI
 
-### **Lab vaja 7.1: Optimizacija zmogljivosti**
+### **Laboratorijska vaja 7.1: Optimizacija zmogljivosti**
 
-**Naloga**: Optimizirajte AI aplikacijo tako za zmogljivost kot stroške.
+**Naloga**: Optimizirajte vašo AI aplikacijo tako za zmogljivost kot stroške.
 
-**Metrike za izboljšanje:**
-- Zmanjšajte povprečni odzivni čas za 20%
+**Metrične izboljšave:**
+- Zmanjšajte povprečni čas odziva za 20%
 - Zmanjšajte mesečne stroške za 15%
 - Ohranjajte 99,9% razpoložljivost
 
-**Strategije za preizkus:**
-- Uvedite predpomnjenje odgovorov
-- Optimirajte pozive za učinkovitost tokenov
-- Uporabite ustrezne računske SKU-je
-- Nastavite ustrezno avtomatsko skaliranje
+**Strategije za poskus:**
+- Uvedite predpomnjenje odzivov
+- Optimizirajte spodbujevalnike za učinkovitost žetonov
+- Uporabite ustrezne računalniške SKU-je
+- Nastavite pravilno samodejno skaliranje
 
 ## Zaključni izziv: Celovita implementacija
 
 ### Scenarij izziva
 
-Vaša naloga je ustvariti produkcijsko pripraven chatbot za podporo strankam, pogonjen z AI, s temi zahtevami:
+Vaša naloga je ustvariti proizvodni AI poganjan klepetalni robot za podporo strankam z naslednjimi zahtevami:
 
 **Funkcionalne zahteve:**
-- Spletni vmesnik za interakcije s strankami
+- Spletni vmesnik za interakcijo s strankami
 - Integracija z Microsoft Foundry Models za odgovore
-- Možnost iskanja dokumentov z uporabo Azure AI Search
-- Integracija z obstoječo bazo strank
+- Iskanje po dokumentih z uporabo Azure AI Search
+- Integracija z obstoječo bazo podatkov strank
 - Podpora za več jezikov
 
 **Ne-funkcionalne zahteve:**
-- Podpreti 1000 sočasnih uporabnikov
-- SLA z 99,9% razpoložljivostjo
-- Skladnost z SOC 2
-- Stroški pod $500/mesec
-- Razmestiti v več okolij (dev, staging, prod)
+- Podpora za 1000 sočasnih uporabnikov
+- 99,9% garancija razpoložljivosti SLA
+- Skladnost s SOC 2
+- Stroški pod 500 $/mesec
+- Namestitev v več okoljih (dev, staging, prod)
 
-### Koraki implementacije
+### Koraki izvedbe
 
-1. Načrtujte arhitekturo
-2. Ustvarite AZD predlogo
-3. Izvedite varnostne ukrepe
-4. Nastavite spremljanje in opozarjanje
-5. Ustvarite cevi za razmestitev
-6. Dokumentirajte rešitev
+1. **Načrtujte arhitekturo**
+2. **Ustvarite AZD vzorec**
+3. **Izvedite varnostne ukrepe**
+4. **Nastavite nadzor in opozorila**
+5. **Ustvarite cevi za namestitev**
+6. **Dokumentirajte rešitev**
 
-### Kriteriji ocenjevanja
+### Merila za ocenjevanje
 
-- ✅ Funkcionalnost: Ali izpolnjuje vse zahteve?
-- ✅ Varnost: Ali so implementirane najboljše prakse?
-- ✅ Skalabilnost: Ali lahko prenese obremenitev?
-- ✅ Vzdrževanje: Ali sta koda in infrastruktura dobro organizirani?
-- ✅ Stroški: Ali ostaja znotraj proračuna?
+- ✅ **Funkcionalnost**: Ali izpolnjuje vse zahteve?
+- ✅ **Varnost**: So najboljše prakse implementirane?
+- ✅ **Razširljivost**: Ali lahko prenese obremenitev?
+- ✅ **Vzdržljivost**: Ali sta koda in infrastruktura dobro organizirani?
+- ✅ **Stroški**: Ali ostaja znotraj proračuna?
 
 ## Dodatni viri
 
 ### Microsoft dokumentacija
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Microsoft Foundry Models Service Documentation](https://learn.microsoft.com/azure/cognitive-services/openai/)
-- [Microsoft Foundry Documentation](https://learn.microsoft.com/azure/ai-studio/)
+- [Dokumentacija Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Dokumentacija Microsoft Foundry Models storitve](https://learn.microsoft.com/azure/cognitive-services/openai/)
+- [Dokumentacija Microsoft Foundry](https://learn.microsoft.com/azure/ai-studio/)
 
-### Vzorcne predloge
-- [Microsoft Foundry Models Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
-- [OpenAI Chat App Quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart)
+### Vzorci
+- [Microsoft Foundry Models Chat Aplikacija](https://github.com/Azure-Samples/azure-search-openai-demo)
+- [Hitri začetek OpenAI Chat Aplikacije](https://github.com/Azure-Samples/openai-chat-app-quickstart)
+
 - [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
 
-### Viri skupnosti
+### Skupnostni viri
 - [Microsoft Foundry Discord](https://discord.gg/microsoft-azure)
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
 - [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
 
 ## 🎓 Potrdilo o zaključku
 
-Čestitke! Zaključili ste AI delavnico. Sedaj bi morali biti sposobni:
+Čestitamo! Zaključili ste delavnico AI. Zdaj bi morali biti sposobni:
 
 - ✅ Pretvoriti obstoječe AI aplikacije v AZD predloge
-- ✅ Razmestiti AI aplikacije, pripravljene za produkcijo
-- ✅ Uvesti varnostne najboljše prakse za AI delovne obremenitve
-- ✅ Nadzorovati in optimizirati zmogljivost AI aplikacij
-- ✅ Odpravljati pogoste težave pri razmestitvi
+- ✅ Namestiti produkcijsko pripravljene AI aplikacije
+- ✅ Izvesti varnostne najboljše prakse za AI obremenitve
+- ✅ Nadzorovati in optimizirati delovanje AI aplikacij
+- ✅ Reševati pogoste težave z nameščanjem
 
 ### Naslednji koraki
 1. Uporabite te vzorce v svojih AI projektih
-2. Prispevajte predloge skupnosti
-3. Pridružite se Microsoft Foundry Discord za nadaljnjo podporo
-4. Raziščite napredne teme, kot so razmestitve v več regijah
+2. Prispevajte predloge skupnosti nazaj
+3. Pridružite se Microsoft Foundry Discord za stalno podporo
+4. Raziščite napredne teme, kot so nameščanja v več regijah
 
 ---
 
-**Povratne informacije o delavnici**: Pomagajte nam izboljšati to delavnico tako, da delite svoje izkušnje v [Microsoft Foundry Discord kanalu #Azure](https://discord.gg/microsoft-azure).
+**Povratne informacije delavnice**: Pomagajte nam izboljšati to delavnico tako, da delite svoje izkušnje v [kanalu #Azure na Microsoft Foundry Discord](https://discord.gg/microsoft-azure).
 
 ---
 
-**Navigacija poglavij:**
-- **📚 Domača stran tečaja**: [AZD For Beginners](../../README.md)
-- **📖 Trenutno poglavje**: Poglavje 2 - Razvoj, ki daje prednost AI
-- **⬅️ Prejšnje**: [Razmestitev AI modela](ai-model-deployment.md)
-- **➡️ Naslednje**: [Najboljše prakse za produkcijski AI](production-ai-practices.md)
+**Navigacija po poglavjih:**
+- **📚 Domov tečaja**: [AZD Za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 2 - AI-prvo razvoj
+- **⬅️ Prejšnje**: [Nameščanje AI modela](ai-model-deployment.md)
+- **➡️ Naslednje**: [Najboljše prakse produkcijske AI](production-ai-practices.md)
 - **🚀 Naslednje poglavje**: [Poglavje 3: Konfiguracija](../chapter-03-configuration/configuration.md)
 
-**Potrebujete pomoč?** Pridružite se naši skupnosti za podporo in razprave o AZD in razmestitvah AI.
+**Potrebujete pomoč?** Pridružite se naši skupnosti za podporo in razprave o AZD in nameščanju AI.
 
 ---
 

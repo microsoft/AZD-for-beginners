@@ -1,22 +1,22 @@
 # Bölüm 3: Yapılandırma ve Kimlik Doğrulama
 
-**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Süre**: 45-60 dakika | **⭐ Zorluk**: Orta
+**📚 Kurs**: [Başlangıç için AZD](../../README.md) | **⏱️ Süre**: 45-60 dakika | **⭐ Zorluk Seviyesi**: Orta
 
 ---
 
 ## Genel Bakış
 
-Bu bölüm, Azure Developer CLI dağıtımları için ortam yapılandırması, kimlik doğrulama desenleri ve güvenlik en iyi uygulamalarını kapsar.
+Bu bölümde Azure Developer CLI dağıtımları için ortam yapılandırması, kimlik doğrulama kalıpları ve güvenlik en iyi uygulamaları ele alınmaktadır.
 
-> Validated against `azd 1.25.6` in Haziran 2026.
+> Temmuz 2026'da `azd 1.27.1` ile doğrulanmıştır.
 
 ## Öğrenme Hedefleri
 
-Bu bölümü tamamlayarak şunları yapacaksınız:
-- AZD yapılandırma hiyerarşisine hakim olmak
-- Birden fazla ortamı yönetmek (dev, staging, prod)
-- Yönetilen kimliklerle güvenli kimlik doğrulaması uygulamak
-- Ortamlara özel ayarları yapılandırmak
+Bu bölümü tamamlayarak:
+- AZD yapılandırma hiyerarşisini ustaca kullanacaksınız
+- Birden çok ortamı (geliştirme, test, üretim) yöneteceksiniz
+- Yönetilen kimliklerle güvenli kimlik doğrulamasını uygulayacaksınız
+- Ortama özgü ayarları yapılandıracaksınız
 
 ---
 
@@ -24,7 +24,7 @@ Bu bölümü tamamlayarak şunları yapacaksınız:
 
 | # | Ders | Açıklama | Süre |
 |---|--------|-------------|------|
-| 1 | [Yapılandırma Kılavuzu](configuration.md) | Ortam kurulumu ve yönetimi | 30 dk |
+| 1 | [Yapılandırma Rehberi](configuration.md) | Ortam kurulumu ve yönetimi | 30 dk |
 | 2 | [Kimlik Doğrulama ve Güvenlik](authsecurity.md) | Yönetilen kimlik ve RBAC kalıpları | 30 dk |
 
 ---
@@ -52,9 +52,9 @@ azd env get-values
 
 ## 🔧 Yapılandırma Hiyerarşisi
 
-AZD ayarları şu sırayla uygular (sonraki, öncekini geçersiz kılar):
+AZD ayarları şu sırayla uygular (sonrakiler öncekinin yerini alır):
 
-1. **Varsayılan değerler** (şablonlara gömülü)
+1. **Varsayılan değerler** (şablonların içine gömülü)
 2. **azure.yaml** (proje yapılandırması)
 3. **Ortam değişkenleri** (`azd env set`)
 4. **Komut satırı bayrakları** (`--location eastus`)
@@ -64,7 +64,7 @@ AZD ayarları şu sırayla uygular (sonraki, öncekini geçersiz kılar):
 ## 🔐 Güvenlik En İyi Uygulamaları
 
 ```bash
-# Yönetilen kimlik kullanın (önerilir)
+# Yönetilen kimliği kullanın (önerilir)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
 # AZD kimlik doğrulama durumunu kontrol edin
@@ -73,7 +73,7 @@ azd auth status
 # İsteğe bağlı: az komutlarını çalıştırmayı planlıyorsanız Azure CLI bağlamını doğrulayın
 az account show
 
-# Gerekirse yeniden kimlik doğrulaması yapın
+# Gerekirse tekrar kimlik doğrulaması yapın
 azd auth login
 
 # İsteğe bağlı: az komutları için Azure CLI kimlik doğrulamasını yenileyin
@@ -82,7 +82,7 @@ az login
 
 ---
 
-## 🔗 Gezinme
+## 🔗 Navigasyon
 
 | Yön | Bölüm |
 |-----------|---------|
@@ -93,7 +93,7 @@ az login
 
 ## 📖 İlgili Kaynaklar
 
-- [Dağıtımdan Önce Kontroller](../chapter-06-pre-deployment/README.md)
+- [Dağıtım Öncesi Kontroller](../chapter-06-pre-deployment/README.md)
 - [Sorun Giderme](../chapter-07-troubleshooting/common-issues.md)
 
 ---

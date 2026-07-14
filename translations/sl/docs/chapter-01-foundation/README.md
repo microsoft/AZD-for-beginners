@@ -6,17 +6,17 @@
 
 ## Pregled
 
-To poglavje predstavlja osnove Azure Developer CLI (azd). Naučili se boste temeljnih konceptov, namestili orodja in razmestili svojo prvo aplikacijo v Azure.
+To poglavje uvaja temelje Azure Developer CLI (azd). Spoznali boste osnovne pojme, namestili orodja in razporedili svojo prvo aplikacijo v Azure.
 
-> Preverjeno z `azd 1.25.6` v juniju 2026.
+> Preizkušeno z `azd 1.27.1` julija 2026.
 
 ## Cilji učenja
 
 Z dokončanjem tega poglavja boste:
-- Razumeti, kaj je Azure Developer CLI in kako se razlikuje od Azure CLI
-- Namestiti in konfigurirati AZD na vaši platformi
-- Razmestiti svojo prvo aplikacijo v Azure z `azd up`
-- Počistiti vire z `azd down`
+- Razumeli, kaj je Azure Developer CLI in kako se razlikuje od Azure CLI
+- Namestili in konfigurirali AZD na svoji platformi
+- Razporedili svojo prvo aplikacijo v Azure z `azd up`
+- Počistili vire z `azd down`
 
 ---
 
@@ -24,17 +24,17 @@ Z dokončanjem tega poglavja boste:
 
 | # | Lekcija | Opis | Čas |
 |---|--------|-------------|------|
-| 1 | [Osnove AZD](azd-basics.md) | Osnovni koncepti, terminologija in struktura projekta | 15 min |
-| 2 | [Namestitev in nastavitev](installation.md) | Vodniki za namestitev, specifični za platformo | 10 min |
-| 3 | [Vaš prvi projekt](first-project.md) | Praktično: Razmestitev spletne aplikacije v Azure | 20 min |
-| 4 | [Dodajte svojo aplikacijo](bring-your-own-app.md) | Dodajte azd obstoječemu projektu, ki ga že imate | 15 min |
-| 5 | [Razvojni kontejnerji in Codespaces](dev-containers.md) | Ponovljivi azd-okolji z razvojnimi kontejnerji | 15 min |
+| 1 | [Osnove AZD](azd-basics.md) | Osnovni pojmi, terminologija in struktura projekta | 15 min |
+| 2 | [Namestitev in nastavitev](installation.md) | Vodniki po namestitvi za specificirane platforme | 10 min |
+| 3 | [Vaš prvi projekt](first-project.md) | Praktično: Razporeditev spletne aplikacije v Azure | 20 min |
+| 4 | [Uporabite svojo aplikacijo](bring-your-own-app.md) | Dodajte azd v obstoječi projekt, ki ga že imate | 15 min |
+| 5 | [Razvojni zabojniki in Codespaces](dev-containers.md) | Reproducibilna okolja azd z razvojnimi zabojniki | 15 min |
 
 ---
 
-## ✅ Začni tukaj: Preverite svojo namestitev
+## ✅ Začnite tukaj: Preverite svojo namestitev
 
-Preden začnete, potrdite, da je vaš lokalni računalnik pripravljen za predlogo Poglavja 1:
+Pred začetkom potrdite, da je vaš lokalni računalnik pripravljen za predlogo poglavja 1:
 
 **Windows:**
 ```powershell
@@ -46,25 +46,25 @@ Preden začnete, potrdite, da je vaš lokalni računalnik pripravljen za predlog
 bash ./validate-setup.sh
 ```
 
-If the script reports missing tools, fix those first and then continue with the chapter.
+Če skripta poroča o manjkajočih orodjih, jih najprej odpravite in nato nadaljujte s poglavjem.
 
 ---
 
 ## 🚀 Hiter začetek
 
 ```bash
-# Preverite namestitev
+# Preveri namestitev
 azd version
 
-# Prijavite se za AZD
+# Avtentikacija za AZD
 # Neobvezno: az login, če nameravate neposredno zagnati ukaze Azure CLI
 azd auth login
 
-# Razmestite svojo prvo aplikacijo
+# Namestite svojo prvo aplikacijo
 azd init --template todo-nodejs-mongo
 azd up
 
-# Po koncu počistite
+# Po končanem čiščenje
 azd down --force --purge
 ```
 
@@ -72,13 +72,13 @@ azd down --force --purge
 
 ## ✅ Merila uspeha
 
-Po končanem poglavju boste lahko:
+Po zaključku tega poglavja bi morali biti sposobni:
 
 ```bash
 azd version              # Prikaže nameščeno različico
 azd init --template todo-nodejs-mongo  # Inicializira projekt
-azd up                   # Razporedi v Azure
-azd show                 # Prikaže URL delujoče aplikacije
+azd up                   # Razporedi na Azure
+azd show                 # Prikaže URL zagnane aplikacije
 azd down --force --purge # Počisti vire
 ```
 
@@ -88,16 +88,16 @@ azd down --force --purge # Počisti vire
 
 | Smer | Poglavje |
 |-----------|---------|
-| **Naprej** | [Poglavje 2: Razvoj, osredotočen na AI](../chapter-02-ai-development/README.md) |
+| **Naslednje** | [Poglavje 2: Razvoj z umetno inteligenco](../chapter-02-ai-development/README.md) |
 | **Preskoči na** | [Poglavje 3: Konfiguracija](../chapter-03-configuration/README.md) |
 
 ---
 
-## 📖 Sorodni viri
+## 📖 Povezani viri
 
 - [Povzetek ukazov](../../resources/cheat-sheet.md)
 - [Pogosta vprašanja](../../resources/faq.md)
-- [Pojmovnik](../../resources/glossary.md)
+- [Slovarček](../../resources/glossary.md)
 
 ---
 

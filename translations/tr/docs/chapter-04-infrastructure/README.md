@@ -1,22 +1,22 @@
-# Bölüm 4: Altyapı Kod Olarak (Infrastructure as Code) & Dağıtım
+# Bölüm 4: Altyapı Kod Olarak & Dağıtım
 
-**📚 Kurs**: [AZD Yeni Başlayanlar](../../README.md) | **⏱️ Süre**: 1-1.5 saat | **⭐ Zorluk**: Orta
+**📚 Kurs**: [AZD Yeni Başlayanlar için](../../README.md) | **⏱️ Süre**: 1-1.5 saat | **⭐ Zorluk Seviyesi**: Orta
 
 ---
 
 ## Genel Bakış
 
-Bu bölüm, Bicep şablonlarıyla Altyapıyı Kod Olarak (IaC) kalıplarını, kaynak sağlama ve Azure Developer CLI kullanarak dağıtım stratejilerini kapsar.
+Bu bölüm, Bicep şablonları kullanılarak Altyapıyı Kod Olarak (IaC) modelini, kaynak sağlama ve Azure Developer CLI ile dağıtım stratejilerini kapsar.
 
-> Haziran 2026'da `azd 1.25.6` ile doğrulandı.
+> Temmuz 2026'da `azd 1.27.1` ile doğrulanmıştır.
 
 ## Öğrenme Hedefleri
 
-By completing this chapter, you will:
-- Bicep şablon yapısını ve sözdizimini anlamak
-- `azd provision` ile Azure kaynakları sağlamak
-- `azd deploy` ile uygulamaları dağıtmak
-- Mavi-yeşil ve kademeli dağıtım stratejilerini uygulamak
+Bu bölümü tamamlayarak:
+- Bicep şablon yapısını ve sözdizimini anlayacaksınız
+- `azd provision` ile Azure kaynaklarını sağlayacaksınız
+- `azd deploy` ile uygulamaları dağıtacaksınız
+- Mavi-yeşil ve kademeli dağıtım stratejilerini uygulayacaksınız
 
 ---
 
@@ -24,9 +24,9 @@ By completing this chapter, you will:
 
 | # | Ders | Açıklama | Süre |
 |---|--------|-------------|------|
-| 1 | [Provisioning Resources](provisioning.md) | AZD ile Azure kaynak yönetimi | 45 dk |
-| 2 | [Deployment Guide](deployment-guide.md) | Uygulama dağıtım stratejileri | 45 dk |
-| 3 | [Authoring Your Own Template](custom-templates.md) | Yeniden kullanılabilir azd şablonları oluşturma ve yayınlama | 30 dk |
+| 1 | [Kaynakların Sağlanması](provisioning.md) | AZD ile Azure kaynak yönetimi | 45 dk |
+| 2 | [Dağıtım Rehberi](deployment-guide.md) | Uygulama dağıtım stratejileri | 45 dk |
+| 3 | [Kendi Şablonunuzu Oluşturma](custom-templates.md) | Yeniden kullanılabilir azd şablonları oluşturma ve yayımlama | 30 dk |
 
 ---
 
@@ -36,16 +36,16 @@ By completing this chapter, you will:
 # Şablondan başlat
 azd init --template azure-functions-python-v2-http
 
-# Ne oluşturulacağını önizle
+# Oluşturulacak olanı önizle
 azd provision --preview
 
 # Yalnızca altyapıyı sağla
 azd provision
 
-# Sadece kodu dağıt
+# Yalnızca kodu dağıt
 azd deploy
 
-# Ya da her ikisini birlikte
+# Ya da her ikisi birden
 azd up
 ```
 
@@ -72,27 +72,27 @@ my-project/
 
 | Komut | Açıklama |
 |---------|-------------|
-| `azd init` | Projeyi başlatır |
-| `azd provision` | Azure kaynakları oluşturur |
-| `azd deploy` | Uygulama kodunu dağıtır |
-| `azd up` | kaynak sağlama + dağıtım |
-| `azd down` | Tüm kaynakları siler |
+| `azd init` | Projeyi başlat |
+| `azd provision` | Azure kaynakları oluştur |
+| `azd deploy` | Uygulama kodunu dağıt |
+| `azd up` | sağlama + dağıtım |
+| `azd down` | Tüm kaynakları sil |
 
 ---
 
-## 🔗 Gezinme
+## 🔗 Navigasyon
 
 | Yön | Bölüm |
 |-----------|---------|
 | **Önceki** | [Bölüm 3: Yapılandırma](../chapter-03-configuration/README.md) |
-| **Sonraki** | [Bölüm 5: Çok Ajanlı Çözümler](../chapter-05-multi-agent/README.md) |
+| **Sonraki** | [Bölüm 5: Çoklu Ajan Çözümleri](../chapter-05-multi-agent/README.md) |
 
 ---
 
 ## 📖 İlgili Kaynaklar
 
-- [Dağıtım Öncesi Kontroller](../chapter-06-pre-deployment/README.md)
-- [Konteyner Uygulama Örnekleri](../../examples/container-app/README.md)
+- [Dağıtımdan Önce Kontroller](../chapter-06-pre-deployment/README.md)
+- [Kapsayıcı Uygulama Örnekleri](../../examples/container-app/README.md)
 - [Veritabanı Uygulama Örneği](../../examples/database-app/README.md)
 
 ---

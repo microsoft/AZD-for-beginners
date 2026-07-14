@@ -1,21 +1,21 @@
-# Kapitola 4: Infrastruktúra ako kód a nasadenie
+# Kapitola 4: Infrastructure as Code & Nasadenie
 
-**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Trvanie**: 1-1,5 hodiny | **⭐ Zložitosť**: Stredná
+**📚 Kurz**: [AZD Pre Začiatočníkov](../../README.md) | **⏱️ Trvanie**: 1-1.5 hodiny | **⭐ Zložitosť**: Stredná
 
 ---
 
 ## Prehľad
 
-Táto kapitola pokrýva vzory Infrastructure as Code (IaC) so šablónami Bicep, provisioning zdrojov a stratégie nasadenia pomocou Azure Developer CLI.
+Táto kapitola pokrýva vzory Infrastructure as Code (IaC) s Bicep šablónami, provisioning zdrojov a stratégie nasadenia pomocou Azure Developer CLI.
 
-> Overené s `azd 1.25.6` v júni 2026.
+> Overené na `azd 1.27.1` v júli 2026.
 
-## Výukové ciele
+## Učebné ciele
 
 Po dokončení tejto kapitoly budete:
-- Pochopiť štruktúru a syntax šablón Bicep
-- Vytvoriť Azure zdroje pomocou `azd provision`
-- Nasadiť aplikácie pomocou `azd deploy`
+- Rozumieť štruktúre a syntaxe Bicep šablón
+- Provisionovať Azure zdroje s `azd provision`
+- Nasadzovať aplikácie s `azd deploy`
 - Implementovať blue-green a rolling stratégie nasadenia
 
 ---
@@ -23,10 +23,10 @@ Po dokončení tejto kapitoly budete:
 ## 📚 Lekcie
 
 | # | Lekcia | Popis | Čas |
-|---|--------|-------|------|
+|---|--------|-------------|------|
 | 1 | [Provisionovanie zdrojov](provisioning.md) | Správa Azure zdrojov pomocou AZD | 45 min |
 | 2 | [Sprievodca nasadením](deployment-guide.md) | Stratégie nasadenia aplikácií | 45 min |
-| 3 | [Tvorba vlastnej šablóny](custom-templates.md) | Vytvárajte a publikujte znovupoužiteľné azd šablóny | 30 min |
+| 3 | [Vytvorenie vlastnej šablóny](custom-templates.md) | Tvorba a publikovanie znovupoužiteľných azd šablón | 30 min |
 
 ---
 
@@ -39,13 +39,13 @@ azd init --template azure-functions-python-v2-http
 # Náhľad toho, čo bude vytvorené
 azd provision --preview
 
-# Iba nasadiť infraštruktúru
+# Zaviesť iba infraštruktúru
 azd provision
 
-# Iba nasadiť kód
+# Nasadiť iba kód
 azd deploy
 
-# Alebo oboje súčasne
+# Alebo oboje spolu
 azd up
 ```
 
@@ -71,12 +71,12 @@ my-project/
 ## 🔧 Základné príkazy
 
 | Príkaz | Popis |
-|--------|-------|
-| `azd init` | Inicializovať projekt |
-| `azd provision` | Vytvoriť Azure zdroje |
-| `azd deploy` | Nasadiť kód aplikácie |
-| `azd up` | vytvorenie + nasadenie |
-| `azd down` | Odstrániť všetky zdroje |
+|---------|-------------|
+| `azd init` | Inicializácia projektu |
+| `azd provision` | Vytvorenie Azure zdrojov |
+| `azd deploy` | Nasadenie aplikačného kódu |
+| `azd up` | provision + nasadenie |
+| `azd down` | Odstránenie všetkých zdrojov |
 
 ---
 
@@ -85,14 +85,14 @@ my-project/
 | Smer | Kapitola |
 |-----------|---------|
 | **Predchádzajúca** | [Kapitola 3: Konfigurácia](../chapter-03-configuration/README.md) |
-| **Ďalšia** | [Kapitola 5: Riešenia s viacerými agentmi](../chapter-05-multi-agent/README.md) |
+| **Nasledujúca** | [Kapitola 5: Multi-agentné riešenia](../chapter-05-multi-agent/README.md) |
 
 ---
 
 ## 📖 Súvisiace zdroje
 
-- [Kontroly pred nasadením](../chapter-06-pre-deployment/README.md)
-- [Príklady aplikácií v kontajneroch](../../examples/container-app/README.md)
+- [Pre-nasadenie kontroly](../chapter-06-pre-deployment/README.md)
+- [Príklady Container App](../../examples/container-app/README.md)
 - [Príklad databázovej aplikácie](../../examples/database-app/README.md)
 
 ---

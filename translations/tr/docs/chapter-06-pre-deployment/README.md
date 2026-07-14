@@ -1,23 +1,23 @@
-# Bölüm 6: Dağıtımdan Önce Planlama ve Doğrulama
+# Bölüm 6: Yayınlama Öncesi Planlama ve Doğrulama
 
-**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Süre**: 1 saat | **⭐ Zorluk**: Orta düzey
+**📚 Kurs**: [AZD Yeni Başlayanlar İçin](../../README.md) | **⏱️ Süre**: 1 saat | **⭐ Zorluk**: Orta Seviye
 
 ---
 
 ## Genel Bakış
 
-Bu bölüm, uygulamanızı dağıtmadan önceki temel planlama ve doğrulama adımlarını kapsar. Doğru kapasite planlaması, SKU seçimi ve preflight kontrolleriyle maliyetli hatalardan kaçınmayı öğrenin.
+Bu bölüm, uygulamanızı yayınlamadan önce gerekli planlama ve doğrulama adımlarını kapsamaktadır. Doğru kapasite planlaması, SKU seçimi ve ön kontrollerle maliyetli hatalardan nasıl kaçınacağınızı öğrenin.
 
-> Haziran 2026'da `azd 1.25.6` ile doğrulanmıştır.
+> Temmuz 2026'da `azd 1.27.1` ile doğrulanmıştır.
 
 ## Öğrenme Hedefleri
 
-By completing this chapter, you will:
-- Dağıtımdan önce preflight kontrollerini çalıştırın
-- Kapasite planlaması yapın ve kaynak gereksinimlerini tahmin edin
-- Maliyet optimizasyonu için uygun SKU'ları seçin
-- İzleme için Application Insights'ı yapılandırın
-- Ekip koordinasyon desenlerini anlayın
+Bu bölümü tamamlayarak:
+- Yayınlama öncesi ön kontrolleri yapacaksınız
+- Kapasiteyi planlayacak ve kaynak gereksinimlerini tahmin edeceksiniz
+- Maliyet optimizasyonu için uygun SKU'ları seçeceksiniz
+- İzleme için Application Insights yapılandıracaksınız
+- Takım koordinasyon kalıplarını anlayacaksınız
 
 ---
 
@@ -25,11 +25,11 @@ By completing this chapter, you will:
 
 | # | Ders | Açıklama | Süre |
 |---|--------|-------------|------|
-| 1 | [Preflight Kontrolleri](preflight-checks.md) | Dağıtımdan önce yapılandırmayı doğrulayın | 15 dk |
-| 2 | [Kapasite Planlaması](capacity-planning.md) | Kaynak gereksinimlerini tahmin edin | 20 dk |
-| 3 | [SKU Seçimi](sku-selection.md) | Uygun fiyatlandırma kademelerini seçin | 15 dk |
-| 4 | [Application Insights](application-insights.md) | İzlemeyi yapılandırın | 20 dk |
-| 5 | [Koordinasyon Desenleri](coordination-patterns.md) | Ekip dağıtım iş akışları | 15 dk |
+| 1 | [Ön Kontroller](preflight-checks.md) | Yayınlama öncesi yapılandırmayı doğrula | 15 dk |
+| 2 | [Kapasite Planlama](capacity-planning.md) | Kaynak gereksinimlerini tahmin et | 20 dk |
+| 3 | [SKU Seçimi](sku-selection.md) | Uygun fiyatlandırma kademelerini seç | 15 dk |
+| 4 | [Application Insights](application-insights.md) | İzlemeyi yapılandır | 20 dk |
+| 5 | [Koordinasyon Kalıpları](coordination-patterns.md) | Takım yayınlama iş akışları | 15 dk |
 
 ---
 
@@ -39,7 +39,7 @@ By completing this chapter, you will:
 # Abonelik kotalarını kontrol et
 az vm list-usage --location eastus --output table
 
-# Dağıtımı önizle (kaynak oluşturulmayacak)
+# Dağıtımı önizle (kaynak oluşturulmaz)
 azd provision --preview
 
 # Bicep sözdizimini doğrula
@@ -51,20 +51,20 @@ azd env get-values
 
 ---
 
-## ☑️ Dağıtımdan Önce Kontrol Listesi
+## ☑️ Yayınlama Öncesi Kontrol Listesi
 
 ### `azd provision` Öncesi
 
-- [ ] Bölge kotası doğrulandı
-- [ ] SKU'lar uygun şekilde seçildi
+- [ ] Bölge için kota doğrulandı
+- [ ] SKU'lar uygun seçildi
 - [ ] Maliyet tahmini gözden geçirildi
-- [ ] Adlandırma konvansiyonu tutarlı
+- [ ] İsimlendirme standardı tutarlı
 - [ ] Güvenlik/RBAC yapılandırıldı
 
 ### `azd deploy` Öncesi
 
 - [ ] Ortam değişkenleri ayarlandı
-- [ ] Gizli bilgiler Key Vault'ta
+- [ ] Anahtar Kasası'nda gizli bilgiler
 - [ ] Bağlantı dizeleri doğrulandı
 - [ ] Sağlık kontrolleri yapılandırıldı
 
@@ -74,26 +74,26 @@ azd env get-values
 
 | İş Yükü | Geliştirme | Üretim |
 |----------|-------------|------------|
-| Konteyner Uygulamaları | Tüketim | Dedicated D4 |
+| Container Apps | Tüketim | Adanmış D4 |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Modelleri | Standard | Standard + PTU |
-| AI Search | Temel | Standard S2+ |
+| Microsoft Foundry Modelleri | Standart | Standart + PTU |
+| AI Search | Temel | Standart S2+ |
 
 ---
 
-## 🔗 Gezinme
+## 🔗 Navigasyon
 
 | Yön | Bölüm |
 |-----------|---------|
-| **Önceki** | [Chapter 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
-| **Sonraki** | [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/README.md) |
+| **Önceki** | [Bölüm 5: Çoklu Ajan](../chapter-05-multi-agent/README.md) |
+| **Sonraki** | [Bölüm 7: Sorun Giderme](../chapter-07-troubleshooting/README.md) |
 
 ---
 
 ## 📖 İlgili Kaynaklar
 
 - [Yapılandırma Kılavuzu](../chapter-03-configuration/configuration.md)
-- [Dağıtım Rehberi](../chapter-04-infrastructure/deployment-guide.md)
+- [Yayınlama Kılavuzu](../chapter-04-infrastructure/deployment-guide.md)
 - [Yaygın Sorunlar](../chapter-07-troubleshooting/common-issues.md)
 
 ---

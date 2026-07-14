@@ -1,23 +1,23 @@
-# Chapter 6: Plannin & Validation Before Deployment
+# Chapter 6: Pre-Deployment Planning & Validation
 
-**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 1 awa | **⭐ Complexity**: Medium
+**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 1 hour | **⭐ Complexity**: Intermediate
 
 ---
 
 ## Overview
 
-Dis chapter dey cover the important plannin an validation steps wey you suppose do before you deploy your app. Learn how to avoid expensive mistakes with proper capacity plannin, SKU selection, an preflight checks.
+Dis chapter dey cover di important steps for planning and validation wey you gats do before you deploy your application. Learn how to avoid expensive mistakes with correct capacity planning, SKU selection, and preflight checks.
 
-> Dem don validate am against `azd 1.25.6` for June 2026.
+> Validated against `azd 1.27.1` in July 2026.
 
 ## Learning Objectives
 
-By completing this chapter, you go:
-- Run preflight checks before you deploy
-- Plan capacity and estimate resource requirements
-- Select appropriate SKUs to optimize cost
-- Configure Application Insights for monitoring
-- Understand how team dey coordinate
+By finishing dis chapter, you go:
+- Run preflight checks before deployment
+- Plan capacity and guess how much resource go need
+- Choose correct SKUs to save money
+- Set up Application Insights to monitor things well
+- Understand how team go coordinate work
 
 ---
 
@@ -26,9 +26,9 @@ By completing this chapter, you go:
 | # | Lesson | Description | Time |
 |---|--------|-------------|------|
 | 1 | [Preflight Checks](preflight-checks.md) | Check configuration before deployment | 15 min |
-| 2 | [Capacity Planning](capacity-planning.md) | Estimate resource requirements | 20 min |
-| 3 | [SKU Selection](sku-selection.md) | Choose appropriate pricing tiers | 15 min |
-| 4 | [Application Insights](application-insights.md) | Configure monitoring | 20 min |
+| 2 | [Capacity Planning](capacity-planning.md) | Guess how much resource you go need | 20 min |
+| 3 | [SKU Selection](sku-selection.md) | Pick correct price tiers | 15 min |
+| 4 | [Application Insights](application-insights.md) | Set up monitoring | 20 min |
 | 5 | [Coordination Patterns](coordination-patterns.md) | Team deployment workflows | 15 min |
 
 ---
@@ -36,16 +36,16 @@ By completing this chapter, you go:
 ## 🚀 Quick Start
 
 ```bash
-# Check subscription quota dem
+# Check di subscription quota dem
 az vm list-usage --location eastus --output table
 
-# Preview deployment (no resource dem go be created)
+# Preview di deployment (no resources go create)
 azd provision --preview
 
-# Make sure say Bicep syntax correct
+# Validate Bicep sintax
 az bicep build --file infra/main.bicep
 
-# Check how environment dey configured
+# Check environment konfiguration
 azd env get-values
 ```
 
@@ -55,18 +55,18 @@ azd env get-values
 
 ### Before `azd provision`
 
-- [ ] Quota don confirm for the region
-- [ ] SKUs don select correctly
-- [ ] Cost estimate don review
-- [ ] Naming convention dey consistent
-- [ ] Security/RBAC don configure
+- [ ] Quota check for region
+- [ ] SKUs pick correct
+- [ ] Money estimate review
+- [ ] Naming style consistent
+- [ ] Security/RBAC set up
 
 ### Before `azd deploy`
 
-- [ ] Environment variables don set
-- [ ] Secrets dey inside Key Vault
-- [ ] Connection strings don verify
-- [ ] Health checks don configure
+- [ ] Environment variables set
+- [ ] Secrets for Key Vault
+- [ ] Connection strings check
+- [ ] Health checks set up
 
 ---
 

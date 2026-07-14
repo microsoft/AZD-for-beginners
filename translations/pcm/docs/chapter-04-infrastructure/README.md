@@ -6,17 +6,17 @@
 
 ## Overview
 
-Dis chapter go cover Infrastructure as Code (IaC) patterns wit Bicep templates, how to provision resources, and deployment strategies usin the Azure Developer CLI.
+Dis chapter dey talk about Infrastructure as Code (IaC) patterns wit Bicep templates, how to arrange resources, and deployment ways wey use Azure Developer CLI.
 
-> Dem don validate am wit `azd 1.25.6` for June 2026.
+> Validated against `azd 1.27.1` in July 2026.
 
 ## Learning Objectives
 
-If you finish dis chapter, you go:
-- Understand how Bicep templates dey structured and how di syntax be
-- Provision Azure resources wit `azd provision`
-- Deploy application dem wit `azd deploy`
-- Use blue-green and rolling deployment strategies
+If you finish dis chapter, you go fit:
+- Understand Bicep template structure and syntax
+- Provision Azure resources with `azd provision`
+- Deploy applications with `azd deploy`
+- Implement blue-green and rolling deployment strategies
 
 ---
 
@@ -24,8 +24,8 @@ If you finish dis chapter, you go:
 
 | # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [Provisioning Resources](provisioning.md) | Manage Azure resources wit AZD | 45 min |
-| 2 | [Deployment Guide](deployment-guide.md) | Strategies for deployin application dem | 45 min |
+| 1 | [Provisioning Resources](provisioning.md) | Azure resource management with AZD | 45 min |
+| 2 | [Deployment Guide](deployment-guide.md) | Application deployment strategies | 45 min |
 | 3 | [Authoring Your Own Template](custom-templates.md) | Build and publish reusable azd templates | 30 min |
 
 ---
@@ -33,16 +33,16 @@ If you finish dis chapter, you go:
 ## 🚀 Quick Start
 
 ```bash
-# Start from di template
+# Start from template
 azd init --template azure-functions-python-v2-http
 
-# Preview wetin dem go create
+# See wetin go create first
 azd provision --preview
 
-# Set up di infrastructure only
+# Arrange only infrastructure
 azd provision
 
-# Deploy di code only
+# Put code only
 azd deploy
 
 # Or do both together
@@ -72,9 +72,9 @@ my-project/
 
 | Command | Description |
 |---------|-------------|
-| `azd init` | Set up di project |
+| `azd init` | Initialize project |
 | `azd provision` | Create Azure resources |
-| `azd deploy` | Deploy di application code |
+| `azd deploy` | Deploy application code |
 | `azd up` | provision + deploy |
 | `azd down` | Delete all resources |
 

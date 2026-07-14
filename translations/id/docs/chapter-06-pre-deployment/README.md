@@ -1,4 +1,4 @@
-# Bab 6: Perencanaan & Validasi Pra-Penyebaran
+# Bab 6: Perencanaan & Validasi Pra-Penerapan
 
 **📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Durasi**: 1 jam | **⭐ Kompleksitas**: Menengah
 
@@ -6,16 +6,16 @@
 
 ## Ikhtisar
 
-Bab ini membahas langkah-langkah perencanaan dan validasi penting sebelum menerapkan aplikasi Anda. Pelajari cara menghindari kesalahan yang mahal dengan perencanaan kapasitas yang tepat, pemilihan SKU, dan pemeriksaan pra-penyebaran.
+Bab ini membahas langkah penting perencanaan dan validasi sebelum menerapkan aplikasi Anda. Pelajari cara menghindari kesalahan mahal dengan perencanaan kapasitas yang tepat, pemilihan SKU, dan pemeriksaan awal.
 
-> Divalidasi terhadap `azd 1.25.6` pada Juni 2026.
+> Diverifikasi dengan `azd 1.27.1` pada Juli 2026.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan bab ini, Anda akan:
-- Menjalankan pemeriksaan pra-penyebaran sebelum penyebaran
+- Menjalankan pemeriksaan awal sebelum penerapan
 - Merencanakan kapasitas dan memperkirakan kebutuhan sumber daya
-- Memilih SKU yang sesuai untuk optimasi biaya
+- Memilih SKU yang tepat untuk optimasi biaya
 - Mengonfigurasi Application Insights untuk pemantauan
 - Memahami pola koordinasi tim
 
@@ -25,11 +25,11 @@ Dengan menyelesaikan bab ini, Anda akan:
 
 | # | Pelajaran | Deskripsi | Waktu |
 |---|--------|-------------|------|
-| 1 | [Pemeriksaan Pra-Deploy](preflight-checks.md) | Validasi konfigurasi sebelum penyebaran | 15 menit |
+| 1 | [Pemeriksaan Pra-Penerapan](preflight-checks.md) | Validasi konfigurasi sebelum penerapan | 15 menit |
 | 2 | [Perencanaan Kapasitas](capacity-planning.md) | Perkirakan kebutuhan sumber daya | 20 menit |
 | 3 | [Pemilihan SKU](sku-selection.md) | Pilih tingkat harga yang sesuai | 15 menit |
-| 4 | [Application Insights](application-insights.md) | Konfigurasikan pemantauan | 20 menit |
-| 5 | [Pola Koordinasi](coordination-patterns.md) | Alur kerja penyebaran tim | 15 menit |
+| 4 | [Application Insights](application-insights.md) | Konfigurasi pemantauan | 20 menit |
+| 5 | [Pola Koordinasi](coordination-patterns.md) | Alur kerja penerapan tim | 15 menit |
 
 ---
 
@@ -51,12 +51,12 @@ azd env get-values
 
 ---
 
-## ☑️ Daftar Periksa Pra-Penyebaran
+## ☑️ Daftar Periksa Pra-Penerapan
 
 ### Sebelum `azd provision`
 
-- [ ] Kuota diverifikasi untuk region
-- [ ] SKU dipilih sesuai
+- [ ] Kuota diverifikasi untuk wilayah
+- [ ] SKU dipilih dengan tepat
 - [ ] Estimasi biaya ditinjau
 - [ ] Konvensi penamaan konsisten
 - [ ] Keamanan/RBAC dikonfigurasi
@@ -64,7 +64,7 @@ azd env get-values
 ### Sebelum `azd deploy`
 
 - [ ] Variabel lingkungan diatur
-- [ ] Rahasia dalam Key Vault
+- [ ] Rahasia di Key Vault
 - [ ] String koneksi diverifikasi
 - [ ] Pemeriksaan kesehatan dikonfigurasi
 
@@ -72,12 +72,12 @@ azd env get-values
 
 ## 💰 Panduan Pemilihan SKU
 
-| Workload | Development | Production |
+| Beban Kerja | Pengembangan | Produksi |
 |----------|-------------|------------|
-| Container Apps | Consumption | Dedicated D4 |
+| Container Apps | Konsumsi | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standard | Standard + PTU |
-| AI Search | Basic | Standard S2+ |
+| Microsoft Foundry Models | Standar | Standar + PTU |
+| AI Search | Dasar | Standar S2+ |
 
 ---
 
@@ -86,14 +86,14 @@ azd env get-values
 | Arah | Bab |
 |-----------|---------|
 | **Sebelumnya** | [Bab 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
-| **Berikutnya** | [Bab 7: Troubleshooting](../chapter-07-troubleshooting/README.md) |
+| **Selanjutnya** | [Bab 7: Pemecahan Masalah](../chapter-07-troubleshooting/README.md) |
 
 ---
 
-## 📖 Sumber Terkait
+## 📖 Sumber Daya Terkait
 
 - [Panduan Konfigurasi](../chapter-03-configuration/configuration.md)
-- [Panduan Penyebaran](../chapter-04-infrastructure/deployment-guide.md)
+- [Panduan Penerapan](../chapter-04-infrastructure/deployment-guide.md)
 - [Masalah Umum](../chapter-07-troubleshooting/common-issues.md)
 
 ---

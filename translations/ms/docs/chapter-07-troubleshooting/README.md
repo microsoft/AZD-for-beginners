@@ -1,20 +1,20 @@
 # Bab 7: Penyelesaian Masalah & Pengendalian Ralat
 
-**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 1-1.5 jam | **⭐ Kerumitan**: Pertengahan
+**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 1-1.5 jam | **⭐ Kerumitan**: Sederhana
 
 ---
 
 ## Gambaran Keseluruhan
 
-Bab ini membantu anda mendiagnosis dan menyelesaikan isu biasa ketika bekerja dengan Azure Developer CLI. Dari kegagalan penyebaran hingga masalah khusus AI.
+Bab ini membantu anda mendiagnosis dan menyelesaikan isu-isu biasa semasa bekerja dengan Azure Developer CLI. Dari kegagalan penyebaran hingga masalah khusus AI.
 
-> Disahkan menggunakan `azd 1.25.6` pada Jun 2026.
+> Disahkan dengan `azd 1.27.1` pada Julai 2026.
 
 ## Objektif Pembelajaran
 
-Dengan menyelesaikan bab ini, anda akan:
+Dengan menamatkan bab ini, anda akan:
 - Mendiagnosis kegagalan penyebaran AZD yang biasa
-- Mengendalikan masalah pengesahan dan kebenaran
+- Mengendalikan ralat pengesahan dan kebenaran
 - Menyelesaikan masalah sambungan perkhidmatan AI
 - Menggunakan Azure Portal dan CLI untuk penyelesaian masalah
 
@@ -23,16 +23,16 @@ Dengan menyelesaikan bab ini, anda akan:
 ## 📚 Pelajaran
 
 | # | Pelajaran | Penerangan | Masa |
-|---|-----------|------------|------|
-| 1 | [Isu Biasa](common-issues.md) | Masalah yang kerap ditemui | 30 min |
+|---|--------|-------------|------|
+| 1 | [Isu Biasa](common-issues.md) | Masalah yang sering dijumpai | 30 min |
 | 2 | [Panduan Pengendalian Ralat](debugging.md) | Strategi pengendalian ralat langkah demi langkah | 45 min |
 | 3 | [Penyelesaian Masalah AI](ai-troubleshooting.md) | Isu khusus AI | 30 min |
 
 ---
 
-## 🚨 Pembetulan Cepat
+## 🚨 Penyelesaian Cepat
 
-### Masalah Pengesahan
+### Isu Pengesahan
 ```bash
 # Diperlukan untuk aliran kerja AZD
 azd auth login
@@ -68,24 +68,24 @@ azd up
 
 ## 📋 Rujukan Kod Ralat
 
-| Ralat | Sebab | Penyelesaian |
-|-------|-------|--------------|
+| Ralat | Punca | Penyelesaian |
+|-------|-------|----------|
 | `AuthenticationError` | Tidak log masuk | `azd auth login` |
 | `ResourceNotFound` | Sumber hilang | Semak nama sumber |
 | `QuotaExceeded` | Had langganan | Mohon kenaikan kuota |
-| `InvalidTemplate` | Ralat sintaks Bicep | `az bicep build` |
-| `Conflict` | Sumber sudah ada | Gunakan nama baru atau padam |
-| `Forbidden` | Keizinan tidak mencukupi | Semak peranan RBAC |
+| `InvalidTemplate` | Kesilapan sintaks Bicep | `az bicep build` |
+| `Conflict` | Sumber sudah wujud | Gunakan nama baru atau padam |
+| `Forbidden` | Kebenaran tidak mencukupi | Semak peranan RBAC |
 
 ---
 
 ## 🔄 Reset dan Pemulihan
 
 ```bash
-# Tetapan semula lembut (simpan sumber, pasang semula kod)
+# Reset lembut (simpan sumber, pasang semula kod)
 azd deploy --force
 
-# Tetapan semula keras (padamkan semuanya, mula semula)
+# Reset keras (padamkan semua, mula semula)
 azd down --force --purge
 azd up
 ```
@@ -95,7 +95,7 @@ azd up
 ## 🔗 Navigasi
 
 | Arah | Bab |
-|------|-----|
+|-----------|---------|
 | **Sebelumnya** | [Bab 6: Pra-Penyebaran](../chapter-06-pre-deployment/README.md) |
 | **Seterusnya** | [Bab 8: Pengeluaran](../chapter-08-production/README.md) |
 
@@ -105,7 +105,7 @@ azd up
 
 - [Pemeriksaan Pra-Penyebaran](../chapter-06-pre-deployment/preflight-checks.md)
 - [Panduan Konfigurasi](../chapter-03-configuration/configuration.md)
-- [Isu Azure GitHub AZD](https://github.com/Azure/azure-dev/issues)
+- [Isu GitHub AZD](https://github.com/Azure/azure-dev/issues)
 
 ---
 

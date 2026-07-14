@@ -1,32 +1,32 @@
-# Chương 4: Hạ tầng dưới dạng mã & Triển khai
+# Chương 4: Hạ tầng dưới dạng Mã & Triển khai
 
-**📚 Khóa học**: [AZD cho người mới](../../README.md) | **⏱️ Thời lượng**: 1-1.5 giờ | **⭐ Độ phức tạp**: Trung cấp
+**📚 Khóa học**: [AZD For Beginners](../../README.md) | **⏱️ Thời lượng**: 1-1.5 giờ | **⭐ Độ khó**: Trung cấp
 
 ---
 
 ## Tổng quan
 
-Chương này đề cập đến các mẫu Hạ tầng dưới dạng Mã (IaC) với các mẫu Bicep, cấp phát tài nguyên và các chiến lược triển khai bằng Azure Developer CLI.
+Chương này trình bày các mẫu Hạ tầng dưới dạng Mã (IaC) với các mẫu Bicep, cấp phát tài nguyên và chiến lược triển khai sử dụng Azure Developer CLI.
 
-> Đã kiểm chứng với `azd 1.25.6` vào tháng 6 năm 2026.
+> Đã xác thực với `azd 1.27.1` vào tháng 7 năm 2026.
 
 ## Mục tiêu học tập
 
 Sau khi hoàn thành chương này, bạn sẽ:
-- Hiểu cấu trúc và cú pháp của mẫu Bicep
-- Cấp phát tài nguyên Azure bằng `azd provision`
-- Triển khai ứng dụng bằng `azd deploy`
-- Thực hiện chiến lược triển khai blue-green và rolling
+- Hiểu được cấu trúc và cú pháp mẫu Bicep
+- Cấp phát tài nguyên Azure với `azd provision`
+- Triển khai ứng dụng với `azd deploy`
+- Thực hiện các chiến lược triển khai xanh-lục và triển khai lăn
 
 ---
 
 ## 📚 Bài học
 
-| # | Bài | Mô tả | Thời gian |
+| # | Bài học | Mô tả | Thời gian |
 |---|--------|-------------|------|
 | 1 | [Cấp phát tài nguyên](provisioning.md) | Quản lý tài nguyên Azure với AZD | 45 phút |
 | 2 | [Hướng dẫn triển khai](deployment-guide.md) | Chiến lược triển khai ứng dụng | 45 phút |
-| 3 | [Tạo mẫu của riêng bạn](custom-templates.md) | Xây dựng và xuất bản các mẫu azd tái sử dụng | 30 phút |
+| 3 | [Tạo mẫu tự thiết kế](custom-templates.md) | Xây dựng và xuất bản mẫu azd tái sử dụng | 30 phút |
 
 ---
 
@@ -39,7 +39,7 @@ azd init --template azure-functions-python-v2-http
 # Xem trước những gì sẽ được tạo
 azd provision --preview
 
-# Chỉ triển khai hạ tầng
+# Chỉ cung cấp hạ tầng
 azd provision
 
 # Chỉ triển khai mã
@@ -51,7 +51,7 @@ azd up
 
 ---
 
-## 📁 Cấu trúc dự án AZD
+## 📁 Cấu trúc Dự án AZD
 
 ```
 my-project/
@@ -68,7 +68,7 @@ my-project/
 
 ---
 
-## 🔧 Các lệnh cần thiết
+## 🔧 Các lệnh thiết yếu
 
 | Lệnh | Mô tả |
 |---------|-------------|
@@ -85,15 +85,15 @@ my-project/
 | Hướng | Chương |
 |-----------|---------|
 | **Trước** | [Chương 3: Cấu hình](../chapter-03-configuration/README.md) |
-| **Tiếp theo** | [Chương 5: Giải pháp đa tác nhân](../chapter-05-multi-agent/README.md) |
+| **Tiếp** | [Chương 5: Giải pháp đa tác nhân](../chapter-05-multi-agent/README.md) |
 
 ---
 
 ## 📖 Tài nguyên liên quan
 
-- [Kiểm tra trước khi triển khai](../chapter-06-pre-deployment/README.md)
-- [Ví dụ ứng dụng Container](../../examples/container-app/README.md)
-- [Ví dụ ứng dụng cơ sở dữ liệu](../../examples/database-app/README.md)
+- [Kiểm tra trước triển khai](../chapter-06-pre-deployment/README.md)
+- [Ví dụ Ứng dụng Container](../../examples/container-app/README.md)
+- [Ví dụ Ứng dụng Cơ sở dữ liệu](../../examples/database-app/README.md)
 
 ---
 

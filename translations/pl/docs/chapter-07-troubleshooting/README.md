@@ -1,19 +1,19 @@
 # Rozdział 7: Rozwiązywanie problemów i debugowanie
 
-**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 1-1.5 godziny | **⭐ Poziom trudności**: Średnio zaawansowany
+**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 1-1.5 godziny | **⭐ Trudność**: Średniozaawansowana
 
 ---
 
 ## Przegląd
 
-Ten rozdział pomaga diagnozować i rozwiązywać typowe problemy podczas pracy z Azure Developer CLI. Od błędów wdrażania po problemy specyficzne dla AI.
+Ten rozdział pomaga diagnozować i rozwiązywać typowe problemy przy pracy z Azure Developer CLI. Od niepowodzeń wdrożeń po kwestie specyficzne dla AI.
 
-> Zweryfikowano z `azd 1.25.6` w czerwcu 2026.
+> Zweryfikowano na `azd 1.27.1` w lipcu 2026 roku.
 
 ## Cele nauki
 
-Po ukończeniu tego rozdziału będziesz potrafił:
-- Diagnozować typowe błędy wdrożeniowe AZD
+Po ukończeniu tego rozdziału będziesz potrafić:
+- Diagnozować typowe błędy wdrożeń AZD
 - Debugować problemy z uwierzytelnianiem i uprawnieniami
 - Rozwiązywać problemy z łącznością usług AI
 - Korzystać z Azure Portal i CLI do rozwiązywania problemów
@@ -25,7 +25,7 @@ Po ukończeniu tego rozdziału będziesz potrafił:
 | # | Lekcja | Opis | Czas |
 |---|--------|-------------|------|
 | 1 | [Typowe problemy](common-issues.md) | Często napotykane problemy | 30 min |
-| 2 | [Przewodnik debugowania](debugging.md) | Strategie debugowania krok po kroku | 45 min |
+| 2 | [Przewodnik po debugowaniu](debugging.md) | Strategie debugowania krok po kroku | 45 min |
 | 3 | [Rozwiązywanie problemów AI](ai-troubleshooting.md) | Problemy specyficzne dla AI | 30 min |
 
 ---
@@ -37,13 +37,13 @@ Po ukończeniu tego rozdziału będziesz potrafił:
 # Wymagane dla przepływów pracy AZD
 azd auth login
 
-# Opcjonalne, jeśli korzystasz również bezpośrednio z poleceń Azure CLI
+# Opcjonalne, jeśli używasz również poleceń Azure CLI bezpośrednio
 az login
 
 azd auth status
 ```
 
-### Błędy podczas provisioningu
+### Niepowodzenia w provisioningu
 ```bash
 azd show
 azd monitor --logs
@@ -57,7 +57,7 @@ azd env new different-name
 azd up
 ```
 
-### Przekroczony limit kwoty
+### Przekroczono limit kwoty
 ```bash
 az vm list-usage --location eastus --output table
 azd env set AZURE_LOCATION westus2
@@ -66,11 +66,11 @@ azd up
 
 ---
 
-## 📋 Odwołanie kodów błędów
+## 📋 Odniesienie kodów błędów
 
 | Błąd | Przyczyna | Rozwiązanie |
 |-------|-------|----------|
-| `AuthenticationError` | Brak zalogowania | `azd auth login` |
+| `AuthenticationError` | Nie zalogowany | `azd auth login` |
 | `ResourceNotFound` | Brak zasobu | Sprawdź nazwy zasobów |
 | `QuotaExceeded` | Limity subskrypcji | Poproś o zwiększenie kwoty |
 | `InvalidTemplate` | Błąd składni Bicep | `az bicep build` |
@@ -82,7 +82,7 @@ azd up
 ## 🔄 Resetowanie i odzyskiwanie
 
 ```bash
-# Miękki reset (zachowaj zasoby, ponownie wdroż kod)
+# Miękki reset (zachowaj zasoby, ponownie wdrażaj kod)
 azd deploy --force
 
 # Twardy reset (usuń wszystko, zacznij od nowa)
@@ -96,14 +96,14 @@ azd up
 
 | Kierunek | Rozdział |
 |-----------|---------|
-| **Poprzedni** | [Rozdział 6: Etap przed wdrożeniem](../chapter-06-pre-deployment/README.md) |
+| **Poprzedni** | [Rozdział 6: Przed wdrożeniem](../chapter-06-pre-deployment/README.md) |
 | **Następny** | [Rozdział 8: Produkcja](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Powiązane zasoby
 
-- [Sprawdzenia przed wdrożeniem](../chapter-06-pre-deployment/preflight-checks.md)
+- [Sprawdzanie przed wdrożeniem](../chapter-06-pre-deployment/preflight-checks.md)
 - [Przewodnik konfiguracji](../chapter-03-configuration/configuration.md)
 - [Problemy AZD na GitHub](https://github.com/Azure/azure-dev/issues)
 

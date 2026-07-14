@@ -1,93 +1,93 @@
-# Misingi ya Wakala Wengi - Weka Mfumo Wako wa Kwanza wa AI Ulioratibiwa
+# Misingi ya Wakala-Wengi - Tumikia Mfumo Wako wa AI Ulio Unganishwa wa Kwanza
 
-**Uabiri wa Sura:**
-- **📚 Nyumbani ya Kozi**: [AZD For Beginners](../../README.md)
-- **📖 Sura ya Sasa**: Sura 5 - Suluhisho za AI za Wakala Wengi
-- **⬅️ Iliyopita**: [Sura 4: Miundombinu](../chapter-04-infrastructure/README.md)
-- **➡️ Ifuatayo**: [Mifumo ya Uratibu](../chapter-06-pre-deployment/coordination-patterns.md)
+**Uelekezaji wa Sura:**
+- **📚 Msingi wa Kozi**: [AZD Kwa Waanzilishi](../../README.md)
+- **📖 Sura ya Sasa**: Sura 5 - Suluhisho za AI za Wakala-Wengi
+- **⬅️ Iliyotangulia**: [Sura 4: Miundombinu](../chapter-04-infrastructure/README.md)
+- **➡️ Ifuatayo**: [Mifumo ya Kuratibu](../chapter-06-pre-deployment/coordination-patterns.md)
 
-> Imethibitishwa kwa `azd 1.25.6` Juni 2026.
+> Imethibitishwa dhidi ya `azd 1.27.1` Julai 2026.
 
 ## Utangulizi
 
-Katika sura za awali uliweka programu moja—na katika Sura 2 uliweka wakala mmoja wa AI. Somo hili linachukua hatua inayofuata: kupeleka **mfumo wa wakala wengi**, ambapo mawakala kadhaa maalum hufanya kazi pamoja kutatua tatizo ambalo wakala mmoja hautaweza kulishughulikia vizuri peke yake.
+Katika sura za awali uliweka programu moja—na katika Sura ya 2 uliweka wakala mmoja wa AI. Somo hili linachukua hatua inayofuata: kuweka mfumo wa **wakala-wengi**, ambapo mawakala kadhaa maalum hufanya kazi pamoja kutatua tatizo ambalo wakala mmoja hawezi kulitatua vyema peke yake.
 
-Habari njema kwa waanziaji: **haufai maagizo mapya.** Suluhisho la wakala wengi bado ni mradi wa azd. Utahifadhi `azd init`, `azd up`, kujaribu, na `azd down`—hasa mwenendo wa kazi ulioujuwa tayari. Kinachobadilika ni *mwangaza* wa programu ndani.
+Habari njema kwa waanzilishi: **huna haja ya amri mpya.** Suluhisho la wakala-wengi bado ni mradi wa azd. Utafanya `azd init`, `azd up`, jaribu, na `azd down`—mtiririko sawa kabisa ambao tayari unajua. Kinachobadilika ni *umbo* la programu ndani.
 
 ## Malengo ya Kujifunza
 
-Mwisho wa somo hili, utaweza:
-- Kuelewa maana ya "wakala wengi" na lini inafaa kwa ugumu wa ziada
-- Kutambua nafasi za kawaida katika mfumo wa wakala wengi (mratibu + maalum)
-- Kuweka kiolezo cha wakala wengi kinachofanya kazi kwa `azd up`
-- Kuelewa rasilimali za Azure zinazosupporta programu ya wakala wengi
-- Kujua jinsi ya kuthibitisha, kubinafsisha, na kuondoa suluhisho kwa usalama
+Mwisho wa somo hili, utakuwa umeweza:
+- Kuelewa maana ya "wakala-wengi" na ni lini inafaa kwa ugumu zaidi
+- Kutambua majukumu ya kawaida katika mfumo wa wakala-wengi (mratibu + maalum)
+- Kuweka kiolezo kinachofanya kazi cha wakala-wengi kwa `azd up`
+- Kuelewa rasilimali za Azure zinazounga mkono programu ya wakala-wengi
+- Kujua jinsi ya kuthibitisha, kubinafsisha, na kuondoa suluhisho salama
 
 ## Matokeo ya Kujifunza
 
 Baada ya kumaliza somo hili, utaweza:
-- Eleza tofauti kati ya wakala mmoja na mfumo wa wakala wengi
-- Chagua kati ya wakala mmoja akiwa na zana na muundo halisi wa wakala wengi
-- Weka na kujaribu kiolezo cha wakala wengi mwishoni hadi mwishowe kwa azd
-- Tambua wapi kila wakala anaendesha na jinsi wanavyowasiliana
-- Safisha rasilimali zote ili kuepuka gharama zinazoendelea
+- Eleza tofauti kati ya wakala mmoja na mfumo wa wakala-wengi
+- Chagua kati ya wakala mmoja mwenye zana na usanifu wa kweli wa wakala-wengi
+- Weka na jaribu kiolezo cha wakala-wengi kumalizia kwa azd
+- Tambua mahali kila wakala anavyofanya kazi na jinsi wanavyoshirikiana
+- Safisha rasilimali zote ili kuepuka malipo yanayoendelea
 
 ---
 
-## Je, Mfumo wa Wakala Wengi Ni Nini?
+## Mfumo wa Wakala-Wengi ni Nini?
 
-Wakala mmoja wa AI ni mfano mmoja ulio na seti ya maagizo na (hiari) zana fulani. Hilo linafanya kazi vizuri kwa kazi zilizolenga. Lakini kazi inapoendelea—tafiti, kisha uandishi, kisha uhariri, kisha uhakiki wa ukweli—kuweka kila kitu kwenye prompt moja kunafanya wakala kuwa polepole, usio na uhakika, na mgumu kusahihisha.
+Wakala mmoja wa AI ni mfano mmoja wenye seti ya maagizo na (hiari) baadhi ya zana. Hii hufanya kazi vizuri kwa kazi zilizo na lengo moja. Lakini kazi inapoendelea—tafiti, kisha uandishi, kisha uhariri, kisha uhakiki—kuongeza kila kitu kwenye kiamsha kimoja hufanya wakala aharibike, aache kuaminika, na kuonekana vigumu kufuatilia.
 
-Mfumo wa **wakala wengi** unagawanya kazi kwa wawekezaji walio maalumu ambao kila mmoja hufanya kazi moja vizuri, zikiratibiwa na mratibu:
+Mfumo wa **wakala-wengi** unagawa kazi kwa wataalam wanaofanya kazi moja vyema, wakoratibiwa na mratibu:
 
 ```mermaid
 graph TD
-    User([Ombi la mtumiaji]) --> Orchestrator[Wakala wa Mratibu<br/>Anapanga na kuelekeza kazi]
-    Orchestrator --> Researcher[Wakala wa Mtafiti<br/>Anakusanya taarifa]
-    Orchestrator --> Writer[Wakala wa Mwandishi<br/>Anaunda rasimu ya yaliyomo]
-    Orchestrator --> Editor[Wakala wa Mhariri<br/>Anakagua na kuboresha]
+    User([Ombi la mtumiaji]) --> Orchestrator[Wakala wa Mipango<br/>Anapanga na kuelekeza kazi]
+    Orchestrator --> Researcher[Wakala wa Utafiti<br/>Anakusanya ukweli]
+    Orchestrator --> Writer[Wakala wa Uandishi<br/>Andaa rasimu ya maudhui]
+    Orchestrator --> Editor[Wakala wa Mhariri<br/>Anapitia na kuboresha]
     Researcher --> Orchestrator
     Writer --> Orchestrator
     Editor --> Orchestrator
     Orchestrator --> Result([Jibu la mwisho])
 ```
 
-### Nafasi mbili utakazoziona kila wakati
+### Majukumu mawili utakayoyaona kila wakati
 
-| Role | Job | Example |
+| Cheo | Kazi | Mfano |
 |------|-----|---------|
-| **Mratibu** | Huamua *nini kitakachotokea kifuatacho* na kutuma kazi kati ya mawakala | "Kwanza kufanya utafiti, kisha kuandika, kisha kuhariri" |
-| **Mtaalamu/Maalum** | Hufanya kazi moja iliyolengwa na kurudisha matokeo | "mtafiti" ambaye anakusanya tu ukweli |
+| **Mratibu** | Anaamua *nini kifanyike kisha* na anapanga kazi kati ya mawakala | "Kwanza tafiti, halafu andika, kisha hariri" |
+| **Mtaalam** | Hufanya kazi moja kwa umakini na kurudisha matokeo | "Mtafiti" anayejikusanya tu ukweli |
 
-### Je, kwa kweli unahitaji mawakala wengi?
+### Je, kweli unahitaji mawakala wengi?
 
-Anza kwa urahisi. Fikia kwa wakala wengi **tu** wakati mojawapo ya yafuatayo ni kweli:
+Anza kwa urahisi. Tumia wakala-wengi **tu** wakati mojawapo ya haya ni kweli:
 
-- ✅ Kazi ina **vigezo tofauti** vinavyofaidika na maagizo tofauti (tafiti vs. kuandika vs. kupitia)
-- ✅ Unataka wataalamu waendeshe **kwa wakati mmoja** ili kuokoa muda
-- ✅ Hatua tofauti zinahitaji **zana au vyanzo tofauti vya data**
-- ✅ Unahitaji kila hatua iwe **inayoweza kupimwa na kusahihishwa kikaboni**
+- ✅ Kazi ina **vipindi dhahiri** vinavyonufaika na maagizo tofauti (tafiti dhidi ya uandishi dhidi ya ukaguzi)
+- ✅ Unataka wataalam wafanye kazi **kwa wakati mmoja** kuokoa muda
+- ✅ Hatua tofauti zinahitaji **zana au vyanzo vya data tofauti**
+- ✅ Unahitaji kila hatua iweze **kujaribiwa na kufanyiwa utatuzi kwa kujitegemea**
 
-Kama kazi yako ni swali-jibu moja au mwito rahisi wa zana, **wakala mmoja akiwa na zana** (Sura 2) ni rahisi zaidi, ya gharama nafuu, na rahisi kuendesha.
+Ikiwa kazi yako ni swali-jibu moja au mwito wa zana rahisi, **wakala mmoja mwenye zana** (Sura 2) ni rahisi, nafuu, na rahisi kuendesha.
 
-> **Ushauri kwa Muanza:** "Mawakala wengi zaidi" sio "bora." Kila wakala anaongeza ucheleweshaji, gharama, na kitu kipya cha kufuatilia. Ongeza mawakala tu wakati tatizo linaonekana wazi kugawanyika katika sehemu.
+> **Ushauri kwa wanaoanza:** "Mawakala wengi" sio "bora zaidi." Kila wakala huongeza kuchelewa, gharama, na kitu kipya cha kufuatilia. Ongeza mawakala tu wakati tatizo linaonekana kugawanyika sehemu.
 
 ---
 
-## Njia Mbili za Kujenga Wakala Wengi kwenye Azure
+## Njia Mbili za Kujenga Wakala-Wengi kwenye Azure
 
-| Approach | What it is | Best for |
+| Mbinu | Ni nini | Bora kwa |
 |----------|-----------|----------|
-| **Wakala mmoja + zana** | Wakala mmoja wa Foundry anayefanya mwito wa kazi/zana | Mifumo rahisi, kuanza haraka |
-| **Mawakala wengi walioratibiwa** | Mawakala kadhaa na mratibu mmoja | Vigezo tofauti, kazi sambamba, utaalam |
+| **Wakala mmoja + zana** | Wakala mmoja wa Foundry anayefanya miito ya kazi/zana | Mtiririko rahisi, kuanza |
+| **Mawakala wengi walioratibiwa** | Mawakala kadhaa na mratibu | Vipindi tofauti, kazi sambamba, ufanisi maalum |
 
-Somo hili linazingatia njia ya pili kwa kutumia **kiolezo kilicho tayari**, ili uone mfumo halisi wa wakala wengi ukifanya kazi kabla ya kujenga yako mwenyewe.
+Somo hili linazingatia njia ya pili kutumia **kiolezo tayari kilichotengenezwa**, ili uweze kuona mfumo halisi wa wakala-wengi ukiwauna kabla ya kujijengea wewe mwenyewe.
 
 ---
 
-## Kazi Mikononi: Weka Programu ya Wakala Wengi Inayofanya Kazi
+## Vitendo: Tumia Programu Inayofanya Kazi ya Wakala-Wengi
 
-Tutaunda **Contoso Creative Writer**, sampuli rasmi ya Azure inayotumia mawakala kadhaa (mtafiti, mwandishi, mhariri) walioratibiwa kutengeneza makala. Ni programu nzuri ya kwanza ya wakala wengi kwa sababu nafasi hizo ni rahisi kuelewa.
+Tutazindua **Mwandishi wa Ubunifu wa Contoso**, sampuli rasmi ya Azure inayotumia mawakala wengi (mtafiti, mwandishi, mhariri) wanaoratibiwa kuzalisha makala. Ni programu ya wakala-wengi nzuri kwa kuanza kwa kuwa majukumu ni rahisi kuelewa.
 
 ### Hatua 1: Anzisha kiolezo
 
@@ -95,106 +95,106 @@ Tutaunda **Contoso Creative Writer**, sampuli rasmi ya Azure inayotumia mawakala
 # Unda folda ya kazi
 mkdir creative-writer && cd creative-writer
 
-# Anzisha kutoka kwa kiolezo rasmi cha wakala wengi
+# Anzisha kutoka kielelezo rasmi cha wakala wengi
 azd init --template contoso-creative-writer
 ```
 
-> Vinjari kiolezo zaidi cha wakala wengi wakati wowote katika [Awesome AZD AI gallery](https://azure.github.io/awesome-azd/?tags=ai). Chaguzi nyingine rafiki kwa waanziaji ni `get-started-with-ai-agents` na `azure-ai-travel-agents`.
+> Tafuta kiolezo zaidi cha wakala-wengi wakati wowote kwenye [Jumba la mfano la Awesome AZD AI](https://azure.github.io/awesome-azd/?tags=ai). Chaguzi nyingine rafiki kwa wanaoanza ni pamoja na `get-started-with-ai-agents` na `azure-ai-travel-agents`.
 
-### Hatua 2: Thibitisha utambulisho
+### Hatua 2: Thibitisha Utambulisho
 
 ```bash
-# Inahitajika kwa mtiririko wa kazi za azd
+# Inahitajika kwa michakato ya azd
 azd auth login
 ```
 
-### Hatua 3: Unda mazingira
+### Hatua 3: Tengeneza mazingira
 
 ```bash
 azd env new dev
 ```
 
-### Hatua 4: Hakiki, kisha weka
+### Hatua 4: Kagua, kisha tumia
 
 ```bash
-# Tazama yatakayoundwa kabla ya kutumia chochote (inashauriwa)
+# Angalia kile kitakachoundwa kabla ya kutumia chochote (inapendekezwa)
 azd provision --preview
 
-# Andaa miundombinu na weka mawakala wote kwa hatua moja
+# Toa miundombinu na weka watumishi wote kwa hatua moja
 azd up
 ```
 
-`azd up` itakuuliza uweke usajili na eneo, kisha itatoa rasilimali za Azure na kuweka programu. Utekelezaji wa AI unaweza kuchukua muda zaidi kuliko programu rahisi ya wavuti—ikiwa unaweka mifano kubwa zaidi, unaweza kuongeza muda wa kusubiri wa utekelezaji:
+`azd up` itauliza usajili na eneo, kisha itasambaza rasilimali za Azure na kuweka programu. Uwekaji AI unaweza kuchukua muda zaidi kuliko programu rahisi ya wavuti—kama unasambaza mifano mikubwa, unaweza kuongeza muda wa kutekeleza:
 
 ```bash
 azd deploy --timeout 1800
 ```
 
-> **Kumbuka kuhusu gharama na uwezo:** Programu za wakala wengi zinaweka mifano ya AI inayotumia quota na kuleta gharama. Ikiwa `azd up` inashindwa kwa sababu ya quota ya modeli, angalia [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) kwa marekebisho ya eneo na quota, na Sura 6 [Mipango ya Uwezo](../chapter-06-pre-deployment/capacity-planning.md).
+> **Tahadharini kuhusu gharama na uwezo:** Programu za wakala-wengi husambaza mifano ya AI inayotumia kiasi cha rasilimali na husababisha gharama. Ikiwa `azd up` itashindwa kwa sababu ya kikomo cha mfano, angalia [Utatuzaji wa AI](../chapter-07-troubleshooting/ai-troubleshooting.md) kwa marekebisho ya eneo na kikomo, na Sura 6 [Mipangilio ya Uwezo](../chapter-06-pre-deployment/capacity-planning.md).
 
 ---
 
-## Kuelewa Ulikojea
+## Kuelewa Ulivyo Weka
 
-Programu ya kawaida ya wakala wengi kama hii huweka seti ya rasilimali za Azure zinazolingana moja kwa moja na wajibu katika mchoro hapo juu:
+Programu ya kawaida ya wakala-wengi kama hii hutoa seti ya rasilimali za Azure zinazolingana moja kwa moja na majukumu kwenye mchoro hapo juu:
 
-| Resource | Why it's there |
+| Rasilimali | Sababu ya kuwepo |
 |----------|----------------|
-| **Microsoft Foundry / Models** | Inahifadhi mifano ya lugha ambazo kila wakala anazitumia |
-| **Azure AI Search** | Inampa wakala wa mtafiti data iliyothibitishwa ya kutafuta |
-| **Container Apps** (au App Service) | Inahifadhi mratibu na msimbo wa mawakala |
-| **Cosmos DB** (katika baadhi ya sampuli) | Inahifadhi hali/ukurasa wa kumbukumbu unaoshirikiwa kati ya mawakala |
-| **Application Insights** | Inafuatilia maombi *mbele ya* mawakala ili uweze kusahihisha mchakato |
+| **Microsoft Foundry / Mifano** | Inahifadhi mifano ya lugha inayotumika na kila wakala |
+| **Azure AI Search** | Inatoa data ya msingi kwa wakala mtafiti kutafuta |
+| **Container Apps** (au App Service) | Inabeba mratibu na nambari za wakala |
+| **Cosmos DB** (katika baadhi ya sampuli) | Inahifadhi hali/mwisho zilizoshirikiwa kati ya mawakala |
+| **Application Insights** | Inafuatilia maombi *miongoni mwa* mawakala ili ufuatiliaji wa mtiririko uwe rahisi |
 
 ### Jinsi mawakala wanavyowasiliana
 
-Katika sampuli nyingi za azd za wakala wengi, **mratibu anaendesha ndani ya msimbo wa programu yako** (kwa mfano, kwa kutumia fremu kama Semantic Kernel au Microsoft Agent Framework). Mratibu anaita kila wakala maalum kwa mfululizo, analeta matokeo, na kutengeneza jibu la mwisho. Wakala wanashirikiana muktadha kupitia:
+Katika sampuli nyingi za azd za wakala-wengi, **mratibu hufanya kazi ndani ya nambari yako ya programu** (kwa mfano, kwa kutumia mfumo kama Semantic Kernel au Microsoft Agent Framework). Mratibu hufanya mwito kwa kila wakala maalum kwa mfululizo, hupitisha matokeo, na hujumlisha jibu la mwisho. Mawakala hushirikiana kwa:
 
-- **Miito ya kazi/zana** — mratibu anamtumia mtaalamu na kurudisha matokeo
-- **Kumbukumbu iliyoshirikiwa** — hifadhidata (mara nyingi Cosmos DB) inahifadhi hali ambayo mawakala yote wanaweza kusoma
-- **Ujumbe/tukio** — kwa uunganisho mdogo, mawakala huwasiliana kupitia foleni au Service Bus
+- **Miito ya kazi/za zana** — mratibu huwaita mtaalam na kupata jibu
+- **Kumbukumbu ya pamoja** — hifadhidata (mara nyingi Cosmos DB) hushikilia hali ambayo mawakala wote wanaweza kusoma
+- **Ujumbe/tukio** — kwa uhusiano mdogo, mawakala huwasiliana kupitia foleni au Service Bus
 
-> **Kwanini hili ni muhimu kwa kusahihisha:** kwa kuwa kila hatua ni tofauti, Application Insights inaonyesha *wakala gani* alikuwa pole au alishindwa. Hilo ni sababu kuu ya kugawanya kazi kwa mawakala.
+> **Kwa nini hili ni muhimu kwa utatuzi wa matatizo:** kwa kuwa kila hatua ni tofauti, Application Insights huonyesha *wakala gani* alichelewa au kushindwa. Hiyo ni sababu kuu ya kugawanya kazi kati ya mawakala.
 
 ---
 
-## Thibitisha Utekelezaji
+## Thibitisha Uwekaji
 
 Thibitisha mfumo unafanya kazi kabla ya kuendelea:
 
 ```bash
-# Onyesha endpoints zilizowekwa
+# Onyesha sehemu za mwisho zilizowekwa
 azd show
 
 # Fungua dashibodi ya ufuatiliaji ya programu
 azd monitor
 
-# Fuata logi kama kuna kitu kinavyoonekana si sawa
+# Fuata kumbukumbu za shughuli ikiwa kuna kitu kinavyoonekana si kawaida
 azd monitor --logs
 ```
 
-Kisha fungua URL ya programu kutoka `azd show` na jaribu ombi linalochosha mawakala yote (kwa Creative Writer, muulize iandike makala fupi juu ya mada). Katika Application Insights **tafutaji la muamala**, utatakiwa kuona ombi likiaga kwa hatua za mtafiti, mwandishi, na mhariri.
+Kisha fungua URL ya programu kutoka `azd show` na jaribu ombi linalowahusisha mawakala wote (kwa Creative Writer, muulize aandae makala fupi juu ya mada). Katika **utafutaji wa shughuli** wa Application Insights, unapaswa kuona ombi likitawanyika kwa hatua za mtafiti, mwandishi, na mhariri.
 
 **Vigezo vya mafanikio:**
-- ✅ `azd show` inaorodhesha endpoint inayoweza kufikiwa
-- ✅ Ombi linatoa matokeo ambayo kwa uwazi yalipitia hatua nyingi
-- ✅ Application Insights inaonyesha ufuatiliaji kwa zaidi ya hatua ya wakala mmoja
+- ✅ `azd show` inaorodhesha mwisho unaoweza kufikiwa
+- ✅ Ombi linalozalisha matokeo lilipitia hatua nyingi waziwazi
+- ✅ Application Insights inaonyesha ufuatiliaji wa hatua zaidi ya wakala mmoja
 
 ---
 
 ## Binafsisha: Ongeza au Rekebisha Wakala
 
-Kwa kuwa kila wakala ni maagizo pamoja na zana, kubinafsisha ni rahisi:
+Kwa kuwa kila wakala ni maagizo plus zana, ubinafsishaji ni rahisi:
 
-1. **Tafuta ufafanuzi wa mawakala** katika kiolezo (mara nyingi folda `prompts/`, `agents/`, au faili za `*.prompty`).
-2. **Rekebisha maagizo ya wakala** — kwa mfano, waambie wakala mhariri kutekeleza tona maalum au idadi ya maneno.
-3. **Tumia tena tu msimbo** (miundombinu haijabadilika):
+1. **Tafuta ufafanuzi wa mawakala** katika kiolezo (mara nyingi faili za `prompts/`, `agents/`, au `*.prompty`).
+2. **Boresha maagizo ya wakala** — kwa mfano, waambie wakala mhariri kuzingatia ladha au idadi maalum ya maneno.
+3. **Zindua upya tu msimbo** (miundombinu haijabadilika):
 
    ```bash
    azd deploy
    ```
 
-Ili kwenda mbali zaidi na kujenga mawakala kutoka kwa *manifest* yako mwenyewe, tumia ugani wa wakala na mzunguko wake kamili wa maisha:
+Ili kuendelea zaidi na kujenga mawakala kutoka kwenye akaunti yako mwenyewe, tumia kiongezi cha wakala na mzunguko wake kamili:
 
 ```bash
 azd extension install azure.ai.agents
@@ -203,51 +203,51 @@ azd up
 azd ai agent invoke      # jaribio, na muda wa majibu
 ```
 
-Angalia [Sura 2: Mawakala](../chapter-02-ai-development/agents.md) na [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) kwa mzunguko kamili wa maisha ya wakala (`invoke`, `eval generate`, `optimize`, `delete`).
+Angalia [Sura 2: Mawakala](../chapter-02-ai-development/agents.md) na rejeleo la [AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) kwa mzunguko kamili wa wakala (`invoke`, `eval generate`, `optimize`, `delete`).
 
 ---
 
 ## Safisha
 
-Programu za wakala wengi zinaendesha huduma nyingi zinazolipishwa. Ondoa kila kitu unachokamilisha:
+Programu za wakala-wengi zinaendesha huduma nyingi zinazolipishwa. Zaraia yote unapo maliza:
 
 ```bash
 azd down --force --purge
 ```
 
-Bendera ya `--purge` pia inaondoa rasilimali za AI zilizofutwa kwa upole (kama Foundry/Azure AI Services accounts) ili zisizuie urekebishaji wa baadaye au kuendelea kuleta gharama.
+Bendera ya `--purge` pia huondoa rasilimali za AI zilizofutwa kwa upole (kama akaunti za Foundry/Azure AI Services) ili zisizuie kuweka upya baadaye au kusababisha gharama.
 
 ---
 
-## Kumbusho kuhusu Mifumo ya Wakala Wengi za Uzalishaji
+## Kumbuka Kuhusu Mifumo ya Wakala-Wengi ya Uzalishaji
 
-[Suluhisho la Wakala Wengi la Rejareja](../../examples/retail-scenario.md) katika repo hii ni **rasimu ya usanifu**, sio kiolezo cha amri-moja—inaandika jinsi mfumo wa rejareja wa uzalishaji *ungerejewa* kujengwa (na inaeleza wazi kwamba ujenzi kamili ni jitihada kubwa). Itumie kama rejea ya muundo *baada ya* umeweka sampuli inayofanya kazi hapa. Kwa masuala ya uzalishaji (uvumilivu, gharama, ufuatiliaji, utawala), endelea kwa [Sura 8: Mbinu za AI za Uzalishaji](../chapter-08-production/production-ai-practices.md).
+[Mfumo wa Suluhisho za Wakala-Wengi wa Rejareja](../../examples/retail-scenario.md) katika jalada hili ni **muundo wa usanifu**, si kiolezo cha amri moja–inaelezea jinsi mfumo wa rejareja wa uzalishaji *ungejengwaje* (na inaeleza wazi kuwa ujenzi kamili ni juhudi kubwa). Tumie kama rejeleo la kubuni *baada* ya kuweka sampuli inayofanya kazi hapa. Kwa masuala ya uzalishaji (uwezo wa kustahimili, gharama, usimamizi, utawala), endelea na [Sura 8: Mazoezi ya AI ya Uzalishaji](../chapter-08-production/production-ai-practices.md).
 
 ---
 
 ## Muhtasari
 
-- Mfumo wa wakala wengi hugawanya kazi kwa maalumu waliooratibiwa na mratibu.
-- Utaitumia tu wakati kazi ina vigezo tofauti, ufanisi wa sambamba, au zana tofauti kwa kila hatua—vinginevyo chagua wakala mmoja.
-- Mtiririko wa azd haujabadilika: `azd init` → `azd up` → test → `azd down`.
-- Kiolezo halisi kama `contoso-creative-writer` kinakuwezesha kuona na kubinafsisha programu ya wakala wengi inayofanya kazi sasa.
-- Ufuatiliaji wa Application Insights kupitia mawakala ni mojawapo ya faida kubwa za vitendo za muundo wa wakala wengi.
+- Mfumo wa wakala-wengi unagawa kazi kwa wataalam wanaoratibiwa na mratibu.
+- Utumie tu wakati kazi ina vipindi dhahiri, usawa wa kazi, au zana tofauti kwa kila hatua—vinyume na hivyo tumia wakala mmoja.
+- Mtiririko wa kazi wa azd haubadiliki: `azd init` → `azd up` → jaribu → `azd down`.
+- Kiolezo halisi kama `contoso-creative-writer` hukuruhusu kuona na kubinafsisha programu ya wakala-wengi inayofanya kazi leo.
+- Ufuatiliaji wa Application Insights miongoni mwa mawakala ni moja ya faida kubwa za usanifu wa wakala-wengi kiutendaji.
 
 ---
 
-## 🔗 Uabiri
+## 🔗 Uelekeo
 
-| Direction | Lesson |
+| Mwelekeo | Somo |
 |-----------|--------|
-| **Iliyopita** | [Sura 4: Miundombinu](../chapter-04-infrastructure/README.md) |
-| **Ifuatayo** | [Mifumo ya Uratibu](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **Iliyotangulia** | [Sura 4: Miundombinu](../chapter-04-infrastructure/README.md) |
+| **Ifuatayo** | [Mifumo ya Kuratibu](../chapter-06-pre-deployment/coordination-patterns.md) |
 
 ## 📖 Rasilimali Zinazohusiana
 
 - [Mwongozo wa Mawakala wa AI](../chapter-02-ai-development/agents.md)
-- [Mifumo ya Uratibu](../chapter-06-pre-deployment/coordination-patterns.md)
-- [Mbinu za AI za Uzalishaji](../chapter-08-production/production-ai-practices.md)
-- [Utatuzi wa Matatizo ya AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Mifumo ya Kuratibu](../chapter-06-pre-deployment/coordination-patterns.md)
+- [Mazoezi ya AI ya Uzalishaji](../chapter-08-production/production-ai-practices.md)
+- [Utatuzaji wa AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

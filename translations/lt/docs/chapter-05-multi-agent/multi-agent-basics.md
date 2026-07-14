@@ -1,49 +1,49 @@
-# Multi-Agent Basics - Deploy Your First Coordinated AI System
+# Multiagentinių pagrindai – diegkite savo pirmąją koordinuotą DI sistemą
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 5 - Multi-Agent AI Solutions
-- **⬅️ Previous**: [Chapter 4: Infrastructure](../chapter-04-infrastructure/README.md)
-- **➡️ Next**: [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md)
+**Skyriaus navigacija:**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 5 skyrius – Multiagentinės DI sprendimai
+- **⬅️ Ankstesnis**: [4 skyrius: Infrastruktūra](../chapter-04-infrastructure/README.md)
+- **➡️ Kitas**: [Koordinavimo modeliai](../chapter-06-pre-deployment/coordination-patterns.md)
 
-> Validated against `azd 1.25.6` in June 2026.
+> Patikrinta naudojant `azd 1.27.1` 2026 m. liepą.
 
-## Introduction
+## Įvadas
 
-Ankstesniuose skyriuose diegėte vieną programą — o 2 skyriuje diegėte vieną AI agentą. Ši pamoka žengia kitą žingsnį: diegiate **daugiagentę sistemą**, kur kelios specializuotos agentūros bendradarbiauja spręsdamos problemą, kurią vienas agentas sunkiai išspręstų pats.
+Ankstesniuose skyriuose diegėte vieną programėlę – o 2 skyriuje diegėte vieną DI agentą. Ši pamoka žengia toliau: diegiate **multiagentinę sistemą**, kur kelios specializuotos agentūros bendradarbiauja spręsdamos problemą, kurios nė vienas agentas vienas gerai nesugebėtų išspręsti.
 
-Gera naujiena pradedantiesiems: **nereikia naujų komandų.** Daugiagentė sprendimas vis tiek yra azd projektas. Jūs darysite `azd init`, `azd up`, testuosite ir `azd down` — būtent tą darbų eigą, kurią jau pažįstate. Kas keičiasi, tai programos vidinė *forma*.
+Geros naujienos pradedantiesiems: **nereikia naujų komandų.** Multiagentinis sprendimas vis dar yra azd projektas. Naudosite `azd init`, `azd up`, testuosite ir `azd down` — tiksliai tą patį darbo eigą, kurią jau žinote. Kinta tik programėlės *forma* viduje.
 
-## Learning Goals
+## Mokymosi tikslai
 
-Baigę šią pamoką jūs:
-- Suprasite, ką reiškia „daugiagentė“ ir kada verta priimti papildomą sudėtingumą
-- Atpažinsite įprastas rolės daugiagentėje sistemoje (orchestrator + specialistai)
-- Išdiegsite veikiančią daugiagentę šabloną su `azd up`
-- Suprasite, kokie Azure ištekliai palaiko daugiagentę programą
-- Žinosite, kaip patikrinti, pritaikyti ir saugiai pašalinti sprendimą
+Pasibaigus šiai pamokai jūs:
+- Suprasite, ką reiškia „multiagentinis“ ir kada verta papildoma sudėtingumas
+- Atpažinsite dažnus vaidmenis multiagentinėje sistemoje (orchestratorius + specialistai)
+- Diegsite tikrą veikiančią multiagentinę šabloną su `azd up`
+- Suprasite, kokie Azure ištekliai palaiko multiagentinę programėlę
+- Žinosite, kaip patikrinti, pritaikyti ir saugiai išardyti sprendimą
 
-## Learning Outcomes
+## Mokymosi rezultatai
 
 Baigę šią pamoką galėsite:
-- Paaiškinti skirtumą tarp vieno agente ir daugiagentės sistemos
-- Pasirinkti tarp vieno agente su įrankiais ir tikro daugiagentės dizaino
-- Išdiegti ir patikrinti daugiagentį šabloną nuo pradžios iki pabaigos su azd
-- Nustatyti, kur kiekvienas agentas vyksta ir kaip jie bendrauja
-- Išvalyti visus išteklius, kad išvengtumėte nuolatinių išlaidų
+- Paaiškinti skirtumą tarp vieno agento ir multiagentinės sistemos
+- Pasirinkti tarp vieno agento su įrankiais ir tikro multiagentinio dizaino
+- Diegti ir testuoti multiagentinę šabloną nuo pradžios iki pabaigos su azd
+- Nustatyti, kur kiekvienas agentas veikia ir kaip jie bendrauja
+- Išvalyti visus išteklius, kad nebūtų tęstinių mokesčių
 
 ---
 
-## What Is a Multi-Agent System?
+## Kas yra multiagentinė sistema?
 
-Vienas AI agentas yra vienas modelis su nurodymų rinkiniu ir (nebūtina) kai kuriais įrankiais. Tai gerai tinka susikoncentravusiems uždaviniams. Bet kai užduotis auga — tyrimai, tada rašymas, tada redagavimas, tada faktų tikrinimas — viską sutalpinti į vieną užklausą daro agentą lėtesnį, mažiau patikimą ir sunkiau derinamą.
+Vienas DI agentas yra vienas modelis su instrukcijų rinkiniu ir (pasirinktinai) kai kuriais įrankiais. Tai gerai tinka koncentruotoms užduotims. Bet kai užduotis didėja – tyrimas, rašymas, redagavimas, faktų tikrinimas – sutalpinti viską į vieną užklausą užtrunka agentą, daro jį mažiau patikimu ir sunkesniu derinti.
 
-Daugiagentė sistema suskaidžia darbą į specialistus, kurie kiekvienas gerai atlieka vieną užduotį, koordinuojami orchestratoriaus:
+**Multiagentinė sistema** darbus padalija tarp specialistų, kurie gerai atlieka savo darbą, koordinuojami orchestratoriaus:
 
 ```mermaid
 graph TD
-    User([Vartotojo užklausa]) --> Orchestrator[Orkestratoriaus agentas<br/>Planuoja ir nukreipia darbus]
-    Orchestrator --> Researcher[Tyrėjo agentas<br/>Renka faktus]
+    User([Vartotojo užklausa]) --> Orchestrator[Orkestravimo agentas<br/>Planuoja ir nukreipia darbą]
+    Orchestrator --> Researcher[Tyrėjo agentas<br/>Renkasi faktus]
     Orchestrator --> Writer[Rašytojo agentas<br/>Rengia turinį]
     Orchestrator --> Editor[Redaktoriaus agentas<br/>Peržiūri ir tobulina]
     Researcher --> Orchestrator
@@ -52,202 +52,202 @@ graph TD
     Orchestrator --> Result([Galutinis atsakymas])
 ```
 
-### The two roles you'll always see
+### Du vaidmenys, kuriuos visada matysite
 
-| Role | Job | Example |
+| Vaidmuo | Darbas | Pavyzdys |
 |------|-----|---------|
-| **Orchestrator** | Decides *what happens next* and routes work between agents | "First research, then write, then edit" |
-| **Specialist** | Does one focused job and returns a result | A "researcher" that only gathers facts |
+| **Orchestratorius** | Nusprendžia, *kas vyksta toliau* ir nukreipia darbus tarp agentų | „Pirmiausia tyrinėti, tada rašyti, tada redaguoti“ |
+| **Specialistas** | Atlieka vieną susitelktą darbą ir pateikia rezultatą | „Tyrinėtojas“, kuris tik renka faktus |
 
-### Do you actually need multiple agents?
+### Ar tikrai reikia kelių agentų?
 
-Pradėkite paprastai. Ieškokite daugiagentės **tik** kai tenkinama bent viena iš šių sąlygų:
+Pradėkite paprastai. Naudokite multiagentinę tik tada, kai galioja bent viena iš šių taisyklių:
 
-- ✅ Užduotis turi **aiškias stadijas**, kurioms naudingesni skirtingi nurodymai (tyrimai vs. rašymas vs. peržiūra)
-- ✅ Norite, kad specialistai veiktų **lygiagrečiai**, kad sutaupytumėte laiko
-- ✅ Skirtingi žingsniai reikalauja **skirtingų įrankių ar duomenų šaltinių**
-- ✅ Kiekvienas žingsnis turi būti **atskirai testuojamas ir derinamas**
+- ✅ Užduotis turi **skirtingas stadijas**, kurių kiekviena turi savas instrukcijas (tyrimui, rašymui, peržiūrai)
+- ✅ Norite, kad specialistai veiktų **lygiagrečiai** ir taupytų laiką
+- ✅ Skirtingi žingsniai turi naudoti **skirtingus įrankius ar duomenų šaltinius**
+- ✅ Kiekvienas žingsnis turi būti **atskiro ištestavimo ir derinimo galimybė**
 
-Jei jūsų užduotis yra vienas klausimas-ir-atsakymas arba paprastas įrankio kvietimas, **vienas agentas su įrankiais** (2 skyrius) yra paprastesnis, pigesnis ir lengviau valdomas.
+Jei jūsų užduotis – paprastas klausimas-atsakymas arba įrankio kvietimas, **vienas agentas su įrankiais** (2 skyrius) yra paprastesnis, pigesnis ir lengviau valdomas.
 
-> **Pradedančiojo patarimas:** „Daugiau agentų“ nereiškia „geriau.“ Kiekvienas agentas prideda delsą, išlaidas ir naują elementą, kuriuo reikia rūpintis. Pridėkite agentus tik tada, kai problema aiškiai suskyla į dalis.
+> **Patirtis pradedantiesiems:** „Daugiau agentų“ nereiškia „geriau“. Kiekvienas agentas prideda delsą, kainą ir dar vieną stebėtiną dalyką. Pridėkite agentus tik kai problema aiškiai dalijasi į dalis.
 
 ---
 
-## Two Ways to Build Multi-Agent on Azure
+## Du būdai sukurti multiagentinę sistemą Azure
 
-| Approach | What it is | Best for |
+| Požiūris | Kas tai yra | Geriausia taikyti |
 |----------|-----------|----------|
-| **Single agent + tools** | One Foundry agent that calls functions/tools | Simple workflows, getting started |
-| **Multiple coordinated agents** | Several agents with an orchestrator | Distinct stages, parallel work, specialization |
+| **Vienas agentas + įrankiai** | Vienas Foundry agentas, kviečiantis funkcijas/įrankius | Paprastos darbo eigos, pradedantiesiems |
+| **Keli koordinuoti agentai** | Keletas agentų su orchestratoriumi | Skirtingos stadijos, lygiagretus darbas, specializacija |
 
-Ši pamoka orientuota į antrą požiūrį, naudojant **paruoštą šabloną**, kad galėtumėte pamatyti tikrą daugiagentę sistemą veikiančią prieš kurdami savo.
+Ši pamoka orientuota į antrąjį požiūrį, naudojant **paruoštą šabloną**, kad galėtumėte iškart pamatyti veikiančią multiagentinę sistemą prieš kurdami savo.
 
 ---
 
-## Hands-On: Deploy a Working Multi-Agent App
+## Praktinis pavyzdys: įdiekite veikiantį multiagentinį programėlę
 
-Mes diegsime **Contoso Creative Writer**, oficialų Azure pavyzdį, kuris naudoja kelis agentus (tyrėją, rašytoją, redaktorių), koordinuojamus straipsnio sukūrimui. Tai puikus pirmas daugiagentis pavyzdys, nes vaidmenys lengvai suprantami.
+Įdiegsite **Contoso Creative Writer**, oficialų Azure pavyzdį, kuris naudoja kelis agentus (tyrinėtoją, rašytoją, redaktorių), koordinuotus sukurti straipsnį. Tai puikus pirmas multiagentinis programėlis, nes vaidmenys lengvai suprantami.
 
-### Step 1: Initialize the template
+### 1 žingsnis: inicijuokite šabloną
 
 ```bash
 # Sukurti darbo aplanką
 mkdir creative-writer && cd creative-writer
 
-# Inicializuoti pagal oficialų daugiaagentinį šabloną
+# Inicializuoti iš oficialaus daugiagentų šablono
 azd init --template contoso-creative-writer
 ```
 
-> Naršykite daugiau daugiagentų šablonų bet kada [Awesome AZD AI gallery](https://azure.github.io/awesome-azd/?tags=ai). Kitos pradedantiesiems draugiškos parinktys yra `get-started-with-ai-agents` ir `azure-ai-travel-agents`.
+> Peržiūrėkite daugiau multiagentinių šablonų bet kada [Awesome AZD AI galerijoje](https://azure.github.io/awesome-azd/?tags=ai). Kitos pradedančioms draugiškos galimybės yra `get-started-with-ai-agents` ir `azure-ai-travel-agents`.
 
-### Step 2: Authenticate
+### 2 žingsnis: autentifikuokitės
 
 ```bash
-# Reikalinga azd darbo eigoms
+# Būtina azd darbo eigos procesams
 azd auth login
 ```
 
-### Step 3: Create an environment
+### 3 žingsnis: sukurkite aplinką
 
 ```bash
 azd env new dev
 ```
 
-### Step 4: Preview, then deploy
+### 4 žingsnis: peržiūrėkite ir įdiekite
 
 ```bash
-# Prieš ką nors išleidžiant, peržiūrėkite, kas bus sukurta (rekomenduojama)
+# Pažiūrėkite, kas bus sukurtas prieš išleisdamas ką nors (rekomenduojama)
 azd provision --preview
 
-# Parengti infrastruktūrą ir įdiegti visus agentus vienu žingsniu
+# Paruoškite infrastruktūrą ir įdiekite visus agentus vienu žingsniu
 azd up
 ```
 
-`azd up` paprašys prenumeratos ir regiono, tada paruoš Azure išteklius ir įdiegs programą. AI diegimai gali užtrukti ilgiau nei paprasta žiniatinklio programa — jei diegiate didesnius modelius, galite praplėsti diegimo laiko limitą:
+`azd up` paprašys pasirinkti prenumeratą ir regioną, paskui sukonfigūruos Azure išteklius ir įdiegs programėlę. DI diegimai gali užtrukti ilgiau nei paprasta žiniatinklio programa – jei diegiate didesnius modelius, galite pratęsti diegimo laiką:
 
 ```bash
 azd deploy --timeout 1800
 ```
 
-> **Dėmesio dėl kainų ir pajėgumo:** Daugiagentės programos diegia AI modelius, kurie naudoja kvotas ir sukelia išlaidas. Jei `azd up` nepavyksta dėl modelio kvotos, žr. [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) dėl regiono ir kvotų sprendimų, ir 6 skyrių [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md).
+> **Dėmesio į kaštus ir pajėgumą:** Multiagentinės programėlės diegia DI modelius, kurie naudoja kvotą ir gali kainuoti. Jei `azd up` nepavyksta dėl modelio kvotos, žr. [DI trikčių šalinimą](../chapter-07-troubleshooting/ai-troubleshooting.md) regionų ir kvotos pataisoms, taip pat 6 skyrių [Pajėgumų planavimas](../chapter-06-pre-deployment/capacity-planning.md).
 
 ---
 
-## Understanding What You Deployed
+## Supratimas, ką įdiegėte
 
-Tipinė tokia daugiagentė programa suteikia rinkinį Azure išteklių, kurie tiesiogiai atitinka aukščiau esančios diagramos atsakomybes:
+Tipinis tokios multiagentinės programėlės rinkinys sukuria Azure išteklius, kurie atitinka atsakomybes aukščiau esančiame diagramoje:
 
-| Resource | Why it's there |
+| Išteklis | Kodėl jis yra |
 |----------|----------------|
-| **Microsoft Foundry / Models** | Talpina kalbos modelius, kuriuos naudoja kiekvienas agentas |
-| **Azure AI Search** | Suteikia tyrėjo agentui pagrįstus duomenis paieškai |
-| **Container Apps** (or App Service) | Laiko orchestratorių ir agentų kodą |
-| **Cosmos DB** (in some samples) | Saugo bendrą būseną/atmintį, perduodamą tarp agentų |
-| **Application Insights** | Sekimas užklausų *tarp* agentų, kad galėtumėte derinti srautą |
+| **Microsoft Foundry / Modeliai** | Priima kalbos modelius, kuriuos naudoja kiekvienas agentas |
+| **Azure AI Search** | Duoda tyrinėtojo agentui patikimus duomenis paieškai |
+| **Container Apps** (arba App Service) | Priima orchestratoriaus ir agentų kodą |
+| **Cosmos DB** (kai kuriuose pavyzdžiuose) | Laiko bendrą būseną/atmintį, perduodamą tarp agentų |
+| **Application Insights** | Stebi užklausas *per* agentus, kad galėtumėte derinti procesą |
 
-### How the agents talk to each other
+### Kaip agentai bendrauja tarpusavyje
 
-Daugumoje azd daugiagentų pavyzdžių **orchestratorius veikia jūsų programos kode** (pvz., naudojant tokį karkasą kaip Semantic Kernel arba Microsoft Agent Framework). Orchestratorius paeiliui kviečia kiekvieną specialisto agentą, perduoda rezultatą ir surenka galutinį atsakymą. Agentai dalijasi kontekstu per:
+Daugelyje azd multiagentinių pavyzdžių **orchestratorius veikia jūsų programėlės kode** (pvz., naudodamas Semantic Kernel arba Microsoft Agent Framework). Orchestratorius paeiliui kviečia kiekvieną specialistų agentą, perduoda rezultatus ir sudeda galutinį atsakymą. Agentai dalijasi kontekstu per:
 
-- **Function/tool calls** — orchestratorius iškviečia specialistą ir gauna rezultatą
-- **Shared memory** — duomenų bazė (dažnai Cosmos DB) saugo būseną, kurią gali skaityti abu agentai
-- **Messages/events** — laisvesniam sujungimui agentai bendrauja per eilę arba Service Bus
+- **Funkcijų/įrankių kvietimus** – orchestratorius kviečia specialistą ir gauna atgal rezultatą
+- **Bendrą atmintį** – duomenų bazė (dažnai Cosmos DB) laiko būseną, kurią gali skaityti abu agentai
+- **Pranešimus/įvykius** – laisvesniam susiejimui agentai bendrauja per eilę ar Service Bus
 
-> **Kodėl tai svarbu derinimui:** kadangi kiekvienas žingsnis yra atskiras, Application Insights parodo *kuris* agentas buvo lėtas arba nepavyko. Tai pagrindinė priežastis, kodėl verta suskaidyti darbą tarp agentų.
+> **Kodėl tai svarbu derinimui:** kadangi kiekvienas žingsnis atskiras, Application Insights parodo, *kuris* agentas vėlavo ar nepavyko. Tai pagrindinė priežastis darbą dalinti tarp agentų.
 
 ---
 
-## Verify the Deployment
+## Patikrinkite diegimą
 
-Patikrinkite, ar sistema iš tikrųjų veikia prieš judant toliau:
+Įsitikinkite, kad sistema veikia prieš eidami toliau:
 
 ```bash
-# Rodyti įdiegtus galinius taškus
+# Rodyti diegiamus galinius taškus
 azd show
 
-# Atidaryti programos stebėjimo prietaisų skydelį
+# Atidaryti programos stebėjimo informacinę skydelį
 azd monitor
 
-# Stebėti žurnalus, jei kas nors atrodo negerai
+# Sekti žurnalus, jei kažkas atrodo neįprastai
 azd monitor --logs
 ```
 
-Tada atidarykite programos URL iš `azd show` ir išbandykite užklausą, kuri įtraukia visus agentus (Creative Writer atveju paprašykite parašyti trumpą straipsnį pasirinkta tema). Application Insights **transaction search** matysite, kad užklausa išsiskleidžia per tyrėjo, rašytojo ir redaktoriaus žingsnius.
+Tada atidarykite programėlės URL iš `azd show` ir bandykite užklausą, kuri apima visus agentus (Creative Writer paprašykite parašyti trumpą straipsnį apie temą). Application Insights **užklausų paieškoje** turėtumėte matyti užklausą, paskirstytą tarp tyrinėtojo, rašytojo ir redaktoriaus žingsnių.
 
 **Sėkmės kriterijai:**
-- ✅ `azd show` išvardija pasiekiamą galinį tašką
-- ✅ Užklausa sukuria rezultatą, kurį akivaizdžiai sudaro keli etapai
-- ✅ Application Insights rodo trasas daugiau nei vienam agento žingsniui
+- ✅ `azd show` rodo pasiekiamą galinį tašką
+- ✅ Užklausa generuoja rezultatą, kuris aiškiai praėjo kelis etapus
+- ✅ Application Insights rodo kelis agentų žingsnius
 
 ---
 
-## Customize: Add or Adjust an Agent
+## Pritaikymas: pridėkite arba pakoreguokite agentą
 
-Kadangi kiekvienas agentas yra tiesiog nurodymai plius įrankiai, pritaikyti tai yra pasiekiama:
+Kadangi agentas yra tik instrukcijos ir įrankiai, jį pritaikyti yra paprasta:
 
-1. **Raskite agentų apibrėžimus** šablone (dažnai `prompts/`, `agents/` arba `*.prompty` rinkinyje failų).
-2. **Tobulinkite agento nurodymus** — pavyzdžiui, nurodykite redaktoriaus agentui taikyti tam tikrą toną arba žodžių kiekį.
-3. **Perdiegtite tik kodą** (infrastruktūra lieka nepakitusi):
+1. **Raskite agentų aprašymus** šablone (dažnai `prompts/`, `agents/` arba `*.prompty` failų rinkinyje).
+2. **Pakeiskite agento instrukcijas** – pavyzdžiui, nurodykite redaktoriaus agentui laikytis tam tikro tono ar žodžių skaičiaus.
+3. **Pervieškite tik kodą** (infrastruktūra nekinta):
 
    ```bash
    azd deploy
    ```
 
-Jei norite eiti toliau ir kurti agentus iš savo *manifesto*, naudokite agento plėtinį ir jo pilną gyvavimo ciklą:
+Norėdami eiti toliau ir kurti agentus pagal *savo* manifestą, naudokite agentų plėtinį ir visas jo gyvavimo ciklas:
 
 ```bash
 azd extension install azure.ai.agents
 azd ai agent init -m agent-manifest.yaml
 azd up
-azd ai agent invoke      # testas, su atsako laiku
+azd ai agent invoke      # testas, su atsakymo laiko matavimu
 ```
 
-Žr. [Chapter 2: Agents](../chapter-02-ai-development/agents.md) ir [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) dėl pilno agentų gyvavimo ciklo (`invoke`, `eval generate`, `optimize`, `delete`).
+Žr. [2 skyrių: Agentai](../chapter-02-ai-development/agents.md) ir [AZD DI CLI nuorodą](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pilnam agentų gyvavimo ciklui (`invoke`, `eval generate`, `optimize`, `delete`).
 
 ---
 
-## Clean Up
+## Išvalymas
 
-Daugiagentės programos paleidžia kelias mokamas paslaugas. Pašalinkite viską, kai baigsite:
+Multiagentinės programėlės veikia kelis mokamus servisus. Išardykite viską, kai baigsite:
 
 ```bash
 azd down --force --purge
 ```
 
-Žymuo `--purge` taip pat pašalina minkštai ištrintus AI išteklius (pvz., Foundry/Azure AI Services paskyras), kad jie netrukdytų būsimiems diegimams arba nesukeltų papildomų išlaidų.
+Vėliava `--purge` taip pat pašalina lengvai ištrintus DI išteklius (pvz., Foundry/Azure DI servisų paskyras), kad jie netrukdytų ateities diegimui ar nesukeltų papildomų mokesčių.
 
 ---
 
-## A Note on Production Multi-Agent Systems
+## Pastaba apie gamyklines multiagentines sistemas
 
-[Retail Multi-Agent Solution](../../examples/retail-scenario.md) šiame repozitorijoje yra **architektūros šablonas**, o ne vieno komandos šablonas — jis dokumentuoja, kaip gamybinė mažmeninės prekybos sistema *galėtų* būti sukurta (ir pabrėžia, kad pilnas kūrimas yra reikšmingas darbas). Naudokite jį kaip dizaino atskaitą *po* to, kai išdiegsite veikiančią demonstracinę programą čia. Dėl gamybinių aspektų (atsparumas, kaina, stebėjimas, valdymas) tęskite [Chapter 8: Production AI Practices](../chapter-08-production/production-ai-practices.md).
-
----
-
-## Summary
-
-- Daugiagentė sistema suskaido darbą tarp specialistų, koordinuojamų orchestratoriaus.
-- Naudokite ją tik tada, kai užduotis turi aiškias stadijas, lygiagretumą arba skirtingus įrankius kiekvienam žingsniui — kitaip rinkitės vieną agentą.
-- azd darbo eiga lieka nepakitusi: `azd init` → `azd up` → test → `azd down`.
-- Tokie realūs šablonai kaip `contoso-creative-writer` leidžia šiandien pamatyti ir pritaikyti veikiančią daugiagentę programą.
-- Application Insights sekimas per agentus yra vienas didžiausių praktinių daugiagentės architektūros privalumų.
+[Retail Multi-Agent Solution](../../examples/retail-scenario.md) šiame saugykloje yra **architektūros šablonas**, o ne viena komanda įvykdoma šablonas – jis dokumentuoja, kaip būtų statoma gamykline prekybos sistema (ir aiškiai nurodo, kad pilnas kūrimas yra didelis darbas). Naudokite jį kaip dizaino pavyzdį *po* to, kai išdiegiate čia veikiančią pavyzdinę sistemą. Dėl gamybos aspektų (atsparumas, kaina, stebėjimas, valdymas) tęskite skaityti [8 skyrių: Gamybinės DI praktikos](../chapter-08-production/production-ai-practices.md).
 
 ---
 
-## 🔗 Navigation
+## Santrauka
 
-| Direction | Lesson |
+- Multiagentinė sistema padalija darbą tarp specialistų, koordinuojamų orchestratoriaus.
+- Naudokite ją tik tada, kai užduotis turi skirtingas stadijas, galima lygiagretių darbų ar skirtingų įrankių kiekvienam žingsniui – kitaip geriau tinka vienas agentas.
+- azd darbo eiga nepakinta: `azd init` → `azd up` → testavimas → `azd down`.
+- Tikras šablonas kaip `contoso-creative-writer` leidžia šiandien pamatyti ir pritaikyti veikiantį multiagentinį programėlą.
+- Application Insights stebėjimas per agentus yra vienas didžiausių multiagentinio dizaino praktinių privalumų.
+
+---
+
+## 🔗 Navigacija
+
+| Kryptis | Pamoka |
 |-----------|--------|
-| **Previous** | [Chapter 4: Infrastructure](../chapter-04-infrastructure/README.md) |
-| **Next** | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **Ankstesnis** | [4 skyrius: Infrastruktūra](../chapter-04-infrastructure/README.md) |
+| **Kitas** | [Koordinavimo modeliai](../chapter-06-pre-deployment/coordination-patterns.md) |
 
-## 📖 Related Resources
+## 📖 Susiję ištekliai
 
-- [AI Agents Guide](../chapter-02-ai-development/agents.md)
-- [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md)
-- [Production AI Practices](../chapter-08-production/production-ai-practices.md)
-- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [DI agentų vadovas](../chapter-02-ai-development/agents.md)
+- [Koordinavimo modeliai](../chapter-06-pre-deployment/coordination-patterns.md)
+- [Gamybinės DI praktikos](../chapter-08-production/production-ai-practices.md)
+- [DI trikčių šalinimas](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

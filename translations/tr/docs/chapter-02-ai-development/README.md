@@ -1,33 +1,33 @@
-# Bölüm 2: Yapay Zeka Öncelikli Geliştirme
+# Bölüm 2: Yapay Zeka-Öncelikli Geliştirme
 
-**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Süre**: 1-2 saat | **⭐ Zorluk**: Orta
+**📚 Kurs**: [Başlangıç için AZD](../../README.md) | **⏱️ Süre**: 1-2 saat | **⭐ Zorluk Seviyesi**: Orta
 
 ---
 
 ## Genel Bakış
 
-Bu bölüm, Azure Developer CLI ve Microsoft Foundry hizmetleri kullanarak yapay zeka destekli uygulamaların dağıtımına odaklanır. Basit yapay zeka sohbet uygulamalarından araçlara sahip akıllı ajanlara kadar.
+Bu bölüm, Azure Developer CLI ve Microsoft Foundry hizmetlerini kullanarak yapay zeka destekli uygulamaların dağıtımına odaklanmaktadır. Basit yapay zeka sohbet uygulamalarından araçlara sahip akıllı ajanlara kadar.
 
-> **Doğrulama notu (2026-06-15):** Bu bölümdeki komut akışı ve eklenti yönergeleri `azd` `1.25.6` ve mevcut önizleme AI agent eklenti sürümü `azure.ai.agents` `0.1.40-preview` ile gözden geçirilmiştir. Eğer daha eski bir AZD sürümündeyseniz, önce güncelleyin ve ardından egzersizlere devam edin.
+> **Doğrulama notu (2026-07-13):** Bu bölümdeki komut akışı ve uzantı rehberi `azd` `1.27.1` ve mevcut önizleme AI ajan uzantısı sürümü `azure.ai.agents` `1.0.0-beta.5` ile gözden geçirilmiştir. Daha eski bir AZD sürümündeyseniz, önce güncelleyin ve sonra alıştırmalara devam edin.
 
 ## Öğrenme Hedefleri
 
-Bu bölümü tamamladığınızda şunları yapabileceksiniz:
-- Önceden hazırlanmış AZD şablonlarını kullanarak yapay zeka uygulamaları dağıtın
-- Microsoft Foundry ile AZD entegrasyonunu anlayın
-- Araçlarla yapay zeka ajanlarını yapılandırın ve özelleştirin
-- RAG (Retrieval-Augmented Generation) uygulamalarını dağıtın
+Bu bölümü tamamlayarak:
+- Önceden hazırlanmış AZD şablonları kullanarak yapay zeka uygulamaları dağıtacaksınız
+- Microsoft Foundry entegrasyonunu AZD ile anlayacaksınız
+- Araçlara sahip yapay zeka ajanlarını yapılandırıp özelleştireceksiniz
+- RAG (Retrieval-Augmented Generation) uygulamalarının dağıtımını yapacaksınız
 
 ---
 
 ## 📚 Dersler
 
 | # | Ders | Açıklama | Süre |
-|---|------|----------|------|
-| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | AZD'yi Foundry hizmetleriyle bağlayın | 30 dk |
-| 2 | [AI Agents Guide](agents.md) | Araçlarla akıllı ajanlar dağıtın | 45 dk |
-| 3 | [AI Model Deployment](ai-model-deployment.md) | Yapay zeka modellerini dağıtın ve yapılandırın | 30 dk |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Uygulamalı: Yapay zeka çözümünüzü AZD'ye hazır hale getirin | 60 dk |
+|---|--------|-------------|------|
+| 1 | [Microsoft Foundry Entegrasyonu](microsoft-foundry-integration.md) | AZD'yi Foundry hizmetlerine bağlayın | 30 dk |
+| 2 | [Yapay Zeka Ajanları Rehberi](agents.md) | Araçlara sahip akıllı ajanlar dağıtın | 45 dk |
+| 3 | [Yapay Zeka Modeli Dağıtımı](ai-model-deployment.md) | Yapay zeka modellerini dağıtın ve yapılandırın | 30 dk |
+| 4 | [Yapay Zeka Atölye Laboratuvarı](ai-workshop-lab.md) | Uygulamalı: Yapay zeka çözümünüzü AZD’ye hazır hale getirin | 60 dk |
 
 ---
 
@@ -52,40 +52,40 @@ azd up
 ## 🤖 Öne Çıkan Yapay Zeka Şablonları
 
 | Şablon | Açıklama | Hizmetler |
-|--------|----------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Atıflı RAG sohbeti | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Araçlara sahip yapay zeka ajanı | AI Agent Service |
+|----------|-------------|----------|
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Atıflı RAG sohbeti | OpenAI + AI Arama |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Araçlara sahip yapay zeka ajanı | AI Ajan Hizmeti |
 | [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Temel yapay zeka sohbeti | OpenAI + Container Apps |
 
 ---
 
-## 💰 Maliyet Farkındalığı
+## 💰 Maliyet Bilinci
 
 | Ortam | Tahmini Aylık Maliyet |
-|-------|-----------------------|
-| Development | $80-150 |
-| Staging | $150-300 |
-| Production | $300-3,500+ |
+|-------------|----------------------|
+| Geliştirme | 80-150 $ |
+| Test | 150-300 $ |
+| Üretim | 300-3.500+ $ |
 
-**İpucu:** Ücretlerden kaçınmak için testten sonra `azd down` komutunu çalıştırın.
+**İpucu:** Ücretlendirmeyi önlemek için testi tamamladıktan sonra `azd down` komutunu çalıştırın.
 
 ---
 
-## 🔗 Gezinme
+## 🔗 Navigasyon
 
 | Yön | Bölüm |
-|-----|-------|
-| **Önceki** | [Chapter 1: Foundation](../chapter-01-foundation/README.md) |
-| **Sonraki** | [Chapter 3: Configuration](../chapter-03-configuration/README.md) |
-| **Atla** | [Chapter 8: Production Patterns](../chapter-08-production/README.md) |
+|-----------|---------|
+| **Önceki** | [Bölüm 1: Temel](../chapter-01-foundation/README.md) |
+| **Sonraki** | [Bölüm 3: Yapılandırma](../chapter-03-configuration/README.md) |
+| **Atla** | [Bölüm 8: Üretim Desenleri](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 İlgili Kaynaklar
 
-- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Production AI Practices](../chapter-08-production/production-ai-practices.md)
-- [Application Insights](../chapter-06-pre-deployment/application-insights.md)
+- [Yapay Zeka Sorun Giderme](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Üretim Yapay Zeka Uygulamaları](../chapter-08-production/production-ai-practices.md)
+- [Uygulama İçgörüleri](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 

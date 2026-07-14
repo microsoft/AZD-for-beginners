@@ -1,69 +1,69 @@
 # AZD für KI-Entwickler Workshop
 
-> Validiert gegen `azd 1.25.6` im Juni 2026.
-> 
+> Validiert mit `azd 1.27.1` im Juli 2026.
+
 > [!IMPORTANT]  
-> **Dieser Workshop enthält eine Anleitung, die Sie in Ihrem lokalen Browser in der Vorschau ansehen können. Um zu beginnen, öffnen Sie das Repository in GitHub Codespaces, einem Dev-Container oder einem lokalen Klon mit installiertem MkDocs—warten Sie dann, bis Sie ein aktives VS Code-Terminal sehen, und geben Sie ein:**  
+> **Dieser Workshop ist mit einem Workshop-Leitfaden ausgestattet, den Sie in Ihrem lokalen Browser anzeigen können. Um zu starten, öffnen Sie das Repo in GitHub Codespaces, einem Dev Container oder einem lokalen Klon mit installiertem MkDocs – warten Sie dann, bis ein aktives VS Code Terminal sichtbar ist, und geben Sie ein:**  
 > `mkdocs serve > /dev/null 2>&1 &`  
-> **Es sollte ein Popup-Dialog erscheinen, um die Vorschauseite in einem Browser zu öffnen.**
+> **Es sollte ein Popup-Dialog erscheinen, um die Vorschauseite im Browser zu öffnen.**
 
-Willkommen zum praxisorientierten Workshop zum Erlernen der Azure Developer CLI (AZD) mit Schwerpunkt auf der Bereitstellung von KI-Anwendungen. Dieser Workshop hilft Ihnen, ein praktisches Verständnis der AZD-Vorlagen in 3 Schritten zu erlangen:
+Willkommen zum praxisorientierten Workshop, um Azure Developer CLI (AZD) mit Schwerpunkt auf KI-Anwendungsbereitstellung zu lernen. Dieser Workshop hilft Ihnen, AZD-Vorlagen in 3 Schritten praktisch zu verstehen:
 
-1. **Discovery** - finden Sie die Vorlage, die zu Ihnen passt.
-1. **Deployment** - bereitstellen und validieren, dass es funktioniert
-1. **Customization** - anpassen und iterieren, um es zu Ihrem eigenen zu machen!
+1. **Entdeckung** – finden Sie die passende Vorlage für Sie.
+1. **Bereitstellung** – stellen Sie bereit und prüfen Sie die Funktionalität
+1. **Anpassung** – passen Sie an und iterieren Sie, um es zu Ihrem eigenen zu machen!
 
-Im Verlauf dieses Workshops werden Sie außerdem in zentrale Entwicklertools und Workflows eingeführt, die Ihnen helfen, Ihren End-to-End-Entwicklungsprozess zu optimieren.
+Im Verlauf dieses Workshops werden Sie auch mit wesentlichen Entwicklerwerkzeugen und Workflows vertraut gemacht, die Ihnen helfen, Ihre gesamte Entwicklungsreise zu optimieren.
 
 | | | 
 |:---|:---|
-| **📚 Kursübersicht**| [AZD für Einsteiger](../README.md)|
+| **📚 Kursstartseite**| [AZD Für Anfänger](../README.md)|
 | **📖 Dokumentation** | [Erste Schritte mit KI-Vorlagen](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️ KI-Vorlagen** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
-|**🚀 Nächste Schritte** | [Nehmen Sie die Herausforderung an](#workshop-challenge) |
+| **🛠️ KI-Vorlagen** | [Microsoft Foundry Vorlagen](https://ai.azure.com/templates) |
+|**🚀 Nächste Schritte** | [Herausforderung annehmen](#workshop-challenge) |
 | | |
 
-## Workshop-Übersicht
+## Workshop Übersicht
 
 **Dauer:** 3-4 Stunden  
-**Niveau:** Anfänger bis Fortgeschrittene  
-**Voraussetzungen:** Vertrautheit mit Azure, KI-Konzepten, VS Code und Kommandozeilen-Tools.
+**Niveau:** Anfänger bis Mittelstufe  
+**Voraussetzungen:** Vertrautheit mit Azure, KI-Konzepten, VS Code & Kommandozeilen-Tools.
 
-Dies ist ein praxisorientierter Workshop, bei dem Sie durch Ausprobieren lernen. Nachdem Sie die Übungen abgeschlossen haben, empfehlen wir, das Curriculum "AZD für Einsteiger" zu durchgehen, um Ihre Lernreise in Richtung Sicherheits- und Produktivitäts-Best-Practices fortzusetzen.
+Dies ist ein praktischer Workshop, bei dem Sie durch Ausführen lernen. Nach Abschluss der Übungen empfehlen wir, das Curriculum AZD Für Anfänger durchzugehen, um Ihre Lernreise in den Bereichen Sicherheit und Produktivität fortzusetzen.
 
 | Zeit| Modul  | Ziel |
 |:---|:---|:---|
-| 15 mins | Einführung | Rahmen setzen, Ziele verstehen |
-| 30 mins | KI-Vorlage auswählen | Optionen erkunden und eine Startervorlage wählen | 
-| 30 mins | KI-Vorlage validieren | Standardlösung in Azure bereitstellen |
-| 30 mins | KI-Vorlage dekonstruieren | Struktur und Konfiguration untersuchen |
-| 30 mins | KI-Vorlage konfigurieren | Verfügbare Funktionen aktivieren und testen |
-| 30 mins | KI-Vorlage anpassen | Vorlage an Ihre Anforderungen anpassen |
-| 30 mins | Infrastruktur abbauen | Bereinigen und Ressourcen freigeben |
-| 15 mins | Abschluss & Nächste Schritte | Lernressourcen, Workshop-Herausforderung |
+| 15 Min | Einführung | Einführung, Verständnis der Ziele |
+| 30 Min | KI-Vorlage auswählen | Optionen erkunden und Startvorlage wählen | 
+| 30 Min | KI-Vorlage validieren | Standardlösung in Azure bereitstellen |
+| 30 Min | KI-Vorlage zerlegen | Struktur und Konfiguration erkunden |
+| 30 Min | KI-Vorlage konfigurieren | Verfügbare Funktionen aktivieren und ausprobieren |
+| 30 Min | KI-Vorlage anpassen | Vorlage an Ihre Bedürfnisse anpassen |
+| 30 Min | Infrastruktur abbauen | Aufräumen und Ressourcen freigeben |
+| 15 Min | Abschluss & Nächste Schritte | Lernquellen, Workshop-Herausforderung |
 | | |
 
 ## Was Sie lernen werden
 
-Betrachten Sie die AZD-Vorlage als eine Lern-Sandbox, um verschiedene Fähigkeiten und Werkzeuge für die End-to-End-Entwicklung auf Microsoft Foundry zu erkunden. Am Ende dieses Workshops sollten Sie ein intuitives Verständnis für verschiedene Werkzeuge und Konzepte in diesem Kontext haben.
+Betrachten Sie die AZD Vorlage als Lernspielplatz, um verschiedene Fähigkeiten und Werkzeuge für die End-to-End-Entwicklung auf Microsoft Foundry zu erkunden. Am Ende dieses Workshops sollten Sie ein intuitives Verständnis für verschiedene Werkzeuge und Konzepte in diesem Kontext haben.
 
 | Konzept  | Ziel |
 |:---|:---|
-| **Azure Developer CLI** | Verständnis der Befehle und Workflows des Tools |
-| **AZD-Vorlagen**| Verständnis von Projektstruktur und Konfiguration |
-| **Azure AI Agent**| Provisionierung & Bereitstellung eines Microsoft Foundry-Projekts  |
-| **Azure AI Search**| Kontext-Engineering mit Agenten ermöglichen |
-| **Beobachtbarkeit**| Tracing, Überwachung und Auswertungen erkunden |
-| **Red Teaming**| Adversarielle Tests und Gegenmaßnahmen erkunden |
+| **Azure Developer CLI** | Befehle und Workflows des Tools verstehen|
+| **AZD Vorlagen**| Projektstruktur und Konfiguration verstehen|
+| **Azure KI Agent**| Microsoft Foundry Projekt bereitstellen & implementieren  |
+| **Azure KI Suche**| Kontextuelle Erstellung mit Agenten ermöglichen |
+| **Beobachtbarkeit**| Tracing, Monitoring und Auswertungen erkunden |
+| **Red Teaming**| Gegnerschaftliches Testen und Gegenmaßnahmen erkunden |
 | | |
 
-## Workshop-Module
+## Workshop Module
 
-Ready to get started? Navigate through the workshop modules:
+Bereit zum Start? Navigieren Sie durch die Workshop-Module:
 
 - [Modul 1: KI-Vorlage auswählen](instructions/1-Select-AI-Template.md)
 - [Modul 2: KI-Vorlage validieren](instructions/2-Validate-AI-Template.md) 
-- [Modul 3: KI-Vorlage dekonstruieren](instructions/3-Deconstruct-AI-Template.md)
+- [Modul 3: KI-Vorlage zerlegen](instructions/3-Deconstruct-AI-Template.md)
 - [Modul 4: KI-Vorlage konfigurieren](instructions/4-Configure-AI-Template.md)
 - [Modul 5: KI-Vorlage anpassen](instructions/5-Customize-AI-Template.md)
 - [Modul 6: Infrastruktur abbauen](instructions/6-Teardown-Infrastructure.md)
@@ -71,7 +71,7 @@ Ready to get started? Navigate through the workshop modules:
 
 ## Haben Sie Feedback?
 
-Erstellen Sie ein Issue in diesem Repository (taggen Sie es mit `Workshop`) oder treten Sie unserem [Discord](https://aka.ms/foundry/discord) bei und posten Sie im Kanal `#get-help`
+Erstellen Sie ein Issue in diesem Repo (kennzeichnen Sie es mit `Workshop`) oder treten Sie unserem [Discord](https://aka.ms/foundry/discord) bei und posten Sie im `#get-help` Kanal
 
 ---
 

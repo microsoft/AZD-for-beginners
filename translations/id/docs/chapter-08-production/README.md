@@ -6,18 +6,18 @@
 
 ## Ikhtisar
 
-Bab ini membahas pola penyebaran yang siap untuk lingkungan perusahaan, penguatan keamanan, pemantauan, dan optimasi biaya untuk beban kerja AI produksi.
+Bab ini membahas pola penerapan siap perusahaan, penguatan keamanan, pemantauan, dan optimisasi biaya untuk beban kerja AI produksi.
 
-> Divalidasi terhadap `azd 1.25.6` pada Juni 2026.
+> Divalidasi menggunakan `azd 1.27.1` pada Juli 2026.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan bab ini, Anda akan:
-- Menerapkan aplikasi yang tangguh di multi-wilayah
-- Menerapkan pola keamanan tingkat perusahaan
-- Mengonfigurasi pemantauan yang komprehensif
+- Menerapkan aplikasi tahan multi-wilayah
+- Mengimplementasikan pola keamanan perusahaan
+- Mengonfigurasi pemantauan menyeluruh
 - Mengoptimalkan biaya dalam skala besar
-- Mengatur pipeline CI/CD dengan AZD
+- Menyiapkan pipeline CI/CD dengan AZD
 
 ---
 
@@ -25,16 +25,16 @@ Dengan menyelesaikan bab ini, Anda akan:
 
 | # | Pelajaran | Deskripsi | Waktu |
 |---|--------|-------------|------|
-| 1 | [Praktik AI Produksi](production-ai-practices.md) | Pola penyebaran tingkat perusahaan | 90 menit |
+| 1 | [Praktik AI Produksi](production-ai-practices.md) | Pola penerapan perusahaan | 90 menit |
 
 ---
 
 ## 🚀 Daftar Periksa Produksi
 
-- [ ] Penyebaran multi-wilayah untuk ketahanan
-- [ ] Identitas terkelola untuk otentikasi (tanpa kunci)
+- [ ] Penerapan multi-wilayah untuk ketahanan
+- [ ] Identitas terkelola untuk autentikasi (tanpa kunci)
 - [ ] Application Insights untuk pemantauan
-- [ ] Anggaran biaya dan peringatan dikonfigurasi
+- [ ] Anggaran dan peringatan biaya dikonfigurasi
 - [ ] Pemindaian keamanan diaktifkan
 - [ ] Integrasi pipeline CI/CD
 - [ ] Rencana pemulihan bencana
@@ -47,21 +47,21 @@ Dengan menyelesaikan bab ini, Anda akan:
 
 ```mermaid
 graph LR
-    Gateway[Gerbang API] --> AI[Layanan AI] --> Models[Model Microsoft Foundry]
-    Gateway --> Auth[Layanan Otentikasi]
-    AI --> Data[Penyimpanan Data]
+    Gateway[Gerbang API] --> AI[Layanan AI] --> Models[Model Foundry Microsoft]
+    Gateway --> Auth[Layanan Authentikasi]
+    AI --> Data[Tempat Penyimpanan Data]
 ```
 
-### Pola 2: Event-Driven AI
+### Pola 2: AI Berbasis Peristiwa
 
 ```mermaid
 graph LR
-    EventGrid[Grid Peristiwa] --> Functions[Fungsi] --> Pipeline[Alur AI]
+    EventGrid[Event Grid] --> Functions[Fungsi] --> Pipeline[Jalur AI]
 ```
 
 ---
 
-## 🔐 Praktik Keamanan Terbaik
+## 🔐 Praktik Terbaik Keamanan
 
 ```bicep
 // Use managed identity
@@ -80,13 +80,13 @@ properties: {
 
 ---
 
-## 💰 Optimasi Biaya
+## 💰 Optimisasi Biaya
 
 | Strategi | Penghematan |
 |----------|---------|
-| Skalakan ke nol (Container Apps) | 60-80% |
-| Gunakan tier konsumsi untuk pengembangan | 50-70% |
-| Skalasi terjadwal | 30-50% |
+| Skala ke nol (Container Apps) | 60-80% |
+| Gunakan tingkat konsumsi untuk pengembangan | 50-70% |
+| Skala terjadwal | 30-50% |
 | Kapasitas terpesan | 20-40% |
 
 ```bash
@@ -120,11 +120,11 @@ az monitor metrics list --resource <resource-id>
 | Arah | Bab |
 |-----------|---------|
 | **Sebelumnya** | [Bab 7: Pemecahan Masalah](../chapter-07-troubleshooting/README.md) |
-| **Selesai Kursus** | [Beranda Kursus](../../README.md) |
+| **Kursus Selesai** | [Beranda Kursus](../../README.md) |
 
 ---
 
-## 📖 Sumber Terkait
+## 📖 Sumber Daya Terkait
 
 - [Panduan Agen AI](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)

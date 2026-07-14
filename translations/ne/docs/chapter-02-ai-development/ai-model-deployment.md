@@ -1,30 +1,30 @@
-# Azure Developer CLI सँग AI मोडेल परिनियोजन
+# Azure Developer CLI संग AI मोडेल डिप्लोयमेन्ट
 
 **अध्याय नेभिगेसन:**
-- **📚 कोर्स गृहपृष्ठ**: [शुरुआतीहरूको लागि AZD](../../README.md)
-- **📖 वर्तमान अध्याय**: अध्याय २ - AI-प्रथम विकास
-- **⬅️ अघिल्लो**: [Microsoft Foundry एकीकरण](microsoft-foundry-integration.md)
-- **➡️ अर्को**: [AI कार्यशाला प्रयोगशाला](ai-workshop-lab.md)
+- **📚 कोर्स होम**: [AZD For Beginners](../../README.md)
+- **📖 हालको अध्याय**: अध्याय २ - AI-प्रथम विकास
+- **⬅️ अघिल्लो**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ अर्को**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 अर्को अध्याय**: [अध्याय ३: कन्फिगरेसन](../chapter-03-configuration/configuration.md)
 
-यस मार्गनिर्देशनले AI मोडेलहरू AZD टेम्प्लेटहरू प्रयोग गरी परिनियोजन गर्ने विस्तृत निर्देशनहरू प्रदान गर्दछ, मोडेल छनोटदेखि उत्पादन परिनियोजन ढाँचा सम्म सबै कुरा समेटिएको छ।
+यस गाइडले AZD टेम्प्लेटहरू प्रयोग गरी AI मोडेलहरू डिप्लोय गर्ने पूर्ण निर्देशनहरू प्रदान गर्छ, मोडेल छनौटदेखि उत्पाद डिप्लोयमेन्ट ढाँचाहरू सम्म सबै कुरा समेट्छ।
 
-> **मान्यता नोट (२०२६-०३-२५):** यो मार्गनिर्देशनमा AZD वर्कफ्लो `azd` `1.23.12` विरुद्ध जाँच गरिएको थियो। डिफल्ट सेवा परिनियोजन विन्डो भन्दा लामो समय लग्ने AI परिनियोजनहरूको लागि, हालका AZD रिलिजहरूले `azd deploy --timeout <सेकेन्ड>` समर्थन गर्दछन्।
+> **प्रमाणीकरण नोट (२०२६-०७-१३):** यस गाइडको AZD वर्कफ्लो `azd` `1.27.1` विरुद्ध जाँच गरिएको थियो। डिफल्ट सेवा डिप्लोयमेन्ट विन्डो भन्दा लामो समय लाग्ने AI डिप्लोयमेन्टहरूका लागि, हालका AZD रिलिजहरूले `azd deploy --timeout <seconds>` समर्थन गर्छन्।
 
 ## सामग्री तालिका
 
-- [मोडेल छनोट रणनीति](#मोडेल-छनोट-रणनीति)
+- [मोडेल छनौट रणनीति](#मोडेल-छनौट-रणनीति)
 - [AI मोडेलहरूको लागि AZD कन्फिगरेसन](#ai-मोडेलहरूको-लागि-azd-कन्फिगरेसन)
-- [परिनियोजन ढाँचाहरू](#परिनियोजन-ढाँचाहरू)
+- [डिप्लोयमेन्ट ढाँचाहरू](#डिप्लोयमेन्ट-ढाँचाहरू)
 - [मोडेल व्यवस्थापन](#मोडेल-व्यवस्थापन)
 - [उत्पादन विचारहरू](#उत्पादन-विचारहरू)
-- [अनुगमन र अवलोकन](#अनुगमन-र-अवलोकन)
+- [अनुगमन र अवलोकन क्षमता](#अनुगमन-र-अवलोकन-क्षमता)
 
-## मोडेल छनोट रणनीति
+## मोडेल छनौट रणनीति
 
 ### Microsoft Foundry मोडेलहरू
 
-तपाईंको प्रयोग केसका लागि उपयुक्त मोडेल छनोट गर्नुहोस्:
+तपाईंको प्रयोगको केसका लागि सही मोडेल छान्नुहोस्:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -54,18 +54,18 @@ services:
 
 ### मोडेल क्षमता योजना
 
-| मोडेल प्रकार | प्रयोग केस | सिफारिश गरिएको क्षमता | लागत विचारहरू |
+| मोडेल प्रकार | प्रयोग केस | सिफारिस गरिएको क्षमता | लागत विचारहरू |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | कुराकानी, प्रश्नोत्तर | १०-५० TPM | अधिकांश कार्यभारका लागि लागत-प्रभावकारी |
+| gpt-4.1-mini | च्याट, प्रश्नोत्तर | १०-५० TPM | धेरै कार्यभारका लागि लागत-प्रभावकारी |
 | gpt-4.1 | जटिल तर्क | २०-१०० TPM | उच्च लागत, प्रिमियम सुविधाहरूका लागि प्रयोग गर्नुहोस् |
-| text-embedding-3-large | खोज, RAG | ३०-१२० TPM | सिमेन्टिक खोज र पुनःप्राप्तिको लागि बलियो पूर्वनिर्धारित विकल्प |
-| Whisper | वक्तव्य-देखि-पाठ | १०-५० TPM | अडियो प्रशोधन कार्यभारहरूका लागि |
+| text-embedding-3-large | खोज, RAG | ३०-१२० TPM | सेम्यान्टिक खोज र पुनःप्राप्तिका लागि बलियो डिफल्ट विकल्प |
+| Whisper | भाषण-बाट-पाठ | १०-५० TPM | अडियो प्रशोधन कार्यभारहरूका लागि |
 
 ## AI मोडेलहरूको लागि AZD कन्फिगरेसन
 
-### बाइसेप टेम्प्लेट कन्फिगरेसन
+### Bicep टेम्प्लेट कन्फिगरेसन
 
-बाइसेप टेम्प्लेटमार्फत मोडेल परिनियोजनहरू सिर्जना गर्नुहोस्:
+Bicep टेम्प्लेटमार्फत मोडेल डिप्लोयमेन्टहरू सिर्जना गर्नुहोस्:
 
 ```bicep
 // infra/main.bicep
@@ -124,9 +124,9 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
-### वातावरण चर
+### वातावरण भेरिएबलहरू
 
-आफ्नो आवेदन वातावरण कन्फिगर गर्नुहोस्:
+आफ्नो अनुप्रयोग वातावरण कन्फिगर गर्नुहोस्:
 
 ```bash
 # .env कन्फिगरेसन
@@ -136,9 +136,9 @@ AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## परिनियोजन ढाँचाहरू
+## डिप्लोयमेन्ट ढाँचाहरू
 
-### ढाँचा १: एकल-क्षेत्र परिनियोजन
+### ढाँचा १: एकल-प्रदेश डिप्लोयमेन्ट
 
 ```yaml
 # azure.yaml - Single region
@@ -151,12 +151,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-उत्तम लागि:
-- विकास र परीक्षण
+सबैभन्दा उपयुक्त:
+- विकास र परीक्षणका लागि
 - एकल बजार अनुप्रयोगहरू
 - लागत अनुकूलन
 
-### ढाँचा २: बहु-क्षेत्र परिनियोजन
+### ढाँचा २: बहु-प्रदेश डिप्लोयमेन्ट
 
 ```bicep
 // Multi-region deployment
@@ -169,14 +169,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-उत्तम लागि:
+सबैभन्दा उपयुक्त:
 - विश्वव्यापी अनुप्रयोगहरू
 - उच्च उपलब्धता आवश्यकताहरू
 - लोड वितरण
 
-### ढाँचा ३: हाइब्रिड परिनियोजन
+### ढाँचा ३: हाइब्रिड डिप्लोयमेन्ट
 
-Microsoft Foundry मोडेलहरूलाई अन्य AI सेवाहरूसँग संयोजन गर्नुहोस्:
+Microsoft Foundry मोडेलहरूलाई अन्य AI सेवाहरूसँग मिलाउनुहोस्:
 
 ```bicep
 // Hybrid AI services
@@ -209,7 +209,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### संस्करण नियन्त्रण
 
-तपाईंको AZD कन्फिगरेसनमा मोडेल संस्करणहरू ट्र्याक गर्नुहोस्:
+आफ्नो AZD कन्फिगरेसनमा मोडेल संस्करणहरू ट्र्याक गर्नुहोस्:
 
 ```json
 {
@@ -229,7 +229,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### मोडेल अपडेटहरू
 
-मोडेल अपडेटका लागि AZD हुकहरू प्रयोग गर्नुहोस्:
+मोडेल अपडेटहरूका लागि AZD हुकहरू प्रयोग गर्नुहोस्:
 
 ```bash
 #!/bin/bash
@@ -241,13 +241,13 @@ az cognitiveservices account list-models \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
 
-# यदि डिप्लोयमेन्टले पूर्वनिर्धारित समय मिटर भन्दा बढी समय लिन्छ भने
+# यदि मेसिनस्थापनले पूर्वनिर्धारित समयसीमा भन्दा बढी समय लिन्छ भने
 azd deploy --timeout 1800
 ```
 
 ### A/B परीक्षण
 
-धेरै मोडेल संस्करणहरू परिनियोजन गर्नुहोस्:
+धेरै मोडेल संस्करणहरू डिप्लोय गर्नुहोस्:
 
 ```bicep
 param enableABTesting bool = false
@@ -338,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### लागत अनुकूलन
 
-लागत नियन्त्रणहरू कार्यान्वयन गर्नुहोस्:
+लागत नियन्त्रण लागू गर्नुहोस्:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -368,11 +368,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## अनुगमन र अवलोकन
+## अनुगमन र अवलोकन क्षमता
 
-### एप्लिकेशन इन्साइट्स एकीकरण
+### अनुप्रयोग इनसाइट्स एकीकरण
 
-AI कार्यभारहरूको लागि अनुगमन कन्फिगर गर्नुहोस्:
+AI कार्यभारहरूको अनुगमन कन्फिगर गर्नुहोस्:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -408,12 +408,12 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### कस्टम मेट्रिक्स
+### अनुकूलित मेट्रिक्स
 
 AI-विशिष्ट मेट्रिक्स ट्र्याक गर्नुहोस्:
 
 ```python
-# एआई मोडेलहरूको लागि अनुकूल टेलिमेट्री
+# एआई मोडेलहरूको लागि अनुकूलन टेलिमेट्री
 import logging
 from applicationinsights import TelemetryClient
 
@@ -447,7 +447,7 @@ class AITelemetry:
 
 ### स्वास्थ्य जाँचहरू
 
-AI सेवा स्वास्थ्य अनुगमन कार्यान्वयन गर्नुहोस्:
+AI सेवा स्वास्थ्य अनुगमन लागू गर्नुहोस्:
 
 ```python
 # स्वास्थ्य जाँच अन्तबिन्दुहरू
@@ -476,32 +476,32 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## आगामी कदमहरू
+## अर्को कदमहरू
 
-1. **[Microsoft Foundry एकीकरण गाइड](microsoft-foundry-integration.md)** सेवा एकीकरण ढाँचाहरूका लागि समीक्षा गर्नुहोस्
-2. **[AI कार्यशाला प्रयोगशाला](ai-workshop-lab.md)** बाट व्यावहारिक अनुभव प्राप्त गर्नुहोस्
-3. **[उत्पादन AI अभ्यासहरू](production-ai-practices.md)** कार्यान्वयन गर्नुहोस् उद्यम परिनियोजनहरूको लागि
-4. **[AI समस्या समाधान गाइड](../chapter-07-troubleshooting/ai-troubleshooting.md)** मा सामान्य समस्याहरूको लागि अन्वेषण गर्नुहोस्
+१. **[Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** मा सेवा एकीकरण ढाँचाहरू समीक्षा गर्नुहोस्
+२. **[AI Workshop Lab](ai-workshop-lab.md)** पूरा गरी व्यावहारिक अनुभव प्राप्त गर्नुहोस्
+३. **[Production AI Practices](production-ai-practices.md)** कार्यान्वयन गरी एन्तरप्राइज डिप्लोयमेन्टहरूका लागि
+४. **[AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** मा सामान्य समस्याहरू अन्वेषण गर्नुहोस्
 
 ## स्रोतहरू
 
-- [Microsoft Foundry मोडेल उपलब्धता](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Azure Developer CLI दस्तावेज़](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [कन्टेनर एप्स स्केलिङ](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [AI मोडेल लागत अनुकूलन](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Microsoft Foundry Models Model Availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Container Apps Scaling](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [AI Model Cost Optimization](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
 **अध्याय नेभिगेसन:**
-- **📚 कोर्स गृहपृष्ठ**: [शुरुआतीहरूको लागि AZD](../../README.md)
-- **📖 वर्तमान अध्याय**: अध्याय २ - AI-प्रथम विकास
-- **⬅️ अघिल्लो**: [Microsoft Foundry एकीकरण](microsoft-foundry-integration.md)
-- **➡️ अर्को**: [AI कार्यशाला प्रयोगशाला](ai-workshop-lab.md)
+- **📚 कोर्स होम**: [AZD For Beginners](../../README.md)
+- **📖 हालको अध्याय**: अध्याय २ - AI-प्रथम विकास
+- **⬅️ अघिल्लो**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ अर्को**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 अर्को अध्याय**: [अध्याय ३: कन्फिगरेसन](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**अस्वीकरण**:  
-यो दस्तावेज़ AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) प्रयोग गरी अनुवाद गरिएको हो। हामी शुद्धताको लागि प्रयासरत छौं, तर कृपया जानकार हुनुहोस् कि स्वचालित अनुवादमा त्रुटिहरू वा असत्यताहरू हुन सक्छन्। मूल दस्तावेज़ आफ्नो मातृ भाषामा आधिकारिक स्रोतको रूपमा मानिनुपर्छ। महत्वपूर्ण जानकारीका लागि, व्यावसायिक मानव अनुवाद सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न कुनै पनि गलतफहमी वा गलत व्याख्याहरूका लागि हामी जिम्मेवार छैनौं।
+**अस्वीकरण**:
+यो दस्तावेज़ AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) प्रयोग गरेर अनुवाद गरिएको हो। हामी सही हुन प्रयास गर्छौं, तर कृपया जानकार हुनुस् कि स्वचालित अनुवादमा त्रुटिहरू वा अशुद्धताहरू हुन सक्छन्। मूल दस्तावेज़ यसको मूल भाषामा आधिकारिक स्रोत मानिनुपर्छ। महत्वपूर्ण जानकारीका लागि व्यावसायिक मानव अनुवाद सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न कुनै पनि गलत बुझाइ वा त्रुटिको लागि हामी जिम्मेवार छैनौं।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

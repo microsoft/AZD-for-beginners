@@ -1,23 +1,23 @@
-# Sura 6: Upangaji kabla ya Utoaji & Uthibitisho
+# Sura 6: Upangaji na Uthibitishaji Kabla ya Utekelezaji
 
-**📚 Kozi**: [AZD Kwa Waanzilishi](../../README.md) | **⏱️ Muda**: 1 saa | **⭐ Ugumu**: Kati
+**📚 Kozi**: [AZD Kwa Anwani](../../README.md) | **⏱️ Muda**: Saa 1 | **⭐ Ugumu**: Kati
 
 ---
 
 ## Muhtasari
 
-Sura hii inashughulikia hatua muhimu za upangaji na uthibitisho kabla ya kutoa programu yako. Jifunze kuepuka makosa ghali kwa upangaji sahihi wa uwezo, uchaguzi wa SKU, na ukaguzi wa preflight.
+Sura hii inajumuisha hatua muhimu za kupanga na kuthibitisha kabla ya kupeleka programu yako. Jifunze kuepuka makosa ghali kwa upangaji bora wa uwezo, uteuzi wa SKU, na ukaguzi wa awali.
 
-> Imethibitishwa dhidi ya `azd 1.25.6` mwezi Juni 2026.
+> Imethibitishwa dhidi ya `azd 1.27.1` mwezi Julai 2026.
 
 ## Malengo ya Kujifunza
 
-Kwa kumaliza sura hii, utaweza:
-- Endesha ukaguzi wa preflight kabla ya utoaji
+Kwa kumaliza sura hii, utakuwa umeweza:
+- Endesha ukaguzi wa awali kabla ya utekelezaji
 - Panga uwezo na kukadiria mahitaji ya rasilimali
 - Chagua SKU zinazofaa kwa uboreshaji wa gharama
-- Sanidi Application Insights kwa ufuatiliaji
-- Elewa mifumo ya uratibu wa timu
+- Sanidi Application Insights kwa ajili ya ufuatiliaji
+- Elewa muundo wa ushirikiano wa timu
 
 ---
 
@@ -25,24 +25,24 @@ Kwa kumaliza sura hii, utaweza:
 
 | # | Somo | Maelezo | Muda |
 |---|--------|-------------|------|
-| 1 | [Ukaguzi wa Preflight](preflight-checks.md) | Thibitisha usanidi kabla ya utoaji | 15 dakika |
-| 2 | [Upangaji wa Uwezo](capacity-planning.md) | Kadiria mahitaji ya rasilimali | 20 dakika |
-| 3 | [Uchaguzi wa SKU](sku-selection.md) | Chagua ngazi za bei zinazofaa | 15 dakika |
-| 4 | [Application Insights](application-insights.md) | Sanidi ufuatiliaji | 20 dakika |
-| 5 | [Mifumo ya Uratibu](coordination-patterns.md) | Taratibu za kazi za timu wakati wa utoaji | 15 dakika |
+| 1 | [Ukaguzi wa Awali](preflight-checks.md) | Thibitisha usanidi kabla ya utekelezaji | 15 min |
+| 2 | [Upangaji Uwezo](capacity-planning.md) | Kadiria mahitaji ya rasilimali | 20 min |
+| 3 | [Uteuzi wa SKU](sku-selection.md) | Chagua ngazi za bei zinazofaa | 15 min |
+| 4 | [Application Insights](application-insights.md) | Sanidi ufuatiliaji | 20 min |
+| 5 | [Mifumo ya Ushirikiano](coordination-patterns.md) | Mipango ya kazi ya timu za utekelezaji | 15 min |
 
 ---
 
 ## 🚀 Anza Haraka
 
 ```bash
-# Angalia vikwazo vya usajili
+# Angalia vikomo vya usajili
 az vm list-usage --location eastus --output table
 
-# Onyesha awali ya uanzishaji (hazitaundwa rasilimali)
+# Tazama mpangilio awali wa uanzishaji (hakuna rasilimali zilizotengenezwa)
 azd provision --preview
 
-# Thibitisha sarufi ya Bicep
+# Thibitisha sintaksia ya Bicep
 az bicep build --file infra/main.bicep
 
 # Angalia usanidi wa mazingira
@@ -51,50 +51,50 @@ azd env get-values
 
 ---
 
-## ☑️ Orodha ya Ukaguzi Kabla ya Utoaji
+## ☑️ Orodha ya Kukagua Kabla ya Utekelezaji
 
 ### Kabla ya `azd provision`
 
-- [ ] Quota imethibitishwa kwa mkoa
-- [ ] SKUs zimechaguliwa ipasavyo
-- [ ] Makadirio ya gharama yamepitwa
-- [ ] Kanuni za kutunga majina zimezingatiwa
-- [ ] Usalama/RBAC umewekwa
+- [ ] Hakikisha nafasi ya rasilimali kwa eneo
+- [ ] SKU zimetolewa kwa usahihi
+- [ ] Makadirio ya gharama yamekaguliwa
+- [ ] Ibada za majina zimeratibiwa
+- [ ] Usalama/RBAC umeanzishwa
 
 ### Kabla ya `azd deploy`
 
-- [ ] Vigezo vya mazingira vimewekwa
-- [ ] Siri zimeshifadhiwa kwenye Key Vault
-- [ ] Connection strings imethibitishwa
+- [ ] Mabadiliko ya mazingira yamewekwa
+- [ ] Siri ziko Key Vault
+- [ ] Mifumo ya uunganisho imethibitishwa
 - [ ] Ukaguzi wa afya umewekwa
 
 ---
 
-## 💰 Mwongozo wa Uchaguzi wa SKU
+## 💰 Mwongozo wa Uteuzi wa SKU
 
-| Mzigo wa Kazi | Maendeleo | Uzalishaji |
+| Kazi | Maendeleo | Uzalishaji |
 |----------|-------------|------------|
-| Container Apps | Matumizi | Dedicated D4 |
-| App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standard | Standard + PTU |
-| AI Search | Basic | Standard S2+ |
+| Programu za Kontena | Matumizi | D4 ya Kujitolea |
+| Huduma za Programu | B1/B2 | P1v3+ |
+| Mfano wa Microsoft Foundry | Kawaida | Kawaida + PTU |
+| Utafutaji wa AI | Msingi | Kawaida S2+ |
 
 ---
 
-## 🔗 Uvinjari
+## 🔗 Mnavigation
 
 | Mwelekeo | Sura |
 |-----------|---------|
-| **Iliyopita** | [Sura 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
-| **Ifuatayo** | [Sura 7: Kutatua Matatizo](../chapter-07-troubleshooting/README.md) |
+| **Iliyopita** | [Sura 5: Mawakala Wengi](../chapter-05-multi-agent/README.md) |
+| **Inayofuata** | [Sura 7: Kutatua Matatizo](../chapter-07-troubleshooting/README.md) |
 
 ---
 
 ## 📖 Rasilimali Zinazohusiana
 
 - [Mwongozo wa Usanidi](../chapter-03-configuration/configuration.md)
-- [Mwongozo wa Utoaji](../chapter-04-infrastructure/deployment-guide.md)
-- [Masuala ya Kawaida](../chapter-07-troubleshooting/common-issues.md)
+- [Mwongozo wa Utekelezaji](../chapter-04-infrastructure/deployment-guide.md)
+- [Matatizo ya Kawaida](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

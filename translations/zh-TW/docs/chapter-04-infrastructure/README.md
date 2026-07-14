@@ -1,32 +1,32 @@
-# Chapter 4: Infrastructure as Code & Deployment
+# 第4章：基礎設施即程式碼與部署
 
-**📚 課程**: [AZD 初學者指南](../../README.md) | **⏱️ 時間**: 1-1.5 小時 | **⭐ 複雜度**: 中等
+**📚 課程**: [初學者的AZD](../../README.md) | **⏱️ 時長**: 1-1.5 小時 | **⭐ 複雜度**: 中階
 
 ---
 
 ## 概覽
 
-This chapter covers Infrastructure as Code (IaC) patterns with Bicep templates, resource provisioning, and deployment strategies using Azure Developer CLI.
+本章涵蓋使用 Bicep 模板的基礎設施即程式碼 (IaC) 範例、資源配置和使用 Azure Developer CLI 的部署策略。
 
-> 已於 2026 年 6 月針對 `azd 1.25.6` 驗證。
+> 已於 2026 年 7 月針對 `azd 1.27.1` 版本驗證。
 
-## Learning Objectives
+## 學習目標
 
-完成本章後，您將：
-- 了解 Bicep 範本的結構與語法
-- 使用 `azd provision` 佈建 Azure 資源
+完成本章後，您將能夠：
+- 理解 Bicep 模板的結構與語法
+- 使用 `azd provision` 進行 Azure 資源配置
 - 使用 `azd deploy` 部署應用程式
 - 實作藍綠部署與滾動部署策略
 
 ---
 
-## 📚 課程
+## 📚 課程內容
 
-| # | 課程 | 說明 | 時間 |
+| # | 課程 | 描述 | 時間 |
 |---|--------|-------------|------|
-| 1 | [Provisioning Resources](provisioning.md) | 使用 AZD 管理 Azure 資源 | 45 分鐘 |
-| 2 | [Deployment Guide](deployment-guide.md) | 應用程式部署策略 | 45 分鐘 |
-| 3 | [Authoring Your Own Template](custom-templates.md) | 建立並發佈可重複使用的 azd 範本 | 30 分鐘 |
+| 1 | [資源配置](provisioning.md) | 使用 AZD 管理 Azure 資源 | 45 分鐘 |
+| 2 | [部署指南](deployment-guide.md) | 應用程式部署策略 | 45 分鐘 |
+| 3 | [創建自訂模板](custom-templates.md) | 建立與發佈可重用 azd 模板 | 30 分鐘 |
 
 ---
 
@@ -36,16 +36,16 @@ This chapter covers Infrastructure as Code (IaC) patterns with Bicep templates, 
 # 從範本初始化
 azd init --template azure-functions-python-v2-http
 
-# 預覽將會建立的內容
+# 預覽將被建立的內容
 azd provision --preview
 
-# 僅配置基礎架構
+# 只提供基礎設施
 azd provision
 
-# 僅部署程式碼
+# 只部署程式碼
 azd deploy
 
-# 或同時執行兩者
+# 或兩者一起進行
 azd up
 ```
 
@@ -68,14 +68,14 @@ my-project/
 
 ---
 
-## 🔧 常用指令
+## 🔧 重要指令
 
-| 指令 | 說明 |
+| 指令 | 描述 |
 |---------|-------------|
 | `azd init` | 初始化專案 |
 | `azd provision` | 建立 Azure 資源 |
 | `azd deploy` | 部署應用程式程式碼 |
-| `azd up` | 佈建 + 部署 |
+| `azd up` | 配置並部署 |
 | `azd down` | 刪除所有資源 |
 
 ---
@@ -84,16 +84,16 @@ my-project/
 
 | 方向 | 章節 |
 |-----------|---------|
-| <strong>上一章</strong> | [第 3 章：設定](../chapter-03-configuration/README.md) |
-| <strong>下一章</strong> | [第 5 章：多代理解決方案](../chapter-05-multi-agent/README.md) |
+| <strong>上一章</strong> | [第3章：設定](../chapter-03-configuration/README.md) |
+| <strong>下一章</strong> | [第5章：多代理解決方案](../chapter-05-multi-agent/README.md) |
 
 ---
 
 ## 📖 相關資源
 
-- [Pre-Deployment Checks](../chapter-06-pre-deployment/README.md)
-- [Container App Examples](../../examples/container-app/README.md)
-- [Database App Example](../../examples/database-app/README.md)
+- [部署前檢查](../chapter-06-pre-deployment/README.md)
+- [容器應用範例](../../examples/container-app/README.md)
+- [資料庫應用範例](../../examples/database-app/README.md)
 
 ---
 

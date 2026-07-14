@@ -1,40 +1,40 @@
-# Chapta 1: Foundation & Quick Start
+# Chapter 1: Foundation & Quick Start
 
-**📚 Kɔrs**: [AZD For Beginners](../../README.md) | **⏱️ Taim**: 30-45 minutes | **⭐ Level**: Beginner
+**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 30-45 minutes | **⭐ Complexity**: Beginner
 
 ---
 
-## Wetin Dis Chapta Dey Talk
+## Overview
 
-Dis chapta go introduce Azure Developer CLI (azd) fundamentals. You go learn di main concepts, install di tools, and deploy your first application to Azure.
+Dis chapter go introduce Azure Developer CLI (azd) fundamentals. You go learn core concepts, install di tools, and deploy your first application for Azure.
 
-> Dem don validate this one with `azd 1.25.6` for June 2026.
+> Validated against `azd 1.27.1` in July 2026.
 
-## Wetin You Go Learn
+## Learning Objectives
 
-By completing this chapta, you go:
+By completing dis chapter, you go:
 - Understand wetin Azure Developer CLI be and how e different from Azure CLI
 - Install and configure AZD for your platform
-- Deploy your first application to Azure with `azd up`
-- Clean up resources with `azd down`
+- Deploy your first application for Azure with `azd up`
+- Clear resources with `azd down`
 
 ---
 
-## 📚 Lekshon
+## 📚 Lessons
 
-| # | Lekshon | Description | Time |
+| # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [AZD Basics](azd-basics.md) | Di main concepts, terminology, and project structure | 15 min |
-| 2 | [Installation & Setup](installation.md) | Installation guide for each platform | 10 min |
-| 3 | [Your First Project](first-project.md) | Hands-on: Deploy web app go Azure | 20 min |
-| 4 | [Bring Your Own App](bring-your-own-app.md) | Add azd to di project wey you don already get | 15 min |
+| 1 | [AZD Basics](azd-basics.md) | Core concepts, terminology, and project structure | 15 min |
+| 2 | [Installation & Setup](installation.md) | Platform-specific installation guides | 10 min |
+| 3 | [Your First Project](first-project.md) | Hands-on: Deploy a web app for Azure | 20 min |
+| 4 | [Bring Your Own App](bring-your-own-app.md) | Add azd to di project wey you get before | 15 min |
 | 5 | [Dev Containers & Codespaces](dev-containers.md) | Reproducible azd environments with dev containers | 15 min |
 
 ---
 
-## ✅ Start Here: Check Your Setup
+## ✅ Start Here: Validate Your Setup
 
-Before you start, make sure say your local machine ready for the Chapter 1 template:
+Before you start, make sure sey your local machine ready for di Chapter 1 template:
 
 **Windows:**
 ```powershell
@@ -46,21 +46,21 @@ Before you start, make sure say your local machine ready for the Chapter 1 templ
 bash ./validate-setup.sh
 ```
 
-If the script report say tools dey miss, install dem first before you continue with di chapta.
+If di script talk sey tools dey miss, fix dem first then continue with di chapter.
 
 ---
 
 ## 🚀 Quick Start
 
 ```bash
-# Make sure say installation don work
+# Check di installation
 azd version
 
-# Make you log in to AZD
-# Optional: run "az login" if you dey plan to run Azure CLI commands direct
+# Make sure say you authentic for AZD
+# Optional: az login if you wan run Azure CLI commands directly
 azd auth login
 
-# Deploy di first app
+# Deploy your first app
 azd init --template todo-nodejs-mongo
 azd up
 
@@ -70,16 +70,16 @@ azd down --force --purge
 
 ---
 
-## ✅ How You Go Know Say You Don Succeed
+## ✅ Success Criteria
 
-After you finish dis chapta, you suppose fit do:
+After you finish dis chapter, you suppose fit:
 
 ```bash
 azd version              # Dey show di version wey don install
-azd init --template todo-nodejs-mongo  # Dey set up di project
-azd up                   # Dey deploy go Azure
-azd show                 # Dey show di URL for di app wey dey run
-azd down --force --purge # Dey clean up di resources
+azd init --template todo-nodejs-mongo  # E dey start di project
+azd up                   # E dey deploy to Azure
+azd show                 # E dey show di app URL wey dey run
+azd down --force --purge # E dey clear resources
 ```
 
 ---

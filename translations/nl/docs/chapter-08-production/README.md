@@ -1,23 +1,23 @@
-# Hoofdstuk 8: Productie- & Enterprise-patronen
+# Hoofdstuk 8: Productie- & Enterprisepatronen
 
-**📚 Cursus**: [AZD Voor Beginners](../../README.md) | **⏱️ Duur**: 2-3 hours | **⭐ Complexiteit**: Geavanceerd
+**📚 Cursus**: [AZD Voor Beginners](../../README.md) | **⏱️ Duur**: 2-3 uur | **⭐ Complexiteit**: Geavanceerd
 
 ---
 
 ## Overzicht
 
-Dit hoofdstuk behandelt enterprise-klare implementatiepatronen, beveiligingsversteviging, monitoring en kostenoptimalisatie voor productie-AI-workloads.
+Dit hoofdstuk behandelt enterprise-klare implementatiepatronen, beveiligingsversteviging, monitoring en kostenoptimalisatie voor productie-AI workloads.
 
-> Gevalideerd tegen `azd 1.25.6` in juni 2026.
+> Gevalideerd tegen `azd 1.27.1` in juli 2026.
 
 ## Leerdoelen
 
-Door dit hoofdstuk te voltooien, zul je:
-- Implementeren van veerkrachtige applicaties in meerdere regio's
-- Implementeren van enterprise-beveiligingspatronen
-- Configureren van uitgebreide monitoring
-- Optimaliseren van kosten op schaal
-- Opzetten van CI/CD-pijplijnen met AZD
+Door dit hoofdstuk te voltooien, zult u:
+- Multi-region veerkrachtige applicaties implementeren
+- Enterprise beveiligingspatronen toepassen
+- Uitgebreide monitoring configureren
+- Kosten op schaal optimaliseren
+- CI/CD pipelines opzetten met AZD
 
 ---
 
@@ -25,19 +25,19 @@ Door dit hoofdstuk te voltooien, zul je:
 
 | # | Les | Beschrijving | Tijd |
 |---|--------|-------------|------|
-| 1 | [Production AI Practices](production-ai-practices.md) | Implementatiepatronen voor enterprise | 90 min |
+| 1 | [Productie AI Praktijken](production-ai-practices.md) | Enterprise implementatiepatronen | 90 min |
 
 ---
 
-## 🚀 Productie-checklist
+## 🚀 Productie Checklist
 
-- [ ] Implementatie in meerdere regio's voor veerkracht
+- [ ] Multi-region implementatie voor veerkracht
 - [ ] Beheerde identiteit voor authenticatie (geen sleutels)
 - [ ] Application Insights voor monitoring
 - [ ] Kostenbudgetten en waarschuwingen geconfigureerd
-- [ ] Beveiligingsscans ingeschakeld
-- [ ] CI/CD-pijplijnintegratie
-- [ ] Noodherstelplan
+- [ ] Beveiligingsscanning ingeschakeld
+- [ ] CI/CD pipeline-integratie
+- [ ] Disaster recovery plan
 
 ---
 
@@ -47,8 +47,8 @@ Door dit hoofdstuk te voltooien, zul je:
 
 ```mermaid
 graph LR
-    Gateway[API-gateway] --> AI[AI-service] --> Models[Microsoft Foundry-modellen]
-    Gateway --> Auth[Authenticatie-service]
+    Gateway[API Gateway] --> AI[AI-service] --> Models[Microsoft Foundry-modellen]
+    Gateway --> Auth[Auth-service]
     AI --> Data[Gegevensopslag]
 ```
 
@@ -56,12 +56,12 @@ graph LR
 
 ```mermaid
 graph LR
-    EventGrid[Evenementenrooster] --> Functions[Functies] --> Pipeline[AI-pijplijn]
+    EventGrid[Event Grid] --> Functions[Functies] --> Pipeline[AI-pijplijn]
 ```
 
 ---
 
-## 🔐 Beste beveiligingspraktijken
+## 🔐 Beste Beveiligingspraktijken
 
 ```bicep
 // Use managed identity
@@ -84,9 +84,9 @@ properties: {
 
 | Strategie | Besparing |
 |----------|---------|
-| Schaal naar nul (Container Apps) | 60-80% |
-| Gebruik consumption-tiers voor ontwikkeling | 50-70% |
-| Gepland schalen | 30-50% |
+| Opschalen naar nul (Container Apps) | 60-80% |
+| Gebruik consumptietarieven voor dev | 50-70% |
+| Geplande opschaling | 30-50% |
 | Gereserveerde capaciteit | 20-40% |
 
 ```bash
@@ -100,10 +100,10 @@ az consumption budget create \
 
 ---
 
-## 📊 Monitoringconfiguratie
+## 📊 Monitoring Setup
 
 ```bash
-# Logs streamen
+# Logboeken streamen
 azd monitor --logs
 
 # Controleer Application Insights
@@ -120,16 +120,16 @@ az monitor metrics list --resource <resource-id>
 | Richting | Hoofdstuk |
 |-----------|---------|
 | **Vorige** | [Hoofdstuk 7: Problemen oplossen](../chapter-07-troubleshooting/README.md) |
-| **Cursus voltooid** | [Cursus startpagina](../../README.md) |
+| **Cursus Voltooid** | [Startpagina Cursus](../../README.md) |
 
 ---
 
-## 📖 Gerelateerde bronnen
+## 📖 Gerelateerde Bronnen
 
-- [AI Agents Guide](../chapter-02-ai-development/agents.md)
+- [AI Agents Gids](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Multi-Agent Solutions](../chapter-05-multi-agent/README.md)
-- [Microservices Example](../../examples/microservices/README.md)
+- [Multi-Agent Oplossingen](../chapter-05-multi-agent/README.md)
+- [Microservices Voorbeeld](../../examples/microservices/README.md)
 
 ---
 

@@ -1,22 +1,22 @@
-# Hoofdstuk 7: Probleemoplossing & Debugging
+# Hoofdstuk 7: Problemen oplossen & Debuggen
 
-**📚 Cursus**: [AZD For Beginners](../../README.md) | **⏱️ Duur**: 1-1,5 uur | **⭐ Complexiteit**: Gemiddeld
+**📚 Cursus**: [AZD Voor Beginners](../../README.md) | **⏱️ Duur**: 1-1.5 uur | **⭐ Complexiteit**: Gemiddeld
 
 ---
 
 ## Overzicht
 
-Dit hoofdstuk helpt je bij het diagnosticeren en oplossen van veelvoorkomende problemen bij het werken met de Azure Developer CLI. Van implementatiefouten tot AI-specifieke problemen.
+Dit hoofdstuk helpt je bij het diagnosticeren en oplossen van veelvoorkomende problemen bij het werken met Azure Developer CLI. Van foutmeldingen bij deployment tot AI-specifieke problemen.
 
-> Gevalideerd met `azd 1.25.6` in juni 2026.
+> Gecontroleerd met `azd 1.27.1` in juli 2026.
 
 ## Leerdoelen
 
-Na het voltooien van dit hoofdstuk kun je:
-- Veelvoorkomende AZD-implementatiefouten diagnosticeren
+Door dit hoofdstuk te voltooien, zul je:
+- Veelvoorkomende AZD deploymentfouten diagnosticeren
 - Authenticatie- en machtigingsproblemen debuggen
-- AI-service verbindingsproblemen oplossen
-- Azure Portal en CLI gebruiken voor probleemoplossing
+- Problemen met AI-serviceconnectiviteit oplossen
+- De Azure Portal en CLI gebruiken voor probleemoplossing
 
 ---
 
@@ -25,8 +25,8 @@ Na het voltooien van dit hoofdstuk kun je:
 | # | Les | Beschrijving | Tijd |
 |---|--------|-------------|------|
 | 1 | [Veelvoorkomende problemen](common-issues.md) | Vaak voorkomende problemen | 30 min |
-| 2 | [Debuggids](debugging.md) | Stapsgewijze debugstrategieën | 45 min |
-| 3 | [AI-probleemoplossing](ai-troubleshooting.md) | AI-specifieke problemen | 30 min |
+| 2 | [Debugginsgids](debugging.md) | Stapsgewijze debugstrategieën | 45 min |
+| 3 | [AI Problemen oplossen](ai-troubleshooting.md) | AI-specifieke problemen | 30 min |
 
 ---
 
@@ -37,20 +37,20 @@ Na het voltooien van dit hoofdstuk kun je:
 # Vereist voor AZD-workflows
 azd auth login
 
-# Optioneel als u ook rechtstreeks Azure CLI-commando's gebruikt
+# Optioneel als u ook Azure CLI-commando's rechtstreeks gebruikt
 az login
 
 azd auth status
 ```
 
-### Provisioning-fouten
+### Fouten bij provisioning
 ```bash
 azd show
 azd monitor --logs
 az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
-### Bronconflicten
+### Resource conflicten
 ```bash
 azd down --force --purge
 azd env new different-name
@@ -66,23 +66,23 @@ azd up
 
 ---
 
-## 📋 Foutcode-referentie
+## 📋 Foutcode referentie
 
 | Fout | Oorzaak | Oplossing |
 |-------|-------|----------|
 | `AuthenticationError` | Niet ingelogd | `azd auth login` |
-| `ResourceNotFound` | Ontbrekende resource | Controleer resource-namen |
-| `QuotaExceeded` | Abonnementslimieten | Vraag een verhoging van de quota aan |
-| `InvalidTemplate` | Bicep-syntaxisfout | `az bicep build` |
-| `Conflict` | Resource bestaat | Gebruik een nieuwe naam of verwijder |
-| `Forbidden` | Onvoldoende machtigingen | Controleer RBAC-rollen |
+| `ResourceNotFound` | Ontbrekende bron | Controleer bron namen |
+| `QuotaExceeded` | Abonnementsbeperkingen | Vraag quota uitbreiding aan |
+| `InvalidTemplate` | Bicep syntaxfout | `az bicep build` |
+| `Conflict` | Bron bestaat al | Gebruik nieuwe naam of verwijder |
+| `Forbidden` | Onvoldoende rechten | Controleer RBAC rollen |
 
 ---
 
 ## 🔄 Reset en herstel
 
 ```bash
-# Zachte reset (bronnen behouden, code opnieuw uitrollen)
+# Zachte reset (houd bronnen vast, code opnieuw implementeren)
 azd deploy --force
 
 # Harde reset (alles verwijderen, opnieuw beginnen)
@@ -96,7 +96,7 @@ azd up
 
 | Richting | Hoofdstuk |
 |-----------|---------|
-| **Vorige** | [Hoofdstuk 6: Voor-implementatie](../chapter-06-pre-deployment/README.md) |
+| **Vorige** | [Hoofdstuk 6: Pre-Deployment](../chapter-06-pre-deployment/README.md) |
 | **Volgende** | [Hoofdstuk 8: Productie](../chapter-08-production/README.md) |
 
 ---
@@ -104,8 +104,8 @@ azd up
 ## 📖 Gerelateerde bronnen
 
 - [Pre-Deployment Checks](../chapter-06-pre-deployment/preflight-checks.md)
-- [Configuration Guide](../chapter-03-configuration/configuration.md)
-- [AZD GitHub-issues](https://github.com/Azure/azure-dev/issues)
+- [Configuratie Gids](../chapter-03-configuration/configuration.md)
+- [AZD GitHub Issues](https://github.com/Azure/azure-dev/issues)
 
 ---
 

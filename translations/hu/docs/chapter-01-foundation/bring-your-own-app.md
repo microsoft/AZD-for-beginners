@@ -1,59 +1,59 @@
-# Hozd a saját alkalmazásodat - azd hozzáadása egy meglévő projekthez
+# Hozd a Saját Alkalmazásodat - az azd hozzáadása meglévő projekthez
 
-**Chapter Navigation:**
-- **📚 Tanfolyam főoldal**: [AZD kezdőknek](../../README.md)
-- **📖 Jelen fejezet**: 1. fejezet - Alapok és Gyors kezdés
+**Fejezet navigáció:**
+- **📚 Tanfolyam kezdőlapja**: [AZD Kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 1. fejezet - Alapok & Gyors kezdés
 - **⬅️ Előző**: [Az első projekted](first-project.md)
-- **➡️ Következő**: [Dev Containers & Codespaces](dev-containers.md)
+- **➡️ Következő**: [Fejlesztői konténerek & Codespaces](dev-containers.md)
 
-> Érvényesítve `azd 1.25.6` használatával, 2026 júniusában.
+> Ellenőrizve `azd 1.27.1` verzióval 2026 júliusában.
 
 ## Bevezetés
 
-A [Az első projekted](first-project.md) fejezetben sablonból indítva telepítettél egy alkalmazást. De a legtöbbször már rendelkezel egy alkalmazással — egy Node.js API-val, egy Python Flask szolgáltatással, egy .NET webalkalmazással — amely egy mappában van a gépeden. Ez a lecke megmutatja, hogyan adhatsz azd-t egy ilyen meglévő kódhoz, hogy `azd up`-pal telepíthesd, sablon nélkül.
+A [Az első projekted](first-project.md) fejezetben egy sablonból indítva telepítettél egy alkalmazást. De a legtöbb esetben már *van* egy alkalmazásod — egy Node.js API, Python Flask szolgáltatás, .NET webalkalmazás — amely egy mappában van a gépeden. Ez a lecke megmutatja, hogyan lehet az azd-t hozzáadni ehhez a meglévő kódhoz, hogy `azd up` paranccsal telepíthesd, sablon nélkül.
 
 ## Tanulási célok
 
-A lecke végére:
-- Megérted az azd projekt indításának három módját
-- Lefuttatod az `azd init`-et egy meglévő kódbázisban
-- Megérted, mit csinál az `azure.yaml` és az `infra/` mappa az alkalmazásod számára
-- Tudod, mikor engedd az azd-nek, hogy generálja az infrastruktúrát, és mikor írj sajátot
-- Telepíted a meglévő alkalmazásodat Azure-ra `azd up` segítségével
+A lecke végére képes leszel:
+- Megérteni az azd projekt indításának három módját
+- Lefuttatni az `azd init` parancsot meglévő kódbázisban
+- Megérteni, hogy mit csinál az `azure.yaml` és az `infra/` mappa az alkalmazásoddal
+- Tudni, mikor hagyd, hogy az azd generálja az infrastruktúrát, illetve mikor írd meg saját magad
+- Telepíteni a meglévő alkalmazásodat az Azure-ra az `azd up` segítségével
 
 ## Tanulási eredmények
 
 A lecke elvégzése után képes leszel:
-- Inicializálni az azd-t egy már meglévő projektben
-- Olvasni és szerkeszteni egy alapvető `azure.yaml` fájlt
-- Generálni indító infrastruktúrát az `azd infra generate`-tel
-- Kiválasztani egy megfelelő Azure hosztot az alkalmazásodhoz
-- Telepíteni és eltávolítani a saját alkalmazásodat
+- Inicializálni az azd-t egy meglévő projektben
+- Elolvasni és szerkeszteni egy alapvető `azure.yaml` fájlt
+- Generálni kezdő infrastruktúrát az `azd infra generate` paranccsal
+- Megfelelő Azure hosztot választani az alkalmazásod számára
+- Telepíteni és tisztítani a saját alkalmazásodat
 
 ---
 
-## Három mód az azd projekt indítására
+## Az azd projekt indításának három módja
 
-| Starting point | Command | When to use |
+| Kiindulópont | Parancs | Mikor használd |
 |----------------|---------|-------------|
-| **From a template** | `azd init --template <name>` | Tanulás vagy új alkalmazás indítása egy bevált mintából |
-| **From your existing code** | `azd init` (in your project folder) | Már van egy alkalmazásod, és telepíteni szeretnéd |
-| **From a Git repo** | `azd init --from-code` (in a cloned repo) | Az azd átvétele egy meglévő repóban |
+| **Sablonból** | `azd init --template <név>` | Tanuláshoz, vagy új alkalmazás indításához bevált mintából |
+| **Már meglévő kódból** | `azd init` (a projekt mappájában) | Már van alkalmazásod és szeretnéd telepíteni |
+| **Git tárházból** | `azd init --from-code` (klónozott tárházban) | Meglévő kódtárházhoz az azd elfogadása |
 
-Az első lehetőséget már gyakoroltad. Ez a lecke a másodikat fedi le — a leggyakoribb valós eshetőséget.
+Az első lehetőséget már gyakoroltad. Ez a lecke a másodikat fedi le — a leggyakoribb valós forgatókönyvet.
 
 ---
 
-## 1. lépés: Futtasd az `azd init`-et a projektedben
+## 1. lépés: Futtasd az `azd init` parancsot a projektedben
 
-Nyiss egy terminált **a meglévő projektmappádban** és futtasd:
+Nyiss egy terminált **a meglévő projekted mappájában** és futtasd:
 
 ```bash
 cd my-existing-app
 azd init
 ```
 
-azd megkérdezi, hogyan szeretnéd inicializálni. Válaszd:
+Az azd megkérdezi, hogyan szeretnéd inicializálni. Válassz:
 
 ```
 ? How do you want to initialize your app?
@@ -61,26 +61,26 @@ azd megkérdezi, hogyan szeretnéd inicializálni. Válaszd:
   Select a template
 ```
 
-Válaszd a **"Use code in the current directory."** opciót. Az azd ezután átvizsgálja a mappádat, felismeri a nyelvet és a keretrendszert, és javasol egy hosztot.
+Válaszd a **"Használd a jelenlegi könyvtárban lévő kódot."** lehetőséget. Az azd lekéri a mappádat, felismeri a nyelvet és a keretrendszert, és javasol egy hosztot.
 
-### Mit észlel az azd
+### Amit az azd felismer
 
-Az azd olyan jeleket keres, mint a `package.json`, `requirements.txt`, `pom.xml`, `*.csproj` vagy egy `Dockerfile`, és egy hozzáillő Azure hosztot javasol:
+Az azd olyan jeleket keres, mint a `package.json`, `requirements.txt`, `pom.xml`, `*.csproj`, vagy `Dockerfile`, és egy hozzárendelt Azure hosztot ajánl:
 
-| Your app | Likely detected host |
+| Alkalmazásod | Valószínűleg felismert hoszt |
 |----------|----------------------|
-| Node.js / Python / .NET web app | Azure App Service vagy Container Apps |
-| Containerized app (`Dockerfile`) | Azure Container Apps |
-| Function app | Azure Functions |
-| Static site (React/Vue build output) | Azure Static Web Apps |
+| Node.js / Python / .NET web alkalmazás | Azure App Service vagy Container Apps |
+| Konténerizált alkalmazás (`Dockerfile`) | Azure Container Apps |
+| Function alkalmazás | Azure Functions |
+| Statikus webhely (React/Vue build output) | Azure Static Web Apps |
 
-Erősítsd meg a felismert szolgáltatást/szolgáltatásokat, és az azd előállítja a szükséges fájlokat.
+Erősítsd meg a felismert szolgáltatást, az azd pedig előkészíti a szükséges fájlokat.
 
 ---
 
 ## 2. lépés: Értsd meg, mit hozott létre az azd
 
-Az init után két új elemet találsz a projektedben:
+Az init parancs után két új dolog lesz a projektedben:
 
 ```
 my-existing-app/
@@ -94,7 +94,7 @@ my-existing-app/
 
 ### `azure.yaml` — a projekt definíciója
 
-Ez az azd projekt szíve. Egy minimális példa így néz ki:
+Ez az azd projekt szíve. Egy minimális így néz ki:
 
 ```yaml
 # azure.yaml
@@ -106,19 +106,19 @@ services:
     host: appservice         # appservice | containerapp | function | staticwebapp
 ```
 
-A `services` blokk a kulcs: minden bejegyzés egy kódkönyvtárat társít egy Azure hoszthoz. Ha az alkalmazásodnak van frontendje és API-ja is, két szolgáltatásod lesz.
+A `services` blokk a kulcsfontosságú rész: minden bejegyzés egy kódkönyvtárat képez le egy Azure hosztra. Ha az alkalmazásodnak van frontendje és API-ja is, két szolgáltatást fogsz látni.
 
 ### `infra/` — az Azure erőforrásaid kódként
 
-Az `infra/` mappa Bicep fájlokat tartalmaz, amelyek meghatározzák az alkalmazásod által igényelt Azure erőforrásokat (App Service, adatbázis stb.). Nem kell kézzel írnod ezeket — az azd generál egy működő kiindulópontot. Később szerkesztheted őket, hogy további erőforrásokat adj hozzá vagy szigorítsd a biztonságot (erről az [4. fejezet](../chapter-04-infrastructure/README.md) részletesen szól).
+Az `infra/` mappa Bicep fájlokat tárol, amelyek az alkalmazásod által igényelt Azure erőforrásokat határozzák meg (például App Service, adatbázis stb.). Nem kell kézzel írnod ezeket — az azd generál egy működő kiindulási pontot. Később szerkesztheted őket, hogy további erőforrásokat adj hozzá, vagy szigorítsd a biztonságot ([4. fejezet](../chapter-04-infrastructure/README.md) foglalkozik vele).
 
-> **Tipp:** Szeretnéd megtekinteni vagy testreszabni a generált infrastruktúrát a telepítés előtt? Futtasd az `azd infra generate`-et (elérhető `azd infra synth` néven is), hogy az IaC fájlokat kiírja a lemezre, így átnézheted és verziókezelheted őket.
+> **Tipp:** Szeretnéd megnézni vagy testreszabni a generált infrastruktúrát telepítés előtt? Futtasd az `azd infra generate` (más néven `azd infra synth`) parancsot, hogy kiírd az IaC-t lemezre, így átnézheted és verziókezelheted.
 
 ---
 
 ## 3. lépés: Állítsd be a szükséges konfigurációt
 
-Ha az alkalmazásodnak beállításokra vagy titkokra van szüksége (például kapcsolati karakterlánc, API-kulcs), ne kódold be őket. Használj környezeti értékeket:
+Ha az alkalmazásodnak beállításokra vagy titkokra van szüksége (kapcsolati string, API kulcs), ne kódold be őket keményen. Használj környezeti értékeket:
 
 ```bash
 # Hozzon létre egy környezetet
@@ -128,7 +128,7 @@ azd env new dev
 azd env set API_VERSION 1.0.0
 ```
 
-Valódi titkok esetén tárold őket a Key Vault-ban, és hivatkozz rájuk az infrastruktúrádból — lásd a [3. fejezet: Konfiguráció és hitelesítés](../chapter-03-configuration/authsecurity.md)-t.
+Valódi titkok esetén tárold őket Key Vault-ban, és onnan hivatkozd meg az infrastruktúrádból — lásd [3. fejezet: Konfiguráció és hitelesítés](../chapter-03-configuration/authsecurity.md).
 
 ---
 
@@ -137,39 +137,39 @@ Valódi titkok esetén tárold őket a Key Vault-ban, és hivatkozz rájuk az in
 Most használd ugyanazt a munkafolyamatot, amit már ismersz:
 
 ```bash
-# Hitelesítés (azd-hez szükséges)
+# Hitelesítés (azd-hez kötelező)
 azd auth login
 
-# Előnézet a létrehozandó erőforrásokról
+# Tekintse meg a létrehozandó erőforrásokat
 azd provision --preview
 
-# Infrastruktúra kiépítése és a kód telepítése
+# Infrastrukturát biztosít és telepíti a kódot
 azd up
 ```
 
-Amikor befejeződik, az azd kiírja az alkalmazásod URL-jét. Ellenőrizd ugyanúgy, mint bármely más azd alkalmazást:
+Amikor befejeződik, az azd kiírja az alkalmazásod URL-jét. Ellenőrizd ugyanúgy, mint bármelyik azd alkalmazás esetén:
 
 ```bash
 azd show           # végpontok megjelenítése
-azd monitor --logs # naplók ellenőrzése szükség esetén
+azd monitor --logs # ellenőrizze a naplókat, ha szükséges
 ```
 
 ---
 
-## Gyakori első alkalommal előforduló problémák
+## Gyakori kezdő problémák
 
-| Symptom | Likely cause | Fix |
+| Tünet | Valószínű ok | Javítás |
 |---------|--------------|-----|
-| azd didn't detect my app | Hiányzó manifest (pl. `package.json`) | Add meg a manifestet, vagy válaszd ki a hosztot kézzel az `azd init` során |
-| Build fails during `azd up` | Az alkalmazásnak szüksége van egy build lépésre | Add hozzá a `buildCommand`/`outputPath` beállításokat a szolgáltatáshoz az `azure.yaml`-ban |
-| App starts but returns errors | Hiányzó konfiguráció/titok | Állítsd be az értékeket az `azd env set`-tel, vagy kösd össze a Key Vault-tal |
-| Wrong host chosen | Az automatikus felismerés tévesztett | Szerkeszd a `host:`-ot az `azure.yaml`-ban és futtasd újra az `azd up`-ot |
+| Az azd nem ismerte fel az alkalmazásomat | Hiányzó manifeszt (pl. `package.json`) | Add hozzá a manifesztet, vagy válaszd kézzel a hosztot az `azd init` során |
+| Az építés meghiúsul az `azd up` lefutása közben | Az alkalmazásnak építési lépésre van szüksége | Add meg a `buildCommand`/`outputPath` mezőket a szolgáltatáshoz az `azure.yaml`-ban |
+| Az alkalmazás elindul, de hibákat ad vissza | Hiányzó konfiguráció/titok | Állítsd be az értékeket az `azd env set` paranccsal, vagy kösd össze a Key Vault-tal |
+| Hibás hoszt lett kiválasztva | Hibás automatikus felismerés | Szerkeszd a `host:` beállítást az `azure.yaml`-ban és futtasd újra az `azd up`-ot |
 
-Továbbiakért lásd a [7. fejezet: Hibakeresés](../chapter-07-troubleshooting/README.md)-t.
+További információért lásd a [7. fejezet: Hibakeresés](../chapter-07-troubleshooting/README.md).
 
 ---
 
-## Takarítás
+## Tisztítás
 
 ```bash
 azd down --force --purge
@@ -177,28 +177,28 @@ azd down --force --purge
 
 ---
 
-## Összegzés
+## Összefoglaló
 
-- `azd init` → **"Használd a kódot az aktuális könyvtárban"** hozzáadja az azd-t egy meglévő alkalmazáshoz.
-- Az `azure.yaml` a kódkönyvtáraidat társítja Azure hosztokhoz; az `infra/` Bicep formában definiálja az erőforrásokat.
-- Az `azd infra generate` lehetővé teszi, hogy átnézd vagy testreszabjad a generált infrastruktúrát.
-- Miután inicializáltad, a meglévő alkalmazás pontosan ugyanazt az `azd up` / `azd down` munkafolyamatot használja, mint egy sablonalapú alkalmazás.
+- `azd init` → **"Használd a jelenlegi könyvtárban lévő kódot"** hozzáadja az azd-t egy meglévő alkalmazáshoz.
+- Az `azure.yaml` leképezi a kódkönyvtárakat Azure hosztokra; az `infra/` Bicep formátumban definiálja az erőforrásokat.
+- Az `azd infra generate` segítségével áttekintheted vagy testreszabhatod a generált infrastruktúrát.
+- Inicializálás után a meglévő alkalmazás ugyanazt az `azd up` / `azd down` munkafolyamatot használja, mint a sablon alapú alkalmazás.
 
 ---
 
 ## 🔗 Navigáció
 
-| Direction | Lesson |
+| Irány | Lecke |
 |-----------|--------|
 | **Előző** | [Az első projekted](first-project.md) |
-| **Következő** | [Dev Containers & Codespaces](dev-containers.md) |
+| **Következő** | [Fejlesztői konténerek & Codespaces](dev-containers.md) |
 
 ## 📖 Kapcsolódó források
 
 - [AZD alapok](azd-basics.md)
-- [4. fejezet: Infrastruktúra kódként](../chapter-04-infrastructure/README.md)
-- [Konfiguráció és hitelesítés](../chapter-03-configuration/authsecurity.md)
-- [Parancs gyorsreferencia](../../resources/cheat-sheet.md)
+- [4. fejezet: Infrastruktúra kód formájában](../chapter-04-infrastructure/README.md)
+- [Konfiguráció & Hitelesítés](../chapter-03-configuration/authsecurity.md)
+- [Parancs gyorslista](../../resources/cheat-sheet.md)
 
 ---
 

@@ -1,77 +1,77 @@
-# AZD for AI Developers Workshop
+# AZD per Workshop Sviluppatori AI
 
-> Validated against `azd 1.25.6` in June 2026.
+> Validato con `azd 1.27.1` a luglio 2026.
 
 > [!IMPORTANT]  
-> **Questo workshop è dotato di una guida che puoi visualizzare in anteprima nel tuo browser locale. Per iniziare, apri il repository in GitHub Codespaces, in un dev container o in una copia locale con MkDocs installato—quindi attendi fino a quando non vedi un terminale VS Code attivo e digita:**  
+> **Questo workshop è dotato di una guida che puoi visualizzare nel tuo browser locale. Per iniziare, apri il repo in GitHub Codespaces, in un contenitore dev o in un clone locale con MkDocs installato—poi aspetta finché non vedi un terminale VS Code attivo e digita:**  
 > `mkdocs serve > /dev/null 2>&1 &`  
-> **Dovresti vedere una finestra popup che ti propone di aprire la pagina di anteprima in un browser.**
+> **Dovresti vedere una finestra pop-up per aprire la pagina di anteprima in un browser.**
 
-Benvenuto al workshop pratico per apprendere Azure Developer CLI (AZD) con un focus sul deployment di applicazioni AI. Questo workshop ti aiuta a ottenere una comprensione pratica dei template AZD in 3 passaggi:
+Benvenuto al workshop pratico per imparare Azure Developer CLI (AZD) con un focus sul deployment di applicazioni AI. Questo workshop ti aiuta a comprendere in modo applicato i template AZD in 3 passi:
 
-1. **Scoperta** - trova il template più adatto a te.
-1. **Deploy** - distribuisci e verifica che funzioni
-1. **Personalizzazione** - modifica e itera per renderlo tuo!
+1. **Scoperta** - trova il template giusto per te.
+1. **Deployment** - distribuisci e verifica che funzioni
+1. **Personalizzazione** - modifica e iterare per farlo tuo!
 
-Nel corso di questo workshop, ti verranno inoltre presentati gli strumenti e i flussi di lavoro principali per sviluppatori, per aiutarti a semplificare il tuo percorso di sviluppo end-to-end.
+Durante il corso di questo workshop, ti verranno presentati anche strumenti core per sviluppatori e workflow, per aiutarti a ottimizzare il tuo percorso di sviluppo end-to-end.
 
 | | | 
 |:---|:---|
-| **📚 Course Home**| [AZD per principianti](../README.md)|
-| **📖 Documentation** | [Get started with AI templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️AI Templates** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
-|**🚀 Next Steps** | [Prendi la sfida](#workshop-challenge) |
+| **📚 Home del corso**| [AZD Per Principianti](../README.md)|
+| **📖 Documentazione** | [Inizia con i template AI](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️Template AI** | [Template Microsoft Foundry](https://ai.azure.com/templates) |
+|**🚀 Passi successivi** | [Accetta la sfida](#workshop-challenge) |
 | | |
 
-## Workshop Overview
+## Panoramica del Workshop
 
-**Duration:** 3-4 hours  
-**Level:** Beginner to Intermediate  
-**Prerequisites:** Familiarity with Azure, AI concepts, VS Code & command-line tools.
+**Durata:** 3-4 ore  
+**Livello:** Da principiante a intermedio  
+**Prerequisiti:** Familiarità con Azure, concetti AI, VS Code e strumenti da linea di comando.
 
-Questo è un workshop pratico in cui si impara facendo. Una volta completati gli esercizi, ti consigliamo di rivedere il curriculum AZD For Beginners per proseguire il tuo percorso di apprendimento nelle best practice di Sicurezza e Produttività.
+Questo è un workshop pratico in cui impari facendo. Una volta completati gli esercizi, raccomandiamo di rivedere il curriculum AZD Per Principianti per continuare il tuo percorso di apprendimento su sicurezza e best practice di produttività.
 
-| Time| Module  | Objective |
+| Tempo| Modulo  | Obiettivo |
 |:---|:---|:---|
-| 15 mins | Introduction | Set the stage, understand the goals |
-| 30 mins | Select AI Template | Explore options and pick starter | 
-| 30 mins | Validate AI Template | Deploy default solution to Azure |
-| 30 mins | Deconstruct AI Template | Explore structure and configuration |
-| 30 mins | Configure AI Template | Activate and try available features |
-| 30 mins | Customize AI Template | Adapt the template to your needs |
-| 30 mins | Teardown Infrastructure | Cleanup and release resources |
-| 15 mins | Wrap-Up & Next Steps | Learning resources, Workshop challenge |
+| 15 min | Introduzione | Mettere le basi, comprendere gli obiettivi |
+| 30 min | Seleziona Template AI | Esplora le opzioni e scegli un punto di partenza | 
+| 30 min | Valida Template AI | Distribuisci la soluzione predefinita su Azure |
+| 30 min | Decomponi Template AI | Esplora struttura e configurazione |
+| 30 min | Configura Template AI | Attiva e prova le funzionalità disponibili |
+| 30 min | Personalizza Template AI | Adatta il template alle tue esigenze |
+| 30 min | Termina l'infrastruttura | Pulizia e rilascio risorse |
+| 15 min | Conclusioni e Passi Successivi | Risorse di apprendimento, sfida del workshop |
 | | |
 
-## What You'll Learn
+## Cosa Imparerai
 
-Think of the AZD Template as a learning sandbox to explore various capabilities and tools for end-to-end development on Microsoft Foundry. By the end of this workshop, you should have an intuitive sense for various tools and concepts in this context.
+Considera il Template AZD come un sandbox di apprendimento per esplorare varie capacità e strumenti per uno sviluppo end-to-end su Microsoft Foundry. Al termine di questo workshop, dovresti avere una percezione intuitiva di vari strumenti e concetti in questo contesto.
 
-| Concept  | Objective |
+| Concetto  | Obiettivo |
 |:---|:---|
-| **Azure Developer CLI** | Understand tool commands and workflows|
-| **AZD Templates**| Understand project structure and config|
-| **Azure AI Agent**| Provision & deploy Microsoft Foundry project  |
-| **Azure AI Search**| Enable context engineering with agents |
-| **Observability**| Explore tracing, monitoring and evaluations |
-| **Red Teaming**| Explore adversarial testing and mitigations |
+| **Azure Developer CLI** | Comprendere comandi e flussi di lavoro dello strumento|
+| **Template AZD**| Comprendere struttura progetto e configurazione|
+| **Azure AI Agent**| Provisioning & deployment progetto Microsoft Foundry  |
+| **Azure AI Search**| Abilitare ingegneria del contesto con agenti |
+| **Osservabilità**| Esplorare tracciatura, monitoraggio e valutazioni |
+| **Red Teaming**| Esplorare test avversari e mitigazioni |
 | | |
 
-## Workshop Modules
+## Moduli del Workshop
 
-Ready to get started? Navigate through the workshop modules:
+Pronto per iniziare? Naviga tra i moduli del workshop:
 
-- [Modulo 1: Seleziona il template AI](instructions/1-Select-AI-Template.md)
-- [Modulo 2: Valida il template AI](instructions/2-Validate-AI-Template.md) 
-- [Modulo 3: Deconstruiisci il template AI](instructions/3-Deconstruct-AI-Template.md)
-- [Modulo 4: Configura il template AI](instructions/4-Configure-AI-Template.md)
-- [Modulo 5: Personalizza il template AI](instructions/5-Customize-AI-Template.md)
-- [Modulo 6: Smantella l'infrastruttura](instructions/6-Teardown-Infrastructure.md)
-- [Modulo 7: Riepilogo e prossimi passi](instructions/7-Wrap-up.md)
+- [Modulo 1: Seleziona Template AI](instructions/1-Select-AI-Template.md)
+- [Modulo 2: Valida Template AI](instructions/2-Validate-AI-Template.md) 
+- [Modulo 3: Decomponi Template AI](instructions/3-Deconstruct-AI-Template.md)
+- [Modulo 4: Configura Template AI](instructions/4-Configure-AI-Template.md)
+- [Modulo 5: Personalizza Template AI](instructions/5-Customize-AI-Template.md)
+- [Modulo 6: Termina infrastruttura](instructions/6-Teardown-Infrastructure.md)
+- [Modulo 7: Conclusioni e Passi Successivi](instructions/7-Wrap-up.md)
 
-## Have feedback?
+## Hai feedback?
 
-Pubblica un issue su questo repository (etichettalo `Workshop`) o unisciti a noi su [Discord](https://aka.ms/foundry/discord) e pubblica nel nostro canale `#get-help`
+Pubblica un problema in questo repo (etichettalo `Workshop`) o unisciti a noi su [Discord](https://aka.ms/foundry/discord) e scrivi nel nostro canale `#get-help`
 
 ---
 

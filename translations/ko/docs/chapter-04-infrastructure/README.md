@@ -1,32 +1,32 @@
-# 4장: 코드형 인프라 & 배포
+# 4장: 코드로서의 인프라 및 배포
 
-**📚 과정**: [초보자를 위한 AZD](../../README.md) | **⏱️ 소요 시간**: 1-1.5시간 | **⭐ 난이도**: 중급
+**📚 코스**: [초보자를 위한 AZD](../../README.md) | **⏱️ 소요 시간**: 1-1.5 시간 | **⭐ 난이도**: 중급
 
 ---
 
 ## 개요
 
-이 장에서는 Bicep 템플릿을 활용한 코드형 인프라(IaC) 패턴, 리소스 프로비저닝 및 Azure Developer CLI를 이용한 배포 전략을 다룹니다.
+이 장에서는 Bicep 템플릿을 활용한 코드로서의 인프라(IaC) 패턴, 리소스 프로비저닝, Azure Developer CLI를 활용한 배포 전략을 다룹니다.
 
-> 2026년 6월 `azd 1.25.6` 버전으로 검증됨.
+> 2026년 7월 `azd 1.27.1` 버전에서 검증됨.
 
 ## 학습 목표
 
-이 장을 완료하면 다음을 할 수 있습니다:
-- Bicep 템플릿 구조 및 구문 이해
-- `azd provision`을 사용한 Azure 리소스 프로비저닝
-- `azd deploy`를 이용한 애플리케이션 배포
+이 장을 완료하면 다음을 할 수 있게 됩니다:
+- Bicep 템플릿의 구조와 구문 이해
+- `azd provision`으로 Azure 리소스 프로비저닝
+- `azd deploy`를 통한 애플리케이션 배포
 - 블루-그린 및 롤링 배포 전략 구현
 
 ---
 
 ## 📚 강의
 
-| # | 강의 | 설명 | 소요 시간 |
+| # | 강의 | 설명 | 시간 |
 |---|--------|-------------|------|
-| 1 | [리소스 프로비저닝](provisioning.md) | AZD를 통한 Azure 리소스 관리 | 45분 |
+| 1 | [리소스 프로비저닝](provisioning.md) | AZD를 이용한 Azure 리소스 관리 | 45분 |
 | 2 | [배포 가이드](deployment-guide.md) | 애플리케이션 배포 전략 | 45분 |
-| 3 | [자체 템플릿 작성하기](custom-templates.md) | 재사용 가능한 azd 템플릿 빌드 및 게시 | 30분 |
+| 3 | [자신만의 템플릿 작성](custom-templates.md) | 재사용 가능한 azd 템플릿 빌드 및 배포 | 30분 |
 
 ---
 
@@ -80,12 +80,12 @@ my-project/
 
 ---
 
-## 🔗 이동 경로
+## 🔗 내비게이션
 
-| 방향 | 챕터 |
+| 방향 | 장 |
 |-----------|---------|
-| <strong>이전</strong> | [3장: 구성하기](../chapter-03-configuration/README.md) |
-| <strong>다음</strong> | [5장: 멀티 에이전트 솔루션](../chapter-05-multi-agent/README.md) |
+| <strong>이전</strong> | [3장: 구성](../chapter-03-configuration/README.md) |
+| <strong>다음</strong> | [5장: 다중 에이전트 솔루션](../chapter-05-multi-agent/README.md) |
 
 ---
 

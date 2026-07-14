@@ -1,22 +1,22 @@
-# 5 skyrius: Daugiaagentiniai AI sprendimai
+# 5 skyrius: Daugiaagentės DI sprendimai
 
-**📚 Kursas**: [AZD For Beginners](../../README.md) | **⏱️ Trukmė**: 2-3 valandos | **⭐ Sudėtingumas**: Pažengęs
+**📚 Kursas**: [AZD Pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 2-3 valandos | **⭐ Sudėtingumas**: Pažengęs
 
 ---
 
 ## Apžvalga
 
-Šis skyrius apima pažangius daugiaagentinės architektūros šablonus, agentų orkestraciją ir gamybai paruoštus DI diegimus sudėtingiems scenarijams.
+Šiame skyriuje aptariami pažangūs daugiaagentės architektūros modeliai, agentų koordinavimas ir gamybai paruoštos DI diegimo praktikos sudėtingoms situacijoms.
 
-> Patikrinta naudojant `azd 1.25.6` 2026 m. birželį.
+> Patikrinta su `azd 1.27.1` 2026 m. liepos mėn.
 
 ## Mokymosi tikslai
 
-Baigę šį skyrių, jūs:
-- Suprasite daugiaagentinės architektūros šablonus
-- Išdiegsite koordinuotą agentų AI sistemas
+Šio skyriaus baigimo metu jūs:
+- Suprasite daugiaagentės architektūros modelius
+- Įdiegsite koordinuotus DI agentų sistemas
 - Įgyvendinsite agentų tarpusavio komunikaciją
-- Sukursite gamybai paruoštus daugiaagentinius sprendimus
+- Kūrėte gamybai paruoštus daugiaagentės sprendimus
 
 ---
 
@@ -24,15 +24,15 @@ Baigę šį skyrių, jūs:
 
 | # | Pamoka | Aprašymas | Trukmė |
 |---|--------|-------------|------|
-| 1 | [Daugiaagentės pagrindai](multi-agent-basics.md) | Praktinė užduotis: išdiekite veikiančią daugiaagentę programą su `azd up` | 45 min |
-| 2 | [Koordinavimo šablonai](../chapter-06-pre-deployment/coordination-patterns.md) | Agentų orkestracijos strategijos (tęsiama 6 skyriuje) | 30 min |
-| 3 | [ARM šablono diegimas](../../examples/retail-multiagent-arm-template/README.md) | Vieno spustelėjimo diegimo pavyzdys | 30 min |
+| 1 | [Daugiaagentės pagrindai](multi-agent-basics.md) | Praktinė: paleiskite veikiančią daugiaagentę programą su `azd up` | 45 min |
+| 2 | [Koordinavimo modeliai](../chapter-06-pre-deployment/coordination-patterns.md) | Agentų koordinavimo strategijos (tęsiama 6 skyriuje) | 30 min |
+| 3 | [ARM šablono diegimas](../../examples/retail-multiagent-arm-template/README.md) | Vieno mygtuko diegimo pavyzdys | 30 min |
 
-> **Pradėkite nuo 1 pamokos.** Tai vienintelė visiškai praktinė ir diegimui paruošta pamoka šiame skyriuje. Pamoka 2 yra 6 skyriuje (ji dalijasi medžiaga su priešdiegimo planavimu), o [Mažmeninės prekybos daugiaagentinis sprendimas](../../examples/retail-scenario.md) yra architektūros šablonas — dizaino nuoroda, o ne vieno komandos šablonas.
+> **Pradėkite nuo 1 pamokos.** Tai vienintelė visiškai praktinė ir diegiama pamoka šiame skyriuje. 2 pamoka yra 6 skyriuje (ji bendrinama su išankstinio diegimo planavimu), o [Mažmeninės prekybos daugiaagentis sprendimas](../../examples/retail-scenario.md) yra architektūros šablonas – projektavimo pavyzdys, o ne vieno komandos šablonas.
 
 ---
 
-## 🚀 Greita pradžia
+## 🚀 Greitas pradėjimas
 
 ```bash
 # Parinktis 1: Diegti iš šablono
@@ -45,36 +45,36 @@ azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **Kuris požiūris?** Naudokite `azd init --template`, kad pradėtumėte nuo veikiančio pavyzdžio. Naudokite `azd ai agent init`, kai turite savo agento manifestą. Žr. [AZD AI CLI referencą](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pilnai informacijai.
+> **Kuris būdas?** Naudokite `azd init --template`, kad pradėtumėte nuo veikiantčio pavyzdžio. Naudokite `azd ai agent init`, kai turite savo agento manifestą. Pilną informaciją rasite [AZD DI CLI nuorodoje](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
 
 ---
 
-## 🤖 Daugiaagentinė architektūra
+## 🤖 Daugiaagentė architektūra
 
 ```mermaid
 graph TD
-    Orchestrator[Orkestratoriaus agentas<br/>Nukreipia užklausas, valdo darbo eigą] --> Customer[Kliento agentas<br/>Vartotojo užklausos, pageidavimai]
+    Orchestrator[Orkestravimo agentas<br/>Maršrutizuoja užklausas, valdo darbo eigą] --> Customer[Kliento agentas<br/>Vartotojo užklausos, nuostatos]
     Orchestrator --> Inventory[Inventoriaus agentas<br/>Atsargų lygiai, užsakymai]
 ```
 
 ---
 
-## 🎯 Parodytas sprendimas: Mažmeninės prekybos daugiaagentinis
+## 🎯 Pateiktas sprendimas: Mažmeninės prekybos daugiaagentė sistema
 
-[Mažmeninės prekybos daugiaagentinis sprendimas](../../examples/retail-scenario.md) demonstruoja:
+[Mažmeninės prekybos daugiaagentis sprendimas](../../examples/retail-scenario.md) demonstruoja:
 
-- **Kliento agentas**: Tvarko vartotojo sąveikas ir nuostatas
+- **Kliento agentas**: Tvarko naudotojų sąveikas ir pageidavimus
 - **Inventoriaus agentas**: Valdo atsargas ir užsakymų apdorojimą
-- **Orkestratorius**: Koordinuoja tarp agentų
-- **Bendrinė atmintis**: Tarpagentinis konteksto valdymas
+- **Orkestratorius**: Koordinuoja agentų veiklą
+- **Bendra atmintis**: Sąlyginis konteksto valdymas tarp agentų
 
-### Naudotos paslaugos
+### Naudojamos paslaugos
 
 | Paslauga | Paskirtis |
 |---------|---------|
 | Microsoft Foundry Models | Kalbos supratimas |
 | Azure AI Search | Produktų katalogas |
-| Cosmos DB | Agento būsena ir atmintis |
+| Cosmos DB | Agentų būsena ir atmintis |
 | Container Apps | Agentų talpinimas |
 | Application Insights | Stebėsena |
 
@@ -85,15 +85,15 @@ graph TD
 | Kryptis | Skyrius |
 |-----------|---------|
 | **Ankstesnis** | [4 skyrius: Infrastruktūra](../chapter-04-infrastructure/README.md) |
-| **Kitas** | [6 skyrius: Priešdiegimas](../chapter-06-pre-deployment/README.md) |
+| **Kitas** | [6 skyrius: Išankstinis diegimas](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 Susiję ištekliai
 
-- [AI agentų vadovas](../chapter-02-ai-development/agents.md)
-- [Gamybinės AI praktikos](../chapter-08-production/production-ai-practices.md)
-- [AI trikčių šalinimas](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [DI agentų vadovas](../chapter-02-ai-development/agents.md)
+- [Gamybos DI praktikos](../chapter-08-production/production-ai-practices.md)
+- [DI trikčių šalinimas](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 

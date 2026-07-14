@@ -1,40 +1,40 @@
-# Poglavlje 2: Razvoj s fokusom na umjetnu inteligenciju (AI-First)
+# Poglavlje 2: AI-First razvoj
 
-**📚 Tečaj**: [AZD za početnike](../../README.md) | **⏱️ Trajanje**: 1-2 sata | **⭐ Složenost**: Srednja razina
+**📚 Tečaj**: [AZD za početnike](../../README.md) | **⏱️ Trajanje**: 1-2 sata | **⭐ Kompleksnost**: Srednja
 
 ---
 
 ## Pregled
 
-Ovo poglavlje fokusira se na implementaciju aplikacija potpomognutih umjetnom inteligencijom korištenjem Azure Developer CLI i Microsoft Foundry usluga. Od jednostavnih AI chat aplikacija do inteligentnih agenata s alatima.
+Ovo poglavlje se fokusira na implementaciju aplikacija s umjetnom inteligencijom koristeći Azure Developer CLI i Microsoft Foundry usluge. Od jednostavnih AI chat aplikacija do inteligentnih agenata s alatima.
 
-> **Napomena validacije (2026-06-15):** Tijek naredbi i upute za proširenja u ovom poglavlju pregledani su nasuprot `azd` verziji `1.25.6` i trenutnom preview izdanju AI agent proširenja `azure.ai.agents` `0.1.40-preview`. Ako koristite stariju AZD verziju, prvo ažurirajte, zatim nastavite s vježbama.
+> **Napomena o provjeri (2026-07-13):** Tok naredbi i upute za proširenja u ovom poglavlju pregledani su u odnosu na `azd` `1.27.1` i aktualno pregledno izdanje AI agent proširenja `azure.ai.agents` `1.0.0-beta.5`. Ako koristite stariju AZD verziju, prvo je ažurirajte, a zatim nastavite s vježbama.
 
 ## Ciljevi učenja
 
-Nakon završetka ovog poglavlja moći ćete:
-- Implementirati AI aplikacije koristeći prethodno izrađene AZD predloške
-- Razumjeti integraciju Microsoft Foundry sa AZD-om
+Završetkom ovog poglavlja ćete:
+- Implementirati AI aplikacije koristeći unaprijed izrađene AZD predloške
+- Razumjeti integraciju Microsoft Foundry sa AZD
 - Konfigurirati i prilagoditi AI agente s alatima
-- Implementirati RAG (Retrieval-Augmented Generation) aplikacije
+- Implementirati RAG (Pretraživanje-rafinirana generacija) aplikacije
 
 ---
 
 ## 📚 Lekcije
 
 | # | Lekcija | Opis | Vrijeme |
-|---|---------|-------|---------|
-| 1 | [Integracija Microsoft Foundry](microsoft-foundry-integration.md) | Povezivanje AZD-a s Foundry uslugama | 30 min |
-| 2 | [Vodič za AI agente](agents.md) | Implementacija inteligentnih agenata s alatima | 45 min |
-| 3 | [Implementacija AI modela](ai-model-deployment.md) | Implementacija i konfiguracija AI modela | 30 min |
-| 4 | [AI radionica](ai-workshop-lab.md) | Praktično: Pripremite svoje AI rješenje za AZD | 60 min |
+|---|--------|-------------|------|
+| 1 | [Microsoft Foundry integracija](microsoft-foundry-integration.md) | Povežite AZD s Foundry uslugama | 30 min |
+| 2 | [Vodič za AI agente](agents.md) | Implementirajte inteligentne agente s alatima | 45 min |
+| 3 | [Implementacija AI modela](ai-model-deployment.md) | Implementirajte i konfigurirajte AI modele | 30 min |
+| 4 | [AI radionica laboratorij](ai-workshop-lab.md) | Praktični rad: Pripremite svoje AI rješenje za AZD | 60 min |
 
 ---
 
 ## 🚀 Brzi početak
 
 ```bash
-# Opcija 1: RAG Chat aplikacija
+# Opcija 1: RAG chat aplikacija
 azd init --template azure-search-openai-demo
 azd up
 
@@ -49,12 +49,12 @@ azd up
 
 ---
 
-## 🤖 Izdvojeni AI predlošci
+## 🤖 Istaknuti AI predlošci
 
 | Predložak | Opis | Usluge |
-|-----------|-------|--------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG chat s citatima | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI agent s alatima | AI Agent Service |
+|----------|-------------|----------|
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG chat s citatima | OpenAI + AI pretraživanje |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI agent s alatima | AI Agent usluga |
 | [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Osnovni AI chat | OpenAI + Container Apps |
 
 ---
@@ -62,10 +62,10 @@ azd up
 ## 💰 Svijest o troškovima
 
 | Okruženje | Procijenjeni mjesečni trošak |
-|-----------|-------------------------------|
+|-------------|----------------------|
 | Razvoj | $80-150 |
-| Predprodukcija | $150-300 |
-| Proizvodnja | $300-3,500+ |
+| Testiranje | $150-300 |
+| Produkcija | $300-3,500+ |
 
 **Savjet:** Pokrenite `azd down` nakon testiranja kako biste izbjegli troškove.
 
@@ -74,17 +74,17 @@ azd up
 ## 🔗 Navigacija
 
 | Smjer | Poglavlje |
-|--------|------------|
-| **Prethodno** | [Poglavlje 1: Temelji](../chapter-01-foundation/README.md) |
+|-----------|---------|
+| **Prethodno** | [Poglavlje 1: Osnove](../chapter-01-foundation/README.md) |
 | **Sljedeće** | [Poglavlje 3: Konfiguracija](../chapter-03-configuration/README.md) |
-| **Preskoči na** | [Poglavlje 8: Obradbeni obrasci](../chapter-08-production/README.md) |
+| **Preskoči na** | [Poglavlje 8: Produkcijski obrasci](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Povezani resursi
 
-- [Rješavanje problema s AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Prakse za proizvodni AI](../chapter-08-production/production-ai-practices.md)
+- [Rješavanje AI problema](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Prakse produkcijske AI](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---

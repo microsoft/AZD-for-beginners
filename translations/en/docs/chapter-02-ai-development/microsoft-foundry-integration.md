@@ -38,7 +38,7 @@ Microsoft Foundry is Microsoft's unified platform for AI development that includ
 - Access to Microsoft Foundry Models services
 - Basic familiarity with Microsoft Foundry
 
-> **Current AZD baseline:** These examples were reviewed against `azd` `1.23.12`. For the AI agent workflow, use the current preview extension release and check your installed version before you begin.
+> **Current AZD baseline:** These examples were reviewed against `azd` `1.27.1`. For the AI agent workflow, use the current preview extension release and check your installed version before you begin.
 
 ## Core Integration Patterns
 
@@ -276,13 +276,13 @@ azd deploy --timeout 1800
 ### Environment-Specific Deployments
 
 ```bash
-# Development environment
+# Entwicklungsumgebung
 azd env new development
 azd env set AZURE_LOCATION eastus
 azd env set ENVIRONMENT_TYPE dev
 azd up
 
-# Production environment
+# Produktionsumgebung
 azd env new production
 azd env set AZURE_LOCATION westus2
 azd env set ENVIRONMENT_TYPE prod
@@ -815,6 +815,8 @@ az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-d
 3. **Use azd down**: Deallocate resources when not actively developing
 4. **Cache Responses**: Implement Redis cache for repeated queries
 5. **Use Prompt Engineering**: Reduce token usage with efficient prompts
+
+
 ```bash
 # Development configuration
 azd env set AZURE_OPENAI_CAPACITY 10

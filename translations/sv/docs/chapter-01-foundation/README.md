@@ -1,14 +1,14 @@
 # Kapitel 1: Grundläggande & Snabbstart
 
-**📚 Kurs**: [AZD för nybörjare](../../README.md) | **⏱️ Varaktighet**: 30-45 minuter | **⭐ Komplexitet**: Nybörjare
+**📚 Kurs**: [AZD För nybörjare](../../README.md) | **⏱️ Varaktighet**: 30-45 minuter | **⭐ Svårighetsgrad**: Nybörjare
 
 ---
 
 ## Översikt
 
-Detta kapitel introducerar Azure Developer CLI (azd) grundläggande. Du kommer att lära dig kärnkoncept, installera verktygen och distribuera din första applikation till Azure.
+Detta kapitel introducerar grunderna för Azure Developer CLI (azd). Du kommer att lära dig kärnbegrepp, installera verktygen och distribuera din första applikation till Azure.
 
-> Validerad mot `azd 1.25.6` i juni 2026.
+> Validerad med `azd 1.27.1` i juli 2026.
 
 ## Lärandemål
 
@@ -16,7 +16,7 @@ Genom att slutföra detta kapitel kommer du att:
 - Förstå vad Azure Developer CLI är och hur det skiljer sig från Azure CLI
 - Installera och konfigurera AZD på din plattform
 - Distribuera din första applikation till Azure med `azd up`
-- Rensa upp resurser med `azd down`
+- Rensa resurser med `azd down`
 
 ---
 
@@ -24,15 +24,15 @@ Genom att slutföra detta kapitel kommer du att:
 
 | # | Lektion | Beskrivning | Tid |
 |---|--------|-------------|------|
-| 1 | [AZD-grunderna](azd-basics.md) | Kärnkoncept, terminologi och projektstruktur | 15 min |
-| 2 | [Installation och uppsättning](installation.md) | Plattformspecifika installationsguider | 10 min |
-| 3 | [Ditt första projekt](first-project.md) | Praktiskt: Distribuera en webbapp till Azure | 20 min |
-| 4 | [Lägg till azd i ett befintligt projekt](bring-your-own-app.md) | Lägg till azd i ett befintligt projekt du redan har | 15 min |
-| 5 | [Utvecklingscontainrar & Codespaces](dev-containers.md) | Reproducerbara azd-miljöer med dev-containrar | 15 min |
+| 1 | [Grundläggande om AZD](azd-basics.md) | Kärnbegrepp, terminologi och projektstruktur | 15 min |
+| 2 | [Installation & Setup](installation.md) | Plattformspecifika installationsguider | 10 min |
+| 3 | [Ditt första projekt](first-project.md) | Praktisk övning: Distribuera en webbapp till Azure | 20 min |
+| 4 | [Ta med din egen app](bring-your-own-app.md) | Lägg till azd i ett existerande projekt du redan har | 15 min |
+| 5 | [Utvecklingscontainrar & Codespaces](dev-containers.md) | Reproducerbara azd-miljöer med utvecklingscontainrar | 15 min |
 
 ---
 
-## ✅ Börja här: Validera din konfiguration
+## ✅ Börja här: Validera din installation
 
 Innan du börjar, bekräfta att din lokala dator är redo för Kapitel 1-mallen:
 
@@ -46,14 +46,14 @@ Innan du börjar, bekräfta att din lokala dator är redo för Kapitel 1-mallen:
 bash ./validate-setup.sh
 ```
 
-Om skriptet rapporterar saknade verktyg, åtgärda dem först och fortsätt sedan med kapitlet.
+Om skriptet rapporterar saknade verktyg, åtgärda dessa först och fortsätt sedan med kapitlet.
 
 ---
 
 ## 🚀 Snabbstart
 
 ```bash
-# Kontrollera installationen
+# Kontrollera installation
 azd version
 
 # Autentisera för AZD
@@ -78,7 +78,7 @@ Efter att ha slutfört detta kapitel ska du kunna:
 azd version              # Visar installerad version
 azd init --template todo-nodejs-mongo  # Initierar projekt
 azd up                   # Distribuerar till Azure
-azd show                 # Visar URL för den körande appen
+azd show                 # Visar körande app-URL
 azd down --force --purge # Rensar upp resurser
 ```
 
@@ -95,8 +95,8 @@ azd down --force --purge # Rensar upp resurser
 
 ## 📖 Relaterade resurser
 
-- [Kommandofusklapp](../../resources/cheat-sheet.md)
-- [Vanliga frågor (FAQ)](../../resources/faq.md)
+- [Kommandocheat sheet](../../resources/cheat-sheet.md)
+- [FAQ](../../resources/faq.md)
 - [Ordlista](../../resources/glossary.md)
 
 ---

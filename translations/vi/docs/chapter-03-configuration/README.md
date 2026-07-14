@@ -1,28 +1,28 @@
 # Chương 3: Cấu hình & Xác thực
 
-**📚 Khóa học**: [AZD Cho Người Mới Bắt Đầu](../../README.md) | **⏱️ Thời lượng**: 45-60 phút | **⭐ Độ khó**: Trung cấp
+**📚 Khóa học**: [AZD Dành Cho Người Mới](../../README.md) | **⏱️ Thời lượng**: 45-60 phút | **⭐ Độ khó**: Trung cấp
 
 ---
 
 ## Tổng quan
 
-Chương này bao gồm cấu hình môi trường, các mẫu xác thực và các thực hành bảo mật tốt nhất cho các triển khai bằng Azure Developer CLI.
+Chương này bao gồm cấu hình môi trường, các mẫu xác thực, và các thực hành bảo mật tốt nhất cho triển khai Azure Developer CLI.
 
-> Đã xác thực với `azd 1.25.6` vào tháng 6 năm 2026.
+> Đã kiểm tra với `azd 1.27.1` vào tháng 7 năm 2026.
 
 ## Mục tiêu học tập
 
-Khi hoàn thành chương này, bạn sẽ:
-- Thành thạo hệ thống phân cấp cấu hình AZD
-- Quản lý nhiều môi trường (dev, staging, prod)
-- Triển khai xác thực an toàn với managed identities
-- Cấu hình các thiết lập riêng cho từng môi trường
+Hoàn thành chương này, bạn sẽ:
+- Thành thạo cấu trúc phân cấp cấu hình AZD
+- Quản lý nhiều môi trường (phát triển, thử nghiệm, sản xuất)
+- Triển khai xác thực bảo mật với managed identities
+- Cấu hình các thiết lập theo môi trường cụ thể
 
 ---
 
-## 📚 Bài học
+## 📚 Các bài học
 
-| # | Bài | Mô tả | Thời gian |
+| # | Bài học | Mô tả | Thời gian |
 |---|--------|-------------|------|
 | 1 | [Hướng dẫn Cấu hình](configuration.md) | Thiết lập và quản lý môi trường | 30 phút |
 | 2 | [Xác thực & Bảo mật](authsecurity.md) | Mẫu managed identity và RBAC | 30 phút |
@@ -37,7 +37,7 @@ azd env new dev
 azd env new staging
 azd env new prod
 
-# Chuyển đổi giữa các môi trường
+# Chuyển đổi môi trường
 azd env select prod
 
 # Thiết lập biến môi trường
@@ -50,9 +50,9 @@ azd env get-values
 
 ---
 
-## 🔧 Hệ thống phân cấp cấu hình
+## 🔧 Cấu trúc phân cấp Cấu hình
 
-AZD áp dụng các thiết lập theo thứ tự này (về sau ghi đè về trước):
+AZD áp dụng các thiết lập theo thứ tự sau (mục sau ghi đè mục trước):
 
 1. **Giá trị mặc định** (được tích hợp trong mẫu)
 2. **azure.yaml** (cấu hình dự án)
@@ -61,16 +61,16 @@ AZD áp dụng các thiết lập theo thứ tự này (về sau ghi đè về t
 
 ---
 
-## 🔐 Các thực hành bảo mật tốt nhất
+## 🔐 Thực hành Bảo mật Tốt nhất
 
 ```bash
-# Sử dụng Managed Identity (khuyến nghị)
+# Sử dụng danh tính được quản lý (khuyến nghị)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
 # Kiểm tra trạng thái xác thực AZD
 azd auth status
 
-# Tùy chọn: xác minh ngữ cảnh Azure CLI nếu bạn định chạy lệnh az
+# Tùy chọn: kiểm tra bối cảnh Azure CLI nếu bạn dự định chạy các lệnh az
 az account show
 
 # Xác thực lại nếu cần
@@ -93,7 +93,7 @@ az login
 
 ## 📖 Tài nguyên liên quan
 
-- [Kiểm tra trước khi triển khai](../chapter-06-pre-deployment/README.md)
+- [Kiểm tra Trước Triển khai](../chapter-06-pre-deployment/README.md)
 - [Khắc phục sự cố](../chapter-07-troubleshooting/common-issues.md)
 
 ---

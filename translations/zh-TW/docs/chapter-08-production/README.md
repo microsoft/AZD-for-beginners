@@ -1,39 +1,39 @@
-# 第 8 章：生產與企業模式
+# 第8章：生產與企業模式
 
-**📚 課程**: [AZD 初學者](../../README.md) | **⏱️ 時長**: 2-3 小時 | **⭐ 複雜度**: 進階
+**📚 課程**：[AZD 初學者指南](../../README.md) | **⏱️ 時長**：2-3 小時 | **⭐ 難度**：進階
 
 ---
 
-## 概覽
+## 概述
 
-本章涵蓋企業級部署模式、強化安全、監控以及針對生產 AI 工作負載的成本優化。
+本章節涵蓋企業級部署模式、安全加固、監控與生產 AI 工作負載的成本優化。
 
-> 已於 2026 年 6 月使用 `azd 1.25.6` 驗證。
+> 於2026年7月，使用 `azd 1.27.1` 版本驗證。
 
 ## 學習目標
 
-完成本章後，您將：
-- 部署多區域具韌性的應用程式
+完成本章後，您將能：
+- 部署多區域高韌性應用
 - 實作企業安全模式
 - 設定完整監控
-- 在大規模下優化成本
-- 使用 AZD 設定 CI/CD 管線
+- 大規模成本優化
+- 使用 AZD 建置 CI/CD 管線
 
 ---
 
-## 📚 課程
+## 📚 課程單元
 
-| # | 課程 | 說明 | 時間 |
+| # | 課程 | 描述 | 時間 |
 |---|--------|-------------|------|
-| 1 | [生產 AI 實務](production-ai-practices.md) | 企業部署模式 | 90 分鐘 |
+| 1 | [生產 AI 實務](production-ai-practices.md) | 企業部署模式 | 90 分 |
 
 ---
 
 ## 🚀 生產檢查清單
 
-- [ ] 多區域部署以提高韌性
-- [ ] 使用受管身分進行驗證（無密鑰）
-- [ ] 使用 Application Insights 進行監控
+- [ ] 多區域部署以提升韌性
+- [ ] 使用管理身分進行驗證（無需金鑰）
+- [ ] 應用程式洞察監控
 - [ ] 設定成本預算與警示
 - [ ] 啟用安全掃描
 - [ ] 整合 CI/CD 管線
@@ -43,20 +43,20 @@
 
 ## 🏗️ 架構模式
 
-### 模式 1：微服務 AI
+### 模式1：微服務 AI
 
 ```mermaid
 graph LR
     Gateway[API 閘道] --> AI[AI 服務] --> Models[微軟 Foundry 模型]
-    Gateway --> Auth[驗證服務]
-    AI --> Data[資料儲存庫]
+    Gateway --> Auth[認證服務]
+    AI --> Data[資料存儲]
 ```
 
-### 模式 2：事件驅動 AI
+### 模式2：事件驅動 AI
 
 ```mermaid
 graph LR
-    EventGrid[事件網格] --> Functions[函式] --> Pipeline[AI 管線]
+    EventGrid[事件網格] --> Functions[函數] --> Pipeline[AI 管線]
 ```
 
 ---
@@ -82,11 +82,11 @@ properties: {
 
 ## 💰 成本優化
 
-| 策略 | 節省 |
+| 策略 | 節省比例 |
 |----------|---------|
-| 縮減至零（Container Apps） | 60-80% |
-| 在開發環境使用消耗型層級 | 50-70% |
-| 排程縮放 | 30-50% |
+| 零擴展 (Container Apps) | 60-80% |
+| 開發用消耗層 | 50-70% |
+| 定時擴展 | 30-50% |
 | 預留容量 | 20-40% |
 
 ```bash
@@ -106,7 +106,7 @@ az consumption budget create \
 # 串流日誌
 azd monitor --logs
 
-# 檢查 Application Insights
+# 檢查應用程式洞察
 azd monitor --overview
 
 # 檢視指標
@@ -119,15 +119,15 @@ az monitor metrics list --resource <resource-id>
 
 | 方向 | 章節 |
 |-----------|---------|
-| <strong>上一章</strong> | [第 7 章：除錯](../chapter-07-troubleshooting/README.md) |
+| <strong>上一章</strong> | [第7章：疑難排解](../chapter-07-troubleshooting/README.md) |
 | <strong>課程完成</strong> | [課程首頁](../../README.md) |
 
 ---
 
 ## 📖 相關資源
 
-- [AI 代理人指南](../chapter-02-ai-development/agents.md)
-- [Application Insights](../chapter-06-pre-deployment/application-insights.md)
+- [AI 代理指南](../chapter-02-ai-development/agents.md)
+- [應用程式洞察](../chapter-06-pre-deployment/application-insights.md)
 - [多代理解決方案](../chapter-05-multi-agent/README.md)
 - [微服務範例](../../examples/microservices/README.md)
 

@@ -1,43 +1,43 @@
 # Bölüm 7: Sorun Giderme ve Hata Ayıklama
 
-**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Süre**: 1-1.5 saat | **⭐ Zorluk**: Orta
+**📚 Kurs**: [AZD Yeni Başlayanlar İçin](../../README.md) | **⏱️ Süre**: 1-1.5 saat | **⭐ Zorluk Seviyesi**: Orta
 
 ---
 
 ## Genel Bakış
 
-Bu bölüm, Azure Developer CLI ile çalışırken karşılaşılan yaygın sorunları teşhis etmenize ve çözmenize yardımcı olur. Dağıtım hatalarından yapay zekâya özgü sorunlara kadar.
+Bu bölüm, Azure Developer CLI ile çalışırken karşılaşılan yaygın sorunları teşhis etmenize ve çözmenize yardımcı olur. Dağıtım hatalarından AI'ya özgü problemlere kadar.
 
-> Haziran 2026'da `azd 1.25.6` ile doğrulanmıştır.
+> Temmuz 2026'da `azd 1.27.1` sürümü ile doğrulanmıştır.
 
 ## Öğrenme Hedefleri
 
-Bu bölümü tamamladığınızda:
-- Yaygın AZD dağıtım hatalarını teşhis etmek
-- Kimlik doğrulama ve izin sorunlarını hata ayıklamak
-- Yapay zekâ hizmeti bağlantı sorunlarını çözmek
-- Sorun giderme için Azure Portal ve CLI'yi kullanmak
+Bu bölümü tamamlayarak:
+- Yaygın AZD dağıtım hatalarını teşhis edeceksiniz
+- Kimlik doğrulama ve izin sorunlarını hata ayıklayacaksınız
+- AI hizmeti bağlantı sorunlarını çözeceksiniz
+- Sorun gidermek için Azure Portal ve CLI kullanacaksınız
 
 ---
 
 ## 📚 Dersler
 
-| # | Lesson | Description | Time |
+| # | Ders | Açıklama | Süre |
 |---|--------|-------------|------|
-| 1 | [Yaygın Sorunlar](common-issues.md) | Sık karşılaşılan problemler | 30 dakika |
-| 2 | [Hata Ayıklama Rehberi](debugging.md) | Adım adım hata ayıklama stratejileri | 45 dakika |
-| 3 | [AI Sorun Giderme](ai-troubleshooting.md) | AI'ye özgü sorunlar | 30 dakika |
+| 1 | [Yaygın Sorunlar](common-issues.md) | Sık karşılaşılan problemler | 30 dk |
+| 2 | [Hata Ayıklama Rehberi](debugging.md) | Adım adım hata ayıklama stratejileri | 45 dk |
+| 3 | [AI Sorun Giderme](ai-troubleshooting.md) | AI'ya özgü sorunlar | 30 dk |
 
 ---
 
-## 🚨 Hızlı Düzeltmeler
+## 🚨 Hızlı Çözümler
 
 ### Kimlik Doğrulama Sorunları
 ```bash
 # AZD iş akışları için gereklidir
 azd auth login
 
-# Ayrıca Azure CLI komutlarını doğrudan kullanıyorsanız isteğe bağlıdır
+# Aynı zamanda doğrudan Azure CLI komutlarını kullanıyorsanız isteğe bağlıdır
 az login
 
 azd auth status
@@ -68,13 +68,13 @@ azd up
 
 ## 📋 Hata Kodu Referansı
 
-| Error | Cause | Solution |
+| Hata | Neden | Çözüm |
 |-------|-------|----------|
-| `AuthenticationError` | Giriş yapılmamış | `azd auth login` |
-| `ResourceNotFound` | Kaynak eksik | Kaynak adlarını kontrol edin |
+| `AuthenticationError` | Giriş yapılmadı | `azd auth login` |
+| `ResourceNotFound` | Kaynak eksik | Kaynak isimlerini kontrol edin |
 | `QuotaExceeded` | Abonelik sınırları | Kota artışı talep edin |
 | `InvalidTemplate` | Bicep sözdizimi hatası | `az bicep build` |
-| `Conflict` | Kaynak mevcut | Yeni bir ad kullanın veya silin |
+| `Conflict` | Kaynak mevcut | Yeni isim kullanın veya silin |
 | `Forbidden` | Yetersiz izinler | RBAC rollerini kontrol edin |
 
 ---
@@ -85,26 +85,26 @@ azd up
 # Yumuşak sıfırlama (kaynakları koru, kodu yeniden dağıt)
 azd deploy --force
 
-# Sert sıfırlama (her şeyi sil, baştan başla)
+# Sert sıfırlama (her şeyi sil, sıfırdan başla)
 azd down --force --purge
 azd up
 ```
 
 ---
 
-## 🔗 Gezinme
+## 🔗 Navigasyon
 
-| Direction | Chapter |
+| Yön | Bölüm |
 |-----------|---------|
-| **Önceki** | [Bölüm 6: Dağıtım Öncesi](../chapter-06-pre-deployment/README.md) |
+| **Önceki** | [Bölüm 6: Dağıtımdan Önce](../chapter-06-pre-deployment/README.md) |
 | **Sonraki** | [Bölüm 8: Üretim](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 İlgili Kaynaklar
 
-- [Dağıtım Öncesi Kontrolleri](../chapter-06-pre-deployment/preflight-checks.md)
-- [Yapılandırma Kılavuzu](../chapter-03-configuration/configuration.md)
+- [Dağıtımdan Önce Kontroller](../chapter-06-pre-deployment/preflight-checks.md)
+- [Yapılandırma Rehberi](../chapter-03-configuration/configuration.md)
 - [AZD GitHub Sorunları](https://github.com/Azure/azure-dev/issues)
 
 ---

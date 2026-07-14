@@ -1,33 +1,33 @@
-# Chapter 2: AI-First Development
+# Kapitola 2: Vývoj s primárním zaměřením na AI
 
-**📚 Kurz**: [AZD pro začátečníky](../../README.md) | **⏱️ Doba trvání**: 1-2 hodiny | **⭐ Složitost**: Střední
+**📚 Kurz**: [AZD pro začátečníky](../../README.md) | **⏱️ Délka**: 1-2 hodiny | **⭐ Složitost**: Středně pokročilý
 
 ---
 
 ## Přehled
 
-Tato kapitola se zaměřuje na nasazování aplikací řízených AI pomocí Azure Developer CLI a služeb Microsoft Foundry. Od jednoduchých AI chat aplikací po inteligentní agenty s nástroji.
+Tato kapitola se zaměřuje na nasazení aplikací poháněných AI pomocí Azure Developer CLI a služeb Microsoft Foundry. Od jednoduchých chatovacích AI aplikací až po inteligentní agenty s nástroji.
 
-> **Poznámka ověření (2026-06-15):** Průběh příkazů a pokyny k rozšíření v této kapitole byly přezkoumány vůči `azd` `1.25.6` a aktuálnímu preview vydání rozšíření AI agenta `azure.ai.agents` `0.1.40-preview`. Pokud používáte starší sestavení AZD, nejprve aktualizujte a pak pokračujte v cvičeních.
+> **Poznámka k ověření (2026-07-13):** Průběh příkazů a doporučení k rozšíření v této kapitole byly ověřeny vůči `azd` `1.27.1` a aktuálnímu preview vydání AI agent rozšíření `azure.ai.agents` `1.0.0-beta.5`. Pokud máte starší verzi AZD, nejprve ji aktualizujte a poté pokračujte v cvičeních.
 
-## Cíle učení
+## Výukové cíle
 
-Po dokončení této kapitoly budete umět:
-- Nasadit AI aplikace pomocí předpřipravených AZD šablon
-- Porozumět integraci Microsoft Foundry s AZD
-- Konfigurovat a upravovat AI agenty s nástroji
-- Nasadit aplikace RAG (Retrieval-Augmented Generation)
+Dokončením této kapitoly budete schopni:
+- Nasazovat AI aplikace pomocí předpřipravených šablon AZD
+- Pochopit integraci Microsoft Foundry s AZD
+- Konfigurovat a přizpůsobovat AI agenty s nástroji
+- Nasazovat aplikace RAG (Retrieval-Augmented Generation)
 
 ---
 
 ## 📚 Lekce
 
-| # | Lekce | Popis | Čas |
+| # | Lekce | Popis | Doba |
 |---|--------|-------------|------|
-| 1 | [Integrace Microsoft Foundry](microsoft-foundry-integration.md) | Propojit AZD se službami Foundry | 30 min |
-| 2 | [Průvodce AI agenty](agents.md) | Nasadit inteligentní agenty s nástroji | 45 min |
-| 3 | [Nasazení AI modelu](ai-model-deployment.md) | Nasadit a nakonfigurovat AI modely | 30 min |
-| 4 | [Lab: AI Workshop](ai-workshop-lab.md) | Prakticky: Připravte své AI řešení pro AZD | 60 min |
+| 1 | [Integrace Microsoft Foundry](microsoft-foundry-integration.md) | Propojení AZD se službami Foundry | 30 min |
+| 2 | [Průvodce AI agenty](agents.md) | Nasazení inteligentních agentů s nástroji | 45 min |
+| 3 | [Nasazení AI modelu](ai-model-deployment.md) | Nasazení a konfigurace AI modelů | 30 min |
+| 4 | [AI workshop laboratoř](ai-workshop-lab.md) | Prakticky: Připravte své AI řešení pro AZD | 60 min |
 
 ---
 
@@ -63,9 +63,9 @@ azd up
 
 | Prostředí | Odhadované měsíční náklady |
 |-------------|----------------------|
-| Vývoj | $80-150 |
-| Testovací | $150-300 |
-| Produkce | $300-3,500+ |
+| Vývojové | 80-150 $ |
+| Testovací | 150-300 $ |
+| Produkční | 300-3 500+ $ |
 
 **Tip:** Po testování spusťte `azd down`, abyste se vyhnuli poplatkům.
 
@@ -76,7 +76,7 @@ azd up
 | Směr | Kapitola |
 |-----------|---------|
 | **Předchozí** | [Kapitola 1: Základy](../chapter-01-foundation/README.md) |
-| **Další** | [Kapitola 3: Konfigurace](../chapter-03-configuration/README.md) |
+| **Následující** | [Kapitola 3: Konfigurace](../chapter-03-configuration/README.md) |
 | **Přeskočit na** | [Kapitola 8: Produkční vzory](../chapter-08-production/README.md) |
 
 ---
@@ -84,7 +84,7 @@ azd up
 ## 📖 Související zdroje
 
 - [Řešení problémů s AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Produkční postupy pro AI](../chapter-08-production/production-ai-practices.md)
+- [Produkční praktiky AI](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---
