@@ -1,81 +1,81 @@
-# AI Workshop Lab: သင့် AI ဖြေရှင်းချက်များကို AZD ဖြင့် တင်သွင်းနည်း
+# ကောင်းမြတ်သော AI Workshop Lab: သင့် AI ဖြေရှင်းချက်များကို AZD ဖြင့် Deploy ပြုလုပ်ခြင်း
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: အခန်း ၂ - AI-First Development
-- **⬅️ Previous**: [AI Model Deployment](ai-model-deployment.md)
-- **➡️ Next**: [Production AI Best Practices](production-ai-practices.md)
-- **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+**အခန်းနှိပ်စက်မှု:**
+- **📚 သင်ကြားရေးအိမ်ဖြစ်စေခြင်း**: [AZD အတွက် စတင်သူများ](../../README.md)
+- **📖 လက်ရှိအခန်း**: အခန်း ၂ - AI ပထမဆုံးတီထွင်မှု
+- **⬅️ ယခင်အခန်း**: [AI မော်ဒယ် Deploy လုပ်ခြင်း](ai-model-deployment.md)
+- **➡️ နောက်ထပ်**: [Production AI အကောင်းဆုံး လုပ်ထုံးလုပ်နည်းများ](production-ai-practices.md)
+- **🚀 နောက်ထပ် အခန်း**: [အခန်း ၃: သတ်မှတ်ချက်များ](../chapter-03-configuration/configuration.md)
 
-## Workshop Overview
+## လေ့ကျင့်ခန်းအနှစ်ချုပ်
 
-ဤ လက်တွေ့ လက်ခုပ်သည် developer များအား ပစ္စည်းရှိပြီးသား AI template ကိုယူ၍ Azure Developer CLI (AZD) အသုံးပြုကာ တင်သွင်းခြင်းလုပ်ငန်းစဉ်အား လမ်းပြပေးသည်။ Microsoft Foundry services များကို အသုံးပြု၍ production AI deployments အတွက် အရေးကြီးပုံစံများကို သင်ယူနိုင်ပါလိမ့်မည်။
+ဤလက်တွေ့လေ့ကျင့်ခန်းသည် developer များကို ရှိပြီးသား AI ပုံစံအတိုင်းရေးဆွဲပြီး Azure Developer CLI (AZD) ဖြင့် deploy ပြုလုပ်နည်းကို လမ်းညွှန်ပေးသည်။ Microsoft Foundry ဝန်ဆောင်မှုများကို အသုံးပြု၍ production AI deployment များအတွက် အရေးကြီးသော ပုံစံများကို သင်ယူမည်။
 
-> **Validation note (2026-03-25):** ဤ workshop ကို `azd` `1.23.12` နှင့်နှိုင်းယှဉ် စစ်ဆေးထားသည်။ သင့် local installation သည် အဟောင်းဖြစ်လျှင် AZD ကို အားလုံးစတင်မည်မဟုတ်မီ update လုပ်ပါ။
+> **အတည်ပြုမှတ်ချက် (2026-07-13):** ယခု workshop ကို `azd` `1.27.1` နှင့် စစ်ဆေးပြီးဖြစ်သည်။ သင့်ဒေသတွင် တပ်ဆင်ထားသည့် AZD အစားအစာဟောင်းပါက စတင်ခြင်းမတိုင်မီ update ပြုလုပ်ပါက auth, template နှင့် deployment လမ်းကြောင်းများအောက်ပါအတိုင်း သင့်စားသုံးမှုနှင့် ကိုက်ညီမည်ဖြစ်သည်။
 
-**Duration:** 2-3 hours  
-**Level:** အလတ်အလတ်  
-**Prerequisites:** Azure အခြေခံ သိမြင်မှု၊ AI/ML အကြောင်းအရာများကို သိထားမှု
+**ကြာမြင့်ချိန်:** ၂-၃ နာရီ  
+**အဆင့်:** အလယ်အလတ်  
+**လိုအပ်ချက်များ:** Azure အခြေခံကွာလဟာ ရှိပြီး၊ AI/ML သဘောတရားများကို နားလည်ခြင်း  
 
-## 🎓 Learning Objectives
+## 🎓 သင်ယူရန်ရည်မှန်းချက်များ
 
-ဤ workshop အပြီးတွင် သင်သည် အောက်ပါ အရာများကို ပြုလုပ်နိုင်မည် —
-- ✅ ရှိပြီးသား AI application ကို AZD templates သို့ ပြောင်းလဲနိုင်မည်
-- ✅ AZD ဖြင့် Microsoft Foundry services များကို ဖွင့်ချိန်ချိန်နိုင်မည်
-- ✅ AI services များအတွက် လုံခြုံသော credential ဖွံ့ဖြိုးမှုကို အကောင်အထည်ဖော်နိုင်မည်
-- ✅ စောင့်ကြည့်မှုပါသော production-ready AI applications များ တင်သွင်းနိုင်မည်
-- ✅ AI deployment များနှင့် ပတ်သက်သော သာမန်ပြဿနာများကို စစ်ဆေးဖြေရှင်းနိုင်မည်
+ဒီ workshop ပြီးဆုံးချိန်တွင် သင်လုပ်နိုင်လိမ့်မှာ:
+- ✅ ရှိပြီးသား AI application ကို AZD template များသို့ ပြောင်းယူခြင်း
+- ✅ Microsoft Foundry ဝန်ဆောင်မှုများကို AZD ဖြင့် configure ပြုလုပ်ခြင်း
+- ✅ AI ဝန်ဆောင်မှုများအတွက် လုံခြုံမှု credentials စီမံခန့်ခွဲခြင်းကျင့်သုံးခြင်း
+- ✅ မောင့်တင်တာနှင့်အတူ production အဆင်သင့် AI application များ deploy လုပ်ခြင်း
+- ✅ AI deployment ပျမ်းမျှ ပြဿနာများကို ပြုပြင်ဖြေရှင်းခြင်း
 
-## Prerequisites
+## လိုအပ်ချက်များ
 
-### Required Tools
-- [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) ထည့်သွင်းထားရန်
-- [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) ထည့်သွင်းထားရန်
-- [Git](https://git-scm.com/) ထည့်သွင်းထားရန်
-- ကုဒ်တည်းဖြတ်ကိရိယာ (VS Code ကို အကြံပြု)
+### လိုအပ်သော ကိရိယာများ
+- [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) တပ်ဆင်ထားရန်
+- [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) တပ်ဆင်ထားရန်
+- [Git](https://git-scm.com/) တပ်ဆင်ထားရန်
+- ကုဒ်ရေးတည်းဖြတ်ရန် စနစ် (VS Code ကို အကြံပြု)
 
-### Azure Resources
-- contributor access ရှိသည့် Azure subscription
-- Microsoft Foundry Models services သို့ အသုံးပြုခွင့် (သို့မဟုတ် access တောင်းနိုင်စွမ်း)
+### Azure ရင်းမြစ်များ
+- Contributor အခွင့်အလမ်းရှိသော Azure subscription
+- Microsoft Foundry Models ဝန်ဆောင်မှုများ အသုံးပြုခွင့် (သို့မဟုတ် လျှောက်ထားခွင့်ရရှိခွင့်)
 - Resource group ဖန်တီးခွင့်များ
 
-### Knowledge Prerequisites
-- Azure services များအပေါ် အခြေခံနားလည်မှု
-- command-line interfaces များကို အသုံးပြုသိရှိမှု
-- AI/ML အကြောင်းအရာ အခြေခံအယူအဆများ (APIs, models, prompts)
+### သတိထားသင့်သည့် ဗဟုသုတများ
+- Azure ဝန်ဆောင်မှုများအတွက် အခြေခံနားလည်မှု
+- command-line interfaces များနှင့် ရင်းနှီးမှု
+- AI/ML သဘောတရား များ (API များ၊ မော်ဒယ်များ၊ prompt များ)
 
-## Lab Setup
+## လက်တွေ့ဆောင်ရွက်မှု စတင်ခြင်း
 
-### Step 1: Environment Preparation
+### အဆင့် ၁: ပတ်ဝန်းကျင် ပြင်ဆင်ခြင်း
 
-1. **Verify tool installations:**
+1. **ကိရိယာများ တပ်ဆင်မှု စစ်ဆေးပါ:**
 ```bash
-# AZD တပ်ဆင်ခြင်းကို စစ်ဆေးပါ
+# AZD တပ်ဆင်မှုကို စစ်ဆေးပါ
 azd version
 
 # Azure CLI ကို စစ်ဆေးပါ
 az --version
 
-# AZD လုပ်ငန်းစဉ်များအတွက် Azure သို့ အကောင့်ဝင်ပါ
+# AZD workflow များအတွက် Azure သို့ ဝင်ရန်
 azd auth login
 
-# စစ်ဆေးမှုများအတွင်း az command များကို လည်ပတ်ရန် ရည်ရွယ်ပါကသာ Azure CLI သို့ အကောင့်ဝင်ပါ
+# ရောဂါရောဂါ စစ်ဆေးမှုအတွင်း az များကို run ဖို့ စီစဉ်ထားပါကသာ Azure CLI သို့ ဝင်ပါ
 az login
 ```
 
-If you work across multiple tenants or your subscription is not detected automatically, retry with `azd auth login --tenant-id <tenant-id>`.
+သင်အများသောတန်နန့်များကြားသို့ သွားရာတွင် သို့မဟုတ် subscription ကို အလိုအလျောက် မတွေ့ရှိပါက `azd auth login --tenant-id <tenant-id>` ဖြင့် ပြန်ကြိုးစားပါ။
 
-2. **Clone the workshop repository:**
+2. **Workshop repository ကို clone လုပ်ပါ:**
 ```bash
 git clone https://github.com/Azure-Samples/azure-search-openai-demo
 cd azure-search-openai-demo
 ```
 
-## Module 1: Understanding AZD Structure for AI Applications
+## မော်ဒျူး ၁: AI အတွက် AZD ဖွဲ့စည်းမှုနားလည်ခြင်း
 
-### Anatomy of an AI AZD Template
+### AI အသုံးပြု AZD Template ၏ ဖွဲ့စည်းပုံ
 
-AI အသုံးပြုရန် အဆင်ပြေသည့် AZD template တွင် ပါဝင်သင့်သော အဓိက ဖိုင်များကို စူးစမ်းကြည့်ရှုပါ။
+AI ရားတွက် AZD template တွင် အဓိက ဖိုင်များကို စူးစမ်းကြည့်ပါ:
 
 ```
 azure-search-openai-demo/
@@ -92,128 +92,128 @@ azure-search-openai-demo/
 └── .azure/               # AZD environment files
 ```
 
-### **Lab Exercise 1.1: Explore the Configuration**
+### **လက်တွေ့လေ့ကျင့်ခန်း ၁.၁: သတ်မှတ်ချက် စူးစမ်းခြင်း**
 
-1. **Examine the azure.yaml file:**
+1. **azure.yaml ဖိုင်ကို စိစစ်ပါ:**
 ```bash
 cat azure.yaml
 ```
 
-**What to look for:**
-- AI component များအတွက် service သတ်မှတ်ချက်များ
-- Environment variable များ၏ မျက်နှာပြင်(mapping)
-- Host ဖန်တီးမှုများ
+**ကြည့်ရှုရန်:**
+- AI အစိတ်အပိုင်းများ ဝန်ဆောင်မှု သတ်မှတ်ချက်များ
+- ပတ်ဝန်းကျင် မဆိုင်ခွဲမှု ချိတ်ဆက်မှုများ
+- Host ဖွဲ့စည်းမှုများ
 
-2. **Review the main.bicep infrastructure:**
+2. **main.bicep အင်ဖရာစွ့တက်ရှင်းကို သုံးသပ်ပါ:**
 ```bash
 cat infra/main.bicep
 ```
 
-**Key AI patterns to identify:**
-- Microsoft Foundry Models service provisioning
-- Azure AI Search integration
-- လုံခြုံသော key management
-- Network security ကို သတ်မှတ်ထားခြင်း
+**အဓိက AI ပုံစံများကို ရှာဖွေပါ:**
+- Microsoft Foundry Models ဝန်ဆောင်မှု သတ်မှတ်ခြင်း
+- Azure AI Search ပေါင်းစည်းမှု
+- လုံခြုံသော key စီမံခန့်ခွဲမှု
+- ကွန်ရက်လုံခြုံမှု ဖွဲ့စည်းမှုများ
 
-### **Discussion Point:** AI အတွက် ဤပုံစံများ အရေးကြီးသည့် အကြောင်း
+### **ဆွေးနွေးစရာ:** ထိုပုံစံများသည် AI အတွက် အဘယ်သို့ အရေးကြီးပါသလဲ
 
-- **Service Dependencies**: AI applications များတွင် အများအားဖြင့် ဝန်ဆောင်မှုများစုံလင်စွာ စီမံရန် လိုအပ်သည်
-- **Security**: API keys နှင့် endpoints များကို လုံခြုံစိတ်ချစေစေရန် စီမံရပါမည်
-- **Scalability**: AI အလုပ်အကိုင်များတွင် သီးခြား scaling လိုအပ်ချက်များ ရှိသည်
-- **Cost Management**: AI services များသည် များစွာအသုံးပြုပါက ဈေးကြီးနိုင်ပြီး မှန်ကန်စွာ ဆက်တင်ဆောင်ရွက်ရန် လိုအပ်သည်
+- **ဝန်ဆောင်မှုအစပ်အဆိုင်များ**: AI app များတွင် ဝန်ဆောင်မှုများစုပေါင်းညှိနှိုင်းမှု လိုအပ်သည်
+- **လုံခြုံမှု**: API key များနှင့် endpoint များကို လုံခြုံစိတ်ချစွာ စီမံပေးရမည်
+- **ချဲ့ထွင့်နိုင်မှု**: AI အလုပ်တင်တာများတွင် ထူးခြားသောချဲ့ထွင့်တုံ့ပြန်မှု လိုအပ်ချက်များရှိသည်
+- **ကုန်ကျစရိတ် စီမံခန့်ခွဲမှု**: AI ဝန်ဆောင်မှုများကို အမှန်တကယ် configure မပြုပါက ယင်းသည် ထိုလွှာကျစရိတ်များ ဖြစ်စေသည်
 
-## Module 2: Deploy Your First AI Application
+## မော်ဒျူး ၂: သင့် ပထမဆုံး AI application ကို deploy လုပ်ပါ
 
-### Step 2.1: Initialize the Environment
+### အဆင့် ၂.၁: ပတ်ဝန်းကျင် စတင်ဖြတ်သန်းခြင်း
 
-1. **Create a new AZD environment:**
+1. **AZD သစ်ပတ်ဝန်းကျင်အသစ် ဖန်တီးပါ:**
 ```bash
 azd env new myai-workshop
 ```
 
-2. **Set required parameters:**
+2. **လိုအပ်သော ပါလာမီတာများ သတ်မှတ်ပါ:**
 ```bash
-# သင်နှစ်သက်ရာ Azure ဒေသကို သတ်မှတ်ပါ
+# သင်နှစ်သက်သော Azure ဒေသကို သတ်မှတ်ပါ
 azd env set AZURE_LOCATION eastus
 
-# ရွေးချယ်စရာ: တိကျသော OpenAI မော်ဒယ်ကို သတ်မှတ်ပါ
+# နောက်ထပ်ရွေးချယ်စရာ: အထူး OpenAI မော်ဒယ်ကို သတ်မှတ်ပါ
 azd env set AZURE_OPENAI_MODEL gpt-4.1-mini
 ```
 
-### Step 2.2: Deploy the Infrastructure and Application
+### အဆင့် ၂.၂: အင်ဖရာစွ့တက်ရှင်းနှင့် application ကို deploy လုပ်ခြင်း
 
-1. **Deploy with AZD:**
+1. **AZD ဖြင့် deploy လုပ်ပါ:**
 ```bash
 azd up
 ```
 
-**What happens during `azd up`:**
-- ✅ Microsoft Foundry Models service ကို provision လုပ်သည်
-- ✅ Azure AI Search service ကို ဖန်တီးသည်
-- ✅ Web application အတွက် App Service ကို တပ်ဆင်သည်
-- ✅ Networking နှင့် security ကို ဖွဲ့စည်းသည်
-- ✅ application code ကို တင်ပို့သည်
-- ✅ မောနိုင်းတာနှင့် လော့ဂ်များကို စတင်တပ်ဆင်သည်
+**`azd up` အတွင်း ဖြစ်ပေါ်မှုများ:**
+- ✅ Microsoft Foundry Models ဝန်ဆောင်မှုကို အဆင်သင့် ပြုလုပ်သည်
+- ✅ Azure AI Search ဝန်ဆောင်မှုဖန်တီးသည်
+- ✅ Web application အတွက် App Service တည်ဆောက်သည်
+- ✅ ကွန်ရက်နှင့် လုံခြုံမှု လုပ်ငန်းစဉ်များ configure ပြုလုပ်သည်
+- ✅ အသုံးပြု application code ကို deploy လုပ်သည်
+- ✅ စောင့်ကြည့်မှုနှင့် မှတ်တမ်းတင်မှု စနစ်များ တပ်ဆင်သည်
 
-2. **Monitor the deployment progress** နှင့် ဖန်တီးနေသော resources များကို မှတ်သားပါ။
+2. **Deployment လုပ်ငန်းတိုးတက်မှုကို စောင့်ကြည့်ပြီး ဖန်တီးနေသော ရင်းမြစ်များ အကြောင်း သိရှိပါ။**
 
-### Step 2.3: Verify Your Deployment
+### အဆင့် ၂.၃: သင့် deployment ကို စစ်ဆေးပါ
 
-1. **Check the deployed resources:**
+1. **Deploy ပြီးသော ရင်းမြစ်များကို စစ်ဆေးပါ:**
 ```bash
 azd show
 ```
 
-2. **Open the deployed application:**
+2. **Deploy လုပ်ပြီးသော application ကို ဖွင့်ပါ:**
 ```bash
 azd show
 ```
 
-Open the web endpoint shown in the `azd show` output.
+`azd show` output မှာ ဖော်ပြထားသည့် web endpoint ကိုဖွင့်ပါ။
 
-3. **Test the AI functionality:**
-   - Web application သို့ သွားကြည့်ပါ
-   - ဥပမာမေးခွန်းများကို ကြိုးစားမေးပါ
-   - AI အဖြေများ အလုပ်လုပ်နေကြောင်း အတည်ပြုပါ
+3. **AI လုပ်ဆောင်ချက်ကို စမ်းသပ်ပါ:**
+   - Web application ကို သွားပါ
+   - နမူနာ query များ ကို စမ်းသပ်ပါ
+   - AI အဖြေများ လည်ပတ်မှု သေချာစေပါ
 
-### **Lab Exercise 2.1: Troubleshooting Practice**
+### **လက်တွေ့လေ့ကျင့်ခန်း ၂.၁: ပြဿနာဖြေရှင်း အကြံပြုခြင်း**
 
-**Scenario**: Deployment အောင်မြင်သော်လည်း AI သည် တုံ့ပြန်မှု မပေးဘဲ ရှိနေသည်။
+**အခြေအနေ**: သင့် deployment အောင်မြင်သော်လည်း AI က တုံ့ပြန်မှုမပြုပါ။
 
-**Common issues to check:**
-1. **OpenAI API keys**: မှန်ကန်စွာ သတ်မှတ်ထားပြီးပါသလား စစ်ဆေးပါ
-2. **Model availability**: သင်၏ region သည် အဆိုပါ model ကို ထောက်ပံ့ပါသလား စစ်ဆေးပါ
-3. **Network connectivity**: ဝန်ဆောင်မှုများ ကြား ဆက်သွယ်နိုင်မှုရှိမရှိ စစ်ဆေးပါ
-4. **RBAC permissions**: app သည် OpenAI ကို ဝင်ရောက်ခွင့် ရှိသည်လား စစ်ဆေးပါ
+**စစ်ဆေးရန် ပျမ်းမျှကိစ္စများ:**
+1. **OpenAI API key များ**: မှန်ကန်စွာ သတ်မှတ်ထားခြင်းရှိ/မရှိ စစ်ဆေးပါ
+2. **မော်ဒယ် ရနိုင်ခြင်း**: သင်၏ဒေသ၌ မော်ဒယ်ရရှိနိုင်မှုကို စစ်ဆေးပါ
+3. **ကွန်ရက် ချိတ်ဆက်မှု**: ဝန်ဆောင်မှုများ ကြား ကွန်ရက်ဆက်သွယ်နိုင်မှု ရှိ/မရှိ စစ်ဆေးပါ
+4. **RBAC ခွင့်ပြုချက်များ**: Application သည် OpenAI ကို ဝင်ရောက်ခွင့်ရှိ/မရှိ စစ်ဆေးပါ
 
-**Debugging commands:**
+**ဒီဘတ်ဂင်း ကွန်မန်းများ:**
 ```bash
-# ပတ်ဝန်းကျင် အပြောင်းအလဲများကို စစ်ဆေးပါ
+# ပတ်ဝန်းကျင်အပြောင်းအလဲများစစ်ဆေးပါ
 azd env get-values
 
-# တပ်ဆင်မှုမှတ်တမ်းများကို ကြည့်ပါ
+# တပ်ဆင်ခြင်းမှတ်တမ်းများကြည့်ပါ
 az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 
-# OpenAI တပ်ဆင်မှုအခြေအနေကို စစ်ဆေးပါ
+# OpenAI တပ်ဆင်မှုအခြေအနေကိုစစ်ဆေးပါ
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
 
-## Module 3: Customizing AI Applications for Your Needs
+## မော်ဒျူး ၃: သင့်လိုအပ်ချက် အတွက် AI application ကို နည်းလမ်းအကြံပြုခြင်း
 
-### Step 3.1: Modify the AI Configuration
+### အဆင့် ၃.၁: AI သတ်မှတ်ချက်ကို ပြင်ဆင်ခြင်း
 
-1. **Update the OpenAI model:**
+1. **OpenAI မော်ဒယ်ကို အပ်ဒိတ်လုပ်ပါ:**
 ```bash
-# တစ်ခြား မော်ဒယ်သို့ ပြောင်းပါ (သင့်ဒေသတွင် ရနိုင်ပါက)
+# သင့်ဒေသမှာရနိုင်ရင် မတူညီတဲ့မော်ဒယ်သို့ပြောင်းပါ
 azd env set AZURE_OPENAI_MODEL gpt-4.1
 
-# အသစ်ပြင်ဆင်ထားသော ဖွဲ့စည်းပုံဖြင့် ပြန်တပ်ဆင်ပါ
+# နယူးဆက်တင်ဖြင့် ထပ်မံတင်ပို့ပါ
 azd deploy
 ```
 
-2. **Add additional AI services:**
+2. **AI ဝန်ဆောင်မှုများ အသစ် ထည့်သွင်းပါ:**
 
-Edit `infra/main.bicep` to add Document Intelligence:
+`infra/main.bicep` ဖိုင်ကို ပြင်ဆင်ပြီး Document Intelligence ကို ထည့်ပါ:
 
 ```bicep
 // Add to main.bicep
@@ -230,64 +230,64 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-### Step 3.2: Environment-Specific Configurations
+### အဆင့် ၃.၂: ပတ်ဝန်းကျင်အလိုက် သတ်မှတ်ချက်များ
 
-**Best Practice**: development နှင့် production အတွက် ကွာခြားခြင်းရှိသည့် configurations များကို သတ်မှတ်ပါ။
+**အကောင်းဆုံး လေ့လာစရာ**: ဖွံ့ဖြိုးရေးနှင့် production အတွက် သတ်မှတ်ချက်ကွာခြားမှုရှိစေရန်။
 
-1. **Create a production environment:**
+1. **Production ပတ်ဝန်းကျင် ဖန်တီးပါ:**
 ```bash
 azd env new myai-production
 ```
 
-2. **Set production-specific parameters:**
+2. **Production အတွက် သီးသန့် ပါလာမီတာများ သတ်မှတ်ပါ:**
 ```bash
-# ထုတ်လုပ်မှုတွင် သာမန်အားဖြင့် အဆင့်မြင့်သော SKU များကို အသုံးပြုသည်
+# ထုတ်လုပ်မှုတွင် အနေအထားအမြင့် SKUs များကို အသုံးပြုသည်
 azd env set AZURE_OPENAI_SKU S0
 azd env set AZURE_SEARCH_SKU standard
 
-# နောက်ထပ် လုံခြုံရေး လုပ်ဆောင်ချက်များကို ဖွင့်ပါ
+# အပိုဆိုးရွားမှုလုံခြုံရေးလက္ခဏာများကို ဖွင့်ပါ
 azd env set ENABLE_PRIVATE_ENDPOINTS true
 ```
 
-### **Lab Exercise 3.1: Cost Optimization**
+### **လက်တွေ့လေ့ကျင့်ခန်း ၃.၁: စရိတ် ထိရောက်စွာ ပြုလုပ်ခြင်း**
 
-**Challenge**: ဆီမနေသော development အတွက် ကုန်ကျစရိတ် ထိန်းသိမ်းစွာ template ကို configure လုပ်ပါ။
+**အပြိုင်အဆိုင်**: Template ကို စရိတ်လျော့နည်းစွာ ဖွံ့ဖြိုးရေးအတွက် configure ပြုလုပ်ပါ။
 
-**Tasks:**
-1. ခွဲခြားထားနိုင်သည့် SKUs များကို free/basic tier သို့ ပြောင်းနိုင်သည်ကို ရှာဖွေပါ
-2. အနိမ့်ဆုံးကုန်ကျစရိတ်အတွက် environment variables များကို သတ်မှတ်ပါ
-3. Deploy လုပ်ပြီး production configuration နှင့် ကုန်ကျစရိတ်ကို နှိုင်းယှဉ်ပါ
+**တာဝန်များ:**
+1. အခမဲ့/basic ကဏ္ဍများသို့ SKUs များ သတ်မှတ်ပါ
+2. အနည်းဆုံး စရိတ်ဖြင့် ပတ်ဝန်းကျင် မဆိုင်ခွဲသတ်မှတ်ချက်များ ပြုလုပ်ပါ
+3. Deploy လုပ်ပြီး production သတ်မှတ်ချက်နှင့် စရိတ်နှိုင်းယှဉ်ပါ
 
-**Solution hints:**
-- Azure AI Services အတွက် ရနိုင်ပါက F0 (free) tier ကို အသုံးပြုပါ
-- Development အတွက် Search Service တွင် Basic tier ကို အသုံးပြုပါ
-- Functions အတွက် Consumption plan ကို စဉ်းစားပါ
+**ဖြေရှင်းနည်း အကြံပြုချက်များ:**
+- Azure AI Service များအတွက် F0 (အခမဲ့) ကဏ္ဍ အသုံးပြုပါ
+- ဖွံ့ဖြိုးရေးတွင် Search Service အတွက် Basic ကဏ္ဍအသုံးပြုပါ
+- Functions အတွက် Consumption စနစ်ကို စဉ်းစားပါ
 
-## Module 4: Security and Production Best Practices
+## မော်ဒျူး ၄: လုံခြုံမှုနှင့် Production အကောင်းဆုံး လုပ်ထုံးလုပ်နည်းများ
 
-### Step 4.1: Secure Credential Management
+### အဆင့် ၄.၁: လုံခြုံသော အထောက်အထား စီမံခန့်ခွဲမှု
 
-**Current challenge**: အများအပြား AI apps များတွင် API keys များကို code ထဲတွင် hardcode လုပ်ထားသည် သို့မဟုတ် လုံခြုံမဟုတ်သော storage သုံးနေသည်။
+**လက်ရှိ ပြဿနာ:** AI app များတွင် API key များကို hardcode သို့မဟုတ် လုံခြုံမှုမရှိသော သိမ်းဆည်းမှုများ အသုံးပြုသည်။
 
-**AZD Solution**: Managed Identity + Key Vault အပြန်အလှန်ပေါင်းစည်းမှု။
+**AZD ဖြေရှင်းနည်း:** Managed Identity နှင့် Key Vault ပေါင်းစည်းခြင်း။
 
-1. **Review the security configuration in your template:**
+1. **သင့်ပုံစံအတွင်း လုံခြုံရေး သတ်မှတ်ချက်များကို ပြန်လည်သုံးသပ်ပါ:**
 ```bash
-# Key Vault နှင့် Managed Identity ဆက်တင်များကို ရှာဖွေပါ
+# Key Vault နှင့် Managed Identity ဆက်တင့်များကို ရှာဖွေပါ
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
-2. **Verify Managed Identity is working:**
+2. **Managed Identity စနစ် အလုပ်လုပ်မှု စစ်ဆေးပါ:**
 ```bash
-# ဝဘ်အက်ပ်တွင် မှန်ကန်သော အမှတ်အသားအတည်ပြု ဖော်ပြချက် (identity configuration) သတ်မှတ်ထားပါသလား စစ်ဆေးပါ
+# ဝဘ်အက်ပ်တွင် မှန်ကန်သော ကိုယ်ပိုင်အတည်ပြုဖွဲ့စည်းပုံရှိကြောင်း စစ်ဆေးပါ
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
-### Step 4.2: Network Security
+### အဆင့် ၄.၂: ကွန်ရက်လုံခြုံမှု
 
-1. **Enable private endpoints** (မရှိသေးပါက):
+1. **private endpoints ကို ဖွင့်ပါ** (ခင်ပွန်းမထည့်ထားသေးပါက):
 
-Add to your bicep template:
+သင့် bicep template တွင် ထည့်ရန်:
 ```bicep
 // Private endpoint for OpenAI
 resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
@@ -310,18 +310,18 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-### Step 4.3: Monitoring and Observability
+### အဆင့် ၄.၃: စောင့်ကြည့်မှုနှင့် ရှုမြင်နိုင်မှု
 
-1. **Configure Application Insights:**
+1. **Application Insights ကို configure ပြုလုပ်ပါ:**
 ```bash
-# Application Insights ကို အလိုအလျောက် ဖွဲ့စည်းထားသင့်သည်
-# ဆက်တင်များကို စစ်ဆေးပါ:
+# Application Insights ကို ကိုယ်တိုင်စနစ်တကျပြင်ဆင်ထားသင့်သည်
+# ပုံသေပြုလုပ်ချက်ကို စစ်ဆေးပါ။
 az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
-2. **Set up AI-specific monitoring:**
+2. **AI-specific စောင့်ကြည့်မှုများ စနစ်တကျ တပ်ဆင်ပါ:**
 
-AI လုပ်ဆောင်ချက်များအတွက် custom metrics များ ထည့်ပါ:
+AI အလုပ်ရုံများအတွက် custom metrics များ ထည့်သွင်းပါ:
 ```bicep
 // In your web app configuration
 resource webApp 'Microsoft.Web/sites@2023-01-01' = {
@@ -342,53 +342,53 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-### **Lab Exercise 4.1: Security Audit**
+### **လက်တွေ့လေ့ကျင့်ခန်း ၄.၁: လုံခြုံရေး စစ်ဆေးခြင်း**
 
-**Task**: သင့် deployment ကို security best practices အရ ပြန်လည်စစ်ဆေးပါ။
+**တာဝန်:** သင့် deployment ကို လုံခြုံရေး အကောင်းဆုံး လုပ်ထုံးလုပ်နည်းများနှင့်နှိုင်းယှဉ် စစ်ဆေးပါ။
 
-**Checklist:**
-- [ ] Code သို့မဟုတ် configuration တွင် hardcoded secrets မရှိပါ
-- [ ] Managed Identity ကို service-to-service authentication အတွက် အသုံးပြုထားပါ
-- [ ] Key Vault သည် sensitive configuration များကို သိမ်းဆည်းထားပါ
-- [ ] Network access ကို သင့်တော်စွာ ကန့်သတ်ထားပါ
-- [ ] Monitoring နှင့် logging များ ဖွင့်ထားပါ
+**စစ်ဆေးရန်**
+- [ ] ကုဒ် သို့မဟုတ် configuration တွင် hardcoded secrets မရှိပါ
+- [ ] ဝန်ဆောင်မှုပြန်လည် သက်ဆိုင်မှုအတွက် Managed Identity အသုံးပြုပါ
+- [ ] Key Vault မှ သိသာထင်ရှားသော သတ်မှတ်ချက်များ သိမ်းဆည်းပါ
+- [ ] ကွန်ရက် ဝင်ရောက်မှု ကို အမှန်တကယ် ကန့်သတ်ထားပါ
+- [ ] စောင့်ကြည့်ခြင်းနှင့် မှတ်တမ်းတင်ခြင်းများ တပ်ဆင်ထားသည်
 
-## Module 5: Converting Your Own AI Application
+## မော်ဒျူး ၅: သင့်ကိုယ်ပိုင် AI application ကို ပြောင်းလဲခြင်း
 
-### Step 5.1: Assessment Worksheet
+### အဆင့် ၅.၁: အကဲဖြတ်မှု စာရွက်တွင် ဖြည့်စွက်ခြင်း
 
-**သင့် app ကို ပြောင်းလဲရန်မတိုင်မီ**, အောက်ပါမေးခွန်းများကို ဖြေပါ။
+**သင့် app ကို ပြောင်းလဲမည့်အရင်က** အောက်ပါ မေးခွန်းများကို ဖြေကြားပါ:
 
 1. **Application Architecture:**
-   - သင့် app သည် ဘယ် AI services များကို အသုံးပြုသနည်း?
-   - ဘယ် compute resources များလိုအပ်သနည်း?
-   - ဒေတာဘေ့စ်တစ်ခု လိုအပ်ပါသလား?
-   - ဝန်ဆောင်မှုများအကြား မည်သည့် dependency များ ရှိသနည်း?
+   - သင့် app သည် ဘယ် AI ဝန်ဆောင်မှုများကို အသုံးပြုပါသလဲ?
+   - ဘယ် compute resource များ လိုအပ်သနည်း?
+   - သိုလှောင်ရန် database လိုအပ်ပါသလား?
+   - ဝန်ဆောင်မှုများအကြားတွင် မည်သည့်အကျိုးတည်ရှိမှုများရှိသနည်း?
 
-2. **Security Requirements:**
-   - သင့် app သည် မည္သည့် sensitive data များကို ကိုင်တွယ်သနည်း?
-   - သင့်တွင် ဘယ်လို compliance လိုအပ်ချက်များ ရှိသနည်း?
-   - private networking လိုအပ်ပါသလား?
+2. **လုံခြုံရေးလိုအပ်ချက်များ:**
+   - သင့် app လက်ခံသော ယက်နယ်ညစ်ညမ်းသော ဒေတာ မည်မျှရှိပါသလဲ?
+   - သင့်တွင် ဘယ်လိုလိုက်နာရမည့် စည်းမျဉ်းစည်းကမ်းများ ရှိပါသလဲ?
+   - ပုဂ္ဂလိက ကွန်ရက်များ လိုအပ်ပါသလား?
 
-3. **Scaling Requirements:**
-   - မျှော်မှန်းထားသည့် load မည်မျှလဲ?
-   - auto-scaling လိုအပ်မလား?
-   - ဧရိယာဆိုင်ရာ လိုအပ်ချက်များ ရှိပါသလား?
+3. **ချဲ့ထွင့်လိုအပ်ချက်များ:**
+   - သင့်မျှော်လင့်ထားသော လုပ်ငန်းအလို့ငှာ ဘယ်လောက်ရှိသနည်း?
+   - အလိုအလျောက်ချဲ့ထွင်မှု လိုအပ်ပါသလား?
+   - ဒေသအလိုက်လိုအပ်ချက်များ ရှိပါသလား?
 
-### Step 5.2: Create Your AZD Template
+### အဆင့် ၅.၂: သင့် AZD Template ကို ဖန်တီးပါ
 
-**သင့် app ကို ပြောင်းလဲရာတွင် ဤပုံစံကို လိုက်နာပါ:**
+**ဒီပုံစံနဲ့ သင့် app ကို ပြောင်းလဲပါ:**
 
-1. **Create the basic structure:**
+1. **အခြေခံဖွဲ့စည်းမှုဖန်တီးပါ:**
 ```bash
 mkdir my-ai-app-azd
 cd my-ai-app-azd
 
-# AZD ပုံစံကို စတင်လုပ်ဆောင်ရန်
+# AZD တမ်ပလိတ်ကို စတင်ဖန်တီးခြင်း
 azd init --template minimal
 ```
 
-2. **Create azure.yaml:**
+2. **azure.yaml ဖိုင်ဖန်တီးပါ:**
 ```yaml
 # Metadata
 name: my-ai-app
@@ -411,9 +411,9 @@ hooks:
     run: echo "Preparing AI models..."
 ```
 
-3. **Create infrastructure templates:**
+3. **အင်ဖရာစွ့တက်ရှင်း template များ ဖန်တီးပါ:**
 
-**infra/main.bicep** - Main template:
+**infra/main.bicep** - အဓိက template:
 ```bicep
 @description('Primary location for all resources')
 param location string = resourceGroup().location
@@ -455,107 +455,107 @@ output endpoint string = openAIAccount.properties.endpoint
 output name string = openAIAccount.name
 ```
 
-### **Lab Exercise 5.1: Template Creation Challenge**
+### **လက်တွေ့လေ့ကျင့်ခန်း ၅.၁: Template ဖန်တီးခြင်း အပြိုင်အဆိုင်**
 
-**Challenge**: document processing AI app အတွက် AZD template တစ်ခု ဖန်တီးပါ။
+**ပြိုင်ဆိုင်မှု**: စာရွက်စာတမ်း ပြင်ဆင် AI app အတွက် AZD template ဖန်တီးပါ။
 
-**Requirements:**
-- content analysis အတွက် Microsoft Foundry Models
-- OCR အတွက် Document Intelligence
-- အဖိုင်တင်ရန် Storage Account
-- processing logic အတွက် Function App
-- user interface အတွက် Web app
+**လိုအပ်ချက်များ:**
+- Microsoft Foundry Models အတွက် အကြောင်းအရာ စစ်ဆေးခြင်း
+- Document Intelligence မှ OCR ဖြင့်
+- စာရွက် စာတင်ရန် Storage Account
+- လုပ်ဆောင်ချက်များအတွက် Function App
+- အသုံးပြုသူ ရှေ့ပြေး အတွက် Web app
 
-**Bonus points:**
-- သင့်တော်သော error handling ထည့်ပါ
-- ကုန်ကျစရိတ် ခန့်မှန်းခြေ ထည့်ပါ
-- မောနိုင်းတာ dashboard များ စတင်ထားပါ
+**အကျိုးဆောင်မှတ်ချက်များ:**
+- အမှားများကို သေချာ လုပ်ဆောင်စေမှု
+- စရိတ် ခန့်မှန်းချက် ပါဝင်မှု
+- စောင့်ကြည့်ရေး dashboard များ တပ်ဆင်ခြင်း
 
-## Module 6: Troubleshooting Common Issues
+## မော်ဒျူး ၆: ပျမ်းမျှ ဖြစ်ပေါ်နိုင်သော ပြဿနာများ
 
-### Common Deployment Issues
+### ပျမ်းမျှ deployment ပြဿနာများ
 
-#### Issue 1: OpenAI Service Quota Exceeded
-**Symptoms:** Deployment သည် quota error ဖြင့် မအောင်မြင်ပါ
-**Solutions:**
+#### ပြဿနာ ၁: OpenAI ဝန်ဆောင်မှုပမာဏ ကျော်လွန်မှု
+**လက္ခဏာများ:** deployment မအောင်မြင်ဘဲ ပမာဏ error ဖြစ်ပေါ်သည်
+**ဖြေရှင်းနည်းများ:**
 ```bash
-# လက်ရှိ ကွိုတာများကို စစ်ဆေးပါ
+# လက်ရှိအရေအတွက်များကို စစ်ဆေးပါ
 az cognitiveservices usage list --location eastus
 
-# ကွိုတာ တိုးမြှင့်ရန် တောင်းဆိုပါ သို့မဟုတ် မတူညီသော ဒေသတစ်ခုကို စမ်းကြည့်ပါ
+# အရေအတွက်တိုးမြှင့်မှုကို တောင်းဆိုပါ ဒါမှမဟုတ် အခြားဒေသကို စမ်းသပ်ကြည့်ပါ
 azd env set AZURE_LOCATION westus2
 azd up
 ```
 
-#### Issue 2: Model Not Available in Region
-**Symptoms:** AI အဖြေများ မအလုပ်လုပ်ခြင်း သို့မဟုတ် model deployment error များ
-**Solutions:**
+#### ပြဿနာ ၂: မော်ဒယ် ကိုဒေသ၌ မရရှိနိုင်မှု
+**လက္ခဏာများ:** AI တုံ့ပြန်မှု မအောင်မြင်ခြင်း သို့မဟုတ် model deployment ပြဿနာများ
+**ဖြေရှင်းနည်းများ:**
 ```bash
-# ဒေသအလိုက် မော်ဒယ် ရနိုင်မှုကို စစ်ဆေးပါ
+# တိုင်းဒေသအလိုက် မော်ဒယ် ရနိုင်မှုကို စစ်ဆေးပါ
 az cognitiveservices model list --location eastus
 
-# ရရှိနိုင်သော မော်ဒယ်သို့ အပ်ဒိတ်လုပ်ပါ
+# ရနိုင်သော မော်ဒယ်သို့ အပ်ဒိတ်လုပ်ပါ
 azd env set AZURE_OPENAI_MODEL gpt-4.1-mini
 azd deploy
 ```
 
-#### Issue 3: Permission Issues
-**Symptoms:** AI services ကို ခေါ်သုံးသောအခါ 403 Forbidden အမှားပြသည်
-**Solutions:**
+#### ပြဿနာ ၃: ခွင့်ပြုပြဿနာများ
+**လက္ခဏာများ:** AI ဝန်ဆောင်မှုများကို ခေါ်ဆိုရာတွင် 403 Forbidden အမှား ဖြစ်ပေါ်သည်
+**ဖြေရှင်းနည်းများ:**
 ```bash
-# အခန်းကဏ္ဍများအပ်နှံထားမှုကို စစ်ဆေးပါ
+# အခန်းကဏ္ဍတာဝန် ပေးခြင်းများ စစ်ဆေးပါ
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# မရှိသေးသော အခန်းကဏ္ဍများကို ထည့်ပါ
+# မရှိသေးသော အခန်းကဏ္ဍများ ထည့်သွင်းပါ
 az role assignment create \
   --assignee YOUR_PRINCIPAL_ID \
   --role "Cognitive Services OpenAI User" \
   --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 ```
 
-### Performance Issues
+### စွမ်းဆောင်ရည် ပြဿနာများ
 
-#### Issue 4: Slow AI Responses
-**Investigation steps:**
-1. Application Insights တွင် performance metrics များကို စစ်ဆေးပါ
-2. Azure portal တွင် OpenAI service metrics များကို ပြန်လည်စစ်ဆေးပါ
-3. network connectivity နှင့် latency ကို အတည်ပြုပါ
+#### ပြဿနာ ၄: AI တုံ့ပြန်မှု များရေ ဆန့်ကျင်မှု နှေးကွေးခြင်း
+**စုံစမ်းစစ်ဆေးရန်:**
+1. Application Insights တွင် စွမ်းဆောင်ရည် တိုင်းတာချက်များ ကြည့်ပါ
+2. Azure portal မှ OpenAI service metrics ပြန်လည်ကြည့်ပါ
+3. ကွန်ရက် ချိတ်ဆက်မှုနှင့် အချိန်ကြာမြင့်မှု စစ်ဆေးပါ
 
-**Solutions:**
-- အထူးမေးလေ့များအတွက် caching ကို အကောင်အထည်ဖော်ပါ
-- သင့် use case အတွက် သင့်လျော်သော OpenAI model ကို အသုံးပြုပါ
-- High-load ပြဿနာများအတွက် read replicas ကို စဉ်းစားပါ
+**ဖြေရှင်းနည်းများ:**
+- ပုံမှန် query များအတွက် caching ယူဆောင်ပါ
+- သင့်အတွက် သင့်တော်သော OpenAI မော်ဒယ်ကို အသုံးပြုပါ
+- အမြင့်တင်အား နဲ့နီးသော replica များကို စဉ်းစားပါ
 
-### **Lab Exercise 6.1: Debugging Challenge**
+### **လက်တွေ့လေ့ကျင့်ခန်း ၆.၁: မတတ်နိုင်မှု ဖြေရှင်းခြင်း အကဲဖြတ်မှု**
 
-**Scenario**: Deployment အောင်မြင်သော်လည်း application က 500 errors ပြန်ပို့နေသည်။
+**အခြေအနေ**: သင့် deployment အောင်မြင်သော်လည်း application က ၅၀၀ အမှားပြန်ပေးနေသည်။
 
-**Debugging tasks:**
-1. application logs ကို စစ်ဆေးပါ
-2. ဝန်ဆောင်မှုဆက်သွယ်နိုင်မှုကို အတည်ပြုပါ
-3. authentication ကို စမ်းသပ်ပါ
-4. configuration ကို ပြန်လည်ဆန်းစစ်ပါ
+**အကဲဖြတ်ရန် လုပ်ဆောင်ချက်များ:**
+1. application logs စစ်ဆေးပါ
+2. ဝန်ဆောင်မှုချိတ်ဆက်မှု စစ်ဆေးပါ
+3. အတည်ပြုမှု စမ်းသပ်ပါ
+4. configuration ကို ပြန်လည်သုံးသပ်ပါ
 
-**Tools to use:**
-- `azd show` အား deployment အမြင်အယမြင်အတွက် အသုံးပြုပါ
-- service logs အသေးစိတ်အတွက် Azure portal ကို အသုံးပြုပါ
-- application telemetry အတွက် Application Insights ကို အသုံးပြုပါ
+**အသုံးပြုရန် ကိရိယာများ:**
+- `azd show` ဖြင့် deployment အမြင်အာရုံ သိရှိပါ
+- Azure portal တွင် ဝန်ဆောင်မှု အသေးစိတ် အချက်အလက်များ ကြည့်ပါ
+- Application Insights မှ တယ်လီမီတရီဓါတ်မှန်များ ကြည့်ပါ
 
-## Module 7: Monitoring and Optimization
+## မော်ဒျူး ၇: စောင့်ကြည့်မှုနှင့် အကောင်းဆုံး ပြုပြင်ခြင်း
 
-### Step 7.1: Set Up Comprehensive Monitoring
+### အဆင့် ၇.၁: ပြည့်စုံသော စောင့်ကြည့်မှု တပ်ဆင်ခြင်း
 
-1. **Create custom dashboards:**
+1. **Custom dashboard များ ဖန်တီးပါ:**
 
-Azure portal သို့ သွားပြီး အောက်ပါအရာများပါဝင်သည့် dashboard တစ်ခု ဖန်တီးပါ။
-- OpenAI request count နှင့် latency
-- Application error rates
-- Resource utilization
-- Cost tracking
+Azure portal သို့ သွားပြီး dashboard ဖန်တီးပါ၊ ထိုနေရာတွင်:
+- OpenAI request အရေအတွက်နှင့် အချိန်ကြာမြင့်မှု
+- Application အမှားနှုန်းများ
+- ရင်းမြစ်အသုံးပြုမှု
+- ကုန်ကျစရိတ် ချက်လက်များ
 
-2. **Set up alerts:**
+2. **Alert များ တပ်ဆင်ပါ:**
 ```bash
-# အမှားနှုန်း မြင့်မားမှုအတွက် သတိပေးချက်
+# အမြင့်အမှားနှုန်းအတွက် သတိပေးချက်
 az monitor metrics alert create \
   --name "AI-App-High-Error-Rate" \
   --resource-group YOUR_RG \
@@ -564,120 +564,120 @@ az monitor metrics alert create \
   --description "Alert when error rate is high"
 ```
 
-### Step 7.2: Cost Optimization
+### အဆင့် ၇.၂: စရိတ် ထိန်းသိမ်းမှု
 
-1. **Analyze current costs:**
+1. **လက်ရှိ စရိတ်များကို ခွဲခြမ်းစိတ်ဖြာပါ:**
 ```bash
-# ကုန်ကျစရိတ် ဒေတာများကို ရယူရန် Azure CLI ကို အသုံးပြုပါ
+# ကုန်ကျစရိတ် ဒေတာ ရယူရန် Azure CLI ကို အသုံးပြုပါ
 az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 ```
 
-2. **Implement cost controls:**
-- budget alerts များကို စတင်တပ်ဆင်ပါ
-- autoscaling policies များကို အသုံးပြုပါ
-- request caching ကို အကောင်အထည်ဖော်ပါ
-- OpenAI အတွက် token အသုံးပြုမှုကို မော်နီတာလုပ်ပါ
+2. **စရိတ် ထိန်းသိမ်းမှုနည်းလမ်းများ တပ်ဆင်ပါ:**
+- အတိုးပမာဏ alert များ တပ်ဆင်ပါ
+- autoscaling မူဝါဒများ သုံးပါ
+- request caching ကို အသုံးပြုပါ
+- OpenAI token အသုံးပြုမှု များကို စောင့်ကြည့်ပါ
 
-### **Lab Exercise 7.1: Performance Optimization**
+### **လက်တွေ့လေ့ကျင့်ခန်း ၇.၁: စွမ်းဆောင်ရည် အကောင်းမြင့်တင်ခြင်း**
 
-**Task**: performance နှင့် cost နှစ်ခုစလုံးအတွက် သင့် AI application ကို မျှလုပ်ကြပါ။
+**တာဝန်:** သင့် AI application ကို စွမ်းဆော်ပြီး စရိတ် သက်သာစေပါ။
 
-**Metrics to improve:**
-- ပျမ်းမျှ တုံ့ပြန်ချိန်ကို 20% လျှော့ချရန်
-- တစ်လလျှင် ကုန်ကျစရိတ်ကို 15% လျှော့ချရန်
-- 99.9% uptime ထိန်းသိမ်းထားရန်
+**တိုးတက်စေရန် မွန်းကောင်းချက်များ:**
+- ပျမ်းမျှ တုံ့ပြန်မှု အချိန်ကို ၂၀% လျော့ပါ
+- လစဉ်ကုန်ကျစရိတ်ကို ၁၅% လျော့ပါ
+- ၉၉.၉% uptime ကို ထိန်းသိမ်းပါ
 
-**Strategies to try:**
-- response caching ကို အကောင်အထည်ဖော်ပါ
-- token သိမြင်မှုအတွက် prompts များကို အကောင်းအစား ပြုပြင်ပါ
-- သင့်လျော်သော compute SKUs များကို အသုံးပြုပါ
-- autoscaling ကို မှန်ကန်စွာ သတ်မှတ်ပါ
+**ကြိုးစားသင့်သော မဟာဗျူဟာများ:**
+- တုံ့ပြန်မှု caching ကို ကျင့်သုံးပါ
+- token ထိရောက်မှု ကြည့်ပြီး prompt များကို optimize ပြုလုပ်ပါ
+- သင့်လိုအပ်ချက်အတွက် သင့်တော်သော compute SKUs အသုံးပြုပါ
+- autoscaling ကို သင့်တော်စွာပြုလုပ်ပါ
 
-## Final Challenge: End-to-End Implementation
+## နောက်ဆုံး ပြိုင်ဆိုင်မှု: ပထမဆုံး မှ နောက်ဆုံး အကောင်အထည်ဖော်မှု
 
-### Challenge Scenario
+### ပြိုင်ဆိုင်မှု အခြေအနေ
 
-သင့်တာဝန်မှာ production-ready AI-powered customer service chatbot တစ်ခုကို ဒီလိုလိုအပ်ချက်များနှင့် ဖန်တီးရန်ဖြစ်သည်။
+သင်သည် production-ready AI-အင်အားမြှင့် ဖောက်သည်ဝန်ဆောင်မှု chatbot တစ်ခုကို အောက်ပါလိုအပ်ချက်များဖြင့် ဖန်တီးရန် တာဝန်ရှိသည်။
 
-**Functional Requirements:**
-- ဖောက်သည်များနှင့် ဆက်သွယ်ရန် web interface
-- ပြန်လည်ဖြေကြားရန် Microsoft Foundry Models နှင့် ပေါင်းစည်းမှု
-- Azure AI Search ကို အသုံးပြု၍ document search ထောက်ပံ့မှု
-- ရှိပြီးသား customer database နှင့် ပေါင်းစည်းမှု
-- ဘာသာစကားများစွာကို ထောက်ပံ့ရေး
+**လုပ်ဆောင်ချက်လိုအပ်ချက်များ:**
+- ဖောက်သည်နှင့် ဆက်သွယ်ရန် web interface
+- Microsoft Foundry Models နှင့် ပေါင်းစည်းမှုဖြင့် တုံ့ပြန်မှု ရရှိခြင်း
+- Azure AI Search အသုံးပြု၍ စာရွက်စာတမ်း ရှာဖွေရန် အင်အား
+- ရှိပြီးသား ဖောက်သည် ဒေတာအိုင်တီ စနစ်နှင့် ပေါင်းစည်းခြင်း
+- ဘာသာစကားစုံ ပံ့ပိုးပေးမှု
 
-**Non-Functional Requirements:**
-- တပြိုင်နက် 1000 ဦးကို ကိုင်တွယ်နိုင်ရန်
-- 99.9% uptime SLA
-- SOC 2 compliance
-- တစ်လလျှင် $500 အောက် ကုန်ကျစရိတ်
-- အမျိုးမျိုးသော environments (dev, staging, prod) သို့ တင်သွင်းရန်
+**လုပ်ဆောင်ချက်မဟုတ်သော လိုအပ်ချက်များ:**
+- တပြိုင်တည်းအသုံးပြုသူ ၁၀၀၀ ကို ကူညီနိုင်မှု
+- ၉၉.၉% uptime SLA ကို ထိန်းသိမ်းခြင်း
+- SOC 2 စည်းမျဉ်းများနှင့် ကိုက်ညီမှု
+- လစဉ် $၅၀၀ အောက် စကားဝိုင်းများ
+- Dev, staging, prod environment များ သို့ deploy ပြုလုပ်ခြင်း
 
-### Implementation Steps
+### အကောင်အထည်ဖော် ခြေလှမ်းများ
 
-1. architecture ကို ဒီဇိုင်น์ဆွဲပါ
-2. AZD template ကို ဖန်တီးပါ
-3. security အတွက် နည်းလမ်းများကို အကောင်အထည်ဖော်ပါ
-4. မောနိုင်းတာနှင့် alerting ကို စတင်ပါ
-5. deployment pipelines များကို ဖန်တီးပါ
-6. ဖြေရှင်းချက်ကို စာရွက်စာတမ်းပြုစုပါ
+1. **လမ်းညွှန်ရေးဆွဲပါ**
+2. **AZD template ဖန်တီးပါ**
+3. **လုံခြုံရေး စနစ်များ အကောင်အထည်ဖော်ပါ**
+4. **စောင့်ကြည့်မှုနှင့် alert ပြုလုပ်ခြင်း စနစ်များ ဖန်တီးပါ**
+5. **Deployment pipeline များတည်ဆောက်ပါ**
+6. **ဖြေရှင်းနည်းဆွဲချိတ်ပါ**
 
-### Evaluation Criteria
+### အကဲဖြတ်မှု စံနှုန်းများ
 
-- ✅ **Functionality**: အားလုံးလိုအပ်ချက်များကို ဖြည့်ဆည်းနိုင်သလား?
-- ✅ **Security**: best practices များ ထည့်သွင်းထားသလား?
-- ✅ **Scalability**: load ကို ကိုင်တွယ်နိုင်သလား?
-- ✅ **Maintainability**: code နှင့် infrastructure ကို ကောင်းစွာ စုပေါင်းထားသလား?
-- ✅ **Cost**: ဘတ်ဂျက်အတွင်းမှာ ရှိနေသလား?
+- ✅ **လုပ်ဆောင်ချက်**: မည်သည့်လိုအပ်ချက်များကိုဖြည့်ဆည်းထားသနည်း?
+- ✅ **လုံခြုံမှု**: အကောင်းဆုံး လုပ်ထုံးလုပ်နည်းများ လက်ခံပြုလုပ်ထားသနည်း?
+- ✅ **ချဲ့ထွင့်နိုင်မှု**: လုပ်ငန်းလောက်မှန်သည့် ချဲ့ထွင့်နိုင်မှု ရှိပါသလား?
+- ✅ **ထိန်းသိမ်းနိုင်မှု**: ကုဒ်နှင့်အင်ဖရာစွ့တက်ရှင်း ဖွဲ့စည်းမှု သေချာရှင်းလင်းပါသလား?
+- ✅ **ကုန်ကျစရိတ်**: ဘတ်ဂျက်အတွင်းတွင် ရှိပြီးနားနိုင်ပါသလား?
 
-## Additional Resources
+## ထပ်တူအသုံးပြုနိုင်သော ရင်းမြစ်များ
 
-### Microsoft Documentation
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Microsoft Foundry Models Service Documentation](https://learn.microsoft.com/azure/cognitive-services/openai/)
-- [Microsoft Foundry Documentation](https://learn.microsoft.com/azure/ai-studio/)
+### Microsoft မှ ပြုစုသော စာတမ်းများ
+- [Azure Developer CLI လမ်းညွှန်စာအုပ်](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Microsoft Foundry Models ဝန်ဆောင်မှု လမ်းညွှန်စာအုပ်](https://learn.microsoft.com/azure/cognitive-services/openai/)
+- [Microsoft Foundry လမ်းညွှန်စာအုပ်](https://learn.microsoft.com/azure/ai-studio/)
 
-### Sample Templates
+### နမူနာ Template များ
 - [Microsoft Foundry Models Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
 - [OpenAI Chat App Quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart)
+
 - [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
 
-### လူထုအရင်းအမြစ်များ
+### ရုပ်ပုံအသိုင်းအဝိုင်း အရင်းအမြစ်များ
 - [Microsoft Foundry Discord](https://discord.gg/microsoft-azure)
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
 - [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
 
-## 🎓 ပြီးမြောက်လက်မှတ်
+## 🎓 ပြီးမြောက်စာမူ
 
-ဂုဏ်ယူပါတယ်! သင်သည် AI Workshop Lab ကို အပြီးသတ် ပြီးမြောက်ပါပြီ။ ယခုတွင် သင်အောက်ပါ အရာများကို ပြုလုပ်နိုင်သင့်သည်။
+ဂုဏ်ယူပါတယ်! သင် AI လုပ်ငန်းရပ်သင်တန်းကိုပြီးမြောက်လိုက်ပြီ။ ယခု သင်လုပ်နိုင်ဖို့ လိုအပ်သည်မှာ -
 
-- ✅ လက်ရှိ AI applications များကို AZD templates များအဖြစ် ပြောင်းနိုင်ခြင်း
-- ✅ ထုတ်လုပ်မှုအသင့် AI applications များကို ထည့်သွင်းတင်ပို့နိုင်ခြင်း
-- ✅ AI workloads များအတွက် လုံခြုံရေး အကောင်းဆုံး လက်တွေ့နည်းလမ်းများကို အကောင်အထည်ဖော်နိုင်ခြင်း
-- ✅ AI application များ၏ လုပ်ဆောင်မှုကို စောင့်ကြည့်၍ တိုးတက်အောင် ပြုစုနိုင်ခြင်း
-- ✅ ပုံမှန် ထည့်သွင်းမှု ပြဿနာများကို ပြန်လည်ဖြေရှင်းနိုင်ခြင်း
+- ✅ ရှိပြီးသား AI အပလီကေးရှင်းများကို AZD ပုံစံများသို့ ပြောင်းလဲခြင်း
+- ✅ ထုတ်လုပ်မှုအဆင့် AI အပလီကေးရှင်းများ တပ်ဆင်ခြင်း
+- ✅ AI အလုပ်လုပြင်ပွဲများအတွက် လုံခြုံရေးကောင်းမွန်မှုဆိုင်ရာ ကောင်းမွန်သောလုပ်ထုံးလုပ်နည်းများ ကို အကောင်အထည်ဖော်ခြင်း
+- ✅ AI အပလီကေးရှင်း၏ တုံ့ပြန်မှုနှင့် ထိန်းသိမ်းမှု ကို စောင့်ကြည့်ပြီး တိုးတက်အောင်လုပ်ခြင်း
+- ✅ ရိုးရှင်းသော ထိပ်တန်းပြဿနာများကို ဖြေရှင်းခြင်း
 
-### နောက်ထပ် ခြေလှမ်းများ
-1. ဤပုံစံများကို သင်၏ ကိုယ်ပိုင် AI ပရိုဇက်များတွင် အသုံးချပါ
-2. Templates များကို ပြန်လည် လူထုထံ စေ့ဆော်ပါ
-3. ဆက်လက်ထောက်ပံ့မှုအတွက် Microsoft Foundry Discord သို့ ဝင်ပါ
-4. multi-region deployments ကဲ့သို့ တိုးတက်ပြောင်းလဲမှု ခေါင်းစဉ်များကို ရှာဖွေပါ
+### နောက်တစ်ဆင့်များ
+1. ဒီပုံစံများကို သင်၏ ကိုယ်ပိုင် AI ပရောဂျက်များတွင် အသုံးပြုပါ
+2. မူပိုင်ခွင့်အသစ်များကို ပြန်လည် ပေးဆောင်ပါ
+3. ဆက်လက်ထောက်ခံမှုအတွက် Microsoft Foundry Discord တွင် ပါဝင်ဆွေးနွေးပါ
+4. မျိုးစုံဒေသတွင် တပ်ဆင်ခြင်းကဲ့သို့ ရှေ့ဆက်ခက်ခဲသော အကြောင်းအရာများကို လေ့လာပါ
 
 ---
 
-**Workshop Feedback**: ဤ workshop ကို တိုးတက်စေရန် သင်၏ အတွေ့အကြုံကို [Microsoft Foundry Discord #Azure ချန်နယ်](https://discord.gg/microsoft-azure) တွင် မျှဝေကူညီပေးပါ။
+**သင်တန်းတုံ့ပြန်ချက်**: သင်၏အတွေ့အကြုံကို [Microsoft Foundry Discord #Azure channel](https://discord.gg/microsoft-azure) တွင် မွေ့တာဝန်မဲ့ပြီး ဤ သင်တန်းကို တိုးတက်အောင် ကူညီပါ။
 
- 
 ---
 
-**အခန်း လမ်းညွှန်:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 2 - AI-First Development
-- **⬅️ Previous**: [AI Model Deployment](ai-model-deployment.md)
-- **➡️ Next**: [Production AI Best Practices](production-ai-practices.md)
-- **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+**အခန်းလမ်းညွှန်:**
+- **📚 သင်တန်းမူလစာမျက်နှာ**: [AZD For Beginners](../../README.md)
+- **📖 လက်ရှိ အခန်း**: အခန်း 2 - AI-First Development
+- **⬅️ ယခင်**: [AI Model Deployment](ai-model-deployment.md)
+- **➡️ နောက်တစ်ခု**: [Production AI Best Practices](production-ai-practices.md)
+- **🚀 နောက်အခန်း**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
-**အကူအညီ လိုပါသလား?** ကျေးဇူးပြု၍ AZD နှင့် AI ထည့်သွင်းခြင်းများအတွက် အထောက်အပံ့နှင့် ဆွေးနွေးရန် ကျွန်တော်တို့၏ လူထုတွင် ပါဝင်ဆွေးနွေးပါ။
+**ကူညီလိုပါသလား?** AZD နှင့် AI တပ်ဆင်မှုများဆိုင်ရာ ထောက်ခံမှုနှင့် ဆွေးနွေးမှုအတွက် ကျွန်ုပ်တို့ရုပ်ပုံအသိုင်းအဝိုင်းတွင် ပါဝင်ပါ။
 
 ---
 

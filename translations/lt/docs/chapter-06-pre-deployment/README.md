@@ -1,45 +1,45 @@
-# Skyrius 6: Išankstinis diegimo planavimas ir patikra
+# 6 skyrius: Išankstinis diegimo planavimas ir patikra
 
-**📚 Kursas**: [AZD pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 1 val. | **⭐ Sudėtingumas**: Vidutinis
+**📚 Kursas**: [AZD Pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 1 valanda | **⭐ Sudėtingumas**: Vidutinis
 
 ---
 
 ## Apžvalga
 
-This chapter covers essential planning and validation steps before deploying your application. Learn to avoid costly mistakes with proper capacity planning, SKU selection, and preflight checks.
+Šiame skyriuje aptariami esminiai planavimo ir patikros žingsniai prieš diegiant jūsų programą. Išmokite išvengti brangių klaidų tinkamai planuojant pajėgumus, pasirenkant SKU ir atliekant priešdiegimo patikras.
 
-> Patikrinta su `azd 1.25.6` 2026 m. birželį.
+> Patikrinta su `azd 1.27.1` 2026 metų liepos mėn.
 
 ## Mokymosi tikslai
 
-Baigę šį skyrių, jūs:
-- Vykdyti parengiamuosius (preflight) patikrinimus prieš diegimą
-- Planuoti pajėgumus ir įvertinti resursų poreikį
-- Pasirinkti tinkamus SKU, kad optimizuotumėte išlaidas
-- Konfigūruoti Application Insights stebėjimui
-- Suprasti komandos koordinavimo modelius
+Baigę šį skyrių jūs:
+- Atliksite priešdiegimo patikras
+- Planuosite pajėgumus ir įvertinsite išteklių poreikį
+- Pasirinksite tinkamus SKU kainų optimizavimui
+- Konfigūruosite Application Insights stebėjimui
+- Suprasite komandos koordinavimo modelius
 
 ---
 
 ## 📚 Pamokos
 
-| # | Pamoka | Aprašymas | Trukmė |
+| # | Pamoka | Aprašymas | Laikas |
 |---|--------|-------------|------|
-| 1 | [Parengiamieji patikrinimai](preflight-checks.md) | Patikrinti konfigūraciją prieš diegimą | 15 min |
-| 2 | [Pajėgumų planavimas](capacity-planning.md) | Įvertinti resursų poreikius | 20 min |
-| 3 | [SKU pasirinkimas](sku-selection.md) | Pasirinkti tinkamus kainų lygius | 15 min |
-| 4 | [Application Insights](application-insights.md) | Konfigūruoti stebėjimą | 20 min |
-| 5 | [Koordinavimo modeliai](coordination-patterns.md) | Komandos diegimo darbo srautai | 15 min |
+| 1 | [Priešdiegimo patikros](preflight-checks.md) | Patikrinkite konfigūraciją prieš diegdami | 15 min |
+| 2 | [Pajėgumų planavimas](capacity-planning.md) | Įvertinkite išteklių poreikį | 20 min |
+| 3 | [SKU pasirinkimas](sku-selection.md) | Pasirinkite tinkamus kainų lygius | 15 min |
+| 4 | [Application Insights](application-insights.md) | Konfigūruokite stebėjimą | 20 min |
+| 5 | [Koordinavimo modeliai](coordination-patterns.md) | Komandos diegimo darbo eiga | 15 min |
 
 ---
 
-## 🚀 Greitas startas
+## 🚀 Greitas pradžios vadovas
 
 ```bash
 # Patikrinti prenumeratos kvotas
 az vm list-usage --location eastus --output table
 
-# Peržiūrėti diegimą (išteklių nesukuriama)
+# Peržiūrėti diegimą (nesukuriant išteklių)
 azd provision --preview
 
 # Patikrinti Bicep sintaksę
@@ -51,42 +51,42 @@ azd env get-values
 
 ---
 
-## ☑️ Prieš diegimą — kontrolinis sąrašas
+## ☑️ Priešdiegimo kontrolinis sąrašas
 
 ### Prieš `azd provision`
 
-- [ ] Kvota patikrinta regione
-- [ ] SKU tinkamai pasirinkti
-- [ ] Išlaidų sąmata peržiūrėta
+- [ ] Regiono kvota patikrinta
+- [ ] SKU pasirinkti tinkamai
+- [ ] Kainos įvertinimas peržiūrėtas
 - [ ] Pavadinimų konvencija nuosekli
-- [ ] Sauga/RBAC sukonfigūruoti
+- [ ] Saugumas/RBAC sukonfigūruotas
 
 ### Prieš `azd deploy`
 
 - [ ] Aplinkos kintamieji nustatyti
-- [ ] Slaptažodžiai saugomi Key Vault
-- [ ] Prisijungimo eilutės patikrintos
+- [ ] Slaptažodžiai Key Vault
+- [ ] Ryšio eilutės patikrintos
 - [ ] Sveikatos patikros sukonfigūruotos
 
 ---
 
 ## 💰 SKU pasirinkimo vadovas
 
-| Workload | Vystymas | Gamybinė |
+| Darbo krūvis | Kūrimas | Gamyba |
 |----------|-------------|------------|
-| Container Apps | Consumption | Dedicated D4 |
+| Container Apps | Sąnaudų modelis | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standard | Standard + PTU |
-| AI Search | Basic | Standard S2+ |
+| Microsoft Foundry Models | Standartinis | Standartinis + PTU |
+| AI Search | Pagrindinis | Standartinis S2+ |
 
 ---
 
-## 🔗 Naršymas
+## 🔗 Navigacija
 
 | Kryptis | Skyrius |
 |-----------|---------|
-| **Ankstesnis** | [Skyrius 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
-| **Kitas** | [Skyrius 7: Trikčių šalinimas](../chapter-07-troubleshooting/README.md) |
+| **Ankstesnis** | [5 skyrius: Multi-Agent](../chapter-05-multi-agent/README.md) |
+| **Kitas** | [7 skyrius: Gedimų šalinimas](../chapter-07-troubleshooting/README.md) |
 
 ---
 

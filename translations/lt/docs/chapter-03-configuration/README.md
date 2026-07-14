@@ -1,4 +1,4 @@
-# 3 skyrius: Konfigūracija ir autentifikavimas
+# 3 skyrius: Konfigūravimas ir autentifikacija
 
 **📚 Kursas**: [AZD Pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 45-60 minučių | **⭐ Sudėtingumas**: Vidutinis
 
@@ -6,38 +6,38 @@
 
 ## Apžvalga
 
-Šiame skyriuje aptariama aplinkos konfigūracija, autentifikavimo modeliai ir saugumo gerosios praktikos Azure Developer CLI diegimams.
+Šiame skyriuje aptariamas aplinkos konfigūravimas, autentifikacijos modeliai ir saugumo geriausios praktikos Azure Developer CLI diegimams.
 
-> Patikrinta su `azd 1.25.6` 2026 m. birželį.
+> Patikrinta su `azd 1.27.1` 2026 m. liepos mėn.
 
 ## Mokymosi tikslai
 
-Baigę šį skyrių, jūs:
-- Įvaldysite AZD konfigūracijos hierarchiją
-- Valdysite kelias aplinkas (dev, staging, prod)
-- Įgyvendinsite saugų autentifikavimą naudojant valdomas tapatybes
-- Konfigūruosite aplinkai būdingus parametrus
+Baigę šį skyrių jūs:
+- Gebėsite valdyti AZD konfigūracijos hierarchiją
+- Valdyti kelias aplinkas (dev, staging, prod)
+- Įgyvendinti saugią autentifikaciją naudojant valdomas tapatybes
+- Konfigūruoti aplinkai specifinius nustatymus
 
 ---
 
 ## 📚 Pamokos
 
-| # | Pamoka | Aprašymas | Laikas |
+| # | Pamoka | Aprašymas | Trukmė |
 |---|--------|-------------|------|
-| 1 | [Konfigūracijos vadovas](configuration.md) | Aplinkos nustatymas ir valdymas | 30 min |
-| 2 | [Autentifikavimas ir saugumas](authsecurity.md) | Valdomos tapatybės ir RBAC modeliai | 30 min |
+| 1 | [Konfigūravimo vadovas](configuration.md) | Aplinkos nustatymas ir valdymas | 30 min |
+| 2 | [Autentifikacija ir saugumas](authsecurity.md) | Valdomos tapatybės ir RBAC modeliai | 30 min |
 
 ---
 
-## 🚀 Greitas startas
+## 🚀 Greitas paleidimas
 
 ```bash
-# Sukurti kelias aplinkas
+# Kurti kelias aplinkas
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Perjungti aplinkas
+# Pereiti tarp aplinkų
 azd env select prod
 
 # Nustatyti aplinkos kintamuosius
@@ -52,19 +52,19 @@ azd env get-values
 
 ## 🔧 Konfigūracijos hierarchija
 
-AZD taiko nustatymus šia tvarka (vėlesni perrašo ankstesnius):
+AZD taiko nustatymus šia tvarka (vėlesni pakeitimai nustato ankstesnius):
 
-1. **Numatytosios reikšmės** (įtrauktos į šablonus)
+1. **Numatytosios reikšmės** (įmontuotos šablonuose)
 2. **azure.yaml** (projekto konfigūracija)
 3. **Aplinkos kintamieji** (`azd env set`)
-4. **Komandinės eilutės parametrai** (`--location eastus`)
+4. **Komandų eilutės parametrai** (`--location eastus`)
 
 ---
 
-## 🔐 Saugumo gerosios praktikos
+## 🔐 Saugumo geriausios praktikos
 
 ```bash
-# Naudokite valdomąją tapatybę (rekomenduojama)
+# Naudokite valdomą tapatybę (rekomenduojama)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
 # Patikrinkite AZD autentifikacijos būseną
@@ -73,7 +73,7 @@ azd auth status
 # Pasirinktinai: patikrinkite Azure CLI kontekstą, jei planuojate vykdyti az komandas
 az account show
 
-# Iš naujo autentifikuokitės prireikus
+# Autentifikuokitės iš naujo, jei reikia
 azd auth login
 
 # Pasirinktinai: atnaujinkite Azure CLI autentifikaciją az komandoms
@@ -82,19 +82,19 @@ az login
 
 ---
 
-## 🔗 Naršymas
+## 🔗 Navigacija
 
 | Kryptis | Skyrius |
 |-----------|---------|
-| **Ankstesnis** | [Chapter 2: AI Development](../chapter-02-ai-development/README.md) |
+| **Ankstesnis** | [2 skyrius: DI kūrimas](../chapter-02-ai-development/README.md) |
 | **Kitas** | [4 skyrius: Infrastruktūra](../chapter-04-infrastructure/README.md) |
 
 ---
 
 ## 📖 Susiję ištekliai
 
-- [Patikrinimai prieš diegimą](../chapter-06-pre-deployment/README.md)
-- [Trikčių šalinimas](../chapter-07-troubleshooting/common-issues.md)
+- [Patikros prieš diegimą](../chapter-06-pre-deployment/README.md)
+- [Gedimų šalinimas](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
