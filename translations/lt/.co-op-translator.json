@@ -12,8 +12,8 @@
     "language_code": "lt"
   },
   "README.md": {
-    "original_hash": "e7f0643ffc3f1653dc754bd9f91e6c26",
-    "translation_date": "2026-06-19T00:11:36+00:00",
+    "original_hash": "de39d21c7bbb6bd8790f999b35c9903b",
+    "translation_date": "2026-07-14T21:55:18+00:00",
     "source_file": "README.md",
     "language_code": "lt"
   },
@@ -28,30 +28,6 @@
     "translation_date": "2025-09-10T05:44:33+00:00",
     "source_file": "SUPPORT.md",
     "language_code": "lt"
-  },
-  "__translation_failures__": {
-    "README.md": {
-      "original_hash": "de39d21c7bbb6bd8790f999b35c9903b",
-      "source_file": "README.md",
-      "language_code": "lt",
-      "failure_date": "2026-07-14T13:22:30+00:00",
-      "status": "failed",
-      "error_type": "TranslationIncompleteError",
-      "error_message": "Markdown translation remained incomplete for chunk 5 of 'README.md', and the chunk could not be split further.",
-      "translator_version": "0.20.0",
-      "failure_policy_version": 1
-    },
-    "docs/chapter-08-production/README.md": {
-      "original_hash": "2be2743c3681602c6cfae53f88d37d08",
-      "source_file": "docs/chapter-08-production/README.md",
-      "language_code": "lt",
-      "failure_date": "2026-07-14T13:36:25+00:00",
-      "status": "failed",
-      "error_type": "TranslationIncompleteError",
-      "error_message": "Markdown translation remained incomplete for chunk 1 of 'README.md', and the chunk could not be split further.",
-      "translator_version": "0.20.0",
-      "failure_policy_version": 1
-    }
   },
   "changelog.md": {
     "original_hash": "460aa99fe12308b419fe320188a81702",
@@ -246,8 +222,8 @@
     "language_code": "lt"
   },
   "docs/chapter-08-production/README.md": {
-    "original_hash": "f906126665dafdfc4e0cf596c0f0d204",
-    "translation_date": "2026-06-19T01:07:05+00:00",
+    "original_hash": "2be2743c3681602c6cfae53f88d37d08",
+    "translation_date": "2026-07-14T21:55:39+00:00",
     "source_file": "docs/chapter-08-production/README.md",
     "language_code": "lt"
   },

@@ -29,19 +29,6 @@
     "source_file": "SUPPORT.md",
     "language_code": "sr"
   },
-  "__translation_failures__": {
-    "docs/chapter-08-production/README.md": {
-      "original_hash": "2be2743c3681602c6cfae53f88d37d08",
-      "source_file": "docs/chapter-08-production/README.md",
-      "language_code": "sr",
-      "failure_date": "2026-07-13T23:35:58+00:00",
-      "status": "failed",
-      "error_type": "TranslationIncompleteError",
-      "error_message": "Markdown translation remained incomplete for chunk 1 of 'README.md', and the chunk could not be split further.",
-      "translator_version": "0.20.0",
-      "failure_policy_version": 1
-    }
-  },
   "changelog.md": {
     "original_hash": "460aa99fe12308b419fe320188a81702",
     "translation_date": "2026-07-13T23:33:03+00:00",
@@ -235,8 +222,8 @@
     "language_code": "sr"
   },
   "docs/chapter-08-production/README.md": {
-    "original_hash": "f906126665dafdfc4e0cf596c0f0d204",
-    "translation_date": "2026-06-17T06:39:38+00:00",
+    "original_hash": "2be2743c3681602c6cfae53f88d37d08",
+    "translation_date": "2026-07-14T22:09:48+00:00",
     "source_file": "docs/chapter-08-production/README.md",
     "language_code": "sr"
   },

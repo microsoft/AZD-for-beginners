@@ -1,62 +1,62 @@
-# 8 skyrius: Gamyba ir įmonių modeliai
+# 8 skyrius: Produkcijos ir įmonių modeliai
 
-**📚 Kursas**: [AZD pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 2-3 valandos | **⭐ Sudėtingumas**: Pažengęs
+**📚 Kursas**: [AZD pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 2–3 valandos | **⭐ Sudėtingumas**: Išplėstinis
 
 ---
 
 ## Apžvalga
 
-Šis skyrius aptaria įmonei paruoštus diegimo modelius, saugumo stiprinimą, stebėjimą ir sąnaudų optimizavimą gamybinėms AI apkrovoms.
+Šiame skyriuje aptariami įmonių lygmens diegimo modeliai, saugumo stiprinimas, stebėsena ir kaštų optimizavimas dirbtinio intelekto gamybos darbo krūviams.
 
-> Patikrinta su `azd 1.25.6` 2026 m. birželį.
+> Patikrinta su `azd 1.27.1` 2026 m. liepos mėn.
 
 ## Mokymosi tikslai
 
-Baigę šį skyrių, jūs:
-- Diegsite kelių regionų atsparias programas
-- Įgyvendinsite įmonės saugumo modelius
-- Konfigūruosite išsamų stebėjimą
-- Optimizuosite sąnaudas mastu
-- Nustatysite CI/CD vamzdynus su AZD
+Baigę šį skyrių jūs:
+- Įdiegsime daugregionius atsparius taikomųjų programų sprendimus
+- Įgyvendinsime įmonių saugumo modelius
+- Suprasime visapusišką stebėsenos konfigūraciją
+- Optimizuosime kaštus dideliu mastu
+- Sukursime CI/CD vamzdynus naudojant AZD
 
 ---
 
 ## 📚 Pamokos
 
 | # | Pamoka | Aprašymas | Trukmė |
-|---|--------|-----------|--------|
-| 1 | [Gamybinės AI praktikos](production-ai-practices.md) | Įmonių diegimo modeliai | 90 min |
+|---|--------|-------------|------|
+| 1 | [Dirbtinio intelekto gamybos praktikos](production-ai-practices.md) | Įmonių diegimo modeliai | 90 min |
 
 ---
 
-## 🚀 Gamybos kontrolinis sąrašas
+## 🚀 Produkcijos kontrolinis sąrašas
 
-- [ ] Diegimas keliuose regionuose dėl atsparumo
-- [ ] Valdoma tapatybė autentifikacijai (be raktų)
-- [ ] Application Insights stebėjimui
-- [ ] Nustatytos sąnaudų biudžetai ir įspėjimai
-- [ ] Įjungtas saugumo skenavimas
+- [ ] Daugregionis diegimas dėl atsparumo
+- [ ] Tvarkoma tapatybė autentifikacijai (be raktų)
+- [ ] Application Insights stebėsenai
+- [ ] Nustatytos sąnaudų biudžeto ribos ir įspėjimai
+- [ ] Įjungta saugumo skenavimas
 - [ ] CI/CD vamzdyno integracija
-- [ ] Atsarginio atstatymo planas
+- [ ] Atsarginių kopijų atkūrimo planas
 
 ---
 
-## 🏗️ Architektūriniai modeliai
+## 🏗️ Architektūros modeliai
 
-### Modelis 1: Mikropaslaugų AI
+### Modelis 1: Mikroservisų DI
 
 ```mermaid
 graph LR
-    Gateway[API vartai] --> AI[DI paslauga] --> Models[Microsoft Foundry modeliai]
-    Gateway --> Auth[Autentifikavimo paslauga]
-    AI --> Data[Duomenų saugykla]
+    Gateway[API Vartai] --> AI[DI Paslauga] --> Models[Microsoft Foundry Modeliai]
+    Gateway --> Auth[Autentifikavimo Paslauga]
+    AI --> Data[Duomenų Saugykla]
 ```
 
-### Modelis 2: Įvykių valdomas AI
+### Modelis 2: Įvykių varomas DI
 
 ```mermaid
 graph LR
-    EventGrid[Įvykių tinklelis] --> Functions[Funkcijos] --> Pipeline[Dirbtinio intelekto vamzdis]
+    EventGrid[Įvykių tinklelis] --> Functions[Funkcijos] --> Pipeline[DI kanalas]
 ```
 
 ---
@@ -82,12 +82,12 @@ properties: {
 
 ## 💰 Sąnaudų optimizavimas
 
-| Strategija | Sutaupymas |
-|-----------|------------|
-| Mastelis iki nulio (Container Apps) | 60-80% |
-| Naudoti vartojimo sluoksnius kūrimo aplinkai | 50-70% |
-| Planuojamas mastelio keitimas | 30-50% |
-| Rezervuota talpa | 20-40% |
+| Strategija | Sutaupymai |
+|----------|------------|
+| Mastelio keitimas iki nulio (Container Apps) | 60-80 % |
+| Naudoti vartojimo lygius kūrimui | 50-70 % |
+| Planuojamas mastelio keitimas | 30-50 % |
+| Rezervuota talpa | 20-40 % |
 
 ```bash
 # Nustatyti biudžeto įspėjimus
@@ -100,10 +100,10 @@ az consumption budget create \
 
 ---
 
-## 📊 Stebėjimo nustatymas
+## 📊 Stebėsenos nustatymai
 
 ```bash
-# Žurnalų srautas
+# Srautiniai žurnalai
 azd monitor --logs
 
 # Patikrinkite Application Insights
@@ -115,21 +115,21 @@ az monitor metrics list --resource <resource-id>
 
 ---
 
-## 🔗 Naršymas
+## 🔗 Navigacija
 
 | Kryptis | Skyrius |
-|--------|---------|
+|--------|----------|
 | **Ankstesnis** | [7 skyrius: Trikčių šalinimas](../chapter-07-troubleshooting/README.md) |
-| **Kursas baigtas** | [Kurso pradžia](../../README.md) |
+| **Kurso pabaiga** | [Kurso pradžia](../../README.md) |
 
 ---
 
-## 📖 Susiję ištekliai
+## 📖 Susiję resursai
 
-- [AI agentų vadovas](../chapter-02-ai-development/agents.md)
+- [DI agentų vadovas](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 - [Daugiagentiniai sprendimai](../chapter-05-multi-agent/README.md)
-- [Mikropaslaugų pavyzdys](../../examples/microservices/README.md)
+- [Mikroservisų pavyzdys](../../examples/microservices/README.md)
 
 ---
 

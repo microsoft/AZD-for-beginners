@@ -1,22 +1,22 @@
-# Kapitel 8: Produktions- och företagsmönster
+# Kapitel 8: Produktions- & Företagsmönster
 
-**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Varaktighet**: 2-3 timmar | **⭐ Svårighetsgrad**: Avancerad
+**📚 Kurs**: [AZD För Nybörjare](../../README.md) | **⏱️ Varaktighet**: 2-3 timmar | **⭐ Svårighetsgrad**: Avancerad
 
 ---
 
 ## Översikt
 
-Detta kapitel täcker företagsklara distributionsmönster, säkerhetshärdning, övervakning och kostnadsoptimering för produktions-AI-arbetsbelastningar.
+Detta kapitel täcker företagsanpassade distributionsmönster, säkerhetsförstärkning, övervakning och kostnadsoptimering för AI-arbetsbelastningar i produktion.
 
-> Validerad mot `azd 1.25.6` i juni 2026.
+> Validerad mot `azd 1.27.1` i juli 2026.
 
 ## Lärandemål
 
 Genom att slutföra detta kapitel kommer du att:
-- Distribuera robusta applikationer i flera regioner
-- Implementera företagsmässiga säkerhetsmönster
+- Distribuera motståndskraftiga applikationer i flera regioner
+- Implementera företags säkerhetsmönster
 - Konfigurera omfattande övervakning
-- Optimera kostnader i skala
+- Optimera kostnader i stor skala
 - Sätta upp CI/CD-pipelines med AZD
 
 ---
@@ -25,43 +25,43 @@ Genom att slutföra detta kapitel kommer du att:
 
 | # | Lektion | Beskrivning | Tid |
 |---|--------|-------------|------|
-| 1 | [Produktions-AI-praktiker](production-ai-practices.md) | Företagsdistributionsmönster | 90 min |
+| 1 | [Produktions-AI Praxis](production-ai-practices.md) | Företagsdistributionsmönster | 90 min |
 
 ---
 
 ## 🚀 Produktionschecklista
 
-- [ ] Distribution över flera regioner för resiliens
+- [ ] Distribution i flera regioner för motståndskraft
 - [ ] Hanterad identitet för autentisering (inga nycklar)
 - [ ] Application Insights för övervakning
-- [ ] Kostnadsbudgetar och aviseringar konfigurerade
+- [ ] Kostnadsbudgetar och larm konfigurerade
 - [ ] Säkerhetsskanning aktiverad
-- [ ] Integration med CI/CD-pipelines
-- [ ] Plan för katastrofåterställning
+- [ ] CI/CD-pipeline integration
+- [ ] Katastrofåterställningsplan
 
 ---
 
 ## 🏗️ Arkitekturmönster
 
-### Mönster 1: Mikrotjänst-AI
+### Mönster 1: Mikroservicer AI
 
 ```mermaid
 graph LR
     Gateway[API-gateway] --> AI[AI-tjänst] --> Models[Microsoft Foundry-modeller]
     Gateway --> Auth[Autentiseringstjänst]
-    AI --> Data[Datalager]
+    AI --> Data[Databutik]
 ```
 
 ### Mönster 2: Händelsedriven AI
 
 ```mermaid
 graph LR
-    EventGrid[Händelsegrid] --> Functions[Funktioner] --> Pipeline[AI-pipeline]
+    EventGrid[Händelsenät] --> Functions[Funktioner] --> Pipeline[AI-pipeline]
 ```
 
 ---
 
-## 🔐 Bästa praxis för säkerhet
+## 🔐 Säkerhetsbästa praxis
 
 ```bicep
 // Use managed identity
@@ -90,7 +90,7 @@ properties: {
 | Reserverad kapacitet | 20-40% |
 
 ```bash
-# Ställ in budgetvarningar
+# Ställ in budgetaviseringar
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -100,7 +100,7 @@ az consumption budget create \
 
 ---
 
-## 📊 Övervakningskonfiguration
+## 📊 Övervakningsinställning
 
 ```bash
 # Strömma loggar
@@ -120,16 +120,16 @@ az monitor metrics list --resource <resource-id>
 | Riktning | Kapitel |
 |-----------|---------|
 | **Föregående** | [Kapitel 7: Felsökning](../chapter-07-troubleshooting/README.md) |
-| **Kurs slutförd** | [Kursöversikt](../../README.md) |
+| **Kurs Slutförd** | [Kursstart](../../README.md) |
 
 ---
 
-## 📖 Relaterade resurser
+## 📖 Relaterade Resurser
 
-- [Guide för AI-agenter](../chapter-02-ai-development/agents.md)
+- [AI Agenters Guide](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Multi-agentlösningar](../chapter-05-multi-agent/README.md)
-- [Exempel på mikrotjänster](../../examples/microservices/README.md)
+- [Multi-Agent Lösningar](../chapter-05-multi-agent/README.md)
+- [Exempel på Mikroservicer](../../examples/microservices/README.md)
 
 ---
 

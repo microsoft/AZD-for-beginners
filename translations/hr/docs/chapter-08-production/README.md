@@ -1,62 +1,62 @@
-# Poglavlje 8: Proizvodni i Enterprise Obrasci
+# Poglavlje 8: Obrasci za proizvodnju i poduzeća
 
-**📚 Tečaj**: [AZD za početnike](../../README.md) | **⏱️ Trajanje**: 2-3 sata | **⭐ Kompleksnost**: Napredno
+**📚 Tečaj**: [AZD Za početnike](../../README.md) | **⏱️ Trajanje**: 2-3 sata | **⭐ Složenost**: Napredno
 
 ---
 
 ## Pregled
 
-Ovo poglavlje pokriva obrasce za implementaciju spremnu za tvrtke, pojačavanje sigurnosti, nadzor i optimizaciju troškova za produkcijske AI radne opterećenja.
+Ovo poglavlje pokriva obrasce za implementaciju spremne za poduzeća, jačanje sigurnosti, nadzor i optimizaciju troškova za proizvodne AI radne zadatke.
 
-> Validirano na `azd 1.25.6` u lipnju 2026.
+> Validirano s `azd 1.27.1` u srpnju 2026.
 
 ## Ciljevi učenja
 
-Kroz završetak ovog poglavlja, naučit ćete:
-- Implementirati višeregionalne otpornosti aplikacije
+Završetkom ovog poglavlja ćete:
+- Implementirati višeregionalne aplikacije otporne na kvarove
 - Provesti sigurnosne obrasce za poduzeća
-- Konfigurirati sveobuhvatan nadzor
-- Optimizirati troškove u velikim razmjerima
-- Postaviti CI/CD pipeline s AZD-om
+- Konfigurirati sveobuhvatni nadzor
+- Optimizirati troškove u velikom obujmu
+- Postaviti CI/CD pipelineove s AZD-om
 
 ---
 
 ## 📚 Lekcije
 
 | # | Lekcija | Opis | Vrijeme |
-|---|---------|--------|--------|
-| 1 | [Proizvodne AI prakse](production-ai-practices.md) | Obrasci implementacije za tvrtke | 90 min |
+|---|--------|-------------|------|
+| 1 | [Proizvodne AI prakse](production-ai-practices.md) | Obrasci implementacije za poduzeća | 90 min |
 
 ---
 
-## 🚀 Kontrolni popis za proizvodnju
+## 🚀 Kontrolna lista za proizvodnju
 
 - [ ] Višeregionalna implementacija za otpornost
 - [ ] Upravljani identitet za autentifikaciju (bez ključeva)
 - [ ] Application Insights za nadzor
-- [ ] Konfigurirani proračuni i upozorenja za troškove
-- [ ] Omogućen sigurnosni skeniranje
+- [ ] Postavljeni budžeti i upozorenja za troškove
+- [ ] Omogućeno sigurnosno skeniranje
 - [ ] Integracija CI/CD pipelinea
-- [ ] Plan za oporavak od katastrofa
+- [ ] Plan oporavka od katastrofe
 
 ---
 
 ## 🏗️ Obrasci arhitekture
 
-### Obrazac 1: Microservices AI
+### Obrazac 1: Mikroservisi AI
 
 ```mermaid
 graph LR
-    Gateway[API Prolaz] --> AI[AI Usluga] --> Models[Microsoft Foundry Modeli]
+    Gateway[API Vrata] --> AI[AI Usluga] --> Models[Microsoft Foundry Modeli]
     Gateway --> Auth[Usluga Autentikacije]
     AI --> Data[Spremište Podataka]
 ```
 
-### Obrazac 2: Event-Driven AI
+### Obrazac 2: AI upravljan događajima
 
 ```mermaid
 graph LR
-    EventGrid[Event Grid] --> Functions[Funkcije] --> Pipeline[AI cjevovod]
+    EventGrid[Rešetka događaja] --> Functions[Funkcije] --> Pipeline[AI cjevovod]
 ```
 
 ---
@@ -83,14 +83,14 @@ properties: {
 ## 💰 Optimizacija troškova
 
 | Strategija | Ušteda |
-|------------|---------|
-| Skaliranje na nulu (Container Apps) | 60-80% |
-| Korištenje potrošačkih razina za razvoj | 50-70% |
-| Zakazano skaliranje | 30-50% |
+|----------|---------|
+| Skaliranje do nule (Container Apps) | 60-80% |
+| Korištenje potrošačkih slojeva za razvoj | 50-70% |
+| Raspoređeno skaliranje | 30-50% |
 | Rezervirani kapacitet | 20-40% |
 
 ```bash
-# Postavi obavijesti o proračunu
+# Postavi upozorenja za proračun
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -103,13 +103,13 @@ az consumption budget create \
 ## 📊 Postavljanje nadzora
 
 ```bash
-# Strujanje zapisa
+# Streamajte dnevnike
 azd monitor --logs
 
 # Provjerite Application Insights
 azd monitor --overview
 
-# Prikaži metrike
+# Pogledajte metrike
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -118,9 +118,9 @@ az monitor metrics list --resource <resource-id>
 ## 🔗 Navigacija
 
 | Smjer | Poglavlje |
-|--------|-----------|
-| **Prethodno** | [Poglavlje 7: Otklanjanje poteškoća](../chapter-07-troubleshooting/README.md) |
-| **Završetak tečaja** | [Početna stranica tečaja](../../README.md) |
+|-----------|---------|
+| **Prethodno** | [Poglavlje 7: Rješavanje problema](../chapter-07-troubleshooting/README.md) |
+| **Tečaj završen** | [Početna stranica tečaja](../../README.md) |
 
 ---
 
@@ -128,7 +128,7 @@ az monitor metrics list --resource <resource-id>
 
 - [Vodič za AI agente](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Višestruka rješenja agenata](../chapter-05-multi-agent/README.md)
+- [Rješenja s više agenata](../chapter-05-multi-agent/README.md)
 - [Primjer mikroservisa](../../examples/microservices/README.md)
 
 ---

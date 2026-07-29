@@ -34,7 +34,7 @@
       "original_hash": "28531c5f61c99b03433f5f38c2627559",
       "source_file": "docs/chapter-01-foundation/dev-containers.md",
       "language_code": "hu",
-      "failure_date": "2026-07-14T09:16:05+00:00",
+      "failure_date": "2026-07-14T22:06:41+00:00",
       "status": "failed",
       "error_type": "TranslationIncompleteError",
       "error_message": "Markdown translation remained incomplete for chunk 1 of 'dev-containers.md', and the chunk could not be split further.",

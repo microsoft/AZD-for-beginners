@@ -1,42 +1,42 @@
-# Chapta 8: Production & Enterprise Patterns
+# Chapter 8: Production & Enterprise Patterns
 
-**📚 Kọs**: [AZD For Beginners](../../README.md) | **⏱️ Taim**: 2-3 hours | **⭐ Kompleksiti**: Advanced
+**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 2-3 hours | **⭐ Complexity**: Advanced
 
 ---
 
 ## Overview
 
-Dis chapta go cover enterprise-ready deployment patterns, how to harden security, monitoring, and how to optimize cost for production AI workloads.
+Dis chapter dey cover enterprise-ready deployment patterns, security stronging, monitoring, and cost optimization for production AI workloads dem.
 
-> Dem don validate am wit `azd 1.25.6` for June 2026.
+> Validated against `azd 1.27.1` in July 2026.
 
 ## Learning Objectives
 
-If you finish dis chapta, you go:
-- Deploy app wey dey resilient across many regions
-- Implement enterprise security pattern dem
-- Configure full monitoring
-- Optimize cost when things dey scale
-- Set up CI/CD pipelines wit AZD
+As you finish dis chapter, you go:
+- Deploy multi-region resilient applications
+- Implement enterprise security patterns
+- Configure comprehensive monitoring
+- Optimize costs at scale
+- Set up CI/CD pipelines with AZD
 
 ---
 
-## 📚 Lekshon dem
+## 📚 Lessons
 
-| # | Lekshon | Tori | Taim |
+| # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [Production AI Practices](production-ai-practices.md) | Enterprise deployment pattern dem | 90 min |
+| 1 | [Production AI Practices](production-ai-practices.md) | Enterprise deployment patterns | 90 min |
 
 ---
 
 ## 🚀 Production Checklist
 
-- [ ] Deploy for many regions make app resilient
-- [ ] Use managed identity to authenticate (no keys)
+- [ ] Multi-region deployment for resilience
+- [ ] Managed identity for authentication (no keys)
 - [ ] Application Insights for monitoring
-- [ ] Set cost budgets and alerts
-- [ ] Enable security scanning
-- [ ] Integrate CI/CD pipeline
+- [ ] Cost budgets and alerts configured
+- [ ] Security scanning enabled
+- [ ] CI/CD pipeline integration
 - [ ] Disaster recovery plan
 
 ---
@@ -47,16 +47,16 @@ If you finish dis chapta, you go:
 
 ```mermaid
 graph LR
-    Gateway[API Geitwe] --> AI[AI Sabis] --> Models[Microsoft Foundry Model dem]
-    Gateway --> Auth[Auth Sabis]
-    AI --> Data[Data Sto]
+    Gateway[API Gateway] --> AI[AI Service] --> Models[Microsoft Foundry Models]
+    Gateway --> Auth[Auth Service]
+    AI --> Data[Data Store]
 ```
 
 ### Pattern 2: Event-Driven AI
 
 ```mermaid
 graph LR
-    EventGrid[Grid wey dey handle events] --> Functions[Function dem] --> Pipeline[Pipeline wey dey run AI]
+    EventGrid[Event Grid] --> Functions[Functions] --> Pipeline[AI Pipeline]
 ```
 
 ---
@@ -90,7 +90,7 @@ properties: {
 | Reserved capacity | 20-40% |
 
 ```bash
-# Put alert dem for budget
+# Set budget alert dem
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -103,13 +103,13 @@ az consumption budget create \
 ## 📊 Monitoring Setup
 
 ```bash
-# Stream di logs
+# Stream logs
 azd monitor --logs
 
-# Check di Application Insights
+# Check Application Insights
 azd monitor --overview
 
-# See di metrics
+# View metrics
 az monitor metrics list --resource <resource-id>
 ```
 
