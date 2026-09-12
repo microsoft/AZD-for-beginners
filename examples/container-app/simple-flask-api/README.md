@@ -54,7 +54,7 @@ docker --version
 ## ⏱️ Deployment Timeline
 
 | Phase | Duration | What Happens |
-|-------|----------|--------------||
+|-------|----------|--------------|
 | Environment setup | 30 seconds | Create azd environment |
 | Build container | 2-3 minutes | Docker build Flask app |
 | Provision infrastructure | 3-5 minutes | Create Container Apps, registry, monitoring |
