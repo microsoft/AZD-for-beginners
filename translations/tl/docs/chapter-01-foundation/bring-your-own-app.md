@@ -190,7 +190,6 @@ azd down --force --purge
 
 | Direksyon | Aralin |
 |-----------|--------|
-
 | **Nakaraan** | [Ang Iyong Unang Proyekto](first-project.md) |
 | **Susunod** | [Dev Containers & Codespaces](dev-containers.md) |
 
