@@ -1057,11 +1057,11 @@ azd env get-values
 
 **🚀 学び始める準備はできましたか？**
 
-<strong>初心者</strong>: [Chapter 1: Foundation & Quick Start](#-chapter-1-foundation--quick-start) から始めましょう  
-**AI開発者**: [Chapter 2: AI-First Development](#-chapter-2-ai-first-development-recommended-for-ai-developers) にジャンプ  
-<strong>経験豊富な開発者</strong>: [Chapter 3: Configuration & Authentication](#️-chapter-3-configuration--authentication) から始めましょう
+<strong>初心者</strong>: [第1章：基礎とクイックスタート](#-chapter-1-foundation--quick-start) から始めましょう  
+**AI開発者**: [第2章：AIファースト開発](#-chapter-2-ai-first-development-recommended-for-ai-developers) にジャンプ  
+<strong>経験豊富な開発者</strong>: [第3章：設定と認証](#️-chapter-3-configuration--authentication) から始めましょう
 
-<strong>次のステップ</strong>: [Chapter 1 - AZD Basics](docs/chapter-01-foundation/azd-basics.md) を始める →
+<strong>次のステップ</strong>: [第1章 - AZD Basics](docs/chapter-01-foundation/azd-basics.md) を始める →
 
 ---
 
