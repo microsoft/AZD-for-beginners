@@ -3,11 +3,11 @@
 # AZD Basics - コア概念と基礎
 
 **章のナビゲーション:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: 第1章 - 基礎とクイックスタート
-- **⬅️ Previous**: [Course Overview](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Next**: [Installation & Setup](installation.md)
-- **🚀 Next Chapter**: [第2章: AIファースト開発](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📚 コースホーム**: [AZD入門](../../README.md)
+- **📖 現在の章**: 第1章 - 基礎とクイックスタート
+- **⬅️ 前へ**: [コース概要](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ 次へ**: [インストールとセットアップ](installation.md)
+- **🚀次の章**: [第2章: AIファースト開発](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## はじめに
 
@@ -39,12 +39,12 @@ Azure Developer CLI (azd) は、ローカル開発から Azure へのデプロ�
 
 azd は幅広いワークロードをサポートしており、そのリストは増え続けています。現在、azd を使ってデプロイできるのは次のようなものです:
 
-| Workload Type | Examples | Same Workflow? |
+| ワークロードの種類 | 例 | 同じワークフロー？ |
 |---------------|----------|----------------|
-| **Traditional applications** | Web apps, REST APIs, static sites | ✅ `azd up` |
-| **Services and microservices** | Container Apps, Function Apps, multi-service backends | ✅ `azd up` |
-| **AI-powered applications** | Chat apps with Microsoft Foundry Models, RAG solutions with AI Search | ✅ `azd up` |
-| **Intelligent agents** | Foundry-hosted agents, multi-agent orchestrations | ✅ `azd up` |
+| **従来のアプリケーション** | Webアプリ、REST API、静的サイト | ✅ `azd up` |
+| **サービスおよびマイクロサービス** | Container Apps、Function Apps、マルチサービス・バックエンド | ✅ `azd up` |
+| **AI 搭載アプリケーション** | Microsoft Foundry Models を利用したチャットアプリ、AI Search を活用した RAG ソリューション | ✅ `azd up` |
+| **インテリジェント・エージェント** | Foundry 上でホストされるエージェント、マルチエージェント・オーケストレーション | ✅ `azd up` |
 
 重要な洞察は、<strong>何をデプロイするかに関係なく azd のライフサイクルは同じ</strong>だということです。プロジェクトを初期化し、インフラをプロビジョニングし、コードをデプロイし、アプリを監視し、クリーンアップします — 単純なウェブサイトでも高度な AI エージェントでも同様です。
 
@@ -185,14 +185,14 @@ azd up
 
 ### 📊 時間とエラーの削減
 
-| Metric | Manual Deployment | AZD Deployment | Improvement |
+| 指標 | 手動デプロイ | AZDデプロイ | 改善効果 |
 |:-------|:------------------|:---------------|:------------|
-| **Commands** | 15+ | 5 | 67% fewer |
-| **Time** | 30-45 min | 10-15 min | 60% faster |
-| **Error Rate** | ~40% | <5% | 88% reduction |
-| **Consistency** | Low (manual) | 100% (automated) | Perfect |
-| **Team Onboarding** | 2-4 hours | 30 minutes | 75% faster |
-| **Rollback Time** | 30+ min (manual) | 2 min (automated) | 93% faster |
+| **コマンド数** | 15以上 | 5 | 67%削減 |
+| **所要時間** | 30〜45分 | 10〜15分 | 60%短縮 |
+| **エラー率** | 約40% | 5%未満 | 88%削減 |
+| **一貫性** | 低（手動） | 100%（自動化） | 完璧 |
+| **チームのオンボーディング** | 2〜4時間 | 30分 | 75%短縮 |
+| **ロールバック時間** | 30分以上（手動） | 2分（自動化） | 93%短縮 |
 
 ## コア概念
 
@@ -268,24 +268,39 @@ azd provision                     # 自信を持って変更を適用する
 
 ```mermaid
 graph LR
-    A[azd init] -->|プロジェクトを初期化| B[azd auth login]
-    B -->|認証| C[azd env new]
-    C -->|環境を作成| D{最初のデプロイですか？}
+    %% 初期化フェーズ
+    subgraph 初期化とセットアップ
+        A[azd init] -->|プロジェクト初期化| B[azd auth login]
+        B -->|認証完了| C[azd env new]
+        C -->|環境を作成| D{最初のデプロイ?}
+    end
+
+    %% デプロイフェーズ
     D -->|はい| E[azd up]
     D -->|いいえ| F[azd provision --preview]
-    F -->|変更を確認| G[azd provision]
-    E -->|プロビジョニングとデプロイ| H[リソースが稼働中]
-    G -->|インフラを更新| H
-    H -->|監視| I[azd monitor]
-    I -->|コードを変更する| J[azd deploy]
-    J -->|コードのみ再デプロイ| H
-    H -->|クリーンアップ| K[azd down]
     
-    style A fill:#e1f5fe
-    style E fill:#c8e6c9
-    style F fill:#fff9c4
-    style H fill:#c5e1a5
-    style K fill:#ffcdd2
+    F -->|変更内容を確認| G[azd provision]
+    
+    %% 稼働・運用フェーズ
+    E -->|プロビジョニングとデプロイ| H((リソース稼働中))
+    G -->|インフラを更新| H
+    
+    H -->|死活監視・ログ| I[azd monitor]
+    
+    %% 日常の開発ループ
+    J[azd deploy] -->|コードのみを再デプロイ| H
+    H -->|コードを修正したら| J
+    
+    %% クリーンアップ
+    H -->|リソースを削除| K[azd down]
+
+    %% スタイル定義
+    style A fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    style E fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+    style F fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
+    style H fill:#d1c4e9,stroke:#512da8,stroke-width:2px
+    style J fill:#e1f5fe,stroke:#01579b,stroke-width:1px
+    style K fill:#ffcdd2,stroke:#c62828,stroke-width:2px
 ```
 
 **ワークフローの説明:**
@@ -330,7 +345,7 @@ azd mcp start
 
 **エージェントのライフサイクル（エンドツーエンド）。** `azure.ai.agents` をインストールすると、アイデアから稼働中で監視されたエージェントまでを単一のワークフローで進められます。これらをすべて最初から使う必要はありません — 存在することを知っておいてください:
 
-| Stage | Command | What it does |
+| ステージ | コマンド | 動作 |
 |-------|---------|--------------|
 | **Scaffold** | `azd ai agent init -m <manifest>` | マニフェストからエージェントプロジェクトを生成 |
 | **Test** | `azd ai agent invoke` | エージェントを呼び出し、応答時間を確認 |
@@ -625,7 +640,7 @@ export AZURE_CLIENT_SECRET="<password>"
 export AZURE_TENANT_ID="<tenant-id>"
 ```
 
-#### 2. Workload Identity (Kubernetes/GitHub Actions)
+#### 2. ワークロードの識別（Kubernetes/GitHub Actions）
 自動的に使用される例:
 - Workload Identity を使用する Azure Kubernetes Service (AKS)
 - OIDC フェデレーションを使った GitHub Actions
@@ -682,7 +697,7 @@ az account set --subscription "Your Subscription Name"
 azd auth login
 ```
 
-#### For CI/CD Pipelines
+#### CI/CDパイプライン向け
 ```yaml
 # GitHub Actions example
 - name: Azure Login
@@ -698,15 +713,15 @@ azd auth login
     azd up --no-prompt
 ```
 
-#### For Production Environments
+#### 本番環境向け
 - Azure リソース上で実行する場合は **Managed Identity** を使用する
 - 自動化シナリオには **Service Principal** を使用する
 - コードや設定ファイルに資格情報を保存しない
 - 機密設定には **Azure Key Vault** を使用する
 
-### Common Authentication Issues and Solutions
+### 認証に関する一般的な問題と解決策
 
-#### Issue: "No subscription found"
+#### 問題：「サブスクリプションが見つかりません」
 ```bash
 # 解決策: 既定のサブスクリプションを設定する
 az account list --output table
@@ -714,7 +729,7 @@ az account set --subscription "<subscription-id>"
 azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 ```
 
-#### Issue: "Insufficient permissions"
+#### 問題：「権限が不足しています」
 ```bash
 # 解決策：必要なロールを確認して割り当てる
 az role assignment list --assignee $(az account show --query user.name --output tsv)
@@ -724,7 +739,7 @@ az role assignment list --assignee $(az account show --query user.name --output 
 # - ユーザーアクセス管理者（ロール割り当て用）
 ```
 
-#### Issue: "Token expired"
+#### 問題：「トークンが期限切れです」
 ```bash
 # 解決策: 再認証
 az logout
@@ -733,23 +748,23 @@ azd auth logout
 azd auth login
 ```
 
-### Authentication in Different Scenarios
+### さまざまなシナリオにおける認証
 
-#### Local Development
+#### ローカル開発
 ```bash
 # 自己啓発用アカウント
 az login
 azd auth login
 ```
 
-#### Team Development
+#### チーム開発
 ```bash
 # 組織には特定のテナントを使用する
 az login --tenant contoso.onmicrosoft.com
 azd auth login
 ```
 
-#### Multi-tenant Scenarios
+#### マルチテナントのシナリオ
 ```bash
 # テナント間を切り替える
 az login --tenant tenant1.onmicrosoft.com
@@ -761,7 +776,7 @@ az login --tenant tenant2.onmicrosoft.com
 azd up
 ```
 
-### Security Considerations
+### セキュリティに関する考慮事項
 
 1. **Credential Storage**: ソースコードに資格情報を保存しないこと
 2. **Scope Limitation**: サービスプリンシパルには最小権限の原則を適用すること
@@ -769,7 +784,7 @@ azd up
 4. **Audit Trail**: 認証およびデプロイのアクティビティを監視すること
 5. **Network Security**: 可能な場合はプライベートエンドポイントを使用すること
 
-### Troubleshooting Authentication
+### 認証のトラブルシューティング
 
 ```bash
 # 認証の問題をデバッグする
@@ -783,23 +798,23 @@ az ad signed-in-user show      # Microsoft Entra ID のユーザー詳細
 az group list                  # リソースアクセスをテストする
 ```
 
-## Understanding `azd down --force --purge`
+## `azd down --force --purge` の理解
 
-### Discovery
+### 発見
 ```bash
 azd template list              # テンプレートを参照
 azd template show <template>   # テンプレートの詳細
 azd init --help               # 初期化オプション
 ```
 
-### Project Management
+### プロジェクト管理
 ```bash
 azd show                     # プロジェクトの概要
 azd env list                # 利用可能な環境と選択されたデフォルト
 azd config show            # 構成設定
 ```
 
-### Monitoring
+### 監視
 ```bash
 azd monitor                  # Azure ポータルの監視を開く
 azd monitor --logs           # アプリケーションのログを表示する
@@ -807,9 +822,9 @@ azd monitor --live           # リアルタイムのメトリクスを表示す�
 azd pipeline config          # CI/CD を設定する
 ```
 
-## Best Practices
+## ベストプラクティス
 
-### 1. Use Meaningful Names
+### 1. 意味のある名前を使う
 ```bash
 # 良い
 azd env new production-east
@@ -820,52 +835,52 @@ azd env new env1
 azd init --template template1
 ```
 
-### 2. Leverage Templates
+### 2. テンプレートを活用する
 - 既存のテンプレートから開始する
 - 必要に応じてカスタマイズする
 - 組織向けに再利用可能なテンプレートを作成する
 
-### 3. Environment Isolation
+### 3. 環境の分離
 - dev/staging/prod 用に別々の環境を使用する
 - ローカルマシンから直接本番にデプロイしない
 - 本番デプロイには CI/CD パイプラインを使用する
 
-### 4. Configuration Management
+### 4. 構成管理
 - 機密データには環境変数を使用する
 - 設定はバージョン管理に保存する
 - 環境固有の設定をドキュメント化する
 
-## Learning Progression
+## 学習の進め方
 
-### Beginner (Week 1-2)
+### 初級（1〜2週目）
 1. azd をインストールして認証する
 2. シンプルなテンプレートをデプロイする
 3. プロジェクト構成を理解する
 4. 基本コマンド（up, down, deploy）を学ぶ
 
-### Intermediate (Week 3-4)
+### 中級（第3〜4週）
 1. テンプレートをカスタマイズする
 2. 複数の環境を管理する
 3. インフラコードを理解する
 4. CI/CD パイプラインを設定する
 
-### Advanced (Week 5+)
+### 上級（5週目以降）
 1. カスタムテンプレートを作成する
 2. 高度なインフラパターン
 3. マルチリージョン展開
 4. エンタープライズ向け構成
 
-## Next Steps
+## 今後のステップ
 
-**📖 Continue Chapter 1 Learning:**
-- [Installation & Setup](installation.md) - azd をインストールして設定する
-- [Your First Project](first-project.md) - ハンズオンチュートリアルを完了する
-- [Configuration Guide](configuration.md) - 高度な構成オプション
+**📖 第1章の学習を続ける:**
+- [インストールとセットアップ](installation.md) - azd をインストールして設定する
+- [最初のプロジェクト](first-project.md) - ハンズオンチュートリアルを完了する
+- [設定ガイド](configuration.md) - 高度な構成オプション
 
-**🎯 Ready for Next Chapter?**
-- [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md) - AI アプリケーションの構築を開始する
+**🎯 次の章へ進む準備はいいですか？**
+- [第2章：AIファースト開発](../chapter-02-ai-development/microsoft-foundry-integration.md) - AI アプリケーションの構築を開始する
 
-## Additional Resources
+## その他のリソース
 
 - [Azure Developer CLI Overview](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Template Gallery](https://azure.github.io/awesome-azd/)
@@ -873,11 +888,11 @@ azd init --template template1
 
 ---
 
-## 🙋 Frequently Asked Questions
+## 🙋 よくある質問
 
-### General Questions
+### 全般的な質問
 
-**Q: What's the difference between AZD and Azure CLI?**
+**Q: AZD と Azure CLI の違いは何ですか？**
 
 A: Azure CLI (`az`) は個々の Azure リソースを管理するためのツールです。AZD (`azd`) はアプリケーション全体を管理するためのツールです：
 
@@ -891,13 +906,13 @@ az sql server create --name myserver --resource-group rg
 azd up  # アプリ全体をすべてのリソースと共にデプロイする
 ```
 
-**Think of it this way:**
+**こう考えてみてください：**
 - `az` = 個々のレゴのブロックを操作すること
 - `azd` = 完成したレゴセットで作業すること
 
 ---
 
-**Q: Do I need to know Bicep or Terraform to use AZD?**
+**Q: AZD を使用するには、Bicep や Terraform について知っておく必要がありますか？**
 
 A: いいえ！まずはテンプレートから始めてください：
 ```bash
@@ -910,7 +925,7 @@ azd up
 
 ---
 
-**Q: How much does it cost to run AZD templates?**
+**Q: AZDテンプレートを実行するには、どのくらいの費用がかかりますか？**
 
 A: コストはテンプレートによって異なります。ほとんどの開発テンプレートは月額 $50–150 程度です：
 
@@ -922,14 +937,14 @@ azd provision --preview
 azd down --force --purge  # すべてのリソースを削除する
 ```
 
-**Pro tip:** 利用可能な無料枠を活用すること：
+**プロのコツ:** 利用可能な無料枠を活用すること：
 - App Service: F1 (Free) ティア
 - Microsoft Foundry Models: Azure OpenAI 50,000 tokens/月の無料枠
 - Cosmos DB: 1000 RU/s の無料枠
 
 ---
 
-**Q: Can I use AZD with existing Azure resources?**
+**Q: 既存のAzureリソースでAZDを使用できますか？**
 
 A: はい、可能ですが新規で始める方が簡単です。AZD はフルライフサイクルを管理する場合に最も効果的です。既存リソースについては：
 
@@ -945,7 +960,7 @@ azd up  # 新しい環境を作成します
 
 ---
 
-**Q: How do I share my project with teammates?**
+**Q: プロジェクトをチームメンバーと共有するにはどうすればよいですか？**
 
 A: AZD プロジェクトを Git にコミットしてください（ただし .azure フォルダーはコミットしない）：
 
@@ -965,7 +980,7 @@ azd up
 
 ---
 
-### Troubleshooting Questions
+### トラブルシューティングに関する質問
 
 **Q: "azd up" failed halfway. What do I do?**
 
@@ -990,7 +1005,7 @@ azd auth login
 azd up
 ```
 
-**Most common issue:** 選択された Azure サブスクリプションが間違っている
+**最もよくある問題：** 選択された Azure サブスクリプションが間違っている
 ```bash
 az account list --output table
 az account set --subscription "<correct-subscription>"
@@ -998,7 +1013,7 @@ az account set --subscription "<correct-subscription>"
 
 ---
 
-**Q: How do I deploy just code changes without reprovisioning?**
+**Q: 環境を再構築することなく、コードの変更のみをデプロイするにはどうすればよいですか？**
 
 A: `azd deploy` を `azd up` の代わりに使用してください：
 
@@ -1016,7 +1031,7 @@ azd deploy      # 以降: デプロイのみ (速い)
 
 ---
 
-**Q: Can I customize the infrastructure templates?**
+**Q: インフラストラクチャテンプレートをカスタマイズすることはできますか？**
 
 A: はい！`infra/` の Bicep ファイルを編集してください：
 
@@ -1042,7 +1057,7 @@ sku: {
 
 ---
 
-**Q: How do I delete everything AZD created?**
+**Q: AZDが作成したものをすべて削除するにはどうすればよいですか？**
 
 A: 1 つのコマンドで全リソースを削除できます：
 
@@ -1056,16 +1071,16 @@ azd down --force --purge
 # - キャッシュされたデプロイメントデータ
 ```
 
-**Always run this when:**
+**これを必ず実行するタイミング：**
 - テンプレートのテストを終えたとき
 - 別のプロジェクトに切り替えるとき
 - 新しくやり直したいとき
 
-**Cost savings:** 未使用リソースを削除すると料金は $0 になります
+**コスト削減：** 未使用リソースを削除すると料金は $0 になります
 
 ---
 
-**Q: What if I accidentally deleted resources in Azure Portal?**
+**Q: Azureポータルで誤ってリソースを削除してしまった場合はどうすればよいですか？**
 
 A: AZD の状態が同期しなくなることがあります。クリーンな状態に戻す方法：
 
@@ -1082,9 +1097,9 @@ azd provision  # 不足しているリソースを作成します
 
 ---
 
-### Advanced Questions
+### 発展的な質問
 
-**Q: Can I use AZD in CI/CD pipelines?**
+**Q: CI/CDパイプラインでAZDを使用することはできますか？**
 
 A: はい！GitHub Actions の例：
 
@@ -1118,7 +1133,7 @@ jobs:
 
 ---
 
-**Q: How do I handle secrets and sensitive data?**
+**Q: シークレットや機密データはどのように取り扱えばよいですか？**
 
 A: AZD は Azure Key Vault と自動統合されます：
 
@@ -1140,7 +1155,7 @@ azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)"
 
 ---
 
-**Q: Can I deploy to multiple regions?**
+**Q: 複数のリージョンにデプロイすることはできますか？**
 
 A: はい、リージョンごとに環境を作成してください：
 
@@ -1163,7 +1178,7 @@ azd env list
 
 ---
 
-**Q: Where can I get help if I'm stuck?**
+**Q: 行き詰まったら、どこで助けを得られますか？**
 
 1. **AZD Documentation:** https://learn.microsoft.com/azure/developer/azure-developer-cli/
 2. **GitHub Issues:** https://github.com/Azure/azure-dev/issues
@@ -1171,7 +1186,7 @@ azd env list
 4. **Stack Overflow:** タグ `azure-developer-cli`
 5. **This Course:** [Troubleshooting Guide](../chapter-07-troubleshooting/common-issues.md)
 
-**Pro tip:** 問い合わせ前に次を実行してください：
+**プロのコツ：** 問い合わせ前に次を実行してください：
 ```bash
 azd show       # 現在の状態を表示します
 azd version    # あなたのバージョンを表示します
@@ -1180,33 +1195,33 @@ azd version    # あなたのバージョンを表示します
 
 ---
 
-## 🎓 What's Next?
+## 🎓 次のステップ
 
-You now understand AZD fundamentals. Choose your path:
+これでAZDの基本を理解できました。今後の進め方を選びましょう：
 
-### 🎯 For Beginners:
-1. **Next:** [Installation & Setup](installation.md) - マシンに AZD をインストールする
-2. **Then:** [Your First Project](first-project.md) - 最初のアプリをデプロイする
-3. **Practice:** このレッスンの全 3 問の演習を完了する
+### 🎯 初心者の方へ：
+1. **次へ:** [インストールとセットアップ](installation.md) - マシンに AZD をインストールする
+2. **続いて:** [最初のプロジェクト](first-project.md) - 最初のアプリをデプロイする
+3. **練習：** このレッスンの全 3 問の演習を完了する
 
-### 🚀 For AI Developers:
-1. **Skip to:** [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
-2. **Deploy:** `azd init --template get-started-with-ai-chat` で開始する
-3. **Learn:** デプロイしながら構築する
+### 🚀 AI開発者の皆様へ：
+1. **スキップ先:** [第2章：AIファースト開発](../chapter-02-ai-development/microsoft-foundry-integration.md)
+2. **展開：** `azd init --template get-started-with-ai-chat` で開始する
+3. **学習:** デプロイしながら構築する
 
-### 🏗️ For Experienced Developers:
-1. **Review:** [Configuration Guide](configuration.md) - 高度な設定
-2. **Explore:** [Infrastructure as Code](../chapter-04-infrastructure/provisioning.md) - Bicep の詳細
-3. **Build:** スタック向けのカスタムテンプレートを作成する
+### 🏗️ 経験豊富な開発者向け:
+1. **確認:** [設定ガイド](configuration.md) - 高度な設定
+2. **探究:** [Infrastructure as Code](../chapter-04-infrastructure/provisioning.md) - Bicep の詳細
+3. **構築:** スタック向けのカスタムテンプレートを作成する
 
 ---
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD 入門](../../README.md)
-- **📖 Current Chapter**: Chapter 1 - 基礎とクイックスタート  
-- **⬅️ Previous**: [Course Overview](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Next**: [Installation & Setup](installation.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**章のナビゲーション:**
+- **📚 コースホーム**: [AZD 入門](../../README.md)
+- **📖 現在の章**: 第1章 - 基礎とクイックスタート  
+- **⬅️ 前へ**: [Course Overview](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ 次へ**: [Installation & Setup](installation.md)
+- **🚀 次の章**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 
