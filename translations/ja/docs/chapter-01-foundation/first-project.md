@@ -1,11 +1,11 @@
 # あなたの最初のプロジェクト - ハンズオンチュートリアル
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
-- **⬅️ Previous**: [Installation & Setup](installation.md)
-- **➡️ Next**: [Configuration](configuration.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**章のナビゲーション:**
+- **📚 コースホーム**: [AZD入門](../../README.md)
+- **📖 現在の章**: 第1章 - 基礎とクイックスタート
+- **⬅️ 前へ**: [インストールとセットアップ](installation.md)
+- **➡️ 次へ**: [構成設定](configuration.md)
+- **🚀 次の章**: [第2章: AIファースト開発](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## はじめに
 
@@ -550,12 +550,12 @@ azd init --template todo-java-mongo
 
 ---
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
-- **⬅️ Previous**: [Installation & Setup](installation.md)
-- **➡️ Next**: [Bring Your Own App](bring-your-own-app.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**章のナビゲーション:**
+- **📚 コースホーム**: [AZD入門](../../README.md)
+- **📖 現在の章**: 第1章 - 基礎とクイックスタート
+- **⬅️ 前へ**: [インストールとセットアップ](installation.md)
+- **➡️ 次へ**: [既存アプリケーションの持ち込み](bring-your-own-app.md)
+- **🚀 次の章**: [第2章: AIファースト開発](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 
