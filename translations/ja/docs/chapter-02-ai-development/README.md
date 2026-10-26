@@ -75,7 +75,7 @@ azd up
 
 | 方向 | 章 |
 |-----------|---------|
-| <strong>前章</strong> | [C第1章：基礎](../chapter-01-foundation/README.md) |
+| <strong>前章</strong> | [第1章：基礎](../chapter-01-foundation/README.md) |
 | <strong>次章</strong> | [第3章：設定](../chapter-03-configuration/README.md) |
 | <strong>スキップ</strong> | [第8章：本番環境のパターン](../chapter-08-production/README.md) |
 
