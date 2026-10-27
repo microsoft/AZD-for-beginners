@@ -1,10 +1,10 @@
 # Azure Developer CLIによるAIエージェント
 
 **章のナビゲーション:**
-- **📚 コースホーム**: [AZD For Beginners](../../README.md)
+- **📚 コースホーム**: [初心者向けAZD](../../README.md)
 - **📖 現在の章**: 第2章 - AIファースト開発
-- **⬅️ 前へ**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ 次へ**: [AI Model Deployment](ai-model-deployment.md)
+- **⬅️ 前へ**: [Microsoft Foundry 統合](microsoft-foundry-integration.md)
+- **➡️ 次へ**: [AIモデルのデプロイ](ai-model-deployment.md)
 - **🚀 上級**: [マルチエージェントソリューション](../../examples/retail-scenario.md)
 
 ---
@@ -607,8 +607,8 @@ AIエージェントを理解した今、以下の上級トピックを探求し
 ---
 
 <strong>ナビゲーション</strong>
-- <strong>前のレッスン</strong>: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- <strong>次のレッスン</strong>: [AI Model Deployment](ai-model-deployment.md)
+- <strong>前のレッスン</strong>: [Microsoft Foundry 統合](microsoft-foundry-integration.md)
+- <strong>次のレッスン</strong>: [AIモデルのデプロイ](ai-model-deployment.md)
 
 ---
 
