@@ -24,10 +24,10 @@
 
 | # | レッスン | 説明 | 所要時間 |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | FoundryサービスとAZDの接続 | 30分 |
-| 2 | [AI Agents Guide](agents.md) | ツール付きインテリジェントエージェントのデプロイ | 45分 |
-| 3 | [AI Model Deployment](ai-model-deployment.md) | AIモデルのデプロイと設定 | 30分 |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | ハンズオン：AIソリューションをAZD対応にする | 60分 |
+| 1 | [Microsoft Foundry 統合](microsoft-foundry-integration.md) | FoundryサービスとAZDの接続 | 30分 |
+| 2 | [AIエージェントガイド](agents.md) | ツール付きインテリジェントエージェントのデプロイ | 45分 |
+| 3 | [AIモデルのデプロイ](ai-model-deployment.md) | AIモデルのデプロイと設定 | 30分 |
+| 4 | [AIワークショップ・ラボ](ai-workshop-lab.md) | ハンズオン：AIソリューションをAZD対応にする | 60分 |
 
 ---
 
