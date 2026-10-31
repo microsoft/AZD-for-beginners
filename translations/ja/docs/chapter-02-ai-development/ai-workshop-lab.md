@@ -1,7 +1,7 @@
 # AI ワークショップラボ: AI ソリューションを AZD でデプロイ可能にする
 
 **章のナビゲーション:**
-- **📚 コースホーム**: [AZD For Beginners](../../README.md)
+- **📚 コースホーム**: [初心者向けAZD](../../README.md)
 - **📖 現在の章**: 第2章 - AIファースト開発
 - **⬅️ 前へ**: [AIモデルのデプロイ](ai-model-deployment.md)
 - **➡️ 次へ**: [本番AIベストプラクティス](production-ai-practices.md)
@@ -671,7 +671,7 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 ---
 
 **章のナビゲーション：**
-- **📚 コースホーム**： [AZD For Beginners](../../README.md)
+- **📚 コースホーム**： [初心者向けAZD](../../README.md)
 - **📖 現在の章**： 第2章 - AIファースト開発
 - **⬅️ 前へ**：[AI Model Deployment](ai-model-deployment.md)
 - **➡️ 次へ**：[Production AI Best Practices](production-ai-practices.md)
