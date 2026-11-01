@@ -1,6 +1,6 @@
 # 第3章: 設定と認証
 
-**📚 コース**: [AZD For Beginners](../../README.md) | **⏱️ 所要時間**: 45-60分 | **⭐ 難易度**: 中級
+**📚 コース**: [初心者向けAZD](../../README.md) | **⏱️ 所要時間**: 45-60分 | **⭐ 難易度**: 中級
 
 ---
 
@@ -24,8 +24,8 @@
 
 | # | レッスン | 説明 | 所要時間 |
 |---|--------|-------------|------|
-| 1 | [Configuration Guide](configuration.md) | 環境セットアップと管理 | 30分 |
-| 2 | [Authentication & Security](authsecurity.md) | マネージドアイデンティティとRBACパターン | 30分 |
+| 1 | [設定ガイド](configuration.md) | 環境セットアップと管理 | 30分 |
+| 2 | [認証とセキュリティ](authsecurity.md) | マネージドアイデンティティとRBACパターン | 30分 |
 
 ---
 
@@ -86,15 +86,15 @@ az login
 
 | 方向 | チャプター |
 |-----------|---------|
-| <strong>前へ</strong> | [Chapter 2: AI Development](../chapter-02-ai-development/README.md) |
-| <strong>次へ</strong> | [Chapter 4: Infrastructure](../chapter-04-infrastructure/README.md) |
+| <strong>前へ</strong> | [第2章：AI開発](../chapter-02-ai-development/README.md) |
+| <strong>次へ</strong> | [第4章：インフラ](../chapter-04-infrastructure/README.md) |
 
 ---
 
 ## 📖 関連資料
 
-- [Pre-Deployment Checks](../chapter-06-pre-deployment/README.md)
-- [Troubleshooting](../chapter-07-troubleshooting/common-issues.md)
+- [デプロイ前の確認事項](../chapter-06-pre-deployment/README.md)
+- [トラブルシューティング](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
