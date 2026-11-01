@@ -674,7 +674,7 @@ az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 - **📚 コースホーム**： [初心者向けAZD](../../README.md)
 - **📖 現在の章**： 第2章 - AIファースト開発
 - **⬅️ 前へ**：[AIモデルのデプロイ](ai-model-deployment.md)
-- **➡️ 次へ**：[本番環境におけるAIのベストプラクティス](production-ai-practices.md)
+- **➡️ 次へ**：[本番AIベストプラクティス](production-ai-practices.md)
 - **🚀 次の章**：[第3章: 設定](../chapter-03-configuration/configuration.md)
 
 **お困りですか？** AZDやAIデプロイに関するサポートやディスカッションのためにコミュニティに参加してください。
