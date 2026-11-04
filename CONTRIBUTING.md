@@ -62,6 +62,19 @@ We welcome the following types of contributions:
 - Follow Azure and AZD best practices
 - Provide expected output where applicable
 
+### Validate English Documentation
+
+From the repository root, install the existing development requirements and run:
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m unittest discover -s .github/scripts -p "test_*.py"
+python .github/scripts/check_links.py
+python -m mkdocs build --strict --config-file workshop/mkdocs.yml
+```
+
+The offline link checker checks English Markdown/HTML paths, headings, explicit anchors, and empty link placeholders. It excludes generated `translations/` and `translated_images/`, including links into those directories. It does not fetch external websites or validate Azure deployments. Use `--json <report-path>` to export failures and the external URL inventory for a separate network check. Verify current upstream commands and sample prerequisites when changing technical instructions; distinguish tested applications from design blueprints.
+
 ### Commit Messages
 
 Use clear, descriptive commit messages:
@@ -75,7 +88,7 @@ Please read and follow our [Code of Conduct](CODE_OF_CONDUCT.md) to maintain a w
 
 ## Getting Help
 
-- **Questions**: Open a [GitHub Discussion](https://github.com/microsoft/azd-for-beginners/discussions)
+- **Questions**: Search or open a [GitHub issue](https://github.com/microsoft/AZD-for-beginners/issues)
 - **Community**: Join the [Azure Discord](https://discord.gg/microsoft-azure)
 - **Documentation**: Review the [Azure Developer CLI docs](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 

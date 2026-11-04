@@ -3,6 +3,7 @@ import logging
 from datetime import datetime
 from flask import Flask, jsonify, request
 from opencensus.ext.azure.log_exporter import AzureLogHandler
+from werkzeug.exceptions import HTTPException
 
 app = Flask(__name__)
 
@@ -74,6 +75,8 @@ def get_product(product_id):
 
 @app.errorhandler(Exception)
 def handle_error(error):
+    if isinstance(error, HTTPException):
+        return jsonify({'error': error.description}), error.code
     logger.error(f"Unhandled error: {str(error)}")
     return jsonify({
         'error': 'Internal server error',

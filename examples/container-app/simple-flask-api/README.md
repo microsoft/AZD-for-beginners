@@ -1,430 +1,224 @@
-# Simple Flask API - Container App Example
+# Simple Flask API — Azure Container Apps
 
-**Learning Path:** Beginner ⭐ | **Time:** 25-35 minutes | **Cost:** $0-15/month
+**Level:** Beginner · **Time:** 30–45 minutes including setup
 
-A complete, working Python Flask REST API deployed to Azure Container Apps using Azure Developer CLI (azd). This example demonstrates container deployment, auto-scaling, and monitoring basics.
+Deploy a Python Flask CRUD API with Azure Developer CLI (azd). Source, Dockerfile,
+Bicep, and deployment parameters are included. This is a **learning sample**, not
+a production-ready API.
 
-## 🎯 What You'll Learn
+## What you'll learn
 
-- Deploy a containerized Python application to Azure
-- Configure auto-scaling with scale-to-zero
-- Implement health probes and readiness checks
-- Monitor application logs and metrics
-- Use Azure Developer CLI for rapid deployment
-
-## 📦 What's Included
-
-✅ **Flask Application** - Complete REST API with CRUD operations (`src/app.py`)  
-✅ **Dockerfile** - Production-ready container configuration  
-✅ **Bicep Infrastructure** - Container Apps environment and API deployment  
-✅ **AZD Configuration** - One-command deployment setup  
-✅ **Health Probes** - Liveness and readiness checks configured  
-✅ **Auto-scaling** - 0-10 replicas based on HTTP load  
-
-## Architecture
+- Build and publish a container through azd.
+- Configure ingress and liveness/readiness probes.
+- Verify CRUD responses and inspect application logs.
+- Understand why in-memory data is unsuitable for durable applications.
 
 ```mermaid
-graph TD
-    subgraph ACA[Azure Container Apps Environment]
-        Flask[Flask API Container<br/>Health endpoints<br/>REST API<br/>Auto-scaling 0-10 replicas]
-        AppInsights[Application Insights]
-    end
+flowchart LR
+    Client -->|HTTPS| API[Flask API — Container App]
+    API --> Memory[Process-local item dictionary]
+    API -->|stdout| Logs[Container Apps / Log Analytics]
 ```
+
+**Important:** items are held in one process. The default is **one Gunicorn worker,
+0–1 replicas**, intentionally avoiding inconsistent data across workers/replicas.
+Items are lost on restart, revision change, or scale-to-zero. Increasing replicas
+requires shared persistent storage. The API has no authentication or authorization.
 
 ## Prerequisites
 
-### Required
-- **Azure Developer CLI (azd)** - [Install guide](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure subscription** - [Free account](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Install Docker](https://www.docker.com/products/docker-desktop/) (for local testing)
-
-### Verify Prerequisites
+- [Current stable azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+  (published release at review time: 1.37.2).
+- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) for verification.
+- Docker with its daemon running; it is required for the default local image build.
+- Azure subscription, resource-creation permissions, and Container Apps regional quota.
+- Bash for the commands below (or equivalent PowerShell).
+- Python 3.11 for optional local development.
 
 ```bash
-# Check azd version (need 1.5.0 or higher)
 azd version
-
-# Verify Azure login
+az version
+docker info
 azd auth login
-
-# Check Docker (optional, for local testing)
-docker --version
+az login
 ```
 
-## ⏱️ Deployment Timeline
+The CLI tools have separate login sessions. Use the same subscription in both.
 
-| Phase | Duration | What Happens |
-|-------|----------|--------------|
-| Environment setup | 30 seconds | Create azd environment |
-| Build container | 2-3 minutes | Docker build Flask app |
-| Provision infrastructure | 3-5 minutes | Create Container Apps, registry, monitoring |
-| Deploy application | 2-3 minutes | Push image and deploy to Container Apps |
-| **Total** | **8-12 minutes** | Complete deployment ready |
+## Quick start
 
-## Quick Start
+From the repository root:
 
 ```bash
-# Navigate to the example
 cd examples/container-app/simple-flask-api
-
-# Initialize environment (choose unique name)
-azd env new myflaskapi
-
-# Deploy everything (infrastructure + application)
+azd env new flask-demo
 azd up
-# You'll be prompted to:
-# 1. Select Azure subscription
-# 2. Choose location (e.g., eastus2)
-# 3. Wait 8-12 minutes for deployment
-
-# Get your API endpoint
-azd env get-values
-
-# Test the API
-curl $(azd env get-value API_ENDPOINT)/health
-```
-
-**Expected Output:**
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z",
-  "service": "simple-flask-api",
-  "version": "1.0.0"
-}
-```
-
-## ✅ Verify Deployment
-
-### Step 1: Check Deployment Status
-
-```bash
-# View deployed services
-azd show
-
-# Expected output shows:
-# - Service: api
-# - Endpoint: https://ca-api-[env].xxx.azurecontainerapps.io
-# - Status: Running
-```
-
-### Step 2: Test API Endpoints
-
-```bash
-# Get API endpoint
 API_URL=$(azd env get-value API_ENDPOINT)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
+API_NAME=$(azd env get-value API_NAME)
+curl --fail-with-body "${API_URL}/health"
+```
 
-# Test health
-curl $API_URL/health
+Expected: HTTP 200 and JSON with `"status":"healthy"`,
+`"service":"simple-flask-api"`, and a current UTC timestamp.
+Provisioning and image building typically take several minutes; timings vary.
 
-# Test root endpoint
-curl $API_URL/
+Initial provisioning uses a public hello-world image listening on port 80.
+`azure.yaml` selects `infra/app/api.bicep` and its matching parameter file for
+service deployment, which switches the image, ingress, and probes to port 8000.
+Do not delete those deployment parameters.
 
-# Create an item
-curl -X POST $API_URL/api/items \
+## Verify CRUD
+
+Run the following sequentially while the same replica remains active:
+
+```bash
+# Create: HTTP 201; note the returned id (1 for a fresh process).
+curl -i -X POST "${API_URL}/api/items" \
   -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "My first item"}'
+  -d '{"name":"Test Item","description":"My first item"}'
 
-# Get all items
-curl $API_URL/api/items
+# Read list: HTTP 200, total 1 in a fresh process.
+curl --fail-with-body "${API_URL}/api/items"
+
+# Replace 1 if your create response returned another id.
+curl --fail-with-body "${API_URL}/api/items/1"
+curl -i -X PUT "${API_URL}/api/items/1" \
+  -H "Content-Type: application/json" -d '{"name":"Updated Item"}'
+curl -i -X DELETE "${API_URL}/api/items/1"
+curl -i "${API_URL}/api/items/1"
 ```
 
-**Success Criteria:**
-- ✅ Health endpoint returns HTTP 200
-- ✅ Root endpoint shows API information
-- ✅ POST creates item and returns HTTP 201
-- ✅ GET returns created items
+Success: POST 201, reads/PUT 200, DELETE 204 with no body, then missing item 404.
+Malformed/non-object JSON or an empty name returns 400.
+If an item disappears between requests, check for a restart or scale-to-zero;
+this is an intentional in-memory limitation, not persistence.
 
-### Step 3: View Logs
+| Endpoint | Methods |
+|---|---|
+| `/` | GET — service information |
+| `/health` | GET — liveness/readiness |
+| `/api/items` | GET, POST |
+| `/api/items/{id}` | GET, PUT, DELETE |
+
+## Logs and configuration
 
 ```bash
-# Stream live logs using azd monitor
-azd monitor --logs
-
-# Or use Azure CLI:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# You should see:
-# - Gunicorn startup messages
-# - HTTP request logs
-# - Application info logs
+az containerapp logs show --name "$API_NAME" --resource-group "$RG_NAME" --follow
 ```
 
-## Project Structure
+Expected: Gunicorn startup, request access logs, and application messages.
+`azd monitor --logs` opens a portal view; it does not stream to the terminal.
+Application Insights is provisioned but **not instrumented by this Flask code**;
+use Container Apps/Log Analytics for stdout logs.
 
+Edit `infra/app/api.bicep` for CPU/memory, replica limits, or scale rules, then
+run `azd up`. Defaults are 0.5 vCPU, 1 GiB, minimum 0 / maximum 1 replica, and an
+HTTP threshold of 50 concurrent requests. Scale-to-zero can add cold-start latency.
+
+Arbitrary `azd env set MAX_REPLICAS`, `API_KEY`, `LOG_LEVEL`, or
+`SCALE_TO_ZERO_TIMEOUT` values are **not wired to this template or app**.
+Setting a value does not automatically make it a runtime environment variable.
+The image binds port 8000 explicitly; update Dockerfile, Bicep ingress, and probes
+together if changing the port.
+
+## Files
+
+```text
+azure.yaml
+infra/main.bicep
+infra/main.parameters.json
+infra/app/container-apps.bicep       # Environment, registry, monitoring
+infra/app/api.bicep                  # App, ingress, probes, scale settings
+infra/app/api.parameters.json        # Image and resource values for azd deploy
+src/app.py
+src/Dockerfile
+src/requirements.txt
 ```
-simple-flask-api/
-├── azure.yaml              # AZD configuration
-├── infra/
-│   ├── main.bicep         # Main infrastructure
-│   ├── main.parameters.json
-│   └── app/
-│       ├── container-env.bicep
-│       └── api.bicep
-└── src/
-    ├── app.py             # Flask application
-    ├── requirements.txt
-    └── Dockerfile
-```
 
-## API Endpoints
+## Local development
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/health` | GET | Health check |
-| `/api/items` | GET | List all items |
-| `/api/items` | POST | Create new item |
-| `/api/items/{id}` | GET | Get specific item |
-| `/api/items/{id}` | PUT | Update item |
-| `/api/items/{id}` | DELETE | Delete item |
-
-## Configuration
-
-### Environment Variables
+From this example directory:
 
 ```bash
-# Set custom configuration
-azd env set PORT 8000
-azd env set LOG_LEVEL info
-azd env set MAX_REPLICAS 20
+python -m venv .venv
+source .venv/bin/activate  # PowerShell: .\.venv\Scripts\Activate.ps1
+python -m pip install -r src/requirements.txt
+python src/app.py
 ```
 
-### Scaling Configuration
-
-The API automatically scales based on HTTP traffic:
-- **Min Replicas**: 0 (scales to zero when idle)
-- **Max Replicas**: 10
-- **Concurrent Requests per Replica**: 50
-
-## Development
-
-### Run Locally
+In another terminal, test `http://localhost:8000/health` and the CRUD endpoints.
+Or build and run the actual image:
 
 ```bash
-# Install dependencies
-cd src
-pip install -r requirements.txt
-
-# Run the app
-python app.py
-
-# Test locally
-curl http://localhost:8000/health
-```
-
-### Build and Test Container
-
-```bash
-# Build Docker image
 docker build -t flask-api:local ./src
-
-# Run container locally
-docker run -p 8000:8000 flask-api:local
-
-# Test container
-curl http://localhost:8000/health
+docker run --rm -p 8000:8000 flask-api:local
 ```
 
-## Deployment
+For code-only changes after first deployment, run `azd deploy api`.
+For Bicep changes, run `azd up` to re-provision and deploy.
 
-### Full Deployment
+## Practical exercises
+
+### 1. Validate input rejection
+
+**Starting point:** deployed API, `API_URL` above.
+**Goal:** verify the API rejects invalid JSON shapes and missing names.
 
 ```bash
-# Deploy infrastructure and application
-azd up
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '[]'
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '{"name":""}'
 ```
 
-### Code-Only Deployment
+**Success criteria / solution:** both return 400 with a JSON error, not 500.
+**Common issue:** omitting the JSON content-type header.
+
+### 2. Add a read-only version endpoint
+
+**Starting point:** `src/app.py`. **Goal:** extend and redeploy the API.
+Add this before the `if __name__ == '__main__':` block:
+
+```python
+@app.route('/version', methods=['GET'])
+def version():
+    return jsonify({'version': '1.0.0'})
+```
+
+Run `azd deploy api`, then `curl --fail-with-body "${API_URL}/version"`.
+**Success criteria:** HTTP 200 and `{"version":"1.0.0"}`.
+**Common issue:** putting the route after the blocking `app.run()` call when
+testing with `python src/app.py`.
+
+### Knowledge checkpoint
+
+Why is one worker insufficient for durable data? Because even one process loses
+its dictionary on restart. A production version needs persistent shared storage,
+authentication, authorization, migrations, tests, and operational monitoring.
+
+## Costs and troubleshooting
+
+This is not a guaranteed $0 deployment: the Basic registry and log storage/ingestion
+can incur charges even when app compute is at zero. Use the
+[pricing calculator](https://azure.microsoft.com/pricing/calculator/) for your region.
+
+- **Docker build failure:** confirm `docker info`, network access, and dependencies.
+- **Unhealthy app:** inspect console/system logs and verify image port, ingress,
+  and probes agree. A placeholder must not be probed on the Flask port.
+- **403/permissions:** confirm subscription and resource-creation permissions.
+- **Items disappear:** in-memory state resets on restart/scale-to-zero; add a database
+  for durable behavior.
+
+## Cleanup and next steps
 
 ```bash
-# Deploy only application code (infrastructure unchanged)
-azd deploy api
+azd down
 ```
 
-### Update Configuration
+Review the deletion prompt and verify the dedicated resource group is removed.
+Do not use destructive cleanup against a resource group containing unrelated data.
 
-```bash
-# Update environment variables
-azd env set API_KEY "new-api-key"
-
-# Redeploy with new configuration
-azd deploy api
-```
-
-## Monitoring
-
-### View Logs
-
-```bash
-# Stream live logs using azd monitor
-azd monitor --logs
-
-# Or use Azure CLI for Container Apps:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# View last 100 lines
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-```
-
-### Monitor Metrics
-
-```bash
-# Open Azure Monitor dashboard
-azd monitor --overview
-
-# View specific metrics
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "Requests,ResponseTime"
-```
-
-## Testing
-
-### Health Check
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/health
-```
-
-Expected response:
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z"
-}
-```
-
-### Create Item
-
-```bash
-curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/items \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "A test item"}'
-```
-
-### Get All Items
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
-```
-
-## Cost Optimization
-
-This deployment uses scale-to-zero, so you only pay when the API is processing requests:
-
-- **Idle cost**: ~$0/month (scaled to zero)
-- **Active cost**: ~$0.000024/second per replica
-- **Expected monthly cost** (light usage): $5-15
-
-### Reduce Costs Further
-
-```bash
-# Scale down max replicas for dev
-azd env set MAX_REPLICAS 3
-
-# Use shorter idle timeout
-azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 minutes
-```
-
-## Troubleshooting
-
-### Container Won't Start
-
-```bash
-# Check container logs using Azure CLI
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-
-# Verify Docker image builds locally
-docker build -t test ./src
-```
-
-### API Not Accessible
-
-```bash
-# Verify ingress is external
-az containerapp show --name api --resource-group rg-simple-flask-api \
-  --query properties.configuration.ingress.external
-```
-
-### High Response Times
-
-```bash
-# Check CPU/Memory usage
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "CPUPercentage,MemoryPercentage"
-
-# Scale up resources if needed
-az containerapp update --name api --resource-group rg-simple-flask-api \
-  --cpu 1.0 --memory 2Gi
-```
-
-## Clean Up
-
-```bash
-# Delete all resources
-azd down --force --purge
-```
-
-## Next Steps
-
-### Expand This Example
-
-1. **Add Database** - Integrate Azure Cosmos DB or SQL Database
-   ```bash
-   # Add Cosmos DB module to infra/main.bicep
-   # Update app.py with database connection
-   ```
-
-2. **Add Authentication** - Implement Microsoft Entra ID or API keys
-   ```python
-   # Add authentication middleware to app.py
-   from functools import wraps
-   ```
-
-3. **Set Up CI/CD** - GitHub Actions workflow
-   ```yaml
-   # Create .github/workflows/deploy.yml
-   name: Deploy to Azure
-   on: [push]
-   ```
-
-4. **Add Managed Identity** - Secure access to Azure services
-   ```bicep
-   # Update infra/app/api.bicep
-   identity: { type: 'SystemAssigned' }
-   ```
-
-### Related Examples
-
-- **[Database App](../../database-app/)** - Complete example with SQL Database
-- **[Microservices](../microservices/)** - Multi-service architecture
-- **[Container Apps Master Guide](../README.md)** - All container patterns
-
-### Learning Resources
-
-- 📚 [AZD For Beginners Course](../../../README.md) - Main course home
-- 📚 [Container Apps Patterns](../README.md) - More deployment patterns
-- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - Community templates
-
-## Additional Resources
-
-### Documentation
-- **[Flask Documentation](https://flask.palletsprojects.com/)** - Flask framework guide
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Official Azure docs
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd command reference
-
-### Tutorials
-- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Deploy your first app
-- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Python development guide
-- **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastructure as code
-
-### Tools
-- **[Azure Portal](https://portal.azure.com)** - Manage resources visually
-- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - IDE integration
-
----
-
-**🎉 Congratulations!** You've deployed a production-ready Flask API to Azure Container Apps with auto-scaling and monitoring.
-
-**Questions?** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) or check the [FAQ](../../../resources/faq.md)
+[Next: Database app](../../database-app/) · [Microservices](../microservices/) ·
+[Container overview](../README.md) · [Course home](../../../README.md) ·
+[Report an issue](https://github.com/microsoft/AZD-for-beginners/issues)

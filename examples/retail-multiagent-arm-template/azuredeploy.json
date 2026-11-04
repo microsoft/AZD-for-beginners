@@ -2,7 +2,7 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "metadata": {
-    "description": "retail Multi-Agent Customer Support Solution - Complete ARM Template",
+    "description": "Retail multi-agent infrastructure scaffold with hello-world placeholders; application implementation is not included.",
     "author": "Microsoft AZD Team"
   },
   "parameters": {
@@ -59,18 +59,18 @@
         "description": "Deployment configuration mode"
       }
     },
-    "openAiApiVersion": {
+    "graderLocation": {
       "type": "string",
-      "defaultValue": "2024-10-21",
+      "defaultValue": "[parameters('location')]",
       "metadata": {
-        "description": "Azure OpenAI API version"
+        "description": "Region for the independent grader account (defaults to primary region)"
       }
     },
     "enableMultiRegion": {
       "type": "bool",
       "defaultValue": true,
       "metadata": {
-        "description": "Enable multi-region deployment for high availability"
+        "description": "Create separate secondary and embeddings accounts; this does not implement application failover"
       }
     },
     "enableMonitoring": {
@@ -84,7 +84,7 @@
       "type": "bool",
       "defaultValue": true,
       "metadata": {
-        "description": "Enable security features including Key Vault and RBAC"
+        "description": "Create an empty RBAC-enabled Key Vault; role assignments and secret population are not included"
       }
     }
   },
@@ -101,20 +101,18 @@
       "containerEnv": "[concat(parameters('projectName'), '-containerenv-', variables('uniqueSuffix'))]",
       "logAnalytics": "[concat(parameters('projectName'), '-logs-', variables('uniqueSuffix'))]",
       "appInsights": "[concat(parameters('projectName'), '-ai-', variables('uniqueSuffix'))]",
-      "frontDoor": "[concat(parameters('projectName'), '-fd-', variables('uniqueSuffix'))]",
-      "bingSearch": "[concat(parameters('projectName'), '-bing-', variables('uniqueSuffix'))]",
       "documentIntelligence": "[concat(parameters('projectName'), '-docai-', variables('uniqueSuffix'))]",
       "cosmosDb": "[concat(parameters('projectName'), '-cosmos-', variables('uniqueSuffix'))]"
     },
     "modelDeployments": {
       "chatModel": {
-        "name": "gpt-4o",
-        "version": "2024-11-20",
+        "name": "gpt-4.1",
+        "version": "2025-04-14",
         "capacity": "[if(equals(parameters('deploymentMode'), 'minimal'), 10, if(equals(parameters('deploymentMode'), 'standard'), 20, 40))]"
       },
       "chatModelMini": {
-        "name": "gpt-4o-mini",
-        "version": "2024-07-18",
+        "name": "gpt-4.1-mini",
+        "version": "2025-04-14",
         "capacity": "[if(equals(parameters('deploymentMode'), 'minimal'), 10, if(equals(parameters('deploymentMode'), 'standard'), 15, 30))]"
       },
       "embeddingModel": {
@@ -123,29 +121,23 @@
         "capacity": "[if(equals(parameters('deploymentMode'), 'minimal'), 20, if(equals(parameters('deploymentMode'), 'standard'), 30, 60))]"
       },
       "graderModel": {
-        "name": "gpt-4o",
-        "version": "2024-11-20",
+        "name": "gpt-4.1",
+        "version": "2025-04-14",
         "capacity": "[if(equals(parameters('deploymentMode'), 'minimal'), 5, if(equals(parameters('deploymentMode'), 'standard'), 15, 30))]"
       }
     },
     "skuMappings": {
       "minimal": {
         "search": "basic",
-        "storage": "Standard_LRS",
-        "containerApps": "Consumption",
-        "cosmosDb": "Standard"
+        "storage": "Standard_LRS"
       },
       "standard": {
         "search": "standard",
-        "storage": "Standard_ZRS",
-        "containerApps": "Dedicated",
-        "cosmosDb": "Standard"
+        "storage": "Standard_ZRS"
       },
       "premium": {
         "search": "standard2",
-        "storage": "Premium_LRS",
-        "containerApps": "Dedicated",
-        "cosmosDb": "Standard"
+        "storage": "Standard_GRS"
       }
     }
   },
@@ -178,7 +170,7 @@
       "kind": "web",
       "properties": {
         "Application_Type": "web",
-        "WorkspaceResourceId": "[if(parameters('enableMonitoring'), resourceId('Microsoft.OperationalInsights/workspaces', variables('resourceNames').logAnalytics), null())]",
+        "WorkspaceResourceId": "[resourceId('Microsoft.OperationalInsights/workspaces', variables('resourceNames').logAnalytics)]",
         "publicNetworkAccessForIngestion": "Enabled",
         "publicNetworkAccessForQuery": "Enabled"
       }
@@ -297,7 +289,7 @@
     {
       "type": "Microsoft.CognitiveServices/accounts/deployments",
       "apiVersion": "2023-05-01",
-      "name": "[concat(variables('resourceNames').openAiPrimary, '/gpt-4o-chat')]",
+      "name": "[concat(variables('resourceNames').openAiPrimary, '/gpt-4.1-chat')]",
       "dependsOn": [
         "[resourceId('Microsoft.CognitiveServices/accounts', variables('resourceNames').openAiPrimary)]"
       ],
@@ -309,7 +301,7 @@
         }
       },
       "sku": {
-        "name": "Standard",
+        "name": "GlobalStandard",
         "capacity": "[variables('modelDeployments').chatModel.capacity]"
       }
     },
@@ -334,7 +326,7 @@
     {
       "type": "Microsoft.CognitiveServices/accounts/deployments",
       "apiVersion": "2023-05-01",
-      "name": "[concat(variables('resourceNames').openAiSecondary, '/gpt-4o-mini-inventory')]",
+      "name": "[concat(variables('resourceNames').openAiSecondary, '/gpt-4.1-mini-inventory')]",
       "condition": "[parameters('enableMultiRegion')]",
       "dependsOn": [
         "[resourceId('Microsoft.CognitiveServices/accounts', variables('resourceNames').openAiSecondary)]"
@@ -347,7 +339,7 @@
         }
       },
       "sku": {
-        "name": "Standard",
+        "name": "GlobalStandard",
         "capacity": "[variables('modelDeployments').chatModelMini.capacity]"
       }
     },
@@ -393,7 +385,7 @@
       "type": "Microsoft.CognitiveServices/accounts",
       "apiVersion": "2023-05-01",
       "name": "[variables('resourceNames').openAiGrader]",
-      "location": "switzerlandnorth",
+      "location": "[parameters('graderLocation')]",
       "sku": {
         "name": "S0"
       },
@@ -409,7 +401,7 @@
     {
       "type": "Microsoft.CognitiveServices/accounts/deployments",
       "apiVersion": "2023-05-01",
-      "name": "[concat(variables('resourceNames').openAiGrader, '/gpt-4o-grader')]",
+      "name": "[concat(variables('resourceNames').openAiGrader, '/gpt-4.1-grader')]",
       "dependsOn": [
         "[resourceId('Microsoft.CognitiveServices/accounts', variables('resourceNames').openAiGrader)]"
       ],
@@ -421,7 +413,7 @@
         }
       },
       "sku": {
-        "name": "Standard",
+        "name": "GlobalStandard",
         "capacity": "[variables('modelDeployments').graderModel.capacity]"
       }
     },
@@ -441,16 +433,6 @@
         },
         "publicNetworkAccess": "Enabled"
       }
-    },
-    {
-      "type": "Microsoft.Bing/accounts",
-      "apiVersion": "2020-06-10",
-      "name": "[variables('resourceNames').bingSearch]",
-      "location": "global",
-      "sku": {
-        "name": "S1"
-      },
-      "kind": "Bing.Search.v7"
     },
     {
       "type": "Microsoft.Search/searchServices",
@@ -555,13 +537,10 @@
       ],
       "properties": {
         "appLogsConfiguration": {
-          "destination": "log-analytics",
-          "logAnalyticsConfiguration": {
-            "customerId": "[if(parameters('enableMonitoring'), reference(resourceId('Microsoft.OperationalInsights/workspaces', variables('resourceNames').logAnalytics)).customerId, '')]",
-            "sharedKey": "[if(parameters('enableMonitoring'), listKeys(resourceId('Microsoft.OperationalInsights/workspaces', variables('resourceNames').logAnalytics), '2023-09-01').primarySharedKey, '')]"
-          }
+          "destination": "[if(parameters('enableMonitoring'), 'log-analytics', 'none')]",
+          "logAnalyticsConfiguration": "[if(parameters('enableMonitoring'), createObject('customerId', reference(resourceId('Microsoft.OperationalInsights/workspaces', variables('resourceNames').logAnalytics), '2023-09-01').customerId, 'sharedKey', listKeys(resourceId('Microsoft.OperationalInsights/workspaces', variables('resourceNames').logAnalytics), '2023-09-01').primarySharedKey), json('null'))]"
         },
-        "zoneRedundant": "[if(equals(parameters('deploymentMode'), 'premium'), true, false)]"
+        "zoneRedundant": false
       }
     },
     {
@@ -579,7 +558,7 @@
         "configuration": {
           "ingress": {
             "external": true,
-            "targetPort": 8080,
+            "targetPort": 80,
             "allowInsecure": false,
             "traffic": [
               {
@@ -587,17 +566,7 @@
                 "latestRevision": true
               }
             ]
-          },
-          "secrets": [
-            {
-              "name": "openai-api-key-primary",
-              "value": "[listKeys(resourceId('Microsoft.CognitiveServices/accounts', variables('resourceNames').openAiPrimary), '2023-05-01').key1]"
-            },
-            {
-              "name": "storage-connection-string",
-              "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('resourceNames').storageAccount, ';AccountKey=', listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('resourceNames').storageAccount), '2023-05-01').keys[0].value, ';EndpointSuffix=core.windows.net')]"
-            }
-          ]
+          }
         },
         "template": {
           "containers": [
@@ -605,21 +574,13 @@
               "name": "agent-router",
               "image": "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest",
               "resources": {
-                "cpu": "[if(equals(parameters('deploymentMode'), 'premium'), 1, 0.5)]",
+                "cpu": "[if(equals(parameters('deploymentMode'), 'premium'), 1, json('0.5'))]",
                 "memory": "[if(equals(parameters('deploymentMode'), 'premium'), '2Gi', '1Gi')]"
               },
               "env": [
                 {
                   "name": "AZURE_OPENAI_ENDPOINT_PRIMARY",
                   "value": "[reference(resourceId('Microsoft.CognitiveServices/accounts', variables('resourceNames').openAiPrimary)).endpoint]"
-                },
-                {
-                  "name": "AZURE_OPENAI_API_KEY_PRIMARY",
-                  "secretRef": "openai-api-key-primary"
-                },
-                {
-                  "name": "AZURE_STORAGE_CONNECTION_STRING",
-                  "secretRef": "storage-connection-string"
                 },
                 {
                   "name": "ENVIRONMENT",
@@ -725,7 +686,6 @@
     },
     "openAiEndpointSecondary": {
       "type": "string",
-      "condition": "[parameters('enableMultiRegion')]",
       "value": "[if(parameters('enableMultiRegion'), reference(resourceId('Microsoft.CognitiveServices/accounts', variables('resourceNames').openAiSecondary)).endpoint, '')]"
     },
     "searchServiceName": {
@@ -742,12 +702,10 @@
     },
     "keyVaultName": {
       "type": "string",
-      "condition": "[parameters('enableSecurity')]",
       "value": "[if(parameters('enableSecurity'), variables('resourceNames').keyVault, '')]"
     },
     "applicationInsightsName": {
       "type": "string",
-      "condition": "[parameters('enableMonitoring')]",
       "value": "[if(parameters('enableMonitoring'), variables('resourceNames').appInsights, '')]"
     },
     "cosmosDbAccountName": {
@@ -762,8 +720,7 @@
         "deploymentMode": "[parameters('deploymentMode')]",
         "multiRegion": "[parameters('enableMultiRegion')]",
         "monitoring": "[parameters('enableMonitoring')]",
-        "security": "[parameters('enableSecurity')]",
-        "resourceCount": "[add(add(add(add(add(add(add(add(add(add(add(add(add(add(add(16, if(parameters('enableMultiRegion'), 4, 0)), if(parameters('enableMonitoring'), 2, 0)), if(parameters('enableSecurity'), 1, 0)), 1), 1), 1), 1), 1), 1), 1), 1), 1), 1), 1), 1)]"
+        "keyVaultCreated": "[parameters('enableSecurity')]"
       }
     }
   }

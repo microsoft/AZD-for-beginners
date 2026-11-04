@@ -8,9 +8,7 @@ param environmentName string
 @minLength(1)
 @description('Primary location for all resources')
 param location string
-
-@description('Id of the service principal to use for deployment')
-param principalId string = ''
+param apiImage string = 'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
 
 // Generate unique resource names
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
@@ -44,13 +42,15 @@ module api './app/api.bicep' = {
     environmentName: environmentName
     containerAppsEnvironmentId: containerApps.outputs.containerAppsEnvironmentId
     containerRegistryName: containerApps.outputs.containerRegistryName
-    logAnalyticsWorkspaceId: containerApps.outputs.logAnalyticsWorkspaceId
     tags: tags
+    containerImage: apiImage
   }
 }
 
 // Outputs
 output AZURE_LOCATION string = location
+output AZURE_RESOURCE_GROUP string = rg.name
+output AZURE_CONTAINER_ENVIRONMENT_ID string = containerApps.outputs.containerAppsEnvironmentId
 output AZURE_CONTAINER_REGISTRY_ENDPOINT string = containerApps.outputs.containerRegistryEndpoint
 output AZURE_CONTAINER_REGISTRY_NAME string = containerApps.outputs.containerRegistryName
 output API_ENDPOINT string = api.outputs.apiEndpoint

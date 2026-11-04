@@ -16,6 +16,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
     httpsOnly: true
     siteConfig: {
       linuxFxVersion: 'PYTHON|3.11'
+      appCommandLine: 'python -c "from app import init_database; init_database()" && gunicorn --bind 0.0.0.0:8000 --workers 2 --timeout 60 app:app'
       alwaysOn: true
       ftpsState: 'Disabled'
       minTlsVersion: '1.2'

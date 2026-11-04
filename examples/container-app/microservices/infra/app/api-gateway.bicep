@@ -7,6 +7,9 @@ param imageName string
 param applicationInsightsName string
 param productServiceUrl string
 param external bool = true
+param containerImage string = 'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
+var isBootstrap = containerImage == 'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
+var targetPort = isBootstrap ? 80 : 8080
 
 resource containerAppsEnvironment 'Microsoft.App/managedEnvironments@2023-05-01' existing = {
   name: containerAppsEnvironmentName
@@ -23,14 +26,14 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' existing
 resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
   name: name
   location: location
-  tags: tags
+  tags: union(tags, { 'azd-service-name': 'api-gateway' })
   properties: {
     managedEnvironmentId: containerAppsEnvironment.id
     configuration: {
       activeRevisionsMode: 'Single'
       ingress: {
         external: external
-        targetPort: 8080
+        targetPort: targetPort
         transport: 'http'
         allowInsecure: false
       }
@@ -56,7 +59,7 @@ resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: imageName
-          image: '${containerRegistry.properties.loginServer}/${imageName}:latest'
+          image: containerImage
           resources: {
             cpu: json('1.0')
             memory: '2Gi'
@@ -68,7 +71,7 @@ resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
             }
             {
               name: 'PRODUCT_SERVICE_URL'
-              value: 'http://${productServiceUrl}'
+              value: 'https://${productServiceUrl}'
             }
             {
               name: 'PORT'
@@ -79,8 +82,8 @@ resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
             {
               type: 'Liveness'
               httpGet: {
-                path: '/health'
-                port: 8080
+                path: isBootstrap ? '/' : '/health'
+                port: targetPort
               }
               initialDelaySeconds: 10
               periodSeconds: 30
@@ -88,8 +91,8 @@ resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
             {
               type: 'Readiness'
               httpGet: {
-                path: '/health'
-                port: 8080
+                path: isBootstrap ? '/' : '/health'
+                port: targetPort
               }
               initialDelaySeconds: 5
               periodSeconds: 10

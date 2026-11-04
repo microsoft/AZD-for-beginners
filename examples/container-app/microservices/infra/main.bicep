@@ -8,9 +8,8 @@ param environmentName string
 @minLength(1)
 @description('Primary location for all resources')
 param location string
-
-@description('Id of the user or app to assign application roles')
-param principalId string = ''
+param apiGatewayImage string = 'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
+param productServiceImage string = 'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
 
 var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
@@ -60,6 +59,7 @@ module productService './app/product-service.bicep' = {
     imageName: 'product-service'
     applicationInsightsName: monitoring.outputs.applicationInsightsName
     external: false  // Internal only
+    containerImage: productServiceImage
   }
 }
 
@@ -77,6 +77,7 @@ module apiGateway './app/api-gateway.bicep' = {
     applicationInsightsName: monitoring.outputs.applicationInsightsName
     productServiceUrl: productService.outputs.fqdn
     external: true  // Public endpoint
+    containerImage: apiGatewayImage
   }
 }
 
@@ -85,6 +86,11 @@ output AZURE_LOCATION string = location
 output AZURE_RESOURCE_GROUP string = rg.name
 output AZURE_CONTAINER_ENVIRONMENT_NAME string = containerAppsEnvironment.outputs.name
 output AZURE_CONTAINER_REGISTRY_NAME string = containerAppsEnvironment.outputs.containerRegistryName
+output AZURE_CONTAINER_REGISTRY_ENDPOINT string = containerAppsEnvironment.outputs.containerRegistryLoginServer
+output API_GATEWAY_NAME string = apiGateway.outputs.name
+output PRODUCT_SERVICE_NAME string = productService.outputs.name
+output PRODUCT_SERVICE_HOST string = productService.outputs.fqdn
+output APPLICATIONINSIGHTS_NAME string = monitoring.outputs.applicationInsightsName
 output API_GATEWAY_URL string = apiGateway.outputs.uri
-output PRODUCT_SERVICE_URL string = 'http://${productService.outputs.fqdn}'
+output PRODUCT_SERVICE_URL string = 'https://${productService.outputs.fqdn}'
 output APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applicationInsightsConnectionString

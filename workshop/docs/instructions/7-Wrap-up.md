@@ -52,7 +52,7 @@ Congratulations! In this workshop, you have successfully:
 
 | Path | Resource | Time |
 |:---|:---|:---|
-| **Complete Course** | [AZD for Beginners Curriculum](../../README.md) | 8-12 hours |
+| **Complete Course** | [AZD for Beginners Curriculum](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) | Self-paced |
 | **Try Another Template** | [Microsoft Foundry Templates](https://ai.azure.com/templates) | 1-2 hours |
 | **Deep Dive** | [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Ongoing |
 | **Community** | [Azure Discord](https://aka.ms/foundry/discord) | Join today! |
@@ -97,7 +97,7 @@ Thank you for completing the AZD for AI Developers Workshop. We hope this experi
 
 | | |
 |:---|:---|
-| **📚 Course Home** | [AZD For Beginners](../../README.md) |
+| **📚 Course Home** | [AZD For Beginners](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) |
 | **📖 Documentation** | [Azure Developer CLI Docs](https://learn.microsoft.com/azure/developer/azure-developer-cli/) |
 | **🛠️ AI Templates** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
 | **💬 Community** | [Azure Discord](https://aka.ms/foundry/discord) |

@@ -1,5 +1,6 @@
 param location string
 param environmentName string
+@minLength(13)
 param resourceToken string
 param tags object
 

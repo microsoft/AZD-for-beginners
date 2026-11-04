@@ -4,6 +4,7 @@ metadata:
 
 services:
   api:
+    module: app/api
     project: ./src
     language: python
     host: containerapp

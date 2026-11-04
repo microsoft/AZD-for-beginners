@@ -78,14 +78,11 @@ Select a template below to deploy. Each template is available on [Awesome AZD](h
 
 | Template | Description | Deploy Command |
 |----------|-------------|----------------|
-| **[AI Chat with RAG](https://azure.github.io/awesome-azd/?tags=ai&tags=rag)** | Chat application with Retrieval Augmented Generation using Microsoft Foundry | `azd init -t azure-samples/azure-search-openai-demo` |
-| **[Foundry Agent Service Starter](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Build AI agents with Foundry Agents for autonomous task execution | `azd init -t azure-samples/foundry-agent-service-starter` |
-| **[Multi-Agent Orchestration](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Coordinate multiple Foundry Agents for complex workflows | `azd init -t azure-samples/multi-agent-orchestration` |
-| **[AI Document Intelligence](https://azure.github.io/awesome-azd/?tags=ai&tags=document)** | Extract and analyze documents with Microsoft Foundry models | `azd init -t azure-samples/ai-document-processing` |
-| **[Conversational AI Bot](https://azure.github.io/awesome-azd/?tags=ai&tags=bot)** | Build intelligent chatbots with Microsoft Foundry integration | `azd init -t azure-samples/ai-chat-protocol` |
-| **[AI Image Generation](https://azure.github.io/awesome-azd/?tags=ai&tags=dalle)** | Generate images using DALL-E via Microsoft Foundry | `azd init -t azure-samples/ai-image-generation` |
-| **[Semantic Kernel Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=semantic-kernel)** | AI agents using Semantic Kernel with Foundry Agents | `azd init -t azure-samples/semantic-kernel-agent` |
-| **[AutoGen Multi-Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=autogen)** | Multi-agent systems using AutoGen framework | `azd init -t azure-samples/autogen-multi-agent` |
+| **[AI Chat with RAG](https://github.com/Azure-Samples/azure-search-openai-demo)** | Search-grounded chat application | `azd init -t Azure-Samples/azure-search-openai-demo .` |
+| **[Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents)** | Agent-backed chat application; used throughout this workshop | `azd init -t Azure-Samples/get-started-with-ai-agents .` |
+| **[Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat)** | Starter AI chat application | `azd init -t Azure-Samples/get-started-with-ai-chat .` |
+
+These are alternatives: initialize **one** template in its own empty directory. The trailing `.` selects that directory; omitting it on current AZD versions creates a template-named subdirectory. Initialization downloads a project; `azd up` performs the billable deployment after you review prerequisites, resources, region support, and quota.
 
 ### Quick Start
 
@@ -97,13 +94,13 @@ Select a template below to deploy. Each template is available on [Awesome AZD](h
 **🎯 | EXERCISE**: <br/>
 Select one of the templates above based on your scenario:
 
-- **Building a chatbot?** → Start with **AI Chat with RAG** or **Conversational AI Bot**
-- **Need autonomous agents?** → Try **Foundry Agent Service Starter** or **Multi-Agent Orchestration**
-- **Processing documents?** → Use **AI Document Intelligence**
-- **Want AI coding assistance?** → Explore **Semantic Kernel Agent** or **AutoGen Multi-Agent**
+- **Continuing this workshop?** → Choose **Get Started with AI Agents**
+- **Building search-grounded chat?** → Explore **AI Chat with RAG** separately
+- **Need another architecture?** → Search the gallery and verify the actual repository, implementation status, and prerequisites
 
-```bash title="Example: Deploy the AI Chat with RAG template" linenums="0"
-azd init -t azure-samples/azure-search-openai-demo
+```bash title="Initialize the workshop template in an empty directory" linenums="0"
+azd init -t Azure-Samples/get-started-with-ai-agents .
+azd auth login
 azd up
 ```
 

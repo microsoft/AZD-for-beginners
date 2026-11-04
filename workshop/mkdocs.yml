@@ -65,12 +65,10 @@ theme:
   # Theme Features ...............................................
   features:
     - navigation.instant
-    - #navigation.expand             # sidebar collapsible sections open
     - navigation.instant.progress   # load progress indicator
     - navigation.tracking           # tracks anchor tags in URL
     - navigation.tabs               # tabbed on desktop, single in mobile    
     - navigation.tabs.sticky        # tabs stick when scrolling down
-    - header.sticky                 # header sticks to top when scrolling
     - navigation.path               # add breadcrumbs
     - navigation.indexes            # default index.md in folder is section page
     - navigation.top
@@ -78,7 +76,6 @@ theme:
     - navigation.footer
     - content.code.copy             # allow copy-paste from codeblocks
     - content.tabs.link             # Ensures site-wide switch to same tab name
-    - navigation.sticky             # sticky sidebar navigation
 
 # Extras  ...............................................
 extra:

@@ -18,7 +18,12 @@ function Show-Error($message) {
 
 if (Get-Command azd -ErrorAction SilentlyContinue) {
     $azdVersion = azd version 2>$null
-    Show-Success "Azure Developer CLI installed: $azdVersion"
+    if ($LASTEXITCODE -eq 0 -and $azdVersion) {
+        Show-Success "Azure Developer CLI installed: $azdVersion"
+    } else {
+        Show-Error "Azure Developer CLI was found, but 'azd version' failed."
+        $errors++
+    }
 } else {
     Show-Error "Azure Developer CLI not found. Install with: winget install microsoft.azd"
     $errors++
@@ -26,7 +31,12 @@ if (Get-Command azd -ErrorAction SilentlyContinue) {
 
 if (Get-Command git -ErrorAction SilentlyContinue) {
     $gitVersion = git --version 2>$null
-    Show-Success "Git installed: $gitVersion"
+    if ($LASTEXITCODE -eq 0 -and $gitVersion) {
+        Show-Success "Git installed: $gitVersion"
+    } else {
+        Show-Error "Git was found, but 'git --version' failed."
+        $errors++
+    }
 } else {
     Show-Error "Git not found. Install from https://git-scm.com/downloads"
     $errors++
@@ -52,7 +62,12 @@ if (Get-Command az -ErrorAction SilentlyContinue) {
 
 if (Get-Command node -ErrorAction SilentlyContinue) {
     $nodeVersion = node --version 2>$null
-    Show-Success "Node.js installed: $nodeVersion"
+    if ($LASTEXITCODE -eq 0 -and $nodeVersion) {
+        Show-Success "Node.js installed: $nodeVersion"
+    } else {
+        Show-Warning "Node.js was found, but 'node --version' failed. Check your installation before using Node.js templates."
+        $warnings++
+    }
 } else {
     Show-Warning "Node.js not found. The Chapter 1 todo template requires Node.js."
     $warnings++

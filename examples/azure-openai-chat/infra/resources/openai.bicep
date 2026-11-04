@@ -24,12 +24,12 @@ resource openAI 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   }
 }
 
-// Deploy GPT-4 model
+// Verify model/version availability and quota in the selected region before provisioning.
 resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAI
   name: modelName
   sku: {
-    name: 'Standard'
+    name: 'GlobalStandard'
     capacity: capacity
   }
   properties: {
@@ -46,5 +46,4 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 // Outputs
 output openAIEndpoint string = openAI.properties.endpoint
 output openAIName string = openAI.name
-output openAIKey string = openAI.listKeys().key1
 output openAIResourceId string = openAI.id

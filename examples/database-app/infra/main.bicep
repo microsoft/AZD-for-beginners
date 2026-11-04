@@ -10,7 +10,6 @@ param environmentName string
 param location string
 
 @description('SQL Server administrator login')
-@secure()
 param sqlAdminLogin string = 'sqladmin'
 
 @description('SQL Server administrator password')

@@ -2,8 +2,10 @@ param location string
 param environmentName string
 param containerAppsEnvironmentId string
 param containerRegistryName string
-param logAnalyticsWorkspaceId string
-param tags object
+param tags object = {}
+param containerImage string = 'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
+var isBootstrap = containerImage == 'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
+var targetPort = isBootstrap ? 80 : 8000
 
 @description('CPU cores for the container')
 param cpu string = '0.5'
@@ -15,7 +17,7 @@ param memory string = '1Gi'
 param minReplicas int = 0
 
 @description('Maximum number of replicas')
-param maxReplicas int = 10
+param maxReplicas int = 1
 
 // Get container registry
 resource containerRegistry 'Microsoft.ContainerRegistry/registries@2023-01-01-preview' existing = {
@@ -26,14 +28,14 @@ resource containerRegistry 'Microsoft.ContainerRegistry/registries@2023-01-01-pr
 resource api 'Microsoft.App/containerApps@2023-05-01' = {
   name: 'ca-api-${environmentName}'
   location: location
-  tags: tags
+  tags: union(tags, { 'azd-service-name': 'api' })
   properties: {
     managedEnvironmentId: containerAppsEnvironmentId
     configuration: {
       activeRevisionsMode: 'Single'
       ingress: {
         external: true
-        targetPort: 8000
+        targetPort: targetPort
         transport: 'http'
         allowInsecure: false
       }
@@ -55,7 +57,7 @@ resource api 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: 'api'
-          image: 'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
+          image: containerImage
           resources: {
             cpu: json(cpu)
             memory: memory
@@ -64,8 +66,8 @@ resource api 'Microsoft.App/containerApps@2023-05-01' = {
             {
               type: 'Liveness'
               httpGet: {
-                path: '/health'
-                port: 8000
+                path: isBootstrap ? '/' : '/health'
+                port: targetPort
               }
               initialDelaySeconds: 10
               periodSeconds: 10
@@ -74,8 +76,8 @@ resource api 'Microsoft.App/containerApps@2023-05-01' = {
             {
               type: 'Readiness'
               httpGet: {
-                path: '/health'
-                port: 8000
+                path: isBootstrap ? '/' : '/health'
+                port: targetPort
               }
               initialDelaySeconds: 5
               periodSeconds: 5

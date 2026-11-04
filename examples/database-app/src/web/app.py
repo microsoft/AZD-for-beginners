@@ -20,6 +20,14 @@ def get_db_connection():
     connection_string = os.getenv('SQL_CONNECTION_STRING')
     if not connection_string:
         raise ValueError("SQL_CONNECTION_STRING environment variable is not set")
+    if 'driver=' not in connection_string.lower():
+        # App Service and local machines can have different driver versions.
+        driver = next((name for name in (
+            'ODBC Driver 18 for SQL Server', 'ODBC Driver 17 for SQL Server'
+        ) if name in pyodbc.drivers()), None)
+        if not driver:
+            raise RuntimeError("Install Microsoft ODBC Driver 18 for SQL Server")
+        connection_string = f"DRIVER={{{driver}}};{connection_string}"
     return pyodbc.connect(connection_string)
 
 def init_database():
@@ -120,7 +128,7 @@ def get_products():
                 'id': row[0],
                 'name': row[1],
                 'description': row[2],
-                'price': float(row[3]) if row[3] else None,
+                'price': float(row[3]) if row[3] is not None else None,
                 'created_at': row[4].isoformat() if row[4] else None
             })
         
@@ -154,7 +162,7 @@ def get_product(product_id):
                 'id': row[0],
                 'name': row[1],
                 'description': row[2],
-                'price': float(row[3]) if row[3] else None,
+                'price': float(row[3]) if row[3] is not None else None,
                 'created_at': row[4].isoformat() if row[4] else None
             }
             logger.info(f"Retrieved product {product_id}")
