@@ -111,7 +111,7 @@ def health():
         return jsonify({
             'status': 'unhealthy',
             'database': 'disconnected',
-            'error': 'Internal server error'
+            'error': 'An internal error has occurred'
         }), 503
 
 @app.route('/products')
@@ -140,7 +140,7 @@ def get_products():
         
     except Exception as e:
         logger.error(f"Error retrieving products: {str(e)}")
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': 'An internal error has occurred'}), 500
 
 @app.route('/products/<int:product_id>')
 def get_product(product_id):
@@ -172,7 +172,7 @@ def get_product(product_id):
         
     except Exception as e:
         logger.error(f"Error retrieving product {product_id}: {str(e)}")
-        return jsonify({'error': 'Internal server error'}), 500
+        return jsonify({'error': 'An internal error has occurred'}), 500
 
 if __name__ == '__main__':
     # Initialize database on startup
