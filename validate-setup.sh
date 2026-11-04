@@ -19,14 +19,24 @@ echo "AZD beginner setup validation"
 echo
 
 if command -v azd >/dev/null 2>&1; then
-  ok "Azure Developer CLI installed: $(azd version 2>/dev/null)"
+  if version=$(azd version 2>/dev/null) && [ -n "$version" ]; then
+    ok "Azure Developer CLI installed: $version"
+  else
+    fail "Azure Developer CLI was found, but 'azd version' failed."
+    errors=$((errors + 1))
+  fi
 else
   fail "Azure Developer CLI not found. Install it before starting Chapter 1."
   errors=$((errors + 1))
 fi
 
 if command -v git >/dev/null 2>&1; then
-  ok "Git installed: $(git --version 2>/dev/null)"
+  if version=$(git --version 2>/dev/null) && [ -n "$version" ]; then
+    ok "Git installed: $version"
+  else
+    fail "Git was found, but 'git --version' failed."
+    errors=$((errors + 1))
+  fi
 else
   fail "Git not found. Install it from https://git-scm.com/downloads"
   errors=$((errors + 1))
@@ -45,7 +55,12 @@ else
 fi
 
 if command -v node >/dev/null 2>&1; then
-  ok "Node.js installed: $(node --version 2>/dev/null)"
+  if version=$(node --version 2>/dev/null) && [ -n "$version" ]; then
+    ok "Node.js installed: $version"
+  else
+    warn "Node.js was found, but 'node --version' failed. Check your installation before using Node.js templates."
+    warnings=$((warnings + 1))
+  fi
 else
   warn "Node.js not found. The Chapter 1 todo template requires Node.js."
   warnings=$((warnings + 1))

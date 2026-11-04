@@ -20,9 +20,6 @@
     "deploymentMode": {
       "value": "standard"
     },
-    "openAiApiVersion": {
-      "value": "2024-10-21"
-    },
     "enableMultiRegion": {
       "value": true
     },

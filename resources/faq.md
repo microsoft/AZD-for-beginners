@@ -2,9 +2,9 @@
 
 **Get Help by Chapter**
 - **📚 Course Home**: [AZD For Beginners](../README.md)
-- **🚆 Installation Issues**: [Chapter 1: Installation & Setup](../docs/getting-started/installation.md)
-- **🤖 AI Questions**: [Chapter 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
-- **🔧 Troubleshooting**: [Chapter 7: Troubleshooting & Debugging](../docs/troubleshooting/common-issues.md)
+- **🚆 Installation Issues**: [Chapter 1: Installation & Setup](../docs/chapter-01-foundation/installation.md)
+- **🤖 AI Questions**: [Chapter 2: AI-First Development](../docs/chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🔧 Troubleshooting**: [Chapter 7: Troubleshooting & Debugging](../docs/chapter-07-troubleshooting/common-issues.md)
 
 ## Introduction
 
@@ -53,11 +53,11 @@ With regular reference to this FAQ, you will be able to:
 **A**: 
 - **Azure CLI**: General-purpose tool for managing Azure resources
 - **azd**: Developer-focused tool for application deployment workflows
-- azd uses Azure CLI internally but provides higher-level abstractions for common development scenarios
+- azd has its own authentication and deployment workflow; Azure CLI is a separate, complementary tool
 - azd includes templates, environment management, and deployment automation
 
 ### Q: Do I need Azure CLI installed to use azd?
-**A**: Yes, azd requires Azure CLI for authentication and some operations. Install Azure CLI first, then install azd.
+**A**: Not for the core AZD workflow. Authenticate with `azd auth login`. Install Azure CLI separately when a template hook or an exercise explicitly runs `az` commands.
 
 ### Q: What programming languages does azd support?
 **A**: azd is language-agnostic. It works with:
@@ -96,13 +96,22 @@ With regular reference to this FAQ, you will be able to:
 **A**: Absolutely! azd is designed for CI/CD integration. Use service principals for authentication and set environment variables for configuration.
 
 ### Q: How do I handle authentication in GitHub Actions?
-**A**: Use the Azure Login action with service principal credentials:
+**A**: Prefer workload identity federation (OIDC), configured with `azd pipeline config`. The generated workflow installs AZD and authenticates AZD directly with a federated identity. An `azure/login` step alone does not establish an AZD login. A login step within an existing job is:
 ```yaml
-- uses: azure/login@v1
-  with:
-    creds: ${{ secrets.AZURE_CREDENTIALS }}
-- run: azd deploy --no-prompt
+permissions:
+  contents: read
+  id-token: write
+steps:
+  - uses: actions/checkout@v7
+  - uses: Azure/setup-azd@v2
+  - run: >-
+      azd auth login
+      --client-id "${{ vars.AZURE_CLIENT_ID }}"
+      --tenant-id "${{ vars.AZURE_TENANT_ID }}"
+      --federated-credential-provider github
 ```
+
+Provision or deploy after login, with the intended AZD environment, subscription, and location configured. The identity's federated credential must trust the workflow's repository/ref or GitHub environment, and its Azure roles must allow the requested operations.
 
 ---
 
@@ -110,7 +119,7 @@ With regular reference to this FAQ, you will be able to:
 
 ### Q: Where can I find azd templates?
 **A**: 
-- Official templates: [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
+- Official and community templates: [Awesome AZD](https://azure.github.io/awesome-azd/)
 - Community templates: GitHub search for "azd-template"
 - Use `azd template list` to browse available templates
 
@@ -164,13 +173,10 @@ hooks:
 **A**: Yes, use `azd provision` to deploy only the infrastructure components defined in your templates.
 
 ### Q: How do I deploy to existing Azure resources?
-**A**: This is complex and not directly supported. You can:
-1. Import existing resources into your Bicep templates
-2. Use existing resource references in templates
-3. Modify templates to conditionally create or reference resources
+**A**: Yes, when the template supports it. Reference existing resources with Bicep's `existing` declarations or the template's documented existing-resource parameters, and map application services to their intended targets. This does not import ownership or automatically create missing permissions. Review the template before deploying.
 
 ### Q: Can I use Terraform instead of Bicep?
-**A**: Currently, azd primarily supports Bicep/ARM templates. Terraform support is not officially available, though community solutions may exist.
+**A**: Yes. AZD supports Terraform as well as Bicep. Select a Terraform-based template or configure `infra.provider: terraform` in `azure.yaml`, with appropriate Terraform files and state/backend configuration. See the [Terraform workflow](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
 
 ---
 
@@ -203,9 +209,11 @@ azd env set DATABASE_TIER Basic
 ### Q: How do I override template defaults?
 **A**: Set environment variables that correspond to template parameters:
 ```bash
-azd env set LOCATION "West US 2"
+azd env set AZURE_LOCATION westus2
 azd env set SKU_NAME "B1"
 ```
+
+Only variables consumed by the template affect deployment. `SKU_NAME` above is an example custom input, not a universal AZD setting.
 
 ---
 
@@ -215,7 +223,7 @@ azd env set SKU_NAME "B1"
 **A**: Common causes:
 1. **Authentication issues**: Run `azd auth login`
 2. **Insufficient permissions**: Check your Azure role assignments
-3. **Resource naming conflicts**: Change AZURE_ENV_NAME
+3. **Resource naming conflicts**: Review the conflicting resource and the template's naming inputs; create a separate environment with `azd env new` when isolation is needed
 4. **Quota/capacity issues**: Check regional availability
 5. **Template errors**: Validate Bicep templates
 
@@ -236,9 +244,9 @@ azd env set SKU_NAME "B1"
 ### Q: How do I clean up failed deployments?
 **A**: 
 ```bash
-azd down --force --purge
+azd down
 ```
-This removes all resources and environment configuration.
+Review the selected environment and deletion confirmation first. This deletes provisioned Azure resources, not the local `.azure` environment configuration. `--purge` additionally requests permanent deletion of supported soft-deleted resources and can be blocked by retention/purge protection; it is not a routine recovery step.
 
 ### Q: Why is my application not accessible after deployment?
 **A**: Check:
@@ -269,13 +277,7 @@ Use the [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculato
 5. Use Azure Cost Management tools
 
 ### Q: Are there free tier options for azd templates?
-**A**: Many Azure services offer free tiers:
-- App Service: Free tier available
-- Azure Functions: 1M free executions/month
-- Cosmos DB: Free tier with 400 RU/s
-- Application Insights: First 5GB/month free
-
-Configure templates to use free tiers where available.
+**A**: Some services have free SKUs or monthly grants, subject to eligibility, hosting plan, region, and subscription limits. These do not make a whole template free: databases, search, networking, registry, telemetry, and model inference can incur charges independently. Check the [Azure free services list](https://azure.microsoft.com/free/) and current pricing for every resource before deployment.
 
 ### Q: How do I estimate costs before deployment?
 **A**: 
@@ -356,7 +358,7 @@ hooks:
 ### Q: How do I contribute to azd or create community templates?
 **A**: 
 1. **azd tool**: Contribute to [Azure/azure-dev](https://github.com/Azure/azure-dev)
-2. **Templates**: Create templates following the [template guidelines](https://github.com/Azure-Samples/awesome-azd)
+2. **Templates**: Follow the [Awesome AZD gallery contribution instructions](https://github.com/Azure/awesome-azd#3-contribute-to-gallery)
 3. **Documentation**: Contribute to docs at [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
 
 ### Q: What's the roadmap for azd?
@@ -394,7 +396,7 @@ hooks:
 
 ---
 
-*This FAQ is regularly updated. Last updated: September 9, 2025*
+*Technical guidance reviewed: November 4, 2026. Cloud availability and pricing must be checked for your subscription and region.*
 
 ---
 

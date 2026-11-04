@@ -166,7 +166,7 @@ After completing all sections of this study guide, you will be able to:
 - Service-to-service communication in containerized environments
 
 #### Practical Exercises
-1. **Retail Solution Deployment**: Deploy the complete multi-agent retail scenario
+1. **Retail Architecture Review**: Analyze the retail blueprint and identify which application components must be implemented before deployment
 2. **Agent Customization**: Modify Customer and Inventory agent behaviors
 3. **Architecture Scaling**: Implement load balancing and auto-scaling
 4. **Production Monitoring**: Set up comprehensive monitoring and alerting
@@ -284,19 +284,19 @@ After completing all sections of this study guide, you will be able to:
 #### Practice Exercises
 
 **Exercise 1.1: Installation and Setup**
-```bash
+```text
 # Complete these tasks:
 1. Install azd using your preferred method
-2. Install Azure CLI and authenticate
+2. Install Azure CLI only for exercises or template hooks that explicitly use `az`; authenticate AZD independently
 3. Verify installation with: azd version
 4. Test connectivity with: azd auth login
 5. Explore available templates: azd template list
 ```
 
 **Exercise 1.2: First Deployment**
-```bash
+```text
 # Deploy a simple web application:
-1. Initialize project: azd init --template todo-nodejs-mongo
+1. Initialize project in an empty directory: azd init --template todo-nodejs-mongo .
 2. Review project structure and configuration files
 3. Deploy to Azure: azd up
 4. Test the deployed application
@@ -322,7 +322,7 @@ Analyze the following components:
 ---
 
 ## Progress Tracking and Assessment Framework
-```bash
+```text
 # Create and configure multiple environments:
 1. Create development environment: azd env new development
 2. Create staging environment: azd env new staging
@@ -332,7 +332,7 @@ Analyze the following components:
 ```
 
 **Exercise 2.2: Advanced Configuration**
-```yaml
+```text
 # Modify azure.yaml to include:
 1. Multiple services with different configurations
 2. Pre and post deployment hooks
@@ -341,7 +341,7 @@ Analyze the following components:
 ```
 
 **Exercise 2.3: Security Configuration**
-```bash
+```text
 # Implement security best practices:
 1. Configure managed identity for service authentication
 2. Set up Azure Key Vault for secrets management
@@ -374,7 +374,7 @@ Analyze the following components:
 #### Practice Exercises
 
 **Exercise 3.1: Custom Infrastructure**
-```bicep
+```text
 // Create custom Bicep templates for:
 1. Web application with custom domain and SSL
 2. Database with backup and high availability
@@ -384,7 +384,7 @@ Analyze the following components:
 ```
 
 **Exercise 3.2: Multi-Service Application**
-```bash
+```text
 # Deploy a microservices architecture:
 1. Frontend web application
 2. Backend API service
@@ -394,7 +394,7 @@ Analyze the following components:
 ```
 
 **Exercise 3.3: Database Integration**
-```bash
+```text
 # Implement database deployment patterns:
 1. Deploy PostgreSQL with connection pooling
 2. Implement schema migrations
@@ -428,7 +428,7 @@ Analyze the following components:
 #### Practice Exercises
 
 **Exercise 4.1: Capacity Planning**
-```bash
+```text
 # Implement capacity validation:
 1. Create scripts to check Azure quotas
 2. Validate service availability in target regions
@@ -438,7 +438,7 @@ Analyze the following components:
 ```
 
 **Exercise 4.2: Pre-flight Validation**
-```powershell
+```text
 # Build comprehensive validation pipeline:
 1. Authentication and permissions validation
 2. Template syntax and parameter validation
@@ -448,7 +448,7 @@ Analyze the following components:
 ```
 
 **Exercise 4.3: SKU Optimization**
-```bash
+```text
 # Optimize service configurations:
 1. Compare performance characteristics of different SKUs
 2. Implement cost-effective development configurations
@@ -482,7 +482,7 @@ Analyze the following components:
 #### Practice Exercises
 
 **Exercise 5.1: Troubleshooting Scenarios**
-```bash
+```text
 # Practice resolving common issues:
 1. Authentication and authorization failures
 2. Resource provisioning conflicts
@@ -492,7 +492,7 @@ Analyze the following components:
 ```
 
 **Exercise 5.2: Monitoring Implementation**
-```bash
+```text
 # Set up comprehensive monitoring:
 1. Application performance monitoring with Application Insights
 2. Infrastructure monitoring with Azure Monitor
@@ -502,7 +502,7 @@ Analyze the following components:
 ```
 
 **Exercise 5.3: Incident Response**
-```bash
+```text
 # Build incident response procedures:
 1. Create runbooks for common problems
 2. Implement automated recovery procedures
@@ -536,7 +536,7 @@ Analyze the following components:
 #### Practice Exercises
 
 **Exercise 6.1: CI/CD Integration**
-```yaml
+```text
 # Implement automated deployment pipelines:
 1. GitHub Actions workflow for azd deployments
 2. Azure DevOps pipeline integration
@@ -546,7 +546,7 @@ Analyze the following components:
 ```
 
 **Exercise 6.2: Custom Template Development**
-```bash
+```text
 # Create and publish custom templates:
 1. Design template for your organization's architecture
 2. Implement parameterization and customization options
@@ -556,7 +556,7 @@ Analyze the following components:
 ```
 
 **Exercise 6.3: Enterprise Implementation**
-```bash
+```text
 # Implement enterprise-grade features:
 1. Multi-tenant architecture with proper isolation
 2. Centralized logging and monitoring
@@ -616,7 +616,7 @@ Design and implement a microservices-based e-commerce platform:
 - Redis cache for performance optimization
 - Comprehensive logging and monitoring
 
-**Reference Example**: See [Microservices Architecture](../examples/container-app/microservices/) for a production-ready template and deployment guide
+**Reference Example**: See [Microservices Architecture](../examples/container-app/microservices/) for a two-service learning sample and deployment guide. Queues, persistence, authentication, payment processing, and production hardening are separate project work.
 
 **Deliverables**:
 - Complete microservices architecture
@@ -754,7 +754,7 @@ Track your progress through each chapter with these measurable outcomes:
 - [ ] **Template Optimization**: Optimized templates for performance and cost
 
 #### 🎯 Chapter 5: Multi-Agent AI Solutions
-- [ ] **Retail Solution Deployment**: Deployed complete multi-agent retail scenario
+- [ ] **Retail Architecture Review**: Identified missing application components and planned their implementation and validation
 - [ ] **Agent Customization**: Modified Customer and Inventory agent behaviors
 - [ ] **Architecture Scaling**: Implemented load balancing and auto-scaling
 - [ ] **Production Monitoring**: Set up comprehensive monitoring and alerting
@@ -818,7 +818,7 @@ Track your progress through each chapter with these measurable outcomes:
 5. **Community Contribution**: Share templates or improvements
 
 #### Professional Development Outcomes
-- **Portfolio Projects**: 8 production-ready deployments
+- **Portfolio Projects**: Learning deployments and architecture exercises; production readiness requires separate implementation and review
 - **Technical Skills**: Industry-standard AZD and AI deployment expertise
 - **Problem-Solving Abilities**: Independent troubleshooting and optimization
 - **Community Recognition**: Active participation in Azure developer community
@@ -828,7 +828,7 @@ Track your progress through each chapter with these measurable outcomes:
 - **Deployment Success Rate**: >95% successful deployments
 - **Troubleshooting Time**: <30 minutes for common issues
 - **Performance Optimization**: Demonstrable improvements in cost and performance
-- **Security Compliance**: All deployments meet enterprise security standards
+- **Security Review**: Document controls and remaining gaps against your organization's requirements; course completion does not certify compliance
 - **Knowledge Transfer**: Ability to mentor other developers
 
 ### Continuous Learning and Community Engagement

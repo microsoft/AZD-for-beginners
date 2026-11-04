@@ -40,12 +40,11 @@ def create_item():
     """Create a new item"""
     global item_counter
     
-    if not request.json:
-        return jsonify({'error': 'Request must be JSON'}), 400
-    
-    data = request.json
-    if 'name' not in data:
-        return jsonify({'error': 'Name is required'}), 400
+    data = request.get_json(silent=True)
+    if not isinstance(data, dict):
+        return jsonify({'error': 'Request must be a JSON object'}), 400
+    if not isinstance(data.get('name'), str) or not data['name'].strip():
+        return jsonify({'error': 'A non-empty name is required'}), 400
     
     item_counter += 1
     item = {
@@ -77,10 +76,11 @@ def update_item(item_id):
         logger.warning(f"Attempted to update non-existent item {item_id}")
         return jsonify({'error': 'Item not found'}), 404
     
-    if not request.json:
-        return jsonify({'error': 'Request must be JSON'}), 400
-    
-    data = request.json
+    data = request.get_json(silent=True)
+    if not isinstance(data, dict):
+        return jsonify({'error': 'Request must be a JSON object'}), 400
+    if 'name' in data and (not isinstance(data['name'], str) or not data['name'].strip()):
+        return jsonify({'error': 'A non-empty name is required'}), 400
     items[item_id].update({
         'name': data.get('name', items[item_id]['name']),
         'description': data.get('description', items[item_id]['description']),

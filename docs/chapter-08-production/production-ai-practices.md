@@ -4,22 +4,18 @@
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
 - **📖 Current Chapter**: Chapter 8 - Production & Enterprise Patterns
 - **⬅️ Previous Chapter**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Also Related**: [AI Workshop Lab](ai-workshop-lab.md)
+- **⬅️ Also Related**: [AI Workshop Lab](../chapter-02-ai-development/ai-workshop-lab.md)
 - **🎯 Course Complete**: [AZD For Beginners](../../README.md)
 
 ## Overview
 
-This guide provides comprehensive best practices for deploying production-ready AI workloads using Azure Developer CLI (AZD). Based on feedback from the Microsoft Foundry Discord community and real-world customer deployments, these practices address the most common challenges in production AI systems.
+This guide explains production AI design patterns using Azure Developer CLI (AZD). It is a design reference, not a deployable application or a production certification.
+
+**Example boundaries:** Unless explicitly described as complete, Bicep fragments assume parameters and referenced resources from a containing template. They omit host images/plans, identities, role assignments, DNS, outputs, and other required integration. YAML service paths and hook/test scripts are illustrative files to create in **your own application**; they are not supplied by this course. Use a working AZD sample as a base, compile the complete infrastructure, and test it in an isolated environment before production.
 
 ## Key Challenges Addressed
 
-Based on our community poll results, these are the top challenges developers face:
-
-- **45%** struggle with multi-service AI deployments
-- **38%** have issues with credential and secret management  
-- **35%** find production readiness and scaling difficult
-- **32%** need better cost optimization strategies
-- **29%** require improved monitoring and troubleshooting
+Common production concerns include multi-service deployments, identity and secret management, scaling, cost controls, and monitoring. No measured prevalence is claimed here.
 
 ## Architecture Patterns for Production AI
 
@@ -67,7 +63,7 @@ services:
 
 ```bicep
 // Event Hub for AI processing pipeline
-resource eventHub 'Microsoft.EventHub/namespaces@2023-01-01-preview' = {
+resource eventHub 'Microsoft.EventHub/namespaces@2024-01-01' = {
   name: eventHubNamespaceName
   location: location
   sku: {
@@ -78,7 +74,7 @@ resource eventHub 'Microsoft.EventHub/namespaces@2023-01-01-preview' = {
 }
 
 // Service Bus for reliable message processing
-resource serviceBus 'Microsoft.ServiceBus/namespaces@2022-10-01-preview' = {
+resource serviceBus 'Microsoft.ServiceBus/namespaces@2024-01-01' = {
   name: serviceBusNamespaceName
   location: location
   sku: {
@@ -110,6 +106,8 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
+This creates namespace fragments, not hubs, queues, subscriptions, or Function triggers. A runnable Function also needs a hosting plan, runtime/storage configuration, an attached identity, RBAC, and network access. The Key Vault reference needs permission to read the secret; an endpoint URL itself is not a credential.
+
 ## Thinking About AI Agent Health
 
 When a traditional web app breaks, the symptoms are familiar: a page doesn't load, an API returns an error, or a deployment fails. AI-powered applications can break in all those same ways—but they can also misbehave in subtler ways that don't produce obvious error messages.
@@ -118,7 +116,7 @@ This section helps you build a mental model for monitoring AI workloads so you k
 
 ### How Agent Health Differs from Traditional App Health
 
-A traditional app either works or it doesn't. An AI agent can appear to work but produce poor results. Think of agent health in two layers:
+Traditional apps can have subtle correctness failures too. An AI agent adds nondeterministic response quality to the usual availability and correctness concerns. Think of agent health in two layers:
 
 | Layer | What to Watch | Where to Look |
 |-------|--------------|---------------|
@@ -133,7 +131,7 @@ If your AI application isn't producing the results you expect, here's a conceptu
 
 1. **Start with the basics.** Is the app running? Can it reach its dependencies? Check `azd monitor` and resource health just as you would for any app.
 2. **Check the model connection.** Is your application successfully calling the AI model? Failed or timed-out model calls are the most common cause of AI app issues and will show up in your application logs.
-3. **Look at what the model received.** AI responses depend on the input (the prompt and any retrieved context). If the output is wrong, the input is usually wrong. Check whether your application is sending the right data to the model.
+3. **Inspect input and grounding safely.** Wrong answers can result from retrieval, instructions, model limitations, or tool execution. Use access-controlled, redacted diagnostic data; do not enable indiscriminate prompt/response logging in production.
 4. **Review response latency.** AI model calls are slower than typical API calls. If your app feels sluggish, check whether model response times have increased—this can indicate throttling, capacity limits, or region-level congestion.
 5. **Watch for cost signals.** Unexpected spikes in token usage or API calls can indicate a loop, a misconfigured prompt, or excessive retries.
 
@@ -161,7 +159,7 @@ resource chatServiceIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2
 // Role assignments with minimal permissions
 resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: openAIAccount
-  name: guid(openAIAccount.id, chatServiceIdentity.id, openAIUserRoleDefinitionId)
+  name: guid(openAIAccount.id, chatServiceIdentity.id, '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
     principalId: chatServiceIdentity.properties.principalId
@@ -183,7 +181,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
     tenantId: tenant().tenantId
     sku: {
       family: 'A'
-      name: 'premium'  // Use premium for production
+      name: 'standard' // Premium is needed for HSM-backed keys, not ordinary secrets
     }
     enableRbacAuthorization: true  // Use RBAC instead of access policies
     enablePurgeProtection: true    // Prevent accidental deletion
@@ -192,7 +190,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   }
 }
 
-// Store all AI service credentials
+// Optional legacy key-auth alternative; omit when using Entra ID.
 resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
   parent: keyVault
   name: 'openai-api-key'
@@ -204,6 +202,8 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
   }
 }
 ```
+
+Assign the runtime identity `Key Vault Secrets User` at the appropriate scope and attach it to the host; `enableRbacAuthorization` alone grants no access. Prefer OpenAI managed identity authentication with `disableLocalAuth: true`. The optional key secret only makes sense for a deliberately key-enabled account, and the provisioning principal also needs permission to write secrets.
 
 ### 3. Network Security
 
@@ -265,6 +265,8 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
+Private endpoints also require private DNS zone groups/VNet links and application VNet integration. They do not automatically block public access: explicitly disable the AI account's public network access after validating private connectivity and deployment access.
+
 ## Performance and Scaling
 
 ### 1. Auto-Scaling Strategies
@@ -318,7 +320,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 **Redis Cache for AI Responses**:
 
 ```bicep
-// Redis Premium for production workloads
+// Legacy Azure Cache for Redis example (not recommended for new deployments)
 resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
   name: redisCacheName
   location: location
@@ -333,8 +335,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
     redisConfiguration: {
       'maxmemory-policy': 'allkeys-lru'
     }
-    // Enable clustering for high availability
-    redisVersion: '6.0'
+    // Sharding distributes data; replication/failover provides availability.
     shardCount: 2
   }
 }
@@ -342,6 +343,8 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 // Cache configuration in application
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
+
+Azure Cache for Redis Basic/Standard/Premium is on a [retirement path](https://learn.microsoft.com/azure/azure-cache-for-redis/retirement-faq). Use Azure Managed Redis for new designs and its documented SKU, identity, and TLS configuration, rather than copying this legacy resource into a new production system. The connection-string line is a nonfunctional placeholder, not a credential. Partition cache keys by authorization, model/instructions, and retrieval version, with expiry; a shared query-only cache can expose another user's data.
 
 ### 3. Load Balancing and Traffic Management
 
@@ -381,11 +384,15 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
+This is a partial gateway resource: a real deployment also needs gateway subnet/IP configuration, frontend IPs and ports, TLS listeners/certificates, backend HTTP settings/probes, routing rules and priorities, and a reviewed WAF policy. TLS hostname/SNI and authentication must match the Container App backend.
+
 ## 💰 Cost Optimization
 
 ### 1. Resource Right-Sizing
 
 **Environment-Specific Configurations**:
+
+These names are **illustrative custom-template inputs**, not automatic AZD settings. Map each into `infra/main.parameters.json`/Bicep and host configuration first. For example, the RAG sample uses `AZURE_SEARCH_SERVICE_SKU` and `AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY`, not the generic names below. Give Container Apps memory a supported unit such as `1Gi` in the actual resource. Apply infrastructure changes with `azd up` or `azd provision`; `azd deploy` alone does not apply Bicep changes.
 
 ```bash
 # Development environment
@@ -408,16 +415,18 @@ azd env set CONTAINER_MEMORY 4.0
 ### 2. Cost Monitoring and Budgets
 
 ```bicep
+// Supply the first day of the current UTC month, e.g. 2026-11-01T00:00:00Z.
+param budgetStartDate string
+
 // Cost management and budgets
-resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
+resource budget 'Microsoft.Consumption/budgets@2024-08-01' = {
   name: 'ai-workload-budget'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate
     }
     timeGrain: 'Monthly'
-    amount: 2000  // $2000 monthly budget
+    amount: 2000  // In the billing currency, not necessarily USD
     category: 'Cost'
     notifications: {
       warning: {
@@ -446,9 +455,13 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
+Replace the example recipients and check scope/permissions. Budget alerts use delayed billing data and do not enforce a spending cap.
+
 ### 3. Token Usage Optimization
 
 **OpenAI Cost Management**:
+
+This is only a character-based heuristic for a UI preview, **not** a model token-limit validator. Production code must use a tokenizer appropriate to the deployed model and account for system instructions, tool schemas, history, and output budget. Reject an oversized user message rather than silently truncating it.
 
 ```typescript
 // Application-level token optimization
@@ -458,11 +471,14 @@ class TokenOptimizer {
   
   optimizePrompt(userInput: string, context: string): string {
     const availableTokens = this.maxTokens - this.reserveTokens;
-    const estimatedTokens = this.estimateTokens(userInput + context);
+    if (this.estimateTokens(userInput) + 8 >= availableTokens) {
+      throw new Error("User input exceeds the illustrative prompt budget");
+    }
+    const estimatedTokens = this.estimateTokens(userInput + context) + 8;
     
     if (estimatedTokens > availableTokens) {
       // Truncate context, not user input
-      context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
+      context = this.truncateContext(context, Math.max(0, availableTokens - this.estimateTokens(userInput) - 8));
     }
     
     return `${context}\n\nUser: ${userInput}`;
@@ -471,6 +487,10 @@ class TokenOptimizer {
   private estimateTokens(text: string): number {
     // Rough estimation: 1 token ≈ 4 characters
     return Math.ceil(text.length / 4);
+  }
+
+  private truncateContext(text: string, estimatedBudget: number): string {
+    return text.slice(0, Math.max(0, estimatedBudget) * 4);
   }
 }
 ```
@@ -488,8 +508,8 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   properties: {
     Application_Type: 'web'
     WorkspaceResourceId: logAnalyticsWorkspace.id
-    SamplingPercentage: 100  // Full sampling for AI apps
-    DisableIpMasking: false  // Enable for security
+    SamplingPercentage: 100  // Ingestion setting; review cost and SDK sampling separately
+    DisableIpMasking: false  // Retain IP masking
   }
 }
 
@@ -498,7 +518,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: 'ai-high-error-rate'
   location: 'global'
   properties: {
-    description: 'Alert when AI service error rate is high'
+    description: 'Alert when failed request count exceeds 10 in five minutes'
     severity: 2
     enabled: true
     scopes: [
@@ -527,18 +547,17 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 **Custom Dashboards for AI Metrics**:
 
 ```json
-// Dashboard configuration for AI workloads
 {
   "dashboard": {
     "name": "AI Application Monitoring",
     "tiles": [
       {
         "name": "OpenAI Request Volume",
-        "query": "requests | where name contains 'openai' | summarize count() by bin(timestamp, 5m)"
+        "query": "dependencies | where target contains 'openai' | summarize count() by bin(timestamp, 5m)"
       },
       {
         "name": "AI Response Latency",
-        "query": "requests | where name contains 'openai' | summarize avg(duration) by bin(timestamp, 5m)"
+        "query": "dependencies | where target contains 'openai' | summarize avg(duration) by bin(timestamp, 5m)"
       },
       {
         "name": "Token Usage",
@@ -552,6 +571,8 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   }
 }
 ```
+
+This JSON is an application-defined sketch, not an importable Azure portal dashboard schema. The token/cost queries require your app to emit those exact custom metrics; they are not created by AZD. Adapt dependency filters for your actual model endpoint/span names.
 
 ### 3. Health Checks and Uptime Monitoring
 
@@ -570,7 +591,7 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
     Enabled: true
     Frequency: 300  // 5 minutes
     Timeout: 120    // 2 minutes
-    Kind: 'ping'
+    Kind: 'standard'
     Locations: [
       {
         Id: 'us-east-2-azr'
@@ -579,50 +600,24 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
         Id: 'us-west-2-azr'
       }
     ]
-    Configuration: {
-      WebTest: '''
-        <WebTest Name="AI Health Check" 
-                 Id="8d2de8d2-a2b0-4c2e-9a0d-8f9c9a0b8c8d" 
-                 Enabled="True" 
-                 CssProjectStructure="" 
-                 CssIteration="" 
-                 Timeout="120" 
-                 WorkItemIds="" 
-                 xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" 
-                 Description="" 
-                 CredentialUserName="" 
-                 CredentialPassword="" 
-                 PreAuthenticate="True" 
-                 Proxy="default" 
-                 StopOnError="False" 
-                 RecordedResultFile="" 
-                 ResultsLocale="">
-          <Items>
-            <Request Method="GET" 
-                     Guid="a5f10126-e4cd-570d-961c-cea43999a200" 
-                     Version="1.1" 
-                     Url="${webApp.properties.defaultHostName}/health" 
-                     ThinkTime="0" 
-                     Timeout="120" 
-                     ParseDependentRequests="True" 
-                     FollowRedirects="True" 
-                     RecordResult="True" 
-                     Cache="False" 
-                     ResponseTimeGoal="0" 
-                     Encoding="utf-8" 
-                     ExpectedHttpStatusCode="200" 
-                     ExpectedResponseUrl="" 
-                     ReportingName="" 
-                     IgnoreHttpStatusCode="False" />
-          </Items>
-        </WebTest>
-      '''
+    Request: {
+      RequestUrl: 'https://${webApp.properties.defaultHostName}/health'
+      HttpVerb: 'GET'
+      FollowRedirects: true
+      ParseDependentRequests: false
+    }
+    ValidationRules: {
+      ExpectedHttpStatusCode: 200
+      SSLCheck: true
+      SSLCertRemainingLifetimeCheck: 7
     }
   }
 }
 ```
 
 ## Disaster Recovery and High Availability
+
+The preceding test assumes an existing App Service `webApp` and Application Insights resource. Standard availability tests are billable and require a reachable endpoint; private-only apps need an appropriate private monitoring design. URL ping tests are deprecated; use [standard availability tests](https://learn.microsoft.com/azure/azure-monitor/app/availability).
 
 ### 1. Multi-Region Deployment
 
@@ -634,16 +629,16 @@ services:
     project: ./api
     host: containerapp
     env:
-      - AZURE_REGION=eastus
+      AZURE_REGION: eastus
   api-secondary:
     project: ./api
     host: containerapp
     env:
-      - AZURE_REGION=westus2
+      AZURE_REGION: westus2
 ```
 
 ```bicep
-// Traffic Manager for global load balancing
+// Separate App Service topology, not the Container Apps declarations above
 resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = {
   name: trafficManagerProfileName
   location: 'global'
@@ -686,6 +681,8 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
+Environment variables do not choose resource locations. IaC must provision distinct regional hosts and bind each service with `resourceName` or `azd-service-name` tags. The Traffic Manager example is a **separate App Service topology** (`primaryAppService`/`secondaryAppService`), not routing for the Container Apps declarations. Container Apps requires an appropriately configured external endpoint/front door, TLS/custom-domain routing, and health probes.
+
 ### 2. Data Backup and Recovery
 
 ```bicep
@@ -706,36 +703,9 @@ resource backupVault 'Microsoft.DataProtection/backupVaults@2023-05-01' = {
   }
 }
 
-// Backup policy for AI models and data
-resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023-05-01' = {
-  parent: backupVault
-  name: 'ai-data-backup-policy'
-  properties: {
-    policyRules: [
-      {
-        backupParameters: {
-          backupType: 'Full'
-          objectType: 'AzureBackupParams'
-        }
-        trigger: {
-          schedule: {
-            repeatingTimeIntervals: [
-              'R/2024-01-01T02:00:00+00:00/P1D'  // Daily at 2 AM
-            ]
-          }
-          objectType: 'ScheduleBasedTriggerContext'
-        }
-        dataStore: {
-          datastoreType: 'VaultStore'
-          objectType: 'DataStoreInfoBase'
-        }
-        name: 'BackupDaily'
-        objectType: 'AzureBackupRule'
-      }
-    ]
-  }
-}
 ```
+
+The vault alone backs up nothing. Configure a **workload-specific supported policy and backup instance**, source permissions, retention, and restore tests using [Azure Backup support matrices](https://learn.microsoft.com/azure/backup/backup-support-matrix). There is no generic Azure Backup policy for hosted Azure OpenAI model deployments. Keep infrastructure/model deployment definitions in source control; protect uploaded documents, application data, and fine-tuning artifacts using each backing service's supported backup/export features. Define and test RPO/RTO explicitly.
 
 ## DevOps and CI/CD Integration
 
@@ -775,83 +745,51 @@ jobs:
           python scripts/test_ai_safety.py
           python scripts/validate_prompts.py
 
-  deploy-staging:
-    needs: test
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Setup AZD
-        uses: Azure/setup-azd@v2
-        
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-          
-      - name: Deploy to Staging
-        run: |
-          azd env select staging
-          azd deploy
-
-  deploy-production:
-    needs: test
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Setup AZD
-        uses: Azure/setup-azd@v2
-        
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-          
-      - name: Deploy to Production
-        run: |
-          azd env select production
-          azd deploy
-          
-      - name: Run Production Health Checks
-        run: |
-          python scripts/health_check.py --env production
 ```
+
+This is the **test-only portion** of a workflow and assumes you have created `requirements.txt`, `tests/`, and the two safety scripts. Add the authenticated OIDC provisioning/deployment jobs from [CI/CD Pipeline Configuration](#cicd-pipeline-configuration), with `needs: test`, a trusted push/manual trigger, and protected GitHub environments. Do not deploy untrusted pull-request code with cloud credentials. A fresh runner has no selected local AZD environment; supply the environment/subscription/location inputs and use `azd auth login`, not just `azure/login`.
 
 ### 2. Infrastructure Validation
 
 ```bash
 # scripts/validate_infrastructure.sh
 #!/bin/bash
+set -euo pipefail
 
 echo "Validating AI infrastructure deployment..."
 
-# Check if all required services are running
-services=("openai" "search" "storage" "keyvault")
-for service in "${services[@]}"; do
-    echo "Checking $service..."
-    if ! az resource list --resource-type "Microsoft.CognitiveServices/accounts" --query "[?contains(name, '$service')]" -o tsv; then
-        echo "ERROR: $service not found"
+# Requires Azure CLI login and the resource group selected explicitly.
+: "${AZURE_RESOURCE_GROUP:?Set AZURE_RESOURCE_GROUP}"
+: "${AZURE_OPENAI_NAME:?Set AZURE_OPENAI_NAME}"
+: "${AZURE_OPENAI_CHAT_DEPLOYMENT:?Set the actual deployment name}"
+
+# A successful empty list is not proof that resources exist.
+types=("Microsoft.CognitiveServices/accounts" "Microsoft.Search/searchServices"
+       "Microsoft.Storage/storageAccounts" "Microsoft.KeyVault/vaults")
+for resource_type in "${types[@]}"; do
+    count=$(az resource list --resource-group "$AZURE_RESOURCE_GROUP" \
+        --resource-type "$resource_type" --query "length(@)" -o tsv)
+    if [[ "$count" -lt 1 ]]; then
+        echo "ERROR: No $resource_type found in $AZURE_RESOURCE_GROUP"
         exit 1
     fi
 done
 
 # Validate OpenAI model deployments
 echo "Validating OpenAI model deployments..."
-models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
-if [[ ! $models == *"gpt-4.1-mini"* ]]; then
-  echo "ERROR: Required model gpt-4.1-mini not deployed"
+state=$(az cognitiveservices account deployment show \
+  --name "$AZURE_OPENAI_NAME" --resource-group "$AZURE_RESOURCE_GROUP" \
+  --deployment-name "$AZURE_OPENAI_CHAT_DEPLOYMENT" \
+  --query "properties.provisioningState" -o tsv)
+if [[ "$state" != "Succeeded" ]]; then
+    echo "ERROR: Required model deployment is not provisioned successfully"
     exit 1
 fi
 
-# Test AI service connectivity
-echo "Testing AI service connectivity..."
-python scripts/test_connectivity.py
-
 echo "Infrastructure validation completed successfully!"
 ```
+
+Expected: a zero exit and the completion message only when all expected types exist and the named model deployment is provisioned. This checks inventory/provisioning state, **not** resource health, exact topology, RBAC, network reachability, or model behavior. Adapt the expected types to your architecture, then perform a separate authenticated application readiness test.
 
 ## Production Readiness Checklist
 
@@ -905,18 +843,22 @@ echo "Infrastructure validation completed successfully!"
 
 ## Performance Benchmarks
 
-### Typical Production Metrics
+### Illustrative Production Targets
+
+These are example SLOs to negotiate and load-test, not measured benchmarks or guarantees. Response latency depends on model/output length; monthly token spend depends on traffic and prices, not token count alone.
 
 | Metric | Target | Monitoring |
 |--------|--------|------------|
 | **Response Time** | < 2 seconds | Application Insights |
 | **Availability** | 99.9% | Uptime monitoring |
 | **Error Rate** | < 0.1% | Application logs |
-| **Token Usage** | < $500/month | Cost management |
+| **Model Spend** | < $500/month (example budget) | Cost management |
 | **Concurrent Users** | 1000+ | Load testing |
 | **Recovery Time** | < 1 hour | Disaster recovery tests |
 
 ### Load Testing
+
+The following is an interface sketch for a load-test script **you must implement**; this repository does not supply `scripts/load_test.py`. Define request payloads, authentication, representative workloads, percentile latency/error assertions, and a spending cap in your chosen load-test tool before running it:
 
 ```bash
 # Load testing script for AI applications
@@ -951,6 +893,8 @@ Based on Microsoft Foundry Discord community feedback:
 
 AZD includes a growing set of AI-specific commands and extensions that streamline production AI workflows. These tools bridge the gap between local development and production deployment for AI workloads.
 
+> **Release review (2026-11-04):** The CLI guidance below was checked against the published releases of `azd` **1.37.2**, `azure.ai.agents` **1.0.0-beta.23**, and `azure.ai.evaluations` **1.0.0-beta.2**. Agents beta.23 requires `azd >= 1.37.0`; evaluations beta.2 requires `azd >= 1.33.0`. Use at least 1.37.0 for the combined workflow. This is a documentation/source review, not a live Azure deployment validation.
+
 ### AZD Extensions for AI
 
 AZD uses an extension system to add AI-specific capabilities. Install and manage extensions with:
@@ -960,10 +904,14 @@ AZD uses an extension system to add AI-specific capabilities. Install and manage
 azd extension list
 
 # Inspect installed extension details
+azd version
 azd extension show azure.ai.agents
 
 # Install the Foundry agents extension
 azd extension install azure.ai.agents
+
+# Install the separate Foundry evaluations extension
+azd extension install azure.ai.evaluations
 
 # Install the fine-tuning extension
 azd extension install azure.ai.finetune
@@ -980,13 +928,29 @@ azd extension upgrade --all
 | Extension | Purpose | Status |
 |-----------|---------|--------|
 | `azure.ai.agents` | Foundry Agent Service management | Preview |
+| `azure.ai.evaluations` | Evaluation datasets, evaluators, eval groups, and runs | Preview |
 | `azure.ai.skills` | Reusable agent skills | Preview |
 | `azure.ai.connections` | Foundry connections (data sources, tools) | Preview |
 | `azure.ai.finetune` | Foundry model fine-tuning | Preview |
 | `azure.ai.models` | Foundry custom models | Preview |
 | `azure.coding-agent` | Coding agent configuration | Available |
 
-> The `azure.ai.agents` extension evolves quickly. This course is validated against `0.1.40-preview`. Run `azd extension upgrade --all` to pick up the latest command set, and `azd extension show azure.ai.agents` to confirm your installed version.
+> Run `azd extension list --installed` and `azd extension show azure.ai.evaluations` to inspect installed versions. Upgrade the core CLI first using the [installation/update instructions](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) (for a Windows winget installation: `winget upgrade Microsoft.Azd`), then run `azd extension upgrade --all`. There is no core `azd upgrade` command. Review breaking changes before upgrading production automation; do not assume an extension upgrade preserves old command or configuration formats.
+
+### Recent Release Changes and Fixes
+
+| Release | What changes for this course |
+|---------|------------------------------|
+| `azd 1.37.0` | Adds stable deployment-preview APIs and fixes extension edits rewriting unrelated `azure.yaml` settings. |
+| `azd 1.37.1` | Fixes Ctrl+C propagation across extensions and distinguishes cancellation/timeouts from generic failures. |
+| `azd 1.37.2` | Improves provisioning validation: critical warnings default to **No**, fail without confirmation in unattended runs, and cancellation skips post-provision hooks. Also fixes unresolved environment values in Deployment Stacks deny lists when that alpha feature is enabled. |
+| Agents `beta.22` | Migrates evaluation to `azd ai eval`, changes optimization to the GA v1 API, requires plural `toolboxes`, and separates managed-harness, voice, and long-running preview opt-ins. Fixes environment-specific model selection and toolbox authentication. |
+| Agents `beta.23` | Exposes `init --harness`; fixes A2A 0.3 answer output, invalid prompt-agent paths/modules across infrastructure layers, activation-timeout diagnostics, and retained developer RBAC warnings. |
+| Evaluations `beta.2` | Requires camelCase evaluation configuration, adds static/simulated conversation authoring and explicit local-file sources, and fixes dataset identity/version handling, quality-gate counts, and failed-run diagnostics. |
+
+An agent activation timeout does **not** prove deployment failure: inspect the attempted version and its state before retrying. Developer RBAC warnings can remain even when provisioning succeeds; resolve the missing access before invoking as that developer.
+
+Sources: [AZD releases](https://github.com/Azure/azure-dev/releases), [agents beta.23 release](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.23), [agents beta.22 migration](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.22), and [evaluations beta.2 release](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-evaluations_1.0.0-beta.2).
 
 **What are the newer `skills` and `connections` extensions?**
 
@@ -999,37 +963,51 @@ You don't need these to deploy your first agents—stick with `azure.ai.agents` 
 
 ### Initializing Agent Projects with `azd ai agent init`
 
-The `azd ai agent init` command scaffolds a production-ready AI agent project integrated with Microsoft Foundry Agent Service:
+The `azd ai agent init` command scaffolds a Microsoft Foundry agent project. Use a current `azure.yaml` project template, not an implicit legacy agent manifest:
 
 ```bash
-# Initialize a new agent project from an agent manifest
-azd ai agent init -m <manifest-path-or-uri>
+# Initialize a new agent project from a local project template
+azd ai agent init --template ./templates/support-agent/azure.yaml
 
 # Initialize and target a specific Foundry project
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+azd ai agent init --template ./templates/support-agent/azure.yaml --project-id <foundry-project-id>
 
-# Initialize with a custom source directory
-azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
-
-# Target Container Apps as the host
-azd ai agent init -m agent-manifest.yaml --host containerapp
+# Adopt the template into a different directory
+azd ai agent init --template ./templates/support-agent/azure.yaml --src ./agents/my-agent
 ```
 
 **Key flags:**
 
 | Flag | Description |
 |------|-------------|
-| `-m, --manifest` | Path or URI to an agent manifest to add to your project |
+| `-t, --template` | Path or supported GitHub URI to an `azure.yaml` project document |
 | `-p, --project-id` | Existing Microsoft Foundry Project ID for your azd environment |
-| `-s, --src` | Directory to download the agent definition (defaults to `src/<agent-id>`) |
-| `--host` | Override the default host (e.g., `containerapp`) |
+| `-s, --src` | Source directory for generated agents, or target directory when adopting a project |
+| `--kind` | Initialize a `hosted`, `prompt`, or preview `prompt-voice` agent |
+| `--harness` | Optional execution harness for `--kind prompt`; requires its preview opt-in |
 | `-e, --environment` | The azd environment to use |
+
+`--manifest`/`-m` is a deprecated alias for `--template`/`-t`; renaming the flag does not convert an old manifest into a current project document. `--host containerapp` is not a current agent-init flag. For an ordinary Container Apps application, use `azd init --template` with a template declaring `host: containerapp`.
+
+For an existing project with exactly one `azure.ai.project` service, `azd ai agent add support-agent --file ./agents/support-agent.yaml` adds or updates a direct agent definition without provisioning or deploying. Runtime commands reject legacy implicit `agent.yaml`/AgentManifest and nested service `config:` definitions; migrate them to a current `azure.ai.agent` service. When init prints a `cd` next step, run it before `azd up`: init does not change your shell directory.
 
 **Production tip**: Use `--project-id` to connect directly to an existing Foundry project, keeping your agent code and cloud resources linked from the start.
 
+#### Optional Preview Features
+
+Managed harness, voice, and long-running invocation are independently disabled by default. Set only the switch for the feature you need in the **shell/CI process environment**, not with `azd env set`:
+
+| Feature | Process environment variable |
+|---------|------------------------------|
+| Managed harness (`init --kind prompt --harness ...`) | `AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` |
+| Voice (`init --kind prompt-voice`) | `AZD_ALPHA_ENABLE_AGENTS_VOICE=true` |
+| Long-running invocation | `AZD_ALPHA_ENABLE_AGENTS_LONG_RUNNING=true` |
+
+For example, use `export AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` in Bash or `$env:AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS = "true"` in PowerShell before running the relevant command. One switch does not enable the others. See the [released agents README](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/README.md) for all preview switches and limitations.
+
 ### Managing the Agent Lifecycle
 
-Beyond `init`, the `azure.ai.agents` extension provides commands for the full lifecycle of a hosted agent—testing, evaluating, optimizing, and retiring it:
+Use `azure.ai.agents` to test, inspect, optimize, and retire agents, and the separate `azure.ai.evaluations` extension to measure quality:
 
 ```bash
 # Invoke a deployed agent and view server response timing
@@ -1038,13 +1016,6 @@ azd ai agent invoke
 
 # Show the live endpoint configuration before changing it
 azd ai agent endpoint show
-
-# Generate an evaluation dataset for the agent
-azd ai agent eval generate --dataset ./eval/dataset.jsonl
-
-# Optimize agent instructions against your evaluation data
-# (requires an optimization_model in the agent project)
-azd ai agent optimize
 
 # Download the deployed source of a code-based hosted agent
 # (with SHA-256 verification)
@@ -1061,12 +1032,75 @@ azd ai agent delete --force
 |-------|---------|----------------|
 | Test | `azd ai agent invoke` | Validate responses and measure latency before release |
 | Inspect | `azd ai agent endpoint show` | Review endpoint auth/config; spot breaking changes early |
-| Measure | `azd ai agent eval generate` | Build a repeatable evaluation set from real traces |
-| Improve | `azd ai agent optimize` | Tune instructions against measured quality |
+| Measure | `azd ai eval init`, `generate`, `run start` | Define, deploy, and execute repeatable evaluations |
+| Improve | `azd ai agent optimize --eval <evaluation-name> --optimize-model <optimizer-deployment>` | Reuse a compatible evaluation to optimize the agent |
 | Recover | `azd ai agent code download` | Retrieve the exact deployed source for audit/rollback |
 | Retire | `azd ai agent delete --force` | Tear down an agent and its versions cleanly |
 
 > These are preview commands and may change between extension releases. Run `azd ai agent --help` to see the exact subcommands available in your installed version.
+
+`endpoint show` supports hosted, prompt, and voice agents, but endpoint updates are hosted-only; workflow agents are unsupported. Code download and the hosted-agent retirement example above are not generic operations for every agent kind.
+
+#### Evaluation Migration and Quality Checks
+
+Starting with agents **1.0.0-beta.22 (2026-10-23)**, legacy `azd ai agent eval` commands provide migration guidance instead of the former evaluation workflow. Do not copy old `eval generate --dataset ...` examples: evaluation now lives under **`azd ai eval`**.
+
+In an initialized agent project, authenticate with `azd auth login`, confirm the selected environment/Foundry project, and install `azure.ai.evaluations`. A judge model deployment is needed for model-based scoring; generation and conversation simulation can require their own model selections and incur additional charges.
+
+```bash
+# Scaffold evals/ and wire an azure.ai.eval service into azure.yaml
+azd ai eval init
+
+# Optionally synthesize a rubric and dataset from the agent
+azd ai eval generate
+
+# Review generated files, then register datasets, evaluators, and eval groups
+azd up
+
+# Start an evaluation and wait for its results
+azd ai eval run start --wait
+
+# Inspect runs and available test-case output
+azd ai eval run list
+azd ai eval run show <run-id>
+azd ai eval run output list <run-id>
+```
+
+Follow the interactive selections and printed next steps rather than assuming generated assets are already registered. Evaluation configuration normally lives in `evals/azure.eval.yaml`, referenced by the `azure.ai.eval` service in `azure.yaml`. Keys are **camelCase** (`evaluationLevel`, `maxSamples`, `initializationParameters`, `dataMapping`); old snake_case configuration keys are rejected. Paths inside a referenced configuration resolve relative to that file, not the repository root.
+
+For conversation evaluations, choose **static** to score completed transcripts without invoking an agent, or **simulation** to generate conversations from scenario seeds. Simulation needs an agent target, a simulator model, and a separate judge-model selection. For unattended commands, supply the inputs listed by `azd ai eval init --help` and `azd ai eval generate --help`; do not assume the generation model is also the judge or simulator.
+
+For CI, configure an explicit quality policy using `azd ai eval run start --help` (`--fail-on`) and treat a nonzero host exit as failure. A completed run is not automatically a quality pass. Review failed/errored rows and diagnostics; missing or inconsistent result counts are not evidence of success. Registered datasets retain their service identity/version; `--max-samples` cannot subset a registered dataset. Publish a smaller dataset deliberately, or use a supported local-file source.
+
+```bash
+# Example CI policy: at least 90% of all test cases must pass
+azd ai eval run start --wait --fail-on "pass-rate=0.9"
+```
+
+The pass-rate gate uses passed test cases divided by total test cases; failed, errored, skipped, and otherwise unpassed rows count against it. Do not combine a gate with `--no-wait`, which returns before a verdict is available.
+
+#### Optimization Configuration Migration
+
+Optimization now uses the GA v1 API. To reuse a compatible **turn-level, dataset-backed** evaluation from the new workflow:
+
+```bash
+# Replace placeholders with the evaluation name and optimizer model deployment
+azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
+```
+
+`--eval` selects an evaluation; `--eval-config` selects its configuration file (including file-backed definitions). `--config` instead takes a **standalone optimization API request** in YAML or JSON. Do not pass an old agent `eval.yaml` or the new `azure.eval.yaml` to `--config`, and do not combine `--config` with `--eval`/`--eval-config`. Conversation, trace-backed, or simulation evaluations are not interchangeable with the dataset-backed optimization shortcut; use the supported optimization request format for those scenarios. Review candidates before applying or deploying them.
+
+See the [evaluations reference for the reviewed release](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-evaluations_1.0.0-beta.2/cli/azd/extensions/azure.ai.evaluations/README.md) and [optimization command source for the reviewed release](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/internal/cmd/optimize.go) for exact options.
+
+#### Read-Only Hosted-Agent Deployment Preview
+
+For an existing Foundry-bound environment with a unified `azure.ai.agent` service of `kind: hosted`, compare supported configuration before deploying:
+
+```bash
+azd deploy <service-name> --preview --no-prompt
+```
+
+This preview does not deploy the agent. It is not a complete infrastructure/security diff: prompt/voice/workflow agents, legacy configuration layouts, and some hosted settings are outside its scope. An `unknown` result is not approval to deploy. There is no standalone `azd ai agent deploy` or agent `--dry-run` command; use the core deployment workflow.
 
 ### Model Context Protocol (MCP) with `azd mcp`
 
@@ -1091,11 +1125,11 @@ The MCP server exposes your azd project context—environments, services, and Az
 For production AI workloads, you can generate and customize Infrastructure as Code rather than relying on automatic provisioning:
 
 ```bash
-# Generate Bicep/Terraform files from your project definition
+# Generate supported infrastructure for this project type
 azd infra generate
 ```
 
-This writes IaC to disk so you can:
+Support depends on the project/host and installed providers; this is not a general reverse-engineering command for arbitrary Azure resources or a promise to generate both Bicep and Terraform. Run `azd infra generate --help` and inspect the generated format. Where supported, writing IaC to disk lets you:
 - Review and audit infrastructure before deploying
 - Add custom security policies (network rules, private endpoints)
 - Integrate with existing IaC review processes
@@ -1114,7 +1148,7 @@ hooks:
     run: scripts/validate-quotas.sh    # Check AI model quota before provisioning
   postprovision:
     shell: sh
-    run: scripts/configure-networking.sh  # Set up private endpoints
+    run: scripts/verify-networking.sh  # Verify IaC-provisioned private connectivity
   predeploy:
     shell: sh
     run: scripts/run-ai-safety-tests.sh  # Run prompt safety checks
@@ -1141,7 +1175,7 @@ azd hooks run predeploy
 | Hook | Use Case |
 |------|----------|
 | `preprovision` | Validate subscription quotas for AI model capacity |
-| `postprovision` | Configure private endpoints, deploy model weights |
+| `postprovision` | Verify private connectivity and required resource outputs |
 | `predeploy` | Run AI safety tests, validate prompt templates |
 | `postdeploy` | Smoke test agent responses, verify model connectivity |
 
@@ -1158,7 +1192,7 @@ azd pipeline config --provider github
 ```
 
 This command:
-- Creates a service principal with least-privilege access
+- Creates or configures a pipeline identity; review its generated role scope/permissions rather than assuming least privilege
 - Configures federated credentials (no stored secrets)
 - Generates or updates your pipeline definition file
 - Sets required environment variables in your CI/CD system
@@ -1190,7 +1224,7 @@ azd will, interactively:
 
 **3. Understand the generated workflow**
 
-azd adds `.github/workflows/azure-dev.yml`. The key parts look like this:
+For a supported template, configure/review `.github/workflows/azure-dev.yml`. The key parts look like this (the template must supply the app's toolchain and environment parameters):
 
 ```yaml
 # .github/workflows/azure-dev.yml
@@ -1248,7 +1282,7 @@ azd env set AZURE_OPENAI_CAPACITY 100
 # 2. Configure the pipeline
 azd pipeline config --provider github
 
-# 3. Pipeline runs azd deploy on every push to main
+# 3. Review the generated trigger, provisioning/deployment steps, and approvals
 ```
 
 #### Step-by-step: Azure DevOps Pipelines
@@ -1269,14 +1303,14 @@ azd will:
 - Ask for your Azure DevOps organization and project
 - Create (or reuse) a **service connection** to Azure using a service principal
 - Configure **workload identity federation (OIDC)** so no client secret is stored
-- Commit an `azure-dev.yml` pipeline definition to your repo
+- Configure a pipeline definition (commonly `.azdo/pipelines/azure-dev.yml`) from the project's pipeline template
 
-**3. Review the generated `azure-dev.yml`**
+**3. Review the generated pipeline**
 
-azd writes a pipeline that provisions and deploys on every push to `main`:
+Use the project's generated pipeline, including its **Azure service connection and AZD authentication steps**. The official [Azure Pipelines setup guide](https://learn.microsoft.com/azure/developer/azure-developer-cli/pipeline-azure-pipelines) shows the installer fragment below; this is **installation only**, not a runnable authenticated deployment workflow:
 
 ```yaml
-# azure-dev.yml
+# .azdo/pipelines/azure-dev.yml (installer fragment only)
 trigger:
   - main
 
@@ -1284,23 +1318,11 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-  - task: setup-azd@1
+  - task: setup-azd@0
     displayName: Install azd
-
-  - script: azd provision --no-prompt
-    displayName: Provision Infrastructure
-    env:
-      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
-      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
-      AZURE_LOCATION: $(AZURE_LOCATION)
-
-  - script: azd deploy --no-prompt
-    displayName: Deploy Application
-    env:
-      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
-      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
-      AZURE_LOCATION: $(AZURE_LOCATION)
 ```
+
+Install the AZD Azure DevOps extension if that task is not available in your organization. Do not copy bare `azd provision`/`azd deploy` shell steps without authentication: having a service connection configured does not automatically log every process into AZD. Follow the generated template's OIDC login and authorized task context, and supply the selected environment/subscription/location.
 
 **4. Where the variables come from**
 
@@ -1334,7 +1356,7 @@ This is particularly useful for expanding production AI applications—for examp
 - **Microsoft Foundry Documentation**: [Official docs](https://learn.microsoft.com/azure/ai-studio/)
 - **Community Templates**: [Azure Samples](https://github.com/Azure-Samples)
 - **Discord Community**: [#Azure channel](https://discord.gg/microsoft-azure)
-- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 open agent skills for Azure AI, Foundry, deployment, cost optimization, and diagnostics. Install in your editor:
+- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - Reusable agent skills for Azure AI, Foundry, deployment, cost optimization, and diagnostics. Install in your editor:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
@@ -1345,7 +1367,7 @@ This is particularly useful for expanding production AI applications—for examp
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
 - **📖 Current Chapter**: Chapter 8 - Production & Enterprise Patterns
 - **⬅️ Previous Chapter**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Also Related**: [AI Workshop Lab](ai-workshop-lab.md)
-- **� Course Complete**: [AZD For Beginners](../../README.md)
+- **⬅️ Also Related**: [AI Workshop Lab](../chapter-02-ai-development/ai-workshop-lab.md)
+- **🎯 Course Complete**: [AZD For Beginners](../../README.md)
 
 **Remember**: Production AI workloads require careful planning, monitoring, and continuous optimization. Start with these patterns and adapt them to your specific requirements.

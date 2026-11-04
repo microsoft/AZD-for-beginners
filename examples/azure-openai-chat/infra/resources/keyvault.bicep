@@ -1,5 +1,4 @@
 param location string
-param environmentName string
 param resourceToken string
 param principalId string
 param tags object

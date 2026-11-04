@@ -1,0 +1,15 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "name": { "value": "${API_GATEWAY_NAME}" },
+    "location": { "value": "${AZURE_LOCATION}" },
+    "tags": { "value": { "azd-env-name": "${AZURE_ENV_NAME}" } },
+    "containerAppsEnvironmentName": { "value": "${AZURE_CONTAINER_ENVIRONMENT_NAME}" },
+    "containerRegistryName": { "value": "${AZURE_CONTAINER_REGISTRY_NAME}" },
+    "imageName": { "value": "api-gateway" },
+    "applicationInsightsName": { "value": "${APPLICATIONINSIGHTS_NAME}" },
+    "productServiceUrl": { "value": "${PRODUCT_SERVICE_HOST}" },
+    "containerImage": { "value": "${SERVICE_API_GATEWAY_IMAGE_NAME}" }
+  }
+}

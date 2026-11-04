@@ -4,11 +4,13 @@ metadata:
 
 services:
   api-gateway:
+    module: app/api-gateway
     project: ./src/api-gateway
     language: js
     host: containerapp
   
   product-service:
+    module: app/product-service
     project: ./src/product-service
     language: python
     host: containerapp

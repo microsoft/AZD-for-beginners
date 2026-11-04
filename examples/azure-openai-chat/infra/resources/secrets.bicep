@@ -1,7 +1,10 @@
 param keyVaultName string
 param openAIEndpoint string
-@secure()
-param openAIKey string
+param openAIName string
+
+resource openAI 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
+  name: openAIName
+}
 
 // Get Key Vault reference
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
@@ -22,6 +25,6 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
   parent: keyVault
   name: 'openai-api-key'
   properties: {
-    value: openAIKey
+    value: openAI.listKeys().key1
   }
 }

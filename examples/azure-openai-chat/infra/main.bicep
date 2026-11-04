@@ -10,12 +10,12 @@ param environmentName string
 param location string
 
 @description('OpenAI model deployment name')
-param openAIModelName string = 'gpt-4'
+param openAIModelName string = 'gpt-4.1'
 
 @description('OpenAI model version')
-param openAIModelVersion string = 'turbo-2024-04-09'
+param openAIModelVersion string = '2025-04-14'
 
-@description('OpenAI deployment capacity (TPM in thousands)')
+@description('OpenAI deployment capacity units; quota mapping depends on model and SKU')
 param openAICapacity int = 20
 
 @description('Id of the user or app to assign application roles')
@@ -38,7 +38,6 @@ module keyVault './resources/keyvault.bicep' = {
   scope: rg
   params: {
     location: location
-    environmentName: environmentName
     resourceToken: resourceToken
     principalId: principalId
     tags: tags
@@ -67,12 +66,8 @@ module secrets './resources/secrets.bicep' = {
   params: {
     keyVaultName: keyVault.outputs.keyVaultName
     openAIEndpoint: openAI.outputs.openAIEndpoint
-    openAIKey: openAI.outputs.openAIKey
+    openAIName: openAI.outputs.openAIName
   }
-  dependsOn: [
-    keyVault
-    openAI
-  ]
 }
 
 // Outputs for azd
@@ -80,7 +75,6 @@ output AZURE_LOCATION string = location
 output AZURE_RESOURCE_GROUP string = rg.name
 output AZURE_OPENAI_ENDPOINT string = openAI.outputs.openAIEndpoint
 output AZURE_OPENAI_NAME string = openAI.outputs.openAIName
-output AZURE_OPENAI_API_KEY string = openAI.outputs.openAIKey
 output AZURE_OPENAI_MODEL string = openAIModelName
 output AZURE_OPENAI_RESOURCE_ID string = openAI.outputs.openAIResourceId
 output AZURE_KEY_VAULT_NAME string = keyVault.outputs.keyVaultName

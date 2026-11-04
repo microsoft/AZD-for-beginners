@@ -3,11 +3,13 @@
 **Chapter Navigation:**
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
 - **📖 Current Chapter**: Chapter 3 - Configuration & Authentication
-- **⬅️ Previous**: [Your First Project](first-project.md)
+- **⬅️ Previous**: [Your First Project](../chapter-01-foundation/first-project.md)
 - **➡️ Next**: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
 - **🚀 Next Chapter**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Introduction
+
+> Reviewed against `azd 1.37.2` (November 2026). Bash commands assume an initialized azd project. Unless explicitly described as a complete file, YAML/Bicep snippets are fragments to merge into matching project files, not standalone runnable projects.
 
 This comprehensive guide covers all aspects of configuring Azure Developer CLI for optimal development and deployment workflows. You'll learn about the configuration hierarchy, environment management, authentication methods, and advanced configuration patterns that enable efficient and secure Azure deployments.
 
@@ -59,12 +61,14 @@ This means there's nothing fundamentally new to learn. If you understand how azd
 
 ## Configuration Hierarchy
 
-azd uses a hierarchical configuration system:
-1. **Command-line flags** (highest priority)
-2. **Environment variables**
-3. **Local project configuration** (`.azd/config.json`)
-4. **Global user configuration** (`~/.azd/config.json`)
-5. **Default values** (lowest priority)
+azd has distinct configuration surfaces, not one universal overlay:
+- **Global user preferences**: `~/.azd/config.json`, managed by `azd config`.
+- **Project definition**: `azure.yaml` specifies services, infrastructure, and hooks.
+- **Local environment selection**: `.azure/config.json`.
+- **Per-environment values**: `.azure/<name>/.env`, managed by `azd env`; additional settings live in that environment's `config.json`.
+- **Flags and process variables**: override only the settings supported by a particular command/provider.
+
+An arbitrary `azd env set` value does not automatically become an infrastructure parameter or deployed application setting. Explicitly reference it in the parameter file, supported service configuration, or a hook.
 
 ## Global Configuration
 
@@ -76,9 +80,6 @@ azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 # Set default location
 azd config set defaults.location "eastus2"
 
-# Set default resource group naming convention
-azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
-
 # View all global configuration
 azd config show
 
@@ -88,18 +89,18 @@ azd config unset defaults.location
 
 ### Common Global Settings
 ```bash
-# Development preferences
-azd config set alpha.enable true                    # Enable alpha features
-azd config set telemetry.enabled false             # Disable telemetry
-azd config set output.format json                  # Set output format
+# Discover supported settings instead of inventing configuration keys
+azd config options
+azd config list-alpha
 
-# Security settings
-azd config set auth.useAzureCliCredential true     # Use Azure CLI for auth
-azd config set tls.insecure false                  # Enforce TLS verification
+# Explicit opt-in only: use Azure CLI credentials rather than azd's default login
+azd config set auth.useAzCliAuth true
+# Restore azd's default credential behavior
+azd config unset auth.useAzCliAuth
 
-# Performance tuning
-azd config set provision.parallelism 5             # Parallel resource creation
-azd config set deploy.timeout 30m                  # Deployment timeout
+# Use per-command flags for supported behavior
+azd show --output json
+azd deploy --timeout 1800   # seconds; stops waiting, not the Azure-side deployment
 ```
 
 ## 🏗️ Project Configuration
@@ -112,7 +113,6 @@ The `azure.yaml` file is the heart of your azd project:
 name: my-awesome-app
 metadata:
   template: my-template@1.0.0
-  templateBranch: main
 
 # Service definitions
 services:
@@ -129,21 +129,13 @@ services:
     language: python
     host: containerapp
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-    
-  # Database service
-  database:
-    project: ./src/db
-    host: postgres
+      context: .
+      path: Dockerfile
     
 # Infrastructure configuration
 infra:
   provider: bicep                   # Infrastructure provider
   path: ./infra                    # Infrastructure code location
-  parameters:
-    environmentName: ${AZURE_ENV_NAME}
-    location: ${AZURE_LOCATION}
 
 # Deployment hooks
 hooks:
@@ -181,6 +173,8 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
+This is a **project-definition example**, not a supplied starter. Create the referenced source directories, hook scripts, package scripts, and matching `infra/main.bicep`/`main.parameters.json` before running it. Databases belong in infrastructure; `postgres` is not a built-in service host. Infrastructure parameters go in the provider's parameter file, not `infra.parameters`.
+
 ### Service Configuration Options
 
 #### Host Types
@@ -202,28 +196,35 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Language-Specific Settings
+#### Language-Specific Build Hooks
+
+The following service fragments illustrate hooks; merge them with each service's real `project` and `host`. `buildCommand` and `startCommand` are not generic azd service properties. Configure startup in the application, Dockerfile, or host infrastructure.
+
 ```yaml
 services:
   node-app:
+    project: ./src/node
+    host: appservice
     language: js
-    buildCommand: npm run build
-    startCommand: npm start
+    hooks:
+      prepackage:
+        shell: sh
+        run: npm run build
     
   python-app:
+    project: ./src/python
+    host: appservice
     language: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
     
   dotnet-app:
+    project: ./src/dotnet
+    host: appservice
     language: csharp
-    buildCommand: dotnet build
-    startCommand: dotnet run
     
   java-app:
+    project: ./src/java
+    host: appservice
     language: java
-    buildCommand: mvn clean package
-    startCommand: java -jar target/app.jar
 ```
 
 ## 🌟 Environment Management
@@ -241,7 +242,7 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
 ### Environment Configuration
-Each environment has its own configuration in `.azure/<env-name>/config.json`:
+Core environment values live in `.azure/<env-name>/.env`, including `AZURE_ENV_NAME`, `AZURE_SUBSCRIPTION_ID`, and `AZURE_LOCATION`. Use `azd env config get/set` for additional environment JSON settings. The following JSON is **conceptual application state**, not an azd config schema; do not copy it into azd's files:
 
 ```json
 {
@@ -264,6 +265,9 @@ Each environment has its own configuration in `.azure/<env-name>/config.json`:
 ```
 
 ### Environment Variables
+
+**Plaintext demonstration only.** Ordinary `azd env set` values are written to `.azure/<name>/.env` and can be printed by read commands. Do not use the example API key as a real credential. For secrets, use `azd env set-secret` and explicit runtime wiring.
+
 ```bash
 # Set environment-specific variables
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
@@ -287,7 +291,7 @@ azd env get-values | grep DEBUG
 ```
 
 ### Environment Templates
-Create `.azure/env.template` for consistent environment setup:
+Create a **non-secret, manually maintained** `.env.example` in the project root for consistent setup. azd does not automatically load a file named `env.template`:
 ```bash
 # Required variables
 AZURE_SUBSCRIPTION_ID=
@@ -313,8 +317,8 @@ When more than one person works on a project, you need to agree on **what travel
 .azure/
 ├── config.json              # which env is currently selected (local)
 └── <env-name>/
-    ├── config.json          # subscription, location, resource IDs
-    └── .env                 # environment variables (may contain secrets!)
+    ├── config.json          # additional environment settings
+    └── .env                 # subscription, location, outputs; may contain secrets!
 ```
 
 **What to gitignore.** azd's default `.gitignore` already excludes `.azure/`. Keep it that way—the `.env` files can contain secrets, and resource IDs are specific to whoever provisioned them. Each teammate creates their **own** environment locally:
@@ -333,7 +337,7 @@ azd env select staging       # make 'staging' the active environment
 azd env get-values           # confirm you're pointed at the right one
 ```
 
-**Providing non-secret defaults to the team.** Commit a template (like the `.azure/env.template` above) so everyone knows which variables to set—but never commit the filled-in values. New teammates copy the template and fill in their own.
+**Providing non-secret defaults to the team.** Commit `.env.example` outside the ignored `.azure/` directory. New teammates copy it to a local ignored file, fill in values, and explicitly import it with `azd env set --file <local-file>`. Never import blank placeholders over a working environment.
 
 **Environments in CI/CD.** Pipelines don't read your local `.azure/` folder. Instead, provide the environment values as pipeline variables/secrets, and azd reads them from the process environment:
 
@@ -341,7 +345,7 @@ azd env get-values           # confirm you're pointed at the right one
 # In CI, azd reads these from the environment, not from .azure/
 export AZURE_ENV_NAME=production
 export AZURE_LOCATION=eastus2
-export AZURE_SUBSCRIPTION_ID=<sub-id>
+export AZURE_SUBSCRIPTION_ID="<sub-id>"
 azd provision --no-prompt
 azd deploy --no-prompt
 ```
@@ -352,14 +356,14 @@ azd deploy --no-prompt
 
 ### Azure CLI Integration
 ```bash
-# Use Azure CLI credentials (default)
-azd config set auth.useAzureCliCredential true
+# Explicit opt-in; NOT the default
+azd config set auth.useAzCliAuth true
 
 # Login with specific tenant
-az login --tenant <tenant-id>
+az login --tenant "<tenant-id>"
 
 # Set default subscription
-az account set --subscription <subscription-id>
+az account set --subscription "<subscription-id>"
 ```
 
 ### Service Principal Authentication
@@ -370,17 +374,18 @@ export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Or configure directly
-azd config set auth.clientId "your-client-id"
-azd config set auth.tenantId "your-tenant-id"
+# Authenticate azd explicitly (prefer pipeline federation over a long-lived secret)
+azd auth login --client-id "$AZURE_CLIENT_ID" \
+  --client-secret "$AZURE_CLIENT_SECRET" --tenant-id "$AZURE_TENANT_ID"
 ```
 
 ### Managed Identity
 For Azure-hosted environments:
 ```bash
 # Enable managed identity authentication
-azd config set auth.useMsi true
-azd config set auth.msiClientId "your-managed-identity-client-id"
+azd auth login --managed-identity
+# Alternative: choose an identity assigned to the host by client ID
+azd auth login --managed-identity --client-id "<managed-identity-client-id>"
 ```
 
 ## 🏗️ Infrastructure Configuration
@@ -409,12 +414,13 @@ Configure infrastructure parameters in `infra/main.parameters.json`:
 ```
 
 ### Terraform Configuration
-For Terraform projects, configure in `infra/terraform.tfvars`:
-```hcl
-environment_name = "${AZURE_ENV_NAME}"
-location = "${AZURE_LOCATION}"
-app_service_sku = "B1"
-database_sku = "GP_Gen5_2"
+For Terraform projects, azd substitutes placeholders in `infra/main.tfvars.json`. These names must match declared Terraform input variables:
+```json
+{
+  "environment_name": "${AZURE_ENV_NAME}",
+  "location": "${AZURE_LOCATION}",
+  "app_service_sku": "B1"
+}
 ```
 
 ## 🚀 Deployment Configuration
@@ -425,21 +431,27 @@ database_sku = "GP_Gen5_2"
 services:
   web:
     project: ./src/web
+    host: appservice
     language: js
-    buildCommand: npm run build:prod
-    buildEnvironment:
-      NODE_ENV: production
-      REACT_APP_API_URL: ${API_URL}
     dist: build
+    hooks:
+      prepackage:
+        shell: sh
+        run: |
+          set -e
+          NODE_ENV=production REACT_APP_API_URL="$API_URL" npm run build:prod
     
   api:
     project: ./src/api
+    host: appservice
     language: python
-    buildCommand: |
-      pip install -r requirements.txt
-      python -m pytest tests/
-    buildEnvironment:
-      PYTHONPATH: src
+    hooks:
+      prepackage:
+        shell: sh
+        run: |
+          set -e
+          python -m pip install -r requirements.txt
+          PYTHONPATH=src python -m pytest tests/
 ```
 
 ### Docker Configuration
@@ -449,47 +461,37 @@ services:
     project: ./src/api
     host: containerapp
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-      target: production
+      context: .
+      path: Dockerfile
       buildArgs:
-        NODE_ENV: production
-        API_VERSION: v1.0.0
+        - NODE_ENV=production
+        - API_VERSION=v1.0.0
 ```
-Example `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
+Paths are relative to the service project. The Dockerfile must declare any `ARG` values it consumes. For a multi-stage build, put the deployable stage last or use a custom packaging workflow; `docker.target` is not a supported property in the reviewed schema.
 
 ## 🔧 Advanced Configuration
 
 ### Custom Resource Naming
-```bash
-# Set naming conventions
-azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
-azd config set naming.storageAccount "{project}{env}sa"
-azd config set naming.keyVault "kv-{project}-{env}"
+```yaml
+# azure.yaml fragment: override resource-group discovery where appropriate
+resourceGroup: rg-${AZURE_ENV_NAME}
 ```
+
+Define actual resource names in Bicep/Terraform and keep resource-group creation consistent with this setting. There are no generic `naming.storageAccount` or `naming.keyVault` configuration keys.
 
 ### Network Configuration
-```yaml
-# In azure.yaml
-infra:
-  provider: bicep
-  parameters:
-    vnetAddressPrefix: "10.0.0.0/16"
-    subnetAddressPrefix: "10.0.1.0/24"
-    enablePrivateEndpoints: true
+```json
+{
+  "vnetAddressPrefix": { "value": "10.0.0.0/16" },
+  "subnetAddressPrefix": { "value": "10.0.1.0/24" },
+  "enablePrivateEndpoints": { "value": true }
+}
 ```
 
+Merge these **illustrative parameter entries** into `infra/main.parameters.json` under `parameters`, and declare and consume the matching parameters in Bicep. They do nothing by themselves.
+
 ### Monitoring Configuration
-```yaml
-# In azure.yaml
-monitoring:
-  applicationInsights:
-    enabled: true
-    samplingPercentage: 100
-  logAnalytics:
-    enabled: true
-    retentionDays: 30
-```
+Provision Application Insights and Log Analytics in Bicep/Terraform and configure application telemetry in your SDK. There is no generic top-level `monitoring` block in `azure.yaml` that creates these resources. See [monitoring infrastructure](../chapter-04-infrastructure/provisioning.md#-monitoring-and-observability).
 
 ## 🎯 Environment-Specific Configurations
 
@@ -524,14 +526,15 @@ ENABLE_SECURITY_HEADERS=true
 
 ### Validate Configuration
 ```bash
-# Check configuration syntax
-azd config validate
+# Inspect supported global settings and current project
+azd config options
+azd show
 
 # Test environment variables
 azd env get-values
 
 # Validate infrastructure
-azd provision --dry-run
+azd provision --preview
 ```
 
 ### Configuration Scripts
@@ -549,9 +552,9 @@ if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   exit 1
 fi
 
-# Validate azure.yaml syntax
-if ! azd config validate; then
-  echo "Error: Invalid azure.yaml configuration"
+# Ask azd to load the project (not full schema or infrastructure validation)
+if ! azd show --output json; then
+  echo "Error: Could not load the azd project"
   exit 1
 fi
 
@@ -566,6 +569,11 @@ echo "Configuration validation passed!"
 database:
   connectionString: ${DATABASE_CONNECTION_STRING}
 
+```
+
+Avoid hardcoding sensitive values (separate illustrative configuration, not a second `database` key in the same file):
+
+```yaml
 # Avoid: Hardcode sensitive values
 database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
@@ -575,7 +583,6 @@ database:
 ```
 .azure/
 ├── config.json              # Global project config
-├── env.template             # Environment template
 ├── development/
 │   ├── config.json         # Dev environment config
 │   └── .env                # Dev environment variables
@@ -615,7 +622,7 @@ Document your configuration in `CONFIG.md`:
 
 ### Exercise 1: Multi-Environment Configuration (15 minutes)
 
-**Goal**: Create and configure three environments with different settings
+**Goal**: Create and configure three local environments with different values. Start in an initialized project; use unused names if these already exist. These application-specific values do not change telemetry/runtime settings until your template consumes them.
 
 ```bash
 # Create development environment
@@ -648,48 +655,47 @@ azd env select production && azd env get-values
 - [ ] Can switch between environments without errors
 - [ ] `azd env list` shows all three environments
 
-### Exercise 2: Secret Management (10 minutes)
+### Exercise 2: Key Vault Secret References (10-20 minutes)
 
-**Goal**: Practice secure configuration with sensitive data
+**Goal**: Store a Key Vault reference instead of plaintext. **Starting point:** an initialized environment, Azure sign-in, and access to a Key Vault with permissions to create/read a dummy secret. Vault operations can incur charges.
 
 ```bash
-# Set secrets (not displayed in output)
-azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
-azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+# Follow the interactive prompts; use a dummy training value, not a production key
+azd env set-secret TRAINING_API_KEY
 
 # Set non-secret config
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# View environment (secrets should be redacted)
-azd env get-values
-
-# Verify secrets are stored
-azd env get DB_PASSWORD  # Should show actual value
+# Inspect .azure/<environment>/.env locally: TRAINING_API_KEY should
+# contain an azd Key Vault reference, not the dummy secret text.
+# Do not print resolved values in CI or shared terminal logs.
 ```
 
 **Success Criteria:**
-- [ ] Secrets stored without displaying in terminal
-- [ ] `azd env get-values` shows redacted secrets
-- [ ] Individual `azd env get <SECRET_NAME>` retrieves actual value
+- [ ] Interactive command reports the selected vault and secret reference
+- [ ] Local `.env` contains a reference rather than the dummy secret
+- [ ] Can explain that runtime identity/RBAC and consumption must still be configured
+
+**Common issues:** a 403 requires the correct vault data-plane role and propagation time; `azd env set ... --secret` is not a valid command. Ordinary `get-values`/`get-value` output must not be assumed redacted. Remove the training reference with `azd env unset TRAINING_API_KEY`; this does not delete the vault secret, which you must clean up separately if you created it.
 
 ## Next Steps
 
-- [Your First Project](first-project.md) - Apply configuration in practice
+- [Your First Project](../chapter-01-foundation/first-project.md) - Apply configuration in practice
 - [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Use configuration for deployment
 - [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - Production-ready configurations
 
 ## References
 
 - [azd Configuration Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Environment Variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [azure.yaml Schema](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-schema)
+- [Environment Variables](https://learn.microsoft.com/azure/developer/azure-developer-cli/manage-environment-variables)
 
 ---
 
 **Chapter Navigation:**
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
 - **📖 Current Chapter**: Chapter 3 - Configuration & Authentication
-- **⬅️ Previous**: [Your First Project](first-project.md)
+- **⬅️ Previous**: [Your First Project](../chapter-01-foundation/first-project.md)
 - **➡️ Next Chapter**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
-- **Next Lesson**: [Your First Project](first-project.md)
+- **Next Lesson**: [Authentication & Security](authsecurity.md)

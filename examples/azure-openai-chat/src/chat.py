@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
 """
 Simple Azure OpenAI Chat Application
-Demonstrates GPT-4 integration with conversation history and cost tracking.
+Demonstrates Azure OpenAI integration with conversation history and cost estimates.
 """
 
 import os
 import sys
-import json
-from datetime import datetime
 from typing import List, Dict
-import time
+from config import Config
 
 try:
     from openai import AzureOpenAI
@@ -22,32 +20,30 @@ except ImportError:
 # Configuration
 AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
 AZURE_OPENAI_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")
-AZURE_OPENAI_MODEL = os.getenv("AZURE_OPENAI_MODEL", "gpt-4")
-AZURE_OPENAI_MAX_TOKENS = int(os.getenv("AZURE_OPENAI_MAX_TOKENS", "800"))
-AZURE_OPENAI_TEMPERATURE = float(os.getenv("AZURE_OPENAI_TEMPERATURE", "0.7"))
+AZURE_OPENAI_MODEL = os.getenv("AZURE_OPENAI_MODEL", "gpt-4.1")
 
-# Token pricing (USD per 1K tokens)
-PRICING = {
-    "gpt-4": {"input": 0.03, "output": 0.06},
-    "gpt-35-turbo": {"input": 0.0015, "output": 0.002}
-}
+# Illustrative non-cached gpt-4.1 Global Standard rates (USD per 1K tokens).
+# Override BOTH rates for another model/SKU; these are estimates, not billing data.
 
 class ChatSession:
     """Manages a chat session with Azure OpenAI"""
     
     def __init__(self):
-        if not AZURE_OPENAI_ENDPOINT or not AZURE_OPENAI_API_KEY:
-            raise ValueError(
-                "Missing required environment variables:\n"
-                "- AZURE_OPENAI_ENDPOINT\n"
-                "- AZURE_OPENAI_API_KEY\n\n"
-                "Run 'azd env get-values' to see deployed values."
-            )
+        self.config = Config()
+        valid, error = self.config.validate()
+        if not valid:
+            raise ValueError(f"{error}. Follow the README to load the endpoint and Key Vault secret.")
+        self.input_price = float(os.getenv("AZURE_OPENAI_INPUT_PRICE_PER_1K", "0.002"))
+        self.output_price = float(os.getenv("AZURE_OPENAI_OUTPUT_PRICE_PER_1K", "0.008"))
+        if self.input_price < 0 or self.output_price < 0:
+            raise ValueError("Token price estimates must be non-negative")
         
         self.client = AzureOpenAI(
             azure_endpoint=AZURE_OPENAI_ENDPOINT,
             api_key=AZURE_OPENAI_API_KEY,
-            api_version="2024-08-01-preview"
+            api_version="2024-10-21",
+            timeout=60.0,
+            max_retries=2
         )
         
         self.model = AZURE_OPENAI_MODEL
@@ -77,12 +73,12 @@ class ChatSession:
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=self.messages,
-                max_tokens=AZURE_OPENAI_MAX_TOKENS,
-                temperature=AZURE_OPENAI_TEMPERATURE
+                max_tokens=self.config.max_tokens,
+                temperature=self.config.temperature
             )
             
             # Extract response
-            assistant_message = response.choices[0].message.content
+            assistant_message = response.choices[0].message.content or "[No text returned; check content filtering.]"
             
             # Add to conversation history
             self.messages.append({
@@ -95,10 +91,9 @@ class ChatSession:
             completion_tokens = response.usage.completion_tokens
             total_tokens = response.usage.total_tokens
             
-            model_key = "gpt-4" if "gpt-4" in self.model else "gpt-35-turbo"
             cost = (
-                (prompt_tokens / 1000) * PRICING[model_key]["input"] +
-                (completion_tokens / 1000) * PRICING[model_key]["output"]
+                (prompt_tokens / 1000) * self.input_price +
+                (completion_tokens / 1000) * self.output_price
             )
             
             self.total_tokens += total_tokens
@@ -107,6 +102,8 @@ class ChatSession:
             return assistant_message, total_tokens, cost
             
         except OpenAIError as e:
+            # Do not keep a failed user turn in the next request's context.
+            self.messages.pop()
             if "429" in str(e):
                 return (
                     "⚠️ Rate limit exceeded. Please wait a moment and try again.",
@@ -122,9 +119,6 @@ class ChatSession:
             else:
                 return f"⚠️ Error: {str(e)}", 0, 0.0
         
-        except Exception as e:
-            return f"⚠️ Unexpected error: {str(e)}", 0, 0.0
-    
     def clear_history(self):
         """Clear conversation history (keeps system message)"""
         self.messages = [self.messages[0]]  # Keep system message
@@ -137,14 +131,14 @@ class ChatSession:
         print(f"   Estimated total cost: ${self.total_cost:.4f}")
         print(f"   Messages exchanged: {(len(self.messages) - 1) // 2}")
 
-def print_banner():
+def print_banner(session):
     """Print application banner"""
     print("=" * 60)
     print("🤖 Azure OpenAI Chat Application")
     print("=" * 60)
     print(f"Model: {AZURE_OPENAI_MODEL}")
     print(f"Endpoint: {AZURE_OPENAI_ENDPOINT}")
-    print(f"Max tokens: {AZURE_OPENAI_MAX_TOKENS}")
+    print(f"Max tokens: {session.config.max_tokens}")
     print("\nCommands:")
     print("  quit/exit - End session")
     print("  clear     - Clear conversation history")
@@ -154,10 +148,13 @@ def print_banner():
 
 def main():
     """Main chat loop"""
+    # Redirected Windows output otherwise defaults to a code page without emoji.
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     try:
         # Initialize session
         session = ChatSession()
-        print_banner()
+        print_banner(session)
         
         # Chat loop
         while True:

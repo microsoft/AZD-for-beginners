@@ -22,6 +22,23 @@ After reviewing changelog entries, you will be able to:
 
 ## Version History
 
+### Unreleased - 2026-11-04
+
+#### Fixed
+- Repaired English course navigation, moved-page paths, missing anchors, and obsolete external references, including the Chapter 2 link to the production AI guide.
+- Reviewed current guidance against published AZD 1.37.2, agents 1.0.0-beta.23, and evaluations 1.0.0-beta.2. Documented the separate `azd ai eval` workflow and optimization configuration migration.
+- Corrected unsupported CLI flags, authentication boundaries, plaintext environment/secret guidance, infrastructure updates, model configuration, and destructive recovery examples.
+- Refreshed the workshop against the current AI Agents sample, including actual hooks, configuration inputs, evaluation tests, red-teaming entry points, and observability.
+- Corrected example implementation claims and repaired associated application/infrastructure/configuration issues. Retail architecture material is explicitly distinguished from a complete working application.
+- Restored the CodeQL language matrix, selected supported Node.js 24 for the dev container, and made setup validators report failed version commands.
+
+#### Added
+- An English-only offline link/anchor checker, regression tests, and a documentation workflow that also builds the workshop in strict mode. Generated translations and translated images are excluded.
+
+#### Validation scope
+- Source, syntax, configuration, local behavior, and network-link checks do not establish live Azure deployability, quota, RBAC, regional model availability, billing, security compliance, or production readiness.
+- Older entries below are historical records, not current command or release instructions.
+
 ### [v3.23.0] - 2026-07-13
 
 #### AZD 1.27.1 Refresh: Version Currency Update

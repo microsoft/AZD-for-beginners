@@ -11,7 +11,7 @@ class Config:
     def __init__(self):
         self.openai_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
         self.openai_api_key = os.getenv("AZURE_OPENAI_API_KEY")
-        self.openai_model = os.getenv("AZURE_OPENAI_MODEL", "gpt-4")
+        self.openai_model = os.getenv("AZURE_OPENAI_MODEL", "gpt-4.1")
         self.max_tokens = int(os.getenv("AZURE_OPENAI_MAX_TOKENS", "800"))
         self.temperature = float(os.getenv("AZURE_OPENAI_TEMPERATURE", "0.7"))
     

@@ -1,25 +1,19 @@
-# TODO: The maintainer of this repo has not yet edited this file
-
-**REPO OWNER**: Do you want Customer Service & Support (CSS) support for this product/project?
-
-- **No CSS support:** Fill out this template with information about how to file issues and get help.
-- **Yes CSS support:** Fill out an intake form at [aka.ms/onboardsupport](https://aka.ms/onboardsupport). CSS will work with/help you to determine next steps.
-- **Not sure?** Fill out an intake as though the answer were "Yes". CSS will help you decide.
-
-*Then remove this first heading from this SUPPORT.MD file before publishing your repo.*
-
 # Support
 
-## How to file issues and get help  
+## Course issues and questions
 
-This project uses GitHub Issues to track bugs and feature requests. Please search the existing 
-issues before filing new issues to avoid duplicates.  For new issues, file your bug or 
-feature request as a new Issue.
+Search the [course issues](https://github.com/microsoft/AZD-for-beginners/issues) before reporting a problem. Include the affected English lesson, the command you ran, your AZD/extension versions, and the error message. Remove credentials, tokens, subscription details, and personal data from logs and screenshots.
 
-For help and questions about using this project, please **REPO MAINTAINER: INSERT INSTRUCTIONS HERE 
-FOR HOW TO ENGAGE REPO OWNERS OR COMMUNITY FOR HELP. COULD BE A STACK OVERFLOW TAG OR OTHER
-CHANNEL. WHERE WILL YOU HELP PEOPLE?**.
+For general learning questions, use the [Azure developer community](https://discord.gg/microsoft-azure). Community responses are not a guaranteed support service.
 
-## Microsoft Support Policy  
+## Tool and service issues
 
-Support for this **PROJECT or PRODUCT** is limited to the resources listed above.
+Report reproducible AZD CLI bugs in [Azure/azure-dev](https://github.com/Azure/azure-dev/issues). For Azure service incidents or subscription-specific assistance, use the support options available in the [Azure portal](https://portal.azure.com/).
+
+## Security reports
+
+Follow [SECURITY.md](SECURITY.md) for private vulnerability reporting. Do not post secrets or exploit details in a public course issue.
+
+## Microsoft support policy
+
+Support for this educational project is limited to the resources listed above. Course examples do not include a production support commitment.

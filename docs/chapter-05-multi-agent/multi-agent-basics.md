@@ -6,7 +6,7 @@
 - **⬅️ Previous**: [Chapter 4: Infrastructure](../chapter-04-infrastructure/README.md)
 - **➡️ Next**: [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md)
 
-> Validated against `azd 1.27.1` in July 2026.
+> Command guidance reviewed against the released `azd 1.37.2` reference. Cloud deployments were not executed.
 
 ## Introduction
 
@@ -87,7 +87,7 @@ This lesson focuses on the second approach using a **ready-made template**, so y
 
 ## Hands-On: Deploy a Working Multi-Agent App
 
-We'll deploy **Contoso Creative Writer**, an official Azure sample that uses multiple agents (researcher, writer, editor) coordinated to produce an article. It's a great first multi-agent app because the roles are easy to understand.
+We'll deploy **Contoso Creative Writer**, an official Azure sample that coordinates research, product, writing, and editing agents to produce an article. Before proceeding, check the [sample's prerequisites and costs](https://github.com/Azure-Samples/contoso-creative-writer#azure-account-requirements): it needs model quota, Azure AI Search, Bing Grounding access, Python, Docker, and Bash-compatible hooks. Model and region availability depend on your subscription; deployment is not guaranteed by choosing a particular region.
 
 ### Step 1: Initialize the template
 
@@ -96,7 +96,7 @@ We'll deploy **Contoso Creative Writer**, an official Azure sample that uses mul
 mkdir creative-writer && cd creative-writer
 
 # Initialize from the official multi-agent template
-azd init --template contoso-creative-writer
+azd init --template Azure-Samples/contoso-creative-writer .
 ```
 
 > Browse more multi-agent templates anytime in the [Awesome AZD AI gallery](https://azure.github.io/awesome-azd/?tags=ai). Other beginner-friendly options include `get-started-with-ai-agents` and `azure-ai-travel-agents`.
@@ -106,12 +106,18 @@ azd init --template contoso-creative-writer
 ```bash
 # Required for azd workflows
 azd auth login
+
+# Also required by this sample's Azure CLI hooks
+az login
 ```
 
-### Step 3: Create an environment
+### Step 3: Check the environment
 
 ```bash
-azd env new dev
+# init normally creates/selects an environment; confirm it before proceeding
+azd env list
+# Only if you need an additional environment:
+# azd env new dev
 ```
 
 ### Step 4: Preview, then deploy
@@ -124,11 +130,13 @@ azd provision --preview
 azd up
 ```
 
-`azd up` will prompt for a subscription and region, then provision the Azure resources and deploy the application. AI deployments can take longer than a simple web app—if you're deploying larger models, you can extend the deploy timeout:
+`azd up` will prompt for missing subscription and region settings, then provision resources and deploy the application. The preview does not reserve quota or guarantee success; template hooks may still run during a provisioning preview, so inspect them first. To extend how long azd waits for each **service deployment** (not model provisioning):
 
 ```bash
 azd deploy --timeout 1800
 ```
+
+A timeout stops azd waiting; it does not cancel the deployment in Azure. Inspect the resource state before retrying.
 
 > **Heads up on cost and capacity:** Multi-agent apps deploy AI models that consume quota and incur cost. If `azd up` fails on model quota, see [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) for region and quota fixes, and Chapter 6 [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md).
 
@@ -169,16 +177,16 @@ azd show
 # Open the app's monitoring dashboard
 azd monitor
 
-# Tail logs if something looks off
+# Open Application Insights Logs (not a terminal log stream)
 azd monitor --logs
 ```
 
-Then open the app URL from `azd show` and try a request that exercises all the agents (for Creative Writer, ask it to write a short article on a topic). In the Application Insights **transaction search**, you should see the request fan out across the researcher, writer, and editor steps.
+Then open the app URL from `azd show` and request a short article. Use the sample's debug view to inspect its agent workflow. Application Insights transaction search can show the individual steps only if the sample instruments and correlates them; azd does not add agent spans automatically.
 
 **Success criteria:**
 - ✅ `azd show` lists a reachable endpoint
 - ✅ A request produces a result that clearly went through multiple stages
-- ✅ Application Insights shows traces for more than one agent step
+- ✅ The debug view shows multiple agent steps; if tracing is enabled, verify the corresponding telemetry after ingestion
 
 ---
 
@@ -194,16 +202,16 @@ Because each agent is just instructions plus tools, customizing is approachable:
    azd deploy
    ```
 
-To go further and build agents from your *own* manifest, use the agent extension and its full lifecycle:
+To go further with your *own* Foundry agent project, use the agent extension's interactive initialization:
 
 ```bash
 azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ai agent init
 azd up
 azd ai agent invoke      # test, with response timing
 ```
 
-See [Chapter 2: Agents](../chapter-02-ai-development/agents.md) and the [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for the complete agent lifecycle (`invoke`, `eval generate`, `optimize`, `delete`).
+See [Chapter 2: Agents](../chapter-02-ai-development/agents.md) and the [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for the complete lifecycle: agent `invoke`, the separate evaluations extension's `azd ai eval` workflow, agent `optimize`, and agent `delete`.
 
 ---
 
@@ -212,10 +220,11 @@ See [Chapter 2: Agents](../chapter-02-ai-development/agents.md) and the [AZD AI 
 Multi-agent apps run multiple billable services. Tear everything down when you're done:
 
 ```bash
-azd down --force --purge
+# Review the resources and confirm deletion interactively
+azd down
 ```
 
-The `--purge` flag also removes soft-deleted AI resources (like Foundry/Azure AI Services accounts) so they don't block a future redeploy or keep incurring cost.
+Deletion is destructive. For a disposable lab, `azd down --force --purge` skips deletion and supported soft-delete purge confirmations; purging is irreversible where supported and can be blocked by purge protection. Soft deletion is a recovery/name-reuse concern, not in itself proof of ongoing charges. Check for retained resources and billing after cleanup.
 
 ---
 

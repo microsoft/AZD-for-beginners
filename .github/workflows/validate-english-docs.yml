@@ -1,0 +1,35 @@
+name: Validate English documentation
+
+on:
+  pull_request:
+    paths:
+      - '*.md'
+      - 'docs/**'
+      - 'examples/**'
+      - 'resources/**'
+      - 'workshop/**'
+      - '.github/scripts/**'
+      - '.github/workflows/validate-english-docs.yml'
+      - 'requirements-dev.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  documentation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install documentation dependencies
+        run: python -m pip install -r requirements-dev.txt
+      - name: Test the English link checker
+        run: python -m unittest discover -s .github/scripts -p 'test_*.py'
+      - name: Check English local links and anchors
+        run: python .github/scripts/check_links.py
+      - name: Build the workshop
+        run: python -m mkdocs build --strict --config-file workshop/mkdocs.yml --site-dir '${{ runner.temp }}/workshop-site'

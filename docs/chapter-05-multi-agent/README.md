@@ -8,7 +8,7 @@
 
 This chapter covers advanced multi-agent architecture patterns, agent orchestration, and production-ready AI deployments for complex scenarios.
 
-> Validated against `azd 1.27.1` in July 2026.
+> Command guidance reviewed against the released `azd 1.37.2` reference. Cloud deployments were not executed.
 
 ## Learning Objectives
 
@@ -35,17 +35,19 @@ By completing this chapter, you will:
 ## 🚀 Quick Start
 
 ```bash
-# Option 1: Deploy from a template
-azd init --template agent-openai-python-prompty
+# Option 1: Deploy the multi-agent template used in Lesson 1
+azd init --template Azure-Samples/contoso-creative-writer .
 azd up
 
-# Option 2: Deploy from an agent manifest (requires azure.ai.agents extension)
+# Option 2: Initialize a Foundry agent interactively (requires azure.ai.agents)
 azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ai agent init
 azd up
 ```
 
-> **Which approach?** Use `azd init --template` to start from a working sample. Use `azd ai agent init` when you have your own agent manifest. See the [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for full details.
+> **Which approach?** Use `azd init --template` to start from a working sample. Use `azd ai agent init` interactively, or `azd ai agent init --template <path-to-azure.yaml>` to adopt a current agent project. See the [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for version requirements and evaluation migration.
+
+Run these alternatives in separate empty folders. Agents extension `1.0.0-beta.23` requires `azd >= 1.37.0`; its interactive flow does not generate the custom Service Bus pipeline in the coordination lesson.
 
 ---
 

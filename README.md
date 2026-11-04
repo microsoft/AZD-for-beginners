@@ -2,9 +2,9 @@
 
 ![AZD-for-beginners](./images/azdbeginners.png) 
 
-[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://GitHub.com/microsoft/azd-for-beginners/watchers/)
+[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/azd-for-beginners.svg?style=social&label=Watch)](https://github.com/microsoft/AZD-for-beginners)
 [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
-[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
+[![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://github.com/microsoft/AZD-for-beginners)
 
 [![Azure Discord](https://dcbadge.limes.pink/api/server/nkVh3dp)](https://discord.com/invite/nkVh3dp)
 [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
@@ -39,14 +39,14 @@
 
 ## 🆕 What's New in azd Today
 
-> 📌 This course is validated against **`azd 1.27.1`** (July 2026). Run `azd version` to check your build, and `azd upgrade` to get the latest.
+> 📌 **AI CLI release review (2026-11-04):** Guidance was checked against published **`azd 1.37.2`**, **agents `1.0.0-beta.23`**, and **evaluations `1.0.0-beta.2`** documentation/source. Use `azd >= 1.37.0` for the combined workflow. Run `azd version` and [update the core CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) before extensions. See [release changes and fixes](docs/chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). This is not a live deployment validation of the whole course.
 
-Azure Developer CLI has grown beyond traditional web apps and APIs. Today, azd is the single tool for deploying **any** application to Azure—including AI-powered applications and intelligent agents.
+Azure Developer CLI supports many application types, including web apps, APIs, and AI agents, through supported hosts, templates, and extensions.
 
 Here's what that means for you:
 
 - **AI agents are now first-class azd workloads.** You can initialize, deploy, and manage AI agent projects using the same `azd init` → `azd up` workflow you already know.
-- **A complete agent lifecycle from the CLI.** The `azure.ai.agents` extension now covers the whole journey—`azd ai agent init` to scaffold, `azd ai agent invoke` to test (with response-timing output), `azd ai agent eval generate` and `azd ai agent optimize` to measure and improve quality, and `azd ai agent delete` to clean up.
+- **An agent lifecycle across two extensions.** Use `azure.ai.agents` to initialize, invoke, optimize, and retire agents. Install **`azure.ai.evaluations`** separately for `azd ai eval init`, `generate`, and `run start`. Agents beta.22 replaced the legacy evaluation workflow and changed optimization configuration; follow the [migration guide](docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks).
 - **More AI building blocks.** New preview extensions—`azure.ai.skills` and `azure.ai.connections`—let you manage reusable agent skills and Foundry connections directly with azd.
 - **Microsoft Foundry integration** brings model deployment, agent hosting, and AI service configuration directly into the azd template ecosystem.
 - **Smoother day-to-day basics.** Recent releases made `azd init` idempotent (safe to re-run), made `azd auth login` clear stale tokens automatically, and added a friendly `azd tool` first-run setup prompt.
@@ -74,7 +74,7 @@ If you've used azd before, AI support is a natural extension—not a separate to
 azd up
 ```
 
-**That's it!** No Azure Portal clicking, no complex ARM templates to learn first, no manual configuration - just working applications on Azure.
+The template supplies the application and infrastructure configuration. Successful deployment still requires supported services/models, sufficient quota and permissions, correct inputs, and verification of the deployed application. `azd up` does not automatically make a template secure, compliant, or production-ready.
 
 ---
 
@@ -103,11 +103,11 @@ This is the most common question beginners ask. Here's the simple answer:
 | "I need to create just a storage account" | `az storage account create` |
 | "I'm building a full AI application" | `azd init --template azure-search-openai-demo` |
 | "I need to debug a specific Azure resource" | `az resource show` |
-| "I want production-ready deployment in minutes" | `azd up --environment production` |
+| "I want to deploy to my configured production environment" | Review configuration, access, cost, and operational gates before `azd up --environment production` |
 
 ### They Work Together!
 
-AZD uses Azure CLI under the hood. You can use both:
+AZD and Azure CLI have separate authentication and configuration. Use `azd auth login` for AZD, and `az login` when a hook or diagnostic command explicitly needs Azure CLI. You can use both:
 ```bash
 # Deploy your app with AZD
 azd up
@@ -130,15 +130,17 @@ Don't start from scratch! **Awesome AZD** is the community collection of ready-t
 
 ### Popular AI Templates from Awesome AZD
 
+Choose one template in its own empty directory; the commands below are alternatives. The trailing `.` initializes that directory.
+
 ```bash
 # RAG Chat with Microsoft Foundry Models + AI Search
-azd init --template azure-search-openai-demo
+azd init --template azure-search-openai-demo .
 
 # Quick AI Chat Application
-azd init --template openai-chat-app-quickstart
+azd init --template openai-chat-app-quickstart .
 
 # AI Agents with Foundry Agents
-azd init --template get-started-with-ai-agents
+azd init --template get-started-with-ai-agents .
 ```
 
 ---
@@ -192,7 +194,7 @@ If you are not sure which one you need, follow the full setup flow in [Installat
 
 ```bash
 # Initialize from a template
-azd init --template todo-nodejs-mongo
+azd init --template todo-nodejs-mongo .
 
 # Deploy to Azure (creates everything!)
 azd up
@@ -244,7 +246,7 @@ Master Azure Developer CLI (azd) through structured chapters designed for progre
 
 ### Why This Course is Essential for Modern Developers
 
-Based on Microsoft Foundry Discord community insights, **45% of developers want to use AZD for AI workloads** but encounter challenges with:
+Developers deploying AI workloads commonly need guidance on:
 - Complex multi-service AI architectures
 - Production AI deployment best practices  
 - Azure AI service integration and configuration
@@ -312,7 +314,7 @@ Each chapter has a dedicated README with learning objectives, quick starts, and 
 - Your first successful deployment
 
 #### Learning Resources
-- **🎯 Start Here**: [What is Azure Developer CLI?](#what-is-azure-developer-cli)
+- **🎯 Start Here**: [What is Azure Developer CLI?](#-what-is-azure-developer-cli-azd)
 - **📖 Theory**: [AZD Basics](docs/chapter-01-foundation/azd-basics.md) - Core concepts and terminology
 - **⚙️ Setup**: [Installation & Setup](docs/chapter-01-foundation/installation.md) - Platform-specific guides
 - **🛠️ Hands-On**: [Your First Project](docs/chapter-01-foundation/first-project.md) - Step-by-step tutorial
@@ -324,7 +326,7 @@ Each chapter has a dedicated README with learning objectives, quick starts, and 
 azd version
 
 # Deploy your first application
-azd init --template todo-nodejs-mongo
+azd init --template todo-nodejs-mongo .
 azd up
 ```
 
@@ -342,7 +344,6 @@ azd down --force --purge  # Cleans up resources
 ```
 
 **📊 Time Investment:** 30-45 minutes  
-**📈 Skill Level After:** Can deploy basic applications independently
 **📈 Skill Level After:** Can deploy basic applications independently
 
 ---
@@ -369,12 +370,12 @@ azd down --force --purge  # Cleans up resources
 #### Practical Exercises
 ```bash
 # Deploy your first AI application
-azd init --template azure-search-openai-demo
+azd init --template azure-search-openai-demo .
 azd up
 
 # Try additional AI templates
-azd init --template openai-chat-app-quickstart
-azd init --template agent-openai-python-prompty
+azd init --template openai-chat-app-quickstart .
+azd init --template agent-openai-python-prompty .
 ```
 
 **💡 Chapter Outcome**: Deploy and configure an AI-powered chat application with RAG capabilities
@@ -382,7 +383,7 @@ azd init --template agent-openai-python-prompty
 **✅ Success Validation:**
 ```bash
 # After Chapter 2, you should be able to:
-azd init --template azure-search-openai-demo
+azd init --template azure-search-openai-demo .
 azd up
 # Test the AI chat interface
 # Ask questions and get AI-powered responses with sources
@@ -392,7 +393,7 @@ azd down --force --purge
 ```
 
 **📊 Time Investment:** 1-2 hours  
-**📈 Skill Level After:** Can deploy and configure production-ready AI applications  
+**📈 Skill Level After:** Can deploy AI learning applications and identify additional production-readiness requirements
 **💰 Cost Awareness:** Understand $80-150/month dev costs, $300-3500/month production costs
 
 #### 💰 Cost Considerations for AI Deployments
@@ -411,15 +412,15 @@ azd down --force --purge
 - Storage (Premium): $10-50/month
 
 **💡 Cost Optimization Tips:**
-- Use **Free Tier** Microsoft Foundry Models for learning (Azure OpenAI 50,000 tokens/month included)
-- Run `azd down` to deallocate resources when not actively developing
+- Check model inference pricing and account-specific credits; Azure OpenAI does not include a universal 50,000-token monthly free allowance
+- Run `azd down` to delete resources when no longer needed, after reviewing the selected environment
 - Start with consumption-based billing, upgrade to PTU only for production
-- Use `azd provision --preview` to estimate costs before deployment
+- Use `azd provision --preview` to inspect planned infrastructure, then price the resulting resources with the Azure Pricing Calculator
 - Enable auto-scaling: pay only for actual usage
 
 **Cost Monitoring:**
 ```bash
-# Check estimated monthly costs
+# Inspect planned resources (this does not calculate prices)
 azd provision --preview
 
 # Monitor actual costs in Azure Portal
@@ -487,21 +488,21 @@ az consumption budget list --resource-group <your-rg>
 - Production-ready AI deployments
 
 #### Learning Resources
-- **🤖 Featured Project**: [Retail Multi-Agent Solution](examples/retail-scenario.md) - Complete implementation
-- **🛠️ ARM Templates**: [ARM Template Package](examples/retail-multiagent-arm-template/) - One-click deployment
+- **🤖 Featured Design**: [Retail Multi-Agent Solution](examples/retail-scenario.md) - Architecture blueprint, not a complete application
+- **🛠️ ARM Templates**: [ARM Template Package](examples/retail-multiagent-arm-template/) - Infrastructure scaffold; review prerequisites and missing application components
 - **📖 Architecture**: [Multi-agent coordination patterns](docs/chapter-06-pre-deployment/coordination-patterns.md) - Patterns
 
 #### Practical Exercises
 ```bash
-# Deploy the complete retail multi-agent solution
+# Inspect the retail infrastructure scaffold before choosing to deploy it
 cd examples/retail-multiagent-arm-template
-./deploy.sh
+cat README.md
 
-# Explore agent configurations
+# After an intentional deployment, inspect infrastructure state
 az deployment group show --resource-group <rg-name> --name <deployment-name>
 ```
 
-**💡 Chapter Outcome**: Deploy and manage a production-ready multi-agent AI solution with Customer and Inventory agents
+**💡 Chapter Outcome**: Understand multi-agent design and identify the implementation, validation, and operational work needed beyond an infrastructure scaffold
 
 ---
 
@@ -648,7 +649,7 @@ By completing the workshop, participants will:
   - [6. Teardown](workshop/docs/instructions/6-Teardown-Infrastructure.md) - Clean up resources
   - [7. Wrap-up](workshop/docs/instructions/7-Wrap-up.md) - Review and next steps
 - **🛠️ AI Workshop Lab**: [AI Workshop Lab](docs/chapter-02-ai-development/ai-workshop-lab.md) - AI-focused exercises
-- **💡 Quick Start**: [Workshop Setup Guide](workshop/README.md#quick-start) - Environment configuration
+- **💡 Quick Start**: [Workshop Setup Guide](workshop/README.md#browser-based-guide) - Environment configuration
 
 **Perfect for**: Corporate training, university courses, self-paced learning, and developer bootcamps.
 
@@ -687,11 +688,11 @@ Beyond the basics, AZD provides powerful features for production deployments:
 |----------|---------|------------|----------|------|
 | [**Get started with AI chat**](https://github.com/Azure-Samples/get-started-with-ai-chat) | Chapter 2 | ⭐⭐ | AzureOpenAI + Azure AI Model Inference API + Azure AI Search + Azure Container Apps + Application Insights | External |
 | [**Get started with AI agents**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Chapter 2 | ⭐⭐ | Foundry Agents + AzureOpenAI + Azure AI Search + Azure Container Apps + Application Insights| External |
-| [**Azure Search + OpenAI Demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Chapter 2 | ⭐⭐ | AzureOpenAI + Azure AI Search + App Service + Storage | External |
+| [**Azure Search + OpenAI Demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Chapter 2 | ⭐⭐ | Azure OpenAI + Azure AI Search + Container Apps (default) + Storage | External |
 | [**OpenAI Chat App Quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chapter 2 | ⭐ | AzureOpenAI + Container Apps + Application Insights | External |
 | [**Agent OpenAI Python Prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Chapter 5 | ⭐⭐⭐ | AzureOpenAI + Azure Functions + Prompty | External |
 | [**Contoso Chat RAG**](https://github.com/Azure-Samples/contoso-chat) | Chapter 8 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Cosmos DB + Container Apps | External |
-| [**Retail Multi-Agent Solution**](examples/retail-scenario.md) | Chapter 5 | ⭐⭐⭐⭐ | AzureOpenAI + AI Search + Storage + Container Apps + Cosmos DB | **Local** |
+| [**Retail Multi-Agent Solution**](examples/retail-scenario.md) | Chapter 5 | ⭐⭐⭐⭐ | Proposed architecture and infrastructure scaffold; application implementation required | **Local blueprint** |
 
 ### Featured: Complete Learning Scenarios
 **Production-ready application templates mapped to learning chapters**
@@ -700,7 +701,7 @@ Beyond the basics, AZD provides powerful features for production deployments:
 |----------|------------------|------------|--------------|
 | [**openai-chat-app-quickstart**](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chapter 2 | ⭐ | Basic AI deployment patterns |
 | [**azure-search-openai-demo**](https://github.com/Azure-Samples/azure-search-openai-demo) | Chapter 2 | ⭐⭐ | RAG implementation with Azure AI Search |
-| [**ai-document-processing**](https://github.com/Azure-Samples/ai-document-processing) | Chapter 4 | ⭐⭐ | Document Intelligence integration |
+| [**get-started-with-ai-agents**](https://github.com/Azure-Samples/get-started-with-ai-agents) | Chapter 2 | ⭐⭐ | Agent-backed chat and sample-specific evaluation tests |
 | [**agent-openai-python-prompty**](https://github.com/Azure-Samples/agent-openai-python-prompty) | Chapter 5 | ⭐⭐⭐ | Agent framework and function calling |
 | [**contoso-chat**](https://github.com/Azure-Samples/contoso-chat) | Chapter 8 | ⭐⭐⭐ | Enterprise AI orchestration |
 | [**retail-multi-agent-solution**](examples/retail-scenario.md) | Chapter 5 | ⭐⭐⭐⭐ | Multi-agent architecture with Customer and Inventory agents |
@@ -708,20 +709,20 @@ Beyond the basics, AZD provides powerful features for production deployments:
 ### Learning by Example Type
 
 > **📌 Local vs. External Examples:**  
-> **Local Examples** (in this repo) = Ready to use immediately  
+> **Local Examples** (in this repo) = Inspect the example's README for implementation status and prerequisites
 > **External Examples** (Azure Samples) = Clone from linked repositories
 
 #### Local Examples (Ready to Use)
-- [**Retail Multi-Agent Solution**](examples/retail-scenario.md) - Complete production-ready implementation with ARM templates
-  - Multi-agent architecture (Customer + Inventory agents)
-  - Comprehensive monitoring and evaluation
-  - One-click deployment via ARM template
+- [**Retail Multi-Agent Solution**](examples/retail-scenario.md) - Architecture blueprint with an ARM infrastructure scaffold
+  - Proposed Customer and Inventory agent roles
+  - Monitoring, evaluation, and application code must be implemented and verified
+  - Provisioning resources alone does not produce a working retail application
 
 #### Local Examples - Container Applications (Chapters 2-5)
 **Comprehensive container deployment examples in this repository:**
 - [**Container App Examples**](examples/container-app/README.md) - Complete guide to containerized deployments
   - [Simple Flask API](examples/container-app/simple-flask-api/) - Basic REST API with scale-to-zero
-  - [Microservices Architecture](examples/container-app/microservices/) - Production-ready multi-service deployment
+  - [Microservices Architecture](examples/container-app/microservices/) - Two-service learning sample; production hardening is additional work
   - Quick Start, Production, and Advanced deployment patterns
   - Monitoring, security, and cost optimization guidance
 
@@ -738,7 +739,7 @@ Beyond the basics, AZD provides powerful features for production deployments:
 #### External Examples - Advanced Patterns (Chapters 4-8)
 - [Java Microservices](https://github.com/Azure-Samples/java-microservices-aca-lab) - Multi-service architectures
 - [Container Apps Jobs](https://github.com/Azure-Samples/container-apps-jobs) - Background processing  
-- [Enterprise ML Pipeline](https://github.com/Azure-Samples/mlops-v2) - Production-ready ML patterns
+- [Enterprise ML Pipeline](https://github.com/Azure/mlops-v2) - MLOps reference patterns; not a drop-in AZD template
 
 ### External Template Collections
 - [**Official AZD Template Gallery**](https://azure.github.io/awesome-azd/) - Curated collection of official and community templates
@@ -835,9 +836,9 @@ azd up
 <summary><strong>❌ "azd up" fails halfway through</strong></summary>
 
 ```bash
-# Option 1: Clean and retry
-azd down --force --purge
-azd up
+# Option 1: Inspect the error and retry after correcting its cause
+azd show
+azd up --debug
 
 # Option 2: Just fix infrastructure
 azd provision
@@ -871,10 +872,8 @@ az account show
 <summary><strong>❌ "Resource already exists" or naming conflicts</strong></summary>
 
 ```bash
-# AZD generates unique names, but if conflict:
-azd down --force --purge
-
-# Then retry with fresh environment
+# Inspect the conflicting resource before changing or deleting anything.
+# For an isolated new deployment, create a separate environment:
 azd env new dev-v2
 azd up
 ```
@@ -977,10 +976,9 @@ Upon completing all chapters, you will have:
 
 ### Community Insights from Microsoft Foundry Discord
 
-**Recent Poll Results from #Azure Channel:**
-- **45%** of developers want to use AZD for AI workloads
-- **Top challenges**: Multi-service deployments, credential management, production readiness  
-- **Most requested**: AI-specific templates, troubleshooting guides, best practices
+**Topics discussed by the community:**
+- Multi-service deployments, credential management, and production readiness
+- AI-specific templates, troubleshooting guides, and best practices
 
 **Join our community to:**
 - Share your AZD + AI experiences and get help
