@@ -172,7 +172,7 @@ def get_product(product_id):
         
     except Exception as e:
         logger.error(f"Error retrieving product {product_id}: {str(e)}")
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': 'Internal server error'}), 500
 
 if __name__ == '__main__':
     # Initialize database on startup
