@@ -1,48 +1,48 @@
-# Dev Containers & GitHub Codespaces azd-hez
+# Dev Containerek és GitHub Codespaces az azd-hez
 
 **Fejezet navigáció:**
-- **📚 Tanfolyam kezdőoldal**: [AZD For Beginners](../../README.md)
-- **📖 Aktuális fejezet**: 1. fejezet - Alapok és Gyors kezdés
-- **⬅️ Előző**: [Hozd a saját alkalmazásodat](bring-your-own-app.md)
+- **📚 Kurzus kezdőlap**: [AZD kezdőknek](../../README.md)
+- **📖 Jelenlegi fejezet**: 1. fejezet - Alapok és gyors kezdés
+- **⬅️ Előző**: [Hozd a saját alkalmazásod](bring-your-own-app.md)
 - **🚀 Következő fejezet**: [2. fejezet: AI-első fejlesztés](../chapter-02-ai-development/README.md)
 
-> Érvényesítve az `azd 1.25.6`-tal 2026 júniusában.
+> Érvényesítve az `azd 1.27.1` verzióval 2026 júliusában.
 
 ## Bevezetés
 
-Az azd, a megfelelő nyelvi futtatókörnyezet, a Docker és az Azure CLI mindenkire történő telepítése fáradságos — és ez az elsődleges oka annak, hogy egy "nálam működik" oktatóanyag máshol nem. Egy dev container ezt úgy oldja meg, hogy egy fájlban leírja az egész eszközkészletedet. Bárki, aki megnyitja a projektet VS Code-ban vagy GitHub Codespaces-ben, ugyanazt a környezetet kapja, az azd már telepítve. Ez a lecke megmutatja, hogyan adhatod hozzá.
+Az azd, a megfelelő nyelvi futtatókörnyezet, a Docker és az Azure CLI telepítése minden gépen fáradságos munka — és ez az első számú oka annak, hogy az a "nálam működik" oktatóanyag másnál nem. Egy **dev container** ezt úgy oldja meg, hogy a teljes eszköztáradat egy fájlban írja le. Bárki, aki megnyitja a projektet VS Code-ban vagy GitHub Codespaces-ben, pontosan ugyanazt a környezetet kapja, azzal, hogy az azd már telepítve van benne. Ez a lecke megmutatja, hogyan adj hozzá egyet.
 
 ## Tanulási célok
 
-A lecke végére képes leszel:
-- Megérteni, mi az a dev container és miért segít az azd-vel
-- Hozzáadni egy minimális `.devcontainer/devcontainer.json` fájlt egy projekthez
-- Tartalmazni az azd-t, az Azure CLI-t és a Dockert Dev Container *features*-ként
-- Megnyitni a projektet GitHub Codespaces-ben vagy VS Code-ban
+A lecke végére:
+- Megérted, mi az a dev container és miért segít az azd-vel
+- Hozzáadsz egy minimális `.devcontainer/devcontainer.json` fájlt egy projekthez
+- Az azd, az Azure CLI és a Docker bekerül a Dev Container *funkcióin* keresztül
+- Megnyitod a projektet GitHub Codespaces-ben vagy VS Code-ban
 
-## Tanulási eredmények
+## Eredmények
 
 A lecke elvégzése után képes leszel:
-- `devcontainer.json` szerkesztésére egy azd projekthez
-- Az azd és az Azure eszközök hozzáadására manuális telepítések nélkül
-- `azd up` futtatására konténerből vagy Codespace-ből
+- Szerkeszteni egy `devcontainer.json` fájlt egy azd projekthez
+- Hozzáadni az azd-t és az Azure eszközöket manuális telepítés nélkül
+- Futtatni az `azd up` parancsot konténerből vagy Codespace-ből
 
 ---
 
 ## Mi az a Dev Container?
 
-A dev container egy Docker-alapú fejlesztőkörnyezet, amelyet a `.devcontainer/devcontainer.json` fájl határoz meg a tárolódban. Amikor megnyitod a projektet:
+A dev container egy Docker-alapú fejlesztői környezet, amelyet egy `.devcontainer/devcontainer.json` fájl határoz meg a repódban. Amikor megnyitod a projektet:
 
-- **VS Code** (a Dev Containers kiterjesztéssel) felépíti a konténert és csatlakozik hozzá.
-- **GitHub Codespaces** felépíti ugyanazt a konténert a felhőben és egy böngészőalapú szerkesztőt ad.
+- **VS Code** (a Dev Containers bővítménnyel) felépíti a konténert és csatlakozik hozzá.
+- **GitHub Codespaces** ugyanazt a konténert építi fel a felhőben, és böngésző alapú szerkesztőt biztosít.
 
-Akárhogy is, minden hozzájáruló ugyanazokat az eszközöket kapja — nincs több „telepítetted az azd-t?” típusú hibaelhárítás.
+Bármelyik esetben minden hozzájáruló azonos eszközöket kap — nincs többé, hogy "feltelepítetted az azd-t?" hibakeresés.
 
 ```mermaid
 graph LR
-    Repo[A repód<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Fejlesztői konténerek]
-    Repo --> Codespaces[GitHub<br/>Codespaces]
-    VSCode --> Env[Azonos környezet:<br/>azd + az + Docker]
+    Repo[A te tárhelyed<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Fejlesztői konténerek]
+    Repo --> Codespaces[GitHub<br/>Kódtér]
+    VSCode --> Env[Identical environment:<br/>azd + az + Docker]
     Codespaces --> Env
 ```
 
@@ -78,20 +78,20 @@ Hozd létre a `.devcontainer/devcontainer.json` fájlt a projekt gyökerében:
 Mit csinál egyes részek:
 
 | Kulcs | Cél |
-|-----|---------|
-| `image` | A konténer alap operációs rendszere |
-| `features` | Előre elkészített telepítők—itt: Azure CLI, **azd**, Docker és Node.js |
-| `customizations.vscode.extensions` | Automatikusan telepíti az azd és a Bicep VS Code kiterjesztéseket |
-| `forwardPorts` | Elérhetővé teszi az alkalmazás portját a böngészőben |
-| `postCreateCommand` | Egyszer lefut a konténer felépítése után (itt egy épségellenőrzés) |
+|-----|--------|
+| `image` | A konténer alapvető operációs rendszere |
+| `features` | Előre kész telepítők — itt: Azure CLI, **azd**, Docker és Node.js |
+| `customizations.vscode.extensions` | Automatikusan telepíti az azd és Bicep VS Code kiterjesztéseket |
+| `forwardPorts` | Kiteszi az alkalmazás portját a böngésződhöz |
+| `postCreateCommand` | Egyszer lefut a konténer összeállítása után (itt egy ellenőrzés) |
 
-> A `ghcr.io/azure/azure-dev/azd:latest` feature az hivatalos módja annak, hogy az azd bekerüljön egy konténerbe. Rögzíts egy konkrét verziót (például `azd:1.25.6`), ha reprodukálhatóságra van szükséged.
+> A `ghcr.io/azure/azure-dev/azd:latest` funkció az hivatalos módja, hogy az azd bekerüljön a konténerbe. Ha reprodukálhatóság kell, tűzd le egy konkrét verzióra (például `azd:1.27.1`).
 
 ---
 
-## 2. lépés: Illeszd a feature-t az alkalmazásod nyelvéhez
+## 2. lépés: Illeszd a funkciót az alkalmazásod nyelvéhez
 
-Cseréld le a `node` feature-t arra, amit az alkalmazásod használ:
+Cseréld le a `node` funkciót arra, amit az alkalmazásod használ:
 
 ```jsonc
 // Python project
@@ -107,71 +107,71 @@ Cseréld le a `node` feature-t arra, amit az alkalmazásod használ:
 "ghcr.io/devcontainers/features/go:1": {}
 ```
 
-Tartsd meg a `docker-in-docker`-t, ha a `host` értéke `containerapp`, `aks`, vagy bármilyen olyan, ami konténerképet épít — az azd-nek Dockerre van szüksége a képek építéséhez és feltöltéséhez.
+Hagyd meg a `docker-in-docker`-t, ha a `host` értéke `containerapp`, `aks`, vagy bármi, ami konténerképet épít — az azd-nek Docker kell képfelépítéshez és toláshoz.
 
 ---
 
 ## 3. lépés: Nyisd meg
 
 **VS Code-ban:**
-1. Telepítsd a **Dev Containers** kiterjesztést.
+1. Telepítsd a **Dev Containers** bővítményt.
 2. Nyisd meg a projekt mappáját.
-3. Kattints a felkérésnél a **Reopen in Container** gombra (vagy futtasd a *Dev Containers: Reopen in Container* parancsot).
+3. Kattints a **Megnyitás konténerben** felhívásra (vagy futtasd a *Dev Containers: Reopen in Container* parancsot).
 
 **GitHub Codespaces-ben:**
-1. Push-old a repo-t GitHubra.
+1. Push-old fel a repót GitHub-ra.
 2. Kattints a **Code → Codespaces → Create codespace on main** opcióra.
 3. Várd meg, amíg a konténer felépül — az azd készen áll a terminálban.
 
 ---
 
-## 4. lépés: Telepítés a konténeren belülről
+## 4. lépés: Telepítés a konténerből
 
-A konténerben előre telepítve van az azd, így a szokásos munkafolyamat egyszerűen működik:
+A konténer előre telepítve tartalmazza az azd-t, így a normál munkafolyamat működik:
 
 ```bash
-azd auth login --use-device-code   # a device-kód hasznos a Codespacesben
+azd auth login --use-device-code   # az eszközkód hasznos a Codespaces-en belül
 azd up
 ```
 
-> **Miért `--use-device-code`?** Egy távoli konténerben vagy Codespace-ben nincs helyi böngésző, ahová átirányíthatna, ezért a device-code beléptetés a megbízható út. Egy kódot kell beillesztened egy böngészőfülbe a bejelentkezés befejezéséhez.
+> **Miért `--use-device-code`?** Távoli konténerben vagy Codespace-ben nincs helyi böngésző átirányításhoz, így a device-code bejelentkezés megbízható mód. Beillesztesz egy kódot egy böngészőfülbe a bejelentkezés befejezéséhez.
 
 ---
 
 ## Gyakori buktatók
 
-| Probléma | Megoldás |
-|---------|-----|
-| `azd up` nem tud képet építeni | Add hozzá a `docker-in-docker` feature-t |
-| Böngészős bejelentkezés elakad Codespaces-ben | Használd az `azd auth login --use-device-code` parancsot |
-| Az eszközök eltérnek a csapattagok között | Rögzítsd a feature verziókat (pl. `azd:1.25.6`) |
-| Az alkalmazás nem elérhető a böngészőben | Add hozzá a portot a `forwardPorts`-hoz |
+| Buktató | Megoldás |
+|---------|---------|
+| Az `azd up` nem tud képet építeni | Add hozzá a `docker-in-docker` funkciót |
+| Böngészős bejelentkezés akad Codespaces-ben | Használd az `azd auth login --use-device-code` parancsot |
+| Az eszközök különböznek a csapattagok között | Rögzítsd a funkcióverziókat (pl. `azd:1.27.1`) |
+| Az alkalmazás nem elérhető böngészőben | Add hozzá a portot a `forwardPorts`-hoz |
 
 ---
 
-## Összefoglalás
+## Összegzés
 
-- Egy dev container reprodukálhatóvá teszi az azd eszközkészleted mindenki számára.
-- Add hozzá az azd-t, az Azure CLI-t és a Dockert Dev Container *features*-ként.
-- Illeszd a nyelvi feature-t az alkalmazásodhoz, és tartsd meg a `docker-in-docker`-t konténer hosztoknál.
-- Használd a device-code beléptetést, amikor Codespaces-ben futsz.
+- A dev container mindenki számára reprodukálhatóvá teszi az azd eszköztáradat.
+- Add hozzá az azd-t, az Azure CLI-t és a Dockert Dev Container *funkciókon* keresztül.
+- Illeszd az alkalmazásod nyelvéhez a nyelv funkciót, és tartsd meg a `docker-in-docker`-t konténerhostoknak.
+- Használj device-code bejelentkezést, amikor Codespaces-ben futsz.
 
 ---
 
 ## 🔗 Navigáció
 
 | Irány | Erőforrás |
-|-----------|----------|
-| **Előző** | [Hozd a saját alkalmazásodat](bring-your-own-app.md) |
-| **Fejezet kezdőoldal** | [1. fejezet: Alapok és Gyors kezdés](README.md) |
+|--------|-----------|
+| **Előző** | [Hozd a saját alkalmazásod](bring-your-own-app.md) |
+| **Fejezet kezdőlap** | [1. fejezet: Alapok és gyors kezdés](README.md) |
 | **Következő fejezet** | [2. fejezet: AI-első fejlesztés](../chapter-02-ai-development/README.md) |
 
 ## 📖 Kapcsolódó források
 
 - [Telepítés és beállítás](installation.md)
-- [Parancs gyorssegéd](../../resources/cheat-sheet.md)
+- [Parancs összefoglaló](../../resources/cheat-sheet.md)
 - [Hivatalos Dev Containers specifikáció](https://containers.dev/)
-- [azd Dev Container feature](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
+- [azd Dev Container funkció](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
 
 ---
 
