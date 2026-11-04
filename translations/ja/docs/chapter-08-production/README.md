@@ -1,62 +1,62 @@
-# Chapter 8: 本番およびエンタープライズパターン
+# 第8章: 本番およびエンタープライズパターン
 
-**📚 Course**: [AZD 入門](../../README.md) | **⏱️ Duration**: 2-3 hours | **⭐ Complexity**: 上級
+**📚 コース**: [AZD For Beginners](../../README.md) | **⏱️ 所要時間**: 2-3時間 | **⭐ 難易度**: 上級
 
 ---
 
-## Overview
+## 概要
 
-この章では、本番向けAIワークロードのエンタープライズ対応デプロイパターン、セキュリティ強化、監視、およびコスト最適化を扱います。
+この章では、エンタープライズ対応のデプロイメントパターン、セキュリティ強化、監視、および本番AIワークロードのコスト最適化について解説します。
 
-> Validated against `azd 1.25.6` in June 2026.
+> 2026年7月に `azd 1.27.1` で検証済みです。
 
-## Learning Objectives
+## 学習目標
 
-この章を修了すると、次のことができるようになります:
-- マルチリージョンでの耐障害性のあるアプリケーションをデプロイする
-- エンタープライズ向けセキュリティパターンを実装する
+この章を修了すると、以下ができるようになります:
+- マルチリージョンの冗長アプリケーションをデプロイする
+- エンタープライズセキュリティパターンを実装する
 - 包括的な監視を構成する
-- 大規模でコストを最適化する
-- AZD を使用した CI/CD パイプラインを設定する
+- 大規模なコスト最適化を行う
+- AZDを使ったCI/CDパイプラインを設定する
 
 ---
 
 ## 📚 レッスン
 
-| # | Lesson | Description | Time |
+| # | レッスン | 説明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [本番AIのプラクティス](production-ai-practices.md) | エンタープライズ向けデプロイパターン | 90分 |
+| 1 | [Production AI Practices](production-ai-practices.md) | エンタープライズデプロイメントパターン | 90 分 |
 
 ---
 
 ## 🚀 本番チェックリスト
 
-- [ ] 耐障害性のためのマルチリージョンデプロイ
-- [ ] 認証のためのマネージドID（キー不要）
-- [ ] 監視のための Application Insights
-- [ ] コスト予算とアラートを設定
-- [ ] セキュリティスキャンを有効化
-- [ ] CI/CD パイプラインの統合
+- [ ] 冗長性のためのマルチリージョンデプロイ
+- [ ] 認証用のマネージドID（キー不要）
+- [ ] 監視用のApplication Insights
+- [ ] コスト予算とアラートの設定
+- [ ] セキュリティスキャンの有効化
+- [ ] CI/CDパイプラインの統合
 - [ ] 災害復旧計画
 
 ---
 
 ## 🏗️ アーキテクチャパターン
 
-### Pattern 1: マイクロサービスAI
+### パターン1: マイクロサービスAI
 
 ```mermaid
 graph LR
-    Gateway[APIゲートウェイ] --> AI[AIサービス] --> Models[マイクロソフト ファウンドリ モデル]
+    Gateway[APIゲートウェイ] --> AI[AIサービス] --> Models[Microsoft Foundryモデル]
     Gateway --> Auth[認証サービス]
     AI --> Data[データストア]
 ```
 
-### Pattern 2: Event-Driven AI
+### パターン2: イベント駆動型AI
 
 ```mermaid
 graph LR
-    EventGrid[イベント グリッド] --> Functions[関数] --> Pipeline[AI パイプライン]
+    EventGrid[イベント グリッド] --> Functions[ファンクションズ] --> Pipeline[AI パイプライン]
 ```
 
 ---
@@ -82,12 +82,12 @@ properties: {
 
 ## 💰 コスト最適化
 
-| Strategy | Savings |
+| 戦略 | 削減率 |
 |----------|---------|
-| Scale to zero (Container Apps) | 60-80% |
-| Use consumption tiers for dev | 50-70% |
-| Scheduled scaling | 30-50% |
-| Reserved capacity | 20-40% |
+| ゼロスケール（Container Apps） | 60-80% |
+| 開発用の消費プラン利用 | 50-70% |
+| スケジュールスケーリング | 30-50% |
+| 予約容量 | 20-40% |
 
 ```bash
 # 予算アラートを設定する
@@ -100,16 +100,16 @@ az consumption budget create \
 
 ---
 
-## 📊 モニタリング設定
+## 📊 監視設定
 
 ```bash
-# ログのストリーミング
+# ストリームログ
 azd monitor --logs
 
-# Application Insights を確認
+# アプリケーション インサイトを確認する
 azd monitor --overview
 
-# メトリクスを表示
+# メトリクスを表示する
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -117,19 +117,19 @@ az monitor metrics list --resource <resource-id>
 
 ## 🔗 ナビゲーション
 
-| Direction | Chapter |
+| 方向 | チャプター |
 |-----------|---------|
-| **Previous** | [第7章: トラブルシューティング](../chapter-07-troubleshooting/README.md) |
-| **Course Complete** | [コースホーム](../../README.md) |
+| <strong>前へ</strong> | [第7章: トラブルシューティング](../chapter-07-troubleshooting/README.md) |
+| <strong>コース完了</strong> | [コースホーム](../../README.md) |
 
 ---
 
 ## 📖 関連リソース
 
-- [AIエージェントガイド](../chapter-02-ai-development/agents.md)
+- [AI Agents Guide](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [マルチエージェントソリューション](../chapter-05-multi-agent/README.md)
-- [マイクロサービスの例](../../examples/microservices/README.md)
+- [Multi-Agent Solutions](../chapter-05-multi-agent/README.md)
+- [Microservices Example](../../examples/microservices/README.md)
 
 ---
 

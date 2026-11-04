@@ -368,7 +368,6 @@ Seni aplankai pakeisti skyriaus numerių aplankais:
 |------|------|---|
 | azd-basics.md | getting-started/ | chapter-01-foundation/ |
 | installation.md | getting-started/ | chapter-01-foundation/ |
-
 | first-project.md | getting-started/ | chapter-01-foundation/ |
 | configuration.md | getting-started/ | chapter-03-configuration/ |
 | authsecurity.md | getting-started/ | chapter-03-configuration/ |

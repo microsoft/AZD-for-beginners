@@ -368,7 +368,6 @@ AZD For Beginners റിപ്പോസിറ്ററിയിലെ എല്�
 |------|------|---|
 | azd-basics.md | getting-started/ | chapter-01-foundation/ |
 | installation.md | getting-started/ | chapter-01-foundation/ |
-
 | first-project.md | getting-started/ | chapter-01-foundation/ |
 | configuration.md | getting-started/ | chapter-03-configuration/ |
 | authsecurity.md | getting-started/ | chapter-03-configuration/ |
