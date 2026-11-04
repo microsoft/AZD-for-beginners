@@ -268,24 +268,39 @@ azd provision                     # Apply changes with confidence
 
 ```mermaid
 graph LR
-    A[azd init] -->|Initialize project| B[azd auth login]
-    B -->|Authenticate| C[azd env new]
-    C -->|Create environment| D{First deployment?}
+    %% Initialization Phase
+    subgraph Setup & Init
+        A[azd init] -->|Initialize project| B[azd auth login]
+        B -->|Authenticate| C[azd env new]
+        C -->|Create environment| D{First deployment?}
+    end
+
+    %% Deployment Phase
     D -->|Yes| E[azd up]
     D -->|No| F[azd provision --preview]
-    F -->|Review changes| G[azd provision]
-    E -->|Provisions & deploys| H[Resources running]
-    G -->|Updates infrastructure| H
-    H -->|Monitor| I[azd monitor]
-    I -->|Make code changes| J[azd deploy]
-    J -->|Redeploy code only| H
-    H -->|Cleanup| K[azd down]
     
-    style A fill:#e1f5fe
-    style E fill:#c8e6c9
-    style F fill:#fff9c4
-    style H fill:#c5e1a5
-    style K fill:#ffcdd2
+    F -->|Review changes| G[azd provision]
+    
+    %% Operational Phase
+    E -->|Provisions & deploys| H((Resources running))
+    G -->|Updates infrastructure| H
+    
+    H -->|Monitor logs/metrics| I[azd monitor]
+    
+    %% Daily Dev Loop
+    J[azd deploy] -->|Redeploy code only| H
+    H -->|Make code changes| J
+    
+    %% Cleanup
+    H -->|Teardown resources| K[azd down]
+
+    %% Styling
+    style A fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    style E fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+    style F fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
+    style H fill:#d1c4e9,stroke:#512da8,stroke-width:2px
+    style J fill:#e1f5fe,stroke:#01579b,stroke-width:1px
+    style K fill:#ffcdd2,stroke:#c62828,stroke-width:2px
 ```
 
 **Workflow Explanation:**
