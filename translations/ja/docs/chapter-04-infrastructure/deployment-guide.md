@@ -1,18 +1,18 @@
 # デプロイガイド - AZD デプロイの習得
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 4 - Infrastructure as Code & Deployment
-- **⬅️ Previous Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
-- **➡️ Next**: [Provisioning Resources](provisioning.md)
-- **🧩 Also in this chapter**: [Authoring Your Own Template](custom-templates.md)
-- **🚀 Next Chapter**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
+**章のナビゲーション:**
+- **📚 コースホーム**: [AZD入門](../../README.md)
+- **📖 現在の章**: 第4章 - Infrastructure as Code（IaC）とデプロイメント
+- **⬅️ 前の章**: [第3章: 構成（Configuration）](../chapter-03-configuration/configuration.md)
+- **➡️ 次へ**: [リソースのプロビジョニング](provisioning.md)
+- **🧩 この章の他のトピック**: [独自のテンプレートを作成する](custom-templates.md)
+- **🚀 次の章**: [第5章: マルチエージェントAIソリューション](../../examples/retail-scenario.md)
 
-## Introduction
+## はじめに
 
 この総合ガイドでは、Azure Developer CLI を使用したアプリケーションのデプロイに関して、単純なワンコマンドデプロイからカスタムフック、複数環境、CI/CD 統合を伴う本番シナリオまで、必要なすべてを取り扱います。実践的な例とベストプラクティスでデプロイライフサイクルを習得しましょう。
 
-## Learning Goals
+## 学習目標
 
 このガイドを完了すると、以下を達成できます:
 - Azure Developer CLI のすべてのデプロイコマンドとワークフローを習得する
@@ -22,7 +22,7 @@
 - ブルーグリーンやカナリアなどの高度なデプロイ戦略を設定する
 - azd デプロイを CI/CD パイプラインや DevOps ワークフローに統合する
 
-## Learning Outcomes
+## 学習成果
 
 完了後、以下ができるようになります:
 - すべての `azd` デプロイワークフローを単独で実行およびトラブルシュートする
@@ -32,7 +32,7 @@
 - デプロイパフォーマンスを最適化し、ロールバック戦略を実装する
 - `azd` デプロイをエンタープライズの DevOps 実践に統合する
 
-## Deployment Overview
+## デプロイの概要
 
 Azure Developer CLI はいくつかのデプロイコマンドを提供します:
 - `azd up` - 完全ワークフロー（プロビジョン + デプロイ）
@@ -40,9 +40,9 @@ Azure Developer CLI はいくつかのデプロイコマンドを提供します
 - `azd deploy` - アプリケーションコードのデプロイのみ
 - `azd package` - アプリケーションのビルドとパッケージ化
 
-## Basic Deployment Workflows
+## 基本的なデプロイワークフロー
 
-### Complete Deployment (azd up)
+### デプロイの完了 (azd up)
 新規プロジェクトで最も一般的なワークフロー:
 ```bash
 # すべてを最初からデプロイする
@@ -55,7 +55,7 @@ azd up --environment production
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Infrastructure-Only Deployment
+### インフラストラクチャのみのデプロイ
 Azure リソースだけを更新する必要がある場合:
 ```bash
 # インフラをプロビジョニング/更新する
@@ -68,7 +68,7 @@ azd provision --preview
 azd provision --service database
 ```
 
-### Code-Only Deployment
+### コードのみのデプロイ
 アプリケーションの素早い更新の場合:
 ```bash
 # すべてのサービスをデプロイする
@@ -91,7 +91,7 @@ azd deploy --service api --build-arg NODE_ENV=production
 azd show --output json | jq '.services'
 ```
 
-### ✅ Deployment Verification
+### ✅ デプロイの検証
 
 デプロイ後は必ず成功を確認してください:
 
@@ -110,7 +110,7 @@ curl -f "$API_URL/health" || echo "❌ API health check failed"
 azd monitor --logs
 ```
 
-**Success Criteria:**
+**成功基準：**
 - ✅ すべてのサービスが「Running」ステータスを示している
 - ✅ ヘルスエンドポイントが HTTP 200 を返す
 - ✅ 過去5分間にエラーログがない
@@ -122,7 +122,7 @@ azd monitor --logs
 
 <strong>フック</strong>は、azd がデプロイ処理の特定のタイミング（プロビジョニングの前後、コードデプロイの前後など）で自動的に実行するコマンドです。フックを使うことで、デプロイに常につきまとう小さな作業を自動化できます：データベースのシード、マイグレーションの実行、アセットのビルド、ライブアプリのスモークテストなど。
 
-| Hook | Runs… | Common use |
+| フック | 実行内容… | 一般的な用途 |
 |------|-------|------------|
 | `preprovision` | プロビジョン前に実行される | 前提条件の検証、レジストリへのログイン |
 | `postprovision` | リソース作成後に実行される | リソースの構成、データベースの設定 |
@@ -743,17 +743,17 @@ echo "Environment: $(azd env get-value AZURE_ENV_NAME)" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
 ```
 
-## Next Steps
+## 次のステップ
 
-- [Provisioning Resources](provisioning.md) - インフラ管理の詳細解説
-- [Pre-Deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - デプロイ戦略の計画
-- [Common Issues](../chapter-07-troubleshooting/common-issues.md) - デプロイの問題解決
-- [Best Practices](../chapter-07-troubleshooting/debugging.md) - 本番対応のデプロイ戦略
+- [リソースのプロビジョニング](provisioning.md) - インフラ管理の詳細解説
+- [導入前計画](../chapter-06-pre-deployment/capacity-planning.md) - デプロイ戦略の計画
+- [よくある問題](../chapter-07-troubleshooting/common-issues.md) - デプロイの問題解決
+- [ベストプラクティス](../chapter-07-troubleshooting/debugging.md) - 本番対応のデプロイ戦略
 
 ## 🎯 ハンズオンデプロイ演習
 
 ### 演習 1: インクリメンタルデプロイワークフロー（20 分）
-**Goal**: フルデプロイとインクリメンタルデプロイの違いを習得する
+**ゴール**: フルデプロイとインクリメンタルデプロイの違いを習得する
 
 ```bash
 # 初期デプロイ
@@ -778,16 +778,16 @@ cat deployment-log.txt
 azd down --force --purge
 ```
 
-**Success Criteria:**
+**成功基準：**
 - [ ] フルデプロイが 5-15 分で完了する
 - [ ] コードのみのデプロイが 2-5 分で完了する
 - [ ] デプロイされたアプリにコード変更が反映される
 - [ ] `azd deploy` 後もインフラは変更されない
 
-**Learning Outcome**: コード変更では `azd deploy` は `azd up` より 50-70% 速い
+学習成果：コード変更では `azd deploy` は `azd up` より 50-70% 速い
 
 ### 演習 2: カスタムデプロイフック（30 分）
-**Goal**: デプロイ前後の自動化を実装する
+**ゴール**: デプロイ前後の自動化を実装する
 
 ```bash
 # デプロイ前の検証スクリプトを作成する
@@ -848,14 +848,14 @@ EOF
 azd deploy
 ```
 
-**Success Criteria:**
+**成功基準：**
 - [ ] デプロイスクリプトがデプロイ前に実行される
 - [ ] テストが失敗した場合デプロイが中止される
 - [ ] デプロイ後のスモークテストでヘルスが検証される
 - [ ] フックが正しい順序で実行される
 
 ### 演習 3: マルチ環境デプロイ戦略（45 分）
-**Goal**: ステージドデプロイワークフロー（dev → staging → production）を実装する
+**ゴール**: ステージドデプロイワークフロー（dev → staging → production）を実装する
 
 ```bash
 # デプロイ用スクリプトを作成する
@@ -916,7 +916,7 @@ azd env new production
 ./deploy-staged.sh
 ```
 
-**Success Criteria:**
+**成功基準：**
 - [ ] Dev 環境が正常にデプロイされる
 - [ ] Staging 環境が正常にデプロイされる
 - [ ] Production には手動承認が必要である
@@ -924,7 +924,7 @@ azd env new production
 - [ ] 必要に応じてロールバックできる
 
 ### 演習 4: ロールバック戦略（25 分）
-**Goal**: Git を使ったデプロイのロールバックを実装・テストする
+**ゴール**: Git を使ったデプロイのロールバックを実装・テストする
 
 ```bash
 # v1 をデプロイ
@@ -958,7 +958,7 @@ if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; 
 fi
 ```
 
-**Success Criteria:**
+**成功基準：**
 - [ ] デプロイ失敗を検出できる
 - [ ] ロールバックスクリプトが自動実行される
 - [ ] アプリケーションが正常な状態に戻る
@@ -1014,9 +1014,9 @@ awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [Your First Project](../chapter-01-foundation/first-project.md)
-- **Next Lesson**: [Provisioning Resources](provisioning.md)
+**ナビゲーション**
+- **前のレッスン**: [最初のプロジェクト](../chapter-01-foundation/first-project.md)
+- **次のレッスン**: [リソースのプロビジョニング](provisioning.md)
 
 ---
 
