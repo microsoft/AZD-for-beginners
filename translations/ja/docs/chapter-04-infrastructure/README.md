@@ -1,6 +1,6 @@
 # 第4章: インフラストラクチャをコード化＆デプロイ
 
-**📚 コース**: [AZD For Beginners](../../README.md) | **⏱️ 所要時間**: 1～1.5時間 | **⭐ 難易度**: 中級
+**📚 コース**: [初心者向けAZD](../../README.md) | **⏱️ 所要時間**: 1～1.5時間 | **⭐ 難易度**: 中級
 
 ---
 
@@ -24,9 +24,9 @@
 
 | # | レッスン | 説明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [Provisioning Resources](provisioning.md) | AZDによるAzureリソース管理 | 45分 |
-| 2 | [Deployment Guide](deployment-guide.md) | アプリケーションのデプロイ戦略 | 45分 |
-| 3 | [Authoring Your Own Template](custom-templates.md) | 再利用可能な azd テンプレートの作成と公開 | 30分 |
+| 1 | [リソースのプロビジョニング](provisioning.md) | AZDによるAzureリソース管理 | 45分 |
+| 2 | [デプロイガイド](deployment-guide.md) | アプリケーションのデプロイ戦略 | 45分 |
+| 3 | [独自のテンプレートの作成](custom-templates.md) | 再利用可能な azd テンプレートの作成と公開 | 30分 |
 
 ---
 
@@ -84,7 +84,7 @@ my-project/
 
 | 方向 | チャプター |
 |-----------|---------|
-| <strong>前へ</strong> | [第3章: コンフィギュレーション](../chapter-03-configuration/README.md) |
+| <strong>前へ</strong> | [第3章: 設定](../chapter-03-configuration/README.md) |
 | <strong>次へ</strong> | [第5章: マルチエージェントソリューション](../chapter-05-multi-agent/README.md) |
 
 ---
