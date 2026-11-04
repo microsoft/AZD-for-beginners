@@ -73,8 +73,14 @@ app.get('/api/products', async (req, res) => {
 app.get('/api/products/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(`Forwarding request to ${PRODUCT_SERVICE_URL}/products/${id}`);
-    const response = await axios.get(`${PRODUCT_SERVICE_URL}/products/${id}`, {
+    const validIdPattern = /^[A-Za-z0-9_-]+$/;
+    if (!validIdPattern.test(id)) {
+      return res.status(400).json({ error: 'Invalid product ID format' });
+    }
+
+    const safeId = encodeURIComponent(id);
+    console.log(`Forwarding request to ${PRODUCT_SERVICE_URL}/products/${safeId}`);
+    const response = await axios.get(`${PRODUCT_SERVICE_URL}/products/${safeId}`, {
       timeout: 5000
     });
     res.json(response.data);
