@@ -22,7 +22,7 @@ After reviewing changelog entries, you will be able to:
 
 ## Version History
 
-### Unreleased - 2026-11-04
+### [v3.24.0]- 2026-11-04
 
 #### Fixed
 - Repaired English course navigation, moved-page paths, missing anchors, and obsolete external references, including the Chapter 2 link to the production AI guide.
