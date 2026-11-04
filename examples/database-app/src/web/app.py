@@ -107,11 +107,11 @@ def health():
         }), 200
         
     except Exception as e:
-        logger.error(f"Health check failed: {str(e)}")
+        logger.exception("Health check failed")
         return jsonify({
             'status': 'unhealthy',
             'database': 'disconnected',
-            'error': str(e)
+            'error': 'Internal server error'
         }), 503
 
 @app.route('/products')
