@@ -1,10 +1,10 @@
 # Azure Developer CLI を使った AI モデルのデプロイ
 
 **章のナビゲーション:**
-- **📚 コースホーム**: [AZD For Beginners](../../README.md)
+- **📚 コースホーム**: [初心者向けAZD](../../README.md)
 - **📖 現在の章**: 第2章 - AIファースト開発
-- **⬅️ 前へ**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ 次へ**: [AI Workshop Lab](ai-workshop-lab.md)
+- **⬅️ 前へ**: [Microsoft Foundry 統合](microsoft-foundry-integration.md)
+- **➡️ 次へ**: [AIワークショップ・ラボ](ai-workshop-lab.md)
 - **🚀 次の章**: [第3章: 設定](../chapter-03-configuration/configuration.md)
 
 このガイドは、モデル選択から本番展開パターンに至るまで、AZD テンプレートを用いた AI モデルのデプロイに関する包括的な手順を提供します。
@@ -493,10 +493,10 @@ async def check_ai_models():
 ---
 
 **章のナビゲーション:**
-- **📚 コースホーム**: [AZD For Beginners](../../README.md)
+- **📚 コースホーム**: [初心者向けAZD](../../README.md)
 - **📖 現在の章**: 第2章 - AIファースト開発
-- **⬅️ 前へ**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ 次へ**: [AI Workshop Lab](ai-workshop-lab.md)
+- **⬅️ 前へ**: [Microsoft Foundry 統合](microsoft-foundry-integration.md)
+- **➡️ 次へ**: [AIワークショップ・ラボ](ai-workshop-lab.md)
 - **🚀 次の章**: [第3章: 設定](../chapter-03-configuration/configuration.md)
 
 ---
