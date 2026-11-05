@@ -1,23 +1,23 @@
-# Kabanata 8: Mga Pattern sa Produksyon at Enterprise
+# Kabanata 8: Mga Pattern sa Produksyon at Negosyo
 
-**📚 Kurso**: [AZD Para sa Nagsisimula](../../README.md) | **⏱️ Tagal**: 2-3 oras | **⭐ Antas ng Kahirapan**: Mataas
+**📚 Kurso**: [AZD Para sa Mga Nagsisimula](../../README.md) | **⏱️ Tagal**: 2-3 oras | **⭐ Antas ng Kahirapan**: Advanced
 
 ---
 
 ## Pangkalahatang-ideya
 
-Sinasaklaw ng kabanatang ito ang mga enterprise-ready na pattern ng pag-deploy, pagpapatibay ng seguridad, pagmo-monitor, at pag-optimize ng gastos para sa mga workload ng AI sa produksyon.
+Tinalakay sa kabanatang ito ang mga pattern ng pag-deploy na handa para sa negosyo, pagpapalakas ng seguridad, pagmamanman, at pag-optimize ng gastos para sa mga workload ng AI sa produksyon.
 
-> Na-validate gamit ang `azd 1.25.6` noong Hunyo 2026.
+> Napatunayan gamit ang `azd 1.27.1` noong Hulyo 2026.
 
 ## Mga Layunin sa Pagkatuto
 
-Sa pagtatapos ng kabanatang ito, magagawa mo:
-- Mag-deploy ng mga resilient na aplikasyon sa maraming rehiyon
-- Magpatupad ng mga pattern ng seguridad para sa enterprise
-- I-configure ang komprehensibong pagmo-monitor
-- I-optimize ang mga gastos sa malaking sukat
-- I-set up ang CI/CD pipelines gamit ang AZD
+Sa pagkumpleto ng kabanatang ito, matututuhan mo:
+- Mag-deploy ng mga multi-region resilient na aplikasyon
+- Magpatupad ng mga pattern ng seguridad para sa negosyo
+- Mag-ayos ng komprehensibong pagmamanman
+- Mag-optimize ng mga gastos sa malaking sukat
+- Mag-set up ng mga CI/CD pipeline gamit ang AZD
 
 ---
 
@@ -25,17 +25,17 @@ Sa pagtatapos ng kabanatang ito, magagawa mo:
 
 | # | Aralin | Paglalarawan | Oras |
 |---|--------|-------------|------|
-| 1 | [Mga Kasanayan sa Produksyon ng AI](production-ai-practices.md) | Mga pattern ng pag-deploy para sa enterprise | 90 min |
+| 1 | [Mga Praktis sa Produksyon ng AI](production-ai-practices.md) | Mga pattern ng pag-deploy sa negosyo | 90 min |
 
 ---
 
-## 🚀 Checklist ng Produksyon
+## 🚀 Checklist para sa Produksyon
 
-- [ ] Pag-deploy sa maraming rehiyon para sa pagiging matatag
-- [ ] Pinamamahalaang identity para sa pagpapatunay (walang mga susi)
-- [ ] Application Insights para sa pagmo-monitor
-- [ ] Na-configure ang mga budget sa gastos at mga alerto
-- [ ] Pinagana ang security scanning
+- [ ] Multi-region deployment para sa resilience
+- [ ] Managed identity para sa authentication (walang mga key)
+- [ ] Application Insights para sa pagmamanman
+- [ ] Mga nakatakdang badyet at mga alerto sa gastos
+- [ ] Security scanning na naka-enable
 - [ ] Integrasyon ng CI/CD pipeline
 - [ ] Plano para sa disaster recovery
 
@@ -47,21 +47,21 @@ Sa pagtatapos ng kabanatang ito, magagawa mo:
 
 ```mermaid
 graph LR
-    Gateway[Gateway ng API] --> AI[Serbisyo ng AI] --> Models[Mga Modelo ng Microsoft Foundry]
-    Gateway --> Auth[Serbisyo ng Awentikasyon]
-    AI --> Data[Imbakan ng Datos]
+    Gateway[API Gateway] --> AI[AI Service] --> Models[Microsoft Foundry Models]
+    Gateway --> Auth[Auth Service]
+    AI --> Data[Data Store]
 ```
 
 ### Pattern 2: Event-Driven AI
 
 ```mermaid
 graph LR
-    EventGrid[Grid ng Mga Kaganapan] --> Functions[Mga Pag-andar] --> Pipeline[Daloy ng AI]
+    EventGrid[Event Grid] --> Functions[Functions] --> Pipeline[AI Pipeline]
 ```
 
 ---
 
-## 🔐 Mga Pinakamahuhusay na Praktis sa Seguridad
+## 🔐 Pinakamahusay na Praktis sa Seguridad
 
 ```bicep
 // Use managed identity
@@ -82,15 +82,15 @@ properties: {
 
 ## 💰 Pag-optimize ng Gastos
 
-| Estratehiya | Pag-iimpok |
+| Strategy | Savings |
 |----------|---------|
-| I-scale hanggang zero (Container Apps) | 60-80% |
-| Gamitin ang consumption tiers para sa dev | 50-70% |
-| Nakaiskedyul na scaling | 30-50% |
-| Nakalaan na kapasidad | 20-40% |
+| Sukatin hanggang zero (Container Apps) | 60-80% |
+| Gumamit ng consumption tiers para sa dev | 50-70% |
+| Iskedyul na scaling | 30-50% |
+| Reserved capacity | 20-40% |
 
 ```bash
-# Itakda ang mga alerto sa badyet
+# Set budget alerts
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -100,36 +100,36 @@ az consumption budget create \
 
 ---
 
-## 📊 Pagsasaayos ng Pagmo-monitor
+## 📊 Setup ng Monitoring
 
 ```bash
-# I-stream ang mga log
+# Stream logs
 azd monitor --logs
 
-# Suriin ang Application Insights
+# Check Application Insights
 azd monitor --overview
 
-# Tingnan ang mga metric
+# View metrics
 az monitor metrics list --resource <resource-id>
 ```
 
 ---
 
-## 🔗 Nabigasyon
+## 🔗 Navigasyon
 
-| Direksyon | Kabanata |
+| Direction | Chapter |
 |-----------|---------|
-| **Nakaraan** | [Kabanata 7: Pag-troubleshoot](../chapter-07-troubleshooting/README.md) |
-| **Course Complete** | [Home ng Kurso](../../README.md) |
+| **Nakaraan** | [Kabanata 7: Troubleshooting](../chapter-07-troubleshooting/README.md) |
+| **Tapos na ang Kurso** | [Home ng Kurso](../../README.md) |
 
 ---
 
-## 📖 Mga Kaugnay na Mapagkukunan
+## 📖 Kaugnay na mga Resources
 
-- [Gabay sa AI Agents](../chapter-02-ai-development/agents.md)
+- [AI Agents Guide](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Mga Solusyong Multi-Agent](../chapter-05-multi-agent/README.md)
-- [Halimbawa ng Microservices](../../examples/microservices/README.md)
+- [Multi-Agent Solutions](../chapter-05-multi-agent/README.md)
+- [Microservices Example](../../examples/microservices/README.md)
 
 ---
 
