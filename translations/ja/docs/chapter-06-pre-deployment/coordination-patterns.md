@@ -3,10 +3,10 @@
 ⏱️ <strong>推定所要時間</strong>: 60〜75 分 | 💰 <strong>推定コスト</strong>: 約$100-300/月 | ⭐ <strong>複雑さ</strong>: 上級
 
 **📚 学習パス:**
-- ← 前へ: [Capacity Planning](capacity-planning.md) - リソースのサイズ見積もりとスケーリング戦略
+- ← 前へ: [キャパシティプランニング](capacity-planning.md) - リソースのサイズ見積もりとスケーリング戦略
 - 🎯 <strong>現在位置</strong>: マルチエージェント調整パターン（オーケストレーション、通信、状態管理）
-- → 次へ: [SKU Selection](sku-selection.md) - 適切な Azure サービスの選択
-- 🏠 [Course Home](../../README.md)
+- → 次へ: [SKU 選定](sku-selection.md) - 適切な Azure サービスの選択
+- 🏠 [コースホーム](../../README.md)
 
 ---
 
@@ -41,7 +41,8 @@ graph TD
     Orchestrator[オーケストレーター] --> Agent1[エージェント1<br/>計画]
     Orchestrator --> Agent2[エージェント2<br/>コード]
     Orchestrator --> Agent3[エージェント3<br/>レビュー]
-```- ✅ 特定のタスクに特化したエージェント
+```
+- ✅ 特定のタスクに特化したエージェント
 - ✅ スピードのための並列実行
 - ✅ モジュール化され保守しやすい
 - ✅ 複雑なワークフローに強い
