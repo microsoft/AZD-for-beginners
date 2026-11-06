@@ -1,433 +1,227 @@
-# Simple Flask API - Container App Eksempel
+# Enkel Flask API — Azure Container Apps
 
-**Læringssti:** Begynder ⭐ | **Tid:** 25-35 minutter | **Pris:** $0-15/måned
+**Niveau:** Begynder · **Tid:** 30–45 minutter inklusive opsætning
 
-En komplet, fungerende Python Flask REST-API udrullet til Azure Container Apps ved hjælp af Azure Developer CLI (azd). Dette eksempel demonstrerer containerudrulning, autoskalering og grundlæggende overvågning.
+Udrul en Python Flask CRUD API med Azure Developer CLI (azd). Kildekode, Dockerfile,
+Bicep og udrulningsparametre er inkluderet. Dette er et **læreeksempel**, ikke
+en produktionsklar API.
 
-## 🎯 Hvad du lærer
+## Hvad du vil lære
 
-- Udrul en containeriseret Python-applikation til Azure
-- Konfigurer autoskalering med scale-to-zero
-- Implementer sundhedsprober og readiness-tjek
-- Overvåg applikationens logfiler og målinger
-- Brug Azure Developer CLI til hurtig udrulning
-
-## 📦 Hvad er inkluderet
-
-✅ **Flask-applikation** - Fuldstændig REST-API med CRUD-operationer (`src/app.py`)  
-✅ **Dockerfile** - Produktionsklar containerkonfiguration  
-✅ **Bicep-infrastruktur** - Container Apps-miljø og API-udrulning  
-✅ **AZD-konfiguration** - Opsætning til udrulning med én kommando  
-✅ **Sundhedsprober** - Liveness- og readiness-tjek konfigureret  
-✅ **Autoskalering** - 0-10 replikaer baseret på HTTP-trafik  
-
-## Arkitektur
+- Byg og publicer en container gennem azd.
+- Konfigurer ingress og liveness/readiness probes.
+- Verificer CRUD-svar og inspicer applikationslogs.
+- Forstå hvorfor data i hukommelsen er uegnet til holdbare applikationer.
 
 ```mermaid
-graph TD
-    subgraph ACA[Azure Container Apps-miljø]
-        Flask[Flask API-container<br/>Sundhedsendepunkter<br/>REST API<br/>Autoskalering 0-10 replikaer]
-        AppInsights[Application Insights]
-    end
+flowchart LR
+    Client -->|HTTPS| API[Flask API — Container App]
+    API --> Memory[Process-local item dictionary]
+    API -->|stdout| Logs[Container Apps / Log Analytics]
 ```
+
+**Vigtigt:** elementerne holdes i én proces. Standard er **én Gunicorn worker,
+0–1 replikaer**, hvilket bevidst undgår inkonsistente data på tværs af workers/replikaer.
+Elementer går tabt ved genstart, revisionsændring eller skalering til nul. Øget antal replikaer
+kræver delt vedvarende lager. API'en har ingen autentifikation eller autorisation.
 
 ## Forudsætninger
 
-### Påkrævet
-- **Azure Developer CLI (azd)** - [Installationsvejledning](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure-abonnement** - [Gratis konto](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Installer Docker](https://www.docker.com/products/docker-desktop/) (til lokal test)
-
-### Bekræft forudsætninger
+- [Nuværende stabile azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+  (publiseret version ved gennemgangstidspunkt: 1.37.2).
+- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) til verifikation.
+- Docker med kørende daemon; det er påkrævet for standard lokal image build.
+- Azure abonnement, rettigheder til ressourceoprettelse og regional kvote for Container Apps.
+- Bash til kommandoerne nedenfor (eller tilsvarende PowerShell).
+- Python 3.11 til valgfri lokal udvikling.
 
 ```bash
-# Kontroller azd-version (kræver 1.5.0 eller nyere)
 azd version
-
-# Bekræft Azure-login
+az version
+docker info
 azd auth login
-
-# Kontroller Docker (valgfrit, til lokal test)
-docker --version
+az login
 ```
 
-## ⏱️ Tidslinje for udrulning
+CLI-værktøjerne har separate login-sessioner. Brug samme abonnement i begge.
 
-| Phase | Duration | What Happens |
-|-------|----------|--------------||
-| Environment setup | 30 seconds | Create azd environment |
-| Build container | 2-3 minutes | Docker build Flask app |
-| Provision infrastructure | 3-5 minutes | Create Container Apps, registry, monitoring |
-| Deploy application | 2-3 minutes | Push image and deploy to Container Apps |
-| **Total** | **8-12 minutes** | Complete deployment ready |
+## Hurtig start
 
-## Hurtigstart
+Fra rodmappen af repository:
 
 ```bash
-# Naviger til eksemplet
 cd examples/container-app/simple-flask-api
-
-# Initialiser miljøet (vælg et unikt navn)
-azd env new myflaskapi
-
-# Udrul alt (infrastruktur + applikation)
+azd env new flask-demo
 azd up
-# Du bliver bedt om at:
-# 1. Vælg Azure-abonnement
-# 2. Vælg placering (f.eks. eastus2)
-# 3. Vent 8-12 minutter på udrulningen
-
-# Hent dit API-endpoint
-azd env get-values
-
-# Test API'en
-curl $(azd env get-value API_ENDPOINT)/health
-```
-
-**Forventet output:**
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z",
-  "service": "simple-flask-api",
-  "version": "1.0.0"
-}
-```
-
-## ✅ Bekræft udrulning
-
-### Trin 1: Tjek udrulningsstatus
-
-```bash
-# Vis udrullede tjenester
-azd show
-
-# Forventet output viser:
-# - Tjeneste: api
-# - Endepunkt: https://ca-api-[env].xxx.azurecontainerapps.io
-# - Status: Kører
-```
-
-### Trin 2: Test API-endpoints
-
-```bash
-# Hent API-endpoint
 API_URL=$(azd env get-value API_ENDPOINT)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
+API_NAME=$(azd env get-value API_NAME)
+curl --fail-with-body "${API_URL}/health"
+```
 
-# Test sundhed
-curl $API_URL/health
+Forventet: HTTP 200 og JSON med `"status":"healthy"`,
+`"service":"simple-flask-api"` og et aktuelt UTC-tidsstempel.
+Provisionering og image build tager typisk adskillige minutter; tider kan variere.
 
-# Test rod-endpoint
-curl $API_URL/
+Første provisionering bruger et offentligt hello-world image, lyt på port 80.
+`azure.yaml` vælger `infra/app/api.bicep` og den tilsvarende parameterfil til
+serviceudrulning, som skifter image, ingress og probes til port 8000.
+Slet ikke disse udrulningsparametre.
 
-# Opret en vare
-curl -X POST $API_URL/api/items \
+## Verificer CRUD
+
+Kør følgende sekventielt mens samme replika er aktiv:
+
+```bash
+# Create: HTTP 201; note the returned id (1 for a fresh process).
+curl -i -X POST "${API_URL}/api/items" \
   -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "My first item"}'
+  -d '{"name":"Test Item","description":"My first item"}'
 
-# Hent alle varer
-curl $API_URL/api/items
+# Read list: HTTP 200, total 1 in a fresh process.
+curl --fail-with-body "${API_URL}/api/items"
+
+# Replace 1 if your create response returned another id.
+curl --fail-with-body "${API_URL}/api/items/1"
+curl -i -X PUT "${API_URL}/api/items/1" \
+  -H "Content-Type: application/json" -d '{"name":"Updated Item"}'
+curl -i -X DELETE "${API_URL}/api/items/1"
+curl -i "${API_URL}/api/items/1"
 ```
 
-**Succeskriterier:**
-- ✅ Sundheds-endpoint returnerer HTTP 200
-- ✅ Root-endpoint viser API-oplysninger
-- ✅ POST opretter element og returnerer HTTP 201
-- ✅ GET returnerer oprettede elementer
+Succes: POST 201, reads/PUT 200, DELETE 204 uden body, derefter manglende element 404.
+Ugyldig/ikke-objekt JSON eller et tomt navn returnerer 400.
+Hvis et element forsvinder mellem forespørgsler, tjek for genstart eller skalering til nul;
+dette er en tilsigtet begrænsning i hukommelsen, ikke vedvarende lagring.
 
-### Trin 3: Se logfiler
+| Endpoint | Metoder |
+|---|---|
+| `/` | GET — serviceinformation |
+| `/health` | GET — liveness/readiness |
+| `/api/items` | GET, POST |
+| `/api/items/{id}` | GET, PUT, DELETE |
+
+## Logs og konfiguration
 
 ```bash
-# Se live-logfiler med azd monitor
-azd monitor --logs
-
-# Eller brug Azure CLI:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# Du bør se:
-# - Gunicorn-opstartsmeddelelser
-# - HTTP-anmodningslogfiler
-# - Applikationsinformationslogfiler
+az containerapp logs show --name "$API_NAME" --resource-group "$RG_NAME" --follow
 ```
 
-## Projektstruktur
+Forventet: Gunicorn opstart, adgangslogs for requests og applikationsbeskeder.
+`azd monitor --logs` åbner en portalvisning; den streamer ikke til terminalen.
+Application Insights er provisioneret men **ikke instrumenteret af denne Flask-kode**;
+brug Container Apps/Log Analytics til stdout-logs.
 
+Rediger `infra/app/api.bicep` for CPU/hukommelse, replika-grænser eller skaléringsregler, og
+kør derefter `azd up`. Standard er 0,5 vCPU, 1 GiB, minimum 0 / maksimum 1 replika, og en
+HTTP grænseværdi på 50 samtidige forespørgsler. Skalering til nul kan tilføje koldstart-latens.
+
+Vilkårlige `azd env set MAX_REPLICAS`, `API_KEY`, `LOG_LEVEL` eller
+`SCALE_TO_ZERO_TIMEOUT` værdier er **ikke koblet til denne skabelon eller app**.
+At sætte en værdi gør den ikke automatisk til en runtime miljøvariabel.
+Imaget binder eksplicit til port 8000; opdater Dockerfile, Bicep ingress og probes
+sammen hvis porten ændres.
+
+## Filer
+
+```text
+azure.yaml
+infra/main.bicep
+infra/main.parameters.json
+infra/app/container-apps.bicep       # Environment, registry, monitoring
+infra/app/api.bicep                  # App, ingress, probes, scale settings
+infra/app/api.parameters.json        # Image and resource values for azd deploy
+src/app.py
+src/Dockerfile
+src/requirements.txt
 ```
-simple-flask-api/
-├── azure.yaml              # AZD configuration
-├── infra/
-│   ├── main.bicep         # Main infrastructure
-│   ├── main.parameters.json
-│   └── app/
-│       ├── container-env.bicep
-│       └── api.bicep
-└── src/
-    ├── app.py             # Flask application
-    ├── requirements.txt
-    └── Dockerfile
-```
 
-## API-endpoints
+## Lokal udvikling
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/health` | GET | Sundhedstjek |
-| `/api/items` | GET | List alle elementer |
-| `/api/items` | POST | Opret nyt element |
-| `/api/items/{id}` | GET | Hent specifikt element |
-| `/api/items/{id}` | PUT | Opdater element |
-| `/api/items/{id}` | DELETE | Slet element |
-
-## Konfiguration
-
-### Miljøvariabler
+Fra denne eksempelmappen:
 
 ```bash
-# Angiv brugerdefineret konfiguration
-azd env set PORT 8000
-azd env set LOG_LEVEL info
-azd env set MAX_REPLICAS 20
+python -m venv .venv
+source .venv/bin/activate  # PowerShell: .\.venv\Scripts\Activate.ps1
+python -m pip install -r src/requirements.txt
+python src/app.py
 ```
 
-### Skaleringskonfiguration
-
-API'en skalerer automatisk baseret på HTTP-trafik:
-- **Min Replicas**: 0 (skalerer til nul når inaktiv)
-- **Max Replicas**: 10
-- **Concurrent Requests per Replica**: 50
-
-## Udvikling
-
-### Kør lokalt
+I et andet terminalvindue, test `http://localhost:8000/health` og CRUD-endpoints.
+Eller byg og kør det faktiske image:
 
 ```bash
-# Installer afhængigheder
-cd src
-pip install -r requirements.txt
-
-# Kør appen
-python app.py
-
-# Test lokalt
-curl http://localhost:8000/health
-```
-
-### Byg og test container
-
-```bash
-# Byg Docker-billede
 docker build -t flask-api:local ./src
-
-# Kør containeren lokalt
-docker run -p 8000:8000 flask-api:local
-
-# Test containeren
-curl http://localhost:8000/health
+docker run --rm -p 8000:8000 flask-api:local
 ```
 
-## Udrulning
+For udelukkende kodeændringer efter først udrulning, kør `azd deploy api`.
+For Bicep-ændringer, kør `azd up` for at gen-provisionere og udrulle.
 
-### Fuld udrulning
+## Praktiske øvelser
+
+### 1. Validér afvisning af input
+
+**Startpunkt:** udrullet API, `API_URL` ovenfor.
+**Mål:** verificer API’en afviser ugyldige JSON-formater og manglende navne.
 
 ```bash
-# Udrul infrastruktur og applikation
-azd up
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '[]'
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '{"name":""}'
 ```
 
-### Kun kode-udrulning
+**Succes kriterier / løsning:** begge returnerer 400 med en JSON-fejl, ikke 500.
+**Almindeligt problem:** undladelse af JSON content-type header.
+
+### 2. Tilføj en skrivebeskyttet version-endpoint
+
+**Startpunkt:** `src/app.py`. **Mål:** udvid og genudrul API’en.
+Tilføj dette før `if __name__ == '__main__':` blokken:
+
+```python
+@app.route('/version', methods=['GET'])
+def version():
+    return jsonify({'version': '1.0.0'})
+```
+
+Kør `azd deploy api`, derefter `curl --fail-with-body "${API_URL}/version"`.
+**Succes kriterier:** HTTP 200 og `{"version":"1.0.0"}`.
+**Almindeligt problem:** at placere ruten efter den blokerende `app.run()` kald når
+der testes med `python src/app.py`.
+
+### Videnscheckpoint
+
+Hvorfor er én worker utilstrækkelig til holdbare data? Fordi selv en proces mister
+sit ordbogsindhold ved genstart. En produktionsversion behøver delt vedvarende lager,
+autentifikation, autorisation, migrationer, tests og operationel overvågning.
+
+## Omkostninger og fejlsøgning
+
+Dette er ikke en garanteret $0 udrulning: det Basic registry og log-lagring/-indtagelse
+kan give omkostninger selv når app-beregninger er nul. Brug
+[priskalkulatoren](https://azure.microsoft.com/pricing/calculator/) for dit område.
+
+- **Docker build-fejl:** bekræft `docker info`, netværksadgang og afhængigheder.
+- **Uegnet app:** undersøg konsol-/systemlogs og verificer image-port, ingress,
+  og probes stemmer overens. En pladsholder må ikke probes på Flask-porten.
+- **403/permissions:** bekræft abonnement og rettigheder til ressourceoprettelse.
+- **Elementer forsvinder:** in-memory tilstand nulstilles ved genstart/skalering til nul; tilføj en database
+  for holdbar adfærd.
+
+## Oprydning og næste trin
 
 ```bash
-# Udrul kun applikationskode (infrastrukturen uændret)
-azd deploy api
+azd down
 ```
 
-### Opdater konfiguration
+Gennemgå sletningsprompten og bekræft at den dedikerede ressourcegruppe er fjernet.
+Brug ikke destruktiv oprydning mod en ressourcegruppe med upåvirkede data.
 
-```bash
-# Opdater miljøvariabler
-azd env set API_KEY "new-api-key"
-
-# Genudrul med ny konfiguration
-azd deploy api
-```
-
-## Overvågning
-
-### Se logfiler
-
-```bash
-# Stream live-logfiler med azd monitor
-azd monitor --logs
-
-# Eller brug Azure CLI til Container Apps:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# Vis de sidste 100 linjer
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-```
-
-### Overvåg målinger
-
-```bash
-# Åbn Azure Monitor-dashboard
-azd monitor --overview
-
-# Vis specifikke målinger
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "Requests,ResponseTime"
-```
-
-## Test
-
-### Sundhedscheck
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/health
-```
-
-Forventet svar:
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z"
-}
-```
-
-### Opret element
-
-```bash
-curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/items \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "A test item"}'
-```
-
-### Hent alle elementer
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
-```
-
-## Omkostningsoptimering
-
-Denne udrulning bruger scale-to-zero, så du betaler kun, når API'en behandler forespørgsler:
-
-- **Inaktiv pris**: ~$0/måned (skaleret til nul)
-- **Aktiv omkostning**: ~$0.000024/sekund per replika
-- **Forventet månedlig omkostning** (let brug): $5-15
-
-### Reducer omkostninger yderligere
-
-```bash
-# Reducer maks. antal replikaer for dev
-azd env set MAX_REPLICAS 3
-
-# Brug kortere tomgangstimeout
-azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 minutter
-```
-
-## Fejlfinding
-
-### Container starter ikke
-
-```bash
-# Kontroller containerlogfiler ved hjælp af Azure CLI
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-
-# Bekræft, at Docker-billedet bygges lokalt
-docker build -t test ./src
-```
-
-### API ikke tilgængelig
-
-```bash
-# Bekræft, at ingress er ekstern
-az containerapp show --name api --resource-group rg-simple-flask-api \
-  --query properties.configuration.ingress.external
-```
-
-### Høje svartider
-
-```bash
-# Kontroller CPU- og hukommelsesforbrug
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "CPUPercentage,MemoryPercentage"
-
-# Skaler ressourcerne op om nødvendigt
-az containerapp update --name api --resource-group rg-simple-flask-api \
-  --cpu 1.0 --memory 2Gi
-```
-
-## Oprydning
-
-```bash
-# Slet alle ressourcer
-azd down --force --purge
-```
-
-## Næste skridt
-
-### Udvid dette eksempel
-
-1. **Tilføj database** - Integrer Azure Cosmos DB eller SQL Database
-   ```bash
-   # Tilføj Cosmos DB-modul til infra/main.bicep
-   # Opdater app.py med databaseforbindelse
-   ```
-
-2. **Tilføj autentificering** - Implementer Microsoft Entra ID eller API-nøgler
-   ```python
-   # Tilføj autentificeringsmiddleware til app.py
-   from functools import wraps
-   ```
-
-3. **Opsæt CI/CD** - GitHub Actions workflow
-   ```yaml
-   # Create .github/workflows/deploy.yml
-   name: Deploy to Azure
-   on: [push]
-   ```
-
-4. **Tilføj Managed Identity** - Sikre adgang til Azure-tjenester
-   ```bicep
-   # Update infra/app/api.bicep
-   identity: { type: 'SystemAssigned' }
-   ```
-
-### Relaterede eksempler
-
-- **[Database-app](../../../../../examples/database-app)** - Fuldstændigt eksempel med SQL-database
-- **[Mikrotjenester](../../../../../examples/container-app/microservices)** - Arkitektur med flere services
-- **[Container Apps Master Guide](../README.md)** - Alle container-mønstre
-
-### Læringsressourcer
-
-- 📚 [AZD For Beginners Course](../../../README.md) - Kursusets hovedside
-- 📚 [Container Apps Patterns](../README.md) - Flere udrulningsmønstre
-- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - Skabeloner fra fællesskabet
-
-## Yderligere ressourcer
-
-### Dokumentation
-- **[Flask Documentation](https://flask.palletsprojects.com/)** - Vejledning til Flask-rammeværket
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Officiel Azure-dokumentation
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd kommando-reference
-
-### Vejledninger
-- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Udrul din første app
-- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Guide til Python-udvikling
-- **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastruktur som kode
-
-### Værktøjer
-- **[Azure Portal](https://portal.azure.com)** - Administrer ressourcer visuelt
-- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - IDE-integration
-
----
-
-**🎉 Tillykke!** Du har udrullet en produktionsklar Flask-API til Azure Container Apps med autoskalering og overvågning.
-
-**Spørgsmål?** [Opret en issue](https://github.com/microsoft/AZD-for-beginners/issues) eller tjek [FAQ](../../../resources/faq.md)
+[Næste: Database app](../../../../../examples/database-app) · [Microservices](../../../../../examples/container-app/microservices) ·
+[Container oversigt](../README.md) · [Kursus startside](../../../README.md) ·
+[Rapportér en fejl](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 

@@ -1,19 +1,19 @@
-# Kapittel 2: AI-Først Utvikling
+# Kapittel 2: AI-First Utvikling
 
-**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Varighet**: 1-2 timer | **⭐ Vanskelighetsgrad**: Middels
+**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Varighet**: 4-5 timer inkludert verksted | **⭐ Kompleksitet**: Middels
 
 ---
 
 ## Oversikt
 
-Dette kapitlet fokuserer på å distribuere AI-drevne applikasjoner ved hjelp av Azure Developer CLI og Microsoft Foundry-tjenester. Fra enkle AI-chatapper til intelligente agenter med verktøy.
+Dette kapittelet fokuserer på å distribuere AI-drevne applikasjoner ved bruk av Azure Developer CLI og Microsoft Foundry-tjenester. Fra enkle AI-chatapper til intelligente agenter med verktøy.
 
-> **Valideringsnotat (2026-07-13):** Kommando flyten og utvidelsesveiledningen i dette kapittelet ble gjennomgått mot `azd` `1.27.1` og den nåværende forhåndsvisning AI agent-utgivelsen `azure.ai.agents` `1.0.0-beta.5`. Hvis du bruker en eldre AZD-versjon, oppdater først og fortsett deretter med øvelsene.
+> **Utgivelsesgjennomgang (2026-11-04):** AI CLI-veiledning ble sjekket opp mot publisert `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, og `azure.ai.evaluations` `1.0.0-beta.2` dokumentasjon/kilde. Bruk `azd >= 1.37.0` for den kombinerte arbeidsflyten. Evalueringer bruker nå det separate `azd ai eval`-navnerommet; se [endringer i utgivelsen og migrasjonsveiledning](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Dette er ikke en validering av levende distribusjon.
 
 ## Læringsmål
 
-Ved å fullføre dette kapitlet vil du:
-- Distribuere AI-applikasjoner ved hjelp av forhåndsbygde AZD-maler
+Ved å fullføre dette kapittelet vil du:
+- Distribuere AI-applikasjoner ved bruk av forhåndslagde AZD-maler
 - Forstå Microsoft Foundry-integrasjon med AZD
 - Konfigurere og tilpasse AI-agenter med verktøy
 - Distribuere RAG (Retrieval-Augmented Generation) applikasjoner
@@ -24,26 +24,28 @@ Ved å fullføre dette kapitlet vil du:
 
 | # | Leksjon | Beskrivelse | Tid |
 |---|---------|-------------|-----|
-| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | Koble AZD med Foundry-tjenester | 30 min |
-| 2 | [AI Agents Guide](agents.md) | Distribuere intelligente agenter med verktøy | 45 min |
-| 3 | [AI Model Deployment](ai-model-deployment.md) | Distribuere og konfigurere AI-modeller | 30 min |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Praktisk: Gjør din AI-løsning AZD-klar | 60 min |
+| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | Koble AZD til Foundry-tjenester | 30 min |
+| 2 | [AI Agents Guide](agents.md) | Distribuer intelligente agenter med verktøy | 45 min |
+| 3 | [AI Model Deployment](ai-model-deployment.md) | Distribuer og konfigurer AI-modeller | 30 min |
+| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Praktisk: Utforsk en mal og planlegg din konvertering | 2-3 timer |
 
 ---
 
-## 🚀 Rask start
+## 🚀 Komme i gang raskt
+
+Velg ett alternativ i en ny tom katalog. Den avsluttende `.` initialiserer den nåværende katalogen; ellers kan AZD opprette en undermappe uten å endre skallens arbeidskatalog.
 
 ```bash
-# Alternativ 1: RAG Chat-applikasjon
-azd init --template azure-search-openai-demo
+# Option 1: RAG Chat Application
+azd init --template azure-search-openai-demo .
 azd up
 
-# Alternativ 2: AI-agenter
-azd init --template get-started-with-ai-agents
+# Option 2: AI Agents
+azd init --template get-started-with-ai-agents .
 azd up
 
-# Alternativ 3: Rask chatteapp
-azd init --template openai-chat-app-quickstart
+# Option 3: Quick Chat App
+azd init --template openai-chat-app-quickstart .
 azd up
 ```
 
@@ -53,18 +55,20 @@ azd up
 
 | Mal | Beskrivelse | Tjenester |
 |-----|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG-chat med henvisninger | OpenAI + AI Search |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG-chat med sitater | OpenAI + AI Search |
 | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI-agent med verktøy | AI Agent Service |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Grunnleggende AI-chat | OpenAI + Container Apps |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Enkel AI-chat | OpenAI + Container Apps |
 
 ---
 
 ## 💰 Kostnadsbevissthet
 
-| Miljø | Estimert månedskostnad |
-|-------|----------------------|
+Dette er illustrerende spenn, ikke tilbud eller tak; modelltrafikk, Search/compute SKUer, region og valgfrie funksjoner kan overstige disse. Gjennomgå gjeldende prisveiledning for ditt valgte eksempel før provisjonering.
+
+| Miljø | Anslått månedskostnad |
+|-------|-----------------------|
 | Utvikling | $80-150 |
-| Testing | $150-300 |
+| Staging | $150-300 |
 | Produksjon | $300-3,500+ |
 
 **Tips:** Kjør `azd down` etter testing for å unngå kostnader.

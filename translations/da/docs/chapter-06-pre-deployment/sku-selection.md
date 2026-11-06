@@ -1,64 +1,66 @@
-# SKU-udvælgelsesguide - Vælg de rigtige Azure-serviceniveauer
+# SKU-udvalgsguide - Vælg de rigtige Azure-tjenesteniveauer
 
 **Kapitelnavigation:**
-- **📚 Kursusforside**: [AZD For Begyndere](../../README.md)
-- **📖 Aktuelt kapitel**: Kapitel 6 - Forvalidering & planlægning før udrulning
+- **📚 Kursushjem**: [AZD For Beginners](../../README.md)
+- **📖 Nuværende kapitel**: Kapitel 6 - Forudinstallationsvalidering og planlægning
 - **⬅️ Forrige**: [Kapacitetsplanlægning](capacity-planning.md)
-- **➡️ Næste**: [Forudgående tjek](preflight-checks.md)
+- **➡️ Næste**: [Forudkontroller](preflight-checks.md)
 - **🚀 Næste kapitel**: [Kapitel 7: Fejlfinding](../chapter-07-troubleshooting/common-issues.md)
 
 ## Introduktion
 
-Denne omfattende guide hjælper dig med at vælge optimale Azure-service-SKUs (Stock Keeping Units) til forskellige miljøer, arbejdsbelastninger og krav. Lær at analysere ydelsesbehov, omkostningshensyn og skaleringskrav for at vælge de mest passende serviceniveauer til dine Azure Developer CLI-udrulninger.
+Denne omfattende guide hjælper dig med at vælge optimale Azure-tjeneste-SKU'er (Stock Keeping Units) til forskellige miljøer, arbejdsbelastninger og krav. Lær at analysere ydeevnebehov, omkostningshensyn og skaleringskrav for at vælge de mest passende tjenesteniveauer til dine Azure Developer CLI-udrulninger.
 
 ## Læringsmål
 
 Når du har gennemført denne guide, vil du:
 - Forstå Azure SKU-koncepter, prismodeller og funktionsforskelle
-- Mestre miljøspecifikke strategier for valg af SKU til udvikling, staging og produktion
-- Analysere arbejdsbelastningskrav og matche dem til passende serviceniveauer
+- Mestre miljøspecifikke SKU-udvælgelsesstrategier til udvikling, staging og produktion
+- Analysere arbejdsbelastningskrav og matche dem med passende tjenesteniveauer
 - Implementere omkostningsoptimeringsstrategier gennem intelligent SKU-udvælgelse
-- Anvende ydelsetest- og valideringsteknikker for SKU-valg
+- Anvende ydeevnetest- og valideringsteknikker for SKU-valg
 - Konfigurere automatiserede SKU-anbefalinger og overvågning
 
 ## Læringsresultater
 
-Ved afslutning vil du være i stand til at:
-- Vælge passende Azure-service-SKUs baseret på arbejdsbelastningskrav og begrænsninger
-- Designe omkostningseffektive multi-miljøarkitekturer med korrekt niveauvalg
-- Implementere ydelsesbenchmarking og validering for SKU-valg
+Når du har gennemført guiden, vil du kunne:
+- Vælge passende Azure-tjeneste-SKU'er baseret på arbejdsbelastningskrav og begrænsninger
+- Designe omkostningseffektive multi-miljøarkitekturer med korrekt niveaubeskrivelse
+- Implementere ydeevnemåling og validering for SKU-valg
 - Oprette automatiserede værktøjer til SKU-anbefaling og omkostningsoptimering
-- Planlægge SKU-migrationer og skaleringsstrategier ved ændrede krav
-- Anvende Azure Well-Architected Framework-principper til valg af serviceniveau
+- Planlægge SKU-migrationer og skaleringsstrategier til ændrende krav
+- Anvende principperne i Azure Well-Architected Framework til tjenesteniveauvalg
 
 ## Indholdsfortegnelse
 
-- [Forståelse af SKUs](../../../../docs/chapter-06-pre-deployment)
-- [Miljøbaseret udvælgelse](../../../../docs/chapter-06-pre-deployment)
-- [Tjenestespecifikke retningslinjer](../../../../docs/chapter-06-pre-deployment)
-- [Strategier for omkostningsoptimering](../../../../docs/chapter-06-pre-deployment)
-- [Ydelsesovervejelser](../../../../docs/chapter-06-pre-deployment)
-- [Hurtige referencetabeller](../../../../docs/chapter-06-pre-deployment)
-- [Valideringsværktøjer](../../../../docs/chapter-06-pre-deployment)
+- [Forstå SKUs](#understanding-skus)
+- [Miljøbaseret udvælgelse](#environment-based-selection)
+- [Tjenestespecifikke retningslinjer](#service-specific-guidelines)
+- [Omkostningsoptimeringsstrategier](#cost-optimization-strategies)
+- [Ydeevnehensyn](#performance-considerations)
+- [Hurtig reference-tabeller](#quick-reference-tables)
+- [Valideringsværktøjer](#validation-tools)
 
 ---
 
-## Forståelse af SKUs
+## Forstå SKUs
+
+> **Eksempelmål:** YAML SKU-kort og ydeevnekonfigurationer nedenfor er designnotater, ikke en `azure.yaml`-skema eller en load-tool-konfiguration. Bicep-blokke er alternativer/fragmenter: deklarer deres parametre og overordnede ressourcer, brug unikke symbolske navne, når du kombinerer dem, og sammenkobl moduler i et fungerende projekt. Priser, grænser og regional/SKU-tilgængelighed skal tjekkes for dit abonnement inden udrulning.
 
 ### Hvad er SKUs?
 
-SKUs (Stock Keeping Units) repræsenterer forskellige serviceniveauer og ydelsesniveauer for Azure-ressourcer. Hver SKU tilbyder forskellige:
+SKUs (Stock Keeping Units) repræsenterer forskellige tjenesteniveauer og ydeevneniveauer for Azure-ressourcer. Hver SKU tilbyder forskellig:
 
-- **Ydelseskarakteristika** (CPU, hukommelse, gennemstrømning)
-- **Funktionstilgængelighed** (skaléringsmuligheder, SLA-niveauer)
-- **Prisstrukturer** (forbrugsbaseret, reserveret kapacitet)
+- **Ydeevnekarakteristika** (CPU, hukommelse, gennemstrømning)
+- **Funktionstilgængelighed** (skaleringsmuligheder, SLA-niveauer)
+- **Prismodeller** (forbrugsbaseret, reserveret kapacitet)
 - **Regional tilgængelighed** (ikke alle SKUs er tilgængelige i alle regioner)
 
-### Vigtige faktorer ved valg af SKU
+### Vigtige faktorer i SKU-udvælgelse
 
-1. **Belastningskrav**
-   - Forventet trafik/belastningsmønstre
-   - Ydelseskrav (CPU, hukommelse, I/O)
+1. **Arbejdsbelastningskrav**
+   - Forventede trafik-/belastningsmønstre
+   - Ydeevnekrav (CPU, hukommelse, I/O)
    - Lagringsbehov og adgangsmønstre
 
 2. **Miljøtype**
@@ -68,10 +70,10 @@ SKUs (Stock Keeping Units) repræsenterer forskellige serviceniveauer og ydelses
 
 3. **Budgetbegrænsninger**
    - Initiale omkostninger vs. driftsomkostninger
-   - Rabatter ved reserveret kapacitet
+   - Rabatter for reserveret kapacitet
    - Omkostningsimplikationer ved autoskalering
 
-4. **Vækstprognoser**
+4. **Vækstforventninger**
    - Skaleringskrav
    - Fremtidige funktionsbehov
    - Migreringskompleksitet
@@ -82,9 +84,9 @@ SKUs (Stock Keeping Units) repræsenterer forskellige serviceniveauer og ydelses
 
 ### Udviklingsmiljø
 
-**Prioriteter**: Omkostningsoptimering, grundlæggende funktionalitet, nem igangsættelse og afvikling
+**Prioriteter**: Omkostningsoptimering, grundlæggende funktionalitet, nem provisioning/deprovisioning
 
-#### Recommended SKUs
+#### Anbefalede SKUs
 ```yaml
 # Development environment configuration
 environment: development
@@ -92,23 +94,23 @@ skus:
   app_service: "F1"          # Free tier
   sql_database: "Basic"       # Basic tier, 5 DTU
   storage: "Standard_LRS"     # Locally redundant
-  cosmos_db: "Free"          # Free tier (400 RU/s)
+  cosmos_db: "Standard"      # Free tier is an account opt-in, not a SKU
   key_vault: "Standard"      # Standard pricing tier
-  application_insights: "Free" # First 5GB free
+  application_insights: "workspace-based" # Consumption billing; no Free SKU
 ```
 
-#### Karakteristika
-- **App Service**: F1 (Free) eller B1 (Basic) til enkel testning
-- **Databaser**: Basic-tier med minimale ressourcer
+#### Egenskaber
+- **App Service**: F1 (gratis) eller B1 (grundlæggende) til simpel testning
+- **Databaser**: Grundlæggende niveau med minimale ressourcer
 - **Storage**: Standard med kun lokal redundans
-- **Compute**: Delte ressourcer er acceptable
-- **Networking**: Grundlæggende konfigurationer
+- **Compute**: Delte ressourcer acceptable
+- **Netværk**: Grundlæggende konfigurationer
 
 ### Staging/testmiljø
 
-**Prioriteter**: Produktionslignende konfiguration, omkostningsbalance, evne til ydelsestest
+**Prioriteter**: Produktionslignende konfiguration, omkostningsbalance, mulighed for ydeevnetest
 
-#### Recommended SKUs
+#### Anbefalede SKUs
 ```yaml
 # Staging environment configuration
 environment: staging
@@ -120,35 +122,35 @@ skus:
   container_apps: "Consumption" # Pay-per-use
 ```
 
-#### Karakteristika
-- **Ydelse**: 70-80% af produktionskapaciteten
-- **Funktioner**: De fleste produktionsfunktioner aktiveret
+#### Egenskaber
+- **Ydeevne**: 70-80 % af produktionskapaciteten
+- **Funktioner**: Flertallet af produktionsfunktioner aktiveret
 - **Redundans**: Nogen geografisk redundans
-- **Skalering**: Begrænset autoskalering til test
-- **Overvågning**: Fuldt overvågningsstack
+- **Skalering**: Begrænset autoskalering til testformål
+- **Overvågning**: Fuld overvågningsstack
 
 ### Produktionsmiljø
 
-**Prioriteter**: Ydelse, tilgængelighed, sikkerhed, overholdelse, skalerbarhed
+**Prioriteter**: Ydeevne, tilgængelighed, sikkerhed, overholdelse, skalerbarhed
 
-#### Recommended SKUs
+#### Anbefalede SKUs
 ```yaml
 # Production environment configuration
 environment: production
 skus:
   app_service: "P1V3"        # Premium v3 tier
   sql_database: "P2"         # Premium tier, 250 DTU
-  storage: "Premium_GRS"     # Premium geo-redundant
+  storage: "Standard_GRS"    # Geo-redundant; Premium_GRS is not a storage SKU
   cosmos_db: "Provisioned"   # Dedicated throughput
   container_apps: "Dedicated" # Dedicated environment
   key_vault: "Premium"       # Premium with HSM
 ```
 
-#### Karakteristika
-- **Høj tilgængelighed**: 99,9%+ SLA-krav
-- **Ydelse**: Dedikerede ressourcer, høj gennemstrømning
-- **Sikkerhed**: Premium-sikkerhedsfunktioner
-- **Skalering**: Fuld autoskaleringskapacitet
+#### Egenskaber
+- **Høj tilgængelighed**: 99,9 %+ SLA-krav
+- **Ydeevne**: Dedikerede ressourcer, høj gennemstrømning
+- **Sikkerhed**: Premium sikkerhedsfunktioner
+- **Skalering**: Fuld autoskaleringsevne
 - **Overvågning**: Omfattende observabilitet
 
 ---
@@ -157,15 +159,15 @@ skus:
 
 ### Azure App Service
 
-#### SKU beslutningsmatrix
+#### SKU-beslutningsmatrix
 
-| Brugstilfælde | Anbefalet SKU | Begrundelse |
-|----------|----------------|-----------|
-| Udvikling/Test | F1 (Free) eller B1 (Basic) | Omkostningseffektivt, tilstrækkeligt til test |
-| Små produktionsapps | S1 (Standard) | Egendefinerede domæner, SSL, autoskalering |
+| Anvendelsestilfælde | Anbefalet SKU | Begrundelse |
+|-------------------|--------------|------------|
+| Udvikling/test | F1 (gratis) eller B1 (grundlæggende) | Omkostningseffektivt, tilstrækkeligt til testning |
+| Små produktionsapps | S1 (standard) | Brugerdefinerede domæner, SSL, autoskalering |
 | Mellemstore produktionsapps | P1V3 (Premium V3) | Bedre ydeevne, flere funktioner |
-| Apps med høj trafik | P2V3 eller P3V3 | Dedikerede ressourcer, høj ydeevne |
-| Mission-kritiske apps | I1V2 (Isolated V2) | Netværksisolation, dedikeret hardware |
+| Højtrafik-apps | P2V3 eller P3V3 | Dedikerede ressourcer, høj ydeevne |
+| Mission-kritiske apps | I1V2 (Isoleret V2) | Netværksisolering, dedikeret hardware |
 
 #### Konfigurationseksempler
 
@@ -203,17 +205,17 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 
 ### Azure SQL Database
 
-#### Ramme for valg af SKU
+#### SKU-udvælgelsesramme
 
 1. **DTU-baseret (Database Transaction Units)**
    - **Basic**: 5 DTU - Udvikling/test
    - **Standard**: S0-S12 (10-3000 DTU) - Generelt formål
-   - **Premium**: P1-P15 (125-4000 DTU) - Ydelseskritisk
+   - **Premium**: P1-P15 (125-4000 DTU) - Ydeevnekritisk
 
-2. **vCore-baseret** (Anbefalet til produktion)
-   - **General Purpose**: Balanseret beregningsressourcer og lager
+2. **vCore-baseret** (Anbefales til produktion)
+   - **General Purpose**: Balanceret compute og storage
    - **Business Critical**: Lav latenstid, høj IOPS
-   - **Hyperscale**: Meget skalerbart lager (op til 100TB)
+   - **Hyperscale**: Meget skalerbar storage; verificer aktuelle størrelsesbegrænsninger og regional support
 
 #### Eksempelkonfigurationer
 
@@ -255,18 +257,18 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 #### Miljøtyper
 
 1. **Forbrugsbaseret**
-   - Betal-per-brug prissætning
-   - Velegnet til udvikling og variable arbejdsbelastninger
+   - Betal pr. brug
+   - Egnet til udvikling og variable arbejdsbelastninger
    - Delt infrastruktur
 
-2. **Dedikeret (arbejdsbelastningsprofiler)**
-   - Dedikerede beregningsressourcer
+2. **Dedikeret (Arbejdsbelastningsprofiler)**
+   - Dedikerede compute-ressourcer
    - Forudsigelig ydeevne
    - Bedre til produktionsarbejdsbelastninger
 
 #### Konfigurationseksempler
 
-**Udvikling (Forbrug)**
+**Udvikling (forbrug)**
 ```bicep
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: 'cae-${environmentName}-dev'
@@ -284,7 +286,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
     configuration: {
       ingress: {
         external: true
-        targetPort: 3000
+        targetPort: 80 // nginx listens on 80 by default
       }
     }
     template: {
@@ -305,9 +307,9 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
 }
 ```
 
-**Produktion (Dedikeret)**
+**Produktion (dedikeret)**
 ```bicep
-resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
+resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-03-01' = {
   name: 'cae-${environmentName}-prod'
   location: location
   properties: {
@@ -315,31 +317,33 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
     workloadProfiles: [{
       name: 'production-profile'
       workloadProfileType: 'D4'
-      minimumCount: 2
+      minimumCount: 3
       maximumCount: 10
     }]
   }
 }
 ```
 
+Zoneredundans kræver også understøttet regionsinfrastruktur og passende VNet/subnet-konfiguration, som er udeladt her. Dette eksempel budgetterer med tre dedikerede noder; konfigurer mindst to app-replikater til kryds-zone distribution og dimensioner både replikater og noder til zonesvigt. Se [Container Apps pålidelighedsguide](https://learn.microsoft.com/azure/reliability/reliability-azure-container-apps). For at placere en app på denne profil, indstil dens `workloadProfileName: 'production-profile'`; selve oprettelsen af profilen flytter ikke apps til den.
+
 ### Azure Cosmos DB
 
 #### Gennemstrømningsmodeller
 
-1. **Manuel provisioneret gennemstrømning**
+1. **Manuelt provisioneret gennemstrømning**
    - Forudsigelig ydeevne
    - Rabatter for reserveret kapacitet
-   - Bedst for stabile arbejdsbelastninger
+   - Bedst til stabile arbejdsbelastninger
 
-2. **Autoskalering provisioneret gennemstrømning**
-   - Automatisk skalering baseret på forbrug
-   - Betal for hvad du bruger (med minimum)
+2. **Autoskalering med provisioneret gennemstrømning**
+   - Automatisk skalering baseret på brug
+   - Betal for det, du bruger (med minimum)
    - God til variable arbejdsbelastninger
 
 3. **Serverless**
-   - Betal-per-anmodning
+   - Betal pr. forespørgsel
    - Ingen provisioneret gennemstrømning
-   - Ideel til udvikling og intermittent arbejdsbelastning
+   - Ideel til udvikling og intermittent belastning
 
 #### SKU-eksempler
 
@@ -398,17 +402,17 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 
 ### Azure Storage Account
 
-#### Typer af Storage-konti
+#### Storage-kontotyper
 
 1. **Standard_LRS** - Udvikling, ikke-kritiske data
 2. **Standard_GRS** - Produktion, behov for geo-redundans
 3. **Premium_LRS** - Højtydende applikationer
 4. **Premium_ZRS** - Høj tilgængelighed med zoneredundans
 
-#### Ydelsestrin
+#### Ydeevneniveauer
 
 - **Standard**: Generelt formål, omkostningseffektivt
-- **Premium**: Højtydende, lav-latens scenarier
+- **Premium**: Højtydende, lav latenstid scenarier
 
 ```bicep
 // Development
@@ -449,19 +453,22 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ---
 
-## Strategier for omkostningsoptimering
+## Omkostningsoptimeringsstrategier
 
 ### 1. Reserveret kapacitet
 
-Reserver ressourcer i 1-3 år for betydelige rabatter:
+Reservér ressourcer i 1-3 år for betydelige rabatter:
 
 ```bash
-# Tjek reservationsmuligheder
-az reservations catalog show --reserved-resource-type SqlDatabase
-az reservations catalog show --reserved-resource-type CosmosDb
+# With the reservation extension available, inspect the subscription catalog
+az reservations catalog show \
+  --subscription-id "$AZURE_SUBSCRIPTION_ID" \
+  --reserved-resource-type SqlDatabases
 ```
 
-### 2. Korrekt dimensionering
+Tilbudsformer og kvalificerede ressourcetyper varierer; undersøg kataloget og købsbetingelserne i stedet for at antage, at hver tjeneste/SKU understøtter reservation.
+
+### 2. Rettidig dimensionering
 
 Start med mindre SKUs og skaler op baseret på faktisk brug:
 
@@ -479,7 +486,7 @@ production:
 
 ### 3. Autoskaleringskonfiguration
 
-Implementér intelligent skalering for at optimere omkostningerne:
+Implementer intelligent skalering for at optimere omkostninger:
 
 ```bicep
 resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
@@ -496,6 +503,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
       rules: [
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'GreaterThan'
@@ -513,6 +521,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
         }
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'LessThan'
@@ -538,7 +547,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 
 ### 4. Planlagt skalering
 
-Skaler ned i perioder uden aktivitet:
+Skaler ned i lavtrafiktider:
 
 ```json
 {
@@ -583,11 +592,11 @@ Skaler ned i perioder uden aktivitet:
 
 ---
 
-## Ydelsesovervejelser
+## Ydeevnehensyn
 
-### Grundlæggende ydeevnekrav
+### Baseline-ydeevnekrav
 
-Definér klare ydeevnekrav før valg af SKU:
+Definer klare ydeevnekrav før SKU-udvælgelse:
 
 ```yaml
 performance_requirements:
@@ -608,11 +617,13 @@ performance_requirements:
 Test forskellige SKUs for at validere ydeevne:
 
 ```bash
-# Azure Load Testing-tjeneste
+# Azure Load Testing service (requires an existing load-testing resource,
+# the load extension, and a valid config plus referenced test script)
 az load test create \
-  --name "sku-performance-test" \
-  --resource-group $RESOURCE_GROUP \
-  --load-test-config @load-test-config.yaml
+  --load-test-resource "$LOAD_TEST_RESOURCE" \
+  --resource-group "$RESOURCE_GROUP" \
+  --test-id "sku-performance-test" \
+  --load-test-config-file load-test-config.yaml
 ```
 
 ### Overvågning og optimering
@@ -626,7 +637,8 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   kind: 'web'
   properties: {
     Application_Type: 'web'
-    RetentionInDays: 90
+    WorkspaceResourceId: logAnalyticsWorkspace.id
+    IngestionMode: 'LogAnalytics'
   }
 }
 
@@ -646,43 +658,43 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ## Hurtige referencetabeller
 
-### App Service SKU - hurtig reference
+### App Service SKU Hurtig Reference
 
-| SKU | Niveau | vCPU | RAM | Storage | Prisklasse | Anvendelsestilfælde |
-|-----|------|------|-----|---------|-------------|----------|
-| F1 | Free | Shared | 1GB | 1GB | Free | Udvikling |
-| B1 | Basic | 1 | 1.75GB | 10GB | $ | Små apps |
-| S1 | Standard | 1 | 1.75GB | 50GB | $$ | Produktion |
+| SKU | Niveau | vCPU | RAM | Storage | Prisklasse | Brugstilfælde |
+|-----|--------|------|-----|---------|------------|--------------|
+| F1 | Gratis | Delt | 1GB | 1GB | Gratis | Udvikling |
+| B1 | Grundlæggende | 1 | 1,75GB | 10GB | $ | Små apps |
+| S1 | Standard | 1 | 1,75GB | 50GB | $$ | Produktion |
 | P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | Høj ydeevne |
-| I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | Enterprise |
+| I1V2 | Isoleret V2 | 2 | 8GB | 1TB | $$$$ | Enterprise |
 
-### SQL Database SKU - hurtig reference
+### SQL Database SKU Hurtig Reference
 
-| SKU | Niveau | DTU/vCore | Lager | Prisklasse | Anvendelsestilfælde |
-|-----|------|-----------|---------|-------------|----------|
-| Basic | Basic | 5 DTU | 2GB | $ | Udvikling |
+| SKU | Niveau | DTU/vCore | Storage | Prisklasse | Brugstilfælde |
+|-----|--------|-----------|---------|------------|--------------|
+| Basic | Grundlæggende | 5 DTU | 2GB | $ | Udvikling |
 | S2 | Standard | 50 DTU | 250GB | $$ | Lille produktion |
 | P2 | Premium | 250 DTU | 1TB | $$$ | Høj ydeevne |
-| GP_Gen5_4 | General Purpose | 4 vCore | 4TB | $$$ | Balanseret |
-| BC_Gen5_8 | Business Critical | 8 vCore | 4TB | $$$$ | Missionkritisk |
+| GP_Gen5_4 | Generelt formål | 4 vCore | 4TB | $$$ | Balanseret |
+| BC_Gen5_8 | Business Critical | 8 vCore | 4TB | $$$$ | Mission-critical |
 
-### Container Apps - hurtig reference
+### Container Apps SKU Hurtig Reference
 
-| Model | Prissætning | CPU/Hukommelse | Anvendelsestilfælde |
-|-------|---------|------------|----------|
-| Consumption | Betal-per-brug | 0.25-2 vCPU | Udvikling, variabel belastning |
-| Dedicated D4 | Reserveret | 4 vCPU, 16GB | Produktion |
-| Dedicated D8 | Reserveret | 8 vCPU, 32GB | Høj ydeevne |
+| Model | Prisfastsættelse | CPU/Hukommelse | Brugstilfælde |
+|-------|-----------------|---------------|--------------|
+| Forbrug | Betal pr. brug | Understøttede CPU/hukommelseskombinationer afhænger af miljø/profil | Udvikling eller produktion, variabel belastning |
+| Dedikeret D4 | Fakturering pr. dedikeret node | 4 vCPU, 16GiB pr. node | Vedvarende belastning/isoleringsbehov |
+| Dedikeret D8 | Fakturering pr. dedikeret node | 8 vCPU, 32GiB pr. node | Højere vedvarende belastning |
 
 ---
 
 ## Valideringsværktøjer
 
-### SKU-tilgængelighedskontrol
+### SKU Tilgængelighedstjekker
 
 ```bash
 #!/bin/bash
-# Kontroller SKU-tilgængelighed i målregionen
+# Check SKU availability in target region
 
 check_sku_availability() {
     local region=$1
@@ -699,7 +711,8 @@ check_sku_availability() {
             az sql db list-editions --location $region --output table
             ;;
         "storage")
-            az storage account check-name --name "test" --output table
+            # Name availability is not SKU availability.
+            az storage sku list --query "[?name=='$sku'].{name:name,locations:locations,restrictions:restrictions}" --output json
             ;;
         *)
             echo "Resource type not supported"
@@ -707,14 +720,16 @@ check_sku_availability() {
     esac
 }
 
-# Brug
+# Usage
 check_sku_availability "eastus" "app-service" "P1V3"
 ```
 
 ### Omkostningsestimeringsscript
 
+**Pseudokode kun:** `Get-ResourceCost` nedenfor er en projektspecifik funktion, du skal implementere ved hjælp af aktuelle regionale/kontraktmæssige priser og brugsantagelser. Det er ikke en PowerShell- eller Azure-cmdlet.
+
 ```powershell
-# PowerShell-script til estimering af omkostninger
+# PowerShell script for cost estimation
 function Get-AzureCostEstimate {
     param(
         [string]$SubscriptionId,
@@ -728,7 +743,7 @@ function Get-AzureCostEstimate {
         $resourceType = $resource.Key
         $sku = $resource.Value
         
-        # Brug Azure Pricing-API eller prisberegner
+        # Use Azure Pricing API or calculator
         $cost = Get-ResourceCost -Type $resourceType -SKU $sku
         $totalCost += $cost
         
@@ -738,7 +753,7 @@ function Get-AzureCostEstimate {
     Write-Host "Total estimated cost: $totalCost/month"
 }
 
-# Brug
+# Usage
 $resources = @{
     "AppService" = "P1V3"
     "SqlDatabase" = "GP_Gen5_4"
@@ -748,7 +763,9 @@ $resources = @{
 Get-AzureCostEstimate -ResourceGroup "rg-myapp-prod" -Resources $resources
 ```
 
-### Ydelsesvalidering
+### Ydeevnevalidering
+
+Følgende YAML er et kravsskema, **ikke** et Azure Load Testing-, JMeter-, Locust- eller k6-inputskema. Oversæt det til dit valgte værktøjs reelle konfiguration, før du bruger load-test-kommandoen ovenfor.
 
 ```yaml
 # Load test configuration for SKU validation
@@ -783,43 +800,43 @@ test_configuration:
 
 ---
 
-## Opsummering af bedste praksis
+## Resumé af bedste praksis
 
-### Gør
+### Gør's
 
 1. **Start småt og skaler op** baseret på faktisk brug
 2. **Brug forskellige SKUs til forskellige miljøer**
-3. **Overvåg løbende ydeevne og omkostninger**
-4. **Udnyt reserveret kapacitet til produktionsarbejdsbelastninger**
-5. **Implementér autoskalering hvor det er passende**
+3. **Overvåg ydeevne og omkostninger løbende**
+4. **Udnyt reserveret kapacitet til produktionsbelastninger**
+5. **Implementer autoskalering, hvor det er relevant**
 6. **Test ydeevne med realistiske arbejdsbelastninger**
 7. **Planlæg for vækst, men undgå overprovisionering**
 8. **Brug gratis niveauer til udvikling, når det er muligt**
 
-### Undgå
+### Don'ts
 
 1. **Brug ikke produktions-SKUs til udvikling**
 2. **Ignorer ikke regional SKU-tilgængelighed**
-3. **Glem ikke dataoverførselsomkostninger**
-4. **Overprovisionér ikke uden begrundelse**
+3. **Glem ikke omkostninger ved dataoverførsel**
+4. **Overprovisioner ikke uden begrundelse**
 5. **Ignorer ikke afhængigheders indvirkning**
-6. **Sæt ikke autoskaleringsgrænser for højt**
-7. **Glem ikke krav til overholdelse**
-8. **Tag ikke beslutninger udelukkende baseret på pris**
+6. **Sæt ikke autoskaleringgrænser for højt**
+7. **Glem ikke overholdelseskrav**
+8. **Træf ikke beslutninger baseret kun på pris**
 
 ---
 
-**Pro Tip**: Brug Azure Cost Management og Advisor til at få personlige anbefalinger til at optimere dine SKU-valg baseret på faktiske brugsdata.
+**Pro tip**: Brug Azure Cost Management og Advisor til at få personlige anbefalinger for at optimere dine SKU-valg baseret på faktiske brugsmønstre.
 
 ---
 
 **Navigation**
 - **Forrige lektion**: [Kapacitetsplanlægning](capacity-planning.md)
-- **Næste lektion**: [Forudgående tjek](preflight-checks.md)
+- **Næste lektion**: [Forudkontroller](preflight-checks.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Ansvarsfraskrivelse:
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, bedes du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritiske oplysninger anbefales en professionel, menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, som opstår som følge af brugen af denne oversættelse.
+**Ansvarsfraskrivelse**:
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

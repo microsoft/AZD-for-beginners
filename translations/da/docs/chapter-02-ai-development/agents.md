@@ -1,101 +1,98 @@
 # AI-agenter med Azure Developer CLI
 
 **Kapitelnavigation:**
-- **📚 Kursushjemmeside**: [AZD For Beginners](../../README.md)
-- **📖 Nuværende kapitel**: Kapitel 2 - AI-Første Udvikling
+- **📚 Kursus Hjem**: [AZD For Beginners](../../README.md)
+- **📖 Nuværende Kapitel**: Kapitel 2 - AI-Først Udvikling
 - **⬅️ Forrige**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Næste**: [AI Model Deployment](ai-model-deployment.md)
-- **🚀 Avanceret**: [Multi-Agent Solutions](../../examples/retail-scenario.md)
+- **🚀 Avanceret**: [Multi-Agent Løsninger](../../examples/retail-scenario.md)
 
 ---
 
 ## Introduktion
 
-AI-agenter er autonome programmer, der kan opfatte deres miljø, træffe beslutninger og handle for at opnå specifikke mål. I modsætning til simple chatbots, der svarer på forespørgsler, kan agenter:
+AI-agenter er autonome programmer, der kan opfatte deres miljø, træffe beslutninger og tage handlinger for at opnå specifikke mål. I modsætning til simple chatbots, der svarer på forespørgsler, kan agenter:
 
-- **Bruge værktøjer** - Kalde API'er, søge i databaser, udføre kode
-- **Planlægge og ræsonnere** - Opdele komplekse opgaver i trin
-- **Lære fra kontekst** - Bevare hukommelse og tilpasse adfærd
-- **Samarbejde** - Arbejde med andre agenter (multi-agent systemer)
+- **Brug værktøjer** - Kalde API’er, søge i databaser, udføre kode
+- **Planlægge og ræsonnere** - Bryde komplekse opgaver ned i trin
+- **Lære fra kontekst** - Opretholde hukommelse og tilpasse adfærd
+- **Samarbejde** - Arbejde sammen med andre agenter (multi-agent systemer)
 
 Denne vejledning viser dig, hvordan du implementerer AI-agenter til Azure ved hjælp af Azure Developer CLI (azd).
 
-> **Valideringsnote (2026-07-13):** Denne vejledning er gennemgået med `azd` `1.27.1` og `azure.ai.agents` `1.0.0-beta.5`. `azd ai`-oplevelsen er stadig preview-baseret, så tjek udvidelseshjælpen, hvis dine installerede flag adskiller sig.
+At bruge samtalekontekst er ikke modeltræning: vedvarende hukommelse, adgangskontrol og opbevaring skal implementeres/konfigureres af applikationen.
+
+> **Udgivelsesgennemgang (2026-11-04):** CLI-eksempler blev tjekket i forhold til `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, og `azure.ai.evaluations` `1.0.0-beta.2` dokumentation/kilde, ikke en live Azure-udrulning. Brug `azd >= 1.37.0` til den samlede arbejdsgang. Se [seneste ændringer og rettelser](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes) før opgradering af ældre projekter.
 
 ## Læringsmål
 
 Ved at gennemføre denne vejledning vil du:
-- Forstå, hvad AI-agenter er, og hvordan de adskiller sig fra chatbots
-- Implementere færdigbyggede AI-agent-templates med AZD
-- Konfigurere Foundry-agenter for tilpassede agenter
+- Forstå hvad AI-agenter er, og hvordan de adskiller sig fra chatbots
+- Implementere færdigbyggede skabeloner til AI-agenter med AZD
+- Konfigurere Foundry-agenter til tilpassede agenter
 - Implementere grundlæggende agentmønstre (værktøjsbrug, RAG, multi-agent)
 - Overvåge og fejlfinde implementerede agenter
 
 ## Læringsresultater
 
-Efter afslutning vil du kunne:
-- Implementere AI-agentapplikationer til Azure med en enkelt kommando
+Når du er færdig, vil du være i stand til at:
+- Implementere AI-agent-applikationer til Azure med en enkelt kommando
 - Konfigurere agentværktøjer og kapaciteter
 - Implementere retrieval-augmented generation (RAG) med agenter
 - Designe multi-agent arkitekturer til komplekse arbejdsgange
-- Fejlsøge almindelige problemer med agentimplementering
+- Fejlsøge almindelige problemer med agentudrulning
 
 ---
 
-## 🤖 Hvad gør en agent forskellig fra en chatbot?
+## 🤖 Hvad gør en Agent anderledes end en Chatbot?
 
 | Funktion | Chatbot | AI Agent |
 |---------|---------|----------|
-| **Adfærd** | Svarer på forespørgsler | Tager autonome handlinger |
-| **Værktøjer** | Ingen | Kan kalde API'er, søge, udføre kode |
-| **Hukommelse** | Kun baseret på session | Vedvarende hukommelse på tværs af sessioner |
-| **Planlægning** | Enkel respons | Flerskridts ræsonnement |
-| **Samarbejde** | Enkelt entitet | Kan arbejde med andre agenter |
+| **Adfærd** | Svarer på prompts | Tager autonome handlinger |
+| **Værktøjer** | Kan bruge hentning eller værktøjer | Bruger typisk værktøjer i en målorienteret løkke |
+| **Hukommelse** | Afhængig af applikationen | Vedvarende hukommelse kun hvis eksplicit implementeret |
+| **Planlægning** | Enkelt svar | Flertrins ræsonnering |
+| **Samarbejde** | Enkelt enhed | Kan arbejde med andre agenter |
 
-### Enkel analogi
+### Simpel Analog
 
-- **Chatbot** = En hjælpsom person, der svarer på spørgsmål ved et informationsbord
-- **AI Agent** = En personlig assistent, der kan ringe op, booke aftaler og udføre opgaver for dig
+- **Chatbot** = En hjælpsom person, der besvarer spørgsmål ved et informationsskrivebord
+- **AI Agent** = En personlig assistent, der kan foretage opkald, booke aftaler og gennemføre opgaver for dig
 
 ---
 
-## 🚀 Kom hurtigt i gang: Udrul din første agent
+## 🚀 Hurtig Start: Implementer Din Første Agent
 
-### Mulighed 1: Foundry Agents-skabelon (anbefalet)
+Vælg en mulighed i et **nyt tomt arbejdsmiljø**. Den afsluttende `.` initialiserer der; uden et eksplicit destination kan den nuværende AZD oprette en undermappe med skabelonnavn og ændrer ikke dit shell-katalog. Hold separate skabeloner/miljøer i separate mapper.
+
+Tid/omkostningsområderne nedenfor er vejledende, ikke bekræftede tilbud. Tjek hver eksempels aktuelle forudsætninger, priser, modelkvota og valgfrie tjenester før implementering.
+
+### Mulighed 1: Foundry Agents Skabelon (Anbefalet)
 
 ```bash
-# Initialiser AI-agenter skabelonen
-azd init --template get-started-with-ai-agents
+# Initialize the AI agents template
+azd init --template get-started-with-ai-agents .
 
-# Udrul til Azure
+# Deploy to Azure
 azd up
 ```
 
-**Hvad der implementeres:**
-- ✅ Foundry Agents
-- ✅ Microsoft Foundry Modeller (gpt-4.1)
-- ✅ Azure AI Search (til RAG)
-- ✅ Azure Container Apps (webgrænseflade)
-- ✅ Application Insights (overvågning)
+**Hvad der implementeres:** Eksemplets nuværende infrastruktur og valgte muligheder bestemmer model, værktøjer, hosting og overvågningsressourcer. Gennemgå dets README og `infra/` før provisioning; antag ikke at alle agent-skabeloner inkluderer Search eller webinterface.
 
 **Tid:** ~15-20 minutter
 **Omkostning:** ~$100-150/måned (udvikling)
 
-### Mulighed 2: OpenAI-agent med Prompty
+### Mulighed 2: Creative Writing Agents med Prompty
 
 ```bash
-# Initialiser Prompty-baseret agent skabelon
-azd init --template agent-openai-python-prompty
+# Initialize the Prompty-based agent template
+azd init --template https://github.com/Azure-Samples/contoso-creative-writer .
 
-# Udrul til Azure
+# Deploy to Azure
 azd up
 ```
 
-**Hvad der implementeres:**
-- ✅ Azure Functions (serverløs agenteksekvering)
-- ✅ Microsoft Foundry Modeller
-- ✅ Prompty konfigurationsfiler
-- ✅ Eksempel på agentimplementering
+**Hvad der implementeres:** En FastAPI/Prompty multi-agent skrive-eksempel med Azure OpenAI, Bing Grounding og Azure AI Search. Det tidligere `agent-openai-python-prompty` repository omdirigerer herhen; det er ikke en minimal Azure Functions vejr-agent skabelon. Følg dets aktuelle README for hosting, modelkvota og Bing Grounding forudsætninger.
 
 **Tid:** ~10-15 minutter
 **Omkostning:** ~$50-100/måned (udvikling)
@@ -103,203 +100,209 @@ azd up
 ### Mulighed 3: RAG Chat Agent
 
 ```bash
-# Initialiser RAG chat-skabelon
-azd init --template azure-search-openai-demo
+# Initialize RAG chat template
+azd init --template azure-search-openai-demo .
 
-# Deploy til Azure
+# Deploy to Azure
 azd up
 ```
 
 **Hvad der implementeres:**
-- ✅ Microsoft Foundry Modeller
+- ✅ Microsoft Foundry Models
 - ✅ Azure AI Search med eksempeldata
 - ✅ Dokumentbehandlingspipeline
-- ✅ Chatgrænseflade med henvisninger
+- ✅ Chat-interface med citater
 
 **Tid:** ~15-25 minutter
 **Omkostning:** ~$80-150/måned (udvikling)
 
-### Mulighed 4: AZD AI Agent Init (Manifest- eller Template-baseret preview)
+### Mulighed 4: AZD AI Agent Init (Projekt Skabelon Preview)
 
-Hvis du har en agent-manifestfil, kan du bruge `azd ai`-kommandoen til direkte at skabe et Foundry Agent Service-projekt. Seneste preview-udgivelser har også tilføjet understøttelse for template-baseret initialisering, så den præcise prompt-flow kan variere lidt afhængigt af din installerede udgave.
+Brug `azd ai agent init` interaktivt, eller tag et aktuelt `azure.yaml` agentprojekt med `--template`/`-t` i brug. Den gamle `--manifest`/`-m` mulighed er en forældet alias, ikke en konverter for ældre manifests.
 
 ```bash
-# Installer AI-agentudvidelsen
+# Install the AI agents extension
 azd extension install azure.ai.agents
 
-# Valgfrit: verificer den installerede preview-version
+# Optional: verify the installed preview version
 azd extension show azure.ai.agents
 
-# Initialiser fra en agentmanifest
-azd ai agent init -m agent-manifest.yaml
+# Initialize from a current agent project template (supply your template path)
+azd ai agent init --template ./templates/support-agent/azure.yaml
 
-# Udrul til Azure
+# Deploy to Azure
 azd up
 
-# Test den udrullede agent (viser latenstid + tid-til-første-byte)
+# Test the deployed agent (shows latency + time-to-first-byte)
 azd ai agent invoke
 ```
 
 **Hvornår man bruger `azd ai agent init` vs `azd init --template`:**
 
-| Tilgang | Bedst til | Sådan fungerer det |
+| Tilgang | Bedst til | Hvordan det virker |
 |----------|----------|------|
-| `azd init --template` | Starte ud fra en fungerende eksempelapp | Kloner et komplet skabelonrepository med kode + infrastruktur |
-| `azd ai agent init -m` | Bygge fra dit eget agentmanifest | Skaber projektstruktur ud fra din agentdefinition |
+| `azd init --template` | Starter fra en fungerende eksempelapp | Kloner et fuldt skabelonrepo med kode + infrastruktur |
+| `azd ai agent init --template` | Bruger et aktuelt Foundry agentprojekt | Bruger et `azure.yaml` projekt dokument og dets definitioner |
 
-> **Tip:** Brug `azd init --template`, når du lærer (mulighederne 1-3 ovenfor). Brug `azd ai agent init`, når du bygger produktionsagenter med dine egne manifests.
+> **Tip:** Brug `azd init --template` når du lærer (Muligheder 1-3 ovenfor). Brug `azd ai agent init` til Foundry agent arbejdsgang. For at tilføje en direkte agentdefinition til et eksisterende projekt, se [initierings- og migrationsvejledning](../chapter-08-production/production-ai-practices.md#initializing-agent-projects-with-azd-ai-agent-init).
 
-Efter `azd up` guider samme udvidelse dig igennem resten af agentens livscyklus: `azd ai agent invoke` til test, `azd ai agent eval generate` og `azd ai agent optimize` til at måle og forbedre kvalitet, og `azd ai agent delete` til oprydning. Se [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for fuld reference.
+Efter `azd up`, brug `azd ai agent invoke` til test, den separate `azure.ai.evaluations` extension (`azd ai eval init`, `generate`, og `run start`) til at måle kvaliteten og `azd ai agent optimize` til at forbedre den ved brug af den nye evalueringskonfiguration. Agenter beta.22 erstattede den gamle evalueringsarbejdsgang og ændrede optimeringens `--config` format. Se [evaluering migration](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) og [optimering migration](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration) før genbrug af ældre eksempler.
 
 ---
 
-## 🏗️ Agentarkitektur-mønstre
+## 🏗️ Agent Arkitektur Mønstre
 
-### Mønster 1: Enkel agent med værktøjer
+### Mønster 1: Enkel Agent med Værktøjer
 
-Det simpleste agentmønster - én agent, der kan bruge flere værktøjer.
+Det simpleste agentmønster - en agent, der kan bruge flere værktøjer.
 
 ```mermaid
 graph TD
-    UI[Brugergrænseflade] --> Agent[AI Agent<br/>gpt-4.1]
-    Agent --> Search[Søgeværktøj]
-    Agent --> Database[Databaseværktøj]
-    Agent --> API[API-værktøj]
+    UI[User Interface] --> Agent[AI Agent<br/>gpt-4.1]
+    Agent --> Search[Search Tool]
+    Agent --> Database[Database Tool]
+    Agent --> API[API Tool]
 ```
 
 **Bedst til:**
-- Kundesupport-bots
+- Kundesupport bots
 - Forskningsassistenter
-- Dataanalyseagenter
+- Dataanalyse agenter
 
-**AZD-skabelon:** `azure-search-openai-demo`
+**Relateret applikationseksempel:** `azure-search-openai-demo` demonstrerer RAG, ikke en generisk agentløkke med vilkårlige værktøjer.
 
 ### Mønster 2: RAG Agent (Retrieval-Augmented Generation)
 
-En agent, der henter relevante dokumenter, før den genererer svar.
+En agent, der henter relevante dokumenter før den genererer svar.
 
 ```mermaid
 graph TD
-    Query[Brugerforespørgsel] --> RAG[RAG Agent]
-    RAG --> Vector[Vektorsøgning]
+    Query[User Query] --> RAG[RAG Agent]
+    RAG --> Vector[Vector Search]
     RAG --> LLM[LLM<br/>gpt-4.1]
     Vector -- Documents --> LLM
-    LLM --> Response[Svar med henvisninger]
+    LLM --> Response[Response with Citations]
 ```
 
 **Bedst til:**
-- Enterprise vidensbaser
-- Dokument-spørgsmål & svar-systemer
-- Overholdelse og juridisk forskning
+- Virksomheders vidensbaser
+- Dokument Q&A systemer
+- Overholdelses- og juridisk forskning
 
-**AZD-skabelon:** `azure-search-openai-demo`
+**AZD Skabelon:** `azure-search-openai-demo`
 
 ### Mønster 3: Multi-Agent System
 
-Flere specialiserede agenter arbejder sammen på komplekse opgaver.
+Flere specialiserede agenter, der arbejder sammen om komplekse opgaver.
 
 ```mermaid
 graph TD
-    Orchestrator[Orkestrator Agent] --> Research[Forsknings Agent<br/>gpt-4.1]
-    Orchestrator --> Writer[Forfatter Agent<br/>gpt-4.1-mini]
-    Orchestrator --> Reviewer[Anmelder Agent<br/>gpt-4.1]
+    Orchestrator[Orchestrator Agent] --> Research[Research Agent<br/>gpt-4.1]
+    Orchestrator --> Writer[Writer Agent<br/>gpt-4.1-mini]
+    Orchestrator --> Reviewer[Reviewer Agent<br/>gpt-4.1]
 ```
 
 **Bedst til:**
 - Kompleks indholdsgenerering
-- Flerskridts arbejdsgange
-- Opgaver der kræver forskellig ekspertise
+- Flertrins arbejdsgange
+- Opgaver, der kræver forskellig ekspertise
 
-**Lær mere:** [Multi-Agent Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md)
+**Læs mere:** [Multi-Agent Koordinations Mønstre](../chapter-06-pre-deployment/coordination-patterns.md)
 
 ---
 
-## ⚙️ Konfigurering af agentværktøjer
+## ⚙️ Konfiguration af Agent Værktøjer
 
-Agenter bliver stærke, når de kan bruge værktøjer. Sådan konfigureres almindelige værktøjer:
+Agenter bliver magtfulde, når de kan bruge værktøjer. Sådan konfigurerer du almindelige værktøjer:
 
-### Værktøjskonfiguration i Foundry Agents
+### Værktøjskonfiguration i Foundry Agenter
+
+Denne **klassiske Agent Service SDK-fragment** retter sig mod `azure-ai-projects==1.0.0` og `azure-ai-agents==1.1.0` med `azure-identity`. Det er ikke den nyere versionerede agent/Responses API, som nogle nuværende Foundry skabeloner bruger, heller ikke `azure.ai.agents` AZD-udvidelsen (et andet pakke). Bland ikke disse API-generationer. Sæt `PROJECT_ENDPOINT` til en klassisk Foundry projektendepunkt og `MODEL_DEPLOYMENT_NAME` til en eksisterende understøttet modelimplementering; godkend med `az login` lokalt og tildel de krævede projektrettigheder.
 
 ```python
 # agent_config.py
+import os
 from azure.ai.projects import AIProjectClient
-from azure.ai.projects.models import FunctionTool, CodeInterpreterTool
+from azure.ai.agents.models import FunctionTool
+from azure.identity import DefaultAzureCredential
 
-# Definer brugerdefinerede værktøjer
-search_tool = FunctionTool(
-    name="search_knowledge_base",
-    description="Search the company knowledge base for relevant documents",
-    parameters={
-        "type": "object",
-        "properties": {
-            "query": {
-                "type": "string",
-                "description": "The search query"
-            }
-        },
-        "required": ["query"]
-    }
+def search_knowledge_base(query: str) -> str:
+    """Search the demonstration knowledge base.
+
+    :param query: Search text.
+    :return: Matching demonstration information.
+    """
+    # Local fixture only, not a production search implementation.
+    return "Demo policy: returns are accepted within 30 days."
+
+project_client = AIProjectClient(
+    endpoint=os.environ["PROJECT_ENDPOINT"],
+    credential=DefaultAzureCredential(),
 )
-
-# Opret agent med værktøjer
+search_tool = FunctionTool(functions={search_knowledge_base})
+project_client.agents.enable_auto_function_calls(search_tool)
 agent = project_client.agents.create_agent(
-    model="gpt-4.1",
+    model=os.environ["MODEL_DEPLOYMENT_NAME"],
     name="Support Agent",
-    instructions="You are a helpful support agent. Use the search tool to find relevant information.",
-    tools=[search_tool, CodeInterpreterTool()]
+    instructions="Use search_knowledge_base for policy questions. Label results as demo data.",
+    tools=search_tool.definitions,
 )
 ```
 
+At registrere et funktionsskema udfører ikke Python på servicen. I denne SDK kører `enable_auto_function_calls` plus `agents.runs.create_and_process(...)` registrerede callbacks i din klientproces. Se det [udgivne SDK-eksempel](https://github.com/Azure/azure-sdk-for-python/blob/azure-ai-agents_1.1.0/sdk/ai/azure-ai-agents/samples/agents_tools/sample_agents_auto_function_call.py). Luk klienten og slet demonstrationsagenter/tråde, når du er færdig.
+
 ### Miljøkonfiguration
 
+Følgende navne er **vejledende custom-template inputs**, ikke indbyggede AZD-skift. Først led hver værdi gennem `infra/main.parameters.json`, infrastruktur og applikationskode. `azd env set` alene ændrer ikke agentens værktøjer eller instruktioner.
+
 ```bash
-# Opsæt agent-specifikke miljøvariabler
+# Set up agent-specific environment variables
 azd env set AZURE_OPENAI_MODEL "gpt-4.1"
 azd env set AGENT_INSTRUCTIONS "You are a helpful assistant..."
 azd env set ENABLE_CODE_INTERPRETER "true"
 azd env set ENABLE_FILE_SEARCH "true"
 
-# Udrul med opdateret konfiguration
-azd deploy
+# Apply wired infrastructure and application changes
+azd up
 ```
 
 ---
 
-## 📊 Overvågning af agenter
+## 📊 Overvågning af Agenter
 
-### Integration med Application Insights
+### Application Insights Integration
 
-Alle AZD-agent-skabeloner inkluderer Application Insights til overvågning:
+Hvis din valgte skabelon provisionerer Application Insights og konfigurerer instrumentering:
 
 ```bash
-# Åbn overvågningsdashboard
+# Open monitoring dashboard
 azd monitor --overview
 
-# Se live-logs
+# Open the Application Insights logs view (not a streaming log tail)
 azd monitor --logs
 
-# Se live-målinger
+# View live metrics
 azd monitor --live
 ```
 
-### Centrale målepunkter at følge
+### Nøgleindikatorer at Spore
 
-| Målepunkt | Beskrivelse | Mål |
+| Metrik | Beskrivelse | Mål |
 |--------|-------------|--------|
-| Responstid | Tid til generering af svar | < 5 sekunder |
+| Responstid | Tid til at generere svar | < 5 sekunder |
 | Tokenforbrug | Tokens pr. forespørgsel | Overvåg for omkostninger |
-| Succesrate af værktøjskald | % af succesfulde værktøjskald | > 95% |
-| Fejlrater | Mislykkede agentforespørgsler | < 1% |
-| Brugertilfredshed | Feedback-score | > 4.0/5.0 |
+| Værktøjskald Successrate | % af vellykkede værktøjskald | > 95% |
+| Fejlrate | Fejlede agentforespørgsler | < 1% |
+| Bruger tilfredshed | Feedback scores | > 4.0/5.0 |
 
-### Tilpasset logning for agenter
+### Brugerdefineret Logning for Agenter
 
 ```python
 import os
 from azure.monitor.opentelemetry import configure_azure_monitor
 from opentelemetry import trace
 
-# Konfigurer Azure Monitor med OpenTelemetry
+# Configure Azure Monitor with OpenTelemetry
 configure_azure_monitor(
     connection_string=os.environ["APPLICATIONINSIGHTS_CONNECTION_STRING"]
 )
@@ -309,14 +312,14 @@ tracer = trace.get_tracer(__name__)
 def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
     with tracer.start_as_current_span("agent_interaction") as span:
         span.set_attributes({
-            "user_query": user_query,
+            "query_length": len(user_query),  # Do not log raw prompts or personal data
             "response_length": len(agent_response),
             "tools_used": tools_used,
             "latency_ms": latency_ms
         })
 ```
 
-> **Note:** Installer de nødvendige pakker: `pip install azure-monitor-opentelemetry opentelemetry`
+> **Bemærk:** Installer den krævede pakke: `pip install azure-monitor-opentelemetry`. Den bringer OpenTelemetry-afhængighederne; import-navnerum er ikke et krav for at installere en pakke med navnet `opentelemetry`.
 
 ---
 
@@ -324,96 +327,92 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
 
 ### Estimerede månedlige omkostninger efter mønster
 
+Disse er vejledende planlægningsintervaller, ikke tilbud eller udgiftslofter. Region, model tokens, Search/compute SKUs, værktøjssessioner, lager og trafik kan overstige dem. Tjek eksempels omkostningsvejledning og Azure-priser før `azd up`.
+
 | Mønster | Udviklingsmiljø | Produktion |
 |---------|-----------------|------------|
-| Enkel agent | $50-100 | $200-500 |
-| RAG agent | $80-150 | $300-800 |
-| Multi-agent (2-3 agenter) | $150-300 | $500-1.500 |
-| Enterprise multi-agent | $300-500 | $1.500-5.000+ |
+| Enkelt Agent | $50-100 | $200-500 |
+| RAG Agent | $80-150 | $300-800 |
+| Multi-Agent (2-3 agenter) | $150-300 | $500-1,500 |
+| Enterprise Multi-Agent | $300-500 | $1,500-5,000+ |
 
-### Tips til omkostningsoptimering
+### Omkostningsoptimeringstips
 
-1. **Brug gpt-4.1-mini til simple opgaver**
+1. **Brug gpt-4.1-mini til simple opgaver** (kun hvis din skabelon anvender dette input)
    ```bash
    azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
    ```
 
-2. **Implementer caching ved gentagne forespørgsler**
-   ```python
-   from functools import lru_cache
-   
-   @lru_cache(maxsize=1000)
-   def get_cached_response(query_hash):
-       return agent.run(query_hash)
-   ```
+2. **Implementér scoped caching for sikre, gentagne forespørgsler.** Inkluder lejer-/brugerautorisation, modeludrulning, instruktioner og hentningsversion i cache-nøglen; sæt udløb. Del ikke private samtalesvar via en proces-bred forespørgselsbaseret cache. SDK-agent-objektet har ingen generisk `agent.run()` metode.
 
-3. **Sæt tokenbegrænsninger pr. kørsel**
+3. **Sæt token-grænser pr. kørsel**
    ```python
-   # Indstil max_completion_tokens ved kørsel af agenten, ikke under oprettelsen
-   run = project_client.agents.create_run(
+   # Set max_completion_tokens when running the agent, not during creation
+   run = project_client.agents.runs.create_and_process(
        thread_id=thread.id,
        agent_id=agent.id,
-       max_completion_tokens=1000  # Begræns svarets længde
+       max_completion_tokens=1000  # Budget across the run; may finish as incomplete
    )
    ```
 
-4. **Skaler til nul, når ikke i brug**
+4. **Skaler berettigede Container Apps ned til nul, når de ikke er i brug**
    ```bash
-   # Container Apps skalerer automatisk til nul
+   # Custom-template input: must map to template.scale.minReplicas
    azd env set MIN_REPLICAS "0"
    ```
+   Anvend infrastrukturbeslutningen med `azd provision` eller `azd up`. Skalering til nul kræver en passende trigger og stopper ikke Search, lager eller model-/værktøjsomkostninger.
 
 ---
 
-## 🔧 Fejlfinding af agenter
+## 🔧 Fejlfinding af Agenter
 
-### Almindelige problemer og løsninger
+### Almindelige Problemer og Løsninger
 
 <details>
-<summary><strong>❌ Agent reagerer ikke på værktøjskald</strong></summary>
+<summary><strong>❌ Agent svarer ikke på værktøjskald</strong></summary>
 
 ```bash
-# Kontroller, om værktøjer er korrekt registreret
+# Inspect the application deployment (not the agent's registered tools)
 azd show
 
-# Bekræft OpenAI-udrulning
+# Verify OpenAI deployment
 az cognitiveservices account deployment list \
   --name $AZURE_OPENAI_NAME \
   --resource-group $RG_NAME
 
-# Tjek agentlogs
+# Check agent logs
 azd monitor --logs
 ```
 
 **Almindelige årsager:**
-- Uoverensstemmelse i værktøjsfunktionssignatur
+- Værktøjsfunktionssignatur passer ikke
 - Manglende nødvendige tilladelser
-- API-endpoint ikke tilgængeligt
+- API-endepunkt ikke tilgængeligt
 </details>
 
 <details>
-<summary><strong>❌ Høj latenstid i agent-svar</strong></summary>
+<summary><strong>❌ Høj forsinkelse i agentsvar</strong></summary>
 
 ```bash
-# Tjek Application Insights for flaskehalse
+# Check Application Insights for bottlenecks
 azd monitor --live
 
-# Overvej at bruge en hurtigere model
+# Consider using a faster model
 azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
-azd deploy
+azd up
 ```
 
 **Optimeringstips:**
 - Brug streaming svar
-- Implementer responscaching
-- Reducer kontekstvinduesstørrelsen
+- Implementér svartcaching
+- Reducér størrelsen på kontekstvinduet
 </details>
 
 <details>
-<summary><strong>❌ Agent returnerer ukorrekte eller hallucinerede oplysninger</strong></summary>
+<summary><strong>❌ Agent returnerer forkert eller hallucineret information</strong></summary>
 
 ```python
-# Forbedr med bedre system-prompt
+# Improve with better system prompts
 instructions = """
 You are a helpful assistant. IMPORTANT:
 - Only answer based on provided context
@@ -422,22 +421,21 @@ You are a helpful assistant. IMPORTANT:
 - Never make up information
 """
 
-# Tilføj opslag for grundlag
-agent = project_client.agents.create_agent(
-    model="gpt-4.1",
-    instructions=instructions,
-    tools=[FileSearchTool()]  # Grund svar i dokumenter
-)
+# Use these instructions in the agent definition.
+# For classic file search, first upload/index documents in a vector store,
+# then use FileSearchTool(vector_store_ids=[...]) and pass both its
+# .definitions and .resources when creating the agent.
 ```
+ Instruktioner og hentning mindsker risiko; ingen garanterer faktuelle svar. Evaluer grundede og uden-for-rammen spørgsmål mod kendte svar.
 </details>
 
 <details>
-<summary><strong>❌ Fejl om overskredet token-grænse</strong></summary>
+<summary><strong>❌ Fejl om overskredne token-grænser</strong></summary>
 
 ```python
-# Implementer kontekstvinduesstyring
+# Implement context window management
 def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
-    """Keep only recent messages within token limit."""
+    """Approximate content-only budget for objects with .content strings."""
     import tiktoken
     encoding = tiktoken.encoding_for_model(model)
     total_tokens = 0
@@ -452,132 +450,143 @@ def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
     
     return truncated
 ```
+ Denne hjælper udelukker rolle-/værktøjsskemaer, systeminstruktioner, billedtokens og protokol overhead. Reserver plads til disse og fuldførelsen; del ikke værktøjskald/resultatpar eller kasser nødvendige systeminstruktioner. Installer `tiktoken` separat. Det er ikke en generel validator for kontekstvindue.
 </details>
 
 ---
 
-## 🎓 Praktiske øvelser
+## 🎓 Praktiske Øvelser
 
-### Øvelse 1: Udrul en basal agent (20 minutter)
+### Øvelse 1: Implementer en Grundlæggende Agent (20 minutter)
 
-**Mål:** Udrul din første AI-agent med AZD
+**Mål:** Implementer din første AI-agent med AZD
 
 ```bash
-# Trin 1: Initialiser skabelon
-azd init --template get-started-with-ai-agents
+# Step 1: Initialize template
+azd init --template get-started-with-ai-agents .
 
-# Trin 2: Log ind på Azure
+# Step 2: Login to Azure
 azd auth login
-# Hvis du arbejder på tværs af lejere, tilføj --tenant-id <tenant-id>
+# If you work across tenants, add --tenant-id <tenant-id>
 
-# Trin 3: Udrul
+# Step 3: Deploy
 azd up
 
-# Trin 4: Test agenten
-# Forventet output efter udrulning:
-#   Udrulning fuldført!
-#   Endepunkt: https://<app-name>.<region>.azurecontainerapps.io
-# Åbn URL’en vist i outputtet og prøv at stille et spørgsmål
+# Step 4: Test the agent
+# Expected output after deployment:
+#   Deployment Complete!
+#   Endpoint: https://<app-name>.<region>.azurecontainerapps.io
+# Open the URL shown in the output and try asking a question
 
-# Trin 5: Se overvågning
+# Step 5: View monitoring
 azd monitor --overview
 
-# Trin 6: Ryd op
+# Step 6: Clean up
 azd down --force --purge
 ```
 
-**Succes-kriterier:**
+**Succes kriterier:**
 - [ ] Agent svarer på spørgsmål
 - [ ] Kan tilgå overvågningsdashboard via `azd monitor`
-- [ ] Ressourcer ryddet op succesfuldt
+- [ ] Ressourcer ryddet op med succes
 
-### Øvelse 2: Tilføj et tilpasset værktøj (30 minutter)
+### Øvelse 2: Tilføj et Tilpasset Værktøj (30 minutter)
 
 **Mål:** Udvid en agent med et tilpasset værktøj
 
-1. Udrul agent-skabelonen:
-   ```bash
-   azd init --template get-started-with-ai-agents
-   azd up
-   ```
-2. Opret en ny værktøjsfunktion i din agentkode:
+**Startpunkt:** Brug den klassiske SDK-klient fra [Værktøjskonfiguration](#tool-configuration-in-foundry-agents), ikke en vilkårlig skabelon med en anden SDK-generation.
+
+1. Tilføj denne deterministiske fixture til `agent_config.py`:
    ```python
    def get_weather(location: str) -> str:
-       """Get current weather for a location."""
-       # API-opkald til vejrservice
-       return f"Weather in {location}: Sunny, 72°F"
+       """Return demonstration weather, not live conditions.
+
+       :param location: City name.
+       :return: A clearly labelled fixture.
+       """
+       print(f"TOOL_CALLED: {location}")
+       return f"Demo weather in {location}: Sunny, 72°F (fixture, not live)"
    ```
-3. Registrer værktøjet hos agenten:
+2. Erstat registrerings- og oprettelsesblokken for søgeværktøjet med:
    ```python
-   from azure.ai.projects.models import FunctionTool
-
-   weather_tool = FunctionTool(
-       name="get_weather",
-       description="Get current weather for a location",
-       parameters={
-           "type": "object",
-           "properties": {
-               "location": {"type": "string", "description": "City name"}
-           },
-           "required": ["location"]
-       }
-   )
-
+   weather_tool = FunctionTool(functions={get_weather})
+   project_client.agents.enable_auto_function_calls(weather_tool)
    agent = project_client.agents.create_agent(
-       model="gpt-4.1",
+       model=os.environ["MODEL_DEPLOYMENT_NAME"],
        name="Weather Agent",
-       tools=[weather_tool]
+       instructions="Call get_weather for weather questions; explain that it returns demo data.",
+       tools=weather_tool.definitions,
    )
+   thread = project_client.agents.threads.create()
+   try:
+       project_client.agents.messages.create(
+           thread_id=thread.id, role="user", content="Use get_weather for Seattle."
+       )
+       run = project_client.agents.runs.create_and_process(
+           thread_id=thread.id, agent_id=agent.id
+       )
+       if run.status != "completed":
+           raise RuntimeError(f"Run status: {run.status}; error: {run.last_error}")
+       for message in project_client.agents.messages.list(thread_id=thread.id):
+           for text in message.text_messages:
+               print(text.text.value)
+   finally:
+       project_client.agents.threads.delete(thread.id)
+       project_client.agents.delete_agent(agent.id)
+       project_client.close()
    ```
-4. Udrul igen og test:
+3. Kør lokalt (dette kalder det eksisterende Azure-projekt og medfører modelomkostninger):
    ```bash
-   azd deploy
-   # Spørg: "Hvordan er vejret i Seattle?"
-   # Forventet: Agenten kalder get_weather("Seattle") og returnerer vejrinfo
+   python agent_config.py
+   # Expected: TOOL_CALLED: Seattle, then a completed answer labelled demo data.
    ```
 
-**Succes-kriterier:**
-- [ ] Agent genkender vejrrelaterede forespørgsler
+**Succeskriterier:**
+- [ ] Agenten genkender vejrbetingede forespørgsler
 - [ ] Værktøjet kaldes korrekt
 - [ ] Svaret inkluderer vejrinformation
 
-### Øvelse 3: Byg en RAG-agent (45 minutter)
+### Øvelse 3: Byg en RAG Agent (45 minutter)
 
-**Mål:** Skab en agent, der svarer på spørgsmål fra dine dokumenter
+**Mål:** Opret en agent, der svarer på spørgsmål ud fra dine dokumenter
 
 ```bash
-# Trin 1: Implementer RAG-skabelon
-azd init --template azure-search-openai-demo
+# Step 1: Deploy RAG template
+azd init --template azure-search-openai-demo .
 azd up
 
-# Trin 2: Upload dine dokumenter
-# Placer PDF/TXT-filer i mappen data/, og kør derefter:
-python scripts/prepdocs.py
+# Step 2: Upload your documents
+# For the sample's local ingestion path, place supported files in data/.
+# Run from the sample root after following its Python environment setup:
+./scripts/prepdocs.sh
+# Windows PowerShell equivalent: .\\scripts\\prepdocs.ps1
 
-# Trin 3: Test med domænespecifikke spørgsmål
-# Åbn webapp-URL'en fra azd up-output
-# Stil spørgsmål om dine uploadede dokumenter
-# Svar bør inkludere kildehenvisninger som [doc.pdf]
+# Step 3: Test with domain-specific questions
+# Open the web app URL from the azd up output
+# Ask questions about your uploaded documents
+# Responses should include citation references like [doc.pdf]
 ```
 
-**Succes-kriterier:**
-- [ ] Agent svarer ud fra uploadede dokumenter
-- [ ] Svar indeholder henvisninger
-- [ ] Ingen hallucination på spørgsmål uden for omfang
+**Succeskriterier:**
+- [ ] Agenten svarer ud fra uploadede dokumenter
+- [ ] Svarene inkluderer kildehenvisninger
+- [ ] Testspørgsmål uden for omfang håndteres uden uunderbyggede påstande (ikke en garanti for hvert fremtidigt spørgsmål)
+
+Hvis `USE_CLOUD_INGESTION=true`, brug i stedet eksemplets cloud ingestion/upload workflow; den lokale wrapper springer bevidst ingestion over. Efter test, kør `azd down` i RAG-miljøet og gennemgå de ressourcer, der skal slettes.
 
 ---
 
-## 📚 Næste skridt
+## 📚 Næste trin
 
-Nu hvor du forstår AI-agenter, så udforsk disse avancerede emner:
+Nu hvor du forstår AI-agenter, kan du udforske disse avancerede emner:
 
 | Emne | Beskrivelse | Link |
 |-------|-------------|------|
 | **Multi-Agent Systemer** | Byg systemer med flere samarbejdende agenter | [Retail Multi-Agent Example](../../examples/retail-scenario.md) |
-| **Koordinationsmønstre** | Lær orkestrerings- og kommunikationsmønstre | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) |
-| **Produktionimplementering** | Agentimplementering klar til enterprise | [Production AI Practices](../chapter-08-production/production-ai-practices.md) |
-| **Agent Evaluering** | Test og evaluér agentpræstation | [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) |
-| **AI Workshop Lab** | Praktisk: Gør din AI-løsning AZD-klar | [AI Workshop Lab](ai-workshop-lab.md) |
+| **Koordineringsmønstre** | Lær orkestrerings- og kommunikationsmønstre | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **Produktionsudrulning** | Agentudrulning klar til virksomhed | [Production AI Practices](../chapter-08-production/production-ai-practices.md) |
+| **Agent Evaluering** | Test og evaluer agentpræstation | [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **AI Workshop Lab** | Hands-on: Gør din AI-løsning AZD-klar | [AI Workshop Lab](ai-workshop-lab.md) |
 
 ---
 
@@ -588,18 +597,18 @@ Nu hvor du forstår AI-agenter, så udforsk disse avancerede emner:
 - [Microsoft Foundry Agent Service Quickstart](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
 - [Semantic Kernel Agent Framework](https://learn.microsoft.com/semantic-kernel/)
 
-### AZD-skabeloner til agenter
-- [Kom godt i gang med AI-agenter](https://github.com/Azure-Samples/get-started-with-ai-agents)
-- [Agent OpenAI Python Prompty](https://github.com/Azure-Samples/agent-openai-python-prompty)
+### AZD Skabeloner til Agenter
+- [Kom i gang med AI-agenter](https://github.com/Azure-Samples/get-started-with-ai-agents)
+- [Kreative skriveagenter med Prompty](https://github.com/Azure-Samples/contoso-creative-writer)
 - [Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-### Community-ressourcer
-- [Awesome AZD - Agent-skabeloner](https://azure.github.io/awesome-azd/?tags=ai-agents)
+### Community ressourcer
+- [Awesome AZD - Agent Skabeloner](https://azure.github.io/awesome-azd/?tags=ai-agents)
 - [Azure AI Discord](https://discord.gg/microsoft-azure)
 - [Microsoft Foundry Discord](https://discord.gg/nTYy5BXMWG)
 
-### Agentkompetencer til din editor
-- [**Microsoft Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Installer genanvendelige AI-agentfærdigheder til Azure-udvikling i GitHub Copilot, Cursor eller enhver understøttet agent. Indeholder færdigheder til [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [implementering](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy) og [diagnostik](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
+### Agentfærdigheder til din editor
+- [**Microsoft Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Installér genanvendelige AI-agentfærdigheder til Azure-udvikling i GitHub Copilot, Cursor eller enhver understøttet agent. Indeholder færdigheder til [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [udrulning](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy) og [diagnostik](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```

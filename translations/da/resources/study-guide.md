@@ -1,52 +1,52 @@
-# Studieguide - Omfattende læringsmål
+# Studiemateriale - Omfattende læringsmål
 
-**Navigering af læringssti**
-- **📚 Kursusside**: [AZD for Begyndere](../README.md)
-- **📖 Kom i gang**: [Kapitel 1: Grundlag & Kom godt i gang](../README.md#-chapter-1-foundation--quick-start)
-- **🎯 Fremdriftssporing**: [Kursusfuldførelse](../README.md#-course-completion--certification)
+**Navigation i læringsforløbet**
+- **📚 Kursusforside**: [AZD For Beginners](../README.md)
+- **📖 Begynd at lære**: [Kapitel 1: Grundlag & Hurtig start](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 Fremgangssporing**: [Kursusfærdiggørelse](../README.md#-course-completion--certification)
 
 ## Introduktion
 
-Denne omfattende studieguide giver strukturerede læringsmål, nøglekoncepter, øvelser og vurderingsmateriale for at hjælpe dig med at mestre Azure Developer CLI (azd). Brug denne guide til at følge din fremdrift og sikre, at du har dækket alle væsentlige emner.
+Dette omfattende studiemateriale giver strukturerede læringsmål, nøglebegreber, praksisøvelser og vurderingsmaterialer, der hjælper dig med at mestre Azure Developer CLI (azd). Brug denne guide til at spore dine fremskridt og sikre, at du har dækket alle væsentlige emner.
 
 ## Læringsmål
 
-Ved at gennemføre denne studieguide vil du:
-- Beherske alle grundlæggende og avancerede koncepter i Azure Developer CLI
-- Udvikle praktiske færdigheder i udrulning og administration af Azure-applikationer
-- Opbygge tillid til fejlfinding og optimering af udrulninger
-- Forstå produktionsklare udrulningsmetoder og sikkerhedsmæssige overvejelser
+Ved at gennemføre dette studiemateriale vil du:
+- Mestre alle grundlæggende og avancerede koncepter i Azure Developer CLI
+- Udvikle praktiske færdigheder i udrulning og håndtering af Azure-applikationer
+- Opbygge selvsikkerhed i fejlfinding og optimering af udrulninger
+- Forstå praksisser for produktionsklar udrulning og sikkerhedsovervejelser
 
-## Læringsresultater
+## Læringsudbytte
 
-Efter at have gennemført alle sektioner i denne studieguide vil du være i stand til at:
-- Designe, implementere og administrere komplette applikationsarkitekturer ved hjælp af azd
-- Implementere omfattende strategier for overvågning, sikkerhed og omkostningsoptimering
-- Fejlsøge komplekse udrulningsproblemer selvstændigt
+Efter at have gennemført alle sektioner i dette studiemateriale vil du kunne:
+- Designe, udrulle og administrere komplette applikationsarkitekturer ved hjælp af azd
+- Implementere omfattende overvågnings-, sikkerheds- og omkostningsoptimeringsstrategier
+- Selvstændigt fejlfinde komplekse udrulningsproblemer
 - Oprette brugerdefinerede skabeloner og bidrage til azd-fællesskabet
 
-## 8-kapitlers læringsstruktur
+## 8-kapitel læringsstruktur
 
-### Kapitel 1: Grundlag & Kom godt i gang (Uge 1)
+### Kapitel 1: Grundlag & Hurtig start (Uge 1)
 **Varighed**: 30-45 minutter | **Kompleksitet**: ⭐
 
 #### Læringsmål
-- Forstå kernekoncepter og terminologi i Azure Developer CLI
+- Forstå Azure Developer CLI’s kernbegreber og terminologi
 - Installere og konfigurere AZD på din udviklingsplatform med succes
 - Udrulle din første applikation ved hjælp af en eksisterende skabelon
-- Navigere effektivt i AZD's kommandolinjegrænseflade
+- Navigere effektivt i AZD kommandolinjegrænsefladen
 
-#### Centrale koncepter at mestre
-- AZD-projektstruktur og komponenter (azure.yaml, infra/, src/)
+#### Nøglebegreber at mestre
+- AZD projektstruktur og komponenter (azure.yaml, infra/, src/)
 - Skabelonbaserede udrulningsarbejdsgange
-- Grundlæggende om miljøkonfiguration
-- Administration af ressourcegrupper og abonnementer
+- Grundlæggende miljøkonfiguration
+- Håndtering af ressourcegrupper og abonnementer
 
-#### Praktiske øvelser
+#### Praksisøvelser
 1. **Installationsverifikation**: Installer AZD og verificer med `azd version`
 2. **Første udrulning**: Udrul todo-nodejs-mongo-skabelonen med succes
-3. **Miljøopsætning**: Konfigurer dine første miljøvariabler
-4. **Ressourceundersøgelse**: Naviger i udrullede ressourcer i Azure Portal
+3. **Miljøopsætning**: Konfigurer dine første miljøvariable
+4. **Resurseudforskning**: Naviger i udrullede ressourcer i Azure Portal
 
 #### Vurderingsspørgsmål
 - Hvad er de centrale komponenter i et AZD-projekt?
@@ -56,7 +56,7 @@ Efter at have gennemført alle sektioner i denne studieguide vil du være i stan
 
 ---
 
-### Kapitel 2: AI-først udvikling (Uge 2)
+### Kapitel 2: AI-First Udvikling (Uge 2)
 **Varighed**: 1-2 timer | **Kompleksitet**: ⭐⭐
 
 #### Læringsmål
@@ -65,23 +65,23 @@ Efter at have gennemført alle sektioner i denne studieguide vil du være i stan
 - Forstå RAG (Retrieval-Augmented Generation) implementeringsmønstre
 - Administrere AI-modeludrulninger og skalering
 
-#### Centrale koncepter at mestre
-- Integration af Microsoft Foundry Models-tjenesten og API-styring
-- Konfiguration af AI Search og vektorindeksering
-- Strategier for modeludrulning og kapacitetsplanlægning
-- Overvågning af AI-applikationer og performanceoptimering
+#### Nøglebegreber at mestre
+- Microsoft Foundry Models serviceintegration og API-administration
+- AI Search-konfiguration og vektorindeksering
+- Modeludrulningsstrategier og kapacitetsplanlægning
+- AI applikationsovervågning og performanceoptimering
 
-#### Praktiske øvelser
-1. **AI-chat udrulning**: Udrul azure-search-openai-demo-skabelonen
+#### Praksisøvelser
+1. **AI Chat-udrulning**: Udrul azure-search-openai-demo-skabelonen
 2. **RAG-implementering**: Konfigurer dokumentindeksering og hentning
-3. **Modelkonfiguration**: Opsæt flere AI-modeller til forskellige formål
-4. **AI-overvågning**: Implementer Application Insights for AI-arbejdsbelastninger
+3. **Modelkonfiguration**: Opsæt flere AI-modeller med forskellige formål
+4. **AI-overvågning**: Implementer Application Insights til AI-arbejdsbelastninger
 
 #### Vurderingsspørgsmål
-- Hvordan konfigurerer du Microsoft Foundry Models-tjenester i en AZD-skabelon?
-- Hvad er de centrale komponenter i en RAG-arkitektur?
-- Hvordan administrerer du kapacitet og skalering af AI-modeller?
-- Hvilke overvågningsmålinger er vigtige for AI-applikationer?
+- Hvordan konfigurerer du Microsoft Foundry Models tjenester i en AZD-skabelon?
+- Hvad er nøglekomponenterne i en RAG-arkitektur?
+- Hvordan håndterer du kapacitet og skalering af AI-modeller?
+- Hvilke overvågningsmetrikker er vigtige for AI-applikationer?
 
 ---
 
@@ -89,121 +89,121 @@ Efter at have gennemført alle sektioner i denne studieguide vil du være i stan
 **Varighed**: 45-60 minutter | **Kompleksitet**: ⭐⭐
 
 #### Læringsmål
-- Beherske miljøkonfigurations- og administrationsstrategier
+- Mestre strategier for miljøkonfiguration og -styring
 - Implementere sikre autentificeringsmønstre og managed identity
 - Organisere ressourcer med korrekte navngivningskonventioner
-- Konfigurere multi-miljøudrulninger (dev, staging, prod)
+- Konfigurere udrulninger med flere miljøer (dev, staging, produktion)
 
-#### Centrale koncepter at mestre
-- Miljøhierarki og konfigurationsprioritering
-- Managed identity og service principal-autentificering
-- Key Vault-integration til hemmelighedshåndtering
-- Miljøspecifik parameterhåndtering
+#### Nøglebegreber at mestre
+- Miljøhierarki og konfigurationsprioritet
+- Managed identity og service principal autentificering
+- Key Vault integration til hemmelighedshåndtering
+- Miljøspecifik parameterstyring
 
-#### Praktiske øvelser
-1. **Opsætning af flere miljøer**: Konfigurer dev-, staging- og prod-miljøer
-2. **Sikkerhedskonfiguration**: Implementer managed identity-autentificering
+#### Praksisøvelser
+1. **Multi-miljøopsætning**: Konfigurer dev, staging og produktion miljøer
+2. **Sikkerhedskonfiguration**: Implementer managed identity autentificering
 3. **Håndtering af hemmeligheder**: Integrer Azure Key Vault til følsomme data
-4. **Parameterstyring**: Opret miljøspecifikke konfigurationer
+4. **Parametermanagement**: Opret miljøspecifikke konfigurationer
 
 #### Vurderingsspørgsmål
 - Hvordan konfigurerer du forskellige miljøer med AZD?
-- Hvad er fordelene ved at bruge managed identity frem for service principals?
+- Hvad er fordelene ved at bruge managed identity fremfor service principals?
 - Hvordan håndterer du applikationshemmeligheder sikkert?
 - Hvad er konfigurationshierarkiet i AZD?
 
 ---
 
-### Kapitel 4: Infrastruktur som kode & Udrulning (Uge 4-5)
+### Kapitel 4: Infrastruktur som kode & udrulning (Uge 4-5)
 **Varighed**: 1-1.5 timer | **Kompleksitet**: ⭐⭐⭐
 
 #### Læringsmål
-- Oprette og tilpasse Bicep-infrastrukturskabeloner
+- Oprette og tilpasse Bicep infrastruktuurskabeloner
 - Implementere avancerede udrulningsmønstre og arbejdsgange
 - Forstå strategier for ressourceprovisionering
-- Designe skalerbare multi-service-arkitekturer
+- Designe skalerbare multi-service arkitekturer
 
-- Udrul containeriserede applikationer ved hjælp af Azure Container Apps og AZD
+- Udrulle containeriserede applikationer ved hjælp af Azure Container Apps og AZD
 
 
-#### Centrale koncepter at mestre
+#### Nøglebegreber at mestre
 - Bicep-skabelonstruktur og bedste praksis
 - Ressourceafhængigheder og udrulningsrækkefølge
 - Parameterfiler og skabelonmodularitet
-- Tilpassede hooks og automatisering af udrulning
-- Udrulningsmønstre for container-apps (hurtig start, produktion, microservices)
+- Tilpassede hooks og udrulningsautomatisering
+- Udrulningsmønstre for container apps (hurtig start, produktion, mikrotjenester)
 
-#### Praktiske øvelser
+#### Praksisøvelser
 1. **Oprettelse af brugerdefineret skabelon**: Byg en multi-service applikationsskabelon
-2. **Bicep-mestring**: Opret modulære, genanvendelige infrastrukturelementer
-3. **Automatisering af udrulning**: Implementer pre/post-udrulningshooks
-4. **Arkitekturdesign**: Udrul kompleks microservices-arkitektur
-5. **Udrulning af Container-app**: Udrul eksemplerne [Simple Flask API](../../../examples/container-app/simple-flask-api) og [Microservices Architecture](../../../examples/container-app/microservices) ved hjælp af AZD
+2. **Bicep-mesterskab**: Skab modulære, genanvendelige infrastrukturelementer
+3. **Automatisering af udrulning**: Implementer pre/post udrulningshooks
+4. **Arkitekturdesign**: Udrul kompleks mikrotjenestearkitektur
+5. **Container app udrulning**: Udrul eksemplerne [Simple Flask API](../../../examples/container-app/simple-flask-api) og [Microservices Architecture](../../../examples/container-app/microservices) ved hjælp af AZD
 
 #### Vurderingsspørgsmål
-- Hvordan opretter du brugerdefinerede Bicep-skabeloner til AZD?
-- Hvad er de bedste praksisser for organisering af infrastrukturkode?
-- Hvordan håndterer du ressourceafhængigheder i skabeloner?
+- Hvordan opretter man brugerdefinerede Bicep-skabeloner til AZD?
+- Hvad er bedste praksis for organisering af infrastrukturkode?
+- Hvordan håndterer man ressourceafhængigheder i skabeloner?
 - Hvilke udrulningsmønstre understøtter opdateringer uden nedetid?
 
 ---
 
-### Kapitel 5: Multi-agent AI-løsninger (Uge 6-7)
+### Kapitel 5: Multi-Agent AI-løsninger (Uge 6-7)
 **Varighed**: 2-3 timer | **Kompleksitet**: ⭐⭐⭐⭐
 
 #### Læringsmål
 - Designe og implementere multi-agent AI-arkitekturer
 - Orkestrere agentkoordination og kommunikation
 - Udrulle produktionsklare AI-løsninger med overvågning
-- Forstå agentspecialisering og arbejdsgangsmønstre
-- Integrere containeriserede microservices som en del af multi-agent-løsninger
+- Forstå agent-specialisering og arbejdsgangsmønstre
+- Integrere containeriserede mikrotjenester som del af multi-agent løsninger
 
-#### Centrale koncepter at mestre
-- Multi-agent mønstre og designprincipper
-- Agentkommunikationsprotokoller og dataflow
+#### Nøglebegreber at mestre
+- Multi-agent arkitekturmønstre og designprincipper
+- Agent-kommunikationsprotokoller og dataflow
 - Load balancing og skaleringsstrategier for AI-agenter
-- Produktionsovervågning for multi-agent-systemer
+- Produktionsovervågning for multi-agent systemer
 - Service-til-service kommunikation i containeriserede miljøer
 
-#### Praktiske øvelser
-1. **Udrulning af detailhandelsløsning**: Udrul det komplette multi-agent detailscenario
-2. **Agenttilpasning**: Ændr Customer- og Inventory-agenters adfærd
-3. **Skalering af arkitektur**: Implementer load balancing og auto-scaling
+#### Praksisøvelser
+1. **Gennemgang af retail-arkitektur**: Analysér retail blueprint og identificer hvilke applikationskomponenter der skal implementeres før udrulning
+2. **Agenttilpasning**: Ændr Customer og Inventory agenters adfærd
+3. **Arkitekturskalering**: Implementer load balancing og autoskalering
 4. **Produktionsovervågning**: Opsæt omfattende overvågning og alarmering
-5. **Integration af microservices**: Udvid eksemplet [Microservices Architecture](../../../examples/container-app/microservices) til at understøtte agentbaserede arbejdsgange
+5. **Mikrotjenesteintegration**: Udvid eksemplet [Microservices Architecture](../../../examples/container-app/microservices) til at understøtte agentbaserede arbejdsgange
 
 #### Vurderingsspørgsmål
-- Hvordan designer du effektive multi-agent kommunikationsmønstre?
-- Hvad er de vigtigste overvejelser for at skalere AI-agentarbejdsbelastninger?
-- Hvordan overvåger og debugger du multi-agent AI-systemer?
+- Hvordan designer man effektive multi-agent kommunikationsmønstre?
+- Hvad er nøgleovervejelser ved skalering af AI-agent arbejdsbelastninger?
+- Hvordan overvåger og fejlfinder man multi-agent AI-systemer?
 - Hvilke produktionsmønstre sikrer pålidelighed for AI-agenter?
 
 ---
 
-### Kapitel 6: Præ-udrulningsvalidering & planlægning (Uge 8)
+### Kapitel 6: Validering & Planlægning før udrulning (Uge 8)
 **Varighed**: 1 time | **Kompleksitet**: ⭐⭐
 
 #### Læringsmål
-- Udføre omfattende kapacitetsplanlægning og ressourcevalidering
-- Vælge optimale Azure-SKUs for omkostningseffektivitet
-- Implementere automatiserede pre-flight-tjek og validering
-- Planlægge udrulninger med omkostningsoptimeringsstrategier
+- Udfør omfattende kapacitetsplanlægning og ressourcevalidering
+- Vælg optimale Azure SKU'er for omkostningseffektivitet
+- Implementer automatiserede pre-flight checks og validering
+- Planlæg udrulninger med omkostningsoptimeringsstrategier
 
-#### Centrale koncepter at mestre
-- Azure-resourceskvoter og kapacitetsbegrænsninger
-- Kriterier for valg af SKU og omkostningsoptimering
-- Automatiserede valideringsscripts og test
-- Udrulningsplanlægning og risikovurdering
+#### Nøglebegreber at mestre
+- Azure ressourcekvoter og kapacitetsbegrænsninger
+- SKU-udvælgelseskriterier og omkostningsoptimering
+- Automatiserede valideringsscripts og testning
+- Planlægning af udrulning og risikovurdering
 
-#### Praktiske øvelser
-1. **Kapacitetsanalyse**: Analyser ressourcekravene til dine applikationer
+#### Praksisøvelser
+1. **Kapacitetsanalyse**: Analyser ressourcebehov for dine applikationer
 2. **SKU-optimering**: Sammenlign og vælg omkostningseffektive servicelag
-3. **Valideringsautomatisering**: Implementer pre-udrulnings tjek-scripts
-4. **Omkostningsplanlægning**: Opret estimater og budgetter for udrulning
+3. **Automatisering af validering**: Implementer pre-udrulningskontrolscripts
+4. **Omkostningsplanlægning**: Opret udrulningsomkostningsestimater og budgetter
 
 #### Vurderingsspørgsmål
 - Hvordan validerer du Azure-kapacitet før udrulning?
-- Hvilke faktorer påvirker beslutninger om valg af SKU?
+- Hvilke faktorer påvirker SKU-valgsbeslutninger?
 - Hvordan automatiserer du pre-udrulningsvalidering?
 - Hvilke strategier hjælper med at optimere udrulningsomkostninger?
 
@@ -213,97 +213,97 @@ Efter at have gennemført alle sektioner i denne studieguide vil du være i stan
 **Varighed**: 1-1.5 timer | **Kompleksitet**: ⭐⭐
 
 #### Læringsmål
-- Udvikle systematiske debugging-tilgange til AZD-udrulninger
+- Udvikle systematiske debugging-metoder for AZD-udrulninger
 - Løse almindelige udrulnings- og konfigurationsproblemer
-- Debugge AI-specifikke problemer og ydelsesproblemer
-- Implementere overvågning og alarmering til proaktiv fejlregistrering
+- Debugge AI-specifikke problemer og performance-udfordringer
+- Implementere overvågning og alarmering for proaktiv problemopdagelse
 
-#### Centrale koncepter at mestre
-- Diagnoseteknikker og logstrategier
+#### Nøglebegreber at mestre
+- Diagnostiske teknikker og logningsstrategier
 - Almindelige fejlmønstre og deres løsninger
 - Performanceovervågning og optimering
-- Hændelsesrespons og genopretningsprocedurer
+- Incident response og genopretningsprocedurer
 
-#### Praktiske øvelser
-1. **Diagnostiske færdigheder**: Træn med bevidst ødelagte udrulninger
+#### Praksisøvelser
+1. **Diagnostiske færdigheder**: Øv dig med bevidst fejlbehæftede udrulninger
 2. **Loganalyse**: Brug Azure Monitor og Application Insights effektivt
-3. **Performance-tuning**: Optimér langsomt kørende applikationer
-4. **Genopretningsprocedurer**: Implementer backup og katastrofegendannelse
+3. **Performanceoptimering**: Optimer langsomt kørende applikationer
+4. **Genopretningsprocedurer**: Implementer backup og disaster recovery
 
 #### Vurderingsspørgsmål
-- Hvad er de mest almindelige AZD-udrulningsfejl?
-- Hvordan debugger du autentificerings- og tilladelsesproblemer?
-- Hvilke overvågningsstrategier hjælper med at forhindre produktionsproblemer?
-- Hvordan optimerer du applikationsydelsen i Azure?
+- Hvad er de mest almindelige fejl i AZD-udrulninger?
+- Hvordan debugges autentificerings- og tilladelsesproblemer?
+- Hvilke overvågningsstrategier hjælper med at forhindre problemer i produktion?
+- Hvordan optimerer man applikationsperformance i Azure?
 
 ---
 
-### Kapitel 8: Produktions- & Enterprise-mønstre (Uge 10-11)
+### Kapitel 8: Produktions- & enterprise-mønstre (Uge 10-11)
 **Varighed**: 2-3 timer | **Kompleksitet**: ⭐⭐⭐⭐
 
 #### Læringsmål
-- Implementere enterpriseklasse udrulningsstrategier
-- Designe sikkerhedsmønstre og compliance-rammeværk
-- Etablere overvågning, governance og omkostningsstyring
+- Implementere enterprise-grade udrulningsstrategier
+- Designe sikkerhedsmønstre og compliance-rammer
+- Etablere overvågning, styring og omkostningsstyring
 - Oprette skalerbare CI/CD-pipelines med AZD-integration
-- Anvende bedste praksis for produktionsudrulning af container-apps (sikkerhed, overvågning, omkostninger, CI/CD)
+- Anvende bedste praksis for produktionsudrulninger af container apps (sikkerhed, overvågning, omkostninger, CI/CD)
 
-#### Centrale koncepter at mestre
-- Enterprise-sikkerheds- og compliancekrav
-- Governance-rammeværk og implementering af politikker
+#### Nøglebegreber at mestre
+- Enterprise sikkerheds- og compliance-krav
+- Styringsrammer og implementering af politikker
 - Avanceret overvågning og omkostningsstyring
-- CI/CD-integration og automatiserede udrulningspipelines
-- Blue-green- og canary-udrulningsstrategier for containeriserede workloads
+- CI/CD-integration og automatiserede deployments-pipelines
+- Blue-green og canary udrulningsstrategier for containeriserede workloads
 
-#### Praktiske øvelser
-1. **Enterprise-sikkerhed**: Implementer omfattende sikkerhedsmønstre
-2. **Governance-rammeværk**: Opsæt Azure Policy og ressourcestyring
+#### Praksisøvelser
+1. **Enterprise sikkerhed**: Implementer omfattende sikkerhedsmønstre
+2. **Styringsrammeværk**: Opsæt Azure Policy og ressourcestyring
 3. **Avanceret overvågning**: Opret dashboards og automatiseret alarmering
-4. **CI/CD-integration**: Byg automatiserede udrulningspipelines
-5. **Produktionscontainer-apps**: Anvend sikkerhed, overvågning og omkostningsoptimering på eksemplet [Microservices Architecture](../../../examples/container-app/microservices)
+4. **CI/CD integration**: Byg automatiserede deployments-pipelines
+5. **Produktions Container Apps**: Anvend sikkerhed, overvågning og omkostningsoptimering til [Microservices-arkitekturen](../../../examples/container-app/microservices) eksemplet
 
 #### Vurderingsspørgsmål
-- Hvordan implementerer du enterprise-sikkerhed i AZD-udrulninger?
-- Hvilke governance-mønstre sikrer compliance og omkostningskontrol?
-- Hvordan designer du skalerbar overvågning for produktionssystemer?
+- Hvordan implementerer du virksomhedssikkerhed i AZD-udrulninger?
+- Hvilke styringsmønstre sikrer overholdelse og omkostningskontrol?
+- Hvordan designer du skalerbar overvågning til produktionssystemer?
 - Hvilke CI/CD-mønstre fungerer bedst med AZD-arbejdsgange?
 
 #### Læringsmål
-- Forstå Azure Developer CLI-fundamenter og kernekoncepter
-- Installere og konfigurere azd på dit udviklingsmiljø med succes
-- Fuldføre din første udrulning ved hjælp af en eksisterende skabelon
-- Navigere i azd-projektstrukturen og forstå nøglekomponenterne
+- Forstå Azure Developer CLI grundlæggende og kernekoncepter
+- Installer og konfigurer azd succesfuldt i dit udviklingsmiljø
+- Gennemfør din første udrulning ved hjælp af en eksisterende skabelon
+- Naviger i azd projektstrukturen og forstå nøglekomponenter
 
 #### Centrale koncepter at mestre
 - Skabeloner, miljøer og services
-- azure.yaml-konfigurationsstruktur
-- Basale azd-kommandoer (init, up, down, deploy)
-- Infrastructure as Code-principper
-- Azure-autentificering og autorisation
+- azure.yaml konfigurationsstruktur
+- Grundlæggende azd kommandoer (init, up, down, deploy)
+- Infrastruktur som kode principper
+- Azure autentificering og autorisation
 
-#### Praktiske øvelser
+#### Øvelser
 
 **Øvelse 1.1: Installation og opsætning**
-```bash
-# Udfør disse opgaver:
+```text
+# Complete these tasks:
 1. Install azd using your preferred method
-2. Install Azure CLI and authenticate
+2. Install Azure CLI only for exercises or template hooks that explicitly use `az`; authenticate AZD independently
 3. Verify installation with: azd version
 4. Test connectivity with: azd auth login
 5. Explore available templates: azd template list
 ```
 
 **Øvelse 1.2: Første udrulning**
-```bash
-# Udrul en simpel webapplikation:
-1. Initialize project: azd init --template todo-nodejs-mongo
+```text
+# Deploy a simple web application:
+1. Initialize project in an empty directory: azd init --template todo-nodejs-mongo .
 2. Review project structure and configuration files
 3. Deploy to Azure: azd up
 4. Test the deployed application
 5. Clean up resources: azd down
 ```
 
-**Øvelse 1.3: Analyse af projektstruktur**
+**Øvelse 1.3: Projektstruktur analyse**
 ```
 Analyze the following components:
 1. azure.yaml - service definitions and hooks
@@ -312,18 +312,18 @@ Analyze the following components:
 4. .azure/ directory - environment configurations
 ```
 
-#### Selv-evalueringsspørgsmål
-1. Hvad er de tre kernekoncepter i azd-arkitekturen?
-2. Hvad er formålet med azure.yaml-filen?
-3. Hvordan hjælper miljøer med at administrere forskellige udrulningsmål?
+#### Selv-vurderingsspørgsmål
+1. Hvad er de tre kernekoncepter i azd arkitekturen?
+2. Hvad er formålet med azure.yaml filen?
+3. Hvordan hjælper miljøer med at styre forskellige udrulningsmål?
 4. Hvilke autentificeringsmetoder kan bruges med azd?
-5. Hvad sker der, når du kører `azd up` første gang?
+5. Hvad sker der, når du kører `azd up` for første gang?
 
 ---
 
-## Fremdriftssporing og vurderingsramme
-```bash
-# Opret og konfigurer flere miljøer:
+## Fremskridts- og vurderingsramme
+```text
+# Create and configure multiple environments:
 1. Create development environment: azd env new development
 2. Create staging environment: azd env new staging
 3. Create production environment: azd env new production
@@ -332,7 +332,7 @@ Analyze the following components:
 ```
 
 **Øvelse 2.2: Avanceret konfiguration**
-```yaml
+```text
 # Modify azure.yaml to include:
 1. Multiple services with different configurations
 2. Pre and post deployment hooks
@@ -341,40 +341,40 @@ Analyze the following components:
 ```
 
 **Øvelse 2.3: Sikkerhedskonfiguration**
-```bash
-# Implementer bedste praksis for sikkerhed:
+```text
+# Implement security best practices:
 1. Configure managed identity for service authentication
 2. Set up Azure Key Vault for secrets management
 3. Implement least-privilege access controls
 4. Enable HTTPS and secure communication protocols
 ```
 
-#### Selv-evalueringsspørgsmål
-1. Hvordan håndterer azd prioritet mellem miljøvariabler?
-2. Hvad er udrulningshooks, og hvornår bør du bruge dem?
-3. Hvordan konfigurerer du forskellige SKUs for forskellige miljøer?
+#### Selv-vurderingsspørgsmål
+1. Hvordan håndterer azd miljøvariablernes prioritet?
+2. Hvad er udrulningshooks, og hvornår bør de bruges?
+3. Hvordan konfigurerer du forskellige SKU'er til forskellige miljøer?
 4. Hvad er sikkerhedsmæssige konsekvenser af forskellige autentificeringsmetoder?
 5. Hvordan håndterer du hemmeligheder og følsomme konfigurationsdata?
 
-### Modul 3: Udrulning og provisionering (Uge 4)
+### Modul 3: Udrulning og provisioning (Uge 4)
 
 #### Læringsmål
-- Beherske udrulningsarbejdsgange og bedste praksis
-- Forstå Infrastructure as Code med Bicep-skabeloner
-- Implementere komplekse multi-service-arkitekturer
-- Optimere udrulningsydelse og pålidelighed
+- Mestre udrulningsarbejdsgange og bedste praksis
+- Forstå Infrastruktur som kode med Bicep skabeloner
+- Implementer komplekse multi-service arkitekturer
+- Optimer udrulningsydelse og pålidelighed
 
 #### Centrale koncepter at mestre
-- Bicep-skabelonstruktur og moduler
+- Bicep skabelonstruktur og moduler
 - Ressourceafhængigheder og rækkefølge
-- Udrulningsstrategier (blue-green, rolling updates)
-- Udrulninger på tværs af regioner
+- Udrulningsstrategier (blue-green, rullende opdateringer)
+- Multi-region udrulninger
 - Database-migrationer og datastyring
 
-#### Praktiske øvelser
+#### Øvelser
 
-**Øvelse 3.1: Brugerdefineret infrastruktur**
-```bicep
+**Øvelse 3.1: Tilpasset infrastruktur**
+```text
 // Create custom Bicep templates for:
 1. Web application with custom domain and SSL
 2. Database with backup and high availability
@@ -384,8 +384,8 @@ Analyze the following components:
 ```
 
 **Øvelse 3.2: Multi-service applikation**
-```bash
-# Udrul en mikrotjenestearkitektur:
+```text
+# Deploy a microservices architecture:
 1. Frontend web application
 2. Backend API service
 3. Database service
@@ -394,8 +394,8 @@ Analyze the following components:
 ```
 
 **Øvelse 3.3: Databaseintegration**
-```bash
-# Implementer mønstre for databaseudrulning:
+```text
+# Implement database deployment patterns:
 1. Deploy PostgreSQL with connection pooling
 2. Implement schema migrations
 3. Configure backup and recovery procedures
@@ -403,31 +403,33 @@ Analyze the following components:
 5. Implement data seeding for different environments
 ```
 
-#### Selv-evalueringsspørgsmål
-1. Hvad er fordelene ved at bruge Bicep frem for ARM-skabeloner?
-2. Hvordan håndterer du database-migrationer i azd-udrulninger?
+#### Selv-vurderingsspørgsmål
+1. Hvad er fordelene ved at bruge Bicep frem for ARM skabeloner?
+2. Hvordan håndterer du database-migrationer i azd udrulninger?
 3. Hvilke strategier findes for udrulninger uden nedetid?
-4. Hvordan administrerer du afhængigheder mellem services?
-5. Hvad er overvejelserne for udrulninger på tværs af regioner?
+4. Hvordan håndterer du afhængigheder mellem services?
+5. Hvilke overvejelser gør du for multi-region udrulninger?
 
-### Modul 4: Præ-udrulningsvalidering (Uge 5)
-- Implementer omfattende forudgående kontroller før udrulning
-- Mestre kapacitetsplanlægning og ressourcevalidering
-- Forstå valg af SKU'er og omkostningsoptimering
+### Modul 4: Forud-udrulningsvalidering (Uge 5)
+
+#### Læringsmål
+- Implementer omfattende præ-udrulningskontroller
+- Mestre kapacitetsplanlægning og ressourcvalidering
+- Forstå SKU-valg og omkostningsoptimering
 - Opbyg automatiserede valideringspipelines
 
-#### Nøglekoncepter at mestre
-- Azure-ressourcekvoter og begrænsninger
+#### Nøglebegreber at mestre
+- Azure-ressourcekvoter og -grænser
 - Kriterier for SKU-valg og omkostningsimplikationer
 - Automatiserede valideringsscripts og værktøjer
-- Metodikker for kapacitetsplanlægning
+- Metoder til kapacitetsplanlægning
 - Ydelsestest og optimering
 
-#### Praktiske øvelser
+#### Øvelser
 
 **Øvelse 4.1: Kapacitetsplanlægning**
-```bash
-# Implementer kapacitetsvalidering:
+```text
+# Implement capacity validation:
 1. Create scripts to check Azure quotas
 2. Validate service availability in target regions
 3. Estimate resource costs for different SKUs
@@ -435,9 +437,9 @@ Analyze the following components:
 5. Document capacity requirements for each environment
 ```
 
-**Øvelse 4.2: Forhåndsvalidering**
-```powershell
-# Opbyg en omfattende valideringspipeline:
+**Øvelse 4.2: Pre-flight Validering**
+```text
+# Build comprehensive validation pipeline:
 1. Authentication and permissions validation
 2. Template syntax and parameter validation
 3. Resource naming and availability checks
@@ -446,8 +448,8 @@ Analyze the following components:
 ```
 
 **Øvelse 4.3: SKU-optimering**
-```bash
-# Optimer servicekonfigurationer:
+```text
+# Optimize service configurations:
 1. Compare performance characteristics of different SKUs
 2. Implement cost-effective development configurations
 3. Design high-performance production configurations
@@ -455,33 +457,33 @@ Analyze the following components:
 5. Set up auto-scaling policies
 ```
 
-#### Selvvurderingsspørgsmål
-1. Hvilke faktorer bør påvirke beslutningen om valg af SKU?
-2. Hvordan validerer du tilgængeligheden af Azure-ressourcer før udrulning?
-3. Hvad er nøglekomponenterne i et forhåndstjek-system?
+#### Selv-vurderingsspørgsmål
+1. Hvilke faktorer bør påvirke SKU-valgsbeslutninger?
+2. Hvordan validerer du Azure-ressource tilgængelighed før udrulning?
+3. Hvad er nøglekomponenterne i et pre-flight tjeksystem?
 4. Hvordan estimerer og kontrollerer du udrulningsomkostninger?
-5. Hvilken overvågning er essentiel for kapacitetsplanlægning?
+5. Hvilken overvågning er væsentlig for kapacitetsplanlægning?
 
-### Modul 5: Fejlfinding og fejlretning (Uge 6)
+### Modul 5: Fejlfinding og debugging (Uge 6)
 
 #### Læringsmål
-- Mestre systematiske fejlfindingstilgange
-- Udvikle ekspertise i fejlretning af komplekse udrulningsproblemer
-- Implementere omfattende overvågning og alarmering
-- Opbygge procedurer for hændelsesrespons og genopretning
+- Mestre systematiske fejlfindingmetoder
+- Udvikle ekspertise i debugging af komplekse udrulningsproblemer
+- Implementer omfattende overvågning og alarmering
+- Opbyg hændelsesrespons- og genopretningsprocedurer
 
-#### Nøglekoncepter at mestre
-- Almindelige fejlmønstre ved udrulning
-- Loganalyse og korrelationsteknikker
+#### Nøglebegreber at mestre
+- Almindelige fejlundertrykningsmønstre ved udrulning
+- Loganalyse og korrelationsmetoder
 - Ydelsesovervågning og optimering
-- Detektion og respons på sikkerhedshændelser
-- Katastrofegendannelse og forretningskontinuitet
+- Sikkerhedshændelsesdetektion og respons
+- Katastrofe-genopretning og forretningskontinuitet
 
-#### Praktiske øvelser
+#### Øvelser
 
-**Øvelse 5.1: Fejlsøgningsscenarier**
-```bash
-# Øv dig i at løse almindelige problemer:
+**Øvelse 5.1: Fejlfinding-scenarier**
+```text
+# Practice resolving common issues:
 1. Authentication and authorization failures
 2. Resource provisioning conflicts
 3. Application startup and runtime errors
@@ -489,9 +491,9 @@ Analyze the following components:
 5. Performance and scaling issues
 ```
 
-**Øvelse 5.2: Implementering af overvågning**
-```bash
-# Opsæt omfattende overvågning:
+**Øvelse 5.2: Overvågningsimplementering**
+```text
+# Set up comprehensive monitoring:
 1. Application performance monitoring with Application Insights
 2. Infrastructure monitoring with Azure Monitor
 3. Custom dashboards and alerting rules
@@ -500,8 +502,8 @@ Analyze the following components:
 ```
 
 **Øvelse 5.3: Hændelsesrespons**
-```bash
-# Opbyg procedurer for hændelseshåndtering:
+```text
+# Build incident response procedures:
 1. Create runbooks for common problems
 2. Implement automated recovery procedures
 3. Set up notification and escalation workflows
@@ -509,32 +511,32 @@ Analyze the following components:
 5. Document lessons learned and improvements
 ```
 
-#### Selvvurderingsspørgsmål
-1. Hvad er den systematiske tilgang til fejlfinding af azd-udrulninger?
-2. Hvordan korrelerer du logs på tværs af flere services og ressourcer?
-3. Hvilke overvågningsmålinger er mest kritiske for tidlig problemdetektion?
-4. Hvordan implementerer du effektive katastrofegendannelsesprocedurer?
+#### Selv-vurderingsspørgsmål
+1. Hvad er den systematiske tilgang til fejlfinding i azd-udrulninger?
+2. Hvordan korrelerer du logs på tværs af flere tjenester og ressourcer?
+3. Hvilke overvågningsmålinger er mest kritiske for tidlig problemopdagelse?
+4. Hvordan implementerer du effektive katastrofe-genopretningsprocedurer?
 5. Hvad er nøglekomponenterne i en hændelsesresponsplan?
 
 ### Modul 6: Avancerede emner og bedste praksis (Uge 7-8)
 
 #### Læringsmål
-- Implementere enterprise-grade udrulningsmønstre
-- Mestre CI/CD-integration og automatisering
-- Udvikle brugerdefinerede skabeloner og bidrage til fællesskabet
+- Implementer enterprise-grade udrulningsmønstre
+- Mestre CI/CD-integration og automation
+- Udvikle tilpassede skabeloner og bidrage til fællesskabet
 - Forstå avancerede sikkerheds- og compliance-krav
 
-#### Nøglekoncepter at mestre
-- Integrationsmønstre for CI/CD-pipelines
-- Udvikling og distribution af brugerdefinerede skabeloner
-- Virksomhedsstyring og compliance
+#### Nøglebegreber at mestre
+- CI/CD-pipeline integrationsmønstre
+- Tilpasset skabelonudvikling og distribution
+- Enterprise governance og compliance
 - Avancerede netværks- og sikkerhedskonfigurationer
 - Ydelsesoptimering og omkostningsstyring
 
-#### Praktiske øvelser
+#### Øvelser
 
 **Øvelse 6.1: CI/CD-integration**
-```yaml
+```text
 # Implement automated deployment pipelines:
 1. GitHub Actions workflow for azd deployments
 2. Azure DevOps pipeline integration
@@ -543,9 +545,9 @@ Analyze the following components:
 5. Security scanning and compliance checks
 ```
 
-**Øvelse 6.2: Udvikling af brugerdefinerede skabeloner**
-```bash
-# Opret og udgiv brugerdefinerede skabeloner:
+**Øvelse 6.2: Tilpasset skabelonudvikling**
+```text
+# Create and publish custom templates:
 1. Design template for your organization's architecture
 2. Implement parameterization and customization options
 3. Add comprehensive documentation and examples
@@ -554,8 +556,8 @@ Analyze the following components:
 ```
 
 **Øvelse 6.3: Enterprise-implementering**
-```bash
-# Implementer funktioner på virksomhedsniveau:
+```text
+# Implement enterprise-grade features:
 1. Multi-tenant architecture with proper isolation
 2. Centralized logging and monitoring
 3. Compliance and governance controls
@@ -563,135 +565,135 @@ Analyze the following components:
 5. Disaster recovery and business continuity
 ```
 
-#### Selvvurderingsspørgsmål
-1. Hvordan integrerer du azd i eksisterende CI/CD-workflows?
-2. Hvad er de vigtigste overvejelser ved udvikling af brugerdefinerede skabeloner?
-3. Hvordan implementerer du styring og compliance i azd-udrulninger?
-4. Hvad er bedste praksis for udrulninger i virksomhedsskala?
+#### Selv-vurderingsspørgsmål
+1. Hvordan integrerer du azd i eksisterende CI/CD-arbejdsgange?
+2. Hvad er nøgleovervejelser ved tilpasset skabelonudvikling?
+3. Hvordan implementerer du governance og compliance i azd-udrulninger?
+4. Hvad er bedste praksis for enterprise-skala udrulninger?
 5. Hvordan bidrager du effektivt til azd-fællesskabet?
 
 ## Praktiske projekter
 
-### Projekt 1: Personlig porteføljehjemmeside
+### Projekt 1: Personlig porteføljewebsted
 **Kompleksitet**: Begynder  
 **Varighed**: 1-2 uger
 
-Byg og udrul en personlig porteføljehjemmeside med:
+Byg og udrul et personligt porteføljewebsted ved brug af:
 - Statisk webhosting på Azure Storage
-- Konfiguration af brugerdefineret domæne
-- CDN-integration for global ydeevne
+- Tilpasning af domæne
+- CDN-integration for global ydelse
 - Automatiseret udrulningspipeline
 
 **Leverancer**:
-- Fungerende website udrullet på Azure
-- Brugerdefineret azd-skabelon til porteføljeudrulninger
-- Dokumentation af udrulningsprocessen
+- Fungerende websted udrullet på Azure
+- Tilpasset azd-skabelon til porteføljeudrulninger
+- Dokumentation af udrulningsproces
 - Omkostningsanalyse og optimeringsanbefalinger
 
 ### Projekt 2: Opgavestyringsapplikation
-**Kompleksitet**: Mellem  
+**Kompleksitet**: Mellemtrin  
 **Varighed**: 2-3 uger
 
-Opret en full-stack opgavestyringsapplikation med:
-- React-frontend udrullet til App Service
+Skab en full-stack opgavestyringsapplikation med:
+- React frontend udrullet til App Service
 - Node.js API-backend med autentificering
-- PostgreSQL-database med migrations
-- Application Insights-overvågning
+- PostgreSQL database med migrationer
+- Application Insights overvågning
 
 **Leverancer**:
-- Komplet applikation med brugergodkendelse
+- Komplett applikation med brugergodkendelse
 - Databaseskema og migrationsscripts
-- Overvågningsdashboard og alarmsregler
-- Fler-miljø udrulningskonfiguration
+- Overvågningsdashboard og alarmeringsregler
+- Multi-miljø udrulningskonfiguration
 
-### Projekt 3: Mikrotjenestebaseret e-handelsplatform
+### Projekt 3: Microservices e-handelsplatform
 **Kompleksitet**: Avanceret  
 **Varighed**: 4-6 uger
 
-Design og implementer en mikrotjenestebaseret e-handelsplatform:
-- Flere API-services (katalog, ordrer, betalinger, brugere)
-- Beskedkøintegration med Service Bus
-- Redis-cache til ydelsesoptimering
-- Omfattende logning og overvågning
+Design og implementer en microservices-baseret e-handelsplatform:
+- Flere API-tjenester (katalog, ordrer, betalinger, brugere)
+- Meddelelseskøintegration med Service Bus
+- Redis-cache for ydelsesoptimering
+- Omfattende logging og overvågning
 
-**Referenceeksempel**: Se [Mikrotjenestearkitektur](../../../examples/container-app/microservices) for en produktionsklar skabelon og udrulningsvejledning
+**Referenceeksempel**: Se [Microservices Architecture](../../../examples/container-app/microservices) for en to-tjeneste læringseksempel og udrulningsguide. Køer, persistence, autentificering, betalingsbehandling og produktionsstyrkelse er separat projektarbejde.
 
 **Leverancer**:
-- Komplett mikrotjenestearkitektur
-- Mønstre for kommunikation mellem tjenester
+- Komplett microservices arkitektur
+- Kommunikationsmønstre mellem tjenester
 - Ydelsestest og optimering
 - Produktionsklar sikkerhedsimplementering
 
 ## Vurdering og certificering
 
-### Videnstjek
+### Vidensprøver
 
 Gennemfør disse vurderinger efter hvert modul:
 
 **Modul 1 Vurdering**: Grundlæggende koncepter og installation
-- Multiple choice-spørgsmål om kernekoncepter
+- Multiple choice spørgsmål om kernekoncepter
 - Praktiske installations- og konfigurationsopgaver
 - Simpel udrulningsøvelse
 
 **Modul 2 Vurdering**: Konfiguration og miljøer
-- Scenarier for miljøstyring
-- Fejlsøgning af konfiguration
+- Miljøstyringsscenarier
+- Fejlfinding af konfiguration
 - Implementering af sikkerhedskonfiguration
 
-**Modul 3 Vurdering**: Udrulning og provisionering
+**Modul 3 Vurdering**: Udrulning og provisioning
 - Infrastrukturdesignudfordringer
-- Scenarier for multi-service udrulning
-- Øvelser i ydelsesoptimering
+- Multi-service udrulningsscenarier
+- Ydelsesoptimeringsøvelser
 
-**Modul 4 Vurdering**: Forhåndsvalidering før udrulning
-- Case-studier i kapacitetsplanlægning
-- Scenarier for omkostningsoptimering
+**Modul 4 Vurdering**: Præ-udrulningsvalidering
+- Kapacitetsplanlægnings-case studier
+- Omkostningsoptimeringsscenarier
 - Implementering af valideringspipeline
 
-**Modul 5 Vurdering**: Fejlfinding og fejlretning
+**Modul 5 Vurdering**: Fejlfinding og debugging
 - Problemdiagnoseøvelser
-- Opgaver i implementering af overvågning
-- Simuleringer af hændelsesrespons
+- Overvågningsimplementeringsopgaver
+- Hændelsesrespons simulationer
 
 **Modul 6 Vurdering**: Avancerede emner
-- Design af CI/CD-pipelines
-- Udvikling af brugerdefinerede skabeloner
-- Scenarier for virksomhedens arkitektur
+- Design af CI/CD-pipeline
+- Udvikling af tilpassede skabeloner
+- Enterprise-arkitektur scenarier
 
-### Afsluttende capstone-projekt
+### Endeligt hovedprojekt
 
 Design og implementer en komplet løsning, der demonstrerer mestring af alle koncepter:
 
 **Krav**:
-- Flerlags applikationsarkitektur
+- Multi-tier applikationsarkitektur
 - Flere udrulningsmiljøer
 - Omfattende overvågning og alarmering
 - Implementering af sikkerhed og compliance
 - Omkostningsoptimering og ydelsestuning
-- Fuldstændig dokumentation og runbooks
+- Fuld dokumentation og runbooks
 
-**Evaluationskriterier**:
-- Teknisk implementeringskvalitet
-- Dokumentationens fuldstændighed
+**Evalueringskriterier**:
+- Kvalitet af teknisk implementering
+- Dokumentationskomplethed
 - Overholdelse af sikkerhed og bedste praksis
 - Ydelse og omkostningsoptimering
-- Fejlfinding og overvågnings effektivitet
+- Effektivitet i fejlfinding og overvågning
 
-## Studieressourcer og referencer
+## Studie materialer og referencer
 
 ### Officiel dokumentation
-- [Azure Developer CLI-dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Bicep-dokumentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Fællesskabsressourcer
-- [AZD-skabelongalleri](https://azure.github.io/awesome-azd/)
-- [Azure-Samples GitHub-organisationen](https://github.com/Azure-Samples)
-- [Azure Developer CLI GitHub-repositorium](https://github.com/Azure/azure-dev)
+- [AZD Template Gallery](https://azure.github.io/awesome-azd/)
+- [Azure-Samples GitHub Organization](https://github.com/Azure-Samples)
+- [Azure Developer CLI GitHub Repository](https://github.com/Azure/azure-dev)
 
 ### Øvelsesmiljøer
-- [Gratis Azure-konto](https://azure.microsoft.com/free/)
-- [Azure DevOps gratis niveau](https://azure.microsoft.com/services/devops/)
+- [Azure Free Account](https://azure.microsoft.com/free/)
+- [Azure DevOps Free Tier](https://azure.microsoft.com/services/devops/)
 - [GitHub Actions](https://github.com/features/actions)
 
 ### Yderligere værktøjer
@@ -699,99 +701,101 @@ Design og implementer en komplet løsning, der demonstrerer mestring af alle kon
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Azure Tools Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)
 
-## Anbefalet studieplan
+## Studieplan anbefalinger
 
 ### Fuldtidsstudie (8 uger)
 - **Uger 1-2**: Moduler 1-2 (Kom godt i gang, Konfiguration)
-- **Uger 3-4**: Moduler 3-4 (Udrulning, Forudgående validering)
+- **Uger 3-4**: Moduler 3-4 (Udrulning, Præ-udrulning)
 - **Uger 5-6**: Moduler 5-6 (Fejlfinding, Avancerede emner)
 - **Uger 7-8**: Praktiske projekter og afsluttende vurdering
 
 ### Deltidsstudie (16 uger)
 - **Uger 1-4**: Modul 1 (Kom godt i gang)
 - **Uger 5-7**: Modul 2 (Konfiguration og miljøer)
-- **Uger 8-10**: Modul 3 (Udrulning og provisionering)
-- **Uger 11-12**: Modul 4 (Forudgående validering)
-- **Uger 13-14**: Modul 5 (Fejlfinding og fejlretning)
+- **Uger 8-10**: Modul 3 (Udrulning og provisioning)
+- **Uger 11-12**: Modul 4 (Præ-udrulningsvalidering)
+- **Uger 13-14**: Modul 5 (Fejlfinding og debugging)
 - **Uger 15-16**: Modul 6 (Avancerede emner og vurdering)
 
 ---
 
-## Fremskridtssporing og vurderingsramme
+## Fremdriftssporing og vurderingsramme
 
-### Tjekliste for kapitelafslutning
+### Tjekliste for kapitelfuldførelse
 
-#### 📚 Kapitel 1: Grundlag & Kom godt i gang
-- [ ] **Installation Fuldført**: AZD installeret og verificeret på din platform
+Spor din fremdrift gennem hvert kapitel med disse målbare resultater:
+
+#### 📚 Kapitel 1: Fundament & Hurtig start
+- [ ] **Installation udført**: AZD installeret og bekræftet på din platform
 - [ ] **Første udrulning**: Succesfuldt udrullet todo-nodejs-mongo skabelon
-- [ ] **Miljøopsætning**: Konfigureret de første miljøvariabler
-- [ ] **Ressourcenavigation**: Udforsket udrullede ressourcer i Azure-portalen
-- [ ] **Kommandomestring**: Fortrolig med grundlæggende AZD-kommandoer
+- [ ] **Miljøopsætning**: Konfigurerede første miljøvariabler
+- [ ] **Ressourcenavigation**: Udforskede udrullede ressourcer i Azure Portal
+- [ ] **Kommando-mestri**: Fortrolig med grundlæggende AZD-kommandoer
 
-#### 🤖 Kapitel 2: AI-først udvikling  
-- [ ] **AI-skabelonudrulning**: Udrullet azure-search-openai-demo med succes
-- [ ] **RAG-implementering**: Konfigureret dokumentindeksering og hentning
-- [ ] **Modelkonfiguration**: Opsat flere AI-modeller til forskellige formål
-- [ ] **AI-overvågning**: Implementeret Application Insights til AI-workloads
-- [ ] **Ydelsesoptimering**: Optimeret AI-applikationens ydeevne
+#### 🤖 Kapitel 2: AI-Første udvikling  
+- [ ] **AI-skabelonudrulning**: Succesfuldt udrullet azure-search-openai-demo
+- [ ] **RAG-implementering**: Konfigurerede dokumentindeksering og -retrieval
+- [ ] **Modelkonfiguration**: Opsat flere AI-modeller med forskellige formål
+- [ ] **AI-overvågning**: Implementerede Application Insights til AI-arbejdsbelastninger
+- [ ] **Ydelsesoptimering**: Tunet AI-applikationsydelse
 
 #### ⚙️ Kapitel 3: Konfiguration & Autentificering
-- [ ] **Opsætning af flere miljøer**: Konfigureret dev, staging og prod miljøer
-- [ ] **Sikkerhedsimplementering**: Opsat managed identity-autentificering
-- [ ] **Håndtering af secrets**: Integreret Azure Key Vault til følsomme data
-- [ ] **Parameterstyring**: Oprettet miljøspecifikke konfigurationer
-- [ ] **Autentificeringsmestring**: Implementeret sikre adgangsmønstre
+- [ ] **Multi-miljøopsætning**: Konfigurerede dev-, staging- og prod-miljøer
+- [ ] **Sikkerhedsimplementering**: Opsatte managed identity autentificering
+- [ ] **Secrets Management**: Integrerede Azure Key Vault til følsomme data
+- [ ] **Parameterstyring**: Oprettede miljøspecifikke konfigurationer
+- [ ] **Autentificeringsmestring**: Implementerede sikre adgangsmønstre
 
 #### 🏗️ Kapitel 4: Infrastruktur som kode & Udrulning
-- [ ] **Oprettelse af brugerdefinerede skabeloner**: Opbygget en multi-service applikationsskabelon
-- [ ] **Bicep-mestring**: Oprettet modulære, genanvendelige infrastrukturkomponenter
-- [ ] **Udrulningsautomatisering**: Implementeret pre/post udrulningshooks
-- [ ] **Arkitekturdesign**: Udrullet kompleks mikrotjenestearkitektur
-- [ ] **Skabelonoptimering**: Optimeret skabeloner for ydeevne og omkostninger
+- [ ] **Tilpasset skabelonskabning**: Byggede en multi-service applikationsskabelon
+- [ ] **Bicep-mestring**: Oprettede modulære, genanvendelige infrastrukturkomponenter
+- [ ] **Udrulningsautomatisering**: Implementerede pre/post udrulningshooks
+- [ ] **Arkitekturdesign**: Udrullede kompleks microservices arkitektur
+- [ ] **Skabelonoptimering**: Optimerede skabeloner for ydelse og omkostning
 
-#### 🎯 Kapitel 5: Multi-agent AI-løsninger
-- [ ] **Udrulning af detailhandelsløsning**: Udrullet komplet multi-agent detailhandelsscenario
-- [ ] **Agenttilpasning**: Tilpasset Customer og Inventory agenters adfærd
-- [ ] **Arkitektur skalering**: Implementeret load balancing og autoskalering
-- [ ] **Produktionsovervågning**: Opsat omfattende overvågning og alarmering
-- [ ] **Ydelsestuning**: Optimeret multi-agent systems ydeevne
+#### 🎯 Kapitel 5: Multi-Agent AI-løsninger
+- [ ] **Retail arkitekturgennemgang**: Identificerede manglende applikationskomponenter og planlagde deres implementering og validering
+- [ ] **Agenttilpasning**: Ændrede Customer og Inventory agentadfærd
+- [ ] **Arkitektur skalering**: Implementerede load balancing og autoskalering
+- [ ] **Produktionsovervågning**: Opsatte omfattende overvågning og alarmering
+- [ ] **Ydelsestuning**: Optimerede multi-agent systemets ydelse
 
-#### 🔍 Kapitel 6: Forudgående validering & planlægning
-- [ ] **Kapacitetsanalyse**: Analyseret ressourcekrav til applikationer
-- [ ] **SKU-optimering**: Valgt omkostningseffektive servicetiers
-- [ ] **Valideringsautomatisering**: Implementeret pre-udrulnings tjek-scripts
-- [ ] **Omkostningsplanlægning**: Oprettet estimerede udrulningsomkostninger og budgetter
-- [ ] **Risikovurdering**: Identificeret og afbødet udrulningsrisici
+#### 🔍 Kapitel 6: Præ-udrulningsvalidering & Planlægning
+- [ ] **Kapacitetsanalyse**: Analyserede ressourcekrav for applikationer
+- [ ] **SKU-optimering**: Valgte omkostningseffektive servicelag
+- [ ] **Valideringsautomatisering**: Implementerede pre-udrulnings tjek-scripts
+- [ ] **Omkostningsplanlægning**: Oprettede omkostningsestimater og budgetter for udrulning
+- [ ] **Risikoevaluering**: Identificerede og afbødte udrulningsrisici
 
-#### 🚨 Kapitel 7: Fejlfinding & Fejlretning
-- [ ] **Diagnostiske færdigheder**: Med succes fejlrettet bevidst ødelagte udrulninger
-- [ ] **Loganalyse**: Brugt Azure Monitor og Application Insights effektivt
-- [ ] **Ydelsestuning**: Optimeret langsomt ydende applikationer
-- [ ] **Genopretningsprocedurer**: Implementeret backup og katastrofegenopretning
-- [ ] **Overvågningsopsætning**: Oprettet proaktiv overvågning og alarmering
+#### 🚨 Kapitel 7: Fejlfinding & Debugging
+- [ ] **Diagnostiske færdigheder**: Succesfuldt debugget bevidst fejlslagne udrulninger
+- [ ] **Loganalyse**: Brugte Azure Monitor og Application Insights effektivt
+- [ ] **Ydelsestuning**: Optimerede langsomt kørende applikationer
+- [ ] **Genopretningsprocedurer**: Implementerede backup og katastrofegenopretning
+- [ ] **Overvågningsopsætning**: Oprettede proaktiv overvågning og alarmering
 
-#### 🏢 Kapitel 8: Produktion & Virksomhedsmønstre
-- [ ] **Virksomhedssikkerhed**: Implementeret omfattende sikkerhedsmønstre
-- [ ] **Styringsramme**: Opsat Azure Policy og ressourcestyring
-- [ ] **Avanceret overvågning**: Oprettet dashboards og automatiseret alarmering
-- [ ] **CI/CD-integration**: Bygget automatiserede udrulningspipelines
-- [ ] **Compliance-implementering**: Opfyldt virksomheders compliance-krav
+#### 🏢 Kapitel 8: Produktions- & Enterprise-mønstre
+- [ ] **Enterprise sikkerhed**: Implementerede omfattende sikkerhedsmønstre
+- [ ] **Governance-ramme**: Opsatte Azure Policy og ressourceadministration
+- [ ] **Avanceret overvågning**: Oprettede dashboards og automatiseret alarmering
+- [ ] **CI/CD-integration**: Byggede automatiserede udrulningspipelines
+- [ ] **Compliance-implementering**: Opfyldte enterprise compliance-krav
 
-### Læringstidslinje og milepæle
+### Læringsplan og milepæle
 
-#### Uge 1-2: Grundopbygning
-- **Milepæl**: Udrul første AI-applikation ved hjælp af AZD
+#### Uge 1-2: Fundamentopbygning
+- **Milepæl**: Udrul første AI-applikation vha. AZD
 - **Validering**: Fungerende applikation tilgængelig via offentlig URL
-- **Færdigheder**: Grundlæggende AZD-workflows og AI-serviceintegration
+- **Færdigheder**: Grundlæggende AZD-arbejdsgange og AI-serviceintegration
 
 #### Uge 3-4: Konfigurationsmestring
-- **Milepæl**: Fler-miljøudrulning med sikker autentificering
+- **Milepæl**: Multi-miljø udrulning med sikker autentificering
 - **Validering**: Samme applikation udrullet til dev/staging/prod
 - **Færdigheder**: Miljøstyring og sikkerhedsimplementering
 
-#### Uge 5-6: Infrastrukturkompetence
-- **Milepæl**: Brugerdefineret skabelon til kompleks multi-service applikation
-- **Validering**: Genanvendelig skabelon udrullet af et andet teammedlem
+#### Uge 5-6: Infrastruktur-ekspertise
+- **Milepæl**: Tilpasset skabelon til kompleks multi-service applikation
+- **Validering**: Genanvendelig skabelon udrullet af anden teammedlem
 - **Færdigheder**: Bicep-mestring og infrastrukturautomatisering
 
 #### Uge 7-8: Avanceret AI-implementering
@@ -799,61 +803,61 @@ Design og implementer en komplet løsning, der demonstrerer mestring af alle kon
 - **Validering**: System håndterer reelt belastning med overvågning
 - **Færdigheder**: Multi-agent orkestrering og ydelsesoptimering
 
-#### Uge 9-10: Produktionsberedskab
+#### Uge 9-10: Produktionsparathed
 - **Milepæl**: Enterprise-grade udrulning med fuld compliance
-- **Validering**: Bestået sikkerhedsrevision og omkostningsoptimeringsaudit
-- **Færdigheder**: Styring, overvågning og CI/CD-integration
+- **Validering**: Består sikkerhedsgennemgang og omkostningsoptimeringsrevision
+- **Færdigheder**: Governance, overvågning og CI/CD-integration
 
 ### Vurdering og certificering
 
-#### Metoder til validering af viden
+#### Vidensvalideringsmetoder
 1. **Praktiske udrulninger**: Fungerende applikationer for hvert kapitel
 2. **Kodegennemgange**: Vurdering af skabelon- og konfigurationskvalitet
-3. **Problemløsning**: Fejlfinding scenarier og løsninger
-4. **Undervisning af medstuderende**: Forklar koncepter til andre lærende
+3. **Problemløsning**: Fejlfinding-scenarier og løsninger
+4. **Peer Teaching**: Forklar koncepter for andre lærende
 5. **Fællesskabsbidrag**: Del skabeloner eller forbedringer
 
 #### Professionelle udviklingsresultater
-- **Porteføljeprojekter**: 8 produktionsklare implementeringer
-- **Tekniske færdigheder**: Industri-standard AZD- og AI-implementeringsekspertise
-- **Problemløsningsevner**: Uafhængig fejlsøgning og optimering
-- **Fællesskabsanerkendelse**: Aktiv deltagelse i Azure-udviklerfællesskabet
-- **Karriereudvikling**: Færdigheder direkte anvendelige i cloud- og AI-roller
+- **Porteføljeprojekter**: Læringsudarbejdninger og arkitekturopgaver; produktionsparathed kræver separat implementering og gennemgang
+- **Tekniske færdigheder**: Industri-standard AZD og AI udrulningsekspertise
+- **Problemløsningsevner**: Selvstændig fejlfinding og optimering
+- **Fællesskabsanerkendelse**: Aktiv deltagelse i Azure udviklerfællesskabet
+- **Karrierefremgang**: Færdigheder direkte anvendelige til cloud- og AI-roller
 
-#### Succeskriterier
+#### Succesmålinger
 - **Implementeringssuccesrate**: >95% succesfulde implementeringer
-- **Fejlsøgningstid**: <30 minutter for almindelige problemer
-- **Ydeevneoptimering**: Påviselige forbedringer i omkostninger og ydeevne
-- **Sikkerhedsoverholdelse**: Alle implementeringer overholder virksomhedens sikkerhedsstandarder
-- **Videnoverførsel**: Evne til at vejlede andre udviklere
+- **Fejlfindingstid**: <30 minutter for almindelige problemer
+- **Ydelsesoptimering**: Påviselige forbedringer i omkostninger og ydelse
+- **Sikkerhedsgennemgang**: Dokumentér kontrolforanstaltninger og resterende huller i forhold til din organisations krav; gennemførelse af kurset garanterer ikke overholdelse
+- **Vidensoverførsel**: Evne til at vejlede andre udviklere
 
 ### Kontinuerlig læring og fællesskabsengagement
 
 #### Hold dig opdateret
-- **Azure-opdateringer**: Følg Azure Developer CLI udgivelsesnoter
-- **Fællesskabsarrangementer**: Deltag i Azure- og AI-udviklerarrangementer
+- **Azure-opdateringer**: Følg udgivelsesnoterne for Azure Developer CLI
+- **Fællesskabsbegivenheder**: Deltag i Azure- og AI-udviklerbegivenheder
 - **Dokumentation**: Bidrag til fællesskabets dokumentation og eksempler
-- **Feedbacksløjfe**: Giv feedback på kursusindhold og Azure-tjenester
+- **Feedback-loop**: Giv feedback på kursusindhold og Azure-tjenester
 
 #### Karriereudvikling
-- **Professionelt netværk**: Forbind dig med Azure- og AI-eksperter
-- **Muligheder for oplæg**: Præsenter dine erfaringer på konferencer eller meetups
-- **Open source-bidrag**: Bidrag til AZD-skabeloner og værktøjer
-- **Mentorskab**: Guide andre udviklere i deres AZD-læringsrejse
+- **Professionelt netværk**: Forbind med Azure- og AI-eksperter
+- **Taler-muligheder**: Præsenter læring på konferencer eller meetups
+- **Bidrag til open source**: Bidrag til AZD-skabeloner og værktøjer
+- **Mentorskab**: Vejled andre udviklere i deres AZD-læringsrejse
 
 ---
 
 **Kapitelnavigation:**
-- **📚 Kursusforside**: [AZD for begyndere](../README.md)
-- **📖 Kom i gang**: [Kapitel 1: Grundlag & Hurtig start](../README.md#-chapter-1-foundation--quick-start)
-- **🎯 Fremgangssporing**: Spor din fremgang gennem det omfattende 8-kapitlers læringssystem
-- **🤝 Fællesskab**: [Azure Discord](https://discord.gg/microsoft-azure) til support og diskussion
+- **📚 Kursusstart**: [AZD For Begyndere](../README.md)
+- **📖 Begynd at lære**: [Kapitel 1: Basis & Hurtigstart](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 Fremgangsovervågning**: Følg din progression gennem det omfattende 8-kapitlers læringssystem
+- **🤝 Fællesskab**: [Azure Discord](https://discord.gg/microsoft-azure) for support og diskussion
 
-**Sporing af studiefremgang**: Brug denne strukturerede vejledning til at mestre Azure Developer CLI gennem progressiv, praktisk læring med målbare resultater og faglige udviklingsfordele.
+**Studieprogressionsovervågning**: Brug denne strukturerede guide til at mestre Azure Developer CLI gennem progressiv, praktisk læring med målbare resultater og fordele for professionel udvikling.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi stræber efter nøjagtighed, bedes du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på dets modersmål bør betragtes som den autoritative kilde. For kritiske oplysninger anbefales en professionel menneskelig oversættelse. Vi er ikke ansvarlige for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

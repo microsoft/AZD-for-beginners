@@ -1,56 +1,56 @@
-# Installasjons- og oppsettsveiledning
+# Installering og Oppsettsveiledning
 
 **Kapittelnavigasjon:**
-- **📚 Kurs Hjem**: [AZD For Nybegynnere](../../README.md)
-- **📖 Nåværende Kapittel**: Kapittel 1 - Grunnlag & Rask Start
+- **📚 Kursstartside**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende kapittel**: Kapittel 1 - Grunnlag & Rask Start
 - **⬅️ Forrige**: [AZD Grunnleggende](azd-basics.md)
-- **➡️ Neste**: [Ditt Første Prosjekt](first-project.md)
-- **🚀 Neste Kapittel**: [Kapittel 2: AI-Først Utvikling](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **➡️ Neste**: [Ditt Første Projekt](first-project.md)
+- **🚀 Neste kapittel**: [Kapittel 2: AI-Først Utvikling](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Introduksjon
 
-Denne omfattende veiledningen vil lede deg gjennom å installere og konfigurere Azure Developer CLI (azd) på systemet ditt. Du vil lære flere installasjonsmetoder for ulike operativsystemer, oppsett av autentisering og initial konfigurasjon for å forberede utviklingsmiljøet ditt for Azure-distribusjoner.
+Denne omfattende veiledningen vil lede deg gjennom installasjon og konfigurering av Azure Developer CLI (azd) på ditt system. Du vil lære flere installasjonsmetoder for ulike operativsystemer, oppsett av autentisering, og den første konfigurasjonen for å forberede ditt utviklingsmiljø for Azure-distribusjoner.
 
 ## Læringsmål
 
-Innen slutten av denne leksjonen vil du:
+Ved slutten av denne leksjonen vil du:
 - Vellykket installere Azure Developer CLI på ditt operativsystem
 - Konfigurere autentisering med Azure ved hjelp av flere metoder
 - Sette opp utviklingsmiljøet ditt med nødvendige forutsetninger
-- Forstå ulike installasjonsalternativer og når hvert skal brukes
-- Feilsøke vanlige problemer med installasjon og oppsett
+- Forstå ulike installasjonsalternativer og når du bør bruke hver
+- Feilsøke vanlige installasjons- og oppsettproblemer
 
-## Læringsutbytte
+## Læringsresultater
 
 Etter å ha fullført denne leksjonen vil du kunne:
-- Installere azd ved bruk av passende metode for din plattform
-- Autentisere med Azure ved hjelp av azd auth login
-- Verifisere installasjonen og teste grunnleggende azd-kommandoer
-- Konfigurere utviklingsmiljøet for optimal bruk av azd
-- Løse vanlige installasjonsproblemer selvstendig
+- Installere azd ved hjelp av riktig metode for din plattform
+- Autentisere med Azure ved bruk av azd auth login
+- Verifisere din installasjon og teste grunnleggende azd-kommandoer
+- Konfigurere ditt utviklingsmiljø for optimal bruk av azd
+- Løse vanlige installasjonsproblemer på egenhånd
 
-Denne veiledningen hjelper deg med å installere og konfigurere Azure Developer CLI på systemet ditt, uavhengig av operativsystem eller utviklingsmiljø.
+Denne veiledningen vil hjelpe deg å installere og konfigurere Azure Developer CLI på ditt system, uansett hvilket operativsystem eller utviklingsmiljø du bruker.
 
 ## Forutsetninger
 
 Før du installerer azd, sørg for at du har:
 - **Azure-abonnement** - [Opprett en gratis konto](https://azure.microsoft.com/free/)
-- **Azure CLI** - For autentisering og ressursadministrasjon
-- **Git** - For å klone maler og versjonskontroll
+- **Azure CLI** (valgfritt) - For eksempler som eksplisitt kjører `az`; azd autentiserer uavhengig
+- **Git** - For kloning av maler og versjonskontroll
 - **Docker** (valgfritt) - For containeriserte applikasjoner
 
-## Installingsmetoder
+## Installasjonsmetoder
 
 ### Windows
 
-#### Alternativ 1: Windows Package Manager (Anbefalt)
+#### Alternativ 1: Windows Package Manager (anbefalt)
 ```cmd
 winget install microsoft.azd
 ```
 
-#### Alternativ 2: PowerShell Installasjonsskript
+#### Alternativ 2: PowerShell installasjonsskript
 ```powershell
-# Nyttig når winget ikke er tilgjengelig
+# Useful when winget is unavailable
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
@@ -59,14 +59,14 @@ powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' 
 choco install azd
 ```
 
-#### Alternativ 4: Manuell Installasjon
-1. Last ned den nyeste versjonen fra [GitHub](https://github.com/Azure/azure-dev/releases)
+#### Alternativ 4: Manuell installasjon
+1. Last ned siste utgivelse fra [GitHub](https://github.com/Azure/azure-dev/releases)
 2. Pakk ut til `C:\Program Files\azd\`
-3. Legg til i PATH miljøvariabelen
+3. Legg til i PATH-miljøvariabelen
 
 ### macOS
 
-#### Alternativ 1: Homebrew (Anbefalt)
+#### Alternativ 1: Homebrew (anbefalt)
 ```bash
 brew tap azure/azd
 brew install azd
@@ -77,60 +77,59 @@ brew install azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Alternativ 3: Manuell Installasjon
-```bash
-# Last ned og installer
-curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.com/Azure/azure-dev/releases/latest/download --verbose
-```
+#### Alternativ 3: Manuell installasjon
+Last ned arkivet for din macOS-arkitektur fra [utgivelsesressursene](https://github.com/Azure/azure-dev/releases), pakk det ut, og legg `azd`-binæren til din `PATH`.
 
 ### Linux
 
-#### Alternativ 1: Installasjonsskript (Anbefalt)
+#### Alternativ 1: Installasjonsskript (anbefalt)
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Alternativ 2: Pakkehåndterere
+#### Alternativ 2: Pakkebehandlere
 
-**Manuell installasjon fra release assets:**
+**Manuell installasjon fra utgivelsesressurser:**
 ```bash
-# Last ned det nyeste arkivet for din Linux-arkitektur fra:
+# Download the latest archive for your Linux architecture from:
 # https://github.com/Azure/azure-dev/releases
-# Pakk det deretter ut og legg til azd-binæren i PATH-en din.
+# Then extract it and add the azd binary to your PATH.
 ```
 
 ### GitHub Codespaces
 
-Noen Codespaces- og dev container-miljøer inkluderer allerede `azd`, men du bør verifisere det i stedet for å anta:
+Noen Codespaces og dev container-miljøer inkluderer allerede `azd`, men du bør bekrefte det i stedet for å anta:
 
 ```bash
 azd version
 ```
 
-Hvis `azd` mangler, installer det med det standard skriptet for miljøet.
+Hvis `azd` mangler, installer det med standard skript for miljøet.
 
 ### Docker
 
 ```bash
-# Kjør azd i en beholder
-docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest
+# Run azd in a container
+docker run --rm -it -v "$(pwd):/workspace" -w /workspace mcr.microsoft.com/azure-dev-cli-tools:latest
 
-# Opprett et alias for enklere bruk
-alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
+# Create an alias for easier use
+alias azd='docker run --rm -it -v "$(pwd):/workspace" -w /workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
-## ✅ Verifiser installasjon
+Denne flyktige containeren bevarer ikke innloggingsstatus mellom kjøringer. For gjentatte distribusjoner, bruk [dev container-oppsettet](dev-containers.md); containerbygg krever også at en Docker daemon er tilgjengelig fra innsiden av containeren.
 
-Etter installasjon, verifiser at azd fungerer riktig:
+## ✅ Verifiser installasjonen
+
+Etter installasjon, verifiser at azd fungerer korrekt:
 
 ```bash
-# Sjekk versjon
+# Check version
 azd version
 
-# Vis hjelp
+# View help
 azd --help
 
-# List opp tilgjengelige maler
+# List available templates
 azd template list
 ```
 
@@ -139,70 +138,70 @@ Forventet utdata:
 azd version 1.x.x (commit xxxxxx)
 ```
 
-**Merk**: Den faktiske versjonsnummeret vil variere. Sjekk [Azure Developer CLI-utgivelser](https://github.com/Azure/azure-dev/releases) for siste versjon.
+**Merk**: Det faktiske versjonsnummeret vil variere. Sjekk [Azure Developer CLI-utgivelser](https://github.com/Azure/azure-dev/releases) for nyeste versjon.
 
 **✅ Sjekkliste for vellykket installasjon:**
 - [ ] `azd version` viser versjonsnummer uten feil
-- [ ] `azd --help` viser kommando-dokumentasjonen
+- [ ] `azd --help` viser kommandodokumentasjon
 - [ ] `azd template list` viser tilgjengelige maler
-- [ ] Du kan opprette en testmappe og kjøre `azd init` med suksess
+- [ ] Du kan opprette en testmappe og kjøre `azd init` uten problemer
 
-**Hvis alle tester er bestått, er du klar til å gå videre til [Ditt Første Prosjekt](first-project.md)!**
+**Hvis alle sjekker er godkjent, er du klar til å gå videre til [Ditt Første Projekt](first-project.md)!**
 
-## Oppsett av autentisering
+## Autentiseringsoppsett
 
-### Anbefalt oppsett for nybegynnere
+### Anbefalt nybegynneroppsett
 
-For AZD-først arbeidsflyter, logg inn med `azd auth login`.
+For AZD-første arbeidsflyter, logg inn med `azd auth login`.
 
 ```bash
-# Nødvendig for AZD-kommandoer som azd up
+# Required for AZD commands such as azd up
 azd auth login
 
-# Verifiser AZD autentiseringsstatus
+# Verify AZD authentication status
 azd auth login --check-status
 ```
 
-Bruk Azure CLI-innlogging bare når du planlegger å kjøre `az`-kommandoer selv under kurset.
+Bruk Azure CLI pålogging bare når du planlegger å kjøre `az`-kommandoer selv under kurset.
 
 ### Azure CLI-autentisering (valgfritt)
 ```bash
-# Installer Azure CLI hvis det ikke allerede er installert
+# Install Azure CLI if not already installed
 # Windows: winget install Microsoft.AzureCLI
 # macOS: brew install azure-cli
-# Linux: se dokumentasjonen for Azure CLI-installasjon for din distribusjon
+# Linux: see the Azure CLI install docs for your distribution
 
-# Logg inn på Azure
+# Login to Azure
 az login
 
-# Verifiser autentisering
+# Verify authentication
 az account show
 ```
 
-### Hvilket påloggingsflyt bør du bruke?
+### Hvilken påloggingsflyt bør du bruke?
 
-- Bruk `azd auth login` hvis du følger nybegynnerstien for AZD og hovedsakelig kjører `azd`-kommandoer.
+- Bruk `azd auth login` hvis du følger AZD-nybegynnerveien og hovedsakelig kjører `azd`-kommandoer.
 - Bruk også `az login` når du vil kjøre Azure CLI-kommandoer som `az account show` eller inspisere ressurser direkte.
-- Hvis en øvelse inkluderer både `azd` og `az` kommandoer, kjør begge påloggingskommandoene én gang i starten.
+- Hvis en øvelse inkluderer både `azd` og `az`-kommandoer, kjør begge påloggingskommandoene en gang ved start.
 
-### Enhetskode-autentisering
-Hvis du er på et headless system eller har problemer med nettleser:
+### Enhetskodeautentisering
+Hvis du er på et hode-løst system eller har nettleserproblemer:
 ```bash
 azd auth login --use-device-code
 ```
 
-### Service Principal (CI/CD)
+### Tjenesteprinsipal (CI/CD)
 For automatiserte miljøer:
 ```bash
 azd auth login \
-  --client-id <client-id> \
-  --client-secret <client-secret> \
-  --tenant-id <tenant-id>
+  --client-id "<client-id>" \
+  --client-secret "<client-secret>" \
+  --tenant-id "<tenant-id>"
 ```
 
-### Valider ditt komplette oppsett
+### Valider ditt fullstendige oppsett
 
-Hvis du vil ha en rask sjekk før du starter Kapittel 1:
+Hvis du vil ha en rask klarhetssjekk før du starter Kapittel 1:
 
 **Windows:**
 ```powershell
@@ -218,26 +217,25 @@ bash ./validate-setup.sh
 
 ### Global konfigurasjon
 ```bash
-# Sett standard abonnement
-azd config set defaults.subscription <subscription-id>
+# Set default subscription
+azd config set defaults.subscription "<subscription-id>"
 
-# Sett standard plassering
+# Set default location
 azd config set defaults.location eastus2
 
-# Vis all konfigurasjon
+# View all configuration
 azd config show
 ```
 
 ### Miljøvariabler
 Legg til i ditt shell-profil (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
-# Azure-konfigurasjon
+# Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 
-# azd-konfigurasjon
-export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
-export AZD_DEBUG=true  # Aktiver feilsøkingsloggføring
+# Enable diagnostics per command rather than relying on undocumented variables
+azd version --debug
 ```
 
 ## IDE-integrasjon
@@ -253,10 +251,10 @@ Funksjoner:
 - IntelliSense for azure.yaml
 - Integrerte terminalkommandoer
 - Mal-gjennomgang
-- Overvåking av distribusjoner
+- Distribusjonsovervåking
 
 ### GitHub Codespaces
-Lag en `.devcontainer/devcontainer.json`:
+Opprett en `.devcontainer/devcontainer.json`:
 ```json
 {
   "name": "Azure Developer CLI",
@@ -277,14 +275,14 @@ Lag en `.devcontainer/devcontainer.json`:
 
 ### Vanlige problemer
 
-#### Tilgang nektet (Windows)
+#### Tillatelse nektet (Windows)
 ```powershell
-# Kjør PowerShell som Administrator
+# Run PowerShell as Administrator
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 #### PATH-problemer
-Legg manuelt til azd i PATH:
+Legg manuelt til azd i PATH-en din:
 
 **Windows:**
 ```cmd
@@ -297,44 +295,41 @@ echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#### Nettverk-/Proxy-problemer
+#### Nettverk/Proxy problemer
 ```bash
-# Konfigurer proxy
-azd config set http.proxy http://proxy:8080
-azd config set https.proxy https://proxy:8080
-
-# Hopp over SSL-verifisering (anbefales ikke for produksjon)
-azd config set http.insecure true
+# Configure standard proxy environment variables for the current Bash session
+export HTTP_PROXY="http://proxy:8080"
+export HTTPS_PROXY="http://proxy:8080"
+# Use your organization's trusted CA configuration; do not disable TLS validation.
 ```
 
 #### Versjonskonflikter
 ```bash
-# Fjern gamle installasjoner
-# Windows: winget avinstaller microsoft.azd
-# macOS: brew avinstaller azd
-# Linux: fjern den forrige azd binærfilen eller symlinken før reinstallasjon
+# Remove old installations
+# Windows: winget uninstall microsoft.azd
+# macOS: brew uninstall azd
+# Linux: remove the previous azd binary or symlink before reinstalling
 
-# Rens konfigurasjon
+# Clean configuration
 rm -rf ~/.azd
 ```
 
 ### Få mer hjelp
 ```bash
-# Aktiver feilsøkingsloggføring
-export AZD_DEBUG=true
-azd <command> --debug
+# Enable debug logging
+azd show --debug
 
-# Vis gjeldende konfigurasjon
+# View current configuration
 azd config show
 
-# Vis gjeldende distribusjonsstatus
+# View current deployment status
 azd show
 ```
 
 ## Oppdatering av azd
 
 ### Oppdateringssjekk
-azd varsler når en ny utgivelse er tilgjengelig, og du kan bekrefte gjeldende versjon med:
+azd varsler når en nyere utgivelse er tilgjengelig, og du kan bekrefte din nåværende installasjon med:
 ```bash
 azd version
 ```
@@ -363,15 +358,15 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 **Azure CLI (az)**: Lavnivåverktøy for å administrere individuelle Azure-ressurser
 - `az webapp create`, `az storage account create`
-- Én ressurs om gangen
-- Infrastrukturforvaltningsfokus
+- En ressurs om gangen
+- Fokus på infrastrukturadministrasjon
 
 **Azure Developer CLI (azd)**: Høynivåverktøy for komplette applikasjonsdistribusjoner
 - `azd up` distribuerer hele appen med alle ressurser
 - Malbaserte arbeidsflyter
 - Fokus på utviklerproduktivitet
 
-**Du trenger begge**: azd bruker az CLI for autentisering
+**De er uavhengige**: azd bruker sin egen autentisering som standard. Installer og logg inn i Azure CLI kun for `az`-kommandoer, eller velg eksplisitt å bruke `azd config set auth.useAzCliAuth true`.
 </details>
 
 <details>
@@ -379,10 +374,10 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 Ja! Du kan:
 1. Importere eksisterende ressurser inn i azd-miljøer
-2. Referere eksisterende ressurser i Bicep-malene dine
-3. Bruke azd for nye distribusjoner ved siden av eksisterende infrastruktur
+2. Referere til eksisterende ressurser i dine Bicep-maler
+3. Bruke azd for nye distribusjoner sammen med eksisterende infrastruktur
 
-Se [Konfigurasjonsveiledning](configuration.md) for detaljer.
+Se [Konfigurasjonsveiledning](../chapter-03-configuration/configuration.md) for detaljer.
 </details>
 
 <details>
@@ -390,23 +385,25 @@ Se [Konfigurasjonsveiledning](configuration.md) for detaljer.
 
 Ja, konfigurer skyen:
 ```bash
-# Azure-regjeringen
-az cloud set --name AzureUSGovernment
-az login
+# Azure Government (azd)
+azd config set cloud.name AzureUSGovernment
+azd auth login
 
-# Azure Kina
-az cloud set --name AzureChinaCloud
-az login
+# Azure China (alternative)
+azd config set cloud.name AzureChinaCloud
+azd auth login
 ```
+
+Hvis du også bruker Azure CLI, må du konfigurere `az cloud set --name ...` separat. Mal-tjenester og modelltilgjengelighet varierer etter sky.
 </details>
 
 <details>
-<summary><strong>Kan jeg bruke azd i CI/CD pipelines?</strong></summary>
+<summary><strong>Kan jeg bruke azd i CI/CD-pipelines?</strong></summary>
 
 Absolutt! azd er designet for automatisering:
 - GitHub Actions-integrasjon
 - Azure DevOps-støtte
-- Service principal-autentisering
+- Autentisering med tjenesteprinsipal
 - Ikke-interaktiv modus
 
 Se [Distribusjonsveiledning](../chapter-04-infrastructure/deployment-guide.md) for CI/CD-mønstre.
@@ -415,43 +412,43 @@ Se [Distribusjonsveiledning](../chapter-04-infrastructure/deployment-guide.md) f
 <details>
 <summary><strong>Hva koster det å bruke azd?</strong></summary>
 
-azd er **helt gratis** og åpen kildekode. Du betaler kun for:
+azd selv er **helt gratis** og åpen kildekode. Du betaler kun for:
 - Azure-ressursene du distribuerer
-- Azure forbrukskostnader (compute, lagring osv.)
+- Azure-forbrukskostnader (beregning, lagring, osv.)
 
-Bruk `azd provision --preview` for å estimere kostnader før distribusjon.
+Bruk `azd provision --preview` til å inspisere foreslåtte ressurser, og estimer deretter deres kostnader med [Azure Prisberegner](https://azure.microsoft.com/pricing/calculator/). Forhåndsvisning beregner ikke priser.
 </details>
 
 ## Neste steg
 
-1. **Fullfør autentiseringen**: Sørg for at du har tilgang til ditt Azure-abonnement
-2. **Prøv din første distribusjon**: Følg [Første Prosjekt-veiledningen](first-project.md)
-3. **Utforsk malene**: Bla gjennom tilgjengelige maler med `azd template list`
-4. **Konfigurer din IDE**: Sett opp utviklingsmiljøet ditt
+1. **Fullfør autentisering**: Sørg for at du kan få tilgang til ditt Azure-abonnement
+2. **Prøv din første distribusjon**: Følg [Første Prosjekt-veiledning](first-project.md)
+3. **Utforsk maler**: Bla gjennom tilgjengelige maler med `azd template list`
+4. **Konfigurer ditt IDE**: Sett opp utviklingsmiljøet ditt
 
 ## Support
 
-Hvis du møter problemer:
+Hvis du støter på problemer:
 - [Offisiell dokumentasjon](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Rapporter problemer](https://github.com/Azure/azure-dev/issues)
-- [Diskusjoner i fellesskapet](https://github.com/Azure/azure-dev/discussions)
+- [Fellesskapsdiskusjoner](https://github.com/Azure/azure-dev/discussions)
 - [Azure Support](https://azure.microsoft.com/support/)
-- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Få Azure-kommando-veiledning direkte i editoren din med `npx skills add microsoft/github-copilot-for-azure`
+- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Få hjelp til Azure-kommandoer direkte i editoren din med `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **Kapittelnavigasjon:**
-- **📚 Kurs Hjem**: [AZD For Nybegynnere](../../README.md)
-- **📖 Nåværende Kapittel**: Kapittel 1 - Grunnlag & Rask Start
+- **📚 Kursstartside**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende kapittel**: Kapittel 1 - Grunnlag & Rask Start
 - **⬅️ Forrige**: [AZD Grunnleggende](azd-basics.md) 
-- **➡️ Neste**: [Ditt Første Prosjekt](first-project.md)
-- **🚀 Neste Kapittel**: [Kapittel 2: AI-Først Utvikling](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **➡️ Neste**: [Ditt Første Projekt](first-project.md)
+- **🚀 Neste kapittel**: [Kapittel 2: AI-Først Utvikling](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**✅ Installasjon fullført!** Fortsett til [Ditt Første Prosjekt](first-project.md) for å begynne å bygge med azd.
+**✅ Installasjon Fullført!** Fortsett til [Ditt Første Projekt](first-project.md) for å begynne å bygge med azd.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på sitt opprinnelige språk bør betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på originalspråket skal betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

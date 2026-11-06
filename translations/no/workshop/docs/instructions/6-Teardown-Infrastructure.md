@@ -1,60 +1,58 @@
-# 6. Rive ned infrastruktur
+# 6. Nedbygging av Infrastruktur
 
-!!! tip "PÅ SLUTTEN AV DETTE MODULEN VIL DU KUNNE"
+!!! tip "ETTER DETTE MODULEN VIL DU KUNNE"
 
-    - [ ] Forstå viktigheten av ressursopprydding og kostnadsstyring
-    - [ ] Bruke `azd down` for å trygt avvikle infrastruktur
-    - [ ] Gjenopprette mykt slettede Azure AI-tjenester om nødvendig
-    - [ ] **Lab 6:** Rydde opp i Azure-ressurser og verifisere fjerning
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
-## Bonusøvelser
+## Bonusutfordringer
 
 Før vi river ned prosjektet, ta noen minutter til å gjøre litt åpen utforskning.
 
-!!! info "Prøv disse utforskningspromptene"
+!!! info "Prøv disse utforskningsoppgavene"
 
-    **Eksperimenter med GitHub Copilot:**
+    **Experiment with GitHub Copilot:**
     
-    1. Spør: `Hvilke andre AZD-maler kan jeg prøve for fleragent-scenarier?`
-    2. Spør: `Hvordan kan jeg tilpasse instruksjonene for agenten for en helsesektorsbruk?`
-    3. Spør: `Hvilke miljøvariabler styrer kostnadsoptimalisering?`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **Utforsk Azure-portalen:**
+    **Explore the Azure Portal:**
     
-    1. Sjekk Application Insights-metrikker for distribusjonen din
-    2. Undersøk kostnadsanalysen for provisjonerte ressurser
-    3. Utforsk Microsoft Foundry-portalen agent-lekeplassen en gang til
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
-## Avvikle infrastruktur
+## Avvikle Infra
 
-1. Å rive ned infrastrukturen er så enkelt som:
+1. Å rive ned infrastrukturen er enkelt som følger:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. `--purge`-flagget sikrer at det også fjerner mykt slettede Cognitive Service-ressurser, og dermed frigjør kvote holdt av disse ressursene. Når det er fullført, vil du se noe som dette:
+1. Bekreft valgt miljø og gå gjennom ressursene som skal slettes. Dette fjerner Azure-ressurser og kan ødelegge data. Behold bekreftelsestilbudet for denne læringsflyten. Når det er fullført vil du se output som ligner på:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Valgfritt) Hvis du nå kjører `azd up` igjen, vil du legge merke til at gpt-4.1-modellen blir distribuert siden miljøvariabelen ble endret (og lagret) i den lokale `.azure`-mappen.
+1. Verifiser slettingen i portalen og sjekk etter ressurser utenfor distribusjonens omfang. Kostnadsrapportering og kvoteoppdateringer kan ha forsinkelse. Lokal `.azure` konfigurasjon forblir med mindre du eksplisitt fjerner den.
 
-      Her er modellutplasseringene **før**:
+1. `azd down --purge` forespør i tillegg permanent sletting av støttede myk-slettede ressurser. Bruk den kun når gjenoppretting ikke er nødvendig og du forstår regler for oppbevaring/slettingsbeskyttelse. Det garanterer ikke umiddelbar kvotefrigivelse.
 
-      ![Initial](../../../../../translated_images/no/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      Og her er det **etter**:
-      ![Ny](../../../../../translated_images/no/14-deploy-new.f7f3c355a3cf7299.webp)
+1. Ikke distribuer på nytt bare for å verifisere opprydding. En senere bevisst `azd up` kan gjenopprette ressurser ved å bruke de gjenværende lokale parameterne, og påløper kostnader på nytt. Modelloppdateringer bruker vanligvis støttede provisioning-endringer, ikke nedbygging.
 
 ---
 

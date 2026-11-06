@@ -1,273 +1,285 @@
-# Almindelige problemer og løsninger
+# Almindelige Problemer og Løsninger
 
 **Kapitelnavigation:**
-- **📚 Kursusforside**: [AZD for begyndere](../../README.md)
-- **📖 Nuværende kapitel**: Kapitel 7 - Fejlfinding & debugging
-- **⬅️ Forrige kapitel**: [Kapitel 6: Forudgående tjek](../chapter-06-pre-deployment/preflight-checks.md)
-- **➡️ Næste**: [Fejlfinding](debugging.md)
-- **🚀 Næste kapitel**: [Kapitel 8: Produktions- og virksomhedsmønstre](../chapter-08-production/production-ai-practices.md)
+- **📚 Kursushjem**: [AZD For Beginners](../../README.md)
+- **📖 Nuværende Kapitel**: Kapitel 7 - Fejlfinding & Debugging
+- **⬅️ Forrige Kapitel**: [Kapitel 6: Pre-flight Checks](../chapter-06-pre-deployment/preflight-checks.md)
+- **➡️ Næste**: [Debugging Guide](debugging.md)
+- **🚀 Næste Kapitel**: [Kapitel 8: Produktion & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
 
 ## Introduktion
 
-Denne omfattende fejlfindingguide dækker de mest almindeligt forekommende problemer ved brug af Azure Developer CLI. Lær at diagnosticere, fejlfinde og løse almindelige problemer med autentificering, udrulning, infrastrukturprovisionering og applikationskonfiguration. Hvert problem indeholder detaljerede symptomer, grundårsager og trin-for-trin løsningsprocedurer.
+Denne omfattende fejlfinding guide dækker de mest hyppigt forekommende problemer ved brug af Azure Developer CLI. Lær at diagnosticere, fejlsøge og løse almindelige problemer med autentificering, deployment, infrastruktur provisionering og applikationskonfiguration. Hvert problem indeholder detaljerede symptomer, grundårsager og trin-for-trin løsningsprocedurer.
 
 ## Læringsmål
 
-Ved at gennemføre denne vejledning vil du:
-- Mestre diagnostiske teknikker til Azure Developer CLI-problemer
-- Forstå almindelige autentificerings- og rettighedsproblemer og deres løsninger
-- Løse udrulningsfejl, fejl ved infrastrukturprovisionering og konfigurationsproblemer
-- Implementere proaktive overvågnings- og fejlsøgningsstrategier
-- Anvende systematiske fejlfindingmetodologier til komplekse problemer
-- Konfigurere korrekt logging og overvågning for at forebygge fremtidige problemer
+Ved at gennemføre denne guide vil du:
+- Mestrer diagnostiske teknikker for Azure Developer CLI problemer
+- Forstå almindelige autentificerings- og tilladelsesproblemer og deres løsninger
+- Løse deploymentfejl, infrastruktur provisioneringsfejl og konfigurationsproblemer
+- Implementere proaktive overvågnings- og debuggingstrategier
+- Anvende systematiske fejlfindingmetodologier for komplekse problemer
+- Konfigurere korrekt logging og overvågning for at forhindre fremtidige problemer
 
 ## Læringsudbytte
 
-Efter gennemførelsen vil du kunne:
-- Diagnosticere Azure Developer CLI-problemer ved hjælp af indbyggede diagnostiske værktøjer
-- Løse autentificerings-, abonnement- og rettighedsrelaterede problemer selvstændigt
-- Fejlsøge udrulningsfejl og fejl ved infrastrukturprovisionering effektivt
+Når du har gennemført vil du være i stand til:
+- Diagnosticere Azure Developer CLI problemer ved brug af indbyggede diagnostiske værktøjer
+- Løse autentificerings-, abonnement- og tilladelsesrelaterede problemer selvstændigt
+- Fejlsøge deploymentfejl og infrastruktur provisioneringsfejl effektivt
 - Debugge applikationskonfigurationsproblemer og miljøspecifikke problemer
 - Implementere overvågning og alarmering for proaktivt at identificere potentielle problemer
-- Anvende bedste praksis for logging, debugging og arbejdsgange til problemhåndtering
+- Anvende best practices for logging, debugging og problemløsningsarbejdsgange
 
-## Hurtig diagnostik
+## Hurtig Diagnostik
 
-Før du dykker ned i specifikke problemer, kør disse kommandoer for at indsamle diagnostisk information:
+> Erstat eksemplernavne/ID'er med dine miljøværdier. Bash, Bicep, JavaScript og parameterfilfragmenter er mærket separat nedenfor; de er ikke ét eksekverbart script. Gennemgå destruktive operationer og fjern hemmeligheder før deling af diagnostik. `azd monitor --logs` åbner en browser; den streamer ikke terminallogs.
+
+Før du dykker ned i specifikke problemer, kør disse kommandoer for at indsamle diagnostiske oplysninger:
 
 ```bash
-# Kontroller azd-version og tilstand
+# Check azd version and health
 azd version
 azd config show
 
-# Bekræft Azure-autentificering
+# Verify Azure authentication
 az account show
 az account list
 
-# Kontroller det aktuelle miljø
+# Check current environment
 azd env list
 azd env get-values
 
-# Aktiver debug-logning
-export AZD_DEBUG=true
+# Enable debug logging for the command being investigated
 azd <command> --debug
 ```
 
 ## Autentificeringsproblemer
 
-### Problem: "Kunne ikke hente adgangstoken"
+### Problem: "Fejl ved hentning af adgangstoken"
 **Symptomer:**
 - `azd up` fejler med autentificeringsfejl
 - Kommandoer returnerer "unauthorized" eller "access denied"
 
 **Løsninger:**
 ```bash
-# 1. Genautentificer med Azure CLI
+# 1. Authenticate azd separately (Azure CLI login alone may not authenticate azd)
+azd auth login
+azd auth login --check-status --output json
+
+# 2. Authenticate Azure CLI when using az commands
 az login
 az account show
 
-# 2. Ryd cachede legitimationsoplysninger
+# 2. Clear cached credentials
 az account clear
 az login
 
-# 3. Brug device code-flow (til headless-systemer)
+# 3. Use device code flow (for headless systems)
 az login --use-device-code
 
-# 4. Angiv eksplicit abonnement
+# 4. Set explicit subscription
 az account set --subscription "your-subscription-id"
-azd config set defaults.subscription "your-subscription-id"
+azd env set AZURE_SUBSCRIPTION_ID "your-subscription-id"
 ```
 
-### Problem: "Utilstrækkelige rettigheder" under udrulning
+### Problem: "Utilstrækkelige privilegier" under deployment
 **Symptomer:**
-- Udrulning fejler med tilladelsesfejl
-- Kan ikke oprette bestemte Azure-ressourcer
+- Deployment fejler med tilladelsesfejl
+- Kan ikke oprette visse Azure-ressourcer
 
 **Løsninger:**
 ```bash
-# 1. Kontroller dine Azure-rolle-tildelinger
+# 1. Check your Azure role assignments
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# 2. Sørg for, at du har de nødvendige roller
-# - Contributor (til oprettelse af ressourcer)
-# - User Access Administrator (til tildeling af roller)
+# 2. Ensure you have required roles
+# - Contributor (for resource creation)
+# - User Access Administrator (for role assignments)
 
-# 3. Kontakt din Azure-administrator for de nødvendige tilladelser
+# 3. Contact your Azure administrator for proper permissions
 ```
 
-### Problem: Problemer med multi-tenant autentificering
+### Problem: Multi-tenant autentificeringsproblemer
 **Løsninger:**
 ```bash
-# 1. Log ind med en specifik lejer
+# 1. Login with specific tenant
 az login --tenant "your-tenant-id"
 
-# 2. Indstil lejer i konfigurationen
-azd config set auth.tenantId "your-tenant-id"
+# 2. Authenticate azd with that tenant too
+azd auth login --tenant-id "your-tenant-id"
 
-# 3. Ryd lejerens cache, hvis du skifter mellem lejere
+# 3. Clear tenant cache if switching tenants
 az account clear
 ```
 
-## 🏗️ Fejl ved provisioning af infrastruktur
+## 🏗️ Infrastruktur Provisioneringsfejl
 
-### Problem: Konflikter i ressourcenavne
+### Problem: Ressourcenavn-konflikter
 **Symptomer:**
-- "The resource name already exists" fejl
-- Udrulning fejler under oprettelse af ressourcer
+- "Ressourcenavnet findes allerede" fejl
+- Deployment fejler under oprettelse af ressourcer
 
 **Løsninger:**
-```bash
-# 1. Brug unikke ressourcenavne med tokener
-# I din Bicep-skabelon:
+```bicep
+// 1. Fragment inside your Bicep template
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
+// Inside a resource declaration:
 name: '${applicationName}-${resourceToken}'
+```
 
-# 2. Skift miljøets navn
+```bash
+# 2. Change environment name
 azd env new my-app-dev-$(whoami)-$(date +%s)
 
-# 3. Ryd op i eksisterende ressourcer
-azd down --force --purge
+# 3. Delete ONLY a disposable environment after inspecting it and backing up data
+azd down
 ```
 
-### Problem: Placering/region ikke tilgængelig
+### Problem: Lokation/region ikke tilgængelig
 **Symptomer:**
-- "The location 'xyz' is not available for resource type"
-- Visse SKUs ikke tilgængelige i den valgte region
+- "Lokationen 'xyz' er ikke tilgængelig for ressource typen"
+- Visse SKU'er ikke tilgængelige i den valgte region
 
 **Løsninger:**
 ```bash
-# 1. Kontroller tilgængelige placeringer for ressourcetyper
+# 1. Check available locations for resource types
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. Brug almindeligt tilgængelige regioner
-azd config set defaults.location eastus2
-# eller
+# 2. For a NEW environment choose a region supported by all required services
 azd env set AZURE_LOCATION eastus2
 
-# 3. Kontroller tjenesters tilgængelighed efter region
-# Besøg: https://azure.microsoft.com/global-infrastructure/services/
+# 3. Check service availability by region
+# Visit: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
-### Problem: Kvote overskredet
+Ændring af lokationsvariablen migrerer ikke eksisterende ressourcer. En eksisterende ressourcegruppe eller ressource kan afvise en lokationsændring; brug et separat miljø til regional nyudrulning.
+
+### Problem: Quota overskridelsesfejl
 **Symptomer:**
-- "Quota exceeded for resource type"
-- "Maximum number of resources reached"
+- "Quota overskredet for ressource typen"
+- "Maksimalt antal ressourcer nået"
 
 **Løsninger:**
 ```bash
-# 1. Kontroller nuværende kvoteforbrug
+# 1. Check current quota usage
 az vm list-usage --location eastus2 -o table
 
-# 2. Anmod om kvoteforhøjelse via Azure-portalen
-# Gå til: Abonnementer > Forbrug + kvoter
+# 2. Request quota increase through Azure portal
+# Go to: Subscriptions > Usage + quotas
 
-# 3. Brug mindre SKU'er til udvikling
-# I main.parameters.json:
+```
+
+Til udvikling, vælg en understøttet mindre SKU i `infra/main.parameters.json`:
+
+```json
 {
   "appServiceSku": {
-    "value": "B1"  // Instead of P1v3
+    "value": "B1"
   }
 }
+```
 
-# 4. Ryd op i ubrugte ressourcer
+```bash
+# 4. Clean up unused resources
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
-### Problem: Bicep-skabelonfejl
+### Problem: Bicep skabelonfejl
 **Symptomer:**
 - Skabelonvalideringsfejl
 - Syntaksfejl i Bicep-filer
 
 **Løsninger:**
 ```bash
-# 1. Valider Bicep-syntaks
+# 1. Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# 2. Brug Bicep-linter
+# 2. Use Bicep linter
 az bicep lint --file infra/main.bicep
 
-# 3. Kontroller parameterfilens syntaks
+# 3. Check parameter file syntax
 cat infra/main.parameters.json | jq '.'
 
-# 4. Forhåndsvis ændringer i udrulningen
+# 4. Preview deployment changes
 azd provision --preview
 ```
 
-## 🚀 Udrulningsfejl
+## 🚀 Deploymentfejl
 
 ### Problem: Build-fejl
 **Symptomer:**
-- Applikationen kan ikke bygges under udrulning
-- Fejl ved installation af pakker
+- Applikation fejler bygges under deployment
+- Pakkeinstallationsfejl
 
 **Løsninger:**
 ```bash
-# 1. Kontroller build-output med debug-flag
-azd deploy --service web --debug
+# 1. Check build output with debug flag
+azd deploy web --debug
 
-# 2. Se status for den udrullede tjeneste
+# 2. View deployed service status
 azd show
 
-# 3. Test build lokalt
+# 3. Test build locally
 cd src/web
 npm install
 npm run build
 
-# 3. Kontroller kompatibiliteten mellem Node.js- og Python-versioner
-node --version  # Skal matche indstillingerne i azure.yaml
+# 3. Check Node.js/Python version compatibility
+node --version  # Should match azure.yaml settings
 python --version
 
-# 4. Ryd build-cache
-rm -rf node_modules package-lock.json
-npm install
+# 4. Clear build cache
+# Preserve the committed dependency lock for reproducibility
+npm ci
 
-# 5. Tjek Dockerfile, hvis du bruger containere
+# 5. Check Dockerfile if using containers
 docker build -t test-image .
 docker run --rm test-image
 ```
 
-### Problem: Fejl ved container-udrulning
+### Problem: Container deployment fejl
 **Symptomer:**
-- Containerapps starter ikke
-- Fejl ved pull af image
+- Container apps starter ikke
+- Image pull-fejl
 
 **Løsninger:**
 ```bash
-# 1. Test Docker-build lokalt
+# 1. Test Docker build locally
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Tjek container-logfiler ved hjælp af Azure CLI
+# 2. Check container logs using Azure CLI
 az containerapp logs show --name my-app --resource-group my-rg --follow
 
-# 3. Overvåg applikationen via azd
+# 3. Monitor application through azd
 azd monitor --logs
 
-# 3. Bekræft adgang til containerregistret
+# 3. Verify container registry access
 az acr login --name myregistry
 
-# 4. Tjek containerappens konfiguration
+# 4. Check container app configuration
 az containerapp show --name my-app --resource-group my-rg
 ```
 
 ### Problem: Databaseforbindelsesfejl
 **Symptomer:**
-- Applikationen kan ikke forbinde til databasen
-- Forbindelsestimeouts
+- Applikation kan ikke oprette forbindelse til database
+- Forbindelsestidsoverskridelse
 
 **Løsninger:**
 ```bash
-# 1. Kontroller firewallreglerne for databasen
+# 1. Check database firewall rules
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
-# 2. Test forbindelsen fra applikationen
-# Tilføj midlertidigt til din app:
+# 2. Test connectivity from application
+# Add to your app temporarily:
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
-# 3. Bekræft formatet på forbindelsesstrengen
+# 3. Verify connection string format
 azd env get-values | grep DATABASE
 
-# 4. Kontroller databaseserverens status
+# 4. Check database server status
 az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```
 
@@ -276,234 +288,235 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 ### Problem: Miljøvariabler virker ikke
 **Symptomer:**
 - App kan ikke læse konfigurationsværdier
-- Miljøvariabler fremstår tomme
+- Miljøvariabler ser tomme ud
 
 **Løsninger:**
 ```bash
-# 1. Bekræft, at miljøvariabler er indstillet
+# 1. Verify environment variables are set
 azd env get-values
-azd env get DATABASE_URL
+azd env get-value DATABASE_URL
 
-# 2. Kontroller variabelnavne i azure.yaml
-cat azure.yaml | grep -A 5 env:
+# 2. Check how your Bicep/template maps values into the deployed app.
+# azd env set updates local environment values; it does not directly update runtime settings.
 
-# 3. Genstart applikationen
-azd deploy --service web
+# 3. Restart the application
+azd deploy web
 
-# 4. Kontroller app service-konfigurationen
+# 4. Check app service configuration
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
-### Problem: SSL/TLS-certifikatproblemer
+### Problem: SSL/TLS certifikatproblemer
 **Symptomer:**
 - HTTPS virker ikke
 - Certifikatvalideringsfejl
 
 **Løsninger:**
 ```bash
-# 1. Kontroller SSL-certifikatets status
+# 1. Check SSL certificate status
 az webapp config ssl list --resource-group myrg
 
-# 2. Aktivér kun HTTPS
+# 2. Enable HTTPS only
 az webapp update --name myapp --resource-group myrg --https-only true
 
-# 3. Tilføj et tilpasset domæne (hvis nødvendigt)
+# 3. Add custom domain (if needed)
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
-### Problem: CORS-konfigurationsproblemer
+### Problem: CORS konfigurationsproblemer
 **Symptomer:**
 - Frontend kan ikke kalde API
-- Cross-origin request blokeret
+- Cross-origin anmodning blokeret
 
 **Løsninger:**
 ```bash
-# 1. Konfigurer CORS for App Service
+# 1. Configure CORS for App Service
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# 2. Opdater API'en for at håndtere CORS
-# I Express.js:
+```
+
+2. Opdater din eksisterende Express-applikation (med `cors` importeret):
+
+```javascript
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
+```
 
-# 3. Kontroller om det kører på de korrekte URL'er
+```bash
+# 3. Check if running on correct URLs
 azd show
 ```
 
-## 🌍 Problemer med miljøstyring
+## 🌍 Miljøstyringsproblemer
 
-### Problem: Problemer med skift af miljø
+### Problem: Miljøskifteproblemer
 **Symptomer:**
-- Forkert miljø bliver brugt
+- Forkert miljø anvendes
 - Konfiguration skifter ikke korrekt
 
 **Løsninger:**
 ```bash
-# 1. Vis alle miljøer
+# 1. List all environments
 azd env list
 
-# 2. Vælg eksplicit miljø
+# 2. Explicitly select environment
 azd env select production
 
-# 3. Bekræft det aktuelle miljø
+# 3. Verify current environment
 azd env list
 
-# 4. Opret nyt miljø, hvis det er beskadiget
+# 4. Create new environment if corrupted
 azd env new production-new
 azd env select production-new
 ```
 
-### Problem: Korrupteret miljø
+### Problem: Miljøkorruption
 **Symptomer:**
-- Miljø viser ugyldig tilstand
+- Miljøet viser ugyldig tilstand
 - Ressourcer matcher ikke konfiguration
 
 **Løsninger:**
 ```bash
-# 1. Opdater miljøets tilstand
+# 1. Refresh environment state
 azd env refresh
 
-# 2. Nulstil miljøkonfigurationen
+# 2. Reset environment configuration
 azd env new production-reset
-# Kopier de nødvendige miljøvariabler
+# Copy over required environment variables
 azd env set DATABASE_URL "your-value"
 
-# 3. Importer eksisterende ressourcer (hvis muligt)
-# Opdater manuelt .azure/production/config.json med ressource-ID'er
+# 3. azd env refresh reads outputs of a previous deployment; it does not
+# import arbitrary existing resources or reconcile template drift.
+# To adopt resources, use the template's documented existing-resource parameters.
 ```
 
-## 🔍 Ydeevneproblemer
+## 🔍 Ydelsesproblemer
 
-### Problem: Langsomme udrulningstider
+### Problem: Langsomme deploymenttider
 **Symptomer:**
-- Udrulninger tager for lang tid
-- Timeouts under udrulning
+- Deployment tager for lang tid
+- Tidsoverskridelser under deployment
 
 **Løsninger:**
 ```bash
-# 1. Udrul specifikke tjenester for hurtigere iteration
-azd deploy --service web
-azd deploy --service api
+# 1. Deploy specific services for faster iteration
+azd deploy web
+azd deploy api
 
-# 2. Brug kun kodeudrulning når infrastrukturen er uændret
-azd deploy  # Hurtigere end azd up
+# 2. Use code-only deployment when infrastructure unchanged
+azd deploy  # Faster than azd up
 
-# 3. Optimer byggeprocessen
-# I package.json:
-"scripts": {
-  "build": "webpack --mode=production --optimize-minimize"
-}
+# 3. Optimize the project's actual build script and image layers.
 
-# 4. Kontroller ressourceplaceringer (brug samme region)
-azd config set defaults.location eastus2
+# 4. Check resource locations (use same region)
+# Do not change AZURE_LOCATION to fix the latency of an existing deployment.
 ```
 
-### Problem: Problemer med applikationens ydeevne
+### Problem: Applikationsydelsesproblemer
 **Symptomer:**
 - Langsomme svartider
-- Højt ressourceforbrug
+- Høj ressourceforbrug
 
 **Løsninger:**
 ```bash
-# 1. Øg ressourcerne
-# Opdater SKU i main.parameters.json:
-"appServiceSku": {
-  "value": "S2"  // Scale up from B1
-}
+# 1. Scale up resources
+# Update the SKU parameter in infra/main.parameters.json, then review and
+# provision infrastructure changes. azd deploy alone does not apply SKU changes.
+azd provision --preview
 
-# 2. Aktivér Application Insights-overvågning
+# 2. Enable Application Insights monitoring
 azd monitor --overview
 
-# 3. Tjek applikationslogfiler i Azure
+# 3. Check application logs in Azure
 az webapp log tail --name myapp --resource-group myrg
-# eller for Container Apps:
+# or for Container Apps:
 az containerapp logs show --name myapp --resource-group myrg --follow
 
-# 4. Implementer caching
-# Tilføj Redis-cache til din infrastruktur
+# 4. Implement caching
+# Add Redis cache to your infrastructure
 ```
 
-## 🛠️ Fejlfindingværktøjer og kommandoer
+## 🛠️ Fejlfinding værktøjer og kommandoer
 
 ### Debug-kommandoer
 ```bash
-# Omfattende fejlfinding
-export AZD_DEBUG=true
-azd up --debug 2>&1 | tee debug.log
+# Comprehensive debugging
+# Only rerun a mutating command when retrying is appropriate.
+azd show --debug
 
-# Tjek azd-versionen
+# Check azd version
 azd version
 
-# Vis den aktuelle konfiguration
+# View current configuration
 azd config show
 
-# Test forbindelsen
+# Test connectivity
 curl -v https://myapp.azurewebsites.net/health
 ```
 
 ### Loganalyse
 ```bash
-# Applikationslogfiler via Azure CLI
+# Application logs via Azure CLI
 az webapp log tail --name myapp --resource-group myrg
 
-# Overvåg applikationen med azd
+# Monitor application with azd
 azd monitor --logs
 azd monitor --live
 
-# Azure-ressourcelogfiler
-az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
+# Azure resource logs
+az monitor activity-log list --resource-group myrg --offset 1h --max-events 50
 
-# Containerlogfiler (for Container Apps)
+# Container logs (for Container Apps)
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
-### Undersøgelse af ressourcer
+### Ressourceundersøgelse
 ```bash
-# Vis alle ressourcer
+# List all resources
 az resource list --resource-group myrg -o table
 
-# Kontroller ressourcestatus
+# Check resource status
 az webapp show --name myapp --resource-group myrg --query state
 
-# Netværksdiagnostik
+# Network diagnostics
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
 ## 🆘 Få yderligere hjælp
 
-### Hvornår du skal eskalere
-- Autentificeringsproblemer fortsætter efter afprøvning af alle løsninger
-- Infrastrukturelle problemer med Azure-tjenester
-- Fakturerings- eller abonnementsrelaterede problemer
+### Hvornår skal eskalere
+- Autentificeringsproblemer fortsætter efter at have prøvet alle løsninger
+- Infrastrukturproblemer med Azure-tjenester
+- Fakturering- eller abonnementsrelaterede problemer
 - Sikkerhedsbekymringer eller hændelser
 
 ### Supportkanaler
 ```bash
-# 1. Kontroller Azure Service Health
+# 1. Check Azure Service Health
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
-# 2. Opret en Azure-supportanmodning
-# Gå til: https://portal.azure.com -> Hjælp + support
+# 2. Create Azure support ticket
+# Go to: https://portal.azure.com -> Help + support
 
-# 3. Fællesskabsressourcer
-# - Stack Overflow: taggen azure-developer-cli
+# 3. Community resources
+# - Stack Overflow: azure-developer-cli tag
 # - GitHub Issues: https://github.com/Azure/azure-dev/issues
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
-### Oplysninger der skal indsamles
+### Oplysninger at indsamle
 Før du kontakter support, indsamle:
 - `azd version` output
 - `azd config show` output
-- `azd show` output (nuværende udrulningstilstand)
+- `azd show` output (nuværende deploymentstatus)
 - Fejlmeddelelser (fuld tekst)
-- Trin til at reproducere problemet
-- Miljødetaljer (`azd env get-values`)
+- Trin til at gengive problemet
+- Redigerede miljødatoer (del aldrig rå `azd env get-values`, som kan indeholde hemmeligheder)
 - Tidslinje for hvornår problemet startede
 
-### Script til logindsamling
+### Logindsamlingsscript
 ```bash
 #!/bin/bash
 # collect-debug-info.sh
@@ -518,7 +531,7 @@ az --version >> debug-logs/system-info.txt
 echo "Configuration:" > debug-logs/config.txt
 azd config show >> debug-logs/config.txt
 azd env list >> debug-logs/config.txt
-azd env get-values >> debug-logs/config.txt
+# Do not collect environment values automatically: they can contain credentials.
 
 echo "Current deployment status:" > debug-logs/status.txt
 azd show >> debug-logs/status.txt
@@ -528,73 +541,75 @@ echo "Debug information collected in debug-logs/"
 
 ## 📊 Forebyggelse af problemer
 
-### Tjekliste før udrulning
+### Pre-deployment Checkliste
 ```bash
-# 1. Valider autentificering
+# 1. Validate authentication
 az account show
 
-# 2. Kontroller kvoter og grænser
+# 2. Check quotas and limits
 az vm list-usage --location eastus2
 
-# 3. Valider skabeloner
+# 3. Validate templates
 az bicep build --file infra/main.bicep
 
-# 4. Test lokalt først
+# 4. Test locally first
 npm run build
 npm run test
 
-# 5. Brug dry-run-udrulninger
+# 5. Use dry-run deployments
 azd provision --preview
 ```
 
-### Opsætning af overvågning
-```bash
-# Aktivér Application Insights
-# Tilføj til main.bicep:
+### Overvågningsopsætning
+```bicep
+// Illustrative fragment, not a complete resource definition:
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   // ... configuration
 }
+```
 
-# Opsæt alarmer
+```bash
+# Example App Service PLAN CPU alert (not a site metric)
 az monitor metrics alert create \
   --name "High CPU Usage" \
   --resource-group myrg \
-  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/sites/myapp \
-  --condition "avg Percentage CPU > 80"
+  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/serverfarms/myplan \
+  --condition "avg CpuPercentage > 80"
 ```
 
 ### Regelmæssig vedligeholdelse
 ```bash
-# Ugentlige sundhedstjek
+# Weekly health checks (project-specific script you must implement)
 ./scripts/health-check.sh
 
-# Månedlig omkostningsgennemgang
-az consumption usage list --billing-period-name 202401
+# Monthly cost review
+# Review current Cost Management data in the portal; Consumption API support
+# depends on your billing agreement.
 
-# Kvartalsvis sikkerhedsgennemgang
-az security assessment list --resource-group myrg
+# Quarterly security review
+az security assessment list
 ```
 
-## Relaterede ressourcer
+## Relaterede Ressourcer
 
-- [Fejlfinding](debugging.md) - Avancerede fejlsøgningsteknikker
-- [Provisionering af ressourcer](../chapter-04-infrastructure/provisioning.md) - Fejlfinding af infrastruktur
-- [Kapacitetsplanlægning](../chapter-06-pre-deployment/capacity-planning.md) - Vejledning i ressourceplanlægning
-- [SKU-valg](../chapter-06-pre-deployment/sku-selection.md) - Anbefalinger til servicelag
+- [Debugging Guide](debugging.md) - Avancerede debugging teknikker
+- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - Infrastruktur fejlfinding
+- [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md) - Ressourceplanlægning vejledning
+- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - Service niveau anbefalinger
 
 ---
 
-**Tip**: Gem denne vejledning i bogmærker og henvis til den, når du støder på problemer. De fleste problemer er set før og har etablerede løsninger!
+**Tip**: Hold denne guide bogmærket og henvis til den, når du støder på problemer. De fleste problemer er tidligere set og har etablerede løsninger!
 
 ---
 
 **Navigation**
-- **Forrige lektion**: [Provisionering af ressourcer](../chapter-04-infrastructure/provisioning.md)
-- **Næste lektion**: [Fejlfinding](debugging.md)
+- **Forrige Lektion**: [Provisioning Resources](../chapter-04-infrastructure/provisioning.md)
+- **Næste Lektion**: [Debugging Guide](debugging.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Dette dokument er oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Mens vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på sit oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger som følge af brugen af denne oversættelse.
+**Ansvarsfraskrivelse**:
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

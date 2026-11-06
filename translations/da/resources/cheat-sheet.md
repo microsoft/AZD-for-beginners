@@ -1,238 +1,244 @@
-# Hurtigreference - Væsentlige AZD-kommandoer
+# Kommandovejledning - Væsentlige AZD-kommandoer
 
 **Hurtig reference for alle kapitler**
-- **📚 Kursusforside**: [AZD for begyndere](../README.md)
-- **📖 Kom godt i gang**: [Kapitel 1: Grundlag & Kom godt i gang](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI-kommandoer**: [Kapitel 2: AI-først udvikling](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **📚 Kursusforside**: [AZD For Begyndere](../README.md)
+- **📖 Kom Godt I Gang**: [Kapitel 1: Fundament & Kom Godt I Gang](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI Kommandoer**: [Kapitel 2: AI-Først Udvikling](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 Avanceret**: [Kapitel 4: Infrastruktur som kode](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Introduktion
 
-Dette omfattende cheat sheet giver en hurtig reference til de mest anvendte Azure Developer CLI-kommandoer, organiseret efter kategori med praktiske eksempler. Perfekt til hurtige opslag under udvikling, fejlfinding og daglig drift af azd-projekter.
+Denne omfattende kommandovejledning giver hurtig reference til de mest brugte Azure Developer CLI-kommandoer, organiseret efter kategori med praktiske eksempler. Perfekt til hurtige opslag under udvikling, fejlfinding og daglige operationer med azd-projekter.
 
 ## Læringsmål
 
-Ved at bruge dette cheat sheet vil du:
-- Få øjeblikkelig adgang til essentielle Azure Developer CLI-kommandoer og syntaks
-- Forstå kommandoernes organisering efter funktionelle kategorier og anvendelsestilfælde
-- Have praktiske eksempler til almindelige udviklings- og udrulningsscenarier
-- Få adgang til fejlsøgningskommandoer for hurtig problemløsning
+Ved at bruge denne kommandovejledning vil du:
+- Have øjeblikkelig adgang til væsentlige Azure Developer CLI-kommandoer og syntaks
+- Forstå kommandosystematikken efter funktionelle kategorier og anvendelsestilfælde
+- Kunne referere praktiske eksempler på almindelige udviklings- og udrulningsscenarier
+- Få adgang til fejlfindingkommandoer til hurtig problemløsning
 - Find avancerede konfigurations- og tilpasningsmuligheder effektivt
-- Find kommandoer til miljøstyring og workflows med flere miljøer
+- Lokalisere miljøstyring og multi-miljø arbejdsflowkommandoer
 
 ## Læringsresultater
 
-Ved regelmæssig reference til dette cheat sheet vil du kunne:
-- Udføre azd-kommandoer sikkert uden at slå op i den fulde dokumentation
-- Hurtigt løse almindelige problemer ved hjælp af passende diagnostiske kommandoer
+Ved regelmæssigt at referere til denne kommandovejledning vil du kunne:
+- Udføre azd-kommandoer trygt uden at skulle konsultere fuld dokumentation
+- Hurtigt løse almindelige problemer med passende diagnostiske kommandoer
 - Effektivt administrere flere miljøer og udrulningsscenarier
 - Anvende avancerede azd-funktioner og konfigurationsmuligheder efter behov
-- Fejlsøge udrulningsproblemer ved hjælp af systematiske kommando-sekvenser
-- Optimere workflows gennem effektiv brug af azd-genveje og indstillinger
+- Fejlsøge udrulningsproblemer med systematiske kommando-sekvenser
+- Optimere arbejdsforløb gennem effektiv brug af azd-genveje og muligheder
 
-## Kommandoer til at komme i gang
+## Begynd med Kommandoer
 
-### Autentificering
+### Godkendelse
 ```bash
-# Log ind på Azure via AZD
+# Login to Azure via AZD
 azd auth login
 
-# Log ind i Azure CLI (AZD bruger dette under motorhjelmen)
+# Optional: login separately for exercises or hooks that run Azure CLI
 az login
 
-# Kontroller den aktuelle konto
+# Check Azure CLI's current account (not AZD's login)
 az account show
 
-# Indstil standardabonnement
+# Set default subscription
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 
-# Log ud af AZD
+# Logout from AZD
 azd auth logout
 
-# Log ud af Azure CLI
+# Logout from Azure CLI
 az logout
 ```
 
 ### Projektinitialisering
 ```bash
-# Gennemse tilgængelige skabeloner
+# Browse available templates
 azd template list
 
-# Initialiser fra skabelon
-azd init --template todo-nodejs-mongo
-azd init --template <template-name>
+# Initialize from a template in the current empty directory (alternatives)
+azd init --template todo-nodejs-mongo .
+azd init --template <template-name> .
 
-# Initialiser i den aktuelle mappe
+# Initialize in current directory
 azd init .
 
-# Initialiser med brugerdefineret navn
+# Initialize with custom name
 azd init --template todo-nodejs-mongo my-awesome-app
+cd my-awesome-app
 ```
 
-## Kerneudrulningskommandoer
+## Grundlæggende Udrulningskommandoer
 
-### Komplet udrulningsworkflow
+### Fuld Udrulningsproces
 ```bash
-# Udrul alt (provisionering + udrulning)
+# Deploy everything (provision + deploy)
 azd up
 
-# Udrul med bekræftelsesforespørgsler deaktiveret
-azd up --confirm-with-no-prompt
+# Deploy with confirmation prompts disabled
+azd up --no-prompt
 
-# Udrul til et specifikt miljø
+# Deploy to specific environment
 azd up --environment production
 
-# Udrul med brugerdefinerede parametre
-azd up --parameter location=westus2
+# Persist the region before deployment
+azd env set AZURE_LOCATION westus2
+azd up
 ```
 
-### Kun infrastruktur
+### Kun Infrastruktur
 ```bash
-# Provisionér Azure-ressourcer
+# Provision Azure resources
 azd provision
 
-# 🧪 Forhåndsvis infrastrukturændringer
+# 🧪 Preview infrastructure changes
 azd provision --preview
-# Viser en simuleret visning af hvilke ressourcer der ville blive oprettet/ændret/slettet
-# Ligner 'terraform plan' eller 'bicep what-if' - sikkert at køre, ingen ændringer bliver foretaget
+# Uses provider-specific planning (Bicep what-if / Terraform plan)
+# It can require Azure reads and can run configured lifecycle hooks
 ```
 
-### Kun applikation
+### Kun Applikation
 ```bash
-# Udrul applikationskode
+# Deploy application code
 azd deploy
 
-# Udrul en specifik tjeneste
-azd deploy --service web
-azd deploy --service api
+# Deploy specific service
+azd deploy web
+azd deploy api
 
-# Udrul alle tjenester
+# Deploy all services
 azd deploy --all
 ```
 
-### Byg og pak
+### Byg og Pak
 ```bash
-# Gendan (hent) applikationens afhængigheder
+# Restore (download) application dependencies
 azd restore
 
-# Gendan en specifik tjeneste
-azd restore --service api
+# Restore a specific service
+azd restore api
 
-# Byg et udrulbart artefakt uden at udrulle det
+# Build a deployable artifact without deploying
 azd package
 
-# Byg en specifik tjeneste
-azd package --service api
+# Build specific service
+azd package api
 ```
 
-> **`azd restore`** downloader din apps afhængigheder (npm, pip, NuGet, Maven osv.). Den køres automatisk under `azd package` og `azd deploy`, så du kalder den sjældent direkte—kør den manuelt for at forudindlæse afhængigheder (for eksempel for at varme en CI-cache eller arbejde offline efterfølgende).
+> **`azd restore`** henter afhængigheder til din app (npm, pip, NuGet, Maven osv.). Den kører automatisk under `azd package` og `azd deploy`, så du kalder den sjældent direkte – kør den manuelt for at hente afhængigheder på forhånd (for eksempel til at varme en CI-cache op eller arbejde offline bagefter).
 
-> **`azd package`** bygger det deployerbare artefakt (et containerbillede eller zip) **uden** at skubbe det til Azure. Brug det alene for at verificere, at en build lykkes, inspicere outputtet, eller producere et artefakt som en separat proces vil udrulle senere. `azd deploy` pakker automatisk, så du behøver kun `azd package`, når du vil have artefaktet uden at udrulle.
+> **`azd package`** forbereder et deployérbart artefakt uden at udrulle applikationstjenesten. Adfærden afhænger af sproget og vært: containerpakning kan bruge Azure fjernbyg og publicere billeder til et register, så det er ikke nødvendigvis offline eller uden Azure-skrivelser. `azd deploy` kan pakke automatisk; brug et separat pakketrin, når du har brug for et artefakt eller en build-check.
 
 
 ## 🌍 Miljøstyring
 
-### Miljøoperationer
+### Miljøhandlinger
 ```bash
-# Vis alle miljøer
+# List all environments
 azd env list
 
-# Opret nyt miljø
+# Create new environment
 azd env new development
 azd env new staging --location westus2
 
-# Vælg miljø
+# Select environment
 azd env select production
 
-# Vis tilgængelige miljøer
+# Show available environments
 azd env list
 
-# Opdater miljøets tilstand
+# Refresh environment state
 azd env refresh
 ```
 
 ### Miljøvariabler
 ```bash
-# Indstil miljøvariabel
-azd env set API_KEY "your-secret-key"
+# Set environment variable
+azd env set LOG_LEVEL info
 azd env set DEBUG true
 
-# Hent miljøvariabel
-azd env get API_KEY
+# Get environment variable
+azd env get-value LOG_LEVEL
 
-# Vis alle miljøvariabler
+# List all environment variables
 azd env get-values
 
-# Fjern miljøvariabel
+# Remove environment variable (beta in AZD 1.37.0+)
 azd env unset DEBUG
 ```
 
+Miljøfiler er klartekst. Behandl ikke `azd env set` som hemmelig opbevaring; brug Key Vault-referencer eller administreret identitet efter behov.
+
 ## ⚙️ Konfigurationskommandoer
 
-### Global konfiguration
+### Global Konfiguration
 ```bash
-# Vis alle konfigurationer
+# List all configuration
 azd config show
 
-# Sæt globale standardværdier
+# Set global defaults
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# Fjern konfiguration
+# Remove configuration
 azd config unset defaults.location
 
-# Nulstil alle konfigurationer
+# Reset all configuration
 azd config reset
 ```
 
 ### Projektkonfiguration
 ```bash
-# Valider azure.yaml
-azd config validate
+# Inspect user configuration (this is not azure.yaml validation)
+azd config show
 
-# Vis projektinformation
+# Show project information
 azd show
 
-# Hent tjenesteendepunkter
+# Get service endpoints
 azd show --output json
 ```
 
-## 📊 Overvågning og diagnostik
+## 📊 Overvågning og Diagnostik
 
 ### Overvågningsdashboard
 ```bash
-# Åbn overvågningsdashboardet i Azure-portalen
+# Open Azure portal monitoring dashboard
 azd monitor
 
-# Åbn live-metrikker i Application Insights
+# Open Application Insights live metrics
 azd monitor --live
 
-# Åbn logbladet i Application Insights
+# Open Application Insights logs blade
 azd monitor --logs
 
-# Åbn oversigten i Application Insights
+# Open Application Insights overview
 azd monitor --overview
 ```
 
-### Visning af containerlogs
+Application Insights skal være konfigureret af skabelonen. AZD's Live Metrics funktion understøttes indtil videre ikke for Python-applikationer; brug oversigten, logs eller eksemplets dokumenterede tracing-arbejdsflow i stedet.
+
+### Visning af Container-Logs
 ```bash
-# Vis logfiler via Azure CLI (til Container Apps)
+# View logs via Azure CLI (for Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
 
-# Følg logfiler i realtid
+# Follow logs in real-time
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
-# Vis logfiler fra Azure-portalen
+# View logs from Azure Portal
 azd monitor --logs
 ```
 
-### Log Analytics-forespørgsler
+### Log Analytics Spørgsmål
 ```bash
-# Få adgang til Log Analytics via Azure-portalen
+# Access Log Analytics via Azure Portal
 azd monitor --logs
 
-# Kør forespørgsler på logfiler ved hjælp af Azure CLI
+# Query logs using Azure CLI
 az monitor log-analytics query \
   --workspace <workspace-id> \
   --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
@@ -242,283 +248,304 @@ az monitor log-analytics query \
 
 ### Oprydning
 ```bash
-# Fjern alle Azure-ressourcer
+# Remove all Azure resources
 azd down
 
-# Tving sletning uden bekræftelse
+# Force delete without confirmation
 azd down --force
 
-# Fjern blødt slettede ressourcer permanent
+# Purge soft-deleted resources
 azd down --purge
 
-# Komplet oprydning
+# Complete cleanup
 azd down --force --purge
 ```
 
 ### Opdateringer
 ```bash
-# Kontroller for azd-opdateringer
+# Check for azd updates
 azd version
 
-# Hent den aktuelle version
+# Get current version
 azd version
 
-# Vis den aktuelle konfiguration
+# View current configuration
 azd config show
 ```
 
-## 🔧 Avancerede kommandoer
+## 🔧 Avancerede Kommandoer
 
 ### Pipeline og CI/CD
 ```bash
-# Konfigurer GitHub Actions
+# Configure GitHub Actions
 azd pipeline config
 
-# Konfigurer Azure DevOps
+# Configure Azure DevOps
 azd pipeline config --provider azdo
 
-# Vis pipelinekonfiguration
-azd pipeline show
+# Inspect supported pipeline configuration options
+azd pipeline config --help
 ```
 
 ### Infrastrukturstyring
 ```bash
-# Generer infrastrukturskabeloner
+# Generate infrastructure templates
 azd infra generate
 
-# 🧪 Infrastrukturforhåndsvisning og planlægning
+# 🧪 Infrastructure Preview & Planning
 azd provision --preview
-# Simulerer udrulning af infrastruktur uden at implementere
-# Analyserer Bicep/Terraform-skabeloner og viser:
-# - Ressourcer, der skal tilføjes (grønne +)
-# - Ressourcer, der skal ændres (gule ~)
-# - Ressourcer, der skal slettes (røde -)
-# Sikkert at køre - ingen faktiske ændringer foretages i Azure-miljøet
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Review provider behavior and configured hooks before treating preview as read-only
 
-# Syntetiser infrastruktur fra azure.yaml
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
 ### Projektinformation
 ```bash
-# Vis projektstatus og endepunkter
+# Show project status and endpoints
 azd show
 
-# Vis detaljerede projektoplysninger som JSON
+# Show detailed project info as JSON
 azd show --output json
 
-# Hent serviceendepunkter
+# Get service endpoints
 azd show --output json | jq '.services'
 ```
 
-## 🤖 AI- og udvidelseskommandoer
+## 🤖 AI & Udvidelseskommandoer
 
-### AZD-udvidelser
+### AZD Udvidelser
+
+AI CLI-reference gennemgået 2026-11-04: `azd 1.37.2`, agenter `1.0.0-beta.23`, evalueringer `1.0.0-beta.2`. Brug `azd >= 1.37.0` til det samlede arbejdsflow; opgrader den centrale CLI før inkompatible udvidelser.
+
 ```bash
-# Vis alle tilgængelige udvidelser (inklusive AI)
+# List all available extensions (including AI)
 azd extension list
 
-# Installer Foundry Agents-udvidelsen
+# Install the Foundry agents extension
 azd extension install azure.ai.agents
 
-# Installer agentfærdighedsudvidelsen (forhåndsvisning)
+# Install the separate evaluations extension
+azd extension install azure.ai.evaluations
+
+# Install the agent skills extension (preview)
 azd extension install azure.ai.skills
 
-# Installer Foundry Connections-udvidelsen (forhåndsvisning)
+# Install the Foundry connections extension (preview)
 azd extension install azure.ai.connections
 
-# Installer finjusteringsudvidelsen
+# Install the fine-tuning extension
 azd extension install azure.ai.finetune
 
-# Installer udvidelsen til tilpassede modeller
+# Install the custom models extension
 azd extension install azure.ai.models
 
-# Opgrader alle installerede udvidelser
+# Upgrade all installed extensions
 azd extension upgrade --all
 ```
 
-### AI-agentkommandoer
+### AI Agent Kommandoer
 ```bash
-# Initialiser et agentprojekt ud fra et manifest
-azd ai agent init -m <manifest-path-or-uri>
+# Initialize an agent project interactively
+azd ai agent init
 
-# Målret et specifikt Foundry-projekt
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+# Or adopt a current azure.yaml agent project template
+azd ai agent init --template <path-to-azure.yaml>
 
-# Angiv agentens kildekatalog
-azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+# Target a specific Foundry project
+azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-id>
 
-# Vælg et hostingsmål
-azd ai agent init -m agent-manifest.yaml --host containerapp
+# Adopt into a specified directory, then follow the printed cd next step
+azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
-# Test en udrullet agent (udskriver latens + tid til første byte)
+# Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
-# Vis konfigurationen for live-endpointet
+# Show the live endpoint configuration
 azd ai agent endpoint show
 
-# Generer et evalueringsdatasæt, og optimer derefter agenten
-azd ai agent eval generate
-azd ai agent optimize
-
-# Hent den udrullede kildekode for en kodebaseret hostet agent
+# Download the deployed source of a code-based hosted agent
 azd ai agent code download
 
-# Slet en hostet agent og alle dens versioner (--force afslutter aktive sessioner)
+# Delete a hosted agent and all its versions (--force ends active sessions)
 azd ai agent delete --force
 ```
 
-### MCP-server (Alpha)
+`--template`/`-t` erstatter den forældede `--manifest`/`-m` stavemåde; gamle manifests skal flyttes. Der findes ikke et aktuelt agent-init `--host containerapp`-valg. Managed-harness, voice og langvarige forhåndsvisninger kræver uafhængig shell/CI miljø-tilmelding; se [AI CLI reference](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+
+### AI Evalueringer og Optimering
 ```bash
-# Start MCP-serveren for dit projekt
+# In an initialized agent project, configure evaluation resources
+azd ai eval init
+
+# Optionally generate a rubric and dataset; review files and printed next steps
+azd ai eval generate
+
+# Register datasets/evaluators/eval groups, then run and inspect results
+azd up
+azd ai eval run start --wait
+azd ai eval run list
+azd ai eval run show <run-id>
+azd ai eval run output list <run-id>
+
+# Reuse a compatible turn-level dataset evaluation for optimization
+azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
+```
+
+Agenter beta.22 erstattede gamle evalueringskommandoer med `azd ai eval` fra `azure.ai.evaluations`. Ny evalueringskonfiguration bruger camelCase-nøgler. Optimerings-`--config` tager en selvstændig optimerings-API-anmodning, **ikke** gamle `eval.yaml` eller nye `azure.eval.yaml`; brug `--eval`/`--eval-config` til genbrug af evalueringer. Se [evalueringsopsætning](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) og [optimeringsmigration](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+
+### MCP Server (Alpha)
+```bash
+# Start the MCP server for your project
 azd mcp start
 
-# Administrer værktøjssamtykke for MCP-operationer
+# Manage tool consent for MCP operations
 azd copilot consent list
 ```
 
-### Infrastrukturgenerering
+### Infrastruktur Generering
 ```bash
-# Generer IaC-filer fra din projektdefinition
+# Generate IaC files from your project definition
 azd infra generate
 
-# Syntetiser infrastruktur fra azure.yaml
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
 ---
 
-## 🎯 Hurtige workflows
+## 🎯 Hurtige Arbejdsflow
 
-### Udviklingsworkflow
+### Udviklingsarbejdsflow
 ```bash
-# Start et nyt projekt
-azd init --template todo-nodejs-mongo
+# Start a new project in an explicit directory
+azd init --template todo-nodejs-mongo my-project
 cd my-project
 
-# Udrul til udvikling
+# Deploy to development
 azd env new dev
 azd up
 
-# Foretag ændringer og udrul igen
+# Make changes and redeploy
 azd deploy
 
-# Åbn overvågningsdashboard
+# Open monitoring dashboard
 azd monitor --live
 ```
 
-### Workflow for flere miljøer
+### Multi-Miljø Arbejdsflow
 ```bash
-# Opsæt miljøer
+# Set up environments
 azd env new dev
 azd env new staging  
 azd env new production
 
-# Udrul til udvikling
+# Deploy to dev
 azd env select dev
 azd up
 
-# Test og flyt til staging
+# Test and promote to staging
 azd env select staging
 azd up
 
-# Udrul til produktion
+# Deploy to production
 azd env select production
 azd up
 ```
 
-### Fejlsøgningsworkflow
+### Fejlfinding Arbejdsflow
 ```bash
-# Aktivér debug-tilstand
-export AZD_DEBUG=true
+# Check deployment status
+azd show --debug
 
-# Kontroller udrulningsstatus
-azd show
-
-# Valider konfiguration
+# Validate configuration
 azd config show
 
-# Åbn overvågningsdashboardet for logfiler
+# Open monitoring dashboard for logs
 azd monitor --logs
 
-# Kontroller ressourcestatus
+# Check resource status
 azd show --output json
 ```
 
-## 🔍 Debugkommandoer
+## 🔍 Debugging Kommandoer
 
-### Debug-information
+### Debug Information
 ```bash
-# Aktivér debug-output
-export AZD_DEBUG=true
+# Enable debug output for a command
 azd <command> --debug
 
-# Deaktiver telemetri for renere output
-export AZD_DISABLE_TELEMETRY=true
+# Disable telemetry for cleaner output
+export AZURE_DEV_COLLECT_TELEMETRY=no
 
-# Kontroller den aktuelle konfiguration
+# Check current configuration
 azd config show
 
-# Kontroller autentificeringsstatus
-az account show
+# Reauthenticate AZD if needed (Azure CLI has a separate login)
+azd auth login
 ```
 
-### Skabelonfejlsøgning
+### Skabelon Debugging
 ```bash
-# Vis tilgængelige skabeloner med detaljer
+# List available templates with details
 azd template list --output json
 
-# Vis skabelonoplysninger
+# Show template information
 azd template show <template-name>
 
-# Valider skabelon før init
-azd template validate <template-name>
+# Inspect supported template operations
+azd template --help
 ```
 
-## 📁 Fil- og bibliotekskommandoer
+## 📁 Fil- og Biblioteks Kommandoer
 
 ### Projektstruktur
 ```bash
-# Vis den aktuelle mappestruktur
+# Show current directory structure
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
-# Naviger til azd-projektets rodmappe
-cd $(azd root)
+# Navigate to your project's directory
+cd /path/to/your/project
 
-# Vis azd-konfigurationsmappen
-echo $AZD_CONFIG_DIR  # Normalt ~/.azd
+# Show azd configuration directory
+echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
 ## 🎨 Outputformatering
 
-### JSON-output
+### JSON Output
 ```bash
-# Hent JSON-output til scripting
+# Get JSON output for scripting
 azd show --output json
 azd env list --output json
 azd config show --output json
 
-# Analyser med jq
-azd show --output json | jq '.services.web.endpoint'
+# Parse with jq
+azd show --output json | jq -r '.services.web.ingressUrl'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### Tabel-output
+### Tabel Output
 ```bash
-# Formater som tabel
-azd env list --output table
+# Human-readable environment table
+azd env list
 
-# Vis udrullede tjenester
+# View deployed services
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 Almindelige kommando-kombinationer
+## 🔧 Almindelige Kommando Kombinationer
 
-### Health-check-script
+### Health Check Script
 ```bash
 #!/bin/bash
-# Hurtigt sundhedstjek
+# Quick health check
 azd show
 azd env get-values
 azd monitor --logs
@@ -527,89 +554,83 @@ azd monitor --logs
 ### Udrulningsvalidering
 ```bash
 #!/bin/bash
-# Validering før udrulning
+# Pre-deployment validation
 azd show
-azd provision --preview  # Forhåndsvis ændringer før udrulning
+azd provision --preview  # Preview changes before deploying
 az account show
 ```
 
 ### Miljøsammenligning
 ```bash
 #!/bin/bash
-# Sammenlign miljøer
+# Compare environments
 for env in dev staging production; do
     echo "=== $env ==="
-    azd env select $env
-    azd show --output json | jq '.services[].endpoint'
+    azd show --environment "$env" --output json | jq '.services'
 done
 ```
 
-### Script til oprydning af ressourcer
+### Ressourceoprydningsscript
 ```bash
 #!/bin/bash
-# Ryd op i gamle miljøer
-azd env list | grep -E "(dev-|test-)" | while read env; do
-    echo "Cleaning up $env"
-    azd env select $env
-    azd down --force --purge
-done
+# Review environments, then explicitly select the one to remove
+azd env list
+azd down --environment <environment-name>
 ```
 
 ## 📝 Miljøvariabler
 
-### Almindelige miljøvariabler
+### Almindelige Miljøvariabler
 ```bash
-# Azure-konfiguration
+# Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# AZD-konfiguration
-export AZD_DEBUG=true
-export AZD_DISABLE_TELEMETRY=true
-export AZD_CONFIG_DIR="~/.azd"
+# AZD configuration
+export AZURE_DEV_COLLECT_TELEMETRY=no
+export AZD_CONFIG_DIR="$HOME/.azd"
 
-# Applikationskonfiguration
+# Application configuration
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
-## 🚨 Nødkommandoer
+## 🚨 Nødsituation Kommandoer
 
-### Hurtige rettelser
+### Hurtige Rettelser
 ```bash
-# Nulstil godkendelse
-az account clear
-az login
+# Reauthenticate AZD without changing Azure CLI's account cache
+azd auth login
 
-# Tving opdatering af miljøet
+# Force refresh environment
 azd env refresh
 
-# Genudrul alle tjenester
+# Redeploy all services
 azd deploy
 
-# Kontroller udrulningsstatus
+# Check deployment status
 azd show --output json
 ```
 
 ### Gendannelseskommandoer
 ```bash
-# Gendan efter mislykket udrulning - ryd op og udrul igen
-azd down --force --purge
-azd up
+# Inspect before retrying; deletion/purge is not a routine recovery step
+azd show
+azd provision --debug
 
-# Genprovisioner kun infrastrukturen
+# Reprovision infrastructure only
 azd provision
 
-# Udrul kun applikationen igen
+# Redeploy application only
 azd deploy
 ```
 
-## 💡 Pro-tip
+## 💡 Pro Tips
 
-### Aliasser for hurtigere workflow
+### Aliaser for Hurtigere Arbejdsflow
 ```bash
-# Tilføj til din .bashrc eller .zshrc
+# Add to your .bashrc or .zshrc
 alias azdup='azd up'
 alias azdm='azd monitor --live'
 alias azds='azd show --output json'
@@ -618,17 +639,17 @@ alias azde='azd env'
 
 ### Funktionsgenveje
 ```bash
-# Hurtigt skift mellem miljøer
+# Quick environment switching
 azd-env() {
-    azd env select $1 && azd show
+    azd env select "$1" && azd show
 }
 
-# Hurtig udrulning med overvågning
+# Quick deployment with monitoring
 azd-deploy-watch() {
-    azd deploy --service $1 && azd monitor --live
+    azd deploy "$1" && azd monitor --overview
 }
 
-# Miljøstatus
+# Environment status
 azd-status() {
     echo "Current environment:"
     azd env get-values
@@ -637,46 +658,46 @@ azd-status() {
 }
 ```
 
-## 📖 Hjælp og dokumentation
+## 📖 Hjælp og Dokumentation
 
-### Få hjælp
+### Få Hjælp
 ```bash
-# Generel hjælp
+# General help
 azd --help
 azd help
 
-# Kommando-specifik hjælp
+# Command-specific help
 azd up --help
 azd env --help
 azd config --help
 
-# Vis versions- og buildoplysninger
+# Show version and build info
 azd version
 azd version --output json
 ```
 
 ### Dokumentationslinks
 ```bash
-# Åbn dokumentationen i browseren
+# Open documentation in browser
 azd docs
 
-# Vis dokumentation for skabelonen
+# Show template documentation
 azd template show <template-name> --docs
 ```
 
 ---
 
-**Tip**: Bogmærk denne huskeseddel og brug `Ctrl+F` for hurtigt at finde de kommandoer, du har brug for!
+**Tip**: Bogmærk denne kommandovejledning og brug `Ctrl+F` til hurtigt at finde de kommandoer, du har brug for!
 
 ---
 
 **Navigation**
-- **Forrige lektion**: [Forhåndstjek](../docs/pre-deployment/preflight-checks.md)
-- **Næste lektion**: [Ordliste](glossary.md)
+- **Forrige Lektion**: [Preflight Checks](../docs/chapter-06-pre-deployment/preflight-checks.md)
+- **Næste Lektion**: [Ordlist](glossary.md)
 
 ---
 
-> **💡 Vil du have hjælp til Azure-kommandoer i din editor?** Installer [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) med `npx skills add microsoft/github-copilot-for-azure` — 37 skills til AI, Foundry, deployment, diagnostik og mere.
+> **💡 Vil du have Azure-kommando hjælp i din editor?** Installer [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) med `npx skills add microsoft/github-copilot-for-azure` — 37 færdigheder til AI, Foundry, udrulning, diagnostik og mere.
 
 ---
 

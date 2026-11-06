@@ -5,11 +5,11 @@
     </h2>
     <p style="color: white; margin: 10px 0 0 0; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
       <strong>En praktisk workshop til at bygge AI-applikationer med Azure Developer CLI.</strong><br>
-      Gennemfør 7 moduler for at mestre AZD-skabeloner og AI-udrulningsarbejdsgange.
+      Fuldfør 7 moduler for at mestre AZD-skabeloner og AI-implementeringsarbejdsgange.
     </p>
     <div style="margin-top: 15px;">
       <span style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 15px; color: white; font-size: 14px;">
-        📅 Senest opdateret: marts 2026
+        📅 Kildevejledning gennemgået: November 2026
       </span>
     </div>
   </div>
@@ -17,157 +17,160 @@
 
 # AZD for AI-udviklere Workshop
 
-Velkommen til den praktiske workshop for at lære Azure Developer CLI (AZD) med fokus på udrulning af AI-applikationer. Denne workshop hjælper dig med at få en anvendt forståelse af AZD-skabeloner i 3 trin:
+Velkommen til den praktiske workshop til læring af Azure Developer CLI (AZD) med fokus på AI-applikationsudrulning. Denne workshop hjælper dig med at opnå en anvendt forståelse af AZD-skabeloner i 3 trin:
 
 1. **Opdagelse** - find den skabelon, der passer til dig.
-1. **Udrulning** - udrul og verificer, at det virker
-1. **Tilpasning** - rediger og iterer for at gøre det til dit!
+1. **Implementering** - implementer og bekræft, at det fungerer
+1. **Tilpasning** - modificer og iterer for at gøre det til dit!
 
-I løbet af denne workshop vil du også blive introduceret til centrale udviklerværktøjer og arbejdsprocesser, for at hjælpe dig med at strømline din ende-til-ende udviklingsrejse.
+I løbet af denne workshop vil du også blive introduceret til kerneudviklerværktøjer og arbejdsgange, for at hjælpe dig med at effektivisere din end-to-end udviklingsrejse.
 
 <br/>
 
-## Guide i browser
+## Browser-baseret Guide
 
-Workshop-lektionerne er i Markdown. Du kan navigere dem direkte i GitHub - eller starte en browserbaseret forhåndsvisning som vist i skærmbilledet nedenfor.
+Workshop-lektionerne er i Markdown. Du kan navigere dem direkte i GitHub - eller starte en browser-baseret preview som vist på skærmbilledet nedenfor.
 
 ![Workshop](../../../translated_images/da/workshop.75906f133e6f8ba0.webp)
 
-For at bruge denne mulighed - fork repositoryet til din profil, og start GitHub Codespaces. Når VS Code-terminalen er aktiv, skriv denne kommando:
+For at bruge denne mulighed - fork repositoriet til din profil, og start GitHub Codespaces. Når VS Code-terminalen er aktiv, skriv denne kommando:
 
-This browser preview works in GitHub Codespaces, dev containers, or a local clone with Python and MkDocs installed.
+Denne browser-preview virker i GitHub Codespaces, dev-containere eller en lokal kopi med Python og MkDocs installeret.
 
 ```bash title="" linenums="0"
-mkdocs serve > /dev/null 2>&1 &
+python -m pip install -r requirements-dev.txt
+python -m mkdocs serve --config-file workshop/mkdocs.yml
 ```
 
-In a few seconds, you will see a pop-up dialog. Select the option to `Åbn i browser`. The web-based guide will now open in a new browser tab. Some benefits of this preview:
+Kør disse kommandoer fra **kursus-repositoriets rod**, ikke den separat initialiserede AI-prøve. Hold previewen i forgrunden, så fejl forbliver synlige; stop den med Ctrl+C. For at tjekke siden uden at servere den, kør `python -m mkdocs build --strict --config-file workshop/mkdocs.yml`.
+
+Om et par sekunder vil du se en pop-up dialog. Vælg muligheden for `Open in browser`. Den webbaserede guide vil nu åbne i en ny browserfane. Nogle fordele ved denne preview:
 
 1. **Indbygget søgning** - find nøgleord eller lektioner hurtigt.
-1. **Kopi-ikon** - hold musen over kodeblokke for at se denne mulighed
-1. **Temaomskifter** - skift mellem mørkt og lyst tema
-1. **Få hjælp** - klik på Discord-ikonet i sidefoden for at deltage!
+1. **Kopier-ikon** - hold musen over kodeblokke for at se denne mulighed
+1. **Tema skifte** - skift mellem mørkt og lyst tema
+1. **Få hjælp** - klik på Discord-ikonet i footeren for at deltage!
 
 <br/>
 
-## Oversigt over workshoppen
+## Workshop Oversigt
 
 **Varighed:** 3-4 timer  
-**Niveau:** Begynder til mellem  
-**Forudsætninger:** Kendskab til Azure, AI-koncepter, VS Code & kommandolinjeværktøjer.
+**Niveau:** Begynder til Mellem  
+**Forudsætninger:** Fortrolighed med Azure, AI-koncepter, VS Code og kommandolinjeværktøjer.
 
-Dette er en praktisk workshop, hvor du lærer ved at gøre. Når du har gennemført øvelserne, anbefaler vi at gennemgå AZD for begyndere-pensum for at fortsætte din læringsrejse inden for sikkerhed og produktivitets bedste praksis.
+Dette er en praktisk workshop, hvor du lærer ved at gøre. Når du har gennemført øvelserne, anbefaler vi at gennemgå AZD For Beginners-curriculum for at fortsætte din læringsrejse inden for sikkerhed og produktivitets bedste praksis.
 
 | Tid| Modul  | Mål |
 |:---|:---|:---|
-| 15 mins | [Introduktion](docs/instructions/0-Introduction.md) | Sæt scenen, forstå målene |
-| 30 mins | [Vælg AI-skabelon](docs/instructions/1-Select-AI-Template.md) | Undersøg muligheder og vælg starter | 
-| 30 mins | [Valider AI-skabelon](docs/instructions/2-Validate-AI-Template.md) | Udrul standardløsning til Azure |
-| 30 mins | [Dekonstruer AI-skabelon](docs/instructions/3-Deconstruct-AI-Template.md) | Undersøg struktur og konfiguration |
-| 30 mins | [Konfigurer AI-skabelon](docs/instructions/4-Configure-AI-Template.md) | Aktivér og prøv tilgængelige funktioner |
-| 30 mins | [Tilpas AI-skabelon](docs/instructions/5-Customize-AI-Template.md) | Tilpas skabelonen til dine behov |
-| 30 mins | [Nedtag infrastruktur](docs/instructions/6-Teardown-Infrastructure.md) | Ryd op og frigiv ressourcer |
-| 15 mins | [Opsummering & næste skridt](docs/instructions/7-Wrap-up.md) | Læringsressourcer, Workshop-udfordring |
+| 15 min | [Introduktion](docs/instructions/0-Introduction.md) | Sæt scenen, forstå målene |
+| 30 min | [Vælg AI Skabelon](docs/instructions/1-Select-AI-Template.md) | Undersøg muligheder og vælg startskabelon | 
+| 30 min | [Validér AI Skabelon](docs/instructions/2-Validate-AI-Template.md) | Implementer standardløsning til Azure |
+| 30 min | [Opløs AI Skabelon](docs/instructions/3-Deconstruct-AI-Template.md) | Undersøg struktur og konfiguration |
+| 30 min | [Konfigurer AI Skabelon](docs/instructions/4-Configure-AI-Template.md) | Aktivér og prøv tilgængelige funktioner |
+| 30 min | [Tilpas AI Skabelon](docs/instructions/5-Customize-AI-Template.md) | Tilpas skabelonen til dine behov |
+| 30 min | [Nedtag Infrastruktur](docs/instructions/6-Teardown-Infrastructure.md) | Ryd op og frigiv ressourcer |
+| 15 min | [Afslutning & Næste Skridt](docs/instructions/7-Wrap-up.md) | Læringsressourcer, workshop-udfordring |
 
 <br/>
 
-## Hvad du vil lære
+## Hvad Du Vil Lære
 
-Se AZD-skabelonen som en lærings-sandbox til at udforske forskellige kapabiliteter og værktøjer for end-to-end udvikling på Microsoft Foundry. Ved afslutningen af denne workshop bør du have en intuitiv fornemmelse for forskellige værktøjer og koncepter i denne kontekst.
+Tænk på AZD Skabelonen som en læringssandbox til at udforske forskellige kapaciteter og værktøjer til end-to-end udvikling på Microsoft Foundry. Ved slutningen af denne workshop bør du have en intuitiv forståelse for forskellige værktøjer og koncepter i denne sammenhæng.
 
 | Koncept  | Mål |
 |:---|:---|
-| **Azure Developer CLI** | Forstå værktøjets kommandoer og arbejdsgange|
-| **AZD-skabeloner**| Forstå projektstruktur og konfiguration|
-| **Azure AI Agent**| Provisioner & udrul Microsoft Foundry-projekt  |
-| **Azure AI Search**| Aktivér kontekst-engineering med agenter |
-| **Observabilitet**| Undersøg tracing, overvågning og evalueringer |
-| **Red Teaming**| Undersøg adversarial testning og afbødninger |
+| **Azure Developer CLI** | Forstå værktøjskommandorer og arbejdsgange|
+| **AZD Skabeloner**| Forstå projektstruktur og konfiguration|
+| **Azure AI Agent**| Provisionér & implementér Microsoft Foundry-projekt  |
+| **Azure AI Search**| Aktiver kontekst-engineering med agenter |
+| **Observability**| Undersøg tracing, overvågning og evalueringer |
+| **Red Teaming**| Undersøg modstandersimulering og modforholdsregler |
 
 <br/>
 
-## Workshopstruktur
+## Workshop Struktur
 
-Workshoppen er struktureret, så den tager dig på en rejse fra skabelonsøgning, til udrulning, dekonstruering og tilpasning - ved hjælp af den officielle [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) startskabelon som basis.
+Workshoppen er struktureret til at tage dig på en rejse fra skabelonopdagelse, til implementering, opløsning og tilpasning - ved brug af den officielle [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) startskabelon som basis.
 
-### [Modul 1: Vælg AI-skabelon](docs/instructions/1-Select-AI-Template.md) (30 min)
+### [Modul 1: Vælg AI Skabelon](docs/instructions/1-Select-AI-Template.md) (30 min)
 
-- Hvad er AI-skabeloner?
-- Hvor kan jeg finde AI-skabeloner?
-- Hvordan kommer jeg i gang med at bygge AI-agenter?
-- **Lab**: Hurtigstart i Codespaces eller en dev container
+- Hvad er AI Skabeloner?
+- Hvor kan jeg finde AI Skabeloner?
+- Hvordan kan jeg komme i gang med at bygge AI Agenter?
+- **Laboratorium**: Hurtigstart i Codespaces eller en dev-container
 
-### [Modul 2: Valider AI-skabelon](docs/instructions/2-Validate-AI-Template.md) (30 min)
+### [Modul 2: Validér AI Skabelon](docs/instructions/2-Validate-AI-Template.md) (30 min)
 
-- Hvad er AI-skabelonarkitekturen?
-- Hvad er AZD-udviklingsarbejdsgangen?
-- Hvordan kan jeg få hjælp til AZD-udvikling?
-- **Lab**: Udrul og valider AI Agents-skabelon
+- Hvad er AI Skabelon Arkitekturen?
+- Hvad er AZD Udviklingsarbejdsgangen?
+- Hvordan kan jeg få hjælp til AZD Udvikling?
+- **Laboratorium**: Implementer & Validér AI Agent-skabelon
 
-### [Modul 3: Dekonstruer AI-skabelon](docs/instructions/3-Deconstruct-AI-Template.md) (30 min)
+### [Modul 3: Opløs AI Skabelon](docs/instructions/3-Deconstruct-AI-Template.md) (30 min)
 
 - Undersøg dit miljø i `.azure/` 
 - Undersøg din ressourceopsætning i `infra/` 
 - Undersøg din AZD-konfiguration i `azure.yaml`s
-- **Lab**: Ændr miljøvariabler & genudrul
+- **Laboratorium**: Modificer Miljøvariabler & Implementér igen
 
-### [Modul 4: Konfigurer AI-skabelon](docs/instructions/4-Configure-AI-Template.md) (30 min)
-- Udforsk: Retrieval Augmented Generation
-- Udforsk: Agent-evaluering & Red Teaming
-- Udforsk: Tracing & overvågning
-- **Lab**: Udforsk AI-agent + observabilitet 
+### [Modul 4: Konfigurer AI Skabelon](docs/instructions/4-Configure-AI-Template.md) (30 min)
+- Undersøg: Retrieval Augmented Generation
+- Undersøg: Agent Evaluering & Red Teaming
+- Undersøg: Tracing & Overvågning
+- **Laboratorium**: Undersøg AI Agent + Observabilitet 
 
-### [Modul 5: Tilpas AI-skabelon](docs/instructions/5-Customize-AI-Template.md) (30 min)
-- Definér: PRD med scenariekrav
+### [Modul 5: Tilpas AI Skabelon](docs/instructions/5-Customize-AI-Template.md) (30 min)
+- Definér: PRD med Scenariekrav
 - Konfigurer: Miljøvariabler for AZD
-- Implementér: Lifecycle Hooks for ekstra opgaver
-- **Lab**: Tilpas skabelon til mit scenarie
+- Implementér: Lifecycle Hooks for tilføjede opgaver
+- **Laboratorium**: Tilpas skabelon til mit scenarie
 
-### [Modul 6: Nedtag infrastruktur](docs/instructions/6-Teardown-Infrastructure.md) (30 min)
-- Opsummering: Hvad er AZD-skabeloner?
+### [Modul 6: Nedtag Infrastruktur](docs/instructions/6-Teardown-Infrastructure.md) (30 min)
+- Opsummering: Hvad er AZD Skabeloner?
 - Opsummering: Hvorfor bruge Azure Developer CLI?
-- Næste skridt: Prøv en anden skabelon!
-- **Lab**: Deprovisionér infrastruktur & ryd op
+- Næste Skridt: Prøv en anden skabelon!
+- **Laboratorium**: Nedluk infrastruktur & oprydning
 
 <br/>
 
-## Workshop-udfordring
+## Workshop Udfordring
 
-Vil du udfordre dig selv til at gøre mere? Her er nogle projektforslag - eller del dine idéer med os!!
+Vil du udfordre dig selv til mere? Her er nogle projektforslag - eller del dine idéer med os!!
 
 | Projekt | Beskrivelse |
 |:---|:---|
-|1. **Dekonstruer en kompleks AI-skabelon** | Brug arbejdsflowet og værktøjerne, vi skitserede, og se om du kan udrulle, validere, og tilpasse en anden AI-løsningsskabelon. _Hvad lærte du?_|
-|2. **Tilpas til dit scenarie**  | Prøv at skrive en PRD (Product Requirements Document) for et andet scenarie. Brug derefter GitHub Copilot i dit skabelonrepo i Agent Model - og bed det om at generere en tilpasningsarbejdsgang for dig. _Hvad lærte du? Hvordan kunne du forbedre disse forslag?_|
+|1. **Opløs en Kompleks AI Skabelon** | Brug den arbejdsgang og de værktøjer, vi har skitseret, og se om du kan implementere, validere og tilpasse en anden AI-løsning skabelon. _Hvad lærte du?_|
+|2. **Tilpas med dit Scenarie**  | Prøv at skrive en PRD (Produktkravsdokument) for et andet scenarie. Brug derefter GitHub Copilot i dit skabelonrepo i Agent Model - og bed det om at generere en tilpasningsarbejdsgang til dig. _Hvad lærte du? Hvordan kunne du forbedre disse forslag?_|
 | | |
 
 ## Har du feedback?
 
-1. Opret en issue i dette repo - tag den `Workshop` for bekvemmelighed.
-1. Deltag i Microsoft Foundry Discord - forbind dig med dine kolleger!
+1. Opret en issue på dette repo - tag den med `Workshop` for nemheds skyld.
+1. Deltag i Microsoft Foundry Discord - forbind dig med dine peers!
 
 
 | | | 
 |:---|:---|
-| **📚 Kursusforside**| [AZD for begyndere](../README.md)|
-| **📖 Dokumentation** | [Kom godt i gang med AI-skabeloner](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️AI-skabeloner** | [Microsoft Foundry-skabeloner](https://ai.azure.com/templates) |
-|**🚀 Næste skridt** | [Begynd workshoppen](#oversigt-over-workshoppen) |
+| **📚 Kursus Hjem**| [AZD For Beginners](../README.md)|
+| **📖 Dokumentation** | [Kom i gang med AI-skabeloner](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️AI Skabeloner** | [Microsoft Foundry Skabeloner](https://ai.azure.com/templates) |
+|**🚀 Næste Skridt** | [Begynd Workshop](#workshop-overview) |
 | | |
 
 <br/>
 
 ---
 
-**Navigation:** [Hovedkursus](../README.md) | [Introduktion](docs/instructions/0-Introduction.md) | [Modul 1: Vælg skabelon](docs/instructions/1-Select-AI-Template.md)
+**Navigation:** [Hovedkursus](../README.md) | [Introduktion](docs/instructions/0-Introduction.md) | [Modul 1: Vælg Skabelon](docs/instructions/1-Select-AI-Template.md)
 
 **Klar til at begynde at bygge AI-applikationer med AZD?**
 
-[Begynd workshop: Introduktion →](docs/instructions/0-Introduction.md)
+[Begynd Workshop: Introduktion →](docs/instructions/0-Introduction.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi stræber efter nøjagtighed, skal du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument i dets originalsprog bør betragtes som den autoritative kilde. For kritiske oplysninger anbefales en professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
