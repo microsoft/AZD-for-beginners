@@ -33,6 +33,8 @@ Upon completion, you will be able to:
 
 ## Quick Diagnostics
 
+> Replace example names/IDs with your environment's values. Bash, Bicep, JavaScript, and parameter-file fragments are labeled separately below; they are not one executable script. Review destructive operations and redact secrets before sharing diagnostics. `azd monitor --logs` opens a browser; it does not stream terminal logs.
+
 Before diving into specific issues, run these commands to gather diagnostic information:
 
 ```bash
@@ -48,8 +50,7 @@ az account list
 azd env list
 azd env get-values
 
-# Enable debug logging
-export AZD_DEBUG=true
+# Enable debug logging for the command being investigated
 azd <command> --debug
 ```
 
@@ -62,7 +63,11 @@ azd <command> --debug
 
 **Solutions:**
 ```bash
-# 1. Re-authenticate with Azure CLI
+# 1. Authenticate azd separately (Azure CLI login alone may not authenticate azd)
+azd auth login
+azd auth login --check-status --output json
+
+# 2. Authenticate Azure CLI when using az commands
 az login
 az account show
 
@@ -75,7 +80,7 @@ az login --use-device-code
 
 # 4. Set explicit subscription
 az account set --subscription "your-subscription-id"
-azd config set defaults.subscription "your-subscription-id"
+azd env set AZURE_SUBSCRIPTION_ID "your-subscription-id"
 ```
 
 ### Issue: "Insufficient privileges" during deployment
@@ -101,8 +106,8 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 # 1. Login with specific tenant
 az login --tenant "your-tenant-id"
 
-# 2. Set tenant in configuration
-azd config set auth.tenantId "your-tenant-id"
+# 2. Authenticate azd with that tenant too
+azd auth login --tenant-id "your-tenant-id"
 
 # 3. Clear tenant cache if switching tenants
 az account clear
@@ -116,17 +121,19 @@ az account clear
 - Deployment fails during resource creation
 
 **Solutions:**
-```bash
-# 1. Use unique resource names with tokens
-# In your Bicep template:
+```bicep
+// 1. Fragment inside your Bicep template
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
+// Inside a resource declaration:
 name: '${applicationName}-${resourceToken}'
+```
 
+```bash
 # 2. Change environment name
 azd env new my-app-dev-$(whoami)-$(date +%s)
 
-# 3. Clean up existing resources
-azd down --force --purge
+# 3. Delete ONLY a disposable environment after inspecting it and backing up data
+azd down
 ```
 
 ### Issue: Location/Region not available
@@ -139,14 +146,14 @@ azd down --force --purge
 # 1. Check available locations for resource types
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. Use commonly available regions
-azd config set defaults.location eastus2
-# or
+# 2. For a NEW environment choose a region supported by all required services
 azd env set AZURE_LOCATION eastus2
 
 # 3. Check service availability by region
 # Visit: https://azure.microsoft.com/global-infrastructure/services/
 ```
+
+Changing the location variable does not migrate existing resources. An existing resource group or resource may reject a location change; use a separate environment for a regional redeployment.
 
 ### Issue: Quota exceeded errors
 **Symptoms:**
@@ -161,14 +168,19 @@ az vm list-usage --location eastus2 -o table
 # 2. Request quota increase through Azure portal
 # Go to: Subscriptions > Usage + quotas
 
-# 3. Use smaller SKUs for development
-# In main.parameters.json:
+```
+
+For development, choose a supported smaller SKU in `infra/main.parameters.json`:
+
+```json
 {
   "appServiceSku": {
-    "value": "B1"  // Instead of P1v3
+    "value": "B1"
   }
 }
+```
 
+```bash
 # 4. Clean up unused resources
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
@@ -203,7 +215,7 @@ azd provision --preview
 **Solutions:**
 ```bash
 # 1. Check build output with debug flag
-azd deploy --service web --debug
+azd deploy web --debug
 
 # 2. View deployed service status
 azd show
@@ -218,8 +230,8 @@ node --version  # Should match azure.yaml settings
 python --version
 
 # 4. Clear build cache
-rm -rf node_modules package-lock.json
-npm install
+# Preserve the committed dependency lock for reproducibility
+npm ci
 
 # 5. Check Dockerfile if using containers
 docker build -t test-image .
@@ -282,13 +294,13 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```bash
 # 1. Verify environment variables are set
 azd env get-values
-azd env get DATABASE_URL
+azd env get-value DATABASE_URL
 
-# 2. Check variable names in azure.yaml
-cat azure.yaml | grep -A 5 env:
+# 2. Check how your Bicep/template maps values into the deployed app.
+# azd env set updates local environment values; it does not directly update runtime settings.
 
 # 3. Restart the application
-azd deploy --service web
+azd deploy web
 
 # 4. Check app service configuration
 az webapp config appsettings list --name myapp --resource-group myrg
@@ -321,13 +333,18 @@ az webapp config hostname add --webapp-name myapp --resource-group myrg --hostna
 # 1. Configure CORS for App Service
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# 2. Update API to handle CORS
-# In Express.js:
+```
+
+2. Update your existing Express application (with `cors` imported):
+
+```javascript
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
+```
 
+```bash
 # 3. Check if running on correct URLs
 azd show
 ```
@@ -370,8 +387,9 @@ azd env new production-reset
 # Copy over required environment variables
 azd env set DATABASE_URL "your-value"
 
-# 3. Import existing resources (if possible)
-# Manually update .azure/production/config.json with resource IDs
+# 3. azd env refresh reads outputs of a previous deployment; it does not
+# import arbitrary existing resources or reconcile template drift.
+# To adopt resources, use the template's documented existing-resource parameters.
 ```
 
 ## 🔍 Performance Issues
@@ -384,20 +402,16 @@ azd env set DATABASE_URL "your-value"
 **Solutions:**
 ```bash
 # 1. Deploy specific services for faster iteration
-azd deploy --service web
-azd deploy --service api
+azd deploy web
+azd deploy api
 
 # 2. Use code-only deployment when infrastructure unchanged
 azd deploy  # Faster than azd up
 
-# 3. Optimize build process
-# In package.json:
-"scripts": {
-  "build": "webpack --mode=production --optimize-minimize"
-}
+# 3. Optimize the project's actual build script and image layers.
 
 # 4. Check resource locations (use same region)
-azd config set defaults.location eastus2
+# Do not change AZURE_LOCATION to fix the latency of an existing deployment.
 ```
 
 ### Issue: Application performance problems
@@ -408,10 +422,9 @@ azd config set defaults.location eastus2
 **Solutions:**
 ```bash
 # 1. Scale up resources
-# Update SKU in main.parameters.json:
-"appServiceSku": {
-  "value": "S2"  // Scale up from B1
-}
+# Update the SKU parameter in infra/main.parameters.json, then review and
+# provision infrastructure changes. azd deploy alone does not apply SKU changes.
+azd provision --preview
 
 # 2. Enable Application Insights monitoring
 azd monitor --overview
@@ -430,8 +443,8 @@ az containerapp logs show --name myapp --resource-group myrg --follow
 ### Debug Commands
 ```bash
 # Comprehensive debugging
-export AZD_DEBUG=true
-azd up --debug 2>&1 | tee debug.log
+# Only rerun a mutating command when retrying is appropriate.
+azd show --debug
 
 # Check azd version
 azd version
@@ -453,7 +466,7 @@ azd monitor --logs
 azd monitor --live
 
 # Azure resource logs
-az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
+az monitor activity-log list --resource-group myrg --offset 1h --max-events 50
 
 # Container logs (for Container Apps)
 az containerapp logs show --name myapp --resource-group myrg --follow
@@ -500,7 +513,7 @@ Before contacting support, collect:
 - `azd show` output (current deployment status)
 - Error messages (full text)
 - Steps to reproduce the issue
-- Environment details (`azd env get-values`)
+- Redacted environment details (never share raw `azd env get-values`, which may contain secrets)
 - Timeline of when issue started
 
 ### Log Collection Script
@@ -518,7 +531,7 @@ az --version >> debug-logs/system-info.txt
 echo "Configuration:" > debug-logs/config.txt
 azd config show >> debug-logs/config.txt
 azd env list >> debug-logs/config.txt
-azd env get-values >> debug-logs/config.txt
+# Do not collect environment values automatically: they can contain credentials.
 
 echo "Current deployment status:" > debug-logs/status.txt
 azd show >> debug-logs/status.txt
@@ -548,31 +561,33 @@ azd provision --preview
 ```
 
 ### Monitoring Setup
-```bash
-# Enable Application Insights
-# Add to main.bicep:
+```bicep
+// Illustrative fragment, not a complete resource definition:
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   // ... configuration
 }
+```
 
-# Set up alerts
+```bash
+# Example App Service PLAN CPU alert (not a site metric)
 az monitor metrics alert create \
   --name "High CPU Usage" \
   --resource-group myrg \
-  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/sites/myapp \
-  --condition "avg Percentage CPU > 80"
+  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/serverfarms/myplan \
+  --condition "avg CpuPercentage > 80"
 ```
 
 ### Regular Maintenance
 ```bash
-# Weekly health checks
+# Weekly health checks (project-specific script you must implement)
 ./scripts/health-check.sh
 
 # Monthly cost review
-az consumption usage list --billing-period-name 202401
+# Review current Cost Management data in the portal; Consumption API support
+# depends on your billing agreement.
 
 # Quarterly security review
-az security assessment list --resource-group myrg
+az security assessment list
 ```
 
 ## Related Resources

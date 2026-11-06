@@ -1,6 +1,6 @@
 # Chapter 6: Pre-Deployment Planning & Validation
 
-**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 1 hour | **⭐ Complexity**: Intermediate
+**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 2-4 hours reading; additional time for adapted labs | **⭐ Complexity**: Intermediate–Advanced
 
 ---
 
@@ -8,7 +8,7 @@
 
 This chapter covers essential planning and validation steps before deploying your application. Learn to avoid costly mistakes with proper capacity planning, SKU selection, and preflight checks.
 
-> Validated against `azd 1.27.1` in July 2026.
+> Command guidance reviewed against the released `azd 1.37.2` reference. Cloud deployments were not executed. The longer lessons include illustrative fragments, not complete local deployment projects.
 
 ## Learning Objectives
 
@@ -17,7 +17,7 @@ By completing this chapter, you will:
 - Plan capacity and estimate resource requirements
 - Select appropriate SKUs for cost optimization
 - Configure Application Insights for monitoring
-- Understand team coordination patterns
+- Understand multi-agent coordination patterns and their deployment requirements
 
 ---
 
@@ -29,7 +29,7 @@ By completing this chapter, you will:
 | 2 | [Capacity Planning](capacity-planning.md) | Estimate resource requirements | 20 min |
 | 3 | [SKU Selection](sku-selection.md) | Choose appropriate pricing tiers | 15 min |
 | 4 | [Application Insights](application-insights.md) | Configure monitoring | 20 min |
-| 5 | [Coordination Patterns](coordination-patterns.md) | Team deployment workflows | 15 min |
+| 5 | [Coordination Patterns](coordination-patterns.md) | Advanced multi-agent orchestration design | 60-75 min |
 
 ---
 
@@ -39,7 +39,7 @@ By completing this chapter, you will:
 # Check subscription quotas
 az vm list-usage --location eastus --output table
 
-# Preview deployment (no resources created)
+# Preview infrastructure changes (inspect template hooks before running)
 azd provision --preview
 
 # Validate Bicep syntax
@@ -74,10 +74,10 @@ azd env get-values
 
 | Workload | Development | Production |
 |----------|-------------|------------|
-| Container Apps | Consumption | Dedicated D4 |
+| Container Apps | Consumption | Consumption or dedicated workload profile, based on measured load |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Models | Standard | Standard + PTU |
-| AI Search | Basic | Standard S2+ |
+| Azure OpenAI models | Supported pay-as-you-go deployment type | Pay-as-you-go or provisioned throughput; model/region dependent |
+| AI Search | Free/Basic within limits | Basic or Standard tier sized for index, replicas, and query load |
 
 ---
 

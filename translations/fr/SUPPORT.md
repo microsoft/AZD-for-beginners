@@ -1,26 +1,26 @@
-# TODO : Le responsable de ce dépôt n'a pas encore modifié ce fichier
-
-**PROPRIÉTAIRE DU DÉPÔT** : Souhaitez-vous un support de la part du service client et support (CSS) pour ce produit/projet ?
-
-- **Pas de support CSS :** Remplissez ce modèle avec des informations sur la manière de signaler des problèmes et d'obtenir de l'aide.
-- **Support CSS activé :** Remplissez un formulaire d'introduction sur [aka.ms/onboardsupport](https://aka.ms/onboardsupport). CSS travaillera avec vous pour déterminer les prochaines étapes.
-- **Pas sûr ?** Remplissez un formulaire d'introduction comme si la réponse était "Oui". CSS vous aidera à décider.
-
-*Ensuite, supprimez ce premier titre de ce fichier SUPPORT.MD avant de publier votre dépôt.*
-
 # Support
 
-## Comment signaler des problèmes et obtenir de l'aide  
+## Problèmes et questions concernant le cours
 
-Ce projet utilise GitHub Issues pour suivre les bugs et les demandes de fonctionnalités. Veuillez rechercher les problèmes existants avant d'en créer de nouveaux afin d'éviter les doublons. Pour les nouveaux problèmes, signalez votre bug ou demande de fonctionnalité en tant que nouvel Issue.
+Recherchez dans les [problèmes du cours](https://github.com/microsoft/AZD-for-beginners/issues) avant de signaler un problème. Incluez la leçon d’anglais concernée, la commande que vous avez exécutée, vos versions AZD/extension et le message d’erreur. Supprimez les identifiants, jetons, détails d’abonnement et données personnelles des journaux et captures d’écran.
 
-Pour obtenir de l'aide et poser des questions sur l'utilisation de ce projet, veuillez **RESPONSABLE DU DÉPÔT : INSÉREZ ICI LES INSTRUCTIONS SUR LA FAÇON DE CONTACTER LES PROPRIÉTAIRES DU DÉPÔT OU LA COMMUNAUTÉ POUR OBTENIR DE L'AIDE. CELA POURRAIT ÊTRE UN TAG STACK OVERFLOW OU UN AUTRE CANAL. OÙ AIDEREZ-VOUS LES GENS ?**.
+Pour les questions générales d’apprentissage, utilisez la [communauté des développeurs Azure](https://discord.gg/microsoft-azure). Les réponses de la communauté ne constituent pas un service d’assistance garanti.
 
-## Politique de support de Microsoft  
+## Problèmes liés aux outils et services
 
-Le support pour ce **PROJET ou PRODUIT** est limité aux ressources mentionnées ci-dessus.
+Signalez les bugs reproductibles de l’interface AZD CLI dans [Azure/azure-dev](https://github.com/Azure/azure-dev/issues). Pour les incidents de services Azure ou une assistance spécifique à un abonnement, utilisez les options de support disponibles dans le [portail Azure](https://portal.azure.com/).
+
+## Rapports de sécurité
+
+Suivez le [SECURITY.md](SECURITY.md) pour un signalement privé des vulnérabilités. Ne publiez pas de secrets ni de détails d’exploitation dans un problème public du cours.
+
+## Politique de support Microsoft
+
+Le support pour ce projet éducatif est limité aux ressources listées ci-dessus. Les exemples du cours n’incluent pas un engagement de support en production.
 
 ---
 
-**Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant autorité. Pour des informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Avertissement** :
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforçions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue native doit être considéré comme la source faisant autorité. Pour les informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous ne saurions être tenus responsables des malentendus ou erreurs d'interprétation découlant de l'utilisation de cette traduction.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

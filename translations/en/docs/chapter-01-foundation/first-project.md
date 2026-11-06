@@ -4,12 +4,14 @@
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
 - **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
 - **⬅️ Previous**: [Installation & Setup](installation.md)
-- **➡️ Next**: [Configuration](configuration.md)
+- **➡️ Next**: [Bring Your Own App](bring-your-own-app.md)
 - **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Introduction
 
-Welcome to your first Azure Developer CLI project! This comprehensive hands-on tutorial provides a complete walkthrough of creating, deploying, and managing a full-stack application on Azure using azd. You'll work with a real todo application that includes a React frontend, Node.js API backend, and MongoDB database.
+Welcome to your first Azure Developer CLI project! You'll deploy a todo application with a React frontend, Node.js API, and Azure Cosmos DB. The template retains the historical name `todo-nodejs-mongo`; its current infrastructure uses Cosmos DB for NoSQL, so inspect the downloaded README and `infra/` rather than infer the database API from the name.
+
+> Reviewed against `azd 1.37.2` and the public template in November 2026. Examples below use Bash; JSON extraction also requires `jq`. Azure deployments incur charges and were not executed during this review.
 
 ## Learning Goals
 
@@ -37,7 +39,7 @@ Upon completion, you will be able to:
 - ✅ Azure Developer CLI installed ([Installation Guide](installation.md))
 - ✅ AZD authentication completed with `azd auth login`
 - ✅ Git installed on your system
-- ✅ Node.js 16+ (for this tutorial)
+- ✅ Node.js 22 LTS (or a supported version required by the downloaded template)
 - ✅ Visual Studio Code (recommended)
 
 Before you continue, run the setup validator from the repository root:
@@ -77,7 +79,7 @@ azd template list
 # Initialize the todo app template
 mkdir my-first-azd-app
 cd my-first-azd-app
-azd init --template todo-nodejs-mongo
+azd init --template todo-nodejs-mongo .
 
 # Follow the prompts:
 # - Enter an environment name: "dev"
@@ -105,9 +107,8 @@ find . -type f | head -20   # macOS/Linux
 You should see:
 ```
 my-first-azd-app/
-├── .azd/
-│   └── config.json              # Project configuration
 ├── .azure/
+│   ├── config.json              # Selected local environment
 │   └── dev/                     # Environment-specific files
 ├── .devcontainer/               # Development container config
 ├── .github/workflows/           # GitHub Actions CI/CD
@@ -115,16 +116,14 @@ my-first-azd-app/
 ├── infra/                       # Infrastructure as code (Bicep)
 │   ├── main.bicep              # Main infrastructure template
 │   ├── main.parameters.json     # Parameters for deployment
-│   └── modules/                # Reusable infrastructure modules
+│   └── app/                    # Application infrastructure modules
 ├── src/
 │   ├── api/                    # Node.js backend API
 │   │   ├── src/               # API source code
-│   │   ├── package.json       # Node.js dependencies
-│   │   └── Dockerfile         # Container configuration
+│   │   └── package.json       # Node.js dependencies
 │   └── web/                   # React frontend
 │       ├── src/               # React source code
-│       ├── package.json       # React dependencies
-│       └── Dockerfile         # Container configuration
+│       └── package.json       # React dependencies
 ├── azure.yaml                  # azd project configuration
 └── README.md                   # Project documentation
 ```
@@ -150,13 +149,13 @@ Before deploying, you can customize the application:
 ### Modify the Frontend
 ```bash
 # Open the React app component
-code src/web/src/App.tsx
+code src/web/src/layout/header.tsx
 ```
 
 Make a simple change:
-```typescript
-// Find the title and change it
-<h1>My Awesome Todo App</h1>
+```tsx
+// Replace the existing <Text variant="xLarge">ToDo</Text> element
+<Text variant="xLarge">My Awesome Todo App</Text>
 ```
 
 ### Configure Environment Variables
@@ -167,6 +166,8 @@ azd env set API_VERSION "v1.18"
 # View all environment variables
 azd env get-values
 ```
+
+These two custom values demonstrate local storage only. The stock template does not consume `WEBSITE_TITLE` or `API_VERSION`, so they do not change the app. The explicit source edit above changes the displayed title.
 
 ## Step 4: Deploy to Azure
 
@@ -185,10 +186,7 @@ azd up
 
 ### What's Happening During Deployment?
 
-The `azd up` command performs these steps:
-1. **Provision** (`azd provision`) - Creates Azure resources
-2. **Package** - Builds your application code
-3. **Deploy** (`azd deploy`) - Deploys code to Azure resources
+The workflow provisions infrastructure and packages/deploys code. Exact ordering can be customized through `workflows.up` in `azure.yaml`; this template specifies provision followed by deploy. Do not rely on one universal phase order for every template.
 
 ### Expected Output
 ```
@@ -212,7 +210,7 @@ Click on the URL provided in the deployment output, or get it anytime:
 azd show
 
 # Open the application in your browser
-azd show --output json | jq -r '.services.web.endpoint'
+azd show --output json | jq -er '.services.web.ingressUrl'
 ```
 
 ### Test the Todo App
@@ -241,10 +239,12 @@ Before moving on, run through this quick checklist to confirm everything actuall
 azd show
 
 # 2. Smoke-test the endpoint (expects HTTP 200)
-curl -I "$(azd show --output json | jq -r '.services.web.endpoint')"
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+curl --fail --show-error --location "$WEB_URL"
 
-# 3. Check the health endpoint if your app exposes one
-curl "$(azd show --output json | jq -r '.services.web.endpoint')/health"
+# 3. Test the API's actual list route (the template has no /health route)
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
+curl --fail --show-error "$API_URL/lists"
 ```
 
 **Deployment is verified when:**
@@ -262,7 +262,7 @@ Let's make a change and see how easy it is to update:
 ### Modify the API
 ```bash
 # Edit the API code
-code src/api/src/routes/lists.js
+code src/api/src/routes/lists.ts
 ```
 
 Add a custom response header:
@@ -303,7 +303,7 @@ azd env list
 azd env select dev
 azd show
 
-# View staging environment
+# View staging environment  
 azd env select staging
 azd show
 ```
@@ -313,15 +313,13 @@ azd show
 When you're done experimenting, clean up to avoid ongoing charges:
 
 ```bash
-# Delete all Azure resources for current environment
-azd down
+# Review and delete BOTH environments created in this tutorial
+azd down --environment dev
+azd down --environment staging
 
-# Force delete without confirmation and purge soft-deleted resources
-azd down --force --purge
-
-# Delete specific environment
-azd env select staging
-azd down --force --purge
+# Automation alternative for a selected disposable environment:
+# azd down --environment dev --force --purge
+# --purge affects supported soft-deleted Azure resources, not local .azure files.
 ```
 
 ## Classic App vs. AI-Powered App: Same Workflow
@@ -332,13 +330,13 @@ The good news: **the workflow is identical.**
 
 | Step | Classic Todo App | AI Chat App |
 |------|-----------------|-------------|
-| Initialize | `azd init --template todo-nodejs-mongo` | `azd init --template azure-search-openai-demo` |
+| Initialize (empty directory) | `azd init --template todo-nodejs-mongo .` | `azd init --template azure-search-openai-demo .` |
 | Authenticate | `azd auth login` | `azd auth login` |
 | Deploy | `azd up` | `azd up` |
 | Monitor | `azd monitor` | `azd monitor` |
 | Clean up | `azd down --force --purge` | `azd down --force --purge` |
 
-The only difference is the **template** you start from. An AI template includes additional infrastructure (like an Microsoft Foundry Models resource or an AI Search index), but azd handles all of that for you. You don't need to learn new commands, adopt a different tool, or change how you think about deployment.
+The lifecycle commands are the same, but prerequisites differ. An AI template can require model access, regional quota, data ingestion, and additional configuration. Read its README before deployment; `azd up` cannot supply missing permissions or quota.
 
 This is the core principle of azd: **one workflow, any workload.** The skills you practiced in this tutorial—initializing, deploying, monitoring, redeploying, and cleaning up—apply equally to AI applications and agents.
 
@@ -362,12 +360,12 @@ Congratulations! You've successfully:
 ```bash
 # Try Python + MongoDB stack
 mkdir todo-python && cd todo-python
-azd init --template todo-python-mongo
+azd init --template todo-python-mongo .
 azd up
 
 # Verify deployment
 azd show
-curl $(azd show --output json | jq -r '.services.web.endpoint')
+curl --fail "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
 # Clean up
 azd down --force --purge
@@ -380,10 +378,10 @@ azd down --force --purge
 - [ ] Successfully cleaned up all resources
 
 ### Exercise 2: Customize Configuration (20 minutes)
-**Goal**: Practice environment variable configuration
+**Goal**: Practice local environment value storage without mistaking it for runtime configuration
 
 ```bash
-cd my-first-azd-app
+# Return to your original my-first-azd-app directory first
 
 # Create custom environment
 azd env new custom-config
@@ -396,15 +394,15 @@ azd env set ENABLE_DEBUG "true"
 # Verify variables
 azd env get-values | grep APP_TITLE
 
-# Deploy with custom config
-azd up
+# Check one value exactly; expected: My Custom Todo App
+azd env get-value APP_TITLE
 ```
 
 **Success Criteria:**
 - [ ] Custom environment created successfully
 - [ ] Environment variables set and retrievable
-- [ ] Application deploys with custom configuration
-- [ ] Can verify custom settings in deployed app
+- [ ] `azd env get-value APP_TITLE` prints `My Custom Todo App`
+- [ ] Can explain why these values do not change the stock app unless code/infrastructure consumes them
 
 ### Exercise 3: Multi-Environment Workflow (25 minutes)
 **Goal**: Master environment management and deployment strategies
@@ -417,7 +415,7 @@ azd env set LOG_LEVEL debug
 azd up
 
 # Note dev URL
-DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+DEV_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 echo "Dev: $DEV_URL"
 
 # Create staging environment
@@ -427,15 +425,15 @@ azd env set LOG_LEVEL info
 azd up
 
 # Note staging URL
-STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+STAGING_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 echo "Staging: $STAGING_URL"
 
 # Compare environments
 azd env list
 
 # Test both environments
-curl "$DEV_URL/health"
-curl "$STAGING_URL/health"
+curl --fail "$DEV_URL"
+curl --fail "$STAGING_URL"
 
 # Clean up both
 azd env select dev-$(whoami) && azd down --force --purge
@@ -460,23 +458,22 @@ azd env select staging-$(whoami) && azd down --force --purge
 - ✅ Configuration management
 - ✅ Resource cleanup and cost management
 
-**Next Level**: You're ready for [Configuration Guide](configuration.md) to learn advanced configuration patterns!
+**Next Level**: You're ready for [Configuration Guide](../chapter-03-configuration/configuration.md) to learn advanced configuration patterns!
 
 ## Troubleshooting Common Issues
 
 ### Authentication Errors
 ```bash
-# Re-authenticate with Azure
-az login
+# Re-authenticate with azd (az login does not refresh azd's default credentials)
+azd auth login
 
-# Verify subscription access
-az account show
+# Verify the selected environment's subscription
+azd env get-value AZURE_SUBSCRIPTION_ID
 ```
 
 ### Deployment Failures
 ```bash
 # Enable debug logging
-export AZD_DEBUG=true
 azd up --debug
 
 # View application logs in Azure
@@ -505,7 +502,7 @@ Now that you've completed your first project, explore these advanced topics:
 
 ### 1. Customize Infrastructure
 - [Infrastructure as Code](../chapter-04-infrastructure/provisioning.md)
-- [Add databases, storage, and other services](../chapter-04-infrastructure/provisioning.md#adding-services)
+- [Add database infrastructure](../chapter-04-infrastructure/provisioning.md#%EF%B8%8F-database-provisioning)
 
 ### 2. Set Up CI/CD
 - [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Complete CI/CD workflows
@@ -522,9 +519,10 @@ azd template list --filter api
 azd template list --filter database
 
 # Try different technology stacks
-azd init --template todo-python-mongo
-azd init --template todo-csharp-sql
-azd init --template todo-java-mongo
+# Choose ONE in a new empty directory, not all three in the same project
+azd init --template todo-python-mongo .
+# azd init --template todo-csharp-sql .
+# azd init --template todo-java-mongo .
 ```
 
 ## Additional Resources
@@ -541,8 +539,8 @@ azd init --template todo-java-mongo
 
 ### Templates & Examples
 - [Official Template Gallery](https://azure.github.io/awesome-azd/)
-- [Community Templates](https://github.com/Azure-Samples/azd-templates)
-- [Enterprise Patterns](https://github.com/Azure/azure-dev/tree/main/templates)
+- [Community Template Contributions](https://github.com/Azure/awesome-azd)
+- [Todo Template Source](https://github.com/Azure-Samples/todo-nodejs-mongo)
 
 ---
 

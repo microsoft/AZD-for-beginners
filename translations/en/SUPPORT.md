@@ -1,26 +1,26 @@
-# TODO: The maintainer of this repo has not yet edited this file
-
-**REPO OWNER**: Do you want Customer Service & Support (CSS) assistance for this product/project?
-
-- **No CSS support:** Complete this template with details on how to report issues and seek help.
-- **Yes CSS support:** Fill out an intake form at [aka.ms/onboardsupport](https://aka.ms/onboardsupport). CSS will collaborate with you to determine the next steps.
-- **Not sure?** Fill out an intake form as if the answer were "Yes." CSS will assist you in making a decision.
-
-*Afterward, delete this initial heading from this SUPPORT.MD file before publishing your repository.*
-
 # Support
 
-## How to report issues and seek help  
+## Course issues and questions
 
-This project uses GitHub Issues to track bugs and feature requests. Please search through the existing issues before submitting new ones to avoid duplicates. For new issues, submit your bug or feature request as a new Issue.
+Search the [course issues](https://github.com/microsoft/AZD-for-beginners/issues) before reporting a problem. Include the affected English lesson, the command you ran, your AZD/extension versions, and the error message. Remove credentials, tokens, subscription details, and personal data from logs and screenshots.
 
-For assistance and questions about using this project, please **REPO MAINTAINER: PROVIDE INSTRUCTIONS HERE ON HOW TO CONTACT REPO OWNERS OR THE COMMUNITY FOR HELP. THIS COULD BE A STACK OVERFLOW TAG OR ANOTHER CHANNEL. WHERE WILL YOU OFFER SUPPORT?**.
+For general learning questions, use the [Azure developer community](https://discord.gg/microsoft-azure). Community responses are not a guaranteed support service.
 
-## Microsoft Support Policy  
+## Tool and service issues
 
-Support for this **PROJECT or PRODUCT** is limited to the resources mentioned above.
+Report reproducible AZD CLI bugs in [Azure/azure-dev](https://github.com/Azure/azure-dev/issues). For Azure service incidents or subscription-specific assistance, use the support options available in the [Azure portal](https://portal.azure.com/).
+
+## Security reports
+
+Follow [SECURITY.md](SECURITY.md) for private vulnerability reporting. Do not post secrets or exploit details in a public course issue.
+
+## Microsoft support policy
+
+Support for this educational project is limited to the resources listed above. Course examples do not include a production support commitment.
 
 ---
 
-**Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we aim for accuracy, please note that automated translations may include errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is advised. We are not responsible for any misunderstandings or misinterpretations resulting from the use of this translation.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Disclaimer**:
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
