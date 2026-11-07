@@ -1,118 +1,118 @@
-# کنفیگریشن گائیڈ
+# ترتیب کا رہنما
 
-**باب نیوی گیشن:**
+**باب کی نیویگیشن:**
 - **📚 کورس ہوم**: [AZD For Beginners](../../README.md)
-- **📖 موجودہ باب**: باب 3 - کنفیگریشن اور توثیق
-- **⬅️ پچھلا**: [آپ کا پہلا پروجیکٹ](first-project.md)
-- **➡️ اگلا**: [ڈپلائمنٹ گائیڈ](../chapter-04-infrastructure/deployment-guide.md)
-- **🚀 اگلا باب**: [باب 4: انفراسٹرکچر از کوڈ](../chapter-04-infrastructure/deployment-guide.md)
+- **📖 موجودہ باب**: باب 3 - ترتیب اور تصدیق
+- **⬅️ پچھلا**: [آپ کا پہلا پروجیکٹ](../chapter-01-foundation/first-project.md)
+- **➡️ اگلا**: [تنصیب کا رہنما](../chapter-04-infrastructure/deployment-guide.md)
+- **🚀 اگلا باب**: [باب 4: انفراسٹرکچر ایز کوڈ](../chapter-04-infrastructure/deployment-guide.md)
 
 ## تعارف
 
-یہ جامع گائیڈ Azure Developer CLI کی کنفیگریشن کے تمام پہلوؤں کا احاطہ کرتا ہے تاکہ آپ کی ترقی اور تعیناتی کے کاموں کو بہترین بنایا جا سکے۔ آپ کنفیگریشن کی ہائیرارکی، ماحول کا انتظام، توثیقی طریقے، اور پیچیدہ Azure تعیناتیوں کے لیے جدید کنفیگریشن کے نمونے سیکھیں گے۔
+> کا جائزہ لیا گیا `azd 1.37.2` (نومبر 2026) کے مطابق۔ باش کمانڈز یہ فرض کرتی ہیں کہ azd پروجیکٹ پہلے سے مرتب شدہ ہے۔ جب تک کہ مکمل فائل کی واضح طور پر وضاحت نہ کی گئی ہو، YAML/Bicep کے کوڈ کے ٹکڑے ایسے حصے ہیں جو متعلقہ پروجیکٹ فائلوں میں ضم کیے جانے کے لیے ہیں، نہ کہ خود مختار چلانے کے قابل منصوبے۔
 
-## سیکھنے کے اہداف
+یہ جامع رہنما Azure Developer CLI کی ترتیب کے تمام پہلوؤں کو شامل کرتا ہے تاکہ بہترین ترقی اور تعیناتی کے ورک فلو کو یقینی بنایا جا سکے۔ آپ ترتیب کے درجات، ماحول کے انتظام، توثیقی طریقے، اور جدید ترتیب کے نمونوں کے بارے میں سیکھیں گے جو موثر اور محفوظ Azure تعیناتیاں ممکن بناتے ہیں۔
 
-اس سبق کے آخر میں، آپ:
-- azd کنفیگریشن کی ہائیرارکی میں ماہر ہو جائیں گے اور سمجھ سکیں گے کہ ترتیبات کو کس طرح اہمیت دی جاتی ہے
-- عالمی اور مخصوص پروجیکٹ کی ترتیبات کو مؤثر طریقے سے ترتیب دیں گے
+## سیکھنے کے مقاصد
+
+اس سبق کے آخر تک، آپ:
+- azd کنفیگریشن کی ہائیرارکی میں مہارت حاصل کریں گے اور سمجھیں گے کہ ترتیبات کو کس طرح درجہ بندی دی جاتی ہے
+- عالمی اور پروجیکٹ مخصوص ترتیبات کو مؤثر طریقے سے ترتیب دیں گے
 - مختلف کنفیگریشنز کے ساتھ متعدد ماحول کا انتظام کریں گے
-- محفوظ توثیق اور اجازت نمونوں کو نافذ کریں گے
-- پیچیدہ حالات کے لیے جدید کنفیگریشن کے نمونے سمجھیں گے
+- محفوظ تصدیق اور اجازت کے نظم و نسق کو نافذ کریں گے
+- پیچیدہ حالات کیلئے اعلی درجے کی کنفیگریشن پیٹرنز کو سمجھیں گے
 
-## سیکھنے کے نتائج
+## تعلیمی نتائج
 
-سبق مکمل کرنے کے بعد، آپ قابل ہوں گے:
-- ترقی کے بہترین ورک فلو کے لیے azd کی کنفیگریشن کریں
-- متعدد ڈپلائمنٹ ماحول قائم اور منظم کریں
-- محفوظ کنفیگریشن مینجمنٹ کے طریقے نافذ کریں
-- کنفیگریشن سے متعلق مسائل کو حل کریں
-- مخصوص تنظیمی ضروریات کے لیے azd کے رویے کو حسب ضرورت بنائیں
+اس سبق کو مکمل کرنے کے بعد، آپ قابل ہو جائیں گے:
+- azd کو مثالی ترقیاتی ورک فلو کے لیے ترتیب دینا
+- متعدد تعیناتی کے ماحول قائم کرنا اور ان کا انتظام کرنا
+- محفوظ ترتیب مینجمنٹ کی مشقیں نافذ کرنا
+- ترتیب سے متعلق مسائل کو حل کرنا
+- مخصوص تنظیمی ضروریات کے لیے azd کے رویے کو حسب ضرورت بنانا
 
-یہ جامع گائیڈ Azure Developer CLI کی کنفیگریشن کے تمام پہلوؤں کا احاطہ کرتا ہے تاکہ آپ کی ترقی اور تعیناتی کے کاموں کو بہترین بنایا جا سکے۔
+یہ جامع گائیڈ Azure Developer CLI کو مثالی ترقی اور تعیناتی کے ورک فلو کے لیے ترتیب دینے کے تمام پہلوؤں کا احاطہ کرتی ہے۔
 
 ## azd پروجیکٹ میں AI ایجنٹس کو سمجھنا
 
-اگر آپ AI ایجنٹس کے لیے نئے ہیں، تو یہاں ایک آسان طریقہ ہے کہ azd کے تناظر میں انہیں سمجھیں۔
+اگر آپ AI ایجنٹس کے نئے ہیں، تو یہاں azd کی دنیا میں ان کے بارے میں سوچنے کا ایک سادہ طریقہ ہے۔
 
 ### ایجنٹ کیا ہے؟
 
-ایجنٹ ایک ایسا سافٹ ویئر ہوتا ہے جو درخواست وصول کر سکتا ہے، اس پر غور کر سکتا ہے، اور کارروائی کر سکتا ہے—اکثر ایک AI ماڈل کال کر کے، ڈیٹا دیکھ کر، یا دیگر خدمات کو بلا کر۔ azd پروجیکٹ میں، ایجنٹ آپ کی ویب فرنٹ اینڈ یا API بیک اینڈ کے ساتھ ایک اور **سروس** ہوتا ہے۔
+ایک ایجنٹ ایک سافٹ ویئر کا ٹکڑا ہوتا ہے جو درخواست وصول کر سکتا ہے، اس کے بارے میں سوچ سکتا ہے، اور کارروائیاں کر سکتا ہے—اکثر ایک AI ماڈل کو کال کر کے، ڈیٹا تلاش کر کے، یا دیگر خدمات کو کال کر کے۔ azd پروجیکٹ میں، ایک ایجنٹ آپ کے ویب فرنٹ اینڈ یا API بیک اینڈ کے ساتھ ایک اضافی **سروس** ہوتا ہے۔
 
 ### ایجنٹس azd پروجیکٹ کے ڈھانچے میں کیسے فٹ ہوتے ہیں
 
-ایک azd پروجیکٹ تین پرتوں پر مشتمل ہوتا ہے: **انفراسٹرکچر، کوڈ، اور کنفیگریشن**۔ ایجنٹس بھی انہی پرتوں میں اسی طرح شامل ہوتے ہیں جیسے کوئی اور سروس:
+azd پروجیکٹ تین تہوں پر مشتمل ہوتا ہے: **انفراسٹرکچر**، **کوڈ**، اور **تشکیل**۔ ایجنٹس ان تہوں میں وہی طریقہ سے شامل ہوتے ہیں جیسے کوئی اور سروس کرتی ہے:
 
-| پرت | روایتی ایپ کے لیے کیا کرتی ہے | ایجنٹ کے لیے کیا کرتی ہے |
-|-------|------------------------------|--------------------------|
-| **انفراسٹرکچر** (`infra/`) | ویب ایپ اور ڈیٹا بیس مہیا کرتی ہے | AI ماڈل اینڈپوائنٹ، سرچ انڈیکس، یا ایجنٹ ہوسٹ مہیا کرتی ہے |
-| **کوڈ** (`src/`) | آپ کے فرنٹ اینڈ اور API کا سورس کوڈ | آپ کے ایجنٹ کا لاجک اور پرامپٹ تعریفیں رکھتی ہے |
-| **کنفیگریشن** (`azure.yaml`) | آپ کی خدمات اور قائل میزبانی کا تعین کرتی ہے | ایجنٹ کو سروس کے طور پر لسٹ کرتی ہے، اس کے کوڈ اور ہوسٹ کی طرف اشارہ کرتی ہے |
+| تہہ | روایتی ایپ کے لیے کام | ایجنٹ کے لیے کام |
+|-------|-------------------------------------|---------------------------|
+| **انفراسٹرکچر** (`infra/`) | ایک ویب ایپ اور ڈیٹا بیس کی فراہمی کرتا ہے | ایک AI ماڈل اینڈ پوائنٹ، سرچ انڈیکس، یا ایجنٹ ہوسٹ کی فراہمی کرتا ہے |
+| **کوڈ** (`src/`) | آپ کے فرنٹ اینڈ اور API کا سورس کوڈ رکھتا ہے | آپ کی ایجنٹ لاجک اور پرامپٹ تعریفات رکھتا ہے |
+| **تشکیل** (`azure.yaml`) | آپ کی سروسز اور ان کے ہوسٹنگ ٹارگیٹس کی فہرست بناتا ہے | آپ کی ایجنٹ کو بطور سروس فہرست کرتا ہے، اس کے کوڈ اور ہوسٹ کی طرف اشارہ کرتا ہے |
 
 ### `azure.yaml` کا کردار
 
-آپ کو ابھی اس کی نحو یاد رکھنے کی ضرورت نہیں۔ تصوراتی طور پر، `azure.yaml` وہ فائل ہے جس میں آپ azd کو بتاتے ہیں: *"یہ خدمات ہیں جو میری ایپلیکیشن پر مشتمل ہیں، اور یہ ان کے کوڈ کہاں ہیں۔"*
+آپ کو ابھی نحو یاد رکھنے کی ضرورت نہیں ہے۔ تصوراً، `azure.yaml` وہ فائل ہے جہاں آپ azd کو بتاتے ہیں: *"یہ ہیں وہ سروسز جو میری ایپلیکیشن پر مشتمل ہیں، اور یہاں ان کا کوڈ ملے گا۔"*
 
-جب آپ کے پروجیکٹ میں ایک AI ایجنٹ شامل ہوتا ہے، `azure.yaml` بس اس ایجنٹ کو خدمات میں سے ایک کے طور پر فہرست کرتا ہے۔ پھر azd صحیح انفراسٹرکچر مہیا کرنا جانتا ہے (جیسے Microsoft Foundry Models اینڈپوائنٹ یا ایجنٹ میزبان کرنے کے لیے کنٹینر ایپ) اور آپ کا ایجنٹ کوڈ تعینات کرتا ہے—بالکل اسی طرح جیسے یہ ویب ایپ یا API کے لیے کرتا ہے۔
+جب آپ کے پروجیکٹ میں ایک AI ایجنٹ شامل ہوتا ہے، تو `azure.yaml` صرف اس ایجنٹ کو سروسز میں سے ایک کے طور پر فہرست کرتا ہے۔ اس کے بعد azd درست انفراسٹرکچر (جیسے Microsoft Foundry Models کا اینڈپوائنٹ یا ایجنٹ کی میزبانی کے لیے کنٹینر ایپ) فراہم کرتا ہے اور آپ کے ایجنٹ کا کوڈ ڈپلائے کرتا ہے—بالکل ویسے ہی جیسے یہ ویب ایپ یا API کے لیے کرتا ہے۔
 
-اس کا مطلب ہے کہ آپ کو بنیادی طور پر کچھ نیا سیکھنے کی ضرورت نہیں ہے۔ اگر آپ سمجھ گئے کہ azd ویب سروس کیسے منظم کرتا ہے، تو آپ پہلے ہی سمجھ چکے ہیں کہ یہ ایجنٹ کو کیسے منظم کرتا ہے۔
+اس کا مطلب ہے کہ سیکھنے کے لیے کوئی بنیادی نیا حکم نہیں ہے۔ اگر آپ سمجھتے ہیں کہ azd ویب سروس کو کیسے منظم کرتا ہے، تو آپ پہلے ہی سمجھتے ہیں کہ یہ ایجنٹ کو کیسے منظم کرتا ہے۔
 
-## کنفیگریشن کی ہائیرارکی
+## تشکیلی درجہ بندی
 
-azd ایک ہائیرارکل کنفیگریشن سسٹم استعمال کرتا ہے:
-1. **کمانڈ لائن فلیگز** (سب سے زیادہ اہم)
-2. **ماحولیاتی متغیرات**
-3. **مقامی پروجیکٹ کنفیگریشن** (`.azd/config.json`)
-4. **گلوبل یوزر کنفیگریشن** (`~/.azd/config.json`)
-5. **ڈیفالٹ ویلیوز** (سب سے کم اہم)
+azd کے پاس مختلف تشکیلی سطحیں ہیں، ایک یونیورسل اوورلے نہیں:
+- **عالمی صارف کی ترجیحات**: `~/.azd/config.json`، جس کا انتظام `azd config` کے ذریعے ہے۔
+- **پروجیکٹ کی تعریف**: `azure.yaml` خدمات، انفراسٹرکچر، اور ہکس کی وضاحت کرتا ہے۔
+- **مقامی ماحول کا انتخاب**: `.azure/config.json`۔
+- **ماحول کے مطابق قدریں**: `.azure/<name>/.env`، جسے `azd env` کے ذریعے منظم کیا جاتا ہے؛ اضافی ترتیبات اس ماحول کے `config.json` میں موجود ہیں۔
+- **فلیگز اور پراسیس متغیرات**: مخصوص کمانڈ/پرووائیڈر کی حمایت یافتہ ترتیبات کو ہی اوور رائڈ کریں۔
 
-## عالمی کنفیگریشن
+ایک فرضی `azd env set` قدر خود بخود انفراسٹرکچر پیرا میٹر یا تعینات شدہ ایپلیکیشن سیٹنگ نہیں بن جاتی۔ اسے پیرا میٹر فائل، سپورٹڈ سروس کنفیگریشن، یا ہک میں واضح طور پر حوالہ دیں۔
 
-### عالمی ڈیفالٹس کی سیٹنگ
+## عالمی ترتیب
+
+### عالمی ڈیفالٹس کی ترتیب
 ```bash
-# ڈیفالٹ سبسکرپشن سیٹ کریں
+# Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# ڈیفالٹ مقام سیٹ کریں
+# Set default location
 azd config set defaults.location "eastus2"
 
-# ڈیفالٹ ریسورس گروپ کے نام رکھنے کا طریقہ کار سیٹ کریں
-azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
-
-# تمام عالمی ترتیب دیکھیں
+# View all global configuration
 azd config show
 
-# ایک ترتیب ہٹائیں
+# Remove a configuration
 azd config unset defaults.location
 ```
 
-### عام عالمی ترتیبات
+### عمومی عالمی ترتیبات
 ```bash
-# ترقی کی ترجیحات
-azd config set alpha.enable true                    # الفا خصوصیات کو فعال کریں
-azd config set telemetry.enabled false             # ٹیلی میٹری کو غیر فعال کریں
-azd config set output.format json                  # آؤٹ پٹ فارمیٹ مقرر کریں
+# Discover supported settings instead of inventing configuration keys
+azd config options
+azd config list-alpha
 
-# سیکیورٹی سیٹنگز
-azd config set auth.useAzureCliCredential true     # تصدیق کے لئے Azure CLI استعمال کریں
-azd config set tls.insecure false                  # TLS کی تصدیق کو نافذ کریں
+# Explicit opt-in only: use Azure CLI credentials rather than azd's default login
+azd config set auth.useAzCliAuth true
+# Restore azd's default credential behavior
+azd config unset auth.useAzCliAuth
 
-# کارکردگی کی بہتری
-azd config set provision.parallelism 5             # متوازی وسائل کی تخلیق
-azd config set deploy.timeout 30m                  # تعیناتی کا وقت ختم ہونا
+# Use per-command flags for supported behavior
+azd show --output json
+azd deploy --timeout 1800   # seconds; stops waiting, not the Azure-side deployment
 ```
 
-## 🏗️ پروجیکٹ کنفیگریشن
+## 🏗️ پروجیکٹ کی ترتیب
 
-### azure.yaml ڈھانچہ
-`azure.yaml` فائل آپ کے azd پروجیکٹ کا مرکزی حصہ ہے:
+### azure.yaml ساخت
+`azure.yaml` فائل آپ کے azd پروجیکٹ کا مرکز ہے:
 
 ```yaml
 # Minimum configuration
 name: my-awesome-app
 metadata:
   template: my-template@1.0.0
-  templateBranch: main
 
 # Service definitions
 services:
@@ -129,21 +129,13 @@ services:
     language: python
     host: containerapp
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-    
-  # Database service
-  database:
-    project: ./src/db
-    host: postgres
+      context: .
+      path: Dockerfile
     
 # Infrastructure configuration
 infra:
   provider: bicep                   # Infrastructure provider
   path: ./infra                    # Infrastructure code location
-  parameters:
-    environmentName: ${AZURE_ENV_NAME}
-    location: ${AZURE_LOCATION}
 
 # Deployment hooks
 hooks:
@@ -181,7 +173,9 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### سروس کنفیگریشن آپشنز
+یہ ایک **پروجیکٹ کی تعریف کی مثال** ہے، فراہم کردہ سٹارٹر نہیں۔ حوالہ دی گئی ماخذ ڈائریکٹریز، ہک اسکرپٹس، پیکج اسکرپٹس، اور مطابقت رکھنے والے `infra/main.bicep`/`main.parameters.json` تخلیق کریں اس کو چلانے سے پہلے۔ ڈیٹا بیس انفراسٹرکچر میں آتے ہیں؛ `postgres` ایک بلٹ ان سروس ہوسٹ نہیں ہے۔ انفراسٹرکچر پیرا میٹرز فراہم کنندہ کی پیرا میٹر فائل میں جائیں، نہ کہ `infra.parameters` میں۔
+
+### سروس کنفیگریشن کے اختیارات
 
 #### ہوسٹ کی اقسام
 ```yaml
@@ -202,46 +196,53 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### زبان مخصوص ترتیبات
+#### زبان مخصوص بلڈ ہکس
+
+درج ذیل سروس کے ٹکڑے ہکس کی وضاحت کرتے ہیں؛ انہیں ہر سروس کے حقیقی `project` اور `host` کے ساتھ ملائیں۔ `buildCommand` اور `startCommand` عام azd سروس خصوصیات نہیں ہیں۔ اسٹارٹ اپ کی ترتیب ایپلیکیشن، Dockerfile، یا ہوسٹ انفراسٹرکچر میں کریں۔
+
 ```yaml
 services:
   node-app:
+    project: ./src/node
+    host: appservice
     language: js
-    buildCommand: npm run build
-    startCommand: npm start
+    hooks:
+      prepackage:
+        shell: sh
+        run: npm run build
     
   python-app:
+    project: ./src/python
+    host: appservice
     language: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
     
   dotnet-app:
+    project: ./src/dotnet
+    host: appservice
     language: csharp
-    buildCommand: dotnet build
-    startCommand: dotnet run
     
   java-app:
+    project: ./src/java
+    host: appservice
     language: java
-    buildCommand: mvn clean package
-    startCommand: java -jar target/app.jar
 ```
 
 ## 🌟 ماحول کا انتظام
 
-### ماحول کی تخلیق
+### ماحول بنانا
 ```bash
-# نیا ماحول بنائیں
+# Create a new environment
 azd env new development
 
-# مخصوص جگہ کے ساتھ بنائیں
+# Create with specific location
 azd env new staging --location "westus2"
 
-# ٹیمپلیٹ سے بنائیں
+# Create from template
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### ماحول کنفیگریشن
-ہر ماحول کی اپنی کنفیگریشن ہوتی ہے جو `.azure/<env-name>/config.json` میں محفوظ ہوتی ہے:
+### ماحول کی ترتیب
+مرکزی ماحول کی قدریں `.azure/<env-name>/.env` میں موجود ہیں، جن میں `AZURE_ENV_NAME`، `AZURE_SUBSCRIPTION_ID`، اور `AZURE_LOCATION` شامل ہیں۔ اضافی ماحول JSON ترتیبات کے لیے `azd env config get/set` استعمال کریں۔ درج ذیل JSON **تصوری ایپلیکیشن اسٹیٹ** ہے، azd کنفیگریشن اسکیمہ نہیں؛ اسے azd کی فائلوں میں کاپی نہ کریں:
 
 ```json
 {
@@ -263,130 +264,134 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 }
 ```
 
-### ماحولیاتی متغیرات
+### ماحول کے متغیرات
+
+**صرف سادہ متن کی نمائش۔** عام `azd env set` قدریں `.azure/<name>/.env` میں لکھ دی جاتی ہیں اور read کمانڈز کے ذریعے پرنٹ کی جا سکتی ہیں۔ مثال کے API کلید کو حقیقی شناختی معلومات کے طور پر استعمال نہ کریں۔ رازوں کے لیے، `azd env set-secret` اور واضح رن ٹائم وائرنگ استعمال کریں۔
+
 ```bash
-# مخصوص ماحول کے لیے متغیرات سیٹ کریں
+# Set environment-specific variables
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# ماحول کے متغیرات دیکھیں
+# View environment variables
 azd env get-values
 
-# متوقع نتیجہ:
+# Expected output:
 # DATABASE_URL=postgresql://user:pass@host:5432/db
 # API_KEY=secret-api-key
 # DEBUG=true
 
-# ماحول کا متغیر ہٹائیں
+# Remove environment variable
 azd env unset DEBUG
 
-# ہٹانے کی تصدیق کریں
+# Verify removal
 azd env get-values | grep DEBUG
-# (کچھ نہیں لوٹانا چاہیے)
+# (should return nothing)
 ```
 
 ### ماحول کے ٹیمپلیٹس
-مسلسل ماحول کی ترتیب کے لیے `.azure/env.template` بنائیں:
+پراجیکٹ روٹ میں مستقل سیٹ اپ کے لیے ایک **غیر رازدار، دستی طور پر برقرار رکھے جانے والا** `.env.example` بنائیں۔ azd خودکار طور پر `env.template` نامی فائل لوڈ نہیں کرتا:
 ```bash
-# مطلوبہ متغیرات
+# Required variables
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# ایپلیکیشن کی ترتیبات
+# Application settings
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# اختیاری ترقی کی ترتیبات
+# Optional development settings
 DEBUG=false
 LOG_LEVEL=info
 ```
 
-### ٹیم کے درمیان ماحول کی شراکت داری
+### ٹیم کے درمیان ماحول کا اشتراک
 
-جب ایک سے زیادہ افراد کسی پروجیکٹ پر کام کرتے ہیں، تو آپ کو اتفاق کرنا ہوتا ہے کہ **کیا چیز رپو کے ساتھ شیئر کی جائے اور کیا مقامی رکھی جائے**۔ azd ہر ماحول کو `.azure/` فولڈر کے تحت رکھتا ہے، اور اس کا سارا مواد کمٹ نہیں ہونا چاہیے۔
+جب ایک سے زیادہ لوگ کسی پروجیکٹ پر کام کرتے ہیں، تو آپ کو اس بات پر متفق ہونا ہوتا ہے کہ **کیا ریپو کے ساتھ منتقل ہوتا ہے اور کیا مقامی رہتا ہے**۔ azd ہر ماحول کو `.azure/` فولڈر کے تحت رکھتا ہے، اور اس کا ہر حصہ کمٹ نہیں ہونا چاہیئے۔
 
-**`.azure/` میں کیا ہوتا ہے:**
+**کیا `.azure/` میں ہوتا ہے:**
 
 ```
 .azure/
 ├── config.json              # which env is currently selected (local)
 └── <env-name>/
-    ├── config.json          # subscription, location, resource IDs
-    └── .env                 # environment variables (may contain secrets!)
+    ├── config.json          # additional environment settings
+    └── .env                 # subscription, location, outputs; may contain secrets!
 ```
 
-**کیا gitignore کرنا ہے۔** azd کا ڈیفالٹ `.gitignore` پہلے ہی `.azure/` کو خارج کرتا ہے۔ اسے اسی طرح رکھیں — `.env` فائلوں میں راز ہوسکتے ہیں، اور وسائل کے شناختی نمبر اس شخص کے لیے مخصوص ہوتے ہیں جس نے انہیں پروویژن کیا ہے۔ ہر ساتھی اپنی **اپنی** ماحول مقامی طور پر بناتا ہے:
+**کیا gitignore کرنا ہے۔** azd کا ڈیفالٹ `.gitignore` پہلے ہی `.azure/` کو خارج کر دیتا ہے۔ اسے اسی طرح رکھیں—`.env` فائلوں میں راز ہو سکتے ہیں، اور resource IDs مخصوص ہوتے ہیں جو انہیں تیار کرنے والے کے لیے مخصوص ہوتے ہیں۔ ہر ساتھی اپنا **ذاتی** ماحول مقامی طور پر بناتا ہے:
 
 ```bash
-# ہر ڈویلپر اسے ایک بار چلاتا ہے تاکہ اپنا علیحدہ ماحول حاصل کر سکے
+# Every developer runs this once to get their own isolated environment
 azd env new dev-alice
 azd up
 ```
 
-**ماحول کے درمیان تبدیلی۔** جو ڈویلپر کئی ماحول کا انتظام کرتا ہے، وہ کمانڈز چلانے سے پہلے فعال ماحول منتخب کرتا ہے:
+**ماحول کے درمیان سوئچ کرنا۔** ایک ڈیولپر جو کئی ماحول کا انتظام کرتا ہے، احکامات چلانے سے پہلے فعال ماحول منتخب کرتا ہے:
 
 ```bash
-azd env list                 # تمام مقامی ماحول دیکھیں اور کون سا ڈیفالٹ ہے
-azd env select staging       # 'staging' کو فعال ماحول بنائیں
-azd env get-values           # تصدیق کریں کہ آپ صحیح ماحول کی طرف اشارہ کر رہے ہیں
+azd env list                 # see all local environments and which is default
+azd env select staging       # make 'staging' the active environment
+azd env get-values           # confirm you're pointed at the right one
 ```
 
-**ٹیم کو غیر رازدار ڈیفالٹس فراہم کرنا۔** ایک ٹیمپلیٹ (جیسے اوپر `.azure/env.template`) کمٹ کریں تاکہ سب کو معلوم ہو کہ کون سے ویری ایبلز سیٹ کرنے ہیں—لیکن کبھی بھری ہوئی ویلیوز کمٹ نہ کریں۔ نئے ساتھی ٹیمپلیٹ کاپی کرتے ہیں اور اپنی بھرائی کرتے ہیں۔
+**ٹیم کو غیر رازدارہ ڈیفالٹس فراہم کرنا۔** کام کو `.env.example` میں commit کریں جو کہ ignored `.azure/` ڈائریکٹری سے باہر ہو۔ نئے ساتھی اسے ایک مقامی ignored فائل میں کاپی کرتے ہیں، اقدار بھر کر، اور واضح طور پر `azd env set --file <local-file>` کے ساتھ امپورٹ کرتے ہیں۔ کبھی بھی خالی placeholders کو ایک کام کرنے والے ماحول پر امپورٹ نہ کریں۔
 
-**CI/CD میں ماحول۔** پائپ لائنز آپ کے مقامی `.azure/` فولڈر کو نہیں پڑھتی، بلکہ ماحول کی قیمتیں پائپ لائن ویری ایبلز/راز کے طور پر فراہم کریں، اور azd انہیں پراسیس ماحول سے پڑھتا ہے:
+**CI/CD میں ماحول۔** پائپ لائنز آپ کے مقامی `.azure/` فولڈر کو نہیں پڑھتی ہیں۔ اس کے بجائے، ماحول کی اقدار کو pipeline variables/secrets کے طور پر فراہم کریں، اور azd انہیں process environment سے پڑھتا ہے:
 
 ```bash
-# CI میں، azd انہیں ماحولیاتی سے پڑھتا ہے، .azure/ سے نہیں۔
+# In CI, azd reads these from the environment, not from .azure/
 export AZURE_ENV_NAME=production
 export AZURE_LOCATION=eastus2
-export AZURE_SUBSCRIPTION_ID=<sub-id>
+export AZURE_SUBSCRIPTION_ID="<sub-id>"
 azd provision --no-prompt
 azd deploy --no-prompt
 ```
 
-> **اصولی قاعدہ:** انفراسٹرکچر کوڈ (`infra/`, `azure.yaml`) Git میں شیئر کیا جاتا ہے؛ ماحول کی *حالت اور راز* (`.azure/`) ہر ڈویلپر اور ہر پائپ لائن کے لیے مخصوص ہوتی ہے۔ `azd pipeline config` خود بخود پائپ لائن ویری ایبلز سیٹ کر دیتا ہے۔
+> **اصولی قاعدہ:** infrastructure code (`infra/`، `azure.yaml`) Git میں شیئر کیا جاتا ہے؛ ماحول کی *حالت اور راز* (`.azure/`) ہر ڈیولپر اور ہر پائپ لائن کے لیے مخصوص ہوتے ہیں۔ `azd pipeline config` آپ کے لیے پائپ لائن متغیرات خود بخود سیٹ کر دیتا ہے۔
 
-## 🔐 توثیق کنفیگریشن
+## 🔐 توثیق کی ترتیب
 
 ### Azure CLI انٹیگریشن
 ```bash
-# Azure CLI اسناد استعمال کریں (پہلے سے طے شدہ)
-azd config set auth.useAzureCliCredential true
+# Explicit opt-in; NOT the default
+azd config set auth.useAzCliAuth true
 
-# مخصوص کرایہ دار کے ساتھ لاگ ان کریں
-az login --tenant <tenant-id>
+# Login with specific tenant
+az login --tenant "<tenant-id>"
 
-# پہلے سے طے شدہ رکنیت مقرر کریں
-az account set --subscription <subscription-id>
+# Set default subscription
+az account set --subscription "<subscription-id>"
 ```
 
 ### سروس پرنسپل توثیق
 CI/CD پائپ لائنز کے لیے:
 ```bash
-# ماحول کے متغیرات مقرر کریں
+# Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# یا براہ راست ترتیب دیں
-azd config set auth.clientId "your-client-id"
-azd config set auth.tenantId "your-tenant-id"
+# Authenticate azd explicitly (prefer pipeline federation over a long-lived secret)
+azd auth login --client-id "$AZURE_CLIENT_ID" \
+  --client-secret "$AZURE_CLIENT_SECRET" --tenant-id "$AZURE_TENANT_ID"
 ```
 
-### مینیجڈ آئیڈینٹیٹی
-Azure ہوسٹڈ ماحول کے لیے:
+### منیجڈ آئیڈینٹیٹی
+Azure میں ہوسٹ کیے گئے ماحول کے لیے:
 ```bash
-# شناخت کی خودکار تصدیق کو فعال کریں
-azd config set auth.useMsi true
-azd config set auth.msiClientId "your-managed-identity-client-id"
+# Enable managed identity authentication
+azd auth login --managed-identity
+# Alternative: choose an identity assigned to the host by client ID
+azd auth login --managed-identity --client-id "<managed-identity-client-id>"
 ```
 
-## 🏗️ انفراسٹرکچر کنفیگریشن
+## 🏗️ بنیادی ترتیب
 
-### بائسک پیرامیٹرز
-`infra/main.parameters.json` میں انفراسٹرکچر پیرامیٹرز مرتب کریں:
+### Bicep پیرامیٹرز
+بنیادی ڈھانچے کے پیرامیٹرز کو `infra/main.parameters.json` میں ترتیب دیں:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -408,90 +413,87 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 }
 ```
 
-### ٹیریفارم کنفیگریشن
-ٹیریفارم پروجیکٹس کے لیے، `infra/terraform.tfvars` میں کنفیگریشن کریں:
-```hcl
-environment_name = "${AZURE_ENV_NAME}"
-location = "${AZURE_LOCATION}"
-app_service_sku = "B1"
-database_sku = "GP_Gen5_2"
+### Terraform ترتیب
+Terraform پروجیکٹس کے لیے، azd `infra/main.tfvars.json` میں placeholders کو تبدیل کرتا ہے۔ یہ نام Terraform کے ان پٹ ویریبلز سے میل کھانے چاہئیں:
+```json
+{
+  "environment_name": "${AZURE_ENV_NAME}",
+  "location": "${AZURE_LOCATION}",
+  "app_service_sku": "B1"
+}
 ```
 
-## 🚀 ڈپلائمنٹ کنفیگریشن
+## 🚀 تعیناتی کی ترتیب
 
-### بلڈ کنفیگریشن
+### تعمیر کی ترتیب
 ```yaml
 # In azure.yaml
 services:
   web:
     project: ./src/web
+    host: appservice
     language: js
-    buildCommand: npm run build:prod
-    buildEnvironment:
-      NODE_ENV: production
-      REACT_APP_API_URL: ${API_URL}
     dist: build
+    hooks:
+      prepackage:
+        shell: sh
+        run: |
+          set -e
+          NODE_ENV=production REACT_APP_API_URL="$API_URL" npm run build:prod
     
   api:
     project: ./src/api
+    host: appservice
     language: python
-    buildCommand: |
-      pip install -r requirements.txt
-      python -m pytest tests/
-    buildEnvironment:
-      PYTHONPATH: src
+    hooks:
+      prepackage:
+        shell: sh
+        run: |
+          set -e
+          python -m pip install -r requirements.txt
+          PYTHONPATH=src python -m pytest tests/
 ```
 
-### ڈوکر کنفیگریشن
+### Docker ترتیب
 ```yaml
 services:
   api:
     project: ./src/api
     host: containerapp
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-      target: production
+      context: .
+      path: Dockerfile
       buildArgs:
-        NODE_ENV: production
-        API_VERSION: v1.0.0
+        - NODE_ENV=production
+        - API_VERSION=v1.0.0
 ```
-مثال `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
+راستے سروس پروجیکٹ کے لحاظ سے نسبتاً ہوتے ہیں۔ Dockerfile کو کسی بھی `ARG` اقدار کا اعلان کرنا ضروری ہے جو یہ استعمال کرتا ہے۔ ملٹی اسٹیج تعمیر کے لیے، آخری مرحلے کو deployable رکھیں یا ایک اپنی مرضی کی پیکیجنگ ورک فلو استعمال کریں؛ `docker.target` جائزہ شدہ schema میں ایک حمایت یافتہ پراپرٹی نہیں ہے۔
 
-## 🔧 جدید کنفیگریشن
+## 🔧 جدید ترتیب
 
-### حسب ضرورت ریسورس نام
-```bash
-# نام رکھنے کے اصول طے کریں
-azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
-azd config set naming.storageAccount "{project}{env}sa"
-azd config set naming.keyVault "kv-{project}-{env}"
-```
-
-### نیٹ ورک کنفیگریشن
+### اپنی مرضی کے وسائل کے نام
 ```yaml
-# In azure.yaml
-infra:
-  provider: bicep
-  parameters:
-    vnetAddressPrefix: "10.0.0.0/16"
-    subnetAddressPrefix: "10.0.1.0/24"
-    enablePrivateEndpoints: true
+# azure.yaml fragment: override resource-group discovery where appropriate
+resourceGroup: rg-${AZURE_ENV_NAME}
 ```
 
-### مانیٹرنگ کنفیگریشن
-```yaml
-# In azure.yaml
-monitoring:
-  applicationInsights:
-    enabled: true
-    samplingPercentage: 100
-  logAnalytics:
-    enabled: true
-    retentionDays: 30
+حقیقی وسائل کے نام Bicep/Terraform میں طے کریں اور resource-group کی تخلیق کو اس ترتیب سے ہم آہنگ رکھیں۔ کوئی عمومی `naming.storageAccount` یا `naming.keyVault` ترتیب کیز موجود نہیں ہیں۔
+
+### نیٹ ورک کی ترتیب
+```json
+{
+  "vnetAddressPrefix": { "value": "10.0.0.0/16" },
+  "subnetAddressPrefix": { "value": "10.0.1.0/24" },
+  "enablePrivateEndpoints": { "value": true }
+}
 ```
 
-## 🎯 ماحول مخصوص کنفیگریشنز
+ان **مثالی پیرامیٹر اندراجات** کو `infra/main.parameters.json` میں `parameters` کے تحت ضم کریں، اور Bicep میں ملتے جلتے پیرامیٹرز کا اعلان اور استعمال کریں۔ یہ خود سے کوئی عمل نہیں کرتے۔
+
+### مانیٹرنگ کی ترتیب
+Application Insights اور Log Analytics کو Bicep/Terraform میں تیار کریں اور اپنی SDK میں ایپلیکیشن ٹیلی میٹری کو ترتیب دیں۔ کوئی عمومی اعلیٰ سطحی `monitoring` بلاک `azure.yaml` میں نہیں جو یہ وسائل بناتا ہو۔ دیکھیں [مانیٹرنگ infrastructure](../chapter-04-infrastructure/provisioning.md#-monitoring-and-observability)۔
+
+## 🎯 ماحول کے مخصوص ترتیبات
 
 ### ترقیاتی ماحول
 ```bash
@@ -502,7 +504,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### اسٹیجنگ ماحول
+### سٹیجنگ ماحول
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -511,7 +513,7 @@ ENABLE_MONITORING=true
 USE_PRODUCTION_APIS=true
 ```
 
-### پروڈکشن ماحول
+### پیداواری ماحول
 ```bash
 # .azure/production/.env
 DEBUG=false
@@ -520,22 +522,23 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 کنفیگریشن کی تصدیق
+## 🔍 تشکیل کی تصدیق
 
-### کنفیگریشن کی تصدیق کریں
+### تشکیل کی تصدیق کریں
 ```bash
-# تشکیل کی نحو کی جانچ کریں
-azd config validate
+# Inspect supported global settings and current project
+azd config options
+azd show
 
-# ماحولیاتی متغیرات کا تجربہ کریں
+# Test environment variables
 azd env get-values
 
-# بنیادی ڈھانچے کی تصدیق کریں
-azd provision --dry-run
+# Validate infrastructure
+azd provision --preview
 ```
 
-### کنفیگریشن اسکرپٹس
-`scripts/` میں تصدیقی اسکرپٹس بنائیں:
+### تشکیل کے اسکرپٹس
+ایک تشکیل کی تصدیق کے اسکرپٹس بنائیں `scripts/` میں:
 
 ```bash
 #!/bin/bash
@@ -543,39 +546,43 @@ azd provision --dry-run
 
 echo "Validating configuration..."
 
-# مطلوبہ ماحول کے متغیرات کی جانچ کریں
+# Check required environment variables
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# azure.yaml کی نحو کی تصدیق کریں
-if ! azd config validate; then
-  echo "Error: Invalid azure.yaml configuration"
+# Ask azd to load the project (not full schema or infrastructure validation)
+if ! azd show --output json; then
+  echo "Error: Could not load the azd project"
   exit 1
 fi
 
 echo "Configuration validation passed!"
 ```
 
-## 🎓 بہترین طریقے
+## 🎓 بہترین عمل
 
-### 1. ماحولیاتی متغیرات استعمال کریں
+### 1. ماحولیاتی متغیرات کا استعمال کریں
 ```yaml
 # Good: Use environment variables
 database:
   connectionString: ${DATABASE_CONNECTION_STRING}
 
+```
+
+حساس قدروں کو ہارڈ کوڈ کرنے سے بچیں (تصویری تشکیل کو علیحدہ رکھیں، جو ایک دوسرا `database` کلید نہیں ہے اسی فائل میں):
+
+```yaml
 # Avoid: Hardcode sensitive values
 database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. کنفیگریشن فائلز کو منظم کریں
+### 2. تشکیل کی فائلوں کو منظم کریں
 ```
 .azure/
 ├── config.json              # Global project config
-├── env.template             # Environment template
 ├── development/
 │   ├── config.json         # Dev environment config
 │   └── .env                # Dev environment variables
@@ -587,16 +594,16 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. ورژن کنٹرول کے تقاضے
+### 3. ورژن کنٹرول کے پہلو
 ```bash
 # .gitignore
-.azure/*/config.json         # ماحول کے کنفیگریشن (وسائل کے IDs شامل ہیں)
-.azure/*/.env               # ماحول کی متغیرات (خفیہ معلومات شامل ہو سکتی ہیں)
-.env                        # مقامی ماحول کی فائل
+.azure/*/config.json         # Environment configs (contain resource IDs)
+.azure/*/.env               # Environment variables (may contain secrets)
+.env                        # Local environment file
 ```
 
-### 4. کنفیگریشن دستاویزات
-اپنی کنفیگریشن `CONFIG.md` میں دستاویزی کریں:
+### 4. تشکیل کی دستاویزات
+اپنے تشکیل کو وثیقہ کریں `CONFIG.md` میں:
 ```markdown
 # Configuration Guide
 
@@ -613,86 +620,85 @@ database:
 
 ## 🎯 عملی مشقیں
 
-### مشق 1: متعدد ماحول کی کنفیگریشن (15 منٹس)
+### مشق 1: کثیر ماحولیاتی تشکیل (15 منٹ)
 
-**مقصد**: تین مختلف ترتیبات والے ماحول بنائیں اور ترتیب دیں
+**مقصد**: تین مقامی ماحولیات بنائیں اور تشکیل دیں جن کی مختلف قدریں ہوں۔ ایک شروع شدہ منصوبے میں شروع کریں؛ اگر یہ پہلے سے موجود ہیں تو غیر استعمال شدہ نام استعمال کریں۔ یہ ایپلیکیشن-خصوصی قدریں ٹیلی میٹری/رَن ٹائم کی ترتیبات کو تبدیل نہیں کریں گی جب تک کہ آپ کا ٹیمپلیٹ انہیں استعمال نہ کرے۔
 
 ```bash
-# ترقیاتی ماحول بنائیں
+# Create development environment
 azd env new dev
 azd env set LOG_LEVEL debug
 azd env set ENABLE_TELEMETRY false
 azd env set APP_INSIGHTS_SAMPLING 100
 
-# اسٹیجنگ ماحول بنائیں
+# Create staging environment
 azd env new staging
 azd env set LOG_LEVEL info
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 50
 
-# پیداواری ماحول بنائیں
+# Create production environment
 azd env new production
 azd env set LOG_LEVEL error
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 10
 
-# ہر ماحول کی تصدیق کریں
+# Verify each environment
 azd env select dev && azd env get-values
 azd env select staging && azd env get-values
 azd env select production && azd env get-values
 ```
 
-**کامیابی کے معیارات:**
-- [ ] تین ماحول کامیابی سے بنائے گئے
-- [ ] ہر ماحول کی جداگانہ کنفیگریشن ہے
-- [ ] بغیر غلطی کے ماحول کے درمیان سوئچ کیا جا سکتا ہے
-- [ ] `azd env list` تمام تین ماحول دکھاتا ہے
+**کامیابی کے معیار:**
+- [ ] تین ماحولیات کامیابی سے بنائی گئی ہیں
+- [ ] ہر ماحول کی منفرد تشکیل ہے
+- [ ] بغیر غلطیوں کے ماحولیات کے درمیان سوئچ کر سکتے ہیں
+- [ ] `azd env list` تینوں ماحولیات کو دکھاتا ہے
 
-### مشق 2: رازداری کا انتظام (10 منٹس)
+### مشق 2: کی والٹ سیکریٹ حوالہ جات (10-20 منٹ)
 
-**مقصد**: حساس ڈیٹا کے ساتھ محفوظ کنفیگریشن کی مشق کریں
+**مقصد**: صاف متن کے بجائے کی والٹ کا حوالہ محفوظ کریں۔ **شروع کا مقام:** ایک شروع شدہ ماحول، Azure میں دستخط، اور ایک کی والٹ تک رسائی جس میں ڈمی سیکریٹ بنانے/پڑھنے کی اجازت ہو۔ والٹ کے عملیات پر چارجز لگ سکتے ہیں۔
 
 ```bash
-# خفیہ معلومات مرتب کریں (آؤٹ پٹ میں ظاہر نہیں کی جاتیں)
-azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
-azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+# Follow the interactive prompts; use a dummy training value, not a production key
+azd env set-secret TRAINING_API_KEY
 
-# غیر خفیہ ترتیب مرتب کریں
+# Set non-secret config
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# ماحول دیکھیں (خفیہ معلومات چھپائی جانی چاہئیں)
-azd env get-values
-
-# تصدیق کریں کہ خفیہ معلومات محفوظ ہیں
-azd env get DB_PASSWORD  # حقیقی قدر دکھانی چاہیے
+# Inspect .azure/<environment>/.env locally: TRAINING_API_KEY should
+# contain an azd Key Vault reference, not the dummy secret text.
+# Do not print resolved values in CI or shared terminal logs.
 ```
 
-**کامیابی کے معیارات:**
-- [ ] راز بغیر ٹرمینل میں دکھائے محفوظ کیے گئے
-- [ ] `azd env get-values` خفیہ راز ظاہر نہیں کرتا
-- [ ] انفرادی `azd env get <SECRET_NAME>` اصل قیمت حاصل کرتا ہے
+**کامیابی کے معیار:**
+- [ ] انٹرایکٹو کمانڈ منتخب شدہ والٹ اور سیکریٹ حوالہ رپورٹ کرتا ہے
+- [ ] مقامی `.env` میں ڈمی سیکریٹ کے بجائے ایک حوالہ شامل ہے
+- [ ] وضاحت کر سکتے ہیں کہ رن ٹائم شناخت/RBAC اور استعمال ابھی بھی ترتیب دینی ہے
+
+**عام مسائل:** ایک 403 کے لیے درست والٹ ڈیٹا-پلیٹ فارم رول اور وقت درکار ہوتا ہے؛ `azd env set ... --secret` ایک درست کمانڈ نہیں ہے۔ عام `get-values`/`get-value` آؤٹ پٹ کو ریڈیکٹڈ نہیں سمجھنا چاہیے۔ تربیتی حوالہ کو `azd env unset TRAINING_API_KEY` سے ہٹائیں؛ یہ والٹ سیکریٹ کو حذف نہیں کرتا، جسے آپ کو الگ سے صاف کرنا ہوگا اگر آپ نے اسے بنایا تھا۔
 
 ## اگلے اقدامات
 
-- [آپ کا پہلا پروجیکٹ](first-project.md) - کنفیگریشن کو عملی طور پر استعمال کریں
-- [ڈپلائمنٹ گائیڈ](../chapter-04-infrastructure/deployment-guide.md) - تعیناتی کے لیے کنفیگریشن استعمال کریں
-- [وسائل کی پروویژننگ](../chapter-04-infrastructure/provisioning.md) - پروڈکشن کے لیے تیار کنفیگریشنز
+- [آپ کا پہلا پروجیکٹ](../chapter-01-foundation/first-project.md) - عملی طور پر تشکیل کا اطلاق کریں
+- [تجھیز رہنمائی](../chapter-04-infrastructure/deployment-guide.md) - تعیناتی کے لیے تشکیل استعمال کریں
+- [وسائل کی فراہمی](../chapter-04-infrastructure/provisioning.md) - پیداواری-تیار تشکیلیں
 
 ## حوالہ جات
 
-- [azd کنفیگریشن حوالہ](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [azure.yaml اسکیمہ](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [ماحولیاتی متغیرات](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [azd تشکیل حوالہ](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azure.yaml اسکیمہ](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-schema)
+- [ماحولیاتی متغیرات](https://learn.microsoft.com/azure/developer/azure-developer-cli/manage-environment-variables)
 
 ---
 
-**باب نیوی گیشن:**
-- **📚 کورس ہوم**: [AZD For Beginners](../../README.md)
-- **📖 موجودہ باب**: باب 3 - کنفیگریشن اور توثیق
-- **⬅️ پچھلا**: [آپ کا پہلا پروجیکٹ](first-project.md)
-- **➡️ اگلا باب**: [باب 4: انفراسٹرکچر از کوڈ](../chapter-04-infrastructure/deployment-guide.md)
-- **اگلا سبق**: [آپ کا پہلا پروجیکٹ](first-project.md)
+**باب کی نیویگیشن:**
+- **📚 کورس ہوم**: [AZD برائے ابتدائی](../../README.md)
+- **📖 موجودہ باب**: باب 3 - کنفیگریشن اور تصدیق
+- **⬅️ پچھلا**: [آپ کا پہلا منصوبہ](../chapter-01-foundation/first-project.md)
+- **➡️ اگلا باب**: [باب 4: کوڈ کی حیثیت سے انفراسٹرکچر](../chapter-04-infrastructure/deployment-guide.md)
+- **اگائی سبق**: [تصدیق اور سیکیورٹی](authsecurity.md)
 
 ---
 

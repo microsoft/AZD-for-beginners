@@ -1,26 +1,26 @@
-# TODO: 此仓库的维护者尚未编辑此文件
-
-**仓库所有者**：您是否希望此产品/项目获得客户服务与支持 (CSS) 的帮助？
-
-- **不需要 CSS 支持**：填写此模板，提供有关如何提交问题和获取帮助的信息。
-- **需要 CSS 支持**：填写 [aka.ms/onboardsupport](https://aka.ms/onboardsupport) 上的表单。CSS 将与您合作/帮助您确定下一步。
-- **不确定？** 按照“需要”的情况填写表单。CSS 将帮助您做出决定。
-
-*在发布您的仓库之前，请从此 SUPPORT.MD 文件中删除此第一个标题。*
-
 # 支持
 
-## 如何提交问题并获取帮助  
+## 课程问题和疑问
 
-此项目使用 GitHub Issues 来跟踪错误和功能请求。在提交新问题之前，请先搜索现有问题以避免重复。对于新问题，请将您的错误或功能请求作为新问题提交。
+在报告问题前请搜索[课程问题](https://github.com/microsoft/AZD-for-beginners/issues)。请包含受影响的英文课程、执行的命令、你的 AZD/扩展版本和错误信息。请从日志和截图中删除凭据、令牌、订阅详情和个人数据。
 
-如果需要帮助或对使用此项目有疑问，请 **仓库维护者：在此处插入说明，说明如何联系仓库所有者或社区以获取帮助。可以是一个 Stack Overflow 标签或其他渠道。您会在哪里帮助人们？**。
+对于一般学习问题，请使用[Azure 开发者社区](https://discord.gg/microsoft-azure)。社区回复不保证是支持服务。
 
-## 微软支持政策  
+## 工具和服务问题
 
-对 **项目或产品** 的支持仅限于上述列出的资源。
+关于可重现的 AZD CLI 版本缺陷，请在[Azure/azure-dev](https://github.com/Azure/azure-dev/issues)报告。有关 Azure 服务事件或订阅专属协助，请使用[Azure 门户](https://portal.azure.com/)中提供的支持选项。
+
+## 安全报告
+
+私密漏洞报告请参考[SECURITY.md](SECURITY.md)。请勿在公开课程问题中发布秘密或漏洞利用细节。
+
+## Microsoft 支持政策
+
+本教育项目的支持仅限于上述资源。课程示例不包含生产环境支持承诺。
 
 ---
 
-**免责声明**：  
-本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保准确性，但请注意，自动翻译可能包含错误或不准确之处。应以原始语言的文档作为权威来源。对于关键信息，建议使用专业人工翻译。因使用本翻译而导致的任何误解或误读，我们概不负责。
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**免责声明**：
+本文件由 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 翻译完成。尽管我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。原始语言版文件应视为权威来源。对于重要信息，建议使用专业人工翻译。我们对因使用本翻译而产生的任何误解或误释不承担责任。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

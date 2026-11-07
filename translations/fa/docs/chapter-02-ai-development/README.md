@@ -1,49 +1,51 @@
 # فصل ۲: توسعه مبتنی بر هوش مصنوعی
 
-**📚 دوره**: [AZD برای مبتدیان](../../README.md) | **⏱️ مدت زمان**: ۱-۲ ساعت | **⭐ درجه سختی**: متوسط
+**📚 دوره**: [AZD برای مبتدیان](../../README.md) | **⏱️ مدت زمان**: ۴-۵ ساعت شامل کارگاه | **⭐ پیچیدگی**: متوسط
 
 ---
 
-## مرور کلی
+## نمای کلی
 
-این فصل بر استقرار برنامه‌های مجهز به هوش مصنوعی با استفاده از Azure Developer CLI و خدمات Microsoft Foundry تمرکز دارد. از برنامه‌های چت ساده هوش مصنوعی تا عوامل هوشمند مجهز به ابزارها.
+این فصل بر استقرار برنامه‌های مبتنی بر هوش مصنوعی با استفاده از Azure Developer CLI و خدمات Microsoft Foundry تمرکز دارد. از برنامه‌های چت ساده هوش مصنوعی تا نمایندگان هوشمند با ابزارها.
 
-> **یادداشت اعتبارسنجی (۱۴۰۵/۰۴/۲۳):** جریان دستورات و راهنمایی توسعه در این فصل در برابر `azd` نسخه `1.27.1` و آخرین نسخه پیش‌نمایش توسعه‌یافته هوش مصنوعی `azure.ai.agents` نسخه `1.0.0-beta.5` بازبینی شده‌اند. اگر از نسخه قدیمی‌تر AZD استفاده می‌کنید، ابتدا به‌روزرسانی کنید و سپس تمرین‌ها را ادامه دهید.
+> **بازبینی نسخه (۲۰۲۶-۱۱-۰۴):** راهنمایی AI CLI بر اساس مستندات/منابع منتشر شده `azd` `1.37.2`، `azure.ai.agents` `1.0.0-beta.23` و `azure.ai.evaluations` `1.0.0-beta.2` بررسی شده است. برای گردش کار ترکیبی از `azd >= 1.37.0` استفاده کنید. ارزیابی‌ها اکنون از فضای نام جداگانه `azd ai eval` استفاده می‌کنند؛ به [تغییرات نسخه و راهنمای مهاجرت](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes) مراجعه کنید. این صحت استقرار زنده را تأیید نمی‌کند.
 
 ## اهداف یادگیری
 
-با پایان این فصل، شما قادر خواهید بود:
-- برنامه‌های هوش مصنوعی را با استفاده از قالب‌های آماده AZD پیاده‌سازی کنید
-- یکپارچه‌سازی Microsoft Foundry با AZD را درک کنید
-- عوامل هوش مصنوعی را با ابزارها پیکربندی و سفارشی کنید
-- برنامه‌های RAG (تولید افزوده بازیابی‌شده) را پیاده‌سازی کنید
+با تکمیل این فصل، شما:
+- استقرار برنامه‌های هوش مصنوعی با استفاده از قالب‌های پیش‌ساخته AZD
+- درک ادغام Microsoft Foundry با AZD
+- پیکربندی و سفارشی‌سازی نمایندگان هوش مصنوعی با ابزارها
+- استقرار برنامه‌های RAG (تولید افزوده بر بازیابی)
 
 ---
 
-## 📚 دروس
+## 📚 درس‌ها
 
-| # | درس | توضیحات | مدت زمان |
+| شماره | درس | توضیحات | زمان |
 |---|--------|-------------|------|
-| ۱ | [یکپارچه‌سازی Microsoft Foundry](microsoft-foundry-integration.md) | اتصال AZD به خدمات Foundry | ۳۰ دقیقه |
-| ۲ | [راهنمای عوامل هوش مصنوعی](agents.md) | استقرار عوامل هوشمند با ابزارها | ۴۵ دقیقه |
-| ۳ | [استقرار مدل هوش مصنوعی](ai-model-deployment.md) | پیاده‌سازی و پیکربندی مدل‌های هوش مصنوعی | ۳۰ دقیقه |
-| ۴ | [آزمایشگاه ورکشاپ هوش مصنوعی](ai-workshop-lab.md) | عملی: آماده‌سازی راهکار هوش مصنوعی شما با AZD | ۶۰ دقیقه |
+| ۱ | [ادغام Microsoft Foundry](microsoft-foundry-integration.md) | اتصال AZD به خدمات Foundry | ۳۰ دقیقه |
+| ۲ | [راهنمای نمایندگان هوش مصنوعی](agents.md) | استقرار نمایندگان هوشمند با ابزارها | ۴۵ دقیقه |
+| ۳ | [استقرار مدل هوش مصنوعی](ai-model-deployment.md) | استقرار و پیکربندی مدل‌های هوش مصنوعی | ۳۰ دقیقه |
+| ۴ | [کارگاه هوش مصنوعی](ai-workshop-lab.md) | عملی: بررسی قالب و برنامه‌ریزی تبدیل شما | ۲-۳ ساعت |
 
 ---
 
 ## 🚀 شروع سریع
 
+یکی از گزینه‌ها را در یک پوشه خالی جدید انتخاب کنید. `.` پایانی دایرکتوری جاری را مقداردهی اولیه می‌کند؛ در غیر اینصورت AZD می‌تواند یک زیرپوشه ایجاد کند بدون اینکه پوشه کاری پوسته شما تغییر کند.
+
 ```bash
-# گزینه ۱: برنامه چت RAG
-azd init --template azure-search-openai-demo
+# Option 1: RAG Chat Application
+azd init --template azure-search-openai-demo .
 azd up
 
-# گزینه ۲: عوامل هوش مصنوعی
-azd init --template get-started-with-ai-agents
+# Option 2: AI Agents
+azd init --template get-started-with-ai-agents .
 azd up
 
-# گزینه ۳: برنامه چت سریع
-azd init --template openai-chat-app-quickstart
+# Option 3: Quick Chat App
+azd init --template openai-chat-app-quickstart .
 azd up
 ```
 
@@ -53,21 +55,23 @@ azd up
 
 | قالب | توضیحات | خدمات |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | گفت‌وگوی RAG با استناد | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | عامل هوش مصنوعی با ابزارها | سرویس عامل هوش مصنوعی |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | چت ساده هوش مصنوعی | OpenAI + برنامه‌های کانتینری |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | چت RAG با استناد | OpenAI + جستجوی هوش مصنوعی |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | نماینده هوش مصنوعی با ابزارها | سرویس نماینده هوش مصنوعی |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | چت پایه هوش مصنوعی | OpenAI + برنامه‌های کانتینری |
 
 ---
 
-## 💰 آگاهی از هزینه‌ها
+## 💰 آگاهی از هزینه
+
+اینها دامنه‌های نمونه هستند، نه قیمت‌های قطعی یا سقف؛ ترافیک مدل، SKUهای جستجو/محاسبه، منطقه و ویژگی‌های اختیاری می‌توانند از آنها فراتر روند. قبل از تأمین، راهنمای قیمت‌گذاری نمونه انتخابی خود را بررسی کنید.
 
 | محیط | هزینه ماهیانه تخمینی |
 |-------------|----------------------|
-| توسعه | ۸۰ تا ۱۵۰ دلار |
-| مرحله تست | ۱۵۰ تا ۳۰۰ دلار |
-| تولید | ۳۰۰ تا بیش از ۳۵۰۰ دلار |
+| توسعه | ۸۰-۱۵۰ دلار |
+| آماده‌سازی | ۱۵۰-۳۰۰ دلار |
+| تولید | ۳۰۰-۳۵۰۰+ دلار |
 
-**نکته:** پس از آزمایش برای جلوگیری از هزینه‌ها، دستور `azd down` را اجرا کنید.
+**نکته:** پس از آزمایش برای جلوگیری از هزینه‌ها `azd down` را اجرا کنید.
 
 ---
 
@@ -75,7 +79,7 @@ azd up
 
 | جهت | فصل |
 |-----------|---------|
-| **قبلی** | [فصل ۱: مبانی](../chapter-01-foundation/README.md) |
+| **قبلی** | [فصل ۱: بنیاد](../chapter-01-foundation/README.md) |
 | **بعدی** | [فصل ۳: پیکربندی](../chapter-03-configuration/README.md) |
 | **پرش به** | [فصل ۸: الگوهای تولید](../chapter-08-production/README.md) |
 
@@ -84,7 +88,7 @@ azd up
 ## 📖 منابع مرتبط
 
 - [عیب‌یابی هوش مصنوعی](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [روش‌های تولید هوش مصنوعی](../chapter-08-production/production-ai-practices.md)
+- [شیوه‌های هوش مصنوعی تولید](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---
