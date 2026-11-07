@@ -1,94 +1,99 @@
-# باب 7: مسائل کا حل اور نقائص کی جانچ
+# باب 7: مسئلہ حل کرنا اور ڈیبگنگ
 
-**📚 کورس**: [AZD برائے ابتدائی] (../../README.md) | **⏱️ دورانیہ**: 1-1.5 گھنٹے | **⭐ پیچیدگی**: درمیانہ
+**📚 کورس**: [AZD مبتدیوں کے لیے](../../README.md) | **⏱️ دورانیہ**: 1-1.5 گھنٹے | **⭐ پیچیدگی**: وسطی درجے کی
 
 ---
 
 ## جائزہ
 
-یہ باب آپ کو Azure Developer CLI کے ساتھ کام کرتے ہوئے عام مسائل کی تشخیص اور حل میں مدد دیتا ہے۔ تعیناتی کی ناکامیوں سے لے کر AI مخصوص مسائل تک۔
+یہ باب Azure Developer CLI کے ساتھ کام کرتے وقت عمومی مسائل کی تشخیص اور حل میں مدد کرتا ہے۔ تعیناتی کی ناکامیوں سے لے کر AI مخصوص مسائل تک۔
 
-> جولائی 2026 میں `azd 1.27.1` کے خلاف تصدیق شدہ۔
+> کمانڈ کی رہنمائی جاری کردہ `azd 1.37.2` حوالہ کے خلاف جائزہ لی گئی۔ کلاؤڈ کی تعیناتیاں انجام نہیں دی گئیں۔ کمانڈز استعمال کرنے سے پہلے مثالی وسائل کے نام اور شناختی نمبروں کو تبدیل کریں۔
 
 ## سیکھنے کے مقاصد
 
-اس باب کو مکمل کرکے، آپ:
-- عام AZD تعیناتی کی ناکامیوں کی تشخیص کریں گے
-- توثیق اور اجازت کے مسائل کی جانچ کریں گے
-- AI سروس کنیکٹیویٹی کے مسائل کو حل کریں گے
-- مسائل کے حل کے لیے Azure پورٹل اور CLI استعمال کریں گے
+اس باب کو مکمل کرکے، آپ کو حاصل ہوگا:
+- عمومی AZD تعیناتی کی ناکامیوں کی تشخیص
+- توثیق اور اجازت کے مسائل کو ڈیبگ کرنا
+- AI سروس کی کنیکٹیویٹی کے مسائل کو حل کرنا
+- مسئلہ حل کرنے کے لیے Azure پورٹل اور CLI کا استعمال
 
 ---
 
 ## 📚 اسباق
 
-| # | سبق | وضاحت | وقت |
+| # | سبق | تفصیل | وقت |
 |---|--------|-------------|------|
-| 1 | [عام مسائل](common-issues.md) | کثرت سے پیش آنے والے مسائل | 30 منٹ |
-| 2 | [نقصان دہی کا رہنما](debugging.md) | مرحلہ وار نقائص کی جانچ کی حکمت عملی | 45 منٹ |
-| 3 | [AI مسائل کا حل](ai-troubleshooting.md) | AI مخصوص مسائل | 30 منٹ |
+| 1 | [عام مسائل](common-issues.md) | اکثر پیش آنے والے مسائل | 30 منٹ |
+| 2 | [ڈیبگنگ گائیڈ](debugging.md) | مرحلہ وار ڈیبگنگ کی حکمت عملی | 45 منٹ |
+| 3 | [AI مسئلہ حل کرنا](ai-troubleshooting.md) | AI مخصوص مسائل | 30 منٹ |
 
 ---
 
-## 🚨 فوری حل
+## 🚨 فوری اصلاحات
 
 ### توثیقی مسائل
 ```bash
-# AZD ورک فلو کے لیے ضروری
+# Required for AZD workflows
 azd auth login
 
-# اگر آپ Azure CLI کے احکامات براہ راست استعمال کر رہے ہیں تو یہ اختیاری ہے
+# Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
-### پروویژننگ کی ناکامیاں
+### فراہمی کی ناکامیاں
 ```bash
 azd show
 azd monitor --logs
 az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
-### وسائل کے تصادم
+### وسائل کے تضادات
+پہلے موجودہ وسائل اور تعیناتی کی غلطیوں کا معائنہ کریں۔ نام کے تصادم کو حل کرنے کے لیے مشترکہ یا پیداوار کے ماحول کو حذف نہ کریں۔ نئے **قابل تلف ماحول** کے لیے منفرد نام استعمال کریں:
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
 
-### مختص حد سے تجاوز
+### کوٹا زیادہ ہو جانا
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+`AZURE_LOCATION` کو تبدیل کرنا موجودہ وسائل کو منتقل نہیں کرتا اور دوبارہ تعیناتی پر مقام کے تصادمات پیدا کرسکتا ہے۔
 
 ---
 
-## 📋 خرابی کوڈ حوالہ
+## 📋 ایرر کوڈ حوالہ
 
-| خرابی | وجہ | حل |
+| ایرر | سبب | حل |
 |-------|-------|----------|
-| `AuthenticationError` | لاگ ان نہیں ہوا | `azd auth login` |
-| `ResourceNotFound` | وسائل موجود نہیں | وسائل کے نام چیک کریں |
-| `QuotaExceeded` | سبسکرپشن کی حدیں | کوٹہ بڑھانے کی درخواست کریں |
-| `InvalidTemplate` | بائیسپ سینتیکس کی خرابی | `az bicep build` |
-| `Conflict` | وسائل پہلے سے موجود | نیا نام استعمال کریں یا حذف کریں |
-| `Forbidden` | اجازت نامہ ناکافی | RBAC کردار چیک کریں |
+| `AuthenticationError` | لاگ ان نہیں ہوئے | `azd auth login` |
+| `ResourceNotFound` | وسائل غائب ہے | وسائل کے نام چیک کریں |
+| `QuotaExceeded` | سبسکرپشن کی حد | کوٹا بڑھانے کی درخواست کریں |
+| `InvalidTemplate` | بائسپس نحوی خرابی | `az bicep build` |
+| `Conflict` | وسائل موجود ہے | نیا نام استعمال کریں یا حذف کریں |
+| `Forbidden` | اجازت نامے ناکافی ہیں | RBAC رولز چیک کریں |
 
 ---
 
 ## 🔄 ری سیٹ اور بازیابی
 
 ```bash
-# نرم ری سیٹ (وسائل برقرار رکھیں، کوڈ دوبارہ تعینات کریں)
-azd deploy --force
+# Soft reset (keep resources, redeploy code)
+azd deploy
 
-# سخت ری سیٹ (سب کچھ حذف کریں، تازہ آغاز کریں)
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
+
+ہارڈ ری سیٹ ڈیٹا کو حذف کرتا ہے اور ممکن ہے اینڈ پوائنٹس کو تبدیل کرے۔ پہلے بیک اپ لیں اور انٹریکٹو حذف کرنے کے پرامپٹس کا جائزہ لیں۔ `--force --purge` صرف قابل تلف ماحول کے لیے مناسب ہے جب ناقابل واپسی حذف کرنے کا ارادہ ہو۔
 
 ---
 
@@ -96,16 +101,16 @@ azd up
 
 | سمت | باب |
 |-----------|---------|
-| **پچھلا** | [باب 6: پیش از تعیناتی](../chapter-06-pre-deployment/README.md) |
+| **پچھلا** | [باب 6: پری-ڈپلائمنٹ](../chapter-06-pre-deployment/README.md) |
 | **اگلا** | [باب 8: پیداوار](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 متعلقہ وسائل
 
-- [پیش از تعیناتی کے چیک](../chapter-06-pre-deployment/preflight-checks.md)
-- [تشکیل کا رہنما](../chapter-03-configuration/configuration.md)
-- [AZD گیٹ ہب مسائل](https://github.com/Azure/azure-dev/issues)
+- [پری-ڈپلائمنٹ چیکس](../chapter-06-pre-deployment/preflight-checks.md)
+- [تشکیلی رہنمائی](../chapter-03-configuration/configuration.md)
+- [AZD GitHub مسائل](https://github.com/Azure/azure-dev/issues)
 
 ---
 

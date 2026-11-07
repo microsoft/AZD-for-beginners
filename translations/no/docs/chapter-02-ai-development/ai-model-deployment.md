@@ -1,74 +1,57 @@
 # Distribusjon av AI-modell med Azure Developer CLI
 
 **Kapittelnavigasjon:**
-- **📚 Kursoversikt**: [AZD For Beginners](../../README.md)
-- **📖 Nåværende kapittel**: Kapittel 2 - AI-første utvikling
-- **⬅️ Forrige**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **📚 Kursstart**: [AZD For Beginners](../../README.md)
+- **📖 Nåværende kapittel**: Kapittel 2 - AI-først utvikling
+- **⬅️ Forrige**: [AI-agenter](agents.md)
 - **➡️ Neste**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Neste kapittel**: [Kapittel 3: Konfigurasjon](../chapter-03-configuration/configuration.md)
 
-Denne veiledningen gir omfattende instruksjoner for distribusjon av AI-modeller ved bruk av AZD-maler, som dekker alt fra modellvalg til produksjonsdistribusjonsmønstre.
+Denne veiledningen gir omfattende instruksjoner for distribusjon av AI-modeller ved bruk av AZD-maler, og dekker alt fra modellvalg til produksjonsdistribusjonsmønstre.
 
-> **Valideringsnotat (2026-07-13):** AZD-arbeidsflyten i denne veiledningen ble sjekket mot `azd` `1.27.1`. For AI-distribusjoner som tar lengre tid enn den standard tjenestedistribusjonsvinduet, støtter nåværende AZD-versjoner `azd deploy --timeout <seconds>`.
+> **Utgivelsesanmeldelse (2026-11-04):** Relaterte CLI-endringer ble gjennomgått mot `azd` `1.37.2`; modelltilgjengelighet, versjoner og kvoter avhenger fortsatt av region og abonnement. `azd deploy --timeout <seconds>` kontrollerer tjenestens distribusjonsvindu, ikke en garanti for agentaktivering. Se [gjeldende utgivelsesnotater og AI-migreringsveiledning](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes).
 
 ## Innholdsfortegnelse
 
-- [Modellvalgstrategi](#modellvalgstrategi)
-- [AZD-konfigurasjon for AI-modeller](#azd-konfigurasjon-for-ai-modeller)
-- [Distribusjonsmønstre](#distribusjonsmønstre)
-- [Modelladministrasjon](#modelladministrasjon)
-- [Produksjonshensyn](#produksjonshensyn)
-- [Overvåking og observabilitet](#overvåking-og-observabilitet)
+- [Modellvalgsstrategi](#model-selection-strategy)
+- [AZD-konfigurasjon for AI-modeller](#azd-configuration-for-ai-models)
+- [Distribusjonsmønstre](#deployment-patterns)
+- [Modelladministrasjon](#model-management)
+- [Produksjonsbetraktninger](#production-considerations)
+- [Overvåking og observabilitet](#monitoring-and-observability)
 
-## Modellvalgstrategi
+## Modellvalgsstrategi
 
-### Microsoft Foundry-modeller
+### Azure OpenAI-modeller i Microsoft Foundry
 
-Velg riktig modell for ditt bruksområde:
+Velg riktig modell for ditt brukstilfelle:
 
-```yaml
-# azure.yaml - Model configuration
-services:
-  ai-service:
-    project: ./infra
-    host: containerapp
-    config:
-      AZURE_OPENAI_MODELS: |
-        [
-          {
-            "name": "gpt-4.1-mini",
-            "version": "2024-07-18",
-            "deployment": "gpt-4.1-mini",
-            "capacity": 10,
-            "format": "OpenAI"
-          },
-          {
-            "name": "text-embedding-3-large",
-            "version": "1",
-            "deployment": "text-embedding-3-large", 
-            "capacity": 30,
-            "format": "OpenAI"
-          }
-        ]
-```
+Definer modellutplasseringer i Bicep (nedenfor), ikke i vilkårlige `services.*.config.AZURE_OPENAI_MODELS`-innstillinger. AZD tolker ikke en slik innstilling som en liste over modellressurser. En tjenestes `project` peker til applikasjonskilde, ikke til dens `infra/`-katalog.
+
+Eksemplene bruker den publiserte `gpt-4.1-mini`-versjonen **`2025-04-14`** og embedding-versjon **`1`**. Bekreft at modellversjonen og distribusjonsskuen støttes i din målregion/konto før provisjonering.
 
 ### Modellkapasitetsplanlegging
 
-| Modelltype | Bruksområde | Anbefalt kapasitet | Kostnadshensyn |
+| Modelltype | Brukstilfelle | Illustrerende token-behov | Kostnadshensyn |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | Chat, Q&A | 10-50 TPM | Kostnadseffektivt for de fleste arbeidsbelastninger |
-| gpt-4.1 | Kompleks resonnering | 20-100 TPM | Høyere kostnad, bruk for premiumfunksjoner |
-| text-embedding-3-large | Søk, RAG | 30-120 TPM | Sterkt standardvalg for semantisk søk og gjenfinning |
-| Whisper | Tale-til-tekst | 10-50 TPM | Arbeidsbelastninger for lydbehandling |
+| gpt-4.1-mini | Chat, spørsmål og svar | 10 000-50 000 TPM | Benchmark kostnad og kvalitet for din arbeidsbelastning |
+| gpt-4.1 | Komplekse oppgaver | 20 000-100 000 TPM | Vurder kvalitetsforbedringer mot tokenkostnad |
+| text-embedding-3-large | Søk, RAG | 30 000-120 000 TPM | Ta høyde for inntasting samt spørringstrafikk |
+| Whisper | Tale-til-tekst | Planlegg med utgangspunkt i lydvarighet og forespørselsgrenser | Ikke bruk en TPM-kapasitetsformel for tekstmodell |
+
+TPM betyr tokens per minutt. For disse Standard tekstdistribusjonene er ARM `sku.capacity` i **1 000-TPM enheter**, ikke enkelt-TPM (kapasitet `10` betyr 10 000 TPM). RPM-til-TPM-forhold varierer med modell/distribusjonstype; verifiser begge grenser mot [kvotedokumentasjonen](https://learn.microsoft.com/azure/ai-foundry/openai/quotas-limits?view=foundry-classic). Disse områdene er eksempler, ikke anbefalinger for dimensjonering.
 
 ## AZD-konfigurasjon for AI-modeller
 
 ### Bicep-mal-konfigurasjon
 
-Opprett modell-distribusjoner via Bicep-maler:
+Opprett modellutplasseringer gjennom Bicep-maler:
 
 ```bicep
 // infra/main.bicep
+param openAiAccountName string
+param location string = resourceGroup().location
+
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
@@ -76,7 +59,7 @@ param openAiModelDeployments array = [
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
     sku: {
       name: 'Standard'
@@ -103,6 +86,7 @@ resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   kind: 'OpenAI'
   properties: {
     customSubDomainName: openAiAccountName
+    disableLocalAuth: true
     networkAcls: {
       defaultAction: 'Allow'
     }
@@ -124,21 +108,24 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
+Dette er et ressursgruppe-avgrenset **utviklingsinfrastruktur-eksempel**, ikke en fullstendig AZD-applikasjonsmal. Kontoen tillater offentlig nettverkstilgang og krever Entra ID/RBAC-autentisering (`Cognitive Services OpenAI User` for anroper). Produksjon krever det private endepunktet, DNS og applikasjonstilkobling beskrevet i kapittel 8. AZD trenger også en hovedmal/parameterkartlegging og applikasjonsvert-ressurser; bruk et fungerende eksempel for full distribusjon.
+
 ### Miljøvariabler
 
-Konfigurer applikasjonsmiljøet ditt:
+Konfigurer ditt applikasjonsmiljø:
 
 ```bash
-# .env-konfigurasjon
+# .env configuration
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
-AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
+Dette er applikasjonsdefinerte navn; koble dem til vertskonfigurasjonen din. Azure OpenAI v1-endepunktet brukt av helsesjekken nedenfor krever ikke den utdaterte `api-version`-spørringsparameteren; eldre `AzureOpenAI`-klienter gjør det, så følg API-genereringen som brukes av din applikasjon.
+
 ## Distribusjonsmønstre
 
-### Mønster 1: Enkeltregion-distribusjon
+### Mønster 1: Enkel-region distribusjon
 
 ```yaml
 # azure.yaml - Single region
@@ -146,20 +133,21 @@ services:
   ai-app:
     project: ./src
     host: containerapp
-    config:
+    env:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
 Best egnet for:
 - Utvikling og testing
-- Applikasjoner for enkeltmarked
+- Enkel-markedsapplikasjoner
 - Kostnadsoptimalisering
 
-### Mønster 2: Multi-region-distribusjon
+### Mønster 2: Multi-region distribusjon
 
 ```bicep
-// Multi-region deployment
+// Illustrative fragment: extend the complete account declaration above.
+// Each region must support the selected model/SKU and have quota.
 param regions array = ['eastus2', 'westus2', 'francecentral']
 
 resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [for region in regions: {
@@ -169,14 +157,18 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
+De utelatte kontoeiendommene/SKU må oppgis; denne fragmenten kan ikke distribueres som skrevet. Distribuer modeller i hver konto og implementer ruting/feilover og datalokalitetskontroller separat.
+
 Best egnet for:
 - Globale applikasjoner
 - Krav til høy tilgjengelighet
-- Belastningsfordeling
+- Lastdistribusjon
 
-### Mønster 3: Hybrid-distribusjon
+### Mønster 3: Hybrid distribusjon
 
 Kombiner Microsoft Foundry-modeller med andre AI-tjenester:
+
+Følgende fragmenter antar at navn og `location` leveres av den omgivende malen.
 
 ```bicep
 // Hybrid AI services
@@ -209,14 +201,14 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Versjonskontroll
 
-Spore modellversjoner i din AZD-konfigurasjon:
+Spor modellversjoner i applikasjonens konfigurasjon eller IaC. Denne JSON er et **applikasjonsdefinert eksempel**, ikke et innebygd AZD-modellskjema; en reserveplan må implementeres og distribueres eksplisitt:
 
 ```json
 {
   "models": {
     "chat": {
       "name": "gpt-4.1-mini",
-      "version": "2024-07-18",
+      "version": "2025-04-14",
       "fallback": "gpt-4.1"
     },
     "embedding": {
@@ -229,25 +221,25 @@ Spore modellversjoner i din AZD-konfigurasjon:
 
 ### Modelloppdateringer
 
-Bruk AZD-hooks for modelloppdateringer:
+Bruk en AZD-hook for en skrivebeskyttet tilgjengelighetssjekk, og oppdater deretter IaC og provisjoner den:
 
 ```bash
 #!/bin/bash
-# hooks/predeploy.sh
+# Illustrative hooks/check-model.sh (requires Azure CLI login and these variables)
 
 echo "Checking model availability..."
 az cognitiveservices account list-models \
-  --name $AZURE_OPENAI_ACCOUNT_NAME \
-  --resource-group $AZURE_RESOURCE_GROUP \
+  --name "$AZURE_OPENAI_ACCOUNT_NAME" \
+  --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "[?name=='gpt-4.1-mini']"
 
-# Hvis utrullingen tar lengre tid enn standard tidsavbrudd
-azd deploy --timeout 1800
 ```
+
+Kjør `azd up` **utenfor** hooken for å anvende endret modellinfrastruktur og distribuere kode. Ring aldri `azd deploy` fra en `predeploy`-hook: det utløser rekursivt samme hook. `azd deploy --timeout 1800` forlenger en applikasjonsdistribusjonstimeout; det oppdaterer ikke Bicep-ressurser.
 
 ### A/B-testing
 
-Distribuer flere modellversjoner:
+Den illustrerende ressursen nedenfor velger et distribusjonsnavn og kapasitet; den oppretter **en** distribusjon, ikke en A/B-test. For et ekte eksperiment, provisjoner to separate distribusjonsressurser, ruter en kontrollert andel av forespørsler til hver, og sammenlign kvalitet, ventetid og kostnad. Det forutsetter `openAi` fra kontoeeksemplet:
 
 ```bicep
 param enableABTesting bool = false
@@ -259,7 +251,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
   }
   sku: {
@@ -269,14 +261,15 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Produksjonshensyn
+## Produksjonsbetraktninger
 
 ### Kapasitetsplanlegging
 
-Beregn nødvendig kapasitet basert på bruksmønstre:
+Beregn nødvendig kapasitet basert på bruks- og mønsteranalyser:
 
 ```python
-# Kapasitetsberegningseksempel
+# Capacity calculation example
+import math
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -286,9 +279,9 @@ def calculate_required_capacity(
     """Calculate required TPM capacity."""
     total_tokens_per_request = avg_prompt_tokens + avg_completion_tokens
     total_tpm = requests_per_minute * total_tokens_per_request
-    return int(total_tpm * (1 + safety_margin))
+    return math.ceil(total_tpm * (1 + safety_margin))
 
-# Eksempel på bruk
+# Example usage
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -298,9 +291,13 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
+Forventet utdata: `Required capacity: 9100 TPM`. Med 1 000-TPM kapasitetenheter, rund opp til minst `10`, og verifiser så modellspesifikke RPM og tjenestebegrensningsestimeringer (inkludert foreslått resultatbudsjett). Dette estimatet for token-behov er ingen garanti mot struping.
+
 ### Autoskalering-konfigurasjon
 
 Konfigurer autoskalering for Container Apps:
+
+**Delvis ressurs:** slå sammen `template.scale`-innstillingene i en komplett Container App med lokasjon, administrert miljø, containerbilde, ressurser og inngang. Skalering av replikaer øker ikke modellkvoten.
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -340,16 +337,19 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 Implementer kostnadskontroller:
 
+**Illustrerende budsjettressurs:** definer `budgetStartDate` som den første dagen i inneværende måned i UTC (for eksempel `2026-11-01T00:00:00Z` for denne gjennomgangen), og erstatt kontaktadressen. Starttidspunktet må tilfredsstille tjenestens gjeldende datobegrensninger. Budsjett varsler om forsinkede faktureringsdata; den stopper ikke utgifter.
+
 ```bicep
+param budgetStartDate string
+
 @description('Enable cost management alerts')
 param enableCostAlerts bool = true
 
-resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCostAlerts) {
+resource budgetAlert 'Microsoft.Consumption/budgets@2024-08-01' = if (enableCostAlerts) {
   name: 'ai-budget-alert'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate
     }
     timeGrain: 'Monthly'
     amount: 1000
@@ -370,7 +370,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ## Overvåking og observabilitet
 
-### Integrasjon med Application Insights
+### Application Insights-integrasjon
 
 Konfigurer overvåking for AI-arbeidsbelastninger:
 
@@ -385,74 +385,45 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-// Custom metrics for AI models
-resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
-  parent: applicationInsights
-  name: 'ai-model-metrics'
-  properties: {
-    content: '''
-      customEvents
-      | where name == "AI_Model_Request"
-      | extend model = tostring(customDimensions.model)
-      | extend tokens = toint(customDimensions.tokens)
-      | extend latency = toint(customDimensions.latency_ms)
-      | summarize 
-          requests = count(),
-          avg_tokens = avg(tokens),
-          avg_latency = avg(latency)
-        by model, bin(timestamp, 5m)
-    '''
-    type: 'query'
-    scope: 'shared'
-  }
-}
 ```
 
-### Egne metrikker
+Ressursfragmentet forutsetter `applicationInsightsName`, `location`, og en eksisterende `logAnalyticsWorkspace`. Det provisjonerer overvåking, men instrumenterer ikke appen eller lager egendefinerte målinger.
 
-Spor AI-spesifikke metrikker:
+### Egne målinger
+
+Spor AI-spesifikke målinger:
+
+Bruk den støttede [Azure Monitor OpenTelemetry-distribusjonen](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python), ikke den gamle `applicationinsights` Python SDK. Installer `azure-monitor-opentelemetry`, konfigurer `APPLICATIONINSIGHTS_CONNECTION_STRING`, og initialiser én gang ved oppstart:
 
 ```python
-# Tilpasset telemetri for AI-modeller
-import logging
-from applicationinsights import TelemetryClient
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
 
-class AITelemetry:
-    def __init__(self, instrumentation_key: str):
-        self.client = TelemetryClient(instrumentation_key)
-    
-    def track_model_request(self, model: str, tokens: int, latency_ms: int, success: bool):
-        """Track AI model request metrics."""
-        self.client.track_event(
-            'AI_Model_Request',
-            {
-                'model': model,
-                'tokens': str(tokens),
-                'latency_ms': str(latency_ms),
-                'success': str(success)
-            }
-        )
-        
-    def track_model_error(self, model: str, error_type: str, error_message: str):
-        """Track AI model errors."""
-        self.client.track_exception(
-            type=error_type,
-            value=error_message,
-            properties={
-                'model': model,
-                'component': 'ai_model'
-            }
-        )
+configure_azure_monitor()
+tracer = trace.get_tracer(__name__)
+
+def record_request(model: str, tokens: int, latency_ms: int, success: bool):
+    with tracer.start_as_current_span("AI_Model_Request") as span:
+        span.set_attribute("ai.model", model)
+        span.set_attribute("ai.tokens", tokens)
+        span.set_attribute("ai.latency_ms", latency_ms)
+        span.set_attribute("ai.success", success)
 ```
 
-### Helsesjekker
+Dette illustrerer utslipp av attributter, ikke faktisk modell-forespørselsinstrumentering. Pakk den virkelige forespørselen inn i et span for å måle varigheten; undersøk `dependencies`/`traces` i Application Insights. Ikke send prompts, svar, nøkler eller rå unntaksmeldinger som inneholder sensitiv informasjon.
 
-Implementer overvåking av AI-tjenestens helse:
+### Helsekontroller
+
+Implementer helseovervåking for AI-tjenester:
+
+Installer `fastapi`, `uvicorn`, `httpx`, og `azure-identity`. Sett endepunkt-/distribusjonsvariablene ovenfor og gi anroper `Cognitive Services OpenAI User`. Denne **readiness-proben** bruker Azure OpenAI v1 dataflyt med Entra ID; den foretar et fakturerbart modellkall. Kjør med `uvicorn health:app` etter lagring som `health.py`. Bruk en separat lettvekts liveness-sjekk, rate-limit/cach readiness-resultater, og eksponer ikke denne ruten offentlig uten tilgangskontroller.
 
 ```python
-# Helsesjekkendepunkter
+# health.py
+import os
 from fastapi import FastAPI, HTTPException
 import httpx
+from azure.identity.aio import DefaultAzureCredential
 
 app = FastAPI()
 
@@ -460,42 +431,48 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test OpenAI-tilkobling
-        async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
-                headers={"api-key": AZURE_OPENAI_API_KEY}
+        async with DefaultAzureCredential() as credential:
+            token = await credential.get_token("https://ai.azure.com/.default")
+        endpoint = os.environ["AZURE_OPENAI_ENDPOINT"].rstrip("/")
+        async with httpx.AsyncClient(timeout=20.0) as client:
+            response = await client.post(
+                f"{endpoint}/openai/v1/chat/completions",
+                headers={"Authorization": f"Bearer {token.token}"},
+                json={
+                    "model": os.environ["AZURE_OPENAI_CHAT_DEPLOYMENT"],
+                    "messages": [{"role": "user", "content": "Reply OK."}],
+                    "max_completion_tokens": 8,
+                },
             )
-            
-        if response.status_code == 200:
-            return {"status": "healthy", "models": response.json()}
-        else:
-            raise HTTPException(status_code=503, detail="AI models unavailable")
-            
-    except Exception as e:
-        raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
+        response.raise_for_status()
+        return {"status": "healthy"}
+    except Exception:
+        # Record sanitized internal diagnostics, not service responses/tokens.
+        raise HTTPException(status_code=503, detail="AI readiness check failed") from None
 ```
+
+Forventet: `GET /health/ai-models` returnerer `200 {"status":"healthy"}` når den konfigurerte chat-distribusjonen er brukbar, eller `503` uten å avsløre oppstrømsdetaljer. Å liste opp distribusjoner er en management-plane-operasjon og er ikke en gyldig data-plane helseprøve.
 
 ## Neste steg
 
-1. **Gå gjennom [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** for tjenesteintegrasjonsmønstre
+1. **Gå gjennom [Microsoft Foundry Integrasjonsveiledning](microsoft-foundry-integration.md)** for tjenesteintegrasjonsmønstre
 2. **Fullfør [AI Workshop Lab](ai-workshop-lab.md)** for praktisk erfaring
-3. **Implementer [Produksjonspraksis for AI](production-ai-practices.md)** for bedriftsdistribusjoner
-4. **Utforsk [AI-feilsøkingsveiledningen](../chapter-07-troubleshooting/ai-troubleshooting.md)** for vanlige problemer
+3. **Implementer [Produksjons-AI-praksis](../chapter-08-production/production-ai-practices.md)** for bedriftsdistribusjoner
+4. **Utforsk [AI Feilsøkingsveiledning](../chapter-07-troubleshooting/ai-troubleshooting.md)** for vanlige problemer
 
 ## Ressurser
 
 - [Microsoft Foundry Models Modelltilgjengelighet](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Azure Developer CLI Dokumentasjon](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Container Apps Skalering](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [Kostnadsoptimalisering for AI-modeller](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [AI Modell Kostnadsoptimalisering](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
 **Kapittelnavigasjon:**
-- **📚 Kursoversikt**: [AZD For Beginners](../../README.md)
-- **📖 Nåværende kapittel**: Kapittel 2 - AI-første utvikling
-- **⬅️ Forrige**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **📚 Kursstart**: [AZD For Beginners](../../README.md)
+- **📖 Nåværende kapittel**: Kapittel 2 - AI-først utvikling
+- **⬅️ Forrige**: [AI-agenter](agents.md)
 - **➡️ Neste**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Neste kapittel**: [Kapittel 3: Konfigurasjon](../chapter-03-configuration/configuration.md)
 

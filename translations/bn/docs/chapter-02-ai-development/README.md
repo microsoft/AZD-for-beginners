@@ -1,91 +1,95 @@
 # অধ্যায় ২: AI-প্রথম উন্নয়ন
 
-**📚 কোর্স**: [AZD For Beginners](../../README.md) | **⏱️ সময়কাল**: ১-২ ঘন্টা | **⭐ জটিলতা**: মধ্যবর্তী
+**📚 কোর্স**: [শুরুতেই AZD](../../README.md) | **⏱️ সময়কাল**: ৪-৫ ঘণ্টা ওয়ার্কশপ সহ | **⭐ জটিলতা**: মধ্যবর্তী
 
 ---
 
-## সারাংশ
+## পর্যালোচনা
 
-এই অধ্যায়টি Azure Developer CLI এবং Microsoft Foundry সেবাগুলো ব্যবহার করে AI-চালিত অ্যাপ্লিকেশন ডিপ্লয়মেন্টে মনোযোগ দিয়ে তৈরি। সাধারণ AI চ্যাট অ্যাপ থেকে টুলস সহ বুদ্ধিমান এজেন্ট পর্যন্ত।
+এই অধ্যায়টি Azure Developer CLI এবং Microsoft Foundry পরিষেবাদি ব্যবহার করে AI-চালিত অ্যাপ্লিকেশন স্থাপনের উপর মনোযোগ দেয়। সাধারণ AI চ্যাট অ্যাপ থেকে টুলস সহ বুদ্ধিমান এজেন্ট পর্যন্ত।
 
-> **যাচাইকরণ নোট (২০২৬-০৭-১৩):** এই অধ্যায়ে কমান্ড ফ্লো এবং এক্সটেনশন নির্দেশিকা `azd` `1.27.1` এবং বর্তমান প্রিভিউ AI এজেন্ট এক্সটেনশন রিলিজ `azure.ai.agents` `1.0.0-beta.5` এর সঙ্গে পর্যালোচনা করা হয়েছে। যদি আপনার AZD এর পুরানো বিল্ড থাকে, তাহলে প্রথমে আপডেট করুন এবং তারপর অনুশীলন চালিয়ে যান।
+> **রিলিজ পর্যালোচনা (২০২৬-১১-০৪):** AI CLI নির্দেশিকা প্রকাশিত `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, এবং `azure.ai.evaluations` `1.0.0-beta.2` ডকুমেন্টেশন/উৎসের বিরুদ্ধে পরীক্ষা করা হয়েছে। সমন্বিত ওয়ার্কফ্লোর জন্য `azd >= 1.37.0` ব্যবহার করুন। মূল্যায়নগুলি এখন পৃথক `azd ai eval` নেমস্পেস ব্যবহার করে; দেখুন [রিলিজ পরিবর্তন এবং স্থানান্তর নির্দেশিকা](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes)। এটি সরাসরি স্থাপনের যাচাই নয়।
 
-## শেখার লক্ষ্যসমূহ
+## শেখার উদ্দেশ্যসমূহ
 
-এই অধ্যায় সম্পন্ন করার মাধ্যমে, আপনি:
-- প্রি-নির্মিত AZD টেম্পলেট ব্যবহার করে AI অ্যাপ্লিকেশন ডিপ্লয় করবেন
-- AZD সঙ্গে Microsoft Foundry ইন্টিগ্রেশন বুঝবেন
-- টুলস দিয়ে AI এজেন্টদের কনফিগার এবং কাস্টমাইজ করবেন
-- RAG (রিট্রিভ্যাল-অগমেন্টেড জেনারেশন) অ্যাপ্লিকেশন ডিপ্লয় করবেন
+এই অধ্যায় সম্পন্ন করে আপনি পারবেন:
+- পূর্বনির্মিত AZD টেমপ্লেট ব্যবহার করে AI অ্যাপ্লিকেশন স্থাপন করা
+- Microsoft Foundry এর সাথে AZD ইন্টিগ্রেশন বোঝা
+- টুলস সহ AI এজেন্ট কনফিগার ও কাস্টোমাইজ করা
+- RAG (রিট্রিভাল-অগমেন্টেড জেনারেশন) অ্যাপ্লিকেশন স্থাপন করা
 
 ---
 
 ## 📚 পাঠসমূহ
 
-| # | পাঠ | বর্ণনা | সময় |
+| # | পাঠ | বিবরণ | সময় |
 |---|--------|-------------|------|
-| ১ | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | Foundry সেবাগুলোর সাথে AZD সংযোগ | ৩০ মিনিট |
-| ২ | [AI Agents Guide](agents.md) | টুলস সহ বুদ্ধিমান এজেন্ট ডিপ্লয়মেন্ট | ৪৫ মিনিট |
-| ৩ | [AI Model Deployment](ai-model-deployment.md) | AI মডেল ডিপ্লয় এবং কনফিগার করা | ৩০ মিনিট |
-| ৪ | [AI Workshop Lab](ai-workshop-lab.md) | হাতে-কলমে: আপনার AI সমাধান AZD-রেডি করুন | ৬০ মিনিট |
+| ১ | [Microsoft Foundry ইন্টিগ্রেশন](microsoft-foundry-integration.md) | Foundry পরিষেবার সাথে AZD সংযোগ | ৩০ মিনিট |
+| ২ | [AI এজেন্টস গাইড](agents.md) | টুলস সহ বুদ্ধিমান এজেন্ট স্থাপন | ৪৫ মিনিট |
+| ৩ | [AI মডেল স্থাপনা](ai-model-deployment.md) | AI মডেল স্থাপন ও কনফিগার করা | ৩০ মিনিট |
+| ৪ | [AI ওয়ার্কশপ ল্যাব](ai-workshop-lab.md) | হাতে কলম: একটি টেমপ্লেট অনুসন্ধান ও রূপান্তরের পরিকল্পনা | ২-৩ ঘণ্টা |
 
 ---
 
 ## 🚀 দ্রুত শুরু
 
+নতুন খালি ডিরেক্টরিতে একটি অপশন বেছে নিন। শেষের `.` বর্তমান ডিরেক্টরি আরম্ভ করে; অন্যথায় AZD একটি সাবডিরেক্টরি তৈরি করতে পারে আপনার শেলের কর্মরত ডিরেক্টরি পরিবর্তন না করে।
+
 ```bash
-# অপশন ১: RAG চ্যাট অ্যাপ্লিকেশন
-azd init --template azure-search-openai-demo
+# Option 1: RAG Chat Application
+azd init --template azure-search-openai-demo .
 azd up
 
-# অপশন ২: AI এজেন্টস
-azd init --template get-started-with-ai-agents
+# Option 2: AI Agents
+azd init --template get-started-with-ai-agents .
 azd up
 
-# অপশন ৩: দ্রুত চ্যাট অ্যাপ্লিকেশন
-azd init --template openai-chat-app-quickstart
+# Option 3: Quick Chat App
+azd init --template openai-chat-app-quickstart .
 azd up
 ```
 
 ---
 
-## 🤖 নির্বাচিত AI টেম্পলেটসমূহ
+## 🤖 নির্বাচিত AI টেমপ্লেট
 
-| টেম্পলেট | বর্ণনা | সেবা |
+| টেমপ্লেট | বিবরণ | পরিষেবা |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | উদ্ধৃতিসহ RAG চ্যাট | OpenAI + AI Search |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | উদ্ধৃতি সহ RAG চ্যাট | OpenAI + AI Search |
 | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | টুলস সহ AI এজেন্ট | AI Agent Service |
 | [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | মৌলিক AI চ্যাট | OpenAI + Container Apps |
 
 ---
 
-## 💰 ব্যয় সচেতনতা
+## 💰 খরচ সচেতনতা
 
-| পরিবেশ | অনুমানকৃত মাসিক ব্যয় |
+এগুলো উদাহরণস্বরূপ পরিসর, কোট বা সর্বোচ্চ সীমা নয়; মডেল ট্রাফিক, সার্চ/কম্পিউট SKUs, অঞ্চল এবং ঐচ্ছিক বৈশিষ্ট্যগুলি এগুলো ছাড়িয়ে যেতে পারে। আপনি যে নমুনা নির্বাচন করেছেন তার বর্তমান মূল্য নির্ধারণ নির্দেশিকা পর্যালোচনা করুন সরবরাহের আগে।
+
+| পরিবেশ | মাসিক আনুমানিক খরচ |
 |-------------|----------------------|
-| ডেভেলপমেন্ট | $৮০-১৫০ |
+| উন্নয়ন | $৮০-১৫০ |
 | স্টেজিং | $১৫০-৩০০ |
-| প্রোডাকশন | $৩০০-৩,৫০০+ |
+| উৎপাদন | $৩০০-৩,৫০০+ |
 
-**পরামর্শ:** পরীক্ষার পর `azd down` চালান যাতে চার্জ না লাগে।
+**টিপ:** চার্জ এড়াতে পরীক্ষা শেষে `azd down` চালান।
 
 ---
 
-## 🔗 ন্যাভিগেশন
+## 🔗 নেভিগেশন
 
 | দিকনির্দেশ | অধ্যায় |
 |-----------|---------|
-| **আগের** | [অধ্যায় ১: ভিত্তি](../chapter-01-foundation/README.md) |
-| **পরের** | [অধ্যায় ৩: কনফিগারেশন](../chapter-03-configuration/README.md) |
-| **এড়িয়ে যান** | [অধ্যায় ৮: প্রোডাকশন প্যাটার্ন](../chapter-08-production/README.md) |
+| **পূর্ববর্তী** | [অধ্যায় ১: ভিত্তি](../chapter-01-foundation/README.md) |
+| **পরবর্তী** | [অধ্যায় ৩: কনফিগারেশন](../chapter-03-configuration/README.md) |
+| **এড়িয়ে যান** | [অধ্যায় ৮: উৎপাদন প্যাটার্ন](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 সম্পর্কিত সম্পদসমূহ
 
-- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Production AI Practices](../chapter-08-production/production-ai-practices.md)
-- [Application Insights](../chapter-06-pre-deployment/application-insights.md)
+- [AI সমস্যা সমাধান](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [উৎপাদন AI অনুশীলন](../chapter-08-production/production-ai-practices.md)
+- [অ্যাপ্লিকেশন ইনসাইটস](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 

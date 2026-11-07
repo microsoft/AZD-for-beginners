@@ -1,173 +1,176 @@
 <div align="center">
   <div style="background: linear-gradient(135deg, #0078d4, #106ebe); border-radius: 10px; padding: 20px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0, 120, 212, 0.3); border: 2px solid #005a9e;">
     <h2 style="color: white; margin: 0; font-size: 24px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      🎯 AZD AI-kehittäjien työpaja
+      🎯 AZD tekoälykehittäjille -työpaja
     </h2>
     <p style="color: white; margin: 10px 0 0 0; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      <strong>Käytännönläheinen työpaja AI-sovellusten rakentamiseen Azure Developer CLI:llä.</strong><br>
-      Suorita 7 moduulia hallitaksesi AZD-pohjia ja AI:n käyttöönoton työnkulkuja.
+      <strong>Käytännön työpaja tekoälysovellusten rakentamiseen Azure Developer CLI:llä.</strong><br>
+      Suorita kaikki 7 moduulia hallitaksesi AZD-mallit ja tekoälyn käyttöönoton työnkulut.
     </p>
     <div style="margin-top: 15px;">
       <span style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 15px; color: white; font-size: 14px;">
-        📅 Viimeksi päivitetty: maaliskuu 2026
+        📅 Lähdeohje tarkistettu: marraskuu 2026
       </span>
     </div>
   </div>
 </div>
 
-# AZD AI-kehittäjien työpaja
+# AZD tekoälykehittäjille -työpaja
 
-Tervetuloa käytännönläheiseen työpajaan, jossa opit Azure Developer CLI:n (AZD) käytön erityisesti AI-sovellusten käyttöönottoon. Tämä työpaja auttaa sinua saamaan soveltavan ymmärryksen AZD-pohjista kolmessa vaiheessa:
+Tervetuloa käytännön työpajaan, jossa opit Azure Developer CLI:n (AZD) tekoälysovellusten käyttöönottoon keskittyen. Tämä työpaja auttaa sinua saamaan käytännön käsityksen AZD-malleista kolmessa vaiheessa:
 
-1. **Tutustuminen** - löydä sinulle sopiva pohja.
-1. **Käyttöönotto** - ota käyttöön ja varmista, että se toimii
-1. **Mukauttaminen** - muokkaa ja iteroi tehdäksesi siitä oman!
+1. **Löytö** - etsi sinulle sopiva malli.
+1. **Käyttöönotto** - ota käyttöön ja vahvista, että se toimii
+1. **Mukautus** - muokkaa ja toista, jotta siitä tulee sinun!
 
-Tämän työpajan aikana tutustut myös keskeisiin kehittäjätyökaluihin ja työnkulkuihin, jotka auttavat virtaviivaistamaan koko kehitysprosessiasi.
+Työpajan aikana tutustut myös keskeisiin kehittäjätyökaluihin ja työnkulkuun, jotka auttavat virtaviivaistamaan koko kehityspolkusi.
 
 <br/>
 
 ## Selainpohjainen opas
 
-Työpajan oppitunnit ovat Markdown-muodossa. Voit selata niitä suoraan GitHubissa - tai avata selainpohjaisen esikatselun kuten alla olevassa kuvakaappauksessa.
+Työpajan oppitunnit ovat Markdown-muodossa. Voit selata niitä suoraan GitHubissa - tai käynnistää selainpohjaisen esikatselun alla olevan kuvakaappauksen mukaisesti.
 
-![Työpaja](../../../translated_images/fi/workshop.75906f133e6f8ba0.webp)
+![Workshop](../../../translated_images/fi/workshop.75906f133e6f8ba0.webp)
 
-Käyttääksesi tätä vaihtoehtoa - tee fork repositoriosta omaan profiiliisi ja käynnistä GitHub Codespaces. Kun VS Code -terminaali on aktiivinen, kirjoita tämä komento:
+Käyttääksesi tätä vaihtoehtoa tee fork repositoriosta omaan profiiliisi ja käynnistä GitHub Codespaces. Kun VS Code -pääte on aktiivinen, kirjoita tämä komento:
 
-This browser preview works in GitHub Codespaces, dev containers, or a local clone with Python and MkDocs installed.
+Tämä selain-esikatselu toimii GitHub Codespacesissa, kehityssäiliöissä tai paikallisessa kopiossa, johon Python ja MkDocs on asennettu.
 
 ```bash title="" linenums="0"
-mkdocs serve > /dev/null 2>&1 &
+python -m pip install -r requirements-dev.txt
+python -m mkdocs serve --config-file workshop/mkdocs.yml
 ```
 
-Sekunnin kuluttua näet ponnahdusikkunan. Valitse vaihtoehto `Open in browser`. Selainpohjainen opas avautuu nyt uudessa selaimen välilehdessä. Tämän esikatselun etuja:
+Suorita nämä komennot **kurssin juurihakemistosta**, älä erikseen alustetusta tekoälyn esimerkkikansiosta. Pidä esikatselu etualalla, jotta virheet näkyvät; pysäytä se Ctrl+C:llä. Tarkistaaksesi sivusto ilman palvelinta, suorita `python -m mkdocs build --strict --config-file workshop/mkdocs.yml`.
 
-1. **Sisäänrakennettu haku** - löydä avainsanat tai oppitunnit nopeasti.
-1. **Kopiointikuvake** - siirrä hiiri koodilohkojen päälle nähdäksesi tämän vaihtoehdon
-1. **Teeman vaihto** - vaihda tummaan ja vaaleaan teemaan
-1. **Hanki apua** - klikkaa Discord-ikonia alatunnisteessa liittyäksesi!
+Muutamassa sekunnissa näet ponnahdusikkunan. Valitse vaihtoehto `Open in browser`. Selainpohjainen opas avautuu nyt uuteen välilehteen. Tämän esikatselun etuja:
+
+1. **Sisäänrakennettu haku** - löydä avainsanoja tai oppitunteja nopeasti.
+1. **Kopioi-kuvake** - vie hiiri koodilohkojen päälle nähdäksesi tämän vaihtoehdon
+1. **Teeman vaihto** - vaihda pimeän ja vaalean teeman välillä
+1. **Hanki apua** - klikkaa Discord-kuvaketta alatunnisteessa liittyäksesi!
 
 <br/>
 
-## Työpajan yleiskuva
+## Työpajan yleiskatsaus
 
-**Kesto:** 3–4 tuntia  
-**Taso:** Aloittelijasta keskitasolle  
-**Esivaatimukset:** Tuntemus Azuresta, AI-käsitteistä, VS Codesta ja komentorivityökaluista.
+**Kesto:** 3-4 tuntia  
+**Taso:** Aloittelijasta keskitason käyttäjälle  
+**Edellytykset:** Azure-tuntemus, tekoälykonseptit, VS Code ja komentorivityökalut.
 
-Tämä on käytännönläheinen työpaja, jossa opit tekemällä. Kun olet suorittanut harjoitukset, suosittelemme tarkastelemaan AZD For Beginners -opetussuunnitelmaa jatkaaksesi oppimista turvallisuuden ja tuottavuuden parhaiden käytäntöjen parissa.
+Tämä on käytännön työpaja, jossa opit tekemällä. Kun olet suorittanut harjoitukset, suosittelemme tutustumaan AZD Aloittelijoille -oppimateriaaliin jatkaaksesi oppimispolkua turvallisuus- ja tuottavuuskäytäntöihin.
 
-| Time| Module  | Objective |
+| Aika| Moduuli  | Tavoite |
 |:---|:---|:---|
-| 15 mins | [Introduction](docs/instructions/0-Introduction.md) | Aseta puitteet, ymmärrä tavoitteet |
-| 30 mins | [Select AI Template](docs/instructions/1-Select-AI-Template.md) | Tutki vaihtoehtoja ja valitse aloituspohja | 
-| 30 mins | [Validate AI Template](docs/instructions/2-Validate-AI-Template.md) | Ota oletusratkaisu käyttöön Azureen |
-| 30 mins | [Deconstruct AI Template](docs/instructions/3-Deconstruct-AI-Template.md) | Tutki rakennetta ja konfiguraatiota |
-| 30 mins | [Configure AI Template](docs/instructions/4-Configure-AI-Template.md) | Aktivoi ja kokeile saatavilla olevia ominaisuuksia |
-| 30 mins | [Customize AI Template](docs/instructions/5-Customize-AI-Template.md) | Mukauta pohjaa tarpeisiisi |
-| 30 mins | [Teardown Infrastructure](docs/instructions/6-Teardown-Infrastructure.md) | Puhdista ja vapauta resurssit |
-| 15 mins | [Wrap-Up & Next Steps](docs/instructions/7-Wrap-up.md) | Oppimateriaalit, työpajan haaste |
+| 15 min | [Johdanto](docs/instructions/0-Introduction.md) | Aloitus, tavoitteiden ymmärtäminen |
+| 30 min | [Valitse tekoälymalli](docs/instructions/1-Select-AI-Template.md) | Tutki vaihtoehtoja ja valitse aloitusmalli | 
+| 30 min | [Vahvista tekoälymalli](docs/instructions/2-Validate-AI-Template.md) | Ota oletusratkaisu käyttöön Azureen |
+| 30 min | [Purkaa tekoälymalli](docs/instructions/3-Deconstruct-AI-Template.md) | Tutki rakennetta ja konfiguraatiota |
+| 30 min | [Määritä tekoälymalli](docs/instructions/4-Configure-AI-Template.md) | Aktivoi ja kokeile käytettävissä olevia ominaisuuksia |
+| 30 min | [Mukauta tekoälymalli](docs/instructions/5-Customize-AI-Template.md) | Sovita malli tarpeidesi mukaan |
+| 30 min | [Pura infrastruktuuri](docs/instructions/6-Teardown-Infrastructure.md) | Siivous ja resurssien vapautus |
+| 15 min | [Yhteenveto & seuraavat askeleet](docs/instructions/7-Wrap-up.md) | Oppimateriaalit, työpajahaaste |
 
 <br/>
 
 ## Mitä opit
 
-Ajattele AZD-pohjaa oppimisalueena, jossa voit tutkia erilaisia ominaisuuksia ja työkaluja täysimittaista kehitystä varten Microsoft Foundry -ympäristössä. Tämän työpajan lopussa sinulla pitäisi olla intuitiivinen käsitys eri työkaluista ja konsepteista tässä kontekstissa.
+Ajattele AZD-mallia oppimisympäristönä, jossa tutustut Microsoft Foundryn end-to-end-kehitykseen liittyviin eri kyvykkyyksiin ja työkaluihin. Tämän työpajan päätteeksi sinulla pitäisi olla intuitiivinen käsitys erilaisista työkaluista ja käsitteistä tässä yhteydessä.
 
-| Concept  | Objective |
+| Käsite  | Tavoite |
 |:---|:---|
 | **Azure Developer CLI** | Ymmärrä työkalun komennot ja työnkulut|
-| **AZD Templates**| Ymmärrä projektin rakenne ja konfiguraatio|
-| **Azure AI Agent**| Provisionoi ja ota käyttöön Microsoft Foundry -projekti  |
-| **Azure AI Search**| Mahdollista kontekstin hyödyntäminen agenteilla |
-| **Observability**| Tutki jäljittämistä, valvontaa ja arviointeja |
-| **Red Teaming**| Tutki vastustavia testauksia ja lieventämistoimia |
+| **AZD-mallit**| Ymmärrä projektin rakenne ja konfiguraatio|
+| **Azure AI Agentti**| Ota käyttöön ja ota Microsoft Foundry -projekti käyttöön  |
+| **Azure AI Haku**| Mahdollista kontekstisuunnittelu agenteilla |
+| **Havaittavuus**| Tutki jäljitystä, valvontaa ja arviointeja |
+| **Punainen tiimi**| Tutki vastustestauksia ja torjuntakeinoja |
 
 <br/>
 
 ## Työpajan rakenne
 
-Työpaja on suunniteltu viemään sinut matkalle pohjan löytämisestä käyttöönottoon, purkamiseen ja mukauttamiseen - käyttäen virallista [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) -aloituspohjaa perustana.
+Työpaja on rakennettu viemään sinut mallin löytämisestä käyttöönottoon, purkamiseen ja mukauttamiseen - käyttämällä virallista [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) aloitusmallia pohjana.
 
-### [Module 1: Select AI Template](docs/instructions/1-Select-AI-Template.md) (30 mins)
+### [Moduuli 1: Valitse tekoälymalli](docs/instructions/1-Select-AI-Template.md) (30 min)
 
-- Mitä AI-pohjat ovat?
-- Mistä löydän AI-pohjia?
-- Miten pääsen alkuun AI-agenttien rakentamisessa?
-- **Lab**: Pikakäynnistys Codespacesissa tai dev-containerissa
+- Mitä ovat tekoälymallit?
+- Mistä löydän tekoälymalleja?
+- Miten pääsen alkuun tekoälyagenttien rakentamisessa?
+- **Harjoitus**: Pikakäynnistys Codespacesissa tai kehityssäiliössä
 
-### [Module 2: Validate AI Template](docs/instructions/2-Validate-AI-Template.md) (30 mins)
+### [Moduuli 2: Vahvista tekoälymalli](docs/instructions/2-Validate-AI-Template.md) (30 min)
 
-- Mikä on AI-pohjan arkkitehtuuri?
-- Mikä on AZD-kehitystyönkulku?
+- Mikä on tekoälymallin arkkitehtuuri?
+- Mikä on AZD:n kehitystyönkulku?
 - Mistä saan apua AZD-kehitykseen?
-- **Lab**: Ota AI Agents -pohja käyttöön ja varmista toimivuus
+- **Harjoitus**: Ota käyttöön ja vahvista AI Agents -malli
 
-### [Module 3: Deconstruct AI Template](docs/instructions/3-Deconstruct-AI-Template.md) (30 mins)
+### [Moduuli 3: Pura tekoälymalli](docs/instructions/3-Deconstruct-AI-Template.md) (30 min)
 
-- Tutki ympäristöäsi kansiossa `.azure/` 
-- Tutki resurssiasetuksiasi kansiossa `infra/` 
-- Tutki AZD-konfiguraatiotasi tiedostoissa `azure.yaml`s
-- **Lab**: Muokkaa ympäristömuuttujia & ota uudelleen käyttöön
+- Tutki ympäristöäsi `.azure/` 
+- Tutki resurssiasetustasi `infra/` 
+- Tutki AZD-konfiguraatiotasi `azure.yaml`
+- **Harjoitus**: Muokkaa ympäristömuuttujia ja ota uudelleen käyttöön
 
-### [Module 4: Configure AI Template](docs/instructions/4-Configure-AI-Template.md) (30 mins)
+### [Moduuli 4: Määritä tekoälymalli](docs/instructions/4-Configure-AI-Template.md) (30 min)
 - Tutki: Retrieval Augmented Generation
-- Tutki: Agenttien arviointi & Red Teaming
-- Tutki: Jäljittäminen & valvonta
-- **Lab**: Tutki AI-agenttia + observabilitya
+- Tutki: Agenttien arviointi ja punainen tiimi
+- Tutki: Jäljitys ja valvonta
+- **Harjoitus**: Tutki AI-agenttia + havaittavuutta 
 
-### [Module 5: Customize AI Template](docs/instructions/5-Customize-AI-Template.md) (30 mins)
-- Määrittele: PRD skenaariovaatimuksilla
-- Konfiguroi: Ympäristömuuttujat AZD:lle
-- Toteuta: Elinkaarihookit lisätehtäville
-- **Lab**: Mukauta pohjaa omaan skenaarioosi
+### [Moduuli 5: Mukauta tekoälymalli](docs/instructions/5-Customize-AI-Template.md) (30 min)
+- Määritä: PRD skenaariovaatimuksilla
+- Konfiguroi: AZD-ympäristömuuttujat
+- Toteuta: Elinkaarenaulat lisätehtäville
+- **Harjoitus**: Mukauta malli omaan skenaarioosi
 
-### [Module 6: Teardown Infrastructure](docs/instructions/6-Teardown-Infrastructure.md) (30 mins)
-- Kertaus: Mitä AZD-pohjat ovat?
+### [Moduuli 6: Pura infrastruktuuri](docs/instructions/6-Teardown-Infrastructure.md) (30 min)
+- Kertaus: Mitä ovat AZD-mallit?
 - Kertaus: Miksi käyttää Azure Developer CLI:tä?
-- Seuraavat askeleet: Kokeile eri pohjaa!
-- **Lab**: Poista infrastruktuuri käytöstä & siivous
+- Seuraavat askeleet: Kokeile toista mallia!
+- **Harjoitus**: Poista infrastruktuuri käytöstä ja siivoa
 
 <br/>
 
-## Työpajan haaste
+## Työpajahaaste
 
-Haluatko haastaa itsesi tekemään enemmän? Tässä on joitain projektiehdotuksia - tai jaa ideasi kanssamme!!
+Haluatko haastaa itsesi tekemään enemmän? Tässä muutamia projektiehdotuksia - tai jaa ideasi meille!
 
-| Project | Description |
+| Projekti | Kuvaus |
 |:---|:---|
-|1. **Deconstruct A Complex AI Template** | Käytä aiemmin esiteltyä työnkulkua ja työkaluja ja katso, pystytkö ottamaan käyttöön, validoimaan ja mukauttamaan eri AI-ratkaisupohjan. _Mitä opit?_|
-|2. **Customize With Your Scenario**  | Yritä kirjoittaa PRD (Product Requirements Document) eri skenaariota varten. Käytä sitten GitHub Copilotia pohjarepossasi Agent Model -tilassa - ja pyydä sitä luomaan mukautustyönkulku sinulle. _Mitä opit? Miten voisit parantaa näitä ehdotuksia?_|
+|1. **Purkaa monimutkainen tekoälymalli** | Käytä esitettyä työnkulkua ja työkaluja kokeillaksesi eri tekoälyratkaisun mallin käyttöönottoa, vahvistamista ja mukauttamista. _Mitä opit?_|
+|2. **Mukauta omalla skenaariollasi**  | Kirjoita PRD (tuotevaatimusasiakirja) toiselle skenaariolle. Käytä sitten GitHub Copilotia mallivarastossasi Agent Model -tilassa ja pyydä sitä luomaan mukautustyönkulku sinulle. _Mitä opit? Miten voisit parantaa ehdotuksia?_|
 | | |
 
-## Onko palautetta?
+## Palautetta?
 
-1. Luo issue tähän repoosi - merkitse se `Workshop` helpottamaan löytymistä.
-1. Liity Microsoft Foundry Discordiin - verkostoidu muiden osallistujien kanssa!
+1. Luo issue tähän repositorioon - tägää se `Workshop` helpottamaan.
+1. Liity Microsoft Foundry Discordiin - verkostoidu vertaisiesi kanssa!
 
 
 | | | 
 |:---|:---|
-| **📚 Kurssin etusivu**| [AZD For Beginners](../README.md)|
-| **📖 Dokumentaatio** | [Get started with AI templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️AI Templates** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
-|**🚀 Seuraavat askeleet** | [Begin Workshop](#työpajan-yleiskuva) |
+| **📚 Kurssin kotisivu**| [AZD Aloittelijoille](../README.md)|
+| **📖 Dokumentaatio** | [Aloita tekoälymallien kanssa](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️Tekoälymallit** | [Microsoft Foundry -mallit](https://ai.azure.com/templates) |
+|**🚀 Seuraavat askeleet** | [Aloita työpaja](#workshop-overview) |
 | | |
 
 <br/>
 
 ---
 
-**Navigaatio:** [Main Course](../README.md) | [Introduction](docs/instructions/0-Introduction.md) | [Module 1: Select Template](docs/instructions/1-Select-AI-Template.md)
+**Navigointi:** [Pääkurssi](../README.md) | [Johdanto](docs/instructions/0-Introduction.md) | [Moduuli 1: Valitse malli](docs/instructions/1-Select-AI-Template.md)
 
-**Valmis aloittamaan AI-sovellusten rakentamisen AZD:llä?**
+**Valmiina aloittamaan tekoälysovellusten rakentamisen AZD:llä?**
 
-[Aloita työpaja: Introduktio →](docs/instructions/0-Introduction.md)
+[Aloita työpaja: Johdanto →](docs/instructions/0-Introduction.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastuuvapauslauseke**:
-Tämä asiakirja on käännetty käyttämällä tekoälykäännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automatisoiduissa käännöksissä saattaa esiintyä virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää virallisena lähteenä. Tärkeiden tietojen osalta suositellaan ammattimaista, ihmisen tekemää käännöstä. Emme ole vastuussa mahdollisista väärinkäsityksistä tai virheellisistä tulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, otathan huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäiskielellä on virallinen lähde. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

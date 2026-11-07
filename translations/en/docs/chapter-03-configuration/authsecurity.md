@@ -1,11 +1,13 @@
 # Authentication Patterns and Managed Identity
 
-⏱️ **Estimated Time**: 45-60 minutes | 💰 **Cost Impact**: Free (no additional charges) | ⭐ **Complexity**: Intermediate
+⏱️ **Estimated Time**: 45-60 minutes reading; allow extra time to integrate exercises | 💰 **Cost Impact**: Identity/RBAC are free; deployed compute, storage, and Key Vault are billable | ⭐ **Complexity**: Intermediate
+
+> Reviewed against `azd 1.37.2` (November 2026). This lesson contains **illustrative integration fragments, not a complete downloadable `secure-app` template**. Create the referenced files, supply matching infrastructure, and replace placeholders before deployment. No Azure resources were provisioned during review.
 
 **📚 Learning Path:**
 - ← Previous: [Configuration Management](configuration.md) - Managing environment variables and secrets
 - 🎯 **You Are Here**: Authentication & Security (Managed Identity, Key Vault, secure patterns)
-- → Next: [First Project](first-project.md) - Build your first AZD application
+- → Next: [Infrastructure as Code](../chapter-04-infrastructure/README.md) - Provision and deploy resources
 - 🏠 [Course Home](../../README.md)
 
 ---
@@ -76,7 +78,7 @@ sequenceDiagram
     
     App->>MI: Request access token<br/>(automatic)
     MI->>MI: Verify identity<br/>(no password needed)
-    MI-->>App: Return token<br/>(valid 1 hour)
+    MI-->>App: Return token for requested audience<br/>(lifetime varies)
     
     App->>KV: Get secret<br/>(using token)
     KV->>KV: Check RBAC permissions
@@ -90,7 +92,7 @@ sequenceDiagram
     DB->>DB: Check SQL permissions
     DB-->>App: Return results
     
-    Note over App,DB: All authentication passwordless!
+    Note over App,DB: Request a separate token for each service audience;<br/>SDK credentials handle caching and renewal
 ```
 
 ### Types of Managed Identities
@@ -123,7 +125,7 @@ graph TB
 | **Deletion** | Deleted with resource | Persists after resource deletion |
 | **Sharing** | One resource only | Multiple resources |
 | **Use Case** | Simple scenarios | Complex multi-resource scenarios |
-| **AZD Default** | ✅ Recommended | Optional |
+| **Template choice** | Defined in infrastructure | Defined in infrastructure |
 
 ---
 
@@ -155,8 +157,8 @@ az --version
 ### Knowledge Prerequisites
 
 You should have completed:
-- [Installation Guide](installation.md) - AZD setup
-- [AZD Basics](azd-basics.md) - Core concepts
+- [Installation Guide](../chapter-01-foundation/installation.md) - AZD setup
+- [AZD Basics](../chapter-01-foundation/azd-basics.md) - Core concepts
 - [Configuration Management](configuration.md) - Environment variables
 
 ---
@@ -179,13 +181,15 @@ SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=
 - ❌ Difficult to rotate
 - ❌ No audit trail of access
 
-**When to use:** Only for local development, never production.
+**When to use:** When the target service requires key-based authentication. Prefer identity where supported; otherwise store keys securely and rotate them, including in production.
 
 ---
 
 ### Pattern 2: Key Vault References (Better)
 
 **How it works:**
+**Partial Bicep fragments:** required vault fields, Container App identity, and its `configuration.secrets` entry are omitted. `secretRef` names a Container App secret; it is **not itself** a Key Vault URI. To use Key Vault, define that named secret with `keyVaultUrl` and an authorized `identity`.
+
 ```bicep
 // Store secret in Key Vault
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
@@ -220,6 +224,8 @@ env: [
 ### Pattern 3: Managed Identity (Best Practice)
 
 **How it works:**
+**Partial Bicep:** merge the identity block into a complete Container App and supply `storageAccount` and the role definition. A role assignment also requires a deterministic `name`.
+
 ```bicep
 // Enable managed identity
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -231,10 +237,12 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 // Grant permissions
 resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(storageAccount.id, containerApp.id, storageBlobDataContributorRole)
   scope: storageAccount
   properties: {
     roleDefinitionId: storageBlobDataContributorRole
     principalId: containerApp.identity.principalId
+    principalType: 'ServicePrincipal'
   }
 }
 ```
@@ -259,7 +267,7 @@ const blobServiceClient = new BlobServiceClient(
 - ✅ RBAC-based permissions
 - ✅ Compliance ready
 
-**When to use:** Always, for production applications.
+**When to use:** Prefer for Azure-hosted applications accessing services that support Microsoft Entra authentication.
 
 ---
 
@@ -275,7 +283,7 @@ Create a service principal scoped to a resource group (least privilege):
 az ad sp create-for-rbac \
   --name "myapp-cicd" \
   --role contributor \
-  --scopes /subscriptions/<sub-id>/resourceGroups/<rg-name>
+  --scopes "/subscriptions/<sub-id>/resourceGroups/<rg-name>"
 ```
 
 This prints a client ID, client secret, and tenant ID. azd can sign in with them non-interactively:
@@ -320,7 +328,7 @@ azd auth login \
 
 ### Step-by-Step Implementation
 
-Let's build a secure Container App that uses managed identity to access Azure Storage and Key Vault.
+The following fragments show how to integrate managed identity into a Container App project. They are **not a copy-and-run starter**: the Storage module, full managed environment/registry infrastructure, Dockerfile, and parameter file are not all supplied here. Start from a working Container Apps template and merge these patterns, keeping its registry configuration and service tags.
 
 ### Project Structure
 
@@ -354,7 +362,7 @@ services:
     language: js
     host: containerapp
 
-# Enable managed identity (AZD handles this automatically)
+# Managed identity must be enabled in the infrastructure, not by this YAML.
 ```
 
 ### 2. Infrastructure: Enable Managed Identity
@@ -366,6 +374,8 @@ targetScope = 'subscription'
 
 param environmentName string
 param location string = 'eastus'
+param containerAppsEnvironmentId string
+param containerImage string
 
 var tags = { 'azd-env-name': environmentName }
 
@@ -408,6 +418,8 @@ module containerApp './app/container-app.bicep' = {
     tags: tags
     storageAccountName: storage.outputs.name
     keyVaultName: keyVault.outputs.name
+    containerAppsEnvironmentId: containerAppsEnvironmentId
+    containerImage: containerImage
   }
 }
 
@@ -418,7 +430,8 @@ module storageRoleAssignment './core/role-assignment.bicep' = {
   params: {
     principalId: containerApp.outputs.identityPrincipalId
     roleDefinitionId: 'ba92f5b4-2d11-453d-a403-e96b0029c9fe'  // Storage Blob Data Contributor
-    targetResourceId: storage.outputs.id
+    targetResourceType: 'storage'
+    targetResourceName: storage.outputs.name
   }
 }
 
@@ -429,7 +442,8 @@ module kvRoleAssignment './core/role-assignment.bicep' = {
   params: {
     principalId: containerApp.outputs.identityPrincipalId
     roleDefinitionId: '4633458b-17de-408a-b874-0445c86b69e6'  // Key Vault Secrets User
-    targetResourceId: keyVault.outputs.id
+    targetResourceType: 'keyvault'
+    targetResourceName: keyVault.outputs.name
   }
 }
 
@@ -449,15 +463,18 @@ param location string
 param tags object = {}
 param storageAccountName string
 param keyVaultName string
+param containerAppsEnvironmentId string
+param containerImage string
 
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: name
   location: location
-  tags: tags
+  tags: union(tags, { 'azd-service-name': 'api' })
   identity: {
     type: 'SystemAssigned'  // 🔑 Enable managed identity
   }
   properties: {
+    managedEnvironmentId: containerAppsEnvironmentId
     configuration: {
       ingress: {
         external: true
@@ -468,7 +485,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: 'api'
-          image: 'myregistry.azurecr.io/api:latest'
+          image: containerImage // Must exist; configure registry credentials for private images
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
@@ -503,11 +520,21 @@ output url string = 'https://${containerApp.properties.configuration.ingress.fqd
 ```bicep
 param principalId string
 param roleDefinitionId string  // Azure built-in role ID
-param targetResourceId string
+@allowed(['storage', 'keyvault'])
+param targetResourceType string
+param targetResourceName string
 
-resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(principalId, roleDefinitionId, targetResourceId)
-  scope: resourceId('Microsoft.Resources/resourceGroups', resourceGroup().name)
+// Typed existing resources give Bicep a valid resource scope, not a string ID.
+resource storageTarget 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
+  name: targetResourceName
+}
+resource vaultTarget 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
+  name: targetResourceName
+}
+
+resource storageAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (targetResourceType == 'storage') {
+  name: guid(storageTarget.id, principalId, roleDefinitionId)
+  scope: storageTarget
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleDefinitionId)
     principalId: principalId
@@ -515,7 +542,17 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   }
 }
 
-output id string = roleAssignment.id
+resource vaultAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (targetResourceType == 'keyvault') {
+  name: guid(vaultTarget.id, principalId, roleDefinitionId)
+  scope: vaultTarget
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleDefinitionId)
+    principalId: principalId
+    principalType: 'ServicePrincipal'
+  }
+}
+
+// This module assigns at the target resource scope, not the whole resource group.
 ```
 
 ### 5. Application Code with Managed Identity
@@ -562,7 +599,8 @@ app.post('/upload', async (req, res) => {
     const blobName = `file-${Date.now()}.txt`;
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
     
-    await blockBlobClient.upload('Hello from managed identity!', 30);
+    const content = 'Hello from managed identity!';
+    await blockBlobClient.upload(content, Buffer.byteLength(content));
     
     res.json({
       success: true,
@@ -583,7 +621,7 @@ app.get('/secret/:name', async (req, res) => {
     
     res.json({
       name: secretName,
-      value: secret.value,
+      retrieved: secret.value !== undefined, // Never return the secret value to callers
       message: 'Secret retrieved using managed identity!'
     });
   } catch (error) {
@@ -637,6 +675,8 @@ app.listen(PORT, () => {
 
 ### 6. Deploy and Test
 
+Only run these commands **after** completing the missing infrastructure, Dockerfile, and matching `main.parameters.json` in your own project. Authenticate azd with `azd auth login`; sign in separately with `az login` for the Azure CLI checks later. The endpoints shown are demonstrations and require appropriate access controls before public use.
+
 ```bash
 # Initialize AZD environment
 azd init
@@ -645,7 +685,7 @@ azd init
 azd up
 
 # Get the app URL
-APP_URL=$(azd env get-values | grep APP_URL | cut -d '=' -f2 | tr -d '"')
+APP_URL=$(azd env get-value APP_URL)
 
 # Test health check
 curl $APP_URL/health
@@ -695,17 +735,19 @@ curl $APP_URL/containers
 
 | Service | Role Name | Role ID | Permissions |
 |---------|-----------|---------|-------------|
-| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Read blobs and containers |
+| **Storage** | Storage Blob Data Reader | `2a2b9908-6ea1-4ae2-8e65-a410df84e7d1` | Read blobs and containers |
 | **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Read, write, delete blobs |
-| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Read, write, delete queue messages |
+| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Read, write, delete queues/messages |
 | **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Read secrets |
 | **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Read, write, delete secrets |
 | **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Read Cosmos DB data |
 | **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Read, write Cosmos DB data |
-| **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Manage SQL databases |
+| **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Manage database resources; does not grant SQL data access |
 | **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Send, receive, manage messages |
 
 ### How to Find Role IDs
+
+Cosmos DB for NoSQL's two IDs above are **native Cosmos data-plane role definitions**, not Azure RBAC subscription role IDs. Assign them with `az cosmosdb sql role assignment create` (or `Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments`), not `az role assignment create`. SQL data access requires an Entra database user and SQL permissions.
 
 ```bash
 # List all built-in roles
@@ -721,6 +763,8 @@ az role definition list --name "Storage Blob Data Contributor"
 ---
 
 ## Practical Exercises
+
+**Integration prerequisites for all three exercises:** a working Container App template in your own project, matching Bicep resources, Azure CLI/azd sign-in, and authority to assign the required roles. These are guided adaptations, not standalone local starters; replace the sample resource names with your deployed names.
 
 ### Exercise 1: Enable Managed Identity for Existing App ⭐⭐ (Medium)
 
@@ -816,7 +860,8 @@ env: [
 azd up
 
 # Test that it still works
-curl https://myapp.azurecontainerapps.io/upload
+APP_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
+curl --fail -X POST "$APP_URL/upload"
 ```
 
 **✅ Success Criteria:**
@@ -890,7 +935,7 @@ module userIdentity './core/identity.bicep' = {
 
 // Grant Storage access
 resource storageRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(userIdentity.outputs.principalId, 'storage-contributor')
+  name: guid(storageAccount.id, environmentName, 'storage-contributor')
   scope: storageAccount
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')
@@ -901,7 +946,7 @@ resource storageRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-
 
 // Grant Key Vault access
 resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(userIdentity.outputs.principalId, 'kv-secrets-user')
+  name: guid(keyVault.id, environmentName, 'kv-secrets-user')
   scope: keyVault
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6')
@@ -951,15 +996,19 @@ resource orderService 'Microsoft.App/containerApps@2023-05-01' = {
 4. **Application code (all services use same pattern):**
 
 ```javascript
-const { DefaultAzureCredential, ManagedIdentityCredential } = require('@azure/identity');
+const { ManagedIdentityCredential } = require('@azure/identity');
+const { BlobServiceClient } = require('@azure/storage-blob');
 
 // For user-assigned identity, specify the client ID
 const credential = new ManagedIdentityCredential(
   process.env.AZURE_CLIENT_ID  // User-assigned identity client ID
 );
 
-// Or use DefaultAzureCredential (auto-detects)
-const credential = new DefaultAzureCredential();
+// Alternative (choose ONE credential declaration):
+// const { DefaultAzureCredential } = require('@azure/identity');
+// const credential = new DefaultAzureCredential({
+//   managedIdentityClientId: process.env.AZURE_CLIENT_ID
+// });
 
 const blobServiceClient = new BlobServiceClient(
   `https://${process.env.STORAGE_ACCOUNT_NAME}.blob.core.windows.net`,
@@ -967,15 +1016,18 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
+Set each Container App's runtime `AZURE_CLIENT_ID` to `userIdentity.outputs.clientId` and `STORAGE_ACCOUNT_NAME` to your storage name in Bicep. Merely assigning the identity or running `azd env set` does not configure these runtime values.
+
 5. **Deploy and verify:**
 
 ```bash
 azd up
 
-# Test that all services can access storage
-curl https://api-gateway.azurecontainerapps.io/upload
-curl https://product-service.azurecontainerapps.io/upload
-curl https://order-service.azurecontainerapps.io/upload
+# Test all services can access storage
+# Replace with the actual ingress URLs reported for your three services
+curl --fail -X POST "$API_GATEWAY_URL/upload"
+curl --fail -X POST "$PRODUCT_SERVICE_URL/upload"
+curl --fail -X POST "$ORDER_SERVICE_URL/upload"
 ```
 
 **✅ Success Criteria:**
@@ -1037,7 +1089,7 @@ output uri string = keyVault.properties.vaultUri
 
 ```bash
 # Get Key Vault name
-KV_NAME=$(azd env get-values | grep AZURE_KEY_VAULT_NAME | cut -d '=' -f2 | tr -d '"')
+KV_NAME=$(azd env get-value AZURE_KEY_VAULT_NAME)
 
 # Store third-party API keys
 az keyvault secret set \
@@ -1111,6 +1163,8 @@ module.exports = new Config();
 
 **File: `src/app.js`**
 
+This **replacement application fragment** requires `npm install openai`, a real third-party key, an accessible model, and the infrastructure from your working project. It calls OpenAI directly, not an Azure OpenAI deployment. Placeholder keys below do not authorize a request.
+
 ```javascript
 const express = require('express');
 const config = require('./config');
@@ -1126,9 +1180,6 @@ async function initializeServices() {
   openaiClient = new OpenAI({ apiKey: openaiKey });
   console.log('✅ Services initialized with secrets from Key Vault');
 }
-
-// Call on startup
-initializeServices().catch(console.error);
 
 app.post('/chat', async (req, res) => {
   try {
@@ -1146,8 +1197,12 @@ app.post('/chat', async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log('Secure API with Key Vault integration running');
+// Start listening only after initialization succeeds.
+initializeServices().then(() => {
+  app.listen(3000, () => console.log('Key Vault demo running'));
+}).catch(error => {
+  console.error('Initialization failed:', error.message);
+  process.exitCode = 1;
 });
 ```
 
@@ -1177,10 +1232,12 @@ az keyvault secret set \
   --name "OpenAI-ApiKey" \
   --value "sk-proj-NEW_KEY_HERE"
 
-# Restart app to pick up new key
+# Find the active revision name, then restart it to clear the in-process cache
+az containerapp revision list --name myapp --resource-group rg-myapp --output table
 az containerapp revision restart \
   --name myapp \
-  --resource-group rg-myapp
+  --resource-group rg-myapp \
+  --revision "<active-revision-name>"
 ```
 
 **Time**: 25-35 minutes
@@ -1228,7 +1285,7 @@ Test your understanding:
   - **A**: Read-only access to secrets (cannot create, update, or delete)
 
 - [ ] **Q3**: How do you grant a Container App access to Azure SQL?
-  - **A**: Assign "SQL DB Contributor" role or configure Microsoft Entra ID authentication for SQL
+  - **A**: Configure Microsoft Entra authentication, create the identity as a database user, and grant the necessary SQL permissions. "SQL DB Contributor" only manages Azure resources; it does not authorize queries.
 
 **Hands-On Verification:**
 ```bash
@@ -1261,7 +1318,7 @@ Test your understanding:
 az keyvault secret show \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
-  --query "value"
+  --query "{name:name,enabled:attributes.enabled}"
 
 # Check RBAC is enabled
 az keyvault show \
@@ -1292,10 +1349,15 @@ az keyvault show \
    const apiKey = await secretClient.getSecret('ThirdPartyApiKey');
    ```
 
-4. **Enable audit logging**
+4. **Enable audit logging** (partial resource fragment; merge with your vault and workspace declarations)
    ```bicep
-   diagnosticSettings: {
-     logs: [{ category: 'AuditEvent', enabled: true }]
+   resource vaultDiagnostics 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
+     name: 'vault-audit'
+     scope: keyVault
+     properties: {
+       workspaceId: logAnalytics.id
+       logs: [{ category: 'AuditEvent', enabled: true }]
+     }
    }
    ```
 
@@ -1327,10 +1389,10 @@ az keyvault show \
 3. **Don't grant excessive permissions**
    ```bicep
    // ❌ BAD - too much access
-   roleDefinitionId: 'Owner'
+   roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '8e3af657-a8ff-443c-a75c-2fe8c4bcb635')
    
    // ✅ GOOD - least privilege
-   roleDefinitionId: 'Storage Blob Data Reader'
+   roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '2a2b9908-6ea1-4ae2-8e65-a410df84e7d1')
    ```
 
 4. **Don't log secrets**
@@ -1512,12 +1574,13 @@ echo "Waiting for RBAC propagation..."
 sleep 300  # Wait 5 minutes
 
 # Test access
-curl https://myapp.azurecontainerapps.io/upload
+curl --fail -X POST "$APP_URL/upload"
 
 # If still failing, restart the app
 az containerapp revision restart \
   --name myapp \
-  --resource-group rg-myapp
+  --resource-group rg-myapp \
+  --revision "<active-revision-name>"
 ```
 
 ---
@@ -1532,20 +1595,14 @@ az containerapp revision restart \
 | **RBAC Role Assignments** | 🆓 **FREE** - No charge |
 | **Microsoft Entra ID Token Requests** | 🆓 **FREE** - Included |
 | **Key Vault Operations** | $0.03 per 10,000 operations |
-| **Key Vault Storage** | $0.024 per secret per month |
+| **Key Vault secret storage** | Check current pricing; do not assume a per-secret monthly storage fee |
 
 **Managed identity saves money by:**
 - ✅ Eliminating Key Vault operations for service-to-service auth
 - ✅ Reducing security incidents (no leaked credentials)
 - ✅ Decreasing operational overhead (no manual rotation)
 
-**Example Cost Comparison (monthly):**
-
-| Scenario | Connection Strings | Managed Identity | Savings |
-|----------|-------------------|-----------------|---------|
-| Small app (1M requests) | ~$50 (Key Vault + ops) | ~$0 | $50/month |
-| Medium app (10M requests) | ~$200 | ~$0 | $200/month |
-| Large app (100M requests) | ~$1,500 | ~$0 | $1,500/month |
+Application request count does not equal Key Vault operation count: caching and rotation patterns determine secret-read costs. Identity does not remove compute/storage charges. Check [Key Vault pricing](https://azure.microsoft.com/pricing/details/key-vault/) and the Azure Pricing Calculator for your region rather than infer monthly savings from request counts alone.
 
 ---
 
@@ -1564,7 +1621,7 @@ az containerapp revision restart \
 
 ### Next Steps in This Course
 - ← Previous: [Configuration Management](configuration.md)
-- → Next: [First Project](first-project.md)
+- → Next: [Infrastructure as Code](../chapter-04-infrastructure/README.md)
 - 🏠 [Course Home](../../README.md)
 
 ### Related Examples
@@ -1593,7 +1650,7 @@ az containerapp revision restart \
 **Next Steps:**
 1. Complete the practical exercises above
 2. Migrate an existing app from connection strings to managed identity
-3. Build your first AZD project with security from day one: [First Project](first-project.md)
+3. Revisit the beginner deployment flow: [First Project](../chapter-01-foundation/first-project.md)
 
 ---
 

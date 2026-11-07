@@ -13,7 +13,7 @@
 
 Building a modern enterprise-ready AI application _from scratch_ can be daunting. It's a little bit like building your new home on your own, brick by brick. Yes, it can be done! But it is not the most effective way to get the desired end result! 
 
-Instead, we often start with an existing _design blueprint_, and work with an architect to customize it to our personal requirements. And that's exactly the approachto take when building intelligent applications. First, find a good design architecture that fits your problem space. Then work with a solution architect to customize and develop the solution for your specific scenario.
+Instead, we often start with an existing _design blueprint_, and work with an architect to customize it to our personal requirements. And that's exactly the approach to take when building intelligent applications. First, find a good design architecture that fits your problem space. Then work with a solution architect to customize and develop the solution for your specific scenario.
 
 But where can we find these design blueprints? And how do we find an architect that is willing to teach us how to customize and deploy these blueprints on our own? In this workshop, we answer those questions by introducing you to three technologies:
 
@@ -51,8 +51,8 @@ azd help
 
 For `azd` to achieve this, it needs to know the infrastructure to provision, the configuration settings to enforce, and the application to deploy. This is where [AZD templates](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates?tabs=csharp) come in. 
 
-AZD templates are open-source repositories that combine sample code with infrastructure and configuraton files required for deploying the solution architecture.
-By using an _Infrastructure-as-Code_ (IaC) approach, they allow template resource definitions and configuration settings to be version-controller (just like the app source code) - creating reusable and consistent workflows across users of that project.
+AZD templates are open-source repositories that combine sample code with infrastructure and configuration files required for deploying the solution architecture.
+By using an _Infrastructure-as-Code_ (IaC) approach, they allow template resource definitions and configuration settings to be version-controlled (just like the app source code) - creating reusable and consistent workflows across users of that project.
 
 When creating or reusing an AZD template for _your_ scenario, consider these questions:
 
@@ -62,7 +62,7 @@ When creating or reusing an AZD template for _your_ scenario, consider these que
 1. How can you optimize it further? → Think built-in monitoring and automation pipelines!
 
 **🎯 | EXERCISE**: <br/> 
-Visit the [Awesome AZD](https://azure.github.io/awesome-azd/) gallery and use the filters to explore the 250+ templates currently available. See if you can find on that aligns to _your_ scenario requirements.
+Visit the [Awesome AZD](https://azure.github.io/awesome-azd/) gallery and use the filters to explore the 250+ templates currently available. See if you can find one that aligns with _your_ scenario requirements.
 
 ![Code](../../../../../translated_images/en/azd-code-to-cloud.2d9503d69d3400da.webp)
 
@@ -78,14 +78,11 @@ Select a template below to deploy. Each template is available on [Awesome AZD](h
 
 | Template | Description | Deploy Command |
 |----------|-------------|----------------|
-| **[AI Chat with RAG](https://azure.github.io/awesome-azd/?tags=ai&tags=rag)** | Chat application with Retrieval Augmented Generation using Microsoft Foundry | `azd init -t azure-samples/azure-search-openai-demo` |
-| **[Foundry Agent Service Starter](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Build AI agents with Foundry Agents for autonomous task execution | `azd init -t azure-samples/foundry-agent-service-starter` |
-| **[Multi-Agent Orchestration](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Coordinate multiple Foundry Agents for complex workflows | `azd init -t azure-samples/multi-agent-orchestration` |
-| **[AI Document Intelligence](https://azure.github.io/awesome-azd/?tags=ai&tags=document)** | Extract and analyze documents with Microsoft Foundry models | `azd init -t azure-samples/ai-document-processing` |
-| **[Conversational AI Bot](https://azure.github.io/awesome-azd/?tags=ai&tags=bot)** | Build intelligent chatbots with Microsoft Foundry integration | `azd init -t azure-samples/ai-chat-protocol` |
-| **[AI Image Generation](https://azure.github.io/awesome-azd/?tags=ai&tags=dalle)** | Generate images using DALL-E via Microsoft Foundry | `azd init -t azure-samples/ai-image-generation` |
-| **[Semantic Kernel Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=semantic-kernel)** | AI agents using Semantic Kernel with Foundry Agents | `azd init -t azure-samples/semantic-kernel-agent` |
-| **[AutoGen Multi-Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=autogen)** | Multi-agent systems using AutoGen framework | `azd init -t azure-samples/autogen-multi-agent` |
+| **[AI Chat with RAG](https://github.com/Azure-Samples/azure-search-openai-demo)** | Search-grounded chat application | `azd init -t Azure-Samples/azure-search-openai-demo .` |
+| **[Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents)** | Agent-backed chat application; used throughout this workshop | `azd init -t Azure-Samples/get-started-with-ai-agents .` |
+| **[Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat)** | Starter AI chat application | `azd init -t Azure-Samples/get-started-with-ai-chat .` |
+
+These are alternatives: initialize **one** template in its own empty directory. The trailing `.` selects that directory; omitting it on current AZD versions creates a template-named subdirectory. Initialization downloads a project; `azd up` performs the billable deployment after you review prerequisites, resources, region support, and quota.
 
 ### Quick Start
 
@@ -97,13 +94,13 @@ Select a template below to deploy. Each template is available on [Awesome AZD](h
 **🎯 | EXERCISE**: <br/>
 Select one of the templates above based on your scenario:
 
-- **Building a chatbot?** → Start with **AI Chat with RAG** or **Conversational AI Bot**
-- **Need autonomous agents?** → Try **Foundry Agent Service Starter** or **Multi-Agent Orchestration**
-- **Processing documents?** → Use **AI Document Intelligence**
-- **Want AI coding assistance?** → Explore **Semantic Kernel Agent** or **AutoGen Multi-Agent**
+- **Continuing this workshop?** → Choose **Get Started with AI Agents**
+- **Building search-grounded chat?** → Explore **AI Chat with RAG** separately
+- **Need another architecture?** → Search the gallery and verify the actual repository, implementation status, and prerequisites
 
-```bash title="Example: Deploy the AI Chat with RAG template" linenums="0"
-azd init -t azure-samples/azure-search-openai-demo
+```bash title="Initialize the workshop template in an empty directory" linenums="0"
+azd init -t Azure-Samples/get-started-with-ai-agents .
+azd auth login
 azd up
 ```
 

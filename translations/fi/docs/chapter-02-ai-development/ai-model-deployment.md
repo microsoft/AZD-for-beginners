@@ -1,65 +1,45 @@
 # AI-mallin käyttöönotto Azure Developer CLI:llä
 
-**Luvun navigointi:**
+**Luku Navigointi:**
 - **📚 Kurssin etusivu**: [AZD Aloittelijoille](../../README.md)
-- **📖 Nykyinen luku**: Luku 2 - AI-ensimmäinen kehitys
-- **⬅️ Edellinen**: [Microsoft Foundry -integraatio](microsoft-foundry-integration.md)
-- **➡️ Seuraava**: [AI-työpajan labra](ai-workshop-lab.md)
+- **📖 Nykyinen luku**: Luku 2 - AI-Ensimmäinen Kehitys
+- **⬅️ Edellinen**: [AI-agentit](agents.md)
+- **➡️ Seuraava**: [AI-työpajan laboratorio](ai-workshop-lab.md)
 - **🚀 Seuraava luku**: [Luku 3: Konfigurointi](../chapter-03-configuration/configuration.md)
 
-Tämä opas tarjoaa kattavat ohjeet AI-mallien käyttöönottoon AZD-mallipohjien avulla kattaen kaiken mallin valinnasta tuotantoon käyttöönottoon.
+Tämä opas tarjoaa kattavat ohjeet AI-mallien käyttöönottoon käyttämällä AZD-malleja, kattaen kaiken mallin valinnasta tuotantoon käyttöönoton malleihin.
 
-> **Vahvistusmerkintä (2026-07-13):** Tässä oppaassa esitetty AZD-työnkulku tarkistettiin versiolla `azd` `1.27.1`. AI-käyttöönottoihin, jotka kestävät kauemmin kuin oletuspalvelun käyttöönottoikkuna, nykyiset AZD-versiot tukevat komentoa `azd deploy --timeout <sekunteja>`.
+> **Julkaisun tarkistus (2026-11-04):** Liittyviä CLI-muutoksia on tarkasteltu `azd` `1.37.2` suhteessa; mallien saatavuus, versiot ja määrärahat ovat alue- ja tilauskohtaisia. `azd deploy --timeout <seconds>` hallitsee palvelun käyttöönottoikkunaa, ei ole takuu agentin aktivoinnista. Katso [nykyiset julkaisumuistiinpanot ja AI-siirtymäohjeet](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes).
 
-## Sisällys
+## Sisällysluettelo
 
-- [Mallin valintastrategia](#mallin-valintastrategia)
-- [AZD-konfigurointi AI-malleille](#azd-konfigurointi-ai-malleille)
-- [Käyttöönottokuvioita](#käyttöönottokuvioita)
-- [Mallinhallinta](#mallinhallinta)
-- [Tuotannon huomioita](#tuotannon-huomioita)
-- [Valvonta ja havaittavuus](#valvonta-ja-havaittavuus)
+- [Mallin valintastrategia](#model-selection-strategy)
+- [AZD-konfigurointi AI-malleille](#azd-configuration-for-ai-models)
+- [Käyttöönoton mallit](#deployment-patterns)
+- [Mallien hallinta](#model-management)
+- [Tuotannon näkökohdat](#production-considerations)
+- [Valvonta ja havainnointi](#monitoring-and-observability)
 
 ## Mallin valintastrategia
 
-### Microsoft Foundry -mallit
+### Azure OpenAI -mallit Microsoft Foundryssa
 
 Valitse oikea malli käyttötarkoitukseesi:
 
-```yaml
-# azure.yaml - Model configuration
-services:
-  ai-service:
-    project: ./infra
-    host: containerapp
-    config:
-      AZURE_OPENAI_MODELS: |
-        [
-          {
-            "name": "gpt-4.1-mini",
-            "version": "2024-07-18",
-            "deployment": "gpt-4.1-mini",
-            "capacity": 10,
-            "format": "OpenAI"
-          },
-          {
-            "name": "text-embedding-3-large",
-            "version": "1",
-            "deployment": "text-embedding-3-large", 
-            "capacity": 30,
-            "format": "OpenAI"
-          }
-        ]
-```
+Määritä mallien käyttöönotot Bicepissä (alla), älä satunnaisissa `services.*.config.AZURE_OPENAI_MODELS`-asetuksissa. AZD ei tulkitse tällaista asetusta malliresurssien listaksi. Palvelun `project` viittaa sovelluksen lähteeseen, ei sen `infra/`-hakemistoon.
 
-### Mallin kapasiteettisuunnittelu
+Esimerkeissä käytetään julkaistua `gpt-4.1-mini` versiota **`2025-04-14`** ja upotuksen versiota **`1`**. Varmista, että malliversio ja käyttöönoton SKU ovat tuettuja kohdealueellasi/tililläsi ennen käyttöönottoa.
 
-| Mallityyppi | Käyttötarkoitus | Suositeltu kapasiteetti | Kustannusharkinnat |
+### Mallikapasiteetin suunnittelu
+
+| Mallin tyyppi | Käyttötapaus | Havainnollistava token-vaatimus | Kustannusnäkökohdat |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | Keskustelu, Kysymys & Vastaus | 10-50 TPM | Hintatehokas useimmille työkuormille |
-| gpt-4.1 | Monimutkainen päättely | 20-100 TPM | Korkeammat kustannukset, käytä premium-ominaisuuksiin |
-| text-embedding-3-large | Haku, RAG | 30-120 TPM | Vahva oletusvalinta semanttiseen hakuun ja hakuun |
-| Whisper | Puhteen tekstiin | 10-50 TPM | Äänenkäsittelytyökuormat |
+| gpt-4.1-mini | Keskustelu, Kysymykset ja vastaukset | 10 000-50 000 TPM | Testaa kustannus ja laatu työkuormallesi |
+| gpt-4.1 | Monimutkaiset tehtävät | 20 000-100 000 TPM | Arvioi laadun parannukset token-kustannuksiin nähden |
+| text-embedding-3-large | Haku, RAG | 30 000-120 000 TPM | Huomioi sisäänsyöttö sekä kyselyliikenne |
+| Whisper | Puhe tekstiksi | Suunnittele äänitallenteen keston ja pyyntilukujen mukaan | Älä käytä tekstimallin TPM-kapasiteetin kaavaa |
+
+TPM tarkoittaa tokeneita minuutissa. Näissä Standard-tekstikäyttöönotossa ARM `sku.capacity` on **1 000 TPM -yksiköissä**, ei yksittäisissä TPM-yksiköissä (kapasiteetti `10` tarkoittaa 10 000 TPM). RPM-TPM-suhteet vaihtelevat mallin/käyttöönoton mukaan; tarkista molemmat rajat [määrärahadokumentaatiosta](https://learn.microsoft.com/azure/ai-foundry/openai/quotas-limits?view=foundry-classic). Nämä vaihteluvälit ovat esimerkkejä, eivät kokoa suosituksia.
 
 ## AZD-konfigurointi AI-malleille
 
@@ -69,6 +49,9 @@ Luo mallien käyttöönotot Bicep-mallipohjien avulla:
 
 ```bicep
 // infra/main.bicep
+param openAiAccountName string
+param location string = resourceGroup().location
+
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
@@ -76,7 +59,7 @@ param openAiModelDeployments array = [
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
     sku: {
       name: 'Standard'
@@ -103,6 +86,7 @@ resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   kind: 'OpenAI'
   properties: {
     customSubDomainName: openAiAccountName
+    disableLocalAuth: true
     networkAcls: {
       defaultAction: 'Allow'
     }
@@ -124,21 +108,24 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
+Tämä on resurssiryhmän laajuinen **kehitysinfrastruktuurin esimerkki**, ei täydellinen AZD-sovelluksen malli. Tili sallii julkisen verkon pääsyn ja edellyttää Entra ID / RBAC -todennusta (`Cognitive Services OpenAI User` kutsujille). Tuotannossa tarvitaan yksityinen päätepiste, DNS ja sovellusyhteydet, jotka on kuvattu luvussa 8. AZD tarvitsee myös päämallipohjan/parametrien kartoituksen ja sovelluksen isäntäresurssit; käytä toimivaa esimerkkiä täyteen käyttöönottoon.
+
 ### Ympäristömuuttujat
 
 Konfiguroi sovellusympäristösi:
 
 ```bash
-# .env-konfigurointi
+# .env configuration
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
-AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## Käyttöönottokuvioita
+Nämä ovat sovelluksen määrittelemiä nimiä; liitä ne isäntäkoneen kokoonpanoon. Azure OpenAI v1 -päätepistettä, jota käytetään alla olevassa terveyden tarkistuksessa, ei tarvitse vanhentunutta `api-version` kyselyparametriä; vanhemmat `AzureOpenAI`-asiakkaat tarvitsevat, joten noudata sovelluksesi käyttämää API-generointia.
 
-### Kuvio 1: Yhden alueen käyttöönotto
+## Käyttöönoton mallit
+
+### Malli 1: Yhden alueen käyttöönotto
 
 ```yaml
 # azure.yaml - Single region
@@ -146,20 +133,21 @@ services:
   ai-app:
     project: ./src
     host: containerapp
-    config:
+    env:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-Parhaiten sopii:
+Paras:
 - Kehitykseen ja testaukseen
 - Yhden markkinan sovelluksiin
 - Kustannusten optimointiin
 
-### Kuvio 2: Monialueen käyttöönotto
+### Malli 2: Monialueen käyttöönotto
 
 ```bicep
-// Multi-region deployment
+// Illustrative fragment: extend the complete account declaration above.
+// Each region must support the selected model/SKU and have quota.
 param regions array = ['eastus2', 'westus2', 'francecentral']
 
 resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [for region in regions: {
@@ -169,14 +157,18 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Parhaiten sopii:
+Poistetut tilin ominaisuudet/SKU:t on toimitettava; tämä katkelma ei ole suoraan käytettävissä. Ota mallit käyttöön jokaisessa tilissä ja toteuta reititys/vikavalvonta sekä datan sijainnin hallinta erikseen.
+
+Paras:
 - Globaaleihin sovelluksiin
 - Korkean käytettävyyden vaatimuksiin
 - Kuorman jakeluun
 
-### Kuvio 3: Hybridikäyttöönotto
+### Malli 3: Hybridikäyttöönotto
 
 Yhdistä Microsoft Foundry -mallit muihin AI-palveluihin:
+
+Seuraavat katkelmat olettavat, että nimet ja `location` ovat mallipohjan määrittelemiä.
 
 ```bicep
 // Hybrid AI services
@@ -205,18 +197,18 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Mallinhallinta
+## Mallien hallinta
 
-### Versiohallinta
+### Versionhallinta
 
-Seuraa malliversioita AZD-konfiguraatiossasi:
+Seuraa malliversioita sovelluksen konfiguraatiossa tai IaC:ssä. Tämä JSON on **sovelluksen määrittelemä esimerkki**, ei sisäänrakennettu AZD-mallikaava; takaporras on toteutettava ja otettava käyttöön erikseen:
 
 ```json
 {
   "models": {
     "chat": {
       "name": "gpt-4.1-mini",
-      "version": "2024-07-18",
+      "version": "2025-04-14",
       "fallback": "gpt-4.1"
     },
     "embedding": {
@@ -229,25 +221,25 @@ Seuraa malliversioita AZD-konfiguraatiossasi:
 
 ### Mallipäivitykset
 
-Käytä AZD-koukkuja mallipäivityksiin:
+Käytä AZD-hookia vain-lukuiseen saatavuustarkistukseen ja päivitä sitten IaC ja ota käyttöön:
 
 ```bash
 #!/bin/bash
-# hooks/predeploy.sh
+# Illustrative hooks/check-model.sh (requires Azure CLI login and these variables)
 
 echo "Checking model availability..."
 az cognitiveservices account list-models \
-  --name $AZURE_OPENAI_ACCOUNT_NAME \
-  --resource-group $AZURE_RESOURCE_GROUP \
+  --name "$AZURE_OPENAI_ACCOUNT_NAME" \
+  --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "[?name=='gpt-4.1-mini']"
 
-# Jos käyttöönotto kestää pidempään kuin oletusaikakatkaisu
-azd deploy --timeout 1800
 ```
+
+Suorita `azd up` **hookin ulkopuolella** soveltaaksesi muutettuja mallin infrastruktuureja ja käyttöönotto-koodia. Älä koskaan kutsu `azd deploy`:a `predeploy`-hookista: se laukaisee rekursiivisesti saman hookin. `azd deploy --timeout 1800` jatkaa sovelluksen käyttöönoton aikakatkaisua; se ei päivitä Bicep-resursseja.
 
 ### A/B-testaus
 
-Ota käyttöön useita malliversioita:
+Alla oleva kuvaava resurssi valitsee käyttöönoton nimen ja kapasiteetin; se luo **yhden** käyttöönoton, ei A/B-testiä. Todellista koetta varten varaa kaksi erillistä käyttöönottoresurssia, ohjaa hallittu osuus pyynnöistä kumpaankin ja vertaa laatua, viivettä ja kustannuksia. Se olettaa `openAi` tiliesimerkistä:
 
 ```bicep
 param enableABTesting bool = false
@@ -259,7 +251,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
   }
   sku: {
@@ -269,14 +261,15 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Tuotannon huomioita
+## Tuotantoon liittyvät näkökohdat
 
-### Kapasiteettisuunnittelu
+### Kapasiteetin suunnittelu
 
-Laske tarvittava kapasiteetti käyttökuvioiden perusteella:
+Laske tarvittava kapasiteetti käyttömalleihin perustuen:
 
 ```python
-# Esimerkki kapasiteetin laskemisesta
+# Capacity calculation example
+import math
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -286,9 +279,9 @@ def calculate_required_capacity(
     """Calculate required TPM capacity."""
     total_tokens_per_request = avg_prompt_tokens + avg_completion_tokens
     total_tpm = requests_per_minute * total_tokens_per_request
-    return int(total_tpm * (1 + safety_margin))
+    return math.ceil(total_tpm * (1 + safety_margin))
 
-# Esimerkin käyttö
+# Example usage
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -298,9 +291,13 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Automaattisen skaalaamisen konfigurointi
+Odotettu tulos: `Required capacity: 9100 TPM`. 1000 TPM -kapasiteettiyksiköllä pyöristä ylöspäin vähintään `10`:een, ja tarkista sitten mallikohtainen RPM- ja palvelun nopeusrajoitusarvio (sisältäen pyydetyn tulosbudjetin). Tämä tokenien kysynnän arvio ei takaa rajoittamisen puuttumista.
 
-Konfiguroi automaattinen skaalaus Container Appsille:
+### Automaattisen skaalaamisen asetukset
+
+Määritä automaattinen skaalaus Container Apps -sovelluksille:
+
+**Osittainen resurssi:** yhdistä `template.scale` asetukset täydelliseen Container Appiin, jossa on sijainti, hallittu ympäristö, konttikuvake, resurssit ja sisääntulo. Kopioiden skaalaus ei lisää mallin kiintiötä.
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -338,18 +335,21 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Kustannusten optimointi
 
-Toteuta kustannusten hallinta:
+Toteuta kustannusten valvonta:
+
+**Kuvaava budjettivaraus:** määritä `budgetStartDate` nykykuukauden ensimmäiseksi päiväksi UTC-ajassa (esimerkiksi `2026-11-01T00:00:00Z` tätä tarkastelua varten), ja vaihda yhteystiedot. Alkamispäivän on täytettävä palvelun nykyiset päivämäärärajoitukset. Budjetit hälyttävät viivästyneestä laskutusaineistosta; ne eivät pysäytä kulutusta.
 
 ```bicep
+param budgetStartDate string
+
 @description('Enable cost management alerts')
 param enableCostAlerts bool = true
 
-resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCostAlerts) {
+resource budgetAlert 'Microsoft.Consumption/budgets@2024-08-01' = if (enableCostAlerts) {
   name: 'ai-budget-alert'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate
     }
     timeGrain: 'Monthly'
     amount: 1000
@@ -368,11 +368,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Valvonta ja havaittavuus
+## Seuranta ja havainnointi
 
 ### Application Insights -integraatio
 
-Konfiguroi valvonta AI-työkuormille:
+Määritä seuranta AI-kuormille:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -385,74 +385,45 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-// Custom metrics for AI models
-resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
-  parent: applicationInsights
-  name: 'ai-model-metrics'
-  properties: {
-    content: '''
-      customEvents
-      | where name == "AI_Model_Request"
-      | extend model = tostring(customDimensions.model)
-      | extend tokens = toint(customDimensions.tokens)
-      | extend latency = toint(customDimensions.latency_ms)
-      | summarize 
-          requests = count(),
-          avg_tokens = avg(tokens),
-          avg_latency = avg(latency)
-        by model, bin(timestamp, 5m)
-    '''
-    type: 'query'
-    scope: 'shared'
-  }
-}
 ```
 
-### Räätälöidyt mittarit
+Resurssifragmentti olettaa `applicationInsightsName`, `location`, ja olemassa olevan `logAnalyticsWorkspace`. Se ottaa käyttöön seurannan, mutta ei instrumentoi sovellusta tai luo mukautettuja mittareita.
+
+### Mukautetut mittarit
 
 Seuraa AI-spesifisiä mittareita:
 
-```python
-# Mukautettu telemetria tekoälymalleille
-import logging
-from applicationinsights import TelemetryClient
+Käytä tuettua [Azure Monitor OpenTelemetry -jakelua](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python), ei legacy `applicationinsights` Python SDK:ta. Asenna `azure-monitor-opentelemetry`, määritä `APPLICATIONINSIGHTS_CONNECTION_STRING`, ja alusta kerran käynnistyksessä:
 
-class AITelemetry:
-    def __init__(self, instrumentation_key: str):
-        self.client = TelemetryClient(instrumentation_key)
-    
-    def track_model_request(self, model: str, tokens: int, latency_ms: int, success: bool):
-        """Track AI model request metrics."""
-        self.client.track_event(
-            'AI_Model_Request',
-            {
-                'model': model,
-                'tokens': str(tokens),
-                'latency_ms': str(latency_ms),
-                'success': str(success)
-            }
-        )
-        
-    def track_model_error(self, model: str, error_type: str, error_message: str):
-        """Track AI model errors."""
-        self.client.track_exception(
-            type=error_type,
-            value=error_message,
-            properties={
-                'model': model,
-                'component': 'ai_model'
-            }
-        )
+```python
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
+
+configure_azure_monitor()
+tracer = trace.get_tracer(__name__)
+
+def record_request(model: str, tokens: int, latency_ms: int, success: bool):
+    with tracer.start_as_current_span("AI_Model_Request") as span:
+        span.set_attribute("ai.model", model)
+        span.set_attribute("ai.tokens", tokens)
+        span.set_attribute("ai.latency_ms", latency_ms)
+        span.set_attribute("ai.success", success)
 ```
+
+Tämä havainnollistaa attribuuttien lähettämistä, ei varsinaista mallikutsun instrumentointia. Kiedo varsinainen pyyntö spanin sisään mitataksesi keston; tarkasta `dependencies`/`traces` Application Insightsissa. Älä lähetä kehoteviestejä, vastauksia, avaimia tai raakoja poikkeusviestejä, jotka sisältävät arkaluontoisia tietoja.
 
 ### Terveystarkastukset
 
-Toteuta AI-palvelun terveystila-valvonta:
+Toteuta AI-palvelun terveysvalvonta:
+
+Asenna `fastapi`, `uvicorn`, `httpx` ja `azure-identity`. Aseta yllä olevan palvelupisteen/käyttöönoton muuttujat ja myönnä kutsujalle `Cognitive Services OpenAI User`. Tämä **valmiusprofiili** käyttää Azure OpenAI:n v1 data planea Entra ID:llä; se tekee laskutettavan mallikutsun. Suorita `uvicorn health:app`:lla tallennuksen jälkeen `health.py`. Käytä erillistä kevyttä elinkelpoisuustarkistusta, rajoita/nojaa valmiustuloksiin välimuistia, äläkä paljasta tätä reittiä julkisesti ilman pääsynvalvontaa.
 
 ```python
-# Terveystarkastus päätepisteet
+# health.py
+import os
 from fastapi import FastAPI, HTTPException
 import httpx
+from azure.identity.aio import DefaultAzureCredential
 
 app = FastAPI()
 
@@ -460,43 +431,49 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Testaa OpenAI-yhteys
-        async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
-                headers={"api-key": AZURE_OPENAI_API_KEY}
+        async with DefaultAzureCredential() as credential:
+            token = await credential.get_token("https://ai.azure.com/.default")
+        endpoint = os.environ["AZURE_OPENAI_ENDPOINT"].rstrip("/")
+        async with httpx.AsyncClient(timeout=20.0) as client:
+            response = await client.post(
+                f"{endpoint}/openai/v1/chat/completions",
+                headers={"Authorization": f"Bearer {token.token}"},
+                json={
+                    "model": os.environ["AZURE_OPENAI_CHAT_DEPLOYMENT"],
+                    "messages": [{"role": "user", "content": "Reply OK."}],
+                    "max_completion_tokens": 8,
+                },
             )
-            
-        if response.status_code == 200:
-            return {"status": "healthy", "models": response.json()}
-        else:
-            raise HTTPException(status_code=503, detail="AI models unavailable")
-            
-    except Exception as e:
-        raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
+        response.raise_for_status()
+        return {"status": "healthy"}
+    except Exception:
+        # Record sanitized internal diagnostics, not service responses/tokens.
+        raise HTTPException(status_code=503, detail="AI readiness check failed") from None
 ```
 
-## Seuraavat vaiheet
+Odotettu: `GET /health/ai-models` palauttaa `200 {"status":"healthy"}`, kun määritetty chat-käyttöönotto on käytettävissä, tai `503` ilman yläpuolisten yksityiskohtien paljastamista. Käyttöönottolistaus on hallintaplaneerausoperaatio eikä ole kelvollinen data-plane-terveystarkastus.
 
-1. **Tutustu [Microsoft Foundry -integraatio-oppaaseen](microsoft-foundry-integration.md)** palveluiden integraatiokuvioita varten
-2. **Suorita [AI-työpajan labra](ai-workshop-lab.md)** käytännön kokemusta varten
-3. **Ota käyttöön [Tuotannon AI-käytännöt](production-ai-practices.md)** yrityskäyttöönottoon
-4. **Tutki [AI-vianmääritysohjeita](../chapter-07-troubleshooting/ai-troubleshooting.md)** yleisiä ongelmia varten
+## Seuraavat askeleet
+
+1. **Tutustu [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** palvelun integrointimalleihin
+2. **Suorita [AI Workshop Lab](ai-workshop-lab.md)** käytännön kokemusta varten
+3. **Ota käyttöön [Production AI Practices](../chapter-08-production/production-ai-practices.md)** yrityskäyttöön
+4. **Tutki [AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** yleisten ongelmien varalta
 
 ## Resurssit
 
-- [Microsoft Foundry Modelien mallien saatavuus](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Azure Developer CLI -dokumentaatio](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Container Apps -skaalaus](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [AI-mallien kustannusten optimointi](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Microsoft Foundry Models Model Availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Container Apps Scaling](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [AI Model Cost Optimization](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Luvun navigointi:**
-- **📚 Kurssin etusivu**: [AZD Aloittelijoille](../../README.md)
-- **📖 Nykyinen luku**: Luku 2 - AI-ensimmäinen kehitys
-- **⬅️ Edellinen**: [Microsoft Foundry -integraatio](microsoft-foundry-integration.md)
-- **➡️ Seuraava**: [AI-työpajan labra](ai-workshop-lab.md)
+**Lukujen navigointi:**
+- **📚 Kurssin etusivu**: [AZD For Beginners](../../README.md)
+- **📖 Nykyinen luku**: Luku 2 - AI-Ensimmäinen kehitys
+- **⬅️ Edellinen**: [AI Agents](agents.md)
+- **➡️ Seuraava**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Seuraava luku**: [Luku 3: Konfigurointi](../chapter-03-configuration/configuration.md)
 
 ---

@@ -8,7 +8,7 @@
 
 This chapter helps you diagnose and resolve common issues when working with Azure Developer CLI. From deployment failures to AI-specific problems.
 
-> Validated against `azd 1.27.1` in July 2026.
+> Command guidance reviewed against the released `azd 1.37.2` reference. Cloud deployments were not executed. Replace example resource names and IDs before using commands.
 
 ## Learning Objectives
 
@@ -40,7 +40,7 @@ azd auth login
 # Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
 ### Provisioning Failures
@@ -51,8 +51,9 @@ az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
 ### Resource Conflicts
+Inspect the existing resource and deployment errors first. Do not delete a shared or production environment to resolve a naming conflict. For a **new disposable environment**, use a unique name:
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
@@ -60,9 +61,11 @@ azd up
 ### Quota Exceeded
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+Changing `AZURE_LOCATION` does not move existing resources and can cause location conflicts on redeployment.
 
 ---
 
@@ -82,13 +85,15 @@ azd up
 ## 🔄 Reset and Recovery
 
 ```bash
-# Soft reset (retain resources, redeploy the code)
-azd deploy --force
+# Soft reset (keep resources, redeploy code)
+azd deploy
 
-# Hard reset (delete everything, start from scratch)
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
+
+The hard reset deletes data and may change endpoints. Back up first and review the interactive deletion prompts. `--force --purge` is only appropriate for disposable environments when irreversible deletion is intended.
 
 ---
 

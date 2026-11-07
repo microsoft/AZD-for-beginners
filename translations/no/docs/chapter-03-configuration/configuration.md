@@ -1,43 +1,45 @@
 # Konfigurasjonsveiledning
 
 **Kapittelnavigasjon:**
-- **📚 Kursforside**: [AZD For Nybegynnere](../../README.md)
-- **📖 Nåværende kapittel**: Kapittel 3 - Konfigurasjon & Autentisering
-- **⬅️ Forrige**: [Ditt første prosjekt](first-project.md)
+- **📚 Kursstartside**: [AZD For Beginners](../../README.md)
+- **📖 Nåværende kapittel**: Kapittel 3 - Konfigurasjon og autentisering
+- **⬅️ Forrige**: [Ditt første prosjekt](../chapter-01-foundation/first-project.md)
 - **➡️ Neste**: [Distribusjonsveiledning](../chapter-04-infrastructure/deployment-guide.md)
 - **🚀 Neste kapittel**: [Kapittel 4: Infrastruktur som kode](../chapter-04-infrastructure/deployment-guide.md)
 
-## Introduksjon
+## Innledning
 
-Denne omfattende veiledningen dekker alle aspekter ved konfigurasjon av Azure Developer CLI for optimale utviklings- og distribusjonsarbeidsflyter. Du vil lære om konfigurasjonshierarki, miljøhåndtering, autentiseringsmetoder og avanserte konfigurasjonsmønstre som muliggjør effektive og sikre Azure-distribusjoner.
+> Gjennomgått mot `azd 1.37.2` (november 2026). Bash-kommandoer forutsetter et initialisert azd-prosjekt. Med mindre det eksplisitt beskrives som en komplett fil, er YAML/Bicep-utdrag fragmenter som skal flettes inn i tilsvarende prosjektfiler, ikke frittstående kjørbare prosjekter.
+
+Denne omfattende veiledningen dekker alle aspekter av konfigurering av Azure Developer CLI for optimale utviklings- og distribusjonsarbeidsflyter. Du vil lære om konfigurasjonshierarki, miljøhåndtering, autentiseringsmetoder og avanserte konfigurasjonsmønstre som muliggjør effektiv og sikker Azure-distribusjon.
 
 ## Læringsmål
 
 Ved slutten av denne leksjonen vil du:
-- Mestre azd konfigurasjonshierarki og forstå hvordan innstillinger prioriteres
+- Mestre azd-konfigurasjonshierarkiet og forstå hvordan innstillinger prioriteres
 - Konfigurere globale og prosjektspesifikke innstillinger effektivt
-- Administrere flere miljøer med forskjellige konfigurasjoner
+- Håndtere flere miljøer med ulike konfigurasjoner
 - Implementere sikre autentiserings- og autorisasjonsmønstre
 - Forstå avanserte konfigurasjonsmønstre for komplekse scenarier
 
-## Læringsutbytte
+## Læringsresultater
 
-Etter å ha fullført denne leksjonen, vil du kunne:
+Etter å ha fullført denne leksjonen vil du kunne:
 - Konfigurere azd for optimale utviklingsarbeidsflyter
 - Sette opp og administrere flere distribusjonsmiljøer
-- Implementere sikre praksiser for konfigurasjonsadministrasjon
+- Implementere sikre konfigurasjonsstyringsrutiner
 - Feilsøke konfigurasjonsrelaterte problemer
-- Tilpasse azd-adferd for spesifikke organisatoriske krav
+- Tilpasse azd-oppførsel for spesifikke organisatoriske krav
 
-Denne omfattende veiledningen dekker alle aspekter ved konfigurasjon av Azure Developer CLI for optimale utviklings- og distribusjonsarbeidsflyter.
+Denne omfattende veiledningen dekker alle aspekter av konfigurering av Azure Developer CLI for optimale utviklings- og distribusjonsarbeidsflyter.
 
 ## Forstå AI-agenter i et azd-prosjekt
 
-Hvis du er ny på AI-agenter, her er en enkel måte å tenke på dem i azd-verdenen.
+Hvis du er ny innen AI-agenter, her er en enkel måte å tenke på dem i azd-verdenen.
 
 ### Hva er en agent?
 
-En agent er et program som kan motta en forespørsel, resonere rundt den og ta handlinger – ofte ved å kalle en AI-modell, slå opp data eller påkalle andre tjenester. I et azd-prosjekt er en agent bare en annen **tjeneste** sammen med ditt webfrontend eller API-backend.
+En agent er et program som kan motta en forespørsel, reflektere over den, og utføre handlinger – ofte ved å kalle en AI-modell, slå opp data eller påkalle andre tjenester. I et azd-prosjekt er en agent bare en annen **tjeneste** ved siden av ditt webfrontend eller API-backend.
 
 ### Hvordan agenter passer inn i azd-prosjektstrukturen
 
@@ -45,74 +47,72 @@ Et azd-prosjekt består av tre lag: **infrastruktur**, **kode** og **konfigurasj
 
 | Lag | Hva det gjør for en tradisjonell app | Hva det gjør for en agent |
 |-------|-------------------------------------|---------------------------|
-| **Infrastruktur** (`infra/`) | Provisjoner en webapp og database | Provisjoner et AI-modellentpunkt, søkeindeks eller agentvert |
-| **Kode** (`src/`) | Inneholder frontend- og API-kildekode | Inneholder agentlogikk og prompt-definisjoner |
-| **Konfigurasjon** (`azure.yaml`) | Lister opp tjenestene dine og deres hostingmål | Lister opp agenten som en tjeneste, peker til kode og vert |
+| **Infrastruktur** (`infra/`) | Provisjoner en webapp og database | Provisjoner et Microsoft Foundry Models-endepunkt, søkeindeks eller agentvert |
+| **Kode** (`src/`) | Inneholder din frontend- og API-kildekode | Inneholder agentlogikk og promptdefinisjoner |
+| **Konfigurasjon** (`azure.yaml`) | Lister tjenester og deres hostingmål | Lister agenten som en tjeneste, peker til dens kode og vert |
 
 ### Rollen til `azure.yaml`
 
-Du trenger ikke å huske syntaksen nå. Konseptuelt er `azure.yaml` filen hvor du forteller azd: *"Her er tjenestene som utgjør applikasjonen min, og her finner du koden deres."*
+Du trenger ikke å lære syntaksen utenat nå. Konseptuelt er `azure.yaml` filen der du forteller azd: *"Her er tjenestene som utgjør applikasjonen min, og her finner du koden deres."*
 
-Når prosjektet ditt inkluderer en AI-agent, lister `azure.yaml` bare opp agenten som en av tjenestene. azd vet da å provisjonere riktig infrastruktur (som et Microsoft Foundry Models-endepunkt eller en Container App til å hoste agenten) og distribuere agentkoden din – akkurat som det ville gjort for en webapp eller API.
+Når prosjektet ditt inkluderer en AI-agent, lister `azure.yaml` simpelthen den agenten som en av tjenestene. azd vet da å provisjonere riktig infrastruktur (som et Microsoft Foundry Models-endepunkt eller en Container App for å hoste agenten) og distribuere agentkoden din – akkurat som for en webapp eller API.
 
-Dette betyr at det ikke er noe fundamentalt nytt å lære. Hvis du forstår hvordan azd håndterer en webtjeneste, forstår du allerede hvordan det håndterer en agent.
+Det betyr at det ikke er noe fundamentalt nytt å lære. Hvis du forstår hvordan azd håndterer en webtjeneste, forstår du allerede hvordan det håndterer en agent.
 
 ## Konfigurasjonshierarki
 
-azd bruker et hierarkisk konfigurasjonssystem:
-1. **Kommandolinjeflagg** (høyeste prioritet)
-2. **Miljøvariabler**
-3. **Lokal prosjektkonfigurasjon** (`.azd/config.json`)
-4. **Global brukerkonfigurasjon** (`~/.azd/config.json`)
-5. **Standardverdier** (laveste prioritet)
+azd har distinkte konfigurasjonsoverflater, ikke én universell overlegg:
+- **Globale brukerpreferanser**: `~/.azd/config.json`, administrert av `azd config`.
+- **Prosjektdefinisjon**: `azure.yaml` spesifiserer tjenester, infrastruktur og hooks.
+- **Lokal miljøvalg**: `.azure/config.json`.
+- **Verdier per miljø**: `.azure/<name>/.env`, administrert av `azd env`; tilleggskonfigurasjon finnes i det miljøets `config.json`.
+- **Flagg og prosessvariabler**: overstyrer bare innstillingene som støttes av en gitt kommando/leverandør.
+
+En vilkårlig `azd env set`-verdi blir ikke automatisk en infrastrukturparameter eller distribuert applikasjonsinnstilling. Referer til den eksplisitt i parameterfilen, støttet tjenestekonfigurasjon eller en hook.
 
 ## Global konfigurasjon
 
-### Sette globale standarder
+### Innstilling av globale standarder
 ```bash
-# Sett standardabonnement
+# Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# Sett standard plassering
+# Set default location
 azd config set defaults.location "eastus2"
 
-# Sett standard navnekonvensjon for ressursgruppe
-azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
-
-# Vis all global konfigurasjon
+# View all global configuration
 azd config show
 
-# Fjern en konfigurasjon
+# Remove a configuration
 azd config unset defaults.location
 ```
 
 ### Vanlige globale innstillinger
 ```bash
-# Utviklingspreferanser
-azd config set alpha.enable true                    # Aktiver alfa-funksjoner
-azd config set telemetry.enabled false             # Deaktiver telemetri
-azd config set output.format json                  # Angi utdataformat
+# Discover supported settings instead of inventing configuration keys
+azd config options
+azd config list-alpha
 
-# Sikkerhetsinnstillinger
-azd config set auth.useAzureCliCredential true     # Bruk Azure CLI for autentisering
-azd config set tls.insecure false                  # Påtvung TLS-verifisering
+# Explicit opt-in only: use Azure CLI credentials rather than azd's default login
+azd config set auth.useAzCliAuth true
+# Restore azd's default credential behavior
+azd config unset auth.useAzCliAuth
 
-# Ytelsesjustering
-azd config set provision.parallelism 5             # Parallell ressursoppretting
-azd config set deploy.timeout 30m                  # Distribusjonstimeout
+# Use per-command flags for supported behavior
+azd show --output json
+azd deploy --timeout 1800   # seconds; stops waiting, not the Azure-side deployment
 ```
 
 ## 🏗️ Prosjektkonfigurasjon
 
-### azure.yaml Struktur
-`azure.yaml`-filen er hjertet i azd-prosjektet ditt:
+### azure.yaml-struktur
+Filen `azure.yaml` er hjertet i ditt azd-prosjekt:
 
 ```yaml
 # Minimum configuration
 name: my-awesome-app
 metadata:
   template: my-template@1.0.0
-  templateBranch: main
 
 # Service definitions
 services:
@@ -129,21 +129,13 @@ services:
     language: python
     host: containerapp
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-    
-  # Database service
-  database:
-    project: ./src/db
-    host: postgres
+      context: .
+      path: Dockerfile
     
 # Infrastructure configuration
 infra:
   provider: bicep                   # Infrastructure provider
   path: ./infra                    # Infrastructure code location
-  parameters:
-    environmentName: ${AZURE_ENV_NAME}
-    location: ${AZURE_LOCATION}
 
 # Deployment hooks
 hooks:
@@ -181,6 +173,8 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
+Dette er et **prosjektdefinisjonseksempel**, ikke en ferdig startpakke. Opprett de refererte kildemappene, hook-skript, pakkeskript og tilsvarende `infra/main.bicep`/`main.parameters.json` før du kjører det. Databaser hører hjemme i infrastruktur; `postgres` er ikke en innebygd tjenestevert. Infrastrukturparametere legges i leverandørens parameterfil, ikke i `infra.parameters`.
+
 ### Tjenestekonfigurasjonsalternativer
 
 #### Vertstyper
@@ -202,46 +196,53 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Språkspecificke innstillinger
+#### Språkspesifikke build hooks
+
+Følgende tjenesteutdrag illustrerer hooks; slå dem sammen med hver tjenestes virkelige `project` og `host`. `buildCommand` og `startCommand` er ikke generiske azd-tjenesteeiendommer. Konfigurer oppstart i applikasjonen, Dockerfile, eller verts-infrastruktur.
+
 ```yaml
 services:
   node-app:
+    project: ./src/node
+    host: appservice
     language: js
-    buildCommand: npm run build
-    startCommand: npm start
+    hooks:
+      prepackage:
+        shell: sh
+        run: npm run build
     
   python-app:
+    project: ./src/python
+    host: appservice
     language: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
     
   dotnet-app:
+    project: ./src/dotnet
+    host: appservice
     language: csharp
-    buildCommand: dotnet build
-    startCommand: dotnet run
     
   java-app:
+    project: ./src/java
+    host: appservice
     language: java
-    buildCommand: mvn clean package
-    startCommand: java -jar target/app.jar
 ```
 
 ## 🌟 Miljøhåndtering
 
-### Lage miljøer
+### Opprettelse av miljøer
 ```bash
-# Opprett et nytt miljø
+# Create a new environment
 azd env new development
 
-# Opprett med spesifikk plassering
+# Create with specific location
 azd env new staging --location "westus2"
 
-# Opprett fra mal
+# Create from template
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
 ### Miljøkonfigurasjon
-Hvert miljø har sin egen konfigurasjon i `.azure/<env-name>/config.json`:
+Kjerneverdier for miljøet finnes i `.azure/<env-name>/.env`, inkludert `AZURE_ENV_NAME`, `AZURE_SUBSCRIPTION_ID`, og `AZURE_LOCATION`. Bruk `azd env config get/set` for tilleggskonfigurasjon i JSON-format. Følgende JSON er **konseptuell applikasjonstilstand**, ikke et azd-konfigurasjonsskjema; ikke kopier det inn i azd sine filer:
 
 ```json
 {
@@ -264,123 +265,127 @@ Hvert miljø har sin egen konfigurasjon i `.azure/<env-name>/config.json`:
 ```
 
 ### Miljøvariabler
+
+**Kun ren tekst-demonstrasjon.** Vanlige `azd env set`-verdier skrives til `.azure/<name>/.env` og kan prints via lese-kommandoer. Ikke bruk eksempelnøkkelen som ekte referanse. For hemmeligheter, bruk `azd env set-secret` og eksplisitt kjøringstid-kobling.
+
 ```bash
-# Angi miljøspesifikke variabler
+# Set environment-specific variables
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# Vis miljøvariabler
+# View environment variables
 azd env get-values
 
-# Forventet output:
+# Expected output:
 # DATABASE_URL=postgresql://user:pass@host:5432/db
-# API_KEY=hemmelig-api-nøkkel
+# API_KEY=secret-api-key
 # DEBUG=true
 
-# Fjern miljøvariabel
+# Remove environment variable
 azd env unset DEBUG
 
-# Verifiser fjerning
+# Verify removal
 azd env get-values | grep DEBUG
-# (skal ikke returnere noe)
+# (should return nothing)
 ```
 
 ### Miljømaler
-Lag `.azure/env.template` for konsekvent miljøoppsett:
+Lag en **ikke-hemmlig, manuelt vedlikeholdt** `.env.example` i prosjektets rot for konsekvent oppsett. azd laster ikke automatisk en fil med navnet `env.template`:
 ```bash
-# Påkrevde variabler
+# Required variables
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Applikasjonsinnstillinger
+# Application settings
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Valgfrie utviklingsinnstillinger
+# Optional development settings
 DEBUG=false
 LOG_LEVEL=info
 ```
 
 ### Dele miljøer i et team
 
-Når flere personer jobber på et prosjekt, må dere bli enige om **hva som følger med repoet og hva som forblir lokalt**. azd holder hvert miljø under en `.azure/`-mappe, og ikke alt skal legges inn i versjonskontroll.
+Når flere personer jobber på et prosjekt, må dere bli enige om **hva som følger med repoet og hva som blir lokalt**. azd holder hvert miljø under en `.azure/`-mappe, og ikke alt av det skal committes.
 
-**Hva som er i `.azure/`:**
+**Hva er i `.azure/`:**
 
 ```
 .azure/
 ├── config.json              # which env is currently selected (local)
 └── <env-name>/
-    ├── config.json          # subscription, location, resource IDs
-    └── .env                 # environment variables (may contain secrets!)
+    ├── config.json          # additional environment settings
+    └── .env                 # subscription, location, outputs; may contain secrets!
 ```
 
-**Hva som skal gitignores.** azds standard `.gitignore` ekskluderer allerede `.azure/`. Behold det slik – `.env`-filene kan inneholde hemmeligheter, og ressurs-ID-er er spesifikke for den som provisjonerte dem. Hver lagkamerat lager sitt **egne** miljø lokalt:
+**Hva som skal gitignores.** azd sin standard `.gitignore` ekskluderer allerede `.azure/`. Behold dette slik—`.env` filene kan inneholde hemmeligheter, og ressurs-ID-er er spesifikke for den som har provisjonert dem. Hver lagkamerat lager sitt **egne** miljø lokalt:
 
 ```bash
-# Hver utvikler kjører dette en gang for å få sitt eget isolerte miljø
+# Every developer runs this once to get their own isolated environment
 azd env new dev-alice
 azd up
 ```
 
-**Bytte mellom miljøer.** En utvikler som administrerer flere miljøer velger det aktive før kommandoer kjøres:
+**Bytte mellom miljøer.** En utvikler som håndterer flere miljøer velger det aktive før kommandoer kjøres:
 
 ```bash
-azd env list                 # se alle lokale miljøer og hvilken som er standard
-azd env select staging       # gjør 'staging' til det aktive miljøet
-azd env get-values           # bekreft at du er rettet mot riktig miljø
+azd env list                 # see all local environments and which is default
+azd env select staging       # make 'staging' the active environment
+azd env get-values           # confirm you're pointed at the right one
 ```
 
-**Gi ikke-hemmelige standardverdier til teamet.** Commit en mal (som `.azure/env.template` ovenfor) slik at alle vet hvilke variabler som skal settes – men aldri commit utfylte verdier. Nye lagkamerater kopierer malen og fyller inn sine egne verdier.
+**Gi ikke-hemmelige standarder til teamet.** Committ `.env.example` utenfor den ignorerte `.azure/`-mappen. Nye lagkamerater kopierer den til en lokal ignorert fil, fyller inn verdier, og importerer eksplisitt med `azd env set --file <local-file>`. Importer aldri blanke placholdere over et fungerende miljø.
 
-**Miljøer i CI/CD.** Pipeliner leser ikke den lokale `.azure/`-mappen din. Gi heller miljødverdiene som pipelinevariabler/-hemmeligheter, og azd leser dem fra prosessmiljøet:
+**Miljøer i CI/CD.** Pipelines leser ikke din lokale `.azure/`-mappe. Gi miljøverdier som pipeline-variabler/hemmeligheter, og azd leser dem fra prosessmiljøet:
 
 ```bash
-# I CI les azd disse fra miljøet, ikke fra .azure/
+# In CI, azd reads these from the environment, not from .azure/
 export AZURE_ENV_NAME=production
 export AZURE_LOCATION=eastus2
-export AZURE_SUBSCRIPTION_ID=<sub-id>
+export AZURE_SUBSCRIPTION_ID="<sub-id>"
 azd provision --no-prompt
 azd deploy --no-prompt
 ```
 
-> **Tommelregel:** infrastrukturkode (`infra/`, `azure.yaml`) deles i Git; miljø *status og hemmeligheter* (`.azure/`) er per utvikler og per pipeline. `azd pipeline config` setter pipelinevariablene for deg automatisk.
+> **Tommelregel:** Infrastrukturskode (`infra/`, `azure.yaml`) deles i Git; miljøets *tilstand og hemmeligheter* (`.azure/`) er per-utvikler og per-pipeline. `azd pipeline config` setter opp pipelinevariablene automatisk for deg.
 
 ## 🔐 Autentiseringskonfigurasjon
 
-### Azure CLI-integrering
+### Integrasjon med Azure CLI
 ```bash
-# Bruk Azure CLI-legitimasjon (standard)
-azd config set auth.useAzureCliCredential true
+# Explicit opt-in; NOT the default
+azd config set auth.useAzCliAuth true
 
-# Logg inn med spesifikk leietaker
-az login --tenant <tenant-id>
+# Login with specific tenant
+az login --tenant "<tenant-id>"
 
-# Sett standard abonnement
-az account set --subscription <subscription-id>
+# Set default subscription
+az account set --subscription "<subscription-id>"
 ```
 
-### Service Principal-autentisering
-For CI/CD pipelines:
+### Tjenesteprinsipp-autentisering
+For CI/CD-pipelines:
 ```bash
-# Sett miljøvariabler
+# Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Eller konfigurer direkte
-azd config set auth.clientId "your-client-id"
-azd config set auth.tenantId "your-tenant-id"
+# Authenticate azd explicitly (prefer pipeline federation over a long-lived secret)
+azd auth login --client-id "$AZURE_CLIENT_ID" \
+  --client-secret "$AZURE_CLIENT_SECRET" --tenant-id "$AZURE_TENANT_ID"
 ```
 
 ### Administrert identitet
 For Azure-hostede miljøer:
 ```bash
-# Aktiver administrert identitetsautentisering
-azd config set auth.useMsi true
-azd config set auth.msiClientId "your-managed-identity-client-id"
+# Enable managed identity authentication
+azd auth login --managed-identity
+# Alternative: choose an identity assigned to the host by client ID
+azd auth login --managed-identity --client-id "<managed-identity-client-id>"
 ```
 
 ## 🏗️ Infrastrukturkonfigurasjon
@@ -409,37 +414,44 @@ Konfigurer infrastrukturparametere i `infra/main.parameters.json`:
 ```
 
 ### Terraform-konfigurasjon
-For Terraform-prosjekter, konfigurer i `infra/terraform.tfvars`:
-```hcl
-environment_name = "${AZURE_ENV_NAME}"
-location = "${AZURE_LOCATION}"
-app_service_sku = "B1"
-database_sku = "GP_Gen5_2"
+For Terraform-prosjekter erstatter azd placholdere i `infra/main.tfvars.json`. Disse navnene må matche deklarerte Terraform input-variabler:
+```json
+{
+  "environment_name": "${AZURE_ENV_NAME}",
+  "location": "${AZURE_LOCATION}",
+  "app_service_sku": "B1"
+}
 ```
 
 ## 🚀 Distribusjonskonfigurasjon
 
-### Byggekontfigurasjon
+### Byggekonfigurasjon
 ```yaml
 # In azure.yaml
 services:
   web:
     project: ./src/web
+    host: appservice
     language: js
-    buildCommand: npm run build:prod
-    buildEnvironment:
-      NODE_ENV: production
-      REACT_APP_API_URL: ${API_URL}
     dist: build
+    hooks:
+      prepackage:
+        shell: sh
+        run: |
+          set -e
+          NODE_ENV=production REACT_APP_API_URL="$API_URL" npm run build:prod
     
   api:
     project: ./src/api
+    host: appservice
     language: python
-    buildCommand: |
-      pip install -r requirements.txt
-      python -m pytest tests/
-    buildEnvironment:
-      PYTHONPATH: src
+    hooks:
+      prepackage:
+        shell: sh
+        run: |
+          set -e
+          python -m pip install -r requirements.txt
+          PYTHONPATH=src python -m pytest tests/
 ```
 
 ### Docker-konfigurasjon
@@ -449,60 +461,50 @@ services:
     project: ./src/api
     host: containerapp
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-      target: production
+      context: .
+      path: Dockerfile
       buildArgs:
-        NODE_ENV: production
-        API_VERSION: v1.0.0
+        - NODE_ENV=production
+        - API_VERSION=v1.0.0
 ```
-Eksempel `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
+Stier er relative til tjenesteprosjektet. Dockerfilen må deklarere eventuelle `ARG`-verdier den bruker. For flertrinns bygg, sett utplasserbar fase sist eller bruk en egen pakkebehandling; `docker.target` er ikke en støttet egenskap i vurdert skjema.
 
 ## 🔧 Avansert konfigurasjon
 
-### Egendefinert ressursnavngiving
-```bash
-# Sett navnekonvensjoner
-azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
-azd config set naming.storageAccount "{project}{env}sa"
-azd config set naming.keyVault "kv-{project}-{env}"
+### Egendefinerte ressursnavn
+```yaml
+# azure.yaml fragment: override resource-group discovery where appropriate
+resourceGroup: rg-${AZURE_ENV_NAME}
 ```
+
+Definer faktiske ressursnavn i Bicep/Terraform og hold opprettelsen av ressursgruppe konsistent med denne innstillingen. Det finnes ingen generiske `naming.storageAccount` eller `naming.keyVault` konfigurasjonsnøkler.
 
 ### Nettverkskonfigurasjon
-```yaml
-# In azure.yaml
-infra:
-  provider: bicep
-  parameters:
-    vnetAddressPrefix: "10.0.0.0/16"
-    subnetAddressPrefix: "10.0.1.0/24"
-    enablePrivateEndpoints: true
+```json
+{
+  "vnetAddressPrefix": { "value": "10.0.0.0/16" },
+  "subnetAddressPrefix": { "value": "10.0.1.0/24" },
+  "enablePrivateEndpoints": { "value": true }
+}
 ```
 
+Slå sammen disse **illustrerende parameteroppføringene** i `infra/main.parameters.json` under `parameters`, og deklarer samt bruk matchende parametere i Bicep. De gjør ingenting på egen hånd.
+
 ### Overvåkingskonfigurasjon
-```yaml
-# In azure.yaml
-monitoring:
-  applicationInsights:
-    enabled: true
-    samplingPercentage: 100
-  logAnalytics:
-    enabled: true
-    retentionDays: 30
-```
+Provision Application Insights og Log Analytics i Bicep/Terraform og konfigurer applikasjonstelemetri i SDK-en din. Det finnes ikke et generisk toppnivå `monitoring`-blokker i `azure.yaml` som lager disse ressursene. Se [overvåkningsinfrastruktur](../chapter-04-infrastructure/provisioning.md#-monitoring-and-observability).
 
 ## 🎯 Miljøspesifikke konfigurasjoner
 
 ### Utviklingsmiljø
 ```bash
-# .azure/utvikling/.env
+# .azure/development/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Testmiljø
+### Preproduksjonsmiljø
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -524,14 +526,15 @@ ENABLE_SECURITY_HEADERS=true
 
 ### Valider konfigurasjon
 ```bash
-# Sjekk konfigurasjonssyntaks
-azd config validate
+# Inspect supported global settings and current project
+azd config options
+azd show
 
-# Test miljøvariabler
+# Test environment variables
 azd env get-values
 
-# Valider infrastruktur
-azd provision --dry-run
+# Validate infrastructure
+azd provision --preview
 ```
 
 ### Konfigurasjonsskript
@@ -543,15 +546,15 @@ Lag valideringsskript i `scripts/`:
 
 echo "Validating configuration..."
 
-# Sjekk nødvendige miljøvariabler
+# Check required environment variables
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# Valider azure.yaml-syntaks
-if ! azd config validate; then
-  echo "Error: Invalid azure.yaml configuration"
+# Ask azd to load the project (not full schema or infrastructure validation)
+if ! azd show --output json; then
+  echo "Error: Could not load the azd project"
   exit 1
 fi
 
@@ -566,6 +569,11 @@ echo "Configuration validation passed!"
 database:
   connectionString: ${DATABASE_CONNECTION_STRING}
 
+```
+
+Unngå hardkoding av sensitive verdier (adskilt illustrativ konfigurasjon, ikke en annen `database`-nøkkel i samme fil):
+
+```yaml
 # Avoid: Hardcode sensitive values
 database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
@@ -575,7 +583,6 @@ database:
 ```
 .azure/
 ├── config.json              # Global project config
-├── env.template             # Environment template
 ├── development/
 │   ├── config.json         # Dev environment config
 │   └── .env                # Dev environment variables
@@ -590,12 +597,12 @@ database:
 ### 3. Versjonskontrollhensyn
 ```bash
 # .gitignore
-.azure/*/config.json         # Miljøkonfigurasjoner (inneholder ressurs-IDer)
-.azure/*/.env               # Miljøvariabler (kan inneholde hemmeligheter)
-.env                        # Lokal miljøfil
+.azure/*/config.json         # Environment configs (contain resource IDs)
+.azure/*/.env               # Environment variables (may contain secrets)
+.env                        # Local environment file
 ```
 
-### 4. Konfigurasjonsdokumentasjon
+### 4. Dokumentasjon av konfigurasjon
 Dokumenter konfigurasjonen i `CONFIG.md`:
 ```markdown
 # Configuration Guide
@@ -615,28 +622,28 @@ Dokumenter konfigurasjonen i `CONFIG.md`:
 
 ### Øvelse 1: Multi-miljø konfigurasjon (15 minutter)
 
-**Mål**: Lage og konfigurere tre miljøer med forskjellige innstillinger
+**Mål**: Opprett og konfigurer tre lokale miljøer med ulike verdier. Start i et initialisert prosjekt; bruk ubrukte navn hvis disse allerede finnes. Disse applikasjonsspesifikke verdiene endrer ikke telemetri/kjøretidsinnstillinger før malen din bruker dem.
 
 ```bash
-# Opprett utviklingsmiljø
+# Create development environment
 azd env new dev
 azd env set LOG_LEVEL debug
 azd env set ENABLE_TELEMETRY false
 azd env set APP_INSIGHTS_SAMPLING 100
 
-# Opprett staging-miljø
+# Create staging environment
 azd env new staging
 azd env set LOG_LEVEL info
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 50
 
-# Opprett produksjonsmiljø
+# Create production environment
 azd env new production
 azd env set LOG_LEVEL error
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 10
 
-# Verifiser hvert miljø
+# Verify each environment
 azd env select dev && azd env get-values
 azd env select staging && azd env get-values
 azd env select production && azd env get-values
@@ -648,51 +655,50 @@ azd env select production && azd env get-values
 - [ ] Kan bytte mellom miljøer uten feil
 - [ ] `azd env list` viser alle tre miljøene
 
-### Øvelse 2: Hemmelighetshåndtering (10 minutter)
+### Øvelse 2: Key Vault hemmelighetsreferanser (10-20 minutter)
 
-**Mål**: Øve på sikker konfigurasjon med sensitiv data
+**Mål**: Lagre en Key Vault-referanse i stedet for ren tekst. **Startpunkt:** et initialisert miljø, Azure-pålogging og tilgang til en Key Vault med tillatelser til å opprette/lese en dummy-hemmlighet. Vault-operasjoner kan medføre kostnader.
 
 ```bash
-# Sett hemmeligheter (vises ikke i utdata)
-azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
-azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+# Follow the interactive prompts; use a dummy training value, not a production key
+azd env set-secret TRAINING_API_KEY
 
-# Sett ikke-hemmelig konfigurasjon
+# Set non-secret config
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# Vis miljø (hemmeligheter skal sensureres)
-azd env get-values
-
-# Bekreft at hemmeligheter er lagret
-azd env get DB_PASSWORD  # Skal vise faktisk verdi
+# Inspect .azure/<environment>/.env locally: TRAINING_API_KEY should
+# contain an azd Key Vault reference, not the dummy secret text.
+# Do not print resolved values in CI or shared terminal logs.
 ```
 
 **Suksesskriterier:**
-- [ ] Hemmeligheter lagres uten å vises i terminalen
-- [ ] `azd env get-values` viser hemmeligheter med utelatt verdi
-- [ ] Individuell `azd env get <SECRET_NAME>` henter faktisk verdi
+- [ ] Interaktiv kommando rapporterer valgt vault og hemmelighetsreferanse
+- [ ] Lokal `.env` inneholder en referanse i stedet for dummy-hemmeligheten
+- [ ] Kan forklare at kjøringsidentitet/RBAC og forbruk fortsatt må konfigureres
+
+**Vanlige problemer:** en 403 krever riktig vault data-plane-rolle og spredningstid; `azd env set ... --secret` er ikke en gyldig kommando. Vanlig `get-values`/`get-value`-utdata må ikke antas å være skjult. Fjern treningsreferansen med `azd env unset TRAINING_API_KEY`; dette sletter ikke vault-hemmeligheten, som du må rydde separat hvis du opprettet den.
 
 ## Neste steg
 
-- [Ditt første prosjekt](first-project.md) - Bruk konfigurasjon i praksis
+- [Ditt første prosjekt](../chapter-01-foundation/first-project.md) - Bruk konfigurasjon i praksis
 - [Distribusjonsveiledning](../chapter-04-infrastructure/deployment-guide.md) - Bruk konfigurasjon for distribusjon
-- [Provisionering av ressurser](../chapter-04-infrastructure/provisioning.md) - Produksjonsklare konfigurasjoner
+- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - Konfigurasjoner klare for produksjon
 
 ## Referanser
 
 - [azd Konfigurasjonsreferanse](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [azure.yaml Skjema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Miljøvariabler](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [azure.yaml-skjema](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-schema)
+- [Miljøvariabler](https://learn.microsoft.com/azure/developer/azure-developer-cli/manage-environment-variables)
 
 ---
 
 **Kapittelnavigasjon:**
-- **📚 Kursforside**: [AZD For Nybegynnere](../../README.md)
-- **📖 Nåværende kapittel**: Kapittel 3 - Konfigurasjon & Autentisering
-- **⬅️ Forrige**: [Ditt første prosjekt](first-project.md)
-- **➡️ Neste kapittel**: [Kapittel 4: Infrastruktur som kode](../chapter-04-infrastructure/deployment-guide.md)
-- **Neste leksjon**: [Ditt første prosjekt](first-project.md)
+- **📚 Kurs Hjem**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende Kapittel**: Kapittel 3 - Konfigurasjon & Autentisering
+- **⬅️ Forrige**: [Ditt Første Prosjekt](../chapter-01-foundation/first-project.md)
+- **➡️ Neste Kapittel**: [Kapittel 4: Infrastruktur som Kode](../chapter-04-infrastructure/deployment-guide.md)
+- **Neste Leksjon**: [Autentisering & Sikkerhet](authsecurity.md)
 
 ---
 

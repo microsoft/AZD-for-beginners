@@ -1,10 +1,10 @@
 # AZD for AI Developers Workshop
 
-> Validated against `azd 1.27.1` in July 2026.
+> Source guidance reviewed against AZD 1.37.2 on November 4, 2026. Screenshots are illustrative; service availability, portal labels, and template defaults can change.
 
 > [!IMPORTANT]  
 > **This workshop is instrumented with a workshop guide that you can preview in your local browser. To get started, open the repo in GitHub Codespaces, a dev container, or a local clone with MkDocs installed—then wait until you see an active VS Code terminal and type:**  
-> `mkdocs serve > /dev/null 2>&1 &`  
+> From the course repository root, install `requirements-dev.txt`, then run `python -m mkdocs serve --config-file workshop/mkdocs.yml` in the foreground.
 > **You should see a pop-up dialog to open the preview page in a browser.**
 
 Welcome to the hands-on workshop for learning Azure Developer CLI (AZD) with a focus on AI application deployment. This workshop helps you gain an applied understanding of AZD templates in 3 steps:
@@ -17,10 +17,10 @@ Over the course of this workshop, you will also be introduced to core developer 
 
 | | | 
 |:---|:---|
-| **📚 Course Home**| [AZD For Beginners](../README.md)|
+| **📚 Course Home**| [AZD For Beginners](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md)|
 | **📖 Documentation** | [Get started with AI templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
 | **🛠️AI Templates** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
-|**🚀 Next Steps** | [Take The Challenge](#workshop-challenge) |
+|**🚀 Next Steps** | [Take The Challenge](instructions/7-Wrap-up.md#4-workshop-challenge) |
 | | |
 
 ## Workshop Overview

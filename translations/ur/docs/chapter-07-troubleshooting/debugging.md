@@ -1,77 +1,72 @@
-# AZD ڈپلائمنٹس کے لیے ڈی بگنگ گائیڈ
+# AZD تعیناتیوں کے لیے ڈیبگنگ گائیڈ
 
 **باب نیویگیشن:**
 - **📚 کورس ہوم**: [ابتدائیوں کے لیے AZD](../../README.md)
-- **📖 موجودہ باب**: باب 7 - مسائل کا حل اور ڈی بگنگ
+- **📖 موجودہ باب**: باب 7 - خرابیوں کا سراغ لگانا اور ڈیبگنگ
 - **⬅️ پچھلا**: [عام مسائل](common-issues.md)
-- **➡️ اگلا**: [AI مخصوص خرابیوں کا ازالہ](ai-troubleshooting.md)
-- **🚀 اگلا باب**: [باب 8: پروڈکشن اور انٹرپرائز پیٹرنز](../chapter-08-production/production-ai-practices.md)
+- **➡️ اگلا**: [AI-مخصوص خرابیوں کا سراغ لگانا](ai-troubleshooting.md)
+- **🚀 اگلا باب**: [باب 8: پروڈکشن اور انٹرپرائز کے نمونے](../chapter-08-production/production-ai-practices.md)
 
 ## تعارف
 
-یہ جامع گائیڈ Azure Developer CLI ڈپلائمنٹس کے ساتھ پیچیدہ مسائل کی تشخیص اور حل کے لیے جدید ڈی بگنگ حکمت عملیاں، ٹولز اور تکنیکیں فراہم کرتی ہے۔ نظاماتی ٹربل شوٹنگ طریقہ کار، لاگ تجزیہ کی تکنیکیں، پرفارمنس پروفائلنگ، اور پیچیدہ مسائل کے مؤثر حل کے لیے جدید تشخیصی ٹولز سیکھیں۔
+یہ جامع گائیڈ ایزور ڈیویلپر CLI کی تعیناتیوں کے ساتھ پیچیدہ مسائل کی تشخیص اور حل کے لیے جدید ڈیبگنگ حکمت عملیاں، اوزار، اور تکنیکیں فراہم کرتا ہے۔ نظامی خرابیوں کے سراغ لگانے کے طریقے، لاگ تجزیہ کی تکنیکیں، کارکردگی کی پروفائلنگ، اور جدید تشخیصی اوزار سیکھیں تاکہ تعیناتی اور رن ٹائم مسائل کو مؤثر طریقے سے حل کیا جا سکے۔
 
 ## سیکھنے کے مقاصد
 
-اس گائیڈ کو مکمل کرنے کے بعد، آپ:
-- Azure Developer CLI کے مسائل کے لیے منظم ڈی بگنگ طریقہ کار میں مہارت حاصل کریں
-- جدید لاگ کنفیگریشن اور لاگ تجزیہ کی تکنیکوں کو سمجھیں
-- کارکردگی کی پروفائلنگ اور مانیٹرنگ حکمت عملیاں نافذ کریں
-- پیچیدہ مسائل کے حل کے لیے Azure کے تشخیصی ٹولز اور سروسز استعمال کریں
-- نیٹ ورک ڈی بگنگ اور سیکیورٹی ٹربل شوٹنگ تکنیکیں لاگو کریں
-- مسائل کی پیشگی نشاندہی کے لیے جامع مانیٹرنگ اور الارٹنگ ترتیب دیں
+اس گائیڈ کو مکمل کرکے آپ:
+- ایزور ڈیویلپر CLI مسائل کے لیے نظامی ڈیبگنگ طریقہ کار میں مہارت حاصل کریں گے
+- جدید لاگنگ کنفیگریشن اور لاگ تجزیہ کی تکنیکوں کو سمجھیں گے
+- کارکردگی کی پروفائلنگ اور نگرانی کی حکمت عملی نافذ کریں گے
+- پیچیدہ مسئلہ کے حل کے لیے ایزور تشخیصی اوزار اور خدمات استعمال کریں گے
+- نیٹ ورک ڈیبگنگ اور سیکیورٹی خرابیوں کے سراغ لگانے کی تکنیکیں لاگو کریں گے
+- غیر متوقع مسئلہ کی شناخت کے لیے مکمل نگرانی اور الرٹنگ کو ترتیب دیں گے
 
 ## سیکھنے کے نتائج
 
-مکمل کرنے پر، آپ قابل ہوں گے:
-- پیچیدہ ڈپلائمنٹ مسائل کو منظم انداز میں ڈی بگ کرنے کے لیے TRIAGE طریقہ کار لاگو کریں
-- جامع لاگنگ اور ٹریسنگ معلومات کو کنفیگر اور تجزیہ کریں
-- Azure Monitor، Application Insights، اور تشخیصی ٹولز کو مؤثر طریقے سے استعمال کریں
-- نیٹ ورک کنیکٹیویٹی، توثیق، اور اجازت کے مسائل کو خود مختار طریقے سے ڈی بگ کریں
-- کارکردگی کی مانیٹرنگ اور بہتر بنانے کی حکمت عملیاں نافذ کریں
-- دہرائے جانے والے مسائل کے لیے کسٹم ڈی بگنگ اسکرپٹس اور آٹومیشن بنائیں
+مکمل کرنے کے بعد، آپ قابل ہوں گے:
+- پیچیدہ تعیناتی مسائل کو نظامی طور پر ڈیبگ کرنے کے لیے TRIAGE طریقہ کار کو لاگو کریں
+- مکمل لاگنگ اور ٹریسنگ معلومات کو ترتیب دینے اور تجزیہ کرنے کے قابل ہوں
+- ایزور مانیٹر، اپلیکیشن انسائیٹس، اور تشخیصی اوزار مؤثر طریقے سے استعمال کریں
+- نیٹ ورک کنیکٹوٹی، تصدیق، اور اجازت کے مسائل کو آزادانہ طور پر ڈیبگ کریں
+- کارکردگی کی نگرانی اور بہتر بنانے کی حکمت عملی نافذ کریں
+- بار بار آنے والے مسائل کے لیے حسب ضرورت ڈیبگنگ اسکرپٹس اور خودکاری تیار کریں
 
-## ڈی بگنگ طریقہ کار
+## ڈیبگنگ طریقہ کار
 
-### TRIAGE طریقۂ کار
+### TRIAGE طریقہ
 - **T**ime: مسئلہ کب شروع ہوا؟
-- **R**eproduce: کیا آپ اسے مستقل طور پر دوبارہ پیدا کر سکتے ہیں؟
-- **I**solate: کون سا جز ناکام ہو رہا ہے؟
+- **R**eproduce: کیا آپ مستقل طور پر اسے دوہرا سکتے ہیں؟
+- **I**solate: کون سا جزو ناکام ہو رہا ہے؟
 - **A**nalyze: لاگز ہمیں کیا بتاتے ہیں؟
 - **G**ather: تمام متعلقہ معلومات جمع کریں
-- **E**scalate: اضافی مدد طلب کرنے کا وقت کب ہے؟
+- **E**scalate: مزید مدد کب طلب کریں
 
-## ڈیبگ موڈ کو فعال کرنا
+## ڈیبگ موڈ فعال کرنا
 
-### ماحولی متغیرات
+> **حد:** یہ تشخیصی مثالیں ہیں جنہیں آپ اپنی مرضی کے مطابق بنا سکتے ہیں، فراہم کردہ اسکرپٹس کا مجموعہ نہیں۔ وسائل کے نام/شناختی کو تبدیل کریں؛ شیل بلاکس کے لیے Bash استعمال کریں۔ `--debug` کے نتائج اور ماحول کی قدریں حساس معلومات پر مشتمل ہو سکتی ہیں—اشتراک سے پہلے جائزہ لیں/حذف کریں۔ ایسے مثالوں جو تعیناتی، رول بیک، یا کنفیگریشن میں تبدیلی کرتے ہیں، آپریٹر کی صراحت سے منظوری درکار ہوتی ہے۔
+
+### ماحولیاتی متغیرات
 ```bash
-# جامع ڈیبگنگ کو فعال کریں
-export AZD_DEBUG=true
-export AZD_LOG_LEVEL=debug
-export AZURE_CORE_DIAGNOSTICS_DEBUG=true
+# Enable diagnostics on the command under investigation
+azd show --debug
+az account show --debug
 
-# Azure CLI کے لیے ڈیبگنگ
-export AZURE_CLI_DIAGNOSTICS=true
-
-# صاف تر آؤٹ پٹ کے لیے ٹیلی میٹری کو غیر فعال کریں
+# Disable telemetry for cleaner output
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### ڈی بگ کنفیگریشن
+### ڈیبگ کنفیگریشن
 ```bash
-# ڈی بگ کنفیگریشن کو عالمی طور پر سیٹ کریں
-azd config set debug.enabled true
-azd config set debug.logLevel debug
-azd config set debug.verboseOutput true
-
-# ٹریس لاگنگ کو فعال کریں
-azd config set trace.enabled true
-azd config set trace.outputPath ./debug-traces
+# Inspect supported flags rather than setting arbitrary config keys
+azd show --help
+azd config list
 ```
+
+`azd config set` عشوائی چابیاں اسٹور کر سکتا ہے؛ اس کا مطلب یہ نہیں ہے کہ `debug.enabled`، `debug.logLevel`، یا `trace.outputPath` معاون ترتیبات ہیں۔ جاری کردہ کمانڈ کے `--debug` جھنڈے کا استعمال کریں۔
 
 ## 📊 لاگ تجزیہ کی تکنیکیں
 
-### لاگ لیولز کو سمجھنا
+### لاگ کی سطح کو سمجھنا
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -81,68 +76,69 @@ ERROR   - Error conditions that need attention
 FATAL   - Critical errors that cause application termination
 ```
 
-### منظم لاگ تجزیہ
+### ساخت بند لاگ تجزیہ
 ```bash
-# Azure Monitor کے ساتھ لاگز دیکھیں (azd monitor کے ذریعے)
+# View logs with Azure Monitor (via azd monitor)
 azd monitor --logs
 
-# ایپلیکیشن کے لاگز حقیقی وقت میں دیکھیں
+# Open Application Insights Live Metrics (not a terminal log stream)
 azd monitor --live
 
-# تفصیلی لاگ تجزیے کے لیے، اپنی App Service یا Container App کے ساتھ Azure CLI استعمال کریں:
-# App Service کے لاگز
-az webapp log tail --name <app-name> --resource-group <rg-name>
+# For detailed log analysis, use Azure CLI with your App Service or Container App:
+# App Service logs
+az webapp log tail --name "$APP_NAME" --resource-group "$RG_NAME"
 
-# Container App کے لاگز
-az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+# Container App logs
+az containerapp logs show --name "$APP_NAME" --resource-group "$RG_NAME" --follow
 
-# تجزیے کے لیے Application Insights کے لاگز برآمد کریں
+# Export Application Insights logs for analysis
 az monitor app-insights query \
-    --app <app-insights-name> \
+    --app "$APPI_NAME" \
+    --resource-group "$RG_NAME" \
     --analytics-query "traces | where timestamp > ago(1h) | where severityLevel >= 3"
 ```
 
-### لاگ کوریلیشن
+### لاگ کی ہم آہنگی
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Azure Monitor استعمال کرتے ہوئے مختلف سروسز کے درمیان لاگز کو مربوط کریں
+# correlate-logs.sh - Correlate logs across services using Azure Monitor
 
 TRACE_ID=$1
-APP_INSIGHTS_NAME=$2
+APP_INSIGHTS_ID=$2 # Application ID (GUID), not an ambiguous component name
 
-if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_NAME" ]; then
-    echo "Usage: $0 <trace-id> <app-insights-name>"
+if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_ID" ]; then
+    echo "Usage: $0 <trace-id> <application-id>"
     exit 1
 fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Application Insights میں مربوط لاگز تلاش کریں
+# Search Application Insights for correlated logs
 az monitor app-insights query \
-    --app "$APP_INSIGHTS_NAME" \
+    --app "$APP_INSIGHTS_ID" \
     --analytics-query "union traces, exceptions, requests, dependencies | where operation_Id == '$TRACE_ID' | order by timestamp asc"
 
-# Azure کی سرگرمی لاگز تلاش کریں
-az monitor activity-log list --correlation-id "$TRACE_ID"
+# Activity Log correlation IDs describe management operations and are not the
+# same as application trace IDs. Obtain them from the failed ARM operation.
 ```
 
-## 🛠️ جدید ڈی بگنگ ٹولز
+## 🛠️ جدید ڈیبگنگ اوزار
 
-### Azure Resource Graph استفسارات
+### ایزور ریسورس گراف سوالات
 ```bash
-# ٹیگز کے ذریعے وسائل تلاش کریں
+# Query resources by tags
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# ناکام تعیناتیاں تلاش کریں
+# Find resource groups with non-success/missing provisioning state (NOT deployments)
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# وسائل کی صحت چیک کریں
+# Check resource health
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
-### نیٹ ورک ڈی بگنگ
+### نیٹ ورک ڈیبگنگ
 ```bash
-# سروسز کے درمیان کنیکٹوٹی کی جانچ
+# Test connectivity between services
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -157,20 +153,21 @@ test_connectivity() {
         --output table
 }
 
-# استعمال
-test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
+# Usage
+# Source must be a supported Network Watcher source, e.g. a configured VM ID.
+test_connectivity "/subscriptions/.../providers/Microsoft.Compute/virtualMachines/myvm" "myapp-api.azurewebsites.net" 443
 ```
 
-### کنٹینر ڈی بگنگ
+### کنٹینر ڈیبگنگ
 ```bash
-# کنٹینر ایپ کے مسائل کی تشخیص کریں
+# Debug container app issues
 debug_container() {
     local app_name=$1
     local resource_group=$2
     
     echo "=== Container App Status ==="
     az containerapp show --name "$app_name" --resource-group "$resource_group" \
-        --query "properties.{provisioningState:provisioningState,runningState:runningState}"
+        --query "properties.{provisioningState:provisioningState,runningStatus:runningStatus}"
     
     echo "=== Container App Revisions ==="
     az containerapp revision list --name "$app_name" --resource-group "$resource_group" \
@@ -181,12 +178,12 @@ debug_container() {
 }
 ```
 
-### ڈیٹا بیس کنکشن ڈی بگنگ
+### ڈیٹا بیس کنکشن ڈیبگنگ
 ```bash
-# ڈیٹا بیس کی کنیکٹیویٹی کو ڈیبگ کریں
+# Debug database connectivity
 debug_database() {
     local db_server=$1
-    local db_name=$2
+    local resource_group=$2
     
     echo "=== Database Server Status ==="
     az postgres flexible-server show --name "$db_server" --resource-group "$resource_group" \
@@ -200,26 +197,15 @@ debug_database() {
 }
 ```
 
-## 🔬 کارکردگی کی ڈی بگنگ
+## 🔬 کارکردگی کی ڈیبگنگ
 
-### ایپلیکیشن کارکردگی مانیٹرنگ
+### ایپلیکیشن کارکردگی کی نگرانی
 ```bash
-# اپلیکیشن انسائٹس کی ڈیبگنگ کو فعال کریں
-export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
-  "role": {
-    "name": "myapp-debug"
-  },
-  "sampling": {
-    "percentage": 100
-  },
-  "instrumentation": {
-    "logging": {
-      "level": "DEBUG"
-    }
-  }
-}'
+# SDK settings are language-specific. For Python OpenTelemetry role naming,
+# set before configuring the Azure Monitor distro:
+export OTEL_SERVICE_NAME=myapp-debug
 
-# حسبِ ضرورت کارکردگی کی نگرانی
+# Custom performance monitoring
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -227,8 +213,10 @@ monitor_performance() {
     echo "Monitoring $endpoint for $duration seconds..."
     
     for i in $(seq 1 $duration); do
-        response_time=$(curl -o /dev/null -s -w "%{time_total}" "$endpoint")
-        status_code=$(curl -o /dev/null -s -w "%{http_code}" "$endpoint")
+        # Capture status and duration from the SAME bounded request.
+        measurement=$(curl --max-time 10 -o /dev/null -s -w "%{http_code},%{time_total}" "$endpoint") || return 1
+        status_code=${measurement%,*}
+        response_time=${measurement#*,}
         
         echo "$(date '+%Y-%m-%d %H:%M:%S') - Status: $status_code, Response Time: ${response_time}s"
         sleep 1
@@ -238,31 +226,29 @@ monitor_performance() {
 
 ### وسائل کے استعمال کا تجزیہ
 ```bash
-# وسائل کے استعمال کی نگرانی کریں
+# Monitor resource usage
 monitor_resources() {
-    local resource_group=$1
+    local plan_id=$1 # Full Microsoft.Web/serverfarms resource ID
     
     echo "=== CPU Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "CpuPercentage" \
+        --resource "$plan_id" \
+        --metrics "CpuPercentage" \
         --interval PT1M \
         --aggregation Average
     
     echo "=== Memory Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "MemoryPercentage" \
+        --resource "$plan_id" \
+        --metrics "MemoryPercentage" \
         --interval PT1M \
         --aggregation Average
 }
 ```
 
-## 🧪 ٹیسٹنگ اور تصدیق
+## 🧪 جانچ اور تصدیق
 
-### انٹیگریشن ٹیسٹ ڈی بگنگ
+### انضمام کے ٹیسٹ کی ڈیبگنگ
 ```bash
 #!/bin/bash
 # debug-integration-tests.sh
@@ -271,27 +257,27 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# ڈیبگ ماحول مرتب کریں
+# Set debug environment
 export NODE_ENV=test
-export DEBUG=*
+export DEBUG='app:*'
 export LOG_LEVEL=debug
 
-# سروس کے اینڈ پوائنٹس حاصل کریں
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Get service endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl // .services.api.ingresUrl')
 
 echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# ہیلتھ اینڈ پوائنٹس کی جانچ کریں
+# Test health endpoints
 test_health() {
     local service=$1
     local url=$2
     
     echo "Testing $service health..."
     
-    response=$(curl -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
+    response=$(curl --max-time 10 -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
     status_code=$(echo $response | cut -d',' -f1)
     response_time=$(echo $response | cut -d',' -f2)
     
@@ -303,17 +289,17 @@ test_health() {
     fi
 }
 
-# ٹیسٹ چلائیں
+# Run tests
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# کسٹم انٹیگریشن ٹیسٹس چلائیں
+# Run custom integration tests
 npm run test:integration
 ```
 
-### ڈی بگنگ کے لیے لوڈ ٹیسٹنگ
+### ڈیبگنگ کے لیے لوڈ ٹیسٹنگ
 ```bash
-# پرفارمنس کی رکاوٹوں کی نشاندہی کے لیے سادہ لوڈ ٹیسٹ
+# Simple load test to identify performance bottlenecks
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -321,42 +307,40 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Apache Bench استعمال کیا جا رہا ہے (انسٹال: apt-get install apache2-utils)
+    # Using Apache Bench (install: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # اہم میٹرکس نکالیں
+    # Extract key metrics
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # ناکامیوں کے لیے چیک کریں
+    # Check for failures
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
 
-## 🔧 انفراسٹرکچر ڈی بگنگ
+## 🔧 بنیادی ڈھانچے کی ڈیبگنگ
 
-### Bicep ٹیمپلیٹ ڈی بگنگ
+### بسپ ٹیمپلیٹ کی ڈیبگنگ
 ```bash
-# تفصیلی آؤٹ پٹ کے ساتھ Bicep ٹیمپلیٹس کی توثیق کریں
+# Validate Bicep templates with detailed output
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # نحو کی توثیق
+    # Syntax validation
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # لنٹ کی توثیق
+    # Lint validation
     az bicep lint --file "$template_file"
     
-    # What-if کی تعیناتی
-    az deployment group what-if \
-        --resource-group "myapp-dev-rg" \
-        --template-file "$template_file" \
-        --parameters @main.parameters.json
+    # From the initialized project: azd resolves its parameter substitutions
+    # and deployment scope. Review hooks before provisioning preview.
+    azd provision --preview
 }
 
-# ٹیمپلیٹ کی تعیناتی کو ڈیبگ کریں
+# Debug template deployment
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -377,52 +361,44 @@ debug_deployment() {
 
 ### وسائل کی حالت کا تجزیہ
 ```bash
-# وسائل کی حالتوں میں عدم مطابقت کے لیے تجزیہ کریں
+# Analyze resource states for inconsistencies
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # تمام وسائل کو ان کی حالتوں کے ساتھ فہرست کریں
+    # List all resources with their states
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # ناکام وسائل کی جانچ کریں
-    failed_resources=$(az resource list --resource-group "$resource_group" \
-        --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
-        --output tsv)
-    
-    if [ -n "$failed_resources" ]; then
-        echo "❌ Failed resources found:"
-        echo "$failed_resources"
-    else
-        echo "✅ All resources provisioned successfully"
-    fi
+    # Generic list responses often omit properties/provisioningState.
+    # Null is unknown, not failure; inspect the service-specific show command
+    # and deployment operations for the affected resource.
+    az deployment group list --resource-group "$resource_group" \
+        --query "[].{name:name,state:properties.provisioningState}" -o table
 }
 ```
 
-## 🔒 سیکیورٹی ڈی بگنگ
+## 🔒 سیکیورٹی ڈیبگنگ
 
-### تصدیقی فلو ڈی بگنگ
+### تصدیقی فلو کی ڈیبگنگ
 ```bash
-# Azure کی تصدیق کی خرابی دور کریں
+# Debug Azure authentication
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
     
     echo "=== Token Information ==="
-    token=$(az account get-access-token --query accessToken -o tsv)
-    
-    # JWT ٹوکن کو ڈی کوڈ کریں (jq اور base64 درکار ہیں)
-    echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
+    # Do not print/decode bearer tokens into logs.
+    az account get-access-token --query "{expiresOn:expiresOn,tenant:tenant,subscription:subscription}" -o json
     
     echo "=== Role Assignments ==="
     user_id=$(az account show --query user.name -o tsv)
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Key Vault تک رسائی کی خرابی دور کریں
+# Debug Key Vault access
 debug_keyvault() {
     local vault_name=$1
     
@@ -438,16 +414,16 @@ debug_keyvault() {
 }
 ```
 
-### نیٹ ورک سیکیورٹی ڈی بگنگ
+### نیٹ ورک سیکیورٹی کی ڈیبگنگ
 ```bash
-# نیٹ ورک سیکیورٹی گروپس کو ڈیبگ کریں
+# Debug network security groups
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # سیکیورٹی رولز چیک کریں
+    # Check security rules
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -456,30 +432,27 @@ debug_network_security() {
 }
 ```
 
-## 📱 ایپلیکیشن مخصوص ڈی بگنگ
+## 📱 ایپلیکیشن-مخصوص ڈیبگنگ
 
-### Node.js ایپلیکیشن ڈی بگنگ
+### Node.js ایپلیکیشن کی ڈیبگنگ
 ```javascript
-// debug-middleware.js - Express کے لیے ڈیبگنگ مڈل ویئر
+// debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // درخواست کی تفصیلات لاگ کریں
+    // Log request details
     debug(`${req.method} ${req.url}`, {
-        headers: req.headers,
-        query: req.query,
-        body: req.body,
-        userAgent: req.get('User-Agent'),
-        ip: req.ip
+        // Do not log authorization headers, bodies, query strings, or client IPs.
+        route: req.route?.path || '(unmatched)'
     });
     
-    // res.json کو اوور رائیڈ کریں تاکہ جوابات لاگ کیے جائیں
+    // Override res.json to log responses
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
-        debug(`Response ${res.statusCode} in ${duration}ms`, data);
+        debug(`Response ${res.statusCode} in ${duration}ms`);
         return originalJson.call(this, data);
     };
     
@@ -487,16 +460,18 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### ڈیٹا بیس کوئری ڈی بگنگ
+### ڈیٹا بیس کے سوالات کی ڈیبگنگ
 ```javascript
-// database-debug.js - ڈیٹا بیس ڈیبگنگ کے اوزار
+// database-debug.js - Database debugging utilities
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
 class DebuggingPool extends Pool {
     async query(text, params) {
         const start = Date.now();
-        debug('Executing query:', { text, params });
+        // Promise-based query(text, params) demo only; not a drop-in replacement
+        // for node-postgres callback/streaming overloads. Avoid query parameters.
+        debug('Executing query');
         
         try {
             const result = await super.query(text, params);
@@ -517,12 +492,12 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 ہنگامی ڈی بگنگ طریقہ کار
+## 🚨 ہنگامی ڈیبگنگ کے طریقہ کار
 
-### پروڈکشن کے مسائل کا جواب
+### پروڈکشن مسئلہ کا جواب
 ```bash
 #!/bin/bash
-# emergency-debug.sh - ہنگامی پیداواری ڈیبگنگ
+# emergency-debug.sh - Emergency production debugging
 
 set -e
 
@@ -538,34 +513,34 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# صحیح ماحول میں سوئچ کریں
+# Switch to correct environment
 azd env select "$ENVIRONMENT"
 
-# اہم معلومات جمع کریں
+# Collect critical information
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
-cat emergency-status.json | jq '.services[].endpoint'
+cat emergency-status.json | jq '.services[] | .ingressUrl // .ingresUrl'
 
 echo "=== 2. Application Health ==="
-for endpoint in $(cat emergency-status.json | jq -r '.services[].endpoint'); do
+for endpoint in $(cat emergency-status.json | jq -r '.services[] | (.ingressUrl // .ingresUrl // empty)'); do
     echo "Testing $endpoint/health"
     curl -f "$endpoint/health" || echo "❌ Health check failed for $endpoint"
 done
 
 echo "=== 3. Recent Errors ==="
-# غلطیوں کے لاگز کے لیے Azure Monitor استعمال کریں
+# Use Azure Monitor for error logs
 azd monitor --logs
 echo "Check Application Insights for detailed error analysis"
 
 echo "=== 4. Resource Status ==="
-az resource list --resource-group "$RESOURCE_GROUP" \
-    --query "[?properties.provisioningState != 'Succeeded']" > failed-resources.json
+az deployment group list --resource-group "$RESOURCE_GROUP" \
+    --query "[?properties.provisioningState == 'Failed']" > failed-resources.json
 
-if [ -s failed-resources.json ]; then
-    echo "❌ Failed resources found!"
+if jq -e 'length > 0' failed-resources.json >/dev/null; then
+    echo "❌ Failed group deployments found (inspect subscription deployments too)!"
     cat failed-resources.json
 else
-    echo "✅ All resources are healthy"
+    echo "No failed group deployment records found; resource health is not established."
 fi
 
 echo "=== 5. Recent Deployments ==="
@@ -576,58 +551,59 @@ az deployment group list --resource-group "$RESOURCE_GROUP" \
 echo "Emergency debugging completed: $(date)"
 echo "Files generated:"
 echo "  - emergency-status.json"
-echo "  - emergency-errors.log"
 echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
-### رول بیک طریقہ کار
+### رول بیک کے طریقہ کار
 ```bash
-# فوری رول بیک اسکرپٹ
+# Quick rollback script
 quick_rollback() {
     local environment=$1
     local previous_commit=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment"
     
-    # ماحول تبدیل کریں
+    # Switch environment
     azd env select "$environment"
     
-    # Git کے ذریعے رول بیک (AZD میں بلٹ ان رول بیک موجود نہیں ہے)
+    # Rollback using Git (AZD doesn't have built-in rollback)
     git checkout "$previous_commit"
-    azd deploy
+    azd deploy || return 1
     
-    # رول بیک کی توثیق کریں
+    # Verify rollback
     echo "Verifying rollback..."
     azd show
     
-    # اہم اینڈ پوائنٹس کی جانچ کریں
-    WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-    curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
+    # Test critical endpoints
+    WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl') || return 1
+    curl --max-time 10 -f "$WEB_URL/health" || { echo "❌ Rollback verification failed"; return 1; }
     
     echo "✅ Rollback completed"
 }
 ```
 
-## 📊 ڈی بگنگ ڈیش بورڈز
+یہ صرف کوڈ کا رول بیک بنیادی ڈھانچے، ڈیٹا بیس مائیگریشنز، یا سیکرٹس کو واپس نہیں کرتا۔ صاف ورکٹری استعمال کریں، شروع ہونے والے کمیٹ کو ریکارڈ کریں، اور بعد میں اسے بحال کریں؛ کمانڈ موجودہ مخزن میں منتخب کمیٹ چیک آؤٹ کرتی ہے۔
 
-### کسٹم مانیٹرنگ ڈیش بورڈ
+## 📊 ڈیبگنگ ڈیش بورڈز
+
+### حسب ضرورت مانیٹرنگ ڈیش بورڈ
 ```bash
-# ڈیبگ کرنے کے لیے Application Insights کے استعلامات بنائیں
+# Create Application Insights queries for debugging
 create_debug_queries() {
-    local app_insights_name=$1
+    local app_insights_name=$1 # Use the Application ID GUID to avoid name ambiguity
     
-    # غلطیوں کے لیے استعلام
+    # Query for errors
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # کارکردگی کے مسائل کے لیے استعلام
+    # Query for performance issues
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # انحصار کی ناکامیوں کے لیے استعلام
+    # Query for dependency failures
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
@@ -636,15 +612,15 @@ create_debug_queries() {
 
 ### لاگ ایگریگیشن
 ```bash
-# متعدد Azure ذرائع سے لاگز کو جمع کریں
+# Aggregate logs from multiple Azure sources
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
-    local app_insights_name=$1
+    local app_insights_name=$1 # Application ID GUID
     
     echo "Aggregating logs to $output_file"
     
     {
-        echo '{"source": "azure-activity", "logs": '
+        echo '[{"source": "azure-activity", "logs": '
         az monitor activity-log list --start-time "$(date -d '1 hour ago' -Iseconds)" --output json
         echo '}'
         
@@ -654,6 +630,7 @@ aggregate_logs() {
                 --analytics-query "union traces, exceptions | where timestamp > ago(1h)" --output json
             echo '}'
         fi
+        echo ']'
     } > "$output_file"
     
     echo "Logs aggregated in $output_file"
@@ -662,20 +639,21 @@ aggregate_logs() {
 
 ## 🔗 جدید وسائل
 
-### کسٹم ڈی بگ اسکرپٹس
-ایک `scripts/debug/` ڈائریکٹری بنائیں جس میں:
-- `health-check.sh` - جامع ہیلتھ چیکنگ
+### حسب ضرورت ڈیبگ اسکرپٹس
+ایک `scripts/debug/` ڈائرکٹری بنائیں جس میں شامل ہوں:
+- `health-check.sh` - مکمل صحت جانچ
 - `performance-test.sh` - خودکار کارکردگی کی جانچ
 - `log-analyzer.py` - جدید لاگ پارسنگ اور تجزیہ
-- `resource-validator.sh` - انفراسٹرکچر کی توثیق
+- `resource-validator.sh` - بنیادی ڈھانچے کی تصدیق
 
-### مانیٹرنگ انٹیگریشن
+### نگرانی کا انضمام
 ```yaml
 # azure.yaml - Add debugging hooks
 hooks:
   postdeploy:
     shell: sh
     run: |
+      set -e
       echo "Running post-deployment debugging..."
       ./scripts/debug/health-check.sh
       ./scripts/debug/performance-test.sh
@@ -686,25 +664,25 @@ hooks:
       fi
 ```
 
-## بہترین مشقیں
+## بہترین طریقے
 
-1. **ہمیشہ غیر پروڈکشن ماحول میں ڈی بگ لاگنگ کو فعال کریں**
-2. **مسائل کے لیے قابلِ تکرار ٹیسٹ کیسز بنائیں**
-3. **اپنی ٹیم کے لیے ڈی بگنگ طریقہ کار دستاویزی بنائیں**
-4. **ہیلتھ چیکس اور مانیٹرنگ کو خودکار بنائیں**
-5. **اپلیکیشن کی تبدیلیوں کے ساتھ ڈی بگ ٹولز کو اپ ڈیٹ رکھیں**
-6. **غیر واقعاتی اوقات میں ڈی بگنگ طریقہ کار کی مشق کریں**
+1. **ہمیشہ غیر پیداواری ماحول میں ڈیبگ لاگنگ کو فعال کریں**
+2. **مسائل کے لیے قابلِ تجدید ٹیسٹ کیسز بنائیں**
+3. **اپنی ٹیم کے لیے ڈیبگنگ کے طریقہ کار دستاویز کریں**
+4. **صحت کی جانچ اور نگرانی کو خودکار بنائیں**
+5. **اپنی ایپلیکیشن کی تبدیلیوں کے ساتھ ڈیبگنگ اوزار کو اپ ڈیٹ رکھیں**
+6. **غیر حادثاتی اوقات میں ڈیبگنگ کے طریقہ کار کی مشق کریں**
 
 ## اگلے اقدامات
 
-- [صلاحیت کی منصوبہ بندی](../chapter-06-pre-deployment/capacity-planning.md) - وسائل کی ضروریات کی منصوبہ بندی کریں
-- [SKU کا انتخاب](../chapter-06-pre-deployment/sku-selection.md) - مناسب سروس ٹیئرز منتخب کریں
-- [پریفلائٹ چیکز](../chapter-06-pre-deployment/preflight-checks.md) - قبل از ڈپلائمنٹ کی تصدیق
+- [صلاحیت کی منصوبہ بندی](../chapter-06-pre-deployment/capacity-planning.md) - وسائل کی ضروریات کی منصوبہ بندی
+- [SKU کا انتخاب](../chapter-06-pre-deployment/sku-selection.md) - مناسب سروس ٹائرز کا انتخاب کریں
+- [پری فلائٹ چیکس](../chapter-06-pre-deployment/preflight-checks.md) - تعیناتی سے قبل کی تصدیق
 - [چیٹ شیٹ](../../resources/cheat-sheet.md) - فوری حوالہ کمانڈز
 
 ---
 
-**یاد رکھیں**: اچھا ڈی بگنگ منظم، مکمل، اور صبر والا ہونا ہے۔ یہ ٹولز اور تکنیکیں آپ کو مسائل کو تیزی اور مؤثر طریقے سے تشخیص کرنے میں مدد دیں گی۔
+**یاد رکھیں**: اچھی ڈیبگنگ بنیادی، مکمل، اور صابر ہونے کے بارے میں ہے۔ یہ اوزار اور تکنیکیں آپ کو مسائل کی تشخیص میں تیزی اور مؤثر طریقے سے مدد کریں گی۔
 
 ---
 
@@ -716,6 +694,6 @@ hooks:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-دستبرداری:
-یہ دستاویز AI ترجمہ سروس [Co-op Translator](https://github.com/Azure/co-op-translator) کے ذریعے ترجمہ کی گئی ہے۔ اگرچہ ہم درستگی کے لیے کوشاں ہیں، براہِ کرم نوٹ کریں کہ خودکار تراجم میں غلطیاں یا خامیاں ہو سکتی ہیں۔ اصل دستاویز کو اس کی مادری زبان میں معتبر ماخذ سمجھا جانا چاہیے۔ اہم معلومات کے لیے پیشہ ور انسانی ترجمہ کی سفارش کی جاتی ہے۔ اس ترجمے کے استعمال سے پیدا ہونے والی کسی بھی غلط فہمی یا غلط تعبیر کے لیے ہم ذمہ دار نہیں ہیں۔
+**ڈس کلیمر**:
+یہ دستاویز AI ترجمہ سروس [Co-op Translator](https://github.com/Azure/co-op-translator) کے ذریعے ترجمہ کی گئی ہے۔ جبکہ ہم درستگی کے لیے کوشاں ہیں، براہ کرم اس بات سے آگاہ رہیں کہ خودکار ترجمے میں غلطیاں یا عدم درستیاں ہو سکتی ہیں۔ اصل دستاویز اپنے مادری زبان میں مستند ماخذ سمجھی جائے گی۔ حساس معلومات کے لیے پیشہ ور انسانی ترجمہ کی سفارش کی جاتی ہے۔ اس ترجمے کے استعمال سے پیدا ہونے والی کسی بھی غلط فہمی یا غلط تشریح کی ذمہ داری ہم قبول نہیں کرتے۔
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

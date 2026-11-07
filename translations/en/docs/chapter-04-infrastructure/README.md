@@ -1,6 +1,6 @@
 # Chapter 4: Infrastructure as Code & Deployment
 
-**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 1-1.5 hours | **⭐ Complexity**: Intermediate
+**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 2-3 hours reading; allow extra time for deployment exercises | **⭐ Complexity**: Intermediate
 
 ---
 
@@ -8,7 +8,7 @@
 
 This chapter covers Infrastructure as Code (IaC) patterns with Bicep templates, resource provisioning, and deployment strategies using Azure Developer CLI.
 
-> Validated against `azd 1.27.1` in July 2026.
+> Command and configuration review target: `azd 1.37.2` (November 2026). Live Azure provisioning was not run during review.
 
 ## Learning Objectives
 
@@ -34,7 +34,10 @@ By completing this chapter, you will:
 
 ```bash
 # Initialize from template
-azd init --template azure-functions-python-v2-http
+mkdir infrastructure-practice
+cd infrastructure-practice
+azd init --template todo-nodejs-mongo .
+azd auth login
 
 # Preview what will be created
 azd provision --preview

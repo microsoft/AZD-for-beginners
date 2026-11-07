@@ -2,10 +2,10 @@
 
 !!! tip "LOS MENSAJES PRINCIPALES SON"
 
-    - [ ] Las plantillas AZD aceleran el desarrollo de aplicaciones de IA de días a horas
-    - [ ] La metodología Descubrimiento → Implementación → Personalización proporciona una ruta de aprendizaje estructurada
-    - [ ] GitHub Copilot con servidores MCP permite la exploración en lenguaje natural de bases de código complejas
-    - [ ] Microsoft Foundry proporciona observabilidad, evaluación y pruebas de seguridad integradas
+    - [ ] AZD templates accelerate AI application development from days to hours
+    - [ ] The Discovery → Deployment → Customization methodology provides a structured learning path
+    - [ ] GitHub Copilot with MCP servers enables natural language exploration of complex codebases
+    - [ ] Microsoft Foundry provides built-in observability, evaluation, and security testing
 
 ---
 
@@ -13,14 +13,14 @@
 
 ¡Felicidades! En este taller, has logrado con éxito:
 
-| Module | Accomplishment |
+| Módulo | Logro |
 |:---|:---|
-| **Módulo 1** | Descubriste Azure Developer CLI y seleccionaste una plantilla de IA |
-| **Módulo 2** | Implementaste y validaste una solución completa de agentes de IA |
-| **Módulo 3** | Desconstruiste la plantilla para entender su arquitectura |
-| **Módulo 4** | Exploraste `azure.yaml` configuración y hooks del ciclo de vida |
-| **Módulo 5** | Personalizaste la plantilla para tu propio escenario |
-| **Módulo 6** | Desmontaste de forma segura la infraestructura y gestionaste recursos |
+| **Módulo 1** | Descubrir Azure Developer CLI y seleccionar una plantilla de IA |
+| **Módulo 2** | Desplegar y validar una solución completa de agentes de IA |
+| **Módulo 3** | Desconstruir la plantilla para entender su arquitectura |
+| **Módulo 4** | Explorar `azure.yaml` configuración y hooks del ciclo de vida |
+| **Módulo 5** | Personalizar la plantilla para tu propio escenario |
+| **Módulo 6** | Desmontar la infraestructura de forma segura y administrar recursos |
 
 ---
 
@@ -28,68 +28,68 @@
 
 ### Azure Developer CLI (azd)
 - `azd init` - Inicializar proyectos desde plantillas
-- `azd up` - Provisionar e implementar con un solo comando
-- `azd env` - Administrar variables de entorno
-- `azd down` - Limpiar recursos de forma segura
+- `azd up` - Provisión y despliegue en un solo comando
+- `azd env` - Gestionar variables de entorno
+- `azd down` - Limpieza segura de recursos
 
-### Estructura de la Plantilla AZD
+### Estructura de Plantillas AZD
 - `azure.yaml` - Configuración y hooks de despliegue
-- `infra/` - Bicep como infraestructura como código
+- `infra/` - Infraestructura como código Bicep
 - `src/` - Código fuente de la aplicación
 - `scripts/` - Scripts de automatización y configuración
 
 ### Capacidades de Microsoft Foundry
 - Servicio de Agentes de IA para asistentes inteligentes
-- File Search y Azure AI Search para la recuperación de conocimiento
-- Trazado, monitorización y evaluación integrados
-- Red teaming para la validación de la seguridad de la IA
+- Búsqueda de archivos y Azure AI Search para recuperación de conocimiento
+- Trazabilidad, monitoreo y evaluación integrados
+- Red teaming para validación de seguridad de IA
 
 ---
 
-## 3. Continúa tu Viaje de Aprendizaje
+## 3. Continúa Tu Trayectoria de Aprendizaje
 
-### Siguientes Pasos Recomendados
+### Próximos Pasos Recomendados
 
-| Path | Resource | Time |
+| Ruta | Recurso | Tiempo |
 |:---|:---|:---|
-| **Completar el curso** | [AZD para principiantes](../../README.md) | 8-12 horas |
-| **Probar otra plantilla** | [Plantillas de Microsoft Foundry](https://ai.azure.com/templates) | 1-2 horas |
-| **Profundizar** | [Documentación de Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Continuo |
-| **Comunidad** | [Discord de Azure](https://aka.ms/foundry/discord) | ¡Únete hoy! |
+| **Curso Completo** | [Currículo AZD para Principiantes](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) | Autodidacta |
+| **Prueba Otra Plantilla** | [Plantillas Microsoft Foundry](https://ai.azure.com/templates) | 1-2 horas |
+| **Profundización** | [Documentación Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/) | Continuo |
+| **Comunidad** | [Azure Discord](https://aka.ms/foundry/discord) | ¡Únete hoy! |
 
-### Plantillas sugeridas para probar a continuación
+### Plantillas Sugeridas para Probar a Continuación
 
-1. **[Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat)** - Chat básico con tus datos
-2. **[Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** - Patrones RAG avanzados
-3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - Escenarios empresariales de retail
+1. **[Comienza con AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat)** - Chat básico con tus datos
+2. **[Demostración Azure Search OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)** - Patrones RAG avanzados
+3. **[Contoso Chat](https://github.com/Azure-Samples/contoso-chat)** - Escenarios empresariales de venta minorista
 
 ---
 
 ## 4. Desafío del Taller
 
-¿Listo para poner a prueba tus habilidades? Intenta estos desafíos:
+¿Listo para poner a prueba tus habilidades? Prueba estos desafíos:
 
-| Challenge | Description | Difficulty |
+| Desafío | Descripción | Dificultad |
 |:---|:---|:---|
-| **1. Multi-Agent Scenario** | Implementa y personaliza para una industria diferente (p. ej., salud, finanzas) | ⭐⭐ |
-| **2. Custom Knowledge Base** | Agrega tus propios archivos de datos y crea un índice de búsqueda personalizado | ⭐⭐⭐ |
-| **3. Production Deployment** | Configura CI/CD con GitHub Actions usando `azd pipeline config` | ⭐⭐⭐⭐ |
+| **1. Escenario Multi-Agente** | Despliega y personaliza para una industria diferente (por ejemplo, salud, finanzas) | ⭐⭐ |
+| **2. Base de Conocimiento Personalizada** | Agrega tus propios archivos de datos y crea un índice de búsqueda personalizado | ⭐⭐⭐ |
+| **3. Despliegue en Producción** | Configura CI/CD con GitHub Actions usando `azd pipeline config` | ⭐⭐⭐⭐ |
 
 ---
 
-## 5. Comparte tu Opinión
+## 5. Comparte Tus Comentarios
 
-¡Tu opinión nos ayuda a mejorar este taller!
+¡Tus comentarios nos ayudan a mejorar este taller!
 
-- **GitHub Issues**: [Envía comentarios](https://github.com/microsoft/azd-for-beginners/issues) - etiqueta con `Workshop`
-- **Discord**: Únete a [Discord de Microsoft Foundry](https://aka.ms/foundry/discord) - publica en `#get-help`
+- **GitHub Issues**: [Envía tus comentarios](https://github.com/microsoft/azd-for-beginners/issues) - etiqueta con `Workshop`
+- **Discord**: Únete a [Microsoft Foundry Discord](https://aka.ms/foundry/discord) - publica en `#get-help`
 - **Contribuciones**: ¡Ayuda a mejorar el taller enviando pull requests!
 
 ---
 
 ## ¡Gracias! 🎉
 
-Gracias por completar el Taller AZD para Desarrolladores de IA. Esperamos que esta experiencia te haya proporcionado las habilidades y la confianza para construir e implementar aplicaciones de IA en Azure.
+Gracias por completar el Taller AZD para Desarrolladores de IA. Esperamos que esta experiencia te haya equipado con las habilidades y la confianza para construir y desplegar aplicaciones de IA en Azure.
 
 **¡Sigue construyendo, sigue aprendiendo y bienvenido a la comunidad de desarrolladores de IA de Azure!**
 
@@ -97,14 +97,14 @@ Gracias por completar el Taller AZD para Desarrolladores de IA. Esperamos que es
 
 | | |
 |:---|:---|
-| **📚 Inicio del curso** | [AZD para principiantes](../../README.md) |
-| **📖 Documentación** | [Documentación de Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/) |
-| **🛠️ Plantillas de IA** | [Plantillas de Microsoft Foundry](https://ai.azure.com/templates) |
-| **💬 Comunidad** | [Discord de Azure](https://aka.ms/foundry/discord) |
+| **📚 Inicio del Curso** | [AZD para Principiantes](https://github.com/microsoft/AZD-for-beginners/blob/main/README.md) |
+| **📖 Documentación** | [Documentación Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/) |
+| **🛠️ Plantillas de IA** | [Plantillas Microsoft Foundry](https://ai.azure.com/templates) |
+| **💬 Comunidad** | [Azure Discord](https://aka.ms/foundry/discord) |
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Descargo de responsabilidad:
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la exactitud, tenga en cuenta que las traducciones automáticas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional por un traductor humano. No nos hacemos responsables de ningún malentendido o interpretación errónea que surja del uso de esta traducción.
+**Descargo de responsabilidad**:
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional humana. No somos responsables de cualquier malentendido o interpretación errónea que surja del uso de esta traducción.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

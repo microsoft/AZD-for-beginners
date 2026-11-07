@@ -1,20 +1,20 @@
 # Capítulo 4: Infraestructura como Código y Despliegue
 
-**📚 Curso**: [AZD Para Principiantes](../../README.md) | **⏱️ Duración**: 1-1.5 horas | **⭐ Complejidad**: Intermedio
+**📚 Curso**: [AZD Para Principiantes](../../README.md) | **⏱️ Duración**: 2-3 horas de lectura; reserva tiempo adicional para ejercicios de despliegue | **⭐ Complejidad**: Intermedio
 
 ---
 
 ## Resumen
 
-Este capítulo cubre patrones de Infraestructura como Código (IaC) con plantillas Bicep, provisión de recursos y estrategias de despliegue usando Azure Developer CLI.
+Este capítulo abarca patrones de Infraestructura como Código (IaC) con plantillas Bicep, aprovisionamiento de recursos y estrategias de despliegue usando Azure Developer CLI.
 
-> Validado con `azd 1.27.1` en julio de 2026.
+> Objetivo de revisión de comandos y configuración: `azd 1.37.2` (noviembre 2026). No se ejecutó aprovisionamiento en vivo en Azure durante la revisión.
 
 ## Objetivos de Aprendizaje
 
 Al completar este capítulo, usted:
 - Entenderá la estructura y sintaxis de plantillas Bicep
-- Proveerá recursos de Azure con `azd provision`
+- Aprovisionará recursos Azure con `azd provision`
 - Desplegará aplicaciones con `azd deploy`
 - Implementará estrategias de despliegue blue-green y rolling
 
@@ -24,28 +24,31 @@ Al completar este capítulo, usted:
 
 | # | Lección | Descripción | Tiempo |
 |---|--------|-------------|------|
-| 1 | [Provisión de Recursos](provisioning.md) | Gestión de recursos Azure con AZD | 45 min |
+| 1 | [Aprovisionamiento de Recursos](provisioning.md) | Gestión de recursos Azure con AZD | 45 min |
 | 2 | [Guía de Despliegue](deployment-guide.md) | Estrategias de despliegue de aplicaciones | 45 min |
-| 3 | [Escribiendo Tu Propia Plantilla](custom-templates.md) | Crear y publicar plantillas azd reutilizables | 30 min |
+| 3 | [Creación de Tu Propia Plantilla](custom-templates.md) | Construcción y publicación de plantillas azd reutilizables | 30 min |
 
 ---
 
 ## 🚀 Inicio Rápido
 
 ```bash
-# Inicializar desde plantilla
-azd init --template azure-functions-python-v2-http
+# Initialize from template
+mkdir infrastructure-practice
+cd infrastructure-practice
+azd init --template todo-nodejs-mongo .
+azd auth login
 
-# Previsualizar lo que se creará
+# Preview what will be created
 azd provision --preview
 
-# Aprovisionar solo infraestructura
+# Provision infrastructure only
 azd provision
 
-# Desplegar solo código
+# Deploy code only
 azd deploy
 
-# O ambos juntos
+# Or both together
 azd up
 ```
 
@@ -72,11 +75,11 @@ my-project/
 
 | Comando | Descripción |
 |---------|-------------|
-| `azd init` | Inicializa el proyecto |
-| `azd provision` | Crea recursos en Azure |
-| `azd deploy` | Despliega código de la aplicación |
-| `azd up` | provisiona + despliega |
-| `azd down` | Elimina todos los recursos |
+| `azd init` | Inicializar proyecto |
+| `azd provision` | Crear recursos Azure |
+| `azd deploy` | Desplegar código de la aplicación |
+| `azd up` | aprovisionar + desplegar |
+| `azd down` | Eliminar todos los recursos |
 
 ---
 
@@ -91,8 +94,8 @@ my-project/
 
 ## 📖 Recursos Relacionados
 
-- [Cheques Pre-Despliegue](../chapter-06-pre-deployment/README.md)
-- [Ejemplos de Aplicaciones en Contenedores](../../examples/container-app/README.md)
+- [Verificaciones Previas al Despliegue](../chapter-06-pre-deployment/README.md)
+- [Ejemplos de Aplicación Contenedorizada](../../examples/container-app/README.md)
 - [Ejemplo de Aplicación de Base de Datos](../../examples/database-app/README.md)
 
 ---

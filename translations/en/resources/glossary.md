@@ -2,8 +2,8 @@
 
 **Reference for All Chapters**
 - **📚 Course Home**: [AZD For Beginners](../README.md)
-- **📖 Learn Basics**: [Chapter 1: AZD Basics](../docs/getting-started/azd-basics.md)
-- **🤖 AI Terms**: [Chapter 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **📖 Learn Basics**: [Chapter 1: AZD Basics](../docs/chapter-01-foundation/azd-basics.md)
+- **🤖 AI Terms**: [Chapter 2: AI-First Development](../docs/chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Introduction
 
@@ -41,7 +41,7 @@ Azure's platform-as-a-service (PaaS) offering for hosting web applications, REST
 Azure's application performance monitoring (APM) service that provides deep insights into application performance, availability, and usage.
 
 **Azure CLI**  
-Command-line interface for managing Azure resources. Used by azd for authentication and some operations.
+Command-line interface for managing Azure resources. It complements AZD but has a separate login; core AZD authentication uses `azd auth login`.
 
 **Azure Developer CLI (azd)**  
 Developer-centric command-line tool that accelerates the process of building and deploying applications to Azure using templates and Infrastructure as Code.
@@ -317,12 +317,14 @@ Physically separate locations within an Azure region that provide redundancy and
 | Container App | Azure Container Apps | `containerapp` |
 | Function | Azure Functions | `function` |
 | Static Site | Azure Static Web Apps | `staticwebapp` |
-| Database | Azure Database for PostgreSQL | `postgres` |
-| NoSQL DB | Azure Cosmos DB | `cosmosdb` |
-| Storage | Azure Storage Account | `storage` |
-| Cache | Azure Cache for Redis | `redis` |
-| Search | Azure AI Search | `search` |
-| Messaging | Azure Service Bus | `servicebus` |
+| Database | Azure Database for PostgreSQL | Infrastructure resource, not an application `host` |
+| NoSQL DB | Azure Cosmos DB | Infrastructure resource, not an application `host` |
+| Storage | Azure Storage Account | Infrastructure resource, not a built-in application `host` |
+| Cache | Azure Managed Redis | Infrastructure resource, not an application `host` |
+| Search | Azure AI Search | Infrastructure resource, not an application `host` |
+| Messaging | Azure Service Bus | Infrastructure resource, not an application `host` |
+
+`services.<name>.host` selects an application deployment target; it is not a shorthand for any Azure resource type. Databases, caches, search services, and queues are normally provisioned through the infrastructure provider and connected to the application through outputs/configuration.
 
 ---
 

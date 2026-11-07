@@ -1,433 +1,227 @@
-# Yksinkertainen Flask-API - Container App -esimerkki
+# Yksinkertainen Flask-API — Azure Container Apps
 
-**Oppimispolku:** Aloittelija ⭐ | **Aika:** 25-35 minuuttia | **Kustannus:** $0-15/month
+**Taso:** Aloittelija · **Aika:** 30–45 minuuttia asetusten kanssa
 
-Täydellinen, toimiva Python Flask REST API, joka on otettu käyttöön Azure Container Appsissa Azure Developer CLI:llä (azd). Tämä esimerkki demonstroi konttien julkaisemista, automaattista skaalausta ja valvonnan perusteita.
+Ota käyttöön Python Flask CRUD -API Azure Developer CLI:llä (azd). Lähdekoodi, Dockerfile,
+Bicep ja käyttöönoton parametrit sisältyvät. Tämä on **opetusnäyte**, ei
+tuotantovalmiina oleva API.
 
-## 🎯 Mitä opit
+## Mitä opit
 
-- Julkaista konttisoitu Python-sovellus Azureen
-- Konfiguroida automaattinen skaalaus, mukaan lukien skaalaus nollaan
-- Toteuttaa health probeja ja readiness-tarkistuksia
-- Valvoa sovelluksen lokitietoja ja mittareita
-- Käyttää Azure Developer CLI:tä nopeaan käyttöönottoon
-
-## 📦 Mitä sisältyy
-
-✅ **Flask Application** - Täydellinen REST API CRUD-operaatioilla (`src/app.py`)  
-✅ **Dockerfile** - Tuotantovalmiin kontin konfiguraatio  
-✅ **Bicep Infrastructure** - Container Apps -ympäristö ja API-julkaisu  
-✅ **AZD Configuration** - Yhdellä komennolla toimiva käyttöönotto  
-✅ **Health Probes** - Konfiguroidut liveness- ja readiness-tarkistukset  
-✅ **Auto-scaling** - 0-10 instanssia HTTP-kuorman mukaan  
-
-## Architecture
+- Luo ja julkaise säilö azd:n kautta.
+- Määritä ingress ja liveness/readiness probe:t.
+- Vahvista CRUD-vastaukset ja tarkastele sovelluksen lokitietoja.
+- Ymmärrä, miksi muistissa oleva data ei sovellu kestävään käyttöön.
 
 ```mermaid
-graph TD
-    subgraph ACA[Azure Container Apps -ympäristö]
-        Flask[Flask API -kontti<br/>Terveys-päätepisteet<br/>REST-rajapinta<br/>Automaattinen skaalaus 0-10 instanssia]
-        AppInsights[Application Insights]
-    end
+flowchart LR
+    Client -->|HTTPS| API[Flask API — Container App]
+    API --> Memory[Process-local item dictionary]
+    API -->|stdout| Logs[Container Apps / Log Analytics]
 ```
 
-## Esivaatimukset
+**Tärkeää:** kohteet pidetään yhdessä prosessissa. Oletuksena on **yksi Gunicorn-työntekijä,
+0–1 replikaa**, joka tarkoituksellisesti välttää ristiriitaista dataa työntekijöiden/replikoiden välillä.
+Kohteet katoavat uudelleenkäynnistyksen, version muutoksen tai skaalaamisen nollaan yhteydessä. Replikoiden
+lisääminen vaatii jaetun pysyvän tallennustilan. API:lla ei ole autentikointia tai autorisointia.
 
-### Tarvittavat
-- **Azure Developer CLI (azd)** - [Asennusohje](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure subscription** - [Free account](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Install Docker](https://www.docker.com/products/docker-desktop/) (paikalliseen testaamiseen)
+## Edellytykset
 
-### Varmista esivaatimukset
+- [Nykyinen vakaa azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+  (julkaistu arviointiajankohtana: 1.37.2).
+- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) varmennukseen.
+- Docker ja sen daemon käynnissä; vaaditaan oletuksena paikalliseen kuvan rakentamiseen.
+- Azure-tilaus, resurssien luontioikeudet ja Container Apps -alueen kiintiö.
+- Bash alla oleville komennoille (tai vastaava PowerShell).
+- Python 3.11 valinnaiseen paikalliseen kehitykseen.
 
 ```bash
-# Tarkista azd-versio (vaaditaan 1.5.0 tai uudempi)
 azd version
-
-# Varmista Azure-kirjautuminen
+az version
+docker info
 azd auth login
-
-# Tarkista Docker (valinnainen, paikallista testausta varten)
-docker --version
+az login
 ```
 
-## ⏱️ Julkaisun aikataulu
+CLI-työkaluilla on erilliset kirjautumissessiot. Käy sama tilaus molemmissa.
 
-| Phase | Duration | What Happens |
-|-------|----------|--------------||
-| Environment setup | 30 seconds | Create azd environment |
-| Build container | 2-3 minutes | Docker build Flask app |
-| Provision infrastructure | 3-5 minutes | Create Container Apps, registry, monitoring |
-| Deploy application | 2-3 minutes | Push image and deploy to Container Apps |
-| **Total** | **8-12 minutes** | Complete deployment ready |
+## Nopeasti käyntiin
 
-## Nopea aloitus
+Repositorion juuresta:
 
 ```bash
-# Siirry esimerkkiin
 cd examples/container-app/simple-flask-api
-
-# Alusta ympäristö (valitse yksilöllinen nimi)
-azd env new myflaskapi
-
-# Ota kaikki käyttöön (infrastruktuuri + sovellus)
+azd env new flask-demo
 azd up
-# Sinulta kysytään:
-# 1. Valitse Azure-tilaus
-# 2. Valitse sijainti (esim. eastus2)
-# 3. Odota 8–12 minuuttia käyttöönoton ajan
-
-# Hanki API-päätepisteesi
-azd env get-values
-
-# Testaa API:ta
-curl $(azd env get-value API_ENDPOINT)/health
-```
-
-**Odotettu tulos:**
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z",
-  "service": "simple-flask-api",
-  "version": "1.0.0"
-}
-```
-
-## ✅ Vahvista käyttöönotto
-
-### Vaihe 1: Tarkista käyttöönoton tila
-
-```bash
-# Näytä käyttöön otetut palvelut
-azd show
-
-# Odotettu tuloste näyttää:
-# - Palvelu: api
-# - Päätepiste: https://ca-api-[env].xxx.azurecontainerapps.io
-# - Tila: Käynnissä
-```
-
-### Vaihe 2: Testaa API-päätepisteitä
-
-```bash
-# Hae API-päätepiste
 API_URL=$(azd env get-value API_ENDPOINT)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
+API_NAME=$(azd env get-value API_NAME)
+curl --fail-with-body "${API_URL}/health"
+```
 
-# Testaa terveydentila
-curl $API_URL/health
+Odotettu: HTTP 200 ja JSON jossa on `"status":"healthy"`,
+`"service":"simple-flask-api"`, ja ajantasainen UTC-aikaleima.
+Käyttöönotto ja kuvan rakentaminen kestävät tyypillisesti useita minuutteja; ajat vaihtelevat.
 
-# Testaa juuripäätepiste
-curl $API_URL/
+Alustuksessa käytetään julkista hello-world-kuvaa, joka kuuntelee portissa 80.
+`azure.yaml` valitsee `infra/app/api.bicep` ja sen vastaavan parametritiedoston
+palvelun käyttöönottoa varten, mikä vaihtaa kuvan, ingressin ja probe:t porttiin 8000.
+Älä poista näitä käyttöönoton parametreja.
 
-# Luo kohde
-curl -X POST $API_URL/api/items \
+## Vahvista CRUD
+
+Suorita seuraavat peräkkäin samalla aktiivisella replikalla:
+
+```bash
+# Create: HTTP 201; note the returned id (1 for a fresh process).
+curl -i -X POST "${API_URL}/api/items" \
   -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "My first item"}'
+  -d '{"name":"Test Item","description":"My first item"}'
 
-# Hae kaikki kohteet
-curl $API_URL/api/items
+# Read list: HTTP 200, total 1 in a fresh process.
+curl --fail-with-body "${API_URL}/api/items"
+
+# Replace 1 if your create response returned another id.
+curl --fail-with-body "${API_URL}/api/items/1"
+curl -i -X PUT "${API_URL}/api/items/1" \
+  -H "Content-Type: application/json" -d '{"name":"Updated Item"}'
+curl -i -X DELETE "${API_URL}/api/items/1"
+curl -i "${API_URL}/api/items/1"
 ```
 
-**Onnistumiskriteerit:**
-- ✅ Terveys-päätepiste palauttaa HTTP 200
-- ✅ Juuri-päätepiste näyttää API-tiedot
-- ✅ POST luo kohteen ja palauttaa HTTP 201
-- ✅ GET palauttaa luodut kohteet
+Onnistuminen: POST 201, luku/PUT 200, DELETE 204 ilman sisältöä, sitten puuttuva kohde 404.
+Virheellinen/ei-olio JSON tai tyhjä nimi palauttaa 400.
+Jos kohde katoaa pyyntöjen välillä, tarkista uudelleenkäynnistys tai skaalaus nollaan;
+tämä on tarkoituksellinen muistirajoitus, ei pysyvyyden puute.
 
-### Vaihe 3: Katso lokit
+| Päätepiste | Menetelmät |
+|---|---|
+| `/` | GET — palvelutiedot |
+| `/health` | GET — liveness/readiness |
+| `/api/items` | GET, POST |
+| `/api/items/{id}` | GET, PUT, DELETE |
+
+## Lokit ja asetukset
 
 ```bash
-# Suoratoista reaaliaikaisia lokeja komennolla azd monitor
-azd monitor --logs
-
-# Tai käytä Azure CLI:tä:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# Sinun pitäisi nähdä:
-# - Gunicornin käynnistysviestit
-# - HTTP-pyyntöjen lokit
-# - Sovelluksen informaatio-lokit
+az containerapp logs show --name "$API_NAME" --resource-group "$RG_NAME" --follow
 ```
 
-## Projektin rakenne
+Odotettu: Gunicornin käynnistys, pyynnön käytön lokit ja sovellusviestit.
+`azd monitor --logs` avaa portaalinäkymän; se ei suoratoista terminaaliin.
+Application Insights on otettu käyttöön mutta **ei instrumentoitu tällä Flask-koodilla**;
+käytä Container Apps/Log Analytics stdout-lokeihin.
 
+Muokkaa `infra/app/api.bicep` CPU/muistin, replikan rajojen tai skaalaussääntöjen osalta, sen jälkeen
+suorita `azd up`. Oletuksena 0.5 vCPU, 1 GiB, vähintään 0 / enintään 1 replikaa, ja
+HTTP-kynnys 50 samanaikaista pyyntöä. Skaalaus nollaan voi lisätä kylmän käynnistyksen viivettä.
+
+Mielivaltaiset `azd env set MAX_REPLICAS`, `API_KEY`, `LOG_LEVEL`, tai
+`SCALE_TO_ZERO_TIMEOUT` arvot eivät ole **kytkettyjä tähän malliin tai sovellukseen**.
+Arvon asettaminen ei automaattisesti tee siitä runtime-ympäristömuuttujaa.
+Kuva sitoo portin 8000 eksplisiittisesti; päivitä Dockerfile, Bicep ingress ja probe:t
+yhdessä jos porttia vaihdetaan.
+
+## Tiedostot
+
+```text
+azure.yaml
+infra/main.bicep
+infra/main.parameters.json
+infra/app/container-apps.bicep       # Environment, registry, monitoring
+infra/app/api.bicep                  # App, ingress, probes, scale settings
+infra/app/api.parameters.json        # Image and resource values for azd deploy
+src/app.py
+src/Dockerfile
+src/requirements.txt
 ```
-simple-flask-api/
-├── azure.yaml              # AZD configuration
-├── infra/
-│   ├── main.bicep         # Main infrastructure
-│   ├── main.parameters.json
-│   └── app/
-│       ├── container-env.bicep
-│       └── api.bicep
-└── src/
-    ├── app.py             # Flask application
-    ├── requirements.txt
-    └── Dockerfile
-```
 
-## API-päätepisteet
+## Paikallinen kehitys
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/health` | GET | Terveystarkistus |
-| `/api/items` | GET | Listaa kaikki kohteet |
-| `/api/items` | POST | Luo uusi kohde |
-| `/api/items/{id}` | GET | Hae tietty kohde |
-| `/api/items/{id}` | PUT | Päivitä kohde |
-| `/api/items/{id}` | DELETE | Poista kohde |
-
-## Asetukset
-
-### Ympäristömuuttujat
+Tästä esimerkkihakemistosta:
 
 ```bash
-# Aseta mukautettu määritys
-azd env set PORT 8000
-azd env set LOG_LEVEL info
-azd env set MAX_REPLICAS 20
+python -m venv .venv
+source .venv/bin/activate  # PowerShell: .\.venv\Scripts\Activate.ps1
+python -m pip install -r src/requirements.txt
+python src/app.py
 ```
 
-### Skaalausasetukset
-
-API skaalaa automaattisesti HTTP-liikenteen mukaan:
-- **Min Replicas**: 0 (skaalautuu nollaan ollessa lepotilassa)
-- **Max Replicas**: 10
-- **Concurrent Requests per Replica**: 50
-
-## Kehitys
-
-### Suorita paikallisesti
+Toisessa terminaalissa testaa `http://localhost:8000/health` ja CRUD-päätepisteet.
+Tai rakenna ja suorita varsinainen kuva:
 
 ```bash
-# Asenna riippuvuudet
-cd src
-pip install -r requirements.txt
-
-# Aja sovellus
-python app.py
-
-# Testaa paikallisesti
-curl http://localhost:8000/health
-```
-
-### Rakenna ja testaa kontti
-
-```bash
-# Rakenna Docker-kuva
 docker build -t flask-api:local ./src
-
-# Aja kontti paikallisesti
-docker run -p 8000:8000 flask-api:local
-
-# Testaa kontti
-curl http://localhost:8000/health
+docker run --rm -p 8000:8000 flask-api:local
 ```
 
-## Julkaisu
+Koodimuutosten jälkeen ensimmäisen käyttöönoton jälkeen suorita `azd deploy api`.
+Bicep-muutoksille suorita `azd up` uudelleenkäyttöönottoa ja käyttöönottoa varten.
 
-### Täysi käyttöönotto
+## Käytännön harjoitukset
+
+### 1. Syötteen hylkäämisen validointi
+
+**Alku:** otettu käyttöön API, `API_URL` yllä.
+**Tavoite:** varmista, että API hylkää virheelliset JSON-rakenteet ja puuttuvat nimet.
 
 ```bash
-# Ota infrastruktuuri ja sovellus käyttöön
-azd up
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '[]'
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '{"name":""}'
 ```
 
-### Pelkkä koodin julkaisu
+**Onnistumiskriteerit / ratkaisu:** molemmat palauttavat 400 JSON-virheen kanssa, eivät 500.
+**Yleinen ongelma:** JSON-content-type-otsikon puuttuminen.
+
+### 2. Lisää lukuoikeuksinen versio-päätepiste
+
+**Alku:** `src/app.py`. **Tavoite:** laajenna ja ota API uudelleen käyttöön.
+Lisää tämä ennen `if __name__ == '__main__':`-lohkoa:
+
+```python
+@app.route('/version', methods=['GET'])
+def version():
+    return jsonify({'version': '1.0.0'})
+```
+
+Suorita `azd deploy api`, sitten `curl --fail-with-body "${API_URL}/version"`.
+**Onnistumiskriteerit:** HTTP 200 ja `{"version":"1.0.0"}`.
+**Yleinen ongelma:** reitin sijoittaminen `app.run()`-estävän kutsun jälkeen, kun
+testataan `python src/app.py`:llä.
+
+### Tiedon tarkistuskohta
+
+Miksi yksi työntekijä ei riitä kestävään dataan? Koska edes yksi prosessi menettää
+sanakirjansa uudelleenkäynnistyksessä. Tuotantoversio tarvitsee pysyvän jaetun tallennuksen,
+autentikoinnin, valtuutuksen, migraatiot, testit ja operatiivisen valvonnan.
+
+## Kustannukset ja vianmääritys
+
+Tämä ei ole taattu $0-kustannuksin tapahtuva käyttöönotto: Basic-rekisteri ja lokien tallennus/ingestio
+voi aiheuttaa maksuja vaikka sovelluslaskenta on nollassa. Käytä
+[hinnoittelulaskuria](https://azure.microsoft.com/pricing/calculator/) alueellesi.
+
+- **Dockerin rakennus epäonnistuu:** varmista `docker info`, verkkoyhteys ja riippuvuudet.
+- **Sovellus ei terve:** tarkista konsoli-/järjestelmälokit ja varmista kuvan portti, ingressi,
+  ja probet vastaavat toisiaan. Paikantimen porttia Flask-ankkurina ei saa probe-taa.
+- **403/oikeudet:** varmista tilaus- ja resurssien luontioikeudet.
+- **Kohteet katoavat:** muistissa oleva tila nollaantuu uudelleenkäynnistyksessä/skaalauksessa nollaan; lisää tietokanta
+  kestävään toimintaan.
+
+## Siivous ja seuraavat vaiheet
 
 ```bash
-# Ota käyttöön vain sovelluskoodi (infrastruktuuri ennallaan)
-azd deploy api
+azd down
 ```
 
-### Päivitä asetuksia
+Tarkista poiston vahvistus ja varmista, että omistettu resurssiryhmä on poistettu.
+Älä käytä tuhoavaa siivousta resurssiryhmälle, jossa on ei-asiaankuuluvaa dataa.
 
-```bash
-# Päivitä ympäristömuuttujat
-azd env set API_KEY "new-api-key"
-
-# Ota uudelleen käyttöön uudella kokoonpanolla
-azd deploy api
-```
-
-## Valvonta
-
-### Näytä lokit
-
-```bash
-# Suoratoista reaaliaikaiset lokit azd monitor -komennolla
-azd monitor --logs
-
-# Tai käytä Azure CLI:tä Container Appsille:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# Näytä viimeiset 100 riviä
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-```
-
-### Seuraa mittareita
-
-```bash
-# Avaa Azure Monitor -kojelauta
-azd monitor --overview
-
-# Näytä tietyt mittarit
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "Requests,ResponseTime"
-```
-
-## Testaus
-
-### Terveystarkistus
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/health
-```
-
-Odotettu vastaus:
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z"
-}
-```
-
-### Luo kohde
-
-```bash
-curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/items \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "A test item"}'
-```
-
-### Hae kaikki kohteet
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
-```
-
-## Kustannusten optimointi
-
-Tämä käyttöönotto käyttää skaalausta nollaan, joten maksat vain silloin kun API käsittelee pyyntöjä:
-
-- **Lepo**: ~$0/kuukausi (skaalautuu nollaan)
-- **Aktiivinen kustannus**: ~$0.000024/sekunti per instanssi
-- **Odotettu kuukausikustannus** (kevyt käyttö): $5-15
-
-### Vähennä kustannuksia edelleen
-
-```bash
-# Vähennä suurinta sallittua replikoiden määrää kehitystä varten
-azd env set MAX_REPLICAS 3
-
-# Käytä lyhyempää inaktiivisuusaikaa
-azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 minuuttia
-```
-
-## Ongelmanratkaisu
-
-### Kontti ei käynnisty
-
-```bash
-# Tarkista säiliön lokit Azure CLI:llä
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-
-# Varmista, että Docker-kuva rakentuu paikallisesti
-docker build -t test ./src
-```
-
-### API ei ole käytettävissä
-
-```bash
-# Varmista, että ingress on ulkoinen
-az containerapp show --name api --resource-group rg-simple-flask-api \
-  --query properties.configuration.ingress.external
-```
-
-### Pitkät vasteajat
-
-```bash
-# Tarkista CPU:n ja muistin käyttö
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "CPUPercentage,MemoryPercentage"
-
-# Lisää resursseja tarvittaessa
-az containerapp update --name api --resource-group rg-simple-flask-api \
-  --cpu 1.0 --memory 2Gi
-```
-
-## Siivous
-
-```bash
-# Poista kaikki resurssit
-azd down --force --purge
-```
-
-## Seuraavat askeleet
-
-### Laajenna tätä esimerkkiä
-
-1. **Add Database** - Integroi Azure Cosmos DB tai SQL Database
-   ```bash
-   # Lisää Cosmos DB -moduuli infra/main.bicep-tiedostoon
-   # Päivitä app.py lisäämällä tietokantayhteys
-   ```
-
-2. **Add Authentication** - Ota käyttöön Microsoft Entra ID tai API-avaimet
-   ```python
-   # Lisää todennusvälikerros tiedostoon app.py
-   from functools import wraps
-   ```
-
-3. **Set Up CI/CD** - GitHub Actions -työnkulku
-   ```yaml
-   # Create .github/workflows/deploy.yml
-   name: Deploy to Azure
-   on: [push]
-   ```
-
-4. **Add Managed Identity** - Turvaa pääsy Azure-palveluihin
-   ```bicep
-   # Update infra/app/api.bicep
-   identity: { type: 'SystemAssigned' }
-   ```
-
-### Aiheeseen liittyviä esimerkkejä
-
-- **[Tietokantasovellus](../../../../../examples/database-app)** - Täydellinen esimerkki SQL-tietokannalla
-- **[Mikropalvelut](../../../../../examples/container-app/microservices)** - Monipalveluarkkitehtuuri
-- **[Container Apps - Pääopas](../README.md)** - Kaikki container-kuviot
-
-### Oppimateriaalit
-
-- 📚 [AZD For Beginners Course](../../../README.md) - Kurssin pääsivu
-- 📚 [Container Apps Patterns](../README.md) - Lisää julkaisu- ja arkkitehtuurimalleja
-- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - Yhteisön mallipohjat
-
-## Lisäresurssit
-
-### Dokumentaatio
-- **[Flask Documentation](https://flask.palletsprojects.com/)** - Flask-kehyksen opas
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Viralliset Azure-dokumentit
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd-komentoviite
-
-### Opetusohjelmat
-- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Ota ensimmäinen sovellus käyttöön
-- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Python-kehitysohjeet
-- **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastructure as code
-
-### Työkalut
-- **[Azure Portal](https://portal.azure.com)** - Hallitse resursseja visuaalisesti
-- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - IDE-integraatio
-
----
-
-**🎉 Onnittelut!** Olet julkaissut tuotantovalmiin Flask-APIn Azure Container Appsiin automaattisella skaalauksella ja valvonnalla.
-
-**Kysymyksiä?** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) tai tarkista [UKK](../../../resources/faq.md)
+[Seuraava: Tietokantasovellus](../../../../../examples/database-app) · [Mikropalvelut](../../../../../examples/container-app/microservices) ·
+[Säilöesittely](../README.md) · [Kurssin etusivu](../../../README.md) ·
+[Ilmoita ongelmasta](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 
