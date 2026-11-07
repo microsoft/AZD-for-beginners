@@ -1,60 +1,58 @@
-# 6. ইনফ্রাস্ট্রাকচার অপসারণ
+# 6. অবকাঠামো অপসারণ
 
 !!! tip "এই মডিউলের শেষে আপনি সক্ষম হবেন"
 
-    - [ ] রিসোর্স পরিষ্কার করা এবং খরচ ব্যবস্থাপনার গুরুত্ব বোঝা
-    - [ ] নিরাপদে ইনফ্রাস্ট্রাকচার অপসারণ করার জন্য `azd down` ব্যবহার করা
-    - [ ] প্রয়োজন হলে সফট-ডিলিটেড Azure AI সার্ভিসগুলি পুনরুদ্ধার করা
-    - [ ] **Lab 6:** Azure রিসোর্সগুলি পরিষ্কার করুন এবং অপসারণ নিশ্চিত করুন
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
-## বোনাস অনুশীলন
+## বোনাস ব্যায়াম
 
-প্রকল্পটি অপসারণ করার আগে, কয়েক মিনিট নিন এবং কিছু খোলা অন্বেষণ করুন।
+প্রকল্পটি অপসারণ করার আগে, কিছু সময় নিয়ে কিছু মুক্ত অনুসন্ধান করুন।
 
 !!! info "এই অনুসন্ধান প্রম্পটগুলো চেষ্টা করুন"
 
-    **GitHub Copilot দিয়ে পরীক্ষা-নিরীক্ষা করুন:**
+    **Experiment with GitHub Copilot:**
     
-    1. জিজ্ঞাসা করুন: `আমি মাল্টি-এজেন্ট পরিস্থিতির জন্য আর কোন AZD টেমপ্লেটগুলি চেষ্টা করতে পারি?`
-    2. জিজ্ঞাসা করুন: `কিভাবে আমি একটি স্বাস্থ্যসেবা ব্যবহারের ক্ষেত্রে এজেন্ট নির্দেশাবলী কাস্টমাইজ করতে পারি?`
-    3. জিজ্ঞাসা করুন: `কোন পরিবেশ ভেরিয়েবলগুলি খরচ অপ্টিমাইজেশন নিয়ন্ত্রণ করে?`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **Azure পোর্টাল অন্বেষণ করুন:**
+    **Explore the Azure Portal:**
     
-    1. আপনার ডিপ্লয়মেন্টের জন্য Application Insights মেট্রিক্স পর্যালোচনা করুন
-    2. প্রদানকৃত রিসোর্সগুলোর জন্য খরচ বিশ্লেষণ পরীক্ষা করুন
-    3. Microsoft Foundry পোর্টালের এজেন্ট প্লেগ্রাউন্ডটি আরেকবার অন্বেষণ করুন
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
-## ইনফ্রা অপসারণ
+## অবকাঠামো অপসারণ
 
-1. ইনফ্রাস্ট্রাকচার সরানো এতই সহজ:
+1. অবকাঠামো অপসারণ করা এত সহজ:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. The `--purge` flag ensures that it also purges soft-deleted Cognitive Service resources, thereby releasing quota held by these resources. Once complete you will see something like this:
+1. নির্বাচিত পরিবেশ নিশ্চিত করুন এবং মুছে ফেলার জন্য সম্পদগুলি পর্যালোচনা করুন। এটি Azure সম্পদ অপসারণ করে এবং ডেটা ধ্বংস করতে পারে। এই শিখন কার্যপ্রবাহের জন্য নিশ্চিতকরণ প্রম্পট রাখুন। সম্পন্ন হলে আপনি নিম্নলিখিত আউটপুট দেখতে পাবেন: 
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Optional) If you now run `azd up` again, you will notice the gpt-4.1 model gets deployed since the environment variable was changed (and saved) in the local `.azure` folder. 
+1. পোর্টালে মুছে ফেলা নিশ্চিত করুন এবং ডিপ্লয়মেন্টের আওতায় থাকা সম্পদগুলি পরীক্ষা করুন। খরচ রিপোর্টিং এবং কোটার আপডেট দেরি হতে পারে। স্থানীয় `.azure` কনফিগারেশন থাকে যতক্ষণ না আপনি এটি স্পষ্টভাবে সরান।
 
-      মডেল ডিপ্লয়মেন্টগুলো **পূর্বে** এখানে:
+1. `azd down --purge` অতিরিক্তভাবে সমর্থিত সফট-ডিলিটেড সম্পদের স্থায়ী অপসারণ অনুরোধ করে। শুধুমাত্র পুনরুদ্ধার প্রয়োজন না হলে এবং আপনি সংরক্ষণ/পিউর্জ-প্রটেকশন নীতি বুঝলে এটি ব্যবহার করুন। এটি তাৎক্ষণিক কোটার মুক্তির নিশ্চয়তা দেয় না।
 
-      ![প্রাথমিক](../../../../../translated_images/bn/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      এবং এটি **পরে**:
-      ![নতুন](../../../../../translated_images/bn/14-deploy-new.f7f3c355a3cf7299.webp)
+1. শুধু পরিষ্কার করার নিশ্চয়তার জন্য পুনরায় ডিপ্লয় করবেন না। পরে ইচ্ছাকৃত `azd up` অবশিষ্ট স্থানীয় ইনপুট ব্যবহার করে সম্পদ পুনরায় তৈরি করতে পারে এবং আবার চার্জ ধার্য হয়। মডেল আপডেট সাধারণত সমর্থিত প্রোভিশনিং পরিবর্তন ব্যবহার করে, অপসারণ নয়।
 
 ---
 

@@ -1,60 +1,58 @@
-# 6. इन्फ्रास्ट्रक्चरचा विघटन करा
+# 6. इन्फ्रास्ट्रक्चर हटविणे
 
-!!! tip "या MODULE च्या शेवटी आपण हे करू शकता"
+!!! tip "या मॉड्यूलच्या शेवटी तुम्ही हे करू शकाल"
 
-    - [ ] संसाधन स्वच्छता आणि खर्च व्यवस्थापनाचे महत्त्व समजून घेणे
-    - [ ] `azd down` वापरून सुरक्षितपणे इन्फ्रास्ट्रक्चर डीप्रोव्हिजन करणे
-    - [ ] आवश्यक असल्यास सॉफ्ट-डिलीट केलेल्या Azure AI सेवांचा पुनर्प्राप्त करणे
-    - [ ] **Lab 6:** Azure संसाधने साफ करा आणि काढून टाकल्याचे सत्यापित करा
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
 ## बोनस व्यायाम
 
-प्रोजेक्ट विघटन करण्यापूर्वी, काही मिनिटे घालवा आणि मुक्त शोधाशोध करा.
+प्रोजेक्ट हटवण्यापूर्वी, काही मिनिटे घ्या आणि काही मुक्त अन्वेषण करा.
 
-!!! info "हे अन्वेषण प्रॉम्प्ट वापरून पहा"
+!!! info "ही अन्वेषणासाठी प्रॉम्प्ट्स वापरून पहा"
 
-    **GitHub Copilot सह प्रयोग करा:**
+    **Experiment with GitHub Copilot:**
     
-    1. विचारा: `मल्टि-एजंट परिस्थितीसाठी मी कोणती इतर AZD टेम्पलेट वापरू शकतो?`
-    2. विचारा: `हेल्थकेअर वापर केससाठी एजंट सूचनांना मी कसे सानुकूलित करू शकतो?`
-    3. विचारा: `खर्च ऑप्टिमायझेशन कोणते पर्यावरण चल नियंत्रित करतात?`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **Azure पोर्टल अन्वेषण करा:**
+    **Explore the Azure Portal:**
     
-    1. तुमच्या डिप्लॉयमेंटसाठी Application Insights मेट्रिक्स तपासा
-    2. Provision केलेल्या संसाधनांसाठी खर्च विश्लेषण तपासा
-    3. Microsoft Foundry पोर्टल एजंट प्लेग्राउंड पुन्हा एकदा अन्वेषण करा
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
-## इन्फ्रास्ट्रक्चर डीप्रोव्हिजन करा
+## इन्फ्रास्ट्रक्चर हटवा
 
-1. इन्फ्रास्ट्रक्चर विघटन करणे इतके सोपे आहे:
+1. इन्फ्रास्ट्रक्चर हटवणे सोपे आहे:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. `--purge` फ्लॅग हे सुनिश्चित करतो कि सॉफ्ट-डिलीट केलेल्या Cognitive Service संसाधनांनाही तो साफ करतो, आणि अशा प्रकारे या संसाधनांनी धरलेली कोटा मोकळी होते. पूर्ण झाल्यावर तुम्हाला असे दिसेल:
+1. निवडलेले वातावरण पुष्टी करा आणि हटविण्यासाठी संसाधने तपासा. हे Azure संसाधने हटवते आणि डेटा नष्ट करू शकते. या शिक्षण प्रक्रियेसाठी पुष्टीकरण प्रॉम्प्ट ठेवा. पूर्ण झाल्यानंतर तुम्हाला या सारखे आउटपुट दिसेल:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (ऐच्छिक) जर तुम्ही आता पुन्हा `azd up` चालवले तर लक्षात येईल की gpt-4.1 मॉडेल डिप्लॉय होते कारण पर्यावरणीय चल स्थानिक `.azure` फोल्डरमध्ये बदलला (आणि जतन केला) गेला आहे. 
+1. पोर्टलमध्ये हटविण्याची पुष्टी करा आणि तैनात श्रेणीबाहेरील संसाधने तपासा. किंमत अहवाल आणि कोटा अपडेट्स थोडा वेळ घेऊ शकतात. स्थानिक `.azure` कॉन्फिगरेशन तेंव्हाच काढले जाते जेव्हा तुम्ही स्पष्टपणे ते काढता.
 
-      ही मॉडेल डिप्लॉयमेंट्सची **पूर्वीची स्थिती**:
+1. `azd down --purge` याव्यतिरिक्त समर्थित सॉफ्ट-डिलीटेड संसाधनांचे कायमस्वरूपी हटविण्याचे विनंती करते. हे फक्त तेव्हाच वापरा जेव्हा पुनर्प्राप्ती आवश्यक नाही आणि तुम्हाला राखण/काढून टाकणे संरक्षण धोरणे समजतात. हे त्वरित कोटा सोडण्याची हमी देत नाही.
 
-      ![Initial](../../../../../translated_images/mr/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      आणि ही त्यानंतरची स्थिती:
-      ![New](../../../../../translated_images/mr/14-deploy-new.f7f3c355a3cf7299.webp)
+1. फक्त स्वच्छता तपासण्यासाठी पुन्हा तैनाती करू नका. नंतर मनापासून केलेली `azd up` उर्वरित स्थानिक इनपुट वापरून संसाधने पुन्हा तयार करू शकते आणि शुल्क पुन्हा लागू होतात. मॉडेल अद्यतनामध्ये सामान्यतः समर्थित प्राविजनिंग बदलांचा वापर होतो, हटविण्याचा नाही.
 
 ---
 
