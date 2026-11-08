@@ -33,14 +33,14 @@
 
 ## 目次
 
-- [Overview](#overview)
-- [Automated Pre-flight Script](#automated-pre-flight-script)
-- [Manual Validation Checklist](#codeblock1)
-- [Environment Validation](#✅-backup-recovery)
-- [Resource Validation](#production-environment-validation)
-- [Security & Compliance Checks](#security--compliance-checks)
-- [Performance & Capacity Planning](#performance--capacity-planning)
-- [Troubleshooting Common Issues](#troubleshooting-common-issues)
+- [概要](#overview)
+- [自動化された事前確認スクリプト](#automated-pre-flight-script)
+- [手動検証チェックリスト](#codeblock1)
+- [環境の検証](#✅-backup-recovery)
+- [リソースの検証](#production-environment-validation)
+- [セキュリティおよびコンプライアンスの確認](#security--compliance-checks)
+- [パフォーマンスおよびキャパシティの計画](#performance--capacity-planning)
+- [一般的な問題のトラブルシューティング](#troubleshooting-common-issues)
 
 ---
 
