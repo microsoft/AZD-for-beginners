@@ -1,21 +1,21 @@
-# Kapitel 7: Felsökning & Debugging
+# Kapitel 7: Felsökning och Debugging
 
-**📚 Kurs**: [AZD För Nybörjare](../../README.md) | **⏱️ Varaktighet**: 1-1.5 timmar | **⭐ Svårighetsgrad**: Medel
+**📚 Kurs**: [AZD För Nybörjare](../../README.md) | **⏱️ Varaktighet**: 1-1,5 timmar | **⭐ Svårighetsgrad**: Mellannivå
 
 ---
 
 ## Översikt
 
-Det här kapitlet hjälper dig att diagnostisera och lösa vanliga problem när du arbetar med Azure Developer CLI. Från driftsättningsfel till AI-specifika problem.
+Detta kapitel hjälper dig att diagnostisera och lösa vanliga problem när du arbetar med Azure Developer CLI. Från distribueringsfel till AI-specifika problem.
 
-> Validerat mot `azd 1.27.1` i juli 2026.
+> Kommandovägledning granskad mot den publicerade `azd 1.37.2` referensen. Molndistributioner har inte utförts. Byt ut exempelresursnamn och ID:n innan du använder kommandon.
 
-## Lärandemål
+## Inlärningsmål
 
-Genom att slutföra det här kapitlet kommer du att:
-- Diagnostisera vanliga AZD driftsättningsfel
-- Felsöka autentisering och behörighetsproblem
-- Lösa AI-tjänsters anslutningsproblem
+Genom att slutföra detta kapitel kommer du att:
+- Diagnostisera vanliga AZD-distributionsfel
+- Debugga autentiserings- och behörighetsproblem
+- Lösa anslutningsproblem för AI-tjänster
 - Använda Azure Portal och CLI för felsökning
 
 ---
@@ -25,25 +25,25 @@ Genom att slutföra det här kapitlet kommer du att:
 | # | Lektion | Beskrivning | Tid |
 |---|--------|-------------|------|
 | 1 | [Vanliga Problem](common-issues.md) | Vanligt förekommande problem | 30 min |
-| 2 | [Felsökningsguide](debugging.md) | Steg-för-steg felsökningsstrategier | 45 min |
+| 2 | [Debugging Guide](debugging.md) | Steg-för-steg felsökningsstrategier | 45 min |
 | 3 | [AI Felsökning](ai-troubleshooting.md) | AI-specifika problem | 30 min |
 
 ---
 
-## 🚨 Snabba Lösningar
+## 🚨 Snabba lösningar
 
 ### Autentiseringsproblem
 ```bash
-# Krävs för AZD-arbetsflöden
+# Required for AZD workflows
 azd auth login
 
-# Valfritt om du också använder Azure CLI-kommandon direkt
+# Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
-### Driftsättningsfel
+### Distributionsfel
 ```bash
 azd show
 azd monitor --logs
@@ -51,44 +51,49 @@ az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
 ### Resurskonflikter
+Inspektera den befintliga resursen och distributionsfel först. Ta inte bort en delad eller produktionsmiljö för att lösa en namngivningskonflikt. För en **ny engångsmiljö**, använd ett unikt namn:
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
 
-### Kvot Överskriden
+### Kvot överskriden
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+Att ändra `AZURE_LOCATION` flyttar inte befintliga resurser och kan orsaka konflikt i plats vid ny distribution.
 
 ---
 
-## 📋 Felkod Referens
+## 📋 Felkodsreferens
 
 | Fel | Orsak | Lösning |
 |-------|-------|----------|
-| `AuthenticationError` | Ej inloggad | `azd auth login` |
+| `AuthenticationError` | Inte inloggad | `azd auth login` |
 | `ResourceNotFound` | Saknad resurs | Kontrollera resursnamn |
 | `QuotaExceeded` | Prenumerationsgränser | Begär kvotökning |
 | `InvalidTemplate` | Bicep syntaxfel | `az bicep build` |
-| `Conflict` | Resurs finns redan | Använd nytt namn eller ta bort |
+| `Conflict` | Resurs finns | Använd nytt namn eller ta bort |
 | `Forbidden` | Otillräckliga behörigheter | Kontrollera RBAC-roller |
 
 ---
 
-## 🔄 Återställning och Återhämtning
+## 🔄 Återställning och återhämtning
 
 ```bash
-# Mjuk återställning (behåll resurser, distribuera om kod)
-azd deploy --force
+# Soft reset (keep resources, redeploy code)
+azd deploy
 
-# Hård återställning (ta bort allt, starta om)
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
+
+Hård återställning raderar data och kan ändra ändpunkter. Säkerhetskopiera först och granska de interaktiva raderingsuppmaningarna. `--force --purge` är endast lämpligt för engångsmiljöer när oåterkallelig radering är avsedd.
 
 ---
 
@@ -96,16 +101,16 @@ azd up
 
 | Riktning | Kapitel |
 |-----------|---------|
-| **Föregående** | [Kapitel 6: Förberedelse före Driftsättning](../chapter-06-pre-deployment/README.md) |
+| **Föregående** | [Kapitel 6: Före distribution](../chapter-06-pre-deployment/README.md) |
 | **Nästa** | [Kapitel 8: Produktion](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Relaterade Resurser
+## 📖 Relaterade resurser
 
-- [Förberedande Kontroller](../chapter-06-pre-deployment/preflight-checks.md)
+- [Kontroller före distribution](../chapter-06-pre-deployment/preflight-checks.md)
 - [Konfigurationsguide](../chapter-03-configuration/configuration.md)
-- [AZD GitHub-ärenden](https://github.com/Azure/azure-dev/issues)
+- [AZD GitHub-problem](https://github.com/Azure/azure-dev/issues)
 
 ---
 

@@ -1,47 +1,49 @@
-# Provisioning Azure Resources with AZD
+# Παροχή Πόρων Azure με το AZD
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 4 - Infrastructure as Code & Deployment
-- **⬅️ Previous**: [Deployment Guide](deployment-guide.md)
-- **➡️ Next Chapter**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
-- **🔧 Related**: [Chapter 6: Pre-Deployment Validation](../chapter-06-pre-deployment/capacity-planning.md)
+**Πλοήγηση Κεφαλαίου:**
+- **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
+- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 4 - Υποδομή ως Κώδικας & Ανάπτυξη
+- **⬅️ Προηγούμενο**: [Οδηγός Ανάπτυξης](deployment-guide.md)
+- **➡️ Επόμενο Κεφάλαιο**: [Κεφάλαιο 5: Πολυ-Πρακτικές Λύσεις AI](../../examples/retail-scenario.md)
+- **🔧 Σχετικό**: [Κεφάλαιο 6: Έλεγχος Πριν την Ανάπτυξη](../chapter-06-pre-deployment/capacity-planning.md)
 
-## Introduction
+## Εισαγωγή
 
-Αυτός ο ολοκληρωμένος οδηγός καλύπτει ό,τι χρειάζεστε για την προμήθεια και διαχείριση πόρων Azure χρησιμοποιώντας το Azure Developer CLI. Μάθετε να εφαρμόζετε πρότυπα Infrastructure as Code (IaC) από τη βασική δημιουργία πόρων έως προηγμένες αρχιτεκτονικές υποδομής επιπέδου επιχείρησης χρησιμοποιώντας Bicep, ARM templates, Terraform και Pulumi.
+Αυτός ο οδηγός καλύπτει την παροχή και διαχείριση πόρων Azure χρησιμοποιώντας το Azure Developer CLI με τους ενσωματωμένους παρόχους Bicep και Terraform.
 
-## Learning Goals
+> Ελεγμένο με βάση το `azd 1.37.2` (Νοέμβριος 2026). Εκτός αν αναφέρεται διαφορετικά, τα παραδείγματα Bicep, Terraform και script είναι **εικονογραφικά αποσπάσματα**, όχι πλήρες πρότυπο. Ενσωματώστε τα σε ένα έργο που παρέχει τις αναφερόμενες παραμέτρους, τα modules, τις ταυτότητες, το δίκτυο και τον κώδικα εφαρμογής. Η παροχή Azure δεν εκτελέστηκε σε αυτήν την ανασκόπηση.
 
-Με την ολοκλήρωση αυτού του οδηγού, θα:
-- Κυριαρχήσετε τις αρχές του Infrastructure as Code και την προμήθεια πόρων στο Azure
-- Κατανοήσετε τους πολλαπλούς παρόχους IaC που υποστηρίζονται από το Azure Developer CLI
-- Σχεδιάσετε και υλοποιήσετε Bicep templates για συνηθισμένες αρχιτεκτονικές εφαρμογών
-- Διαμορφώσετε παραμέτρους πόρων, μεταβλητές και ρυθμίσεις ανάλογα με το περιβάλλον
-- Εφαρμόσετε προχωρημένα πρότυπα υποδομής συμπεριλαμβανομένων δικτύωσης και ασφάλειας
-- Διαχειριστείτε τον κύκλο ζωής των πόρων, ενημερώσεις και επίλυση εξαρτήσεων
+## Στόχοι Μάθησης
 
-## Learning Outcomes
+Ολοκληρώνοντας αυτό τον οδηγό, θα:
+- Κατακτήσετε τις αρχές της Υποδομής ως Κώδικας και την παροχή πόρων Azure
+- Κατανοήσετε πολλούς παρόχους IaC που υποστηρίζει το Azure Developer CLI
+- Σχεδιάσετε και υλοποιήσετε πρότυπα Bicep για κοινές αρχιτεκτονικές εφαρμογών
+- Διαμορφώσετε παραμέτρους πόρων, μεταβλητές και ρυθμίσεις ειδικές για το περιβάλλον
+- Υλοποιήσετε προχωρημένα πρότυπα υποδομής όπως δικτύωση και ασφάλεια
+- Διαχειριστείτε τον κύκλο ζωής πόρων, ενημερώσεις και επίλυση εξαρτήσεων
+
+## Αποτελέσματα Μάθησης
 
 Μετά την ολοκλήρωση, θα μπορείτε να:
-- Σχεδιάζετε και να προμηθεύετε υποδομή Azure χρησιμοποιώντας Bicep και ARM templates
-- Διαμορφώνετε πολύπλοκες αρχιτεκτονικές πολλαπλών υπηρεσιών με σωστές εξαρτήσεις πόρων
-- Εφαρμόζετε παραμετροποιημένα templates για πολλαπλά περιβάλλοντα και διαμορφώσεις
-- Αντιμετωπίζετε προβλήματα προμήθειας υποδομής και να επιλύετε αποτυχίες ανάπτυξης
-- Εφαρμόζετε τις αρχές του Azure Well-Architected Framework στο σχεδιασμό υποδομής
-- Διαχειρίζεστε ενημερώσεις υποδομής και να εφαρμόζετε στρατηγικές versioning της υποδομής
+- Σχεδιάσετε και να παρέχετε υποδομή Azure χρησιμοποιώντας Bicep και πρότυπα ARM
+- Διαμορφώσετε σύνθετες πολυ-υπηρεσιακές αρχιτεκτονικές με σωστές εξαρτήσεις πόρων
+- Υλοποιήσετε παραμετροποιημένα πρότυπα για πολλαπλά περιβάλλοντα και ρυθμίσεις
+- Αντιμετωπίσετε προβλήματα παροχής υποδομής και επιλύσετε αποτυχίες ανάπτυξης
+- Εφαρμόσετε τις αρχές του Πλαισίου Azure Well-Architected στο σχεδιασμό υποδομής
+- Διαχειριστείτε ενημερώσεις υποδομής και υλοποιήσετε στρατηγικές εκδόσεων υποδομής
 
-## Infrastructure Provisioning Overview
+## Επισκόπηση Παροχής Υποδομής
 
-Azure Developer CLI υποστηρίζει πολλαπλούς παρόχους Infrastructure as Code (IaC):
-- **Bicep** (συνιστάται) - Η domain-specific γλώσσα της Azure
-- **ARM Templates** - JSON-based Azure Resource Manager templates
-- **Terraform** - Εργαλείο υποδομής πολλαπλού cloud
-- **Pulumi** - Σύγχρονο infrastructure as code με γλώσσες προγραμματισμού
+Το Azure Developer CLI υποστηρίζει πολλούς παρόχους Υποδομής ως Κώδικα (IaC):
+- **Bicep** (συνιστάται) - Η γλώσσα ειδικού τομέα του Azure
+- **Πρότυπα ARM** - Το Bicep μεταγλωττίζεται σε ARM· το ακατέργαστο JSON ARM δεν είναι ξεχωριστός ενσωματωμένος `infra.provider`
+- **Terraform** - Εργαλείο υποδομής πολλαπλών cloud
+- **Επεκτατικοί πάροχοι** - Απαιτούν ξεχωριστή εγκατάσταση επέκτασης παρόχου και τεκμηριωμένη διαμόρφωση· δεν θεωρείτε υποστηριζόμενο οποιοδήποτε συμβολοσειρά παρόχου
 
-## Understanding Azure Resources
+## Κατανόηση Πόρων Azure
 
-### Resource Hierarchy
+### Ιεραρχία Πόρων
 ```
 Azure Account
 └── Subscriptions
@@ -49,18 +51,19 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### Common Azure Services for Applications
-- **Compute**: App Service, Container Apps, Functions, Virtual Machines
-- **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Networking**: Virtual Network, Application Gateway, CDN
-- **Security**: Key Vault, Application Insights, Log Analytics
+### Κοινές Υπηρεσίες Azure για Εφαρμογές
+- **Υπολογιστική Ισχύς**: App Service, Container Apps, Functions, Εικονικές Μηχανές
+- **Αποθήκευση**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
+- **Δικτύωση**: Εικονικό Δίκτυο, Application Gateway, CDN
+- **Ασφάλεια**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Azure AI Services, Azure OpenAI, Azure Machine Learning
 
-## Bicep Infrastructure Templates
+## Πρότυπα Υποδομής Bicep
 
-### Basic Bicep Template Structure
+### Βασική Δομή Προτύπου Bicep
 ```bicep
-// infra/main.bicep
+// infra/modules/web.bicep - resource-group-scoped module fragment
+targetScope = 'resourceGroup'
 @description('The name of the environment')
 param environmentName string
 
@@ -75,11 +78,6 @@ var resourceToken = toLower(uniqueString(subscription().id, environmentName, loc
 var tags = {
   'azd-env-name': environmentName
   'azd-app': applicationName
-}
-
-// Resource Group (created automatically by azd)
-resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' existing = {
-  name: '${applicationName}-${environmentName}-rg'
 }
 
 // App Service Plan
@@ -100,11 +98,14 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
   location: location
-  tags: tags
+  tags: union(tags, { 'azd-service-name': 'web' })
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     serverFarmId: appServicePlan.id
     siteConfig: {
-      linuxFxVersion: 'NODE|18-lts'
+      linuxFxVersion: 'NODE|22-lts'
       alwaysOn: true
       ftpsState: 'Disabled'
       minTlsVersion: '1.2'
@@ -128,9 +129,11 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### Advanced Bicep Patterns
+Για ένα πλήρες έργο azd, καλέστε αυτό το module από ένα `infra/main.bicep` με εύρος συνδρομής που δημιουργεί μια ομάδα πόρων με ετικέτα και περνάει το εύρος της. Ταιριάξτε `environmentName`/`location` στο `main.parameters.json`. Η ετικέτα `azd-service-name: web` συσχετίζει τον πόρο με `services.web`; μόνο αυθαίρετα ονόματα εξόδου δεν ρυθμίζουν ανακάλυψη υπηρεσίας.
 
-#### Modular Infrastructure
+### Προχωρημένα Πρότυπα Bicep
+
+#### Μονάδα Υποδομής
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -142,11 +145,14 @@ param appSettings array = []
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: name
   location: location
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     serverFarmId: planId
     siteConfig: {
       appSettings: appSettings
-      linuxFxVersion: 'NODE|18-lts'
+      linuxFxVersion: 'NODE|22-lts'
       alwaysOn: true
     }
     httpsOnly: true
@@ -179,7 +185,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### Conditional Resource Creation
+#### Υπό Όρους Δημιουργία Πόρου
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -200,13 +206,13 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🌐 Using Terraform with azd
+## 🌐 Χρήση Terraform με azd
 
-Το Bicep είναι το προεπιλεγμένο για azd, αλλά το azd υποστηρίζει επίσης **Terraform**—χρήσιμο αν η ομάδα σας ήδη το χρησιμοποιεί ή διαχειρίζεστε υποδομή πολλαπλού cloud. Το workflow του azd (`azd up`, `azd provision`, `azd down`) είναι ίδιο· αλλάζει μόνο η γλώσσα υποδομής και η δομή φακέλων.
+Το Bicep είναι η προεπιλογή του azd, αλλά το azd υποστηρίζει και **Terraform**—χρήσιμο αν η ομάδα σας το έχει ήδη τυποποιήσει ή διαχειρίζεστε υποδομή πολλαπλών cloud. Η ροή εργασίας azd (`azd up`, `azd provision`, `azd down`) είναι απαράλλακτη· μόνο αλλάζει η γλώσσα υποδομής και η διάταξη φακέλων.
 
-### Tell azd to use Terraform
+### Πείτε στο azd να χρησιμοποιήσει Terraform
 
-Προσθέστε ένα τμήμα `infra` στο `azure.yaml` που δείχνει στον provider Terraform:
+Προσθέστε μια ενότητα `infra` στο `azure.yaml` που δείχνει τον πάροχο Terraform:
 
 ```yaml
 # azure.yaml
@@ -221,9 +227,9 @@ services:
     host: containerapp
 ```
 
-### Terraform folder layout
+### Δομή φακέλου Terraform
 
-Με τον provider Terraform, ο φάκελος `infra/` σας χρησιμοποιεί αρχεία `.tf` αντί για Bicep:
+Με τον πάροχο Terraform, ο φάκελος σας `infra/` χρησιμοποιεί αρχεία `.tf` αντί για Bicep:
 
 ```
 infra/
@@ -234,7 +240,9 @@ infra/
 └── main.tfvars.json   # values azd injects per environment
 ```
 
-### A minimal `main.tf`
+### Ένα απόσπασμα `main.tf`
+
+Αυτό δημιουργεί μόνο μια ομάδα πόρων και πλάνο, όχι υπηρεσία για ανάπτυξη. Πρέπει επίσης να δηλώσετε μεταβλητές εισόδου, έναν συμβατό πάροχο `azurerm`, την web app και τον χάρτη ονομάτων υπηρεσιών/πόρων της.
 
 ```hcl
 # infra/main.tf
@@ -253,9 +261,9 @@ resource "azurerm_service_plan" "plan" {
 }
 ```
 
-### How azd connects to your Terraform outputs
+### Πώς το azd συνδέεται με τις εξόδους Terraform σας
 
-Το azd διαβάζει τα Terraform **outputs** για να μάθει τα endpoints σας και να συνδέσει τιμές περιβάλλοντος πίσω στην εφαρμογή σας. Τα ονόματα των outputs έχουν σημασία—το azd ψάχνει συγκεκριμένα:
+Το azd διαβάζει τις **εξόδους** του Terraform σε τιμές περιβάλλοντος. Αυτό το απόσπασμα υποθέτει ότι έχετε ορίσει `azurerm_linux_web_app.web`· η ανακάλυψη υπηρεσιών απαιτεί ακόμα αντίστοιχο όνομα πόρου ή ετικέτα `azd-service-name`:
 
 ```hcl
 # infra/outputs.tf
@@ -264,111 +272,48 @@ output "AZURE_LOCATION" {
 }
 
 output "SERVICE_WEB_ENDPOINT_URL" {
-  value = azurerm_linux_web_app.web.default_hostname
+  value = "https://${azurerm_linux_web_app.web.default_hostname}"
 }
 ```
 
-> **Σημαντικό:** το azd χρησιμοποιεί το tag `azd-env-name` και τα `AZURE_*` outputs για να παρακολουθεί πόρους ανά περιβάλλον. Πάντα κάντε tag το resource group σας με `"azd-env-name" = var.environment_name` ώστε το `azd down` να μπορεί να βρει και να αφαιρέσει τα πάντα.
+> **Σημαντικό:** Το azd χρησιμοποιεί την ετικέτα `azd-env-name` και τις εξόδους `AZURE_*` για την παρακολούθηση πόρων ανά περιβάλλον. Πάντα σημαδέψτε την ομάδα πόρων σας με `"azd-env-name" = var.environment_name`, ώστε το `azd down` να μπορεί να βρει και να αφαιρέσει τα πάντα.
 
-### Deploy with Terraform
+### Αναπτύξτε με Terraform
 
-Οι εντολές είναι ακριβώς οι ίδιες με το Bicep:
-
-```bash
-azd auth login
-azd env new dev
-azd provision --preview   # azd εκτελεί 'terraform plan' υπό το καπό
-azd up                    # παροχή + ανάπτυξη
-azd down --force          # καταστρέφει τους πόρους που διαχειρίζεται το Terraform
-```
-
-> **Προαπαιτούμενο:** Το Terraform πρέπει να είναι εγκατεστημένο και στο `PATH` σας. Το azd διαχειρίζεται το Terraform *workflow* αλλά δεν εγκαθιστά το Terraform για εσάς. Για το state, το azd προεπιλέγει το τοπικό state· για ομάδες, διαμορφώστε ένα απομακρυσμένο backend (για παράδειγμα, ένα Azure Storage backend) στο `provider.tf`.
-
-Για πλήρη, εκτελέσιμα starters με βάση το Terraform, περιηγηθείτε στην [Awesome AZD gallery](https://azure.github.io/awesome-azd/) και φιλτράρετε για Terraform, ή δείτε την επίσημη [azd Terraform documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
-
-## 🧩 Using Pulumi with azd
-
-Αν η ομάδα σας γράφει υποδομή σε μια γενικής χρήσης γλώσσα (TypeScript, Python, Go, ή C#) αντί για DSL, το azd υποστηρίζει επίσης **Pulumi**. Όπως με το Terraform, το workflow `azd up` / `azd provision` / `azd down` μένει αμετάβλητο—αλλάζουν μόνο τα εργαλεία υποδομής και η διάταξη φακέλων.
-
-### Tell azd to use Pulumi
-
-```yaml
-# azure.yaml
-name: my-pulumi-app
-infra:
-  provider: pulumi      # default is "bicep"
-  path: infra           # folder containing your Pulumi program
-services:
-  web:
-    project: ./src
-    language: js
-    host: containerapp
-```
-
-### Pulumi folder layout
-
-```
-infra/
-├── Pulumi.yaml          # project definition
-├── Pulumi.dev.yaml      # stack config (one per environment)
-├── index.ts             # your resource program (or __main__.py, main.go, etc.)
-├── package.json         # dependencies (for TypeScript)
-└── tsconfig.json
-```
-
-### A minimal `index.ts`
-
-```typescript
-import * as azure from "@pulumi/azure-native";
-import * as pulumi from "@pulumi/pulumi";
-
-const environmentName = pulumi.getStack();
-
-// Επισημάνετε κάθε πόρο ώστε το azd να μπορεί να τους παρακολουθεί και να τους καθαρίζει
-const tags = { "azd-env-name": environmentName };
-
-const rg = new azure.resources.ResourceGroup("rg", {
-  resourceGroupName: `rg-${environmentName}`,
-  tags,
-});
-
-// azd διαβάζει αυτές τις εξόδους πίσω στο περιβάλλον σας
-export const AZURE_LOCATION = rg.location;
-export const SERVICE_WEB_ENDPOINT_URL = "https://...";
-```
-
-### Stacks map to azd environments
-
-Το Pulumi οργανώνει ανάπτυξεις σε **stacks**, και το azd αντιστοιχίζει κάθε περιβάλλον azd σε ένα Pulumi stack με το ίδιο όνομα. Όταν τρέχετε `azd env new staging`, το azd επιλέγει (ή δημιουργεί) το Pulumi stack `staging`. Οι ίδιες κανόνες tagging `azd-env-name` και τα `AZURE_*` outputs εφαρμόζονται, ώστε το `azd down` να μπορεί να βρει και να αφαιρέσει τα πάντα.
-
-### Deploy with Pulumi
+Οι εντολές είναι ακριβώς ίδιες με το Bicep:
 
 ```bash
 azd auth login
 azd env new dev
-azd provision --preview   # azd εκτελεί το 'pulumi preview' εσωτερικά
-azd up                    # παροχή πόρων + ανάπτυξη
-azd down --force          # εκτελεί το 'pulumi destroy'
+azd provision --preview   # azd runs 'terraform plan' under the hood
+azd up                    # provision + deploy
+azd down --force          # destroys the Terraform-managed resources
 ```
 
-> **Προαπαιτούμενο:** Το Pulumi πρέπει να είναι εγκατεστημένο και στο `PATH` σας, και θα χρειαστείτε ένα state backend (Pulumi Cloud ή ένα self-managed backend όπως το Azure Blob Storage). Το azd διαχειρίζεται το Pulumi *workflow*, όχι την εγκατάσταση. Δείτε την επίσημη [azd Pulumi documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-pulumi-for-azd).
+> **Προαπαιτούμενο:** Πρέπει να είναι εγκατεστημένο το Terraform και να είναι στον `PATH` σας. Το azd διαχειρίζεται τη *ροή εργασίας* Terraform αλλά δεν το εγκαθιστά για εσάς. Για κατάσταση, το azd προεπιλέγει το τοπικό αποθηκευτικό· για ομάδες, διαμορφώστε απομακρυσμένο backend (π.χ., Azure Storage backend) στο `provider.tf`.
 
-## 🎯 Choosing a Host for Your Service
+Για πλήρεις, λειτουργικούς starters με βάση το Terraform, περιηγηθείτε στη [Φανταστική συλλογή AZD](https://azure.github.io/awesome-azd/) και φιλτράρετε για Terraform, ή δείτε την επίσημη [τεκμηρίωση azd Terraform](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
 
-Το πεδίο `host` στο `azure.yaml` αποφασίζει πού εκτελείται ο κώδικάς σας. Το azd υποστηρίζει διάφορους hosts—η σωστή επιλογή έχει μεγαλύτερη σημασία από τη γλώσσα υποδομής. Ακολουθεί μια φιλική προς αρχάριους σύγκριση:
+## 🧩 Άλλα Εργαλεία Υποδομής
 
-| `host` value | Best for | Why |
+Το Pulumi δεν είναι ενσωματωμένος πάροχος παροχής του azd 1.37.2. Η ρύθμιση μόνο `infra.provider: pulumi` δεν δημιουργεί ολοκληρωμένη ενσωμάτωση, και το `azd env new` δεν δημιουργεί/επιλέγει αυτόματα stack Pulumi. Αν χρησιμοποιείτε άλλο εργαλείο IaC, ακολουθήστε την τεκμηρίωση επεκτατικού παρόχου ή διαχειριστείτε τον κύκλο ζωής του ρητά στη δική σας ροή εργασίας. Αυτό το μάθημα δεν παρέχει ή επικυρώνει πάροχο Pulumi.
+
+## 🎯 Επιλογή Υποδοχής για την Υπηρεσία σας
+
+Το πεδίο `host` στο `azure.yaml` αποφασίζει πού εκτελείται ο κώδικάς σας. Το azd υποστηρίζει πολλούς hosts—η σωστή επιλογή έχει μεγαλύτερη σημασία από τη γλώσσα υποδομής. Εδώ μια σύγκριση φιλική για αρχάριους:
+
+| Τιμή `host` | Καλύτερο για | Γιατί |
 |--------------|----------|-----|
-| `appservice` | Traditional web apps and APIs | Simplest PaaS; no containers required |
-| `staticwebapp` | Front-end SPAs (React, Vue, Angular) | Global CDN + free SSL, built-in API support |
-| `function` | Event-driven and serverless workloads | Scale-to-zero, pay-per-execution |
-| `containerapp` | Containerized microservices | Serverless containers, scale-to-zero, built-in ingress |
-| `aks` | Complex orchestration needs | Full Kubernetes control when you truly need it |
-| `springapp` | Java Spring Boot apps | Managed Azure Spring Apps runtime tuned for Spring |
+| `appservice` | Παραδοσιακές web εφαρμογές και APIs | Απλούστερο PaaS· δεν απαιτούνται containers |
+| `staticwebapp` | Front-end SPAs (React, Vue, Angular) | Παγκόσμιο CDN + δωρεάν SSL, ενσωματωμένη υποστήριξη API |
+| `function` | Workloads βάσει συμβάντων και serverless | Κλίμακα σε μηδέν, πληρωμή ανά εκτέλεση |
+| `containerapp` | Containerized μικροϋπηρεσίες | Serverless containers, κλίμακα σε μηδέν, ενσωματωμένη εισροή |
+| `aks` | Πολύπλοκες ανάγκες ορχήστρωσης | Πλήρης έλεγχος Kubernetes όταν πραγματικά το χρειάζεστε |
+| `springapp` | Υφιστάμενες αναπτύξεις Azure Spring Apps | Legacy στόχος· η υπηρεσία καταργείται 31 Μαρτίου 2028 και κλείνει για νέους πελάτες |
 
-### When to reach for AKS
+### Πότε να επιλέξετε AKS
 
-**Azure Kubernetes Service (`host: aks`)** σας δίνει όλη τη δύναμη του Kubernetes—custom controllers, service meshes, πολύπλοκη δικτύωση και λεπτομερή scheduling. Αυτή η δύναμη συνοδεύεται από λειτουργικό κόστος: διαχειρίζεστε node pools, αναβαθμίσεις και το δίκτυο του cluster.
+**Η Υπηρεσία Azure Kubernetes (`host: aks`)** σας παρέχει την πλήρη ισχύ του Kubernetes—προσαρμοσμένους ελεγκτές, υπηρεσίες mesh, πολύπλοκη δικτύωση και λεπτομερή προγραμματισμό. Αυτή η ισχύς συνοδεύεται από λειτουργικό κόστος: διαχειρίζεστε pool κόμβων, αναβαθμίσεις και δικτύωση του cluster.
 
 ```yaml
 services:
@@ -378,11 +323,11 @@ services:
     host: aks          # deploys to an existing AKS cluster
 ```
 
-> **Ξεκινήστε απλούστερα αν μπορείτε.** Για τα περισσότερα μικρο-υπηρεσιακά συστήματα, τα **Container Apps** σας δίνουν containers, autoscaling και scale-to-zero χωρίς να διαχειριστείτε cluster. Επιλέξτε AKS μόνο όταν χρειάζεστε λειτουργίες που είναι ειδικές για Kubernetes.
+> **Ξεκινήστε απλούστερα αν μπορείτε.** Για τις περισσότερες μικροϋπηρεσίες, τα **Container Apps** παρέχουν containers, αυτόματη κλιμάκωση και κλίμακα σε μηδέν χωρίς διαχείριση cluster. Επιλέξτε AKS μόνο όταν χρειάζεστε δυνατότητες αποκλειστικά του Kubernetes.
 
-### When to use Azure Spring Apps
+### Πότε να χρησιμοποιήσετε Azure Spring Apps
 
-**Azure Spring Apps (`host: springapp`)** είναι ένα managed runtime σχεδιασμένο για Spring Boot. Διαχειρίζεται service discovery, config server και blue-green deployment ώστε οι Java ομάδες να μην χρειάζεται να τρέχουν τη δική τους υποδομή.
+**Τα Azure Spring Apps (`host: springapp`)** είναι managed runtime κατασκευασμένο για Spring Boot. Χειρίζεται ανακάλυψη υπηρεσίας, config server και blue-green ανάπτυξη, ώστε οι ομάδες Java να μην διαχειρίζονται τη δική τους υποδομή.
 
 ```yaml
 services:
@@ -392,9 +337,9 @@ services:
     host: springapp
 ```
 
-> Χρησιμοποιήστε `springapp` όταν έχετε υπάρχουσες εφαρμογές Spring Boot και θέλετε ένα runtime βελτιστοποιημένο γι’ αυτές. Για νέες containerized Java εφαρμογές χωρίς ανάγκες ειδικές για Spring, το `containerapp` είναι συχνά η απλούστερη επιλογή.
+> Μην επιλέξετε Azure Spring Apps για νέο πρότζεκτ αρχαρίων: είναι κλειστό σε νέους πελάτες και [καταργείται 31 Μαρτίου 2028](https://learn.microsoft.com/azure/spring-apps/basic-standard/retirement-announcement). Προτιμήστε υποστηριζόμενες εναλλακτικές όπως Container Apps και σχεδιάστε τη μετεγκατάσταση για υπάρχουσες αναπτύξεις.
 
-## 🗃️ Database Provisioning
+## 🗃️ Παροχή Βάσεων Δεδομένων
 
 ### Cosmos DB
 ```bicep
@@ -446,6 +391,8 @@ resource todoContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/conta
 ```
 
 ### PostgreSQL
+**Προαπαιτούμενα αποσπάσματος:** δηλώστε `@secure() param databasePassword string` και χρησιμοποιήστε μια ισχυρή τιμή. Επιλέξτε δημόσια πρόσβαση **ή** ενσωματώστε το ανατεθέν υποδίκτυο/ιδιωτικό DNS παρακάτω· τα δύο αποσπάσματα δεν συνδέονται αυτόματα μεταξύ τους.
+
 ```bicep
 resource postgresServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01' = {
   name: '${applicationName}-postgres-${resourceToken}'
@@ -492,9 +439,11 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 Security and Secrets Management
+Ο κανόνας `0.0.0.0` επιτρέπει συνδέσεις από υπηρεσίες Azure πέρα από τη δική σας συνδρομή. Δεν είναι ιδιωτική δικτύωση· προτιμήστε περιορισμένο δίκτυο για πραγματικά workloads.
 
-### Key Vault Integration
+## 🔒 Ασφάλεια και Διαχείριση Μυστικών
+
+### Ενσωμάτωση Key Vault
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -536,7 +485,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Managed Identity Configuration
+### Διαμόρφωση Διαχειριζόμενης Ταυτότητας
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -553,8 +502,8 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
           value: '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
         }
         {
-          name: 'AZURE_CLIENT_ID'
-          value: webApp.identity.principalId
+          name: 'NODE_ENV'
+          value: 'production'
         }
       ]
     }
@@ -562,9 +511,11 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 Networking and Connectivity
+Για ταυτότητα συστήματος, μην ρυθμίζετε `AZURE_CLIENT_ID` στην principal ID της. Μια ταυτότητα χρήστη χρησιμοποιεί το **client ID** της, όχι το object/principal ID. Η αναφορά Key Vault χρειάζεται επίσης ανάθεση ρόλου κάδου ταυτότητας app και πρόσβαση δικτύου.
 
-### Virtual Network Configuration
+## 🌍 Δικτύωση και Συνδεσιμότητα
+
+### Διαμόρφωση Εικονικού Δικτύου
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -627,7 +578,9 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### Application Gateway with SSL
+### Application Gateway με SSL
+**Ατελές απόσπασμα αρχιτεκτονικής, δεν είναι αναπτυσσόμενος gateway:** προσθέστε αφιερωμένο `gateway-subnet` στη VNet μαζί με backend pools, ρυθμίσεις HTTP, ακροατές, κανόνες δρομολόγησης με προτεραιότητες και πιστοποιητικό TLS (ή εξουσιοδοτημένη αναφορά Key Vault). Το απλό άνοιγμα της θύρας 443 δεν ρυθμίζει το HTTPS.
+
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -690,7 +643,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Monitoring and Observability
+## 📊 Παρακολούθηση και Παρατηρησιμότητα
 
 ### Application Insights
 ```bicep
@@ -721,7 +674,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Custom Metrics and Alerts
+### Προσαρμοσμένες Μετρικές και Ειδοποιήσεις
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -731,7 +684,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
     description: 'Alert when CPU usage is high'
     severity: 2
     enabled: true
-    scopes: [webApp.id]
+    scopes: [appServicePlan.id]
     evaluationFrequency: 'PT5M'
     windowSize: 'PT5M'
     criteria: {
@@ -740,6 +693,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
         {
           name: 'CPU Usage'
           metricName: 'CpuPercentage'
+          metricNamespace: 'Microsoft.Web/serverfarms'
           operator: 'GreaterThan'
           threshold: 80
           timeAggregation: 'Average'
@@ -755,11 +709,14 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Environment-Specific Configurations
+## 🔧 Διαμορφώσεις Ειδικές για Περιβάλλον
 
-### Parameter Files for Different Environments
+### Αρχεία Παραμέτρων για Διάφορα Περιβάλλοντα
+Τα δύο παρακάτω αρχεία είναι **εναλλακτικά παραδείγματα αρχείων παραμέτρων**. Το azd δεν επιλέγει αυτόματα `main.parameters.dev.json` ή `main.parameters.prod.json` ανά όνομα περιβάλλοντος. Χρησιμοποιήστε το πραγματικό `main.parameters.json` με υποκαταστάσεις περιβάλλοντος (π.χ., `${APP_SERVICE_SKU=B1}`), και δηλώστε/καταναλώστε κάθε παράμετρο στο Bicep.
+
+Παραδείγματα περιεχομένου για `infra/main.parameters.dev.json`:
+
 ```json
-// infra/main.parameters.dev.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -783,8 +740,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
+Παραδείγματα περιεχομένου για `infra/main.parameters.prod.json`:
+
 ```json
-// infra/main.parameters.prod.json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
@@ -811,7 +769,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Conditional Resource Provisioning
+### Υπό Όρους Παροχή Πόρων
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -819,7 +777,7 @@ param environmentType string = 'dev'
 
 // Development resources
 resource devStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environmentType == 'dev') {
-  name: '${applicationName}devstorage${resourceToken}'
+  name: 'stdev${resourceToken}'
   location: location
   kind: 'StorageV2'
   sku: {
@@ -829,7 +787,7 @@ resource devStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environ
 
 // Production resources with geo-redundancy
 resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (environmentType == 'prod') {
-  name: '${applicationName}prodstorage${resourceToken}'
+  name: 'stprod${resourceToken}'
   location: location
   kind: 'StorageV2'
   sku: {
@@ -843,9 +801,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Advanced Provisioning Patterns
+## 🚀 Προχωρημένα Πρότυπα Παροχής
 
-### Multi-Region Deployment
+### Ανάπτυξη σε Πολλές Περιοχές
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -913,78 +871,54 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### Infrastructure Testing
-```bicep
-// infra/test/main.test.bicep
-param location string = resourceGroup().location
+### Δοκιμή Υποδομής
+```bash
+# Local compilation checks syntax/types; this does not provision infrastructure
+az bicep build --file infra/main.bicep --stdout
 
-module mainTemplate '../main.bicep' = {
-  name: 'main-template-test'
-  params: {
-    environmentName: 'test'
-    location: location
-    applicationName: 'testapp'
-  }
-}
-
-// Test assertions
-resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
-  name: 'test-deployment'
-  location: location
-  kind: 'AzurePowerShell'
-  properties: {
-    azPowerShellVersion: '8.0'
-    scriptContent: '''
-      $webAppName = "${mainTemplate.outputs.WEB_NAME}"
-      $response = Invoke-WebRequest -Uri "https://${mainTemplate.outputs.WEB_URL}/health" -UseBasicParsing
-      if ($response.StatusCode -ne 200) {
-        throw "Health check failed"
-      }
-      Write-Output "All tests passed!"
-    '''
-    timeout: 'PT10M'
-    cleanupPreference: 'OnSuccess'
-    retentionInterval: 'P1D'
-  }
-}
+# After deploying your own complete app, test an actual application route
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+curl --fail --show-error "$WEB_URL"
 ```
 
-## 🧪 Infrastructure Preview & Validation (NEW)
+Η παροχή υποδομής δεν αναπτύσσει τον κώδικα της εφαρμογής σας. Εκτελέστε ελέγχους εφαρμογής μόνο μετά το `azd deploy`/`azd up`, και χρησιμοποιήστε `/health` μόνο αν η εφαρμογή σας το υλοποιεί. Τα σενάρια ανάπτυξης ARM δημιουργούν πόρους Azure και χρειάζονται πρόσθετη ταυτότητα, υποστηριζόμενες εκδόσεις runtime και δικαιώματα· δεν είναι τοπικά unit tests.
 
-### Preview Infrastructure Changes Before Deployment
+## 🧪 Προεπισκόπηση & Επικύρωση Υποδομής (ΝΕΟ)
 
-Η δυνατότητα `azd provision --preview` σας επιτρέπει να **προσομοιώσετε την προμήθεια υποδομής** πριν την πραγματική ανάπτυξη πόρων. Είναι παρόμοια με το `terraform plan` ή το `bicep what-if`, προσφέροντας μια **dry-run εικόνα** των αλλαγών που θα γίνουν στο περιβάλλον Azure σας.
+### Προεπισκόπηση Αλλαγών Υποδομής Πριν την Ανάπτυξη
 
-#### 🛠️ What It Does
-- **Αναλύει τα IaC templates σας** (Bicep ή Terraform)
-- **Δείχνει προεπισκόπηση των αλλαγών πόρων**: προσθήκες, διαγραφές, ενημερώσεις
-- **Δεν εφαρμόζει αλλαγές** — είναι μόνο για ανάγνωση και ασφαλές να τρέξει
+Η λειτουργία `azd provision --preview` σάς επιτρέπει να **προσομοιώσετε την παροχή υποδομής** πριν αναπτύξετε ουσιαστικά πόρους. Είναι παρόμοια με το `terraform plan` ή `bicep what-if`, δίνοντάς σας μια **προεπισκόπηση ξηρής εκτέλεσης** των αλλαγών που θα γίνονταν στο περιβάλλον Azure.
 
-#### Use Cases
+#### 🛠️ Τι Κάνει
+- **Αναλύει τα πρότυπα IaC σας** (Bicep ή Terraform)
+- **Δείχνει προεπισκόπηση αλλαγών πόρων**: προσθήκες, διαγραφές, ενημερώσεις
+- **Δεν εφαρμόζει τις προτεινόμενες αλλαγές υποδομής** από τον πάροχο — ελέγξτε πρώτα τα hooks του έργου· τα scripts μπορεί να έχουν παρενέργειες και η προεπισκόπηση ακόμα απαιτεί δικαιώματα Azure
+
+#### Περιπτώσεις Χρήσης
 ```bash
-# Προεπισκόπηση των αλλαγών στην υποδομή πριν την ανάπτυξη
+# Preview infrastructure changes before deployment
 azd provision --preview
 
-# Προεπισκόπηση για συγκεκριμένο περιβάλλον
+# Preview for specific environment
 azd provision --preview -e production
 ```
 
-Αυτή η εντολή σας βοηθά να:
-- **Επαληθεύετε τις αλλαγές υποδομής** πριν δεσμεύσετε πόρους
-- **Εντοπίσετε λάθος ρυθμίσεις νωρίς** στον κύκλο ανάπτυξης
-- **Συνεργάζεστε με ασφάλεια** σε περιβάλλοντα ομάδας
-- **Εξασφαλίζετε αναπτύξεις με ελάχιστα δικαιώματα** χωρίς εκπλήξεις
+Αυτή η εντολή βοηθά να:
+- **Επικυρώσετε τις αλλαγές υποδομής** πριν δεσμεύσετε πόρους
+- **Εντοπίσετε σφάλματα διαμόρφωσης νωρίς** στον κύκλο ανάπτυξης
+- **Συνεργαστείτε με ασφάλεια** σε ομαδικά περιβάλλοντα
+- **Εξασφαλίσετε ανάπτυξη με ελάχιστα δικαιώματα** χωρίς εκπλήξεις
 
-Είναι ιδιαίτερα χρήσιμη όταν:
-- Εργάζεστε με πολύπλοκα περιβάλλοντα πολλαπλών υπηρεσιών
-- Κάνετε αλλαγές σε production υποδομή
-- Επαληθεύετε τροποποιήσεις templates πριν από έγκριση PR
-- Εκπαιδεύετε νέα μέλη της ομάδας στα πρότυπα υποδομής
+Είναι ιδιαίτερα χρήσιμο όταν:
+- Δουλεύετε με σύνθετα περιβάλλοντα πολλαπλών υπηρεσιών
+- Κάνετε αλλαγές στην παραγωγική υποδομή
+- Επικυρώνετε τροποποιήσεις προτύπου πριν την έγκριση PR
+- Εκπαιδεύετε νέα μέλη ομάδας σε πρότυπα υποδομής
 
-### Example Preview Output
-Το ακριβές preview output διαφέρει ανά πάροχο και δομή έργου, αλλά το αποτέλεσμα θα πρέπει να ταυτοποιεί σαφώς τις προτεινόμενες αλλαγές πριν εφαρμοστεί οτιδήποτε.
+### Παράδειγμα Προεπισκόπησης Εξόδου
+Η ακριβής έξοδος προεπισκόπησης διαφέρει ανά πάροχο και δομή έργου, αλλά το αποτέλεσμα πρέπει να αναγνωρίζει καθαρά τις προτεινόμενες αλλαγές πριν εφαρμοστεί κάτι.
 
-```bash
+```text
 $ azd provision --preview
 
 🔍 Previewing infrastructure changes...
@@ -1007,22 +941,26 @@ The following resources will be destroyed:
 ✅ Preview completed successfully!
 ```
 
-## �🔄 Resource Updates and Migrations
+## 🔄 Ενημερώσεις και Μεταφορές Πόρων
 
-### Safe Resource Updates
+### Ασφαλείς Ενημερώσεις Πόρων
 ```bash
-# Προεπισκόπηση πρώτα των αλλαγών στην υποδομή (ΣΥΝΙΣΤΑΤΑΙ)
+# Preview infrastructure changes first (RECOMMENDED)
 azd provision --preview
 
-# Εφαρμόστε τις αλλαγές μετά την επιβεβαίωση της προεπισκόπησης
-azd provision --confirm-with-no-prompt
+# Apply changes after preview confirmation
+azd provision
+# In automation, --no-prompt uses known values and fails on unresolved decisions;
+# it is not an approval bypass.
 
-# Για επαναφορά (rollback), χρησιμοποιήστε το Git για να αναιρέσετε τις αλλαγές στην υποδομή:
-git revert HEAD  # Αναίρεση του τελευταίου commit της υποδομής
-azd provision    # Εφαρμόστε την προηγούμενη κατάσταση της υποδομής
+# For rollback, use Git to revert infrastructure changes:
+git revert HEAD  # Revert last infrastructure commit
+azd provision    # Apply previous infrastructure state
 ```
 
-### Database Migrations
+### Μεταφορές Βάσης Δεδομένων
+**Ατελές πρότυπο σεναρίου ανάπτυξης:** απαιτεί ρυθμισμένη ταυτότητα χρήστη όπου χρειάζεται, υποστηριζόμενο runtime Azure CLI, διαθέσιμα εργαλεία μετανάστευσης, παρεχόμενο φάκελο/διαμόρφωση μετανάστευσης και συνδεσιμότητα βάσης δεδομένων. Δεν εκτελείται απλώς με το να επικολληθεί αυτός ο πόρος σε πρότυπο.
+
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -1047,25 +985,29 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
     ]
     timeout: 'PT30M'
     cleanupPreference: 'OnSuccess'
+    retentionInterval: 'P1D'
   }
 }
 ```
 
-## 🎯 Best Practices
+## 🎯 Καλύτερες Πρακτικές
 
-### 1. Resource Naming Conventions
+### 1. Συμβάσεις Ονοματοδοσίας Πόρων
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
   appService: '${applicationName}-web-${resourceToken}'
   database: '${applicationName}-db-${resourceToken}'
-  storage: '${take(replace(applicationName, '-', ''), 15)}${environmentName}sa${take(resourceToken, 8)}'
-  keyVault: '${take(applicationName, 15)}-kv-${take(resourceToken, 8)}'
+  storage: 'st${resourceToken}' // lowercase alphanumeric, <=24 characters
+  keyVault: 'kv-${resourceToken}' // <=24 characters
 }
 ```
 
-### 2. Tagging Strategy
+### 2. Στρατηγική Επισήμανσης
 ```bicep
+// utcNow is only allowed in a parameter default, not directly in a variable.
+param deploymentDate string = utcNow('yyyy-MM-dd')
+
 var commonTags = {
   'azd-env-name': environmentName
   'azd-app': applicationName
@@ -1073,11 +1015,11 @@ var commonTags = {
   'cost-center': 'engineering'
   'owner': 'platform-team'
   'project': applicationName
-  'created-date': utcNow('yyyy-MM-dd')
+  'deployment-date': deploymentDate
 }
 ```
 
-### 3. Parameter Validation
+### 3. Επικύρωση Παραμέτρων
 ```bicep
 @description('Environment name')
 @minLength(3)
@@ -1093,7 +1035,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Output Organization
+### 4. Οργάνωση Εξόδου
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -1108,25 +1050,25 @@ output DATABASE_NAME string = database.name
 output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
 ```
 
-## Next Steps
+## Επόμενα Βήματα
 
-- [Pre-deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - Επαληθεύστε τη διαθεσιμότητα πόρων
-- [Common Issues](../chapter-07-troubleshooting/common-issues.md) - Επιδιορθώστε προβλήματα υποδομής
-- [Debugging Guide](../chapter-07-troubleshooting/debugging.md) - Εντοπίστε σφάλματα προμήθειας
-- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - Επιλέξτε κατάλληλα tiers υπηρεσιών
+- [Σχεδιασμός Πριν την Ανάπτυξη](../chapter-06-pre-deployment/capacity-planning.md) - Επικυρώστε τη διαθεσιμότητα πόρων
+- [Συνηθισμένα Προβλήματα](../chapter-07-troubleshooting/common-issues.md) - Αντιμετωπίστε προβλήματα υποδομής
+- [Οδηγός Αποσφαλμάτωσης](../chapter-07-troubleshooting/debugging.md) - Αποσφαλμάτωση προβλημάτων παροχής
+- [Επιλογή SKU](../chapter-06-pre-deployment/sku-selection.md) - Επιλογή κατάλληλων επιπέδων υπηρεσίας
 
-## Additional Resources
+## Πρόσθετοι Πόροι
 
-- [Azure Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Τεκμηρίωση Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Πρότυπα Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Κέντρο Αρχιτεκτονικής Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Πλαίσιο Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [Deployment Guide](deployment-guide.md)
-- **Next Lesson**: [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md)
+**Πλοήγηση**
+- **Προηγούμενο Μάθημα**: [Οδηγός Ανάπτυξης](deployment-guide.md)
+- **Επόμενο Μάθημα**: [Σχεδιασμός Χωρητικότητας](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 

@@ -1,208 +1,207 @@
-# Installation & Setup Guide
+# Οδηγός Εγκατάστασης & Ρύθμισης
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
-- **⬅️ Previous**: [AZD Basics](azd-basics.md)
-- **➡️ Next**: [Your First Project](first-project.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Πλοήγηση Κεφαλαίου:**
+- **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
+- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 1 - Θεμέλια & Γρήγορη Εκκίνηση
+- **⬅️ Προηγούμενο**: [Βασικά του AZD](azd-basics.md)
+- **➡️ Επόμενο**: [Το Πρώτο Σου Έργο](first-project.md)
+- **🚀 Επόμενο Κεφάλαιο**: [Κεφάλαιο 2: Ανάπτυξη με Προτεραιότητα την Τεχνητή Νοημοσύνη](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-## Introduction
+## Εισαγωγή
 
-Αυτός ο ολοκληρωμένος οδηγός θα σας καθοδηγήσει στην εγκατάσταση και διαμόρφωση του Azure Developer CLI (azd) στο σύστημά σας. Θα μάθετε πολλαπλούς τρόπους εγκατάστασης για διαφορετικά λειτουργικά συστήματα, ρύθμιση ταυτοποίησης και αρχική διαμόρφωση για να προετοιμάσετε το περιβάλλον ανάπτυξής σας για αναπτύξεις στο Azure.
+Αυτός ο ολοκληρωμένος οδηγός θα σε καθοδηγήσει στην εγκατάσταση και παραμετροποίηση του Azure Developer CLI (azd) στο σύστημά σου. Θα μάθεις πολλές μεθόδους εγκατάστασης για διαφορετικά λειτουργικά συστήματα, ρύθμιση αυθεντικοποίησης και αρχική παραμετροποίηση για να προετοιμάσεις το περιβάλλον ανάπτυξης για αναπτύξεις στο Azure.
 
-## Learning Goals
+## Στόχοι Μάθησης
 
-Μέχρι το τέλος αυτού του μαθήματος, θα:
-- Εγκαταστήσετε επιτυχώς το Azure Developer CLI στο λειτουργικό σας σύστημα
-- Διαμορφώσετε την ταυτοποίηση με το Azure χρησιμοποιώντας πολλαπλές μεθόδους
-- Ετοιμάσετε το περιβάλλον ανάπτυξης με τα απαραίτητα προαπαιτούμενα
-- Κατανοήσετε τις διαφορετικές επιλογές εγκατάστασης και πότε να χρησιμοποιείτε κάθε μία
-- Εντοπίσετε και επιλύσετε κοινά προβλήματα εγκατάστασης και ρύθμισης
+Στο τέλος αυτού του μαθήματος, θα:
+- Εγκαταστήσεις επιτυχώς το Azure Developer CLI στο λειτουργικό σου σύστημα
+- Παραμετροποιήσεις την αυθεντικοποίηση με το Azure μέσω πολλαπλών μεθόδων
+- Ρυθμίσεις το περιβάλλον ανάπτυξης με τα απαραίτητα προαπαιτούμενα
+- Κατανοήσεις τις διαφορετικές επιλογές εγκατάστασης και πότε να χρησιμοποιείς καθεμία
+- Αντιμετωπίσεις κοινά προβλήματα εγκατάστασης και ρύθμισης
 
-## Learning Outcomes
+## Αποτέλεσμα Μάθησης
 
-Μετά την ολοκλήρωση αυτού του μαθήματος, θα μπορείτε να:
-- Εγκαταστήσετε το azd χρησιμοποιώντας την κατάλληλη μέθοδο για την πλατφόρμα σας
-- Πραγματοποιήσετε ταυτοποίηση με το Azure χρησιμοποιώντας `azd auth login`
-- Επαληθεύσετε την εγκατάσταση και να δοκιμάσετε βασικές εντολές azd
-- Διαμορφώσετε το περιβάλλον ανάπτυξης σας για βέλτιστη χρήση του azd
-- Επιλύσετε συνήθη προβλήματα εγκατάστασης ανεξάρτητα
+Μετά την ολοκλήρωση αυτού του μαθήματος, θα μπορείς να:
+- Εγκαταστήσεις το azd χρησιμοποιώντας την κατάλληλη μέθοδο για την πλατφόρμα σου
+- Αυθεντικοποιηθείς με το Azure χρησιμοποιώντας την εντολή azd auth login
+- Επαληθεύσεις την εγκατάσταση και να δοκιμάσεις βασικές εντολές azd
+- Παραμετροποιήσεις το περιβάλλον ανάπτυξης για βέλτιστη χρήση του azd
+- Επίλυσης κοινούς προβλήματα εγκατάστασης ανεξάρτητα
 
-Αυτός ο οδηγός θα σας βοηθήσει να εγκαταστήσετε και να διαμορφώσετε το Azure Developer CLI στο σύστημά σας, ανεξάρτητα από το λειτουργικό σύστημα ή το περιβάλλον ανάπτυξης.
+Αυτός ο οδηγός θα σε βοηθήσει να εγκαταστήσεις και να παραμετροποιήσεις το Azure Developer CLI στο σύστημά σου, ανεξαρτήτως λειτουργικού συστήματος ή περιβάλλοντος ανάπτυξης.
 
-## Prerequisites
+## Προαπαιτούμενα
 
-Πριν από την εγκατάσταση του azd, βεβαιωθείτε ότι έχετε:
-- **Azure subscription** - [Create a free account](https://azure.microsoft.com/free/)
-- **Azure CLI** - Για ταυτοποίηση και διαχείριση πόρων
-- **Git** - Για κλωνοποίηση προτύπων και έλεγχο έκδοσης
-- **Docker** (προαιρετικά) - Για εφαρμογές σε κοντέινερ
+Πριν εγκαταστήσεις το azd, βεβαιώσου ότι έχεις:
+- **Συνδρομή Azure** - [Δημιούργησε δωρεάν λογαριασμό](https://azure.microsoft.com/free/)
+- **Azure CLI** (προαιρετικό) - Για παραδείγματα που εκτελούν ρητά `az`; το azd αυθεντικοποιείται ανεξάρτητα
+- **Git** - Για κλωνοποίηση προτύπων και έλεγχο εκδόσεων
+- **Docker** (προαιρετικό) - Για εφαρμογές κοντέινερ
 
-## Installation Methods
+## Μέθοδοι Εγκατάστασης
 
 ### Windows
 
-#### Option 1: Windows Package Manager (Recommended)
+#### Επιλογή 1: Windows Package Manager (Συνιστάται)
 ```cmd
 winget install microsoft.azd
 ```
 
-#### Option 2: PowerShell Install Script
+#### Επιλογή 2: Εγκατάσταση με PowerShell
 ```powershell
-# Χρήσιμο όταν το winget δεν είναι διαθέσιμο
+# Useful when winget is unavailable
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
-#### Option 3: Chocolatey
+#### Επιλογή 3: Chocolatey
 ```cmd
 choco install azd
 ```
 
-#### Option 4: Manual Installation
-1. Download the latest release from [GitHub](https://github.com/Azure/azure-dev/releases)
-2. Extract to `C:\Program Files\azd\`
-3. Add to PATH environment variable
+#### Επιλογή 4: Χειροκίνητη Εγκατάσταση
+1. Κατέβασε την τελευταία έκδοση από [GitHub](https://github.com/Azure/azure-dev/releases)
+2. Αποσυμπίεσε στο `C:\Program Files\azd\`
+3. Πρόσθεσε στο μεταβλητό περιβάλλον PATH
 
 ### macOS
 
-#### Option 1: Homebrew (Recommended)
+#### Επιλογή 1: Homebrew (Συνιστάται)
 ```bash
 brew tap azure/azd
 brew install azd
 ```
 
-#### Option 2: Install Script
+#### Επιλογή 2: Εγκατάσταση μέσω script
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Option 3: Manual Installation
-```bash
-# Κατεβάστε και εγκαταστήστε
-curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.com/Azure/azure-dev/releases/latest/download --verbose
-```
+#### Επιλογή 3: Χειροκίνητη Εγκατάσταση
+Κατέβασε το αρχείο για την αρχιτεκτονική macOS από [τα αρχεία έκδοσης](https://github.com/Azure/azure-dev/releases), αποσυμπίεσε το, και πρόσθεσε το δυαδικό `azd` στο `PATH` σου.
 
 ### Linux
 
-#### Option 1: Install Script (Recommended)
+#### Επιλογή 1: Εγκατάσταση μέσω script (Συνιστάται)
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Option 2: Package Managers
+#### Επιλογή 2: Package Managers
 
-**Manual installation from release assets:**
+**Χειροκίνητη εγκατάσταση από αρχεία έκδοσης:**
 ```bash
-# Κατεβάστε το πιο πρόσφατο αρχείο για την αρχιτεκτονική Linux σας από:
+# Download the latest archive for your Linux architecture from:
 # https://github.com/Azure/azure-dev/releases
-# Στη συνέχεια, αποσυμπιέστε το και προσθέστε το εκτελέσιμο azd στο PATH σας.
+# Then extract it and add the azd binary to your PATH.
 ```
 
 ### GitHub Codespaces
 
-Ορισμένα Codespaces και περιβάλλοντα dev container περιλαμβάνουν ήδη το `azd`, αλλά θα πρέπει να το επαληθεύσετε αντί να το υποθέσετε:
+Μερικά περιβάλλοντα Codespaces και κοντέινερ ανάπτυξης ήδη περιλαμβάνουν `azd`, αλλά καλό είναι να το επαληθεύσεις αντί να το υποθέσεις:
 
 ```bash
 azd version
 ```
 
-If `azd` is missing, install it with the standard script for the environment.
+Αν λείπει `azd`, εγκατέστησέ το με το πρότυπο script για το περιβάλλον.
 
 ### Docker
 
 ```bash
-# Τρέξτε το azd σε ένα κοντέινερ
-docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest
+# Run azd in a container
+docker run --rm -it -v "$(pwd):/workspace" -w /workspace mcr.microsoft.com/azure-dev-cli-tools:latest
 
-# Δημιουργήστε ένα ψευδώνυμο για ευκολότερη χρήση
-alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
+# Create an alias for easier use
+alias azd='docker run --rm -it -v "$(pwd):/workspace" -w /workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
-## ✅ Verify Installation
+Αυτό το πρόσκαιρο κοντέινερ δεν διατηρεί την σύνδεση εισόδου μεταξύ των εκτελέσεων. Για επαναλαμβανόμενες αναπτύξεις, χρησιμοποίησε το [dev container setup](dev-containers.md); οι κατασκευές κοντέινερ απαιτούν επίσης έναν Docker daemon προσβάσιμο από μέσα.
 
-Μετά την εγκατάσταση, επαληθεύστε ότι το azd λειτουργεί σωστά:
+## ✅ Επαλήθευση Εγκατάστασης
+
+Μετά την εγκατάσταση, επαλήθευσε ότι το azd λειτουργεί σωστά:
 
 ```bash
-# Έλεγχος έκδοσης
+# Check version
 azd version
 
-# Προβολή βοήθειας
+# View help
 azd --help
 
-# Κατάλογος διαθέσιμων προτύπων
+# List available templates
 azd template list
 ```
 
-Expected output:
+Αναμενόμενη έξοδος:
 ```
 azd version 1.x.x (commit xxxxxx)
 ```
 
-**Note**: The actual version number will vary. Check [Azure Developer CLI releases](https://github.com/Azure/azure-dev/releases) for the latest version.
+**Σημείωση**: Ο αριθμός έκδοσης διαφέρει. Έλεγξε τις [Azure Developer CLI εκδόσεις](https://github.com/Azure/azure-dev/releases) για την πιο πρόσφατη.
 
-**✅ Installation Success Checklist:**
-- [ ] `azd version` shows version number without errors
-- [ ] `azd --help` displays command documentation
-- [ ] `azd template list` shows available templates
-- [ ] You can create a test directory and run `azd init` successfully
+**✅ Λίστα ελέγχου επιτυχούς εγκατάστασης:**
+- [ ] `azd version` εμφανίζει αριθμό έκδοσης χωρίς σφάλματα
+- [ ] `azd --help` εμφανίζει την τεκμηρίωση εντολών
+- [ ] `azd template list` εμφανίζει διαθέσιμα πρότυπα
+- [ ] Μπορείς να δημιουργήσεις έναν δοκιμαστικό φάκελο και να εκτελέσεις επιτυχώς `azd init`
 
-**If all checks pass, you're ready to proceed to [Your First Project](first-project.md)!**
+**Αν όλα τα παραπάνω λειτουργούν, είσαι έτοιμος να συνεχίσεις στο [Πρώτο σου Έργο](first-project.md)!**
 
-## Authentication Setup
+## Ρύθμιση Αυθεντικοποίησης
 
-### Recommended Beginner Setup
+### Συνιστώμενη Ρύθμιση για Αρχάριους
 
-Για ροές εργασίας με επίκεντρο το AZD, συνδεθείτε με `azd auth login`.
+Για ροές εργασίας με προτεραιότητα στο AZD, κάνε είσοδο με `azd auth login`.
 
 ```bash
-# Απαιτείται για εντολές AZD όπως το azd up
+# Required for AZD commands such as azd up
 azd auth login
 
-# Επαλήθευση της κατάστασης αυθεντικοποίησης του AZD
+# Verify AZD authentication status
 azd auth login --check-status
 ```
 
-Use Azure CLI sign-in only when you plan to run `az` commands yourself during the course.
+Χρησιμοποίησε την είσοδο Azure CLI μόνο εάν σκοπεύεις να εκτελείς εντολές `az` ο ίδιος κατά τη διάρκεια του μαθήματος.
 
-### Azure CLI Authentication (Optional)
+### Αυθεντικοποίηση μέσω Azure CLI (Προαιρετικό)
 ```bash
-# Εγκαταστήστε το Azure CLI αν δεν είναι ήδη εγκατεστημένο
+# Install Azure CLI if not already installed
 # Windows: winget install Microsoft.AzureCLI
 # macOS: brew install azure-cli
-# Linux: δείτε τα έγγραφα εγκατάστασης του Azure CLI για τη διανομή σας
+# Linux: see the Azure CLI install docs for your distribution
 
-# Συνδεθείτε στο Azure
+# Login to Azure
 az login
 
-# Επαληθεύστε τον έλεγχο ταυτότητας
+# Verify authentication
 az account show
 ```
 
-### Which Sign-In Flow Should You Use?
+### Ποια ροή εισόδου να χρησιμοποιήσεις;
 
-- Use `azd auth login` if you are following the beginner AZD path and mainly running `azd` commands.
-- Use `az login` as well when you want to run Azure CLI commands such as `az account show` or inspect resources directly.
-- If an exercise includes both `azd` and `az` commands, run both sign-in commands once at the start.
+- Χρησιμοποίησε `azd auth login` αν ακολουθείς το αρχικό μονοπάτι AZD και εκτελείς κυρίως εντολές `azd`.
+- Χρησιμοποίησε επίσης `az login` όταν θέλεις να εκτελέσεις εντολές Azure CLI όπως `az account show` ή να ελέγξεις πόρους άμεσα.
+- Αν μια άσκηση περιλαμβάνει τόσο `azd` όσο και `az`, τρέξε και τις δύο εντολές εισόδου μία φορά στην αρχή.
 
-### Device Code Authentication
-If you're on a headless system or having browser issues:
+### Αυθεντικοποίηση μέσω κωδικού συσκευής
+Έχεις σύστημα χωρίς περιβάλλον γραφικών ή προβλήματα browser:
 ```bash
 azd auth login --use-device-code
 ```
 
 ### Service Principal (CI/CD)
-For automated environments:
+Για αυτοματοποιημένα περιβάλλοντα:
 ```bash
 azd auth login \
-  --client-id <client-id> \
-  --client-secret <client-secret> \
-  --tenant-id <tenant-id>
+  --client-id "<client-id>" \
+  --client-secret "<client-secret>" \
+  --tenant-id "<tenant-id>"
 ```
 
-### Validate Your Complete Setup
+### Επικύρωσε τη συνολική σου ρύθμιση
 
-If you want a quick readiness check before starting Chapter 1:
+Θέλεις έναν γρήγορο έλεγχο πριν ξεκινήσεις το Κεφάλαιο 1;
 
 **Windows:**
 ```powershell
@@ -214,49 +213,48 @@ If you want a quick readiness check before starting Chapter 1:
 bash ./validate-setup.sh
 ```
 
-## Configuration
+## Παραμετροποίηση
 
-### Global Configuration
+### Παγκόσμια Παραμετροποίηση
 ```bash
-# Ορισμός προεπιλεγμένης συνδρομής
-azd config set defaults.subscription <subscription-id>
+# Set default subscription
+azd config set defaults.subscription "<subscription-id>"
 
-# Ορισμός προεπιλεγμένης τοποθεσίας
+# Set default location
 azd config set defaults.location eastus2
 
-# Προβολή όλης της διαμόρφωσης
+# View all configuration
 azd config show
 ```
 
-### Environment Variables
-Add to your shell profile (`.bashrc`, `.zshrc`, `.profile`):
+### Μεταβλητές Περιβάλλοντος
+Πρόσθεσε στο προφίλ του shell σου (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
-# Διαμόρφωση Azure
+# Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 
-# Διαμόρφωση azd
-export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
-export AZD_DEBUG=true  # Ενεργοποίηση καταγραφής εντοπισμού σφαλμάτων
+# Enable diagnostics per command rather than relying on undocumented variables
+azd version --debug
 ```
 
-## IDE Integration
+## Ενσωμάτωση σε IDE
 
 ### Visual Studio Code
-Install the Azure Developer CLI extension:
-1. Open VS Code
-2. Go to Extensions (Ctrl+Shift+X)
-3. Search for "Azure Developer CLI"
-4. Install the extension
+Εγκατάστησε την επέκταση Azure Developer CLI:
+1. Άνοιξε το VS Code
+2. Πήγαινε στις Επεκτάσεις (Ctrl+Shift+X)
+3. Αναζήτησε "Azure Developer CLI"
+4. Εγκατάστησε την επέκταση
 
-Features:
-- IntelliSense for azure.yaml
-- Integrated terminal commands
-- Template browsing
-- Deployment monitoring
+Χαρακτηριστικά:
+- IntelliSense για azure.yaml
+- Ενσωματωμένες εντολές τερματικού
+- Περιήγηση προτύπων
+- Παρακολούθηση ανάπτυξης
 
 ### GitHub Codespaces
-Create a `.devcontainer/devcontainer.json`:
+Δημιούργησε ένα `.devcontainer/devcontainer.json`:
 ```json
 {
   "name": "Azure Developer CLI",
@@ -269,22 +267,22 @@ Create a `.devcontainer/devcontainer.json`:
 ```
 
 ### IntelliJ/JetBrains
-1. Install the Azure plugin
-2. Configure Azure credentials
-3. Use integrated terminal for azd commands
+1. Εγκατάστησε το plugin Azure
+2. Ρύθμισε τα διαπιστευτήρια Azure
+3. Χρησιμοποίησε το ενσωματωμένο τερματικό για εντολές azd
 
-## 🐛 Troubleshooting Installation
+## 🐛 Αντιμετώπιση Προβλημάτων Εγκατάστασης
 
-### Common Issues
+### Κοινά Προβλήματα
 
-#### Permission Denied (Windows)
+#### Άρνηση Άδειας (Windows)
 ```powershell
-# Εκτελέστε το PowerShell ως Διαχειριστής
+# Run PowerShell as Administrator
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
-#### PATH Issues
-Manually add azd to your PATH:
+#### Προβλήματα PATH
+Πρόσθεσε χειροκίνητα το azd στο PATH:
 
 **Windows:**
 ```cmd
@@ -297,49 +295,46 @@ echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#### Network/Proxy Issues
+#### Προβλήματα Δικτύου/Proxy
 ```bash
-# Ρύθμιση proxy
-azd config set http.proxy http://proxy:8080
-azd config set https.proxy https://proxy:8080
-
-# Παράβλεψη επαλήθευσης SSL (δεν συνιστάται για χρήση σε παραγωγή)
-azd config set http.insecure true
+# Configure standard proxy environment variables for the current Bash session
+export HTTP_PROXY="http://proxy:8080"
+export HTTPS_PROXY="http://proxy:8080"
+# Use your organization's trusted CA configuration; do not disable TLS validation.
 ```
 
-#### Version Conflicts
+#### Συγκρούσεις Έκδοσης
 ```bash
-# Αφαιρέστε τις παλιές εγκαταστάσεις
+# Remove old installations
 # Windows: winget uninstall microsoft.azd
 # macOS: brew uninstall azd
-# Linux: Αφαιρέστε το προηγούμενο εκτελέσιμο azd ή τον συμβολικό σύνδεσμο πριν από την επανεγκατάσταση
+# Linux: remove the previous azd binary or symlink before reinstalling
 
-# Καθαρίστε τις ρυθμίσεις
+# Clean configuration
 rm -rf ~/.azd
 ```
 
-### Getting More Help
+### Λήψη Περαιτέρω Βοήθειας
 ```bash
-# Ενεργοποίηση καταγραφής για αποσφαλμάτωση
-export AZD_DEBUG=true
-azd <command> --debug
+# Enable debug logging
+azd show --debug
 
-# Προβολή τρέχουσας διαμόρφωσης
+# View current configuration
 azd config show
 
-# Προβολή τρέχουσας κατάστασης ανάπτυξης
+# View current deployment status
 azd show
 ```
 
-## Updating azd
+## Ενημέρωση του azd
 
-### Update Check
-azd warns when a newer release is available, and you can confirm your current build with:
+### Έλεγχος Ενημέρωσης
+Το azd προειδοποιεί όταν υπάρχει νεότερη έκδοση, και μπορείς να επιβεβαιώσεις την τρέχουσα έκδοσή σου με:
 ```bash
 azd version
 ```
 
-### Manual Updates
+### Χειροκίνητες Ενημερώσεις
 
 **Windows (winget):**
 ```cmd
@@ -356,102 +351,104 @@ brew upgrade azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-## 💡 Frequently Asked Questions
+## 💡 Συχνές Ερωτήσεις
 
 <details>
-<summary><strong>Ποια είναι η διαφορά μεταξύ azd και az CLI;</strong></summary>
+<summary><strong>Ποια η διαφορά ανάμεσα σε azd και az CLI;</strong></summary>
 
-**Azure CLI (az)**: Εργαλείο χαμηλού επιπέδου για τη διαχείριση μεμονωμένων πόρων του Azure
+**Azure CLI (az)**: Εργαλείο χαμηλού επιπέδου για διαχείριση μεμονωμένων πόρων Azure
 - `az webapp create`, `az storage account create`
 - Ένας πόρος τη φορά
-- Έμφαση στη διαχείριση υποδομής
+- Εστίαση στη διαχείριση υποδομής
 
 **Azure Developer CLI (azd)**: Εργαλείο υψηλού επιπέδου για ολοκληρωμένες αναπτύξεις εφαρμογών
-- `azd up` αναπτύσσει ολόκληρη την εφαρμογή με όλους τους πόρους
+- `azd up` αναπτύσσει ολόκληρη εφαρμογή με όλους τους πόρους
 - Ροές εργασίας βασισμένες σε πρότυπα
 - Εστίαση στην παραγωγικότητα των προγραμματιστών
 
-**Χρειάζεστε και τα δύο**: το azd χρησιμοποιεί το az CLI για την ταυτοποίηση
+**Είναι ανεξάρτητα**: Το azd χρησιμοποιεί τη δική του αυθεντικοποίηση από προεπιλογή. Εγκατέστησε και κάνε είσοδο στο Azure CLI μόνο για εντολές `az`, ή επικεντρώσου ρητά στο `azd config set auth.useAzCliAuth true`.
 </details>
 
 <details>
 <summary><strong>Μπορώ να χρησιμοποιήσω το azd με υπάρχοντες πόρους Azure;</strong></summary>
 
-Ναι! Μπορείτε να:
-1. Εισάγετε υπάρχοντες πόρους σε περιβάλλοντα azd
-2. Αναφερθείτε σε υπάρχοντες πόρους στα Bicep πρότυπά σας
-3. Χρησιμοποιήσετε το azd για νέες αναπτύξεις παράλληλα με την υπάρχουσα υποδομή
+Ναι! Μπορείς:
+1. Να εισάγεις υπάρχοντες πόρους σε περιβάλλοντα azd
+2. Να αναφέρεσαι σε υπάρχοντες πόρους στα πρότυπα Bicep σου
+3. Να χρησιμοποιήσεις το azd για νέες αναπτύξεις μαζί με υπάρχουσα υποδομή
 
-Δείτε τον [Configuration Guide](configuration.md) για λεπτομέρειες.
+Δες τον [Οδηγό Παραμετροποίησης](../chapter-03-configuration/configuration.md) για λεπτομέρειες.
 </details>
 
 <details>
-<summary><strong>Λειτουργεί το azd με το Azure Government ή το Azure China;</strong></summary>
+<summary><strong>Το azd λειτουργεί με Azure Government ή Azure China;</strong></summary>
 
-Ναι, διαμορφώστε το cloud:
+Ναι, ρύθμισε το cloud:
 ```bash
-# Azure Κυβέρνηση
-az cloud set --name AzureUSGovernment
-az login
+# Azure Government (azd)
+azd config set cloud.name AzureUSGovernment
+azd auth login
 
-# Azure Κίνα
-az cloud set --name AzureChinaCloud
-az login
+# Azure China (alternative)
+azd config set cloud.name AzureChinaCloud
+azd auth login
 ```
+
+Αν χρησιμοποιείς επίσης Azure CLI, ρύθμισε ξεχωριστά το `az cloud set --name ...`. Οι υπηρεσίες προτύπων και η διαθεσιμότητα μοντέλων διαφέρουν ανά cloud.
 </details>
 
 <details>
-<summary><strong>Μπορώ να χρησιμοποιήσω το azd σε pipelines CI/CD;</strong></summary>
+<summary><strong>Μπορώ να χρησιμοποιήσω το azd σε CI/CD pipelines;</strong></summary>
 
-Απολύτως! Το azd έχει σχεδιαστεί για αυτοματοποίηση:
+Απόλυτα! Το azd έχει σχεδιαστεί για αυτοματοποίηση:
 - Ενσωμάτωση με GitHub Actions
 - Υποστήριξη Azure DevOps
-- Ταυτοποίηση με service principal
-- Λειτουργία χωρίς αλληλεπίδραση
+- Αυθεντικοποίηση μέσω service principal
+- Λειτουργία χωρίς παρέμβαση χρήστη (non-interactive)
 
-Δείτε τον [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) για μοτίβα CI/CD.
+Δες τον [Οδηγό Ανάπτυξης](../chapter-04-infrastructure/deployment-guide.md) για πρότυπα CI/CD.
 </details>
 
 <details>
-<summary><strong>Πόρο κόστος έχει η χρήση του azd;</strong></summary>
+<summary><strong>Πόσο κοστίζει η χρήση του azd;</strong></summary>
 
-Το azd καθαυτό είναι **πλήρως δωρεάν** και ανοιχτού κώδικα. Πληρώνετε μόνο για:
-- Τους πόρους Azure που αναπτύσσετε
-- Το κόστος κατανάλωσης Azure (υπολογιστική ισχύ, αποθήκευση, κ.λπ.)
+Το azd είναι **εντελώς δωρεάν** και ανοιχτού κώδικα. Πληρώνεις μόνο για:
+- Τους Azure πόρους που αναπτύσσεις
+- Το κόστος χρήσης Azure (υπολογισμός, αποθήκευση, κλπ.)
 
-Χρησιμοποιήστε `azd provision --preview` για να εκτιμήσετε τα έξοδα πριν την ανάπτυξη.
+Χρησιμοποίησε `azd provision --preview` για να ελέγξεις τους προτεινόμενους πόρους και μετά εκτίμησε το κόστος με τον [Υπολογιστή Τιμολόγησης Azure](https://azure.microsoft.com/pricing/calculator/). Το Preview δεν υπολογίζει τιμές.
 </details>
 
-## Next Steps
+## Επόμενα Βήματα
 
-1. **Complete authentication**: Ensure you can access your Azure subscription
-2. **Try your first deployment**: Follow the [First Project Guide](first-project.md)
-3. **Explore templates**: Browse available templates with `azd template list`
-4. **Configure your IDE**: Set up your development environment
+1. **Ολοκλήρωσε την αυθεντικοποίηση**: Βεβαιώσου ότι έχεις πρόσβαση στη συνδρομή σου στο Azure
+2. **Δοκίμασε την πρώτη σου ανάπτυξη**: Ακολούθησε τον [Οδηγό Πρώτου Έργου](first-project.md)
+3. **Εξερεύνησε πρότυπα**: Περιηγήσου στα διαθέσιμα πρότυπα με `azd template list`
+4. **Ρύθμισε το IDE σου**: Παραμετροποίησε το περιβάλλον ανάπτυξης
 
-## Support
+## Υποστήριξη
 
-If you encounter issues:
-- [Official Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Report Issues](https://github.com/Azure/azure-dev/issues)
-- [Community Discussions](https://github.com/Azure/azure-dev/discussions)
-- [Azure Support](https://azure.microsoft.com/support/)
-- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Get Azure command guidance directly in your editor with `npx skills add microsoft/github-copilot-for-azure`
+Αν αντιμετωπίσεις προβλήματα:
+- [Επίσημη Τεκμηρίωση](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Αναφορά Προβλημάτων](https://github.com/Azure/azure-dev/issues)
+- [Συζητήσεις Κοινότητας](https://github.com/Azure/azure-dev/discussions)
+- [Υποστήριξη Azure](https://azure.microsoft.com/support/)
+- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Λάβε καθοδήγηση εντολών Azure απευθείας στον επεξεργαστή σου με `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
-- **⬅️ Previous**: [AZD Basics](azd-basics.md) 
-- **➡️ Next**: [Your First Project](first-project.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Πλοήγηση Κεφαλαίου:**
+- **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
+- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 1 - Θεμέλια & Γρήγορη Εκκίνηση
+- **⬅️ Προηγούμενο**: [Βασικά του AZD](azd-basics.md) 
+- **➡️ Επόμενο**: [Το Πρώτο Σου Έργο](first-project.md)
+- **🚀 Επόμενο Κεφάλαιο**: [Κεφάλαιο 2: Ανάπτυξη με Προτεραιότητα την Τεχνητή Νοημοσύνη](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**✅ Installation Complete!** Continue to [Your First Project](first-project.md) to start building with azd.
+**✅ Εγκατάσταση Ολοκληρώθηκε!** Συνέχισε στο [Πρώτο Σου Έργο](first-project.md) για να ξεκινήσεις να δημιουργείς με το azd.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Αποποίηση ευθυνών**:
-Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης με τεχνητή νοημοσύνη [Co-op Translator](https://github.com/Azure/co-op-translator). Παρότι επιδιώκουμε την ακρίβεια, να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στη γλώσσα του πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για οποιεσδήποτε παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης με τεχνητή νοημοσύνη [Co-op Translator](https://github.com/Azure/co-op-translator). Ενώ επιδιώκουμε την ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,22 +1,22 @@
 # บทที่ 2: การพัฒนาแบบ AI-First
 
-**📚 คอร์ส**: [AZD สำหรับผู้เริ่มต้น](../../README.md) | **⏱️ ระยะเวลา**: 1-2 ชั่วโมง | **⭐ ความซับซ้อน**: ระดับกลาง
+**📚 คอร์ส**: [AZD สำหรับผู้เริ่มต้น](../../README.md) | **⏱️ ระยะเวลา**: 4-5 ชั่วโมง รวมเวิร์กช็อป | **⭐ ความซับซ้อน**: ระดับกลาง
 
 ---
 
 ## ภาพรวม
 
-บทนี้มุ่งเน้นที่การปรับใช้แอปพลิเคชันที่ขับเคลื่อนด้วย AI โดยใช้ Azure Developer CLI และบริการ Microsoft Foundry ตั้งแต่แอปแชท AI ง่าย ๆ ไปจนถึงเอเจนต์อัจฉริยะที่มีเครื่องมือ
+บทนี้เน้นการปรับใช้แอปพลิเคชันที่ขับเคลื่อนด้วย AI โดยใช้ Azure Developer CLI และบริการ Microsoft Foundry ตั้งแต่แอปแชต AI ง่ายๆ ไปจนถึงเอเจนต์อัจฉริยะที่มาพร้อมเครื่องมือ
 
-> **หมายเหตุการตรวจสอบ (2026-07-13):** ลำดับคำสั่งและคำแนะนำส่วนขยายในบทนี้ได้รับการตรวจสอบกับ `azd` `1.27.1` และรุ่นพรีวิวปัจจุบันของส่วนขยายเอเจนต์ AI `azure.ai.agents` `1.0.0-beta.5` หากคุณใช้ AZD รุ่นเก่าโปรดอัปเดตก่อนแล้วจึงดำเนินการตามแบบฝึกหัด
+> **รีวิวเวอร์ชัน (2026-11-04):** คำแนะนำ AI CLI ได้รับการตรวจสอบกับเอกสาร/แหล่งที่มาที่เผยแพร่ `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, และ `azure.ai.evaluations` `1.0.0-beta.2` ใช้ `azd >= 1.37.0` สำหรับเวิร์กโฟลว์รวม การประเมินผลในตอนนี้ใช้พื้นที่ชื่อ `azd ai eval` แยกต่างหาก; ดู [การเปลี่ยนแปลงเวอร์ชันและคำแนะนำการย้ายข้อมูล](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes) นี่ไม่ใช่การตรวจสอบการปรับใช้แบบสด
 
 ## วัตถุประสงค์การเรียนรู้
 
-โดยการเรียนจบบทนี้ คุณจะได้:
+เมื่อทำบทนี้จบ คุณจะสามารถ:
 - ปรับใช้แอป AI โดยใช้เทมเพลต AZD ที่สร้างไว้ล่วงหน้า
-- เข้าใจการผสานการทำงานของ Microsoft Foundry กับ AZD
-- กำหนดค่าและปรับแต่งเอเจนต์ AI ด้วยเครื่องมือ
-- ปรับใช้แอป RAG (Retrieval-Augmented Generation)
+- เข้าใจการผสาน Microsoft Foundry กับ AZD
+- กำหนดค่าและปรับแต่งเอเจนต์ AI พร้อมเครื่องมือ
+- ปรับใช้แอป RAG (การสร้างเนื้อหาที่เสริมด้วยการดึงข้อมูล)
 
 ---
 
@@ -25,49 +25,53 @@
 | # | บทเรียน | คำอธิบาย | เวลา |
 |---|--------|-------------|------|
 | 1 | [การผสาน Microsoft Foundry](microsoft-foundry-integration.md) | เชื่อมต่อ AZD กับบริการ Foundry | 30 นาที |
-| 2 | [คู่มือเอเจนต์ AI](agents.md) | ปรับใช้เอเจนต์อัจฉริยะพร้อมเครื่องมือ | 45 นาที |
+| 2 | [คู่มือเอเจนต์ AI](agents.md) | ปรับใช้เอเจนต์อัจฉริยะที่มาพร้อมเครื่องมือ | 45 นาที |
 | 3 | [การปรับใช้โมเดล AI](ai-model-deployment.md) | ปรับใช้และกำหนดค่าโมเดล AI | 30 นาที |
-| 4 | [ห้องปฏิบัติการเวิร์กช็อป AI](ai-workshop-lab.md) | ลงมือทำ: ทำให้โซลูชัน AI ของคุณพร้อมใช้กับ AZD | 60 นาที |
+| 4 | [ห้องปฏิบัติการเวิร์กช็อป AI](ai-workshop-lab.md) | ปฏิบัติการ: สำรวจเทมเพลตและวางแผนการแปลง | 2-3 ชั่วโมง |
 
 ---
 
 ## 🚀 เริ่มต้นอย่างรวดเร็ว
 
+เลือกตัวเลือกหนึ่งในไดเรกทอรีว่างใหม่ `.` ที่ต่อท้ายจะเป็นการเริ่มต้นไดเรกทอรีปัจจุบัน; มิฉะนั้น AZD สามารถสร้างไดเรกทอรีย่อยโดยไม่เปลี่ยนไดเรกทอรีทำงานของเชลล์ของคุณ
+
 ```bash
-# ตัวเลือกที่ 1: แอปแชท RAG
-azd init --template azure-search-openai-demo
+# Option 1: RAG Chat Application
+azd init --template azure-search-openai-demo .
 azd up
 
-# ตัวเลือกที่ 2: ตัวแทน AI
-azd init --template get-started-with-ai-agents
+# Option 2: AI Agents
+azd init --template get-started-with-ai-agents .
 azd up
 
-# ตัวเลือกที่ 3: แอปแชทด่วน
-azd init --template openai-chat-app-quickstart
+# Option 3: Quick Chat App
+azd init --template openai-chat-app-quickstart .
 azd up
 ```
 
 ---
 
-## 🤖 เทมเพลต AI ที่โดดเด่น
+## 🤖 เทมเพลต AI แนะนำ
 
 | เทมเพลต | คำอธิบาย | บริการ |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | การแชท RAG พร้อมการอ้างอิง | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | เอเจนต์ AI พร้อมเครื่องมือ | บริการเอเจนต์ AI |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | แชท AI พื้นฐาน | OpenAI + Container Apps |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | แชต RAG พร้อมการอ้างอิง | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | เอเจนต์ AI พร้อมเครื่องมือ | บริการ AI Agent |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | แชต AI พื้นฐาน | OpenAI + Container Apps |
 
 ---
 
-## 💰 การรับรู้ค่าใช้จ่าย
+## 💰 ความรู้เรื่องค่าใช้จ่าย
 
-| สภาพแวดล้อม | ค่าใช้จ่ายรายเดือนโดยประมาณ |
+เหล่านี้เป็นช่วงราคาประมาณเพื่อให้เห็นภาพ ไม่ใช่ราคาเสนอหรือเพดาน; ปริมาณการใช้งานโมเดล, SKU ของ Search/compute, ภูมิภาค, และฟีเจอร์เสริมสามารถเกินช่วงนี้ได้ โปรดตรวจสอบคำแนะนำราคาปัจจุบันของตัวอย่างที่เลือกก่อนจัดเตรียม
+
+| สภาพแวดล้อม | ค่าใช้จ่ายต่อเดือนโดยประมาณ |
 |-------------|----------------------|
 | การพัฒนา | $80-150 |
-| สเตจจิ้ง | $150-300 |
+| การเตรียมงาน | $150-300 |
 | การผลิต | $300-3,500+ |
 
-**เคล็ดลับ:** รันคำสั่ง `azd down` หลังการทดสอบเพื่อหลีกเลี่ยงค่าใช้จ่าย
+**คำแนะนำ:** รัน `azd down` หลังทดสอบเพื่อหลีกเลี่ยงค่าใช้จ่าย
 
 ---
 
@@ -75,9 +79,9 @@ azd up
 
 | ทิศทาง | บทที่ |
 |-----------|---------|
-| **ก่อนหน้า** | [บทที่ 1: รากฐาน](../chapter-01-foundation/README.md) |
+| **ก่อนหน้า** | [บทที่ 1: พื้นฐาน](../chapter-01-foundation/README.md) |
 | **ถัดไป** | [บทที่ 3: การกำหนดค่า](../chapter-03-configuration/README.md) |
-| **ข้ามไป** | [บทที่ 8: รูปแบบการผลิต](../chapter-08-production/README.md) |
+| **ข้ามไปที่** | [บทที่ 8: รูปแบบการผลิต](../chapter-08-production/README.md) |
 
 ---
 

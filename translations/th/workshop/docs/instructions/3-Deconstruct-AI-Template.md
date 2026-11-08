@@ -1,280 +1,133 @@
-# 3. แยกองค์ประกอบของเทมเพลต
+# 3. แยกวิเคราะห์เทมเพลต
 
-!!! tip "เมื่อสิ้นสุดโมดูลนี้ คุณจะสามารถ"
+!!! tip "เมื่อจบโมดูลนี้คุณจะสามารถ"
 
-    - [ ] เปิดใช้งาน GitHub Copilot กับ MCP servers สำหรับช่วยเหลือ Azure
-    - [ ] เข้าใจโครงสร้างโฟลเดอร์และส่วนประกอบของเทมเพลต AZD
-    - [ ] สำรวจรูปแบบการจัดการโครงสร้างพื้นฐานด้วยโค้ด (Bicep)
-    - [ ] **แลป 3:** ใช้ GitHub Copilot เพื่อสำรวจและเข้าใจสถาปัตยกรรมของรีโพสิตอรี
-
----
-
-
-ด้วยเทมเพลต AZD และ Azure Developer CLI (`azd`) เราสามารถเริ่มต้นการพัฒนาปัญญาประดิษฐ์ได้อย่างรวดเร็วด้วยรีโพสิตอรีมาตรฐานที่มีโค้ดตัวอย่าง โครงสร้างพื้นฐาน และไฟล์กำหนดค่าต่าง ๆ — ในรูปแบบของโปรเจกต์ _starter_ พร้อมใช้งานสำหรับการปรับใช้ทันที
-
-**แต่ตอนนี้ เราต้องเข้าใจโครงสร้างโปรเจกต์และฐานโค้ด — และสามารถปรับแต่งเทมเพลต AZD ได้ — โดยไม่จำเป็นต้องมีประสบการณ์หรือเข้าใจ AZD มาก่อน!**
+    - [ ] Use GitHub Copilot and optional MCP tools for Azure documentation and read-only exploration
+    - [ ] Identify the template's application, infrastructure, configuration, and test entry points
+    - [ ] Verify generated explanations against actual repository files
+    - [ ] **Lab 3:** Trace one request and one configuration input through the project
 
 ---
 
 ## 1. เปิดใช้งาน GitHub Copilot
 
-### 1.1 ติดตั้ง GitHub Copilot Chat
+เปิดตัวอย่าง AI ที่สร้างขึ้นแล้วใน VS Code และเปิดใช้งาน [GitHub Copilot](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) ลงชื่อเข้าใช้ด้วยบัญชีที่มีแผนที่เหมาะสม; ข้อจำกัดการใช้งานจะแตกต่างกัน ขอให้ Copilot อธิบาย repository ก่อนอนุมัติการเปลี่ยนแปลง
 
-ถึงเวลาสำรวจ [GitHub Copilot กับ Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) แล้ว ตอนนี้เราสามารถใช้ภาษาธรรมชาติอธิบายงานในระดับสูง แล้วรับความช่วยเหลือในการดำเนินการ สำหรับแลปนี้ เราจะใช้ [แผน Copilot Free](https://github.com/github-copilot/signup) ซึ่งมีขีดจำกัดรายเดือนสำหรับการระบุคำตอบและแชท
+### เซิร์ฟเวอร์ MCP ที่เป็นทางเลือก
 
-ส่วนขยายนี้สามารถติดตั้งจาก Marketplace และมักจะมีให้ใน Codespaces หรือสภาพแวดล้อม dev container อยู่แล้ว _คลิก `Open Chat` จากเมนูไอคอน Copilot แล้วพิมพ์ข้อความ เช่น `What can you do?`_ — อาจมีการแจ้งให้เข้าสู่ระบบ **GitHub Copilot Chat พร้อมใช้งานแล้ว**
+บริการเหล่านี้สามารถให้เครื่องมือเพิ่มเติม:
 
-### 1.2 ติดตั้ง MCP Servers
+- [Azure MCP Server](https://learn.microsoft.com/azure/developer/azure-mcp-server/overview)
+- [Microsoft Learn MCP Server](https://learn.microsoft.com/training/support/mcp)
 
-เพื่อให้ Agent mode มีประสิทธิภาพ มันจำเป็นต้องเข้าถึงเครื่องมือที่เหมาะสมเพื่อช่วยดึงความรู้ หรือดำเนินการต่าง ๆ นี่คือจุดที่ MCP servers มีประโยชน์ เราจะตั้งค่าเซิร์ฟเวอร์ดังนี้:
+ใน VS Code ทบทวน [คำแนะนำการกำหนดค่า MCP](https://code.visualstudio.com/docs/copilot/chat/mcp-servers) และสร้าง `.vscode/mcp.json` หากจำเป็น:
 
-1. [Azure MCP Server](../../../../../workshop/docs/instructions)
-1. [Microsoft Docs MCP Server](../../../../../workshop/docs/instructions)
+```json
+{
+  "servers": {
+    "Azure MCP Server": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@azure/mcp@latest", "server", "start"]
+    },
+    "microsoft.docs.mcp": {
+      "type": "http",
+      "url": "https://learn.microsoft.com/api/mcp"
+    }
+  }
+}
+```
 
-วิธีเปิดใช้งาน:
+คำสั่ง `npx` ต้องการการติดตั้ง Node.js/npm ที่รองรับและดาวน์โหลดโค้ดที่ใช้ปฏิบัติการ ทบทวนแพ็กเกจและตรึงเวอร์ชันที่อนุมัติสำหรับการตั้งค่าทีมที่ทำซ้ำได้ เริ่มเซิร์ฟเวอร์โดยใช้คอนโทรล MCP ของ VS Code และตรวจสอบเครื่องมือที่มีให้; ชื่ออาจเปลี่ยนระหว่างเวอร์ชัน
 
-1. สร้างไฟล์ชื่อ `.vscode/mcp.json` ถ้าไม่มีอยู่
-1. คัดลอกเนื้อหาต่อไปนี้ลงในไฟล์นั้น แล้วเริ่มเซิร์ฟเวอร์!
-   ```json title=".vscode/mcp.json"
-   {
-      "servers": {
-         "Azure MCP Server": {
-            "command": "npx",
-            "args": [
-            "-y",
-            "@azure/mcp@latest",
-            "server",
-            "start"
-            ]
-         },
-         "microsoft.docs.mcp": {
-            "type": "http",
-            "url": "https://learn.microsoft.com/api/mcp"
-         }
-      }
-   }
-   ```
+**การพิสูจน์ตัวตนแยกต่างหาก** ใช้ `azd auth login` สำหรับ AZD ปฏิบัติตามขั้นตอนการพิสูจน์ตัวตนที่มีเอกสารของ Azure MCP สำหรับเครื่องมือของมัน; การเข้าสู่ระบบ AZD เพียงอย่างเดียวไม่สร้างเซสชัน MCP ใช้ `az login` แยกต่างหากเมื่อแบบฝึกหัดหรือตัวฮุกเรียกใช้ Azure CLI
 
-??? warning "คุณอาจพบข้อผิดพลาดว่าคำสั่ง `npx` ยังไม่ถูกติดตั้ง (คลิกเพื่อขยายวิธีแก้ไข)"
+ทดลองใช้พรอมต์แบบอ่านอย่างเดียว:
 
-      ในการแก้ไข ให้เปิดไฟล์ `.devcontainer/devcontainer.json` และเพิ่มบรรทัดนี้ในส่วน features แล้วสร้างคอนเทนเนอร์ใหม่ คุณจะมี `npx` ติดตั้งแล้ว
+1. “ใช้ Microsoft Learn MCP เพื่อค้นหาคู่มือการกำหนดค่า Azure Developer CLI.”
+2. “อธิบาย `azure.yaml` ของ repository นี้; อ้างอิงไฟล์ที่ใช้งานแต่ละตัวฮุก”
+3. “โดยใช้เครื่องมือ Azure MCP ที่มีอยู่, แสดงรายการทรัพยากรที่ฉันปรับใช้อย่างไม่แก้ไขอะไร”
 
-      ```title="" linenums="0"
-         "features": {
-            "ghcr.io/devcontainers/features/node:1": {},
-            ...
-         },
-      ```
+ตรวจสอบ tenant/subscription ที่เลือกและการเรียกเครื่องมือที่เสนอทุกครั้ง อย่าอนุมัติการสร้างทรัพยากร การลบ หรือการเปลี่ยนแปลงการเข้าถึงเพียงเพื่อสำรวจสถาปัตยกรรม
 
----
+## 2. เข้าใจสถาปัตยกรรม
 
-### 1.3 ทดสอบ GitHub Copilot Chat
+ตัวอย่างนี้โฮสต์ backend Python FastAPI และ frontend React/TypeScript ใน Azure Container Apps. backend สื่อสารกับ agent ในโครงการ Microsoft Foundry. การดึงข้อมูลและการสังเกตการณ์ขึ้นอยู่กับฟีเจอร์เทมเพลตที่เปิดใช้งานและการตั้งค่าที่สำเร็จ; ไม่ได้รับประกันเพียงเพราะแอปพลิเคชันถูกปรับใช้แล้ว
 
-**ใช้คำสั่ง `azd auth login` เพื่อยืนยันตัวตนกับ Azure ผ่านบรรทัดคำสั่ง VS Code ก่อน ใช้ `az login` ด้วยหากคุณต้องการเรียกใช้คำสั่ง Azure CLI โดยตรง**
+![สถาปัตยกรรมประกอบ](../../../../../translated_images/th/architecture.8cec470ec15c65c7.webp)
 
-ตอนนี้คุณควรสามารถตรวจสอบสถานะการสมัครใช้งาน Azure ได้ และถามคำถามเกี่ยวกับทรัพยากรหรือการกำหนดค่าที่ถูกปรับใช้ ลองใช้คำสั่งเหล่านี้:
+เปรียบเทียบแผนภาพนี้กับ [คู่มือการปรับใช้ต้นน้ำปัจจุบัน](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deployment.md) และทรัพยากรของคุณเอง ตรวจสอบการกำหนดค่าการปรับใช้โมเดล, เครื่องมือ agent, managed identity, การกำหนดบทบาท และทรัพยากร AI Search/Application Insights ทางเลือก
 
-1. `List my Azure resource groups`
-1. `#foundry list my current deployments`
+**แบบฝึกหัด:** ขอให้ Copilot ติดตามคำขอแชทจาก frontend ผ่าน API ไปยัง Foundry พร้อมการอ้างอิงไฟล์และฟังก์ชัน เปิดดูการอ้างอิงเหล่านั้นและตรวจสอบคำอธิบาย อย่าสรุปการพิสูจน์ตัวตน การส่งเส้นทาง หรือการอนุญาตจากแผนภาพเพียงอย่างเดียว
 
-คุณยังสามารถถามเกี่ยวกับเอกสาร Azure และรับคำตอบจาก Microsoft Docs MCP server ดังนี้:
+## 3. โครงสร้าง repository
 
-1. `#microsoft_docs_search What is Azure Developer CLI?`
-1. `#microsoft_docs_search Show me a Python tutorial to chat with deployed model`
+เส้นทางที่เลือกต่อไปนี้ได้รับการตรวจสอบกับตัวอย่างเมื่อวันที่ 4 พฤศจิกายน 2026. รุ่นที่สร้างของคุณยังคงเป็นแหล่งข้อมูลที่ถูกต้อง:
 
-หรือขอโค้ดตัวอย่างเพื่อทำงาน ลองใช้คำสั่งนี้ดู
+```text
+get-started-with-ai-agents/
+  azure.yaml
+  docker-compose.yaml
+  requirements-dev.txt
+  .devcontainer/
+  infra/
+    main.bicep
+    main.parameters.json
+    api.bicep
+    core/
+  src/
+    Dockerfile
+    pyproject.toml
+    requirements.txt
+    api/
+      main.py
+      routes.py
+      search_index_manager.py
+    frontend/
+      package.json
+      src/
+    files/
+  scripts/
+    validate_env_vars.sh
+    validate_env_vars.ps1
+    postdeploy.sh
+    postdeploy.ps1
+  tests/
+    test_evaluation.py
+    test_red_teaming.py
+  docs/
+    deployment.md
+    deploy_customization.md
+    ai_search.md
+    observability.md
+    local_development.md
+    troubleshooting.md
+```
 
-1. `Give me a Python code example that uses AAD for an interactive chat client`
+### โครงสร้างพื้นฐานและการตั้งค่า
 
-ในโหมด `Ask` จะให้โค้ดที่คุณสามารถคัดลอกและลองใช้ ในโหมด `Agent` อาจก้าวไปไกลกว่าโดยสร้างทรัพยากรที่เกี่ยวข้องให้คุณ — รวมสคริปต์ติดตั้งและเอกสาร — เพื่อช่วยการดำเนินงานนั้น
+`infra/main.bicep` เป็นผู้จัดการทรัพยากร; `main.parameters.json` เชื่อมโยงอินพุตเทมเพลตกับค่าของสภาพแวดล้อม AZD. `azure.yaml` เลือกแอปพลิเคชันเซอร์วิสและตัวฮุกวงจรชีวิต แทรกตามอินพุตเช่น `USE_AZURE_AI_SEARCH_SERVICE` ผ่านไฟล์เหล่านี้เพื่อค้นหาสิ่งที่เปลี่ยนแปลงจริงๆ
 
-**ตอนนี้คุณพร้อมเริ่มสำรวจเทมเพลตรีโพสิตอรีแล้ว**
+### แอปพลิเคชันและตัวตน
 
----
+อ่าน `src/api/` และ `src/frontend/` ร่วมกัน ระบุจุดที่สร้างหรือดึง agent, จุดที่กำหนดค่าเครื่องมือ/คำสั่ง, และตัวตนที่ใช้การเรียก Azure แต่ละครั้ง ไฟล์ตัวอย่างภายใต้ `src/files/` เป็นข้อมูลสาธิต ไม่ใช่แคตตาล็อกการผลิตหรือโมเดลการอนุญาต
 
-## 2. วิเคราะห์สถาปัตยกรรม
+### การทดสอบและการสังเกตการณ์
 
-??? prompt "ถาม: อธิบายสถาปัตยกรรมแอปพลิเคชันใน docs/images/architecture.png ในย่อหน้าเดียว"
+จุดเริ่มต้นการประเมินและ red-teaming ปัจจุบันอยู่ภายใต้ `tests/`; การอ้างอิงไดเรกทอรี `evals/` และ `airedteaming/` เก่ากว่าไม่ได้ใช้กับตัวอย่างนี้ อ่าน `docs/observability.md` สำหรับข้อกำหนดเบื้องต้นและค่าใช้จ่ายก่อนรันการทดสอบบนคลาวด์ การทดสอบ Python เหล่านี้แยกจากส่วนขยาย AZD `azure.ai.evaluations` ทางเลือก
 
-      แอปพลิเคชันนี้เป็นแอปแชทที่ขับเคลื่อนด้วยปัญญาประดิษฐ์บน Azure ซึ่งแสดงตัวอย่างสถาปัตยกรรมแบบ agent-based ที่ทันสมัย โซลูชันนี้เน้นที่ Azure Container App ซึ่งโฮสต์โค้ดแอปหลักที่ประมวลผลอินพุตของผู้ใช้และสร้างคำตอบอัจฉริยะผ่านเอเย่นต์ AI
-      
-      สถาปัตยกรรมนี้ใช้ Microsoft Foundry Project เป็นฐานสำหรับความสามารถ AI เชื่อมต่อกับ Azure AI Services ที่ให้โมเดลภาษาเบื้องหลัง (เช่น gpt-4.1-mini) และฟังก์ชันการทำงานของเอเย่นต์ การโต้ตอบของผู้ใช้ไหลผ่าน frontend ที่สร้างด้วย React ไปยัง backend FastAPI ที่สื่อสารกับบริการเอเย่นต์ AI เพื่อสร้างคำตอบตามบริบท
-      
-      ระบบมีความสามารถในการดึงความรู้ผ่านการค้นหาไฟล์หรือบริการ Azure AI Search เพื่อให้เอเย่นต์เข้าถึงและอ้างอิงข้อมูลจากเอกสารที่อัปโหลด สำหรับความเป็นเลิศในการปฏิบัติงาน สถาปัตยกรรมรวมการตรวจสอบอย่างละเอียดผ่าน Application Insights และ Log Analytics Workspace สำหรับติดตาม บันทึก และปรับปรุงประสิทธิภาพ
-      
-      Azure Storage ให้ blob storage สำหรับข้อมูลแอปและการอัปโหลดไฟล์ ในขณะที่ Managed Identity ช่วยรักษาความปลอดภัยการเข้าถึงระหว่างทรัพยากร Azure โดยไม่ต้องเก็บข้อมูลรับรอง โซลูชันทั้งหมดออกแบบเพื่อความสามารถในการปรับขนาดและการบำรุงรักษา โดยแอปในคอนเทนเนอร์จะปรับขนาดอัตโนมัติตามความต้องการ พร้อมความปลอดภัย การตรวจสอบ และ CI/CD ผ่านระบบบริการบริหารของ Azure
+## 4. ตรวจสอบสิ่งที่ค้นพบ
 
-![Architecture](../../../../../translated_images/th/architecture.48d94861e6e6cdc0.webp)
+- ระบุเส้นทาง API, การโต้ตอบกับ agent, และโค้ดดึงข้อมูลสำหรับคำถามตัวอย่างหนึ่ง
+- อธิบายว่าตัวตนใดเข้าถึง Foundry และการตั้งค่าใดเลือกจุดสิ้นสุดของมัน
+- ค้นหาสคริปต์ pre-up และ post-deploy ที่แท้จริงและพฤติกรรมการจัดการข้อผิดพลาด
+- ระบุการพึ่งพาหรือฟีเจอร์ทางเลือกใดที่ขาดหายไปจากการปรับใช้ของคุณ
 
----
-
-## 3. โครงสร้างรีโพสิตอรี
-
-!!! prompt "ถาม: อธิบายโครงสร้างโฟลเดอร์เทมเพลต เริ่มด้วยแผนภาพลำดับชั้น"
-
-??? info "คำตอบ: แผนภาพลำดับชั้น"
-
-      ```bash title="" 
-      get-started-with-ai-agents/
-      ├── 📋 Configuration & Setup
-      │   ├── azure.yaml                    # การกำหนดค่า Azure Developer CLI
-      │   ├── docker-compose.yaml           # คอนเทนเนอร์สำหรับพัฒนาท้องถิ่น
-      │   ├── pyproject.toml                # การกำหนดค่าโปรเจกต์ Python
-      │   ├── requirements-dev.txt          # ไลบรารีสำหรับพัฒนาซอฟต์แวร์
-      │   └── .devcontainer/                # การตั้งค่า dev container สำหรับ VS Code
-      │
-      ├── 🏗️ Infrastructure (infra/)
-      │   ├── main.bicep                    # เทมเพลตโครงสร้างพื้นฐานหลัก
-      │   ├── api.bicep                     # ทรัพยากรเฉพาะ API
-      │   ├── main.parameters.json          # พารามิเตอร์โครงสร้างพื้นฐาน
-      │   └── core/                         # โมดูลส่วนประกอบโครงสร้างพื้นฐาน
-      │       ├── ai/                       # การกำหนดค่าบริการ AI
-      │       ├── host/                     # โครงสร้างพื้นฐานสำหรับโฮสต์
-      │       ├── monitor/                  # การตรวจสอบและบันทึก
-      │       ├── search/                   # การตั้งค่า Azure AI Search
-      │       ├── security/                 # การรักษาความปลอดภัยและตัวตน
-      │       └── storage/                  # การกำหนดค่าบัญชีที่เก็บข้อมูล
-      │
-      ├── 💻 Application Source (src/)
-      │   ├── api/                          # Backend API
-      │   │   ├── main.py                   # จุดเข้าแอป FastAPI
-      │   │   ├── routes.py                 # กำหนดเส้นทาง API
-      │   │   ├── search_index_manager.py   # ฟังก์ชันการค้นหา
-      │   │   ├── data/                     # การจัดการข้อมูล API
-      │   │   ├── static/                   # ไฟล์เว็บสเตติก
-      │   │   └── templates/                # เทมเพลต HTML
-      │   ├── frontend/                     # frontend React/TypeScript
-      │   │   ├── package.json              # ไลบรารี Node.js
-      │   │   ├── vite.config.ts            # กำหนดค่าการ build ด้วย Vite
-      │   │   └── src/                      # โค้ดต้นทาง frontend
-      │   ├── data/                         # ไฟล์ข้อมูลตัวอย่าง
-      │   │   └── embeddings.csv            # ข้อมูล embeddings ที่คำนวณไว้ล่วงหน้า
-      │   ├── files/                        # ไฟล์ฐานความรู้
-      │   │   ├── customer_info_*.json      # ตัวอย่างข้อมูลลูกค้า
-      │   │   └── product_info_*.md         # เอกสารผลิตภัณฑ์
-      │   ├── Dockerfile                    # การกำหนดค่าคอนเทนเนอร์
-      │   └── requirements.txt              # ไลบรารี Python
-      │
-      ├── 🔧 Automation & Scripts (scripts/)
-      │   ├── postdeploy.sh/.ps1           # การตั้งค่าหลังจากปรับใช้
-      │   ├── setup_credential.sh/.ps1     # การตั้งค่าความเชื่อถือ
-      │   ├── validate_env_vars.sh/.ps1    # การตรวจสอบตัวแปรสิ่งแวดล้อม
-      │   └── resolve_model_quota.sh/.ps1  # การจัดการโควต้ารุ่นโมเดล
-      │
-      ├── 🧪 Testing & Evaluation
-      │   ├── tests/                        # การทดสอบหน่วยและรวม
-      │   │   └── test_search_index_manager.py
-      │   ├── evals/                        # เฟรมเวิร์กประเมินเอเย่นต์
-      │   │   ├── evaluate.py               # ตัวรันการประเมินผล
-      │   │   ├── eval-queries.json         # คำถามทดสอบ
-      │   │   └── eval-action-data-path.json
-      │   ├── sandbox/                      # สนามทดลองพัฒนา
-      │   │   ├── 1-quickstart.py           # ตัวอย่างเริ่มต้น
-      │   │   └── aad-interactive-chat.py   # ตัวอย่างการยืนยันตัวตน
-      │   └── airedteaming/                 # การประเมินความปลอดภัย AI
-      │       └── ai_redteaming.py          # การทดสอบทีมแดง
-      │
-      ├── 📚 Documentation (docs/)
-      │   ├── deployment.md                 # คู่มือการปรับใช้
-      │   ├── local_development.md          # คำแนะนำตั้งค่าในเครื่อง
-      │   ├── troubleshooting.md            # ปัญหาทั่วไป & วิธีแก้ไข
-      │   ├── azure_account_setup.md        # ความต้องการ Azure
-      │   └── images/                       # สินทรัพย์เอกสาร
-      │
-      └── 📄 Project Metadata
-         ├── README.md                     # ภาพรวมโปรเจกต์
-         ├── CODE_OF_CONDUCT.md           # กฎเกณฑ์ชุมชน
-         ├── CONTRIBUTING.md              # คู่มือร่วมพัฒนา
-         ├── LICENSE                      # ข้อตกลงใบอนุญาต
-         └── next-steps.md                # คำแนะนำหลังปรับใช้
-      ```
-
-### 3.1 สถาปัตยกรรมแอปหลัก
-
-เทมเพลตนี้ใช้รูปแบบ **แอปพลิเคชันเว็บแบบ full-stack** โดยมี:
-
-- **Backend**: Python FastAPI ผสานกับ Azure AI
-- **Frontend**: TypeScript/React ใช้ระบบ build Vite
-- **โครงสร้างพื้นฐาน**: เทมเพลต Azure Bicep สำหรับทรัพยากรคลาวด์
-- **คอนเทนเนอร์**: Docker เพื่อการปรับใช้ที่สอดคล้อง
-
-### 3.2 โครงสร้างพื้นฐานด้วยโค้ด (bicep)
-
-ชั้นโครงสร้างพื้นฐานใช้เทมเพลต **Azure Bicep** ที่จัดระเบียบแบบโมดูลาร์:
-
-   - **`main.bicep`**: ประสานงานทรัพยากร Azure ทั้งหมด
-   - **โมดูล `core/`**: ส่วนประกอบซ้ำได้ของบริการต่าง ๆ
-      - บริการ AI (Microsoft Foundry Models, AI Search)
-      - โฮสต์คอนเทนเนอร์ (Azure Container Apps)
-      - การตรวจสอบ (Application Insights, Log Analytics)
-      - ความปลอดภัย (Key Vault, Managed Identity)
-
-### 3.3 โค้ดต้นทางแอป (`src/`)
-
-**Backend API (`src/api/`)**:
-
-- REST API บน FastAPI
-- ผสาน Foundry Agents
-- จัดการดัชนีการค้นหาเพื่อดึงความรู้
-- รองรับการอัปโหลดและประมวลผลไฟล์
-
-**Frontend (`src/frontend/`)**:
-
-- SPA ด้วย React/TypeScript สมัยใหม่
-- ใช้ Vite สำหรับพัฒนาและ build เร็ว
-- อินเทอร์เฟซแชทสำหรับโต้ตอบกับเอเย่นต์
-
-**ฐานความรู้ (`src/files/`)**:
-
-- ตัวอย่างข้อมูลลูกค้าและผลิตภัณฑ์
-- แสดงการเรียกใช้ความรู้จากไฟล์
-- ตัวอย่างในรูปแบบ JSON และ Markdown
-
-
-### 3.4 DevOps & อัตโนมัติ
-
-**สคริปต์ (`scripts/`)**:
-
-- สคริปต์ PowerShell และ Bash ข้ามแพลตฟอร์ม
-- ตรวจสอบและตั้งค่าสิ่งแวดล้อม
-- การตั้งค่าหลังปรับใช้
-- การจัดการโควต้ารุ่นโมเดล
-
-**บูรณาการกับ Azure Developer CLI**:
-
-- กำหนดค่า `azure.yaml` สำหรับเวิร์กโฟลว์ `azd`
-- จัดหาและปรับใช้โดยอัตโนมัติ
-- จัดการตัวแปรสิ่งแวดล้อม
-
-### 3.5 ทดสอบ & ประกันคุณภาพ
-
-**เฟรมเวิร์กประเมินผล (`evals/`)**:
-
-- ประเมินประสิทธิภาพเอเย่นต์
-- ทดสอบคุณภาพการตอบคำถาม
-- ท่อประเมินผลอัตโนมัติ
-
-**ความปลอดภัย AI (`airedteaming/`)**:
-
-- ทดสอบทีมแดงเพื่อความปลอดภัย AI
-- สแกนหาช่องโหว่ด้านความปลอดภัย
-- ปฏิบัติการ AI ที่รับผิดชอบ
-
----
-
-## 4. ขอแสดงความยินดี 🏆
-
-คุณใช้ GitHub Copilot Chat กับ MCP servers เพื่อสำรวจรีโพสิตอรีสำเร็จแล้ว
-
-- [X] เปิดใช้งาน GitHub Copilot สำหรับ Azure สำเร็จ
-- [X] เข้าใจสถาปัตยกรรมแอปพลิเคชัน
-- [X] สำรวจโครงสร้างเทมเพลต AZD
-
-นี่ทำให้คุณเห็นภาพของทรัพยากร _infrastructure as code_ สำหรับเทมเพลตนี้ ขั้นตอนต่อไปเราจะดูไฟล์กำหนดค่าสำหรับ AZD กัน
+ดำเนินการต่อไปที่ [กำหนดค่าเทมเพลต](4-Configure-AI-Template.md).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ข้อจำกัดความรับผิดชอบ**:  
-เอกสารนี้ได้รับการแปลโดยใช้บริการแปลภาษา AI [Co-op Translator](https://github.com/Azure/co-op-translator) แม้เราจะพยายามให้ถูกต้อง แต่โปรดทราบว่าการแปลอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้อง เอกสารต้นฉบับในภาษาต้นทางถือเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลที่สำคัญ ขอแนะนำให้ใช้การแปลโดยผู้เชี่ยวชาญที่เป็นมนุษย์ เราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความผิดใด ๆ ที่เกิดขึ้นจากการใช้การแปลนี้
+**ปฏิเสธความรับผิดชอบ**:
+เอกสารนี้ได้รับการแปลโดยใช้บริการแปลภาษา AI [Co-op Translator](https://github.com/Azure/co-op-translator) ขณะที่เราพยายามให้ความถูกต้อง โปรดทราบว่าการแปลโดยอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้อง เอกสารต้นฉบับในภาษาต้นทางควรถูกพิจารณาเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลที่สำคัญ แนะนำให้ใช้การแปลโดยมนุษย์มืออาชีพ เราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความที่ผิดพลาดที่เกิดขึ้นจากการใช้การแปลนี้
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,30 +1,30 @@
-# การรวม Application Insights กับ AZD
+# การบูรณาการ Application Insights กับ AZD
 
-⏱️ **เวลาที่คาดการณ์**: 40-50 นาที | 💰 **ผลกระทบค่าใช้จ่าย**: ~$5-15/เดือน | ⭐ **ความซับซ้อน**: ปานกลาง
+⏱️ **เวลาที่ประเมิน**: 40-50 นาที | 💰 **ผลกระทบค่าใช้จ่าย**: ~$5-15/เดือน | ⭐ **ความซับซ้อน**: ระดับกลาง
 
 **📚 เส้นทางการเรียนรู้:**
-- ← ก่อนหน้า: [Preflight Checks](preflight-checks.md) - การตรวจสอบก่อนการปรับใช้
-- 🎯 **คุณอยู่ที่นี่**: การรวม Application Insights (การตรวจสอบ, เทเลเมทรี, การดีบัก)
-- → ถัดไป: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - ปรับใช้ไปยัง Azure
-- 🏠 [หน้าหลักหลักสูตร](../../README.md)
+- ← ก่อนหน้า: [Preflight Checks](preflight-checks.md) - การตรวจสอบก่อนการเปิดใช้งาน
+- 🎯 **คุณอยู่ที่นี่**: การบูรณาการ Application Insights (การติดตาม, เทเลเมทรี, การดีบัก)
+- → ถัดไป: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - การเปิดใช้งานบน Azure
+- 🏠 [หน้าแรกของคอร์ส](../../README.md)
 
 ---
 
 ## สิ่งที่คุณจะได้เรียนรู้
 
-เมื่อทำบทเรียนนี้จบ คุณจะสามารถ:
-- รวม **Application Insights** เข้าในโปรเจกต์ AZD โดยอัตโนมัติ
-- กำหนดค่า **distributed tracing** สำหรับไมโครเซอร์วิส
-- นำไปใช้ **custom telemetry** (เมตริก, เหตุการณ์, ความสัมพันธ์)
-- ตั้งค่า **live metrics** สำหรับการตรวจสอบแบบเรียลไทม์
-- สร้าง **การแจ้งเตือนและแดชบอร์ด** จากการปรับใช้ AZD
-- ดีบักปัญหาในระบบจริงด้วย **telemetry queries**
+เมื่อจบบทเรียนนี้ คุณจะสามารถ:
+- ประกาศ **Application Insights** ในโครงสร้างพื้นฐานของ AZD และกำหนดค่าเครื่องมือ SDK
+- กำหนดค่า **การติดตามแบบกระจาย** สำหรับไมโครเซอร์วิส
+- ใช้งาน **เทเลเมทรีแบบกำหนดเอง** (เมตริก, เหตุการณ์, การพึ่งพา)
+- ตั้งค่า **เมตริกสด** สำหรับการตรวจสอบแบบเรียลไทม์
+- สร้าง **การแจ้งเตือนและแดชบอร์ด** จากการเปิดใช้งาน AZD
+- ดีบักปัญหาในโปรดักชันด้วย **คำค้นเทเลเมทรี**
 - ปรับแต่ง **กลยุทธ์ค่าใช้จ่ายและการสุ่มตัวอย่าง**
-- ตรวจสอบ **แอปพลิเคชัน AI/LLM** (โทเคน, ความหน่วง, ค่าใช้จ่าย)
+- ตรวจสอบ **แอปพลิเคชัน AI/LLM** (โทเคน, ความล่าช้า, ค่าใช้จ่าย)
 
 ## ทำไม Application Insights กับ AZD ถึงสำคัญ
 
-### ความท้าทาย: การสังเกตในระบบที่ใช้งานจริง
+### ความท้าทาย: การสังเกตการณ์โปรดักชัน
 
 **ถ้าไม่มี Application Insights:**
 ```
@@ -36,7 +36,7 @@
 ❌ Unknown failure rates and bottlenecks
 ```
 
-**ถ้ามี Application Insights + AZD:**
+**เมื่อติดตั้ง Application Insights + AZD:**
 ```
 ✅ Automatic telemetry collection
 ✅ Centralized logs from all services
@@ -44,10 +44,10 @@
 ✅ End-to-end request tracing
 ✅ Performance metrics and insights
 ✅ Real-time dashboards
-✅ AZD provisions everything automatically
+✅ AZD provisions the monitoring declared in your templates
 ```
 
-**การเปรียบเทียบ**: Application Insights เหมือนกับการมีเครื่องบันทึกข้อมูล "กล่องดำ" และแดชบอร์ดในห้องนักบินสำหรับแอปของคุณ คุณจะเห็นทุกอย่างที่เกิดขึ้นแบบเรียลไทม์และสามารถย้อนดูเหตุการณ์ใด ๆ ได้
+**การเปรียบเทียบ**: Application Insights เหมือนกับการมีเครื่องบันทึก "กล่องดำ" และแดชบอร์ดในห้องนักบินสำหรับแอปพลิเคชันของคุณ คุณจะเห็นทุกอย่างที่เกิดขึ้นแบบเรียลไทม์และสามารถเล่นซ้ำเหตุการณ์ใดก็ได้
 
 ---
 
@@ -57,24 +57,24 @@
 
 ```mermaid
 graph TB
-    User[ผู้ใช้/ลูกค้า]
-    App1[แอปคอนเทนเนอร์ 1<br/>เกตเวย์ API]
-    App2[แอปคอนเทนเนอร์ 2<br/>บริการสินค้า]
-    App3[แอปคอนเทนเนอร์ 3<br/>บริการคำสั่งซื้อ]
+    User[User/Client]
+    App1[Container App 1<br/>API Gateway]
+    App2[Container App 2<br/>Product Service]
+    App3[Container App 3<br/>Order Service]
     
-    AppInsights[แอปพลิเคชันอินไซต์<br/>ศูนย์โทรเมทรี]
-    LogAnalytics[(ล็อกแอนาเลติกส์<br/>เวิร์กสเปซ)]
+    AppInsights[Application Insights<br/>Telemetry Hub]
+    LogAnalytics[(Log Analytics<br/>Workspace)]
     
-    Portal[พอร์ทัล Azure<br/>แดชบอร์ด & การแจ้งเตือน]
-    Query[คำสั่ง Kusto<br/>การวิเคราะห์แบบกำหนดเอง]
+    Portal[Azure Portal<br/>Dashboards & Alerts]
+    Query[Kusto Queries<br/>Custom Analysis]
     
     User --> App1
     App1 --> App2
     App2 --> App3
     
-    App1 -.->|การติดตั้งอัตโนมัติ| AppInsights
-    App2 -.->|การติดตั้งอัตโนมัติ| AppInsights
-    App3 -.->|การติดตั้งอัตโนมัติ| AppInsights
+    App1 -.->|Auto-instrumentation| AppInsights
+    App2 -.->|Auto-instrumentation| AppInsights
+    App3 -.->|Auto-instrumentation| AppInsights
     
     AppInsights --> LogAnalytics
     LogAnalytics --> Portal
@@ -83,49 +83,52 @@ graph TB
     style AppInsights fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style LogAnalytics fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
+
 ### สิ่งที่ถูกตรวจสอบโดยอัตโนมัติ
 
-| ประเภทเทเลเมทรี | สิ่งที่จับข้อมูลได้ | กรณีใช้งาน |
+การจับอัตโนมัติที่รองรับจะเก็บข้อมูลคำขอ/การพึ่งพาสำหรับไลบรารีที่ติดตั้งเครื่องมือ เหตุการณ์และเมตริกที่กำหนดเองต้องการโค้ดแอปพลิเคชัน; การทดสอบความพร้อมใช้งานต้องตั้งค่าแยกต่างหาก ระบบจะไม่เก็บทุกแถวด้านล่างเพียงเพราะทรัพยากรมีอยู่
+
+| ประเภทเทเลเมทรี | สิ่งที่จับได้ | การใช้งาน |
 |----------------|------------------|----------|
-| **คำขอ (Requests)** | คำขอ HTTP, รหัสสถานะ, ระยะเวลา | การตรวจสอบประสิทธิภาพ API |
-| **ความสัมพันธ์ (Dependencies)** | การเรียกภายนอก (ฐานข้อมูล, API, storage) | ตรวจหาคอขวด |
-| **ข้อยกเว้น (Exceptions)** | ข้อผิดพลาดที่ไม่ได้จับคู่พร้อมสแต็คเทรซ | ดีบักข้อผิดพลาด |
-| **เหตุการณ์กำหนดเอง (Custom Events)** | เหตุการณ์ธุรกิจ (สมัครสมาชิก, การซื้อ) | การวิเคราะห์และช่องทาง |
-| **เมตริก (Metrics)** | เคาน์เตอร์ประสิทธิภาพ, เมตริกกำหนดเอง | การวางแผนความจุ |
-| **แทรซ (Traces)** | ข้อความล็อกพร้อมความรุนแรง | ดีบักและตรวจสอบ |
-| **ความพร้อมใช้งาน (Availability)** | การทดสอบเวลาทำงานและเวลาตอบสนอง | การตรวจสอบ SLA |
+| **คำขอ** | คำขอ HTTP, รหัสสถานะ, ระยะเวลา | การตรวจสอบประสิทธิภาพ API |
+| **การพึ่งพา** | การเรียกภายนอก (DB, API, ที่เก็บข้อมูล) | การระบุจุดแออัด |
+| **ข้อยกเว้น** | ข้อผิดพลาดที่ไม่ได้จัดการพร้อมสแต็กเทรซ | การดีบักข้อผิดพลาด |
+| **เหตุการณ์กำหนดเอง** | เหตุการณ์ธุรกิจ (ลงชื่อสมัคร, ซื้อของ) | การวิเคราะห์และช่องทาง |
+| **เมตริก** | เคาน์เตอร์ประสิทธิภาพ, เมตริกกำหนดเอง | การวางแผนความจุ |
+| **เทรซ** | ข้อความล็อกพร้อมความรุนแรง | การดีบักและตรวจสอบ |
+| **ความพร้อมใช้งาน** | การทดสอบเวลาใช้งานและเวลาตอบสนอง | การตรวจสอบ SLA |
 
 ---
 
-## ข้อกำหนดเบื้องต้น
+## สิ่งที่ต้องมีล่วงหน้า
 
-### เครื่องมือที่จำเป็น
+### เครื่องมือที่ต้องใช้
 
 ```bash
-# ตรวจสอบ Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ คาดว่า: azd เวอร์ชัน 1.0.0 หรือสูงกว่า
+# Command reference baseline: azd 1.37.2
 
-# ตรวจสอบ Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ คาดว่า: azure-cli 2.50.0 หรือสูงกว่า
+# ✅ Expected: azure-cli 2.50.0 or higher
 ```
 
-### ข้อกำหนดของ Azure
+### ความต้องการของ Azure
 
-- ต้องมีการสมัครสมาชิก Azure ที่ใช้งานอยู่
+- การสมัครใช้งาน Azure ที่เปิดใช้งานอยู่
 - สิทธิ์ในการสร้าง:
   - ทรัพยากร Application Insights
-  - Log Analytics workspaces
+  - พื้นที่ทำงาน Log Analytics
   - Container Apps
-  - Resource groups
+  - กลุ่มทรัพยากร
 
-### ความรู้เบื้องต้น
+### ความรู้พื้นฐานที่ต้องมี
 
 คุณควรได้ทำ:
-- [พื้นฐาน AZD](../chapter-01-foundation/azd-basics.md) - แนวคิดหลักของ AZD
-- [การตั้งค่า](../chapter-03-configuration/configuration.md) - การตั้งค่าสภาพแวดล้อม
-- [โปรเจกต์แรก](../chapter-01-foundation/first-project.md) - การปรับใช้เบื้องต้น
+- [AZD Basics](../chapter-01-foundation/azd-basics.md) - แนวคิดหลักของ AZD
+- [Configuration](../chapter-03-configuration/configuration.md) - การตั้งค่าสภาพแวดล้อม
+- [First Project](../chapter-01-foundation/first-project.md) - การเปิดใช้งานพื้นฐาน
 
 ---
 
@@ -133,7 +136,9 @@ az --version
 
 ### วิธีที่ AZD จัดเตรียม Application Insights
 
-AZD จะสร้างและกำหนดค่า Application Insights โดยอัตโนมัติเมื่อคุณปรับใช้ มาดูกันว่ามันทำงานอย่างไร
+AZD จัดเตรียม Application Insights **เฉพาะเมื่อโครงสร้างพื้นฐานของโปรเจกต์ประกาศไว้** เท่านั้น `azure.yaml` เพียงอย่างเดียวไม่สร้างการตรวจสอบหรือฝังเครื่องมือในโค้ดแอปพลิเคชัน
+
+> **ตัวอย่างขอบเขต:** บทเรียนนี้มีส่วนประกอบการบูรณาการ ไม่ใช่โปรเจกต์ `monitored-app` เต็มรูปแบบในที่เก็บนี้ ต้องเตรียมแม่แบบหลักและการแม็ปพารามิเตอร์, สภาพแวดล้อม Container Apps, การกำหนดค่าการลงทะเบียน/อิมเมจและตัวตน, Dockerfile และแท็กเซอร์วิสก่อนเปิดใช้งาน บทเรียนต่อไปแสดงชิ้นส่วนเสริม/ตัวเลือก ไม่ใช่ไฟล์ที่สามารถวางรวมกันได้แบบไม่แก้ไข เริ่มต้นด้วย [ตัวอย่างไมโครเซอร์วิส](../../../../examples/microservices) ที่ใช้งานได้ถ้าคุณต้องการพื้นฐานที่รันได้
 
 ### โครงสร้างโปรเจกต์
 
@@ -169,10 +174,10 @@ services:
     language: python
     host: containerapp
 
-# AZD automatically provisions monitoring!
+# Monitoring must be declared in infra/ and enabled in application code.
 ```
 
-**แค่นี้!** AZD จะสร้าง Application Insights โดยค่าเริ่มต้น ไม่ต้องตั้งค่าเพิ่มเติมสำหรับการตรวจสอบพื้นฐาน
+นี่คือการประกาศเซอร์วิสที่สามารถเปิดใช้งานได้ ไฟล์ Bicep และการกำหนดค่า SDK ด้านล่างเป็นการจัดเตรียมการตรวจสอบ; azd ไม่ได้เพิ่มให้โดยอัตโนมัติ
 
 ---
 
@@ -223,11 +228,12 @@ output logAnalyticsWorkspaceName string = logAnalytics.name
 output applicationInsightsConnectionString string = applicationInsights.properties.ConnectionString
 output applicationInsightsInstrumentationKey string = applicationInsights.properties.InstrumentationKey
 output applicationInsightsName string = applicationInsights.name
+output applicationInsightsId string = applicationInsights.id
 ```
 
 ---
 
-### ขั้นตอนที่ 3: เชื่อม Container App กับ Application Insights
+### ขั้นตอนที่ 3: เชื่อมต่อ Container App กับ Application Insights
 
 **ไฟล์: `infra/app/api.bicep`**
 
@@ -235,7 +241,8 @@ output applicationInsightsName string = applicationInsights.name
 param name string
 param location string
 param tags object = {}
-param containerAppsEnvironmentName string
+param containerAppsEnvironmentId string
+param containerImage string
 param applicationInsightsConnectionString string
 
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -243,6 +250,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   location: location
   tags: tags
   properties: {
+    managedEnvironmentId: containerAppsEnvironmentId
     configuration: {
       ingress: {
         external: true
@@ -259,7 +267,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: 'api'
-          image: 'myregistry.azurecr.io/api:latest'
+          image: containerImage // Supply an accessible image and registry authentication
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
@@ -291,29 +299,23 @@ output uri string = 'https://${containerApp.properties.configuration.ingress.fqd
 
 ```python
 from flask import Flask, request, jsonify
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.ext.flask.flask_middleware import FlaskMiddleware
-from opencensus.trace.samplers import ProbabilitySampler
+from azure.monitor.opentelemetry import configure_azure_monitor
 import logging
 import os
 
 app = Flask(__name__)
 
-# รับสตริงการเชื่อมต่อ Application Insights
+# Get Application Insights connection string
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
 if connection_string:
-    # กำหนดค่าการติดตามแบบกระจาย
-    middleware = FlaskMiddleware(
-        app,
-        exporter=AzureExporter(connection_string=connection_string),
-        sampler=ProbabilitySampler(rate=1.0)  # การสุ่มตัวอย่าง 100% สำหรับการพัฒนา
+    # Azure Monitor OpenTelemetry instruments supported libraries, including Flask.
+    configure_azure_monitor(
+        connection_string=connection_string,
+        logger_name=__name__,
+        enable_live_metrics=True
     )
-    
-    # กำหนดค่าการบันทึกล็อก
     logger = logging.getLogger(__name__)
-    logger.addHandler(AzureLogHandler(connection_string=connection_string))
     logger.setLevel(logging.INFO)
     
     print("✅ Application Insights enabled")
@@ -325,13 +327,13 @@ else:
 @app.route('/health')
 def health():
     logger.info('Health check endpoint called')
-    return jsonify({'status': 'healthy', 'monitoring': 'enabled'})
+    return jsonify({'status': 'healthy', 'monitoring': 'enabled' if connection_string else 'disabled'})
 
 @app.route('/api/products')
 def get_products():
     logger.info('Fetching products')
     
-    # จำลองการเรียกฐานข้อมูล (ติดตามเป็นการพึ่งพาโดยอัตโนมัติ)
+    # In-memory fixture: this is not a database dependency call.
     products = [
         {'id': 1, 'name': 'Laptop', 'price': 999.99},
         {'id': 2, 'name': 'Mouse', 'price': 29.99},
@@ -356,7 +358,7 @@ def slow_endpoint():
     """Test performance tracking"""
     import time
     logger.info('Slow endpoint called')
-    time.sleep(3)  # จำลองการดำเนินการช้า
+    time.sleep(3)  # Simulate slow operation
     logger.warning('Endpoint took 3 seconds to respond')
     return jsonify({'message': 'Slow operation completed'})
 
@@ -367,27 +369,27 @@ if __name__ == '__main__':
 **ไฟล์: `src/requirements.txt`**
 
 ```txt
-Flask==3.0.0
-opencensus-ext-azure==1.1.13
-opencensus-ext-flask==0.8.1
-gunicorn==21.2.0
+Flask
+azure-monitor-opentelemetry
+gunicorn
+requests
+openai
 ```
+
+แก้ไขการพึ่งพาในโปรเจกต์ของคุณ ทดสอบร่วมกัน และล็อกเวอร์ชันที่ได้ โปรเจกต์ใหม่ควรใช้ Azure Monitor OpenTelemetry ไม่ใช่ผู้ส่งออก OpenCensus Python ที่เลิกใช้แล้ว
 
 ---
 
-### ขั้นตอนที่ 5: ปรับใช้และตรวจสอบ
+### ขั้นตอนที่ 5: เปิดใช้งานและตรวจสอบ
 
 ```bash
-# เริ่มต้น AZD
-azd init
-
-# ติดตั้ง (จัดเตรียม Application Insights โดยอัตโนมัติ)
+# Deploy only after completing and wiring the infrastructure fragments above
 azd up
 
-# รับ URL ของแอป
-APP_URL=$(azd env get-values | grep API_URL | cut -d '=' -f2 | tr -d '"')
+# Get app URL
+APP_URL=$(azd env get-value API_URL) # Requires this output in main.bicep
 
-# สร้างข้อมูลโทรมาตร
+# Generate telemetry
 curl $APP_URL/health
 curl $APP_URL/api/products
 curl $APP_URL/api/error-test
@@ -407,44 +409,39 @@ curl $APP_URL/api/slow
 ### ขั้นตอนที่ 6: ดูเทเลเมทรีใน Azure Portal
 
 ```bash
-# ดึงรายละเอียด Application Insights
+# Get Application Insights details
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# เปิดใน Azure Portal
+# Open in Azure Portal
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"') \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --query "appId" -o tsv
 ```
 
-**ไปที่ Azure Portal → Application Insights → Transaction Search**
+**ไปยัง Azure Portal → Application Insights → Transaction Search**
 
 คุณควรเห็น:
 - ✅ คำขอ HTTP พร้อมรหัสสถานะ
-- ✅ ระยะเวลาคำขอ (เกิน 3 วินาทีสำหรับ `/api/slow`)
+- ✅ ระยะเวลาคำขอ (3 วินาทีขึ้นไปสำหรับ `/api/slow`)
 - ✅ รายละเอียดข้อยกเว้นจาก `/api/error-test`
-- ✅ ข้อความล็อกกำหนดเอง
+- ✅ ข้อความล็อกแบบกำหนดเอง
 
 ---
 
-## บทเรียน 2: เทเลเมทรีและเหตุการณ์กำหนดเอง
+## บทเรียน 2: เทเลเมทรีและเหตุการณ์แบบกำหนดเอง
 
 ### ติดตามเหตุการณ์ธุรกิจ
 
-มาสร้างเทเลเมทรีกำหนดเองสำหรับเหตุการณ์สำคัญทางธุรกิจกัน
+มาเพิ่มเทเลเมทรีแบบกำหนดเองสำหรับเหตุการณ์ที่สำคัญทางธุรกิจกันเถอะ
 
 **ไฟล์: `src/telemetry.py`**
 
 ```python
-from opencensus.ext.azure import metrics_exporter
-from opencensus.stats import aggregation as aggregation_module
-from opencensus.stats import measure as measure_module
-from opencensus.stats import stats as stats_module
-from opencensus.stats import view as view_module
-from opencensus.tags import tag_map as tag_map_module
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import tracer as tracer_module
+from contextlib import contextmanager
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import metrics, trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
@@ -454,31 +451,19 @@ class TelemetryClient:
     def __init__(self, connection_string=None):
         self.connection_string = connection_string or os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
         
-        if not self.connection_string:
-            print("⚠️ Application Insights connection string not found")
-            return
-        
-        # ตั้งค่าตัวบันทึกเหตุการณ์
+        # Configure once per process. If app.py already calls this, keep only
+        # one configure_azure_monitor call and use logger_name='telemetry'.
+        if self.connection_string:
+            configure_azure_monitor(
+                connection_string=self.connection_string,
+                logger_name=__name__,
+                enable_live_metrics=True
+            )
         self.logger = logging.getLogger(__name__)
-        self.logger.addHandler(AzureLogHandler(connection_string=self.connection_string))
         self.logger.setLevel(logging.INFO)
-        
-        # ตั้งค่าตัวส่งออกเมตริก
-        self.stats = stats_module.stats
-        self.view_manager = self.stats.view_manager
-        self.stats_recorder = self.stats.stats_recorder
-        
-        exporter = metrics_exporter.new_metrics_exporter(
-            connection_string=self.connection_string
-        )
-        self.view_manager.register_exporter(exporter)
-        
-        # ตั้งค่าตัวติดตาม
-        self.tracer = tracer_module.Tracer(
-            exporter=AzureExporter(connection_string=self.connection_string)
-        )
-        
-        print("✅ Custom telemetry client initialized")
+        self.tracer = trace.get_tracer(__name__)
+        self.meter = metrics.get_meter(__name__)
+        self.instruments = {}
     
     def track_event(self, event_name: str, properties: dict = None):
         """Track custom business event"""
@@ -486,59 +471,56 @@ class TelemetryClient:
         self.logger.info(
             f"CustomEvent: {event_name}",
             extra={
-                'custom_dimensions': {
+                # OTel log attributes become customDimensions in App Insights.
                     'event_name': event_name,
                     **properties
-                }
             }
         )
     
     def track_metric(self, metric_name: str, value: float, properties: dict = None):
         """Track custom metric"""
         properties = properties or {}
-        self.logger.info(
-            f"CustomMetric: {metric_name} = {value}",
-            extra={
-                'custom_dimensions': {
-                    'metric_name': metric_name,
-                    'value': value,
-                    **properties
-                }
-            }
-        )
+        if metric_name not in self.instruments:
+            self.instruments[metric_name] = self.meter.create_histogram(metric_name)
+        self.instruments[metric_name].record(value, attributes=properties)
     
-    def track_dependency(self, name: str, dependency_type: str, duration: float, success: bool):
-        """Track external dependency call"""
-        with self.tracer.span(name=name) as span:
-            span.add_attribute('dependency.type', dependency_type)
-            span.add_attribute('duration', duration)
-            span.add_attribute('success', success)
+    @contextmanager
+    def track_dependency(self, name: str):
+        """Time the real operation inside a client span; exceptions mark failure."""
+        with self.tracer.start_as_current_span(name, kind=SpanKind.CLIENT) as span:
+            yield span
 
-# ไคลเอนต์การวัดทางไกลระดับโลก
+# Global telemetry client
 telemetry = TelemetryClient()
 ```
 
-### อัปเดตแอปด้วยเหตุการณ์กำหนดเอง
+### อัปเดตแอปพลิเคชันด้วยเหตุการณ์กำหนดเอง
 
-**ไฟล์: `src/app.py` (ปรับปรุง)**
+**ไฟล์: `src/app.py` (เวอร์ชันปรับปรุง)**
+
+เพิ่มเส้นทางเหล่านี้ในแอป Flask ที่มีอยู่; รักษาเส้นทางสุขภาพ/ทดสอบเดิมไว้ บล็อกที่ย่อด้านล่างแสดงแอปแยกเพื่อความชัดเจน การเริ่มต้นเทเลเมทรีตอนนี้อยู่ใน `telemetry.py`—อย่าเริ่มต้นผู้ส่งออกสองครั้ง
 
 ```python
 from flask import Flask, request, jsonify
 from telemetry import telemetry
 import time
 import random
+import os
 
 app = Flask(__name__)
 
 @app.route('/api/purchase', methods=['POST'])
 def purchase():
     """Track purchase event with custom telemetry"""
-    data = request.json
+    data = request.get_json(silent=True) or {}
     product_id = data.get('product_id')
     quantity = data.get('quantity', 1)
     price = data.get('price', 0)
+    if not isinstance(quantity, int) or quantity < 1 or \
+       not isinstance(price, (int, float)) or price < 0:
+        return jsonify({'error': 'quantity and price must be non-negative numbers; quantity >= 1'}), 400
     
-    # ติดตามเหตุการณ์ทางธุรกิจ
+    # Track business event
     telemetry.track_event('Purchase', {
         'product_id': product_id,
         'quantity': quantity,
@@ -546,7 +528,7 @@ def purchase():
         'user_id': request.headers.get('X-User-Id', 'anonymous')
     })
     
-    # ติดตามตัวชี้วัดรายได้
+    # Track revenue metric
     telemetry.track_metric('Revenue', price * quantity, {
         'product_id': product_id,
         'currency': 'USD'
@@ -565,19 +547,19 @@ def search():
     
     start_time = time.time()
     
-    # จำลองการค้นหา (จะเป็นการสอบถามฐานข้อมูลจริง)
+    # Simulate search (would be real database query)
     results = [{'id': 1, 'name': f'Result for {query}'}]
     
-    duration = (time.time() - start_time) * 1000  # แปลงเป็นมิลลิวินาที
+    duration = (time.time() - start_time) * 1000  # Convert to ms
     
-    # ติดตามเหตุการณ์การค้นหา
+    # Track search event
     telemetry.track_event('Search', {
         'query': query,
         'results_count': len(results),
         'duration_ms': duration
     })
     
-    # ติดตามตัวชี้วัดประสิทธิภาพการค้นหา
+    # Track search performance metric
     telemetry.track_metric('SearchDuration', duration, {
         'query_length': len(query)
     })
@@ -589,26 +571,14 @@ def external_call():
     """Track external API dependency"""
     import requests
     
-    start_time = time.time()
-    success = True
-    
     try:
-        # จำลองการเรียกใช้ API ภายนอก
-        response = requests.get('https://api.example.com/data', timeout=5)
-        result = response.json()
+        # Set an actual test endpoint; api.example.com is not a working API.
+        with telemetry.track_dependency('ExternalAPI'):
+            response = requests.get(os.environ['EXTERNAL_API_URL'], timeout=5)
+            response.raise_for_status()
+            result = response.json()
     except Exception as e:
-        success = False
-        result = {'error': str(e)}
-    
-    duration = (time.time() - start_time) * 1000
-    
-    # ติดตามการพึ่งพา
-    telemetry.track_dependency(
-        name='ExternalAPI',
-        dependency_type='HTTP',
-        duration=duration,
-        success=success
-    )
+        return jsonify({'error': 'External dependency failed'}), 502
     
     return jsonify(result)
 
@@ -616,19 +586,19 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-### ทดสอบเทเลเมทรีกำหนดเอง
+### ทดสอบเทเลเมทรีแบบกำหนดเอง
 
 ```bash
-# ติดตามเหตุการณ์การซื้อ
+# Track purchase event
 curl -X POST $APP_URL/api/purchase \
   -H "Content-Type: application/json" \
   -H "X-User-Id: user123" \
   -d '{"product_id": 1, "quantity": 2, "price": 29.99}'
 
-# ติดตามเหตุการณ์การค้นหา
+# Track search event
 curl "$APP_URL/api/search?q=laptop"
 
-# ติดตามการพึ่งพาภายนอก
+# Track external dependency
 curl $APP_URL/api/external-call
 ```
 
@@ -647,10 +617,10 @@ traces
     user_id = tostring(customDimensions.user_id)
 | order by timestamp desc
 
-// View revenue metrics
+// Revenue recorded in Purchase events (not a billing ledger)
 traces
-| where customDimensions.metric_name == "Revenue"
-| summarize TotalRevenue = sum(todouble(customDimensions.value)) by bin(timestamp, 1h)
+| where customDimensions.event_name == "Purchase"
+| summarize TotalRevenue = sum(todouble(customDimensions.total_amount)) by bin(timestamp, 1h)
 | render timechart
 
 // View search performance
@@ -665,11 +635,11 @@ traces
 
 ---
 
-## บทเรียน 3: Distributed Tracing สำหรับไมโครเซอร์วิส
+## บทเรียน 3: การติดตามแบบกระจายสำหรับไมโครเซอร์วิส
 
-### เปิดใช้งานการแทรซข้ามบริการ
+### เปิดใช้งานการติดตามข้ามบริการ
 
-สำหรับไมโครเซอร์วิส Application Insights จะเชื่อมโยงคำขอระหว่างบริการโดยอัตโนมัติ
+ด้วยเครื่องมือที่เข้ากันได้และการส่งต่อ W3C trace-context, Application Insights เชื่อมโยงคำขอข้ามบริการ การแชร์ connection string เพียงอย่างเดียวไม่สร้างส่วน parent-child span ชิ้นส่วนสถาปัตยกรรมดังต่อไปนี้อ้างอิงโมดูลที่คุณต้องเป็นผู้ดำเนินการเอง
 
 **ไฟล์: `infra/main.bicep`**
 
@@ -739,40 +709,41 @@ output APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applica
 output GATEWAY_URL string = apiGateway.outputs.uri
 ```
 
-### ดูธุรกรรมตั้งแต่ต้นจนจบ
+### ดูธุรกรรมแบบ end-to-end
 
 ```mermaid
 sequenceDiagram
     participant User
-    participant Gateway as API Gateway<br/>(รหัสติดตาม: abc123)
-    participant Product as บริการสินค้า<br/>(รหัสต้นทาง: abc123)
-    participant Order as บริการคำสั่งซื้อ<br/>(รหัสต้นทาง: abc123)
+    participant Gateway as API Gateway<br/>(Trace ID: abc123)
+    participant Product as Product Service<br/>(Parent ID: abc123)
+    participant Order as Order Service<br/>(Parent ID: abc123)
     participant AppInsights as Application Insights
     
     User->>Gateway: POST /api/checkout
-    Note over Gateway: เริ่มต้นการติดตาม: abc123
-    Gateway->>AppInsights: บันทึกการร้องขอ (รหัสติดตาม: abc123)
+    Note over Gateway: Start Trace: abc123
+    Gateway->>AppInsights: Log request (Trace ID: abc123)
     
     Gateway->>Product: GET /products/123
-    Note over Product: รหัสต้นทาง: abc123
-    Product->>AppInsights: บันทึกการเรียกใช้งานแบบพึ่งพา
-    Product-->>Gateway: รายละเอียดสินค้า
+    Note over Product: Parent ID: abc123
+    Product->>AppInsights: Log dependency call
+    Product-->>Gateway: Product details
     
     Gateway->>Order: POST /orders
-    Note over Order: รหัสต้นทาง: abc123
-    Order->>AppInsights: บันทึกการเรียกใช้งานแบบพึ่งพา
-    Order-->>Gateway: คำสั่งซื้อถูกสร้าง
+    Note over Order: Parent ID: abc123
+    Order->>AppInsights: Log dependency call
+    Order-->>Gateway: Order created
     
-    Gateway-->>User: การชำระเงินเสร็จสมบูรณ์
-    Gateway->>AppInsights: บันทึกการตอบสนอง (ระยะเวลา: 450มิลลิวินาที)
+    Gateway-->>User: Checkout complete
+    Gateway->>AppInsights: Log response (Duration: 450ms)
     
-    Note over AppInsights: เชื่อมโยงโดยรหัสติดตาม
+    Note over AppInsights: Correlation by Trace ID
 ```
-**สอบถามการแทรซตั้งแต่ต้นจนจบ:**
+
+**คำค้นหา trace แบบ end-to-end:**
 
 ```kusto
 // Find complete request flow
-let traceId = "abc123...";  // Get from response header
+let traceId = "abc123...";  // Copy operation_Id from a request in Application Insights
 dependencies
 | union requests
 | where operation_Id == traceId
@@ -788,43 +759,43 @@ dependencies
 
 ---
 
-## บทเรียน 4: Live Metrics และการตรวจสอบแบบเรียลไทม์
+## บทเรียน 4: เมตริกสดและการตรวจสอบแบบเรียลไทม์
 
 ### เปิดใช้งาน Live Metrics Stream
 
-Live Metrics ให้ข้อมูลเทเลเมทรีแบบเรียลไทม์โดยมีความหน่วงน้อยกว่า 1 วินาที
+Live Metrics ให้เทเลเมทรีเกือบแบบเรียลไทม์เมื่อรองรับและเปิดใช้งานโดย SDK ไม่ใช่ SLA ความหน่วงเวลาตั้งค่าสำหรับ Python OpenTelemetry ด้านบนเลือกใช้ `enable_live_metrics=True`
 
 **เข้าถึง Live Metrics:**
 
 ```bash
-# รับข้อมูลทรัพยากร Application Insights
+# Get Application Insights resource
 APPI_NAME=$(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"')
 
-# รับกลุ่มทรัพยากร
+# Get resource group
 RG_NAME=$(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"')
 
 echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME → Live Metrics"
 ```
 
 **สิ่งที่คุณเห็นแบบเรียลไทม์:**
-- ✅ อัตราคำขอที่เข้า (คำขอต่อวินาที)
-- ✅ การเรียกความสัมพันธ์ออกไป
+- ✅ อัตราคำขอเข้า (คำขอต่อวินาที)
+- ✅ การเรียกพึ่งพาภายนอกออกไป
 - ✅ จำนวนข้อยกเว้น
-- ✅ การใช้งาน CPU และหน่วยความจำ
-- ✅ จำนวนเซิร์ฟเวอร์ที่ใช้งานอยู่
+- ✅ การใช้ CPU และหน่วยความจำ
+- ✅ จำนวนเซอร์เวอร์ที่ใช้งาน
 - ✅ ตัวอย่างเทเลเมทรี
 
 ### สร้างโหลดเพื่อทดสอบ
 
 ```bash
-# สร้างโหลดเพื่อดูเมตริกแบบเรียลไทม์
+# Generate load to see live metrics
 for i in {1..100}; do
-  curl $APP_URL/api/products &
-  curl $APP_URL/api/search?q=test$i &
+  curl --silent --max-time 10 "$APP_URL/api/products"
+  curl --silent --max-time 10 "$APP_URL/api/search?q=test$i"
 done
 
-# ดูเมตริกแบบเรียลไทม์ใน Azure Portal
-# คุณควรเห็นอัตราการร้องขอเพิ่มขึ้นอย่างรวดเร็ว
+# Watch live metrics in Azure Portal
+# You should see request rate spike
 ```
 
 ---
@@ -833,20 +804,20 @@ done
 
 ### แบบฝึกหัด 1: ตั้งค่าการแจ้งเตือน ⭐⭐ (ระดับกลาง)
 
-**เป้าหมาย**: สร้างการแจ้งเตือนสำหรับอัตราข้อผิดพลาดสูงและการตอบสนองช้า
+**เป้าหมาย**: สร้างการแจ้งเตือนสำหรับอัตราความผิดพลาดสูงและการตอบสนองช้า
 
 **ขั้นตอน:**
 
-1. **สร้างการแจ้งเตือนสำหรับอัตราข้อผิดพลาด:**
+1. **สร้างการแจ้งเตือนสำหรับอัตราความผิดพลาด:**
 
 ```bash
-# รับ ID ของทรัพยากร Application Insights
+# Get Application Insights resource ID
 APPI_ID=$(az monitor app-insights component show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
   --query "id" -o tsv)
 
-# สร้างการแจ้งเตือนเมตริกสำหรับคำขอล้มเหลว
+# Create metric alert for failed requests
 az monitor metrics alert create \
   --name "High-Error-Rate" \
   --resource-group $RG_NAME \
@@ -854,7 +825,7 @@ az monitor metrics alert create \
   --condition "count requests/failed > 10" \
   --window-size 5m \
   --evaluation-frequency 1m \
-  --description "Alert when error rate exceeds 10 per 5 minutes"
+  --description "Alert when failed request count exceeds 10 per 5 minutes"
 ```
 
 2. **สร้างการแจ้งเตือนสำหรับการตอบสนองช้า:**
@@ -947,36 +918,36 @@ output slowResponseAlertId string = slowResponseAlert.id
 4. **ทดสอบการแจ้งเตือน:**
 
 ```bash
-# สร้างข้อผิดพลาด
+# Generate errors
 for i in {1..20}; do
   curl $APP_URL/api/error-test
 done
 
-# สร้างการตอบสนองช้า
+# Generate slow responses
 for i in {1..10}; do
   curl $APP_URL/api/slow
 done
 
-# ตรวจสอบสถานะการแจ้งเตือน (รอ 5-10 นาที)
+# Check rule configuration (not fired/resolved alert-instance history)
 az monitor metrics alert list \
   --resource-group $RG_NAME \
-  --query "[].{Name:name, Enabled:enabled, State:properties.enabled}" \
+  --query "[].{Name:name, Enabled:enabled}" \
   --output table
 ```
 
 **✅ เกณฑ์ความสำเร็จ:**
 - ✅ สร้างการแจ้งเตือนได้สำเร็จ
 - ✅ การแจ้งเตือนทำงานเมื่อเกินเกณฑ์
-- ✅ ดูประวัติการแจ้งเตือนได้ใน Azure Portal
-- ✅ ผสานกับการปรับใช้ AZD
+- ✅ ดูประวัติการแจ้งเตือนใน Azure Portal ได้
+- ✅ รวมเข้ากับการเปิดใช้งาน AZD
 
 **เวลา**: 20-25 นาที
 
 ---
 
-### แบบฝึกหัด 2: สร้างแดชบอร์ดกำหนดเอง ⭐⭐ (ระดับกลาง)
+### แบบฝึกหัด 2: สร้างแดชบอร์ดแบบกำหนดเอง ⭐⭐ (ระดับกลาง)
 
-**เป้าหมาย**: สร้างแดชบอร์ดแสดงเมตริกสำคัญของแอปพลิเคชัน
+**เป้าหมาย**: สร้างแดชบอร์ดแสดงเมตริกแอปพลิเคชันสำคัญ
 
 **ขั้นตอน:**
 
@@ -984,13 +955,13 @@ az monitor metrics alert list \
 
 ไปที่: Azure Portal → Dashboards → New Dashboard
 
-2. **เพิ่มแผ่นแสดงข้อมูลสำหรับเมตริกหลัก:**
+2. **เพิ่มไทล์สำหรับเมตริกสำคัญ:**
 
-- จำนวนคำขอ (24 ชั่วโมงล่าสุด)
-- เวลาเฉลี่ยในการตอบสนอง
-- อัตราข้อผิดพลาด
-- 5 งานที่ช้าที่สุด
-- การกระจายภูมิศาสตร์ของผู้ใช้
+- จำนวนคำขอ (ใน 24 ชั่วโมงที่ผ่านมา)
+- เวลาเฉลี่ยการตอบสนอง
+- อัตราความผิดพลาด
+- 5 อันดับการดำเนินการช้าที่สุด
+- การกระจายทางภูมิศาสตร์ของผู้ใช้
 
 3. **สร้างแดชบอร์ดผ่าน Bicep:**
 
@@ -1011,7 +982,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
         parts: [
           // Request count
           {
-            position: { x: 0, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 0
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1032,7 +1008,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
           }
           // Error rate
           {
-            position: { x: 6, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 6
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1063,10 +1044,10 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
 output dashboardId string = dashboard.id
 ```
 
-4. **ปรับใช้แดชบอร์ด:**
+4. **เปิดใช้งานแดชบอร์ด:**
 
-```bash
-# เพิ่มไปที่ main.bicep
+```bicep
+// Add to a subscription-scoped main.bicep with rg and monitoring declared
 module dashboard './core/dashboard.bicep' = {
   name: 'dashboard'
   scope: rg
@@ -1076,28 +1057,30 @@ module dashboard './core/dashboard.bicep' = {
     location: location
   }
 }
+```
 
-# ติดตั้งใช้งาน
+```bash
+# Deploy
 azd up
 ```
 
 **✅ เกณฑ์ความสำเร็จ:**
-- ✅ แดชบอร์ดแสดงเมตริกหลักครบถ้วน
-- ✅ ปักหมุดบนหน้าแรกของ Azure Portal ได้
+- ✅ แดชบอร์ดแสดงเมตริกสำคัญ
+- ✅ สามารถปักหมุดที่หน้าแรกของ Azure Portal ได้
 - ✅ อัปเดตแบบเรียลไทม์
-- ✅ ปรับใช้ผ่าน AZD ได้
+- ✅ เปิดใช้งานผ่าน AZD ได้
 
 **เวลา**: 25-30 นาที
 
 ---
 
-### แบบฝึกหัด 3: ตรวจสอบแอป AI/LLM ⭐⭐⭐ (ขั้นสูง)
+### แบบฝึกหัด 3: ตรวจสอบแอป AI/LLM ⭐⭐⭐ (ระดับสูง)
 
-**เป้าหมาย**: ติดตามการใช้งาน Microsoft Foundry Models (โทเคน, ค่าใช้จ่าย, ความหน่วง)
+**เป้าหมาย**: ติดตามการใช้งาน Microsoft Foundry Models (โทเคน, ค่าใช้จ่าย, ความล่าช้า)
 
 **ขั้นตอน:**
 
-1. **สร้าง wrapper ตรวจสอบ AI:**
+1. **สร้างห่อหุ้มสำหรับการตรวจสอบ AI:**
 
 **ไฟล์: `src/ai_telemetry.py`**
 
@@ -1109,19 +1092,22 @@ import time
 class MonitoredAzureOpenAI:
     """Microsoft Foundry Models client with automatic telemetry"""
     
-    def __init__(self, api_key, endpoint, api_version="2024-02-01"):
+    def __init__(self, api_key, endpoint, input_usd_per_million,
+                 output_usd_per_million, api_version="2024-10-21"):
         self.client = AzureOpenAI(
             api_key=api_key,
             api_version=api_version,
             azure_endpoint=endpoint
         )
+        self.input_rate = input_usd_per_million
+        self.output_rate = output_usd_per_million
     
     def chat_completion(self, model: str, messages: list, **kwargs):
         """Track chat completion with telemetry"""
         start_time = time.time()
         
         try:
-            # เรียกใช้ Microsoft Foundry Models
+            # Call Microsoft Foundry Models
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
@@ -1130,18 +1116,19 @@ class MonitoredAzureOpenAI:
             
             duration = (time.time() - start_time) * 1000  # ms
             
-            # สกัดการใช้งาน
+            # Extract usage
             usage = response.usage
             prompt_tokens = usage.prompt_tokens
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # คำนวณค่าใช้จ่าย (ราคาของ gpt-4.1)
-            prompt_cost = (prompt_tokens / 1000) * 0.03  # $0.03 ต่อ 1K โทเคน
-            completion_cost = (completion_tokens / 1000) * 0.06  # $0.06 ต่อ 1K โทเคน
+            # Approximation: supply actual deployment/region/contract rates.
+            # Cached input, batch, provisioned and other charges need separate accounting.
+            prompt_cost = (prompt_tokens / 1_000_000) * self.input_rate
+            completion_cost = (completion_tokens / 1_000_000) * self.output_rate
             total_cost = prompt_cost + completion_cost
             
-            # ติดตามเหตุการณ์ที่กำหนดเอง
+            # Track custom event
             telemetry.track_event('OpenAI_Request', {
                 'model': model,
                 'prompt_tokens': prompt_tokens,
@@ -1152,7 +1139,7 @@ class MonitoredAzureOpenAI:
                 'success': True
             })
             
-            # ติดตามเมตริกส์
+            # Track metrics
             telemetry.track_metric('OpenAI_Tokens', total_tokens, {
                 'model': model,
                 'type': 'total'
@@ -1191,10 +1178,12 @@ import os
 
 app = Flask(__name__)
 
-# เริ่มต้นไคลเอนต์ OpenAI ที่ได้รับการตรวจสอบ
+# Initialize monitored OpenAI client
 openai_client = MonitoredAzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
+    endpoint=os.environ['AZURE_OPENAI_ENDPOINT'],
+    input_usd_per_million=float(os.environ['INPUT_USD_PER_MILLION']),
+    output_usd_per_million=float(os.environ['OUTPUT_USD_PER_MILLION'])
 )
 
 @app.route('/api/chat', methods=['POST'])
@@ -1202,9 +1191,9 @@ def chat():
     data = request.json
     user_message = data.get('message')
     
-    # เรียกด้วยการตรวจสอบอัตโนมัติ
+    # Call with automatic monitoring
     response = openai_client.chat_completion(
-        model='gpt-4.1',
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'], # Deployment name, not catalog ID
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1216,13 +1205,13 @@ def chat():
     })
 ```
 
-3. **สอบถามเมตริก AI:**
+3. **คำค้นหาเมตริก AI:**
 
 ```kusto
 // Total AI spend over time
 traces
 | where customDimensions.event_name == "OpenAI_Request"
-| where customDimensions.success == "True"
+| where tobool(customDimensions.success) == true
 | summarize TotalCost = sum(todouble(customDimensions.cost_usd)) by bin(timestamp, 1h)
 | render timechart
 
@@ -1251,45 +1240,32 @@ traces
 ```
 
 **✅ เกณฑ์ความสำเร็จ:**
-- ✅ ติดตามการเรียก OpenAI ทุกครั้งโดยอัตโนมัติ
-- ✅ แสดงการใช้งานโทเคนและค่าใช้จ่ายได้
-- ✅ ตรวจสอบความหน่วงได้
-- ✅ ตั้งการแจ้งเตือนงบประมาณได้
+- ✅ การเรียก OpenAI ทุกครั้งถูกติดตามโดยอัตโนมัติ
+- ✅ การใช้งานและค่าใช้จ่ายโทเคนแสดงให้เห็น
+- ✅ ตรวจสอบความล่าช้า
+- ✅ ตั้งค่าการแจ้งเตือนงบประมาณได้
 
 **เวลา**: 35-45 นาที
 
 ---
 
-## การปรับค่าใช้จ่ายให้เหมาะสม
+## การปรับแต่งค่าใช้จ่าย
 
 ### กลยุทธ์การสุ่มตัวอย่าง
 
 ควบคุมค่าใช้จ่ายด้วยการสุ่มตัวอย่างเทเลเมทรี:
 
 ```python
-from opencensus.trace.samplers import ProbabilitySampler
+import os
 
-# การพัฒนา: การสุ่ม 100%
-sampler = ProbabilitySampler(rate=1.0)
-
-# การผลิต: การสุ่ม 10% (ลดต้นทุนลง 90%)
-sampler = ProbabilitySampler(rate=0.1)
-
-# การสุ่มแบบปรับตัว (ปรับเองโดยอัตโนมัติ)
-from opencensus.trace.samplers import AdaptiveSampler
-sampler = AdaptiveSampler()
+# Configure before the one configure_azure_monitor() call in your process.
+os.environ["OTEL_TRACES_SAMPLER"] = "microsoft.fixed_percentage"
+os.environ["OTEL_TRACES_SAMPLER_ARG"] = "0.1" # 10% trace sampling
 ```
 
-**ใน Bicep:**
+การสุ่มตัวอย่างเทรซไม่ได้ลดทุกประเภทเทเลเมทรีลง 90% เมตริกและล็อกที่ปล่อยแยกต่างหากต้องมีการควบคุมปริมาณของตัวเอง เลือกอัตราโดยใช้ความต้องการในการสังเกต ไม่ใช่การห้ามผลิตภัณฑ์ทั้งหมด
 
-```bicep
-resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
-  name: applicationInsightsName
-  properties: {
-    SamplingPercentage: 10  // 10% sampling
-  }
-}
-```
+กำหนดการสุ่มตัวอย่างของ SDK อย่างชัดเจน; สมบัติ `SamplingPercentage` ของคอมโพเนนต์ไม่ใช่ตัวแทนการกำหนดค่าซัมเพลอร์ Python OpenTelemetry
 
 ### การเก็บรักษาข้อมูล
 
@@ -1303,40 +1279,40 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 }
 ```
 
-### การประมาณค่าใช้จ่ายรายเดือน
+### การประมาณค่ารายเดือน
 
-| ปริมาณข้อมูล | ระยะเวลาการเก็บรักษา | ค่าใช้จ่ายรายเดือน |
+| ปริมาณข้อมูล | การเก็บรักษา | ค่าใช้จ่ายรายเดือน |
 |-------------|-----------|--------------|
 | 1 GB/เดือน | 30 วัน | ~$2-5 |
 | 5 GB/เดือน | 30 วัน | ~$10-15 |
 | 10 GB/เดือน | 90 วัน | ~$25-40 |
 | 50 GB/เดือน | 90 วัน | ~$100-150 |
 
-**ฟรี**: รวม 5 GB/เดือน
+ตัวเลขเหล่านี้เป็นแนวทาง ไม่ใช่ราคายืนยัน โปรดตรวจสอบราคา ingestion, การเก็บรักษา, การแจ้งเตือน และการทดสอบในภูมิภาคและข้อตกลงของคุณ; สิทธิ์ใช้งานฟรีจะแบ่งปัน/กำหนดขอบเขตตามราคาของ Azure Monitor ไม่ใช่ SKU ฟรีที่รับประกันต่อทรัพยากร Application Insights
 
 ---
 
-## การตรวจสอบความรู้
+## จุดตรวจสอบความรู้
 
-### 1. การรวมพื้นฐาน ✓
+### 1. การบูรณาการพื้นฐาน ✓
 
-ทดสอบความเข้าใจ:
+ทดสอบความเข้าใจของคุณ:
 
-- [ ] **ข้อถาม 1**: AZD จัดเตรียม Application Insights อย่างไร?
-  - **คำตอบ**: อัตโนมัติผ่านเทมเพลต Bicep ใน `infra/core/monitoring.bicep`
+- [ ] **ถาม 1**: AZD จัดเตรียม Application Insights อย่างไร?
+  - **ตอบ**: มันเปิดใช้งานทรัพยากรการตรวจสอบที่ประกาศอย่างชัดเจนโดยแม่แบบ Bicep/Terraform ของโปรเจกต์
 
-- [ ] **ข้อถาม 2**: ตัวแปรสภาพแวดล้อมใดเปิดใช้งาน Application Insights?
-  - **คำตอบ**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
+- [ ] **ถาม 2**: ตัวแปรสภาพแวดล้อมใดที่เปิดใช้งาน Application Insights?
+  - **ตอบ**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
 
-- [ ] **ข้อถาม 3**: เทเลเมทรีหลักสามประเภทคืออะไร?
-  - **คำตอบ**: คำขอ (HTTP calls), ความสัมพันธ์ (การเรียกภายนอก), ข้อยกเว้น (ข้อผิดพลาด)
+- [ ] **ถาม 3**: เทเลเมทรีหลักสามประเภทคืออะไร?
+  - **ตอบ**: คำขอ (การเรียก HTTP), การพึ่งพา (การเรียกภายนอก), ข้อยกเว้น (ข้อผิดพลาด)
 
-**ถ่ายทอดความรู้:**
+**การตรวจสอบด้วยตนเอง:**
 ```bash
-# ตรวจสอบว่าได้กำหนดค่า Application Insights หรือไม่
+# Check if Application Insights is configured
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# ตรวจสอบการไหลของข้อมูลเทเลเมทรี
+# Verify telemetry is flowing
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1345,20 +1321,20 @@ az monitor app-insights metrics show \
 
 ---
 
-### 2. เทเลเมทรีกำหนดเอง ✓
+### 2. เทเลเมทรีแบบกำหนดเอง ✓
 
-ทดสอบความเข้าใจ:
+ทดสอบความเข้าใจของคุณ:
 
-- [ ] **ข้อถาม 1**: คุณติดตามเหตุการณ์ธุรกิจกำหนดเองอย่างไร?
-  - **คำตอบ**: ใช้ logger พร้อม `custom_dimensions` หรือ `TelemetryClient.track_event()`
+- [ ] **ถาม 1**: คุณติดตามเหตุการณ์ธุรกิจแบบกำหนดเองอย่างไร?
+  - **ตอบ**: ห่อหุ้มในบทเรียนนี้เขียนล็อก OTel ที่มีโครงสร้างพร้อมแอตทริบิวต์ `event_name` ซึ่งสามารถค้นหาใน `traces`; เหล่านี้ไม่ใช่ `customEvents` อัตโนมัติ
 
-- [ ] **ข้อถาม 2**: ความแตกต่างระหว่างเหตุการณ์กับเมตริกคืออะไร?
-  - **คำตอบ**: เหตุการณ์เป็นการเกิดขึ้นแยกกัน, เมตริกเป็นการวัดเชิงตัวเลข
+- [ ] **ถาม 2**: ความแตกต่างระหว่างเหตุการณ์กับเมตริกคืออะไร?
+  - **ตอบ**: เหตุการณ์เป็นเหตุการณ์เฉพาะ, เมตริกเป็นการวัดเชิงตัวเลข
 
-- [ ] **ข้อถาม 3**: คุณเชื่อมโยงเทเลเมทรีข้ามบริการอย่างไร?
-  - **คำตอบ**: Application Insights ใช้ `operation_Id` อัตโนมัติสำหรับการเชื่อมโยง
+- [ ] **ถาม 3**: คุณเชื่อมโยงเทเลเมทรีข้ามบริการอย่างไร?
+  - **ตอบ**: Application Insights ใช้ `operation_Id` อัตโนมัติสำหรับการเชื่อมโยงข้อมูล
 
-**ถ่ายทอดความรู้:**
+**การตรวจสอบด้วยตนเอง:**
 ```kusto
 // Verify custom events
 traces
@@ -1368,26 +1344,24 @@ traces
 
 ---
 
-### 3. การตรวจสอบระบบจริง ✓
+### 3. การตรวจสอบโปรดักชัน ✓
 
-ทดสอบความเข้าใจ:
+ทดสอบความเข้าใจของคุณ:
 
-- [ ] **ข้อถาม 1**: การสุ่มตัวอย่างคืออะไรและทำไมต้องใช้?
-  - **คำตอบ**: การสุ่มตัวอย่างลดปริมาณข้อมูล (และค่าใช้จ่าย) โดยจับเฉพาะบางเปอร์เซ็นต์ของเทเลเมทรี
+- [ ] **ถาม 1**: Sampling คืออะไรและทำไมต้องใช้?
+  - **ตอบ**: Sampling ลดปริมาณข้อมูล (และต้นทุน) โดยจับข้อมูลเทเลเมทรีเพียงส่วนหนึ่งเท่านั้น
 
-- [ ] **ข้อถาม 2**: คุณตั้งค่าการแจ้งเตือนได้อย่างไร?
-  - **คำตอบ**: ใช้ metric alerts ใน Bicep หรือ Azure Portal ตามเมตริกของ Application Insights
+- [ ] **ถาม 2**: คุณตั้งค่าการแจ้งเตือนได้อย่างไร?
+  - **ตอบ**: ใช้การแจ้งเตือนเมตริกใน Bicep หรือ Azure Portal บนเมตริกของ Application Insights
 
-- [ ] **ข้อถาม 3**: ความแตกต่างระหว่าง Log Analytics กับ Application Insights คืออะไร?
-  - **คำตอบ**: Application Insights จัดเก็บข้อมูลใน Log Analytics workspace; App Insights ให้มุมมองเฉพาะสำหรับแอปพลิเคชัน
+- [ ] **ถาม 3**: Log Analytics แตกต่างกับ Application Insights อย่างไร?
+  - **ตอบ**: Application Insights เก็บข้อมูลในพื้นที่ทำงาน Log Analytics; App Insights ให้มุมมองเฉพาะแอปพลิเคชัน
 
-**ถ่ายทอดความรู้:**
+**การตรวจสอบด้วยตนเอง:**
 ```bash
-# ตรวจสอบการตั้งค่าการสุ่มตัวอย่าง
-az monitor app-insights component show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --query "properties.SamplingPercentage"
+# Check the sampler configured for the running application, not only the ARM component.
+az containerapp show --name "$APP_NAME" --resource-group "$RG_NAME" \
+  --query "properties.template.containers[].env[?starts_with(name, 'OTEL_TRACES_SAMPLER')]"
 ```
 
 ---
@@ -1396,13 +1370,11 @@ az monitor app-insights component show \
 
 ### ✅ ควรทำ:
 
-1. **ใช้ correlation IDs**
+1. **ใช้รหัสการเชื่อมโยง (correlation IDs)**
    ```python
    logger.info('Processing order', extra={
-       'custom_dimensions': {
            'order_id': order_id,
            'user_id': user_id
-       }
    })
    ```
 
@@ -1411,67 +1383,67 @@ az monitor app-insights component show \
    // Error rate, slow responses, availability
    ```
 
-3. **ใช้ structured logging**
+3. **ใช้การล็อกที่มีโครงสร้าง**
    ```python
-   # ✅ ดี: มีโครงสร้าง
-   logger.info('User signup', extra={'custom_dimensions': {'user_id': 123}})
+   # ✅ GOOD: Structured
+   logger.info('User signup', extra={'user_id': 'pseudonymous-id'})
    
-   # ❌ ไม่ดี: ไม่มีโครงสร้าง
+   # ❌ BAD: Unstructured
    logger.info(f'User 123 signed up')
    ```
 
-4. **ตรวจสอบ dependencies**
+4. **ตรวจสอบการพึ่งพา**
    ```python
-   # ติดตามการเรียกฐานข้อมูล การร้องขอ HTTP อัตโนมัติ ฯลฯ
+   # Automatically track database calls, HTTP requests, etc.
    ```
 
-5. **ใช้ Live Metrics ระหว่างการปรับใช้**
+5. **ใช้ Live Metrics ขณะเปิดใช้งาน**
 
-### ❌ หลีกเลี่ยง:
+### ❌ ห้าม:
 
-1. **อย่าล็อกข้อมูลที่ละเอียดอ่อน**
+1. **อย่าบันทึกข้อมูลที่ละเอียดอ่อน**
    ```python
-   # ❌ แย่
+   # ❌ BAD
    logger.info(f'Login: {username}:{password}')
    
-   # ✅ ดี
-   logger.info('Login attempt', extra={'custom_dimensions': {'username': username}})
+   # ✅ GOOD
+   logger.info('Login attempt', extra={'result': 'failed'})
    ```
 
-2. **อย่าใช้การสุ่มตัวอย่าง 100% ในระบบจริง**
+2. **อย่าเลือกการสุ่มตัวอย่างโดยไม่วัดปริมาณและความต้องการวินิจฉัย**
    ```python
-   # ❌ แพง
-   sampler = ProbabilitySampler(rate=1.0)
+   # ❌ Expensive
+   # 100% traces may be appropriate for a small workload or investigation.
    
-   # ✅ คุ้มค่าเงินลงทุน
-   sampler = ProbabilitySampler(rate=0.1)
+   # ✅ Cost-effective
+   # A lower trace rate reduces visibility; validate coverage before enabling.
    ```
 
-3. **อย่ามองข้าม dead letter queues**
+3. **อย่ามองข้ามคิวจดหมายตาย**
 
-4. **อย่าลืมตั้งค่าเวลาการเก็บข้อมูล**
+4. **อย่าลืมตั้งค่าข้อจำกัดการเก็บข้อมูล**
 
 ---
 
 ## การแก้ไขปัญหา
 
-### ปัญหา: ไม่มีเทเลเมทรีแสดงผล
+### ปัญหา: ไม่มีข้อมูลเทเลเมทรีแสดง
 
 **การวินิจฉัย:**
 ```bash
-# ตรวจสอบว่าได้ตั้งค่าสตริงการเชื่อมต่อแล้ว
+# Check connection string is set
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# ตรวจสอบบันทึกแอปพลิเคชันผ่าน Azure Monitor
+# Check application logs via Azure Monitor
 azd monitor --logs
 
-# หรือใช้ Azure CLI สำหรับ Container Apps:
+# Or use Azure CLI for Container Apps:
 az containerapp logs show --name $APP_NAME --resource-group $RG_NAME --tail 50
 ```
 
-**แนวทางแก้ไข:**
+**วิธีแก้ไข:**
 ```bash
-# ตรวจสอบสตริงการเชื่อมต่อใน Container App
+# Verify connection string in Container App
 az containerapp show \
   --name $APP_NAME \
   --resource-group $RG_NAME \
@@ -1485,17 +1457,16 @@ az containerapp show \
 
 **การวินิจฉัย:**
 ```bash
-# ตรวจสอบการนำเข้าข้อมูล
-az monitor app-insights metrics show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --metric "availabilityResults/count"
+# Query ingestion volume in the linked Log Analytics workspace.
+# WORKSPACE_ID is the workspace customer ID (GUID), not its ARM resource ID.
+az monitor log-analytics query --workspace "$WORKSPACE_ID" \
+  --analytics-query "Usage | where TimeGenerated > ago(30d) | where IsBillable == true | summarize IngestedMB=sum(Quantity) by DataType"
 ```
 
-**แนวทางแก้ไข:**
+**วิธีแก้ไข:**
 - ลดอัตราการสุ่มตัวอย่าง
 - ลดระยะเวลาการเก็บข้อมูล
-- ลบการล็อกที่มากเกินไป
+- ลบการบันทึกที่มากเกินไป
 
 ---
 
@@ -1503,49 +1474,49 @@ az monitor app-insights metrics show \
 
 ### เอกสารอย่างเป็นทางการ
 - [ภาพรวม Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Application Insights สำหรับ Python](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
-- [ภาษา Kusto Query](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
-- [AZD การตรวจสอบ](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
+- [การตั้งค่า Azure Monitor OpenTelemetry](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python)
+- [ภาษา Kusto Query Language](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
+- [การตรวจสอบ AZD Monitoring](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
 
 ### ขั้นตอนถัดไปในหลักสูตรนี้
-- ← ก่อนหน้า: [Preflight Checks](preflight-checks.md)
-- → ถัดไป: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
+- ← ก่อนหน้า: [ตรวจสอบก่อนบิน](preflight-checks.md)
+- → ถัดไป: [คู่มือการปรับใช้งาน](../chapter-04-infrastructure/deployment-guide.md)
 - 🏠 [หน้าหลักหลักสูตร](../../README.md)
 
 ### ตัวอย่างที่เกี่ยวข้อง
 - [ตัวอย่าง Microsoft Foundry Models](../../../../examples/azure-openai-chat) - เทเลเมทรี AI
-- [ตัวอย่างไมโครเซอร์วิส](../../../../examples/microservices) - Distributed tracing
+- [ตัวอย่าง Microservices](../../../../examples/microservices) - การติดตามแบบกระจาย
 
 ---
 
 ## สรุป
 
 **คุณได้เรียนรู้:**
-- ✅ การจัดเตรียม Application Insights อัตโนมัติกับ AZD
-- ✅ เทเลเมทรีกำหนดเอง (เหตุการณ์, เมตริก, ความสัมพันธ์)
-- ✅ การแทรซแบบกระจายข้ามไมโครเซอร์วิส
-- ✅ Live metrics และการตรวจสอบแบบเรียลไทม์
-- ✅ การแจ้งเตือนและแดชบอร์ด
-- ✅ การตรวจสอบแอป AI/LLM
-- ✅ กลยุทธ์การปรับค่าใช้จ่ายให้เหมาะสม
+- ✅ การจัดเตรียม Application Insights อัตโนมัติด้วย AZD
+- ✅ เทเลเมทรีที่กำหนดเอง (เหตุการณ์, เมตริก, การพึ่งพา)
+- ✅ การติดตามแบบกระจายข้ามไมโครเซอร์วิส
+- ✅ เมตริกสดและการตรวจสอบแบบเรียลไทม์
+- ✅ การแจ้งเตือนและแผงควบคุม
+- ✅ การตรวจสอบแอปพลิเคชัน AI/LLM
+- ✅ กลยุทธ์การเพิ่มประสิทธิภาพค่าใช้จ่าย
 
 **ข้อสรุปสำคัญ:**
-1. **AZD จัดเตรียมการตรวจสอบโดยอัตโนมัติ** - ไม่ต้องตั้งค่าด้วยตนเอง  
-2. **ใช้การบันทึกแบบมีโครงสร้าง** - ทำให้การสืบค้นง่ายขึ้น  
-3. **ติดตามเหตุการณ์ทางธุรกิจ** - ไม่ใช่แค่เมตริกทางเทคนิค  
-4. **ตรวจสอบค่าใช้ AI** - ติดตามโทเค็นและการใช้จ่าย  
-5. **ตั้งค่าการแจ้งเตือน** - เป็นเชิงรุก ไม่ใช่เชิงรับ  
-6. **ปรับค่าใช้จ่ายให้เหมาะสม** - ใช้การสุ่มตัวอย่างและขีดจำกัดการเก็บรักษา  
+1. **ประกาศการตรวจสอบอย่างชัดเจน** - AZD ปรับใช้งานแม่แบบของคุณ; การใส่ SDK ส่งเทเลเมทรี
+2. **ใช้การบันทึกแบบมีโครงสร้าง** - ทำให้การสืบค้นง่ายขึ้น
+3. **ติดตามเหตุการณ์ทางธุรกิจ** - ไม่ใช่แค่เมตริกทางเทคนิค
+4. **ตรวจสอบค่าใช้จ่าย AI** - ติดตามโทเคนและการใช้จ่าย
+5. **ตั้งค่าการแจ้งเตือน** - เป็นเชิงรุก ไม่ใช่ตอบโต้
+6. **เพิ่มประสิทธิภาพค่าใช้จ่าย** - ใช้การสุ่มตัวอย่างและข้อจำกัดการเก็บรักษา
 
-**ขั้นตอนต่อไป:**  
-1. ทำแบบฝึกหัดปฏิบัติให้เสร็จ  
-2. เพิ่ม Application Insights ในโครงการ AZD ของคุณ  
-3. สร้างแดชบอร์ดที่กำหนดเองสำหรับทีมของคุณ  
-4. เรียนรู้ [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
+**ขั้นตอนถัดไป:**
+1. ทำแบบฝึกหัดปฏิบัติให้เสร็จ
+2. เพิ่ม Application Insights ไปยังโครงการ AZD ของคุณ
+3. สร้างแผงควบคุมที่กำหนดเองสำหรับทีมของคุณ
+4. เรียนรู้ [คู่มือการปรับใช้งาน](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ข้อจำกัดความรับผิดชอบ**:
-เอกสารนี้ได้รับการแปลโดยใช้บริการแปลภาษาอัตโนมัติ [Co-op Translator](https://github.com/Azure/co-op-translator) แม้เราจะพยายามรักษาความถูกต้องไว้สูงสุด โปรดทราบว่าการแปลโดยอัตโนมัติอาจมีข้อผิดพลาดหรือความคลาดเคลื่อน เอกสารต้นฉบับในภาษาต้นทางควรถูกพิจารณาเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลสำคัญ แนะนำให้ใช้การแปลโดยผู้เชี่ยวชาญมนุษย์เป็นหลัก เราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความผิดใด ๆ ที่เกิดขึ้นจากการใช้การแปลนี้
+**ปฏิเสธความรับผิดชอบ**:
+เอกสารนี้ได้รับการแปลโดยใช้บริการแปลภาษา AI [Co-op Translator](https://github.com/Azure/co-op-translator) ขณะที่เราพยายามให้ความถูกต้อง โปรดทราบว่าการแปลโดยอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้อง เอกสารต้นฉบับในภาษาต้นทางควรถูกพิจารณาเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลที่สำคัญ แนะนำให้ใช้การแปลโดยมนุษย์มืออาชีพ เราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความที่ผิดพลาดที่เกิดขึ้นจากการใช้การแปลนี้
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

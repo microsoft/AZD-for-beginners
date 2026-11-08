@@ -1,238 +1,244 @@
-# Kommandofusklista - Viktiga AZD-kommandon
+# Kommandosschema - Viktiga AZD-kommandon
 
 **Snabbreferens för alla kapitel**
-- **📚 Kursöversikt**: [AZD för nybörjare](../README.md)
-- **📖 Snabbstart**: [Kapitel 1: Grunderna & Snabbstart](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI-kommandon**: [Kapitel 2: AI-fokuserad utveckling](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Avancerat**: [Kapitel 4: Infrastruktur som kod](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+- **📚 Kurshemsida**: [AZD För Nybörjare](../README.md)
+- **📖 Kom igång snabbt**: [Kapitel 1: Grundläggande & Snabbstart](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI-kommandon**: [Kapitel 2: AI-Först Utveckling](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Avancerat**: [Kapitel 4: Infrastruktur som Kod](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Introduktion
 
-Denna omfattande fusklista ger en snabbreferens för de vanligast använda Azure Developer CLI-kommandona, organiserade efter kategori med praktiska exempel. Perfekt för snabba uppslag under utveckling, felsökning och dagliga operationer med azd-projekt.
+Detta omfattande kommandosschema ger snabb referens för de mest använda Azure Developer CLI-kommandona, organiserade efter kategori med praktiska exempel. Perfekt för snabba uppslag under utveckling, felsökning och daglig hantering av azd-projekt.
 
-## Lärandemål
+## Läromål
 
-Genom att använda denna fusklista kommer du att:
-- Ha omedelbar åtkomst till viktiga Azure Developer CLI-kommandon och syntax
-- Förstå kommandoorganisation efter funktionella kategorier och användningsfall
-- Referera praktiska exempel för vanliga utvecklings- och driftsättningsscenarier
-- Få åtkomst till felsökningskommandon för snabb problemlösning
+Genom att använda detta kommandosschema kommer du att:
+- Ha omedelbar tillgång till viktiga Azure Developer CLI-kommandon och syntax
+- Förstå kommandosorganisering efter funktionella kategorier och användningsfall
+- Ha referens till praktiska exempel för vanliga utvecklings- och distributionsscenarier
+- Få tillgång till felsökningskommandon för snabb problemlösning
 - Hitta avancerade konfigurations- och anpassningsalternativ effektivt
-- Lokalisera kommandon för miljöhantering och arbetsflöden med flera miljöer
+- Lokalisera kommandon för miljöhantering och flermiljöarbetsflöden
 
-## Läranderesultat
+## Inlärningsresultat
 
-Genom regelbunden användning av denna fusklista kommer du att kunna:
-- Köra azd-kommandon självsäkert utan att referera till fullständig dokumentation
-- Snabbt lösa vanliga problem med lämpliga diagnostiska kommandon
+Med regelbunden användning av detta kommandosschema kommer du kunna:
+- Utföra azd-kommandon självsäkert utan att behöva full dokumentation
+- Snabbt lösa vanliga problem med rätt diagnoskommandon
 - Effektivt hantera flera miljöer och distributionsscenarier
 - Använda avancerade azd-funktioner och konfigurationsalternativ vid behov
 - Felsöka distributionsproblem med systematiska kommando-sekvenser
-- Optimera arbetsflöden genom effektiv användning av azd-genvägar och alternativ
+- Optimera arbetsflöden genom effektiv användning av azd-snabbkommandon och inställningar
 
-## Kommandon för att komma igång
+## Kom igång-kommandon
 
 ### Autentisering
 ```bash
-# Logga in på Azure via AZD
+# Login to Azure via AZD
 azd auth login
 
-# Logga in i Azure CLI (AZD använder detta bakom kulisserna)
+# Optional: login separately for exercises or hooks that run Azure CLI
 az login
 
-# Kontrollera det aktuella kontot
+# Check Azure CLI's current account (not AZD's login)
 az account show
 
-# Ställ in standardprenumeration
+# Set default subscription
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 
-# Logga ut från AZD
+# Logout from AZD
 azd auth logout
 
-# Logga ut från Azure CLI
+# Logout from Azure CLI
 az logout
 ```
 
-### Initiering av projekt
+### Projektinitiering
 ```bash
-# Bläddra bland tillgängliga mallar
+# Browse available templates
 azd template list
 
-# Initiera från mall
-azd init --template todo-nodejs-mongo
-azd init --template <template-name>
+# Initialize from a template in the current empty directory (alternatives)
+azd init --template todo-nodejs-mongo .
+azd init --template <template-name> .
 
-# Initiera i aktuell katalog
+# Initialize in current directory
 azd init .
 
-# Initiera med eget namn
+# Initialize with custom name
 azd init --template todo-nodejs-mongo my-awesome-app
+cd my-awesome-app
 ```
 
-## Kärnkommandon för distribution
+## Kärndistributionskommandon
 
 ### Komplett distributionsarbetsflöde
 ```bash
-# Distribuera allt (provisionering + distribution)
+# Deploy everything (provision + deploy)
 azd up
 
-# Distribuera med bekräftelsefrågor inaktiverade
-azd up --confirm-with-no-prompt
+# Deploy with confirmation prompts disabled
+azd up --no-prompt
 
-# Distribuera till en specifik miljö
+# Deploy to specific environment
 azd up --environment production
 
-# Distribuera med anpassade parametrar
-azd up --parameter location=westus2
+# Persist the region before deployment
+azd env set AZURE_LOCATION westus2
+azd up
 ```
 
-### Endast infrastruktur
+### Endast Infrastruktur
 ```bash
-# Provisionera Azure-resurser
+# Provision Azure resources
 azd provision
 
-# 🧪 Förhandsgranska infrastruktursändringar
+# 🧪 Preview infrastructure changes
 azd provision --preview
-# Visar en simulerad vy av vilka resurser som skulle skapas/ändras/raderas
-# Liknar 'terraform plan' eller 'bicep what-if' - säkert att köra, inga ändringar genomförs
+# Uses provider-specific planning (Bicep what-if / Terraform plan)
+# It can require Azure reads and can run configured lifecycle hooks
 ```
 
-### Endast applikation
+### Endast Applikation
 ```bash
-# Distribuera applikationskod
+# Deploy application code
 azd deploy
 
-# Distribuera en specifik tjänst
-azd deploy --service web
-azd deploy --service api
+# Deploy specific service
+azd deploy web
+azd deploy api
 
-# Distribuera alla tjänster
+# Deploy all services
 azd deploy --all
 ```
 
-### Bygg och paketera
+### Bygg och Paketera
 ```bash
-# Återställ (ladda ner) applikationens beroenden
+# Restore (download) application dependencies
 azd restore
 
-# Återställ en specifik tjänst
-azd restore --service api
+# Restore a specific service
+azd restore api
 
-# Bygg ett distribuerbart paket utan att distribuera
+# Build a deployable artifact without deploying
 azd package
 
-# Bygg en specifik tjänst
-azd package --service api
+# Build specific service
+azd package api
 ```
 
-> **`azd restore`** laddar ner din apps beroenden (npm, pip, NuGet, Maven, etc.). Det körs automatiskt under `azd package` och `azd deploy`, så du anropar det sällan direkt—kör det manuellt för att förhämta beroenden (till exempel för att värma en CI-cache eller arbeta offline efteråt).
+> **`azd restore`** laddar ner appens beroenden (npm, pip, NuGet, Maven, etc.). Det körs automatiskt under `azd package` och `azd deploy`, så det kallar du sällan direkt – kör det manuellt för att förhämta beroenden (till exempel för att värma en CI-cache eller arbeta offline senare).
 
-> **`azd package`** bygger det deploybara artefaktet (en containerbild eller zip) **utan** att pusha det till Azure. Använd det separat för att verifiera att en build lyckas, inspektera utdata eller producera ett artefakt som en separat process kommer att distribuera senare. `azd deploy` paketerar automatiskt, så du behöver bara `azd package` när du vill ha artefaktet utan att distribuera.
+> **`azd package`** förbereder en deploybar artefakt utan att distribuera applikationstjänsten. Beteendet beror på språk och värd: containerpaketering kan använda Azure-fjärrbyggen och publicera bilder till ett register, så det är inte nödvändigtvis offline eller utan Azure-skrivningar. `azd deploy` kan paketera automatiskt; använd ett separat paketsteg när du behöver en artefakt eller en byggkontroll.
 
 
 ## 🌍 Miljöhantering
 
 ### Miljöoperationer
 ```bash
-# Lista alla miljöer
+# List all environments
 azd env list
 
-# Skapa ny miljö
+# Create new environment
 azd env new development
 azd env new staging --location westus2
 
-# Välj miljö
+# Select environment
 azd env select production
 
-# Visa tillgängliga miljöer
+# Show available environments
 azd env list
 
-# Uppdatera miljöns tillstånd
+# Refresh environment state
 azd env refresh
 ```
 
 ### Miljövariabler
 ```bash
-# Sätt miljövariabel
-azd env set API_KEY "your-secret-key"
+# Set environment variable
+azd env set LOG_LEVEL info
 azd env set DEBUG true
 
-# Hämta miljövariabel
-azd env get API_KEY
+# Get environment variable
+azd env get-value LOG_LEVEL
 
-# Lista alla miljövariabler
+# List all environment variables
 azd env get-values
 
-# Ta bort miljövariabel
+# Remove environment variable (beta in AZD 1.37.0+)
 azd env unset DEBUG
 ```
 
+Miljöfiler är ren text. Behandla inte `azd env set` som säker lagring; använd Key Vault-referenser eller hanterad identitet vid behov.
+
 ## ⚙️ Konfigurationskommandon
 
-### Global konfiguration
+### Global Konfiguration
 ```bash
-# Lista alla konfigurationer
+# List all configuration
 azd config show
 
-# Ange globala standardinställningar
+# Set global defaults
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# Ta bort konfiguration
+# Remove configuration
 azd config unset defaults.location
 
-# Återställ alla konfigurationer
+# Reset all configuration
 azd config reset
 ```
 
 ### Projektkonfiguration
 ```bash
-# Validera azure.yaml
-azd config validate
+# Inspect user configuration (this is not azure.yaml validation)
+azd config show
 
-# Visa projektinformation
+# Show project information
 azd show
 
-# Hämta tjänendepunkter
+# Get service endpoints
 azd show --output json
 ```
 
-## 📊 Övervakning och diagnostik
+## 📊 Övervakning och Diagnostik
 
-### Övervakningspanel
+### Övervakningsdashboard
 ```bash
-# Öppna övervakningspanelen i Azure-portalen
+# Open Azure portal monitoring dashboard
 azd monitor
 
-# Öppna live-metriker i Application Insights
+# Open Application Insights live metrics
 azd monitor --live
 
-# Öppna loggbladet i Application Insights
+# Open Application Insights logs blade
 azd monitor --logs
 
-# Öppna översikten för Application Insights
+# Open Application Insights overview
 azd monitor --overview
 ```
 
+Application Insights måste konfigureras av mallen. AZD:s Live Metrics-alternativ stöds inte för närvarande för Python-applikationer; använd istället översikten, loggar eller exempelns dokumenterade spårningsarbetsflöde.
+
 ### Visa containerloggar
 ```bash
-# Visa loggar via Azure CLI (för Container Apps)
+# View logs via Azure CLI (for Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
 
-# Följ loggar i realtid
+# Follow logs in real-time
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
-# Visa loggar från Azure-portalen
+# View logs from Azure Portal
 azd monitor --logs
 ```
 
 ### Log Analytics-frågor
 ```bash
-# Få åtkomst till Log Analytics via Azure-portalen
+# Access Log Analytics via Azure Portal
 azd monitor --logs
 
-# Fråga loggar med hjälp av Azure CLI
+# Query logs using Azure CLI
 az monitor log-analytics query \
   --workspace <workspace-id> \
   --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
@@ -242,206 +248,228 @@ az monitor log-analytics query \
 
 ### Rensning
 ```bash
-# Ta bort alla Azure-resurser
+# Remove all Azure resources
 azd down
 
-# Tvinga radering utan bekräftelse
+# Force delete without confirmation
 azd down --force
 
-# Rensa mjukt raderade resurser
+# Purge soft-deleted resources
 azd down --purge
 
-# Fullständig rensning
+# Complete cleanup
 azd down --force --purge
 ```
 
 ### Uppdateringar
 ```bash
-# Kontrollera efter azd-uppdateringar
+# Check for azd updates
 azd version
 
-# Hämta aktuell version
+# Get current version
 azd version
 
-# Visa aktuell konfiguration
+# View current configuration
 azd config show
 ```
 
-## 🔧 Avancerade kommandon
+## 🔧 Avancerade Kommandon
 
 ### Pipeline och CI/CD
 ```bash
-# Konfigurera GitHub Actions
+# Configure GitHub Actions
 azd pipeline config
 
-# Konfigurera Azure DevOps
+# Configure Azure DevOps
 azd pipeline config --provider azdo
 
-# Visa pipelinekonfiguration
-azd pipeline show
+# Inspect supported pipeline configuration options
+azd pipeline config --help
 ```
 
 ### Infrastrukturhantering
 ```bash
-# Generera infrastruktursmallar
+# Generate infrastructure templates
 azd infra generate
 
-# 🧪 Infrastrukturförhandsgranskning och planering
+# 🧪 Infrastructure Preview & Planning
 azd provision --preview
-# Simulerar skapande av infrastruktur utan att distribuera
-# Analyserar Bicep/Terraform-mallar och visar:
-# - Resurser som kommer att läggas till (grön +)
-# - Resurser som kommer att ändras (gul ~)
-# - Resurser som kommer att tas bort (röd -)
-# Säkert att köra - inga faktiska ändringar görs i Azure-miljön
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Review provider behavior and configured hooks before treating preview as read-only
 
-# Syntetisera infrastruktur från azure.yaml
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
 ### Projektinformation
 ```bash
-# Visa projektstatus och slutpunkter
+# Show project status and endpoints
 azd show
 
-# Visa detaljerad projektinformation som JSON
+# Show detailed project info as JSON
 azd show --output json
 
-# Hämta tjänstens slutpunkter
+# Get service endpoints
 azd show --output json | jq '.services'
 ```
 
-## 🤖 AI- och tilläggskommandon
+## 🤖 AI & Tilläggskommandon
 
-### AZD-tillägg
+### AZD Tillägg
+
+AI CLI-referens granskat 2026-11-04: `azd 1.37.2`, agenter `1.0.0-beta.23`, utvärderingar `1.0.0-beta.2`. Använd `azd >= 1.37.0` för den sammansatta arbetsflödet; uppgradera kärn-CLI innan inkompatibla tillägg.
+
 ```bash
-# Lista alla tillgängliga tillägg (inklusive AI)
+# List all available extensions (including AI)
 azd extension list
 
-# Installera Foundry agents-tillägget
+# Install the Foundry agents extension
 azd extension install azure.ai.agents
 
-# Installera agent skills-tillägget (förhandsgranskning)
+# Install the separate evaluations extension
+azd extension install azure.ai.evaluations
+
+# Install the agent skills extension (preview)
 azd extension install azure.ai.skills
 
-# Installera Foundry connections-tillägget (förhandsgranskning)
+# Install the Foundry connections extension (preview)
 azd extension install azure.ai.connections
 
-# Installera fine-tuning-tillägget
+# Install the fine-tuning extension
 azd extension install azure.ai.finetune
 
-# Installera custom models-tillägget
+# Install the custom models extension
 azd extension install azure.ai.models
 
-# Uppgradera alla installerade tillägg
+# Upgrade all installed extensions
 azd extension upgrade --all
 ```
 
 ### AI-agentkommandon
 ```bash
-# Initiera ett agentprojekt från ett manifest
-azd ai agent init -m <manifest-path-or-uri>
+# Initialize an agent project interactively
+azd ai agent init
 
-# Rikta in mot ett specifikt Foundry-projekt
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+# Or adopt a current azure.yaml agent project template
+azd ai agent init --template <path-to-azure.yaml>
 
-# Ange agentens källkatalog
-azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+# Target a specific Foundry project
+azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-id>
 
-# Välj ett mål för hosting
-azd ai agent init -m agent-manifest.yaml --host containerapp
+# Adopt into a specified directory, then follow the printed cd next step
+azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
-# Testa en driftsatt agent (skriver ut latens + tid till första byte)
+# Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
-# Visa konfigurationen för den aktiva slutpunkten
+# Show the live endpoint configuration
 azd ai agent endpoint show
 
-# Generera en utvärderingsdatamängd och optimera sedan agenten
-azd ai agent eval generate
-azd ai agent optimize
-
-# Ladda ner den driftsatta källkoden för en kodbaserad hostad agent
+# Download the deployed source of a code-based hosted agent
 azd ai agent code download
 
-# Ta bort en hostad agent och alla dess versioner (--force avslutar aktiva sessioner)
+# Delete a hosted agent and all its versions (--force ends active sessions)
 azd ai agent delete --force
 ```
 
-### MCP-server (Alpha)
+`--template`/`-t` ersätter den föråldrade `--manifest`/`-m` stavningen; äldre manifest behöver migreras. Det finns inget aktuellt agent-init `--host containerapp` alternativ. Hanterad-harnes, röst och långvariga förhandsvisningar behöver självständigt shell-/CI-miljögodkännande; se [AI CLI-referensen](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features).
+
+### AI-utvärderingar och optimering
 ```bash
-# Starta MCP-servern för ditt projekt
+# In an initialized agent project, configure evaluation resources
+azd ai eval init
+
+# Optionally generate a rubric and dataset; review files and printed next steps
+azd ai eval generate
+
+# Register datasets/evaluators/eval groups, then run and inspect results
+azd up
+azd ai eval run start --wait
+azd ai eval run list
+azd ai eval run show <run-id>
+azd ai eval run output list <run-id>
+
+# Reuse a compatible turn-level dataset evaluation for optimization
+azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
+```
+
+Agenter beta.22 ersatte äldre utvärderingskommandon med `azd ai eval` från `azure.ai.evaluations`. Ny utvärderingskonfiguration använder camelCase-nycklar. Optimering `--config` tar en fristående optimerings-API-förfrågan, **inte** äldre `eval.yaml` eller nya `azure.eval.yaml`; använd `--eval`/`--eval-config` för återanvändning av utvärdering. Se [utvärderingsinställning](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) och [optimeringsmigrering](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+
+### MCP Server (Alpha)
+```bash
+# Start the MCP server for your project
 azd mcp start
 
-# Hantera verktygssamtycke för MCP-operationer
+# Manage tool consent for MCP operations
 azd copilot consent list
 ```
 
-### Generering av infrastruktur
+### Infrastrukturgenerering
 ```bash
-# Generera IaC-filer från din projektdefinition
+# Generate IaC files from your project definition
 azd infra generate
 
-# Syntetisera infrastruktur från azure.yaml
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
 ---
 
-## 🎯 Snabba arbetsflöden
+## 🎯 Snabba Arbetsflöden
 
 ### Utvecklingsarbetsflöde
 ```bash
-# Starta nytt projekt
-azd init --template todo-nodejs-mongo
+# Start a new project in an explicit directory
+azd init --template todo-nodejs-mongo my-project
 cd my-project
 
-# Distribuera till utvecklingsmiljön
+# Deploy to development
 azd env new dev
 azd up
 
-# Gör ändringar och distribuera om
+# Make changes and redeploy
 azd deploy
 
-# Öppna övervakningspanelen
+# Open monitoring dashboard
 azd monitor --live
 ```
 
-### Arbetsflöde för flera miljöer
+### Flermiljöarbetsflöde
 ```bash
-# Konfigurera miljöer
+# Set up environments
 azd env new dev
 azd env new staging  
 azd env new production
 
-# Driftsätt till dev
+# Deploy to dev
 azd env select dev
 azd up
 
-# Testa och flytta till staging
+# Test and promote to staging
 azd env select staging
 azd up
 
-# Driftsätt till produktion
+# Deploy to production
 azd env select production
 azd up
 ```
 
 ### Felsökningsarbetsflöde
 ```bash
-# Aktivera felsökningsläge
-export AZD_DEBUG=true
+# Check deployment status
+azd show --debug
 
-# Kontrollera distributionsstatus
-azd show
-
-# Validera konfiguration
+# Validate configuration
 azd config show
 
-# Öppna övervakningspanel för loggar
+# Open monitoring dashboard for logs
 azd monitor --logs
 
-# Kontrollera resursstatus
+# Check resource status
 azd show --output json
 ```
 
@@ -449,159 +477,152 @@ azd show --output json
 
 ### Felsökningsinformation
 ```bash
-# Aktivera felsökningsutmatning
-export AZD_DEBUG=true
+# Enable debug output for a command
 azd <command> --debug
 
-# Inaktivera telemetri för renare utdata
-export AZD_DISABLE_TELEMETRY=true
+# Disable telemetry for cleaner output
+export AZURE_DEV_COLLECT_TELEMETRY=no
 
-# Kontrollera aktuell konfiguration
+# Check current configuration
 azd config show
 
-# Kontrollera autentiseringsstatus
-az account show
+# Reauthenticate AZD if needed (Azure CLI has a separate login)
+azd auth login
 ```
 
 ### Mallfelsökning
 ```bash
-# Lista tillgängliga mallar med detaljer
+# List available templates with details
 azd template list --output json
 
-# Visa mallinformation
+# Show template information
 azd template show <template-name>
 
-# Validera mallen innan init
-azd template validate <template-name>
+# Inspect supported template operations
+azd template --help
 ```
 
 ## 📁 Fil- och katalogkommandon
 
 ### Projektstruktur
 ```bash
-# Visa aktuell katalogstruktur
+# Show current directory structure
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
-# Navigera till azd-projektets rotkatalog
-cd $(azd root)
+# Navigate to your project's directory
+cd /path/to/your/project
 
-# Visa azd-konfigurationskatalog
-echo $AZD_CONFIG_DIR  # Vanligtvis ~/.azd
+# Show azd configuration directory
+echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
-## 🎨 Utdataformat
+## 🎨 Utdataformatering
 
 ### JSON-utdata
 ```bash
-# Hämta JSON-utdata för skript
+# Get JSON output for scripting
 azd show --output json
 azd env list --output json
 azd config show --output json
 
-# Parsa med jq
-azd show --output json | jq '.services.web.endpoint'
+# Parse with jq
+azd show --output json | jq -r '.services.web.ingressUrl'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
 ### Tabellutdata
 ```bash
-# Formatera som tabell
-azd env list --output table
+# Human-readable environment table
+azd env list
 
-# Visa driftsatta tjänster
+# View deployed services
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 Vanliga kommando­kombinationer
+## 🔧 Vanliga Kommando-kombinationer
 
-### Hälsokontrollskript
+### Hälsokontroll-skript
 ```bash
 #!/bin/bash
-# Snabb hälsokontroll
+# Quick health check
 azd show
 azd env get-values
 azd monitor --logs
 ```
 
-### Distributionvalidering
+### Distributionsvalidering
 ```bash
 #!/bin/bash
-# Validering före distribution
+# Pre-deployment validation
 azd show
-azd provision --preview  # Förhandsgranska ändringar innan distribution
+azd provision --preview  # Preview changes before deploying
 az account show
 ```
 
 ### Miljöjämförelse
 ```bash
 #!/bin/bash
-# Jämför miljöer
+# Compare environments
 for env in dev staging production; do
     echo "=== $env ==="
-    azd env select $env
-    azd show --output json | jq '.services[].endpoint'
+    azd show --environment "$env" --output json | jq '.services'
 done
 ```
 
-### Skript för resursrensning
+### Resursrensningsskript
 ```bash
 #!/bin/bash
-# Rensa upp gamla miljöer
-azd env list | grep -E "(dev-|test-)" | while read env; do
-    echo "Cleaning up $env"
-    azd env select $env
-    azd down --force --purge
-done
+# Review environments, then explicitly select the one to remove
+azd env list
+azd down --environment <environment-name>
 ```
 
 ## 📝 Miljövariabler
 
-### Vanliga miljövariabler
+### Vanliga Miljövariabler
 ```bash
-# Azure-konfiguration
+# Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# AZD-konfiguration
-export AZD_DEBUG=true
-export AZD_DISABLE_TELEMETRY=true
-export AZD_CONFIG_DIR="~/.azd"
+# AZD configuration
+export AZURE_DEV_COLLECT_TELEMETRY=no
+export AZD_CONFIG_DIR="$HOME/.azd"
 
-# Applikationskonfiguration
+# Application configuration
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
-## 🚨 Nödlägeskommandon
+## 🚨 Akutkommandon
 
-### Snabba åtgärder
+### Snabba fixar
 ```bash
-# Återställ autentisering
-az account clear
-az login
+# Reauthenticate AZD without changing Azure CLI's account cache
+azd auth login
 
-# Tvinga uppdatering av miljön
+# Force refresh environment
 azd env refresh
 
-# Distribuera om alla tjänster
+# Redeploy all services
 azd deploy
 
-# Kontrollera distributionsstatus
+# Check deployment status
 azd show --output json
 ```
 
 ### Återställningskommandon
 ```bash
-# Återställ efter misslyckad distribution - rensa och distribuera på nytt
-azd down --force --purge
-azd up
+# Inspect before retrying; deletion/purge is not a routine recovery step
+azd show
+azd provision --debug
 
-# Återprovisionera endast infrastrukturen
+# Reprovision infrastructure only
 azd provision
 
-# Distribuera om endast applikationen
+# Redeploy application only
 azd deploy
 ```
 
@@ -609,7 +630,7 @@ azd deploy
 
 ### Alias för snabbare arbetsflöde
 ```bash
-# Lägg till i din .bashrc eller .zshrc
+# Add to your .bashrc or .zshrc
 alias azdup='azd up'
 alias azdm='azd monitor --live'
 alias azds='azd show --output json'
@@ -618,17 +639,17 @@ alias azde='azd env'
 
 ### Funktionsgenvägar
 ```bash
-# Snabb växling mellan miljöer
+# Quick environment switching
 azd-env() {
-    azd env select $1 && azd show
+    azd env select "$1" && azd show
 }
 
-# Snabb distribution med övervakning
+# Quick deployment with monitoring
 azd-deploy-watch() {
-    azd deploy --service $1 && azd monitor --live
+    azd deploy "$1" && azd monitor --overview
 }
 
-# Miljöstatus
+# Environment status
 azd-status() {
     echo "Current environment:"
     azd env get-values
@@ -637,46 +658,46 @@ azd-status() {
 }
 ```
 
-## 📖 Hjälp och dokumentation
+## 📖 Hjälp och Dokumentation
 
 ### Få hjälp
 ```bash
-# Allmän hjälp
+# General help
 azd --help
 azd help
 
-# Kommandospecifik hjälp
+# Command-specific help
 azd up --help
 azd env --help
 azd config --help
 
-# Visa versions- och bygginformation
+# Show version and build info
 azd version
 azd version --output json
 ```
 
 ### Dokumentationslänkar
 ```bash
-# Öppna dokumentationen i webbläsaren
+# Open documentation in browser
 azd docs
 
-# Visa mallens dokumentation
+# Show template documentation
 azd template show <template-name> --docs
 ```
 
 ---
 
-**Tips**: Bokmärk denna fusklista och använd `Ctrl+F` för att snabbt hitta de kommandon du behöver!
+**Tips**: Bokmärk detta kommandosschema och använd `Ctrl+F` för att snabbt hitta de kommandon du behöver!
 
 ---
 
 **Navigering**
-- **Föregående lektion**: [Förhandskontroller](../docs/pre-deployment/preflight-checks.md)
+- **Föregående lektion**: [Förhandskontroller](../docs/chapter-06-pre-deployment/preflight-checks.md)
 - **Nästa lektion**: [Ordlista](glossary.md)
 
 ---
 
-> **💡 Vill du ha hjälp med Azure-kommandon i din redigerare?** Installera [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) med `npx skills add microsoft/github-copilot-for-azure` — 37 skills för AI, Foundry, driftsättning, diagnostik och mer.
+> **💡 Vill du ha Azure-kommandohjälp i din editor?** Installera [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) med `npx skills add microsoft/github-copilot-for-azure` — 37 färdigheter för AI, Foundry, distribution, diagnostik med mera.
 
 ---
 

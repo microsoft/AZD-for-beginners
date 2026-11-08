@@ -1,73 +1,73 @@
 # Vanliga frågor (FAQ)
 
 **Få hjälp per kapitel**
-- **📚 Kursstartsida**: [AZD för nybörjare](../README.md)
-- **🚆 Installationsproblem**: [Kapitel 1: Installation och uppsättning](../docs/getting-started/installation.md)
-- **🤖 AI-frågor**: [Kapitel 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
-- **🔧 Felsökning**: [Kapitel 7: Troubleshooting & Debugging](../docs/troubleshooting/common-issues.md)
+- **📚 Kursstart**: [AZD För nybörjare](../README.md)
+- **🚆 Installationsproblem**: [Kapitel 1: Installation & Uppstart](../docs/chapter-01-foundation/installation.md)
+- **🤖 AI-frågor**: [Kapitel 2: AI-First Utveckling](../docs/chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🔧 Felsökning**: [Kapitel 7: Felsökning & Debugging](../docs/chapter-07-troubleshooting/common-issues.md)
 
 ## Introduktion
 
-Denna omfattande FAQ ger svar på de vanligaste frågorna om Azure Developer CLI (azd) och distributioner till Azure. Hitta snabba lösningar på vanliga problem, förstå bästa praxis och få förtydliganden kring azd-koncept och arbetsflöden.
+Denna omfattande FAQ ger svar på de vanligaste frågorna om Azure Developer CLI (azd) och Azure-distributioner. Hitta snabba lösningar på vanliga problem, förstå bästa praxis och få klarhet i azd-koncept och arbetsflöden.
 
 ## Lärandemål
 
 Genom att gå igenom denna FAQ kommer du att:
 - Hitta snabba svar på vanliga frågor och problem kring Azure Developer CLI
-- Förstå nyckelbegrepp och terminologi genom praktiska frågor och svar
-- Få tillgång till felsökningslösningar för frekventa problem och felscenarier
-- Lära dig bästa praxis genom vanliga frågor om optimering
-- Upptäcka avancerade funktioner och kapaciteter genom expertfrågor
-- Snabbt kunna referera till vägledning om kostnader, säkerhet och distributionsstrategi
+- Förstå nyckelkoncept och terminologi genom praktiskt Q&A-format 
+- Få tillgång till felsökningslösningar för vanliga problem och fel
+- Lära dig bästa praxis genom ofta förekommande frågor om optimering 
+- Upptäcka avancerade funktioner och möjligheter genom expertfrågor
+- Effektivt referera till kostnads-, säkerhets- och distributionsstrategier
 
 ## Läranderesultat
 
-Genom regelbunden användning av denna FAQ kommer du att kunna:
-- Lösa vanliga problem med Azure Developer CLI självständigt med hjälp av tillhandahållna lösningar
-- Fatta informerade beslut om distributionsstrategier och konfigurationer
-- Förstå relationen mellan azd och andra Azure-verktyg och tjänster
-- Tillämpa bästa praxis baserat på communityerfarenheter och expertrekommendationer
-- Felsöka autentisering, distribution och konfigurationsproblem effektivt
-- Optimera kostnader och prestanda med hjälp av FAQ-insikter och rekommendationer
+Med regelbunden hänvisning till denna FAQ kommer du kunna:
+- Lösa vanliga problem med Azure Developer CLI självständigt med tillhandahållna lösningar
+- Göra informerade val om distributionsstrategier och konfigurationer
+- Förstå sambandet mellan azd och andra Azure-verktyg och tjänster
+- Tillämpa bästa praxis baserad på erfarenhet från community och expertrekommendationer
+- Felsöka autentiserings-, distributions- och konfigurationsproblem effektivt
+- Optimera kostnader och prestanda med hjälp av insikter och rekommendationer från FAQ
 
 ## Innehållsförteckning
 
-- [Getting Started](../../../resources)
-- [Authentication & Access](../../../resources)
-- [Templates & Projects](../../../resources)
-- [Deployment & Infrastructure](../../../resources)
-- [Configuration & Environments](../../../resources)
-- [Troubleshooting](../../../resources)
-- [Cost & Billing](../../../resources)
-- [Best Practices](../../../resources)
-- [Advanced Topics](../../../resources)
+- [Komma igång](#getting-started)
+- [Autentisering & åtkomst](#authentication--access)
+- [Mallar & projekt](#templates--projects)
+- [Distribution & infrastruktur](#deployment--infrastructure)
+- [Konfiguration & miljöer](#configuration--environments)
+- [Felsökning](#troubleshooting)
+- [Kostnad & fakturering](#cost--billing)
+- [Bästa praxis](#best-practices)
+- [Avancerade ämnen](#advanced-topics)
 
 ---
 
-## Getting Started
+## Komma igång
 
 ### F: Vad är Azure Developer CLI (azd)?
-**S**: Azure Developer CLI (azd) är ett utvecklarcentrerat kommandoradsverktyg som påskyndar tiden det tar att få din applikation från lokal utvecklingsmiljö till Azure. Det tillhandahåller bästa praxis genom mallar och hjälper till under hela distributionslivscykeln.
+**S**: Azure Developer CLI (azd) är ett utvecklarcentrerat kommandoradsverktyg som påskyndar tiden det tar för dig att få din applikation från lokal utvecklingsmiljö till Azure. Det tillhandahåller bästa praxis genom mallar och hjälper till med hela distributionslivscykeln.
 
 ### F: Hur skiljer sig azd från Azure CLI?
 **S**: 
 - **Azure CLI**: Allmänt verktyg för hantering av Azure-resurser
 - **azd**: Utvecklarfokuserat verktyg för applikationsdistributionsarbetsflöden
-- azd använder Azure CLI internt men erbjuder högre abstraktioner för vanliga utvecklingsscenarier
-- azd inkluderar mallar, miljöhantering och distributionsautomatisering
+- azd har eget autentiserings- och distributionsarbetsflöde; Azure CLI är ett separat, kompletterande verktyg
+- azd inkluderar mallar, miljöhantering och distributionsautomation
 
-### F: Behöver jag Azure CLI installerat för att använda azd?
-**S**: Ja, azd kräver Azure CLI för autentisering och vissa operationer. Installera Azure CLI först, installera sedan azd.
+### F: Behöver jag installera Azure CLI för att använda azd?
+**S**: Inte för det grundläggande AZD-arbetsflödet. Autentisera med `azd auth login`. Installera Azure CLI separat när en mall-hook eller övning uttryckligen kör `az`-kommandon.
 
 ### F: Vilka programmeringsspråk stöder azd?
-**S**: azd är språkövergripande. Det fungerar med:
+**S**: azd är språkoberoende. Det fungerar med:
 - Node.js/JavaScript/TypeScript
 - Python
 - .NET/C#
 - Java
 - Go
 - PHP
-- Statisk webbplats
+- Statisk webbplatser
 - Containeriserade applikationer
 
 ### F: Kan jag använda azd med befintliga projekt?
@@ -78,66 +78,75 @@ Genom regelbunden användning av denna FAQ kommer du att kunna:
 
 ---
 
-## Authentication & Access
+## Autentisering & åtkomst
 
-### F: Hur autentiserar jag mot Azure med azd?
+### F: Hur autentiserar jag med Azure med azd?
 **S**: Använd `azd auth login` som öppnar ett webbläsarfönster för Azure-autentisering. För CI/CD-scenarier, använd service principals eller hanterade identiteter.
 
 ### F: Kan jag använda azd med flera Azure-prenumerationer?
 **S**: Ja. Använd `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` för att specificera vilken prenumeration som ska användas för varje miljö.
 
 ### F: Vilka behörigheter behöver jag för att distribuera med azd?
-**S**: Typiskt behöver du:
-- **Contributor**-roll på resursgruppen eller prenumerationen
-- **User Access Administrator** om du distribuerar resurser som kräver rolltilldelningar
-- Specifika behörigheter varierar beroende på mall och de resurser som distribueras
+**S**: Vanligtvis behöver du:
+- **Bidragsgivarrollen** på resursgruppen eller prenumerationen
+- **Användaråtkomstadministratör** om resurser som kräver rolltilldelningar distribueras
+- Specifika behörigheter varierar beroende på mall och resurser som distribueras
 
 ### F: Kan jag använda azd i CI/CD-pipelines?
-**S**: Absolut! azd är utformat för integration i CI/CD. Använd service principals för autentisering och ställ in miljövariabler för konfiguration.
+**S**: Absolut! azd är designad för CI/CD-integration. Använd service principals för autentisering och ställ in miljövariabler för konfiguration.
 
 ### F: Hur hanterar jag autentisering i GitHub Actions?
-**S**: Använd Azure Login-action med service principal-referenser:
+**S**: Föredra workload identity federation (OIDC), konfigurerad med `azd pipeline config`. Det genererade arbetsflödet installerar AZD och autentiserar AZD direkt med en federerad identitet. Ett `azure/login`-steg ensam etablerar inte en AZD-inloggning. Ett inloggningssteg inom ett befintligt jobb är:
 ```yaml
-- uses: azure/login@v1
-  with:
-    creds: ${{ secrets.AZURE_CREDENTIALS }}
-- run: azd deploy --no-prompt
+permissions:
+  contents: read
+  id-token: write
+steps:
+  - uses: actions/checkout@v7
+  - uses: Azure/setup-azd@v2
+  - run: >-
+      azd auth login
+      --client-id "${{ vars.AZURE_CLIENT_ID }}"
+      --tenant-id "${{ vars.AZURE_TENANT_ID }}"
+      --federated-credential-provider github
 ```
+
+Provisonera eller distribuera efter inloggning, med avsedd AZD-miljö, prenumeration och plats konfigurerad. Identitetens federerade legitimationsuppgifter måste lita på arbetsflödets repository/ref eller GitHub-miljö, och dess Azure-roller måste tillåta de begärda operationerna.
 
 ---
 
-## Templates & Projects
+## Mallar & projekt
 
 ### F: Var kan jag hitta azd-mallar?
 **S**: 
-- Officiella mallar: [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- Community-mallar: Sök på GitHub efter "azd-template"
-- Använd `azd template list` för att bläddra bland tillgängliga mallar
+- Officiella och community-mallar: [Awesome AZD](https://azure.github.io/awesome-azd/)
+- Community-mallar: GitHub-sökning efter "azd-template"
+- Använd `azd template list` för att bläddra i tillgängliga mallar
 
-### F: Hur skapar jag en anpassad mall?
+### F: Hur skapar jag en egen mall?
 **S**: 
-1. Börja med en befintlig mallstruktur
-2. Modifiera `azure.yaml`, infrastrukturfiler och applikationskod
+1. Börja med befintlig mallstruktur
+2. Modifiera `azure.yaml`, infrastrukturn filer och applikationskod
 3. Testa noggrant med `azd up`
-4. Publicera till GitHub med lämpliga taggar
+4. Publicera på GitHub med lämpliga taggar
 
 ### F: Kan jag använda azd utan en mall?
-**S**: Ja, använd `azd init` i ett befintligt projekt för att skapa nödvändiga konfigurationsfiler. Du behöver manuellt konfigurera `azure.yaml` och infrastrukturfiler.
+**S**: Ja, använd `azd init` i ett befintligt projekt för att skapa nödvändiga konfigurationsfiler. Du måste manuellt konfigurera `azure.yaml` och infrastrukturn filer.
 
 ### F: Vad är skillnaden mellan officiella och community-mallar?
 **S**: 
-- **Officiella mallar**: Underhålls av Microsoft, uppdateras regelbundet, omfattande dokumentation
+- **Officiella mallar**: Underhålls av Microsoft, regelbundet uppdaterade, omfattande dokumentation
 - **Community-mallar**: Skapade av utvecklare, kan ha specialiserade användningsfall, varierande kvalitet och underhåll
 
 ### F: Hur uppdaterar jag en mall i mitt projekt?
 **S**: Mallar uppdateras inte automatiskt. Du kan:
-1. Jämföra och slå ihop ändringar manuellt från källmallen
-2. Börja om med `azd init` med den uppdaterade mallen
-3. Cherry-picka specifika förbättringar från uppdaterade mallar
+1. Jämföra och slå samman förändringar från källmallen manuellt
+2. Börja om med `azd init` och den uppdaterade mallen
+3. Plocka ut specifika förbättringar från uppdaterade mallar
 
 ---
 
-## Deployment & Infrastructure
+## Distribution & Infrastruktur
 
 ### F: Vilka Azure-tjänster kan azd distribuera?
 **S**: azd kan distribuera vilken Azure-tjänst som helst via Bicep/ARM-mallar, inklusive:
@@ -147,10 +156,10 @@ Genom regelbunden användning av denna FAQ kommer du att kunna:
 - Nätverk, säkerhet och övervakningsresurser
 
 ### F: Kan jag distribuera till flera regioner?
-**S**: Ja, konfigurera flera regioner i dina Bicep-mallar och ställ in platsparametern lämpligt för varje miljö.
+**S**: Ja, konfigurera flera regioner i dina Bicep-mallar och ange lägesparametern lämpligt för varje miljö.
 
-### F: Hur hanterar jag databas-schemamigreringar?
-**S**: Använd distributionshooks i `azure.yaml`:
+### F: Hur hanterar jag databas-schema-migrationer?
+**S**: Använd distributions-hooks i `azure.yaml`:
 ```yaml
 hooks:
   postdeploy:
@@ -160,21 +169,18 @@ hooks:
       run: ./scripts/migrate-database.ps1
 ```
 
-### F: Kan jag distribuera endast infrastrukturen utan applikationer?
-**S**: Ja, använd `azd provision` för att endast distribuera infrastrukturkomponenterna som definieras i dina mallar.
+### F: Kan jag distribuera bara infrastrukturen utan applikationer?
+**S**: Ja, använd `azd provision` för att distribuera endast infrastrukturkomponenterna definierade i dina mallar.
 
 ### F: Hur distribuerar jag till befintliga Azure-resurser?
-**S**: Detta är komplext och inte direkt stöds. Du kan:
-1. Importera befintliga resurser i dina Bicep-mallar
-2. Använda referenser till befintliga resurser i mallarna
-3. Modifiera mallarna för att villkorligt skapa eller referera resurser
+**S**: Ja, när mallen stöder det. Referera befintliga resurser med Biceps `existing`-deklarationer eller mallens dokumenterade parametrar för befintliga resurser, och mappa applikationstjänster till deras avsedda mål. Detta importerar inte automatiskt ägarskap eller skapar saknade behörigheter. Granska mallen före distribution.
 
 ### F: Kan jag använda Terraform istället för Bicep?
-**S**: För närvarande stöder azd främst Bicep/ARM-mallar. Terraform-stöd är inte officiellt tillgängligt, även om community-lösningar kan finnas.
+**S**: Ja. AZD stödjer både Terraform och Bicep. Välj en Terraform-baserad mall eller konfigurera `infra.provider: terraform` i `azure.yaml` med lämpliga Terraform-filer och state/backend-konfiguration. Se [Terraform-arbetsflödet](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
 
 ---
 
-## Configuration & Environments
+## Konfiguration & miljöer
 
 ### F: Hur hanterar jag olika miljöer (dev, staging, prod)?
 **S**: Skapa separata miljöer med `azd env new <environment-name>` och konfigurera olika inställningar för varje:
@@ -185,114 +191,110 @@ azd env new production
 ```
 
 ### F: Var lagras miljökonfigurationer?
-**S**: I `.azure`-mappen i din projektkatalog. Varje miljö har sin egen mapp med konfigurationsfiler.
+**S**: I `.azure`-mappen inom din projektkatalog. Varje miljö har sin egen mapp med konfigurationsfiler.
 
-### F: Hur ställer jag in miljöspecifik konfiguration?
+### F: Hur sätter jag miljöspecifik konfiguration?
 **S**: Använd `azd env set` för att konfigurera miljövariabler:
 ```bash
 azd env set AZURE_LOCATION eastus
 azd env set DATABASE_TIER Basic
 ```
 
-### F: Kan jag dela miljökonfigurationer med teammedlemmar?
-**S**: Mappen `.azure` innehåller känslig information och bör inte committas till versionskontroll. Istället:
+### F: Kan jag dela miljökonfigurationer med teamkollegor?
+**S**: `.azure`-mappen innehåller känslig information och bör inte checkas in i versionshantering. Istället:
 1. Dokumentera nödvändiga miljövariabler
 2. Använd distributionsskript för att sätta upp miljöer
-3. Använd Azure Key Vault för känslig konfiguration
+3. Använd Azure Key Vault för känsliga konfigurationer
 
-### F: Hur åsidosätter jag mallarnas standardvärden?
-**S**: Ställ in miljövariabler som motsvarar mallparametrarna:
+### F: Hur överskrider jag mallens standardinställningar?
+**S**: Sätt miljövariabler som motsvarar mallparametrar:
 ```bash
-azd env set LOCATION "West US 2"
+azd env set AZURE_LOCATION westus2
 azd env set SKU_NAME "B1"
 ```
 
+Endast variabler som förbrukas av mallen påverkar distributionen. `SKU_NAME` ovan är ett exempel på anpassad indata, inte en universell AZD-inställning.
+
 ---
 
-## Troubleshooting
+## Felsökning
 
 ### F: Varför misslyckas `azd up`?
 **S**: Vanliga orsaker:
 1. **Autentiseringsproblem**: Kör `azd auth login`
 2. **Otillräckliga behörigheter**: Kontrollera dina Azure-rolltilldelningar
-3. **Konflikter i resursnamn**: Byt AZURE_ENV_NAME
-4. **Kvantitets-/kapacitetsproblem**: Kontrollera regional tillgänglighet
-5. **Mallfel**: Validera Bicep-mallarna
+3. **Konflikter i resursnamn**: Granska den konfliktande resursen och mallens namngivningsindata; skapa en separat miljö med `azd env new` när isolering krävs
+4. **Kvot-/kapacitetsproblem**: Kontrollera regional tillgänglighet
+5. **Mallfel**: Validera Bicep-mallar
 
-### F: Hur felsöker jag distributionsfel?
+### F: Hur felsöker jag distributionsmisslyckanden?
 **S**: 
-1. Använd `azd deploy --debug` för detaljerad utdata
+1. Använd `azd deploy --debug` för detaljerad utskrift
 2. Kontrollera distributionshistorik i Azure-portalen
-3. Granska Aktivitetloggen i Azure-portalen
+3. Granska Aktivitetsloggen i Azure-portalen
 4. Använd `azd show` för att visa aktuell miljöstatus
 
 ### F: Varför fungerar inte mina miljövariabler?
 **S**: Kontrollera:
-1. Att variabelnamnen matchar mallparametrarna exakt
-2. Att värden är korrekt citerade om de innehåller mellanslag
-3. Att rätt miljö är vald: `azd env select <environment>`
-4. Att variablerna är satta i rätt miljö
+1. Variabelnamnen matchar mallparametrarna exakt
+2. Värden är korrekt citerade om de innehåller blanksteg
+3. Miljön är vald: `azd env select <environment>`
+4. Variabler är satta i rätt miljö
 
-### F: Hur städar jag upp misslyckade distributioner?
+### F: Hur rensar jag upp misslyckade distributioner?
 **S**: 
 ```bash
-azd down --force --purge
+azd down
 ```
-Detta tar bort alla resurser och miljökonfiguration.
+Granska vald miljö och bekräftelse för radering först. Detta tar bort provisionerade Azure-resurser, inte den lokala `.azure`-miljökonfigurationen. `--purge` begär dessutom permanent borttagning av stödjda mjukborttagna resurser och kan blockeras av behållnings-/rensningsskydd; det är inte ett rutinmässigt återställningssteg.
 
-### F: Varför är min applikation inte tillgänglig efter distribution?
+### F: Varför är min applikation inte åtkomlig efter distribution?
 **S**: Kontrollera:
-1. Att distributionen slutfördes framgångsrikt
-2. Att applikationen körs (kontrollera loggar i Azure-portalen)
-3. Att nätverkssäkerhetsgrupper tillåter trafik
-4. Att DNS/anpassade domäner är korrekt konfigurerade
+1. Distributionen slutfördes framgångsrikt
+2. Applikationen körs (kolla loggar i Azure-portalen)
+3. Nätverkssäkerhetsgrupper tillåter trafik
+4. DNS/egna domäner är korrekt konfigurerade
 
 ---
 
-## Cost & Billing
+## Kostnad & fakturering
 
 ### F: Hur mycket kommer azd-distributioner att kosta?
 **S**: Kostnader beror på:
 - Azure-tjänster som distribueras
-- Valda service tiers/SKUs
-- Prisskillnader mellan regioner
+- Valda tjänstenivåer/SKU:er
+- Regionala prisavvikelser
 - Användningsmönster
 
-Använd [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) för uppskattningar.
+Använd [Azure Price Calculator](https://azure.microsoft.com/pricing/calculator/) för uppskattningar.
 
 ### F: Hur kontrollerar jag kostnader i azd-distributioner?
 **S**: 
-1. Använd lägre tier SKUs för utvecklingsmiljöer
-2. Konfigurera Azure-budgetar och varningar
+1. Använd lägre tier-SKU:er för utvecklingsmiljöer
+2. Sätt upp Azure-budgetar och larm
 3. Använd `azd down` för att ta bort resurser när de inte behövs
-4. Välj lämpliga regioner (kostnader varierar per plats)
+4. Välj lämpliga regioner (kostnader varierar efter plats)
 5. Använd Azure Cost Management-verktyg
 
-### F: Finns det gratisalternativ för azd-mallar?
-**S**: Många Azure-tjänster erbjuder gratisnivåer:
-- App Service: Gratisnivå tillgänglig
-- Azure Functions: 1M gratis körningar/månad
-- Cosmos DB: Gratisnivå med 400 RU/s
-- Application Insights: Första 5GB/månad gratis
-
-Konfigurera mallar för att använda gratisnivåer där det finns.
+### F: Finns det gratisnivåer för azd-mallar?
+**S**: Vissa tjänster har gratis SKU:er eller månadsvisa bidrag, beroende på behörighet, värdplan, region och prenumerationsgränser. Dessa gör inte en hel mall gratis: databaser, sök, nätverk, register, telemetri och modellinferens kan ge kostnader separat. Kontrollera [Azure lista över gratis tjänster](https://azure.microsoft.com/free/) och aktuell prissättning för varje resurs innan distribution.
 
 ### F: Hur uppskattar jag kostnader innan distribution?
 **S**: 
 1. Granska mallens `main.bicep` för att se vilka resurser som skapas
-2. Använd Azure Pricing Calculator med specifika SKUs
+2. Använd Azure Price Calculator med specifika SKU:er
 3. Distribuera först till en utvecklingsmiljö för att övervaka faktiska kostnader
 4. Använd Azure Cost Management för detaljerad kostnadsanalys
 
 ---
 
-## Best Practices
+## Bästa praxis
 
 ### F: Vilka är bästa praxis för azd-projektstruktur?
 **S**: 
-1. Håll applikationskod separat från infrastrukturen
-2. Använd meningsfulla servicenamn i `azure.yaml`
-3. Implementera korrekt felhantering i build-skript
+1. Håll applikationskod separat från infrastruktur
+2. Använd meningsfulla tjänstenamn i `azure.yaml`
+3. Implementera korrekt felhantering i byggskript
 4. Använd miljöspecifik konfiguration
 5. Inkludera omfattande dokumentation
 
@@ -308,8 +310,8 @@ Konfigurera mallar för att använda gratisnivåer där det finns.
 └── README.md         # Project documentation
 ```
 
-### F: Ska jag committa `.azure`-mappen till versionskontroll?
-**S**: **Nej!** Mappen `.azure` innehåller känslig information. Lägg till den i `.gitignore`:
+### F: Bör jag checka in `.azure`-mappen i versionshantering?
+**S**: **Nej!** `.azure`-mappen innehåller känslig information. Lägg till den i `.gitignore`:
 ```gitignore
 .azure/
 ```
@@ -317,21 +319,21 @@ Konfigurera mallar för att använda gratisnivåer där det finns.
 ### F: Hur hanterar jag hemligheter och känslig konfiguration?
 **S**: 
 1. Använd Azure Key Vault för hemligheter
-2. Referera Key Vault-hemligheter i applikationskonfiguration
-3. Committa aldrig hemligheter till versionskontroll
+2. Referera till Key Vault-hemligheter i applikationskonfigurationen
+3. Lämna aldrig hemligheter i versionskontroll
 4. Använd hanterade identiteter för tjänst-till-tjänst-autentisering
 
-### F: Vad är rekommenderat tillvägagångssätt för CI/CD med azd?
+### F: Vad är den rekommenderade metoden för CI/CD med azd?
 **S**: 
-1. Använd separata miljöer för varje steg (dev/staging/prod)
-2. Implementera automatiserade tester innan distribution
-3. Använd service principals för autentisering
-4. Lagra känslig konfiguration i pipeline-hemligheter/variabler
-5. Implementera godkännandegates för produktionsdistributioner
+1. Använd separata miljöer för varje steg (utv/test/prod)
+2. Implementera automatiska tester innan distribution
+3. Använd tjänsthuvudkonton för autentisering
+4. Spara känslig konfiguration i pipeline-hemligheter/variabler
+5. Implementera godkännandepunkter för produktionsdistributioner
 
 ---
 
-## Advanced Topics
+## Avancerade ämnen
 
 ### F: Kan jag utöka azd med anpassad funktionalitet?
 **S**: Ja, genom distributionshooks i `azure.yaml`:
@@ -346,28 +348,28 @@ hooks:
 ### F: Hur integrerar jag azd med befintliga DevOps-processer?
 **S**: 
 1. Använd azd-kommandon i befintliga pipelineskript
-2. Standardisera på azd-mallar över teamen
-3. Integrera med befintlig övervakning och larm
+2. Standardisera på azd-mallar över team
+3. Integrera med befintlig övervakning och aviseringar
 4. Använd azd:s JSON-utdata för pipelineintegration
 
 ### F: Kan jag använda azd med Azure DevOps?
 **S**: Ja, azd fungerar med vilket CI/CD-system som helst. Skapa Azure DevOps-pipelines som använder azd-kommandon.
 
 ### F: Hur bidrar jag till azd eller skapar community-mallar?
-**S**:
+**S**: 
 1. **azd-verktyget**: Bidra till [Azure/azure-dev](https://github.com/Azure/azure-dev)
-2. **Mallar**: Skapa mallar enligt [riktlinjer för mallar](https://github.com/Azure-Samples/awesome-azd)
-3. **Dokumentation**: Bidra till dokumentation på [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
+2. **Mallar**: Följ [Awesome AZD gallery contribution instructions](https://github.com/Azure/awesome-azd#3-contribute-to-gallery)
+3. **Dokumentation**: Bidra till dokumentationen vid [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
 
-### Fråga: Vad är färdplanen för azd?
-**Svar**: Kontrollera den [officiella färdplanen](https://github.com/Azure/azure-dev/projects) för planerade funktioner och förbättringar.
+### F: Vad är färdplanen för azd?
+**S**: Kolla [den officiella färdplanen](https://github.com/Azure/azure-dev/projects) för planerade funktioner och förbättringar.
 
-### Fråga: Hur migrerar jag från andra driftsättningsverktyg till azd?
-**Svar**: 
-1. Analysera befintlig driftsättningsarkitektur
+### F: Hur migrerar jag från andra distributionsverktyg till azd?
+**S**: 
+1. Analysera aktuell distributionsarkitektur
 2. Skapa motsvarande Bicep-mallar
-3. Konfigurera `azure.yaml` så att den matchar befintliga tjänster
-4. Testa noggrant i utvecklingsmiljön
+3. Konfigurera `azure.yaml` för att matcha aktuella tjänster
+4. Testa noggrant i utvecklingsmiljö
 5. Migrera miljöer gradvis
 
 ---
@@ -375,26 +377,26 @@ hooks:
 ## Har du fortfarande frågor?
 
 ### **Sök först**
-- Kontrollera den [officiella dokumentationen](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- Sök i [GitHub issues](https://github.com/Azure/azure-dev/issues) efter liknande problem
+- Kolla [den officiella dokumentationen](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- Sök i [GitHub-ärenden](https://github.com/Azure/azure-dev/issues) efter liknande problem
 
 ### **Få hjälp**
-- [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) - Gemenskapsstöd
+- [GitHub Discussions](https://github.com/Azure/azure-dev/discussions) - Gemenskapens stöd
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Tekniska frågor
-- [Azure Discord](https://discord.gg/azure) - Chatt i realtid
+- [Azure Discord](https://discord.gg/azure) - Gemenskapens chatt i realtid
 
 ### **Rapportera problem**
 - [GitHub Issues](https://github.com/Azure/azure-dev/issues/new) - Buggrapporter och funktionsförfrågningar
-- Inkludera relevanta loggar, felmeddelanden och steg för att reproducera
+- Bifoga relevanta loggar, felmeddelanden och steg för att reproducera
 
 ### **Lär dig mer**
-- [Azure Developer CLI documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Dokumentation för Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-*Denna FAQ uppdateras regelbundet. Senast uppdaterad: 9 september 2025*
+*Teknisk vägledning granskad: 4 november 2026. Molntillgänglighet och priser måste kontrolleras för din prenumeration och region.*
 
 ---
 
@@ -406,5 +408,5 @@ hooks:
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfriskrivning**:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Vi strävar efter noggrannhet, men var medveten om att automatiska översättningar kan innehålla fel eller felaktigheter. Originaldokumentet på dess ursprungliga språk ska betraktas som den auktoritativa källan. För kritisk information rekommenderas en professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var vänlig notera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

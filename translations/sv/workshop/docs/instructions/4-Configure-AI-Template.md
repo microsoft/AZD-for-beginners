@@ -1,221 +1,25 @@
 # 4. Konfigurera en mall
 
-!!! tip "I SLUTET AV DETTA AVSNITT KOMMER DU ATT KUNNA"
+!!! tip "I SLUTET AV DENNA MODUL KOMMER DU ATT KUNNA"
 
-    - [ ] Förstå syftet med `azure.yaml`
-    - [ ] Förstå strukturen i `azure.yaml`
-    - [ ] Förstå värdet av azd livscykel `hooks`
-    - [ ] **Lab 4:** Utforska och modifiera miljövariabler
-
----
-
-!!! prompt "Vad gör filen `azure.yaml`? Använd en kodfence och förklara den rad för rad"
-
-      Filen `azure.yaml` är **konfigurationsfilen för Azure Developer CLI (azd)**. Den definierar hur din applikation ska distribueras till Azure, inklusive infrastruktur, tjänster, distributionshooks och miljövariabler.
+    - [ ] Explain the purpose and structure of `azure.yaml`
+    - [ ] Distinguish application services, infrastructure parameters, and lifecycle hooks
+    - [ ] Configure the selected environment using inputs supported by the template
+    - [ ] **Lab 4:** Review a configuration change before provisioning it
 
 ---
 
-## 1. Syfte och funktionalitet
+## 1. Börja med själva mallen
 
-Denna `azure.yaml`-fil fungerar som **distributionsplan** för en AI-agentapplikation som:
+Öppna [`azure.yaml` i Kom igång med AI-agenter](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/azure.yaml) i det repository du initierade. Den upstream-mallen kan ändras oberoende av denna workshop. Följande **utdrag** kontrollerades den 4 november 2026; det är inte en ersättning för hela filen:
 
-1. **Validerar miljön** före distribution
-2. **Provisionerar Azure AI-tjänster** (AI Hub, AI Project, Search, etc.)
-3. **Distribuerar en Python-applikation** till Azure Container Apps
-4. **Konfigurerar AI-modeller** för både chatt- och inbäddningsfunktionalitet
-5. **Sätter upp övervakning och spårning** för AI-applikationen
-6. **Hanterar både nya och befintliga** scenarier för Azure AI-projekt
-
-Filen möjliggör **distribution med ett kommando** (`azd up`) av en komplett AI-agentlösning med korrekt validering, provisionering och efter-distributionskonfiguration.
-
-??? info "Expandera för att visa: `azure.yaml`"
-
-      Filen `azure.yaml` anger hur Azure Developer CLI ska distribuera och hantera denna AI-agentapplikation i Azure. Låt oss gå igenom den rad för rad.
-
-      ```yaml title="" linenums="0"
-
-      # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: do we need hooks? 
-      # TODO: do we need all of the variables?
-
-      name: azd-get-started-with-ai-agents
-      metadata:
-      template: azd-get-started-with-ai-agents@1.0.2
-      requiredVersions:
-      azd: ">=1.14.0"
-
-      hooks:
-      preup:
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/validate_env_vars.sh; ./scripts/validate_env_vars.sh
-            interactive: true
-            continueOnError: false
-      windows:
-            shell: pwsh
-            run: ./scripts/validate_env_vars.ps1
-            interactive: true
-            continueOnError: false      
-      postprovision:
-      windows:
-            shell: pwsh
-            run: ./scripts/write_env.ps1
-            continueOnError: true
-            interactive: true
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/write_env.sh; ./scripts/write_env.sh;
-            continueOnError: true
-            interactive: true
-      postdeploy:
-      windows:
-            shell: pwsh
-            run: ./scripts/postdeploy.ps1
-            continueOnError: true
-            interactive: true
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/postdeploy.sh; ./scripts/postdeploy.sh;
-            continueOnError: true
-            interactive: true
-      services:
-      api_and_frontend:
-      project: ./src
-      language: py
-      host: containerapp
-      docker:
-            image: api_and_frontend
-            remoteBuild: true
-      pipeline:
-      variables:
-      - AZURE_RESOURCE_GROUP
-      - AZURE_AIHUB_NAME
-      - AZURE_AIPROJECT_NAME
-      - AZURE_AISERVICES_NAME
-      - AZURE_SEARCH_SERVICE_NAME
-      - AZURE_APPLICATION_INSIGHTS_NAME
-      - AZURE_CONTAINER_REGISTRY_NAME
-      - AZURE_KEYVAULT_NAME
-      - AZURE_STORAGE_ACCOUNT_NAME
-      - AZURE_LOG_ANALYTICS_WORKSPACE_NAME
-      - USE_CONTAINER_REGISTRY
-      - USE_APPLICATION_INSIGHTS
-      - USE_AZURE_AI_SEARCH_SERVICE
-      - AZURE_AI_AGENT_NAME
-      - AZURE_AI_AGENT_ID
-      - AZURE_AI_AGENT_DEPLOYMENT_NAME
-      - AZURE_AI_AGENT_DEPLOYMENT_SKU
-      - AZURE_AI_AGENT_DEPLOYMENT_CAPACITY
-      - AZURE_AI_AGENT_MODEL_NAME
-      - AZURE_AI_AGENT_MODEL_FORMAT
-      - AZURE_AI_AGENT_MODEL_VERSION
-      - AZURE_AI_EMBED_DEPLOYMENT_NAME
-      - AZURE_AI_EMBED_DEPLOYMENT_SKU
-      - AZURE_AI_EMBED_DEPLOYMENT_CAPACITY
-      - AZURE_AI_EMBED_MODEL_NAME
-      - AZURE_AI_EMBED_MODEL_FORMAT
-      - AZURE_AI_EMBED_MODEL_VERSION
-      - AZURE_AI_EMBED_DIMENSIONS
-      - AZURE_AI_SEARCH_INDEX_NAME
-      - AZURE_EXISTING_AIPROJECT_RESOURCE_ID
-      - AZURE_EXISTING_AIPROJECT_ENDPOINT
-      - AZURE_EXISTING_AGENT_ID
-      - ENABLE_AZURE_MONITOR_TRACING
-      - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
-      ```
-
----
-
-## 2. Genomgång av filen
-
-Låt oss gå igenom filen avsnitt för avsnitt för att förstå vad den gör - och varför.
-
-### 2.1 **Rubrik och schema (1-3)**
-
-```yaml title="" linenums="0"
+```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-```
-
-- **Rad 1**: Ger YAML language server schema-validering för IDE-stöd och IntelliSense
-
-### 2.2 Projektmetadata (5-10)
-
-```yaml title="" linenums="0"
 name: azd-get-started-with-ai-agents
 metadata:
-  template: azd-get-started-with-ai-agents@1.0.2
+  template: azd-get-started-with-ai-agents@2.5.0
 requiredVersions:
   azd: ">=1.14.0"
-```
-
-- **Rad 5**: Definierar projektnamnet som används av Azure Developer CLI
-- **Raderna 6-7**: Anger att detta baseras på en mall version 1.0.2
-- **Raderna 8-9**: Kräver Azure Developer CLI version 1.14.0 eller högre
-
-### 2.3 Deploy-hooks (11-40)
-
-```yaml title="" linenums="0"
-hooks:
-  preup:
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/validate_env_vars.sh; ./scripts/validate_env_vars.sh
-      interactive: true
-      continueOnError: false
-    windows:
-      shell: pwsh
-      run: ./scripts/validate_env_vars.ps1
-      interactive: true
-      continueOnError: false      
-```
-
-- **Raderna 11-20**: **För-distributionshook** - körs före `azd up`
-
-      - På Unix/Linux: Gör valideringsskriptet körbart och kör det
-      - På Windows: Kör PowerShell-valideringsskriptet
-      - Båda är interaktiva och stoppar distributionen om de misslyckas
-
-```yaml  title="" linenums="0"
-  postprovision:
-    windows:
-      shell: pwsh
-      run: ./scripts/write_env.ps1
-      continueOnError: true
-      interactive: true
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/write_env.sh; ./scripts/write_env.sh;
-      continueOnError: true
-      interactive: true
-```
-- **Raderna 21-30**: **Post-provision-hook** - körs efter att Azure-resurserna skapats
-
-  - Kör skript som skriver miljövariabler
-  - Fortsätter distributionen även om dessa skript misslyckas (`continueOnError: true`)
-
-```yaml title="" linenums="0"
-  postdeploy:
-    windows:
-      shell: pwsh
-      run: ./scripts/postdeploy.ps1
-      continueOnError: true
-      interactive: true
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/postdeploy.sh; ./scripts/postdeploy.sh;
-      continueOnError: true
-      interactive: true
-```
-- **Raderna 31-40**: **Post-deploy-hook** - körs efter applikationsdistributionen
-
-  - Kör slutliga installationsskript
-  - Fortsätter även om skripten misslyckas
-
-### 2.4 Tjänstkonfiguration (41-48)
-
-Detta konfigurerar applikationstjänsten du distribuerar.
-
-```yaml title="" linenums="0"
 services:
   api_and_frontend:
     project: ./src
@@ -226,162 +30,109 @@ services:
       remoteBuild: true
 ```
 
-- **Rad 42**: Definierar en tjänst med namnet "api_and_frontend"
-- **Rad 43**: Pekar på katalogen `./src` för källkoden
-- **Rad 44**: Anger Python som programmeringsspråk
-- **Rad 45**: Använder Azure Container Apps som värdplattform
-- **Raderna 46-48**: Docker-konfiguration
+- `name` identifierar AZD-projektet; `metadata.template` registrerar mallversionen.
+- `requiredVersions.azd` är mallens minimum, inte en rekommendation att använda en gammal CLI. Använd en aktuell stödd AZD-release.
+- `services` definierar applikationsdistributionsmål. Denna mall distribuerar sin Python-API och frontend som en Container Apps-tjänst.
+- `project` är relativt till `azure.yaml`.
+- `remoteBuild` begär en fjärrkontainerbygge. Din identitet behöver fortfarande nödvändiga Azure-behörigheter.
 
-      - Använder "api_and_frontend" som imagenamn
-      - Bygger Docker-imagen fjärrstyrt i Azure (inte lokalt)
+Mallens Bicep-filer under `infra/`, inte enbart `services`-listan, deklarerar resurser som Microsoft Foundry, modelldistributioner, lagring och valfri AI Search.
 
-### 2.5 Pipeline-variabler (49-76)
+## 2. Förstå livscykelhakar
 
-Detta är variabler som hjälper dig att köra `azd` i CI/CD-pipelines för automatisering
+Inspektera `hooks`-sektionen och de refererade skripten innan du kör mallen. Den granskade versionen innehåller:
 
-```yaml title="" linenums="0"
-pipeline:
-  variables:
-    - AZURE_RESOURCE_GROUP
-    - AZURE_AIHUB_NAME
-    - AZURE_AIPROJECT_NAME
-    - AZURE_AISERVICES_NAME
-    - AZURE_SEARCH_SERVICE_NAME
-    - AZURE_APPLICATION_INSIGHTS_NAME
-    - AZURE_CONTAINER_REGISTRY_NAME
-    - AZURE_KEYVAULT_NAME
-    - AZURE_STORAGE_ACCOUNT_NAME
-    - AZURE_LOG_ANALYTICS_WORKSPACE_NAME
-    - USE_CONTAINER_REGISTRY
-    - USE_APPLICATION_INSIGHTS
-    - USE_AZURE_AI_SEARCH_SERVICE
-    - AZURE_AI_AGENT_NAME
-    - AZURE_AI_AGENT_ID
-    - AZURE_AI_AGENT_DEPLOYMENT_NAME
-    - AZURE_AI_AGENT_DEPLOYMENT_SKU
-    - AZURE_AI_AGENT_DEPLOYMENT_CAPACITY
-    - AZURE_AI_AGENT_MODEL_NAME
-    - AZURE_AI_AGENT_MODEL_FORMAT
-    - AZURE_AI_AGENT_MODEL_VERSION
-    - AZURE_AI_EMBED_DEPLOYMENT_NAME
-    - AZURE_AI_EMBED_DEPLOYMENT_SKU
-    - AZURE_AI_EMBED_DEPLOYMENT_CAPACITY
-    - AZURE_AI_EMBED_MODEL_NAME
-    - AZURE_AI_EMBED_MODEL_FORMAT
-    - AZURE_AI_EMBED_MODEL_VERSION
-    - AZURE_AI_EMBED_DIMENSIONS
-    - AZURE_AI_SEARCH_INDEX_NAME
-    - AZURE_EXISTING_AIPROJECT_RESOURCE_ID
-    - AZURE_EXISTING_AIPROJECT_ENDPOINT
-    - AZURE_EXISTING_AGENT_ID
-    - ENABLE_AZURE_MONITOR_TRACING
-    - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
-```
+| Hak | Syfte | Viktigt beteende |
+|------|---------|--------------------|
+| `preup` | Validera mallens miljöinputs innan `up`-arbetsflödet | Plattformsspecifika shell-skript kan stoppa arbetsflödet vid fel |
+| `postdeploy` | Kör mall-specifik uppsättning efter applikationsdistribution | Inspektera `continueOnError` och skriptutdata; en lyckad distribution bevisar inte att alla uppgiftssteg lyckades |
 
-Detta avsnitt definierar miljövariabler som används **under distribution**, organiserade efter kategori:
+Denna version innehåller **inte** den äldre `postprovision` / `write_env`-haken som visades i tidigare workshopmaterial. Kopiera inte haka-referenser till skript som inte längre finns.
 
-- **Azure-resursnamn (Raderna 51-60)**:
-      - Kärnnamn för Azure-tjänster, t.ex. Resource Group, AI Hub, AI Project, etc.- 
-- **Funktionsflaggor (Raderna 61-63)**:
-      - Booleska variabler för att aktivera/inaktivera specifika Azure-tjänster
-- **AI-agentkonfiguration (Raderna 64-71)**:
-      - Konfiguration för huvud-AI-agenten inklusive namn, ID, distributionsinställningar, modelldetaljer- 
-- **AI-inbäddningskonfiguration (Raderna 72-79)**:
-      - Konfiguration för inbäddningsmodellen som används för vektorsökning
-- **Sökning och övervakning (Raderna 80-84)**:
-      - Sökindexnamn, befintliga resurs-ID:n och inställningar för övervakning/spårning
+Haknycklar väljer livscykelhändelser; `posix` och `windows` väljer plattformsimplementationer. `shell`, `run`, `interactive` och `continueOnError` styr körning. Det här är exekverbara skript med dina rättigheter, så granska dem på samma sätt som applikationskod.
 
----
+Se [AZD hooks-dokumentationen](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-extensibility) för hela livscykeln.
 
-## 3. Känn till miljövariablerna
-Följande miljövariabler styr din distributions konfiguration och beteende, organiserade efter deras huvudsakliga syfte. De flesta variabler har rimliga standardvärden, men du kan anpassa dem för att matcha dina specifika krav eller befintliga Azure-resurser.
+## 3. Spåra miljöinputs till infrastruktur
 
-### 3.1 Obligatoriska variabler 
+Kör dessa kommandon från det initierade exempelrytteriet:
 
-```bash title="" linenums="0"
-# Kärnkonfiguration för Azure
-AZURE_ENV_NAME                    # Miljönamn (används vid resursnamngivning)
-AZURE_LOCATION                    # Distributionsregion
-AZURE_SUBSCRIPTION_ID             # Målprenumeration
-AZURE_RESOURCE_GROUP              # Resursgruppsnamn
-AZURE_PRINCIPAL_ID                # Användarprincipal för RBAC
-
-# Resursnamn (skapas automatiskt om inte specificerat)
-AZURE_AIHUB_NAME                  # Microsoft Foundry-hubbens namn
-AZURE_AIPROJECT_NAME              # AI-projektnamn
-AZURE_AISERVICES_NAME             # AI-tjänstekontonamn
-AZURE_STORAGE_ACCOUNT_NAME        # Lagringskontonamn
-AZURE_CONTAINER_REGISTRY_NAME     # Containerregisternamn
-AZURE_KEYVAULT_NAME               # Key Vault-namn (om används)
-```
-
-### 3.2 Modellkonfiguration 
-```bash title="" linenums="0"
-# Konfiguration för chattmodell
-AZURE_AI_AGENT_MODEL_NAME         # Standard: gpt-4.1-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # Standard: OpenAI (eller Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # Standard: senaste tillgängliga
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Utplaceringsnamn för chattmodellen
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # Standard: Standard
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Standard: 80 (tusentals TPM)
-
-# Konfiguration för inbäddningsmodell
-AZURE_AI_EMBED_MODEL_NAME         # Standard: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # Standard: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # Standard: senaste tillgängliga
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Utplaceringsnamn för inbäddningar
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # Standard: Standard
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Standard: 50 (tusentals TPM)
-
-# Agentkonfiguration
-AZURE_AI_AGENT_NAME               # Agentens visningsnamn
-AZURE_EXISTING_AGENT_ID           # Använd befintlig agent (valfritt)
-```
-
-### 3.3 Funktionsflaggor
-```bash title="" linenums="0"
-# Valfria tjänster
-USE_APPLICATION_INSIGHTS         # Standard: true
-USE_AZURE_AI_SEARCH_SERVICE      # Standard: false
-USE_CONTAINER_REGISTRY           # Standard: true
-
-# Övervakning och spårning
-ENABLE_AZURE_MONITOR_TRACING     # Standard: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Standard: false
-
-# Sökinställningar
-AZURE_AI_SEARCH_INDEX_NAME       # Sökindexnamn
-AZURE_SEARCH_SERVICE_NAME        # Söktjänstnamn
-```
-
-### 3.4 AI-projektkonfiguration 
-```bash title="" linenums="0"
-# Använd befintliga resurser
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Fullständigt resurs-ID för befintligt AI-projekt
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # Slutpunkts-URL för befintligt projekt
-```
-
-### 3.5 Kontrollera dina variabler
-
-Använd Azure Developer CLI för att visa och hantera dina miljövariabler:
-
-```bash title="" linenums="0"
-# Visa alla miljövariabler för den aktuella miljön
-azd env get-values
-
-# Hämta en specifik miljövariabel
+```bash
+azd env list
 azd env get-value AZURE_ENV_NAME
-
-# Ställ in en miljövariabel
-azd env set AZURE_LOCATION eastus
-
-# Ställ in flera variabler från en .env-fil
-azd env set --from-file .env
+azd env get-value AZURE_LOCATION
 ```
+
+Inspektera `infra/main.parameters.json` för att se vilka miljövariabler mallen faktiskt använder. Att sätta ett godtyckligt namn med `azd env set` ändrar inte automatiskt en Azure-resurs.
+
+Granskade standardvärden inkluderar:
+
+| Input | Standard / syfte |
+|-------|-------------------|
+| `AZURE_AI_AGENT_MODEL_NAME` | `gpt-5-mini` |
+| `AZURE_AI_AGENT_MODEL_VERSION` | `2025-08-07` |
+| `AZURE_AI_AGENT_DEPLOYMENT_SKU` | `GlobalStandard` |
+| `AZURE_AI_AGENT_DEPLOYMENT_CAPACITY` | `80`; kvot-enheter beror på modell och distributionstyp |
+| `AZURE_AI_EMBED_MODEL_NAME` | `text-embedding-3-small` |
+| `AZURE_AI_EMBED_DIMENSIONS` | `1536` |
+| `USE_APPLICATION_INSIGHTS` | `true` |
+| `USE_AZURE_AI_SEARCH_SERVICE` | `false` |
+| `ENABLE_AZURE_MONITOR_TRACING` | `false` |
+| `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT` | `false`; lämna inaktiverad om inte datapolicy och hantering har granskats |
+
+Dessa är exempelspecifika inputs, inte globala AZD-inställningar. Kontrollera [modell- och regionsstödsdokumentationen](https://learn.microsoft.com/azure/ai-services/agents/concepts/model-region-support) och ditt abonnemangs kvot innan du väljer modell, SKU, kapacitet eller plats. Tolk inte varje kapacitetenhet som 1000 token per minut.
+
+För att välja en annan chattmodell, uppdatera dess kompatibla **namn, version, format, SKU och kapacitet tillsammans**, enligt [exemplets anpassningsguide](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deploy_customization.md). Att bara ändra namnet kan lämna en inkompatibel version eller distributionstyp.
+
+## 4. Lab: aktivera valfri sökning och spårning
+
+!!! warning "Dessa inställningar kan lägga till avgiftsbelagda resurser"
+
+    Check the planned resources and current Azure prices first. Provisioning preview is not a cost estimator. Enabling search does not create your custom document index or ingest a product catalog automatically.
+
+```bash
+azd env set USE_AZURE_AI_SEARCH_SERVICE true
+azd env set USE_APPLICATION_INSIGHTS true
+azd env set ENABLE_AZURE_MONITOR_TRACING true
+
+# Inspect the infrastructure changes and any configured preview hooks
+azd provision --preview
+
+# Apply the resource changes and deploy the application
+azd up
+```
+
+Infrastrukturförändringar kräver försörjning; `azd deploy` distribuerar endast applikationstjänster. För sökindexering och stödda hämtalternativ, följ [AI Search-guiden](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/ai_search.md). För övervakning, följ [observabilitetsguiden](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md).
+
+Aktivera inte inspelning av prompt-/svars-innehåll på verkliga kunddata utan nödvändigt samtycke, åtkomstkontroller, lagringspolicy och maskering.
+
+## 5. Befintliga resurser och CI/CD
+
+För att återanvända ett Foundry-projekt, följ exempelns [instruktioner för befintlig resurs](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deploy_customization.md#use-existing-resources). Att sätta `AZURE_EXISTING_AIPROJECT_RESOURCE_ID` ändrar distributionsvägen; i det scenariot skapar mallen inte Application Insights eller AI Search åt dig. Verifiera beroenden, rolltilldelningar och modelldistributioner uttryckligen.
+
+`pipeline.variables`-sektionen kontrollerar värden som skickas in i ett genererat pipeline; det är inte en sekretesshanterare och skapar inga Azure-resurser. Föredra hanterad identitet i appen och OIDC för CI/CD. AZD-miljöfiler är klartext och bör inte checkas in.
+
+AZD stöder import av en betrodd, lokalt förberedd dotenv-fil:
+
+```bash
+azd env set --file .env
+```
+
+Granska filen innan import, och skriv inte ut miljöfiler som innehåller hemligheter i delade terminaler eller CI-loggar.
+
+## 6. Kontrollera din förståelse
+
+- Vilken `azure.yaml`-tjänst distribuerar applikationen?
+- Vilken infrastrukturparameter använder varje värde du ändrade?
+- Vilka ändringar kräver försörjning istället för bara distribution?
+- Stöddes modellen och kvoten av den valda regionen och prenumerationen?
+- Lyckades alla setup-hakar, och kan du verifiera den distribuerade applikationens beteende?
+
+Fortsätt till [Anpassa en mall](5-Customize-AI-Template.md).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Ansvarsfriskrivning:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten Co-op Translator (https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet bör du vara medveten om att automatiska översättningar kan innehålla fel eller brister. Originaldokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår genom användningen av denna översättning.
+**Ansvarsfriskrivning**:
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var vänlig notera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
