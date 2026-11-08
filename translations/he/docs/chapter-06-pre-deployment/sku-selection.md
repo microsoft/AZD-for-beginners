@@ -1,90 +1,92 @@
-# מדריך לבחירת SKU - בחירת רמות השירות המתאימות ב-Azure
+# מדריך לבחירת SKU - כיצד לבחור את שכבות השירות המתאימות של Azure
 
-**ניווט פרקים:**
-- **📚 בית הקורס**: [AZD למתחילים](../../README.md)
-- **📖 הפרק הנוכחי**: פרק 6 - אימות מקדים ותכנון לפני פריסה
-- **⬅️ הקודם**: [תכנון קיבולת](capacity-planning.md)
-- **➡️ הבא**: [בדיקות מקדימות](preflight-checks.md)
-- **🚀 הפרק הבא**: [פרק 7: פתרון בעיות](../chapter-07-troubleshooting/common-issues.md)
+**ניווט בפרק:**
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+- **📖 פרק נוכחי**: פרק 6 - אימות ותכנון לפני פריסה
+- **⬅️ קודם**: [תכנון קיבולת](capacity-planning.md)
+- **➡️ הבא**: [בדיקות טרום-המראה](preflight-checks.md)
+- **🚀 פרק הבא**: [פרק 7: פתרון תקלות](../chapter-07-troubleshooting/common-issues.md)
 
-## הקדמה
+## מבוא
 
-מדריך מקיף זה עוזר לך לבחור את SKU-ים (Stock Keeping Units) האופטימליים לשירותי Azure עבור סביבות, עומסי עבודה ודרישות שונות. למד כיצד לנתח צרכי ביצועים, שיקולי עלות ודרישות סקלאביליות כדי לבחור את רמות השירות המתאימות ביותר לפריסות באמצעות Azure Developer CLI.
+מדריך מקיף זה מסייע לכם לבחור את SKU-ים האופטימליים של שירותי Azure (יחידות מלאי) לסביבות, עומסי עבודה ודרישות שונות. למד לנתח צרכי ביצועים, שיקולי עלות ודרישות סקלאביליות כדי לבחור את שכבות השירות המתאימות ביותר לפריסות Azure Developer CLI שלך.
 
-## מטרות למידה
+## יעדי הלמידה
 
-By completing this guide, you will:
-- להבין את מושגי ה‑SKU של Azure, מודלים של תמחור ושוני תכונות
-- להתמחות באסטרטגיות בחירת SKU ייעודיות לסביבות פיתוח, בדיקה (staging) וייצור
-- לנתח דרישות עומס עבודה ולהתאים אותן לרמות שירות מתאימות
-- להטמיע אסטרטגיות אופטימיזציית עלויות באמצעות בחירת SKU חכמה
-- להחיל טכניקות בדיקת ביצועים ואימות לבחירות SKU
-- להגדיר המלצות SKU אוטומטיות ומערכות ניטור
+עם השלמת מדריך זה, תוכל:
+- להבין מושגים של SKU, מודלי תמחור, והבדלים בתכונות
+- לשלוט באסטרטגיות בחירת SKU מותאמות לסביבה לפיתוח, אחסון וייצור
+- לנתח דרישות עומס עבודה ולהתאים אותן לשכבות שירות מתאימות
+- ליישם אסטרטגיות אופטימיזציית עלויות באמצעות בחירת SKU חכמה
+- להחיל טכניקות בדיקות ביצועים ואימות לבחירות SKU
+- לתצבר המלצות ומעקב אוטומטיים עבור SKU
 
-## תוצאות למידה
+## תוצאות הלמידה
 
-Upon completion, you will be able to:
-- לבחור SKU-ים מתאימים לשירותי Azure בהתבסס על דרישות ועומס העבודה וההגבלות
-- לעצב ארכיטקטורות מרובות-סביבה בעלות מיטבית עם בחירת רמות מתאימות
-- להטמיע מדידות ביצועים ואימות לבחירות SKU
-- ליצור כלים אוטומטיים להמלצת SKU ואופטימיזציית עלויות
-- לתכנן מהלכי הגירה של SKU ואסטרטגיות סקיילינג לשינויים בדרישות
-- להחיל עקרונות מסגרת Azure Well-Architected על בחירת רמות שירות
+עם סיום, תוכל:
+- לבחור SKU-ים מתאימים של Azure על פי דרישות ומגבלות העומס
+- לתכנן ארכיטקטורות רב-סביבתיות חסכוניות עם בחירת שכבות נאותה
+- ליישם מדידת ביצועים ואימות עבור בחירות SKU
+- ליצור כלים אוטומטיים להמלצה על SKU ואופטימיזציה של עלויות
+- לתכנן אסטרטגיות מיגרציה והרחבה של SKU לשינויים בדרישות
+- להחיל עקרונות מסגרת Azure Well-Architected לבחירת שכבת השירות
 
 ## תוכן העניינים
 
-- [הבנת SKU-ים](../../../../docs/chapter-06-pre-deployment)
-- [בחירה מבוססת-סביבה](../../../../docs/chapter-06-pre-deployment)
-- [הנחיות לפי שירות](../../../../docs/chapter-06-pre-deployment)
-- [אסטרטגיות לאופטימיזציה של עלויות](../../../../docs/chapter-06-pre-deployment)
-- [התחשבות בביצועים](../../../../docs/chapter-06-pre-deployment)
-- [טבלאות עזר מהירות](../../../../docs/chapter-06-pre-deployment)
-- [כלי אימות](../../../../docs/chapter-06-pre-deployment)
+- [הבנת SKUs](#understanding-skus)
+- [בחירה מבוססת סביבה](#environment-based-selection)
+- [הנחיות מותאמות שירות](#service-specific-guidelines)
+- [אסטרטגיות אופטימיזציה של עלויות](#cost-optimization-strategies)
+- [שיקולי ביצועים](#performance-considerations)
+- [טבלאות עזר מהירות](#quick-reference-tables)
+- [כלי אימות](#validation-tools)
 
 ---
 
 ## הבנת SKUs
 
-### מה הם SKU-ים?
+> **דוגמת תחום:** מפות SKU ב-YAML וקונפיגורציות ביצועים למטה הן הערות עיצוב, לא סכמת `azure.yaml` או הגדרת כלי טעינה. בלוקים ב-Bicep הם חלופות/שברים: הכריזו פרמטרים ומשאבים הורים, השתמשו בשמות סימבוליים ייחודיים בשילובם, וקשרו מודולים לפרויקט עובד. יש לבדוק מחירים, מגבלות וזמינות אזורית/SKU עבורך לפני פריסה.
 
-SKU-ים (Stock Keeping Units) מייצגים רמות שירות וביצועים שונות עבור משאבי Azure. כל SKU מציע הבדלים ב:
+### מה הם SKUs?
 
-- **מאפייני ביצועים** (CPU, זיכרון, throughput)
-- **זמינות תכונות** (אפשרויות סקיילינג, רמות SLA)
+SKUs (יחידות מלאי) מייצגות שכבות שירות שונות ורמות ביצועים למשאבי Azure. כל SKU מציע:
+
+- **מאפייני ביצועים** (CPU, זיכרון, רוחב פס)
+- **זמינות תכונות** (אפשרויות סקלאביליות, רמות SLA)
 - **מודלי תמחור** (מבוסס צריכה, קיבולת שמורה)
-- **זמינות אזורית** (לא כל ה-SKU-ים זמינים בכל האזורים)
+- **זמינות אזורית** (לא כל SKUs זמינים בכל האזורים)
 
 ### גורמים מרכזיים בבחירת SKU
 
 1. **דרישות עומס עבודה**
-   - דפוסי תעבורה/עומס צפויים
-   - דרישות ביצועים (CPU, זיכרון, I/O)
+   - תבניות תנועה/עומס צפויות
+   - דרישות ביצועים (CPU, זיכרון, קלט/פלט)
    - צרכי אחסון ודפוסי גישה
 
 2. **סוג סביבה**
-   - פיתוח/בדיקות מול ייצור
+   - פיתוח/בדיקה מול ייצור
    - דרישות זמינות
    - צרכי אבטחה וציות
 
 3. **מגבלות תקציב**
-   - עלויות התחלתיות מול עלויות תפעוליות
-   - הנחות על קיבולת שמורה
-   - ההשלכות של סקיילינג אוטומטי על עלויות
+   - עלויות התחלתיות מול תפעוליות
+   - הנחות לקיבולת שמורה
+   - השלכות עלות של אוטו-סקיילינג
 
 4. **תחזיות צמיחה**
    - דרישות סקלאביליות
    - צרכי תכונות עתידיות
-   - מורכבות ההגירה
+   - מורכבות מיגרציה
 
 ---
 
-## בחירה מבוססת-סביבה
+## בחירה מבוססת סביבה
 
 ### סביבת פיתוח
 
-**עדיפויות**: אופטימיזציית עלות, פונקציונליות בסיסית, פריסה/הסרה קלה
+**עדיפויות**: אופטימיזציית עלות, פונקציונליות בסיסית, הקצאה/שחרור פשוטים
 
-#### SKU-ים מומלצים
+#### SKU מומלצים
 ```yaml
 # Development environment configuration
 environment: development
@@ -92,23 +94,23 @@ skus:
   app_service: "F1"          # Free tier
   sql_database: "Basic"       # Basic tier, 5 DTU
   storage: "Standard_LRS"     # Locally redundant
-  cosmos_db: "Free"          # Free tier (400 RU/s)
+  cosmos_db: "Standard"      # Free tier is an account opt-in, not a SKU
   key_vault: "Standard"      # Standard pricing tier
-  application_insights: "Free" # First 5GB free
+  application_insights: "workspace-based" # Consumption billing; no Free SKU
 ```
 
 #### מאפיינים
-- **App Service**: F1 (Free) או B1 (Basic) לבדיקות פשוטות
-- **Databases**: שכבת Basic עם משאבים מינימליים
-- **Storage**: Standard עם שכפול מקומי בלבד
-- **Compute**: משאבים משותפים מקובלים
-- **Networking**: תצורות בסיסיות
+- **App Service**: F1 (בחינם) או B1 (בסיסי) לבדיקות פשוטות
+- **מסדי נתונים**: שכבת בסיס עם מינימום משאבים
+- **אחסון**: סטנדרטי עם רדנדנציה מקומית בלבד
+- **חישוב**: משאבים משותפים מספיקים
+- **רשת**: תצורות בסיסיות
 
-### סביבת Staging/בדיקה
+### סביבת אחסון/בדיקה
 
-**עדיפויות**: תצורה הדומה לייצור, איזון עלות וביצועים, יכולת לביצוע בדיקות ביצועים
+**עדיפויות**: תצורת דומה לייצור, איזון עלויות, יכולת בדיקת ביצועים
 
-#### SKU-ים מומלצים
+#### SKU מומלצים
 ```yaml
 # Staging environment configuration
 environment: staging
@@ -121,51 +123,51 @@ skus:
 ```
 
 #### מאפיינים
-- **Performance**: 70-80% מתפקוד הייצור
-- **Features**: רוב התכונות של הייצור מופעלות
-- **Redundancy**: שכפול גיאוגרפי חלקי
-- **Scaling**: קנה מידה אוטומטי מוגבל לצורך בדיקות
-- **Monitoring**: אמצעי ניטור מלאים
+- **ביצועים**: 70-80% מהקיבולת של הייצור
+- **תכונות**: רוב תכונות הייצור מופעלות
+- **רדנדנציה**: קצת רדנדנציה גיאוגרפית
+- **סקיילינג**: סקיילינג אוטומטי מוגבל לבדיקות
+- **מעקב**: מחסנית מעקב מלאה
 
 ### סביבת ייצור
 
-**עדיפויות**: ביצועים, זמינות, אבטחה, ציות (compliance), סקלאביליות
+**עדיפויות**: ביצועים, זמינות, אבטחה, ציות, סקלאביליות
 
-#### SKU-ים מומלצים
+#### SKU מומלצים
 ```yaml
 # Production environment configuration
 environment: production
 skus:
   app_service: "P1V3"        # Premium v3 tier
   sql_database: "P2"         # Premium tier, 250 DTU
-  storage: "Premium_GRS"     # Premium geo-redundant
+  storage: "Standard_GRS"    # Geo-redundant; Premium_GRS is not a storage SKU
   cosmos_db: "Provisioned"   # Dedicated throughput
   container_apps: "Dedicated" # Dedicated environment
   key_vault: "Premium"       # Premium with HSM
 ```
 
 #### מאפיינים
-- **High availability**: דרישות SLA של 99.9%+
-- **Performance**: משאבים ייעודיים, תפוקה גבוהה
-- **Security**: תכונות אבטחה פרימיום
-- **Scaling**: יכולות סקיילינג אוטומטיות מלאות
-- **Monitoring**: יכולות תצפית מקיפות
+- **זמינות גבוהה**: דרישות SLA 99.9% ומעלה
+- **ביצועים**: משאבים ייעודיים, קצב גבוה
+- **אבטחה**: תכונות אבטחה פרימיום
+- **סקיילינג**: יכולות סקיילינג אוטומטי מלאות
+- **מעקב**: נראות מקיפה
 
 ---
 
-## הנחיות לפי שירות
+## הנחיות מותאמות לשירות
 
-### Azure App Service
+### שירות האפליקציות של Azure
 
-#### מטריצת החלטת SKU
+#### מטריצת בחירת SKU
 
-| שימוש | SKU מומלץ | נימוק |
+| מקרה שימוש | SKU מומלץ | נימוק |
 |----------|----------------|-----------|
-| פיתוח/בדיקות | F1 (Free) או B1 (Basic) | חסכוני, מספק לבדיקות |
-| אפליקציות ייצור קטנות | S1 (Standard) | דומיינים מותאמים, SSL, סקיילינג אוטומטי |
-| אפליקציות ייצור בינוניות | P1V3 (Premium V3) | ביצועים טובים יותר, יותר תכונות |
-| אפליקציות בעלות תעבורת גבוה | P2V3 או P3V3 | משאבים ייעודיים, ביצועים גבוהים |
-| אפליקציות קריטיות למשימה | I1V2 (Isolated V2) | בידוד רשת, חומרה ייעודית |
+| פיתוח/בדיקה | F1 (בחינם) או B1 (בסיסי) | חסכוני, מספיק לבדיקה |
+| אפליקציות ייצור קטנות | S1 (סטנדרט) | דומיינים מותאמים, SSL, סקיילינג אוטומטי |
+| אפליקציות ייצור בינוניות | P1V3 (פרימיום V3) | ביצועים טובים יותר, יותר תכונות |
+| אפליקציות תעבורה גבוהה | P2V3 או P3V3 | משאבים ייעודיים, ביצועים גבוהים |
+| אפליקציות קריטיות למשימה | I1V2 (בודד V2) | בידוד רשת, חומרה ייעודית |
 
 #### דוגמאות תצורה
 
@@ -201,19 +203,19 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 }
 ```
 
-### Azure SQL Database
+### מסד הנתונים של Azure SQL
 
-#### מסגרת לבחירת SKU
+#### מסגרת בחירת SKU
 
-1. **מבוסס DTU (Database Transaction Units)**
-   - **Basic**: 5 DTU - פיתוח/בדיקות
-   - **Standard**: S0-S12 (10-3000 DTU) - מטרות כלליות
-   - **Premium**: P1-P15 (125-4000 DTU) - קריטי מבחינת ביצועים
+1. **מבוסס DTU (יחידות עסקת מסד נתונים)**
+   - **בסיסי**: 5 DTU - פיתוח/בדיקה
+   - **סטנדרטי**: S0-S12 (10-3000 DTU) - כללי
+   - **פרימיום**: P1-P15 (125-4000 DTU) - קריטי לביצועים
 
 2. **מבוסס vCore** (מומלץ לייצור)
-   - **General Purpose**: איזון בין מחשוב ואחסון
-   - **Business Critical**: השהייה נמוכה, IOPS גבוהות
-   - **Hyperscale**: אחסון בעל יכולת סקלאביליות גבוהה (עד 100TB)
+   - **כללי**: איזון בין חישוב ואחסון
+   - **קריטי לעסקים**: השהייה נמוכה, IOPS גבוהים
+   - **היפרסקייל**: אחסון מדרגי; יש לוודא מגבלות גודל ותמיכה אזורית עדכניות
 
 #### דוגמאות תצורה
 
@@ -250,23 +252,23 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 }
 ```
 
-### Azure Container Apps
+### אפליקציות מכולות של Azure
 
 #### סוגי סביבה
 
 1. **מבוסס צריכה**
-   - תמחור תשלום לפי שימוש
+   - תשלום לפי שימוש
    - מתאים לפיתוח ולעומסי עבודה משתנים
    - תשתית משותפת
 
-2. **מיועד (Workload Profiles)**
-   - משאבי מחשוב ייעודיים
+2. **ייעודי (פרופילי עומס)**
+   - משאבי חישוב ייעודיים
    - ביצועים צפויים
    - מתאים יותר לעומסי ייצור
 
 #### דוגמאות תצורה
 
-**פיתוח (מבוסס צריכה)**
+**פיתוח (צריכה)**
 ```bicep
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: 'cae-${environmentName}-dev'
@@ -284,7 +286,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
     configuration: {
       ingress: {
         external: true
-        targetPort: 3000
+        targetPort: 80 // nginx listens on 80 by default
       }
     }
     template: {
@@ -305,9 +307,9 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
 }
 ```
 
-**ייצור (מיועד)**
+**ייצור (ייעודי)**
 ```bicep
-resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
+resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-03-01' = {
   name: 'cae-${environmentName}-prod'
   location: location
   properties: {
@@ -315,31 +317,33 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
     workloadProfiles: [{
       name: 'production-profile'
       workloadProfileType: 'D4'
-      minimumCount: 2
+      minimumCount: 3
       maximumCount: 10
     }]
   }
 }
 ```
 
+רדנדנציה איזורית דורשת גם תשתית באזור נתמך וקונפיגורציית VNet/Subnet מתאימה, מוזכר כאן בקצרה. דוגמה זו מתרגמת שלושה צמתים ייעודיים; תגדיר לפחות שני שכפולים לאפליקציה להפרדת איזורים ותקבע את המידות של השכפולים והצמתים עבור כשל איזורי. ראה [הנחיות אמינות לאפליקציות מכולות](https://learn.microsoft.com/azure/reliability/reliability-azure-container-apps). כדי למקם אפליקציה בפרופיל זה, הגדר את `workloadProfileName: 'production-profile'` שלה; יצירת הפרופיל לבדו לא מעבירה אפליקציות אליו.
+
 ### Azure Cosmos DB
 
-#### מודלי תפוקה
+#### מודלי רוחב פס
 
-1. **תפוקה מסופקת ידנית**
+1. **רוחב פס מוקצב ידנית**
    - ביצועים צפויים
-   - הנחות על קיבולת שמורה
-   - מתאים לעומסים יציבים
+   - הנחות לקיבולת שמורה
+   - מתאים לעומסי עבודה יציבים
 
-2. **תפוקה מסופקת עם סקייל אוטומטי**
-   - סקיילינג אוטומטי מבוסס שימוש
+2. **רוחב פס עם סקייל אוטומטי**
+   - סקייל אוטומטי מבוסס שימוש
    - תשלום לפי שימוש (עם מינימום)
    - טוב לעומסי עבודה משתנים
 
-3. **Serverless**
+3. **ללא שרת (Serverless)**
    - תשלום לפי בקשה
-   - אין תפוקת פרוביזיונינג
-   - אידיאלי לפיתוח ולעומסים מזדמנים
+   - ללא רוחב פס מוקצב
+   - אידיאלי לפיתוח ולעומסי עבודה תקופתיים
 
 #### דוגמאות SKU
 
@@ -398,17 +402,17 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 
 ### חשבון אחסון Azure
 
-#### סוגי חשבונות אחסון
+#### סוגי חשבון אחסון
 
-1. **Standard_LRS** - פיתוח, נתונים שאינם קריטיים
-2. **Standard_GRS** - ייצור, נדרשת שכפול גיאוגרפי
-3. **Premium_LRS** - אפליקציות ביצועיות גבוהות
-4. **Premium_ZRS** - זמינות גבוהה עם שכפול אזורי
+1. **Standard_LRS** - פיתוח, נתונים לא קריטיים
+2. **Standard_GRS** - ייצור, דרושה רדנדנציה גאוגרפית
+3. **Premium_LRS** - יישומים בעלי ביצועים גבוהים
+4. **Premium_ZRS** - זמינות גבוהה עם רדנדנציה אזורית
 
 #### שכבות ביצועים
 
-- **Standard**: לשימוש כללי, חסכוני
-- **Premium**: ביצועים גבוהים, תרחישי השהיה נמוכה
+- **סטנדרטי**: כללי, חסכוני
+- **פרימיום**: תרחישי ביצועים גבוהים והשהייה נמוכה
 
 ```bicep
 // Development
@@ -449,21 +453,24 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ---
 
-## אסטרטגיות לאופטימיזציה של עלויות
+## אסטרטגיות אופטימיזציה של עלויות
 
 ### 1. קיבולת שמורה
 
-שמרו משאבים ל-1–3 שנים כדי לקבל הנחות משמעותיות:
+שמור משאבים ל-1-3 שנים ותקבל הנחות משמעותיות:
 
 ```bash
-# בדוק אפשרויות הזמנה
-az reservations catalog show --reserved-resource-type SqlDatabase
-az reservations catalog show --reserved-resource-type CosmosDb
+# With the reservation extension available, inspect the subscription catalog
+az reservations catalog show \
+  --subscription-id "$AZURE_SUBSCRIPTION_ID" \
+  --reserved-resource-type SqlDatabases
 ```
 
-### 2. התאמת גודל (Right-Sizing)
+הצעות השמירה וסוגי המשאבים הזכאים משתנים; בדוק את הקטלוג ותנאי הרכישה במקום להניח שכל שירות/SKU תומך בשמירה.
 
-התחילו ב-SKU-ים קטנים יותר והגדילו על סמך שימוש אמיתי:
+### 2. גודל נכון
+
+התחל עם SKU-ים קטנים יותר והרחב על פי השימוש בפועל:
 
 ```yaml
 # Progressive scaling approach
@@ -479,7 +486,7 @@ production:
 
 ### 3. תצורת סקיילינג אוטומטי
 
-ממשו סקיילינג חכם כדי למטב עלויות:
+יישם סקיילינג חכם לאופטימיזציה של עלויות:
 
 ```bicep
 resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
@@ -496,6 +503,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
       rules: [
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'GreaterThan'
@@ -513,6 +521,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
         }
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'LessThan'
@@ -538,7 +547,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 
 ### 4. סקיילינג מתוזמן
 
-הקטינו קיבולת בשעות שאינן שיא:
+הורד קנה מידה בשעות לא פעילות:
 
 ```json
 {
@@ -583,11 +592,11 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 
 ---
 
-## התחשבות בביצועים
+## שיקולי ביצועים
 
-### דרישות ביצועים בסיסיות
+### דרישות ביצוע בסיסיות
 
-הגדירו דרישות ביצועים ברורות לפני בחירת SKU:
+הגדר דרישות ביצועים ברורות לפני בחירת SKU:
 
 ```yaml
 performance_requirements:
@@ -605,19 +614,21 @@ performance_requirements:
 
 ### בדיקות עומס
 
-בדקו SKU-ים שונים כדי לאמת ביצועים:
+בדוק SKU-ים שונים לאימות ביצועים:
 
 ```bash
-# שירות בדיקות העומס של Azure
+# Azure Load Testing service (requires an existing load-testing resource,
+# the load extension, and a valid config plus referenced test script)
 az load test create \
-  --name "sku-performance-test" \
-  --resource-group $RESOURCE_GROUP \
-  --load-test-config @load-test-config.yaml
+  --load-test-resource "$LOAD_TEST_RESOURCE" \
+  --resource-group "$RESOURCE_GROUP" \
+  --test-id "sku-performance-test" \
+  --load-test-config-file load-test-config.yaml
 ```
 
-### ניטור ואופטימיזציה
+### מעקב ואופטימיזציה
 
-הקימו ניטור מקיף:
+הגדר מעקב מקיף:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -626,7 +637,8 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   kind: 'web'
   properties: {
     Application_Type: 'web'
-    RetentionInDays: 90
+    WorkspaceResourceId: logAnalyticsWorkspace.id
+    IngestionMode: 'LogAnalytics'
   }
 }
 
@@ -646,33 +658,33 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ## טבלאות עזר מהירות
 
-### טבלת עזר מהירה ל-SKU של App Service
+### טבלת עזר מהירה ל-App Service SKU
 
-| SKU | שכבה | vCPU | זיכרון RAM | אחסון | טווח מחירים | שימוש |
+| SKU | שכבה | vCPU | RAM | אחסון | טווח מחירים | מקרה שימוש |
 |-----|------|------|-----|---------|-------------|----------|
-| F1 | חינם | משותף | 1GB | 1GB | חינם | פיתוח |
-| B1 | Basic | 1 | 1.75GB | 10GB | $ | אפליקציות קטנות |
-| S1 | Standard | 1 | 1.75GB | 50GB | $$ | ייצור |
-| P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | ביצועים גבוהים |
-| I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | ארגוני |
+| F1 | חינמי | משותף | 1GB | 1GB | חינמי | פיתוח |
+| B1 | בסיסי | 1 | 1.75GB | 10GB | $ | אפליקציות קטנות |
+| S1 | סטנדרטי | 1 | 1.75GB | 50GB | $$ | ייצור |
+| P1V3 | פרימיום V3 | 2 | 8GB | 250GB | $$$ | ביצועים גבוהים |
+| I1V2 | מבודד V2 | 2 | 8GB | 1TB | $$$$ | ארגוני |
 
-### טבלת עזר מהירה ל-SKU של SQL Database
+### טבלת עזר מהירה ל-SQL Database SKU
 
-| SKU | שכבה | DTU/vCore | אחסון | טווח מחירים | שימוש |
+| SKU | שכבה | DTU/vCore | אחסון | טווח מחירים | מקרה שימוש |
 |-----|------|-----------|---------|-------------|----------|
-| Basic | Basic | 5 DTU | 2GB | $ | פיתוח |
-| S2 | Standard | 50 DTU | 250GB | $$ | ייצור קטן |
-| P2 | Premium | 250 DTU | 1TB | $$$ | ביצועים גבוהים |
-| GP_Gen5_4 | General Purpose | 4 vCore | 4TB | $$$ | מאוזן |
-| BC_Gen5_8 | Business Critical | 8 vCore | 4TB | $$$$ | קריטי למשימה |
+| בסיסי | בסיסי | 5 DTU | 2GB | $ | פיתוח |
+| S2 | סטנדרטי | 50 DTU | 250GB | $$ | ייצור קטן |
+| P2 | פרימיום | 250 DTU | 1TB | $$$ | ביצועים גבוהים |
+| GP_Gen5_4 | כללי | 4 vCore | 4TB | $$$ | מאוזן |
+| BC_Gen5_8 | קריטי לעסקים | 8 vCore | 4TB | $$$$ | קריטי למשימה |
 
-### טבלת עזר מהירה ל-SKU של Container Apps
+### טבלת עזר מהירה ל-Container Apps SKU
 
-| מודל | תמחור | CPU/זיכרון | שימוש |
+| מודל | תמחור | CPU/זיכרון | מקרה שימוש |
 |-------|---------|------------|----------|
-| Consumption | Pay-per-use | 0.25-2 vCPU | פיתוח, עומס משתנה |
-| Dedicated D4 | Reserved | 4 vCPU, 16GB | ייצור |
-| Dedicated D8 | Reserved | 8 vCPU, 32GB | ביצועים גבוהים |
+| צריכה | תשלום לפי שימוש | שילובי CPU/זיכרון נתמכים בהתאם לסביבה/פרופיל | פיתוח או ייצור, עומס משתנה |
+| ייעודי D4 | חשבונית צומת ייעודי | 4 vCPU, 16GiB לצומת | עומס מתמשך/דרישות בידוד |
+| ייעודי D8 | חשבונית צומת ייעודי | 8 vCPU, 32GiB לצומת | עומס מתמשך גבוה יותר |
 
 ---
 
@@ -682,7 +694,7 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ```bash
 #!/bin/bash
-# בדוק זמינות SKU באזור היעד
+# Check SKU availability in target region
 
 check_sku_availability() {
     local region=$1
@@ -699,7 +711,8 @@ check_sku_availability() {
             az sql db list-editions --location $region --output table
             ;;
         "storage")
-            az storage account check-name --name "test" --output table
+            # Name availability is not SKU availability.
+            az storage sku list --query "[?name=='$sku'].{name:name,locations:locations,restrictions:restrictions}" --output json
             ;;
         *)
             echo "Resource type not supported"
@@ -707,14 +720,16 @@ check_sku_availability() {
     esac
 }
 
-# שימוש
+# Usage
 check_sku_availability "eastus" "app-service" "P1V3"
 ```
 
-### סקריפט להערכת עלויות
+### סקריפט הערכת עלויות
+
+**רק פסאודו-קוד:** `Get-ResourceCost` למטה הוא פונקציה ספציפית לפרויקט שצריך לממש תוך שימוש בתמחור אזורי/חוזים עדכני והנחות שימוש. זה לא PowerShell או cmdlet של Azure.
 
 ```powershell
-# סקריפט PowerShell להערכת עלויות
+# PowerShell script for cost estimation
 function Get-AzureCostEstimate {
     param(
         [string]$SubscriptionId,
@@ -728,7 +743,7 @@ function Get-AzureCostEstimate {
         $resourceType = $resource.Key
         $sku = $resource.Value
         
-        # השתמש ב-API לתמחור של Azure או במחשבון
+        # Use Azure Pricing API or calculator
         $cost = Get-ResourceCost -Type $resourceType -SKU $sku
         $totalCost += $cost
         
@@ -738,7 +753,7 @@ function Get-AzureCostEstimate {
     Write-Host "Total estimated cost: $totalCost/month"
 }
 
-# הוראות שימוש
+# Usage
 $resources = @{
     "AppService" = "P1V3"
     "SqlDatabase" = "GP_Gen5_4"
@@ -749,6 +764,8 @@ Get-AzureCostEstimate -ResourceGroup "rg-myapp-prod" -Resources $resources
 ```
 
 ### אימות ביצועים
+
+ה-YAML הבא הוא תרשים דרישות, **לא** סכמת קלט של Azure Load Testing, JMeter, Locust, או k6. תרגם אותו לקונפיגורציה אמיתית של הכלי שבחרת לפני השימוש בפקודת ההעמסה למעלה.
 
 ```yaml
 # Load test configuration for SKU validation
@@ -783,43 +800,43 @@ test_configuration:
 
 ---
 
-## סיכום שיטות עבודה מומלצות
+## סיכום נהלים מומלצים
 
-### מה כן לעשות
+### מה לעשות
 
-1. **התחילו קטן והגדילו** בהתאם לשימוש האמיתי
-2. **השתמשו ב-SKU-ים שונים עבור סביבות שונות**
-3. **נטרו ביצועים ועלויות באופן רצוף**
-4. **היעזרו בקיבולת שמורה לעומסי ייצור**
-5. **ממשו סקיילינג אוטומטי היכן שנדרש**
-6. **בדקו ביצועים בעומסי עבודה ריאליים**
-7. **תכננו לצמיחה אך הימנעו מהקצאה-יתר**
-8. **השתמשו בשכבות חינמיות לפיתוח כאשר ניתן**
+1. **התחל קטן והרחב** לפי שימוש בפועל
+2. **השתמש ב-SKU שונים לסביבות שונות**
+3. **עקוב אחרי ביצועים ועלויות באופן רציף**
+4. **נצל קיבולת שמורה לעומסי ייצור**
+5. **החל סקיילינג אוטומטי במקומות המתאימים**
+6. **בדוק ביצועים עם עומסים מציאותיים**
+7. **תכנן לצמיחה אך הימנע מהקצאה מופרזת**
+8. **השתמש בשכבות חינמיות לפיתוח כאשר ניתן**
 
 ### מה לא לעשות
 
-1. **אל תשתמשו ב-SKU-ים של ייצור לסביבת פיתוח**
-2. **אל תתעלמו מזמינות SKU לפי אזור**
-3. **אל תשכחו עלויות העברת נתונים**
-4. **אל תבצעו הקצאה-יתר ללא הצדקה**
-5. **אל תתעלמו מהשפעת התלויות**
-6. **אל תקבעו מגבלות סקיילינג אוטומטי גבוהות מדי**
-7. **אל תשכחו דרישות ציות**
-8. **אל תקבלו החלטות על בסיס מחיר בלבד**
+1. **אל תשתמש ב-SKU ייצור לפיתוח**
+2. **אל תתעלם מזמינות SKU אזורית**
+3. **אל תשכח עלויות העברת נתונים**
+4. **אל תקצה משאבים יתר ללא הצדקה**
+5. **אל תתעלם מהשפעת תלותיות**
+6. **אל תגדיר גבולות סקיילינג אוטומטי גבוהים מדי**
+7. **אל תשכח דרישות ציות**
+8. **אל תקבל החלטות על בסיס מחיר בלבד**
 
 ---
 
-**טיפ מקצועי**: השתמשו ב-Azure Cost Management וב-Advisor לקבלת המלצות מותאמות אישית לאופטימיזציה של בחירות ה-SKU שלכם בהתבסס על דפוסי שימוש אמיתיים.
+**טיפ מקצועי**: השתמש ב-Azure Cost Management ו-Advisor לקבלת המלצות אישיות לאופטימיזציה של בחירות ה-SKU שלך בהתבסס על דפוסי שימוש בפועל.
 
 ---
 
 **ניווט**
 - **שיעור קודם**: [תכנון קיבולת](capacity-planning.md)
-- **שיעור הבא**: [בדיקות מקדימות](preflight-checks.md)
+- **שיעור הבא**: [בדיקות טרום-המראה](preflight-checks.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-כתב ויתור:
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית Co-op Translator (https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש להיות מודעים לכך שתרגומים אוטומטיים עלולים להכיל שגיאות או אי־דיוקים. יש להסתמך על המסמך המקורי בשפתו כמקור הסמכותי. עבור מידע קריטי מומלץ תרגום מקצועי על ידי מתרגם אנושי. איננו נושאים באחריות לכל אי־הבנה או פרשנות שגויה הנובעת משימוש בתרגום זה.
+**כתב ויתור**:
+מסמך זה תורגם באמצעות שירות תרגום אוטומטי [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עלולים להכיל שגיאות או אי-דיוקים. יש להחשיב את המסמך המקורי בשפתו הטבעית כמקור הסמכות. למידע קריטי מומלץ להשתמש בתרגום מקצועי על ידי מתרגם אדם. אנו לא אחראים לכל אי-הבנה או פירוש שגוי הנובע מהשימוש בתרגום זה.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

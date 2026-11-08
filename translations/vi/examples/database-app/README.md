@@ -1,920 +1,284 @@
-# Triển khai cơ sở dữ liệu Microsoft SQL và Web App bằng AZD
+# Flask và Azure SQL trên App Service
 
-⏱️ **Thời gian ước tính**: 20-30 phút | 💰 **Chi phí ước tính**: ~$15-25/tháng | ⭐ **Độ phức tạp**: Trung cấp
+**Cấp độ:** Trung cấp · **Thời gian:** 30–60 phút bao gồm các điều kiện tiên quyết
 
-Ví dụ **đầy đủ, hoạt động** này trình bày cách sử dụng [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) để triển khai một ứng dụng web Python Flask với cơ sở dữ liệu Microsoft SQL lên Azure. Tất cả mã đều được bao gồm và kiểm thử — không yêu cầu phụ thuộc bên ngoài.
+Mẫu này triển khai API đọc Python Flask lên **Linux App Service** và một cơ sở dữ liệu Azure SQL Basic. Mã nguồn, Bicep và cấu hình azd được bao gồm. Đây là một ứng dụng học tập, không phải kiến trúc cơ sở dữ liệu sẵn sàng cho sản xuất.
 
-## Bạn sẽ học được gì
 
-Hoàn thành ví dụ này, bạn sẽ:
-- Triển khai một ứng dụng nhiều tầng (web app + database) bằng cơ sở hạ tầng dưới dạng mã (infrastructure-as-code)
-- Cấu hình kết nối cơ sở dữ liệu an toàn mà không ghi trực tiếp bí mật trong mã nguồn
-- Giám sát trạng thái ứng dụng bằng Application Insights
-- Quản lý tài nguyên Azure hiệu quả bằng AZD CLI
-- Theo các phương pháp hay nhất của Azure về bảo mật, tối ưu chi phí và khả năng quan sát
 
-## Tổng quan kịch bản
-- **Web App**: Python Flask REST API với khả năng kết nối cơ sở dữ liệu
-- **Database**: Azure SQL Database với dữ liệu mẫu
-- **Infrastructure**: Cung cấp bằng Bicep (mẫu mô-đun, có thể tái sử dụng)
-- **Deployment**: Hoàn toàn tự động bằng các lệnh `azd`
-- **Monitoring**: Application Insights cho nhật ký và telemetri
+## Những gì bạn sẽ học
+
+- Cung cấp tài nguyên App Service, SQL và giám sát với Bicep.
+- Cấu hình kết nối SQL được mã hóa mà không cần cam kết thông tin đăng nhập.
+- Khởi tạo lược đồ trước khi bắt đầu các worker Gunicorn.
+- Xác minh dữ liệu đã được tạo, phản hồi không tìm thấy và sức khỏe cơ sở dữ liệu.
+
+```mermaid
+flowchart LR
+    User -->|HTTPS| Web[App Service — Flask]
+    Web -->|ODBC + encrypted SQL connection| SQL[Azure SQL — products table]
+    Web -. application log traces .-> AI[Application Insights]
+```
+
+Tài nguyên: nhóm tài nguyên dành riêng, kế hoạch dịch vụ ứng dụng Linux B1, ứng dụng Web Python 3.11,
+máy chủ SQL và cơ sở dữ liệu Basic 2-GB, Application Insights và Log Analytics.
+Ứng dụng Web sử dụng **triển khai mã nguồn/ZIP và cài đặt phụ thuộc Oryx**;
+`azd deploy` không xây dựng hoặc triển khai Dockerfile tùy chọn.
 
 ## Yêu cầu tiên quyết
 
-### Công cụ cần thiết
+- Phiên bản ổn định hiện tại của [azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+  (phiên bản phát hành tại thời điểm đánh giá: 1.37.2).
+- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) để xác minh.
+- Đăng ký Azure, quyền tạo các tài nguyên liệt kê, và hạn mức theo vùng.
+- Python **3.11** cho phát triển cục bộ; `pyodbc==5.0.1` đã cam kết có thể yêu cầu
+  các công cụ xây dựng bản địa trên các phiên bản Python mới hơn.
+- Microsoft ODBC Driver 18 (hoặc 17) cho SQL Server trên máy cục bộ. `pip install
+  pyodbc` không cài đặt trình điều khiển hệ thống. Xem
+  [cài đặt ODBC](https://learn.microsoft.com/sql/connect/odbc/download-odbc-driver-for-sql-server).
+- Docker chỉ khi thử nghiệm container tùy chọn cục bộ.
 
-Trước khi bắt đầu, hãy đảm bảo bạn đã cài đặt các công cụ sau:
-
-1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (phiên bản 2.50.0 trở lên)
-   ```sh
-   az --version
-   # Đầu ra mong đợi: azure-cli 2.50.0 trở lên
-   ```
-
-2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (phiên bản 1.0.0 trở lên)
-   ```sh
-   azd version
-   # Đầu ra mong đợi: azd phiên bản 1.0.0 trở lên
-   ```
-
-3. **[Python 3.8+](https://www.python.org/downloads/)** (cho phát triển cục bộ)
-   ```sh
-   python --version
-   # Đầu ra mong đợi: Python 3.8 trở lên
-   ```
-
-4. **[Docker](https://www.docker.com/get-started)** (tùy chọn, cho phát triển cục bộ trong container)
-   ```sh
-   docker --version
-   # Đầu ra mong đợi: Docker phiên bản 20.10 trở lên
-   ```
-
-### Yêu cầu Azure
-
-- Một **đăng ký Azure** hoạt động ([tạo tài khoản miễn phí](https://azure.microsoft.com/free/))
-- Quyền để tạo tài nguyên trong đăng ký của bạn
-- Có vai trò **Owner** hoặc **Contributor** trên đăng ký hoặc nhóm tài nguyên
-
-### Kiến thức cần có
-
-Đây là ví dụ **trình độ trung cấp**. Bạn nên quen thuộc với:
-- Các thao tác cơ bản trên dòng lệnh
-- Các khái niệm cơ bản về đám mây (tài nguyên, nhóm tài nguyên)
-- Hiểu biết cơ bản về ứng dụng web và cơ sở dữ liệu
-
-**Mới với AZD?** Bắt đầu với [Hướng dẫn Bắt đầu](../../docs/chapter-01-foundation/azd-basics.md) trước.
-
-## Kiến trúc
-
-Ví dụ này triển khai kiến trúc hai tầng với ứng dụng web và cơ sở dữ liệu SQL:
-
-```mermaid
-graph TD
-    Browser[Trình duyệt người dùng] <--> WebApp[Ứng dụng Web Azure<br/>API Flask<br/>/health<br/>/products]
-    WebApp -- Kết nối an toàn<br/>Được mã hóa --> SQL[Cơ sở dữ liệu Azure SQL<br/>Bảng sản phẩm<br/>Dữ liệu mẫu]
-```
-
-**Triển khai tài nguyên:**
-- **Resource Group**: Nơi chứa tất cả tài nguyên
-- **App Service Plan**: Hosting trên Linux (hạng B1 để tối ưu chi phí)
-- **Web App**: Runtime Python 3.11 với ứng dụng Flask
-- **SQL Server**: Máy chủ cơ sở dữ liệu quản lý với TLS 1.2 trở lên
-- **SQL Database**: Hạng Basic (2GB, phù hợp cho phát triển/kiểm thử)
-- **Application Insights**: Giám sát và ghi nhật ký
-- **Log Analytics Workspace**: Lưu trữ nhật ký tập trung
-
-**Phân tích**: Hãy nghĩ về điều này giống như một nhà hàng (web app) với một kho lạnh (database). Khách hàng gọi món từ thực đơn (API endpoints), và bếp (ứng dụng Flask) lấy nguyên liệu (dữ liệu) từ kho lạnh. Quản lý nhà hàng (Application Insights) theo dõi mọi việc xảy ra.
-
-## Cấu trúc thư mục
-
-Tất cả các tệp được bao gồm trong ví dụ này—không yêu cầu phụ thuộc bên ngoài:
-
-```
-examples/database-app/
-│
-├── README.md                    # This file
-├── azure.yaml                   # AZD configuration file
-├── .env.sample                  # Sample environment variables
-├── .gitignore                   # Git ignore patterns
-│
-├── infra/                       # Infrastructure as Code (Bicep)
-│   ├── main.bicep              # Main orchestration template
-│   ├── abbreviations.json      # Azure naming conventions
-│   └── resources/              # Modular resource templates
-│       ├── sql-server.bicep    # SQL Server configuration
-│       ├── sql-database.bicep  # Database configuration
-│       ├── app-service-plan.bicep  # Hosting plan
-│       ├── app-insights.bicep  # Monitoring setup
-│       └── web-app.bicep       # Web application
-│
-└── src/
-    └── web/                    # Application source code
-        ├── app.py              # Flask REST API
-        ├── requirements.txt    # Python dependencies
-        └── Dockerfile          # Container definition
-```
-
-**Mỗi tệp dùng để làm gì:**
-- **azure.yaml**: Cho AZD biết sẽ triển khai gì và ở đâu
-- **infra/main.bicep**: Điều phối tất cả tài nguyên Azure
-- **infra/resources/*.bicep**: Định nghĩa từng tài nguyên (mô-đun để tái sử dụng)
-- **src/web/app.py**: Ứng dụng Flask với logic cơ sở dữ liệu
-- **requirements.txt**: Các phụ thuộc gói Python
-- **Dockerfile**: Hướng dẫn đóng gói container để triển khai
-
-## Bắt đầu nhanh (Từng bước)
-
-### Bước 1: Clone và điều hướng
-
-```sh
-git clone https://github.com/microsoft/AZD-for-beginners.git
-cd AZD-for-beginners/examples/database-app
-```
-
-**✓ Kiểm tra thành công**: Xác nhận bạn thấy `azure.yaml` và thư mục `infra/`:
-```sh
-ls
-# Dự kiến: README.md, azure.yaml, infra/, src/
-```
-
-### Bước 2: Xác thực với Azure
-
-```sh
+```bash
+azd version
+az version
 azd auth login
-```
-
-Lệnh này sẽ mở trình duyệt để xác thực Azure. Đăng nhập bằng thông tin đăng nhập Azure của bạn.
-
-**✓ Kiểm tra thành công**: Bạn sẽ thấy:
-```
-Logged in to Azure.
-```
-
-### Bước 3: Khởi tạo môi trường
-
-```sh
-azd init
-```
-
-**Điều gì xảy ra**: AZD tạo cấu hình cục bộ cho việc triển khai của bạn.
-
-**Các lời nhắc bạn sẽ thấy**:
-- **Environment name**: Nhập một tên ngắn (ví dụ, `dev`, `myapp`)
-- **Azure subscription**: Chọn đăng ký của bạn từ danh sách
-- **Azure location**: Chọn một vùng (ví dụ, `eastus`, `westeurope`)
-
-**✓ Kiểm tra thành công**: Bạn sẽ thấy:
-```
-SUCCESS: New project initialized!
-```
-
-### Bước 4: Cấp phát tài nguyên Azure
-
-```sh
-azd provision
-```
-
-**Điều gì xảy ra**: AZD triển khai toàn bộ cơ sở hạ tầng (mất 5-8 phút):
-1. Tạo nhóm tài nguyên
-2. Tạo SQL Server và cơ sở dữ liệu
-3. Tạo App Service Plan
-4. Tạo Web App
-5. Tạo Application Insights
-6. Cấu hình mạng và bảo mật
-
-**Bạn sẽ được yêu cầu cung cấp**:
-- **SQL admin username**: Nhập tên người dùng (ví dụ, `sqladmin`)
-- **SQL admin password**: Nhập mật khẩu mạnh (hãy lưu lại!)
-
-**✓ Kiểm tra thành công**: Bạn sẽ thấy:
-```
-SUCCESS: Your application was provisioned in Azure in X minutes Y seconds.
-You can view the resources created under the resource group rg-<env-name> in Azure Portal:
-https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-name>
-```
-
-**⏱️ Thời gian**: 5-8 phút
-
-### Bước 5: Triển khai ứng dụng
-
-```sh
-azd deploy
-```
-
-**Điều gì xảy ra**: AZD xây dựng và triển khai ứng dụng Flask của bạn:
-1. Đóng gói ứng dụng Python
-2. Xây dựng container Docker
-3. Đẩy lên Azure Web App
-4. Khởi tạo cơ sở dữ liệu với dữ liệu mẫu
-5. Khởi động ứng dụng
-
-**✓ Kiểm tra thành công**: Bạn sẽ thấy:
-```
-SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
-You can view the resources created under the resource group rg-<env-name> in Azure Portal:
-https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-name>
-```
-
-**⏱️ Thời gian**: 3-5 phút
-
-### Bước 6: Duyệt ứng dụng
-
-```sh
-azd browse
-```
-
-Lệnh này mở ứng dụng web đã triển khai trong trình duyệt tại `https://app-<unique-id>.azurewebsites.net`
-
-**✓ Kiểm tra thành công**: Bạn sẽ thấy đầu ra JSON:
-```json
-{
-  "message": "Welcome to the Database App API",
-  "endpoints": {
-    "/": "This help message",
-    "/health": "Health check endpoint",
-    "/products": "List all products",
-    "/products/<id>": "Get product by ID"
-  }
-}
-```
-
-### Bước 7: Kiểm tra các endpoint API
-
-**Kiểm tra trạng thái** (xác minh kết nối cơ sở dữ liệu):
-```sh
-curl https://app-<your-id>.azurewebsites.net/health
-```
-
-**Phản hồi mong đợi**:
-```json
-{
-  "status": "healthy",
-  "database": "connected"
-}
-```
-
-**Liệt kê sản phẩm** (dữ liệu mẫu):
-```sh
-curl https://app-<your-id>.azurewebsites.net/products
-```
-
-**Phản hồi mong đợi**:
-```json
-[
-  {
-    "id": 1,
-    "name": "Laptop",
-    "description": "High-performance laptop",
-    "price": 1299.99,
-    "created_at": "2025-11-19T10:30:00"
-  },
-  ...
-]
-```
-
-**Lấy một sản phẩm**:
-```sh
-curl https://app-<your-id>.azurewebsites.net/products/1
-```
-
-**✓ Kiểm tra thành công**: Tất cả các endpoint trả về dữ liệu JSON mà không có lỗi.
-
----
-
-**🎉 Chúc mừng!** Bạn đã triển khai thành công một ứng dụng web với cơ sở dữ liệu lên Azure bằng AZD.
-
-## Đi sâu vào cấu hình
-
-### Biến môi trường
-
-Các bí mật được quản lý an toàn thông qua cấu hình Azure App Service—**không bao giờ ghi cứng trong mã nguồn**.
-
-**Được AZD cấu hình tự động**:
-- `SQL_CONNECTION_STRING`: Chuỗi kết nối cơ sở dữ liệu với thông tin đăng nhập được mã hóa
-- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Điểm cuối telemetri giám sát
-- `SCM_DO_BUILD_DURING_DEPLOYMENT`: Kích hoạt cài đặt phụ thuộc tự động
-
-**Nơi lưu trữ bí mật**:
-1. Trong quá trình `azd provision`, bạn cung cấp thông tin đăng nhập SQL qua các lời nhắc an toàn
-2. AZD lưu chúng trong tệp cục bộ `.azure/<env-name>/.env` của bạn (bị bỏ qua bởi git)
-3. AZD chèn chúng vào cấu hình Azure App Service (được mã hóa khi nghỉ)
-4. Ứng dụng đọc chúng qua `os.getenv()` khi chạy
-
-### Phát triển cục bộ
-
-Để kiểm thử cục bộ, tạo tệp `.env` từ mẫu:
-
-```sh
-cp .env.sample .env
-# Chỉnh sửa .env với thông tin kết nối cơ sở dữ liệu cục bộ của bạn
-```
-
-**Luồng làm việc phát triển cục bộ**:
-```sh
-# Cài đặt các phụ thuộc
-cd src/web
-pip install -r requirements.txt
-
-# Đặt biến môi trường
-export SQL_CONNECTION_STRING="your-local-connection-string"
-
-# Chạy ứng dụng
-python app.py
-```
-
-**Kiểm thử cục bộ**:
-```sh
-curl http://localhost:8000/health
-# Mong đợi: {"status": "healthy", "database": "connected"}
-```
-
-### Hạ tầng như mã
-
-Tất cả tài nguyên Azure được định nghĩa trong **mẫu Bicep** (thư mục `infra/`):
-
-- **Thiết kế mô-đun**: Mỗi loại tài nguyên có tệp riêng để tái sử dụng
-- **Tham số hóa**: Tùy chỉnh SKU, vùng, quy ước đặt tên
-- **Thực hành tốt nhất**: Tuân theo tiêu chuẩn đặt tên và mặc định bảo mật của Azure
-- **Quản lý phiên bản**: Các thay đổi hạ tầng được theo dõi trong Git
-
-**Ví dụ tùy chỉnh**:
-Để thay đổi hạng cơ sở dữ liệu, chỉnh sửa `infra/resources/sql-database.bicep`:
-```bicep
-sku: {
-  name: 'Standard'  // Changed from 'Basic'
-  tier: 'Standard'
-  capacity: 10
-}
-```
-
-## Thực hành bảo mật tốt nhất
-
-Ví dụ này tuân theo các thực hành bảo mật tốt nhất của Azure:
-
-### 1. **Không lưu bí mật trong mã nguồn**
-- ✅ Thông tin xác thực được lưu trong cấu hình Azure App Service (được mã hóa)
-- ✅ Các tệp `.env` được loại trừ khỏi Git qua `.gitignore`
-- ✅ Bí mật được truyền qua các tham số an toàn khi cấp phát
-
-### 2. **Kết nối được mã hóa**
-- ✅ Yêu cầu tối thiểu TLS 1.2 cho SQL Server
-- ✅ Chỉ cho phép HTTPS cho Web App
-- ✅ Kết nối cơ sở dữ liệu sử dụng kênh được mã hóa
-
-### 3. **Bảo mật mạng**
-- ✅ Tường lửa SQL Server được cấu hình chỉ cho phép dịch vụ Azure
-- ✅ Truy cập mạng công cộng bị hạn chế (có thể khóa chặt hơn bằng Private Endpoints)
-- ✅ FTPS bị vô hiệu trên Web App
-
-### 4. **Xác thực & Ủy quyền**
-- ⚠️ **Hiện tại**: Xác thực SQL (tên người dùng/mật khẩu)
-- ✅ **Khuyến nghị cho môi trường sản xuất**: Sử dụng Azure Managed Identity để xác thực không cần mật khẩu
-
-**Để nâng cấp lên Managed Identity** (cho môi trường sản xuất):
-1. Bật managed identity trên Web App
-2. Cấp quyền SQL cho identity
-3. Cập nhật chuỗi kết nối để sử dụng managed identity
-4. Loại bỏ xác thực dựa trên mật khẩu
-
-### 5. **Kiểm toán & Tuân thủ**
-- ✅ Application Insights ghi lại tất cả yêu cầu và lỗi
-- ✅ Bật kiểm toán SQL Database (có thể cấu hình cho tuân thủ)
-- ✅ Tất cả tài nguyên được gắn thẻ để quản trị
-
-**Danh sách kiểm tra bảo mật trước khi vào sản xuất**:
-- [ ] Bật Azure Defender cho SQL
-- [ ] Cấu hình Private Endpoints cho SQL Database
-- [ ] Bật Web Application Firewall (WAF)
-- [ ] Triển khai Azure Key Vault để xoay vòng bí mật
-- [ ] Cấu hình xác thực Microsoft Entra ID
-- [ ] Bật ghi nhật ký chẩn đoán cho tất cả tài nguyên
-
-## Tối ưu chi phí
-
-**Chi phí ước tính hàng tháng** (tính đến tháng 11 năm 2025):
-
-| Tài nguyên | SKU/Hạng | Chi phí ước tính |
-|----------|----------|----------------|
-| App Service Plan | B1 (Basic) | ~\$13/tháng |
-| SQL Database | Basic (2GB) | ~\$5/tháng |
-| Application Insights | Pay-as-you-go | ~\$2/tháng (lưu lượng thấp) |
-| **Tổng cộng** | | **~\$20/tháng** |
-
-**💡 Mẹo tiết kiệm chi phí**:
-
-1. **Sử dụng hạng miễn phí để học**:
-   - App Service: Hạng F1 (miễn phí, giờ dùng có giới hạn)
-   - SQL Database: Sử dụng Azure SQL Database serverless
-   - Application Insights: Miễn phí 5GB/tháng cho ingest
-
-2. **Dừng tài nguyên khi không sử dụng**:
-   ```sh
-   # Dừng ứng dụng web (cơ sở dữ liệu vẫn tính phí)
-   az webapp stop --name <app-name> --resource-group <rg-name>
-   
-   # Khởi động lại khi cần
-   az webapp start --name <app-name> --resource-group <rg-name>
-   ```
-
-3. **Xóa mọi thứ sau khi kiểm thử**:
-   ```sh
-   azd down
-   ```
-   Điều này xóa TẤT CẢ tài nguyên và ngừng tính phí.
-
-4. **SKU cho Phát triển và Sản xuất**:
-   - **Phát triển**: Hạng Basic (được dùng trong ví dụ này)
-   - **Sản xuất**: Hạng Standard/Premium với độ dư lỗi
-
-**Giám sát chi phí**:
-- Xem chi phí trong [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
-- Thiết lập cảnh báo chi phí để tránh bất ngờ
-- Gắn thẻ tất cả tài nguyên với `azd-env-name` để theo dõi
-
-**Lựa chọn thay thế hạng miễn phí**:
-Cho mục đích học tập, bạn có thể sửa `infra/resources/app-service-plan.bicep`:
-```bicep
-sku: {
-  name: 'F1'  // Free tier
-  tier: 'Free'
-}
-```
-**Ghi chú**: Hạng miễn phí có giới hạn (60 phút/ngày CPU, không có chế độ luôn bật).
-
-## Giám sát & Khả năng quan sát
-
-### Tích hợp Application Insights
-
-Ví dụ này bao gồm **Application Insights** cho giám sát toàn diện:
-
-**Những gì được giám sát**:
-- ✅ Yêu cầu HTTP (độ trễ, mã trạng thái, endpoint)
-- ✅ Lỗi và ngoại lệ ứng dụng
-- ✅ Ghi nhật ký tùy chỉnh từ ứng dụng Flask
-- ✅ Trạng thái kết nối cơ sở dữ liệu
-- ✅ Chỉ số hiệu năng (CPU, bộ nhớ)
-
-**Truy cập Application Insights**:
-1. Mở [Azure Portal](https://portal.azure.com)
-2. Điều hướng tới nhóm tài nguyên của bạn (`rg-<env-name>`)
-3. Nhấp vào tài nguyên Application Insights (`appi-<unique-id>`)
-
-**Truy vấn hữu ích** (Application Insights → Logs):
-
-**Xem tất cả yêu cầu**:
-```kusto
-requests
-| where timestamp > ago(1h)
-| order by timestamp desc
-| project timestamp, name, url, resultCode, duration
-```
-
-**Tìm lỗi**:
-```kusto
-exceptions
-| where timestamp > ago(24h)
-| order by timestamp desc
-| project timestamp, type, outerMessage, operation_Name
-```
-
-**Kiểm tra endpoint trạng thái**:
-```kusto
-requests
-| where name contains "health"
-| summarize count() by resultCode, bin(timestamp, 1h)
-```
-
-### Kiểm toán SQL Database
-
-**Kiểm toán SQL Database được bật** để theo dõi:
-- Mẫu truy cập cơ sở dữ liệu
-- Thử đăng nhập thất bại
-- Thay đổi lược đồ
-- Truy cập dữ liệu (cho tuân thủ)
-
-**Truy cập nhật ký kiểm toán**:
-1. Azure Portal → SQL Database → Auditing
-2. Xem nhật ký trong Log Analytics workspace
-
-### Giám sát thời gian thực
-
-**Xem số liệu trực tiếp**:
-1. Application Insights → Live Metrics
-2. Xem yêu cầu, lỗi và hiệu năng theo thời gian thực
-
-**Thiết lập cảnh báo**:
-Tạo cảnh báo cho các sự kiện quan trọng:
-- Lỗi HTTP 500 > 5 trong 5 phút
-- Thất bại kết nối cơ sở dữ liệu
-- Thời gian phản hồi cao (>2 giây)
-
-**Ví dụ tạo cảnh báo**:
-```sh
-az monitor metrics alert create \
-  --name "High-Response-Time" \
-  --resource-group <rg-name> \
-  --scopes <app-insights-resource-id> \
-  --condition "avg requests/duration > 2000" \
-  --description "Alert when response time exceeds 2 seconds"
-```
-
-## Gỡ lỗi
-### Các sự cố thường gặp và cách giải quyết
-
-#### 1. `azd provision` fails with "Vị trí không khả dụng"
-
-**Triệu chứng**:
-```
-Error: The subscription is not registered for the resource type 'components' in the location 'centralus'.
-```
-
-**Giải pháp**:
-Chọn một khu vực Azure khác hoặc đăng ký nhà cung cấp tài nguyên:
-```sh
-az provider register --namespace Microsoft.Insights
-```
-
-#### 2. SQL Connection Fails During Deployment
-
-**Triệu chứng**:
-```
-pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL Server]TCP Provider...')
-```
-
-**Giải pháp**:
-- Xác minh tường lửa SQL Server cho phép dịch vụ Azure (được cấu hình tự động)
-- Kiểm tra mật khẩu admin SQL đã được nhập chính xác trong `azd provision`
-- Đảm bảo SQL Server đã được provision hoàn toàn (có thể mất 2-3 phút)
-
-**Xác minh kết nối**:
-```sh
-# Từ Azure Portal, vào SQL Database → Trình chỉnh sửa truy vấn
-# Thử kết nối bằng thông tin đăng nhập của bạn
-```
-
-#### 3. Web App Shows "Application Error"
-
-**Triệu chứng**:
-Trình duyệt hiển thị trang lỗi chung.
-
-**Giải pháp**:
-Kiểm tra logs ứng dụng:
-```sh
-# Xem nhật ký gần đây
-az webapp log tail --name <app-name> --resource-group <rg-name>
-```
-
-**Nguyên nhân thường gặp**:
-- Thiếu biến môi trường (kiểm tra App Service → Configuration)
-- Cài đặt gói Python thất bại (kiểm tra logs triển khai)
-- Lỗi khởi tạo cơ sở dữ liệu (kiểm tra kết nối SQL)
-
-#### 4. `azd deploy` Fails with "Build Error"
-
-**Triệu chứng**:
-```
-Error: Failed to build project
-```
-
-**Giải pháp**:
-- Đảm bảo `requirements.txt` không có lỗi cú pháp
-- Kiểm tra rằng Python 3.11 được chỉ định trong `infra/resources/web-app.bicep`
-- Xác minh Dockerfile có ảnh nền (base image) chính xác
-
-**Gỡ lỗi cục bộ**:
-```sh
-cd src/web
-docker build -t test-app .
-docker run -p 8000:8000 test-app
-```
-
-#### 5. "Unauthorized" When Running AZD Commands
-
-**Triệu chứng**:
-```
-ERROR: (Unauthorized) The client '<id>' with object id '<id>' does not have authorization
-```
-
-**Giải pháp**:
-Đăng nhập lại với Azure:
-```sh
-# Bắt buộc cho các workflow AZD
-azd auth login
-
-# Tùy chọn nếu bạn cũng đang sử dụng trực tiếp các lệnh Azure CLI
 az login
 ```
 
-Xác minh bạn có quyền thích hợp (vai trò Contributor) trên subscription.
+Sử dụng cùng một đăng ký trong cả hai công cụ. Các lệnh dưới đây dùng Bash.
 
-#### 6. High Database Costs
+## Triển khai
 
-**Triệu chứng**:
-Hoá đơn Azure bất ngờ.
+Từ thư mục gốc của kho lưu trữ:
 
-**Giải pháp**:
-- Kiểm tra xem bạn có quên chạy `azd down` sau khi thử nghiệm không
-- Xác minh SQL Database đang sử dụng tier Basic (không phải Premium)
-- Xem lại chi phí trong Azure Cost Management
-- Thiết lập cảnh báo chi phí
-
-### Nhận trợ giúp
-
-**Xem tất cả biến môi trường AZD**:
-```sh
-azd env get-values
+```bash
+cd examples/database-app
+azd env new sql-demo
+azd provision
+azd deploy
+WEB_URL=$(azd env get-value WEB_APP_URI)
+WEB_NAME=$(azd env get-value WEB_APP_NAME)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
 ```
 
-**Kiểm tra trạng thái triển khai**:
-```sh
-az webapp show --name <app-name> --resource-group <rg-name> --query state
+Chọn một vùng hỗ trợ. `sqlAdminLogin` mặc định là `sqladmin`; tham số cần thiết
+`sqlAdminPassword` là một tham số bảo mật. Cung cấp mật khẩu mạnh khi được nhắc.
+Giữ thông tin đăng nhập triển khai ngoài Git và báo cáo sự cố. Nội suy chuỗi kết nối hiện tại
+mong đợi mật khẩu không có dấu phân cách chuỗi kết nối như
+`;`; điều chỉnh dấu thoát trước khi sử dụng các giá trị như vậy.
+
+Bicep đặt một lệnh khởi động chạy `init_database()` **trước khi** các worker Gunicorn
+bắt đầu. Điều này cần thiết vì việc nhập `app:app` không thực thi
+khối `if __name__ == '__main__'` của Python. Trên cơ sở dữ liệu mới, khởi tạo
+tạo `products` và chèn năm dòng. Đây là một dữ liệu khởi tạo đơn giản để dạy, không phải là
+khung di cư đồng thời; sử dụng di cư thích hợp trước khi mở rộng các phiên bản.
+
+Ứng dụng chọn Microsoft ODBC Driver 18 đã cài đặt, rồi 17, nếu chuỗi kết nối
+không chỉ rõ trình điều khiển. Nếu không có trình điều khiển nào, khởi động sẽ thất bại với
+lỗi cài đặt có thể thực hiện được. Xác minh sẵn có trình điều khiển trong runtime
+App Service bạn chọn thay vì giả định.
+
+## Xác minh
+
+```bash
+curl --fail-with-body "${WEB_URL}/"
+curl --fail-with-body "${WEB_URL}/health"
+curl --fail-with-body "${WEB_URL}/products"
+curl --fail-with-body "${WEB_URL}/products/1"
+curl -i "${WEB_URL}/products/999"
 ```
 
-**Truy cập logs ứng dụng**:
-```sh
-az webapp log download --name <app-name> --resource-group <rg-name> --log-file app-logs.zip
+Mong đợi:
+
+- `/` trả về thông tin endpoint.
+- `/health` trả về 200 với `{"status":"healthy","database":"connected"}`.
+- `/products` trả về năm sản phẩm khởi tạo trên cơ sở dữ liệu mới.
+- `/products/1` trả về Laptop với giá 1299.99.
+- Một sản phẩm không tồn tại trả về 404 với `{"error":"Product not found"}`.
+
+API chỉ cho phép đọc. Không có route POST/PUT/DELETE hay giao diện trình duyệt.
+Lỗi kết nối cơ sở dữ liệu trả về 503 từ `/health`; nó không phải thành công.
+
+## Tệp và cấu hình
+
+```text
+azure.yaml                         # Python App Service source deployment
+infra/main.bicep
+infra/main.parameters.json
+infra/abbreviations.json
+infra/resources/sql-server.bicep
+infra/resources/sql-database.bicep
+infra/resources/app-service-plan.bicep
+infra/resources/web-app.bicep       # Settings + initialization/startup command
+infra/resources/app-insights.bicep
+src/web/app.py
+src/web/requirements.txt
+src/web/Dockerfile                 # Optional local container, not the azd target
+.env.sample
 ```
 
-**Cần thêm trợ giúp?**
-- [Hướng dẫn gỡ rối AZD](../../docs/chapter-07-troubleshooting/common-issues.md)
-- [Troubleshooting Azure App Service](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
-- [Troubleshooting Azure SQL](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
+`SQL_CONNECTION_STRING` được truyền như một tham số Bicep bảo mật đến module Web App
+và lưu trong thiết lập App Service, không phải đầu ra triển khai.
+`APPLICATIONINSIGHTS_CONNECTION_STRING` cấu hình xuất log.
+`SCM_DO_BUILD_DURING_DEPLOYMENT=true` kích hoạt cài đặt phụ thuộc phía máy chủ.
+Thiết lập các giá trị `azd env` tùy ý không tự động thay đổi cài đặt ứng dụng.
+
+Quy tắc firewall `0.0.0.0` của SQL cho phép kết nối từ **dịch vụ Azure,
+bao gồm cả đăng ký của khách hàng khác**, chịu sự xác thực SQL. Nó
+không giới hạn cho ứng dụng hoặc đăng ký này. Truy cập mạng công khai SQL được bật.
+Sử dụng mạng có phạm vi và định danh ứng dụng không phải admin trước khi vào sản xuất.
+
+## Phát triển cục bộ
+
+Sử dụng Python 3.11 và trình điều khiển Microsoft SQL ODBC đã cài đặt:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # PowerShell: .\.venv\Scripts\Activate.ps1
+python -m pip install -r src/web/requirements.txt
+export SQL_CONNECTION_STRING='Server=tcp:YOUR_SERVER.database.windows.net,1433;Database=YOUR_DATABASE;UID=YOUR_USER;PWD=YOUR_PASSWORD;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
+python src/web/app.py
+```
+
+Thay thế các chỗ giữ chỗ một cách an toàn. Một tệp `.env` sao chép **không tự động được tải**
+bởi ứng dụng này. Xuất biến trong shell hiện tại của bạn thay vào đó.
+Đối với Azure SQL từ máy tính xách tay, tạm thời chỉ cho phép IP công khai của bạn:
+
+```bash
+SQL_SERVER=$(azd env get-value SQL_SERVER_NAME)
+MY_IP=YOUR_PUBLIC_IP
+az sql server firewall-rule create -g "$RG_NAME" -s "$SQL_SERVER" \
+  -n AllowMyLearningIP --start-ip-address "$MY_IP" --end-ip-address "$MY_IP"
+```
+
+Xóa quy tắc sau khi thử nghiệm:
+
+```bash
+az sql server firewall-rule delete -g "$RG_NAME" -s "$SQL_SERVER" -n AllowMyLearningIP
+```
+
+Thử container tùy chọn từ thư mục ví dụ này:
+
+```bash
+docker build -t sql-flask:local src/web
+docker run --rm -p 8000:8000 -e SQL_CONNECTION_STRING sql-flask:local
+```
+
+Hình ảnh này cài Driver 18 sử dụng kho gói Debian 12 phù hợp với nền tảng
+Bookworm của nó, khởi tạo cơ sở dữ liệu một lần, rồi khởi động Gunicorn.
+
+## Giám sát và khắc phục sự cố
+
+Bật / theo dõi nhật ký ứng dụng hệ thống tệp App Service khi chẩn đoán khởi động:
+
+```bash
+az webapp log config --name "$WEB_NAME" --resource-group "$RG_NAME" \
+  --application-logging filesystem --level information
+az webapp log tail --name "$WEB_NAME" --resource-group "$RG_NAME"
+```
+
+Mã này xuất các **dấu vết nhật ký** ứng dụng qua trình xử lý OpenCensus cũ.
+Nó không cấu hình theo dõi yêu cầu/phụ thuộc Flask tự động, Live Metrics,
+kiểm toán SQL, cài đặt chẩn đoán hoặc cảnh báo. Những cái đó yêu cầu cài đặt riêng.
+Đối với công cụ mới, ưu tiên dùng Azure Monitor OpenTelemetry.
+
+Trong Application Insights Logs, sau khi thực hiện các yêu cầu API:
+
+```kusto
+traces
+| where timestamp > ago(1h)
+| where message contains "products" or message contains "Health check"
+| project timestamp, message, severityLevel
+```
+
+Cho phép độ trễ chuyển dữ liệu. Hoạt động bảng yêu cầu hoặc Live Metrics không phải tiêu chí
+hoàn thành cho việc chỉ theo dõi nhật ký này.
+
+- **Thiếu trình điều khiển:** kiểm tra `pyodbc.drivers()` trong runtime và cài
+  đặt driver Microsoft ODBC được hỗ trợ. Chỉ gói Python là không đủ.
+- **Lỗi kết nối:** kiểm tra cài đặt SQL, thông tin đăng nhập, firewall và đăng ký được chọn.
+  Không tắt mã hóa để bỏ qua lỗi.
+- **Thiếu bảng sản phẩm:** xác nhận lệnh khởi động Bicep đã được triển khai;
+  khởi chạy riêng `gunicorn app:app` bỏ qua khởi tạo.
+- **Lỗi xây dựng gói:** sử dụng Python 3.11 hoặc cung cấp các yêu cầu xây dựng bản địa.
+- **Dữ liệu giá bằng 0:** giá bằng 0 là hợp lệ; nó phải được tuần tự hóa thành 0.0,
+  không phải `null`.
 
 ## Bài tập thực hành
 
-### Bài tập 1: Xác minh triển khai của bạn (Người mới bắt đầu)
+### Bài tập 1: Xác minh hành vi sản phẩm bị thiếu
 
-**Mục tiêu**: Xác nhận tất cả tài nguyên đã được triển khai và ứng dụng hoạt động.
+**Điểm bắt đầu:** API đã triển khai và `WEB_URL` phía trên.
+**Mục tiêu:** phân biệt một dòng bị thiếu với cơ sở dữ liệu bị hỏng.
+Yêu cầu `/health` và `/products/999` dùng các lệnh trên.
+**Tiêu chí thành công / trả lời:** trạng thái 200 cho sức khỏe, 404 cho sản phẩm không tồn tại (không phải 500 hoặc 503).
+**Vấn đề phổ biến:** cho rằng phản hồi không tìm thấy chứng tỏ kết nối SQL bị hỏng.
 
-**Các bước**:
-1. Liệt kê tất cả tài nguyên trong resource group của bạn:
-   ```sh
-   az resource list --resource-group rg-<env-name> --output table
-   ```
-   **Mong đợi**: 6-7 resources (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
+### Bài tập 2: Thay đổi giá trị đã khởi tạo
 
-2. Kiểm tra tất cả endpoint API:
-   ```sh
-   curl https://app-<your-id>.azurewebsites.net/
-   curl https://app-<your-id>.azurewebsites.net/health
-   curl https://app-<your-id>.azurewebsites.net/products
-   curl https://app-<your-id>.azurewebsites.net/products/1
-   ```
-   **Mong đợi**: Tất cả trả về JSON hợp lệ không có lỗi
+**Điểm bắt đầu:** Azure SQL Query Editor, kết nối tới cơ sở dữ liệu mẫu.
+**Mục tiêu:** chứng minh dữ liệu API được lưu trong SQL chứ không chỉ trong bộ nhớ xử lý.
 
-3. Kiểm tra Application Insights:
-   - Điều hướng đến Application Insights trong Azure Portal
-   - Vào "Live Metrics"
-   - Làm mới trình duyệt của bạn trên ứng dụng web
-   **Mong đợi**: Thấy các yêu cầu xuất hiện theo thời gian thực
+```sql
+UPDATE products SET price = 0 WHERE id = 1;
+SELECT id, name, price FROM products WHERE id = 1;
+```
 
-**Tiêu chí thành công**: Tất cả 6-7 tài nguyên tồn tại, tất cả endpoint trả về dữ liệu, Live Metrics hiển thị hoạt động.
+Yêu cầu `${WEB_URL}/products/1`. **Tiêu chí thành công:** giá là `0.0`, không phải `null`.
+Khôi phục giá trị:
 
----
+```sql
+UPDATE products SET price = 1299.99 WHERE id = 1;
+```
 
-### Bài tập 2: Thêm một endpoint API mới (Trung cấp)
+**Vấn đề phổ biến:** chỉnh sửa danh sách Python seed không cập nhật các dòng đã có trong SQL.
+Không thực hiện bài tập về schema/dữ liệu trên cơ sở dữ liệu sản xuất.
 
-**Mục tiêu**: Mở rộng ứng dụng Flask với một endpoint mới.
+### Bài tập 3: Thêm endpoint đếm chỉ đọc
 
-**Mã khởi đầu**: Các endpoint hiện tại trong `src/web/app.py`
+**Điểm bắt đầu:** `src/web/app.py`.
+**Mục tiêu:** mở rộng API bằng truy vấn tổng hợp không có tham số.
+Thêm đoạn này trước khối `if __name__ == '__main__':`:
 
-**Các bước**:
-1. Chỉnh sửa `src/web/app.py` và thêm một endpoint mới sau hàm `get_product()`:
-   ```python
-   @app.route('/products/search/<keyword>')
-   def search_products(keyword):
-       """Search products by name or description."""
-       try:
-           conn = get_db_connection()
-           cursor = conn.cursor()
-           cursor.execute(
-               "SELECT id, name, description, price, created_at FROM products WHERE name LIKE ? OR description LIKE ?",
-               (f'%{keyword}%', f'%{keyword}%')
-           )
-           
-           products = []
-           for row in cursor.fetchall():
-               products.append({
-                   'id': row[0],
-                   'name': row[1],
-                   'description': row[2],
-                   'price': float(row[3]) if row[3] else None,
-                   'created_at': row[4].isoformat() if row[4] else None
-               })
-           
-           cursor.close()
-           conn.close()
-           
-           logger.info(f"Search for '{keyword}' returned {len(products)} results")
-           return jsonify(products), 200
-           
-       except Exception as e:
-           logger.error(f"Error searching products: {str(e)}")
-           return jsonify({'error': str(e)}), 500
-   ```
+```python
+@app.route('/product-count')
+def product_count():
+    from contextlib import closing
+    with closing(get_db_connection()) as conn, closing(conn.cursor()) as cursor:
+        cursor.execute("SELECT COUNT(*) FROM products")
+        return jsonify({'count': cursor.fetchone()[0]})
+```
 
-2. Triển khai ứng dụng đã cập nhật:
-   ```sh
-   azd deploy
-   ```
+Chạy `azd deploy web`, sau đó yêu cầu `${WEB_URL}/product-count`.
+**Tiêu chí thành công:** 200 với `{"count":5}` trên cơ sở dữ liệu seed chưa thay đổi.
+**Vấn đề phổ biến:** thay đổi route nhưng quên triển khai lại.
+Đối với sản xuất, thêm xử lý lỗi/kiểm thử; bài tập ngắn này tập trung vào truy vấn.
 
-3. Kiểm tra endpoint mới:
-   ```sh
-   curl https://app-<your-id>.azurewebsites.net/products/search/laptop
-   ```
-   **Mong đợi**: Trả về các sản phẩm khớp với "laptop"
+## Chi phí, thiếu sót sản xuất và dọn dẹp
 
-**Tiêu chí thành công**: Endpoint mới hoạt động, trả về kết quả lọc, xuất hiện trong logs của Application Insights.
+B1 App Service và cơ sở dữ liệu Basic tính phí khi còn được cung cấp. Dừng
+Web App **không** dừng tính phí App Service plan. Nhật ký và lưu trữ có thể phát sinh chi phí.
+Sử dụng [Azure pricing calculator](https://azure.microsoft.com/pricing/calculator/)
+để xem giá hiện tại theo vùng. Chuyển sang F1 cũng yêu cầu vô hiệu hóa `alwaysOn`;
+nó không phải là một thay thế thay thế đơn giản một dòng lệnh. SQL serverless không tự động miễn phí.
 
----
+Công việc sản xuất bao gồm định danh ứng dụng quyền hạn thấp nhất (không phải quản trị SQL),
+xác thực/ủy quyền, mạng riêng, di cư an toàn, xem xét vòng đời/đóng gói kết nối,
+thu thập dữ liệu, kiểm toán, cảnh báo, kiểm thử và quy trình phục hồi.
+Bộ nhớ đệm Redis và các bảng bổ sung là ý tưởng phát triển, không phải bài tập đã thực hiện.
 
-### Bài tập 3: Thêm giám sát và cảnh báo (Nâng cao)
+Từ thư mục ví dụ này:
 
-**Mục tiêu**: Thiết lập giám sát chủ động kèm cảnh báo.
-
-**Các bước**:
-1. Tạo cảnh báo cho lỗi HTTP 500:
-   ```sh
-   # Lấy ID tài nguyên Application Insights
-   AI_ID=$(az monitor app-insights component show \
-     --app appi-<your-id> \
-     --resource-group rg-<env-name> \
-     --query id -o tsv)
-   
-   # Tạo cảnh báo
-   az monitor metrics alert create \
-     --name "High-Error-Rate" \
-     --resource-group rg-<env-name> \
-     --scopes $AI_ID \
-     --condition "count requests/failed > 5" \
-     --window-size 5m \
-     --evaluation-frequency 1m \
-     --description "Alert when >5 failed requests in 5 minutes"
-   ```
-
-2. Gây lỗi để kích hoạt cảnh báo:
-   ```sh
-   # Yêu cầu một sản phẩm không tồn tại
-   for i in {1..10}; do curl https://app-<your-id>.azurewebsites.net/products/999; done
-   ```
-
-3. Kiểm tra xem cảnh báo có được kích hoạt:
-   - Azure Portal → Alerts → Alert Rules
-   - Kiểm tra email của bạn (nếu đã cấu hình)
-
-**Tiêu chí thành công**: Rule cảnh báo được tạo, kích hoạt khi có lỗi, nhận được thông báo.
-
----
-
-### Bài tập 4: Thay đổi lược đồ cơ sở dữ liệu (Nâng cao)
-
-**Mục tiêu**: Thêm bảng mới và chỉnh sửa ứng dụng để sử dụng nó.
-
-**Các bước**:
-1. Kết nối tới SQL Database qua Query Editor trong Azure Portal
-
-2. Tạo bảng `categories` mới:
-   ```sql
-   CREATE TABLE categories (
-       id INT PRIMARY KEY IDENTITY(1,1),
-       name NVARCHAR(50) NOT NULL,
-       description NVARCHAR(200)
-   );
-   
-   INSERT INTO categories (name, description) VALUES
-   ('Electronics', 'Electronic devices and accessories'),
-   ('Office Supplies', 'Office equipment and supplies');
-   
-   -- Add category to products table
-   ALTER TABLE products ADD category_id INT;
-   UPDATE products SET category_id = 1; -- Set all to Electronics
-   ```
-
-3. Cập nhật `src/web/app.py` để bao gồm thông tin danh mục trong phản hồi
-
-4. Triển khai và kiểm tra
-
-**Tiêu chí thành công**: Bảng mới tồn tại, sản phẩm hiển thị thông tin danh mục, ứng dụng vẫn hoạt động.
-
----
-
-### Bài tập 5: Triển khai bộ nhớ đệm (Chuyên gia)
-
-**Mục tiêu**: Thêm Azure Redis Cache để cải thiện hiệu năng.
-
-**Các bước**:
-1. Thêm Redis Cache vào `infra/main.bicep`
-2. Cập nhật `src/web/app.py` để cache các truy vấn sản phẩm
-3. Đo cải thiện hiệu năng bằng Application Insights
-4. So sánh thời gian phản hồi trước/sau khi dùng bộ nhớ đệm
-
-**Tiêu chí thành công**: Redis được triển khai, bộ nhớ đệm hoạt động, thời gian phản hồi cải thiện >50%.
-
-**Gợi ý**: Bắt đầu với [Azure Cache for Redis documentation](https://learn.microsoft.com/azure/azure-cache-for-redis/).
-
----
-
-## Dọn dẹp
-
-Để tránh bị tính phí liên tục, hãy xóa tất cả tài nguyên khi hoàn thành:
-
-```sh
+```bash
 azd down
 ```
 
-**Lời nhắc xác nhận**:
-```
-? Total resources to delete: 7, are you sure you want to continue? (y/N)
-```
+Xem lại lời nhắc xoá và xác minh nhóm tài nguyên chuyên dụng bị xoá.
+Không xoá các nhóm chứa dữ liệu không liên quan.
 
-Gõ `y` để xác nhận.
-
-**✓ Kiểm tra thành công**: 
-- Tất cả tài nguyên đã bị xóa khỏi Azure Portal
-- Không còn chi phí phát sinh
-- Thư mục cục bộ `.azure/<env-name>` có thể bị xóa
-
-**Alternative** (giữ hạ tầng, xóa dữ liệu):
-```sh
-# Chỉ xóa nhóm tài nguyên (giữ cấu hình AZD)
-az group delete --name rg-<env-name> --yes
-```
-## Tìm hiểu thêm
-
-### Tài liệu liên quan
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Azure SQL Database Documentation](https://learn.microsoft.com/azure/azure-sql/database/)
-- [Azure App Service Documentation](https://learn.microsoft.com/azure/app-service/)
-- [Application Insights Documentation](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Bicep Language Reference](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
-
-### Bước tiếp theo trong khóa học này
-- **[Container Apps Example](../../../../examples/container-app)**: Triển khai microservices với Azure Container Apps
-- **[AI Integration Guide](../../../../docs/ai-foundry)**: Thêm khả năng AI vào ứng dụng của bạn
-- **[Deployment Best Practices](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Các mẫu triển khai cho production
-
-### Chủ đề nâng cao
-- **Managed Identity**: Loại bỏ mật khẩu và sử dụng xác thực Microsoft Entra ID
-- **Private Endpoints**: Bảo mật kết nối cơ sở dữ liệu trong mạng ảo
-- **CI/CD Integration**: Tự động hoá triển khai với GitHub Actions hoặc Azure DevOps
-- **Multi-Environment**: Thiết lập môi trường dev, staging và production
-- **Database Migrations**: Sử dụng Alembic hoặc Entity Framework cho version hóa lược đồ
-
-### So sánh với các phương pháp khác
-
-**AZD vs. ARM Templates**:
-- ✅ AZD: Trừu tượng cấp cao hơn, lệnh đơn giản hơn
-- ⚠️ ARM: Dài dòng hơn, kiểm soát chi tiết hơn
-
-**AZD vs. Terraform**:
-- ✅ AZD: Thuộc Azure, tích hợp với dịch vụ Azure
-- ⚠️ Terraform: Hỗ trợ đa đám mây, hệ sinh thái lớn hơn
-
-**AZD vs. Azure Portal**:
-- ✅ AZD: Lặp lại được, quản lý mã nguồn, tự động hoá được
-- ⚠️ Portal: Nhấn chuột thủ công, khó tái tạo
-
-**Hãy nghĩ về AZD như**: Docker Compose cho Azure—cấu hình đơn giản hóa cho các triển khai phức tạp.
-
----
-
-## Câu hỏi thường gặp
-
-**Q: Tôi có thể sử dụng ngôn ngữ lập trình khác không?**  
-A: Có! Thay `src/web/` bằng Node.js, C#, Go, hoặc bất kỳ ngôn ngữ nào. Cập nhật `azure.yaml` và Bicep tương ứng.
-
-**Q: Làm thế nào để thêm nhiều cơ sở dữ liệu hơn?**  
-A: Thêm module SQL Database khác trong `infra/main.bicep` hoặc sử dụng PostgreSQL/MySQL từ dịch vụ Azure Database.
-
-**Q: Liệu tôi có thể dùng cái này cho production không?**  
-A: Đây là điểm khởi đầu. Cho production, hãy thêm: managed identity, private endpoints, dự phòng, chiến lược backup, WAF, và giám sát nâng cao.
-
-**Q: Nếu tôi muốn dùng container thay vì triển khai mã thì sao?**  
-A: Xem ví dụ [Container Apps Example](../../../../examples/container-app) sử dụng Docker containers xuyên suốt.
-
-**Q: Làm sao để kết nối tới cơ sở dữ liệu từ máy cục bộ?**  
-A: Thêm IP của bạn vào tường lửa SQL Server:
-```sh
-az sql server firewall-rule create \
-  --resource-group rg-<env-name> \
-  --server sql-<unique-id> \
-  --name AllowMyIP \
-  --start-ip-address <your-ip> \
-  --end-ip-address <your-ip>
-```
-
-**Q: Tôi có thể sử dụng cơ sở dữ liệu hiện có thay vì tạo mới không?**  
-A: Có, chỉnh sửa `infra/main.bicep` để tham chiếu tới SQL Server hiện có và cập nhật các tham số chuỗi kết nối.
-
----
-
-> **Lưu ý:** Ví dụ này minh hoạ các best practices khi triển khai web app với cơ sở dữ liệu sử dụng AZD. Nó bao gồm mã hoạt động, tài liệu toàn diện, và bài tập thực hành để củng cố kiến thức. Cho triển khai production, xem xét bảo mật, scale, tuân thủ và yêu cầu chi phí cụ thể cho tổ chức của bạn.
-
-**📚 Điều hướng khóa học:**
-- ← Trước: [Container Apps Example](../../../../examples/container-app)
-- → Tiếp: [AI Integration Guide](../../../../docs/ai-foundry)
-- 🏠 [Trang chủ khóa học](../../README.md)
+[Container examples](../../../../examples/container-app) ·
+[AI development](../../docs/chapter-02-ai-development/README.md) ·
+[Course home](../../README.md) · [Report an issue](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 

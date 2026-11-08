@@ -1,583 +1,216 @@
-# Ứng dụng Chat Microsoft Foundry Models
+# Azure OpenAI Chat — CLI địa phương và Hạ tầng AZD
 
-**Lộ trình học:** Trung cấp ⭐⭐ | **Thời gian:** 35-45 phút | **Chi phí:** $50-200/month
+**Cấp độ:** Trung cấp · **Thời gian:** 35–60 phút bao gồm cả cài đặt
 
-Một ứng dụng chat hoàn chỉnh của Microsoft Foundry Models được triển khai bằng Azure Developer CLI (azd). Ví dụ này minh họa việc triển khai gpt-4.1, truy cập API an toàn và một giao diện chat đơn giản.
+Mẫu này cung cấp một **tài nguyên Azure OpenAI và Key Vault**, sau đó chạy một
+CLI trò chuyện Python tương tác **trên máy của bạn**. Nó không lưu trữ ứng dụng web
+hoặc Container App. Mô hình mặc định là `gpt-4.1`, phiên bản `2025-04-14`, với
+công suất triển khai `GlobalStandard` là 20. Kiểm tra khả năng sẵn có và hạn mức hiện tại trong
+khu vực bạn chọn trước khi cung cấp; ngày vòng đời mô hình có thể thay đổi.
 
-## 🎯 Những gì bạn sẽ học
+## Mục tiêu học tập
 
-- Triển khai Dịch vụ Microsoft Foundry Models với mô hình gpt-4.1
-- Bảo mật khóa API OpenAI với Key Vault
-- Xây dựng giao diện chat đơn giản bằng Python
-- Giám sát việc sử dụng token và chi phí
-- Thực hiện giới hạn tần suất và xử lý lỗi
-
-## 📦 Những gì được bao gồm
-
-✅ **Microsoft Foundry Models Service** - triển khai mô hình gpt-4.1  
-✅ **Python Chat App** - Giao diện chat dòng lệnh đơn giản  
-✅ **Tích hợp Key Vault** - Lưu trữ khóa API an toàn  
-✅ **ARM Templates** - Hạ tầng dưới dạng mã hoàn chỉnh  
-✅ **Giám sát chi phí** - Theo dõi sử dụng token  
-✅ **Giới hạn tần suất** - Ngăn cạn kiệt hạn mức  
-
-## Kiến trúc
+- Cung cấp hạ tầng mô hình bằng Bicep và azd.
+- Lấy khóa API từ Key Vault mà không cần đưa nó vào đầu ra triển khai.
+- Gửi yêu cầu Chat Completions và duy trì lịch sử hội thoại.
+- Giải thích số lượng token và các giới hạn của ước tính chi phí.
 
 ```mermaid
-graph TD
-    App[Ứng dụng Chat Python<br/>Cục bộ/Đám mây<br/>Giao diện dòng lệnh<br/>Lịch sử cuộc trò chuyện<br/>Theo dõi sử dụng token] -- "HTTPS (Khóa API)" --> Foundry[Dịch vụ Mô hình Microsoft Foundry<br/>Mô hình gpt-4.1<br/>Công suất 20K token/phút<br/>Chuyển đổi dự phòng đa vùng]
-    Foundry --> KV[Azure Key Vault<br/>Khóa API OpenAI<br/>URL điểm cuối]
-    Foundry -. Managed Identity .-> KV
+flowchart LR
+    Deploy[azd provision + Bicep] --> AOAI[Azure OpenAI deployment]
+    Deploy --> KV[Key Vault stores endpoint + API key]
+    Shell[Your authenticated Azure CLI] -->|Read secret into local environment| KV
+    Chat[Local Python chat CLI] -->|HTTPS + API key| AOAI
 ```
 
-## Yêu cầu
+Mẫu này không có tích hợp runtime managed-identity, chuyển đổi dự phòng đa khu vực, giới hạn tỉ lệ tùy chỉnh,
+chế độ phát trực tiếp, hoặc tính toán được lưu trữ. SDK OpenAI thực hiện tối đa hai lần thử lại cho các lỗi có thể thử lại;
+CLI báo cáo các lỗi còn lại.
 
-### Bắt buộc
+## Yêu cầu trước
 
-- **Azure Developer CLI (azd)** - [Hướng dẫn cài đặt](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure subscription** with OpenAI access - [Yêu cầu quyền truy cập](https://aka.ms/oai/access)
-- **Python 3.9+** - [Cài đặt Python](https://www.python.org/downloads/)
-
-### Xác minh yêu cầu
+- Phiên bản ổn định hiện tại của [azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+  (phiên bản phát hành tại thời điểm xem xét: 1.37.2).
+- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
+- Python **3.10+** (khuyến nghị 3.11) và một môi trường ảo.
+- Một đăng ký Azure với quyền tạo các dịch vụ Cognitive Services và Key Vault
+  tài nguyên, triển khai mô hình và đọc các bí mật trong vault.
+- Khả năng sẵn có theo vùng và hạn mức `GlobalStandard` cho `gpt-4.1`. Yêu cầu truy cập
+  phụ thuộc vào đăng ký và tính năng; không có thời gian phê duyệt được đảm bảo.
 
 ```bash
-# Kiểm tra phiên bản azd (cần 1.5.0 trở lên)
 azd version
-
-# Xác minh đăng nhập Azure
+az version
+python --version
 azd auth login
-
-# Kiểm tra phiên bản Python
-python --version  # hoặc python3 --version
-
-# Xác minh quyền truy cập OpenAI (kiểm tra trong Cổng Azure)
-az cognitiveservices account list-skus \
-  --kind OpenAI \
-  --location eastus
+az login
 ```
 
-> **⚠️ Quan trọng:** Microsoft Foundry Models yêu cầu phê duyệt ứng dụng. Nếu bạn chưa nộp đơn, truy cập [aka.ms/oai/access](https://aka.ms/oai/access). Việc phê duyệt thường mất 1-2 ngày làm việc.
+Đây là các phiên xác thực riêng biệt. Chọn cùng một subscription trong cả hai
+công cụ trước khi chạy các lệnh bên dưới.
 
-## ⏱️ Lịch trình triển khai
+## Bắt đầu nhanh (Bash)
 
-| Giai đoạn | Thời lượng | Nội dung |
-|-------|----------|--------------|
-| Kiểm tra yêu cầu | 2-3 minutes | Xác minh hạn ngạch OpenAI có sẵn |
-| Triển khai hạ tầng | 8-12 minutes | Tạo OpenAI, Key Vault, triển khai mô hình |
-| Cấu hình ứng dụng | 2-3 minutes | Thiết lập môi trường và phụ thuộc |
-| **Tổng cộng** | **12-18 minutes** | Sẵn sàng chat với gpt-4.1 |
-
-**Ghi chú:** Lần đầu triển khai OpenAI có thể mất lâu hơn do cấp phát mô hình.
-
-## Bắt đầu nhanh
+Chạy từ thư mục gốc của kho lưu trữ:
 
 ```bash
-# Đi đến ví dụ
 cd examples/azure-openai-chat
-
-# Khởi tạo môi trường
 azd env new myopenai
-
-# Triển khai mọi thứ (cơ sở hạ tầng + cấu hình)
-azd up
-# Bạn sẽ được nhắc:
-# 1. Chọn đăng ký Azure
-# 2. Chọn khu vực có dịch vụ OpenAI (ví dụ: eastus, eastus2, westus)
-# 3. Chờ 12-18 phút để triển khai
-
-# Cài đặt các phụ thuộc Python
-pip install -r requirements.txt
-
-# Bắt đầu trò chuyện!
-python chat.py
+azd provision
 ```
 
-**Kết quả mong đợi:**
-```
-🤖 Microsoft Foundry Models Chat Application
-Connected to: gpt-4.1 (eastus)
-Type your message (or 'quit' to exit)
+Chọn một khu vực được hỗ trợ. Việc cung cấp tài nguyên tạo một nhóm tài nguyên, tài khoản OpenAI,
+triển khai mô hình, Key Vault, và các bí mật `openai-endpoint`/`openai-api-key`.
+Không có **dịch vụ nào để triển khai** trong `azure.yaml`.
 
-You: Hello! Tell me about Microsoft Foundry Models.
-Assistant: Microsoft Foundry Models Service provides REST API access to OpenAI's powerful language models including gpt-4.1, GPT-3.5-Turbo, and Embeddings...
-
-[Tokens used: 145 | Estimated cost: $0.0044]
-```
-
-## ✅ Xác minh triển khai
-
-### Bước 1: Kiểm tra tài nguyên Azure
+Tải các đầu ra không phải bí mật và lấy bí mật vào shell hiện tại của bạn:
 
 ```bash
-# Xem các tài nguyên đã triển khai
-azd show
-
-# Kết quả mong đợi hiển thị:
-# - Dịch vụ OpenAI: (tên tài nguyên)
-# - Key Vault: (tên tài nguyên)
-# - Triển khai: gpt-4.1
-# - Vị trí: eastus (hoặc vùng bạn đã chọn)
-```
-
-### Bước 2: Kiểm tra OpenAI API
-
-```bash
-# Lấy endpoint và khóa OpenAI
-OPENAI_ENDPOINT=$(azd env get-value AZURE_OPENAI_ENDPOINT)
-OPENAI_KEY=$(azd env get-value AZURE_OPENAI_API_KEY)
-
-# Kiểm tra cuộc gọi API
-curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
-  -H "Content-Type: application/json" \
-  -H "api-key: $OPENAI_KEY" \
-  -d '{
-    "messages": [{"role": "user", "content": "Say hello!"}],
-    "max_tokens": 50
-  }'
-```
-
-**Phản hồi mong đợi:**
-```json
-{
-  "choices": [
-    {
-      "message": {
-        "role": "assistant",
-        "content": "Hello! How can I assist you today?"
-      }
-    }
-  ],
-  "usage": {
-    "prompt_tokens": 8,
-    "completion_tokens": 9,
-    "total_tokens": 17
-  }
-}
-```
-
-### Bước 3: Xác minh truy cập Key Vault
-
-```bash
-# Liệt kê các bí mật trong Key Vault
-KV_NAME=$(azd env get-value AZURE_KEY_VAULT_NAME)
-
-az keyvault secret list \
-  --vault-name $KV_NAME \
-  --query "[].name" \
-  --output table
-```
-
-**Các secret mong đợi:**
-- `openai-api-key`
-- `openai-endpoint`
-
-**Tiêu chí thành công:**
-- ✅ Dịch vụ OpenAI đã được triển khai với gpt-4.1
-- ✅ Lệnh gọi API trả về kết quả hợp lệ
-- ✅ Các secret được lưu trong Key Vault
-- ✅ Việc theo dõi sử dụng token hoạt động
-
-## Cấu trúc dự án
-
-```
-azure-openai-chat/
-├── README.md                   ✅ This guide
-├── azure.yaml                  ✅ AZD configuration
-├── infra/                      ✅ Infrastructure as Code
-│   ├── main.bicep             ✅ Main Bicep template
-│   ├── main.parameters.json   ✅ Parameters
-│   └── openai.bicep           ✅ OpenAI resource definition
-├── src/                        ✅ Application code
-│   ├── chat.py                ✅ Chat interface
-│   ├── config.py              ✅ Configuration loader
-│   └── requirements.txt       ✅ Python dependencies
-└── .gitignore                  ✅ Git ignore rules
-```
-
-## Tính năng ứng dụng
-
-### Giao diện Chat (`chat.py`)
-
-Ứng dụng chat bao gồm:
-
-- **Lịch sử hội thoại** - Duy trì ngữ cảnh giữa các tin nhắn
-- **Đếm token** - Theo dõi sử dụng và ước tính chi phí
-- **Xử lý lỗi** - Xử lý mượt mà giới hạn tần suất và lỗi API
-- **Ước tính chi phí** - Tính toán chi phí theo thời gian thực cho mỗi tin nhắn
-- **Hỗ trợ Streaming** - Phản hồi streaming tùy chọn
-
-### Các lệnh
-
-Khi đang chat, bạn có thể dùng:
-- `quit` or `exit` - Kết thúc phiên
-- `clear` - Xóa lịch sử hội thoại
-- `tokens` - Hiển thị tổng lượng token đã dùng
-- `cost` - Hiển thị ước tính tổng chi phí
-
-### Cấu hình (`config.py`)
-
-Nạp cấu hình từ biến môi trường:
-```python
-AZURE_OPENAI_ENDPOINT  # Từ Key Vault
-AZURE_OPENAI_API_KEY   # Từ Key Vault
-AZURE_OPENAI_MODEL     # Mặc định: gpt-4.1
-AZURE_OPENAI_MAX_TOKENS # Mặc định: 800
-```
-
-## Ví dụ sử dụng
-
-### Chat cơ bản
-
-```bash
-python chat.py
-```
-
-### Chat với mô hình tùy chỉnh
-
-```bash
-export AZURE_OPENAI_MODEL=gpt-35-turbo
-python chat.py
-```
-
-### Chat với Streaming
-
-```bash
-python chat.py --stream
-```
-
-### Ví dụ hội thoại
-
-```
-You: Explain Microsoft Foundry Models Service in 3 sentences.
-Assistant: Microsoft Foundry Models Service is Microsoft Azure's cloud platform offering 
-that provides access to OpenAI's powerful language models. It enables developers 
-to integrate capabilities like gpt-4.1 into their applications with enterprise-grade 
-security and compliance. The service includes features for content filtering, 
-abuse monitoring, and responsible AI practices.
-
-[Tokens used: 89 | Estimated cost: $0.0027]
-
-You: What models are available?
-Assistant: Microsoft Foundry Models Service offers several model families including gpt-4.1 
-(most capable), GPT-3.5-Turbo (faster and cost-effective), and Embeddings models 
-for vector search. Each model has different capabilities, pricing, and token limits.
-
-[Tokens used: 67 | Estimated cost: $0.0020]
-
-Total session: 156 tokens | $0.0047
-```
-
-## Quản lý chi phí
-
-### Giá token (gpt-4.1)
-
-| Mô hình | Đầu vào (mỗi 1K token) | Đầu ra (mỗi 1K token) |
-|-------|----------------------|------------------------|
-| gpt-4.1 | $0.03 | $0.06 |
-| GPT-3.5-Turbo | $0.0015 | $0.002 |
-
-### Ước tính chi phí hàng tháng
-
-Dựa trên mẫu sử dụng:
-
-| Mức sử dụng | Tin nhắn/Ngày | Token/Ngày | Chi phí hàng tháng |
-|-------------|--------------|------------|--------------|
-| **Nhẹ** | 20 messages | 3,000 tokens | $3-5 |
-| **Trung bình** | 100 messages | 15,000 tokens | $15-25 |
-| **Nặng** | 500 messages | 75,000 tokens | $75-125 |
-
-**Chi phí hạ tầng cơ bản:** $1-2/month (Key Vault + minimal compute)
-
-### Mẹo tối ưu chi phí
-
-```bash
-# 1. Sử dụng GPT-3.5-Turbo cho các tác vụ đơn giản hơn (rẻ hơn 20 lần)
-export AZURE_OPENAI_MODEL=gpt-35-turbo
-
-# 2. Giảm số token tối đa để phản hồi ngắn hơn
-export AZURE_OPENAI_MAX_TOKENS=400
-
-# 3. Theo dõi việc sử dụng token
-python chat.py --show-tokens
-
-# 4. Thiết lập cảnh báo ngân sách
-az consumption budget create \
-  --budget-name "openai-budget" \
-  --amount 50 \
-  --time-grain Monthly
-```
-
-## Giám sát
-
-### Xem sử dụng token
-
-```bash
-# Trong Cổng Azure:
-# Tài nguyên OpenAI → Số liệu → Chọn "Token Transaction"
-
-# Hoặc qua Azure CLI:
-az monitor metrics list \
-  --resource $(azd env get-value AZURE_OPENAI_RESOURCE_ID) \
-  --metric "TokenTransaction" \
-  --start-time $(date -u -d '1 hour ago' '+%Y-%m-%dT%H:%M:%S') \
-  --interval PT1M
-```
-
-### Xem nhật ký API
-
-```bash
-# Phát trực tiếp nhật ký chẩn đoán
-az monitor diagnostic-settings create \
-  --resource $(azd env get-value AZURE_OPENAI_RESOURCE_ID) \
-  --name openai-logs \
-  --logs '[{"category": "Audit", "enabled": true}]' \
-  --workspace $(azd env get-value LOG_ANALYTICS_WORKSPACE_ID)
-
-# Nhật ký truy vấn
-az monitor log-analytics query \
-  --workspace $(azd env get-value LOG_ANALYTICS_WORKSPACE_ID) \
-  --analytics-query "AzureDiagnostics | where Category == 'Audit' | top 10 by TimeGenerated"
-```
-
-## Khắc phục sự cố
-
-### Vấn đề: "Access Denied" Error
-
-**Triệu chứng:** 403 Forbidden khi gọi API
-
-**Giải pháp:**
-```bash
-# 1. Xác minh truy cập OpenAI đã được phê duyệt
-az cognitiveservices account show \
-  --name $(azd env get-value AZURE_OPENAI_NAME) \
-  --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
-
-# 2. Kiểm tra khóa API có chính xác không
-azd env get-value AZURE_OPENAI_API_KEY
-
-# 3. Xác minh định dạng URL điểm cuối
-azd env get-value AZURE_OPENAI_ENDPOINT
-# Nên là: https://[name].openai.azure.com/
-```
-
-### Vấn đề: "Rate Limit Exceeded"
-
-**Triệu chứng:** 429 Too Many Requests
-
-**Giải pháp:**
-```bash
-# 1. Kiểm tra hạn mức hiện tại
-az cognitiveservices account deployment show \
-  --name $(azd env get-value AZURE_OPENAI_NAME) \
-  --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
-  --deployment-name gpt-4.1
-
-# 2. Yêu cầu tăng hạn mức (nếu cần)
-# Đi tới Azure Portal → Tài nguyên OpenAI → Hạn mức → Yêu cầu tăng
-
-# 3. Triển khai logic thử lại (đã có trong chat.py)
-# Ứng dụng tự động thử lại với thời gian chờ tăng theo cấp số nhân
-```
-
-### Vấn đề: "Model Not Found"
-
-**Triệu chứng:** 404 error for deployment
-
-**Giải pháp:**
-```bash
-# 1. Liệt kê các triển khai có sẵn
-az cognitiveservices account deployment list \
-  --name $(azd env get-value AZURE_OPENAI_NAME) \
-  --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
-
-# 2. Xác minh tên mô hình trong môi trường
-echo $AZURE_OPENAI_MODEL
-
-# 3. Cập nhật thành tên triển khai chính xác
-export AZURE_OPENAI_MODEL=gpt-4.1  # hoặc gpt-35-turbo
-```
-
-### Vấn đề: Độ trễ cao
-
-**Triệu chứng:** Thời gian phản hồi chậm (>5 seconds)
-
-**Giải pháp:**
-```bash
-# 1. Kiểm tra độ trễ theo khu vực
-# Triển khai tới khu vực gần người dùng nhất
-
-# 2. Giảm max_tokens để có phản hồi nhanh hơn
-export AZURE_OPENAI_MAX_TOKENS=400
-
-# 3. Sử dụng streaming để cải thiện trải nghiệm người dùng
-python chat.py --stream
-```
-
-## Các thực hành bảo mật tốt nhất
-
-### 1. Bảo vệ khóa API
-
-```bash
-# Không bao giờ đưa khóa vào kho mã nguồn
-# Sử dụng Key Vault (đã được cấu hình)
-
-# Thường xuyên thay đổi khóa
-az cognitiveservices account keys regenerate \
-  --name $(azd env get-value AZURE_OPENAI_NAME) \
-  --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
-  --key-name key1
-```
-
-### 2. Triển khai lọc nội dung
-
-```python
-# Microsoft Foundry Models bao gồm bộ lọc nội dung tích hợp sẵn
-# Cấu hình trong Azure Portal:
-# Tài nguyên OpenAI → Bộ lọc nội dung → Tạo bộ lọc tùy chỉnh
-
-# Danh mục: Thù hận, Tình dục, Bạo lực, Tự làm hại
-# Mức độ lọc: Thấp, Trung bình, Cao
-```
-
-### 3. Sử dụng Managed Identity (Sản xuất)
-
-```bash
-# Đối với triển khai trong môi trường sản xuất, hãy sử dụng định danh được quản lý
-# thay vì khóa API (yêu cầu ứng dụng được lưu trữ trên Azure)
-
-# Cập nhật infra/openai.bicep để bao gồm:
-# identity: { type: 'SystemAssigned' }
-```
-
-## Phát triển
-
-### Chạy cục bộ
-
-```bash
-# Cài đặt các phụ thuộc
-pip install -r src/requirements.txt
-
-# Thiết lập biến môi trường
-export AZURE_OPENAI_ENDPOINT="https://[name].openai.azure.com/"
-export AZURE_OPENAI_API_KEY="your-api-key"
-export AZURE_OPENAI_MODEL="gpt-4.1"
-
-# Chạy ứng dụng
+export AZURE_OPENAI_ENDPOINT="$(azd env get-value AZURE_OPENAI_ENDPOINT)"
+export AZURE_OPENAI_MODEL="$(azd env get-value AZURE_OPENAI_MODEL)"
+KV_NAME="$(azd env get-value AZURE_KEY_VAULT_NAME)"
+export AZURE_OPENAI_API_KEY="$(az keyvault secret show \
+  --vault-name "$KV_NAME" --name openai-api-key --query value --output tsv)"
+
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -r src/requirements.txt
 python src/chat.py
 ```
 
-### Chạy kiểm thử
+Trong PowerShell, kích hoạt với `.\.venv\Scripts\Activate.ps1` và gán biến môi trường
+với `$env:AZURE_OPENAI_ENDPOINT = azd env get-value AZURE_OPENAI_ENDPOINT`
+(và tương tự cho mô hình). Lấy khóa API sử dụng
+`$env:AZURE_OPENAI_API_KEY = az keyvault secret show --vault-name $KV_NAME --name openai-api-key --query value -o tsv`.
+Đặt `$KV_NAME = azd env get-value AZURE_KEY_VAULT_NAME` trước.
 
-```bash
-# Cài đặt phụ thuộc cho kiểm thử
-pip install pytest pytest-cov
+Không in ra, cam kết, hoặc dán khóa API vào các báo cáo sự cố. CLI đọc các biến môi trường của tiến trình;
+nó **không** lấy các bí mật từ Key Vault hoặc tải các tệp `.env`.
+`config.py` xác thực điểm cuối, giới hạn token, và nhiệt độ khi khởi động.
 
-# Chạy các bài kiểm thử
-pytest tests/ -v
+Kết quả mong đợi (nội dung và sử dụng có thể khác nhau):
 
-# Với báo cáo độ bao phủ
-pytest tests/ --cov=src --cov-report=html
+```text
+Azure OpenAI Chat Application
+Model: gpt-4.1
+...
+You: Say hello in one sentence.
+Assistant: Hello! How can I help you today?
+[Tokens: ... | Cost: $...]
 ```
 
-### Cập nhật triển khai mô hình
+Các lệnh: `stats` hiển thị tổng, `clear` xóa lịch sử hội thoại, và
+`quit`/`exit` kết thúc phiên. Không có lệnh `--stream`, `--show-tokens`, `tokens`,
+hoặc `cost`.
+
+## Xác minh việc triển khai
+
+Sau khi tải các biến shell ở trên:
 
 ```bash
-# Triển khai phiên bản mô hình khác
-az cognitiveservices account deployment create \
-  --name $(azd env get-value AZURE_OPENAI_NAME) \
-  --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
-  --deployment-name gpt-35-turbo \
-  --model-name gpt-35-turbo \
-  --model-version "0613" \
-  --model-format OpenAI \
-  --sku-capacity 20 \
-  --sku-name "Standard"
+curl --fail-with-body \
+  "${AZURE_OPENAI_ENDPOINT%/}/openai/deployments/${AZURE_OPENAI_MODEL}/chat/completions?api-version=2024-10-21" \
+  -H "Content-Type: application/json" \
+  -H "api-key: $AZURE_OPENAI_API_KEY" \
+  -d '{"messages":[{"role":"user","content":"Say hello!"}],"max_tokens":50}'
+
+az keyvault secret list --vault-name "$KV_NAME" --query "[].name" -o table
 ```
 
-## Dọn dẹp
+Thành công: API trả về HTTP 200 với `choices[0].message.content` và `usage`;
+kho lưu trữ liệt kê `openai-api-key` và `openai-endpoint`. Một triển khai ARM thành công
+một mình không xác minh được sự suy luận.
+
+## Tệp và cấu hình
+
+```text
+azure.yaml                         # Infrastructure-only AZD project
+infra/main.bicep                   # Subscription deployment
+infra/main.parameters.json         # Environment, location, principal ID
+infra/resources/openai.bicep       # Account + model
+infra/resources/keyvault.bicep     # Vault + deploying user's secret access policy
+infra/resources/secrets.bicep      # Writes secrets, no key output
+src/chat.py                        # Interactive CLI
+src/config.py                      # Environment validation
+src/requirements.txt               # Python packages
+```
+
+Để thay đổi mô hình/phiên bản/công suất đã cấp, chỉnh sửa mặc định trong
+`infra/main.bicep` và chạy `azd provision`. Việc đặt `AZURE_OPENAI_MODEL` trong
+shell của bạn chỉ chọn **tên triển khai hiện có**; nó không triển khai mô hình khác.
+
+| Biến thời gian chạy | Mặc định / nguồn |
+|---|---|
+| `AZURE_OPENAI_ENDPOINT` | Bắt buộc; đầu ra không bí mật azd |
+| `AZURE_OPENAI_API_KEY` | Bắt buộc; lấy từ Key Vault |
+| `AZURE_OPENAI_MODEL` | `gpt-4.1`; tên triển khai Azure |
+| `AZURE_OPENAI_MAX_TOKENS` | 800 (phạm vi xác thực 1–4096) |
+| `AZURE_OPENAI_TEMPERATURE` | 0.7 (phạm vi 0–2) |
+| `AZURE_OPENAI_INPUT_PRICE_PER_1K` | 0.002 USD; tỷ lệ đầu vào chưa cache minh họa |
+| `AZURE_OPENAI_OUTPUT_PRICE_PER_1K` | 0.008 USD; tỷ lệ đầu ra minh họa |
+
+## Chi phí và giới hạn bảo mật
+
+Hiển thị chi phí là một **ước tính**, không phải hóa đơn Azure. Nó nhân lượng token API
+sử dụng với các tỷ lệ đã cấu hình và không tính đến giảm giá đầu vào đã được cache,
+khác biệt vùng/kích thước SKU, thuế, thay đổi giá hoặc các cuộc gọi thất bại/thử lại.
+Ghi đè **cả hai tỷ lệ** khi sử dụng mô hình hoặc SKU khác và xác minh
+[bảng giá Azure OpenAI hiện tại](https://azure.microsoft.com/pricing/details/cognitive-services/openai-service/).
+
+Ví dụ minh họa, 100 yêu cầu sử dụng 500 token đầu vào chưa được lưu bộ nhớ đệm và 200 token đầu ra mỗi yêu cầu
+với mức phí mặc định là `100 × (500/1000 × .002 + 200/1000 × .008) = $0.26`.
+Các hoạt động Key Vault/lưu trữ chịu phí riêng. Không có phí cố định 50$/tháng
+cho CLI cục bộ này và không có máy chủ xử lý trong mẫu.
+
+Vault sử dụng chính sách truy cập cho chủ thể triển khai; đây không phải là ví dụ ứng dụng RBAC hoặc
+quản lý danh tính. Các điểm cuối công khai và xác thực bằng khóa API
+được sử dụng cho mục đích giảng dạy. Hạn chế quyền và thêm các kiểm soát danh tính/mạng phù hợp
+trước khi điều chỉnh cho môi trường sản xuất.
+
+## Các bài tập thực hành
+
+### 1. Xác minh ngữ cảnh và đặt lại nó
+
+**Bắt đầu:** chạy CLI. **Mục tiêu:** quan sát lịch sử.
+Nói “Nhớ từ cedar,” sau đó hỏi “Từ nào tôi đã yêu cầu bạn nhớ?”
+Chạy `stats`; hai lượt thành công nên tính là hai tin nhắn đã trao đổi.
+Chạy `clear` và `stats`; các tin nhắn đã trao đổi sẽ là không (tổng token vẫn giữ nguyên).
+Cách diễn đạt chính xác của mô hình không mang tính xác định.
+
+### 2. Thay đổi giới hạn phản hồi
+
+**Bắt đầu:** thoát CLI, giữ nguyên shell.
+Chạy `export AZURE_OPENAI_MAX_TOKENS=100`, khởi động lại `python src/chat.py`, và hỏi
+một lời giải thích ngắn gọn về azd. Kiểm tra rằng biểu ngữ hiển thị 100.
+Phục hồi với `unset AZURE_OPENAI_MAX_TOKENS`. Giới hạn phản hồi nhỏ hơn không
+làm giảm số token lịch sử đã gửi.
+
+### Các vấn đề phổ biến
+
+- **Thiếu biến môi trường:** việc cung cấp không xuất giá trị shell;
+  lặp lại các bước xuất. Một terminal mới cần các biến này lại.
+- **403 đọc Key Vault:** xác minh đăng ký/đăng nhập Azure CLI và chủ thể
+  trong chính sách truy cập kho. Việc thay đổi chính sách có thể mất thời gian để truyền đi.
+- **404 suy luận:** kiểm tra tên triển khai, điểm cuối và trạng thái triển khai.
+- **429 suy luận:** chờ giới hạn tần suất đặt lại; xác minh hạn ngạch mô hình theo khu vực.
+  CLI loại bỏ các lượt thất bại khỏi lịch sử nên việc thử lại sẽ không gây trùng lặp.
+- **Độ dài ngữ cảnh:** mẫu không cắt bớt các cuộc trò chuyện dài; sử dụng `clear`.
+- **Mô hình không khả dụng/ngưng sử dụng:** tham khảo tình trạng sẵn có của mô hình hiện tại và cập nhật
+  mô hình/phiên bản/SKU cùng nhau; phiên bản API và phiên bản mô hình là các thiết lập khác nhau.
+
+## Dọn dẹp và các bước tiếp theo
 
 ```bash
-# Xóa tất cả tài nguyên Azure
-azd down --force --purge
-
-# Việc này sẽ xóa:
-# - Dịch vụ OpenAI
-# - Key Vault (với chế độ xóa mềm 90 ngày)
-# - Nhóm tài nguyên
-# - Tất cả các triển khai và cấu hình
+azd down
+unset AZURE_OPENAI_API_KEY
 ```
 
-## Bước tiếp theo
+Giữ lại xóa mềm của Key Vault là bảy ngày; việc xoá hoàn toàn đòi hỏi quyền riêng biệt.
+Không có bộ kiểm thử cam kết; không chạy lệnh `pytest tests/` không tồn tại.
+Thêm kiểm thử API mô phỏng trước khi mở rộng mã.
 
-### Mở rộng ví dụ này
-
-1. **Thêm Web Interface** - Xây dựng frontend React/Vue
-   ```bash
-   # Thêm dịch vụ frontend vào azure.yaml
-   # Triển khai lên Azure Static Web Apps
-   ```
-
-2. **Implement RAG** - Thêm tìm kiếm tài liệu với Azure AI Search
-   ```python
-   # Tích hợp Azure AI Search
-   # Tải lên tài liệu và tạo chỉ mục vector
-   ```
-
-3. **Add Function Calling** - Kích hoạt sử dụng công cụ
-   ```python
-   # Định nghĩa các hàm trong chat.py
-   # Cho phép gpt-4.1 gọi các API bên ngoài
-   ```
-
-4. **Multi-Model Support** - Triển khai nhiều mô hình
-   ```bash
-   # Thêm gpt-35-turbo và các mô hình embeddings
-   # Triển khai logic định tuyến mô hình
-   ```
-
-### Ví dụ liên quan
-
-- **[Retail Multi-Agent](../retail-scenario.md)** - Kiến trúc đa tác nhân nâng cao
-- **[Database App](../../../../examples/database-app)** - Thêm lưu trữ bền vững
-- **[Container Apps](../../../../examples/container-app)** - Triển khai dưới dạng dịch vụ container
-
-### Tài nguyên học tập
-
-- 📚 [AZD For Beginners Course](../../README.md) - Trang chủ khóa học
-- 📚 [Microsoft Foundry Models Documentation](https://learn.microsoft.com/azure/ai-services/openai/) - Tài liệu chính thức
-- 📚 [OpenAI API Reference](https://platform.openai.com/docs/api-reference) - Chi tiết API
-- 📚 [Responsible AI](https://www.microsoft.com/ai/responsible-ai) - Thực hành tốt nhất
-
-## Tài nguyên bổ sung
-
-### Tài liệu
-- **[Microsoft Foundry Models Service](https://learn.microsoft.com/azure/ai-services/openai/)** - Hướng dẫn đầy đủ
-- **[gpt-4.1 Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - Khả năng của mô hình
-- **[Content Filtering](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - Tính năng an toàn
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - Tài liệu azd
-
-### Hướng dẫn
-- **[OpenAI Quickstart](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - Triển khai lần đầu
-- **[Chat Completions](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - Xây dựng ứng dụng chat
-- **[Function Calling](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - Tính năng nâng cao
-
-### Công cụ
-- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - Playground trên web
-- **[Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)** - Viết prompt tốt hơn
-- **[Token Calculator](https://platform.openai.com/tokenizer)** - Ước tính sử dụng token
-
-### Cộng đồng
-- **[Azure AI Discord](https://discord.gg/azure)** - Nhận trợ giúp từ cộng đồng
-- **[GitHub Discussions](https://github.com/Azure-Samples/openai/discussions)** - Diễn đàn Hỏi & Đáp
-- **[Azure Blog](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - Cập nhật mới nhất
-
----
-
-**🎉 Thành công!** Bạn đã triển khai Microsoft Foundry Models và xây dựng một ứng dụng chat hoạt động. Bắt đầu khám phá khả năng của gpt-4.1 và thử nghiệm với các prompt và trường hợp sử dụng khác nhau.
-
-**Có câu hỏi?** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) hoặc xem [FAQ](../../resources/faq.md)
-
-**Cảnh báo chi phí:** Hãy nhớ chạy `azd down` khi kết thúc việc thử nghiệm để tránh phí liên tục (~$50-100/month cho mức sử dụng đang hoạt động).
+[Ví dụ Container](../../../../examples/container-app) · [Kiến trúc bán lẻ mẫu](../retail-scenario.md) ·
+[Trang khóa học](../../README.md) · [Báo cáo sự cố](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 

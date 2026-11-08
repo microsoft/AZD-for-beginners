@@ -1,19 +1,19 @@
-# Chương 1: Nền tảng & Bắt đầu Nhanh
+# Chương 1: Nền tảng & Bắt đầu nhanh
 
-**📚 Khóa học**: [AZD For Beginners](../../README.md) | **⏱️ Thời lượng**: 30-45 phút | **⭐ Độ phức tạp**: Người mới bắt đầu
+**📚 Khóa học**: [AZD Cho Người Mới Bắt Đầu](../../README.md) | **⏱️ Thời lượng**: 75-120 phút bao gồm triển khai đầu tiên; bài tập bổ sung sẽ mất nhiều thời gian hơn | **⭐ Độ phức tạp**: Người mới bắt đầu
 
 ---
 
 ## Tổng quan
 
-Chương này giới thiệu những kiến thức cơ bản về Azure Developer CLI (azd). Bạn sẽ học các khái niệm cốt lõi, cài đặt công cụ và triển khai ứng dụng đầu tiên lên Azure.
+Chương này giới thiệu các kiến thức cơ bản về Azure Developer CLI (azd). Bạn sẽ học các khái niệm cốt lõi, cài đặt công cụ và triển khai ứng dụng đầu tiên lên Azure.
 
-> Đã xác thực trên `azd 1.27.1` vào tháng 7 năm 2026.
+> Mục tiêu xem xét lệnh và cấu hình: `azd 1.37.2` (Tháng 11 năm 2026). Việc cung cấp Azure trực tiếp không được chạy trong quá trình đánh giá.
 
 ## Mục tiêu học tập
 
 Sau khi hoàn thành chương này, bạn sẽ:
-- Hiểu Azure Developer CLI là gì và cách nó khác với Azure CLI
+- Hiểu Azure Developer CLI là gì và nó khác Azure CLI như thế nào
 - Cài đặt và cấu hình AZD trên nền tảng của bạn
 - Triển khai ứng dụng đầu tiên lên Azure bằng `azd up`
 - Dọn dẹp tài nguyên bằng `azd down`
@@ -24,17 +24,17 @@ Sau khi hoàn thành chương này, bạn sẽ:
 
 | # | Bài học | Mô tả | Thời gian |
 |---|--------|-------------|------|
-| 1 | [Cơ bản về AZD](azd-basics.md) | Các khái niệm cốt lõi, thuật ngữ, và cấu trúc dự án | 15 phút |
+| 1 | [Cơ bản về AZD](azd-basics.md) | Các khái niệm cốt lõi, thuật ngữ và cấu trúc dự án | 15 phút |
 | 2 | [Cài đặt & Thiết lập](installation.md) | Hướng dẫn cài đặt theo nền tảng | 10 phút |
 | 3 | [Dự án đầu tiên của bạn](first-project.md) | Thực hành: Triển khai ứng dụng web lên Azure | 20 phút |
-| 4 | [Mang ứng dụng của bạn vào](bring-your-own-app.md) | Thêm azd vào dự án hiện có của bạn | 15 phút |
-| 5 | [Dev Containers & Codespaces](dev-containers.md) | Môi trường azd có thể tái tạo với dev containers | 15 phút |
+| 4 | [Mang ứng dụng của bạn đến](bring-your-own-app.md) | Thêm azd vào dự án hiện có của bạn | 15 phút |
+| 5 | [Dev Containers & Codespaces](dev-containers.md) | Môi trường azd có thể tái lập với dev containers | 15 phút |
 
 ---
 
-## ✅ Bắt đầu tại đây: Xác thực cài đặt của bạn
+## ✅ Bắt đầu tại đây: Xác nhận Cấu hình của bạn
 
-Trước khi bắt đầu, hãy xác nhận máy tính cục bộ của bạn đã sẵn sàng cho mẫu Chương 1:
+Trước khi bắt đầu, hãy xác nhận máy cục bộ của bạn đã sẵn sàng cho mẫu Chapter 1:
 
 **Windows:**
 ```powershell
@@ -46,25 +46,27 @@ Trước khi bắt đầu, hãy xác nhận máy tính cục bộ của bạn đ
 bash ./validate-setup.sh
 ```
 
-Nếu script báo thiếu công cụ, hãy sửa các công cụ đó trước rồi tiếp tục với chương.
+Nếu script báo thiếu công cụ, hãy sửa lỗi đó trước rồi tiếp tục với chương.
 
 ---
 
-## 🚀 Bắt đầu Nhanh
+## 🚀 Bắt đầu nhanh
 
 ```bash
-# Kiểm tra cài đặt
+# Check installation
 azd version
 
-# Xác thực cho AZD
-# Tùy chọn: đăng nhập az nếu bạn định chạy lệnh Azure CLI trực tiếp
+# Authenticate for AZD
+# Optional: az login if you plan to run Azure CLI commands directly
 azd auth login
 
-# Triển khai ứng dụng đầu tiên của bạn
-azd init --template todo-nodejs-mongo
+# Deploy your first app
+mkdir chapter1-demo
+cd chapter1-demo
+azd init --template todo-nodejs-mongo .
 azd up
 
-# Dọn dẹp khi hoàn thành
+# Clean up when done
 azd down --force --purge
 ```
 
@@ -72,14 +74,14 @@ azd down --force --purge
 
 ## ✅ Tiêu chí thành công
 
-Sau khi hoàn thành chương này, bạn nên có khả năng:
+Sau khi hoàn thành chương này, bạn cần có khả năng:
 
 ```bash
-azd version              # Hiển thị phiên bản đã cài đặt
-azd init --template todo-nodejs-mongo  # Khởi tạo dự án
-azd up                   # Triển khai lên Azure
-azd show                 # Hiển thị URL ứng dụng đang chạy
-azd down --force --purge # Dọn dẹp tài nguyên
+azd version              # Shows installed version
+azd env list             # Lists the initialized environment
+azd up                   # Deploys to Azure
+azd show                 # Displays running app URL
+azd down --force --purge # Cleans up resources
 ```
 
 ---
@@ -88,7 +90,7 @@ azd down --force --purge # Dọn dẹp tài nguyên
 
 | Hướng đi | Chương |
 |-----------|---------|
-| **Tiếp theo** | [Chương 2: Phát triển ưu tiên AI](../chapter-02-ai-development/README.md) |
+| **Tiếp theo** | [Chương 2: Phát triển AI-First](../chapter-02-ai-development/README.md) |
 | **Bỏ qua đến** | [Chương 3: Cấu hình](../chapter-03-configuration/README.md) |
 
 ---

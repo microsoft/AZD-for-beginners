@@ -1,433 +1,227 @@
-# Eenvoudige Flask-API - Container App-voorbeeld
+# Eenvoudige Flask API — Azure Container Apps
 
-**Leerpad:** Beginner ⭐ | **Tijd:** 25-35 minuten | **Kosten:** $0-15/maand
+**Niveau:** Beginner · **Tijd:** 30–45 minuten inclusief setup
 
-Een complete, werkende Python Flask REST-API die is ingezet naar Azure Container Apps met behulp van Azure Developer CLI (azd). Dit voorbeeld demonstreert implementatie van containers, automatische schaling en basisprincipes van monitoring.
+Zet een Python Flask CRUD API uit met Azure Developer CLI (azd). Broncode, Dockerfile,
+Bicep en uitrolparameters zijn inbegrepen. Dit is een **leersample**, geen
+productieklare API.
 
-## 🎯 Wat je leert
+## Wat je gaat leren
 
-- Implementeer een gecontaineriseerde Python-toepassing naar Azure
-- Configureer automatische schaling met scale-to-zero
-- Implementeer health probes en readiness-controles
-- Monitor applicatielogs en metrics
-- Gebruik Azure Developer CLI voor snelle implementatie
-
-## 📦 Wat is inbegrepen
-
-✅ **Flask-toepassing** - Volledige REST-API met CRUD-bewerkingen (`src/app.py`)  
-✅ **Dockerfile** - Productiegereed containerconfiguratie  
-✅ **Bicep-infrastructuur** - Container Apps-omgeving en API-implementatie  
-✅ **AZD-configuratie** - Implementatie met één opdracht  
-✅ **Health probes** - Liveness- en readiness-controles geconfigureerd  
-✅ **Auto-scaling** - 0-10 replica's op basis van HTTP-belasting  
-
-## Architectuur
+- Bouw en publiceer een container via azd.
+- Configureer ingress en liveness/readiness probes.
+- Verifieer CRUD-responsen en inspecteer applicatielogs.
+- Begrijp waarom in-memory data ongeschikt is voor duurzame applicaties.
 
 ```mermaid
-graph TD
-    subgraph ACA[Azure Container Apps-omgeving]
-        Flask[Flask API-container<br/>Health-eindpunten<br/>REST-API<br/>Automatisch schalen 0-10 replica's]
-        AppInsights[Application Insights]
-    end
+flowchart LR
+    Client -->|HTTPS| API[Flask API — Container App]
+    API --> Memory[Process-local item dictionary]
+    API -->|stdout| Logs[Container Apps / Log Analytics]
 ```
+
+**Belangrijk:** items worden in één proces gehouden. Standaard is **één Gunicorn worker,
+0–1 replicas**, met opzet om inconsistente data over workers/replica’s te voorkomen.
+Items gaan verloren bij herstart, revisiewijziging, of scale-to-zero. Meer replicas
+vraagt om gedeelde persistente opslag. De API heeft geen authenticatie of autorisatie.
 
 ## Vereisten
 
-### Vereist
-- **Azure Developer CLI (azd)** - [Installatiehandleiding](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure subscription** - [Free account](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Installeer Docker](https://www.docker.com/products/docker-desktop/) (voor lokaal testen)
-
-### Controleer vereisten
+- [Huidige stabiele azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+  (uitgebrachte versie ten tijde van review: 1.37.2).
+- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) voor verificatie.
+- Docker met draaiende daemon; vereist voor de standaard lokale image-build.
+- Azure-abonnement, rechten voor resource-creatie en regionaal quotum Container Apps.
+- Bash voor onderstaande commando’s (of gelijkwaardige PowerShell).
+- Python 3.11 voor optionele lokale ontwikkeling.
 
 ```bash
-# Controleer azd-versie (vereist 1.5.0 of hoger)
 azd version
-
-# Controleer Azure-aanmelding
+az version
+docker info
 azd auth login
-
-# Controleer Docker (optioneel, voor lokaal testen)
-docker --version
+az login
 ```
 
-## ⏱️ Implementatietijdlijn
-
-| Fase | Duur | Wat gebeurt er |
-|-------|----------|--------------||
-| Omgeving instellen | 30 seconden | Maak azd-omgeving |
-| Container bouwen | 2-3 minuten | Docker build van Flask-app |
-| Infrastructuur voorzien | 3-5 minuten | Maak Container Apps, registry en monitoring |
-| Applicatie implementeren | 2-3 minuten | Push image en implementeer naar Container Apps |
-| **Totaal** | **8-12 minuten** | Volledige implementatie gereed |
+De CLI tools hebben aparte login-sessies. Gebruik hetzelfde abonnement in beide.
 
 ## Snelstart
 
+Vanuit de root van de repository:
+
 ```bash
-# Navigeer naar het voorbeeld
 cd examples/container-app/simple-flask-api
-
-# Initialiseer de omgeving (kies een unieke naam)
-azd env new myflaskapi
-
-# Implementeer alles (infrastructuur + applicatie)
+azd env new flask-demo
 azd up
-# Er wordt je gevraagd om:
-# 1. Selecteer een Azure-abonnement
-# 2. Kies een locatie (bijv. eastus2)
-# 3. Wacht 8-12 minuten op de implementatie
-
-# Haal je API-eindpunt op
-azd env get-values
-
-# Test de API
-curl $(azd env get-value API_ENDPOINT)/health
-```
-
-**Verwachte uitvoer:**
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z",
-  "service": "simple-flask-api",
-  "version": "1.0.0"
-}
-```
-
-## ✅ Controleer implementatie
-
-### Stap 1: Controleer de implementatiestatus
-
-```bash
-# Bekijk uitgerolde services
-azd show
-
-# Verwachte uitvoer toont:
-# - Service: api
-# - Eindpunt: https://ca-api-[env].xxx.azurecontainerapps.io
-# - Status: Actief
-```
-
-### Stap 2: Test API-eindpunten
-
-```bash
-# Haal API-eindpunt op
 API_URL=$(azd env get-value API_ENDPOINT)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
+API_NAME=$(azd env get-value API_NAME)
+curl --fail-with-body "${API_URL}/health"
+```
 
-# Controleer gezondheid
-curl $API_URL/health
+Verwacht: HTTP 200 en JSON met `"status":"healthy"`,
+`"service":"simple-flask-api"`, en een huidige UTC-tijdstempel.
+Provisioning en image-build duurt meestal enkele minuten; tijd kan variëren.
 
-# Controleer root-eindpunt
-curl $API_URL/
+Aanvangsprovisioning gebruikt een publieke hello-world image die luistert op poort 80.
+`azure.yaml` selecteert `infra/app/api.bicep` en de bijbehorende parameterbestand voor
+service-uitrol, hiermee wordt de image, ingress en probes op poort 8000 gezet.
+Verwijder die uitrolparameters niet.
 
-# Maak een item aan
-curl -X POST $API_URL/api/items \
+## Verifieer CRUD
+
+Voer de volgende commando’s achtereenvolgens uit terwijl dezelfde replica actief blijft:
+
+```bash
+# Create: HTTP 201; note the returned id (1 for a fresh process).
+curl -i -X POST "${API_URL}/api/items" \
   -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "My first item"}'
+  -d '{"name":"Test Item","description":"My first item"}'
 
-# Haal alle items op
-curl $API_URL/api/items
+# Read list: HTTP 200, total 1 in a fresh process.
+curl --fail-with-body "${API_URL}/api/items"
+
+# Replace 1 if your create response returned another id.
+curl --fail-with-body "${API_URL}/api/items/1"
+curl -i -X PUT "${API_URL}/api/items/1" \
+  -H "Content-Type: application/json" -d '{"name":"Updated Item"}'
+curl -i -X DELETE "${API_URL}/api/items/1"
+curl -i "${API_URL}/api/items/1"
 ```
 
-**Succescriteria:**
-- ✅ Health-endpoint retourneert HTTP 200
-- ✅ Root-endpoint toont API-informatie
-- ✅ POST maakt item aan en retourneert HTTP 201
-- ✅ GET geeft aangemaakte items terug
+Succes: POST 201, leest/PUT 200, DELETE 204 zonder body, dan ontbrekend item 404.
+Foutieve/niet-object JSON of een lege naam geeft 400 terug.
+Als een item tussen requests verdwijnt, controleer op herstart of scale-to-zero;
+dit is een opzet voor een in-memory beperking, geen persistentie.
 
-### Stap 3: Bekijk logs
+| Endpoint | Methoden |
+|---|---|
+| `/` | GET — service-informatie |
+| `/health` | GET — liveness/readiness |
+| `/api/items` | GET, POST |
+| `/api/items/{id}` | GET, PUT, DELETE |
+
+## Logs en configuratie
 
 ```bash
-# Bekijk live-logboeken met azd monitor
-azd monitor --logs
-
-# Of gebruik de Azure CLI:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# Je zou het volgende moeten zien:
-# - Opstartmeldingen van Gunicorn
-# - HTTP-aanvraaglogboeken
-# - Informatielogboeken van de applicatie
+az containerapp logs show --name "$API_NAME" --resource-group "$RG_NAME" --follow
 ```
 
-## Projectstructuur
+Verwacht: Gunicorn startup, toegangslogs van verzoeken, en applicatieberichten.
+`azd monitor --logs` opent een portalweergave; het streamt niet naar de terminal.
+Application Insights is ingericht maar **niet geïnstrumenteerd door deze Flask code**;
+gebruik Container Apps/Log Analytics voor stdout logs.
 
+Bewerk `infra/app/api.bicep` voor CPU/geheugen, replica limits of schaalregels, en voer dan
+`azd up` uit. Standaard zijn 0,5 vCPU, 1 GiB, minimaal 0 / maximaal 1 replica, en een
+HTTP-drempel van 50 gelijktijdige aanvragen. Scale-to-zero kan koude-start vertraging toevoegen.
+
+Willekeurige `azd env set MAX_REPLICAS`, `API_KEY`, `LOG_LEVEL` of
+`SCALE_TO_ZERO_TIMEOUT` waarden zijn **niet aangesloten op deze template of app**.
+Een waarde instellen maakt deze niet automatisch tot runtime-omgevingsvariabele.
+De image bindt expliciet poort 8000; werk Dockerfile, Bicep ingress en probes
+samen bij als de poort verandert.
+
+## Bestanden
+
+```text
+azure.yaml
+infra/main.bicep
+infra/main.parameters.json
+infra/app/container-apps.bicep       # Environment, registry, monitoring
+infra/app/api.bicep                  # App, ingress, probes, scale settings
+infra/app/api.parameters.json        # Image and resource values for azd deploy
+src/app.py
+src/Dockerfile
+src/requirements.txt
 ```
-simple-flask-api/
-├── azure.yaml              # AZD configuration
-├── infra/
-│   ├── main.bicep         # Main infrastructure
-│   ├── main.parameters.json
-│   └── app/
-│       ├── container-env.bicep
-│       └── api.bicep
-└── src/
-    ├── app.py             # Flask application
-    ├── requirements.txt
-    └── Dockerfile
-```
 
-## API-eindpunten
+## Lokale ontwikkeling
 
-| Eindpunt | Methode | Beschrijving |
-|----------|--------|-------------|
-| `/health` | GET | Gezondheidscontrole |
-| `/api/items` | GET | Geef alle items weer |
-| `/api/items` | POST | Maak nieuw item aan |
-| `/api/items/{id}` | GET | Specifiek item ophalen |
-| `/api/items/{id}` | PUT | Item bijwerken |
-| `/api/items/{id}` | DELETE | Verwijder item |
-
-## Configuratie
-
-### Omgevingsvariabelen
+Vanuit deze voorbeeldmap:
 
 ```bash
-# Stel aangepaste configuratie in
-azd env set PORT 8000
-azd env set LOG_LEVEL info
-azd env set MAX_REPLICAS 20
+python -m venv .venv
+source .venv/bin/activate  # PowerShell: .\.venv\Scripts\Activate.ps1
+python -m pip install -r src/requirements.txt
+python src/app.py
 ```
 
-### Schaalconfiguratie
-
-De API schaalt automatisch op basis van HTTP-verkeer:
-- **Min Replicas**: 0 (schaalt naar nul wanneer inactief)
-- **Max Replicas**: 10
-- **Gelijktijdige verzoeken per replica**: 50
-
-## Ontwikkeling
-
-### Lokaal uitvoeren
+Test in een ander terminalvenster `http://localhost:8000/health` en de CRUD endpoints.
+Of bouw en draai de daadwerkelijke image:
 
 ```bash
-# Installeer afhankelijkheden
-cd src
-pip install -r requirements.txt
-
-# Voer de app uit
-python app.py
-
-# Test lokaal
-curl http://localhost:8000/health
-```
-
-### Container bouwen en testen
-
-```bash
-# Docker-image bouwen
 docker build -t flask-api:local ./src
-
-# Container lokaal uitvoeren
-docker run -p 8000:8000 flask-api:local
-
-# Container testen
-curl http://localhost:8000/health
+docker run --rm -p 8000:8000 flask-api:local
 ```
 
-## Implementatie
+Voor alleen codewijzigingen na de eerste uitrol, voer `azd deploy api` uit.
+Voor Bicep-wijzigingen, voer `azd up` uit om opnieuw te provisioneren en uit te rollen.
 
-### Volledige implementatie
+## Praktische oefeningen
+
+### 1. Valideer afwijzing van invoer
+
+**Startpunt:** uitgerolde API, `API_URL` hierboven.
+**Doel:** controleer dat de API ongeldige JSON-vormen en ontbrekende namen weigert.
 
 ```bash
-# Implementeer infrastructuur en applicatie
-azd up
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '[]'
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '{"name":""}'
 ```
 
-### Alleen code-implementatie
+**Succescriteria / oplossing:** beide geven 400 terug met een JSON-fout, niet 500.
+**Veelvoorkomend probleem:** het weglaten van de JSON content-type header.
+
+### 2. Voeg een read-only versie endpoint toe
+
+**Startpunt:** `src/app.py`. **Doel:** breid uit en rol de API opnieuw uit.
+Voeg dit toe vóór het `if __name__ == '__main__':` blok:
+
+```python
+@app.route('/version', methods=['GET'])
+def version():
+    return jsonify({'version': '1.0.0'})
+```
+
+Voer `azd deploy api` uit, daarna `curl --fail-with-body "${API_URL}/version"`.
+**Succescriteria:** HTTP 200 en `{"version":"1.0.0"}`.
+**Veelvoorkomend probleem:** de route na de blokkerende `app.run()` call plaatsen wanneer
+getest met `python src/app.py`.
+
+### Kenniscontrole
+
+Waarom is één worker onvoldoende voor duurzame data? Omdat zelfs één proces zijn
+woordenboek verliest bij herstart. Een productieversie heeft persistente gedeelde opslag,
+authenticatie, autorisatie, migraties, tests, en operationele monitoring nodig.
+
+## Kosten en probleemoplossing
+
+Dit is geen gegarandeerde gratis uitrol: het Basic register en logopslag/-inname
+kunnen kosten veroorzaken, zelfs als app compute op nul staat. Gebruik de
+[prijscalculator](https://azure.microsoft.com/pricing/calculator/) voor jouw regio.
+
+- **Docker build mislukt:** controleer `docker info`, netwerktoegang, en afhankelijkheden.
+- **Ongezonde app:** bekijk console-/systemlogs en verifieer image-poort, ingress,
+  en probes zijn consistent. Een placeholder mag niet geprobed worden op de Flask-poort.
+- **403/permissions:** controleer abonnement en permissies voor resource-creatie.
+- **Items verdwijnen:** in-memory state reset bij herstart/scale-to-zero; voeg een database toe
+  voor duurzame functionaliteit.
+
+## Opruimen en volgende stappen
 
 ```bash
-# Implementeer alleen applicatiecode (infrastructuur ongewijzigd)
-azd deploy api
+azd down
 ```
 
-### Configuratie bijwerken
+Bekijk de verwijderingsprompt en verifieer dat de speciale resourcegroep is verwijderd.
+Gebruik geen destructieve opruiming op een resourcegroep met niet-gerelateerde data.
 
-```bash
-# Werk omgevingsvariabelen bij
-azd env set API_KEY "new-api-key"
-
-# Opnieuw uitrollen met nieuwe configuratie
-azd deploy api
-```
-
-## Monitoring
-
-### Bekijk logs
-
-```bash
-# Live-logs streamen met azd monitor
-azd monitor --logs
-
-# Of gebruik de Azure CLI voor Container Apps:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# Bekijk de laatste 100 regels
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-```
-
-### Monitor metrics
-
-```bash
-# Open het Azure Monitor-dashboard
-azd monitor --overview
-
-# Bekijk specifieke statistieken
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "Requests,ResponseTime"
-```
-
-## Testen
-
-### Gezondheidscontrole
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/health
-```
-
-Verwachte reactie:
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z"
-}
-```
-
-### Item aanmaken
-
-```bash
-curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/items \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "A test item"}'
-```
-
-### Alle items ophalen
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
-```
-
-## Kostenoptimalisatie
-
-Deze implementatie gebruikt scale-to-zero, dus je betaalt alleen wanneer de API verzoeken verwerkt:
-
-- **Inactieve kosten**: ~ $0/maand (geschaald naar nul)
-- **Actieve kosten**: ~ $0.000024/seconde per replica
-- **Verwachte maandelijkse kosten** (licht gebruik): $5-15
-
-### Kosten verder verlagen
-
-```bash
-# Schaal het maximale aantal replica's omlaag voor dev
-azd env set MAX_REPLICAS 3
-
-# Gebruik een kortere idle-timeout
-azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 minuten
-```
-
-## Problemen oplossen
-
-### Container start niet
-
-```bash
-# Controleer containerlogboeken met de Azure CLI
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-
-# Controleer of Docker-images lokaal worden gebouwd
-docker build -t test ./src
-```
-
-### API niet bereikbaar
-
-```bash
-# Controleer of ingress extern is
-az containerapp show --name api --resource-group rg-simple-flask-api \
-  --query properties.configuration.ingress.external
-```
-
-### Hoge responstijden
-
-```bash
-# Controleer CPU-/geheugengebruik
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "CPUPercentage,MemoryPercentage"
-
-# Schaal middelen op indien nodig
-az containerapp update --name api --resource-group rg-simple-flask-api \
-  --cpu 1.0 --memory 2Gi
-```
-
-## Opruimen
-
-```bash
-# Verwijder alle bronnen
-azd down --force --purge
-```
-
-## Volgende stappen
-
-### Breid dit voorbeeld uit
-
-1. **Database toevoegen** - Integreer Azure Cosmos DB of SQL Database
-   ```bash
-   # Voeg Cosmos DB-module toe aan infra/main.bicep
-   # Werk app.py bij met databaseverbinding
-   ```
-
-2. **Authenticatie toevoegen** - Implementeer Microsoft Entra ID of API-sleutels
-   ```python
-   # Voeg authenticatiemiddleware toe aan app.py
-   from functools import wraps
-   ```
-
-3. **CI/CD opzetten** - GitHub Actions-workflow
-   ```yaml
-   # Create .github/workflows/deploy.yml
-   name: Deploy to Azure
-   on: [push]
-   ```
-
-4. **Managed Identity toevoegen** - Beveilig toegang tot Azure-services
-   ```bicep
-   # Update infra/app/api.bicep
-   identity: { type: 'SystemAssigned' }
-   ```
-
-### Gerelateerde voorbeelden
-
-- **[Database-app](../../../../../examples/database-app)** - Volledig voorbeeld met SQL-database
-- **[Microservices](../../../../../examples/container-app/microservices)** - Architectuur met meerdere services
-- **[Container Apps Master Guide](../README.md)** - Alle containerpatronen
-
-### Leermiddelen
-
-- 📚 [Cursus AZD voor beginners](../../../README.md) - Hoofdpagina van de cursus
-- 📚 [Container Apps-patronen](../README.md) - Meer implementatiepatronen
-- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - Community-sjablonen
-
-## Aanvullende bronnen
-
-### Documentatie
-- **[Flask-documentatie](https://flask.palletsprojects.com/)** - Gids voor het Flask-framework
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Officiële Azure-documentatie
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd commando-referentie
-
-### Tutorials
-- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Implementeer je eerste app
-- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Gids voor Python-ontwikkeling
-- **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastructuur als code
-
-### Hulpmiddelen
-- **[Azure Portal](https://portal.azure.com)** - Beheer resources visueel
-- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - IDE-integratie
-
----
-
-**🎉 Gefeliciteerd!** Je hebt een productieklare Flask-API ingezet naar Azure Container Apps met automatische schaling en monitoring.
-
-**Vragen?** [Open een issue](https://github.com/microsoft/AZD-for-beginners/issues) of bekijk de [FAQ](../../../resources/faq.md)
+[Volgende: Database-app](../../../../../examples/database-app) · [Microservices](../../../../../examples/container-app/microservices) ·
+[Container overzicht](../README.md) · [Cursus startpagina](../../../README.md) ·
+[Meld een probleem](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 

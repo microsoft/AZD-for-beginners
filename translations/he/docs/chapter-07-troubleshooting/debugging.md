@@ -1,77 +1,72 @@
-# מדריך לניפוי שגיאות לפריסות AZD
+# מדריך לניפוי באגים לפריסות AZD
 
-**ניווט פרקים:**
-- **📚 בית הקורס**: [AZD למתחילים](../../README.md)
-- **📖 הפרק הנוכחי**: פרק 7 - פתרון בעיות וניפוי שגיאות
+**ניווט בפרקים:**
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+- **📖 הפרק הנוכחי**: פרק 7 - פתרון בעיות וניפוי באגים
 - **⬅️ הקודם**: [בעיות נפוצות](common-issues.md)
-- **➡️ הבא**: [פתרון בעיות ספציפי ל-AI](ai-troubleshooting.md)
-- **🚀 הפרק הבא**: [פרק 8: דפוסי פרודקשן וארגוניים](../chapter-08-production/production-ai-practices.md)
+- **➡️ הבא**: [פתרון בעיות ממוקד AI](ai-troubleshooting.md)
+- **🚀 הפרק הבא**: [פרק 8: תבניות פרודקשן וארגוניות](../chapter-08-production/production-ai-practices.md)
 
 ## מבוא
 
-מדריך מקיף זה מספק אסטרטגיות מתקדמות לניפוי שגיאות, כלים וטכניקות לאבחון ופתרון בעיות מורכבות בפריסות באמצעות Azure Developer CLI. למד מתודולוגיות פתרון בעיות שיטתיות, טכניקות לניתוח לוגים, פרופיל ביצועים וכלי אבחון מתקדמים כדי לפתור ביעילות בעיות בזמן פריסה והרצה.
+מדריך מקיף זה מספק אסטרטגיות מתקדמות לניפוי באגים, כלים וטכניקות לאבחון ופתרון בעיות מורכבות בפריסות Azure Developer CLI. למדו מתודולוגיות שיטתיות לפתרון בעיות, טכניקות ניתוח לוגים, פרופיל ביצועים וכלים מתקדמים לאבחון לפתירת בעיות הפריסה והריצה ביעילות.
 
 ## יעדי למידה
 
-By completing this guide, you will:
-- להתמחות במתודולוגיות ניפוי שגיאות שיטתיות לבעיות ב-Azure Developer CLI
-- להבין קונפיגורציה מתקדמת של רישום וטכניקות לניתוח לוגים
-- להטמיע אסטרטגיות פרופיל ביצועים וניטור
-- להשתמש בכלי אבחון ושירותי Azure לפתרון בעיות מורכבות
-- ליישם טכניקות ניפוי שגיאות ברשת ובפתרון בעיות אבטחה
-- להגדיר ניטור ואיתותים מקיפים לגילוי בעיות באופן יזום
+עם השלמת מדריך זה, תוכלו:
+- לשלוט במתודולוגיות ניפוי באגים שיטתיות לבעיות Azure Developer CLI
+- להבין תצורת לוגים מתקדמת וטכניקות ניתוח לוגים
+- ליישם פרופיל ביצועים ואסטרטגיות ניטור
+- להשתמש בכלי הדיאגנוסטיקה ושירותי Azure לפתרון בעיות מורכבות
+- להחיל טכניקות ניפוי באגים ברשת ובפתרון בעיות אבטחה
+- להגדיר ניטור כולל והתרעות לזיהוי מוקדם של בעיות
 
 ## תוצאות למידה
 
-Upon completion, you will be able to:
-- להחיל את מתודולוגיית TRIAGE לניפוי שגיאות שיטתי של בעיות פריסה מורכבות
-- להגדיר ולנתח מידע רישום ומעקב מקיף
-- להשתמש ב-Azure Monitor, Application Insights וכלי אבחון באופן יעיל
-- לפתור באופן עצמאי בעיות חיבור רשת, אימות והרשאות
-- להטמיע אסטרטגיות ניטור ביצועים ואופטימיזציה
-- ליצור סקריפטים מותאמים לניפוי שגיאות ואוטומציה לבעיות חוזרות
+בסיום, תוכלו:
+- להחיל את מתודולוגיית TRIAGE לניפוי שיטתי של בעיות פריסה מורכבות
+- להגדיר ולנתח מידע מקיף של לוגים ועקבות
+- להשתמש ב-Azure Monitor, Application Insights וכלי דיאגנוסטיקה ביעילות
+- לנפות בעיות חיבור רשת, אימות והרשאות באופן עצמאי
+- ליישם אסטרטגיות לניטור ושיפור ביצועים
+- ליצור סקריפטים מותאמים אישית לניפוי באגים ואוטומציה לבעיות חוזרות
 
-## מתודולוגיית ניפוי שגיאות
+## מתודולוגיית ניפוי באגים
 
-### The TRIAGE Approach
-- **T**ime: מתי התחילה הבעיה?
-- **R**eproduce: האם ניתן לשחזר אותה בעקביות?
-- **I**solate: איזה רכיב נכשל?
-- **A**nalyze: מה אומרים הלוגים?
-- **G**ather: אסוף את כל המידע הרלוונטי
-- **E**scalate: מתי לפנות לעזרה נוספת
+### גישת ה-TRIAGE
+- **T**ime (זמן): מתי התחילה הבעיה?
+- **R**eproduce (שחזור): האם ניתן לשחזר אותה בעקביות?
+- **I**solate (בידוד): איזה רכיב נכשל?
+- **A**nalyze (ניתוח): מה אומרים הלוגים?
+- **G**ather (איסוף): לאסוף את כל המידע הרלוונטי
+- **E**scalate (הסלמה): מתי לבקש עזרה נוספת
 
-## הפעלת מצב ניפוי שגיאות
+## הפעלת מצב ניפוי באגים
 
-### Environment Variables
+> **היקף:** אלה דוגמאות דיאגנוסטיות להתאמה, לא אוסף סקריפטים מסופק. החליפו שמות/מזהי משאבים; השתמשו ב-Bash לחלקי shell. פלט וערכי סביבה של `--debug` עלולים להכיל מידע רגיש – בדקו/ערכו לפני שתפו. דוגמאות שמבצעות פריסה, חזרה אחורה, או שינוי בתצורה מצריכות אישור מפורש מפעיל.
+
+### משתני סביבה
 ```bash
-# הפעל ניפוי שגיאות מקיף
-export AZD_DEBUG=true
-export AZD_LOG_LEVEL=debug
-export AZURE_CORE_DIAGNOSTICS_DEBUG=true
+# Enable diagnostics on the command under investigation
+azd show --debug
+az account show --debug
 
-# ניפוי שגיאות של Azure CLI
-export AZURE_CLI_DIAGNOSTICS=true
-
-# השבת טלמטריה כדי לקבל פלט נקי יותר
+# Disable telemetry for cleaner output
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### Debug Configuration
+### תצורת ניפוי באגים
 ```bash
-# הגדר את תצורת הדיבוג באופן גלובלי
-azd config set debug.enabled true
-azd config set debug.logLevel debug
-azd config set debug.verboseOutput true
-
-# אפשר רישום עקבות
-azd config set trace.enabled true
-azd config set trace.outputPath ./debug-traces
+# Inspect supported flags rather than setting arbitrary config keys
+azd show --help
+azd config list
 ```
+
+`azd config set` יכול לאחסן מפתחות שרירותיים; זה לא הופך את `debug.enabled`, `debug.logLevel`, או `trace.outputPath` להגדרות נתמכות. השתמש בדגל `--debug` של הפקודה שיצאה.
 
 ## 📊 טכניקות ניתוח לוגים
 
-### Understanding Log Levels
+### הבנת רמות הלוג
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -81,68 +76,69 @@ ERROR   - Error conditions that need attention
 FATAL   - Critical errors that cause application termination
 ```
 
-### Structured Log Analysis
+### ניתוח לוגים מובנה
 ```bash
-# הצג לוגים ב-Azure Monitor (באמצעות azd monitor)
+# View logs with Azure Monitor (via azd monitor)
 azd monitor --logs
 
-# הצג לוגים של היישום בזמן אמת
+# Open Application Insights Live Metrics (not a terminal log stream)
 azd monitor --live
 
-# לניתוח מפורט של לוגים, השתמש ב-Azure CLI עם App Service או Container App שלך:
-# לוגים של App Service
-az webapp log tail --name <app-name> --resource-group <rg-name>
+# For detailed log analysis, use Azure CLI with your App Service or Container App:
+# App Service logs
+az webapp log tail --name "$APP_NAME" --resource-group "$RG_NAME"
 
-# לוגים של Container App
-az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+# Container App logs
+az containerapp logs show --name "$APP_NAME" --resource-group "$RG_NAME" --follow
 
-# ייצא לוגים מ-Application Insights לניתוח
+# Export Application Insights logs for analysis
 az monitor app-insights query \
-    --app <app-insights-name> \
+    --app "$APPI_NAME" \
+    --resource-group "$RG_NAME" \
     --analytics-query "traces | where timestamp > ago(1h) | where severityLevel >= 3"
 ```
 
-### Log Correlation
+### קורלציה של לוגים
 ```bash
 #!/bin/bash
-# correlate-logs.sh - התאמת לוגים בין שירותים באמצעות Azure Monitor
+# correlate-logs.sh - Correlate logs across services using Azure Monitor
 
 TRACE_ID=$1
-APP_INSIGHTS_NAME=$2
+APP_INSIGHTS_ID=$2 # Application ID (GUID), not an ambiguous component name
 
-if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_NAME" ]; then
-    echo "Usage: $0 <trace-id> <app-insights-name>"
+if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_ID" ]; then
+    echo "Usage: $0 <trace-id> <application-id>"
     exit 1
 fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# חפש ב-Application Insights לוגים מקושרים
+# Search Application Insights for correlated logs
 az monitor app-insights query \
-    --app "$APP_INSIGHTS_NAME" \
+    --app "$APP_INSIGHTS_ID" \
     --analytics-query "union traces, exceptions, requests, dependencies | where operation_Id == '$TRACE_ID' | order by timestamp asc"
 
-# חפש ביומני הפעילות של Azure
-az monitor activity-log list --correlation-id "$TRACE_ID"
+# Activity Log correlation IDs describe management operations and are not the
+# same as application trace IDs. Obtain them from the failed ARM operation.
 ```
 
-## 🛠️ כלים מתקדמים לניפוי שגיאות
+## 🛠️ כלים מתקדמים לניפוי באגים
 
-### Azure Resource Graph Queries
+### שאילתות Azure Resource Graph
 ```bash
-# שאילת משאבים לפי תגיות
+# Query resources by tags
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# מצא פריסות שנכשלו
+# Find resource groups with non-success/missing provisioning state (NOT deployments)
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# בדוק את בריאות המשאב
+# Check resource health
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
-### Network Debugging
+### ניפוי באגים ברשת
 ```bash
-# בדיקת חיבוריות בין שירותים
+# Test connectivity between services
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -157,20 +153,21 @@ test_connectivity() {
         --output table
 }
 
-# שימוש
-test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
+# Usage
+# Source must be a supported Network Watcher source, e.g. a configured VM ID.
+test_connectivity "/subscriptions/.../providers/Microsoft.Compute/virtualMachines/myvm" "myapp-api.azurewebsites.net" 443
 ```
 
-### Container Debugging
+### ניפוי באגים במכולות
 ```bash
-# ניפוי בעיות באפליקציית מכולה
+# Debug container app issues
 debug_container() {
     local app_name=$1
     local resource_group=$2
     
     echo "=== Container App Status ==="
     az containerapp show --name "$app_name" --resource-group "$resource_group" \
-        --query "properties.{provisioningState:provisioningState,runningState:runningState}"
+        --query "properties.{provisioningState:provisioningState,runningStatus:runningStatus}"
     
     echo "=== Container App Revisions ==="
     az containerapp revision list --name "$app_name" --resource-group "$resource_group" \
@@ -181,12 +178,12 @@ debug_container() {
 }
 ```
 
-### Database Connection Debugging
+### ניפוי באגים בחיבור למסד נתונים
 ```bash
-# איתור תקלות בחיבור למסד הנתונים
+# Debug database connectivity
 debug_database() {
     local db_server=$1
-    local db_name=$2
+    local resource_group=$2
     
     echo "=== Database Server Status ==="
     az postgres flexible-server show --name "$db_server" --resource-group "$resource_group" \
@@ -200,26 +197,15 @@ debug_database() {
 }
 ```
 
-## 🔬 ניפוי שגיאות ביצועים
+## 🔬 ניפוי באגים של ביצועים
 
-### Application Performance Monitoring
+### ניטור ביצועי יישומים
 ```bash
-# הפעל דיבוג של Application Insights
-export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
-  "role": {
-    "name": "myapp-debug"
-  },
-  "sampling": {
-    "percentage": 100
-  },
-  "instrumentation": {
-    "logging": {
-      "level": "DEBUG"
-    }
-  }
-}'
+# SDK settings are language-specific. For Python OpenTelemetry role naming,
+# set before configuring the Azure Monitor distro:
+export OTEL_SERVICE_NAME=myapp-debug
 
-# ניטור ביצועים מותאם אישית
+# Custom performance monitoring
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -227,8 +213,10 @@ monitor_performance() {
     echo "Monitoring $endpoint for $duration seconds..."
     
     for i in $(seq 1 $duration); do
-        response_time=$(curl -o /dev/null -s -w "%{time_total}" "$endpoint")
-        status_code=$(curl -o /dev/null -s -w "%{http_code}" "$endpoint")
+        # Capture status and duration from the SAME bounded request.
+        measurement=$(curl --max-time 10 -o /dev/null -s -w "%{http_code},%{time_total}" "$endpoint") || return 1
+        status_code=${measurement%,*}
+        response_time=${measurement#*,}
         
         echo "$(date '+%Y-%m-%d %H:%M:%S') - Status: $status_code, Response Time: ${response_time}s"
         sleep 1
@@ -236,25 +224,23 @@ monitor_performance() {
 }
 ```
 
-### Resource Utilization Analysis
+### ניתוח ניצול משאבים
 ```bash
-# ניטור שימוש במשאבים
+# Monitor resource usage
 monitor_resources() {
-    local resource_group=$1
+    local plan_id=$1 # Full Microsoft.Web/serverfarms resource ID
     
     echo "=== CPU Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "CpuPercentage" \
+        --resource "$plan_id" \
+        --metrics "CpuPercentage" \
         --interval PT1M \
         --aggregation Average
     
     echo "=== Memory Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "MemoryPercentage" \
+        --resource "$plan_id" \
+        --metrics "MemoryPercentage" \
         --interval PT1M \
         --aggregation Average
 }
@@ -262,7 +248,7 @@ monitor_resources() {
 
 ## 🧪 בדיקות ואימות
 
-### Integration Test Debugging
+### ניפוי באגים בבדיקות אינטגרציה
 ```bash
 #!/bin/bash
 # debug-integration-tests.sh
@@ -271,27 +257,27 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# הגדר סביבת דיבוג
+# Set debug environment
 export NODE_ENV=test
-export DEBUG=*
+export DEBUG='app:*'
 export LOG_LEVEL=debug
 
-# קבל נקודות קצה של השירות
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Get service endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl // .services.api.ingresUrl')
 
 echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# בדוק נקודות קצה של סטטוס הבריאות
+# Test health endpoints
 test_health() {
     local service=$1
     local url=$2
     
     echo "Testing $service health..."
     
-    response=$(curl -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
+    response=$(curl --max-time 10 -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
     status_code=$(echo $response | cut -d',' -f1)
     response_time=$(echo $response | cut -d',' -f2)
     
@@ -303,17 +289,17 @@ test_health() {
     fi
 }
 
-# הרץ בדיקות
+# Run tests
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# הרץ בדיקות אינטגרציה מותאמות אישית
+# Run custom integration tests
 npm run test:integration
 ```
 
-### Load Testing for Debugging
+### בדיקות עומס לניפוי באגים
 ```bash
-# בדיקת עומס פשוטה לצורך זיהוי צווארי בקבוק בביצועים
+# Simple load test to identify performance bottlenecks
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -321,42 +307,40 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # שימוש ב-Apache Bench (התקנה: apt-get install apache2-utils)
+    # Using Apache Bench (install: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # חילוץ מדדי מפתח
+    # Extract key metrics
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # בדוק אם יש כישלונות
+    # Check for failures
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
 
-## 🔧 ניפוי שגיאות תשתיתי
+## 🔧 ניפוי באגים בתשתית
 
-### Bicep Template Debugging
+### ניפוי באגים בתבניות Bicep
 ```bash
-# אמת תבניות Bicep עם פלט מפורט
+# Validate Bicep templates with detailed output
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # אימות תחביר
+    # Syntax validation
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # אימות Lint
+    # Lint validation
     az bicep lint --file "$template_file"
     
-    # פריסת What-if
-    az deployment group what-if \
-        --resource-group "myapp-dev-rg" \
-        --template-file "$template_file" \
-        --parameters @main.parameters.json
+    # From the initialized project: azd resolves its parameter substitutions
+    # and deployment scope. Review hooks before provisioning preview.
+    azd provision --preview
 }
 
-# ניפוי שגיאות בפריסת התבנית
+# Debug template deployment
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -375,54 +359,46 @@ debug_deployment() {
 }
 ```
 
-### Resource State Analysis
+### ניתוח מצב משאבים
 ```bash
-# נתח מצבי משאבים לאיתור אי-התאמות
+# Analyze resource states for inconsistencies
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # הצג את כל המשאבים ואת מצבם
+    # List all resources with their states
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # בדוק משאבים שנכשלו
-    failed_resources=$(az resource list --resource-group "$resource_group" \
-        --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
-        --output tsv)
-    
-    if [ -n "$failed_resources" ]; then
-        echo "❌ Failed resources found:"
-        echo "$failed_resources"
-    else
-        echo "✅ All resources provisioned successfully"
-    fi
+    # Generic list responses often omit properties/provisioningState.
+    # Null is unknown, not failure; inspect the service-specific show command
+    # and deployment operations for the affected resource.
+    az deployment group list --resource-group "$resource_group" \
+        --query "[].{name:name,state:properties.provisioningState}" -o table
 }
 ```
 
-## 🔒 ניפוי שגיאות אבטחה
+## 🔒 ניפוי באגים לאבטחה
 
-### Authentication Flow Debugging
+### ניפוי באגים בזרימת אימות
 ```bash
-# איתור שגיאות באימות של Azure
+# Debug Azure authentication
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
     
     echo "=== Token Information ==="
-    token=$(az account get-access-token --query accessToken -o tsv)
-    
-    # פענוח אסימון JWT (דורש jq ו-base64)
-    echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
+    # Do not print/decode bearer tokens into logs.
+    az account get-access-token --query "{expiresOn:expiresOn,tenant:tenant,subscription:subscription}" -o json
     
     echo "=== Role Assignments ==="
     user_id=$(az account show --query user.name -o tsv)
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# איתור שגיאות בגישה ל-Key Vault
+# Debug Key Vault access
 debug_keyvault() {
     local vault_name=$1
     
@@ -438,16 +414,16 @@ debug_keyvault() {
 }
 ```
 
-### Network Security Debugging
+### ניפוי באגים אבטחת רשת
 ```bash
-# ניפוי שגיאות בקבוצות אבטחת הרשת
+# Debug network security groups
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # בדוק את כללי האבטחה
+    # Check security rules
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -456,30 +432,27 @@ debug_network_security() {
 }
 ```
 
-## 📱 ניפוי שגיאות ספציפי לאפליקציה
+## 📱 ניפוי באגים ספציפי ליישום
 
-### Node.js Application Debugging
+### ניפוי באגים ביישום Node.js
 ```javascript
-// debug-middleware.js - תוכנת ביניים לניפוי שגיאות של Express
+// debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // רשום את פרטי הבקשה
+    // Log request details
     debug(`${req.method} ${req.url}`, {
-        headers: req.headers,
-        query: req.query,
-        body: req.body,
-        userAgent: req.get('User-Agent'),
-        ip: req.ip
+        // Do not log authorization headers, bodies, query strings, or client IPs.
+        route: req.route?.path || '(unmatched)'
     });
     
-    // החלף את res.json כדי לרשום את התגובות
+    // Override res.json to log responses
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
-        debug(`Response ${res.statusCode} in ${duration}ms`, data);
+        debug(`Response ${res.statusCode} in ${duration}ms`);
         return originalJson.call(this, data);
     };
     
@@ -487,16 +460,18 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### Database Query Debugging
+### ניפוי באגים בשאילתות למסד נתונים
 ```javascript
-// database-debug.js - כלי ניפוי שגיאות של מסד הנתונים
+// database-debug.js - Database debugging utilities
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
 class DebuggingPool extends Pool {
     async query(text, params) {
         const start = Date.now();
-        debug('Executing query:', { text, params });
+        // Promise-based query(text, params) demo only; not a drop-in replacement
+        // for node-postgres callback/streaming overloads. Avoid query parameters.
+        debug('Executing query');
         
         try {
             const result = await super.query(text, params);
@@ -517,12 +492,12 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 נהלי ניפוי שגיאות חירום
+## 🚨 פרוצדורות טיפול חירום לניפוי באגים
 
-### Production Issue Response
+### תגובה לבעיה בפרודקשן
 ```bash
 #!/bin/bash
-# emergency-debug.sh - ניפוי באגים חירום בייצור
+# emergency-debug.sh - Emergency production debugging
 
 set -e
 
@@ -538,34 +513,34 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# החלף לסביבה הנכונה
+# Switch to correct environment
 azd env select "$ENVIRONMENT"
 
-# אסוף מידע קריטי
+# Collect critical information
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
-cat emergency-status.json | jq '.services[].endpoint'
+cat emergency-status.json | jq '.services[] | .ingressUrl // .ingresUrl'
 
 echo "=== 2. Application Health ==="
-for endpoint in $(cat emergency-status.json | jq -r '.services[].endpoint'); do
+for endpoint in $(cat emergency-status.json | jq -r '.services[] | (.ingressUrl // .ingresUrl // empty)'); do
     echo "Testing $endpoint/health"
     curl -f "$endpoint/health" || echo "❌ Health check failed for $endpoint"
 done
 
 echo "=== 3. Recent Errors ==="
-# השתמש ב-Azure Monitor עבור יומני שגיאות
+# Use Azure Monitor for error logs
 azd monitor --logs
 echo "Check Application Insights for detailed error analysis"
 
 echo "=== 4. Resource Status ==="
-az resource list --resource-group "$RESOURCE_GROUP" \
-    --query "[?properties.provisioningState != 'Succeeded']" > failed-resources.json
+az deployment group list --resource-group "$RESOURCE_GROUP" \
+    --query "[?properties.provisioningState == 'Failed']" > failed-resources.json
 
-if [ -s failed-resources.json ]; then
-    echo "❌ Failed resources found!"
+if jq -e 'length > 0' failed-resources.json >/dev/null; then
+    echo "❌ Failed group deployments found (inspect subscription deployments too)!"
     cat failed-resources.json
 else
-    echo "✅ All resources are healthy"
+    echo "No failed group deployment records found; resource health is not established."
 fi
 
 echo "=== 5. Recent Deployments ==="
@@ -576,75 +551,76 @@ az deployment group list --resource-group "$RESOURCE_GROUP" \
 echo "Emergency debugging completed: $(date)"
 echo "Files generated:"
 echo "  - emergency-status.json"
-echo "  - emergency-errors.log"
 echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
-### Rollback Procedures
+### פרוצדורות נסיגה
 ```bash
-# סקריפט החזרה מהירה
+# Quick rollback script
 quick_rollback() {
     local environment=$1
     local previous_commit=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment"
     
-    # החלף סביבה
+    # Switch environment
     azd env select "$environment"
     
-    # החזרה באמצעות Git (ל-AZD אין מנגנון החזרה מובנה)
+    # Rollback using Git (AZD doesn't have built-in rollback)
     git checkout "$previous_commit"
-    azd deploy
+    azd deploy || return 1
     
-    # וודא את ההחזרה
+    # Verify rollback
     echo "Verifying rollback..."
     azd show
     
-    # בדוק נקודות קצה קריטיות
-    WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-    curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
+    # Test critical endpoints
+    WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl') || return 1
+    curl --max-time 10 -f "$WEB_URL/health" || { echo "❌ Rollback verification failed"; return 1; }
     
     echo "✅ Rollback completed"
 }
 ```
 
-## 📊 לוחות מחוונים לניפוי שגיאות
+נסיגה בקוד בלבד זו אינה מבטלת תשתיות, מיגרציות מסד נתונים או סודות. השתמשו בעץ עבודה נקי, רשמו את ה-commit ההתחלתי והשיבו אותו לאחר מכן; הפקודה בוחרת את ה-commit שנבחר במאגר הנוכחי.
 
-### Custom Monitoring Dashboard
+## 📊 לוחות ניטור לניפוי באגים
+
+### לוח ניטור מותאם אישית
 ```bash
-# צור שאילתות של Application Insights לניפוי באגים
+# Create Application Insights queries for debugging
 create_debug_queries() {
-    local app_insights_name=$1
+    local app_insights_name=$1 # Use the Application ID GUID to avoid name ambiguity
     
-    # שאילתה עבור שגיאות
+    # Query for errors
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # שאילתה לבעיות ביצועים
+    # Query for performance issues
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # שאילתה לכשלים בתלויות
+    # Query for dependency failures
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
 }
 ```
 
-### Log Aggregation
+### איסוף לוגים
 ```bash
-# לאגד יומנים ממספר מקורות ב-Azure
+# Aggregate logs from multiple Azure sources
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
-    local app_insights_name=$1
+    local app_insights_name=$1 # Application ID GUID
     
     echo "Aggregating logs to $output_file"
     
     {
-        echo '{"source": "azure-activity", "logs": '
+        echo '[{"source": "azure-activity", "logs": '
         az monitor activity-log list --start-time "$(date -d '1 hour ago' -Iseconds)" --output json
         echo '}'
         
@@ -654,6 +630,7 @@ aggregate_logs() {
                 --analytics-query "union traces, exceptions | where timestamp > ago(1h)" --output json
             echo '}'
         fi
+        echo ']'
     } > "$output_file"
     
     echo "Logs aggregated in $output_file"
@@ -662,20 +639,21 @@ aggregate_logs() {
 
 ## 🔗 משאבים מתקדמים
 
-### Custom Debug Scripts
-Create a `scripts/debug/` directory with:
+### סקריפטים מותאמים לניפוי באגים
+צרו תיקיית `scripts/debug/` עם:
 - `health-check.sh` - בדיקות בריאות מקיפות
 - `performance-test.sh` - בדיקות ביצועים אוטומטיות
-- `log-analyzer.py` - ניתוח ופרסינג מתקדם של לוגים
+- `log-analyzer.py` - ניתוח מתקדם של לוגים ופרסינג
 - `resource-validator.sh` - אימות תשתית
 
-### Monitoring Integration
+### אינטגרציית ניטור
 ```yaml
 # azure.yaml - Add debugging hooks
 hooks:
   postdeploy:
     shell: sh
     run: |
+      set -e
       echo "Running post-deployment debugging..."
       ./scripts/debug/health-check.sh
       ./scripts/debug/performance-test.sh
@@ -688,34 +666,34 @@ hooks:
 
 ## שיטות עבודה מומלצות
 
-1. **הפעל תמיד רישום דיבוג** בסביבות שאינן פרודקשן
-2. **צור מקרי בדיקה שניתן לשחזר** לבעיות
-3. **תעד נהלי ניפוי שגיאות** לצוות שלך
-4. **אוטומט בדיקות בריאות** וניטור
-5. **שמור על כלי ניפוי השגיאות מעודכנים** בהתאם לשינויים באפליקציה שלך
-6. **תתרגל נהלי ניפוי שגיאות** בזמני שגרה
+1. **הפעל תמיד רישום ניפוי באגים** בסביבות שאינן פרודקשן
+2. **צרו מקרי בדיקה לשחזור בעיות**
+3. **תעדו פרוצדורות ניפוי באגים** לצוות שלכם
+4. **אוטומטו בדיקות בריאות וניטור**
+5. **עדכנו כלים לניפוי באגים** עם שינויים ביישום שלכם
+6. **תרגלו פרוצדורות ניפוי באגים** בזמני שגרה ללא תקלות
 
-## השלבים הבאים
+## צעדים הבאים
 
-- [תכנון קיבולת](../chapter-06-pre-deployment/capacity-planning.md) - תכנן דרישות משאבים
-- [בחירת SKU](../chapter-06-pre-deployment/sku-selection.md) - בחר רמות שירות מתאימות
-- [בדיקות מקדימות](../chapter-06-pre-deployment/preflight-checks.md) - אימות לפני פריסה
-- [גיליון עזר](../../resources/cheat-sheet.md) - פקודות לעיון מהיר
+- [תכנון קיבולת](../chapter-06-pre-deployment/capacity-planning.md) - תכננו דרישות משאבים
+- [בחירת SKU](../chapter-06-pre-deployment/sku-selection.md) - בחרו שכבות שירות מתאימות
+- [בדיקות טרום פריסה](../chapter-06-pre-deployment/preflight-checks.md) - אימות לפני פריסה
+- [גליון עזר](../../resources/cheat-sheet.md) - פקודות קיצור
 
 ---
 
-**זכור**: ניפוי שגיאות טוב הוא עניין של שיטתיות, יסודיות וסבלנות. כלים וטכניקות אלה יעזרו לך לאבחן בעיות מהר יותר וביעילות רבה יותר.
+**זכרו**: ניפוי באגים טוב הוא על היותו שיטתי, יסודי וסבלני. כלים וטכניקות אלו יעזרו לכם לזהות בעיות מהר ויעיל יותר.
 
 ---
 
 **ניווט**
 - **שיעור קודם**: [בעיות נפוצות](common-issues.md)
 
-- **השיעור הבא**: [תכנון קיבולת](../chapter-06-pre-deployment/capacity-planning.md)
+- **שיעור הבא**: [תכנון קיבולת](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-הצהרת אי-אחריות:
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית Co-op Translator (https://github.com/Azure/co-op-translator). אף שאנו שואפים לדיוק, שימו לב שתרגומים אוטומטיים עלולים לכלול שגיאות או אי-דיוקים. יש להתייחס למסמך המקורי בשפת המקור כמקור הסמכות. לצורך מידע קריטי מומלץ להסתייע בתרגום מקצועי שבוצע על ידי מתרגם אנושי. איננו אחראים לכל אי-הבנות או פרשנויות שגויות הנובעות משימוש בתרגום זה.
+**כתב ויתור**:
+מסמך זה תורגם באמצעות שירות תרגום אוטומטי [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עלולים להכיל שגיאות או אי-דיוקים. יש להחשיב את המסמך המקורי בשפתו הטבעית כמקור הסמכות. למידע קריטי מומלץ להשתמש בתרגום מקצועי על ידי מתרגם אדם. אנו לא אחראים לכל אי-הבנה או פירוש שגוי הנובע מהשימוש בתרגום זה.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

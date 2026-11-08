@@ -1,30 +1,26 @@
-# TODO: De beheerder van deze repo heeft dit bestand nog niet bewerkt
-
-**REPO EIGENAAR**: Wil je ondersteuning van Customer Service & Support (CSS) voor dit product/project?
-
-- **Geen CSS-ondersteuning:** Vul deze template in met informatie over hoe je problemen kunt melden en hulp kunt krijgen.
-- **Wel CSS-ondersteuning:** Vul een intakeformulier in op [aka.ms/onboardsupport](https://aka.ms/onboardsupport). CSS zal met je samenwerken/je helpen om de volgende stappen te bepalen.
-- **Niet zeker?** Vul een intakeformulier in alsof het antwoord "Ja" is. CSS zal je helpen beslissen.
-
-*Verwijder vervolgens deze eerste kop uit dit SUPPORT.MD-bestand voordat je je repo publiceert.*
-
 # Ondersteuning
 
-## Hoe problemen melden en hulp krijgen  
+## Problemen en vragen over de cursus
 
-Dit project gebruikt GitHub Issues om bugs en functieverzoeken bij te houden. Zoek eerst in de bestaande 
-issues voordat je nieuwe issues aanmaakt om duplicaten te voorkomen. Voor nieuwe issues, meld je bug of 
-functieverzoek als een nieuw Issue.
+Doorzoek de [cursusproblemen](https://github.com/microsoft/AZD-for-beginners/issues) voordat je een probleem meldt. Vermeld de getroffen Engelse les, de uitgevoerde opdracht, je AZD/uitbreidingsversies en de foutmelding. Verwijder inlogs, tokens, abonnementsgegevens en persoonlijke data uit logs en screenshots.
 
-Voor hulp en vragen over het gebruik van dit project, gelieve **REPO BEHEERDER: VOEG HIER INSTRUCTIES IN 
-OVER HOE JE REPO-EIGENAARS OF DE COMMUNITY KUNT BENADEREN VOOR HULP. DIT KAN EEN STACK OVERFLOW TAG OF EEN ANDER 
-KANAAL ZIJN. WAAR ZAL JE MENSEN HELPEN?**.
+Voor algemene leervragen, gebruik de [Azure developer community](https://discord.gg/microsoft-azure). Reacties van de community zijn geen gegarandeerde ondersteuningsdienst.
 
-## Microsoft Ondersteuningsbeleid  
+## Problemen met tools en services
 
-Ondersteuning voor dit **PROJECT of PRODUCT** is beperkt tot de hierboven vermelde bronnen.
+Meld reproduceerbare AZD CLI bugs in [Azure/azure-dev](https://github.com/Azure/azure-dev/issues). Voor Azure service-incidenten of abonnementspecifieke hulp, gebruik de ondersteuningsopties in de [Azure-portal](https://portal.azure.com/).
+
+## Beveiligingsrapporten
+
+Volg [SECURITY.md](SECURITY.md) voor privé rapportage van kwetsbaarheden. Plaats geen geheimen of exploitdetails in een openbaar cursusprobleem.
+
+## Microsoft ondersteuningsbeleid
+
+Ondersteuning voor dit educatieve project is beperkt tot de bovenstaande bronnen. Cursusvoorbeelden bevatten geen productieondersteuningsverplichting.
 
 ---
 
-**Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in zijn oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Disclaimer**:
+Dit document is vertaald met behulp van de AI vertaaldienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

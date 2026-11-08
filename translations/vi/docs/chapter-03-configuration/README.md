@@ -1,100 +1,100 @@
-# Chương 3: Cấu hình & Xác thực
+# Chương 3: Cấu Hình & Xác Thực
 
-**📚 Khóa học**: [AZD Dành Cho Người Mới](../../README.md) | **⏱️ Thời lượng**: 45-60 phút | **⭐ Độ khó**: Trung cấp
+**📚 Khóa học**: [AZD Cho Người Mới Bắt Đầu](../../README.md) | **⏱️ Thời lượng**: 90-150 phút bao gồm thực hành tích hợp | **⭐ Mức độ**: Trung cấp
 
 ---
 
-## Tổng quan
+## Tổng Quan
 
 Chương này bao gồm cấu hình môi trường, các mẫu xác thực, và các thực hành bảo mật tốt nhất cho triển khai Azure Developer CLI.
 
-> Đã kiểm tra với `azd 1.27.1` vào tháng 7 năm 2026.
+> Mục tiêu xem xét lệnh và cấu hình: `azd 1.37.2` (Tháng 11 năm 2026). Việc cung cấp Azure trực tiếp không được thực hiện trong quá trình xem xét.
 
-## Mục tiêu học tập
+## Mục Tiêu Học Tập
 
-Hoàn thành chương này, bạn sẽ:
-- Thành thạo cấu trúc phân cấp cấu hình AZD
-- Quản lý nhiều môi trường (phát triển, thử nghiệm, sản xuất)
-- Triển khai xác thực bảo mật với managed identities
-- Cấu hình các thiết lập theo môi trường cụ thể
+Khi hoàn thành chương này, bạn sẽ:
+- Thành thạo thứ bậc cấu hình của AZD
+- Quản lý nhiều môi trường (dev, staging, prod)
+- Triển khai xác thực an toàn với managed identities
+- Cấu hình các thiết lập riêng cho từng môi trường
 
 ---
 
-## 📚 Các bài học
+## 📚 Bài học
 
 | # | Bài học | Mô tả | Thời gian |
-|---|--------|-------------|------|
-| 1 | [Hướng dẫn Cấu hình](configuration.md) | Thiết lập và quản lý môi trường | 30 phút |
-| 2 | [Xác thực & Bảo mật](authsecurity.md) | Mẫu managed identity và RBAC | 30 phút |
+|---|--------|-------------|----------|
+| 1 | [Hướng Dẫn Cấu Hình](configuration.md) | Thiết lập và quản lý môi trường | 30 phút |
+| 2 | [Xác Thực & Bảo Mật](authsecurity.md) | Mẫu managed identity và RBAC | 30 phút |
 
 ---
 
-## 🚀 Bắt đầu nhanh
+## 🚀 Bắt Đầu Nhanh
+
+Chạy từ thư mục gốc của **ứng dụng azd đã được khởi tạo**, không phải khoá học. Sử dụng tên môi trường chưa dùng nếu những tên đó đã tồn tại.
 
 ```bash
-# Tạo nhiều môi trường
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Chuyển đổi môi trường
+# Switch environments
 azd env select prod
 
-# Thiết lập biến môi trường
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Xem cấu hình
+# View configuration
 azd env get-values
 ```
 
----
-
-## 🔧 Cấu trúc phân cấp Cấu hình
-
-AZD áp dụng các thiết lập theo thứ tự sau (mục sau ghi đè mục trước):
-
-1. **Giá trị mặc định** (được tích hợp trong mẫu)
-2. **azure.yaml** (cấu hình dự án)
-3. **Biến môi trường** (`azd env set`)
-4. **Cờ dòng lệnh** (`--location eastus`)
+`SKU_NAME` là minh họa: nó ảnh hưởng đến hạ tầng chỉ khi mẫu của bạn rõ ràng sử dụng nó. Các giá trị `azd env set` thông thường được lưu trữ cục bộ dưới dạng văn bản thuần; chúng không phải là kho bí mật an toàn.
 
 ---
 
-## 🔐 Thực hành Bảo mật Tốt nhất
+## 🔧 Thứ Bậc Cấu Hình
+
+Giữ ba bề mặt cấu hình khác nhau riêng biệt: tùy chọn toàn cục (`azd config`), cấu trúc dự án (`azure.yaml`), và giá trị cho từng môi trường (`azd env`). Các cờ chỉ ghi đè các thiết lập mà chúng thực sự hỗ trợ; không có lớp phủ toàn cục của các biến môi trường tùy ý lên `azure.yaml` hoặc Bicep.
+
+---
+
+## 🔐 Thực Hành Bảo Mật Tốt Nhất
 
 ```bash
-# Sử dụng danh tính được quản lý (khuyến nghị)
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
-# Kiểm tra trạng thái xác thực AZD
-azd auth status
+# Check AZD authentication status
+azd auth login --check-status
 
-# Tùy chọn: kiểm tra bối cảnh Azure CLI nếu bạn dự định chạy các lệnh az
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# Xác thực lại nếu cần
+# Re-authenticate if needed
 azd auth login
 
-# Tùy chọn: làm mới xác thực Azure CLI cho các lệnh az
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 
 ---
 
-## 🔗 Điều hướng
+## 🔗 Điều Hướng
 
 | Hướng | Chương |
 |-----------|---------|
-| **Trước** | [Chương 2: Phát triển AI](../chapter-02-ai-development/README.md) |
-| **Tiếp theo** | [Chương 4: Hạ tầng](../chapter-04-infrastructure/README.md) |
+| **Trước** | [Chương 2: Phát Triển AI](../chapter-02-ai-development/README.md) |
+| **Tiếp** | [Chương 4: Hạ Tầng](../chapter-04-infrastructure/README.md) |
 
 ---
 
-## 📖 Tài nguyên liên quan
+## 📖 Tài Nguyên Liên Quan
 
-- [Kiểm tra Trước Triển khai](../chapter-06-pre-deployment/README.md)
-- [Khắc phục sự cố](../chapter-07-troubleshooting/common-issues.md)
+- [Kiểm Tra Trước Triển Khai](../chapter-06-pre-deployment/README.md)
+- [Khắc Phục Sự Cố](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 

@@ -1,22 +1,22 @@
 # Hoofdstuk 2: AI-First Ontwikkeling
 
-**📚 Cursus**: [AZD Voor Beginners](../../README.md) | **⏱️ Duur**: 1-2 uur | **⭐ Complexiteit**: Gemiddeld
+**📚 Cursus**: [AZD Voor Beginners](../../README.md) | **⏱️ Duur**: 4-5 uur inclusief de workshop | **⭐ Complexiteit**: Middenniveau
 
 ---
 
 ## Overzicht
 
-Dit hoofdstuk richt zich op het implementeren van AI-gedreven applicaties met behulp van Azure Developer CLI en Microsoft Foundry diensten. Van eenvoudige AI-chatapps tot intelligente agenten met tools.
+Dit hoofdstuk richt zich op het implementeren van AI-aangedreven toepassingen met behulp van Azure Developer CLI en Microsoft Foundry-diensten. Van eenvoudige AI-chatapps tot intelligente agenten met tools.
 
-> **Validatienotitie (2026-07-13):** De commandoflow en extensierichtlijnen in dit hoofdstuk zijn gecontroleerd tegen `azd` `1.27.1` en de huidige preview AI-agent extensie release `azure.ai.agents` `1.0.0-beta.5`. Als je een oudere AZD-versie gebruikt, update dan eerst en ga daarna verder met de oefeningen.
+> **Release review (2026-11-04):** AI CLI-richtlijnen zijn gecontroleerd aan de hand van gepubliceerde `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, en `azure.ai.evaluations` `1.0.0-beta.2` documentatie/bronnen. Gebruik `azd >= 1.37.0` voor de gecombineerde workflow. Evaluaties gebruiken nu de aparte `azd ai eval` namespace; zie [releasewijzigingen en migratierichtlijnen](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). Dit is geen live deployment validatie.
 
 ## Leerdoelen
 
-Door dit hoofdstuk te voltooien, zul je:
-- AI-toepassingen implementeren met vooraf gebouwde AZD-sjablonen
-- Microsoft Foundry integratie met AZD begrijpen
-- AI-agenten met tools configureren en aanpassen
-- RAG (Retrieval-Augmented Generation) applicaties implementeren
+Na het voltooien van dit hoofdstuk:
+- Implementeer AI-toepassingen met vooraf gebouwde AZD-templates
+- Begrijp Microsoft Foundry-integratie met AZD
+- Configureer en pas AI-agenten met tools aan
+- Implementeer RAG (Retrieval-Augmented Generation) toepassingen
 
 ---
 
@@ -27,31 +27,33 @@ Door dit hoofdstuk te voltooien, zul je:
 | 1 | [Microsoft Foundry Integratie](microsoft-foundry-integration.md) | Verbind AZD met Foundry-diensten | 30 min |
 | 2 | [AI Agenten Gids](agents.md) | Implementeer intelligente agenten met tools | 45 min |
 | 3 | [AI Model Implementatie](ai-model-deployment.md) | Implementeer en configureer AI-modellen | 30 min |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Praktijk: Maak je AI-oplossing AZD-klaar | 60 min |
+| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Praktijk: Verken een template en plan je conversie | 2-3 uur |
 
 ---
 
-## 🚀 Snelle Start
+## 🚀 Snel aan de slag
+
+Kies een optie in een nieuwe lege map. De afsluitende `.` initialiseert de huidige map; anders kan AZD een submap aanmaken zonder de werkdirectory van je shell te veranderen.
 
 ```bash
-# Optie 1: RAG Chat Applicatie
-azd init --template azure-search-openai-demo
+# Option 1: RAG Chat Application
+azd init --template azure-search-openai-demo .
 azd up
 
-# Optie 2: AI Agenten
-azd init --template get-started-with-ai-agents
+# Option 2: AI Agents
+azd init --template get-started-with-ai-agents .
 azd up
 
-# Optie 3: Snelle Chat App
-azd init --template openai-chat-app-quickstart
+# Option 3: Quick Chat App
+azd init --template openai-chat-app-quickstart .
 azd up
 ```
 
 ---
 
-## 🤖 Uitgelichte AI Sjablonen
+## 🤖 Uitgelichte AI-templates
 
-| Sjabloon | Beschrijving | Diensten |
+| Template | Beschrijving | Diensten |
 |----------|-------------|----------|
 | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG-chat met citaties | OpenAI + AI Search |
 | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI-agent met tools | AI Agent Service |
@@ -61,13 +63,15 @@ azd up
 
 ## 💰 Kostenbewustzijn
 
+Dit zijn illustratieve bereikwaarden, geen offertes of limieten; modelverkeer, Search/compute SKU’s, regio, en optionele functies kunnen deze overschrijden. Bekijk de actuele prijsrichtlijnen van je gekozen voorbeeld voordat je provisioning uitvoert.
+
 | Omgeving | Geschatte Maandelijkse Kosten |
 |-------------|----------------------|
 | Ontwikkeling | $80-150 |
-| Acceptatie | $150-300 |
-| Productie | $300-3.500+ |
+| Staging | $150-300 |
+| Productie | $300-3,500+ |
 
-**Tip:** Voer `azd down` uit na het testen om kosten te vermijden.
+**Tip:** Voer `azd down` uit na het testen om kosten te voorkomen.
 
 ---
 
@@ -77,14 +81,14 @@ azd up
 |-----------|---------|
 | **Vorige** | [Hoofdstuk 1: Fundament](../chapter-01-foundation/README.md) |
 | **Volgende** | [Hoofdstuk 3: Configuratie](../chapter-03-configuration/README.md) |
-| **Overslaan naar** | [Hoofdstuk 8: Productiepatronen](../chapter-08-production/README.md) |
+| **Sla over naar** | [Hoofdstuk 8: Productiepatronen](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Gerelateerde Bronnen
+## 📖 Gerelateerde bronnen
 
 - [AI Probleemoplossing](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Productie AI Praktijken](../chapter-08-production/production-ai-practices.md)
+- [Productierichtlijnen voor AI](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---

@@ -1,77 +1,72 @@
-# Debugging Guide for AZD Deployments
+# Hướng Dẫn Gỡ Lỗi cho Triển Khai AZD
 
-**Chapter Navigation:**
-- **📚 Trang Khóa Học**: [AZD Cho Người Mới](../../README.md)
-- **📖 Chương Hiện Tại**: Chương 7 - Khắc phục sự cố & Gỡ lỗi
-- **⬅️ Trước**: [Các sự cố phổ biến](common-issues.md)
-- **➡️ Tiếp theo**: [Khắc phục sự cố cụ thể cho AI](ai-troubleshooting.md)
-- **🚀 Chương Tiếp Theo**: [Chương 8: Mô hình Sản xuất & Doanh nghiệp](../chapter-08-production/production-ai-practices.md)
+**Điều Hướng Chương:**
+- **📚 Trang Chủ Khóa Học**: [AZD Cho Người Mới](../../README.md)
+- **📖 Chương Hiện Tại**: Chương 7 - Khắc Phục Sự Cố & Gỡ Lỗi
+- **⬅️ Trước Đó**: [Các Vấn Đề Thường Gặp](common-issues.md)
+- **➡️ Tiếp Theo**: [Khắc Phục Sự Cố Đặc Thù AI](ai-troubleshooting.md)
+- **🚀 Chương Tiếp Theo**: [Chương 8: Mô Hình Sản Xuất & Doanh Nghiệp](../chapter-08-production/production-ai-practices.md)
 
-## Giới thiệu
+## Giới Thiệu
 
-Hướng dẫn toàn diện này cung cấp các chiến lược gỡ lỗi nâng cao, công cụ và kỹ thuật để chẩn đoán và giải quyết các sự cố phức tạp với việc triển khai bằng Azure Developer CLI. Tìm hiểu các phương pháp hệ thống để khắc phục sự cố, kỹ thuật phân tích nhật ký, phân tích hiệu năng và các công cụ chẩn đoán nâng cao để giải quyết hiệu quả các vấn đề triển khai và chạy thời gian.
+Hướng dẫn toàn diện này cung cấp các chiến lược gỡ lỗi nâng cao, công cụ và kỹ thuật để chẩn đoán và giải quyết các vấn đề phức tạp liên quan đến việc triển khai Azure Developer CLI. Tìm hiểu các phương pháp khắc phục sự cố có hệ thống, kỹ thuật phân tích nhật ký, phân tích hiệu năng và công cụ chẩn đoán nâng cao để giải quyết hiệu quả các sự cố triển khai và thời gian chạy.
 
-## Mục tiêu học tập
+## Mục Tiêu Học Tập
 
 Khi hoàn thành hướng dẫn này, bạn sẽ:
-- Nắm vững các phương pháp gỡ lỗi hệ thống cho các sự cố Azure Developer CLI
+- Thành thạo các phương pháp gỡ lỗi có hệ thống cho các vấn đề Azure Developer CLI
 - Hiểu cấu hình ghi nhật ký nâng cao và kỹ thuật phân tích nhật ký
-- Triển khai các chiến lược phân tích và hồ sơ hiệu năng
-- Sử dụng các công cụ và dịch vụ chẩn đoán của Azure để giải quyết các vấn đề phức tạp
-- Áp dụng các kỹ thuật gỡ lỗi mạng và khắc phục sự cố bảo mật
+- Áp dụng hồ sơ hiệu năng và chiến lược giám sát
+- Sử dụng công cụ và dịch vụ chẩn đoán Azure để giải quyết các vấn đề phức tạp
+- Áp dụng kỹ thuật gỡ lỗi mạng và khắc phục sự cố bảo mật
 - Cấu hình giám sát và cảnh báo toàn diện để phát hiện sự cố chủ động
 
-## Kết quả học tập
+## Kết Quả Học Tập
 
 Sau khi hoàn thành, bạn sẽ có thể:
-- Áp dụng phương pháp TRIAGE để gỡ lỗi hệ thống các sự cố triển khai phức tạp
+- Áp dụng phương pháp TRIAGE để gỡ lỗi có hệ thống các vấn đề triển khai phức tạp
 - Cấu hình và phân tích thông tin ghi nhật ký và theo dõi toàn diện
-- Sử dụng Azure Monitor, Application Insights và các công cụ chẩn đoán một cách hiệu quả
-- Gỡ lỗi kết nối mạng, xác thực và quyền truy cập một cách độc lập
+- Sử dụng hiệu quả Azure Monitor, Application Insights và các công cụ chẩn đoán
+- Gỡ lỗi các vấn đề kết nối mạng, xác thực và quyền truy cập một cách độc lập
 - Triển khai các chiến lược giám sát và tối ưu hóa hiệu năng
-- Tạo các script gỡ lỗi tùy chỉnh và tự động hóa cho các vấn đề lặp lại
+- Tạo các kịch bản gỡ lỗi và tự động hóa tùy chỉnh cho các vấn đề lặp lại
 
-## Phương pháp gỡ lỗi
+## Phương Pháp Gỡ Lỗi
 
-### Cách tiếp cận TRIAGE
-- **T**hời gian: Vấn đề bắt đầu khi nào?
-- **R**eproduce: Bạn có thể tái hiện nó một cách nhất quán không?
+### Phương Pháp TRIAGE
+- **T**ime: Khi nào sự cố bắt đầu?
+- **R**eproduce: Bạn có thể tái hiện nó liên tục không?
 - **I**solate: Thành phần nào đang gặp lỗi?
-- **A**nalyze: Nhật ký cho chúng ta biết gì?
+- **A**nalyze: Nhật ký nói gì với chúng ta?
 - **G**ather: Thu thập tất cả thông tin liên quan
-- **E**scalate: Khi nào cần tìm trợ giúp thêm
+- **E**scalate: Khi nào cần tìm sự trợ giúp thêm
 
-## Bật Chế độ Gỡ lỗi
+## Bật Chế Độ Gỡ Lỗi
 
-### Biến môi trường
+> **Phạm Vi:** Đây là các ví dụ chẩn đoán để điều chỉnh, không phải bộ kịch bản được cung cấp. Thay thế tên/ID tài nguyên; sử dụng Bash cho các khối shell. Dữ liệu `--debug` và giá trị môi trường có thể chứa thông tin nhạy cảm—xem xét/loại bỏ trước khi chia sẻ. Các ví dụ triển khai, quay lại hoặc thay đổi cấu hình đòi hỏi sự phê duyệt rõ ràng từ người vận hành.
+
+### Biến Môi Trường
 ```bash
-# Bật gỡ lỗi toàn diện
-export AZD_DEBUG=true
-export AZD_LOG_LEVEL=debug
-export AZURE_CORE_DIAGNOSTICS_DEBUG=true
+# Enable diagnostics on the command under investigation
+azd show --debug
+az account show --debug
 
-# Gỡ lỗi Azure CLI
-export AZURE_CLI_DIAGNOSTICS=true
-
-# Vô hiệu hóa telemetry để đầu ra gọn hơn
+# Disable telemetry for cleaner output
 export AZD_DISABLE_TELEMETRY=true
 ```
 
-### Cấu hình gỡ lỗi
+### Cấu Hình Gỡ Lỗi
 ```bash
-# Đặt cấu hình gỡ lỗi toàn cục
-azd config set debug.enabled true
-azd config set debug.logLevel debug
-azd config set debug.verboseOutput true
-
-# Bật ghi nhật ký theo dõi
-azd config set trace.enabled true
-azd config set trace.outputPath ./debug-traces
+# Inspect supported flags rather than setting arbitrary config keys
+azd show --help
+azd config list
 ```
 
-## 📊 Kỹ thuật Phân tích Nhật ký
+`azd config set` có thể lưu các khóa tùy ý; điều đó không có nghĩa `debug.enabled`, `debug.logLevel`, hoặc `trace.outputPath` là các cài đặt được hỗ trợ. Sử dụng cờ `--debug` của lệnh đã phát hành.
 
-### Hiểu các Mức nhật ký
+## 📊 Kỹ Thuật Phân Tích Nhật Ký
+
+### Hiểu Các Cấp Độ Nhật Ký
 ```
 TRACE   - Most detailed, includes internal function calls
 DEBUG   - Detailed diagnostic information
@@ -81,68 +76,69 @@ ERROR   - Error conditions that need attention
 FATAL   - Critical errors that cause application termination
 ```
 
-### Phân tích Nhật ký Có cấu trúc
+### Phân Tích Nhật Ký Có Cấu Trúc
 ```bash
-# Xem nhật ký bằng Azure Monitor (qua azd monitor)
+# View logs with Azure Monitor (via azd monitor)
 azd monitor --logs
 
-# Xem nhật ký ứng dụng theo thời gian thực
+# Open Application Insights Live Metrics (not a terminal log stream)
 azd monitor --live
 
-# Để phân tích nhật ký chi tiết, sử dụng Azure CLI với App Service hoặc Container App của bạn:
-# Nhật ký App Service
-az webapp log tail --name <app-name> --resource-group <rg-name>
+# For detailed log analysis, use Azure CLI with your App Service or Container App:
+# App Service logs
+az webapp log tail --name "$APP_NAME" --resource-group "$RG_NAME"
 
-# Nhật ký Container App
-az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+# Container App logs
+az containerapp logs show --name "$APP_NAME" --resource-group "$RG_NAME" --follow
 
-# Xuất nhật ký Application Insights để phân tích
+# Export Application Insights logs for analysis
 az monitor app-insights query \
-    --app <app-insights-name> \
+    --app "$APPI_NAME" \
+    --resource-group "$RG_NAME" \
     --analytics-query "traces | where timestamp > ago(1h) | where severityLevel >= 3"
 ```
 
-### Tương quan Nhật ký
+### Liên Kết Nhật Ký
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Tương quan nhật ký giữa các dịch vụ bằng Azure Monitor
+# correlate-logs.sh - Correlate logs across services using Azure Monitor
 
 TRACE_ID=$1
-APP_INSIGHTS_NAME=$2
+APP_INSIGHTS_ID=$2 # Application ID (GUID), not an ambiguous component name
 
-if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_NAME" ]; then
-    echo "Usage: $0 <trace-id> <app-insights-name>"
+if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_ID" ]; then
+    echo "Usage: $0 <trace-id> <application-id>"
     exit 1
 fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Tìm kiếm trong Application Insights các nhật ký tương quan
+# Search Application Insights for correlated logs
 az monitor app-insights query \
-    --app "$APP_INSIGHTS_NAME" \
+    --app "$APP_INSIGHTS_ID" \
     --analytics-query "union traces, exceptions, requests, dependencies | where operation_Id == '$TRACE_ID' | order by timestamp asc"
 
-# Tìm kiếm nhật ký hoạt động Azure
-az monitor activity-log list --correlation-id "$TRACE_ID"
+# Activity Log correlation IDs describe management operations and are not the
+# same as application trace IDs. Obtain them from the failed ARM operation.
 ```
 
-## 🛠️ Công cụ Gỡ lỗi Nâng cao
+## 🛠️ Công Cụ Gỡ Lỗi Nâng Cao
 
-### Truy vấn Azure Resource Graph
+### Truy Vấn Đồ Thị Tài Nguyên Azure
 ```bash
-# Truy vấn tài nguyên theo thẻ
+# Query resources by tags
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Tìm các triển khai thất bại
+# Find resource groups with non-success/missing provisioning state (NOT deployments)
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Kiểm tra tình trạng sức khỏe của tài nguyên
+# Check resource health
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
-### Gỡ lỗi Mạng
+### Gỡ Lỗi Mạng
 ```bash
-# Kiểm tra kết nối giữa các dịch vụ
+# Test connectivity between services
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -157,20 +153,21 @@ test_connectivity() {
         --output table
 }
 
-# Cách sử dụng
-test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
+# Usage
+# Source must be a supported Network Watcher source, e.g. a configured VM ID.
+test_connectivity "/subscriptions/.../providers/Microsoft.Compute/virtualMachines/myvm" "myapp-api.azurewebsites.net" 443
 ```
 
-### Gỡ lỗi Container
+### Gỡ Lỗi Container
 ```bash
-# Gỡ lỗi sự cố ứng dụng container
+# Debug container app issues
 debug_container() {
     local app_name=$1
     local resource_group=$2
     
     echo "=== Container App Status ==="
     az containerapp show --name "$app_name" --resource-group "$resource_group" \
-        --query "properties.{provisioningState:provisioningState,runningState:runningState}"
+        --query "properties.{provisioningState:provisioningState,runningStatus:runningStatus}"
     
     echo "=== Container App Revisions ==="
     az containerapp revision list --name "$app_name" --resource-group "$resource_group" \
@@ -181,12 +178,12 @@ debug_container() {
 }
 ```
 
-### Gỡ lỗi Kết nối Cơ sở dữ liệu
+### Gỡ Lỗi Kết Nối Cơ Sở Dữ Liệu
 ```bash
-# Gỡ lỗi kết nối cơ sở dữ liệu
+# Debug database connectivity
 debug_database() {
     local db_server=$1
-    local db_name=$2
+    local resource_group=$2
     
     echo "=== Database Server Status ==="
     az postgres flexible-server show --name "$db_server" --resource-group "$resource_group" \
@@ -200,26 +197,15 @@ debug_database() {
 }
 ```
 
-## 🔬 Gỡ lỗi Hiệu năng
+## 🔬 Gỡ Lỗi Hiệu Năng
 
-### Giám sát Hiệu năng Ứng dụng
+### Giám Sát Hiệu Năng Ứng Dụng
 ```bash
-# Bật gỡ lỗi Application Insights
-export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
-  "role": {
-    "name": "myapp-debug"
-  },
-  "sampling": {
-    "percentage": 100
-  },
-  "instrumentation": {
-    "logging": {
-      "level": "DEBUG"
-    }
-  }
-}'
+# SDK settings are language-specific. For Python OpenTelemetry role naming,
+# set before configuring the Azure Monitor distro:
+export OTEL_SERVICE_NAME=myapp-debug
 
-# Giám sát hiệu suất tùy chỉnh
+# Custom performance monitoring
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -227,8 +213,10 @@ monitor_performance() {
     echo "Monitoring $endpoint for $duration seconds..."
     
     for i in $(seq 1 $duration); do
-        response_time=$(curl -o /dev/null -s -w "%{time_total}" "$endpoint")
-        status_code=$(curl -o /dev/null -s -w "%{http_code}" "$endpoint")
+        # Capture status and duration from the SAME bounded request.
+        measurement=$(curl --max-time 10 -o /dev/null -s -w "%{http_code},%{time_total}" "$endpoint") || return 1
+        status_code=${measurement%,*}
+        response_time=${measurement#*,}
         
         echo "$(date '+%Y-%m-%d %H:%M:%S') - Status: $status_code, Response Time: ${response_time}s"
         sleep 1
@@ -236,33 +224,31 @@ monitor_performance() {
 }
 ```
 
-### Phân tích Sử dụng Tài nguyên
+### Phân Tích Sử Dụng Tài Nguyên
 ```bash
-# Giám sát việc sử dụng tài nguyên
+# Monitor resource usage
 monitor_resources() {
-    local resource_group=$1
+    local plan_id=$1 # Full Microsoft.Web/serverfarms resource ID
     
     echo "=== CPU Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "CpuPercentage" \
+        --resource "$plan_id" \
+        --metrics "CpuPercentage" \
         --interval PT1M \
         --aggregation Average
     
     echo "=== Memory Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "MemoryPercentage" \
+        --resource "$plan_id" \
+        --metrics "MemoryPercentage" \
         --interval PT1M \
         --aggregation Average
 }
 ```
 
-## 🧪 Kiểm thử và Xác thực
+## 🧪 Kiểm Tra và Xác Thực
 
-### Gỡ lỗi Kiểm thử Tích hợp
+### Gỡ Lỗi Kiểm Tra Tích Hợp
 ```bash
 #!/bin/bash
 # debug-integration-tests.sh
@@ -271,27 +257,27 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Thiết lập môi trường gỡ lỗi
+# Set debug environment
 export NODE_ENV=test
-export DEBUG=*
+export DEBUG='app:*'
 export LOG_LEVEL=debug
 
-# Lấy các điểm cuối của dịch vụ
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Get service endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl // .services.api.ingresUrl')
 
 echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Kiểm tra các điểm cuối trạng thái
+# Test health endpoints
 test_health() {
     local service=$1
     local url=$2
     
     echo "Testing $service health..."
     
-    response=$(curl -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
+    response=$(curl --max-time 10 -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
     status_code=$(echo $response | cut -d',' -f1)
     response_time=$(echo $response | cut -d',' -f2)
     
@@ -303,17 +289,17 @@ test_health() {
     fi
 }
 
-# Chạy các bài kiểm tra
+# Run tests
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Chạy các bài kiểm tra tích hợp tùy chỉnh
+# Run custom integration tests
 npm run test:integration
 ```
 
-### Kiểm thử Tải để Gỡ lỗi
+### Kiểm Tra Tải Để Gỡ Lỗi
 ```bash
-# Kiểm thử tải đơn giản để xác định các nút thắt hiệu năng
+# Simple load test to identify performance bottlenecks
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -321,42 +307,40 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # Sử dụng Apache Bench (cài đặt: apt-get install apache2-utils)
+    # Using Apache Bench (install: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Trích xuất các chỉ số chính
+    # Extract key metrics
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Kiểm tra lỗi
+    # Check for failures
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
 
-## 🔧 Gỡ lỗi Hạ tầng
+## 🔧 Gỡ Lỗi Hạ Tầng
 
-### Gỡ lỗi Template Bicep
+### Gỡ Lỗi Mẫu Bicep
 ```bash
-# Xác thực các mẫu Bicep với đầu ra chi tiết
+# Validate Bicep templates with detailed output
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Xác thực cú pháp
+    # Syntax validation
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Kiểm tra lint
+    # Lint validation
     az bicep lint --file "$template_file"
     
-    # Triển khai mô phỏng (what-if)
-    az deployment group what-if \
-        --resource-group "myapp-dev-rg" \
-        --template-file "$template_file" \
-        --parameters @main.parameters.json
+    # From the initialized project: azd resolves its parameter substitutions
+    # and deployment scope. Review hooks before provisioning preview.
+    azd provision --preview
 }
 
-# Gỡ lỗi triển khai mẫu
+# Debug template deployment
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -375,54 +359,46 @@ debug_deployment() {
 }
 ```
 
-### Phân tích Trạng thái Tài nguyên
+### Phân Tích Trạng Thái Tài Nguyên
 ```bash
-# Phân tích trạng thái tài nguyên để tìm sự không nhất quán
+# Analyze resource states for inconsistencies
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # Liệt kê tất cả tài nguyên cùng với trạng thái của chúng
+    # List all resources with their states
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Kiểm tra các tài nguyên bị lỗi
-    failed_resources=$(az resource list --resource-group "$resource_group" \
-        --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
-        --output tsv)
-    
-    if [ -n "$failed_resources" ]; then
-        echo "❌ Failed resources found:"
-        echo "$failed_resources"
-    else
-        echo "✅ All resources provisioned successfully"
-    fi
+    # Generic list responses often omit properties/provisioningState.
+    # Null is unknown, not failure; inspect the service-specific show command
+    # and deployment operations for the affected resource.
+    az deployment group list --resource-group "$resource_group" \
+        --query "[].{name:name,state:properties.provisioningState}" -o table
 }
 ```
 
-## 🔒 Gỡ lỗi Bảo mật
+## 🔒 Gỡ Lỗi Bảo Mật
 
-### Gỡ lỗi Lưu đồ Xác thực
+### Gỡ Lỗi Luồng Xác Thực
 ```bash
-# Gỡ lỗi xác thực Azure
+# Debug Azure authentication
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
     
     echo "=== Token Information ==="
-    token=$(az account get-access-token --query accessToken -o tsv)
-    
-    # Giải mã token JWT (yêu cầu jq và base64)
-    echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
+    # Do not print/decode bearer tokens into logs.
+    az account get-access-token --query "{expiresOn:expiresOn,tenant:tenant,subscription:subscription}" -o json
     
     echo "=== Role Assignments ==="
     user_id=$(az account show --query user.name -o tsv)
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Gỡ lỗi truy cập Key Vault
+# Debug Key Vault access
 debug_keyvault() {
     local vault_name=$1
     
@@ -438,16 +414,16 @@ debug_keyvault() {
 }
 ```
 
-### Gỡ lỗi Bảo mật Mạng
+### Gỡ Lỗi Bảo Mật Mạng
 ```bash
-# Gỡ lỗi nhóm bảo mật mạng
+# Debug network security groups
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Kiểm tra các quy tắc bảo mật
+    # Check security rules
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -456,30 +432,27 @@ debug_network_security() {
 }
 ```
 
-## 📱 Gỡ lỗi Ứng dụng Cụ thể
+## 📱 Gỡ Lỗi Đặc Thù Ứng Dụng
 
-### Gỡ lỗi Ứng dụng Node.js
+### Gỡ Lỗi Ứng Dụng Node.js
 ```javascript
-// debug-middleware.js - middleware gỡ lỗi cho Express
+// debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Ghi lại chi tiết của yêu cầu
+    // Log request details
     debug(`${req.method} ${req.url}`, {
-        headers: req.headers,
-        query: req.query,
-        body: req.body,
-        userAgent: req.get('User-Agent'),
-        ip: req.ip
+        // Do not log authorization headers, bodies, query strings, or client IPs.
+        route: req.route?.path || '(unmatched)'
     });
     
-    // Ghi đè res.json để ghi lại các phản hồi
+    // Override res.json to log responses
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
-        debug(`Response ${res.statusCode} in ${duration}ms`, data);
+        debug(`Response ${res.statusCode} in ${duration}ms`);
         return originalJson.call(this, data);
     };
     
@@ -487,16 +460,18 @@ module.exports = (req, res, next) => {
 };
 ```
 
-### Gỡ lỗi Truy vấn Cơ sở dữ liệu
+### Gỡ Lỗi Truy Vấn Cơ Sở Dữ Liệu
 ```javascript
-// database-debug.js - Tiện ích gỡ lỗi cơ sở dữ liệu
+// database-debug.js - Database debugging utilities
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
 class DebuggingPool extends Pool {
     async query(text, params) {
         const start = Date.now();
-        debug('Executing query:', { text, params });
+        // Promise-based query(text, params) demo only; not a drop-in replacement
+        // for node-postgres callback/streaming overloads. Avoid query parameters.
+        debug('Executing query');
         
         try {
             const result = await super.query(text, params);
@@ -517,12 +492,12 @@ class DebuggingPool extends Pool {
 module.exports = DebuggingPool;
 ```
 
-## 🚨 Quy trình Gỡ lỗi Khẩn cấp
+## 🚨 Quy Trình Gỡ Lỗi Khẩn Cấp
 
-### Phản ứng với Sự cố Ở Môi trường Sản xuất
+### Ứng Phó Vấn Đề Sản Xuất
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Gỡ lỗi khẩn cấp trong môi trường sản xuất
+# emergency-debug.sh - Emergency production debugging
 
 set -e
 
@@ -538,34 +513,34 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Chuyển sang môi trường chính xác
+# Switch to correct environment
 azd env select "$ENVIRONMENT"
 
-# Thu thập thông tin quan trọng
+# Collect critical information
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
-cat emergency-status.json | jq '.services[].endpoint'
+cat emergency-status.json | jq '.services[] | .ingressUrl // .ingresUrl'
 
 echo "=== 2. Application Health ==="
-for endpoint in $(cat emergency-status.json | jq -r '.services[].endpoint'); do
+for endpoint in $(cat emergency-status.json | jq -r '.services[] | (.ingressUrl // .ingresUrl // empty)'); do
     echo "Testing $endpoint/health"
     curl -f "$endpoint/health" || echo "❌ Health check failed for $endpoint"
 done
 
 echo "=== 3. Recent Errors ==="
-# Sử dụng Azure Monitor để xem nhật ký lỗi
+# Use Azure Monitor for error logs
 azd monitor --logs
 echo "Check Application Insights for detailed error analysis"
 
 echo "=== 4. Resource Status ==="
-az resource list --resource-group "$RESOURCE_GROUP" \
-    --query "[?properties.provisioningState != 'Succeeded']" > failed-resources.json
+az deployment group list --resource-group "$RESOURCE_GROUP" \
+    --query "[?properties.provisioningState == 'Failed']" > failed-resources.json
 
-if [ -s failed-resources.json ]; then
-    echo "❌ Failed resources found!"
+if jq -e 'length > 0' failed-resources.json >/dev/null; then
+    echo "❌ Failed group deployments found (inspect subscription deployments too)!"
     cat failed-resources.json
 else
-    echo "✅ All resources are healthy"
+    echo "No failed group deployment records found; resource health is not established."
 fi
 
 echo "=== 5. Recent Deployments ==="
@@ -576,75 +551,76 @@ az deployment group list --resource-group "$RESOURCE_GROUP" \
 echo "Emergency debugging completed: $(date)"
 echo "Files generated:"
 echo "  - emergency-status.json"
-echo "  - emergency-errors.log"
 echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
-### Quy trình Rollback
+### Quy Trình Quay Lại
 ```bash
-# Tập lệnh hoàn nguyên nhanh
+# Quick rollback script
 quick_rollback() {
     local environment=$1
     local previous_commit=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment"
     
-    # Chuyển môi trường
+    # Switch environment
     azd env select "$environment"
     
-    # Hoàn nguyên bằng Git (AZD không có chức năng hoàn nguyên tích hợp sẵn)
+    # Rollback using Git (AZD doesn't have built-in rollback)
     git checkout "$previous_commit"
-    azd deploy
+    azd deploy || return 1
     
-    # Xác minh hoàn nguyên
+    # Verify rollback
     echo "Verifying rollback..."
     azd show
     
-    # Kiểm tra các điểm cuối quan trọng
-    WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-    curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
+    # Test critical endpoints
+    WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl') || return 1
+    curl --max-time 10 -f "$WEB_URL/health" || { echo "❌ Rollback verification failed"; return 1; }
     
     echo "✅ Rollback completed"
 }
 ```
 
-## 📊 Bảng điều khiển Gỡ lỗi
+Việc quay lại chỉ bằng mã này không hoàn nguyên hạ tầng, di cư cơ sở dữ liệu hoặc bí mật. Sử dụng worktree sạch, ghi lại commit bắt đầu, và phục hồi sau đó; lệnh sẽ chuyển sang commit được chọn trong kho hiện tại.
 
-### Bảng giám sát Tùy chỉnh
+## 📊 Bảng Điều Khiển Gỡ Lỗi
+
+### Bảng Điều Khiển Giám Sát Tùy Chỉnh
 ```bash
-# Tạo các truy vấn Application Insights để gỡ lỗi
+# Create Application Insights queries for debugging
 create_debug_queries() {
-    local app_insights_name=$1
+    local app_insights_name=$1 # Use the Application ID GUID to avoid name ambiguity
     
-    # Truy vấn các lỗi
+    # Query for errors
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Truy vấn các vấn đề hiệu suất
+    # Query for performance issues
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Truy vấn các lỗi phụ thuộc
+    # Query for dependency failures
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
 }
 ```
 
-### Tổng hợp Nhật ký
+### Tổng Hợp Nhật Ký
 ```bash
-# Tổng hợp nhật ký từ nhiều nguồn Azure
+# Aggregate logs from multiple Azure sources
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
-    local app_insights_name=$1
+    local app_insights_name=$1 # Application ID GUID
     
     echo "Aggregating logs to $output_file"
     
     {
-        echo '{"source": "azure-activity", "logs": '
+        echo '[{"source": "azure-activity", "logs": '
         az monitor activity-log list --start-time "$(date -d '1 hour ago' -Iseconds)" --output json
         echo '}'
         
@@ -654,28 +630,30 @@ aggregate_logs() {
                 --analytics-query "union traces, exceptions | where timestamp > ago(1h)" --output json
             echo '}'
         fi
+        echo ']'
     } > "$output_file"
     
     echo "Logs aggregated in $output_file"
 }
 ```
 
-## 🔗 Tài nguyên Nâng cao
+## 🔗 Tài Nguyên Nâng Cao
 
-### Script Gỡ lỗi Tùy chỉnh
-Create a `scripts/debug/` directory with:
+### Kịch Bản Gỡ Lỗi Tùy Chỉnh
+Tạo thư mục `scripts/debug/` với:
 - `health-check.sh` - Kiểm tra sức khỏe toàn diện
-- `performance-test.sh` - Kiểm thử hiệu năng tự động
+- `performance-test.sh` - Kiểm tra hiệu năng tự động
 - `log-analyzer.py` - Phân tích và xử lý nhật ký nâng cao
 - `resource-validator.sh` - Xác thực hạ tầng
 
-### Tích hợp Giám sát
+### Tích Hợp Giám Sát
 ```yaml
 # azure.yaml - Add debugging hooks
 hooks:
   postdeploy:
     shell: sh
     run: |
+      set -e
       echo "Running post-deployment debugging..."
       ./scripts/debug/health-check.sh
       ./scripts/debug/performance-test.sh
@@ -686,36 +664,36 @@ hooks:
       fi
 ```
 
-## Thực hành Tốt nhất
+## Thực Tiễn Tốt Nhất
 
-1. **Luôn bật ghi nhật ký gỡ lỗi** trong các môi trường không phải sản xuất
-2. **Tạo trường hợp kiểm thử có thể tái hiện** cho các sự cố
-3. **Ghi lại quy trình gỡ lỗi** cho nhóm của bạn
-4. **Tự động hoá kiểm tra sức khỏe** và giám sát
-5. **Giữ các công cụ gỡ lỗi được cập nhật** cùng với thay đổi của ứng dụng
-6. **Luyện tập quy trình gỡ lỗi** vào những thời điểm không có sự cố
+1. **Luôn bật ghi nhật ký gỡ lỗi** trong môi trường không phải sản xuất
+2. **Tạo các trường hợp kiểm tra có thể tái hiện** cho các vấn đề
+3. **Ghi chép quy trình gỡ lỗi** cho nhóm của bạn
+4. **Tự động hóa kiểm tra sức khỏe** và giám sát
+5. **Cập nhật công cụ gỡ lỗi** theo thay đổi ứng dụng của bạn
+6. **Thực hành quy trình gỡ lỗi** trong thời gian không có sự cố
 
-## Bước Tiếp theo
+## Bước Tiếp Theo
 
-- [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md) - Lập kế hoạch yêu cầu tài nguyên
-- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - Chọn các hạng dịch vụ phù hợp
-- [Preflight Checks](../chapter-06-pre-deployment/preflight-checks.md) - Xác thực trước triển khai
-- [Cheat Sheet](../../resources/cheat-sheet.md) - Câu lệnh tham khảo nhanh
-
----
-
-**Nhớ**: Gỡ lỗi tốt là phải có phương pháp, tỉ mỉ và kiên nhẫn. Các công cụ và kỹ thuật này sẽ giúp bạn chẩn đoán sự cố nhanh hơn và hiệu quả hơn.
+- [Lập Kế Hoạch Dung Lượng](../chapter-06-pre-deployment/capacity-planning.md) - Lên kế hoạch yêu cầu tài nguyên
+- [Chọn SKU](../chapter-06-pre-deployment/sku-selection.md) - Chọn lớp dịch vụ phù hợp
+- [Kiểm Tra Trước Triển Khai](../chapter-06-pre-deployment/preflight-checks.md) - Xác thực trước khi triển khai
+- [Bảng Tóm Tắt](../../resources/cheat-sheet.md) - Các lệnh tham khảo nhanh
 
 ---
 
-**Điều hướng**
-- **Bài học trước**: [Các sự cố phổ biến](common-issues.md)
+**Hãy nhớ**: Gỡ lỗi tốt là phải có hệ thống, kỹ lưỡng và kiên nhẫn. Những công cụ và kỹ thuật này sẽ giúp bạn chẩn đoán sự cố nhanh hơn và hiệu quả hơn.
 
-- **Bài học tiếp theo**: [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md)
+---
+
+**Điều Hướng**
+- **Bài Trước**: [Các Vấn Đề Thường Gặp](common-issues.md)
+
+- **Bài Tiếp Theo**: [Lập Kế Hoạch Dung Lượng](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Miễn trừ trách nhiệm:
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI Co-op Translator (https://github.com/Azure/co-op-translator). Mặc dù chúng tôi nỗ lực để đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa sai sót hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ ban đầu nên được coi là nguồn có thẩm quyền. Đối với những thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp do người dịch thực hiện. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+**Tuyên bố miễn trừ trách nhiệm**:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng bản dịch tự động có thể chứa lỗi hoặc sai sót. Tài liệu gốc bằng ngôn ngữ gốc nên được coi là nguồn tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

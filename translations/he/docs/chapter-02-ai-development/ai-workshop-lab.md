@@ -1,17 +1,17 @@
-# מעבדת סדנת בינה מלאכותית: הפיכת פתרונות ה-AI שלך לניתנים לפריסה עם AZD
+# מעבדת סדנת בינה מלאכותית: להפוך את פתרונות ה-AI שלכם לאפליקציות שניתן לפרוס באמצעות AZD
 
-**ניווט בפרקים:**
+**ניווט בפרק:**
 - **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
-- **📖 הפרק הנוכחי**: פרק 2 - פיתוח ממוקד בינה מלאכותית
-- **⬅️ קודם**: [פריסת מודל בינה מלאכותית](ai-model-deployment.md)
-- **➡️ הבא**: [שיטות עבודה מומלצות ל-AI בייצור](production-ai-practices.md)
-- **🚀 הפרק הבא**: [פרק 3: קונפיגורציה](../chapter-03-configuration/configuration.md)
+- **📖 פרק נוכחי**: פרק 2 - פיתוח בראש AI
+- **⬅️ קודם**: [פריסת מודלי AI](ai-model-deployment.md)
+- **➡️ הבא**: [שיטות עבודה מומלצות ל-AI בפרודקשן](../chapter-08-production/production-ai-practices.md)
+- **🚀 הפרק הבא**: [פרק 3: הגדרות](../chapter-03-configuration/configuration.md)
 
 ## סקירת הסדנה
 
-מעבדה זו מלמדת מפתחים כיצד לקחת תבנית AI קיימת ולפרוס אותה באמצעות Azure Developer CLI (AZD). תלמדו דפוסים חיוניים לפריסות AI בייצור תוך שימוש בשירותי Microsoft Foundry.
+מעבדה מעשית זו מנחה מפתחים בתהליך לקיחת תבנית AI קיימת ופריסתה באמצעות Azure Developer CLI (AZD). תלמדו דפוסים חיוניים לפריסות AI בפרודקשן באמצעות שירותי Microsoft Foundry.
 
-> **הערת אימות (2026-07-13):** סדנה זו נבדקה עם `azd` בגרסה `1.27.1`. אם ההתקנה המקומית שלך ישנה יותר, עדכן את AZD לפני תחילת העבודה כדי שזרימת העבודה של האותנטיקציה, התבנית והפריסה תתאים לשלבים שלמטה.
+> **סקירת מהדורה (2026-11-04):** התבוננות בפקודות AZD ושמות התצורה המדגמית נעשו בהתאמה למהדורת `azd` `1.37.2` ולתצורה הנוכחית של המדגם המקושר. זוהי סקירת תיעוד, לא אימות פריסה בשידור חי. מעבדת RAG אינה דורשת את תוסף הסוכן; עבור הערכות סוכן יש להשתמש בתוסף נפרד `azure.ai.evaluations` וב[זרימת ההערכה העדכנית](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks), ולא בפקודות הערכה של סוכן ישנות.
 
 **משך:** 2-3 שעות  
 **רמה:** בינונית  
@@ -19,51 +19,53 @@
 
 ## 🎓 מטרות הלמידה
 
-בסיום הסדנה תוכל:
-- ✅ להמיר אפליקציית AI קיימת לשימוש בתבניות AZD
+בסיום הסדנה, תוכלו:
+- ✅ לחקור תבנית AI קיימת של AZD ולתכנן המרה של האפליקציה שלכם
 - ✅ להגדיר שירותי Microsoft Foundry עם AZD
-- ✅ ליישם ניהול בטוח של אישורי גישה לשירותי AI
-- ✅ לפרוס אפליקציות AI מוכנות לייצור עם ניטור
-- ✅ לפתור תקלות נפוצות בפריסת AI
+- ✅ ליישם ניהול קרדנציאלים מאובטח לשירותי AI
+- ✅ לפרוס אפליקציית AI לדוגמה עם ניטור
+- ✅ לפתור בעיות נפוצות בפריסת AI
 
 ## דרישות מוקדמות
 
-### כלים דרושים
-- התקנת [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- התקנת [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli)
-- התקנת [Git](https://git-scm.com/)
+### כלים נדרשים
+- [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) מותקן
+- [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) מותקן
+- [Git](https://git-scm.com/) מותקן
 - עורך קוד (מומלץ VS Code)
 
+בלוקים אלה משתמשים בתחביר Bash (כולל המשכים של שורות ו-`grep`). ב-Windows, השתמש ב-Git Bash/WSL או תרגם אותם ל-PowerShell. בנוסף התקן את שפת התכנות, מנהל החבילות, וכלי המכולות המפורטים ב[הגדרת הסביבה המקומית של המדגם](https://github.com/Azure-Samples/azure-search-openai-demo#local-environment).
+
 ### משאבי Azure
-- מנוי Azure עם גישת תורם
+- מנוי Azure עם הרשאות הקצאת משאבים והקצאת תפקידים (למשתמש Contributor בלבד אין הרשאות ליצירת הקצאת RBAC; השתמש במנהל תפקידים מורשה או שווה ערך מתועד של המדגם)
 - גישה לשירותי Microsoft Foundry Models (או יכולת לבקש גישה)
 - הרשאות יצירת Resource Group
 
 ### דרישות ידע
 - הבנה בסיסית של שירותי Azure
-- היכרות עם ממשקי שורת פקודה
-- מושגי AI/ML בסיסיים (APIs, מודלים, פרומפטים)
+- היכרות עם ממשקי שורת הפקודה
+- מושגי AI/ML בסיסיים (API, מודלים, פקודות)
 
-## התקנת הסדנה
+## הקמת המעבדה
 
 ### שלב 1: הכנת הסביבה
 
-1. **וודא שהכלים מותקנים:**
+1. **אמת את התקנת הכלים:**
 ```bash
-# בדוק התקנת AZD
+# Check AZD installation
 azd version
 
-# בדוק את Azure CLI
+# Check Azure CLI
 az --version
 
-# התחבר ל-Azure עבור זרימות העבודה של AZD
+# Login to Azure for AZD workflows
 azd auth login
 
-# התחבר ל-Azure CLI רק אם אתה מתכנן להריץ פקודות az במהלך האבחון
+# Login to Azure CLI only if you plan to run az commands during diagnostics
 az login
 ```
 
-אם אתה עובד עם כמה tenants או שהמנוי שלך לא מזוהה אוטומטית, נסה שוב עם `azd auth login --tenant-id <tenant-id>`.
+אם אתה עובד עם מספר שוכרים או שהמנוי לא מזוהה אוטומטית, נסה שוב עם `azd auth login --tenant-id <tenant-id>`.
 
 2. **שכפל את מאגר הסדנה:**
 ```bash
@@ -75,7 +77,7 @@ cd azure-search-openai-demo
 
 ### אנטומיה של תבנית AZD ל-AI
 
-בחן את הקבצים המרכזיים בתבנית AZD מוכנה ל-AI:
+חקור את הקבצים המרכזיים בתבנית AZD מוכנה ל-AI:
 
 ```
 azure-search-openai-demo/
@@ -83,26 +85,26 @@ azure-search-openai-demo/
 ├── infra/                   # Infrastructure as Code
 │   ├── main.bicep          # Main infrastructure template
 │   ├── main.parameters.json # Environment parameters
-│   └── modules/            # Reusable Bicep modules
-│       ├── openai.bicep    # Microsoft Foundry Models configuration
-│       ├── search.bicep    # Azure AI Search setup
-│       └── webapp.bicep    # Web app configuration
-├── app/                    # Application code
+│   ├── core/               # Shared infrastructure modules
+│   └── app/                # Application-specific infrastructure
+├── app/                    # Backend, frontend, and optional ingestion functions
 ├── scripts/               # Deployment scripts
 └── .azure/               # AZD environment files
 ```
 
-### **תרגיל מעבדה 1.1: בחינת הקונפיגורציה**
+המדגם המשוכפל יכול להשתנות; `.azure/` מופיע לאחר אתחול הסביבה, לא בהכרח בשכפול טרי. בדוק את השכפול בפועל במקום ליצור תיקיות חסרות שיתאימו לסכמה הזו.
 
-1. **בחן את הקובץ azure.yaml:**
+### **תרגיל מעבדה 1.1: חקור את התצורה**
+
+1. **בדוק את הקובץ azure.yaml:**
 ```bash
 cat azure.yaml
 ```
 
-**מה לבדוק:**
-- הגדרות שירותים עבור רכיבי AI
+**מה לחפש:**
+- הגדרות שירות עבור רכיבי AI
 - מיפוי משתני סביבה
-- הגדרות מארחים
+- תצורות מארח
 
 2. **סקור את התשתית ב-main.bicep:**
 ```bash
@@ -113,14 +115,14 @@ cat infra/main.bicep
 - פריסת שירות Microsoft Foundry Models
 - אינטגרציה עם Azure AI Search
 - ניהול מפתחות מאובטח
-- הגדרות אבטחת רשת
+- תצורות אבטחת רשת
 
-### **נושא לדיון:** למה דפוסים אלו חשובים ל-AI
+### **נקודת שיח:** מדוע דפוסים אלה חשובים ל-AI
 
-- **תלויות שירות**: אפליקציות AI דורשות שירותים מתואמים מרובים
-- **אבטחה**: מפתחות API ונקודות קצה צריכים ניהול בטוח
-- **קשיחות בקנה מידה**: עומסי AI מחייבים דרישות גדילה ייחודיות
-- **ניהול עלויות**: שירותי AI עלולים להיות יקרים אם לא מוגדרים נכון
+- **תלות בשירותים**: אפליקציות AI דורשות לעיתים שירותים רבים מתואמים
+- **אבטחה**: חשוב לנהל מפתחות API ונקודות קצה בצורה מאובטחת
+- **סרגללות**: לעומסי AI דרישות סקלביליות ייחודיות
+- **ניהול עלויות**: שירותי AI יכולים להיות יקרים אם לא מוגדרים נכון
 
 ## מודול 2: פרוס את אפליקציית ה-AI הראשונה שלך
 
@@ -133,87 +135,89 @@ azd env new myai-workshop
 
 2. **הגדר פרמטרים נדרשים:**
 ```bash
-# הגדר את אזור Azure המועדף עליך
+# Set your preferred Azure region
 azd env set AZURE_LOCATION eastus
 
-# אופציונלי: הגדר מודל OpenAI ספציפי
-azd env set AZURE_OPENAI_MODEL gpt-4.1-mini
+# Optional: select a chat model supported by your region and quota
+azd env set AZURE_OPENAI_CHATGPT_MODEL gpt-4.1-mini
 ```
 
-### שלב 2.2: פריסת התשתית והאפליקציה
+### שלב 2.2: פרוס את התשתית והאפליקציה
 
-1. **פרוס באמצעות AZD:**
+1. **פרוס עם AZD:**
 ```bash
 azd up
 ```
 
-**מה קורה במהלך `azd up`:**
-- ✅ פריסת שירות Microsoft Foundry Models
-- ✅ יצירת שירות Azure AI Search
-- ✅ הקמת App Service לאפליקציית ווב
-- ✅ קונפיגורציות רשת ואבטחה
-- ✅ פריסת קוד האפליקציה
-- ✅ הקמה של ניטור ורישום
+**מה קורה בזמן `azd up`:**
+- ✅ מקים שירות Microsoft Foundry Models
+- ✅ יוצר שירות Azure AI Search
+- ✅ מתקין Azure Container Apps ל-backend ול-frontend כלול (הברירת מחדל הנוכחי של המדגם)
+- ✅ מגדיר רשת ואבטחה
+- ✅ מפרוס קוד אפליקציה
+- ✅ מקים ניטור ורישום
 
-2. **עקוב אחרי התקדמות הפריסה** ורשום את המשאבים שנוצרים.
+2. **נטר את ההתקדמות בפריסה** והער את המשאבים הנוצרים.
 
-### שלב 2.3: אימות הפריסה שלך
+### שלב 2.3: אמת את הפריסה שלך
 
 1. **בדוק את המשאבים שפורסמו:**
 ```bash
 azd show
 ```
 
-2. **פתח את האפליקציה שפורסה:**
+2. **פתח את האפליקציה שפורסמה:**
 ```bash
 azd show
 ```
 
-פתח את נקודת הקצה שתוצג בפקודת `azd show`.
+פתח את נקודת הקצה האינטרנטית שמופיעה בתוצאת `azd show`.
 
-3. **בדוק את תפקוד הבינה המלאכותית:**
-   - ניווט אל אפליקציית הווב
+3. **בדוק את פעולת ה-AI:**
+   - עבור לאפליקציה באינטרנט
    - נסה שאילתות לדוגמה
-   - אמת שהתשובות של ה-AI עובדות
+   - אמת שמספרי ה-AI פועלים
 
-### **תרגיל מעבדה 2.1: תרגול פתרון תקלות**
+### **תרגיל מעבדה 2.1: תרגול פתרון בעיות**
 
-**תרחיש**: הפריסה הצליחה אך ה-AI אינו מגיב.
+**תרחיש**: הפריסה הצליחה אך ה-AI אינו משיב.
 
 **בעיות נפוצות לבדיקה:**
-1. **מפתחות API של OpenAI**: וודא שנקבעו כראוי
-2. **זמינות המודל**: בדוק אם האזור שלך תומך במודל
-3. **קישוריות רשת**: ודא שהשירותים יכולים לתקשר
-4. **הרשאות RBAC**: וודא שהאפליקציה יכולה לגשת ל-OpenAI
+1. **אימות:** אמת את הזהות המנוהלת והקצאת התפקידים; בדוק מפתחות API רק אם אפשרת באופן מיוחד אימות מבוסס מפתח
+2. **זמינות דגם:** בדוק אם האזור שלך תומך בדגם
+3. **חיבוריות רשת:** ודא שהשירותים יכולים לתקשר
+4. **הרשאות RBAC:** אמת שהאפליקציה יכולה לגשת ל-OpenAI
 
-**פקודות לאבחון:**
+**פקודות דיבוג:**
 ```bash
-# בדוק משתני סביבה
+# Check environment variables
 azd env get-values
 
-# הצג יומני פריסה
-az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
+# Open the selected environment's logging view
+azd monitor --logs
 
-# בדוק את מצב הפריסה של OpenAI
+# Check OpenAI deployment status
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
 
 ## מודול 3: התאמת אפליקציות AI לצרכים שלך
 
-### שלב 3.1: שינוי קונפיגורציית ה-AI
+### שלב 3.1: שינוי תצורת ה-AI
 
-1. **עדכן את דגם ה-OpenAI:**
+1. **עדכן את דגם OpenAI:**
 ```bash
-# שנה לדגם שונה (אם זמין באזור שלך)
-azd env set AZURE_OPENAI_MODEL gpt-4.1
+# Change to a different model (if available in your region)
+azd env set AZURE_OPENAI_CHATGPT_MODEL gpt-4.1
 
-# פרוס מחדש עם התצורה החדשה
-azd deploy
+# Apply the model infrastructure change, then deploy the application
+azd up
 ```
 
 2. **הוסף שירותי AI נוספים:**
 
-ערוך את `infra/main.bicep` להוספת Document Intelligence:
+ערוך את `infra/main.bicep` כדי להוסיף Document Intelligence:
+
+הקטע הבא הוא המחשה, לא תבנית מלאה. ייתכן שהמדגם כבר מקים שירותי עיבוד מסמכים: בדוק את התשתית הנוכחית לפני הוספת משאבים כפולים. תוספות מותאמות דורשות חיבורים לפלטים, זהויות, ותצורת אפליקציה.
 
 ```bicep
 // Add to main.bicep
@@ -230,64 +234,68 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-### שלב 3.2: קונפיגורציות לפי סביבה
+### שלב 3.2: תצורות ייחודיות לסביבה
 
-**שיטה מומלצת**: הגדרות שונות לפיתוח מול ייצור.
+**שיטת עבודה מומלצת:** תצורות שונות לפיתוח מול פרודקשן.
 
-1. **צור סביבה בייצור:**
+1. **צור סביבה לפרודקשן:**
 ```bash
 azd env new myai-production
 ```
 
-2. **הגדר פרמטרים מותאמים לייצור:**
+2. **הגדר פרמטרים ייעודיים לפרודקשן:**
 ```bash
-# בייצור משתמשים בדרך כלל בקודי מוצר (SKU) גבוהים יותר
-azd env set AZURE_OPENAI_SKU S0
-azd env set AZURE_SEARCH_SKU standard
+# Use the sample's actual Search SKU parameter
+azd env set AZURE_SEARCH_SERVICE_SKU standard
 
-# הפעל תכונות אבטחה נוספות
-azd env set ENABLE_PRIVATE_ENDPOINTS true
+# Enable private endpoints using the sample's parameter
+azd env set AZURE_USE_PRIVATE_ENDPOINT true
 ```
 
-### **תרגיל מעבדה 3.1: אופטימיזציית עלויות**
+שמות אלה מגיעים מ-[main.parameters.json](https://github.com/Azure-Samples/azure-search-openai-demo/blob/main/infra/main.parameters.json) של המדגם. `azd env set` מאחסן ערך אך אינו מייצר משתנה פעיל באופן שרירותי: התבנית חייבת להשתמש בו. סקור את [מדריך בידוד הרשת](https://github.com/Azure-Samples/azure-search-openai-demo/blob/main/docs/deploy_private.md) של המדגם לפני השבתת גישה ציבורית, והשתמש ב-`azd up` ליישום שינויים בתשתית. SKU של OpenAI `S0` בלבד אינו קובע את קצב העיבוד; גם סוג וכושר הפריסה של הדגם משפיעים.
 
-**אתגר**: קונפיגורציה לתבנית בהתאמה לכלכלה בפיתוח.
+### **תרגיל מעבדה 3.1: אופטימיזציה של עלויות**
+
+**אתגר:** הגדר את התבנית לפיתוח חסכוני.
 
 **משימות:**
-1. זהה אילו SKUs ניתן להגדיר כרמות חינמיות/בסיסיות
-2. הגדר משתני סביבה להוצאות מינימליות
-3. פרוס והשווה עלויות עם קונפיגורציית הייצור
+1. בחר את הסביבה הניתנת למחיקה של הסדנה: `azd env select myai-workshop`.
+2. רשום את ה-SKU הנוכחי של Search וקיבולת הדגם מתוך `infra/main.parameters.json` והסביבה שבחרת.
+3. השתמש בקלט הנתמך למטה, לאחר אימות מכסת הדגם/האזור:
+   ```bash
+   azd env set AZURE_SEARCH_SERVICE_SKU basic
+   azd env set AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY 10
+   azd up
+   ```
+4. אמת את ה-SKU של Search וקיבולת הפריסה בפורטל ואמד את ההבדל עם מחשבון המחירים. אל תצפה לעדכון מיידי של נתוני החיוב.
 
-**רמזים לפתרון:**
-- השתמש ברמת F0 (חינמית) עבור שירותי Azure AI כשאפשרי
-- השתמש ברמת Base לשירות Search בפיתוח
-- שקול שימוש בתכנית צריכה לפונקציות
+**קריטריוני הצלחה:** Search משתמש ב-Basic, לפריסת הצ'אט יש קיבולת נתמכת כפי שבוקשה, והאפליקציה עדיין מגיבה לשאלה לדוגמה. קיבולת `10` היא מוקצית להגבלת שיעור, לא הנחה במחיר טוקן. שינויים ברמת Search עשויים להיות מוגבלים או לדרוש יצירת מחודש; אל תערוך ניסויים על משאבים בפרודקשן. F0 הוא ספציפי לשירות ואינו SKU של דגם Azure OpenAI.
 
-## מודול 4: אבטחה ושיטות עבודה מומלצות בייצור
+## מודול 4: אבטחה ושיטות עבודה מומלצות בפרודקשן
 
-### שלב 4.1: ניהול אישורים מאובטח
+### שלב 4.1: ניהול קרדנציאלים מאובטח
 
-**אתגר נוכחי**: רבות מאפליקציות ה-AI כוללות מפתחות API מוצפנים ישירות או משתמשות באחסון לא בטוח.
+**אתגר נוכחי:** אפליקציות AI רבות מקודדות מפתחות API או משתמשות באחסון לא בטוח.
 
-**פתרון AZD**: זהות מנוהלת + אינטגרציית Key Vault.
+**פתרון AZD:** זהות מנוהלת + אינטגרציה עם Key Vault.
 
-1. **בדוק את קונפיגורציית האבטחה בתבנית שלך:**
+1. **סקור את הגדרות האבטחה בתבנית שלך:**
 ```bash
-# חפש תצורת Key Vault וזוית מנוהלת
+# Look for Key Vault and Managed Identity configuration
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
-2. **ודא שזהות מנוהלת פעילה:**
+2. **אמת את פעולת הזהות המנוהלת:**
 ```bash
-# בדוק אם לאפליקציית האינטרנט יש את תצורת הזיהוי הנכונה
-az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
+# For the sample's default Container Apps host
+az containerapp identity show --name YOUR_CONTAINER_APP_NAME --resource-group YOUR_RG
 ```
 
 ### שלב 4.2: אבטחת רשת
 
-1. **אפשר נקודות קצה פרטיות** (אם עדיין לא מוגדר):
+1. **אפשר נקודות קצה פרטיות** באמצעות תצורת הרשת הנתמכת של המדגם (אם לא מוגדר כבר).
 
-הוסף לתבנית הביספ שלך:
+עבור התבנית שלך, קטע המחשה זה מראה את חיבור נקודת הקצה של OpenAI. הוא גם זקוק ל-VNet, תצורת DNS פרטית, וקישוריות לאפליקציה; אל תעתיק אותו כפי שהוא לתוך המדגם, שכבר כולל מודולים לנקודות קצה פרטיות:
 ```bicep
 // Private endpoint for OpenAI
 resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
@@ -310,82 +318,70 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-### שלב 4.3: ניטור ונראות
+### שלב 4.3: ניטור ותצפית
 
 1. **הגדר Application Insights:**
 ```bash
-# יש לתצגר את Application Insights אוטומטית
-# בדוק את התצוגה:
-az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
+# Application Insights should be automatically configured
+# Check the configuration:
+az monitor app-insights component show --app YOUR_APP_INSIGHTS_NAME --resource-group YOUR_RG
 ```
 
-2. **הגדר ניטור ייחודי ל-AI:**
-
-הוסף מדדים מותאמים לניטור פעולות AI:
-```bicep
-// In your web app configuration
-resource webApp 'Microsoft.Web/sites@2023-01-01' = {
-  properties: {
-    siteConfig: {
-      appSettings: [
-        {
-          name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
-          value: applicationInsights.properties.ConnectionString
-        }
-        {
-          name: 'OPENAI_MONITOR_ENABLED'
-          value: 'true'
-        }
-      ]
-    }
-  }
-}
+2. **אפשר אינטגרציה של Application Insights של המדגם:**
+```bash
+azd env set AZURE_USE_APPLICATION_INSIGHTS true
+azd up
+azd monitor --overview
 ```
+
+הכלי לניטור של המדגם שולח טלמטריה; הגדרה שרירותית של `OPENAI_MONITOR_ENABLED` אינה מפעילה מדדי AI. בדוק מעקבים עבור שיחות לדגם, תנודתיות, כשלונות, ושימוש בטוקנים, והימנע מהרשמת פקודות או תגובות רגישות.
 
 ### **תרגיל מעבדה 4.1: ביקורת אבטחה**
 
-**משימה**: בדוק את הפריסה שלך לפי שיטות עבודה מומלצות לאבטחה.
+**משימה:** סקור את הפריסה שלך לשיטות עבודה מומלצות באבטחה.
 
 **רשימת בדיקה:**
-- [ ] אין סודות מוצפנים ישירות בקוד או בקונפיגורציה
-- [ ] זהות מנוהלת בשימוש לאימות בין שירותים
-- [ ] Key Vault לאחסון קונפיגורציה רגישה
-- [ ] גישת רשת מוגבלת כראוי
+- [ ] אין סודות מקודדים בקוד או בתצורה
+- [ ] זהות מנוהלת לשם אימות שירות-לשירות
+- [ ] Key Vault מאחסן תצורה רגישה
+- [ ] גישה לרשת מוגבלת כראוי
 - [ ] ניטור ורישום מופעלים
 
-## מודול 5: המרת אפליקציית ה-AI שלך
+## מודול 5: המרת אפליקציית AI שלך
 
-### שלב 5.1: טופס הערכה
+### שלב 5.1: גיליון הערכה
 
-**לפני המרת האפליקציה שלך**, ענה על השאלות הבאות:
+**לפני המרת האפליקציה שלך**, השב על השאלות הבאות:
 
 1. **ארכיטקטורת האפליקציה:**
    - אילו שירותי AI האפליקציה שלך משתמשת?
-   - אילו משאבי מחשוב היא דורשת?
+   - אילו משאבי מחשוב דרושים לה?
    - האם היא דורשת בסיס נתונים?
-   - מה התלויות בין השירותים?
+   - מהן התלויות בין השירותים?
 
 2. **דרישות אבטחה:**
-   - אילו נתונים רגישים מטפלת האפליקציה?
+   - אילו נתונים רגישים האפליקציה שלך מטפלת בהם?
    - אילו דרישות תאימות יש לך?
    - האם דרושה רשת פרטית?
 
-3. **דרישות קנה מידה:**
-   - מה העומס הצפוי שלך?
-   - האם נדרש קנה מידה אוטומטי?
+3. **דרישות סרגלול:**
+   - מה עומס העבודה הצפוי?
+   - האם דרוש סרגלול אוטומטי?
    - האם יש דרישות אזוריות?
 
-### שלב 5.2: צור את תבנית ה-AZD שלך
+### שלב 5.2: צור תבנית AZD משלך
 
-**עקוב אחרי דפוס זה להמרת האפליקציה שלך:**
+**עקוב אחרי דפוס זה להמרת האפליקציה:**
+
+**רק שלד תבנית:** חלק זה אינו מספק קוד מקור של API/אפליקציית רשת, תשתית מארחת, פריסות מודלים, זהויות/RBAC או `main.parameters.json` גמורה. הבייסיק של Bicep ברמת resource-group מדגים הרכבת מודול; נקודת כניסה טיפוסית של מנוי AZD חייבת ליצור resource group ולהפעיל אותו בהיקף זה. אל תצפה ש-`azd up` יפרוס אפליקציה שלמה לאחר העתקת חלקים אלה בלבד. לשורת בסיס הניתנת להרצה, המשך להשתמש בתבנית RAG ממודול 1.
 
 1. **צור את המבנה הבסיסי:**
 ```bash
 mkdir my-ai-app-azd
 cd my-ai-app-azd
 
-# אתחול תבנית AZD
-azd init --template minimal
+# Initialize AZD template
+azd init --template minimal .
 ```
 
 2. **צור azure.yaml:**
@@ -413,7 +409,7 @@ hooks:
 
 3. **צור תבניות תשתית:**
 
-**infra/main.bicep** - תבנית ראשית:
+**infra/main.bicep** - התבנית הראשית:
 ```bicep
 @description('Primary location for all resources')
 param location string = resourceGroup().location
@@ -448,6 +444,7 @@ resource openAIAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   }
   properties: {
     customSubDomainName: name
+    disableLocalAuth: true
   }
 }
 
@@ -457,227 +454,238 @@ output name string = openAIAccount.name
 
 ### **תרגיל מעבדה 5.1: אתגר יצירת תבנית**
 
-**אתגר**: צור תבנית AZD עבור אפליקציית AI לעיבוד מסמכים.
+**אתגר:** צור תבנית AZD לאפליקציית עיבוד מסמכים מבוססת AI.
 
 **דרישות:**
 - Microsoft Foundry Models לניתוח תוכן
 - Document Intelligence ל-OCR
 - חשבון אחסון להעלאת מסמכים
-- פונקציית Azure לעיבוד לוגיקה
-- אפליקציית ווב לממשק משתמש
+- Function App ללוגיקת עיבוד
+- אפליקציית רשת לממשק משתמש
 
 **נקודות בונוס:**
-- הוסף טיפול בשגיאות כראוי
+- הוסף טיפול נכון בשגיאות
 - כלול הערכת עלויות
-- הקם לוחות ניטור
+- הקם לוחות בקרה לניטור
 
-## מודול 6: פתרון תקלות נפוצות
+## מודול 6: פתרון בעיות נפוצות
 
-### תקלות נפוצות בפריסה
+### בעיות נפוצות בפריסה
 
-#### תקלה 1: חריגה ממכסת שירות OpenAI
-**תסמינים:** הפריסה נכשלת עם שגיאת מכסה
+#### בעיה 1: חריגה ממכסת שירות OpenAI
+**תסמינים:** הפריסה נכשלה עם שגיאת מכסה
 **פתרונות:**
 ```bash
-# בדוק מכסות נוכחיות
+# Check current quotas
 az cognitiveservices usage list --location eastus
 
-# בקש הגדלת מכסה או נסה אזור שונה
+# Request quota increase, OR try a new disposable environment in another region.
+# Azure resources cannot be relocated merely by changing AZURE_LOCATION.
+azd env new myai-quota-test
 azd env set AZURE_LOCATION westus2
 azd up
 ```
 
-#### תקלה 2: המודל אינו זמין באזור
-**תסמינים:** תגובות AI נכשלות או שגיאות בפריסת מודל
+#### בעיה 2: דגם לא זמין באזור
+**תסמינים:** תגובות AI נכשלים או שגיאות בפריסת הדגם
 **פתרונות:**
 ```bash
-# בדוק זמינות דגם לפי אזור
+# Check model availability by region
 az cognitiveservices model list --location eastus
 
-# עדכן לדגם זמין
-azd env set AZURE_OPENAI_MODEL gpt-4.1-mini
-azd deploy
+# Update to available model
+azd env set AZURE_OPENAI_CHATGPT_MODEL gpt-4.1-mini
+azd up
 ```
 
-#### תקלה 3: בעיות הרשאה
-**תסמינים:** שגיאות 403 Forbidden בקריאה לשירותי AI
+#### בעיה 3: בעיות הרשאה
+**תסמינים:** שגיאות 403 Forbidden בעת קריאה לשירותי AI
 **פתרונות:**
 ```bash
-# בדוק את ההקצאות לתפקידים
+# Check role assignments
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# הוסף תפקידים חסרים
+# Add missing roles
 az role assignment create \
   --assignee YOUR_PRINCIPAL_ID \
   --role "Cognitive Services OpenAI User" \
   --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 ```
 
-### תקלות ביצועים
+### בעיות ביצועים
 
-#### תקלה 4: תגובות AI איטיות
+#### בעיה 4: תגובות AI איטיות
 **שלבי חקירה:**
-1. בדוק מדדי ביצועים ב-Application Insights
-2. סקור מדדי שירות OpenAI בפורטל Azure
-3. אמת קישוריות רשת והשהיה
+1. בדוק מדדים ב-Application Insights
+2. עיין במדדי שירות OpenAI בפורטל Azure
+3. אמת חיבוריות רשת ועיכובים
 
 **פתרונות:**
-- יישם מטמון לשאילתות נפוצות
-- השתמש בדגם OpenAI המתאים למקרה השימוש שלך
-- שקול שכפולי קריאה לעומסים גבוהים
+- יישם caching לשאילתות נפוצות
+- השתמש בדגם OpenAI מתאים למקרה השימוש שלך
+- סקל אפליקציית רפליקות רק לאחר בדיקת מגבלות RPM/TPM של הדגם; פריסות Azure OpenAI אינן חושפות הגדרת "רפליקת קריאה" בסגנון בסיס נתונים גנרי
 
-### **תרגיל מעבדה 6.1: אתגר איתור באגים**
+### **תרגיל מעבדה 6.1: אתגר דיבוג**
 
-**תרחיש**: הפריסה הצליחה אך האפליקציה מחזירה שגיאות 500.
+**תרחיש:** הפריסה הצליחה, אך האפליקציה מחזירה שגיאות 500.
 
-**משימות איתור באגים:**
+**משימות דיבוג:**
 1. בדוק לוגים של האפליקציה
-2. אמת קישוריות שירותים
+2. אמת חיבור שירות
 3. בדוק אימות
-4. סקור את הקונפיגורציה
+4. סקור תצורה
 
 **כלים לשימוש:**
-- `azd show` להצגת מידע על הפריסה
-- פורטל Azure ללוגים מפורטים של שירותים
-- Application Insights לטלמטריית האפליקציה
+- `azd show` לסקירת פריסות
+- פורטל Azure ליומני שירות מפורטים
+- Application Insights למעקב טלמטריה של האפליקציה
 
 ## מודול 7: ניטור ואופטימיזציה
 
-### שלב 7.1: הקם ניטור מקיף
+### שלב 7.1: הקמת ניטור מקיף
 
-1. **צור לוחות מחוונים מותאמים אישית:**
+1. **צור לוחות בקרה מותאמים אישית:**
 
-ניווט לפורטל Azure וצור לוח מחוונים עם:
-- ספירת בקשות OpenAI והשהיה
-- שיעורי שגיאות באפליקציה
+עבור לפורטל Azure וצור לוח בקרה הכולל:
+- ספירת בקשות וזמני השהייה ל-OpenAI
+- אחוזי שגיאות האפליקציה
 - ניצול משאבים
 - מעקב עלויות
 
 2. **הגדר התראות:**
 ```bash
-# התראה על שיעור שגיאות גבוה
+# Failed-request count on the Application Insights component (not a percentage)
 az monitor metrics alert create \
-  --name "AI-App-High-Error-Rate" \
+  --name "AI-App-Failed-Requests" \
   --resource-group YOUR_RG \
-  --target-resource-id YOUR_APP_ID \
-  --condition "avg Http5xx greater than 10" \
-  --description "Alert when error rate is high"
+  --scopes YOUR_APPLICATION_INSIGHTS_RESOURCE_ID \
+  --condition "count requests/failed > 10" \
+  --window-size 5m \
+  --evaluation-frequency 1m \
+  --description "More than 10 failed requests in five minutes"
 ```
 
-### שלב 7.2: אופטימיזציית עלויות
+אמת שהרכיב משדר טלמטריה של בקשות והוסף קבוצת פעולה אם נדרשות התראות. המדד הוא ספירה, לא אחוז כישלונות; התראת שיעור דורשת שאילתה ומתאם מתאים.
 
-1. **נתח הוצאות נוכחיות:**
+### שלב 7.2: אופטימיזציה של עלויות
+
+1. **נתח את העלויות הנוכחיות:**
 ```bash
-# השתמש ב-Azure CLI לקבלת נתוני עלות
-az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
+# Set a recent reporting window supported by your billing account.
+az consumption usage list --start-date YYYY-MM-DD --end-date YYYY-MM-DD
 ```
 
-2. **הטמע בקרות עלויות:**
+החלף את משתני התאריך. תמיכת ממשק הצריכה משתנה לפי הסכם החיוב; השתמש בניהול עלויות בפורטל אם פרטי השימוש אינם זמינים. העלויות מתעכבות ואינן מדד בזמן אמת.
+
+2. **יישם בקרות עלויות:**
 - הגדר התראות תקציב
-- השתמש במדיניות קנה מידה אוטומטי
+- השתמש במדיניות אוטוסקיילינג
 - יישם מטמון לבקשות
-- ניטור שימוש ב-OpenAI tokens
+- נטר שימוש ב-token עבור OpenAI
 
 ### **תרגיל מעבדה 7.1: אופטימיזציית ביצועים**
 
-**משימה**: אופטימז את אפליקציית ה-AI שלך לביצועים ולעלות.
+**משימה**: בצע אופטימיזציה לאפליקציית ה-AI שלך הן מבחינת ביצועים והן מבחינת עלויות.
 
 **מדדים לשיפור:**
-- הפחת את זמן התגובה הממוצע ב-20%
-- הפחת את העלויות החודשיות ב-15%
-- שמור על זמינות של 99.9%
+- הפחת זמן תגובה ממוצע ב-20%
+- הפחת עלויות חודשיות ב-15%
+- הגדר SLO זמינות של 99.9% וחלון מדידה (מעבדה קצרה לא תוכל להציג זמינות חודשית)
 
-**אסטרטגיות ליישום:**
+**אסטרטגיות לנסות:**
 - יישם מטמון תגובות
-- אופטימיזציה של פרומפטים ליעילות טוקנים
-- השתמש ב-SKU מתאימים למחשוב
-- הקם קנה מידה אוטומטי נכון
+- אופטימיזציה להנחיות ליעילות token
+- השתמש ב-SKU מתאימים לחישוב
+- הגדר אוטוסקיילינג נכון
 
 ## אתגר סופי: יישום מקצה לקצה
 
-### תרחיש אתגר
+### תרחיש האתגר
 
-אתה מתבקש ליצור צ'אטבוט תמיכת לקוחות מונע AI מוכן לייצור עם הדרישות הבאות:
+זהו **אתגר ארכיטקטורה/עיצוב אופציונלי**, לא תרגיל הרצה מסופק או הסמכת ייצור. הצע צ׳אטבוט שירות לקוחות מבוסס AI ותעד אילו דרישות דורשות יישום נוסף והוכחות:
 
 **דרישות פונקציונליות:**
-- ממשק ווב לאינטראקציות עם לקוחות
-- אינטגרציה עם Microsoft Foundry Models לתשובות
-- יכולת חיפוש מסמכים באמצעות Azure AI Search
-- אינטגרציה עם בסיס נתונים לקוחות קיים
-- תמיכה בשפות רבות
+- ממשק רשת לאינטראקציות עם לקוחות
+- אינטגרציה עם מודלים של Microsoft Foundry לתגובות
+- יכולת חיפוש במסמכים באמצעות Azure AI Search
+- אינטגרציה עם מסד נתונים קיים של לקוחות
+- תמיכה רב-לשונית
 
 **דרישות לא פונקציונליות:**
-- טיפול ב-1000 משתמשים בו-זמנית
-- SLA של זמינות 99.9%
-- עמידה בתקנות SOC 2
-- עלות מתחת ל-500$ לחודש
-- פריסה בכמה סביבות (פיתוח, בדיקה, ייצור)
+- תמיכה ב-1000 משתמשים בו זמנית
+- SLA זמינות של 99.9%
+- תאימות SOC 2
+- עלות מתחת ל-500 דולר לחודש
+- פריסה במספר סביבות (פיתוח, בדיקה, ייצור)
 
-### שלבי היישום
+אלה מגבלות היפותטיות של בעלי עניין, לא תוצאות מובטחות במקביל. הגדר שיעור בקשות, גודל הפרומפט/פלט, ומשך מושב לפני הערכת עלויות; 1000 משתמשים בו זמנית אינם מבססים עומס עבודה או מוכיחים שהתקציב של $500 ניתן להשגה. SOC 2 הוא תוצר ביקורת ארגונית, לא מתג שמופעל על ידי תבנית AZD. זהה פשרות ודחה מגבלות בלתי אפשריות עם הוכחות.
 
-1. **עיצוב הארכיטקטורה**
-2. **יצירת תבנית AZD**
-3. **יישום אמצעי אבטחה**
-4. **הקמת ניטור והתראות**
-5. **יצירת צינורות פריסה**
-6. **תיעוד הפתרון**
+### שלבי יישום
+
+1. **עצב את הארכיטקטורה**
+2. **צור את תבנית ה-AZD**
+3. **יישם אמצעי אבטחה**
+4. **הגדר ניטור והתראה**
+5. **צור צינורות פריסה**
+6. **תעד את הפתרון**
 
 ### קריטריוני הערכה
 
-- ✅ **פונקציונליות**: האם עומד בכל הדרישות?
-- ✅ **אבטחה**: האם מיושמות שיטות עבודה מומלצות?
-- ✅ **קשיחות בקנה מידה**: האם יכול לטפל בעומס?
-- ✅ **יכולת תחזוקה**: האם הקוד והתשתית מאורגנים היטב?
-- ✅ **עלות**: האם שומר על התקציב?
+- ✅ **פונקציונליות**: האם הוצגו יכולות מיושמות וחסרים שנותרו מפורשים?
+- ✅ **אבטחה**: האם יושמו שיטות עבודה מומלצות?
+- ✅ **יכולת התרחבות**: האם ניתן להתמודד עם העומס?
+- ✅ **תחזוקה**: האם הקוד והתשתית מאורגנים היטב?
+- ✅ **עלות**: האם נשאר במסגרת התקציב?
 
 ## משאבים נוספים
 
-### תיעוד של מיקרוסופט
-- [תיעוד Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [תיעוד שירות Microsoft Foundry Models](https://learn.microsoft.com/azure/cognitive-services/openai/)
-- [תיעוד Microsoft Foundry](https://learn.microsoft.com/azure/ai-studio/)
+### תיעוד של Microsoft
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Microsoft Foundry Models Service Documentation](https://learn.microsoft.com/azure/cognitive-services/openai/)
+- [Microsoft Foundry Documentation](https://learn.microsoft.com/azure/ai-studio/)
 
 ### תבניות לדוגמה
 - [Microsoft Foundry Models Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
 - [OpenAI Chat App Quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart)
-
 - [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
 
-### משאבים קהילתיים
+### משאבי קהילה
 - [Microsoft Foundry Discord](https://discord.gg/microsoft-azure)
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
 - [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
 
-## 🎓 תעודת סיום
+## 🎓 נקודת סיום
 
-מזל טוב! סיימת את סדנת המעבדה ל-AI. כעת אמור להיות באפשרותך:
+ברכות! השלמת את סדנת המעבדה של AI. כעת אמור להיות באפשרותך:
 
-- ✅ להמיר יישומי AI קיימים לתבניות AZD
-- ✅ לפרוס יישומי AI מוכנים לייצור
-- ✅ ליישם שיטות עבודה מומלצות לאבטחה בעומסי עבודה של AI
-- ✅ לנטר ולשפר ביצועי יישומי AI
+- ✅ להסביר כיצד להתאים אפליקציית AI קיימת לתבנית AZD
+- ✅ לפרוס ולבדוק אפליקציית AI לדוגמה
+- ✅ ליישם שיטות אבטחה מומלצות לעומסי עבודה של AI
+- ✅ לנטר ולאופטם את ביצועי אפליקציית AI
 - ✅ לפתור בעיות פריסה נפוצות
 
+**ניקוי:** הרץ `azd env list`, בחר בכל סביבה חד-פעמית שנוצרה במעבדה זו (`myai-workshop`, ואם פרוסה `myai-production`/`myai-quota-test`), והרץ `azd down` בכל אחת. סקור את תוכנית המחיקה; מחיקת הגדרות מקומיות של סביבה בלבד אינה מוחקת משאבי Azure. הימנע מ-`--purge` אלא אם כן אתה מבין הסרת משאבים שנמחקו ברכות בלתי הפיכה.
+
 ### צעדים הבאים
-1. להחיל דפוסים אלה בפרויקטי ה-AI שלך
-2. לתרום תבניות לקהילה
-3. להצטרף ל-Microsoft Foundry Discord לתמיכה מתמשכת
-4. לחקור נושאים מתקדמים כמו פריסות בריבוי אזורים
+1. יישם את התבניות הללו בפרויקטי ה-AI שלך
+2. תרום תבניות חזרה לקהילה
+3. הצטרף ל-Microsoft Foundry Discord לתמיכה שוטפת
+4. חקור נושאים מתקדמים כמו פריסות מרובות אזורים
 
 ---
 
-**משוב על הסדנה**: עזור לנו לשפר סדנה זו על ידי שיתוף החוויה שלך בערוץ [Microsoft Foundry Discord #Azure](https://discord.gg/microsoft-azure).
+**משוב על הסדנה**: עזור לנו לשפר את הסדנה הזו על ידי שיתוף חווייתך בערוץ #Azure ב-[Microsoft Foundry Discord](https://discord.gg/microsoft-azure).
 
 ---
 
 **ניווט בפרק:**
-- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
-- **📖 הפרק הנוכחי**: פרק 2 - פיתוח מבוסס AI
-- **⬅️ קודם**: [פריסת מודל AI](ai-model-deployment.md)
-- **➡️ הבא**: [שיטות עבודה מומלצות ל-AI בייצור](production-ai-practices.md)
+- **📚 בית הקורס**: [AZD למתחילים](../../README.md)
+- **📖 הפרק הנוכחי**: פרק 2 - פיתוח ממוקד AI
+- **⬅️ הקודם**: [פריסת מודל AI](ai-model-deployment.md)
+- **➡️ הבא**: [שיטות עבודה מומלצות ל-AI בייצור](../chapter-08-production/production-ai-practices.md)
 - **🚀 הפרק הבא**: [פרק 3: תצורה](../chapter-03-configuration/configuration.md)
 
-**צריך עזרה?** הצטרף לקהילה שלנו לתמיכה ולדיונים על פריסות AZD ו-AI.
+**צריכים עזרה?** הצטרפו לקהילה שלנו לתמיכה ודיונים בנושא AZD ופריסות AI.
 
 ---
 

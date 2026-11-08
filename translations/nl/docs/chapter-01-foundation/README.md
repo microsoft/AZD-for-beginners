@@ -1,21 +1,21 @@
 # Hoofdstuk 1: Basis & Snelle Start
 
-**📚 Cursus**: [AZD Voor Beginners](../../README.md) | **⏱️ Duur**: 30-45 minuten | **⭐ Complexiteit**: Beginner
+**📚 Cursus**: [AZD Voor Beginners](../../README.md) | **⏱️ Duur**: 75-120 minuten inclusief de eerste implementatie; extra oefeningen duren langer | **⭐ Moeilijkheidsgraad**: Beginner
 
 ---
 
 ## Overzicht
 
-Dit hoofdstuk introduceert de basisprincipes van Azure Developer CLI (azd). Je leert de kernconcepten, installeert de tools en zet je eerste applicatie in Azure uit.
+Dit hoofdstuk introduceert de basisprincipes van Azure Developer CLI (azd). Je leert kernconcepten, installeert de tools, en zet je eerste applicatie in Azure uit.
 
-> Gevalideerd tegen `azd 1.27.1` in juli 2026.
+> Doel van de opdracht- en configuratiereview: `azd 1.37.2` (november 2026). Live Azure provisioning werd tijdens de review niet uitgevoerd.
 
 ## Leerdoelen
 
-Door dit hoofdstuk te voltooien zul je:
+Door dit hoofdstuk te voltooien, zul je:
 - Begrijpen wat Azure Developer CLI is en hoe het verschilt van Azure CLI
-- AZD installeren en configureren op jouw platform
-- Je eerste applicatie naar Azure uitrollen met `azd up`
+- AZD op jouw platform installeren en configureren
+- Je eerste applicatie naar Azure implementeren met `azd up`
 - Resources opruimen met `azd down`
 
 ---
@@ -26,15 +26,15 @@ Door dit hoofdstuk te voltooien zul je:
 |---|--------|-------------|------|
 | 1 | [AZD Basisprincipes](azd-basics.md) | Kernconcepten, terminologie en projectstructuur | 15 min |
 | 2 | [Installatie & Setup](installation.md) | Platform-specifieke installatiehandleidingen | 10 min |
-| 3 | [Je Eerste Project](first-project.md) | Hands-on: Zet een webapp uit naar Azure | 20 min |
-| 4 | [Breng Je Eigen App](bring-your-own-app.md) | Voeg azd toe aan een bestaand project dat je al hebt | 15 min |
+| 3 | [Je Eerste Project](first-project.md) | Praktijk: Implementeer een webapp naar Azure | 20 min |
+| 4 | [Gebruik Je Eigen App](bring-your-own-app.md) | Voeg azd toe aan een bestaand project dat je al hebt | 15 min |
 | 5 | [Dev Containers & Codespaces](dev-containers.md) | Reproduceerbare azd-omgevingen met dev containers | 15 min |
 
 ---
 
-## ✅ Begin Hier: Controleer Je Setup
+## ✅ Begin Hier: Verifieer Je Setup
 
-Controleer voordat je begint of je lokale machine klaar is voor de sjabloon van Hoofdstuk 1:
+Voordat je begint, bevestig dat je lokale machine klaar is voor de template van hoofdstuk 1:
 
 **Windows:**
 ```powershell
@@ -46,25 +46,27 @@ Controleer voordat je begint of je lokale machine klaar is voor de sjabloon van 
 bash ./validate-setup.sh
 ```
 
-Als het script ontbrekende tools meldt, los die dan eerst op en ga dan verder met het hoofdstuk.
+Als het script ontbrekende tools meldt, los die dan eerst op en ga daarna verder met het hoofdstuk.
 
 ---
 
 ## 🚀 Snelle Start
 
 ```bash
-# Controleer installatie
+# Check installation
 azd version
 
-# Authenticeren voor AZD
-# Optioneel: az login als je van plan bent Azure CLI-commando's direct uit te voeren
+# Authenticate for AZD
+# Optional: az login if you plan to run Azure CLI commands directly
 azd auth login
 
-# Zet je eerste app uit
-azd init --template todo-nodejs-mongo
+# Deploy your first app
+mkdir chapter1-demo
+cd chapter1-demo
+azd init --template todo-nodejs-mongo .
 azd up
 
-# Opruimen wanneer klaar
+# Clean up when done
 azd down --force --purge
 ```
 
@@ -75,11 +77,11 @@ azd down --force --purge
 Na het voltooien van dit hoofdstuk zou je in staat moeten zijn om:
 
 ```bash
-azd version              # Toont geïnstalleerde versie
-azd init --template todo-nodejs-mongo  # Initialiseert project
-azd up                   # Zet uit naar Azure
-azd show                 # Toont URL van de lopende app
-azd down --force --purge # Ruimt bronnen op
+azd version              # Shows installed version
+azd env list             # Lists the initialized environment
+azd up                   # Deploys to Azure
+azd show                 # Displays running app URL
+azd down --force --purge # Cleans up resources
 ```
 
 ---
@@ -89,7 +91,7 @@ azd down --force --purge # Ruimt bronnen op
 | Richting | Hoofdstuk |
 |-----------|---------|
 | **Volgende** | [Hoofdstuk 2: AI-First Development](../chapter-02-ai-development/README.md) |
-| **Sla over naar** | [Hoofdstuk 3: Configuratie](../chapter-03-configuration/README.md) |
+| **Overslaan naar** | [Hoofdstuk 3: Configuratie](../chapter-03-configuration/README.md) |
 
 ---
 
