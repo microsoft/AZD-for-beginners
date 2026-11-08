@@ -1,633 +1,655 @@
-# សន្លឹកសម្គាល់បញ្ជា - ពាក្យបញ្ជា AZD ចាំបាច់
+# សន្លឹកបញ្ឆេទពាក្យបញ្ជា - ពាក្យបញ្ជា AZD សំខាន់ៗ
 
-**យោងយ៉ាងរហ័សសម្រាប់គ្រប់ជំពូក**
-- **📚 ទំព័រដើមវគ្គ**: [AZD For Beginners](../README.md)
-- **📖 ចាប់ផ្តើមឆាប់**: [ជំពូក 1: មូលដ្ឋាន & ចាប់ផ្តើមឆាប់](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 ពាក្យបញ្ជា AI**: [ជំពូក 2: ការអភិវឌ្ឍន៍ផ្តល់អាទិភាពដល់ AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 កម្រិតខ្ពស់**: [ជំពូក 4: ហេដ្ឋារចនាសម្ព័ន្ធជាកូដ](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+**ការប៉ាន់ប្រមាណរហ័សសម្រាប់ជំពូកទាំងអស់**
+- **📚 ផ្ទះសិក្សា**: [AZD សម្រាប់អ្នកចាប់ផ្តើម](../README.md)
+- **📖 ចាប់ផ្តើមយ៉ាងរហ័ស**: [ជំពូក ១៖ មូលដ្ឋាន & ចាប់ផ្តើមយ៉ាងរហ័ស](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 ពាក្យបញ្ជា AI**: [ជំពូក ២៖ ការអភិវឌ្ឍ AI ជាប្រភពដំបូង](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 កម្រិតកំពូល**: [ជំពូក ៤៖ បរិក្ខារជាកូដ](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## ការណែនាំ
 
-សន្លឹកសម្គាល់ទូលំទូលាយនេះផ្តល់យោងយ៉ាងរហ័សសម្រាប់ពាក្យបញ្ជា Azure Developer CLI ដែលប្រើប្រាស់ញឹកញាប់បំផុត ដាក់ចងក្រងតាមប្រភេទជាមួយឧទាហរណ៍ជាក់ស្តែង។ វាគ្មានភាពលំបាកសម្រាប់រកមើលយ៉ាងរហ័សនៅពេលអភិវឌ្ឍនា ការដោះស្រាយបញ្ហា និងប្រតិបត្តិការប្រចាំថ្ងៃជាមួយគម្រោង azd។
+សន្លឹកបញ្ឆេទពាក្យបញ្ជាជាច្រើននេះផ្តល់ជាការយោងយ៉ាងរហ័សសម្រាប់ពាក្យបញ្ជា Azure Developer CLI ដែលប្រើប្រាស់ជាទូទៅបំផុត ដែលត្រូវបានរៀបចំតាមប្រភេទរួមជាមួយឧទាហរណ៍អនុវត្តន៍។ មានសមត្ថភាពល្អបំផុតសម្រាប់ការស្វែងរកយ៉ាងរហ័ស ក្នុងអំឡុងពេលអភិវឌ្ឍន៍ ការដោះស្រាយបញ្ហា និងប្រតិបត្តិការប្រចាំថ្ងៃជាមួយគម្រោង azd។
 
-## គោលដៅការរៀន
+## គោលបំណងសិក្សា
 
-ដោយប្រើសន្លឹកសម្គាល់នេះ អ្នកនឹង:
-- មានចង្កោះបង្ហាញភ្លាមៗចំពោះពាក្យបញ្ជា Azure Developer CLI និងស៊ីនតាក់ស៊ី
-- យល់ដឹងពីការរៀបចំពាក្យបញ្ជាតាមប្រភេទនិងករណីប្រើប្រាស់
-- យោងឧទាហរណ៍ជាក់ស្តែងសម្រាប់ស្ថានការណ៏អភិវឌ្ឍន៍ និងការដាក់ពង្រីក
-- ចូលដល់ពាក្យបញ្ជាសម្រាប់ដោះស្រាយបញ្ហាប្រសិនបើមាន
-- រកមើលជម្រើសកំណត់តម្លៃ និងប្តូរដែលមានកម្រិតខ្ពស់យ៉ាងមានប្រសិទ្ធភាព
-- ស្វែងរកពាក្យបញ្ជាកំណត់បរិស្ថាន និងចរន្តការងារជាច្រើនបរិស្ថាន
+ដោយប្រើសន្លឹកបញ្ឆេទនេះ អ្នកនឹង:
+- មានការចូលដំណើរការយ៉ាងភ្លាមៗទៅកាន់ពាក្យបញ្ជា Azure Developer CLI សំខាន់ៗ និង វ្យាករណ៍​វិភាគ
+- យល់ដឹងពីការរៀបចំពាក្យបញ្ជាតាមប្រភេទមុខងារ និងករណីប្រើប្រាស់
+- យោងទៅឧទាហរណ៍អនុវត្តន៍សម្រាប់សេណារីយ៉ូអភិវឌ្ឍន៍ និងដាក់ឱ្យដំណើរការជារឿយៗ
+- ចូលដំណើរការពាក្យបញ្ជាសម្រាប់ដោះស្រាយបញ្ហាយ៉ាងរហ័ស
+- រកមើលជម្រើសកំណត់តម្លៃ និងប្តូរតាមតម្រូវការកម្រិតកំពូលបានយ៉ាងមានប្រសិទ្ធភាព
+- រកមើលពាក្យបញ្ជាចំពោះការគ្រប់គ្រងបរិបទ និងដំណើរការប្រព័ន្ធបរិបទច្រើន
 
-## លទ្ធផលនៃការរៀន
+## លទ្ធផលសិក្សា
 
-ដោយយោងសន្លឹកសម្គាល់នេះជាញឹកញាប់ អ្នកនឹងអាច:
+ជាមួយការយោងជារឿយទៅសន្លឹកបញ្ឆេទនេះ អ្នកនឹងអាច:
 - ប្រតិបត្តិពាក្យបញ្ជា azd ដោយទំនុកចិត្តដោយមិនចាំបាច់យោងឯកសារពេញលេញ
-- ដោះស្រាយបញ្ហាជាញឹកញាប់បានរហ័សដោយប្រើពាក្យបញ្ជាវិភាគសមស្រប
-- គ្រប់គ្រងបរិស្ថានច្រើន និងស្ថានការណ៍ដាក់ពង្រីកបានយ៉ាងមានប្រសិទ្ធភាព
-- អនុវត្តមុខងារ azd ជម្រៅ និងជម្រើសកំណត់តម្លៃពេលត្រូវការ
-- ដោះស្រាយបញ្ហាការ​ដាក់ពង្រីកដោយប្រើលំដាប់ពាក្យបញ្ជាផ្លូវការ
-- សម្រួលកិច្ចការ តាមរយៈការប្រើប្រាស់កាត់បន្ថយ និងជម្រើស azd ដោយមានប្រសិទ្ធភាព
+- ដោះស្រាយបញ្ហាទូទៅដោយប្រើពាក្យបញ្ជាកំណត់ជួសជុលបានយ៉ាងរហ័ស
+- គ្រប់គ្រងបរិបទ និងសេណារីយ៉ូដាក់ឱ្យដំណើរការជាច្រើនបានយ៉ាងមានប្រសិទ្ធភាព
+- អនុវត្តលក្ខណៈពិសេស azd កម្រិតកំពូល និងជម្រើសកំណត់តម្លៃតាមតម្រូវការ
+- ដោះស្រាយបញ្ហាការដាក់ឱ្យដំណើរការដោយប្រើតម្រៀបពាក្យបញ្ជាដំណើរការ
+- អុីម៉ែលសកម្មភាពធ្វើការ តាមរយៈការប្រើប្រាស់ពាក្យបញ្ជាសង្ខេប និងជម្រើស azd ដ៏មានប្រសិទ្ធភាព
 
-## ពាក្យបញ្ជាដើម្បីចាប់ផ្ដើម
+## ពាក្យបញ្ជាចាប់ផ្តើម
 
-### Authentication
+### ការផ្ទៀងផ្ទាត់
 ```bash
-# ចូលទៅកាន់ Azure តាមរយៈ AZD
+# Login to Azure via AZD
 azd auth login
 
-# ចូលទៅកាន់ Azure CLI (AZD ប្រើវាខាងក្រោម)
+# Optional: login separately for exercises or hooks that run Azure CLI
 az login
 
-# ពិនិត្យគណនីបច្ចុប្បន្ន
+# Check Azure CLI's current account (not AZD's login)
 az account show
 
-# កំណត់ការជាវលំនាំដើម
+# Set default subscription
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 
-# ចាកចេញពី AZD
+# Logout from AZD
 azd auth logout
 
-# ចាកចេញពី Azure CLI
+# Logout from Azure CLI
 az logout
 ```
 
-### Project Initialization
+### ការចាប់ផ្តើមគំរោង
 ```bash
-# រុករកគំរូដែលអាចប្រើបាន
+# Browse available templates
 azd template list
 
-# ចាប់ផ្តើមពីគំរូ
-azd init --template todo-nodejs-mongo
-azd init --template <template-name>
+# Initialize from a template in the current empty directory (alternatives)
+azd init --template todo-nodejs-mongo .
+azd init --template <template-name> .
 
-# ចាប់ផ្តើមនៅក្នុងថតបច្ចុប្បន្ន
+# Initialize in current directory
 azd init .
 
-# ចាប់ផ្តើមដោយឈ្មោះផ្ទាល់ខ្លួន
+# Initialize with custom name
 azd init --template todo-nodejs-mongo my-awesome-app
+cd my-awesome-app
 ```
 
-## ពាក្យបញ្ជាផ្នែកស្នូល​សម្រាប់​ការ​ដាក់​បញ្ចូន
+## ពាក្យបញ្ជាផ្ទុកចម្បង
 
-### Complete Deployment Workflow
+### ដំណើរការផ្ទុកចម្បងពេញលេញ
 ```bash
-# ដាក់ឲ្យដំណើរការ​ទាំងអស់ (ផ្គត់ផ្គង់ + ចេញផ្សាយ)
+# Deploy everything (provision + deploy)
 azd up
 
-# ដាក់ឲ្យដំណើរការ​ដោយបិទសំណើបញ្ជាក់
-azd up --confirm-with-no-prompt
+# Deploy with confirmation prompts disabled
+azd up --no-prompt
 
-# ដាក់ឲ្យដំណើរការ​ទៅ​បរិស្ថាន​ជាក់លាក់
+# Deploy to specific environment
 azd up --environment production
 
-# ដាក់ឲ្យដំណើរការ​ជាមួយ​ប៉ារ៉ាម៉ែត្រ​ផ្ទាល់ខ្លួន
-azd up --parameter location=westus2
+# Persist the region before deployment
+azd env set AZURE_LOCATION westus2
+azd up
 ```
 
-### Infrastructure Only
+### មានតែបរិក្ខារប៉ុណ្ណោះ
 ```bash
-# ផ្តល់ធនធាន Azure
+# Provision Azure resources
 azd provision
 
-# 🧪 មើលជាមុននូវការផ្លាស់ប្តូរហេដ្ឋារចនាសម្ព័ន្ធ
+# 🧪 Preview infrastructure changes
 azd provision --preview
-# បង្ហាញទិដ្ឋភាព 'dry-run' នៃធនធានដែលនឹងត្រូវបានបង្កើត/កែប្រែ/លុប
-# ដូចជា 'terraform plan' ឬ 'bicep what-if' - អាចរត់បានដោយសុវត្ថិភាព, មិនមានការផ្លាស់ប្តូរត្រូវបានអនុវត្ត
+# Uses provider-specific planning (Bicep what-if / Terraform plan)
+# It can require Azure reads and can run configured lifecycle hooks
 ```
 
-### Application Only
+### មានតែកម្មវិធីប៉ុណ្ណោះ
 ```bash
-# ដាក់ចេញកូដកម្មវិធី
+# Deploy application code
 azd deploy
 
-# ដាក់ចេញសេវាកម្មជាក់លាក់
-azd deploy --service web
-azd deploy --service api
+# Deploy specific service
+azd deploy web
+azd deploy api
 
-# ដាក់ចេញសេវាកម្មទាំងអស់
+# Deploy all services
 azd deploy --all
 ```
 
-### Build and Package
+### សាងសង់ និង បំពាក់ជាបណ្ណៈ
 ```bash
-# ស្តារ (ទាញយក) បណ្ណាល័យ និងឯកសារដែលកម្មវិធីអាស្រ័យលើ
+# Restore (download) application dependencies
 azd restore
 
-# ស្តារ សេវាកម្មជាក់លាក់
-azd restore --service api
+# Restore a specific service
+azd restore api
 
-# បង្កើតផលិតផលដែលអាចដាក់ប្រើបាន ដោយមិនដាក់ប្រើ
+# Build a deployable artifact without deploying
 azd package
 
-# កសាងសេវាកម្មជាក់លាក់
-azd package --service api
+# Build specific service
+azd package api
 ```
 
-> **`azd restore`** ទាញយកការពឹងផ្អែករបស់កម្មវិធីរបស់អ្នក (npm, pip, NuGet, Maven, ល។)។ វារត់ដោយស្វ័យប្រវត្តិកាលពេល `azd package` និង `azd deploy` ដូច្នេះអ្នកធ្លាប់មិនចាំបាច់ហៅវាត្រង់ៗទេ — រត់វាដោយដៃដើម្បីទាញមុន (ឧ. ដើម្បីកម្តៅ cache CI ឬដើម្បីដំណើរការលើកក្រោយក្នុងលក្ខខណ្ឌអនឡាញលែងត្រូវបានភ្ជាប់)។
+> **`azd restore`** ទាញយកការពឹងផ្អែកនៃកម្មវិធីរបស់អ្នក (npm, pip, NuGet, Maven, ល។) វាដំណើរការដោយស្វ័យប្រវត្តិក្នុងអំឡុងពេល `azd package` និង `azd deploy` ដូច្នេះអ្នកក៏ប្រហែលជាមិនបានហៅវាដោយផ្ទាល់ញឹកញាប់ទេ — អ្នកអាចដំណើរការវាដោយដៃដើម្បីត្រៀមទាញយកការពឹងផ្អែកជាមុន (ឧទាហរណ៍ ដើម្បីកំដៅប្រព័ន្ធផ្ទុក CI ឬធ្វើការងារពេលក្រោយក្រៅបណ្តាញ)។
 
-> **`azd package`** សង់ឯកសារដែលអាចដាក់ដំណើរការ (រូបភាព container ឬ zip) **ដោយមិន** បញ្ចេញវាទៅ Azure។ ប្រើវាដោយឡែកដើម្បីផ្ទៀងផ្ទាត់ការសាងសង់ថាអាចជោគជ័យ បានពិនិត្យលទ្ធផល ឬបង្កើតឯកសារដែលដំណើរការផ្សេងទៀតនឹងដាក់ឲ្យក្រោយ។ `azd deploy` បណ្តុំជាបណ្ដោះអាសន្នដូច្នេះអ្នកត្រូវការតែ `azd package` ពេលដែលអ្នកចង់បានឯកសារដោយមិនចាំបាច់ដាក់បញ្ចូន។
+> **`azd package`** រៀបចំអត្ថបទដែលអាចដាក់ឲ្យដំណើរការបានដោយមិនបានដាក់ប្រើសេវាកម្មកម្មវិធី។ លទ្ធភាពនៃសកម្មភាពអាស្រ័យលើភាសា និងម៉ាស៊ីនបើកផ្ទះ៖ ការបំពាក់កូណតឺន័រអាចប្រើការសាងសង់ពីចម្ងាយរបស់ Azure និងផ្សព្វផ្សាយរូបភាពទៅឃ្លាំងរូបភាព ដូច្នេះវាមិនមានន័យថាជាការងារពេញលេញក្រៅបណ្តាញ ឬមិនមានការសរសេរទៅកាន់ Azure។ `azd deploy` អាចបំពាក់ដោយស្វ័យប្រវត្តិបាន; ប្រើជំហានបំពាក់ផ្សេងទៀតបើអ្នកត្រូវការអត្ថបទឬត្រួតពិនិត្យការសាងសង់។
 
-## 🌍 ការគ្រប់គ្រងបរិស្ថាន
 
-### Environment Operations
+## 🌍 ការគ្រប់គ្រងបរិបទ
+
+### ប្រតិបត្តិការបរិបទ
 ```bash
-# បញ្ជីបរិយាកាសទាំងអស់
+# List all environments
 azd env list
 
-# បង្កើតបរិយាកាសថ្មី
+# Create new environment
 azd env new development
 azd env new staging --location westus2
 
-# ជ្រើសបរិយាកាស
+# Select environment
 azd env select production
 
-# បង្ហាញបរិយាកាសដែលអាចប្រើបាន
+# Show available environments
 azd env list
 
-# បន្ទាន់សម័យស្ថានភាពបរិយាកាស
+# Refresh environment state
 azd env refresh
 ```
 
-### Environment Variables
+### អថេរបរិបទ
 ```bash
-# កំណត់អថេរបរិស្ថាន
-azd env set API_KEY "your-secret-key"
+# Set environment variable
+azd env set LOG_LEVEL info
 azd env set DEBUG true
 
-# យកអថេរបរិស្ថាន
-azd env get API_KEY
+# Get environment variable
+azd env get-value LOG_LEVEL
 
-# បញ្ជីអថេរបរិស្ថានទាំងអស់
+# List all environment variables
 azd env get-values
 
-# លុបអថេរបរិស្ថាន
+# Remove environment variable (beta in AZD 1.37.0+)
 azd env unset DEBUG
 ```
 
+សោបរិបទគឺជាឯកសារអត្ថបទជាងសាមញ្ញ។ កុំយក `azd env set` ជាកន្លែងផ្ទុកឯកជន; សូមប្រើយោង Key Vault ឬអត្តសញ្ញាណគ្រប់គ្រងតាមសម្រួល។
+
 ## ⚙️ ពាក្យបញ្ជាកំណត់តម្លៃ
 
-### Global Configuration
+### កំណត់តម្លៃសកល
 ```bash
-# បញ្ជីការកំណត់ទាំងអស់
+# List all configuration
 azd config show
 
-# កំណត់លំនាំដើមសកល
+# Set global defaults
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# លុបការកំណត់
+# Remove configuration
 azd config unset defaults.location
 
-# កំណត់ឡើងវិញការកំណត់ទាំងអស់
+# Reset all configuration
 azd config reset
 ```
 
-### Project Configuration
+### កំណត់តម្លៃគំរោង
 ```bash
-# ផ្ទៀងផ្ទាត់ azure.yaml
-azd config validate
+# Inspect user configuration (this is not azure.yaml validation)
+azd config show
 
-# បង្ហាញព័ត៌មានគម្រោង
+# Show project information
 azd show
 
-# ទទួលចំណុចចូលចេញនៃសេវា
+# Get service endpoints
 azd show --output json
 ```
 
-## 📊 ការត្រួតពិនិត្យ និងវិភាគ
+## 📊 ការត្រួតពិនិត្យ និងការវិភាគ
 
-### Monitoring Dashboard
+### ផ្ទាំងគ្រប់គ្រងការត្រួតពិនិត្យ
 ```bash
-# បើកផ្ទាំងតាមដាន (dashboard) នៅក្នុង Azure Portal
+# Open Azure portal monitoring dashboard
 azd monitor
 
-# បើកមេត្រិកផ្ទាល់ (live metrics) របស់ Application Insights
+# Open Application Insights live metrics
 azd monitor --live
 
-# បើកផ្ទាំងកំណត់ហេតុ (logs) នៃ Application Insights
+# Open Application Insights logs blade
 azd monitor --logs
 
-# បើកទិដ្ឋភាពទូទៅ (overview) នៃ Application Insights
+# Open Application Insights overview
 azd monitor --overview
 ```
 
-### Viewing Container Logs
+តម្រូវឲ្យមានការកំណត់ Application Insights ដោយប្លង់ខ្ទង់។ ជម្រើស Live Metrics របស់ AZD មិនគាំទ្រថ្ងៃនេះសម្រាប់កម្មវិធី Python ទេ; សូមប្រើការមើលទូទៅ កំណត់ហេតុ ឬដំណើរការឆ្លងកាត់ដែលមានឯកសារពិពណ៌នារបស់គំរូជំនួស។
+
+### មើលកំណត់ហេតុកុងតឺន័រ
 ```bash
-# មើលកំណត់ហេតុតាមរយៈ Azure CLI (សម្រាប់ Container Apps)
+# View logs via Azure CLI (for Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
 
-# តាមដានកំណត់ហេតុក្នុងពេលពិត
+# Follow logs in real-time
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
-# មើលកំណត់ហេតុពី Azure Portal
+# View logs from Azure Portal
 azd monitor --logs
 ```
 
-### Log Analytics Queries
+### សំណួរវិភាគកំណត់ហេតុ
 ```bash
-# ចូលប្រើ Log Analytics តាមរយៈ Azure Portal
+# Access Log Analytics via Azure Portal
 azd monitor --logs
 
-# ស្វែងរកកំណត់ហេតុដោយប្រើ Azure CLI
+# Query logs using Azure CLI
 az monitor log-analytics query \
   --workspace <workspace-id> \
   --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
 ```
 
-## 🛠️ ពាក្យបញ្ជាថែទាំ
+## 🛠️ ពាក្យបញ្ជថែទាំ
 
-### Cleanup
+### សម្អាត
 ```bash
-# លុបធនធាន Azure ទាំងអស់
+# Remove all Azure resources
 azd down
 
-# បង្ខំលុបដោយគ្មានការបញ្ជាក់
+# Force delete without confirmation
 azd down --force
 
-# លុបចោលធនធានដែលបានលុបទន់
+# Purge soft-deleted resources
 azd down --purge
 
-# សម្អាតដោយពេញលេញ
+# Complete cleanup
 azd down --force --purge
 ```
 
-### Updates
+### បច្ចុប្បន្នភាព
 ```bash
-# ពិនិត្យមើលការអាប់ដេត azd
+# Check for azd updates
 azd version
 
-# ទទួលបានកំណែបច្ចុប្បន្ន
+# Get current version
 azd version
 
-# មើលការកំណត់បច្ចុប្បន្ន
+# View current configuration
 azd config show
 ```
 
-## 🔧 ពាក្យបញ្ជាខ្ពស់ជាង
+## 🔧 ពាក្យបញ្ជាកម្រិតកំពូល
 
-### Pipeline and CI/CD
+### ប៊ីប្លាញ និង CI/CD
 ```bash
-# កំណត់រចនាសម្ព័ន្ធ GitHub Actions
+# Configure GitHub Actions
 azd pipeline config
 
-# កំណត់រចនាសម្ព័ន្ធ Azure DevOps
+# Configure Azure DevOps
 azd pipeline config --provider azdo
 
-# បង្ហាញការកំណត់រចនាសម្ព័ន្ធ pipeline
-azd pipeline show
+# Inspect supported pipeline configuration options
+azd pipeline config --help
 ```
 
-### Infrastructure Management
+### ការគ្រប់គ្រងបរិក្ខារ
 ```bash
-# បង្កើតគំរូហេដ្ឋារចនាសម្ព័ន្ធ
+# Generate infrastructure templates
 azd infra generate
 
-# 🧪 ការមើលមុន និងការធ្វើផែនការហេដ្ឋារចនាសម្ព័ន្ធ
+# 🧪 Infrastructure Preview & Planning
 azd provision --preview
-# សម្រមោលការផ្គត់ផ្គង់ហេដ្ឋារចនាសម្ព័ន្ធដោយមិនដាក់ចេញ
-# វិភាគគំរូ Bicep/Terraform ហើយបង្ហាញ៖
-# - ធនធានដែលនឹងត្រូវបន្ថែម (បៃតង +)
-# - ធនធានដែលនឹងត្រូវកែប្រែ (លឿង ~)
-# - ធនធានដែលនឹងត្រូវលុប (ក្រហម -)
-# រត់ដោយសុវត្ថិភាព - មិនធ្វើការផ្លាស់ប្តូរណាមួយជាក់ស្តែងលើបរិយាកាស Azure
+# Simulates infrastructure provisioning without deploying
+# Analyzes Bicep/Terraform templates and shows:
+# - Resources to be added (green +)
+# - Resources to be modified (yellow ~) 
+# - Resources to be deleted (red -)
+# Review provider behavior and configured hooks before treating preview as read-only
 
-# បង្កើតរចនាសម្ព័ន្ធពី azure.yaml
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
-### Project Information
+### ព័ត៌មានគំរោង
 ```bash
-# បង្ហាញស្ថានភាពគម្រោង និងចំណុចបញ្ចប់
+# Show project status and endpoints
 azd show
 
-# បង្ហាញព័ត៌មានលម្អិតនៃគម្រោងជា JSON
+# Show detailed project info as JSON
 azd show --output json
 
-# ទាញយកចំណុចបញ្ចប់សេវា
+# Get service endpoints
 azd show --output json | jq '.services'
 ```
 
-## 🤖 ពាក្យបញ្ជា AI និងផ្នែកបន្ថែម
+## 🤖 ពាក្យបញ្ជា AI និងកម្មវិធីបន្ថែម
 
-### AZD Extensions
+### កម្មវិធីបន្ថែម AZD
+
+យោង CLI AI បានពិនិត្យឡើងវិញថ្ងៃទី ០៤-១១-២០២៦ៈ `azd 1.37.2`, អ្នកប្រតិបត្តិការ `1.0.0-beta.23`, ការវាយតម្លៃ `1.0.0-beta.2`។ ប្រើ `azd >= 1.37.0` សម្រាប់ដំណើរការរួម; អាប់ដេត CLI ស្នូលមុនកម្មវិធីបន្ថែមដែលមិនសមរម្យ។
+
 ```bash
-# បញ្ជីផ្នែកបន្ថែមដែលមានទាំងអស់ (រួមទាំង AI)
+# List all available extensions (including AI)
 azd extension list
 
-# តំឡើងផ្នែកបន្ថែមភ្នាក់ងារ Foundry
+# Install the Foundry agents extension
 azd extension install azure.ai.agents
 
-# តំឡើងផ្នែកបន្ថែមសមត្ថភាពភ្នាក់ងារ (សាកល្បង)
+# Install the separate evaluations extension
+azd extension install azure.ai.evaluations
+
+# Install the agent skills extension (preview)
 azd extension install azure.ai.skills
 
-# តំឡើងផ្នែកបន្ថែមការតភ្ជាប់ Foundry (សាកល្បង)
+# Install the Foundry connections extension (preview)
 azd extension install azure.ai.connections
 
-# តំឡើងផ្នែកបន្ថែមសម្រាប់ការតម្រូវលំអិត
+# Install the fine-tuning extension
 azd extension install azure.ai.finetune
 
-# តំឡើងផ្នែកបន្ថែមម៉ូឌែលផ្ទាល់ខ្លួន
+# Install the custom models extension
 azd extension install azure.ai.models
 
-# ធ្វើឲ្យទាន់សម័យផ្នែកបន្ថែមដែលបានតំឡើងទាំងអស់
+# Upgrade all installed extensions
 azd extension upgrade --all
 ```
 
-### AI Agent Commands
+### ពាក្យបញ្ជាអ្នកប្រតិបត្តិការ AI
 ```bash
-# ចាប់ផ្ដើមគម្រោងភ្នាក់ងារពីឯកសារ manifest
-azd ai agent init -m <manifest-path-or-uri>
+# Initialize an agent project interactively
+azd ai agent init
 
-# គោលដៅទៅកាន់គម្រោង Foundry ជាក់លាក់
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+# Or adopt a current azure.yaml agent project template
+azd ai agent init --template <path-to-azure.yaml>
 
-# បញ្ជាក់ថតប្រភពរបស់ភ្នាក់ងារ
-azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+# Target a specific Foundry project
+azd ai agent init --template <path-to-azure.yaml> --project-id <foundry-project-id>
 
-# ជ្រើសគោលដៅសម្រាប់បង្ហោះ
-azd ai agent init -m agent-manifest.yaml --host containerapp
+# Adopt into a specified directory, then follow the printed cd next step
+azd ai agent init --template <path-to-azure.yaml> --src ./agents/my-agent
 
-# សាកល្បងភ្នាក់ងារដែលបានបង្ហោះ (បង្ហាញពេលយឺត និងពេលដល់បៃដំបូង)
+# Test a deployed agent (prints latency + time-to-first-byte)
 azd ai agent invoke
 
-# បង្ហាញការកំណត់ចំណុចបញ្ចប់ផ្សាយផ្ទាល់
+# Show the live endpoint configuration
 azd ai agent endpoint show
 
-# បង្កើតសំណុំទិន្នន័យសម្រាប់វាយតម្លៃ ហើយបន្ទាប់មកបង្កើនប្រសិទ្ធភាពភ្នាក់ងារ
-azd ai agent eval generate
-azd ai agent optimize
-
-# ទាញយកប្រភពដែលបានបង្ហោះ​របស់ភ្នាក់ងារផ្ទុកដែលផ្អែកលើកូដ
+# Download the deployed source of a code-based hosted agent
 azd ai agent code download
 
-# លុបភ្នាក់ងារផ្ទុក និងកំណែទាំងអស់របស់វា (--force បញ្ចប់សម័យសកម្ម)
+# Delete a hosted agent and all its versions (--force ends active sessions)
 azd ai agent delete --force
 ```
 
-### MCP Server (Alpha)
+`--template`/`-t` ជំនួសចំណងជើងដែលបានលុបចោល `--manifest`/`-m`; តំណាងចាស់ទៀតត្រូវការផ្លាស់ប្តូរ។ ឥឡូវនេះមិនមានជម្រើស agent-init `--host containerapp` ទេ។ ការគ្រប់គ្រង-harness, សំឡេង និងមុនរយៈពេលវែងត្រូវការជ្រើសរើសបរិយាកាសសែល / CI ដាច់ដោយឡែក; មើល [យោង CLI AI](../docs/chapter-08-production/production-ai-practices.md#optional-preview-features)។
+
+### ការវាយតម្លៃ និងការបង្កើនប្រសិទ្ធភាព AI
 ```bash
-# ចាប់ផ្តើមម៉ាស៊ីនមេ MCP សម្រាប់គម្រោងរបស់អ្នក
+# In an initialized agent project, configure evaluation resources
+azd ai eval init
+
+# Optionally generate a rubric and dataset; review files and printed next steps
+azd ai eval generate
+
+# Register datasets/evaluators/eval groups, then run and inspect results
+azd up
+azd ai eval run start --wait
+azd ai eval run list
+azd ai eval run show <run-id>
+azd ai eval run output list <run-id>
+
+# Reuse a compatible turn-level dataset evaluation for optimization
+azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
+```
+
+អេហ្សង់ beta.22 បានជំនួសពាក្យបញ្ជាបានប៉ាន់ស្មានដើមជាមួយ `azd ai eval` ពី `azure.ai.evaluations`។ ការកំណត់ការប៉ាន់ស្មានថ្មីប្រើកូនសោ camelCase។ ការប៊ិចត្បាញ `--config` គឺទទួលសំណើ API ប៊ិចត្បាញឯករាជ្យមួយ **មិន**មែន `eval.yaml` ដើមឬ `azure.eval.yaml` ថ្មីទេ; ប្រើ `--eval`/`--eval-config` សម្រាប់ការប្រើប្រាស់ឡើងវិញនៃការប៉ាន់ស្មាន។ មើល [ការកំណត់ការប៉ាន់ស្មាន](../docs/chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) និង [ការផ្ទេរប៊ិចត្បាញ](../docs/chapter-08-production/production-ai-practices.md#optimization-configuration-migration)។
+
+### ម៉ាស៊ីនមេ MCP (អាល់ហ្វា)
+```bash
+# Start the MCP server for your project
 azd mcp start
 
-# គ្រប់គ្រងការយល់ព្រមនៃឧបករណ៍សម្រាប់ប្រតិបត្តិការរបស់ MCP
+# Manage tool consent for MCP operations
 azd copilot consent list
 ```
 
-### Infrastructure Generation
+### ការបង្កើតហេដ្ឋារចនាសម្ព័ន្ធ
 ```bash
-# បង្កើតឯកសារ IaC ពីការបញ្ជាក់នៃគម្រោងរបស់អ្នក
+# Generate IaC files from your project definition
 azd infra generate
 
-# បង្កើតហេដ្ឋារចនាសម្ព័ន្ធពី azure.yaml
-azd infra synth
+# Inspect supported infrastructure operations
+azd infra --help
 ```
 
 ---
 
-## 🎯 ជំនុំការងារយ៉ាងរហ័ស
+## 🎯 សកម្មភាពរហ័ស
 
-### Development Workflow
+### សកម្មភាពអភិវឌ្ឍន៍
 ```bash
-# ចាប់ផ្តើមគម្រោងថ្មី
-azd init --template todo-nodejs-mongo
+# Start a new project in an explicit directory
+azd init --template todo-nodejs-mongo my-project
 cd my-project
 
-# ដាក់ចេញទៅបរិយាកាសអភិវឌ្ឍន៍
+# Deploy to development
 azd env new dev
 azd up
 
-# ធ្វើការផ្លាស់ប្តូរ និងដាក់ចេញឡើងវិញ
+# Make changes and redeploy
 azd deploy
 
-# បើកផ្ទាំងតាមដាន
+# Open monitoring dashboard
 azd monitor --live
 ```
 
-### Multi-Environment Workflow
+### សកម្មភាពបរិដ្ឋានច្រើន
 ```bash
-# រៀបចំបរិស្ថាន
+# Set up environments
 azd env new dev
 azd env new staging  
 azd env new production
 
-# ដាក់ប្រតិបត្តិទៅបរិស្ថានអភិវឌ្ឍន៍
+# Deploy to dev
 azd env select dev
 azd up
 
-# សាកល្បង និងលើកទៅបរិស្ថានស្តេជីង
+# Test and promote to staging
 azd env select staging
 azd up
 
-# ដាក់ប្រតិបត្តិទៅបរិស្ថានផលិតកម្ម
+# Deploy to production
 azd env select production
 azd up
 ```
 
-### Troubleshooting Workflow
+### សកម្មភាពដោះស្រាយបញ្ហា
 ```bash
-# បើកម៉ូដឌីប៊ក់
-export AZD_DEBUG=true
+# Check deployment status
+azd show --debug
 
-# ពិនិត្យស្ថានភាពការដាក់ឲ្យដំណើការ
-azd show
-
-# ផ្ទៀងផ្ទាត់ការកំណត់
+# Validate configuration
 azd config show
 
-# បើកផ្ទាំងតាមដានសម្រាប់កំណត់ហេតុ
+# Open monitoring dashboard for logs
 azd monitor --logs
 
-# ពិនិត្យស្ថានភាពធនធាន
+# Check resource status
 azd show --output json
 ```
 
-## 🔍 ពាក្យបញ្ជាធ្វើដើម្បីធ្វើដំណើរការវាយតម្លៃ
+## 🔍 ពាក្យបញ្ជាដើម្បីពិនិត្យកំហុស
 
-### Debug Information
+### ព័ត៌មានពិនិត្យកំហុស
 ```bash
-# បើកការបញ្ចេញព័ត៌មានដើម្បីរកកំហុស
-export AZD_DEBUG=true
+# Enable debug output for a command
 azd <command> --debug
 
-# បិទទេលេមែត្រីសម្រាប់លទ្ធផលដែលស្អាត
-export AZD_DISABLE_TELEMETRY=true
+# Disable telemetry for cleaner output
+export AZURE_DEV_COLLECT_TELEMETRY=no
 
-# ពិនិត្យការកំណត់បច្ចុប្បន្ន
+# Check current configuration
 azd config show
 
-# ពិនិត្យស្ថានភាពការផ្ទៀងផ្ទាត់អត្តសញ្ញាណ
-az account show
+# Reauthenticate AZD if needed (Azure CLI has a separate login)
+azd auth login
 ```
 
-### Template Debugging
+### ពិនិត្យកំហុសម៉ូដែល
 ```bash
-# បញ្ជីគម្របដែលមានជាមួយព័ត៌មានលម្អិត
+# List available templates with details
 azd template list --output json
 
-# បង្ហាញព័ត៌មានពីគំរូ
+# Show template information
 azd template show <template-name>
 
-# ផ្ទៀងផ្ទាត់គំរូមុនពេលចាប់ផ្តើម
-azd template validate <template-name>
+# Inspect supported template operations
+azd template --help
 ```
 
 ## 📁 ពាក្យបញ្ជាឯកសារ និងថត
 
-### Project Structure
+### រចនាសម្ព័ន្ធគម្រោង
 ```bash
-# បង្ហាញរចនាសម្ព័ន្ធថតបច្ចុប្បន្ន
-tree /f  # វីនដូស
-find . -type f  # លីនុច/ម៉ាក់អូអេស
+# Show current directory structure
+tree /f  # Windows
+find . -type f  # Linux/macOS
 
-# ទៅកាន់ឫសគម្រោង azd
-cd $(azd root)
+# Navigate to your project's directory
+cd /path/to/your/project
 
-# បង្ហាញថតកំណត់របស់ azd
-echo $AZD_CONFIG_DIR  # ជាទូទៅ ~/.azd
+# Show azd configuration directory
+echo $AZD_CONFIG_DIR  # Usually ~/.azd
 ```
 
-## 🎨 ការបង្ហាញលទ្ធផល
+## 🎨 ទ្រង់ទ្រាយចេញ
 
-### JSON Output
+### ចេញរាង JSON
 ```bash
-# ទទួលលទ្ធផល JSON សម្រាប់ការស្គ្រីប
+# Get JSON output for scripting
 azd show --output json
 azd env list --output json
 azd config show --output json
 
-# វិភាគដោយ jq
-azd show --output json | jq '.services.web.endpoint'
+# Parse with jq
+azd show --output json | jq -r '.services.web.ingressUrl'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### Table Output
+### ចេញរាងតារាង
 ```bash
-# រៀបចំជាតារាង
-azd env list --output table
+# Human-readable environment table
+azd env list
 
-# មើលសេវាកម្មដែលបានដាក់ចេញ
+# View deployed services
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 ការចម្រុះពាក្យបញ្ជាដែលប្រើញឹកញាប់
+## 🔧 ការរួមបញ្ចូលពាក្យបញ្ជារួម
 
-### Health Check Script
+### script ពិនិត្យសុខភាព
 ```bash
 #!/bin/bash
-# ការត្រួតពិនិត្យសុខភាពយ៉ាងរហ័ស
+# Quick health check
 azd show
 azd env get-values
 azd monitor --logs
 ```
 
-### Deployment Validation
+### ការត្រួតពិនិត្យដំឡើង
 ```bash
 #!/bin/bash
-# ការផ្ទៀងផ្ទាត់មុនការដាក់ចេញ
+# Pre-deployment validation
 azd show
-azd provision --preview  # មើលជាមុននូវការផ្លាស់ប្តូរមុនពេលដាក់ចេញ
+azd provision --preview  # Preview changes before deploying
 az account show
 ```
 
-### Environment Comparison
+### ការប្រៀបធៀបទីតាំងបរិស្ថាន
 ```bash
 #!/bin/bash
-# ប្រៀបធៀបបរិយាកាស
+# Compare environments
 for env in dev staging production; do
     echo "=== $env ==="
-    azd env select $env
-    azd show --output json | jq '.services[].endpoint'
+    azd show --environment "$env" --output json | jq '.services'
 done
 ```
 
-### Resource Cleanup Script
+### script សំអាតធនធាន
 ```bash
 #!/bin/bash
-# សម្អាតបរិយាកាសចាស់ៗ
-azd env list | grep -E "(dev-|test-)" | while read env; do
-    echo "Cleaning up $env"
-    azd env select $env
-    azd down --force --purge
-done
+# Review environments, then explicitly select the one to remove
+azd env list
+azd down --environment <environment-name>
 ```
 
-## 📝 តម្លៃបរិស្ថាន
+## 📝 អថេរបរិដ្ឋាន
 
-### Common Environment Variables
+### អថេរបរិដ្ឋានទូទៅ
 ```bash
-# ការកំណត់រចនាសម្ព័ន្ធ Azure
+# Azure configuration
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# ការកំណត់រចនាសម្ព័ន្ធ AZD
-export AZD_DEBUG=true
-export AZD_DISABLE_TELEMETRY=true
-export AZD_CONFIG_DIR="~/.azd"
+# AZD configuration
+export AZURE_DEV_COLLECT_TELEMETRY=no
+export AZD_CONFIG_DIR="$HOME/.azd"
 
-# ការកំណត់រចនាសម្ព័ន្ធកម្មវិធី
+# Application configuration
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
 ## 🚨 ពាក្យបញ្ជាបន្ទាន់
 
-### Quick Fixes
+### ការជួសជុលបន្ទាន់
 ```bash
-# កំណត់ការផ្ទៀងផ្ទាត់ឡើងវិញ
-az account clear
-az login
+# Reauthenticate AZD without changing Azure CLI's account cache
+azd auth login
 
-# បង្ខំផ្ទុកបរិស្ថានម្តងទៀត
+# Force refresh environment
 azd env refresh
 
-# ដាក់ប្រើឡើងវិញសេវាកម្មទាំងអស់
+# Redeploy all services
 azd deploy
 
-# ពិនិត្យស្ថានភាពនៃការដាក់ប្រើ
+# Check deployment status
 azd show --output json
 ```
 
-### Recovery Commands
+### ពាក្យបញ្ជាការស្តារឡើងវិញ
 ```bash
-# ស្ដារឡើងវិញពីការដាក់ចេញដែលបរាជ័យ - សម្អាត ហើយដាក់ចេញឡើងវិញ
-azd down --force --purge
-azd up
+# Inspect before retrying; deletion/purge is not a routine recovery step
+azd show
+azd provision --debug
 
-# ផ្គត់ផ្គង់រចនាសម្ព័ន្ធឡើងវិញតែប៉ុណ្ណោះ
+# Reprovision infrastructure only
 azd provision
 
-# ដាក់ចេញកម្មវិធីឡើងវិញតែប៉ុណ្ណោះ
+# Redeploy application only
 azd deploy
 ```
 
-## 💡 ក្បួនជំនាញ
+## 💡 គន្លឹះអាជីព
 
-### Aliases for Faster Workflow
+### ឈ្មោះខ្លីសម្រាប់សកម្មភាពរហ័ស
 ```bash
-# បន្ថែមទៅក្នុង .bashrc ឬ .zshrc របស់អ្នក
+# Add to your .bashrc or .zshrc
 alias azdup='azd up'
 alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Function Shortcuts
+### ហ្វ៊ង់សិនរហ័ស
 ```bash
-# ប្ដូរបរិយាកាសយ៉ាងលឿន
+# Quick environment switching
 azd-env() {
-    azd env select $1 && azd show
+    azd env select "$1" && azd show
 }
 
-# ការដាក់ចេញឆាប់រហ័សជាមួយការត្រួតពិនិត្យ
+# Quick deployment with monitoring
 azd-deploy-watch() {
-    azd deploy --service $1 && azd monitor --live
+    azd deploy "$1" && azd monitor --overview
 }
 
-# ស្ថានភាពបរិយាកាស
+# Environment status
 azd-status() {
     echo "Current environment:"
     azd env get-values
@@ -638,44 +660,44 @@ azd-status() {
 
 ## 📖 ជំនួយ និងឯកសារ
 
-### Getting Help
+### របៀបទទួលបានជំនួយ
 ```bash
-# ជំនួយទូទៅ
+# General help
 azd --help
 azd help
 
-# ជំនួយសម្រាប់ពាក្យបញ្ជាជាក់លាក់
+# Command-specific help
 azd up --help
 azd env --help
 azd config --help
 
-# បង្ហាញកំណែ និងព័ត៌មានការបង្កើត
+# Show version and build info
 azd version
 azd version --output json
 ```
 
-### Documentation Links
+### ឯកសារភ្ជាប់
 ```bash
-# បើកឯកសារណែនាំក្នុងកម្មវិធីរុករក
+# Open documentation in browser
 azd docs
 
-# បង្ហាញឯកសារណែនាំសម្រាប់គំរូ
+# Show template documentation
 azd template show <template-name> --docs
 ```
 
 ---
 
-**យោបល់**: ចំណាំទំព័រនេះនៅក្នុងប៊ុកម៉ាករបស់អ្នក ហើយប្រើ `Ctrl+F` ដើម្បីស្វែងរកពាក្យបញ្ជាដែលអ្នកត្រូវការ​យ៉ាងរហ័ស!
+**គន្លឹះ**៖ ជៀសវាងហ្វាយ Cheat Sheet នេះ ហើយប្រើ `Ctrl+F` ដើម្បីស្វែងរកពាក្យបញ្ជាដោយរហ័ស!
 
 ---
 
 **ការរុករក**
-- **មេរៀនមុន**: [Preflight Checks](../docs/pre-deployment/preflight-checks.md)
-- **មេរៀនបន្ទាប់**: [Glossary](glossary.md)
+- **មេរៀនមុន**៖ [ពិនិត្យមុនហោះហើរ](../docs/chapter-06-pre-deployment/preflight-checks.md)
+- **មេរៀនបន្ទាប់**៖ [ពត៌មានពាក្យ](glossary.md)
 
 ---
 
-> **💡 ចង់បានជំនួយពាក្យបញ្ជា Azure ក្នុងកម្មវិធីកែសម្រួលរបស់អ្នកទេ?** ដំឡើង [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) ជាមួយ `npx skills add microsoft/github-copilot-for-azure` — 37 skills សម្រាប់ AI, Foundry, ការដាក់ចេញ, វិភាគកំហុស, និងផ្សេងៗទៀត។
+> **💡 ចង់បានជំនួយពាក្យបញ្ជា Azure ក្នុងកម្មវិធីសម្រង់របស់អ្នកទេ?** តំឡើង [ជំនាញអេហ្សង់ Microsoft Azure](https://skills.sh/microsoft/github-copilot-for-azure) ជាមួយ `npx skills add microsoft/github-copilot-for-azure` — មានជំនាញ ៣៧ សម្រាប់ AI, Foundry, ដំឡើង, ផ្ទុកកំហុស និងជាច្រើនទៀត។
 
 ---
 

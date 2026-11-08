@@ -1,44 +1,40 @@
-# ការអនុវត្តល្អបំផុតសម្រាប់បន្ទុកការងារ AI ផលិតកម្ម ជាមួយ AZD
+# ព័ត៌មានអនុវត្តល្អសម្រាប់សារពើភ័ណ្ឌ AI ផលិតកម្មជាមួយ AZD
 
-**Chapter Navigation:**
-- **📚 ទំព័រដើមវគ្គ**: [AZD For Beginners](../../README.md)
-- **📖 ជំពូកបច្ចុប្បន្ន**: Chapter 8 - Production & Enterprise Patterns
-- **⬅️ ជំពូកមុន**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ ក៏ទាក់ទង**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🎯 បញ្ចប់វគ្គសិក្សា**: [AZD For Beginners](../../README.md)
+**ការលេងដំណើរការចំណាត់ថ្នាក់:**
+- **📚 ទំព័រដើមវគ្គសិក្សា**៖ [AZD សម្រាប់អ្នកចាប់ផ្តើម](../../README.md)
+- **📖 ជំពូកបច្ចុប្បន្ន**៖ ជំពូក 8 - លំនាំផលិតកម្ម និងសហគ្រិនភាព
+- **⬅️ ជំពូកមុន** ៖ [ជំពូក 7: ការជួសជុលបញ្ហា](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ ក៏ពាក់ព័ន្ធ**៖ [មន្ទីរពិសោធន៍ AI](../chapter-02-ai-development/ai-workshop-lab.md)
+- **🎯 បញ្ចប់វគ្គសិក្សា**៖ [AZD សម្រាប់អ្នកចាប់ផ្តើម](../../README.md)
 
-## ទិដ្ឋភាពទូទៅ
+## សេចក្ដីសង្ខេប
 
-មគ្គុទេសក៍នេះផ្តល់នូវអនុវត្តល្អបំផុតទូលំទូលាយសម្រាប់ដាក់ឲ្យដំណើរការបន្ទុកការងារ AI ដែលរួចរាល់សម្រាប់ផលិតកម្ម ដោយប្រើ Azure Developer CLI (AZD)។ ដោយផ្អែកលើមតិយោបល់ពីសហគមន៍ Microsoft Foundry Discord និងការដាក់ចេញប្រតិបត្តិការពិតនៅភពពេលវេលាពិតប្រាកដ ការអនុវត្តទាំងនេះដោះស្រាយបញ្ហាសារសំខាន់ៗក្នុងប្រព័ន្ធ AI ផលិតកម្ម។
+មគ្គុទេសក៍នេះពិពណ៌នាលំនាំរចនាសម្ព័ន្ធ AI ផលិតកម្មដោយប្រើ Azure Developer CLI (AZD)។ វាជាគំរូយោងសម្រាប់ការរចនា មិនមែនកម្មវិធីដែលអាចរំលោភបានឬវិញ្ញាបនបត្រផលិតកម្មឡើយ។
 
-## បញ្ហាសំខាន់ៗដែលបានដោះស្រាយ
+**ព្រំដែនឧទាហរណ៍**៖ ចូរយកចិត្តទុកដាក់ថា ប្លុក Bicep ទាំងឡាយទាំងអស់ត្រូវបានគេគិតថាអាស្រ័យលើប៉ារ៉ាម៉ែត្រ និងធនធានដែលយោងពីគំរូដែលមានពាសពេញចំណុច។ ពួកវាបាត់បង់រូបភាព/ផែនការអ្នកផ្ទុក សមាជិកភាព ការចាត់តួនាទី DNS, ផលប៉ះពាល់ និងការចូលរួមផ្សេងៗផងដែរ។ ផ្លូវសេវា YAML និងស្គ្រីបហ៊ុច/សាកល្បងគឺជាឯកសារតំណាងសម្រាប់បង្កើតក្នុង **កម្មវិធីរបស់អ្នកផ្ទាល់**; វាគ្មានផ្តល់ដោយវគ្គសិក្សានេះទេ។ ប្រើឧទាហរណ៍ AZD ដំណើរការមួយជាមូលដ្ឋាន បញ្ចូលមូលដ្ឋានស្ថាបត្យកម្មពេញលេញ ហើយសាកល្បងវានៅបរិយាកាសដាច់ដោយឡែកមុនពេលផលិតកម្ម។
 
-ដោយផ្អែកលើលទ្ធផលគោលបំណងស្ទង់មតិពីសហគមន៍ នេះគឺជា​បញ្ហាសំខាន់ៗ​ដែលអ្នកអភិវឌ្ឍប្រឈមមុខ៖
+## 도ើរោសផ្សេងៗដ៏សំខាន់
 
-- **45%** ប្រឈមមុខនឹងការដាក់ចេញ AI ដែលមានមុខងារច្រើននៅក្នុងសេវាកម្មច្រើន
-- **38%** មានបញ្ហាជាមួយការគ្រប់គ្រងឯកសារជាមួយដេតាបន្ថែម និងសម្ងាត់  
-- **35%** រកឃើញថាការរៀបចំសម្រាប់ផលិតកម្ម និងការពង្រីក​មានភាពលំបាក
-- **32%** ត្រូវការយុទ្ធសាស្ត្រកាត់បន្ថយចំណាយល្អជាងនេះ
-- **29%** ត្រូវការការត្រួតពិនិត្យ និងការរុករកកំហុសកាន់តែប្រសើរ
+បញ្ហាធម្មតាផលិតកម្មរួមមានការដាក់ពង្រីកសេវាកម្មជាច្រើន ការគ្រប់គ្រងអត្តសញ្ញាណ និងសម្ងាត់ ការកំណត់ទំហំថែមប្រាក់ ចំណាយតម្លៃ និងការត្រួតពិនិត្យ។ ខ្ញុំមិនបានដាក់អោយមានការវាស់វែងអត្រារបស់វានៅទីនេះទេ។
 
-## គំរូស្ថាបត្យករណ៍សម្រាប់ AI ផលិតកម្ម
+## លំនាំស្ថាបត្យកម្មសម្រាប់ AI ផលិតកម្ម
 
-### គំរូ 1: ស្ថាបត្យកម្ម AI មីក្រូសេវា
+### លំនាំ 1៖ ស្ថាបត្យកម្ម AI ម៉ីក្រូសេវាកម្ម
 
-**ពេលប្រើ**: កម្មវិធី AI ស្មុគស្មាញ ដែលមានមុខងារ​ច្រើន
+**ពេលដែលត្រូវប្រើ**៖ កម្មវិធី AI ដែលស្មុំស្មូរ មានមុខងារច្រើន
 
 ```mermaid
 graph TD
-    Frontend[ផ្នែកមុខ​បណ្ដាញ​វែប] --- Gateway[ទ្វារ API] --- LB[ឧបករណ៍តម្រូវផ្ទុក]
-    Gateway --> Chat[សេវាកម្មជជែក]
-    Gateway --> Image[សេវារូបភាព]
-    Gateway --> Text[សេវាអត្ថបទ]
-    Chat --> OpenAI[ម៉ូឌែល Microsoft Foundry]
-    Image --> Vision[វិស័យទស្សន៍កុំព្យួទ័រ]
-    Text --> DocIntel[បញ្ញាឯកសារ]
+    Frontend[Web Frontend] --- Gateway[API Gateway] --- LB[Load Balancer]
+    Gateway --> Chat[Chat Service]
+    Gateway --> Image[Image Service]
+    Gateway --> Text[Text Service]
+    Chat --> OpenAI[Microsoft Foundry Models]
+    Image --> Vision[Computer Vision]
+    Text --> DocIntel[Document Intelligence]
 ```
 
-**ការអនុវត្ត AZD**:
+**ការអនុវត្ត AZD**៖
 
 ```yaml
 # azure.yaml
@@ -61,13 +57,13 @@ services:
     host: containerapp
 ```
 
-### គំរូ 2: ការកំណត់ដំណើរការដោយព្រឹត្តិការណ៍សម្រាប់ AI (Event-Driven)
+### លំនាំ 2៖ ប្រតិបត្តិការនិយមន័យព្រឹត្តិការណ៍ AI
 
-**ពេលប្រើ**: ការប្រមូលជាគូប (batch processing), វិភាគឯកសារ, ដំណើរការមិនសម័យ (asynchronous workflows)
+**ពេលដែលត្រូវប្រើ**៖ ការប្រតិបត្តិការបញ្ចូលជាដំណាក់កាល ការវិភាគឯកសារ សកម្មភាពធ្វើការចម្រូងចម្រាស
 
 ```bicep
 // Event Hub for AI processing pipeline
-resource eventHub 'Microsoft.EventHub/namespaces@2023-01-01-preview' = {
+resource eventHub 'Microsoft.EventHub/namespaces@2024-01-01' = {
   name: eventHubNamespaceName
   location: location
   sku: {
@@ -78,7 +74,7 @@ resource eventHub 'Microsoft.EventHub/namespaces@2023-01-01-preview' = {
 }
 
 // Service Bus for reliable message processing
-resource serviceBus 'Microsoft.ServiceBus/namespaces@2022-10-01-preview' = {
+resource serviceBus 'Microsoft.ServiceBus/namespaces@2024-01-01' = {
   name: serviceBusNamespaceName
   location: location
   sku: {
@@ -110,46 +106,48 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
+នេះបង្កើតប្លុក namespace មិនមែន hub, queue, subscription ឬកម្មវិធីបង្ហោះ Function। Function ដែលអាចដំណើរការបាន ត្រូវការផែនការអ៊ុតហ្សឹម(Runtime/Storage), អត្តសញ្ញាណភ្ជាប់, RBAC និងការចូលបណ្តាញ។ ឯកសារយោង Key Vault ត្រូវការអនុញ្ញាតអានសម្ងាត់; URL endpoint មិនមែនគឺជាគន្លងសំងាត់ទេ។
+
 ## ការគិតអំពីសុខភាពភ្នាក់ងារ AI
 
-ពេលកម្មវិធីវេបបែបបុរាណខូច ការសម្គាល់អាការៈគឺស្គាល់បាន: ទំព័រមិនដំណើរការ, API ត្រឡប់កំហុស, ឬការដាក់ចេញបរាជ័យ។ កម្មវិធីដែលមានឈ្មោះដោយ AI អាចខូចដោយមានអាកប្បកិរិយាដូចគ្នាទាំងនេះ—ប៉ុន្តែវាក៏អាចធ្វើដំណើរមិនត្រឹមត្រូវក្នុងវិធីដែលស្តើងស្ទាត់ និងមិនបង្ហាញសារកំហុសច្បាស់។
+ពេលកម្មវិធីវែបប្រពៃណីខូច មានសញ្ញាដូចគ្នា៖ ទំព័រមិនផ្ទុក, API មានកំហុស ឬការតំឡើងបរាជ័យ។ កម្មវិធីដែលមាន AI អាចខូចទាំងអស់នោះ—ប៉ុន្តែវាក៏អាចមានបញ្ហាដែលមិនបញ្ចេញសារφάλះទេ។
 
-ផ្នែកនេះជួយអ្នកសាងសង់គំរូផ្លូវចិត្តសម្រាប់ការត្រួតពិនិត្យបន្ទុកការងារ AI ដើម្បីអ្នកដឹងថាត្រូវស្វែងរកនៅកន្លែងណាពេលមានបញ្ហា។
+ផ្នែកនេះជួយអ្នកបង្កើតគំរូគិតជាចិត្តសម្រាប់ត្រួតពិនិត្យសកម្មភាព AI ដើម្បីដឹងកន្លែងជួយពិនិត្យពេលមានបញ្ហា។
 
-### របៀបដែលសុខភាពភ្នាក់ងារខុសពីសុខភាពកម្មវិធីធម្មតា
+### របៀបដែលសុខភាពភ្នាក់ងារផ្សឺពីសុខភាពកម្មវិធីប្រពៃណី
 
-កម្មវិធីធម្មតាអាចដំណើរការ ឬមិនដំណើរការ។ ភ្នាក់ងារ AI អាចបង្ហាញថាដំណើរការ ប៉ុន្តែផលលទ្ធផលអស់សិទ្ធិ។ គិតពីសុខភាពភ្នាក់ងារជាទ្វេស្រទាប់៖
+កម្មវិធីប្រពៃណីក៏មានបញ្ហាគុណភាពតូចៗផងដែរ។ ភ្នាក់ងារ AI បន្ថែមគុណភាពការឆ្លើយតបមិនច្បាស់លាស់ទៅលើកង្វះភាពប្រសប់ និងអ្នកប្រើប្រាស់។ ចងចាំសុខភាពភ្នាក់ងារជាបន្ទាត់ពីររូប៖
 
-| Layer | What to Watch | Where to Look |
+| បន្ទាត់ | អ្វីដែលត្រូវត្រួតពិនិត្យ | កន្លែងដែលត្រូវមើល |
 |-------|--------------|---------------|
-| **សុខភាពហេដ្ឋារចនាសម្ព័ន្ធ** | តើសេវាកម្មកំពុងដំណើរការ? តើធនធានបានផ្ដល់រួចហើយឬ? តើចំណុចចូលអាចទាក់ទងបានទេ? | `azd monitor`, សុខភាពធនធាននៅក្នុង Azure Portal, កំណត់ហេតុ container/app |
-| **សុខភាពអាកប្បកិរិយា** | តើភ្នាក់ងារឆ្លើយតបបានត្រឹមត្រូវទេ? តើចម្លើយបាននៅពេលត្រឹមត្រូវទេ? តើម៉ូដែលត្រូវបានហៅយ៉ាងត្រឹមត្រូវទេ? | កំណត់ត្រា Application Insights, មេត្រិកពេលយឺតនៃការហៅម៉ូដែល, កំណត់ហេតុគុណភាពចម្លើយ |
+| **សុខភាពមូលដ្ឋានស្ថាបត្យកម្ម** | តើសេវាកម្មដំណើរការរឺ? តើធនធានត្រូវបានផ្តល់ជូនរឺ? តើ endpoint អាចចូលដំណើរការបានរឺ? | `azd monitor`, សុខភាពធនធាន Azure Portal, សញ្ញាអំណត្តិនិងកំណត់ហេតុកម្មវិធី|
+| **សុខភាពអាកប្បី** | តើភ្នាក់ងារឆ្លើយតបត្រឹមត្រូវរឺ? តើចម្លើយបានពេលវេលាឬ? តើម៉ូ​ដែលត្រូវបានហៅត្រឹមត្រូវរឺ? | រការតាមដាន Application Insights, វិធីវាស់ស្ទង់ពេលយឺតនៅម៉ូដែល, កំណត់ហេតុគុណភាពការឆ្លើយតប |
 
-សុខភាពហេដ្ឋារចនាសម្ព័ន្ធគឺស្គាល់រួច—វាដូចគ្នានៅសម្រាប់កម្មវិធី azd ណាមួយ។ សុខភាពអាកប្បកិរិយា គឺជាស្រទាប់ថ្មីដែលបន្ទុកការងារ AI បន្ថែមចូល។
+សុខភាពមូលដ្ឋានស្ថាបត្យកម្មគឺជារឿងស្រួលចាប់អារម្មណ៍—វាជាការដូចគ្នាសម្រាប់កម្មវិធី azd មួយណា។ សុខភាពអាកប្បីគឺជាបន្ទាត់ថ្មីដែលសកម្មភាព AI ណែនាំ។
 
-### កន្លែងដែលត្រូវពិនិត្យពេលកម្មវិធី AI មិនបង្ហាញលក្ខណៈដូចដែលរំពឹងទុក
+### កន្លែងដែលត្រូវពិនិត្យពេលកម្មវិធី AI មិនឆ្លើយដោយរបៀបដែលរំពឹងទុក
 
-បើកម្មវិធី AI របស់អ្នកមិនបង្កើតលទ្ធផលដដែលដែលអ្នករំពឹង សូមពិនិត្យតាមបញ្ជីគំនិតនេះ៖
+ប្រសិនបើកម្មវិធី AI របស់អ្នកមិនផលិតលទ្ធផលដូចដែលអ្នករំពឹងទុក នេះគឺជាបញ្ជីឆែកគំនិតមួយ៖
 
-1. **ចាប់ផ្តើមពីមូលដ្ឋាន។** តើកម្មវិធីកំពុងដំណើរការទេ? តើវាអាចទាក់ទងទៅកាន់អាស្រ័យភាពរបស់វាទេ? ពិនិត្យ `azd monitor` និងសុខភាពធនធាន ដូចដែលអ្នកធ្វើសម្រាប់កម្មវិធីណាមួយ។
-2. **ពិនិត្យការតភ្ជាប់ទៅម៉ូដែល។** តើកម្មវិធីរបស់អ្នកបានហៅម៉ូដែលដោយជោគជ័យទេ? ករណីហៅម៉ូដែលបរាជ័យ ឬหมดពេលជាទូទៅជាមូលហេតុនិងបំផ្លាញបញ្ហា AI ហើយនឹងបង្ហាញនៅក្នុងកំណត់ហេតុកម្មវិធីរបស់អ្នក។
-3. **មើលអ្វីដែលម៉ូដែលបានទទួល។** ចម្លើយ AI អាស្រ័យលើបញ្ចូល (prompt និង context ដែលបានយកមក)។ បើលទ្ធផលខុស បញ្ចូលជាញឹកញាប់ដែរ។ ពិនិត្យថាកម្មវិធីរបស់អ្នកកំពុងផ្ញើទិន្នន័យត្រឹមត្រូវទៅម៉ូដែលឬអត់។
-4. **ពិនិត្យពេលយឺតនៃចម្លើយ។** ការហៅម៉ូដែល AI យឺតជាងការហៅ API ទូទៅ។ បើកម្មវិធីមានអារម្មណ៍យឺត សូមពិនិត្យថាពេលឆ្លើយតបម៉ូដែលបានកើនឡើងឬអត់—នេះអាចសញ្ញាការត្រូវបានដាក់កាត់ចរ (throttling), កំណត់សមត្ថភាព ឬការឧបទ្បាញកម្រិតតំបន់។
-5. **តាមដានសញ្ញាចំណាយ។** ការកើនឡើងដ៏មិនរំពឹងទុកក្នុងការប្រើ token ឬការហៅ API អាចបង្ហាញពីរបង្វិល, prompt កំណត់ខុស ឬការបញ្ចូនឡើងវិញច្រើនពេក។
+1. **ចាប់ផ្តើមពីមូលដ្ឋាន។** តើកម្មវិធីដំណើរការរឺ? តើវាអាចចូលដំណើរការប្រព័ន្ធផ្អែកជាអ្នកផ្ទុករបស់វារឺ? ពិនិត្យ `azd monitor` និងសុខភាពធនធានដូចជាកម្មវិធីផ្សេងៗ។
+2. **ពិនិត្យការតភ្ជាប់ម៉ូដែល។** តើកម្មវិធីរបស់អ្នកហៅម៉ូដែល AI បានជោគជ័យរឺ? ការហៅម៉ូដែលដែលបរាជ័យ ឬពន្យារពេលគឺជាហេតុផលសំខាន់នៃបញ្ហាកម្មវិធី AI ហើយនឹងបង្ហាញនៅក្នុងកំណត់ហេតុកម្មវិធី។
+3. **ពិនិត្យការបញ្ចូល និងជំនួយដោយសុវត្ថិភាព។** ព័ត៌មានកំហុសអាចបណ្តាលមកពីការទាញយក, សេចក្ដីណែនាំ, ការរឹតត្បិតម៉ូដែល ឬការប្រតិបត្តិឧបករណ៍។ ប្រើទិន្នន័យវាយតម្លៃដោយត្រួតពិនិត្យការចូលប្រើដោយការគ្រប់គ្រង កុំបើកការចុះបញ្ជីការចម្លើយ/បញ្ជាក់ឯកសារបោះពុម្ពក្នុងផលិតកម្ម។
+4. **ពិនិត្យពេលយឺតឆ្លើយតប។** ការហៅម៉ូដែល AI យឺតជាងការហៅ API ទូទៅ។ ប្រសិនបើកម្មវិធីរបស់អ្នកមានការយឺត ពិនិត្យមើលពេលឆ្លើយតបម៉ូដែលថាជើង ឬថយចុះ—វាអាចបង្ហាញថាមានការច្រោមខ្ទប់, កំណត់កម្រិតសមត្ថភាព ឬការដាក់ទម្រង់តំបន់ព្រំដែនខ្ពស់។
+5. **ត្រួតពិនិត្យសញ្ញាចំណាយ។** ការកើនឡើងមិនរំពឹងទុកនៃការប្រើ token ឬការហៅ API អាចបញ្ជាក់ភាពវង់វៀត ការចេញបញ្ជារដោយមិនត្រឹមត្រូវ ឬការព្យាយាមម្តងទៀតច្រើនពេក។
 
-អ្នកមិនចាំបាច់ឱ្យមានជំនាញខ្ពស់លើឧបករណ៍ observability ពេលភ្លាមទេ។ ចំណុចសំខាន់គឺកម្មវិធី AI មានស្រទាប់អាកប្បកិរិយាបន្ថែមដែលត្រូវតាមដាន ហើយការត្រួតពិនិត្យដែល built-in របស់ azd (`azd monitor`) ផ្តល់ជាចំណុចចាប់ផ្តើមសម្រាប់ពិនិត្យទាំងពីរស្រទាប់។
+អ្នកមិនចាំបាច់ត្រូវកាន់ចំណេះដឹងឧបករណ៍សំរាប់ត្រួតពិនិត្យភ្លាមៗឡើយ។ គោលចំណុចសំខាន់គឺកម្មវិធី AI មានស្រទាប់បន្ថែមសម្រាប់ការត្រួតពិនិត្យអាកប្បី ហើយការត្រួតពិនិត្យដែលរួមបញ្ចូលជាមួយ azd (`azd monitor`) ផ្តល់ចំណុចចាប់ផ្តើមសម្រាប់ការស្រាវជ្រាវពីរ​បន្ទាត់។
 
 ---
 
-## កិច្ចអនុវត្តសុវត្ថិភាពល្អបំផុត
+## គោលការណ៍សុវត្ថិភាពល្អបំផុត
 
-### 1. គំរូសុវត្ថិភាព Zero-Trust
+### 1. រូបមន្តសុវត្ថិភាព Zero-Trust
 
-**យុទ្ធសាស្ត្រ​អនុវត្ត៖**
-- មិនមានការទំនាក់ទំនងពីសេវាមួយទៅសេវាផ្សេងដោយគ្មានការផ្ទៀងផ្ទាត់អត្តសញ្ញាណ
-- ការហៅ API ទាំងអស់ប្រើអត្តសញ្ញាណដែលគ្រប់គ្រងដោយប្រព័ន្ធ
-- ការផ្តាច់បណ្តាញជាមួយចំណុចចូលឯកជន
-- ការត្រួតពិនិត្យការចូលប្រើដោយមានសិទ្ធិតិចបំផុត
+**យុទ្ឋសាស្ត្រអនុវត្ត**៖
+- គ្មានការទំនាក់ទំនងរវាងសេវាកម្មដោយគ្មានការផ្ទៀងផ្ទាត់អត្តសញ្ញាណ
+- ការហៅ API ទាំងអស់ប្រើអត្តសញ្ញាណគ្រប់គ្រង
+- ការបំបែកបណ្តាញជាមួយ endpoint ផ្ទាល់ខ្លួន
+- ការត្រួតពិនិត្យកម្រិតសិទ្ធិចាប់តិចបំផុត
 
 ```bicep
 // Managed Identity for each service
@@ -161,7 +159,7 @@ resource chatServiceIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2
 // Role assignments with minimal permissions
 resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: openAIAccount
-  name: guid(openAIAccount.id, chatServiceIdentity.id, openAIUserRoleDefinitionId)
+  name: guid(openAIAccount.id, chatServiceIdentity.id, '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
     principalId: chatServiceIdentity.properties.principalId
@@ -172,7 +170,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 ### 2. ការគ្រប់គ្រងសម្ងាត់យ៉ាងសុវត្ថិភាព
 
-**គំរូការរួមបញ្ចូល Key Vault**:
+**ល្បែងរួមផ្សំនៃ Key Vault**៖
 
 ```bicep
 // Key Vault with proper access policies
@@ -183,7 +181,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
     tenantId: tenant().tenantId
     sku: {
       family: 'A'
-      name: 'premium'  // Use premium for production
+      name: 'standard' // Premium is needed for HSM-backed keys, not ordinary secrets
     }
     enableRbacAuthorization: true  // Use RBAC instead of access policies
     enablePurgeProtection: true    // Prevent accidental deletion
@@ -192,7 +190,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   }
 }
 
-// Store all AI service credentials
+// Optional legacy key-auth alternative; omit when using Entra ID.
 resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
   parent: keyVault
   name: 'openai-api-key'
@@ -205,9 +203,11 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
+ផ្ដល់អត្តសញ្ញាណ runtime `Key Vault Secrets User` នៅក្នុងដែនកំណត់សមរម្យ ហើយភ្ជាប់វាទៅអ្នកផ្ទុក; `enableRbacAuthorization` ដាច់ដោយឡែកមិនផ្តល់សិទ្ធិ។ ជ្រើសការផ្ទៀងផ្ទាត់អត្តសញ្ញាណ OpenAI ដែលគ្រប់គ្រងជាមួយ `disableLocalAuth: true`។ កូនសោសម្ងាត់ជាជម្រើសគ្មានន័យសម្រាប់គណនីដែលដំណើរការជង់សោដោយចេតនា ហើយអ្នកផ្ដល់កម្មសិទ្ធិផងត្រូវតែមានសិទ្ធិចេញសម្ងាត់ផងដែរ។
+
 ### 3. សុវត្ថិភាពបណ្តាញ
 
-**ការកំណត់រចនាសម្ព័ន្ធចំណុចចូលឯកជន**:
+**ការកំណត់ Private Endpoint**៖
 
 ```bicep
 // Virtual Network for AI services
@@ -265,11 +265,13 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## សមត្ថភាព និងការពង្រីក
+Private endpoints ត្រូវការក្រុម DNS ផ្ទាល់ខ្លួន / លីង VNet និងការចូលរួម VNet នៃកម្មវិធីផងដែរ។ វាមិនបិទការចូលសាធារណៈដោយស្វ័យប្រវត្តិទេ៖ បិទការចូលបណ្តាញសាធារណៈរបស់គណនី AI បន្ទាប់ពីផ្ទៀងផ្ទាត់កម្លាំងភ្ជាប់ផ្ទាល់ និងការចូលដំណើរការដំឡើង។
 
-### 1. យុទ្ធសាស្ត្រការដាក់ស្វ័យប្រវត្តិសម្រាប់ការពង្រីក
+## សមត្ថភាព និងកំណត់ទំហំ
 
-**Container Apps Auto-scaling**:
+### 1. យុទ្ធសាស្ត្រកំណត់ទំហំស្វ័យប្រវត្តិ
+
+** Container Apps កំណត់ទំហំស្វ័យប្រវត្តិ**៖
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -313,12 +315,12 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 2. យុទ្ធសាស្រ្ត Caching
+### 2. យុទ្ធសាស្ត្រគាំទ្រការផ្ទុកក្នុងចង្វាក់
 
-**Redis Cache សម្រាប់ចម្លើយ AI**:
+** Redis Cache សម្រាប់ការឆ្លើយតប AI**៖
 
 ```bicep
-// Redis Premium for production workloads
+// Legacy Azure Cache for Redis example (not recommended for new deployments)
 resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
   name: redisCacheName
   location: location
@@ -333,8 +335,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
     redisConfiguration: {
       'maxmemory-policy': 'allkeys-lru'
     }
-    // Enable clustering for high availability
-    redisVersion: '6.0'
+    // Sharding distributes data; replication/failover provides availability.
     shardCount: 2
   }
 }
@@ -343,9 +344,11 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. ការប៉ះតម្រង់បន្ទុក និងការគ្រប់គ្រងចរាចរណ៍
+Azure Cache សម្រាប់ Redis Basic/Standard/Premium កំពុងត្រូវនាំមុខទៅនឹង [ផ្លូវចោល](https://learn.microsoft.com/azure/azure-cache-for-redis/retirement-faq)។ ប្រើ Azure Managed Redis សម្រាប់ការរចនាថ្មី និងគំរូ SKU, អត្តសញ្ញាណ និងការកំណត់ TLS ដែលបានឯកភាព មិនត្រូវចម្លងធនធានចាស់នេះទៅក្នុងប្រព័ន្ធផលិតកម្មថ្មី។ ផ្លូវកំណត់ភ្ជាប់គឺជាកន្លែងទំនេរមិនអនុវត្ត ហើយមិនមែនសញ្ញាភ្ជាប់ទេ។ ចែកសោបញ្ចូល cache ដោយសិទ្ធិការអនុញ្ញាត ម៉ូដែល/ការណែនាំ និងកំណែការទាញយក ដោយមានការថយចុះ; cache ចែករំលែកសម្រាប់ការសំណួរតែប៉ុណ្ណោះអាចបង្ហាញទិន្នន័យអ្នកប្រើផ្សេងទៀត។
 
-**Application Gateway ជាមួយ WAF**:
+### 3. ការប្រមាណលំនាំផ្ទុក និងគ្រប់គ្រងចរាចរណ៍
+
+** Application Gateway ជាមួយ WAF**៖
 
 ```bicep
 // Application Gateway with Web Application Firewall
@@ -381,14 +384,18 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 💰 ការគ្រប់គ្រងចំណាយ
+នេះជាធនធាន gateway រង៖ ការដំឡើងពេញលេញត្រូវការកំណត់ subnet/IP gateway, អាសយដ្ឋាន IP និងច្រក, អ្នកស្ដាប់ TLS/សញ្ញាប័ត្រ, កំណត់ HTTP ផ្នែកខាងក្រោយ/ការត្រួតពិនិត្យ, ច្បាប់ផ្លូវចរ និងអាទិភាព និងគោលនយោបាយ WAF ដែលបានពិនិត្យ។ TLS hostname/SNI និងការផ្ទៀងផ្ទាត់ត្រូវតែលៃតម្រូវជាមួយ backend Container App។
 
-### 1. ការកំណត់ទំហំធនធានឲ្យសមរម្យ
+## 💰 ការបង្កើនប្រសិទ្ធភាពចំណាយ
 
-**ការ​កំណត់រចនាសម្ព័ន្ធតាមបរិយាកាស**:
+### 1. ការជ្រើសរើសទំហំធនធានឲ្យត្រឹមត្រូវ
+
+** ការកំណត់លក្ខណៈវិជ្ជមានបរិយាកាស**៖
+
+ឈ្មោះទាំងនេះគឺជា **ការបញ្ចូលគំរូលំនាំបន្ទះផ្ទាល់ខ្លួន** មិនមែនការកំណត់ AZD ដោយស្វ័យប្រវត្តិទេ។ បញ្ជីជាមួយ `infra/main.parameters.json`/Bicep និងកំណត់អ្នកផ្ទុកជាមុន។ ឧទាហរណ៍ កម្មវិធី RAG ប្រើ `AZURE_SEARCH_SERVICE_SKU` និង `AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY` កុំប្រើឈ្មោះទូទៅខាងក្រោម។ ផ្ដល់អង្គចងចាំ Container Apps ជាឯកត្តា​ដែលគាំទ្រ​ដូចជា `1Gi` នៅក្នុងធនធានពិតប្រាកដ។ អនុវត្តការផ្លាស់ប្តូរស្ថាបត្យកម្មជាមួយ `azd up` ឬ `azd provision`; `azd deploy` ដាច់ដោយឡែកមិនអនុវត្តការផ្លាស់ប្តូរ Bicep។
 
 ```bash
-# បរិយាកាសអភិវឌ្ឍន៍
+# Development environment
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -396,7 +403,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# បរិយាកាសផលិត
+# Production environment  
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -408,16 +415,18 @@ azd env set CONTAINER_MEMORY 4.0
 ### 2. ការត្រួតពិនិត្យចំណាយ និងថវិកា
 
 ```bicep
+// Supply the first day of the current UTC month, e.g. 2026-11-01T00:00:00Z.
+param budgetStartDate string
+
 // Cost management and budgets
-resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
+resource budget 'Microsoft.Consumption/budgets@2024-08-01' = {
   name: 'ai-workload-budget'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate
     }
     timeGrain: 'Monthly'
-    amount: 2000  // $2000 monthly budget
+    amount: 2000  // In the billing currency, not necessarily USD
     category: 'Cost'
     notifications: {
       warning: {
@@ -446,38 +455,49 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-### 3. ការបង្កើនប្រសិទ្ធភាពការប្រើ Token
+ជំនួសអ្នកទទួលឧទាហរណ៍ ហើយពិនិត្យកំណត់ដែន/សិទ្ធិក្នុងការចូល។ សញ្ញាថវិកាប្រើទិន្នន័យវិភាគចំណាយយឺត ហើយមិនដាក់កំណត់ការចំណាយ។
 
-**ការគ្រប់គ្រងចំណាយ OpenAI**:
+### 3. ការបង្កើនប្រសិទ្ធភាពប្រើប្រាស់ Token
+
+** ការគ្រប់គ្រងចំណាយ OpenAI**៖
+
+នេះគឺជាការវាយតម្លៃតួអក្សរតែក្នុងការរំពឹងមើល UI មិនមែនកម្មវិធីវាស់ Token តាមម៉ូដែលទេ។ កូដផលិតកម្មត្រូវប្រើ tokenizer ដែលសមរម្យទៅម៉ូដែលដំឡើង ហើយគិតទៅការណែនាំប្រព័ន្ធ ស្កីមាឧបករណ៍ ប្រវត្តិ និងថវិកាផលិត។ បដិសេធសារ​អ្នកប្រើធំពេក ជាជម្រើសល្អជាងការកាត់បន្ថយដំណើរការដោយខ្ងុំ។
 
 ```typescript
-// ការបង្កើនប្រសិទ្ធភាពនៃតូកិននៅកម្រិតកម្មវិធី
+// Application-level token optimization
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
   
   optimizePrompt(userInput: string, context: string): string {
     const availableTokens = this.maxTokens - this.reserveTokens;
-    const estimatedTokens = this.estimateTokens(userInput + context);
+    if (this.estimateTokens(userInput) + 8 >= availableTokens) {
+      throw new Error("User input exceeds the illustrative prompt budget");
+    }
+    const estimatedTokens = this.estimateTokens(userInput + context) + 8;
     
     if (estimatedTokens > availableTokens) {
-      // កាត់បន្ថយបរិបទ មិនត្រូវកាត់បន្ថយការបញ្ចូលរបស់អ្នកប្រើ
-      context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
+      // Truncate context, not user input
+      context = this.truncateContext(context, Math.max(0, availableTokens - this.estimateTokens(userInput) - 8));
     }
     
     return `${context}\n\nUser: ${userInput}`;
   }
   
   private estimateTokens(text: string): number {
-    // ការប៉ាន់ស្មានប្រហែល៖ 1 តូកិន ≈ 4 តួអក្សរ
+    // Rough estimation: 1 token ≈ 4 characters
     return Math.ceil(text.length / 4);
+  }
+
+  private truncateContext(text: string, estimatedBudget: number): string {
+    return text.slice(0, Math.max(0, estimatedBudget) * 4);
   }
 }
 ```
 
-## ការត្រួតពិនិត្យ និងការមើលឃើញ
+## ការត្រួតពិនិត្យ និងការសង្កេត
 
-### 1. ការប្រើ Application Insights ដោយទូលំទូលាយ
+### 1. Application Insights ពេញលេញ
 
 ```bicep
 // Application Insights with advanced features
@@ -488,8 +508,8 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   properties: {
     Application_Type: 'web'
     WorkspaceResourceId: logAnalyticsWorkspace.id
-    SamplingPercentage: 100  // Full sampling for AI apps
-    DisableIpMasking: false  // Enable for security
+    SamplingPercentage: 100  // Ingestion setting; review cost and SDK sampling separately
+    DisableIpMasking: false  // Retain IP masking
   }
 }
 
@@ -498,7 +518,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: 'ai-high-error-rate'
   location: 'global'
   properties: {
-    description: 'Alert when AI service error rate is high'
+    description: 'Alert when failed request count exceeds 10 in five minutes'
     severity: 2
     enabled: true
     scopes: [
@@ -524,21 +544,20 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 
 ### 2. ការត្រួតពិនិត្យពិសេសសម្រាប់ AI
 
-**ផ្ទាំងតាមដានផ្ទាល់ខ្លួនសម្រាប់មេត្រិក AI**:
+**ផ្ទាំងបញ្ជាការប្តូរតំលៃសម្រាប់តួវាស់ AI**៖
 
 ```json
-// Dashboard configuration for AI workloads
 {
   "dashboard": {
     "name": "AI Application Monitoring",
     "tiles": [
       {
         "name": "OpenAI Request Volume",
-        "query": "requests | where name contains 'openai' | summarize count() by bin(timestamp, 5m)"
+        "query": "dependencies | where target contains 'openai' | summarize count() by bin(timestamp, 5m)"
       },
       {
         "name": "AI Response Latency",
-        "query": "requests | where name contains 'openai' | summarize avg(duration) by bin(timestamp, 5m)"
+        "query": "dependencies | where target contains 'openai' | summarize avg(duration) by bin(timestamp, 5m)"
       },
       {
         "name": "Token Usage",
@@ -553,7 +572,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. ការត្រួតពិនិត្យសុខភាព និងការតាមដាន uptime
+JSON នេះជាគំនូសរូបមន្តកម្មវិធីonly មិនមែនschema ផ្ទាំងបញ្ជារពី Azure portal មិនអាចនាំចូលបានទេ។ សំណួរចំនួន/ចំណាយ token ត្រូវការឲ្យកម្មវិធីរបស់អ្នកបញ្ចេញតួវាស់ផ្ទាល់ខ្លួនពីពិត; មិនត្រូវបានបង្កើតដោយ AZD ទេ។ អត្រាពិនិត្យការទំនាក់ទំនងត្រូវប្តូរតាមម៉ូដែល ពហុស្ពាន ឈ្មោះ។
+
+### 3. ការត្រួតពិនិត្យសុខភាព និងសម័យដំណើរការ
 
 ```bicep
 // Application Insights availability tests
@@ -570,7 +591,7 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
     Enabled: true
     Frequency: 300  // 5 minutes
     Timeout: 120    // 2 minutes
-    Kind: 'ping'
+    Kind: 'standard'
     Locations: [
       {
         Id: 'us-east-2-azr'
@@ -579,52 +600,26 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
         Id: 'us-west-2-azr'
       }
     ]
-    Configuration: {
-      WebTest: '''
-        <WebTest Name="AI Health Check" 
-                 Id="8d2de8d2-a2b0-4c2e-9a0d-8f9c9a0b8c8d" 
-                 Enabled="True" 
-                 CssProjectStructure="" 
-                 CssIteration="" 
-                 Timeout="120" 
-                 WorkItemIds="" 
-                 xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" 
-                 Description="" 
-                 CredentialUserName="" 
-                 CredentialPassword="" 
-                 PreAuthenticate="True" 
-                 Proxy="default" 
-                 StopOnError="False" 
-                 RecordedResultFile="" 
-                 ResultsLocale="">
-          <Items>
-            <Request Method="GET" 
-                     Guid="a5f10126-e4cd-570d-961c-cea43999a200" 
-                     Version="1.1" 
-                     Url="${webApp.properties.defaultHostName}/health" 
-                     ThinkTime="0" 
-                     Timeout="120" 
-                     ParseDependentRequests="True" 
-                     FollowRedirects="True" 
-                     RecordResult="True" 
-                     Cache="False" 
-                     ResponseTimeGoal="0" 
-                     Encoding="utf-8" 
-                     ExpectedHttpStatusCode="200" 
-                     ExpectedResponseUrl="" 
-                     ReportingName="" 
-                     IgnoreHttpStatusCode="False" />
-          </Items>
-        </WebTest>
-      '''
+    Request: {
+      RequestUrl: 'https://${webApp.properties.defaultHostName}/health'
+      HttpVerb: 'GET'
+      FollowRedirects: true
+      ParseDependentRequests: false
+    }
+    ValidationRules: {
+      ExpectedHttpStatusCode: 200
+      SSLCheck: true
+      SSLCertRemainingLifetimeCheck: 7
     }
   }
 }
 ```
 
-## ស្ដារឡើងវិញបន្ទាប់ពីគ្រោះថ្នាក់ និងភាពអាចប្រើបានខ្ពស់
+## ការជួយសង្រ្គោះគ្រោះអាគារ និងភាពអាចប្រើបានខ្ពស់
 
-### 1. ការដាក់ប្រតិបត្តិការនៅក្នុងតំបន់ច្រើន
+ការសាកល្បងដែលបានរៀបរាប់មុននេះគឺផ្អែកលើ App Service `webApp` និងធនធាន Application Insights មានរួចហើយ។ ការផ្ទៀងផ្ទាត់ភាពអាចប្រើបានស្ដង់ដារគឺគិតថ្លៃ ហើយតម្រូវឲ្យមាន endpoint ដែលអាចចូលដំណើរការ; កម្មវិធីលក្ខណៈផ្ទាល់ខ្លួនត្រូវការរចនាការត្រួតពិនិត្យផ្ទាល់ខ្លួនត្រឹមត្រូវ។ ការសាកល្បង URL ping ត្រូវបិទ; ប្រើ [ការត្រួតពិនិត្យភាពអាចប្រើបានស្ដង់ដារ](https://learn.microsoft.com/azure/azure-monitor/app/availability)។
+
+### 1. ការដាក់បណ្តាលពហុតំបន់
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -634,16 +629,16 @@ services:
     project: ./api
     host: containerapp
     env:
-      - AZURE_REGION=eastus
+      AZURE_REGION: eastus
   api-secondary:
     project: ./api
     host: containerapp
     env:
-      - AZURE_REGION=westus2
+      AZURE_REGION: westus2
 ```
 
 ```bicep
-// Traffic Manager for global load balancing
+// Separate App Service topology, not the Container Apps declarations above
 resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = {
   name: trafficManagerProfileName
   location: 'global'
@@ -686,7 +681,9 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. ការបម្រុងទុក និងស្ដារទិន្នន័យ
+ជម្រើសអថេរបរិយាកាសមិនជ្រើសទីតាំងធនធានឡើយ។ IaC ត្រូវតែផ្គត់ផ្គង់អ្នកផ្ទុកតំបន់ផ្សេងៗ និងភ្ជាប់សេវាកម្មដោយប្រើ `resourceName` ឬ `azd-service-name` ជាតិគន្លង។ ឧទាហរណ៍ Traffic Manager គឺជា **ទីតាំង App Service ផ្សេងទៀត** (`primaryAppService`/`secondaryAppService`) មិនមែនជាដំណើរការបញ្ជូនសម្រាប់ការបញ្ជាក់ Container Apps ទេ។ Container Apps ត្រូវការដំណើរការតំណាក់លំដាប់ externel endpoint/front door, TLS/domain ផ្ទាល់ខ្លួន, ការបញ្ជូនសង់ និងសុខភាព។
+
+### 2. ការផ្ទុកទិន្នន័យ និងការជួយសង្រ្គោះ
 
 ```bicep
 // Backup configuration for critical data
@@ -706,40 +703,13 @@ resource backupVault 'Microsoft.DataProtection/backupVaults@2023-05-01' = {
   }
 }
 
-// Backup policy for AI models and data
-resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023-05-01' = {
-  parent: backupVault
-  name: 'ai-data-backup-policy'
-  properties: {
-    policyRules: [
-      {
-        backupParameters: {
-          backupType: 'Full'
-          objectType: 'AzureBackupParams'
-        }
-        trigger: {
-          schedule: {
-            repeatingTimeIntervals: [
-              'R/2024-01-01T02:00:00+00:00/P1D'  // Daily at 2 AM
-            ]
-          }
-          objectType: 'ScheduleBasedTriggerContext'
-        }
-        dataStore: {
-          datastoreType: 'VaultStore'
-          objectType: 'DataStoreInfoBase'
-        }
-        name: 'BackupDaily'
-        objectType: 'AzureBackupRule'
-      }
-    ]
-  }
-}
 ```
 
-## DevOps និងការរួមបញ្ចូល CI/CD
+តែតំណក់ផ្ទុកមួយគឺមិនសម្រួលការបម្រុងទុកអ្វីទេ។ កំណត់រចនាការ**គោលនយោបាយគាំទ្រពិសេសសម្រាប់បន្ទុកការងារ និងអាជ្ញាប័ណ្ណបម្រុងទុក** សិទ្ធិប្រភព, ការរក្សាទុក និងការតេស្តការស្តារឡើងវិញប្រើប្រាស់ [ម៉ាទ្រីកន្ធកម្មជំនួយ Azure Backup](https://learn.microsoft.com/azure/backup/backup-support-matrix)។ មិនមានគោលនយោបាយ Azure Backup ទូទៅសម្រាប់ការតំឡើងម៉ូដែល Azure OpenAI ជាមួយនឹងអ៊ីសូឡែនទេ។ រក្សាទុកការបញ្ជាក់លំដាប់កិច្ចការវិស្វកម្ម/ការតំឡើងម៉ូដែលនៅក្នុងការត្រួតពិនិត្យប្រភព; អនុញ្ញាតឯកសារផ្ទុកឡើង, ទិន្នន័យកម្មវិធី និង វត្ថុប្រើប្រាស់ fine-tuning ដោយប្រើលក្ខណៈបម្រុងទុក/នាំចេញដែលគាំទ្រដោយសេវាកម្មគាំទ្រនីមួយៗ។ កំណត់និងតេស្ត RPO/RTO អោយច្បាស់លាស់។
 
-### 1. លំហូរការងារ GitHub Actions
+## ការបញ្ចូល DevOps និង CI/CD
+
+### 1. ប្រតិបត្តិការ GitHub Actions Workflow
 
 ```yaml
 # .github/workflows/deploy-ai-app.yml
@@ -775,151 +745,123 @@ jobs:
           python scripts/test_ai_safety.py
           python scripts/validate_prompts.py
 
-  deploy-staging:
-    needs: test
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Setup AZD
-        uses: Azure/setup-azd@v2
-        
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-          
-      - name: Deploy to Staging
-        run: |
-          azd env select staging
-          azd deploy
-
-  deploy-production:
-    needs: test
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Setup AZD
-        uses: Azure/setup-azd@v2
-        
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-          
-      - name: Deploy to Production
-        run: |
-          azd env select production
-          azd deploy
-          
-      - name: Run Production Health Checks
-        run: |
-          python scripts/health_check.py --env production
 ```
 
-### 2. ការបញ្ជាក់ហេដ្ឋារចនាសម្ព័ន្ធ
+នេះគឺជាផ្នែក**សម្រាប់តេស្ត​តែប៉ុណ្ណោះ**នៃប្រតិបត្តិការ ហើយគិតថាអ្នកបានបង្កើត `requirements.txt`, `tests/` និងស្គ្រីបសុវត្ថិភាពពីរហើយ។ បន្ថែមការងារផ្ដល់សិទ្ធិ OIDC បានបញ្ជាក់/ការដំឡើងពី [CI/CD Pipeline Configuration](#cicd-pipeline-configuration) ដែលមាន `needs: test`, ការត្រៀមជឿជាក់ក្នុងការបញ្ចូន/បើកដំណើរការដោយដៃ និងបរិស្ថាន GitHub ដែលបានការពារ។ កុំដំឡើងកូដ pull-request មិនទាន់ទុកចិត្តដែលមានភ្ជាប់គណនេយ្យ Cloud។ ប្រតិបត្តិការ runner ថ្មីមិនបានជ្រើសរើសបរិស្ថាន AZD ទូលាយនៅក្នុងតំបន់; ផ្ដល់ជូនព័ត៌មានបរិស្ថាន/ការជាវ/ទីតាំងនិងប្រើ `azd auth login` មិនមែនតែ `azure/login` ទេ។
+
+### 2. ការធ្វើតេស្តត្រឹមត្រូវនៃសំណង់​វិស្វកម្ម
 
 ```bash
 # scripts/validate_infrastructure.sh
 #!/bin/bash
+set -euo pipefail
 
 echo "Validating AI infrastructure deployment..."
 
-# ពិនិត្យមើលថា សេវាកម្មទាំងអស់ដែលត្រូវការកំពុងដំណើរការ
-services=("openai" "search" "storage" "keyvault")
-for service in "${services[@]}"; do
-    echo "Checking $service..."
-    if ! az resource list --resource-type "Microsoft.CognitiveServices/accounts" --query "[?contains(name, '$service')]" -o tsv; then
-        echo "ERROR: $service not found"
+# Requires Azure CLI login and the resource group selected explicitly.
+: "${AZURE_RESOURCE_GROUP:?Set AZURE_RESOURCE_GROUP}"
+: "${AZURE_OPENAI_NAME:?Set AZURE_OPENAI_NAME}"
+: "${AZURE_OPENAI_CHAT_DEPLOYMENT:?Set the actual deployment name}"
+
+# A successful empty list is not proof that resources exist.
+types=("Microsoft.CognitiveServices/accounts" "Microsoft.Search/searchServices"
+       "Microsoft.Storage/storageAccounts" "Microsoft.KeyVault/vaults")
+for resource_type in "${types[@]}"; do
+    count=$(az resource list --resource-group "$AZURE_RESOURCE_GROUP" \
+        --resource-type "$resource_type" --query "length(@)" -o tsv)
+    if [[ "$count" -lt 1 ]]; then
+        echo "ERROR: No $resource_type found in $AZURE_RESOURCE_GROUP"
         exit 1
     fi
 done
 
-# ផ្ទៀងផ្ទាត់ការដាក់ប្រើម៉ូឌែល OpenAI
+# Validate OpenAI model deployments
 echo "Validating OpenAI model deployments..."
-models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
-if [[ ! $models == *"gpt-4.1-mini"* ]]; then
-  echo "ERROR: Required model gpt-4.1-mini not deployed"
+state=$(az cognitiveservices account deployment show \
+  --name "$AZURE_OPENAI_NAME" --resource-group "$AZURE_RESOURCE_GROUP" \
+  --deployment-name "$AZURE_OPENAI_CHAT_DEPLOYMENT" \
+  --query "properties.provisioningState" -o tsv)
+if [[ "$state" != "Succeeded" ]]; then
+    echo "ERROR: Required model deployment is not provisioned successfully"
     exit 1
 fi
-
-# សាកល្បងការតភ្ជាប់ទៅសេវាកម្ម AI
-echo "Testing AI service connectivity..."
-python scripts/test_connectivity.py
 
 echo "Infrastructure validation completed successfully!"
 ```
 
-## បញ្ជីត្រួតពិនិត្យភាពរួចរាល់សម្រាប់ផលិតកម្ម
+រំពឹង: ការចេញកម្មវិធីជាមួយសូន្យ និងសារជូនដំណឹងបញ្ចប់ ប៉ុន្មានសិនទាល់តែប្រភេទទាំងអស់ដែលរំពឹងទុកមាន និងតំឡើងម៉ូដែលដែលបានបញ្ជាក់។ នេះធ្វើការត្រួតពិនិត្យស្ថានភាពសន្ទស្សន៍/ការតម្លើង​ **មិនមែន** សុខភាពធនធាន, ទម្រង់ត្រឹមត្រូវ, RBAC, អាចរកដល់បណ្តាញ ឬអាកប្បកិរិយា​ម៉ូដែលទេ។ សម្រួលប្រភេទដែលរំពឹងទុកទៅតាមសំណង់របស់អ្នកបន្ទាប់មកធ្វើតេស្តត្រៀមប្រើប្រាស់កម្មវិធីដែលបានបញ្ជាក់ផ្សេងទៀត។
+
+## បញ្ជីត្រួតពិនិត្យភាពត្រៀមប្រើប្រាស់ផលិតកម្ម
 
 ### សុវត្ថិភាព ✅
-- [ ] សេវាទាំងអស់ប្រើអត្តសញ្ញាណដែលគ្រប់គ្រងដោយប្រព័ន្ធ
-- [ ] សម្ងាត់ផ្ទុកក្នុង Key Vault
-- [ ] ចំណុចចូលឯកជនបានកំណត់រចនាសម្ព័ន្ធ
-- [ ] ក្រុមសុវត្ថិភាពបណ្តាញបានអនុវត្ត
-- [ ] RBAC ជាមួយសិទ្ធិតិចបំផុត
-- [ ] WAF បានបើកនៅលើចំណុចចូលសាធារណៈ
+- [ ] សេវាសុទ្ធិព្រមទាំងគ្រប់គ្រងតែម្ដង
+- [ ] រក្សាទុកពាក្យសម្ងាត់នៅក្នុង Key Vault
+- [ ] កំណត់ចំណុចផ្ញើសារឯកជន
+- [ ] អនុវត្តក្រុមសុវត្ថិភាព​បណ្ដាញ
+- [ ] RBAC ជាមួយអនុញ្ញាតតិចតួចបំផុត
+- [ ] បើកយន្តហោះគ្រប់គ្រង WAF លើចំណុច​ចូលសាធារណៈ
 
-### សមត្ថភាព ✅
-- [ ] ការដាក់ស្វ័យប្រវត្តិសម្រាប់ការពង្រីកបានកំណត់រួច
-- [ ] ការកែតម្រូវ caching បានអនុវត្ត
-- [ ] ការបង្វិលបន្ទុកបានកំណត់
-- [ ] CDN សម្រាប់មាតិកា​ស្ថិតិស្ថេរ
-- [ ] ការបង្កើតការភ្ជាប់ទៅDB ដោយ pooling
-- [ ] ការបង្កើនប្រសិទ្ធភាពការប្រើ token
+### មានប្រសិទ្ធភាព ✅
+- [ ] កំណត់ការកើនឡើងដោយស្វ័យប្រវត្តិ
+- [ ] អនុវត្តការចងចាំ (caching)
+- [ ] កំណត់ការបរាជ័យបន្ទុក
+- [ ] CDN សម្រាប់ខ្លឹមសារស្ថិតស្ថេរ
+- [ ] ការភ្ជាប់តួលេខទិន្នន័យមានប្រសិទ្ធភាព
+- [ ] បំលែងប្រើប្រាស់ token ឲ្យមានប្រសិទ្ធភាព
 
 ### ការត្រួតពិនិត្យ ✅
-- [ ] Application Insights បានកំណត់រួច
-- [ ] មេត្រិកផ្ទាល់ខ្លួនបានកំណត់
-- [ ] ការកំណត់ច្បាប់ការ alerted បានរៀបចំ
-- [ ] ផ្ទាំងតាមដានបានបង្កើត
-- [ ] ការត្រួតពិនិត្យសុខភាពបានអនុវត្ត
-- [ ] គោលនយោបាយរក្សាទុកកំណត់ហេតុ
+- [ ] កំណត់ Application Insights
+- [ ] កំណត់មាត្រដ្ឋានផ្ទាល់ខ្លួន
+- [ ] កំណត់ច្បាប់ជូនដំណឹង
+- [ ] បង្កើតផ្ទាំងបញ្ជី
+- [ ] អនុវត្តការត្រួតពិនិត្យសុខភាព
+- [ ] គោលការណ៍រក្សាទុកកំណត់ហេតុ
 
-### ភាពទំនុកចិត្ត ✅
-- [ ] ការដាក់ប្រតិបត្តិការនៅក្នុងតំបន់ច្រើន
-- [ ] ផែនការបម្រុងទុក និងស្ដារឡើងវិញ
-- [ ] តម្រូវការរកាត់ចរន្ត (circuit breakers) អនុវត្ត
-- [ ] គោលការណ៍ retry បានកំណត់
-- [ ] ការធ្វើចុះបន្ទាន់យ៉ាងរាបសារ (graceful degradation)
-- [ ] ចំណុចចូលសម្រាប់ត្រួតពិនិត្យសុខភាព
+### ភាពជឿជាក់ ✅
+- [ ] តំឡើងបន្តផ្ទាល់ក្នុងតំបន់ជាច្រើន
+- [ ] ផែនការបម្រុងទុកនិងស្តារឡើងវិញ
+- [ ] អនុវត្តការ​បិទបំពង់​វាយប្រហារ (circuit breakers)
+- [ ] កំណត់គោលនយោបាយ Retry
+- [ ] ការដាច់ចេញយ៉ាងទន់ភ្លន់
+- [ ] ចំណុចផ្ទៀងផ្ទាត់សុខភាព
 
-### ការគ្រប់គ្រងចំណាយ ✅
-- [ ] ការជូនដំណឹងថវិកា បានកំណត់
-- [ ] ការកំណត់ទំហំធនធានឲ្យសមរម្យ
-- [ ] ការបញ្ចុះតម្លៃសម្រាប់ Dev/test បានអនុវត្ត
-- [ ] reserved instances បានទិញ
-- [ ] ផ្ទាំងតាមដានចំណាយ
-- [ ] ការពិនិត្យចំណាយជាប្រចាំ
+### ការគ្រប់គ្រងថ្លៃឈ្នួល ✅
+- [ ] កំណត់ប្រតិបត្តិការ​រាយការណ៍ថ្លៃឈ្នួល
+- [ ] កំណត់ទំហំធនធានអោយត្រឹមត្រូវ
+- [ ] ការបញ្ចុះតម្លៃសម្រាប់ការអភិវឌ្ឍន៍/ការប្រឡង
+- [ ] ទិញបណ្ដុំ instance រក្សាទុក
+- [ ] ផ្ទាំងបញ្ជីត្រួតពិនិត្យថ្លៃឈ្នួល
+- [ ] ការពិនិត្យថ្លៃឈ្នួលជារឿយៗ
 
-### ការអនុលោម ✅
-- [ ] បានបំពេញតម្រូវការអាស័យដ្ឋានទិន្នន័យ
-- [ ] ការកំណត់ហេតុ audit បានបើក
-- [ ] គោលនយោបាយអនុលោមបានអនុវត្ត
-- [ ] សន្ទស្សន៍សុវត្ថិភាពបានអនុវត្ត
-- [ ] การវាយតម្លៃសុវត្ថិភាពជាប្រចាំ
-- [ ] ផែនការឆ្លើយតបព្រឹត្តិការណ៍
+### ភាពស្របតាមវិធានការ ✅
+- [ ] បំពេញតំរូវការទីតាំងទិន្នន័យ
+- [ ] បើកមុខងារស្តារកំណត់ហេតុ
+- [ ] ដាក់អនុវត្តគោលការណ៍គ្រប់គ្រងតាមច្បាប់
+- [ ] អនុវត្តស្តង់ដាសុវត្ថិភាព
+- [ ] ការវាយតម្លៃសុវត្ថិភាពជារឿយៗ
+- [ ] ផែនការឆ្លើយតបហេតុការណ៍
 
-## គំរូសមត្ថភាព
+## គោលវិធានប្រសិទ្ធភាព
 
-### មេត្រិកទូទៅក្នុងផលិតកម្ម
+### គោលដៅផលិតកម្មអោយយល់ច្បាស់
 
-| Metric | Target | Monitoring |
+នេះគឺជាគំរូ SLO ដែលសម្រាប់ចរចា និងតេស្តផ្ទុក មិនមែនជាគោលវិធានដែលបានវាស់ឬធានាឡើយ។ ដំណើរឆ្លើយតបអាស្រ័យលើប្រវែងម៉ូដែល/លទ្ធផល; ការចំណាយ token ប្រចាំខែអាស្រ័យលើចរាចរយ៉ាងដូននិងតម្លៃ មិនមែនត្រឹមតែចំនួន token ទេ។
+
+| គោលវិធាន | គោលដៅ | ការត្រួតពិនិត្យ |
 |--------|--------|------------|
-| **Response Time** | < 2 seconds | Application Insights |
-| **Availability** | 99.9% | Uptime monitoring |
-| **Error Rate** | < 0.1% | Application logs |
-| **Token Usage** | < $500/month | Cost management |
-| **Concurrent Users** | 1000+ | Load testing |
-| **Recovery Time** | < 1 hour | Disaster recovery tests |
+| **ពេលវេលាឆ្លើយតប** | < 2 វិនាទី | Application Insights |
+| **ភាពអាចប្រើបាន** | 99.9% | ការត្រួតពិនិត្យ uptime |
+| **អត្រាលើកកំហុស** | < 0.1% | កំណត់ហេតុកម្មវិធី |
+| **ការចំណាយម៉ូដែល** | < $500/ខែ (គំរូថវិកា) | ការគ្រប់គ្រងថ្លៃឈ្នួល |
+| **អ្នកប្រើប្រាស់សមរម្យ** | 1000+ | ការតេស្តផ្ទុក |
+| **ពេលវេលាស្ដារឡើងវិញ** | < 1 ម៉ោង | ការធ្វើតេស្តស្ដារឡើងវិញពីគ្រោះអាសន្ន |
 
 ### ការធ្វើតេស្តបន្ទុក
 
+ខាងក្រោមនេះជាចំណុចប្រទាក់សម្រាប់ស្គេតឆ្រ script តេស្តបន្ទុកដែល **អ្នកត្រូវតែអនុវត្ត**; ឃ្លាំងនេះមិនផ្តល់ជូន `scripts/load_test.py` ទេ។ កំណត់ payloads សំណើ, ការផ្ទៀងផ្ទាត់, បន្ទុកតំណាង, ការបញ្ជាក់ latency/error ក្នុងភាគរយ និងកំណត់ថវិកាចំណាយនៅក្នុងឧបករណ៍តេស្តបន្ទុកដែលអ្នកបានជ្រើសរើសមុនចាប់ផ្តើមរត់វា៖
+
 ```bash
-# ស្គ្រីបសម្រាប់ធ្វើតេស្តផ្ទុកសម្រាប់កម្មវិធី AI
+# Load testing script for AI applications
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -927,182 +869,275 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 អនុវត្តល្អបំផុតពីសហគមន៍
+## 🤝 គោលការណ៍ល្អបំផុតពីសហគមន៍
 
-ដោយផ្អែកលើមតិយោបល់ពីសហគមន៍ Microsoft Foundry Discord:
+dựa trên phản hồi cộng đồng Microsoft Foundry Discord:
 
-### ការណែនាំកំពូលពីសហគមន៍:
+### សេចក្ដីផ្តល់អនុសាសន៍ដ៏ល្អបំផុតពីសហគមន៍:
 
-1. **ចាប់ផ្តើមតូចៗ បន្ដបង្កើនយឺតៗ**: ចាប់ផ្តើមជាមួយ SKU មូលដ្ឋាន ហើយពង្រីកបន្តទៅតាមការប្រើប្រាស់ពិតប្រាកដ
-2. **ត្រួតពិនិត្យគ្រប់យ៉ាង**: រៀបចំការត្រួតពិនិត្យទូលំទូលាយចាប់ពីថ្ងៃដើម
-3. **ស្វ័យប្រវត្តិសម្រាប់សុវត្ថិភាព**: ប្រើ Infrastructure as Code សម្រាប់សុវត្ថិភាពដែលមានភាពឯកសារដូចគ្នា
-4. **សាកល្បងយ៉ាងហ្មត់ចត**: រួមបញ្ចូលការធ្វើតេស្តពិសេសសម្រាប់ AI ក្នុងបណ្ដាញរបស់អ្នក
-5. **រៀបចំផែនការសម្រាប់ចំណាយ**: តាមដានការប្រើ token និងកំណត់អការណ៍ថវិកាចាប់ពីដើម
+1. **ចាប់ផ្តើមតូចៗ, បន្ដរឹតត Gradually**: ចាប់ផ្តើមជាមួយ SKUs មូលដ្ឋាន និងថយធំឡើងទៅតាមការប្រើប្រាស់ពិតប្រាកដ
+2. **ត្រួតពិនិត្យគ្រប់យ៉ាង**: កំណត់ការត្រួតពិនិត្យទូលំទូលាយចាប់ពីថ្ងៃដំបូង
+3. **អូតូម៉ាទិក សុវត្ថិភាព**: ប្រើប្រាស់ហេដ្ឋារចនាសម្ព័ន្ធជា code ដើម្បីធ្វើសុវត្ថិភាពឲ្យមានស្ថេរភាព
+4. **ធ្វើតេស្តយ៉ាងពេញលេញ**: រួមបញ្ចូលការធ្វើតេស្តជាក់លាក់សម្រាប់ AI នៅក្នុងដំណើរការ
+5. **ផែនការចំណាយ**: ត្រួតពិនិត្យការប្រើប្រាស់ token និងកំណត់ការជូនដំណឹងថវិកាមុនពេលយូរ
 
-### កំហុសទូទៅដែលត្រូវជៀសវាង:
+### ចូមកកំហុសសំខាន់ដែលត្រូវជៀសវាង:
 
-- ❌ ការដាក់ API keys យ៉ាងរឹងនៅក្នុងកូដ
-- ❌ មិនរៀបចំការត្រួតពិនិត្យឲ្យត្រឹមត្រូវ
-- ❌ ធ្វើម្ហូបចំណាយអច្បាប់
-- ❌ មិនសាកល្បងស្ថានភាពបរាជ័យ
-- ❌ ដាក់ចេញដោយគ្មានការត្រួតពិនិត្យសុខភាព
+- ❌ កំណត់ API កូនសោក្នុងកូដដោយដាច់ដោយខ្លួន
+- ❌ មិនបានកំណត់ការត្រួតពិនិត្យត្រឹមត្រូវ
+- ❌ មិនយកចិត្តទុកដាក់ការបន្ថយចំណាយ
+- ❌ មិនធ្វើតេស្តសំណុំបែបបទបរាជ័យ
+- ❌ បង្ហោះដោយគ្មានការត្រួតពិនិត្យសុខភាព
 
-## ពាក្យបញ្ជា AZD AI CLI និងផ្នែកបន្ថែម
+## បញ្ជារបាយ AZD AI CLI និងការពង្រីក
 
-AZD រួមមានសំណុំនៃពាក្យបញ្ជាមួយចំនួនដែលផ្តល់អត្ថិភាពពិសេសសម្រាប់ AI និងផ្នែកបន្ថែមដែលធ្វើឲ្យដំណើរការពេញផលិតកម្មសម្រាប់បន្ទុកការងារ AI ងាយស្រួល។ ឧបករណ៍ទាំងនេះជាស្ពានចន្លោះរវាងការអភិវឌ្ឍនៅក្នុងតំបន់មូលដ្ឋាននិងការដាក់ចេញទៅផលិតកម្ម។
+AZD រួមបញ្ចូលបញ្ជាររបស់ AI ជាច្រើន និងការពង្រីកដែលផ្តល់នូវដំណើរការងារវាយយល់ AI ក្នុងផលិតកម្មបានកាន់តែលឿននិងងាយស្រួល។ ឧបករណ៍ទាំងនេះជួយភ្ជាប់ចន្លោះការអភិវឌ្ឍន៍ក្នុងតំបន់និងការបង្ហោះក្នុងផលិតកម្មសម្រាប់ការងារវាយយល់ AI។
 
-### ផ្នែកបន្ថែម AZD សម្រាប់ AI
+> **ការពិនិត្យការបញ្ចេញ (2026-11-04):**ការណែនាំ CLI ខាងក្រោមត្រូវបានពិនិត្យទណ្ឌកម្មជាមួយការបញ្ចេញដែលបានផ្សាយរបស់ `azd` **1.37.2**, `azure.ai.agents` **1.0.0-beta.23**, និង `azure.ai.evaluations` **1.0.0-beta.2**។ Agents beta.23 ត្រូវការជំនួយពី `azd >= 1.37.0`; evaluations beta.2 ត្រូវការជំនួយពី `azd >= 1.33.0`។ សូមប្រើយ៉ាងហោចណាស់ 1.37.0 សម្រាប់ដំណើរការរួមបញ្ចូល។ នេះគឺជាការពិនិត្យឯកសារនិងគោលដៅឆ្លើយតបចំពោះប្រភេទនេះ មិនមែនជាការផ្ទៀងផ្ទាត់ការបង្ហោះរបស់ Azure ដោយផ្ទាល់។
 
-AZD ប្រើប្រព័ន្ធផ្នែកបន្ថែមដើម្បីបន្ថែមសមត្ថភាពពិសេសសម្រាប់ AI។ តម្លើង និងគ្រប់គ្រងផ្នែកបន្ថែមដោយ៖
+### ការពង្រីក AZD សម្រាប់ AI
+
+AZD ប្រើប្រព័ន្ធការពង្រីកដើម្បីបន្ថែមសមត្ថភាព AI ជាក់លាក់។ ដំឡើងនិងគ្រប់គ្រងការពង្រីកដោយ៖
 
 ```bash
-# បញ្ជីផ្នែកបន្ថែមទាំងអស់ដែលមាន (រួមទាំង AI)
+# List all available extensions (including AI)
 azd extension list
 
-# ពិនិត្យលម្អិតអំពីផ្នែកបន្ថែមដែលបានដំឡើង
+# Inspect installed extension details
+azd version
 azd extension show azure.ai.agents
 
-# ដំឡើងផ្នែកបន្ថែម Foundry agents
+# Install the Foundry agents extension
 azd extension install azure.ai.agents
 
-# ដំឡើងផ្នែកបន្ថែម fine-tuning
+# Install the separate Foundry evaluations extension
+azd extension install azure.ai.evaluations
+
+# Install the fine-tuning extension
 azd extension install azure.ai.finetune
 
-# ដំឡើងផ្នែកបន្ថែមម៉ូដែលផ្ទាល់ខ្លួន
+# Install the custom models extension
 azd extension install azure.ai.models
 
-# បន្ទាន់សម័យផ្នែកបន្ថែមទាំងអស់ដែលបានដំឡើង
+# Upgrade all installed extensions
 azd extension upgrade --all
 ```
 
-**ផ្នែកបន្ថែម AI ដែលអាចប្រើបាន៖**
+**ការពង្រីក AI ដែលអាចប្រើបាន:**
 
-| Extension | Purpose | Status |
+| ការពង្រីក | គោលបំណង | ស្ថានភាព |
 |-----------|---------|--------|
-| `azure.ai.agents` | ការគ្រប់គ្រង Foundry Agent Service | Preview |
-| `azure.ai.skills` | ជំនាញដែលអាចប្រើឡើងវិញសម្រាប់ភ្នាក់ងារ | Preview |
-| `azure.ai.connections` | ការតភ្ជាប់ Foundry (ប្រភពទិន្នន័យ, ឧបករណ៍) | Preview |
-| `azure.ai.finetune` | ការបង្វឹកម៉ូដែលក្នុង Foundry | Preview |
-| `azure.ai.models` | ម៉ូដែលប្តូរតាម Foundry | Preview |
-| `azure.coding-agent` | ការកំណត់រចនាសម្ព័ន្ធ coding agent | Available |
+| `azure.ai.agents` | ការគ្រប់គ្រងសេវាកម្ម Foundry Agent | ពិនិត្យមើលជាមុន |
+| `azure.ai.evaluations` | សំណុំទិន្នន័យវាយតម្លៃ, អ្នកវាយតម្លៃ, ក្រុម eval, និងការរត់ | ពិនិត្យមើលជាមុន |
+| `azure.ai.skills` | ជំនាញភ្នាក់ងាររើសយកបាន | ពិនិត្យមើលជាមុន |
+| `azure.ai.connections` | ការតភ្ជាប់Foundry (ប្រភពទិន្នន័យ, ឧបករណ៍) | ពិនិត្យមើលជាមុន |
+| `azure.ai.finetune` | ការបង្វឹកម៉ូដែល Foundry | ពិនិត្យមើលជាមុន |
+| `azure.ai.models` | ម៉ូដែលពិសេស Foundry | ពិនិត្យមើលជាមុន |
+| `azure.coding-agent` | ការកំណត់ភាពភ្នាក់ងារអក្សរ | អាចប្រើបាន |
 
-> ផ្នែកបន្ថែម `azure.ai.agents` កំពុងអភិវឌ្ឍយ៉ាងលឿន។ វគ្គសិក្សានេះត្រូវបានផ្ទៀងផ្ទាត់ប្រឆាំងនឹង `0.1.40-preview`។ បើកការបញ្ជា `azd extension upgrade --all` ដើម្បីយកសំណុកពាក្យបញ្ជាថ្មីៗ និង `azd extension show azure.ai.agents` ដើម្បីបញ្ជាក់កំណែដែលបានដំឡើង។
+> រត់ `azd extension list --installed` និង `azd extension show azure.ai.evaluations` ដើម្បីពិនិត្យមើលកំណែដែលបានដំឡើង។ ធ្វើការ ធ្វើបរិច្ឆេទ core CLI ជាមុនដោយប្រើ [ការណែនាំដំឡើង/បន្ទាន់សម័យ](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) (សម្រាប់ការដំឡើង Windows winget: `winget upgrade Microsoft.Azd`), បន្ទាប់មករត់ `azd extension upgrade --all`។ មិនមានបញ្ជារថ្នាក់ក្រុម `azd upgrade` core ទេ។ សូមពិនិត្យការផ្លាស់ប្តូរដែលបញ្ចេញខ្សោយមុនពេលធ្វើបន្តឹមបង្វឹកការងារផលិតកម្ម; កុំយកប្រើការបង្វឹកបន្ថែមការពង្រីកដែលថ្កោលទោសលក្ខណៈនៃបញ្ជារ ឬទ្រង់ទ្រាយកំណត់រចនាសម្ព័ន្ធចាស់។
 
-**អ្វីទៅជាផ្នែកបន្ថែមថ្មី `skills` និង `connections`?**
+### ការផ្លាស់ប្តូរនិងកំណែល่าสุด
 
-មានផ្នែកបន្ថែម preview ពីរបានបង្ហាញរួចជាមួយឧបករណ៍ភ្នាក់ងារ ហើយមានតម្លៃក្នុងការស្វែងយល់ទោះអ្នកជាអ្នកចាប់ផ្ដើមក៏ដោយ៖
+| ការចេញផ្សាយ | ផ្លាស់ប្តូរអ្វីសម្រាប់វគ្គសិក្សានេះ |
+|---------|------------------------------|
+| `azd 1.37.0` | បន្ថែម API stable deployment-preview និងកែលម្អការកែប្រែថ្កោលចំពោះការកំណត់ `azure.yaml` ដែលមិនទាក់ទង |
+| `azd 1.37.1` | កែលម្អការបញ្ជូន Ctrl+C មកតាមការពង្រីក និងផ្ដាច់ចោលការបោះបង់/កំណត់ពេលវេលាឆេះពីការបរាជ័យទូទៅ |
+| `azd 1.37.2` | កែលម្អការផ្ទៀងផ្ទាត់ provisioning៖ ការព្រមានសំខាន់បើកឡើងជាប្រពៃណីជា **No**, បរាជ័យដោយគ្មានការបញ្ជាក់នៅពេលភាពមិនបានសំរាប់រត់ដែលមិនមានមនុស្សពាក់ព្រោះ, និងបោះបង់កាត់កំណត់ post-provision ហ៊ុក។ ក៏កែលម្អករណីតម្លៃបរិស្ថាននៅក្នុង Deployment Stacks deny lists នៅពេលដែលមុខងារ alpha នេះបើកប្រើ។ |
+| Agents `beta.22` | ផ្លាស់ប្តូរវាយតម្លៃទៅ `azd ai eval`, ផ្លាស់ប្តូរការបង្កើតទៅ API GA v1, តម្រូវ plural `toolboxes`, រួមបញ្ចូលកំណត់ managed-harness, សំឡេង និងបញ្ចូលការពិនិត្យរកលក្ខណៈ opt-ins ពី preview រយៈវេលាវែង។ កែលម្អការជ្រើសរើសម៉ូដែលតាមបរិស្ថាន និងការផ្ទៀងផ្ទាត់ toolbox ។ |
+| Agents `beta.23` | បង្ហាញ `init --harness`; កែលម្អការបញ្ចេញចម្លើយ A2A 0.3, ផ្លូវផ្គត់ផ្គង់ prompt-agent / ម៉ូដុលមិនត្រឹមត្រូវតាមបណ្ដាលគ្រឿងចក្រ, ការធ្វើតេស្តពេលវេលា activation-timeout, និងការព្រមាន developer RBAC ដែលរក្សាទុក។ |
+| Evaluations `beta.2` | តម្រូវការកំណត់វិធីសាស្រ្តវាយតម្លៃនៅក្នុង camelCase, បន្ថែមការបង្កើត static/simulated conversation និងបញ្ជាក់ប្រភព local-file ព្រោះវា បញ្ជាក់កំណត់ dataset identity/version បញ្ហាបរិមាណ អកុសល run និងការពិនិត្យកំហុសរត់ទាំងឡាយ។ |
 
-- **`azure.ai.skills`** — មួយ **skill** គឺជាសមត្ថភាពដែលអាចប្រើឡើងវិញ (ឧបករណ៍ឬអាកប្បកិរិយាប្រើប្រាស់ដែលបន្ទាប់) ដែលអ្នកអាចភ្ជាប់ចូលទៅភ្នាក់ងារមួយឬច្រើន ជាពិចារណានៃប្លុករាងក្រុមដែលអាចចែករំលែក៖ និយាយថា កំណត់ skill "ស្វែងរកឯកសារ" ឬ "ស្វែងរកបញ្ជាទិញ" មួយដង ហើយប្រើឡើងវិញក្នុងភ្នាក់ងារច្រើន។ នេះធ្វើឲ្យប្រព័ន្ធភ្នាក់ងារច្រើន (ជំពូក 5) មានសមរម្យ និងជៀសវាងការចម្លងកូដ។
-- **`azure.ai.connections`** — មួយ **connection** គឺជាការតភ្ជាប់ដែលគ្រប់គ្រងពីគម្រោង Foundry របស់អ្នកទៅប្រភពបន្ទាន់ដែលភ្នាក់ងាររបស់អ្នកត្រូវការជាចាំបាច់—ប្រភពទិន្នន័យ (ដូចជា Azure AI Search), ចំណុចឧបករណ៍ ឬសេវាផ្សេងទៀត។ Connections បម្រើជាកន្លែងកណ្តាលសម្រាប់ *កន្លែង* និង *របៀប* ដែលភ្នាក់ងារACCESSទិន្នន័យ ដូច្នេះព័ត៌មានសំងាត់ និងចំណុចចូលរស់នៅក្នុងមួយកន្លែងដែលគ្រប់គ្រងបាន មិនរាយនៅក្នុងកូដរីករាយឡើយ។
+ការពន្យារពេល activation agent មិនមានន័យថាការបង្ហោះបរាជ័យទេ៖ សូមពិនិត្យវកម្មនិងស្ថានភាពមុនពេលសាកល្បងឡើងវិញ។ ការព្រមាន developer RBAC អាចនៅសល់ទោះបី provisioning បានជោគជ័យ; សូមដោះស្រាយការចូលវាដែលបាត់ខណ: មុនពេលអនុវត្តជាអ្នកអភិវឌ្ឍន៍នោះ។
 
-អ្នកមិនចាំបាច់ប្រើពួកនេះដើម្បីដាក់ចេញភ្នាក់ងារដំបូងរបស់អ្នក—សូមនៅជាមួយ `azure.ai.agents` ខណៈអ្នករៀន។ ប្រើ `skills` នៅពេលអ្នកឃើញខ្លួនឯងកំពុងចម្លងឧបករណ៍ដូចគ្នាច្រើនភ្នាក់ងារ និង `connections` នៅពេលភ្នាក់ងារច្រើនចែករំលែកប្រភពទិន្នន័យដូចគ្នា។
+ប្រភព៖ [ការចេញផ្សាយ AZD](https://github.com/Azure/azure-dev/releases), [ការចេញផ្សាយ agents beta.23](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.23), [ការផ្លាស់ប្តូរតាម agents beta.22](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-agents_1.0.0-beta.22), និង [ការ​ចេញផ្សាយ evaluations beta.2](https://github.com/Azure/azure-dev/releases/tag/azd-ext-azure-ai-evaluations_1.0.0-beta.2)។
+
+**តើការពង្រីកថ្មីៗ `skills` និង `connections` ជាអ្វី?**
+
+មួយសំណុំការពង្រីកពិនិត្យមើលបានបង្ហាញឡើងជាមួយឧបករណ៍ភ្នាក់ងារនិងគួរតែយល់ដឹងខ្លះសូម្បីតែក្នុងកម្រិតអ្នកចាប់ផ្តើម៖
+
+- **`azure.ai.skills`** — **ជំនាញ** គឺជាសមត្ថភាពអាចការបានកំណត់ឡើងវិញបាន (ឧបករណ៍ឬអាកប្បកិរិយាប៉ែតដែលត្រូវបានវេចខ្ចប់) ដែលអ្នកអាចភ្ជាប់ទៅភ្នាក់ងារច្រើន ជាជំនួយដោយកុំធ្វើឡើងថ្មីរៀងៗ។ គិតថាជាកន្លែងសាងសង់ចែករំលែក: កំណត់ជំនាញ "ស្វែងរកឯកសារ" ឬ "ស្វែងរកការបញ្ជាទិញ" មួយដង រួចប្រើវាទៅភ្នាក់ងារ។ វារក្សាអោយប្រព័ន្ធភ្នាក់ងារច្រើន (ជំពូក ៥) មានសុពលភាព និងជៀសវាងការចម្លងយក។
+- **`azure.ai.connections`** — **ការតភ្ជាប់** គឺជាខ្សែភ្ជាប់គ្រប់គ្រងពីគម្រោង Foundry របស់អ្នកទៅធនធានខាងក្រៅដែលភ្នាក់ងារការពារអាចប្រើបាន — ប្រភពទិន្នន័យ (ដូចជា Azure AI Search), ចំណុចឧបករណ៍, ឬសេវាកម្មផ្សេងទៀត។ ការតភ្ជាប់រួមបញ្ចូលគ្នា *កន្លែង* និង *របៀប*ភ្នាក់ងារចូលដល់ទិន្នន័យ ដូច្នេះ អត្តសញ្ញាណនិងចំណុចចូលនៅក្នុងកន្លែងគ្រប់គ្រងមួយមិនមែនរំលែកនៅក្នុងកូដ។
+
+អ្នកមិនត្រូវការទាំងនេះសម្រាប់បង្ហោះភ្នាក់ងារដំបូងរបស់អ្នក—បន្តប្រើ `azure.ai.agents` ខណៈពេលរៀន។ ឈានទៅប្រើ `skills` នៅពេលដែលអ្នកស្គាល់ថាអ្នកកំពុងចម្លងឧបករណ៍ដូចគ្នាចេញវិញនៅក្នុងភ្នាក់ងារ និង `connections` នៅពេលភ្នាក់ងារច្រើនមួយនឹងប្រើប្រាស់ប្រភពទិន្នន័យដូចគ្នា។
 
 ### ការចាប់ផ្តើមគម្រោងភ្នាក់ងារជាមួយ `azd ai agent init`
 
-ពាក្យបញ្ជា `azd ai agent init` បង្កើតសុទិដ្ឋិនិយមគម្រោងភ្នាក់ងារ AI ដែលរួចរាល់សម្រាប់ផលិតកម្ម និងរួមបញ្ចូលជាមួយ Microsoft Foundry Agent Service:
+បញ្ជារ `azd ai agent init` បង្កើតគម្រោងភ្នាក់ងារ Microsoft Foundry។ ប្រើប្រភេទគំរូគម្រោង `azure.yaml` បច្ចុប្បន្ន មិនមែន manifest agent និងទំនាស់ចាស់ទេ៖
 
 ```bash
-# ចាប់ផ្ដើមគម្រោងភ្នាក់ងារថ្មីពីឯកសារ manifest នៃភ្នាក់ងារ
-azd ai agent init -m <manifest-path-or-uri>
+# Initialize a new agent project from a local project template
+azd ai agent init --template ./templates/support-agent/azure.yaml
 
-# ចាប់ផ្ដើម និងកំណត់គោលដៅទៅគម្រោង Foundry ជាក់លាក់
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+# Initialize and target a specific Foundry project
+azd ai agent init --template ./templates/support-agent/azure.yaml --project-id <foundry-project-id>
 
-# ចាប់ផ្ដើមដោយប្រើថតប្រភពផ្ទាល់ខ្លួន
-azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
-
-# កំណត់ Container Apps ជា បរិស្ថាន ដំណើរការ (host)
-azd ai agent init -m agent-manifest.yaml --host containerapp
+# Adopt the template into a different directory
+azd ai agent init --template ./templates/support-agent/azure.yaml --src ./agents/my-agent
 ```
 
-**ទង់សំខាន់:** 
+**យសសញ្ញាសំខាន់ៗ:**
 
-| Flag | Description |
+| សញ្ញា | សេចក្ដីពិពណ៌នា |
 |------|-------------|
-| `-m, --manifest` | ផ្លូវ ឬ URI ទៅ manifest ភ្នាក់ងារដើម្បីបន្ថែមទៅគម្រោងរបស់អ្នក |
-| `-p, --project-id` | Microsoft Foundry Project ID ថ្មីសម្រាប់បរិយាកាស azd របស់អ្នក |
-| `-s, --src` | បង់ឯកសារដើម្បីទាញយកនិយមន័យភ្នាក់ងារ (លំនាំដើមទៅ `src/<agent-id>`) |
-| `--host` | លៃតម្រូវ host លំនាំដើម (ឧ. `containerapp`) |
-| `-e, --environment` | បរិយាកាស azd ដែលត្រូវប្រើ |
+| `-t, --template` | ផ្លូវឬ URI GitHub ដែលគាំទ្រសម្រាប់ឯកសារគម្រោង `azure.yaml` |
+| `-p, --project-id` | ID គម្រោង Microsoft Foundry ដែលមានស្រាប់សម្រាប់បរិយាកាស azd របស់អ្នក |
+| `-s, --src` | ថតប្រភពសម្រាប់ភ្នាក់ងារបង្កើត ឬថតគោលដៅពេលយកគម្រោងមកបញ្ចូល |
+| `--kind` | ចាប់ផ្តើមភ្នាក់ងារភាពជា `hosted`, `prompt` ឬ preview `prompt-voice` |
+| `--harness` | ប្រព័ន្ធការប្រតិបត្តិការជាជម្រើសសម្រាប់ `--kind prompt`; ត្រូវការការទទួលខុសត្រូវ preview opt-in របស់វា |
+| `-e, --environment` | បរិយាកាស azd ដើម្បីប្រើ |
 
-**បញ្ហាសម្រាប់ផលិតកម្ម**: ប្រើ `--project-id` ដើម្បីភ្ជាប់ដោយផ្ទាល់ទៅគម្រោង Foundry មានស្រាប់ បន្ថែមកូដភ្នាក់ងារនិងធនធានពពកណាត់ពីដើម។
+`--manifest`/`-m` គឺជាឈ្មោះចាស់ដែលមិនបានប្រើឡើងវិញសម្រាប់ `--template`/`-t`; ការផ្លាស់ប្តូរឈ្មោះសញ្ញាមិនបំលែង manifest ចាស់ជាឯកសារគម្រោងបច្ចុប្បន្នទេ។ `--host containerapp` មិនមែនជាសញ្ញាដែលមានសម្រាប់ agent-init បច្ចុប្បន្នទេ។ សម្រាប់កម្មវិធី Container Apps ធម្មតា ប្រើ `azd init --template` ជាមួយគំរូដែលប្រកាស `host: containerapp`។
 
-### ការគ្រប់គ្រងអាយុកាលភ្នាក់ងារ
+សម្រាប់គម្រោងដែលមានស្រាប់ដែលមានសេវា `azure.ai.project` មួយតែប៉ុណ្ណោះ, `azd ai agent add support-agent --file ./agents/support-agent.yaml` បន្ថែម ឬធ្វើបច្ចុប្បន្នភាពអក្សរភ្នាក់ងារផ្ទាល់ដោយគ្មានការផ្គត់ផ្គង់ ឬការបង្ហោះ។ បញ្ជារប្រតិបត្តិការពេលរត់ច្រានចេញ `agent.yaml`/AgentManifest ពីរូបសម្បត្តិចាស់ និងតំណាលសេវា nested `config:`; ផ្លាស់ប្តូរទៅសេវា `azure.ai.agent` បច្ចុប្បន្ន។ ពេល init បោះពត៌មាន `cd` ជាជំហានបន្ត, បង្ហោះវាមុន `azd up`: init មិនប្ដូរទីតាំងថត shell របស់អ្នកទេ។
 
-សែកលើ `init` អន្ដរជាប់ ផ្នែកបន្ថែម `azure.ai.agents` ផ្តល់ពាក្យបញ្ជាសម្រាប់អាយុកាលពេញលេញនៃភ្នាក់ងារដែលផ្តល់សេវា—ធ្វើតេស្ត, វាយតម្លៃ, បង្កើនប្រសិទ្ធភាព និងចេញពីប្រព័ន្ធ:
+**គន្លឹះផលិតកម្ម**៖ ប្រើ `--project-id` ដើម្បីភ្ជាប់ផ្ទាល់ទៅគម្រោង Foundry ដែលមានស្រាប់ ដែលរក្សាកូដភ្នាក់ងាររបស់អ្នកនិងធនធាន cloud រួមគ្នាពីដំបូង។
+
+#### មុខងារពិនិត្យមើលជាជម្រើស
+
+ការគ្រប់គ្រង harness, សំឡេង, និងការអញ្ជើញរយៈវេលាវែង ត្រូវបានបិទដោយឡែក។ សូមកំណត់ស្វីច័រតែសម្រាប់មុខងារដែលអ្នកត្រូវការនៅ **shell/CI process environment**, មិនមែនជាមួយ `azd env set` ទេ៖
+
+| មុខងារ | អថេរបរិយាកាសដំណើរការ |
+|---------|------------------------------|
+| Managed harness (`init --kind prompt --harness ...`) | `AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` |
+| សំឡេង (`init --kind prompt-voice`) | `AZD_ALPHA_ENABLE_AGENTS_VOICE=true` |
+| អញ្ជើញរយៈវេលាវែង | `AZD_ALPHA_ENABLE_AGENTS_LONG_RUNNING=true` |
+
+ឧទាហរណ៍ ប្រើ `export AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS=true` នៅក្នុង Bash ឬ `$env:AZD_ALPHA_ENABLE_AGENTS_MANAGED_HARNESS = "true"` នៅក្នុង PowerShell មុនចាប់ផ្តើមបញ្ជារដែលពាក់ព័ន្ធ។ ស្វីច័រមួយមិនបានបើកអ្នកផ្សេងទៀតទេ។ ចូលទៅមើល [README agents ចេញផ្សាយ](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/README.md) សម្រាប់ស្វីច័រសព្វថ្ងៃ និងការបង្ហោះ។
+
+### ការគ្រប់គ្រងជីវជាតិភ្នាក់ងារ
+
+ប្រើ `azure.ai.agents` ដើម្បីធ្វើតេស្ត, ពិនិត្យមើល, បង្កើនប្រសិទ្ធភាព, និងចេញពីការប្រើប្រាស់ភ្នាក់ងារ, និងការពង្រីកបំបែក `azure.ai.evaluations` ដើម្បីវាស់ថ្នាក់គុណភាព៖
 
 ```bash
-# ហៅភ្នាក់ងារដែលបានដាក់ឱ្យដំណើរការ និងមើលពេលវេលាចម្លើយពីម៉ាស៊ីនបម្រើ
-# (រយៈពេលយឺតសរុប និង ពេលដល់បៃដំបូង)
+# Invoke a deployed agent and view server response timing
+# (total latency and time to first byte)
 azd ai agent invoke
 
-# បង្ហាញកំណត់រចនាសម្ព័ន្ធចំណុចបញ្ចប់ដែលកំពុងដំណើរការ មុនផ្លាស់ប្ដូរ
+# Show the live endpoint configuration before changing it
 azd ai agent endpoint show
 
-# បង្កើតសំណុំទិន្នន័យសម្រាប់វាយតម្លៃឲ្យភ្នាក់ងារ
-azd ai agent eval generate --dataset ./eval/dataset.jsonl
-
-# ធ្វើឲ្យណែនាំរបស់ភ្នាក់ងារប្រសើរឡើងដោយប្រើទិន្នន័យវាយតម្លៃរបស់អ្នក
-# (តម្រូវឲ្យមាន optimization_model ក្នុងគម្រោងភ្នាក់ងារ)
-azd ai agent optimize
-
-# ទាញយកកូដប្រភពដែលបានដាក់ចេញសម្រាប់ភ្នាក់ងារដែលផ្អែកលើកូដ និងបានផ្តល់ជាសេវា
-# (ជាមួយការផ្ទៀងផ្ទាត់ SHA-256)
+# Download the deployed source of a code-based hosted agent
+# (with SHA-256 verification)
 azd ai agent code download
 
-# លុបភ្នាក់ងារដែលផ្តល់ជាសេវា និងកំណែទាំងអស់របស់វា
-# (--force បញ្ចប់សម័យដែលកំពុងសកម្ម)
+# Delete a hosted agent and all of its versions
+# (--force terminates active sessions)
 azd ai agent delete --force
 ```
 
-**រង្វង់ជីវិតជាសង្ខេប:**
+**ជីវិតរស់នៅក្នុងមួយទិដ្ឋភាព:**
 
-| Stage | Command | Production use |
+| ដំណាក់កាល | បញ្ជារ | ការប្រើប្រាស់ក្នុងផលិតកម្ម |
 |-------|---------|----------------|
-| Test | `azd ai agent invoke` | ផ្ទៀងផ្ទាត់ចម្លើយ និងវាស់ពេលយឺត មុនការចេញផ្សាយ |
-| Inspect | `azd ai agent endpoint show` | ពិនិត្យ auth/config នៃ endpoint; រកឃើញការបំផ្លាញឆាប់ |
-| Measure | `azd ai agent eval generate` | សាងចំណាតវាយតម្លៃដែលអាចធ្វើឡើងម្តងទៀតពីហេតុការណ៍ពិត |
-| Improve | `azd ai agent optimize` | លៃតម្រូវសេចក្តីណែនាំអោយបានតាមគុណភាពដែលវាស់បាន |
-| Recover | `azd ai agent code download` | ទាញយកប្រភពដែលបានដាក់ចេញពិតសម្រាប់ audit/rollback |
-| Retire | `azd ai agent delete --force` | លុបភ្នាក់ងារ និងកំណែកាត់វានៅឡើយស្អាត |
+| តេស្ត | `azd ai agent invoke` | ផ្ទៀងផ្ទាត់ចម្លើយ និងវាស់ពេលយឺតមុនចេញផ្សាយ |
+| ពិនិត្យ | `azd ai agent endpoint show` | ពិនិត្យការផ្ទៀងផ្ទាត់ auth/config ផ្លូវចុងក្រោយ; រកឃើញការផ្លាស់ប្តូរដែលបំបែកជាមុន |
+| វាស់ | `azd ai eval init`, `generate`, `run start` | កំណត់, បង្ហោះ, ប្រតិបត្តិវាយតម្លៃដែលអាចធ្វើឡើងម្ដងទៀត |
+| ធ្វើអោយប្រសើរ | `azd ai agent optimize --eval <evaluation-name> --optimize-model <optimizer-deployment>` | បង្កើតប្រសើរឡើងដោយប្រើវាយតម្លៃដែលឆបគ្នា |
+| ស្ដារឡើងវិញ | `azd ai agent code download` | ទាញយកប្រភពដែលបានបង្ហោះនោះសម្រាប់ការត្រួតពិនិត្យ/ត្រលប់ក្រោយ |
+| ចូលលះ | `azd ai agent delete --force` | បំបែកភ្នាក់ងារ និងកំណែរបស់វា ឲ្យស្អាត |
 
-> ពាក្យបញ្ជាខាងលើឈ្មោះជា preview ហើយអាចផ្លាស់ប្ដូរក្នុងការចេញផ្សាយផ្នែកបន្ថែម។ បើក `azd ai agent --help` ដើម្បីមើល subcommands ដែលមាននៅក្នុងកំណែកដែលបានដំឡើង។
+> ទាំងនេះជាបញ្ជារពិនិត្យមើល និងអាចផ្លាស់ប្តូរនៅចន្លោះការបញ្ចេញពង្រីក។ ប្រើ `azd ai agent --help` ដើម្បីមើលបញ្ជារជាក់លាក់ដែលមាននៅក្នុងកំណែដែលបានដំឡើង។
 
-### Model Context Protocol (MCP) ជាមួយ `azd mcp`
-AZD includes built-in MCP server support (Alpha), enabling AI agents and tools to interact with your Azure resources through a standardized protocol:
+`endpoint show` គាំទ្រភ្នាក់ងារ hosted, prompt, និងសំឡេង ប៉ុន្តែបច្ចប្បន្នភាពចុងបញ្ចប់គឺសម្រាប់ hosted តែប៉ុណ្ណោះ; ភ្នាក់ងារ workflow មិនគាំទ្រ។ ការទាញយកកូដ និងឧទាហរណ៍ចូលលះភ្នាក់ងារ hosted មិនមែនជាសកម្មភាពទូទៅសម្រាប់ភ្នាក់ងារដែលមានប្រភេទផ្សេងទៀត។
+
+#### ការផ្លាស់ប្តូរវាយតម្លៃ និងការពិនិត្យគុណភាព
+
+ចាប់ពីភ្នាក់ងារលេខ **1.0.0-beta.22 (2026-10-23)**, បញ្ជារ legacy `azd ai agent eval` ផ្តល់ដំណើរការផ្លាស់ប្តូរជំនួស workflow វាយតម្លៃចាស់។ កុំចម្លងឧទាហរណ៍ `eval generate --dataset ...` ចាស់ទេ៖ វាយតម្លៃឥឡូវនេះស្ថិតនៅក្រោម **`azd ai eval`**។
+
+នៅក្នុងគម្រោងភ្នាក់ងារដែលបានចាប់ផ្តើម ប្រើ `azd auth login` ដើម្បីផ្ទៀងផ្ទាត់, ទាញយកបរិយាកាស/គម្រោង Foundry ដែលបានជ្រើសរើស, និងដំឡើង `azure.ai.evaluations`។ ការបង្ហោះម៉ូដែល juez ត្រូវការសម្រាប់ការវាយតម្លៃដោយម៉ូដែល; ការបង្កើត និងការសម្តែង សន្ទនា អាចត្រូវការជ្រើសរើសម៉ូដែលផ្សេងទៀតនិងបង្កអោយមានការ​ចំណាយបន្ថែម។
 
 ```bash
-# ចាប់ផ្ដើមម៉ាស៊ីនបម្រើ MCP សម្រាប់គម្រោងរបស់អ្នក
+# Scaffold evals/ and wire an azure.ai.eval service into azure.yaml
+azd ai eval init
+
+# Optionally synthesize a rubric and dataset from the agent
+azd ai eval generate
+
+# Review generated files, then register datasets, evaluators, and eval groups
+azd up
+
+# Start an evaluation and wait for its results
+azd ai eval run start --wait
+
+# Inspect runs and available test-case output
+azd ai eval run list
+azd ai eval run show <run-id>
+azd ai eval run output list <run-id>
+```
+
+តាមដានចំណាំជ្រើសរើសអន្តរកម្ម និងជំហានបន្ទាប់ដែលបោះពុម្ពមកវិញ មិនត្រូវគិតវាបានចុះដែលបានបង្កើតលទ្ធផលរួចហើយ។ ការកំណត់វាយតម្លៃភាគច្រើនស្ថិតនៅក្នុង `evals/azure.eval.yaml` ដែលយោងទៅសេវា `azure.ai.eval` ក្នុង `azure.yaml`។ កូនសោគឺជា **camelCase** (`evaluationLevel`, `maxSamples`, `initializationParameters`, `dataMapping`); កូនសោបែប snake_case ចាស់ត្រូវបដិសេធ។ ផ្លូវក្នុងការកំណត់គឺអាស្រ័យទៅឯកសារនោះ មិនមែនកំណត់នៅ root ឃ្លាំងទេ។
+
+សម្រាប់ការវាយតម្លៃសន្ទនា, ជ្រើសរើស **static** ដើម្បីវាយតម្លៃអត្ថបទបានសម្រេចដោយគ្មានការអញ្ជើញភ្នាក់ងារ, ឬ **simulation** ដើម្បីបង្កើតសន្ទនាពីគំរូសេណារីយោ។ ការសម្តែងត្រូវមានភ្នាក់ងារគោលបំណង, ម៉ូដែលសម្តែង, និងជ្រើសរើសម៉ូដែល juez ផ្សេងទៀត។ សម្រាប់បញ្ជារដំណើរការមិនមានមនុស្សពាក់ព័ន្ធ, ផ្ដល់ទិន្នន័យបញ្ចូលដែលរាយការណ៍ដោយ `azd ai eval init --help` និង `azd ai eval generate --help`; កុំគិតថាម៉ូដែលបង្កើតគឺជាម៉ូដែល juez ឬសម្តែងផងដែរ។
+
+សម្រាប់ CI, កំណត់គោលការណ៍គុណភាពច្បាស់លាស់ដោយប្រើ `azd ai eval run start --help` (`--fail-on`) និងដាក់កម្រិតវាយតម្លៃជាការបរាជ័យបើ EXIT ដំណើរការ​មិនសូន្យ។ រត់បានល្អមិនស្មើនឹងជាប់គុណភាពដោយស្វ័យប្រវត្តិ។ សូមពិនិត្យជួរដែលបានបរាជ័យ/កំហុស និងបច្ចេកទេសជំនួយ; ការខ្វះឬការមិនស្មើររបស់ចំនួនលទ្ធផលមិនមែនអះអាងនៃភាពជោគជ័យទេ។ សំណុំទិន្នន័យដែលបានចុះបញ្ជីរក្សាភាពសម្គាល់សេវា/កំណែរបស់វា; `--max-samples` មិនអាចចែកក្រាបក្រោមប្រភេទទិន្នន័យដែលបានចុះបញ្ជី។ បោះពុម្ពសំណុំទិន្នន័យតូចជំរៅមួយ ឬប្រើប្រភពទិន្នន័យ local-file ដែលគាំទ្រ។
+
+```bash
+# Example CI policy: at least 90% of all test cases must pass
+azd ai eval run start --wait --fail-on "pass-rate=0.9"
+```
+
+ច្រកអត្រាការឈ្នះប្រើករណីតេស្តដែលបានជោគជ័យចែកដោយចំនួនករណីតេស្តទាំងមូល; ករណីបរាជ័យ, កំហុស, រលកចោល, និងការមិនត្រូវបានជោគជ័យផ្សេងទៀតគិតទុកក្នុងការវាយតម្លៃច្រក។ កុំបន្សំច្រកជាមួយ `--no-wait` ដែលវិលត្រឡប់មុនចេញសេចក្តីសម្រេច។
+
+#### ការផ្លាស់ប្តូរការកំណត់គុណភាពបន្ថែម
+
+ការបង្កើតឡើងបច្ចុប្បន្នប្រើ API GA v1។ ដើម្បីប្រើបន្តវាយតម្លៃ **តំណាក់កាល-តែម្តង, រួមបញ្ចូល dataset** ពី workflow ថ្មី៖
+
+```bash
+# Replace placeholders with the evaluation name and optimizer model deployment
+azd ai agent optimize --eval-config ./evals/azure.eval.yaml --eval <evaluation-name> --optimize-model <optimizer-deployment>
+```
+
+`--eval` ជ្រើសរើសការវាយតម្លៃមួយ; `--eval-config` ជ្រើសរើសឯកសារកំណត់រចនាសម្ព័ន្ធរបស់វា (រួមទាំងការគ្រប់គ្រងផ្ទាំងឯកសារ)។ `--config` ផ្ទេរជំនួសដោយការស្នើសុំ API ផ្ទាល់ខ្លួនសម្រាប់ពុម្ពផ្តាច់មុខ **standalone optimization API request** ជា YAML ឬ JSON។ កុំផ្ទេរបុរាណ agent `eval.yaml` ឬ agent ថ្មី `azure.eval.yaml` ទៅកាន់ `--config` ហើយកុំប្រើប្រាស់រួមគ្នាជាមួយ `--config` និង `--eval`/`--eval-config`។ ការវាយតម្លៃដោយការពិភាក្សា trace-backed ឬ simulation មិនអាចផ្លាស់ប្តូរជាមួយកាត់បន្ថយប្រសិទ្ធភាពដែលគាំទ្រដោយ dataset បានឡើយ; សូមប្រើទ្រង់ទ្រាយការស្នើសុំបម្រើការផ្គត់ផ្គង់ដែលគាំទ្រសម្រាប់ស្ថានភាពទាំងនោះ។ ពិនិត្យបេក្ខភាពមុនពេលអនុវត្ត ឬប្រើប្រាស់។
+
+មើលទំព័រ [ឯកសារយោងសម្រាប់កំណែត្រួតពិនិត្យ](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-evaluations_1.0.0-beta.2/cli/azd/extensions/azure.ai.evaluations/README.md) និង [កូដបញ្ជាសម្រាប់បម្រើការកំណែត្រួតពិនិត្យ](https://github.com/Azure/azure-dev/blob/azd-ext-azure-ai-agents_1.0.0-beta.23/cli/azd/extensions/azure.ai.agents/internal/cmd/optimize.go) សម្រាប់ជម្រើសច្បាស់លាស់។
+
+#### មើលជាមុនការតំឡើង Agent ដែលមានសិទ្ធិអានតែ
+
+សម្រាប់បរិយាកាស Foundry ដែលមានសេវាកម្ម `azure.ai.agent` តែមួយរបស់ `kind: hosted` សូមប្រៀបធៀបរចនាសម្ព័ន្ធគាំទ្រមុនពេលដាក់បញ្ចូល៖
+
+```bash
+azd deploy <service-name> --preview --no-prompt
+```
+
+មើលជាមុននេះមិនបានដាក់បញ្ចូល agent មែនទេ។ វាមិនមែនជាការប្រៀបធៀបស្ថាបត្យកម្ម/សន្តិសុខពេញលេញឡើយ៖ agent ការបញ្ចូលការសរសេរ/សំឡេង/សំណុំការងារ កម្មវិធីបរិក្ខារ legacy និងកំណត់ការងារតំរូវការខ្លះគឺជាផ្នែកក្រៅដែនកំណត់របស់វា។ លទ្ធផល `unknown` មិនមែនជាការអនុម័តដាក់បញ្ចូលទេ។ មិនមានពាក្យបញ្ជា `azd ai agent deploy` ឯករាជ្យ ឬ `--dry-run` agent បែបផ្ទាល់ខ្លួនឡើយ; សូមប្រើខ្សែការងារដាក់បញ្ចូលគោល។
+
+### Model Context Protocol (MCP) ជាមួយ `azd mcp`
+
+AZD រួមបញ្ចូលការគាំទ្រផ្ទៃក្នុង MCP server (Alpha) អនុញ្ញាតឲ្យ AI agents និងឧបករណ៍បង្កើតគម្រោងអាចអន្តរកម្មជាមួយធនធាន Azure របស់អ្នកតាមរយៈប្រព័ន្ធប្រតិបត្តិការតម្លើងបាន៖
+
+```bash
+# Start the MCP server for your project
 azd mcp start
 
-# ពិនិត្យច្បាប់ការយល់ព្រមបច្ចុប្បន្នរបស់ Copilot សម្រាប់ការប្រើឧបករណ៍
+# Review current Copilot consent rules for tool execution
 azd copilot consent list
 ```
 
-ម៉ាស៊ីនបម្រើ MCP បានបង្ហាញបរិបទគម្រោង azd របស់អ្នក—បរិយាកាស សេវាកម្ម និងធនធាន Azure—ដល់ឧបករណ៍អភិវឌ្ឍដែលមានថាមពល AI។ នេះអនុញ្ញាតឱ្យ:
+MCP server បង្ហាញព័ត៌មាន context គម្រោង azd របស់អ្នក—បរិយាកាស សេវា និងធនធាន Azure—ទៅឧបករណ៍អភិវឌ្ឍដែលថាមពលដោយ AI។ វាអនុញ្ញាតដូចខាងក្រោម៖
 
-- **AI-assisted deployment**: អនុញ្ញាតឲ្យភ្នាក់ងារកូដសួរសំណួរអំពីស្ថានភាពគម្រោងរបស់អ្នក និងចាប់ផ្តើមការចែកចាយ
-- **Resource discovery**: ឧបករណ៍ AI អាចរកឃើញថាធនធាន Azure មួយចំនួនដែលគម្រោងរបស់អ្នកប្រើ
-- **Environment management**: ភ្នាក់ងារអាចប្តូរពេលរវាង បរិយាកាស dev/staging/production
+- **ការដាក់បញ្ចូលជួយដោយ AI**៖ អោយ agent ជួរលេខសំណួរចំពោះស្ថានភាពគម្រោង និងបង្កើតការដាក់បញ្ចូល
+- **ការរកឃើញធនធាន**៖ ឧបករណ៍ AI អាចរកឃើញធនធាន Azure ដែលគម្រោងរបស់អ្នកប្រើប្រាស់
+- **ការគ្រប់គ្រងបរិយាកាស**៖ agent អាចផ្លាស់ប្ដូរពីបរិយាកាស dev/staging/production
 
-### Infrastructure Generation with `azd infra generate`
+### ការបង្កើតស្ថាបត្យកម្មជាមួយ `azd infra generate`
 
-សម្រាប់ការងារ AI ក្នុងបរិយាកាសផលិតកម្ម អ្នកអាចបង្កើត និងប្ដូរប្លង់ Infrastructure as Code ជំនួសការរំពឹងទុកលើការផ្គត់ផ្គង់ស្វ័យប្រវត្តិ៖
+សម្រាប់សកម្មភាព AI ផលិតកម្ម អ្នកអាចបង្កើត និងប្ដូរតាមផ្ទាល់ គម្រោង Infrastructure as Code ជំនួសការបំពានបច្ចុប្បន្ន:
 
 ```bash
-# បង្កើត​ឯកសារ Bicep/Terraform ពីការបញ្ជាក់គម្រោងរបស់អ្នក
+# Generate supported infrastructure for this project type
 azd infra generate
 ```
 
-នេះនឹងសរសេរ IaC ទៅក្នុងឌីសដើម្បីឲ្យអ្នកអាច:
-- ពិនិត្យ និងធ្វើ audit ទៅលើអាហារដ្ឋានមុនពេលចែកចាយ
-- បន្ថែមគោលនយោបាយសន្តិសុខបុគ្គលិក (ច្បាប់បណ្ដាញ, private endpoints)
-- បញ្ចូលជាមួយដំណើរការពិនិត្យ IaC មានស្រាប់
-- គ្រប់គ្រងកំណែបម្លែងរចនាសម្ព័ន្ធដោយដាច់ពីកូដកម្មវិធី
+ការគាំទ្រគឺផ្អែកលើគម្រោង/ម៉ាស៊ីនផ្ទុក និងអ្នកផ្គត់ផ្គង់បានដំឡើង; នេះមិនមែនជាពាក្យបញ្ជាផ្ទាល់ខ្លួនអំពីការវិលត្រឡប់ក្រោយសម្រាប់ធនធាន Azure ណាមួយឡើយ ឬការសន្យាឱ្យបង្កើតទាំង Bicep និង Terraform ។ ដំណើរការ `azd infra generate --help` ហើយពិនិត្យមើលទ្រង់ទ្រាយដែលបានបង្កើត។ នៅកន្លែងគាំទ្រ ការសរសេរ IaC ទៅឯកសារអនុញ្ញាតឲ្យអ្នក៖
+- ពិនិត្យ និងត្រួតពិនិត្យស្ថាបត្យកម្មមុនដាក់បញ្ចូល
+- បន្ថែមគោលការណ៍សន្តិសុខផ្ទាល់ខ្លួន (ច្បាប់បណ្តាញ ចំណុចបញ្ចប់ឯកជន)
+- រួមបញ្ចូលជាមួយដំណើរការត្រួតពិនិត្យ IaC មានស្រាប់
+- គ្រប់គ្រងការផ្លាស់ប្ដូរស្ថាបត្យកម្មដោយមាន version control បំបែកពីកូដកម្មវិធី
 
-### Production Lifecycle Hooks
+### សូចនាករ Lifecycle ផលិតកម្ម
 
-AZD hooks អនុញ្ញាតឲ្យអ្នកបញ្ចូលយុទ្ធសាស្ត្របុគ្គលនៅគ្រប់ដំណាក់កាលនៃជីវចក្រារចនាការចែកចាយ—ដែលសំខាន់សម្រាប់កម្មវិធី AI នៅផលិតកម្ម៖
+AZD សូចនាករអនុញ្ញាតឲ្យអ្នកបញ្ចូលត្រីវិស័យផ្ទាល់ខ្លួននៅគ្រប់ជំហាននៃជីវិតការដាក់បញ្ចូល—គឺចាំបាច់សម្រាប់សកម្មភាព AI ផលិតកម្ម៖
 
 ```yaml
 # azure.yaml - Production hooks example
@@ -1113,7 +1148,7 @@ hooks:
     run: scripts/validate-quotas.sh    # Check AI model quota before provisioning
   postprovision:
     shell: sh
-    run: scripts/configure-networking.sh  # Set up private endpoints
+    run: scripts/verify-networking.sh  # Verify IaC-provisioned private connectivity
   predeploy:
     shell: sh
     run: scripts/run-ai-safety-tests.sh  # Run prompt safety checks
@@ -1131,42 +1166,42 @@ services:
 ```
 
 ```bash
-# រត់ហ៊ុចជាក់លាក់ដោយដៃនៅក្នុងកំឡុងពេលអភិវឌ្ឍន៍
+# Run a specific hook manually during development
 azd hooks run predeploy
 ```
 
-**យោង hook ផលិតកម្មដែលបានណែនាំសម្រាប់ការងារ AI៖**
+**សូចនាករផលិតកម្មដែលណែនាំសម្រាប់សកម្មភាព AI៖**
 
-| Hook | ករណីប្រើ |
+| Hook | ករណីប្រើប្រាស់ |
 |------|----------|
-| `preprovision` | ផ្ទៀងផ្ទាត់គណៈបញ្ជាក់ subscription សម្រាប់សមត្ថភាពម៉ូឌែល AI |
-| `postprovision` | កំណត់ private endpoints, ចែកចាយទំងន់ម៉ូឌែល |
-| `predeploy` | រត់តេស្តសុវត្ថិភាព AI, ផ្ទៀងផ្ទាត់ទំរងPrompt |
-| `postdeploy` | តេស្តបង្ហាញចម្លើយភ្នាក់ងារ, ធ្វើឲ្យប្រាកដពីការតភ្ជាប់ម៉ូឌែល |
+| `preprovision` | ផ្ទៀងផ្ទាត់គុណភាពការជាវសម្រាប់សមត្ថភាពម៉ូដែល AI |
+| `postprovision` | ផ្ទៀងផ្ទាត់ការតភ្ជាប់ផ្ទាល់ខ្លួន និងចំណេញធនធានដែលត្រូវការ |
+| `predeploy` | រត់ការធ្វើតេស្តសន្តិសុខ AI ធ្វើការផ្ទៀងផ្ទាត់គំរូការបញ្ជូន |
+| `postdeploy` | សាកល្បងការឆ្លើយតប agent ដូចកេស្រេង ស្ទុលការតភ្ជាប់ម៉ូដែល |
 
-### CI/CD Pipeline Configuration
+### កំណត់រចនាសម្ព័ន្ធ CI/CD Pipeline
 
-ប្រើ `azd pipeline config` ដើម្បីភ្ជាប់គម្រោងរបស់អ្នកទៅ GitHub Actions ឬ Azure Pipelines ជាមួយការផ្ទៀងផ្ទាត់អត្តសញ្ញាណ Azure ដែលមានសម្ងាត់៖
+ប្រើ `azd pipeline config` ដើម្បីភ្ជាប់គម្រោងរបស់អ្នកទៅ GitHub Actions ឬ Azure Pipelines ជាមួយការផ្ទៀងផ្ទាត់សុវត្ថិភាពរបស់ Azure៖
 
 ```bash
-# កំណត់រចនាសម្ព័ន្ធ CI/CD (អន្តរកម្ម)
+# Configure CI/CD pipeline (interactive)
 azd pipeline config
 
-# កំណត់ជាមួយអ្នកផ្គត់ផ្គង់ជាក់លាក់
+# Configure with a specific provider
 azd pipeline config --provider github
 ```
 
-កំណត់បញ្ជានេះ:
-- បង្កើត service principal ជាមួយចូលដំណើរការក្បួនល្អបំផុត (least-privilege)
-- កំណត់ federated credentials (គ្មានអាថ៌កំបាំងដែលបានរក្សាទុក)
-- បង្កើតឬធ្វើបច្ចុប្បន្នភាពឯកសារផ្សព្វផ្សាយ pipeline របស់អ្នក
+ពាក្យបញ្ជានេះ៖
+- បង្កើត ឬកែប្រែអត្តសញ្ញាណ pipeline; ពិនិត្យបរិវេណតួនាទី/សិទ្ធិដែលបានបង្កើត មិនគួររំពឹងថាជាសិទ្ធិតិចបំផុតឡើយ
+- កំណត់សញ្ជាតិមូលដ្ឋានសហគមន៍ (គ្មានសម្ងាត់បានរក្សាទុក)
+- បង្កើត ឬធ្វើបច្ចុប្បន្នភាពឯកសារកំណត់ដំណើរការ pipeline របស់អ្នក
 - កំណត់អថេរបរិយាកាសដែលត្រូវការនៅក្នុងប្រព័ន្ធ CI/CD របស់អ្នក
 
-#### Step-by-step: your first GitHub Actions pipeline
+#### ជំហាន​ដំបូង៖ pipeline GitHub Actions ដំបូងរបស់អ្នក
 
-នេះជាមាតិកាគ្រប់ដំណាក់កាលចាប់ពីគម្រោង azd ដែលដំណើរការបាន ដល់ការចែកចាយស្វ័យប្រវត្តិដោយលើកដាក់រាល់ការផុស។
+នេះជាការបណ្តុះបណ្តាលពេញលេញចាប់ពីគម្រោង azd ដែលមានសកម្មភាពដល់ការដាក់បញ្ចូលស្វ័យប្រវត្តិក្នុងរាល់ការជុះផ្សាយ។
 
-**1. Make sure your project is on GitHub**
+**1. ធ្វើឲ្យប្រាកដថាគម្រោងរបស់អ្នកមាននៅលើ GitHub**
 
 ```bash
 git init
@@ -1175,21 +1210,21 @@ git commit -m "Initial azd project"
 gh repo create my-ai-app --private --source=. --push
 ```
 
-**2. Run pipeline config**
+**2. ប្រតិបត្តិការកំណត់ pipeline**
 
 ```bash
 azd pipeline config --provider github
 ```
 
-azd នឹង, ក្នុងរបៀបអន្តរកម្ម:
-- សួរថាតើ subscription និងបរិយាកាស Azure ណាដែលត្រូវដាក់កំណត់
+azd នឹងប្រាស្រ័យទាក់ទងជាមួយអ្នក៖
+- សូមប្រាប់ថាលេខសមាជិក Azure Subscription និងបរិយាកាសគោលដៅ
 - បង្កើត Entra **app registration + service principal** សម្រាប់ pipeline
-- កំណត់ **federated credentials (OIDC)**—ដូច្នេះ GitHub អះអាងទៅ Azure ដោយមាន token រយៈពេលខ្លី ហើយ **គ្មានសម្ងាត់ណាមួយត្រូវបានរក្សាទុក**
-- បញ្ចូន **អថេរ** ដែលត្រូវការទៅកាន់ repo GitHub របស់អ្នក (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `AZURE_ENV_NAME`, `AZURE_LOCATION`)
+- តំឡើង **federated credentials (OIDC)** — ដូច្នេះ GitHub អាចផ្ទៀងផ្ទាត់ទៅ Azure ដោយប្រើសញ្ញាកាត់ថ្មីៗ ហើយ **មិនមានសម្ងាត់ត្រូវរក្សាទុក**
+- ជម្ងឺ **អថេរ** ដែលត្រូវការ ទៅកាន់ repo GitHub របស់អ្នក (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `AZURE_ENV_NAME`, `AZURE_LOCATION`)
 
-**3. Understand the generated workflow**
+**3. យល់ដឹងអំពី workflow ត្រូវបានបង្កើត**
 
-azd បន្ថែម `.github/workflows/azure-dev.yml`។ ផ្នែកសំខាន់ៗដូចជា៖
+សម្រាប់គំរូដែលគាំទ្រ ត្រូវកំណត់/ពិនិត្យមើល `.github/workflows/azure-dev.yml`។ ផ្នែកសំខាន់ៗមានរូបរាងដូចនេះ (គំរូត្រូវផ្តល់ឱ្យនូវ toolchain និងប៉ារ៉ាម៉ែត្របរិយាកាសរបស់កម្មវិធី):
 
 ```yaml
 # .github/workflows/azure-dev.yml
@@ -1223,59 +1258,59 @@ jobs:
         run: azd deploy --no-prompt
 ```
 
-**4. Verify it works**
+**4. ផ្ទៀងផ្ទាត់ថាវាដំណើរការបាន**
 
 ```bash
-# បញ្ចូនការផ្លាស់ប្តូរ ដើម្បីចាប់ផ្តើម pipeline
+# Push a change to trigger the pipeline
 git commit -am "Trigger pipeline" --allow-empty
 git push
 ```
 
-បើកផ្ទាំង **Actions** នៅក្នុង repo GitHub របស់អ្នក ហើយមើលលំហាត់កំណត់ដែលរត់ `azd provision` និង `azd deploy` បានដោយស្វ័យប្រវត្តិ។
+បើកកន្លែង **Actions** នៅ repo GitHub របស់អ្នក ហើយមើល workflow ដំណើរការជាអូតូភាព `azd provision` និង `azd deploy`។
 
-> **Why federated credentials matter:** សន្លឹក pipeline ប៉ុន្មានចាស់បានរក្សា client secret នៅក្នុង GitHub។ federated credentials OIDC យកសម្ងាត់នោះឲ្យអស់សូន្យ—GitHub នឹងសំណើសុំ token រយៈពេលខ្លីនៅពេលរត់ ដែលមានសុវត្ថិភាពជាង និងមិនចាំបាច់បម្លែង ឬរលកចេញ។ នេះជាការកំណត់ដើមដែល `azd pipeline config` បង្កើតឡើង។
+> **មូលហេតុដែលអត្តសញ្ញាណពហុផ្សព្វផ្សាយមានសារៈសំខាន់ៈ** បណ្ដាញចាស់បានរក្សាទុកសម្ងាត់ client នៅក្នុង GitHub។ ការយោងអត្តសញ្ញាណនៃ OIDC ដោយពហុផ្សព្វផ្សាយ គឺយកយកសម្ងាត់នោះចេញពីទាំងស្រុង - GitHub ស្នើសុំសញ្ញាអំណាចខ្លីនៅពេលរត់ ដែលមានសុវត្ថិភាពជាងនិងមិនត្រូវបង្វិលឬរាំងខ្សែឡើយ។ នេះគឺជាការកំណត់ដើមដែល `azd pipeline config` កំណត់។
 
-> **Secrets vs. variables:** ឈ្មោះសម្គាល់ដែលមិនមានសុពលភាពសម្ងាត់ (`AZURE_CLIENT_ID`, ល។) គួរត្រូវដាក់ក្នុង **variables** របស់ repo។ ប្រសិនបើកម្មវិធីរបស់អ្នកពិតជាត្រូវការសម្ងាត់នៅពេលកសាង សូមបន្ថែមវាជា GitHub **secret** ហើយយោងវាជាមួយ `${{ secrets.NAME }}`—ប៉ុន្ដែអធិប្បាយប្រើ Key Vault + managed identity នៅ runtime គឺល្អជាង (មើល [ជំពូក 3](../chapter-03-configuration/authsecurity.md))។
+> **រឿងសម្ងាត់ និងអថេរ:** អត្តសញ្ញាណដែលមិនមែនសម្ងាត់ (`AZURE_CLIENT_ID`, ល. ក.) ទៅក្នុងអថេរ **variables** នៅ repo។ ប្រសិនបើកម្មវិធីរបស់អ្នកត្រូវការសម្ងាត់ពេលសាងសង់ បន្ថែមវាជា **secret** នៅ GitHub ហើយយោងវាជាមួយ `${{ secrets.NAME }}` — ប៉ុន្តែផ្តល់ជម្រើស Key Vault + managed identity នៅពេលរត់ (មើល [ជំពូក 3](../chapter-03-configuration/authsecurity.md))។
 
-**Production workflow with pipeline config:**
+**Workflow ផលិតកម្មជាមួយកំណត់តម្រូវ pipeline:**
 
 ```bash
-# 1. រៀបចំបរិយាកាសផលិត
+# 1. Set up production environment
 azd env new production
 azd env set AZURE_OPENAI_CAPACITY 100
 
-# 2. កំណត់រចនាសម្ព័ន្ធបណ្តុំដំណើរការ
+# 2. Configure the pipeline
 azd pipeline config --provider github
 
-# 3. បណ្ដុំដំណើរការ រត់ azd deploy រាល់ពេលមានការបញ្ចូន (push) ទៅសាខា main
+# 3. Review the generated trigger, provisioning/deployment steps, and approvals
 ```
 
-#### Step-by-step: Azure DevOps Pipelines
+#### ជំហានដល់ជំហាន៖ Azure DevOps Pipelines
 
-ចូលចិត្ត Azure DevOps មុន GitHub Actions? azd គាំទ្រវា​ដោយស្រ្តីថ្នាក់ជាមួយ provider `azdo`។ ឈុតប្រតិបត្តិគឺស្ទើរតែដូចគ្នា—azd បង្កើតឯកសារ pipeline, បង្កើត service connection, និងភ្ជាប់ការផ្ទៀងផ្ទាត់។
+ចង់ប្រើ Azure DevOps ជំនួស GitHub Actions? azd គាំទ្រវាដោយធម្មតាមួយជាមួយផ្តល់សេវា `azdo`។ លំហូរច្រើនស្រដៀងគ្នា—azd បង្កើតឯកសារផ្លូវបម្រែបម្រួល, បង្កើតការតភ្ជាប់សេវា, ហើយភ្ជាប់ប្រព័ន្ធផ្ទៀងផ្ទាត់។
 
-**1. Make sure you have an Azure DevOps project**
+**1. ធ្វើអោយប្រាកដថាអ្នកមានគម្រោង Azure DevOps**
 
-អ្នកត្រូវការអង្គភាព និងគម្រោងនៅ `https://dev.azure.com/<your-org>`។ បង្កើត Personal Access Token (PAT) ដែលមានសិទ្ធិ **Build (Read & execute)**, **Code (Read & write)**, និង **Service Connections (Read, query & manage)**—azd នឹងស្នើសុំអ្នកសម្រាប់វា។
+អ្នកត្រូវការយួនអង្គភាព និងគម្រោងនៅ `https://dev.azure.com/<your-org>`។ បង្កើត Personal Access Token (PAT) ជាមួយសមត្ថភាព **Build (អាន និងអនុវត្ត)**, **Code (អាន និងសរសេរ)**, និង **Service Connections (អាន, ស្វែងរក និងគ្រប់គ្រង)** — azd នឹងសួរពីវា។
 
-**2. Configure the pipeline**
+**2. កំណត់ pipeline**
 
 ```bash
 azd pipeline config --provider azdo
 ```
 
 azd នឹង:
-- សួរអំពីអង្គភាព Azure DevOps និងគម្រោងរបស់អ្នក
-- បង្កើត (ឬ reuse) **service connection** ទៅ Azure ដោយប្រើ service principal
-- កំណត់ **workload identity federation (OIDC)** ដូច្នេះគ្មាន client secret ត្រូវបានរក្សាទុក
-- commit ឯកសារ `azure-dev.yml` pipeline definition ទៅ repo របស់អ្នក
+- សុំអំពីអង្គភាព Azure DevOps និងគម្រោងរបស់អ្នក
+- បង្កើត (ឬប្រើវិញ) **service connection** ទៅ Azure ដោយប្រើ service principal
+- កំណត់ **workload identity federation (OIDC)** ដើម្បីមិនរក្សាសម្ងាត់ client ទេ
+- កំណត់តម្លៃការបញ្ជាក់ pipeline (ភាគច្រើន `.azdo/pipelines/azure-dev.yml`) ពីគំរូ pipeline គម្រោង
 
-**3. Review the generated `azure-dev.yml`**
+**3. ពិនិត្យ pipeline បានបង្កើត**
 
-azd សរសេរ pipeline ដែលផ្គត់ផ្គង់ និងចែកចាយរាល់ពេលមាន push ទៅ `main`៖
+ប្រើ pipeline ដែលបានបង្កើតរួចរួមទាំង **Azure service connection និងជំហានផ្ទៀងផ្ទាត់ AZD**។ មាគ៌ាផ្លូវការនៃការតំឡើង [Azure Pipelines setup guide](https://learn.microsoft.com/azure/developer/azure-developer-cli/pipeline-azure-pipelines) បង្ហាញកម្រងតែមួយខាងក្រោមនេះ; វា​គ្រាន់តែជា **ការតំឡើងតែប៉ុណ្ណោះ**, មិនមែន workflow យកទៅប្រើដោយផ្ទៀងផ្ទាត់ឡើយ:
 
 ```yaml
-# azure-dev.yml
+# .azdo/pipelines/azure-dev.yml (installer fragment only)
 trigger:
   - main
 
@@ -1283,71 +1318,59 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-  - task: setup-azd@1
+  - task: setup-azd@0
     displayName: Install azd
-
-  - script: azd provision --no-prompt
-    displayName: Provision Infrastructure
-    env:
-      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
-      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
-      AZURE_LOCATION: $(AZURE_LOCATION)
-
-  - script: azd deploy --no-prompt
-    displayName: Deploy Application
-    env:
-      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
-      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
-      AZURE_LOCATION: $(AZURE_LOCATION)
 ```
 
-**4. Where the variables come from**
+តំឡើងបន្ថែម AZD Azure DevOps extension ប្រសិនបើមិនមានភារកិច្ចនោះក្នុងអង្គភាពរបស់អ្នក។ កុំចម្លងការប្រតិបត្ដិការបង្ហាញ `azd provision`/`azd deploy` ដោយគ្មានការផ្ទៀងផ្ទាត់: ការកំណត់ service connection មិនបញ្ជាក់ថាចូល AZD ស្វ័យប្រវត្តិទេ។ តាមដានការចូល OIDC និងបរិបទភារកិច្ចដែលបានអនុញ្ញាតជាសហគមន៍នៃគំរូ ហើយផ្គត់ផ្គង់បរិយាកាស/ការជាវ/ទីតាំងដែលបានជ្រើសរើស។
 
-azd រក្សាទុកតម្លៃបរិយាកាស (`AZURE_ENV_NAME`, `AZURE_LOCATION`, `AZURE_SUBSCRIPTION_ID`) ជា **variable group** ក្នុង Azure DevOps ដើម្បីឲ្យ pipeline អាចអានបាន។ អ្នកអាចមើល និងកែប្រែវាទៅក្រោម **Pipelines → Library**។
+**4. ដើមកំណើតអថេរ**
 
-> **Same OIDC benefit as GitHub:** provider `azdo` ក៏កំណត់ workload identity federation ជាមូលដ្ឋានដែរ ដូច្នេះគ្មាន client secret ត្រូវបានរក្សាទុកនៅក្នុង service connection—Azure DevOps នឹងប្តូរទៅ token រយៈពេលខ្លីនៅពេល runtime។ ប្រើ `--auth-type client-credentials` តែប៉ុណ្ណោះ ប្រសិនបើអង្គការរបស់អ្នកមិនអាចប្រើ OIDC ទេ។
+azd រក្សាទុកតម្លៃបរិយាកាស (`AZURE_ENV_NAME`, `AZURE_LOCATION`, `AZURE_SUBSCRIPTION_ID`) ជា **variable group** ក្នុង Azure DevOps ដើម្បី pipeline អាចអាន។ អ្នកអាចមើលនិងកែប្រែវាបានក្រោម **Pipelines → Library**។
 
-**5. Run it**
+> **អត្ថប្រយោជន៍ OIDC ដូចគ្នាជាមួយ GitHub:** ផ្តល់សេវា `azdo` ក៏កំណត់ workload identity federation ដូចគ្នាដោយលំនាំដើម ដូច្នេះគ្មានសម្ងាត់ client ត្រូវបានរក្សាទុកនៅ service connection — Azure DevOps ប្ដូរតែនៅការប្រើសញ្ញាអំណាចខ្លីនៅពេលរត់។ ផ្ញើ `--auth-type client-credentials` តែប៉ុណ្ណោះ ប្រសិនបើអង្គភាពរបស់អ្នកមិនអាចប្រើ OIDC នៅឡើយ។
+
+**5. បើកដំណើរការ**
 
 ```bash
 git commit -am "Add Azure DevOps pipeline" --allow-empty
 git push
 ```
 
-បើក **Pipelines** នៅក្នុង Azure DevOps ដើម្បីមើល `azd provision` និង `azd deploy` រត់។
+បើក **Pipelines** នៅ Azure DevOps មើលការរត់ `azd provision` និង `azd deploy`។
 
-### Adding Components with `azd add`
+### បន្ថែមធាតុជាមួយ `azd add`
 
-បន្ថែមសេវាកម្ម Azure ជាចំណុចៗ ទៅក្នុងគម្រោងដែលមានស្រាប់៖
+បន្ថែមសេវា Azure ដោយជំហានទៅលើគម្រោងមានស្រាប់:
 
 ```bash
-# បន្ថែមផ្នែកសេវាថ្មីដោយអន្តរកម្ម
+# Add a new service component interactively
 azd add
 ```
 
-នេះមានអត្ថប្រយោជន៍ជាពិសេសសម្រាប់ពង្រីកកម្មវិធី AI ផលិតកម្ម—ឧទាហរណ៍ បន្ថែមសេវាក្សែងស្វែងរកវ៉ិចទ័រ (vector search service), ចំណុចបញ្ចប់ភ្នាក់ងារថ្មី, ឬឧបករណ៍ត្រួតពិនិត្យមួយចំណុច ទៅក្នុងការចែកចាយដែលមានស្រាប់។
+នេះមានប្រយោជន៍សម្រាប់ពង្រីកកម្មវិធី AI ផលិតកម្ម - ឧទាហរណ៍ បន្ថែមសេវាកម្មស្វែងរក vector, ចំណុចបញ្ចេញភ្នាក់ងារថ្មី, ឬធាត្រត្រួតពិនិត្យទៅលើការដាក់ចេញដែលមានស្រាប់។
 
-## Additional Resources
+## ធនធានបន្ថែម
 
-- **Azure Well-Architected Framework**: [ការណែនាំអំពីផ្ទុកការងារ AI](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Microsoft Foundry Documentation**: [ឯកសារ​ផ្លូវការ](https://learn.microsoft.com/azure/ai-studio/)
-- **Community Templates**: [Azure Samples](https://github.com/Azure-Samples)
-- **Discord Community**: [#Azure channel](https://discord.gg/microsoft-azure)
-- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 ជំនាញភ្នាក់ងារ បើកសម្រាប់ Azure AI, Foundry, ការចែកចាយ, ការបង្វិលថ្លៃ និងវាយតម្លៃជំងឺ។ តម្លើងនៅក្នុងកម្មវិធីកែសម្រួលរបស់អ្នក៖
+- **រចនាសម្ព័ន្ធ Azure Well-Architected**: [សេចក្ដីណែនាំសម្រាប់ AI workload](https://learn.microsoft.com/azure/well-architected/ai/)
+- **ឯកសារមូលដ្ឋាន Microsoft Foundry**: [ឯកសារផ្លូវការ](https://learn.microsoft.com/azure/ai-studio/)
+- **គំរូសហគមន៍**: [ឧទាហរណ៍ Azure](https://github.com/Azure-Samples)
+- **សហគមន៍ Discord**: [ប៉ុស្តិ៍ #Azure](https://discord.gg/microsoft-azure)
+- **ជំនាញភ្នាក់ងារសម្រាប់ Azure**: [microsoft/github-copilot-for-azure នៅ skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - ជំនាញភ្នាក់ងាររើសបានសម្រាប់ Azure AI, Foundry, ការដាក់ចេញ, ការបន្ថែមថវិកា និងការវិភាគកំហុស។ តំឡើងនៅក្នុងកម្មវិធីកែសម្រួលរបស់អ្នក:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
 
 ---
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: ជំពូក 8 - រាងទម្រង់ផលិតកម្ម និងសហគ្រាស
-- **⬅️ Previous Chapter**: [ជំពូក 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Also Related**: [AI Workshop Lab](ai-workshop-lab.md)
-- **� Course Complete**: [AZD For Beginners](../../README.md)
+**ការរុករកជំពូក:**
+- **📚 ផ្ទះវគ្គសិក្សា**: [AZD សម្រាប់អ្នកចាប់ផ្តើម](../../README.md)
+- **📖 ជំពូកបច្ចុប្បន្ន**: ជំពូក 8 - លំនាំផលិតកម្ម និងសហគ្រាស
+- **⬅️ ជំពូកមុន**: [ជំពូក 7: ដោះស្រាយបញ្ហា](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ ផ្សេងទៀតដែលទាក់ទង**: [ព្រឹត្តិការណ៍មន្ទីរ AI](../chapter-02-ai-development/ai-workshop-lab.md)
+- **🎯 បញ្ចប់វគ្គសិក្សា**: [AZD សម្រាប់អ្នកចាប់ផ្តើម](../../README.md)
 
-**ចងចាំ**: ការងារ AI នៅផលិតកម្មត្រូវការការធ្វើប្រាក់ចំណាយ ការតាមដាន និងការ​បង្កើនប្រសិទ្ធភាពជាបន្តបន្ទាប់។ ចាប់ផ្តើមពីគំរូទាំងនេះ ហើយប្ដូរឲ្យសមស្របទៅតាមតម្រូវការជាក់លាក់របស់អ្នក។
+**ចងចាំ**៖ កម្មវិធី AI ផលិតកម្មត្រូវការការធ្វើផែនការយ៉ាងម៉ត់ចត់, ការត្រួតពិនិត្យ និងការបង្កើនប្រសិទ្ធភាពជាប់ជានិច្ច។ ចាប់ផ្តើមពីលំនាំទាំងនេះ ហើយផ្លាស់ប្តូរតាមតម្រូវការពិសេសរបស់អ្នក។
 
 ---
 

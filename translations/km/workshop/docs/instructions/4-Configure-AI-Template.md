@@ -1,221 +1,25 @@
-# 4. កំណត់គំរូ
+# 4. កំណត់រចនាសម្ព័ន្ធមួយគំរូ
 
-!!! tip "ចប់មូឌុលនេះ អ្នកនឹងអាច"
+!!! tip "នៅចុងបញ្ចប់នៃមូឌុលនេះ អ្នកនឹងអាចធ្វើបាន"
 
-    - [ ] យល់ពីគោលបំណងនៃ `azure.yaml`
-    - [ ] យល់ពីរចនាសម្ព័ន្ធនៃ `azure.yaml`
-    - [ ] យល់ពីតម្លៃនៃ `hooks` រង្វង់ជីវិត azd
-    - [ ] **Lab 4:** ស្វែងរក និងកែប្រែអថេរសម្រាប់បរិស្ថាន
-
----
-
-!!! prompt "ឯកសារ `azure.yaml` ធ្វើអ្វី? សូមប្រើ codefence ហើយពន្យល់តាមបន្ទាត់"
-
-      The `azure.yaml` file is the **configuration file for Azure Developer CLI (azd)**. It defines how your application should be deployed to Azure, including infrastructure, services, deployment hooks, and environment variables.
+    - [ ] Explain the purpose and structure of `azure.yaml`
+    - [ ] Distinguish application services, infrastructure parameters, and lifecycle hooks
+    - [ ] Configure the selected environment using inputs supported by the template
+    - [ ] **Lab 4:** Review a configuration change before provisioning it
 
 ---
 
-## 1. គោលបំណង និងមុខងារ
+## 1. ចាប់ផ្តើមជាមួយគំរូពិតប្រាកដ
 
-ឯកសារ `azure.yaml` នេះបម្រើជា **ផែនការដាក់បញ្ចូល (deployment blueprint)** សម្រាប់កម្មវិធីភ្នាក់ងារយ៉ាង AI ដែល:
+បើក [`azure.yaml` នៅក្នុង Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/azure.yaml) នៅក្នុងឃ្លាំងដែលអ្នកបានចាប់ផ្តើម។ គំរូផ្តាច់មុខអាចផ្លាស់ប្តូរដោយឡែកពីវគ្គបណ្តុះបណ្តាលនេះ។ **វិចារណយោបល់** ខាងក្រោមត្រូវបានពិនិត្យនៅថ្ងៃទី ៤ ខែវិច្ឆិកា ឆ្នាំ ២០២៦; វាមិនមែនជាការជំនួសឯកសារពេញលេញទេ៖
 
-1. **ផ្ទៀងផ្ទាត់បរិស្ថាន** មុនការដាក់បញ្ចូល
-2. **ផ្គត់ផ្គង់សេវា Azure AI** (AI Hub, AI Project, Search, ល។)
-3. **ដាក់បញ្ចូលកម្មវិធី Python** ទៅកាន់ Azure Container Apps
-4. **កំណត់ម៉ូឌែល AI** សម្រាប់ទាំងបែបជជែក និង embedding
-5. **រៀបចំការត្រួតពិនិត្យ និងតាមដាន** សម្រាប់កម្មវិធី AI
-6. **គាំទ្រ​ទាំង​គម្រោង Azure AI ថ្មី និងដែលមានរួច**
-
-ឯកសារនេះអនុញ្ញាតឱ្យមានការ **ដាក់បញ្ចូលដោយពាក្យបញ្ជាតែមួយ** (`azd up`) សម្រាប់ដំណោះស្រាយភ្នាក់ងារយ៉ាង AI ពេញលេញ ជាមួយការផ្ទៀងផ្ទាត់ ផ្គត់ផ្គង់ និងកំណត់រចនាសម្ព័ន្ធបន្ទាប់ពីដាក់បញ្ចូលយ៉ាងត្រឹមត្រូវ។
-
-??? info "បើកដើម្បីមើល: `azure.yaml`"
-
-      The `azure.yaml` file defines how Azure Developer CLI should deploy and manage this AI Agent application in Azure. Let's break it down line-by-line.
-
-      ```yaml title="" linenums="0"
-
-      # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: do we need hooks? 
-      # TODO: do we need all of the variables?
-
-      name: azd-get-started-with-ai-agents
-      metadata:
-      template: azd-get-started-with-ai-agents@1.0.2
-      requiredVersions:
-      azd: ">=1.14.0"
-
-      hooks:
-      preup:
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/validate_env_vars.sh; ./scripts/validate_env_vars.sh
-            interactive: true
-            continueOnError: false
-      windows:
-            shell: pwsh
-            run: ./scripts/validate_env_vars.ps1
-            interactive: true
-            continueOnError: false      
-      postprovision:
-      windows:
-            shell: pwsh
-            run: ./scripts/write_env.ps1
-            continueOnError: true
-            interactive: true
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/write_env.sh; ./scripts/write_env.sh;
-            continueOnError: true
-            interactive: true
-      postdeploy:
-      windows:
-            shell: pwsh
-            run: ./scripts/postdeploy.ps1
-            continueOnError: true
-            interactive: true
-      posix:
-            shell: sh
-            run: chmod u+r+x ./scripts/postdeploy.sh; ./scripts/postdeploy.sh;
-            continueOnError: true
-            interactive: true
-      services:
-      api_and_frontend:
-      project: ./src
-      language: py
-      host: containerapp
-      docker:
-            image: api_and_frontend
-            remoteBuild: true
-      pipeline:
-      variables:
-      - AZURE_RESOURCE_GROUP
-      - AZURE_AIHUB_NAME
-      - AZURE_AIPROJECT_NAME
-      - AZURE_AISERVICES_NAME
-      - AZURE_SEARCH_SERVICE_NAME
-      - AZURE_APPLICATION_INSIGHTS_NAME
-      - AZURE_CONTAINER_REGISTRY_NAME
-      - AZURE_KEYVAULT_NAME
-      - AZURE_STORAGE_ACCOUNT_NAME
-      - AZURE_LOG_ANALYTICS_WORKSPACE_NAME
-      - USE_CONTAINER_REGISTRY
-      - USE_APPLICATION_INSIGHTS
-      - USE_AZURE_AI_SEARCH_SERVICE
-      - AZURE_AI_AGENT_NAME
-      - AZURE_AI_AGENT_ID
-      - AZURE_AI_AGENT_DEPLOYMENT_NAME
-      - AZURE_AI_AGENT_DEPLOYMENT_SKU
-      - AZURE_AI_AGENT_DEPLOYMENT_CAPACITY
-      - AZURE_AI_AGENT_MODEL_NAME
-      - AZURE_AI_AGENT_MODEL_FORMAT
-      - AZURE_AI_AGENT_MODEL_VERSION
-      - AZURE_AI_EMBED_DEPLOYMENT_NAME
-      - AZURE_AI_EMBED_DEPLOYMENT_SKU
-      - AZURE_AI_EMBED_DEPLOYMENT_CAPACITY
-      - AZURE_AI_EMBED_MODEL_NAME
-      - AZURE_AI_EMBED_MODEL_FORMAT
-      - AZURE_AI_EMBED_MODEL_VERSION
-      - AZURE_AI_EMBED_DIMENSIONS
-      - AZURE_AI_SEARCH_INDEX_NAME
-      - AZURE_EXISTING_AIPROJECT_RESOURCE_ID
-      - AZURE_EXISTING_AIPROJECT_ENDPOINT
-      - AZURE_EXISTING_AGENT_ID
-      - ENABLE_AZURE_MONITOR_TRACING
-      - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
-      ```
-
----
-
-## 2. បំបែកឯកសារ
-
-យើងនឹងឆែកឯកសារនេះមុខងារ​ដោយ​ដំណាក់កាល ដើម្បីយល់ពីអ្វីដែលវាធ្វើ និងហេតុផល។
-
-### 2.1 **ក្បាល និងស្គីម៉ា (1-3)**
-
-```yaml title="" linenums="0"
+```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-```
-
-- **បន្ទាត់ 1**: ផ្តល់ការផ្ទៀងផ្ទាត់ស្គីម៉ាសម្រាប់ YAML language server សម្រាប់ការគាំទ្រ IDE និង IntelliSense
-
-### 2.2 ព័ត៌មានមេតាផ្ទាល់គម្រោង (5-10)
-
-```yaml title="" linenums="0"
 name: azd-get-started-with-ai-agents
 metadata:
-  template: azd-get-started-with-ai-agents@1.0.2
+  template: azd-get-started-with-ai-agents@2.5.0
 requiredVersions:
   azd: ">=1.14.0"
-```
-
-- **បន្ទាត់ 5**: កំណត់ឈ្មោះគម្រោងដែលប្រើដោយ Azure Developer CLI
-- **បន្ទាត់ 6-7**: បញ្ជាក់ថាវា​គឺផ្អែកលើគំរូ ជំនាន់ 1.0.2
-- **បន្ទាត់ 8-9**: ទាមទារថាត្រូវមាន Azure Developer CLI ជំនាន់ 1.14.0 ឬខ្ពស់ជាងនេះ
-
-### 2.3 hooks សម្រាប់ដាក់បញ្ចូល (11-40)
-
-```yaml title="" linenums="0"
-hooks:
-  preup:
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/validate_env_vars.sh; ./scripts/validate_env_vars.sh
-      interactive: true
-      continueOnError: false
-    windows:
-      shell: pwsh
-      run: ./scripts/validate_env_vars.ps1
-      interactive: true
-      continueOnError: false      
-```
-
-- **បន្ទាត់ 11-20**: **Pre-deployment hook** - ដំណើរការមុន `azd up`
-
-      - លើ Unix/Linux: ធ្វើឱ្យស្គ្រីបផ្ទៀងផ្ទាត់អាចដំណើរការ និងរត់វា
-      - លើ Windows: រត់ស្គ្រីប PowerShell សម្រាប់ផ្ទៀងផ្ទាត់
-      - ទាំងពីរមានរបៀបអន្តរកម្ម ហើយនឹងបញ្ឈប់ការដាក់បញ្ចូល ប្រសិនបើពួកវាបរាជ័យ
-
-```yaml  title="" linenums="0"
-  postprovision:
-    windows:
-      shell: pwsh
-      run: ./scripts/write_env.ps1
-      continueOnError: true
-      interactive: true
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/write_env.sh; ./scripts/write_env.sh;
-      continueOnError: true
-      interactive: true
-```
-- **បន្ទាត់ 21-30**: **Post-provision hook** - ដំណើរការបន្ទាប់ពីធនធាន Azure ត្រូវបានបង្កើត
-
-  - អនុវត្តស្គ្រីបសរសេរ​អថេរសម្រាប់បរិស្ថាន
-  - បន្តការដាក់បញ្ចូល ទោះបីស្គ្រីបទទួលបរាជ័យក៏ដោយ (`continueOnError: true`)
-
-```yaml title="" linenums="0"
-  postdeploy:
-    windows:
-      shell: pwsh
-      run: ./scripts/postdeploy.ps1
-      continueOnError: true
-      interactive: true
-    posix:
-      shell: sh
-      run: chmod u+r+x ./scripts/postdeploy.sh; ./scripts/postdeploy.sh;
-      continueOnError: true
-      interactive: true
-```
-- **បន្ទាត់ 31-40**: **Post-deploy hook** - ដំណើរការបន្ទាប់ពីដាក់បញ្ចូលកម្មវិធី
-
-  - អនុវត្តស្គ្រីបចាក់សំរួលចុងក្រោយ
-  - បន្តទោះបីស្គ្រីបបរាជ័យក៏ដោយ
-
-### 2.4 កំណត់រចនាសម្ព័ន្ធសេវា (41-48)
-
-This configures the application service you are deploying.
-
-```yaml title="" linenums="0"
 services:
   api_and_frontend:
     project: ./src
@@ -226,166 +30,109 @@ services:
       remoteBuild: true
 ```
 
-- **បន្ទាត់ 42**: កំណត់សេវាមួយឈ្មោះ "api_and_frontend"
-- **បន្ទាត់ 43**: បង្ហាញទៅកាន់ថត `./src` សម្រាប់កូដប្រភព
-- **បន្ទាត់ 44**: បញ្ជាក់ថា Python ជាភាសាកម្មវិធី
-- **បន្ទាត់ 45**: ប្រើ Azure Container Apps ជាវេទិកាអ្នកបម្រើ
-- **បន្ទាត់ 46-48**: កំណត់រចនាសម្ព័ន្ធ Docker
+- `name` កំណត់គម្រោង AZD; `metadata.template` កត់ត្រាភាពជាផ្សេងគ្នារបស់គំរូ។
+- `requiredVersions.azd` គឺជាចំនួនទាបបំផុតរបស់គំរូ មិនមែនជាការផ្ដល់អនុសាសន៍ឲ្យនៅលើ CLI ចាស់។ ប្រើការចេញផ្សាយ AZD ដែលមានការគាំទ្របច្ចុប្បន្ន។
+- `services` កំណត់គោលដៅផ្សព្វផ្សាយកម្មវិធី។ គំរូនេះផ្សព្វផ្សាយ Python API និងផ្នែកមុខមួយជា សេវាកម្ម Container Apps មួយ។
+- `project` មានទំនាក់ទំនងទៅកាន់ `azure.yaml`។
+- `remoteBuild` ស្នើសុំការបង្កើតកុងតឺន័រពីចម្ងាយ។ អត្តសញ្ញាណរបស់អ្នកត្រូវតែមានសិទិ្ធ Azure ត្រូវការ។
 
-      - ប្រើ "api_and_frontend" ជាឈ្មោះរូបភាព
-      - សាងសង់រូបភាព Docker ឆ្ងាយនៅលើ Azure (មិននៅក្នុងកុំព្យូទ័រមូលដ្ឋាន)
+ឯកសារ Bicep របស់គំរូនៅក្រោម `infra/` មិនមែនតែបញ្ជី `services` ទេ ក៏ប្រកាសធនធានដូចជា Microsoft Foundry, ការផ្សព្វផ្សាយម៉ូដែល, អត្រាទុក និង AI Search ជាជម្រើស។
 
-### 2.5 អថេរសម្រាប់ Pipeline (49-76)
+## ២. យល់ដឹងអំពី lifecycle hooks
 
-These are variables to help you run `azd` in CI/CD pipelines for automation
+សូមពិនិត្យផ្នែក `hooks` និងស្គ្រីប​ដែលបានយោងមុនពេលដំណើរការគំរូ។ កំណែដែលបានពិនិត្យមាន៖
 
-```yaml title="" linenums="0"
-pipeline:
-  variables:
-    - AZURE_RESOURCE_GROUP
-    - AZURE_AIHUB_NAME
-    - AZURE_AIPROJECT_NAME
-    - AZURE_AISERVICES_NAME
-    - AZURE_SEARCH_SERVICE_NAME
-    - AZURE_APPLICATION_INSIGHTS_NAME
-    - AZURE_CONTAINER_REGISTRY_NAME
-    - AZURE_KEYVAULT_NAME
-    - AZURE_STORAGE_ACCOUNT_NAME
-    - AZURE_LOG_ANALYTICS_WORKSPACE_NAME
-    - USE_CONTAINER_REGISTRY
-    - USE_APPLICATION_INSIGHTS
-    - USE_AZURE_AI_SEARCH_SERVICE
-    - AZURE_AI_AGENT_NAME
-    - AZURE_AI_AGENT_ID
-    - AZURE_AI_AGENT_DEPLOYMENT_NAME
-    - AZURE_AI_AGENT_DEPLOYMENT_SKU
-    - AZURE_AI_AGENT_DEPLOYMENT_CAPACITY
-    - AZURE_AI_AGENT_MODEL_NAME
-    - AZURE_AI_AGENT_MODEL_FORMAT
-    - AZURE_AI_AGENT_MODEL_VERSION
-    - AZURE_AI_EMBED_DEPLOYMENT_NAME
-    - AZURE_AI_EMBED_DEPLOYMENT_SKU
-    - AZURE_AI_EMBED_DEPLOYMENT_CAPACITY
-    - AZURE_AI_EMBED_MODEL_NAME
-    - AZURE_AI_EMBED_MODEL_FORMAT
-    - AZURE_AI_EMBED_MODEL_VERSION
-    - AZURE_AI_EMBED_DIMENSIONS
-    - AZURE_AI_SEARCH_INDEX_NAME
-    - AZURE_EXISTING_AIPROJECT_RESOURCE_ID
-    - AZURE_EXISTING_AIPROJECT_ENDPOINT
-    - AZURE_EXISTING_AGENT_ID
-    - ENABLE_AZURE_MONITOR_TRACING
-    - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
-```
+| Hook |គោលបំណង | អនុវត្តន៍សំខាន់ |
+|------|---------|--------------------|
+| `preup` | ផ្ទៀងផ្ទាត់បញ្ចូលបរិស្ថានគំរូ មុនចាប់ផ្តើមសកម្មភាព `up` | ស្គ្រីបរាងដែកเฉพาะប្លាតហ្វមអាចបញ្ឈប់សកម្មភាពនៅពេលបរាជ័យ |
+| `postdeploy` | ប្រតិបត្ដិការការតំឡើងជាក់លាក់របស់គំរូបន្ទាប់ពីផ្សព្វផ្សាយកម្មវិធី | សូមពិនិត្យ `continueOnError` និងលទ្ធផលស្គ្រីប; ការផ្សព្វផ្សាយដោយជោគជ័យមិនបញ្ជាក់ថាការតំឡើងទាំងអស់បានជោគជ័យទេ |
 
-ផ្នែកនេះកំណត់អថេរសម្រាប់បរិស្ថានដែលប្រើ **ក្នុងអំឡុងពេលដាក់បញ្ចូល**, ដាក់តម្រៀបដោយប្រភេទៈ
+ជំនាន់នេះមិន​មាន **hook** `postprovision` / `write_env` ចាស់ៗ​ដែលបានបង្ហាញ​នៅក្នុងសម្ភារៈវគ្គបណ្តុះបណ្តាល​មុនទេ។ កុំចម្លងយោង hook ទៅកាន់ស្គ្រីបដែលមិនមានទៀតឡើយ។
 
-- **ឈ្មោះធនធាន Azure (បន្ទាត់ 51-60)**:
-      - ឈ្មោះធនធានសេវាកម្ម Azure សំខាន់ៗ ឧទាហរណ៍ Resource Group, AI Hub, AI Project, ល។
+កូនសោ hook ជ្រើសរើសព្រឹត្តិការណ៍វិធីជីវិត; `posix` និង `windows` ជ្រើសរើសការអនុវត្តវេទិកា។ `shell`, `run`, `interactive`, និង `continueOnError` គ្រប់គ្រងការប្រតិបត្តិ។ ទាំងនេះជាស្គ្រីបទៅនឹងការប្រតិបត្តិដោយមានការអនុញ្ញាតរបស់អ្នក ដូច្នេះសូមពិនិត្យមើលពួកវាដូចជាកូដកម្មវិធីមួយ។
 
-- **ស្លាកមុខងារ (Feature Flags) (បន្ទាត់ 61-63)**:
-      - អថេរបែប boolean ដើម្បីបើក/បិទសេវាកម្ម Azure ជាក់លាក់
+មើលឯកសារ [AZD hooks documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-extensibility) សម្រាប់វិធីជីវិតពេញលេញ។
 
-- **ការកំណត់រចនាសម្ព័ន្ធភ្នាក់ងារ AI (បន្ទាត់ 64-71)**:
-      - ការកំណត់សម្រាប់ភ្នាក់ងារសំខាន់រួមទាំងឈ្មោះ, ID, កំណត់ដាក់បញ្ចូល, ព័ត៌មានម៉ូឌែល
+## 3. តាមដានការបញ្ចូលបរិស្ថានទៅក្នុងហេដ្ឋារចនាសម្ព័ន្ធ
 
-- **ការកំណត់រចនាសម្ព័ន្ធ embedding AI (បន្ទាត់ 72-79)**:
-      - ការកំណត់សម្រាប់ម៉ូឌែល embedding ដែលប្រើសម្រាប់ការស្វែងរកវ៉ិចទ័រ
+ចាប់ផ្តើមបញ្ជាលេខនេះពីឃ្លាំងគំរូដែលបានចាប់ផ្តើមរួច៖
 
-- **ស្វែងរក និងត្រួតពិនិត្យ (បន្ទាត់ 80-84)**:
-      - ឈ្មោះសន្ទស្សន៍ស្វែងរក, អត្តសញ្ញាណធនធានដែលមានរួច, និងការកំណត់សម្រាប់ត្រួតពិនិត្យ/តាមដាន
-
----
-
-## 3. ស្គាល់អថេរសម្រាប់បរិស្ថាន
-អថេរបរិស្ថានខាងក្រោមគ្រប់គ្រងការកំណត់រចនាសម្ព័ន្ធ និងអាកប្បកិរិយារៃការដាក់បញ្ចូលរបស់អ្នក ដែលត្រូវបានរៀបចំតាមគោលបំណងសំខាន់របស់ពួកវា។ អថេរច្រើនមានតម្លៃលំនាំដែលសមសម្រាប់ការប្រើ ប៉ុន្តែអ្នកអាចប្ដូរឲ្យសមទៅតាមតម្រូវការរបស់អ្នក ឬធនធាន Azure ដែលមានរួច។
-
-### 3.1 អថេរត្រូវការ 
-
-```bash title="" linenums="0"
-# ការកំណត់មូលដ្ឋាន Azure
-AZURE_ENV_NAME                    # ឈ្មោះបរិយាកាស (គេប្រើសម្រាប់ការកំណត់ឈ្មោះធនធាន)
-AZURE_LOCATION                    # តំបន់បង្ហោះ
-AZURE_SUBSCRIPTION_ID             # ការជាវគោលដៅ
-AZURE_RESOURCE_GROUP              # ឈ្មោះក្រុមធនធាន
-AZURE_PRINCIPAL_ID                # អត្តសញ្ញាណអ្នកប្រើសម្រាប់ RBAC
-
-# ឈ្មោះធនធាន (បង្កើតដោយស្វ័យប្រវត្តិ ប្រសិនបើមិនបានបញ្ជាក់)
-AZURE_AIHUB_NAME                  # ឈ្មោះហាប់ Microsoft Foundry
-AZURE_AIPROJECT_NAME              # ឈ្មោះគម្រោង AI
-AZURE_AISERVICES_NAME             # ឈ្មោះគណនីសេវាកម្ម AI
-AZURE_STORAGE_ACCOUNT_NAME        # ឈ្មោះគណនីផ្ទុក
-AZURE_CONTAINER_REGISTRY_NAME     # ឈ្មោះចុះបញ្ជីកុងតឺន័រ
-AZURE_KEYVAULT_NAME               # ឈ្មោះឃ្លាំងកូនសោ (ប្រសិនបើប្រើ)
-```
-
-### 3.2 ការកំណត់ម៉ូឌែល 
-```bash title="" linenums="0"
-# ការកំណត់ម៉ូឌែលសម្រាប់ការជជែក
-AZURE_AI_AGENT_MODEL_NAME         # លំនាំដើម: gpt-4.1-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # លំនាំដើម: OpenAI (ឬ Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # លំនាំដើម: ថ្មីបំផុតដែលអាចប្រើបាន
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # ឈ្មោះការដាក់ចេញសម្រាប់ម៉ូឌែលជជែក
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # លំនាំដើម: ស្តង់ដារ
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # លំនាំដើម: 80 (ពាន់ TPM)
-
-# ការកំណត់ម៉ូឌែលអ៊ីមបេឌឌីង
-AZURE_AI_EMBED_MODEL_NAME         # លំនាំដើម: text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # លំនាំដើម: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # លំនាំដើម: ថ្មីបំផុតដែលអាចប្រើបាន
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # ឈ្មោះការដាក់ចេញសម្រាប់អ៊ីមបេឌឌីង
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # លំនាំដើម: ស្តង់ដារ
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # លំនាំដើម: 50 (ពាន់ TPM)
-
-# ការកំណត់ភ្នាក់ងារ
-AZURE_AI_AGENT_NAME               # ឈ្មោះបង្ហាញរបស់ភ្នាក់ងារ
-AZURE_EXISTING_AGENT_ID           # ប្រើភ្នាក់ងារដែលមានរួច (ជាជម្រើស)
-```
-
-### 3.3 បិទ/បើកមុខងារ
-```bash title="" linenums="0"
-# សេវាជម្រើស
-USE_APPLICATION_INSIGHTS         # លំនាំដើម: ពិត
-USE_AZURE_AI_SEARCH_SERVICE      # លំនាំដើម: មិនពិត
-USE_CONTAINER_REGISTRY           # លំនាំដើម: ពិត
-
-# ការត្រួតពិនិត្យ និងការតាមដាន
-ENABLE_AZURE_MONITOR_TRACING     # លំនាំដើម: មិនពិត
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # លំនាំដើម: មិនពិត
-
-# ការកំណត់ស្វែងរក
-AZURE_AI_SEARCH_INDEX_NAME       # ឈ្មោះសន្ទស្សន៍ស្វែងរក
-AZURE_SEARCH_SERVICE_NAME        # ឈ្មោះសេវាស្វែងរក
-```
-
-### 3.4 ការកំណត់គម្រោង AI 
-```bash title="" linenums="0"
-# ប្រើធនធានដែលមានស្រាប់
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # អត្តសញ្ញាណធនធានពេញលេញនៃគម្រោង AI ដែលមានស្រាប់
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # URL ចុងផ្លូវនៃគម្រោងដែលមានស្រាប់
-```
-
-### 3.5 ពិនិត្យអថេររបស់អ្នក
-
-ប្រើ Azure Developer CLI ដើម្បីមើល និងគ្រប់គ្រងអថេរសម្រាប់បរិស្ថានរបស់អ្នក:
-
-```bash title="" linenums="0"
-# បង្ហាញអថេរបរិយាកាសទាំងអស់សម្រាប់បរិយាកាសបច្ចុប្បន្ន
-azd env get-values
-
-# យកអថេរបរិយាកាសជាក់លាក់
+```bash
+azd env list
 azd env get-value AZURE_ENV_NAME
-
-# កំណត់អថេរបរិយាកាសមួយ
-azd env set AZURE_LOCATION eastus
-
-# កំណត់អថេរច្រើនពីឯកសារ .env
-azd env set --from-file .env
+azd env get-value AZURE_LOCATION
 ```
+
+ពិនិត្យ `infra/main.parameters.json` ដើម្បីមើលថាតើអថេរបរិស្ថានណាខ្លះដែលគំរូប្រើប្រាស់ពិតប្រាកដ។ ការកំណត់ឈ្មោះដោយសំណើចដោយ `azd env set` មិនបានផ្លាស់ប្ដូរធនធាន Azure ដោយស្វ័យប្រវត្តិទេ។
+
+ការកំណត់លំនាំដើមបានពិនិត្យរួចរួមមាន៖
+
+| បញ្ចូល | លំនាំដើម / អ្នកប្រើប្រាស់ |
+|-------|-------------------|
+| `AZURE_AI_AGENT_MODEL_NAME` | `gpt-5-mini` |
+| `AZURE_AI_AGENT_MODEL_VERSION` | `2025-08-07` |
+| `AZURE_AI_AGENT_DEPLOYMENT_SKU` | `GlobalStandard` |
+| `AZURE_AI_AGENT_DEPLOYMENT_CAPACITY` | `80`; អង្គភាពកំណត់សិទ្ធិអាស្រ័យលើម៉ូដែល និងប្រភេទការដាក់ចេញ |
+| `AZURE_AI_EMBED_MODEL_NAME` | `text-embedding-3-small` |
+| `AZURE_AI_EMBED_DIMENSIONS` | `1536` |
+| `USE_APPLICATION_INSIGHTS` | `true` |
+| `USE_AZURE_AI_SEARCH_SERVICE` | `false` |
+| `ENABLE_AZURE_MONITOR_TRACING` | `false` |
+| `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT` | `false`; កុំបើកប្រើ លុះត្រាតែការដោះស្រាយទិន្នន័យត្រូវបានពិនិត្យឡើយ |
+
+ឯកសារទាំងនេះជាបញ្ចូលជាក់លាក់សម្រាប់គំរូ មិនមែនការកំណត់ AZD ជាសកលទេ។ សូមពិនិត្យមើល [ឯកសារគាំទ្រម៉ូដែល និងតំបន់](https://learn.microsoft.com/azure/ai-services/agents/concepts/model-region-support) និងកាលង់ការជាវរបស់អ្នកមុនជ្រើសរើសម៉ូដែល, SKU, សមត្ថភាព ឬទីតាំង។ កុំបកស្រាយការឯកភាពសមត្ថភាពទាំងអស់ថា ១,០០០ សញ្ញា​ក្នុងមួយនាទី។
+
+ដើម្បីជ្រើសរើសម៉ូដែលសន្ទនាផ្សេងទៀត សូមធ្វើបច្ចុប្បន្នភាព **នាម, កំណែ, ទ្រង់ទ្រាយ, SKU, និងសមត្ថភាពរួមគ្នា** ដែលអាចប្រើបានរបស់វា ដោយអនុវត្តតាម [មគ្គុទេសក៍ប្តូរតាមគំរូ](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deploy_customization.md)។ ការផ្លាស់ប្តូរតែឈ្មោះអាចធ្វើអោយកំណែឬប្រភេទការដាក់ចេញមិនសមរម្យ។
+
+## ៤. រោងចក្រ៖ បើកការស្វែងរក និងការតាមដានជាជម្រើស
+
+!!! warning "ការកំណត់ទាំងនេះអាចបន្ថែមធនធានដែលត្រូវគិតប្រាក់"
+
+    Check the planned resources and current Azure prices first. Provisioning preview is not a cost estimator. Enabling search does not create your custom document index or ingest a product catalog automatically.
+
+```bash
+azd env set USE_AZURE_AI_SEARCH_SERVICE true
+azd env set USE_APPLICATION_INSIGHTS true
+azd env set ENABLE_AZURE_MONITOR_TRACING true
+
+# Inspect the infrastructure changes and any configured preview hooks
+azd provision --preview
+
+# Apply the resource changes and deploy the application
+azd up
+```
+
+ការផ្លាស់ប្តូរក្រោមមូលដ្ឋានត្រូវការការផ្គត់ផ្គង់; `azd deploy` ផ្ទាល់គ្រាន់តែដាក់បង្ហោះសេវាកម្មកម្មវិធីប៉ុណ្ណោះ។ សម្រាប់ការសង្ខេបវិញក្នុងការស្វែងរក និងជម្រើសធ្វើការយកព័ត៌មានដែលគាំទ្រ សូមអនុវត្តតាម [មគ្គុទេសក៍ AI Search](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/ai_search.md)។ សម្រាប់ការត្រួតពិនិត្យសូមអនុវត្តតាម [មគ្គុទេសក៍កំណត់មើល](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md)។
+
+កុំបើកការកាមរការស្តុកមាតិកាពី prompt/response នៅលើទិន្នន័យអតិថិជនពិត ដោយគ្មានការយល់ព្រម តាមការគ្រប់គ្រងការចូលដំណើរការ, នយោបាយរក្សាទុក និងការលុបចោលដែលត្រូវការជាក់លាក់។
+
+## ៥. ធនធានមានស្រាប់ និង CI/CD
+
+ដើម្បីប្រើប្រាស់គម្រោង Foundry ម្តងទៀត សូមអនុវត្តតាម [សេចក្ដីណែនាំធនធានមានស្រាប់](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deploy_customization.md#use-existing-resources) របស់គំរូ។ ការកំណត់ `AZURE_EXISTING_AIPROJECT_RESOURCE_ID` ប្រែផ្លូវដាក់ចេញ; ក្នុងករណីនោះ គំរូមិនបង្កើត Application Insights ឬ AI Search សម្រាប់អ្នកឡើយ។ សូមផ្ទៀងផ្ទាត់អាស្រ័យភាព ការបែងចែកតួនាទី និងការដាក់ចេញម៉ូដែលជាការប្រកាសច្បាស់។
+
+ផ្នែក `pipeline.variables` គ្រប់គ្រងតម្លៃដែលផ្តល់ចូលទៅក្នុងបន្ទាត់បង្រួមដែលបានបង្កើត; វាមិនមែនឃ្លាំងសម្ងាត់និងមិនបង្កើតធនធាន Azure ឡើយ។ ត្រូវពេញចិត្តអត្តសញ្ញាណគ្រប់គ្រងក្នុងកម្មវិធី និង OIDC សម្រាប់ CI/CD ។ ឯកសារបរិយាកាស AZD ជាផ្ទឹមអត្ថបទធម្មតា ហើយមិនគួរត្រូវបានបញ្ជូល។
+
+AZD គាំទ្រការនាំចូលឯកសារ dotenv ដែលបានរៀបចំទុកជាក់លាក់នៅមូលដ្ឋាន៖
+
+```bash
+azd env set --file .env
+```
+
+ពិនិត្យមើលឯកសារនោះមុននាំចូល ហើយកុំបោះពុម្ភឯកសារតំបន់បរិយាកាសដែលមានសម្ងាត់នៅក្នុងធនាគារចែករំលែកឬកំណត់ត្រា CI។
+
+## ៦. ស្មារតីភាពរបស់អ្នក
+
+- សេវាកម្ម `azure.yaml` ណាមួយដែលដាក់ចេញកម្មវិធី?
+- ប៉ារ៉ាម៉ែត្រ អាគុយចិចចេញក្នុងផ្នែកអាគុយចិចណាមួយដែលអ្នកបានផ្លាស់ប្តូរតម្លៃ?
+- ការផ្លាស់ប្តូរអ្វីខ្លះដែលត្រូវការការផ្គត់ផ្គង់ ជាងតែការដាក់ចេញ?
+- តំបន់ និងការជាវដែលបានជ្រើសគាំទ្រម៉ូដែល និងគោត?
+- តួអង្គហាងស្រេចទាំងអស់ ហើយអ្នកអាចផ្ទៀងផ្ទាត់សកម្មភាពកម្មវិធីដែលបានដាក់ចេញ?
+
+បន្តទៅ [ផ្លាស់ប្តូរគំរូ](5-Customize-AI-Template.md)។
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-ឯកសារនេះត្រូវបានបកប្រែដោយប្រើសេវាកម្មបកប្រែដោយ AI [Co-op Translator](https://github.com/Azure/co-op-translator). ទោះយើងខិតខំសម្រាប់ភាពត្រឹមត្រូវ សូមយល់ថាការបកប្រែស្វ័យប្រវត្តិក៏អាចមានកំហុស ឬភាពមិនត្រឹមត្រូវ។ ឯកសារដើមនៅក្នុងភាសាដើមគួរត្រូវបានចាត់ទុកថាជាប្រភពដែលមានអាជ្ញាធរ។ សម្រាប់ព័ត៌មានសំខាន់ យើងសូមណែនាំឲ្យប្រើការបកប្រែដោយអ្នកជំនាញមនុស្ស។ យើងមិនទទួលខុសត្រូវចំពោះការយល់ច្រឡំ ឬការបកស្រាយខុសណាមួយដែលកើតឡើងពីការប្រើប្រាស់ការបកប្រែនេះឡើយ។
+**ការបដិសេធ**:
+ឯកសារនេះត្រូវបានបម្លែងភាសា ដោយប្រើសេវាបម្លែងភាសា AI [Co-op Translator](https://github.com/Azure/co-op-translator)។ ទោះយើងខ្ញុំមានក្តីប្រាថ្នាឱ្យបានច្បាស់លាស់ តែសូមយល់ដឹងថាការបម្លែងដោយស្វ័យប្រវត្តិក៏អាចមានកំហុសឬភាពមិនត្រឹមត្រូវ។ ឯកសារដើមជាភាសាទីតាំងគួរត្រូវបានគេប្រើជាប្រភពច្បាស់លាស់។ សម្រាប់ព័ត៌មានសំខាន់ៗ សូមណែនាំឱ្យប្រើប្រាស់ការប្រែដោយមនុស្សជំនាញ។ យើងខ្ញុំមិនទទួលខុសត្រូវចំពោះការយល់ច្រឡំ ឬការបកស្រាយខុសបន្ទាប់ពីការប្រើប្រាស់ការបម្លែងនេះនោះទេ។
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
