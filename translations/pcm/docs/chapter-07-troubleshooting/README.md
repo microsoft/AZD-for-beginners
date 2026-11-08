@@ -6,9 +6,9 @@
 
 ## Overview
 
-Dis chapter go help you sabi wetin cause wahala plus how to solve common kasala wen you dey work wit Azure Developer CLI. From deployment failure go reach AI kind problem dem.
+Dis chapter dey help you sabi and solve common wahala wen you dey use Azure Developer CLI. From deployment failure dem go AI-specific problem dem.
 
-> Validated against `azd 1.27.1` in July 2026.
+> Command guidance wey dem check well well with the released `azd 1.37.2` reference. Dem no run cloud deployments. Before you run command, change example resource names and IDs.
 
 ## Learning Objectives
 
@@ -24,9 +24,9 @@ If you finish dis chapter, you go fit:
 
 | # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [Common Issues](common-issues.md) | Frequently encountered problems | 30 min |
-| 2 | [Debugging Guide](debugging.md) | Step-by-step debugging strategies | 45 min |
-| 3 | [AI Troubleshooting](ai-troubleshooting.md) | AI-specific issues | 30 min |
+| 1 | [Common Issues](common-issues.md) | Problems wey dey happen often | 30 min |
+| 2 | [Debugging Guide](debugging.md) | Step-by-step way to debug | 45 min |
+| 3 | [AI Troubleshooting](ai-troubleshooting.md) | AI specific problem dem | 30 min |
 
 ---
 
@@ -34,13 +34,13 @@ If you finish dis chapter, you go fit:
 
 ### Authentication Issues
 ```bash
-# Na wetin dey needed for AZD waka
+# Required for AZD workflows
 azd auth login
 
-# No too necessary if you dey also use Azure CLI commands directly
+# Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
 ### Provisioning Failures
@@ -51,8 +51,9 @@ az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
 ### Resource Conflicts
+First, look the resource wey dey and the deployment wahala dem. No delete shared or production environment to fix naming wahala. If na **new disposable environment**, give am unique name:
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
@@ -60,9 +61,11 @@ azd up
 ### Quota Exceeded
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+Changing `AZURE_LOCATION` no go carry the current resource dem, e fit cause location wahala when you redeploy.
 
 ---
 
@@ -70,12 +73,12 @@ azd up
 
 | Error | Cause | Solution |
 |-------|-------|----------|
-| `AuthenticationError` | Not logged in | `azd auth login` |
-| `ResourceNotFound` | Missing resource | Check resource names |
-| `QuotaExceeded` | Subscription limits | Request quota increase |
+| `AuthenticationError` | No log in | `azd auth login` |
+| `ResourceNotFound` | Resource no dey | Check resource names |
+| `QuotaExceeded` | Subscription limits reach | Request for quota increase |
 | `InvalidTemplate` | Bicep syntax error | `az bicep build` |
-| `Conflict` | Resource exists | Use new name or delete |
-| `Forbidden` | Insufficient permissions | Check RBAC roles |
+| `Conflict` | Resource don dey | Use new name or delete am |
+| `Forbidden` | No get enough permission | Check RBAC roles |
 
 ---
 
@@ -83,12 +86,14 @@ azd up
 
 ```bash
 # Soft reset (keep resources, redeploy code)
-azd deploy --force
+azd deploy
 
-# Hard reset (delete everytin, start fresh)
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
+
+Hard reset go delete data and e fit change endpoints. Make you back up before and check the interactive deletion prompts. `--force --purge` good pass for disposable environment wen you want delete things wey no fit bring back.
 
 ---
 

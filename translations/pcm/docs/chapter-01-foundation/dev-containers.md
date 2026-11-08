@@ -6,37 +6,37 @@
 - **⬅️ Previous**: [Bring Your Own App](bring-your-own-app.md)
 - **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/README.md)
 
-> Validated against `azd 1.27.1` in July 2026.
+> Command and configuration review target: `azd 1.37.2` (November 2026). Container builds and Azure deployments were not executed as part of this review.
 
 ## Introduction
 
-Installing azd, di correct language runtime, Docker, and di Azure CLI for every machine na wahala—an e be di number-one reason why tutorial wey “work for my machine” no go work for someone else. One **dev container** dey solve dis one by describing your whole toolchain for inside one file. Anyone wey open di project for VS Code or GitHub Codespaces go get di exact same environment, wit azd don already install. Dis lesson go show you how to add one.
+Installing azd, the right language runtime, Docker, and the Azure CLI on every machine na wahala—and na di number one reason why tutorial wey "work for my machine" no go work for another person. A **dev container** dey solve dis by describing your whole toolchain inside one file. Anybody wey open di project for VS Code or GitHub Codespaces go get di exact same environment, with azd already install. Dis lesson go show you how to add one.
 
 ## Learning Goals
 
-By di end of dis lesson, you go:
-- Understand wetin dev container be and why e dey help wit azd
+By di end of dis lesson, you go fit:
+- Understand wetin dev container be and why e dey help with azd
 - Add one small `.devcontainer/devcontainer.json` to project
-- Include azd, di Azure CLI, and Docker through Dev Container *features*
+- Include azd, di Azure CLI, plus Docker through Dev Container *features*
 - Open di project for GitHub Codespaces or VS Code
 
 ## Learning Outcomes
 
-After you finish dis lesson, you go fit:
-- Write one `devcontainer.json` for azd project
-- Add azd and Azure tools without to install manually
+After you finish dis lesson, you go sabi:
+- Write `devcontainer.json` for azd project
+- Add azd and Azure tools without install am by hand
 - Run `azd up` from inside container or Codespace
 
 ---
 
-## Wetin Be Dev Container?
+## Wetin be Dev Container?
 
-Dev container na Docker-based development environment wey you define with `.devcontainer/devcontainer.json` file for your repo. When you open di project:
+Dev container na Docker-based development environment wey you define with `.devcontainer/devcontainer.json` file inside your repository. When you open di project:
 
-- **VS Code** (wit di Dev Containers extension) go build di container and attach to am.
-- **GitHub Codespaces** go build di same container for cloud and give you browser-based editor.
+- **VS Code** (wey get Dev Containers extension) dey build di container and e attach to am.
+- **GitHub Codespaces** dey build di same container for cloud and e give you browser-based editor.
 
-Either way, every contributor go get di same tools—no need to ask "you don install azd?"
+Either way, every person wey dey work on am go get the same tools—no more "you install azd?" wahala.
 
 ```mermaid
 graph LR
@@ -50,7 +50,7 @@ graph LR
 
 ## Step 1: Create di devcontainer File
 
-Create `.devcontainer/devcontainer.json` for di root of your project:
+Create `.devcontainer/devcontainer.json` for the root of your project:
 
 ```json
 {
@@ -58,7 +58,7 @@ Create `.devcontainer/devcontainer.json` for di root of your project:
   "image": "mcr.microsoft.com/devcontainers/base:bookworm",
   "features": {
     "ghcr.io/devcontainers/features/azure-cli:1": {},
-    "ghcr.io/azure/azure-dev/azd:latest": {},
+    "ghcr.io/azure/azure-dev/azd:0": { "version": "1.37.2" },
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
     "ghcr.io/devcontainers/features/node:1": {}
   },
@@ -75,23 +75,23 @@ Create `.devcontainer/devcontainer.json` for di root of your project:
 }
 ```
 
-Wetin each part dey do:
+Wetin every part dey do:
 
 | Key | Purpose |
 |-----|---------|
-| `image` | Di base OS for di container |
+| `image` | Na di base OS for di container |
 | `features` | Prebuilt installers—here: Azure CLI, **azd**, Docker, and Node.js |
-| `customizations.vscode.extensions` | Auto-install di azd and Bicep VS Code extensions |
-| `forwardPorts` | Make your app port dey accessible for your browser |
-| `postCreateCommand` | Run once after container build (here, na to check say everytin dey okay) |
+| `customizations.vscode.extensions` | E install azd and Bicep VS Code extensions automatic |
+| `forwardPorts` | E open your app port to your browser |
+| `postCreateCommand` | E run one time after container finish build (here na sanity check) |
 
-> Di `ghcr.io/azure/azure-dev/azd:latest` feature na di official way to get azd inside container. You fit pin one specific version (example `azd:1.27.1`) if you want make e repeat exactly same way.
+> Di feature version (`azd:0`) and di CLI version wey dey install no be di same. Make you set di feature's `version` option to `"1.37.2"` if you wan pin di CLI version; no use CLI version as the feature tag.
 
 ---
 
-## Step 2: Match di Feature to Your App Language
+## Step 2: Match Di Feature To Your App Language
 
-Change di `node` feature to wetin your app dey use:
+Swap di `node` feature for wetin your app dey use:
 
 ```jsonc
 // Python project
@@ -107,51 +107,51 @@ Change di `node` feature to wetin your app dey use:
 "ghcr.io/devcontainers/features/go:1": {}
 ```
 
-Make sure you keep `docker-in-docker` if your `host` na `containerapp`, `aks`, or anything wey dey build container image—azd need Docker to build and push images.
+Make sure you keep `docker-in-docker` if you dey build images local. One configured remote ACR build (`docker.remoteBuild: true`) fit be option; but host type alone no always mean say you need local Docker.
 
 ---
 
 ## Step 3: Open Am
 
-**For VS Code:**
+**Inside VS Code:**
 1. Install **Dev Containers** extension.
-2. Open di project folder.
-3. Click **Reopen in Container** when e ask you (or run *Dev Containers: Reopen in Container*).
+2. Open your project folder.
+3. Click **Reopen in Container** when di prompt show (or run *Dev Containers: Reopen in Container*).
 
-**For GitHub Codespaces:**
+**Inside GitHub Codespaces:**
 1. Push di repo go GitHub.
 2. Click **Code → Codespaces → Create codespace on main**.
-3. Wait make container build finish—azd go ready for terminal.
+3. Wait make di container build—azd go ready for terminal.
 
 ---
 
-## Step 4: Deploy From Inside Container
+## Step 4: Deploy Inside di Container
 
-Di container get azd wey don already install, so di normal workflow go just work:
+Di container don get azd preinstalled, so di normal workflow go just work:
 
 ```bash
-azd auth login --use-device-code   # device code dey handy inside Codespaces
+azd auth login --use-device-code   # device code is handy inside Codespaces
 azd up
 ```
 
-> **Why `--use-device-code`?** For remote container or Codespace, no local browser dey to redirect you, so device-code login na di sure way. You go paste one code for browser tab to finish sign-in.
+> **Why `--use-device-code`?** Inside remote container or Codespace no get local browser wey fit redirect, so device-code login na di sure way. You go put code for browser tab to finish sign-in.
 
 ---
 
-## Common Pitfalls
+## Common Wahalas
 
-| Pitfall | How to Fix am |
-|---------|-----|
+| Wahala | How to Fix am |
+|---------|------------|
 | `azd up` no fit build image | Add di `docker-in-docker` feature |
-| Browser login dey hang for Codespaces | Use `azd auth login --use-device-code` |
-| Tools different between teammates | Pin feature versions (e.g. `azd:1.27.1`) |
-| App no fit reach for browser | Add di port to `forwardPorts` |
+| Browser login hang for Codespaces | Use `azd auth login --use-device-code` |
+| Tools different between teammates | Pin di CLI through di azd feature's `version` option and pin language runtimes |
+| App no dey reach inside browser | Add di port to `forwardPorts` |
 
 ---
 
 ## Summary
 
-- Dev container go make your azd toolchain fit repeat for everybody.
+- Dev container go make your azd toolchain dey reproducible for everybody.
 - Add azd, di Azure CLI, and Docker through Dev Container *features*.
 - Match di language feature to your app and keep `docker-in-docker` for container hosts.
 - Use device-code login when you dey run inside Codespaces.

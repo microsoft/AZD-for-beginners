@@ -1,427 +1,440 @@
-# Common Wahala & How to Solve Dem
+# Komon Wahala dem and How to Solve am
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 7 - Troubleshooting & Debugging
-- **⬅️ Previous Chapter**: [Chapter 6: Pre-flight Checks](../chapter-06-pre-deployment/preflight-checks.md)
+**Chapte Navigashion:**
+- **📚 Kurs Home**: [AZD For Beginners](../../README.md)
+- **📖 Dis Chapte**: Chapte 7 - Troubleshooting & Debugging
+- **⬅️ Previous Chapte**: [Chapte 6: Pre-flight Checks](../chapter-06-pre-deployment/preflight-checks.md)
 - **➡️ Next**: [Debugging Guide](debugging.md)
-- **🚀 Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
+- **🚀 Next Chapte**: [Chapte 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
 
-## Introduction
+## Introdakshon
 
-Dis full troubleshooting guide dey cover di common wahala wey people dey face wen dem dey use Azure Developer CLI. Learn how to diagnose, troubleshoot, and fix common problems like authentication, deployment, infrastructure provisioning, and app configuration. Every problem get how e show, wetin cause am, and step-by-step way to fix am.
+Dis beta guide for troubleshooting cover di most komon wahala wey person fit face wen e dey use Azure Developer CLI. Learn how to diagnose, troubleshoot, and solve the usual problems wey get to do with authentication, deployment, infrastructure provisioning, and how app configuration take be. Each wahala get di detailed signs, root causes, and step-by-step way to solve am.
 
-## Learning Goals
+## Wetin You Go Learn
 
-After you finish dis guide, you go:
-- Master how to diagnose Azure Developer CLI wahala
-- Understand common authentication and permission gbege and how to fix dem
-- Solve deployment failures, infrastructure provisioning errors, and configuration wahala
-- Put proactive monitoring and debugging strategies for place
-- Use systematic troubleshooting methods for complex problems
-- Configure proper logging and monitoring to prevent future wahala
+As you finish dis guide, you go fit:
+- Master diagnostic methods for Azure Developer CLI wahala
+- Understand common wahala about authentication and permission and how to solve dem
+- Solve deployment failure, infrastructure provisioning mistakes, and configuration wahala
+- Use better monitoring and debugging strategies
+- Apply proper troubleshooting methods for wahala wey hard well-well
+- Set correct logging and monitoring to prevent future wahala dem
 
-## Learning Outcomes
+## Wetin You Go Fit Do After
 
 When you don finish, you go fit:
-- Diagnose Azure Developer CLI problems using di tools wey dey build-in
-- Solve authentication, subscription, and permission yawa on your own
-- Troubleshoot deployment failures and infrastructure provisioning errors well
-- Debug application configuration problems and environment-specific gbege
-- Implement monitoring and alerting to catch potential problems early
-- Follow best practices for logging, debugging, and resolving problems
+- Diagnose Azure Developer CLI wahala using the tools wey dey inside
+- Solve authentication, subscription, and permission wahala by yourself
+- Troubleshoot deployment failure and infrastructure provisioning wahala well
+- Debug app configuration wahala and environment-specific problems
+- Use monitoring and alerting to kpeme for possible future wahala
+- Apply correct way for logging, debugging, and solving wahala workflow
 
 ## Quick Diagnostics
 
-Before you waka into specific problems, run these commands make you gather diagnostic information:
+> Change example names/IDs to your environment ones. Bash, Bicep, JavaScript, and parameter-file bits dey label separate below; dem no be one script wey you fit run together. Check any wahala wey fit destroy data and hide secrets before you share diagnostics. `azd monitor --logs` go open browser; e no dey show terminal logs.
+
+Before you start to check specific wahala, run these commands to gather info:
 
 ```bash
-# Check azd version and whether e dey healthy
+# Check azd version and health
 azd version
 azd config show
 
-# Confirm say Azure authentication dey valid
+# Verify Azure authentication
 az account show
 az account list
 
-# Check di current environment
+# Check current environment
 azd env list
 azd env get-values
 
-# Turn on debug logging
-export AZD_DEBUG=true
+# Enable debug logging for the command being investigated
 azd <command> --debug
 ```
 
-## Authentication Issues
+## Wahala for Authentication
 
-### Problem: "Failed to get access token"
-**How e dey show:**
-- `azd up` dey fail with authentication errors
+### Wahala: "No fit get access token"
+**Signs:**
+- `azd up` dey fail wit authentication errors
 - Commands dey return "unauthorized" or "access denied"
 
-**How to fix am:**
+**How to Solve am:**
 ```bash
-# 1. Sign in again wit Azure CLI
+# 1. Authenticate azd separately (Azure CLI login alone may not authenticate azd)
+azd auth login
+azd auth login --check-status --output json
+
+# 2. Authenticate Azure CLI when using az commands
 az login
 az account show
 
-# 2. Remove di cached credentials
+# 2. Clear cached credentials
 az account clear
 az login
 
-# 3. Use di device code flow (for machines wey no get screen)
+# 3. Use device code flow (for headless systems)
 az login --use-device-code
 
-# 4. Set di specific subscription
+# 4. Set explicit subscription
 az account set --subscription "your-subscription-id"
-azd config set defaults.subscription "your-subscription-id"
+azd env set AZURE_SUBSCRIPTION_ID "your-subscription-id"
 ```
 
-### Problem: "Insufficient privileges" during deployment
-**How e dey show:**
-- Deployment dey fail with permission errors
-- No fit create certain Azure resources
+### Wahala: "You no get enough rights" for deployment
+**Signs:**
+- Deployment dey fail wit permission errors
+- E no fit create some Azure resources
 
-**How to fix am:**
+**How to Solve am:**
 ```bash
-# 1. Make you check di roles wey dem assign you for Azure
+# 1. Check your Azure role assignments
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# 2. Make sure say you get di roles wey dem require
-# - Contributor (to fit create resources)
-# - User Access Administrator (to fit assign roles)
+# 2. Ensure you have required roles
+# - Contributor (for resource creation)
+# - User Access Administrator (for role assignments)
 
-# 3. Make you contact your Azure administrator to get di correct permissions
+# 3. Contact your Azure administrator for proper permissions
 ```
 
-### Problem: Multi-tenant authentication problems
-**How to fix am:**
+### Wahala: Multi-tenant authentication wahala
+**How to Solve am:**
 ```bash
-# 1. Log in wit particular tenant
+# 1. Login with specific tenant
 az login --tenant "your-tenant-id"
 
-# 2. Put di tenant for configuration
-azd config set auth.tenantId "your-tenant-id"
+# 2. Authenticate azd with that tenant too
+azd auth login --tenant-id "your-tenant-id"
 
-# 3. Clear tenant cache if you dey switch tenants
+# 3. Clear tenant cache if switching tenants
 az account clear
 ```
 
-## 🏗️ Infrastructure Provisioning Errors
+## 🏗️ Infrastructure Provisioning Wahala
 
-### Problem: Resource name conflicts
-**How e dey show:**
+### Wahala: Resource name conflicts
+**Signs:**
 - "The resource name already exists" errors
-- Deployment dey fail during resource creation
+- Deployment dey fail when e wan create resource
 
-**How to fix am:**
-```bash
-# 1. Make resource names dem unique wit tokens
-# For your Bicep template:
+**How to Solve am:**
+```bicep
+// 1. Fragment inside your Bicep template
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
+// Inside a resource declaration:
 name: '${applicationName}-${resourceToken}'
+```
 
-# 2. Change di environment name
+```bash
+# 2. Change environment name
 azd env new my-app-dev-$(whoami)-$(date +%s)
 
-# 3. Clean up di existing resources
-azd down --force --purge
+# 3. Delete ONLY a disposable environment after inspecting it and backing up data
+azd down
 ```
 
-### Problem: Location/Region not available
-**How e dey show:**
+### Wahala: Location/Region no dey available
+**Signs:**
 - "The location 'xyz' is not available for resource type"
-- Certain SKUs no dey for di selected region
+- Some SKUs no dey for the selected region
 
-**How to fix am:**
+**How to Solve am:**
 ```bash
-# 1. Check di locations wey dey available for di kain resource dem
+# 1. Check available locations for resource types
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. Use regions wey dey commonly available
-azd config set defaults.location eastus2
-# or
+# 2. For a NEW environment choose a region supported by all required services
 azd env set AZURE_LOCATION eastus2
 
-# 3. Check if service dey available for each region
-# Waka go: https://azure.microsoft.com/global-infrastructure/services/
+# 3. Check service availability by region
+# Visit: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
-### Problem: Quota exceeded errors
-**How e dey show:**
+Changing the location variable no go move existing resources. Resource group or resource wey dey already fit reject location change; make you use separate environment for regional redeployment.
+
+### Wahala: Quota pass level errors
+**Signs:**
 - "Quota exceeded for resource type"
 - "Maximum number of resources reached"
 
-**How to fix am:**
+**How to Solve am:**
 ```bash
-# 1. Check how much of the quota you don use
+# 1. Check current quota usage
 az vm list-usage --location eastus2 -o table
 
-# 2. Request make dem increase the quota through the Azure portal
-# Waka go: Subscriptions > Usage + quotas
+# 2. Request quota increase through Azure portal
+# Go to: Subscriptions > Usage + quotas
 
-# 3. Make you use smaller SKUs for development
-# Inside main.parameters.json:
+```
+
+For development, pick smaller SKU wey dem support inside `infra/main.parameters.json`:
+
+```json
 {
   "appServiceSku": {
-    "value": "B1"  // Instead of P1v3
+    "value": "B1"
   }
 }
+```
 
-# 4. Remove resources we no dey use
+```bash
+# 4. Clean up unused resources
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
-### Problem: Bicep template errors
-**How e dey show:**
-- Template validation dey fail
+### Wahala: Bicep template errors
+**Signs:**
+- Template validation failure
 - Syntax errors for Bicep files
 
-**How to fix am:**
+**How to Solve am:**
 ```bash
-# 1. Make sure say Bicep syntax dey correct
+# 1. Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# 2. Use Bicep linter make e check di code
+# 2. Use Bicep linter
 az bicep lint --file infra/main.bicep
 
-# 3. Check di parameter file syntax
+# 3. Check parameter file syntax
 cat infra/main.parameters.json | jq '.'
 
-# 4. Preview wetin deployment go change
+# 4. Preview deployment changes
 azd provision --preview
 ```
 
 ## 🚀 Deployment Failures
 
-### Problem: Build failures
-**How e dey show:**
-- App no fit build during deployment
-- Package installation errors
+### Wahala: Build failures
+**Signs:**
+- Application no fit build during deployment
+- Package installation problems
 
-**How to fix am:**
+**How to Solve am:**
 ```bash
-# 1. Make sure say build output dey with debug flag
-azd deploy --service web --debug
+# 1. Check build output with debug flag
+azd deploy web --debug
 
-# 2. Check di deployed service status
+# 2. View deployed service status
 azd show
 
-# 3. Test di build locally
+# 3. Test build locally
 cd src/web
 npm install
 npm run build
 
-# 3. Check if Node.js/Python versions dey compatible
-node --version  # E suppose match di settings wey dey for azure.yaml
+# 3. Check Node.js/Python version compatibility
+node --version  # Should match azure.yaml settings
 python --version
 
-# 4. Clear di build cache
-rm -rf node_modules package-lock.json
-npm install
+# 4. Clear build cache
+# Preserve the committed dependency lock for reproducibility
+npm ci
 
-# 5. Check Dockerfile if you dey use containers
+# 5. Check Dockerfile if using containers
 docker build -t test-image .
 docker run --rm test-image
 ```
 
-### Problem: Container deployment failures
-**How e dey show:**
+### Wahala: Container deployment failures
+**Signs:**
 - Container apps no dey start
 - Image pull errors
 
-**How to fix am:**
+**How to Solve am:**
 ```bash
-# 1. Try build Docker for local machine
+# 1. Test Docker build locally
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Use Azure CLI check container logs
+# 2. Check container logs using Azure CLI
 az containerapp logs show --name my-app --resource-group my-rg --follow
 
-# 3. Watch the app with azd
+# 3. Monitor application through azd
 azd monitor --logs
 
-# 3. Make sure say you get access to the container registry
+# 3. Verify container registry access
 az acr login --name myregistry
 
-# 4. Make sure say container app configuration correct
+# 4. Check container app configuration
 az containerapp show --name my-app --resource-group my-rg
 ```
 
-### Problem: Database connection failures
-**How e dey show:**
+### Wahala: Database connection failures
+**Signs:**
 - App no fit connect to database
 - Connection timeout errors
 
-**How to fix am:**
+**How to Solve am:**
 ```bash
-# 1. Check di database firewall rule dem
+# 1. Check database firewall rules
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
-# 2. Test if di app fit connect
-# Add to your app temporarily: Add am to your app for now:
+# 2. Test connectivity from application
+# Add to your app temporarily:
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
-# 3. Make sure say di connection string format correct
+# 3. Verify connection string format
 azd env get-values | grep DATABASE
 
-# 4. Check if di database server dey up
+# 4. Check database server status
 az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```
 
-## 🔧 Configuration Issues
+## 🔧 Configuration Wahala
 
-### Problem: Environment variables not working
-**How e dey show:**
-- App no dey read configuration values
-- Environment variables dey show empty
+### Wahala: Environment variables no dey work
+**Signs:**
+- App no fit read configuration values
+- Environment variables dey show as empty
 
-**How to fix am:**
+**How to Solve am:**
 ```bash
-# 1. Confirm say environment variables don set
+# 1. Verify environment variables are set
 azd env get-values
-azd env get DATABASE_URL
+azd env get-value DATABASE_URL
 
-# 2. Check di variable names wey dey for azure.yaml
-cat azure.yaml | grep -A 5 env:
+# 2. Check how your Bicep/template maps values into the deployed app.
+# azd env set updates local environment values; it does not directly update runtime settings.
 
-# 3. Restart di application
-azd deploy --service web
+# 3. Restart the application
+azd deploy web
 
-# 4. Check di app service configuration
+# 4. Check app service configuration
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
-### Problem: SSL/TLS certificate problems
-**How e dey show:**
+### Wahala: SSL/TLS certificate problems
+**Signs:**
 - HTTPS no dey work
 - Certificate validation errors
 
-**How to fix am:**
+**How to Solve am:**
 ```bash
-# 1. Make sure say SSL certificate still dey valid
+# 1. Check SSL certificate status
 az webapp config ssl list --resource-group myrg
 
-# 2. Make na HTTPS only
+# 2. Enable HTTPS only
 az webapp update --name myapp --resource-group myrg --https-only true
 
-# 3. Add custom domain if e necessary
+# 3. Add custom domain (if needed)
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
-### Problem: CORS configuration problems
-**How e dey show:**
+### Wahala: CORS configuration problems
+**Signs:**
 - Frontend no fit call API
-- Cross-origin request dey block
+- Cross-origin request block
 
-**How to fix am:**
+**How to Solve am:**
 ```bash
-# 1. Make CORS dey work for App Service
+# 1. Configure CORS for App Service
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# 2. Update API make e fit handle CORS
-# Inside Express.js:
+```
+
+2. Update your current Express app (wey `cors` dey import):
+
+```javascript
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
+```
 
-# 3. Check say e dey run for correct URLs
+```bash
+# 3. Check if running on correct URLs
 azd show
 ```
 
-## 🌍 Environment Management Issues
+## 🌍 Environment Management Wahala
 
-### Problem: Environment switching problems
-**How e dey show:**
-- Wrong environment dey used
-- Configuration no dey switch properly
+### Wahala: Environment switching wahala
+**Signs:**
+- Wrong environment dey use
+- Configuration no dey switch well
 
-**How to fix am:**
+**How to Solve am:**
 ```bash
-# 1. Show all environment dem
+# 1. List all environments
 azd env list
 
-# 2. Pick the environment for sure
+# 2. Explicitly select environment
 azd env select production
 
-# 3. Confirm the environment wey dey now
+# 3. Verify current environment
 azd env list
 
-# 4. Make new environment if e don spoil
+# 4. Create new environment if corrupted
 azd env new production-new
 azd env select production-new
 ```
 
-### Problem: Environment corruption
-**How e dey show:**
+### Wahala: Environment spoil
+**Signs:**
 - Environment dey show invalid state
 - Resources no match configuration
 
-**How to fix am:**
+**How to Solve am:**
 ```bash
-# 1. Refresh di environment state
+# 1. Refresh environment state
 azd env refresh
 
-# 2. Reset di environment configuration
+# 2. Reset environment configuration
 azd env new production-reset
-# Copy di required environment variables
+# Copy over required environment variables
 azd env set DATABASE_URL "your-value"
 
-# 3. Import di existing resources (if e fit)
-# Update .azure/production/config.json by hand with di resource IDs
+# 3. azd env refresh reads outputs of a previous deployment; it does not
+# import arbitrary existing resources or reconcile template drift.
+# To adopt resources, use the template's documented existing-resource parameters.
 ```
 
-## 🔍 Performance Issues
+## 🔍 Performance Wahala
 
-### Problem: Slow deployment times
-**How e dey show:**
-- Deployments dey take too long
-- Timeouts during deployment
+### Wahala: Slow deployment time
+**Signs:**
+- Deployment dey take too long
+- Timeout dey happen during deployment
 
-**How to fix am:**
+**How to Solve am:**
 ```bash
-# 1. Deploy di specific services make e faster to test changes
-azd deploy --service web
-azd deploy --service api
+# 1. Deploy specific services for faster iteration
+azd deploy web
+azd deploy api
 
-# 2. Use code-only deployment when infrastructure no change
-azd deploy  # Faster pass azd up
+# 2. Use code-only deployment when infrastructure unchanged
+azd deploy  # Faster than azd up
 
-# 3. Make di build process more efficient
-# Inside package.json:
-"scripts": {
-  "build": "webpack --mode=production --optimize-minimize"
-}
+# 3. Optimize the project's actual build script and image layers.
 
-# 4. Check di resource locations (make dem dey for same region)
-azd config set defaults.location eastus2
+# 4. Check resource locations (use same region)
+# Do not change AZURE_LOCATION to fix the latency of an existing deployment.
 ```
 
-### Problem: Application performance problems
-**How e dey show:**
-- Slow response times
-- High resource usage
+### Wahala: Application performance wahala
+**Signs:**
+- Response dey slow
+- Resources dey use plenty
 
-**How to fix am:**
+**How to Solve am:**
 ```bash
-# 1. Increase di resources
-# Update di SKU for main.parameters.json:
-"appServiceSku": {
-  "value": "S2"  // Scale up from B1
-}
+# 1. Scale up resources
+# Update the SKU parameter in infra/main.parameters.json, then review and
+# provision infrastructure changes. azd deploy alone does not apply SKU changes.
+azd provision --preview
 
-# 2. Enable Application Insights make e dey monitor
+# 2. Enable Application Insights monitoring
 azd monitor --overview
 
-# 3. Check di application logs for Azure
+# 3. Check application logs in Azure
 az webapp log tail --name myapp --resource-group myrg
-# or if na Container Apps:
+# or for Container Apps:
 az containerapp logs show --name myapp --resource-group myrg --follow
 
-# 4. Set up caching
+# 4. Implement caching
 # Add Redis cache to your infrastructure
 ```
 
@@ -429,31 +442,31 @@ az containerapp logs show --name myapp --resource-group myrg --follow
 
 ### Debug Commands
 ```bash
-# Debug everytin well
-export AZD_DEBUG=true
-azd up --debug 2>&1 | tee debug.log
+# Comprehensive debugging
+# Only rerun a mutating command when retrying is appropriate.
+azd show --debug
 
-# Check which azd version dey
+# Check azd version
 azd version
 
-# See di current configuration
+# View current configuration
 azd config show
 
-# Test if connection dey
+# Test connectivity
 curl -v https://myapp.azurewebsites.net/health
 ```
 
 ### Log Analysis
 ```bash
-# App logs through di Azure CLI
+# Application logs via Azure CLI
 az webapp log tail --name myapp --resource-group myrg
 
-# Monitor di app wit azd
+# Monitor application with azd
 azd monitor --logs
 azd monitor --live
 
-# Logs for Azure resource dem
-az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
+# Azure resource logs
+az monitor activity-log list --resource-group myrg --offset 1h --max-events 50
 
 # Container logs (for Container Apps)
 az containerapp logs show --name myapp --resource-group myrg --follow
@@ -461,47 +474,47 @@ az containerapp logs show --name myapp --resource-group myrg --follow
 
 ### Resource Investigation
 ```bash
-# Make list of all resources
+# List all resources
 az resource list --resource-group myrg -o table
 
-# Check di status of resources
+# Check resource status
 az webapp show --name myapp --resource-group myrg --query state
 
-# Run network check
+# Network diagnostics
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
-## 🆘 Getting Additional Help
+## 🆘 How to Get More Help
 
-### When to Escalate
-- Authentication wahala still dey after you try all solutions
-- Infrastructure problems wey involve Azure services
-- Billing or subscription-related gbege
-- Security concerns or incidents
+### When to Take Am Higher
+- Authentication wahala still dey after you try all solution dem
+- Infrastructure problems with Azure services
+- Billing or subscription wahala dem
+- Security wahala or incidents
 
 ### Support Channels
 ```bash
-# 1. Make you check di Azure Service Health
+# 1. Check Azure Service Health
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
-# 2. Make ticket for Azure support
-# Waka go: https://portal.azure.com -> Help + support
+# 2. Create Azure support ticket
+# Go to: https://portal.azure.com -> Help + support
 
-# 3. Resources wey di community get
-# - Stack Overflow: di 'azure-developer-cli' tag
+# 3. Community resources
+# - Stack Overflow: azure-developer-cli tag
 # - GitHub Issues: https://github.com/Azure/azure-dev/issues
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
-### Information to Gather
+### Wetin to Collect Gather
 Before you contact support, collect:
 - `azd version` output
 - `azd config show` output
-- `azd show` output (current deployment status)
-- Error messages (full text)
-- Steps to reproduce the problem
-- Environment details (`azd env get-values`)
-- Timeline of when di problem start
+- `azd show` output (deployment wey you get now)
+- Full error messages
+- Steps wey you take to cause the wahala
+- Environment details wey you hide sensitive info (no share raw `azd env get-values`, e fit get secrets)
+- Timeline of when wahala start
 
 ### Log Collection Script
 ```bash
@@ -518,7 +531,7 @@ az --version >> debug-logs/system-info.txt
 echo "Configuration:" > debug-logs/config.txt
 azd config show >> debug-logs/config.txt
 azd env list >> debug-logs/config.txt
-azd env get-values >> debug-logs/config.txt
+# Do not collect environment values automatically: they can contain credentials.
 
 echo "Current deployment status:" > debug-logs/status.txt
 azd show >> debug-logs/status.txt
@@ -526,69 +539,71 @@ azd show >> debug-logs/status.txt
 echo "Debug information collected in debug-logs/"
 ```
 
-## 📊 Issue Prevention
+## 📊 How to Prevent Wahala
 
 ### Pre-deployment Checklist
 ```bash
-# 1. Make sure say authentication dey valid
+# 1. Validate authentication
 az account show
 
-# 2. Check quota dem and limit dem
+# 2. Check quotas and limits
 az vm list-usage --location eastus2
 
-# 3. Make sure template dem dey valid
+# 3. Validate templates
 az bicep build --file infra/main.bicep
 
-# 4. First test am locally
+# 4. Test locally first
 npm run build
 npm run test
 
-# 5. Use dry-run deployment dem
+# 5. Use dry-run deployments
 azd provision --preview
 ```
 
 ### Monitoring Setup
-```bash
-# Make Application Insights dey on
-# Add am for main.bicep:
+```bicep
+// Illustrative fragment, not a complete resource definition:
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   // ... configuration
 }
+```
 
-# Arrange di alerts
+```bash
+# Example App Service PLAN CPU alert (not a site metric)
 az monitor metrics alert create \
   --name "High CPU Usage" \
   --resource-group myrg \
-  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/sites/myapp \
-  --condition "avg Percentage CPU > 80"
+  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/serverfarms/myplan \
+  --condition "avg CpuPercentage > 80"
 ```
 
 ### Regular Maintenance
 ```bash
-# Every week check di health
+# Weekly health checks (project-specific script you must implement)
 ./scripts/health-check.sh
 
-# Every month check di cost
-az consumption usage list --billing-period-name 202401
+# Monthly cost review
+# Review current Cost Management data in the portal; Consumption API support
+# depends on your billing agreement.
 
-# Every three months check di security
-az security assessment list --resource-group myrg
+# Quarterly security review
+az security assessment list
 ```
 
-## Related Resources
+## Resources Wey Still Fit Help You
 
-- [Debugging Guide](debugging.md) - Advanced debugging techniques
+- [Debugging Guide](debugging.md) - Advanced debugging skills
 - [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - Infrastructure troubleshooting
-- [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md) - Resource planning guidance
-- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - Service tier recommendations
+- [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md) - Guidance for resource planning
+- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - Service tier advice
 
 ---
 
-**Tip**: Keep dis guide bookmarked and refer to am anytime you meet wahala. Most problems don don happen before and dem get known solutions!
+**Tip**: Keep dis guide bookmarked and check am anytime you get wahala. Most wahala dem don happen before and solution dem dey ground already!
 
 ---
 
-**Navigation**
+**Navigashion**
 - **Previous Lesson**: [Provisioning Resources](../chapter-04-infrastructure/provisioning.md)
 - **Next Lesson**: [Debugging Guide](debugging.md)
 
@@ -596,5 +611,5 @@ az security assessment list --resource-group myrg
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Dis document don translate with AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even tho we dey try make am accurate, abeg note say automated translations fit get errors or inaccuracies. The original document for im native language suppose be the authoritative source. For critical information, make professional human translation do am. We no go liable for any misunderstandings or misinterpretations wey fit arise from the use of this translation.
+Dis document don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even tho we dey try make am correct, abeg make you know say automated translation fit get errors or mistakes. Di original document for dia own language na im be di correct source. For important info, make person wey sabi human translation do am. We no go responsible for any misunderstanding or wrong understanding wey fit happen because of dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

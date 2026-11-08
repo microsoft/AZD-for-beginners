@@ -1,78 +1,80 @@
-# SKU Selection Guide - Chooz di Right Azure Service Tiers
+# SKU Selection Guide - How to Choose Correct Azure Service Tiers
 
-**Chapta Navigation:**
+**Chapter Navigation:**
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Di Current Chapta**: Chapter 6 - Pre-Deployment Validation & Planning
+- **📖 Current Chapter**: Chapter 6 - Pre-Deployment Validation & Planning
 - **⬅️ Previous**: [Capacity Planning](capacity-planning.md)
 - **➡️ Next**: [Pre-flight Checks](preflight-checks.md)
-- **🚀 Next Chapta**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/common-issues.md)
+- **🚀 Next Chapter**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/common-issues.md)
 
-## Introdokshon
+## Introduction
 
-Dis full guide go help you choose di best Azure service SKUs (Stock Keeping Units) for different environments, workloads, and requirements. You go learn how to check performance needs, cost mata, and how e go scale make you fit pick di correct service tiers for your Azure Developer CLI deployments.
+Dis guide wey full ground go help you pick correct Azure service SKUs (Stock Keeping Units) for different environment dem, workload dem, and wetin you need. You go learn how to check performance wetin dem need, cost wey e go involve, plus scalability wey dem require to select the best service tiers wey go fit for your Azure Developer CLI deployments.
 
 ## Learning Goals
 
-By finishing dis guide, you go:
-- Sabi Azure SKU concepts, pricing models, and di difference between features
-- Master strategy wey you go use pick SKUs for development, staging, and production
-- Check workload requirements and match dem to correct service tiers
-- Do cost optimization through smart SKU selection
-- Run performance testing and validate your SKU choices
+If you finish dis guide, you go fit:
+- Understand Azure SKU concepts, pricing models, and feature differences
+- Master environment-specific SKU selection strategies for development, staging, and production
+- Analyze workload requirements and match them to appropriate service tiers
+- Implement cost optimization strategies through intelligent SKU selection
+- Apply performance testing and validation techniques for SKU choices
 - Configure automated SKU recommendations and monitoring
 
 ## Learning Outcomes
 
-After you don finish, you go fit:
-- Choose correct Azure service SKUs based on workload requirements and constraints
+When you don finish, you fit:
+- Select appropriate Azure service SKUs based on workload requirements and constraints
 - Design cost-effective multi-environment architectures with proper tier selection
 - Implement performance benchmarking and validation for SKU choices
-- Build automated tools for SKU recommendation and cost optimization
-- Plan SKU migrations and scaling strategies as requirements change
+- Create automated tools for SKU recommendation and cost optimization
+- Plan SKU migrations and scaling strategies for changing requirements
 - Apply Azure Well-Architected Framework principles to service tier selection
 
 ## Table of Contents
 
-- [Understanding SKUs](../../../../docs/chapter-06-pre-deployment)
-- [Environment-Based Selection](../../../../docs/chapter-06-pre-deployment)
-- [Service-Specific Guidelines](../../../../docs/chapter-06-pre-deployment)
-- [Cost Optimization Strategies](../../../../docs/chapter-06-pre-deployment)
-- [Performance Considerations](../../../../docs/chapter-06-pre-deployment)
-- [Quick Reference Tables](../../../../docs/chapter-06-pre-deployment)
-- [Validation Tools](../../../../docs/chapter-06-pre-deployment)
+- [Understanding SKUs](#understanding-skus)
+- [Environment-Based Selection](#environment-based-selection)
+- [Service-Specific Guidelines](#service-specific-guidelines)
+- [Cost Optimization Strategies](#cost-optimization-strategies)
+- [Performance Considerations](#performance-considerations)
+- [Quick Reference Tables](#quick-reference-tables)
+- [Validation Tools](#validation-tools)
 
 ---
 
 ## Understanding SKUs
 
+> **Example scope:** YAML SKU maps and performance configurations below are design notes, not an `azure.yaml` schema or a load-tool configuration. Bicep blocks are alternatives/fragments: declare their parameters and parent resources, use unique symbolic names when combining them, and wire modules into a working project. Prices, limits, and region/SKU availability must be checked for your subscription before deployment.
+
 ### Wetin be SKUs?
 
-SKUs (Stock Keeping Units) na di different service tiers and performance levels for Azure resources. Each SKU get different:
+SKUs (Stock Keeping Units) na the different service tiers and performance levels wey dey for Azure resources. Every SKU dey offer different:
 
 - **Performance characteristics** (CPU, memory, throughput)
 - **Feature availability** (scaling options, SLA levels)
 - **Pricing models** (consumption-based, reserved capacity)
-- **Regional availability** (no be all SKUs dey for all regions)
+- **Regional availability** (not all SKUs available in all regions)
 
-### Key Factors wey dey affect SKU Selection
+### Important Ting Dem Wey You Go Consider When You Wan Choose SKU
 
 1. **Workload Requirements**
-   - Wetin traffic/load go be
+   - Expected traffic/load patterns
    - Performance requirements (CPU, memory, I/O)
-   - Storage needs and how dem go access am
+   - Storage needs and access patterns
 
 2. **Environment Type**
-   - Development/testing vs production
+   - Development/testing vs. production
    - Availability requirements
    - Security and compliance needs
 
 3. **Budget Constraints**
-   - Initial cost vs operational cost
+   - Initial costs vs. operational costs
    - Reserved capacity discounts
-   - How auto-scaling go affect cost
+   - Auto-scaling cost implications
 
 4. **Growth Projections**
-   - How e go need to scale
+   - Scalability requirements
    - Future feature needs
    - Migration complexity
 
@@ -92,16 +94,16 @@ skus:
   app_service: "F1"          # Free tier
   sql_database: "Basic"       # Basic tier, 5 DTU
   storage: "Standard_LRS"     # Locally redundant
-  cosmos_db: "Free"          # Free tier (400 RU/s)
+  cosmos_db: "Standard"      # Free tier is an account opt-in, not a SKU
   key_vault: "Standard"      # Standard pricing tier
-  application_insights: "Free" # First 5GB free
+  application_insights: "workspace-based" # Consumption billing; no Free SKU
 ```
 
 #### Characteristics
 - **App Service**: F1 (Free) or B1 (Basic) for simple testing
 - **Databases**: Basic tier with minimal resources
 - **Storage**: Standard with local redundancy only
-- **Compute**: Shared resources dey okay
+- **Compute**: Shared resources acceptable
 - **Networking**: Basic configurations
 
 ### Staging/Testing Environment
@@ -138,7 +140,7 @@ environment: production
 skus:
   app_service: "P1V3"        # Premium v3 tier
   sql_database: "P2"         # Premium tier, 250 DTU
-  storage: "Premium_GRS"     # Premium geo-redundant
+  storage: "Standard_GRS"    # Geo-redundant; Premium_GRS is not a storage SKU
   cosmos_db: "Provisioned"   # Dedicated throughput
   container_apps: "Dedicated" # Dedicated environment
   key_vault: "Premium"       # Premium with HSM
@@ -213,7 +215,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 2. **vCore-based** (Recommended for production)
    - **General Purpose**: Balanced compute and storage
    - **Business Critical**: Low latency, high IOPS
-   - **Hyperscale**: Highly scalable storage (up to 100TB)
+   - **Hyperscale**: Highly scalable storage; verify current size limits and regional support
 
 #### Example Configurations
 
@@ -284,7 +286,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
     configuration: {
       ingress: {
         external: true
-        targetPort: 3000
+        targetPort: 80 // nginx listens on 80 by default
       }
     }
     template: {
@@ -307,7 +309,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
 
 **Production (Dedicated)**
 ```bicep
-resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
+resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-03-01' = {
   name: 'cae-${environmentName}-prod'
   location: location
   properties: {
@@ -315,12 +317,14 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
     workloadProfiles: [{
       name: 'production-profile'
       workloadProfileType: 'D4'
-      minimumCount: 2
+      minimumCount: 3
       maximumCount: 10
     }]
   }
 }
 ```
+
+Zone redundancy also requires supported-region infrastructure and suitable VNet/subnet configuration, omitted here. This example budgets three dedicated nodes; configure at least two app replicas for cross-zone distribution and size both replicas and nodes for zone failure. See [Container Apps reliability guidance](https://learn.microsoft.com/azure/reliability/reliability-azure-container-apps). To place an app on this profile, set its `workloadProfileName: 'production-profile'`; creating the profile alone does not move apps to it.
 
 ### Azure Cosmos DB
 
@@ -453,17 +457,20 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ### 1. Reserved Capacity
 
-Reserve resources for 1-3 years to get better discounts:
+Reserve resources for 1-3 years for big discounts:
 
 ```bash
-# Check di reservation options
-az reservations catalog show --reserved-resource-type SqlDatabase
-az reservations catalog show --reserved-resource-type CosmosDb
+# With the reservation extension available, inspect the subscription catalog
+az reservations catalog show \
+  --subscription-id "$AZURE_SUBSCRIPTION_ID" \
+  --reserved-resource-type SqlDatabases
 ```
+
+Reservation offerings and eligible resource types vary; inspect the catalog and purchase terms instead of assuming every service/SKU supports a reservation.
 
 ### 2. Right-Sizing
 
-Start with smaller SKUs and scale up based on wetin actual usage show:
+Start with smaller SKUs and scale up based on actual usage:
 
 ```yaml
 # Progressive scaling approach
@@ -479,7 +486,7 @@ production:
 
 ### 3. Auto-Scaling Configuration
 
-Put intelligent scaling make e help control cost:
+Implement intelligent scaling to optimize costs:
 
 ```bicep
 resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
@@ -496,6 +503,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
       rules: [
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'GreaterThan'
@@ -513,6 +521,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
         }
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'LessThan'
@@ -587,7 +596,7 @@ Scale down during off-hours:
 
 ### Baseline Performance Requirements
 
-Define clear performance requirements before you pick SKUs:
+Define clear performance requirements before SKU selection:
 
 ```yaml
 performance_requirements:
@@ -605,19 +614,21 @@ performance_requirements:
 
 ### Load Testing
 
-Test different SKUs to make sure dem fit perform:
+Test different SKUs to validate performance:
 
 ```bash
-# Azure Load Testing sabis
+# Azure Load Testing service (requires an existing load-testing resource,
+# the load extension, and a valid config plus referenced test script)
 az load test create \
-  --name "sku-performance-test" \
-  --resource-group $RESOURCE_GROUP \
-  --load-test-config @load-test-config.yaml
+  --load-test-resource "$LOAD_TEST_RESOURCE" \
+  --resource-group "$RESOURCE_GROUP" \
+  --test-id "sku-performance-test" \
+  --load-test-config-file load-test-config.yaml
 ```
 
 ### Monitoring and Optimization
 
-Set up full monitoring:
+Set up comprehensive monitoring:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -626,7 +637,8 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   kind: 'web'
   properties: {
     Application_Type: 'web'
-    RetentionInDays: 90
+    WorkspaceResourceId: logAnalyticsWorkspace.id
+    IngestionMode: 'LogAnalytics'
   }
 }
 
@@ -670,9 +682,9 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 | Model | Pricing | CPU/Memory | Use Case |
 |-------|---------|------------|----------|
-| Consumption | Pay-per-use | 0.25-2 vCPU | Development, variable load |
-| Dedicated D4 | Reserved | 4 vCPU, 16GB | Production |
-| Dedicated D8 | Reserved | 8 vCPU, 32GB | High performance |
+| Consumption | Pay-per-use | Supported CPU/memory combinations depend on environment/profile | Development or production, variable load |
+| Dedicated D4 | Dedicated node billing | 4 vCPU, 16GiB per node | Sustained load/isolation needs |
+| Dedicated D8 | Dedicated node billing | 8 vCPU, 32GiB per node | Higher sustained load |
 
 ---
 
@@ -682,7 +694,7 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ```bash
 #!/bin/bash
-# Check if SKU dey available for di target region
+# Check SKU availability in target region
 
 check_sku_availability() {
     local region=$1
@@ -699,7 +711,8 @@ check_sku_availability() {
             az sql db list-editions --location $region --output table
             ;;
         "storage")
-            az storage account check-name --name "test" --output table
+            # Name availability is not SKU availability.
+            az storage sku list --query "[?name=='$sku'].{name:name,locations:locations,restrictions:restrictions}" --output json
             ;;
         *)
             echo "Resource type not supported"
@@ -707,14 +720,16 @@ check_sku_availability() {
     esac
 }
 
-# How to use am
+# Usage
 check_sku_availability "eastus" "app-service" "P1V3"
 ```
 
 ### Cost Estimation Script
 
+**Pseudocode only:** `Get-ResourceCost` below na project-specific function wey you must implement using current regional/contract pricing and usage assumptions. E no be PowerShell or Azure cmdlet.
+
 ```powershell
-# PowerShell skript wey dey estimate cost
+# PowerShell script for cost estimation
 function Get-AzureCostEstimate {
     param(
         [string]$SubscriptionId,
@@ -728,7 +743,7 @@ function Get-AzureCostEstimate {
         $resourceType = $resource.Key
         $sku = $resource.Value
         
-        # Make you use Azure Pricing API or di calculator
+        # Use Azure Pricing API or calculator
         $cost = Get-ResourceCost -Type $resourceType -SKU $sku
         $totalCost += $cost
         
@@ -738,7 +753,7 @@ function Get-AzureCostEstimate {
     Write-Host "Total estimated cost: $totalCost/month"
 }
 
-# How to use am
+# Usage
 $resources = @{
     "AppService" = "P1V3"
     "SqlDatabase" = "GP_Gen5_4"
@@ -749,6 +764,8 @@ Get-AzureCostEstimate -ResourceGroup "rg-myapp-prod" -Resources $resources
 ```
 
 ### Performance Validation
+
+The following YAML na just requirements sketch, **no be** Azure Load Testing, JMeter, Locust, or k6 input schema. You go need change am to your tool real configuration before you run the load-test command wey dey top.
 
 ```yaml
 # Load test configuration for SKU validation
@@ -785,7 +802,7 @@ test_configuration:
 
 ## Best Practices Summary
 
-### Wetin make sense to do
+### Do's
 
 1. **Start small and scale up** based on actual usage
 2. **Use different SKUs for different environments**
@@ -796,16 +813,16 @@ test_configuration:
 7. **Plan for growth but avoid over-provisioning**
 8. **Use free tiers for development when possible**
 
-### Wetin no suppose do
+### Don'ts
 
-1. **Don't use production SKUs for development**
-2. **Don't ignore regional SKU availability**
-3. **Don't forget about data transfer costs**
-4. **Don't over-provision without justification**
-5. **Don't ignore the impact of dependencies**
-6. **Don't set auto-scaling limits too high**
-7. **Don't forget about compliance requirements**
-8. **Don't make decisions based on price alone**
+1. **No use production SKUs for development**
+2. **No ignore regional SKU availability**
+3. **No forget about data transfer costs**
+4. **No over-provision without correct reason**
+5. **No ignore the impact of dependencies**
+6. **No set auto-scaling limits too high**
+7. **No forget about compliance requirements**
+8. **No make decisions based on price alone**
 
 ---
 
@@ -820,6 +837,6 @@ test_configuration:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Make una sabi:
-Dem don translate dis document wit AI translation service wey dem dey call Co-op Translator (https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg sabi say machine/automated translation fit get mistakes or no too accurate. The original document for im own language na im be the authoritative source. If na important information, better make professional human translator do am. We no dey liable for any misunderstanding or misinterpretation wey fit come from using this translation.
+**Disclaimer**:
+Dis document don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even tho we dey try make am correct, abeg make you know say automated translation fit get errors or mistakes. Di original document for dia own language na im be di correct source. For important info, make person wey sabi human translation do am. We no go responsible for any misunderstanding or wrong understanding wey fit happen because of dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

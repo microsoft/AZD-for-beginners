@@ -4,24 +4,24 @@
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
 - **📖 Current Chapter**: Chapter 2 - AI-First Development
 - **⬅️ Previous Chapter**: [Chapter 1: Your First Project](../chapter-01-foundation/first-project.md)
-- **➡️ Next**: [AI Model Deployment](ai-model-deployment.md)
+- **➡️ Next**: [AI Agents](agents.md)
 - **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
 ## Overview
 
-Dis guide dey show how to take join Microsoft Foundry services wit Azure Developer CLI (AZD) make AI app deployment easy. Microsoft Foundry na one platform wey fit help you build, deploy, and manage AI apps, and AZD go simplify how you set infrastructure and deploy am.
+Dis guide dey show how to join Microsoft Foundry service wit Azure Developer CLI (AZD) to make AI app deployment beta easy. Microsoft Foundry na one complete platform for build, deploy, and manage AI apps, while AZD dey simplify the infrastructure and deployment process.
 
 ## Wetin be Microsoft Foundry?
 
-Microsoft Foundry na Microsoft one platform wey dem join together for AI development wey get:
+Microsoft Foundry na Microsoft unified platform for AI development wey get:
 
-- **Model Catalog**: Access to beta AI models
-- **Prompt Flow**: Designer wey you fit use for AI workflows
-- **Microsoft Foundry Portal**: Integrated development environment for AI applications
-- **Deployment Options**: Different ways to host and scale
+- **Model Catalog**: Access to beta correct AI models
+- **Prompt Flow**: Visual designer for AI workflow dem
+- **Microsoft Foundry Portal**: Integrated development environment for AI apps
+- **Deployment Options**: Plenty hosting and scaling options
 - **Safety and Security**: Built-in responsible AI features
 
-## AZD + Microsoft Foundry: Beta Together
+## AZD + Microsoft Foundry: Better Together
 
 | Feature | Microsoft Foundry | AZD Integration Benefit |
 |---------|-----------------|------------------------|
@@ -33,18 +33,20 @@ Microsoft Foundry na Microsoft one platform wey dem join together for AI develop
 
 ## Prerequisites
 
-- Azure subscription wey get correct permissions
-- Azure Developer CLI don install
+- Azure subscription wey get better permissions
+- Azure Developer CLI installed
 - Access to Microsoft Foundry Models services
-- Basic sense about Microsoft Foundry
+- Basic sabi Microsoft Foundry
 
-> **Current AZD baseline:** Dem check dis examples with `azd` `1.27.1`. For AI agent workflow, make you use the current preview extension wey dem release and check your version before you start.
+> **Release review (2026-11-04):** AI CLI guidance check am with `azd` `1.37.2`, agents `1.0.0-beta.23`, and evaluations `1.0.0-beta.2` documentation/source. Use `azd >= 1.37.0` for the combined workflow. See [release changes and fixes](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes); dis review no mean say every template or SDK example fit work for live deployment.
 
 ## Core Integration Patterns
 
+**Scope of the examples:** The Bicep wey dey below get illustrative resource parts, e no be full deployable template. The containing template must define names, `location`, referenced resources, identities, outputs, and app hosting. Use linked sample for runnable starting point. Bash examples need Azure CLI authentication separate from `azd auth login`.
+
 ### Pattern 1: Microsoft Foundry Models Integration
 
-**Use Case**: Deploy chat applications wit Microsoft Foundry Models models
+**Use Case**: Deploy chat apps wit Azure OpenAI models for Microsoft Foundry
 
 ```yaml
 # azure.yaml
@@ -54,8 +56,7 @@ services:
     project: ./api
     host: containerapp
     env:
-      - AZURE_OPENAI_ENDPOINT
-      - AZURE_OPENAI_API_KEY
+      AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
 ```
 
 **Infrastructure (main.bicep):**
@@ -70,7 +71,7 @@ resource openAIAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   }
   properties: {
     customSubDomainName: openAIAccountName
-    disableLocalAuth: false
+    disableLocalAuth: true
   }
 }
 
@@ -82,19 +83,21 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
-    scaleSettings: {
-      scaleType: 'Standard'
-      capacity: 30
-    }
+  }
+  sku: {
+    name: 'Standard'
+    capacity: 30 // 30,000 TPM for this text-model deployment type
   }
 }
 ```
 
+The caller need attached managed identity and `Cognitive Services OpenAI User` for account scope; disabling keys no go give access. Confirm region/model/SKU availability and quota before deployment.
+
 ### Pattern 2: AI Search + RAG Integration
 
-**Use Case**: Deploy retrieval-augmented generation (RAG) applications
+**Use Case**: Deploy retrieval-augmented generation (RAG) apps
 
 ```bicep
 // Azure AI Search
@@ -111,20 +114,13 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
   }
 }
 
-// Connect Search with OpenAI
-resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-11-01' = {
-  parent: searchService
-  name: 'openai-connection'
-  properties: {
-    targetResourceId: openAIAccount.id
-    authenticationMethod: 'managedIdentity'
-  }
-}
 ```
+
+No `Microsoft.Search/searchServices/dataConnections` ARM resource for dis one. Configure Search index, data source, indexer/skillset or vectorizer through supported Search data-plane APIs. If Search dey call embedding model, enable its managed identity, give relevant model role, configure embedding skill/vectorizer. See [integrated vectorization](https://learn.microsoft.com/azure/search/vector-search-integrated-vectorization).
 
 ### Pattern 3: Document Intelligence Integration
 
-**Use Case**: Document processing and analysis workflows
+**Use Case**: Document processing and analysis workflow dem
 
 ```bicep
 // Document Intelligence service
@@ -159,31 +155,35 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ### Environment Variables Setup
 
+Outside documented AZD settings like `AZURE_LOCATION`, these na **custom-template input names**. Them no go work unless template/app use dem via parameter and host-environment mappings. For `azure-search-openai-demo`, use correct names like `AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY` and `AZURE_SEARCH_SERVICE_SKU` instead. Model capacity no be account SKU.
+
 **Production Configuration:**
 ```bash
-# Core AI service dem
+# Core AI services
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_SEARCH_ENDPOINT "https://your-search.search.windows.net"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT "https://your-formrec.cognitiveservices.azure.com/"
 
-# Model konfigurasions
+# Model configurations
 azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
 azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-3-large"
 
-# Performance settings dem
+# Performance settings
 azd env set AZURE_OPENAI_CAPACITY 30
 azd env set AZURE_SEARCH_SKU "standard"
 ```
 
 **Development Configuration:**
 ```bash
-# Cost settings wey dem arrange make e cheap for development
+# Cost-optimized settings for development
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set AZURE_SEARCH_SKU "basic"
-azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Free level
+azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Free tier
 ```
 
-### Secure Configuration wit Key Vault
+### Secure Configuration with Key Vault
+
+Make you prefer Entra ID with local key authentication off. Wetin dey below na **legacy key-authentication alternative** for apps wey need keys: e need account wit key auth enabled, app identity attached to host, plus Key Vault access/network working. No join key retrieval wit `disableLocalAuth: true` and hope say key-based calls go work.
 
 ```bicep
 // Key Vault for secrets
@@ -192,6 +192,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   location: location
   properties: {
     tenantId: tenant().tenantId
+    enableRbacAuthorization: false // This fragment deliberately uses access policies
     sku: {
       family: 'A'
       name: 'standard'
@@ -222,54 +223,57 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ### AZD Extensions for Foundry
 
-AZD get extensions wey dey add AI-specific features to work wit Microsoft Foundry services:
+AZD get extensions wey add AI-specific power to work wit Microsoft Foundry services:
 
 ```bash
-# Install di Foundry agents extension
+# Install the Foundry agents extension
 azd extension install azure.ai.agents
 
-# Install di fine-tuning extension
+# Install the separate evaluations extension
+azd extension install azure.ai.evaluations
+
+# Install the fine-tuning extension
 azd extension install azure.ai.finetune
 
-# Install di custom models extension
+# Install the custom models extension
 azd extension install azure.ai.models
 
-# List di installed extensions dem
+# List installed extensions
 azd extension list --installed
 
-# Check di version of di installed agent extension now
+# Inspect the currently installed agent extension version
 azd extension show azure.ai.agents
 ```
 
-AI extensions still dey move quick for preview. If any command no work like dis one, upgrade the extension before you start to fix your project.
+AI extensions still dey move fast for preview. If command no behave like this one, upgrade the extension before you start check the project.
 
 ### Agent-First Deployment wit `azd ai`
 
-If you get agent manifest, use `azd ai agent init` to set up project wey join Foundry Agent Service:
+Use `azd ai agent init` interactively, or use current `azure.yaml` agent project template connected to Foundry Agent Service:
 
 ```bash
-# Start from one agent manifest
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+# Initialize from a current project template (supply your template path)
+azd ai agent init --template ./templates/support-agent/azure.yaml --project-id <foundry-project-id>
 
-# Put for Azure
+# Deploy to Azure
 azd up
 ```
 
-Recent preview releases of `azure.ai.agents` add template-based setup support for `azd ai agent init`. If you dey follow newer agent samples, check extension help for exact flags wey your version get.
+`--template`/`-t` don replace deprecated `--manifest`/`-m` spelling; legacy manifest and nested agent configuration still need migration. Use `azd ai eval` from `azure.ai.evaluations` to evaluate agents, no use old workflow wey they remove. See [evaluation migration](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) for setup, run and results.
 
-See [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for full command reference and flags.
+See [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for full command list and flags.
 
 ### Single Command Deployment
 
 ```bash
-# Deploy all tins wit one command
+# Deploy everything with one command
 azd up
 
-# Or deploy small small
-azd provision  # Na only infrastructure
-azd deploy     # Na only application
+# Or deploy incrementally
+azd provision  # Infrastructure only
+azd deploy     # Application only
 
-# For long-time AI app deployment dem inside azd 1.23.11+
+# For long-running AI app deployments in azd 1.23.11+
 azd deploy --timeout 1800
 ```
 
@@ -307,34 +311,30 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 }
 
 // Custom metrics for AI operations
-resource customMetrics 'Microsoft.Insights/components/analyticsItems@2015-05-01' = {
-  parent: applicationInsights
-  name: 'AI-Metrics'
-  properties: {
-    name: 'AI Operations Metrics'
-    content: '''
-      requests
-      | where name contains "openai"
-      | summarize 
-          RequestCount = count(),
-          AvgDuration = avg(duration),
-          SuccessRate = countif(success == true) * 100.0 / count()
-      by bin(timestamp, 5m)
-    '''
-  }
-}
+```
+
+Dis one dey create Insights resource, e no be telemetry instrumentation. When your app send model-call spans, run dis query for Application Insights Logs (adapt filter to real span names):
+
+```kusto
+dependencies
+| where target contains "openai"
+| summarize RequestCount = count(), AvgDuration = avg(duration),
+    SuccessRate = countif(success == true) * 100.0 / count()
+  by bin(timestamp, 5m)
 ```
 
 ### Cost Monitoring
 
 ```bicep
+// Supply the first day of the current UTC month, e.g. 2026-11-01T00:00:00Z.
+param budgetStartDate string
+
 // Budget alert for AI services
-resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
+resource budget 'Microsoft.Consumption/budgets@2024-08-01' = {
   name: 'ai-services-budget'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate
     }
     timeGrain: 'Monthly'
     amount: 500
@@ -352,6 +352,8 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
   }
 }
 ```
+
+Use real recipient and check billing-scope permission. Budget dey send alerts; e no be spending cap.
 
 ## 🔐 Security Best Practices
 
@@ -377,6 +379,8 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 ```
 
 ### Network Security
+
+This endpoint fragment still need private DNS zone/group, VNet links, app VNet connectivity, and clear public-access policy. Just create private endpoint no go disable public access.
 
 ```bicep
 // Private endpoints for AI services
@@ -411,12 +415,12 @@ services:
     project: ./api
     host: containerapp
     env:
-      - REDIS_CONNECTION_STRING
-      - CACHE_TTL=3600
+      REDIS_CONNECTION_STRING: ${REDIS_CONNECTION_STRING}
+      CACHE_TTL: "3600"
 ```
 
 ```bicep
-// Redis cache for AI responses
+// Existing Azure Cache for Redis example; use Azure Managed Redis for new designs.
 resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
   name: redisCacheName
   location: location
@@ -432,7 +436,11 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 }
 ```
 
+Azure Cache for Redis Basic/Standard/Premium dey for [retirement path](https://learn.microsoft.com/azure/azure-cache-for-redis/retirement-faq); use Azure Managed Redis for new deployments and follow its authentication/template guide. Scope cached AI response by authorization, model/instruction, data version and expiry; no share private responses based on only query text.
+
 ### Auto-scaling Configuration
+
+**Partial resource:** merge these scale/ingress settings into full Container App wit managed environment, container image, and resource limits. More replicas no go increase model quota.
 
 ```bicep
 // Container App with auto-scaling
@@ -471,57 +479,63 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 ### Issue 1: OpenAI Quota Exceeded
 
 **Symptoms:**
-- Deployment no go with quota errors
-- 429 errors for application logs
+- Deployment fail wit quota errors
+- 429 errors for app logs
 
 **Solutions:**
 ```bash
-# Check how much quota you don use so far
+# Check current quota usage
 az cognitiveservices usage list --location eastus
 
-# Try another region
+# Try a different region in a NEW disposable environment, not by moving resources
+azd env new quota-region-test
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Small small reduce capacity for now
+# Alternative: select the ORIGINAL environment before reducing its capacity
+# azd env select <original-environment>
 azd env set AZURE_OPENAI_CAPACITY 10
-azd deploy
+azd provision
 ```
+
+The capacity variable na only for custom template wey dey wired to use am. For RAG sample, use `AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY`. No change `AZURE_LOCATION` to move existing resources; create separate environment for new region and plan migration/cleanup.
 
 ### Issue 2: Authentication Failures
 
 **Symptoms:**
-- 401/403 errors when you dey call AI services
+- 401/403 errors when dey call AI services
 - "Access denied" messages
 
 **Solutions:**
 ```bash
-# Make sure say role assignment correct
+# Verify role assignments
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Check how dem arrange managed identity
-az webapp identity show --name YOUR_APP --resource-group YOUR_RG
+# Check managed identity configuration
+az containerapp identity show --name YOUR_APP --resource-group YOUR_RG
 
-# Confirm say person fit enter Key Vault access
-az keyvault secret show --vault-name YOUR_KV --name openai-api-key
+# Validate Key Vault access
+az keyvault secret show --vault-name YOUR_KV --name openai-api-key --query id -o tsv
 ```
 
 ### Issue 3: Model Deployment Issues
 
 **Symptoms:**
 - Models no dey available for deployment
-- Specific model versions dey fail
+- Certain model versions dey fail
 
 **Solutions:**
 ```bash
-# List all di models wey dey for each region
+# List available models by region
 az cognitiveservices model list --location eastus
 
-# Change di model version inside bicep template
-# Check di model capacity wey e need
+# Update model version in bicep template
+# Check model capacity requirements
 ```
 
 ## Example Templates
+
+These be alternatives, no be sequential commands. Start each one for separate empty directory. Explicit `.` destination go keep init for your current directory; else AZD fit create template-named child directory without changing your shell directory.
 
 ### RAG Chat Application (Python)
 
@@ -529,11 +543,11 @@ az cognitiveservices model list --location eastus
 
 **Services**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
 
-**Description**: Di most popular Azure AI sample — production-ready RAG chat app wey fit make you ask question about your documents. E use GPT-4.1-mini for chat, text-embedding-3-large for embeddings, and Azure AI Search for retrieval. E support multimodal documents, speech input/output, Microsoft Entra authentication, plus Application Insights tracing.
+**Description**: RAG chat reference app for question on your documents, with Azure AI Search retrieval. Check supported models, optional features, cost guidance, production hardening for current sample before use; deploying sample no mean say app ready for production.
 
 **Quick Start**:
 ```bash
-azd init --template azure-search-openai-demo
+azd init --template azure-search-openai-demo .
 azd up
 ```
 
@@ -543,11 +557,11 @@ azd up
 
 **Services**: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
 
-**Description**: .NET/C# version of the Python RAG chat sample. E build wit ASP.NET Core Minimal API and Blazor WebAssembly frontend. Get voice chat, GPT-4o-mini vision support, and .NET MAUI Blazor Hybrid desktop/mobile client wey dey join am.
+**Description**: .NET/C# beta for Python RAG chat sample. Build with ASP.NET Core Minimal API plus Blazor WebAssembly frontend. Get voice chat, GPT-4o-mini vision support, plus companion .NET MAUI Blazor Hybrid desktop/mobile client.
 
 **Quick Start**:
 ```bash
-azd init --template azure-search-openai-demo-csharp
+azd init --template azure-search-openai-demo-csharp .
 azd up
 ```
 
@@ -557,11 +571,11 @@ azd up
 
 **Services**: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
 
-**Description**: Java version of RAG chat sample wey use Langchain4J for AI orchestration. E support microservice event-driven architecture, multiple search styles (text, vector, hybrid), document upload wit Azure Document Intelligence, and deployment on Azure Container Apps or Azure Kubernetes Service.
+**Description**: Java version for RAG chat sample using Langchain4J for AI orchestration. Support microservice event-driven architecture, many search strategies (text, vector, hybrid), document upload with Azure Document Intelligence, deploy on Azure Container Apps or Azure Kubernetes Service.
 
 **Quick Start**:
 ```bash
-azd init --template azure-search-openai-demo-java
+azd init --template azure-search-openai-demo-java .
 azd up
 ```
 
@@ -571,11 +585,11 @@ azd up
 
 **Services**: Azure OpenAI + Microsoft Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
 
-**Description**: End-to-end retail RAG copilot wey dey use Microsoft Foundry and Prompty. Na Contoso Outdoor retailer chatbot wey base im responses on product catalog and customer order data. E show full GenAIOps workflow — prototype wit Prompty, evaluate wit AI-assisted evaluators, and deploy with AZD to Container Apps.
+**Description**: End-to-end retail RAG copilot wit Microsoft Foundry and Prompty. Contoso Outdoor retailer chatbot wey base responses on product catalog and customer order data. Show full GenAIOps workflow—prototype wit Prompty, evaluate wit AI-assisted evaluators, deploy with AZD to Container Apps.
 
 **Quick Start**:
 ```bash
-azd init --template contoso-chat
+azd init --template contoso-chat .
 azd up
 ```
 
@@ -585,11 +599,11 @@ azd up
 
 **Services**: Azure OpenAI + Azure AI Agent Service + Bing Grounding + Azure AI Search + Azure Container Apps
 
-**Description**: Multi-agent sample wey show AI agent orchestration wit Prompty. E use research agent (Bing Grounding for Azure AI Agent Service), product agent (Azure AI Search), writer agent, and editor agent to work together to produce well-researched articles. E get CI/CD wit evaluation for GitHub Actions.
+**Description**: Multi-agent sample wey dey show AI agent orchestration wit Prompty. Get research agent (Bing Grounding for Azure AI Agent Service), product agent (Azure AI Search), writer agent, plus editor agent wey work together to produce well-research articles. Get CI/CD with evaluation in GitHub Actions.
 
 **Quick Start**:
 ```bash
-azd init --template contoso-creative-writer
+azd init --template contoso-creative-writer .
 azd up
 ```
 
@@ -599,11 +613,11 @@ azd up
 
 **Services**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB for NoSQL + LangChain.js
 
-**Description**: Fully serverless RAG chatbot wey dey use LangChain.js with Azure Functions for API and Azure Static Web Apps for hosting. E use Azure Cosmos DB as vector store and chat history database. E support local development wit Ollama for free testing.
+**Description**: Fully serverless RAG chatbot dey use LangChain.js with Azure Functions for API and Azure Static Web Apps for hosting. Dey use Azure Cosmos DB as vector store and chat history database. Support local development with Ollama for zero-cost testing.
 
 **Quick Start**:
 ```bash
-azd init --template serverless-chat-langchainjs
+azd init --template serverless-chat-langchainjs .
 azd up
 ```
 
@@ -611,13 +625,13 @@ azd up
 
 **Repository**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
 
-**Services**: Azure OpenAI + Azure AI Search + Azure App Service + Azure Document Intelligence + Azure Functions + Azure Cosmos DB / PostgreSQL
+**Services**: Microsoft Foundry + Azure Container Apps (web/API/ingestion) + Azure AI Search with Cosmos DB, or PostgreSQL with pgvector
 
-**Description**: Enterprise-grade RAG solution accelerator with admin portal for document upload/management, different orchestrator choices (Semantic Kernel, LangChain, Prompt Flow), speech-to-text, Microsoft Teams integration, and choice of PostgreSQL or Cosmos DB backend. Design am as customizable starting point for production RAG scenarios.
+**Description**: Document-grounded chat accelerator wit citations. Current sample get React frontend, FastAPI backend and Functions ingestion worker on Container Apps; orchestrator options na Agent Framework and LangGraph. Database/retrieval options selected during deployment. Na starting point, no be turnkey production system; no assume old App Service, Semantic Kernel or Prompt Flow versions be current default.
 
 **Quick Start**:
 ```bash
-azd init --template chat-with-your-data-solution-accelerator
+azd init --template chat-with-your-data-solution-accelerator .
 azd up
 ```
 
@@ -627,84 +641,69 @@ azd up
 
 **Services**: Azure OpenAI + Microsoft Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
 
-**Description**: Reference app for multi-agent AI orchestration wey dey use three frameworks (LangChain.js, LlamaIndex.TS, and Microsoft Agent Framework). Get MCP (Model Context Protocol) servers for four languages wey deploy as serverless Azure Container Apps with OpenTelemetry monitoring.
+**Description**: Reference app wey dey do multi-agent AI orchestration wey use three frameworks (LangChain.js, LlamaIndex.TS, and Microsoft Agent Framework). E get MCP (Model Context Protocol) servers for four languages wey dem deploy as serverless Azure Container Apps wey get OpenTelemetry monitoring.
 
 **Quick Start**:
 ```bash
-azd init --template azure-ai-travel-agents
+azd init --template azure-ai-travel-agents .
 azd up
 ```
 
-### Azure AI Starter
-
-**Repository**: [azd-ai-starter](https://github.com/Azure/azd-ai-starter)
-
-**Services**: Azure AI Services + Azure OpenAI
-
-**Description**: Minimal Bicep template wey deploy Azure AI services wey get configured machine learning models. E light and easy starting point if you just need Azure AI infrastructure without full app stack.
-
-**Quick Start**:
-```bash
-azd init --template azd-ai-starter
-azd up
-```
-
-> **Browse more templates**: Visit the [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) for 80+ AI-specific AZD templates across languages and scenarios.
+> **Browse more templates**: Visit di [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) for di templates wey dey now for different languages and scenarios. Each one wey get link na external repository, no be local sample wey dis course give; make you check di requirements and production guide well before you deploy am.
 
 ## Next Steps
 
-1. **Try the Examples**: Start wit pre-built template wey match your use case
-2. **Customize for Your Needs**: Change infrastructure and app code
-3. **Add Monitoring**: Put comprehensive observability
-4. **Optimize Costs**: Fine-tune configurations for budget
+1. **Try the Examples**: Begin with template wey fit your use case
+2. **Customize for Your Needs**: Change di infrastructure and app code
+3. **Add Monitoring**: Make sure say you fit see how e dey perform well
+4. **Optimize Costs**: Arrange configurations to fit your budget
 5. **Secure Your Deployment**: Use enterprise security patterns
 6. **Scale to Production**: Add multi-region and high-availability features
 
 ## 🎯 Hands-On Exercises
 
 ### Exercise 1: Deploy Microsoft Foundry Models Chat App (30 minutes)
-**Goal**: Deploy and test production-ready AI chat app
+**Goal**: Deploy and test AI chat reference app
 
 ```bash
-# Start di template
+# Initialize template
 mkdir ai-chat-demo && cd ai-chat-demo
-azd init --template azure-search-openai-demo
+azd init --template azure-search-openai-demo .
 
 # Set environment variables
 azd env set AZURE_LOCATION eastus2
-azd env set AZURE_OPENAI_CAPACITY 30
+azd env set AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY 30
 
-# Deploy am
+# Deploy
 azd up
 
-# Test di application
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-echo "Chat app: $WEB_URL"
+# Test the application
+azd show
+# Open the web endpoint shown; do not assume a service name/JSON shape.
 
-# Watch AI work
+# Monitor AI operations
 azd monitor
 
-# Clear everything comot
+# Clean up
 azd down --force --purge
 ```
 
 **Success Criteria:**
-- [ ] Deployment complete without quota errors
-- [ ] Fit access chat interface for browser
-- [ ] Fit ask questions and get AI-powered answers
-- [ ] Application Insights show telemetry data
-- [ ] Resources clean up well
+- [ ] Deployment finish without quota wahala
+- [ ] You fit enter chat interface for browser
+- [ ] You fit ask questions and get AI-powered answers
+- [ ] Application Insights dey show telemetry data
+- [ ] Resources dem clean well after
 
-**Estimated Cost**: $5-10 for 30 minutes testing
+**Cost:** Check di sample cost guide and di selected SKUs before you deploy. Billing go still dey go till you delete di resources; no fixed 30-minute estimate fit every setup.
 
 ### Exercise 2: Configure Multi-Model Deployment (45 minutes)
-**Goal**: Deploy many AI models wit different configurations
+**Goal**: Deploy many AI models with different configurations
 
-```bash
-# Make your own Bicep setup
-cat > infra/ai-models.bicep << 'EOF'
+**Starting point:** Get Azure OpenAI account and AZD resource-group module wey fit call dis file. Create `infra/ai-models.bicep` with di content wey you go put for your editor. E no go deploy automatically just because e dey under `infra/`.
+
+```bicep
 param openAiAccountName string
-param location string
 
 resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
   name: openAiAccountName
@@ -718,12 +717,12 @@ resource gpt4omini 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01'
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
-    scaleSettings: {
-      scaleType: 'Standard'
-      capacity: 30
-    }
+  }
+  sku: {
+    name: 'Standard'
+    capacity: 30
   }
 }
 
@@ -737,39 +736,53 @@ resource embedding 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01'
       name: 'text-embedding-3-large'
       version: '1'
     }
-    scaleSettings: {
-      scaleType: 'Standard'
-      capacity: 50
-    }
+  }
+  sku: {
+    name: 'Standard'
+    capacity: 50
   }
   dependsOn: [gpt4omini]
 }
-EOF
+```
 
-# Deploy and make sure e work well
+From di resource-group-scoped module wey get di account, add module call (change di symbol name to your actual account):
+
+```bicep
+module additionalModels 'ai-models.bicep' = {
+  name: 'additional-models'
+  params: {
+    openAiAccountName: openAIAccount.name
+  }
+}
+```
+
+No make you dey declare di same deployments for both modules. If AZD entry point na subscription-scoped, call am from its resource-group-scoped child module and change di relative path. Build dat module with `az bicep build --file <path-to-containing-module>`, den:
+
+```bash
 azd provision
-azd show
+az cognitiveservices account deployment list \
+  --name YOUR_OPENAI_ACCOUNT --resource-group YOUR_RG \
+  --query "[].{deployment:name,model:properties.model.name,version:properties.model.version,capacity:sku.capacity}" -o table
 ```
 
 **Success Criteria:**
-- [ ] Plenty models deploy successful
+- [ ] Multiple models deploy well
 - [ ] Different capacity settings apply
-- [ ] Models dey accessible via API
-- [ ] Fit call both models from app
+- [ ] Models fit access via API
+- [ ] You fit call both models from app
 
 ### Exercise 3: Implement Cost Monitoring (20 minutes)
-**Goal**: Setup budget alerts and cost tracking
+**Goal**: Set budget alerts and track cost
 
-```bash
-# Add budget alert to Bicep
-cat >> infra/main.bicep << 'EOF'
+**Starting point:** Di budget pattern wey you see before and resource-group-scoped infrastructure module. Add dis resource with your editor; pass `budgetStartDate` from your parameter mapping (no put duplicate parameter if e don dey). Change recipient and make sure say you get budget write access.
 
-resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
+```bicep
+param budgetStartDate string
+resource budget 'Microsoft.Consumption/budgets@2024-08-01' = {
   name: 'ai-monthly-budget'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2025-12-31'
+      startDate: budgetStartDate
     }
     timeGrain: 'Monthly'
     amount: 200
@@ -790,37 +803,41 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
     }
   }
 }
-EOF
+```
 
+```bash
 # Deploy budget alert
 azd provision
 
-# Check current costs
-az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-date $(date +%Y-%m-%d)
+# Verify the budget at its resource-group scope
+az rest --method get \
+  --url "https://management.azure.com/subscriptions/YOUR_SUB/resourceGroups/YOUR_RG/providers/Microsoft.Consumption/budgets/ai-monthly-budget?api-version=2024-08-01"
 ```
 
+Expect: response get `amount: 200`, both thresholds, and your recipient. Check Cost Management for portal for real charges; cost data dey delay and alert no need fire for short exercise.
+
 **Success Criteria:**
-- [ ] Budget alert make for Azure
-- [ ] Email notifications set up
-- [ ] Fit see cost data for Azure Portal
-- [ ] Budget thresholds set well
+- [ ] Budget alert don create for Azure
+- [ ] Email notifications don configure
+- [ ] You fit see cost data for Azure Portal
+- [ ] Budget thresholds set correct
 
 ## 💡 Frequently Asked Questions
 
 <details>
 <summary><strong>How I fit reduce Microsoft Foundry Models costs during development?</strong></summary>
 
-1. **Use Free Tier**: Microsoft Foundry Models dey give 50,000 tokens/month free
-2. **Reduce Capacity**: Set capacity to 10 TPM instead of 30+ for dev
-3. **Use azd down**: Deallocate resources when you no dey do development
-4. **Cache Responses**: Put Redis cache for repeated queries
-5. **Use Prompt Engineering**: Reduce token use wit efficient prompts
-
+1. **Check pricing**: No universal free 50,000-token monthly allowance for Azure OpenAI models
+2. **Right-size capacity**: Capacity `10` usually mean 10,000 TPM for these Standard text models, no be 10 TPM. To reduce this rate limit no go reduce per-token prices
+3. **Use azd down**: Delete resources wey you no dey use when development stop (e no be deallocation)
+4. **Cache Responses**: Use Redis cache for repeated queries
+5. **Use Prompt Engineering**: Reduce token use with better prompts
 
 ```bash
-# Development configuaration na so e be
-azd env set AZURE_OPENAI_CAPACITY 10
-azd env set ENABLE_RESPONSE_CACHE true
+# Development configuration
+azd env set AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY 10
+azd provision
+# Caching requires application code and infrastructure; no universal AZD toggle.
 ```
 </details>
 
@@ -832,34 +849,32 @@ azd env set ENABLE_RESPONSE_CACHE true
 - Private network integration
 - SLA guarantees
 - Managed identity authentication
-- Higher quotas available
+- Higher quotas dey available
 
-**OpenAI API**:
-- Faster access to new models
-- Simpler setup
-- Lower barrier to entry
-- Public internet only
+**OpenAI API**: Na different provider/API wey get im own model availability, pricing, authentication, and enterprise connectivity options. Make you compare current offerings no assume say e be just public-internet or always ship models first.
 
-For production apps, **Microsoft Foundry Models na di one wey dem recommend**.
+Choose based on your organization's requirements; Azure-managed identity and private-link examples for this course apply to Azure-hosted services, no be every model/provider for Foundry catalog.
 </details>
 
 <details>
-<summary><strong>How I go take handle Microsoft Foundry Models quota exceeded errors?</strong></summary>
+<summary><strong>How I take handle Microsoft Foundry Models quota exceeded errors?</strong></summary>
 
 ```bash
-# Check di current quota
+# Check current quota
 az cognitiveservices usage list --location eastus2
 
-# Try diffrent region
+# Try different region
+azd env new quota-region-test
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Reduce capacity for small time
+# Alternative: select the original environment before reducing capacity
+# azd env select <original-environment>
 azd env set AZURE_OPENAI_CAPACITY 10
 azd provision
 
-# Request make dem increase di quota
-# Go Azure Portal > Quotas > Request increase
+# Request quota increase
+# Go to Azure Portal > Quotas > Request increase
 ```
 </details>
 
@@ -872,17 +887,19 @@ Yes! Use **Azure AI Search** for RAG (Retrieval Augmented Generation):
 # azure.yaml
 services:
   ai:
+    project: ./api
+    host: containerapp
     env:
-      - AZURE_SEARCH_ENDPOINT
-      - AZURE_SEARCH_INDEX
-      - AZURE_OPENAI_ENDPOINT
+      AZURE_SEARCH_ENDPOINT: ${AZURE_SEARCH_ENDPOINT}
+      AZURE_SEARCH_INDEX: ${AZURE_SEARCH_INDEX}
+      AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
 ```
 
 See di [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) template.
 </details>
 
 <details>
-<summary><strong>How I go take secure AI model endpoints?</strong></summary>
+<summary><strong>How I fit secure AI model endpoints?</strong></summary>
 
 **Best Practices**:
 1. Use Managed Identity (no API keys)
@@ -922,10 +939,10 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
 - **📖 Current Chapter**: Chapter 2 - AI-First Development
 - **⬅️ Previous Chapter**: [Chapter 1: Your First Project](../chapter-01-foundation/first-project.md)
-- **➡️ Next**: [AI Model Deployment](ai-model-deployment.md)
+- **➡️ Next**: [AI Agents](agents.md)
 - **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
-**Need Help?** Join our community discussions or open issue for the repository. The Azure AI + AZD community dey here to help you succeed!
+**Need Help?** Join our community discussions or open issue for di repository. Azure AI + AZD community dey here to help you succeed!
 
 ---
 

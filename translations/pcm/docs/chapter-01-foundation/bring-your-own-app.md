@@ -6,29 +6,29 @@
 - **⬅️ Previous**: [Your First Project](first-project.md)
 - **➡️ Next**: [Dev Containers & Codespaces](dev-containers.md)
 
-> Validated against `azd 1.27.1` in July 2026.
+> Command and configuration review target: `azd 1.37.2` (November 2026). Generated files depend on the detected application; Azure deployment was not executed in this review.
 
 ## Introduction
 
-For [Your First Project](first-project.md) you deploy one app by starting from template. Bot most times, you don already *get* one app — Node.js API, Python Flask service, .NET web app — wey dey for one folder for your machine. Dis lesson go show how you go take add azd to dat existing code so you fit deploy am wit `azd up`, no template needed.
+In [Your First Project](first-project.md) you deploy one app by starting from template. But most time you don already *get* one app—a Node.js API, Python Flask service, .NET web app—wey dey for folder for your machine. This lesson go show how to add azd to that kode wey don dey so you fit deploy am wit `azd up`, no template wey you need.
 
 ## Learning Goals
 
-By di end of dis lesson, you go:
-- Understand di three ways to start one azd project
-- Run `azd init` inside already existing code
-- Understand how `azure.yaml` and di `infra/` folder dey work for your app
-- Know when to make azd generate infrastructure and when to write your own
-- Deploy your existing app for Azure using `azd up`
+By the end of this lesson, you go:
+- Understand the three ways to start an azd project
+- Run `azd init` inside an existing codebase
+- Understand what `azure.yaml` and the `infra/` folder do for your app
+- Know when to let azd generate infrastructure vs. write your own
+- Deploy your existing app to Azure with `azd up`
 
 ## Learning Outcomes
 
-After you finish dis lesson, you go sabi:
-- Init azd for one project wey you don already get
-- Read and edit one simple `azure.yaml` file
-- Generate starter infrastructure wit `azd infra generate`
-- Choose di right Azure host for your app
-- Deploy and take down your own application
+After you don finish this lesson, you go fit:
+- Initialize azd for project wey you already get
+- Read and edit basic `azure.yaml` file
+- Generate starter infrastructure with `azd infra generate`
+- Choose correct Azure host for your app
+- Deploy and clean up your own application
 
 ---
 
@@ -36,11 +36,11 @@ After you finish dis lesson, you go sabi:
 
 | Starting point | Command | When to use |
 |----------------|---------|-------------|
-| **From a template** | `azd init --template <name>` | If you dey learn or you wan start new app from beta sample |
-| **From your existing code** | `azd init` (inside your project folder) | When you don already get one app and you wan deploy am |
-| **From a Git repo** | `azd init --from-code` (inside cloned repo) | When you wan start azd for existing repository |
+| **From a template** | `azd init --template <name> .` (empty directory) | Learning, or starting new app from proven sample |
+| **From your existing code** | `azd init` (for your project folder) | You already get app and you want deploy am |
+| **From a Git repo** | `azd init --from-code` (for cloned repo) | To use azd for app wey dey existing repo |
 
-You don already try di first option. Dis lesson na di second case - di most normal one for real life.
+You don practice first option before. This lesson dey talk about second one—di most common for real life.
 
 ---
 
@@ -53,7 +53,7 @@ cd my-existing-app
 azd init
 ```
 
-azd go ask how you wan init. Choose:
+azd go ask how you wan initialize. Choose:
 
 ```
 ? How do you want to initialize your app?
@@ -61,40 +61,39 @@ azd go ask how you wan init. Choose:
   Select a template
 ```
 
-Pick **"Use code for di current directory."** azd go check your folder, find your language and framework, den suggest host.
+Choose **"Use code in the current directory."** azd go then scan your folder, go detect your language and framework, and go suggest host.
 
 ### Wetin azd go detect
 
-azd dey find signs like `package.json`, `requirements.txt`, `pom.xml`, `*.csproj`, or `Dockerfile`, den e go suggest matching Azure host:
+azd dey look for app signs like `package.json`, `requirements.txt`, `pom.xml`, `*.csproj`, or one `Dockerfile`. Di from-code flow no be general host-selection wizard for every supported deployment target:
 
-| Your app | Host wey e fit detect |
+| Your app | Likely detected host |
 |----------|----------------------|
-| Node.js / Python / .NET web app | Azure App Service or Container Apps |
+| Supported Node.js / Python / .NET web app | Normally Azure Container Apps; check the generated definition |
 | Containerized app (`Dockerfile`) | Azure Container Apps |
-| Function app | Azure Functions |
-| Static site (React/Vue build output) | Azure Static Web Apps |
+| Function app or Static Web Apps project | Use matching template or author `azure.yaml` and infrastructure if from-code no support your layout |
 
-Confirm di service(s) wey e detect, azd go build the files you need.
+Confirm the detected service(s), and azd go scaffold the files wey you need.
 
 ---
 
 ## Step 2: Understand Wetin azd Create
 
-After init finish, you go get two new tins for your project:
+After you initialize, look `azure.yaml`. The infrastructure generated flow fit keep infrastructure implicit until you run `azd infra generate`; no assume say `infra/` don dey already:
 
 ```
 my-existing-app/
 ├── azure.yaml          # ← NEW: tells azd what to deploy and where
-├── infra/              # ← NEW: Infrastructure as Code (Bicep by default)
+├── infra/              # Materialized with azd infra generate when using implicit infrastructure
 │   ├── main.bicep
 │   └── main.parameters.json
 ├── src/ (your code)    # unchanged
 └── ...                 # your existing files, untouched
 ```
 
-### `azure.yaml` — project definition
+### `azure.yaml` — the project definition
 
-Dis one na di heart of azd project. One small one dey look like dis:
+Na di heart of azd project be this one. The following **illustrative App Service definition** need matching App Service infrastructure; no be reason to change generated Container Apps host without changing infrastructure:
 
 ```yaml
 # azure.yaml
@@ -106,66 +105,68 @@ services:
     host: appservice         # appservice | containerapp | function | staticwebapp
 ```
 
-Di `services` block na di main part: each entry na folder for your code wey map to one Azure host. If your app get both frontend and API, you go get two services.
+The `services` block be the key part: every entry dey map folder of your code to Azure host. If your app get frontend and API, you go get two services.
 
 ### `infra/` — your Azure resources as code
 
-Di `infra/` folder get Bicep files wey define Azure resources your app need (like App Service, database, etc). You no need write dem yourself — azd go generate starting point wey dey work. You fit still edit dem later to add resources or make security stronger (we cover am inside [Chapter 4](../chapter-04-infrastructure/README.md)).
+The `infra/` folder get Bicep files wey define di Azure resources wey your app need (di App Service, di database, etc.). You no need write dem by hand—azd go generate wetin fit start all di work. You *fit* edit dem later to add resources or make security tight pass (wey we go talk for [Chapter 4](../chapter-04-infrastructure/README.md)).
 
-> **Tip:** If you wan see or customize di generated infrastructure before you deploy, run `azd infra generate` (you fit use `azd infra synth` too) so e go write IaC to disk and you fit check am well and control version.
+> **Tip:** You want see or customize di infrastructure wey dem generate before you deploy am? Run `azd infra generate` (wey still dey as `azd infra synth`) to write di IaC for disk so dat you fit review am and handle am for version-control.
 
 ---
 
-## Step 3: Set Wetin You Need for Config
+## Step 3: Set Required Configuration
 
-If your app need settings or secrets (connection string, API key), no hardcode dem. Use environment values:
+If your app need settings or secrets (like connection string, API key), no put dem hard-hard for code. Make you use environment values:
 
 ```bash
-# Create one environment
+# Create an environment
 azd env new dev
 
-# Put one value wey no be secret
+# Set a non-secret value
 azd env set API_VERSION 1.0.0
 ```
 
-For real secrets, put dem for Key Vault and reference dem from your infrastructure — see [Chapter 3: Configuration & Authentication](../chapter-03-configuration/authsecurity.md).
+This one dey store local value only. To make am affect di app, you go need consume am explicitly for infrastructure parameters, supported service setting, or hook; jus set any random variable no go configure di deployed runtime.
+
+For real secrets, put dem for Key Vault and refer am from your infrastructure—check [Chapter 3: Configuration & Authentication](../chapter-03-configuration/authsecurity.md).
 
 ---
 
 ## Step 4: Deploy
 
-Now use the same workflow wey you sabi:
+Now use di same workflow wey you sabi already:
 
 ```bash
-# Make sure say e be you (e dey needed for azd)
+# Authenticate (required for azd)
 azd auth login
 
-# See di tins wey dem go create before
+# Preview the resources that will be created
 azd provision --preview
 
-# Set up di infrastructure and put your code live
+# Provision infrastructure and deploy your code
 azd up
 ```
 
-When e finish, azd go show your app URL. Check am same way like any azd app:
+When e finish, azd go print your app URL. Check am same way you take check any azd app:
 
 ```bash
-azd show           # show di endpoints
-azd monitor --logs # check di logs if e necessary
+azd show           # show endpoints
+azd monitor --logs # check logs if needed
 ```
 
 ---
 
-## Common First-Time Problems
+## Common First-Time Issues
 
-| Problem | Likely Cause | How to fix am |
-|---------|--------------|---------------|
-| azd no detect my app | Manifest like `package.json` dey miss | Add di manifest or select host manually during `azd init` |
-| Build fail during `azd up` | Your app need build step | Add `buildCommand`/`outputPath` under service inside `azure.yaml` |
-| App start but e dey return errors | Config or secret dey miss | Set correct values wit `azd env set` or key am to Key Vault |
-| Wrong host pick | Auto-detect no correct | Change `host:` for `azure.yaml` then run `azd up` again |
+| Symptom | Likely cause | Fix |
+|---------|--------------|-----|
+| azd no detect my app | Manifest missing (like `package.json`) | Add di manifest, or manually pick di host during `azd init` |
+| Build fail during `azd up` | App need build step | Configure di app package scripts or service `prepackage` hook; use `dist` for deployment output, no use `buildCommand`/`outputPath` |
+| App start but e dey return error | Config/secret dey missing | Wire values into runtime app settings or Key Vault reference; just `azd env set` no go complete am |
+| Wrong host choose | Auto-detection no match your needs | Change both `host:` and di infrastructure wey relate, or choose correct template wey match |
 
-For more info, see [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/README.md).
+For more, check [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/README.md).
 
 ---
 
@@ -179,10 +180,10 @@ azd down --force --purge
 
 ## Summary
 
-- `azd init` → **"Use code for di current directory"** dey add azd to app wey you don already get.
-- `azure.yaml` dey map your code folder to Azure hosts; `infra/` dey define resources like Bicep.
-- `azd infra generate` dey allow you check or customize di generated infrastructure.
-- After init, your existing app go use di exact same `azd up` / `azd down` workflow as template-based app.
+- `azd init` → **"Use code in the current directory"** add azd to app wey you get already.
+- `azure.yaml` dey map your code folders to Azure hosts; `infra/` dey define resources as Bicep.
+- `azd infra generate` make you fit review or customize di infrastructure wey dem generate.
+- Once you don initialize, your existing app dey use di exact same `azd up` / `azd down` workflow like template-based app.
 
 ---
 

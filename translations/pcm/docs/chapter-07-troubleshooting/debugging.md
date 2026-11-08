@@ -9,65 +9,60 @@
 
 ## Introduction
 
-This complete guide dey show advanced ways to debug, tools, and techniques wey go help you diagnose and fix complex wahala wey relate to Azure Developer CLI deployments. You go learn systematic troubleshooting methods, how to analyze logs, performance profiling, and advanced diagnostic tools to quickly resolve deployment and runtime problems.
+Dis comprehensive guide dey provide advanced debugging strategies, tools, and teknik dem for diagnosing and resolving complex issues wit Azure Developer CLI deployments. Learn systematic troubleshooting methodologies, log analysis techniques, performance profiling, and advanced diagnostic tools to efficiently resolve deployment and runtime issues.
 
 ## Learning Goals
 
-If you finish this guide, you go:
-- Master systematic debugging methods for Azure Developer CLI issues
+By completing dis guide, you go:
+- Master systematic debugging methodologies for Azure Developer CLI issues
 - Understand advanced logging configuration and log analysis techniques
 - Implement performance profiling and monitoring strategies
 - Use Azure diagnostic tools and services for complex problem resolution
 - Apply network debugging and security troubleshooting techniques
-- Configure comprehensive monitoring and alerting to catch issues early
+- Configure comprehensive monitoring and alerting for proactive issue detection
 
 ## Learning Outcomes
 
-After you complete am, you go fit:
-- Use the TRIAGE methodology to systematically debug complex deployment issues
-- Configure and analyze full logging and tracing information
-- Use Azure Monitor, Application Insights, and diagnostic tools well
-- Debug network connectivity, authentication, and permission wahala on your own
+When you finish, you fit:
+- Apply the TRIAGE methodology to systematically debug complex deployment issues
+- Configure and analyze comprehensive logging and tracing information
+- Use Azure Monitor, Application Insights, and diagnostic tools effectively
+- Debug network connectivity, authentication, and permission issues independently
 - Implement performance monitoring and optimization strategies
-- Build custom debugging scripts and automation for things wey repeat
+- Create custom debugging scripts and automation for recurring issues
 
 ## Debugging Methodology
 
 ### The TRIAGE Approach
-- **T**ime: When the issue start?
-- **R**eproduce: You fit reproduce am steady?
-- **I**solate: Which component dey fail?
-- **A**nalyze: Wetin the logs dey talk?
-- **G**ather: Collect all the relevant information
-- **E**scalate: When you suppose call for additional help
+- **T**ime: When di issue start?
+- **R**eproduce: You fit dey consistently reproduce am?
+- **I**solate: Which part dey fail?
+- **A**nalyze: Wetin logs dey talk?
+- **G**ather: Collect all di relevant information
+- **E**scalate: When you suppose find extra help
 
 ## Enabling Debug Mode
 
+> **Scope:** Dis na diagnostic examples to adapt, no be supplied suite of scripts. Replace resource names/IDs; use Bash for shell blocks. `--debug` output and environment values fit get sensitive information—review/redact before you share. Examples wey deploy, roll back, or change configuration need explicit operator approval.
+
 ### Environment Variables
 ```bash
-# Make debugging dey show everything
-export AZD_DEBUG=true
-export AZD_LOG_LEVEL=debug
-export AZURE_CORE_DIAGNOSTICS_DEBUG=true
+# Enable diagnostics on the command under investigation
+azd show --debug
+az account show --debug
 
-# Debug wey dey for Azure CLI
-export AZURE_CLI_DIAGNOSTICS=true
-
-# Turn off telemetry so output go clean
+# Disable telemetry for cleaner output
 export AZD_DISABLE_TELEMETRY=true
 ```
 
 ### Debug Configuration
 ```bash
-# Make debug configuration dey for whole system
-azd config set debug.enabled true
-azd config set debug.logLevel debug
-azd config set debug.verboseOutput true
-
-# Make trace logging dey on
-azd config set trace.enabled true
-azd config set trace.outputPath ./debug-traces
+# Inspect supported flags rather than setting arbitrary config keys
+azd show --help
+azd config list
 ```
+
+`azd config set` fit store any kind keys; that one no mean `debug.enabled`, `debug.logLevel`, or `trace.outputPath` na supported settings. Use the released command's `--debug` flag.
 
 ## 📊 Log Analysis Techniques
 
@@ -83,66 +78,67 @@ FATAL   - Critical errors that cause application termination
 
 ### Structured Log Analysis
 ```bash
-# Check logs wit Azure Monitor (via azd monitor)
+# View logs with Azure Monitor (via azd monitor)
 azd monitor --logs
 
-# Check application logs as e dey happen
+# Open Application Insights Live Metrics (not a terminal log stream)
 azd monitor --live
 
-# If you wan analyze logs well-well, use Azure CLI with your App Service or Container App:
+# For detailed log analysis, use Azure CLI with your App Service or Container App:
 # App Service logs
-az webapp log tail --name <app-name> --resource-group <rg-name>
+az webapp log tail --name "$APP_NAME" --resource-group "$RG_NAME"
 
 # Container App logs
-az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
+az containerapp logs show --name "$APP_NAME" --resource-group "$RG_NAME" --follow
 
-# Export Application Insights logs so you fit analyze dem
+# Export Application Insights logs for analysis
 az monitor app-insights query \
-    --app <app-insights-name> \
+    --app "$APPI_NAME" \
+    --resource-group "$RG_NAME" \
     --analytics-query "traces | where timestamp > ago(1h) | where severityLevel >= 3"
 ```
 
 ### Log Correlation
 ```bash
 #!/bin/bash
-# correlate-logs.sh - Join logs dem wey relate from different services using Azure Monitor
+# correlate-logs.sh - Correlate logs across services using Azure Monitor
 
 TRACE_ID=$1
-APP_INSIGHTS_NAME=$2
+APP_INSIGHTS_ID=$2 # Application ID (GUID), not an ambiguous component name
 
-if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_NAME" ]; then
-    echo "Usage: $0 <trace-id> <app-insights-name>"
+if [ -z "$TRACE_ID" ] || [ -z "$APP_INSIGHTS_ID" ]; then
+    echo "Usage: $0 <trace-id> <application-id>"
     exit 1
 fi
 
 echo "Correlating logs for trace ID: $TRACE_ID"
 
-# Look for logs dem wey relate inside Application Insights
+# Search Application Insights for correlated logs
 az monitor app-insights query \
-    --app "$APP_INSIGHTS_NAME" \
+    --app "$APP_INSIGHTS_ID" \
     --analytics-query "union traces, exceptions, requests, dependencies | where operation_Id == '$TRACE_ID' | order by timestamp asc"
 
-# Look for Azure activity logs dem
-az monitor activity-log list --correlation-id "$TRACE_ID"
+# Activity Log correlation IDs describe management operations and are not the
+# same as application trace IDs. Obtain them from the failed ARM operation.
 ```
 
 ## 🛠️ Advanced Debugging Tools
 
 ### Azure Resource Graph Queries
 ```bash
-# Find resource dem by tags
+# Query resources by tags
 az graph query -q "Resources | where tags['azd-env-name'] == 'production' | project name, type, location"
 
-# Find deployment dem wey don fail
+# Find resource groups with non-success/missing provisioning state (NOT deployments)
 az graph query -q "ResourceContainers | where type == 'microsoft.resources/resourcegroups' | extend deploymentStatus = properties.provisioningState | where deploymentStatus != 'Succeeded'"
 
-# Check how resource dem dey
+# Check resource health
 az graph query -q "HealthResources | where properties.targetResourceId contains 'myapp' | project properties.targetResourceId, properties.currentHealthStatus"
 ```
 
 ### Network Debugging
 ```bash
-# Check if services dey connect to each oda
+# Test connectivity between services
 test_connectivity() {
     local source=$1
     local dest=$2
@@ -157,20 +153,21 @@ test_connectivity() {
         --output table
 }
 
-# How to use am
-test_connectivity "/subscriptions/.../myapp-web" "myapp-api.azurewebsites.net" 443
+# Usage
+# Source must be a supported Network Watcher source, e.g. a configured VM ID.
+test_connectivity "/subscriptions/.../providers/Microsoft.Compute/virtualMachines/myvm" "myapp-api.azurewebsites.net" 443
 ```
 
 ### Container Debugging
 ```bash
-# Find and fix wahala wey dey for container app
+# Debug container app issues
 debug_container() {
     local app_name=$1
     local resource_group=$2
     
     echo "=== Container App Status ==="
     az containerapp show --name "$app_name" --resource-group "$resource_group" \
-        --query "properties.{provisioningState:provisioningState,runningState:runningState}"
+        --query "properties.{provisioningState:provisioningState,runningStatus:runningStatus}"
     
     echo "=== Container App Revisions ==="
     az containerapp revision list --name "$app_name" --resource-group "$resource_group" \
@@ -183,10 +180,10 @@ debug_container() {
 
 ### Database Connection Debugging
 ```bash
-# Debug how database dey connect
+# Debug database connectivity
 debug_database() {
     local db_server=$1
-    local db_name=$2
+    local resource_group=$2
     
     echo "=== Database Server Status ==="
     az postgres flexible-server show --name "$db_server" --resource-group "$resource_group" \
@@ -204,22 +201,11 @@ debug_database() {
 
 ### Application Performance Monitoring
 ```bash
-# Make Application Insights debugging dey on
-export APPLICATIONINSIGHTS_CONFIGURATION_CONTENT='{
-  "role": {
-    "name": "myapp-debug"
-  },
-  "sampling": {
-    "percentage": 100
-  },
-  "instrumentation": {
-    "logging": {
-      "level": "DEBUG"
-    }
-  }
-}'
+# SDK settings are language-specific. For Python OpenTelemetry role naming,
+# set before configuring the Azure Monitor distro:
+export OTEL_SERVICE_NAME=myapp-debug
 
-# Monitoring wey you set for performance
+# Custom performance monitoring
 monitor_performance() {
     local endpoint=$1
     local duration=${2:-60}
@@ -227,8 +213,10 @@ monitor_performance() {
     echo "Monitoring $endpoint for $duration seconds..."
     
     for i in $(seq 1 $duration); do
-        response_time=$(curl -o /dev/null -s -w "%{time_total}" "$endpoint")
-        status_code=$(curl -o /dev/null -s -w "%{http_code}" "$endpoint")
+        # Capture status and duration from the SAME bounded request.
+        measurement=$(curl --max-time 10 -o /dev/null -s -w "%{http_code},%{time_total}" "$endpoint") || return 1
+        status_code=${measurement%,*}
+        response_time=${measurement#*,}
         
         echo "$(date '+%Y-%m-%d %H:%M:%S') - Status: $status_code, Response Time: ${response_time}s"
         sleep 1
@@ -238,23 +226,21 @@ monitor_performance() {
 
 ### Resource Utilization Analysis
 ```bash
-# Dey monitor how resources dey used
+# Monitor resource usage
 monitor_resources() {
-    local resource_group=$1
+    local plan_id=$1 # Full Microsoft.Web/serverfarms resource ID
     
     echo "=== CPU Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "CpuPercentage" \
+        --resource "$plan_id" \
+        --metrics "CpuPercentage" \
         --interval PT1M \
         --aggregation Average
     
     echo "=== Memory Usage ==="
     az monitor metrics list \
-        --resource-group "$resource_group" \
-        --resource-type "Microsoft.Web/sites" \
-        --metric "MemoryPercentage" \
+        --resource "$plan_id" \
+        --metrics "MemoryPercentage" \
         --interval PT1M \
         --aggregation Average
 }
@@ -271,27 +257,27 @@ set -e
 
 echo "Running integration tests with debugging..."
 
-# Make di debug environment ready
+# Set debug environment
 export NODE_ENV=test
-export DEBUG=*
+export DEBUG='app:*'
 export LOG_LEVEL=debug
 
-# Find di service endpoints
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Get service endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl // .services.api.ingresUrl')
 
 echo "Testing endpoints:"
 echo "Web: $WEB_URL"
 echo "API: $API_URL"
 
-# Test di health endpoints
+# Test health endpoints
 test_health() {
     local service=$1
     local url=$2
     
     echo "Testing $service health..."
     
-    response=$(curl -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
+    response=$(curl --max-time 10 -s -o /dev/null -w "%{http_code},%{time_total}" "$url/health")
     status_code=$(echo $response | cut -d',' -f1)
     response_time=$(echo $response | cut -d',' -f2)
     
@@ -303,17 +289,17 @@ test_health() {
     fi
 }
 
-# Run di tests
+# Run tests
 test_health "Web" "$WEB_URL"
 test_health "API" "$API_URL"
 
-# Run di custom integration tests
+# Run custom integration tests
 npm run test:integration
 ```
 
 ### Load Testing for Debugging
 ```bash
-# Simple load test wey go show where system dey choke
+# Simple load test to identify performance bottlenecks
 load_test() {
     local url=$1
     local concurrent=${2:-10}
@@ -321,14 +307,14 @@ load_test() {
     
     echo "Load testing $url with $concurrent concurrent connections, $requests total requests"
     
-    # We dey use Apache Bench (install: apt-get install apache2-utils)
+    # Using Apache Bench (install: apt-get install apache2-utils)
     ab -n "$requests" -c "$concurrent" -v 2 "$url" > load-test-results.txt
     
-    # Comot important metrics
+    # Extract key metrics
     echo "=== Load Test Results ==="
     grep -E "(Time taken|Requests per second|Time per request)" load-test-results.txt
     
-    # Check if any failure dey
+    # Check for failures
     grep -E "(Failed requests|Non-2xx responses)" load-test-results.txt
 }
 ```
@@ -337,26 +323,24 @@ load_test() {
 
 ### Bicep Template Debugging
 ```bash
-# Check Bicep templates an show full details
+# Validate Bicep templates with detailed output
 validate_bicep() {
     local template_file=$1
     
     echo "Validating Bicep template: $template_file"
     
-    # Check syntax
+    # Syntax validation
     az bicep build --file "$template_file" --stdout > /dev/null
     
-    # Check lint rules
+    # Lint validation
     az bicep lint --file "$template_file"
     
-    # Deploy wey show wetin go change
-    az deployment group what-if \
-        --resource-group "myapp-dev-rg" \
-        --template-file "$template_file" \
-        --parameters @main.parameters.json
+    # From the initialized project: azd resolves its parameter substitutions
+    # and deployment scope. Review hooks before provisioning preview.
+    azd provision --preview
 }
 
-# Debug how template dey deploy
+# Debug template deployment
 debug_deployment() {
     local deployment_name=$1
     local resource_group=$2
@@ -377,28 +361,22 @@ debug_deployment() {
 
 ### Resource State Analysis
 ```bash
-# Check resource states, see if dem dey inconsistent
+# Analyze resource states for inconsistencies
 analyze_resources() {
     local resource_group=$1
     
     echo "=== Resource Analysis for $resource_group ==="
     
-    # List all resources and dem status
+    # List all resources with their states
     az resource list --resource-group "$resource_group" \
         --query "[].{name:name,type:type,provisioningState:properties.provisioningState,location:location}" \
         --output table
     
-    # Check for resources wey don fail
-    failed_resources=$(az resource list --resource-group "$resource_group" \
-        --query "[?properties.provisioningState != 'Succeeded'].{name:name,state:properties.provisioningState}" \
-        --output tsv)
-    
-    if [ -n "$failed_resources" ]; then
-        echo "❌ Failed resources found:"
-        echo "$failed_resources"
-    else
-        echo "✅ All resources provisioned successfully"
-    fi
+    # Generic list responses often omit properties/provisioningState.
+    # Null is unknown, not failure; inspect the service-specific show command
+    # and deployment operations for the affected resource.
+    az deployment group list --resource-group "$resource_group" \
+        --query "[].{name:name,state:properties.provisioningState}" -o table
 }
 ```
 
@@ -406,23 +384,21 @@ analyze_resources() {
 
 ### Authentication Flow Debugging
 ```bash
-# Make we check Azure login
+# Debug Azure authentication
 debug_auth() {
     echo "=== Current Authentication Status ==="
     az account show --query "{user:user.name,tenant:tenantId,subscription:name}"
     
     echo "=== Token Information ==="
-    token=$(az account get-access-token --query accessToken -o tsv)
-    
-    # Decode JWT token (you go need jq and base64)
-    echo "$token" | cut -d'.' -f2 | base64 -d | jq '.'
+    # Do not print/decode bearer tokens into logs.
+    az account get-access-token --query "{expiresOn:expiresOn,tenant:tenant,subscription:subscription}" -o json
     
     echo "=== Role Assignments ==="
     user_id=$(az account show --query user.name -o tsv)
     az role assignment list --assignee "$user_id" --query "[].{role:roleDefinitionName,scope:scope}"
 }
 
-# Make we check Key Vault access
+# Debug Key Vault access
 debug_keyvault() {
     local vault_name=$1
     
@@ -440,14 +416,14 @@ debug_keyvault() {
 
 ### Network Security Debugging
 ```bash
-# Find and fix wahala for di network security groups
+# Debug network security groups
 debug_network_security() {
     local resource_group=$1
     
     echo "=== Network Security Groups ==="
     az network nsg list --resource-group "$resource_group" --query "[].{name:name,location:location}"
     
-    # Check di security rules
+    # Check security rules
     for nsg in $(az network nsg list --resource-group "$resource_group" --query "[].name" -o tsv); do
         echo "=== Rules for $nsg ==="
         az network nsg rule list --nsg-name "$nsg" --resource-group "$resource_group" \
@@ -460,26 +436,23 @@ debug_network_security() {
 
 ### Node.js Application Debugging
 ```javascript
-// debug-middleware.js - Express middleware wey dey debug
+// debug-middleware.js - Express debugging middleware
 const debug = require('debug')('app:debug');
 
 module.exports = (req, res, next) => {
     const start = Date.now();
     
-    // Dey log request details
+    // Log request details
     debug(`${req.method} ${req.url}`, {
-        headers: req.headers,
-        query: req.query,
-        body: req.body,
-        userAgent: req.get('User-Agent'),
-        ip: req.ip
+        // Do not log authorization headers, bodies, query strings, or client IPs.
+        route: req.route?.path || '(unmatched)'
     });
     
-    // Override res.json make e dey log responses
+    // Override res.json to log responses
     const originalJson = res.json;
     res.json = function(data) {
         const duration = Date.now() - start;
-        debug(`Response ${res.statusCode} in ${duration}ms`, data);
+        debug(`Response ${res.statusCode} in ${duration}ms`);
         return originalJson.call(this, data);
     };
     
@@ -489,14 +462,16 @@ module.exports = (req, res, next) => {
 
 ### Database Query Debugging
 ```javascript
-// Tools wey dey help debug database
+// database-debug.js - Database debugging utilities
 const { Pool } = require('pg');
 const debug = require('debug')('app:db');
 
 class DebuggingPool extends Pool {
     async query(text, params) {
         const start = Date.now();
-        debug('Executing query:', { text, params });
+        // Promise-based query(text, params) demo only; not a drop-in replacement
+        // for node-postgres callback/streaming overloads. Avoid query parameters.
+        debug('Executing query');
         
         try {
             const result = await super.query(text, params);
@@ -522,7 +497,7 @@ module.exports = DebuggingPool;
 ### Production Issue Response
 ```bash
 #!/bin/bash
-# emergency-debug.sh - Na emergency debug for production
+# emergency-debug.sh - Emergency production debugging
 
 set -e
 
@@ -538,34 +513,34 @@ echo "🚨 EMERGENCY DEBUGGING STARTED: $(date)"
 echo "Resource Group: $RESOURCE_GROUP"
 echo "Environment: $ENVIRONMENT"
 
-# Switch to di correct environment
+# Switch to correct environment
 azd env select "$ENVIRONMENT"
 
-# Collect di critical info
+# Collect critical information
 echo "=== 1. System Status ==="
 azd show --output json > emergency-status.json
-cat emergency-status.json | jq '.services[].endpoint'
+cat emergency-status.json | jq '.services[] | .ingressUrl // .ingresUrl'
 
 echo "=== 2. Application Health ==="
-for endpoint in $(cat emergency-status.json | jq -r '.services[].endpoint'); do
+for endpoint in $(cat emergency-status.json | jq -r '.services[] | (.ingressUrl // .ingresUrl // empty)'); do
     echo "Testing $endpoint/health"
     curl -f "$endpoint/health" || echo "❌ Health check failed for $endpoint"
 done
 
 echo "=== 3. Recent Errors ==="
-# Use Azure Monitor to see di error logs
+# Use Azure Monitor for error logs
 azd monitor --logs
 echo "Check Application Insights for detailed error analysis"
 
 echo "=== 4. Resource Status ==="
-az resource list --resource-group "$RESOURCE_GROUP" \
-    --query "[?properties.provisioningState != 'Succeeded']" > failed-resources.json
+az deployment group list --resource-group "$RESOURCE_GROUP" \
+    --query "[?properties.provisioningState == 'Failed']" > failed-resources.json
 
-if [ -s failed-resources.json ]; then
-    echo "❌ Failed resources found!"
+if jq -e 'length > 0' failed-resources.json >/dev/null; then
+    echo "❌ Failed group deployments found (inspect subscription deployments too)!"
     cat failed-resources.json
 else
-    echo "✅ All resources are healthy"
+    echo "No failed group deployment records found; resource health is not established."
 fi
 
 echo "=== 5. Recent Deployments ==="
@@ -576,58 +551,59 @@ az deployment group list --resource-group "$RESOURCE_GROUP" \
 echo "Emergency debugging completed: $(date)"
 echo "Files generated:"
 echo "  - emergency-status.json"
-echo "  - emergency-errors.log"
 echo "  - failed-resources.json"
 echo "  - recent-deployments.json"
 ```
 
 ### Rollback Procedures
 ```bash
-# Small script wey go roll back sharp-sharp
+# Quick rollback script
 quick_rollback() {
     local environment=$1
     local previous_commit=$2
     
     echo "🔄 INITIATING ROLLBACK for $environment"
     
-    # Change di environment
+    # Switch environment
     azd env select "$environment"
     
-    # Roll back with Git (AZD no get rollback wey dey inside)
+    # Rollback using Git (AZD doesn't have built-in rollback)
     git checkout "$previous_commit"
-    azd deploy
+    azd deploy || return 1
     
-    # Make sure say rollback work
+    # Verify rollback
     echo "Verifying rollback..."
     azd show
     
-    # Test di critical endpoints
-    WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-    curl -f "$WEB_URL/health" || echo "❌ Rollback verification failed"
+    # Test critical endpoints
+    WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl // .services.web.ingresUrl') || return 1
+    curl --max-time 10 -f "$WEB_URL/health" || { echo "❌ Rollback verification failed"; return 1; }
     
     echo "✅ Rollback completed"
 }
 ```
 
+Dis code-only rollback no dey revert infrastructure, database migrations, or secrets. Make you use clean worktree, record di starting commit, and restore am afterwards; di command dey check out di selected commit for di current repository.
+
 ## 📊 Debugging Dashboards
 
 ### Custom Monitoring Dashboard
 ```bash
-# Make Application Insights queries to find and fix wahala
+# Create Application Insights queries for debugging
 create_debug_queries() {
-    local app_insights_name=$1
+    local app_insights_name=$1 # Use the Application ID GUID to avoid name ambiguity
     
-    # Query to find error dem
+    # Query for errors
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "exceptions | where timestamp > ago(1h) | summarize count() by problemId, outerMessage"
     
-    # Query to find performance wahala
+    # Query for performance issues
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "requests | where timestamp > ago(1h) and duration > 5000 | project timestamp, name, duration, resultCode"
     
-    # Query to find when dependency dem fail
+    # Query for dependency failures
     az monitor app-insights query \
         --app "$app_insights_name" \
         --analytics-query "dependencies | where timestamp > ago(1h) and success == false | project timestamp, name, target, resultCode"
@@ -636,15 +612,15 @@ create_debug_queries() {
 
 ### Log Aggregation
 ```bash
-# Gather log dem from different Azure sources
+# Aggregate logs from multiple Azure sources
 aggregate_logs() {
     local output_file="aggregated-logs-$(date +%Y%m%d_%H%M%S).json"
-    local app_insights_name=$1
+    local app_insights_name=$1 # Application ID GUID
     
     echo "Aggregating logs to $output_file"
     
     {
-        echo '{"source": "azure-activity", "logs": '
+        echo '[{"source": "azure-activity", "logs": '
         az monitor activity-log list --start-time "$(date -d '1 hour ago' -Iseconds)" --output json
         echo '}'
         
@@ -654,6 +630,7 @@ aggregate_logs() {
                 --analytics-query "union traces, exceptions | where timestamp > ago(1h)" --output json
             echo '}'
         fi
+        echo ']'
     } > "$output_file"
     
     echo "Logs aggregated in $output_file"
@@ -663,8 +640,8 @@ aggregate_logs() {
 ## 🔗 Advanced Resources
 
 ### Custom Debug Scripts
-Create a `scripts/debug/` directory with:
-- `health-check.sh` - Full health check script
+Create `scripts/debug/` directory with:
+- `health-check.sh` - Comprehensive health checking
 - `performance-test.sh` - Automated performance testing
 - `log-analyzer.py` - Advanced log parsing and analysis
 - `resource-validator.sh` - Infrastructure validation
@@ -676,6 +653,7 @@ hooks:
   postdeploy:
     shell: sh
     run: |
+      set -e
       echo "Running post-deployment debugging..."
       ./scripts/debug/health-check.sh
       ./scripts/debug/performance-test.sh
@@ -688,23 +666,23 @@ hooks:
 
 ## Best Practices
 
-1. **Always enable debug logging** in non-production environments
+1. **Always enable debug logging** for non-production environments
 2. **Create reproducible test cases** for issues
 3. **Document debugging procedures** for your team
 4. **Automate health checks** and monitoring
-5. **Keep debug tools updated** with your application changes
+5. **Keep debug tools updated** with your app changes
 6. **Practice debugging procedures** during non-incident times
 
 ## Next Steps
 
 - [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md) - Plan resource requirements
-- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - Choose appropriate service tiers
+- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - Choose proper service tiers
 - [Preflight Checks](../chapter-06-pre-deployment/preflight-checks.md) - Pre-deployment validation
 - [Cheat Sheet](../../resources/cheat-sheet.md) - Quick reference commands
 
 ---
 
-**Remember**: Good debugging na to dey systematic, thorough, and patient. These tools and techniques go help you diagnose issues faster and more effectively.
+**Remember**: Good debugging na about to be systematic, thorough, and patient. These tools and techniques go help you diagnose issues faster and more effective.
 
 ---
 
@@ -716,6 +694,6 @@ hooks:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-Dis document na wetin we translate with AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). Even though we dey try make everything correct, abeg sabi say automatic/machine translation fit get mistakes or no too accurate. The original document for im original language suppose be di official/authoritative source. If na important info, make you use professional human translator. We no dey responsible for any misunderstanding or wrong interpretation wey fit come from using this translation.
+**Disclaimer**:
+Dis document don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even tho we dey try make am correct, abeg make you know say automated translation fit get errors or mistakes. Di original document for dia own language na im be di correct source. For important info, make person wey sabi human translation do am. We no go responsible for any misunderstanding or wrong understanding wey fit happen because of dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
