@@ -1,55 +1,57 @@
-# SKU Seçim Rehberi - Doğru Azure Hizmet Katmanlarını Seçmek
+# SKU Seçim Kılavuzu - Doğru Azure Hizmet Katmanlarını Seçme
 
 **Bölüm Navigasyonu:**
-- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar](../../README.md)
-- **📖 Mevcut Bölüm**: Bölüm 6 - Dağıtımdan Önce Doğrulama ve Planlama
+- **📚 Kurs Ana Sayfası**: [Yeni Başlayanlar için AZD](../../README.md)
+- **📖 Mevcut Bölüm**: Bölüm 6 - Ön Dağıtım Doğrulama & Planlama
 - **⬅️ Önceki**: [Kapasite Planlaması](capacity-planning.md)
 - **➡️ Sonraki**: [Uçuş Öncesi Kontroller](preflight-checks.md)
 - **🚀 Sonraki Bölüm**: [Bölüm 7: Sorun Giderme](../chapter-07-troubleshooting/common-issues.md)
 
 ## Giriş
 
-Bu kapsamlı rehber, farklı ortamlar, iş yükleri ve gereksinimler için optimal Azure hizmet SKU'larını (Stock Keeping Units) seçmenize yardımcı olur. Azure Developer CLI dağıtımlarınız için en uygun hizmet katmanlarını seçmek üzere performans ihtiyaçlarını, maliyet değerlendirmelerini ve ölçeklenebilirlik gereksinimlerini nasıl analiz edeceğinizi öğrenin.
+Bu kapsamlı kılavuz, farklı ortamlar, iş yükleri ve gereksinimler için optimal Azure hizmet SKU'larını (Stok Tutma Birimleri) seçmenize yardımcı olur. Azure Developer CLI dağıtımlarınız için performans ihtiyaçları, maliyet değerlendirmeleri ve ölçeklenebilirlik gereksinimlerini analiz ederek en uygun hizmet katmanlarını seçmeyi öğrenin.
 
 ## Öğrenme Hedefleri
 
-Bu rehberi tamamlayarak:
+Bu kılavuzu tamamlayarak:
 - Azure SKU kavramlarını, fiyatlandırma modellerini ve özellik farklarını anlayacaksınız
-- Geliştirme, sahneleme ve üretim için ortam-spesifik SKU seçim stratejilerini öğreneceksiniz
-- İş yükü gereksinimlerini analiz edip bunları uygun hizmet katmanlarıyla eşleştirebileceksiniz
-- Akıllı SKU seçimiyle maliyet optimizasyonu stratejilerini uygulayabileceksiniz
-- SKU tercihleri için performans testleri ve doğrulama tekniklerini uygulayabileceksiniz
-- Otomatik SKU önerileri ve izleme yapılandırmaları oluşturabileceksiniz
+- Geliştirme, hazırlık ve üretim için ortam bazlı SKU seçim stratejilerinde uzmanlaşacaksınız
+- İş yükü gereksinimlerini analiz edip uygun hizmet katmanları ile eşleştireceksiniz
+- Akıllı SKU seçimi ile maliyet optimizasyon stratejilerini uygulayacaksınız
+- SKU seçimleri için performans testi ve doğrulama tekniklerini uygulayacaksınız
+- Otomatik SKU önerileri ve izleme yapılandıracaksınız
 
 ## Öğrenme Çıktıları
 
-Tamamlandığında, şu yetkinliklere sahip olacaksınız:
-- İş yükü gereksinimleri ve kısıtlamalarına göre uygun Azure hizmet SKU'larını seçmek
-- Uygun katman seçimiyle maliyet-etkin çoklu ortam mimarileri tasarlamak
-- SKU tercihleri için performans kıyaslaması ve doğrulama uygulamak
-- SKU önerisi ve maliyet optimizasyonu için otomatik araçlar oluşturmak
-- Değişen gereksinimler için SKU geçişleri ve ölçeklendirme stratejileri planlamak
-- Hizmet katmanı seçimine Azure Well-Architected Framework ilkelerini uygulamak
+Tamamladıktan sonra:
+- İş yükü gereksinimleri ve kısıtlamalarına göre uygun Azure hizmet SKU'larını seçebileceksiniz
+- Doğru katman seçimi ile çok ortamlı maliyet-etkin mimariler tasarlayabileceksiniz
+- SKU seçimleri için performans kıyaslama ve doğrulama uygulayabileceksiniz
+- SKU önerisi ve maliyet optimizasyonu için otomatik araçlar oluşturabileceksiniz
+- Değişen gereksinimler için SKU geçişleri ve ölçeklendirme stratejileri planlayabileceksiniz
+- Azure İyi Tasarlanmış Çerçeve prensiplerini hizmet katmanı seçiminde uygulayabileceksiniz
 
 ## İçindekiler
 
-- [SKU'ları Anlamak](../../../../docs/chapter-06-pre-deployment)
-- [Ortam Tabanlı Seçim](../../../../docs/chapter-06-pre-deployment)
-- [Servise Özel Yönergeler](../../../../docs/chapter-06-pre-deployment)
-- [Maliyet Optimizasyonu Stratejileri](../../../../docs/chapter-06-pre-deployment)
-- [Performans Hususları](../../../../docs/chapter-06-pre-deployment)
-- [Hızlı Başvuru Tabloları](../../../../docs/chapter-06-pre-deployment)
-- [Doğrulama Araçları](../../../../docs/chapter-06-pre-deployment)
+- [SKU'ları Anlamak](#understanding-skus)
+- [Ortam Bazlı Seçim](#environment-based-selection)
+- [Hizmete Özel Kılavuzlar](#service-specific-guidelines)
+- [Maliyet Optimizasyonu Stratejileri](#cost-optimization-strategies)
+- [Performans Dikkatleri](#performance-considerations)
+- [Hızlı Referans Tabloları](#quick-reference-tables)
+- [Doğrulama Araçları](#validation-tools)
 
 ---
 
 ## SKU'ları Anlamak
 
-### SKU'lar nedir?
+> **Örnek kapsam:** Aşağıdaki YAML SKU haritaları ve performans konfigürasyonları tasarım notlarıdır, bir `azure.yaml` şeması veya yük aracı konfigürasyonu değildir. Bicep blokları alternatifler/parçalar içindir: parametrelerini ve üst kaynaklarını beyan edin, birleştirirken benzersiz sembolik isimler kullanın ve modülleri çalışan bir projeye bağlayın. Fiyatlar, limitler ve bölge/SKU kullanılabilirliği aboneliğiniz için dağıtımdan önce kontrol edilmelidir.
 
-SKU'lar (Stock Keeping Units), Azure kaynakları için farklı hizmet katmanlarını ve performans seviyelerini temsil eder. Her SKU farklı sunar:
+### SKU'lar Nedir?
 
-- **Performans özellikleri** (CPU, bellek, verim)
+SKU'lar (Stok Tutma Birimleri), Azure kaynakları için farklı hizmet katmanları ve performans seviyelerini temsil eder. Her SKU aşağıdakilerde farklılık gösterir:
+
+- **Performans özellikleri** (CPU, bellek, throughput)
 - **Özellik kullanılabilirliği** (ölçeklendirme seçenekleri, SLA seviyeleri)
 - **Fiyatlandırma modelleri** (tüketim bazlı, rezerve kapasite)
 - **Bölgesel kullanılabilirlik** (tüm SKU'lar tüm bölgelerde mevcut değildir)
@@ -58,7 +60,7 @@ SKU'lar (Stock Keeping Units), Azure kaynakları için farklı hizmet katmanlar�
 
 1. **İş Yükü Gereksinimleri**
    - Beklenen trafik/yük desenleri
-   - Performans gereksinimleri (CPU, bellek, I/O)
+   - Performans gereksinimleri (CPU, bellek, G/Ç)
    - Depolama ihtiyaçları ve erişim desenleri
 
 2. **Ortam Türü**
@@ -66,10 +68,10 @@ SKU'lar (Stock Keeping Units), Azure kaynakları için farklı hizmet katmanlar�
    - Kullanılabilirlik gereksinimleri
    - Güvenlik ve uyumluluk ihtiyaçları
 
-3. **Bütçe Kısıtları**
-   - Başlangıç maliyetleri vs. işletme maliyetleri
+3. **Bütçe Kısıtlamaları**
+   - Başlangıç maliyetleri vs. operasyonel maliyetler
    - Rezerve kapasite indirimleri
-   - Otomatik ölçeklemenin maliyet etkileri
+   - Otomatik ölçeklendirme maliyet etkileri
 
 4. **Büyüme Projeksiyonları**
    - Ölçeklenebilirlik gereksinimleri
@@ -78,13 +80,13 @@ SKU'lar (Stock Keeping Units), Azure kaynakları için farklı hizmet katmanlar�
 
 ---
 
-## Ortam Tabanlı Seçim
+## Ortam Bazlı Seçim
 
 ### Geliştirme Ortamı
 
-**Öncelikler**: Maliyet optimizasyonu, temel işlevsellik, kolay sağlama/kaldırma
+**Öncelikler**: Maliyet optimizasyonu, temel işlevsellik, kolay tahsis/iptal
 
-#### Recommended SKUs
+#### Önerilen SKU'lar
 ```yaml
 # Development environment configuration
 environment: development
@@ -92,23 +94,23 @@ skus:
   app_service: "F1"          # Free tier
   sql_database: "Basic"       # Basic tier, 5 DTU
   storage: "Standard_LRS"     # Locally redundant
-  cosmos_db: "Free"          # Free tier (400 RU/s)
+  cosmos_db: "Standard"      # Free tier is an account opt-in, not a SKU
   key_vault: "Standard"      # Standard pricing tier
-  application_insights: "Free" # First 5GB free
+  application_insights: "workspace-based" # Consumption billing; no Free SKU
 ```
 
 #### Özellikler
-- **App Service**: Basit testler için F1 (Ücretsiz) veya B1 (Basic)
-- **Veritabanları**: Minimum kaynaklarla Basic katman
-- **Depolama**: Sadece yerel yedeklemeli Standard
+- **App Service**: Basit testler için F1 (Ücretsiz) veya B1 (Temel)
+- **Veritabanları**: Minimum kaynaklarla temel katman
+- **Depolama**: Sadece yerel yedeklilik ile standart
 - **Hesaplama**: Paylaşılan kaynaklar kabul edilebilir
-- **Ağ**: Temel yapılandırmalar
+- **Ağ**: Temel konfigürasyonlar
 
-### Sahneleme/Test Ortamı
+### Hazırlık/Test Ortamı
 
-**Öncelikler**: Üretim benzeri yapılandırma, maliyet dengesi, performans testi yeteneği
+**Öncelikler**: Üretim benzeri konfigürasyon, maliyet dengesi, performans testi yeteneği
 
-#### Recommended SKUs
+#### Önerilen SKU'lar
 ```yaml
 # Staging environment configuration
 environment: staging
@@ -122,23 +124,23 @@ skus:
 
 #### Özellikler
 - **Performans**: Üretim kapasitesinin %70-80'i
-- **Özellikler**: Çoğu üretim özelliği etkin
-- **Yedeklilik**: Bir miktar coğrafi yedeklilik
-- **Ölçekleme**: Test için sınırlı otomatik ölçekleme
+- **Özellikler**: Üretim özelliklerinin çoğu aktif
+- **Yedeklilik**: Bazı coğrafi yedeklilik
+- **Ölçeklendirme**: Testler için sınırlı otomatik ölçeklendirme
 - **İzleme**: Tam izleme yığını
 
 ### Üretim Ortamı
 
 **Öncelikler**: Performans, kullanılabilirlik, güvenlik, uyumluluk, ölçeklenebilirlik
 
-#### Recommended SKUs
+#### Önerilen SKU'lar
 ```yaml
 # Production environment configuration
 environment: production
 skus:
   app_service: "P1V3"        # Premium v3 tier
   sql_database: "P2"         # Premium tier, 250 DTU
-  storage: "Premium_GRS"     # Premium geo-redundant
+  storage: "Standard_GRS"    # Geo-redundant; Premium_GRS is not a storage SKU
   cosmos_db: "Provisioned"   # Dedicated throughput
   container_apps: "Dedicated" # Dedicated environment
   key_vault: "Premium"       # Premium with HSM
@@ -146,26 +148,26 @@ skus:
 
 #### Özellikler
 - **Yüksek kullanılabilirlik**: %99.9+ SLA gereksinimleri
-- **Performans**: Adanmış kaynaklar, yüksek verim
+- **Performans**: Ayrılmış kaynaklar, yüksek verim
 - **Güvenlik**: Premium güvenlik özellikleri
-- **Ölçekleme**: Tam otomatik ölçekleme yetenekleri
+- **Ölçeklendirme**: Tam otomatik ölçeklendirme yetenekleri
 - **İzleme**: Kapsamlı gözlemlenebilirlik
 
 ---
 
-## Servise Özel Yönergeler
+## Hizmete Özel Kılavuzlar
 
 ### Azure App Service
 
 #### SKU Karar Matrisi
 
-| Kullanım Durumu | Önerilen SKU | Gerekçe |
+| Kullanım Durumu | Önerilen SKU | Gerekçesi |
 |----------|----------------|-----------|
-| Geliştirme/Test | F1 (Free) or B1 (Basic) | Maliyet-etkin, test için yeterli |
-| Küçük üretim uygulamaları | S1 (Standard) | Özel alan adları, SSL, otomatik ölçekleme |
-| Orta ölçek üretim uygulamaları | P1V3 (Premium V3) | Daha iyi performans, daha fazla özellik |
-| Yüksek trafikli uygulamalar | P2V3 or P3V3 | Adanmış kaynaklar, yüksek performans |
-| Kritik görev uygulamaları | I1V2 (Isolated V2) | Ağ izolasyonu, adanmış donanım |
+| Geliştirme/Test | F1 (Ücretsiz) veya B1 (Temel) | Maliyet-etkin, test için yeterli |
+| Küçük üretim uygulamaları | S1 (Standart) | Özel alan adları, SSL, otomatik ölçeklendirme |
+| Orta üretim uygulamaları | P1V3 (Premium V3) | Daha iyi performans, daha fazla özellik |
+| Yüksek trafik uygulamaları | P2V3 veya P3V3 | Ayrılmış kaynaklar, yüksek performans |
+| Kritik görev uygulamaları | I1V2 (İzole V2) | Ağ izolasyonu, ayrılmış donanım |
 
 #### Konfigürasyon Örnekleri
 
@@ -205,15 +207,15 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 
 #### SKU Seçim Çerçevesi
 
-1. **DTU tabanlı (Database Transaction Units)**
-   - **Basic**: 5 DTU - Geliştirme/test
-   - **Standard**: S0-S12 (10-3000 DTU) - Genel amaç
+1. **DTU tabanlı (Veritabanı İşlem Birimleri)**
+   - **Temel**: 5 DTU - Geliştirme/test
+   - **Standart**: S0-S12 (10-3000 DTU) - Genel amaçlı
    - **Premium**: P1-P15 (125-4000 DTU) - Performans kritik
 
 2. **vCore tabanlı** (Üretim için önerilen)
-   - **General Purpose**: Dengeli işlem ve depolama
-   - **Business Critical**: Düşük gecikme, yüksek IOPS
-   - **Hyperscale**: Yüksek ölçeklenebilir depolama (up to 100TB)
+   - **Genel Amaç**: Dengeli hesaplama ve depolama
+   - **İş Kritik**: Düşük gecikme, yüksek IOPS
+   - **Hiperscale**: Yüksek ölçeklenebilir depolama; mevcut boyut sınırları ve bölgesel destek doğrulanmalı
 
 #### Örnek Konfigürasyonlar
 
@@ -254,13 +256,13 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 
 #### Ortam Türleri
 
-1. **Tüketim tabanlı**
-   - Kullandıkça öde fiyatlandırma
+1. **Tüketim bazlı**
+   - Kullanım bazlı fiyatlandırma
    - Geliştirme ve değişken iş yükleri için uygun
    - Paylaşılan altyapı
 
-2. **Adanmış (İş Yükü Profilleri)**
-   - Adanmış hesaplama kaynakları
+2. **Özel (İş Yükü Profilleri)**
+   - Ayrılmış hesaplama kaynakları
    - Öngörülebilir performans
    - Üretim iş yükleri için daha iyi
 
@@ -284,7 +286,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
     configuration: {
       ingress: {
         external: true
-        targetPort: 3000
+        targetPort: 80 // nginx listens on 80 by default
       }
     }
     template: {
@@ -305,9 +307,9 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
 }
 ```
 
-**Üretim (Adanmış)**
+**Üretim (Ayrılmış)**
 ```bicep
-resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
+resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-03-01' = {
   name: 'cae-${environmentName}-prod'
   location: location
   properties: {
@@ -315,30 +317,32 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
     workloadProfiles: [{
       name: 'production-profile'
       workloadProfileType: 'D4'
-      minimumCount: 2
+      minimumCount: 3
       maximumCount: 10
     }]
   }
 }
 ```
 
+Bölge yedekliliği ayrıca desteklenen bölge altyapısı ve uygun VNet/alt ağ konfigürasyonu gerektirir; burada atlanmıştır. Bu örnek üç adede kadar ayrılmış node bütçelendirir; bölge arası dağıtım için en az iki uygulama çoğaltması yapılandırın ve bölge arızası için çoğaltmaları ve nodeları boyutlandırın. Daha fazla bilgi için [Container Apps güvenilirlik rehberi](https://learn.microsoft.com/azure/reliability/reliability-azure-container-apps) bakınız. Bir uygulamayı bu profile atamak için `workloadProfileName: 'production-profile'` ayarlayın; sadece profil oluşturmak uygulamaları otomatik taşımıyor.
+
 ### Azure Cosmos DB
 
-#### İşlem Hacmi Modelleri
+#### Throughput Modelleri
 
-1. **Manuel Tahsis Edilmiş İşlem Hacmi**
+1. **Manuel Rezerve Edilmiş Throughput**
    - Öngörülebilir performans
    - Rezerve kapasite indirimleri
-   - Dengeli iş yükleri için en iyi
+   - Sabit iş yükleri için en iyisi
 
-2. **Otomatik Ölçeklenebilir Tahsis Edilmiş İşlem Hacmi**
-   - Kullanıma göre otomatik ölçeklenir
-   - Kullandığınız kadar ödersiniz (minimum ile)
+2. **Otomatik Ölçeklenen Rezerve Throughput**
+   - Kullanıma göre otomatik ölçeklendirme
+   - Tüketilen kadar ödeme (minimum ile)
    - Değişken iş yükleri için iyi
 
 3. **Sunucusuz**
    - İstek başına ödeme
-   - Tahsis edilmiş işlem hacmi yok
+   - Rezerve edilmiş throughput yok
    - Geliştirme ve aralıklı iş yükleri için ideal
 
 #### SKU Örnekleri
@@ -396,18 +400,18 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 }
 ```
 
-### Azure Storage Account
+### Azure Storage Hesabı
 
 #### Depolama Hesabı Türleri
 
 1. **Standard_LRS** - Geliştirme, kritik olmayan veriler
-2. **Standard_GRS** - Üretim, coğrafi yedeklilik gerektiğinde
-3. **Premium_LRS** - Yüksek performanslı uygulamalar
+2. **Standard_GRS** - Üretim, coğrafi yedeklilik gerekliyse
+3. **Premium_LRS** - Yüksek performans uygulamaları
 4. **Premium_ZRS** - Bölge yedekliliği ile yüksek kullanılabilirlik
 
 #### Performans Katmanları
 
-- **Standard**: Genel amaç, maliyet-etkin
+- **Standart**: Genel amaç, maliyet-etkin
 - **Premium**: Yüksek performans, düşük gecikme senaryoları
 
 ```bicep
@@ -451,19 +455,22 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ## Maliyet Optimizasyonu Stratejileri
 
-### 1. Rezerve Kapasite
+### 1. Rezerve Edilmiş Kapasite
 
-Kaynakları 1-3 yıl rezerve edin, önemli indirimler elde edin:
+1-3 yıl için kaynakları ayırtın ve önemli indirimlerden faydalanın:
 
 ```bash
-# Rezervasyon seçeneklerini kontrol et
-az reservations catalog show --reserved-resource-type SqlDatabase
-az reservations catalog show --reserved-resource-type CosmosDb
+# With the reservation extension available, inspect the subscription catalog
+az reservations catalog show \
+  --subscription-id "$AZURE_SUBSCRIPTION_ID" \
+  --reserved-resource-type SqlDatabases
 ```
+
+Rezervasyon teklifleri ve uygun kaynak türleri değişir; her hizmet/SKU’nun rezervasyon desteklediğini varsaymak yerine kataloğu ve satın alma koşullarını inceleyin.
 
 ### 2. Doğru Boyutlandırma
 
-Daha küçük SKU'larla başlayın ve gerçek kullanım temelinde yukarı ölçeklendirin:
+Küçük SKU'larla başlayın ve gerçek kullanım temelinde yukarı ölçeklendirin:
 
 ```yaml
 # Progressive scaling approach
@@ -477,9 +484,9 @@ production:
   app_service: "P1V3"  # Premium tier
 ```
 
-### 3. Otomatik Ölçekleme Yapılandırması
+### 3. Otomatik Ölçeklendirme Konfigürasyonu
 
-Maliyetleri optimize etmek için akıllı ölçekleme uygulayın:
+Maliyeti optimize etmek için akıllı ölçeklendirme uygulayın:
 
 ```bicep
 resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
@@ -496,6 +503,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
       rules: [
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'GreaterThan'
@@ -513,6 +521,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
         }
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'LessThan'
@@ -536,9 +545,9 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 }
 ```
 
-### 4. Zamanlanmış Ölçekleme
+### 4. Planlanmış Ölçeklendirme
 
-İş dışı saatlerde küçültün:
+Off-time saatlerinde ölçek küçültme:
 
 ```json
 {
@@ -583,11 +592,11 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 
 ---
 
-## Performans Hususları
+## Performans Dikkatleri
 
 ### Temel Performans Gereksinimleri
 
-SKU seçiminden önce net performans gereksinimleri tanımlayın:
+SKU seçmeden önce net performans gereksinimleri tanımlayın:
 
 ```yaml
 performance_requirements:
@@ -605,19 +614,21 @@ performance_requirements:
 
 ### Yük Testi
 
-Performansı doğrulamak için farklı SKU'ları test edin:
+Farklı SKU'ları test ederek performansı doğrulayın:
 
 ```bash
-# Azure Load Testing hizmeti
+# Azure Load Testing service (requires an existing load-testing resource,
+# the load extension, and a valid config plus referenced test script)
 az load test create \
-  --name "sku-performance-test" \
-  --resource-group $RESOURCE_GROUP \
-  --load-test-config @load-test-config.yaml
+  --load-test-resource "$LOAD_TEST_RESOURCE" \
+  --resource-group "$RESOURCE_GROUP" \
+  --test-id "sku-performance-test" \
+  --load-test-config-file load-test-config.yaml
 ```
 
 ### İzleme ve Optimizasyon
 
-Kapsamlı izleme kurun:
+Kapsamlı izleme yapılandırın:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -626,7 +637,8 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   kind: 'web'
   properties: {
     Application_Type: 'web'
-    RetentionInDays: 90
+    WorkspaceResourceId: logAnalyticsWorkspace.id
+    IngestionMode: 'LogAnalytics'
   }
 }
 
@@ -644,45 +656,45 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ---
 
-## Hızlı Başvuru Tabloları
+## Hızlı Referans Tabloları
 
-### App Service SKU Hızlı Başvuru
+### App Service SKU Hızlı Referans
 
 | SKU | Katman | vCPU | RAM | Depolama | Fiyat Aralığı | Kullanım Durumu |
-|-----|------|------|-----|---------|-------------|----------|
+|-----|--------|------|-----|----------|--------------|-----------------|
 | F1 | Ücretsiz | Paylaşılan | 1GB | 1GB | Ücretsiz | Geliştirme |
-| B1 | Basic | 1 | 1.75GB | 10GB | $ | Küçük uygulamalar |
-| S1 | Standard | 1 | 1.75GB | 50GB | $$ | Üretim |
+| B1 | Temel | 1 | 1.75GB | 10GB | $ | Küçük uygulamalar |
+| S1 | Standart | 1 | 1.75GB | 50GB | $$ | Üretim |
 | P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | Yüksek performans |
-| I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | Kurumsal |
+| I1V2 | İzole V2 | 2 | 8GB | 1TB | $$$$ | Kurumsal |
 
-### SQL Database SKU Hızlı Başvuru
+### SQL Veritabanı SKU Hızlı Referans
 
 | SKU | Katman | DTU/vCore | Depolama | Fiyat Aralığı | Kullanım Durumu |
-|-----|------|-----------|---------|-------------|----------|
-| Basic | Basic | 5 DTU | 2GB | $ | Geliştirme |
-| S2 | Standard | 50 DTU | 250GB | $$ | Küçük üretim |
+|-----|--------|----------|----------|--------------|-----------------|
+| Basic | Temel | 5 DTU | 2GB | $ | Geliştirme |
+| S2 | Standart | 50 DTU | 250GB | $$ | Küçük üretim |
 | P2 | Premium | 250 DTU | 1TB | $$$ | Yüksek performans |
-| GP_Gen5_4 | General Purpose | 4 vCore | 4TB | $$$ | Dengeli |
-| BC_Gen5_8 | Business Critical | 8 vCore | 4TB | $$$$ | Misyon kritik |
+| GP_Gen5_4 | Genel Amaç | 4 vCore | 4TB | $$$ | Dengeli |
+| BC_Gen5_8 | İş Kritik | 8 vCore | 4TB | $$$$ | Kritik görev |
 
-### Container Apps SKU Hızlı Başvuru
+### Container Apps SKU Hızlı Referans
 
 | Model | Fiyatlandırma | CPU/Bellek | Kullanım Durumu |
-|-------|---------|------------|----------|
-| Consumption | Kullandıkça öde | 0.25-2 vCPU | Geliştirme, değişken yük |
-| Dedicated D4 | Rezerve | 4 vCPU, 16GB | Üretim |
-| Dedicated D8 | Rezerve | 8 vCPU, 32GB | Yüksek performans |
+|-------|-------------|------------|-----------------|
+| Tüketim | Kullanıma göre ödeme | Desteklenen CPU/bellek kombinasyonları ortam/profile göre değişir | Geliştirme veya üretim, değişken yük |
+| Ayrılmış D4 | Ayrılmış node faturalama | Her node için 4 vCPU, 16GiB | Sürekli yük/izolasyon ihtiyaçları |
+| Ayrılmış D8 | Ayrılmış node faturalama | Her node için 8 vCPU, 32GiB | Daha yüksek sürekli yük |
 
 ---
 
 ## Doğrulama Araçları
 
-### SKU Availability Checker
+### SKU Kullanılabilirlik Kontrolü
 
 ```bash
 #!/bin/bash
-# Hedef bölgedeki SKU kullanılabilirliğini kontrol edin
+# Check SKU availability in target region
 
 check_sku_availability() {
     local region=$1
@@ -699,7 +711,8 @@ check_sku_availability() {
             az sql db list-editions --location $region --output table
             ;;
         "storage")
-            az storage account check-name --name "test" --output table
+            # Name availability is not SKU availability.
+            az storage sku list --query "[?name=='$sku'].{name:name,locations:locations,restrictions:restrictions}" --output json
             ;;
         *)
             echo "Resource type not supported"
@@ -707,14 +720,16 @@ check_sku_availability() {
     esac
 }
 
-# Kullanım
+# Usage
 check_sku_availability "eastus" "app-service" "P1V3"
 ```
 
-### Cost Estimation Script
+### Maliyet Tahmin Scripti
+
+**Yalnızca sözde kod:** Aşağıdaki `Get-ResourceCost` proje-özel bir fonksiyondur, geçerli bölgesel/sözleşme fiyatlandırması ve kullanım varsayımlarını kullanarak sizin tarafınızdan uygulanması gerekir. PowerShell veya Azure cmdlet değildir.
 
 ```powershell
-# Maliyet tahmini için PowerShell betiği
+# PowerShell script for cost estimation
 function Get-AzureCostEstimate {
     param(
         [string]$SubscriptionId,
@@ -728,7 +743,7 @@ function Get-AzureCostEstimate {
         $resourceType = $resource.Key
         $sku = $resource.Value
         
-        # Azure Fiyatlandırma API'sini veya hesaplayıcısını kullanın
+        # Use Azure Pricing API or calculator
         $cost = Get-ResourceCost -Type $resourceType -SKU $sku
         $totalCost += $cost
         
@@ -738,7 +753,7 @@ function Get-AzureCostEstimate {
     Write-Host "Total estimated cost: $totalCost/month"
 }
 
-# Kullanım
+# Usage
 $resources = @{
     "AppService" = "P1V3"
     "SqlDatabase" = "GP_Gen5_4"
@@ -748,7 +763,9 @@ $resources = @{
 Get-AzureCostEstimate -ResourceGroup "rg-myapp-prod" -Resources $resources
 ```
 
-### Performance Validation
+### Performans Doğrulaması
+
+Aşağıdaki YAML bir gereksinim taslağıdır, **Azure Load Testing, JMeter, Locust veya k6 giriş şeması değildir**. Üstteki yük-test komutundan önce seçtiğiniz aracın gerçek yapılandırmasına dönüştürün.
 
 ```yaml
 # Load test configuration for SKU validation
@@ -787,39 +804,39 @@ test_configuration:
 
 ### Yapılması Gerekenler
 
-1. **Küçük başlayın ve gerçek kullanım temelinde ölçeklendirin**
+1. **Küçük başlayın ve gerçek kullanıma göre ölçeklendirin**
 2. **Farklı ortamlar için farklı SKU'lar kullanın**
 3. **Performansı ve maliyetleri sürekli izleyin**
-4. **Üretim iş yükleri için rezerve kapasiteden yararlanın**
-5. **Uygun yerlerde otomatik ölçeklemeyi uygulayın**
+4. **Üretim iş yükleri için rezerve kapasiteyi kullanın**
+5. **Uygun yerlerde otomatik ölçeklendirme uygulayın**
 6. **Gerçekçi iş yükleriyle performans testleri yapın**
-7. **Büyümeyi planlayın, ancak aşırı kaynak ayırmaktan kaçının**
+7. **Büyüme planlayın ama aşırı tahsis yapmaktan kaçının**
 8. **Mümkün olduğunda geliştirme için ücretsiz katmanları kullanın**
 
 ### Yapılmaması Gerekenler
 
 1. **Geliştirme için üretim SKU'larını kullanmayın**
-2. **Bölgesel SKU kullanılabilirliğini görmezden gelmeyin**
+2. **Bölgesel SKU kullanılabilirliğini göz ardı etmeyin**
 3. **Veri transfer maliyetlerini unutmayın**
-4. **Gerekçe olmadan aşırı kaynak ayırmayın**
-5. **Bağımlılıkların etkisini göz ardı etmeyin**
-6. **Otomatik ölçekleme limitlerini çok yüksek ayarlamayın**
+4. **Gerekçelendirmeden aşırı tahsis yapmayın**
+5. **Bağımlılıkların etkisini görmezden gelmeyin**
+6. **Otomatik ölçeklendirme sınırlarını çok yüksek ayarlamayın**
 7. **Uyumluluk gereksinimlerini unutmayın**
 8. **Sadece fiyata göre karar vermeyin**
 
 ---
 
-**İpucu**: Azure Cost Management ve Advisor'ı kullanarak SKU seçimlerinizi gerçek kullanım desenlerine göre optimize etmek için kişiselleştirilmiş öneriler alın.
+**Profesyonel İpucu**: Azure Maliyet Yönetimi ve Danışmanı kullanarak gerçek kullanım desenlerine dayalı SKU seçimlerinizi optimize etmek için kişiselleştirilmiş öneriler alın.
 
 ---
 
-**Gezinme**
+**Navigasyon**
 - **Önceki Ders**: [Kapasite Planlaması](capacity-planning.md)
 - **Sonraki Ders**: [Uçuş Öncesi Kontroller](preflight-checks.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Feragatname:
-Bu belge, Co-op Translator (https://github.com/Azure/co-op-translator) adlı yapay zeka çeviri hizmeti kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, özgün dilindeki haliyle yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek herhangi bir yanlış anlama veya yanlış yorumdan sorumlu değiliz.
+**Feragatname**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

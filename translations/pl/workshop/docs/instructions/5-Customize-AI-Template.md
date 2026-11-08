@@ -1,470 +1,133 @@
-# 5. Dostosuj Szablon
+# 5. Dostosuj szablon
 
-!!! tip "NA KONIEC TEGO MODUŁU BĘDZIESZ MÓGŁ"
+!!! tip "NA KOŃCU TEGO MODUŁU BĘDZIESZ W STANIE"
 
-    - [ ] Poznać domyślne możliwości Agenta AI
-    - [ ] Dodać AI Search z własnym indeksem
-    - [ ] Aktywować i analizować metryki śledzenia
-    - [ ] Wykonać przebieg oceny
-    - [ ] Przeprowadzić skanowanie red-teamingowe
-    - [ ] **Lab 5: Opracować Plan Dostosowania** 
-
----
-
-## 5.1 Możliwości Agenta AI
-
-!!! success "Ukończyliśmy to w Laboratorium 01"
-
-- **Wyszukiwanie plików**: Wbudowane w OpenAI wyszukiwanie plików do pozyskiwania wiedzy
-- **Cytowania**: Automatyczne przypisywanie źródeł w odpowiedziach
-- **Konfigurowalne instrukcje**: Modyfikowanie zachowania i osobowości agenta
-- **Integracja narzędzi**: Rozszerzalny system narzędzi dla niestandardowych funkcji
+    - [ ] Distinguish configuration changes from application implementation
+    - [ ] Plan a grounded retrieval customization
+    - [ ] Enable and inspect tracing without unnecessarily capturing sensitive content
+    - [ ] Locate and run the sample's current evaluation and red-teaming tests
+    - [ ] **Lab 5:** Build a customization and validation plan
 
 ---
 
-## 5.2 Opcje pozyskiwania wiedzy
+## 5.1 Ustal bazę odniesienia
 
-!!! task "Aby to zakończyć, musimy wprowadzić zmiany i wdrożyć ponownie"    
-    
-    ```bash title=""
-    # Ustaw zmienne środowiskowe
-    azd env set USE_AZURE_AI_SEARCH_SERVICE true
-    azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
-    azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
-    azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
-    azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
+Użyj zainicjowanego repozytorium [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) z poprzednich modułów. Zapisz wersję szablonu, wersję AZD, wybrane środowisko, wdrożenie modelu oraz przykładowe pytania przed wprowadzeniem jakichkolwiek zmian.
 
-    # Prześlij dane i utwórz mój indeks
+Przykład implementuje aplikację czatu wspieraną przez agenta. Nie staje się to systemem detalicznym z dwoma agentami tylko przez ustawienie zmiennych środowiskowych lub zapis dodatkowych plików instrukcji. Dodatkowi agenci, obsługa narzędzi, routowanie, autoryzacja i dostęp do danych wymagają kodu aplikacji.
 
-    ```
+Sprawdź obecne instrukcje i narzędzia wdrożonego agenta w Foundry. Przetestuj jedno pytanie faktograficzne, jedno pytanie typu retrieval i jedno pytanie, na które dane próbki nie mogą odpowiedzieć. Zweryfikuj cytaty względem faktycznych źródłowych dokumentów zamiast zakładać, że płynna odpowiedź jest poprawna.
 
----
+## 5.2 Dostosuj pobieranie wiedzy
 
-**OpenAI Wyszukiwanie plików (Domyślne):**
+Szablon wspiera pobieranie na podstawie plików oraz opcjonalną integrację z Azure AI Search. Postępuj zgodnie z [aktualnym przewodnikiem AI Search](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/ai_search.md) dotyczącym indeksowania i konfiguracji narzędzi.
 
-- Wbudowane w Foundry Agents
-- Automatyczne przetwarzanie i indeksowanie dokumentów
-- Brak dodatkowej konfiguracji
-
-**Azure AI Search (Opcjonalne):**
-
-- Hybrydowe wyszukiwanie semantyczne i wektorowe
-- Zarządzanie niestandardowymi indeksami
-- Zaawansowane możliwości wyszukiwania
-- Wymaga `USE_AZURE_AI_SEARCH_SERVICE=true`
-
----
-
-## 5.3 [Śledzenie i monitorowanie](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
-
-!!! task "Aby to zakończyć, musimy wprowadzić zmiany i wdrożyć ponownie"    
-    
-    ```bash title=""
-    azd env set ENABLE_AZURE_MONITOR_TRACING true
-    azd deploy
-    ```
-
-**Śledzenie:**
-
-- Integracja OpenTelemetry
-- Śledzenie żądań/odpowiedzi
-- Metryki wydajności
-- Dostępne w portalu Microsoft Foundry
-
-**Logowanie:**
-
-- Logi aplikacji w Container Apps
-- Strukturalne logowanie z identyfikatorami korelacji
-- Podgląd logów w czasie rzeczywistym i historycznych
-
----
-
-## 5.4 [Ocena Agenta](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
-
-**Ocena lokalna:**
-
-- Wbudowane mechanizmy oceny jakości
-- Niestandardowe skrypty oceny
-- Benchmarki wydajności
-
-**Ciągłe monitorowanie:**
-
-- Automatyczna ocena interakcji na żywo
-- Śledzenie metryk jakości
-- Wykrywanie regresji wydajności
-
-**Integracja CI/CD:**
-
-- Workflow GitHub Actions
-- Automatyczne testowanie i ocena
-- Testy porównawcze statystyczne
-
----
-
-## 5.5 [Agent AI Red Teaming](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
-
-**AI Red Teaming:**
-
-- Automatyczne skanowanie bezpieczeństwa
-- Ocena ryzyka systemów AI
-- Ocena bezpieczeństwa w wielu kategoriach
-
-**Uwierzytelnianie:**
-
-- Managed Identity dla usług Azure
-- Opcjonalne uwierzytelnianie Azure App Service
-- Fallback basic auth dla środowiska developerskiego
-
-
-
-!!! quote "NA KONIEC TEGO LABORATORIUM POWINIENEŚ MIEĆ"
-    - [ ] Określone wymagania scenariusza
-    - [ ] Dostosowane zmienne środowiskowe (konfiguracja)
-    - [ ] Dostosowane instrukcje agenta (zadania)
-    - [ ] Wdrożony dostosowany szablon (aplikacja)
-    - [ ] Wykonane zadania po wdrożeniu (ręczne)
-    - [ ] Przeprowadzoną ocenę testową
-
-Ten przykład pokazuje dostosowanie szablonu do korporacyjnego zastosowania detalicznego z dwoma wyspecjalizowanymi agentami i wieloma wdrożeniami modeli.
-
----
-
-## 5.6 Dostosuj go dla siebie!
-
-### 5.6.1. Wymagania scenariusza
-
-#### **Wdrożenia agentów:** 
-
-   - Agent zakupowy: Pomaga klientom znaleźć i porównać produkty
-   - Agent lojalnościowy: Zarządza nagrodami i promocjami klientów
-
-#### **Wdrożenia modeli:**
-
-   - `gpt-4.1`: Główny model czatu
-   - `o3`: Model rozumowania dla złożonych zapytań
-   - `gpt-4.1-nano`: Lekki model do prostych interakcji
-   - `text-embedding-3-large`: Wysokiej jakości embeddingi do wyszukiwania
-
-#### **Funkcje:**
-
-   - Włączone śledzenie i monitorowanie
-   - AI Search dla katalogu produktów
-   - Ramy oceny dla zapewnienia jakości
-   - Red teaming do walidacji bezpieczeństwa
-
----
-
-### 5.6.2 Implementacja scenariusza
-
-
-#### 5.6.2.1. Konfiguracja przed wdrożeniem
-
-Utwórz skrypt instalacyjny (`setup-retail.sh`)
-
-```bash title="" linenums="0"
-#!/bin/bash
-
-# Ustaw nazwę środowiska
-azd env set AZURE_ENV_NAME "retail-ai-agents"
-
-# Skonfiguruj region (wybierz w zależności od dostępności modelu)
-azd env set AZURE_LOCATION "eastus2"
-
-# Włącz wszystkie opcjonalne usługi
-azd env set USE_APPLICATION_INSIGHTS true
+```bash
+# Infrastructure settings; these can add charges
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
-azd env set ENABLE_AZURE_MONITOR_TRACING true
-
-# Skonfiguruj główny model czatu (gpt-4.1 jako najbliższy dostępny do gpt-4.1)
-azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
-azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
-azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
-azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
-
-# Skonfiguruj model osadzania dla ulepszonego wyszukiwania
-azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
-azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
-azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
-
-# Ustaw nazwę agenta (utworzy pierwszego agenta)
-azd env set AZURE_AI_AGENT_NAME "shopper-agent"
-
-# Skonfiguruj indeks wyszukiwania
-azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
-
-echo "Environment configured for retail deployment"
-echo "Recommended quota: 300,000+ TPM across all models"
-```
-
----
-
-#### 5.6.2.2: Instrukcje Agenta
-
-Utwórz `custom-agents/shopper-agent-instructions.md`:
-
-```markdown
-# Shopper Agent Instructions
-
-You are a helpful shopping assistant for an enterprise retail company. Your role is to:
-
-1. **Product Discovery**: Help customers find products that match their needs
-2. **Comparison**: Provide detailed product comparisons with pros/cons
-3. **Recommendations**: Suggest complementary products and alternatives
-4. **Inventory**: Check product availability and delivery options
-
-## Guidelines:
-- Always provide citations from the product catalog
-- Be conversational and helpful
-- Ask clarifying questions to understand customer needs
-- Mention relevant promotions when appropriate
-- Escalate complex warranty or return questions to human agents
-
-## Knowledge Base:
-You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
-```
-
-Utwórz `custom-agents/loyalty-agent-instructions.md`:
-
-```markdown
-# Loyalty Agent Instructions
-
-You are a customer loyalty specialist focused on maximizing customer satisfaction and retention. Your responsibilities include:
-
-1. **Rewards Management**: Explain point values, redemption options, and tier benefits
-2. **Promotions**: Identify applicable discounts and special offers
-3. **Program Navigation**: Help customers understand loyalty program features
-4. **Account Support**: Assist with account-related questions and updates
-
-## Guidelines:
-- Prioritize customer satisfaction and retention
-- Explain complex program rules in simple terms
-- Proactively identify opportunities for customers to save money
-- Celebrate customer milestones and achievements
-- Connect customers with shopper agent for product questions
-
-## Knowledge Base:
-You have access to loyalty program rules, current promotions, customer tier information, and reward catalogs.
-```
-
----
-
-#### 5.6.2.3: Skrypt wdrożeniowy
-
-Utwórz `deploy-retail.sh`:
-
-```bash title="" linenums="0"
-#!/bin/bash
-set -e
-
-echo "🚀 Starting Enterprise Retail AI Agents deployment..."
-
-# Sprawdź wymagania wstępne
-echo "📋 Validating prerequisites..."
-if ! command -v azd &> /dev/null; then
-    echo "❌ Azure Developer CLI (azd) is required"
-    exit 1
-fi
-
-if ! az account show &> /dev/null; then
-    echo "❌ Please login to Azure CLI: az login"
-    exit 1
-fi
-
-# Skonfiguruj środowisko
-echo "🔧 Configuring deployment environment..."
-chmod +x setup-retail.sh
-./setup-retail.sh
-
-# Sprawdź limit w wybranym regionie
-echo "📊 Checking quota availability..."
-LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
-echo "Deploying to region: $LOCATION"
-echo "⚠️  Please verify you have 300,000+ TPM quota for:"
-echo "   - gpt-4.1: 150,000 TPM"
-echo "   - text-embedding-3-large: 75,000 TPM"
-echo "   - Additional models: 75,000+ TPM"
-
-read -p "Continue with deployment? (y/N): " -n 1 -r
-echo
-if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-    echo "Deployment cancelled"
-    exit 1
-fi
-
-# Wdróż infrastrukturę i aplikację
-echo "🏗️  Deploying Azure infrastructure..."
+azd provision --preview
 azd up
-
-# Zbierz dane wyjściowe wdrożenia
-echo "📝 Capturing deployment information..."
-azd show > deployment-info.txt
-
-# Pobierz URL aplikacji webowej
-APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
-
-if [ ! -z "$APP_URL" ]; then
-    echo "✅ Deployment completed successfully!"
-    echo "🌐 Web Application: $APP_URL"
-    echo "🔍 Azure Portal: Run 'azd show' for resource group link"
-    echo "📊 Microsoft Foundry Portal: https://ai.azure.com"
-else
-    echo "⚠️  Deployment completed but unable to retrieve URL"
-    echo "Run 'azd show' for deployment details"
-fi
-
-echo "📚 Next steps:"
-echo "1. Create second agent (Loyalty Agent) in Microsoft Foundry portal"
-echo "2. Upload product catalog to search index"
-echo "3. Configure custom agent instructions"
-echo "4. Test both agents with sample queries"
 ```
 
----
+Włączenie usługi to tylko część pobierania. Przed przesłaniem własnych danych:
 
-#### 5.6.2.4: Konfiguracja po wdrożeniu
+1. Potwierdź, że masz pozwolenie na użycie dokumentów i usuń informacje wrażliwe.
+2. Wybierz model embeddingu obsługiwany w twoim regionie i ustaw jego kompatybilną wersję, typ wdrożenia i wymiary wektorów.
+3. Utwórz/wypełnij indeks zgodnie z dokumentowanym procesem próbki.
+4. Skonfiguruj narzędzie pobierania agenta, aby używało tego indeksu.
+5. Przetestuj pobieranie, cytowania, autoryzację i zachowanie, gdy nie istnieje żaden istotny dokument.
 
-Utwórz `configure-retail-agents.sh`:
+Nie przełączaj się z `text-embedding-3-small` na inny model embeddingu bez sprawdzenia wymiarów i ewentualnego przebudowania/przeindeksowania wektorów. Nazwa taka jak `retail-products` nie jest implementowanym katalogiem ani polityką kontroli dostępu.
 
-```bash title="" linenums="0"
-#!/bin/bash
+## 5.3 Śledzenie i monitorowanie
 
-echo "🔧 Configuring retail agents..."
+Postępuj zgodnie z [przewodnikiem obserwowalności próbki](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md#tracing-and-monitoring). Upewnij się, że wymagana zasobów Application Insights i połączenie już istnieją; jeśli zmieniasz ustawienia infrastruktury, użyj `azd up`.
 
-# Pobierz informacje o wdrożeniu
-PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
-AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
-
-echo "Project Endpoint: $PROJECT_ENDPOINT"
-echo "Primary Agent ID: $AGENT_ID"
-
-# Instrukcje dotyczące ręcznej konfiguracji
-echo "
-🤖 Agent Configuration:
-
-1. **Update Shopper Agent Instructions:**
-   - Go to Microsoft Foundry portal: https://ai.azure.com
-   - Navigate to your project
-   - Select Agents tab
-   - Edit the existing agent
-   - Update instructions with content from custom-agents/shopper-agent-instructions.md
-
-2. **Create Loyalty Agent:**
-   - In Agents tab, click 'Create Agent'
-   - Name: 'loyalty-agent'
-   - Model: Use same deployment as shopper agent
-   - Instructions: Use content from custom-agents/loyalty-agent-instructions.md
-   - Enable file search tool
-   - Save and note the Agent ID
-
-3. **Upload Knowledge Base:**
-   - Prepare product catalog files (JSON/CSV format)
-   - Upload to both agents' file search
-   - Or configure Azure AI Search index
-
-4. **Test Configuration:**
-   - Test shopper agent with product queries
-   - Test loyalty agent with rewards questions
-   - Verify citations and search functionality
-
-📊 Monitoring Setup:
-- Tracing: Available in Microsoft Foundry > Tracing tab
-- Logs: Azure Portal > Container Apps > Monitoring > Log Stream
-- Evaluation: Run python evals/evaluate.py
-
-🔒 Security Validation:
-- Run red teaming: python airedteaming/ai_redteaming.py
-- Review security recommendations
-- Configure authentication if needed
-"
+```bash
+azd env set ENABLE_AZURE_MONITOR_TRACING true
+azd up
 ```
 
-### 5.6.3: Testowanie i walidacja
+Wyślij testowe żądanie, następnie przejrzyj logi aplikacji Container App i widok śledzenia agenta w Foundry. Sprawdź opóźnienia, wywołania narzędzi, błędy oraz korelację między żądaniem a śladem. Nie zakładaj, że telemetria jest podłączona tylko dlatego, że wdrożenie się powiodło.
 
-Utwórz `test-retail-deployment.sh`:
+Pozostaw `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT` wyłączone chyba że wyraźnie przejrzałeś zgodę, redakcję, przechowywanie i kontrole dostępu. Ślady mogą zawierać wrażliwe argumenty narzędzi lub treść dokumentów, nawet jeśli zwykłe logi aplikacji wyglądają nieszkodliwie.
 
-```bash title="" linenums="0"
-#!/bin/bash
+## 5.4 Ocena agenta
 
-echo "🧪 Testing retail deployment..."
+Punkt wejścia oceny próbki to teraz [`tests/test_evaluation.py`](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/tests/test_evaluation.py), a nie katalog `evals/`. Z korzenia próbki użyj środowiska Python, które spełnia dokumentowane wymagania:
 
-# Sprawdź, czy zmienne środowiskowe są ustawione
-echo "📋 Checking environment configuration..."
-azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
-
-# Przetestuj dostępność aplikacji webowej
-APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
-if [ ! -z "$APP_URL" ]; then
-    echo "🌐 Testing web application at: $APP_URL"
-    HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
-    if [ "$HTTP_STATUS" = "200" ]; then
-        echo "✅ Web application is responding"
-    else
-        echo "❌ Web application returned status: $HTTP_STATUS"
-    fi
-else
-    echo "❌ Could not retrieve web application URL"
-fi
-
-# Uruchom ocenę, jeśli jest skonfigurowana
-if [ -f "evals/evaluate.py" ]; then
-    echo "📊 Running agent evaluation..."
-    cd evals
-    python -m pip install -r ../src/requirements.txt
-    python -m pip install azure-ai-evaluation
-    python evaluate.py
-    cd ..
-fi
-
-echo "
-🎯 Deployment validation complete!
-
-Next steps:
-1. Access the web application and test basic functionality
-2. Create the second agent (Loyalty Agent) in Microsoft Foundry portal
-3. Upload your product catalog and loyalty program data
-4. Configure agent instructions for your specific use case
-5. Run comprehensive testing with your retail scenarios
-"
+```bash
+python -m pip install -r src/requirements.txt
+pytest tests/test_evaluation.py -s
 ```
 
----
+Przed uruchomieniem ukończ [wymagania wstępne oceny](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md). Testy ładują konfigurację z wybranego `.azure/<environment>/.env`; potwierdź, że wybrane jest odpowiednie środowisko. Ważne dane wejściowe obejmują:
 
-### 5.6.4 Oczekiwane rezultaty
+- `AZURE_EXISTING_AIPROJECT_ENDPOINT`
+- `AZURE_EXISTING_AGENT_ID`, używając formatu wymaganego przez obecną próbkę (zweryfikowana wersja wykorzystuje `agent_name:agent_version`)
+- `AZURE_AI_AGENT_DEPLOYMENT_NAME`, używanego jako wdrożenie modelu sędziego
 
-Po wykonaniu tego przewodnika wdrożeniowego będziesz mieć:
+Sprawdź testy, aby zrozumieć wybór ewaluatora, progi, wymagane role i koszty modeli. Ukończone uruchomienie nie oznacza automatycznie przejścia bramki jakości; sprawdź wyniki, przypadki nieudane/błędne i powiązane wyniki w Foundry.
 
-1. **Wdrożoną infrastrukturę:**
+### Oddzielne rozszerzenie ocen AZD
 
-      - Projekt Microsoft Foundry z wdrożeniami modeli
-      - Container Apps hostujące aplikację webową
-      - Usługa AI Search dla katalogu produktów
-      - Application Insights do monitorowania
+Powyzszy test w Pythonie to **przepływ pracy specyficzny dla próbki**. Opcjonalne rozszerzenie `azure.ai.evaluations` jest innym przepływem pracy, posiadającym własną konfigurację `evals/azure.eval.yaml`:
 
-2. **Początkowego agenta:**
+```bash
+azd extension install azure.ai.evaluations
+azd ai eval --help
+```
 
-      - Agent zakupowy skonfigurowany z podstawowymi instrukcjami
-      - Włączona możliwość wyszukiwania plików
-      - Skonfigurowane śledzenie i monitorowanie
+Pełna konfiguracja rozszerzenia dostępna jest w [przepływach oceny i migracji](https://github.com/microsoft/AZD-for-beginners/blob/main/docs/chapter-08-production/production-ai-practices.md). Od beta.22 rozszerzenia agents nie używaj usuniętych poleceń `azd ai agent eval`. Instalacja rozszerzenia ocen nie konwertuje automatycznie testów Pythonowej próbki ani nie tworzy konfiguracji oceny.
 
-3. **Gotowość do dostosowań:**
+## 5.5 Red teaming AI i ciągła ewaluacja
 
-      - Ramy do dodania Agenta lojalnościowego
-      - Szablony niestandardowych instrukcji
-      - Skrypty testowe i walidacyjne
-      - Konfiguracja monitorowania i oceny
+Aktualna próbka zawiera [`tests/test_red_teaming.py`](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/tests/test_red_teaming.py). Ukończ jej wymagania wstępne i przejrzyj zamierzony cel oraz koszty przed uruchomieniem:
 
-4. **Gotowość produkcyjna:**
+```bash
+pytest tests/test_red_teaming.py -s
+```
 
-      - Skanowanie bezpieczeństwa red teaming
-      - Monitorowanie wydajności
-      - Ramy oceny jakości
-      - Skalowalna architektura
+Użyj autoryzowanego wdrożenia testowego i danych syntetycznych. Przejrzyj wygenerowane ataki i wyniki; to skanowanie nie gwarantuje, że aplikacja jest bezpieczna lub zgodna.
 
-Ten przykład pokazuje, jak szablon AZD można rozszerzać i dostosowywać do specyficznych scenariuszy korporacyjnych, zachowując najlepsze praktyki dotyczące bezpieczeństwa, monitorowania i skalowalności.
+Przewodnik [po obserwowalności](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/observability.md#continuous-evaluation) opisuje też ciągłą ewaluację konfigurowaną przy starcie kontenera. Ocena odbywa się na podstawie faktycznych interakcji użytkownika, a nie generowanego ruchu testowego, a wsparcie ewaluatora zależy od regionu. Brak interakcji oznacza brak wpisów ewaluacji. Zweryfikuj wersję zainstalowanej próbki i konfigurację ewaluatora zamiast zakładać, że każde wdrożenie ma te same domyślne ustawienia.
+
+Uwierzytelnianie jest oddzielne od ewaluacji. Postępuj zgodnie z dokumentowaną konfiguracją tożsamości/dostępu próbki. Nie istnieje udokumentowane „podstawowe uwierzytelnianie jako zapasowe” do zabezpieczania publicznego punktu końcowego.
+
+## 5.6 Ćwiczenie projektowe: dostosowanie systemu detalicznego
+
+!!! warning "Ćwiczenie projektowe, a nie kompletne wdrożenie"
+
+    The workshop does not provide a complete Shopper/Loyalty multi-agent implementation. Do not claim that additional agents, models, catalogs, or policies exist until you have implemented and verified them.
+
+Napisz krótki plan uwzględniający:
+
+| Obszar | Decyzja i dowody do zebrania |
+|------|------------------------------|
+| Odpowiedzialności agenta | Zacznij od jednego agenta lub uzasadnij osobnych agentów Shopper i Loyalty oraz logikę routingu |
+| Dane | Zdefiniuj syntetyczny katalog/dane o nagrodach i właściciela aktualizacji |
+| Narzędzia | Najpierw wdroż obsługę tylko do odczytu; określ autoryzację i walidację dla jakichkolwiek zapisów |
+| Modele | Wybierz dostępne kombinacje model/wersja/SKU i zweryfikuj limit; unikaj provisionowania nieużywanych modeli |
+| Pobieranie | Zdefiniuj indeksowanie, wymiary embeddingu, cytowania i kontroli dostępu na poziomie dokumentu |
+| Ewaluacja | Dodaj przypadki z oczekiwaną odpowiedzią, pytania niewspierane, użycie narzędzi i bezpieczeństwo z wyraźnymi progami |
+| Operacje | Zdefiniuj telemetrię, budżety opóźnień/błędów, limity kosztów oraz właściciela sprzątania |
+
+Zapisanie `custom-agents/shopper-agent-instructions.md` nie powoduje, że próbka ją ładuje. Znajdź kod aplikacji tworzący/aktualizujący agenta, podłącz tam przeglądane instrukcje i zweryfikuj wersję agenta przed testami. Instrukcje nie mogą przyznawać dostępu do danych lub narzędzi, których nie zaimplementowałeś.
+
+Wprowadzaj zmiany pojedynczo, ponownie wdrażaj dotknięte komponenty i ponownie uruchamiaj pytania bazowe oraz ewaluacje. Zachowaj działającą rewizję do porównań. Dla inspiracji architektonicznych zobacz [retail blueprint](https://github.com/microsoft/AZD-for-beginners/blob/main/examples/retail-scenario.md), który również nie jest kompletną aplikacją detaliczną.
+
+!!! quote "NA KOŃCU TEGO LABORATORIUM POWINIENEŚ MIEĆ"
+
+    - [ ] A documented customization scope and cost/region checks
+    - [ ] Evidence that retrieval and tracing work for your selected environment
+    - [ ] Reviewed evaluation/red-teaming results, or a clear explanation of unmet prerequisites
+    - [ ] A list of missing implementation work rather than a claim of automatic production readiness
+
+Kontynuuj do [Demontaż infrastruktury](6-Teardown-Infrastructure.md).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Zastrzeżenie**:  
-Ten dokument został przetłumaczony przy użyciu usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dążymy do jak największej dokładności, prosimy pamiętać, że tłumaczenia automatyczne mogą zawierać błędy lub niedokładności. Oryginalny dokument w języku źródłowym powinien być uznawany za źródło wiarygodne. W przypadku informacji istotnych zaleca się skorzystanie z profesjonalnego tłumaczenia wykonywanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+**Zastrzeżenie**:
+Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Choć dążymy do dokładności, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub niedokładności. Oryginalny dokument w jego języku źródłowym należy uznawać za autorytatywne źródło. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

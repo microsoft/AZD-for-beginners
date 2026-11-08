@@ -1,21 +1,21 @@
-# Capitolo 7: Risoluzione dei Problemi e Debugging
+# Capitolo 7: Risoluzione problemi e Debug
 
-**📚 Corso**: [AZD Per Principianti](../../README.md) | **⏱️ Durata**: 1-1.5 ore | **⭐ Complessità**: Intermedio
+**📚 Corso**: [AZD Per Principianti](../../README.md) | **⏱️ Durata**: 1-1.5 ore | **⭐ Difficoltà**: Intermedio
 
 ---
 
 ## Panoramica
 
-Questo capitolo ti aiuta a diagnosticare e risolvere problemi comuni quando si lavora con Azure Developer CLI. Dai fallimenti di distribuzione a problemi specifici dell'AI.
+Questo capitolo ti aiuta a diagnosticare e risolvere problemi comuni quando lavori con Azure Developer CLI. Dai fallimenti di distribuzione ai problemi specifici dell'AI.
 
-> Validato con `azd 1.27.1` a luglio 2026.
+> Guida ai comandi verificata rispetto alla versione ufficiale di `azd 1.37.2`. Le distribuzioni cloud non sono state eseguite. Sostituisci i nomi e gli ID delle risorse di esempio prima di usare i comandi.
 
 ## Obiettivi di Apprendimento
 
-Completando questo capitolo, sarai in grado di:
-- Diagnosticare i fallimenti comuni di distribuzione AZD
+Completando questo capitolo, potrai:
+- Diagnosticare i fallimenti comuni nelle distribuzioni AZD
 - Debuggare problemi di autenticazione e permessi
-- Risolvere problemi di connettività del servizio AI
+- Risolvere problemi di connettività ai servizi AI
 - Usare Azure Portal e CLI per la risoluzione dei problemi
 
 ---
@@ -26,7 +26,7 @@ Completando questo capitolo, sarai in grado di:
 |---|--------|-------------|------|
 | 1 | [Problemi Comuni](common-issues.md) | Problemi frequentemente riscontrati | 30 min |
 | 2 | [Guida al Debugging](debugging.md) | Strategie di debugging passo-passo | 45 min |
-| 3 | [Risoluzione Problemi AI](ai-troubleshooting.md) | Problemi specifici dell'AI | 30 min |
+| 3 | [Risoluzione Problemi AI](ai-troubleshooting.md) | Problemi specifici AI | 30 min |
 
 ---
 
@@ -34,13 +34,13 @@ Completando questo capitolo, sarai in grado di:
 
 ### Problemi di Autenticazione
 ```bash
-# Necessario per i flussi di lavoro AZD
+# Required for AZD workflows
 azd auth login
 
-# Opzionale se stai anche usando direttamente i comandi Azure CLI
+# Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
 ### Fallimenti di Provisioning
@@ -51,8 +51,9 @@ az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
 ### Conflitti di Risorse
+Ispeziona prima le risorse esistenti e gli errori di distribuzione. Non eliminare un ambiente condiviso o di produzione per risolvere un conflitto di nomi. Per un **nuovo ambiente usa e getta**, usa un nome unico:
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
@@ -60,9 +61,11 @@ azd up
 ### Quota Superata
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+Cambiare `AZURE_LOCATION` non sposta le risorse esistenti e può causare conflitti di localizzazione alla ridistribuzione.
 
 ---
 
@@ -70,25 +73,27 @@ azd up
 
 | Errore | Causa | Soluzione |
 |-------|-------|----------|
-| `AuthenticationError` | Non autenticato | `azd auth login` |
-| `ResourceNotFound` | Risorsa mancante | Controlla i nomi risorsa |
-| `QuotaExceeded` | Limiti di sottoscrizione | Richiedi aumento quota |
-| `InvalidTemplate` | Errore di sintassi Bicep | `az bicep build` |
-| `Conflict` | Risorsa esistente | Usa un nome nuovo o cancella |
-| `Forbidden` | Permessi insufficienti | Controlla ruoli RBAC |
+| `AuthenticationError` | Non loggato | `azd auth login` |
+| `ResourceNotFound` | Risorsa mancante | Controlla i nomi delle risorse |
+| `QuotaExceeded` | Limiti sottoscrizione | Richiedi aumento quota |
+| `InvalidTemplate` | Errore sintassi Bicep | `az bicep build` |
+| `Conflict` | Risorsa esistente | Usa un nome nuovo o elimina |
+| `Forbidden` | Permessi insufficienti | Controlla i ruoli RBAC |
 
 ---
 
-## 🔄 Reset e Ripristino
+## 🔄 Reset e Recupero
 
 ```bash
-# Reset soft (mantieni risorse, ridistribuisci codice)
-azd deploy --force
+# Soft reset (keep resources, redeploy code)
+azd deploy
 
-# Reset hard (elimina tutto, ricomincia da capo)
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
+
+Il reset completo elimina dati e può cambiare gli endpoint. Esegui un backup prima e rivedi le richieste di eliminazione interattive. `--force --purge` è appropriato solo per ambienti usa e getta quando si intende un'eliminazione irreversibile.
 
 ---
 
@@ -103,7 +108,7 @@ azd up
 
 ## 📖 Risorse Correlate
 
-- [Controlli Pre-Distribuzione](../chapter-06-pre-deployment/preflight-checks.md)
+- [Verifiche Pre-Distribuzione](../chapter-06-pre-deployment/preflight-checks.md)
 - [Guida alla Configurazione](../chapter-03-configuration/configuration.md)
 - [Issue GitHub AZD](https://github.com/Azure/azure-dev/issues)
 

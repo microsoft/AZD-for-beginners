@@ -1,365 +1,367 @@
 # Sözlük - Azure ve AZD Terimleri
 
 **Tüm Bölümler İçin Referans**
-- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../README.md)
-- **📖 Temel Bilgiler**: [Bölüm 1: AZD Temelleri](../docs/getting-started/azd-basics.md)
-- **🤖 Yapay Zeka Terimleri**: [Bölüm 2: Yapay Zeka Odaklı Geliştirme](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **📚 Kurs Anasayfası**: [Yeni Başlayanlar İçin AZD](../README.md)
+- **📖 Temel Öğrenme**: [Bölüm 1: AZD Temelleri](../docs/chapter-01-foundation/azd-basics.md)
+- **🤖 Yapay Zeka Terimleri**: [Bölüm 2: AI-Öncelikli Geliştirme](../docs/chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Giriş
 
-Bu kapsamlı sözlük, Azure Developer CLI ve Azure bulut geliştirme ile ilgili terimler, kavramlar ve kısaltmalar için tanımlar sağlar. azd projeleri ve Azure hizmetleri hakkında teknik belgeleri anlamak, sorun gidermede ve etkili iletişim kurmada temel bir başvuru kaynağıdır.
+Bu kapsamlı sözlük, Azure Developer CLI ve Azure bulut geliştirmede kullanılan terimlerin, kavramların ve kısaltmaların tanımlarını sunar. Teknik dokümantasyonu anlamak, sorunları gidermek ve azd projeleri ile Azure hizmetleri hakkında etkili iletişim kurmak için temel bir referanstır.
 
 ## Öğrenme Hedefleri
 
 Bu sözlüğü kullanarak:
-- Azure Developer CLI ile ilgili temel terimleri ve kavramları anlayacaksınız
-- Azure bulut geliştirme sözlüğü ve teknik terimlerinde ustalaşacaksınız
-- Altyapı olarak Kod ve dağıtım terimlerine hızlı erişim sağlayacaksınız
+- Temel Azure Developer CLI terminolojisi ve kavramlarını anlayacaksınız
+- Azure bulut geliştirme kelime dağarcığı ve teknik terimleri ustaca öğreneceksiniz
+- Altyapı Kod Olarak ve dağıtım terimlerine verimli şekilde başvuracaksınız
 - Azure hizmet adlarını, kısaltmalarını ve amaçlarını kavrayacaksınız
-- Sorun giderme ve hata ayıklama terimleri için tanımlara erişebileceksiniz
+- Sorun giderme ve hata ayıklama terminolojisinin tanımlarına erişeceksiniz
 - Gelişmiş Azure mimarisi ve geliştirme kavramlarını öğreneceksiniz
 
-## Öğrenme Çıktıları
+## Öğrenim Çıktıları
 
-Bu sözlüğe düzenli başvuru ile şunları yapabileceksiniz:
-- Azure Developer CLI terminolojisini doğru kullanarak etkili iletişim kurmak
-- Teknik belgeleri ve hata mesajlarını daha net anlamak
-- Azure hizmetleri ve kavramlarında kendinden emin gezinmek
-- Uygun teknik dil kullanarak sorunları gidermek
-- Doğru teknik dil ile ekip tartışmalarına katkıda bulunmak
-- Azure bulut geliştirme bilginizi sistematik olarak genişletmek
+Bu sözlüğe düzenli başvurarak:
+- Doğru Azure Developer CLI terminolojisini kullanarak etkili iletişim kurabileceksiniz
+- Teknik dokümantasyon ve hata mesajlarını daha net anlayacaksınız
+- Azure hizmetleri ve kavramlarında kendinden emin şekilde gezinebileceksiniz
+- Sorunları uygun teknik kelime dağarcığı ile çözebileceksiniz
+- Takım tartışmalarına doğru teknik dil ile katkıda bulunabileceksiniz
+- Azure bulut geliştirme bilginizi sistematik olarak genişletebileceksiniz
 
 ## A
 
-**ARM Template**  
-Azure Resource Manager şablonu. Azure kaynaklarını bildirimsiz olarak tanımlamak ve dağıtmak için kullanılan JSON tabanlı Infrastructure as Code formatı.
+**ARM Şablonu**  
+Azure Resource Manager şablonu. Azure kaynaklarını bildirgesel olarak tanımlamak ve dağıtmak için kullanılan JSON tabanlı Altyapı Kod formatı.
 
-**App Service**  
-Web uygulamaları, REST API'leri ve mobil arka uçlarını altyapıyı yönetmeden barındırmak için Azure'ın platform olarak hizmet (PaaS) offering'i.
+**Uygulama Hizmeti**  
+Altyapır yönetimi olmadan web uygulamaları, REST API'leri ve mobil arka uçları barındırmak için Azure’un platform hizmeti (PaaS) sunumu.
 
 **Application Insights**  
-Uygulama performansı, kullanılabilirlik ve kullanım hakkında derinlemesine içgörüler sağlayan Azure'ın uygulama performansı izleme (APM) hizmeti.
+Uygulama performansı, kullanılabilirlik ve kullanımına derinlemesine bakış sağlayan Azure uygulama performans izleme (APM) hizmeti.
 
 **Azure CLI**  
-Azure kaynaklarını yönetmek için komut satırı arayüzü. azd tarafından kimlik doğrulama ve bazı işlemler için kullanılır.
+Azure kaynaklarını yönetmek için komut satırı arayüzü. AZD'yi tamamlar ama ayrı bir giriş yapısı vardır; ana AZD kimlik doğrulaması `azd auth login` kullanır.
 
 **Azure Developer CLI (azd)**  
-Şablonlar ve Infrastructure as Code kullanarak uygulamaları Azure'a hızlıca oluşturup dağıtma sürecini hızlandıran geliştirici odaklı komut satırı aracı.
+Şablonlar ve Altyapı Kod ile Azure'a uygulama oluşturma ve dağıtma sürecini hızlandıran geliştirici odaklı komut satırı aracı.
 
 **azure.yaml**  
 Hizmetleri, altyapıyı ve dağıtım kancalarını tanımlayan bir azd projesinin ana yapılandırma dosyası.
 
 **Azure Resource Manager (ARM)**  
-Kaynak oluşturma, güncelleme ve silme için yönetim katmanı sağlayan Azure'ın dağıtım ve yönetim hizmeti.
+Kaynak oluşturma, güncelleme ve silme işlemleri için yönetim katmanı sağlayan Azure dağıtım ve yönetim hizmeti.
 
 ## B
 
 **Bicep**  
-Azure kaynaklarını dağıtmak için Microsoft tarafından geliştirilen etki alanına özgü dil (DSL). ARM şablonlarına derlenirken daha basit bir sözdizimi sunar.
+Microsoft tarafından Azure kaynaklarını dağıtmak için geliştirilen alan özel dili (DSL). ARM şablonlarından daha basit sözdizimi sunar ancak ARM'a derlenir.
 
-**Build**  
+**Derleme**  
 Kaynak kodun derlenmesi, bağımlılıkların yüklenmesi ve uygulamaların dağıtıma hazırlanması süreci.
 
-**Blue-Green Deployment**  
-Kesinti ve riski minimize etmek için iki özdeş üretim ortamı (blue ve green) kullanan dağıtım stratejisi.
+**Mavi-Yeşil Dağıtım**  
+Kesinti ve riski en aza indirmek için iki aynı üretim ortamı (mavi ve yeşil) kullanılan dağıtım stratejisi.
 
 ## C
 
-**Container Apps**  
-Karmaşık altyapıyı yönetmeden konteynerlenmiş uygulamaları çalıştırmayı sağlayan Azure'ın sunucusuz konteyner hizmeti.
+**Kapsayıcı Uygulamalar**  
+Karmaşık altyapı yönetimi olmadan kapsayıcı uygulamaların çalıştırılmasını sağlayan Azure'un sunucusuz konteyner hizmeti.
 
 **CI/CD**  
-Sürekli Entegrasyon/Sürekli Dağıtım. Kod değişikliklerini entegre etme ve uygulamaları dağıtma için otomatik uygulamalar.
+Sürekli Entegrasyon/Sürekli Dağıtım. Kod değişikliklerinin entegre edilmesi ve uygulamaların dağıtımı için otomatik uygulamalar.
 
 **Cosmos DB**  
-Akış hızı, gecikme, kullanılabilirlik ve tutarlılık için kapsamlı SLA'lar sağlayan Azure'ın küresel olarak dağıtılmış, çok modelli veritabanı hizmeti.
+Küresel dağıtımlı, çok modelleri destekleyen, işlem hızı, gecikme, kullanılabilirlik ve tutarlılık için kapsamlı SLA’lar sunan Azure veri tabanı hizmeti.
 
-**Configuration**  
-Uygulama davranışını ve dağıtım seçeneklerini kontrol eden ayarlar ve parametreler.
+**Yapılandırma**  
+Uygulama davranışı ve dağıtım seçeneklerini kontrol eden ayarlar ve parametreler.
 
 ## D
 
-**Deployment**  
+**Dağıtım**  
 Uygulamaların ve bağımlılıklarının hedef altyapıya kurulması ve yapılandırılması süreci.
 
 **Docker**  
-Uygulamaları konteynerleştirme teknolojisi kullanarak geliştirme, gönderme ve çalıştırma platformu.
+Kapsayıcı teknolojisi kullanarak uygulamaların geliştirilmesi, gönderilmesi ve çalıştırılması için platform.
 
 **Dockerfile**  
-Bir Docker konteyner görüntüsü oluşturmak için talimatlar içeren metin dosyası.
+Docker konteyner imajı oluşturmak için talimatlar içeren metin dosyası.
 
 ## E
 
-**Environment**  
-Uygulamanızın belirli bir örneğini temsil eden dağıtım hedefi (ör. geliştirme, test, üretim).
+**Ortam**  
+Uygulamanızın belirli bir örneğini temsil eden dağıtım hedefi (örneğin, geliştirme, test, üretim).
 
-**Environment Variables**  
-Uygulamaların çalışma zamanında erişebildiği anahtar-değer çiftleri şeklindeki yapılandırma değerleri.
+**Ortam Değişkenleri**  
+Uygulamaların çalışma zamanında erişebileceği anahtar-değer çiftleri şeklinde saklanan yapılandırma değerleri.
 
-**Endpoint**  
-Bir uygulamaya veya hizmete erişilebilen URL veya ağ adresi.
+**Uç Nokta**  
+Bir uygulama veya hizmete erişim sağlanan URL ya da ağ adresi.
 
 ## F
 
 **Function App**  
-Altyapıyı yönetmeden olay odaklı kod çalıştırmayı sağlayan Azure'ın sunucusuz hesaplama hizmeti.
+Altyapı yönetmeden olay odaklı kod çalıştırmayı sağlayan Azure sunucusuz hesaplama hizmeti.
 
 ## G
 
 **GitHub Actions**  
-Depolara entegre edilmiş, iş akışlarını otomatikleştirmek için kullanılan CI/CD platformu.
+İş akışlarını otomatikleştirmek için GitHub depo entegrasyonlu CI/CD platformu.
 
 **Git**  
-Kaynak kod değişikliklerini izlemek için kullanılan dağıtılmış versiyon kontrol sistemi.
+Kaynak kod değişikliklerini takip etmek için kullanılan dağıtık sürüm kontrol sistemi.
 
 ## H
 
-**Hooks**  
-Dağıtım yaşam döngüsünün belirli noktalarında (preprovision, postprovision, predeploy, postdeploy) çalışan özel betikler veya komutlar.
+**Kancalar**  
+Dağıtım yaşam döngüsünün belirli aşamalarında (ön sağlama, sonrası sağlama, ön dağıtım, sonrası dağıtım) çalışan özel betikler veya komutlar.
 
-**Host**  
-Bir uygulamanın dağıtılacağı Azure hizmet türü (ör. appservice, containerapp, function).
+**Barındırıcı**  
+Bir uygulamanın dağıtılacağı Azure hizmet türü (örneğin, appservice, containerapp, function).
 
 ## I
 
-**Infrastructure as Code (IaC)**  
-Altyapıyı manuel süreçler yerine kod yoluyla tanımlama ve yönetme uygulaması.
+**Altyapı Kod Olarak (IaC)**  
+Altyapıyı elle değil kod yoluyla tanımlama ve yönetme uygulaması.
 
 **Init**  
-Genellikle bir şablondan yeni bir azd projesini başlatma süreci.
+Genellikle bir şablondan yeni bir azd projesi başlatma işlemi.
 
 ## J
 
 **JSON**  
-JavaScript Nesne Gösterimi. Yapılandırma dosyaları ve API yanıtları için yaygın olarak kullanılan veri alışveriş formatı.
+JavaScript Nesne Gösterimi. Yaygın olarak yapılandırma dosyaları ve API yanıtları için kullanılan veri değişim formatı.
 
 **JWT**  
-JSON Web Token. Taraflar arasında bilgiyi güvenli şekilde JSON nesnesi olarak iletmek için kullanılan standart.
+JSON Web Token. Taraflar arasında bilgiyi güvenli şekilde JSON objesi olarak iletmek için standart.
 
 ## K
 
-**Key Vault**  
-Gizli verileri, anahtarları ve sertifikaları güvenli bir şekilde saklamak ve yönetmek için Azure hizmeti.
+**Anahtar Kasası**  
+Sırlar, anahtarlar ve sertifikaları güvenli şekilde depolayıp yöneten Azure hizmeti.
 
-**Kusto Query Language (KQL)**  
-Azure Monitor, Application Insights ve diğer Azure hizmetlerindeki verileri analiz etmek için kullanılan sorgu dili.
+**Kusto Sorgu Dili (KQL)**  
+Azure Monitor, Application Insights ve diğer Azure hizmetlerindeki verilere sorgu yazmak için kullanılan dil.
 
 ## L
 
-**Load Balancer**  
-Gelen ağ trafiğini birden çok sunucu veya örnek arasında dağıtan hizmet.
+**Yük Dengeleyici**  
+Gelen ağ trafiğini birden fazla sunucu veya örnek arasında dağıtan hizmet.
 
 **Log Analytics**  
-Bulut ve kurum içi ortamlardan telemetri verilerini toplamak, analiz etmek ve harekete geçmek için Azure hizmeti.
+Bulut ve yerel ortamlardan telemetri verisi toplama, analiz etme ve işlem yapma için Azure hizmeti.
 
 ## M
 
-**Managed Identity**  
-Azure hizmetlerine diğer Azure hizmetlerine kimlik doğrulama için otomatik olarak yönetilen bir kimlik sağlayan Azure özelliği.
+**Yönetilen Kimlik**  
+Azure hizmetlerinin diğer Azure hizmetlerine kimlik doğrulama için otomatik olarak yönetilen kimlik sağlaması özelliği.
 
-**Microservices**  
+**Mikroservisler**  
 Uygulamaların küçük, bağımsız hizmetler koleksiyonu olarak inşa edildiği mimari yaklaşım.
 
 **Monitor**  
-Uygulamalar ve altyapı genelinde tam yığın gözlemlenebilirlik sağlayan Azure'ın birleşik izleme çözümü.
+Uygulamalar ve altyapı genelinde tam görünürlük sağlayan Azure’un birleşik izleme çözümü.
 
 ## N
 
 **Node.js**  
-Sunucu tarafı uygulamalar oluşturmak için Chrome'un V8 JavaScript motoru üzerine inşa edilmiş JavaScript çalışma zamanı.
+Chrome'un V8 JavaScript motoru üzerine kurulu, sunucu tarafı uygulama geliştirme için JavaScript çalışma zamanı.
 
 **npm**  
-Bağımlılıkları ve paketleri yöneten Node.js için paket yöneticisi.
+Node.js için bağımlılık ve paket yöneticisi.
 
 ## O
 
-**Output**  
-Uygulama veya diğer kaynaklar tarafından kullanılabilen altyapı dağıtımından döndürülen değerler.
+**Çıktı**  
+Altyapı dağıtımından dönen, uygulamalar veya diğer kaynaklar tarafından kullanılabilen değerler.
 
 ## P
 
-**Package**  
-Uygulama kodunu ve bağımlılıklarını dağıtıma hazırlama süreci.
+**Paket**  
+Uygulama kodu ve bağımlılıkların dağıtıma hazırlanması süreci.
 
-**Parameters**  
+**Parametreler**  
 Dağıtımları özelleştirmek için altyapı şablonlarına geçirilen giriş değerleri.
 
 **PostgreSQL**  
-Azure'da yönetilen hizmet olarak desteklenen açık kaynaklı ilişkisel veritabanı sistemi.
+Azure'da yönetilen hizmet olarak desteklenen açık kaynak ilişkisel veri tabanı sistemi.
 
-**Provisioning**  
-Altyapı şablonlarında tanımlanan Azure kaynaklarını oluşturma ve yapılandırma süreci.
+**Sağlama**  
+Altyapı şablonlarında tanımlanan Azure kaynaklarının oluşturulup yapılandırılması süreci.
 
 ## Q
 
-**Quota**  
-Bir Azure aboneliğinde veya bölgede oluşturulabilecek kaynak miktarına ilişkin sınırlar.
+**Kotayı**  
+Bir Azure aboneliğinde veya bölgesinde oluşturulabilecek kaynak miktarına getirilen sınırlar.
 
 ## R
 
-**Resource Group**  
-Aynı yaşam döngüsünü, izinleri ve politikaları paylaşan Azure kaynakları için mantıksal kapsayıcı.
+**Kaynak Grubu**  
+Aynı yaşam döngüsü, izinler ve politikaları paylaşan Azure kaynakları için mantıksal konteyner.
 
-**Resource Token**  
-Kaynak adlarının dağıtımlar arasında benzersiz olmasını sağlamak için azd tarafından oluşturulan benzersiz dize.
+**Kaynak Tokenı**  
+Dağıtımlar arasında kaynak adlarının benzersiz olmasını sağlamak için azd tarafından oluşturulan benzersiz dize.
 
 **REST API**  
-HTTP yöntemlerini kullanarak ağ uygulamaları tasarlamak için kullanılan mimari stil.
+HTTP yöntemleri kullanarak ağ uygulamaları tasarlamak için mimari stil.
 
-**Rollback**  
-Bir uygulamanın veya altyapı yapılandırmasının önceki bir sürümüne geri dönme süreci.
+**Geri Alma**  
+Bir uygulama veya altyapı yapılandırmasının önceki sürümüne dönme süreci.
 
 ## S
 
-**Service**  
-azure.yaml içinde tanımlanan uygulamanızın bir bileşeni (ör. web ön yüzü, API arka ucu, veritabanı).
+**Hizmet**  
+azure.yaml dosyasında tanımlanan uygulamanızın bir bileşeni (örneğin, web ön yüzü, API arka ucu, veri tabanı).
 
 **SKU**  
-Stok Tutma Birimi. Azure kaynakları için farklı hizmet katmanlarını veya performans seviyelerini temsil eder.
+Stok Tutma Birimi. Azure kaynakları için farklı hizmet katmanları veya performans seviyelerini temsil eder.
 
-**SQL Database**  
-Microsoft SQL Server tabanlı Azure'ın yönetilen ilişkisel veritabanı hizmeti.
+**SQL Veritabanı**  
+Microsoft SQL Server'a dayalı Azure'un yönetilen ilişkisel veritabanı hizmeti.
 
-**Static Web Apps**  
+**Statik Web Uygulamaları**  
 Kaynak kod depolarından tam yığın web uygulamaları oluşturmak ve dağıtmak için Azure hizmeti.
 
-**Storage Account**  
-Bloblar, dosyalar, kuyruklar ve tablolar dahil veri nesneleri için bulut depolama sağlayan Azure hizmeti.
+**Depolama Hesabı**  
+Azure’un bloblar, dosyalar, kuyruklar ve tablolar dahil veri nesneleri için bulut depolaması sağlayan hizmeti.
 
-**Subscription**  
-Faturalama ve erişim yönetimi ile ilişkili kaynak grupları ve kaynakları içeren Azure hesap kapsayıcısı.
+**Abonelik**  
+Kaynak gruplarını ve kaynakları içeren, faturalama ve erişim yönetimiyle ilişkili Azure hesap konteyneri.
 
 ## T
 
-**Template**  
+**Şablon**  
 Uygulama kodu, altyapı tanımları ve yaygın senaryolar için yapılandırma içeren önceden oluşturulmuş proje yapısı.
 
 **Terraform**  
-Azure dahil birden çok bulut sağlayıcısını destekleyen açık kaynak Infrastructure as Code aracı.
+Azure dahil birden çok bulut sağlayıcısını destekleyen açık kaynak Altyapı Kod Aracı.
 
-**Traffic Manager**  
-Küresel Azure bölgelerine trafik dağıtmak için DNS tabanlı trafik yük dengeleyicisi.
+**Trafik Yöneticisi**  
+Küresel Azure bölgeleri arasında trafiği dağıtmak için Azure'un DNS tabanlı trafik yük dengeleyicisi.
 
 ## U
 
 **URI**  
-Uniform Resource Identifier. Belirli bir kaynağı tanımlayan dize.
+Tekdüzen Kaynak Tanımlayıcısı. Belirli bir kaynağı tanımlayan dize.
 
 **URL**  
-Uniform Resource Locator. Bir kaynağın nerede bulunduğunu ve nasıl alınacağını belirten URI türü.
+Tekdüzen Kaynak Konumlayıcısı. Bir kaynağın nerede olduğu ve nasıl alınacağı bilgisini belirten URI türü.
 
 ## V
 
-**Virtual Network (VNet)**  
-Azure'da özel ağlar için temel yapı taşı olup izolasyon ve segmentasyon sağlar.
+**Sanal Ağ (VNet)**  
+Azure'daki özel ağlar için temel yapı taşı, izolasyon ve segmentasyon sağlar.
 
 **VS Code**  
-Visual Studio Code. Azure ve azd entegrasyonu için mükemmel desteğe sahip popüler kod düzenleyici.
+Visual Studio Code. Azure ve azd entegrasyonu ile popüler kod editörü.
 
 ## W
 
 **Webhook**  
-Belirli olaylarla tetiklenen HTTP geri çağırması; genellikle CI/CD boru hatlarında kullanılır.
+Belirli olaylarla tetiklenen HTTP geri çağrısı, genellikle CI/CD boru hattında kullanılır.
 
-**What-if**  
-Bir dağıtımın gerçekten yürütülmeden hangi değişiklikleri yapacağını gösteren Azure özelliği.
+**Ne Olur**  
+Bir dağıtımın hangi değişiklikleri yapacağını gerçek çalıştırmadan gösteren Azure özelliği.
 
 ## Y
 
 **YAML**  
-YAML Ain't Markup Language. azure.yaml gibi yapılandırma dosyaları için kullanılan insan tarafından okunabilir veri serileştirme standardı.
+YAML Bir İşaretleme Dili Değildir. azure.yaml gibi yapılandırma dosyalarında kullanılan insan tarafından okunabilir veri serileştirme standardı.
 
 ## Z
 
-**Zone**  
-Azure bölgesi içinde fiziksel olarak ayrılmış konumlar olup yedeklilik ve yüksek kullanılabilirlik sağlar.
+**Bölge**  
+Azure bölgesinde yedeklilik ve yüksek kullanılabilirlik sağlayan fiziksel olarak ayrılmış konumlar.
 
 ---
 
 ## Yaygın Kısaltmalar
 
-| Acronym | Full Form | Description |
+| Kısaltma | Tam Adı | Açıklama |
 |---------|-----------|-------------|
-| AAD | Azure Active Directory (now Microsoft Entra ID) | Kimlik ve erişim yönetimi hizmeti |
-| ACR | Azure Container Registry | Konteyner görüntü kayıt hizmeti |
+| AAD | Azure Active Directory (şimdi Microsoft Entra ID) | Kimlik ve erişim yönetim hizmeti |
+| ACR | Azure Container Registry | Kapsayıcı imajı kayıt hizmeti |
 | AKS | Azure Kubernetes Service | Yönetilen Kubernetes hizmeti |
-| API | Application Programming Interface | Yazılım geliştirmek için protokoller kümesi |
-| ARM | Azure Resource Manager | Azure'ın dağıtım ve yönetim hizmeti |
-| CDN | Content Delivery Network | Sunucuların dağıtık ağı |
-| CI/CD | Continuous Integration/Continuous Deployment | Otomatik geliştirme uygulamaları |
-| CLI | Command Line Interface | Metin tabanlı kullanıcı arayüzü |
+| API | Application Programming Interface | Yazılım oluşturmak için protokoller seti |
+| ARM | Azure Resource Manager | Azure’un dağıtım ve yönetim hizmeti |
+| CDN | Content Delivery Network | Dağıtık sunucu ağı |
+| CI/CD | Sürekli Entegrasyon/Sürekli Dağıtım | Otomatik geliştirme uygulamaları |
+| CLI | Komut Satırı Arayüzü | Metin tabanlı kullanıcı arayüzü |
 | DNS | Domain Name System | Alan adlarını IP adreslerine çevirme sistemi |
-| HTTPS | Hypertext Transfer Protocol Secure | HTTP'nin güvenli sürümü |
-| IaC | Infrastructure as Code | Altyapıyı kod yoluyla yönetme |
-| JSON | JavaScript Object Notation | Veri alışveriş formatı |
+| HTTPS | Hypertext Transfer Protocol Secure | Güvenli HTTP versiyonu |
+| IaC | Infrastructure as Code | Altyapıyı kodla yönetme |
+| JSON | JavaScript Object Notation | Veri değişim formatı |
 | JWT | JSON Web Token | Güvenli bilgi iletimi için token formatı |
 | KQL | Kusto Query Language | Azure veri hizmetleri için sorgu dili |
 | RBAC | Role-Based Access Control | Kullanıcı rollerine dayalı erişim kontrolü |
 | REST | Representational State Transfer | Web servisleri için mimari stil |
 | SDK | Software Development Kit | Geliştirme araçları koleksiyonu |
-| SLA | Service Level Agreement | Hizmetin kullanılabilirlik/performans taahhüdü |
-| SQL | Structured Query Language | İlişkisel veritabanlarını yönetme dili |
+| SLA | Service Level Agreement | Hizmet kullanılabilirlik / performans taahhüdü |
+| SQL | Structured Query Language | İlişkisel veritabanları için dil |
 | SSL/TLS | Secure Sockets Layer/Transport Layer Security | Kriptografik protokoller |
-| URI | Uniform Resource Identifier | Bir kaynağı tanımlayan dize |
-| URL | Uniform Resource Locator | Kaynağın konumunu belirten URI türü |
-| VM | Virtual Machine | Bir bilgisayar sisteminin öykünmesi |
-| VNet | Virtual Network | Azure'da özel ağ |
-| YAML | YAML Ain't Markup Language | Veri serileştirme standardı |
+| URI | Uniform Resource Identifier | Kaynağı tanımlayan dize |
+| URL | Uniform Resource Locator | Kaynak konumunu belirten URI türü |
+| VM | Sanal Makine | Bilgisayar sistemi emülasyonu |
+| VNet | Sanal Ağ | Azure’da özel ağ |
+| YAML | YAML Bir İşaretleme Dili Değildir | Veri serileştirme standardı |
 
 ---
 
 ## Azure Hizmet Adı Eşlemeleri
 
-| Common Name | Official Azure Service Name | azd Host Type |
+| Yaygın Ad | Resmi Azure Hizmet Adı | azd Barındırıcı Türü |
 |-------------|------------------------------|---------------|
-| Web App | Azure App Service | `appservice` |
-| API App | Azure App Service | `appservice` |
-| Container App | Azure Container Apps | `containerapp` |
-| Function | Azure Functions | `function` |
-| Static Site | Azure Static Web Apps | `staticwebapp` |
-| Database | Azure Database for PostgreSQL | `postgres` |
-| NoSQL DB | Azure Cosmos DB | `cosmosdb` |
-| Storage | Azure Storage Account | `storage` |
-| Cache | Azure Cache for Redis | `redis` |
-| Search | Azure AI Search | `search` |
-| Messaging | Azure Service Bus | `servicebus` |
+| Web Uygulaması | Azure App Service | `appservice` |
+| API Uygulaması | Azure App Service | `appservice` |
+| Kapsayıcı Uygulama | Azure Container Apps | `containerapp` |
+| Fonksiyon | Azure Functions | `function` |
+| Statik Site | Azure Static Web Apps | `staticwebapp` |
+| Veritabanı | Azure Database for PostgreSQL | Altyapı kaynağı, uygulama değil `host` |
+| NoSQL Veritabanı | Azure Cosmos DB | Altyapı kaynağı, uygulama değil `host` |
+| Depolama | Azure Storage Account | Altyapı kaynağı, yerleşik uygulama değil `host` |
+| Önbellek | Azure Managed Redis | Altyapı kaynağı, uygulama değil `host` |
+| Arama | Azure AI Search | Altyapı kaynağı, uygulama değil `host` |
+| Mesajlaşma | Azure Service Bus | Altyapı kaynağı, uygulama değil `host` |
+
+`services.<name>.host`, bir uygulama dağıtım hedefini seçer; herhangi bir Azure kaynak türü için kısaltma değildir. Veritabanları, önbellekler, arama hizmetleri ve kuyruklar genellikle altyapı sağlayıcısı aracılığıyla sağlanır ve çıktılar/yapılandırma yoluyla uygulamaya bağlanır.
 
 ---
 
 ## Bağlama Özgü Terimler
 
 ### Geliştirme Terimleri
-- **Hot Reload**: Geliştirme sırasında uygulamaları yeniden başlatmadan otomatik olarak güncelleme
-- **Build Pipeline**: Kodu derlemek ve test etmek için otomatik süreç
-- **Deployment Slot**: App Service içinde bir hazırlama (staging) ortamı
-- **Environment Parity**: Geliştirme, hazırlama ve üretim ortamlarını benzer tutma
+- **Sıcak Yeniden Yükleme**: Yeniden başlatmadan geliştirme sırasında uygulamayı otomatik olarak güncelleme
+- **Derleme Boru Hattı**: Kodu derleyip test etmek için otomatik süreç
+- **Dağıtım Yuvası**: App Service içinde hazırlık ortamı
+- **Ortam Paritesi**: Geliştirme, hazırlık ve üretim ortamlarını benzer tutma
 
 ### Güvenlik Terimleri
-- **Managed Identity**: Otomatik kimlik bilgisi yönetimi sağlayan Azure özelliği
-- **Key Vault**: Gizli veriler, anahtarlar ve sertifikalar için güvenli depolama
-- **RBAC**: Azure kaynakları için role dayalı erişim kontrolü
-- **Network Security Group**: Ağ trafiğini kontrol etmek için sanal güvenlik duvarı
+- **Yönetilen Kimlik**: Otomatik kimlik bilgisi yönetimi sağlayan Azure özelliği
+- **Anahtar Kasası**: Sırlar, anahtarlar ve sertifikalar için güvenli depolama
+- **RBAC**: Azure kaynakları için rol tabanlı erişim kontrolü
+- **Ağ Güvenlik Grubu**: Ağ trafiğini kontrol eden sanal güvenlik duvarı
 
 ### İzleme Terimleri
-- **Telemetry**: Ölçümlerin ve verilerin otomatik toplanması
-- **Application Performance Monitoring (APM)**: Yazılım performansını izleme
-- **Log Analytics**: Günlük verilerini toplamak ve analiz etmek için hizmet
-- **Alert Rules**: Metriklere veya koşullara dayalı otomatik bildirimler
+- **Telemetri**: Ölçümler ve verilerin otomatik toplanması
+- **Uygulama Performans İzleme (APM)**: Yazılım performansını izleme
+- **Log Analytics**: Günlük verilerini toplama ve analiz etme hizmeti
+- **Alarm Kuralları**: Ölçümler veya koşullara dayalı otomatik bildirimler
 
 ### Dağıtım Terimleri
-- **Blue-Green Deployment**: Kesintisiz dağıtım stratejisi
-- **Canary Deployment**: Kullanıcıların bir alt kümesine kademeli yayılım
-- **Rolling Update**: Uygulama örneklerinin sırayla değiştirilmesi
-- **Rollback**: Önceki uygulama sürümüne geri dönme
+- **Mavi-Yeşil Dağıtım**: Sıfır kesintiyle dağıtım stratejisi
+- **Kanarya Dağıtımı**: Kullanıcıların alt kümesine kademeli yayın
+- **Döner Güncelleme**: Uygulama örneklerinin sırayla değiştirilmesi
+- **Geri Alma**: Önceki uygulama sürümüne dönme
 
 ---
 
-**Kullanım İpucu**: Hızlıca belirli terimleri aramak için `Ctrl+F` kullanın. Terimler gerektiğinde çapraz referanslanmıştır.
+**Kullanım İpucu**: Bu sözlükte belirli terimleri hızla aramak için `Ctrl+F` kullanın. Terimler ilgili yerlerde çapraz referanslanmıştır.
 
 ---
 
 **Gezinme**
-- **Önceki Ders**: [Cheat Sheet](cheat-sheet.md)
+- **Önceki Ders**: [Hızlı Başvuru](cheat-sheet.md)
 - **Sonraki Ders**: [SSS](faq.md)
 
 ---

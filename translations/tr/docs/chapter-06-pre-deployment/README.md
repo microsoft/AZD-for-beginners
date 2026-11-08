@@ -1,23 +1,23 @@
-# Bölüm 6: Yayınlama Öncesi Planlama ve Doğrulama
+# Bölüm 6: Dağıtımdan Önce Planlama ve Doğrulama
 
-**📚 Kurs**: [AZD Yeni Başlayanlar İçin](../../README.md) | **⏱️ Süre**: 1 saat | **⭐ Zorluk**: Orta Seviye
+**📚 Kurs**: [Yeni Başlayanlar için AZD](../../README.md) | **⏱️ Süre**: 2-4 saat okuma; uyarlanmış laboratuvarlar için ek süre | **⭐ Zorluk**: Orta-Seviye–İleri
 
 ---
 
 ## Genel Bakış
 
-Bu bölüm, uygulamanızı yayınlamadan önce gerekli planlama ve doğrulama adımlarını kapsamaktadır. Doğru kapasite planlaması, SKU seçimi ve ön kontrollerle maliyetli hatalardan nasıl kaçınacağınızı öğrenin.
+Bu bölüm, uygulamanızı dağıtmadan önce temel planlama ve doğrulama adımlarını kapsar. Doğru kapasite planlaması, SKU seçimi ve ön kontrollerle maliyetli hatalardan kaçınmayı öğrenin.
 
-> Temmuz 2026'da `azd 1.27.1` ile doğrulanmıştır.
+> Yayınlanmış `azd 1.37.2` referansına karşı kontrol edilmiş komut rehberi. Bulut dağıtımları gerçekleştirilmedi. Uzun dersler, tamamlanmış yerel dağıtım projeleri değil, örnek parçalardan oluşmaktadır.
 
 ## Öğrenme Hedefleri
 
-Bu bölümü tamamlayarak:
-- Yayınlama öncesi ön kontrolleri yapacaksınız
-- Kapasiteyi planlayacak ve kaynak gereksinimlerini tahmin edeceksiniz
-- Maliyet optimizasyonu için uygun SKU'ları seçeceksiniz
-- İzleme için Application Insights yapılandıracaksınız
-- Takım koordinasyon kalıplarını anlayacaksınız
+Bu bölümü tamamlayarak şunları yapabileceksiniz:
+- Dağıtımdan önce ön kontrolleri çalıştırmak
+- Kapasite planlaması yapmak ve kaynak gereksinimlerini tahmin etmek
+- Maliyet optimizasyonu için uygun SKU'ları seçmek
+- İzleme için Application Insights'ı yapılandırmak
+- Çoklu ajan koordinasyon desenlerini ve bunların dağıtım gereksinimlerini anlamak
 
 ---
 
@@ -25,38 +25,38 @@ Bu bölümü tamamlayarak:
 
 | # | Ders | Açıklama | Süre |
 |---|--------|-------------|------|
-| 1 | [Ön Kontroller](preflight-checks.md) | Yayınlama öncesi yapılandırmayı doğrula | 15 dk |
-| 2 | [Kapasite Planlama](capacity-planning.md) | Kaynak gereksinimlerini tahmin et | 20 dk |
-| 3 | [SKU Seçimi](sku-selection.md) | Uygun fiyatlandırma kademelerini seç | 15 dk |
-| 4 | [Application Insights](application-insights.md) | İzlemeyi yapılandır | 20 dk |
-| 5 | [Koordinasyon Kalıpları](coordination-patterns.md) | Takım yayınlama iş akışları | 15 dk |
+| 1 | [Ön Kontroller](preflight-checks.md) | Dağıtımdan önce yapılandırmayı doğrulama | 15 dk |
+| 2 | [Kapasite Planlaması](capacity-planning.md) | Kaynak gereksinimlerini tahmin etme | 20 dk |
+| 3 | [SKU Seçimi](sku-selection.md) | Uygun fiyatlandırma katmanlarını seçme | 15 dk |
+| 4 | [Application Insights](application-insights.md) | İzlemeyi yapılandırma | 20 dk |
+| 5 | [Koordinasyon Desenleri](coordination-patterns.md) | İleri seviye çoklu ajan orkestrasyon tasarımı | 60-75 dk |
 
 ---
 
 ## 🚀 Hızlı Başlangıç
 
 ```bash
-# Abonelik kotalarını kontrol et
+# Check subscription quotas
 az vm list-usage --location eastus --output table
 
-# Dağıtımı önizle (kaynak oluşturulmaz)
+# Preview infrastructure changes (inspect template hooks before running)
 azd provision --preview
 
-# Bicep sözdizimini doğrula
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# Ortam yapılandırmasını kontrol et
+# Check environment configuration
 azd env get-values
 ```
 
 ---
 
-## ☑️ Yayınlama Öncesi Kontrol Listesi
+## ☑️ Dağıtımdan Önce Kontrol Listesi
 
 ### `azd provision` Öncesi
 
 - [ ] Bölge için kota doğrulandı
-- [ ] SKU'lar uygun seçildi
+- [ ] SKU'lar uygun şekilde seçildi
 - [ ] Maliyet tahmini gözden geçirildi
 - [ ] İsimlendirme standardı tutarlı
 - [ ] Güvenlik/RBAC yapılandırıldı
@@ -64,20 +64,20 @@ azd env get-values
 ### `azd deploy` Öncesi
 
 - [ ] Ortam değişkenleri ayarlandı
-- [ ] Anahtar Kasası'nda gizli bilgiler
+- [ ] Sırlar Key Vault'ta
 - [ ] Bağlantı dizeleri doğrulandı
 - [ ] Sağlık kontrolleri yapılandırıldı
 
 ---
 
-## 💰 SKU Seçim Rehberi
+## 💰 SKU Seçim Kılavuzu
 
 | İş Yükü | Geliştirme | Üretim |
 |----------|-------------|------------|
-| Container Apps | Tüketim | Adanmış D4 |
+| Container Apps | Tüketim | Ölçülen yük bazında tüketim veya özel iş yükü profili |
 | App Service | B1/B2 | P1v3+ |
-| Microsoft Foundry Modelleri | Standart | Standart + PTU |
-| AI Search | Temel | Standart S2+ |
+| Azure OpenAI modelleri | Desteklenen kullanım bazlı dağıtım türü | Kullanım bazlı veya tahsis edilmiş throughput; model/bölgeye bağlı |
+| AI Search | Limitler dahilinde Ücretsiz/Temel | İndeks, replika ve sorgu yüküne göre Temel veya Standart katman |
 
 ---
 
@@ -93,7 +93,7 @@ azd env get-values
 ## 📖 İlgili Kaynaklar
 
 - [Yapılandırma Kılavuzu](../chapter-03-configuration/configuration.md)
-- [Yayınlama Kılavuzu](../chapter-04-infrastructure/deployment-guide.md)
+- [Dağıtım Kılavuzu](../chapter-04-infrastructure/deployment-guide.md)
 - [Yaygın Sorunlar](../chapter-07-troubleshooting/common-issues.md)
 
 ---
