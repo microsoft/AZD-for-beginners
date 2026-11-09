@@ -10,7 +10,7 @@ This chapter covers enterprise-ready deployment patterns, security hardening, mo
 
 This is an architectural reference, not a complete deployable production template. Examples omit integration details that must be supplied and tested in your own application; reading the checklist does not certify production readiness.
 
-> **Release review (2026-11-04):** AI CLI guidance was checked against `azd 1.37.2`, agents `1.0.0-beta.23`, and evaluations `1.0.0-beta.2` documentation/source. See [release changes and fixes](production-ai-practices.md#recent-release-changes-and-fixes) for compatibility requirements and migration details; this is not a live deployment validation.
+> **Foundry GA update (2026-11-09):** Use `azd >= 1.37.0` and the generally available `microsoft.foundry` 1.0 bundle for the Foundry workflow; evaluations are installed separately. See [release scope and migration](production-ai-practices.md#recent-release-changes-and-fixes) and the [authenticated pipeline example](production-ai-practices.md#cicd-pipeline-configuration). This is a documentation review, not live deployment validation or blanket GA status for optional preview features.
 
 ## Learning Objectives
 

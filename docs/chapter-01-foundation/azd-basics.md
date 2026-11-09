@@ -325,8 +325,8 @@ azd uses an extension system to add capabilities beyond the core CLI. This is es
 # List available extensions
 azd extension list
 
-# Install the Foundry agents extension
-azd extension install azure.ai.agents
+# Install the GA Foundry bundle (requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 
 # Initialize an AI agent project interactively
 azd ai agent init
@@ -338,18 +338,20 @@ azd ai agent invoke
 azd mcp start
 ```
 
-**The agent lifecycle, end to end.** Use `azure.ai.agents` for agent lifecycle operations and install `azure.ai.evaluations` separately for evaluation. Use `azd >= 1.37.0` for the combined workflow. You don't need all of these on day one:
+**The agent lifecycle, end to end.** The GA `microsoft.foundry` bundle includes `azure.ai.agents` and six other core extensions. Install `azure.ai.evaluations` separately for evaluation. Use `azd >= 1.37.0` for this workflow. You don't need all of these on day one:
 
 | Stage | Command | What it does |
 |-------|---------|--------------|
 | **Scaffold** | `azd ai agent init --template <path-to-azure.yaml>` | Adopt a current agent project template |
+| **Run locally** | `azd ai agent run`, then `azd ai agent invoke --local "Test prompt"` in another terminal | Inspect local activity in Agent Inspector; model calls still use Azure |
+| **Deploy** | `azd deploy` | For code-mode hosted agents, upload source for a remote Foundry build |
 | **Test** | `azd ai agent invoke` | Call the agent and view response timing |
 | **Measure** | `azd ai eval init`, `generate`, `run start` | Configure, deploy, and run evaluations using the separate extension |
 | **Improve** | `azd ai agent optimize --eval <evaluation-name> --optimize-model <optimizer-deployment>` | Reuse a compatible evaluation to optimize the agent |
 | **Inspect** | `azd ai agent endpoint show` | View the live endpoint configuration |
 | **Clean up** | `azd ai agent delete` | Delete a hosted agent and all its versions |
 
-> Extensions are covered in detail in [Chapter 2: AI-First Development](../chapter-02-ai-development/agents.md) and the [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) reference.
+> Start with the [GA hosted-agent walkthrough](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga), which covers prerequisites, provisioning, and safe cleanup. Extensions are covered further in the [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) reference.
 
 ## 📁 Project Structure
 

@@ -8,13 +8,15 @@
 
 This chapter focuses on deploying AI-powered applications using Azure Developer CLI and Microsoft Foundry services. From simple AI chat apps to intelligent agents with tools.
 
-> **Release review (2026-11-04):** AI CLI guidance was checked against published `azd` `1.37.2`, `azure.ai.agents` `1.0.0-beta.23`, and `azure.ai.evaluations` `1.0.0-beta.2` documentation/source. Use `azd >= 1.37.0` for the combined workflow. Evaluations now use the separate `azd ai eval` namespace; see [release changes and migration guidance](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes). This is not a live deployment validation.
+> **Foundry GA update (2026-11-09):** The `microsoft.foundry` 1.0 bundle is [generally available](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). Use `azd >= 1.37.0`; evaluations remain a separate installation. The [hosted-agent walkthrough](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) covers local Agent Inspector testing and remote code deployment. This is a documentation review, not a live deployment validation; optional preview features retain their own status.
 
 ## Learning Objectives
 
 By completing this chapter, you will:
 - Deploy AI applications using pre-built AZD templates
 - Understand Microsoft Foundry integration with AZD
+- Install the GA bundle and test a hosted agent locally before deploying its source to Foundry
+- Review `azure.yaml`, evaluation assets, and new-versus-reused-project cleanup
 - Configure and customize AI agents with tools
 - Deploy RAG (Retrieval-Augmented Generation) applications
 
@@ -24,7 +26,7 @@ By completing this chapter, you will:
 
 | # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | Connect AZD with Foundry services | 30 min |
+| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | GA bundle, hosted-agent local-to-cloud workflow, and evaluations | 60 min |
 | 2 | [AI Agents Guide](agents.md) | Deploy intelligent agents with tools | 45 min |
 | 3 | [AI Model Deployment](ai-model-deployment.md) | Deploy and configure AI models | 30 min |
 | 4 | [AI Workshop Lab](ai-workshop-lab.md) | Hands-on: Explore a template and plan your conversion | 2-3 hours |
@@ -34,6 +36,8 @@ By completing this chapter, you will:
 ## 🚀 Quick Start
 
 Choose one option in a new empty directory. The trailing `.` initializes the current directory; otherwise AZD can create a subdirectory without changing your shell's working directory.
+
+For the **GA hosted-agent code-deployment path**, start with the [guided walkthrough](microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). It requires AZD 1.37.0+, current uv, Python 3.13+, Foundry permissions, and model quota. The full application templates below are alternatives, not prerequisites for that walkthrough.
 
 ```bash
 # Option 1: RAG Chat Application
@@ -71,7 +75,7 @@ These are illustrative ranges, not quotes or caps; model traffic, Search/compute
 | Staging | $150-300 |
 | Production | $300-3,500+ |
 
-**Tip:** Run `azd down` after testing to avoid charges.
+**Cleanup:** Review `azd down` before confirming: for a newly created Foundry project it deletes the resource group and everything in it. For a reused Foundry project, it leaves the project and agent resources in place; follow the [walkthrough cleanup guidance](microsoft-foundry-integration.md#7-clean-up-deliberately) to remove unwanted resources separately.
 
 ---
 

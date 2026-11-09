@@ -22,6 +22,25 @@ After reviewing changelog entries, you will be able to:
 
 ## Version History
 
+### [v3.25.0] - 2026-11-09
+
+#### Microsoft Foundry extension 1.0 is now generally available
+
+The `microsoft.foundry` 1.0 bundle is **live and generally available**, as announced on [November 5, 2026](https://devblogs.microsoft.com/azure-sdk/microsoft-foundry-azure-developer-cli-ga/). The course now teaches the released GA workflow, not an upcoming release. Get started with AZD **1.37.0 or later** and `azd ext install microsoft.foundry`.
+
+#### Available in this course update
+- The English guidance uses the GA bundle as the default installation path and explains its seven independently versioned core extensions.
+- A [hosted-agent walkthrough](docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) covers the upstream Python Agent Framework Responses API sample, current uv, Python 3.13+, new/existing project selection, model reuse, and review of `azure.yaml`.
+- The local-to-cloud workflow covers Agent Inspector testing, Azure-backed model-call costs, remote code builds, deployed invocation, cloud tracing, deployment preview, logs, and diagnostics.
+- Separate evaluation guidance covers generating and reviewing datasets/rubrics, configuring a named evaluation, registering assets, and inspecting results. Older evaluation/optimization instructions remain migration history, not the current release baseline.
+- Foundry CI/CD guidance includes runner extension installation, authenticated deployment, evaluation assets/access, and an explicit quality gate.
+- Cleanup guidance distinguishes newly created and reused Foundry projects. The workshop links to the separate GA exercise without replacing its sample-specific tests.
+- Course navigation, learning objectives, setup prerequisites, cheat sheet, FAQ, and study guide reflect the GA workflow. Generated translations are not manually edited.
+
+#### Review scope
+- Based on the GA announcement, linked Microsoft Learn guidance, and the upstream sample configuration. No live Azure provisioning, deployment, model invocation, or evaluation was performed.
+- Bundle GA does not imply GA for every optional feature, independent extension, or SDK, nor certify the examples for production.
+
 ### [v3.24.0]- 2026-11-04
 
 #### Fixed

@@ -39,6 +39,8 @@ Before installing azd, ensure you have:
 - **Git** - For cloning templates and version control
 - **Docker** (optional) - For containerized applications
 
+**Chapter 2 Foundry GA path:** Use AZD **1.37.0 or later**, install the bundle with `azd ext install microsoft.foundry`, and use Python **3.13+** and current **uv** for the hosted-agent sample. Its code-deployment mode builds remotely, so it does not require a local Docker build. Foundry permissions, regional model availability, and quota are still required; see the [hosted-agent setup](../chapter-02-ai-development/microsoft-foundry-integration.md#1-prepare-and-initialize).
+
 ## Installation Methods
 
 ### Windows
