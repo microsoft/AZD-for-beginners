@@ -1,100 +1,100 @@
-# Szójegyzék - Azure és AZD Terminológia
+# Szószedet - Azure és AZD Terminológia
 
-**Minden fejezethez referencia**
-- **📚 Tanfolyam kezdőoldal**: [AZD kezdőknek](../README.md)
-- **📖 Alapok elsajátítása**: [1. fejezet: AZD alapok](../docs/getting-started/azd-basics.md)
-- **🤖 MI kifejezések**: [2. fejezet: AI-első fejlesztés](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+**Minden fejezet hivatkozása**
+- **📚 Tanfolyam főoldal**: [AZD Kezdőknek](../README.md)
+- **📖 Alapok elsajátítása**: [1. fejezet: AZD alapok](../docs/chapter-01-foundation/azd-basics.md)
+- **🤖 Mesterséges intelligencia kifejezések**: [2. fejezet: AI-First fejlesztés](../docs/chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Bevezetés
 
-Ez az átfogó szójegyzék definíciókat nyújt az Azure Developer CLI és az Azure felhőfejlesztés során használt kifejezésekhez, fogalmakhoz és rövidítésekhez. Lényeges hivatkozás a műszaki dokumentáció megértéséhez, hibakereséshez és a hatékony kommunikációhoz az azd projektek és az Azure szolgáltatások kapcsán.
+Ez az átfogó szószedet definíciókat ad az Azure Developer CLI-ben és az Azure felhőfejlesztésben használt kifejezésekre, fogalmakra és mozaikszavakra. Lényeges referencia a műszaki dokumentáció megértéséhez, hibakereséshez és az azd projektek és Azure szolgáltatások hatékony kommunikációjához.
 
 ## Tanulási célok
 
-E szójegyzék használatával Ön:
+A szószedet használatával:
 - Megérti az alapvető Azure Developer CLI terminológiát és fogalmakat
 - Elsajátítja az Azure felhőfejlesztés szókincsét és műszaki kifejezéseit
-- Hatékonyan hivatkozik az Infrastructure as Code (IaC) és telepítési terminológiára
-- Megérti az Azure szolgáltatások neveit, rövidítéseit és céljait
-- Hozzáfér a hibakeresési és debugolási terminológia definícióihoz
-- Megismeri a fejlett Azure architektúra és fejlesztési fogalmakat
+- Hatékonyan hivatkozik az Infrastructure as Code és telepítési terminológiára
+- Megérti az Azure szolgáltatásneveket, mozaikszavakat és azok célját
+- Hozzáférhet a hibakeresés és hibajavítás terminológiájához adott definíciókhoz
+- Megtanulja az Azure fejlett architektúra és fejlesztési fogalmait
 
 ## Tanulási eredmények
 
-A szójegyzék rendszeres használatával Ön képes lesz:
-- Hatékonyan kommunikálni az Azure Developer CLI megfelelő terminológiájával
-- Világosabban érteni a műszaki dokumentációt és a hibaüzeneteket
+A szószedet rendszeres használatával képes lesz:
+- Hatékonyan kommunikálni a megfelelő Azure Developer CLI terminológiát használva
+- Világosabban megérteni a műszaki dokumentációt és hibajelzéseket
 - Magabiztosan eligazodni az Azure szolgáltatások és fogalmak között
-- Megfelelő műszaki szókincset használva hibákat elhárítani
-- Pontos műszaki nyelvezettel hozzájárulni a csapat megbeszéléseihez
-- Rendszeresen bővíteni Azure felhőfejlesztési ismereteit
+- Megfelelő műszaki szókincset alkalmazva hibákat elhárítani
+- Pontos műszaki nyelvezetet használva hozzájárulni a csapat megbeszéléseihez
+- Rendszeresen bővíteni az Azure felhőfejlesztés ismereteit
 
 ## A
 
 **ARM Template**  
-Azure Resource Manager minta. JSON-alapú Infrastructure as Code formátum, amely deklaratívan határozza meg és telepíti az Azure erőforrásokat.
+Azure Resource Manager sablon. JSON alapú Infrastructure as Code formátum, amely deklaratív módon definiálja és telepíti az Azure erőforrásokat.
 
 **App Service**  
-Az Azure platform-szolgáltatása (PaaS) webalkalmazások, REST API-k és mobil hátterek hosztolására, infrastruktúra kezelés nélkül.
+Az Azure platform szolgáltatása (PaaS) webalkalmazások, REST API-k és mobil háttérrendszerek hosztolásához, infrastruktúra kezelés nélkül.
 
 **Application Insights**  
-Az Azure alkalmazásteljesítmény-monitorozási (APM) szolgáltatása, amely mélyreható betekintést nyújt az alkalmazás teljesítményébe, rendelkezésre állásába és használatába.
+Az Azure alkalmazás teljesítményfigyelő (APM) szolgáltatása, amely mélyreható betekintést nyújt az alkalmazás teljesítményébe, rendelkezésre állásába és használatába.
 
 **Azure CLI**  
-Parancssoros felület az Azure erőforrások kezeléséhez. Az azd hitelesítéshez és egyes műveletekhez használja.
+Parancssori felület az Azure erőforrások kezeléséhez. Kiegészíti az AZD-t, de külön bejelentkezést igényel; az AZD fő hitelesítése `azd auth login`-t használ.
 
 **Azure Developer CLI (azd)**  
-Fejlesztőközpontú parancssoros eszköz, amely felgyorsítja az alkalmazások Azure-ba történő építését és telepítését sablonok és Infrastructure as Code segítségével.
+Fejlesztőközpontú parancssori eszköz, amely felgyorsítja az alkalmazások Azure-ba történő építését és telepítését sablonok és Infrastructure as Code használatával.
 
 **azure.yaml**  
-Az azd projekt fő konfigurációs fájlja, amely definiálja a szolgáltatásokat, infrastruktúrát és telepítési hook-okat.
+Az azd projekt fő konfigurációs fájlja, amely definiálja a szolgáltatásokat, infrastruktúrát és telepítési horgonyokat.
 
 **Azure Resource Manager (ARM)**  
-Az Azure telepítési és felügyeleti szolgáltatása, amely kezelőréteget biztosít az erőforrások létrehozására, frissítésére és törlésére.
+Az Azure telepítési és kezelési szolgáltatása, amely felügyeleti réteget biztosít az erőforrások létrehozásához, frissítéséhez és törléséhez.
 
 ## B
 
 **Bicep**  
-Microsoft által fejlesztett domén-specifikus nyelv (DSL) Azure erőforrások telepítéséhez. Egyszerűbb szintaxist kínál, mint az ARM template-ek, miközben ARM-re fordul.
+Microsoft által fejlesztett domain-specifikus nyelv (DSL) az Azure erőforrások telepítéséhez. Egyszerűbb szintaxist kínál, mint az ARM sablonok, miközben ARM-re fordítódik.
 
 **Build**  
-A forráskód fordításának, függőségek telepítésének és az alkalmazások telepítésre való előkészítésének folyamata.
+A forráskód lefordításának, a függőségek telepítésének és az alkalmazások telepítésre történő előkészítésének folyamata.
 
 **Blue-Green Deployment**  
-Telepítési stratégia, amely két azonos működésű gyártási környezetet (kék és zöld) használ a leállás és kockázat minimalizálására.
+Telepítési stratégia, amely két azonos termelési környezetet (kék és zöld) használ a leállások és kockázatok minimalizálására.
 
 ## C
 
 **Container Apps**  
-Az Azure szerver nélküli konténer szolgáltatása, amely lehetővé teszi konténerizált alkalmazások futtatását összetett infrastruktúra kezelés nélkül.
+Az Azure szerver nélküli konténer szolgáltatása, amely lehetővé teszi konténerizált alkalmazások futtatását bonyolult infrastruktúra kezelés nélkül.
 
 **CI/CD**  
-Folyamatos Integráció/Folyamatos Telepítés. Automatizált gyakorlatok a kódváltoztatások integrálására és az alkalmazások telepítésére.
+Folyamatos integráció/folyamatos telepítés. Automatizált gyakorlatok a kódváltozások integrálására és alkalmazások telepítésére.
 
 **Cosmos DB**  
-Az Azure globálisan elosztott, többmodellű adatbázis-szolgáltatása, amely átfogó SLA-kat nyújt átbocsátóképességre, késleltetésre, rendelkezésre állásra és konzisztenciára.
+Az Azure globálisan elosztott, többmodellű adatbázis szolgáltatása, amely átfogó SLA-kat biztosít átbocsátóképességre, késleltetésre, rendelkezésre állásra és konzisztenciára.
 
-**Konfiguráció**  
-Beállítások és paraméterek, amelyek irányítják az alkalmazás viselkedését és telepítési lehetőségeit.
+**Configuration**  
+Beállítások és paraméterek, amelyek szabályozzák az alkalmazás viselkedését és telepítési lehetőségeit.
 
 ## D
 
 **Deployment**  
-Az alkalmazások és azok függőségeinek telepítési és konfigurációs folyamata a cél infrastruktúrán.
+Az alkalmazások és függőségeik célinfrastruktúrán való telepítésének és konfigurálásának folyamata.
 
 **Docker**  
-Platform az alkalmazások fejlesztésére, szállítására és futtatására konténerizációs technológia használatával.
+Platform alkalmazások fejlesztésére, szállítására és futtatására konténerizációs technológia segítségével.
 
 **Dockerfile**  
-Szöveges fájl, amely utasításokat tartalmaz egy Docker konténerkép építéséhez.
+Szövegfájl, amely utasításokat tartalmaz egy Docker konténer kép felépítéséhez.
 
 ## E
 
 **Environment**  
-Egy telepítési célpont, amely az alkalmazás egy adott példányát képviseli (pl. fejlesztés, teszt, éles).
+Egy telepítési cél, amely az alkalmazás egy adott példányát képviseli (pl. fejlesztés, tesztelés, éles környezet).
 
-**Környezeti változók**  
-Beállítási értékek kulcs-érték párok formájában, amelyeket az alkalmazások futásidőben elérnek.
+**Environment Variables**  
+Konfigurációs értékek kulcs-érték párokban tárolva, amelyeket az alkalmazások futásidőben elérhetnek.
 
 **Endpoint**  
 URL vagy hálózati cím, ahol egy alkalmazás vagy szolgáltatás elérhető.
@@ -107,34 +107,34 @@ Az Azure szerver nélküli számítási szolgáltatása, amely eseményvezérelt
 ## G
 
 **GitHub Actions**  
-CI/CD platform, amely integrálva van a GitHub tárolókkal a munkafolyamatok automatizálásához.
+CI/CD platform, amely integrálva van a GitHub tárolókkal munkafolyamatok automatizálásához.
 
 **Git**  
-Elosztott verziókezelő rendszer a forráskód változásainak nyomon követésére.
+Elosztott verziókezelő rendszer, amelyet a forráskód változásainak nyomon követésére használnak.
 
 ## H
 
 **Hooks**  
-Egyedi scriptek vagy parancsok, amelyek a telepítési életciklus bizonyos pontjain futnak (előfeltétel, utófeltétel, előtelepítés, utótelepítés).
+Egyedi parancsfájlok vagy parancsok, amelyek a telepítési életciklus bizonyos pontjain futnak (előtelepítés, utótelepítés, előtelepítés, utótelepítés).
 
 **Host**  
-Az Azure szolgáltatástípus, amelyre az alkalmazás telepítésre kerül (pl. appservice, containerapp, function).
+Az Azure szolgáltatás típusa, amelyre egy alkalmazást telepítenek (pl. appservice, containerapp, function).
 
 ## I
 
 **Infrastructure as Code (IaC)**  
-Az infrastruktúra kód általi definiálása és kezelése manuális folyamatok helyett.
+Az a gyakorlat, amely az infrastruktúra kódon keresztüli definiálására és kezelésére épül manuális folyamatok helyett.
 
 **Init**  
-Az új azd projekt inicializálásának folyamata, általában egy sablonból.
+Egy új azd projekt inicializálásának folyamata, rendszerint sablonból.
 
 ## J
 
 **JSON**  
-JavaScript Object Notation. Gyakran használt adatcsere formátum konfigurációs fájlokban és API válaszokban.
+JavaScript Object Notation. Adatcsere-formátum, amelyet gyakran használnak konfigurációs fájlokban és API válaszokban.
 
 **JWT**  
-JSON Web Token. Szabvány az adatok biztonságos JSON objektumként történő továbbítására felek között.
+JSON Web Token. Szabvány az információ biztonságos átadására felek között JSON objektumként.
 
 ## K
 
@@ -142,7 +142,7 @@ JSON Web Token. Szabvány az adatok biztonságos JSON objektumként történő t
 Az Azure szolgáltatása bizalmas adatok, kulcsok és tanúsítványok biztonságos tárolására és kezelésére.
 
 **Kusto Query Language (KQL)**  
-Lekérdező nyelv az Azure Monitor, Application Insights és egyéb Azure szolgáltatások adatainak elemzéséhez.
+Lekérdező nyelv az Azure Monitor, Application Insights és más Azure szolgáltatások adatelemzésére.
 
 ## L
 
@@ -150,23 +150,23 @@ Lekérdező nyelv az Azure Monitor, Application Insights és egyéb Azure szolg�
 Szolgáltatás, amely a bejövő hálózati forgalmat több szerver vagy példány között osztja el.
 
 **Log Analytics**  
-Az Azure szolgáltatása telemetriai adatok gyűjtésére, elemzésére és feldolgozására felhős és helyszíni környezetekben.
+Azure szolgáltatás, amely gyűjti, elemzi és reagál a felhő- és helyszíni környezetek telemetriai adataira.
 
 ## M
 
 **Managed Identity**  
-Azure szolgáltatás, amely automatikusan kezelt identitást biztosít más Azure szolgáltatásokhoz való hitelesítéshez.
+Azure funkció, amely automatikusan kezelt azonosítót biztosít Azure szolgáltatásoknak más Azure szolgáltatásokhoz való hitelesítéshez.
 
 **Microservices**  
-Olyan architekturális megközelítés, ahol az alkalmazás kis, független szolgáltatások gyűjteményeként épül fel.
+Architektúra, amelyben az alkalmazásokat kicsi, független szolgáltatások gyűjteményeként építik fel.
 
 **Monitor**  
-Az Azure egységes megfigyelési megoldása, amely teljeskörű átláthatóságot biztosít alkalmazásokra és infrastruktúrára.
+Az Azure egységes megfigyelési megoldása, amely teljes körű átláthatóságot biztosít alkalmazásokra és infrastruktúrára.
 
 ## N
 
 **Node.js**  
-JavaScript futtatókörnyezet, amely a Chrome V8 JavaScript motorjára épül, szerveroldali alkalmazások fejlesztéséhez.
+JavaScript futtatókörnyezet a Chrome V8 JavaScript motorjára építve szerveroldali alkalmazások fejlesztéséhez.
 
 **npm**  
 Node.js csomagkezelő, amely kezeli a függőségeket és csomagokat.
@@ -174,192 +174,194 @@ Node.js csomagkezelő, amely kezeli a függőségeket és csomagokat.
 ## O
 
 **Output**  
-Az infrastruktúra telepítéséből visszatérő értékek, amelyeket az alkalmazások vagy más erőforrások használhatnak.
+Értékek, amelyeket az infrastruktúra telepítése ad vissza, és amelyeket alkalmazások vagy más erőforrások használhatnak.
 
 ## P
 
 **Package**  
-Az alkalmazáskód és a függőségek telepítésre való előkészítése.
+Az alkalmazáskód és függőségek telepítésre történő előkészítésének folyamata.
 
-**Params (Parameters)**  
-Bemeneti értékek, amelyeket infrastruktúra sablonoknak adunk át a telepítések testreszabásához.
+**Parameters**  
+Bemeneti értékek, amelyeket az infrastruktúra sablonoknak adnak át a telepítés testreszabásához.
 
 **PostgreSQL**  
-Nyílt forráskódú relációs adatbázis rendszer, amely Azure-ban menedzselt szolgáltatásként elérhető.
+Nyílt forráskódú relációs adatbázis rendszer, amelyet az Azure menedzselt szolgáltatásként támogat.
 
 **Provisioning**  
-Az infrastruktúra sablonokban definiált Azure erőforrások létrehozásának és konfigurálásának folyamata.
+Az Azure erőforrások létrehozásának és konfigurálásának folyamata, ahogy azt az infrastruktúra sablonok definiálják.
 
 ## Q
 
 **Quota**  
-Erőforrás létrehozási korlátok egy Azure előfizetés vagy régió esetén.
+Az Azure előfizetésben vagy régióban létrehozható erőforrások mennyiségének korlátai.
 
 ## R
 
 **Resource Group**  
-Logikai tároló az Azure erőforrások számára, amelyek azonos életciklust, jogosultságokat és szabályzatokat osztanak.
+Logikai tároló az Azure erőforrások számára, amelyek közös életciklussal, jogosultságokkal és szabályzatokkal rendelkeznek.
 
 **Resource Token**  
-Az azd által generált egyedi karakterlánc, amely biztosítja, hogy az erőforrásnevek telepítéskor egyediek legyenek.
+Az azd által generált egyedi karaktersorozat az erőforrásnevek telepítésenkénti egyediségének biztosítására.
 
 **REST API**  
-Architekturális stílus hálózati alkalmazások tervezésére HTTP metódusok használatával.
+Architektúrális stílus hálózati alkalmazások tervezéséhez HTTP módszerek használatával.
 
 **Rollback**  
-Folyamat, amely során az alkalmazás vagy infrastruktúra konfiguráció korábbi verziójára térnek vissza.
+Az alkalmazás vagy infrastruktúra konfiguráció egy korábbi verziójára való visszatérés folyamata.
 
 ## S
 
 **Service**  
-Az alkalmazás olyan komponense, amely az azure.yaml fájlban definiált (pl. web frontend, API backend, adatbázis).
+Az alkalmazásának egy komponense, amely az azure.yaml fájlban van definiálva (pl. web frontend, API háttér, adatbázis).
 
 **SKU**  
-Stock Keeping Unit. Az Azure erőforrások különböző szolgáltatási szintjeit vagy teljesítményszintjeit jelöli.
+Raktári egység. Az Azure erőforrások különböző szolgáltatási szintjeit vagy teljesítmény szintjeit jelenti.
 
 **SQL Database**  
-Az Azure menedzselt relációs adatbázis szolgáltatása Microsoft SQL Server alapokon.
+Az Azure menedzselt relációs adatbázis szolgáltatása, amely a Microsoft SQL Server-en alapul.
 
 **Static Web Apps**  
-Azure szolgáltatás teljes webalkalmazások forráskód-tárolóból való építésére és telepítésére.
+Azure szolgáltatás, amelyet teljes stack webalkalmazások forráskód tárhelyből történő létrehozására és telepítésére használnak.
 
 **Storage Account**  
-Azure szolgáltatás felhőtárhely biztosítására adatobjektumok (blobok, fájlok, sorok, táblák) számára.
+Azure szolgáltatás, amely felhőalapú tárhelyet biztosít adatelemekhez, beleértve blobokat, fájlokat, sorokat és táblákat.
 
 **Subscription**  
-Azure fiókkezelő konténer, amely erőforráscsoportokat és erőforrásokat tartalmaz, valamint számlázást és hozzáférés-kezelést biztosít.
+Azure fiókot tartalmazó tároló, amely erőforráscsoportokat és erőforrásokat foglal magába, valamint a kapcsolódó számlázást és hozzáférés-kezelést.
 
 ## T
 
 **Template**  
-Előre elkészített projektstruktúra, amely tartalmazza az alkalmazáskódot, infrastruktúra definíciókat és konfigurációkat gyakori forgatókönyvekhez.
+Előre elkészített projektstruktúra, amely alkalmazáskódot, infrastruktúra definíciókat és közös forgatókönyvek konfigurációját tartalmazza.
 
 **Terraform**  
-Nyílt forráskódú Infrastructure as Code eszköz, amely több felhőszolgáltató, köztük az Azure támogatását nyújtja.
+Nyílt forráskódú Infrastructure as Code eszköz, amely több felhőszolgáltatót támogat, beleértve az Azure-t is.
 
 **Traffic Manager**  
-Az Azure DNS-alapú forgalomelosztó szolgáltatása, amely globális Azure régiók között osztja meg a forgalmat.
+Az Azure DNS-alapú forgalomelosztója, amely a forgalmat globális Azure régiók között teríti szét.
 
 ## U
 
 **URI**  
-Uniform Resource Identifier. Karakterlánc, amely egy adott erőforrást azonosít.
+Uniform Resource Identifier. Karaktersorozat, amely egy adott erőforrást azonosít.
 
 **URL**  
-Uniform Resource Locator. Az URI típusa, amely megadja egy erőforrás helyét és hozzáférési módját.
+Uniform Resource Locator. URI típus, amely megadja az erőforrás helyét és elérésének módját.
 
 ## V
 
 **Virtual Network (VNet)**  
-Az Azure privát hálózatok alapvető építőköve, izolációt és szegmentálást biztosítva.
+Alapvető építőelem az Azure privát hálózataihoz, elszigetelést és szegmentálást biztosít.
 
 **VS Code**  
-Visual Studio Code. Népszerű kódszerkesztő, amely kiváló Azure és azd integrációval rendelkezik.
+Visual Studio Code. Népszerű kódszerkesztő, kiváló Azure és azd integrációval.
 
 ## W
 
 **Webhook**  
-HTTP callback, amely adott események hatására aktiválódik, gyakran használják CI/CD folyamatokban.
+HTTP visszahívás, amelyet konkrét események indítanak el, gyakran használják CI/CD folyamatokban.
 
 **What-if**  
-Azure funkció, amely megjeleníti, milyen változtatásokat hajtana végre egy telepítés anélkül, hogy ténylegesen végrehajtaná azt.
+Azure funkció, amely megmutatja, milyen változtatásokat hajtana végre a telepítés anélkül, hogy ténylegesen végrehajtaná azt.
 
 ## Y
 
 **YAML**  
-YAML Ain't Markup Language. Ember által olvasható adat-szériázási szabvány, amelyet konfigurációs fájlokhoz, mint az azure.yaml, használnak.
+YAML nem jelölőnyelv. Ember által olvasható adat sorosítási szabvány, amelyet konfigurációs fájlokhoz, például az azure.yaml-hoz használnak.
 
 ## Z
 
 **Zone**  
-Fizikailag különálló helyek egy Azure régión belül, amelyek redundanciát és magas rendelkezésre állást biztosítanak.
+Fizikailag elkülönült helyszínek egy Azure régión belül, amelyek redundanciát és magas rendelkezésre állást biztosítanak.
 
 ---
 
-## Gyakori rövidítések
+## Gyakori mozaikszavak
 
-| Rövidítés | Teljes név | Leírás |
+| Mozaikszó | Teljes alak | Leírás |
 |---------|-----------|-------------|
-| AAD | Azure Active Directory (most Microsoft Entra ID) | Azonosítás és hozzáférés-kezelési szolgáltatás |
-| ACR | Azure Container Registry | Konténer kép-tároló szolgáltatás |
+| AAD | Azure Active Directory (most Microsoft Entra ID) | Identitás- és hozzáférés-kezelési szolgáltatás |
+| ACR | Azure Container Registry | Konténerkép-regisztrációs szolgáltatás |
 | AKS | Azure Kubernetes Service | Menedzselt Kubernetes szolgáltatás |
-| API | Application Programming Interface | Szoftverépítés protokoll-készlete |
-| ARM | Azure Resource Manager | Azure telepítési és kezelési szolgáltatás |
-| CDN | Content Delivery Network | Elosztott szerverhálózat |
+| API | Application Programming Interface | Szoftverek építésére szolgáló protokollkészlet |
+| ARM | Azure Resource Manager | Az Azure telepítési és kezelési szolgáltatása |
+| CDN | Content Delivery Network | Elosztott kiszolgálóhálózat |
 | CI/CD | Continuous Integration/Continuous Deployment | Automatizált fejlesztési gyakorlatok |
 | CLI | Command Line Interface | Szöveges felhasználói felület |
-| DNS | Domain Name System | Domain nevek IP címekké fordítása |
-| HTTPS | Hypertext Transfer Protocol Secure | Biztonságos HTTP változat |
-| IaC | Infrastructure as Code | Infrastruktúra kód általi kezelése |
+| DNS | Domain Name System | Domain nevek IP címekké alakítása |
+| HTTPS | Hypertext Transfer Protocol Secure | HTTP biztonságos verziója |
+| IaC | Infrastructure as Code | Infrastruktúra kódon keresztüli kezelése |
 | JSON | JavaScript Object Notation | Adatcsere formátum |
-| JWT | JSON Web Token | Biztonságos adatátviteli token formátum |
-| KQL | Kusto Query Language | Azure adatelemző lekérdező nyelv |
-| RBAC | Role-Based Access Control | Felhasználói szerepkör alapú hozzáférés-kezelés |
-| REST | Representational State Transfer | Webszolgáltatások architekturális stílusa |
+| JWT | JSON Web Token | Token formátum biztonságos információátvitelhez |
+| KQL | Kusto Query Language | Lekérdező nyelv Azure adat szolgáltatásokhoz |
+| RBAC | Role-Based Access Control | Szerepalapú hozzáférés-vezérlés |
+| REST | Representational State Transfer | Webszolgáltatások architektúrális stílusa |
 | SDK | Software Development Kit | Fejlesztői eszközkészlet |
-| SLA | Service Level Agreement | Szolgáltatás rendelkezésre állási/teljesítmény vállalás |
-| SQL | Structured Query Language | Relációs adatbázis kezelő nyelv |
+| SLA | Service Level Agreement | Szolgáltatási szint megállapodás |
+| SQL | Structured Query Language | Relációs adatbázis-kezelő nyelv |
 | SSL/TLS | Secure Sockets Layer/Transport Layer Security | Kriptográfiai protokollok |
-| URI | Uniform Resource Identifier | Erőforrás azonosító karakterlánc |
-| URL | Uniform Resource Locator | URI típus, ami erőforrás helyét határozza meg |
-| VM | Virtual Machine | Számítógép rendszerek emulációja |
-| VNet | Virtual Network | Azure privát hálózat |
-| YAML | YAML Ain't Markup Language | Adatsorozat-szabvány |
+| URI | Uniform Resource Identifier | Erőforrás azonosító karaktersorozat |
+| URL | Uniform Resource Locator | URI típus, amely meghatározza az erőforrás helyét |
+| VM | Virtual Machine | Számítógéprendszer emulációja |
+| VNet | Virtual Network | Privát hálózat az Azure-ban |
+| YAML | YAML nem jelölőnyelv | Adat sorosítási szabvány |
 
 ---
 
-## Azure szolgáltatás névillesztések
+## Azure szolgáltatásnév megfeleltetések
 
-| Gyakori név | Hivatalos Azure szolgáltatásnév | azd hoszt típus |
+| Általános név | Hivatalos Azure szolgáltatásnév | azd Host típus |
 |-------------|------------------------------|---------------|
 | Web App | Azure App Service | `appservice` |
 | API App | Azure App Service | `appservice` |
 | Container App | Azure Container Apps | `containerapp` |
 | Function | Azure Functions | `function` |
 | Static Site | Azure Static Web Apps | `staticwebapp` |
-| Database | Azure Database for PostgreSQL | `postgres` |
-| NoSQL DB | Azure Cosmos DB | `cosmosdb` |
-| Storage | Azure Storage Account | `storage` |
-| Cache | Azure Cache for Redis | `redis` |
-| Search | Azure AI Search | `search` |
-| Messaging | Azure Service Bus | `servicebus` |
+| Database | Azure Database for PostgreSQL | Infrastruktúra erőforrás, nem alkalmazás `host` |
+| NoSQL DB | Azure Cosmos DB | Infrastruktúra erőforrás, nem alkalmazás `host` |
+| Storage | Azure Storage Account | Infrastruktúra erőforrás, nem beépített alkalmazás `host` |
+| Cache | Azure Managed Redis | Infrastruktúra erőforrás, nem alkalmazás `host` |
+| Search | Azure AI Search | Infrastruktúra erőforrás, nem alkalmazás `host` |
+| Messaging | Azure Service Bus | Infrastruktúra erőforrás, nem alkalmazás `host` |
+
+`services.<name>.host` alkalmazás telepítési célpontot választ; nem rövidítése bármely Azure erőforrástípusnak. Adatbázisokat, gyorsítótárakat, keresési szolgáltatásokat és sorokat általában az infrastruktúra szolgáltató telepíti, és kimenetek/konfiguráció által kapcsolódnak az alkalmazáshoz.
 
 ---
 
 ## Kontextus-specifikus kifejezések
 
 ### Fejlesztési kifejezések
-- **Hot Reload**: Automatikus frissítés fejlesztés közben újraindítás nélkül
-- **Build Pipeline**: Automatizált folyamat a kód építésére és tesztelésére
-- **Deployment Slot**: Tesztkörnyezet az App Service-ben
-- **Environment Parity**: A fejlesztési, teszt és éles környezet hasonlóvá tétele
+- **Hot Reload**: Az alkalmazások automatikus frissítése fejlesztés közben újraindítás nélkül
+- **Build Pipeline**: Automatikus folyamat kód építésére és tesztelésére
+- **Deployment Slot**: Tesztelési környezet egy App Service-en belül
+- **Environment Parity**: Fejlesztési, tesztelési és éles környezetek hasonlóvá tartása
 
 ### Biztonsági kifejezések
-- **Managed Identity**: Azure funkció az automatikus hitelesítő adatkezeléshez
+- **Managed Identity**: Azure funkció automatikus hitelesítő adat kezelésre
 - **Key Vault**: Titkok, kulcsok és tanúsítványok biztonságos tárolása
-- **RBAC**: Szerepkör-alapú hozzáférés-kezelés Azure erőforrásokhoz
+- **RBAC**: Szerepalapú hozzáférés-vezérlés Azure erőforrásokhoz
 - **Network Security Group**: Virtuális tűzfal a hálózati forgalom szabályozásához
 
 ### Megfigyelési kifejezések
-- **Telemetry**: Automatizált mérési és adatgyűjtési folyamat
-- **Application Performance Monitoring (APM)**: Szoftver teljesítmény monitorozása
+- **Telemetry**: Mérések és adatok automatikus gyűjtése
+- **Application Performance Monitoring (APM)**: Alkalmazás teljesítményének figyelése
 - **Log Analytics**: Szolgáltatás naplóadatok gyűjtésére és elemzésére
-- **Alert Rules**: Automatizált értesítések metrikák és feltételek alapján
+- **Alert Rules**: Automatikus értesítések metrikák vagy feltételek alapján
 
 ### Telepítési kifejezések
-- **Blue-Green Deployment**: Leállás nélküli telepítési stratégia
-- **Canary Deployment**: Fokozatos kiterjesztés egy alcsoportra
-- **Rolling Update**: Az alkalmazás példányainak egymás utáni cseréje
+- **Blue-Green Deployment**: Zéró leállásos telepítési stratégia
+- **Canary Deployment**: Fokozatos bevezetés a felhasználók egy részének
+- **Rolling Update**: Az alkalmazás példányainak fokozatos cseréje
 - **Rollback**: Visszatérés az alkalmazás korábbi verziójára
 
 ---
 
-**Használati tipp**: Használja a `Ctrl+F` billentyűkombinációt a kifejezések gyors kereséséhez ebben a szójegyzékben. A kifejezések keresztelhivatkozottak, ahol alkalmazható.
+**Használati tipp**: Használja `Ctrl+F`-t, hogy gyorsan keressen specifikus kifejezéseket ebben a szószedetben. Kifejezések hol alkalmazható, ott egymásra mutatnak.
 
 ---
 
 **Navigáció**
-- **Előző lecke**: [Cheat Sheet](cheat-sheet.md)
+- **Előző lecke**: [Összefoglaló](cheat-sheet.md)
 - **Következő lecke**: [GYIK](faq.md)
 
 ---

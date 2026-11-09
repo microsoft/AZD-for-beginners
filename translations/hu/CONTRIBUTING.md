@@ -1,66 +1,79 @@
-# Hozzájárulás az AZD For Beginners-hez
+# Az AZD For Beginners-hoz való hozzájárulás
 
-Köszönjük az érdeklődésedet az AZD For Beginners kurzushoz való hozzájárulás iránt! Ez a dokumentum irányelveket és információkat tartalmaz a hozzájárulók számára.
+Köszönjük érdeklődésedet az AZD For Beginners tanfolyamhoz való hozzájárulás iránt! Ez a dokumentum irányelveket és információkat nyújt a közreműködők számára.
 
 ## Hogyan járulhatsz hozzá
 
-### Hibajelentés
+### Hibák jelentése
 
-Ha hibákat, problémákat találsz, vagy javaslataid vannak a fejlesztésekre:
+Ha hibákat, tévedéseket találsz, vagy javítási javaslataid vannak:
 
-1. **Ellenőrizd a meglévő problémákat**: Keresd át a [meglévő problémákat](https://github.com/microsoft/azd-for-beginners/issues), hogy elkerüld a duplikációkat
-2. **Hozz létre egy új issue-t**: Használd a megfelelő issue sablont
-3. **Adj meg részleteket**: Tüntesd fel a reprodukálás lépéseit, a várt viselkedést és a képernyőképeket, ha alkalmazható
+1. **Ellenőrizd a meglévő hibákat**: Keresd meg a [meglévő hibákat](https://github.com/microsoft/azd-for-beginners/issues), hogy elkerüld az ismétléseket
+2. **Hozz létre új hibajegyet**: Használd a megfelelő hibajegy sablont
+3. **Adj meg részleteket**: Tartalmazza a reprodukálási lépéseket, a várható viselkedést és ha szükséges, képernyőképeket
 
-### Változtatások javaslása
+### Változtatások javaslata
 
-1. **Forkold a repót**: Készíts saját forkot a projektről
-2. **Hozz létre egy ágat**: Készíts egy feature ágat a változtatásaidhoz
-3. **Végezd el a módosításokat**: Kövesd a kódolási és dokumentációs szabványainkat
-4. **Teszteld a változtatásaidat**: Ellenőrizd, hogy minden link működik és a tartalom helyesen jelenik meg
-5. **Nyújts be Pull Requestet**: Adj meg világos leírást a változtatásaidról
+1. **Forkold a tárolót**: Hozd létre a saját forkodat a projektről
+2. **Hozz létre egy ágat**: Készíts egy funkcióágat a változtatásokhoz
+3. **Végezze el a változtatásokat**: Kövesd a kódolási és dokumentációs szabványaikat
+4. **Teszteld a változtatásokat**: Ellenőrizd, hogy minden link működik és a tartalom megfelelően jelenik meg
+5. **Nyújts be Pull Request-et**: Adj világos leírást a változtatásaidról
 
-### A hozzájárulások típusai
+### Hozzájárulás típusai
 
-Az alábbi hozzájárulásokat szívesen fogadjuk:
+Az alábbi hozzájárulásokat várjuk szívesen:
 
 #### Tartalomfejlesztések
-- Javíts helyesírási, nyelvtani és formázási hibákat
-- Javítsd a meglévő dokumentáció érthetőségét
-- Frissíts elavult információkat
-- Adj hozzá hiányzó magyarázatokat vagy kontextust
+- Hibák, helyesírási, nyelvtani és formázási hibák javítása
+- A meglévő dokumentáció tisztázása
+- Elavult információk frissítése
+- Hiányzó magyarázatok vagy kontextus hozzáadása
 
 #### Új példák
-- Adj hozzá valós telepítési forgatókönyveket
-- Hozz létre új AZD sablonokat gyakori használati esetekhez
-- Adj meg további kódpéldákat és gyakorlatokat
+- Valós telepítési forgatókönyvek hozzáadása
+- Új AZD sablonok készítése gyakori használati esetekhez
+- További kódpéldák és gyakorlatok biztosítása
 
 #### Fordítási támogatás
-- Segíts fenntartani a meglévő fordításokat
-- Javítsd a fordítások minőségét
-- Adj hozzá fordításokat új tartalomhoz
+- A meglévő fordítások karbantartásának segítése
+- A fordítások minőségének javítása
+- Új tartalmak fordításának hozzáadása
 
-#### Hibajelentések
-- Jelents törött linkeket vagy helytelen kódpéldákat
-- Azonosítsd a dokumentáció következetlenségeit
-- Jelöld a hozzáférhetőségi problémákat
+#### Hibabejelentés
+- Törött linkek vagy helytelen kódpéldák jelentése
+- A dokumentációs inkonzisztenciák azonosítása
+- Hozzáférhetőségi problémák jelzése
 
 ## Hozzájárulási irányelvek
 
 ### Dokumentációs szabványok
 
 - Használj világos, kezdők számára barátságos nyelvezetet
-- Tüntesd fel a tanulási célokat és eredményeket
-- Adj lépésről lépésre útmutatót a várt kimenetekkel
-- Adj navigációs linkeket a kapcsolódó tartalmakhoz
+- Tartalmazzon tanulási célokat és eredményeket
+- Lépésről lépésre instrukciókat adj meg a várható eredményekkel
+- Adj navigációs linkeket a kapcsolódó tartalomhoz
 - Használj következetes formázást és markdown stílust
 
 ### Kódpéldák
 
-- Biztosítsd, hogy minden kódpélda le legyen tesztelve és működik
-- Tartalmazzon megjegyzéseket a kulcsfogalmak magyarázatához
-- Kövesd az Azure és AZD legjobb gyakorlatait
-- Adj meg várt kimenetet, ha alkalmazható
+- Biztosítsd, hogy az összes kódpélda tesztelt és működőképes legyen
+- Magyarázó megjegyzéseket tartalmazzon a kulcsfogalmakról
+- Kövesd az Azure és az AZD legjobb gyakorlatait
+- Ha alkalmazható, adj meg várható kimenetet is
+
+### Az angol dokumentáció validálása
+
+A tároló gyökérkönyvtárából telepítsd a meglévő fejlesztési követelményeket és futtasd:
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m unittest discover -s .github/scripts -p "test_*.py"
+python .github/scripts/check_links.py
+python -m mkdocs build --strict --config-file workshop/mkdocs.yml
+```
+
+Az offline linkellenőrző ellenőrzi az angol Markdown/HTML útvonalakat, címsorokat, explicit horgonyokat és az üres linkhelyeket. Kizárja a generált `translations/` és `translated_images/` tartalmakat, valamint a hozzájuk vezető linkeket. Nem tölti le külső webhelyeket és nem ellenőrzi az Azure telepítéseket. Használd a `--json <report-path>` parancsot a hibák és a külső URL-állomány exportálásához külön hálózati ellenőrzéshez. Módosítások esetén ellenőrizd a jelenlegi upstream parancsokat és a minta előfeltételeit; különböztesd meg a tesztelt alkalmazásokat a tervezési tervektől.
 
 ### Commit üzenetek
 
@@ -69,27 +82,27 @@ Használj világos, leíró commit üzeneteket:
 - `feat: add new container app example`
 - `fix: correct broken link in chapter 2`
 
-## Viselkedési kódex
+## Magatartási kódex
 
-Kérjük, olvasd el és kövesd a [Viselkedési kódexünket](CODE_OF_CONDUCT.md), hogy megőrizzük a barátságos és befogadó közösséget.
+Kérjük, olvasd el és kövesd a [Magatartási kódexünket](CODE_OF_CONDUCT.md), hogy egy befogadó és barátságos közösséget tartsunk fenn.
 
-## Segítség
+## Segítség kérése
 
-- **Kérdések**: Nyiss egy [GitHub Discussion](https://github.com/microsoft/azd-for-beginners/discussions)
-- **Közösség**: Csatlakozz az [Azure Discord](https://discord.gg/microsoft-azure) közösséghez
-- **Dokumentáció**: Tekintsd át az [Azure Developer CLI docs](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- **Kérdések**: Keress vagy hozz létre egy [GitHub hibajegyet](https://github.com/microsoft/AZD-for-beginners/issues)
+- **Közösség**: Csatlakozz az [Azure Discordhoz](https://discord.gg/microsoft-azure)
+- **Dokumentáció**: Tekintsd meg az [Azure Developer CLI dokumentációt](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
 ## Licenc
 
-Azáltal, hogy hozzájárulsz ehhez a tárolóhoz, elfogadod, hogy a hozzájárulásaid az [MIT License](../../LICENSE) alatt lesznek licencelve.
+Az ebbe a tárolóba való hozzájárulással elfogadod, hogy a hozzájárulásaid a [MIT licenc](../../LICENSE) alatt lesznek licencelve.
 
 ---
 
-Köszönjük, hogy segítesz jobb tanulási forrást létrehozni az AZD For Beginners számára!
+Köszönjük, hogy segítesz jobb tanulási erőforrást létrehozni az AZD For Beginners számára a közösségnek!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Felelősségkizárás**:
-Ezt a dokumentumot az AI-alapú fordítószolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével fordítottuk. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti, anyanyelvi dokumentum tekintendő irányadónak. Kritikus fontosságú információk esetén professzionális, emberi fordítást javasolunk. Nem vállalunk felelősséget a jelen fordítás használatából eredő félreértésekért vagy félreértelmezésekért.
+**Jogi nyilatkozat**:
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Fontos információk esetén professzionális emberi fordítást javasolunk. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely ebből a fordításból ered.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,75 +1,77 @@
-# Průvodce výběrem SKU - Výběr správných úrovní služeb Azure
+# Průvodce výběrem SKU - Jak vybrat správné úrovně služeb Azure
 
 **Navigace kapitolou:**
 - **📚 Domů kurzu**: [AZD pro začátečníky](../../README.md)
-- **📖 Aktuální kapitola**: Kapitola 6 - Ověření a plánování před nasazením
+- **📖 Aktuální kapitola**: Kapitola 6 - Validace a plánování před nasazením
 - **⬅️ Předchozí**: [Plánování kapacity](capacity-planning.md)
-- **➡️ Další**: [Kontroly před nasazením](preflight-checks.md)
+- **➡️ Další**: [Předběžné kontroly](preflight-checks.md)
 - **🚀 Další kapitola**: [Kapitola 7: Řešení problémů](../chapter-07-troubleshooting/common-issues.md)
 
 ## Úvod
 
-Tento komplexní průvodce vám pomůže vybrat optimální SKU (Stock Keeping Units) služeb Azure pro různá prostředí, pracovní zatížení a požadavky. Naučíte se analyzovat požadavky na výkon, zvážit náklady a požadavky na škálovatelnost, abyste vybrali nejvhodnější úrovně služeb pro nasazení pomocí Azure Developer CLI.
+Tento ucelený průvodce vám pomůže vybrat optimální SKU (jednotky skladové evidence) Azure služeb pro různá prostředí, zátěže a požadavky. Naučíte se analyzovat potřeby výkonu, cenové faktory a požadavky na škálovatelnost, abyste mohli zvolit nejvhodnější úrovně služeb pro nasazení pomocí Azure Developer CLI.
 
-## Cíle učení
+## Výukové cíle
 
-Po dokončení tohoto průvodce budete:
-- Rozumět konceptům SKU v Azure, modelům cen a rozdílům ve funkcích
-- Ovládat strategie výběru SKU podle prostředí pro vývoj, staging a produkci
-- Analyzovat požadavky pracovního zatížení a přiřazovat je k vhodným úrovním služeb
+Po dokončení tohoto průvodce budete schopni:
+- Porozumět konceptům SKU Azure, cenovým modelům a rozdílům ve funkcích
+- Ovládnout strategie výběru SKU specifické pro prostředí (vývoj, staging, produkce)
+- Analyzovat požadavky zátěže a přiřadit je k vhodným úrovním služeb
 - Implementovat strategie optimalizace nákladů prostřednictvím inteligentního výběru SKU
-- Používat techniky testování výkonu a ověřování pro volbu SKU
+- Aplikovat techniky testování výkonu a validace výběru SKU
 - Konfigurovat automatizovaná doporučení SKU a monitorování
 
 ## Výsledky učení
 
 Po dokončení budete schopni:
-- Vybrat vhodné SKU služeb Azure na základě požadavků a omezení pracovního zatížení
-- Navrhnout nákladově efektivní architektury pro více prostředí s vhodným výběrem úrovní
-- Implementovat benchmarkování výkonu a ověřování pro volbu SKU
-- Vytvořit automatizované nástroje pro doporučení SKU a optimalizaci nákladů
-- Plánovat migrace SKU a strategie škálování pro měnící se požadavky
-- Aplikovat principy Azure Well-Architected Framework při výběru úrovní služeb
+- Vybrat vhodné SKU Azure služeb na základě požadavků a omezení zátěže
+- Navrhnout nákladově efektivní architektury pro více prostředí se správným výběrem úrovní
+- Implementovat testování výkonu a validaci pro výběr SKU
+- Vytvářet automatizované nástroje pro doporučení SKU a optimalizaci nákladů
+- Plánovat migrace SKU a škálovací strategie na základě měnících se požadavků
+- Aplikovat principy Azure Well-Architected Framework pro výběr úrovně služby
 
 ## Obsah
 
-- [Porozumění SKU](../../../../docs/chapter-06-pre-deployment)
-- [Výběr podle prostředí](../../../../docs/chapter-06-pre-deployment)
-- [Pokyny specifické pro služby](../../../../docs/chapter-06-pre-deployment)
-- [Strategie optimalizace nákladů](../../../../docs/chapter-06-pre-deployment)
-- [Výkonové úvahy](../../../../docs/chapter-06-pre-deployment)
-- [Rychlé referenční tabulky](../../../../docs/chapter-06-pre-deployment)
-- [Nástroje pro ověření](../../../../docs/chapter-06-pre-deployment)
+- [Porozumění SKU](#understanding-skus)
+- [Výběr podle prostředí](#environment-based-selection)
+- [Pokyny pro konkrétní služby](#service-specific-guidelines)
+- [Strategie optimalizace nákladů](#cost-optimization-strategies)
+- [Úvahy o výkonu](#performance-considerations)
+- [Rychlé referenční tabulky](#quick-reference-tables)
+- [Nástroje pro validaci](#validation-tools)
 
 ---
 
 ## Porozumění SKU
 
+> **Příklad rozsahu:** YAML mapy SKU a konfigurace výkonu níže jsou návrhové poznámky, nikoli schematu `azure.yaml` nebo konfigurace nástroje pro zatížení. Bloky Bicep jsou alternativy/fragmenty: deklarujte jejich parametry a nadřazené zdroje, používejte jedinečné symbolické názvy při jejich kombinování a propojujte moduly do funkčního projektu. Ceny, limity a dostupnost regio/sku je třeba před nasazením ověřit pro váš předplatný účet.
+
 ### Co jsou SKU?
 
-SKU (Stock Keeping Units) představují různé úrovně služeb a výkonnostní profily pro zdroje Azure. Každé SKU nabízí odlišné:
+SKU (jednotky skladové evidence) představují různé úrovně služby a úrovně výkonu pro zdroje Azure. Každé SKU nabízí různé:
 
 - **Výkonové charakteristiky** (CPU, paměť, propustnost)
 - **Dostupnost funkcí** (možnosti škálování, úrovně SLA)
-- **Modely cen** (na základě spotřeby, rezervovaná kapacita)
-- **Regionální dostupnost** (ne všechny SKU jsou dostupné ve všech regionech)
+- **Cenové modely** (na základě spotřeby, rezervované kapacity)
+- **Regionální dostupnost** (ne všechna SKU jsou dostupná ve všech regionech)
 
 ### Klíčové faktory při výběru SKU
 
-1. **Požadavky pracovního zatížení**
-   - Očekávané vzorce provozu/zátěže
+1. **Požadavky zátěže**
+   - Očekávané vzory provozu/zátěže
    - Požadavky na výkon (CPU, paměť, I/O)
-   - Potřeby úložiště a přístupové vzorce
+   - Potřeby úložiště a způsoby přístupu
 
 2. **Typ prostředí**
    - Vývoj/testování vs. produkce
    - Požadavky na dostupnost
-   - Požadavky na bezpečnost a shodu
+   - Požadavky na bezpečnost a soulad s předpisy
 
-3. **Finanční omezení**
+3. **Rozpočtová omezení**
    - Počáteční náklady vs. provozní náklady
    - Slevy za rezervovanou kapacitu
-   - Dopady automatického škálování na náklady
+   - Dopady nákladů autoškálování
 
 4. **Projekce růstu**
    - Požadavky na škálovatelnost
@@ -82,9 +84,9 @@ SKU (Stock Keeping Units) představují různé úrovně služeb a výkonnostní
 
 ### Vývojové prostředí
 
-**Priority**: Optimalizace nákladů, základní funkčnost, snadné zřizování a odstraňování
+**Priority**: Optimalizace nákladů, základní funkcionalita, snadné zprovoznění/odprovoznění
 
-#### Doporučené SKU
+#### Doporučená SKU
 ```yaml
 # Development environment configuration
 environment: development
@@ -92,23 +94,23 @@ skus:
   app_service: "F1"          # Free tier
   sql_database: "Basic"       # Basic tier, 5 DTU
   storage: "Standard_LRS"     # Locally redundant
-  cosmos_db: "Free"          # Free tier (400 RU/s)
+  cosmos_db: "Standard"      # Free tier is an account opt-in, not a SKU
   key_vault: "Standard"      # Standard pricing tier
-  application_insights: "Free" # First 5GB free
+  application_insights: "workspace-based" # Consumption billing; no Free SKU
 ```
 
 #### Charakteristiky
-- **App Service**: F1 (Free) nebo B1 (Basic) pro jednoduché testování
-- **Databáze**: Základní úroveň s minimálními prostředky
-- **Úložiště**: Standardní s lokální redundancí pouze
-- **Výpočet**: Sdílené prostředky jsou přijatelné
-- **Síťování**: Základní konfigurace
+- **App Service**: F1 (zdarma) nebo B1 (základní) pro jednoduché testování
+- **Databáze**: základní úroveň s minimálními zdroji
+- **Úložiště**: standardní s místní redundancí pouze
+- **Výpočet**: sdílené zdroje jsou přijatelné
+- **Síťování**: základní konfigurace
 
-### Testovací/staging prostředí
+### Staging/Testovací prostředí
 
-**Priority**: Konfigurace podobná produkci, vyvážení nákladů, možnost testovat výkon
+**Priority**: konfigurace podobná produkci, rovnováha nákladů, schopnost testování výkonu
 
-#### Doporučené SKU
+#### Doporučená SKU
 ```yaml
 # Staging environment configuration
 environment: staging
@@ -121,51 +123,51 @@ skus:
 ```
 
 #### Charakteristiky
-- **Výkon**: 70–80 % produkční kapacity
+- **Výkon**: 70-80 % produkční kapacity
 - **Funkce**: Většina produkčních funkcí povolena
-- **Redundance**: Částečná geografická redundance
-- **Škálování**: Omezené automatické škálování pro testování
+- **Redundance**: Některá geografická redundance
+- **Škálování**: Omezené autoškálování pro testování
 - **Monitorování**: Plný monitorovací stack
 
 ### Produkční prostředí
 
-**Priority**: Výkon, dostupnost, bezpečnost, shoda, škálovatelnost
+**Priority**: Výkon, dostupnost, bezpečnost, soulad, škálovatelnost
 
-#### Doporučené SKU
+#### Doporučená SKU
 ```yaml
 # Production environment configuration
 environment: production
 skus:
   app_service: "P1V3"        # Premium v3 tier
   sql_database: "P2"         # Premium tier, 250 DTU
-  storage: "Premium_GRS"     # Premium geo-redundant
+  storage: "Standard_GRS"    # Geo-redundant; Premium_GRS is not a storage SKU
   cosmos_db: "Provisioned"   # Dedicated throughput
   container_apps: "Dedicated" # Dedicated environment
   key_vault: "Premium"       # Premium with HSM
 ```
 
 #### Charakteristiky
-- **Vysoká dostupnost**: Požadavky SLA 99,9 %+
-- **Výkon**: Vyhrazené prostředky, vysoká propustnost
-- **Bezpečnost**: Prémiové bezpečnostní funkce
-- **Škálování**: Plné možnosti automatického škálování
-- **Monitorování**: Komplexní observabilita
+- **Vysoká dostupnost**: požadavky na SLA 99,9 % a více
+- **Výkon**: vyhrazené zdroje, vysoká propustnost
+- **Bezpečnost**: prémiové bezpečnostní funkce
+- **Škálování**: plné schopnosti autoškálování
+- **Monitorování**: komplexní pozorovatelnost
 
 ---
 
-## Pokyny specifické pro služby
+## Pokyny pro konkrétní služby
 
 ### Azure App Service
 
-#### Matice rozhodování SKU
+#### Matice rozhodování o SKU
 
-| Případ použití | Doporučené SKU | Odůvodnění |
+| Použití | Doporučená SKU | Odůvodnění |
 |----------|----------------|-----------|
-| Vývoj/Testování | F1 (Free) nebo B1 (Basic) | Nákladově efektivní, postačující pro testování |
-| Malé produkční aplikace | S1 (Standard) | Vlastní domény, SSL, automatické škálování |
-| Středně velké produkční aplikace | P1V3 (Premium V3) | Lepší výkon, více funkcí |
-| Aplikace s vysokou návštěvností | P2V3 nebo P3V3 | Vyhrazené prostředky, vysoký výkon |
-| Kritické aplikace | I1V2 (Isolated V2) | Izolace sítě, vyhrazený hardware |
+| Vývoj/Testování | F1 (zdarma) nebo B1 (základní) | Nákladově efektivní, dostačující pro testování |
+| Malé produkční aplikace | S1 (standard) | Vlastní domény, SSL, autoškálování |
+| Střední produkční aplikace | P1V3 (prémiová V3) | Lepší výkon, více funkcí |
+| Aplikace s vysokou návštěvností | P2V3 nebo P3V3 | Vyhrazené zdroje, vysoký výkon |
+| Kritické aplikace | I1V2 (izolovaná V2) | Síťová izolace, vyhrazený hardware |
 
 #### Příklady konfigurací
 
@@ -203,19 +205,19 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 
 ### Azure SQL Database
 
-#### Rámec výběru SKU
+#### Rámec pro výběr SKU
 
-1. **Na bázi DTU (Database Transaction Units)**
-   - **Basic**: 5 DTU - Vývoj/testování
-   - **Standard**: S0-S12 (10-3000 DTU) - Obecné použití
-   - **Premium**: P1-P15 (125-4000 DTU) - Výkonově kritické
+1. **Na základě DTU (Databázové transakční jednotky)**
+   - **Basic**: 5 DTU - vývoj/testování
+   - **Standard**: S0-S12 (10-3000 DTU) - obecné použití
+   - **Premium**: P1-P15 (125-4000 DTU) - kritický výkon
 
-2. **Na bázi vCore (doporučeno pro produkci)**
-   - **General Purpose**: Vyvážený výpočet a úložiště
-   - **Business Critical**: Nízká latence, vysoké IOPS
-   - **Hyperscale**: Vysoce škálovatelné úložiště (až 100 TB)
+2. **Na základě vCore** (doporučeno pro produkci)
+   - **General Purpose**: vyvážený výpočet a úložiště
+   - **Business Critical**: nízká latence, vysoké IOPS
+   - **Hyperscale**: vysoce škálovatelné úložiště; ověřte aktuální limity velikosti a regionální podporu
 
-#### Příklady konfigurací
+#### Příklad konfigurací
 
 ```bicep
 // Development
@@ -255,18 +257,18 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
 #### Typy prostředí
 
 1. **Na základě spotřeby**
-   - Platba za použití
-   - Vhodné pro vývoj a proměnlivá pracovní zatížení
+   - Platba podle využití
+   - Vhodné pro vývoj a proměnlivé zátěže
    - Sdílená infrastruktura
 
-2. **Vyhrazené (Workload Profiles)**
-   - Vyhrazené výpočetní prostředky
+2. **Vyhrazené (profil zátěže)**
+   - Vyhrazené výpočetní zdroje
    - Předvídatelný výkon
-   - Lepší pro produkční zátěže
+   - Vhodnější pro produkční zátěže
 
 #### Příklady konfigurací
 
-**Vývoj (spotřební)**
+**Vývoj (Spotřeba)**
 ```bicep
 resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: 'cae-${environmentName}-dev'
@@ -284,7 +286,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
     configuration: {
       ingress: {
         external: true
-        targetPort: 3000
+        targetPort: 80 // nginx listens on 80 by default
       }
     }
     template: {
@@ -305,9 +307,9 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
 }
 ```
 
-**Produkce (vyhrazené)**
+**Produkce (Vyhrazené)**
 ```bicep
-resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' = {
+resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-03-01' = {
   name: 'cae-${environmentName}-prod'
   location: location
   properties: {
@@ -315,31 +317,33 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2022-10-01' 
     workloadProfiles: [{
       name: 'production-profile'
       workloadProfileType: 'D4'
-      minimumCount: 2
+      minimumCount: 3
       maximumCount: 10
     }]
   }
 }
 ```
 
+Zona redundance rovněž vyžaduje infrastrukturu podporující regiony a vhodnou konfiguraci VNet/podsíť, které jsou zde vynechány. Tento příklad plánuje tři vyhrazené uzly; nastavte alespoň dva repliky aplikace pro přesazení mezi zónami a velikost replik i uzlů optimalizujte pro selhání zóny. Viz [Pokyny pro spolehlivost Container Apps](https://learn.microsoft.com/azure/reliability/reliability-azure-container-apps). Pro přidání aplikace na tento profil nastavte její `workloadProfileName: 'production-profile'`; vytvoření profilu samo o sobě aplikace na něj nepřesune.
+
 ### Azure Cosmos DB
 
 #### Modely propustnosti
 
-1. **Ručně zajištěná propustnost**
+1. **Manuálně nakonfigurovaná propustnost**
    - Předvídatelný výkon
    - Slevy za rezervovanou kapacitu
-   - Nejlepší pro stabilní pracovní zatížení
+   - Nejlepší pro stabilní zátěže
 
-2. **Autoscale provisioned throughput**
-   - Automatické škálování podle využití
-   - Platíte za to, co použijete (s minimem)
-   - Vhodné pro proměnlivá zatížení
+2. **Autoškálovaná propustnost**
+   - Automatické škálování na základě využití
+   - Platba za využití (s minimem)
+   - Vhodné pro proměnlivé zátěže
 
 3. **Serverless**
    - Platba za požadavek
-   - Žádná zajištěná propustnost
-   - Ideální pro vývoj a přerušované zatížení
+   - Žádná rezervovaná propustnost
+   - Ideální pro vývoj a občasné zátěže
 
 #### Příklady SKU
 
@@ -400,15 +404,15 @@ resource cosmosDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2023
 
 #### Typy účtů úložiště
 
-1. **Standard_LRS** - Vývoj, nekritická data
-2. **Standard_GRS** - Produkce, potřeba geo-redundance
-3. **Premium_LRS** - Aplikace s vysokým výkonem
-4. **Premium_ZRS** - Vysoká dostupnost s redundancí zón
+1. **Standard_LRS** - vývoj, méně kritická data
+2. **Standard_GRS** - produkce, potřeba geo-redundance
+3. **Premium_LRS** - vysoce výkonné aplikace
+4. **Premium_ZRS** - vysoká dostupnost se zonální redundancí
 
 #### Výkonové úrovně
 
-- **Standard**: Obecné použití, nákladově efektivní
-- **Premium**: Vysoký výkon, scénáře s nízkou latencí
+- **Standardní**: obecné použití, nákladově efektivní
+- **Prémiové**: vysoce výkonné, nízká latence
 
 ```bicep
 // Development
@@ -453,17 +457,20 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ### 1. Rezervovaná kapacita
 
-Rezervujte prostředky na 1–3 roky pro významné slevy:
+Rezervujte zdroje na 1-3 roky pro výrazné slevy:
 
 ```bash
-# Zkontrolujte možnosti rezervace
-az reservations catalog show --reserved-resource-type SqlDatabase
-az reservations catalog show --reserved-resource-type CosmosDb
+# With the reservation extension available, inspect the subscription catalog
+az reservations catalog show \
+  --subscription-id "$AZURE_SUBSCRIPTION_ID" \
+  --reserved-resource-type SqlDatabases
 ```
+
+Nabídky rezervací a způsobilé typy zdrojů se liší; prohlédněte si katalog a podmínky nákupu, nevyvozujte, že každá služba/SKU podporuje rezervaci.
 
 ### 2. Správná velikost
 
-Začněte s menšími SKU a škálujte na základě skutečného využití:
+Začněte s menšími SKU a škálujte nahoru na základě skutečného využití:
 
 ```yaml
 # Progressive scaling approach
@@ -477,9 +484,9 @@ production:
   app_service: "P1V3"  # Premium tier
 ```
 
-### 3. Konfigurace automatického škálování
+### 3. Konfigurace autoškálování
 
-Implementujte inteligentní škálování pro optimalizaci nákladů:
+Zavádějte inteligentní škálování pro optimalizaci nákladů:
 
 ```bicep
 resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
@@ -496,6 +503,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
       rules: [
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'GreaterThan'
@@ -513,6 +521,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
         }
         {
           metricTrigger: {
+            statistic: 'Average'
             metricName: 'CpuPercentage'
             metricResourceUri: appServicePlan.id
             operator: 'LessThan'
@@ -538,7 +547,7 @@ resource autoScaleSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
 
 ### 4. Plánované škálování
 
-Snižte škálování mimo špičku:
+Snižujte škálu během nešpičkových hodin:
 
 ```json
 {
@@ -583,7 +592,7 @@ Snižte škálování mimo špičku:
 
 ---
 
-## Výkonové úvahy
+## Úvahy o výkonu
 
 ### Základní požadavky na výkon
 
@@ -605,14 +614,16 @@ performance_requirements:
 
 ### Testování zátěže
 
-Otestujte různé SKU pro ověření výkonu:
+Testujte různé SKU pro ověření výkonu:
 
 ```bash
-# Služba Azure pro testování zátěže
+# Azure Load Testing service (requires an existing load-testing resource,
+# the load extension, and a valid config plus referenced test script)
 az load test create \
-  --name "sku-performance-test" \
-  --resource-group $RESOURCE_GROUP \
-  --load-test-config @load-test-config.yaml
+  --load-test-resource "$LOAD_TEST_RESOURCE" \
+  --resource-group "$RESOURCE_GROUP" \
+  --test-id "sku-performance-test" \
+  --load-test-config-file load-test-config.yaml
 ```
 
 ### Monitorování a optimalizace
@@ -626,7 +637,8 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   kind: 'web'
   properties: {
     Application_Type: 'web'
-    RetentionInDays: 90
+    WorkspaceResourceId: logAnalyticsWorkspace.id
+    IngestionMode: 'LogAnalytics'
   }
 }
 
@@ -646,43 +658,43 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
 
 ## Rychlé referenční tabulky
 
-### Rychlá reference SKU pro App Service
+### Rychlý přehled SKU App Service
 
-| SKU | Úroveň | vCPU | RAM | Storage | Rozsah cen | Použití |
+| SKU | Úroveň | vCPU | RAM | Úložiště | Cenové rozpětí | Použití |
 |-----|------|------|-----|---------|-------------|----------|
-| F1 | Zdarma | Sdílené | 1GB | 1GB | Zdarma | Vývoj |
+| F1 | Zdarma | Sdílený | 1GB | 1GB | Zdarma | Vývoj |
 | B1 | Základní | 1 | 1.75GB | 10GB | $ | Malé aplikace |
 | S1 | Standardní | 1 | 1.75GB | 50GB | $$ | Produkce |
-| P1V3 | Premium V3 | 2 | 8GB | 250GB | $$$ | Vysoký výkon |
-| I1V2 | Isolated V2 | 2 | 8GB | 1TB | $$$$ | Podnikové |
+| P1V3 | Prémiová V3 | 2 | 8GB | 250GB | $$$ | Vysoký výkon |
+| I1V2 | Izolovaná V2 | 2 | 8GB | 1TB | $$$$ | Podniková |
 
-### Rychlá reference SKU pro SQL Database
+### Rychlý přehled SKU SQL Database
 
-| SKU | Úroveň | DTU/vCore | Storage | Rozsah cen | Použití |
+| SKU | Úroveň | DTU/vCore | Úložiště | Cenové rozpětí | Použití |
 |-----|------|-----------|---------|-------------|----------|
-| Basic | Basic | 5 DTU | 2GB | $ | Vývoj |
-| S2 | Standard | 50 DTU | 250GB | $$ | Malá produkce |
-| P2 | Premium | 250 DTU | 1TB | $$$ | Vysoký výkon |
-| GP_Gen5_4 | General Purpose | 4 vCore | 4TB | $$$ | Vyvážené |
-| BC_Gen5_8 | Business Critical | 8 vCore | 4TB | $$$$ | Kritické |
+| Basic | Základní | 5 DTU | 2GB | $ | Vývoj |
+| S2 | Standardní | 50 DTU | 250GB | $$ | Malá produkce |
+| P2 | Prémiová | 250 DTU | 1TB | $$$ | Vysoký výkon |
+| GP_Gen5_4 | Obecné použití | 4 vCore | 4TB | $$$ | Vyvážené |
+| BC_Gen5_8 | Business Critical | 8 vCore | 4TB | $$$$ | Kritické aplikace |
 
-### Rychlá reference SKU pro Container Apps
+### Rychlý přehled SKU Container Apps
 
-| Model | Ceník | CPU/Paměť | Použití |
+| Model | Cena | CPU/Paměť | Použití |
 |-------|---------|------------|----------|
-| Consumption | Platba za použití | 0.25-2 vCPU | Vývoj, proměnlivé zatížení |
-| Dedicated D4 | Rezervované | 4 vCPU, 16GB | Produkce |
-| Dedicated D8 | Rezervované | 8 vCPU, 32GB | Vysoký výkon |
+| Spotřeba | Platba za použití | Podporované kombinace CPU/paměť závisí na prostředí/profilu | Vývoj nebo produkce, proměnlivá zátěž |
+| Vyhrazený D4 | Účtování vyhrazeného uzlu | 4 vCPU, 16GiB na uzel | Nepřetržitá zátěž/požadavky na izolaci |
+| Vyhrazený D8 | Účtování vyhrazeného uzlu | 8 vCPU, 32GiB na uzel | Vyšší nepřetržitá zátěž |
 
 ---
 
-## Nástroje pro ověření
+## Nástroje pro validaci
 
 ### Kontrola dostupnosti SKU
 
 ```bash
 #!/bin/bash
-# Zkontrolujte dostupnost SKU v cílovém regionu
+# Check SKU availability in target region
 
 check_sku_availability() {
     local region=$1
@@ -699,7 +711,8 @@ check_sku_availability() {
             az sql db list-editions --location $region --output table
             ;;
         "storage")
-            az storage account check-name --name "test" --output table
+            # Name availability is not SKU availability.
+            az storage sku list --query "[?name=='$sku'].{name:name,locations:locations,restrictions:restrictions}" --output json
             ;;
         *)
             echo "Resource type not supported"
@@ -707,14 +720,16 @@ check_sku_availability() {
     esac
 }
 
-# Použití
+# Usage
 check_sku_availability "eastus" "app-service" "P1V3"
 ```
 
 ### Skript pro odhad nákladů
 
+**Pouze pseudokód:** `Get-ResourceCost` níže je specifická funkce projektu, kterou musíte implementovat pomocí aktuálních regionálních/cenových údajů a předpokladů použití. Není to PowerShell nebo Azure cmdlet.
+
 ```powershell
-# PowerShell skript pro odhad nákladů
+# PowerShell script for cost estimation
 function Get-AzureCostEstimate {
     param(
         [string]$SubscriptionId,
@@ -728,7 +743,7 @@ function Get-AzureCostEstimate {
         $resourceType = $resource.Key
         $sku = $resource.Value
         
-        # Použijte Azure Pricing API nebo kalkulačku
+        # Use Azure Pricing API or calculator
         $cost = Get-ResourceCost -Type $resourceType -SKU $sku
         $totalCost += $cost
         
@@ -738,7 +753,7 @@ function Get-AzureCostEstimate {
     Write-Host "Total estimated cost: $totalCost/month"
 }
 
-# Použití
+# Usage
 $resources = @{
     "AppService" = "P1V3"
     "SqlDatabase" = "GP_Gen5_4"
@@ -748,7 +763,9 @@ $resources = @{
 Get-AzureCostEstimate -ResourceGroup "rg-myapp-prod" -Resources $resources
 ```
 
-### Ověření výkonu
+### Validace výkonu
+
+Následující YAML je náčrtek požadavků, **nikoli** vstupní schema Azure Load Testing, JMeter, Locust nebo k6. Přeložte jej do konfigurace vámi zvoleného nástroje před použitím příkazu load-test výše.
 
 ```yaml
 # Load test configuration for SKU validation
@@ -783,43 +800,43 @@ test_configuration:
 
 ---
 
-## Shrnutí nejlepších postupů
+## Souhrn osvědčených postupů
 
 ### Co dělat
 
 1. **Začněte s malým a škálujte nahoru** na základě skutečného využití
 2. **Používejte různé SKU pro různá prostředí**
-3. **Průběžně sledujte výkon a náklady**
-4. **Využijte rezervovanou kapacitu pro produkční zátěže**
-5. **Implementujte automatické škálování tam, kde je vhodné**
+3. **Průběžně monitorujte výkon a náklady**
+4. **Využívejte rezervovanou kapacitu pro produkční zátěže**
+5. **Implementujte autoškálování tam, kde je to vhodné**
 6. **Testujte výkon s realistickými zátěžemi**
-7. **Plánujte růst, ale vyvarujte se nadměrného přidělování prostředků**
-8. **Používejte bezplatné úrovně pro vývoj, kdykoli je to možné**
+7. **Plánujte růst, ale vyhněte se nadměrnému přidělení zdrojů**
+8. **Používejte bezplatné úrovně pro vývoj, pokud je to možné**
 
 ### Čemu se vyhnout
 
 1. **Nepoužívejte produkční SKU pro vývoj**
 2. **Neignorujte regionální dostupnost SKU**
 3. **Nezapomínejte na náklady na přenos dat**
-4. **Nepřidělujte nadměrné prostředky bez odůvodnění**
+4. **Nepřidělujte zdroje bez dostatečného odůvodnění**
 5. **Neignorujte vliv závislostí**
-6. **Nedávejte příliš vysoké limity automatického škálování**
-7. **Nezapomínejte na požadavky na shodu**
+6. **Nenastavujte příliš vysoké limity autoškálování**
+7. **Nezapomínejte na požadavky na soulad s předpisy**
 8. **Nedělejte rozhodnutí pouze na základě ceny**
 
 ---
 
-**Tip**: Použijte Azure Cost Management a Advisor pro získání personalizovaných doporučení pro optimalizaci vašich výběrů SKU na základě skutečných vzorců používání.
+**Profesionální tip**: Použijte Azure Cost Management a Advisor pro získání personalizovaných doporučení na optimalizaci výběru SKU na základě skutečných vzorů využití.
 
 ---
 
 **Navigace**
 - **Předchozí lekce**: [Plánování kapacity](capacity-planning.md)
-- **Další lekce**: [Kontroly před nasazením](preflight-checks.md)
+- **Další lekce**: [Předběžné kontroly](preflight-checks.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Prohlášení o vyloučení odpovědnosti:
-Tento dokument byl přeložen pomocí AI překladatelské služby Co‑op Translator (https://github.com/Azure/co-op-translator). Ačkoli usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho originálním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakákoli nedorozumění nebo chybné výklady vyplývající z použití tohoto překladu.
+**Prohlášení o omezení odpovědnosti**:
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o co největší přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo nesprávné interpretace vzniklé použitím tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

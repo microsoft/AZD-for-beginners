@@ -1,28 +1,30 @@
-# AI-specifikus hibakeresési útmutató
+# MI-specifikus hibaelhárítási útmutató
 
 **Fejezet navigáció:**
-- **📚 Tanfolyam kezdőlapja**: [AZD kezdőknek](../../README.md)
-- **📖 Aktuális fejezet**: 7. fejezet - Hibakeresés és hibajavítás
+- **📚 Tanfolyam kezdőlap**: [AZD kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 7. fejezet - Hibaelhárítás és hibakeresés
 - **⬅️ Előző**: [Hibakeresési útmutató](debugging.md)
 - **➡️ Következő fejezet**: [8. fejezet: Termelési és vállalati minták](../chapter-08-production/production-ai-practices.md)
-- **🤖 Kapcsolódó**: [2. fejezet: AI-első fejlesztés](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🤖 Kapcsolódó**: [2. fejezet: MI-első fejlesztés](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-Ez az átfogó hibakeresési útmutató az AI megoldások AZD-val történő telepítésekor gyakori problémákat és azok megoldási módszereit, valamint az Azure AI szolgáltatásokhoz kapcsolódó hibakeresési technikákat tárgyalja.
+Ez az átfogó hibaelhárítási útmutató a gyakori problémákat tárgyalja az AZD-vel történő MI-megoldás telepítése során, megoldásokat és hibakeresési technikákat kínálva, amelyek kifejezetten az Azure MI szolgáltatásokra vonatkoznak.
+
+> **Hatály:** A parancsok példa erőforrásneveket használnak; cserélje ki azokat és válassza ki a megfelelő előfizetést. A Bicep blokkok töredékek, amelyeket egy meglévő sablonba kell illeszteni, nem önálló telepítések. A Python kódrészletekhez a megadott SDK-k és alkalmazáskonfiguráció szükséges. Ebben az értékelésben nem történt élő Azure telepítés.
 
 ## Tartalomjegyzék
 
-- [Microsoft Foundry Models szolgáltatás problémái](#azure-openai-service-issues)
-- [Azure AI Search problémák](#azure-ai-search-problémák)
-- [Container Apps telepítési problémák](#container-apps-telepítési-problémák)
-- [Hitelesítési és jogosultsági hibák](#hitelesítési-és-jogosultsági-hibák)
-- [Modell telepítési hibák](#modell-telepítési-hibák)
-- [Teljesítmény és skálázási problémák](#teljesítmény-és-skálázási-problémák)
-- [Költség- és kvóta menedzsment](#költség-és-kvóta-menedzsment)
-- [Hibakeresési eszközök és technikák](#hibakeresési-eszközök-és-technikák)
+- [Microsoft Foundry modellek szolgáltatási problémái](#microsoft-foundry-models-service-issues)
+- [Azure AI Keresési problémák](#azure-ai-search-problems)
+- [Konténeralkalmazás telepítési problémák](#container-apps-deployment-issues)
+- [Hitelesítési és jogosultsági hibák](#authentication-and-permission-errors)
+- [Modell telepítési hibák](#model-deployment-failures)
+- [Teljesítmény- és skálázási problémák](#performance-and-scaling-issues)
+- [Költség- és kvótagazdálkodás](#cost-and-quota-management)
+- [Hibakereső eszközök és technikák](#debugging-tools-and-techniques)
 
-## Microsoft Foundry Models szolgáltatás problémái
+## Microsoft Foundry modellek szolgáltatási problémái
 
-### Probléma: OpenAI szolgáltatás nem elérhető a régióban
+### Probléma: OpenAI szolgáltatás nem elérhető régióban
 
 **Tünetek:**
 ```
@@ -30,35 +32,30 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **Okozók:**
-- Microsoft Foundry Models nem elérhető a kiválasztott régióban
-- Kvóta kimerülése az előnyben részesített régiókban
-- Regionális kapacitáskorlátok
+- Microsoft Foundry modellek nem elérhetők a kiválasztott régióban
+- Kvóta kimerült a preferált régiókban
+- Régiós kapacitáskorlátok
 
 **Megoldások:**
 
 1. **Ellenőrizze a régió elérhetőségét:**
 ```bash
-# Elérhető régiók listázása az OpenAI számára
-az cognitiveservices account list-skus \
-  --kind OpenAI \
-  --query "[].locations[]" \
-  --output table
+# Inspect model/deployment-type offerings in a candidate region
+az cognitiveservices model list --location eastus2 --output json
+# Availability in the catalog does not guarantee quota or physical capacity.
 ```
 
-2. **Frissítse az AZD konfigurációt:**
-```yaml
-# azure.yaml - Force specific region
-infra:
-  provider: bicep
-  path: infra
-  module: main
-parameters:
-  location: "eastus2"  # Known working region
+2. **Frissítse az AZD-konfigurációt:**
+```bash
+# For a new environment: choose a supported region with available quota
+azd env set AZURE_LOCATION eastus2
+# Templates with a separate model-location parameter must wire that value
+# through infra/main.parameters.json as documented by the template.
 ```
 
 3. **Használjon alternatív régiókat:**
 ```bicep
-// infra/main.bicep - Multi-region fallback
+// infra/main.bicep - Explicit location selection, NOT automatic fallback
 @allowed([
   'eastus2'
   'francecentral'
@@ -79,36 +76,30 @@ Error: Deployment failed due to insufficient quota
 
 1. **Ellenőrizze az aktuális kvótát:**
 ```bash
-# Ellenőrizze a kvóta használatát
+# Check quota usage
 az cognitiveservices usage list \
-  --name YOUR_OPENAI_RESOURCE \
-  --resource-group YOUR_RG
+  --location eastus2 --output table
 ```
 
-2. **Kérjen kvóta növelést:**
-```bash
-# Kvóta növelési kérelem benyújtása
-az support tickets create \
-  --ticket-name "OpenAI Quota Increase" \
-  --description "Need increased quota for production deployment" \
-  --severity "minimal" \
-  --problem-classification "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/quota_service_problemClassification_guid"
-```
+2. **Kérjen kvótaemelést:**
+Használja a Foundry portál kvóta-menedzsment munkafolyamatát az érintett előfizetéshez, régióhoz, modellhez és telepítési típushoz. Lásd a [hivatalos kvóta útmutatót](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota). VM kvóta kérelem nem növeli a modell kvótát.
 
-3. **Optimalizálja a modell kapacitást:**
+3. **Optimalizálja a modell kapacitását:**
 ```bicep
 // Reduce initial capacity
 resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openAi // Existing account resource declared in your template
+  name: 'chat-model'
   properties: {
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
   }
   sku: {
-    name: 'Standard'
-    capacity: 1  // Start with minimal capacity
+    name: 'GlobalStandard' // Verify this model/version/type in the target region
+    capacity: 1  // Capacity units are model/deployment-type specific
   }
 }
 ```
@@ -122,23 +113,18 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 **Megoldások:**
 
-1. **Használjon támogatott API verziót:**
+1. **Használja a támogatott API verziót:**
 ```python
-# Használja a legfrissebb támogatott verziót
-AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
+# Stable dated Azure OpenAI data-plane API, where supported by your feature
+AZURE_OPENAI_API_VERSION = "2024-10-21"
 ```
 
 2. **Ellenőrizze az API verzió kompatibilitását:**
-```bash
-# Támogatott API verziók listázása
-az rest --method get \
-  --url "https://management.azure.com/providers/Microsoft.CognitiveServices/operations?api-version=2023-05-01" \
-  --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
-```
+Nézze meg az [Azure OpenAI API életciklus referencia](https://learn.microsoft.com/azure/ai-foundry/openai/api-version-lifecycle) dokumentációt. Az ARM erőforrás-szolgáltató API verziók **nem** listázzák az inference/adatplane API verziókat. Új v1 kliens `/openai/v1/` használ dátum nélküli `api-version` helyett; ne keverje a két kliens konfigurációt.
 
-## Azure AI Search problémák
+## Azure AI Keresési problémák
 
-### Probléma: Keresőszolgáltatás árazási szintje nem megfelelő
+### Probléma: Keresési szolgáltatás árazási szintje nem megfelelő
 
 **Tünetek:**
 ```
@@ -147,11 +133,14 @@ Error: Semantic search requires Basic tier or higher
 
 **Megoldások:**
 
-1. **Frissítse az árazási szintet:**
+1. **Használjon támogatott árazási szintet:**
+
+A szemantikus rangsorolóhoz Basic vagy magasabb szint szükséges. A Free/Basic szintről magasabbra váltás esetén új keresési szolgáltatást kell létrehozni és újraépíteni az indexeket; a SKU szerkesztése nem garantálja a helyben történő frissítést.
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
   name: searchServiceName
+  location: location
   location: location
   sku: {
     name: 'basic'  // Minimum for semantic search
@@ -165,7 +154,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **Fejlesztés alatt tiltsa le a szemantikai keresést:**
+2. **Kapcsolja ki a szemantikus keresést (fejlesztés alatt):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -179,7 +168,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### Probléma: Index létrehozási hibák
+### Probléma: Index létrehozás sikertelen
 
 **Tünetek:**
 ```
@@ -188,22 +177,23 @@ Error: Cannot create index, insufficient permissions
 
 **Megoldások:**
 
-1. **Ellenőrizze a keresőszolgáltatás kulcsait:**
+1. **Ellenőrizze a keresési szolgáltatás kulcsait:**
 ```bash
-# Keresési szolgáltatás admin kulcsának lekérése
+# Get search service admin key
 az search admin-key show \
   --service-name YOUR_SEARCH_SERVICE \
   --resource-group YOUR_RG
 ```
 
-2. **Ellenőrizze az index sémát:**
+2. **Ellenőrizze az index sémáját:**
 ```python
-# Index séma érvényesítése
+# Validate index schema
 from azure.search.documents.indexes import SearchIndexClient
 from azure.search.documents.indexes.models import SearchIndex
 
 def validate_index_schema(index_definition):
     """Validate index schema before creation."""
+    # These are this application's requirements, not universal Search fields.
     required_fields = ['id', 'content']
     field_names = [field.name for field in index_definition.fields]
     
@@ -214,21 +204,22 @@ def validate_index_schema(index_definition):
 
 3. **Használjon kezelt identitást:**
 ```bicep
-// Grant search permissions to managed identity
+// Grant index-definition management permissions to the managed identity.
+// Search Index Data Contributor manages documents, not index definitions.
 resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: searchService
-  name: guid(searchService.id, containerApp.id, searchIndexDataContributorRole)
+  name: guid(searchService.id, containerApp.id, 'Search Service Contributor')
   properties: {
     principalId: containerApp.identity.principalId
-    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '8ebe5a00-799e-43f5-93ac-243d3dce84a7')
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '7ca78c08-252a-4471-8644-bb5ff32d4ba0')
     principalType: 'ServicePrincipal'
   }
 }
 ```
 
-## Container Apps telepítési problémák
+## Konténeralkalmazás telepítési problémák
 
-### Probléma: Konténer építési hibák
+### Probléma: Konténer build sikertelen
 
 **Tünetek:**
 ```
@@ -259,21 +250,22 @@ EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-2. **Érvényesítse a függőségeket:**
+2. **Ellenőrizze a függőségeket:**
 ```txt
-# requirements.txt - Pin versions for stability
-fastapi==0.104.1
-uvicorn==0.24.0
-openai==1.3.7
-azure-identity==1.14.1
-azure-keyvault-secrets==4.7.0
-azure-search-documents==11.4.0
-azure-cosmos==4.5.1
+# Dependency names for these snippets. Resolve supported versions in your
+# project's environment, test together, then commit a lock/pinned requirements file.
+fastapi
+uvicorn
+openai
+azure-identity
+azure-keyvault-secrets
+azure-search-documents
+azure-cosmos
 ```
 
 3. **Adjon hozzá egészségügyi ellenőrzést:**
 ```python
-# main.py - Egészségügyi ellenőrző végpont hozzáadása
+# main.py - Add health check endpoint
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -292,7 +284,7 @@ Error: Container failed to start within timeout period
 
 **Megoldások:**
 
-1. **Növelje az indítási időtúllépést:**
+1. **Növelje az indítási időkorlátot:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -307,7 +299,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
           }
           probes: [
             {
-              type: 'startup'
+              type: 'Startup'
               httpGet: {
                 path: '/health'
                 port: 8000
@@ -327,9 +319,12 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **Optimalizálja a modell betöltését:**
 ```python
-# Modelljelek lustán betöltése az indítási idő csökkentésére
+# Lazy load models to reduce startup time
+# Illustrative skeleton: implement _initialize_client and synchronize concurrent
+# initialization before using this pattern in an application.
 import asyncio
 from contextlib import asynccontextmanager
+from fastapi import FastAPI
 
 class ModelManager:
     def __init__(self):
@@ -341,15 +336,15 @@ class ModelManager:
         return self._client
         
     async def _initialize_client(self):
-        # AI kliens inicializálása itt
+        # Initialize AI client here
         pass
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Indítás
+    # Startup
     app.state.model_manager = ModelManager()
     yield
-    # Leállítás
+    # Shutdown
     pass
 
 app = FastAPI(lifespan=lifespan)
@@ -366,15 +361,15 @@ Error: Authentication failed for Microsoft Foundry Models Service
 
 **Megoldások:**
 
-1. **Ellenőrizze a szerepkör-hozzárendeléseket:**
+1. **Ellenőrizze a szerepkiosztásokat:**
 ```bash
-# Ellenőrizze a jelenlegi szerepkiosztásokat
+# Check current role assignments
 az role assignment list \
   --assignee YOUR_MANAGED_IDENTITY_ID \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
 ```
 
-2. **Rendelje hozzá a szükséges szerepköröket:**
+2. **Rendeljen hozzá szükséges szerepköröket:**
 ```bicep
 // Required role assignments for AI services
 var cognitiveServicesOpenAIUserRole = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
@@ -393,18 +388,22 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 3. **Tesztelje a hitelesítést:**
 ```python
-# Kezelt azonosító hitelesítés tesztelése
+# Test managed identity authentication
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
-async def test_authentication():
+def test_authentication():
     try:
-        credential = DefaultAzureCredential()
-        token = await credential.get_token("https://cognitiveservices.azure.com/.default")
-        print(f"Authentication successful: {token.token[:10]}...")
+        with DefaultAzureCredential() as credential:
+            token = credential.get_token("https://cognitiveservices.azure.com/.default")
+            print(f"Token acquired; expires at Unix time {token.expires_on}")
     except ClientAuthenticationError as e:
         print(f"Authentication failed: {e}")
+
+test_authentication()
 ```
+
+A token beszerzése bizonyítja a hitelesítést, nem pedig a modell meghívásának jogosultságát. Tesztelje külön a kívánt műveletet. Lokálisan a `DefaultAzureCredential` fejlesztői hitelesítést használhat; Azure-ban ellenőrizze, hogy a megfelelő kezelt identitás van-e kiválasztva.
 
 ### Probléma: Key Vault hozzáférés megtagadva
 
@@ -415,7 +414,9 @@ Error: The user, group or application does not have secrets get permission
 
 **Megoldások:**
 
-1. **Adjon Key Vault jogosultságokat:**
+1. **Adjon meg Key Vault jogosultságokat:**
+
+Az alábbi hozzáférési szabály részt csak olyan tárolóhoz használja, amely `enableRbacAuthorization: false`. RBAC engedélyezett tároló esetén használja a 2. opciót; az hozzáférési szabály hozzáadása nem biztosít adat-plane hozzáférést RBAC módban.
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -434,7 +435,9 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **Használjon RBAC-ot hozzáférési szabályzatok helyett:**
+2. **Használjon RBAC-ot hozzáférési szabályok helyett:**
+
+A tárolónak `enableRbacAuthorization: true` kell, hogy legyen; a jogosultságmodell változtatása meglévő hozzáférési migrációt igényel.
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -460,79 +463,63 @@ Error: Model version 'gpt-4-32k' is not available
 
 1. **Ellenőrizze az elérhető modelleket:**
 ```bash
-# Elérhető modellek listázása
+# List available models
 az cognitiveservices account list-models \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG \
-  --query "[].{name:model.name, version:model.version}" \
+  --query "[].{name:name, version:version}" \
   --output table
 ```
 
-2. **Használjon modell visszaesési megoldásokat:**
+2. **Válasszon kifejezetten egy elérhető modellt:**
 ```bicep
-// Model deployment with fallback
+// Example model selection; verify version and deployment type in the catalog.
 @description('Primary model configuration')
 param primaryModel object = {
   name: 'gpt-4.1-mini'
-  version: '2024-07-18'
+  version: '2025-04-14'
 }
 
-@description('Fallback model configuration')
-param fallbackModel object = {
-  name: 'gpt-4.1'
-  version: '2024-08-06'
-}
-
-// Try primary model first, fallback if unavailable
+// Bicep does not catch provisioning failures and retry a fallback model.
 resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
   name: 'chat-model'
   properties: {
-    model: primaryModel
+    model: {
+      format: 'OpenAI'
+      name: primaryModel.name
+      version: primaryModel.version
+    }
   }
   sku: {
-    name: 'Standard'
+    name: 'GlobalStandard'
     capacity: 10
   }
 }
 ```
 
-3. **Validálja a modellt telepítés előtt:**
-```python
-# Modell előzetes érvényesítése a telepítés előtt
-import httpx
-
-async def validate_model_availability(model_name: str, version: str) -> bool:
-    """Check if model is available before deployment."""
-    try:
-        async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{AZURE_OPENAI_ENDPOINT}/openai/models",
-                headers={"api-key": AZURE_OPENAI_API_KEY}
-            )
-            models = response.json()
-            return any(
-                model["id"] == f"{model_name}-{version}"
-                for model in models.get("data", [])
-            )
-    except Exception:
-        return False
+3. **Érvényesítse a modellt telepítés előtt:**
+```bash
+# Management-plane catalog for the actual account
+az cognitiveservices account list-models \
+  --name YOUR_OPENAI_RESOURCE --resource-group YOUR_RG --output json
+# Inspect model/version and supported SKUs; check regional quota separately.
 ```
 
-## Teljesítmény és skálázási problémák
+## Teljesítmény- és skálázási problémák
 
 ### Probléma: Magas késleltetésű válaszok
 
 **Tünetek:**
 - Válaszidők > 30 másodperc
-- Időtúllépési hibák
+- Időtúllépés hibák
 - Rossz felhasználói élmény
 
 **Megoldások:**
 
-1. **Valósítson meg kérés-időtúllépéseket:**
+1. **Valósítson meg lekérdezési időkorlátokat:**
 ```python
-# Állítsa be a megfelelő időkorlátokat
+# Configure proper timeouts
 import httpx
 
 client = httpx.AsyncClient(
@@ -545,9 +532,9 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **Adjon hozzá válaszgyorsítótárat:**
+2. **Adjon hozzá válasz gyorsítótárazást:**
 ```python
-# Redis gyorsítótár a válaszokhoz
+# Redis cache for responses
 import redis.asyncio as redis
 import json
 
@@ -565,7 +552,7 @@ class ResponseCache:
         await self.redis.setex(f"ai_response:{query_hash}", ttl, response)
 ```
 
-3. **Állítsa be az automatikus skálázást:**
+3. **Állítson be automatikus skálázást:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -608,7 +595,7 @@ Error: Container killed due to memory limit exceeded
 
 **Megoldások:**
 
-1. **Növelje a memóriaallokációt:**
+1. **Növelje a memória allokációt:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -629,7 +616,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **Optimalizálja a memóriahasználatot:**
 ```python
-# Memóriatakarékos modellkezelés
+# Memory-efficient model handling
 import gc
 import psutil
 
@@ -637,34 +624,37 @@ class MemoryOptimizedAI:
     def __init__(self):
         self.max_memory_percent = 80
         
+    async def _process_ai_request(self, request):
+        raise NotImplementedError("Supply the application's AI operation")
+
     async def process_request(self, request):
         """Process request with memory monitoring."""
-        # Memóriahasználat ellenőrzése feldolgozás előtt
+        # Check memory usage before processing
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # Szemétgyűjtés végrehajtása kényszerítve
+            gc.collect()  # Force garbage collection
             
         result = await self._process_ai_request(request)
         
-        # Takarítás a feldolgozás után
+        # Clean up after processing
         gc.collect()
         return result
 ```
 
-## Költség- és kvóta menedzsment
+## Költség- és kvótagazdálkodás
 
 ### Probléma: Váratlan magas költségek
 
 **Tünetek:**
-- Az Azure számla váratlanul magas
-- Token-felhasználás meghaladja a becsléseket
-- Költségvetési figyelmeztetések aktiválva
+- Azure számla a vártnál magasabb
+- Token felhasználás meghaladja az előrejelzéseket
+- Költségvetési riasztások aktiválódtak
 
 **Megoldások:**
 
-1. **Vezessen be költségszabályozást:**
+1. **Valósítson meg költségkontrollokat:**
 ```python
-# Token használatának nyomon követése
+# Token usage tracking
 class TokenTracker:
     def __init__(self, monthly_limit: int = 100000):
         self.monthly_limit = monthly_limit
@@ -681,23 +671,26 @@ class TokenTracker:
         return total_tokens
 ```
 
+Ez a memóriabeli számláló szemléltető jellegű, nem havi kiadási kontroll: újraindításkor nullázódik, nem osztott replikák között, és lekérések után ellenőrzi a használatot. Egy valódi limitnek tartós elszámolásra, egyidejűleg biztonságos foglalásokra és havi reset szabályra van szüksége. A konténer memória metrikákra figyelni kell az cgroup limitet is; `psutil.virtual_memory()` nem megbízható konténer-limit mérés, és a szemétgyűjtés nem kényszerít memóriakorlátot.
+
 2. **Állítson be költségriasztásokat:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate // Parameter: first day of a supported budget period
+      endDate: budgetEndDate     // Parameter: a future date
     }
     timeGrain: 'Monthly'
-    amount: 500  // $500 monthly limit
+    amount: 500  // Notification threshold in the subscription's billing currency
     category: 'Cost'
     notifications: {
       Actual_GreaterThan_80_Percent: {
         enabled: true
         operator: 'GreaterThan'
         threshold: 80
+        thresholdType: 'Actual'
         contactEmails: ['admin@company.com']
         contactRoles: ['Owner']
       }
@@ -706,9 +699,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-3. **Optimalizálja a modell kiválasztást:**
+Deklarálja `budgetStartDate` és `budgetEndDate` a sablonban. A költségvetések riasztanak; nem állítanak le erőforrásokat vagy nem szabnak kemény kiadási plafont.
+
+3. **Optimalizálja a modell választást:**
 ```python
-# Költségtudatos modellválasztás
+# Cost-aware model selection
 MODEL_COST_TIERS = {
   'gpt-4.1-mini': 'low',
   'gpt-4.1': 'high'
@@ -722,46 +717,53 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
         return 'gpt-4.1'
 ```
 
-## Hibakeresési eszközök és technikák
+## Hibakereső eszközök és technikák
 
-### AZD hibakeresési parancsok
+### AZD hibakereső parancsok
 
 ```bash
-# Engedélyezze a részletes naplózást
+# Enable verbose logging
 azd up --debug
 
-# Ellenőrizze a telepítés állapotát
+# Check deployment status
 azd show
 
-# Alkalmazás naplók megtekintése (megnyitja a monitoring irányítópultot)
+# View application logs (opens monitoring dashboard)
 azd monitor --logs
 
-# Élő metrikák megtekintése
+# View live metrics
 azd monitor --live
 
-# Környezeti változók ellenőrzése
+# Check environment variables
 azd env get-values
 ```
 
-### AZD AI bővítmény diagnosztikai parancsai
+### AZD AI bővítmény parancsai diagnosztikához
 
-Ha az `azd ai agent init` használatával telepített ügynököket, ezek a további eszközök rendelkezésre állnak:
+Ha `azd ai agent init` segítségével telepített ügynököket, ezek a további eszközök rendelkezésre állnak:
 
 ```bash
-# Győződj meg róla, hogy az ügynök bővítmény telepítve van
+# Ensure the agents extension is installed
 azd extension install azure.ai.agents
 
-# Egy ügynök újra inicializálása vagy frissítése egy manifestből
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+# Check project storage permissions and agent configuration
+azd ai agent doctor
 
-# Használd az MCP szervert, hogy az AI eszközök lekérdezhessék a projekt állapotát
+# Inspect the deployed endpoint
+azd ai agent endpoint show
+
+# Use the MCP server to let AI tools query project state
 azd mcp start
 
-# Infrastruktúra fájlok generálása felülvizsgálathoz és auditáláshoz
+# Generate infrastructure files for review and audit
 azd infra generate
 ```
 
-> **Tipp:** Használja az `azd infra generate` parancsot, hogy IaC-t írjon a lemezre, így pontosan ellenőrizheti, milyen erőforrások kerültek létrehozásra. Ez felbecsülhetetlen értékű, amikor az erőforrás-konfigurációs problémákat hibakeres. Részletes információkért lásd a [AZD AI CLI referencia](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) szakaszt.
+> **Tipp:** Használja `azd infra generate`, hogy az IaC-t lemezre írja, így pontosan megtekintheti, milyen erőforrásokat hoztak létre. Ez felbecsülhetetlen értékű a konfigurációs hibák hibakeresésekor. Lásd a [AZD AI CLI referencia](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) teljes részleteiért.
+
+**Verziótól függő diagnosztika (2026-11-04):** A `1.0.0-beta.23` ügynök `azd >= 1.37.0`-t követel meg; frissítse az alap CLI-t az inkompatibilis bővítmények előtt. Ez az ügynök verzió megőrzi a fejlesztői RBAC figyelmeztetéseket a végső telepítési kimenetben, és azonosítja az aktiválási hibák/időtúllépések során érintett verziót. Az időtúllépés nem jelenti a telepítés sikertelenségét: ellenőrizze a kipróbált verziót újrapróbálás előtt. Javítja továbbá az A2A 0.3 hívásoknál az életciklus üzenetek megjelenítését a befejezett válaszok helyett. Az alap `azd 1.37.1` javítja a megszakítás terjedését bővítmények között; `1.37.2` jobb kritikus telepítési visszaigazolást és megszakítás kezelést biztosít.
+
+Ha egy régebbi oktatóanyag értékelési parancsa csak migrációs útmutatót nyomtat ki, telepítse a `azure.ai.evaluations` (`1.0.0-beta.2`-hoz szükséges a `azd >= 1.33.0`) és használja a `azd ai eval init`, `generate` és `run start`-et. Az optimalizálás `--config` már nem fogad el régi értékelési fájlokat. Lásd a [értékelési migráció](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) és az [optimalizálási migráció](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration) útmutatókat.
 
 ### Alkalmazás hibakeresése
 
@@ -770,7 +772,7 @@ azd infra generate
 import logging
 import json
 
-# Strukturált naplózás beállítása AI alkalmazások számára
+# Configure structured logging for AI applications
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -791,29 +793,33 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
 
 2. **Egészségügyi ellenőrző végpontok:**
 ```python
+# Integration fragment: add to an existing FastAPI app, protect this diagnostic
+# endpoint, and configure AZURE_SEARCH_ENDPOINT. This tests Search index-list
+# authorization, not Azure OpenAI inference.
+import os
+from azure.identity.aio import DefaultAzureCredential
+from azure.search.documents.indexes.aio import SearchIndexClient
+from fastapi import Response
+
 @app.get("/debug/health")
-async def detailed_health_check():
+async def detailed_health_check(response: Response):
     """Comprehensive health check for debugging."""
     checks = {}
     
-    # Ellenőrizze az OpenAI kapcsolódást
+    # Check Search service
     try:
-        client = AsyncOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT)
-        await client.models.list()
-        checks['openai'] = {'status': 'healthy'}
-    except Exception as e:
-        checks['openai'] = {'status': 'unhealthy', 'error': str(e)}
-    
-    # Ellenőrizze a keresési szolgáltatást
-    try:
-        search_client = SearchIndexClient(
-            endpoint=AZURE_SEARCH_ENDPOINT,
-            credential=DefaultAzureCredential()
-        )
-        indexes = await search_client.list_index_names()
-        checks['search'] = {'status': 'healthy', 'indexes': list(indexes)}
-    except Exception as e:
-        checks['search'] = {'status': 'unhealthy', 'error': str(e)}
+        async with DefaultAzureCredential() as credential:
+            async with SearchIndexClient(
+                endpoint=os.environ['AZURE_SEARCH_ENDPOINT'],
+                credential=credential
+            ) as search_client:
+                # AsyncItemPaged is iterated asynchronously, not awaited as a list.
+                async for _ in search_client.list_index_names():
+                    break
+        checks['search'] = {'status': 'healthy'}
+    except Exception:
+        response.status_code = 503
+        checks['search'] = {'status': 'unhealthy'}
     
     return checks
 ```
@@ -853,39 +859,39 @@ def monitor_performance(func):
 
 | Hibakód | Leírás | Megoldás |
 |------------|-------------|----------|
-| 401 | Jogosulatlan | Ellenőrizze az API kulcsokat és a kezelt identitás konfigurációját |
-| 403 | Tiltott | Ellenőrizze az RBAC szerepkör-hozzárendeléseket |
-| 429 | Korlátozott | Valósítson meg újrapróbálkozási logikát exponenciális visszalökéssel |
-| 500 | Belső szerverhiba | Ellenőrizze a modell telepítés állapotát és naplókat |
-| 503 | Szolgáltatás nem elérhető | Ellenőrizze a szolgáltatás állapotát és regionális elérhetőségét |
+| 401 | Jogosulatlan | Ellenőrizze az API kulcsokat és a kezelt identitás beállításait |
+| 403 | Tiltott | Ellenőrizze az RBAC szerep-hozzárendeléseket |
+| 429 | Korlátozott lekérések száma | Valósítson meg újrapróbálkozási logikát exponenciális visszaállással |
+| 500 | Belső szerverhiba | Ellenőrizze a modell telepítésének állapotát és a naplókat |
+| 503 | Szolgáltatás nem elérhető | Ellenőrizze a szolgáltatás állapotát és a régiós elérhetőséget |
 
 ## Következő lépések
 
-1. **Tekintse át az [AI Modell telepítési útmutatót](../chapter-02-ai-development/ai-model-deployment.md)** a telepítési bevált gyakorlatokért
-2. **Fejezze be a [Termelési AI gyakorlatokat](../chapter-08-production/production-ai-practices.md)** vállalati szintű megoldásokért
-3. **Csatlakozzon a [Microsoft Foundry Discordhoz](https://aka.ms/foundry/discord)** közösségi támogatásért
-4. **Jelentsen problémákat** az [AZD GitHub tárházba](https://github.com/Azure/azure-dev), AZD-specifikus hibák esetén
+1. **Tekintse át az [AI modell telepítési útmutatót](../chapter-02-ai-development/ai-model-deployment.md)** a legjobb gyakorlatokért a telepítéshez
+2. **Fejezze be a [Production AI Practices](../chapter-08-production/production-ai-practices.md)** tananyagot az vállalati szintű megoldásokhoz
+3. **Csatlakozzon a [Microsoft Foundry Discord közösséghez](https://aka.ms/foundry/discord)** közösségi támogatásért
+4. **Jelentsen problémákat** az [AZD GitHub tárolóban](https://github.com/Azure/azure-dev) az AZD-specifikus kérdésekhez
 
 ## Források
 
-- [Microsoft Foundry Models szolgáltatás hibakeresése](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [Container Apps hibakeresés](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Azure AI Search hibakeresés](https://learn.microsoft.com/azure/search/search-monitor-logs)
-- [**Azure Diagnostics Agent Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Telepítsen Azure hibakeresési készségeket a szerkesztőjébe: `npx skills add microsoft/github-copilot-for-azure`
+- [Azure OpenAI kvóta és korlátozás hibakeresése](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota)
+- [Container Apps hibakeresése](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Azure AI Search hibakeresése](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [**Azure Diagnostics Agent Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Telepítse az Azure hibakeresési képességeket a szerkesztőjébe: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **Fejezet navigáció:**
 - **📚 Tanfolyam kezdőlapja**: [AZD kezdőknek](../../README.md)
-- **📖 Aktuális fejezet**: 7. fejezet - Hibakeresés és hibajavítás
+- **📖 Aktuális fejezet**: 7. fejezet - Hibakeresés és hibák elhárítása
 - **⬅️ Előző**: [Hibakeresési útmutató](debugging.md)
-- **➡️ Következő fejezet**: [8. fejezet: Termelési és vállalati minták](../chapter-08-production/production-ai-practices.md)
+- **➡️ Következő fejezet**: [8. fejezet: Gyártási és vállalati minták](../chapter-08-production/production-ai-practices.md)
 - **🤖 Kapcsolódó**: [2. fejezet: AI-első fejlesztés](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- **📖 Hivatkozás**: [Azure Developer CLI hibakeresés](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+- **📖 Referencia**: [Azure Developer CLI hibakeresés](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Felelősségkizárás**:  
-Ez a dokumentum az AI fordítószolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Habár a pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások tartalmazhatnak hibákat vagy pontatlanságokat. A dokumentum eredeti, anyanyelvi változatát kell tekinteni a hiteles forrásnak. Kritikus információk esetén szakmai, emberi fordítás ajánlott. Nem vállalunk felelősséget e fordítás használatából eredő félreértésekért vagy félreértelmezésekért.
+**Jogi nyilatkozat**:
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Fontos információk esetén professzionális emberi fordítást javasolunk. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely ebből a fordításból ered.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

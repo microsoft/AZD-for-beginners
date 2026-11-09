@@ -1,135 +1,140 @@
-# Průvodce nasazením - Zvládnutí nasazení AZD
+# Průvodce nasazením - Mistrovství v nasazeních AZD
 
 **Navigace kapitolou:**
-- **📚 Course Home**: [AZD pro začátečníky](../../README.md)
-- **📖 Aktuální kapitola**: Kapitola 4 - Infrastruktura jako kód a nasazení
+- **📚 Domovská stránka kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 4 - Infrastruktura jako kód & nasazení
 - **⬅️ Předchozí kapitola**: [Kapitola 3: Konfigurace](../chapter-03-configuration/configuration.md)
-- **➡️ Další**: [Zřizování prostředků](provisioning.md)
-- **🧩 Také v této kapitole**: [Tvorba vlastní šablony](custom-templates.md)
-- **🚀 Další kapitola**: [Kapitola 5: AI řešení s více agenty](../../examples/retail-scenario.md)
+- **➡️ Další**: [Provisioning Resources](provisioning.md)
+- **🧩 Také v této kapitole**: [Vytváření vlastních šablon](custom-templates.md)
+- **🚀 Další kapitola**: [Kapitola 5: Víceagentové AI řešení](../../examples/retail-scenario.md)
 
 ## Úvod
 
-Tento komplexní průvodce pokrývá vše, co potřebujete vědět o nasazování aplikací pomocí Azure Developer CLI, od základních jednopříkazových nasazení až po pokročilé produkční scénáře s vlastními hooky, více prostředími a integrací CI/CD. Ovládněte celý životní cyklus nasazení pomocí praktických příkladů a osvědčených postupů.
+> Zkontrolováno k datu `azd 1.37.2` (listopad 2026). Příkazy využívají Bash; ukázky JSON vyžadují `jq`. S výjimkou explicitně inicializovaného cvičení todo jsou pokročilé příklady **fragmenty integrace**: doplňte vlastní zdroje, infrastrukturu, testy a skripty. V této revizi nebyla provedena žádná reálná nasazení Azure.
 
-## Cíle učení
+Tento komplexní průvodce pokrývá vše, co potřebujete vědět o nasazování aplikací pomocí Azure Developer CLI, od základních nasazení jedním příkazem až po pokročilé produkční scénáře s vlastními hooky, více prostředími a integrací CI/CD. Ovládněte celý životní cyklus nasazení s praktickými příklady a osvědčenými postupy.
 
-Po dokončení tohoto průvodce:
-- Osvojíte si všechny příkazy a pracovní postupy nasazení Azure Developer CLI
-- Pochopíte celý životní cyklus nasazení od provisioningu po monitoring
-- Implementujete vlastní hooky pro automatizaci před a po nasazení
-- Nakonfigurujete více prostředí s parametry specifickými pro prostředí
-- Nastavíte pokročilé strategie nasazení včetně blue-green a canary nasazení
-- Integrujete azd nasazení s CI/CD pipeline a DevOps pracovními toky
+## Výukové cíle
+
+Po dokončení tohoto průvodce budete:
+- Ovládat všechny příkazy a workflow nasazení Azure Developer CLI
+- Rozumět kompletnímu životnímu cyklu nasazení od provisioning až po monitoring
+- Implementovat vlastní nasazovací hooky pro automatizaci před a po nasazení
+- Konfigurovat více prostředí s parametry specifickými pro prostředí
+- Nastavit pokročilé nasazovací strategie včetně blue-green a canary nasazení
+- Integrovat nasazení azd s CI/CD pipelines a DevOps procesy
 
 ## Výsledky učení
 
 Po dokončení budete schopni:
-- Samostatně spouštět a řešit problémy se všemi azd nasazovacími pracovními postupy
-- Navrhovat a implementovat vlastní nasazovací automatizace pomocí hooků
-- Konfigurovat nasazení připravená pro produkci s odpovídajícím zabezpečením a monitoringem
-- Spravovat složité scénáře nasazení napříč více prostředími
+- Samostatně provádět a řešit problémy ve všech azd nasazovacích workflow
+- Navrhnout a implementovat vlastní automatizaci nasazení pomocí hooků
+- Konfigurovat nasazení připravená pro produkci se správnou bezpečností a monitoringem
+- Spravovat složité scénáře nasazení s více prostředími
 - Optimalizovat výkon nasazení a implementovat strategie rollbacku
-- Integrovat azd nasazení do podnikových DevOps postupů
+- Integrovat nasazení azd do podnikových DevOps procesů
 
 ## Přehled nasazení
 
-Azure Developer CLI poskytuje několik příkazů pro nasazení:
-- `azd up` - Kompletní pracovní postup (vytvoření prostředků + nasazení)
-- `azd provision` - Vytvořit/aktualizovat pouze Azure zdroje
-- `azd deploy` - Nasadit pouze kód aplikace
-- `azd package` - Sestavit a zabalit aplikace
+Azure Developer CLI poskytuje několik nasazovacích příkazů:
+- `azd up` - Kompletní workflow (provision + deploy)
+- `azd provision` - Vytvoření/aktualizace pouze Azure zdrojů
+- `azd deploy` - Nasazení pouze aplikačního kódu
+- `azd package` - Sestavení a zabalení aplikací
 
-## Základní pracovní postupy nasazení
+## Základní nasazovací workflow
 
 ### Kompletní nasazení (azd up)
-Nejčastější pracovní postup pro nové projekty:
+Nejčastější workflow pro nové projekty:
 ```bash
-# Nasadit vše od začátku
+# Deploy everything from scratch
 azd up
 
-# Nasadit s konkrétním prostředím
+# Deploy with specific environment
 azd up --environment production
 
-# Nasadit s vlastními parametry
-azd up --parameter location=westus2 --parameter sku=P1v2
+# Configure a location for the selected environment before first provisioning
+azd env set AZURE_LOCATION westus2
+# SKU changes must be wired into your template's parameter file/Bicep.
+azd up
 ```
 
 ### Nasazení pouze infrastruktury
-Když potřebujete pouze aktualizovat Azure zdroje:
+Když potřebujete aktualizovat pouze Azure zdroje:
 ```bash
-# Zajistit/aktualizovat infrastrukturu
+# Provision/update infrastructure
 azd provision
 
-# Nasadit v režimu dry-run pro náhled změn
+# Provision with dry-run to preview changes
 azd provision --preview
 
-# Nasadit konkrétní služby
-azd provision --service database
+# Provisioning applies infrastructure, not an azure.yaml service selection.
+# In a configured layered project, use: azd provision <layer-name>
 ```
 
 ### Nasazení pouze kódu
 Pro rychlé aktualizace aplikace:
 ```bash
-# Nasadit všechny služby
+# Deploy all services
 azd deploy
 
-# Očekávaný výstup:
-# Nasazování služeb (azd deploy)
-# - web: Nasazování... Hotovo
-# - api: Nasazování... Hotovo
-# ÚSPĚCH: Vaše nasazení bylo dokončeno za 2 minuty 15 sekund
+# Expected output:
+# Deploying services (azd deploy)
+# - web: Deploying... Done
+# - api: Deploying... Done
+# SUCCESS: Your deployment completed in 2 minutes 15 seconds
 
-# Nasadit konkrétní službu
-azd deploy --service web
-azd deploy --service api
+# Deploy specific service
+azd deploy web
+azd deploy api
 
-# Nasadit s vlastními argumenty sestavení
-azd deploy --service api --build-arg NODE_ENV=production
+# Docker build arguments belong in azure.yaml: services.api.docker.buildArgs
+# They are not an azd deploy --build-arg flag.
 
-# Ověřit nasazení
+# Verify deployment
 azd show --output json | jq '.services'
 ```
 
 ### ✅ Ověření nasazení
 
-Po jakémkoli nasazení ověřte úspěšnost:
+Po každém nasazení ověřte úspěch:
 
 ```bash
-# Zkontrolujte, zda všechny služby běží
+# Inspect configured service targets and ingress URLs (not a health check)
 azd show
 
-# Otestujte koncové body kontroly stavu
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Test health endpoints
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
 
-curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
-curl -f "$API_URL/health" || echo "❌ API health check failed"
+curl -f "$WEB_URL" || { echo "❌ Web request failed"; exit 1; }
+# For the todo-nodejs-mongo template, /lists exists; /health does not.
+curl -f "$API_URL/lists" || { echo "❌ API request failed"; exit 1; }
 
-# Monitorujte chyby (ve výchozím nastavení se otevře v prohlížeči)
+# Monitor for errors (opens in browser by default)
 azd monitor --logs
 ```
 
 **Kritéria úspěchu:**
-- ✅ Všechny služby zobrazují stav "Running"
-- ✅ Kontrolní koncové body vracejí HTTP 200
-- ✅ Žádné chybové záznamy za posledních 5 minut
-- ✅ Aplikace odpovídá na testovací požadavky
+- ✅ `azd show` vyřeší očekávané cíle služeb/URL
+- ✅ Požadavky na skutečné aplikační routy vracejí očekávaný stav a obsah
+- ✅ Žádné chybové logy za posledních 5 minut
+- ✅ Aplikace reaguje na testovací požadavky
 
 ## 🏗️ Pochopení procesu nasazení
 
-### Neznáte hooks? Začněte zde
+### Nováček v hookech? Začněte zde
 
-A **hook** je příkaz, který azd spouští automaticky v konkrétním okamžiku nasazovacího procesu — před nebo po provisioningu a před nebo po nasazení vašeho kódu. Umožňují automatizovat malé úkoly, které vždy obklopují nasazení: naplnění databáze, spuštění migrací, sestavení assetů nebo rychlé testování běžící aplikace.
+**Hook** je příkaz, který azd spustí automaticky v konkrétní fázi procesu nasazení—před nebo po provisioningu a před nebo po nasazení kódu. Umožňují automatizovat drobné úkoly, které vždy doprovázejí nasazení: naplnění databáze, spuštění migrací, sestavení assetů nebo rychlý test běžící aplikace.
 
-| Hook | Běží… | Běžné použití |
-|------|-------|------------|
-| `preprovision` | Před vytvořením prostředků | Ověřit předpoklady, přihlásit se do registru |
-| `postprovision` | Po vytvoření prostředků | Konfigurovat zdroje, nastavit databázi |
-| `predeploy` | Před nasazením kódu | Sestavit front-end assety, spustit jednotkové testy |
-| `postdeploy` | Po nasazení kódu | Spustit migrace DB, provést smoke-test endpointu |
+| Hook | Spouští se… | Běžné použití |
+|------|------------|--------------|
+| `preprovision` | Před vytvořením zdrojů | Ověření předpokladů, přihlášení do registru |
+| `postprovision` | Po existenci zdrojů | Konfigurace zdrojů, nastavení databáze |
+| `predeploy` | Před nasazením kódu | Sestavení front-end assetů, spuštění jednotkových testů |
+| `postdeploy` | Po nasazení kódu | Spuštění DB migrací, rychlý test endpointu |
 
-Hooky jsou definovány ve vašem `azure.yaml`. Zde je nejmenší možný příklad — pouze vytiskne zprávu po nasazení:
+Hooky jsou definovány ve vašem `azure.yaml`. Zde je nejmenší možný příklad—jen vypíše zprávu po nasazení:
 
 ```yaml
 # azure.yaml
@@ -139,15 +144,15 @@ hooks:
     run: echo "Deployment finished! 🎉"
 ```
 
-To je všechno — při příštím spuštění `azd up` se zpráva vytiskne automaticky. Hook můžete také spustit samostatně bez plného nasazení, což je skvělé pro testování:
+To je vše—při příštím spuštění `azd up` se zpráva automaticky vypíše. Hook můžete také spustit samostatně, bez kompletního nasazení, což je skvělé pro testování:
 
 ```bash
 azd hooks run postdeploy
 ```
 
-Fáze níže ukazují reálné hooky (migrace, testy, validace) pro každé stádium.
+Níže jsou fáze ukazující reálné hooky (migrace, testy, ověření) pro každou etapu.
 
-### Fáze 1: Pre-Provision hooky
+### Fáze 1: Hooky před provisioningem
 ```yaml
 # azure.yaml
 hooks:
@@ -167,7 +172,7 @@ hooks:
 - Konfiguruje síťování a zabezpečení
 - Nastavuje monitoring a logování
 
-### Fáze 3: Post-Provision hooky
+### Fáze 3: Hooky po provisioningu
 ```yaml
 hooks:
   postprovision:
@@ -181,11 +186,11 @@ hooks:
 ```
 
 ### Fáze 4: Balení aplikace
-- Sestavuje kód aplikace
-- Vytváří artefakty nasazení
-- Baluje pro cílovou platformu (kontejnery, ZIP soubory atd.)
+- Sestavení aplikačního kódu
+- Vytvoření nasazovacích artefaktů
+- Zabalení pro cílovou platformu (containers, ZIP soubory atd.)
 
-### Fáze 5: Pre-Deploy hooky
+### Fáze 5: Hooky před nasazením
 ```yaml
 hooks:
   predeploy:
@@ -199,11 +204,11 @@ hooks:
 ```
 
 ### Fáze 6: Nasazení aplikace
-- Nasazuje zabalené aplikace do Azure služeb
-- Aktualizuje konfigurační nastavení
-- Spouští/restartuje služby
+- Nasadí zabalené aplikace do Azure služeb
+- Aktualizuje konfiguraci nastavení
+- Spustí/restartuje služby
 
-### Fáze 7: Post-Deploy hooky
+### Fáze 7: Hooky po nasazení
 ```yaml
 hooks:
   postdeploy:
@@ -213,14 +218,14 @@ hooks:
       npm run test:integration
       
       echo "Warming up applications..."
-      curl https://${WEB_URL}/health
+      curl --fail "$WEB_URL/health"
 ```
 
-### Zpracování chyb hooků
+### Zacházení s chybami v hookech
 
-Ve výchozím nastavení **pokud příkaz hooku skončí s nenulovým kódem, azd zastaví celou operaci.** To je obvykle žádoucí — neúspěšná migrace by měla zastavit nasazení, nikoli dodat rozbitou aplikaci. To však znamená, že hooky musí být psány pečlivě.
+Ve výchozím nastavení **pokud hook příkaz skončí s nenulovým kódem, azd zastaví celou operaci.** Obvykle to chcete—neúspěšná migrace by měla zastavit nasazení, ne dodat poškozenou aplikaci. Znamená to však, že hooky musí být napsány pečlivě.
 
-**1. Dejte chybám hlasitost a záměr.** Hook selže, když jeho poslední příkaz vrátí nenulový návratový kód. V shell skriptech přidejte `set -e`, aby hook skončil při prvním selhávajícím příkazu místo tichého pokračování:
+**1. Neúspěchy musí být hlasité a záměrné.** Hook selže, když jeho poslední příkaz vrátí nenulový exit code. V shell skriptech přidejte `set -e`, aby hook ihned skončil při první chybě, místo tichého pokračování:
 
 ```yaml
 hooks:
@@ -232,24 +237,24 @@ hooks:
       npm run db:migrate
 ```
 
-**2. Povolit, aby hook selhal, aniž by zastavil azd.** Pro nekritické kroky (volitelné zahřátí cache, oznámení na principu nejlepší snahy) nastavte `continueOnError: true`. azd zaznamená selhání, ale pokračuje dál:
+**2. Umožněte, aby hook mohl selhat, aniž by zastavil azd.** Pro kriticky nevýznamné kroky (volné ohřátí cache, upozornění na nejlepší úsilí) nastavte `continueOnError: true`. azd chybu zaznamená, ale pokračuje dál:
 
 ```yaml
 hooks:
   postdeploy:
     shell: sh
     continueOnError: true         # a failure here won't fail 'azd up'
-    run: curl -f https://${WEB_URL}/warmup || echo "Warm-up skipped"
+    run: curl -f "$WEB_URL/warmup"
 ```
 
-**3. Testujte hooky izolovaně před plným spuštěním.** Nemusíte spouštět `azd up`, abyste ladili hook — spusťte ho samostatně a rychle iterujte:
+**3. Testujte hooky izolovaně před kompletním během.** Nemusíte spouštět `azd up` k debugování hooku—spusťte ho samostatně a rychle iterujte:
 
 ```bash
-azd hooks run predeploy          # spustí pouze predeploy hook
+azd hooks run predeploy          # runs the matching project/service hooks
 azd hooks run postdeploy --service api
 ```
 
-**4. Dávejte pozor na shell specifické pro OS.** Hook používající `shell: pwsh` vyžaduje na stroji, který ho spouští (včetně CI agentů), nainstalovaný PowerShell. Pro co nejširší přenositelnost použijte `shell: sh`, nebo poskytněte varianty pro `windows` a `posix`:
+**4. Dávejte pozor na OS-specifické shelly.** Hook využívající `shell: pwsh` musí mít na stroji, kde běží (včetně CI agentů), nainstalovaný PowerShell. Pro nejširší přenositelnost používejte `shell: sh` nebo současně obě varianty `windows` a `posix`:
 
 ```yaml
 hooks:
@@ -262,54 +267,54 @@ hooks:
       run: ./scripts/setup.ps1
 ```
 
-> **Tip pro ladění:** spusťte jakýkoli azd příkaz s `--debug`, abyste viděli přesný příkaz hooku a jeho kompletní výstup — neocenitelné, když hook funguje lokálně, ale selhává v CI.
+> **Tip na ladění:** Spusťte jakýkoliv příkaz azd s `--debug`, abyste viděli přesnou příkazovou řádku hooku a jeho kompletní výstup—neocenitelné, když hook funguje lokálně, ale selhává v CI.
 
 ## 🎛️ Konfigurace nasazení
 
-### Nastavení nasazení specifická pro službu
+### Nasazovací nastavení specifická pro službu
 ```yaml
 # azure.yaml
 services:
   web:
     project: ./src/web
     host: staticwebapp
-    buildCommand: npm run build
-    outputPath: dist
+    language: js
+    dist: dist
     
   api:
     project: ./src/api
     host: containerapp
+    language: js
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-      target: production
+      context: .
+      path: Dockerfile
     env:
-      - name: NODE_ENV
-        value: production
-      - name: API_VERSION
-        value: "1.0.0"
+      NODE_ENV: production
+      API_VERSION: "1.0.0"
         
   worker:
     project: ./src/worker
     host: function
-    runtime: node
-    buildCommand: npm install --production
+    language: js
 ```
 
 ### Konfigurace specifické pro prostředí
+
+Tato jsou pouze lokální azd hodnoty. Explicitně je namapujte do infrastruktury/runtime konfigurace. `NODE_ENV` je obvykle `production` u nasazené Node aplikace, včetně staging nasazení; pro odlišení fází nasazení používejte samostatnou proměnnou specifickou pro aplikaci.
+
 ```bash
-# Vývojové prostředí
+# Development environment
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# Předprodukční prostředí
+# Staging environment
 azd env new staging
-azd env set NODE_ENV staging
+azd env set NODE_ENV production
 azd env set DEBUG false
 azd env set LOG_LEVEL info
 
-# Produkční prostředí
+# Production environment
 azd env new production
 azd env set NODE_ENV production
 azd env set DEBUG false
@@ -318,7 +323,7 @@ azd env set LOG_LEVEL error
 
 ## 🔧 Pokročilé scénáře nasazení
 
-### Víceslužbové aplikace
+### Více-službové aplikace
 ```yaml
 # Complex application with multiple services
 services:
@@ -355,51 +360,52 @@ services:
 ```
 
 ### Blue-Green nasazení
+
+**Ilustrační provozní náčrt:** musíte dodat obě prostředí, společnou vrstvu řízení provozu a dva níže uvedené skripty. azd automaticky nepřepíná provoz ani neověřuje připravenost rollbacku. Nechte zelené prostředí aktivní, dokud testování v modrém neproběhne a rollback již není potřeba.
+
 ```bash
-# Vytvořit modré prostředí
+# Create blue environment
 azd env new production-blue
 azd up --environment production-blue
 
-# Otestovat modré prostředí
+# Test blue environment
 ./scripts/test-environment.sh production-blue
 
-# Přesměrovat provoz na modré (ruční aktualizace DNS nebo vyrovnávače zatížení)
+# Switch traffic to blue (manual DNS/load balancer update)
 ./scripts/switch-traffic.sh production-blue
 
-# Vyčistit zelené prostředí
+# Clean up green environment
 azd env select production-green
 azd down --force
 ```
 
 ### Canary nasazení
-```yaml
-# azure.yaml - Configure traffic splitting
-services:
-  api:
-    project: ./src/api
-    host: containerapp
-    trafficSplit:
-      - revision: stable
-        percentage: 90
-      - revision: canary
-        percentage: 10
+```bash
+# Requires an existing Container App in multiple-revision mode and two
+# ready revisions. Replace placeholders with actual revision names.
+az containerapp ingress traffic set \
+  --name "<app-name>" --resource-group "<rg-name>" \
+  --revision-weight "<stable-revision>=90" "<canary-revision>=10"
 ```
 
-### Fázovaná nasazení
+Rozdělení provozu patří konfiguraci Container Apps (Bicep nebo Azure CLI), ne vlastnosti `azure.yaml` `trafficSplit`. Náhled/provisioning i pozdější nasazení musí zachovat vámi zvolený režim revize a pravidla směrování.
+
+### Postupné nasazení
 ```bash
 #!/bin/bash
 # deploy-staged.sh
+set -e
 
 echo "Deploying to development..."
 azd env select dev
-azd up --confirm-with-no-prompt
+azd up --no-prompt
 
 echo "Running dev tests..."
 ./scripts/test-environment.sh dev
 
 echo "Deploying to staging..."
 azd env select staging
-azd up --confirm-with-no-prompt
+azd up --no-prompt
 
 echo "Running staging tests..."
 ./scripts/test-environment.sh staging
@@ -409,7 +415,7 @@ read -p "Deploy to production? (y/N): " confirm
 if [[ $confirm == [yY] ]]; then
     echo "Deploying to production..."
     azd env select production
-    azd up --confirm-with-no-prompt
+    azd up --no-prompt
     
     echo "Running production smoke tests..."
     ./scripts/test-environment.sh production
@@ -424,28 +430,23 @@ services:
   api:
     project: ./src/api
     host: containerapp
+    language: js
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-      target: production
+      context: .
+      path: Dockerfile
       buildArgs:
-        BUILD_VERSION: ${BUILD_VERSION}
-        NODE_ENV: production
+        - BUILD_VERSION=${BUILD_VERSION}
+        - NODE_ENV=production
     env:
-      - name: DATABASE_URL
-        value: ${DATABASE_URL}
-    secrets:
-      - name: jwt-secret
-        value: ${JWT_SECRET}
-    scale:
-      minReplicas: 1
-      maxReplicas: 10
+      NODE_ENV: production
 ```
 
-### Optimalizace vícefázového Dockerfile
+Konfigurujte runtime secret hodnoty pomocí `configuration.secrets`/`secretRef` (nebo referencí na Key Vault) a škálování pomocí `template.scale` v infrastruktuře Container App. Nevymýšlejte service-level `secrets` nebo `scale` vlastnosti v `azure.yaml`.
+
+### Optimalizace Dockerfile ve více fázích
 ```dockerfile
 # Dockerfile
-FROM node:18-alpine AS base
+FROM node:22-alpine AS base
 WORKDIR /app
 COPY package*.json ./
 
@@ -455,11 +456,12 @@ COPY . .
 CMD ["npm", "run", "dev"]
 
 FROM base AS build
-RUN npm ci --only=production
+RUN npm ci
 COPY . .
 RUN npm run build
+RUN npm prune --omit=dev
 
-FROM node:18-alpine AS production
+FROM node:22-alpine AS production
 WORKDIR /app
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/node_modules ./node_modules
@@ -470,77 +472,89 @@ CMD ["npm", "start"]
 
 ## ⚡ Optimalizace výkonu
 
-### Nasazení specifická pro službu
+### Nasazení specifické pro službu
 ```bash
-# Nasadit konkrétní službu pro rychlejší iteraci
-azd deploy --service web
-azd deploy --service api
+# Deploy a specific service for faster iteration
+azd deploy web
+azd deploy api
 
-# Nasadit všechny služby
+# Deploy all services
 azd deploy
 ```
 
-### Caching při sestavení
+### Caching buildů
 ```yaml
-# azure.yaml - Configure build commands
+# azure.yaml fragment - assumes package.json has a build script
 services:
   web:
     project: ./src/web
-    buildCommand: npm run build
-    outputPath: dist
+    language: js
+    host: appservice
+    dist: dist
 ```
+
+Standardní Node workflow používá package skripty; service `prepackage` hooky mohou přidat požadované kroky. Docker caching vrstev je oddělený od definice build příkazu služby.
 
 ### Efektivní nasazení kódu
 ```bash
-# Použijte azd deploy (nikoli azd up) pro změny pouze v kódu
-# Tím se přeskočí zřizování infrastruktury a je to mnohem rychlejší
+# Use azd deploy (not azd up) for code-only changes
+# This skips infrastructure provisioning and is much faster
 azd deploy
 
-# Nasazujte konkrétní službu pro nejrychlejší iterace
-azd deploy --service api
+# Deploy specific service for fastest iteration
+azd deploy api
 ```
 
 ## 🔍 Monitoring nasazení
 
-### Monitorování nasazení v reálném čase
+### Monitoring nasazení v reálném čase
 ```bash
-# Sledovat aplikaci v reálném čase
+# Monitor application in real-time
 azd monitor --live
 
-# Zobrazit protokoly aplikace
+# View application logs
 azd monitor --logs
 
-# Zkontrolovat stav nasazení
+# Check deployment status
 azd show
 ```
 
-### Kontroly zdraví
-```yaml
-# azure.yaml - Configure health checks
-services:
-  api:
-    project: ./src/api
-    host: containerapp
-    healthCheck:
-      path: /health
-      interval: 30s
-      timeout: 10s
-      retries: 3
+### Kontroly zdravotního stavu
+```bicep
+// Partial Container App container definition:
+// merge into properties.template.containers[] in your Bicep resource.
+probes: [
+  {
+    type: 'Readiness'
+    httpGet: {
+      path: '/health'
+      port: 3000
+      scheme: 'HTTP'
+    }
+    initialDelaySeconds: 10
+    periodSeconds: 30
+    timeoutSeconds: 10
+    failureThreshold: 3
+  }
+]
 ```
 
-### Validace po nasazení
+Vaše aplikace musí implementovat `/health`; není automaticky poskytováno azd. Neexistuje obecná služební vlastnost `azure.yaml` `healthCheck`.
+
+### Ověření po nasazení
 ```bash
 #!/bin/bash
 # scripts/validate-deployment.sh
+set -e
 
 echo "Validating deployment..."
 
-# Zkontrolovat stav aplikace
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
-API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
+# Check application health
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
 
 echo "Testing web application..."
-if curl -f "$WEB_URL/health"; then
+if curl -f "$WEB_URL"; then
     echo "✅ Web application is healthy"
 else
     echo "❌ Web application health check failed"
@@ -548,7 +562,7 @@ else
 fi
 
 echo "Testing API..."
-if curl -f "$API_URL/health"; then
+if curl -f "$API_URL/lists"; then
     echo "✅ API is healthy"
 else
     echo "❌ API health check failed"
@@ -561,79 +575,49 @@ npm run test:integration
 echo "✅ Deployment validation completed successfully"
 ```
 
-## 🔐 Bezpečnostní úvahy
+## 🔐 Bezpečnostní aspekty
 
 ### Správa tajemství
 ```bash
-# Ukládejte tajemství bezpečně
-azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
-azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
-azd env set API_KEY "your-api-key" --secret
-
-# Odkazujte na tajemství v azure.yaml
+# Interactive Key Vault reference setup; requires appropriate vault permissions
+azd env set-secret DATABASE_PASSWORD
+azd env set-secret JWT_SECRET
+azd env set-secret API_KEY
 ```
 
-```yaml
-services:
-  api:
-    secrets:
-      - name: database-password
-        value: ${DATABASE_PASSWORD}
-      - name: jwt-secret
-        value: ${JWT_SECRET}
-```
+`azd env set ... --secret` je neplatné. Obvyklé hodnoty prostředí jsou lokální plaintext; nepředpokládejte, že čtecí příkazy je skryjí. Výše uvedené příkazy ukládají reference na Key Vault, ale infrastruktura/aplikace musí tajemství také spotřebovat a povolit runtime identitě přístup.
 
-### Síťové zabezpečení
-```yaml
-# azure.yaml - Configure network security
-infra:
-  parameters:
-    enablePrivateEndpoints: true
-    allowedIPs:
-      - "203.0.113.0/24"  # Office IP range
-      - "198.51.100.0/24" # VPN IP range
-```
+### Síťová bezpečnost
+Deklarujte a používejte síťové parametry v Bicep a mapujte je v `infra/main.parameters.json`. Neexistuje obecná síťová vrstva `infra.parameters` v `azure.yaml`. Ukázková dokumentace s rozsahy `203.0.113.0/24` a `198.51.100.0/24` nejsou opravdové kancelářské/VPN sítě; nahraďte je autorizovanými síťovými rozsahy.
 
 ### Řízení identity a přístupu
-```yaml
-services:
-  api:
-    project: ./src/api
-    host: containerapp
-    identity:
-      type: systemAssigned
-    keyVault:
-      - name: app-secrets
-        secrets:
-          - database-connection
-          - external-api-key
-```
+Povolte `identity` Container App v Bicep a přidělte potřebnou datovou roli Key Vaultu v rozsahu vaultu. Konfigurujte pojmenovaná tajemství založená na Key Vault a runtime reference v tomto zdroji; `identity` a `keyVault` nejsou obecné azd service vlastnosti. Viz [Autentizace & Managed Identity](../chapter-03-configuration/authsecurity.md).
 
 ## 🚨 Strategie rollbacku
 
 ### Rychlý rollback
 ```bash
-# AZD nemá vestavěné vrácení změn. Doporučené postupy:
+# AZD doesn't have built-in rollback. Recommended approaches:
 
-# Možnost 1: Znovu nasadit z Gitu (doporučeno)
-git revert HEAD  # Vrátit problematický commit
+# Option 1: Redeploy from Git (recommended)
+git revert HEAD  # Revert the problematic commit
 git push
 azd deploy
 
-# Možnost 2: Znovu nasadit konkrétní commit
-git checkout <previous-commit-hash>
+# Option 2: Redeploy specific commit
+git checkout "<previous-commit-hash>"
 azd deploy
 git checkout main
 ```
 
 ### Rollback infrastruktury
 ```bash
-# Náhled změn infrastruktury před aplikací
+# Preview infrastructure changes before applying
 azd provision --preview
 
-# Pro vrácení změn infrastruktury použijte systém správy verzí:
-git revert HEAD  # Vrátit změny infrastruktury
-azd provision    # Aplikovat předchozí stav infrastruktury
+# For infrastructure rollback, use version control:
+git revert HEAD  # Revert infrastructure changes
+azd provision    # Apply previous infrastructure state
 ```
 
 ### Rollback migrací databáze
@@ -654,13 +638,13 @@ echo "Database rollback completed"
 
 ### Sledování výkonu nasazení
 ```bash
-# Zobrazit aktuální stav nasazení
+# View current deployment status
 azd show
 
-# Monitorovat aplikaci pomocí Application Insights
+# Monitor application with Application Insights
 azd monitor --overview
 
-# Zobrazit metriky v reálném čase
+# View live metrics
 azd monitor --live
 ```
 
@@ -681,28 +665,28 @@ hooks:
         -d "{\"timestamp\": $DEPLOY_TIME, \"service_count\": $SERVICE_COUNT}"
 ```
 
-## 🎯 Nejlepší postupy
+## 🎯 Nejlepší praxe
 
 ### 1. Konzistence prostředí
 ```bash
-# Používejte konzistentní pojmenování
+# Use consistent naming
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Udržujte konzistenci prostředí
+# Maintain environment parity
 ./scripts/sync-environments.sh
 ```
 
 ### 2. Validace infrastruktury
 ```bash
-# Náhled změn infrastruktury před nasazením
+# Preview infrastructure changes before deployment
 azd provision --preview
 
-# Použít lintování ARM/Bicep
+# Use ARM/Bicep linting
 az bicep lint --file infra/main.bicep
 
-# Ověřit syntaxi Bicepu
+# Validate Bicep syntax
 az bicep build --file infra/main.bicep
 ```
 
@@ -737,7 +721,7 @@ hooks:
 
 ### 4. Dokumentace a logování
 ```bash
-# Zdokumentujte postupy nasazení
+# Document deployment procedures
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env get-value AZURE_ENV_NAME)" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
@@ -745,64 +729,70 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Další kroky
 
-- [Zřizování prostředků](provisioning.md) - Podrobně o správě infrastruktury
-- [Plánování před nasazením](../chapter-06-pre-deployment/capacity-planning.md) - Naplánujte svou strategii nasazení
-- [Běžné problémy](../chapter-07-troubleshooting/common-issues.md) - Řešení problémů s nasazením
-- [Nejlepší postupy](../chapter-07-troubleshooting/debugging.md) - Strategie nasazení připravené pro produkci
+- [Provisioning Resources](provisioning.md) - Hloubkový rozbor správy infrastruktury
+- [Pre-Deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - Plánování strategie nasazení
+- [Common Issues](../chapter-07-troubleshooting/common-issues.md) - Řešení problémů s nasazením
+- [Best Practices](../chapter-07-troubleshooting/debugging.md) - Strategie nasazení připravené pro produkci
 
-## 🎯 Praktická cvičení nasazení
+## 🎯 Praktická nasazovací cvičení
 
-### Cvičení 1: Inkrementální pracovní postup nasazení (20 minut)
-**Cíl**: Ovládnout rozdíl mezi plným a inkrementálním nasazením
+### Cvičení 1: Inkremetální nasazovací workflow (20 minut)
+**Cíl**: Ovládnout rozdíl mezi kompletním a inkrementálním nasazením
+
+**Výchozí bod:** Bash, Node.js 22, Git, azd přihlášení a předplatné Azure s oprávněními pro nasazení. Spusťte v novém adresáři; očekávejte zpoplatněné App Service/Cosmos DB zdroje. Časy závisí na regionu a šabloně.
 
 ```bash
-# Počáteční nasazení
+# Initial deployment
 mkdir deployment-practice && cd deployment-practice
-azd init --template todo-nodejs-mongo
-azd up
+azd init --template todo-nodejs-mongo .
+time azd up
 
-# Zaznamenat čas počátečního nasazení
+# Record initial deployment time
 echo "Full deployment: $(date)" > deployment-log.txt
 
-# Provést změnu v kódu
-echo "// Updated $(date)" >> src/api/src/server.js
+# Make a code change
+echo "// Updated $(date)" >> src/api/src/index.ts
 
-# Nasadit pouze kód (rychle)
+# Deploy only code (fast)
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
-# Porovnat časy
+# Compare times
 cat deployment-log.txt
 
-# Vyčistit
+# Clean up
 azd down --force --purge
 ```
 
 **Kritéria úspěchu:**
-- [ ] Plné nasazení trvá 5-15 minut
-- [ ] Nasazení pouze kódu trvá 2-5 minut
-- [ ] Změny kódu se projeví v nasazené aplikaci
-- [ ] Infrastruktura nezměněna po `azd deploy`
+- [ ] Zaznamenejte uplynulý čas pro oba příkazy (doba není garantována)
+- [ ] Oba příkazy úspěšně dokončeny
+- [ ] API zůstává funkční; editace pouze komentářů není viditelná změna UI
+- [ ] Infrastruktura beze změn po `azd deploy`
 
-**Výsledek učení**: `azd deploy` je 50-70% rychlejší než `azd up` pro změny kódu
+**Výsledek učení**: `azd deploy` přeskočí provisioning infrastruktury. Porovnejte změřené časy, než předpokládáte fixní procentuální zrychlení.
 
-### Cvičení 2: Vlastní hooky nasazení (30 minut)
-**Cíl**: Implementovat před- a po-nasazovací automatizaci
+### Cvičení 2: Vlastní nasazovací hooky (30 minut)
+**Cíl**: Implementovat automatizaci před i po nasazení
+
+**Výchozí bod:** Inicializovaný projekt `deployment-practice` výše. Pokud jste ho vyčistili, spusťte znova `azd up` před testováním nasazení pouze kódu. Níže uvedená validace používá skutečný build skript API, ne neexistující root `test:unit` skript. Testy API šablony vyžadují nakonfigurovaný přístup do databáze; nejsou izolované jednotkové testy.
 
 ```bash
-# Vytvořit validační skript před nasazením
+# Create pre-deploy validation script
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
+set -e
 echo "⚠️ Running pre-deployment checks..."
 
-# Zkontrolovat, zda testy projdou
-if ! npm run test:unit; then
-    echo "❌ Tests failed! Aborting deployment."
+# Install API dependencies and check its actual lint/TypeScript build
+npm --prefix src/api ci
+if ! npm --prefix src/api run build; then
+    echo "❌ Build validation failed! Aborting deployment."
     exit 1
 fi
 
-# Zkontrolovat necommitované změny
+# Check for uncommitted changes
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -812,14 +802,15 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# Vytvořit smoke test po nasazení
+# Create post-deploy smoke test
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
+set -e
 echo "💨 Running smoke tests..."
 
-WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
+WEB_URL=$(azd show --output json | jq -er '.services.web.ingressUrl')
 
-if curl -f "$WEB_URL/health"; then
+if curl -f "$WEB_URL"; then
     echo "✅ Health check passed!"
 else
     echo "❌ Health check failed!"
@@ -831,8 +822,11 @@ EOF
 
 chmod +x scripts/post-deploy-test.sh
 
-# Přidat hooky do azure.yaml
-cat >> azure.yaml << 'EOF'
+# Merge the following into the EXISTING azure.yaml using your editor.
+# If hooks already exists, merge its children; never append a duplicate YAML key.
+```
+
+```yaml
 
 hooks:
   predeploy:
@@ -842,23 +836,26 @@ hooks:
   postdeploy:
     shell: sh
     run: ./scripts/post-deploy-test.sh
-EOF
+```
 
-# Otestovat nasazení s hooky
+```bash
+# Test deployment with hooks
 azd deploy
 ```
 
 **Kritéria úspěchu:**
-- [ ] Skript před nasazením se spustí před nasazením
-- [ ] Nasazení se přeruší, pokud testy selžou
-- [ ] Smoke test po nasazení ověřuje zdraví
-- [ ] Hooky se spouští ve správném pořadí
+- [ ] Skript před nasazením běží před nasazením
+- [ ] Nasazení se přeruší při neúspěšné validaci buildu
+- [ ] Rychlý test po nasazení ověřuje zdraví
+- [ ] Hooky se spouštějí ve správném pořadí
 
-### Cvičení 3: Strategie nasazení pro více prostředí (45 minut)
-**Cíl**: Implementovat fázovaný pracovní postup nasazení (dev → staging → production)
+### Cvičení 3: Strategie nasazení více prostředí (45 minut)
+**Cíl**: Implementovat workflow postupného nasazení (dev → staging → produkce)
+
+**Výchozí bod:** stejný inicializovaný projekt todo s `jq`. Vytvořte níže uvedená prostředí s reálnými hodnotami předplatného/lokace (nebo nastavte `AZURE_SUBSCRIPTION_ID`/`AZURE_LOCATION` v každém) **před** spuštěním workflow bez výzev. Úmyslně selže, místo aby vymýšlel chybějící hodnoty. Používejte pouze dočasná výuková prostředí, nikoli skutečné produkční předplatné.
 
 ```bash
-# Vytvořit skript pro nasazení
+# Create deployment script
 cat > deploy-staged.sh << 'EOF'
 #!/bin/bash
 set -e
@@ -866,25 +863,25 @@ set -e
 echo "🚀 Staged Deployment Workflow"
 echo "=============================="
 
-# Krok 1: Nasadit do vývojového prostředí
+# Step 1: Deploy to dev
 echo "
 🛠️ Step 1: Deploying to development..."
 azd env select dev
 azd up --no-prompt
 
 echo "Running dev tests..."
-curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+curl -f "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
-# Krok 2: Nasadit do staging prostředí
+# Step 2: Deploy to staging
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
 azd up --no-prompt
 
 echo "Running staging tests..."
-curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+curl -f "$(azd show --output json | jq -er '.services.web.ingressUrl')"
 
-# Krok 3: Ruční schválení pro nasazení do produkce
+# Step 3: Manual approval for production
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -896,7 +893,7 @@ if [[ $confirm == "yes" ]]; then
     azd up --no-prompt
     
     echo "Running production smoke tests..."
-    curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
+    curl -f "$(azd show --output json | jq -er '.services.web.ingressUrl')"
     
     echo "
 ✅ Production deployment completed!"
@@ -907,74 +904,90 @@ EOF
 
 chmod +x deploy-staged.sh
 
-# Vytvořit prostředí
-azd env new dev
-azd env new staging
-azd env new production
+# Create environments
+# Reuse existing dev if you completed Exercise 1; create unused environments
+azd env select dev
+azd env new staging --subscription "<subscription-id>" --location eastus2
+azd env new production --subscription "<subscription-id>" --location eastus2
 
-# Spustit postupné nasazení
+# Run staged deployment
 ./deploy-staged.sh
+
+# After verification, delete each disposable deployment (review prompts)
+azd down --environment dev
+azd down --environment staging
+azd down --environment production
 ```
 
-**Kritéria úspěchu:**
-- [ ] Vývojové prostředí (dev) se nasadí úspěšně
+**Kriteria úspěchu:**
+- [ ] Vývojové prostředí se nasadí úspěšně
 - [ ] Staging prostředí se nasadí úspěšně
-- [ ] Pro produkci je vyžadováno manuální schválení
-- [ ] Všechna prostředí mají funkční health checky
-- [ ] Možnost vrácení změn v případě potřeby
+- [ ] Pro produkci je vyžadováno ruční schválení
+- [ ] Všechna prostředí mají funkční kontrolu stavu
+- [ ] Je možné provést návrat zpět, pokud je to potřeba
 
-### Cvičení 4: Strategie rollbacku (25 minut)
-**Cíl**: Implementovat a otestovat rollback nasazení pomocí Gitu
+### Cvičení 4: Strategie návratu zpět (25 minut)
+**Cíl**: Implementovat a otestovat nasazení návratu zpět pomocí Gitu
+
+**Výchozí bod:** izolovaná výuková kopie šablony todo s veškerým základním zdrojem zcommitovaným, čistým pracovním stromem Gitu a dočasně nakonfigurovaným prostředím. Nikdy nezavádějte úmyslné chyby v reálném produkčním projektu. `APP_VERSION` níže jsou pouze účetní záležitostí, pokud je výslovně nezapojíte do aplikace.
 
 ```bash
-# Nasadit v1
+# Deploy v1
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# Uložit hash commitu v1
+# Save v1 commit hash
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# Nasadit v2 s nekompatibilní změnou
-echo "throw new Error('Intentional break')" >> src/api/src/server.js
-git add . && git commit -m "v2 with intentional break"
+# Deploy v2 with breaking change
+echo "throw new Error('Intentional break');" >> src/api/src/index.ts
+git add src/api/src/index.ts
+git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
-azd deploy
+DEPLOY_FAILED=false
+azd deploy api || DEPLOY_FAILED=true
 
-# Zjistit selhání a vrátit nasazení
-if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
+# Detect failure and rollback
+API_URL=$(azd show --output json | jq -er '.services.api.ingressUrl')
+if [ "$DEPLOY_FAILED" = true ] || ! curl -f "$API_URL/lists"; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # Vrátit změny pomocí gitu
+    # Rollback using git
     git revert HEAD --no-edit
     
-    # Vrátit prostředí
+    # Rollback environment
     azd env set APP_VERSION "1.0.0"
     
-    # Znovu nasadit v1
-    azd deploy
+    # Redeploy v1
+    azd deploy api
+    curl --fail "$API_URL/lists"
     
     echo "✅ Rolled back to v1.0.0"
 fi
+
+# Clean up the disposable deployment when finished
+azd down
 ```
 
-**Kritéria úspěchu:**
+**Kriteria úspěchu:**
 - [ ] Dokáže detekovat selhání nasazení
-- [ ] Skript rollbacku se spustí automaticky
+- [ ] Skript pro návrat zpět se spustí automaticky
 - [ ] Aplikace se vrátí do funkčního stavu
-- [ ] Health checky projdou po rollbacku
+- [ ] Kontroly stavu projdou po návratu zpět
 
 ## 📊 Sledování metrik nasazení
 
-### Sledujte výkon nasazení
+### Sledujte výkon svého nasazení
 
 ```bash
-# Vytvořit skript pro metriky nasazení
+# Create deployment metrics script
 cat > track-deployment.sh << 'EOF'
 #!/bin/bash
 START_TIME=$(date +%s)
 
 azd deploy "$@"
+DEPLOY_STATUS=$?
 
 END_TIME=$(date +%s)
 DURATION=$((END_TIME - START_TIME))
@@ -986,37 +999,38 @@ echo "Timestamp: $(date)"
 echo "Environment: $(azd env get-value AZURE_ENV_NAME)"
 echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
 
-# Zapisovat do souboru
-echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
+# Log to file
+echo "$(date +%Y-%m-%dT%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
+exit "$DEPLOY_STATUS"
 EOF
 
 chmod +x track-deployment.sh
 
-# Použijte to
+# Use it
 ./track-deployment.sh
 ```
 
 **Analyzujte své metriky:**
 ```bash
-# Zobrazit historii nasazení
+# View deployment history
 cat deployment-metrics.csv
 
-# Vypočítat průměrnou dobu nasazení
+# Calculate average deployment time
 awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
 ```
 
 ## Další zdroje
 
-- [Azure Developer CLI Deployment Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Azure App Service Deployment](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Azure Container Apps Deployment](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Azure Functions Deployment](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Reference nasazení Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Nasazení Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Nasazení Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Nasazení Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
 **Navigace**
 - **Předchozí lekce**: [Váš první projekt](../chapter-01-foundation/first-project.md)
-- **Další lekce**: [Zřizování prostředků](provisioning.md)
+- **Následující lekce**: [Provisioning zdrojů](provisioning.md)
 
 ---
 

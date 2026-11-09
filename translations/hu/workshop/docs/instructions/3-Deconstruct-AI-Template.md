@@ -1,280 +1,133 @@
-# 3. Dekonstruáld a sablont
+# 3. Egy sablon bontása
 
-!!! tip "ENNEK A MODULNAK A VÉGÉRE KÉPES LESZEL"
+!!! tip "A MODUL VÉGÉRE KÉPES LESZEL"
 
-    - [ ] Aktiválni a GitHub Copilotot MCP szerverekkel az Azure támogatásához
-    - [ ] Megérteni az AZD sablon könyvtárszerkezetét és komponenseit
-    - [ ] Felfedezni az infrastruktúra-kód (Bicep) szervezési mintáit
-    - [ ] **Lab 3:** Használni a GitHub Copilotot a tárház architektúrájának felfedezéséhez és megértéséhez
-
----
-
-
-Az AZD sablonokkal és az Azure Developer CLI-vel (`azd`) gyorsan elindíthatjuk AI fejlesztési utunkat szabványosított tárházakkal, amelyek mintakódot, infrastruktúrát és konfigurációs fájlokat biztosítanak – egy telepítésre kész _starter_ projekt formájában.
-
-**De most meg kell értenünk a projekt szerkezetét és kódbázisát – és képesnek kell lennünk az AZD sablon testreszabására – előzetes tapasztalat vagy AZD ismerete nélkül!**
+    - [ ] Use GitHub Copilot and optional MCP tools for Azure documentation and read-only exploration
+    - [ ] Identify the template's application, infrastructure, configuration, and test entry points
+    - [ ] Verify generated explanations against actual repository files
+    - [ ] **Lab 3:** Trace one request and one configuration input through the project
 
 ---
 
-## 1. Aktiváld a GitHub Copilotot
+## 1. GitHub Copilot aktiválása
 
-### 1.1 Telepítsd a GitHub Copilot Chat-et
+Nyisd meg a inicializált AI mintát a VS Code-ban, és engedélyezd a [GitHub Copilot](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) szolgáltatást. Jelentkezz be olyan fiókkal, amely jogosult tervvel rendelkezik; a használati korlátok változóak. Kérd meg a Copilot-ot, hogy magyarázza el a tárolót a változtatások engedélyezése előtt.
 
-Ideje felfedezni a [GitHub Copilot Agent Mode-ot](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Most már természetes nyelven írhatjuk le feladatunkat magas szinten, és kaphatunk segítséget a végrehajtásához. Ehhez a laborhoz a [Copilot Free tervet](https://github.com/github-copilot/signup) fogjuk használni, amely havi korlátot tartalmaz a válaszokra és a csevegési interakciókra.
+### Választható MCP szerverek
 
-A kiterjesztés telepíthető a Marketplace-ről, és gyakran már elérhető Codespaces vagy fejlesztői konténer környezetekben. _Kattints a Copilot ikon legördülő menüjében az `Open Chat`-ra, és írj be egy kérdést, például `What can you do?`_ – előfordulhat, hogy bejelentkezésre kérnek. **A GitHub Copilot Chat készen áll**.
+Ezek a szolgáltatások további eszközöket biztosíthatnak:
 
-### 1.2. Telepítsd az MCP szervereket
+- [Azure MCP szerver](https://learn.microsoft.com/azure/developer/azure-mcp-server/overview)
+- [Microsoft Learn MCP szerver](https://learn.microsoft.com/training/support/mcp)
 
-Az Agent mód hatékony működéséhez hozzáférés kell a megfelelő eszközökhöz, hogy tudást szerezzen vagy műveleteket hajtson végre. Itt segíthetnek az MCP szerverek. A következő szervereket fogjuk konfigurálni:
+A VS Code-ban tekintsd át a [MCP konfigurációs útmutatót](https://code.visualstudio.com/docs/copilot/chat/mcp-servers), és hozd létre a `.vscode/mcp.json` fájlt, ha szükséges:
 
-1. [Azure MCP Server](../../../../../workshop/docs/instructions)
-1. [Microsoft Docs MCP Server](../../../../../workshop/docs/instructions)
+```json
+{
+  "servers": {
+    "Azure MCP Server": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@azure/mcp@latest", "server", "start"]
+    },
+    "microsoft.docs.mcp": {
+      "type": "http",
+      "url": "https://learn.microsoft.com/api/mcp"
+    }
+  }
+}
+```
 
-Aktiválásukhoz:
+Az `npx` parancs támogatott Node.js/npm telepítést igényel, és végrehajtható kódot tölt le. Vizsgáld meg a csomagot, és rögzíts engedélyezett verziót az ismételhető csapatbeállításhoz. Indítsd el a szervereket a VS Code MCP vezérlőivel, és tekintsd meg az elérhető eszközöket; a nevek verziók között változhatnak.
 
-1. Hozz létre egy `.vscode/mcp.json` nevű fájlt, ha még nem létezik
-1. Másold bele a következőt – és indítsd el a szervereket!
-   ```json title=".vscode/mcp.json"
-   {
-      "servers": {
-         "Azure MCP Server": {
-            "command": "npx",
-            "args": [
-            "-y",
-            "@azure/mcp@latest",
-            "server",
-            "start"
-            ]
-         },
-         "microsoft.docs.mcp": {
-            "type": "http",
-            "url": "https://learn.microsoft.com/api/mcp"
-         }
-      }
-   }
-   ```
+**Az azonosítás külön van kezelve.** Használd az `azd auth login`-t AZD-hez. Kövesd az Azure MCP dokumentált azonosítási folyamatát az eszközök számára; az AZD bejelentkezés önmagában nem hoz létre MCP munkamenetet. Az `az login`-at használd külön, amikor egy feladat vagy hook az Azure CLI-t hívja meg.
 
-??? warning "Előfordulhat, hogy hibát kapsz, miszerint a `npx` nincs telepítve (kattints a javításért)"
+Próbálj ki csak olvasási parancsokat:
 
-      Javításhoz nyisd meg a `.devcontainer/devcontainer.json` fájlt, és add hozzá ezt a sort a features szekcióhoz. Ezután építsd újra a konténert. Most már telepítve lesz az `npx`.
+1. „Használd a Microsoft Learn MCP-t az Azure Developer CLI konfigurációs dokumentációjának megtalálásához.”
+2. „Magyarázd el ennek a tárolónak az `azure.yaml`-ját; idézd az egyes hookokat megvalósító fájlokat.”
+3. „Az elérhető Azure MCP eszközök használatával sorold fel a telepített erőforrásaimat anélkül, hogy bármit módosítanál.”
 
-      ```title="" linenums="0"
-         "features": {
-            "ghcr.io/devcontainers/features/node:1": {},
-            ...
-         },
-      ```
+Ellenőrizd a kiválasztott bérlőt/előfizetést és minden javasolt eszközhívást. Ne engedélyezd erőforrás létrehozását, törlését vagy hozzáférés megváltoztatását pusztán az architektúra feltérképezése érdekében.
 
----
+## 2. Értsd meg az architektúrát
 
-### 1.3. Teszteld a GitHub Copilot Chat-et
+A minta Python FastAPI backendet és React/TypeScript frontendet futtat Azure Container Appsekben. A backend kommunikál egy agenttel egy Microsoft Foundry projektben. Az adatok lekérése és megfigyelése az engedélyezett sablonfunkcióktól és a sikeres beállítástól függ; nem garantált, hogy működik csak azért, mert az alkalmazás telepítve lett.
 
-**Először használd az `azd auth login` parancsot az Azure-ba való azonosításhoz a VS Code parancssorból. Az `az login` használata is ajánlott, ha közvetlenül Azure CLI parancsokat szeretnél futtatni.**
+![Illusztratív architektúra](../../../../../translated_images/hu/architecture.8cec470ec15c65c7.webp)
 
-Most már lekérdezheted Azure előfizetésed állapotát, és kérdéseket tehetsz fel az üzembe helyezett erőforrásokról vagy konfigurációkról. Próbáld ki ezeket a promptokat:
+Hasonlítsd össze ezt az ábrát a [jelenlegi upstream telepítési útmutatóval](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/deployment.md) és a saját erőforrásaiddal. Ellenőrizd a konfigurált modelltelepítést, az agent eszközöket, kezelt identitást, szerepköri hozzárendeléseket és az opcionális AI Search/Application Insights erőforrásokat.
 
-1. `List my Azure resource groups`
-1. `#foundry list my current deployments`
+**Gyakorlat:** Kérd meg a Copilot-ot, hogy kövesse nyomon egy chat kérés útját a frontendtől az API-n keresztül a Foundry-ig, fájl- és függvény hivatkozásokkal. Nyisd meg azokat a hivatkozásokat, és ellenőrizd a magyarázatot. Ne következtess a megvalósított hitelesítésre, útválasztásra vagy engedélyezésre csak az ábra alapján.
 
-Kérdezhetsz az Azure dokumentációról is, és a Microsoft Docs MCP szerver által alapozott válaszokat kaphatsz. Próbáld ki ezeket:
+## 3. Tároló szerkezete
 
-1. `#microsoft_docs_search What is Azure Developer CLI?`
-1. `#microsoft_docs_search Show me a Python tutorial to chat with deployed model`
+A következő kiválasztott elérési utak 2026. november 4-én lettek ellenőrizve a mintán. Az inicializált verziód marad az igazság forrása:
 
-Vagy kérhetsz kódrészleteket egy feladat befejezéséhez. Próbáld ki ezt:
+```text
+get-started-with-ai-agents/
+  azure.yaml
+  docker-compose.yaml
+  requirements-dev.txt
+  .devcontainer/
+  infra/
+    main.bicep
+    main.parameters.json
+    api.bicep
+    core/
+  src/
+    Dockerfile
+    pyproject.toml
+    requirements.txt
+    api/
+      main.py
+      routes.py
+      search_index_manager.py
+    frontend/
+      package.json
+      src/
+    files/
+  scripts/
+    validate_env_vars.sh
+    validate_env_vars.ps1
+    postdeploy.sh
+    postdeploy.ps1
+  tests/
+    test_evaluation.py
+    test_red_teaming.py
+  docs/
+    deployment.md
+    deploy_customization.md
+    ai_search.md
+    observability.md
+    local_development.md
+    troubleshooting.md
+```
 
-1. `Give me a Python code example that uses AAD for an interactive chat client`
+### Infrastruktúra és konfiguráció
 
-Az `Ask` módban olyan kódot kapsz, amit kimásolhatsz és kipróbálhatsz. Az `Agent` módban ez továbbmehet, és létrehozhatja a kapcsolódó erőforrásokat is – beleértve beállító szkripteket és dokumentációt –, hogy segítsen a feladat végrehajtásában.
+Az `infra/main.bicep` kezeli az erőforrásokat; az `main.parameters.json` kapcsolja össze a sablon bemeneteket az AZD környezeti értékekkel. Az `azure.yaml` választja ki az alkalmazás szolgáltatást és az életciklus hookokat. Kövesd nyomon egy olyan bemenetet, mint az `USE_AZURE_AI_SEARCH_SERVICE` ezekben a fájlokban, hogy megtaláld mi változik valójában.
 
-**Most már fel vagy készülve arra, hogy felfedezd a sablon tárházat**
+### Alkalmazás és identitás
 
----
+Olvasd együtt az `src/api/` és az `src/frontend/` fájlokat. Határozd meg, hol jön létre vagy kerül lekérésre az agent, hol konfigurálják az utasításokat/eszközöket, és melyik identitás használatával történnek az Azure hívások. Az `src/files/` alatti minta fájlok bemutató adatok, nem termelési katalógus vagy engedélyezési modell.
 
-## 2. Dekonstruáld az architektúrát
+### Tesztek és megfigyelhetőség
 
-??? prompt "KÉRÉS: Magyarázd el az alkalmazás architektúráját docs/images/architecture.png fájl alapján 1 bekezdésben"
+A jelenlegi értékelési és red-teaming belépési pontok az `tests/` alatt találhatók; a régebbi `evals/` és `airedteaming/` könyvtári hivatkozások elavultak ehhez a mintához. Futtatás előtt olvasd el az `docs/observability.md`-öt a követelményekről és költségekről. Ezek a Python tesztek különállóak az opcionális `azure.ai.evaluations` AZD kiterjesztéstől.
 
-      Ez az alkalmazás egy Azure-on futó, AI által vezérelt csevegőalkalmazás, amely egy modern, ügynök-alapú architektúrát mutat be. A megoldás középpontjában egy Azure Container App áll, amely hosztolja a fő alkalmazáskódot, mely feldolgozza a felhasználói inputot és intelligens válaszokat generál egy AI ügynök segítségével. 
-      
-      Az architektúra a Microsoft Foundry Projectet használja AI képességek alapjaként, amely kapcsolódik az Azure AI szolgáltatásokhoz, amelyek biztosítják az alapul szolgáló nyelvi modelleket (például a gpt-4.1-mini) és az ügynök funkciókat. A felhasználói interakciók egy React alapú frontendből a FastAPI backendhez folynak, amely kommunikál az AI ügynökszolgáltatással a kontextuális válaszok generálásához. 
-      
-      A rendszer tudás-visszakeresési képességeket is magában foglal vagy fájlkeresés, vagy az Azure AI Search szolgáltatás használatával, lehetővé téve az ügynök számára, hogy hozzáférjen és hivatkozzon a feltöltött dokumentumokból származó információkra. Az üzemeltetési kiválóság érdekében az architektúra átfogó monitorozást tartalmaz az Application Insights és Log Analytics Workspace által a nyomkövetéshez, naplózáshoz és teljesítményoptimalizáláshoz. 
-      
-      Az Azure Storage blob tárolást biztosít az alkalmazás adatainak és fájlfeltöltéseknek, míg a Managed Identity biztonságos hozzáférést garantál az Azure erőforrások között hitelesítő adatok tárolása nélkül. Az egész megoldás skálázhatóságra és karbantarthatóságra van tervezve, a konténerizált alkalmazás automatikusan skálázódik a terhelés függvényében, miközben beépített biztonságot, monitorozást és CI/CD képességeket biztosít az Azure kezelt szolgáltatások ökoszisztémáján keresztül.
+## 4. Ellenőrizd a megállapításaidat
 
-![Architecture](../../../../../translated_images/hu/architecture.48d94861e6e6cdc0.webp)
+- Azonosítsd az API útvonalat, az agent interakciót és a lekérési kódot egy minta kérdés alapján.
+- Magyarázd el, melyik identitás fér hozzá a Foundry-hoz, és melyik konfiguráció választja ki annak végpontját.
+- Találd meg a tényleges pre-up és post-deploy szkripteket és azok hibakezelési viselkedését.
+- Sorold fel az esetleges függőségeket vagy hiányzó opcionális funkciókat a telepítésedben.
 
----
-
-## 3. Tárház szerkezet
-
-!!! prompt "KÉRÉS: Magyarázd el a sablon könyvtárszerkezetét. Kezdd egy vizuális hierarchikus ábrával."
-
-??? info "VÁLASZ: Vizuális hierarchikus ábra"
-
-      ```bash title="" 
-      get-started-with-ai-agents/
-      ├── 📋 Konfiguráció és beállítás
-      │   ├── azure.yaml                    # Azure Developer CLI konfiguráció
-      │   ├── docker-compose.yaml           # Helyi fejlesztő konténerek
-      │   ├── pyproject.toml                # Python projekt konfiguráció
-      │   ├── requirements-dev.txt          # Fejlesztési függőségek
-      │   └── .devcontainer/                # VS Code fejlesztői konténer beállítása
-      │
-      ├── 🏗️ Infrastruktúra (infra/)
-      │   ├── main.bicep                    # Fő infrastrukturális sablon
-      │   ├── api.bicep                     # API-specifikus erőforrások
-      │   ├── main.parameters.json          # Infrastruktúra paraméterek
-      │   └── core/                         # Moduláris infrastruktúra komponensek
-      │       ├── ai/                       # AI szolgáltatás konfigurációk
-      │       ├── host/                     # Host infrastruktúra
-      │       ├── monitor/                  # Monitorozás és naplózás
-      │       ├── search/                   # Azure AI Search beállítás
-      │       ├── security/                 # Biztonság és identitás
-      │       └── storage/                  # Tárfiók konfigurációk
-      │
-      ├── 💻 Alkalmazás forráskód (src/)
-      │   ├── api/                          # Backend API
-      │   │   ├── main.py                   # FastAPI alkalmazás belépési pont
-      │   │   ├── routes.py                 # API útvonal definíciók
-      │   │   ├── search_index_manager.py   # Keresési funkciók
-      │   │   ├── data/                     # API adatok kezelése
-      │   │   ├── static/                   # Statikus webes erőforrások
-      │   │   └── templates/                # HTML sablonok
-      │   ├── frontend/                     # React/TypeScript frontend
-      │   │   ├── package.json              # Node.js függőségek
-      │   │   ├── vite.config.ts            # Vite build konfiguráció
-      │   │   └── src/                      # Frontend forráskód
-      │   ├── data/                         # Minta adatfájlok
-      │   │   └── embeddings.csv            # Előre kalkulált embeddingek
-      │   ├── files/                        # Tudásbázis fájlok
-      │   │   ├── customer_info_*.json      # Ügyféladat minták
-      │   │   └── product_info_*.md         # Termék dokumentációk
-      │   ├── Dockerfile                    # Konténer konfiguráció
-      │   └── requirements.txt              # Python függőségek
-      │
-      ├── 🔧 Automatizálás és szkriptek (scripts/)
-      │   ├── postdeploy.sh/.ps1           # Telepítés utáni beállítások
-      │   ├── setup_credential.sh/.ps1     # Hitelesítés konfiguráció
-      │   ├── validate_env_vars.sh/.ps1    # Környezeti változók érvényesítése
-      │   └── resolve_model_quota.sh/.ps1  # Modelkvóta kezelése
-      │
-      ├── 🧪 Tesztelés és értékelés
-      │   ├── tests/                        # Egység- és integrációs tesztek
-      │   │   └── test_search_index_manager.py
-      │   ├── evals/                        # Ügynök értékelő keretrendszer
-      │   │   ├── evaluate.py               # Értékelő futtató
-      │   │   ├── eval-queries.json         # Teszt lekérdezések
-      │   │   └── eval-action-data-path.json
-      │   ├── sandbox/                      # Fejlesztői játszótér
-      │   │   ├── 1-quickstart.py           # Gyorsindítási példák
-      │   │   └── aad-interactive-chat.py   # Hitelesítési példák
-      │   └── airedteaming/                 # AI biztonsági értékelés
-      │       └── ai_redteaming.py          # Red team tesztelés
-      │
-      ├── 📚 Dokumentáció (docs/)
-      │   ├── deployment.md                 # Telepítési útmutató
-      │   ├── local_development.md          # Helyi beállítási utasítások
-      │   ├── troubleshooting.md            # Gyakori problémák és megoldások
-      │   ├── azure_account_setup.md        # Azure előfeltételek
-      │   └── images/                       # Dokumentációs erőforrások
-      │
-      └── 📄 Projekt metaadatok
-         ├── README.md                     # Projekt áttekintés
-         ├── CODE_OF_CONDUCT.md           # Közösségi irányelvek
-         ├── CONTRIBUTING.md              # Hozzájárulási útmutató
-         ├── LICENSE                      # Licencfeltételek
-         └── next-steps.md                # Telepítés utáni útmutatás
-      ```
-
-### 3.1. Alkalmazás architektúra magja
-
-Ez a sablon egy **full-stack webalkalmazás** mintát követ az alábbiakkal:
-
-- **Backend**: Python FastAPI Azure AI integrációval
-- **Frontend**: TypeScript/React Vite build rendszerrel
-- **Infrastruktúra**: Azure Bicep sablonok felhő erőforrásokhoz
-- **Konténerizáció**: Docker az egységes telepítésért
-
-### 3.2 Infra mint kód (bicep)
-
-Az infrastruktúra réteg **Azure Bicep** sablonokat használ moduláris szervezésben:
-
-   - **`main.bicep`**: Minden Azure erőforrást összehangol
-   - **`core/` modulok**: Újrahasználható komponensek különféle szolgáltatásokhoz
-      - AI szolgáltatások (Microsoft Foundry modellek, AI Search)
-      - Konténer hosztolás (Azure Container Apps)
-      - Monitorozás (Application Insights, Log Analytics)
-      - Biztonság (Key Vault, Managed Identity)
-
-### 3.3 Alkalmazás forráskód (`src/`)
-
-**Backend API (`src/api/`)**:
-
-- FastAPI alapú REST API
-- Foundry Agents integráció
-- Keresési index kezelés tudás-visszakereséshez
-- Fájl feltöltés és feldolgozás képességek
-
-**Frontend (`src/frontend/`)**:
-
-- Modern React/TypeScript SPA
-- Vite gyors fejlesztéshez és optimalizált buildhez
-- Csevegő felület ügynök interakciókhoz
-
-**Tudásbázis (`src/files/`)**:
-
-- Minta ügyfél- és termékadatok
-- Fájl alapú tudás-visszakeresés bemutatása
-- JSON és Markdown formátumú példák
-
-
-### 3.4 DevOps és automatizálás
-
-**Szkriptek (`scripts/`)**:
-
-- Platformfüggetlen PowerShell és Bash szkriptek
-- Környezet validáció és beállítás
-- Telepítés utáni konfiguráció
-- Modellkvóta menedzsment
-
-**Azure Developer CLI integráció**:
-
-- `azure.yaml` konfiguráció az `azd` munkafolyamatokhoz
-- Automatizált felügyelet és telepítés
-- Környezeti változók kezelése
-
-### 3.5 Tesztelés és minőségbiztosítás
-
-**Értékelő keretrendszer (`evals/`)**:
-
-- Ügynök teljesítmény értékelése
-- Lekérdezés-válasz minőség tesztelése
-- Automatizált értékelő csővezeték
-
-**AI biztonság (`airedteaming/`)**:
-
-- Red team tesztelés AI biztonságához
-- Biztonsági sebezhetőség vizsgálat
-- Felelős AI gyakorlatok
-
----
-
-## 4. Gratulálunk 🏆
-
-Sikeresen használtad a GitHub Copilot Chat-et MCP szerverekkel a tárház felfedezéséhez.
-
-- [X] Aktiváltad a GitHub Copilotot Azure-hoz
-- [X] Megértetted az alkalmazás architektúráját
-- [X] Felfedezted az AZD sablon szerkezetét
-
-Ez egy áttekintést ad a sablon _infrastruktúra mint kód_ eszközeiről. Következő lépésként megnézzük az AZD konfigurációs fájlját.
+Folytasd a [Sablon konfigurálása](4-Configure-AI-Template.md) tematikával.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Jogi nyilatkozat**:  
-Ez a dokumentum az AI fordító szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár a pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Kritikus információk esetén szakmai emberi fordítást javaslunk. Nem vállalunk felelősséget az ebből a fordításból eredő félreértésekért vagy téves értelmezésekért.
+**Jogi nyilatkozat**:
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Fontos információk esetén professzionális emberi fordítást javasolunk. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely ebből a fordításból ered.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

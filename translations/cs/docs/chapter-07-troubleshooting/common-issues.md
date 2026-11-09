@@ -1,175 +1,187 @@
 # Běžné problémy a řešení
 
 **Navigace kapitolou:**
-- **📚 Domů kurzu**: [AZD pro začátečníky](../../README.md)
+- **📚 Domovská stránka kurzu**: [AZD pro začátečníky](../../README.md)
 - **📖 Aktuální kapitola**: Kapitola 7 - Řešení problémů a ladění
-- **⬅️ Předchozí kapitola**: [Kapitola 6: Kontroly před nasazením](../chapter-06-pre-deployment/preflight-checks.md)
+- **⬅️ Předchozí kapitola**: [Kapitola 6: Předletové kontroly](../chapter-06-pre-deployment/preflight-checks.md)
 - **➡️ Další**: [Průvodce laděním](debugging.md)
-- **🚀 Další kapitola**: [Kapitola 8: Produkční a podnikové vzory](../chapter-08-production/production-ai-practices.md)
+- **🚀 Další kapitola**: [Kapitola 8: Produkční & podnikové vzory](../chapter-08-production/production-ai-practices.md)
 
 ## Úvod
 
-Tento komplexní průvodce řešením problémů pokrývá nejčastěji se vyskytující potíže při používání Azure Developer CLI. Naučíte se diagnostikovat, řešit a odstranit běžné problémy s ověřováním, nasazením, poskytováním infrastruktury a konfigurací aplikací. Každý problém obsahuje podrobné příznaky, hlavní příčiny a postupy k jeho řešení krok za krokem.
+Tento komplexní průvodce řešením problémů zahrnuje nejčastější potíže při používání Azure Developer CLI. Naučte se diagnostikovat, řešit a odstranit běžné problémy s autentizací, nasazením, provisioningem infrastruktury a konfigurací aplikací. Každý problém obsahuje podrobné příznaky, příčiny a postupy řešení krok za krokem.
 
-## Vzdělávací cíle
+## Cíle učení
 
-Dokončením tohoto průvodce budete:
-- Mistrovsky ovládat diagnostické techniky pro Azure Developer CLI
-- Rozumět běžným problémům s ověřováním a oprávněními a jejich řešením
-- Řešit selhání nasazení, chyby při poskytování infrastruktury a potíže s konfigurací
-- Implementovat proaktivní sledování a strategie pro ladění
+Po dokončení tohoto průvodce budete:
+- Ovládat diagnostické techniky pro problémy Azure Developer CLI
+- Rozumět běžným problémům s autentizací a oprávněními a jejich řešením
+- Řešit selhání nasazení, chyby provisioningu infrastruktury a konfigurační problémy
+- Implementovat proaktivní strategie monitorování a ladění
 - Používat systematické metodiky řešení složitých problémů
-- Konfigurovat správné protokolování a monitorování k předcházení budoucích problémů
+- Nastavit správné protokolování a monitorování pro prevenci budoucích potíží
 
 ## Výsledky učení
 
 Po dokončení budete schopni:
 - Diagnostikovat problémy Azure Developer CLI pomocí vestavěných diagnostických nástrojů
-- Samostatně řešit problémy s ověřováním, předplatným a oprávněními
-- Efektivně řešit selhání nasazení a chyby poskytování infrastruktury
-- Ladit potíže s konfigurací aplikací a problémy specifické pro prostředí
-- Implementovat monitorování a upozornění k proaktivní identifikaci možných potíží
-- Aplikovat osvědčené postupy pro protokolování, ladění a řešení problémů
+- Samostatně řešit problémy s autentizací, předplatným a oprávněními
+- Efektivně řešit selhání nasazení a chyby provisioningu infrastruktury
+- Ladit problémy konfigurace aplikací a specifické problémy prostředí
+- Implementovat monitorování a upozornění pro proaktivní identifikaci potenciálních problémů
+- Uplatnit osvědčené postupy protokolování, ladění a pracovních postupů řešení problémů
 
 ## Rychlá diagnostika
 
-Než se pustíte do konkrétních problémů, spusťte tyto příkazy pro shromáždění diagnostických informací:
+> Nahraďte příklady jmen/ID hodnotami z vašeho prostředí. Fragmenty Bash, Bicep, JavaScriptu a souborů s parametry jsou níže označeny samostatně; nejde o jeden spustitelný skript. Před sdílením diagnostiky si zkontrolujte destruktivní operace a smažte tajné údaje. `azd monitor --logs` otevře prohlížeč; nezobrazuje terminálové logy.
+
+Než se vrhnete na konkrétní problémy, spusťte tyto příkazy pro získání diagnostických údajů:
 
 ```bash
-# Zkontrolujte verzi a stav azd
+# Check azd version and health
 azd version
 azd config show
 
-# Ověřte autentizaci Azure
+# Verify Azure authentication
 az account show
 az account list
 
-# Zkontrolujte aktuální prostředí
+# Check current environment
 azd env list
 azd env get-values
 
-# Povolit ladicí protokolování
-export AZD_DEBUG=true
+# Enable debug logging for the command being investigated
 azd <command> --debug
 ```
 
-## Problémy s ověřováním
+## Problémy s autentizací
 
-### Problém: "Nepodařilo se získat přístupový token"
+### Problém: "Nepodařilo se získat access token"
 **Příznaky:**
-- `azd up` selhává s chybami ověřování
-- Příkazy vrací "neautorizováno" nebo "přístup odepřen"
+- `azd up` končí chybami autentizace
+- Příkazy vrací „neautorizováno“ nebo „přístup odepřen“
 
 **Řešení:**
 ```bash
-# 1. Znovu se ověřte pomocí Azure CLI
+# 1. Authenticate azd separately (Azure CLI login alone may not authenticate azd)
+azd auth login
+azd auth login --check-status --output json
+
+# 2. Authenticate Azure CLI when using az commands
 az login
 az account show
 
-# 2. Vymažte uložené přihlašovací údaje
+# 2. Clear cached credentials
 az account clear
 az login
 
-# 3. Použijte tok zařízení (pro systémy bez hlavy)
+# 3. Use device code flow (for headless systems)
 az login --use-device-code
 
-# 4. Nastavte explicitní předplatné
+# 4. Set explicit subscription
 az account set --subscription "your-subscription-id"
-azd config set defaults.subscription "your-subscription-id"
+azd env set AZURE_SUBSCRIPTION_ID "your-subscription-id"
 ```
 
-### Problém: "Nedostatečná oprávnění" během nasazení
+### Problém: „Nedostatečná oprávnění“ během nasazení
 **Příznaky:**
-- Nasazení selhává s chybami oprávnění
-- Nelze vytvořit určité Azure zdroje
+- Nasazení selhává kvůli chybám oprávnění
+- Nelze vytvořit některé Azure zdroje
 
 **Řešení:**
 ```bash
-# 1. Zkontrolujte svá přiřazení rolí v Azure
+# 1. Check your Azure role assignments
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# 2. Ujistěte se, že máte požadované role
-# - Přispěvatel (pro vytváření zdrojů)
-# - Správce přístupu uživatelů (pro přiřazení rolí)
+# 2. Ensure you have required roles
+# - Contributor (for resource creation)
+# - User Access Administrator (for role assignments)
 
-# 3. Kontaktujte správce Azure pro správná oprávnění
+# 3. Contact your Azure administrator for proper permissions
 ```
 
-### Problém: Problémy s ověřováním více tenantů
+### Problém: Problémy s multi-tenant autentizací
 **Řešení:**
 ```bash
-# 1. Přihlaste se s konkrétním tenantem
+# 1. Login with specific tenant
 az login --tenant "your-tenant-id"
 
-# 2. Nastavte tenant v konfiguraci
-azd config set auth.tenantId "your-tenant-id"
+# 2. Authenticate azd with that tenant too
+azd auth login --tenant-id "your-tenant-id"
 
-# 3. Vymažte cache tenantů při přepínání tenantů
+# 3. Clear tenant cache if switching tenants
 az account clear
 ```
 
-## 🏗️ Chyby poskytování infrastruktury
+## 🏗️ Chyby při provisioningu infrastruktury
 
-### Problém: Kolize názvů zdrojů
+### Problém: Konflikty názvů zdrojů
 **Příznaky:**
-- Chyby "Název zdroje již existuje"
-- Selhání nasazení při vytváření zdrojů
+- Chyby „Jméno zdroje již existuje“
+- Nasazení selhává při vytváření zdroje
 
 **Řešení:**
-```bash
-# 1. Použijte jedinečné názvy zdrojů s tokeny
-# Ve vašem Bicep šabloně:
+```bicep
+// 1. Fragment inside your Bicep template
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
+// Inside a resource declaration:
 name: '${applicationName}-${resourceToken}'
-
-# 2. Změňte název prostředí
-azd env new my-app-dev-$(whoami)-$(date +%s)
-
-# 3. Ukliďte existující zdroje
-azd down --force --purge
 ```
 
-### Problém: Nedostupná lokalita/region
+```bash
+# 2. Change environment name
+azd env new my-app-dev-$(whoami)-$(date +%s)
+
+# 3. Delete ONLY a disposable environment after inspecting it and backing up data
+azd down
+```
+
+### Problém: Poloha/region není dostupný
 **Příznaky:**
-- "Lokalita 'xyz' není dostupná pro typ zdroje"
+- „Poloha 'xyz' není dostupná pro typ zdroje“
 - Některé SKU nejsou v daném regionu dostupné
 
 **Řešení:**
 ```bash
-# 1. Zkontrolujte dostupná umístění pro typy zdrojů
+# 1. Check available locations for resource types
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. Použijte běžně dostupné regiony
-azd config set defaults.location eastus2
-# nebo
+# 2. For a NEW environment choose a region supported by all required services
 azd env set AZURE_LOCATION eastus2
 
-# 3. Zkontrolujte dostupnost služby podle regionu
-# Navštivte: https://azure.microsoft.com/global-infrastructure/services/
+# 3. Check service availability by region
+# Visit: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
-### Problém: Překročení kvóty
+Změna proměnné polohy neprovádí migraci existujících zdrojů. Existující resource group nebo zdroj může změnu polohy odmítnout; použijte samostatné prostředí pro regionální nové nasazení.
+
+### Problém: Chyby kvóty překročeny
 **Příznaky:**
-- "Překročena kvóta pro typ zdroje"
-- "Dosažen maximální počet zdrojů"
+- „Kvóta překročena pro typ zdroje“
+- „Maximální počet zdrojů dosažen“
 
 **Řešení:**
 ```bash
-# 1. Zkontrolujte aktuální využití kvóty
+# 1. Check current quota usage
 az vm list-usage --location eastus2 -o table
 
-# 2. Požádejte o zvýšení kvóty přes portál Azure
-# Přejděte na: Předplatná > Využití + kvóty
+# 2. Request quota increase through Azure portal
+# Go to: Subscriptions > Usage + quotas
 
-# 3. Používejte menší SKU pro vývoj
-# V main.parameters.json:
+```
+
+Pro vývoj zvolte podporovanou menší SKU v `infra/main.parameters.json`:
+
+```json
 {
   "appServiceSku": {
-    "value": "B1"  // Instead of P1v3
+    "value": "B1"
   }
 }
+```
 
-# 4. Vyčistěte nepoužívané zdroje
+```bash
+# 4. Clean up unused resources
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
@@ -180,16 +192,16 @@ az resource list --query "[?contains(name, 'unused')]" -o table
 
 **Řešení:**
 ```bash
-# 1. Ověřte syntaxi Bicep
+# 1. Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# 2. Použijte Bicep linter
+# 2. Use Bicep linter
 az bicep lint --file infra/main.bicep
 
-# 3. Zkontrolujte syntaxi souboru parametrů
+# 3. Check parameter file syntax
 cat infra/main.parameters.json | jq '.'
 
-# 4. Náhled změn nasazení
+# 4. Preview deployment changes
 azd provision --preview
 ```
 
@@ -197,298 +209,299 @@ azd provision --preview
 
 ### Problém: Selhání sestavení
 **Příznaky:**
-- Aplikace se nepodaří sestavit během nasazení
-- Chyby instalace balíčků
+- Aplikace během nasazení nesestaví
+- Chyby při instalaci balíčků
 
 **Řešení:**
 ```bash
-# 1. Zkontrolujte výstup sestavení s ladicím příznakem
-azd deploy --service web --debug
+# 1. Check build output with debug flag
+azd deploy web --debug
 
-# 2. Zobrazit stav nasazené služby
+# 2. View deployed service status
 azd show
 
-# 3. Otestujte sestavení lokálně
+# 3. Test build locally
 cd src/web
 npm install
 npm run build
 
-# 3. Zkontrolujte kompatibilitu verzí Node.js/Python
-node --version  # Mělo by odpovídat nastavením v azure.yaml
+# 3. Check Node.js/Python version compatibility
+node --version  # Should match azure.yaml settings
 python --version
 
-# 4. Vyčistit mezipaměť sestavení
-rm -rf node_modules package-lock.json
-npm install
+# 4. Clear build cache
+# Preserve the committed dependency lock for reproducibility
+npm ci
 
-# 5. Zkontrolujte Dockerfile, pokud používáte kontejnery
+# 5. Check Dockerfile if using containers
 docker build -t test-image .
 docker run --rm test-image
 ```
 
-### Problém: Selhání nasazení kontejnerů
+### Problém: Selhání nasazení kontejneru
 **Příznaky:**
 - Kontejnerové aplikace se nespustí
-- Chyby stažení image
+- Chyby při stahování obrazu
 
 **Řešení:**
 ```bash
-# 1. Otestujte sestavení Dockeru lokálně
+# 1. Test Docker build locally
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Zkontrolujte protokoly kontejneru pomocí Azure CLI
+# 2. Check container logs using Azure CLI
 az containerapp logs show --name my-app --resource-group my-rg --follow
 
-# 3. Sledujte aplikaci přes azd
+# 3. Monitor application through azd
 azd monitor --logs
 
-# 3. Ověřte přístup do registru kontejnerů
+# 3. Verify container registry access
 az acr login --name myregistry
 
-# 4. Zkontrolujte konfiguraci kontejnerové aplikace
+# 4. Check container app configuration
 az containerapp show --name my-app --resource-group my-rg
 ```
 
 ### Problém: Selhání připojení k databázi
 **Příznaky:**
 - Aplikace se nemůže připojit k databázi
-- Chyby vypršení časového limitu připojení
+- Chyby timeoutu připojení
 
 **Řešení:**
 ```bash
-# 1. Zkontrolujte pravidla firewallu databáze
+# 1. Check database firewall rules
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
-# 2. Otestujte konektivitu z aplikace
-# Dočasně přidejte do vaší aplikace:
+# 2. Test connectivity from application
+# Add to your app temporarily:
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
-# 3. Ověřte formát připojovacího řetězce
+# 3. Verify connection string format
 azd env get-values | grep DATABASE
 
-# 4. Zkontrolujte stav databázového serveru
+# 4. Check database server status
 az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```
 
-## 🔧 Problémy s konfigurací
+## 🔧 Konfigurační problémy
 
 ### Problém: Proměnné prostředí nefungují
 **Příznaky:**
-- Aplikace nemůže číst konfigurační hodnoty
-- Proměnné prostředí vypadají prázdné
+- Aplikace nedokáže načíst konfigurační hodnoty
+- Proměnné prostředí se jeví jako prázdné
 
 **Řešení:**
 ```bash
-# 1. Ověřte, že jsou nastaveny proměnné prostředí
+# 1. Verify environment variables are set
 azd env get-values
-azd env get DATABASE_URL
+azd env get-value DATABASE_URL
 
-# 2. Zkontrolujte názvy proměnných v azure.yaml
-cat azure.yaml | grep -A 5 env:
+# 2. Check how your Bicep/template maps values into the deployed app.
+# azd env set updates local environment values; it does not directly update runtime settings.
 
-# 3. Restartujte aplikaci
-azd deploy --service web
+# 3. Restart the application
+azd deploy web
 
-# 4. Zkontrolujte konfiguraci aplikační služby
+# 4. Check app service configuration
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
-### Problém: Problémy s SSL/TLS certifikáty
+### Problém: Problémy s certifikáty SSL/TLS
 **Příznaky:**
 - HTTPS nefunguje
-- Chyby validace certifikátu
+- Chyby ověření certifikátu
 
 **Řešení:**
 ```bash
-# 1. Zkontrolujte stav SSL certifikátu
+# 1. Check SSL certificate status
 az webapp config ssl list --resource-group myrg
 
-# 2. Povolit pouze HTTPS
+# 2. Enable HTTPS only
 az webapp update --name myapp --resource-group myrg --https-only true
 
-# 3. Přidejte vlastní doménu (pokud je potřeba)
+# 3. Add custom domain (if needed)
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
 ### Problém: Problémy s konfigurací CORS
 **Příznaky:**
 - Frontend nemůže volat API
-- Žádost z jiného původu je blokována
+- Cross-origin request zablokován
 
 **Řešení:**
 ```bash
-# 1. Nakonfigurujte CORS pro App Service
+# 1. Configure CORS for App Service
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# 2. Aktualizujte API pro správu CORS
-# V Express.js:
+```
+
+2. Aktualizujte vaši existující Express aplikaci (s importem `cors`):
+
+```javascript
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
+```
 
-# 3. Zkontrolujte, zda běží na správných URL
+```bash
+# 3. Check if running on correct URLs
 azd show
 ```
 
-## 🌍 Problémy se správou prostředí
+## 🌍 Problémy s řízením prostředí
 
 ### Problém: Problémy s přepínáním prostředí
 **Příznaky:**
 - Používá se nesprávné prostředí
-- Konfigurace se správně nepřepíná
+- Konfigurace se nepřepíná správně
 
 **Řešení:**
 ```bash
-# 1. Vypsat všechna prostředí
+# 1. List all environments
 azd env list
 
-# 2. Explicitně vybrat prostředí
+# 2. Explicitly select environment
 azd env select production
 
-# 3. Ověřit aktuální prostředí
+# 3. Verify current environment
 azd env list
 
-# 4. Vytvořit nové prostředí, pokud je poškozené
+# 4. Create new environment if corrupted
 azd env new production-new
 azd env select production-new
 ```
 
 ### Problém: Poškození prostředí
 **Příznaky:**
-- Prostředí ukazuje neplatný stav
+- Prostředí vykazuje neplatný stav
 - Zdroje neodpovídají konfiguraci
 
 **Řešení:**
 ```bash
-# 1. Aktualizujte stav prostředí
+# 1. Refresh environment state
 azd env refresh
 
-# 2. Resetujte konfiguraci prostředí
+# 2. Reset environment configuration
 azd env new production-reset
-# Zkopírujte požadované proměnné prostředí
+# Copy over required environment variables
 azd env set DATABASE_URL "your-value"
 
-# 3. Importujte existující zdroje (pokud je to možné)
-# Ručně aktualizujte .azure/production/config.json s ID zdrojů
+# 3. azd env refresh reads outputs of a previous deployment; it does not
+# import arbitrary existing resources or reconcile template drift.
+# To adopt resources, use the template's documented existing-resource parameters.
 ```
 
-## 🔍 Problémy s výkonem
+## 🔍 Výkonové problémy
 
-### Problém: Pomalá doba nasazení
+### Problém: Pomalé doby nasazení
 **Příznaky:**
 - Nasazení trvá příliš dlouho
-- Vypršení časového limitu během nasazení
+- Timeouty během nasazení
 
 **Řešení:**
 ```bash
-# 1. Nasazení specifických služeb pro rychlejší iteraci
-azd deploy --service web
-azd deploy --service api
+# 1. Deploy specific services for faster iteration
+azd deploy web
+azd deploy api
 
-# 2. Použijte nasazení pouze kódu, pokud se infrastruktura nezměnila
-azd deploy  # Rychlejší než azd up
+# 2. Use code-only deployment when infrastructure unchanged
+azd deploy  # Faster than azd up
 
-# 3. Optimalizujte proces sestavení
-# V package.json:
-"scripts": {
-  "build": "webpack --mode=production --optimize-minimize"
-}
+# 3. Optimize the project's actual build script and image layers.
 
-# 4. Zkontrolujte umístění zdrojů (použijte stejný region)
-azd config set defaults.location eastus2
+# 4. Check resource locations (use same region)
+# Do not change AZURE_LOCATION to fix the latency of an existing deployment.
 ```
 
 ### Problém: Problémy s výkonem aplikace
 **Příznaky:**
-- Pomalé reakce
-- Vysoké využití zdrojů
+- Pomalu reaguje
+- Vysoká spotřeba zdrojů
 
 **Řešení:**
 ```bash
-# 1. Zvýšit zdroje
-# Aktualizujte SKU v main.parameters.json:
-"appServiceSku": {
-  "value": "S2"  // Scale up from B1
-}
+# 1. Scale up resources
+# Update the SKU parameter in infra/main.parameters.json, then review and
+# provision infrastructure changes. azd deploy alone does not apply SKU changes.
+azd provision --preview
 
-# 2. Povolit monitorování pomocí Application Insights
+# 2. Enable Application Insights monitoring
 azd monitor --overview
 
-# 3. Zkontrolujte protokoly aplikace v Azure
+# 3. Check application logs in Azure
 az webapp log tail --name myapp --resource-group myrg
-# nebo pro Container Apps:
+# or for Container Apps:
 az containerapp logs show --name myapp --resource-group myrg --follow
 
-# 4. Implementujte ukládání do mezipaměti
-# Přidejte Redis cache do své infrastruktury
+# 4. Implement caching
+# Add Redis cache to your infrastructure
 ```
 
 ## 🛠️ Nástroje a příkazy pro řešení problémů
 
-### Příkazy pro ladění
+### Ladící příkazy
 ```bash
-# Komplexní ladění
-export AZD_DEBUG=true
-azd up --debug 2>&1 | tee debug.log
+# Comprehensive debugging
+# Only rerun a mutating command when retrying is appropriate.
+azd show --debug
 
-# Zkontrolujte verzi azd
+# Check azd version
 azd version
 
-# Zobrazit aktuální konfiguraci
+# View current configuration
 azd config show
 
-# Otestovat připojení
+# Test connectivity
 curl -v https://myapp.azurewebsites.net/health
 ```
 
-### Analýza protokolů
+### Analýza logů
 ```bash
-# Protokoly aplikace přes Azure CLI
+# Application logs via Azure CLI
 az webapp log tail --name myapp --resource-group myrg
 
-# Monitorovat aplikaci pomocí azd
+# Monitor application with azd
 azd monitor --logs
 azd monitor --live
 
-# Protokoly zdrojů Azure
-az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
+# Azure resource logs
+az monitor activity-log list --resource-group myrg --offset 1h --max-events 50
 
-# Protokoly kontejneru (pro kontejnerové aplikace)
+# Container logs (for Container Apps)
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
 ### Vyšetřování zdrojů
 ```bash
-# Vypsat všechny zdroje
+# List all resources
 az resource list --resource-group myrg -o table
 
-# Zkontrolovat stav zdroje
+# Check resource status
 az webapp show --name myapp --resource-group myrg --query state
 
-# Diagnostika sítě
+# Network diagnostics
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
 ## 🆘 Získání další pomoci
 
 ### Kdy eskalovat
-- Problémy s ověřováním přetrvávají i po vyzkoušení všech řešení
+- Problémy s autentizací přetrvávají i po vyzkoušení všech řešení
 - Problémy s infrastrukturou Azure služeb
 - Problémy s fakturací nebo předplatným
 - Bezpečnostní obavy nebo incidenty
 
 ### Podpůrné kanály
 ```bash
-# 1. Zkontrolujte stav služby Azure
+# 1. Check Azure Service Health
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
-# 2. Vytvořte žádost o podporu Azure
-# Přejděte na: https://portal.azure.com -> Nápověda + podpora
+# 2. Create Azure support ticket
+# Go to: https://portal.azure.com -> Help + support
 
-# 3. Komunitní zdroje
-# - Stack Overflow: tag azure-developer-cli
+# 3. Community resources
+# - Stack Overflow: azure-developer-cli tag
 # - GitHub Issues: https://github.com/Azure/azure-dev/issues
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
@@ -498,12 +511,12 @@ Před kontaktováním podpory shromážděte:
 - Výstup `azd version`
 - Výstup `azd config show`
 - Výstup `azd show` (aktuální stav nasazení)
-- Chybové zprávy (plný text)
-- Postup reprodukce problému
-- Detaily prostředí (`azd env get-values`)
-- Časovou osu, kdy se problém objevil
+- Chybové zprávy (celý text)
+- Kroky vedoucí k reprodukci problému
+- Očistěné údaje o prostředí (nikdy nesdílejte holý `azd env get-values`, který může obsahovat tajné informace)
+- Časová osa, kdy problém začal
 
-### Skript pro sběr protokolů
+### Skript pro sběr logů
 ```bash
 #!/bin/bash
 # collect-debug-info.sh
@@ -518,7 +531,7 @@ az --version >> debug-logs/system-info.txt
 echo "Configuration:" > debug-logs/config.txt
 azd config show >> debug-logs/config.txt
 azd env list >> debug-logs/config.txt
-azd env get-values >> debug-logs/config.txt
+# Do not collect environment values automatically: they can contain credentials.
 
 echo "Current deployment status:" > debug-logs/status.txt
 azd show >> debug-logs/status.txt
@@ -530,71 +543,73 @@ echo "Debug information collected in debug-logs/"
 
 ### Kontrolní seznam před nasazením
 ```bash
-# 1. Ověřit autentizaci
+# 1. Validate authentication
 az account show
 
-# 2. Zkontrolovat kvóty a limity
+# 2. Check quotas and limits
 az vm list-usage --location eastus2
 
-# 3. Ověřit šablony
+# 3. Validate templates
 az bicep build --file infra/main.bicep
 
-# 4. Nejprve otestovat lokálně
+# 4. Test locally first
 npm run build
 npm run test
 
-# 5. Použít nasazení suchým během (dry-run)
+# 5. Use dry-run deployments
 azd provision --preview
 ```
 
 ### Nastavení monitorování
-```bash
-# Povolit Application Insights
-# Přidat do main.bicep:
+```bicep
+// Illustrative fragment, not a complete resource definition:
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   // ... configuration
 }
+```
 
-# Nastavit upozornění
+```bash
+# Example App Service PLAN CPU alert (not a site metric)
 az monitor metrics alert create \
   --name "High CPU Usage" \
   --resource-group myrg \
-  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/sites/myapp \
-  --condition "avg Percentage CPU > 80"
+  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/serverfarms/myplan \
+  --condition "avg CpuPercentage > 80"
 ```
 
 ### Pravidelná údržba
 ```bash
-# Týdenní kontroly zdravotního stavu
+# Weekly health checks (project-specific script you must implement)
 ./scripts/health-check.sh
 
-# Měsíční přehled nákladů
-az consumption usage list --billing-period-name 202401
+# Monthly cost review
+# Review current Cost Management data in the portal; Consumption API support
+# depends on your billing agreement.
 
-# Čtvrtletní bezpečnostní přehled
-az security assessment list --resource-group myrg
+# Quarterly security review
+az security assessment list
 ```
 
 ## Související zdroje
 
 - [Průvodce laděním](debugging.md) - Pokročilé techniky ladění
-- [Poskytování zdrojů](../chapter-04-infrastructure/provisioning.md) - Řešení problémů s infrastrukturou
-- [Plánování kapacity](../chapter-06-pre-deployment/capacity-planning.md) - Návody pro plánování zdrojů
-- [Výběr SKU](../chapter-06-pre-deployment/sku-selection.md) - Doporučení pro úrovně služeb
+- [Provisioning zdrojů](../chapter-04-infrastructure/provisioning.md) - Řešení problémů infrastruktury
+- [Plánování kapacity](../chapter-06-pre-deployment/capacity-planning.md) - Pokyny pro plánování zdrojů
+- [Výběr SKU](../chapter-06-pre-deployment/sku-selection.md) - Doporučení úrovně služeb
 
 ---
 
-**Tip**: Mějte tento průvodce v záložkách a odkazujte se na něj vždy, když narazíte na problém. Většina potíží už byla zaznamenána a má ověřená řešení!
+**Tip**: Tento průvodce si uložte do záložek a odkazujte se na něj vždy, když narazíte na problémy. Většina problémů již byla zaznamenána a mají zavedená řešení!
 
 ---
 
 **Navigace**
-- **Předchozí lekce**: [Poskytování zdrojů](../chapter-04-infrastructure/provisioning.md)
-- **Následující lekce**: [Průvodce laděním](debugging.md)
+- **Předchozí lekce**: [Provisioning zdrojů](../chapter-04-infrastructure/provisioning.md)
+- **Další lekce**: [Průvodce laděním](debugging.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Prohlášení o vyloučení odpovědnosti**:
-Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). I když usilujeme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v rodném jazyce by měl být považován za závazný zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo chybné interpretace vzniklé použitím tohoto překladu.
+**Prohlášení o omezení odpovědnosti**:
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o co největší přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo nesprávné interpretace vzniklé použitím tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

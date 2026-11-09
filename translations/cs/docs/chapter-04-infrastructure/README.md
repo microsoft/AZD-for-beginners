@@ -1,51 +1,54 @@
-# Kapitola 4: Infrastruktura jako kód & Nasazení
+# Kapitola 4: Infrastruktura jako kód a nasazení
 
-**📚 Kurz**: [AZD Pro Začátečníky](../../README.md) | **⏱️ Doba trvání**: 1-1.5 hodiny | **⭐ Složitost**: Středně pokročilý
+**📚 Kurz**: [AZD pro začátečníky](../../README.md) | **⏱️ Délka**: 2-3 hodiny čtení; vyhraďte si více času na cvičení s nasazením | **⭐ Složitost**: Středně pokročilý
 
 ---
 
 ## Přehled
 
-Tato kapitola pokrývá vzory Infrastruktury jako kódu (IaC) s šablonami Bicep, zřizování zdrojů a strategie nasazení pomocí Azure Developer CLI.
+Tato kapitola pokrývá vzory Infrastruktury jako kódu (IaC) s šablonami Bicep, poskytování zdrojů a strategie nasazení pomocí Azure Developer CLI.
 
-> Validováno proti `azd 1.27.1` v červenci 2026.
+> Cíl přezkumu příkazů a konfigurací: `azd 1.37.2` (listopad 2026). Naživo nebylo během přezkumu provedeno poskytování služby Azure.
 
-## Výukové cíle
+## Cíle učení
 
 Po dokončení této kapitoly budete:
 - Rozumět struktuře a syntaxi šablon Bicep
-- Zřizovat Azure zdroje pomocí `azd provision`
+- Poskytovat zdroje Azure s použitím `azd provision`
 - Nasazovat aplikace pomocí `azd deploy`
-- Implementovat blue-green a rolling strategie nasazení
+- Implementovat strategie modrozeleného (blue-green) a postupného (rolling) nasazení
 
 ---
 
 ## 📚 Lekce
 
-| # | Lekce | Popis | Doba |
+| # | Lekce | Popis | Čas |
 |---|--------|-------------|------|
-| 1 | [Provisioning Resources](provisioning.md) | Správa Azure zdrojů s AZD | 45 min |
-| 2 | [Deployment Guide](deployment-guide.md) | Strategie nasazení aplikací | 45 min |
-| 3 | [Authoring Your Own Template](custom-templates.md) | Vytváření a publikování znovu použitelných azd šablon | 30 min |
+| 1 | [Zajištění zdrojů](provisioning.md) | Správa zdrojů Azure s AZD | 45 min |
+| 2 | [Průvodce nasazením](deployment-guide.md) | Strategie nasazení aplikací | 45 min |
+| 3 | [Vytváření vlastní šablony](custom-templates.md) | Vytváření a publikování opakovaně použitelných azd šablon | 30 min |
 
 ---
 
 ## 🚀 Rychlý start
 
 ```bash
-# Inicializovat z šablony
-azd init --template azure-functions-python-v2-http
+# Initialize from template
+mkdir infrastructure-practice
+cd infrastructure-practice
+azd init --template todo-nodejs-mongo .
+azd auth login
 
-# Náhled toho, co bude vytvořeno
+# Preview what will be created
 azd provision --preview
 
-# Poskytnout pouze infrastrukturu
+# Provision infrastructure only
 azd provision
 
-# Nasadit pouze kód
+# Deploy code only
 azd deploy
 
-# Nebo obojí dohromady
+# Or both together
 azd up
 ```
 
@@ -72,11 +75,11 @@ my-project/
 
 | Příkaz | Popis |
 |---------|-------------|
-| `azd init` | Inicializace projektu |
-| `azd provision` | Vytvoření Azure zdrojů |
-| `azd deploy` | Nasazení kódu aplikace |
-| `azd up` | zřízení + nasazení |
-| `azd down` | Odstranění všech zdrojů |
+| `azd init` | Inicializovat projekt |
+| `azd provision` | Vytvořit zdroje Azure |
+| `azd deploy` | Nasadit kód aplikace |
+| `azd up` | poskytování + nasazení |
+| `azd down` | Odstranit všechny zdroje |
 
 ---
 
@@ -85,14 +88,14 @@ my-project/
 | Směr | Kapitola |
 |-----------|---------|
 | **Předchozí** | [Kapitola 3: Konfigurace](../chapter-03-configuration/README.md) |
-| **Další** | [Kapitola 5: Multi-Agentní řešení](../chapter-05-multi-agent/README.md) |
+| **Další** | [Kapitola 5: Víceagentní řešení](../chapter-05-multi-agent/README.md) |
 
 ---
 
 ## 📖 Související zdroje
 
 - [Kontroly před nasazením](../chapter-06-pre-deployment/README.md)
-- [Příklady Container App](../../examples/container-app/README.md)
+- [Příklady kontejnerových aplikací](../../examples/container-app/README.md)
 - [Příklad databázové aplikace](../../examples/database-app/README.md)
 
 ---

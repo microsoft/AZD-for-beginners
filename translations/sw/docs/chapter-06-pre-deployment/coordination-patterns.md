@@ -1,29 +1,29 @@
-# Muundo wa Mawakala Wengi
+# Mifumo ya Uratibu wa Wakala Wengi
 
-⏱️ **Muda Uliokadiriwa**: 60-75 dakika | 💰 **Gharama Ilivyokadiriwa**: ~$100-300/mwezi | ⭐ **Ukomavu**: Chenye Utaalamu
+⏱️ **Muda Unaokadiriwa**: Dakika 60-75 za kusoma; masaa kadhaa kutekeleza | 💰 **Gharama Inayokadiriwa**: hutegemea mzigo wa kazi | ⭐ **Ugumu**: Juu
 
 **📚 Njia ya Kujifunza:**
-- ← Iliyopita: [Capacity Planning](capacity-planning.md) - Uwezo wa rasilimali na mikakati ya upanuzi
-- 🎯 **Uko Hapa**: Multi-Agent Coordination Patterns (Orchestration, communication, state management)
-- → Ifuatayo: [SKU Selection](sku-selection.md) - Kuchagua huduma sahihi za Azure
-- 🏠 [Course Home](../../README.md)
+- ← Nyuma: [Mipango ya Uwezo](capacity-planning.md) - Mikakati ya kupima rasilimali na upanuzi
+- 🎯 **Uko Hapa**: Mifumo ya Uratibu wa Wakala Wengi (Utaratibu, mawasiliano, usimamizi wa hali)
+- → Ifuatayo: [Uchaguzi wa SKU](sku-selection.md) - Kuteua huduma za Azure zinazofaa
+- 🏠 [Nyumbani kwa Kozi](../../README.md)
 
 ---
 
-## Utakachojifunza
+## Utahujifunza Nini
 
-Kwa kumaliza somo hili, utapata:
-- Elewa **mitindo ya usanifu wa mawakala wengi** na lini kuyatumia
-- Tekeleza **mitindo ya uendeshaji** (kituo-kimoja, zisizo na kituo-kimoja, hierarki)
-- Buni mikakati ya **mawasiliano ya mawakala** (synchronous, asynchronous, event-driven)
-- Dhibiti **hali iliyoshirikiwa** kati ya mawakala waliogawanywa
-- Zindua **mifumo ya mawakala wengi** kwenye Azure kwa AZD
-- Tumia **mitindo ya uratibu** kwa matukio halisi ya AI
-- Fuatilia na kutatua matatizo ya mifumo ya mawakala zilizogawanywa
+Kwa kumaliza somo hili, utapitia:
+- Kuelewa mifumo ya **miundo ya wakala wengi** na lini kuzitumia
+- Kutekeleza **mifumo ya uratibu** (katika kituo kimoja, isiyo ya kituo kimoja, kwa ngazi)
+- Kubuni mikakati ya **mawasiliano ya wakala** (kwa wakati mmoja, bila wakati, inayoendeshwa na matukio)
+- Kusimamia **hali iliyogawanyika** kati ya mawakala waliosambazwa
+- Kuweka mifumo ya **wakala wengi** kwenye Azure kwa kutumia AZD
+- Kutumia **mifumo ya uratibu** kwa hali halisi za AI
+- Kuchunguza na kutatua matatizo ya mifumo ya wakala waliosambazwa
 
-## Kwa Nini Uratibu wa Mawakala Wengi Unahitajika
+## Kwa Nini Uratibu wa Wakala Wengi Ni Muhimu
 
-### Mageuzi: Kutoka kwa Wakala Mmoja hadi Mawakala Wengi
+### Mageuzi: Kutoka kwa Wakala Mmoja hadi Wakala Wengi
 
 **Wakala Mmoja (Rahisi):**
 ```
@@ -31,81 +31,83 @@ User → Agent → Response
 ```
 - ✅ Rahisi kuelewa na kutekeleza
 - ✅ Haraka kwa kazi rahisi
-- ❌ Inategemea uwezo wa mfano mmoja
-- ❌ Haiwezi kukazia kazi ngumu kwa wakati mmoja
-- ❌ Hakuna utaalamu maalum
+- ❌ Huathiriwa na uwezo wa mfano mmoja tu
+- ❌ Haiwezi kuendesha kazi ngumu kwa njia sambamba
+- ❌ Hakuna utaalam maalum
 
-**Mfumo wa Mawakala Wengi (Cha Kitaalamu):**
+**Mfumo wa Wakala Wengi (Juu):**
 ```mermaid
 graph TD
-    Orchestrator[Mratibu] --> Agent1[Wakala1<br/>Mpango]
-    Orchestrator --> Agent2[Wakala2<br/>Msimbo]
-    Orchestrator --> Agent3[Wakala3<br/>Mapitio]
-```- ✅ Mawakala maalum kwa kazi mbalimbali
+    Orchestrator[Orchestrator] --> Agent1[Agent1<br/>Plan]
+    Orchestrator --> Agent2[Agent2<br/>Code]
+    Orchestrator --> Agent3[Agent3<br/>Review]
+```
+- ✅ Wakala maalum kwa kazi maalum
 - ✅ Utekelezaji sambamba kwa kasi
 - ✅ Moduli na rahisi kudumishwa
-- ✅ Bora kwa mtiririko wa kazi ngumu
+- ✅ Bora kwa michakato ya kazi ngumu
 - ⚠️ Inahitaji mantiki ya uratibu
 
-**Mfanano**: Wakala mmoja ni kama mtu mmoja anafanya kazi zote. Mawakala wengi ni kama timu ambapo kila mshiriki ana ujuzi maalum (mtafiti, mprogramu, mrekebishaji, mwandishi) wanaofanya kazi pamoja.
+**Mfano**: Wakala mmoja ni kama mtu mmoja anayetekeleza kazi zote. Wakala wengi ni kama timu ambapo kila mshiriki ana ujuzi maalum (mtafiti, mhandisi wa programu, mkaguzi, mtaalamu wa uandishi) wakifanya kazi pamoja.
 
 ---
 
-## Mifano ya Msingi ya Uratibu
+## Mifumo Msingi ya Uratibu
 
-### Mfumo 1: Uratibu wa Mtiririko (Mnyororo wa Majukumu)
+### Mfumo 1: Uratibu wa Mfuatano (Mnyororo wa Wajibu)
 
-**Wakati wa kutumia**: Kazi lazima zimalizwe kwa mpangilio maalum, kila wakala anajenga juu ya matokeo ya awali.
+**Lini utumie**: Kazi lazima zikamilike kwa mpangilio maalum, kila wakala anaendeleza matokeo ya awali.
 
 ```mermaid
 sequenceDiagram
     participant User
     participant Orchestrator
-    participant Agent1 as Wakala wa Utafiti
-    participant Agent2 as Wakala Mwandishi
-    participant Agent3 as Wakala Mhariri
+    participant Agent1 as Research Agent
+    participant Agent2 as Writer Agent
+    participant Agent3 as Editor Agent
     
-    User->>Orchestrator: "Andika makala kuhusu AI"
-    Orchestrator->>Agent1: Fanya utafiti wa mada
-    Agent1-->>Orchestrator: Matokeo ya utafiti
-    Orchestrator->>Agent2: Andika rasimu (ukitumia utafiti)
-    Agent2-->>Orchestrator: Rasimu ya makala
-    Orchestrator->>Agent3: Hariri na boresha
-    Agent3-->>Orchestrator: Makala ya mwisho
-    Orchestrator-->>User: Makala iliyokamilishwa
+    User->>Orchestrator: "Write article about AI"
+    Orchestrator->>Agent1: Research topic
+    Agent1-->>Orchestrator: Research results
+    Orchestrator->>Agent2: Write draft (using research)
+    Agent2-->>Orchestrator: Draft article
+    Orchestrator->>Agent3: Edit and improve
+    Agent3-->>Orchestrator: Final article
+    Orchestrator-->>User: Polished article
     
-    Note over User,Agent3: Mfululizo: Kila hatua inasubiri ile iliyotangulia
+    Note over User,Agent3: Sequential: Each step waits for previous
 ```
+
 **Faida:**
-- ✅ Mtiririko wa data wazi
-- ✅ Rahisi kutatua shida
-- ✅ Mpangilio wa utekelezaji unaotarajiwa
+- ✅ Mtiririko wazi wa data
+- ✅ Rahisi kutambua makosa
+- ✅ Omba kutekelezeka kwa mpangilio unaowezekana
 
-**Mapungufu:**
-- ❌ Polepole (hakuna utendakazi sambamba)
+**Mikomo:**
+- ❌ Polepole (hakuna utekelezaji sambamba)
 - ❌ Hitilafu moja inazuia mnyororo mzima
-- ❌ Haiwezi kushughulikia kazi zinategemeana kwa karibu
+- ❌ Haiwezi kushughulikia kazi zinazotegemeana
 
-**Mifano ya Matumizi:**
-- Mnyororo wa uundaji wa maudhui (utafiti → andika → hariri → chapisha)
-- Uundaji wa msimbo (mpango → tekeleza → jaribu → weka uzalishaji)
-- Uundaji wa ripoti (ukusanyaji wa data → uchambuzi → uonyeshaji → muhtasari)
+**Mfano wa Matumizi:**
+- Mlolongo wa utengenezaji wa maudhui (tafiti → andika → hakiki → chapisha)
+- Uundaji wa msimbo (panga → tekeleza → jaribu → sambaza)
+- Uundaji wa ripoti (kusanya data → chambuzi → onyesha → muhtasari)
 
 ---
 
-### Mfumo 2: Uratibu wa Paraleli (Fan-Out/Fan-In)
+### Mfumo 2: Uratibu Sambamba (Fan-Out/Fan-In)
 
-**Wakati wa kutumia**: Kazi huru zinaweza kuendeshwa kwa wakati mmoja, matokeo yakakusanywa mwishoni.
+**Lini utumie**: Kazi huru zinaweza kukimbia kwa wakati mmoja, matokeo yachanganywe mwishoni.
 
 ```mermaid
 graph TB
-    User[Ombi la Mtumiaji]
-    Orchestrator[Mratibu]
-    Agent1[Wakala wa Uchanganuzi]
-    Agent2[Wakala wa Utafiti]
-    Agent3[Wakala wa Takwimu]
-    Aggregator[Mkusanyaji wa Matokeo]
-    Response[Jibu Jumuishi]
+    User[User Request]
+    Orchestrator[Orchestrator]
+    Agent1[Analysis Agent]
+    Agent2[Research Agent]
+    Agent3[Data Agent]
+    Aggregator[Result Aggregator]
+    Response[Combined Response]
     
     User --> Orchestrator
     Orchestrator --> Agent1
@@ -119,36 +121,37 @@ graph TB
     style Orchestrator fill:#2196F3,stroke:#1976D2,stroke-width:3px,color:#fff
     style Aggregator fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
+
 **Faida:**
 - ✅ Haraka (utekelezaji sambamba)
-- ✅ Ustahimilivu wa hitilafu (matokeo sehemu yanakubaliwa)
-- ✅ Inaweza kupanuka kwa usawa
+- ✅ Uvumilivu wa hitilafu (matokeo ya sehemu yanakubalika)
+- ✅ Inaweza kupanuka katika wima
 
-**Mapungufu:**
-- ⚠️ Matokeo yanaweza kufika bila mpangilio
-- ⚠️ Inahitaji mantiki ya ukusanyaji
-- ⚠️ Usimamizi wa hali ni mgumu
+**Mikomo:**
+- ⚠️ Matokeo yanaweza kuwasili nje ya mpangilio
+- ⚠️ Inahitaji mantiki ya kuchanganya matokeo
+- ⚠️ Usimamizi mgumu wa hali
 
-**Mifano ya Matumizi:**
-- Ukusanyaji wa data kutoka vyanzo vingi (APIs + databases + web scraping)
-- Uchambuzi wa ushindani (miundo mingi zanatoa suluhisho, bora inachaguliwa)
-- Huduma za tafsiri (kutafsiri kwa lugha nyingi kwa wakati mmoja)
+**Mfano wa Matumizi:**
+- Kukusanya data kutoka vyanzo vingi (APIs + hifadhidata + kuchambua wavuti)
+- Uchambuzi wa ushindani (mifano mingi hutengeneza suluhisho, bora hupendekezwa)
+- Huduma za tafsiri (kutafsiri lugha nyingi kwa wakati mmoja)
 
 ---
 
-### Mfumo 3: Uratibu wa Msingi wa Hierarki (Meneja-Mfanyakazi)
+### Mfumo 3: Uratibu wa Ngazi (Msimamizi-Mfanyakazi)
 
-**Wakati wa kutumia**: Midirisha ya kazi ngumu na kazi ndogo, inahitajika kusambaza.
+**Lini utumie**: Michakato ngumu yenye kazi ndogo, inahitaji kugawa majukumu.
 
 ```mermaid
 graph TB
-    Master[Mratibu Mkuu]
-    Manager1[Meneja wa Utafiti]
-    Manager2[Meneja wa Maudhui]
-    W1[Mkusanyi wa Wavuti]
-    W2[Mchambuzi wa Makala]
-    W3[Mwandishi]
-    W4[Mhariri]
+    Master[Master Orchestrator]
+    Manager1[Research Manager]
+    Manager2[Content Manager]
+    W1[Web Scraper]
+    W2[Paper Analyzer]
+    W3[Writer]
+    W4[Editor]
     
     Master --> Manager1
     Master --> Manager2
@@ -161,75 +164,77 @@ graph TB
     style Manager1 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style Manager2 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
 ```
+
 **Faida:**
-- ✅ Inashughulikia mtiririko wa kazi ngumu
+- ✅ Inasimamia michakato ngumu
 - ✅ Moduli na rahisi kudumishwa
-- ✅ Mipaka ya majukumu wazi
+- ✅ Mipaka wazi ya majukumu
 
-**Mapungufu:**
-- ⚠️ Usanifu mgumu zaidi
-- ⚠️ Ucheleweshaji mkubwa (tabaka nyingi za uratibu)
-- ⚠️ Inahitaji uendeshaji wa hali ya juu
+**Mikomo:**
+- ⚠️ Miundo tata zaidi
+- ⚠️ Muda mrefu wa kuchelewa (tabaka nyingi za uratibu)
+- ⚠️ Inahitaji utaratibu wa hali ya juu
 
-**Mifano ya Matumizi:**
-- Usindikaji wa hati za shirika (ainisha → panga → chakata → hifadhi)
-- Mnyororo wa data wa hatua nyingi (ingest → safisha → geuza → chunguza → ripoti)
-- Mifumo tata ya kiotomatiki (mipango → mgawanyo wa rasilimali → utekelezaji → ufuatiliaji)
+**Mfano wa Matumizi:**
+- Uendeshaji wa nyaraka za shirika (ainisha → peleka → fanyia kazi → arjivisha)
+- Mito ya data yenye hatua nyingi (ingiza → safisha → badilisha → chambua → ripoti)
+- Michakato tata ya ujenzi wa kiotomatiki (kupanga → kugawanya rasilimali → kutekeleza → kufuatilia)
 
 ---
 
-### Mfumo 4: Uratibu unaotokana na Matukio (Publish-Subscribe)
+### Mfumo 4: Uratibu Unaotegemea Matukio (Chapisha-Jisajili)
 
-**Wakati wa kutumia**: Mawakala yanahitaji kutenda kwa matukio, muunganisho mdogo utakapotakiwa.
+**Lini utumie**: Wakala wanahitaji kutenda kwa matukio, unganisho mwepesi unahitajika.
 
 ```mermaid
 sequenceDiagram
-    participant Agent1 as Mkusanyi wa Taarifa
-    participant EventBus as Basi ya Huduma ya Azure
-    participant Agent2 as Mchambuzi
-    participant Agent3 as Mtaarifu
-    participant Agent4 as Mweka kumbukumbu
+    participant Agent1 as Data Collector
+    participant EventBus as Azure Service Bus
+    participant Agent2 as Analyzer
+    participant Agent3 as Notifier
+    participant Agent4 as Archiver
     
-    Agent1->>EventBus: Chapisha tukio "DataIliopokelewa"
-    EventBus->>Agent2: Jisajili: Changanua data
-    EventBus->>Agent3: Jisajili: Tuma arifa
-    EventBus->>Agent4: Jisajili: Hifadhi data
+    Agent1->>EventBus: Publish "DataReceived" event
+    EventBus->>Agent2: Subscribe: Analyze data
+    EventBus->>Agent3: Subscribe: Send notification
+    EventBus->>Agent4: Subscribe: Archive data
     
-    Note over Agent1,Agent4: Wote waliojisajili hufanya usindikaji kwa kujitegemea
+    Note over Agent1,Agent4: All subscribers process independently
     
-    Agent2->>EventBus: Chapisha tukio "UchambuziUmekamilika"
-    EventBus->>Agent3: Jisajili: Tuma ripoti ya uchambuzi
+    Agent2->>EventBus: Publish "AnalysisComplete" event
+    EventBus->>Agent3: Subscribe: Send analysis report
 ```
-**Faida:**
-- ✅ Uunganisho mdogo kati ya mawakala
-- ✅ Rahisi kuongeza mawakala wapya (wanajiandikisha tu)
-- ✅ Uandishi usio wa papo kwa papo (asynchronous)
-- ✅ Ustahimilivu (uhifadhi wa ujumbe)
 
-**Mapungufu:**
-- ⚠️ Ulinganifu wa mwisho
-- ⚠️ Ugumu wa kutatua matatizo
+**Faida:**
+- ✅ Unganisho mwepesi kati ya mawakala
+- ✅ Rahisi kuongeza mawakala wapya (jisajili tu)
+- ✅ Uendeshaji bila wakati
+- ✅ Uvumilivu (uhifadhi wa ujumbe)
+
+**Mikomo:**
+- ⚠️ Kuwepo kwa muafaka wa hatimaye
+- ⚠️ Ugumu wa kutambua makosa
 - ⚠️ Changamoto za mpangilio wa ujumbe
 
-**Mifano ya Matumizi:**
-- Mifumo ya ufuatiliaji wa wakati halisi (alarms, dashibodi, logi)
-- Taarifa kwa njia nyingi (barua pepe, SMS, push, Slack)
-- Mnyororo wa usindikaji wa data (walaji wengi wa data ile ile)
+**Mfano wa Matumizi:**
+- Mifumo ya ufuatiliaji wa wakati halisi (arifa, dashibodi, kumbukumbu)
+- Arifa kwa njia mbalimbali (barua pepe, SMS, push, Slack)
+- Mito ya usindikaji wa data (wateja wengi kwa data moja)
 
 ---
 
-### Mfumo 5: Uratibu unaotegemea Makubaliano (Kura/Quorum)
+### Mfumo 5: Uratibu wa Kiasi (Kupiga Kura/Kundi)
 
-**Wakati wa kutumia**: Inahitajika makubaliano kutoka kwa mawakala wengi kabla ya kuendelea.
+**Lini utumie**: Inahitaji makubaliano kutoka kwa mawakala wengi kabla ya kuendelea.
 
 ```mermaid
 graph TB
-    Input[Kazi ya Ingizo]
-    Agent1[Wakala 1: gpt-4.1]
-    Agent2[Wakala 2: Claude]
-    Agent3[Wakala 3: Gemini]
-    Voter[Mchagua wa Makubaliano]
-    Output[Matokeo Yaliokubaliwa]
+    Input[Input Task]
+    Agent1[Agent 1: gpt-4.1]
+    Agent2[Agent 2: Claude]
+    Agent3[Agent 3: Gemini]
+    Voter[Consensus Voter]
+    Output[Agreed Output]
     
     Input --> Agent1
     Input --> Agent2
@@ -241,42 +246,43 @@ graph TB
     
     style Voter fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
 ```
+
 **Faida:**
 - ✅ Usahihi wa juu (maoni mengi)
-- ✅ Ustahimilivu wa hitilafu (kosa la wachache unakubalika)
-- ✅ Udhibiti wa ubora umejengwa
+- ✅ Uvumilivu wa hitilafu (makosa ya wachache yanakubalika)
+- ✅ Udhibitisho wa ubora umejengwa ndani
 
-**Mapungufu:**
-- ❌ Ghali (miito mingi kwa miundo)
+**Mikomo:**
+- ❌ Gharama kubwa (miito mingi ya mifano)
 - ❌ Polepole (kusubiri mawakala wote)
-- ⚠️ Inahitajika utatuzi wa migogoro
+- ⚠️ Inahitaji utatuzi wa migogoro
 
-**Mifano ya Matumizi:**
-- Ufuatiliaji wa maudhui (miundo mingi hupitia maudhui)
-- Ukaguzi wa msimbo (linters/analizaji nyingi)
-- Utambuzi wa matibabu (miundo mingi ya AI, uhakiki wa mtaalam)
+**Mfano wa Matumizi:**
+- Udhibiti wa maudhui (mifano mingi hukagua maudhui)
+- Ukaguzi wa msimbo (liwaza nyingi / wachambuzi)
+- Uchunguzi wa tiba (mifano mingi ya AI, uthibitisho wa mtaalamu)
 
 ---
 
-## Muhtasari wa Usanifu
+## Muhtasari wa Miundo
 
-### Mfumo Kamili wa Mawakala Wengi kwenye Azure
+### Mfumo Kamili wa Wakala Wengi kwenye Azure
 
 ```mermaid
 graph TB
-    User[Mtumiaji/Mteja wa API]
-    APIM[Usimamizi wa API wa Azure]
-    Orchestrator[Huduma ya Orchestrator<br/>App ya Kontena]
-    ServiceBus[Azure Service Bus<br/>Kituo cha Matukio]
+    User[User/API Client]
+    APIM[Azure API Management]
+    Orchestrator[Orchestrator Service<br/>Container App]
+    ServiceBus[Azure Service Bus<br/>Queues / Topics]
     
-    Agent1[Wakala wa Utafiti<br/>App ya Kontena]
-    Agent2[Wakala Mwandishi<br/>App ya Kontena]
-    Agent3[Wakala Mchambuzi<br/>App ya Kontena]
-    Agent4[Wakala Mkaguzi<br/>App ya Kontena]
+    Agent1[Research Agent<br/>Container App]
+    Agent2[Writer Agent<br/>Container App]
+    Agent3[Analyst Agent<br/>Container App]
+    Agent4[Reviewer Agent<br/>Container App]
     
-    CosmosDB[(Cosmos DB<br/>Hali Iliyoshirikiwa)]
-    Storage[Azure Storage<br/>Artifakti]
-    AppInsights[Uchunguzi wa Programu<br/>Ufuatiliaji]
+    CosmosDB[(Cosmos DB<br/>Shared State)]
+    Storage[Azure Storage<br/>Artifacts]
+    AppInsights[Application Insights<br/>Monitoring]
     
     User --> APIM
     APIM --> Orchestrator
@@ -307,58 +313,67 @@ graph TB
     style ServiceBus fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style CosmosDB fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
+
 **Vipengele Muhimu:**
 
-| Sehemu | Madhumuni | Azure Service |
+| Kipengele | Kusudi | Huduma ya Azure |
 |-----------|---------|---------------|
-| **API Gateway** | Kituo cha kuingia, mpaka kasi, uthibitisho | API Management |
-| **Orchestrator** | Inaratibu mtiririko wa kazi za mawakala | Container Apps |
-| **Message Queue** | Mawasiliano ya asynchronou | Service Bus / Event Hubs |
-| **Agents** | Wafanyakazi maalum wa AI | Container Apps / Functions |
-| **State Store** | Hali iliyoshirikiwa, ufuatiliaji wa kazi | Cosmos DB |
-| **Artifact Storage** | Hati, matokeo, logi | Blob Storage |
-| **Monitoring** | Ufuatiliaji uliosambazwa, logi | Application Insights |
+| **Kipinda cha API** | Kuingia, kuweka kikomo cha viwango, uthibitishaji | Usimamizi wa API |
+| **Msimamizi wa Uratibu** | Kuratibu mifumo ya kazi za wakala | Container Apps |
+| **Foleni ya Ujumbe** | Mawasiliano yasiyo ya kusubiri | Service Bus / Event Hubs |
+| **Makala** | Wafanyakazi maalum wa AI | Container Apps / Functions |
+| **Hifadhi ya Hali** | Hali iliyogawanyika, ufuatiliaji wa kazi | Cosmos DB |
+| **Hifadhi ya Makabari** | Nyaraka, matokeo, kumbukumbu | Blob Storage |
+| **Ufuatiliaji** | Kufuata kilichosambazwa, kumbukumbu | Application Insights |
+
+Foleni/maudhuzi ya Service Bus na Event Hubs ni huduma tofauti zenye mifumo tofauti ya usambazaji/matumizi; Event Hubs si mbadala halisi wa msimbo wa mfanyakazi wa Service Bus hapa chini. Utekelezaji sambamba, ujumbe ulihifadhiwa, na kupiga kura kwa mfano hakuahidi peke yake uvumilivu wa hitilafu au usahihi wa juu.
 
 ---
 
-## Mahitaji ya Awali
+## Mahitaji Awali
 
-### Vifaa Vinavyohitajika
+### Zana Zinazohitajika
 
 ```bash
-# Thibitisha Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ Inatarajiwa: azd toleo 1.0.0 au juu zaidi
+# Command reference baseline: azd 1.37.2
 
-# Thibitisha Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ Inatarajiwa: azure-cli 2.50.0 au juu zaidi
+# ✅ Expected: azure-cli 2.50.0 or higher
 
-# Thibitisha Docker (kwa majaribio ya ndani)
+# Verify Docker (for local testing)
 docker --version
-# ✅ Inatarajiwa: toleo la Docker 20.10 au juu zaidi
+# ✅ Expected: Docker version 20.10 or higher
 ```
 
 ### Mahitaji ya Azure
 
-- Usajili wa Azure unaofanya kazi
+- Usajili wa Azure unaoendelea
 - Ruhusa za kuunda:
   - Container Apps
-  - Service Bus namespaces
-  - Cosmos DB accounts
-  - Storage accounts
+  - Mabara ya Service Bus
+  - Akaunti za Cosmos DB
+  - Akaunti za Hifadhi
   - Application Insights
 
-### Maarifa Yanayohitajika
+### Maarifa Muhimu
 
-Unapaswa kuwa umemaliza:
-- [Configuration Management](../chapter-03-configuration/configuration.md)
-- [Authentication & Security](../chapter-03-configuration/authsecurity.md)
-- [Microservices Example](../../../../examples/microservices)
+Unapaswa kuwa umefanya:
+- [Usimamizi wa Mipangilio](../chapter-03-configuration/configuration.md)
+- [Uthibitishaji & Usalama](../chapter-03-configuration/authsecurity.md)
+- [Mfano wa Microservices](../../../../examples/microservices)
 
 ---
 
-## Mwongozo wa Utekelezaji
+## Mwongozo wa Kutekeleza
+
+> **Vipande vya muundo, si maabara inayoweza kutumika moja kwa moja:** Mti wa mradi na lebo za `File:` hapa chini zinaelezea faili za kuunda katika mradi wako wenyewe; hazina programu kamili ya `multi-agent-system`. Vipande vinavyokosa ni kama vigezo vikuu, mazingira/rehabari za Container Apps, Dockerfiles na uteuzi wa tegemezi, usanidi wa hifadhidata/cosmos, uanzishaji wa mifano, usanidi wa kitambulisho/majukumu, sheria za upanuzi, na wafanyakazi/foleni sambamba. Usitarajia `azd init` kuunda faili hizi au `azd up` kupeleka vipande hivi bila mabadiliko. Kwa mwanzo unaoweza kutekelezeka, tembelea [Misingi ya Wakala Wengi](../chapter-05-multi-agent/multi-agent-basics.md).
+
+**Makadirio ya wakati wa utendaji:** Python 3.10+, `azure-servicebus`, `azure-cosmos`, `openai`, Flask, na (kwa ufuatiliaji) `azure-monitor-opentelemetry`; weka `shared` katika njia ya kuagiza Python kwa picha ya kila huduma. Kontena la Cosmos `agent-state/tasks` lazima liwe tayari na kitufe cha mgawanyo `/id`. Unganisho kwa kutumia funguo hufanya vipande hivi kuwa rahisi, si ushauri wa uzalishaji: tumia kitambulisho kinachosimamiwa chenye majukumu yaliyopangwa ya Service Bus/Cosmos/OpenAI data-plane. Usifunue funguo katika matokeo au kumbukumbu.
+
+Usambazaji wa Service Bus ni **angalia angalau mara moja**. Hifadhi utendakazi wa idempotency kwa kazi **na hatua**, tumia mshindano unaotegemea matarajio (ETags) kwa kusoma/badilisha/kuandika hali, na rudisha funguo za ujumbe wakati wa usindikaji mrefu. Usimamizi rahisi wa hali hapa chini ni kwa mfuatano tu na hauhifadhi dhamana za uzalishaji.
 
 ### Muundo wa Mradi
 
@@ -392,15 +407,15 @@ multi-agent-system/
 
 ---
 
-## Somo 1: Mfumo wa Uratibu wa Mtiririko
+## Somo 1: Mfumo wa Uratibu wa Mfuatano
 
-### Utekelezaji: Mnyororo wa Uundaji wa Maudhui
+### Utekelezaji: Mlolongo wa Utengenezaji Maudhui
 
-Tujenge mnyororo wa mfululizo: Utafiti → Andika → Hariri → Chapisha
+Tuweke mlolongo wa mfuatano: Tafiti → Andika → Hariri. Kuchapisha ni nje ya mfano huu.
 
 ### 1. Usanidi wa AZD
 
-**File: `azure.yaml`**
+**Faili: `azure.yaml`**
 
 ```yaml
 name: content-pipeline
@@ -431,7 +446,7 @@ services:
 
 ### 2. Miundombinu: Service Bus kwa Uratibu
 
-**File: `infra/core/servicebus.bicep`**
+**Faili: `infra/core/servicebus.bicep`**
 
 ```bicep
 param name string
@@ -483,16 +498,17 @@ resource editorQueue 'Microsoft.ServiceBus/namespaces/queues@2022-10-01-preview'
 }
 
 output namespace string = serviceBusNamespace.name
-output connectionString string = listKeys('${serviceBusNamespace.id}/AuthorizationRules/RootManageSharedAccessKey', serviceBusNamespace.apiVersion).primaryConnectionString
+// Do not output RootManageSharedAccessKey. Resolve scoped credentials
+// securely or use managed identity in the application and scale rules.
 ```
 
-### 3. Meneja wa Hali Iliyoshirikiwa
+### 3. Msimamizi wa Hali Iliyosambazwa
 
-**File: `src/shared/state_manager.py`**
+**Faili: `src/shared/state_manager.py`**
 
 ```python
 from azure.cosmos import CosmosClient, PartitionKey
-from datetime import datetime
+from datetime import datetime, timezone
 import os
 
 class StateManager:
@@ -513,7 +529,7 @@ class StateManager:
             'type': task_type,
             'status': 'pending',
             'input': input_data,
-            'created_at': datetime.utcnow().isoformat(),
+            'created_at': datetime.now(timezone.utc).isoformat(),
             'steps': []
         }
         self.container.create_item(task)
@@ -525,7 +541,7 @@ class StateManager:
         
         task['steps'].append({
             'name': step_name,
-            'completed_at': datetime.utcnow().isoformat(),
+            'completed_at': datetime.now(timezone.utc).isoformat(),
             'result': result
         })
         
@@ -537,7 +553,7 @@ class StateManager:
         task = self.container.read_item(task_id, partition_key=task_id)
         task['status'] = 'completed'
         task['result'] = final_result
-        task['completed_at'] = datetime.utcnow().isoformat()
+        task['completed_at'] = datetime.now(timezone.utc).isoformat()
         self.container.replace_item(task_id, task)
         return task
     
@@ -546,9 +562,9 @@ class StateManager:
         return self.container.read_item(task_id, partition_key=task_id)
 ```
 
-### 4. Huduma ya Orchestrator
+### 4. Huduma ya Msimamizi wa Uratibu
 
-**File: `src/orchestrator/app.py`**
+**Faili: `src/orchestrator/app.py`**
 
 ```python
 from flask import Flask, request, jsonify
@@ -561,7 +577,7 @@ from shared.state_manager import StateManager
 app = Flask(__name__)
 state_manager = StateManager()
 
-# Muunganisho wa Service Bus
+# Service Bus connection
 servicebus_connection_str = os.environ['SERVICEBUS_CONNECTION_STRING']
 servicebus_client = ServiceBusClient.from_connection_string(servicebus_connection_str)
 
@@ -572,15 +588,15 @@ def health():
 @app.route('/create-content', methods=['POST'])
 def create_content():
     """
-    Sequential workflow: Research → Write → Edit → Publish
+    Sequential workflow: Research → Write → Edit (returns a draft; no publishing)
     """
-    data = request.json
+    data = request.get_json(silent=True) or {}
     topic = data.get('topic')
     
     if not topic:
         return jsonify({'error': 'Topic required'}), 400
     
-    # Unda kazi katika hifadhi ya hali
+    # Create task in state store
     task_id = str(uuid.uuid4())
     task = state_manager.create_task(
         task_id=task_id,
@@ -588,13 +604,13 @@ def create_content():
         input_data={'topic': topic}
     )
     
-    # Tuma ujumbe kwa wakala wa utafiti (hatua ya kwanza)
+    # Send message to research agent (first step)
     sender = servicebus_client.get_queue_sender('research-tasks')
     message = ServiceBusMessage(
         body=json.dumps({
             'task_id': task_id,
             'topic': topic,
-            'next_queue': 'writer-tasks'  # Mahali pa kutuma matokeo
+            'next_queue': 'writer-tasks'  # Where to send results
         }),
         content_type='application/json'
     )
@@ -606,7 +622,7 @@ def create_content():
         'task_id': task_id,
         'status': 'started',
         'workflow': 'sequential',
-        'steps': ['research', 'write', 'edit', 'publish'],
+        'steps': ['research', 'write', 'edit'],
         'message': 'Content creation pipeline initiated'
     }), 202
 
@@ -623,9 +639,9 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### 5. Wakala wa Utafiti
+### 5. Wakala wa Tafiti
 
-**File: `src/agents/research/app.py`**
+**Faili: `src/agents/research/app.py`**
 
 ```python
 from azure.servicebus import ServiceBusClient, ServiceBusMessage
@@ -635,7 +651,7 @@ import os
 import time
 from shared.state_manager import StateManager
 
-# Anzisha wateja
+# Initialize clients
 state_manager = StateManager()
 servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
@@ -643,7 +659,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -655,9 +671,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # Piga wito kwa Microsoft Foundry Models kwa ajili ya utafiti
+    # Call Microsoft Foundry Models for research
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -667,14 +683,14 @@ def process_research_task(message_data):
     
     research_results = response.choices[0].message.content
     
-    # Sasisha hali
+    # Update state
     state_manager.update_task_step(
         task_id=task_id,
         step_name='research',
         result={'research': research_results}
     )
     
-    # Tuma kwa wakala ufuatao (mwandishi)
+    # Send to next agent (writer)
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -715,7 +731,7 @@ if __name__ == '__main__':
 
 ### 6. Wakala wa Uandishi
 
-**File: `src/agents/writer/app.py`**
+**Faili: `src/agents/writer/app.py`**
 
 ```python
 from azure.servicebus import ServiceBusClient, ServiceBusMessage
@@ -731,7 +747,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -744,9 +760,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # Witisha Microsoft Foundry Models ili kuandika makala
+    # Call Microsoft Foundry Models to write article
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -756,14 +772,14 @@ def process_writing_task(message_data):
     
     article_draft = response.choices[0].message.content
     
-    # Sasisha hali
+    # Update state
     state_manager.update_task_step(
         task_id=task_id,
         step_name='writing',
         result={'draft': article_draft}
     )
     
-    # Tuma kwa mhariri
+    # Send to editor
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -801,9 +817,9 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. Wakala wa Uhariri
+### 7. Wakala wa Uhifadhi
 
-**File: `src/agents/editor/app.py`**
+**Faili: `src/agents/editor/app.py`**
 
 ```python
 from azure.servicebus import ServiceBusClient
@@ -819,7 +835,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 openai_client = AzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    api_version="2024-02-01",
+    api_version="2024-10-21",
     azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
 )
 
@@ -831,9 +847,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # Waita Microsoft Foundry Models ili kuhariri
+    # Call Microsoft Foundry Models to edit
     response = openai_client.chat.completions.create(
-        model="gpt-4.1",
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'],
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -843,7 +859,7 @@ def process_editing_task(message_data):
     
     final_article = response.choices[0].message.content
     
-    # Alama kazi kama imekamilika
+    # Mark task as complete
     state_manager.complete_task(
         task_id=task_id,
         final_result={
@@ -877,38 +893,39 @@ if __name__ == '__main__':
     main()
 ```
 
-### 8. Tekeleza na Jaribu
+### 8. Weka na Jaribu
+
+Amri hizi zinafaa **baada ya kutekeleza faili za mradi zilizokosekana tu**. Uanzishaji wa wakala wa Interactive Foundry ni mchakato tofauti; hauundaji muundo huu wa Service Bus.
 
 ```bash
-# Chaguo A: Utekelezaji unaotegemea templeti
-azd init
+# In your completed custom project
 azd up
 
-# Chaguo B: Utekelezaji kupitia manifesti ya wakala (inahitaji nyongeza)
+# Alternative in a SEPARATE empty folder (agents beta.23 requires azd >= 1.37)
 azd extension install azure.ai.agents
-azd ai agent init -m agent-manifest.yaml
+azd ai agent init
 azd up
 ```
 
-> Angalia [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) kwa `azd ai` bendera na chaguo zote.
+> Angalia [Amri za AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) kwa bendera na chaguzi zote za `azd ai`.
 
 ```bash
-# Pata URL ya mratibu
+# Get orchestrator URL
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
-# Unda maudhui
+# Create content
 curl -X POST $ORCHESTRATOR_URL/create-content \
   -H "Content-Type: application/json" \
   -d '{"topic": "The Future of AI in Healthcare"}'
 ```
 
-**✅ Matokeo yanayotarajiwa:**
+**✅ Matokeo Yanayotarajiwa:**
 ```json
 {
   "task_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
   "status": "started",
   "workflow": "sequential",
-  "steps": ["research", "write", "edit", "publish"],
+  "steps": ["research", "write", "edit"],
   "message": "Content creation pipeline initiated"
 }
 ```
@@ -919,7 +936,7 @@ TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ Matokeo yanayotarajiwa (imekamilika):**
+**✅ Matokeo Yanayotarajiwa (imemalizika):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -947,15 +964,15 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Somo 2: Mfumo wa Uratibu wa Paraleli
+## Somo 2: Mfumo wa Uratibu Sambamba
 
-### Utekelezaji: Mkusanyaji wa Utafiti kutoka Vyanzo Vingi
+### Utekelezaji: Mkusanyiko wa Tafiti Kutoka Vyanzo Vingi
 
-Tujenge mfumo wa paraleli unaokusanya habari kutoka vyanzo vingi kwa wakati mmoja.
+Tujenge mfumo sambamba unaokusanya taarifa kutoka vyanzo vingi kwa wakati mmoja.
 
-### Orchestrator wa Paraleli
+### Msimamizi Sambamba
 
-**File: `src/orchestrator/parallel_workflow.py`**
+**Faili: `src/orchestrator/parallel_workflow.py`**
 
 ```python
 from flask import Flask, request, jsonify
@@ -990,7 +1007,7 @@ def research_parallel():
         }
     )
     
-    # Kusambaza: Tuma kwa mawakala wote kwa wakati mmoja
+    # Fan-out: publish sequentially; workers may process concurrently.
     agents = [
         ('web-research-queue', 'web'),
         ('academic-research-queue', 'academic'),
@@ -1025,9 +1042,9 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### Mantiki ya Ukusanyaji
+### Mantiki ya Kuchanganya
 
-**File: `src/agents/aggregator/app.py`**
+**Faili: `src/agents/aggregator/app.py`**
 
 ```python
 from azure.servicebus import ServiceBusClient
@@ -1041,9 +1058,10 @@ servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
 )
 
-# Fuatilia matokeo kwa kila kazi
-task_results = defaultdict(list)
-expected_agents = 4  # mtandao, kitaaluma, habari, kijamii
+# Single-process demo only: not durable or shared across replicas.
+# Production: use durable unique (task_id, agent_type) result records.
+task_results = defaultdict(dict)
+expected_agents = 4  # web, academic, news, social
 
 def process_result(message_data):
     """Aggregate results from parallel agents"""
@@ -1051,29 +1069,29 @@ def process_result(message_data):
     agent_type = message_data['agent_type']
     result = message_data['result']
     
-    # Hifadhi matokeo
-    task_results[task_id].append({
+    # Store result
+    task_results[task_id][agent_type] = {
         'agent': agent_type,
         'data': result
-    })
+    }
     
     print(f"📊 Received result from {agent_type} agent ({len(task_results[task_id])}/{expected_agents})")
     
-    # Angalia kama mawakala wote wamekamilisha (fan-in)
+    # Check if all agents completed (fan-in)
     if len(task_results[task_id]) == expected_agents:
         print(f"✅ All agents completed for task {task_id}. Aggregating...")
         
-        # Changanya matokeo
+        # Combine results
         aggregated = {
             'query': message_data['query'],
-            'sources': task_results[task_id],
-            'summary': generate_summary(task_results[task_id])
+            'sources': list(task_results[task_id].values()),
+            'summary': generate_summary(list(task_results[task_id].values()))
         }
         
-        # Alama kama imekamilika
+        # Mark complete
         state_manager.complete_task(task_id, aggregated)
         
-        # Safisha
+        # Clean up
         del task_results[task_id]
         
         print(f"✅ Aggregation complete for task {task_id}")
@@ -1105,129 +1123,94 @@ if __name__ == '__main__':
     main()
 ```
 
-**Faida za Mfumo wa Paraleli:**
-- ⚡ **Haraka mara 4** (mawakala wanakwenda kwa wakati mmoja)
-- 🔄 **Ustahimilivu wa hitilafu** (matokeo sehemu yanakubaliwa)
+**Faida za Mfumo Sambamba:**
+- ⚡ **Huenda kuchelewesha chini** (imefungwa na mfanyakazi polepole zaidi na mzigo wa uratibu)
+- 🔄 **Inaweza kubeba matokeo ya sehemu** kwa tarehe za mwisho na sera ya hitilafu (haijatimizwa na mkusanyiko wa msingi)
 - 📈 **Inaweza kupanuka** (ongeza mawakala kwa urahisi)
 
 ---
 
-## Mazoezi ya Vitendo
+## Mazoezi ya Kivitendo
 
-### Zoefzo 1: Ongeza Usimamizi wa Muda (Timeout) ⭐⭐ (Kiwango cha Wastani)
+### Zoekezaji 1: Ongeza Usimamizi wa Muda wa Kuisha ⭐⭐ (Kiwango cha Kati)
 
-**Lengo**: Tekeleza mantiki ya timeout ili ukusanyaji usisubiri milele kwa mawakala polepole.
+**Lengo**: Tekeleza mantiki ya muda wa kuisha ili mkusanyiko usisubiri milele kwa mawakala waliochelewa.
 
-**Hatua**:
+**Mwanzo:** Endesha mchakato huu wa kujaribu wa ndani kabla ya kuuumba kwenye mfanyakazi wa foleni. Muda wa kuangalia unaangaliwa tu wakati ujumbe mwingine unakuja hauwawachi hata wakala aliyekosekana kutuma chochote.
 
-1. **Ongeza ufuatiliaji wa timeout kwa aggregator:**
+**Hatua:**
 
-```python
-from datetime import datetime, timedelta
-
-task_timeouts = {}  # task_id -> expiration_time
-
-def process_result(message_data):
-    task_id = message_data['task_id']
-    
-    # Weka muda wa kukomesha kwenye matokeo ya kwanza
-    if task_id not in task_timeouts:
-        task_timeouts[task_id] = datetime.utcnow() + timedelta(seconds=30)
-    
-    task_results[task_id].append({
-        'agent': message_data['agent_type'],
-        'data': message_data['result']
-    })
-    
-    # Angalia ikiwa imekamilika AU imepitwa na muda
-    if len(task_results[task_id]) == expected_agents or \
-       datetime.utcnow() > task_timeouts[task_id]:
-        
-        print(f"📊 Aggregating with {len(task_results[task_id])}/{expected_agents} results")
-        
-        aggregated = {
-            'query': message_data['query'],
-            'sources': task_results[task_id],
-            'completed_agents': len(task_results[task_id]),
-            'timed_out': len(task_results[task_id]) < expected_agents
-        }
-        
-        state_manager.complete_task(task_id, aggregated)
-        
-        # Usafishaji
-        del task_results[task_id]
-        del task_timeouts[task_id]
-```
-
-2. **Jaribu kwa ucheleweshaji bandia:**
+1. **Ongeza kufuatilia muda wa kuisha kwa mkusanyiko:**
 
 ```python
-# Kwa wakala mmoja, ongeza ucheleweshaji ili kuiga usindikaji polepole
-import time
-time.sleep(35)  # Inazidi kikomo cha sekunde 30
+import asyncio
+
+async def simulated_agent(name, delay):
+    await asyncio.sleep(delay)
+    return {'agent': name, 'result': 'done'}
+
+async def main():
+    tasks = [asyncio.create_task(simulated_agent(name, delay))
+             for name, delay in [('web', 0.1), ('academic', 0.2),
+                                 ('news', 0.3), ('social', 3)]]
+    done, pending = await asyncio.wait(tasks, timeout=1)
+    results = [task.result() for task in done]
+    for task in pending:
+        task.cancel()
+    await asyncio.gather(*pending, return_exceptions=True)
+    print({'completed_agents': len(results), 'timed_out': bool(pending)})
+    assert len(results) == 3 and pending
+
+asyncio.run(main())
 ```
 
-3. **Tekeleza na thibitisha:**
+2. **Matokeo yanayotarajiwa:**
+
+```text
+{'completed_agents': 3, 'timed_out': True}
+```
+
+3. **Ushirikiano wa mfumo wa foleni (kazi ya kubuni):** Hifadhi tarehe ya mwisho ya kusambaza na mawakala wanaotarajiwa wakati wa kuunda kazi, endesha usafishaji wa tarehe ya mwisho mara kwa mara huru na matokeo yanayoingia, kama atimize matokeo ya sehemu kwa atomiki, na puuza ujumbe umechelewa/kurudiwa kwa kazi zilizokamilika. Muda wa kuisha wa ndani hauzitami kazi za mbali.
+
+Kwa mradi wako uliotekelezwa tu:
 
 ```bash
 azd deploy aggregator
 
-# Wasilisha kazi
+# Submit task
 curl -X POST $ORCHESTRATOR_URL/research-parallel \
   -H "Content-Type: application/json" \
   -d '{"query": "AI safety research"}'
 
-# Angalia matokeo baada ya sekunde 30
+# Check results after 30 seconds
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ Vigezo vya Mafanikio:**
-- ✅ Kazi inakamilika baada ya sekunde 30 hata kama mawakala hawajakamilika
+- ✅ Jaribio la ndani hurarudi baada ya muda wake wa sekunde moja hata wakala haijakamilika
 - ✅ Jibu linaonyesha matokeo ya sehemu (`"timed_out": true`)
-- ✅ Matokeo yaliyopo yanarejeshwa (3 kati ya mawakala 4)
+- ✅ Matokeo yaliyopatikana yarejeshwa (3 kati ya mawakala 4)
 
-**Muda**: 20-25 dakika
+**Muda**: Dakika 20-25
 
 ---
 
-### Zoefzo 2: Tekeleza Mantiki ya Kurudia (Retry) ⭐⭐⭐ (Chenye Utaalamu)
+### Zoekezaji 2: Tekeleza Mantiki ya Jaribio Upya ⭐⭐⭐ (Juu)
 
-**Lengo**: Rudia kazi za wakala zilizoshindwa moja kwa moja kabla ya kukata tamaa.
+**Lengo**: Jaribu tena kazi zilizoshindwa za wakala moja kwa moja kabla ya kuacha.
 
-**Hatua**:
+**Hatua:**
 
-1. **Ongeza ufuatiliaji wa kurudia kwa orchestrator:**
+1. **Tumia hesabu za usambazaji wa Service Bus badala ya kuingiza tena makonta ya jaribio binafsi:**
 
 ```python
-from dataclasses import dataclass
-from typing import Dict
-
-@dataclass
-class RetryConfig:
-    max_retries: int = 3
-    backoff_seconds: int = 5
-
-retry_counts: Dict[str, int] = {}  # kitambulisho_cha_ujumbe -> idadi_ya_jaribio
-
-def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConfig):
-    """Send message with retry metadata"""
-    message_id = message_data.get('message_id', str(uuid.uuid4()))
-    message_data['message_id'] = message_id
-    message_data['retry_count'] = retry_counts.get(message_id, 0)
-    message_data['max_retries'] = retry_config.max_retries
-    
-    sender = servicebus_client.get_queue_sender(queue_name)
-    message = ServiceBusMessage(
-        body=json.dumps(message_data),
-        content_type='application/json',
-        message_id=message_id
-    )
-    
-    with sender:
-        sender.send_messages(message)
+import json
+import time
+# Integration fragment: use a live peek-lock ServiceBusReceiver.
+# Set queue maxDeliveryCount to 4 for one attempt + up to three retries.
 ```
 
-2. **Ongeza mshandisi wa kurudia kwa mawakala:**
+2. **Ongeza mshughulikiaji wa jaribio upya kwa mawakala:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1235,31 +1218,21 @@ def process_with_retry(message, receiver, process_func):
     try:
         message_data = json.loads(str(message))
         
-        # Chakata ujumbe
+        # Process the message
         process_func(message_data)
         
-        # Imefanikiwa - imekamilika
+        # Success - complete
         receiver.complete_message(message)
         
     except Exception as e:
-        message_id = message.message_id
-        retry_count = message_data.get('retry_count', 0)
-        max_retries = message_data.get('max_retries', 3)
-        
-        if retry_count < max_retries:
-            # Jaribu tena: acha na uweke tena kwenye safu kwa kuongeza idadi
-            print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
-            
-            message_data['retry_count'] = retry_count + 1
-            
-            # Tuma tena kwenye safu ile ile kwa ucheleweshaji
-            time.sleep(5 * (retry_count + 1))  # Ucheleweshaji wa kuongezeka kwa mlingano
-            send_with_retry(queue_name, message_data, RetryConfig())
-            
-            receiver.complete_message(message)  # Ondoa asili
+        if message.delivery_count < 4:
+            # Bounded exponential delay: 5s, 10s, 20s.
+            # Renew the lock if processing + waiting can exceed its duration.
+            time.sleep(5 * 2 ** (message.delivery_count - 1))
+            receiver.abandon_message(message)
         else:
-            # Idadi ya majaribio imezidi - hamisha kwenye foleni ya barua zilizokufa
-            print(f"❌ Max retries exceeded for message {message_id}")
+            # Max retries exceeded - move to dead letter queue
+            print(f"❌ Max attempts exceeded for message {message.message_id}")
             receiver.dead_letter_message(
                 message,
                 reason="MaxRetriesExceeded",
@@ -1267,13 +1240,13 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **Fuatilia foleni ya dead letter:**
+3. **Fuatilia foleni ya barua tupu:**
 
 ```python
 def monitor_dead_letters():
     """Check dead letter queue for failed messages"""
     receiver = servicebus_client.get_queue_receiver(
-        'research-queue',
+        'research-tasks',
         sub_queue='deadletter'
     )
     
@@ -1286,31 +1259,31 @@ def monitor_dead_letters():
 ```
 
 **✅ Vigezo vya Mafanikio:**
-- ✅ Kazi zilizoshindwa zinarudia moja kwa moja (hadi mara 3)
-- ✅ Kuongeza muda kwa kila kurudia (exponential backoff) (5s, 10s, 15s)
-- ✅ Baada ya jaribio za juu, ujumbe unaenda kwenye dead letter queue
-- ✅ Dead letter queue inaweza kufuatiliwa na kuchezwa tena
+- ✅ Kazi zilizoshindwa zinarudiwa tena moja kwa moja (hadi mara 3)
+- ✅ Usitishi unaoongezeka kati ya jaribio upya (5s, 10s, 20s), na upya wa funguo za ujumbe inapohitajika
+- ✅ Baada ya jaribio la mwisho, ujumbe hupelekwa kwenye foleni ya barua tupu
+- ✅ Ujumbe za foleni ya barua tupu zinaweza kuchunguzwa; kurudisha upya kunahitaji mchakato wa kupona unaoweza kurudiwa
 
-**Muda**: 30-40 dakika
+**Muda**: Dakika 30-40
 
 ---
 
-### Zoefzo 3: Tekeleza Circuit Breaker ⭐⭐⭐ (Chenye Utaalamu)
+### Zoekezaji 3: Tekeleza Wavunaji Mzunguko ⭐⭐⭐ (Juu)
 
-**Lengo**: Zuia kuenea kwa matatizo kwa kusitisha maombi kwa mawakala wanaoshindwa.
+**Lengo**: Zuia hitilafu kuenea kwa kuzuia maombi kwa mawakala wanaoshindwa.
 
-**Hatua**:
+**Hatua:**
 
-1. **Unda darasa la circuit breaker:**
+1. **Unda darasa la wavunaji mzunguko:**
 
 ```python
 from enum import Enum
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 class CircuitState(Enum):
-    CLOSED = "closed"      # Uendeshaji wa kawaida
-    OPEN = "open"          # Inashindwa, kataa maombi
-    HALF_OPEN = "half_open"  # Inajaribu ikiwa imepona
+    CLOSED = "closed"      # Normal operation
+    OPEN = "open"          # Failing, reject requests
+    HALF_OPEN = "half_open"  # Testing if recovered
 
 class CircuitBreaker:
     def __init__(self, failure_threshold=5, timeout_seconds=60):
@@ -1323,8 +1296,8 @@ class CircuitBreaker:
     def call(self, func):
         """Execute function with circuit breaker protection"""
         if self.state == CircuitState.OPEN:
-            # Angalia ikiwa muda wa kusubiri umeisha
-            if datetime.utcnow() - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
+            # Check if timeout expired
+            if datetime.now(timezone.utc) - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
                 self.state = CircuitState.HALF_OPEN
                 print("🔄 Circuit breaker: HALF_OPEN (testing)")
             else:
@@ -1333,7 +1306,8 @@ class CircuitBreaker:
         try:
             result = func()
             
-            # Mafanikio
+            # Success
+            self.failure_count = 0 # Count consecutive failures only
             if self.state == CircuitState.HALF_OPEN:
                 self.state = CircuitState.CLOSED
                 self.failure_count = 0
@@ -1343,19 +1317,19 @@ class CircuitBreaker:
             
         except Exception as e:
             self.failure_count += 1
-            self.last_failure_time = datetime.utcnow()
+            self.last_failure_time = datetime.now(timezone.utc)
             
             if self.failure_count >= self.failure_threshold:
                 self.state = CircuitState.OPEN
                 print(f"🔴 Circuit breaker: OPEN (too many failures)")
             
-            raise e
+            raise
 ```
 
 2. **Tumia kwa miito ya wakala:**
 
 ```python
-# Katika mratibu
+# In orchestrator
 agent_circuits = {
     'web': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
     'academic': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
@@ -1371,89 +1345,89 @@ def send_to_agent(agent_type, message_data):
         circuit.call(lambda: send_message(agent_type, message_data))
     except Exception as e:
         print(f"⚠️ Skipping {agent_type} agent: {e}")
-        # Endelea na mawakala wengine
+        # Continue with other agents
 ```
 
-3. **Jaribu circuit breaker:**
+Mzunguko huu unalinda **operesheni ya kutuma**, si kukamilika kwa mfanyakazi wa mbali: kuweka ujumbe kwenye foleni kwa mafanikio hakumaanishi chochote kuhusu kama wakala bado yupo hai. `send_message` ni kazi ya mtumaji katika programu yako. Kwa midundo ya utekelezaji, tumia kushindwa/kusitishwa kwa shughuli zilizoonekana kwa msimamizi thabiti. Darasa hili la kumbukumbu ya ndani ni onyesho la thread moja, si mzunguko wa kugawanyika wa kuzima kwa mzunguko.
 
-```bash
-# Iga kushindwa mara kwa mara (simamisha wakala mmoja)
-az containerapp stop --name web-research-agent --resource-group rg-agents
+3. **Jaribu kuzima mzunguko ndani ya kompyuta:**
 
-# Tuma maombi kadhaa
-for i in {1..10}; do
-  curl -X POST $ORCHESTRATOR_URL/research-parallel \
-    -H "Content-Type: application/json" \
-    -d '{"query": "test query '$i'"}'
-  sleep 2
-done
-
-# Angalia logi - unapaswa kuona mzunguko umefunguka baada ya kushindwa mara 5
-# Tumia Azure CLI kwa logi za Container App:
-az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
+```python
+# Run after the class definition; no Azure changes required.
+circuit = CircuitBreaker(failure_threshold=5, timeout_seconds=0)
+def fail():
+    raise RuntimeError("simulated failure")
+for _ in range(5):
+    try:
+        circuit.call(fail)
+    except RuntimeError:
+        pass
+assert circuit.state == CircuitState.OPEN
+assert circuit.call(lambda: "recovered") == "recovered"
+assert circuit.state == CircuitState.CLOSED
+print("Circuit breaker recovery verified")
 ```
 
 **✅ Vigezo vya Mafanikio:**
-- ✅ Baada ya kushindwa mara 5, mzunguko unafunguka (unakataa maombi)
-- ✅ Baada ya sekunde 60, mzunguko unasonga kuwa nusu wazi (hupima urejesho)
-- ✅ Mawakala wengine wanaendelea kufanya kazi vizuri
-- ✅ Mzunguko unafunga moja kwa moja wakati wakala anapopona
+- ✅ Baada ya mashindwa 5, mzunguko unafunguliwa (unakataa maombi)
+- ✅ Baada ya sekunde 60, mzunguko unakuwa wa nusu-funguliwa (unajaribu kupona)
+- ✅ Wakala wengine wanaendelea kufanya kazi kama kawaida
+- ✅ Mzunguko unafungwa moja kwa moja wakati wakala anarudi hali nzuri
 
-**Muda**: 40-50 dakika
+**Muda**: dakika 40-50
 
 ---
 
-## Ufuatiliaji na Utatuzi wa Hitilafu
+## Ufuatiliaji na Utatuzi wa Kasoro
 
-### Ufuatiliaji uliosambazwa kwa Application Insights
+### Kufuatilia kwa Usambazaji kwa Application Insights
 
-**File: `src/shared/tracing.py`**
+**Faili: `src/shared/tracing.py`**
 
 ```python
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import config_integration
-from opencensus.trace.tracer import Tracer
-from opencensus.trace.samplers import AlwaysOnSampler
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
-# Sanidi ufuatiliaji
-config_integration.trace_integrations(['requests', 'logging'])
-
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
-# Unda mfuatiliaji
-tracer = Tracer(
-    exporter=AzureExporter(connection_string=connection_string),
-    sampler=AlwaysOnSampler()
-)
+# Configure once per process. Message send/receive trace-context propagation
+# and agent attributes on exceptions need explicit instrumentation.
+if connection_string:
+    configure_azure_monitor(connection_string=connection_string, logger_name=__name__)
+tracer = trace.get_tracer(__name__)
 
-# Sanidi uandishi wa kumbukumbu
+# Configure logging
 logger = logging.getLogger(__name__)
-logger.addHandler(AzureLogHandler(connection_string=connection_string))
 logger.setLevel(logging.INFO)
 
-def trace_agent_call(agent_name, task_id, operation):
+def trace_agent_call(agent_name, task_id, operation_name, operation):
     """Trace agent operations"""
-    with tracer.span(name=f'{agent_name}.{operation}') as span:
-        span.add_attribute('agent', agent_name)
-        span.add_attribute('task_id', task_id)
-        span.add_attribute('operation', operation)
+    with tracer.start_as_current_span(f'agent.{agent_name}.{operation_name}', kind=SpanKind.CLIENT) as span:
+        span.set_attribute('agent', agent_name)
+        span.set_attribute('task_id', task_id)
+        span.set_attribute('operation', operation_name)
         
         try:
             result = operation()
-            span.add_attribute('status', 'success')
+            span.set_attribute('status', 'success')
+            logger.info('Agent operation completed', extra={
+                'agent': agent_name, 'task_id': task_id, 'operation': operation_name
+            })
             return result
         except Exception as e:
-            span.add_attribute('status', 'error')
-            span.add_attribute('error', str(e))
+            span.set_attribute('status', 'error')
+            logger.exception('Agent operation failed', extra={
+                'agent': agent_name, 'task_id': task_id, 'operation': operation_name
+            })
             raise
 ```
 
 ### Maswali ya Application Insights
 
-**Fuata mitiririko ya kazi za mawakala wengi:**
+**Fuata mifumo ya wakala wengi:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1494,18 +1468,20 @@ exceptions
 
 ## Uchambuzi wa Gharama
 
-### Gharama za Mfumo wa Mawakala Wengi (Makadirio ya Kila Mwezi)
+### Gharama za Mfumo wa Wakala Wengi (Makadirio ya Kila Mwezi)
 
-| Component | Configuration | Cost |
+Takwimu za upangaji kwa mfano tu, si nukuu rasmi: jumla hapa chini ni **$240-565/kila mwezi**. Hakiki viwango vya kikanda vya sasa, saa za nakala za kazi zinazofanya kazi/sitofanya kazi, mchanganyiko wa tokeni za kuingiza/kutoa, hifadhi, na telemetry. Serverless haina kiwango cha chini cha kupitia malipo lakini bado inalipisha kwa maombi na hifadhi.
+
+| Kipengele | Usanidi | Gharama |
 |-----------|--------------|------|
-| **Orchestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
-| **4 Agents** | 4 Container Apps (0.5 vCPU, 1GB each) | $60-120 |
-| **Service Bus** | Standard tier, 10M messages | $10-20 |
-| **Cosmos DB** | Serverless, 5GB storage, 1M RUs | $25-50 |
-| **Blob Storage** | 10GB storage, 100K operations | $5-10 |
-| **Application Insights** | 5GB ingestion | $10-15 |
-| **Microsoft Foundry Models** | gpt-4.1, 10M tokens | $100-300 |
-| **Total** | | **$240-565/month** |
+| **Msimamizi** | Programu ya Kontena 1 (CPU 1, GB 2) | $30-50 |
+| **Wakala 4** | Programu za Kontena 4 (CPU 0.5, GB 1 kila moja) | $60-120 |
+| **Service Bus** | Ngazi ya kawaida, ujumbe milioni 10 | $10-20 |
+| **Cosmos DB** | Serverless, hifadhi ya GB 5, RUs milioni 1 | $25-50 |
+| **Blob Storage** | Hifadhi ya GB 10, operesheni 100K | $5-10 |
+| **Application Insights** | Kuingiza GB 5 | $10-15 |
+| **Microsoft Foundry Models** | gpt-4.1, tokeni milioni 10 | $100-300 |
+| **Jumla** | | **$240-565/kila mwezi** |
 
 ### Mikakati ya Kupunguza Gharama
 
@@ -1518,135 +1494,135 @@ exceptions
    }
    ```
 
-2. **Punguza mawakala hadi sifuri wanapokaa bila shughuli:**
+2. **Punguza wingi wa wakala hadi sifuri wakati hawatumo kazi:**
    ```bicep
    scale: {
-     minReplicas: 0  // Scale to zero when no messages
+     minReplicas: 0  // Requires a Service Bus/KEDA scale rule to wake workers
      maxReplicas: 10
    }
    ```
 
-3. **Tumia batching kwa Service Bus:**
+3. **Tumia kundi kwa Service Bus:**
    ```python
-   # Tuma ujumbe kwa vifurushi (gharama nafuu)
+   # Send messages in batches (cheaper)
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **Cache matokeo yanayotumika mara kwa mara:**
+4. **Hifadhi matokeo yanayotumika mara kwa mara:**
    ```python
-   # Tumia Azure Cache for Redis
+   # Use Azure Cache for Redis
    if cache.exists(query_hash):
        return cache.get(query_hash)
    ```
 
 ---
 
-## Mbinu Bora
+## Mazoea Bora
 
 ### ✅ FANYA:
 
-1. **Tumia operesheni zisizobadilika (idempotent)**
+1. **Tumia operesheni zisizobadilisha matokeo**
    ```python
-   # Wakala anaweza kushughulikia ujumbe ule ule mara nyingi kwa usalama
+   # Pseudocode: implement a durable, atomic per-step deduplication claim.
    def process_task(task_id):
-       if state_manager.task_exists(task_id):
-           print(f"Task {task_id} already processed, skipping")
-           return
-       # Chakata kazi...
+       raise NotImplementedError("Claim (task_id, step) atomically, execute, persist outcome")
    ```
 
-2. **Tekeleza utenganishaji wa logi kwa kina**
+2. **Tekeleza uandikaji wa kina wa kumbukumbu**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
 
-3. **Tumia correlation IDs**
+3. **Tumia vitambulisho vya uhusiano**
    ```python
-   # Pitisha task_id kupitia mtiririko mzima wa kazi
+   # Pass task_id through entire workflow
    message_data = {
-       'task_id': task_id,  # Kitambulisho cha muunganisho
+       'task_id': task_id,  # Correlation ID
        'timestamp': datetime.utcnow().isoformat()
    }
    ```
 
-4. **Weka TTL kwa ujumbe (time-to-live)**
+4. **Weka muda wa kuishi kwa ujumbe (TTL)**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
 
-5. **Fuatilia dead letter queues**
+5. **Fuata foleni za barua zilizokufa**
    ```python
-   # Ufuatiliaji wa mara kwa mara wa ujumbe ulioshindwa
+   # Regular monitoring of failed messages
    monitor_dead_letters()
    ```
 
 ### ❌ USIFANYE:
 
-1. **Usiunde utegemezi wa mzunguko**
+1. **Usitengeneze utegemezi wa mduara**
    ```python
-   # ❌ MBAYA: Wakala A → Wakala B → Wakala A (mzunguko usio na mwisho)
-   # ✅ BORA: Fafanua kwa uwazi grafu elekezayo isiyo na duara (DAG)
+   # ❌ BAD: Agent A → Agent B → Agent A (infinite loop)
+   # ✅ GOOD: Define clear directed acyclic graph (DAG)
    ```
 
-2. **Usizui thread za wakala**
+2. **Usizuie thread za wakala**
    ```python
-   # ❌ MBAYA: Kusubiri kwa sinkroni
+   # ❌ BAD: Synchronous wait
    while not task_complete:
        time.sleep(1)
    
-   # ✅ BORA: Tumia callbacks za foleni ya ujumbe
+   # ✅ GOOD: Use message queue callbacks
    ```
 
-3. **Usiache makosa ya sehemu bila kuyashughulikia**
+3. **Usiache kushindwa kidogo bila kujali**
    ```python
-   # ❌ MBAYA: Kusababisha mchakato mzima kushindwa ikiwa wakala mmoja atashindwa
-   # ✅ NZURI: Rejesha matokeo ya sehemu na viashiria vya makosa
+   # ❌ BAD: Fail entire workflow if one agent fails
+   # ✅ GOOD: Return partial results with error indicators
    ```
 
-4. **Usitumie jaribio zisizo na ukomo**
+4. **Usitumie jaribio la kurudia bila kikomo**
    ```python
-   # ❌ MBAYA: jaribu tena milele
-   # ✅ BORA: max_retries = 3, kisha kwenda kwenye 'dead letter'
+   # ❌ BAD: retry forever
+   # ✅ GOOD: max_retries = 3, then dead letter
    ```
 
 ---
 
-## Mwongozo wa Utatuzi wa Matatizo
+## Mwongozo wa Kutatua Matatizo
 
 ### Tatizo: Ujumbe umekwama kwenye foleni
 
 **Dalili:**
-- Ujumbe zinaongezeka kwenye foleni
-- Mawakala hawashughuliki
-- Hali ya kazi imekwama "pending"
+- Ujumbe unaongezeka kwenye foleni
+- Wakala hawashughuliki
+- Hali ya kazi inakaa "inangoja"
 
-**Uchambuzi:**
+**Uchunguzi:**
 ```bash
-# Kagua kina cha foleni
+# Check queue depth
 az servicebus queue show \
+  --resource-group "$RG_NAME" \
   --namespace-name mybus \
   --name research-tasks \
   --query "countDetails"
 
-# Kagua kumbukumbu za wakala kwa kutumia Azure CLI
+# Check agent logs using Azure CLI
 az containerapp logs show --name research-agent --resource-group $RG_NAME --tail 50
 ```
 
 **Suluhisho:**
 
-1. **Ongeza nakala za mawakala:**
+1. **Ongeza nakala za wakala:**
    ```bash
    az containerapp update \
+     --resource-group "$RG_NAME" \
      --name research-agent \
      --min-replicas 3 \
      --max-replicas 10
    ```
 
-2. **Kagua foleni ya dead-letter:**
+2. **Kagua foleni ya barua zilizokufa:**
    ```bash
    az servicebus queue show \
+     --resource-group "$RG_NAME" \
      --namespace-name mybus \
      --name research-tasks \
      --query "countDetails.deadLetterMessageCount"
@@ -1654,36 +1630,36 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Tatizo: Muda wa kazi umeisha/haijakamilika
+### Tatizo: Kazi imekwisha muda wa muda/mhakikisha haijakamilika
 
 **Dalili:**
-- Hali ya kazi inabaki "in_progress"
-- Baadhi ya mawakala wanakamilisha, wengine hawakamilishi
+- Hali ya kazi inabaki "inapoendelea"
+- Baadhi ya wakala wanakamilisha, wengine hawakamilishi
 - Hakuna ujumbe wa kosa
 
-**Uchambuzi:**
+**Uchunguzi:**
 ```bash
-# Angalia hali ya kazi
+# Check task state
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 
-# Angalia Application Insights
-# Endesha query: traces | where customDimensions.task_id == "..."
+# Check Application Insights
+# Run query: traces | where customDimensions.task_id == "..."
 ```
 
 **Suluhisho:**
 
-1. **Tekeleza muda wa kusubiri katika aggregator (Mazoezi 1)**
+1. **Tekeleza muda wa kukata kazi kwenye mchanganyiko (Zoekazi 1)**
 
-2. **Angalia kwa kushindwa kwa mawakala ukitumia Azure Monitor:**
+2. **Angalia kwa kushindwa kwa wakala kwa kutumia Azure Monitor:**
    ```bash
-   # Tazama logi kupitia azd monitor
+   # View logs via azd monitor
    azd monitor --logs
    
-   # Au tumia Azure CLI kuangalia logi za programu za kontena maalum
+   # Or use Azure CLI to check specific container app logs
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
-3. **Hakikisha mawakala wote wanaendelea kufanya kazi:**
+3. **Hakikisha wakala wote wanaendesha:**
    ```bash
    az containerapp list \
      --resource-group rg-agents \
@@ -1698,44 +1674,44 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
 - [Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/introduction)
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
-- [Multi-Agent Design Patterns](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
+- [AI Agent Orchestration Patterns](https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns)
 
-### Hatua Zifuatazo Kwenye Kozi Hii
-- ← Iliyopita: [Mipango ya Uwezo](capacity-planning.md)
+### Hatua Zinazofuata Katika Kozi Hii
+- ← Kwenye: [Mpango wa Uwezo](capacity-planning.md)
 - → Ifuatayo: [Uchaguzi wa SKU](sku-selection.md)
-- 🏠 [Nyumbani kwa Kozi](../../README.md)
+- 🏠 [Mwanzo wa Kozi](../../README.md)
 
 ### Mifano Inayohusiana
-- [Mfano wa Microservices](../../../../examples/microservices) - miundo ya mawasiliano ya huduma
-- [Mfano wa Microsoft Foundry Models](../../../../examples/azure-openai-chat) - ujumuishaji wa AI
+- [Mfano wa Microservices](../../../../examples/microservices) - Mifumo ya mawasiliano ya huduma
+- [Mfano wa Microsoft Foundry Models](../../../../examples/azure-openai-chat) - Muunganiko wa AI
 
 ---
 
 ## Muhtasari
 
 **Umejifunza:**
-- ✅ Mifumo mitano ya uratibu (mfululizo, sambamba, ya ngazi, inayoendeshwa na matukio, makubaliano)
-- ✅ Miundo ya mawakala wengi kwenye Azure (Service Bus, Cosmos DB, Container Apps)
-- ✅ Usimamizi wa hali miongoni mwa mawakala waliogawanywa
-- ✅ Usimamizi wa muda wa kusubiri, jaribio upya, na vizuizi vya mzunguko
-- ✅ Ufuatiliaji na utatuzi wa hitilafu kwenye mifumo iliyogawanywa
+- ✅ Mifumo mitano ya uratibu (mfuatano, sambamba, ngazi, inayosababishwa na matukio, makubaliano)
+- ✅ Miundo ya wakala wengi kwenye Azure (Service Bus, Cosmos DB, Container Apps)
+- ✅ Usimamizi wa hali kati ya wakala walioenea
+- ✅ Ushughulikiaji wa muda wa kukata kazi, jaribio la kurudia, na kuzima kwa mzunguko
+- ✅ Ufuatiliaji na utatuzi wa kasoro katika mifumo iliyosambazwa
 - ✅ Mikakati ya kuboresha gharama
 
-**Mambo Muhimu ya Kukumbuka:**
-1. **Chagua muundo sahihi** - Mfululizo kwa workflows zilizo na mpangilio, sambamba kwa kasi, inayoendeshwa na matukio kwa unyumbufu
-2. **Dhibiti hali kwa uangalifu** - Tumia Cosmos DB au sawa kwa hali iliyoshirikiwa
-3. **Shughulikia kushindwa kwa heshima** - Muda wa kusubiri, jaribio upya, vizuizi vya mzunguko, foleni za dead-letter
-4. **Fuatilia kila kitu** - Tracing uliogawanywa ni muhimu kwa utatuzi wa hitilafu
-5. **Boresha gharama** - Punguza hadi sifuri, tumia serverless, tekeleza caching
+**Muhimu:**
+1. **Chagua mfumo sahihi** - Mfuatano kwa kazi zilizo na mpangilio, sambamba kwa kasi, inayosababishwa na matukio kwa urahisi
+2. **Dhibiti hali kwa uangalifu** - Tumia Cosmos DB au sawa kwa hali ya kushirikiwa
+3. **Shughulikia kushindwa kwa heshima** - Muda wa kukata kazi, jaribio la kurudia, kuzima kwa mzunguko, foleni za barua zilizokufa
+4. **Fuata kila kitu** - Kufuatilia kwa usambazaji ni muhimu kwa utatuzi wa kasoro
+5. **Boresha gharama** - Punguza hadi sifuri, tumia serverless, tekeleza kuhifadhi matokeo
 
-**Hatua Zifuatazo:**
-1. Kamilisha mazoezi ya vitendo
-2. Jenga mfumo wa mawakala wengi kwa matumizi yako
+**Hatua Zinazofuata:**
+1. Kamilisha mazoezi halisi
+2. Jenga mfumo wa wakala wengi kwa matumizi yako
 3. Soma [Uchaguzi wa SKU](sku-selection.md) ili kuboresha utendaji na gharama
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuwa sahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au ukosefu wa usahihi. Hati ya asili katika lugha yake ya asili inapaswa kuzingatiwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, inapendekezwa kutafsiriwa na mtafsiri mtaalamu wa kibinadamu. Hatubebei uwajibikaji kwa kutoelewana au tafsiri mbaya zinazotokana na matumizi ya tafsiri hii.
+**Kionyozo**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Hati ya asili katika lugha yake halisi inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatutojibu kwa kuelewa vibaya au tafsiri potofu zinazotokea kutokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

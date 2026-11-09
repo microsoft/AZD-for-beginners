@@ -1,156 +1,165 @@
 # Maswali Yanayoulizwa Mara kwa Mara (FAQ)
 
 **Pata Msaada kwa Sura**
-- **📚 Nyumbani kwa Kozi**: [AZD For Beginners](../README.md)
-- **🚆 Matatizo ya Usakinishaji**: [Chapter 1: Installation & Setup](../docs/getting-started/installation.md)
-- **🤖 Maswali ya AI**: [Chapter 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
-- **🔧 Ufumbuzi wa Matatizo**: [Chapter 7: Troubleshooting & Debugging](../docs/troubleshooting/common-issues.md)
+- **📚 Mwanzo wa Kozi**: [AZD Kwa Waanzilishi](../README.md)
+- **🚆 Masuala ya Usanidi**: [Sura 1: Ufungaji na Usanidi](../docs/chapter-01-foundation/installation.md)
+- **🤖 Maswali ya AI**: [Sura 2: Maendeleo ya AI-Kwanza](../docs/chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🔧 Utatuzi wa Matatizo**: [Sura 7: Utatuzi wa Matatizo & Udhibiti wa Hitilafu](../docs/chapter-07-troubleshooting/common-issues.md)
 
 ## Utangulizi
 
-FAQ hii kamili inatoa majibu kwa maswali yanayotokea mara kwa mara kuhusu Azure Developer CLI (azd) na utekelezaji wa Azure. Pata suluhisho za haraka kwa matatizo ya kawaida, elewa mbinu bora, na upate ufafanuzi kuhusu dhana na mtiririko wa kazi wa azd.
+FAQ hii ya kina inatoa majibu kwa maswali yanayoulizwa mara kwa mara kuhusu Azure Developer CLI (azd) na usambazaji wa Azure. Pata suluhisho za haraka kwa matatizo ya kawaida, elewa mbinu bora, na pata ufafanuzi juu ya dhana na mchakato wa azd.
 
 ## Malengo ya Kujifunza
 
-Kwa kupitia FAQ hii, utakuwa umeweza:
+Kwa kupitia FAQ hii, utakuwa na uwezo wa:
 - Kupata majibu ya haraka kwa maswali na matatizo ya kawaida ya Azure Developer CLI
 - Kuelewa dhana muhimu na istilahi kupitia muundo wa maswali na majibu ya vitendo
-- Kupata suluhisho za ufumbuzi wa matatizo kwa matatizo yanayotokea mara kwa mara na hali za makosa
-- Kujifunza mbinu bora kupitia maswali yanayoulizwa mara kwa mara kuhusu uboreshaji
-- Kugundua vipengele na uwezo wa juu kupitia maswali ya ngazi ya mtaalamu
-- Kurejea mwongozo wa gharama, usalama, na kimkakati kwa ufanisi
+- Kupata suluhisho za utatuzi wa matatizo ya mara kwa mara na hali za makosa
+- Kujifunza mbinu bora kupitia maswali yanayoulizwa sana kuhusu uboreshaji
+- Kugundua vipengele na uwezo wa hali ya juu kupitia maswali ya kiwango cha mtaalamu
+- Kufikia mwongozo wa gharama, usalama, na mbinu za usambazaji kwa ufanisi
 
 ## Matokeo ya Kujifunza
 
-Kwa kurejea mara kwa mara FAQ hii, utakuwa na uwezo wa:
-- Kutatua matatizo ya kawaida ya Azure Developer CLI kwa kujitegemea ukitumia suluhisho zilizotolewa
-- Kufanya maamuzi yenye ufahamu kuhusu mikakati ya uenezaji na usanidi
+Ukiendelea kurejea FAQ hii, utaweza:
+- Kutatua matatizo ya kawaida ya Azure Developer CLI kwa kujitegemea kwa kutumia suluhisho zilizotolewa
+- Kufanya maamuzi sahihi kuhusu mbinu za usambazaji na usanidi
 - Kuelewa uhusiano kati ya azd na zana na huduma nyingine za Azure
-- Kutumia mbinu bora kulingana na uzoefu wa jumuiya na mapendekezo ya wataalamu
-- Kufumbua matatizo ya uthibitishaji, utekelezaji, na usanidi kwa ufanisi
-- Kuboreshwa gharama na utendaji kwa kutumia maarifa na mapendekezo ya FAQ
+- Kutekeleza mbinu bora kwa msingi wa uzoefu wa jamii na mapendekezo ya wataalamu
+- Kutatua matatizo ya uthibitishaji, usambazaji, na usanidi kwa ufanisi
+- Kuboresha gharama na utendaji kwa kutumia maarifa na mapendekezo ya FAQ
 
-## Yaliyomo
+## Jedwali la Yaliyomo
 
-- [Kuanzia](../../../resources)
-- [Uthibitishaji & Upatikanaji](../../../resources)
-- [Violezo & Miradi](../../../resources)
-- [Usambazaji & Miundombinu](../../../resources)
-- [Usanidi & Mazingira](../../../resources)
-- [Ufumbuzi wa Matatizo](../../../resources)
-- [Gharama & Malipo](../../../resources)
-- [Mazoea Bora](../../../resources)
-- [Mada za Juu](../../../resources)
+- [Kuanza](#getting-started)
+- [Uthibitishaji & Upatikanaji](#authentication--access)
+- [Mifano & Miradi](#templates--projects)
+- [Usambazaji & Miundombinu](#deployment--infrastructure)
+- [Usanidi & Mazingira](#configuration--environments)
+- [Utatuzi wa Matatizo](#troubleshooting)
+- [Gharama & Malipo](#cost--billing)
+- [Mbinu Bora](#best-practices)
+- [Mada za Juu](#advanced-topics)
 
 ---
 
-## Getting Started
+## Kuanza
 
-### Q: What is Azure Developer CLI (azd)?
-**A**: Azure Developer CLI (azd) ni zana ya mstari wa amri inayomlenga mtengenezaji ambayo inaongeza kasi ya kupeleka programu yako kutoka kwenye mazingira ya maendeleo ya ndani hadi Azure. Inatoa mbinu bora kupitia violezo na husaidia katika mzunguko mzima wa uenezaji.
+### S: Azure Developer CLI (azd) ni nini?
+**J**: Azure Developer CLI (azd) ni chombo cha mstari wa amri kilicholenga waendelezaji ambacho huchochea muda unaochukua kupeleka programu yako kutoka kwenye mazingira ya maendeleo ya ndani hadi Azure. Kinatoa mbinu bora kupitia mifano na husaidia katika mzunguko mzima wa usambazaji.
 
-### Q: How is azd different from Azure CLI?
-**A**: 
-- **Azure CLI**: Chombo cha madhumuni ya jumla kwa kusimamia rasilimali za Azure
-- **azd**: Chombo linalolenga watengenezaji kwa mtiririko wa kazi wa uenezaji wa programu
-- azd hutumia Azure CLI ndani, lakini hutoa miundo ya ngazi ya juu kwa matukio ya kawaida ya maendeleo
-- azd inajumuisha violezo, usimamizi wa mazingira, na uendeshaji wa uenezaji wa programu kwa njia ya kiotomatiki
+### S: azd inatofautianaje na Azure CLI?
+**J**: 
+- **Azure CLI**: Zana ya matumizi ya jumla kwa kusimamia rasilimali za Azure
+- **azd**: Zana inayolenga waendelezaji kwa mchakato wa usambazaji wa programu
+- azd ina mchakato wake wa uthibitishaji na usambazaji; Azure CLI ni zana tofauti, ya kuongeza
+- azd inajumuisha mifano, usimamizi wa mazingira, na ut automatizishaji wa usambazaji
 
-### Q: Do I need Azure CLI installed to use azd?
-**A**: Yes, azd inahitaji Azure CLI kwa uthibitishaji na baadhi ya shughuli. Weka Azure CLI kwanza, kisha weka azd.
+### S: Je, ninahitaji Azure CLI kufunga ili kutumia azd?
+**J**: Sio kwa mchakato mkuu wa AZD. Thibitisha kwa `azd auth login`. Sakinisha Azure CLI tofauti wakati kiungo cha mfano au zoezi linapotekeleza amri za `az` kwa uwazi.
 
-### Q: What programming languages does azd support?
-**A**: azd haitegemei lugha maalum. Inafanya kazi na:
+### S: azd inaunga mkono lugha gani za programu?
+**J**: azd haina mwelekeo wa lugha maalum. Inafanya kazi na:
 - Node.js/JavaScript/TypeScript
 - Python
 - .NET/C#
 - Java
 - Go
 - PHP
-- Static websites
-- Containerized applications
+- Tovuti za kudumu
+- Programu zilizo ndani ya kontena
 
-### Q: Can I use azd with existing projects?
-**A**: Yes! Unaweza ama:
-1. Tumia `azd init` kuongeza usanidi wa azd kwenye miradi iliyopo
-2. Rekebisha miradi iliyopo ili ifanane na muundo wa kiolezo cha azd
-3. Tengeneza violezo vya kibinafsi vinavyoendana na usanifu wako uliopo
+### S: Je, naweza kutumia azd na miradi iliyopo?
+**J**: Ndiyo! Unaweza:
+1. Tumia `azd init` kuongeza usanidi wa azd kwa miradi iliyopo
+2. Badilisha miradi iliyopo ili ifuatane na muundo wa mfano wa azd
+3. Unda mifano maalum kulingana na usanifu wako uliopo
 
 ---
 
 ## Uthibitishaji & Upatikanaji
 
-### Q: How do I authenticate with Azure using azd?
-**A**: Tumia `azd auth login` itakayofungua dirisha la kivinjari kwa ajili ya uthibitishaji wa Azure. Kwa hali za CI/CD, tumia service principals au managed identities.
+### S: Ninawezaje kuthibitisha na Azure kutumia azd?
+**J**: Tumia `azd auth login` ambayo itafungua dirisha la kivinjari kwa uthibitishaji wa Azure. Kwa hali za CI/CD, tumia service principals au managed identities.
 
-### Q: Can I use azd with multiple Azure subscriptions?
-**A**: Yes. Tumia `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` kubainisha ni usajili gani utakaotumika kwa kila mazingira.
+### S: Je, naweza kutumia azd na usajili mwingi wa Azure?
+**J**: Ndiyo. Tumia `azd env set AZURE_SUBSCRIPTION_ID <subscription-id>` kuweka usajili gani utumike kwa kila mazingira.
 
-### Q: What permissions do I need to deploy with azd?
-**A**: Kawaida unahitaji:
-- **Contributor** role kwenye resource group au subscription
-- **User Access Administrator** ikiwa unafanyia uenezaji wa rasilimali zinazohitaji uteuzi wa nafasi
-- Mvuto wa ruhusa maalum hutofautiana kulingana na kiolezo na rasilimali zinazotumika
+### S: Nahitaji ruhusa gani kuwasambaza kwa azd?
+**J**: Kawaida unahitaji:
+- Nafasi ya **Contributor** kwenye kundi la rasilimali au usajili
+- Nafasi ya **User Access Administrator** ikiwa unasambaza rasilimali zinazohitaji utekelezaji wa nafasi
+- Ruhusa maalum zinatofautiana kulingana na mfano na rasilimali zinazosambazwa
 
-### Q: Can I use azd in CI/CD pipelines?
-**A**: Absolutely! azd imeundwa kwa ajili ya kuunganishwa na CI/CD. Tumia service principals kwa uthibitishaji na weka vigezo vya mazingira kwa usanidi.
+### S: Je, naweza kutumia azd katika mishale ya CI/CD?
+**J**: Kabisa! azd imeundwa kwa muunganisho wa CI/CD. Tumia service principals kwa uthibitishaji na weka vigezo vya mazingira kwa usanidi.
 
-### Q: How do I handle authentication in GitHub Actions?
-**A**: Tumia Azure Login action pamoja na cheti za service principal:
+### S: Ninawezaje kushughulikia uthibitishaji katika GitHub Actions?
+**J**: Pendelea ushirikiano wa utambulisho wa mizigo (OIDC), umewekwa na `azd pipeline config`. Mchakato ulioundwa husakinisha AZD na kuthibitisha AZD moja kwa moja na utambulisho wa ushirikiano. Hatua ya `azure/login` pekee haitiunde kiingilio cha AZD. Hatua ya kuingia ndani ya kazi iliyopo ni:
 ```yaml
-- uses: azure/login@v1
-  with:
-    creds: ${{ secrets.AZURE_CREDENTIALS }}
-- run: azd deploy --no-prompt
+permissions:
+  contents: read
+  id-token: write
+steps:
+  - uses: actions/checkout@v7
+  - uses: Azure/setup-azd@v2
+  - run: >-
+      azd auth login
+      --client-id "${{ vars.AZURE_CLIENT_ID }}"
+      --tenant-id "${{ vars.AZURE_TENANT_ID }}"
+      --federated-credential-provider github
 ```
+
+Toa au sambaza baada ya kuingia, na mazingira ya AZD yaliyokusudiwa, usajili, na eneo vimewekwa. Cheti cha ushirikiano cha utambulisho kinapaswa kuamini hifadhidata/kiashiria cha mchakato wa kazi au mazingira ya GitHub, na nafasi za Azure zinapaswa kuruhusu shughuli zinazohitajika.
 
 ---
 
-## Templates & Projects
+## Mifano & Miradi
 
-### Q: Where can I find azd templates?
-**A**: 
-- Official templates: [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- Community templates: GitHub search for "azd-template"
-- Tumia `azd template list` kuvinjari violezo vinavyopatikana
+### S: Ninawezaje kupata mifano ya azd?
+**J**: 
+- Mifano rasmi na ya jamii: [Awesome AZD](https://azure.github.io/awesome-azd/)
+- Mifano ya jamii: Tafuta GitHub kwa "azd-template"
+- Tumia `azd template list` kuvinjari mifano inayopatikana
 
-### Q: How do I create a custom template?
-**A**: 
-1. Anza na muundo wa kiolezo kilicho tayari
+### S: Ninawezaje kuunda mfano maalum?
+**J**: 
+1. Anza na muundo wa mfano uliopo
 2. Badilisha `azure.yaml`, faili za miundombinu, na msimbo wa programu
-3. Jaribu kwa kina kwa kutumia `azd up`
-4. Chapisha GitHub ukiweka lebo zinazofaa
+3. Jaribu kwa kina na `azd up`
+4. Chapisha GitHub na lebo zinazofaa
 
-### Q: Can I use azd without a template?
-**A**: Yes, tumia `azd init` kwenye mradi uliopo kutengeneza faili muhimu za usanidi. Utahitaji kusanidi `azure.yaml` na faili za miundombinu kwa mkono.
+### S: Je, naweza kutumia azd bila mfano?
+**J**: Ndiyo, tumia `azd init` katika mradi uliopo kuunda faili za usanidi zinazohitajika. Utahitaji kusanidi kwa mkono `azure.yaml` na faili za miundombinu.
 
-### Q: What's the difference between official and community templates?
-**A**: 
-- **Official templates**: Zinahifadhiwa na Microsoft, zinasasishwa mara kwa mara, na zina nyaraka kamili
-- **Community templates**: Zinatengenezwa na waendelezaji, zinaweza kuwa na matumizi maalum, ubora na matengenezo yanatofautiana
+### S: Tofauti kati ya mifano rasmi na ya jamii ni nini?
+**J**: 
+- **Mifano rasmi**: Inasimamiwa na Microsoft, inasasishwa mara kwa mara, na ina nyaraka kamili
+- **Mifano ya jamii**: Imetengenezwa na waendelezaji, inaweza kuwa na matumizi maalum, ubora na usimamizi hutofautiana
 
-### Q: How do I update a template in my project?
-**A**: Violezo havisasishwi kiotomatiki. Unaweza:
-1. Linganisha na kuunganisha mabadiliko kutoka kwa kiolezo cha chanzo kwa mkono
-2. Anza upya kwa `azd init` ukitumia kiolezo kilichosasishwa
-3. Chagua na kunakili maboresho maalum kutoka kwa violezo vilivyosasishwa
+### S: Ninawezaje kusasisha mfano kwenye mradi wangu?
+**J**: Mifano haisasishwi moja kwa moja. Unaweza:
+1. Linganisha na kuunganisha mabadiliko kutoka kwa mfano wa chanzo kwa mkono
+2. Anza upya na `azd init` ukitumia mfano uliosasishwa
+3. Chagua maboresho maalum kutoka kwa mifano iliyosasishwa
 
 ---
 
 ## Usambazaji & Miundombinu
 
-### Q: What Azure services can azd deploy?
-**A**: azd inaweza kupeleka huduma yoyote ya Azure kupitia Bicep/ARM templates, zikiwemo:
-- App Services, Container Apps, Functions
-- Databases (SQL, PostgreSQL, Cosmos DB)
-- Storage, Key Vault, Application Insights
-- Networking, security, and monitoring resources
+### S: Huduma gani za Azure azd inaweza kusambaza?
+**J**: azd inaweza kusambaza huduma yoyote ya Azure kupitia mifano ya Bicep/ARM, zikiwemo:
+- Huduma za Programu, Programu za Kontena, Functions
+- Hifadhidata (SQL, PostgreSQL, Cosmos DB)
+- Hifadhi, Key Vault, Application Insights
+- Mtandao, usalama, na rasilimali za ufuatiliaji
 
-### Q: Can I deploy to multiple regions?
-**A**: Yes, sanidi maeneo mbalimbali katika Bicep templates zako na weka parameter ya location ipasavyo kwa kila mazingira.
+### S: Je, naweza kusambaza kwa mikoa mingi?
+**J**: Ndiyo, sanidi mikoa mingi katika mifano yako ya Bicep na kuweka parameter ya eneo ipasavyo kwa kila mazingira.
 
-### Q: How do I handle database schema migrations?
-**A**: Tumia deployment hooks katika `azure.yaml`:
+### S: Ninawezaje kushughulikia uhamaji wa muundo wa hifadhidata?
+**J**: Tumia hooks za usambazaji katika `azure.yaml`:
 ```yaml
 hooks:
   postdeploy:
@@ -160,144 +169,137 @@ hooks:
       run: ./scripts/migrate-database.ps1
 ```
 
-### Q: Can I deploy only infrastructure without applications?
-**A**: Yes, tumia `azd provision` kupeleka tu vipengele vya miundombinu vilivyofafanuliwa kwenye violezo vyako.
+### S: Je, naweza kusambaza miundombinu tu bila programu?
+**J**: Ndiyo, tumia `azd provision` kusambaza sehemu za miundombinu tu zilizobainishwa katika mifano yako.
 
-### Q: How do I deploy to existing Azure resources?
-**A**: Hii ni ngumu na haiji kwa msaada wa moja kwa moja. Unaweza:
-1. Ingiza rasilimali zilizopo katika Bicep templates zako
-2. Tumia marejeleo ya rasilimali zilizopo katika templates
-3. Badilisha templates ili kuunda au kurejelea rasilimali kwa masharti
+### S: Ninawezaje kusambaza kwa rasilimali zilizopo za Azure?
+**J**: Ndiyo, wakati mfano unakiunga mkono. Rejelea rasilimali zilizopo na tamko za Bicep za `existing` au parameta za mfano za rasilimali zilizopo, na panga huduma za programu kwa malengo yao yaliyokusudiwa. Hii haisafirishi umiliki wala kuunda ruhusa zilizokosekana moja kwa moja. Kagua mfano kabla ya kusambaza.
 
-### Q: Can I use Terraform instead of Bicep?
-**A**: Kwa sasa, azd kwa msingi wake inaunga mkono Bicep/ARM templates. Msaada wa Terraform haujatangazwa rasmi, ingawa suluhisho za jumuiya zinaweza kuwepo.
+### S: Je, naweza kutumia Terraform badala ya Bicep?
+**J**: Ndiyo. AZD inaunga mkono Terraform pamoja na Bicep. Chagua mfano wa msingi wa Terraform au sanidi `infra.provider: terraform` ndani ya `azure.yaml`, pamoja na faili za Terraform na usanidi wa hali/nyuma. Angalia [mchakato wa Terraform](https://learn.microsoft.com/azure/developer/azure-developer-cli/use-terraform-for-azd).
 
 ---
 
 ## Usanidi & Mazingira
 
-### Q: How do I manage different environments (dev, staging, prod)?
-**A**: Tengeneza mazingira tofauti kwa `azd env new <environment-name>` na sanidi mipangilio tofauti kwa kila moja:
+### S: Ninawezaje kusimamia mazingira tofauti (dev, staging, prod)?
+**J**: Unda mazingira tofauti kwa `azd env new <environment-name>` na usanidi mipangilio tofauti kwa kila moja:
 ```bash
 azd env new development
 azd env new staging  
 azd env new production
 ```
 
-### Q: Where are environment configurations stored?
-**A**: Katika folda `.azure` ndani ya saraka ya mradi wako. Kila mazingira ina folda yake yenye faili za usanidi.
+### S: Usanidi wa mazingira huhifadhiwa wapi?
+**J**: Katika folda ya `.azure` ndani ya saraka ya mradi wako. Kila mazingira yana folda yake yenye faili za usanidi.
 
-### Q: How do I set environment-specific configuration?
-**A**: Tumia `azd env set` kusanidi vigezo vya mazingira:
+### S: Ninawezaje kuweka usanidi maalum wa mazingira?
+**J**: Tumia `azd env set` kuweka vigezo vya mazingira:
 ```bash
 azd env set AZURE_LOCATION eastus
 azd env set DATABASE_TIER Basic
 ```
 
-### Q: Can I share environment configurations across team members?
-**A**: Folda `.azure` ina taarifa nyeti na haipendekezwi kuingizwa kwenye udhibiti wa toleo. Badala yake:
-1. Andika vigezo vinavyohitajika vya mazingira
-2. Tumia skripti za uenezaji kusaidia kuanzisha mazingira
-3. Tumia Azure Key Vault kwa usanidi nyeti
+### S: Je, naweza kushirikiana usanidi wa mazingira kwa wanachama wa timu?
+**J**: Folda ya `.azure` ina taarifa nyeti na haipaswi kuwekwa kwenye udhibiti wa toleo. Badala yake:
+1. Andika mahitaji ya vigezo vya mazingira
+2. Tumia skiripti za usambazaji kufunga mazingira
+3. Tumia Azure Key Vault kwa usanidi wa siri
 
-### Q: How do I override template defaults?
-**A**: Weka vigezo vya mazingira vinavyolingana na parameter za kiolezo:
+### S: Ninavyoweza kuvunja chaguo za msingi za mfano?
+**J**: Weka vigezo vya mazingira vinavyolingana na parameta za mfano:
 ```bash
-azd env set LOCATION "West US 2"
+azd env set AZURE_LOCATION westus2
 azd env set SKU_NAME "B1"
 ```
 
+Vigezo vinavyotumiwa na mfano tu ndivyo huathiri usambazaji. `SKU_NAME` hapo juu ni mfano wa ingizo maalum, si usanidi wa jumla wa AZD.
+
 ---
 
-## Troubleshooting
+## Utatuzi wa Matatizo
 
-### Q: Why is `azd up` failing?
-**A**: Sababu za kawaida:
-1. **Authentication issues**: Endesha `azd auth login`
-2. **Insufficient permissions**: Angalia uteuzi wa nafasi zako za Azure
-3. **Resource naming conflicts**: Badilisha AZURE_ENV_NAME
-4. **Quota/capacity issues**: Angalia upatikanaji wa kikanda
-5. **Template errors**: Thibitisha Bicep templates
+### S: Kwa nini `azd up` inashindwa?
+**J**: Sababu za kawaida:
+1. **Matatizo ya uthibitishaji**: Endesha `azd auth login`
+2. **Ruhusa zisizotosheleza**: Angalia utekelezaji wa nafasi zako za Azure
+3. **Migongano ya majina ya rasilimali**: Kagua rasilimali inayoingiliana na ingizo la majina la mfano; unda mazingira tofauti kwa `azd env new` wakati upweke unahitajika
+4. **Matatizo ya uwezo/kipaumbele**: Angalia upatikanaji wa kanda
+5. **Makosa ya mfano**: Hakiki mifano ya Bicep
 
-### Q: How do I debug deployment failures?
-**A**: 
-1. Tumia `azd deploy --debug` kwa matokeo ya undani
-2. Angalia historia ya uenezaji kwenye Azure portal
-3. Kagua Activity Log kwenye Azure portal
-4. Tumia `azd show` kuonyesha hali ya mazingira ya sasa
+### S: Ninawezaje kutatua hitilafu za usambazaji?
+**J**: 
+1. Tumia `azd deploy --debug` kwa maelezo ya kina
+2. Angalia historia ya usambazaji kwenye lango la Azure
+3. Pitia Kumbukumbu ya Shughuli kwenye lango la Azure
+4. Tumia `azd show` kuonyesha hali ya sasa ya mazingira
 
-### Q: Why are my environment variables not working?
-**A**: Angalia:
-1. Majina ya vigezo yanalingana na parameter za kiolezo kwa usahihi
-2. Thamani zimewekewa nukuu ipasavyo ikiwa zina nafasi
+### S: Kwa nini vigezo vya mazingira havifanyi kazi?
+**J**: Angalia:
+1. Majina ya vigezo yanalingana kikamilifu na parameta za mfano
+2. Thamani zimewekewa nukuu ipasavyo kama zina nafasi
 3. Mazingira yamechaguliwa: `azd env select <environment>`
-4. Vigezo vimewekwa kwa mazingira sahihi
+4. Vigezo vimewekwa kwenye mazingira sahihi
 
-### Q: How do I clean up failed deployments?
-**A**: 
+### S: Ninawezaje kusafisha usambazaji uliofeli?
+**J**: 
 ```bash
-azd down --force --purge
+azd down
 ```
-Hii inafuta rasilimali zote na usanidi wa mazingira.
+Kagua kwanza mazingira yaliyoteuliwa na uthibitisho wa ufutaji. Hii hufuta rasilimali za Azure zilizotolewa, sio usanidi wa mazingira ya ndani wa `.azure`. `--purge` pia huomba ufutaji wa kudumu wa rasilimali zilizo wazi kutoka kwa "soft-delete" zinazoungwa mkono na inaweza kuzuiwa na ulinzi wa kuhifadhi/kufuta; hii si hatua ya kawaida ya urejeshaji.
 
-### Q: Why is my application not accessible after deployment?
-**A**: Angalia:
-1. Uenezaji ulimalizika kwa mafanikio
-2. Programu inaendesha (angalia logi kwenye Azure portal)
-3. Network security groups zinaruhusu trafiki
-4. DNS/vikoa maalum vimewekwa ipasavyo
+### S: Kwa nini programu yangu haiwezi kufikiwa baada ya usambazaji?
+**J**: Angalia:
+1. Usambazaji umekamilika kwa mafanikio
+2. Programu inaendeshwa (tazama kumbukumbu langoni Azure)
+3. Vikundi vya usalama wa mtandao vina ruhusa za trafiki
+4. DNS/majina ya desturi yamewekwa ipasavyo
 
 ---
 
 ## Gharama & Malipo
 
-### Q: How much will azd deployments cost?
-**A**: Gharama zinategemea:
-- Huduma za Azure zinazotumika
-- Madaraja ya huduma/SKUs zilizochaguliwa
-- Tofauti za bei kwa mikoa tofauti
+### S: Usambazaji wa azd utagharimu kiasi gani?
+**J**: Gharama zinategemea:
+- Huduma za Azure zinazotolewa
+- Viwango vya huduma/SKU zilizochaguliwa
+- Tofauti za bei kwa mikoa
 - Mifumo ya matumizi
 
-Tumia [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) kwa makisio.
+Tumia [Kipimo cha Bei cha Azure](https://azure.microsoft.com/pricing/calculator/) kwa makadirio.
 
-### Q: How do I control costs in azd deployments?
-**A**: 
-1. Tumia SKUs za daraja la chini kwa mazingira ya maendeleo
+### S: Ninawezaje kudhibiti gharama katika usambazaji wa azd?
+**J**: 
+1. Tumia SKU za ngazi ya chini kwa mazingira ya maendeleo
 2. Sanidi bajeti na arifa za Azure
-3. Tumia `azd down` kuondoa rasilimali wakati hazihitajiki
-4. Chagua mikoa inayofaa (gharama zinatofautiana kwa eneo)
-5. Tumia zana za Azure Cost Management
+3. Tumia `azd down` kuondoa rasilimali usizohitaji
+4. Chagua mikoa inayofaa (gharama zinatofautiana kwa maeneo)
+5. Tumia zana za Usimamizi wa Gharama za Azure
 
-### Q: Are there free tier options for azd templates?
-**A**: Huduma nyingi za Azure zinatoa tabaka za bure:
-- App Service: Tier ya bure inapatikana
-- Azure Functions: Utekelezaji 1M bure/mwezi
-- Cosmos DB: Tier ya bure yenye 400 RU/s
-- Application Insights: GB 5 za kwanza/mwezi bure
+### S: Je, kuna chaguzi za ngazi ya bure kwa mifano ya azd?
+**J**: Huduma zingine zina SKU za bure au ruzuku za kila mwezi, zikiwekwa chini ya sifa, mpango wa huduma, kanda, na vizingiti vya usajili. Hizi hazifanyi mfano mzima kuwa bure: hifadhidata, utafutaji, mtandao, rejista, telemetry, na uchanganuzi wa mfano vinaweza kusababisha gharama kwa kujitegemea. Angalia [orodha ya huduma za bure za Azure](https://azure.microsoft.com/free/) na bei za sasa kabla ya usambazaji wa kila rasilimali.
 
-Sanidi violezo kutumia tabaka za bure pale zinazopatikana.
-
-### Q: How do I estimate costs before deployment?
-**A**: 
-1. Kagua `main.bicep` ya kiolezo ili kuona rasilimali zitakazotengenezwa
-2. Tumia Azure Pricing Calculator kwa SKUs maalum
-3. Zindua kwenye mazingira ya maendeleo kwanza ili kufuatilia gharama halisi
+### S: Ninawezaje kukadiria gharama kabla ya usambazaji?
+**J**: 
+1. Kagua `main.bicep` ya mfano kuona rasilimali zinazotengenezwa
+2. Tumia Azure Pricing Calculator na SKU maalum
+3. Sambaza katika mazingira ya maendeleo kwanza kufuatilia gharama halisi
 4. Tumia Azure Cost Management kwa uchambuzi wa kina wa gharama
 
 ---
 
-## Mazoea Bora
+## Mbinu Bora
 
-### Q: What are the best practices for azd project structure?
-**A**: 
-1. Weka msimbo wa programu tofauti na miundombinu
-2. Tumia majina ya huduma yenye maana katika `azure.yaml`
-3. Tekeleza utunzaji wa makosa unaofaa katika skripti za kujenga
-4. Tumia usanidi maalum kwa mazingira
+### S: Ni mbinu gani bora za muundo wa mradi wa azd?
+**J**: 
+1. Hifadhi msimbo wa programu tofauti na miundombinu
+2. Tumia majina yenye maana kwa huduma katika `azure.yaml`
+3. Tekeleza utambuzi mzuri wa makosa katika skiripti za kujenga
+4. Tumia usanidi maalum wa mazingira
 5. Jumuisha nyaraka kamili
 
-### Q: How should I organize multiple services in azd?
-**A**: Tumia muundo uliopendekezwa:
+### S: Ninavyopaswa kupanga huduma nyingi katika azd?
+**J**: Tumia muundo unaopendekezwa:
 ```
 ├── src/
 │   ├── web/          # Frontend service
@@ -308,33 +310,33 @@ Sanidi violezo kutumia tabaka za bure pale zinazopatikana.
 └── README.md         # Project documentation
 ```
 
-### Q: Should I commit the `.azure` folder to version control?
-**A**: **Hapana!** Folda `.azure` ina taarifa nyeti. Iiweke kwenye `.gitignore`:
+### S: Je, nifanye nini kuhusu folda ya `.azure` katika udhibiti wa toleo?
+**J**: **Hapana!** Folda ya `.azure` ina taarifa nyeti. Idaftari kwenye `.gitignore`:
 ```gitignore
 .azure/
 ```
 
-### Q: How do I handle secrets and sensitive configuration?
-**A**: 
+### S: Ninawezaje kushughulikia siri na usanidi nyeti?
+**J**: 
 1. Tumia Azure Key Vault kwa siri
-2. Rejea siri za Key Vault kwenye usanidi wa programu
-3. Usiwape siri kwenye udhibiti wa toleo
-4. Tumia managed identities kwa uthibitishaji kati ya huduma
+2. Rejelea siri za Key Vault katika usanidi wa programu
+3. Usifanye commit kwa siri kwenye udhibiti wa toleo
+4. Tumia utambulisho ulioendeshwa kwa uthibitishaji kati ya huduma
 
-### Q: What's the recommended approach for CI/CD with azd?
-**A**: 
+### S: Ni njia gani inayopendekezwa kwa CI/CD na azd?
+**J**: 
 1. Tumia mazingira tofauti kwa kila hatua (dev/staging/prod)
-2. Tekeleza upimaji wa kiotomatiki kabla ya uenezaji
-3. Tumia service principals kwa uthibitishaji
-4. Hifadhi usanidi nyeti katika siri/vigezo vya pipeline
-5. Tekeleza vizingiti vya idhini kwa uenezaji wa uzalishaji
+2. Tekeleza upimaji wa moja kwa moja kabla ya usambazaji
+3. Tumia wakala wa huduma kwa uthibitishaji
+4. Hifadhi usanidi nyeti katika siri/variables za pipeline
+5. Tekeleza malango ya idhini kwa usambazaji wa uzalishaji
 
 ---
 
-## Mada za Juu
+## Mada Zinazoendelea
 
-### Q: Can I extend azd with custom functionality?
-**A**: Yes, kupitia deployment hooks katika `azure.yaml`:
+### S: Ninaweza kuongeza azd na utendakazi wa kawaida?
+**J**: Ndiyo, kupitia hooks za usambazaji katika `azure.yaml`:
 ```yaml
 hooks:
   predeploy:
@@ -343,68 +345,68 @@ hooks:
     run: ./scripts/custom-config.sh
 ```
 
-### Q: How do I integrate azd with existing DevOps processes?
-**A**: 
-1. Tumia amri za azd katika skripti za pipeline uliopo
-2. Sanifisha violezo vya azd kwa timu zote
-3. Unganisha na ufuatiliaji na arifa ulizopo
-4. Tumia pato la JSON la azd kwa kuingiza kwenye pipeline
+### S: Ninawezaje kuingiza azd na michakato ya sasa ya DevOps?
+**J**: 
+1. Tumia amri za azd katika scripts zilizopo za pipeline
+2. Wezesha mfano wa azd kwa timu zote
+3. Unganisha na ufuatiliaji na tahadhari zilizopo
+4. Tumia toleo la JSON la azd kwa ujumuishaji wa pipeline
 
-### Q: Can I use azd with Azure DevOps?
-**A**: Yes, azd inafanya kazi na mfumo wowote wa CI/CD. Tengeneza pipelines za Azure DevOps zinazotumia amri za azd.
+### S: Je, naweza kutumia azd na Azure DevOps?
+**J**: Ndiyo, azd hufanya kazi na mfumo wowote wa CI/CD. Tengeneza pipelines za Azure DevOps zinazotumia amri za azd.
 
-### Q: How do I contribute to azd or create community templates?
-**A**:
-1. **chombo cha azd**: Changia kwenye [Azure/azure-dev](https://github.com/Azure/azure-dev)
-2. **Violezo**: Tengeneza violezo ukifuata [miongozo ya violezo](https://github.com/Azure-Samples/awesome-azd)
-3. **Nyaraka**: Changia kwenye nyaraka katika [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
+### S: Ninawezaje kuchangia azd au kutengeneza kiolezo cha jumuiya?
+**J**: 
+1. **zana ya azd**: Changia katika [Azure/azure-dev](https://github.com/Azure/azure-dev)
+2. **Violezo**: Fuata [maelekezo ya mchango katika maktaba ya Awesome AZD](https://github.com/Azure/awesome-azd#3-contribute-to-gallery)
+3. **Nyaraka**: Changia katika nyaraka za [MicrosoftDocs/azure-dev-docs](https://github.com/MicrosoftDocs/azure-dev-docs)
 
-### Q: Je, ramani ya maendeleo ya azd ni ipi?
-**A**: Angalia the [ramani rasmi](https://github.com/Azure/azure-dev/projects) kwa sifa zilizo pangwa na maboresho.
+### S: Ratiba ya azd ni ipi?
+**J**: Angalia [ratiba rasmi](https://github.com/Azure/azure-dev/projects) kwa vipengele na maboresho yaliyopangwa.
 
-### Q: Ninawezaje kuhama kutoka kwa zana nyingine za utekelezaji kwenda azd?
-**A**: 
-1. Chambua usanifu wa utekelezaji uliopo
-2. Unda violezo vya Bicep vinavyofanana
-3. Sanidi `azure.yaml` ili ifanane na huduma zilizopo
+### S: Ninawezaje kuhamia kutoka zana nyingine za usambazaji kwenda azd?
+**J**: 
+1. Chunguza usanifu wa sasa wa usambazaji
+2. Tengeneza violezo sawa vya Bicep
+3. Sanidi `azure.yaml` ili iendane na huduma za sasa
 4. Jaribu kwa kina katika mazingira ya maendeleo
-5. Hamisha mazingira polepole
+5. Hamisha mazingira hatua kwa hatua
 
 ---
 
-## Je, bado una maswali?
+## Bado Una Maswali?
 
 ### **Tafuta Kwanza**
 - Angalia [nyaraka rasmi](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - Tafuta [masuala ya GitHub](https://github.com/Azure/azure-dev/issues) kwa matatizo yanayofanana
 
 ### **Pata Msaada**
-- [Majadiliano ya GitHub](https://github.com/Azure/azure-dev/discussions) - Msaada wa jamii
+- [Majadiliano ya GitHub](https://github.com/Azure/azure-dev/discussions) - Msaada wa jumuiya
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-developer-cli) - Maswali ya kiufundi
-- [Azure Discord](https://discord.gg/azure) - Chati ya jamii kwa wakati halisi
+- [Azure Discord](https://discord.gg/azure) - Mazungumzo ya jumuiya kwa wakati halisi
 
 ### **Ripoti Masuala**
-- [Masuala ya GitHub](https://github.com/Azure/azure-dev/issues/new) - Ripoti za mende na maombi ya vipengele
-- Jumuisha logi zinazohusiana, ujumbe za makosa, na hatua za kuiga tatizo
+- [Masuala ya GitHub](https://github.com/Azure/azure-dev/issues/new) - Ripoti za hitilafu na ombi la vipengele
+- Jumuisha kumbukumbu muhimu, ujumbe wa makosa, na hatua za kurudia tatizo
 
 ### **Jifunze Zaidi**
 - [Nyaraka za Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Kituo cha Usanifu wa Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Mfumo wa Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Kituo cha Miundo ya Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Mfumo Bora wa Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-*FAQ hii inasasishwa mara kwa mara. Imesasishwa: 9 Septemba 2025*
+*Mwongozo wa kiufundi ulioangaliwa: Novemba 4, 2026. Upatikanaji wa wingu na bei lazima yachekiwe kwa usajili wako na mkoa.*
 
 ---
 
-**Urambazaji**
+**Uavigeshaji**
 - **Somo lililopita**: [Kamusi](glossary.md)
-- **Somo lijalo**: [Mwongozo wa Masomo](study-guide.md)
+- **Somo lijalo**: [Mwongozo wa Kusoma](study-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Tamko la kutokuwajibika:
-Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Nyaraka asilia katika lugha yake ya asili inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, tunapendekeza kutumia tafsiri ya kitaalamu ya binadamu. Hatutawajibika kwa kutokuelewana au tafsiri potofu zitokanazo na matumizi ya tafsiri hii.
+**Kionyozo**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Hati ya asili katika lugha yake halisi inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatutojibu kwa kuelewa vibaya au tafsiri potofu zinazotokea kutokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

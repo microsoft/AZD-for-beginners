@@ -1,22 +1,22 @@
-# 4. fejezet: Infrastruktúra mint kód és telepítés
+# 4. fejezet: Infrastruktúra kódként és telepítés
 
-**📚 Tanfolyam**: [AZD kezdőknek](../../README.md) | **⏱️ Időtartam**: 1-1,5 óra | **⭐ Bonyolultság**: Középhaladó
+**📚 Tanfolyam**: [AZD kezdőknek](../../README.md) | **⏱️ Időtartam**: 2-3 óra olvasás; extra idő a telepítési gyakorlatokhoz | **⭐ Nehézségi szint**: Középhaladó
 
 ---
 
 ## Áttekintés
 
-Ez a fejezet az Infrastruktúra mint kód (IaC) mintákat tárgyalja Bicep sablonokkal, erőforrások létrehozásával és telepítési stratégiákkal az Azure Developer CLI használatával.
+Ez a fejezet az Infrastruktúra kódként (IaC) mintákat tárgyalja Bicep sablonokkal, erőforrások előkészítésével és telepítési stratégiákkal az Azure Developer CLI használatával.
 
-> Ellenőrizve a `azd 1.27.1` verzióval 2026 júliusában.
+> Parancs- és konfiguráció-áttekintési cél: `azd 1.37.2` (2026 november). Élő Azure erőforrás-előkészítés áttekintéskor nem történt.
 
 ## Tanulási célok
 
-A fejezet elvégzésével Ön:
-- Megérti a Bicep sablon szerkezetét és szintaxisát
-- Azure erőforrásokat hoz létre az `azd provision` segítségével
-- Alkalmazásokat telepít az `azd deploy` használatával
-- Kék-zöld és fokozatos telepítési stratégiákat valósít meg
+Ennek a fejezetnek a végére:
+- Megérted a Bicep sablon szerkezetét és szintaxisát
+- Azure erőforrásokat készítesz elő `azd provision` segítségével
+- Alkalmazásokat telepítesz `azd deploy` használatával
+- Megvalósítasz kék-zöld és gördülő telepítési stratégiákat
 
 ---
 
@@ -24,7 +24,7 @@ A fejezet elvégzésével Ön:
 
 | # | Lecke | Leírás | Idő |
 |---|--------|-------------|------|
-| 1 | [Erőforrások létrehozása](provisioning.md) | Azure erőforráskezelés az AZD-vel | 45 perc |
+| 1 | [Erőforrások előkészítése](provisioning.md) | Azure erőforráskezelés az AZD-vel | 45 perc |
 | 2 | [Telepítési útmutató](deployment-guide.md) | Alkalmazástelepítési stratégiák | 45 perc |
 | 3 | [Saját sablon készítése](custom-templates.md) | Újrahasználható azd sablonok készítése és közzététele | 30 perc |
 
@@ -33,25 +33,28 @@ A fejezet elvégzésével Ön:
 ## 🚀 Gyors kezdés
 
 ```bash
-# Inicializálás sablon alapján
-azd init --template azure-functions-python-v2-http
+# Initialize from template
+mkdir infrastructure-practice
+cd infrastructure-practice
+azd init --template todo-nodejs-mongo .
+azd auth login
 
-# Előnézet, hogy mi lesz létrehozva
+# Preview what will be created
 azd provision --preview
 
-# Csak az infrastruktúra kiépítése
+# Provision infrastructure only
 azd provision
 
-# Csak a kód telepítése
+# Deploy code only
 azd deploy
 
-# Vagy mindkettő egyszerre
+# Or both together
 azd up
 ```
 
 ---
 
-## 📁 AZD projekt struktúra
+## 📁 AZD projekt szerkezete
 
 ```
 my-project/
@@ -68,15 +71,15 @@ my-project/
 
 ---
 
-## 🔧 Alapvető parancsok
+## 🔧 Fontos parancsok
 
 | Parancs | Leírás |
 |---------|-------------|
 | `azd init` | Projekt inicializálása |
 | `azd provision` | Azure erőforrások létrehozása |
 | `azd deploy` | Alkalmazáskód telepítése |
-| `azd up` | létrehozás + telepítés |
-| `azd down` | Minden erőforrás törlése |
+| `azd up` | előkészítés + telepítés |
+| `azd down` | Összes erőforrás törlése |
 
 ---
 
@@ -85,14 +88,14 @@ my-project/
 | Irány | Fejezet |
 |-----------|---------|
 | **Előző** | [3. fejezet: Konfiguráció](../chapter-03-configuration/README.md) |
-| **Következő** | [5. fejezet: Több ügynökös megoldások](../chapter-05-multi-agent/README.md) |
+| **Következő** | [5. fejezet: Többügynökös megoldások](../chapter-05-multi-agent/README.md) |
 
 ---
 
-## 📖 Kapcsolódó anyagok
+## 📖 Kapcsolódó források
 
-- [Telepítés előtti ellenőrzések](../chapter-06-pre-deployment/README.md)
-- [Container App példák](../../examples/container-app/README.md)
+- [Előkészítés előtti ellenőrzések](../chapter-06-pre-deployment/README.md)
+- [Konténeralkalmazás példák](../../examples/container-app/README.md)
 - [Adatbázis alkalmazás példa](../../examples/database-app/README.md)
 
 ---

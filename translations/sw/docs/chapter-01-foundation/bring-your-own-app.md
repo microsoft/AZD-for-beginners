@@ -1,52 +1,52 @@
-# Leta Programu Yako - Ongeza azd kwenye Mradi Uliopo
+# Leta Programu Yako - Ongeza azd kwa Mradi Umojawapo
 
 **Uvinjari wa Sura:**
-- **📚 Mwanzo wa Kozi**: [AZD Kwa Wananchi](../../README.md)
-- **📖 Sura ya Sasa**: Sura 1 - Msingi & Kuanzia Haraka
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Waanzilishi](../../README.md)
+- **📖 Sura ya Sasa**: Sura ya 1 - Msingi & Kuanza Haraka
 - **⬅️ Iliyotangulia**: [Mradi Wako wa Kwanza](first-project.md)
-- **➡️ Ifuatayo**: [Makontena ya Maendeleo & Codespaces](dev-containers.md)
+- **➡️ Ifuatayo**: [Vifungashio vya Maendeleo & Codespaces](dev-containers.md)
 
-> Imethibitishwa dhidi ya `azd 1.27.1` Julai 2026.
+> Lengo la ukaguzi wa amri na usanidi: `azd 1.37.2` (Novemba 2026). Faili zilizotengenezwa zinategemea programu iliyobainishwa; usambazaji wa Azure haukujumuishwa katika ukaguzi huu.
 
 ## Utangulizi
 
-Katika [Mradi Wako wa Kwanza](first-project.md) ulipeleka programu kwa kuanzia na kiolezo. Lakini mara nyingi tayari una programu—API ya Node.js, huduma ya Python Flask, programu ya wavuti ya .NET—iliyoko katika folda kwenye mashine yako. Somo hili linaonyesha jinsi ya kuongeza azd kwenye msimbo uliopo ili uweze kupeleka kwa kutumia `azd up`, bila kioo kinachohitajika.
+Katika [Mradi Wako wa Kwanza](first-project.md) uliwasilisha programu kwa kuanza kutoka kwenye kiolezo. Lakini mara nyingi tayari una *programu*—API ya Node.js, huduma ya Python Flask, programu ya wavuti ya .NET—ikiwa kwenye folda kwenye kompyuta yako. Somo hili linaonyesha jinsi ya kuongeza azd kwenye msimbo uliopo ili uweze kuuisambaza kwa kutumia `azd up`, haina haja ya kiolezo.
 
 ## Malengo ya Kujifunza
 
-Mwisho wa somo hili, utakuwa umeweza:
-- Elewa njia tatu za kuanzisha mradi wa azd
-- Endesha `azd init` ndani ya msimbo uliopo
-- Elewa kinachofanywa na `azure.yaml` na folda ya `infra/` kwa programu yako
-- Jua lini kumruhusu azd kuzalisha miundombinu na lini kuandika yako mwenyewe
-- Tuma programu yako iliyopo kwenda Azure kwa kutumia `azd up`
+Mwisho wa somo hili, utakuwa na uwezo wa:
+- Kuelewa njia tatu za kuanzisha mradi wa azd
+- Kuwezesha `azd init` ndani ya msimbo uliopo
+- Kuelewa kile `azure.yaml` na folda ya `infra/` hufanya kwa programu yako
+- Kujua lini kumruhusu azd kutengeneza miundombinu au kuandika wewe mwenyewe
+- Kusambaza programu yako iliyopo kwenye Azure kwa kutumia `azd up`
 
 ## Matokeo ya Kujifunza
 
 Baada ya kumaliza somo hili, utaweza:
-- Anzisha azd katika mradi uliouwa tayari
-- Soma na hariri faili rahisi la `azure.yaml`
-- Toa miundombinu ya kuanzia na `azd infra generate`
-- Chagua mwenyeji sahihi wa Azure kwa programu yako
-- Tuma na safisha programu yako mwenyewe
+- Kuanza azd katika mradi uliyonayo tayari
+- Kusoma na kuhariri faili msingi la `azure.yaml`
+- Kutengeneza miundombinu ya mwanzo kwa kutumia `azd infra generate`
+- Kuchagua mwenyeji wa Azure unaofaa kwa programu yako
+- Kusambaza na kusafisha programu yako binafsi
 
 ---
 
 ## Njia Tatu za Kuanzisha Mradi wa azd
 
-| Mahali pa kuanzia | Amri | Lini utumie |
+| Mahali pa kuanzia | Amri | Lini kutumia |
 |----------------|---------|-------------|
-| **Kutoka kwenye kiolezo** | `azd init --template <name>` | Kujifunza, au kuanzisha programu mpya kutoka sampuli iliyothibitishwa |
-| **Kutoka kwenye msimbo wako uliopo** | `azd init` (katika folda ya mradi wako) | Tayari una programu na unataka kupeleka |
-| **Kutoka kwenye hifadhi ya Git** | `azd init --from-code` (katika hifadhi iliyokopiwa) | Kubadilisha azd kwa hifadhi iliyopo |
+| **Kutoka kwenye kiolezo** | `azd init --template <name> .` (folda tupu) | Kujifunza, au kuanza programu mpya kutoka mfano uliothibitishwa |
+| **Kutoka kwenye msimbo wako uliopo** | `azd init` (katika folda ya mradi wako) | Tayari una programu na unataka kuisambaza |
+| **Kutoka kwenye repo ya Git** | `azd init --from-code` (katika repo iliyochongwa) | Kukubali azd kwa hazina ya kuwepo |
 
-Tayari umejaribu njia ya kwanza. Somo hili linahusu ya pili—hali ya kawaida zaidi duniani halisi.
+Tayari umejaribu chaguo la kwanza. Somo hili linahusu la pili—hali ya kawaida kabisa katika maisha halisi.
 
 ---
 
-## Hatua ya 1: Endesha `azd init` Katika Mradi Wako
+## Hatua ya 1: Endesha `azd init` katika Mradi Wako
 
-Fungua terminal **ndani ya folda ya mradi wako uliopo** kisha endesha:
+Fungua terminal **ndani ya folda ya mradi wako uliopo** na endesha:
 
 ```bash
 cd my-existing-app
@@ -61,40 +61,39 @@ azd itauliza jinsi unavyotaka kuanzisha. Chagua:
   Select a template
 ```
 
-Chagua **"Tumia msimbo uliopo katika saraka hii."** azd kisha utachambua folda yako, utambue lugha yako na mfumo, na kupendekeza mwenyeji.
+Chagua **"Tumia msimbo ulioko katika saraka ya sasa."** azd kisha itachunguza folda yako, itagundua lugha na fremu yako, na kupendekeza mwenyeji.
 
-### Kile azd kinachotambua
+### Kile azd kinachogundua
 
-azd hutafuta ishara kama `package.json`, `requirements.txt`, `pom.xml`, `*.csproj`, au `Dockerfile`, na kupendekeza mwenyeji wa Azure unaofanana:
+azd inatafuta ishara za programu kama `package.json`, `requirements.txt`, `pom.xml`, `*.csproj`, au `Dockerfile`. Mtiririko wa kutoka-msimbo si mchawi wa uchaguzi wa mwenyeji kwa kila lengo la usambazaji linaloungwa mkono:
 
-| Programu yako | Mwenyeji aliyeonekana |
+| Programu yako | Mwenyeji kwa kawaida |
 |----------|----------------------|
-| Node.js / Python / programu ya wavuti ya .NET | Azure App Service au Container Apps |
-| Programu iliyofungashwa (`Dockerfile`) | Azure Container Apps |
-| Programu ya Function | Azure Functions |
-| Tovuti imara (matokeo ya kujenga React/Vue) | Azure Static Web Apps |
+| Programu zinazoungwa mkono Node.js / Python / .NET za wavuti | Kawaida Azure Container Apps; angalia maelezo yaliyotengenezwa |
+| Programu iliyohifadhiwa kwenye kontena (`Dockerfile`) | Azure Container Apps |
+| Programu ya function au Mradi wa Static Web Apps | Tumia kiolezo kinacholingana au tengeneza `azure.yaml` na miundombinu ikiwa kutoka-msimbo hauna msaada kwa mpangilio wako |
 
-Thibitisha huduma zilizotambuliwa, azd itatengeneza faili unazohitaji.
+Thibitisha huduma zilizotambulika, na azd itaandaa faili unazohitaji.
 
 ---
 
-## Hatua ya 2: Elewa Kile azd Kilichotengeneza
+## Hatua ya 2: Elewa Kile azd Kimeumba
 
-Baada ya init, utakuwa na vitu viwili vipya kwenye mradi wako:
+Baada ya kuanzisha, angalia `azure.yaml`. Mtiririko wa miundombinu uliotengenezwa unaweza kuweka miundombinu kuwa dhaifu mpaka utakapomshawishi `azd infra generate`; usifikirie `infra/` tayari ipo:
 
 ```
 my-existing-app/
 ├── azure.yaml          # ← NEW: tells azd what to deploy and where
-├── infra/              # ← NEW: Infrastructure as Code (Bicep by default)
+├── infra/              # Materialized with azd infra generate when using implicit infrastructure
 │   ├── main.bicep
 │   └── main.parameters.json
 ├── src/ (your code)    # unchanged
 └── ...                 # your existing files, untouched
 ```
 
-### `azure.yaml` — ufafanuzi wa mradi
+### `azure.yaml` — maelezo ya mradi
 
-Hiki ndicho moyo wa mradi wa azd. Mfupi unaonekana hivi:
+Hii ni moyo wa mradi wa azd. Maelezo ya **App Service** yafuatayo yanahitaji miundombinu inayolingana ya App Service; sio sababu ya kubadilisha mwenyeji wa Container Apps ulioundwa bila kubadilisha miundombinu:
 
 ```yaml
 # azure.yaml
@@ -106,66 +105,68 @@ services:
     host: appservice         # appservice | containerapp | function | staticwebapp
 ```
 
-Sehemu ya `services` ni muhimu: kila kipengee kinaunganisha saraka ya msimbo wako na mwenyeji wa Azure. Ikiwa programu yako ina sehemu ya mbele na API, utakuwa na huduma mbili.
+Sehemu ya `services` ni muhimu: kila kipengee kimeandikwa kuoanisha folda ya msimbo wako na mwenyeji wa Azure. Ikiwa programu yako ina mbele na API, utakuwa na huduma mbili.
 
 ### `infra/` — rasilimali zako za Azure kama msimbo
 
-Folda ya `infra/` ina faili za Bicep zinazobainisha rasilimali za Azure ambazo programu yako inahitaji (App Service, hifadhidata, nk). Huhitaji kuziandika kwa mkono—azd hutengeneza mwanzo unaofanya kazi. Unaweza kuzihariri baadaye kuongeza rasilimali au kuongeza usalama (imeelezwa katika [Sura 4](../chapter-04-infrastructure/README.md)).
+Folda ya `infra/` ina faili za Bicep ambazo zinaelezea rasilimali za Azure zinazohitajika na programu yako (Huduma ya Programu, msingi wa data, n.k.). Huna haja ya kuziandika kwa mkono—azd hutengeneza sehemu ya mwanzo inayofanya kazi. Una *weza* kuzihariri baadaye kuongeza rasilimali au kuongeza usalama (imeelezwa katika [Sura ya 4](../chapter-04-infrastructure/README.md)).
 
-> **Vidokezo:** Unataka kuona au kubinafsisha miundombinu iliyotengenezwa kabla ya kupeleka? Endesha `azd infra generate` (inapatikana pia kama `azd infra synth`) ili kuandika IaC kwenye diski kwa ajili ya mapitio na udhibiti wa matoleo.
+> **Kidokezo:** Unataka kuona au kubadilisha miundombinu iliyotengenezwa kabla ya kupeleka? Endesha `azd infra generate` (inapatikana pia kama `azd infra synth`) kuandika IaC kwenye diski ili uweze kuikagua na kudhibiti toleo lake.
 
 ---
 
-## Hatua ya 3: Weka Usanidi unaohitajika
+## Hatua ya 3: Weka Mipangilio Inayohitajika
 
-Ikiwa programu yako inahitaji mipangilio au siri (mkuu wa muunganisho, kitufe cha API), usiingize moja kwa moja. Tumia thamani za mazingira:
+Ikiwa programu yako inahitaji mipangilio au siri (kamba ya muunganisho, ufunguo wa API), usiweke vikali. Tumia thamani za mazingira:
 
 ```bash
-# Unda mazingira
+# Create an environment
 azd env new dev
 
-# Weka thamani isiyo ya siri
+# Set a non-secret value
 azd env set API_VERSION 1.0.0
 ```
 
-Kwa siri halisi, zihifadhi Key Vault na zirejelee kutoka kwa miundombinu yako—angalia [Sura 3: Usanidi na Uthibitishaji](../chapter-03-configuration/authsecurity.md).
+Hii inahifadhi thamani ya ndani pekee. Ili kuathiri programu, itumie waziwazi katika vigezo vya miundombinu, mipangilio ya huduma inayoungwa mkono, au hook; kuweka kigezo chochote bila mpangilio hauwezi kusanidi wakati wa utekelezaji uliowekwa.
+
+Kwa siri halisi, zahirisha katika Key Vault na zitaje kutoka kwa miundombinu yako—ona [Sura ya 3: Mipangilio na Uthibitishaji](../chapter-03-configuration/authsecurity.md).
 
 ---
 
-## Hatua ya 4: Tuma
+## Hatua ya 4: Weka Kazi
 
-Sasa tumia mtiririko wa kazi uleule unaoujua tayari:
+Sasa tumia mnada wa kazi ule ule unaoujua tayari:
 
 ```bash
-# Thibitisha (inahitajika kwa azd)
+# Authenticate (required for azd)
 azd auth login
 
-# Angalia rasilimali zitakazoundwa
+# Preview the resources that will be created
 azd provision --preview
 
-# Toa miundombinu na wapeleke msimbo wako
+# Provision infrastructure and deploy your code
 azd up
 ```
 
-Itakapokamilika, azd itachapisha URL ya programu yako. Thibitisha kwa njia ile ile kama programu yoyote ya azd:
+Linapomalizika, azd itaonyesha URL ya programu yako. Thibitisha kwa njia ile ile kama programu yoyote ya azd:
 
 ```bash
-azd show           # onyesha vituo vya mwisho
-azd monitor --logs # angalia kumbukumbu ikiwa inahitajika
+azd show           # show endpoints
+azd monitor --logs # check logs if needed
 ```
 
 ---
 
-## Masuala ya Kwanza Mara ya Kwanza
+## Masuala Yanayojitokeza Mara ya Kwanza
 
-| Dalili | Sababu Inayowezekana | Marekebisho |
+| Dalili | Sababu Inayowezekana | Suluhisho |
 |---------|--------------|-----|
-| azd haikutambua programu yangu | Manifesto haipo (k.m., `package.json`) | Ongeza manifesto, au chagua mwenyeji kwa mkono wakati wa `azd init` |
-| Ujenzi unashindwa wakati wa `azd up` | Programu inahitaji hatua ya ujenzi | Ongeza `buildCommand`/`outputPath` chini ya huduma katika `azure.yaml` |
-| Programu inaanza lakini inarudisha makosa | Ukosefu wa usanidi/siri | Weka thamani kwa `azd env set` au ungana na Key Vault |
-| Mwenyeji si sahihi | Ujitambuzi wa moja kwa moja umekisia | Hariri `host:` katika `azure.yaml` na endesha tena `azd up` |
+| azd haikuweza kugundua programu yangu | Mlango wa maelezo haupo (km, `package.json`) | Ongeza mlango wa maelezo, au chagua mwenyeji kwa mkono wakati wa `azd init` |
+| Ujenzi unashindwa wakati wa `azd up` | Programu inahitaji hatua ya ujenzi | Sanidi maandishi ya kifurushi cha programu au hook ya huduma `prepackage`; tumia `dist` kwa matokeo ya upeleka, si `buildCommand`/`outputPath` |
+| App inaanza lakini inarudisha makosa | Kukosekana kwa config/secret | Tengeneza thamani kwa mipangilio ya runtime ya app au rejeleo la Key Vault; `azd env set` peke yake haitoshi |
+| Mtandao mbaya umechaguliwa | Kugundua kiotomatiki hakuhusiani na mahitaji yako | Badilisha zote `host:` na miundombinu inayolingana, au chagua templeti inayofanana |
 
-Kwa zaidi, tazama [Sura 7: Utatuzi wa Matatizo](../chapter-07-troubleshooting/README.md).
+Kwa zaidi, angalia [Sura ya 7: Kutatua Matatizo](../chapter-07-troubleshooting/README.md).
 
 ---
 
@@ -179,26 +180,26 @@ azd down --force --purge
 
 ## Muhtasari
 
-- `azd init` → **"Tumia msimbo uliopo katika saraka hii"** huongeza azd kwenye programu uliyonayo tayari.
-- `azure.yaml` huunganisha folda zako za msimbo na wenyeji wa Azure; `infra/` hufafanua rasilimali kama Bicep.
-- `azd infra generate` hukuruhusu kupitia au kubinafsisha miundombinu iliyotengenezwa.
-- Baada ya kuanzishwa, programu yako iliyopo hutumia mtiririko sawa wa `azd up` / `azd down` kama programu inayotegemea kiolezo.
+- `azd init` → **"Tumia msimbo katika saraka ya sasa"** inaongeza azd kwa app unayo tayari.
+- `azure.yaml` inaweka ramani folda zako za msimbo kwa viongezi vya Azure; `infra/` inaelezea rasilimali kama Bicep.
+- `azd infra generate` inakuwezesha kupitia au kubinafsisha miundombinu iliyotengenezwa.
+- Mara ilipoanzishwa, app yako iliyopo hutumia mchakato mmoja wa `azd up` / `azd down` kama app ya msingi wa templeti.
 
 ---
 
-## 🔗 Uvinjari
+## 🔗 Uelekezaji
 
 | Mwelekeo | Somo |
 |-----------|--------|
 | **Iliyotangulia** | [Mradi Wako wa Kwanza](first-project.md) |
-| **Ifuatayo** | [Makontena ya Maendeleo & Codespaces](dev-containers.md) |
+| **Inayofuata** | [Dev Containers & Codespaces](dev-containers.md) |
 
 ## 📖 Rasilimali Zinazohusiana
 
 - [Msingi wa AZD](azd-basics.md)
 - [Sura 4: Miundombinu kama Msimbo](../chapter-04-infrastructure/README.md)
-- [Usanidi & Uthibitishaji](../chapter-03-configuration/authsecurity.md)
-- [Karatasi ya Amri](../../resources/cheat-sheet.md)
+- [Masanidi na Uthibitishaji](../chapter-03-configuration/authsecurity.md)
+- [Futa Amri](../../resources/cheat-sheet.md)
 
 ---
 
