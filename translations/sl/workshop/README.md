@@ -1,173 +1,176 @@
 <div align="center">
   <div style="background: linear-gradient(135deg, #0078d4, #106ebe); border-radius: 10px; padding: 20px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0, 120, 212, 0.3); border: 2px solid #005a9e;">
     <h2 style="color: white; margin: 0; font-size: 24px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      🎯 Delavnica AZD za razvijalce AI
+      🎯 Delavnica AZD za razvijalce umetne inteligence
     </h2>
     <p style="color: white; margin: 10px 0 0 0; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      <strong>Praktična delavnica za izdelavo AI aplikacij z Azure Developer CLI.</strong><br>
-      Dokončajte 7 modulov, da obvladate AZD predloge in delovne tokove za uvajanje AI.
+      <strong>Praktična delavnica za gradnjo AI aplikacij z ukazno vrstico Azure Developer CLI.</strong><br>
+      Dokončajte 7 modulov, da osvojite predloge AZD in delovne procese uvajanja umetne inteligence.
     </p>
     <div style="margin-top: 15px;">
       <span style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 15px; color: white; font-size: 14px;">
-        📅 Zadnja posodobitev: marec 2026
+        📅 Pregled navodil izvora: November 2026
       </span>
     </div>
   </div>
 </div>
 
-# AZD za razvijalce AI - delavnica
+# Delavnica AZD za razvijalce umetne inteligence
 
-Dobrodošli na praktični delavnici za učenje Azure Developer CLI (AZD) s poudarkom na uvajanju AI aplikacij. Ta delavnica vam pomaga pridobiti praktično razumevanje AZD predlog v 3 korakih:
+Dobrodošli na praktični delavnici za učenje Azure Developer CLI (AZD) s poudarkom na uvajanju aplikacij umetne inteligence. Ta delavnica vam pomaga pridobiti praktično razumevanje predlog AZD v 3 korakih:
 
-1. **Odkritje** - najdite predlogo, ki je prava za vas.
-1. **Uvajanje** - uvedite in preverite, da deluje
-1. **Prilagoditev** - prilagodite in iterirajte, da bo vaša!
+1. **Odkritje** - poiščite predlogo, ki je primerna za vas.
+1. **Uvajanje** - uvedite in preverite, da deluje.
+1. **Prilagoditev** - spremenite in prilagodite, da bo vaša!
 
-Over the course of this workshop, you will also be introduced to core developer tools and workflows, to help you streamline your end-to-end development journey.
+V času te delavnice se boste tudi seznanili z osnovnimi orodji in delovnimi procesi za razvijalce, ki vam bodo pomagali poenostaviti vašo celostno razvojno pot.
 
 <br/>
 
 ## Vodnik v brskalniku
 
-The workshop lessons are in Markdown. You can navigate them directly in GitHub - or launch a browser-based preview as shown in the screenshot below.
+Lekcije delavnice so v Markdownu. Lahko jih neposredno pregledujete na GitHubu ali pa zaženete predogled v brskalniku, kot je prikazano na spodnjem posnetku zaslona.
 
-![Delavnica](../../../translated_images/sl/workshop.75906f133e6f8ba0.webp)
+![Workshop](../../../translated_images/sl/workshop.75906f133e6f8ba0.webp)
 
-To use this option - fork the repository to your profile, and launch GitHub Codespaces. Once the VS Code terminal is active, type this command:
+Če želite uporabiti to možnost - naredite fork repozitorija na svoj profil in zaženite GitHub Codespaces. Ko je terminal VS Code aktiven, vnesite ta ukaz:
 
-This browser preview works in GitHub Codespaces, dev containers, or a local clone with Python and MkDocs installed.
+Ta predogled v brskalniku deluje v GitHub Codespaces, razvojnih kontejnerjih ali lokalni kopiji z nameščenim Pythonom in MkDocs.
 
 ```bash title="" linenums="0"
-mkdocs serve > /dev/null 2>&1 &
+python -m pip install -r requirements-dev.txt
+python -m mkdocs serve --config-file workshop/mkdocs.yml
 ```
 
-In a few seconds, you will see a pop-up dialog. Select the option to `Open in browser`. The web-based guide will now open in a new browser tab. Some benefits of this preview:
+Zaženite te ukaze iz **koreninskega repozitorija tečaja**, ne iz posebej inicializiranega vzorca AI. Držite predogled v ospredju, da bodo napake ostale vidne; ustavite ga s Ctrl+C. Če želite preveriti stran brez strežnika, zaženite `python -m mkdocs build --strict --config-file workshop/mkdocs.yml`.
 
-1. **Built-in search** - find keywords or lessons quickly.
-1. **Copy icon** - hover over codeblocks to see this option
-1. **Theme toggle** - switch between dark and light themes
-1. **Get help** - click the Discord icon in footer to join!
+V nekaj sekundah se bo pojavilo pojavnostno okno. Izberite možnost za `Open in browser`. Spletni vodnik se bo zdaj odprl v novem zavihku brskalnika. Nekatere prednosti tega predogleda:
+
+1. **Vgrajeno iskanje** - hitro poiščite ključne besede ali lekcije.
+1. **Ikona za kopiranje** - pokažite se nad blokom kode, da vidite to možnost.
+1. **Preklop teme** - preklapljajte med temno in svetlo temo.
+1. **Dobite pomoč** - kliknite ikono Discord v nogi, da se pridružite!
 
 <br/>
 
 ## Pregled delavnice
 
 **Trajanje:** 3-4 ure  
-**Raven:** Začetna do vmesna  
-**Predpogoji:** Poznavanje Azure, konceptov AI, VS Code in orodij ukazne vrstice.
+**Raven:** Začetna do srednja  
+**Predpogoji:** Poznavanje Azure, konceptov AI, VS Code in ukaznih orodij.
 
-This is a hands-on workshop where you learn by doing. Once you have completed the exercises, we recommend reviewing the AZD For Beginners curriculum to continue your learning journey into Security and Productivity best practices.
+To je praktična delavnica, kjer se učite z izvajanjem. Ko opravite vaje, priporočamo, da pregledate učni načrt AZD za začetnike, da nadaljujete svojo učno pot z najboljšimi praksami za varnost in produktivnost.
 
-| Time| Module  | Objective |
+| Čas| Modul  | Cilj |
 |:---|:---|:---|
-| 15 mins | [Introduction](docs/instructions/0-Introduction.md) | Uvod, razumevanje ciljev |
-| 30 mins | [Select AI Template](docs/instructions/1-Select-AI-Template.md) | Raziščite možnosti in izberite začetno predlogo | 
-| 30 mins | [Validate AI Template](docs/instructions/2-Validate-AI-Template.md) | Uvedite privzeto rešitev v Azure |
-| 30 mins | [Deconstruct AI Template](docs/instructions/3-Deconstruct-AI-Template.md) | Raziščite strukturo in konfiguracijo |
-| 30 mins | [Configure AI Template](docs/instructions/4-Configure-AI-Template.md) | Aktivirajte in preizkusite razpoložljive funkcije |
-| 30 mins | [Customize AI Template](docs/instructions/5-Customize-AI-Template.md) | Prilagodite predlogo svojim potrebam |
-| 30 mins | [Teardown Infrastructure](docs/instructions/6-Teardown-Infrastructure.md) | Počistite in sprostite vire |
-| 15 mins | [Wrap-Up & Next Steps](docs/instructions/7-Wrap-up.md) | Viri za učenje, izziv delavnice |
+| 15 min | [Uvod](docs/instructions/0-Introduction.md) | Upostavitev temeljev, razumevanje ciljev |
+| 30 min | [Izbira AI predloge](docs/instructions/1-Select-AI-Template.md) | Raziskava možnosti in izbira začetne |
+| 30 min | [Preverjanje AI predloge](docs/instructions/2-Validate-AI-Template.md) | Uvedba privzete rešitve v Azure |
+| 30 min | [Analiza AI predloge](docs/instructions/3-Deconstruct-AI-Template.md) | Raziskava strukture in konfiguracije |
+| 30 min | [Nastavitev AI predloge](docs/instructions/4-Configure-AI-Template.md) | Aktivacija in preizkus razpoložljivih funkcij |
+| 30 min | [Prilagoditev AI predloge](docs/instructions/5-Customize-AI-Template.md) | Prilagoditev predloge vašim potrebam |
+| 30 min | [Razgradnja infrastrukture](docs/instructions/6-Teardown-Infrastructure.md) | Čiščenje in sprostitev virov |
+| 15 min | [Zaključek in nadaljnji koraki](docs/instructions/7-Wrap-up.md) | Učilni viri, izziv delavnice |
 
 <br/>
 
 ## Kaj se boste naučili
 
-Think of the AZD Template as a learning sandbox to explore various capabilities and tools for end-to-end development on Microsoft Foundry. By the end of this workshop, you should have an intuitive sense for various tools and concepts in this context.
+Predstavljajte si predlogo AZD kot učno peskovnik za raziskovanje različnih zmogljivosti in orodij za celoviti razvoj v Microsoft Foundry. Do konca te delavnice boste imeli intuitivni občutek za različna orodja in koncepte v tem kontekstu.
 
-| Concept  | Objective |
+| Koncept  | Cilj |
 |:---|:---|
-| **Azure Developer CLI** | Razumeti ukaze in delovne tokove orodja|
-| **AZD Templates**| Razumeti strukturo projekta in konfiguracijo|
-| **Azure AI Agent**| Zagotavljanje in uvajanje projekta Microsoft Foundry  |
+| **Azure Developer CLI** | Razumeti ukaze orodja in delovne procese |
+| **AZD predloge**| Razumeti strukturo projekta in konfiguracijo |
+| **Azure AI Agent**| Priprava in uvajanje projekta Microsoft Foundry |
 | **Azure AI Search**| Omogočiti inženiring konteksta z agenti |
-| **Observability**| Raziščite sledenje, spremljanje in ocenjevanja |
-| **Red Teaming**| Raziščite adverzarialno testiranje in ukrepe omilitve |
+| **Opazovanje**| Raziskati sledenje, spremljanje in ocenjevanja |
+| **Red Teaming**| Raziskati sovražno testiranje in omilitve |
 
 <br/>
 
 ## Struktura delavnice
 
-The workshop is structured to take you on a journey from template discovery, to deployment, deconstruction, and customization - using the official [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) starter template as the basis.
+Delavnica je strukturirana tako, da vas popelje od odkritja predloge, do uvajanja, analize in prilagoditve - z uporabo uradne [Začetek z AI agenti](https://github.com/Azure-Samples/get-started-with-ai-agents) začetne predloge kot osnovo.
 
-### [Modul 1: Izberite AI predlogo](docs/instructions/1-Select-AI-Template.md) (30 mins)
+### [Modul 1: Izbira AI predloge](docs/instructions/1-Select-AI-Template.md) (30 min)
 
 - Kaj so AI predloge?
 - Kje lahko najdem AI predloge?
-- Kako lahko začnem graditi AI agente?
-- **Laboratorij**: Hiter začetek v Codespaces ali razvojni posodi
+- Kako začeti graditi AI agente?
+- **Lab**: Hiter začetek v Codespaces ali razvojni posodi
 
-### [Modul 2: Validacija AI predloge](docs/instructions/2-Validate-AI-Template.md) (30 mins)
+### [Modul 2: Preverjanje AI predloge](docs/instructions/2-Validate-AI-Template.md) (30 min)
 
 - Kakšna je arhitektura AI predloge?
-- Kakšen je razvojni potek AZD?
-- Kako lahko dobim pomoč pri razvoju z AZD?
-- **Laboratorij**: Uvedite in validirajte predlogo AI agentov
+- Kakšen je delovni proces razvoja z AZD?
+- Kako dobim pomoč pri razvoju z AZD?
+- **Lab**: Uvedba in preverjanje predloge AI agentov
 
-### [Modul 3: Razstavite AI predlogo](docs/instructions/3-Deconstruct-AI-Template.md) (30 mins)
+### [Modul 3: Analiza AI predloge](docs/instructions/3-Deconstruct-AI-Template.md) (30 min)
 
-- Raziščite svoje okolje v `.azure/` 
-- Raziščite nastavitve virov v `infra/` 
-- Raziščite svojo AZD konfiguracijo v `azure.yaml`s
-- **Laboratorij**: Spremenite spremenljivke okolja in ponovno uvedite
+- Raziskovanje okolja v `.azure/` 
+- Raziskovanje nastavitve virov v `infra/` 
+- Raziskovanje konfiguracije AZD v `azure.yaml`s
+- **Lab**: Spreminjanje okoljskih spremenljivk in ponovna uvedba
 
-### [Modul 4: Konfigurirajte AI predlogo](docs/instructions/4-Configure-AI-Template.md) (30 mins)
-- Raziščite: Retrieval Augmented Generation
-- Raziščite: Agent Evaluation & Red Teaming
-- Raziščite: Sledenje in spremljanje
-- **Laboratorij**: Raziščite AI agenta + opazovanje 
+### [Modul 4: Nastavitev AI predloge](docs/instructions/4-Configure-AI-Template.md) (30 min)
+- Raziskovanje: Pridobivanje z izboljšanim iskanjem
+- Raziskovanje: Ovrednotenje agentov in Red Teaming
+- Raziskovanje: Sledenje in spremljanje
+- **Lab**: Raziskovanje AI agenta + opazovanje 
 
-### [Modul 5: Prilagodite AI predlogo](docs/instructions/5-Customize-AI-Template.md) (30 mins)
-- Določite: PRD z zahtevami scenarija
-- Konfigurirajte: spremenljivke okolja za AZD
-- Implementirajte: vtičnice življenjskega cikla za dodatna opravila
-- **Laboratorij**: Prilagodite predlogo za moj scenarij
+### [Modul 5: Prilagoditev AI predloge](docs/instructions/5-Customize-AI-Template.md) (30 min)
+- Določitev: PRD z zahtevami scenarija
+- Nastavitev: Okoljske spremenljivke za AZD
+- Implementacija: Hooki za življenjski cikel za dodatne naloge
+- **Lab**: Prilagoditev predloge za moj scenarij
 
-### [Modul 6: Odstranitev infrastrukture](docs/instructions/6-Teardown-Infrastructure.md) (30 mins)
+### [Modul 6: Razgradnja infrastrukture](docs/instructions/6-Teardown-Infrastructure.md) (30 min)
 - Povzetek: Kaj so AZD predloge?
 - Povzetek: Zakaj uporabljati Azure Developer CLI?
 - Naslednji koraki: Poskusite drugo predlogo!
-- **Laboratorij**: Odstranite infrastrukturo in počistite
+- **Lab**: Odpravljanje infrastrukture in čiščenje
 
 <br/>
 
 ## Izziv delavnice
 
-Want to challenge yourself to do more? Here are some project suggestions - or share your ideas with us!!
+Želite izzvati sebe z več? Tukaj je nekaj predlogov za projekte – ali pa delite svoje ideje z nami!!
 
-| Project | Description |
+| Projekt | Opis |
 |:---|:---|
-|1. **Razstavite kompleksno AI predlogo** | Uporabite delovni tok in orodja, ki smo jih opisali, ter preverite, ali lahko uvedete, validirate in prilagodite drugo predlogo rešitve AI. _Kaj ste se naučili?_|
-|2. **Prilagodite glede na svoj scenarij**  | Poskusite napisati PRD (Product Requirements Document) za drug scenarij. Nato uporabite GitHub Copilot v svojem repozitoriju s predlogo v Agent Model - in ga prosite, naj za vas ustvari delovni tok za prilagoditev. _Kaj ste se naučili? Kako bi lahko izboljšali ta predloga?_|
+|1. **Analiza zahtevne AI predloge** | Uporabite delovni proces in orodja, ki smo jih opisali, in preverite, ali lahko uvedete, preverite in prilagodite drugačno AI rešitveno predlogo. _Kaj ste se naučili?_|
+|2. **Prilagoditev vašemu scenariju**  | Poskusite napisati PRD (dokument zahtev izdelka) za drug scenarij. Nato uporabite GitHub Copilot v vašem repozitoriju predloge v Agent Model in ga prosite, da vam ustvari delovni proces prilagoditve. _Kaj ste se naučili? Kako bi lahko izboljšali te predloge?_|
 | | |
 
 ## Imate povratne informacije?
 
-1. Objavite issue v tem repozitoriju - označite ga z `Workshop` za lažje iskanje.
-1. Pridružite se Microsoft Foundry Discordu - povežite se s kolegi!
+1. Objavite težavo na tem repozitoriju – označite jo z `Workshop` za lažjo uporabo.
+1. Pridružite se Discordu Microsoft Foundry - povežite se s sotekmovalci!
 
 
 | | | 
 |:---|:---|
-| **📚 Domača stran tečaja**| [AZD For Beginners](../README.md)|
-| **📖 Dokumentacija** | [Get started with AI templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️AI predloge** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
-|**🚀 Naslednji koraki** | [Začni delavnico](#pregled-delavnice) |
+| **📚 Domača stran tečaja**| [AZD za začetnike](../README.md)|
+| **📖 Dokumentacija** | [Začni z AI predlogami](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️AI predloge** | [Microsoft Foundry predloge](https://ai.azure.com/templates) |
+|**🚀 Naslednji koraki** | [Začni delavnico](#workshop-overview) |
 | | |
 
 <br/>
 
 ---
 
-**Navigacija:** [Main Course](../README.md) | [Introduction](docs/instructions/0-Introduction.md) | [Modul 1: Izberite predlogo](docs/instructions/1-Select-AI-Template.md)
+**Navigacija:** [Glavni tečaj](../README.md) | [Uvod](docs/instructions/0-Introduction.md) | [Modul 1: Izbira predloge](docs/instructions/1-Select-AI-Template.md)
 
-**Pripravljeni začeti graditi AI aplikacije z AZD?**
+**Ste pripravljeni začeti graditi AI aplikacije z AZD?**
 
 [Začni delavnico: Uvod →](docs/instructions/0-Introduction.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Izjava o omejitvi odgovornosti**:
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, upoštevajte, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v svojem izvirnem jeziku velja za avtoritativni vir. Za kritične informacije priporočamo strokovni človeški prevod. Ne odgovarjamo za morebitne nesporazume ali napačne interpretacije, ki bi izhajale iz uporabe tega prevoda.
+**Omejitev odgovornosti**:
+Ta dokument je bil preveden z uporabo AI prevajalske storitve [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za kritične informacije je priporočljiv strokovni človeški prevod. Ne odgovarjamo za morebitna nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

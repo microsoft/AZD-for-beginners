@@ -1,20 +1,20 @@
 # Poglavlje 7: Rješavanje problema i ispravljanje pogrešaka
 
-**📚 Tečaj**: [AZD za početnike](../../README.md) | **⏱️ Trajanje**: 1-1.5 sati | **⭐ Kompleksnost**: Srednja
+**📚 Tečaj**: [AZD za početnike](../../README.md) | **⏱️ Trajanje**: 1-1,5 sati | **⭐ Kompleksnost**: Srednja razina
 
 ---
 
 ## Pregled
 
-Ovo poglavlje pomaže vam dijagnosticirati i riješiti uobičajene probleme pri radu s Azure Developer CLI. Od neuspjeha u implementaciji do problema specifičnih za AI.
+Ovo poglavlje pomaže vam dijagnosticirati i riješiti uobičajene probleme prilikom rada s Azure Developer CLI. Od neuspjeha implementacije do problema specifičnih za AI.
 
-> Potvrđeno za `azd 1.27.1` u srpnju 2026.
+> Upute za naredbe pregleda su u skladu s objavljenim `azd 1.37.2` referentnim materijalom. Implementacije u oblaku nisu izvršene. Zamijenite primjere naziva resursa i ID-ove prije korištenja naredbi.
 
 ## Ciljevi učenja
 
 Završetkom ovog poglavlja ćete:
-- Dijagnosticirati uobičajene neuspjehe implementacije AZD-a
-- Ispravljati probleme s autentikacijom i dozvolama
+- Dijagnosticirati uobičajene neuspjehe AZD implementacije
+- Ispravljati probleme s autentifikacijom i dopuštenjima
 - Riješiti probleme s povezivanjem AI usluga
 - Koristiti Azure Portal i CLI za rješavanje problema
 
@@ -24,26 +24,26 @@ Završetkom ovog poglavlja ćete:
 
 | # | Lekcija | Opis | Vrijeme |
 |---|--------|-------------|------|
-| 1 | [Česti problemi](common-issues.md) | Često susretani problemi | 30 min |
-| 2 | [Vodič za ispravljanje pogrešaka](debugging.md) | Strategije ispravljanja korak po korak | 45 min |
-| 3 | [Rješavanje AI problema](ai-troubleshooting.md) | Problemi specifični za AI | 30 min |
+| 1 | [Uobičajeni problemi](common-issues.md) | Često se javljajući problemi | 30 min |
+| 2 | [Vodič za ispravljanje pogrešaka](debugging.md) | Strategije korak-po-korak | 45 min |
+| 3 | [Rješavanje problema AI](ai-troubleshooting.md) | Problemi specifični za AI | 30 min |
 
 ---
 
 ## 🚨 Brza rješenja
 
-### Problemi s autentikacijom
+### Problemi s autentifikacijom
 ```bash
-# Potrebno za AZD tokove rada
+# Required for AZD workflows
 azd auth login
 
-# Opcionalno ako također izravno koristite Azure CLI naredbe
+# Optional if you are also using Azure CLI commands directly
 az login
 
-azd auth status
+azd auth login --check-status
 ```
 
-### Neuspjesi pri postavljanju
+### Neuspjesi u provisioningu
 ```bash
 azd show
 azd monitor --logs
@@ -51,18 +51,21 @@ az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
 ### Sukobi resursa
+Prvo pregledajte postojeće pogreške resursa i implementacije. Nemojte brisati zajedničko ili produkcijsko okruženje da biste riješili sukob u nazivima. Za **novo privremeno okruženje**, koristite jedinstveni naziv:
+
 ```bash
-azd down --force --purge
 azd env new different-name
 azd up
 ```
 
-### Prekoračena kvota
+### Prekoračenje kvote
 ```bash
 az vm list-usage --location eastus --output table
-azd env set AZURE_LOCATION westus2
-azd up
+# Check the affected service's own quotas, not just VM quotas.
+# For a new environment only, choose a supported region with available quota.
 ```
+
+Promjena `AZURE_LOCATION` ne premješta postojeće resurse i može uzrokovati sukobe lokacija prilikom ponovne implementacije.
 
 ---
 
@@ -73,22 +76,24 @@ azd up
 | `AuthenticationError` | Niste prijavljeni | `azd auth login` |
 | `ResourceNotFound` | Nedostaje resurs | Provjerite nazive resursa |
 | `QuotaExceeded` | Ograničenja pretplate | Zatražite povećanje kvote |
-| `InvalidTemplate` | Pogreška u sintaksi Bicep-a | `az bicep build` |
-| `Conflict` | Resurs već postoji | Koristite novo ime ili izbrišite |
-| `Forbidden` | Nedostatak dozvola | Provjerite RBAC uloge |
+| `InvalidTemplate` | Sintaksna pogreška u Bicep-u | `az bicep build` |
+| `Conflict` | Resurs već postoji | Koristite novi naziv ili izbrišite |
+| `Forbidden` | Nedovoljna dopuštenja | Provjerite RBAC uloge |
 
 ---
 
 ## 🔄 Resetiranje i oporavak
 
 ```bash
-# Soft reset (zadrži resurse, ponovno rasporedi kod)
-azd deploy --force
+# Soft reset (keep resources, redeploy code)
+azd deploy
 
-# Hard reset (izbriši sve, započni iznova)
-azd down --force --purge
+# Hard reset (delete everything, start fresh)
+azd down
 azd up
 ```
+
+Hard reset briše podatke i može promijeniti krajnje točke. Prvo napravite sigurnosnu kopiju i pregledajte interaktivne upite za brisanje. `--force --purge` je prikladan samo za privremena okruženja kada je namjera nepovratnog brisanja.
 
 ---
 

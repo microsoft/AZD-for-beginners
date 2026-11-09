@@ -1,433 +1,227 @@
-# Jednostavan Flask API - Primjer Container App
+# Jednostavan Flask API — Azure Container Apps
 
-**Put učenja:** Početnik ⭐ | **Vrijeme:** 25-35 minuta | **Cijena:** 0-15 $/mjesec
+**Razina:** Početnik · **Vrijeme:** 30–45 minuta uključujući postavljanje
 
-Potpuni, funkcionalni Python Flask REST API implementiran na Azure Container Apps pomoću Azure Developer CLI (azd). Ovaj primjer pokazuje osnovne korake implementacije kontejnera, automatsko skaliranje i nadzor.
+Implementirajte Python Flask CRUD API pomoću Azure Developer CLI (azd). Izvorni kod, Dockerfile,
+Bicep i parametri implementacije su uključeni. Ovo je **primjer za učenje**, nije
+API spreman za produkciju.
 
-## 🎯 Što ćete naučiti
+## Što ćete naučiti
 
-- Implementirati Python aplikaciju u kontejneru na Azure
-- Konfigurirati automatsko skaliranje sa scale-to-zero
-- Implementirati health probe i provjere spremnosti
-- Nadzirati dnevnike i metrike aplikacije
-- Koristiti Azure Developer CLI za brzu implementaciju
-
-## 📦 Što je uključeno
-
-✅ **Flask aplikacija** - Potpuni REST API s CRUD operacijama (`src/app.py`)  
-✅ **Dockerfile** - Konfiguracija kontejnera spremna za produkciju  
-✅ **Bicep infrastruktura** - Okruženje Container Apps i implementacija API-ja  
-✅ **AZD konfiguracija** - Jedan naredbeni setup za implementaciju  
-✅ **Health Probes** - Konfigurirane provjere liveness i readiness  
-✅ **Automatsko skaliranje** - 0-10 replika prema HTTP opterećenju  
-
-## Arhitektura
+- Izgraditi i objaviti spremnik pomoću azd.
+- Konfigurirati ulazni promet i probes za liveness/readiness.
+- Provjeriti odgovore CRUD i pregledavati dnevnike aplikacije.
+- Razumjeti zašto podatci u memoriji nisu prikladni za trajne aplikacije.
 
 ```mermaid
-graph TD
-    subgraph ACA[Okruženje Azure Container Apps]
-        Flask[Flask API spremnik<br/>Zdravstvene krajnje točke<br/>REST API<br/>Automatsko skaliranje 0-10 replika]
-        AppInsights[Application Insights]
-    end
+flowchart LR
+    Client -->|HTTPS| API[Flask API — Container App]
+    API --> Memory[Process-local item dictionary]
+    API -->|stdout| Logs[Container Apps / Log Analytics]
 ```
+
+**Važno:** stavke se drže u jednom procesu. Zadano je **jedan Gunicorn radnik,
+0–1 replika**, namjerno izbjegavajući nekonzistentne podatke između radnika/replika.
+Stavke se gube nakon ponovnog pokretanja, promjene revizije ili skaliranja na nulu. Povećanje replika
+zahtijeva zajedničku trajnu pohranu. API nema autentifikaciju ni autorizaciju.
 
 ## Preduvjeti
 
-### Potrebno
-- **Azure Developer CLI (azd)** - [Vodič za instalaciju](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure pretplata** - [Besplatan račun](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Instaliraj Docker](https://www.docker.com/products/docker-desktop/) (za lokalno testiranje)
-
-### Provjera preduvjeta
+- [Trenutno stabilni azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+  (objavljena verzija u vrijeme pregleda: 1.37.2).
+- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) za provjeru.
+- Docker s pokrenutim daemonom; potreban je za zadanu lokalnu izgradnju slike.
+- Azure pretplata, dopuštenja za kreiranje resursa i regionalna kvota za Container Apps.
+- Bash za dolje navedene naredbe (ili ekvivalentni PowerShell).
+- Python 3.11 za opcionalni lokalni razvoj.
 
 ```bash
-# Provjerite verziju azd (potreban 1.5.0 ili viši)
 azd version
-
-# Provjerite Azure prijavu
+az version
+docker info
 azd auth login
-
-# Provjerite Docker (neobavezno, za lokalno testiranje)
-docker --version
+az login
 ```
 
-## ⏱️ Vrijeme implementacije
-
-| Faza | Trajanje | Što se događa |
-|-------|----------|--------------||
-| Postavljanje okruženja | 30 sekundi | Kreiranje azd okruženja |
-| Izgradnja kontejnera | 2-3 minute | Docker build Flask aplikacije |
-| Provisioniranje infrastrukture | 3-5 minuta | Kreiranje Container Apps, registara, monitoringa |
-| Implementacija aplikacije | 2-3 minute | Slanje slike i implementacija u Container Apps |
-| **Ukupno** | **8-12 minuta** | Spremna kompletna implementacija |
+CLI alati imaju zasebne prijave. Koristite istu pretplatu u oba.
 
 ## Brzi početak
 
+Iz korijena repozitorija:
+
 ```bash
-# Navigirajte do primjera
 cd examples/container-app/simple-flask-api
-
-# Inicijalizirajte okruženje (odaberite jedinstveno ime)
-azd env new myflaskapi
-
-# Postavite sve (infrastruktura + aplikacija)
+azd env new flask-demo
 azd up
-# Bit ćete upitani da:
-# 1. Odaberete Azure pretplatu
-# 2. Odaberete lokaciju (npr. eastus2)
-# 3. Pričekate 8-12 minuta za postavljanje
-
-# Dohvatite svoj API endpoint
-azd env get-values
-
-# Testirajte API
-curl $(azd env get-value API_ENDPOINT)/health
-```
-
-**Očekivani rezultat:**
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z",
-  "service": "simple-flask-api",
-  "version": "1.0.0"
-}
-```
-
-## ✅ Provjera implementacije
-
-### Korak 1: Provjeri status implementacije
-
-```bash
-# Pogledajte implementirane usluge
-azd show
-
-# Očekivani izlaz pokazuje:
-# - Usluga: api
-# - Krajnja točka: https://ca-api-[env].xxx.azurecontainerapps.io
-# - Status: Radi
-```
-
-### Korak 2: Testiraj API krajnje točke
-
-```bash
-# Dohvati API krajnju točku
 API_URL=$(azd env get-value API_ENDPOINT)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
+API_NAME=$(azd env get-value API_NAME)
+curl --fail-with-body "${API_URL}/health"
+```
 
-# Testiraj status
-curl $API_URL/health
+Očekivano: HTTP 200 i JSON s `"status":"healthy"`,
+`"service":"simple-flask-api"` i trenutnim UTC vremenskim žigom.
+Provisioning i izrada slike obično traju nekoliko minuta; trajanja variraju.
 
-# Testiraj početnu krajnju točku
-curl $API_URL/
+Početni provisioning koristi javnu hello-world sliku koja sluša na portu 80.
+`azure.yaml` bira `infra/app/api.bicep` i odgovarajuću datoteku parametara za
+implementaciju servisa, što prebacuje sliku, ingress i probes na port 8000.
+Ne brišite te parametre implementacije.
 
-# Kreiraj stavku
-curl -X POST $API_URL/api/items \
+## Provjera CRUD
+
+Pokrenite sljedeće redom dok je ista replika aktivna:
+
+```bash
+# Create: HTTP 201; note the returned id (1 for a fresh process).
+curl -i -X POST "${API_URL}/api/items" \
   -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "My first item"}'
+  -d '{"name":"Test Item","description":"My first item"}'
 
-# Dohvati sve stavke
-curl $API_URL/api/items
+# Read list: HTTP 200, total 1 in a fresh process.
+curl --fail-with-body "${API_URL}/api/items"
+
+# Replace 1 if your create response returned another id.
+curl --fail-with-body "${API_URL}/api/items/1"
+curl -i -X PUT "${API_URL}/api/items/1" \
+  -H "Content-Type: application/json" -d '{"name":"Updated Item"}'
+curl -i -X DELETE "${API_URL}/api/items/1"
+curl -i "${API_URL}/api/items/1"
 ```
 
-**Kriteriji uspješnosti:**
-- ✅ Health endpoint vraća HTTP 200
-- ✅ Root endpoint prikazuje informacije o API-ju
-- ✅ POST kreira stavku i vraća HTTP 201
-- ✅ GET vraća kreirane stavke
+Uspjeh: POST 201, čitanja/PUT 200, DELETE 204 bez tijela, zatim nedostajuća stavka 404.
+Neispravan/neobjektni JSON ili prazno ime vraća 400.
+Ako stavka nestane između zahtjeva, provjerite restart ili skaliranje na nulu;
+ovo je namjerna ograničenje u memoriji, nije trajnost.
 
-### Korak 3: Pregledaj dnevnike
+| Krajnja točka | Metode |
+|---|---|
+| `/` | GET — informacije o servisu |
+| `/health` | GET — liveness/readiness |
+| `/api/items` | GET, POST |
+| `/api/items/{id}` | GET, PUT, DELETE |
+
+## Dnevnici i konfiguracija
 
 ```bash
-# Prikaz uživo logova pomoću azd monitor
-azd monitor --logs
-
-# Ili upotrijebite Azure CLI:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# Trebali biste vidjeti:
-# - Poruke o pokretanju Gunicorna
-# - Zapise HTTP zahtjeva
-# - Informacije o aplikaciji u zapisima
+az containerapp logs show --name "$API_NAME" --resource-group "$RG_NAME" --follow
 ```
 
-## Struktura projekta
+Očekivano: pokretanje Gunicorna, dnevnici pristupa zahtjevima i poruke aplikacije.
+`azd monitor --logs` otvara prikaz portala; ne strimuje u terminal.
+Application Insights je provisioniran, ali **nije instrumentiran ovim Flask kodom**;
+koristite Container Apps/Log Analytics za stdout dnevnike.
 
+Uredite `infra/app/api.bicep` za CPU/memoriju, ograničenja replika ili pravila skaliranja, zatim
+pokrenite `azd up`. Zadano je 0.5 vCPU, 1 GiB, minimalno 0 / maksimalno 1 replika i
+HTTP prag od 50 istovremenih zahtjeva. Skaliranje na nulu može uzrokovati kašnjenje hladnog starta.
+
+Poljubno `azd env set MAX_REPLICAS`, `API_KEY`, `LOG_LEVEL` ili
+`SCALE_TO_ZERO_TIMEOUT` vrijednosti **nisu povezane s ovom predloškom ili aplikacijom**.
+Postavljanje vrijednosti ne znači automatski da je runtime varijabla okruženja.
+Slika eksplicitno veže port 8000; ažurirajte Dockerfile, Bicep ingress i probes
+zajedno ako mijenjate port.
+
+## Datoteke
+
+```text
+azure.yaml
+infra/main.bicep
+infra/main.parameters.json
+infra/app/container-apps.bicep       # Environment, registry, monitoring
+infra/app/api.bicep                  # App, ingress, probes, scale settings
+infra/app/api.parameters.json        # Image and resource values for azd deploy
+src/app.py
+src/Dockerfile
+src/requirements.txt
 ```
-simple-flask-api/
-├── azure.yaml              # AZD configuration
-├── infra/
-│   ├── main.bicep         # Main infrastructure
-│   ├── main.parameters.json
-│   └── app/
-│       ├── container-env.bicep
-│       └── api.bicep
-└── src/
-    ├── app.py             # Flask application
-    ├── requirements.txt
-    └── Dockerfile
-```
 
-## API krajnje točke
+## Lokalni razvoj
 
-| Krajnja točka | Metoda | Opis |
-|----------|--------|-------------|
-| `/health` | GET | Provjera zdravlja |
-| `/api/items` | GET | Dohvat svih stavki |
-| `/api/items` | POST | Kreiranje nove stavke |
-| `/api/items/{id}` | GET | Dohvat određene stavke |
-| `/api/items/{id}` | PUT | Ažuriranje stavke |
-| `/api/items/{id}` | DELETE | Brisanje stavke |
-
-## Konfiguracija
-
-### Varijable okruženja
+Iz ovog direktorija primjera:
 
 ```bash
-# Postavi prilagođene postavke
-azd env set PORT 8000
-azd env set LOG_LEVEL info
-azd env set MAX_REPLICAS 20
+python -m venv .venv
+source .venv/bin/activate  # PowerShell: .\.venv\Scripts\Activate.ps1
+python -m pip install -r src/requirements.txt
+python src/app.py
 ```
 
-### Konfiguracija skaliranja
-
-API se automatski skalira prema HTTP prometu:
-- **Minimalni broj replika**: 0 (scale-to-zero kad je neaktivan)
-- **Maksimalni broj replika**: 10
-- **Istovremeni zahtjevi po replici**: 50
-
-## Razvoj
-
-### Pokreni lokalno
+U drugom terminalu testirajte `http://localhost:8000/health` i CRUD krajnje točke.
+Ili izgradite i pokrenite stvarnu sliku:
 
 ```bash
-# Instalirajte ovisnosti
-cd src
-pip install -r requirements.txt
-
-# Pokrenite aplikaciju
-python app.py
-
-# Testirajte lokalno
-curl http://localhost:8000/health
-```
-
-### Izgradi i testiraj kontejner
-
-```bash
-# Izradi Docker sliku
 docker build -t flask-api:local ./src
-
-# Pokreni spremnik lokalno
-docker run -p 8000:8000 flask-api:local
-
-# Testiraj spremnik
-curl http://localhost:8000/health
+docker run --rm -p 8000:8000 flask-api:local
 ```
 
-## Implementacija
+Za promjene samo u kodu nakon prve implementacije, pokrenite `azd deploy api`.
+Za promjene u Bicepu, pokrenite `azd up` za ponovni provisioning i implementaciju.
 
-### Potpuna implementacija
+## Praktične vježbe
+
+### 1. Provjera odbijanja unosa
+
+**Početna točka:** implementirani API, `API_URL` gore.
+**Cilj:** potvrditi da API odbija nevaljane JSON oblike i nedostajuća imena.
 
 ```bash
-# Implementirajte infrastrukturu i aplikaciju
-azd up
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '[]'
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '{"name":""}'
 ```
 
-### Implementacija samo koda
+**Kriteriji uspjeha / rješenje:** oba vraćaju 400 s JSON pogreškom, ne 500.
+**Čest problem:** izostavljanje zaglavlja JSON content-type.
+
+### 2. Dodajte krajnju točku samo za čitanje
+
+**Početna točka:** `src/app.py`. **Cilj:** proširiti i ponovo implementirati API.
+Dodajte ovo prije `if __name__ == '__main__':` bloka:
+
+```python
+@app.route('/version', methods=['GET'])
+def version():
+    return jsonify({'version': '1.0.0'})
+```
+
+Pokrenite `azd deploy api`, zatim `curl --fail-with-body "${API_URL}/version"`.
+**Kriterij uspjeha:** HTTP 200 i `{"version":"1.0.0"}`.
+**Čest problem:** stavljanje rute nakon blokirajućeg `app.run()` poziva pri
+testiranju s `python src/app.py`.
+
+### Provjera znanja
+
+Zašto je jedan radnik nedovoljan za trajne podatke? Zato što i jedan proces gubi
+svoj rječnik pri ponovnom pokretanju. Produkcijska verzija treba trajnu zajedničku pohranu,
+autentifikaciju, autorizaciju, migracije, testove i operativni nadzor.
+
+## Troškovi i rješavanje problema
+
+Ovo nije zajamčena besplatna implementacija: osnovni registar i pohrana/ingest dnevnika
+mogu uzrokovati troškove čak i kada je izračun aplikacije na nuli. Koristite
+[kalkulator cijena](https://azure.microsoft.com/pricing/calculator/) za vašu regiju.
+
+- **Neuspjeh izgradnje Dockera:** provjerite `docker info`, mrežni pristup i ovisnosti.
+- **Nezdrava aplikacija:** pregledajte konzolne/sistemske dnevnike i provjerite port slike, ingress,
+  i probes su usklađeni. Zadrživač ne smije biti probean na Flask portu.
+- **403/dozvole:** provjerite pretplatu i dopuštenja za kreiranje resursa.
+- **Stavke nestaju:** stanje u memoriji se resetira pri ponovnom pokretanju/skaliranju na nulu; dodajte bazu podataka
+  za trajno ponašanje.
+
+## Čišćenje i sljedeći koraci
 
 ```bash
-# Implementirajte samo kod aplikacije (infrastruktura nepromijenjena)
-azd deploy api
+azd down
 ```
 
-### Ažuriraj konfiguraciju
+Pregledajte upit za brisanje i potvrdite da je posvećena grupa resursa uklonjena.
+Nemojte koristiti destruktivno čišćenje nad grupom resursa koja sadrži nepovezane podatke.
 
-```bash
-# Ažuriraj varijable okoline
-azd env set API_KEY "new-api-key"
-
-# Ponovno implementiraj s novom konfiguracijom
-azd deploy api
-```
-
-## Nadzor
-
-### Pregled dnevnika
-
-```bash
-# Prikaz uživo dnevnika pomoću azd monitor
-azd monitor --logs
-
-# Ili koristite Azure CLI za Container Apps:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# Prikaži zadnjih 100 linija
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-```
-
-### Praćenje metrika
-
-```bash
-# Otvori Azure Monitor nadzornu ploču
-azd monitor --overview
-
-# Pregledaj određene metrike
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "Requests,ResponseTime"
-```
-
-## Testiranje
-
-### Health Check
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/health
-```
-
-Očekivani odgovor:
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z"
-}
-```
-
-### Kreiranje stavke
-
-```bash
-curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/items \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "A test item"}'
-```
-
-### Dohvat svih stavki
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
-```
-
-## Optimizacija troškova
-
-Ova implementacija koristi scale-to-zero, tako da plaćate samo kad API obrađuje zahtjeve:
-
-- **Trošak pri mirovanju**: ~0 $/mjesec (skalirano na nulu)
-- **Aktivni trošak**: ~0.000024 $/sekundi po replici
-- **Očekivani mjesečni trošak** (lagana upotreba): 5-15 $
-
-### Daljnje smanjenje troškova
-
-```bash
-# Smanji maksimalni broj replika za razvoj
-azd env set MAX_REPLICAS 3
-
-# Koristi kraći vremenski period neaktivnosti
-azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 minuta
-```
-
-## Rješavanje problema
-
-### Kontejner se ne pokreće
-
-```bash
-# Provjerite zapise spremnika pomoću Azure CLI
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-
-# Provjerite lokalnu izgradnju Docker slike
-docker build -t test ./src
-```
-
-### API nije dostupan
-
-```bash
-# Provjerite je li ulaz vanjski
-az containerapp show --name api --resource-group rg-simple-flask-api \
-  --query properties.configuration.ingress.external
-```
-
-### Visoka vremena odziva
-
-```bash
-# Provjerite upotrebu CPU-a/podatkovne memorije
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "CPUPercentage,MemoryPercentage"
-
-# Povećajte resurse ako je potrebno
-az containerapp update --name api --resource-group rg-simple-flask-api \
-  --cpu 1.0 --memory 2Gi
-```
-
-## Čišćenje
-
-```bash
-# Izbrišite sve resurse
-azd down --force --purge
-```
-
-## Sljedeći koraci
-
-### Proširite ovaj primjer
-
-1. **Dodajte bazu podataka** - Integrirajte Azure Cosmos DB ili SQL bazu
-   ```bash
-   # Dodajte Cosmos DB modul u infra/main.bicep
-   # Ažurirajte app.py s povezom na bazu podataka
-   ```
-
-2. **Dodajte autentifikaciju** - Implementirajte Microsoft Entra ID ili API ključeve
-   ```python
-   # Dodajte middleware za autentifikaciju u app.py
-   from functools import wraps
-   ```
-
-3. **Postavite CI/CD** - GitHub Actions workflow
-   ```yaml
-   # Create .github/workflows/deploy.yml
-   name: Deploy to Azure
-   on: [push]
-   ```
-
-4. **Dodajte upravljani identitet** - Siguran pristup Azure uslugama
-   ```bicep
-   # Update infra/app/api.bicep
-   identity: { type: 'SystemAssigned' }
-   ```
-
-### Povezani primjeri
-
-- **[Database App](../../../../../examples/database-app)** - Potpuni primjer s SQL bazom
-- **[Microservices](../../../../../examples/container-app/microservices)** - Arhitektura s više servisa
-- **[Container Apps Master Guide](../README.md)** - Svi obrasci za kontejnere
-
-### Resursi za učenje
-
-- 📚 [AZD za početnike tečaj](../../../README.md) - Glavna početna stranica tečaja
-- 📚 [Container Apps obrasci](../README.md) - Više obrazaca implementacije
-- 📚 [AZD galerija predložaka](https://azure.github.io/awesome-azd/) - Zajednički predlošci
-
-## Dodatni resursi
-
-### Dokumentacija
-- **[Flask dokumentacija](https://flask.palletsprojects.com/)** - Vodič za Flask framework
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Službeni Azure dokumenti
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - Referenca naredbi azd
-
-### Tutorijali
-- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Implementirajte svoju prvu aplikaciju
-- **[Python na Azure](https://learn.microsoft.com/azure/developer/python/)** - Vodič za razvoj u Pythonu
-- **[Bicep jezik](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastruktura kao kod
-
-### Alati
-- **[Azure Portal](https://portal.azure.com)** - Vizualno upravljanje resursima
-- **[VS Code Azure ekstenzija](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - Integracija s IDE-om
-
----
-
-**🎉 Čestitamo!** Implementirali ste Flask API spreman za produkciju u Azure Container Apps s automatskim skaliranjem i nadzorom.
-
-**Imate pitanja?** [Otvorite problem](https://github.com/microsoft/AZD-for-beginners/issues) ili provjerite [FAQ](../../../resources/faq.md)
+[Sljedeće: Aplikacija baze podataka](../../../../../examples/database-app) · [Mikroservisi](../../../../../examples/container-app/microservices) ·
+[Pregled kontejnera](../README.md) · [Početna stranica tečaja](../../../README.md) ·
+[Prijavite problem](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 

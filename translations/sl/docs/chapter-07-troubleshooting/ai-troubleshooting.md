@@ -1,26 +1,28 @@
 # Vodnik za odpravljanje težav specifičnih za AI
 
 **Navigacija po poglavjih:**
-- **📚 Domov tečaja**: [AZD For Beginners](../../README.md)
-- **📖 Trenutno poglavje**: Poglavje 7 - Odpravljanje težav in razhroščevanje
-- **⬅️ Prejšnje**: [Vodnik za razhroščevanje](debugging.md)
+- **📚 Domov tečaja**: [AZD Za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 7 - Odpravljanje težav in odpravljanje napak
+- **⬅️ Prejšnje**: [Vodnik za odpravljanje napak](debugging.md)
 - **➡️ Naslednje poglavje**: [Poglavje 8: Produkcijski in poslovni vzorci](../chapter-08-production/production-ai-practices.md)
-- **🤖 Povezano**: [Poglavje 2: Razvoj, osredotočen na AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🤖 Povezano**: [Poglavje 2: Razvoj z AI na prvem mestu](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-Ta obsežen vodnik za odpravljanje težav obravnava pogoste težave pri nameščanju AI rešitev z AZD in ponuja rešitve ter tehnike razhroščevanja, specifične za storitve Azure AI.
+Ta obsežen vodnik za odpravljanje težav obravnava pogoste težave pri uvajanju AI rešitev z AZD, z rešitvami in tehnikami odpravljanja napak, ki so specifične za Azure AI storitve.
 
-## Kazalo vsebine
+> **Obseg:** Ukazi uporabljajo primerne imena sredstev; zamenjajte jih in izberite pravilno naročnino. Bicep bloki so fragmenti za združitev v obstoječi predlog, ne samostojne uvedbe. Python izrezki zahtevajo navedene SDK-je in konfiguracijo aplikacije. Za to oceno ni bilo izvedene žive Azure uvedbe.
 
-- [Težave storitve Microsoft Foundry Models](#azure-openai-service-issues)
-- [Težave z Azure AI Search](#težave-z-azure-ai-search)
-- [Težave pri nameščanju Container Apps](#težave-pri-nameščanju-container-apps)
-- [Napake pri overjanju in dovoljenjih](#napake-pri-overjanju-in-dovoljenjih)
-- [Neuspehi pri nameščanju modela](#neuspehi-pri-nameščanju-modela)
-- [Težave z zmogljivostjo in skaliranjem](#težave-z-zmogljivostjo-in-skaliranjem)
-- [Upravljanje stroškov in kvot](#upravljanje-stroškov-in-kvot)
-- [Orodja in tehnike za razhroščevanje](#orodja-in-tehnike-za-razhroščevanje)
+## Kazalo
 
-## Težave storitve Microsoft Foundry Models
+- [Težave s storitvijo Microsoft Foundry Models](#microsoft-foundry-models-service-issues)
+- [Težave z Azure AI Search](#azure-ai-search-problems)
+- [Težave z uvajanjem Container Apps](#container-apps-deployment-issues)
+- [Težave z avtentikacijo in dovoljenji](#authentication-and-permission-errors)
+- [Neuspehi uvajanja modelov](#model-deployment-failures)
+- [Težave z zmogljivostjo in skaliranjem](#performance-and-scaling-issues)
+- [Upravljanje stroškov in kvot](#cost-and-quota-management)
+- [Orodja in tehnike za odpravljanje napak](#debugging-tools-and-techniques)
+
+## Težave s storitvijo Microsoft Foundry Models
 
 ### Težava: Storitev OpenAI ni na voljo v regiji
 
@@ -31,34 +33,29 @@ Error: The requested resource type is not available in the location 'westus'
 
 **Vzroki:**
 - Microsoft Foundry Models ni na voljo v izbrani regiji
-- Kvota v prednostnih regijah je porabljena
+- Kvota porabljena v prednostnih regijah
 - Regionalne omejitve zmogljivosti
 
 **Rešitve:**
 
 1. **Preverite razpoložljivost regije:**
 ```bash
-# Prikaži razpoložljive regije za OpenAI
-az cognitiveservices account list-skus \
-  --kind OpenAI \
-  --query "[].locations[]" \
-  --output table
+# Inspect model/deployment-type offerings in a candidate region
+az cognitiveservices model list --location eastus2 --output json
+# Availability in the catalog does not guarantee quota or physical capacity.
 ```
 
 2. **Posodobite konfiguracijo AZD:**
-```yaml
-# azure.yaml - Force specific region
-infra:
-  provider: bicep
-  path: infra
-  module: main
-parameters:
-  location: "eastus2"  # Known working region
+```bash
+# For a new environment: choose a supported region with available quota
+azd env set AZURE_LOCATION eastus2
+# Templates with a separate model-location parameter must wire that value
+# through infra/main.parameters.json as documented by the template.
 ```
 
 3. **Uporabite alternativne regije:**
 ```bicep
-// infra/main.bicep - Multi-region fallback
+// infra/main.bicep - Explicit location selection, NOT automatic fallback
 @allowed([
   'eastus2'
   'francecentral'
@@ -68,7 +65,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### Težava: Kvota za nameščanje modelov je presežena
+### Težava: Kvota za uvajanje modela presežena
 
 **Simptomi:**
 ```
@@ -79,36 +76,30 @@ Error: Deployment failed due to insufficient quota
 
 1. **Preverite trenutno kvoto:**
 ```bash
-# Preveri porabo kvote
+# Check quota usage
 az cognitiveservices usage list \
-  --name YOUR_OPENAI_RESOURCE \
-  --resource-group YOUR_RG
+  --location eastus2 --output table
 ```
 
 2. **Zahtevajte povečanje kvote:**
-```bash
-# Oddaj zahtevo za povečanje kvote
-az support tickets create \
-  --ticket-name "OpenAI Quota Increase" \
-  --description "Need increased quota for production deployment" \
-  --severity "minimal" \
-  --problem-classification "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/quota_service_problemClassification_guid"
-```
+Uporabite potek upravljanja kvot na portalu Foundry za prizadeto naročnino, regijo, model in vrsto uvajanja. Oglejte si [uradne smernice za kvote](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota). Zahteva za kvoto VM ne povečuje kvote modela.
 
-3. **Optimizirajte kapaciteto modela:**
+3. **Optimizirajte zmogljivost modela:**
 ```bicep
 // Reduce initial capacity
 resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
+  parent: openAi // Existing account resource declared in your template
+  name: 'chat-model'
   properties: {
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
   }
   sku: {
-    name: 'Standard'
-    capacity: 1  // Start with minimal capacity
+    name: 'GlobalStandard' // Verify this model/version/type in the target region
+    capacity: 1  // Capacity units are model/deployment-type specific
   }
 }
 ```
@@ -124,21 +115,16 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 1. **Uporabite podprto različico API-ja:**
 ```python
-# Uporabite najnovejšo podprto različico
-AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
+# Stable dated Azure OpenAI data-plane API, where supported by your feature
+AZURE_OPENAI_API_VERSION = "2024-10-21"
 ```
 
 2. **Preverite združljivost različice API-ja:**
-```bash
-# Naštej podprte različice API-ja
-az rest --method get \
-  --url "https://management.azure.com/providers/Microsoft.CognitiveServices/operations?api-version=2023-05-01" \
-  --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
-```
+Preverite [referenco življenjskega cikla Azure OpenAI API-ja](https://learn.microsoft.com/azure/ai-foundry/openai/api-version-lifecycle). ARM različice API-ja za ponudnike virov **ne** vključujejo različic inference/data-plane API-jev. Novi v1 odjemalci uporabljajo `/openai/v1/` brez datiranega `api-version`; ne mešajte obeh konfiguracij odjemalcev.
 
 ## Težave z Azure AI Search
 
-### Težava: Cena storitve Search ni zadostna
+### Težava: Nezadosten cenovni razred storitve iskanja
 
 **Simptomi:**
 ```
@@ -147,11 +133,14 @@ Error: Semantic search requires Basic tier or higher
 
 **Rešitve:**
 
-1. **Nadgradite cenovni razred:**
+1. **Uporabite podprt cenovni razred:**
+
+Semantični razvrščevalnik zahteva Basic ali višji razred. Prehod z brezplačnega/basic na drug razred morda zahteva ustvarjanje nove storitve iskanja in ponovno ustvarjanje indeksov; urejanje SKU-ja ni zagotovljena nadgradnja na mestu.
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
   name: searchServiceName
+  location: location
   location: location
   sku: {
     name: 'basic'  // Minimum for semantic search
@@ -165,7 +154,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **Onemogočite semantično iskanje (v razvoju):**
+2. **Onemogočite semantično iskanje (za razvoj):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -179,7 +168,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### Težava: Napake pri ustvarjanju indeksa
+### Težava: Napake pri ustvarjanju indeksov
 
 **Simptomi:**
 ```
@@ -188,9 +177,9 @@ Error: Cannot create index, insufficient permissions
 
 **Rešitve:**
 
-1. **Preverite ključe storitve Search:**
+1. **Preverite ključe storitve iskanja:**
 ```bash
-# Pridobi administratorski ključ iskalne storitve
+# Get search service admin key
 az search admin-key show \
   --service-name YOUR_SEARCH_SERVICE \
   --resource-group YOUR_RG
@@ -198,12 +187,13 @@ az search admin-key show \
 
 2. **Preverite shemo indeksa:**
 ```python
-# Preveri shemo indeksa
+# Validate index schema
 from azure.search.documents.indexes import SearchIndexClient
 from azure.search.documents.indexes.models import SearchIndex
 
 def validate_index_schema(index_definition):
     """Validate index schema before creation."""
+    # These are this application's requirements, not universal Search fields.
     required_fields = ['id', 'content']
     field_names = [field.name for field in index_definition.fields]
     
@@ -214,19 +204,20 @@ def validate_index_schema(index_definition):
 
 3. **Uporabite upravljano identiteto:**
 ```bicep
-// Grant search permissions to managed identity
+// Grant index-definition management permissions to the managed identity.
+// Search Index Data Contributor manages documents, not index definitions.
 resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: searchService
-  name: guid(searchService.id, containerApp.id, searchIndexDataContributorRole)
+  name: guid(searchService.id, containerApp.id, 'Search Service Contributor')
   properties: {
     principalId: containerApp.identity.principalId
-    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '8ebe5a00-799e-43f5-93ac-243d3dce84a7')
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '7ca78c08-252a-4471-8644-bb5ff32d4ba0')
     principalType: 'ServicePrincipal'
   }
 }
 ```
 
-## Težave pri nameščanju Container Apps
+## Težave z uvajanjem Container Apps
 
 ### Težava: Napake pri gradnji kontejnerja
 
@@ -259,21 +250,22 @@ EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-2. **Validirajte odvisnosti:**
+2. **Preverite odvisnosti:**
 ```txt
-# requirements.txt - Pin versions for stability
-fastapi==0.104.1
-uvicorn==0.24.0
-openai==1.3.7
-azure-identity==1.14.1
-azure-keyvault-secrets==4.7.0
-azure-search-documents==11.4.0
-azure-cosmos==4.5.1
+# Dependency names for these snippets. Resolve supported versions in your
+# project's environment, test together, then commit a lock/pinned requirements file.
+fastapi
+uvicorn
+openai
+azure-identity
+azure-keyvault-secrets
+azure-search-documents
+azure-cosmos
 ```
 
 3. **Dodajte preverjanje zdravja:**
 ```python
-# main.py - Dodaj končno točko za preverjanje stanja
+# main.py - Add health check endpoint
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -283,7 +275,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Težava: Zagon Container App ni uspel
+### Težava: Neuspehi zagona Container App
 
 **Simptomi:**
 ```
@@ -307,7 +299,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
           }
           probes: [
             {
-              type: 'startup'
+              type: 'Startup'
               httpGet: {
                 path: '/health'
                 port: 8000
@@ -327,9 +319,12 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **Optimizirajte nalaganje modela:**
 ```python
-# Odloženo nalaganje modelov za zmanjšanje časa zagona
+# Lazy load models to reduce startup time
+# Illustrative skeleton: implement _initialize_client and synchronize concurrent
+# initialization before using this pattern in an application.
 import asyncio
 from contextlib import asynccontextmanager
+from fastapi import FastAPI
 
 class ModelManager:
     def __init__(self):
@@ -341,23 +336,23 @@ class ModelManager:
         return self._client
         
     async def _initialize_client(self):
-        # Tukaj inicializirajte AI odjemalca
+        # Initialize AI client here
         pass
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Zagon
+    # Startup
     app.state.model_manager = ModelManager()
     yield
-    # Zaustavitev
+    # Shutdown
     pass
 
 app = FastAPI(lifespan=lifespan)
 ```
 
-## Napake pri overjanju in dovoljenjih
+## Napake avtentikacije in dovoljenj
 
-### Težava: Upravljana identiteta - dovoljenje zavrnjeno
+### Težava: Zavrnjen dostop upravljane identitete
 
 **Simptomi:**
 ```
@@ -368,7 +363,7 @@ Error: Authentication failed for Microsoft Foundry Models Service
 
 1. **Preverite dodelitve vlog:**
 ```bash
-# Preverite trenutne dodelitve vlog
+# Check current role assignments
 az role assignment list \
   --assignee YOUR_MANAGED_IDENTITY_ID \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
@@ -391,22 +386,26 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-3. **Preizkusite overjanje:**
+3. **Preizkusite avtentikacijo:**
 ```python
-# Preizkus avtentikacije upravljane identitete
+# Test managed identity authentication
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
-async def test_authentication():
+def test_authentication():
     try:
-        credential = DefaultAzureCredential()
-        token = await credential.get_token("https://cognitiveservices.azure.com/.default")
-        print(f"Authentication successful: {token.token[:10]}...")
+        with DefaultAzureCredential() as credential:
+            token = credential.get_token("https://cognitiveservices.azure.com/.default")
+            print(f"Token acquired; expires at Unix time {token.expires_on}")
     except ClientAuthenticationError as e:
         print(f"Authentication failed: {e}")
+
+test_authentication()
 ```
 
-### Težava: Dostop do Key Vault zavrnjen
+Pridobitev žetona dokazuje avtentikacijo, ne pa dovoljenja za klic modela. Operacijo preizkusite posebej. Lokalno lahko `DefaultAzureCredential` uporablja razvijalske poverilnice; v Azure preverite, da je izbrana prava upravljana identiteta.
+
+### Težava: Dostop do Key Vaulta zavrnjen
 
 **Simptomi:**
 ```
@@ -416,6 +415,8 @@ Error: The user, group or application does not have secrets get permission
 **Rešitve:**
 
 1. **Dodelite dovoljenja za Key Vault:**
+
+Uporabite naslednji fragment dostopne politike samo za hranilnik z `enableRbacAuthorization: false`. Za hranilnik z omogočenim RBAC uporabite možnost 2; dodajanje dostopne politike ne omogoča dostopa do podatkovne ravni v načinu RBAC.
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -434,7 +435,9 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **Uporabite RBAC namesto Access Policies:**
+2. **Uporabite RBAC namesto dostopnih politik:**
+
+Hranilnik mora imeti `enableRbacAuthorization: true`; sprememba modela dovoljenj zahteva načrtovano migracijo obstoječega dostopa.
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -447,7 +450,7 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 }
 ```
 
-## Neuspehi pri nameščanju modela
+## Neuspehi uvajanja modelov
 
 ### Težava: Različica modela ni na voljo
 
@@ -460,79 +463,63 @@ Error: Model version 'gpt-4-32k' is not available
 
 1. **Preverite razpoložljive modele:**
 ```bash
-# Prikaži razpoložljive modele
+# List available models
 az cognitiveservices account list-models \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG \
-  --query "[].{name:model.name, version:model.version}" \
+  --query "[].{name:name, version:version}" \
   --output table
 ```
 
-2. **Uporabite nadomestne modele:**
+2. **Explicitno izberite razpoložljiv model:**
 ```bicep
-// Model deployment with fallback
+// Example model selection; verify version and deployment type in the catalog.
 @description('Primary model configuration')
 param primaryModel object = {
   name: 'gpt-4.1-mini'
-  version: '2024-07-18'
+  version: '2025-04-14'
 }
 
-@description('Fallback model configuration')
-param fallbackModel object = {
-  name: 'gpt-4.1'
-  version: '2024-08-06'
-}
-
-// Try primary model first, fallback if unavailable
+// Bicep does not catch provisioning failures and retry a fallback model.
 resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
   name: 'chat-model'
   properties: {
-    model: primaryModel
+    model: {
+      format: 'OpenAI'
+      name: primaryModel.name
+      version: primaryModel.version
+    }
   }
   sku: {
-    name: 'Standard'
+    name: 'GlobalStandard'
     capacity: 10
   }
 }
 ```
 
-3. **Validirajte model pred nameščanjem:**
-```python
-# Validacija modela pred uvajanjem
-import httpx
-
-async def validate_model_availability(model_name: str, version: str) -> bool:
-    """Check if model is available before deployment."""
-    try:
-        async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{AZURE_OPENAI_ENDPOINT}/openai/models",
-                headers={"api-key": AZURE_OPENAI_API_KEY}
-            )
-            models = response.json()
-            return any(
-                model["id"] == f"{model_name}-{version}"
-                for model in models.get("data", [])
-            )
-    except Exception:
-        return False
+3. **Preverite model pred uvajanjem:**
+```bash
+# Management-plane catalog for the actual account
+az cognitiveservices account list-models \
+  --name YOUR_OPENAI_RESOURCE --resource-group YOUR_RG --output json
+# Inspect model/version and supported SKUs; check regional quota separately.
 ```
 
 ## Težave z zmogljivostjo in skaliranjem
 
-### Težava: Visoka zakasnitev odgovorov
+### Težava: Visoke zakasnitve odzivov
 
 **Simptomi:**
-- Časi odziva > 30 sekund
-- Napake preteka časa
+- Čas odziva > 30 sekund
+- Napake zaradi časovne omejitve
 - Slaba uporabniška izkušnja
 
 **Rešitve:**
 
-1. **Uvedite časovne omejitve zahtev:**
+1. **Implementirajte časovne omejitve zahtev:**
 ```python
-# Nastavite ustrezne časovne omejitve
+# Configure proper timeouts
 import httpx
 
 client = httpx.AsyncClient(
@@ -545,9 +532,9 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **Dodajte predpomnjenje odgovorov:**
+2. **Dodajte predpomnjenje odzivov:**
 ```python
-# Redis predpomnilnik za odgovore
+# Redis cache for responses
 import redis.asyncio as redis
 import json
 
@@ -565,7 +552,7 @@ class ResponseCache:
         await self.redis.setex(f"ai_response:{query_hash}", ttl, response)
 ```
 
-3. **Konfigurirajte avtoskaliranje:**
+3. **Konfigurirajte samodejno skaliranje:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -599,7 +586,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Težava: Napake zaradi izpada pomnilnika
+### Težava: Napake zaradi pomnilniške omejitve
 
 **Simptomi:**
 ```
@@ -629,7 +616,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **Optimizirajte uporabo pomnilnika:**
 ```python
-# Pomnilniško učinkovito upravljanje modela
+# Memory-efficient model handling
 import gc
 import psutil
 
@@ -637,16 +624,19 @@ class MemoryOptimizedAI:
     def __init__(self):
         self.max_memory_percent = 80
         
+    async def _process_ai_request(self, request):
+        raise NotImplementedError("Supply the application's AI operation")
+
     async def process_request(self, request):
         """Process request with memory monitoring."""
-        # Preverite porabo pomnilnika pred obdelavo
+        # Check memory usage before processing
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # Prisili zbiranje smeti
+            gc.collect()  # Force garbage collection
             
         result = await self._process_ai_request(request)
         
-        # Po obdelavi počisti
+        # Clean up after processing
         gc.collect()
         return result
 ```
@@ -656,15 +646,15 @@ class MemoryOptimizedAI:
 ### Težava: Nepričakovano visoki stroški
 
 **Simptomi:**
-- Azure račun višji kot pričakovano
-- Poraba tokenov presega ocene
-- Sproženi opozorili o proračunu
+- Višji račun Azure od pričakovanega
+- Poraba žetonov presega ocene
+- Aktivirane so proračunske opozorila
 
 **Rešitve:**
 
-1. **Uvedite kontrole stroškov:**
+1. **Implementirajte kontrole stroškov:**
 ```python
-# Spremljanje uporabe tokenov
+# Token usage tracking
 class TokenTracker:
     def __init__(self, monthly_limit: int = 100000):
         self.monthly_limit = monthly_limit
@@ -681,23 +671,26 @@ class TokenTracker:
         return total_tokens
 ```
 
+Ta števec v pomnilniku je ilustrativen, ne mesečni nadzor porabe: ponastavi se ob ponovnem zagonu, ni deljen med kopijami in preverja porabo le po klicu. Prava omejitev zahteva trajno računovodstvo, varne rezervacije pred zahtevami in mesečno politiko ponastavitve. Meritve pomnilnika kontejnerja morajo upoštevati tudi omejitve cgroup; `psutil.virtual_memory()` ni zanesljiva meritve omejitve kontejnerja, zbiranje smeti pa ne uveljavlja omejitve pomnilnika.
+
 2. **Nastavite opozorila o stroških:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate // Parameter: first day of a supported budget period
+      endDate: budgetEndDate     // Parameter: a future date
     }
     timeGrain: 'Monthly'
-    amount: 500  // $500 monthly limit
+    amount: 500  // Notification threshold in the subscription's billing currency
     category: 'Cost'
     notifications: {
       Actual_GreaterThan_80_Percent: {
         enabled: true
         operator: 'GreaterThan'
         threshold: 80
+        thresholdType: 'Actual'
         contactEmails: ['admin@company.com']
         contactRoles: ['Owner']
       }
@@ -706,9 +699,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
+Določite `budgetStartDate` in `budgetEndDate` v svojem predlogu. Proračuni obveščajo; ne zaustavijo virov ali ne postavljajo strogega proračunskega limita.
+
 3. **Optimizirajte izbiro modela:**
 ```python
-# Izbira modela ob upoštevanju stroškov
+# Cost-aware model selection
 MODEL_COST_TIERS = {
   'gpt-4.1-mini': 'low',
   'gpt-4.1': 'high'
@@ -722,55 +717,62 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
         return 'gpt-4.1'
 ```
 
-## Orodja in tehnike za razhroščevanje
+## Orodja in tehnike za odpravljanje napak
 
-### AZD ukazi za razhroščevanje
+### Ukazi za odpravljanje napak AZD
 
 ```bash
-# Omogoči podrobno beleženje
+# Enable verbose logging
 azd up --debug
 
-# Preveri stanje uvajanja
+# Check deployment status
 azd show
 
-# Ogled dnevnikov aplikacije (odpre nadzorno ploščo za spremljanje)
+# View application logs (opens monitoring dashboard)
 azd monitor --logs
 
-# Ogled meritev v živo
+# View live metrics
 azd monitor --live
 
-# Preveri spremenljivke okolja
+# Check environment variables
 azd env get-values
 ```
 
 ### Ukazi razširitve AZD AI za diagnostiko
 
-Če ste namestili agente z `azd ai agent init`, so na voljo ta dodatna orodja:
+Če ste uvedli agente z uporabo `azd ai agent init`, so na voljo dodatna orodja:
 
 ```bash
-# Prepričajte se, da je razširitev agents nameščena
+# Ensure the agents extension is installed
 azd extension install azure.ai.agents
 
-# Ponovno inicializirajte ali posodobite agenta iz manifesta
-azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+# Check project storage permissions and agent configuration
+azd ai agent doctor
 
-# Uporabite strežnik MCP, da AI orodjem omogočite poizvedovanje o stanju projekta
+# Inspect the deployed endpoint
+azd ai agent endpoint show
+
+# Use the MCP server to let AI tools query project state
 azd mcp start
 
-# Ustvarite datoteke infrastrukture za pregled in revizijo
+# Generate infrastructure files for review and audit
 azd infra generate
 ```
 
-> **Namig:** Uporabite `azd infra generate` za zapis IaC na disk, da lahko natančno pregledate, kateri viri so bili provisionani. To je neprecenljivo pri razhroščevanju težav s konfiguracijo virov. Oglejte si [referenco AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) za polne podrobnosti.
+> **Namig:** Uporabite `azd infra generate` za zapis IaC na disk, da lahko natančno pregledate, kateri viri so bili vzpostavljeni. To je neprecenljivo pri odpravljanju težav s konfiguracijo virov. Oglejte si [referenco AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) za podrobnosti.
 
-### Razhroščevanje aplikacije
+**Diagnostika, ki pozna izdajo (2026-11-04):** Agenti `1.0.0-beta.23` zahtevajo `azd >= 1.37.0`; nadgradite jedrni CLI pred nezdružljivimi razširitvami. Ta izdaja agentov ohranja opozorila RBAC razvijalcev v končnem poročilu uvedbe in identificira različico, vključeno v neuspehe aktivacije/čase poteka. Časovna omejitev ne pomeni, da je uvedba spodletela: pred ponovnim poskusom preverite različico poskusa. Prav tako popravlja prikazovanje življenjskih sporočil namesto dokončanih odgovorov pri klicih A2A 0.3. Jedro `azd 1.37.1` odpravlja preklic propagacije med razširitvami; `1.37.2` izboljšuje ključna potrjevanja uvedbe in obravnavo preklicev.
+
+Če ukaz ocenjevanja starega vodnika le izpiše navodila za migracijo, namestite `azure.ai.evaluations` (`1.0.0-beta.2` zahteva `azd >= 1.33.0`) in uporabite `azd ai eval init`, `generate` in `run start`. Optimizacija `--config` ne sprejema več starih datotek za ocenjevanje. Oglejte si [migracijo ocenjevanja](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) in [migracijo optimizacije](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+
+### Odpravljanje napak v aplikaciji
 
 1. **Strukturirano beleženje:**
 ```python
 import logging
 import json
 
-# Konfigurirajte strukturirano beleženje za aplikacije z umetno inteligenco
+# Configure structured logging for AI applications
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -789,31 +791,35 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **Končne točke za preverjanje stanja:**
+2. **Končne točke za preverjanje zdravja:**
 ```python
+# Integration fragment: add to an existing FastAPI app, protect this diagnostic
+# endpoint, and configure AZURE_SEARCH_ENDPOINT. This tests Search index-list
+# authorization, not Azure OpenAI inference.
+import os
+from azure.identity.aio import DefaultAzureCredential
+from azure.search.documents.indexes.aio import SearchIndexClient
+from fastapi import Response
+
 @app.get("/debug/health")
-async def detailed_health_check():
+async def detailed_health_check(response: Response):
     """Comprehensive health check for debugging."""
     checks = {}
     
-    # Preveri povezavo z OpenAI
+    # Check Search service
     try:
-        client = AsyncOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT)
-        await client.models.list()
-        checks['openai'] = {'status': 'healthy'}
-    except Exception as e:
-        checks['openai'] = {'status': 'unhealthy', 'error': str(e)}
-    
-    # Preveri storitev iskanja
-    try:
-        search_client = SearchIndexClient(
-            endpoint=AZURE_SEARCH_ENDPOINT,
-            credential=DefaultAzureCredential()
-        )
-        indexes = await search_client.list_index_names()
-        checks['search'] = {'status': 'healthy', 'indexes': list(indexes)}
-    except Exception as e:
-        checks['search'] = {'status': 'unhealthy', 'error': str(e)}
+        async with DefaultAzureCredential() as credential:
+            async with SearchIndexClient(
+                endpoint=os.environ['AZURE_SEARCH_ENDPOINT'],
+                credential=credential
+            ) as search_client:
+                # AsyncItemPaged is iterated asynchronously, not awaited as a list.
+                async for _ in search_client.list_index_names():
+                    break
+        checks['search'] = {'status': 'healthy'}
+    except Exception:
+        response.status_code = 503
+        checks['search'] = {'status': 'unhealthy'}
     
     return checks
 ```
@@ -853,39 +859,39 @@ def monitor_performance(func):
 
 | Koda napake | Opis | Rešitev |
 |------------|-------------|----------|
-| 401 | Neavtorizirano | Preverite API ključe in konfiguracijo upravljane identitete |
-| 403 | Prepovedano | Preverite dodelitve vlog RBAC |
-| 429 | Omejitev zahtevkov | Implementirajte logiko ponovnega poizkusa z eksponentnim upočasnjevanjem |
-| 500 | Notranja napaka strežnika | Preverite stanje nameščanja modela in dnevnike |
-| 503 | Storitev ni na voljo | Preverite stanje storitve in regionalno razpoložljivost |
+| 401 | Neavtoriziran | Preverite ključe API in konfiguracijo upravljane identitete |
+| 403 | Prepovedano | Preverite dodelitve RBAC vlog |
+| 429 | Omejena hitrost | Uvedite logiko ponovnega poskusa z eksponentno zakasnitvijo |
+| 500 | Notranja napaka strežnika | Preverite stanje uvajanja modela in dnevniške zapise |
+| 503 | Storitev ni na voljo | Preverite zdravje storitve in regionalno razpoložljivost |
 
 ## Naslednji koraki
 
-1. **Preglejte [Vodič za nameščanje AI modelov](../chapter-02-ai-development/ai-model-deployment.md)** za najboljše prakse nameščanja
-2. **Dokončajte [Prakse produkcijskega AI](../chapter-08-production/production-ai-practices.md)** za rešitve primerne za podjetja
-3. **Pridružite se [Discord skupnosti Microsoft Foundry](https://aka.ms/foundry/discord)** za podporo skupnosti
-4. **Pošljite težave** v [AZD GitHub repozitorij](https://github.com/Azure/azure-dev) za težave, specifične za AZD
+1. **Preglejte [Vodnik za uvajanje AI modelov](../chapter-02-ai-development/ai-model-deployment.md)** za najboljše prakse uvajanja
+2. **Zaključite [Prakse proizvodnje AI](../chapter-08-production/production-ai-practices.md)** za rešitve pripravljene na podjetja
+3. **Pridružite se [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** za podporo skupnosti
+4. **Pošljite težave** v [AZD GitHub repozitorij](https://github.com/Azure/azure-dev) za težave specifične za AZD
 
 ## Viri
 
-- [Microsoft Foundry Models Service Troubleshooting](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Azure AI Search Troubleshooting](https://learn.microsoft.com/azure/search/search-monitor-logs)
-- [**Azure Diagnostics Agent Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Namestite Azure orodja za odpravljanje težav v vašem urejevalniku: `npx skills add microsoft/github-copilot-for-azure`
+- [Odpravljanje težav s kvotami in omejevanjem Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota)
+- [Odpravljanje težav Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Odpravljanje težav Azure AI Search](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [**Skill za Azure Diagnostics Agent**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Namestite veščine za odpravljanje težav v urejevalnik: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **Navigacija po poglavjih:**
-- **📚 Domov tečaja**: [AZD For Beginners](../../README.md)
-- **📖 Trenutno poglavje**: Poglavje 7 - Odpravljanje težav in razhroščevanje
-- **⬅️ Prejšnje**: [Vodnik za razhroščevanje](debugging.md)
+- **📚 Domov tečaja**: [AZD Za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 7 - Odpravljanje težav in odpravljanje napak
+- **⬅️ Prejšnje**: [Vodnik za odpravljanje napak](debugging.md)
 - **➡️ Naslednje poglavje**: [Poglavje 8: Produkcijski in poslovni vzorci](../chapter-08-production/production-ai-practices.md)
-- **🤖 Povezano**: [Poglavje 2: Razvoj, osredotočen na AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- **📖 Referenca**: [Razhroščevanje Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+- **🤖 Povezano**: [Poglavje 2: Razvoj z AI na prvem mestu](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 Referenca**: [Odpravljanje težav Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, upoštevajte, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku naj velja za avtoritativni vir. Za ključne informacije priporočamo strokovni človeški prevod. Ne odgovarjamo za morebitne nesporazume ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
+**Omejitev odgovornosti**:
+Ta dokument je bil preveden z uporabo AI prevajalske storitve [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za kritične informacije je priporočljiv strokovni človeški prevod. Ne odgovarjamo za morebitna nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

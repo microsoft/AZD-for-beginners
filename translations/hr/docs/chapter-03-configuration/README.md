@@ -1,21 +1,21 @@
-# Poglavlje 3: Konfiguracija i autentifikacija
+# Poglavlje 3: Konfiguracija i autentikacija
 
-**📚 Tečaj**: [AZD za početnike](../../README.md) | **⏱️ Trajanje**: 45-60 minuta | **⭐ Kompleksnost**: Srednja
+**📚 Tečaj**: [AZD za početnike](../../README.md) | **⏱️ Trajanje**: 90-150 minuta uključujući praksu integracije | **⭐ Kompleksnost**: Srednja
 
 ---
 
 ## Pregled
 
-Ovo poglavlje pokriva konfiguraciju okruženja, obrasce autentifikacije i najbolje sigurnosne prakse za Azure Developer CLI implementacije.
+Ovo poglavlje pokriva konfiguraciju okruženja, obrasce autentikacije i najbolje sigurnosne prakse za Azure Developer CLI implementacije.
 
-> Provjereno na `azd 1.27.1` u srpnju 2026.
+> Pregled naredbi i konfiguracije cilj: `azd 1.37.2` (studeni 2026.). Nije izvršena stvarna Azure provisija tijekom pregleda.
 
 ## Ciljevi učenja
 
 Završetkom ovog poglavlja ćete:
-- Ovladati hijerarhijom konfiguracije AZD-a
-- Upravljati višestrukim okruženjima (razvoj, testiranje, produkcija)
-- Implementirati sigurnu autentifikaciju s upravljanim identitetima
+- Savladati hijerarhiju konfiguracije AZD-a
+- Upravljati s više okruženja (dev, staging, prod)
+- Implementirati sigurnu autentikaciju pomoću upravljanih identiteta
 - Konfigurirati postavke specifične za okruženje
 
 ---
@@ -25,58 +25,58 @@ Završetkom ovog poglavlja ćete:
 | # | Lekcija | Opis | Vrijeme |
 |---|--------|-------------|------|
 | 1 | [Vodič za konfiguraciju](configuration.md) | Postavljanje i upravljanje okruženjem | 30 min |
-| 2 | [Autentifikacija i sigurnost](authsecurity.md) | Obrasci upravljanog identiteta i RBAC-a | 30 min |
+| 2 | [Autentikacija i sigurnost](authsecurity.md) | Obrasci upravljanih identiteta i RBAC-a | 30 min |
 
 ---
 
 ## 🚀 Brzi početak
 
+Pokrenite iz korijena **već inicijalizirane azd aplikacije**, a ne iz repozitorija tečaja. Koristite neiskorištena imena okruženja ako ova već postoje.
+
 ```bash
-# Kreirajte više okruženja
+# Create multiple environments
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Prebacite okruženja
+# Switch environments
 azd env select prod
 
-# Postavite varijable okruženja
+# Set environment variables
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# Pogledajte konfiguraciju
+# View configuration
 azd env get-values
 ```
+
+`SKU_NAME` je ilustrativan: utječe na infrastrukturu samo ako ga vaš predložak eksplicitno koristi. Uobičajene vrijednosti `azd env set` se spremaju lokalno u običnom tekstu; nisu sigurna pohrana tajni.
 
 ---
 
 ## 🔧 Hijerarhija konfiguracije
 
-AZD primjenjuje postavke redoslijedom (kasnije nadjačava ranije):
-
-1. **Zadane vrijednosti** (ugrađene u predloške)
-2. **azure.yaml** (konfiguracija projekta)
-3. **Varijable okruženja** (`azd env set`)
-4. **Zastavice naredbenog retka** (`--location eastus`)
+Držite tri različite površine konfiguracije odvojeno: globalne postavke (`azd config`), strukturu projekta (`azure.yaml`), i vrijednosti po okruženju (`azd env`). Zastavice nadjačavaju samo one postavke koje zapravo podržavaju; ne postoji univerzalni sloj proizvoljnih varijabli okruženja preko `azure.yaml` ili Bicep-a.
 
 ---
 
 ## 🔐 Najbolje sigurnosne prakse
 
 ```bash
-# Koristite upravljani identitet (preporučeno)
-azd env set AZURE_USE_MANAGED_IDENTITY true
+# Runtime managed identity must be enabled in infrastructure and granted RBAC.
+# To authenticate azd itself on an Azure host with an assigned identity:
+# azd auth login --managed-identity
 
-# Provjerite status AZD autentifikacije
-azd auth status
+# Check AZD authentication status
+azd auth login --check-status
 
-# Opcionalno: provjerite Azure CLI kontekst ako planirate pokretati az naredbe
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
-# Ponovo se autentificirajte ako je potrebno
+# Re-authenticate if needed
 azd auth login
 
-# Opcionalno: osvježite Azure CLI autentifikaciju za az naredbe
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 
@@ -86,7 +86,7 @@ az login
 
 | Smjer | Poglavlje |
 |-----------|---------|
-| **Prethodno** | [Poglavlje 2: Razvoj AI](../chapter-02-ai-development/README.md) |
+| **Prethodno** | [Poglavlje 2: AI razvoj](../chapter-02-ai-development/README.md) |
 | **Sljedeće** | [Poglavlje 4: Infrastruktura](../chapter-04-infrastructure/README.md) |
 
 ---
