@@ -1,60 +1,58 @@
-# 6. Infrastruktūros išardymas
+# 6. Infrastruktūros naikinimas
 
-!!! tip "MODULIO PABAIGOJE JŪS GALĖSITE"
+!!! tipas "ŠIO MODULIO PABAIGOJE JŪS SUDEBĖSITE"
 
-    - [ ] Suprasti išteklių išvalymo ir kaštų valdymo svarbą
-    - [ ] Naudoti `azd down`, kad saugiai išardytumėte infrastruktūrą
-    - [ ] Atkurti minkštai ištrintas Azure AI paslaugas, jei reikia
-    - [ ] **Laboratorija 6:** Išvalyti Azure išteklius ir patvirtinti pašalinimą
+    - [ ] Understand the importance of resource cleanup and cost management
+    - [ ] Use `azd down` to deprovision infrastructure safely
+    - [ ] Recover soft-deleted Azure AI Services if needed
+    - [ ] **Lab 6:** Clean up Azure resources and verify removal
 
 ---
 
 ## Papildomos užduotys
 
-Prieš išardydami projektą, skirkite kelias minutes laisvam tyrinėjimui.
+Prieš naikindami projektą, skirkite kelias minutes atviram tyrinėjimui.
 
-!!! info "Išbandykite šias tyrinėjimo užuominas"
+!!! info "Išbandykite šiuos tyrinėjimo užuominas"
 
-    **Eksperimentuokite su GitHub Copilot:**
+    **Experiment with GitHub Copilot:**
     
-    1. Paklauskite: `Kokius kitus AZD šablonus galėčiau išbandyti daugiaagentėms scenarijams?`
-    2. Paklauskite: `Kaip galėčiau pritaikyti agentų instrukcijas sveikatos priežiūros atvejui?`
-    3. Paklauskite: `Kokie aplinkos kintamieji valdo kaštų optimizavimą?`
+    1. Ask: `What other AZD templates could I try for multi-agent scenarios?`
+    2. Ask: `How can I customize the agent instructions for a healthcare use case?`
+    3. Ask: `What environment variables control cost optimization?`
     
-    **Ištirkite Azure portalą:**
+    **Explore the Azure Portal:**
     
-    1. Peržiūrėkite Application Insights metrikas savo diegimui
-    2. Patikrinkite kaštų analizę sukurtų išteklių
-    3. Dar kartą ištirkite Microsoft Foundry portalo agentų bandymų aikštelę
+    1. Review Application Insights metrics for your deployment
+    2. Check the cost analysis for resources provisioned
+    3. Explore the Microsoft Foundry portal agent playground one more time
 
 ---
 
-## Išardyti infrastruktūrą
+## Infrastruktūros pašalinimas
 
-1. Infrastruktūros išardymas yra toks paprastas:
+1. Infrastruktūros naikinimas yra toks paprastas:
       
       ```bash title="" linenums="0"
-      azd down --purge
+      azd env list
+      azd show
+      azd down
       ```
-1. Jungiklis `--purge` užtikrina, kad jis taip pat pašalintų minkštai ištrintas Cognitive Service išteklius, taip atlaisvindamas šių išteklių užimamą kvotą. Baigus pamatysite kažką panašaus:
+1. Patvirtinkite pasirinktą aplinką ir peržiūrėkite ištrinsite resursus. Tai pašalins Azure resursus ir gali sunaikinti duomenis. Išlaikykite patvirtinimo užklausą šiam mokymosi srautui. Baigę matysite panašų rezultatą:
       
-      ```bash title="" linenums="0"
+      ```text title="" linenums="0"
       ? Total resources to delete: 11, are you sure you want to continue? Yes
       Deleting your resources can take some time.
       (✓) Done: Deleted resource group rg-nitya-mshack-azd
-      (✓) Done: Purging Cognitive Account: aoai-3cz3zkynhvpbc
 
       SUCCESS: Your application was removed from Azure in 11 minutes 4 seconds.
       ```
 
-1. (Pasirinktinai) Jei dabar vėl paleisite `azd up`, pastebėsite, kad diegiamas modelis gpt-4.1, nes aplinkos kintamasis buvo pakeistas (ir išsaugotas) lokaliame `.azure` kataloge. 
+1. Patikrinkite ištrynimą portale ir patikrinkite resursus už diegimo ribų. Sąnaudų ataskaitos ir kvotų atnaujinimai gali vėluoti. Vietinė `.azure` konfigūracija išlieka, jei ją nepašalinate explicitiai.
 
-      Štai modelio diegimai **prieš**:
+1. `azd down --purge` taip pat prašo nuolatinio palaikomų minkštai ištrintų resursų ištrynimo. Naudokite tik tada, kai atkūrimas nereikalingas ir suprantate saugojimo/šalinimo apsaugos politiką. Tai negarantuoja greito kvotų atlaisvinimo.
 
-      ![Pradinis](../../../../../translated_images/lt/14-deploy-initial.30e4cf1c29b587bc.webp)
-
-      O štai **po**:
-      ![Naujas](../../../../../translated_images/lt/14-deploy-new.f7f3c355a3cf7299.webp)
+1. Neperdieginėkite tik patikrinti išvalymą. Vėlesnis tyčinis `azd up` gali perkurti resursus naudodamas likusius vietinius įvesties duomenis ir vėl sukelti išlaidas. Modelio atnaujinimai paprastai naudoja palaikomus teikimo pakeitimus, o ne naikinimą.
 
 ---
 

@@ -1,30 +1,30 @@
 # Application Insights integracija su AZD
 
-⏱️ **Apskaičiuotas laikas**: 40-50 minučių | 💰 **Kainos įtaka**: ~$5-15/mėn. | ⭐ **Sudėtingumas**: Tarpinis
+⏱️ **Numatomas laikas**: 40-50 minučių | 💰 **Kainos įtaka**: ~5-15 $/mėn | ⭐ **Sudedamumas**: Vidutinio lygio
 
 **📚 Mokymosi kelias:**
-- ← Ankstesnis: [Preflight Checks](preflight-checks.md) - Patikra prieš diegimą
-- 🎯 **Jūs esate čia**: Application Insights integracija (stebėjimas, telemetrija, derinimas)
-- → Toliau: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Diegimas į Azure
+- ← Ankstesnis: [Priešdiegiamos patikros](preflight-checks.md) - Diegimo patikrinimas
+- 🎯 **Esate čia**: Application Insights integracija (Stebėjimas, telemetrija, derinimas)
+- → Kitas: [Diegimo vadovas](../chapter-04-infrastructure/deployment-guide.md) - Diegimas Azure
 - 🏠 [Kurso pradžia](../../README.md)
 
 ---
 
-## Ką sužinosite
+## Ką išmoksite
 
 Baigę šią pamoką, jūs:
-- Integruosite **Application Insights** į AZD projektus automatiškai
-- Konfigūruosite **paskirstytą trasavimą** mikroservisams
-- Įgyvendinsite **pasirinktinius telemetrijos duomenis** (metrikos, įvykiai, priklausomybės)
-- Nustatysite **tiesiogines metrikas** realaus laiko stebėjimui
-- Kursite **įspėjimus ir prietaisų skydus** iš AZD diegimų
-- Derinsite gamybos problemas naudodami **telemetrijos užklausas**
-- Optimizuosite **sąnaudas ir ėmimo (sampling)** strategijas
-- Stebėsite **AI/LLM programas** (tokenai, delsos, sąnaudos)
+- Deklaruosite **Application Insights** AZD infrastruktūroje ir sukonfigūruosite SDK instrumentaciją
+- Sukonfigūruosite **išplitusį sekimą** mikroservisams
+- Įgyvendinsite **pasirinktą telemetriją** (metrimas, įvykiai, priklausomybės)
+- Nustatysite **gyvą metrikų stebėjimą** realiu laiku
+- Kursite **įspėjimus ir valdymo skydelius** iš AZD diegimų
+- Derinsite produkcijos problemas naudodami **telemetrijos užklausas**
+- Optimaliuosite **išlaidų ir mėginių ėmimo** strategijas
+- Stebėsite **AI/LLM programas** (žetonai, delsimas, išlaidos)
 
-## Kodėl Application Insights su AZD yra svarbu
+## Kodėl svarbu naudoti Application Insights su AZD
 
-### Iššūkis: stebėjimas produkcijoje
+### Iššūkis: Produkcijos stebėjimas
 
 **Be Application Insights:**
 ```
@@ -44,37 +44,37 @@ Baigę šią pamoką, jūs:
 ✅ End-to-end request tracing
 ✅ Performance metrics and insights
 ✅ Real-time dashboards
-✅ AZD provisions everything automatically
+✅ AZD provisions the monitoring declared in your templates
 ```
 
-**Analogija**: Application Insights yra lyg „juodosios dėžės“ skrydžio registratorius + pilotų panelė jūsų programai. Matote viską, kas vyksta realiu laiku, ir galite peržiūrėti bet kokį incidentą.
+**Palyginimas**: Application Insights yra tarsi jūsų programos „juodoji dėžė“ ir kabinos valdymo pultas. Jūs matote visa, kas vyksta realiu laiku, ir galite peržiūrėti bet kokį incidentą.
 
 ---
 
 ## Architektūros apžvalga
 
-### Application Insights architektūra su AZD
+### Application Insights AZD architektūroje
 
 ```mermaid
 graph TB
-    User[Vartotojas/Klientas]
-    App1[Konteinerinė programa 1<br/>API vartai]
-    App2[Konteinerinė programa 2<br/>Produkto paslauga]
-    App3[Konteinerinė programa 3<br/>Užsakymų paslauga]
+    User[User/Client]
+    App1[Container App 1<br/>API Gateway]
+    App2[Container App 2<br/>Product Service]
+    App3[Container App 3<br/>Order Service]
     
-    AppInsights[Application Insights<br/>Telemetrijos centras]
-    LogAnalytics[(Log Analytics<br/>Darbo sritis)]
+    AppInsights[Application Insights<br/>Telemetry Hub]
+    LogAnalytics[(Log Analytics<br/>Workspace)]
     
-    Portal[Azure Portal<br/>Prietaisų skydai & įspėjimai]
-    Query[Kusto užklausos<br/>Pasirinktinė analizė]
+    Portal[Azure Portal<br/>Dashboards & Alerts]
+    Query[Kusto Queries<br/>Custom Analysis]
     
     User --> App1
     App1 --> App2
     App2 --> App3
     
-    App1 -.->|Automatinė instrumentacija| AppInsights
-    App2 -.->|Automatinė instrumentacija| AppInsights
-    App3 -.->|Automatinė instrumentacija| AppInsights
+    App1 -.->|Auto-instrumentation| AppInsights
+    App2 -.->|Auto-instrumentation| AppInsights
+    App3 -.->|Auto-instrumentation| AppInsights
     
     AppInsights --> LogAnalytics
     LogAnalytics --> Portal
@@ -83,32 +83,35 @@ graph TB
     style AppInsights fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style LogAnalytics fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
+
 ### Kas stebima automatiškai
 
-| Telemetrijos tipas | Ką fiksuoja | Panaudojimo atvejis |
+Palaikoma automatinė instrumentacija fiksuoja užklausas/priklausomybes instrumentuotose bibliotekose. Pasirinktiniai įvykiai ir metrika reikalauja programos kodo; prieinamumo testai turi būti sukonfigūruoti atskirai. Ji nesurinks kiekvienos eilutės žemiau tik todėl, kad šis resursas egzistuoja.
+
+| Telemetrijos tipas | Ką fiksuoja | Panaudojimas |
 |----------------|------------------|----------|
-| **Užklausos** | HTTP užklausos, būsenos kodai, trukmė | API našumo stebėjimas |
-| **Priklausomybės** | Išoriniai kvietimai (DB, API, saugykla) | Nustatyti butelio kaklelius |
-| **Išimtys** | Neapdorotos klaidos su steko pėdsakais | Trikčių derinimas |
-| **Pasirinktiniai įvykiai** | Verslo įvykiai (registracija, pirkimas) | Analitika ir piltuvai |
-| **Metrikos** | Veikimo skaitikliai, pasirinktinės metrikos | Talpos planavimas |
-| **Sekos** | Žurnalo pranešimai su rimtumo lygiu | Derinimas ir auditavimas |
-| **Prieinamumas** | Prieinamumo ir atsako laiko testai | SLA stebėjimas |
+| **Užklausos** | HTTP užklausos, statuso kodai, trukmė | API našumo stebėjimas |
+| **Priklausomybės** | Išoriniai iškvietimai (DB, API, saugykla) | Butelio kaklelio identifikavimas |
+| **Išimtys** | Nenumatytos klaidos su steko atsekimu | Gedimų derinimas |
+| **Pasirinktiniai įvykiai** | Verslo įvykiai (registracija, pirkimas) | Analitika ir funneliai |
+| **Metrika** | Veikimo skaitikliai, pasirinktiniai matavimai | Talpos planavimas |
+| **Sekos** | Žurnalo pranešimai su svarba | Derinimas ir auditavimas |
+| **Prieinamumas** | Veikimo laiko ir atsako testai | SLA stebėjimas |
 
 ---
 
-## Išankstiniai reikalavimai
+## Prieš sąlygos
 
 ### Reikalingi įrankiai
 
 ```bash
-# Patikrinkite Azure Developer CLI
+# Verify Azure Developer CLI
 azd version
-# ✅ Tikimasi: azd versija 1.0.0 arba naujesnė
+# Command reference baseline: azd 1.37.2
 
-# Patikrinkite Azure CLI
+# Verify Azure CLI
 az --version
-# ✅ Tikimasi: azure-cli 2.50.0 arba naujesnė
+# ✅ Expected: azure-cli 2.50.0 or higher
 ```
 
 ### Azure reikalavimai
@@ -116,24 +119,26 @@ az --version
 - Aktyvi Azure prenumerata
 - Leidimai kurti:
   - Application Insights išteklius
-  - Log Analytics darbo sritis
+  - Log Analytics darbo erdves
   - Container Apps
-  - Išteklų grupes
+  - Resursų grupes
 
-### Reikalingos žinios
+### Žinių prieš sąlygos
 
-Turėtumėte būti atlikę:
-- [AZD Basics](../chapter-01-foundation/azd-basics.md) - Pagrindinės AZD sąvokos
-- [Configuration](../chapter-03-configuration/configuration.md) - Aplinkos nustatymas
-- [First Project](../chapter-01-foundation/first-project.md) - Pagrindinis diegimas
+Turėtumėte būti pabaigę:
+- [AZD pagrindai](../chapter-01-foundation/azd-basics.md) - Pagrindinės AZD sąvokos
+- [Konfigūracija](../chapter-03-configuration/configuration.md) - Aplinkos nustatymas
+- [Pirmas projektas](../chapter-01-foundation/first-project.md) - Pagrindinis diegimas
 
 ---
 
-## Pamoka 1: Automatinė Application Insights su AZD
+## Pamoka 1: Automatinis Application Insights su AZD
 
 ### Kaip AZD paruošia Application Insights
 
-AZD automatiškai sukuria ir sukonfigūruoja Application Insights diegimo metu. Pažiūrėkime, kaip tai veikia.
+AZD sukuria Application Insights **tik jei projekto infrastruktūra tai deklaruoja**. `azure.yaml` viena nepateikia stebėjimo ir neinstrumentuoja programos kodo.
+
+> **Pavyzdinis aprėptis:** Šioje pamokoje yra integracijos fragmentai, o ne visiškas `monitored-app` projektas šiame saugyklos kataloge. Prieš diegimą pateikite pagrindinį šabloną su parametrų žemėlapiu, Container Apps aplinką, registrą/image bei tapatybės konfigūraciją, Dockerfile ir paslaugų žymes. Vėlesnėse pamokose pateikiami alternatyvūs/plėtiniai fragmentai, o ne visiškai pakeičiamos bylos. Pradėkite nuo veikianties [mikroservisų pavyzdžio](../../../../examples/microservices), jei reikia bėgančios pradžios bazės.
 
 ### Projekto struktūra
 
@@ -156,7 +161,7 @@ monitored-app/
 
 ### 1 žingsnis: Konfigūruokite AZD (azure.yaml)
 
-**Failas: `azure.yaml`**
+**Byla: `azure.yaml`**
 
 ```yaml
 name: monitored-app
@@ -169,16 +174,16 @@ services:
     language: python
     host: containerapp
 
-# AZD automatically provisions monitoring!
+# Monitoring must be declared in infra/ and enabled in application code.
 ```
 
-**Tai viskas!** AZD pagal numatytuosius nustatymus sukurs Application Insights. Papildoma konfigūracija pagrindiniam stebėjimui nereikalinga.
+Tai deklaruoja diegiamą paslaugą. Tolimesnės Bicep ir SDK konfigūracijos pateikia stebėjimą; azd jų implicitiai neprideda.
 
 ---
 
 ### 2 žingsnis: Stebėjimo infrastruktūra (Bicep)
 
-**Failas: `infra/core/monitoring.bicep`**
+**Byla: `infra/core/monitoring.bicep`**
 
 ```bicep
 param logAnalyticsName string
@@ -223,19 +228,21 @@ output logAnalyticsWorkspaceName string = logAnalytics.name
 output applicationInsightsConnectionString string = applicationInsights.properties.ConnectionString
 output applicationInsightsInstrumentationKey string = applicationInsights.properties.InstrumentationKey
 output applicationInsightsName string = applicationInsights.name
+output applicationInsightsId string = applicationInsights.id
 ```
 
 ---
 
 ### 3 žingsnis: Prijunkite Container App prie Application Insights
 
-**Failas: `infra/app/api.bicep`**
+**Byla: `infra/app/api.bicep`**
 
 ```bicep
 param name string
 param location string
 param tags object = {}
-param containerAppsEnvironmentName string
+param containerAppsEnvironmentId string
+param containerImage string
 param applicationInsightsConnectionString string
 
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -243,6 +250,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   location: location
   tags: tags
   properties: {
+    managedEnvironmentId: containerAppsEnvironmentId
     configuration: {
       ingress: {
         external: true
@@ -259,7 +267,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
       containers: [
         {
           name: 'api'
-          image: 'myregistry.azurecr.io/api:latest'
+          image: containerImage // Supply an accessible image and registry authentication
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
@@ -287,33 +295,27 @@ output uri string = 'https://${containerApp.properties.configuration.ingress.fqd
 
 ### 4 žingsnis: Programos kodas su telemetrija
 
-**Failas: `src/app.py`**
+**Byla: `src/app.py`**
 
 ```python
 from flask import Flask, request, jsonify
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.ext.flask.flask_middleware import FlaskMiddleware
-from opencensus.trace.samplers import ProbabilitySampler
+from azure.monitor.opentelemetry import configure_azure_monitor
 import logging
 import os
 
 app = Flask(__name__)
 
-# Gauti Application Insights ryšio eilutę
+# Get Application Insights connection string
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
 if connection_string:
-    # Konfigūruoti paskirstytą sekimą
-    middleware = FlaskMiddleware(
-        app,
-        exporter=AzureExporter(connection_string=connection_string),
-        sampler=ProbabilitySampler(rate=1.0)  # 100% mėginių ėmimas kūrimo aplinkai
+    # Azure Monitor OpenTelemetry instruments supported libraries, including Flask.
+    configure_azure_monitor(
+        connection_string=connection_string,
+        logger_name=__name__,
+        enable_live_metrics=True
     )
-    
-    # Konfigūruoti žurnalavimą
     logger = logging.getLogger(__name__)
-    logger.addHandler(AzureLogHandler(connection_string=connection_string))
     logger.setLevel(logging.INFO)
     
     print("✅ Application Insights enabled")
@@ -325,13 +327,13 @@ else:
 @app.route('/health')
 def health():
     logger.info('Health check endpoint called')
-    return jsonify({'status': 'healthy', 'monitoring': 'enabled'})
+    return jsonify({'status': 'healthy', 'monitoring': 'enabled' if connection_string else 'disabled'})
 
 @app.route('/api/products')
 def get_products():
     logger.info('Fetching products')
     
-    # Simuliuoti duomenų bazės užklausą (automatiškai fiksuojama kaip priklausomybė)
+    # In-memory fixture: this is not a database dependency call.
     products = [
         {'id': 1, 'name': 'Laptop', 'price': 999.99},
         {'id': 2, 'name': 'Mouse', 'price': 29.99},
@@ -356,7 +358,7 @@ def slow_endpoint():
     """Test performance tracking"""
     import time
     logger.info('Slow endpoint called')
-    time.sleep(3)  # Simuliuoti lėtą operaciją
+    time.sleep(3)  # Simulate slow operation
     logger.warning('Endpoint took 3 seconds to respond')
     return jsonify({'message': 'Slow operation completed'})
 
@@ -364,37 +366,37 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-**Failas: `src/requirements.txt`**
+**Byla: `src/requirements.txt`**
 
 ```txt
-Flask==3.0.0
-opencensus-ext-azure==1.1.13
-opencensus-ext-flask==0.8.1
-gunicorn==21.2.0
+Flask
+azure-monitor-opentelemetry
+gunicorn
+requests
+openai
 ```
+
+Išspręskite šias priklausomybes savo projekte, išbandykite kartu ir užrakinkite galutines versijas. Naujiems projektams rekomenduojama naudoti Azure Monitor OpenTelemetry, o ne nutrauktus OpenCensus Python eksportuotojus.
 
 ---
 
-### 5 žingsnis: Diegti ir patikrinti
+### 5 žingsnis: Diegimas ir patikrinimas
 
 ```bash
-# Inicializuoti AZD
-azd init
-
-# Diegti (automatiškai sukonfigūruoja Application Insights)
+# Deploy only after completing and wiring the infrastructure fragments above
 azd up
 
-# Gauti programos URL
-APP_URL=$(azd env get-values | grep API_URL | cut -d '=' -f2 | tr -d '"')
+# Get app URL
+APP_URL=$(azd env get-value API_URL) # Requires this output in main.bicep
 
-# Generuoti telemetriją
+# Generate telemetry
 curl $APP_URL/health
 curl $APP_URL/api/products
 curl $APP_URL/api/error-test
 curl $APP_URL/api/slow
 ```
 
-**✅ Tikėtinas išvestis:**
+**✅ Laukiamas rezultatas:**
 ```json
 {
   "status": "healthy",
@@ -404,23 +406,23 @@ curl $APP_URL/api/slow
 
 ---
 
-### 6 žingsnis: Peržiūrėti telemetriją Azure portale
+### 6 žingsnis: Peržiūrėkite telemetriją Azure portale
 
 ```bash
-# Gauti Application Insights informaciją
+# Get Application Insights details
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Atidaryti Azure portale
+# Open in Azure Portal
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"') \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
   --query "appId" -o tsv
 ```
 
-**Eikite į Azure Portal → Application Insights → Transakcijų paieška**
+**Eikite į Azure portalo → Application Insights → Transaction Search**
 
-Turėtumėte matyti:
-- ✅ HTTP užklausas su būsenos kodais
+Jūs turėtumėte matyti:
+- ✅ HTTP užklausas su statuso kodais
 - ✅ Užklausos trukmę (3+ sekundės `/api/slow`)
 - ✅ Išimčių detales iš `/api/error-test`
 - ✅ Pasirinktinius žurnalo pranešimus
@@ -431,20 +433,15 @@ Turėtumėte matyti:
 
 ### Sekite verslo įvykius
 
-Pridėkime pasirinktinę telemetriją verslui svarbiems įvykiams.
+Pridėsime pasirinktinę telemetriją verslo kritiniams įvykiams.
 
-**Failas: `src/telemetry.py`**
+**Byla: `src/telemetry.py`**
 
 ```python
-from opencensus.ext.azure import metrics_exporter
-from opencensus.stats import aggregation as aggregation_module
-from opencensus.stats import measure as measure_module
-from opencensus.stats import stats as stats_module
-from opencensus.stats import view as view_module
-from opencensus.tags import tag_map as tag_map_module
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import tracer as tracer_module
+from contextlib import contextmanager
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import metrics, trace
+from opentelemetry.trace import SpanKind
 import logging
 import os
 
@@ -454,31 +451,19 @@ class TelemetryClient:
     def __init__(self, connection_string=None):
         self.connection_string = connection_string or os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
         
-        if not self.connection_string:
-            print("⚠️ Application Insights connection string not found")
-            return
-        
-        # Konfigūruoti žurnalą
+        # Configure once per process. If app.py already calls this, keep only
+        # one configure_azure_monitor call and use logger_name='telemetry'.
+        if self.connection_string:
+            configure_azure_monitor(
+                connection_string=self.connection_string,
+                logger_name=__name__,
+                enable_live_metrics=True
+            )
         self.logger = logging.getLogger(__name__)
-        self.logger.addHandler(AzureLogHandler(connection_string=self.connection_string))
         self.logger.setLevel(logging.INFO)
-        
-        # Konfigūruoti metrikų eksportuotoją
-        self.stats = stats_module.stats
-        self.view_manager = self.stats.view_manager
-        self.stats_recorder = self.stats.stats_recorder
-        
-        exporter = metrics_exporter.new_metrics_exporter(
-            connection_string=self.connection_string
-        )
-        self.view_manager.register_exporter(exporter)
-        
-        # Konfigūruoti sekiklį
-        self.tracer = tracer_module.Tracer(
-            exporter=AzureExporter(connection_string=self.connection_string)
-        )
-        
-        print("✅ Custom telemetry client initialized")
+        self.tracer = trace.get_tracer(__name__)
+        self.meter = metrics.get_meter(__name__)
+        self.instruments = {}
     
     def track_event(self, event_name: str, properties: dict = None):
         """Track custom business event"""
@@ -486,59 +471,56 @@ class TelemetryClient:
         self.logger.info(
             f"CustomEvent: {event_name}",
             extra={
-                'custom_dimensions': {
+                # OTel log attributes become customDimensions in App Insights.
                     'event_name': event_name,
                     **properties
-                }
             }
         )
     
     def track_metric(self, metric_name: str, value: float, properties: dict = None):
         """Track custom metric"""
         properties = properties or {}
-        self.logger.info(
-            f"CustomMetric: {metric_name} = {value}",
-            extra={
-                'custom_dimensions': {
-                    'metric_name': metric_name,
-                    'value': value,
-                    **properties
-                }
-            }
-        )
+        if metric_name not in self.instruments:
+            self.instruments[metric_name] = self.meter.create_histogram(metric_name)
+        self.instruments[metric_name].record(value, attributes=properties)
     
-    def track_dependency(self, name: str, dependency_type: str, duration: float, success: bool):
-        """Track external dependency call"""
-        with self.tracer.span(name=name) as span:
-            span.add_attribute('dependency.type', dependency_type)
-            span.add_attribute('duration', duration)
-            span.add_attribute('success', success)
+    @contextmanager
+    def track_dependency(self, name: str):
+        """Time the real operation inside a client span; exceptions mark failure."""
+        with self.tracer.start_as_current_span(name, kind=SpanKind.CLIENT) as span:
+            yield span
 
-# Globalus telemetrijos klientas
+# Global telemetry client
 telemetry = TelemetryClient()
 ```
 
-### Atnaujinkite programą su pasirinktiniais įvykiais
+### Atnaujinkite programą su pasirinktinais įvykiais
 
-**Failas: `src/app.py` (išplėstas)**
+**Byla: `src/app.py` (patobulinta)**
+
+Pridėkite šias maršrutų taisykles prie jau esamos Flask programos; palikite ankstesnius sveikatos/testo maršrutus. Trumpesnis blokas žemiau rodo atskirą programą aiškumui. Telemetrijos inicializacija dabar gyvena `telemetry.py`—neinicializuokite eksportuotojų du kartus.
 
 ```python
 from flask import Flask, request, jsonify
 from telemetry import telemetry
 import time
 import random
+import os
 
 app = Flask(__name__)
 
 @app.route('/api/purchase', methods=['POST'])
 def purchase():
     """Track purchase event with custom telemetry"""
-    data = request.json
+    data = request.get_json(silent=True) or {}
     product_id = data.get('product_id')
     quantity = data.get('quantity', 1)
     price = data.get('price', 0)
+    if not isinstance(quantity, int) or quantity < 1 or \
+       not isinstance(price, (int, float)) or price < 0:
+        return jsonify({'error': 'quantity and price must be non-negative numbers; quantity >= 1'}), 400
     
-    # Fiksuoti verslo įvykį
+    # Track business event
     telemetry.track_event('Purchase', {
         'product_id': product_id,
         'quantity': quantity,
@@ -546,7 +528,7 @@ def purchase():
         'user_id': request.headers.get('X-User-Id', 'anonymous')
     })
     
-    # Fiksuoti pajamų metriką
+    # Track revenue metric
     telemetry.track_metric('Revenue', price * quantity, {
         'product_id': product_id,
         'currency': 'USD'
@@ -565,19 +547,19 @@ def search():
     
     start_time = time.time()
     
-    # Simuliuoti paiešką (tai būtų reali duomenų bazės užklausa)
+    # Simulate search (would be real database query)
     results = [{'id': 1, 'name': f'Result for {query}'}]
     
-    duration = (time.time() - start_time) * 1000  # Konvertuoti į ms
+    duration = (time.time() - start_time) * 1000  # Convert to ms
     
-    # Fiksuoti paieškos įvykį
+    # Track search event
     telemetry.track_event('Search', {
         'query': query,
         'results_count': len(results),
         'duration_ms': duration
     })
     
-    # Fiksuoti paieškos našumo metriką
+    # Track search performance metric
     telemetry.track_metric('SearchDuration', duration, {
         'query_length': len(query)
     })
@@ -589,26 +571,14 @@ def external_call():
     """Track external API dependency"""
     import requests
     
-    start_time = time.time()
-    success = True
-    
     try:
-        # Simuliuoti išorinę API užklausą
-        response = requests.get('https://api.example.com/data', timeout=5)
-        result = response.json()
+        # Set an actual test endpoint; api.example.com is not a working API.
+        with telemetry.track_dependency('ExternalAPI'):
+            response = requests.get(os.environ['EXTERNAL_API_URL'], timeout=5)
+            response.raise_for_status()
+            result = response.json()
     except Exception as e:
-        success = False
-        result = {'error': str(e)}
-    
-    duration = (time.time() - start_time) * 1000
-    
-    # Fiksuoti priklausomybę
-    telemetry.track_dependency(
-        name='ExternalAPI',
-        dependency_type='HTTP',
-        duration=duration,
-        success=success
-    )
+        return jsonify({'error': 'External dependency failed'}), 502
     
     return jsonify(result)
 
@@ -616,19 +586,19 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-### Išbandykite pasirinktinę telemetriją
+### Išbandykite pasirinktą telemetriją
 
 ```bash
-# Sekti pirkimo įvykį
+# Track purchase event
 curl -X POST $APP_URL/api/purchase \
   -H "Content-Type: application/json" \
   -H "X-User-Id: user123" \
   -d '{"product_id": 1, "quantity": 2, "price": 29.99}'
 
-# Sekti paieškos įvykį
+# Track search event
 curl "$APP_URL/api/search?q=laptop"
 
-# Sekti išorinę priklausomybę
+# Track external dependency
 curl $APP_URL/api/external-call
 ```
 
@@ -647,10 +617,10 @@ traces
     user_id = tostring(customDimensions.user_id)
 | order by timestamp desc
 
-// View revenue metrics
+// Revenue recorded in Purchase events (not a billing ledger)
 traces
-| where customDimensions.metric_name == "Revenue"
-| summarize TotalRevenue = sum(todouble(customDimensions.value)) by bin(timestamp, 1h)
+| where customDimensions.event_name == "Purchase"
+| summarize TotalRevenue = sum(todouble(customDimensions.total_amount)) by bin(timestamp, 1h)
 | render timechart
 
 // View search performance
@@ -665,13 +635,13 @@ traces
 
 ---
 
-## Pamoka 3: Paskirstytas trasavimas mikroservisams
+## Pamoka 3: Išplitęs sekimas mikroservisuose
 
-### Įgalinkite tarp paslaugų trasavimą
+### Įgalinkite tarp-paslaugų sekimą
 
-Mikroservisams Application Insights automatiškai koreliuoja užklausas tarp paslaugų.
+Su suderinama instrumentacija ir W3C trace-context propagacija, Application Insights koreliuoja užklausas tarp paslaugų. Vien tik ryšio eilutės dalijimasis nesukuria tėvų-vaikų sekų. Tolimesnis architektūros fragmentas nurodo modulius, kuriuos turite įgyvendinti.
 
-**Failas: `infra/main.bicep`**
+**Byla: `infra/main.bicep`**
 
 ```bicep
 targetScope = 'subscription'
@@ -739,40 +709,41 @@ output APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applica
 output GATEWAY_URL string = apiGateway.outputs.uri
 ```
 
-### Peržiūrėkite viso kelio transakciją
+### Peržiūrėkite viso proceso seką
 
 ```mermaid
 sequenceDiagram
-    participant User as Vartotojas
-    participant Gateway as API vartai<br/>(Sekos ID: abc123)
-    participant Product as Produktų paslauga<br/>(Tėvinis ID: abc123)
-    participant Order as Užsakymų paslauga<br/>(Tėvinis ID: abc123)
-    participant AppInsights as Programų įžvalgos
+    participant User
+    participant Gateway as API Gateway<br/>(Trace ID: abc123)
+    participant Product as Product Service<br/>(Parent ID: abc123)
+    participant Order as Order Service<br/>(Parent ID: abc123)
+    participant AppInsights as Application Insights
     
     User->>Gateway: POST /api/checkout
-    Note over Gateway: Pradėti sekimą: abc123
-    Gateway->>AppInsights: Registruoti užklausą (Sekos ID: abc123)
+    Note over Gateway: Start Trace: abc123
+    Gateway->>AppInsights: Log request (Trace ID: abc123)
     
     Gateway->>Product: GET /products/123
-    Note over Product: Tėvinis ID: abc123
-    Product->>AppInsights: Registruoti priklausomybės kvietimą
-    Product-->>Gateway: Produkto informacija
+    Note over Product: Parent ID: abc123
+    Product->>AppInsights: Log dependency call
+    Product-->>Gateway: Product details
     
     Gateway->>Order: POST /orders
-    Note over Order: Tėvinis ID: abc123
-    Order->>AppInsights: Registruoti priklausomybės kvietimą
-    Order-->>Gateway: Užsakymas sukurtas
+    Note over Order: Parent ID: abc123
+    Order->>AppInsights: Log dependency call
+    Order-->>Gateway: Order created
     
-    Gateway-->>User: Atsiskaitymas baigtas
-    Gateway->>AppInsights: Registruoti atsakymą (Trukmė: 450ms)
+    Gateway-->>User: Checkout complete
+    Gateway->>AppInsights: Log response (Duration: 450ms)
     
-    Note over AppInsights: Koreliacija pagal Sekos ID
+    Note over AppInsights: Correlation by Trace ID
 ```
-**Užklauskite viso kelio trasą:**
+
+**Užklausa visos sekos pabaigai:**
 
 ```kusto
 // Find complete request flow
-let traceId = "abc123...";  // Get from response header
+let traceId = "abc123...";  // Copy operation_Id from a request in Application Insights
 dependencies
 | union requests
 | where operation_Id == traceId
@@ -788,65 +759,65 @@ dependencies
 
 ---
 
-## Pamoka 4: Live Metrics ir realaus laiko stebėjimas
+## Pamoka 4: Gyvų metrų srautas ir realaus laiko stebėjimas
 
-### Įgalinkite Live Metrics srautą
+### Įgalinkite gyvų metrų srautą
 
-Live Metrics suteikia realaus laiko telemetriją su mažesniu nei 1 s vėlavimu.
+Gyvos metrikos teikia beveik realaus laiko telemetriją, kai tai palaiko ir leidžia SDK. Tai nėra delsimo SLA. Python OpenTelemetry diegime aukščiau įjungta per `enable_live_metrics=True`.
 
-**Prieiga prie Live Metrics:**
+**Prieiga prie gyvų metrų:**
 
 ```bash
-# Gauti Application Insights resursą
+# Get Application Insights resource
 APPI_NAME=$(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"')
 
-# Gauti išteklių grupę
+# Get resource group
 RG_NAME=$(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"')
 
 echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME → Live Metrics"
 ```
 
 **Ką matote realiu laiku:**
-- ✅ Gaunamų užklausų dažnis (užklausės/sek.)
-- ✅ Išeinančių priklausomybių kvietimų skaičius
-- ✅ Išimčių kiekis
+- ✅ Įeinančių užklausų dažnis (užklausos/sek)
+- ✅ Išeinančių priklausomybių iškvietimai
+- ✅ Išimčių skaičius
 - ✅ CPU ir atminties naudojimas
 - ✅ Aktyvių serverių skaičius
-- ✅ Mėginio telemetrija
+- ✅ Telemetrijos pavyzdžiai
 
-### Generuoti apkrovą testavimui
+### Generuokite apkrovą testavimui
 
 ```bash
-# Generuokite apkrovą, kad pamatytumėte tiesiogines metrikas
+# Generate load to see live metrics
 for i in {1..100}; do
-  curl $APP_URL/api/products &
-  curl $APP_URL/api/search?q=test$i &
+  curl --silent --max-time 10 "$APP_URL/api/products"
+  curl --silent --max-time 10 "$APP_URL/api/search?q=test$i"
 done
 
-# Stebėkite tiesiogines metrikas Azure portale
-# Turėtumėte matyti užklausų srauto piką
+# Watch live metrics in Azure Portal
+# You should see request rate spike
 ```
 
 ---
 
-## Praktinės užduotys
+## Praktiniai pratimai
 
-### Užduotis 1: Nustatyti įspėjimus ⭐⭐ (Tarpinis)
+### Pratimas 1: Nustatykite įspėjimus ⭐⭐ (Vidutinio lygio)
 
-**Tikslas**: Sukurti įspėjimus dėl didelio klaidų dažnio ir lėtų atsakymų.
+**Tikslas**: Sukurti įspėjimus dėl didelio klaidų lygio ir lėto atsako.
 
-**Žingsniai:**
+**Veiksmai:**
 
-1. **Sukurti įspėjimą klaidų rodikliui:**
+1. **Sukurkite įspėjimą dėl klaidų dažnio:**
 
 ```bash
-# Gauti Application Insights resurso ID
+# Get Application Insights resource ID
 APPI_ID=$(az monitor app-insights component show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
   --query "id" -o tsv)
 
-# Sukurti metrinį įspėjimą dėl nepavykusių užklausų
+# Create metric alert for failed requests
 az monitor metrics alert create \
   --name "High-Error-Rate" \
   --resource-group $RG_NAME \
@@ -854,10 +825,10 @@ az monitor metrics alert create \
   --condition "count requests/failed > 10" \
   --window-size 5m \
   --evaluation-frequency 1m \
-  --description "Alert when error rate exceeds 10 per 5 minutes"
+  --description "Alert when failed request count exceeds 10 per 5 minutes"
 ```
 
-2. **Sukurti įspėjimą lėtoms atsakoms:**
+2. **Sukurkite įspėjimą dėl lėtų atsakymų:**
 
 ```bash
 az monitor metrics alert create \
@@ -870,9 +841,9 @@ az monitor metrics alert create \
   --description "Alert when average response time exceeds 3 seconds"
 ```
 
-3. **Sukurti įspėjimą per Bicep (pageidautina AZD):**
+3. **Sukurkite įspėjimą per Bicep (pageidautina AZD):**
 
-**Failas: `infra/core/alerts.bicep`**
+**Byla: `infra/core/alerts.bicep`**
 
 ```bicep
 param applicationInsightsId string
@@ -944,57 +915,57 @@ output errorAlertId string = errorRateAlert.id
 output slowResponseAlertId string = slowResponseAlert.id
 ```
 
-4. **Išbandyti įspėjimus:**
+4. **Išbandykite įspėjimus:**
 
 ```bash
-# Generuoti klaidas
+# Generate errors
 for i in {1..20}; do
   curl $APP_URL/api/error-test
 done
 
-# Generuoti lėtus atsakymus
+# Generate slow responses
 for i in {1..10}; do
   curl $APP_URL/api/slow
 done
 
-# Patikrinkite įspėjimo būseną (palaukite 5–10 minučių)
+# Check rule configuration (not fired/resolved alert-instance history)
 az monitor metrics alert list \
   --resource-group $RG_NAME \
-  --query "[].{Name:name, Enabled:enabled, State:properties.enabled}" \
+  --query "[].{Name:name, Enabled:enabled}" \
   --output table
 ```
 
 **✅ Sėkmės kriterijai:**
 - ✅ Įspėjimai sėkmingai sukurti
 - ✅ Įspėjimai aktyvuojami viršijus ribas
-- ✅ Galima peržiūrėti įspėjimų istoriją Azure portale
+- ✅ Gali matyti įspėjimų istoriją Azure portale
 - ✅ Integruota su AZD diegimu
 
 **Laikas**: 20-25 minutės
 
 ---
 
-### Užduotis 2: Sukurti pasirinktinį prietaisų skydą ⭐⭐ (Tarpinis)
+### Pratimas 2: Sukurkite pasirinktinius valdymo skydelius ⭐⭐ (Vidutinio lygio)
 
-**Tikslas**: Sukurti prietaisų skydą, rodantį pagrindines programos metrikas.
+**Tikslas**: Sukurti valdymo skydelį su pagrindine programos metrika.
 
-**Žingsniai:**
+**Veiksmai:**
 
-1. **Sukurti prietaisų skydą per Azure Portal:**
+1. **Sukurkite valdymo skydelį per Azure Portal:**
 
-Eikite į: Azure Portal → Dashboards → New Dashboard
+Eikite į: Azure Portal → Valdymo skydeliai → Naujas valdymo skydelis
 
-2. **Pridėti korteles su pagrindinėmis metrikomis:**
+2. **Pridėkite blokus pagrindinei metrikai:**
 
-- Užklausų skaičius (per pastarąsias 24 valandas)
+- Užklausų skaičius (per paskutines 24 valandas)
 - Vidutinis atsako laikas
-- Klaidos dažnis
-- 5 lėčiausios operacijos
-- Vartotojų geografinė paskirstis
+- Klaidų lygis
+- Top 5 lėčiausios operacijos
+- Naudotojų geografinis pasiskirstymas
 
-3. **Sukurti prietaisų skydą per Bicep:**
+3. **Sukurkite valdymo skydelį per Bicep:**
 
-**Failas: `infra/core/dashboard.bicep`**
+**Byla: `infra/core/dashboard.bicep`**
 
 ```bicep
 param dashboardName string
@@ -1011,7 +982,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
         parts: [
           // Request count
           {
-            position: { x: 0, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 0
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1032,7 +1008,12 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
           }
           // Error rate
           {
-            position: { x: 6, y: 0, rowSpan: 4, colSpan: 6 }
+            position: {
+              x: 6
+              y: 0
+              rowSpan: 4
+              colSpan: 6
+            }
             metadata: {
               type: 'Extension/Microsoft_OperationsManagementSuite_Workspace/PartType/LogsDashboardPart'
               inputs: [
@@ -1063,10 +1044,10 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
 output dashboardId string = dashboard.id
 ```
 
-4. **Diegti prietaisų skydą:**
+4. **Diegti valdymo skydelį:**
 
-```bash
-# Pridėti į main.bicep
+```bicep
+// Add to a subscription-scoped main.bicep with rg and monitoring declared
 module dashboard './core/dashboard.bicep' = {
   name: 'dashboard'
   scope: rg
@@ -1076,30 +1057,32 @@ module dashboard './core/dashboard.bicep' = {
     location: location
   }
 }
+```
 
-# Diegti
+```bash
+# Deploy
 azd up
 ```
 
 **✅ Sėkmės kriterijai:**
-- ✅ Prietaisų skydas rodo pagrindines metrikas
-- ✅ Galima prisegti prie Azure Portal pradžios
-- ✅ Atnaujinama realiu laiku
-- ✅ Diegiama per AZD
+- ✅ Valdymo skydelis rodo pagrindinę metriką
+- ✅ Gali prisegti prie Azure portalo pradžios puslapio
+- ✅ Atnaujina realiu laiku
+- ✅ Diegiamas per AZD
 
 **Laikas**: 25-30 minučių
 
 ---
 
-### Užduotis 3: Stebėti AI/LLM programą ⭐⭐⭐ (Išplėstinė)
+### Pratimas 3: Stebėkite AI/LLM programą ⭐⭐⭐ (Pažengęs)
 
-**Tikslas**: Stebėti Microsoft Foundry modelių naudojimą (tokenai, sąnaudos, delsos).
+**Tikslas**: Sekti Microsoft Foundry modelių naudojimą (žetonai, kainos, delsimas).
 
-**Žingsniai:**
+**Veiksmai:**
 
-1. **Sukurti AI stebėjimo apvalkalą:**
+1. **Sukurkite AI stebėjimo įvyniojimą:**
 
-**Failas: `src/ai_telemetry.py`**
+**Byla: `src/ai_telemetry.py`**
 
 ```python
 from telemetry import telemetry
@@ -1109,19 +1092,22 @@ import time
 class MonitoredAzureOpenAI:
     """Microsoft Foundry Models client with automatic telemetry"""
     
-    def __init__(self, api_key, endpoint, api_version="2024-02-01"):
+    def __init__(self, api_key, endpoint, input_usd_per_million,
+                 output_usd_per_million, api_version="2024-10-21"):
         self.client = AzureOpenAI(
             api_key=api_key,
             api_version=api_version,
             azure_endpoint=endpoint
         )
+        self.input_rate = input_usd_per_million
+        self.output_rate = output_usd_per_million
     
     def chat_completion(self, model: str, messages: list, **kwargs):
         """Track chat completion with telemetry"""
         start_time = time.time()
         
         try:
-            # Kviesti Microsoft Foundry modelius
+            # Call Microsoft Foundry Models
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
@@ -1130,18 +1116,19 @@ class MonitoredAzureOpenAI:
             
             duration = (time.time() - start_time) * 1000  # ms
             
-            # Išgauti naudojimą
+            # Extract usage
             usage = response.usage
             prompt_tokens = usage.prompt_tokens
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # Apskaičiuoti kainą (gpt-4.1 kainodara)
-            prompt_cost = (prompt_tokens / 1000) * 0.03  # $0.03 už 1K tokenų
-            completion_cost = (completion_tokens / 1000) * 0.06  # $0.06 už 1K tokenų
+            # Approximation: supply actual deployment/region/contract rates.
+            # Cached input, batch, provisioned and other charges need separate accounting.
+            prompt_cost = (prompt_tokens / 1_000_000) * self.input_rate
+            completion_cost = (completion_tokens / 1_000_000) * self.output_rate
             total_cost = prompt_cost + completion_cost
             
-            # Stebėti pasirinktinį įvykį
+            # Track custom event
             telemetry.track_event('OpenAI_Request', {
                 'model': model,
                 'prompt_tokens': prompt_tokens,
@@ -1152,7 +1139,7 @@ class MonitoredAzureOpenAI:
                 'success': True
             })
             
-            # Stebėti rodiklius
+            # Track metrics
             telemetry.track_metric('OpenAI_Tokens', total_tokens, {
                 'model': model,
                 'type': 'total'
@@ -1182,7 +1169,7 @@ class MonitoredAzureOpenAI:
             raise
 ```
 
-2. **Naudoti stebimą klientą:**
+2. **Naudokite stebimą klientą:**
 
 ```python
 from flask import Flask, request, jsonify
@@ -1191,10 +1178,12 @@ import os
 
 app = Flask(__name__)
 
-# Inicializuoti stebimą OpenAI klientą
+# Initialize monitored OpenAI client
 openai_client = MonitoredAzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
-    endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
+    endpoint=os.environ['AZURE_OPENAI_ENDPOINT'],
+    input_usd_per_million=float(os.environ['INPUT_USD_PER_MILLION']),
+    output_usd_per_million=float(os.environ['OUTPUT_USD_PER_MILLION'])
 )
 
 @app.route('/api/chat', methods=['POST'])
@@ -1202,9 +1191,9 @@ def chat():
     data = request.json
     user_message = data.get('message')
     
-    # Iškviesti su automatiniu stebėjimu
+    # Call with automatic monitoring
     response = openai_client.chat_completion(
-        model='gpt-4.1',
+        model=os.environ['AZURE_OPENAI_DEPLOYMENT'], # Deployment name, not catalog ID
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1216,13 +1205,13 @@ def chat():
     })
 ```
 
-3. **Užklausti AI metrikas:**
+3. **Užklauskite AI metrikas:**
 
 ```kusto
 // Total AI spend over time
 traces
 | where customDimensions.event_name == "OpenAI_Request"
-| where customDimensions.success == "True"
+| where tobool(customDimensions.success) == true
 | summarize TotalCost = sum(todouble(customDimensions.cost_usd)) by bin(timestamp, 1h)
 | render timechart
 
@@ -1251,47 +1240,34 @@ traces
 ```
 
 **✅ Sėkmės kriterijai:**
-- ✅ Kiekvienas OpenAI kvietimas stebimas automatiškai
-- ✅ Tokenų naudojimas ir sąnaudos matomos
-- ✅ Delsa stebima
-- ✅ Galima nustatyti biudžeto įspėjimus
+- ✅ Kiekvienas OpenAI iškvietimas automatiškai stebimas
+- ✅ Matomas žetonų naudojimas ir kainos
+- ✅ Stebimas delsimas
+- ✅ Gali nustatyti biudžeto įspėjimus
 
 **Laikas**: 35-45 minutės
 
 ---
 
-## Sąnaudų optimizavimas
+## Išlaidų optimizavimas
 
-### Ūmavimo strategijos
+### Mėginių ėmimo strategijos
 
-Kontroliuokite sąnaudas taikydami ėmimą (sampling):
+Kontroliuokite išlaidas mėginių ėmimu telemetrijoje:
 
 ```python
-from opencensus.trace.samplers import ProbabilitySampler
+import os
 
-# Kūrimas: 100% mėginių atranka
-sampler = ProbabilitySampler(rate=1.0)
-
-# Gamyba: 10% mėginių atranka (sumažina išlaidas 90%)
-sampler = ProbabilitySampler(rate=0.1)
-
-# Adaptyvi mėginių atranka (automatiškai prisitaiko)
-from opencensus.trace.samplers import AdaptiveSampler
-sampler = AdaptiveSampler()
+# Configure before the one configure_azure_monitor() call in your process.
+os.environ["OTEL_TRACES_SAMPLER"] = "microsoft.fixed_percentage"
+os.environ["OTEL_TRACES_SAMPLER_ARG"] = "0.1" # 10% trace sampling
 ```
 
-**Bicep faile:**
+Sekos mėginimas nesumažina kiekvienos telemetrijos kategorijos 90%. Metrikai ir savarankiškai siunčiami žurnalai reikalauja savo apimties valdymo. Pasirinkite rodiklį pagal stebėjimo poreikius, o ne bendrą draudimą produkcijoje.
 
-```bicep
-resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
-  name: applicationInsightsName
-  properties: {
-    SamplingPercentage: 10  // 10% sampling
-  }
-}
-```
+Nustatykite SDK mėginių ėmimą aiškiai; komponento `SamplingPercentage` savybė nėra pakaitalas Python OpenTelemetry mėginių ėmimo konfigūrai.
 
-### Duomenų saugojimas
+### Duomenų saugojimo laikas
 
 ```bicep
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
@@ -1303,40 +1279,40 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 }
 ```
 
-### Mėnesinės sąnaudų sąmatos
+### Mėnesinės kainos įvertinimai
 
-| Duomenų kiekis | Saugojimas | Mėnesinės sąnaudos |
+| Duomenų apimtis | Saugojimo trukmė | Mėnesio kaina |
 |-------------|-----------|--------------|
-| 1 GB/mėn. | 30 dienų | ~$2-5 |
-| 5 GB/mėn. | 30 dienų | ~$10-15 |
-| 10 GB/mėn. | 90 dienų | ~$25-40 |
-| 50 GB/mėn. | 90 dienų | ~$100-150 |
+| 1 GB per mėn. | 30 dienų | ~2-5 $ |
+| 5 GB per mėn. | 30 dienų | ~10-15 $ |
+| 10 GB per mėn. | 90 dienų | ~25-40 $ |
+| 50 GB per mėn. | 90 dienų | ~100-150 $ |
 
-**Nemokamas planas**: 5 GB/mėn. įtrauktas
+Šie skaičiai yra iliustraciniai, o ne pasiūlymai. Patikrinkite įkėlimo, saugojimo, įspėjimo ir testavimo kainas savo regione ir sutartyje; nemokami limitai dalijami ir apriboti pagal Azure Monitor kainodarą, o ne garantuojami kaip atskira nemokama SKU kiekvienam Application Insights ištekliui.
 
 ---
 
-## Žinių patikrinimas
+## Žinių tikrinimo punktas
 
 ### 1. Pagrindinė integracija ✓
 
-Išbandykite savo supratimą:
+Patikrinkite savo žinias:
 
-- [ ] **K1**: Kaip AZD paruošia Application Insights?
-  - **A**: Automatiškai per Bicep šablonus faile `infra/core/monitoring.bicep`
+- [ ] **Klausimas 1**: Kaip AZD paruošia Application Insights?
+  - **A**: Jis diegia stebėjimo išteklius, kuriuos aiškiai nurodo projekto Bicep/Terraform šablonai.
 
-- [ ] **K2**: Koks aplinkos kintamasis įjungia Application Insights?
+- [ ] **Klausimas 2**: Kuris aplinkos kintamasis įjungia Application Insights?
   - **A**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
 
-- [ ] **K3**: Kokie yra trys pagrindiniai telemetrijos tipai?
-  - **A**: Užklausos (HTTP kvietimai), Priklausomybės (išoriniai kvietimai), Išimtys (klaidos)
+- [ ] **Klausimas 3**: Kokie yra trys pagrindiniai telemetrijos tipai?
+  - **A**: Užklausos (HTTP iškvietimai), Priklausomybės (išoriniai iškvietimai), Išimtys (klaidos)
 
 **Praktinis patikrinimas:**
 ```bash
-# Patikrinkite, ar Application Insights yra sukonfigūruotas
+# Check if Application Insights is configured
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Patikrinkite, ar telemetrija siunčiama
+# Verify telemetry is flowing
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1347,15 +1323,15 @@ az monitor app-insights metrics show \
 
 ### 2. Pasirinktinė telemetrija ✓
 
-Išbandykite savo supratimą:
+Patikrinkite savo žinias:
 
-- [ ] **K1**: Kaip stebite pasirinktinius verslo įvykius?
-  - **A**: Naudojant logger su `custom_dimensions` arba `TelemetryClient.track_event()`
+- [ ] **Klausimas 1**: Kaip sekti pasirinktinius verslo įvykius?
+  - **A**: Šioje pamokoje naudojamas įvyniojimas rašo struktūruotus OTel žurnalus su `event_name` atributais, kuriuos galima užklausti klientėje `traces`; jie automatiškai nėra `customEvents`.
 
-- [ ] **K2**: Kuo skiriasi įvykiai ir metrikos?
-  - **A**: Įvykiai yra atskiri įvykiai, metrikos yra skaitinės reikšmės
+- [ ] **Klausimas 2**: Kuo skiriasi įvykiai ir metrika?
+  - **A**: Įvykiai yra atskiri įvykiai, metrika - skaitiniai matavimai
 
-- [ ] **K3**: Kaip koreliuoti telemetriją tarp paslaugų?
+- [ ] **Klausimas 3**: Kaip susieti telemetriją tarp paslaugų?
   - **A**: Application Insights automatiškai naudoja `operation_Id` koreliacijai
 
 **Praktinis patikrinimas:**
@@ -1368,26 +1344,24 @@ traces
 
 ---
 
-### 3. Gamybinis stebėjimas ✓
+### 3. Produkcijos stebėjimas ✓
 
-Išbandykite savo supratimą:
+Patikrinkite savo žinias:
 
-- [ ] **K1**: Kas yra ėmimas (sampling) ir kam jis reikalingas?
-  - **A**: Ūmimas sumažina duomenų kiekį (ir sąnaudas) užfiksuodamas tik dalį telemetrijos
+- [ ] **Klausimas 1**: Kas yra mėginimas ir kodėl jį naudoti?
+  - **A**: Mėginimas sumažina duomenų kiekį (ir išlaidas), fiksuodamas tik dalį telemetrijos
 
-- [ ] **K2**: Kaip nustatyti įspėjimus?
-  - **A**: Naudoti metrikų įspėjimus per Bicep arba Azure Portal remiantis Application Insights metrikomis
+- [ ] **Klausimas 2**: Kaip nustatyti įspėjimus?
+  - **A**: Naudokite metrikų įspėjimus Bicep arba Azure portale pagal Application Insights metrikas
 
-- [ ] **K3**: Kuo skiriasi Log Analytics ir Application Insights?
-  - **A**: Application Insights saugo duomenis Log Analytics darbo srityje; App Insights suteikia programai specifines peržiūras
+- [ ] **Klausimas 3**: Kuo skiriasi Log Analytics ir Application Insights?
+  - **A**: Application Insights saugo duomenis Log Analytics darbo aplinkoje; App Insights teikia specifines programos peržiūras
 
 **Praktinis patikrinimas:**
 ```bash
-# Patikrinkite mėginių ėmimo konfigūraciją
-az monitor app-insights component show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --query "properties.SamplingPercentage"
+# Check the sampler configured for the running application, not only the ARM component.
+az containerapp show --name "$APP_NAME" --resource-group "$RG_NAME" \
+  --query "properties.template.containers[].env[?starts_with(name, 'OTEL_TRACES_SAMPLER')]"
 ```
 
 ---
@@ -1396,13 +1370,11 @@ az monitor app-insights component show \
 
 ### ✅ DARYKITE:
 
-1. **Naudokite korrelacijos ID**
+1. **Naudokite koreliacijos ID**
    ```python
    logger.info('Processing order', extra={
-       'custom_dimensions': {
            'order_id': order_id,
            'user_id': user_id
-       }
    })
    ```
 
@@ -1411,67 +1383,67 @@ az monitor app-insights component show \
    // Error rate, slow responses, availability
    ```
 
-3. **Naudokite struktūruotą žurnala (structured logging)**
+3. **Naudokite struktūruotą žurnalavimą**
    ```python
-   # ✅ GERAI: Struktūruotas
-   logger.info('User signup', extra={'custom_dimensions': {'user_id': 123}})
+   # ✅ GOOD: Structured
+   logger.info('User signup', extra={'user_id': 'pseudonymous-id'})
    
-   # ❌ BLOGAI: Nestruktūruotas
+   # ❌ BAD: Unstructured
    logger.info(f'User 123 signed up')
    ```
 
 4. **Stebėkite priklausomybes**
    ```python
-   # Automatiškai stebėti duomenų bazės iškvietimus, HTTP užklausas ir kt.
+   # Automatically track database calls, HTTP requests, etc.
    ```
 
 5. **Naudokite Live Metrics diegimų metu**
 
 ### ❌ NEDARYKITE:
 
-1. **Neloginkite jautrių duomenų**
+1. **Neloginkite jautrios informacijos**
    ```python
-   # ❌ BLOGAI
+   # ❌ BAD
    logger.info(f'Login: {username}:{password}')
    
-   # ✅ GERAI
-   logger.info('Login attempt', extra={'custom_dimensions': {'username': username}})
+   # ✅ GOOD
+   logger.info('Login attempt', extra={'result': 'failed'})
    ```
 
-2. **Nenaudokite 100% ėmimo produkcijoje**
+2. **Nenaudokite ėminių be tūrio ir diagnostikos poreikių įvertinimo**
    ```python
-   # ❌ Brangu
-   sampler = ProbabilitySampler(rate=1.0)
+   # ❌ Expensive
+   # 100% traces may be appropriate for a small workload or investigation.
    
-   # ✅ Ekonomiškas
-   sampler = ProbabilitySampler(rate=0.1)
+   # ✅ Cost-effective
+   # A lower trace rate reduces visibility; validate coverage before enabling.
    ```
 
-3. **Nenumokite ranka į dead letter eilutes**
+3. **Nepamirškite spręsti mirusių laiškų eilių**
 
-4. **Neužmirškite nustatyti duomenų saugojimo limitų**
+4. **Nepamirškite nustatyti duomenų saugojimo ribų**
 
 ---
 
-## Trikčių šalinimas
+## Gedimų šalinimas
 
-### Problema: Telemetrija neatsiranda
+### Problema: Nėra jokios telemetrijos
 
-**Diagnozė:**
+**Diagnostika:**
 ```bash
-# Patikrinkite, ar prisijungimo eilutė nustatyta
+# Check connection string is set
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Peržiūrėkite programos žurnalus naudodami Azure Monitor
+# Check application logs via Azure Monitor
 azd monitor --logs
 
-# Arba naudokite Azure CLI Container Apps:
+# Or use Azure CLI for Container Apps:
 az containerapp logs show --name $APP_NAME --resource-group $RG_NAME --tail 50
 ```
 
 **Sprendimas:**
 ```bash
-# Patikrinkite ryšio eilutę konteinerinėje programoje
+# Verify connection string in Container App
 az containerapp show \
   --name $APP_NAME \
   --resource-group $RG_NAME \
@@ -1481,71 +1453,70 @@ az containerapp show \
 
 ---
 
-### Problema: Didelės sąnaudos
+### Problema: Didelės išlaidos
 
-**Diagnozė:**
+**Diagnostika:**
 ```bash
-# Patikrinti duomenų įkėlimą
-az monitor app-insights metrics show \
-  --app $APPI_NAME \
-  --resource-group $RG_NAME \
-  --metric "availabilityResults/count"
+# Query ingestion volume in the linked Log Analytics workspace.
+# WORKSPACE_ID is the workspace customer ID (GUID), not its ARM resource ID.
+az monitor log-analytics query --workspace "$WORKSPACE_ID" \
+  --analytics-query "Usage | where TimeGenerated > ago(30d) | where IsBillable == true | summarize IngestedMB=sum(Quantity) by DataType"
 ```
 
 **Sprendimas:**
-- Sumažinti ėmimo dažnį
-- Sutrumpinti saugojimo periodą
-- Pašalinti išsamius žurnalus
+- Sumažinkite ėminių dažnį
+- Trumpinkite saugojimo laikotarpį
+- Pašalinkite išsamią žurnalų registraciją
 
 ---
 
 ## Sužinokite daugiau
 
-### Oficialus dokumentavimas
-- [Application Insights Overview](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Application Insights for Python](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
-- [Kusto Query Language](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
-- [AZD Monitoring](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
+### Oficialūs dokumentai
+- [Application Insights apžvalga](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
+- [Azure Monitor OpenTelemetry nustatymas](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python)
+- [Kusto užklausų kalba](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
+- [AZD monitoravimas](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
 
-### Tolimesni žingsniai šiame kurse
-- ← Ankstesnis: [Preflight Checks](preflight-checks.md)
-- → Toliau: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
+### Kiti žingsniai šiame kurse
+- ← Ankstesnis: [Paruošiamieji patikrinimai](preflight-checks.md)
+- → Tolimesnis: [Diegimo vadovas](../chapter-04-infrastructure/deployment-guide.md)
 - 🏠 [Kurso pradžia](../../README.md)
 
 ### Susiję pavyzdžiai
-- [Microsoft Foundry Models Example](../../../../examples/azure-openai-chat) - AI telemetrija
-- [Microservices Example](../../../../examples/microservices) - Paskirstytas trasavimas
+- [Microsoft Foundry modelių pavyzdys](../../../../examples/azure-openai-chat) - DI telemetrija
+- [Mikropaslaugų pavyzdys](../../../../examples/microservices) - Išskirstytasis sekimas
 
 ---
 
 ## Santrauka
 
-**Jūs sužinojote:**
-- ✅ Automatinį Application Insights paruošimą su AZD
-- ✅ Pasirinktinius telemetrijos duomenis (įvykiai, metrikos, priklausomybės)
-- ✅ Paskirstytą trasavimą tarp mikroservisų
-- ✅ Live Metrics ir realaus laiko stebėjimą
-- ✅ Įspėjimus ir prietaisų skydus
-- ✅ AI/LLM programų stebėjimą
-- ✅ Sąnaudų optimizavimo strategijas
+**Išmokote:**
+- ✅ Automatinis Application Insights įvedimas su AZD
+- ✅ Individualizuota telemetrija (įvykiai, metrika, priklausomybės)
+- ✅ Išskaidytasis sekimas tarp mikropaslaugų
+- ✅ Tiesioginė metrika ir realaus laiko stebėjimas
+- ✅ Įspėjimai ir informaciniai skydeliai
+- ✅ DI/LLM programų stebėjimas
+- ✅ Kaštų optimizavimo strategijos
 
-**Pagrindinės išvados:**
-1. **AZD automatiškai sukonfigūruoja stebėjimą** - Be rankinio nustatymo
-2. **Naudokite struktūruotą žurnalavimą** - Palengvina užklausų vykdymą
-3. **Sekite verslo įvykius** - Ne tik techniniai rodikliai
-4. **Stebėkite DI sąnaudas** - Sekite tokenus ir išlaidas
-5. **Nustatykite įspėjimus** - Būkite proaktyvūs, o ne reaktyvūs
-6. **Optimizuokite sąnaudas** - Naudokite mėginių ėmimą ir saugojimo apribojimus
+**Pagrindinės įžvalgos:**
+1. **Aiškiai deklaruokite stebėjimą** - AZD diegia šablonus; SDK instrumentacija siunčia telemetriją
+2. **Naudokite struktūruotą žurnalų registravimą** - Palengvina užklausų kūrimą
+3. **Stebėkite verslo įvykius** - Ne tik techninę metriką
+4. **Stebėkite DI kaštus** - Sekite žetonus ir išlaidas
+5. **Nustatykite įspėjimus** - Būkite proaktyvūs, o ne reaguojantys
+6. **Optimizuokite kaštus** - Naudokite ėminius ir saugojimo limitus
 
 **Tolimesni žingsniai:**
-1. Atlikite praktines užduotis
-2. Pridėkite Application Insights prie savo AZD projektų
-3. Sukurkite pritaikytas informacijos suvestines savo komandai
-4. Susipažinkite su [Diegimo vadovu](../chapter-04-infrastructure/deployment-guide.md)
+1. Įvykdykite praktines užduotis
+2. Pridėkite Application Insights į savo AZD projektus
+3. Sukurkite individualius informacinius skydelius savo komandai
+4. Išmokite [Diegimo vadovas](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Šis dokumentas buvo išverstas pasitelkus DI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, atkreipkite dėmesį, kad automatizuoti vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama rinktis profesionalų žmogaus atliktą vertimą. Mes neatsakome už jokius nesusipratimus ar neteisingą aiškinimą, kylančius dėl šio vertimo naudojimo.
+**Atsakomybės apribojimas**:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojama naudoti profesionalų žmogiškąjį vertimą. Mes neatsakome už jokius nesusipratimus ar neteisingą interpretaciją, kilusią naudojantis šiuo vertimu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

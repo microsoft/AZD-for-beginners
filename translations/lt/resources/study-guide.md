@@ -1,302 +1,302 @@
-# Studijų vadovas - Išsamūs mokymosi tikslai
+# Studijų vadovas – Išsamūs mokymosi tikslai
 
 **Mokymosi kelio navigacija**
 - **📚 Kurso pradžia**: [AZD pradedantiesiems](../README.md)
 - **📖 Pradėti mokytis**: [1 skyrius: Pagrindai ir greitas pradėjimas](../README.md#-chapter-1-foundation--quick-start)
-- **🎯 Progreso stebėjimas**: [Kurso užbaigimas](../README.md#-course-completion--certification)
+- **🎯 Pažangos stebėjimas**: [Kurso baigimas](../README.md#-course-completion--certification)
 
 ## Įvadas
 
-Šis išsamus studijų vadovas pateikia struktūrizuotus mokymosi tikslus, pagrindines koncepcijas, praktinius užduočių pavyzdžius ir vertinimo medžiagą, padedančią įvaldyti Azure Developer CLI (azd). Naudokite šį vadovą savo pažangai sekti ir įsitikinti, kad apėmėte visus esminius dalykus.
+Šis išsamus studijų vadovas pateikia struktūruotus mokymosi tikslus, pagrindines sąvokas, praktines užduotis ir vertinimo priemones, kad padėtų jums įvaldyti Azure Developer CLI (azd). Naudokite šį vadovą pažangai sekti ir įsitikinkite, kad apėmėte visas svarbiausias temas.
 
 ## Mokymosi tikslai
 
-Užbaigę šį studijų vadovą, jūs:
-- Įvaldysite visus Azure Developer CLI pagrindinius ir pažengusius konceptus
-- Išvystysite praktinius įgūdžius diegiant ir valdant Azure programas
+Baigę šį studijų vadovą, jūs:
+- Įvaldysite visas pagrindines ir pažangias Azure Developer CLI sąvokas
+- Įgysite praktinių įgūdžių diegiant ir valdant Azure programas
 - Įgysite pasitikėjimo sprendžiant problemas ir optimizuojant diegimus
 - Suprasite gamybai paruoštas diegimo praktikas ir saugumo aspektus
 
 ## Mokymosi rezultatai
 
-Užbaigę visas šio studijų vadovo dalis, sugebėsite:
-- Kurti, diegti ir valdyti pilnas programų architektūras naudojant azd
-- Įgyvendinti išsamią stebėseną, saugumą ir kaštų optimizavimo strategijas
-- Nepriklausomai spręsti sudėtingas diegimo problemas
+Baigę visas šio studijų vadovo dalis, galėsite:
+- Kurti, diegti ir valdyti pilną programų architektūrą naudojant azd
+- Įgyvendinti išsamią stebėjimą, saugumą ir kaštų optimizavimo strategijas
+- Savarankiškai spręsti sudėtingas diegimo problemas
 - Kurti pasirinktinius šablonus ir prisidėti prie azd bendruomenės
 
 ## 8 skyrių mokymosi struktūra
 
 ### 1 skyrius: Pagrindai ir greitas pradėjimas (1 savaitė)
-**Trukmė**: 30-45 minučių | **Sunkumo lygis**: ⭐
+**Trukmė**: 30–45 minutės | **Sudėtingumas**: ⭐
 
 #### Mokymosi tikslai
-- Suprasti Azure Developer CLI (AZD) pagrindines koncepcijas ir terminologiją
-- Sėkmingai įdiegti ir sukonfigūruoti AZD savo vystymo aplinkoje
-- Pirmą kartą pakeisti programą, naudodami esamą šabloną
-- Efektyviai naršyti AZD komandų eilutės sąsają
+- Suprasti Azure Developer CLI pagrindines sąvokas ir terminologiją
+- Sėkmingai įdiegti ir sukonfigūruoti AZD savo kūrimo aplinkoje
+- Diegti pirmąją programą naudodami esamą šabloną
+- Efektyviai naviguoti AZD komandinės eilutės sąsajoje
 
-#### Pagrindinės koncepcijos, kurias reikia įsisavinti
+#### Pagrindinės sąvokos, kurias reikia įvaldyti
 - AZD projekto struktūra ir komponentai (azure.yaml, infra/, src/)
-- Šablonais pagrįsti diegimo darbo srautai
+- Šablonais paremtos diegimo darbo eigos
 - Aplinkos konfigūracijos pagrindai
-- Išteklų grupių ir prenumeratų valdymas
+- Išteklių grupių ir prenumeratos valdymas
 
 #### Praktinės užduotys
 1. **Įdiegimo patikra**: Įdiekite AZD ir patikrinkite su `azd version`
 2. **Pirmasis diegimas**: Sėkmingai įdiekite todo-nodejs-mongo šabloną
 3. **Aplinkos nustatymas**: Sukonfigūruokite pirmuosius aplinkos kintamuosius
-4. **Išteklų tyrinėjimas**: Naršykite įdiegti išteklius Azure portale
+4. **Ištekliai naršymas**: Naršykite įdiegtus išteklius Azure portale
 
 #### Vertinimo klausimai
 - Kokie yra pagrindiniai AZD projekto komponentai?
-- Kaip inicializuoti naują projektą iš šablono?
+- Kaip inicijuoti naują projektą iš šablono?
 - Kuo skiriasi `azd up` ir `azd deploy`?
 - Kaip valdyti kelias aplinkas su AZD?
 
 ---
 
-### 2 skyrius: AI orientuotas vystymas (2 savaitė)
-**Trukmė**: 1-2 valandos | **Sunkumo lygis**: ⭐⭐
+### 2 skyrius: AI pirmas vystymas (2 savaitė)
+**Trukmė**: 1–2 valandos | **Sudėtingumas**: ⭐⭐
 
 #### Mokymosi tikslai
-- Integruoti Microsoft Foundry paslaugas į AZD darbo srautus
-- Diegti ir konfigūruoti AI palaikomas programas
+- Integruoti Microsoft Foundry paslaugas su AZD darbo eigomis
+- Diegti ir konfigūruoti dirbtinio intelekto pagrindu veikiančias programas
 - Suprasti RAG (Retrieval-Augmented Generation) įgyvendinimo modelius
-- Valdyti AI modelių diegimus ir mastelį
+- Valdyti DI modelių diegimus ir skalavimą
 
-#### Pagrindinės koncepcijos, kurias reikia įsisavinti
-- Microsoft Foundry Models paslaugos integracija ir API valdymas
-- AI paieškos konfigūracija ir vektorinis indeksavimas
+#### Pagrindinės sąvokos, kurias reikia įvaldyti
+- Microsoft Foundry Models paslaugų integracija ir API valdymas
+- DI paieškos konfigūracija ir vektorinė indeksacija
 - Modelių diegimo strategijos ir pajėgumų planavimas
-- AI programų stebėsena ir našumo optimizacija
+- DI programų stebėjimas ir veikimo optimizavimas
 
 #### Praktinės užduotys
-1. **AI pokalbių diegimas**: Įdiekite azure-search-openai-demo šabloną
-2. **RAG įgyvendinimas**: Konfigūruokite dokumentų indeksavimą ir gavimą
-3. **Modelių konfigūravimas**: Apsibrėžkite kelis AI modelius skirtingiems tikslams
-4. **AI stebėsena**: Įdiekite Application Insights AI apkrovoms
+1. **DI pokalbio diegimas**: Įdiekite azure-search-openai-demo šabloną
+2. **RAG įgyvendinimas**: Konfigūruokite dokumentų indeksaciją ir paiešką
+3. **Modelių konfigūracija**: Nustatykite kelis DI modelius skirtingiems tikslams
+4. **DI stebėjimas**: Įdiekite Application Insights DI darbo krūviams
 
 #### Vertinimo klausimai
 - Kaip konfigūruoti Microsoft Foundry Models paslaugas AZD šablone?
 - Kokie yra pagrindiniai RAG architektūros komponentai?
-- Kaip valdyti AI modelių pajėgumą ir mastelį?
-- Kokie stebėsenos metrikai svarbūs AI programoms?
+- Kaip valdyti DI modelių pajėgumus ir skalavimą?
+- Kokie stebėjimo rodikliai yra svarbūs DI programoms?
 
 ---
 
 ### 3 skyrius: Konfigūracija ir autentifikacija (3 savaitė)
-**Trukmė**: 45-60 minučių | **Sunkumo lygis**: ⭐⭐
+**Trukmė**: 45–60 minučių | **Sudėtingumas**: ⭐⭐
 
 #### Mokymosi tikslai
-- Įsisavinti aplinkos konfigūracijos ir valdymo strategijas
-- Įgyvendinti saugius autentifikacijos modelius ir valdomas identybes
-- Organizuoti išteklius naudojant tinkamas pavadinimų konvencijas
-- Konfigūruoti daugiaaplinkes diegimo schemas (dev, staging, prod)
+- Įvaldyti aplinkos konfigūracijos ir valdymo strategijas
+- Įgyvendinti saugios autentifikacijos modelius ir valdomą tapatybę
+- Organizuoti išteklius su tinkamomis pavadinimų konvencijomis
+- Konfigūruoti multi-aplinkos diegimus (dev, staging, prod)
 
-#### Pagrindinės koncepcijos, kurias reikia įsisavinti
-- Aplinkos hierarchija ir konfigūracijos prioritetai
-- Valdoma identybė ir serviso principal autentifikacija
-- Key Vault integracija slaptoms reikšmėms valdyti
-- Aplinkai specifinių parametrų valdymas
+#### Pagrindinės sąvokos, kurias reikia įvaldyti
+- Aplinkos hierarchija ir konfigūracijos prioriteto taisyklės
+- Valdomos tapatybės ir paslaugų pagrindinio autentifikacija
+- Key Vault integracija slaptų duomenų valdymui
+- Aplinkai būdingų parametrų valdymas
 
 #### Praktinės užduotys
-1. **Daugiaplinkės aplinkos nustatymas**: Sukonfigūruokite dev, staging ir prod aplinkas
-2. **Saugumo konfigūracija**: Įgyvendinkite valdoma identiteto autentifikaciją
-3. **Slaptumų valdymas**: Integruokite Azure Key Vault jautriems duomenims
-4. **Parametrų valdymas**: Sukurkite aplinkai specifines konfigūracijas
+1. **Multi-aplinkos nustatymas**: Konfigūruokite dev, staging ir prod aplinkas
+2. **Saugumo konfigūracija**: Įgyvendinkite valdomos tapatybės autentifikaciją
+3. **Slaptų duomenų valdymas**: Integruokite Azure Key Vault jautriems duomenims
+4. **Parametrų valdymas**: Sukurkite aplinkai būdingas konfigūracijas
 
 #### Vertinimo klausimai
-- Kaip sukonfigūruoti skirtingas aplinkas su AZD?
-- Kokie yra valdytos identiteto privalumai prieš serviso principal?
-- Kaip saugiai valdyti programos slaptumus?
-- Kokia yra konfigūracijos hierarchija AZD?
+- Kaip konfigūruoti skirtingas aplinkas su AZD?
+- Kokie yra valdomos tapatybės privalumai prieš paslaugų pagrindus?
+- Kaip saugiai valdyti programos slaptažodžius?
+- Kokia yra AZD konfigūracijos hierarchija?
 
 ---
 
-### 4 skyrius: Infrastruktūra kaip kodas ir diegimas (4-5 savaitės)
-**Trukmė**: 1-1.5 valandos | **Sunkumo lygis**: ⭐⭐⭐
+### 4 skyrius: Infrastruktūra kaip Kodeksas ir diegimas (4–5 savaitė)
+**Trukmė**: 1–1,5 valandos | **Sudėtingumas**: ⭐⭐⭐
 
 #### Mokymosi tikslai
 - Kurti ir pritaikyti Bicep infrastruktūros šablonus
-- Įgyvendinti pažangius diegimo modelius ir darbo srautus
-- Suprasti išteklių teikimo strategijas
-- Projektuoti mastomas daugiapaslaugines architektūras
+- Įgyvendinti pažangias diegimo schemas ir darbo eigos
+- Suprasti išteklių pateikimo strategijas
+- Kurti mastelio keičiamas daugiaservises architektūras
 
 - Diegti konteinerizuotas programas naudojant Azure Container Apps ir AZD
 
 
-#### Pagrindinės koncepcijos, kurias reikia įsisavinti
-- Bicep šablono struktūra ir geriausios praktikos
-- Išteklų priklausomybės ir diegimo tvarka
-- Parametrų failai ir šablonų moduliškumas
-- Pasirinktiniai kabliai ir diegimo automatizavimas
-- Container app diegimo modeliai (greitas startas, gamyba, mikropaslaugos)
+#### Pagrindinės sąvokos, kurias reikia įvaldyti
+- Bicep šablonų struktūra ir geriausios praktikos
+- Išteklių priklausomybės ir diegimo tvarka
+- Parametrų failai ir šablonų modularumas
+- Pasirinktiniai kabliai ir diegimo automatikos įgyvendinimas
+- Konteinerinių programų diegimo modeliai (greitas startas, gamyba, mikroservisai)
 
 #### Praktinės užduotys
-1. **Pasirinktinio šablono kūrimas**: Sukurkite daugiapaslaugę programos šabloną
-2. **Bicep įvaldymas**: Sukurkite moduliškus, pakartotinai naudojamus infrastruktūros komponentus
-3. **Diegimo automatizavimas**: Įgyvendinkite prieš ir po diegimo kablius
-4. **Architektūros projektavimas**: Įdiekite sudėtingą mikropaslaugų architektūrą
-5. **Container App diegimas**: Įdiekite [Paprastas Flask API](../../../examples/container-app/simple-flask-api) ir [Mikropaslaugų architektūra](../../../examples/container-app/microservices) pavyzdžius naudojant AZD
+1. **Pasirinktinio šablono kūrimas**: Sukurkite daugiaservisės programos šabloną
+2. **Bicep įvaldymas**: Kūrkite modulinės, pakartotinai naudojamos infrastruktūros komponentus
+3. **Diegimo automatizavimas**: Įgyvendinkite iš anksto ir po diegimo kablius
+4. **Architektūros projektavimas**: Diegti sudėtingą mikroservisų architektūrą
+5. **Konteinerinių programų diegimas**: Diegti [Paprasto Flask API](../../../examples/container-app/simple-flask-api) ir [Mikroservisų architektūros](../../../examples/container-app/microservices) pavyzdžius naudojant AZD
 
 #### Vertinimo klausimai
 - Kaip sukurti pasirinktinius Bicep šablonus AZD?
 - Kokios yra geriausios praktikos infrastruktūros kodo organizavimui?
-- Kaip tvarkyti išteklių priklausomybes šablonuose?
-- Kokie diegimo modeliai palaiko be prastovų atnaujinimus?
+- Kaip šablonuose valdyti išteklių priklausomybes?
+- Kokios diegimo modeliai palaiko atnaujinimus be prastovų?
 
 ---
 
-### 5 skyrius: Daugiaagentės AI sprendimai (6-7 savaitės)
-**Trukmė**: 2-3 valandos | **Sunkumo lygis**: ⭐⭐⭐⭐
+### 5 skyrius: Daugiaagentės DI sprendimai (6–7 savaitė)
+**Trukmė**: 2–3 valandos | **Sudėtingumas**: ⭐⭐⭐⭐
 
 #### Mokymosi tikslai
-- Projektuoti ir įgyvendinti daugiaagentes AI architektūras
-- Orkestruoti agentų koordinaciją ir komunikaciją
-- Diegti gamybai tinkamus AI sprendimus su stebėsena
-- Suprasti agentų specializaciją ir darbo srautų modelius
-- Integruoti konteinerizuotas mikropaslaugas kaip daugiaagentės sistemos dalį
+- Kurti ir įgyvendinti daugiaagentų DI architektūras
+- Koordinuoti agentų bendradarbiavimą ir komunikaciją
+- Diegti gamybai paruoštus DI sprendimus su stebėsena
+- Suprasti agentų specializaciją ir darbo eigos modelius
+- Integruoti konteinerizuotus mikroservisus kaip daugiaagentės sistemos dalį
 
-#### Pagrindinės koncepcijos, kurias reikia įsisavinti
+#### Pagrindinės sąvokos, kurias reikia įvaldyti
 - Daugiaagentės architektūros modeliai ir projektavimo principai
 - Agentų komunikacijos protokolai ir duomenų srautas
-- Apkrovos balansavimo ir mastelio strategijos AI agentams
-- Gamybinė stebėsena daugiaagentėms sistemoms
+- Darbo krūvio paskirstymo ir skalavimo strategijos DI agentams
+- Gamybinė daugiagentė sistemų stebėsena
 - Paslaugų tarpusavio komunikacija konteinerizuotose aplinkose
 
 #### Praktinės užduotys
-1. **Mažmeninės prekybos sprendimo diegimas**: Įdiekite visą daugiaagentį mažmeninės prekybos scenarijų
-2. **Agentų pritaikymas**: Pakeiskite Kliento ir Atsargų agentų elgseną
-3. **Architektūros mastelio keitimas**: Įgyvendinkite apkrovos balansavimą ir automatinį mastelį
-4. **Gamybinė stebėsena**: Sukonfigūruokite išsamią stebėseną ir perspėjimus
-5. **Mikropaslaugų integracija**: Išplėskite [Mikropaslaugų architektūra](../../../examples/container-app/microservices) pavyzdį, kad palaikytų agentų pagrindu veikiančius darbo srautus
+1. **Mažmeninės prekybos architektūros peržiūra**: Išanalizuokite mažmeninės prekybos šabloną ir nustatykite, kokie programų komponentai turi būti įgyvendinti prieš diegimą
+2. **Agentų pritaikymas**: Modifikuokite Kliento ir Inventoriaus agentų elgseną
+3. **Architektūros skalavimas**: Įgyvendinkite darbo krūvio balansavimą ir automatinį skalavimą
+4. **Gamybinė stebėsena**: Nustatykite išsamią stebėseną ir įspėjimus
+5. **Mikroservisų integravimas**: Išplėskite [Mikroservisų architektūros](../../../examples/container-app/microservices) pavyzdį, kad palaikytų agentų pagrindu veikiančias darbo eigas
 
 #### Vertinimo klausimai
-- Kaip suprojektuoti veiksmingus daugiaagentės komunikacijos modelius?
-- Kokie yra pagrindiniai aspektai mastelėjant AI agentų apkrovas?
-- Kaip stebėti ir derinti daugiaagentes AI sistemas?
-- Kokie gamybiniai modeliai užtikrina patikimumą AI agentams?
+- Kaip sukurti veiksmingus daugiaagentės komunikacijos modelius?
+- Kokie yra pagrindiniai aspektai skalaujant DI agentų darbo krūvius?
+- Kaip stebėti ir derinti daugiaagentės DI sistemas?
+- Kokie gamybiniai modeliai užtikrina DI agentų patikimumą?
 
 ---
 
-### 6 skyrius: Priešdiegiamoji validacija ir planavimas (8 savaitė)
-**Trukmė**: 1 valanda | **Sunkumo lygis**: ⭐⭐
+### 6 skyrius: Prieš diegimą skirtas patikrinimas ir planavimas (8 savaitė)
+**Trukmė**: 1 valanda | **Sudėtingumas**: ⭐⭐
 
 #### Mokymosi tikslai
-- Atlikti išsamų pajėgumų planavimą ir išteklių validaciją
-- Pasirinkti optimalias Azure SKU kaštų efektyvumui
-- Įgyvendinti automatizuotus priešdiegiamuosius patikrinimus ir validaciją
-- Planuoti diegimus taikant kaštų optimizavimo strategijas
+- Atlikti išsamų pajėgumų planavimą ir išteklių patikrinimą
+- Pasirinkti optimaliausius Azure SKU kaštų efektyvumui
+- Įgyvendinti automatizuotus prieš diegimo patikrinimus
+- Planuoti diegimus atsižvelgiant į kaštų optimizavimą
 
-#### Pagrindinės koncepcijos, kurias reikia įsisavinti
-- Azure išteklių kvotos ir pajėgumų apribojimai
-- SKU pasirinkimo kriterijai ir kaštų optimizacija
-- Automatizuoti validavimo skriptai ir testavimas
-- Diegimo planavimas ir rizikų vertinimas
+#### Pagrindinės sąvokos, kurias reikia įvaldyti
+- Azure išteklių kvotos ir pajėgumų ribojimai
+- SKU pasirinkimo kriterijai ir kaštų optimizavimas
+- Automatizuoti patikrinimo scenarijai ir testavimas
+- Diegimo planavimas ir rizikos vertinimas
 
 #### Praktinės užduotys
-1. **Pajėgumų analizė**: Analizuokite jūsų programų išteklių reikalavimus
-2. **SKU optimizacija**: Palyginkite ir pasirinkite kaštų efektyvias paslaugų klases
-3. **Validacijos automatizavimas**: Įgyvendinkite priešdiegiamuosius patikrinimo skriptus
-4. **Kaštų planavimas**: Sudarykite diegimo kaštų sąmatą ir biudžetą
+1. **Pajėgumų analizė**: Išanalizuokite savo programų išteklių poreikius
+2. **SKU optimizavimas**: Palyginkite ir pasirinkite ekonomiškiausias paslaugų klases
+3. **Patikrinimo automatizavimas**: Įgyvendinkite prieš diegimo patikrinimo scenarijus
+4. **Kaštų planavimas**: Sudarykite diegimo kaštų sąmatas ir biudžetus
 
 #### Vertinimo klausimai
 - Kaip patikrinti Azure pajėgumus prieš diegimą?
 - Kokie veiksniai įtakoja SKU pasirinkimą?
-- Kaip automatizuoti priešdiegiamąją validaciją?
+- Kaip automatizuoti prieš diegimą skirtą patikrinimą?
 - Kokios strategijos padeda optimizuoti diegimo kaštus?
 
 ---
 
-### 7 skyrius: Trikčių šalinimas ir derinimas (9 savaitė)
-**Trukmė**: 1-1.5 valandos | **Sunkumo lygis**: ⭐⭐
+### 7 skyrius: Gedimų paieška ir derinimas (9 savaitė)
+**Trukmė**: 1–1,5 valandos | **Sudėtingumas**: ⭐⭐
 
 #### Mokymosi tikslai
-- Sukurti sistemingus derinimo metodus AZD diegimams
-- Išspręsti dažniausias diegimo ir konfigūracijos problemas
-- Derinti AI specifines problemas ir našumo klausimus
-- Įgyvendinti stebėseną ir perspėjimus proaktyviam problemų aptikimui
+- Kurti sistemingus derinimo metodus AZD diegimams
+- Spręsti dažniausias diegimo ir konfigūracijos problemas
+- Derinti DI specifines problemas ir našumo klausimus
+- Įdiegti stebėjimą ir įspėjimus proaktyviam problemų aptikimui
 
-#### Pagrindinės koncepcijos, kurias reikia įsisavinti
-- Diagnostikos technikos ir žurnalų strategijos
-- Dažniausi gedimų modeliai ir jų sprendimai
-- Našumo stebėsena ir optimizacija
+#### Pagrindinės sąvokos, kurias reikia įvaldyti
+- Diagnostikos metodai ir žurnalo strategijos
+- Dažnos klaidų modeliai ir jų sprendimai
+- Veikimo stebėjimas ir optimizavimas
 - Incidentų valdymo ir atkūrimo procedūros
 
 #### Praktinės užduotys
-1. **Diagnostikos įgūdžiai**: Praktikuokitės su tyčia sulaužytais diegimais
-2. **Žurnalų analizė**: Efektyviai naudokite Azure Monitor ir Application Insights
-3. **Našumo tunningas**: Optimizuokite lėtai veikiančias programas
-4. **Atkūrimo procedūros**: Įdiekite atsargines kopijas ir nelaimių atkūrimą
+1. **Diagnostikos įgūdžiai**: Praktikuokitės su sąmoningai sulaužytais diegimais
+2. **Žurnalų analizė**: Naudokite Azure Monitor ir Application Insights efektyviai
+3. **Veikimo optimizavimas**: Optimizuokite lėtai veikiančias programas
+4. **Atkūrimo procesai**: Įgyvendinkite atsargines kopijas ir katastrofų atstatymą
 
 #### Vertinimo klausimai
-- Kokie yra dažniausiai pasitaikantys AZD diegimo klaidų atvejai?
+- Kokios yra dažniausios AZD diegimo klaidos?
 - Kaip derinti autentifikacijos ir leidimų problemas?
-- Kokios stebėsenos strategijos padeda išvengti gamybinių problemų?
-- Kaip optimizuoti programų našumą Azure aplinkoje?
+- Kokios stebėjimo strategijos padeda išvengti gamybinių problemų?
+- Kaip optimizuoti programos veikimą Azure aplinkoje?
 
 ---
 
-### 8 skyrius: Gamybinės ir įmoninės praktikos (10-11 savaitės)
-**Trukmė**: 2-3 valandos | **Sunkumo lygis**: ⭐⭐⭐⭐
+### 8 skyrius: Gamybiniai ir įmonių modeliai (10–11 savaitė)
+**Trukmė**: 2–3 valandos | **Sudėtingumas**: ⭐⭐⭐⭐
 
 #### Mokymosi tikslai
-- Įgyvendinti įmonės lygio diegimo strategijas
-- Projektuoti saugumo modelius ir atitikties karkasus
-- Nustatyti stebėseną, valdymą ir kaštų kontrolę
-- Kurti mastomas CI/CD pipelines su AZD integracija
-- Taikyti geriausias praktikas gamybiniams container app diegimams (saugumas, stebėsena, kaštai, CI/CD)
+- Įgyvendinti įmonių lygio diegimo strategijas
+- Projektuoti saugumo modelius ir atitikties sistemas
+- Nustatyti stebėseną, valdymą ir kaštų valdymą
+- Kurti mastelio keičiamus CI/CD kanalus su AZD integracija
+- Taikyti geriausias praktikas gamybiniams konteinerinių programų diegimams (sauga, stebėsena, kaštai, CI/CD)
 
-#### Pagrindinės koncepcijos, kurias reikia įsisavinti
-- Įmonės saugumo ir atitikties reikalavimai
-- Valdymo karkasai ir politikos įgyvendinimas
+#### Pagrindinės sąvokos, kurias reikia įvaldyti
+- Įmonių saugumo ir atitikties reikalavimai
+- Valdymo sistemos ir politikos įgyvendinimas
 - Pažangi stebėsena ir kaštų valdymas
-- CI/CD integracija ir automatizuoti diegimo pipeline'ai
-- Blue-green ir canary diegimo strategijos konteinerizuotoms apkrovoms
+- CI/CD integracija ir automatizuoti diegimo kanalai
+- Mėlynos-žalios ir kanarinių diegimo strategijos konteinerizuotiems darbo krūviams
 
 #### Praktinės užduotys
-1. **Įmonės saugumas**: Įgyvendinkite išsamius saugumo modelius
-2. **Valdymo karkasas**: Sukonfigūruokite Azure Policy ir išteklių valdymą
-3. **Pažangi stebėsena**: Sukurkite informacijos suvestines ir automatizuotus perspėjimus
-4. **CI/CD integracija**: Sukurkite automatizuotus diegimo pipeline'us
-5. **Gamybinės Container Apps**: Taikykite saugumą, stebėseną ir kaštų optimizavimą [Mikropaslaugų architektūra](../../../examples/container-app/microservices) pavyzdyje
+1. **Įmonių saugumas**: Įgyvendinkite išsamius saugumo modelius
+2. **Valdymo sistema**: Nustatykite Azure Policy ir išteklių valdymą
+3. **Pažangi stebėsena**: Kurkite informacinius centrus ir automatizuotus įspėjimus
+4. **CI/CD integracija**: Kurkite automatizuotus diegimo kanalus
+5. **Gamybinės konteinerinės programos**: Taikykite saugumo, stebėsenos ir kaštų optimizavimo praktikas [Mikroservisų architektūros](../../../examples/container-app/microservices) pavyzdyje
 
 #### Vertinimo klausimai
-- Kaip įgyvendinti įmonės saugumą AZD diegimuose?
+- Kaip įgyvendinti įmonių saugumą AZD diegimuose?
 - Kokie valdymo modeliai užtikrina atitiktį ir kaštų kontrolę?
-- Kaip suprojektuoti mastomą stebėseną gamybos sistemoms?
-- Kokie CI/CD modeliai geriausiai veikia su AZD darbo srautais?
+- Kaip projektuoti mastelio keičiamą gamybinių sistemų stebėseną?
+- Kokie CI/CD modeliai geriausiai veikia su AZD darbo eigomis?
 
 #### Mokymosi tikslai
-- Suprasti Azure Developer CLI pagrindus ir pagrindines koncepcijas
-- Sėkmingai įdiegti ir sukonfigūruoti azd savo vystymo aplinkoje
-- Atlikti pirmąjį diegimą naudodami esamą šabloną
+- Suprasti Azure Developer CLI pagrindus ir svarbiausias sąvokas
+- Sėkmingai įdiegti ir konfigūruoti azd savo kūrimo aplinkoje
+- Atlikti pirmąjį diegimą naudojant esamą šabloną
 - Naršyti azd projekto struktūrą ir suprasti pagrindinius komponentus
 
-#### Pagrindinės koncepcijos, kurias reikia įsisavinti
+#### Pagrindinės sąvokos, kurias reikia įvaldyti
 - Šablonai, aplinkos ir paslaugos
 - azure.yaml konfigūracijos struktūra
 - Pagrindinės azd komandos (init, up, down, deploy)
-- Infrastruktūra kaip kodas principai
+- Infrastruktūros kaip kodo principai
 - Azure autentifikacija ir autorizacija
 
 #### Praktinės užduotys
 
 **Užduotis 1.1: Įdiegimas ir nustatymas**
-```bash
-# Atlikite šias užduotis:
+```text
+# Complete these tasks:
 1. Install azd using your preferred method
-2. Install Azure CLI and authenticate
+2. Install Azure CLI only for exercises or template hooks that explicitly use `az`; authenticate AZD independently
 3. Verify installation with: azd version
 4. Test connectivity with: azd auth login
 5. Explore available templates: azd template list
 ```
 
-**Užduotis 1.2: Pirmasis diegimas**
-```bash
-# Diegti paprastą žiniatinklio programą:
-1. Initialize project: azd init --template todo-nodejs-mongo
+**Užduotis 1.2: Pirmas diegimas**
+```text
+# Deploy a simple web application:
+1. Initialize project in an empty directory: azd init --template todo-nodejs-mongo .
 2. Review project structure and configuration files
 3. Deploy to Azure: azd up
 4. Test the deployed application
@@ -313,17 +313,17 @@ Analyze the following components:
 ```
 
 #### Savianalizės klausimai
-1. Kokios yra trys pagrindinės azd architektūros koncepcijos?
-2. Koks yra azure.yaml failo paskirtis?
-3. Kaip aplinkos padeda valdyti skirtingus diegimo tikslus?
+1. Kokios yra trys pagrindinės azd architektūros sąvokos?
+2. Koks azure.yaml failo paskirtis?
+3. Kaip aplinkos padeda valdyti skirtingus diegimo taikinius?
 4. Kokie autentifikacijos metodai gali būti naudojami su azd?
-5. Kas vyksta, kai pirmą kartą paleidžiate `azd up`?
+5. Kas nutinka, kai pirmą kartą paleidžiate `azd up`?
 
 ---
 
-## Progreso stebėjimas ir vertinimo sistema
-```bash
-# Sukurti ir sukonfigūruoti kelias aplinkas:
+## Pažangos sekimas ir vertinimo sistema
+```text
+# Create and configure multiple environments:
 1. Create development environment: azd env new development
 2. Create staging environment: azd env new staging
 3. Create production environment: azd env new production
@@ -331,8 +331,8 @@ Analyze the following components:
 5. Deploy the same application to different environments
 ```
 
-**Užduotis 2.2: Pažanginta konfigūracija**
-```yaml
+**Užduotis 2.2: Pažangi konfigūracija**
+```text
 # Modify azure.yaml to include:
 1. Multiple services with different configurations
 2. Pre and post deployment hooks
@@ -341,8 +341,8 @@ Analyze the following components:
 ```
 
 **Užduotis 2.3: Saugumo konfigūracija**
-```bash
-# Laikykitės geriausių saugumo praktikų:
+```text
+# Implement security best practices:
 1. Configure managed identity for service authentication
 2. Set up Azure Key Vault for secrets management
 3. Implement least-privilege access controls
@@ -350,31 +350,31 @@ Analyze the following components:
 ```
 
 #### Savianalizės klausimai
-1. Kaip azd tvarko aplinkos kintamųjų prioritetus?
+1. Kaip azd valdo aplinkos kintamųjų prioritetus?
 2. Kas yra diegimo kabliai ir kada juos naudoti?
-3. Kaip konfigūruoti skirtingus SKU skirtingoms aplinkoms?
+3. Kaip sukonfigūruoti skirtingus SKU skirtingoms aplinkoms?
 4. Kokios yra skirtingų autentifikacijos metodų saugumo pasekmės?
 5. Kaip valdyti slaptus duomenis ir jautrią konfigūraciją?
 
-### 3 modulis: Diegimas ir tiekimas (4 savaitė)
+### 3 modulis: Diegimas ir išteklių suteikimas (4 savaitė)
 
 #### Mokymosi tikslai
-- Įvaldyti diegimo darbo srautus ir geriausias praktikas
-- Suprasti infrastruktūrą kaip kodą naudojant Bicep šablonus
-- Įgyvendinti sudėtingas daugiapaslaugines architektūras
+- Įvaldyti diegimo darbo eigas ir geriausias praktikas
+- Suprasti Infrastrukturą kaip Kodą naudojant Bicep šablonus
+- Įgyvendinti sudėtingas daugiaservisės architektūras
 - Optimizuoti diegimo našumą ir patikimumą
 
-#### Pagrindinės koncepcijos, kurias reikia įsisavinti
-- Bicep šablono struktūra ir moduliai
-- Išteklų priklausomybės ir tvarka
-- Diegimo strategijos (blue-green, rolling updates)
-- Daugiaregioniai diegimai
+#### Pagrindinės sąvokos, kurias reikia įvaldyti
+- Bicep šablonų struktūra ir moduliai
+- Išteklių priklausomybės ir tvarka
+- Diegimo strategijos (mėlyna-žalia, vykstantys atnaujinimai)
+- Daugiaregioniniai diegimai
 - Duomenų bazių migracijos ir duomenų valdymas
 
 #### Praktinės užduotys
 
 **Užduotis 3.1: Pasirinktinė infrastruktūra**
-```bicep
+```text
 // Create custom Bicep templates for:
 1. Web application with custom domain and SSL
 2. Database with backup and high availability
@@ -383,9 +383,9 @@ Analyze the following components:
 5. Network security groups and virtual networks
 ```
 
-**Užduotis 3.2: Daugiapaslaugė programa**
-```bash
-# Diegti mikroservisų architektūrą:
+**Užduotis 3.2: Daugiaservisinė programa**
+```text
+# Deploy a microservices architecture:
 1. Frontend web application
 2. Backend API service
 3. Database service
@@ -394,8 +394,8 @@ Analyze the following components:
 ```
 
 **Užduotis 3.3: Duomenų bazės integracija**
-```bash
-# Įgyvendinti duomenų bazės diegimo šablonus:
+```text
+# Implement database deployment patterns:
 1. Deploy PostgreSQL with connection pooling
 2. Implement schema migrations
 3. Configure backup and recovery procedures
@@ -404,32 +404,32 @@ Analyze the following components:
 ```
 
 #### Savianalizės klausimai
-1. Kokie yra Bicep privalumai prieš ARM šablonus?
+1. Kokie yra Bicep pranašumai prieš ARM šablonus?
 2. Kaip tvarkyti duomenų bazių migracijas azd diegimuose?
-3. Kokios strategijos egzistuoja be prastovų diegimams?
+3. Kokios yra diegimo be prastovų strategijos?
 4. Kaip valdyti priklausomybes tarp paslaugų?
-5. Kokie yra daugiaregionių diegimų aspektai?
+5. Kokie aspektai svarbūs daugiaregioniniams diegimams?
 
-### 4 modulis: Priešdiegiamoji validacija (5 savaitė)
+### 4 modulis: Prieš diegimą skirtas patikrinimas (5 savaitė)
 
 #### Mokymosi tikslai
-- Įgyvendinti išsamius prieš diegiant atliekamus patikrinimus
-- Įvaldyti pajėgumų planavimą ir išteklių patvirtinimą
-- Suprasti SKU pasirinkimą ir kaštų optimizavimą
-- Kurti automatizuotus patikros srautus
+- Įgyvendinkite išsamius išankstinius patikrinimus prieš diegiant
+- Išmokite pajėgumų planavimo ir resursų patvirtinimo
+- Supraskite SKU pasirinkimą ir sąnaudų optimizavimą
+- Kurkite automatinio patvirtinimo srautus
 
 #### Pagrindinės sąvokos, kurias reikia įvaldyti
-- Azure išteklių kvotos ir apribojimai
-- SKU pasirinkimo kriterijai ir kaštų pasekmės
-- Automatizuoti patikros skriptai ir įrankiai
-- Pajėgumų planavimo metodikos
+- Azure resursų kvotos ir ribos
+- SKU pasirinkimo kriterijai ir sąnaudų pasekmės
+- Automatizuoti patvirtinimo scenarijai ir įrankiai
+- Pajėgumų planavimo metodologijos
 - Veikimo testavimas ir optimizavimas
 
-#### Praktikos užduotys
+#### Praktikos pratimai
 
-**Exercise 4.1: Capacity Planning**
-```bash
-# Įgyvendinti talpos patikrinimą:
+**4.1 pratimas: Pajėgumų planavimas**
+```text
+# Implement capacity validation:
 1. Create scripts to check Azure quotas
 2. Validate service availability in target regions
 3. Estimate resource costs for different SKUs
@@ -437,9 +437,9 @@ Analyze the following components:
 5. Document capacity requirements for each environment
 ```
 
-**Exercise 4.2: Pre-flight Validation**
-```powershell
-# Sukurkite išsamų patikros (validacijos) procesą:
+**4.2 pratimas: Išankstinis patikrinimas**
+```text
+# Build comprehensive validation pipeline:
 1. Authentication and permissions validation
 2. Template syntax and parameter validation
 3. Resource naming and availability checks
@@ -447,9 +447,9 @@ Analyze the following components:
 5. Cost estimation and budget verification
 ```
 
-**Exercise 4.3: SKU Optimization**
-```bash
-# Optimizuoti paslaugų konfigūracijas:
+**4.3 pratimas: SKU optimizavimas**
+```text
+# Optimize service configurations:
 1. Compare performance characteristics of different SKUs
 2. Implement cost-effective development configurations
 3. Design high-performance production configurations
@@ -457,33 +457,33 @@ Analyze the following components:
 5. Set up auto-scaling policies
 ```
 
-#### Savęs įvertinimo klausimai
+#### Savarankiško įvertinimo klausimai
 1. Kokie veiksniai turėtų įtakoti SKU pasirinkimo sprendimus?
-2. Kaip patikrinti Azure išteklių prieinamumą prieš diegimą?
-3. Kokie yra pagrindiniai priešdienių tikrinimo (pre-flight) sistemos komponentai?
-4. Kaip įvertinti ir kontroliuoti diegimo kaštus?
-5. Kokia stebėsena yra būtina pajėgumų planavimui?
+2. Kaip patikrinate Azure resursų prieinamumą prieš diegiant?
+3. Kokios yra pagrindinės išankstinio patikrinimo sistemos sudedamosios dalys?
+4. Kaip įvertinate ir kontroliuojate diegimo sąnaudas?
+5. Kokia yra esminė stebėsena pajėgumų planavimui?
 
-### Modulis 5: Trikčių šalinimas ir derinimas (6 savaitė)
+### 5 modulis: Klaidų šalinimas ir derinimas (6 savaitė)
 
 #### Mokymosi tikslai
-- Įvaldyti sistemines trikčių šalinimo metodikas
-- Įgyti įgūdžių derinant sudėtingas diegimo problemas
-- Įdiegti išsamią stebėseną ir perspėjimus
-- Parengti incidentų valdymo ir atkūrimo procedūras
+- Įvaldykite sisteminius klaidų šalinimo metodus
+- Tapkite ekspertu derinant sudėtingas diegimo problemas
+- Įgyvendinkite išsamią stebėseną ir įspėjimus
+- Sukurkite reagavimo į incidentus ir atkūrimo procedūras
 
 #### Pagrindinės sąvokos, kurias reikia įvaldyti
-- Dažniausios diegimo klaidų modeliai
-- Taisyklingos žurnalų analizės ir koreliavimo technikos
+- Įprasti diegimo trikdžių modeliai
+- Žurnalų analizės ir koreliacijos technikos
 - Veikimo stebėsena ir optimizavimas
 - Saugumo incidentų aptikimas ir reagavimas
-- Atsparumo gedimams ir verslo tęstinumo užtikrinimas
+- Nenumatytų situacijų atkūrimas ir verslo tęstinumas
 
-#### Praktikos užduotys
+#### Praktikos pratimai
 
-**Exercise 5.1: Troubleshooting Scenarios**
-```bash
-# Praktikuokite spręsti įprastas problemas:
+**5.1 pratimas: Klaidų šalinimo scenarijai**
+```text
+# Practice resolving common issues:
 1. Authentication and authorization failures
 2. Resource provisioning conflicts
 3. Application startup and runtime errors
@@ -491,9 +491,9 @@ Analyze the following components:
 5. Performance and scaling issues
 ```
 
-**Exercise 5.2: Monitoring Implementation**
-```bash
-# Nustatykite išsamią stebėseną:
+**5.2 pratimas: Stebėsenos įgyvendinimas**
+```text
+# Set up comprehensive monitoring:
 1. Application performance monitoring with Application Insights
 2. Infrastructure monitoring with Azure Monitor
 3. Custom dashboards and alerting rules
@@ -501,9 +501,9 @@ Analyze the following components:
 5. Health check endpoints and automated testing
 ```
 
-**Exercise 5.3: Incident Response**
-```bash
-# Sukurkite incidentų reagavimo procedūras:
+**5.3 pratimas: Incidentų reagavimas**
+```text
+# Build incident response procedures:
 1. Create runbooks for common problems
 2. Implement automated recovery procedures
 3. Set up notification and escalation workflows
@@ -511,32 +511,32 @@ Analyze the following components:
 5. Document lessons learned and improvements
 ```
 
-#### Savęs įvertinimo klausimai
-1. Koks yra sisteminis požiūris į azd diegimų trikčių šalinimą?
-2. Kaip koreliuoti žurnalus tarp kelių paslaugų ir resursų?
-3. Kokie stebėsenos metrikai yra kritiškai svarbūs ankstyvam problemų aptikimui?
-4. Kaip įgyvendinti veiksmingas atsarginių atkūrimo procedūras?
-5. Kokie yra pagrindiniai incidentų valdymo plano komponentai?
+#### Savarankiško įvertinimo klausimai
+1. Koks yra sisteminis požiūris į azd diegimų klaidų šalinimą?
+2. Kaip koreliuojate žurnalus tarp kelių paslaugų ir išteklių?
+3. Kokie stebėsenos metrikai yra svarbiausi ankstyvam problemų aptikimui?
+4. Kaip įgyvendinate veiksmingas nenumatytų situacijų atkūrimo procedūras?
+5. Kokios yra pagrindinės reagavimo į incidentus plano sudedamosios dalys?
 
-### Modulis 6: Pažangios temos ir geriausios praktikos (7-8 savaitės)
+### 6 modulis: Pažangios temos ir geriausios praktikos (7-8 savaitės)
 
 #### Mokymosi tikslai
-- Taikyti įmonės lygio diegimo modelius
-- Įvaldyti CI/CD integraciją ir automatizavimą
-- Kurti pasirinktinius šablonus ir prisidėti prie bendruomenės
-- Suprasti pažangius saugumo ir atitikties reikalavimus
+- Įgyvendinkite įmonės lygio diegimo modelius
+- Įvaldykite CI/CD integraciją ir automatizavimą
+- Kurkite pasirinktinės šablonus ir prisidėkite prie bendruomenės
+- Supraskite pažangius saugumo ir atitikties reikalavimus
 
 #### Pagrindinės sąvokos, kurias reikia įvaldyti
-- CI/CD vamzdynų integracijos modeliai
+- CI/CD srauto integracijos modeliai
 - Pasirinktinių šablonų kūrimas ir platinimas
-- Įmonės valdymas ir atitiktis
-- Pažangios tinklų ir saugumo konfigūracijos
-- Veikimo optimizavimas ir kaštų valdymas
+- Įmonių valdymas ir atitiktis
+- Pažangios tinklo ir saugumo konfigūracijos
+- Veikimo optimizavimas ir išlaidų valdymas
 
-#### Praktikos užduotys
+#### Praktikos pratimai
 
-**Exercise 6.1: CI/CD Integration**
-```yaml
+**6.1 pratimas: CI/CD integracija**
+```text
 # Implement automated deployment pipelines:
 1. GitHub Actions workflow for azd deployments
 2. Azure DevOps pipeline integration
@@ -545,9 +545,9 @@ Analyze the following components:
 5. Security scanning and compliance checks
 ```
 
-**Exercise 6.2: Custom Template Development**
-```bash
-# Sukurti ir paskelbti pasirinktinius šablonus:
+**6.2 pratimas: Pasirinktinio šablono kūrimas**
+```text
+# Create and publish custom templates:
 1. Design template for your organization's architecture
 2. Implement parameterization and customization options
 3. Add comprehensive documentation and examples
@@ -555,9 +555,9 @@ Analyze the following components:
 5. Publish and maintain template in template gallery
 ```
 
-**Exercise 6.3: Enterprise Implementation**
-```bash
-# Įgyvendinti įmonės lygio funkcijas:
+**6.3 pratimas: Įmonės diegimas**
+```text
+# Implement enterprise-grade features:
 1. Multi-tenant architecture with proper isolation
 2. Centralized logging and monitoring
 3. Compliance and governance controls
@@ -565,123 +565,123 @@ Analyze the following components:
 5. Disaster recovery and business continuity
 ```
 
-#### Savęs įvertinimo klausimai
-1. Kaip integruoti azd į esamus CI/CD darbo eigų procesus?
-2. Kokie yra pagrindiniai aspektai kuriant pasirinktinius šablonus?
+#### Savarankiško įvertinimo klausimai
+1. Kaip integruoti azd į esamus CI/CD darbo srautus?
+2. Kokie yra pagrindiniai aspektai kuriant pasirinktinį šabloną?
 3. Kaip įgyvendinti valdymą ir atitiktį azd diegimuose?
-4. Kokios yra geriausios praktikos įmonės mastelio diegimams?
+4. Kokios yra geriausios praktikos įmonių dydžio diegimams?
 5. Kaip efektyviai prisidėti prie azd bendruomenės?
 
 ## Praktiniai projektai
 
-### Projektas 1: Asmeninė portfelio svetainė
-**Sudėtingumas**: Pradedantiesiems  
-**Trukmė**: 1–2 savaitės
+### Projekta 1: Asmeninė portfelio svetainė
+**Sudėtingumas**: Pradedantysis  
+**Trukmė**: 1-2 savaitės
 
-Sukurkite ir įdiekite asmeninę portfelio svetainę naudodami:
-- Statinį svetainės talpinimą Azure Storage
-- Individualaus domeno konfigūracija
-- CDN integracija globaliam našumui
-- Automatizuotas diegimo vamzdynas
+Sukurkite ir diekite asmeninę portfelio svetainę, pasitelkdami:
+- Stacionarų svetainės talpinimą Azure Storage
+- Pasirinktinio domeno konfigūraciją
+- CDN integracija globaliam veikimui
+- Automatizuotas diegimo srautas
 
-**Rezultatai**:
-- Veikianti svetainė, įdiegta Azure
-- Individualus azd šablonas portfelio diegimams
+**Pristatomi darbai**:
+- Veikianti svetainė, išdiegta Azure
+- Pasirinktinis azd šablonas portfelio diegimams
 - Diegimo proceso dokumentacija
-- Kaštų analizė ir optimizavimo rekomendacijos
+- Sąnaudų analizė ir optimizavimo rekomendacijos
 
-### Projektas 2: Užduočių valdymo programa
+### Projekta 2: Užduočių valdymo programa
 **Sudėtingumas**: Vidutinis  
-**Trukmė**: 2–3 savaitės
+**Trukmė**: 2-3 savaitės
 
-Sukurkite pilno stalo (full-stack) užduočių valdymo programą su:
-- React frontend, įdiegtu į App Service
+Sukurkite pilnos aprėpties užduočių valdymo programą su:
+- React frontend, įdiegtu App Service
 - Node.js API backend su autentifikacija
-- PostgreSQL duomenų baze su migracijomis
+- PostgreSQL duomenų bazė su migracijomis
 - Application Insights stebėsena
 
-**Rezultatai**:
-- Pilna programa su vartotojų autentifikacija
-- Duomenų bazės schema ir migracijos skriptai
-- Stebėjimo informacijos suvestinės ir perspėjimų taisyklės
-- Daugiaplokštės aplinkos diegimo konfigūracija
+**Pristatomi darbai**:
+- Pilna programa su naudotojų autentifikacija
+- Duomenų bazės schema ir migracijos scenarijai
+- Stebėjimo informaciniai skydeliai ir įspėjimų taisyklės
+- Konfigūracija kelioms aplinkoms diegti
 
-### Projektas 3: Mikroservisų el. prekybos platforma
+### Projekta 3: Mikroservisų el. prekybos platforma
 **Sudėtingumas**: Pažengęs  
-**Trukmė**: 4–6 savaitės
+**Trukmė**: 4-6 savaitės
 
-Sukurkite ir įgyvendinkite mikroservisais pagrįstą el. prekybos platformą:
-- Kelios API paslaugos (katalogas, užsakymai, mokėjimai, vartotojai)
-- Žinučių eilės integracija su Service Bus
-- Redis talpykla našumo optimizavimui
-- Išsami žurnalo kaupimo ir stebėsenos sistema
+Sukurkite mikroservisų pagrindu veikiančią el. prekybos platformą:
+- Keli API servisai (katalogas, užsakymai, mokėjimai, naudotojai)
+- Žinučių eilių integracija su Service Bus
+- Redis talpykla veikimo optimizavimui
+- Išsami žurnalų ir stebėsenos sistema
 
-**Pavyzdys**: Žr. [Mikroservisų architektūra](../../../examples/container-app/microservices) dėl gamybai paruošto šablono ir diegimo vadovo
+**Pavyzdinis šaltinis**: Žr. [Microservices Architecture](../../../examples/container-app/microservices) - dviejų servisų mokomąją pavyzdinę versiją ir diegimo vadovą. Eilės, duomenų saugojimas, autentifikacija, mokėjimų apdorojimas ir gamybos parengimas yra atskiri projektai.
 
-**Rezultatai**:
+**Pristatomi darbai**:
 - Pilna mikroservisų architektūra
-- Tarppaslauginė komunikacijos modeliai
+- Tarpservisinės komunikacijos modeliai
 - Veikimo testavimas ir optimizavimas
-- Gamybai paruoštas saugumo įgyvendinimas
+- Gamybinės aplinkos saugumo įgyvendinimas
 
-## Vertinimas ir sertifikacija
+## Įvertinimas ir sertifikavimas
 
-### Žinių patikrinimai
+### Žinių patikros
 
 Atlikite šiuos vertinimus po kiekvieno modulio:
 
-**Modulis 1 Vertinimas**: Pagrindinės sąvokos ir diegimas
-- Klausimai su pasirinkimais apie pagrindines sąvokas
-- Praktinės diegimo ir konfigūracijos užduotys
+**1 modulio vertinimas**: Pagrindinės sąvokos ir įdiegimas
+- Kelių pasirinkimų klausimai apie pagrindines sąvokas
+- Praktiniai įdiegimo ir konfigūracijos uždaviniai
 - Paprastas diegimo pratimas
 
-**Modulis 2 Vertinimas**: Konfigūracija ir aplinkos
+**2 modulio vertinimas**: Konfigūracija ir aplinkos
 - Aplinkos valdymo scenarijai
-- Konfigūracijos trikčių šalinimo užduotys
+- Konfigūracijos trikčių šalinimo pratimai
 - Saugumo konfigūracijos įgyvendinimas
 
-**Modulis 3 Vertinimas**: Diegimas ir provizionavimas
-- Infrastruktūros projektavimo iššūkiai
-- Daugiapaslaugio diegimo scenarijai
-- Veikimo optimizavimo užduotys
+**3 modulio vertinimas**: Diegimas ir paruošimas
+- Infrastruktūros dizaino iššūkiai
+- Multi-paslaugų diegimo scenarijai
+- Veikimo optimizavimo pratimai
 
-**Modulis 4 Vertinimas**: Priešdiegiami patikrinimai
+**4 modulio vertinimas**: Išankstinis patvirtinimas
 - Pajėgumų planavimo atvejų analizė
-- Kaštų optimizavimo scenarijai
-- Patikros vamzdyno įgyvendinimas
+- Sąnaudų optimizavimo scenarijai
+- Patvirtinimo srauto įgyvendinimas
 
-**Modulis 5 Vertinimas**: Trikčių šalinimas ir derinimas
-- Problemų diagnozavimo užduotys
-- Stebėsenos įgyvendinimo užduotys
-- Incidentų valdymo simuliacijos
+**5 modulio vertinimas**: Klaidų šalinimas ir derinimas
+- Problemų diagnozės pratimai
+- Stebėsenos įgyvendinimo uždaviniai
+- Incidentų reagavimo simuliacijos
 
-**Modulis 6 Vertinimas**: Pažangios temos
-- CI/CD vamzdyno projektavimas
+**6 modulio vertinimas**: Pažangios temos
+- CI/CD srauto dizainas
 - Pasirinktinių šablonų kūrimas
-- Įmonės architektūros scenarijai
+- Įmonių architektūros scenarijai
 
-### Baigiamasis projektas
+### Baigiamasis integruotas projektas
 
-Sukurkite ir įgyvendinkite pilną sprendimą, demonstruojantį visų koncepcijų išmanymą:
+Sukurkite ir įgyvendinkite visapusišką sprendimą, demonstruojantį visų sąvokų išmanymą:
 
 **Reikalavimai**:
-- Daugiapakopė programos architektūra
+- Daugiasluoksnė programos architektūra
 - Kelios diegimo aplinkos
-- Išsami stebėsena ir perspėjimai
+- Išsami stebėsena ir įspėjimai
 - Saugumo ir atitikties įgyvendinimas
-- Kaštų optimizavimas ir veikimo derinimas
-- Pilna dokumentacija ir veikimo instrukcijos (runbooks)
+- Sąnaudų optimizavimas ir veikimo tuningas
+- Pilna dokumentacija ir naudojimo vadovai
 
-**Vertinimo kriterijai**:
+**Įvertinimo kriterijai**:
 - Techninio įgyvendinimo kokybė
-- Dokumentacijos pilnumas
+- Dokumentacijos išsamumas
 - Saugumo ir geriausių praktikų laikymasis
-- Veikimas ir kaštų optimizavimas
-- Trikčių šalinimo ir stebėsenos efektyvumas
+- Veikimo ir sąnaudų optimizavimas
+- Klaidų šalinimo ir stebėsenos efektyvumas
 
-## Studijų ištekliai ir nuorodos
+## Mokymosi šaltiniai ir nuorodos
 
-### Oficialioji dokumentacija
+### Oficialios dokumentacijos
 - [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
@@ -701,163 +701,163 @@ Sukurkite ir įgyvendinkite pilną sprendimą, demonstruojantį visų koncepcij�
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Azure Tools Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)
 
-## Studijų tvarkaraščio rekomendacijos
+## Mokymosi tvarkaraščio rekomendacijos
 
-### Pilno laiko studijos (8 savaitės)
-- **1–2 savaitės**: Moduliai 1–2 (Pradžia, Konfigūracija)
-- **3–4 savaitės**: Moduliai 3–4 (Diegimas, Priešdiegiami patikrinimai)
-- **5–6 savaitės**: Moduliai 5–6 (Trikčių šalinimas, Pažangios temos)
-- **7–8 savaitės**: Praktiniai projektai ir baigiamasis vertinimas
+### Pilnas studijavimas (8 savaitės)
+- **1-2 savaitės**: 1-2 moduliai (Pradžia, Konfigūracija)
+- **3-4 savaitės**: 3-4 moduliai (Diegimas, Išankstinis patvirtinimas)
+- **5-6 savaitės**: 5-6 moduliai (Klaidų šalinimas, Pažangios temos)
+- **7-8 savaitės**: Praktinės užduotys ir galutinis vertinimas
 
-### Ne pilno laiko studijos (16 savaičių)
-- **1–4 savaitės**: Modulis 1 (Pradžia)
-- **5–7 savaitės**: Modulis 2 (Konfigūracija ir aplinkos)
-- **8–10 savaitės**: Modulis 3 (Diegimas ir provizionavimas)
-- **11–12 savaitės**: Modulis 4 (Priešdiegiami patikrinimai)
-- **13–14 savaitės**: Modulis 5 (Trikčių šalinimas ir derinimas)
-- **15–16 savaitės**: Modulis 6 (Pažangios temos ir vertinimas)
+### Dalinis studijavimas (16 savaičių)
+- **1-4 savaitės**: 1 modulis (Pradžia)
+- **5-7 savaitės**: 2 modulis (Konfigūracija ir aplinkos)
+- **8-10 savaitės**: 3 modulis (Diegimas ir paruošimas)
+- **11-12 savaitės**: 4 modulis (Išankstinis patvirtinimas)
+- **13-14 savaitės**: 5 modulis (Klaidų šalinimas ir derinimas)
+- **15-16 savaitės**: 6 modulis (Pažangios temos ir vertinimas)
 
 ---
 
-## Progreso sekimas ir vertinimo sistema
+## Progreso stebėjimo ir vertinimo sistema
 
-### Skyriaus užbaigimo kontrolinis sąrašas
+### Skyrelio užbaigimo kontrolinis sąrašas
 
-Stebėkite savo pažangą per kiekvieną skyrių naudodami šiuos išmatuojamus rezultatus:
+Sekite pažangą per kiekvieną skyrių su šiais matuojamais rezultatais:
 
-#### 📚 Skyrius 1: Pagrindai ir greitas startas
-- [ ] **Įdiegimas baigtas**: AZD įdiegta ir patvirtinta jūsų platformoje
-- [ ] **Pirmasis diegimas**: Sėkmingai įdiegtas todo-nodejs-mongo šablonas
-- [ ] **Aplinkos nustatymas**: Sukonfigūruoti pirmieji aplinkos kintamieji
-- [ ] **Resursų naršymas**: Peržiūrėti įdiegtus resursus Azure portale
-- [ ] **Komandų įvaldymas**: Patogiai naudojatės pagrindinėmis AZD komandomis
+#### 📚 1 skyrius: Pagrindai ir greitas startas
+- [ ] **Įdiegimas baigtas**: AZD įdiegtas ir patikrintas Jūsų platformoje
+- [ ] **Pirmas diegimas**: Sėkmingai įdiegta todo-nodejs-mongo šablonas
+- [ ] **Aplinkos nustatymas**: Konfigūruoti pirmieji aplinkos kintamieji
+- [ ] **Resursų naršymas**: Išnagrinėtos išdiegtos Azure Portal resursai
+- [ ] **Komandų valdymas**: Pasitikimas pagrindinėmis AZD komandomis
 
-#### 🤖 Skyrius 2: AI orientuotas vystymas  
-- [ ] **AI šablono diegimas**: Sėkmingai įdiegtas azure-search-openai-demo
-- [ ] **RAG įgyvendinimas**: Sukonfigūruotas dokumentų indeksavimas ir gavimas
-- [ ] **Modelių konfigūravimas**: Nustatyti keli AI modeliai skirtingiems tikslams
-- [ ] **AI stebėsena**: Įdiegta Application Insights AI apkrovoms
-- [ ] **Veikimo optimizavimas**: Parinktas AI programos veikimo tobulinimas
+#### 🤖 2 skyrius: AI pirmenybės kūrimas  
+- [ ] **AI šablono diegimas**: Sėkmingai įdiegta azure-search-openai-demo
+- [ ] **RAG įgyvendinimas**: Konfigūruotas dokumentų indeksavimas ir paieška
+- [ ] **Modelių konfigūracija**: Nustatyti keli skirtingų paskirčių AI modeliai
+- [ ] **AI stebėsena**: Įdiegta Application Insights AI darbo krūviams
+- [ ] **Veikimo optimizavimas**: Pritaikytas AI programos našumas
 
-#### ⚙️ Skyrius 3: Konfigūracija ir autentifikacija
-- [ ] **Daugiaplokštė aplinka**: Sukonfigūruotos dev, staging ir prod aplinkos
-- [ ] **Saugumo įgyvendinimas**: Nustatyta valdomos tapatybės autentifikacija
-- [ ] **Slapukų valdymas**: Integruotas Azure Key Vault konfidencialiems duomenims
-- [ ] **Parametrų valdymas**: Sukurta aplinkai specifiška konfigūracija
-- [ ] **Autentifikacijos įvaldymas**: Įgyvendinti saugūs prieigos modeliai
+#### ⚙️ 3 skyrius: Konfigūracija ir autentifikavimas
+- [ ] **Daugiaplatformių aplinkų kūrimas**: Konfigūruotos dev, staging ir prod aplinkos
+- [ ] **Saugumo įgyvendinimas**: Įdiegta valdoma tapatybės autentifikacija
+- [ ] **Slapukų valdymas**: Integruotas Azure Key Vault jautriems duomenims saugoti
+- [ ] **Parametrų valdymas**: Sukurtos aplinkai specifinės konfigūracijos
+- [ ] **Autentifikacijos valdymas**: Įgyvendinti saugūs prieigos modeliai
 
-#### 🏗️ Skyrius 4: Infrastruktūra kaip kodas ir diegimas
-- [ ] **Pasirinktinio šablono kūrimas**: Sukurtas daugiaservisinės aplikacijos šablonas
-- [ ] **Bicep įvaldymas**: Sukurti moduliniai, pakartotinai naudojami infrastruktūros komponentai
-- [ ] **Diegimo automatizavimas**: Įdiegti prieš / po diegimo hook'ai
-- [ ] **Architektūros dizainas**: Išdiegta sudėtinga mikroservisų architektūra
-- [ ] **Šablono optimizavimas**: Optimizuoti šablonai našumui ir kaštams
+#### 🏗️ 4 skyrius: Infrastruktūra kaip kodas ir diegimas
+- [ ] **Pasirinktinių šablonų kūrimas**: Sukurtas daugiapakopis programos šablonas
+- [ ] **Bicep įvaldymas**: Sukurtos modulinės, pakartotinai naudojamos infrastruktūros dalys
+- [ ] **Diegimo automatizavimas**: Įdiegta išankstinių/po diegimo kablių sistema
+- [ ] **Architektūros dizainas**: Įdiegta sudėtinga mikroservisų architektūra
+- [ ] **Šablonų optimizavimas**: Optimizuoti šablonai našumui ir sąnaudoms
 
-#### 🎯 Skyrius 5: Multi-Agent AI sprendimai
-- [ ] **Mažmeninės prekybos sprendimo diegimas**: Išdiegta pilna multi-agent mažmeninės prekybos situacija
-- [ ] **Agentų pritaikymas**: Modifikuoti Kliento ir Inventoriaus agentų elgesiai
-- [ ] **Architektūros mastelio didinimas**: Įdiegta apkrovos balansavimas ir auto-scaling
-- [ ] **Gamybinė stebėsena**: Nustatyta išsami stebėsena ir perspėjimai
-- [ ] **Veikimo derinimas**: Optimizuotas multi-agent sistemos veikimas
+#### 🎯 5 skyrius: Daugiagentės AI sistemos
+- [ ] **Mažmeninės architektūros peržiūra**: Nustatyti trūkstami programos komponentai ir suplanuota jų diegimas bei patikrinimas
+- [ ] **Agentų pritaikymas**: Pakeisti Customer ir Inventory agentų elgesys
+- [ ] **Architektūros mastelio keitimas**: Įdiegta apkrovos balansavimo ir automatinio mastelio keitimo sistema
+- [ ] **Gamybos stebėsena**: Sukurta išsami stebėsena ir įspėjimai
+- [ ] **Veikimo tuningas**: Optimizuotas daugiagentinės sistemos našumas
 
-#### 🔍 Skyrius 6: Priešdiegiami patikrinimai ir planavimas
-- [ ] **Pajėgumų analizė**: Įvertinti aplikacijų resursų poreikiai
-- [ ] **SKU optimizavimas**: Parinkti kaštų efektyvūs paslaugų lygiai
-- [ ] **Patikros automatizavimas**: Įdiegti priešdiegiami patikros skriptai
-- [ ] **Kaštų planavimas**: Sukurti diegimo kaštų sąmatas ir biudžetus
-- [ ] **Rizikos vertinimas**: Nustatyti ir mažinti diegimo rizikas
+#### 🔍 6 skyrius: Išankstiniai patikrinimai ir planavimas prieš diegimą
+- [ ] **Pajėgumų analizė**: Išnagrinėti resursų reikalavimai programoms
+- [ ] **SKU optimizavimas**: Pasirinkti ekonomiški paslaugų lygiai
+- [ ] **Patvirtinimo automatizavimas**: Įdiegti išankstiniai patikrinimo scenarijai
+- [ ] **Sąnaudų planavimas**: Sukurti diegimo sąnaudų įvertinimai ir biudžetai
+- [ ] **Rizikos vertinimas**: Nustatyti ir sumažinti diegimo rizikas
 
-#### 🚨 Skyrius 7: Trikčių šalinimas ir derinimas
-- [ ] **Diagnostikos įgūdžiai**: Sėkmingai išspręstos specialiai sukelto klaidingo diegimo problemos
-- [ ] **Žurnalo analizė**: Efektyviai naudojamas Azure Monitor ir Application Insights
-- [ ] **Veikimo tobulinimas**: Optimizuotos lėtai veikiančios aplikacijos
-- [ ] **Atkūrimo procedūros**: Įdiegta atsarginių kopijų ir gedimų atkūrimo sistema
-- [ ] **Stebėsenos nustatymas**: Sukurta proaktyvi stebėsena ir perspėjimai
+#### 🚨 7 skyrius: Klaidų šalinimas ir derinimas
+- [ ] **Diagnostikos įgūdžiai**: Sėkmingai išspręstos specialiai sugadintos diegimo problemos
+- [ ] **Žurnalų analizė**: Efektyviai naudota Azure Monitor ir Application Insights
+- [ ] **Veikimo optimizavimas**: Suprojektuotos lėtai veikiančios programos optimizacijos
+- [ ] **Atkūrimo procedūros**: Įgyvendintos atsarginės kopijos ir katastrofų atkūrimas
+- [ ] **Stebėsenos įdiegimas**: Sukurta proaktyvi stebėsenos ir įspėjimų sistema
 
-#### 🏢 Skyrius 8: Gamybiniai ir įmonės modeliai
-- [ ] **Įmonės saugumas**: Įgyvendintos išsamios saugumo praktikos
+#### 🏢 8 skyrius: Gamybos ir įmonių modeliai
+- [ ] **Įmonių saugumas**: Įdiegti išsamūs saugumo modeliai
 - [ ] **Valdymo sistema**: Nustatyta Azure Policy ir resursų valdymas
-- [ ] **Pažangi stebėsena**: Sukurtos informacijos suvestinės ir automatizuoti perspėjimai
-- [ ] **CI/CD integracija**: Sukurti automatizuoti diegimo vamzdynai
-- [ ] **Atitikties įgyvendinimas**: Atitikta įmonės atitikties reikalavimai
+- [ ] **Pažangi stebėsena**: Sukurti informaciniai skydeliai ir automatizuoti įspėjimai
+- [ ] **CI/CD integracija**: Sukurti automatizuoti diegimo srautai
+- [ ] **Atitikties įgyvendinimas**: Įgyvendinti įmonių atitikties reikalavimai
 
-### Mokymosi laiko planas ir etapai
+### Mokymosi grafikas ir etapai
 
-#### 1–2 savaitės: Pagrindų formavimas
-- **Tikslas**: Įdiegti pirmą AI aplikaciją naudojant AZD
-- **Validacija**: Veikianti aplikacija pasiekiama per viešą URL
-- **Įgūdžiai**: Baziniai AZD darbo srautai ir AI paslaugų integracija
+#### 1-2 savaitės: Pagrindų kūrimas
+- **Etapas**: Įdiegti pirmąją AI programą naudojant AZD
+- **Patvirtinimas**: Veikianti programa, pasiekiama viešu URL
+- **Įgūdžiai**: Pagrindiniai AZD darbo srautai ir AI paslaugų integracija
 
-#### 3–4 savaitės: Konfigūracijos įvaldymas
-- **Tikslas**: Daugiaplokštis diegimas su saugia autentifikacija
-- **Validacija**: Ta pati aplikacija išdiegta dev/staging/prod aplinkose
+#### 3-4 savaitės: Konfigūracijos įvaldymas
+- **Etapas**: Diegimas kelioms aplinkoms su saugia autentifikacija
+- **Patvirtinimas**: Ta pati programa įdiegta dev/staging/prod aplinkose
 - **Įgūdžiai**: Aplinkos valdymas ir saugumo įgyvendinimas
 
-#### 5–6 savaitės: Infrastruktūros kompetencija
-- **Tikslas**: Pasirinktinis šablonas sudėtingai daugiaservisinei aplikacijai
-- **Validacija**: Pakartotinai naudojamas šablonas įdiegtas kito komandos nario
+#### 5-6 savaitės: Infrastruktūros ekspertizė
+- **Etapas**: Pasirinktinis šablonas sudėtingai multi-paslaugų programai
+- **Patvirtinimas**: Pakartotinai naudojamas šablonas, taikytas kito komandos nario
 - **Įgūdžiai**: Bicep įvaldymas ir infrastruktūros automatizavimas
 
-#### 7–8 savaitės: Pažangus AI įgyvendinimas
-- **Tikslas**: Gamybai paruoštas multi-agent AI sprendimas
-- **Validacija**: Sistema tvarko realaus pasaulio apkrovą su stebėsena
-- **Įgūdžiai**: Multi-agent orkestracija ir veikimo optimizavimas
+#### 7-8 savaitės: Pažangus AI įgyvendinimas
+- **Etapas**: Gamybai paruoštas daugiagentės AI sprendimas
+- **Patvirtinimas**: Sistema veikia realius apkrovimus su stebėsena
+- **Įgūdžiai**: Daugiagentė orkestracija ir veikimo optimizavimas
 
-#### 9–10 savaitės: Gamybinis pasirengimas
-- **Tikslas**: Įmonės lygio diegimas su pilna atitiktimi
-- **Validacija**: Praeina saugumo peržiūrą ir kaštų auditą
+#### 9-10 savaitės: Gamybinis pasirengimas
+- **Etapas**: Įmonės lygio diegimas su pilna atitiktimi
+- **Patvirtinimas**: Praėjęs saugumo apžvalgą ir sąnaudų auditą
 - **Įgūdžiai**: Valdymas, stebėsena ir CI/CD integracija
 
-### Vertinimas ir sertifikacija
+### Vertinimas ir sertifikavimas
 
-#### Žinių patikrinimo metodai
-1. **Praktiniai diegimai**: Veikiančios aplikacijos kiekvienam skyriui
+#### Žinių įvertinimo metodai
+1. **Praktiniai diegimai**: Veikiančios programos kiekvienam skyriui
 2. **Kodo peržiūros**: Šablonų ir konfigūracijos kokybės vertinimas
-3. **Problemų sprendimas**: Trikčių šalinimo scenarijai ir sprendimai
-4. **Mokymas bendraamžiams**: Paaiškinti koncepcijas kitiems besimokantiesiems
-5. **Bendruomenės indėlis**: Dalintis šablonais ar patobulinimais
+3. **Problemos sprendimas**: Trikčių šalinimo scenarijai ir sprendimai
+4. **Bendrakaipimas**: Paaiškinkite sąvokas kitiems besimokantiesiems
+5. **Bendruomenės indėlis**: Dalinkitės šablonais arba patobulinimais
 
-#### Profesinio tobulėjimo rezultatai
-- **Portfelio projektai**: 8 gamybai paruošti diegimai
-- **Techninės įgūdžiai**: AZD ir AI diegimo kompetencija pagal pramonės standartus
-- **Gebėjimai spręsti problemas**: Nepriklausomas trikčių šalinimas ir optimizavimas
+#### Profesinės pažangos rezultatai
+- **Portfolio projektai**: Diegimo mokymai ir architektūros pratimai; gamybinis paruošimas reikalauja atskiro įgyvendinimo ir apžvalgos
+- **Techniniai įgūdžiai**: Pramonės standartų AZD ir AI diegimo kompetencijos
+- **Problemos sprendimo gebėjimai**: Savarankiškas trikčių šalinimas ir optimizavimas
 - **Bendruomenės pripažinimas**: Aktyvus dalyvavimas Azure kūrėjų bendruomenėje
-- **Karjeros pažanga**: Įgūdžiai tiesiogiai pritaikomi debesų ir AI pareigoms
+- **Karjeros pažanga**: Įgūdžiai, tiesiogiai pritaikomi debesų ir DI vaidmenims
 
-#### Sėkmės rodikliai
-- **Diegimų sėkmės rodiklis**: >95% sėkmingų diegimų
-- **Trikčių šalinimo laikas**: <30 minučių įprastoms problemoms
-- **Našumo optimizavimas**: Matomi patobulinimai sąnaudų ir našumo srityje
-- **Saugumo atitiktis**: VisI diegimai atitinka įmonės saugumo standartus
-- **Žinių perdavimas**: Gebėjimas mentorinti kitus kūrėjus
+#### Sėkmės metrika
+- **Diegimo sėkmės rodiklis**: >95% sėkmingų diegimų
+- **Gedimų šalinimo laikas**: <30 minučių dažniausioms problemoms
+- **Veiklos optimizavimas**: Aiškiai matomi kaštų ir veiklos patobulinimai
+- **Saugumo peržiūra**: Dokumentuoti kontrolės mechanizmai ir likę trūkumai pagal jūsų organizacijos reikalavimus; kurso baigimas nereiškia atitikties sertifikavimo
+- **Žinių perdavimas**: Gebėjimas mentorystei kitiems kūrėjams
 
 ### Nuolatinis mokymasis ir bendruomenės įsitraukimas
 
-#### Sekite naujienas
-- **Azure naujinimai**: Sekite Azure Developer CLI išleidimo pastabas
-- **Bendruomenės renginiai**: Dalyvaukite Azure ir AI kūrėjų renginiuose
+#### Būkite informuoti
+- **Azure atnaujinimai**: Sekite Azure Developer CLI leidimo pastabas
+- **Bendruomenės renginiai**: Dalyvaukite Azure ir DI kūrėjų renginiuose
 - **Dokumentacija**: Prisidėkite prie bendruomenės dokumentacijos ir pavyzdžių
-- **Atsiliepimų ciklas**: Teikite atsiliepimus apie kurso turinį ir Azure paslaugas
+- **Atsiliepimų teikimas**: Teikite atsiliepimus apie kurso turinį ir Azure paslaugas
 
 #### Karjeros plėtra
-- **Profesinis tinklas**: Užmegzkite ryšius su Azure ir AI ekspertais
-- **Pranešimo galimybės**: Pristatykite įgytas žinias konferencijose ar susitikimuose
-- **Indėlis į atvirojo kodo projektus**: Prisidėkite prie AZD šablonų ir įrankių
-- **Mentorystė**: Veskite kitus kūrėjus jų AZD mokymosi kelyje
+- **Profesinis tinklas**: Užmegzkite ryšius su Azure ir DI ekspertais
+- **Kalbėjimo galimybės**: Praneškite apie įgytas žinias konferencijose ar susitikimuose
+- **Atviro kodo indėlis**: Prisidėkite prie AZD šablonų ir įrankių
+- **Mentorystė**: Vadovaukite kitiems kūrėjams jų AZD mokymosi kelionėje
 
 ---
 
-**Skyrių naršymas:**
-- **📚 Kurso pradžia**: [AZD pradedantiesiems](../README.md)
-- **📖 Pradėkite mokytis**: [1 skyrius: Pagrindai ir greitas startas](../README.md#-chapter-1-foundation--quick-start)
-- **🎯 Pažangos sekimas**: Sekite savo pažangą per visapusišką 8 skyrių mokymosi sistemą
-- **🤝 Bendruomenė**: [Azure Discord](https://discord.gg/microsoft-azure) pagalbos ir diskusijų tikslais
+**Skyriaus navigacija:**
+- **📚 Kurso pradžia**: [AZD For Beginners](../README.md)
+- **📖 Pradėti mokytis**: [1 skyrius: Pagrindai ir greitas startas](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 Progreso sekimas**: Sekite savo pažangą per išsamų 8 skyrių mokymosi sistemą
+- **🤝 Bendruomenė**: [Azure Discord](https://discord.gg/microsoft-azure) pagalbai ir diskusijoms
 
-**Studijų pažangos sekimas**: Naudokite šį struktūruotą vadovą, kad įvaldytumėte Azure Developer CLI per palaipsninį, praktinį mokymąsi su išmatuojamais rezultatais ir profesinio tobulėjimo nauda.
+**Mokymosi pažangos sekimas**: Naudokite šį struktūrizuotą vadovą, kad įvaldytumėte Azure Developer CLI per pažangų, praktišką mokymąsi su matuojamais rezultatais ir profesinės plėtros privalumais.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Atsakomybės apribojimas**:
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatizuoti vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojamas profesionalus, žmogaus atliktas vertimas. Mes neatsakome už jokius nesusipratimus ar neteisingus aiškinimus, kilusius dėl šio vertimo naudojimo.
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojama naudoti profesionalų žmogiškąjį vertimą. Mes neatsakome už jokius nesusipratimus ar neteisingą interpretaciją, kilusią naudojantis šiuo vertimu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

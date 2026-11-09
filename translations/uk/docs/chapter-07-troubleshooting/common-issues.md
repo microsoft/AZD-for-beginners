@@ -1,507 +1,520 @@
 # Загальні проблеми та рішення
 
-**Навігація розділом:**
+**Навігація по розділах:**
 - **📚 Головна сторінка курсу**: [AZD For Beginners](../../README.md)
-- **📖 Поточний розділ**: Розділ 7 - Вирішення проблем і налагодження
+- **📖 Поточний розділ**: Розділ 7 - Усунення несправностей та відлагодження
 - **⬅️ Попередній розділ**: [Розділ 6: Перевірки перед запуском](../chapter-06-pre-deployment/preflight-checks.md)
-- **➡️ Наступний**: [Посібник з налагодження](debugging.md)
-- **🚀 Наступний розділ**: [Розділ 8: Виробничі та корпоративні патерни](../chapter-08-production/production-ai-practices.md)
+- **➡️ Наступний**: [Керівництво з відлагодження](debugging.md)
+- **🚀 Наступний розділ**: [Розділ 8: Виробничі та корпоративні шаблони](../chapter-08-production/production-ai-practices.md)
 
 ## Вступ
 
-Цей всебічний посібник з усунення несправностей охоплює найчастіші проблеми, які виникають при використанні Azure Developer CLI. Навчіться діагностувати, усувати несправності та вирішувати поширені проблеми з автентифікацією, розгортанням, наданням інфраструктури та конфігурацією додатків. Кожна проблема включає докладні симптоми, кореневі причини та покрокові процедури вирішення.
+Це комплексне керівництво з усунення несправностей охоплює найпоширеніші проблеми при роботі з Azure Developer CLI. Навчіться діагностувати, усувати неполадки та вирішувати типові проблеми з автентифікацією, розгортанням, створенням інфраструктури та налаштуванням додатків. Для кожної проблеми наведені детальні симптоми, основні причини та покрокові процедури вирішення.
 
 ## Цілі навчання
 
-Виконавши цей посібник, ви:
-- Освоїте методи діагностики проблем Azure Developer CLI
-- Зрозумієте поширені проблеми з автентифікацією та дозволами і їхні рішення
-- Навчитеся вирішувати помилки розгортання, помилки надання інфраструктури та проблеми конфігурації
-- Впровадите проактивний моніторинг і стратегії налагодження
-- Застосуєте систематичні методи усунення несправностей для складних проблем
-- Налаштуєте правильний журнал подій і моніторинг для запобігання майбутнім проблемам
+Пройшовши цей посібник, ви:
+- Оволодієте техніками діагностики проблем Azure Developer CLI
+- Зрозумієте типові проблеми з автентифікацією та дозволами та їхні рішення
+- Вирішуватимете помилки розгортання, помилки створення інфраструктури та проблеми конфігурації
+- Застосовуватимете проактивний моніторинг та стратегії відлагодження
+- Застосовуватимете систематичні методи усунення несправностей для складних проблем
+- Налаштовуватимете правильне ведення журналів і моніторинг для запобігання майбутнім проблемам
 
 ## Результати навчання
 
 Після завершення ви зможете:
 - Діагностувати проблеми Azure Developer CLI за допомогою вбудованих інструментів діагностики
-- Самостійно вирішувати проблеми з автентифікацією, підписками та дозволами
-- Ефективно усувати помилки розгортання та проблеми надання інфраструктури
-- Налагоджувати проблеми конфігурації додатків і проблеми, специфічні для середовища
-- Впроваджувати моніторинг та сповіщення для проактивного виявлення потенційних проблем
-- Застосовувати найкращі практики ведення журналів, налагодження та робочих процесів вирішення проблем
+- Вирішувати проблеми з автентифікацією, підписками та дозволами самостійно
+- Ефективно усувати неполадки розгортання та помилки створення інфраструктури
+- Відлагоджувати проблеми конфігурації додатків і середовища
+- Впроваджувати моніторинг і сповіщення для проактивного виявлення потенційних проблем
+- Застосовувати найкращі практики ведення журналів, відлагодження та процесів вирішення проблем
 
 ## Швидка діагностика
 
-Перш ніж переходити до конкретних проблем, виконайте ці команди для збору діагностичної інформації:
+> Замініть приклади імен/ідентифікаторів на значення вашого середовища. Фрагменти Bash, Bicep, JavaScript та файлів з параметрами наведені окремо нижче; це не один виконуваний скрипт. Перевіряйте руйнівні операції і приховуйте секрети перед передачою діагностичних даних. `azd monitor --logs` відкриває браузер; він не веде трансляцію журналів терміналу.
+
+Перед тим як зануритися в конкретні проблеми, виконайте ці команди для збору діагностичної інформації:
 
 ```bash
-# Перевірте версію та стан azd
+# Check azd version and health
 azd version
 azd config show
 
-# Перевірте автентифікацію в Azure
+# Verify Azure authentication
 az account show
 az account list
 
-# Перевірте поточне середовище
+# Check current environment
 azd env list
 azd env get-values
 
-# Увімкніть налагоджувальне логування
-export AZD_DEBUG=true
+# Enable debug logging for the command being investigated
 azd <command> --debug
 ```
 
-## Проблеми автентифікації
+## Проблеми з автентифікацією
 
 ### Проблема: "Не вдалося отримати токен доступу"
 **Симптоми:**
-- `azd up` не вдається через помилки автентифікації
-- Команди повертають "неавторизовано" або "доступ заборонено"
+- `azd up` залежить з помилками автентифікації
+- Команди повертають "unauthorized" або "access denied"
 
 **Рішення:**
 ```bash
-# 1. Повторно аутентифікуйтесь за допомогою Azure CLI
+# 1. Authenticate azd separately (Azure CLI login alone may not authenticate azd)
+azd auth login
+azd auth login --check-status --output json
+
+# 2. Authenticate Azure CLI when using az commands
 az login
 az account show
 
-# 2. Очистіть кешовані облікові дані
+# 2. Clear cached credentials
 az account clear
 az login
 
-# 3. Використовуйте потік коду пристрою (для безголових систем)
+# 3. Use device code flow (for headless systems)
 az login --use-device-code
 
-# 4. Встановіть явну підписку
+# 4. Set explicit subscription
 az account set --subscription "your-subscription-id"
-azd config set defaults.subscription "your-subscription-id"
+azd env set AZURE_SUBSCRIPTION_ID "your-subscription-id"
 ```
 
 ### Проблема: "Недостатньо привілеїв" під час розгортання
 **Симптоми:**
-- Розгортання завершується з помилками дозволів
-- Неможливо створити певні ресурси Azure
+- Розгортання не вдається з помилками дозволів
+- Не вдається створити певні ресурси Azure
 
 **Рішення:**
 ```bash
-# 1. Перевірте ваші призначення ролей в Azure
+# 1. Check your Azure role assignments
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# 2. Переконайтеся, що у вас є необхідні ролі
-# - Співавтор (для створення ресурсів)
-# - Адміністратор доступу користувачів (для призначення ролей)
+# 2. Ensure you have required roles
+# - Contributor (for resource creation)
+# - User Access Administrator (for role assignments)
 
-# 3. Зверніться до свого адміністратора Azure для отримання відповідних дозволів
+# 3. Contact your Azure administrator for proper permissions
 ```
 
-### Проблема: Проблеми багатокористувацької автентифікації
+### Проблема: Проблеми автентифікації для мульти-орендарів
 **Рішення:**
 ```bash
-# 1. Увійти з певним орендарем
+# 1. Login with specific tenant
 az login --tenant "your-tenant-id"
 
-# 2. Встановити орендаря в конфігурації
-azd config set auth.tenantId "your-tenant-id"
+# 2. Authenticate azd with that tenant too
+azd auth login --tenant-id "your-tenant-id"
 
-# 3. Очистити кеш орендаря при зміні орендаря
+# 3. Clear tenant cache if switching tenants
 az account clear
 ```
 
-## 🏗️ Помилки надання інфраструктури
+## 🏗️ Помилки створення інфраструктури
 
 ### Проблема: Конфлікти імен ресурсів
 **Симптоми:**
-- Помилки "Ім’я ресурсу вже існує"
+- Помилки "Ім'я ресурсу вже існує"
 - Розгортання не вдається під час створення ресурсу
 
 **Рішення:**
-```bash
-# 1. Використовуйте унікальні імена ресурсів з токенами
-# У вашому шаблоні Bicep:
+```bicep
+// 1. Fragment inside your Bicep template
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
+// Inside a resource declaration:
 name: '${applicationName}-${resourceToken}'
-
-# 2. Змініть ім’я середовища
-azd env new my-app-dev-$(whoami)-$(date +%s)
-
-# 3. Очистіть існуючі ресурси
-azd down --force --purge
 ```
 
-### Проблема: Локація/Регіон недоступний
+```bash
+# 2. Change environment name
+azd env new my-app-dev-$(whoami)-$(date +%s)
+
+# 3. Delete ONLY a disposable environment after inspecting it and backing up data
+azd down
+```
+
+### Проблема: Локація/регіон недоступні
 **Симптоми:**
 - "Локація 'xyz' недоступна для типу ресурсу"
-- Деякі SKU недоступні у вибраному регіоні
+- Певні SKU недоступні в обраному регіоні
 
 **Рішення:**
 ```bash
-# 1. Перевірте доступні розташування для типів ресурсів
+# 1. Check available locations for resource types
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. Використовуйте загальнодоступні регіони
-azd config set defaults.location eastus2
-# або
+# 2. For a NEW environment choose a region supported by all required services
 azd env set AZURE_LOCATION eastus2
 
-# 3. Перевірте доступність служби за регіоном
-# Відвідайте: https://azure.microsoft.com/global-infrastructure/services/
+# 3. Check service availability by region
+# Visit: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
-### Проблема: Перевищено квоту
+Зміна змінної локації не переносить існуючі ресурси. Існуюча група ресурсів або ресурс можуть відмовитися від зміни локації; використовуйте окреме середовище для регіонального повторного розгортання.
+
+### Проблема: Перевищення квоти
 **Симптоми:**
 - "Перевищено квоту для типу ресурсу"
 - "Досягнуто максимальну кількість ресурсів"
 
 **Рішення:**
 ```bash
-# 1. Перевірте поточне використання квоти
+# 1. Check current quota usage
 az vm list-usage --location eastus2 -o table
 
-# 2. Запросіть збільшення квоти через портал Azure
-# Перейдіть до: Підписки > Використання + квоти
+# 2. Request quota increase through Azure portal
+# Go to: Subscriptions > Usage + quotas
 
-# 3. Використовуйте менші SKU для розробки
-# У main.parameters.json:
+```
+
+Для розробки обирайте підтримуваний менший SKU в `infra/main.parameters.json`:
+
+```json
 {
   "appServiceSku": {
-    "value": "B1"  // Instead of P1v3
+    "value": "B1"
   }
 }
+```
 
-# 4. Очистіть невикористані ресурси
+```bash
+# 4. Clean up unused resources
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
-### Проблема: Помилки шаблону Bicep
+### Проблема: Помилки шаблонів Bicep
 **Симптоми:**
-- Помилки валідації шаблону
+- Сертифікаційні помилки шаблонів
 - Синтаксичні помилки у файлах Bicep
 
 **Рішення:**
 ```bash
-# 1. Перевірити синтаксис Bicep
+# 1. Validate Bicep syntax
 az bicep build --file infra/main.bicep
 
-# 2. Використати лінтер Bicep
+# 2. Use Bicep linter
 az bicep lint --file infra/main.bicep
 
-# 3. Перевірити синтаксис файлу параметрів
+# 3. Check parameter file syntax
 cat infra/main.parameters.json | jq '.'
 
-# 4. Попередньо переглянути зміни розгортання
+# 4. Preview deployment changes
 azd provision --preview
 ```
 
-## 🚀 Збої розгортання
+## 🚀 Помилки розгортання
 
-### Проблема: Збої під час збірки
+### Проблема: Помилки збірки
 **Симптоми:**
 - Додаток не збирається під час розгортання
 - Помилки встановлення пакетів
 
 **Рішення:**
 ```bash
-# 1. Перевірте вивід збірки з прапорцем налагодження
-azd deploy --service web --debug
+# 1. Check build output with debug flag
+azd deploy web --debug
 
-# 2. Переглянути статус розгорнутого сервісу
+# 2. View deployed service status
 azd show
 
-# 3. Тестувати збірку локально
+# 3. Test build locally
 cd src/web
 npm install
 npm run build
 
-# 3. Перевірити сумісність версій Node.js/Python
-node --version  # Має відповідати налаштуванням azure.yaml
+# 3. Check Node.js/Python version compatibility
+node --version  # Should match azure.yaml settings
 python --version
 
-# 4. Очистити кеш збірки
-rm -rf node_modules package-lock.json
-npm install
+# 4. Clear build cache
+# Preserve the committed dependency lock for reproducibility
+npm ci
 
-# 5. Перевірити Dockerfile, якщо використовуються контейнери
+# 5. Check Dockerfile if using containers
 docker build -t test-image .
 docker run --rm test-image
 ```
 
-### Проблема: Збої розгортання контейнерів
+### Проблема: Помилки розгортання контейнерів
 **Симптоми:**
 - Контейнерні додатки не запускаються
 - Помилки завантаження образів
 
 **Рішення:**
 ```bash
-# 1. Тестування збірки Docker локально
+# 1. Test Docker build locally
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Перевірте журнали контейнерів за допомогою Azure CLI
+# 2. Check container logs using Azure CLI
 az containerapp logs show --name my-app --resource-group my-rg --follow
 
-# 3. Моніторинг застосунку через azd
+# 3. Monitor application through azd
 azd monitor --logs
 
-# 3. Перевірте доступ до реєстру контейнерів
+# 3. Verify container registry access
 az acr login --name myregistry
 
-# 4. Перевірте конфігурацію контейнерного застосунку
+# 4. Check container app configuration
 az containerapp show --name my-app --resource-group my-rg
 ```
 
-### Проблема: Збої підключення до бази даних
+### Проблема: Помилки підключення до бази даних
 **Симптоми:**
 - Додаток не може підключитися до бази даних
-- Помилки таймауту підключення
+- Помилки тайм-ауту підключення
 
 **Рішення:**
 ```bash
-# 1. Перевірте правила брандмауера бази даних
+# 1. Check database firewall rules
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
-# 2. Перевірте з'єднання з додатком
-# Тимчасово додайте до вашого додатка:
+# 2. Test connectivity from application
+# Add to your app temporarily:
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
-# 3. Перевірте формат рядка підключення
+# 3. Verify connection string format
 azd env get-values | grep DATABASE
 
-# 4. Перевірте статус сервера бази даних
+# 4. Check database server status
 az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```
 
 ## 🔧 Проблеми конфігурації
 
-### Проблема: Змінні оточення не працюють
+### Проблема: Змінні середовища не працюють
 **Симптоми:**
 - Додаток не читає значення конфігурації
-- Змінні оточення здаються порожніми
+- Змінні середовища виглядають пустими
 
 **Рішення:**
 ```bash
-# 1. Перевірте, чи встановлені змінні середовища
+# 1. Verify environment variables are set
 azd env get-values
-azd env get DATABASE_URL
+azd env get-value DATABASE_URL
 
-# 2. Перевірте імена змінних у файлі azure.yaml
-cat azure.yaml | grep -A 5 env:
+# 2. Check how your Bicep/template maps values into the deployed app.
+# azd env set updates local environment values; it does not directly update runtime settings.
 
-# 3. Перезапустіть застосунок
-azd deploy --service web
+# 3. Restart the application
+azd deploy web
 
-# 4. Перевірте конфігурацію служби застосунку
+# 4. Check app service configuration
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
 ### Проблема: Проблеми з SSL/TLS сертифікатами
 **Симптоми:**
 - HTTPS не працює
-- Помилки валідації сертифікатів
+- Помилки перевірки сертифікатів
 
 **Рішення:**
 ```bash
-# 1. Перевірте стан SSL-сертифіката
+# 1. Check SSL certificate status
 az webapp config ssl list --resource-group myrg
 
-# 2. Увімкніть лише HTTPS
+# 2. Enable HTTPS only
 az webapp update --name myapp --resource-group myrg --https-only true
 
-# 3. Додайте власний домен (за потребою)
+# 3. Add custom domain (if needed)
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
 ### Проблема: Проблеми конфігурації CORS
 **Симптоми:**
 - Фронтенд не може викликати API
-- Заблоковано крос-доменний запит
+- Блокування запитів з інших джерел
 
 **Рішення:**
 ```bash
-# 1. Налаштуйте CORS для App Service
+# 1. Configure CORS for App Service
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# 2. Оновіть API для обробки CORS
-# В Express.js:
+```
+
+2. Оновіть ваш існуючий Express-додаток (з імпортованим `cors`):
+
+```javascript
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
+```
 
-# 3. Перевірте, чи запущено на правильних URL-адресах
+```bash
+# 3. Check if running on correct URLs
 azd show
 ```
 
-## 🌍 Проблеми управління середовищем
+## 🌍 Проблеми керування середовищем
 
-### Проблема: Проблеми при переключенні середовищ
+### Проблема: Помилки при перемиканні середовищ
 **Симптоми:**
 - Використовується неправильне середовище
 - Конфігурація не переключається належним чином
 
 **Рішення:**
 ```bash
-# 1. Перелік усіх середовищ
+# 1. List all environments
 azd env list
 
-# 2. Явно вибрати середовище
+# 2. Explicitly select environment
 azd env select production
 
-# 3. Перевірити поточне середовище
+# 3. Verify current environment
 azd env list
 
-# 4. Створити нове середовище, якщо пошкоджене
+# 4. Create new environment if corrupted
 azd env new production-new
 azd env select production-new
 ```
 
-### Проблема: Корупція середовища
+### Проблема: Пошкодження середовища
 **Симптоми:**
 - Середовище показує недійсний стан
 - Ресурси не відповідають конфігурації
 
 **Рішення:**
 ```bash
-# 1. Оновити стан середовища
+# 1. Refresh environment state
 azd env refresh
 
-# 2. Скинути конфігурацію середовища
+# 2. Reset environment configuration
 azd env new production-reset
-# Скопіювати необхідні змінні середовища
+# Copy over required environment variables
 azd env set DATABASE_URL "your-value"
 
-# 3. Імпортувати існуючі ресурси (якщо можливо)
-# Ручне оновлення .azure/production/config.json із ідентифікаторами ресурсів
+# 3. azd env refresh reads outputs of a previous deployment; it does not
+# import arbitrary existing resources or reconcile template drift.
+# To adopt resources, use the template's documented existing-resource parameters.
 ```
 
 ## 🔍 Проблеми продуктивності
 
-### Проблема: Повільний час розгортання
+### Проблема: Повільне розгортання
 **Симптоми:**
-- Розгортання займають надто багато часу
-- Таймаути під час розгортання
+- Розгортання тривають занадто довго
+- Тайм-аути під час розгортання
 
 **Рішення:**
 ```bash
-# 1. Розгорнути конкретні сервіси для швидшої ітерації
-azd deploy --service web
-azd deploy --service api
+# 1. Deploy specific services for faster iteration
+azd deploy web
+azd deploy api
 
-# 2. Використовувати розгортання тільки коду, коли інфраструктура не змінена
-azd deploy  # Швидше за azd up
+# 2. Use code-only deployment when infrastructure unchanged
+azd deploy  # Faster than azd up
 
-# 3. Оптимізувати процес збірки
-# У package.json:
-"scripts": {
-  "build": "webpack --mode=production --optimize-minimize"
-}
+# 3. Optimize the project's actual build script and image layers.
 
-# 4. Перевірити розташування ресурсів (використовувати той самий регіон)
-azd config set defaults.location eastus2
+# 4. Check resource locations (use same region)
+# Do not change AZURE_LOCATION to fix the latency of an existing deployment.
 ```
 
-### Проблема: Проблеми продуктивності додатка
+### Проблема: Проблеми продуктивності додатку
 **Симптоми:**
-- Повільне реагування
+- Повільний час відповіді
 - Високе використання ресурсів
 
 **Рішення:**
 ```bash
-# 1. Масштабувати ресурси
-# Оновіть SKU у main.parameters.json:
-"appServiceSku": {
-  "value": "S2"  // Scale up from B1
-}
+# 1. Scale up resources
+# Update the SKU parameter in infra/main.parameters.json, then review and
+# provision infrastructure changes. azd deploy alone does not apply SKU changes.
+azd provision --preview
 
-# 2. Увімкнути моніторинг Application Insights
+# 2. Enable Application Insights monitoring
 azd monitor --overview
 
-# 3. Перевірте журнали додатків в Azure
+# 3. Check application logs in Azure
 az webapp log tail --name myapp --resource-group myrg
-# або для додатків контейнерів:
+# or for Container Apps:
 az containerapp logs show --name myapp --resource-group myrg --follow
 
-# 4. Реалізуйте кешування
-# Додайте Redis кеш до вашої інфраструктури
+# 4. Implement caching
+# Add Redis cache to your infrastructure
 ```
 
 ## 🛠️ Інструменти та команди для усунення несправностей
 
-### Команди для налагодження
+### Команди відлагодження
 ```bash
-# Комплексне налагодження
-export AZD_DEBUG=true
-azd up --debug 2>&1 | tee debug.log
+# Comprehensive debugging
+# Only rerun a mutating command when retrying is appropriate.
+azd show --debug
 
-# Перевірте версію azd
+# Check azd version
 azd version
 
-# Переглянути поточну конфігурацію
+# View current configuration
 azd config show
 
-# Перевірка з'єднання
+# Test connectivity
 curl -v https://myapp.azurewebsites.net/health
 ```
 
 ### Аналіз журналів
 ```bash
-# Журнали застосунку через Azure CLI
+# Application logs via Azure CLI
 az webapp log tail --name myapp --resource-group myrg
 
-# Моніторинг застосунку за допомогою azd
+# Monitor application with azd
 azd monitor --logs
 azd monitor --live
 
-# Журнали ресурсів Azure
-az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
+# Azure resource logs
+az monitor activity-log list --resource-group myrg --offset 1h --max-events 50
 
-# Журнали контейнерів (для Container Apps)
+# Container logs (for Container Apps)
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
 ### Дослідження ресурсів
 ```bash
-# Перелік усіх ресурсів
+# List all resources
 az resource list --resource-group myrg -o table
 
-# Перевірка стану ресурсу
+# Check resource status
 az webapp show --name myapp --resource-group myrg --query state
 
-# Мережеві діагностики
+# Network diagnostics
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
 ## 🆘 Отримання додаткової допомоги
 
-### Коли звертатися вище
-- Проблеми автентифікації залишаються після застосування всіх рішень
-- Проблеми інфраструктури з сервісами Azure
+### Коли слід передавати ескалацію
+- Проблеми з автентифікацією залишаються після використання всіх рішень
+- Проблеми з інфраструктурою Azure
 - Проблеми з оплатою або підписками
-- Питання безпеки або інциденти
+- Проблеми безпеки або інциденти
 
 ### Канали підтримки
 ```bash
-# 1. Перевірте стан служби Azure
+# 1. Check Azure Service Health
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
-# 2. Створіть запит до служби підтримки Azure
-# Перейдіть за адресою: https://portal.azure.com -> Допомога + підтримка
+# 2. Create Azure support ticket
+# Go to: https://portal.azure.com -> Help + support
 
-# 3. Ресурси спільноти
-# - Stack Overflow: тег azure-developer-cli
+# 3. Community resources
+# - Stack Overflow: azure-developer-cli tag
 # - GitHub Issues: https://github.com/Azure/azure-dev/issues
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
 ### Інформація для збору
-Перед зверненням до підтримки зберіть:
+Перед тим, як звертатися до служби підтримки, зберіть:
 - Вивід `azd version`
 - Вивід `azd config show`
-- Вивід `azd show` (статус поточного розгортання)
-- Повні текстові повідомлення про помилки
+- Вивід `azd show` (поточний стан розгортання)
+- Повні повідомлення про помилки
 - Кроки для відтворення проблеми
-- Деталі середовища (`azd env get-values`)
-- Хронологію початку проблеми
+- Приховані деталі середовища (ніколи не передавайте сирі `azd env get-values`, вони можуть містити секрети)
+- Хронологія початку проблеми
 
 ### Скрипт для збору журналів
 ```bash
@@ -518,7 +531,7 @@ az --version >> debug-logs/system-info.txt
 echo "Configuration:" > debug-logs/config.txt
 azd config show >> debug-logs/config.txt
 azd env list >> debug-logs/config.txt
-azd env get-values >> debug-logs/config.txt
+# Do not collect environment values automatically: they can contain credentials.
 
 echo "Current deployment status:" > debug-logs/status.txt
 azd show >> debug-logs/status.txt
@@ -528,73 +541,75 @@ echo "Debug information collected in debug-logs/"
 
 ## 📊 Запобігання проблемам
 
-### Перевірочний список перед розгортанням
+### Контрольний список перед розгортанням
 ```bash
-# 1. Перевірити автентифікацію
+# 1. Validate authentication
 az account show
 
-# 2. Перевірити квоти та ліміти
+# 2. Check quotas and limits
 az vm list-usage --location eastus2
 
-# 3. Перевірити шаблони
+# 3. Validate templates
 az bicep build --file infra/main.bicep
 
-# 4. Спочатку протестувати локально
+# 4. Test locally first
 npm run build
 npm run test
 
-# 5. Використовувати розгортання в режимі тестування
+# 5. Use dry-run deployments
 azd provision --preview
 ```
 
 ### Налаштування моніторингу
-```bash
-# Увімкніть Application Insights
-# Додайте до main.bicep:
+```bicep
+// Illustrative fragment, not a complete resource definition:
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   // ... configuration
 }
+```
 
-# Налаштуйте сповіщення
+```bash
+# Example App Service PLAN CPU alert (not a site metric)
 az monitor metrics alert create \
   --name "High CPU Usage" \
   --resource-group myrg \
-  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/sites/myapp \
-  --condition "avg Percentage CPU > 80"
+  --scopes /subscriptions/{id}/resourceGroups/myrg/providers/Microsoft.Web/serverfarms/myplan \
+  --condition "avg CpuPercentage > 80"
 ```
 
-### Регулярне обслуговування
+### Регулярне технічне обслуговування
 ```bash
-# Щотижневі перевірки стану здоров'я
+# Weekly health checks (project-specific script you must implement)
 ./scripts/health-check.sh
 
-# Щомісячний огляд витрат
-az consumption usage list --billing-period-name 202401
+# Monthly cost review
+# Review current Cost Management data in the portal; Consumption API support
+# depends on your billing agreement.
 
-# Щоквартальний огляд безпеки
-az security assessment list --resource-group myrg
+# Quarterly security review
+az security assessment list
 ```
 
 ## Пов’язані ресурси
 
-- [Посібник з налагодження](debugging.md) - Розширені техніки налагодження
-- [Надання ресурсів](../chapter-04-infrastructure/provisioning.md) - Усунення несправностей інфраструктури
+- [Керівництво з відлагодження](debugging.md) - Розширені техніки відлагодження
+- [Створення ресурсів](../chapter-04-infrastructure/provisioning.md) - Усунення неполадок інфраструктури
 - [Планування ємності](../chapter-06-pre-deployment/capacity-planning.md) - Рекомендації з планування ресурсів
-- [Вибір SKU](../chapter-06-pre-deployment/sku-selection.md) - Рекомендації щодо рівнів послуг
+- [Вибір SKU](../chapter-06-pre-deployment/sku-selection.md) - Рекомендації по рівнях сервісів
 
 ---
 
-**Підказка**: Збережіть цей посібник у закладках і звертайтеся до нього щоразу, коли стикаєтеся з проблемами. Більшість проблем уже зустрічалися раніше і мають перевірені рішення!
+**Порада**: Збережіть це керівництво в закладках і звертайтеся до нього щоразу, коли виникають проблеми. Більшість проблем вже зустрічалися раніше і мають усталені рішення!
 
 ---
 
 **Навігація**
-- **Попередній урок**: [Надання ресурсів](../chapter-04-infrastructure/provisioning.md)
-- **Наступний урок**: [Посібник з налагодження](debugging.md)
+- **Попередній урок**: [Створення ресурсів](../chapter-04-infrastructure/provisioning.md)
+- **Наступний урок**: [Керівництво з відлагодження](debugging.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Відмова від відповідальності**:
-Цей документ було перекладено за допомогою сервісу автоматичного перекладу [Co-op Translator](https://github.com/Azure/co-op-translator). Хоча ми прагнемо до точності, будь ласка, майте на увазі, що автоматичні переклади можуть містити помилки або неточності. Оригінальний документ рідною мовою слід вважати авторитетним джерелом. Для критичної інформації рекомендується професійний переклад людиною. Ми не несемо відповідальності за будь-які непорозуміння або неправильні тлумачення, що виникли внаслідок використання цього перекладу.
+Цей документ було перекладено за допомогою сервісу штучного інтелекту для перекладу [Co-op Translator](https://github.com/Azure/co-op-translator). Хоча ми прагнемо до точності, будь ласка, майте на увазі, що автоматичні переклади можуть містити помилки або неточності. Оригінальний документ рідною мовою слід вважати авторитетним джерелом. Для критично важливої інформації рекомендується професійний людський переклад. Ми не несемо відповідальності за будь-які непорозуміння або неправильні тлумачення, що виникли внаслідок використання цього перекладу.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

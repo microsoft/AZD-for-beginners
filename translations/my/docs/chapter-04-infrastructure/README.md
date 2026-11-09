@@ -1,57 +1,60 @@
-# အခန်း ၄: အင်ဖရာစထရပ်ချက်ဇာတ်ကောင်အဖြစ်နှင့် ထည့်သွင်းခြင်း  
+# အခန်း ၄: Infrastructure as Code နှင့် တပ်ဆင်ခြင်း
 
-**📚 သင်ခန်းစာ**: [AZD For Beginners](../../README.md) | **⏱️ ကြာမြင့်ချိန်**: ၁-၁.၅ နာရီ | **⭐ အဆင့်**: အလယ်အလတ်  
+**📚 သင်တန်း**: [AZD For Beginners](../../README.md) | **⏱️ ကြာချိန်**: ၂-၃ နာရီစာဖတ်ရန်; တပ်ဆင်မှုလေ့ကျင့်ခန်းများအတွက် အပိုအချိန် ခွင့်ပြုပါ | **⭐ ပြင်းထန်မှု**: အလယ်အလတ်
 
----  
+---
 
-## အကျဉ်းချုပ်  
+## အနှစ်ချုပ်
 
-ဒီအခန်းမှာ Infrastructure as Code (IaC) ရဲ့ ပုံစံများကို Bicep templates နဲ့ resource provisioning နှင့် Azure Developer CLI ကို အသုံးပြုသည့် deployment များကို ဖော်ပြထားပါတယ်။  
+ဤအခန်းတွင် Infrastructure as Code (IaC) ပုံစံများကို Bicep template များဖြင့် ပုံဖော်ခြင်း၊ ရင်းမြစ်များ ဖန်တီးခြင်းနှင့် Azure Developer CLI ကို အသုံးပြု၍ တပ်ဆင်ခြင်း မဟာဗျူဟာများကို တွေ့ရှိနိုင်မည်ဖြစ်သည်။
 
-> ၂၀၂၆ ခုနှစ် ဇူလိုင်လတွင် `azd 1.27.1` နှင့် အတည်ပြုထားသည်။  
+> အမိန့်နှင့် ဖွဲ့စည်းမှု ပြန်လည်သုံးသပ်မှု၏ အာရုံစိုက်ချက်: `azd 1.37.2` (နိုဝင်ဘာ ၂၀၂၆)။ ပြန်လည်သုံးသပ်မှုတွင် လက်တွေ့ Azure provisioning မပြုလုပ်ခဲ့ပါ။
 
-## သင်ယူရမည့် ရည်မှန်းချက်များ  
+## သင်ယူရရှိစေလိုသည့် အချက်များ
 
-ဒီအခန်းကိုပြီးမြောက်ပါက သင်သည်-  
-- Bicep template ဖွဲ့စည်းမှုနှင့် စာလုံးပေါင်းနည်းကို နားလည်သည်  
-- `azd provision` ဖြင့် Azure အရင်းအမြစ်များကို provision ပြုလုပ်နိုင်သည်  
-- `azd deploy` ဖြင့် အက်ပလီကေးရှင်းများကို ထည့်သွင်းနိုင်သည်  
-- blue-green နှင့် rolling deployment များကို လုပ်ဆောင်နိုင်သည်  
+ဤအခန်းကိုပြီးမြောက်ခြင်းဖြင့် သင်သည်:
+- Bicep template ဖွဲ့စည်းမှုနှင့် စာလုံးပုံစံကို နားလည်နိုင်မည်
+- `azd provision` ဖြင့် Azure ရင်းမြစ်များ ဖန်တီးနိုင်မည်
+- `azd deploy` ဖြင့် လျှောက်လွှာများ တပ်ဆင်နိုင်မည်
+- blue-green နှင့် rolling တပ်ဆင်မှု မဟာဗျူဟာများကို အကောင်အထည်ဖော်နိုင်မည်
 
----  
+---
 
-## 📚 သင်ခန်းစာများ  
+## 📚 အတန်းများ
 
-| # | သင်ခန်းစာ | ဖော်ပြချက် | အချိန် |  
-|---|--------|-------------|------|  
-| 1 | [Provisioning Resources](provisioning.md) | AZD ဖြင့် Azure resource စီမံခန့်ခွဲမှု | ၄၅ မိနစ် |  
-| 2 | [Deployment Guide](deployment-guide.md) | အက်ပလီကေးရှင်း ထည့်သွင်းမှု မျိုးစုံ | ၄၅ မိနစ် |  
-| 3 | [Authoring Your Own Template](custom-templates.md) | အသုံးပြုနိုင်သော azd template များ ဆောက်လုပ်နှင့် ထုတ်ပြန်ခြင်း | ၃၀ မိနစ် |  
+| # | သင်ခန်းစာ | ဖော်ပြချက် | ကြာချိန် |
+|---|--------|-------------|------|
+| 1 | [ရင်းမြစ်များ ဖန်တီးခြင်း](provisioning.md) | AZD ဖြင့် Azure resource များ စီမံခန့်ခွဲခြင်း | ၄၅ မိနစ် |
+| 2 | [တပ်ဆင်ခြင်း လမ်းညွှန်](deployment-guide.md) | လျှာကာလျှောက်လွှာ တပ်ဆင်မှု မဟာဗျူဟာများ | ၄၅ မိနစ် |
+| 3 | [သင့်ကိုယ်ပိုင် Template ဖန်တီးခြင်း](custom-templates.md) | ထပ်မံအသုံးပြုနိုင်သော azd template များ တည်ဆောက်၍ ထုတ်ဝေခြင်း | ၃၀ မိနစ် |
 
----  
+---
 
-## 🚀 အမြန်စတင်ခြင်း  
+## 🚀 အမြန်စတင်ခြင်း
 
 ```bash
-# စံနမူနาจาก စတင်ခြင်း
-azd init --template azure-functions-python-v2-http
+# Initialize from template
+mkdir infrastructure-practice
+cd infrastructure-practice
+azd init --template todo-nodejs-mongo .
+azd auth login
 
-# ဖန်တီးမည့်အရာကို ကြိုကြည့်ရှုခြင်း
+# Preview what will be created
 azd provision --preview
 
-# အခြေခံအဆောက်အအုံသာ ရှိထုတ်ခြင်း
+# Provision infrastructure only
 azd provision
 
-# ကုဒ်သာ တပ်ဆင်ခြင်း
+# Deploy code only
 azd deploy
 
-# သို့မဟုတ် နှစ်ခုလုံးကိုအတူတကွ
+# Or both together
 azd up
 ```
-  
----  
 
-## 📁 AZD စီမံကိန်း ဖွဲ့စည်းမှု  
+---
+
+## 📁 AZD စီမံကိန်း ဖွဲ့စည်းမှု
 
 ```
 my-project/
@@ -65,35 +68,35 @@ my-project/
 └── src/                  # Application code
     └── api/
 ```
-  
----  
 
-## 🔧 အရေးကြီးဆုံး command များ  
+---
 
-| Command | ဖော်ပြချက် |  
-|---------|-------------|  
-| `azd init` | စီမံကိန်း စတင်ခြင်း |  
-| `azd provision` | Azure အရင်းအမြစ်များ ဖန်တီးခြင်း |  
-| `azd deploy` | အက်ပလီကေးရှင်း ကုဒ် ထည့်သွင်းခြင်း |  
-| `azd up` | provision + deploy |  
-| `azd down` | အရင်းအမြစ်များအားလုံး ဖျက်ခြင်း |  
+## 🔧 အရေးကြီးသော အမိန့်များ
 
----  
+| အမိန့် | ဖော်ပြချက် |
+|---------|-------------|
+| `azd init` | စီမံကိန်း စတင်ခြင်း |
+| `azd provision` | Azure ရင်းမြစ်များ ဖန်တီးခြင်း |
+| `azd deploy` | လျှောက်လွှာကုဒ် တပ်ဆင်ခြင်း |
+| `azd up` | ရင်းမြစ်ဖန်တီး + တပ်ဆင်ခြင်း |
+| `azd down` | ရင်းမြစ်အားလုံး ဖျက်သိမ်းခြင်း |
 
-## 🔗 လမ်းညွှန်မှု  
+---
 
-| ဘက် | အခန်း |  
-|-----------|---------|  
-| **ယခင်** | [အခန်း ၃: စနစ်ဖွဲ့ခြင်း](../chapter-03-configuration/README.md) |  
-| **နောက်တစ်ခုပေါ်** | [အခန်း ၅: Multi-Agent Solutions](../chapter-05-multi-agent/README.md) |  
+## 🔗 လမ်းညွှန်ခြင်း
 
----  
+| လမ်းညွှန်မှု | အခန်း |
+|-----------|---------|
+| **ရှေ့ဆက်** | [အခန်း ၃: ဖွဲ့စည်းမှု](../chapter-03-configuration/README.md) |
+| **နောက်တစ်ခု** | [အခန်း ၅: မျိုးစုံအေးဂျင့်ဖြေရှင်းချက်များ](../chapter-05-multi-agent/README.md) |
 
-## 📖 ဆက်စပ် အရင်းအမြစ်များ  
+---
 
-- [Pre-Deployment Checks](../chapter-06-pre-deployment/README.md)  
-- [Container App Examples](../../examples/container-app/README.md)  
-- [Database App Example](../../examples/database-app/README.md)  
+## 📖 ဆက်စပ် ရင်းမြစ်များ
+
+- [တပ်ဆင်မှုမပြုမီ စစ်ဆေးမှုများ](../chapter-06-pre-deployment/README.md)
+- [Container App ဥပမာများ](../../examples/container-app/README.md)
+- [Database App ဥပမာ](../../examples/database-app/README.md)
 
 ---
 

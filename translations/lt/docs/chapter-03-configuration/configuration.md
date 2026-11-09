@@ -1,105 +1,106 @@
-# Konfigūracijos vadovas
+# Konfigūracijos Vadovas
 
-**Skyrių naršymas:**
+**Skyriaus navigacija:**
 - **📚 Kurso pradžia**: [AZD Pradedantiesiems](../../README.md)
 - **📖 Dabartinis skyrius**: 3 skyrius - Konfigūracija ir autentifikacija
-- **⬅️ Ankstesnis**: [Jūsų pirmasis projektas](first-project.md)
+- **⬅️ Ankstesnis**: [Jūsų pirmas projektas](../chapter-01-foundation/first-project.md)
 - **➡️ Kitas**: [Diegimo vadovas](../chapter-04-infrastructure/deployment-guide.md)
 - **🚀 Kitas skyrius**: [4 skyrius: Infrastruktūra kaip kodas](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Įvadas
 
-Šis išsamus vadovas apima visus aspektus, susijusius su Azure Developer CLI konfigūravimu siekiant optimizuoti kūrimo ir diegimo darbo eigos. Sužinosite apie konfigūracijos hierarchiją, aplinkų valdymą, autentifikavimo metodus ir pažangius konfigūracijos šablonus, leidžiančius efektyviai ir saugiai diegti į Azure.
+> Peržiūrėta pagal `azd 1.37.2` (2026 m. lapkritis). Bash komandos daro prielaidą, kad azd projektas yra inicijuotas. Nors YAML/Bicep fragmentai nėra pilni failai, jie yra skirti įtraukti į atitinkamus projekto failus, o ne būti atskirais vykdomais projektais.
+
+Ši išsami instrukcija apima visus Azure Developer CLI konfigūravimo aspektus optimaliai programavimo ir diegimo eigai. Sužinosite apie konfigūracijos hierarchiją, aplinkų valdymą, autentifikavimo metodus ir pažangius konfigūracijos šablonus, kurie leidžia efektyviai ir saugiai vykdyti Azure diegimus.
 
 ## Mokymosi tikslai
 
-Pamokos pabaigoje jūs:
-- Išmoksite azd konfigūracijos hierarchiją ir suprasite, kaip nustatymai yra prioritizuojami
-- Efektyviai sukonfigūruosite globalius ir projektui specifinius nustatymus
+Baigę šią pamoką, Jūs:
+- Įvaldysite azd konfigūracijos hierarchiją ir suprasite, kaip nustatymai teikiami prioriteto tvarka
+- Veiksmingai sukonfigūruosite globalius ir projekto specifinius nustatymus
 - Valdysite kelias aplinkas su skirtingomis konfigūracijomis
-- Įgyvendinsite saugius autentifikavimo ir autorizavimo šablonus
-- Suprasite pažangius konfigūracijos modelius sudėtingoms situacijoms
+- Įgyvendinsite saugius autentifikavimo ir autorizacijos šablonus
+- Suprasite pažangius konfigūracijos šablonus sudėtingoms situacijoms
 
 ## Mokymosi rezultatai
 
-Baigę šią pamoką galėsite:
-- Sukonfigūruoti azd optimaliam kūrimo darbo srautui
-- Nustatyti ir valdyti kelias diegimo aplinkas
-- Įdiegti saugias konfigūracijos valdymo praktikas
+Baigę pamoką, sugebėsite:
+- Suvienodinti azd konfiguraciją optimaliai kūrimo eigai
+- Sukurti ir valdyti kelias diegimo aplinkas
+- Įgyvendinti saugią konfigūracijos valdymo praktiką
 - Spręsti su konfigūracija susijusias problemas
-- Priderinti azd elgseną pagal konkrečius organizacijos reikalavimus
+- Priderinti azd veikimą prie specifinių organizacijos poreikių
 
-Šis išsamus vadovas apima visus aspektus, susijusius su Azure Developer CLI konfigūravimu siekiant optimizuoti kūrimo ir diegimo darbo eigos.
+Ši išsami instrukcija apima visus Azure Developer CLI konfigūravimo aspektus optimaliai programavimo ir diegimo eigai.
 
 ## AI agentų supratimas azd projekte
 
-Jei esate naujas dėl AI agentų, štai paprastas paaiškinimas, kaip juos suprasti azd pasaulyje.
+Jei AI agentai jums naujiena, štai paprastas būdas juos suprasti azd kontekste.
 
 ### Kas yra agentas?
 
-Agentas yra programinė įranga, kuri gali priimti užklausą, apmąstyti ją ir atlikti veiksmus – dažnai kviesdama AI modelį, ieškodama duomenų arba kviesdama kitas paslaugas. Azd projekte agentas yra tiesiog kita **paslauga** kartu su jūsų žiniatinklio priekiu ar API užpakaliu.
+Agentas yra programinės įrangos komponentas, kuris gali priimti užklausą, ją analizuoti ir imtis veiksmų – dažnai kviečiant AI modelį, ieškant duomenų ar kviečiant kitas paslaugas. azd projekte agentas yra tiesiog dar viena **paslauga** šalia jūsų svetainės frontendo ar API backend'o.
 
-### Kaip agentai dera į azd projekto struktūrą
+### Kaip agentai integruojasi į azd projekto struktūrą
 
-azd projektą sudaro trys sluoksniai: **infrastruktūra**, **kodas** ir **konfigūracija**. Agentai prisijungia prie šių sluoksnių taip pat, kaip ir kitos paslaugos:
+azd projektas susideda iš trijų sluoksnių: **infrastruktūra**, **kodas** ir **konfigūracija**. Agentai prijungiami prie šių sluoksnių taip pat, kaip ir bet kuri kita paslauga:
 
-| Sluoksnis | Ką tai daro tradicinei programai | Ką tai daro agentui |
+| Sluoksnis | Ką jis daro tradicinėje programėlėje | Ką jis daro agentui |
 |-------|-------------------------------------|---------------------------|
-| **Infrastruktūra** (`infra/`) | Sukuria žiniatinklio programą ir duomenų bazę | Sukuria AI modelio galinį tašką, paieškos indeksą arba agento talpyklą |
-| **Kodas** (`src/`) | Sudėtyje yra jūsų priekinės dalies ir API šaltinio kodas | Sudėtyje yra agento logika ir promptų apibrėžimai |
-| **Konfigūracija** (`azure.yaml`) | Išvardina jūsų paslaugas ir jų talpinimo tikslus | Išvardina jūsų agentą kaip paslaugą, nurodant jo kodą ir talpą |
+| **Infrastruktūra** (`infra/`) | Teikia interneto programėlę ir duomenų bazę | Teikia AI modelio galinį tašką, paieškos indeksą ar agento talpinimą |
+| **Kodas** (`src/`) | Turi jūsų frontend ir API šaltinio kodą | Turi jūsų agento logiką ir nurodymų aprašymus |
+| **Konfigūracija** (`azure.yaml`) | Nurodo jūsų paslaugas ir jų talpinimo tikslinius taškus | Nurodo jūsų agentą kaip paslaugą, nurodydama jo kodą ir talpinimą |
 
 ### `azure.yaml` vaidmuo
 
-Jums dabar nereikia įsiminti sintaksės. Konceptualiai `azure.yaml` yra failas, kuriame pasakote azd: "Štai paslaugos, sudarančios mano programą, ir čia yra jų kodas."
+Neturite dabar įsiminti sintaksės. Konceptualiai, `azure.yaml` yra failas, kuriame sakote azd: *„Štai paslaugos, kurios sudaro mano programėlę, ir čia yra jų kodas.“*
 
-Kai jūsų projekte yra AI agentas, `azure.yaml` tiesiog nurodo tą agentą kaip vieną iš paslaugų. azd tada žino, kokią infrastruktūrą suteikti (pvz., Microsoft Foundry Models galinį tašką arba Container App agento talpinimui) ir išdėsto jūsų agento kodą – taip pat, kaip tai darytų su žiniatinklio programa ar API.
+Kai jūsų projekte yra AI agentas, `azure.yaml` tiesiog įrašo jį kaip vieną iš paslaugų. Tada azd žino, kad reikia paruošti tinkamą infrastruktūrą (pvz., Microsoft Foundry Models galinį tašką ar konteinerių programėlę agento talpinimui) ir įdiegti jūsų agento kodą – taip pat, kaip tai darytų su interneto programa ar API.
 
-Tai reiškia, kad nėra nieko esminio naujo mokytis. Jei suprantate, kaip azd valdo žiniatinklio paslaugą, jau suprantate, kaip jis valdo agentą.
+Tai reiškia, kad nėra fundamentalių naujovių. Jei suprantate, kaip azd valdo interneto paslaugą, jūs jau suprantate, kaip valdo agentą.
 
 ## Konfigūracijos hierarchija
 
-azd naudoja hierarchinę konfigūracijos sistemą:
-1. **Komandinės eilutės parametrai** (aukščiausias prioritetas)
-2. **Aplinkos kintamieji**
-3. **Vietinė projekto konfigūracija** (`.azd/config.json`)
-4. **Globali vartotojo konfigūracija** (`~/.azd/config.json`)
-5. **Numatytosios reikšmės** (žemiausias prioritetas)
+azd turi atskiras konfigūracijos vietas, o ne vieną universalų sluoksnį:
+- **Globalios vartotojo nuostatos**: `~/.azd/config.json`, valdomos `azd config`.
+- **Projekto apibrėžtis**: `azure.yaml` nurodo paslaugas, infrastruktūrą ir krantines.
+- **Vietinė aplinkos pasirinktis**: `.azure/config.json`.
+- **Pagal aplinką nustatymai**: `.azure/<name>/.env`, valdomi `azd env`; papildomi nustatymai gyvena tos aplinkos `config.json`.
+- **Žymos ir proceso kintamieji**: perrašo tik tuos nustatymus, kuriuos palaiko konkretus komandos/tiekėjo palaikymas.
+
+Atsitiktinė `azd env set` reikšmė automatiškai netampa infrastruktūros parametru ar diegiamojo programos nustatymu. Aiškiai nurodykite ją parametrų faile, palaikomame paslaugos konfigūracijoje arba krantinėje.
 
 ## Globali konfigūracija
 
-### Globalių numatytųjų nustatymų nustatymas
+### Globalių numatytųjų reikšmių nustatymas
 ```bash
-# Nustatyti numatytąją prenumeratą
+# Set default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# Nustatyti numatytąją vietą
+# Set default location
 azd config set defaults.location "eastus2"
 
-# Nustatyti numatytąją išteklių grupės pavadinimų konvenciją
-azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
-
-# Peržiūrėti visą globalią konfigūraciją
+# View all global configuration
 azd config show
 
-# Pašalinti konfigūraciją
+# Remove a configuration
 azd config unset defaults.location
 ```
 
-### Įprasti globalūs nustatymai
+### Dažnai naudojami globalūs nustatymai
 ```bash
-# Plėtros nuostatos
-azd config set alpha.enable true                    # Įjungti alfa funkcijas
-azd config set telemetry.enabled false             # Išjungti telemetriją
-azd config set output.format json                  # Nustatyti išvesties formatą
+# Discover supported settings instead of inventing configuration keys
+azd config options
+azd config list-alpha
 
-# Saugumo nustatymai
-azd config set auth.useAzureCliCredential true     # Naudoti Azure CLI autentifikacijai
-azd config set tls.insecure false                  # Reikalauti TLS patikros
+# Explicit opt-in only: use Azure CLI credentials rather than azd's default login
+azd config set auth.useAzCliAuth true
+# Restore azd's default credential behavior
+azd config unset auth.useAzCliAuth
 
-# Našumo derinimas
-azd config set provision.parallelism 5             # Paralelinis išteklių kūrimas
-azd config set deploy.timeout 30m                  # Diegimo laiko limitas
+# Use per-command flags for supported behavior
+azd show --output json
+azd deploy --timeout 1800   # seconds; stops waiting, not the Azure-side deployment
 ```
 
 ## 🏗️ Projekto konfigūracija
@@ -112,7 +113,6 @@ azd config set deploy.timeout 30m                  # Diegimo laiko limitas
 name: my-awesome-app
 metadata:
   template: my-template@1.0.0
-  templateBranch: main
 
 # Service definitions
 services:
@@ -129,21 +129,13 @@ services:
     language: python
     host: containerapp
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-    
-  # Database service
-  database:
-    project: ./src/db
-    host: postgres
+      context: .
+      path: Dockerfile
     
 # Infrastructure configuration
 infra:
   provider: bicep                   # Infrastructure provider
   path: ./infra                    # Infrastructure code location
-  parameters:
-    environmentName: ${AZURE_ENV_NAME}
-    location: ${AZURE_LOCATION}
 
 # Deployment hooks
 hooks:
@@ -181,9 +173,11 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Paslaugų konfigūracijos parinktys
+Tai yra **projekto apibrėžties pavyzdys**, o ne tiekimas paleidimui. Sukurkite nurodytas šaltinio katalogus, krantinių scenarijus, paketų scenarijus ir atitinkančius `infra/main.bicep`/`main.parameters.json` prieš paleisdami. Duomenų bazės priklauso infrastruktūrai; `postgres` nėra įmontuota paslaugos talpinimo vieta. Infrastruktūros parametrai įrašomi į tiekėjo parametrų failą, o ne į `infra.parameters`.
 
-#### Talpinimo tipai
+### Paslaugos konfigūracijos parinktys
+
+#### Hostingo tipai
 ```yaml
 services:
   web-static:
@@ -202,46 +196,53 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Kalbai specifiniai nustatymai
+#### Kalbai specifiški krantinių šablonai
+
+Toliau pateikti paslaugų fragmentai iliustruoja krantines; juos sujunkite su kiekvienos paslaugos tikru `project` ir `host`. `buildCommand` ir `startCommand` nėra bendri azd paslaugų atributai. Paleidimą konfigūruokite programėlėje, Docker faile arba hostingo infrastruktūroje.
+
 ```yaml
 services:
   node-app:
+    project: ./src/node
+    host: appservice
     language: js
-    buildCommand: npm run build
-    startCommand: npm start
+    hooks:
+      prepackage:
+        shell: sh
+        run: npm run build
     
   python-app:
+    project: ./src/python
+    host: appservice
     language: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
     
   dotnet-app:
+    project: ./src/dotnet
+    host: appservice
     language: csharp
-    buildCommand: dotnet build
-    startCommand: dotnet run
     
   java-app:
+    project: ./src/java
+    host: appservice
     language: java
-    buildCommand: mvn clean package
-    startCommand: java -jar target/app.jar
 ```
 
 ## 🌟 Aplinkos valdymas
 
 ### Aplinkų kūrimas
 ```bash
-# Sukurti naują aplinką
+# Create a new environment
 azd env new development
 
-# Sukurti konkrečioje vietoje
+# Create with specific location
 azd env new staging --location "westus2"
 
-# Sukurti iš šablono
+# Create from template
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
 ### Aplinkos konfigūracija
-Kiekviena aplinka turi savo konfigūraciją faile `.azure/<env-name>/config.json`:
+Pagrindinės aplinkos reikšmės saugomos `.azure/<env-name>/.env`, įskaitant `AZURE_ENV_NAME`, `AZURE_SUBSCRIPTION_ID` ir `AZURE_LOCATION`. Naudokite `azd env config get/set` papildomiems aplinkos JSON nustatymams. Šis JSON yra **konceptuali programėlės būsena**, o ne azd konfigūracijos schema; neperkelkite jo į azd failus:
 
 ```json
 {
@@ -264,129 +265,133 @@ Kiekviena aplinka turi savo konfigūraciją faile `.azure/<env-name>/config.json
 ```
 
 ### Aplinkos kintamieji
+
+**Tik paprasto teksto demonstravimui.** Paprastos `azd env set` reikšmės rašomos į `.azure/<name>/.env` ir gali būti atspausdintos skaitymo komandomis. Nenaudokite pavyzdinio API rakto kaip tikro įgaliojimo. Slaptumams naudokite `azd env set-secret` ir aiškų vykdymo laiko susiejimą.
+
 ```bash
-# Nustatyti aplinkai būdingus kintamuosius
+# Set environment-specific variables
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# Peržiūrėti aplinkos kintamuosius
+# View environment variables
 azd env get-values
 
-# Tikėtina išvestis:
+# Expected output:
 # DATABASE_URL=postgresql://user:pass@host:5432/db
 # API_KEY=secret-api-key
 # DEBUG=true
 
-# Pašalinti aplinkos kintamąjį
+# Remove environment variable
 azd env unset DEBUG
 
-# Patikrinti pašalinimą
+# Verify removal
 azd env get-values | grep DEBUG
-# (neturėtų nieko grąžinti)
+# (should return nothing)
 ```
 
 ### Aplinkos šablonai
-Sukurkite `.azure/env.template`, kad užtikrintumėte nuoseklų aplinkos nustatymą:
+Sukurkite **neslaptą, rankiniu būdu tvarkomą** `.env.example` projekto šaknyje nuosekliam nustatymui. azd automatiškai nekrauna failo pavadinimu `env.template`:
 ```bash
-# Būtini kintamieji
+# Required variables
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Programos nustatymai
+# Application settings
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Pasirenkami kūrimo nustatymai
+# Optional development settings
 DEBUG=false
 LOG_LEVEL=info
 ```
 
-### Aplinkų dalijimasis tarp komandos
+### Aplinkų dalijimasis komandoje
 
-Kai projekte dirba daugiau nei vienas asmuo, turite susitarti dėl to, **kas keliauja su repozitorija ir kas lieka vietinis**. azd laiko kiekvieną aplinką po `.azure/` aplanku, ir ne viską reikėtų įtraukti į versijų kontrolę.
+Kai projekte dirba daugiau nei vienas asmuo, turite susitarti, **kas keliauja kartu su repozitorija ir kas lieka vietinis**. azd kiekvieną aplinką laiko po `.azure/` katalogu, tačiau ne visa turinį reikia įkelti į versijų valdymą.
 
-**Ką sudaro `.azure/`:**
+**Kas yra `.azure/`:**
 
 ```
 .azure/
 ├── config.json              # which env is currently selected (local)
 └── <env-name>/
-    ├── config.json          # subscription, location, resource IDs
-    └── .env                 # environment variables (may contain secrets!)
+    ├── config.json          # additional environment settings
+    └── .env                 # subscription, location, outputs; may contain secrets!
 ```
 
-**Ką įtraukti į `.gitignore`.** azd numatytasis `.gitignore` jau neįtraukia `.azure/`. Laikykite taip — `.env` failai gali turėti paslaptis, o išteklių ID yra susiję su tuo, kas juos sukūrė. Kiekvienas komandos narys sukuria **savo** aplinką lokaliai:
+**Ką ignoruoti git.** azd numatytasis `.gitignore` jau pašalina `.azure/`. Palikite taip – `.env` failuose gali būti slapta informacija, o ištekliai priklauso tam, kas juos pasirūpino. Kiekvienas komandos narys vietoje kuria savo **vietinę** aplinką:
 
 ```bash
-# Kiekvienas kūrėjas tai paleidžia vieną kartą, kad gautų savo izoliuotą aplinką
+# Every developer runs this once to get their own isolated environment
 azd env new dev-alice
 azd up
 ```
 
-**Aplinkų perjungimas.** Kūrėjas, valdantis kelias aplinkas, pasirenka aktyvią prieš vykdant komandas:
+**Aplinkų perjungimas.** Kūrėjas, valdantis kelias aplinkas, prieš vykdydamas komandas pasirenka aktyvią aplinką:
 
 ```bash
-azd env list                 # pamatyti visas vietines aplinkas ir kuri iš jų yra numatytoji
-azd env select staging       # padaryti 'staging' aktyvia aplinka
-azd env get-values           # patvirtinkite, kad esate nukreiptas į tinkamą aplinką
+azd env list                 # see all local environments and which is default
+azd env select staging       # make 'staging' the active environment
+azd env get-values           # confirm you're pointed at the right one
 ```
 
-**Neslaptinių numatytųjų reikšmių pateikimas komandai.** Įsipareigokite šabloną (pvz., `.azure/env.template` aukščiau), kad visi žinotų, kuriuos kintamuosius nustatyti — bet niekada neįsipareigokite užpildytų reikšmių. Nauji komandos nariai nukopijuoja šabloną ir užpildo savo.
+**Nesecreto numatytųjų teikimas komandai.** Įtraukite `.env.example` už ignoruojamo `.azure/` katalogo ribų. Nauji komandos nariai nukopijuoja jį į savo vietinį ignoruojamą failą, užpildo reikšmes ir aiškiai įkelia naudojant `azd env set --file <local-file>`. Niekada neimportuokite tuščių vietų dirbant veikiant aplinkai.
 
-**Aplinkos CI/CD.** Darbo eigos neperskaito jūsų vietinio `.azure/` aplanko. Vietoje to pateikite aplinkos reikšmes kaip pipeline kintamuosius / slaptus duomenis, o azd jas nuskaito iš proceso aplinkos:
+**Aplinka CI/CD.** Vamzdynai neskaito jūsų vietinio `.azure/` katalogo. Vietoj to, teikite aplinkos reikšmes kaip vamzdžio kintamuosius/slaptus duomenis, o azd juos skaito iš proceso aplinkos:
 
 ```bash
-# CI metu azd skaito juos iš aplinkos, o ne iš .azure/
+# In CI, azd reads these from the environment, not from .azure/
 export AZURE_ENV_NAME=production
 export AZURE_LOCATION=eastus2
-export AZURE_SUBSCRIPTION_ID=<sub-id>
+export AZURE_SUBSCRIPTION_ID="<sub-id>"
 azd provision --no-prompt
 azd deploy --no-prompt
 ```
 
-> **Bendroji taisyklė:** infrastruktūros kodas (`infra/`, `azure.yaml`) dalijamas Git; aplinkos *būsena ir paslaptys* (`.azure/`) yra kiekvienam kūrėjui ir kiekvienai pipeline. `azd pipeline config` automatiškai nustato pipeline kintamuosius jums.
+> **Praktinis patarimas:** infrastruktūros kodui (`infra/`, `azure.yaml`) dalijamasi Git, o aplinkos *būsena ir slaptumai* (`.azure/`) yra kiekvienam kūrėjui ir vamzdžiui atskirai. `azd pipeline config` automatiškai sukonfigūruoja vamzdžio kintamuosius.
 
 ## 🔐 Autentifikacijos konfigūracija
 
 ### Azure CLI integracija
 ```bash
-# Naudokite Azure CLI prisijungimo duomenis (numatytieji)
-azd config set auth.useAzureCliCredential true
+# Explicit opt-in; NOT the default
+azd config set auth.useAzCliAuth true
 
-# Prisijunkite su konkrečiu nuomininku
-az login --tenant <tenant-id>
+# Login with specific tenant
+az login --tenant "<tenant-id>"
 
-# Nustatykite numatytąją prenumeratą
-az account set --subscription <subscription-id>
+# Set default subscription
+az account set --subscription "<subscription-id>"
 ```
 
 ### Service Principal autentifikacija
-CI/CD pipeline'ams:
+CI/CD vamzdynams:
 ```bash
-# Nustatykite aplinkos kintamuosius
+# Set environment variables
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Arba sukonfigūruokite tiesiogiai
-azd config set auth.clientId "your-client-id"
-azd config set auth.tenantId "your-tenant-id"
+# Authenticate azd explicitly (prefer pipeline federation over a long-lived secret)
+azd auth login --client-id "$AZURE_CLIENT_ID" \
+  --client-secret "$AZURE_CLIENT_SECRET" --tenant-id "$AZURE_TENANT_ID"
 ```
 
-### Valdomas identitetas
+### Valdoma tapatybė (Managed Identity)
 Azure talpinamoms aplinkoms:
 ```bash
-# Įgalinti valdomo identiteto autentifikaciją
-azd config set auth.useMsi true
-azd config set auth.msiClientId "your-managed-identity-client-id"
+# Enable managed identity authentication
+azd auth login --managed-identity
+# Alternative: choose an identity assigned to the host by client ID
+azd auth login --managed-identity --client-id "<managed-identity-client-id>"
 ```
 
 ## 🏗️ Infrastruktūros konfigūracija
 
 ### Bicep parametrai
-Konfigūruokite infrastruktūros parametrus faile `infra/main.parameters.json`:
+Konfigūruokite infrastruktūros parametrus `infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -409,12 +414,13 @@ Konfigūruokite infrastruktūros parametrus faile `infra/main.parameters.json`:
 ```
 
 ### Terraform konfigūracija
-Terraform projektams konfigūruokite faile `infra/terraform.tfvars`:
-```hcl
-environment_name = "${AZURE_ENV_NAME}"
-location = "${AZURE_LOCATION}"
-app_service_sku = "B1"
-database_sku = "GP_Gen5_2"
+Terraform projektams azd keičia vietas `infra/main.tfvars.json`. Šie pavadinimai turi atitikti deklaruotus Terraform įvesties kintamuosius:
+```json
+{
+  "environment_name": "${AZURE_ENV_NAME}",
+  "location": "${AZURE_LOCATION}",
+  "app_service_sku": "B1"
+}
 ```
 
 ## 🚀 Diegimo konfigūracija
@@ -425,21 +431,27 @@ database_sku = "GP_Gen5_2"
 services:
   web:
     project: ./src/web
+    host: appservice
     language: js
-    buildCommand: npm run build:prod
-    buildEnvironment:
-      NODE_ENV: production
-      REACT_APP_API_URL: ${API_URL}
     dist: build
+    hooks:
+      prepackage:
+        shell: sh
+        run: |
+          set -e
+          NODE_ENV=production REACT_APP_API_URL="$API_URL" npm run build:prod
     
   api:
     project: ./src/api
+    host: appservice
     language: python
-    buildCommand: |
-      pip install -r requirements.txt
-      python -m pytest tests/
-    buildEnvironment:
-      PYTHONPATH: src
+    hooks:
+      prepackage:
+        shell: sh
+        run: |
+          set -e
+          python -m pip install -r requirements.txt
+          PYTHONPATH=src python -m pytest tests/
 ```
 
 ### Docker konfigūracija
@@ -449,51 +461,41 @@ services:
     project: ./src/api
     host: containerapp
     docker:
-      context: ./src/api
-      dockerfile: Dockerfile
-      target: production
+      context: .
+      path: Dockerfile
       buildArgs:
-        NODE_ENV: production
-        API_VERSION: v1.0.0
+        - NODE_ENV=production
+        - API_VERSION=v1.0.0
 ```
-Pavyzdinis `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
+Keliai yra santykiniai paslaugos projektui. Dockerfile turi deklaruoti visus naudojamus `ARG`. Daugiasluoksniam kūrimui paskutinė turi būti diegimo stadija arba naudokite individualų paketų kūrimo procesą; `docker.target` nėra palaikomas požymis peržiūrėtoje schemoje.
 
 ## 🔧 Pažangi konfigūracija
 
-### Tinkintas išteklių pavadinimas
-```bash
-# Nustatyti vardų konvencijas
-azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
-azd config set naming.storageAccount "{project}{env}sa"
-azd config set naming.keyVault "kv-{project}-{env}"
+### Individualių išteklių pavadinimų nustatymas
+```yaml
+# azure.yaml fragment: override resource-group discovery where appropriate
+resourceGroup: rg-${AZURE_ENV_NAME}
 ```
+
+Apibrėžkite faktinius išteklių pavadinimus Bicep/Terraform ir užtikrinkite išteklių grupės sudarymo nuoseklumą su šiuo nustatymu. Nėra bendrų `naming.storageAccount` ar `naming.keyVault` rakto konfigūracijų.
 
 ### Tinklo konfigūracija
-```yaml
-# In azure.yaml
-infra:
-  provider: bicep
-  parameters:
-    vnetAddressPrefix: "10.0.0.0/16"
-    subnetAddressPrefix: "10.0.1.0/24"
-    enablePrivateEndpoints: true
+```json
+{
+  "vnetAddressPrefix": { "value": "10.0.0.0/16" },
+  "subnetAddressPrefix": { "value": "10.0.1.0/24" },
+  "enablePrivateEndpoints": { "value": true }
+}
 ```
 
+Sujunkite šiuos **iliustracinius parametrų įrašus** į `infra/main.parameters.json` po `parameters` ir deklaruokite bei naudokite atitinkančius parametrus Bicep. Jie savaime nieko nedaro.
+
 ### Stebėjimo konfigūracija
-```yaml
-# In azure.yaml
-monitoring:
-  applicationInsights:
-    enabled: true
-    samplingPercentage: 100
-  logAnalytics:
-    enabled: true
-    retentionDays: 30
-```
+Paruoškite Application Insights ir Log Analytics Bicep/Terraform ir sukonfigūruokite programėlės telemetriją savo SDK. Nėra bendro aukšto lygio `monitoring` bloko `azure.yaml`, kuris sukurtų šiuos išteklius. Peržiūrėkite [stebėjimo infrastruktūrą](../chapter-04-infrastructure/provisioning.md#-monitoring-and-observability).
 
 ## 🎯 Aplinkai specifinės konfigūracijos
 
-### Vystymo aplinka
+### Kūrimo aplinka
 ```bash
 # .azure/development/.env
 DEBUG=true
@@ -502,9 +504,9 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Parengimo aplinka
+### Bandymų aplinka
 ```bash
-# .azure/parengimo/.env
+# .azure/staging/.env
 DEBUG=false
 LOG_LEVEL=info
 ENABLE_MONITORING=true
@@ -520,22 +522,23 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Konfigūracijos tikrinimas
+## 🔍 Konfigūracijos patikra
 
-### Konfigūracijos patikrinimas
+### Patikrinkite konfigūraciją
 ```bash
-# Patikrinti konfigūracijos sintaksę
-azd config validate
+# Inspect supported global settings and current project
+azd config options
+azd show
 
-# Patikrinti aplinkos kintamuosius
+# Test environment variables
 azd env get-values
 
-# Patikrinti infrastruktūrą
-azd provision --dry-run
+# Validate infrastructure
+azd provision --preview
 ```
 
-### Konfigūracijos skriptai
-Sukurkite patikros skriptus kataloge `scripts/`:
+### Konfigūracijos scenarijai
+Kurkite patikros scenarijus `scripts/`:
 
 ```bash
 #!/bin/bash
@@ -543,15 +546,15 @@ Sukurkite patikros skriptus kataloge `scripts/`:
 
 echo "Validating configuration..."
 
-# Patikrinti reikiamus aplinkos kintamuosius
+# Check required environment variables
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# Patikrinti azure.yaml sintaksę
-if ! azd config validate; then
-  echo "Error: Invalid azure.yaml configuration"
+# Ask azd to load the project (not full schema or infrastructure validation)
+if ! azd show --output json; then
+  echo "Error: Could not load the azd project"
   exit 1
 fi
 
@@ -566,16 +569,20 @@ echo "Configuration validation passed!"
 database:
   connectionString: ${DATABASE_CONNECTION_STRING}
 
+```
+
+Venkite jautrių reikšmių įkietinimo (atskirai iliustracinei konfigūracijai, o ne antram `database` raktui tame pačiame faile):
+
+```yaml
 # Avoid: Hardcode sensitive values
 database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Tvarkykite konfigūracijos failus
+### 2. Organizuokite konfigūracijos failus
 ```
 .azure/
 ├── config.json              # Global project config
-├── env.template             # Environment template
 ├── development/
 │   ├── config.json         # Dev environment config
 │   └── .env                # Dev environment variables
@@ -587,16 +594,16 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Versijų valdymo svarstymai
+### 3. Versijų valdymo aspektai
 ```bash
 # .gitignore
-.azure/*/config.json         # Aplinkos konfigūracijos (turi išteklių ID)
-.azure/*/.env               # Aplinkos kintamieji (gali turėti slaptus duomenis)
-.env                        # Vietinis aplinkos failas
+.azure/*/config.json         # Environment configs (contain resource IDs)
+.azure/*/.env               # Environment variables (may contain secrets)
+.env                        # Local environment file
 ```
 
 ### 4. Konfigūracijos dokumentacija
-Dokumentuokite savo konfigūraciją faile `CONFIG.md`:
+Dokumentuokite savo konfigūraciją `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -613,86 +620,85 @@ Dokumentuokite savo konfigūraciją faile `CONFIG.md`:
 
 ## 🎯 Praktinės užduotys
 
-### Užduotis 1: Kelių aplinkų konfigūracija (15 minučių)
+### Užduotis 1: Daugiaprodukcinė konfigūracija (15 minučių)
 
-**Tikslas**: Sukurti ir sukonfigūruoti tris aplinkas su skirtingais nustatymais
+**Tikslas**: Sukurti ir konfigūruoti tris vietines aplinkas su skirtingomis reikšmėmis. Pradėkite nuo inicijuoto projekto; jei šios jau egzistuoja, naudokite nenaudojamus vardus. Šios programėlės specifinės reikšmės nekeičia telemetrijos / vykdymo laiko nustatymų, kol jūsų šablonas jų nesunaudoja.
 
 ```bash
-# Sukurti vystymo aplinką
+# Create development environment
 azd env new dev
 azd env set LOG_LEVEL debug
 azd env set ENABLE_TELEMETRY false
 azd env set APP_INSIGHTS_SAMPLING 100
 
-# Sukurti parengiamąją aplinką
+# Create staging environment
 azd env new staging
 azd env set LOG_LEVEL info
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 50
 
-# Sukurti gamybinę aplinką
+# Create production environment
 azd env new production
 azd env set LOG_LEVEL error
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 10
 
-# Patikrinti kiekvieną aplinką
+# Verify each environment
 azd env select dev && azd env get-values
 azd env select staging && azd env get-values
 azd env select production && azd env get-values
 ```
 
 **Sėkmės kriterijai:**
-- [ ] Trys aplinkos sėkmingai sukurtos
+- [ ] Sekmingai sukurtos trys aplinkos
 - [ ] Kiekviena aplinka turi unikalią konfigūraciją
-- [ ] Galima perjungti aplinkas be klaidų
+- [ ] Galima be klaidų perjunginėti aplinkas
 - [ ] `azd env list` rodo visas tris aplinkas
 
-### Užduotis 2: Slaptųjų reikšmių valdymas (10 minučių)
+### Užduotis 2: Key Vault slaptų reikšmių nuorodos (10-20 minučių)
 
-**Tikslas**: Praktikuoti saugią konfigūraciją su jautriais duomenimis
+**Tikslas**: Vietoj paprasto teksto saugoti Key Vault nuorodą. **Pradinė būsena:** inicijuota aplinka, prisijungimas prie Azure ir prieiga prie Key Vault su teise sukurti / skaityti bandomąjį slaptumą. Valdymo operacijos gali kainuoti.
 
 ```bash
-# Nustatyti slaptus duomenis (nebus rodomi išvestyje)
-azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
-azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
+# Follow the interactive prompts; use a dummy training value, not a production key
+azd env set-secret TRAINING_API_KEY
 
-# Nustatyti neslaptą konfigūraciją
+# Set non-secret config
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# Peržiūrėti aplinką (slaptieji duomenys turėtų būti užmaskuoti)
-azd env get-values
-
-# Patikrinti, ar slaptieji duomenys yra saugomi
-azd env get DB_PASSWORD  # Turėtų rodyti tikrąją reikšmę
+# Inspect .azure/<environment>/.env locally: TRAINING_API_KEY should
+# contain an azd Key Vault reference, not the dummy secret text.
+# Do not print resolved values in CI or shared terminal logs.
 ```
 
 **Sėkmės kriterijai:**
-- [ ] Slaptažodžiai saugomi neparodomi terminale
-- [ ] `azd env get-values` rodo užmaskuotus slaptažodžius
-- [ ] Individualus `azd env get <SECRET_NAME>` grąžina faktinę reikšmę
+- [ ] Interaktyvi komanda praneša apie pasirinktą raktavimo reikšmę ir slaptumo nuorodą
+- [ ] Vietinė `.env` turi nuorodą, o ne bandomąjį slaptumą
+- [ ] Gali paaiškinti, kad vis tiek reikia sukonfigūruoti vykdymo laiko tapatybę / RBAC ir vartojimą
 
-## Tolimesni veiksmai
+**Dažnos problemos:** 403 yra dėl tinkamos rinkinio duomenų plano rolės ir propagacijos laiko; `azd env set ... --secret` nėra galiojanti komanda. Paprastas `get-values`/`get-value` išvestis neturėtų būti laikoma slėpta. Pašalinkite mokymo nuorodą naudojant `azd env unset TRAINING_API_KEY`; tai neištrina raktavimo slaptumo, kurį privalote atskirai sutvarkyti, jei jį sukūrėte.
 
-- [Jūsų pirmasis projektas](first-project.md) - Taikyti konfigūraciją praktikoje
-- [Diegimo vadovas](../chapter-04-infrastructure/deployment-guide.md) - Naudoti konfigūraciją diegimui
-- [Išteklių suteikimas](../chapter-04-infrastructure/provisioning.md) - Produkcijai paruoštos konfigūracijos
+## Tolimesni žingsniai
+
+- [Jūsų pirmas projektas](../chapter-01-foundation/first-project.md) - Konfigūracijos taikymas praktikoje
+- [Diegimo vadovas](../chapter-04-infrastructure/deployment-guide.md) - Konfigūracijos naudojimas diegimui
+- [Ištekliai ir paruošimas](../chapter-04-infrastructure/provisioning.md) - Produkcijai paruoštos konfigūracijos
 
 ## Nuorodos
 
-- [azd Configuration Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [azure.yaml schemos](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Aplinkos kintamieji](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [azd konfigūracijos nuoroda](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azure.yaml schema](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-schema)
+- [Aplinkos kintamieji](https://learn.microsoft.com/azure/developer/azure-developer-cli/manage-environment-variables)
 
 ---
 
-**Skyrių naršymas:**
+**Skyriaus navigacija:**
 - **📚 Kurso pradžia**: [AZD Pradedantiesiems](../../README.md)
 - **📖 Dabartinis skyrius**: 3 skyrius - Konfigūracija ir autentifikacija
-- **⬅️ Ankstesnis**: [Jūsų pirmasis projektas](first-project.md)
+- **⬅️ Ankstesnis**: [Jūsų pirmasis projektas](../chapter-01-foundation/first-project.md)
 - **➡️ Kitas skyrius**: [4 skyrius: Infrastruktūra kaip kodas](../chapter-04-infrastructure/deployment-guide.md)
-- **Kita pamoka**: [Jūsų pirmasis projektas](first-project.md)
+- **Kita pamoka**: [Autentifikacija ir saugumas](authsecurity.md)
 
 ---
 

@@ -1,175 +1,175 @@
-# Žodynas - Azure ir AZD terminologija
+# Žodynas – Azure ir AZD terminologija
 
-**Nuoroda į visus skyrius**
-- **📚 Kurso pradžia**: [AZD For Beginners](../README.md)
-- **📖 Išmokite pagrindų**: [Chapter 1: AZD Basics](../docs/getting-started/azd-basics.md)
-- **🤖 Dirbtinio intelekto terminai**: [Chapter 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+**Referencija visiems skyriams**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../README.md)
+- **📖 Pagrindų mokymasis**: [1 skyrius: AZD pagrindai](../docs/chapter-01-foundation/azd-basics.md)
+- **🤖 DI terminai**: [2 skyrius: DI-pirmojo kūrimo metodai](../docs/chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Įvadas
 
-Šis išsamus žodynas pateikia apibrėžimus terminams, sąvokoms ir santrumpoms, naudojamoms Azure Developer CLI ir Azure debesų vystyme. Esminė priemonė suprasti techninę dokumentaciją, šalinti gedimus ir aiškiai bendrauti apie azd projektus bei Azure paslaugas.
+Šis išsamus žodynas pateikia apibrėžimus terminams, sąvokoms ir santrumpoms, naudotoms Azure Developer CLI ir Azure debesų kūrime. Esminė priemonė suprasti techninę dokumentaciją, spręsti problemas ir efektyviai bendrauti apie azd projektus ir Azure paslaugas.
 
 ## Mokymosi tikslai
 
-Naudodami šį žodyną jūs:
-- Suprasite esminę Azure Developer CLI terminologiją ir sąvokas
-- Įvaldysite Azure debesų vystymo žodyną ir techninius terminus
-- Greitai rasite Infrastructure as Code ir diegimo terminus
-- Suprasite Azure paslaugų pavadinimus, santrumpas ir jų paskirtį
-- Gaunate apibrėžimus trikčių šalinimo ir derinimo terminams
-- Išmoksite pažangesnes Azure architektūros ir vystymo sąvokas
+Naudodami šį žodyną, jūs:
+- Suprasite pagrindinę Azure Developer CLI terminiją ir sąvokas
+- Išmoksitė Azure debesų kūrimo žodyną ir techninius terminus
+- Efektyviai naudositės infrastruktūros kaip kodo ir diegimo terminija
+- Suprasite Azure paslaugų pavadinimus, santrumpas ir jų paskirtis
+- Gaunate apibrėžimus klaidų šalinimo ir derinimo terminų
+- Išmoksite pažangias Azure architektūros ir kūrimo sąvokas
 
 ## Mokymosi rezultatai
 
-Reguliariai naudodamiesi šiuo žodynu galėsite:
-- Efektyviai bendrauti, naudodami tinkamą Azure Developer CLI terminologiją
+Reguliariai naudodamiesi šiuo žodynu, galėsite:
+- Efektyviai bendrauti vartodami tinkamą Azure Developer CLI terminiją
 - Aiškiau suprasti techninę dokumentaciją ir klaidų pranešimus
-- Pasitikėdami naršyti Azure paslaugas ir sąvokas
-- Spręsti problemas naudodami tinkamą techninę leksiką
-- Prisidėti prie komandos diskusijų naudodami tikslią techninę kalbą
-- Sistemiškai plėsti savo Azure debesų vystymo žinias
+- Užtikrintai naršyti Azure paslaugas ir sąvokas
+- Šalinti problemas naudodami tinkamą techninę leksiką
+- Tiksliai prisidėti prie komandos diskusijų technine kalba
+- Sistemingai plėsti Azure debesų kūrimo žinias
 
 ## A
 
 **ARM šablonas**  
-Azure Resource Manager šablonas. JSON pagrindu veikiantis Infrastructure as Code formatas, naudojamas deklaratyviai apibrėžti ir diegti Azure išteklius.
+Azure Resource Manager šablonas. JSON pagrindu sukurtas infrastruktūros kaip kodo formatas Azure ištekliams apibrėžti ir deklaratyviai diegti.
 
 **App Service**  
-Azure platformos kaip paslaugos (PaaS) pasiūlymas internetinėms programoms, REST API ir mobiliųjų servisų back-endams talpinti be infrastruktūros valdymo.
+Azure platformos kaip paslaugos (PaaS) siūlymas žiniatinklio programų, REST API ir mobiliųjų galinių sistemų talpinimui be infrastruktūros valdymo.
 
 **Application Insights**  
-Azure taikomosios programos veiklos stebėjimo (APM) paslauga, suteikianti gilias įžvalgas apie programos veikimą, prieinamumą ir naudojimą.
+Azure programų našumo stebėjimo (APM) paslauga, suteikianti išsamią informaciją apie programų našumą, prieinamumą ir naudojimą.
 
 **Azure CLI**  
-Komandinės eilutės sąsaja Azure ištekliams valdyti. Naudojama azd autentifikacijai ir kai kurioms operacijoms.
+Komandinės eilutės sąsaja Azure ištekliams valdyti. Papildo AZD, bet turi atskirą prisijungimą; pagrindinė AZD autentifikacija naudoja `azd auth login`.
 
 **Azure Developer CLI (azd)**  
-Vystytojams pritaikytas komandinis įrankis, pagreitinantis programų kūrimo ir diegimo procesą į Azure naudojant šablonus ir Infrastructure as Code.
+Kūrėjo orientuotas komandų eilutės įrankis, kuris pagreitina programų kūrimo ir diegimo į Azure procesą naudojant šablonus ir infrastruktūrą kaip kodą.
 
 **azure.yaml**  
 Pagrindinis azd projekto konfigūracijos failas, apibrėžiantis paslaugas, infrastruktūrą ir diegimo kablius.
 
 **Azure Resource Manager (ARM)**  
-Azure diegimo ir valdymo paslauga, suteikianti valdymo sluoksnį kuriant, atnaujinant ir trinant išteklius.
+Azure diegimo ir valdymo paslauga, suteikianti valdymo sluoksnį išteklių kūrimui, atnaujinimui ir šalinimui.
 
 ## B
 
 **Bicep**  
-Domenui pritaikyta kalba (DSL), sukurta Microsoft, skirta Azure ištekliams diegti. Turi paprastesnę sintaksę nei ARM šablonai ir kompiliuojasi į ARM.
+Domenui skirta kalba (DSL), sukurta Microsoft diegti Azure išteklius. Suteikia paprastesnę sintaksę nei ARM šablonai, kompiliuodama į ARM.
 
-**Kompiliacija (Build)**  
+**Build**  
 Procesas, kurio metu kompiliuojamas šaltinio kodas, įdiegiamos priklausomybės ir paruošiamos programos diegimui.
 
-**Blue-Green diegimas**  
-Diegimo strategija, naudojanti dvi identiškas gamybos aplinkas (mėlynąją ir žaliąją), siekiant sumažinti prastovas ir riziką.
+**Blue-Green Diegimas**  
+Diegimo strategija, naudojanti du identiškus gamybinius aplinkas (mėlyną ir žalią), kad būtų sumažintas neveikimo laikas ir rizika.
 
 ## C
 
 **Container Apps**  
-Azure serverless konteinerių paslauga, leidžianti vykdyti konteinerizuotas programas be sudėtingos infrastruktūros valdymo.
+Azure be serverių konteinerių paslauga, leidžianti vykdyti konteinerizuotas programas be sudėtingos infrastruktūros valdymo.
 
 **CI/CD**  
-Continuous Integration/Continuous Deployment. Automatizuotos praktikos kodui integruoti ir programoms diegti.
+Nuolatinė integracija/nuolatinis diegimas. Automatizuotos praktikos vykdant kodo pakeitimus ir diegiant programas.
 
 **Cosmos DB**  
-Globaliai paskirstyta, daugmodelinė duomenų bazės paslauga Azure, teikianti išsamius SLA pralaidumui, delsai, prieinamumui ir nuoseklumui.
+Azure pasauliniu mastu paskirstyta, daugiamodelė duomenų bazės paslauga, teikianti išsamias SLA užtikrinančias pralaidumą, delsą, prieinamumą ir nuoseklumą.
 
 **Konfigūracija**  
-Nustatymai ir parametrai, valdantys programos elgseną ir diegimo parinktis.
+Nustatymai ir parametrai, kontroliuojantys programų elgesį ir diegimo parinktis.
 
 ## D
 
-**Diegimas (Deployment)**  
-Procesas, kurio metu programos ir jų priklausomybės įdiegiamos ir konfigūruojamos tikslinei infrastruktūrai.
+**Diegimas**  
+Procesas, kurio metu programos ir jų priklausomybės įdiegiamos ir konfigūruojamos tikslinėje infrastruktūroje.
 
 **Docker**  
-Platforma programoms kurti, pristatyti ir vykdyti naudojant konteinerizacijos technologiją.
+Platforma programų kūrimui, siuntimui ir vykdymui naudojant konteinerizacijos technologiją.
 
 **Dockerfile**  
-Tekstinis failas, kuriame pateiktos instrukcijos Docker konteinerio vaizdui kurti.
+Tekstinis failas, kuriame pateikiamos instrukcijos Docker konteinerio atvaizdui kurti.
 
 ## E
 
-**Aplinka (Environment)**  
-Diegimo tikslas, atstovaujantis konkrečiai jūsų programos egzemplioriaus versijai (pvz., development, staging, production).
+**Aplinka**  
+Diegimo taikinys, atspindintis konkrečią programos kopiją (pvz., kūrimo, patikros, gamybinę).
 
 **Aplinkos kintamieji**  
-Konfigūracijos reikšmės, saugomos raktas-reikšmė poromis, kurias programos gali pasiekti vykdymo metu.
+Konfigūracijos reikšmės, saugomos kaip raktas-reikšmė, prieinamos programai vykdymo metu.
 
-**Galutinis taškas (Endpoint)**  
+**Pabaigos taškas (Endpoint)**  
 URL arba tinklo adresas, kuriuo galima pasiekti programą ar paslaugą.
 
 ## F
 
 **Function App**  
-Azure serverless skaičiavimo paslauga, leidžianti vykdyti įvykiams reaguojantį kodą be infrastruktūros valdymo.
+Azure be serverių vykdymo paslauga, leidžianti vykdyti įvykius veikiančius kodus be infrastruktūros valdymo.
 
 ## G
 
 **GitHub Actions**  
-CI/CD platforma, integruota su GitHub saugyklomis automatiškai darbo eigai (workflow) vykdyti.
+CI/CD platforma, integruota su GitHub saugyklomis, skirta automatizuoti darbo eigas.
 
 **Git**  
-Distribuota versijų valdymo sistema, skirta šaltinio kodo pakeitimams sekti.
+Išskirstyta versijų kontrolės sistema, skirta sekti šaltinio kodo pakeitimus.
 
 ## H
 
-**Hooks**  
-Pasirinktinių scenarijų ar komandų rinkinys, vykdomas tam tikrais diegimo gyvavimo ciklo momentais (preprovision, postprovision, predeploy, postdeploy).
+**Kabliai (Hooks)**  
+Individualūs scenarijai ar komandų rinkiniai, kurie vykdomi tam tikrais diegimo ciklo etapais (prieš ir po paruošimo ar diegimo).
 
-**Host**  
-Azure paslaugos tipas, į kurį bus diegiama programa (pvz., appservice, containerapp, function).
+**Šeimininkas (Host)**  
+Azure paslaugos tipas, kuriame programa bus diegiama (pvz., appservice, containerapp, function).
 
 ## I
 
-**Infrastructure as Code (IaC)**  
-Praktika, kai infrastruktūra apibrėžiama ir valdomas per kodą, o ne rankiniais procesais.
+**Infrastruktūra kaip kodas (IaC)**  
+Praktika apibrėžti ir valdyti infrastruktūrą per kodą, o ne rankines operacijas.
 
 **Init**  
-Naujo azd projekto inicijavimo procesas, paprastai iš šablono.
+Procesas inicializuoti naują azd projektą, dažniausiai pagal šabloną.
 
 ## J
 
 **JSON**  
-JavaScript Object Notation. Duomenų mainų formatas, dažnai naudojamas konfigūracijų failams ir API atsakymams.
+JavaScript objektų žymėjimo formatas. Duomenų keitimosi formatas, dažnai naudojamas konfigūracijų failams ir API atsakymams.
 
 **JWT**  
-JSON Web Token. Standartas saugiam informacijos perdavimui tarp šalių kaip JSON objekto.
+JSON Web Token. Standartas saugiai perduoti informaciją tarp šalių kaip JSON objektą.
 
 ## K
 
 **Key Vault**  
-Azure paslauga saugiai saugoti ir valdyti slaptus duomenis, raktus ir sertifikatus.
+Azure paslauga saugiai saugoti ir valdyti paslaptis, raktus ir sertifikatus.
 
 **Kusto užklausų kalba (KQL)**  
-Užklausų kalba, naudojama analizuoti duomenis Azure Monitor, Application Insights ir kitose Azure paslaugose.
+Užklausų kalba, skirta analizuoti duomenis Azure Monitor, Application Insights ir kitose Azure paslaugose.
 
 ## L
 
 **Load Balancer**  
-Paslauga, paskirstanti įeinantį tinklo srautą tarp kelių serverių arba egzempliorių.
+Paslauga, skirstanti įeinantį tinklo srautą tarp kelių serverių ar instancijų.
 
 **Log Analytics**  
-Azure paslauga telemetrijos duomenims rinkti, analizuoti ir imtis veiksmų iš debesų ir vietinių aplinkų.
+Azure paslauga rinkti, analizuoti ir veikti remiantis debesų ir vietinių aplinkų telemetrijos duomenimis.
 
 ## M
 
-**Managed Identity**  
-Azure funkcija, suteikianti Azure paslaugoms automatiškai valdomą identitetą autentifikacijai į kitus Azure servisus.
+**Valdomoji tapatybė (Managed Identity)**  
+Azure funkcija, suteikianti paslaugoms automatiškai valdomą tapatybę autentifikavimuisi prie kitų Azure paslaugų.
 
 **Mikropaslaugos (Microservices)**  
 Architektūrinis požiūris, kai programos kuriamos kaip mažų, nepriklausomų paslaugų rinkinys.
 
 **Monitor**  
-Azure suvienyta stebėjimo sprendimų sistema, teikianti viso stako stebėjimą per programas ir infrastruktūrą.
+Azure unifikuotas stebėjimo sprendimas, suteikiantis visapusišką stebėjimą tarp programų ir infrastruktūros.
 
 ## N
 
 **Node.js**  
-JavaScript vykdymo laikas, sukurtas ant Chrome V8 variklio, skirtas serverinės pusės programoms kurti.
+JavaScript vykdymo aplinka, sukurta Chrome V8 varikliui, skirta serverinėms programoms.
 
 **npm**  
-Paketu vadybininkas Node.js, valdantis priklausomybes ir paketus.
+Paketo valdymo sistema Node.js, valdanti priklausomybes ir paketus.
 
 ## O
 
@@ -178,80 +178,80 @@ Reikšmės, grąžinamos iš infrastruktūros diegimo, kurias gali naudoti progr
 
 ## P
 
-**Pakuotė (Package)**  
-Procesas, paruošiantis programos kodą ir priklausomybes diegimui.
+**Paketas (Package)**  
+Procesas ruošiant programos kodą ir priklausomybes diegimui.
 
 **Parametrai**  
-Įvesties reikšmės, perduodamos infrastruktūros šablonams, norint suasmeninti diegimus.
+Įėjimo reikšmės, perduodamos infrastruktūros šablonams diegimo pritaikymui.
 
 **PostgreSQL**  
-Atviro kodo reliacinė duomenų bazė, palaikoma kaip valdomas servisas Azure.
+Atvirojo kodo reliacinė duomenų bazė, palaikoma kaip valdomoji paslauga Azure.
 
 **Provisioning**  
-Procesas, kuriuo sukuriami ir konfigūruojami Azure ištekliai, apibrėžti infrastruktūros šablonuose.
+Procesas kuriant ir konfigūruojant Azure išteklius, aprašytus infrastruktūros šablonuose.
 
 ## Q
 
-**Quota**  
-Ribos, nustatančios, kiek išteklių galima sukurti Azure prenumeratoje arba regione.
+**Kvotos (Quota)**  
+Išteklių kiekio, kurį galima sukurti Azure prenumeratoje ar regione, apribojimai.
 
 ## R
 
-**Resource Group**  
-Loginis konteineris Azure ištekliams, kurie dalijasi tuo pačiu gyvenimo ciklu, leidimais ir politika.
+**Išteklių grupė (Resource Group)**  
+Loginis konteineris Azure ištekliams, kurie dalijasi tuo pačiu gyvenimo ciklu, prieigos teisėmis ir politikomis.
 
-**Resource Token**  
-Unikalus eilutės pavidalo žymuo, generuojamas azd, užtikrinantis, kad išteklių pavadinimai būtų unikalūs diegimų metu.
+**Išteklių žetonas (Resource Token)**  
+Unikalus azd sugeneruotas tekstas, užtikrinantis unikalius išteklių pavadinimus diegimuose.
 
 **REST API**  
-Architektūrinis stilius tinklo programoms kurti naudojant HTTP metodus.
+Architektūrinis stilius tinklo programoms projektuoti, naudojant HTTP metodus.
 
 **Rollback**  
-Procesas, kai grįžtama prie ankstesnės programos arba infrastruktūros konfigūracijos versijos.
+Procesas grįžti prie ankstesnės programos ar infrastruktūros konfigūracijos versijos.
 
 ## S
 
-**Service**  
-Jūsų programos komponentas, apibrėžtas azure.yaml (pvz., web frontend, API backend, duomenų bazė).
+**Paslauga (Service)**  
+Jūsų programos komponentas, apibrėžtas azure.yaml faile (pvz., žiniatinklio priekinė dalis, API galinė dalis, duomenų bazė).
 
 **SKU**  
-Stock Keeping Unit. Reiškia skirtingus paslaugos lygius arba našumo klases Azure ištekliams.
+Sandėlio vienetas. Atspindi skirtingus paslaugų lygius arba našumo klases Azure ištekliams.
 
 **SQL Database**  
-Azure valdomos reliacinės duomenų bazės paslauga, paremta Microsoft SQL Server.
+Azure valdomoji reliacinė duomenų bazės paslauga, paremta Microsoft SQL Server.
 
 **Static Web Apps**  
-Azure paslauga pilnaverčioms interneto programoms kurti ir diegti iš šaltinio kodų saugyklų.
+Azure paslauga pilno kelio žiniatinklio programoms kurti ir diegti iš šaltinio kodų saugyklų.
 
-**Storage Account**  
-Azure paslauga, teikianti debesų saugyklą duomenų objektams, įskaitant blob'us, failus, eilutes ir lenteles.
+**Saugyklos paskyra (Storage Account)**  
+Azure paslauga, suteikianti debesų saugyklą duomenų objektams, įskaitant blob’us, failus, eiles ir lenteles.
 
-**Subscription**  
-Azure sąskaitos konteineris, kuriame yra resource group'ai ir ištekliai, su susijusiu atsiskaitymu ir prieigos valdymu.
+**Prenumerata (Subscription)**  
+Azure paskyros konteineris, kuriame yra išteklių grupės ir ištekliai, su sąskaitų apmokėjimu ir prieigos valdymu.
 
 ## T
 
-**Template**  
-Iš anksto paruošta projekto struktūra, apimanti programos kodą, infrastruktūros apibrėžimus ir konfigūraciją įprastoms scenarijoms.
+**Šablonas (Template)**  
+Iš anksto paruošta projekto struktūra, kurioje yra programos kodas, infrastruktūros aprašai ir konfigūracija dažnai pasitaikančioms situacijoms.
 
 **Terraform**  
-Atviro kodo Infrastructure as Code įrankis, palaikantis kelis debesų tiekėjus, įskaitant Azure.
+Atvirojo kodo infrastruktūros kaip kodo įrankis, palaikantis kelis debesų tiekėjus, įskaitant Azure.
 
 **Traffic Manager**  
-Azure DNS pagrįstas eismo balansavimo sprendimas, paskirstantis srautą tarp pasaulinių Azure regionų.
+Azure DNS pagrindu veikiantis srauto balansavimo įrankis, skirstantis srautą tarp pasaulinių Azure regionų.
 
 ## U
 
 **URI**  
-Uniform Resource Identifier. Eilutė, identifikuojanti konkretų išteklių.
+Uniform Resource Identifier. Grandinė, identifikuojanti konkretų išteklių.
 
 **URL**  
-Uniform Resource Locator. URI tipas, nurodantis, kur išteklius yra ir kaip jį gauti.
+Uniform Resource Locator. URI tipas, nurodantis kur yra išteklius ir kaip jį pasiekti.
 
 ## V
 
 **Virtual Network (VNet)**  
-Pagrindinis privačių tinklų Azure elementas, teikiantis izoliaciją ir segmentaciją.
+Pagrindinis privatiems tinklams Azure blokas, suteikiantis atskyrimą ir segmentaciją.
 
 **VS Code**  
 Visual Studio Code. Populiarus kodo redaktorius su puikia Azure ir azd integracija.
@@ -259,108 +259,110 @@ Visual Studio Code. Populiarus kodo redaktorius su puikia Azure ir azd integraci
 ## W
 
 **Webhook**  
-HTTP atgalinis kvietimas, suveikiantis konkrečių įvykių metu, dažnai naudojamas CI/CD procesuose.
+HTTP atgalinis kvietimas, aktyvuojamas tam tikrų įvykių, dažnai naudojamas CI/CD procesuose.
 
 **What-if**  
-Azure funkcija, rodanti, kokie pakeitimai būtų atlikti diegimo metu, neįvykdant jų realiai.
+Azure funkcija, rodanti, kokie pakeitimai būtų atlikti diegimo metu, nepaleidžiant jo iš tikrųjų.
 
 ## Y
 
 **YAML**  
-YAML Ain't Markup Language. Žmonėms skaitomas duomenų serializacijos standartas, naudojamas konfigūracijos failams, pvz., azure.yaml.
+YAML Ain't Markup Language. Žmogui skaitomas duomenų serijalizavimo standartas, naudojamas konfigūracijos failams kaip azure.yaml.
 
 ## Z
 
-**Zone**  
-Fiziškai atskiros vietovės regione Azure, suteikiančios atsparumą gedimams ir didelį prieinamumą.
+**Zona**  
+Fiziškai atskiri vietovės Azure regione taškai, užtikrinantys atsarginį kopijavimą ir aukštą prieinamumą.
 
 ---
 
-## Dažnos santrumpos
+## Dažniausios santrumpos
 
-| Acronym | Pilnas pavadinimas | Aprašymas |
-|---------|--------------------|-----------|
-| AAD | Azure Active Directory (now Microsoft Entra ID) | Tapatybės ir prieigos valdymo paslauga |
-| ACR | Azure Container Registry | Konteinerių vaizdų registravimo paslauga |
-| AKS | Azure Kubernetes Service | Valdomos Kubernetes paslaugos |
-| API | Application Programming Interface | Protokolų rinkinys programinei įrangai kurti |
+| Santrumpa | Pilnas pavadinimas | Aprašymas |
+|---------|-----------|-------------|
+| AAD | Azure Active Directory (dabar Microsoft Entra ID) | Tapatybės ir prieigos valdymo paslauga |
+| ACR | Azure Container Registry | Konteinerių atvaizdų registracijos paslauga |
+| AKS | Azure Kubernetes Service | Valdomoji Kubernetes paslauga |
+| API | Application Programming Interface | Programinės įrangos kūrimo protokolų rinkinys |
 | ARM | Azure Resource Manager | Azure diegimo ir valdymo paslauga |
-| CDN | Content Delivery Network | Išskaidytas serverių tinklas |
-| CI/CD | Continuous Integration/Continuous Deployment | Automatizuotos vystymo praktikos |
-| CLI | Command Line Interface | Tekstinė vartotojo sąsaja |
+| CDN | Content Delivery Network | Išskirstytas serverių tinklas |
+| CI/CD | Nuolatinė integracija/nuolatinis diegimas | Automatizuotos kūrimo praktikos |
+| CLI | Komandinės eilutės sąsaja | Tekstinė naudotojo sąsaja |
 | DNS | Domain Name System | Sistema domenų vardams versti į IP adresus |
 | HTTPS | Hypertext Transfer Protocol Secure | Saugioji HTTP versija |
-| IaC | Infrastructure as Code | Infrastruktūros valdymas per kodą |
-| JSON | JavaScript Object Notation | Duomenų mainų formatas |
-| JWT | JSON Web Token | Žyma saugiam informacijos perdavimui |
-| KQL | Kusto Query Language | Užklausų kalba Azure duomenų paslaugoms |
-| RBAC | Role-Based Access Control | Prieigos valdymas pagal vartotojų vaidmenis |
-| REST | Representational State Transfer | Architektūrinis stilius žiniatinklio paslaugoms |
-| SDK | Software Development Kit | Vystymo įrankių rinkinys |
-| SLA | Service Level Agreement | Įsipareigojimas dėl paslaugos prieinamumo/veikimo |
-| SQL | Structured Query Language | Kalba reliacinėms duomenų bazėms valdyti |
-| SSL/TLS | Secure Sockets Layer/Transport Layer Security | Kriptografiniai protokolai |
-| URI | Uniform Resource Identifier | Eilutė identifikuojanti išteklių |
+| IaC | Infrastruktūra kaip kodas | Infrastruktūros valdymas per kodą |
+| JSON | JavaScript Object Notation | Duomenų keitimosi formatas |
+| JWT | JSON Web Token | Saugios informacijos perdavimo formatas |
+| KQL | Kusto užklausų kalba | Užklausų kalba Azure duomenų paslaugoms |
+| RBAC | Role-Based Access Control | Prieigos valdymo metodas pagal naudotojo roles |
+| REST | Representational State Transfer | Aukštos lygio stilius interneto paslaugoms |
+| SDK | Programinės įrangos kūrimo rinkinys | Kūrimo įrankių kolekcija |
+| SLA | Service Level Agreement | Paslaugos prieinamumo/našumo įsipareigojimas |
+| SQL | Structured Query Language | Kalba reliacinių duomenų bazių valdymui |
+| SSL/TLS | Secure Sockets Layer/Transport Layer Security | Kriptografijos protokolai |
+| URI | Uniform Resource Identifier | Grandinė, identifikuojanti išteklių |
 | URL | Uniform Resource Locator | URI tipas, nurodantis išteklių vietą |
-| VM | Virtual Machine | Kompiuterio sistemos emuliacija |
-| VNet | Virtual Network | Privatus tinklas Azure |
-| YAML | YAML Ain't Markup Language | Duomenų serializacijos standartas |
+| VM | Virtual Machine | Kompiuterinės sistemos emuliacija |
+| VNet | Virtual Network | Privatus Azure tinklas |
+| YAML | YAML Ain't Markup Language | Duomenų serijalizavimo standartas |
 
 ---
 
-## Azure paslaugų pavadinimų žemėlapiai
+## Azure paslaugų pavadinimų atitikmenys
 
-| Common Name | Official Azure Service Name | azd Host Type |
+| Dažnas pavadinimas | Oficialus Azure paslaugos pavadinimas | azd šeimininko tipas |
 |-------------|------------------------------|---------------|
 | Web App | Azure App Service | `appservice` |
 | API App | Azure App Service | `appservice` |
 | Container App | Azure Container Apps | `containerapp` |
 | Function | Azure Functions | `function` |
 | Static Site | Azure Static Web Apps | `staticwebapp` |
-| Database | Azure Database for PostgreSQL | `postgres` |
-| NoSQL DB | Azure Cosmos DB | `cosmosdb` |
-| Storage | Azure Storage Account | `storage` |
-| Cache | Azure Cache for Redis | `redis` |
-| Search | Azure AI Search | `search` |
-| Messaging | Azure Service Bus | `servicebus` |
+| Database | Azure Database for PostgreSQL | Infrastruktūros išteklius, ne programa `host` |
+| NoSQL DB | Azure Cosmos DB | Infrastruktūros išteklius, ne programa `host` |
+| Storage | Azure Storage Account | Infrastruktūros išteklius, ne pagrindinė programa `host` |
+| Cache | Azure Managed Redis | Infrastruktūros išteklius, ne programa `host` |
+| Search | Azure AI Search | Infrastruktūros išteklius, ne programa `host` |
+| Messaging | Azure Service Bus | Infrastruktūros išteklius, ne programa `host` |
+
+`services.<name>.host` parenka programos diegimo tikslą; tai nėra santrumpa jokiai Azure išteklių rūšiai. Duomenų bazės, talpyklos, paieškos paslaugos ir eilės paprastai diegiamos per infrastruktūros tiekėją ir prijungiamos prie programos per išvestis/konfigūraciją.
 
 ---
 
-## Kontekstui būdingi terminai
+## Kontekstui specifiniai terminai
 
-### Vystymo terminai
-- **Hot Reload**: Automatinis programų atnaujinimas vystymo metu be perkrovimo
-- **Build Pipeline**: Automatizuotas procesas kodo kūrimui ir testavimui
-- **Deployment Slot**: Parengimo (staging) aplinka App Service viduje
-- **Environment Parity**: Vystymo, parengimo ir gamybos aplinkų panašumo išlaikymas
+### Kūrimo terminai
+- **Hot Reload**: Automatiškai atnaujina programas kūrimo metu be perkrovimo
+- **Build Pipeline**: Automatizuotas kodų kūrimo ir testavimo procesas
+- **Deployment Slot**: Vienas iš patikros aplinkų App Service viduje
+- **Environment Parity**: Kūrybos, patikros ir gamybos aplinkų suderinamumas
 
-### Saugaus darbų terminai
-- **Managed Identity**: Azure funkcija, teikianti automatinį kredencialų valdymą
-- **Key Vault**: Saugus slaptųjų duomenų, raktų ir sertifikatų saugojimas
-- **RBAC**: Vaidmenimis grindžiamas prieigos valdymas Azure ištekliams
-- **Network Security Group**: Virtualus ugniasienės sluoksnis tinklo srautui valdyti
+### Saugumo terminai
+- **Managed Identity**: Azure funkcija, suteikianti automatinį kredencialų valdymą
+- **Key Vault**: Saugi paslapčių, raktų ir sertifikatų saugykla
+- **RBAC**: Rolėmis grįstas Azure išteklių prieigos valdymas
+- **Network Security Group**: Virtualus ugniasienės sprendimas tinklo srautui valdyti
 
 ### Stebėjimo terminai
 - **Telemetry**: Automatizuotas matavimų ir duomenų rinkimas
-- **Application Performance Monitoring (APM)**: Programų veiklos stebėjimas
-- **Log Analytics**: Paslauga žurnalo duomenų rinkimui ir analizei
-- **Alert Rules**: Automatizuoti pranešimai, paremti metrikomis arba sąlygomis
+- **Application Performance Monitoring (APM)**: Programų našumo stebėjimas
+- **Log Analytics**: Paslauga logų duomenų rinkimui ir analizei
+- **Alert Rules**: Automatizuoti pranešimai pagal metrikas ar sąlygas
 
 ### Diegimo terminai
-- **Blue-Green Deployment**: Diegimo strategija be prastovų
-- **Canary Deployment**: Postepinis išleidimas daliai vartotojų
-- **Rolling Update**: Sekanti programos egzempliorių pakeitimo strategija
+- **Blue-Green Deployment**: Diegimo strategija be neveikimo laiko
+- **Canary Deployment**: Palaipsnis diegimas daliai naudotojų
+- **Rolling Update**: Nuoseklus programos instancijų keitimas
 - **Rollback**: Grįžimas prie ankstesnės programos versijos
 
 ---
 
-**Naudojimo patarimas**: Naudokite `Ctrl+F`, kad greitai rastumėte konkrečius terminus šiame žodyne. Terminai yra tarpusavyje susieti, kai tai taikoma.
+**Naudojimo patarimas**: Naudokite `Ctrl+F` greitai ieškoti tam tikrų terminų šiame žodyne. Terminai kryžmiškai nurodomi, kai taikoma.
 
 ---
 
-**Naršymas**
-- **Ankstesnė pamoka**: [Cheat Sheet](cheat-sheet.md)
-- **Kita pamoka**: [FAQ](faq.md)
+**Navigacija**
+- **Ankstesnė pamoka**: [Santrauka](cheat-sheet.md)
+- **Kita pamoka**: [DUK](faq.md)
 
 ---
 

@@ -1,46 +1,46 @@
 # azd အတွက် Dev Containers နှင့် GitHub Codespaces
 
-**အခန်းကဏ္ဍ သွားကြည့်ရန်:**
-- **📚 သင်တန်းမူလ**: [AZD ဦးစွာ သင်ယူသူများအတွက်](../../README.md)
-- **📖 လက်ရှိ အခန်း**: အခန်း ၁ - အခြေခံနှင့် အမြန်သွားခြင်း
-- **⬅️ ယခင်အခန်း**: [ကိုယ့်အပလီကေးရှင်းကိုယ်တိုင် ယူလာခြင်း](bring-your-own-app.md)
-- **🚀 နောက်အခန်း**: [အခန်း ၂: AI- ပထမ ဦးဆောင်ဖွံ့ဖြိုးတိုးတတ်မှု](../chapter-02-ai-development/README.md)
+**အခန်းလမ်းညွှန်:**
+- **📚 သင်တန်းအိမ်**: [AZD အခြေခံသူများအတွက်](../../README.md)
+- **📖 လက်ရှိအခန်း**: အခန်း ၁ - အခြေခံနှင့် လျင်မြန်စတင်ခြင်း
+- **⬅️ ယခင်**: [သင်၏ကိုယ်ပိုင်အက်ပ်ကိုယူရန်](bring-your-own-app.md)
+- **🚀 နောက်ထပ်အခန်း**: [အခန်း ၂: AI-ရှေ့ဆုံး ဖွံ့ဖြိုးရေး](../chapter-02-ai-development/README.md)
 
-> `azd 1.27.1` ဖြင့် ၂၀၂၆ ခုနှစ် ဇူလိုင်တွင် အတည်ပြုပြီး။
+> အမိန့်နှင့် ဖွဲ့စည်းခြင်း ပြန်လည်စစ်ဆေးမှု ရည်ရွယ်ချက်: `azd 1.37.2` (နိုဝင်ဘာ ၂၀၂၆)။ Container ဆောက်လုပ်ခြင်းနှင့် Azure ထုတ်လုပ်ခြင်းများကို ဤစစ်ဆေးမှု၏ အစိတ်အပိုင်းအနေဖြင့် မလုပ်ခဲ့ပါ။
 
-## နိဒါန်း
+## မိတ်ဆက်ခြင်း
 
-azd၊ သင့်လိုအပ်သည့် ဘာသာစကား runtime၊ Docker နှင့် Azure CLI တို့ကို တစ်စက်လုံးတွင် ထည့်သွင်းရတာဟာ အလုပ်နည်းလမ်းများမှ တစ်ခုဖြစ်ပြီး၊ "ကျွန်တော့်စက်မှာ အလုပ်လုပ်တယ်" ဆိုတဲ့ မဟာဗျူဟာဟာ တခြားသူများအတွက် မအောင်မြင်တာရဲ့ အဓိက အကြောင်းတစ်ခုဖြစ်ပါတယ်။ **dev container** ဆိုသည်မှာ သင်၏ကိရိယာစစ်မှန်မှု လုံးဝကို ဖိုင်တစ်ခုတည်းဖြင့် ဖော်ပြပေးခြင်းဖြစ်ပြီး၊ VS Code သို့မဟုတ် GitHub Codespaces မှာ ပရောဂျက်ကို ဖွင့်တဲ့ အသုံးပြုသူတိုင်းအတွက် azd ထည့်သွင်းပြီး တူညီသောပတ်ဝန်းကျင်ကို ရရှိစေပါသည်။ ဒီသင်ခန်းစာက တစ်ခုတည်း ထည့်သွင်းပုံကို ပြသပါမည်။
+azd၊ သင့်လျော်သော ဘာသာစကား runtime၊ Docker နှင့် Azure CLI ကို မည်သည့်စက်မဆို ထည့်သွင်းရန်သည် အလုပ်ရှုပ်နေလွန်းပြီး၊ "ကျွန်ုပ်၏စက်တွင်အလုပ်လုပ်သည်" ဆိုသော သင်ခန်းစာတစ်ခုသည် တခြားသူများအတွက် မအောင်မြင်ပဲဖြစ်သွားရခြင်း၏ အဖွဲ့အစည်း နံပါတ်တစ်ဖြစ်သည်။ **dev container** သည် သင်၏ စက်ကရိယာချိန်းများအားလုံးကို ဖိုင်တစ်ဖိုင် ထဲတွင် ဖော်ပြခြင်းဖြင့်ဤပြဿနာကို ဖြေရှင်းပေးသည်။ VS Code သို့မဟုတ် GitHub Codespaces တွင် project ကို ဖွင့်သည့်သူတိုင်းသည် azd ပါပြီးသား အပြင် သာမာန်တူညီသော ပတ်ဝန်းကျင်တူရရှိစေပါသည်။ ဤသင်ခန်းစာက သင်ကို dev container တစ်ခု ထည့်သွင်းနည်းကို ပြသပါမည်။
 
-## သင်ယူရန်ရည်ရွယ်ချက်များ
+## သင်ယူရမည့်ရည်ရွယ်ချက်များ
 
-ဒီသင်ခန်းစာကုန်သွားလျှင် သင်မည်သည်ကို ပြုလုပ်နိုင်မည်:
-- Dev container ဆိုတာ ဘာလဲ၊ azd နှင့် ဘာကြောင့် အသုံးဝင်သလဲ ကွဲပြားစွာ နားလည်နိုင်မည်။
-- ပရောဂျက်အတွက် အနည်းဆုံး `.devcontainer/devcontainer.json` ဖိုင်တစ်ခု ထည့်သွင်းမည်။
-- Dev Container *features* များဖြင့် azd၊ Azure CLI နှင့် Docker ကို ပေါင်းထည့်မည်။
-- GitHub Codespaces သို့ VS Code မှာ ပရောဂျက်ကို ဖွင့်မည်။
+သင်သင်ခန်းစာအဆုံးသတ်သောအခါ၊ သင်သည်
+- dev container သည် မည်သည့်အရာဖြစ်ပြီး azd နှင့်အဘယ်ကြောင့် ကူညီမှုရှိသည်ကို နားလည်သွားမည်။
+- project ပြုလုပ်ရာတွင် အနည်းငယ်သော `.devcontainer/devcontainer.json` တစ်ခု ထည့်သွင်းရန်။
+- Dev Container *အင်္ဂါရပ်များ* မှတဆင့် azd၊ Azure CLI နှင့် Docker ပါဝင်မှုပြုလုပ်ရန်
+- GitHub Codespaces သို့မဟုတ် VS Code မှ project ကို ဖွင့်ရန်
 
-## သင်ယူပြီးရရှိမည့် ပစ္စည်းများ
+## သင်ယူရမည့်ရလဒ်များ
 
-ဒီသင်ခန်းစာကို ပြီးမြောက်ပြီးနောက် သင်လုပ်နိုင်မည့်အရာများ:
-- azd ပရောဂျက်အတွက် `devcontainer.json` ဖိုင်ရေးဆွဲနိုင်မည်။
-- သုံးစွဲသူအသုံးပြုသူ မတင်သွင်းဘဲ azd နှင့် Azure ကိရိယာများ ထည့်သွင်းနိုင်မည်။
-- container ထဲမှ သို့ Codespace မှ `azd up` ကို ဖျော်ဖြေပြေးနိုင်မည်။
+ဤသင်ခန်းစာပြီးဆုံးပါက၊ သင်အား အောက်ပါအရာများ ပြုလုပ်နိုင်မည်ဖြစ်သည်:
+- azd project အတွက် `devcontainer.json` တစ်ခု ရေးသားခြင်း
+- လက်ဖြင့် ထည့်သွင်းခြင်းမရှိဘဲ azd နှင့် Azure ကိရိယာများ ထည့်သွင်းခြင်း
+- ဆာဗာအတွင်း သို့မဟုတ် Codespace အတွင်းမှ `azd up` ကို အကောင်အထည်ဖော်ခြင်း
 
 ---
 
-## Dev Container ဆိုတာ ဘာလဲ?
+## Dev Container ဆိုတာဘာလဲ?
 
-Dev container ဆိုသည်မှာ သင့် code repository အတွင်းရှိ `.devcontainer/devcontainer.json` ဖိုင်တစ်ခုဖြင့် သတ်မှတ်ထားသော Docker အခြေပြုဖွံ့ဖြိုးရေးပတ်ဝန်းကျင်ဖြစ်သည်။ ပရောဂျက်ကို ဖွင့်သောအခါ:
+Dev container သည် သင့်ရဲ့ repository ထဲရှိ `.devcontainer/devcontainer.json` ဖိုင်တစ်ခုဖြင့် သတ်မှတ်ပေးထားသော Docker အခြေခံ ဖွံ့ဖြိုးရေး ပတ်ဝန်းကျင် တစ်ခုဖြစ်သည်။ Project ကို ဖွင့်သည့်အခါ
 
-- **VS Code** (Dev Containers extension ဖြင့်) container ကို တည်ဆောက်ပြီး ဆက်သွယ်ပေးသည်။
-- **GitHub Codespaces** မှ cloud တွင်တူညီသော container ကို တည်ဆောက်ပြီး browser-based အယ်ဒီတာ ပေးသည်။
+- **VS Code** (Dev Containers extension ပါဝင်သော) သည် container ကို ဆောက်ပြီး ကွန်နက်ရှိသည်။
+- **GitHub Codespaces** သည် တူညီသော container ကို cloud မှာ ဆောက်ပြီး browser အခြေပြု အယ်ဒီတာဖြစ်စေသည်။
 
-ပြောလိုသောအတိုင်း သူတို႔လိုတူညီသော ကိရိယာတွေ ရရှိပါသည် - "azd ကို ထည့်သွင်းပြီလား?" ဆိုပြီး မရှာဖွေရေး။
+မည်သည့်နည်းလမ်းဖြင့်မဆို၊ အဖွဲ့ပူးပေါင်းသူတိုင်းသည် တူညီသော ကိရိယာများကို ရရှိမည်ဖြစ်သောကြောင့် "azd ထည့်သွင်းပါပြီလား?" ဆိုပြီး ပြဿနာရှာခြင်းမရှိတော့ပါ။
 
 ```mermaid
 graph LR
-    Repo[သင့် Repo<br/>+ devcontainer.json] --> VSCode[VS ကုဒ်<br/>Dev Containers]
+    Repo[Your Repo<br/>+ devcontainer.json] --> VSCode[VS Code<br/>Dev Containers]
     Repo --> Codespaces[GitHub<br/>Codespaces]
     VSCode --> Env[Identical environment:<br/>azd + az + Docker]
     Codespaces --> Env
@@ -48,9 +48,9 @@ graph LR
 
 ---
 
-## အဆင့် ၁: devcontainer ဖိုင် ဖန်တီးခြင်း
+## အဆင့် ၁: devcontainer ဖိုင်ကို ဖန်တီးပါ
 
-သင့်ပရောဂျက် root folder မှာ `.devcontainer/devcontainer.json` ဖိုင် ဖန်တီးပါ။
+Project ရဲ့ root တွင် `.devcontainer/devcontainer.json` ဖန်တီးပါ။
 
 ```json
 {
@@ -58,7 +58,7 @@ graph LR
   "image": "mcr.microsoft.com/devcontainers/base:bookworm",
   "features": {
     "ghcr.io/devcontainers/features/azure-cli:1": {},
-    "ghcr.io/azure/azure-dev/azd:latest": {},
+    "ghcr.io/azure/azure-dev/azd:0": { "version": "1.37.2" },
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
     "ghcr.io/devcontainers/features/node:1": {}
   },
@@ -75,23 +75,23 @@ graph LR
 }
 ```
 
-အစိတ်အပိုင်းတိုင်း၏ ရည်ရွယ်ချက်များ:
+အသီးသီးစိတ်ဝင်စားရန်:
 
-| Key | ရည်ရွယ်ချက် |
+| ကီး | ရည်ရွယ်ချက် |
 |-----|---------|
-| `image` | container အတွက် အခြေခံ OS |
-| `features` | အသေးစား installers များ - ဤနေရာတွင် Azure CLI၊ **azd**၊ Docker နှင့် Node.js ပါရှိသည် |
-| `customizations.vscode.extensions` | azd နှင့် Bicep VS Code extensions များကို အလိုအလျောက် ထည့်သွင်းပေးသည် |
-| `forwardPorts` | သင့်အပလီကေးရှင်း၏ port ကို browser တွင် ဖော်ပြပေးသည် |
-| `postCreateCommand` | container တည်ဆောက်ပြီးပြီးနောက်တစ်ကြိမ် အလုပ်လုပ်စေသည် (ဤနေရာတွင် sanity check) |
+| `image` | Container ပေါ်တွင် အသုံးပြုမည့် အခြေခံ OS |
+| `features` | ထုတ်လုပ်ပြီးသား ထည့်သွင်းကိရိယာများ—ဒီမှာ Azure CLI၊ **azd**, Docker နှင့် Node.js |
+| `customizations.vscode.extensions` | azd နှင့် Bicep VS Code extensions များကို အလိုအလျောက် ထည့်သွင်းသည် |
+| `forwardPorts` | သင်၏ app ၏ port ကို browser အတွက် ဖော်ပြသည် |
+| `postCreateCommand` | Container ဆောက်ပြီးနောက်တစ်ကြိမ် လည်ပတ်သော command (ဒီမှာ sanity check) |
 
-> `ghcr.io/azure/azure-dev/azd:latest` feature သည် container တွင် azd ရရှိရန် တရားဝင်နည်းလမ်းဖြစ်သည်။ မည်သည့် version ကိုဖြစ်စေ သတ်မှတ်နိုင်သည် (ဥပမာ `azd:1.27.1`) သို့မဟုတ် အတည်ပြုနိုင်ရန်။
+> feature version (`azd:0`) နှင့် ထည့်သွင်းထားသော CLI ဗားရှင်းသည် ကွာခြားပါသည်။ CLI ကို pin လုပ်ရန် feature ရဲ့ `version` အစိတ်အပိုင်းကို `"1.37.2"` သတ်မှတ်ပါ၊ CLI ဗားရှင်းကို feature tag အဖြစ် မသုံးပါနှင့်။
 
 ---
 
-## အဆင့် ၂: သင့်အပလီကေးရှင်း ဘာသာစကားနှင့် feature ကို ကိုက်ညီစေပါ
+## အဆင့် ၂: သင်၏ app ဘာသာစကားနှင့် ကိုက်ညီအောင် feature ကို ဆိုင်ခွဲပါ
 
-သင့် app တွင် အသုံးပြုသည့် ဘာသာစကားအလိုက် `node` feature ကိုဖြူလို့ အစားထိုးပေးပါ:
+သင့် app အသုံးပြုသည့် feature ကို `node` ဖြင့် အစားထိုးပါ။
 
 ```jsonc
 // Python project
@@ -107,70 +107,70 @@ graph LR
 "ghcr.io/devcontainers/features/go:1": {}
 ```
 
-`host` မှာ `containerapp`၊ `aks` သို့မဟုတ် container image တည်ဆောက်တဲ့ အရာဖြစ်လျှင် `docker-in-docker` ကို ထားပါ - azd သည် image ကို တည်ဆောက်ရန်နှင့် တင်ပို့ရန် Docker လိုအပ်သည်။
+ဒေသခံတွင် ပုံများ ဆောက်ရန် `docker-in-docker` ကို ထိန်းသိမ်းပါ။ Remote ACR build (`docker.remoteBuild: true`) ကို ပြင်လည်ဖွဲ့စည်းထားခြင်းသည် အခြားရွေးချယ်စရာတစ်ခုဖြစ်သည်; host အမျိုးအစားတစ်ခုတည်းက ဒေသခံ Docker ကို အမြဲလိုအပ်လိမ့်မည် မဟုတ်ပါ။
 
 ---
 
-## အဆင့် ၃: ဖွင့်ကြည့်ပါ
+## အဆင့် ၃: ဖွင့်ပါ
 
-**VS Code မှ:**
+**VS Code တွင်:**
 1. **Dev Containers** extension ကို ထည့်သွင်းပါ။
-2. ပရောဂျက်ဖိုဒါကို ဖွင့်ပါ။
-3. စာမျက်နှာပြန်ပိတ်လာမည်ဆိုပါက **Reopen in Container** ကို နှိပ်ပါ (သို့မဟုတ် *Dev Containers: Reopen in Container* ကို အသုံးပြုပါ)။
+2. Project ဖိုလ်ဒါကို ဖွင့်ပါ။
+3. Prompt လာလျှင် **Reopen in Container** ကို နှိပ်ပါ (သို့မဟုတ် *Dev Containers: Reopen in Container* ကို run ပါ)။
 
-**GitHub Codespaces မှ:**
-1. repo ကို GitHub သို့ပို့ပါ။
+**GitHub Codespaces တွင်:**
+1. Repo ကို GitHub တွင်ပို့ပါ။
 2. **Code → Codespaces → Create codespace on main** ကို နှိပ်ပါ။
-3. container တည်ဆောက်သည့်အချိန် စောင့်ဆိုင်းပါ - terminal တွင် azd အသင့်ရှိနေပါပြီ။
+3. Container ဆောက်နေစဉ် သတိပြုဆောင်ရွက်ပါ—azd သည် terminal တွင် အသင့်ရှိပါပြီ။
 
 ---
 
-## အဆင့် ၄: Container အတွင်းမှ တိုက်ရိုက် တင်ပို့ခြင်း
+## အဆင့် ၄: Container အတွင်းမှ ထုတ်လုပ်ပါ
 
-container အတွင်းမှာ azd သည်ပြီးတင်ထားပြီးဖြစ်သောကြောင့် သင်၏ ပုံမှန် လုပ်ဆောင်မှုသည် သဘောတူတယ်။
+Container တွင် azd သည် အစောပိုင်းတွင် ထည့်သွင်းပြီးသည်ဖြင့် ပုံမှန် workflow သည် အလုပ်လုပ်ပုံမှန် ဆက်လက်လုပ်ဆောင်နိုင်သည်။
 
 ```bash
-azd auth login --use-device-code   # device code က Codespaces အတွင်းမှာ အသုံးဝင်တယ်
+azd auth login --use-device-code   # device code is handy inside Codespaces
 azd up
 ```
 
-> **ဘာကြောင့် `--use-device-code`?** remote container သို့ Codespace ထဲမှာ local browser မရှိသောကြောင့် device-code login ဟာ ယုံကြည်စိတ်ချရတဲ့ နည်းလမ်းဖြစ်ပါတယ်။ သင်သည် browser tab တစ်ခုတွင် code တစ်ခု ထည့်သွင်းပြီး လက်မှတ်ရေးထိုးမှု ပြီးစီးပါမည်။
+> **ဘာလို့ `--use-device-code` လဲ?** remote container သို့မဟုတ် Codespace တစ်ခုတွင် ဒေသခံ browser မရှိသောကြောင့် device-code login သည် ယုံကြည်စိတ်ချရသော လမ်းကြောင်းဖြစ်သည်။ သင်မှ code ကို browser tab တစ်ခုထဲတွင် ကူးထည့်ပြီး စာရင်းသွင်းခြင်း အပြီးသတ်လိုက်ပါမည်။
 
 ---
 
-## အနှောင့်အယှက်များ များများ တွေ့ရသည့် ရှိမှုများ
+## ရိုးရာဖြစ်တတ်သော အခက်အခဲများ
 
-| အနှောင့်အယှက် | ဖြေရှင်းချက် |
+| အခက်အခဲ | ဖြေရှင်းနည်း |
 |---------|-----|
-| `azd up` မှ image တည်ဆောက်၍ မရနိုင်ခြင်း | `docker-in-docker` feature ထည့်ပါ |
-| Codespaces မှာ browser login ပျက်ကွက်ခြင်း | `azd auth login --use-device-code` ကို သုံးပါ |
-| ကိရိယာများသည် အသင်းသား များအလိုက်ကွဲပြားခြင်း | feature version များ pin လုပ်ပါ (ဥပမာ `azd:1.27.1`) |
-| Browser တို့တွင် app မမြင်ရခြင်း | `forwardPorts` တွင် port ထည့်ပါ |
+| `azd up` က ပုံတူပြုလုပ်၍ မရ | `docker-in-docker` feature ကို ထည့်သွင်းပါ |
+| Codespaces တွင် browser login တင်မရပ် | `azd auth login --use-device-code` ကို အသုံးပြုပါ |
+| အဖွဲ့ဝင်များက ကိရိယာများ မတူ | azd feature ရဲ့ `version` အစိတ်အပိုင်းဖြင့် CLI ကို pin လုပ်ပြီး runtime များကို ပင်မလုပ်ပါ |
+| Browser ထဲတွင် app ကို မရောက် | `forwardPorts` တွင် port ကို ထည့်သွင်းပါ |
 
 ---
 
-## အနှစ်ချုပ်
+## အကျဉ်းချုပ်
 
-- dev container တစ်ခုက သင့် azd ကိရိယာ များအား လူတိုင်းအတွက် ပြန်လည်ထုတ်လုပ်နိုင်စေရန် အကူအညီပြုသည်။
-- azd၊ Azure CLI နှင့် Docker ကို Dev Container *features* မှတဆင့် ထည့်သွင်းနိုင်သည်။
-- ဘာသာစကား feature ကို သင့် app နှင့် ကိုက်ညီစေရန်နှင့် container host များအတွက် `docker-in-docker` ကို ထားပါ။
-- Codespaces ထဲတွင် အသုံးပြုသောအခါ device-code login ကို သုံးပါ။
+- dev container သည် သင့် azd toolchain ကို လူတိုင်းအတွက် ထပ်မံလုပ်ဆောင်နိုင်စေသည်။
+- Dev Container *features* ဖြင့် azd၊ Azure CLI နှင့် Docker ကို ထည့်သွင်းပါ။
+- သင့် app ဘာသာစကား feature နဲ့ ကိုက်ညီမှု ရှိစေရန်နှင့် container hosts အတွက် `docker-in-docker` ကို ထိန်းသိမ်းပါ။
+- Codespaces အတွင်း လည်ပတ်သောအခါ device-code login ကို အသုံးပြုပါ။
 
 ---
 
-## 🔗 လမ်းညွှန်မှု
+## 🔗 လမ်းညွှန်
 
-| မျဉ်းကြောင်း | အရင်းအမြစ် |
+| ဦးတည်ချက် | အရင်းအမြစ် |
 |-----------|----------|
-| **ယခင်** | [ကိုယ့်အပလီကေးရှင်းကိုယ်တိုင် ယူလာခြင်း](bring-your-own-app.md) |
-| **အခန်းမူလ** | [အခန်း ၁: အခြေခံနှင့် အမြန်သွားခြင်း](README.md) |
-| **နောက်အခန်း** | [အခန်း ၂: AI- ပထမ ဦးဆောင်ဖွံ့ဖြိုးတိုးတတ်မှု](../chapter-02-ai-development/README.md) |
+| **ယခင်** | [သင်၏ကိုယ်ပိုင်အက်ပ်ကိုယူရန်](bring-your-own-app.md) |
+| **အခန်းအိမ်** | [အခန်း ၁: အခြေခံနှင့် လျင်မြန်စတင်ခြင်း](README.md) |
+| **နောက်ထပ်အခန်း** | [အခန်း ၂: AI-ရှေ့ဆုံး ဖွံ့ဖြိုးရေး](../chapter-02-ai-development/README.md) |
 
-## 📖 ဆက်စပ် အရင်းအမြစ်များ
+## 📖 ဆက်စပ်အရင်းအမြစ်များ
 
-- [ထည့်သွင်းခြင်းနှင့် စတင်ရန်](installation.md)
-- [Command Cheat Sheet](../../resources/cheat-sheet.md)
-- [အတည်ပြု Dev Containers သတ်မှတ်ချက်](https://containers.dev/)
+- [ထည့်သွင်းခြင်းနှင့် တပ်ဆင်ခြင်း](installation.md)
+- [အမိန့် စာရွက်စာတမ်း](../../resources/cheat-sheet.md)
+- [တရားဝင် Dev Containers သတ်မှတ်ချက်](https://containers.dev/)
 - [azd Dev Container feature](https://github.com/Azure/azure-dev/tree/main/ext/devcontainer)
 
 ---

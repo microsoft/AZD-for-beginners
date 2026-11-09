@@ -1,51 +1,54 @@
 # 4 skyrius: Infrastruktūra kaip kodas ir diegimas
 
-**📚 Kursas**: [AZD pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 1-1.5 valandos | **⭐ Sudėtingumas**: Vidutinis
+**📚 Kursas**: [AZD pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 2-3 valandos skaitymo; papildomam laikui skirtas diegimo pratimams | **⭐ Sudėtingumas**: Vidutinis
 
 ---
 
 ## Apžvalga
 
-Šiame skyriuje aptariami Infrastruktūros kaip kodo (IaC) modeliai su Bicep šablonais, išteklių paruošimas ir diegimo strategijos naudojant Azure Developer CLI.
+Šiame skyriuje apžvelgiami Infrastruktūros kaip kodo (IaC) modeliai su Bicep šablonais, išteklių suteikimas ir diegimo strategijos naudojant Azure Developer CLI.
 
-> Patikrinta naudojant `azd 1.27.1` 2026 m. liepos mėn.
+> Komandos ir konfigūracijos peržiūros tikslas: `azd 1.37.2` (2026 m. lapkritis). Gyvas Azure išteklių suteikimas peržiūros metu nebuvo vykdomas.
 
 ## Mokymosi tikslai
 
 Baigę šį skyrių jūs:
 - Suprasite Bicep šablonų struktūrą ir sintaksę
-- Paruošite Azure išteklius naudodami `azd provision`
-- Diegsite programas su `azd deploy`
-- Įgyvendinsite mėlyno-žalio ir nuolatinio diegimo strategijas
+- Suteiksite Azure išteklius naudodami `azd provision`
+- Diegsite programas naudodami `azd deploy`
+- Įgyvendinsite mėlyno-žalio ir laipsniško diegimo strategijas
 
 ---
 
 ## 📚 Pamokos
 
-| Nr. | Pamoka | Aprašymas | Trukmė |
+| # | Pamoka | Aprašymas | Laikas |
 |---|--------|-------------|------|
-| 1 | [Ištekliai paruošimas](provisioning.md) | Azure išteklių valdymas su AZD | 45 min |
+| 1 | [Išteklių suteikimas](provisioning.md) | Azure išteklių valdymas su AZD | 45 min |
 | 2 | [Diegimo vadovas](deployment-guide.md) | Programų diegimo strategijos | 45 min |
-| 3 | [Savo šablono kūrimas](custom-templates.md) | Kurkite ir publikuokite pakartotinai naudojamus azd šablonus | 30 min |
+| 3 | [Sukurti savo šabloną](custom-templates.md) | Kurkite ir publikuokite pakartotinai naudojamus azd šablonus | 30 min |
 
 ---
 
 ## 🚀 Greitas pradžia
 
 ```bash
-# Inicializuoti iš šablono
-azd init --template azure-functions-python-v2-http
+# Initialize from template
+mkdir infrastructure-practice
+cd infrastructure-practice
+azd init --template todo-nodejs-mongo .
+azd auth login
 
-# Peržiūrėti, kas bus sukurta
+# Preview what will be created
 azd provision --preview
 
-# Tik aprūpinti infrastruktūrą
+# Provision infrastructure only
 azd provision
 
-# Tik diegti kodą
+# Deploy code only
 azd deploy
 
-# Arba abu kartu
+# Or both together
 azd up
 ```
 
@@ -72,10 +75,10 @@ my-project/
 
 | Komanda | Aprašymas |
 |---------|-------------|
-| `azd init` | Inicijuoti projektą |
+| `azd init` | Inicializuoti projektą |
 | `azd provision` | Kurti Azure išteklius |
 | `azd deploy` | Diegti programos kodą |
-| `azd up` | paruošti + diegti |
+| `azd up` | suteikti + diegti |
 | `azd down` | Ištrinti visus išteklius |
 
 ---
@@ -91,7 +94,7 @@ my-project/
 
 ## 📖 Susiję ištekliai
 
-- [Patikrinimai prieš diegimą](../chapter-06-pre-deployment/README.md)
+- [Prieš diegimą tikrinimai](../chapter-06-pre-deployment/README.md)
 - [Konteinerių programų pavyzdžiai](../../examples/container-app/README.md)
 - [Duomenų bazės programos pavyzdys](../../examples/database-app/README.md)
 

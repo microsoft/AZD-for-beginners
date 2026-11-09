@@ -1,433 +1,227 @@
-# Simple Flask API - Container App Example
+# လွယ်ကူသော Flask API — Azure Container Apps
 
-**Learning Path:** Beginner ⭐ | **Time:** 25-35 minutes | **Cost:** $0-15/month
+**အဆင့်:** မစတင်သူ · **အချိန်:** 30–45 မိနစ် (စတင်တပ်ဆင်ခြင်းအပါအဝင်)
 
-A complete, working Python Flask REST API deployed to Azure Container Apps using Azure Developer CLI (azd). This example demonstrates container deployment, auto-scaling, and monitoring basics.
+Azure Developer CLI (azd) ဖြင့် Python Flask CRUD API တစ်ခု ထုတ်လုပ်ပါ။ မူလကုဒ်, Dockerfile,
+Bicep နှင့် deployment parameters များ ပါဝင်သည်။ သည်သည် **သင်ယူမှုနမူနာ** ဖြစ်ကာ
+ထုတ်လုပ်မှုအဆင့်ပြည့် API မဟုတ်ပါ။
 
-## 🎯 သင်ယူမယ့်အချက်များ
+## သင်ယူရမည့်အရာများ
 
-- Container ဆောင်ထားသော Python application ကို Azure သို့ deploy လုပ်နည်း
-- scale-to-zero သတ်မှတ်ချက်ဖြင့် auto-scaling ကို ဖန်တီးနည်း
-- health probes နှင့် readiness checks ကို ထည့်သွင်းနည်း
-- application logs နှင့် metrics များကို စောင့်ကြည့်နည်း
-- အလျင်အမြန် deploy အတွက် Azure Developer CLI ကို အသုံးပြုနည်း
-
-## 📦 ပါဝင်သော အရာများ
-
-✅ **Flask Application** - CRUD လုပ်ဆောင်ချက်များပါရှိသော အပြည့်အစုံ REST API (`src/app.py`)  
-✅ **Dockerfile** - Production အသုံးအတွက် container ပြင်ဆင်ချက်  
-✅ **Bicep Infrastructure** - Container Apps environment နှင့် API deployment  
-✅ **AZD Configuration** - တစ်ချက်နှိပ်၍ deploy လုပ်နိုင်စေရေး setup  
-✅ **Health Probes** - Liveness နှင့် readiness checks များ သတ်မှတ်ထား됨  
-✅ **Auto-scaling** - HTTP traffic အပေါ် မူတည်၍ 0-10 replicas အထိ
-
-## Architecture
+- azd ဖြင့် container တည်ဆောက်ပြီး ဖော်ပြခြင်း။
+- ingress နှင့် liveness/readiness probes ကို ဖွဲ့စည်းညှိနှိုင်းခြင်း။
+- CRUD အဖြေများစစ်ဆေးပြီး application logs များကို စစ်ဆေးခြင်း။
+- မှတ်ဉာဏ်ရှိ ဒေတာသည် ခိုင်မာသော application များအတွက် မသင့်လျော်သောကြောင်း နားလည်ခြင်း။
 
 ```mermaid
-graph TD
-    subgraph ACA[Azure Container Apps ပတ်ဝန်းကျင်]
-        Flask[Flask API ကွန်တိန်နာ<br/>ကျန်းမာရေး အဆုံးချိတ်များ<br/>REST API<br/>အလိုအလျောက် စကေးလ် (0-10 မိတ္တူ)]
-        AppInsights[အက်ပလီကေးရှင်း အင်ဆိုက်]
-    end
+flowchart LR
+    Client -->|HTTPS| API[Flask API — Container App]
+    API --> Memory[Process-local item dictionary]
+    API -->|stdout| Logs[Container Apps / Log Analytics]
 ```
 
-## မတိုင်ခင် conditions
+**အရေးကြီး:** ပစ္စည်းများကို တစ်ခုသော process တစ်ခုအတွင်း သိမ်းဆည်းထားသည်။ မူလတစ်ခုမှာ **Gunicorn worker တစ်ခု,
+0–1 replicas** ဖြစ်ပြီး ဝေါ်ကာများ/replicas အကြား ဒေတာ မညီမျှမှုကို ရှောင်ကြဉ်ရန် ရည်ရွယ်သည်။
+ပြန်ခေါ်သည့်အခါ, ပြင်ဆင်မှု ပြောင်းလဲသည့်အခါ သို့မဟုတ် zero သို့ မျှတစွာကြီးပြင်းစေသည့် အခါ ပစ္စည်းများဆုံးရှုံးမှု ရှိသည်။
+replicas များဖြင့် ကြီးပြင်းရန် shared persistent storage လိုအပ်သည်။ API သည် authentication သို့မဟုတ် authorization မပါဝင်ပါ။
 
-### လိုအပ်ချက်များ
-- **Azure Developer CLI (azd)** - [Install guide](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure subscription** - [Free account](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Install Docker](https://www.docker.com/products/docker-desktop/) (for local testing)
+## ကြိုတင်လိုအပ်ချက်များ
 
-### လိုအပ်ချက်များ စစ်ဆေးခြင်း
+- [လက်ရှိတည်ငြိမ်သော azd](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+  (သုံးသပ်ချိန်တွင် ထုတ်ဝေထားသောဗားရှင်း: 1.37.2)။
+- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) ကို စစ်ဆေးရန်။
+- Docker နဲ့ daemon လည်ပတ်နေမှု; ဒါဟာ ပျမ်းမျှ ဒေသခံ image တည်ဆောက်မှုအတွက် လိုအပ်ပါတယ်။
+- Azure subscription, resource-creation ခွင့်ပြုချက်များ၊ နှင့် Container Apps ဒေသဆိုင်ရာ အနုတ်ထိန်းချုပ်မှု။
+- အောက်ပါ command များအတွက် Bash (သို့) PowerShell တူညီသောအသုံးပြုမှု။
+- ရွေးချယ်စရာ local development အတွက် Python 3.11။
 
 ```bash
-# azd ဗားရှင်းကို စစ်ဆေးပါ (1.5.0 သို့မဟုတ် အထက်လိုအပ်သည်)
 azd version
-
-# Azure လော့ဂ်အင်ကို အတည်ပြုပါ
+az version
+docker info
 azd auth login
-
-# Docker ကို စစ်ဆေးပါ (ရွေးချယ်နိုင်၊ ဒေသခံ စမ်းသပ်မှုများအတွက်)
-docker --version
+az login
 ```
 
-## ⏱️ Deployment အချိန်ဇယား
+CLI tools များတွင် login session များကွာခြားသည်။ နှစ်ခုလုံးတွင် တူညီသော subscription ကို အသုံးပြုပါ။
 
-| Phase | Duration | What Happens |
-|-------|----------|--------------||
-| Environment setup | 30 seconds | Create azd environment |
-| Build container | 2-3 minutes | Docker build Flask app |
-| Provision infrastructure | 3-5 minutes | Create Container Apps, registry, monitoring |
-| Deploy application | 2-3 minutes | Push image and deploy to Container Apps |
-| **Total** | **8-12 minutes** | Complete deployment ready |
+## အလျင်အမြန် စတင်ခြင်း
 
-## Quick Start
+စာကြည့်တိုက်ရဲ့ အခြေခံ directory မှ:
 
 ```bash
-# ဥပမာသို့ သွားပါ
 cd examples/container-app/simple-flask-api
-
-# ပတ်ဝန်းကျင်ကို စတင်ဆောက်လုပ်ပါ (ထူးခြားသော နာမည် ရွေးပါ)
-azd env new myflaskapi
-
-# အားလုံးကို တပ်ဆင်ပါ (အခြေခံအဆောက်အအုံ + အပလီကေးရှင်း)
+azd env new flask-demo
 azd up
-# သင့်အား အောက်ပါအချက်များကို မေးမြန်းပါလိမ့်မည်
-# 1. Azure subscription ကို ရွေးချယ်ပါ
-# 2. တည်နေရာကို ရွေးချယ်ပါ (ဥပမာ၊ eastus2)
-# 3. ထည့်တပ်မှုအတွက် 8-12 မိနစ် ခန့် စောင့်ပါ
-
-# သင့် API endpoint ကို ရယူပါ
-azd env get-values
-
-# API ကို စမ်းသပ်ပါ
-curl $(azd env get-value API_ENDPOINT)/health
-```
-
-**Expected Output:**
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z",
-  "service": "simple-flask-api",
-  "version": "1.0.0"
-}
-```
-
-## ✅ Deployment စစ်ဆေးခြင်း
-
-### အဆင့် 1: Deployment အခြေအနေ စစ်ဆေးမည်
-
-```bash
-# တင်ထားသော ဝန်ဆောင်မှုများကို ကြည့်ရန်
-azd show
-
-# မျှော်မှန်းထားသော အထွက်မှာ အောက်ပါအတိုင်း ဖြစ်သည်:
-# - ဝန်ဆောင်မှု: api
-# - အင်ဒ်ပိုင့်: https://ca-api-[env].xxx.azurecontainerapps.io
-# - အခြေအနေ: လည်ပတ်နေသည်
-```
-
-### အဆင့် 2: API Endpoints များ စမ်းသပ်မည်
-
-```bash
-# API အဆုံးပိုင်းကို ရယူပါ
 API_URL=$(azd env get-value API_ENDPOINT)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
+API_NAME=$(azd env get-value API_NAME)
+curl --fail-with-body "${API_URL}/health"
+```
 
-# ကျန်းမာရေးကို စမ်းသပ်ပါ
-curl $API_URL/health
+မျှော်မှန်းထားချက်: HTTP 200 နှင့် `"status":"healthy"`၊
+`"service":"simple-flask-api"`, နှင့် လက်ရှိ UTC အချိန်ကိုပါရှိသည့် JSON။
+Provisioning နှင့် image တည်ဆောက်ခြင်းသည် မိနစ်အနည်းငယ်ကြာနိုင်သည်၊ အချိန်သည် မတူညီနိုင်ပါသည်။
 
-# မူလ အဆုံးပိုင်းကို စမ်းသပ်ပါ
-curl $API_URL/
+စတင်စဥ်၌ ပေါ်ပြူလာ hello-world image တစ်ခုကို port 80 တွင် အသုံးပြုသည်။
+`azure.yaml` က `infra/app/api.bicep` နှင့် ပြန်လည်လိုက်ဖက်သော parameters ဖိုင်ကို
+service deployment အတွက် ရွေးချယ်ပြီး image, ingress, နှင့် probes ကို port 8000 သို့ ပြောင်းသည်။
+ထို deployment parameters များကို ဖျက်မထားပေးရ။
 
-# ပစ္စည်းတစ်ခု ဖန်တီးပါ
-curl -X POST $API_URL/api/items \
+## CRUD ကို စစ်ဆေးခြင်း
+
+တူညီသော replica က အလုပ်လုပ်နေစဉ် အောက်ပါ အဆင့်များကို အဆက်မပြတ် လုပ်ဆောင်ပါ။
+
+```bash
+# Create: HTTP 201; note the returned id (1 for a fresh process).
+curl -i -X POST "${API_URL}/api/items" \
   -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "My first item"}'
+  -d '{"name":"Test Item","description":"My first item"}'
 
-# ပစ္စည်းအားလုံးကို ရယူပါ
-curl $API_URL/api/items
+# Read list: HTTP 200, total 1 in a fresh process.
+curl --fail-with-body "${API_URL}/api/items"
+
+# Replace 1 if your create response returned another id.
+curl --fail-with-body "${API_URL}/api/items/1"
+curl -i -X PUT "${API_URL}/api/items/1" \
+  -H "Content-Type: application/json" -d '{"name":"Updated Item"}'
+curl -i -X DELETE "${API_URL}/api/items/1"
+curl -i "${API_URL}/api/items/1"
 ```
 
-**အောင်မြင်မှု စံသတ်မှတ်ချက်များ:**
-- ✅ Health endpoint သည် HTTP 200 ကို ပြန်လည်ပေးရမည်
-- ✅ Root endpoint တွင် API အချက်အလက်များ ပြလိမ့်မည်
-- ✅ POST သည် item ကို ဖန်တီးပြီး HTTP 201 ကို ပြန်ပေးရမည်
-- ✅ GET သည် ဖန်တီးထားသော items များကို ပြန်ပေးရမည်
+အောင်မြင်မှု: POST 201, reads/PUT 200, DELETE 204 မှာ body မရှိဘဲ၊ ထို့နောက် ပျောက်ဆုံး item 404။
+မမှန်ကန်သော/non-object JSON သို့မဟုတ် name ထည့်မထားခြင်းသည် 400 ပြန်ပေးသည်။
+အကြောင်းတစ်ခုခုကြောင့် item တစ်ခု တောင်းဆိုမှုတွေအကြားပျောက်ဆုံးပါက၊ restart သို့မဟုတ် scale-to-zero ကို စစ်ဆေးပါ။
+၎င်းမှာ အကုန်အကျဆုံး မှတ်ဉာဏ်ကန့်သတ်ချက်ဖြစ်ပြီး၊ persist မရှိပါ။
 
-### အဆင့် 3: Logs ကြည့်ရှူမည်
+| Endpoint | Methods |
+|---|---|
+| `/` | GET — service အချက်အလက်များ |
+| `/health` | GET — liveness/readiness |
+| `/api/items` | GET, POST |
+| `/api/items/{id}` | GET, PUT, DELETE |
+
+## မှတ်တမ်းများနှင့် ပုံသဏ္ဍာန်သတ်မှတ်ချက်
 
 ```bash
-# azd monitor ကို အသုံးပြုပြီး တိုက်ရိုက် လော့ဂ်များကို စီးဆင်းကြည့်ပါ
-azd monitor --logs
-
-# သို့မဟုတ် Azure CLI ကို အသုံးပြုပါ:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# သင်သည် အောက်ပါအရာများကို မြင်ရမည်:
-# - Gunicorn စတင်ချိန် မက်ဆေ့ခ်ျများ
-# - HTTP တောင်းဆိုမှု လော့ဂ်များ
-# - လျှောက်လွှာ အချက်အလက် လော့ဂ်များ
+az containerapp logs show --name "$API_NAME" --resource-group "$RG_NAME" --follow
 ```
 
-## Project ဖွဲ့စည်းမှု
+မျှော်မှန်းချက်: Gunicorn စတင်မှု၊ အတောင်းထားပါ မူဝါဒမှတ်တမ်းများ နှင့် အပ်ပလီ케ရှင်း စာရင်းများ။
+`azd monitor --logs` သည် portal view ကို ဖွင့်ပေးသည်၊ terminal သို့ stream မဟုတ်ပါ။
+Application Insights ကို provision လုပ်ထားသော်လည်း **ဤ Flask code မှ စက်မှုပစ္စည်းအဖြစ် မအပ်ထားပါ**။
+stdout logs များအတွက် Container Apps/Log Analytics ကို အသုံးပြုပါ။
 
+CPU/memory, replica ကန့်သတ်ချက်များ သို့မဟုတ် scale နည်းလမ်းများကို ပြင်ဆင်ရန် `infra/app/api.bicep` ကို ပြင်ဆင်ပြီး
+`azd up` ကို စတင်ပါ။ ပုံမှန်တန်ဖိုးများမှာ 0.5 vCPU, 1 GiB, အနည်းဆုံး 0 / အများဆုံး 1 replica နှင့်
+HTTP threshold တန်ဖိုးသည် တပြိုင်တည်း အတောင်းများ 50 ဖြစ်သည်။ Scale-to-zero သည် cold-start နောက်ကျချိန်ကို ထပ်မံဖြည့်စွက်နိုင်သည်။
+
+မသက်ဆိုင်သော `azd env set MAX_REPLICAS`, `API_KEY`, `LOG_LEVEL`, သို့မဟုတ်
+`SCALE_TO_ZERO_TIMEOUT` တန်ဖိုးများကို **ဤအမျိုးအစား သို့မဟုတ် အက်ပ်နှင့် မချိတ်ဆက်ပါ**။
+တန်ဖိုးတစ်ခု ချမှတ်ခြင်းသည် လုပ်ဆောင်ချိန် ပတ်ဝန်းကျင် အပြောင်းအလဲအဖြစ် အလိုအလျောက် မပြောင်းလဲစေပါ။
+Image သည် port 8000 ကို တိတိကျကျ bind လုပ်ထားသည်။ Port ပြောင်းလဲလိုပါက Dockerfile, Bicep ingress နှင့် probes များကို
+တပြိုင်နက် ပြင်ဆင်ပါ။
+
+## ဖိုင်များ
+
+```text
+azure.yaml
+infra/main.bicep
+infra/main.parameters.json
+infra/app/container-apps.bicep       # Environment, registry, monitoring
+infra/app/api.bicep                  # App, ingress, probes, scale settings
+infra/app/api.parameters.json        # Image and resource values for azd deploy
+src/app.py
+src/Dockerfile
+src/requirements.txt
 ```
-simple-flask-api/
-├── azure.yaml              # AZD configuration
-├── infra/
-│   ├── main.bicep         # Main infrastructure
-│   ├── main.parameters.json
-│   └── app/
-│       ├── container-env.bicep
-│       └── api.bicep
-└── src/
-    ├── app.py             # Flask application
-    ├── requirements.txt
-    └── Dockerfile
-```
 
-## API Endpoints
+## ဒေသခံ ဖွံ့ဖြိုးတိုးတက်မှု
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/health` | GET | Health check |
-| `/api/items` | GET | List all items |
-| `/api/items` | POST | Create new item |
-| `/api/items/{id}` | GET | Get specific item |
-| `/api/items/{id}` | PUT | Update item |
-| `/api/items/{id}` | DELETE | Delete item |
-
-## သတ်မှတ်ချက်များ
-
-### Environment Variables
+ဤဥပမာ directory မှ:
 
 ```bash
-# စိတ်ကြိုက် ဖွဲ့စည်းပုံကို သတ်မှတ်ပါ
-azd env set PORT 8000
-azd env set LOG_LEVEL info
-azd env set MAX_REPLICAS 20
+python -m venv .venv
+source .venv/bin/activate  # PowerShell: .\.venv\Scripts\Activate.ps1
+python -m pip install -r src/requirements.txt
+python src/app.py
 ```
 
-### Scaling သတ်မှတ်ချက်များ
-
-API သည် HTTP traffic အပေါ် မူတည်၍ အလိုအလျောက် scale လုပ်ပါသည်။
-- **Min Replicas**: 0 (idle ဖြစ်သောအခါ scale to zero)
-- **Max Replicas**: 10
-- **Concurrent Requests per Replica**: 50
-
-## ဖွံ့ဖြိုးရေး
-
-### ဒေသတွင်းတွင် chạy ချရန်
+အသစ်သော terminal တစ်ခုတွင် `http://localhost:8000/health` နှင့် CRUD endpoint များကို စမ်းသပ်ပါ။
+သို့မဟုတ် အမှန်တကယ် image ကို တည်ဆောက်ပြီး လည်ပတ်ပါ:
 
 ```bash
-# dependencies များကို ထည့်သွင်းပါ
-cd src
-pip install -r requirements.txt
-
-# အက်ပ်ကို လည်ပတ်ပါ
-python app.py
-
-# ကိုယ်ပိုင်စက်ပေါ်တွင် စမ်းသပ်ပါ
-curl http://localhost:8000/health
-```
-
-### Container တည်ဆောက်၍ စမ်းသပ်မည်
-
-```bash
-# Docker image ကို ဖန်တီးပါ
 docker build -t flask-api:local ./src
-
-# container ကို local ပတ်ဝန်းကျင်တွင် လည်ပတ်ပါ
-docker run -p 8000:8000 flask-api:local
-
-# container ကို စမ်းသပ်ပါ
-curl http://localhost:8000/health
+docker run --rm -p 8000:8000 flask-api:local
 ```
 
-## Deployment
+ယုံကြည်မှုသာ ပြောင်းလဲမှုများအတွက် ပထမ deployment ပြီးနောက် `azd deploy api` ကို လည်ပတ်ပါ။
+Bicep ပြောင်းလဲမှုများအတွက် `azd up` ကို လည်ပတ်၍ ပြန်လည် provision နှင့် deploy လုပ်ပါ။
 
-### အပြည့်အစုံ Deployment
+## အသုံးချနိုင်သော လေ့ကျင့်ခန်းများ
+
+### 1. ထည့်သွင်းချက် ပယ်ဖျက်မှုကို တိုက်ထွန်းစစ်ဆေးခြင်း
+
+**ပထမဆုံးအချက်:** deployed API, `API_URL` အထက်ပါ။
+**ရည်မှန်းချက်:** ဘလောက် JSON ပုံသဏ္ဍာန် မမှန်ကန်ခြင်းနှင့် နာမည် မပါဝင်ခြင်းတို့ကို API မှ ပယ်ချသည်ကို အတည်ပြုခြင်း။
 
 ```bash
-# အခြေခံအဆောက်အအုံနှင့် အက်ပလီကေးရှင်းကို ဖြန့်ချိပါ
-azd up
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '[]'
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '{"name":""}'
 ```
 
-### ကုဒ်သာ Deploy လုပ်ခြင်း
+**အောင်မြင်မှု သတ်မှတ်ချက် / ဖြေရှင်းချက်:** နှစ်ခုစလုံး 400 နှင့် JSON အမှားပြ မှတ်ချက်ပြန်သည်၊ 500 မဟုတ်ပါ။
+**ပုံမှန်ပြဿနာ:** JSON content-type header ကို ဖယ်ရှားထားခြင်း။
+
+### 2. ဖတ်ရန်သာ version endpoint တစ်ခု ထည့်ပါ
+
+**ပထမဆုံးအချက်:** `src/app.py`။ **ရည်မှန်းချက်:** API ကို တိုးချဲ့ပြီး ပြန်လည် deploy ပြုလုပ်ခြင်း။
+`if __name__ == '__main__':` block မတိုင်မီ အောက်ပါကို ထည့်ပါ။
+
+```python
+@app.route('/version', methods=['GET'])
+def version():
+    return jsonify({'version': '1.0.0'})
+```
+
+`azd deploy api` ကို စတင်ပြီးနောက် `curl --fail-with-body "${API_URL}/version"` ကို လည်ပတ်ပါ။
+**အောင်မြင်မှု သတ်မှတ်ချက်:** HTTP 200 နှင့် `{"version":"1.0.0"}`။
+**ပုံမှန်ပြဿနာ။** `app.run()` ကိုအတားအဆီးပေးသည့်ခေါ်ဆိုမှုပြီးနောက်တွင် လမ်းကြောင်းကို ထားခြင်း၊
+သုံးသည့်အခါ `python src/app.py` တွင်စစ်ဆေးခြင်း။
+
+### သိမှတ်ချက် စစ်ဆေးမှု
+
+ဘာဖြစ်လို့ သန်ခါယာဒေတာအတွက် ဝန်ထမ်းတစ်ဦးမလုံလောက်သလဲ? ပြန်လည်စတင်သည့်အခါ သဲခြဲစာအုပ်ကို ဆုံးရှုံးသွားတတ်သည်။
+ထုတ်လုပ်မှုဗားရှင်းတွင် တာရှည်ခံမျှဝေမှုသိုလှောင်မှု၊ အတည်ပြုမှု၊ ခွင့်ပြုမှု၊ ပြောင်းရွှေ့မှုများ၊ စစ်ဆေးမှုများနှင့် စက်မှုကြီးကြပ်မှုလိုအပ်သည်။
+
+
+## ကုန်ကျစရိတ်နှင့်ပြဿနာဖြေရှင်းခြင်း
+
+၎င်းသည် အာမခံထားသော $0 ဖြင့် တပ်ဆင်ခြင်းမဟုတ်ပါ။ အခြေခံမှတ်ပုံတင်မှုနှင့် မှတ်တမ်းသိုလှောင်ခြင်း/သိမ်းဆည်းခြင်းသည်
+အက်ပ် ရုပ်ရှင်ခြင်း ပိတ်ထားသောအချိန်တွင်ပါ ကုန်ကျစရိတ်ရှိနိုင်သည်။ သင့်ဒေသအတွက်
+[စျေးနှုန်းတွက်ချက်ကိရိယာ](https://azure.microsoft.com/pricing/calculator/) ကိုအသုံးပြုပါ။
+
+- **Docker ဝန်ဆောင်မှုလည်ပတ်မှုမအောင်မြင်ခြင်း:** `docker info`၊ network access နှင့် ကိုယ်တိုင်သက်ဆိုင်သော dependencies များကို အတည်ပြုပါ။
+- **ကျန်းမာမဟုတ်သော app:** console/system logs များကို စစ်ဆေးပြီး image port၊ ingress,
+  နှင့် probes များညီညွတ်ကြောင်း အတည်ပြုပါ။ Flask port ကို placeholder ဖြင့် probe မပြုရ။
+- **403/permissions:** membership နှင့် resource-creation အာဏာများကို အတည်ပြုပါ။
+- **ပစ္စည်းများပျောက်ဆုံးခြင်း:** in-memory state သည် restart/scale-to-zero မှာ reset ဖြစ်သောကြောင့်
+  တာရှည်ခံလိုသောအတွက် database တစ်ခု ထည့်သွင်းပါ။
+
+## သန့်ရှင်းရေးနှင့် နောက်လှုပ်ရှားမှုများ
 
 ```bash
-# အပလီကေးရှင်းကုဒ်ပဲ တင်ပို့ပါ (အောက်ခံအဆောက်အအုံ မပြောင်းလဲပါ)
-azd deploy api
+azd down
 ```
 
-### သတ်မှတ်ချက်များ အပ်ဒိတ်လုပ်ခြင်း
+ဖျက်သိမ်းမှုအတိုင်ပင်ခံကို ပြန်လည်စစ်ဆေးပြီး အထူးသီးသန့် resource group ကို ဖယ်ရှားထားသည်ကို အတည်ပြုပါ။
+မဆက်စပ်သော ဒေတာများပါသော resource group တွင် ပျက်စီးဖျက်စီးမှု သန့်ရှင်းမှုမပြုပါနှင့်။
 
-```bash
-# ပတ်ဝန်းကျင် သတ်မှတ်ချက်များကို အပ်ဒိတ်လုပ်ပါ
-azd env set API_KEY "new-api-key"
-
-# ဖွဲ့စည်းပုံအသစ်နှင့်အတူ ပြန်လည်တပ်ဆင်ပါ
-azd deploy api
-```
-
-## မှတ်တမ်း ကြည့်ရှုခြင်း
-
-### Logs များ ကြည့်ရန်
-
-```bash
-# azd monitor ကို အသုံးပြုပြီး လက်ရှိ တိုက်ရိုက် log များကို စီးဆင်းကြည့်ပါ
-azd monitor --logs
-
-# သို့မဟုတ် Container Apps အတွက် Azure CLI ကို အသုံးပြုပါ:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# နောက်ဆုံး 100 လိုင်းများကို ကြည့်ပါ
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-```
-
-### Metrics များ စောင့်ကြည့်ရန်
-
-```bash
-# Azure Monitor ဒက်ရှ်ဘုတ်ကို ဖွင့်ပါ
-azd monitor --overview
-
-# သီးခြားသော မက်ထရစ်များကို ကြည့်ပါ
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "Requests,ResponseTime"
-```
-
-## စမ်းသပ်ခြင်း
-
-### Health Check
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/health
-```
-
-Expected response:
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z"
-}
-```
-
-### Item ဖန်တီးခြင်း
-
-```bash
-curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/items \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "A test item"}'
-```
-
-### အားလုံးကို ရယူမည်
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
-```
-
-## ကုန်ကျစရိတ် အနည်းဆုံးသိမ်းဆည်းနည်း
-
-ဒီ deployment သည် scale-to-zero ကို အသုံးပြုသည်၊ ထို့ကြောင့် API သည် request ကို process လုပ်စဉ်တွင်သာ ပေးဆောင်ရမည်:
-
-- **Idle cost**: ~$0/month (scaled to zero)
-- **Active cost**: ~$0.000024/second per replica
-- **Expected monthly cost** (light usage): $5-15
-
-### ကုန်ကျစရိတ် သက်သာစေရန် နည်းလမ်းများ
-
-```bash
-# dev အတွက် အမြင့်ဆုံး replicas များကို လျော့ချပါ
-azd env set MAX_REPLICAS 3
-
-# မအသုံးပြုနေသည့် အချိန်ကုန်ချိန်ကို ပိုတို သတ်မှတ်ပါ
-azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 မိနစ်
-```
-
-## ပြဿနာဖြေရှင်းခြင်း
-
-### Container ပေါက်မထိုးနိုင်ခြင်း
-
-```bash
-# Azure CLI ကို အသုံးပြု၍ ကွန်တိန်နာ လော့ဂ်များကို စစ်ဆေးပါ
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-
-# Docker image များကို မိမိစက်တွင် တည်ဆောက်နိုင်မှုကို အတည်ပြုပါ
-docker build -t test ./src
-```
-
-### API မရောက်နိုင်ခြင်း
-
-```bash
-# ingress သည် အပြင်ဘက် ဖြစ်ကြောင်း အတည်ပြုပါ
-az containerapp show --name api --resource-group rg-simple-flask-api \
-  --query properties.configuration.ingress.external
-```
-
-### တုံ့ပြန်ချိန် များစွာ ကြာခြင်း
-
-```bash
-# CPU/မှတ်ဉာဏ် (Memory) အသုံးပြုမှုကို စစ်ဆေးပါ
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "CPUPercentage,MemoryPercentage"
-
-# လိုအပ်လျှင် အရင်းအမြစ်များကို တိုးမြှင့်ပါ
-az containerapp update --name api --resource-group rg-simple-flask-api \
-  --cpu 1.0 --memory 2Gi
-```
-
-## သန့်ရှင်းရေး
-
-```bash
-# အရင်းအမြစ်အားလုံးကို ဖျက်ပါ
-azd down --force --purge
-```
-
-## နောက်တစ်ဆင့်များ
-
-### ဤဥပမာကို တိုးချဲ့မည်
-
-1. **Add Database** - Integrate Azure Cosmos DB or SQL Database
-   ```bash
-   # infra/main.bicep တွင် Cosmos DB မော်ဂျူးကို ထည့်ပါ
-   # app.py ကို ဒေတာဘေ့စ် ချိတ်ဆက်မှုဖြင့် အပ်ဒိတ်ပြုလုပ်ပါ
-   ```
-
-2. **Add Authentication** - Implement Microsoft Entra ID or API keys
-   ```python
-   # app.py ထဲတွင် authentication middleware ထည့်ပါ
-   from functools import wraps
-   ```
-
-3. **Set Up CI/CD** - GitHub Actions workflow
-   ```yaml
-   # Create .github/workflows/deploy.yml
-   name: Deploy to Azure
-   on: [push]
-   ```
-
-4. **Add Managed Identity** - Secure access to Azure services
-   ```bicep
-   # Update infra/app/api.bicep
-   identity: { type: 'SystemAssigned' }
-   ```
-
-### ဆက်စပ် ဥပမာများ
-
-- **[Database App](../../../../../examples/database-app)** - Complete example with SQL Database
-- **[Microservices](../../../../../examples/container-app/microservices)** - Multi-service architecture
-- **[Container Apps Master Guide](../README.md)** - All container patterns
-
-### သင်ယူရန် အရင်းအမြစ်များ
-
-- 📚 [AZD For Beginners Course](../../../README.md) - Main course home
-- 📚 [Container Apps Patterns](../README.md) - More deployment patterns
-- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - Community templates
-
-## အပိုဆောင်း အရင်းအမြစ်များ
-
-### စာတမ်းများ
-- **[Flask Documentation](https://flask.palletsprojects.com/)** - Flask framework guide
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Official Azure docs
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd command reference
-
-### သင်ခန်းစာများ
-- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Deploy your first app
-- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Python development guide
-- **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastructure as code
-
-### ကိရိယာများ
-- **[Azure Portal](https://portal.azure.com)** - Manage resources visually
-- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - IDE integration
-
----
-
-**🎉 ကံကောင်းပါစေ!** သင်သည် auto-scaling နှင့် monitoring ပါသော production-ready Flask API ကို Azure Container Apps ပေါ်သို့ deploy ပြီးသားဖြစ်ပါပြီ။
-
-**မေးခွန်းများ ရှိပါသလား?** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) သို့မဟုတ် [FAQ](../../../resources/faq.md) ကို စစ်ဆေးပါ။
+[နောက်တစ်ခု: Database app](../../../../../examples/database-app) · [Microservices](../../../../../examples/container-app/microservices) ·
+[Container overview](../README.md) · [Course home](../../../README.md) ·
+[ပြဿနာတင်ရန်](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 

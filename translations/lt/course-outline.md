@@ -1,559 +1,560 @@
-# AZD Pradedantiesiems: Kurso Apžvalga ir Mokymosi Sistema
+# AZD Pradedantiesiems: Kurso apžvalga ir mokymosi sistema
 
-## Kurso Apžvalga
+## Kurso apžvalga
 
-Išmokite Azure Developer CLI (azd) naudojimą per struktūrizuotus skyrius, sukurtus palaipsniui mokytis. **Dėmesys AI taikymų diegimui su Microsoft Foundry integracija.**
+Įvaldykite Azure Developer CLI (azd) per struktūrizuotus skyrius, skirtus progresyviam mokymuisi. **Ypač dėmesio skiriama AI programų diegimui su Microsoft Foundry integracija.**
 
-### Kodėl Šis Kursas Yra Būtinas Šiuolaikiniams Programuotojams
+### Kodėl šis kursas yra svarbus šiuolaikiniams kūrėjams
 
-Remiantis Microsoft Foundry Discord bendruomenės įžvalgomis, **45 % programuotojų nori naudoti AZD AI darbo krūviams**, bet susiduria su iššūkiais:
-- Sudėtingos daugiaservisinės AI architektūros
-- Geriausios praktikos AI produkcijos diegime  
-- Azure AI paslaugų integravimas ir konfigūracija
-- Sąnaudų optimizavimas AI darbo krūviams
-- AI specifinių diegimo problemų trikčių šalinimas
+AI darbo krūvius diegiantys kūrėjai dažnai ieško patarimų dėl:
+- Sudėtingų daugiapakopių AI architektūrų  
+- Gamybinio AI diegimo geriausių praktikų  
+- Azure AI paslaugų integracijos ir konfigūracijos  
+- AI darbo krūvių sąnaudų optimizavimo  
+- AI specifinių diegimo problemų trikčių šalinimo  
 
-### Pagrindiniai Mokymosi Tikslai
+### Pagrindiniai mokymosi tikslai
 
-Baigę šį struktūrizuotą kursą, Jūs:
-- **Išmoksite AZD pagrindus**: Pagrindinės sąvokos, diegimas ir konfigūracija
-- **Diegsite AI programėles**: Naudosite AZD su Microsoft Foundry paslaugomis
-- **Įgyvendinsite Infrastructure as Code**: Valdysite Azure išteklius su Bicep šablonais
-- **Trikčių šalinimą**: Spręsite įprastas problemas ir darysite klaidų paiešką
-- **Optimizuosite produkcijai**: Saugumas, mastelio keitimas, stebėsena ir sąnaudų valdymas
-- **Kursite daugiaagentų sprendimus**: Diegsite sudėtingas AI architektūras
+Baigę šį struktūrizuotą kursą, jūs:
+- **Įvaldysite AZD pagrindus**: Pagrindines sąvokas, diegimą ir konfigūraciją
+- **Diegsite AI programas**: Naudosite AZD su Microsoft Foundry paslaugomis  
+- **Įgyvendinsite infrastruktūrą kaip kodą**: Valdysite Azure išteklius su Bicep šablonais
+- **Šalinsite trikdžius diegimuose**: Spręsite dažnas problemas ir derinsite klaidas  
+- **Optimizuosite gamybai**: Saugumą, mastelį, stebėseną ir sąnaudų valdymą  
+- **Kursite daugiaagentines sistemas**: Diegsite sudėtingas AI architektūras  
 
-## 🎓 Dirbtuvėse gaunama mokymosi patirtis
+## 🎓 Mokymosi patirtis dirbtuvėse
 
-### Lankstūs mokymosi būdai
-Šis kursas sukurtas palaikyti tiek **savarankišką individualų mokymąsi**, tiek **vadovaujamus dirbtuvių seansus**, suteikiant mokiniams galimybę praktiškai naudotis AZD ir įgyti praktiškų įgūdžių per interaktyvias užduotis.
+### Lankstūs mokymosi būdai  
+Šis kursas sukurtas palaikyti tiek **savarankišką mokymąsi**, tiek **vadovaujamas dirbtuves**, leidžiančias įgyti praktinės AZD darbo patirties per interaktyvias užduotis.  
 
 #### 🚀 Savarankiško mokymosi režimas
-**Puikus individualiems programuotojams bei nuolatiniam mokymuisi**
+**Puikiai tinka individualiems kūrėjams ir nuolatiniam mokymuisi**
 
-**Savybės:**
-- **Naršyklėje veikianti sąsaja**: Pilnai MkDocs varoma dirbtuvė, pasiekiama per bet kurią naršyklę
-- **GitHub Codespaces integracija**: Vieno spustelėjimo kūrimo aplinka su iš anksto sukonfigūruotais įrankiais
-- **Interaktyvi DevContainer aplinka**: Nereikia vietinės sąrankos - pradėkite koduoti iš karto
-- **Progreso sekimas**: Įmontuotos kontrolinės punktai ir patvirtinimo užduotys
-- **Bendruomenės palaikymas**: Prieiga prie Azure Discord kanalų klausimams ir bendradarbiavimui
+**Funkcijos:**
+- **Naršyklės sąsaja**: Visas MkDocs palaikomas kursas pasiekiamas per bet kurią interneto naršyklę  
+- **GitHub Codespaces integracija**: Vieno paspaudimo kūrimo aplinka su iš anksto paruoštais įrankiais  
+- **Interaktyvi DevContainer aplinka**: Nereikia vietinės sąrankos – pradėkite koduoti iš karto  
+- **Progreso sekimas**: Įmontuoti patikros taškai ir patvirtinimo užduotys  
+- **Bendruomenės palaikymas**: Prieiga prie Azure Discord kanalų klausimams ir bendradarbiavimui  
 
 **Mokymosi struktūra:**
-- **Lankstus laiko tvarkaraštis**: Baikite skyrius savo tempu per kelias dienas ar savaites
-- **Kontrolinių punktų sistema**: Patvirtinkite žinias prieš pereidami prie sudėtingesnių temų
-- **Ištekliai**: Išsami dokumentacija, pavyzdžiai ir trikčių šalinimo vadovai
-- **Portfolio kūrimas**: Kurkite diegiamus projektus savo profesionaliam portfeliui
+- **Lankstus laiko planavimas**: Užbaikite skyrius savo tempu per kelias dienas ar savaites  
+- **Patikros taškų sistema**: Patvirtinkite žinias prieš pereidami prie sudėtingų temų  
+- **Ištekliai**: Išsami dokumentacija, pavyzdžiai ir trikčių šalinimo vadovai  
+- **Portfolio kūrimas**: Kurkite diegimui paruoštus projektus profesiniam portfolio  
 
-**Pradžia (savęs mokymuisi):**
+**Pradžia (Savarankiškai):**
 ```bash
-# Parinktis 1: GitHub Codespaces (Rekomenduojama)
-# Eikite į saugyklą ir spustelėkite „Code“ → „Create codespace on main“
+# Option 1: GitHub Codespaces (Recommended)
+# Navigate to the repository and click "Code" → "Create codespace on main"
 
-# Parinktis 2: Vietinis vystymas
+# Option 2: Local Development
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/workshop
-# Vadovaukitės diegimo instrukcijomis faile workshop/README.md
+# Follow setup instructions in workshop/README.md
 ```
 
 #### 🏛️ Vadovaujamos dirbtuvės
-**Tinka įmonių mokymams, stovykloms ir švietimo įstaigoms**
+**Tinka įmonių mokymams, bootcampams ir mokykloms**
 
-**Dirbtuvių formatų galimybės:**
+**Dirbtuvių formatų pasirinkimai:**
 
-**📚 Akademinių kursų integracija (8-12 savaičių)**
-- **Universitetų programos**: Semestro kursas su savaitiniais 2 valandų seansais
-- **Stovyklos formatas**: Intensyvus 3-5 dienų programos su kasdieniniais 6-8 valandų seansais
-- **Įmonių mokymai**: Mėnesio komandos seansai su praktiniais projekto įgyvendinimais
-- **Vertinimo sistema**: Įvertintos užduotys, kolegų peržiūros ir baigiamieji projektai
+**📚 Akademinis kursas (8-12 savaičių)**
+- **Universitetų programos**: Semestras su savaitiniais 2 valandų užsiėmimais  
+- **Bootcamp formatas**: Intensiškas 3-5 dienų kursas su kasdieniais 6-8 valandų užsiėmimais  
+- **Įmonių mokymai**: Mėnesiniai komandos užsiėmimai su praktiniais projektais  
+- **Vertinimo sistema**: Įvertinamos užduotys, kolegų peržiūros ir baigiamieji projektai  
 
 **🚀 Intensyvios dirbtuvės (1-3 dienos)**
-- **1 diena**: Pagrindai + AI vystymas (1-2 skyriai) - 6 valandos
-- **2 diena**: Konfigūracija + infrastruktūra (3-4 skyriai) - 6 valandos  
-- **3 diena**: Pažangūs modeliai + produkcija (5-8 skyriai) - 8 valandos
-- **Tolimesnė pagalba**: Pasirenkamas 2 savaičių mentoriavimas projekto užbaigimui
+- **1 diena**: Pagrindai + AI kūrimas (1-2 skyriai) – 6 valandos  
+- **2 diena**: Konfigūracija + infrastruktūra (3-4 skyriai) – 6 valandos  
+- **3 diena**: Pažangūs modeliai + gamyba (5-8 skyriai) – 8 valandos  
+- **Tęsinys**: Pasirinktinė 2 savaičių mentorystė projektų užbaigimui  
 
-**⚡ Vadovų susipažinimo sesija (4-6 valandos)**
-- **Strateginė apžvalga**: AZD vertės pasiūlymas ir verslo poveikis (1 valanda)
-- **Praktinis demo**: Pilnas AI programėlės diegimas (2 valandos)
-- **Architektūros peržiūra**: Įmonių modeliai ir valdymas (1 valanda)
-- **Įgyvendinimo planavimas**: Organizacijos adaptacijos strategija (1-2 valandos)
+**⚡ Vadovaujantis apžvalga (4-6 valandos)**
+- **Strateginė apžvalga**: AZD vertė ir verslo poveikis (1 valanda)  
+- **Praktinė demonstracija**: Pilnas AI programos diegimas (2 valandos)  
+- **Architektūros apžvalga**: Įmonių modeliai ir valdymas (1 valanda)  
+- **Įgyvendinimo planavimas**: Organizacijos įsisavinimo strategija (1-2 valandos)  
 
 #### 🛠️ Dirbtuvių mokymosi metodika
-**Atrankos → Diegimo → Tinklinimo metodika praktiniam įgūdžių įgijimui**
+**Atranka → Diegimas → Priderinimas – praktinių įgūdžių ugdymo metodas**
 
-**1 fazė: Atranka (45 minutės)**
-- **Šablonų tyrimas**: Vertinkite Microsoft Foundry šablonus ir paslaugas
-- **Architektūros analizė**: Supraskite daugiaagentės architektūros modelius ir diegimo strategijas
-- **Reikalavimų vertinimas**: Nustatykite organizacijos poreikius ir ribojimus
-- **Aplinkos paruošimas**: Konfigūruokite kūrimo aplinką ir Azure išteklius
+**1 etapas: Atranka (45 minutės)**
+- **Šablonų tyrimas**: Vertinti Microsoft Foundry šablonus ir paslaugas  
+- **Architektūros analizė**: Suprasti daugiaagentinius modelius ir diegimo strategijas  
+- **Reikalavimų įvertinimas**: Nustatyti organizacijos poreikius ir apribojimus  
+- **Aplinkos paruošimas**: Konfigūruoti kūrimo aplinką ir Azure resursus  
 
-**2 fazė: Diegimas (2 valandos)**
-- **Vedama įgyvendinimo eiga**: Žingsnis po žingsnio AI programėlių diegimas su AZD
-- **Paslaugų konfigūracija**: Konfigūruokite Azure AI paslaugas, galinius taškus ir autentifikaciją
-- **Saugumo įgyvendinimas**: Taikykite įmonių saugumo modelius ir prieigos valdymą
-- **Patvirtinimo testavimas**: Patikrinkite diegimus ir šalinkite dažnas problemas
+**2 etapas: Diegimas (2 valandos)**
+- **Vadybinis įgyvendinimas**: Žingsnis po žingsnio AI programų diegimas su AZD  
+- **Paslaugų konfigūracija**: Azure AI paslaugų, galinių taškų ir autentifikacijos nustatymas  
+- **Saugumo įgyvendinimas**: Taikyti įmonių saugumo modelius ir prieigos valdymą  
+- **Patvirtinimo testavimas**: Patikrinti diegimus ir šalinti dažnas problemas  
 
-**3 fazė: Tinklinimas (45 minutės)**
-- **Programėlių modifikavimas**: Pritaikykite šablonus konkretiems naudojimo atvejams ir reikalavimams
-- **Optimali produkcija**: Įgyvendinkite stebėsenos, sąnaudų valdymo ir mastelio keitimo strategijas
-- **Pažangūs modeliai**: Ištirkite daugiaagentės koordinavimo ir sudėtingų architektūrų galimybes
-- **Tolesni žingsniai**: Nustatykite mokymosi kelią tolesniam įgūdžių tobulinimui
+**3 etapas: Priderinimas (45 minutės)**
+- **Programos modifikacija**: Adaptuoti šablonus konkretiems atvejams ir reikalavimams  
+- **Gamybos optimizavimas**: Įgyvendinti stebėsenos, sąnaudų valdymo ir mastelio strategijas  
+- **Pažangūs modeliai**: Tyrinėti daugiaagentinę koordinaciją ir sudėtingas architektūras  
+- **Tolimesni žingsniai**: Apibrėžti mokymosi kelią nuolatiniam įgūdžių tobulinimui  
 
 #### 🎯 Dirbtuvių mokymosi rezultatai
-**Įgūdžių įvertinimas per praktinę veiklą**
+**Matomi įgūdžiai ugdomi per praktinius užsiėmimus**
 
 **Techniniai gebėjimai:**
-- **Diegti AI programėles produkcijoje**: Sėkmingai diegti ir konfigūruoti AI sprendimus
-- **Infrastructure as Code valdymas**: Kurti ir valdyti adaptyvius Bicep šablonus
-- **Daugiaagentė architektūra**: Įgyvendinti koordinuotus AI agentų sprendimus
-- **Produkcinis pasirengimas**: Taikyti saugumo, stebėsenos ir valdymo modelius
-- **Trikčių šalinimo įgūdžiai**: Savarankiškai spręsti diegimo ir konfigūracijos problemas
+- **Produkcinių AI programų diegimas**: Sėkmingai diegti ir konfigūruoti AI sprendimus  
+- **Infrastruktūros kaip kodo meistriškumas**: Kurti ir valdyti Bicep šablonus  
+- **Daugiaagentinė architektūra**: Įgyvendinti koordinuotas AI agentų sistemas  
+- **Gamybos pasirengimas**: Taikyti saugumo, stebėsenos ir valdymo modelius  
+- **Trikčių šalinimo įgūdžiai**: Savarankiškai spręsti diegimo ir konfigūracijos problemas  
 
-**Profesiniai gebėjimai:**
-- **Projekto valdymas**: Vadovauti techninėms komandoms debesijos diegimuose
-- **Architektūros projektavimas**: Kurti mastelio keičiamus ir sąnaudų efektyvius Azure sprendimus
-- **Žinių perdavimas**: Mokyti ir mentoriauti kolegas AZD geriausiose praktikose
-- **Strateginis planavimas**: Įtakoti organizacijos debesijos adaptacijos strategijas
+**Profesiniai įgūdžiai:**
+- **Projektų vadovavimas**: Vadovauti techninėms komandoms debesijos diegimo iniciatyvose  
+- **Architektūros projektavimas**: Kurti skalėsią, ekonomišką Azure sprendimų architektūrą  
+- **Žinių perdavimas**: Mokyti ir konsultuoti kolegas AZD geriausių praktikų klausimais  
+- **Strateginis planavimas**: Įtakoti organizacijos debesijos įsisavinimo strategijas  
 
-#### 📋 Dirbtuvių ištekliai ir medžiagos
-**Išsamus rinkinys vedėjams ir mokiniams**
+#### 📋 Dirbtuvių ištekliai ir medžiaga
+**Išsamus rinkinys treneriams ir besimokantiems**
 
-**Vedėjams:**
-- **Instruktoriaus vadovas**: [Dirbtuvių apžvalga](workshop/README.md) - sesijų planavimas ir vedimas
-- **Pristatymo medžiaga**: Skaidrės, architektūros schemos ir demo scenarijai
-- **Vertinimo priemonės**: Praktinės užduotys, žinių patikrinimai ir vertinimo kriterijai
-- **Techninė sąranka**: Aplinkos konfigūracijos, trikčių šalinimo vadovai ir atsarginiai planai
+**Treneriams:**
+- **Instruktoriaus vadovas**: [Dirbtuvių apžvalga](workshop/README.md) – užsiėmimų planavimas ir vedimas  
+- **Pranešimų medžiaga**: Skaidrių komplektai, architektūros diagramos ir demonstraciniai scenarijai  
+- **Vertinimo įrankiai**: Praktinės užduotys, žinių tikrinimas ir vertinimo kriterijai  
+- **Techninė sąranga**: Aplinkos konfigūracija, trikčių šalinimo vadovai ir atsarginiai planai  
 
-**Mokiniams:**
-- **Interaktyvi dirbtuvių aplinka**: [Dirbtuvių medžiaga](workshop/README.md) - naršyklėje veikianti mokymosi platforma
-- **Žingsnis po žingsnio instrukcijos**: [Vedinamos užduotys](../../workshop/docs/instructions) - išsamūs įgyvendinimo pavyzdžiai  
-- **Nuorodų dokumentacija**: [AI dirbtuvių laboratorija](docs/microsoft-foundry/ai-workshop-lab.md) - AI tematikos giluminės žinios
-- **Bendruomenės ištekliai**: Azure Discord kanalai, GitHub diskusijos ir ekspertų pagalba
+**Besimokantiesiems:**
+- **Interaktyvi dirbtuvių aplinka**: [Dirbtuvių medžiaga](workshop/README.md) – naršykle valdomas mokymosi platforma  
+- **Žingsnis po žingsnio instrukcijos**: [Vadybinės užduotys](../../workshop/docs/instructions) – detalaus diegimo instrukcijos  
+- **Nuorodų dokumentacija**: [AI dirbtuvių laboratorija](docs/chapter-02-ai-development/ai-workshop-lab.md) – AI orientuota giluminė medžiaga  
+- **Bendruomenės ištekliai**: Azure Discord kanalai, GitHub diskusijos ir ekspertų palaikymas  
 
-#### 🏢 Įmonių dirbtuvių įgyvendinimas
-**Organizacinių diegimo ir mokymo strategijos**
+#### 🏢 Įmonių dirbtuvių įgyvendinimas  
+**Organizacijos diegimo ir mokymo strategijos**
 
 **Įmonių mokymo programos:**
-- **Naujų darbuotojų integracija**: Naujo personalo įvadinis mokymas su AZD pagrindais (2-4 savaitės)
-- **Komandų tobulinimas**: Kas ketvirtinės dirbtuvės esamoms plėtros komandoms (1-2 dienos)
-- **Architektūros peržiūra**: Mėnesio seansai vyresniems inžinieriams ir architektams (4 valandos)
-- **Vadovų susitikimai**: Vadovų dirbtuvės techniniams sprendimų priėmėjams (pusdienis)
+- **Naujokų mokymas**: Naujo darbuotojo orientacija su AZD pagrindais (2-4 savaitės)  
+- **Komandų įgūdžių kėlimas**: Ketvirtiniai kursai esamoms komandoms (1-2 dienos)  
+- **Architektūros peržiūra**: Mėnesiniai užsiėmimai vyresniems inžinieriams ir architektams (4 valandos)  
+- **Vadovų informavimas**: Vadovų dirbtuvės techniniams sprendimų priėmėjams (pusdienis)  
 
 **Įgyvendinimo palaikymas:**
-- **Individualios dirbtuvės**: Turinys pritaikytas specifiniams organizacijos poreikiams
-- **Bandomųjų projektų valdymas**: Struktūruotas įgyvendinimas su sėkmės metrika ir grįžtamuoju ryšiu  
-- **Nuolatinis mentoriavimas**: Po dirbtuvių palaikymas projektų įgyvendinimui
-- **Bendruomenės kūrimas**: Vidinės Azure AI programuotojų bendruomenės ir žinių dalijimasis
+- **Individualus dirbtuvių dizainas**: Pritaikyta turinys konkretiems organizacijos poreikiams  
+- **Bandomoji programa**: Struktūruotas paleidimas su sėkmės rodikliais ir atsiliepimų ciklais  
+- **Nuolatinė mentorystė**: Po dirbtuvių palaikymas projektų įgyvendinimui  
+- **Bendruomenės kūrimas**: Vidaus Azure AI kūrėjų bendruomenės ir žinių dalijimasis  
 
-**Sėkmės matavimas:**
-- **Įgūdžių įsisavinimas**: Prieš ir po vertinimai, matuojantys techninių gebėjimų augimą
-- **Prod. diegimo sėkmė**: Dalyvių, sėkmingai įdiegusių produkcines programėles, procentas
-- **Produktyvumo laikas**: Sutrumpintas naujų Azure AI projektų įsisavinimo laikotarpis
-- **Žinių išlaikymas**: Tolimesni vertinimai 3-6 mėnesius po dirbtuvių
+**Sėkmės rodikliai:**
+- **Įgūdžių įsisavinimas**: Prieš ir po vertinimai, matuojantys techninių gebėjimų augimą  
+- **Diegimo sėkmė**: Dalyvių procentas, sėkmingai įdiegusių gamybines programas  
+- **Greitesnis produktyvumas**: Mažesnis naujų Azure AI projektų paleidimo laikas  
+- **Žinių išlaikymas**: Tolimesni vertinimai 3-6 mėnesius po dirbtuvių  
 
 ## 8 skyrių mokymosi struktūra
 
 ### 1 skyrius: Pagrindai ir greitas startas (30-45 minutės) 🌱
-**Reikalavimai**: Azure prenumerata, pagrindinės komandinės eilutės žinios  
+**Reikalavimai**: Azure prenumerata, bazinės komandų eilutės žinios  
 **Sudėtingumas**: ⭐
 
 #### Ko išmoksite
-- Suprasti Azure Developer CLI pagrindus
+- Suprasti Azure Developer CLI pagrindus  
 - Įdiegti AZD savo platformoje  
-- Padaryti pirmą sėkmingą diegimą
-- Pagrindinės sąvokos ir terminai
+- Atlikti pirmą sėkmingą diegimą  
+- Pagrindines sąvokas ir terminus  
 
 #### Mokymosi šaltiniai
-- [AZD pagrindai](docs/getting-started/azd-basics.md) - Pagrindinės sąvokos
-- [Diegimas ir sąranka](docs/getting-started/installation.md) - Platformos vadovai
-- [Jūsų pirmas projektas](docs/getting-started/first-project.md) - Praktinis vadovas
-- [Komandų spartusis vadovas](resources/cheat-sheet.md) - Greita atmintinė
+- [AZD pagrindai](docs/chapter-01-foundation/azd-basics.md) – Pagrindinės sąvokos  
+- [Diegimas ir sąranka](docs/chapter-01-foundation/installation.md) – Platformos specifinės instrukcijos  
+- [Jūsų pirmas projektas](docs/chapter-01-foundation/first-project.md) – Praktinis vadovas  
+- [Komandų atmintinė](resources/cheat-sheet.md) – Greitos nuorodos  
 
 #### Praktinis rezultatas
-Sėkmingai įdiekite paprastą internetinę programėlę į Azure naudojant AZD
+Sėkmingai įdiegti paprastą žiniatinklio programą Azure naudojant AZD  
 
 ---
 
-### 2 skyrius: AI-pirmas vystymas (1-2 valandos) 🤖
-**Reikalavimai**: 1 skyrius baigtas  
+### 2 skyrius: AI pirmiausia kūrimas (1-2 valandos) 🤖
+**Reikalavimai**: Baigtas 1 skyrius  
 **Sudėtingumas**: ⭐⭐
 
 #### Ko išmoksite
-- Microsoft Foundry integracija su AZD
-- AI palaikomų programėlių diegimas
-- AI paslaugų konfigūracijų supratimas
-- RAG (gavimo stiprinimo) modeliai
+- Microsoft Foundry integraciją su AZD  
+- AI varomų programų diegimą  
+- AI paslaugų konfigūracijos supratimą  
+- RAG (Retrieval-Augmented Generation) modelius  
 
 #### Mokymosi šaltiniai
-- [Microsoft Foundry integracija](docs/microsoft-foundry/microsoft-foundry-integration.md)
-- [AI modelių diegimas](docs/microsoft-foundry/ai-model-deployment.md)
-- [AI dirbtuvių laboratorija](docs/microsoft-foundry/ai-workshop-lab.md) - **NAUJA**: Išsami 2-3 valandų praktinė laboratorija
-- [Interaktyvus dirbtuvių vadovas](workshop/README.md) - **NAUJA**: Naršyklėje veikianti dirbtuvių platforma su MkDocs peržiūra
-- [Microsoft Foundry šablonai](README.md#featured-microsoft-foundry-templates)
-- [Dirbtuvių instrukcijos](../../workshop/docs/instructions) - **NAUJA**: Žingsnis po žingsnio vedamos užduotys
+- [Microsoft Foundry integracija](docs/chapter-02-ai-development/microsoft-foundry-integration.md)  
+- [AI modelio diegimas](docs/chapter-02-ai-development/ai-model-deployment.md)  
+- [AI dirbtuvių laboratorija](docs/chapter-02-ai-development/ai-workshop-lab.md) – **NAUJA**: Išsami 2-3 valandų praktinė laboratorija  
+- [Interaktyvios dirbtuvės vadovas](workshop/README.md) – **NAUJA**: Naršyklėje veikiantis MkDocs peržiūros sprendimas  
+- [Microsoft Foundry šablonai](README.md#featured-microsoft-foundry-templates)  
+- [Dirbtuvių instrukcijos](../../workshop/docs/instructions) – **NAUJA**: Žingsnis po žingsnio vedamos užduotys  
 
-#### Praktinis rezultatas
-Įdiekite ir sukonfigūruokite AI palaikomą pokalbių programėlę su RAG funkcionalumu
+#### Praktinis rezultatas  
+Diegti ir konfigūruoti AI varomą pokalbių aplikaciją su RAG galimybėmis  
 
-#### Dirbtuvių mokymosi kelias (pasirinkimas papildymui)
-**NAUJA interaktyvi patirtis**: [Pilnas dirbtuvių vadovas](workshop/README.md)
-1. **Atranka** (30 min): Šablonų pasirinkimas ir įvertinimas
-2. **Diegimas** (45 min): AI šablono funkcionalumo diegimas ir patikrinimas  
-3. **Išardymas** (30 min): Šablono architektūros ir komponentų supratimas
-4. **Konfigūracija** (30 min): Nustatymų ir parametrų pritaikymas
-5. **Tinklinimas** (45 min): Modifikavimas ir darbo tęsinys
-6. **Valymas** (15 min): Išteklių pašalinimas ir jų ciklo supratimas
-7. **Apibendrinimas** (15 min): Tolimesni žingsniai ir pažangesni mokymosi keliai
+#### Dirbtuvių mokymosi kelias (pasirinktinai)
+**NAUJA interaktyvi patirtis**: [Pilnas dirbtuvių vadovas](workshop/README.md)  
+1. **Atranka** (30 min): Šablonų pasirinkimas ir vertinimas  
+2. **Diegimas** (45 min): AI šablono funkcijų diegimas ir patvirtinimas  
+3. **Analizė** (30 min): Šablono architektūros ir komponentų supratimas  
+4. **Konfigūracija** (30 min): Nustatymų ir parametrų pritaikymas  
+5. **Priderinimas** (45 min): Modifikavimas ir pritaikymas sau  
+6. **Išvalymas** (15 min): Išteklų ištrynimas ir gyvavimo ciklo supratimas  
+7. **Apibendrinimas** (15 min): Tolimesni žingsniai ir pažangių mokymosi kelių pasirinkimas  
 
 ---
 
 ### 3 skyrius: Konfigūracija ir autentifikacija (45-60 minučių) ⚙️
-**Reikalavimai**: 1 skyrius baigtas  
+**Reikalavimai**: Baigtas 1 skyrius  
 **Sudėtingumas**: ⭐⭐
 
 #### Ko išmoksite
-- Aplinkos konfigūracija ir valdymas
-- Autentifikacijos ir saugumo geriausios praktikos
-- Išteklų pavadinimai ir organizavimas
-- Daugiaplaniai diegimai
+- Aplinkos konfigūracijos ir valdymo  
+- Autentifikacijos ir saugumo geriausių praktikų  
+- Išteklų vardų suteikimo ir organizavimo  
+- Daugiapusių aplinkų diegimas  
 
 #### Mokymosi šaltiniai
-- [Konfigūracijos vadovas](docs/getting-started/configuration.md) - Aplinkos nustatymas
-- [Autentifikacija ir saugumo modeliai](docs/getting-started/authsecurity.md) - Valdomos tapatybės ir Key Vault integracija
-- Pavyzdžiai su keliomis aplinkomis
+- [Konfigūracijos vadovas](docs/chapter-03-configuration/configuration.md) – Aplinkos paruošimas  
+- [Autentifikavimo ir saugumo modeliai](docs/chapter-03-configuration/authsecurity.md) – Valdomos tapatybės ir Key Vault integracija  
+- Daugiapusių aplinkų pavyzdžiai  
 
 #### Praktinis rezultatas
-Valdykite kelias aplinkas su tinkama autentifikacija ir saugumu
+Valdyti kelias aplinkas su tinkama autentifikacija ir saugumu  
 
 ---
 
-### 4 skyrius: Infrastructure as Code ir diegimas (1-1.5 valandos) 🏗️
-**Reikalavimai**: 1-3 skyrius baigti  
+### 4 skyrius: Infrastruktūra kaip kodas ir diegimas (1-1.5 valandos) 🏗️
+**Reikalavimai**: Baigti 1-3 skyriai  
 **Sudėtingumas**: ⭐⭐⭐
 
 #### Ko išmoksite
-- Pažangūs diegimo modeliai
-- Infrastructure as Code naudojimas su Bicep
-- Išteklų suteikimo strategijos
-- Individualių šablonų kūrimas
+- Pažangūs diegimo modeliai  
+- Infrastruktūra kaip kodas su Bicep  
+- Išteklų teikimo strategijos  
+- Individualūs šablonai  
 
-- Programėlių diegimas konteineriuose su Azure Container Apps ir AZD
+- Konteinerizuotų aplikacijų diegimas su Azure Container Apps ir AZD  
 
 #### Mokymosi šaltiniai
-- [Diegimo vadovas](docs/deployment/deployment-guide.md) - Pilni darbo eiga
-- [Išteklų suteikimas](docs/deployment/provisioning.md) - Išteklų valdymas
-- Konteinerių ir mikroservisų pavyzdžiai
-- [Container App pavyzdžiai](examples/container-app/README.md) - Greitas startas, produkcija ir pažangūs diegimo modeliai
+- [Diegimo vadovas](docs/chapter-04-infrastructure/deployment-guide.md) – Pilni darbų srautai  
+- [Išteklų teikimas](docs/chapter-04-infrastructure/provisioning.md) – Išteklų valdymas  
+- Konteinerių ir mikroservisų pavyzdžiai  
+- [Container App pavyzdžiai](examples/container-app/README.md) – Greitas startas, gamybiniai ir pažangūs diegimo modeliai  
 
 #### Praktinis rezultatas
-Diegti sudėtingas daugiaservises programėles naudojant individualius infrastruktūros šablonus
+Diegti sudėtingas daugiaservises programas naudojant individualius infrastruktūros šablonus  
 
 ---
 
-### 5 skyrius: Daugiaagentai AI sprendimai (2-3 valandos) 🤖🤖
-**Reikalavimai**: 1-2 skyrius baigti  
+### 5 skyrius: Daugiaagentinės AI sistemos (2-3 valandos) 🤖🤖
+**Reikalavimai**: Baigti 1-2 skyriai  
 **Sudėtingumas**: ⭐⭐⭐⭐
 
 #### Ko išmoksite
-- Daugiaagentės architektūros modeliai
-- Agentų koordinavimas ir valdymas
-- Produkcijai pasirengę AI diegimai
-- Klientų ir inventoriaus agentų įgyvendinimas
+- Daugiaagentinės architektūros modeliai  
+- Agentų orkestracija ir koordinavimas  
+- Gamybai tinkami AI diegimai  
+- Klientų ir inventoriaus agentų įgyvendinimas  
 
-- Konteinerizuotų mikroservisų integravimas kaip agentų sprendimų dalis
+- Integruoti konteinerizuotus mikroservisus kaip agentų pagrindu veikiančių sprendimų dalį  
 
 #### Mokymosi šaltiniai
-- [Mažmeninės prekybos daugiaagentų sprendimas](examples/retail-scenario.md) - Pilnas įgyvendinimas
-- [ARM šablonų paketas](../../examples/retail-multiagent-arm-template) - Vieno spustelėjimo diegimas
-- Daugiaagentų koordinavimo modeliai
-- [Mikroservisų architektūros pavyzdys](../../examples/container-app/microservices) - Paslaugų tarpusavio komunikacija, asinchroniniai pranešimai ir produkcinis diegimas
+- [Mažmeninės prekybos daugiaagentinės sistemos](examples/retail-scenario.md) – Architektūros schema, ne pilna programa  
+- [ARM šablonų paketas](../../examples/retail-multiagent-arm-template) – Infrastruktūros karkasas su įgyvendinimo reikalavimais  
+- Daugiaagentinės koordinacijos modeliai  
+- [Mikroservisų architektūros pavyzdys](../../examples/container-app/microservices) – Paslaugų tarpusavio ryšiai, asinchroninis susirašinėjimas ir gamybinis diegimas  
 
 #### Praktinis rezultatas
-Įdiekite ir valdykite produkcijai pasirengtą daugiaagentį AI sprendimą
+Sukurti daugiaagentinį AI sprendimą ir identifikuoti programos įgyvendinimo, patvirtinimo ir eksploatacijos darbus, reikalingus be infrastruktūros teikimo  
 
 ---
 
-### 6 skyrius: Priešdiegimo validacija ir planavimas (1 valanda) 🔍
-**Reikalavimai**: 4 skyrius baigtas  
+### 6 skyrius: Priešdiegimo patikra ir planavimas (1 valanda) 🔍
+**Reikalavimai**: Baigtas 4 skyrius  
 **Sudėtingumas**: ⭐⭐
 
 #### Ko išmoksite
-- Talpos planavimas ir išteklių patikrinimas
-- SKU pasirinkimo strategijos
-- Priešdiegimo patikros ir automatizavimas
-- Sąnaudų optimizavimo planavimas
+- Talpos planavimas ir išteklių patikra  
+- SKU pasirinkimo strategijos  
+- Priešdiegimo patikros ir automatizavimas  
+- Sąnaudų optimizavimo planavimas  
 
 #### Mokymosi šaltiniai
-- [Talpos planavimas](docs/pre-deployment/capacity-planning.md) - Išteklų validavimas
-- [SKU pasirinkimas](docs/pre-deployment/sku-selection.md) - Ekonomiškas pasirinkimas
-- [Priešdiegimo patikros](docs/pre-deployment/preflight-checks.md) - Automatizuotos skriptai
-- [Application Insights integracija](docs/pre-deployment/application-insights.md) - Stebėsena ir matomumas
-- [Daugiaagentų koordinavimo modeliai](docs/pre-deployment/coordination-patterns.md) - Agentų valdymo strategijos
+- [Talpos planavimas](docs/chapter-06-pre-deployment/capacity-planning.md) – Išteklių patikra  
+- [SKU pasirinkimas](docs/chapter-06-pre-deployment/sku-selection.md) – Ekonomiški sprendimai  
+- [Priešdiegimo patikros](docs/chapter-06-pre-deployment/preflight-checks.md) – Automatizuoti scenarijai  
+- [Application Insights integracija](docs/chapter-06-pre-deployment/application-insights.md) – Stebėsena ir matomumas  
+- [Daugiaagentinės koordinacijos modeliai](docs/chapter-06-pre-deployment/coordination-patterns.md) – Agentų orkestracijos strategijos  
 
 #### Praktinis rezultatas
-Patikrinkite ir optimizuokite diegimus prieš vykdymą
+Patikrinti ir optimizuoti diegimus prieš įgyvendinimą  
+
 ---
 
-### 7 skyrius: Gedimų šalinimas ir derinimas (1–1,5 valandos) 🔧  
-**Išankstinės žinios**: Baigtas bet kuris diegimo skyrius  
+### 7 skyrius: Trikčių šalinimas ir derinimas (1-1.5 valandos) 🔧
+**Išankstiniai reikalavimai**: Užbaigtas bet kuris diegimo skyrius  
 **Sunkumo lygis**: ⭐⭐
 
-#### Ką išmoksite  
-- Sistemingus gedimų šalinimo metodus  
-- Dažniausiai pasitaikančias problemas ir sprendimus  
-- AI specifinius gedimų šalinimo būdus  
-- Veikimo optimizavimą  
+#### Ką išmoksite
+- Sistemingos trikčių šalinimo metodikos
+- Dažnos problemos ir jų sprendimai
+- AI specifinis trikčių šalinimas
+- Veikimo optimizavimas
 
-#### Mokymosi ištekliai  
-- [Dažnos problemos](docs/troubleshooting/common-issues.md) – DUK ir sprendimai  
-- [Derinimo vadovas](docs/troubleshooting/debugging.md) – Žingsnis po žingsnio strategijos  
-- [AI specifinis gedimų šalinimas](docs/troubleshooting/ai-troubleshooting.md) – AI paslaugų problemos  
+#### Mokymosi ištekliai
+- [Dažnos problemos](docs/chapter-07-troubleshooting/common-issues.md) - DUK ir sprendimai
+- [Trikčių šalinimo vadovas](docs/chapter-07-troubleshooting/debugging.md) - Žingsnis po žingsnio strategijos
+- [AI specifinis trikčių šalinimas](docs/chapter-07-troubleshooting/ai-troubleshooting.md) - AI paslaugų problemos
 
-#### Praktinis rezultatas  
-Savistoviškai diagnozuoti ir išspręsti dažnas diegimo problemas  
+#### Praktinis rezultatas
+Savarankiškai diagnozuoti ir spręsti dažnas diegimo problemas
 
 ---
 
-### 8 skyrius: Produkciniai ir verslo šablonai (2–3 valandos) 🏢  
-**Išankstinės žinios**: Baigti 1–4 skyriai  
+### 8 skyrius: Produkcijos ir įmonių modeliai (2-3 valandos) 🏢
+**Išankstiniai reikalavimai**: Užbaigti 1–4 skyrius  
 **Sunkumo lygis**: ⭐⭐⭐⭐
 
-#### Ką išmoksite  
-- Produkcijos diegimo strategijas  
-- Verslo saugumo šablonus  
-- Stebėjimą ir kaštų optimizavimą  
-- Masto keitimo galimybes ir valdymą  
+#### Ką išmoksite
+- Produkcijos diegimo strategijos
+- Įmonių saugumo modeliai
+- Stebėjimas ir kaštų optimizavimas
+- Masto didinimas ir valdymas
 
-- Gerąsias praktikas konteinerinių programų gamybinio diegimo srityje (sauga, stebėjimas, sąnaudos, CI/CD)  
+- Geriausios praktikos produkcijos konteinerinių taikomųjų programų diegimui (sauga, stebėjimas, kaštai, CI/CD)
 
-#### Mokymosi ištekliai  
-- [Produkcinės AI gerosios praktikos](docs/microsoft-foundry/production-ai-practices.md) – Verslo šablonai  
-- Mikroservisų ir verslo pavyzdžiai  
-- Stebėjimo ir valdymo sistemos  
-- [Mikroservisų architektūros pavyzdys](../../examples/container-app/microservices) – Blue-green/canary diegimas, paskirstytas sekimas ir kaštų optimizavimas  
+#### Mokymosi ištekliai
+- [Geriausios praktikos AI produkcijoje](docs/chapter-08-production/production-ai-practices.md) - Įmonių modeliai
+- Mikroservisų ir įmonių pavyzdžiai
+- Stebėjimo ir valdymo sistemos
+- [Mikroservisų architektūros pavyzdys](../../examples/container-app/microservices) - Blue-green/canary diegimas, paskirstytas sekimas ir kaštų optimizavimas
 
-#### Praktinis rezultatas  
-Diegti verslui paruoštas programas su pilnais produkciniais pajėgumais  
+#### Praktinis rezultatas
+Diegti įmonėms paruoštas programas su visomis produkcinėmis galimybėmis
 
 ---
 
-## Mokymosi pažangos ir sudėtingumo apžvalga
+## Mokymosi pažangos ir sudėtingumo lygiai
 
-### Laipsniškas įgūdžių ugdymas
+### Įgūdžių laipsniškas ugdymas
 
-- **🌱 Pradedantieji**: Pradėti nuo 1 skyriaus (pagrindai) → 2 skyriaus (AI kūrimas)  
-- **🔧 Vidutiniai**: 3–4 skyriai (konfigūracija ir infrastruktūra) → 6 skyrius (patikra)  
-- **🚀 Pažengusieji**: 5 skyrius (multi-agent sprendimai) → 7 skyrius (gedimų šalinimas)  
-- **🏢 Verslas**: Baigti visus skyrius, ypatingai 8 skyrių (produkcinių šablonų)  
+- **🌱 Pradedantieji**: Pradėti nuo 1 skyriaus (Pagrindai) → 2 skyrius (AI kūrimas)
+- **🔧 Vidutinio lygio**: 3–4 skyriai (Konfigūravimas ir infrastruktūra) → 6 skyrius (Tikrinimas)
+- **🚀 Pažengę**: 5 skyrius (Daugiaveiktorių sprendimai) → 7 skyrius (Trikčių šalinimas)
+- **🏢 Įmonių lygis**: Užbaigti visus skyrius, dėmesys 8 skyriui (Produkciniai modeliai)
 
-- **Konteinerių programų kelias**: 4 skyriaus (konteinerizuotas diegimas), 5 skyriaus (mikroservisų integracija), 8 skyriaus (produkcijos gerosios praktikos)  
+- **Konteinerinių programų kelias**: 4 skyrius (Konteinerizuotas diegimas), 5 skyrius (Mikroservisų integracija), 8 skyrius (Produkcinės gerosios praktikos)
 
-### Sudėtingumo žymėjimas
+### Sudėtingumo ženklai
 
-- **⭐ Pagrindinis**: Vienos temos, vedamos pamokos, 30–60 min  
-- **⭐⭐ Vidutinis**: Kelios temos, praktika, 1–2 valandos  
-- **⭐⭐⭐ Pažangus**: Sudėtinga architektūra, individualūs sprendimai, 1–3 valandos  
-- **⭐⭐⭐⭐ Ekspertas**: Produkcinės sistemos, verslo šablonai, 2–4 valandos  
+- **⭐ Pagrindinis**: Vienos temos, vadovaujami mokymai, 30-60 minučių
+- **⭐⭐ Vidutinis**: Kelių temų, praktinės užduotys, 1-2 valandos  
+- **⭐⭐⭐ Pažengęs**: Sudėtingos architektūros, individualūs sprendimai, 1-3 valandos
+- **⭐⭐⭐⭐ Ekspertas**: Produkcinės sistemos, įmonių modeliai, 2-4 valandos
 
 ### Lankstūs mokymosi keliai
 
-#### 🎯 AI kūrėjo greitasis maršrutas (4–6 valandos)  
-1. **1 skyrius**: Pagrindai ir greitas pradžia (45 min)  
-2. **2 skyrius**: AI pirmenybės kūrimas (2 valandos)  
-3. **5 skyrius**: Multi-agent AI sprendimai (3 valandos)  
-4. **8 skyrius**: Produkcinės AI gerosios praktikos (1 valanda)  
+#### 🎯 Greitas AI kūrėjo kelias (4-6 valandos)
+1. **1 skyrius**: Pagrindai ir greitas pradžia (45 min)
+2. **2 skyrius**: AI-prioritetinis kūrimas (2 valandos)  
+3. **5 skyrius**: Daugiaveiktorių AI sprendimai (3 valandos)
+4. **8 skyrius**: AI produkcijos gerosios praktikos (1 valanda)
 
-#### 🛠️ Infrastruktūros specialisto kelias (5–7 valandos)  
-1. **1 skyrius**: Pagrindai ir greitas pradžia (45 min)  
-2. **3 skyrius**: Konfigūracija ir autentifikacija (1 valanda)  
-3. **4 skyrius**: Infrastruktūra kaip kodas ir diegimas (1,5 valandos)  
-4. **6 skyrius**: Išankstinė patikra ir planavimas (1 valanda)  
-5. **7 skyrius**: Gedimų šalinimas ir derinimas (1,5 valandos)  
-6. **8 skyrius**: Produkciniai ir verslo šablonai (2 valandos)  
+#### 🛠️ Infrastruktūros specialisto kelias (5-7 valandos)
+1. **1 skyrius**: Pagrindai ir greita pradžia (45 min)
+2. **3 skyrius**: Konfigūravimas ir autentifikacija (1 valanda)
+3. **4 skyrius**: Infrastruktūra kaip kodas ir diegimas (1,5 valandos)
+4. **6 skyrius**: Priešdiegiamos tikrinimo ir planavimo užduotys (1 valanda)
+5. **7 skyrius**: Trikčių šalinimas ir derinimas (1,5 valandos)
+6. **8 skyrius**: Produkcijos ir įmonių modeliai (2 valandos)
 
-#### 🎓 Visapusiškas mokymosi kelias (8–12 valandų)  
-Sekmingas visų 8 skyrių užbaigimas su praktine veikla ir patikra  
+#### 🎓 Pilnas mokymosi kelias (8-12 valandų)
+Nuoseklus visų 8 skyrių užbaigimas su praktika ir tikrinimu
 
-## Kurso baigimo sistema
+## Kursų baigimo sistema
 
-### Žinių patikra  
-- **Skyriaus kontroliniai taškai**: Praktinės užduotys su matomais rezultatais  
-- **Praktinė patikra**: Dirbančių sprendimų diegimas kiekvienam skyriui  
-- **Pažangos stebėjimas**: Vizualūs indikatoriai ir baigimo ženkleliai  
-- **Bendruomenės patikra**: Patirties dalinimasis Azure Discord kanaluose  
+### Žinių patvirtinimas
+- **Skyriaus kontroliniai taškai**: Praktinės užduotys su matuojamais rezultatais
+- **Praktinis tikrinimas**: Diegti veikiančius sprendimus kiekvienam skyriui
+- **Pažangos stebėjimas**: Vizualūs indikatoriai ir baigimo ženkleliai
+- **Bendruomenės patvirtinimas**: Dalintis patirtimi Azure Discord kanaluose
 
 ### Mokymosi rezultatų vertinimas
 
-#### 1–2 skyrių užbaigimas (pagrindai + AI)  
-- ✅ Pagrindinės internetinės programos diegimas naudojant AZD  
-- ✅ AI pagrindu veikianti pokalbių programa su RAG diegimas  
-- ✅ Azure AZD pagrindinių koncepcijų ir AI integracijos supratimas  
+#### Užbaigus 1–2 skyrius (Pagrindai + AI)
+- ✅ Diegti paprastą interneto programą naudojant AZD
+- ✅ Diegti RAG pagrindu veikiančią AI pokalbių programą
+- ✅ Suprasti AZD pagrindines sąvokas ir AI integraciją
 
-#### 3–4 skyrių užbaigimas (konfigūracija + infrastruktūra)  
-- ✅ Kelių aplinkų diegimų valdymas  
-- ✅ Individualių Bicep infrastruktūros šablonų kūrimas  
-- ✅ Saugios autentifikacijos šablonų diegimas  
+#### Užbaigus 3–4 skyrius (Konfigūravimas + infrastruktūra)  
+- ✅ Valdyti daugiaplatforminius diegimus
+- ✅ Kurti pasirinktines Bicep infrastruktūros šablonus
+- ✅ Įgyvendinti saugaus autentifikavimo modelius
 
-#### 5–6 skyrių užbaigimas (multi-agent + patikra)  
-- ✅ Kompleksinių multi-agent AI sprendimų diegimas  
-- ✅ Pajėgumų planavimo ir kaštų optimizavimo atlikimas  
-- ✅ Automatizuotos išankstinės patikros įgyvendinimas  
+#### Užbaigus 5–6 skyrius (Daugiaveikliai + tikrinimas)
+- ✅ Diegti sudėtingą daugiaveiklio AI sprendimą
+- ✅ Atlikti pajėgumų planavimą ir kaštų optimizavimą
+- ✅ Įgyvendinti automatizuotą priešdiegią validaciją
 
-#### 7–8 skyrių užbaigimas (gedimų šalinimas + produkcija)  
-- ✅ Savarankiškas diegimo problemų derinimas ir sprendimas  
-- ✅ Verslo lygio stebėjimo ir saugumo šablonų diegimas  
-- ✅ Produkcijai paruoštų programų diegimas su valdymu  
+#### Užbaigus 7–8 skyrius (Trikčių šalinimas + produkcija)
+- ✅ Savarankiškai derinti ir spręsti diegimo problemas  
+- ✅ Įgyvendinti įmonės klasės stebėseną ir saugumą
+- ✅ Diegti produkcijai paruoštas programas su valdymu
 
-### Sertifikavimas ir pripažinimas  
-- **Kurso baigimo ženklelis**: Visų 8 skyrių baigimas su praktine patikra  
-- **Bendruomenės pripažinimas**: Aktyvus dalyvavimas Microsoft Foundry Discord  
-- **Profesinis tobulėjimas**: Rinkoje pripažinti AZD ir AI diegimo įgūdžiai  
-- **Karjeros galimybės**: Verslui paruošto debesijos diegimo kompetencijos  
+### Sertifikavimas ir pripažinimas
+- **Baigimo ženklas**: Užbaigti visus 8 skyrius su praktiniu patvirtinimu
+- **Bendruomenės pripažinimas**: Aktyvus dalyvavimas Microsoft Foundry Discord
+- **Profesinis tobulėjimas**: Pramonės aktualūs AZD ir AI diegimo įgūdžiai
+- **Karjeros pažanga**: Įmonėms pasiruošusios debesų diegimo galimybės
 
 ## 🎓 Išsamūs mokymosi rezultatai
 
-### Pagrindinis lygis (1–2 skyriai)  
-Baigus pagrindinius skyrius, mokiniai gebės:
+### Pagrindinis lygis (1–2 skyriai)
+Baigus pagrindinius skyrius, mokiniai parodys:
 
-**Techninės kompetencijos:**  
-- Diegti paprastas interneto programas į Azure naudojant AZD komandas  
-- Konfigūruoti ir diegti AI pokalbių programas su RAG galimybėmis  
-- Suprasti AZD pagrindines sąvokas: šablonus, aplinkas, paruošimo srautus  
-- Integruoti Microsoft Foundry paslaugas su AZD diegimais  
-- Naudotis Azure AI paslaugų konfigūracijomis ir API galutiniais taškais  
+**Techninės galimybės:**
+- Diegti paprastas interneto programas į Azure naudojant AZD komandas
+- Konfigūruoti ir diegti AI pokalbių programas su RAG galimybėmis
+- Suprasti pagrindines AZD sąvokas: šablonai, aplinkos, diegimo procesai
+- Integruoti Microsoft Foundry paslaugas su AZD diegimais
+- Naršyti Azure AI paslaugų konfigūracijas ir API taškus
 
-**Profesiniai įgūdžiai:**  
-- Vykdyti struktūruotus diegimo srautus pastoviems rezultatams  
-- Šalinti paprastas diegimo problemas naudojant žurnalus ir dokumentaciją  
-- Efektyviai komunikuoti apie debesijos diegimo procesus  
-- Taikyti gerąsias praktikas saugiai AI paslaugų integracijai  
+**Profesiniai įgūdžiai:**
+- Laikytis struktūrizuotų diegimo eigų nuoseklumui užtikrinti
+- Trikčių šalinimas baziniai diegimo klausimai pagal žurnalus ir dokumentaciją
+- Efektyviai komunikuoti apie debesų diegimo procesus
+- Taikyti gerąsias praktikas saugiam AI paslaugų integravimui
 
-**Mokymosi patikra:**  
-- ✅ Sėkmingai įdiegti `todo-nodejs-mongo` šabloną  
-- ✅ Įdiegti ir konfigūruoti `azure-search-openai-demo` su RAG  
-- ✅ Atlikti interaktyvias praktines dirbtuves (atradimo fazė)  
-- ✅ Dalyvauti Azure Discord bendruomenės diskusijose  
+**Mokymosi patvirtinimas:**
+- ✅ Sėkmingai diegti `todo-nodejs-mongo` šabloną
+- ✅ Diegti ir konfigūruoti `azure-search-openai-demo` su RAG
+- ✅ Užbaigti interaktyvias dirbtuvių užduotis (Atrankos etapas)
+- ✅ Dalyvauti Azure Discord bendruomenės diskusijose
 
-### Vidutinis lygis (3–4 skyriai)  
-Baigus vidutinius skyrius, mokiniai gebės:
+### Vidutinis lygis (3–4 skyriai)
+Baigus vidutinio lygio skyrius, mokiniai parodys:
 
-**Techninės kompetencijos:**  
-- Valdyti kelių aplinkų diegimus (vystymas, testavimas, gamyba)  
-- Kurti individualius Bicep šablonus infrastruktūrai kaip kodui  
-- Diegti saugius autentifikacijos šablonus su valdomomis tapatybėmis  
-- Diegti sudėtingas kelių paslaugų programas su individualiomis konfigūracijomis  
-- Optimizuoti išteklių paruošimo strategijas kaštams ir veikimui  
+**Techninės galimybės:**
+- Valdyti kelių aplinkų diegimus (vystymas, paruošimas, produkcija)
+- Kurti pasirinktinius Bicep šablonus infrastruktūrai kaip kodui
+- Įgyvendinti saugius autentifikavimo modelius su valdomu identitetu
+- Diegti sudėtingas daugiaservises programas su pasirinktinėmis konfigūracijomis
+- Optimizuoti išteklių aprūpinimą kaštams ir veikimui
 
-**Profesiniai įgūdžiai:**  
-- Kurti skalavimo infrastruktūros architektūras  
-- Diegti saugumo gerąsias praktikas debesų sistemose  
-- Dokumentuoti infrastruktūros šablonus komandiniam darbui  
-- Vertinti ir pasirinkti tinkamas Azure paslaugas pagal poreikius  
+**Profesiniai įgūdžiai:**
+- Kurti mastelio didinimo infrastruktūros architektūras
+- Įgyvendinti debesų diegimų saugumo gerąsias praktikas
+- Dokumentuoti infrastruktūros modelius komandiniam darbui
+- Įvertinti ir pasirinkti tinkamas Azure paslaugas reikalavimams
 
-**Mokymosi patikra:**  
-- ✅ Konfigūruoti atskiras aplinkas su aplinkos specifiniais nustatymais  
-- ✅ Kurti ir diegti individualų Bicep šabloną kelių paslaugų programai  
-- ✅ Diegti valdomos tapatybės autentifikaciją saugiam prieigos valdymui  
-- ✅ Atlikti konfigūracijos valdymo užduotis realiomis situacijomis  
+**Mokymosi patvirtinimas:**
+- ✅ Konfigūruoti atskiras aplinkas su aplinkai būdingais nustatymais
+- ✅ Kurti ir diegti pasirinktinius Bicep šablonus daugiaservisei programai
+- ✅ Įgyvendinti valdomo identiteto autentifikaciją saugiam prieigai
+- ✅ Atlikti konfigūracijos valdymo užduotis su realiais scenarijais
 
-### Pažangus lygis (5–6 skyriai)  
-Baigus pažangius skyrius, mokiniai gebės:
+### Pažengęs lygis (5–6 skyriai)
+Baigus pažengusius skyrius, mokiniai parodys:
 
-**Techninės kompetencijos:**  
-- Diegti ir valdyti multi-agent AI sprendimus su koordinuotais srautais  
-- Įgyvendinti klientų ir inventoriaus agentų architektūras mažmeninės prekybos scenarijams  
-- Atlikti išsamų pajėgumų planavimą ir išteklių patikrą  
-- Vykdyti automatizuotą išankstinę diegimo patikrą ir optimizavimą  
-- Kurti kaštus taupančius SKU pasirinkimus pagal darbo krūvio reikalavimus  
+**Techninės galimybės:**
+- Diegti ir orkestruoti daugiaveiklius AI sprendimus koordinuotais procesais
+- Įgyvendinti Kliento ir Inventoriaus agentų architektūras mažmeninės prekybos scenarijams
+- Atlikti išsamų pajėgumų planavimą ir išteklių tikrinimą
+- Vykdyti automatizuotą priešdiegią validaciją ir optimizavimą
+- Kurti ekonomiškų SKU pasirinkimus pagal darbo krūvį
 
-**Profesiniai įgūdžiai:**  
-- Architektuoti sudėtingus AI sprendimus gamybos aplinkai  
-- Vadovauti techninėms diskusijoms apie AI diegimo strategijas  
-- Mentorystė jaunesniems kūrėjams AZD ir AI diegimo geriausių praktikos klausimais  
-- Vertinti ir rekomenduoti AI architektūros šablonus verslo poreikiams  
+**Profesiniai įgūdžiai:**
+- Kurti sudėtingus AI sprendimus produkcijos aplinkoms
+- Vadovauti techninėms diskusijoms apie AI diegimo strategijas
+- Mentoriauti jaunesniuosius kūrėjus AZD ir AI diegimo gerosiomis praktikomis
+- Vertinti ir rekomenduoti AI architektūros modelius verslo poreikiams
 
-**Mokymosi patikra:**  
-- ✅ Įdiegti pilną mažmeninės prekybos multi-agent sprendimą su ARM šablonais  
-- ✅ Demonstruoti agentų koordinavimą ir srautų valdymą  
-- ✅ Atlikti pajėgumų planavimo pratimus su realiais išteklių apribojimais  
-- ✅ Patvirtinti diegimo pasirengimą per automatizuotus patikrinimus  
+**Mokymosi patvirtinimas:**
+- ✅ Peržiūrėti mažmeninės prekybos daugiaveiklio plano šabloną ir atskirti aprūpintą infrastruktūrą nuo trūkstamos programų įgyvendinimo
+- ✅ Demonstruoti agentų koordinaciją ir procesų orkestraciją
+- ✅ Atlikti pajėgumų planavimo užduotis su realiais išteklių apribojimais
+- ✅ Patvirtinti diegimo pasiruošimą per automatizuotus priešdiegius patikrinimus
 
-### Eksperto lygis (7–8 skyriai)  
-Baigus ekspertų skyrius, mokiniai gebės:
+### Eksperto lygis (7–8 skyriai)
+Baigus ekspertinius skyrius, mokiniai parodys:
 
-**Techninės kompetencijos:**  
-- Savarankiškai diagnozuoti ir spręsti sudėtingas diegimo problemas  
-- Diegti verslo lygio saugumo šablonus ir valdymo sistemas  
-- Kurti išsamias stebėjimo ir perspėjimų strategijas  
-- Optimizuoti produkcinius diegimus pagal mastą, kaštus ir veikimą  
-- Įgyvendinti CI/CD srautus su tinkamu testavimu ir patikra  
+**Techninės galimybės:**
+- Savarankiškai diagnozuoti ir išspręsti sudėtingas diegimo problemas
+- Įgyvendinti įmonės lygio saugumo modelius ir valdymo sistemas
+- Kurti išsamias stebėjimo ir įspėjimų strategijas
+- Optimizuoti produkcijos diegimus pagal mastelį, kaštus ir veikimą
+- Įsteigti CI/CD grandines su tinkamu testavimu ir patikrinimu
 
-**Profesiniai įgūdžiai:**  
-- Vadovauti verslo debesijos transformacijos iniciatyvoms  
-- Kurti ir įgyvendinti organizacinius diegimo standartus  
-- Mokyti ir mentorinti kūrėjų komandas pažangiose AZD praktikose  
-- Daryti poveikį techniniams sprendimams verslo AI diegimuose  
+**Profesiniai įgūdžiai:**
+- Vadovauti įmonių debesų transformacijos iniciatyvoms
+- Kurti ir taikyti organizacinius diegimo standartus
+- Mokyti ir mentoriauti kūrimo komandas pažangiose AZD praktikose
+- Įtakoti techninius sprendimus įmonių AI diegimuose
 
-**Mokymosi patikra:**  
-- ✅ Išspręsti sudėtingus kelių paslaugų diegimo gedimus  
-- ✅ Įgyvendinti verslo saugumo šablonus su atitikties reikalavimais  
-- ✅ Kurti ir diegti gamybos stebėjimo sprendimus su Application Insights  
-- ✅ Atlikti verslo valdymo sistemos diegimą  
+**Mokymosi patvirtinimas:**
+- ✅ Išspręsti sudėtingas daugiaservių diegimo klaidas
+- ✅ Įdiegti įmonės saugumo modelius laikantis atitikties reikalavimų
+- ✅ Sukurti ir diegti produkcijos stebėjimo sistemas su Application Insights
+- ✅ Užbaigti įmonių valdymo sistemos įgyvendinimą
 
 ## 🎯 Kurso baigimo sertifikavimas
 
-### Pažangos stebėjimo sistema  
-Stebėkite savo mokymosi pažangą per struktūruotus kontrolinius taškus:
+### Pažangos stebėjimo sistema
+Sekite savo mokymosi pažangą per struktūrizuotus kontrolinius taškus:
 
-- [ ] **1 skyrius**: Pagrindai ir greitas pradžia ✅  
-- [ ] **2 skyrius**: AI pirmenybės kūrimas ✅  
-- [ ] **3 skyrius**: Konfigūracija ir autentifikacija ✅  
-- [ ] **4 skyrius**: Infrastruktūra kaip kodas ir diegimas ✅  
-- [ ] **5 skyrius**: Multi-agent AI sprendimai ✅  
-- [ ] **6 skyrius**: Išankstinė patikra ir planavimas ✅  
-- [ ] **7 skyrius**: Gedimų šalinimas ir derinimas ✅  
-- [ ] **8 skyrius**: Produkciniai ir verslo šablonai ✅  
+- [ ] **1 skyrius**: Pagrindai ir greita pradžia ✅
+- [ ] **2 skyrius**: AI-prioritetinis kūrimas ✅  
+- [ ] **3 skyrius**: Konfigūravimas ir autentifikacija ✅
+- [ ] **4 skyrius**: Infrastruktūra kaip kodas ir diegimas ✅
+- [ ] **5 skyrius**: Daugiaveikliai AI sprendimai ✅
+- [ ] **6 skyrius**: Priešdiegiama validacija ir planavimas ✅
+- [ ] **7 skyrius**: Trikčių šalinimas ir derinimas ✅
+- [ ] **8 skyrius**: Produkcijos ir įmonių modeliai ✅
 
-### Patikros procesas  
-Baigus kiekvieną skyrių, patikrinkite savo žinias:
+### Tikrinimo procesas
+Baigus kiekvieną skyrių, patvirtinkite žinias per:
 
-1. **Praktinių užduočių įgyvendinimas**: Diegti veikiančius sprendimus kiekvienam skyriui  
-2. **Žinių vertinimas**: Peržiūrėti DUK skyrius ir atlikti savarankiškus įvertinimus  
-3. **Bendruomenės dalyvavimas**: Dalintis patirtimi ir gauti atsiliepimus Azure Discord  
-4. **Portfolio kūrimas**: Dokumentuoti savo diegimus ir pamokas  
-5. **Bendrų peržiūrų atlikimas**: Bendradarbiauti su kitais mokiniais sprendžiant sudėtingas situacijas  
+1. **Praktinių užduočių atlikimas**: Diegti veikiančius sprendimus kiekvienam skyriui
+2. **Žinių vertinimas**: Peržvelgti DUK skirsnius ir atlikti savarankiškus vertinimus
+3. **Bendruomenės įsitraukimas**: Dalintis patirtimi ir gauti atsiliepimus Azure Discord
+4. **Portfelio kūrimas**: Dokumentuoti diegimus ir įgytas pamokas
+5. **Bendramokslių peržiūra**: Bendradarbiauti su kitais mokiniais sudėtinguose scenarijuose
 
-### Kurso baigimo privalumai  
-Baigus visus skyrius su patikrinimu, absolventai turės:
+### Kurso baigimo naudos
+Baigus visus skyrius su patvirtinimais, absolventai turės:
 
-**Techninę ekspertizę:**  
-- **Produkcinė patirtis**: Realūs AI programų diegimai Azure aplinkose  
-- **Profesiniai įgūdžiai**: Verslui paruošto diegimo ir gedimų šalinimo gebėjimai  
-- **Architektūros žinios**: Multi-agent AI sprendimai ir sudėtingi infrastruktūros šablonai  
-- **Gedimų šalinimo meistrystė**: Savarankiškas diegimo ir konfigūracijos problemų sprendimas  
+**Techninė kompetencija:**
+- **Produkcijos patirtis**: Diegtos realios AI programos Azure aplinkose
+- **Profesiniai įgūdžiai**: Įmonėms pritaikytas diegimas ir trikčių šalinimas  
+- **Architektūros žinios**: Daugiaveikliai AI sprendimai ir sudėtingi infrastruktūros modeliai
+- **Trikčių šalinimo meistriškumas**: Savarankiškas diegimo ir konfigūracijos problemų sprendimas
 
-**Profesinis tobulėjimas:**  
-- **Pripažinimas rinkoje**: Įrodytas įgūdžių lygis labai paklausiose AZD ir AI diegimo srityse  
-- **Karjeros galimybės**: Tinkamumas debesų architekto ir AI diegimo specialisto pozicijoms  
-- **Bendruomenės lyderystė**: Aktyvumas Azure kūrėjų bei AI bendruomenėse  
-- **Nuolatinis mokymasis**: Pagrindas pažangiai Microsoft Foundry specializacijai  
+**Profesinis tobulėjimas:**
+- **Pramonės pripažinimas**: Patikrinami įgūdžiai didelės paklausos AZD ir AI diegimo srityse
+- **Karjeros augimas**: Kvalifikacijos debesų architekto ir AI diegimo specialisto vaidmenims
+- **Bendruomenės lyderystė**: Aktyvūs nariai Azure kūrėjų ir AI bendruomenėse
+- **Nuolatinis mokymasis**: Pamatai pažangiai Microsoft Foundry specializacijai
 
-**Portfolio vertybės:**  
-- **Įdiegti sprendimai**: Veikiantys AI programų ir infrastruktūros šablonų pavyzdžiai  
-- **Dokumentacija**: Išsamios diegimo gaires ir gedimų šalinimo procedūros  
-- **Bendruomenės indėlis**: Diskusijos, pavyzdžiai ir patobulinimai Azure bendruomenei  
-- **Profesinis tinklas**: Ryšiai su Azure ekspertais ir AI diegimo praktikais  
+**Portfelio turinys:**
+- **Diegti sprendimai**: Veikiančių AI programų ir infrastruktūros modelių pavyzdžiai
+- **Dokumentacija**: Išsamios diegimo gaires ir trikčių šalinimo procedūros  
+- **Bendruomenės indėlis**: Diskusijos, pavyzdžiai ir patobulinimai dalijami su Azure bendruomene
+- **Profesinis tinklas**: Ryšiai su Azure ekspertais ir AI diegimo praktikais
 
-### Pokurso mokymosi kelias  
-Absolventai yra pasirengę tolesniam specializavimuisi:  
-- **Microsoft Foundry ekspertas**: Gilus AI modelių diegimo ir orkestravimo specializavimas  
-- **Debesų architektūros lyderystė**: Verslo masto diegimo dizainas ir valdymas  
-- **Kūrėjų bendruomenės lyderystė**: Indėlis į Azure pavyzdžius ir bendruomenės išteklius  
-- **Įmonių mokymai**: AZD ir AI diegimo įgūdžių mokymas organizacijose  
+### Po kurso mokymosi kelias
+Absolventai pasiruošę pažangiems specializacijos keliams:
+- **Microsoft Foundry ekspertas**: Gilus AI modelių diegimo ir orkestravimo specializavimas
+- **Debesų architektūros lyderystė**: Įmonių masto diegimų projektavimas ir valdymas
+- **Kūrėjų bendruomenės lyderystė**: Indėlis į Azure pavyzdžius ir bendruomenės išteklius
+- **Įmonių mokymai**: AZD ir AI diegimo įgūdžių mokymas organizacijose
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Atsakomybės apribojimas**:
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipkite dėmesį, kad automatizuoti vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojamas profesionalus žmogaus vertimas. Mes neatsakome už bet kokius nesusipratimus ar neteisingus aiškinimus, kilusius naudojantis šiuo vertimu.
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojama naudoti profesionalų žmogiškąjį vertimą. Mes neatsakome už jokius nesusipratimus ar neteisingą interpretaciją, kilusią naudojantis šiuo vertimu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

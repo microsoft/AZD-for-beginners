@@ -1,433 +1,227 @@
-# Paprastas Flask API - Container App pavyzdys
+# Paprasta Flask API — Azure Container Apps
 
-**Mokymosi kelias:** Pradedantiesiems ⭐ | **Laikas:** 25-35 minučių | **Kaina:** $0-15/mėn
+**Lygis:** Pradedantysis · **Laikas:** 30–45 minutės įskaitant diegimą
 
-Pilnas, veikiantis Python Flask REST API, išdiegtas į Azure Container Apps naudojant Azure Developer CLI (azd). Šis pavyzdys demonstruoja konteinerio diegimą, automatinį skalavimą ir monitoringo pagrindus.
+Diegkite Python Flask CRUD API su Azure Developer CLI (azd). Šaltiniai, Dockerfile,
+Bicep ir diegimo parametrai įtraukti. Tai yra **mokymosi pavyzdys**, o ne
+gamybinės aplinkos API.
 
-## 🎯 Ką sužinosite
+## Ko išmoksite
 
-- Išdiegti konteinerizuotą Python programą į Azure
-- Konfigūruoti automatinį skalavimą (scale-to-zero)
-- Įdiegti būklės patikrinimus (health probes) ir pasirengimo patikras (readiness checks)
-- Stebėti programos žurnalus ir metrikas
-- Naudoti Azure Developer CLI greitam diegimui
-
-## 📦 Kas įtraukta
-
-✅ **Flask programa** - Pilnas REST API su CRUD operacijomis (`src/app.py`)  
-✅ **Dockerfile** - Gamybai paruošta konteinerio konfigūracija  
-✅ **Bicep infrastruktūra** - Container Apps aplinka ir API diegimas  
-✅ **AZD konfigūracija** - Vienos komandos diegimo nustatymas  
-✅ **Būklės patikrinimai** - Sukonfigūruoti liveness ir readiness patikrinimai  
-✅ **Automatinis skalavimas** - 0-10 replikų pagal HTTP apkrovą  
-
-## Architektūra
+- Sukurti ir publikuoti konteinerį per azd.
+- Konfigūruoti įeinančius srautus ir gyvybingumo/pasirengimo patikrinimus.
+- Patikrinti CRUD atsakymus ir peržiūrėti programos žurnalus.
+- Suprasti, kodėl duomenys atmintyje nėra tinkami patvariosioms programoms.
 
 ```mermaid
-graph TD
-    subgraph ACA[Azure Container Apps aplinka]
-        Flask[Flask API konteineris<br/>Sveikatos galiniai taškai<br/>REST API<br/>Automatinis mastelio keitimas 0-10 kopijų]
-        AppInsights[Programos įžvalgos]
-    end
+flowchart LR
+    Client -->|HTTPS| API[Flask API — Container App]
+    API --> Memory[Process-local item dictionary]
+    API -->|stdout| Logs[Container Apps / Log Analytics]
 ```
 
-## Reikalavimai
+**Svarbu:** elementai saugomi viename procese. Numatytoji reikšmė yra **vienas Gunicorn darbininkas,
+0–1 replikos**, sąmoningai vengiant nekonsistentiškų duomenų tarp darbininkų/replikų.
+Elementai prarandami perkrovus, pakeitus versiją arba sumažinus mastelį iki nulio. Replikų didinimas
+reikalauja bendros nuolatinės atminties. API neturi autentifikacijos ar autorizacijos.
 
-### Reikalinga
-- **Azure Developer CLI (azd)** - [Diegimo vadovas](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure subscription** - [Nemokama paskyra](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Įdiegti Docker](https://www.docker.com/products/docker-desktop/) (lokaliniam testavimui)
+## Prieš sąlygos
 
-### Patikrinkite reikalavimus
+- [Dabartinė stabili azd versija](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+  (peržiūros metu išleista versija: 1.37.2).
+- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) patikrinimui.
+- Veikiantis Docker su savo demonų; reikalinga numatytajam vietiniam vaizdo kūrimui.
+- Azure prenumerata, leidimai kurti išteklius ir Container Apps regiono kvota.
+- Bash komandoms žemiau (arba atitinkamas PowerShell).
+- Python 3.11 pasirenkamam vietiniam kūrimui.
 
 ```bash
-# Patikrinkite azd versiją (reikia 1.5.0 arba naujesnės)
 azd version
-
-# Patikrinkite prisijungimą prie Azure
+az version
+docker info
 azd auth login
-
-# Patikrinkite Docker (neprivaloma, vietiniam testavimui)
-docker --version
+az login
 ```
 
-## ⏱️ Diegimo laikas
+CLI įrankiai turi atskiras prisijungimo sesijas. Abu naudokite tą pačią prenumeratą.
 
-| Fazė | Trukmė | Kas vyksta |
-|-------|----------|--------------||
-| Environment setup | 30 seconds | Create azd environment |
-| Build container | 2-3 minutes | Docker build Flask app |
-| Provision infrastructure | 3-5 minutes | Create Container Apps, registry, monitoring |
-| Deploy application | 2-3 minutes | Push image and deploy to Container Apps |
-| **Iš viso** | **8-12 minutes** | Diegimas baigtas |
+## Greitas pradžia
 
-## Greita pradžia
+Iš saugyklos šaknies katalogo:
 
 ```bash
-# Eikite į pavyzdį
 cd examples/container-app/simple-flask-api
-
-# Inicializuokite aplinką (pasirinkite unikalų pavadinimą)
-azd env new myflaskapi
-
-# Įdiekite viską (infrastruktūrą + programą)
+azd env new flask-demo
 azd up
-# Jums bus paprašyta:
-# 1. Pasirinkite Azure prenumeratą
-# 2. Pasirinkite vietą (pvz., eastus2)
-# 3. Palaukite 8–12 minučių, kol vyks diegimas
-
-# Gaukite savo API galinį tašką
-azd env get-values
-
-# Išbandykite API
-curl $(azd env get-value API_ENDPOINT)/health
-```
-
-**Tikėtinas išvestis:**
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z",
-  "service": "simple-flask-api",
-  "version": "1.0.0"
-}
-```
-
-## ✅ Patikrinkite diegimą
-
-### 1 žingsnis: Patikrinkite diegimo būseną
-
-```bash
-# Peržiūrėti įdiegtas paslaugas
-azd show
-
-# Laukiamas išvesties rezultatas:
-# - Paslauga: api
-# - Galinis taškas: https://ca-api-[env].xxx.azurecontainerapps.io
-# - Būsena: Veikia
-```
-
-### 2 žingsnis: Išbandykite API galinius taškus
-
-```bash
-# Gauti API galinį tašką
 API_URL=$(azd env get-value API_ENDPOINT)
+RG_NAME=$(azd env get-value AZURE_RESOURCE_GROUP)
+API_NAME=$(azd env get-value API_NAME)
+curl --fail-with-body "${API_URL}/health"
+```
 
-# Patikrinti sveikatą
-curl $API_URL/health
+Laukiamas rezultatas: HTTP 200 ir JSON su `"status":"healthy"`,
+`"service":"simple-flask-api"` ir dabartiniu UTC laiku.
+Diegimas ir vaizdo kūrimas paprastai trunka keletą minučių; laikas gali skirtis.
 
-# Patikrinti pagrindinį galinį tašką
-curl $API_URL/
+Pradinio diegimo metu naudojamas viešas hello-world vaizdas, klausantis 80 prievado.
+`azure.yaml` parenka `infra/app/api.bicep` ir jo atitinkamą parametrų failą
+paslaugos diegimui, kas perjungia vaizdą, įeinančius srautus ir patikrinimus į 8000 prievadą.
+Šių diegimo parametrų naikinti negalima.
 
-# Sukurti elementą
-curl -X POST $API_URL/api/items \
+## Patikrinkite CRUD
+
+Vykdykite šią seką, kai aktyvi ta pati replika:
+
+```bash
+# Create: HTTP 201; note the returned id (1 for a fresh process).
+curl -i -X POST "${API_URL}/api/items" \
   -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "My first item"}'
+  -d '{"name":"Test Item","description":"My first item"}'
 
-# Gauti visus elementus
-curl $API_URL/api/items
+# Read list: HTTP 200, total 1 in a fresh process.
+curl --fail-with-body "${API_URL}/api/items"
+
+# Replace 1 if your create response returned another id.
+curl --fail-with-body "${API_URL}/api/items/1"
+curl -i -X PUT "${API_URL}/api/items/1" \
+  -H "Content-Type: application/json" -d '{"name":"Updated Item"}'
+curl -i -X DELETE "${API_URL}/api/items/1"
+curl -i "${API_URL}/api/items/1"
 ```
 
-**Sėkmės kriterijai:**
-- ✅ /health galinis taškas grąžina HTTP 200
-- ✅ Root endpoint rodo API informaciją
-- ✅ POST sukuria elementą ir grąžina HTTP 201
-- ✅ GET grąžina sukurtus elementus
+Sėkmė: POST 201, skaitymas/PUT 200, DELETE 204 be turinio, tada neegzistuojantis elementas 404.
+Netinkamai suformuotas/non-objektinis JSON arba tuščias pavadinimas grąžina 400.
+Jei elementas dingsta tarp užklausų, tikrinkite dėl perkrovimo ar mastelio sumažinimo iki nulio;
+tai sąmoninga atminties ribojimas, o ne nuolatinis saugojimas.
 
-### 3 žingsnis: Peržiūrėkite žurnalus
+| Galinis taškas | Metodai |
+|---|---|
+| `/` | GET — paslaugos informacija |
+| `/health` | GET — gyvybingumo/pasirengimo patikrinimai |
+| `/api/items` | GET, POST |
+| `/api/items/{id}` | GET, PUT, DELETE |
+
+## Žurnalai ir konfigūracija
 
 ```bash
-# Srautiniu būdu transliuokite gyvus žurnalus naudodami azd monitor
-azd monitor --logs
-
-# Arba naudokite Azure CLI:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# Turėtumėte pamatyti:
-# - Gunicorn paleidimo pranešimus
-# - HTTP užklausų žurnalus
-# - Programos informacijos žurnalus
+az containerapp logs show --name "$API_NAME" --resource-group "$RG_NAME" --follow
 ```
 
-## Projekto struktūra
+Laukiamas rezultatas: Gunicorn paleidimas, užklausų prieigos žurnalai ir programos pranešimai.
+`azd monitor --logs` atidaro portalo vaizdą; jis neatlieka srauto į terminalą.
+Application Insights yra paruoštas, bet **šis Flask kodas jo neprižiūri**;
+naudokite Container Apps/Log Analytics stdout žurnalams.
 
+Redaguokite `infra/app/api.bicep` dėl CPU/atminties, replikų ribų ar mastelio taisyklių, tada
+paleiskite `azd up`. Numatytoji reikšmė yra 0.5 vCPU, 1 GiB, minimum 0 / maksimum 1 replika ir
+HTTP slenkstis 50 vienalaikių užklausų. Mastelio sumazinimas iki nulio gali pridėti šalto paleidimo delsą.
+
+Bet kokios `azd env set MAX_REPLICAS`, `API_KEY`, `LOG_LEVEL` ar
+`SCALE_TO_ZERO_TIMEOUT` reikšmės **nėra susietos su šia šablonu ar programa**.
+Reikšmės nustatymas automatiškai jos nepadaro aplinkos kintamuoju vykdymo metu.
+Vaizdas aiškiai naudoja 8000 prievadą; keisdami prievadą, atnaujinkite Dockerfile, Bicep įėjimą ir patikrinimus
+kartu.
+
+## Failai
+
+```text
+azure.yaml
+infra/main.bicep
+infra/main.parameters.json
+infra/app/container-apps.bicep       # Environment, registry, monitoring
+infra/app/api.bicep                  # App, ingress, probes, scale settings
+infra/app/api.parameters.json        # Image and resource values for azd deploy
+src/app.py
+src/Dockerfile
+src/requirements.txt
 ```
-simple-flask-api/
-├── azure.yaml              # AZD configuration
-├── infra/
-│   ├── main.bicep         # Main infrastructure
-│   ├── main.parameters.json
-│   └── app/
-│       ├── container-env.bicep
-│       └── api.bicep
-└── src/
-    ├── app.py             # Flask application
-    ├── requirements.txt
-    └── Dockerfile
-```
 
-## API galiniai taškai
+## Vietinis kūrimas
 
-| Galinis taškas | Metodas | Aprašymas |
-|----------|--------|-------------|
-| `/health` | GET | Sveikatos patikra |
-| `/api/items` | GET | Išvardinti visus elementus |
-| `/api/items` | POST | Sukurti naują elementą |
-| `/api/items/{id}` | GET | Gauti konkretų elementą |
-| `/api/items/{id}` | PUT | Atnaujinti elementą |
-| `/api/items/{id}` | DELETE | Ištrinti elementą |
-
-## Konfigūracija
-
-### Aplinkos kintamieji
+Iš šio pavyzdžio katalogo:
 
 ```bash
-# Nustatyti pasirinktinius nustatymus
-azd env set PORT 8000
-azd env set LOG_LEVEL info
-azd env set MAX_REPLICAS 20
+python -m venv .venv
+source .venv/bin/activate  # PowerShell: .\.venv\Scripts\Activate.ps1
+python -m pip install -r src/requirements.txt
+python src/app.py
 ```
 
-### Skalavimo konfigūracija
-
-API automatiškai skalauja pagal HTTP srautą:
-- **Min. replikų skaičius**: 0 (skalavimas iki nulio, kai neveikia)
-- **Maks. replikų skaičius**: 10
-- **Vienu metu užklausų per repliką**: 50
-
-## Kūrimas
-
-### Vykdyti lokaliai
+Kitame terminale išbandykite `http://localhost:8000/health` ir CRUD galinius taškus.
+Arba sukurkite ir paleiskite tikrąjį vaizdą:
 
 ```bash
-# Įdiegti priklausomybes
-cd src
-pip install -r requirements.txt
-
-# Paleisti programą
-python app.py
-
-# Testuoti lokaliai
-curl http://localhost:8000/health
-```
-
-### Sukurti ir išbandyti konteinerį
-
-```bash
-# Sukurti Docker atvaizdą
 docker build -t flask-api:local ./src
-
-# Paleisti konteinerį lokaliai
-docker run -p 8000:8000 flask-api:local
-
-# Išbandyti konteinerį
-curl http://localhost:8000/health
+docker run --rm -p 8000:8000 flask-api:local
 ```
 
-## Diegimas
+Po pirmo diegimo tik kodo pakeitimams paleiskite `azd deploy api`.
+Bicep pakeitimams, paleiskite `azd up`, kad perkurtumėte ir įdiegtumėte.
 
-### Pilnas diegimas
+## Praktinės užduotys
+
+### 1. Patvirtinkite įvesties atmetimą
+
+**Pradinė pozicija:** įdiegta API, `API_URL` aukščiau.
+**Tikslas:** patikrinti, kad API atmeta netinkamus JSON formatus ir trūkstamus pavadinimus.
 
 ```bash
-# Įdiegti infrastruktūrą ir taikomąją programą
-azd up
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '[]'
+curl -i -X POST "${API_URL}/api/items" \
+  -H "Content-Type: application/json" -d '{"name":""}'
 ```
 
-### Tik kodo diegimas
+**Sėkmės kriterijus / sprendimas:** abu grąžina 400 su JSON klaida, o ne 500.
+**Dažnos problemos:** JSON turinio tipo antraštės praleidimas.
+
+### 2. Pridėkite tik skaitymo versijos galinį tašką
+
+**Pradinė pozicija:** `src/app.py`. **Tikslas:** išplėsti ir iš naujo diegti API.
+Pridėkite tai prieš `if __name__ == '__main__':` bloką:
+
+```python
+@app.route('/version', methods=['GET'])
+def version():
+    return jsonify({'version': '1.0.0'})
+```
+
+Paleiskite `azd deploy api`, tada `curl --fail-with-body "${API_URL}/version"`.
+**Sėkmės kriterijus:** HTTP 200 ir `{"version":"1.0.0"}`.
+**Dažna problema:** maršruto įrašymas po blokuojančio `app.run()` kvietimo testuojant su
+`python src/app.py`.
+
+### Žinių patikra
+
+Kodėl vienas darbininkas nepakankamas patvariems duomenims? Nes net vienas procesas praranda
+savo žodyną perkrovus. Gamybinė versija reikalauja nuolatinės bendros atminties,
+autentifikacijos, autorizacijos, migracijų, testų ir operacijų stebėjimo.
+
+## Išlaidos ir trikčių šalinimas
+
+Tai nėra garantuotas 0 $ diegimas: Basic registras bei žurnalų saugojimas/įsisavinimas
+gali generuoti mokesčius net kai programos skaičiavimo ištekliai yra nuliniai. Naudokite
+[kainų skaičiuoklę](https://azure.microsoft.com/pricing/calculator/) savo regionui.
+
+- **Docker kūrimo klaida:** patikrinkite `docker info`, tinklo prieigą ir priklausomybes.
+- **Nesveika programa:** peržiūrėkite konsolės/sistemos žurnalus ir patikrinkite vaizdo prievadą, įeinančius srautus,
+  bei patikrinimus. Vietoje esančio Flask prievado negalima tikrinti.
+- **403/leidimai:** patikrinkite prenumeratos ir išteklių kūrimo leidimus.
+- **Elementai dingsta:** atminties būsena iš naujo nustatoma perkrovimo/mastelio sumažinimo iki nulio metu; pridėkite duomenų bazę,
+  kad įgyvendintumėte patvarų elgesį.
+
+## Valymas ir tolimesni žingsniai
 
 ```bash
-# Diegti tik programos kodą (infrastruktūra nekeičiama)
-azd deploy api
+azd down
 ```
 
-### Atnaujinti konfigūraciją
+Peržiūrėkite ištrynimo patvirtinimą ir įsitikinkite, kad speciali išteklių grupė pašalinta.
+Nenaudokite destruktyvaus valymo išteklių grupei, kurioje yra nesusijusių duomenų.
 
-```bash
-# Atnaujinkite aplinkos kintamuosius
-azd env set API_KEY "new-api-key"
-
-# Įdiekite iš naujo su nauja konfigūracija
-azd deploy api
-```
-
-## Stebėjimas
-
-### Peržiūrėti žurnalus
-
-```bash
-# Transliuokite gyvus žurnalus naudodami azd monitor
-azd monitor --logs
-
-# Arba naudokite Azure CLI Container Apps:
-az containerapp logs show --name api --resource-group $RG_NAME --follow
-
-# Peržiūrėkite paskutines 100 eilučių
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-```
-
-### Stebėti metrikas
-
-```bash
-# Atidaryti Azure Monitor prietaisų skydelį
-azd monitor --overview
-
-# Peržiūrėti konkrečias metrikas
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "Requests,ResponseTime"
-```
-
-## Testavimas
-
-### Būklės patikra
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/health
-```
-
-Tikėtinas atsakymas:
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-11-19T10:30:00Z"
-}
-```
-
-### Sukurti elementą
-
-```bash
-curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/items \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Test Item", "description": "A test item"}'
-```
-
-### Gauti visus elementus
-
-```bash
-curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
-```
-
-## Kaštų optimizavimas
-
-Šis diegimas naudoja scale-to-zero, tad mokate tik tada, kai API apdoroja užklausas:
-
-- **Neaktyvumo kaina**: ~$0/mėn. (skalavimas iki nulio)
-- **Aktyvi kaina**: ~$0.000024/sekundę už repliką
-- **Tikėtinos mėnesinės išlaidos** (mažas naudojimas): $5-15
-
-### Tolimesnis išlaidų mažinimas
-
-```bash
-# Sumažinti maksimalų replikų skaičių vystymo aplinkai
-azd env set MAX_REPLICAS 3
-
-# Naudoti trumpesnį neveiklumo laiką
-azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 minutės
-```
-
-## Trikčių šalinimas
-
-### Konteineris nepaleidžiamas
-
-```bash
-# Patikrinkite konteinerio žurnalus naudodami Azure CLI
-az containerapp logs show --name api --resource-group $RG_NAME --tail 100
-
-# Patikrinkite, ar Docker atvaizdas kuriamas lokaliai
-docker build -t test ./src
-```
-
-### API nepasiekiama
-
-```bash
-# Patikrinkite, ar Ingress yra išorinis
-az containerapp show --name api --resource-group rg-simple-flask-api \
-  --query properties.configuration.ingress.external
-```
-
-### Ilgi atsako laikai
-
-```bash
-# Patikrinkite procesoriaus/atminties naudojimą
-az monitor metrics list \
-  --resource $(azd show --output json | jq -r '.services.api.resourceId') \
-  --metric "CPUPercentage,MemoryPercentage"
-
-# Padidinkite išteklius, jei reikia
-az containerapp update --name api --resource-group rg-simple-flask-api \
-  --cpu 1.0 --memory 2Gi
-```
-
-## Išvalymas
-
-```bash
-# Ištrinti visus išteklius
-azd down --force --purge
-```
-
-## Tolimesni žingsniai
-
-### Išplėsti šį pavyzdį
-
-1. **Pridėti duomenų bazę** - Integruoti Azure Cosmos DB arba SQL duomenų bazę
-   ```bash
-   # Pridėti Cosmos DB modulį į infra/main.bicep
-   # Atnaujinti app.py su duomenų bazės prisijungimu
-   ```
-
-2. **Pridėti autentifikaciją** - Įdiegti Microsoft Entra ID arba API raktus
-   ```python
-   # Pridėti autentifikacijos tarpinį sluoksnį į app.py
-   from functools import wraps
-   ```
-
-3. **Sukurti CI/CD** - GitHub Actions workflow
-   ```yaml
-   # Create .github/workflows/deploy.yml
-   name: Deploy to Azure
-   on: [push]
-   ```
-
-4. **Pridėti valdomą identitetą** - Užtikrinti saugų prieigą prie Azure paslaugų
-   ```bicep
-   # Update infra/app/api.bicep
-   identity: { type: 'SystemAssigned' }
-   ```
-
-### Susiję pavyzdžiai
-
-- **[Duomenų bazės programa](../../../../../examples/database-app)** - Pilnas pavyzdys su SQL duomenų baze
-- **[Mikropaslaugos](../../../../../examples/container-app/microservices)** - Daugiaservisė architektūra
-- **[Container Apps pagrindinis vadovas](../README.md)** - Visi konteinerių modeliai
-
-### Mokymosi ištekliai
-
-- 📚 [AZD Pradedantiesiems kursas](../../../README.md) - Pagrindinis kurso puslapis
-- 📚 [Container Apps modeliai](../README.md) - Daugiau diegimo modelių
-- 📚 [AZD šablonų galerija](https://azure.github.io/awesome-azd/) - Bendruomenės šablonai
-
-## Papildomi ištekliai
-
-### Dokumentacija
-- **[Flask dokumentacija](https://flask.palletsprojects.com/)** - Flask karkaso vadovas
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Oficiali Azure dokumentacija
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd komandų aprašymas
-
-### Mokymai
-- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Įdiekite savo pirmąją programą
-- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Python kūrimo vadovas
-- **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastruktūra kaip kodas
-
-### Įrankiai
-- **[Azure Portal](https://portal.azure.com)** - Valdykite išteklius vizualiai
-- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - IDE integracija
-
----
-
-**🎉 Sveikiname!** Jūs išdiegėte gamybai paruoštą Flask API į Azure Container Apps su automatinio skalavimo ir stebėjimo galimybėmis.
-
-**Klausimų?** [Atidarykite problemą](https://github.com/microsoft/AZD-for-beginners/issues) arba peržiūrėkite [DUK](../../../resources/faq.md)
+[Toliau: Duomenų bazės programa](../../../../../examples/database-app) · [Mikropaslaugos](../../../../../examples/container-app/microservices) ·
+[Konteinerių apžvalga](../README.md) · [Kurso pradžia](../../../README.md) ·
+[Pranešti apie problemą](https://github.com/microsoft/AZD-for-beginners/issues)
 
 ---
 

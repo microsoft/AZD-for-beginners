@@ -1,74 +1,57 @@
-# AI Modelio diegimas naudojant Azure Developer CLI
+# DI Modelių diegimas naudojant Azure Developer CLI
 
-**Skyrelio navigacija:**
+**Skyriaus navigacija:**
 - **📚 Kurso pradžia**: [AZD Pradedantiesiems](../../README.md)
-- **📖 Dabartinis skyrius**: 2 skyrius - AI-pirmas vystymas
-- **⬅️ Ankstesnis**: [Microsoft Foundry integracija](microsoft-foundry-integration.md)
-- **➡️ Kitas**: [AI dirbtuvės](ai-workshop-lab.md)
+- **📖 Dabartinis skyrius**: 2 skyrius – DI pirma vystymas
+- **⬅️ Ankstesnis**: [DI Agentai](agents.md)
+- **➡️ Kitas**: [DI dirbtuvės laboratorija](ai-workshop-lab.md)
 - **🚀 Kitas skyrius**: [3 skyrius: Konfigūracija](../chapter-03-configuration/configuration.md)
 
-Šiame vadove pateikiamos išsamios instrukcijos, kaip diegti AI modelius naudojant AZD šablonus, aprėpiant viską nuo modelio pasirinkimo iki gamybos diegimo modelių.
+Šiame vadove pateikiamos išsamios instrukcijos, kaip diegti DI modelius naudojant AZD šablonus – pradedant nuo modelio pasirinkimo ir baigiant gamybinio diegimo šablonais.
 
-> **Patvirtinimo pastaba (2026-07-13):** Šio vadovo AZD darbo eiga buvo patikrinta naudojant `azd` `1.27.1`. AI diegimams, kurie trunka ilgiau nei numatytasis paslaugos diegimo langas, dabartinės AZD versijos palaiko komandą `azd deploy --timeout <seconds>`.
+> **Leidimo apžvalga (2026-11-04):** Susiję CLI pakeitimai buvo peržiūrėti su `azd` `1.37.2`; modelių prieinamumas, versijos ir kvotos priklauso nuo regiono ir prenumeratos. `azd deploy --timeout <seconds>` kontroliuoja paslaugos diegimo langą, ne garantiją agentui aktyvuotis. Žr. [dabartines išleidimo pastabas ir DI migracijos rekomendacijas](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes).
 
 ## Turinys
 
-- [Modelio pasirinkimo strategija](#modelio-pasirinkimo-strategija)
-- [AZD konfigūracija AI modeliams](#azd-konfigūracija-ai-modeliams)
-- [Diegimo modeliai](#diegimo-modeliai)
-- [Modelio valdymas](#modelio-valdymas)
-- [Gamybos svarstymai](#gamybos-svarstymai)
-- [Stebėsena ir matomumas](#stebėsena-ir-matomumas)
+- [Modelių pasirinkimo strategija](#model-selection-strategy)
+- [AZD konfigūracija DI modeliams](#azd-configuration-for-ai-models)
+- [Diegimo šablonai](#deployment-patterns)
+- [Modelių valdymas](#model-management)
+- [Gamybiniai svarstymai](#production-considerations)
+- [Stebėsena ir stebimumas](#monitoring-and-observability)
 
-## Modelio pasirinkimo strategija
+## Modelių pasirinkimo strategija
 
-### Microsoft Foundry modeliai
+### Azure OpenAI modeliai Microsoft Foundry aplinkoje
 
-Pasirinkite tinkamą modelį savo naudojimo atvejui:
+Pasirinkite tinkamą modelį pagal savo naudojimo atvejį:
 
-```yaml
-# azure.yaml - Model configuration
-services:
-  ai-service:
-    project: ./infra
-    host: containerapp
-    config:
-      AZURE_OPENAI_MODELS: |
-        [
-          {
-            "name": "gpt-4.1-mini",
-            "version": "2024-07-18",
-            "deployment": "gpt-4.1-mini",
-            "capacity": 10,
-            "format": "OpenAI"
-          },
-          {
-            "name": "text-embedding-3-large",
-            "version": "1",
-            "deployment": "text-embedding-3-large", 
-            "capacity": 30,
-            "format": "OpenAI"
-          }
-        ]
-```
+Modelių diegimus deklaruokite Bicep šablonuose (žemiau), o ne laisvuose `services.*.config.AZURE_OPENAI_MODELS` nustatymuose. AZD tokio nustatymo neinterpretina kaip modelių išteklių sąrašo. Paslaugos `project` nurodo programos šaltinį, o ne jos `infra/` katalogą.
+
+Pavyzdžiuose naudojama paskelbta `gpt-4.1-mini` versija **`2025-04-14`** ir embedding versija **`1`**. Patikrinkite, ar modelio versija ir diegimo SKU palaikomi jūsų tikslinei regiono/paskyros vietai prieš diegiant.
 
 ### Modelio talpos planavimas
 
-| Modelio tipas | Naudojimo atvejis | Rekomenduojama talpa | Kainos aspektai |
-|------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | Pokalbiai, klausimai ir atsakymai | 10-50 TPM | Ekonomiškas daugumai krūvių |
-| gpt-4.1 | Kompleksinis samprotavimas | 20-100 TPM | Aukštesnės kainos, naudoti aukščiausios klasės funkcijoms |
-| text-embedding-3-large | Paieška, RAG | 30-120 TPM | Stiprus numatytasis pasirinkimas semantinei paieškai ir gavimui |
-| Whisper | Kalbos į tekstą | 10-50 TPM | Garso apdorojimo krūviai |
+| Modelio tipas | Naudojimo atvejis | Iliustracinis požymių poreikis | Sąnaudų svarstymai |
+|--------------|------------------|----------------------------|-------------------|
+| gpt-4.1-mini  | Pokalbiai, klausimai-atsakymai | 10,000-50,000 TPM | Įvertinkite darbo krūvio sąnaudų ir kokybės santykį |
+| gpt-4.1       | Sudėtingos užduotys | 20,000-100,000 TPM | Įvertinkite kokybės augimą lyginant su požymių sąnaudomis |
+| text-embedding-3-large | Paieška, RAG | 30,000-120,000 TPM | Įvertinkite tiek įvedimo, tiek užklausų srautą |
+| Whisper      | Kalbos į tekstą | Planuokite pagal garso trukmę ir užklausų limitus | Nenaudokite TPM talpos formulės tekstiniams modeliams |
 
-## AZD konfigūracija AI modeliams
+TPM reiškia požymių per minutę. Šiems Standartiniams tekstiniams diegimams ARM `sku.capacity` yra **1,000-TPM vienetais**, ne pavieniais TPM (pavyzdžiui, talpa `10` reiškia 10,000 TPM). RPM ir TPM santykiai skiriasi priklausomai nuo modelio/diegimo tipo; patikrinkite abu limitus pagal [kvotų dokumentaciją](https://learn.microsoft.com/azure/ai-foundry/openai/quotas-limits?view=foundry-classic). Šie intervalai yra pavyzdžiai, ne dydžio rekomendacijos.
+
+## AZD konfigūracija DI modeliams
 
 ### Bicep šablono konfigūracija
 
-Kurkite modelio diegimus per Bicep šablonus:
+Kurkite modelių diegimus per Bicep šablonus:
 
 ```bicep
 // infra/main.bicep
+param openAiAccountName string
+param location string = resourceGroup().location
+
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
@@ -76,7 +59,7 @@ param openAiModelDeployments array = [
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
     sku: {
       name: 'Standard'
@@ -103,6 +86,7 @@ resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   kind: 'OpenAI'
   properties: {
     customSubDomainName: openAiAccountName
+    disableLocalAuth: true
     networkAcls: {
       defaultAction: 'Allow'
     }
@@ -124,21 +108,24 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
+Tai yra išteklių grupės ribų **vystymo infrastruktūros pavyzdys**, ne pilnas AZD programos šablonas. Paskyroje leidžiamas viešasis tinklo prieigos būdas ir reikalaujama Entra ID/RBAC autentifikacija (`Cognitive Services OpenAI User` kvietėjams). Gamyboje reikalingas privatus taškas, DNS ir aprašytas programos ryšys 8 skyriuje. AZD taip pat reikalauja pagrindinio šablono/parametrų žemėlapio ir programos šeimininko išteklių; pilnam diegimui naudokite veikiančius pavyzdžius.
+
 ### Aplinkos kintamieji
 
 Konfigūruokite savo programos aplinką:
 
 ```bash
-# .env konfigūracija
+# .env configuration
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
-AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## Diegimo modeliai
+Tai su programa susieti pavadinimai; susiekite juos su savo šeimininko konfigūracija. Apačioje naudojamas Azure OpenAI v1 galinis taškas sveikatos patikrinimui nereikalauja senosios `api-version` užklausos parametro; senesni `AzureOpenAI` klientai jo reikalauja, tad vadovaukitės API generavimo būdu pagal savo programą.
 
-### Modelis 1: Vienos regiono diegimas
+## Diegimo šablonai
+
+### Šablonas 1: Vieno regiono diegimas
 
 ```yaml
 # azure.yaml - Single region
@@ -146,20 +133,21 @@ services:
   ai-app:
     project: ./src
     host: containerapp
-    config:
+    env:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-Geriausia:
-- Kūrimo ir testavimo aplinkoms
-- Programėlėms vienai rinkai
+Geriausiai tinka:
+- Vystymui ir testavimui
+- Vienos rinkos programoms
 - Sąnaudų optimizavimui
 
-### Modelis 2: Daugybinio regiono diegimas
+### Šablonas 2: Daugregionis diegimas
 
 ```bicep
-// Multi-region deployment
+// Illustrative fragment: extend the complete account declaration above.
+// Each region must support the selected model/SKU and have quota.
 param regions array = ['eastus2', 'westus2', 'francecentral']
 
 resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [for region in regions: {
@@ -169,14 +157,18 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Geriausia:
-- Globalioms programėlėms
-- Didelio prieinamumo reikalavimams
+Praleistos paskyros savybės/SKU turi būti nurodytos; šis fragmentas nepasiekiamas tiesiogiai. Diegkite modelius kiekvienoje paskyroje ir atskirai įgyvendinkite maršrutizavimą/atsarginį perkėlimą bei duomenų lokalizacijos kontrolę.
+
+Geriausiai tinka:
+- Pasaulinėms programoms
+- Aukštą pasiekiamumo lygį reikalaujantiems sprendimams
 - Apkrovos paskirstymui
 
-### Modelis 3: Hibridinis diegimas
+### Šablonas 3: Hibridinis diegimas
 
-Derinkite Microsoft Foundry modelius su kitomis AI paslaugomis:
+Kombinuokite Microsoft Foundry modelius su kitomis DI paslaugomis:
+
+Toliau pateikti fragmentai numato, kad pavadinimai ir `location` yra pateikti didesnio šablono.
 
 ```bicep
 // Hybrid AI services
@@ -205,18 +197,18 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Modelio valdymas
+## Modelių valdymas
 
 ### Versijų valdymas
 
-Sekite modelio versijas savo AZD konfigūracijoje:
+Sekite modelių versijas savo programos konfigūracijoje arba infrastruktūroje kaip kodas. Šis JSON yra **su programa susieta pavyzdinė struktūra**, ne įmontuota AZD modelio schema; turi būti sukurta rezervinė sistema ir aiškiai išdiegta:
 
 ```json
 {
   "models": {
     "chat": {
       "name": "gpt-4.1-mini",
-      "version": "2024-07-18",
+      "version": "2025-04-14",
       "fallback": "gpt-4.1"
     },
     "embedding": {
@@ -227,27 +219,27 @@ Sekite modelio versijas savo AZD konfigūracijoje:
 }
 ```
 
-### Modelio atnaujinimai
+### Modelių atnaujinimai
 
-Naudokite AZD kablius modelio atnaujinimams:
+Naudokite AZD kablį skaitymui skirtam prieinamumo patikrinimui, tada atnaujinkite infrastruktūrą kaip kodą ir įdiekite:
 
 ```bash
 #!/bin/bash
-# hooks/predeploy.sh
+# Illustrative hooks/check-model.sh (requires Azure CLI login and these variables)
 
 echo "Checking model availability..."
 az cognitiveservices account list-models \
-  --name $AZURE_OPENAI_ACCOUNT_NAME \
-  --resource-group $AZURE_RESOURCE_GROUP \
+  --name "$AZURE_OPENAI_ACCOUNT_NAME" \
+  --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "[?name=='gpt-4.1-mini']"
 
-# Jei diegimas užtrunka ilgiau nei numatytasis laiko limitas
-azd deploy --timeout 1800
 ```
 
-### A/B testingas
+Vykdykite `azd up` **už** kablio ribų, kad pritaikytumėte pakeitimus modelio infrastruktūroje ir įdiegtumėte kodą. Niekada nekvieskite `azd deploy` iš `predeploy` kablio: tai rekursyviai suaktyvins tą patį kablį. `azd deploy --timeout 1800` pratęsia programos diegimo laiko limitą; jis neatnaujina Bicep išteklių.
 
-Diegkite kelias modelio versijas:
+### A/B testavimas
+
+Toliau pateiktas išteklius pasirenka diegimo pavadinimą ir talpą; jis sukuria **vieną** diegimą, ne A/B testą. Tikram eksperimentui sukurkite dvi atskiras diegimo karteles, nukreipkite kontroliuojamą užklausų dalį kiekvienai ir palyginkite kokybę, delsą bei sąnaudas. Jis remiasi `openAi` iš paskyros pavyzdžio:
 
 ```bicep
 param enableABTesting bool = false
@@ -259,7 +251,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
     model: {
       format: 'OpenAI'
       name: 'gpt-4.1-mini'
-      version: '2024-07-18'
+      version: '2025-04-14'
     }
   }
   sku: {
@@ -269,14 +261,15 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Gamybos svarstymai
+## Gamybiniai svarstymai
 
 ### Talpos planavimas
 
 Apskaičiuokite reikiamą talpą pagal naudojimo modelius:
 
 ```python
-# Talpos skaičiavimo pavyzdys
+# Capacity calculation example
+import math
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -286,9 +279,9 @@ def calculate_required_capacity(
     """Calculate required TPM capacity."""
     total_tokens_per_request = avg_prompt_tokens + avg_completion_tokens
     total_tpm = requests_per_minute * total_tokens_per_request
-    return int(total_tpm * (1 + safety_margin))
+    return math.ceil(total_tpm * (1 + safety_margin))
 
-# Panaudojimo pavyzdys
+# Example usage
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -298,9 +291,13 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Automatinio mastelio keitimo konfigūracija
+Tikėtina išvestis: `Required capacity: 9100 TPM`. Turint 1,000-TPM talpos vienetus, apvalinkite į viršų bent iki `10`, po to patikrinkite modelio specifinius RPM ir paslaugų ribojimo skaičiavimus (įskaitant prašomą išvesties biudžetą). Šis požymių paklausos vertinimas nėra garantija prieš ribojimą.
 
-Konfigūruokite automatinį mastelio keitimą Container Apps:
+### Automatinio skalavimo konfigūravimas
+
+Konfigūruokite automatinį skalavimą Container Apps:
+
+**Dalinis išteklius:** sujunkite `template.scale` nustatymus su pilnu Container App, apimančiu vietą, valdomą aplinką, konteinerio atvaizdą, išteklius ir įėjimą. Kartų skaičiaus didinimas nepadidina modelio kvotos.
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -340,16 +337,19 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 Įgyvendinkite sąnaudų kontrolę:
 
+**Iliustracinis biudžeto išteklius:** apibrėžkite `budgetStartDate` kaip einamojo mėnesio pirmą dieną UTC laiku (pvz., `2026-11-01T00:00:00Z` šiai apžvalgai), ir pakeiskite kontaktinį adresą. Pradžia turi atitikti dabartinius paslaugos datos reikalavimus. Biudžetai signalizuoja apie atidėtas sąskaitų duomenų vėlavimus; jie nesustabdo išlaidų.
+
 ```bicep
+param budgetStartDate string
+
 @description('Enable cost management alerts')
 param enableCostAlerts bool = true
 
-resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCostAlerts) {
+resource budgetAlert 'Microsoft.Consumption/budgets@2024-08-01' = if (enableCostAlerts) {
   name: 'ai-budget-alert'
   properties: {
     timePeriod: {
-      startDate: '2024-01-01'
-      endDate: '2024-12-31'
+      startDate: budgetStartDate
     }
     timeGrain: 'Monthly'
     amount: 1000
@@ -368,11 +368,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Stebėsena ir matomumas
+## Stebėsena ir stebimumas
 
 ### Application Insights integracija
 
-Konfigūruokite AI krūvių stebėjimą:
+Konfigūruokite DI darbo krūvio stebėjimą:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -385,74 +385,45 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-// Custom metrics for AI models
-resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
-  parent: applicationInsights
-  name: 'ai-model-metrics'
-  properties: {
-    content: '''
-      customEvents
-      | where name == "AI_Model_Request"
-      | extend model = tostring(customDimensions.model)
-      | extend tokens = toint(customDimensions.tokens)
-      | extend latency = toint(customDimensions.latency_ms)
-      | summarize 
-          requests = count(),
-          avg_tokens = avg(tokens),
-          avg_latency = avg(latency)
-        by model, bin(timestamp, 5m)
-    '''
-    type: 'query'
-    scope: 'shared'
-  }
-}
 ```
 
-### Pasirinktinių rodiklių sekimas
+Išteklių fragmentas numato `applicationInsightsName`, `location` ir esamą `logAnalyticsWorkspace`. Jis įdiegtas stebėsenai, bet neprogramuoja programos ar sukuria pasirinktinius metrikas.
 
-Sekite AI specifinius rodiklius:
+### Pasirinktinės metrikos
+
+Sekite DI specifines metrikas:
+
+Naudokite palaikomą [Azure Monitor OpenTelemetry distribuciją](https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable?tabs=python), ne senąjį `applicationinsights` Python SDK. Įdiekite `azure-monitor-opentelemetry`, sukonfigūruokite `APPLICATIONINSIGHTS_CONNECTION_STRING` ir inicializuokite vieną kartą paleidime:
 
 ```python
-# Tinkinta telemetrija dirbtinio intelekto modeliams
-import logging
-from applicationinsights import TelemetryClient
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
 
-class AITelemetry:
-    def __init__(self, instrumentation_key: str):
-        self.client = TelemetryClient(instrumentation_key)
-    
-    def track_model_request(self, model: str, tokens: int, latency_ms: int, success: bool):
-        """Track AI model request metrics."""
-        self.client.track_event(
-            'AI_Model_Request',
-            {
-                'model': model,
-                'tokens': str(tokens),
-                'latency_ms': str(latency_ms),
-                'success': str(success)
-            }
-        )
-        
-    def track_model_error(self, model: str, error_type: str, error_message: str):
-        """Track AI model errors."""
-        self.client.track_exception(
-            type=error_type,
-            value=error_message,
-            properties={
-                'model': model,
-                'component': 'ai_model'
-            }
-        )
+configure_azure_monitor()
+tracer = trace.get_tracer(__name__)
+
+def record_request(model: str, tokens: int, latency_ms: int, success: bool):
+    with tracer.start_as_current_span("AI_Model_Request") as span:
+        span.set_attribute("ai.model", model)
+        span.set_attribute("ai.tokens", tokens)
+        span.set_attribute("ai.latency_ms", latency_ms)
+        span.set_attribute("ai.success", success)
 ```
 
-### Sveikatos patikrinimai
+Tai iliustruoja atributų perdavimą, ne realią modelio kvietimų instrumentaciją. Apvyniokite tikrą užklausą laike, kad pamatuotumėte trukmę; patikrinkite `dependencies`/`traces` Application Insights. Nesiųskite raginimų, atsakymų, raktų ar žalių išimčių pranešimų su jautriais duomenimis.
 
-Įgyvendinkite AI paslaugų sveikatos stebėjimą:
+### Sveikatos patikros
+
+Įgyvendinkite DI paslaugų sveikatos stebėseną:
+
+Įdiekite `fastapi`, `uvicorn`, `httpx` ir `azure-identity`. Nustatykite aukščiau galinio taško/diegimo kintamuosius ir suteikite kvietėjui `Cognitive Services OpenAI User` teises. Ši **parengties patikra** naudoja Azure OpenAI v1 duomenų sritį su Entra ID; ji sukuria apmokestinamą modelio kvietimą. Vykdykite su `uvicorn health:app` įrašę kaip `health.py`. Naudokite atskirą lengvą gyvybingumo patikrą, ribokite spartą/saugokite parengties rezultatus ir neviešinkite šio maršruto be prieigos kontrolės.
 
 ```python
-# Sveikatos patikros galiniai taškai
+# health.py
+import os
 from fastapi import FastAPI, HTTPException
 import httpx
+from azure.identity.aio import DefaultAzureCredential
 
 app = FastAPI()
 
@@ -460,43 +431,49 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Patikrinti OpenAI ryšį
-        async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
-                headers={"api-key": AZURE_OPENAI_API_KEY}
+        async with DefaultAzureCredential() as credential:
+            token = await credential.get_token("https://ai.azure.com/.default")
+        endpoint = os.environ["AZURE_OPENAI_ENDPOINT"].rstrip("/")
+        async with httpx.AsyncClient(timeout=20.0) as client:
+            response = await client.post(
+                f"{endpoint}/openai/v1/chat/completions",
+                headers={"Authorization": f"Bearer {token.token}"},
+                json={
+                    "model": os.environ["AZURE_OPENAI_CHAT_DEPLOYMENT"],
+                    "messages": [{"role": "user", "content": "Reply OK."}],
+                    "max_completion_tokens": 8,
+                },
             )
-            
-        if response.status_code == 200:
-            return {"status": "healthy", "models": response.json()}
-        else:
-            raise HTTPException(status_code=503, detail="AI models unavailable")
-            
-    except Exception as e:
-        raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
+        response.raise_for_status()
+        return {"status": "healthy"}
+    except Exception:
+        # Record sanitized internal diagnostics, not service responses/tokens.
+        raise HTTPException(status_code=503, detail="AI readiness check failed") from None
 ```
 
-## Kiti veiksmai
+Tikėtina: `GET /health/ai-models` grąžina `200 {"status":"healthy"}`, kai sukonfigūruotas pokalbių diegimas yra naudojamas, arba `503` neatskleisdamas vidinių detalių. Diegimų sąrašas yra valdymo srities operacija ir nėra tinkama duomenų srities sveikatos patikra.
 
-1. **Peržiūrėkite [Microsoft Foundry integracijos vadovą](microsoft-foundry-integration.md)** dėl paslaugų integracijos modelių
-2. **Užbaikite [AI dirbtuvių laboratoriją](ai-workshop-lab.md)** praktinei patirčiai
-3. **Įgyvendinkite [gamybos AI praktiką](production-ai-practices.md)** verslui skirtam diegimui
-4. **Išnagrinėkite [AI trikčių šalinimo vadovą](../chapter-07-troubleshooting/ai-troubleshooting.md)** dėl dažnų problemų
+## Tolimesni žingsniai
+
+1. **Peržiūrėkite [Microsoft Foundry integracijos vadovą](microsoft-foundry-integration.md)** paslaugų integracijos šablonams
+2. **Baikite [DI dirbtuvių laboratoriją](ai-workshop-lab.md)** praktinei patirčiai
+3. **Įgyvendinkite [gamybinius DI sprendimus](../chapter-08-production/production-ai-practices.md)** įmonių diegimams
+4. **Tyrinėkite [DI trikčių šalinimo vadovą](../chapter-07-troubleshooting/ai-troubleshooting.md)** dažnoms problemoms
 
 ## Ištekliai
 
 - [Microsoft Foundry modelių prieinamumas](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Azure Developer CLI dokumentacija](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Container Apps mastelio keitimas](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [AI modelio sąnaudų optimizavimas](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Container Apps skalavimas](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [DI modelių sąnaudų optimizavimas](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Skyrelio navigacija:**
+**Skyriaus navigacija:**
 - **📚 Kurso pradžia**: [AZD Pradedantiesiems](../../README.md)
-- **📖 Dabartinis skyrius**: 2 skyrius - AI-pirmas vystymas
-- **⬅️ Ankstesnis**: [Microsoft Foundry integracija](microsoft-foundry-integration.md)
-- **➡️ Kitas**: [AI dirbtuvės](ai-workshop-lab.md)
+- **📖 Dabartinis skyrius**: 2 skyrius – DI pirma vystymas
+- **⬅️ Ankstesnis**: [DI Agentai](agents.md)
+- **➡️ Kitas**: [DI dirbtuvės laboratorija](ai-workshop-lab.md)
 - **🚀 Kitas skyrius**: [3 skyrius: Konfigūracija](../chapter-03-configuration/configuration.md)
 
 ---
