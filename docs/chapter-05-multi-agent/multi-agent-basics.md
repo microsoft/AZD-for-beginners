@@ -202,16 +202,16 @@ Because each agent is just instructions plus tools, customizing is approachable:
    azd deploy
    ```
 
-To go further with your *own* Foundry agent project, use the agent extension's interactive initialization:
+To go further with your *own* Foundry agent project, use the GA bundle with AZD 1.37.0+ in a separate empty directory:
 
 ```bash
-azd extension install azure.ai.agents
+azd ext install microsoft.foundry
 azd ai agent init
 azd up
 azd ai agent invoke      # test, with response timing
 ```
 
-See [Chapter 2: Agents](../chapter-02-ai-development/agents.md) and the [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for the complete lifecycle: agent `invoke`, the separate evaluations extension's `azd ai eval` workflow, agent `optimize`, and agent `delete`.
+See the [GA hosted-agent walkthrough](../chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) for Agent Inspector local testing, remote code deployment, and cleanup ownership. The [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) also covers the separate evaluations extension, optimization, and agent deletion.
 
 ---
 
@@ -225,6 +225,8 @@ azd down
 ```
 
 Deletion is destructive. For a disposable lab, `azd down --force --purge` skips deletion and supported soft-delete purge confirmations; purging is irreversible where supported and can be blocked by purge protection. Soft deletion is a recovery/name-reuse concern, not in itself proof of ongoing charges. Check for retained resources and billing after cleanup.
+
+If you also initialized a hosted agent against an existing Foundry project, `azd down` leaves that project's agent and other resources in place. Remove only unwanted resources you own separately. For a new Foundry project created by its AZD environment, `azd down` deletes the resource group and everything in it.
 
 ---
 

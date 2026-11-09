@@ -743,14 +743,17 @@ azd env get-values
 If you deployed agents using `azd ai agent init`, these additional tools are available:
 
 ```bash
-# Ensure the agents extension is installed
-azd extension install azure.ai.agents
+# Install the GA Foundry bundle (requires azd >= 1.37.0)
+azd ext install microsoft.foundry
 
 # Check project storage permissions and agent configuration
 azd ai agent doctor
 
 # Inspect the deployed endpoint
 azd ai agent endpoint show
+
+# Stream hosted-agent logs
+azd ai agent monitor --follow
 
 # Use the MCP server to let AI tools query project state
 azd mcp start
@@ -761,9 +764,11 @@ azd infra generate
 
 > **Tip:** Use `azd infra generate` to write IaC to disk so you can inspect exactly what resources were provisioned. This is invaluable when debugging resource configuration issues. See the [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for full details.
 
-**Release-aware diagnostics (2026-11-04):** Agents `1.0.0-beta.23` requires `azd >= 1.37.0`; upgrade the core CLI before incompatible extensions. This agent release retains developer RBAC warnings in final deployment output and identifies the version involved in activation failures/timeouts. A timeout does not establish that deployment failed: inspect the attempted version before retrying. It also fixes A2A 0.3 invocations displaying lifecycle messages instead of completed answers. Core `azd 1.37.1` fixes cancellation propagation across extensions; `1.37.2` improves critical provisioning confirmations and cancellation handling.
+**GA workflow diagnostics (2026-11-09):** Verify `azd version` is at least 1.37.0 and inspect `azd ext list --installed`. Update the core CLI first with `azd update` or its installer, then update the bundle with `azd ext upgrade microsoft.foundry`. For local failures, check current uv, Python 3.13+ for the basic sample, `PYTHONNOUSERSITE: "1"` in its service configuration, and the Azure credentials used by `DefaultAzureCredential`. Keep `azd ai agent run` running while invoking `--local` from a second terminal in the project directory.
 
-If an older tutorial's evaluation command only prints migration guidance, install `azure.ai.evaluations` (`1.0.0-beta.2` requires `azd >= 1.33.0`) and use `azd ai eval init`, `generate`, and `run start`. Optimization's `--config` no longer accepts legacy evaluation files. See [evaluation migration](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) and [optimization migration](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
+Provisioning success does not prove the developer has data-plane access. Review RBAC warnings and the [hosted-agent permission matrix](https://learn.microsoft.com/azure/foundry/agents/concepts/hosted-agent-permissions). A timeout does not establish deployment failure: inspect the attempted version and logs before retrying. Earlier agents beta.23 improved these warnings and A2A output; those historical fixes are described in the [release notes](../chapter-08-production/production-ai-practices.md#recent-release-changes-and-fixes), not a requirement to install that beta.
+
+If `azd ai eval` is unavailable, install `azure.ai.evaluations` separately; the GA bundle does not include it. If an older tutorial's agent-evaluation command only prints migration guidance, use the separate `azd ai eval` workflow. Optimization's `--config` no longer accepts legacy evaluation files. See [evaluation migration](../chapter-08-production/production-ai-practices.md#evaluation-migration-and-quality-checks) and [optimization migration](../chapter-08-production/production-ai-practices.md#optimization-configuration-migration).
 
 ### Application Debugging
 

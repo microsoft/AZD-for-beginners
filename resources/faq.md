@@ -76,6 +76,14 @@ With regular reference to this FAQ, you will be able to:
 2. Adapt existing projects to match azd template structure
 3. Create custom templates based on your existing architecture
 
+### Q: What changed with the Foundry extension's general availability?
+**A**: The `microsoft.foundry` bundle reached version 1.0 and GA on November 5, 2026. With AZD 1.37.0+, use `azd ext install microsoft.foundry` to install seven core extensions for agents, connections, inspector, projects, routines, skills, and toolboxes. It is not a new command namespace, and its components are independently versioned. Evaluations, datasets, fine-tuning, and custom models are installed separately; optional preview features do not become GA just because the bundle is GA.
+
+The [hosted-agent walkthrough](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga) uses Python 3.13+ and current uv. `azd ai agent run` opens Agent Inspector locally, but model calls still use Azure and incur charges. Code-mode `azd deploy` uploads source for a remote build without requiring a local container build.
+
+### Q: Does `azd down` remove a hosted agent from an existing Foundry project?
+**A**: Not for the reused-project path described in the hosted-agent quickstart: it leaves the project, hosted agent, and other resources in place. Remove unwanted resources separately without deleting shared resources. If the environment created a new Foundry project, `azd down` deletes its resource group and everything in it. Review the [cleanup guidance](../docs/chapter-02-ai-development/microsoft-foundry-integration.md#7-clean-up-deliberately) and deletion prompts before confirming.
+
 ---
 
 ## Authentication & Access

@@ -71,7 +71,7 @@ Inspect the tests to understand evaluator choice, thresholds, required roles, an
 
 ### Separate AZD evaluations extension
 
-The Python test above is a **sample-specific workflow**. The optional `azure.ai.evaluations` extension is a different workflow, with its own `evals/azure.eval.yaml` configuration:
+The Python test above is a **sample-specific workflow**. The optional `azure.ai.evaluations` extension is a different workflow, with its own `evals/azure.eval.yaml` configuration. It is installed separately, not included in the generally available `microsoft.foundry` 1.0 bundle:
 
 ```bash
 azd extension install azure.ai.evaluations
@@ -79,6 +79,8 @@ azd ai eval --help
 ```
 
 For a complete extension setup, see [evaluation workflows and migration](https://github.com/microsoft/AZD-for-beginners/blob/main/docs/chapter-08-production/production-ai-practices.md). Since agents extension beta.22, do not use the removed `azd ai agent eval` commands. Installing the evaluations extension does not convert the sample's Python tests or automatically create an evaluation configuration.
+
+For a separate **GA hosted-agent exercise**, use an empty folder outside this workshop's sample and follow the [Foundry local-to-cloud walkthrough](https://github.com/microsoft/AZD-for-beginners/blob/main/docs/chapter-02-ai-development/microsoft-foundry-integration.md#hosted-agent-walkthrough-ga). It uses AZD 1.37.0+, the `microsoft.foundry` bundle, Python 3.13+, and current uv. You will inspect `azure.yaml`, test locally with Agent Inspector, deploy source for a remote Foundry build, and generate/review a dataset and rubric before configuring `azd ai eval init --name quality`. Do not replace this sample's tests or assume installing the bundle changes its hosting model.
 
 ## 5.5 AI red teaming and continuous evaluation
 
